@@ -268,8 +268,12 @@ void Lith_Player()
       // Run scripts
       Lith_PlayerDamageBob(p);
       
-      p->addangle = p->bobangle;
-      p->addpitch = p->bobpitch;
+      if(ACS_GetCVar("lith_player_damagebob"))
+      {
+         float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
+         p->addangle = p->bobangle * bobmul;
+         p->addpitch = p->bobpitch * bobmul;
+      }
       
       if(p->health > 0)
          Lith_PlayerMove(p);
