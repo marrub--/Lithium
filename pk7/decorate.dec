@@ -1,0 +1,21 @@
+#include "lscripts/Constants.dec"
+
+#include "lscripts/Weapons/0_Base.dec"
+#include "lscripts/Weapons/2_Pistol.dec"         // Postil
+#include "lscripts/Weapons/3_Shotgun.dec"        // Shtegnu
+#include "lscripts/Weapons/3_SuperShotgun.dec"   // Sbepru Shtetgenu
+#include "lscripts/Weapons/4_Minigun.dec"        // Mnegbun
+#include "lscripts/Weapons/5_RocketLauncher.dec" // Ruckebt Laurence
+#include "lscripts/Weapons/6_PlasmaRifle.dec"    // Spalmo Rinfer
+#include "lscripts/Weapons/7_BFG9000.dec"        // Biffgee Nintendo
+
+#include "lscripts/Entities/Dummy.dec"
+#include "lscripts/Entities/ScoreItems.dec"
+#include "lscripts/Entities/Player.dec"
+#include "lscripts/Entities/Monsters/Zombies.dec"
+#include "lscripts/Entities/Monsters/Demons.dec"
+#include "lscripts/Entities/Monsters/LostSoul.dec"
+
+#include "lscripts/Effects/GunSmoke.dec"
+#include "lscripts/Effects/BulletPuff.dec"
+

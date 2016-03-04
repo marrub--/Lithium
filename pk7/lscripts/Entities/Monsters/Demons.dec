@@ -1,0 +1,33 @@
+actor Lith_Demon : Demon replaces Demon
+{
+   Radius 29
+   MeleeRange 52
+   
+   states
+   {
+   Dummy:
+      TNT1 A 0
+      loop
+   Missile:
+      SARG A 0 { if(A_JumpIfCloser(192, "Dummy")) { return state(0); } return state("See"); }
+      SARG A 2 A_FaceTarget
+      SARG E 8
+      {
+         A_PlaySound("demon/melee", CHAN_BODY);
+         A_FaceTarget;
+         ThrustThingZ(0, 16, 0, 1);
+         ThrustThing(angle * 256 / 360, 16, 0, 0);
+      }
+      SARG F 8
+      SARG G 8 A_SargAttack
+      goto See
+   }
+}
+
+actor Lith_Spectre : Lith_Demon replaces Spectre
+{
+   +SHADOW
+   RenderStyle OptFuzzy
+   Alpha 0.5
+}
+

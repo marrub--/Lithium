@@ -1,0 +1,58 @@
+#include "lscripts/Weapons/PlasmaBolt.dec"
+
+actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
+{
+   Tag "Plasma Rifle"
+   Inventory.PickupMessage "You got the Spalmo Rinfer!"
+   Weapon.SlotNumber 6
+   
+   states
+   {
+   Ready:
+      PLSG A 1 A_WeaponReady
+      wait
+   Deselect:
+      PLSG A 1 { A_Lower; A_Lower; }
+      loop
+   Select:
+      PLSG A 1 { A_Raise; A_Raise; }
+      loop
+   Fire:
+      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 2000), "FireEmpty")
+      PLSG AAAA 0 A_FireCustomMissile("Lith_PlasmaBolt",
+         CallACS("Lith_CircleSpread", 5 * IFIX, 3 * IFIX, false) / FIX,
+         0, 0, -9, 0,
+         CallACS("Lith_CircleSpread", 0, 0, true) / FIX)
+      PLSG A 0 A_PlaySound("weapons/plasma/fire", CHAN_WEAPON)
+      PLSJ A 1 offset(0, 37) bright
+      PLSJ B 1 offset(0, 36) bright
+      PLSG A 1 offset(0, 32)
+      PLSG A 4 A_ReFire
+      goto Ready
+   AltFire:
+      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 2000), "FireEmpty")
+      PLSK A 1 offset(0, 37) bright {
+         A_FireCustomMissile("Lith_PenetratingPlasmaBolt", 0, 0, 0, -9);
+         A_PlaySound("weapons/plasma/altfire", CHAN_WEAPON);
+      }
+      PLSK B 1 offset(0, 36) bright
+      PLSG A 1 offset(0, 35)
+      PLSG A 1 offset(0, 34)
+      PLSG A 1 offset(0, 32)
+      PLSG A 4 A_ReFire
+      Goto Ready
+   FireEmpty:
+      PLSG A 1 A_PlaySound("weapons/plasma/empty", 7)
+      PLSG A 1 offset(0, 37)
+      PLSG A 1 offset(0, 36)
+      PLSG A 1 offset(0, 35)
+      PLSG A 1 offset(0, 34)
+      PLSG A 1 offset(0, 32)
+      PLSG A 1 A_ReFire
+      goto Ready
+   Spawn:
+      PLAS A 0
+      PLAS A 0 A_SetUserVar("user_pickupparm", weapon_plasmarifle)
+      goto SpawnLoop
+   }
+}

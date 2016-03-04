@@ -1,0 +1,5 @@
+#include "lscripts/C/inc/lith_cvars.h"
+#include "lscripts/C/inc/lith_weapons.h"
+
+const float FIX = 65536.0;
+const int IFIX = 65536;

@@ -1,0 +1,5 @@
+user float lith_weapons_zoomfactor = 3.0;
+user float lith_weapons_alpha = 1.0;
+user float lith_weapons_scopealpha = 0.2;
+user bool lith_hud_showscore = true;
+user bool lith_hud_showweapons = true;

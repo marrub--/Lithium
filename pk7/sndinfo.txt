@@ -1,0 +1,100 @@
+//
+// Weapons
+
+weapons/pistol/fire    lsounds/Pistol/Fire.flac     // Killing Floor
+weapons/pistol/reload  lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
+weapons/pistol/zoomin  lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
+weapons/pistol/zoomout lsounds/Pistol/ScopeOut.flac // same
+
+weapons/shotgun/fire    lsounds/Shotgun/FireFull.flac  // Killing Floor, General 6000
+weapons/shotgun/open    lsounds/Shotgun/PumpOpen.flac  // General 6000
+weapons/shotgun/close   lsounds/Shotgun/PumpClose.flac // same
+weapons/shotgun/zoomin  lsounds/Shotgun/ScopeIn.flac   // Halo 3, EYE: Divine Cybermancy
+weapons/shotgun/zoomout lsounds/Shotgun/ScopeOut.flac  // same
+
+weapons/ssg/charge       lsounds/SuperShotgun/Charge.flac       // Killing Floor
+weapons/ssg/chargefinish lsounds/SuperShotgun/ChargeFinish.flac // same
+weapons/ssg/close        lsounds/SuperShotgun/Close.flac        // Killing Floor, ???
+weapons/ssg/open         lsounds/SuperShotgun/Open.flac         // same
+weapons/ssg/load         lsounds/SuperShotgun/Load.flac         // General 6000, ???
+
+weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Killing Floor
+weapons/minigun/fire1  lsounds/Minigun/FireFast.flac    // same
+weapons/minigun/fire2  lsounds/Minigun/FireMedium.flac  // same
+weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // Serious Sam: The First Encounter HD
+weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // same
+weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // same
+weapons/minigun/click  lsounds/Minigun/Click.flac       // same
+weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
+$volume weapons/minigun/fire 0.7
+$volume weapons/minigun/fire1 0.7
+$volume weapons/minigun/fire2 0.7
+
+weapons/rocket/firel1  lsounds/RocketLauncher/FireLeft.flac   // FEAR
+weapons/rocket/firel2  lsounds/RocketLauncher/FireLeft1.flac  // same
+weapons/rocket/firel3  lsounds/RocketLauncher/FireLeft2.flac  // same
+weapons/rocket/firer1  lsounds/RocketLauncher/FireRight.flac  // Alliance of Valiant Arms, FEAR
+weapons/rocket/firer2  lsounds/RocketLauncher/FireRight1.flac // same
+weapons/rocket/firer3  lsounds/RocketLauncher/FireRight2.flac // same
+weapons/rocket/pickup1 lsounds/RocketLauncher/Pickup1.flac    // FEAR, Doom 3, Firearms: Source
+weapons/rocket/pickup2 lsounds/RocketLauncher/Pickup2.flac    // FEAR, Firearms: Source
+
+$random weapons/rocket/pickup {
+   weapons/rocket/pickup1
+   weapons/rocket/pickup2 }
+
+$random weapons/rocket/firel {
+   weapons/rocket/firel1
+   weapons/rocket/firel2
+   weapons/rocket/firel3 }
+
+$random weapons/rocket/firer {
+   weapons/rocket/firer1
+   weapons/rocket/firer2
+   weapons/rocket/firer3 }
+
+weapons/plasma/fire    lsounds/PlasmaRifle/Fire.flac      // Devil May Cry 3
+weapons/plasma/altfire lsounds/PlasmaRifle/AltFire.flac   // same
+weapons/plasma/explode lsounds/PlasmaRifle/Explode.flac   // same
+weapons/plasma/pickup  lsounds/PlasmaRifle/Pickup.flac    // Alliance of Valiant Arms
+weapons/plasma/empty   lsounds/PlasmaRifle/FireEmpty.flac // Killing Floor
+
+weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD
+weapons/cannon/prepare lsounds/Cannon/Prepare.flac   // same
+weapons/cannon/explode lsounds/Cannon/Explode.flac   // same
+weapons/cannon/empty   lsounds/Cannon/FireEmpty.flac // Killing Floor
+
+//
+// Enemies
+
+enemies/zombie/fire lsounds/ZombieMan/Fire.flac // Killing Floor
+$attenuation enemies/zombie/fire 0.5
+
+enemies/shotguy/fire lsounds/ShotGuy/Fire.flac // Killing Floor
+$attenuation enemies/shotguy/fire 0.5
+
+enemies/chainguy/fire  lsounds/ChaingunGuy/Fire.flac        // Killing Floor
+enemies/chainguy/bolt  lsounds/ChaingunGuy/Bolt.flac        // same
+enemies/chainguy/boltb lsounds/ChaingunGuy/BoltBack.flac    // same
+enemies/chainguy/boltf lsounds/ChaingunGuy/BoltForward.flac // same
+$attenuation enemies/chainguy/fire 0.5
+
+//
+// Effects
+effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac
+effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac
+effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac
+effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac
+
+$random effects/puff/ricochet {
+   effects/puff/ricochet1
+   effects/puff/ricochet2
+   effects/puff/ricochet3
+   effects/puff/ricochet4 }
+
+//
+// Player
+
+player/rocketboost lsounds/Player/RocketBoost.flac
+player/doublejump  lsounds/Player/DoubleJump.flac
+$volume player/doublejump 0.7

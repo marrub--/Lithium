@@ -1,0 +1,50 @@
+actor Lith_Rocket
+{
+   RenderStyle Translucent
+   Alpha 0.3
+   Scale 0.5
+   Radius 5
+   Height 4
+   Speed 35
+   Damage (50)
+   SeeSound "weapons/rocket/firel"
+   DeathSound "weapons/rocklx"
+   
+   Projectile
+   +RANDOMIZE
+   +ROCKETTRAIL
+   
+   states
+   {
+   Spawn:
+      MISL A 1 bright
+      loop
+   Death:
+      MISL B 8 bright A_Explode(48, 64, 0)
+      MISL C 6 bright
+      MISL D 4 bright
+      stop
+   }
+}
+
+actor Lith_HomingRocket : Lith_Rocket
+{
+   Speed 30
+   Damage (30)
+   SeeSound "weapons/rocket/firer"
+   
+   +SEEKERMISSILE
+   
+   states
+   {
+   Spawn:
+      MISL A 2 bright A_SeekerMissile(0, 2, SMF_LOOK)
+      loop
+   Death:
+      MISL B 8 bright A_Explode(24, 32, 0)
+      MISL C 6 bright
+      MISL D 4 bright
+      stop
+   }
+}
+

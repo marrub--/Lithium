@@ -1,0 +1,5 @@
+gameinfo
+{
+   playerclasses = "Lith_Player"
+}
+

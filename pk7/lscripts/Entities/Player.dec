@@ -1,0 +1,14 @@
+actor Lith_Player : DoomPlayer
+{
+   Player.StartItem "Lith_Pistol"
+   Player.StartItem "Fist"
+   DamageFactor PlayerMissile, 0
+   
+   var int user_rocketcharge;
+}
+
+actor Lith_RocketBooster : PowerFlight
+{
+   Powerup.Duration 60
+}
+
