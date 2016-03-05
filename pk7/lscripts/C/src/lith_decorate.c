@@ -17,16 +17,21 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    if(ACS_GetCVar("lith_hud_stupidpickups"))
    {
       __str const *names = pickupnames[user_pickupparm];
-      size_t i;
+      int namesmax;
       
-      for(i = 0; names[i]; i++);
+      for(namesmax = 1; names[namesmax]; namesmax++);
       
-      Log(pickupfmt[ACS_Random(0, pickupfmtmax - 1)], names[ACS_Random(1, i - 1)]);
+      int i1 = ACS_Random(0, pickupfmtmax - 1);
+      int i2 = ACS_Random(1, namesmax - 1);
+      int i3 = ACS_Random(0, uncertaintymax - 1);
+      
+      if(pickupfmt[i1].flag == 1)
+         Log(pickupfmt[i1].fmt, names[i2], uncertainty[i3]);
+      else
+         Log(pickupfmt[i1].fmt, names[i2]);
    }
    else
-   {
-      Log(pickupfmt[0], pickupnames[user_pickupparm][0]);
-   }
+      Log(pickupfmt[0].fmt, pickupnames[user_pickupparm][0]);
    
    switch(user_pickupparm)
    {
@@ -82,9 +87,7 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       return bitsk(A);
    }
    else
-   {
       return bitsk(P);
-   }
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
