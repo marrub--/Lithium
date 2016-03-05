@@ -103,6 +103,18 @@ void Lith_UpdateScore()
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveScoreToTarget(int amount)
+{
+   ACS_SetActivatorToTarget(0);
+   
+   if(ACS_PlayerNumber() == -1)
+      return;
+   
+   ACS_GiveInventory("Lith_ScoreCount", amount);
+   Lith_UpdateScore();
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 bool Lith_FireScore(int amount)
 {
    player_t *p = &players[ACS_PlayerNumber()];

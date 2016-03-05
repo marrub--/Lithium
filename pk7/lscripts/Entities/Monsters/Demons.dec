@@ -22,6 +22,9 @@ actor Lith_Demon : Demon replaces Demon
       SARG F 8
       SARG G 8 A_SargAttack
       goto See
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_GiveScoreToTarget", 0, Score_Demon)
+      goto Super::Death
    }
 }
 

@@ -21,6 +21,9 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
    MissileEnd:
       POSS E 8
       goto See
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_GiveScoreToTarget", 0, Score_ZombieMan)
+      goto Super::Death
    }
 }
 
@@ -40,6 +43,9 @@ actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
       SPOS F 10 bright
       SPOS E 10
       goto See
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_GiveScoreToTarget", 0, Score_ShotgunGuy)
+      goto Super::Death
    }
 }
 
@@ -60,6 +66,9 @@ actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
          frandom(1, 4) * 3.0)
       CPOS F 1 A_CPosRefire
       loop
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_GiveScoreToTarget", 0, Score_ChaingunGuy)
+      goto Super::Death
    }
 }
 
