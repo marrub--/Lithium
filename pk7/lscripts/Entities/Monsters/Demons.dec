@@ -2,6 +2,7 @@ actor Lith_Demon : Demon replaces Demon
 {
    Radius 29
    MeleeRange 52
+   Health 200
    
    states
    {
