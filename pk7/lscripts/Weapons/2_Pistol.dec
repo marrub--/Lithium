@@ -16,7 +16,6 @@ actor Lith_PistolScopedDisplayToken : Inventory
 actor Lith_Pistol : Lith_Weapon replaces Pistol
 {
    Tag "Pistol"
-   Inventory.PickupMessage "You got the Postil!"
    Weapon.SlotNumber 2
    Weapon.BobSpeed 3
    Weapon.BobRangeX 0.2

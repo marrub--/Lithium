@@ -3,7 +3,6 @@
 actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
 {
    Tag "Plasma Rifle"
-   Inventory.PickupMessage "You got the Spalmo Rinfer!"
    Weapon.SlotNumber 6
    
    states

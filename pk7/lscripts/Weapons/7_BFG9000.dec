@@ -65,7 +65,6 @@ actor Lith_SmallCannonBall : Lith_CannonBall
 actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
 {
    Tag "BFG9000"
-   Inventory.PickupMessage "You got the Biffgee Nintendo!"
    Weapon.SlotNumber 7
    Weapon.BobStyle InverseSmooth
    Weapon.BobRangeX 2.0

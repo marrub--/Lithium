@@ -8,7 +8,6 @@ actor Lith_RocketLauncherHand : Inventory
 actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
 {
    Tag "Rocket Launcher"
-   Inventory.PickupMessage "You got the Ruckebt Laurence!"
    Weapon.SlotNumber 5
    Weapon.BobStyle Smooth
    Weapon.BobSpeed 1.3

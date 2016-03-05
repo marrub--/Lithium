@@ -13,7 +13,6 @@ actor Lith_ShotgunScopedDisplayToken : Inventory
 actor Lith_Shotgun : Lith_Weapon replaces Shotgun
 {
    Tag "Shotgun"
-   Inventory.PickupMessage "You got the Shtegnu!"
    Weapon.SlotNumber 3
    
    +WEAPON.NOAUTOFIRE

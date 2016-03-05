@@ -19,7 +19,6 @@ actor Lith_MinigunFireFrame : Inventory
 actor Lith_Minigun : Lith_Weapon
 {
    Tag "Minigun"
-   Inventory.PickupMessage "You got the Mnegubn!"
    Weapon.SlotNumber 4
    Weapon.BobStyle Smooth
    
