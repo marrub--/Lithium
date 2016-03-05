@@ -10,16 +10,7 @@
 [[__call("ScriptI"), __address(200), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
-   #define pickups(name, ...) \
-      static __str const pickupnames_##name[] = __VA_ARGS__;
    #include "lith_pickups.h"
-   #undef pickups
-   static __str const *const pickupnames[] = {
-      #define pickups(name, ...) \
-         [name] = pickupnames_##name,
-      #include "lith_pickups.h"
-      #undef pickups
-   };
    
    ACS_Thing_Remove(user_spritetid);
    
@@ -29,7 +20,7 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       
       for(i = 0; names[i]; i++);
       
-      Log("You got the %S!", names[Random(0, i - 1)]);
+      Log(pickupfmt[Random(0, pickupfmtmax)], names[Random(0, i - 1)]);
    }
    
    switch(user_pickupparm)

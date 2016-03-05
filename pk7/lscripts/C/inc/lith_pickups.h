@@ -1,39 +1,24 @@
-pickups(weapon_pistol, {
-   "Postil",
-   null
-})
+#ifndef LITH_PICKUPS_H
+#define LITH_PICKUPS_H
 
-pickups(weapon_shotgun, {
-   "Shtegnu",
-   null
-})
+#define pickups(name, ...) static __str const pickupnames_##name[] = __VA_ARGS__;
+#include "lith_pickupnames.h"
+static __str const *const pickupnames[] = {
+   #define pickups(name, ...) [name] = pickupnames_##name,
+   #include "lith_pickupnames.h"
+};
 
-pickups(weapon_supershotgun, {
-   "Sbepru Shtetgenu",
-   null
-})
+static __str const pickupfmt[] = {
+   "\CjYou got the %S!",
+   "\CjOh yes, a %S.",
+   "\CjThe %S has been acquired.",
+   "\CjSnatched up a %S!",
+   "\CjOh baby, it's time for %S!",
+   "\CjThere was a %S here, but you stole it.\nIt is now in your inventory.\nYou Monster.",
+   "\CjOH NO, NOT %s"
+};
 
-pickups(weapon_combatrifle, {
-   "Cmobta Riffel",
-   "Combit Raffle",
-   "Combat Rifl",
-   "Rifcom Litbl",
-   "Bltbm Liffem",
-   null
-})
+static size_t const pickupfmtmax = sizeof(pickupfmt) / sizeof(*pickupfmt);
 
-pickups(weapon_rocketlauncher, {
-   "Ruckebt Laurence",
-   null
-})
-
-pickups(weapon_plasmarifle, {
-   "Spalmo Rinfer",
-   null
-})
-
-pickups(weapon_bfg9000, {
-   "Biffgee Nintendo",
-   null
-})
+#endif
 
