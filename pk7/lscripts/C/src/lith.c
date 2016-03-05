@@ -21,7 +21,7 @@ void Lith_GetWeaponType(player_t *p)
       { "Lith_Pistol",         weapon_pistol,         weaponf_pistol         },
       { "Lith_Shotgun",        weapon_shotgun,        weaponf_shotgun        },
       { "Lith_SuperShotgun",   weapon_supershotgun,   weaponf_supershotgun   },
-      { "Lith_Minigun",        weapon_minigun,        weaponf_minigun        },
+      { "Lith_CombatRifle",    weapon_combatrifle,    weaponf_combatrifle    },
       { "Lith_RocketLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
       { "Lith_PlasmaRifle",    weapon_plasmarifle,    weaponf_plasmarifle    },
       { "Lith_BFG9000",        weapon_bfg9000,        weaponf_bfg9000        }

@@ -20,7 +20,7 @@ enum
    weaponf_pistol         = 1 << 0,
    weaponf_shotgun        = 1 << 1,
    weaponf_supershotgun   = 1 << 2,
-   weaponf_minigun        = 1 << 3,
+   weaponf_combatrifle    = 1 << 3,
    weaponf_rocketlauncher = 1 << 4,
    weaponf_plasmarifle    = 1 << 5,
    weaponf_bfg9000        = 1 << 6

@@ -65,7 +65,7 @@ actor Lith_Weapon : Weapon
    var int user_pickupparm;
    var int user_spritetid;
    
-   const int Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
+   const int LITH_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
    
    states
    {

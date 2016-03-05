@@ -102,7 +102,7 @@ void Lith_PlayerHUD(player_t *p)
       [weapon_pistol]         = "H_D24",
       [weapon_shotgun]        = "H_D23",
       [weapon_supershotgun]   = "H_D23",
-      [weapon_minigun]        = "H_D22",
+      [weapon_combatrifle]    = "H_D22",
       [weapon_rocketlauncher] = "H_D21",
       [weapon_plasmarifle]    = "H_D25",
       [weapon_bfg9000]        = "H_D26"

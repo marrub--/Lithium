@@ -16,7 +16,7 @@ actor Lith_MinigunFireFrame : Inventory
 // This weapon is a clusterfuck because ZDoom doesn't allow uservars on weapons.
 // Also because I'm bad at programming when I'm very tired.
 // I apologize to anyone who needs to read this.
-actor Lith_Minigun : Lith_Weapon replaces Chaingun
+actor Lith_Minigun : Lith_Weapon
 {
    Tag "Minigun"
    Inventory.PickupMessage "You got the Mnegubn!"
@@ -51,9 +51,9 @@ actor Lith_Minigun : Lith_Weapon replaces Chaingun
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 2, 6);
          A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
          A_Recoil(0.1);
-         A_WeaponReady(Lith_BOBONLY);
+         A_WeaponReady(LITH_BOBONLY);
       }
-      MNGG AABBBCCCAAABBBCCC 1 A_WeaponReady(Lith_BOBONLY)
+      MNGG AABBBCCCAAABBBCCC 1 A_WeaponReady(LITH_BOBONLY)
       MNGG A 0 A_PlaySound("weapons/minigun/rotate", 7, 1.0, true)
       goto FireLoop
    FireLoopContinue:
@@ -89,20 +89,20 @@ actor Lith_Minigun : Lith_Weapon replaces Chaingun
             A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
          }
          
-         A_WeaponReady(Lith_BOBONLY);
+         A_WeaponReady(LITH_BOBONLY);
       }
       MNGG D 1 bright A_SetTics(CountInv("Lith_MinigunFireFrame") == 1)
       MNGG A 1 { A_SetTics(((WM - CountInv("Lith_MinigunWindup")) / WM10)
                            + (CountInv("Lith_MinigunFireFrame") == 1));
-                 A_WeaponReady(Lith_BOBONLY); }
+                 A_WeaponReady(LITH_BOBONLY); }
       MNGG E 1 bright A_SetTics(CountInv("Lith_MinigunFireFrame") == 2)
       MNGG B 1 { A_SetTics(((WM - CountInv("Lith_MinigunWindup")) / WM10)
                            + (CountInv("Lith_MinigunFireFrame") == 2));
-                 A_WeaponReady(Lith_BOBONLY); }
+                 A_WeaponReady(LITH_BOBONLY); }
       MNGG F 1 bright A_SetTics(CountInv("Lith_MinigunFireFrame") == 3)
       MNGG C 1 { A_SetTics(((WM - CountInv("Lith_MinigunWindup")) / WM10)
                            + (CountInv("Lith_MinigunFireFrame") == 3));
-                 A_WeaponReady(Lith_BOBONLY); }
+                 A_WeaponReady(LITH_BOBONLY); }
       MNGG A 0 {
          A_GiveInventory("Lith_MinigunWindup",
             CallACS("Lith_SuperOmegaRandom", 0, 2));
@@ -125,7 +125,7 @@ actor Lith_Minigun : Lith_Weapon replaces Chaingun
    Fire:
       MNGG A 0 A_PlaySound("weapons/minigun/click", 6)
       MNGG A 0 A_PlaySound("weapons/minigun/up", 7)
-      MNGG ABC 2 A_WeaponReady(Lith_BOBONLY)
+      MNGG ABC 2 A_WeaponReady(LITH_BOBONLY)
       MNGG A 0 A_PlaySound("weapons/minigun/rotate", 7, 1.0, true)
       goto AltFireLoop
    AltRefire:
@@ -138,21 +138,17 @@ actor Lith_Minigun : Lith_Weapon replaces Chaingun
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 2, 6);
          A_Recoil(0.1);
          A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
-         A_WeaponReady(Lith_BOBONLY);
+         A_WeaponReady(LITH_BOBONLY);
       }
-      MNGG B 2 A_WeaponReady(Lith_BOBONLY)
-      MNGG C 1 A_WeaponReady(Lith_BOBONLY)
+      MNGG B 2 A_WeaponReady(LITH_BOBONLY)
+      MNGG C 1 A_WeaponReady(LITH_BOBONLY)
       MNGG C 0 A_ReFire("AltFireLoop")
       MNGG A 0 A_PlaySound("weapons/minigun/down", 7)
-      MNGG ABCABCABC 3 { A_ReFire("AltRefire"); A_WeaponReady(Lith_BOBONLY); }
+      MNGG ABCABCABC 3 { A_ReFire("AltRefire"); A_WeaponReady(LITH_BOBONLY); }
    WindDownDone:
       MNGG A 0 A_PlaySound("weapons/minigun/place", 5)
       MNGG A 0 A_TakeInventory("Lith_MinigunWinddown", 1)
       goto Ready
-   Spawn:
-      MGUN A 0
-      MGUN A 0 A_SetUserVar("user_pickupparm", weapon_minigun)
-      goto SpawnLoop
    }
 }
 

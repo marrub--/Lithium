@@ -1,6 +1,18 @@
 //
 // Weapons
 
+weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Killing Floor
+weapons/minigun/fire1  lsounds/Minigun/FireFast.flac    // same
+weapons/minigun/fire2  lsounds/Minigun/FireMedium.flac  // same
+weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // Serious Sam: The First Encounter HD
+weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // same
+weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // same
+weapons/minigun/click  lsounds/Minigun/Click.flac       // same
+weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
+$volume weapons/minigun/fire 0.7
+$volume weapons/minigun/fire1 0.7
+$volume weapons/minigun/fire2 0.7
+
 weapons/pistol/fire    lsounds/Pistol/Fire.flac     // Killing Floor
 weapons/pistol/reload  lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
 weapons/pistol/zoomin  lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
@@ -18,30 +30,24 @@ weapons/ssg/close        lsounds/SuperShotgun/Close.flac        // Killing Floor
 weapons/ssg/open         lsounds/SuperShotgun/Open.flac         // same
 weapons/ssg/load         lsounds/SuperShotgun/Load.flac         // General 6000, ???
 
-weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Killing Floor
-weapons/minigun/fire1  lsounds/Minigun/FireFast.flac    // same
-weapons/minigun/fire2  lsounds/Minigun/FireMedium.flac  // same
-weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // Serious Sam: The First Encounter HD
-weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // same
-weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // same
-weapons/minigun/click  lsounds/Minigun/Click.flac       // same
-weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
-$volume weapons/minigun/fire 0.7
-$volume weapons/minigun/fire1 0.7
-$volume weapons/minigun/fire2 0.7
+weapons/rifle/fire1    lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
+weapons/rifle/fire2    lsounds/CombatRifle/Fire2.flac       // same
+weapons/rifle/fire3    lsounds/CombatRifle/Fire3.flac       // same
+weapons/rifle/rldmount lsounds/CombatRifle/ReloadMount.flac // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
+weapons/rifle/pickup   lsounds/CombatRifle/Pickup.flac      // Halo 3
 
-weapons/rocket/firel1  lsounds/RocketLauncher/FireLeft.flac   // FEAR
-weapons/rocket/firel2  lsounds/RocketLauncher/FireLeft1.flac  // same
-weapons/rocket/firel3  lsounds/RocketLauncher/FireLeft2.flac  // same
-weapons/rocket/firer1  lsounds/RocketLauncher/FireRight.flac  // Alliance of Valiant Arms, FEAR
-weapons/rocket/firer2  lsounds/RocketLauncher/FireRight1.flac // same
-weapons/rocket/firer3  lsounds/RocketLauncher/FireRight2.flac // same
-weapons/rocket/pickup1 lsounds/RocketLauncher/Pickup1.flac    // FEAR, Doom 3, Firearms: Source
-weapons/rocket/pickup2 lsounds/RocketLauncher/Pickup2.flac    // FEAR, Firearms: Source
+$random weapons/rifle/fire {
+   weapons/rifle/fire1
+   weapons/rifle/fire2
+   weapons/rifle/fire3 }
 
-$random weapons/rocket/pickup {
-   weapons/rocket/pickup1
-   weapons/rocket/pickup2 }
+weapons/rocket/firel1 lsounds/RocketLauncher/FireLeft.flac   // FEAR
+weapons/rocket/firel2 lsounds/RocketLauncher/FireLeft1.flac  // same
+weapons/rocket/firel3 lsounds/RocketLauncher/FireLeft2.flac  // same
+weapons/rocket/firer1 lsounds/RocketLauncher/FireRight.flac  // Alliance of Valiant Arms, FEAR
+weapons/rocket/firer2 lsounds/RocketLauncher/FireRight1.flac // same
+weapons/rocket/firer3 lsounds/RocketLauncher/FireRight2.flac // same
+weapons/rocket/pickup lsounds/RocketLauncher/Pickup.flac     // FEAR, Doom 3, Firearms: Source
 
 $random weapons/rocket/firel {
    weapons/rocket/firel1

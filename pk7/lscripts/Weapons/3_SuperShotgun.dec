@@ -38,16 +38,16 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
       SHT2 A 6 {
          A_TakeInventory("Lith_SuperShotgunChargeIter", 999);
          A_GiveInventory("Lith_SuperShotgunCharge", 1);
-         A_WeaponReady(Lith_BOBONLY); }
+         A_WeaponReady(LITH_BOBONLY); }
       goto FirePellets
    AltFire:
       SHT2 A 6 {
          A_TakeInventory("Lith_SuperShotgunChargeIter", 999);
-         A_WeaponReady(Lith_BOBONLY); }
+         A_WeaponReady(LITH_BOBONLY); }
       SHT2 A 3 {
          A_GiveInventory("Lith_SuperShotgunCharge", 1);
          A_PlaySound("weapons/ssg/charge");
-         A_WeaponReady(Lith_BOBONLY); }
+         A_WeaponReady(LITH_BOBONLY); }
       SHT2 A 0 {
          if(CountInv("Lith_SuperShotgunCharge") == chargemax)
             { return state("FirePelletsStart"); }

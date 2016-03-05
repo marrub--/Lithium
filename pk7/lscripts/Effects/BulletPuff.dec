@@ -57,13 +57,13 @@ actor XPuff replaces BulletPuff
    PuffMirrored:
       XPUF V 0 A_Jump(32, "PuffMirroredAlt")
       XPUF VWXYZ 1 bright
-      PuffMirroredEnd:
+   PuffMirroredEnd:
       XPUF NOP 1 bright
       stop
    PuffMirroredAlt:
       XPUF I 0 A_PlaySound("effects/puff/ricochet")
       XPUF IJKLM 1 bright
-      goto PuffNormalEnd
+      goto PuffMirroredEnd
    }
 }
 

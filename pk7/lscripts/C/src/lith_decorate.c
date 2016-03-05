@@ -27,9 +27,8 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       ACS_Delay(10);
       ACS_LocalAmbientSound("weapons/ssg/chargefinish", 127);
       break;
-   case weapon_minigun:
-      ACS_LocalAmbientSound("enemies/chainguy/boltf", 127);
-      ACS_LocalAmbientSound("weapons/minigun/place", 127);
+   case weapon_combatrifle:
+      ACS_LocalAmbientSound("weapons/rifle/pickup", 127);
       break;
    case weapon_rocketlauncher:
       ACS_LocalAmbientSound("weapons/rocket/pickup", 127);
