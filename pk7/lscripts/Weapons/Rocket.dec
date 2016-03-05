@@ -18,7 +18,7 @@ actor Lith_Rocket
       MISL A 1 bright
       loop
    Death:
-      MISL B 8 bright A_Explode(48, 64, 0)
+      MISL B 8 bright A_Explode(48, 64)
       MISL C 6 bright
       MISL D 4 bright
       stop
@@ -39,7 +39,7 @@ actor Lith_HomingRocket : Lith_Rocket
       MISL A 2 bright A_SeekerMissile(0, 2, SMF_LOOK)
       loop
    Death:
-      MISL B 8 bright A_Explode(24, 32, 0)
+      MISL B 8 bright A_Explode(24, 32)
       MISL C 6 bright
       MISL D 4 bright
       stop
