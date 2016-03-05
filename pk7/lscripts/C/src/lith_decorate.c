@@ -52,6 +52,9 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    case weapon_plasmarifle:
       ACS_LocalAmbientSound("weapons/plasma/pickup", 127);
       break;
+   case weapon_bfg9000:
+      ACS_LocalAmbientSound("weapons/cannon/pickup", 127);
+      break;
    }
 }
 

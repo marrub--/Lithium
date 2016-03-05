@@ -80,6 +80,7 @@ weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First E
 weapons/cannon/prepare lsounds/Cannon/Prepare.flac   // same
 weapons/cannon/explode lsounds/Cannon/Explode.flac   // same
 weapons/cannon/empty   lsounds/Cannon/FireEmpty.flac // Killing Floor
+weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3
 
 //
 // Enemies

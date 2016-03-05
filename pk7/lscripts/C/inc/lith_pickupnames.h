@@ -38,18 +38,25 @@ pickups(weapon_combatrifle, {
 pickups(weapon_rocketlauncher, {
    "Dual Rocket Launcher",
    "Ruckebt Laurence",
+   "Rawket Lawnchair",
+   "Rokkit Luncher",
+   "Bottle Rocket Cannon",
    null
 })
 
 pickups(weapon_plasmarifle, {
    "Plasma Rifle",
    "Spalmo Rinfer",
+   "Layzuh Beem",
+   "Shooty-pew Gun",
    null
 })
 
 pickups(weapon_bfg9000, {
    "Omega Cannon",
    "Biffgee Nintendo",
+   "BFG 8000",
+   "One Shot Cannon",
    null
 })
 
