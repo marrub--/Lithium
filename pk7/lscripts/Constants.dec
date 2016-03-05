@@ -3,3 +3,20 @@
 
 const float FIX = 65536.0;
 const int IFIX = 65536;
+
+// Score values.
+const int Score_Clip      = 11  * 100;
+const int Score_ClipBox   = 51  * 100;
+const int Score_Shell     = 5   * 100 * 2;
+const int Score_ShellBox  = 21  * 100 * 2;
+const int Score_Rocket    = 2   * 100 * 4;
+const int Score_RocketBox = 6   * 100 * 4;
+const int Score_Cell      = 21  * 100 * 5;
+const int Score_CellPack  = 101 * 100 * 5;
+const int Score_Backpack  = (Score_Clip + Score_ShellBox + Score_Rocket + Score_Cell) * 5;
+
+const int Score_ZombieMan   = Score_Clip    * 1.5;
+const int Score_ShotgunGuy  = Score_Shell   * 1.5;
+const int Score_ChaingunGuy = Score_ClipBox * 1.5;
+const int Score_LostSoul    = Score_Shell   * 2.0;
+

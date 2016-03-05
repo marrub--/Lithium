@@ -21,7 +21,7 @@ actor Lith_Clip : Lith_ScoreItem replaces Clip
    states
    {
    Spawn:
-      CLIP A 0 nodelay A_GiveInventory("Lith_ScoreCount", 1100)
+      CLIP A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip)
       CLIP A -1
       stop
    }
@@ -32,7 +32,7 @@ actor Lith_ClipBox : Lith_ScoreItem replaces ClipBox
    states
    {
    Spawn:
-      AMMO A 0 nodelay A_GiveInventory("Lith_ScoreCount", 5100)
+      AMMO A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox)
       AMMO A -1
       stop
    }
@@ -43,7 +43,7 @@ actor Lith_Shell : Lith_ScoreItem replaces Shell
    states
    {
    Spawn:
-      SHEL A 0 nodelay A_GiveInventory("Lith_ScoreCount", 500 * 2)
+      SHEL A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Shell)
       SHEL A -1
       stop
    }
@@ -54,7 +54,7 @@ actor Lith_ShellBox : Lith_ScoreItem replaces ShellBox
    states
    {
    Spawn:
-      SBOX A 0 nodelay A_GiveInventory("Lith_ScoreCount", 2100 * 2)
+      SBOX A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ShellBox)
       SBOX A -1
       stop
    }
@@ -65,7 +65,7 @@ actor Lith_RocketAmmo : Lith_ScoreItem replaces RocketAmmo
    states
    {
    Spawn:
-      ROCK A 0 nodelay A_GiveInventory("Lith_ScoreCount", 200 * 4)
+      ROCK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Rocket)
       ROCK A -1
       stop
    }
@@ -76,7 +76,7 @@ actor Lith_RocketBox : Lith_ScoreItem replaces RocketBox
    states
    {
    Spawn:
-      BROK A 0 nodelay A_GiveInventory("Lith_ScoreCount", 600 * 4)
+      BROK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_RocketBox)
       BROK A -1
       stop
    }
@@ -87,7 +87,7 @@ actor Lith_Cell : Lith_ScoreItem replaces Cell
    states
    {
    Spawn:
-      CELL A 0 nodelay A_GiveInventory("Lith_ScoreCount", 2100 * 5)
+      CELL A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Cell)
       CELL A -1
       stop
    }
@@ -98,7 +98,7 @@ actor Lith_CellPack : Lith_ScoreItem replaces CellPack
    states
    {
    Spawn:
-      CELP A 0 nodelay A_GiveInventory("Lith_ScoreCount", 10100 * 5)
+      CELP A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_CellPack)
       CELP A -1
       stop
    }
@@ -109,7 +109,7 @@ actor Lith_Backpack : Lith_ScoreItem replaces Backpack
    states
    {
    Spawn:
-      BPAK A 0 nodelay A_GiveInventory("Lith_ScoreCount", (1100 + 2100 + 200 + 500) * 5)
+      BPAK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Backpack)
       BPAK A -1
       stop
    }
