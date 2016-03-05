@@ -46,7 +46,7 @@ actor Lith_Minigun : Lith_Weapon
       MNGG A 0 A_PlaySound("weapons/minigun/click", 6)
       MNGG A 0 A_PlaySound("weapons/minigun/up", 7)
       MNGG D 1 bright {
-         A_FireBullets(4, 1, 2, 5, "BulletPuff");
+         A_FireBullets(4, 1, -2, 5, "BulletPuff");
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 2, 6);
          A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
          A_Recoil(0.1);
@@ -67,7 +67,7 @@ actor Lith_Minigun : Lith_Weapon
                floor(2.0 * (CountInv("Lith_MinigunWindup") / WM)) * IFIX,
                false) / FIX,
             CallACS("Lith_CircleSpread", 0, 0, true) / FIX,
-            1, 7, "BulletPuff", FBF_EXPLICITANGLE | FBF_USEAMMO);
+            -1, 7, "BulletPuff", FBF_EXPLICITANGLE | FBF_USEAMMO);
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 2, 6);
          A_Recoil(0.1);
          
@@ -133,7 +133,7 @@ actor Lith_Minigun : Lith_Weapon
    AltFireLoop:
       MNGG D 1 bright {
          A_FireBullets(frandom(-5.0, 5.0), 0.0,
-            1, 7, "BulletPuff", FBF_EXPLICITANGLE | FBF_USEAMMO);
+            -1, 7, "BulletPuff", FBF_EXPLICITANGLE | FBF_USEAMMO);
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 2, 6);
          A_Recoil(0.1);
          A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);

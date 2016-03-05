@@ -61,7 +61,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
       }
       PISG B 1 {
          A_WeaponReady(LITH_BOBONLY);
-         A_FireBullets(0, 0, 1, 20, "BulletPuff", FBF_NORANDOM);
+         A_FireBullets(0, 0, -1, 20, "BulletPuff", FBF_NORANDOM);
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6);
          A_PlaySound("weapons/pistol/fire", CHAN_WEAPON);
          A_GunFlash;

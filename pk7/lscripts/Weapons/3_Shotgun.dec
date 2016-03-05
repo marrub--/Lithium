@@ -43,7 +43,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       loop
    Fire:
       SHTG A 7 {
-         A_FireBullets(5.3, 2.3, 8, 6, "BulletPuff");
+         A_FireBullets(5.3, 2.3, -8, 6, "BulletPuff");
          A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
          A_ZoomFactor(1.0, ZOOM_INSTANT);
          A_RailAttack(105, 0, true, None, Green, RGF_SILENT | RGF_FULLBRIGHT,

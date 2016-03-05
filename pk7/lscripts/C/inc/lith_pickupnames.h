@@ -1,3 +1,11 @@
+pickups(weapon_unknown, {
+   "Unknown Weapon",
+   "Literally What The Fuck",
+   "How Even",
+   "Why Are You Doing This",
+   null
+})
+
 pickups(weapon_pistol, {
    "Pistol",
    "Postil",

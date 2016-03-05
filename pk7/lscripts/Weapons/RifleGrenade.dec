@@ -5,6 +5,7 @@ actor Lith_RifleGrenade
    Speed 25
    Damage 30
    BounceType Doom
+   BounceCount 2
    Gravity 0.5
    SeeSound "weapons/rifle/grenade"
    DeathSound "weapons/rocklx"
