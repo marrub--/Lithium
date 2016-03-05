@@ -14,13 +14,18 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    
    ACS_Thing_Remove(user_spritetid);
    
+   if(ACS_GetCVar("lith_hud_stupidpickups"))
    {
       __str const *names = pickupnames[user_pickupparm];
       size_t i;
       
       for(i = 0; names[i]; i++);
       
-      Log(pickupfmt[ACS_Random(0, pickupfmtmax - 1)], names[ACS_Random(0, i - 1)]);
+      Log(pickupfmt[ACS_Random(0, pickupfmtmax - 1)], names[ACS_Random(1, i - 1)]);
+   }
+   else
+   {
+      Log(pickupfmt[0], pickupnames[user_pickupparm][0]);
    }
    
    switch(user_pickupparm)

@@ -6,6 +6,7 @@ user float lith_weapons_scopealpha = 0.2;
 // HUD
 user bool lith_hud_showscore = true;
 user bool lith_hud_showweapons = true;
+user bool lith_hud_stupidpickups = false;
 
 // Player
 user float lith_player_damagebobmul = 1.0;
