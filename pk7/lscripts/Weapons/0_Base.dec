@@ -57,6 +57,7 @@ actor Lith_Weapon : Weapon
    Weapon.BobSpeed 1.5
    Radius 16
    Inventory.PickupSound ""
+   Inventory.PickupMessage ""
    
    +NOGRAVITY
    

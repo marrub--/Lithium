@@ -1,0 +1,28 @@
+actor Lith_RifleGrenade
+{
+   Radius 8
+   Height 8
+   Speed 25
+   Damage 20
+   BounceType Doom
+   Gravity 0.5
+   SeeSound "weapons/rifle/grenade"
+   DeathSound "weapons/rocklx"
+   BounceSound "weapons/rifle/grenadebounce"
+   
+   Projectile
+   -NOGRAVITY
+   
+   states
+   {
+   Spawn:
+      SGRN A 1 Bright
+      Loop
+   Death:
+      MISL B 8 Bright A_Explode
+      MISL C 6 Bright
+      MISL D 4 Bright
+      Stop
+   }
+}
+

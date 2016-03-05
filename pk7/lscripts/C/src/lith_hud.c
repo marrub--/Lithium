@@ -97,7 +97,7 @@ void Lith_PlayerHUD(player_t *p)
       notr    = CR_UNTRANSLATED
    };
    
-   __str const weapongfx[weapon_max] = {
+   static __str const weapongfx[weapon_max] = {
       [weapon_unknown]        = "H_D27",
       [weapon_pistol]         = "H_D24",
       [weapon_shotgun]        = "H_D23",
@@ -108,7 +108,7 @@ void Lith_PlayerHUD(player_t *p)
       [weapon_bfg9000]        = "H_D26"
    };
    
-   __str const armorgfx[armor_max] = {
+   static __str const armorgfx[armor_max] = {
       [armor_unknown] = "H_D27",
       [armor_none]    = "H_D28",
       [armor_bonus]   = "H_D23",
@@ -176,6 +176,17 @@ void Lith_PlayerHUD(player_t *p)
       
       HudMessageF("BIGFONT", "%i", count);
       HudMessageParams(plain, hid_ammo, CR_RED, 318.2, 200.2, 0.1);
+   }
+   else if(p->weapontype == weapon_combatrifle)
+   {
+      DrawSprite("H_W3", plain, hid_ammobg, notr, 320.2, 200.2, 0.1);
+      DrawSprite(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3),
+         plain,
+         hid_ammo,
+         notr,
+         320.2,
+         168.2 + (p->riflefiremode * 16),
+         0.1);
    }
    
    // Health

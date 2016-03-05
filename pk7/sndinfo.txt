@@ -35,6 +35,17 @@ weapons/rifle/fire2    lsounds/CombatRifle/Fire2.flac       // same
 weapons/rifle/fire3    lsounds/CombatRifle/Fire3.flac       // same
 weapons/rifle/rldmount lsounds/CombatRifle/ReloadMount.flac // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
 weapons/rifle/pickup   lsounds/CombatRifle/Pickup.flac      // Halo 3
+weapons/rifle/firemode lsounds/CombatRifle/SetFiremode.flac // Fallout: New Vegas, Deus Ex
+weapons/rifle/grenade  lsounds/CombatRifle/FireGrenade.flac // Fallout: New Vegas
+
+weapons/rifle/grenadebounce1 lsounds/CombatRifle/GrenadeBounce1.flac // Halo 3
+weapons/rifle/grenadebounce2 lsounds/CombatRifle/GrenadeBounce2.flac // same
+weapons/rifle/grenadebounce3 lsounds/CombatRifle/GrenadeBounce3.flac // same
+
+$random weapons/rifle/grenadebounce {
+   weapons/rifle/grenadebounce1
+   weapons/rifle/grenadebounce2
+   weapons/rifle/grenadebounce3 }
 
 $random weapons/rifle/fire {
    weapons/rifle/fire1

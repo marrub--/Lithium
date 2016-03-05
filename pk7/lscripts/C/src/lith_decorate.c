@@ -10,7 +10,27 @@
 [[__call("ScriptI"), __address(200), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
+   #define pickups(name, ...) \
+      static __str const pickupnames_##name[] = __VA_ARGS__;
+   #include "lith_pickups.h"
+   #undef pickups
+   static __str const *const pickupnames[] = {
+      #define pickups(name, ...) \
+         [name] = pickupnames_##name,
+      #include "lith_pickups.h"
+      #undef pickups
+   };
+   
    ACS_Thing_Remove(user_spritetid);
+   
+   {
+      __str const *names = pickupnames[user_pickupparm];
+      size_t i;
+      
+      for(i = 0; names[i]; i++);
+      
+      Log("You got the %S!", names[Random(0, i - 1)]);
+   }
    
    switch(user_pickupparm)
    {
@@ -126,6 +146,21 @@ bool Lith_FireScore(int amount)
    
    p->score -= amount;
    return false;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SwitchRifleFiremode()
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   p->riflefiremode = (p->riflefiremode + 1) % rifle_firemode_max;
+   ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetRifleFiremode()
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   return p->riflefiremode;
 }
 
 //

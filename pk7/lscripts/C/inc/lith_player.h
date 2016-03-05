@@ -88,12 +88,15 @@ typedef struct player_s
    // Misc. / inventory
    bool berserk;
    bool scopetoken;
+   bool lastscopetoken;
+   
+   int riflefiremode;
    
    int weapons;
    int keys;
    
    bool leaped;
-   bool lastscopetoken;
+   
    struct dlist_s *hudstrstack;
 } player_t;
 

@@ -1,23 +1,38 @@
 #include "lscripts/Weapons/RifleBullet.dec"
+#include "lscripts/Weapons/RifleGrenade.dec"
+
+actor Lith_RifleBurstIter : Inventory
+{
+   Inventory.MaxAmount 5
+}
 
 actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
 {
    Tag "Combat Rifle"
-   Inventory.PickupMessage "You got the Cmobta Riffel!"
    Weapon.SlotNumber 4
+   
+   +WEAPON.NOAUTOFIRE
    
    states
    {
+   OhFuck:
+      TNT1 A 1 A_Log("oh god what the fuck")
+      stop
    Ready:
       CRIF A 1 A_WeaponReady
       wait
    Deselect:
+      CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
+   DeselectLoop:
       CRIF A 1 { A_Lower; A_Lower; }
       loop
    Select:
+      CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
+   SelectLoop:
       CRIF A 1 { A_Raise; A_Raise; }
       loop
    Fire:
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetRifleFiremode") == rifle_firemode_grenade, "FireGrenade")
       CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRIF A 0 A_FireCustomMissile(
          "Lith_RifleBullet",         frandom(-4, 4), true, 0, 0, 0, frandom(-1.6, 1.6))
@@ -25,8 +40,50 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
          "Lith_RifleBulletPainless", frandom(-4, 4), true, 0, 0, 0, frandom(-1.6, 1.6))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRIF A 2        A_WeaponReady(LITH_BOBONLY)
-      CRIF A 4 A_ReFire
+      CRIF A 2
+      {
+         if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst)
+            { A_SetTics(0); }
+         else
+            { A_WeaponReady(LITH_BOBONLY); }
+      }
+      CRIF A 4
+      {
+         // :|
+         if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_auto)
+            { return state("FireAuto"); }
+         else if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst)
+         {
+            A_GiveInventory("Lith_RifleBurstIter", 1);
+            
+            if(CountInv("Lith_RifleBurstIter") == 5)
+            {
+               A_TakeInventory("Lith_RifleBurstIter", 999);
+               return state("FireBurstDone"); // :|
+            }
+            else
+               { return state("Fire"); }
+         }
+         
+         return state("Ready");
+      }
+   FireBurstDone:
+      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
+      goto Ready
+   FireAuto:
+      CRIF A 0 A_ReFire
+      goto Ready
+   FireGrenade:
+      CRIF A 3 A_WeaponReady(LITH_BOBONLY)
+      CRIF G 0 A_FireCustomMissile("Lith_RifleGrenade")
+      CRIF G 4 A_WeaponReady(LITH_BOBONLY)
+      CRIF H 3 A_WeaponReady(LITH_BOBONLY)
+      CRIF I 3 A_WeaponReady(LITH_BOBONLY)
+      goto Ready
+   AltFire:
+      CRIF A 2 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 0 ACS_NamedExecuteAlways("Lith_SwitchRifleFiremode", 0)
+      CRIF DEF 1 A_WeaponReady(LITH_BOBONLY)
       goto Ready
    Spawn:
       RIFL A 0
