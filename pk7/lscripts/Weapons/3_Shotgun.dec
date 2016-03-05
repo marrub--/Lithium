@@ -20,69 +20,95 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    states
    {
    AltReady:
-      SCOP A 1 {
+      SCOP A 1
+      {
          A_GiveInventory("Lith_ShotgunScopedDisplayToken");
-         A_WeaponReady(WRF_NOBOB); }
+         A_WeaponReady(WRF_NOBOB);
+      }
       loop
    Ready:
-      SHTG A 1 A_WeaponReady
+      PKSG A 1 A_WeaponReady
       wait
    Deselect:
-      SHTG A 0 {
+      PKSG A 0 {
          A_TakeInventory("Lith_ShotgunScopedToken", 1);
          A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
          A_ZoomFactor(1.0); }
    DeselectLoop:
-      SHTG A 1 { A_Lower; A_Lower; }
+      PKSG A 1 { A_Lower; A_Lower; }
       loop
    Select:
       // fuck youuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-      SHTG A 0 A_ZoomFactor(1.0)
+      PKSG A 0 A_ZoomFactor(1.0)
    SelectLoop:
-      SHTG A 1 { A_Raise; A_Raise; }
+      PKSG A 1 { A_Raise; A_Raise; }
       loop
    Fire:
-      SHTG A 7 {
-         A_FireBullets(5.3, 2.3, -8, 6, "BulletPuff");
-         A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
-         A_ZoomFactor(1.0, ZOOM_INSTANT);
+      TNT1 A 0
+      {
+         A_FireBullets(5.3, 2.3, 8, 6, "BulletPuff");
          A_RailAttack(105, 0, true, None, Green, RGF_SILENT | RGF_FULLBRIGHT,
             2, "BulletPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
          A_FireCustomMissile("Lith_GunSmokeSpawner", 0, 0, 0, 6);
          A_PlaySound("weapons/shotgun/fire", CHAN_WEAPON);
          A_Recoil(0.7);
-         A_GunFlash;
-      }
-      SHTG BC 5
-      SHTG D 4
-      SHTG CB 5
-      SHTG A 3
-      SHTG A 5 A_ReFire
-      SHTG A 0 {
-         if(!CountInv("Lith_ShotgunScopedToken"))
-         { return state("Ready"); }
+         
+         if(CountInv("Lith_ShotgunScopedToken"))
+            { return state("FireFinish_Scoped"); }
          else
-         { A_ZoomFactor(CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX, ZOOM_INSTANT);
-           return state("AltReady"); } }
-      goto Ready
+            { return state("FireFinish_NoScopeThough_DidntHaveThe700ForTheScope"); }
+      }
+   FireFinish_Scoped:
+      SCOP A 34
+      SCOP A 7 A_ReFire
+      goto FireFinish
+   FireFinish_NoScopeThough_DidntHaveThe700ForTheScope:
+      PKSG I 1 A_GunFlash
+      PKSG IJJ 1
+      PKSG KJI 1
+      PKSG B 2
+      PKSG C 1
+      PKSG D 2
+      PKSG E 2
+      PKSG F 2
+      PKSG G 1
+      PKSG H 3
+      PKSG GFEDC 2
+      PKSG B 1
+      PKSG A 3
+      PKSG A 7 A_ReFire
+      goto FireFinish
+   FireFinish:
+      TNT1 A 0
+      {
+         if(!CountInv("Lith_ShotgunScopedToken"))
+            { return state("Ready"); }
+         else
+            { return state("AltReady"); }
+      }
    AltFire:
       "####" A 1
-      "####" A 0 {
+      "####" A 0
+      {
          if(CountInv("Lith_ShotgunScopedToken"))
-         {  A_TakeInventory("Lith_ShotgunScopedToken", 1);
+         {
+            A_TakeInventory("Lith_ShotgunScopedToken", 1);
             A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
             A_ZoomFactor(1.0, ZOOM_INSTANT);
             A_PlaySound("weapons/shotgun/zoomout", 6);
-            return state("Ready"); }
+            return state("Ready");
+         }
          else
-         {  A_GiveInventory("Lith_ShotgunScopedToken", 1);
+         {
+            A_GiveInventory("Lith_ShotgunScopedToken", 1);
             A_ZoomFactor(CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX);
             A_PlaySound("weapons/shotgun/zoomin", 6);
-            return state("AltReady"); }
+            return state("AltReady");
+         }
       }
    Flash:
-      SHTF A 4 Bright A_Light1
-      SHTF B 3 Bright A_Light2
+      SHTF A 2 Bright A_Light1
+      SHTF B 2 Bright A_Light2
       goto LightDone
    Spawn:
       SHOT A 0

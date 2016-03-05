@@ -55,13 +55,11 @@ void Lith_GetArmorType(player_t *p)
    
    p->armortype = armor_unknown;
    for(int i = 0; i < sizeof(armorids) / sizeof(*armorids); i++)
-   {
       if(!ACS_StrICmp(p->armorclass, armorids[i].class))
       {
          p->armortype = armorids[i].type;
          break;
       }
-   }
 }
 
 [[__call("ScriptI")]]
@@ -119,7 +117,6 @@ void Lith_PlayerMove(player_t *p)
    if(grounddist == 0.0)
       p->leaped = false;
    else if(grounddist > 16.0 && ButtonPressed(p, BT_JUMP))
-   {
       if(p->user_rocketcharge >= user_rocketcharge_max)
       {
          ACS_PlaySound(0, "player/rocketboost");
@@ -144,7 +141,6 @@ void Lith_PlayerMove(player_t *p)
          
          p->leaped = true;
       }
-   }
 }
 
 [[__call("ScriptI")]]

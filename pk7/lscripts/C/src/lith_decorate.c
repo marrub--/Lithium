@@ -118,7 +118,7 @@ void Lith_UpdateScore()
    
    p->score += score;
    p->scoreaccum += score;
-   p->scoreaccumtime += 20 * rmul;
+   p->scoreaccumtime = 35 * rmul;
    
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
