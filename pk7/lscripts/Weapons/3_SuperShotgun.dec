@@ -62,13 +62,17 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
          if(CountInv("Lith_SuperShotgunChargeIter") ==
             CountInv("Lith_SuperShotgunCharge"))
             { return state("FireDone"); }
-         A_FireBullets(11.2, 7.1, 20, 5, "BulletPuff");
+         return state(0);
+      }
+      SHT1 AAAAAAAAAAAAAAAAAAAAA 0 A_FireBullets(
+         11.2, 7.1, 1, 6 * random(1, 4), "BulletPuff", FBF_NORANDOM)
+      SHT1 A 0 {
          A_FireCustomMissile("Lith_GunSmokeSpawner", 0, 0, 0, 6);
          A_PlaySound("weapons/sshotf", 7);
          A_GiveInventory("Lith_SuperShotgunChargeIter", 1);
          A_Recoil(1.2);
-         return state("FirePelletsAnim");
       }
+      goto FirePelletsAnim
    FirePelletsAnim:
       SHT2 IJ 1 bright
       goto FirePellets

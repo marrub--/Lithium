@@ -1,12 +1,10 @@
 actor Lith_Rocket
 {
-   RenderStyle Translucent
-   Alpha 0.3
    Scale 0.5
    Radius 5
    Height 4
-   Speed 35
-   Damage (50)
+   Speed 40
+   Damage (60)
    SeeSound "weapons/rocket/firel"
    DeathSound "weapons/rocklx"
    
@@ -29,8 +27,8 @@ actor Lith_Rocket
 
 actor Lith_HomingRocket : Lith_Rocket
 {
-   Speed 30
-   Damage (30)
+   Speed 35
+   Damage (40)
    SeeSound "weapons/rocket/firer"
    
    +SEEKERMISSILE
