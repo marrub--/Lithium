@@ -93,7 +93,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 1 offset(8, 40)
       CRIF A 1 offset(5, 38)
       CRIF A 1 offset(2, 35)
-      CRIF A 15 offset(0, 32)
+      CRIF A 5 offset(0, 32) A_WeaponReady(LITH_BOBONLY)
       goto Ready
    AltFire:
       CRIF A 2 A_WeaponReady(LITH_BOBONLY)
