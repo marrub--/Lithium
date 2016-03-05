@@ -3,7 +3,7 @@ actor Lith_RifleGrenade
    Radius 8
    Height 8
    Speed 25
-   Damage 20
+   Damage 30
    BounceType Doom
    Gravity 0.5
    SeeSound "weapons/rifle/grenade"

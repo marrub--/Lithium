@@ -20,7 +20,7 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       
       for(i = 0; names[i]; i++);
       
-      Log(pickupfmt[Random(0, pickupfmtmax)], names[Random(0, i - 1)]);
+      Log(pickupfmt[ACS_Random(0, pickupfmtmax - 1)], names[ACS_Random(0, i - 1)]);
    }
    
    switch(user_pickupparm)

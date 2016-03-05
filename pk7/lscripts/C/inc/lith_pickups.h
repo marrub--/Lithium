@@ -15,7 +15,7 @@ static __str const pickupfmt[] = {
    "\CjSnatched up a %S!",
    "\CjOh baby, it's time for %S!",
    "\CjThere was a %S here, but you stole it.\nIt is now in your inventory.\nYou Monster.",
-   "\CjOH NO, NOT %s"
+   "\CjOH NO, NOT %S"
 };
 
 static size_t const pickupfmtmax = sizeof(pickupfmt) / sizeof(*pickupfmt);

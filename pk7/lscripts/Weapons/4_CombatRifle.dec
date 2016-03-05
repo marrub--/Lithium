@@ -32,6 +32,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 1 { A_Raise; A_Raise; }
       loop
    Fire:
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst,   "FireBurst")
       CRIF A 0 A_JumpIf(CallACS("Lith_GetRifleFiremode") == rifle_firemode_grenade, "FireGrenade")
       CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRIF A 0 A_FireCustomMissile(
@@ -40,45 +41,59 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
          "Lith_RifleBulletPainless", frandom(-4, 4), true, 0, 0, 0, frandom(-1.6, 1.6))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRIF A 2
-      {
-         if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst)
-            { A_SetTics(0); }
-         else
-            { A_WeaponReady(LITH_BOBONLY); }
-      }
-      CRIF A 4
-      {
-         // :|
-         if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_auto)
-            { return state("FireAuto"); }
-         else if(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst)
-         {
-            A_GiveInventory("Lith_RifleBurstIter", 1);
-            
-            if(CountInv("Lith_RifleBurstIter") == 5)
-            {
-               A_TakeInventory("Lith_RifleBurstIter", 999);
-               return state("FireBurstDone"); // :|
-            }
-            else
-               { return state("Fire"); }
-         }
-         
-         return state("Ready");
-      }
-   FireBurstDone:
-      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 2 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 4 A_ReFire
       goto Ready
-   FireAuto:
-      CRIF A 0 A_ReFire
+   FireBurst:
+      CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
+      CRIF A 0 A_FireCustomMissile(
+         "Lith_RifleBullet", frandom(-2, 2), true, 0, 0, 0, frandom(-1.6, 1.6))
+      CRIF A 0 A_FireCustomMissile(
+         "Lith_RifleBullet", frandom(-2, 2), true, 0, 0, 0, frandom(-1.6, 1.6))
+      CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
+      CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
+      CRIF A 0 A_GiveInventory("Lith_RifleBurstIter", 1)
+      CRIF A 0 A_JumpIf(CountInv("Lith_RifleBurstIter") < 5, "FireBurst")
+      CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
+      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
       goto Ready
    FireGrenade:
       CRIF A 3 A_WeaponReady(LITH_BOBONLY)
-      CRIF G 0 A_FireCustomMissile("Lith_RifleGrenade")
-      CRIF G 4 A_WeaponReady(LITH_BOBONLY)
-      CRIF H 3 A_WeaponReady(LITH_BOBONLY)
-      CRIF I 3 A_WeaponReady(LITH_BOBONLY)
+      CRIF G 2 bright A_FireCustomMissile("Lith_RifleGrenade")
+      CRIF H 2 bright
+      CRIF I 2 bright
+      CRIF A 5
+      CRIF A 1 Offset(1, 32) A_PlaySound("weapons/rifle/rldmount", CHAN_WEAPON)
+      CRIF A 1 offset(3, 32)
+      CRIF A 1 offset(4, 32)
+      CRIF A 1 offset(8, 38)
+      CRIF A 1 offset(12, 45)
+      CRIF A 1 offset(16, 53)
+      CRIF A 1 offset(19, 60)
+      CRIF A 1 offset(21, 64)
+      CRIF A 1 offset(23, 67)
+      CRIF A 1 offset(22, 69)
+      CRIF A 1 offset(19, 70)
+      CRIF A 7 offset(18, 72)
+      CRIF A 1 offset(17, 69)
+      CRIF A 1 offset(19, 67)
+      CRIF A 1 offset(20, 66)
+      CRIF A 1 offset(21, 62)
+      CRIF A 1 offset(20, 60)
+      CRIF A 1 offset(21, 63)
+      CRIF A 1 offset(23, 66)
+      CRIF A 1 offset(24, 68)
+      CRIF A 1 offset(25, 63)
+      CRIF A 1 offset(24, 59)
+      CRIF A 1 offset(22, 57)
+      CRIF A 1 offset(20, 54)
+      CRIF A 1 offset(16, 49)
+      CRIF A 1 offset(12, 44)
+      CRIF A 1 offset(10, 42)
+      CRIF A 1 offset(8, 40)
+      CRIF A 1 offset(5, 38)
+      CRIF A 1 offset(2, 35)
+      CRIF A 15 offset(0, 32)
       goto Ready
    AltFire:
       CRIF A 2 A_WeaponReady(LITH_BOBONLY)
