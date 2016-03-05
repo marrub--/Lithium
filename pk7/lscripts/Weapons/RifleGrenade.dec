@@ -16,12 +16,13 @@ actor Lith_RifleGrenade
    states
    {
    Spawn:
-      SGRN A 1 Bright
+      SGRN A 1 bright
       Loop
    Death:
-      MISL B 8 Bright A_Explode
-      MISL C 6 Bright
-      MISL D 4 Bright
+      MISL B 0 A_ChangeFlag("NOGRAVITY", true)
+      MISL B 8 bright A_Explode
+      MISL C 6 bright
+      MISL D 4 bright
       Stop
    }
 }
