@@ -14,6 +14,7 @@ pickups(weapon_pistol, {
    "Peetool",
    "Pistell",
    "Pistuh",
+   "Listep",
    null
 })
 

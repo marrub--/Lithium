@@ -2,7 +2,7 @@
 
 actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
 {
-   Tag "BFG9000"
+   Tag "Omega Cannon"
    Weapon.SlotNumber 7
    Weapon.BobStyle InverseSmooth
    Weapon.BobRangeX 2.0

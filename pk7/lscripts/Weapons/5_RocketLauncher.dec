@@ -7,7 +7,7 @@ actor Lith_RocketLauncherHand : Inventory
 
 actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
 {
-   Tag "Rocket Launcher"
+   Tag "Dual Rocket Launchers"
    Weapon.SlotNumber 5
    Weapon.BobStyle Smooth
    Weapon.BobSpeed 1.3
