@@ -8,7 +8,6 @@ actor Lith_RifleGrenade
    BounceCount 2
    Gravity 0.5
    SeeSound "weapons/rifle/grenade"
-   DeathSound "weapons/rocklx"
    BounceSound "weapons/rifle/grenadebounce"
    
    Projectile
@@ -21,7 +20,8 @@ actor Lith_RifleGrenade
       Loop
    Death:
       MISL B 0 A_ChangeFlag("NOGRAVITY", true)
-      MISL B 8 bright A_Explode
+      MISL B 1 bright A_PlaySound("weapons/rocklx", 6)
+      MISL B 7 bright A_Explode
       MISL C 6 bright
       MISL D 4 bright
       Stop
