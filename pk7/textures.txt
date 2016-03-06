@@ -135,66 +135,6 @@ Sprite PLSKB0, 320, 200
 	}
 }
 
-Sprite SHT2A0, 320, 200
-{
-	Patch SSG1, 119, 112
-}
-
-Sprite SHT2B0, 320, 200
-{
-	Patch SSG3, 99, 74
-}
-
-Sprite SHT2C0, 320, 200
-{
-	Patch SSG4, 24, 43
-}
-
-Sprite SHT2D0, 320, 200
-{
-	Patch SSG2, 117, 95
-}
-
-Sprite SHT2E0, 420, 200
-{
-	Offset 50, 0
-	Patch SSG5, 25, 105
-	Patch SSG7, 181, 134
-}
-
-Sprite SHT2F0, 320, 200
-{
-	Patch SSG6, 91, 117
-}
-
-Sprite SHT2G0, 320, 200
-{
-	Patch SSG2, 118, 94
-}
-
-Sprite SHT2H0, 320, 200
-{
-	Patch SSG3, 116, 90
-}
-
-Sprite SHT2I0, 320, 200
-{
-	Patch SHT2I0, 137, 103
-	Patch SSG1, 119, 113
-}
-
-Sprite SHT2J0, 320, 200
-{
-	Patch SHT2J0, 131, 95
-	Patch SSG1, 119, 114
-}
-
-Sprite SHT2Z0, 420, 200
-{
-	Offset 50, 0
-	Patch SSG7, 181, 134
-}
-
 Sprite CBALA0, 107, 92
 {
 	XScale 4.500

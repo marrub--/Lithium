@@ -18,84 +18,91 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
    states
    {
    Ready:
-      SHT2 A 1 A_WeaponReady
+      SSGG A 1 A_WeaponReady
       wait
    Deselect:
-      SHT2 A 0 A_TakeInventory("Lith_SuperShotgunCharge", 999)
-      SHT2 A 0 A_TakeInventory("Lith_SuperShotgunChargeIter", 999)
+      SSGG A 0 A_TakeInventory("Lith_SuperShotgunCharge", 999)
+      SSGG A 0 A_TakeInventory("Lith_SuperShotgunChargeIter", 999)
    DeselectLoop:
-      SHT2 A 1 { A_Lower; A_Lower; }
+      SSGG A 1 { A_Lower; A_Lower; }
       loop
    Select:
-      SHT2 A 0 A_TakeInventory("Lith_SuperShotgunCharge", 999)
-      SHT2 A 0 A_TakeInventory("Lith_SuperShotgunChargeIter", 999)
+      SSGG A 0 A_TakeInventory("Lith_SuperShotgunCharge", 999)
+      SSGG A 0 A_TakeInventory("Lith_SuperShotgunChargeIter", 999)
    SelectLoop:
-      SHT2 A 1 { A_Raise; A_Raise; }
+      SSGG A 1 { A_Raise; A_Raise; }
       loop
+   Flash:
+      SSGG B 1 bright A_Light1
+      SSGG C 1 bright A_Light2
+      goto LightDone
    Fire:
-   FireSingle:
-      SHT2 A 6 {
+      SSGG A 6
+      {
          A_TakeInventory("Lith_SuperShotgunChargeIter", 999);
          A_GiveInventory("Lith_SuperShotgunCharge", 1);
-         A_WeaponReady(LITH_BOBONLY); }
+         A_WeaponReady(LITH_BOBONLY);
+      }
       goto FirePellets
    AltFire:
-      SHT2 A 6 {
+      SSGG A 7
+      {
          A_TakeInventory("Lith_SuperShotgunChargeIter", 999);
-         A_WeaponReady(LITH_BOBONLY); }
-      SHT2 A 3 {
+         A_WeaponReady(LITH_BOBONLY);
+      }
+      SSGG A 3
+      {
          A_GiveInventory("Lith_SuperShotgunCharge", 1);
          A_PlaySound("weapons/ssg/charge");
-         A_WeaponReady(LITH_BOBONLY); }
-      SHT2 A 0 {
-         if(CountInv("Lith_SuperShotgunCharge") == chargemax)
-            { return state("FirePelletsStart"); }
-         A_ReFire;
-         return state(0);
+         A_WeaponReady(LITH_BOBONLY);
       }
-   FirePelletsStart:
-      SHT2 A 0 A_PlaySound("weapons/ssg/chargefinish", 6)
+      SSGG A 0
+      {
+         if(CountInv("Lith_SuperShotgunCharge") != chargemax)
+            { A_ReFire; }
+      }
+      SSGG A 0 A_PlaySound("weapons/ssg/chargefinish", 6)
    FirePellets:
-      SHT2 A 1 {
-         // gyaaaaaaaaaaaa
-         if(CountInv("Lith_SuperShotgunChargeIter") ==
-            CountInv("Lith_SuperShotgunCharge"))
+      SSGG A 1 offset(0, 32)
+      {
+         if(CountInv("Lith_SuperShotgunChargeIter") == CountInv("Lith_SuperShotgunCharge"))
             { return state("FireDone"); }
          return state(0);
       }
-      SHT1 AAAAAAAAAAAAAAAAAAAAA 0 A_FireBullets(
-         11.2, 7.1, -1, 6 * random(1, 4), "BulletPuff", FBF_NORANDOM)
-      SHT1 A 0 {
+      SSGG AAAAAAAAAAAAAAAAAAAAA 0 A_FireBullets(11.2, 7.1, -1, 6 * random(1, 4), "BulletPuff", FBF_NORANDOM)
+      SSGG A 0
+      {
          A_FireCustomMissile("Lith_GunSmokeSpawner", 0, 0, 0, 6);
          A_PlaySound("weapons/sshotf", 7);
          A_GiveInventory("Lith_SuperShotgunChargeIter", 1);
          A_Recoil(1.2);
       }
-      goto FirePelletsAnim
-   FirePelletsAnim:
-      SHT2 IJ 1 bright
+      SSGG A 1 offset(0, 36) A_GunFlash
+      SSGG A 1 offset(0, 38)
       goto FirePellets
    FireDone:
-      SHT2 B 7
-      SHT2 C 7 A_CheckReload
-      SHT2 D 7 A_PlaySound("weapons/ssg/open", CHAN_WEAPON)
-   ReloadChecks:
-      SHT2 D 0 A_JumpIf(CountInv("Lith_SuperShotgunCharge"), "Reload")
-      goto ReloadDone
+      SSGG D 3 A_WeaponReady(LITH_BOBONLY)
+      SSGG E 3
+      SSGG F 4
+      SSGG GHI 3
+      SSGG J 2 A_PlaySound("weapons/ssg/open", CHAN_WEAPON)
    Reload:
-      SHT2 Z 6
-      SHT2 E 4
-      SHT2 F 5 A_PlaySound("weapons/ssg/load", CHAN_WEAPON)
-      SHT2 A 0 A_TakeInventory("Lith_SuperShotgunCharge", 1)
-      goto ReloadChecks
-   ReloadDone:
-      SHT2 G 6
-      SHT2 H 6 A_PlaySound("weapons/ssg/close", CHAN_WEAPON)
-      SHT2 A 5 A_ReFire("FireSingle")
+      SSGG Z 1
+      SSGG KL 3
+      SSGG M 4
+      SSGG N 2 A_PlaySound("weapons/ssg/load", CHAN_WEAPON)
+      SSGG O 2
+      SSGG Z 0 A_TakeInventory("Lith_SuperShotgunCharge", 1)
+      SSGG Z 0 A_JumpIf(CountInv("Lith_SuperShotgunCharge"), "Reload")
+      SSGG P 3
+      SSGG Q 3
+      SSGG R 3 A_PlaySound("weapons/ssg/close", CHAN_WEAPON)
+      SSGG S 3
+      SSGG A 5 A_WeaponReady
       goto Ready
    Spawn:
-      SGN2 A 0
-      SGN2 A 0 A_SetUserVar("user_pickupparm", weapon_supershotgun)
+      SSGG X 0
+      SSGG X 0 A_SetUserVar("user_pickupparm", weapon_supershotgun)
       goto SpawnLoop
    }
 }
