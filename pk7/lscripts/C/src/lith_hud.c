@@ -58,6 +58,11 @@ void Lith_RenderHUDWaves(player_t *p)
 }
 
 [[__call("ScriptI")]]
+void Lith_SendingACK(player_t *p)
+{
+}
+
+[[__call("ScriptI")]]
 void Lith_RenderHUDStringStack(player_t *p)
 {
    size_t i = 0;

@@ -8,11 +8,6 @@ actor Lith_PistolScopedToken : Inventory
    Inventory.MaxAmount 1
 }
 
-actor Lith_PistolScopedDisplayToken : Inventory
-{
-   Inventory.MaxAmount 1
-}
-
 actor Lith_Pistol : Lith_Weapon replaces Pistol
 {
    Tag "Pistol"
@@ -28,18 +23,17 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    states
    {
    AltReady:
-      SCOP B 1 {
-         A_GiveInventory("Lith_PistolScopedDisplayToken");
-         A_WeaponReady(WRF_ALLOWRELOAD | WRF_NOBOB); }
+      SCOP B 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_NOBOB)
       loop
    Ready:
       PISG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
       wait
    Deselect:
-      PISG A 0 {
+      PISG A 0
+      {
          A_TakeInventory("Lith_PistolScopedToken", 1);
-         A_TakeInventory("Lith_PistolScopedDisplayToken", 1);
-         A_ZoomFactor(1.0); }
+         A_ZoomFactor(1.0);
+      }
    DeselectLoop:
       PISG A 1 { A_Lower; A_Lower; }
       loop
@@ -50,67 +44,89 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
       PISG A 1 { A_Raise; A_Raise; }
       loop
    Fire:
-      PISG A 2 {
-         A_WeaponReady(LITH_BOBONLY);
+      TNT1 A 0
+      {
          if(CountInv("Lith_PistolShotsFired") == Lith_PistolLoad)
-         { return state("Reload"); }
-         A_TakeInventory("Lith_PistolScopedDisplayToken", 1);
-         A_ZoomFactor(1.0, ZOOM_INSTANT);
+            { return state("Reload"); }
+         
          A_GiveInventory("Lith_PistolShotsFired", 1);
-         return state(0);
-      }
-      PISG B 1 {
-         A_WeaponReady(LITH_BOBONLY);
+         
          A_FireBullets(0, 0, -1, 20, "BulletPuff", FBF_NORANDOM);
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6);
          A_PlaySound("weapons/pistol/fire", CHAN_WEAPON);
+         
+         if(CountInv("Lith_PistolScopedToken"))
+            { return state("FireFinish_Scoped"); }
+         else
+            { return state("FireFinish_NoScope"); }
+      }
+   FireFinish_Scoped:
+      SCOP B 3 bright
+      SCOP B 5 A_WeaponReady(WRF_NOBOB)
+      goto FireFinish
+   FireFinish_NoScope:
+      PISG B 1
+      {
+         A_WeaponReady(LITH_BOBONLY);
          A_GunFlash;
       }
-      PISG E 2
+      PISG E 2 A_WeaponReady(LITH_BOBONLY)
       PISG C 2 A_WeaponReady
       PISG B 3 A_WeaponReady
-      PISG A 0 {
+      goto FireFinish
+   FireFinish:
+      TNT1 A 0
+      {
          if(!CountInv("Lith_PistolScopedToken"))
-         { return state("Ready"); }
+            { return state("Ready"); }
          else
-         { A_ZoomFactor((CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX) * 0.5, ZOOM_INSTANT);
-           return state("AltReady"); } }
+            { return state("AltReady"); }
+      }
    Reload:
-      PISG A 1 {
-         A_TakeInventory("Lith_PistolScopedDisplayToken", 1);
+      PISG A 1
+      {
+         A_WeaponReady(LITH_BOBONLY);
+         
+         if(CountInv("Lith_PistolScopedToken"))
+            { A_PlaySound("weapons/pistol/zoomout", 6); }
+         
+         A_TakeInventory("Lith_PistolScopedToken", 999);
          A_ZoomFactor(1.0, ZOOM_INSTANT);
-         A_WeaponReady(LITH_BOBONLY); }
-      PISG A 2 {
+      }
+      PISG A 2
+      {
          A_WeaponReady(LITH_BOBONLY);
          if(CountInv("Lith_PistolShotsFired") == 0)
-         { return state("Ready"); }
+            { return state("Ready"); }
          A_PlaySound("weapons/pistol/reload", 7);
          return state(0);
       }
       PISG D 7 A_WeaponReady(LITH_BOBONLY)
       PISG EC 5 A_WeaponReady(LITH_BOBONLY)
-      PISG E 0 A_TakeInventory("Lith_PistolShotsFired", Lith_PistolLoad)
-      PISG A 3 A_WeaponReady
-      PISG A 0 {
-         if(!CountInv("Lith_PistolScopedToken"))
-         { return state("Ready"); }
-         else
-         { A_ZoomFactor((CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX) * 0.5, ZOOM_INSTANT);
-           return state("AltReady"); } }
+      PISG A 3
+      {
+         A_TakeInventory("Lith_PistolShotsFired", 999);
+         A_WeaponReady;
+      }
+      goto FireFinish
    AltFire:
       "####" B 1
-      "####" B 0 {
+      "####" B 0
+      {
          if(CountInv("Lith_PistolScopedToken"))
-         {  A_TakeInventory("Lith_PistolScopedToken", 1);
-            A_TakeInventory("Lith_PistolScopedDisplayToken", 1);
+         {
+            A_TakeInventory("Lith_PistolScopedToken", 1);
             A_ZoomFactor(1.0, ZOOM_INSTANT);
             A_PlaySound("weapons/pistol/zoomout", 6);
-            return state("Ready"); }
+            return state("Ready");
+         }
          else
-         {  A_GiveInventory("Lith_PistolScopedToken", 1);
+         {
+            A_GiveInventory("Lith_PistolScopedToken", 1);
             A_ZoomFactor((CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX) * 0.5);
             A_PlaySound("weapons/pistol/zoomin", 6);
-            return state("AltReady"); }
+            return state("AltReady");
+         }
       }
    Flash:
       PISF A 1 Bright A_Light1

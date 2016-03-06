@@ -38,6 +38,9 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    default:
       ACS_LocalAmbientSound("misc/w_pkup", 127);
       break;
+   case weapon_pistol:
+      ACS_LocalAmbientSound("weapons/pistol/pickup", 127);
+      break;
    case weapon_shotgun:
       ACS_LocalAmbientSound("weapons/shotgun/open", 127);
       ACS_Delay(10);

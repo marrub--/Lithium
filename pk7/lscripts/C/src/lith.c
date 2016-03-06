@@ -178,9 +178,7 @@ void Lith_ResetPlayer(player_t *p)
    // pls don't exit map with scope out dis bad
    p->lastscopetoken = false;
    ACS_TakeInventory("Lith_PistolScopedToken", 999);
-   ACS_TakeInventory("Lith_PistolScopedDisplayToken", 999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
-   ACS_TakeInventory("Lith_ShotgunScopedDisplayToken", 999);
    
    if(p->hudstrstack)
    {
@@ -253,8 +251,8 @@ void Lith_Player()
       
       // Misc. / inventory
       p->berserk = ACS_CheckInventory("PowerStrength");
-      p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedDisplayToken") ||
-         ACS_CheckInventory("Lith_PistolScopedDisplayToken");
+      p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
+         ACS_CheckInventory("Lith_PistolScopedToken");
       
       p->keys = 0;
       p->keys |= ACS_CheckInventory("RedCard")    << key_red_bit;
@@ -262,6 +260,7 @@ void Lith_Player()
       p->keys |= ACS_CheckInventory("BlueCard")   << key_blue_bit;
       
       // Run scripts
+      Lith_SendingACK(p);
       Lith_PlayerDamageBob(p);
       
       if(ACS_GetCVar("lith_player_damagebob"))

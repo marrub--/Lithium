@@ -7,6 +7,7 @@ Dynamo - Target sprite rip (Minigun)
 Captain J, Solo Spaghetti, Bloax & Slax - Cannon sprites
 zrrion the insect - Rocket launcher sprites
 Sgt. Shivers, TheRailgunner & Captain J - Rifle sprites
+Per Kristian - Shotgun sprites
 Turbo & Captain J - Super Shotgun sprites
 Kate - A few lines of code taken from Error: Doom
 Xaser - Bullet puff from Psychic

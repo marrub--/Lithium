@@ -5,11 +5,6 @@ actor Lith_ShotgunScopedToken : Inventory
    Inventory.MaxAmount 1
 }
 
-actor Lith_ShotgunScopedDisplayToken : Inventory
-{
-   Inventory.MaxAmount 1
-}
-
 actor Lith_Shotgun : Lith_Weapon replaces Shotgun
 {
    Tag "Shotgun"
@@ -20,20 +15,17 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    states
    {
    AltReady:
-      SCOP A 1
-      {
-         A_GiveInventory("Lith_ShotgunScopedDisplayToken");
-         A_WeaponReady(WRF_NOBOB);
-      }
+      SCOP A 1 A_WeaponReady(WRF_NOBOB)
       loop
    Ready:
       PKSG A 1 A_WeaponReady
       wait
    Deselect:
-      PKSG A 0 {
+      PKSG A 0
+      {
          A_TakeInventory("Lith_ShotgunScopedToken", 1);
-         A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
-         A_ZoomFactor(1.0); }
+         A_ZoomFactor(1.0);
+      }
    DeselectLoop:
       PKSG A 1 { A_Lower; A_Lower; }
       loop
@@ -59,7 +51,8 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
             { return state("FireFinish_NoScopeThough_DidntHaveThe700ForTheScope"); }
       }
    FireFinish_Scoped:
-      SCOP A 34
+      SCOP A 4 bright
+      SCOP A 30
       SCOP A 7 A_ReFire
       goto FireFinish
    FireFinish_NoScopeThough_DidntHaveThe700ForTheScope:
@@ -93,7 +86,6 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
          if(CountInv("Lith_ShotgunScopedToken"))
          {
             A_TakeInventory("Lith_ShotgunScopedToken", 1);
-            A_TakeInventory("Lith_ShotgunScopedDisplayToken", 1);
             A_ZoomFactor(1.0, ZOOM_INSTANT);
             A_PlaySound("weapons/shotgun/zoomout", 6);
             return state("Ready");
