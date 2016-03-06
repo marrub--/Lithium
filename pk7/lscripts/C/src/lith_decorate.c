@@ -23,12 +23,14 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       
       int i1 = ACS_Random(0, pickupfmtmax - 1);
       int i2 = ACS_Random(1, namesmax - 1);
-      int i3 = ACS_Random(0, uncertaintymax - 1);
       
-      if(pickupfmt[i1].flag == 1)
-         Log(pickupfmt[i1].fmt, names[i2], uncertainty[i3]);
+      __str fmt = StrParam("\Cj%S", pickupfmt[i1].fmt);
+      int flag = pickupfmt[i1].flag;
+      
+      if(flag == 1)
+         Log(fmt, names[i2], uncertainty[ACS_Random(0, uncertaintymax - 2)]);
       else
-         Log(pickupfmt[i1].fmt, names[i2]);
+         Log(fmt, names[i2], uncertainty[ACS_Random(0, uncertaintymax - 1)]);
    }
    else
       Log(pickupfmt[0].fmt, pickupnames[user_pickupparm][0]);

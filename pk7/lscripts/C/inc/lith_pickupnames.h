@@ -12,6 +12,8 @@ pickups(weapon_pistol, {
    "Peestol",
    "Pinstool",
    "Peetool",
+   "Pistell",
+   "Pistuh",
    null
 })
 
@@ -44,7 +46,7 @@ pickups(weapon_combatrifle, {
 })
 
 pickups(weapon_rocketlauncher, {
-   "Dual Rocket Launcher",
+   "Dual Rocket Launchers",
    "Ruckebt Laurence",
    "Rawket Lawnchair",
    "Rokkit Luncher",
@@ -56,7 +58,8 @@ pickups(weapon_plasmarifle, {
    "Plasma Rifle",
    "Spalmo Rinfer",
    "Layzuh Beem",
-   "Shooty-pew Gun",
+   "Shooty-pew-pew Gun",
+   "Laser RCW",
    null
 })
 
@@ -65,6 +68,7 @@ pickups(weapon_bfg9000, {
    "Biffgee Nintendo",
    "BFG 8000",
    "One Shot Cannon",
+   "\"Thing That Shoots Cannonballs\"",
    null
 })
 
