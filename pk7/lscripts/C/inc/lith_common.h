@@ -79,6 +79,9 @@ __str StrUpper(__str in);
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_UpdateScore();
+
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;

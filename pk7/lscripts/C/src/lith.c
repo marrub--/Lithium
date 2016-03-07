@@ -169,6 +169,7 @@ void Lith_PlayerDamageBob(player_t *p)
 static
 void Lith_ResetPlayer(player_t *p)
 {
+   p->active = true;
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    ACS_SetUserVariable(0, "user_rocketcharge", user_rocketcharge_max);
    
@@ -207,12 +208,51 @@ void Lith_ResetPlayer(player_t *p)
    p->scoreaccum = 0;
 }
 
+[[__call("ScriptI")]]
+static
+void Lith_GiveSecretScore(int playernum, int mul)
+{
+   ACS_SetActivator(players[playernum].tid);
+   ACS_GiveInventory("Lith_ScoreCount", 9000 * (mul));
+   Lith_UpdateScore();
+}
+
 //
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
 // Callback scripts.
 //
+
+[[__call("ScriptI"), __script("Open")]]
+void Lith_World()
+{
+   int maxsecrets = ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
+   int prevsecrets = 0;
+   
+   ACS_Delay(1);
+   
+   for(;;)
+   {
+      int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+      
+      if(secrets > prevsecrets)
+         for(int i = 0; i < MAX_PLAYERS; i++)
+            if(players[i].active)
+               Lith_GiveSecretScore(i, secrets - prevsecrets);
+      
+      prevsecrets = secrets;
+      
+      ACS_Delay(1);
+   }
+}
+
+[[__call("ScriptI"), __script("Disconnect")]]
+void Lith_PlayerDisconnect()
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   p->active = false;
+}
 
 [[__call("ScriptI"), __script("Enter")]]
 void Lith_Player()
@@ -221,7 +261,7 @@ void Lith_Player()
    
    Lith_ResetPlayer(p);
    
-   for(;;)
+   while(p->active)
    {
       // Status data
       p->x = ACS_GetActorX(0);

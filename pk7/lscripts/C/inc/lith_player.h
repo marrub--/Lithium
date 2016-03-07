@@ -47,6 +47,8 @@ typedef struct player_s
    int tid;
    
    // Status data
+   bool active;
+   
    fixed x, y, z;
    fixed velx, vely, velz;
    fixed floorz;
