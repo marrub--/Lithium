@@ -40,7 +40,8 @@ actor Lith_WeaponSprite
          A_Warp(AAPTR_MASTER,
             cos(user_floatangle) * 4.0,
             sin(user_floatangle) * 4.0,
-            16.0 + (sin(user_floatzangle) * 12.0));
+            16.0 + (sin(user_floatzangle) * 12.0),
+            0.0, WARPF_NOCHECKPOSITION);
       }
       "####" "#" 0 bright A_Warp(AAPTR_MASTER,
          user_origx / FIX,
