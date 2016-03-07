@@ -47,10 +47,11 @@ static
 void Lith_GetArmorType(player_t *p)
 {
    static struct { __str class; int type; } const armorids[] = {
-      { "None",       armor_none  },
-      { "ArmorBonus", armor_bonus },
-      { "GreenArmor", armor_green },
-      { "BlueArmor",  armor_blue  }
+      { "None",                   armor_none  },
+      { "ArmorBonus",             armor_bonus },
+      { "GreenArmor",             armor_green },
+      { "BlueArmor",              armor_blue  },
+      { "BlueArmorForMegasphere", armor_blue  }
    };
    
    p->armortype = armor_unknown;
