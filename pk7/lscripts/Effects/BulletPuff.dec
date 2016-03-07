@@ -23,12 +23,8 @@ actor PuffSmoke
 
 actor XPuff replaces BulletPuff
 {
-   Mass 1
-   Radius 1
-   Height 1
    RenderStyle Add
    Alpha 0.9
-   Scale 1.0
    
    +NOGRAVITY
    +NOBLOCKMAP

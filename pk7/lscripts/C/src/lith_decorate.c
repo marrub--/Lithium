@@ -182,6 +182,7 @@ void Lith_PistolBulletTrace(bool hitactor)
    fixed pitch = ACS_GetActorPitch(0);
    
    int user_timesshot = ACS_GetUserVariable(0, "user_timesshot");
+   int user_thingshit = ACS_GetUserVariable(0, "user_thingshit");
    int user_timesshot_max = ACS_GetCVar("lith_sv_ricochet_max");
    
    if(user_timesshot_max > 9999)
@@ -206,11 +207,17 @@ void Lith_PistolBulletTrace(bool hitactor)
       
       if(!hitactor)
          user_timesshot++;
+      else
+         user_thingshit++;
       
       ACS_SetUserVariable(pufftid, "user_timesshot", user_timesshot);
+      ACS_SetUserVariable(pufftid, "user_thingshit", user_thingshit);
       
       ACS_SetActivatorToTarget(0);
       int playertid = ACS_ActivatorTID();
+      
+      if(hitactor && user_thingshit >= 2)
+         ACS_LocalAmbientSound(StrParam("player/pong%i", min(user_thingshit, 3)), 127);
       
       ACS_SetActivator(pufftid);
       ACS_SetPointer(AAPTR_TARGET, playertid);

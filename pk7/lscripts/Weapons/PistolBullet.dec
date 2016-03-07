@@ -18,21 +18,28 @@ actor Lith_PistolTrace
 
 actor Lith_PistolPuff : XPuff
 {
-   var int user_timesshot;
+   Species "Lith_Player"
    
    +PUFFGETSOWNER
    +PUFFONACTORS
+   +THRUSPECIES
+   +MTHRUSPECIES
+   
+   var int user_timesshot;
+   var int user_thingshit;
    
    states
    {
    Crash:
       TNT1 A 0
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", false)
+      TNT1 A 0 A_Warp(AAPTR_DEFAULT, 0, 0, -16, 0, WARPF_NOCHECKPOSITION)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", 0, false)
       goto Super::Spawn
    Melee:
    Spawn:
       TNT1 A 0
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", true)
+      TNT1 A 0 A_Warp(AAPTR_DEFAULT, 0, 0, -16, 0, WARPF_NOCHECKPOSITION)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", 0, true)
       goto Super::Spawn
    }
 }

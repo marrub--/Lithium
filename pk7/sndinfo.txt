@@ -117,6 +117,9 @@ $random effects/puff/ricochet {
 //
 // Player
 
+player/pong1       lsounds/Player/Pong1.flac
+player/pong2       lsounds/Player/Pong2.flac
+player/pong3       lsounds/Player/Pong3.flac
 player/rocketboost lsounds/Player/RocketBoost.flac
 player/doublejump  lsounds/Player/DoubleJump.flac
 $volume player/doublejump 0.7

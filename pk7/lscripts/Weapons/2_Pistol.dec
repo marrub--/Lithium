@@ -53,7 +53,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
          
          A_GiveInventory("Lith_PistolShotsFired", 1);
          
-         A_FireBullets(0, 0, -1, 20, "Lith_PistolPuff", FBF_NORANDOM | FBF_NORANDOMPUFFZ);
+         A_FireBullets(0, -1, -1, 20, "Lith_PistolPuff", FBF_NORANDOM | FBF_NORANDOMPUFFZ | FBF_EXPLICITANGLE);
          A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6);
          A_PlaySound("weapons/pistol/fire", CHAN_WEAPON);
          
