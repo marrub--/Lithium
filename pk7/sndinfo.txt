@@ -101,6 +101,8 @@ $attenuation enemies/chainguy/fire 0.5
 //
 // Effects
 
+silence lsounds/Silence.flac
+
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
 
 effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac
@@ -120,6 +122,15 @@ $random effects/puff/ricochet {
 player/pong1       lsounds/Player/Pong1.flac
 player/pong2       lsounds/Player/Pong2.flac
 player/pong3       lsounds/Player/Pong3.flac
+player/score1      lsounds/Player/Score1.flac
+player/score2      lsounds/Player/Score2.flac
+player/score3      lsounds/Player/Score3.flac
 player/rocketboost lsounds/Player/RocketBoost.flac
 player/doublejump  lsounds/Player/DoubleJump.flac
 $volume player/doublejump 0.7
+
+$random player/score {
+   player/score1
+   player/score2
+   player/score3
+   silence }

@@ -9,9 +9,10 @@ user bool lith_hud_showweapons = true;
 user bool lith_hud_stupidpickups = false;
 
 // Player
-user float lith_player_damagebobmul = 1.0;
+user float lith_player_damagebobmul = 0.6;
 user bool lith_player_damagebob = true;
 user bool lith_player_pong = true;
+user bool lith_player_scoresound = true;
 
 // Server
 server int lith_sv_ricochet_max = 4;

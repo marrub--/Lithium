@@ -141,6 +141,9 @@ void Lith_GiveScoreToTarget(int amount)
    else if(ACS_PlayerNumber() == -1)
       return;
    
+   if(ACS_GetCVar("lith_player_scoresound"))
+      ACS_LocalAmbientSound("player/score", 50);
+   
    ACS_GiveInventory("Lith_ScoreCount", amount);
    Lith_UpdateScore();
 }
