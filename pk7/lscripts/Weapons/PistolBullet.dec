@@ -18,15 +18,15 @@ actor Lith_PistolTrace
 
 actor Lith_PistolPuff : XPuff
 {
-   var int user_timesshot_hi;
-   var int user_timesshot_mid;
-   var int user_timesshot_lo;
+   var int user_timesshot;
+   
+   +PUFFGETSOWNER
+   +PUFFONACTORS
    
    states
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_PlaySound("effects/puff/ricochet")
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PistolBulletTrace")
       goto Super::Spawn
    }

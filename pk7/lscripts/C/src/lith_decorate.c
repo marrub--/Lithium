@@ -133,7 +133,12 @@ void Lith_GiveScoreToTarget(int amount)
 {
    ACS_SetActivatorToTarget(0);
    
-   if(ACS_PlayerNumber() == -1)
+   if(!ACS_StrICmp(ACS_GetActorClass(0), "Lith_PistolPuff"))
+   {
+      ACS_SetActivatorToTarget(0);
+      amount *= 1.5f;
+   }
+   else if(ACS_PlayerNumber() == -1)
       return;
    
    ACS_GiveInventory("Lith_ScoreCount", amount);
@@ -176,14 +181,13 @@ int Lith_PistolBulletTrace()
    fixed angle = ACS_GetActorAngle(0);
    fixed pitch = ACS_GetActorPitch(0);
    
-   long long int user_timesshot;
-   long long int user_timesshot_max;
+   int user_timesshot = ACS_GetUserVariable(0, "user_timesshot");
+   int user_timesshot_max = ACS_GetCVar("lith_sv_ricochet_max");
    
-   user_timesshot  = ACS_GetUserVariable(0, "user_timesshot_lo")  << 0;
-   user_timesshot |= ACS_GetUserVariable(0, "user_timesshot_mid") << 32;
-   user_timesshot |= ACS_GetUserVariable(0, "user_timesshot_hi")  << 64;
-   
-   user_timesshot_max = strtoll_str(ACS_GetCVarString("lith_sv_ricochet_max"), null, 0);
+   if(user_timesshot_max > 9999)
+      ACS_ActivatorSound("MMMMHMHMMMHMMM", 127);
+   else
+      ACS_ActivatorSound("effects/puff/ricochet", 127);
    
    angle = absk(1.0 - angle);
    angle += ACS_RandomFixed(-0.2, 0.2);
@@ -191,15 +195,23 @@ int Lith_PistolBulletTrace()
    
    ACS_Delay(2);
    
+   int tid = ACS_UniqueTID();
+   ACS_Thing_ChangeTID(0, tid);
+   
    if(ACS_GetCVar("lith_sv_ricochet") && user_timesshot < user_timesshot_max)
    {
       int pufftid = ACS_UniqueTID();
-      ACS_LineAttack(0, angle, pitch, 20, "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
       
-      user_timesshot++;
-      ACS_SetUserVariable(pufftid, "user_timesshot_lo",  (user_timesshot & (0xFFFFFFFF << 0))  >> 0);
-      ACS_SetUserVariable(pufftid, "user_timesshot_mid", (user_timesshot & (0xFFFFFFFF << 32)) >> 32);
-      ACS_SetUserVariable(pufftid, "user_timesshot_hi",  (user_timesshot & (0xFFFFFFFF << 64)) >> 64);
+      ACS_LineAttack(0, angle, pitch, 20, "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
+      ACS_SetUserVariable(pufftid, "user_timesshot", user_timesshot + 1);
+      
+      ACS_SetActivatorToTarget(0);
+      int playertid = ACS_ActivatorTID();
+      
+      ACS_SetActivator(pufftid);
+      ACS_SetPointer(AAPTR_TARGET, playertid);
+      
+      ACS_SetActivator(tid);
       
       fixed puffx = ACS_GetActorX(pufftid);
       fixed puffy = ACS_GetActorY(pufftid);
