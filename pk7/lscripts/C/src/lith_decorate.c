@@ -248,6 +248,9 @@ void Lith_PistolBulletTrace(bool hitactor)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SpawnWeaponText(int user_pickupparm, int user_spritetid)
 {
+   if(ACS_GetCVar("lith_sv_noweapontext"))
+      return;
+   
    fixed x = ACS_GetActorX(0);
    fixed y = ACS_GetActorY(0);
    fixed z = ACS_GetActorZ(0);
