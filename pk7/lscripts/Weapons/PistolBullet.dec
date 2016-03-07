@@ -25,9 +25,14 @@ actor Lith_PistolPuff : XPuff
    
    states
    {
+   Crash:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", false)
+      goto Super::Spawn
+   Melee:
    Spawn:
       TNT1 A 0
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PistolBulletTrace")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_PistolBulletTrace", true)
       goto Super::Spawn
    }
 }

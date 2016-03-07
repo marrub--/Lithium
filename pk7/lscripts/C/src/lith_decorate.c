@@ -176,7 +176,7 @@ int Lith_GetRifleFiremode()
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_PistolBulletTrace()
+void Lith_PistolBulletTrace(bool hitactor)
 {
    fixed angle = ACS_GetActorAngle(0);
    fixed pitch = ACS_GetActorPitch(0);
@@ -203,7 +203,11 @@ int Lith_PistolBulletTrace()
       int pufftid = ACS_UniqueTID();
       
       ACS_LineAttack(0, angle, pitch, 20, "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
-      ACS_SetUserVariable(pufftid, "user_timesshot", user_timesshot + 1);
+      
+      if(!hitactor)
+         user_timesshot++;
+      
+      ACS_SetUserVariable(pufftid, "user_timesshot", user_timesshot);
       
       ACS_SetActivatorToTarget(0);
       int playertid = ACS_ActivatorTID();
@@ -230,8 +234,6 @@ int Lith_PistolBulletTrace()
          ACS_SpawnForced("Lith_PistolTrace", x, y, z);
       }
    }
-   
-   return 0;
 }
 
 //
