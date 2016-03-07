@@ -170,6 +170,59 @@ int Lith_GetRifleFiremode()
    return p->riflefiremode;
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_PistolBulletTrace()
+{
+   fixed angle = ACS_GetActorAngle(0);
+   fixed pitch = ACS_GetActorPitch(0);
+   
+   long long int user_timesshot;
+   long long int user_timesshot_max;
+   
+   user_timesshot  = ACS_GetUserVariable(0, "user_timesshot_lo")  << 0;
+   user_timesshot |= ACS_GetUserVariable(0, "user_timesshot_mid") << 32;
+   user_timesshot |= ACS_GetUserVariable(0, "user_timesshot_hi")  << 64;
+   
+   user_timesshot_max = strtoll_str(ACS_GetCVarString("lith_sv_ricochet_max"), null, 0);
+   
+   angle = absk(1.0 - angle);
+   angle += ACS_RandomFixed(-0.2, 0.2);
+   angle = absk(angle);
+   
+   ACS_Delay(2);
+   
+   if(ACS_GetCVar("lith_sv_ricochet") && user_timesshot < user_timesshot_max)
+   {
+      int pufftid = ACS_UniqueTID();
+      ACS_LineAttack(0, angle, pitch, 20, "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
+      
+      user_timesshot++;
+      ACS_SetUserVariable(pufftid, "user_timesshot_lo",  (user_timesshot & (0xFFFFFFFF << 0))  >> 0);
+      ACS_SetUserVariable(pufftid, "user_timesshot_mid", (user_timesshot & (0xFFFFFFFF << 32)) >> 32);
+      ACS_SetUserVariable(pufftid, "user_timesshot_hi",  (user_timesshot & (0xFFFFFFFF << 64)) >> 64);
+      
+      fixed puffx = ACS_GetActorX(pufftid);
+      fixed puffy = ACS_GetActorY(pufftid);
+      fixed puffz = ACS_GetActorZ(pufftid);
+      
+      fixed x = ACS_GetActorX(0);
+      fixed y = ACS_GetActorY(0);
+      fixed z = ACS_GetActorZ(0);
+      
+      for(int i = 0; i < 35; i++)
+      {
+         x = lerpk(x, puffx, 0.1);
+         y = lerpk(y, puffy, 0.1);
+         z = lerpk(z, puffz, 0.1);
+         
+         ACS_SpawnForced("Lith_PistolTrace", x, y, z);
+      }
+   }
+   
+   return 0;
+}
+
 //
 // ---------------------------------------------------------------------------
+
 

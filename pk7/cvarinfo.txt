@@ -11,3 +11,8 @@ user bool lith_hud_stupidpickups = false;
 // Player
 user float lith_player_damagebobmul = 1.0;
 user bool lith_player_damagebob = true;
+
+// Server
+server string lith_sv_ricochet_max = "4";
+server bool lith_sv_ricochet = true;
+

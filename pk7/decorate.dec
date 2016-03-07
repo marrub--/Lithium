@@ -1,5 +1,8 @@
 #include "lscripts/Constants.dec"
 
+#include "lscripts/Effects/GunSmoke.dec"
+#include "lscripts/Effects/BulletPuff.dec"
+
 #include "lscripts/Weapons/0_Base.dec"
 #include "lscripts/Weapons/0_Minigun.dec"        // Mnegbun
 #include "lscripts/Weapons/2_Pistol.dec"         // Postil
@@ -17,7 +20,4 @@
 #include "lscripts/Entities/Monsters/Demons.dec"
 #include "lscripts/Entities/Monsters/LostSoul.dec"
 #include "lscripts/Entities/Monsters/Revenant.dec"
-
-#include "lscripts/Effects/GunSmoke.dec"
-#include "lscripts/Effects/BulletPuff.dec"
 
