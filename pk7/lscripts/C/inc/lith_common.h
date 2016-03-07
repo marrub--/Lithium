@@ -74,6 +74,8 @@ __str StrParam(__str fmt, ...);
 void HudMessage(__str fmt, ...);
 void Log(__str fmt, ...);
 
+__str StrUpper(__str in);
+
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 

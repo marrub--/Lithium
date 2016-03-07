@@ -2,6 +2,7 @@
 #include "lith_player.h"
 #include <stdio.h>
 #include <math.h>
+#include <ctype.h>
 
 // ---------------------------------------------------------------------------
 // Functions.
@@ -78,6 +79,16 @@ void Log(__str fmt, ...)
    va_end(vl);
    
    ACS_EndLog();
+}
+
+__str StrUpper(__str in)
+{
+   ACS_BeginStrParam();
+   
+   for(char __str_ars const *c = in; *c; c++)
+      ACS_PrintChar(toupper(*c));
+   
+   return ACS_EndStrParam();
 }
 
 accum lerpk(accum a, accum b, accum t)

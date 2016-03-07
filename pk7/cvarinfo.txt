@@ -6,7 +6,6 @@ user float lith_weapons_scopealpha = 0.2;
 // HUD
 user bool lith_hud_showscore = true;
 user bool lith_hud_showweapons = true;
-user bool lith_hud_stupidpickups = false;
 
 // Player
 user float lith_player_damagebobmul = 0.6;
@@ -18,4 +17,5 @@ user bool lith_player_scoresound = true;
 server int lith_sv_ricochet_max = 4;
 server bool lith_sv_ricochet = true;
 server bool lith_sv_ack = true;
+server bool lith_sv_stupidpickups = false;
 
