@@ -1,0 +1,12 @@
+actor Lith_Revenant : Revenant replaces Revenant
+{
+   Health 400
+   
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_GiveScoreToTarget", 0, Score_Revenant)
+      goto Super::Death
+   }
+}
+

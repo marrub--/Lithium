@@ -20,4 +20,5 @@ const int Score_ShotgunGuy  = Score_Shell    * 1.5;
 const int Score_ChaingunGuy = Score_ClipBox  * 1.5;
 const int Score_LostSoul    = Score_Shell    * 2.0;
 const int Score_Demon       = Score_ShellBox * 1.5;
+const int Score_Revenant    = Score_Rocket   * 2.0;
 

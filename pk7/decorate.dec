@@ -16,6 +16,7 @@
 #include "lscripts/Entities/Monsters/Zombies.dec"
 #include "lscripts/Entities/Monsters/Demons.dec"
 #include "lscripts/Entities/Monsters/LostSoul.dec"
+#include "lscripts/Entities/Monsters/Revenant.dec"
 
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/BulletPuff.dec"
