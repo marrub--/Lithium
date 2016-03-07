@@ -22,6 +22,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    
    const int loadmax = 7;
    const int weaponreadyflags = WRF_ALLOWRELOAD | WRF_ALLOWUSER1;
+   const int weaponreadyfireflags = WRF_ALLOWRELOAD;
    
    states
    {
@@ -81,7 +82,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
       }
    FireFinish_Scoped:
       SCOP B 3 bright
-      SCOP B 5 A_WeaponReady(weaponreadyflags | WRF_NOBOB)
+      SCOP B 5 A_WeaponReady(weaponreadyfireflags | WRF_NOBOB)
       goto FireFinish
    FireFinish_NoScope:
       PISG B 1
@@ -90,8 +91,8 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
          A_GunFlash;
       }
       PISG E 2 A_WeaponReady(LITH_BOBONLY)
-      PISG C 2 A_WeaponReady(weaponreadyflags)
-      PISG B 3 A_WeaponReady(weaponreadyflags)
+      PISG C 2 A_WeaponReady(weaponreadyfireflags)
+      PISG B 3 A_WeaponReady(weaponreadyfireflags)
       goto FireFinish
    FireFinish:
       TNT1 A 0
