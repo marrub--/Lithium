@@ -14,14 +14,14 @@ if not exist bin/libGDCC.ir (
 )
 
 if not exist ../../acs/lithlib.bin (
-   C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 400 --alloc-min Sta "" 300000000 ^
+   C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1200 --alloc-min Sta "" 300000000 ^
       bin/libGDCC.ir ^
       bin/libc.ir ^
       -o ..\..\acs\lithlib.bin
 )
 
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_list.c -o bin/lith_list.ir
-C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 300 --alloc-min Sta "" 1000000000 ^
+C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1300 --alloc-min Sta "" 1000000000 ^
    -llithlib ^
    bin/lith_list.ir ^
    -o ..\..\acs\lithlist.bin
@@ -30,7 +30,7 @@ C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_common.c -o bin/lith_common.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith.c -o bin/lith.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_hud.c -o bin/lith_hud.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_decorate.c -o bin/lith_decorate.ir
-C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 200 --alloc-min Sta "" 3000000000 ^
+C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1400 --alloc-min Sta "" 3000000000 ^
    -llithlib ^
    -llithlist ^
    bin/lith_common.ir ^

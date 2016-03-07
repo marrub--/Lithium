@@ -78,7 +78,7 @@ void Lith_PlayerRender(player_t *p)
       for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
       {
          HudMessage("");
-         HudMessageParams(HUDMSG_PLAIN, i, 0, 0.0, 0.0, 0.0);
+         HudMessagePlain(i, 0.0, 0.0, 0.0);
       }
    }
    else if(p->scopetoken && !p->lastscopetoken)

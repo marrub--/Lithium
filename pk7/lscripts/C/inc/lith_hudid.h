@@ -4,11 +4,14 @@
 enum
 {
    //
+   // hid_base        to hid_base + 999  reserved for random shit
    // hid_base + 2000 to hid_base + 2999 reserved for HUD
    // hid_base + 1000 to hid_base + 1999 reserved for shotgun scope
    //
    
    hid_base = 500000,
+   
+   hid_ack,
    
    // Scope
    hid_base_scope = hid_base + 1000,

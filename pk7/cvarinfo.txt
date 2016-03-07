@@ -15,4 +15,5 @@ user bool lith_player_damagebob = true;
 // Server
 server int lith_sv_ricochet_max = 4;
 server bool lith_sv_ricochet = true;
+server bool lith_sv_ack = true;
 

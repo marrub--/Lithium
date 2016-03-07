@@ -18,15 +18,41 @@
 
 #define HudMessageParams(flags, id, tr, x, y, hold, ...) \
    ( \
-      ACS_OptHudMessage(flags, id, tr, x, y, hold), \
+      ACS_OptHudMessage((flags) | HUDMSG_NOTWITHFULLMAP, id, tr, x, y, hold), \
       ACS_EndHudMessage(__VA_ARGS__) \
    )
 
-#define DrawSprite(name, flags, id, tr, x, y, hold, ...) \
+#define HudMessagePlain(id, x, y, hold) \
+   ( \
+      ACS_OptHudMessage(HUDMSG_PLAIN | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold), \
+      ACS_EndHudMessage() \
+   )
+
+#define HudMessageFade(id, x, y, hold, fadetime) \
+   ( \
+      ACS_OptHudMessage(HUDMSG_FADEOUT | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold), \
+      ACS_EndHudMessage(fadetime) \
+   )
+
+#define DrawSprite(name, flags, id, x, y, hold, ...) \
    ( \
       ACS_SetFont(name), \
       HudMessage("A"), \
-      HudMessageParams(flags, id, tr, x, y, hold, __VA_ARGS__) \
+      HudMessageParams((flags) | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold, __VA_ARGS__) \
+   )
+
+#define DrawSpriteFade(name, id, x, y, hold, fadetime) \
+   ( \
+      ACS_SetFont(name), \
+      HudMessage("A"), \
+      HudMessageFade(id, x, y, hold, fadetime) \
+   )
+
+#define DrawSpritePlain(name, id, x, y, hold) \
+   ( \
+      ACS_SetFont(name), \
+      HudMessage("A"), \
+      HudMessagePlain(id, x, y, hold) \
    )
 
 #define HudMessageF(font, ...) \
