@@ -216,7 +216,7 @@ void Lith_PistolBulletTrace(bool hitactor)
       ACS_SetActivatorToTarget(0);
       int playertid = ACS_ActivatorTID();
       
-      if(hitactor && user_thingshit >= 2)
+      if(ACS_GetCVar("lith_player_pong") && hitactor && user_thingshit >= 2)
          ACS_LocalAmbientSound(StrParam("player/pong%i", min(user_thingshit, 3)), 127);
       
       ACS_SetActivator(pufftid);
