@@ -138,7 +138,7 @@ void Lith_PlayerMove(player_t *p)
    }
    else
    {
-      if(p->buttons & BT_SPEED &&
+      if(ButtonPressed(p, BT_SPEED) &&
          p->rocketcharge >= rocketcharge_max)
       {
          ACS_PlaySound(0, "player/rocketboost");
