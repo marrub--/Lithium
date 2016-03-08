@@ -118,10 +118,11 @@ void Lith_PlayerMove(player_t *p)
       p->slidecharge++;
    
    if(grounddist == 0.0)
-   {
       p->leaped = false;
-      
-      if(ButtonPressed(p, BT_SPEED) && p->slidecharge >= slidecharge_max)
+   
+   if(grounddist <= 16.0)
+   {
+      if(p->buttons & BT_SPEED && p->slidecharge >= slidecharge_max)
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
@@ -135,8 +136,10 @@ void Lith_PlayerMove(player_t *p)
          p->slidecharge = 0;
       }
    }
-   else if(grounddist > 16.0 && ButtonPressed(p, BT_JUMP))
-      if(p->buttons & BT_SPEED && p->rocketcharge >= rocketcharge_max)
+   else
+   {
+      if(p->buttons & BT_SPEED &&
+         p->rocketcharge >= rocketcharge_max)
       {
          ACS_PlaySound(0, "player/rocketboost");
          ACS_GiveInventory("Lith_RocketBooster", 1);
@@ -149,7 +152,8 @@ void Lith_PlayerMove(player_t *p)
          p->rocketcharge = 0;
          p->leaped = false;
       }
-      else if(!p->leaped && !ACS_CheckInventory("Lith_RocketBooster"))
+      else if(ButtonPressed(p, BT_JUMP) &&
+         !ACS_CheckInventory("Lith_RocketBooster") && !p->leaped)
       {
          ACS_PlaySound(0, "player/doublejump");
          ACS_SetActorVelocity(0,
@@ -160,6 +164,7 @@ void Lith_PlayerMove(player_t *p)
          
          p->leaped = true;
       }
+   }
 }
 
 [[__call("ScriptI")]]
