@@ -52,8 +52,13 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       }
    FireFinish_Scoped:
       SCOP A 4 bright
-      SCOP A 30
-      SCOP A 7 A_ReFire
+      SCOP A 25
+      SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
+      SCOP A 7
+      {
+         A_ReFire;
+         A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
+      }
       goto FireFinish
    FireFinish_NoScopeThough_DidntHaveThe700ForTheScope:
       PKSG I 1 A_GunFlash
