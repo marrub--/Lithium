@@ -111,23 +111,40 @@ void Lith_PlayerMove(player_t *p)
 {
    fixed grounddist = p->z - p->floorz;
    
-   if(p->user_rocketcharge < user_rocketcharge_max)
-      ACS_SetUserVariable(0, "user_rocketcharge", p->user_rocketcharge + 1);
+   if(p->rocketcharge < rocketcharge_max)
+      p->rocketcharge++;
+   
+   if(p->slidecharge < slidecharge_max)
+      p->slidecharge++;
    
    if(grounddist == 0.0)
+   {
       p->leaped = false;
+      
+      if(ButtonPressed(p, BT_SPEED) && p->slidecharge >= slidecharge_max)
+      {
+         ACS_PlaySound(0, "player/slide");
+         ACS_SetActorVelocity(0,
+            p->velx + (ACS_Cos(p->angle) * 16.0),
+            p->vely + (ACS_Sin(p->angle) * 16.0),
+            0.0,
+            false, true);
+         
+         p->slidecharge = 0;
+      }
+   }
    else if(grounddist > 16.0 && ButtonPressed(p, BT_JUMP))
-      if(p->user_rocketcharge >= user_rocketcharge_max)
+      if(p->rocketcharge >= rocketcharge_max)
       {
          ACS_PlaySound(0, "player/rocketboost");
          ACS_GiveInventory("Lith_RocketBooster", 1);
-         ACS_SetUserVariable(0, "user_rocketcharge", 0);
          ACS_SetActorVelocity(0,
             p->velx + (ACS_Cos(p->angle) * 16.0),
             p->vely + (ACS_Sin(p->angle) * 16.0),
             10.0,
             false, true);
          
+         p->rocketcharge = 0;
          p->leaped = false;
       }
       else if(!p->leaped && !ACS_CheckInventory("Lith_RocketBooster"))
@@ -170,32 +187,30 @@ void Lith_ResetPlayer(player_t *p)
 {
    p->active = true;
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-   ACS_SetUserVariable(0, "user_rocketcharge", user_rocketcharge_max);
    
-   // i cri tears of pain for APROP_SpawnHealth
-   if(!p->maxhealth)
-      p->maxhealth = ACS_GetActorProperty(0, APROP_Health);
-   
-   // pls don't exit map with scope out dis bad
-   p->lastscopetoken = false;
+   // pls not exit map with murder thingies out
+   // is bad practice
    ACS_TakeInventory("Lith_PistolScopedToken", 999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
-   
-   if(p->hudstrstack)
-   {
-      // i will fucking
-      // aghhghg
-      DList_Free(p->hudstrstack);
-      p->hudstrstack = null;
-   }
-   
-   // pls oh my fucking god why do i have to make this many checks
-   // are you not okay with just exiting the fucking map normally ;_;
    ACS_TakeInventory("Lith_MinigunWindup", 999);
    ACS_TakeInventory("Lith_MinigunWinddown", 999);
    ACS_TakeInventory("Lith_SuperShotgunCharge", 999);
    ACS_TakeInventory("Lith_SuperShotgunChargeIter", 999);
    
+   // i cri tears of pain for APROP_SpawnHealth
+   if(!p->maxhealth)
+      p->maxhealth = ACS_GetActorProperty(0, APROP_Health);
+   
+   if(p->hudstrstack)
+   {
+      DList_Free(p->hudstrstack);
+      p->hudstrstack = null;
+   }
+   
+   p->lastscopetoken = false;
+   
+   p->slidecharge = slidecharge_max;
+   p->rocketcharge = rocketcharge_max;
    p->leaped = false;
    
    p->bobangle = 0.0f;
@@ -316,9 +331,6 @@ void Lith_Player()
       
       Lith_GetWeaponType(p);
       Lith_GetArmorType(p);
-      
-      // User variables
-      p->user_rocketcharge = ACS_GetUserVariable(0, "user_rocketcharge");
       
       // Misc. / inventory
       p->berserk = ACS_CheckInventory("PowerStrength");

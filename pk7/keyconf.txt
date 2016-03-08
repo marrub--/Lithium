@@ -1,0 +1,5 @@
+addkeysection "Lithium - CBI" LithiumCBI
+addmenukey "Open CBI" lith_k_opencbi
+alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
+defaultbind i lith_k_opencbi
+

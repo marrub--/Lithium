@@ -108,9 +108,9 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Jet
-   if(p->user_rocketcharge != user_rocketcharge_max)
+   if(p->rocketcharge != rocketcharge_max)
    {
-      fixed rocket = p->user_rocketcharge / (fixed)user_rocketcharge_max;
+      fixed rocket = p->rocketcharge / (fixed)rocketcharge_max;
       int max = (hid_jetS - hid_jetE) * rocket;
       
       DrawSpriteFade("H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);

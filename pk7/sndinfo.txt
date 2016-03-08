@@ -129,9 +129,17 @@ player/score2      lsounds/Player/Score2.flac
 player/score3      lsounds/Player/Score3.flac
 player/rocketboost lsounds/Player/RocketBoost.flac
 player/doublejump  lsounds/Player/DoubleJump.flac
+player/slide       lsounds/Player/Slide.flac
 $volume player/doublejump 0.7
 
 $random player/score {
    player/score1
    player/score2
    player/score3 }
+
+//
+// Player - CBI
+
+player/cbi/open  lsounds/Player/CBI/Open.flac  // Halo 3
+player/cbi/close lsounds/Player/CBI/Close.flac // same
+

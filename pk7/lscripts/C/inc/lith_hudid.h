@@ -4,9 +4,10 @@
 enum
 {
    //
-   // hid_base        to hid_base + 999  reserved for random shit
-   // hid_base + 2000 to hid_base + 2999 reserved for HUD
-   // hid_base + 1000 to hid_base + 1999 reserved for shotgun scope
+   // hid_base         to hid_base + 999   reserved for random shit
+   // hid_base + 2000  to hid_base + 2999  reserved for HUD
+   // hid_base + 1000  to hid_base + 1999  reserved for shotgun scope
+   // hid_base + 10000 to hid_base + 39999 reserved for CBI
    //
    
    hid_base = 500000,
@@ -67,7 +68,12 @@ enum
    
    hid_key_blue,
    hid_key_yellow,
-   hid_key_red
+   hid_key_red,
+   
+   // CBI
+   hid_base_cbi = hid_base + 10000,
+   
+   hid_cbi_test = hid_base_cbi,
 };
 
 #endif

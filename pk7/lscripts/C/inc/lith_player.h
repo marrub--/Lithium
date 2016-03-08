@@ -38,9 +38,16 @@ enum
 
 typedef long long int score_t;
 
+// BIP - Biotic Information Panel
+typedef struct bip_s
+{
+   void *no_data;
+} bip_t;
+
+// CBI - Computer/Brain Interface
 typedef struct cbi_s
 {
-   void *dicks;
+   bool open;
 } cbi_t;
 
 typedef struct player_s
@@ -69,6 +76,7 @@ typedef struct player_s
    int scoreaccumtime;
    
    cbi_t cbi;
+   bip_t bip;
    
    // Type / class
    __str weaponclass;
@@ -91,19 +99,18 @@ typedef struct player_s
    float bobangle;
    float bobpitch;
    
-   // User variables
-   int user_rocketcharge;
-   
    // Misc. / inventory
-   bool berserk;
    bool scopetoken;
    bool lastscopetoken;
    
    int riflefiremode;
    
+   bool berserk;
    int weapons;
    int keys;
    
+   int slidecharge;
+   int rocketcharge;
    bool leaped;
    
    struct dlist_s *hudstrstack;

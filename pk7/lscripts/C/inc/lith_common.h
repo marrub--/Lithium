@@ -16,6 +16,12 @@
 #define min(x, y) ((x) > (y) ? (y) : (x))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))
 
+#define HudMessageF(font, ...) \
+   ( \
+      ACS_SetFont(font), \
+      HudMessage(__VA_ARGS__) \
+   )
+
 #define HudMessageParams(flags, id, tr, x, y, hold, ...) \
    ( \
       ACS_OptHudMessage((flags) | HUDMSG_NOTWITHFULLMAP, id, tr, x, y, hold), \
@@ -55,12 +61,6 @@
       HudMessagePlain(id, x, y, hold) \
    )
 
-#define HudMessageF(font, ...) \
-   ( \
-      ACS_SetFont(font), \
-      HudMessage(__VA_ARGS__) \
-   )
-
 // Misc.
 bool ButtonPressed(struct player_s *p, int bt);
 
@@ -98,7 +98,8 @@ void Lith_PlayerDrawCBI(struct player_s *p);
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
-static int const user_rocketcharge_max = 35 * 7;
+static int const rocketcharge_max = 35 * 7;
+static int const slidecharge_max = 35 * 1;
 static int const hudstrstack_max = 20;
 
 #endif

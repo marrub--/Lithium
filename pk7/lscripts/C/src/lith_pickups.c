@@ -30,7 +30,7 @@ struct pickupfmt_s const pickupfmt[] = {
    0, "Studies show that normal people do not steal %Ss.",
    0, "OH NO, NOT %S",
    1, "What? Is that.. %S? ... %S",
-   0, "Magnetically attached a %S to your body, crushing your every bone. (Just kidding.)",
+   0, "Magnetically attached a %S to your body, crushing your every bone.",
    0, "DavidPH was here, nyu.",
    0, "%S-senpai still won't notice you.",
    0, "Grabbed a %S!",
