@@ -2,7 +2,7 @@
 
 setlocal
 
-set LFLAGS=--bc-target=ZDoom --bc-zdacs-init-delay
+set LFLAGS=--bc-target=ZDoom --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
 set CFLAGS=--bc-target=ZDoom -iinc -Dnull=NULL
 
 if not exist bin/libc.ir (

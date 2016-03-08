@@ -20,16 +20,19 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       
       for(namesmax = 1; names[namesmax]; namesmax++);
       
-      int i1 = ACS_Random(0, pickupfmtmax - 1);
-      int i2 = ACS_Random(1, namesmax - 1);
+      int ifmt = ACS_Random(0, pickupfmtmax - 1);
+      int iname = ACS_Random(1, namesmax - 1);
       
-      __str fmt = StrParam("\Cj%S", pickupfmt[i1].fmt);
-      int flag = pickupfmt[i1].flag;
+      if(pickupfmt[ifmt].flag == 2)
+         ifmt = ACS_Random(0, pickupfmtmax - 1);
+      
+      __str fmt = StrParam("\Cj%S", pickupfmt[ifmt].fmt);
+      int flag = pickupfmt[ifmt].flag;
       
       if(flag == 1)
-         Log(fmt, names[i2], uncertainty[ACS_Random(0, uncertaintymax - 2)]);
+         Log(fmt, names[iname], uncertainty[ACS_Random(0, uncertaintymax - 2)]);
       else
-         Log(fmt, names[i2], uncertainty[ACS_Random(0, uncertaintymax - 1)]);
+         Log(fmt, names[iname], uncertainty[ACS_Random(0, uncertaintymax - 1)]);
    }
    else
       Log(pickupfmt[0].fmt, pickupnames[user_pickupparm][0]);
@@ -120,6 +123,9 @@ void Lith_UpdateScore()
    float rmul = RandomFloat(1.0f, 6.0f);
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * rmul;
    
+   if(ACS_GetCVar("lith_player_scoresound"))
+      ACS_LocalAmbientSound("player/score", 80);
+   
    p->score += score;
    p->scoreaccum += score;
    p->scoreaccumtime = 35 * rmul;
@@ -139,9 +145,6 @@ void Lith_GiveScoreToTarget(int amount)
    }
    else if(ACS_PlayerNumber() == -1)
       return;
-   
-   if(ACS_GetCVar("lith_player_scoresound"))
-      ACS_LocalAmbientSound("player/score", 50);
    
    ACS_GiveInventory("Lith_ScoreCount", amount);
    Lith_UpdateScore();

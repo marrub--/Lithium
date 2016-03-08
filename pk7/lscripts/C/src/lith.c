@@ -213,7 +213,7 @@ static
 void Lith_GiveSecretScore(int playernum, int mul)
 {
    ACS_SetActivator(players[playernum].tid);
-   ACS_GiveInventory("Lith_ScoreCount", 9000 * (mul));
+   ACS_GiveInventory("Lith_ScoreCount", 9000 * mul);
    Lith_UpdateScore();
 }
 

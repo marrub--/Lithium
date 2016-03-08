@@ -132,5 +132,4 @@ $volume player/doublejump 0.7
 $random player/score {
    player/score1
    player/score2
-   player/score3
-   silence }
+   player/score3 }

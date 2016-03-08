@@ -61,6 +61,7 @@ pickups(weapon_plasmarifle, {
    "Layzuh Beem",
    "Shooty-pew-pew Gun",
    "Laser RCW",
+   "Elfir Amsalp",
    null
 })
 
