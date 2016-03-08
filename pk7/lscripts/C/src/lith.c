@@ -139,10 +139,12 @@ void Lith_PlayerMove(player_t *p)
       !ACS_CheckInventory("Lith_RocketBooster") && !p->leaped &&
       ((grounddist <= 16.0 && p->slidecharge < slidecharge_max) || grounddist > 16.0))
    {
+      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      
       ACS_PlaySound(0, "player/doublejump");
       ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(p->yaw) * 12.0),
-         p->vely + (ACS_Sin(p->yaw) * 12.0),
+         p->velx + (ACS_Cos(angle) * 12.0),
+         p->vely + (ACS_Sin(angle) * 12.0),
          10.0,
          false, true);
       
@@ -152,11 +154,13 @@ void Lith_PlayerMove(player_t *p)
    if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 &&
       p->rocketcharge >= rocketcharge_max)
    {
+      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
       ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(p->yaw) * 16.0),
-         p->vely + (ACS_Sin(p->yaw) * 16.0),
+         p->velx + (ACS_Cos(angle) * 16.0),
+         p->vely + (ACS_Sin(angle) * 16.0),
          10.0,
          false, true);
       
