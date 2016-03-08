@@ -66,8 +66,8 @@ typedef struct player_s
    fixed floorz;
    float pitch, yaw;
    
-   float pitchv, yawv;
-   float forwardv, sidev, upv;
+   fixed pitchv, yawv;
+   fixed forwardv, sidev, upv;
    int buttons;
    
    int health;
