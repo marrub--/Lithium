@@ -140,8 +140,10 @@ void Lith_GiveScoreToTarget(int amount)
    
    if(!ACS_StrICmp(ACS_GetActorClass(0), "Lith_PistolPuff"))
    {
+      for(int i = 0, n = min(ACS_GetUserVariable(0, "user_thingshit"), 3); i < n; i++)
+         amount *= 1.5f;
+      
       ACS_SetActivatorToTarget(0);
-      amount *= 1.5f;
    }
    else if(ACS_PlayerNumber() == -1)
       return;
