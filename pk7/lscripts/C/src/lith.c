@@ -217,6 +217,37 @@ void Lith_GiveSecretScore(int playernum, int mul)
    Lith_UpdateScore();
 }
 
+[[__call("ScriptI")]]
+static
+void Lith_PlayerView(player_t *p)
+{
+   if(ACS_GetCVar("lith_player_damagebob"))
+   {
+      float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
+      p->addangle = p->bobangle * bobmul;
+      p->addpitch = p->bobpitch * bobmul;
+   }
+}
+
+[[__call("ScriptI")]]
+static
+void Lith_PlayerScore(player_t *p)
+{
+   if(p->health < 0)
+      p->score = 0;
+   
+   if(!p->scoreaccumtime || p->score < p->prevscore)
+   {
+      p->scoreaccum = 0;
+      p->scoreaccumtime = 0;
+   }
+   
+   if(p->scoreaccumtime > 0)
+      p->scoreaccumtime--;
+   else if(p->scoreaccumtime < 0)
+      p->scoreaccumtime++;
+}
+
 //
 // ---------------------------------------------------------------------------
 
@@ -301,41 +332,29 @@ void Lith_Player()
       p->keys |= ACS_CheckInventory("BlueCard")   << key_blue_bit;
       
       // Run scripts
-      Lith_SendingACK(p);
+      
+      // -- Logic
+      Lith_PlayerScore(p);
       Lith_PlayerDamageBob(p);
       
-      if(ACS_GetCVar("lith_player_damagebob"))
+      if(p->health > 0)
       {
-         float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
-         p->addangle = p->bobangle * bobmul;
-         p->addpitch = p->bobpitch * bobmul;
+         // Lith_PlayerUpdateCBI(p);
+         Lith_PlayerMove(p);
       }
       
-      if(p->health > 0)
-         Lith_PlayerMove(p);
+      Lith_PlayerView(p);
       
+      // -- Rendering
       Lith_PlayerHUD(p);
       Lith_PlayerRender(p);
+      // Lith_PlayerDrawCBI(p);
       
-      // Update score stuff
-      if(p->health < 0)
-         p->score = 0;
-      
-      if(!p->scoreaccumtime || p->score < p->prevscore)
-      {
-         p->scoreaccum = 0;
-         p->scoreaccumtime = 0;
-      }
-      
-      if(p->scoreaccumtime > 0)
-         p->scoreaccumtime--;
-      else if(p->scoreaccumtime < 0)
-         p->scoreaccumtime++;
-      
-      // do not touch pls
+      // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addangle);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
       
+      // Tic passes
       ACS_Delay(1);
       
       // Update previous-tic values
@@ -345,7 +364,7 @@ void Lith_Player()
       p->prevarmor = p->armor;
       p->prevscore = curscore;
       
-      // is very important
+      // Reset view for next tic
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addangle);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
    }

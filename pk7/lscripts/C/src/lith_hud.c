@@ -50,11 +50,6 @@ void Lith_RenderHUDWaves(player_t *p)
 [[__call("ScriptI")]]
 void Lith_SendingACK(player_t *p)
 {
-   if(ACS_PlayerCount() > 1 && ACS_GetCVar("lith_sv_ack"))
-   {
-      HudMessageF("SMALLFNT", "Out of sync with: ZDoom");
-      HudMessageParams(HUDMSG_PLAIN, hid_ack, CR_GREEN, 0.5, 0.0, 0.1);
-   }
 }
 
 [[__call("ScriptI")]]
@@ -86,8 +81,6 @@ void Lith_RenderHUDStringStack(player_t *p)
 [[__call("ScriptI")]]
 void Lith_PlayerHUD(player_t *p)
 {
-   // These are seriously way too long.
-   
    static __str const weapongfx[weapon_max] = {
       [weapon_unknown]        = "H_D27",
       [weapon_pistol]         = "H_D24",
@@ -112,6 +105,13 @@ void Lith_PlayerHUD(player_t *p)
    int hid_armorbg_fx  = hid_armorbg_fxS  - (time % 32);
    
    ACS_SetHudSize(320, 200, false);
+   
+   // ACK
+   if(ACS_PlayerCount() > 1 && ACS_GetCVar("lith_sv_ack"))
+   {
+      HudMessageF("SMALLFNT", "Out of sync with: ZDoom");
+      HudMessageParams(HUDMSG_PLAIN, hid_ack, CR_GREEN, 0.5, 0.0, 0.1);
+   }
    
    // Jet
    if(p->user_rocketcharge != user_rocketcharge_max)
