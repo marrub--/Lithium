@@ -3,7 +3,6 @@
 #include "lith_list.h"
 #include "lith_hudid.h"
 #include "lith_hud.h"
-#include "lith_const.h"
 #include <math.h>
 
 player_t players[MAX_PLAYERS];
@@ -339,7 +338,7 @@ void Lith_Player()
       
       if(p->health > 0)
       {
-         // Lith_PlayerUpdateCBI(p);
+         Lith_PlayerUpdateCBI(p);
          Lith_PlayerMove(p);
       }
       
@@ -348,7 +347,7 @@ void Lith_Player()
       // -- Rendering
       Lith_PlayerHUD(p);
       Lith_PlayerRender(p);
-      // Lith_PlayerDrawCBI(p);
+      Lith_PlayerDrawCBI(p);
       
       // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addangle);

@@ -11,7 +11,19 @@
 [[__call("ScriptI"), __address(200), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
+   static __str const pickupsounds[] = {
+      [weapon_unknown] = "MMMMHMHMMMHMMM",
+      [weapon_pistol] = "weapons/pistol/pickup",
+      [weapon_shotgun] = "weapons/shotgun/pickup",
+      [weapon_supershotgun] = "weapons/ssg/pickup",
+      [weapon_combatrifle] = "weapons/rifle/pickup",
+      [weapon_rocketlauncher] = "weapons/rocket/pickup",
+      [weapon_plasmarifle] = "weapons/plasma/pickup",
+      [weapon_bfg9000] = "weapons/cannon/pickup"
+   };
+   
    ACS_Thing_Remove(user_spritetid);
+   ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
    {
@@ -36,38 +48,6 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    }
    else
       Log(pickupfmt[0].fmt, pickupnames[user_pickupparm][0]);
-   
-   switch(user_pickupparm)
-   {
-   default:
-      ACS_LocalAmbientSound("misc/w_pkup", 127);
-      break;
-   case weapon_pistol:
-      ACS_LocalAmbientSound("weapons/pistol/pickup", 127);
-      break;
-   case weapon_shotgun:
-      ACS_LocalAmbientSound("weapons/shotgun/open", 127);
-      ACS_Delay(10);
-      ACS_LocalAmbientSound("weapons/shotgun/zoomout", 127);
-      break;
-   case weapon_supershotgun:
-      ACS_LocalAmbientSound("weapons/ssg/load", 127);
-      ACS_Delay(10);
-      ACS_LocalAmbientSound("weapons/ssg/chargefinish", 127);
-      break;
-   case weapon_combatrifle:
-      ACS_LocalAmbientSound("weapons/rifle/pickup", 127);
-      break;
-   case weapon_rocketlauncher:
-      ACS_LocalAmbientSound("weapons/rocket/pickup", 127);
-      break;
-   case weapon_plasmarifle:
-      ACS_LocalAmbientSound("weapons/plasma/pickup", 127);
-      break;
-   case weapon_bfg9000:
-      ACS_LocalAmbientSound("weapons/cannon/pickup", 127);
-      break;
-   }
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -159,7 +139,7 @@ bool Lith_FireScore(int amount)
    
    if(p->score - amount < 0)
    {
-      p->scoreaccumtime = -1;
+      p->scoreaccumtime = -2;
       return true;
    }
    

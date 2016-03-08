@@ -38,6 +38,11 @@ enum
 
 typedef long long int score_t;
 
+typedef struct cbi_s
+{
+   void *dicks;
+} cbi_t;
+
 typedef struct player_s
 {
    // Static
@@ -62,6 +67,8 @@ typedef struct player_s
    score_t score;
    score_t scoreaccum;
    int scoreaccumtime;
+   
+   cbi_t cbi;
    
    // Type / class
    __str weaponclass;

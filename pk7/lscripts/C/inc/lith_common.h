@@ -61,8 +61,10 @@
       HudMessage(__VA_ARGS__) \
    )
 
+// Misc.
 bool ButtonPressed(struct player_s *p, int bt);
 
+// Random
 [[__optional_args(1)]]
 int Random(int max, int min);
 [[__optional_args(1)]]
@@ -70,21 +72,34 @@ fixed RandomFixed(fixed max, fixed min);
 [[__optional_args(1)]]
 float RandomFloat(float max, float min);
 
+// Printing
 __str StrParam(__str fmt, ...);
 void HudMessage(__str fmt, ...);
 void Log(__str fmt, ...);
 
+// Strings
 __str StrUpper(__str in);
 
+// Math
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 
+// Scripts
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore();
 
+[[__call("ScriptI")]]
+void Lith_PlayerUpdateCBI(struct player_s *p);
+
+[[__call("ScriptI")]]
+void Lith_PlayerDrawCBI(struct player_s *p);
+
+// Constants
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
+static int const user_rocketcharge_max = 35 * 7;
+static int const hudstrstack_max = 20;
 
 #endif
 

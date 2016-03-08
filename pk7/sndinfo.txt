@@ -24,12 +24,14 @@ weapons/shotgun/open    lsounds/Shotgun/PumpOpen.flac  // General 6000
 weapons/shotgun/close   lsounds/Shotgun/PumpClose.flac // same
 weapons/shotgun/zoomin  lsounds/Shotgun/ScopeIn.flac   // Halo 3, EYE: Divine Cybermancy
 weapons/shotgun/zoomout lsounds/Shotgun/ScopeOut.flac  // same
+weapons/shotgun/pickup  lsounds/Shotgun/Pickup.flac    // Halo 3, EYE: Divine Cybermancy, General 6000
 
 weapons/ssg/charge       lsounds/SuperShotgun/Charge.flac       // Killing Floor
 weapons/ssg/chargefinish lsounds/SuperShotgun/ChargeFinish.flac // same
 weapons/ssg/close        lsounds/SuperShotgun/Close.flac        // Killing Floor, ???
 weapons/ssg/open         lsounds/SuperShotgun/Open.flac         // same
 weapons/ssg/load         lsounds/SuperShotgun/Load.flac         // General 6000, ???
+weapons/ssg/pickup       lsounds/SuperShotgun/Pickup.flac       // General 6000, ???, Killing Floor
 
 weapons/rifle/fire1    lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
 weapons/rifle/fire2    lsounds/CombatRifle/Fire2.flac       // same

@@ -3,7 +3,6 @@
 #include "lith_list.h"
 #include "lith_hudid.h"
 #include "lith_hud.h"
-#include "lith_const.h"
 
 // ---------------------------------------------------------------------------
 // HUD Scripts.
@@ -45,11 +44,6 @@ void Lith_RenderHUDWaves(player_t *p)
    // Triangle
    pos = (5 + timer) % 160;
    DrawSpriteFade("H_D14", hid_scope_triS - pos, 20.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
-}
-
-[[__call("ScriptI")]]
-void Lith_SendingACK(player_t *p)
-{
 }
 
 [[__call("ScriptI")]]
