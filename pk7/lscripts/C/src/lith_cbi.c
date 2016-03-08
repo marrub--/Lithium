@@ -29,7 +29,7 @@ void Lith_PlayerDrawCBI(player_t *p)
 {
    if(p->cbi.open)
    {
-      HudMessageF("BIGFONT", "yay it works");
+      HudMessageRainbowsF("BIGFONT", "yay it works");
       HudMessagePlain(hid_cbi_test, 0.0, 0.0, 0.1);
    }
 }

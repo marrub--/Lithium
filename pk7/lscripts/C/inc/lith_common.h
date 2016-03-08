@@ -22,6 +22,12 @@
       HudMessage(__VA_ARGS__) \
    )
 
+#define HudMessageRainbowsF(font, ...) \
+   ( \
+      ACS_SetFont(font), \
+      HudMessageRainbows(__VA_ARGS__) \
+   )
+
 #define HudMessageParams(flags, id, tr, x, y, hold, ...) \
    ( \
       ACS_OptHudMessage((flags) | HUDMSG_NOTWITHFULLMAP, id, tr, x, y, hold), \
@@ -75,6 +81,7 @@ float RandomFloat(float max, float min);
 // Printing
 __str StrParam(__str fmt, ...);
 void HudMessage(__str fmt, ...);
+void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
 
 // Strings
@@ -99,7 +106,7 @@ static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
 static int const rocketcharge_max = 35 * 7;
-static int const slidecharge_max = 35 * 1;
+static int const slidecharge_max = 35 * 1.5;
 static int const hudstrstack_max = 20;
 
 #endif

@@ -49,6 +49,9 @@ enum
    hid_ammo,
    hid_ammobg,
    
+   hid_slideind_fxE,
+   hid_slideind_fxS = hid_slideind_fxE + 11,
+   
    hid_healthhit,
    hid_health,
    hid_healthbg,

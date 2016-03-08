@@ -68,6 +68,26 @@ void HudMessage(__str fmt, ...)
    ACS_MoreHudMessage();
 }
 
+void HudMessageRainbows(__str fmt, ...)
+{
+   static char const chars[] = { 'g', 'i', 'k', 'd', 'h', 't', 'r' };
+   static int const charsmax = sizeof(chars);
+   
+   char ch = chars[(ACS_Timer() / 4) % charsmax]; // GDCC bug: sizeof doesn't work here
+   va_list vl;
+   
+   ACS_BeginPrint();
+   
+   ACS_PrintChar('\C');
+   ACS_PrintChar(ch);
+   
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+   
+   ACS_MoreHudMessage();
+}
+
 void Log(__str fmt, ...)
 {
    va_list vl;

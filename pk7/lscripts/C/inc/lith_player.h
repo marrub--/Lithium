@@ -64,8 +64,10 @@ typedef struct player_s
    fixed x, y, z;
    fixed velx, vely, velz;
    fixed floorz;
-   float angle;
-   float pitch;
+   float pitch, yaw;
+   
+   float pitchv, yawv;
+   float forwardv, sidev, upv;
    int buttons;
    
    int health;
@@ -93,11 +95,11 @@ typedef struct player_s
    score_t prevscore;
    
    // Additive view
-   float addangle;
    float addpitch;
+   float addyaw;
    
-   float bobangle;
    float bobpitch;
+   float bobyaw;
    
    // Misc. / inventory
    bool scopetoken;

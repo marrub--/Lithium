@@ -123,10 +123,12 @@ void Lith_PlayerMove(player_t *p)
       
       if(ButtonPressed(p, BT_SPEED) && p->slidecharge >= slidecharge_max)
       {
+         fixed angle = p->yaw;
+         
          ACS_PlaySound(0, "player/slide");
          ACS_SetActorVelocity(0,
-            p->velx + (ACS_Cos(p->angle) * 16.0),
-            p->vely + (ACS_Sin(p->angle) * 16.0),
+            p->velx + (ACS_Cos(angle) * 24.0),
+            p->vely + (ACS_Sin(angle) * 24.0),
             0.0,
             false, true);
          
@@ -139,8 +141,8 @@ void Lith_PlayerMove(player_t *p)
          ACS_PlaySound(0, "player/rocketboost");
          ACS_GiveInventory("Lith_RocketBooster", 1);
          ACS_SetActorVelocity(0,
-            p->velx + (ACS_Cos(p->angle) * 16.0),
-            p->vely + (ACS_Sin(p->angle) * 16.0),
+            p->velx + (ACS_Cos(p->yaw) * 16.0),
+            p->vely + (ACS_Sin(p->yaw) * 16.0),
             10.0,
             false, true);
          
@@ -151,8 +153,8 @@ void Lith_PlayerMove(player_t *p)
       {
          ACS_PlaySound(0, "player/doublejump");
          ACS_SetActorVelocity(0,
-            p->velx + (ACS_Cos(p->angle) * 12.0),
-            p->vely + (ACS_Sin(p->angle) * 12.0),
+            p->velx + (ACS_Cos(p->yaw) * 12.0),
+            p->vely + (ACS_Sin(p->yaw) * 12.0),
             10.0,
             false, true);
          
@@ -173,11 +175,11 @@ void Lith_PlayerDamageBob(player_t *p)
       distance *= 0.2f;
       distance *= (200 - p->armor) / 200.0f;
       
-      p->bobangle = sin(angle) * distance;
-      p->bobpitch = cos(angle) * distance;
+      p->bobyaw = sinf(angle) * distance;
+      p->bobpitch = cosf(angle) * distance;
    }
    
-   p->bobangle = lerpf(p->bobangle, 0.0f, 0.1f);
+   p->bobyaw = lerpf(p->bobyaw, 0.0f, 0.1f);
    p->bobpitch = lerpf(p->bobpitch, 0.0f, 0.1f);
 }
 
@@ -213,10 +215,10 @@ void Lith_ResetPlayer(player_t *p)
    p->rocketcharge = rocketcharge_max;
    p->leaped = false;
    
-   p->bobangle = 0.0f;
+   p->bobyaw = 0.0f;
    p->bobpitch = 0.0f;
    
-   p->addangle = 0.0f;
+   p->addyaw = 0.0f;
    p->addpitch = 0.0f;
    
    p->scoreaccum = 0;
@@ -238,7 +240,7 @@ void Lith_PlayerView(player_t *p)
    if(ACS_GetCVar("lith_player_damagebob"))
    {
       float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
-      p->addangle = p->bobangle * bobmul;
+      p->addyaw = p->bobyaw * bobmul;
       p->addpitch = p->bobpitch * bobmul;
    }
 }
@@ -315,8 +317,13 @@ void Lith_Player()
       p->velx = ACS_GetActorVelX(0);
       p->vely = ACS_GetActorVelY(0);
       p->velz = ACS_GetActorVelZ(0);
-      p->angle = ACS_GetActorAngle(0) - p->addangle;
+      p->yaw = ACS_GetActorAngle(0) - p->addyaw;
       p->pitch = ACS_GetActorPitch(0) - p->addpitch;
+      p->pitchv = ACS_GetPlayerInputFixed(0, INPUT_PITCH);
+      p->yawv = ACS_GetPlayerInputFixed(0, INPUT_YAW);
+      p->forwardv = ACS_GetPlayerInputFixed(0, INPUT_FORWARDMOVE);
+      p->sidev = ACS_GetPlayerInputFixed(0, INPUT_SIDEMOVE);
+      p->upv = ACS_GetPlayerInputFixed(0, INPUT_UPMOVE);
       p->floorz = ACS_GetActorFloorZ(0);
       p->buttons = ACS_GetPlayerInput(0, INPUT_BUTTONS);
       p->oldbuttons = ACS_GetPlayerInput(0, INPUT_OLDBUTTONS);
@@ -362,7 +369,7 @@ void Lith_Player()
       Lith_PlayerDrawCBI(p);
       
       // Update view
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addangle);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
       
       // Tic passes
@@ -376,7 +383,7 @@ void Lith_Player()
       p->prevscore = curscore;
       
       // Reset view for next tic
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addangle);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
    }
 }

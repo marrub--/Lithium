@@ -97,6 +97,7 @@ void Lith_PlayerHUD(player_t *p)
    int time            = ACS_Timer();
    int hid_healthbg_fx = hid_healthbg_fxS - (time % 32);
    int hid_armorbg_fx  = hid_armorbg_fxS  - (time % 32);
+   int hid_slideind_fx = hid_slideind_fxS - (time % 10);
    
    ACS_SetHudSize(320, 200, false);
    
@@ -198,6 +199,21 @@ void Lith_PlayerHUD(player_t *p)
          187.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0),
          0.2,
          0.7);
+   }
+   
+   // Slide indicator
+   {
+      int time11 = time % 11;
+      float slide = p->slidecharge / (float)slidecharge_max;
+      
+      DrawSprite(slide != 1.0f ? "H_D21" : "H_D24",
+         HUDMSG_FADEOUT | HUDMSG_ALPHA,
+         hid_slideind_fx,
+         77.1 - time11,
+         188.1 + (11 - time11),
+         (fixed)(0.3f * slide),
+         (fixed)(0.6f * slide),
+         0.8);
    }
    
    // Armor
