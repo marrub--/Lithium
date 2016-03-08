@@ -190,7 +190,8 @@ void Lith_PistolBulletTrace(bool hitactor)
    {
       int pufftid = ACS_UniqueTID();
       
-      ACS_LineAttack(0, angle, pitch, 20, "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
+      ACS_LineAttack(0, angle, pitch, 20 / (user_thingshit + 1), "Lith_PistolPuff",
+         "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
       
       if(!hitactor)
          user_timesshot++;
@@ -204,7 +205,7 @@ void Lith_PistolBulletTrace(bool hitactor)
       int playertid = ACS_ActivatorTID();
       
       if(ACS_GetCVar("lith_player_pong") && hitactor && user_thingshit >= 2)
-         ACS_LocalAmbientSound(StrParam("player/pong%i", min(user_thingshit, 3)), 127);
+         ACS_LocalAmbientSound(StrParam("player/pong%i", min(user_thingshit, 3)), 50);
       
       ACS_SetActivator(pufftid);
       ACS_SetPointer(AAPTR_TARGET, playertid);

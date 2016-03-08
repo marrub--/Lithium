@@ -117,22 +117,24 @@ void Lith_PlayerMove(player_t *p)
    if(p->slidecharge < slidecharge_max)
       p->slidecharge++;
    
-   if(grounddist == 0.0)
-      p->leaped = false;
-   
-   if(p->buttons & BT_SPEED && grounddist <= 16.0 &&
-      p->slidecharge >= slidecharge_max)
+   if(p->slidecharge >= slidecharge_max)
    {
-      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      if(grounddist == 0.0)
+         p->leaped = false;
       
-      ACS_PlaySound(0, "player/slide");
-      ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(angle) * 24.0),
-         p->vely + (ACS_Sin(angle) * 24.0),
-         -30.0,
-         false, true);
-      
-      p->slidecharge = 0;
+      if(p->buttons & BT_SPEED && grounddist <= 16.0)
+      {
+         fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+         
+         ACS_PlaySound(0, "player/slide");
+         ACS_SetActorVelocity(0,
+            p->velx + (ACS_Cos(angle) * 24.0),
+            p->vely + (ACS_Sin(angle) * 24.0),
+            -30.0,
+            false, true);
+         
+         p->slidecharge = 0;
+      }
    }
    
    if(ButtonPressed(p, BT_JUMP) &&
