@@ -104,7 +104,7 @@ void Lith_UpdateScore()
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * rmul;
    
    if(ACS_GetCVar("lith_player_scoresound"))
-      ACS_LocalAmbientSound("player/score", 80);
+      ACS_LocalAmbientSound("player/score", minmax(score / 5000.0f, 0.1f, 1.0f) * 80);
    
    p->score += score;
    p->scoreaccum += score;
