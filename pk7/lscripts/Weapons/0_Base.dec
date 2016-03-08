@@ -24,6 +24,7 @@ actor Lith_WeaponText
    
    +NOINTERACTION
    
+   var int user_iteration;
    var int user_char;
    var int user_chariter;
    var int user_theta;
@@ -34,11 +35,19 @@ actor Lith_WeaponText
    
    states
    {
+   NoMatch:
+      TNT1 A 1
+      stop
    Spawn:
       TNT1 A 1
-   SpawnLoop:
+   Spawn1:
       STCF A 0 A_SetUserVar(user_chariter, 65)
-      STCF ABCDEFGHIJKLMNOPQRSTUVWXYZ 0 bright
+      goto SpawnCheck
+   Spawn2:
+      STC1 A 0 A_SetUserVar(user_chariter, 48)
+      goto SpawnCheck
+   SpawnCheck:
+      "####" ABCDEFGHIJKLMNOPQRSTUVWXYZ 0 bright
       {
          if(user_char == user_chariter)
             { return state("SpawnDone"); }
@@ -46,7 +55,16 @@ actor Lith_WeaponText
          A_SetUserVar(user_chariter, user_chariter + 1);
          return state(0);
       }
-      stop
+      "####" A 0 bright
+      {
+         A_SetUserVar(user_iteration, user_iteration + 1);
+         if(user_iteration == 1)
+            { return state("Spawn2"); }
+         else if(user_iteration == 2)
+            { return state("NoMatch"); }
+         else
+            { return state("NoMatch"); }
+      }
    SpawnDone:
       "####" "#" 1 bright
       {
@@ -133,7 +151,8 @@ actor Lith_Weapon : Weapon
       loop
    SpawnLoop:
       "####" "#" 1
-      "####" "#" 0 bright {
+      "####" "#" 0 bright
+      {
          Thing_ChangeTID(0, CallACS("Lith_UniqueTID"));
          A_SetUserVar("user_spritetid", CallACS("Lith_UniqueTID"));
          // 226:ACS_ExecuteAlways
@@ -146,7 +165,8 @@ actor Lith_Weapon : Weapon
             user_spritetid);
       }
    SpawnLoopForRealYo:
-      TNT1 A 1 {
+      TNT1 A 1
+      {
          if(!A_CheckSight("DummyState"))
          {
             A_SetUserVar(user_glowangle,  (user_glowangle   + 5) % 360);
