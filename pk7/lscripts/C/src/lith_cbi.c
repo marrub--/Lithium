@@ -7,14 +7,19 @@
 // Node Types.
 //
 
-typedef int (*cbi_func_t)(struct cbi_node_s *, int);
+typedef int (*cbi_drawfunc_t)(struct cbi_node_s *, int);
+typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct dlist_s *, struct cursor_s);
+typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct dlist_s *, struct cursor_s);
 
 typedef struct cbi_node_s
 {
    int x, y;
+   int id;
    bool visible;
    
-   cbi_func_t Draw;
+   cbi_drawfunc_t Draw;
+   cbi_updatefunc_t Update;
+   cbi_clickfunc_t Click;
 } cbi_node_t;
 
 typedef struct cbi_text_s
@@ -31,6 +36,14 @@ typedef struct cbi_sprite_s
    __str name;
    fixed alpha;
 } cbi_sprite_t;
+
+typedef struct cbi_button_s
+{
+   cbi_node_t node;
+   __str label;
+   bool hover;
+   int clicked;
+} cbi_button_t;
 
 //
 // ---------------------------------------------------------------------------
@@ -115,6 +128,88 @@ cbi_node_t *CBI_SpriteAlloc(int flags, int x, int y, __str name, fixed alpha)
 }
 
 //
+// cbi_button_t
+//
+
+enum
+{
+   BAF_NOTVISIBLE = 1 << 0,
+};
+
+int CBI_ButtonDraw(cbi_node_t *node, int id)
+{
+   cbi_button_t *button = (cbi_button_t *)node;
+   cbi_node_t *node = &button->node;
+   int ret;
+   
+   if(button->label)
+   {
+      char color = 'j';
+      
+      if(button->clicked)
+         color = 'g';
+      else if(button->hover)
+         color = 'k';
+      
+      HudMessageF("CBIFONT", "\C%c%S", color, button->label);
+      HudMessagePlain(id - 1, node->x + (48 / 2), node->y + (16 / 2), 0.1);
+      ret = 2;
+   }
+   else
+      ret = 1;
+   
+   DrawSpritePlain("H_Z3", id, 0.1 + node->x, 0.1 + node->y, 0.1);
+   
+   if(button->clicked)
+      button->clicked--;
+   
+   return ret;
+}
+
+void CBI_ButtonUpdate(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
+{
+   cbi_button_t *button = (cbi_button_t *)node;
+   cbi_node_t *node = &button->node;
+   
+   if(cur.x >= node->x + 48 || cur.y >= node->y + 16 ||
+      cur.x < node->x || cur.y < node->y)
+      button->hover = false;
+   else
+      button->hover = true;
+}
+
+bool CBI_ButtonClick(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
+{
+   cbi_button_t *button = (cbi_button_t *)node;
+   cbi_node_t *node = &button->node;
+   
+   if(cur.x >= node->x + 48 || cur.y >= node->y + 16 ||
+      cur.x < node->x || cur.y < node->y)
+      return false;
+   
+   button->clicked = 5;
+   Log("button %p clicked", button);
+   
+   return true;
+}
+
+[[__optional_args(1)]]
+cbi_node_t *CBI_ButtonAlloc(int flags, int x, int y, __str label)
+{
+   cbi_button_t *node = calloc(1, sizeof(cbi_button_t));
+   
+   node->label = label;
+   node->node.visible = !(flags & BAF_NOTVISIBLE);
+   node->node.x = x;
+   node->node.y = y;
+   node->node.Draw = CBI_ButtonDraw;
+   node->node.Update = CBI_ButtonUpdate;
+   node->node.Click = CBI_ButtonClick;
+   
+   return &node->node;
+}
+
+//
 // cbi_node_t
 //
 
@@ -136,6 +231,8 @@ void Lith_PlayerInitCBI(player_t *p)
    cbi->ui = DList_Create(0);
    CBI_InsertNode(cbi, CBI_SpriteAlloc(SAF_ALPHA, 0, 0, "H_Z1", 0.8));
    CBI_InsertNode(cbi, CBI_TextAlloc(0, 20, 20, "\CjComp/Brain OS ver. 1"));
+   CBI_InsertNode(cbi, CBI_ButtonAlloc(0, 40, 40, "Button"));
+   CBI_InsertNode(cbi, CBI_TextAlloc(0, 20, 30, "\CjThis is drawn after the button"));
    
    cbi->wasinit = true;
 }
@@ -154,6 +251,24 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(cbi->cur.y < 0) cbi->cur.y = 0;
       if(cbi->cur.x > 320) cbi->cur.x = 320;
       if(cbi->cur.y > 200) cbi->cur.y = 200;
+      
+      for(slist_t *rover = cbi->ui->head; rover; rover = rover->next)
+      {
+         cbi_node_t *node = rover->data.vp;
+         
+         if(node->visible && node->Update)
+            node->Update(node, cbi->ui, cbi->cur);
+      }
+      
+      if(ButtonPressed(p, BT_ATTACK))
+         for(slist_t *rover = cbi->ui->head; rover; rover = rover->next)
+         {
+            cbi_node_t *node = rover->data.vp;
+            
+            if(node->visible && node->Click)
+               if(node->Click(node, cbi->ui, cbi->cur))
+                  break;
+         }
    }
 }
 
@@ -200,9 +315,6 @@ void Lith_KeyOpenCBI()
    }
    else
    {
-      p->cbi.cur.x = 0;
-      p->cbi.cur.y = 0;
-      
       p->frozen--;
       ACS_LocalAmbientSound("player/cbi/close", 127);
    }
