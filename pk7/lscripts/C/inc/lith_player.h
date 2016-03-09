@@ -107,7 +107,6 @@ typedef struct player_s
    // Misc. / inventory
    bool scopetoken;
    bool lastscopetoken;
-   
    int riflefiremode;
    
    bool berserk;
@@ -117,6 +116,8 @@ typedef struct player_s
    int slidecharge;
    int rocketcharge;
    bool leaped;
+   
+   int frozen;
    
    struct dlist_s *hudstrstack;
 } player_t;

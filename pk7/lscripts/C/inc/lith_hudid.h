@@ -16,6 +16,9 @@ enum
    hid_base_cbi = hid_base,
    hid_end_cbi  = hid_base + 39999,
    
+   hid_cbi_cursor = hid_base_cbi,
+   hid_cbi_underflow,
+   
    // Misc.
    hid_base_misc = hid_base + 40000,
    hid_end_misc  = hid_base + 40999,

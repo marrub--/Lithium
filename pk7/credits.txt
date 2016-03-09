@@ -1,4 +1,5 @@
 Lithium: Credits
+I think I missed one or two people, sorry.
 
 Yholl - Effects from LegenDoom, help with a buncha stuff, Minigun firing frames
 Terminrerefjdfmsnf - Has way too many sound effects, for real what the hells
@@ -6,6 +7,7 @@ Shadowlink226 - Halo 3 sound rip
 Dynamo - Target sprite rip (Minigun)
 Captain J, Solo Spaghetti, Bloax & Slax - Cannon sprites
 zrrion the insect - Rocket launcher sprites
+Jimmy - Fonts
 Sgt. Shivers, TheRailgunner & Captain J - Rifle sprites
 Per Kristian - Shotgun sprites
 Yholl & Sgt. Shivers - Super Shotgun sprites

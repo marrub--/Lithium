@@ -374,9 +374,12 @@ void Lith_Player()
       if(p->health > 0)
       {
          Lith_PlayerUpdateCBI(p);
-         Lith_PlayerMove(p);
+         
+         if(!p->frozen)
+            Lith_PlayerMove(p);
       }
       
+      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
       Lith_PlayerView(p);
       
       // -- Rendering
