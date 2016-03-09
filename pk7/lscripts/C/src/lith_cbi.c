@@ -51,14 +51,23 @@ int CBI_TextDraw(cbi_node_t *node, int id)
    return 1;
 }
 
-[[__optional_args(2)]]
-cbi_node_t *CBI_TextAlloc(__str text, __str font, bool rainbows)
+enum
+{
+   TAF_NOTVISIBLE = 1 << 0,
+   TAF_RAINBOWS   = 1 << 1,
+};
+
+[[__optional_args(1)]]
+cbi_node_t *CBI_TextAlloc(int flags, int x, int y, __str text, __str font)
 {
    cbi_text_t *node = calloc(1, sizeof(cbi_text_t));
    
    node->text = text;
    node->font = font ? font : "SMALLFNT";
-   node->node.visible = true;
+   node->rainbows = flags & TAF_RAINBOWS;
+   node->node.visible = !(flags & TAF_NOTVISIBLE);
+   node->node.x = x;
+   node->node.y = y;
    node->node.Draw = CBI_TextDraw;
    
    return &node->node;
@@ -77,7 +86,7 @@ void Lith_PlayerInitCBI(player_t *p)
    register cbi_t *cbi = &p->cbi;
    
    cbi->ui = DList_Create(0);
-   DList_InsertBack(cbi->ui, (listdata_t){ CBI_TextAlloc("yay it works") });
+   DList_InsertBack(cbi->ui, (listdata_t){ CBI_TextAlloc(TAF_RAINBOWS, 20, 20, "yay it works") });
    
    cbi->wasinit = true;
 }
