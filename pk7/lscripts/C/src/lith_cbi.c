@@ -8,8 +8,9 @@
 //
 
 typedef int (*cbi_drawfunc_t)(struct cbi_node_s *, int);
-typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct dlist_s *, struct cursor_s);
-typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct dlist_s *, struct cursor_s);
+typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s);
+typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s);
+typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *) [[__call("ScriptI")]];
 
 typedef struct cbi_node_s
 {
@@ -42,6 +43,8 @@ typedef struct cbi_button_s
    __str label;
    bool hover;
    int clicked;
+   
+   cbi_buttonevent_t Event;
 } cbi_button_t;
 
 //
@@ -165,7 +168,7 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
    return ret;
 }
 
-void CBI_ButtonUpdate(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
+void CBI_ButtonUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
 {
    cbi_button_t *button = (cbi_button_t *)node;
    cbi_node_t *node = &button->node;
@@ -177,7 +180,7 @@ void CBI_ButtonUpdate(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
       button->hover = true;
 }
 
-bool CBI_ButtonClick(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
+bool CBI_ButtonClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
 {
    cbi_button_t *button = (cbi_button_t *)node;
    cbi_node_t *node = &button->node;
@@ -189,15 +192,19 @@ bool CBI_ButtonClick(cbi_node_t *node, dlist_t *ui, struct cursor_s cur)
    button->clicked = 5;
    Log("button %p clicked", button);
    
+   if(button->Event)
+      button->Event(button, p);
+   
    return true;
 }
 
 [[__optional_args(1)]]
-cbi_node_t *CBI_ButtonAlloc(int flags, int x, int y, __str label)
+cbi_node_t *CBI_ButtonAlloc(int flags, int x, int y, cbi_buttonevent_t event, __str label)
 {
    cbi_button_t *node = calloc(1, sizeof(cbi_button_t));
    
    node->label = label;
+   node->Event = event;
    node->node.visible = !(flags & BAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;
@@ -223,14 +230,22 @@ cbi_node_t *CBI_ButtonAlloc(int flags, int x, int y, __str label)
 //
 
 [[__call("ScriptI")]]
+static
+void Button_Die(cbi_button_t *button, player_t *p)
+{
+   ACS_Delay(10);
+   ACS_Thing_Damage2(p->tid, 9999, "None");
+}
+
+[[__call("ScriptI")]]
 void Lith_PlayerInitCBI(player_t *p)
 {
    register cbi_t *cbi = &p->cbi;
    
    cbi->ui = DList_Create(0);
    CBI_InsertNode(cbi, CBI_SpriteAlloc(SAF_ALPHA, 0, 0, "H_Z1", 0.8));
-   CBI_InsertNode(cbi, CBI_TextAlloc(0, 20, 20, "\CjComp/Brain OS ver. 1"));
-   CBI_InsertNode(cbi, CBI_ButtonAlloc(0, 40, 40, "Button"));
+   CBI_InsertNode(cbi, CBI_TextAlloc(TAF_RAINBOWS, 20, 20, "Comp/Brain OS ver. 1"));
+   CBI_InsertNode(cbi, CBI_ButtonAlloc(0, 40, 40, Button_Die, "Die"));
    CBI_InsertNode(cbi, CBI_TextAlloc(0, 20, 30, "\CjThis is drawn after the button"));
    
    cbi->wasinit = true;
@@ -260,7 +275,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
          cbi_node_t *node = rover->data.vp;
          
          if(node->visible && node->Update)
-            node->Update(node, cbi->ui, cbi->cur);
+            node->Update(node, p, cbi->cur);
       }
       
       if(ButtonPressed(p, BT_ATTACK))
@@ -269,7 +284,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
             cbi_node_t *node = rover->data.vp;
             
             if(node->visible && node->Click)
-               if(node->Click(node, cbi->ui, cbi->cur))
+               if(node->Click(node, p, cbi->cur))
                   break;
          }
    }
