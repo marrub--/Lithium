@@ -282,8 +282,12 @@ int CBI_TabDraw(cbi_node_t *node, int id)
    {
       char color = 'j';
       
-      if(tab->hover == i)
+      if(tab->curtab == i && tab->clicked)
+         color = 'g';
+      else if(tab->hover == i)
          color = 'k';
+      else if(tab->curtab == i)
+         color = 'n';
       
       HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
       HudMessagePlain(id - 1, node->x + (48 / 2) + (48 * i), node->y + (16 / 2), TICSECOND);
@@ -292,6 +296,9 @@ int CBI_TabDraw(cbi_node_t *node, int id)
       ret += 2;
       id -= 2;
    }
+   
+   if(tab->clicked)
+      tab->clicked--;
    
    return ret;
 }
@@ -336,6 +343,7 @@ bool CBI_TabClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
       {
          ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
          tab->curtab = i;
+         tab->clicked = 5;
          return true;
       }
    }

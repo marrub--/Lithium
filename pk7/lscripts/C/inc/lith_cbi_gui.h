@@ -54,6 +54,7 @@ typedef struct cbi_tab_s
    int ntabs;
    int curtab;
    int hover;
+   int clicked;
    __str *names;
 } cbi_tab_t;
 
