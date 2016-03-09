@@ -67,6 +67,9 @@
       HudMessagePlain(id, x, y, hold) \
    )
 
+// Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
+#define TICSECOND (0.029)
+
 // Misc.
 bool ButtonPressed(struct player_s *p, int bt);
 
