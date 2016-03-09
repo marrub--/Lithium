@@ -14,7 +14,6 @@ typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct dlist_s *, struct cu
 typedef struct cbi_node_s
 {
    int x, y;
-   int id;
    bool visible;
    
    cbi_drawfunc_t Draw;
@@ -245,7 +244,11 @@ void Lith_PlayerUpdateCBI(player_t *p)
    if(cbi->open)
    {
       cbi->cur.x -= p->yawv * 800.0f;
-      cbi->cur.y += p->pitchv * 800.0f;
+      
+      if(ACS_GetCVar("invertmouse"))
+         cbi->cur.y += p->pitchv * 800.0f;
+      else
+         cbi->cur.y -= p->pitchv * 800.0f;
       
       if(cbi->cur.x < 0) cbi->cur.x = 0;
       if(cbi->cur.y < 0) cbi->cur.y = 0;
