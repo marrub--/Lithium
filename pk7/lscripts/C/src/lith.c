@@ -265,7 +265,7 @@ void Lith_PlayerView(player_t *p)
 static
 void Lith_PlayerScore(player_t *p)
 {
-   if(p->health < 0)
+   if(p->health < 1)
       p->score = 0;
    
    if(!p->scoreaccumtime || p->score < p->prevscore)
@@ -378,6 +378,8 @@ void Lith_Player()
          if(!p->frozen)
             Lith_PlayerMove(p);
       }
+      else
+         p->cbi.open = false;
       
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
       Lith_PlayerView(p);

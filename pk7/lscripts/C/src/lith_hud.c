@@ -175,7 +175,7 @@ void Lith_PlayerHUD(player_t *p)
    // Health
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, 0.0);
    
-   HudMessageF("BIGFONT", p->health < 0 ? "---" : "%i", p->health);
+   HudMessageF("BIGFONT", p->health < 1 ? "---" : "%i", p->health);
    HudMessageParams(HUDMSG_PLAIN, hid_health, CR_RED, 2.1, 200.2, 0.0);
    
    if(p->health > 0 && p->health < p->prevhealth)

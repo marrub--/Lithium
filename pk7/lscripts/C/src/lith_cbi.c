@@ -309,6 +309,9 @@ void Lith_KeyOpenCBI()
 {
    player_t *p = &players[ACS_PlayerNumber()];
    
+   if(p->health < 1)
+      return;
+   
    p->cbi.open = !p->cbi.open;
    
    if(p->cbi.open)
