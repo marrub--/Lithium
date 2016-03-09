@@ -4,6 +4,7 @@
 #define MAX_PLAYERS 8
 
 #include "lith_weapons.h"
+#include "lith_cbi.h"
 
 enum
 {
@@ -37,21 +38,6 @@ enum
 };
 
 typedef long long int score_t;
-
-// BIP - Biotic Information Panel
-typedef struct bip_s
-{
-   void *no_data;
-} bip_t;
-
-// CBI - Computer/Brain Interface
-typedef struct cbi_s
-{
-   struct dlist_s *ui;
-   
-   bool wasinit;
-   bool open;
-} cbi_t;
 
 typedef struct player_s
 {

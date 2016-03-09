@@ -385,7 +385,9 @@ void Lith_Player()
       // -- Rendering
       Lith_PlayerHUD(p);
       Lith_PlayerRender(p);
-      Lith_PlayerDrawCBI(p);
+      
+      if(p->cbi.open)
+         Lith_PlayerDrawCBI(p);
       
       // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);

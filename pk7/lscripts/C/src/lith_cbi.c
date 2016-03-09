@@ -143,6 +143,18 @@ void Lith_PlayerInitCBI(player_t *p)
 [[__call("ScriptI")]]
 void Lith_PlayerUpdateCBI(player_t *p)
 {
+   register cbi_t *cbi = &p->cbi;
+   
+   if(cbi->open)
+   {
+      cbi->cur.x -= p->yawv * 800.0f;
+      cbi->cur.y += p->pitchv * 800.0f;
+      
+      if(cbi->cur.x < 0) cbi->cur.x = 0;
+      if(cbi->cur.y < 0) cbi->cur.y = 0;
+      if(cbi->cur.x > 320) cbi->cur.x = 320;
+      if(cbi->cur.y > 200) cbi->cur.y = 200;
+   }
 }
 
 [[__call("ScriptI")]]
@@ -150,21 +162,20 @@ void Lith_PlayerDrawCBI(player_t *p)
 {
    register cbi_t *cbi = &p->cbi;
    
-   if(cbi->open)
+   ACS_SetHudSize(320, 200);
+   
+   DrawSpritePlain("H_Z2", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, 0.1);
+   
+   int id = hid_end_cbi;
+   for(slist_t *rover = cbi->ui->head; rover; rover = rover->next)
    {
-      int id = hid_end_cbi;
+      cbi_node_t *node = rover->data.vp;
       
-      ACS_SetHudSize(320, 200);
-      for(slist_t *rover = cbi->ui->head; rover; rover = rover->next)
-      {
-         cbi_node_t *node = rover->data.vp;
-         
-         if(node->visible && node->Draw)
-            id -= node->Draw(node, id);
-         
-         if(id < hid_cbi_underflow)
-            Log("Hud ID underflow in Lith_PlayerDrawCBI!");
-      }
+      if(node->visible && node->Draw)
+         id -= node->Draw(node, id);
+      
+      if(id < hid_cbi_underflow)
+         Log("Hud ID underflow in Lith_PlayerDrawCBI!");
    }
 }
 
@@ -189,6 +200,9 @@ void Lith_KeyOpenCBI()
    }
    else
    {
+      p->cbi.cur.x = 0;
+      p->cbi.cur.y = 0;
+      
       p->frozen--;
       ACS_LocalAmbientSound("player/cbi/close", 127);
    }
