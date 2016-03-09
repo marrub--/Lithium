@@ -140,6 +140,8 @@ $random player/score {
 //
 // Player - CBI
 
-player/cbi/open  lsounds/Player/CBI/Open.flac  // Halo 3
-player/cbi/close lsounds/Player/CBI/Close.flac // same
+player/cbi/open         lsounds/Player/CBI/Open.flac         // Halo 3
+player/cbi/close        lsounds/Player/CBI/Close.flac        // same
+player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac  // Doom 3
+player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac // Steam
 

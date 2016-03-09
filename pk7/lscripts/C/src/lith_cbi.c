@@ -160,7 +160,7 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
    else
       ret = 1;
    
-   DrawSpritePlain("H_Z3", id, 0.1 + node->x, 0.1 + node->y, 0.1);
+   DrawSprite("H_Z3", HUDMSG_ALPHA, id, 0.1 + node->x, 0.1 + node->y, 0.1, 0.7);
    
    if(button->clicked)
       button->clicked--;
@@ -190,6 +190,7 @@ bool CBI_ButtonClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
       return false;
    
    button->clicked = 5;
+   ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
    Log("button %p clicked", button);
    
    if(button->Event)
@@ -279,14 +280,23 @@ void Lith_PlayerUpdateCBI(player_t *p)
       }
       
       if(ButtonPressed(p, BT_ATTACK))
+      {
+         bool click = false;
          for(slist_t *rover = cbi->ui->head; rover; rover = rover->next)
          {
             cbi_node_t *node = rover->data.vp;
             
             if(node->visible && node->Click)
                if(node->Click(node, p, cbi->cur))
+               {
+                  click = true;
                   break;
+               }
          }
+         
+         if(!click)
+            ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
+      }
    }
 }
 
