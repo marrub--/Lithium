@@ -3,6 +3,7 @@
 #include "lith_list.h"
 #include "lith_hudid.h"
 #include "lith_hud.h"
+#include "lith_cbi.h"
 #include <math.h>
 
 player_t players[MAX_PLAYERS];
@@ -199,6 +200,9 @@ void Lith_ResetPlayer(player_t *p)
    p->active = true;
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    
+   if(!p->cbi.wasinit)
+      Lith_PlayerInitCBI(p);
+   
    // pls not exit map with murder thingies out
    // is bad practice
    ACS_TakeInventory("Lith_PistolScopedToken", 999);
@@ -237,6 +241,9 @@ void Lith_ResetPlayer(player_t *p)
 static
 void Lith_GiveSecretScore(int playernum, int mul)
 {
+   [[__call("ScriptS"), __extern("ACS")]]
+   extern void Lith_UpdateScore();
+   
    ACS_SetActivator(players[playernum].tid);
    ACS_GiveInventory("Lith_ScoreCount", 9000 * mul);
    Lith_UpdateScore();

@@ -47,6 +47,9 @@ typedef struct bip_s
 // CBI - Computer/Brain Interface
 typedef struct cbi_s
 {
+   struct dlist_s *ui;
+   
+   bool wasinit;
    bool open;
 } cbi_t;
 

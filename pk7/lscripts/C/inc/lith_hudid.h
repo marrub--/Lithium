@@ -5,17 +5,22 @@ enum
 {
    //
    // hid_base         to hid_base + 999   reserved for random shit
-   // hid_base + 2000  to hid_base + 2999  reserved for HUD
    // hid_base + 1000  to hid_base + 1999  reserved for shotgun scope
+   // hid_base + 2000  to hid_base + 2999  reserved for HUD
    // hid_base + 10000 to hid_base + 39999 reserved for CBI
    //
    
    hid_base = 500000,
    
-   hid_ack,
+   // Misc.
+   hid_base_misc = hid_base,
+   hid_end_misc  = hid_base + 999,
+   
+   hid_ack = hid_base_misc,
    
    // Scope
    hid_base_scope = hid_base + 1000,
+   hid_end_scope  = hid_base + 1999,
    
    hid_scope_sineE = hid_base_scope,
    hid_scope_sineS = hid_scope_sineE + 200,
@@ -31,6 +36,7 @@ enum
    
    // HUD
    hid_base_hud = hid_base + 2000,
+   hid_end_hud  = hid_base + 2999,
    
    hid_jetE = hid_base_hud,
    hid_jetS = hid_jetE + 15,
@@ -75,8 +81,7 @@ enum
    
    // CBI
    hid_base_cbi = hid_base + 10000,
-   
-   hid_cbi_test = hid_base_cbi,
+   hid_end_cbi  = hid_base + 39999
 };
 
 #endif

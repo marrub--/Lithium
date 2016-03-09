@@ -91,16 +91,6 @@ __str StrUpper(__str in);
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 
-// Scripts
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_UpdateScore();
-
-[[__call("ScriptI")]]
-void Lith_PlayerUpdateCBI(struct player_s *p);
-
-[[__call("ScriptI")]]
-void Lith_PlayerDrawCBI(struct player_s *p);
-
 // Constants
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;

@@ -97,7 +97,7 @@ void Lith_PlayerHUD(player_t *p)
    int time            = ACS_Timer();
    int hid_healthbg_fx = hid_healthbg_fxS - (time % 32);
    int hid_armorbg_fx  = hid_armorbg_fxS  - (time % 32);
-   int hid_slideind_fx = hid_slideind_fxS - (time % 10);
+   int hid_slideind_fx = hid_slideind_fxS - (time % 11);
    
    ACS_SetHudSize(320, 200, false);
    
@@ -175,10 +175,10 @@ void Lith_PlayerHUD(player_t *p)
    // Health
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, 0.0);
    
-   HudMessageF("BIGFONT", "%i", p->health);
+   HudMessageF("BIGFONT", p->health < 0 ? "---" : "%i", p->health);
    HudMessageParams(HUDMSG_PLAIN, hid_health, CR_RED, 2.1, 200.2, 0.0);
    
-   if(p->health < p->prevhealth)
+   if(p->health > 0 && p->health < p->prevhealth)
    {
       fixed ft = minmax((p->prevhealth - p->health) / 30.0, 0.1, 3.0);
       HudMessageF("BIGFONT", "%i", p->health);
