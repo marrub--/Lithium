@@ -44,7 +44,7 @@ void Lith_PlayerInitCBI(player_t *p)
       tab1->children = DList_Create();
       
       CBI_InsertNode(tab1->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 40, "Comp/Brain OS ver. 1"));
-      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 2, 40, 60, Button_Generic, "Die"));
+      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 2, 40, 50, Button_Generic, "Die"));
       CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 1, 40, 80, Button_Generic, "Give Health"));
       CBI_InsertNode(tab1->children, CBI_TextAlloc(0, 0, 20, 50, "\CjThis is drawn after the buttons"));
       
@@ -60,8 +60,11 @@ void Lith_PlayerInitCBI(player_t *p)
       CBI_InsertNode(tab->children, tab2);
    }
    
-   CBI_InsertNode(cbi->ui, CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, "H_Z1", 0.8));
-   CBI_InsertNode(cbi->ui, tab);
+   cbi_node_t *container = CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, "H_Z1", 0.8);
+   container->children = DList_Create();
+   
+   CBI_InsertNode(container->children, tab);
+   CBI_InsertNode(cbi->ui, container);
    
    cbi->wasinit = true;
 }
@@ -85,7 +88,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(cbi->cur.x > 320) cbi->cur.x = 320;
       if(cbi->cur.y > 200) cbi->cur.y = 200;
       
-      CBI_NodeUpdateList(cbi->ui, p, cbi->cur);
+      CBI_NodeListUpdate(cbi->ui, p, cbi->cur);
       
       int click = 0;
       if(ButtonPressed(p, BT_ATTACK))
@@ -94,7 +97,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
          click = 1;
       
       if(click)
-         if(!CBI_NodeClickList(cbi->ui, p, cbi->cur, click == 2))
+         if(!CBI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
             ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
    }
 }
@@ -108,7 +111,7 @@ void Lith_PlayerDrawCBI(player_t *p)
    
    DrawSpritePlain("H_Z2", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
    
-   CBI_NodeDrawList(cbi->ui, hid_end_cbi);
+   CBI_NodeListDraw(cbi->ui, hid_end_cbi);
 }
 
 //

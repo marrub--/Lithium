@@ -8,7 +8,7 @@
 // Node Functions.
 //
 
-int CBI_NodeDrawList(dlist_t *list, int id)
+int CBI_NodeListDraw(dlist_t *list, int id)
 {
    int ret = 0;
    
@@ -24,13 +24,13 @@ int CBI_NodeDrawList(dlist_t *list, int id)
       }
       
       if(id < hid_cbi_underflow)
-         Log("Hud ID underflow in CBI_NodeDrawList!");
+         Log("Hud ID underflow in CBI_NodeListDraw!");
    }
    
    return ret;
 }
 
-void CBI_NodeUpdateList(dlist_t *list, player_t *p, struct cursor_s cur)
+void CBI_NodeListUpdate(dlist_t *list, player_t *p, struct cursor_s cur)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
@@ -41,7 +41,7 @@ void CBI_NodeUpdateList(dlist_t *list, player_t *p, struct cursor_s cur)
    }
 }
 
-bool CBI_NodeClickList(dlist_t *list, player_t *p, struct cursor_s cur, bool left)
+bool CBI_NodeListClick(dlist_t *list, player_t *p, struct cursor_s cur, bool left)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
@@ -55,6 +55,20 @@ bool CBI_NodeClickList(dlist_t *list, player_t *p, struct cursor_s cur, bool lef
    return false;
 }
 
+bool CBI_NodeListHold(dlist_t *list, player_t *p, struct cursor_s cur, bool left)
+{
+   for(slist_t *rover = list->head; rover; rover = rover->next)
+   {
+      cbi_node_t *node = rover->data.vp;
+      
+      if(node->visible && node->Hold)
+         if(node->Hold(node, p, cur, left))
+            return true;
+   }
+   
+   return false;
+}
+
 // ---------------------------------------------------------------------------
 // cbi_node_t
 //
@@ -62,7 +76,7 @@ bool CBI_NodeClickList(dlist_t *list, player_t *p, struct cursor_s cur, bool lef
 int CBI_NodeDraw(cbi_node_t *node, int id)
 {
    if(node->children)
-      return CBI_NodeDrawList(node->children, id);
+      return CBI_NodeListDraw(node->children, id);
    
    return 0;
 }
@@ -70,13 +84,23 @@ int CBI_NodeDraw(cbi_node_t *node, int id)
 void CBI_NodeUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
 {
    if(node->children)
-      CBI_NodeUpdateList(node->children, p, cur);
+      CBI_NodeListUpdate(node->children, p, cur);
 }
 
 bool CBI_NodeClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
    if(node->children)
-      return CBI_NodeClickList(node->children, p, cur, left);
+      return CBI_NodeListClick(node->children, p, cur, left);
+   
+   return false;
+}
+
+bool CBI_NodeHold(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
+{
+   Log("CBI_NodeHold %p", node);
+   
+   if(node->children)
+      return CBI_NodeListHold(node->children, p, cur, left);
    
    return false;
 }
@@ -92,6 +116,7 @@ cbi_node_t *CBI_NodeAlloc(int flags, int id, int x, int y)
    node->Draw = CBI_NodeDraw;
    node->Update = CBI_NodeUpdate;
    node->Click = CBI_NodeClick;
+   node->Hold = CBI_NodeHold;
    
    return node;
 }
@@ -104,10 +129,7 @@ int CBI_TextDraw(cbi_node_t *node, int id)
 {
    cbi_text_t *text = (cbi_text_t *)node;
    cbi_node_t *node = &text->node;
-   int ret;
-   
-   ret = CBI_NodeDraw(node, id);
-   id -= ret;
+   int ret = 0;
    
    // The most important check.
    if(text->rainbows)
@@ -116,8 +138,11 @@ int CBI_TextDraw(cbi_node_t *node, int id)
       HudMessageF(text->font, "%S", text->text);
    
    HudMessagePlain(id, 0.1 + node->x, 0.1 + node->y, TICSECOND);
+   ret++;
+   id--;
    
-   return ret + 1;
+   ret += CBI_NodeDraw(node, id);
+   return ret;
 }
 
 cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str font)
@@ -134,6 +159,7 @@ cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str fon
    node->node.Draw = CBI_TextDraw;
    node->node.Update = CBI_NodeUpdate;
    node->node.Click = CBI_NodeClick;
+   node->node.Hold = CBI_NodeHold;
    
    return &node->node;
 }
@@ -146,14 +172,14 @@ int CBI_SpriteDraw(cbi_node_t *node, int id)
 {
    cbi_sprite_t *sprite = (cbi_sprite_t *)node;
    cbi_node_t *node = &sprite->node;
-   int ret;
-   
-   ret = CBI_NodeDraw(node, id);
-   id -= ret;
+   int ret = 0;
    
    DrawSprite(sprite->name, HUDMSG_ALPHA, id, 0.1 + node->x, 0.1 + node->y, TICSECOND, sprite->alpha);
+   ret++;
+   id--;
    
-   return ret + 1;
+   ret += CBI_NodeDraw(node, id);
+   return ret;
 }
 
 cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed alpha)
@@ -169,6 +195,7 @@ cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed a
    node->node.Draw = CBI_SpriteDraw;
    node->node.Update = CBI_NodeUpdate;
    node->node.Click = CBI_NodeClick;
+   node->node.Hold = CBI_NodeHold;
    
    return &node->node;
 }
@@ -181,11 +208,7 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
 {
    cbi_button_t *button = (cbi_button_t *)node;
    cbi_node_t *node = &button->node;
-   int ret;
-   int ret;
-   
-   ret = CBI_NodeDraw(node, id);
-   id -= ret;
+   int ret = 0;
    
    if(button->label)
    {
@@ -208,6 +231,7 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
    if(button->clicked)
       button->clicked--;
    
+   ret += CBI_NodeDraw(node, id);
    return ret;
 }
 
@@ -264,6 +288,7 @@ cbi_node_t *CBI_ButtonAlloc(int flags, int id, int x, int y, cbi_buttonevent_t e
    node->node.Draw = CBI_ButtonDraw;
    node->node.Update = CBI_ButtonUpdate;
    node->node.Click = CBI_ButtonClick;
+   node->node.Hold = CBI_NodeHold;
    
    return &node->node;
 }
@@ -276,10 +301,7 @@ int CBI_TabDraw(cbi_node_t *node, int id)
 {
    cbi_tab_t *tab = (cbi_tab_t *)node;
    cbi_node_t *node = &tab->node;
-   int ret;
-   
-   ret = CBI_NodeDraw(node, id);
-   id -= ret;
+   int ret = 0;
    
    for(int i = 0; i < tab->ntabs; i++)
    {
@@ -303,6 +325,7 @@ int CBI_TabDraw(cbi_node_t *node, int id)
    if(tab->clicked)
       tab->clicked--;
    
+   ret += CBI_NodeDraw(node, id);
    return ret;
 }
 
@@ -372,6 +395,7 @@ cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names)
    node->node.Draw = CBI_TabDraw;
    node->node.Update = CBI_TabUpdate;
    node->node.Click = CBI_TabClick;
+   node->node.Hold = CBI_NodeHold;
    
    return &node->node;
 }

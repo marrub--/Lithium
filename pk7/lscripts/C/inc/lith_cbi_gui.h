@@ -8,7 +8,7 @@
 typedef int (*cbi_drawfunc_t)(struct cbi_node_s *, int);
 typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s);
 typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s, bool);
-typedef void (*cbi_holdfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s, bool);
+typedef cbi_clickfunc_t cbi_holdfunc_t;
 typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
 
 typedef struct cbi_node_s
@@ -60,6 +60,17 @@ typedef struct cbi_tab_s
    __str *names;
 } cbi_tab_t;
 
+typedef struct cbi_slider_s
+{
+   cbi_node_t node;
+   union cbi_slider_value_u
+   {
+      int i;
+      fixed k;
+      float f;
+   } value, min, max;
+} cbi_slider_t;
+
 //
 // ---------------------------------------------------------------------------
 
@@ -99,9 +110,15 @@ enum
    TABAF_NOTVISIBLE = 1 << 0,
 };
 
-int CBI_NodeDrawList(struct dlist_s *list, int id);
-void CBI_NodeUpdateList(struct dlist_s *list, player_t *p, struct cursor_s cur);
-bool CBI_NodeClickList(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
+enum
+{
+   SLDAF_NOTVISIBLE = 1 << 0,
+};
+
+int CBI_NodeListDraw(struct dlist_s *list, int id);
+void CBI_NodeListUpdate(struct dlist_s *list, player_t *p, struct cursor_s cur);
+bool CBI_NodeListClick(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
+bool CBI_NodeListHold(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
 
 //
 // cbi_node_t
