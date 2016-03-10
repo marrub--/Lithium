@@ -63,12 +63,8 @@ typedef struct cbi_tab_s
 typedef struct cbi_slider_s
 {
    cbi_node_t node;
-   union cbi_slider_value_u
-   {
-      int i;
-      fixed k;
-      float f;
-   } value, min, max;
+   int type;
+   float value, min, max;
 } cbi_slider_t;
 
 //
@@ -115,6 +111,13 @@ enum
    SLDAF_NOTVISIBLE = 1 << 0,
 };
 
+enum
+{
+   SLDTYPE_INT = 0,
+   SLDTYPE_FIXED = 1,
+   SLDTYPE_FLOAT = 2
+};
+
 int CBI_NodeListDraw(struct dlist_s *list, int id);
 void CBI_NodeListUpdate(struct dlist_s *list, player_t *p, struct cursor_s cur);
 bool CBI_NodeListClick(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
@@ -148,6 +151,12 @@ cbi_node_t *CBI_ButtonAlloc(int flags, int id, int x, int y, cbi_buttonevent_t e
 // cbi_tab_t
 
 cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names);
+
+//
+// cbi_slider_t
+
+[[__optional_args(1)]]
+cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min, float max, float value);
 
 //
 // ---------------------------------------------------------------------------

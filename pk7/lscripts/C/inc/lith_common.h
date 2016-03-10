@@ -93,6 +93,7 @@ __str StrUpper(__str in);
 // Math
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
+float normf(float x, float min, float max);
 
 // Constants
 static float const pi  = 3.14159265358979323846f;

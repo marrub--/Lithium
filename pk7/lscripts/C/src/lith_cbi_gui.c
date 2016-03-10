@@ -97,8 +97,6 @@ bool CBI_NodeClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left
 
 bool CBI_NodeHold(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
-   Log("CBI_NodeHold %p", node);
-   
    if(node->children)
       return CBI_NodeListHold(node->children, p, cur, left);
    
@@ -261,7 +259,6 @@ bool CBI_ButtonClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool le
       cur.x < node->x || cur.y < node->y)
       return false;
    
-   // TODO: this could possibly cause data race conditions, go ask david
    bool ret = false;
    if(button->Event)
       button->Event(button, p, left, &ret);
@@ -315,8 +312,8 @@ int CBI_TabDraw(cbi_node_t *node, int id)
          color = 'n';
       
       HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
-      HudMessagePlain(id - 1, node->x + (48 / 2) + (48 * i), node->y + (16 / 2), TICSECOND);
-      DrawSprite("H_Z3", HUDMSG_ALPHA, id, 0.1 + node->x + (48 * i), 0.1 + node->y, TICSECOND, 0.7);
+      HudMessagePlain(id - 1, node->x + (48 / 2) + (48 * i), node->y + (14 / 2), TICSECOND);
+      DrawSprite("H_Z4", HUDMSG_ALPHA, id, 0.1 + node->x + (48 * i), 0.1 + node->y, TICSECOND, 0.7);
       
       ret += 2;
       id -= 2;
@@ -346,7 +343,7 @@ void CBI_TabUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
       rnode->visible = (i == tab->curtab);
       
       int x = node->x + (48 * i);
-      if(cur.x < x + 48 && cur.y < node->y + 16 && cur.x >= x && cur.y >= node->y)
+      if(cur.x < x + 48 && cur.y < node->y + 14 && cur.x >= x && cur.y >= node->y)
          tab->hover = i;
    }
    
@@ -395,6 +392,59 @@ cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names)
    node->node.Draw = CBI_TabDraw;
    node->node.Update = CBI_TabUpdate;
    node->node.Click = CBI_TabClick;
+   node->node.Hold = CBI_NodeHold;
+   
+   return &node->node;
+}
+
+// ---------------------------------------------------------------------------
+// cbi_slider_t
+//
+
+int CBI_SliderDraw(cbi_node_t *node, int id)
+{
+   cbi_slider_t *slider = (cbi_slider_t *)node;
+   cbi_node_t *node = &slider->node;
+   int ret = 0;
+   
+   float pos = normf(slider->value, slider->min, slider->max);
+   
+   DrawSpritePlain("H_Z5", id, 0.1 + node->x + 2, 0.1 + node->y + 3, TICSECOND);
+   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 4, 0.1 + node->y + 1, TICSECOND);
+   
+   if(slider->type == SLDTYPE_INT)
+   {
+      long fixed lf = pos * 100.0f;
+      HudMessageF("CBIFONT", "%lk", lf);
+   }
+   else if(slider->type == SLDTYPE_FIXED)
+      HudMessageF("CBIFONT", "%k", (fixed)slider->value);
+   else if(slider->type == SLDTYPE_FLOAT)
+      HudMessageF("CBIFONT", "%lk", (long fixed)slider->value); // ;_;
+   
+   HudMessagePlain(id - 2, 0.1 + node->x + 64 + 4, node->y + 4, TICSECOND);
+   ret += 3;
+   id -= 3;
+   
+   ret += CBI_NodeDraw(node, id);
+   return ret;
+}
+
+cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min, float max, float value)
+{
+   cbi_slider_t *node = calloc(1, sizeof(cbi_slider_t));
+   
+   node->type = type;
+   node->min = min;
+   node->max = max;
+   node->value = value;
+   node->node.visible = !(flags & SLDAF_NOTVISIBLE);
+   node->node.x = x;
+   node->node.y = y;
+   node->node.id = id;
+   node->node.Draw = CBI_SliderDraw;
+   node->node.Update = CBI_NodeUpdate;
+   node->node.Click = CBI_NodeClick;
    node->node.Hold = CBI_NodeHold;
    
    return &node->node;

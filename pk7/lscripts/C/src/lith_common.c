@@ -71,9 +71,7 @@ void HudMessage(__str fmt, ...)
 void HudMessageRainbows(__str fmt, ...)
 {
    static char const chars[] = { 'g', 'i', 'k', 'd', 'h', 't', 'r' };
-   static int const charsmax = sizeof(chars);
-   
-   char ch = chars[(ACS_Timer() / 4) % charsmax]; // GDCC bug: sizeof doesn't work here
+   char ch = chars[(ACS_Timer() / 4) % sizeof(chars)];
    va_list vl;
    
    ACS_BeginPrint();
@@ -133,6 +131,11 @@ float lerpf(float a, float b, float t)
    }
    
    return ret;
+}
+
+float normf(float x, float min, float max)
+{
+   return (x - min) / (max - min);
 }
 
 //

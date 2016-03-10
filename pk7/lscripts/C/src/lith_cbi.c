@@ -36,7 +36,7 @@ void Lith_PlayerInitCBI(player_t *p)
    
    cbi->ui = DList_Create();
    
-   cbi_node_t *tab = CBI_TabAlloc(0, 0, 10, 10, (__str[]){ "Tab 1", "Empty Tab", null });
+   cbi_node_t *tab = CBI_TabAlloc(0, 0, 13, 13, (__str[]){ "Tab 1", "Empty Tab", null });
    tab->children = DList_Create();
    
    {
@@ -44,9 +44,10 @@ void Lith_PlayerInitCBI(player_t *p)
       tab1->children = DList_Create();
       
       CBI_InsertNode(tab1->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 40, "Comp/Brain OS ver. 1"));
-      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 2, 40, 50, Button_Generic, "Die"));
+      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 2, 40, 60, Button_Generic, "Die"));
       CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 1, 40, 80, Button_Generic, "Give Health"));
       CBI_InsertNode(tab1->children, CBI_TextAlloc(0, 0, 20, 50, "\CjThis is drawn after the buttons"));
+      CBI_InsertNode(tab1->children, CBI_SliderAlloc(0, 0, 40, 100, SLDTYPE_INT, 0, 100, 20));
       
       CBI_InsertNode(tab->children, tab1);
    }
@@ -91,14 +92,20 @@ void Lith_PlayerUpdateCBI(player_t *p)
       CBI_NodeListUpdate(cbi->ui, p, cbi->cur);
       
       int click = 0;
+      int hold = 0;
       if(ButtonPressed(p, BT_ATTACK))
          click = 2;
       else if(ButtonPressed(p, BT_ALTATTACK))
          click = 1;
+      else if(p->buttons & BT_ATTACK)
+         hold = 2;
+      else if(p->buttons & BT_ALTATTACK)
+         hold = 1;
       
-      if(click)
-         if(!CBI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
-            ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
+      if(click && !CBI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
+         ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
+      else if(hold)
+         CBI_NodeListHold(cbi->ui, p, cbi->cur, hold == 2);
    }
 }
 
