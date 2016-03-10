@@ -64,7 +64,7 @@ typedef struct cbi_slider_s
 {
    cbi_node_t node;
    int type;
-   float value, min, max;
+   float pos, min, max;
 } cbi_slider_t;
 
 //

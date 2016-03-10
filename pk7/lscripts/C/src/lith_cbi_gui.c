@@ -407,27 +407,22 @@ int CBI_SliderDraw(cbi_node_t *node, int id)
    cbi_node_t *node = &slider->node;
    int ret = 0;
    
-   float pos = normf(slider->value, slider->min, slider->max);
-   
    DrawSpritePlain("H_Z5", id, 0.1 + node->x + 2, 0.1 + node->y + 3, TICSECOND);
-   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 4, 0.1 + node->y + 1, TICSECOND);
+   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 4 + (int)(60 * slider->pos), 0.1 + node->y + 1, TICSECOND);
    
-   if(slider->type == SLDTYPE_INT)
-   {
-      long fixed lf = pos * 100.0f;
-      HudMessageF("CBIFONT", "%lk", lf);
-   }
-   else if(slider->type == SLDTYPE_FIXED)
-      HudMessageF("CBIFONT", "%k", (fixed)slider->value);
-   else if(slider->type == SLDTYPE_FLOAT)
-      HudMessageF("CBIFONT", "%lk", (long fixed)slider->value); // ;_;
-   
+   HudMessageF("CBIFONT", "%.2k", (fixed)slider->pos);
    HudMessagePlain(id - 2, 0.1 + node->x + 64 + 4, node->y + 4, TICSECOND);
    ret += 3;
    id -= 3;
    
    ret += CBI_NodeDraw(node, id);
    return ret;
+}
+
+float CBI_SliderGetValue(cbi_node_t *node)
+{
+   cbi_slider_t *slider = (cbi_slider_t *)node;
+   return slider->pos * slider->max + slider->min;
 }
 
 cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min, float max, float value)
@@ -437,7 +432,7 @@ cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min
    node->type = type;
    node->min = min;
    node->max = max;
-   node->value = value;
+   node->pos = normf(value, node->min, node->max);
    node->node.visible = !(flags & SLDAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;
