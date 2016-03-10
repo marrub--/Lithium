@@ -156,8 +156,7 @@ int CBI_TextDraw(cbi_node_t *node, int id)
       HudMessageF(text->font, "%S", text->text);
    
    HudMessagePlain(id, 0.1 + node->x, 0.1 + node->y, TICSECOND);
-   ret++;
-   id--;
+   ret++, id--;
    
    ret += CBI_NodeDraw(node, id);
    return ret;
@@ -193,8 +192,7 @@ int CBI_SpriteDraw(cbi_node_t *node, int id)
    int ret = 0;
    
    DrawSprite(sprite->name, HUDMSG_ALPHA, id, 0.1 + node->x, 0.1 + node->y, TICSECOND, sprite->alpha);
-   ret++;
-   id--;
+   ret++, id--;
    
    ret += CBI_NodeDraw(node, id);
    return ret;
@@ -228,6 +226,9 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
    cbi_node_t *node = &button->node;
    int ret = 0;
    
+   DrawSpriteAlpha("H_Z3", id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
+   ret++, id--;
+   
    if(button->label)
    {
       char color = 'j';
@@ -238,13 +239,9 @@ int CBI_ButtonDraw(cbi_node_t *node, int id)
          color = 'k';
       
       HudMessageF("CBIFONT", "\C%c%S", color, button->label);
-      HudMessagePlain(id - 1, node->x + (48 / 2), node->y + (16 / 2), TICSECOND);
-      ret += 2;
+      HudMessagePlain(id, node->x + (48 / 2), node->y + (16 / 2), TICSECOND);
+      ret++, id--;
    }
-   else
-      ret++;
-   
-   DrawSprite("H_Z3", HUDMSG_ALPHA, id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
    
    if(button->clicked)
       button->clicked--;
@@ -333,10 +330,9 @@ int CBI_TabDraw(cbi_node_t *node, int id)
       
       HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
       HudMessagePlain(id - 1, node->x + (48 / 2) + (48 * i), node->y + (14 / 2), TICSECOND);
-      DrawSprite("H_Z4", HUDMSG_ALPHA, id, 0.1 + node->x + (48 * i), 0.1 + node->y, TICSECOND, 0.7);
+      DrawSpriteAlpha("H_Z4", id, 0.1 + node->x + (48 * i), 0.1 + node->y, TICSECOND, 0.7);
       
-      ret += 2;
-      id -= 2;
+      ret += 2, id -= 2;
    }
    
    if(tab->clicked)
@@ -440,8 +436,8 @@ int CBI_SliderDraw(cbi_node_t *node, int id)
    cbi_node_t *node = &slider->node;
    int ret = 0;
    
-   DrawSpritePlain("H_Z5", id, 0.1 + node->x + 2, 0.1 + node->y + 3, TICSECOND);
-   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 3 + (int)(58 * slider->pos), 0.1 + node->y + 1, TICSECOND);
+   DrawSpriteAlpha("H_Z5", id, 0.1 + node->x + 2, 0.1 + node->y + 3, TICSECOND, 0.7);
+   DrawSpriteAlpha("H_Z6", id - 1, 0.1 + node->x + 3 + (int)(58 * slider->pos), 0.1 + node->y + 1, TICSECOND, 0.7);
    
    if(slider->type == SLDTYPE_INT)
       HudMessageF("CBIFONT", "%i", (int)CBI_SliderGetValue(node));
@@ -449,8 +445,7 @@ int CBI_SliderDraw(cbi_node_t *node, int id)
       HudMessageF("CBIFONT", "%.2k", (fixed)CBI_SliderGetValue(node));
    
    HudMessagePlain(id - 2, 0.1 + node->x + 64 + 4, node->y + 4, TICSECOND);
-   ret += 3;
-   id -= 3;
+   ret += 3, id -= 3;
    
    if(slider->label)
    {
@@ -461,8 +456,7 @@ int CBI_SliderDraw(cbi_node_t *node, int id)
          node->x + (64 / 2),
          node->y + (8 / 2),
          TICSECOND, 0.6);
-      ret++;
-      id--;
+      ret++, id--;
    }
    
    ret += CBI_NodeDraw(node, id);
@@ -514,6 +508,109 @@ cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type,
    node->node.Update = CBI_NodeUpdate;
    node->node.Click = CBI_NodeClick;
    node->node.Hold = CBI_SliderHold;
+   
+   return &node->node;
+}
+
+// ---------------------------------------------------------------------------
+// cbi_checkbox_t
+//
+
+
+int CBI_CheckboxDraw(cbi_node_t *node, int id)
+{
+   cbi_checkbox_t *checkbox = (cbi_checkbox_t *)node;
+   cbi_node_t *node = &checkbox->node;
+   int ret = 0;
+   
+   DrawSpriteAlpha("H_Z7", id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
+   ret++, id--;
+   
+   if(checkbox->checked)
+   {
+      DrawSpritePlain("H_Z8", id, 0.1 + node->x, 0.1 + node->y, TICSECOND);
+      ret++, id--;
+   }
+   
+   if(checkbox->label)
+   {
+      char color = 'j';
+      
+      if(checkbox->clicked)
+         color = 'g';
+      else if(checkbox->hover)
+         color = 'k';
+      
+      HudMessageF("CBIFONT", "\C%c%S", color, checkbox->label);
+      HudMessagePlain(id, node->x + (checkbox->left ? -12.2 : 12.1), 0.1 + node->y + 1, TICSECOND);
+      ret++, id--;
+   }
+   
+   if(checkbox->clicked)
+      checkbox->clicked--;
+   
+   ret += CBI_NodeDraw(node, id);
+   return ret;
+}
+
+void CBI_CheckboxUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
+{
+   cbi_checkbox_t *checkbox = (cbi_checkbox_t *)node;
+   cbi_node_t *node = &checkbox->node;
+   
+   CBI_NodeUpdate(node, p, cur);
+   
+   if(cur.x >= node->x + 10 || cur.y >= node->y + 10 ||
+      cur.x < node->x || cur.y < node->y)
+      checkbox->hover = false;
+   else
+      checkbox->hover = true;
+}
+
+bool CBI_CheckboxClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
+{
+   cbi_checkbox_t *checkbox = (cbi_checkbox_t *)node;
+   cbi_node_t *node = &checkbox->node;
+   
+   if(CBI_NodeClick(node, p, cur, left))
+      return true;
+   
+   if(cur.x >= node->x + 10 || cur.y >= node->y + 10 ||
+      cur.x < node->x || cur.y < node->y)
+      return false;
+   
+   bool ret = true;
+   if(checkbox->Event)
+      checkbox->Event(checkbox, p, left, &ret);
+   else
+      checkbox->checked = !checkbox->checked;
+   
+   if(ret)
+   {
+      checkbox->clicked = 5;
+      ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+   }
+   
+   return ret;
+}
+
+cbi_node_t *CBI_CheckboxAlloc(int flags, int id, int x, int y, __str label, bool checked, bool left,
+   cbi_checkboxevent_t event)
+{
+   cbi_checkbox_t *node = calloc(1, sizeof(cbi_checkbox_t));
+   
+   node->checked = checked;
+   node->left = left;
+   node->label = label;
+   node->Event = event;
+   node->node.visible = !(flags & CBXAF_NOTVISIBLE);
+   node->node.x = x;
+   node->node.y = y;
+   node->node.id = id;
+   node->node.Draw = CBI_CheckboxDraw;
+   node->node.Update = CBI_CheckboxUpdate;
+   node->node.Click = CBI_CheckboxClick;
+   node->node.Hold = CBI_NodeHold;
    
    return &node->node;
 }

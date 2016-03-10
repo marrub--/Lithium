@@ -67,6 +67,13 @@
       HudMessagePlain(id, x, y, hold) \
    )
 
+#define DrawSpriteAlpha(name, id, x, y, hold, alpha) \
+   ( \
+      ACS_SetFont(name), \
+      HudMessage("A"), \
+      HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
+   )
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 

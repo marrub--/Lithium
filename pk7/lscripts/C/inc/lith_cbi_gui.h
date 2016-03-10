@@ -10,6 +10,7 @@ typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct player_s *, struct 
 typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s, bool);
 typedef cbi_clickfunc_t cbi_holdfunc_t;
 typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
+typedef void (*cbi_checkboxevent_t)(struct cbi_checkbox_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
 
 typedef struct cbi_node_s
 {
@@ -68,6 +69,18 @@ typedef struct cbi_slider_s
    __str label;
 } cbi_slider_t;
 
+typedef struct cbi_checkbox_s
+{
+   cbi_node_t node;
+   bool checked;
+   bool left;
+   bool hover;
+   int clicked;
+   __str label;
+   
+   cbi_checkboxevent_t Event;
+} cbi_checkbox_t;
+
 //
 // ---------------------------------------------------------------------------
 
@@ -110,6 +123,11 @@ enum
 enum
 {
    SLDAF_NOTVISIBLE = 1 << 0,
+};
+
+enum
+{
+   CBXAF_NOTVISIBLE = 1 << 0,
 };
 
 enum
@@ -160,6 +178,13 @@ float CBI_SliderGetValue(cbi_node_t *node);
 [[__optional_args(2)]]
 cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type,
    float min, float max, float value, __str label);
+
+//
+// cbi_checkbox_t
+
+[[__optional_args(5)]]
+cbi_node_t *CBI_CheckboxAlloc(int flags, int id, int x, int y, __str label, bool checked, bool left,
+   cbi_checkboxevent_t event);
 
 //
 // ---------------------------------------------------------------------------

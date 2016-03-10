@@ -23,13 +23,14 @@ void Button_Generic(cbi_button_t *button, player_t *p, bool left, bool *ret)
    ACS_Delay(10);
    
    cbi_node_t *healthslider = CBI_NodeListGetByID(p->cbi.ui, 16);
+   bool dbl = ((cbi_checkbox_t *)CBI_NodeListGetByID(p->cbi.ui, 17))->checked;
    int value = CBI_SliderGetValue(healthslider);
    
    switch(button->node.id)
    {
    case 3: ACS_Thing_Damage2(0, 1000000000, "None"); break;
-   case 2: ACS_Thing_Damage2(0, value, "None"); break;
-   case 1: ACS_SetActorProperty(0, APROP_Health, p->health + value); break;
+   case 2: ACS_Thing_Damage2(0, value * (dbl ? 2 : 1), "None"); break;
+   case 1: ACS_SetActorProperty(0, APROP_Health, p->health + (value * (dbl ? 2 : 1))); break;
    }
 }
 
@@ -52,6 +53,7 @@ void Lith_PlayerInitCBI(player_t *p)
       CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 1, 40, 100, Button_Generic, "Give Health"));
       CBI_InsertNode(tab1->children, CBI_TextAlloc(0, 0, 20, 50, "\CjThis is drawn after the buttons"));
       CBI_InsertNode(tab1->children, CBI_SliderAlloc(0, 16, 40, 120, SLDTYPE_INT, 0, 9999, 100, "Health"));
+      CBI_InsertNode(tab1->children, CBI_CheckboxAlloc(0, 17, 40, 140, "Double", true));
       
       CBI_InsertNode(tab->children, tab1);
    }
