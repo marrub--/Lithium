@@ -10,8 +10,16 @@
 
 [[__call("ScriptI")]]
 static
-void Button_Generic(cbi_button_t *button, player_t *p)
+void Button_Generic(cbi_button_t *button, player_t *p, bool left, bool *ret)
 {
+   *ret = true;
+   
+   if(!left)
+   {
+      *ret = false;
+      return;
+   }
+   
    ACS_Delay(10);
    
    switch(button->node.id)
@@ -32,7 +40,7 @@ void Lith_PlayerInitCBI(player_t *p)
    tab->children = DList_Create();
    
    {
-      cbi_node_t *tab1 = CBI_NodeAlloc(0, 0, 0, 0);
+      cbi_node_t *tab1 = CBI_NodeAlloc();
       tab1->children = DList_Create();
       
       CBI_InsertNode(tab1->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 40, "Comp/Brain OS ver. 1"));
@@ -44,7 +52,7 @@ void Lith_PlayerInitCBI(player_t *p)
    }
    
    {
-      cbi_node_t *tab2 = CBI_NodeAlloc(0, 0, 0, 0);
+      cbi_node_t *tab2 = CBI_NodeAlloc();
       tab2->children = DList_Create();
       
       CBI_InsertNode(tab2->children, CBI_TextAlloc(0, 0, 20, 50, "\CjSome text here"));
@@ -79,8 +87,14 @@ void Lith_PlayerUpdateCBI(player_t *p)
       
       CBI_NodeUpdateList(cbi->ui, p, cbi->cur);
       
+      int click = 0;
       if(ButtonPressed(p, BT_ATTACK))
-         if(!CBI_NodeClickList(cbi->ui, p, cbi->cur))
+         click = 2;
+      else if(ButtonPressed(p, BT_ALTATTACK))
+         click = 1;
+      
+      if(click)
+         if(!CBI_NodeClickList(cbi->ui, p, cbi->cur, click == 2))
             ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
    }
 }

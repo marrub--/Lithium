@@ -7,8 +7,9 @@
 
 typedef int (*cbi_drawfunc_t)(struct cbi_node_s *, int);
 typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s);
-typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s);
-typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *) [[__call("ScriptI")]];
+typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s, bool);
+typedef void (*cbi_holdfunc_t)(struct cbi_node_s *, struct player_s *, struct cursor_s, bool);
+typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
 
 typedef struct cbi_node_s
 {
@@ -19,6 +20,7 @@ typedef struct cbi_node_s
    cbi_drawfunc_t Draw;
    cbi_updatefunc_t Update;
    cbi_clickfunc_t Click;
+   cbi_holdfunc_t Hold;
    
    struct dlist_s *children;
 } cbi_node_t;
@@ -99,11 +101,12 @@ enum
 
 int CBI_NodeDrawList(struct dlist_s *list, int id);
 void CBI_NodeUpdateList(struct dlist_s *list, player_t *p, struct cursor_s cur);
-bool CBI_NodeClickList(struct dlist_s *list, player_t *p, struct cursor_s cur);
+bool CBI_NodeClickList(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
 
 //
 // cbi_node_t
 
+[[__optional_args(4)]]
 cbi_node_t *CBI_NodeAlloc(int flags, int id, int x, int y);
 
 //

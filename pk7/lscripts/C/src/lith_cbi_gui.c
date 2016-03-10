@@ -41,17 +41,15 @@ void CBI_NodeUpdateList(dlist_t *list, player_t *p, struct cursor_s cur)
    }
 }
 
-bool CBI_NodeClickList(dlist_t *list, player_t *p, struct cursor_s cur)
+bool CBI_NodeClickList(dlist_t *list, player_t *p, struct cursor_s cur, bool left)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
       cbi_node_t *node = rover->data.vp;
       
       if(node->visible && node->Click)
-         if(node->Click(node, p, cur))
-         {
+         if(node->Click(node, p, cur, left))
             return true;
-         }
    }
    
    return false;
@@ -75,10 +73,10 @@ void CBI_NodeUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
       CBI_NodeUpdateList(node->children, p, cur);
 }
 
-bool CBI_NodeClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
+bool CBI_NodeClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
    if(node->children)
-      return CBI_NodeClickList(node->children, p, cur);
+      return CBI_NodeClickList(node->children, p, cur, left);
    
    return false;
 }
@@ -227,25 +225,30 @@ void CBI_ButtonUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
       button->hover = true;
 }
 
-bool CBI_ButtonClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
+bool CBI_ButtonClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
    cbi_button_t *button = (cbi_button_t *)node;
    cbi_node_t *node = &button->node;
    
-   if(CBI_NodeClick(node, p, cur))
+   if(CBI_NodeClick(node, p, cur, left))
       return true;
    
    if(cur.x >= node->x + 48 || cur.y >= node->y + 16 ||
       cur.x < node->x || cur.y < node->y)
       return false;
    
-   button->clicked = 5;
-   ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-   
+   // TODO: this could possibly cause data race conditions, go ask david
+   bool ret = false;
    if(button->Event)
-      button->Event(button, p);
+      button->Event(button, p, left, &ret);
    
-   return true;
+   if(ret)
+   {
+      button->clicked = 5;
+      ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+   }
+   
+   return ret;
 }
 
 cbi_node_t *CBI_ButtonAlloc(int flags, int id, int x, int y, cbi_buttonevent_t event, __str label)
@@ -327,13 +330,16 @@ void CBI_TabUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
    CBI_NodeUpdate(node, p, cur);
 }
 
-bool CBI_TabClick(cbi_node_t *node, player_t *p, struct cursor_s cur)
+bool CBI_TabClick(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
    cbi_tab_t *tab = (cbi_tab_t *)node;
    cbi_node_t *node = &tab->node;
    
-   if(CBI_NodeClick(node, p, cur))
+   if(CBI_NodeClick(node, p, cur, left))
       return true;
+   
+   if(!left)
+      return false;
    
    for(int i = 0; i < tab->ntabs; i++)
    {
