@@ -26,26 +26,37 @@ actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
       MISD A 1 { A_Raise; A_Raise; }
       loop
    Fire:
-      MISD A 0 {
+      MISD A 0
+      {
          if(CountInv("Lith_RocketLauncherHand"))
-         {  A_TakeInventory("Lith_RocketLauncherHand", 1);
-            return state("User2"); }
+         {
+            A_TakeInventory("Lith_RocketLauncherHand", 1);
+            return state("User2");
+         }
          else
-         {  A_GiveInventory("Lith_RocketLauncherHand", 1);
-            return state("User1"); }
+         {
+            A_GiveInventory("Lith_RocketLauncherHand", 1);
+            return state("User1");
+         }
       }
    User1:
       MISD A 1 A_WeaponReady(LITH_BOBONLY)
-      MISD F 2 bright {
+      MISD F 2 bright
+      {
          A_WeaponReady(LITH_BOBONLY);
-         A_FireCustomMissile("Lith_HomingRocket", 0, true, -5, -2); }
+         A_FireCustomMissile("Lith_HomingRocket", 0, true, -5, -2);
+         A_PlaySound("weapons/rocket/firer", 6);
+      }
       MISD GHI 3 bright A_WeaponReady(LITH_BOBONLY)
       goto FireDone
    User2:
       MISD A 1 A_WeaponReady(LITH_BOBONLY)
-      MISD B 2 bright {
+      MISD B 2 bright
+      {
          A_WeaponReady(LITH_BOBONLY);
-         A_FireCustomMissile("Lith_Rocket", 0, true, 5, -2); }
+         A_FireCustomMissile("Lith_Rocket", 0, true, 5, -2);
+         A_PlaySound("weapons/rocket/firel", 7);
+      }
       MISD CDE 3 bright A_WeaponReady(LITH_BOBONLY)
       goto FireDone
    FireDone:

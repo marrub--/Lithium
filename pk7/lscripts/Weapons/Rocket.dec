@@ -5,7 +5,6 @@ actor Lith_Rocket
    Height 4
    Speed 40
    Damage (60)
-   SeeSound "weapons/rocket/firel"
    DeathSound "weapons/rocklx"
    
    Projectile
@@ -29,7 +28,6 @@ actor Lith_HomingRocket : Lith_Rocket
 {
    Speed 35
    Damage (40)
-   SeeSound "weapons/rocket/firer"
    
    +SEEKERMISSILE
    
