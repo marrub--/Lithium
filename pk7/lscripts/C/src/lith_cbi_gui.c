@@ -3,6 +3,7 @@
 #include "lith_hudid.h"
 #include "lith_list.h"
 #include "lith_cbi_gui.h"
+#include <math.h>
 
 // ---------------------------------------------------------------------------
 // Node Functions.
@@ -67,6 +68,25 @@ bool CBI_NodeListHold(dlist_t *list, player_t *p, struct cursor_s cur, bool left
    }
    
    return false;
+}
+
+cbi_node_t *CBI_NodeListGetByID(dlist_t *list, int id)
+{
+   for(slist_t *rover = list->head; rover; rover = rover->next)
+   {
+      cbi_node_t *node = rover->data.vp;
+      
+      if(node->id == id)
+         return node;
+      else if(node->children)
+      {
+         cbi_node_t *n = CBI_NodeListGetByID(node->children, id);
+         if(n)
+            return n;
+      }
+   }
+   
+   return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -401,6 +421,19 @@ cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names)
 // cbi_slider_t
 //
 
+float CBI_SliderGetValue(cbi_node_t *node)
+{
+   cbi_slider_t *slider = (cbi_slider_t *)node;
+   return slider->pos * slider->max + slider->min;
+}
+
+void CBI_SliderSetPos(cbi_node_t *node, float val)
+{
+   cbi_slider_t *slider = (cbi_slider_t *)node;
+   slider->pos = val;
+   ACS_LocalAmbientSound("player/cbi/slidertick", 50);
+}
+
 int CBI_SliderDraw(cbi_node_t *node, int id)
 {
    cbi_slider_t *slider = (cbi_slider_t *)node;
@@ -408,31 +441,71 @@ int CBI_SliderDraw(cbi_node_t *node, int id)
    int ret = 0;
    
    DrawSpritePlain("H_Z5", id, 0.1 + node->x + 2, 0.1 + node->y + 3, TICSECOND);
-   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 4 + (int)(60 * slider->pos), 0.1 + node->y + 1, TICSECOND);
+   DrawSpritePlain("H_Z6", id - 1, 0.1 + node->x + 3 + (int)(58 * slider->pos), 0.1 + node->y + 1, TICSECOND);
    
-   HudMessageF("CBIFONT", "%.2k", (fixed)slider->pos);
+   if(slider->type == SLDTYPE_INT)
+      HudMessageF("CBIFONT", "%i", (int)CBI_SliderGetValue(node));
+   else if(slider->type == SLDTYPE_FIXED)
+      HudMessageF("CBIFONT", "%.2k", (fixed)CBI_SliderGetValue(node));
+   
    HudMessagePlain(id - 2, 0.1 + node->x + 64 + 4, node->y + 4, TICSECOND);
    ret += 3;
    id -= 3;
+   
+   if(slider->label)
+   {
+      HudMessageF("CBIFONT", "\Ct%S", slider->label);
+      HudMessageParams(HUDMSG_ALPHA,
+         id,
+         CR_UNTRANSLATED,
+         node->x + (64 / 2),
+         node->y + (8 / 2),
+         TICSECOND, 0.6);
+      ret++;
+      id--;
+   }
    
    ret += CBI_NodeDraw(node, id);
    return ret;
 }
 
-float CBI_SliderGetValue(cbi_node_t *node)
+bool CBI_SliderHold(cbi_node_t *node, player_t *p, struct cursor_s cur, bool left)
 {
    cbi_slider_t *slider = (cbi_slider_t *)node;
-   return slider->pos * slider->max + slider->min;
+   cbi_node_t *node = &slider->node;
+   
+   if(CBI_NodeClick(node, p, cur, left))
+      return true;
+   
+   if(!left)
+      return false;
+   
+   if(cur.x >= node->x     && cur.x <= node->x + 64 &&
+      cur.y >= node->y + 2 && cur.y <= node->y + 8)
+   {
+      float val = minmax(cur.x - (node->x + 2), 0, 60) / 60.0f;
+      val = roundf(val * 1000.0f) / 1000.0f;
+      
+      if(slider->pos != val)
+         CBI_SliderSetPos(node, val);
+      
+      return true;
+   }
+   
+   return false;
 }
 
-cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min, float max, float value)
+cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type,
+   float min, float max, float value, __str label)
 {
    cbi_slider_t *node = calloc(1, sizeof(cbi_slider_t));
    
+   node->label = label;
    node->type = type;
    node->min = min;
    node->max = max;
    node->pos = normf(value, node->min, node->max);
+   node->pos = roundf(node->pos * 1000.0f) / 1000.0f;
    node->node.visible = !(flags & SLDAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;
@@ -440,7 +513,7 @@ cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min
    node->node.Draw = CBI_SliderDraw;
    node->node.Update = CBI_NodeUpdate;
    node->node.Click = CBI_NodeClick;
-   node->node.Hold = CBI_NodeHold;
+   node->node.Hold = CBI_SliderHold;
    
    return &node->node;
 }

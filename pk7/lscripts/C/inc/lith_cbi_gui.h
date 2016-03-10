@@ -65,6 +65,7 @@ typedef struct cbi_slider_s
    cbi_node_t node;
    int type;
    float pos, min, max;
+   __str label;
 } cbi_slider_t;
 
 //
@@ -114,14 +115,14 @@ enum
 enum
 {
    SLDTYPE_INT = 0,
-   SLDTYPE_FIXED = 1,
-   SLDTYPE_FLOAT = 2
+   SLDTYPE_FIXED = 1
 };
 
 int CBI_NodeListDraw(struct dlist_s *list, int id);
 void CBI_NodeListUpdate(struct dlist_s *list, player_t *p, struct cursor_s cur);
 bool CBI_NodeListClick(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
 bool CBI_NodeListHold(struct dlist_s *list, player_t *p, struct cursor_s cur, bool left);
+cbi_node_t *CBI_NodeListGetByID(struct dlist_s *list, int id);
 
 //
 // cbi_node_t
@@ -155,8 +156,10 @@ cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names);
 //
 // cbi_slider_t
 
-[[__optional_args(1)]]
-cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type, float min, float max, float value);
+float CBI_SliderGetValue(cbi_node_t *node);
+[[__optional_args(2)]]
+cbi_node_t *CBI_SliderAlloc(int flags, int id, int x, int y, int type,
+   float min, float max, float value, __str label);
 
 //
 // ---------------------------------------------------------------------------

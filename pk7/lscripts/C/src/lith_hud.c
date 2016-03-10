@@ -12,7 +12,7 @@
 void Lith_RenderHUDWaves(player_t *p)
 {
    fixed health = (fixed)p->health / (fixed)p->maxhealth;
-   int frame = min(health * 4.0, 4.0) + 1.0;
+   int frame = minmax(health * 4, 1, 5);
    int timer = ACS_Timer();
    int pos;
    
