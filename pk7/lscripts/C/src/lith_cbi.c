@@ -17,6 +17,12 @@ enum
    uid_stats_score,
    uid_stats_scoresum,
    uid_stats_scoreused,
+   uid_stats_healthsum,
+   uid_stats_healthused,
+   uid_stats_armorsum,
+   uid_stats_armorused,
+   uid_stats_weaponsheld,
+   uid_stats_secretsfound,
    uid_stats_end,
    
    uid_stats_start = uid_stats_health,
@@ -30,12 +36,18 @@ void Menu_Stats_GenericText(cbi_text_t *text, player_t *p)
    
    switch(node->id)
    {
-   case uid_stats_name:      text->text = StrParam("\Cj%S", p->name); break;
-   case uid_stats_health:    text->text = StrParam("Health: %i", p->health); break;
-   case uid_stats_armor:     text->text = StrParam("Armor: %i", p->armor); break;
-   case uid_stats_score:     text->text = StrParam("Score: %lli", p->score); break;
-   case uid_stats_scoresum:  text->text = StrParam("Score Sum: %lli", p->scoresum); break;
-   case uid_stats_scoreused: text->text = StrParam("Score Used: %lli", p->scoreused); break;
+   case uid_stats_name:         text->text = StrParam("\Cj%S",             p->name);         break;
+   case uid_stats_health:       text->text = StrParam("Health: %i",        p->health);       break;
+   case uid_stats_armor:        text->text = StrParam("Armor: %i",         p->armor);        break;
+   case uid_stats_score:        text->text = StrParam("Score: %lli",       p->score);        break;
+   case uid_stats_scoresum:     text->text = StrParam("Score Sum: %lli",   p->scoresum);     break;
+   case uid_stats_scoreused:    text->text = StrParam("Score Used: %lli",  p->scoreused);    break;
+   case uid_stats_healthsum:    text->text = StrParam("Health Sum: %li",   p->healthsum);    break;
+   case uid_stats_healthused:   text->text = StrParam("Health Used: %li",  p->healthused);   break;
+   case uid_stats_armorsum:     text->text = StrParam("Armor Sum: %li",    p->armorsum);     break;
+   case uid_stats_armorused:    text->text = StrParam("Armor Used: %li",   p->armorused);    break;
+   case uid_stats_weaponsheld:  text->text = StrParam("Weapons Held: %i",  p->weaponsheld);  break; 
+   case uid_stats_secretsfound: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
    }
 }
 

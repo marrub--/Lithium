@@ -243,10 +243,12 @@ void Lith_GiveSecretScore(int playernum, int mul)
 {
    [[__call("ScriptS"), __extern("ACS")]]
    extern void Lith_UpdateScore();
+   player_t *p = &players[playernum];
    
-   ACS_SetActivator(players[playernum].tid);
+   ACS_SetActivator(p->tid);
    ACS_GiveInventory("Lith_ScoreCount", 9000 * mul);
    Lith_UpdateScore();
+   p->secretsfound++;
 }
 
 [[__call("ScriptI")]]
@@ -278,6 +280,21 @@ void Lith_PlayerScore(player_t *p)
       p->scoreaccumtime--;
    else if(p->scoreaccumtime < 0)
       p->scoreaccumtime++;
+}
+
+[[__call("ScriptI")]]
+static
+void Lith_PlayerStats(player_t *p)
+{
+   if(p->health < p->prevhealth)
+      p->healthused += p->prevhealth - p->health;
+   else if(p->health > p->prevhealth && ACS_Timer() != 1)
+      p->healthsum += p->health - p->prevhealth;
+   
+   if(p->armor < p->prevarmor)
+      p->armorused += p->prevarmor - p->armor;
+   else if(p->armor > p->prevarmor && ACS_Timer() != 1)
+      p->armorsum += p->armor - p->prevarmor;
 }
 
 //
@@ -347,7 +364,9 @@ void Lith_Player()
       
       p->health = ACS_GetActorProperty(0, APROP_Health);
       p->armor = ACS_CheckInventory("BasicArmor");
-      score_t curscore = p->score; // This can be changed any time, so save it here
+      
+      // This can be changed any time during script / playsim run, so save it here
+      score_t curscore = p->score;
       
       // Type / class
       p->weaponclass = ACS_GetWeapon();
@@ -356,7 +375,7 @@ void Lith_Player()
       Lith_GetWeaponType(p);
       Lith_GetArmorType(p);
       
-      // Misc. / inventory
+      // Inventory
       p->berserk = ACS_CheckInventory("PowerStrength");
       p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
          ACS_CheckInventory("Lith_PistolScopedToken");
@@ -372,6 +391,7 @@ void Lith_Player()
       // Run scripts
       
       // -- Logic
+      Lith_PlayerStats(p);
       Lith_PlayerScore(p);
       Lith_PlayerDamageBob(p);
       

@@ -47,14 +47,9 @@ typedef long long int score_t;
 
 typedef struct player_s
 {
-   // Static
-   int maxhealth;
-   
-   // Set every map
-   int tid;
-   
    // Status data
    bool active;
+   int tid;
    
    fixed x, y, z;
    fixed velx, vely, velz;
@@ -65,17 +60,31 @@ typedef struct player_s
    fixed forwardv, sidev, upv;
    int buttons;
    
+   int maxhealth;
    int health;
    int armor;
    
+   // Score
    score_t score;
-   score_t scoresum;
-   score_t scoreused;
    score_t scoreaccum;
    int scoreaccumtime;
    
+   // CBI
    cbi_t cbi;
    bip_t bip;
+   
+   // Statistics
+   int weaponsheld;
+   int secretsfound;
+   
+   long healthsum;
+   long healthused;
+   
+   long armorsum;
+   long armorused;
+   
+   score_t scoresum;
+   score_t scoreused;
    
    // Type / class
    __str name;
@@ -100,22 +109,24 @@ typedef struct player_s
    float bobpitch;
    float bobyaw;
    
-   // Misc. / inventory
+   // Weapons
    bool scopetoken;
    bool lastscopetoken;
    int riflefiremode;
+   struct dlist_s *hudstrstack;
    
+   // Inventory
    bool berserk;
    int weapons;
    int keys;
    
+   // Movement
    int slidecharge;
    int rocketcharge;
    bool leaped;
    
+   // Miscellaneous
    int frozen;
-   
-   struct dlist_s *hudstrstack;
 } player_t;
 
 extern player_t players[MAX_PLAYERS];

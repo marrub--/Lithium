@@ -22,6 +22,10 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       [weapon_bfg9000] = "weapons/cannon/pickup"
    };
    
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   p->weaponsheld++;
+   
    ACS_Thing_Remove(user_spritetid);
    ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
    
