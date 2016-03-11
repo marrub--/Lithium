@@ -27,7 +27,7 @@ actor Lith_Rocket
 actor Lith_HomingRocket : Lith_Rocket
 {
    Speed 35
-   Damage (40)
+   Damage (45)
    
    +SEEKERMISSILE
    

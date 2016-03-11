@@ -47,7 +47,8 @@ actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
          A_FireCustomMissile("Lith_HomingRocket", 0, true, -5, -2);
          A_PlaySound("weapons/rocket/firer", 6);
       }
-      MISD GHI 3 bright A_WeaponReady(LITH_BOBONLY)
+      MISD GH 3 bright A_WeaponReady(LITH_BOBONLY)
+      MISD I 2 bright A_WeaponReady(LITH_BOBONLY)
       goto FireDone
    User2:
       MISD A 1 A_WeaponReady(LITH_BOBONLY)
@@ -57,7 +58,8 @@ actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
          A_FireCustomMissile("Lith_Rocket", 0, true, 5, -2);
          A_PlaySound("weapons/rocket/firel", 7);
       }
-      MISD CDE 3 bright A_WeaponReady(LITH_BOBONLY)
+      MISD CD 3 bright A_WeaponReady(LITH_BOBONLY)
+      MISD E 2 bright A_WeaponReady(LITH_BOBONLY)
       goto FireDone
    FireDone:
       MISD A 0 A_ReFire
