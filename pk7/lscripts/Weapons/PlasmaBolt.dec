@@ -11,14 +11,11 @@ actor Lith_PlasmaBoltTrail
    Spawn:
       TNT1 A 0
       TNT1 A 0 { return state("Particles"); }
-      
    SpawnPick:
       TNT1 A 0 A_Jump(256, "SpawnA", "SpawnB")
-      
    SpawnA:
       PBAL A 1 bright
       stop
-      
    SpawnB:
       PBAL B 1 bright
       stop
@@ -32,7 +29,6 @@ actor Lith_PlasmaBoltTrail_Green : Lith_PlasmaBoltTrail
    Particles:
       TNT1 A 0 A_SpawnParticle(Green, SPF_FULLBRIGHT, 6, 2, 0,
          0, 0, 0,
-         
          frandom[Lith_PlasmaBolt](-2, 2),
          frandom[Lith_PlasmaBolt](-2, 2),
          frandom[Lith_PlasmaBolt](-2, 2))
@@ -49,7 +45,6 @@ actor Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail
    Particles:
       TNT1 A 0 A_SpawnParticle(Red, SPF_FULLBRIGHT, 6, 2, 0,
          0, 0, 0,
-         
          frandom[Lith_PlasmaBolt](-2, 2),
          frandom[Lith_PlasmaBolt](-2, 2),
          frandom[Lith_PlasmaBolt](-2, 2))
