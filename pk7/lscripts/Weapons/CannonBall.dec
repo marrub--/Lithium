@@ -1,22 +1,22 @@
 actor Lith_CannonBall
 {
    // Some actor properties taken from Error: Doom
-	Radius 51
-	Height 32
-	Scale 3.5
-	Damage (80)
-	Speed 42
-	Gravity 0.55
-	BounceType Doom
+   Radius 51
+   Height 32
+   Scale 3.5
+   Damage (80)
+   Speed 42
+   Gravity 0.55
+   BounceType Doom
    DamageType "PlayerMissile"
    SeeSound "weapons/cannon/fire"
    DeathSound "weapons/cannon/explode"
    
-	Projectile
-	+RIPPER
+   Projectile
+   +RIPPER
    +BOUNCEONACTORS
    +BOUNCEAUTOOFFFLOORONLY
-	-NOGRAVITY
+   -NOGRAVITY
    
    var int user_angle;
    
@@ -49,10 +49,10 @@ actor Lith_CannonBall
 
 actor Lith_SmallCannonBall : Lith_CannonBall
 {
-	Radius 29
-	Height 16
+   Radius 29
+   Height 16
    Scale 2
-	Damage (40)
+   Damage (40)
    
    states
    {
