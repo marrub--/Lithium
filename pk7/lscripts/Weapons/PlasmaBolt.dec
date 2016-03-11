@@ -57,7 +57,7 @@ actor Lith_PlasmaBolt
    Radius 12
    Height 12
    Speed 55
-   Damage (9)
+   Damage (10)
    DamageType "Plasma"
    
    Projectile
@@ -109,8 +109,8 @@ actor Lith_PlasmaBolt
 
 actor Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
 {
-   Damage (12)
-   Speed 40
+   Damage (7)
+   Speed 47
    
    +RIPPER
    
