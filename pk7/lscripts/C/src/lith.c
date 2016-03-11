@@ -343,6 +343,7 @@ void Lith_Player()
       p->floorz = ACS_GetActorFloorZ(0);
       p->buttons = ACS_GetPlayerInput(0, INPUT_BUTTONS);
       p->oldbuttons = ACS_GetPlayerInput(0, INPUT_OLDBUTTONS);
+      p->name = StrParam("%tS", 0);
       
       p->health = ACS_GetActorProperty(0, APROP_Health);
       p->armor = ACS_CheckInventory("BasicArmor");
@@ -361,9 +362,12 @@ void Lith_Player()
          ACS_CheckInventory("Lith_PistolScopedToken");
       
       p->keys = 0;
-      p->keys |= ACS_CheckInventory("RedCard")    << key_red_bit;
-      p->keys |= ACS_CheckInventory("YellowCard") << key_yellow_bit;
-      p->keys |= ACS_CheckInventory("BlueCard")   << key_blue_bit;
+      p->keys |= ACS_CheckInventory("RedCard")     << key_red_bit;
+      p->keys |= ACS_CheckInventory("YellowCard")  << key_yellow_bit;
+      p->keys |= ACS_CheckInventory("BlueCard")    << key_blue_bit;
+      p->keys |= ACS_CheckInventory("RedSkull")    << key_redskull_bit;
+      p->keys |= ACS_CheckInventory("YellowSkull") << key_yellowskull_bit;
+      p->keys |= ACS_CheckInventory("BlueSkull")   << key_blueskull_bit;
       
       // Run scripts
       

@@ -107,6 +107,7 @@ void Lith_UpdateScore()
       ACS_LocalAmbientSound("player/score", minmax(score / 5000.0f, 0.1f, 1.0f) * 80);
    
    p->score += score;
+   p->scoresum += score;
    p->scoreaccum += score;
    p->scoreaccumtime = 35 * rmul;
    
@@ -144,6 +145,7 @@ bool Lith_FireScore(int amount)
    }
    
    p->score -= amount;
+   p->scoreused += amount;
    return false;
 }
 

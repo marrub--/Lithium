@@ -279,12 +279,18 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Keys
+   if(p->keys & key_redskull)
+      DrawSpritePlain("H_KS1", hid_key_redskull, 8.1, 144.1, 0.1);
+   if(p->keys & key_yellowskull)
+      DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
+   if(p->keys & key_blueskull)
+      DrawSpritePlain("H_KS3", hid_key_blueskull, 8.1, 160.1, 0.1);
    if(p->keys & key_red)
-      DrawSpritePlain("H_RKEY", hid_key_red, 0.1, 140.1, 0.1);
+      DrawSpritePlain("H_KC1", hid_key_red, 0.1, 140.1, 0.1);
    if(p->keys & key_yellow)
-      DrawSpritePlain("H_YKEY", hid_key_yellow, 0.1, 148.1, 0.1);
+      DrawSpritePlain("H_KC2", hid_key_yellow, 0.1, 148.1, 0.1);
    if(p->keys & key_blue)
-      DrawSpritePlain("H_BKEY", hid_key_blue, 0.1, 156.1, 0.1);
+      DrawSpritePlain("H_KC3", hid_key_blue, 0.1, 156.1, 0.1);
 }
 
 

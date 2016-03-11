@@ -8,70 +8,89 @@
 // Computer-Brain Interface (CBI) Scripts.
 //
 
+enum
+{
+   uid_none,
+   uid_stats_name,
+   uid_stats_health,
+   uid_stats_armor,
+   uid_stats_score,
+   uid_stats_scoresum,
+   uid_stats_scoreused,
+   uid_stats_end,
+   
+   uid_stats_start = uid_stats_health,
+};
+
 [[__call("ScriptI")]]
 static
-void Button_Generic(cbi_button_t *button, player_t *p, bool left, bool *ret)
+void Menu_Stats_GenericText(cbi_text_t *text, player_t *p)
 {
-   *ret = true;
+   cbi_node_t *node = &text->node;
    
-   if(!left)
+   switch(node->id)
    {
-      *ret = false;
-      return;
+   case uid_stats_name:      text->text = StrParam("\Cj%S", p->name); break;
+   case uid_stats_health:    text->text = StrParam("Health: %i", p->health); break;
+   case uid_stats_armor:     text->text = StrParam("Armor: %i", p->armor); break;
+   case uid_stats_score:     text->text = StrParam("Score: %lli", p->score); break;
+   case uid_stats_scoresum:  text->text = StrParam("Score Sum: %lli", p->scoresum); break;
+   case uid_stats_scoreused: text->text = StrParam("Score Used: %lli", p->scoreused); break;
+   }
+}
+
+static
+cbi_node_t *Menu_InitStatistics()
+{
+   cbi_node_t *tab = CBI_NodeAlloc();
+   tab->children = DList_Create();
+   
+   CBI_InsertNode(tab->children,
+      CBI_TextAlloc(0, uid_stats_name, 20, 30, null, "SMALLFNT", Menu_Stats_GenericText));
+   
+   for(int i = uid_stats_start; i < uid_stats_end; i++)
+   {
+      int ofs = 8 * (i - uid_stats_start);
+      CBI_InsertNode(tab->children, CBI_TextAlloc(0, i, 25, 40 + ofs, null, null, Menu_Stats_GenericText));
    }
    
-   ACS_Delay(10);
-   
-   cbi_node_t *healthslider = CBI_NodeListGetByID(p->cbi.ui, 16);
-   bool dbl = ((cbi_checkbox_t *)CBI_NodeListGetByID(p->cbi.ui, 17))->checked;
-   int value = CBI_SliderGetValue(healthslider);
-   
-   switch(button->node.id)
-   {
-   case 3: ACS_Thing_Damage2(0, 1000000000, "None"); break;
-   case 2: ACS_Thing_Damage2(0, value * (dbl ? 2 : 1), "None"); break;
-   case 1: ACS_SetActorProperty(0, APROP_Health, p->health + (value * (dbl ? 2 : 1))); break;
-   }
+   return tab;
 }
 
 [[__call("ScriptI")]]
 void Lith_PlayerInitCBI(player_t *p)
 {
-   register cbi_t *cbi = &p->cbi;
+   cbi_t *cbi = &p->cbi;
    
-   cbi->ui = DList_Create();
+   // Tab control
+   __str tabnames[] = {
+      "Statistics",
+      "Upgrades",
+      "BIP",
+      "Settings",
+      null
+   };
    
-   cbi_node_t *tab = CBI_TabAlloc(0, 0, 13, 13, (__str[]){ "Tab 1", "Empty Tab", null });
-   tab->children = DList_Create();
+   cbi_node_t *tabc = CBI_TabAlloc(0, 0, 13, 13, tabnames);
+   tabc->children = DList_Create();
    
-   {
-      cbi_node_t *tab1 = CBI_NodeAlloc();
-      tab1->children = DList_Create();
-      
-      CBI_InsertNode(tab1->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 40, "Comp/Brain OS ver. 1"));
-      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 2, 40, 80, Button_Generic, "Take Health"));
-      CBI_InsertNode(tab1->children, CBI_ButtonAlloc(0, 1, 40, 100, Button_Generic, "Give Health"));
-      CBI_InsertNode(tab1->children, CBI_TextAlloc(0, 0, 20, 50, "\CjThis is drawn after the buttons"));
-      CBI_InsertNode(tab1->children, CBI_SliderAlloc(0, 16, 40, 120, SLDTYPE_INT, 0, 9999, 100, "Health"));
-      CBI_InsertNode(tab1->children, CBI_CheckboxAlloc(0, 17, 40, 140, "Double", true));
-      
-      CBI_InsertNode(tab->children, tab1);
-   }
+   CBI_InsertNode(tabc->children, Menu_InitStatistics());
+   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
+   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
+   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
+   //CBI_InsertNode(tabc->children, Menu_InitUpgrades());
+   //CBI_InsertNode(tabc->children, Menu_InitBIP());
+   //CBI_InsertNode(tabc->children, Menu_InitSettings());
    
-   {
-      cbi_node_t *tab2 = CBI_NodeAlloc();
-      tab2->children = DList_Create();
-      
-      CBI_InsertNode(tab2->children, CBI_TextAlloc(0, 0, 20, 50, "\CjSome text here"));
-      CBI_InsertNode(tab2->children, CBI_ButtonAlloc(0, 3, 40, 60, Button_Generic, "Die"));
-      
-      CBI_InsertNode(tab->children, tab2);
-   }
-   
+   // Container
    cbi_node_t *container = CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, "H_Z1", 0.8);
    container->children = DList_Create();
    
-   CBI_InsertNode(container->children, tab);
+   CBI_InsertNode(container->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 175, "Comp/Brain OS ver. 1"));
+   CBI_InsertNode(container->children, tabc);
+   
+   // Main list
+   cbi->ui = DList_Create();
    CBI_InsertNode(cbi->ui, container);
    
    cbi->wasinit = true;

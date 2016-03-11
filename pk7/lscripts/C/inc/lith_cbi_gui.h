@@ -11,6 +11,8 @@ typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, struct c
 typedef cbi_clickfunc_t cbi_holdfunc_t;
 typedef void (*cbi_buttonevent_t)(struct cbi_button_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
 typedef void (*cbi_checkboxevent_t)(struct cbi_checkbox_s *, struct player_s *, bool, bool *) [[__call("ScriptI")]];
+typedef void (*cbi_textevent_t)(struct cbi_text_s *, struct player_s *) [[__call("ScriptI")]];
+typedef void (*cbi_spriteevent_t)(struct cbi_sprite_s *, struct player_s *) [[__call("ScriptI")]];
 
 typedef struct cbi_node_s
 {
@@ -32,6 +34,8 @@ typedef struct cbi_text_s
    __str text;
    __str font;
    bool rainbows;
+   
+   cbi_textevent_t Update;
 } cbi_text_t;
 
 typedef struct cbi_sprite_s
@@ -39,6 +43,8 @@ typedef struct cbi_sprite_s
    cbi_node_t node;
    __str name;
    fixed alpha;
+   
+   cbi_spriteevent_t Update;
 } cbi_sprite_t;
 
 typedef struct cbi_button_s
@@ -151,14 +157,14 @@ cbi_node_t *CBI_NodeAlloc(int flags, int id, int x, int y);
 //
 // cbi_text_t
 
-[[__optional_args(1)]]
-cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str font);
+[[__optional_args(2)]]
+cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str font, cbi_textevent_t update);
 
 //
 // cbi_sprite_t
 
-[[__optional_args(1)]]
-cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed alpha);
+[[__optional_args(2)]]
+cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed alpha, cbi_spriteevent_t update);
 
 //
 // cbi_button_t

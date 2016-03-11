@@ -29,12 +29,18 @@ enum
 
 enum
 {
-   key_red    = 1 << 0,
-   key_yellow = 1 << 1,
-   key_blue   = 1 << 2,
-   key_red_bit    = 0,
-   key_yellow_bit = 1,
-   key_blue_bit   = 2
+   key_red_bit         = 0,
+   key_yellow_bit      = 1,
+   key_blue_bit        = 2,
+   key_redskull_bit    = 3,
+   key_yellowskull_bit = 4,
+   key_blueskull_bit   = 5,
+   key_red         = 1 << key_red_bit,
+   key_yellow      = 1 << key_yellow_bit,
+   key_blue        = 1 << key_blue_bit,
+   key_redskull    = 1 << key_redskull_bit,
+   key_yellowskull = 1 << key_yellowskull_bit,
+   key_blueskull   = 1 << key_blueskull_bit,
 };
 
 typedef long long int score_t;
@@ -63,6 +69,8 @@ typedef struct player_s
    int armor;
    
    score_t score;
+   score_t scoresum;
+   score_t scoreused;
    score_t scoreaccum;
    int scoreaccumtime;
    
@@ -70,6 +78,8 @@ typedef struct player_s
    bip_t bip;
    
    // Type / class
+   __str name;
+   
    __str weaponclass;
    __str armorclass;
    

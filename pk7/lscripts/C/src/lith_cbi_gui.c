@@ -149,32 +149,47 @@ int CBI_TextDraw(cbi_node_t *node, int id)
    cbi_node_t *node = &text->node;
    int ret = 0;
    
-   // The most important check.
-   if(text->rainbows)
-      HudMessageRainbowsF(text->font, "%S", text->text);
-   else
-      HudMessageF(text->font, "%S", text->text);
-   
-   HudMessagePlain(id, 0.1 + node->x, 0.1 + node->y, TICSECOND);
-   ret++, id--;
+   if(text->text)
+   {
+      // The most important check.
+      if(text->rainbows)
+         HudMessageRainbowsF(text->font, "%S", text->text);
+      else
+         HudMessageF(text->font, "%S", text->text);
+      
+      HudMessagePlain(id, 0.1 + node->x, 0.1 + node->y, TICSECOND);
+      ret++, id--;
+   }
    
    ret += CBI_NodeDraw(node, id);
    return ret;
 }
 
-cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str font)
+void CBI_TextUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
+{
+   cbi_text_t *text = (cbi_text_t *)node;
+   cbi_node_t *node = &text->node;
+   
+   CBI_NodeUpdate(node, p, cur);
+   
+   if(text->Update)
+      text->Update(text, p);
+}
+
+cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, __str text, __str font, cbi_textevent_t update)
 {
    cbi_text_t *node = calloc(1, sizeof(cbi_text_t));
    
    node->text = text;
    node->font = font ? font : "CBIFONT";
    node->rainbows = flags & TXTAF_RAINBOWS;
+   node->Update = update;
    node->node.visible = !(flags & TXTAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;
    node->node.id = id;
    node->node.Draw = CBI_TextDraw;
-   node->node.Update = CBI_NodeUpdate;
+   node->node.Update = CBI_TextUpdate;
    node->node.Click = CBI_NodeClick;
    node->node.Hold = CBI_NodeHold;
    
@@ -198,18 +213,30 @@ int CBI_SpriteDraw(cbi_node_t *node, int id)
    return ret;
 }
 
-cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed alpha)
+void CBI_SpriteUpdate(cbi_node_t *node, player_t *p, struct cursor_s cur)
+{
+   cbi_sprite_t *sprite = (cbi_sprite_t *)node;
+   cbi_node_t *node = &sprite->node;
+   
+   CBI_NodeUpdate(node, p, cur);
+   
+   if(sprite->Update)
+      sprite->Update(sprite, p);
+}
+
+cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, __str name, fixed alpha, cbi_spriteevent_t update)
 {
    cbi_sprite_t *node = calloc(1, sizeof(cbi_sprite_t));
    
    node->name = name;
    node->alpha = (flags & SPRAF_ALPHA) ? alpha : 1.0;
+   node->Update = update;
    node->node.visible = !(flags & SPRAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;
    node->node.id = id;
    node->node.Draw = CBI_SpriteDraw;
-   node->node.Update = CBI_NodeUpdate;
+   node->node.Update = CBI_SpriteUpdate;
    node->node.Click = CBI_NodeClick;
    node->node.Hold = CBI_NodeHold;
    
@@ -400,7 +427,9 @@ cbi_node_t *CBI_TabAlloc(int flags, int id, int x, int y, __str *names)
    for(__str *p = names; *p; p++)
       node->ntabs++;
    
-   node->names = names;
+   node->names = malloc(sizeof(__str) * node->ntabs);
+   memcpy(node->names, names, sizeof(__str) * node->ntabs);
+   
    node->node.visible = !(flags & TABAF_NOTVISIBLE);
    node->node.x = x;
    node->node.y = y;

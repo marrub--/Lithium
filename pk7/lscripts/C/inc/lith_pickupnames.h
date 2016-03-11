@@ -33,6 +33,7 @@ pickups(weapon_supershotgun, {
    "Sbepru Shtetgenu",
    "Sugoi Shotgun-desu",
    "Soapy Shitgun",
+   "Super Famigun",
    null
 })
 
