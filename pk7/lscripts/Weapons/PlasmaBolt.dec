@@ -69,7 +69,8 @@ actor Lith_PlasmaBolt
    Spawn:
       TNT1 A 3
    Trail:
-      TNT1 A 0 {
+      TNT1 A 0
+      {
          if(user_trailstep >= 5)
          {
             A_SetUserVar(user_trailstep, 0);
@@ -99,10 +100,7 @@ actor Lith_PlasmaBolt
          frandom[Lith_PlasmaBolt](-5, 5),
          frandom[Lith_PlasmaBolt](-5, 5),
          frandom[Lith_PlasmaBolt](-5, 5))
-      TNT1 A 2 {
-         A_PlaySound("weapons/plasma/explode", CHAN_AUTO);
-         A_Explode(10, 32, 0);
-      }
+      TNT1 A 2 A_PlaySound("weapons/plasma/explode", CHAN_AUTO)
       stop
    }
 }
@@ -117,7 +115,8 @@ actor Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
    states
    {
    Trail:
-      TNT1 A 0 {
+      TNT1 A 0
+      {
          if(user_trailstep >= 10)
          {
             A_SetUserVar(user_trailstep, 0);
@@ -144,10 +143,7 @@ actor Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
          frandom[Lith_PlasmaBolt](-5, 5),
          frandom[Lith_PlasmaBolt](-5, 5),
          frandom[Lith_PlasmaBolt](-5, 5))
-      TNT1 A 2 {
-         A_PlaySound("weapons/plasma/explode", CHAN_AUTO);
-         A_Explode(30, 32, 0);
-      }
+      TNT1 A 2 A_PlaySound("weapons/plasma/explode", CHAN_AUTO)
       stop
    }
 }

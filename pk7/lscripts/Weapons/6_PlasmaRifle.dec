@@ -17,7 +17,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       PLSG A 1 { A_Raise; A_Raise; }
       loop
    Fire:
-      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 1700), "FireEmpty")
+      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 1750), "FireEmpty")
       PLSG AAAA 0 A_FireCustomMissile("Lith_PlasmaBolt",
          CallACS("Lith_CircleSpread", 5 * IFIX, 3 * IFIX, false) / FIX,
          0, 0, -9, 0,
@@ -29,7 +29,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       PLSG A 4 A_ReFire
       goto Ready
    AltFire:
-      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 3500), "FireEmpty")
+      PLSG A 0 A_JumpIf(CallACS("Lith_FireScore", 7000), "FireEmpty")
       PLSK A 1 offset(0, 37) bright
       {
          A_FireCustomMissile("Lith_PenetratingPlasmaBolt", 0, 0, 0, -9);
