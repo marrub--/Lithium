@@ -8,6 +8,7 @@ actor Lith_ShotgunScopedToken : Inventory
 actor Lith_Shotgun : Lith_Weapon replaces Shotgun
 {
    Tag "Shotgun"
+   Weapon.UpSound "weapons/shotgun/draw"
    Weapon.SlotNumber 3
    
    +WEAPON.NOAUTOFIRE
@@ -27,13 +28,15 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
          A_ZoomFactor(1.0);
       }
    DeselectLoop:
-      PKSG A 1 { A_Lower; A_Lower; }
+      PKSG AAA 0 A_Lower
+      PKSG A 1
       loop
    Select:
       // fuck youuuuuuuuuuuuuuuuuuuuuuuuuuuuu
       PKSG A 0 A_ZoomFactor(1.0)
    SelectLoop:
-      PKSG A 1 { A_Raise; A_Raise; }
+      PKSG AAA 0 A_Raise
+      PKSG A 1
       loop
    Fire:
       TNT1 A 0

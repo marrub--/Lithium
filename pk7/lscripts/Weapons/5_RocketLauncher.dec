@@ -8,6 +8,7 @@ actor Lith_RocketLauncherHand : Inventory
 actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
 {
    Tag "Dual Rocket Launchers"
+   Weapon.UpSound "weapons/rocket/draw"
    Weapon.SlotNumber 5
    Weapon.BobStyle Smooth
    Weapon.BobSpeed 1.3
@@ -20,10 +21,12 @@ actor Lith_RocketLauncher : Lith_Weapon replaces RocketLauncher
       MISD A 1 A_WeaponReady(WRF_ALLOWUSER1 | WRF_ALLOWUSER2)
       wait
    Deselect:
-      MISD A 1 { A_Lower; A_Lower; }
+      MISD AAA 0 A_Lower
+      MISD A 1
       loop
    Select:
-      MISD A 1 { A_Raise; A_Raise; }
+      MISD AAA 0 A_Raise
+      MISD A 1
       loop
    Fire:
       MISD A 0

@@ -136,6 +136,7 @@ actor Lith_Weapon : Weapon
    Inventory.PickupMessage ""
    
    +NOGRAVITY
+   +INVENTORY.UNTOSSABLE // Now needed so statistics don't fuck up.
    
    var int user_glowangle;
    var int user_glowzangle;

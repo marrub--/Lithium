@@ -16,7 +16,8 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    Weapon.SlotNumber 2
    Weapon.BobSpeed 3
    Weapon.BobRangeX 0.2
-   Weapon.BobRangeY 0.1
+   Weapon.BobRangeY 0.3
+   Weapon.UpSound "weapons/pistol/draw"
    
    +WEAPON.NOAUTOFIRE
    
@@ -39,15 +40,17 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
          A_ZoomFactor(1.0);
       }
    DeselectLoop:
-      PISG A 1 { A_Lower; A_Lower; }
+      PISG AAA 0 A_Lower
+      PISG A 1
       loop
    Select:
       // fuck youuuuuuuuuuuuuuuuuuuuuuuuuuuuu
       PISG A 0 A_ZoomFactor(1.0)
    SelectLoop:
-      PISG A 1 { A_Raise; A_Raise; }
+      PISG AAA 0 A_Raise
+      PISG A 1
       loop
-   User1:
+   Fire:
       TNT1 A 0
       {
          if(CountInv("Lith_PistolShotsFired") == loadmax)
@@ -58,7 +61,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
          A_FireBullets(0, 0, -1, 20, "BulletPuff", FBF_NORANDOM);
          return state("FireChecks");
       }
-   Fire:
+   User1:
       TNT1 A 0
       {
          if(CountInv("Lith_PistolShotsFired") == loadmax)

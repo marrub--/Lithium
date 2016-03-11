@@ -1,7 +1,7 @@
 actor Lith_Player : DoomPlayer
 {
    Player.StartItem "Lith_Pistol"
-   Player.StartItem "Fist"
+   Player.StartItem "Lith_Fist"
    DamageFactor PlayerMissile, 0
    Species "Lith_Player"
 }

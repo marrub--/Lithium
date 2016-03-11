@@ -9,6 +9,7 @@ actor Lith_RifleBurstIter : Inventory
 actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
 {
    Tag "Combat Rifle"
+   Weapon.UpSound "weapons/rifle/draw"
    Weapon.SlotNumber 4
    
    +WEAPON.NOAUTOFIRE
@@ -24,12 +25,14 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    Deselect:
       CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
    DeselectLoop:
-      CRIF A 1 { A_Lower; A_Lower; }
+      CRIF AAA 0 A_Lower
+      CRIF A 1
       loop
    Select:
       CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
    SelectLoop:
-      CRIF A 1 { A_Raise; A_Raise; }
+      CRIF AAA 0 A_Raise
+      CRIF A 1
       loop
    Fire:
       CRIF A 0 A_JumpIf(CallACS("Lith_GetRifleFiremode") == rifle_firemode_burst,   "FireBurst")
