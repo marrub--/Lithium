@@ -101,6 +101,7 @@ __str StrUpper(__str in);
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 float normf(float x, float min, float max);
+bool bpcldi(int x, int y, int z, int w, int x2, int y2);
 
 // Constants
 static float const pi  = 3.14159265358979323846f;

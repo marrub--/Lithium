@@ -22,6 +22,8 @@ typedef struct cbi_s
    bool open;
 } cbi_t;
 
+typedef struct cursor_s cursor_t;
+
 [[__call("ScriptI")]]
 void Lith_PlayerInitCBI(struct player_s *p);
 

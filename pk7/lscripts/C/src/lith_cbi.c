@@ -8,65 +8,25 @@
 // Computer-Brain Interface (CBI) Scripts.
 //
 
-enum
-{
-   uid_none,
-   uid_stats_name,
-   uid_stats_health,
-   uid_stats_armor,
-   uid_stats_score,
-   uid_stats_scoresum,
-   uid_stats_scoreused,
-   uid_stats_healthsum,
-   uid_stats_healthused,
-   uid_stats_armorsum,
-   uid_stats_armorused,
-   uid_stats_weaponsheld,
-   uid_stats_secretsfound,
-   uid_stats_end,
-   
-   uid_stats_start = uid_stats_health,
-};
-
-[[__call("ScriptI")]]
 static
-void Menu_Stats_GenericText(cbi_text_t *text, player_t *p)
+void Menu_TextUpdateFunc(cbi_node_t *node, player_t *p, cursor_t cur)
 {
+   cbi_text_t *text = (cbi_text_t *)node;
    cbi_node_t *node = &text->node;
    
-   switch(node->id)
-   {
-   case uid_stats_name:         text->text = StrParam("\Cj%S",             p->name);         break;
-   case uid_stats_health:       text->text = StrParam("Health: %i",        p->health);       break;
-   case uid_stats_armor:        text->text = StrParam("Armor: %i",         p->armor);        break;
-   case uid_stats_score:        text->text = StrParam("Score: %lli",       p->score);        break;
-   case uid_stats_scoresum:     text->text = StrParam("Score Sum: %lli",   p->scoresum);     break;
-   case uid_stats_scoreused:    text->text = StrParam("Score Used: %lli",  p->scoreused);    break;
-   case uid_stats_healthsum:    text->text = StrParam("Health Sum: %li",   p->healthsum);    break;
-   case uid_stats_healthused:   text->text = StrParam("Health Used: %li",  p->healthused);   break;
-   case uid_stats_armorsum:     text->text = StrParam("Armor Sum: %li",    p->armorsum);     break;
-   case uid_stats_armorused:    text->text = StrParam("Armor Used: %li",   p->armorused);    break;
-   case uid_stats_weaponsheld:  text->text = StrParam("Weapons Held: %i",  p->weaponsheld);  break; 
-   case uid_stats_secretsfound: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
-   }
+   text->text = StrParam("yay it works %i", ACS_Timer());
 }
 
 static
-cbi_node_t *Menu_InitStatistics()
+bool Menu_ButtonClickFunc(cbi_node_t *node, player_t *p, cursor_t cur, bool left)
 {
-   cbi_node_t *tab = CBI_NodeAlloc();
-   tab->children = DList_Create();
+   cbi_button_t *button = (cbi_button_t *)node;
+   cbi_node_t *node = &button->node;
    
-   CBI_InsertNode(tab->children,
-      CBI_TextAlloc(0, uid_stats_name, 20, 30, null, "SMALLFNT", Menu_Stats_GenericText));
+   if(left && bpcldi(node->x, node->y, node->x + CBI_BUTTON_W, node->y + CBI_BUTTON_H, cur.x, cur.y))
+      Log("yay it works");
    
-   for(int i = uid_stats_start; i < uid_stats_end; i++)
-   {
-      int ofs = 8 * (i - uid_stats_start);
-      CBI_InsertNode(tab->children, CBI_TextAlloc(0, i, 25, 40 + ofs, null, null, Menu_Stats_GenericText));
-   }
-   
-   return tab;
+   return false;
 }
 
 [[__call("ScriptI")]]
@@ -74,36 +34,20 @@ void Lith_PlayerInitCBI(player_t *p)
 {
    cbi_t *cbi = &p->cbi;
    
-   // Tab control
-   __str tabnames[] = {
-      "Statistics",
-      "Upgrades",
-      "BIP",
-      "Settings",
-      null
-   };
+   cbi_node_t *ctr;
+   ctr = CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, null, "H_Z1", 0.7);
+   ctr->children = DList_Create();
    
-   cbi_node_t *tabc = CBI_TabAlloc(0, 0, 13, 13, tabnames);
-   tabc->children = DList_Create();
-   
-   CBI_InsertNode(tabc->children, Menu_InitStatistics());
-   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
-   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
-   CBI_InsertNode(tabc->children, CBI_NodeAlloc());
-   //CBI_InsertNode(tabc->children, Menu_InitUpgrades());
-   //CBI_InsertNode(tabc->children, Menu_InitBIP());
-   //CBI_InsertNode(tabc->children, Menu_InitSettings());
-   
-   // Container
-   cbi_node_t *container = CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, "H_Z1", 0.8);
-   container->children = DList_Create();
-   
-   CBI_InsertNode(container->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 20, 175, "Comp/Brain OS ver. 1"));
-   CBI_InsertNode(container->children, tabc);
+   cbi_nodefuncs_t textfuncs = { .Update = Menu_TextUpdateFunc };
+   cbi_nodefuncs_t btnfuncs = { .Click = Menu_ButtonClickFunc };
+   CBI_InsertNode(ctr->children, CBI_ButtonAlloc(BTNAF_RESPOND_LEFT, 0, 20, 20, &btnfuncs, "button"));
+   CBI_InsertNode(ctr->children, CBI_TextAlloc(0, 0, 8, 8, &textfuncs, "yay it works"));
+   CBI_InsertNode(ctr->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 10, 10, &textfuncs, "yay it works"));
+   CBI_InsertNode(ctr->children, CBI_TextAlloc(0, 0, 12, 12, &textfuncs, "yay it works"));
    
    // Main list
    cbi->ui = DList_Create();
-   CBI_InsertNode(cbi->ui, container);
+   CBI_InsertNode(cbi->ui, ctr);
    
    cbi->wasinit = true;
 }

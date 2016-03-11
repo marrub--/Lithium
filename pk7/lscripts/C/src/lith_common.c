@@ -138,6 +138,12 @@ float normf(float x, float min, float max)
    return (x - min) / (max - min);
 }
 
+bool bpcldi(int x, int y, int z, int w, int x2, int y2)
+{
+   return x2 >= x && y2 >= y && x2 < z && y2 < w;
+}
+
+
 //
 // ---------------------------------------------------------------------------
 
