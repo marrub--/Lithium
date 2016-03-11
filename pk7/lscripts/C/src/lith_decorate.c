@@ -100,7 +100,7 @@ void Lith_UpdateScore()
 {
    player_t *p = &players[ACS_PlayerNumber()];
    
-   float rmul = RandomFloat(1.0f, 6.0f);
+   double rmul = RandomFloat(1.0f, 6.0f);
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * rmul;
    
    if(ACS_GetCVar("lith_player_scoresound"))
