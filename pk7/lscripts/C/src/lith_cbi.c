@@ -5,6 +5,35 @@
 #include "lith_cbi_gui.h"
 
 // ---------------------------------------------------------------------------
+// Key Scripts.
+//
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_KeyOpenCBI()
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   if(p->health < 1)
+      return;
+   
+   p->cbi.open = !p->cbi.open;
+   
+   if(p->cbi.open)
+   {
+      p->frozen++;
+      ACS_LocalAmbientSound("player/cbi/open", 127);
+   }
+   else
+   {
+      p->frozen--;
+      ACS_LocalAmbientSound("player/cbi/close", 127);
+   }
+}
+
+//
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
 // Computer-Brain Interface (CBI) Scripts.
 //
 
@@ -44,16 +73,44 @@ void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    
    switch(node->id)
    {
-   case uid_stat_name: text->text = StrParam("\Cj%S", p->name); break;
-   case uid_stat_score_sum: text->text = StrParam("Score Sum: %lli", p->scoresum); break;
-   case uid_stat_score_used: text->text = StrParam("Score Used: %lli", p->scoreused); break;
-	case uid_stat_health_sum: text->text = StrParam("Health Sum: %li", p->healthsum); break;
-	case uid_stat_health_used: text->text = StrParam("Health Used: %li", p->healthused); break;
-	case uid_stat_armor_sum: text->text = StrParam("Armor Sum: %li", p->armorsum); break;
-	case uid_stat_armor_used: text->text = StrParam("Armor Used: %li", p->armorused); break;
-	case uid_stat_weapons_held: text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
+   case uid_stat_name:          text->text = StrParam("\Cj%S", p->name); break;
+   case uid_stat_score_sum:     text->text = StrParam("Score Sum: %lli", p->scoresum); break;
+   case uid_stat_score_used:    text->text = StrParam("Score Used: %lli", p->scoreused); break;
+	case uid_stat_health_sum:    text->text = StrParam("Health Sum: %li", p->healthsum); break;
+	case uid_stat_health_used:   text->text = StrParam("Health Used: %li", p->healthused); break;
+	case uid_stat_armor_sum:     text->text = StrParam("Armor Sum: %li", p->armorsum); break;
+	case uid_stat_armor_used:    text->text = StrParam("Armor Used: %li", p->armorused); break;
+	case uid_stat_weapons_held:  text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
 	case uid_stat_secrets_found: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
    }
+   
+   UI_NodeUpdate(node, p, cur);
+}
+
+[[__call("ScriptI")]]
+static
+void Menu_Main_XClickEvent()
+{
+   ACS_Delay(10);
+   Lith_KeyOpenCBI();
+}
+
+static
+bool Menu_Main_XClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+{
+   if(UI_NodeClick(node, p, cur, left))
+      return true;
+   
+   if(!left)
+      return false;
+   
+   if(bpcldi(node->x, node->y, node->x + 11, node->y + 11, cur.x, cur.y))
+   {
+      Menu_Main_XClickEvent();
+      return true;
+   }
+   
+   return false;
 }
 
 [[__call("ScriptI")]]
@@ -65,6 +122,7 @@ void Lith_PlayerInitCBI(player_t *p)
    __str tabnames[] = { "Statistics", "Upgrades", "BIP", "Settings", null };
    ui_node_t *tabs = UI_TabAlloc(NODEAF_ALLOCCHILDREN, 0, 13, 13, null, tabnames);
    
+   // Statistics
    {
       ui_nodefuncs_t statfunc = { .Update = Menu_Stats_TextUpdate };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
@@ -78,7 +136,9 @@ void Lith_PlayerInitCBI(player_t *p)
    }
    
    // Main container
+   ui_nodefuncs_t xfunc = { .Click = Menu_Main_XClick };
    ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "H_Z1", 0.7);
+   UI_InsertNode(ctr->children, UI_SpriteAlloc(0, 0, 296, 13, &xfunc, "H_Z9"));
    UI_InsertNode(ctr->children, tabs);
    
    // Main list
@@ -137,35 +197,6 @@ void Lith_PlayerDrawCBI(player_t *p)
    DrawSpritePlain("H_Z2", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
    
    UI_NodeListDraw(cbi->ui, hid_end_cbi);
-}
-
-//
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Key Scripts.
-//
-
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_KeyOpenCBI()
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   
-   if(p->health < 1)
-      return;
-   
-   p->cbi.open = !p->cbi.open;
-   
-   if(p->cbi.open)
-   {
-      p->frozen++;
-      ACS_LocalAmbientSound("player/cbi/open", 127);
-   }
-   else
-   {
-      p->frozen--;
-      ACS_LocalAmbientSound("player/cbi/close", 127);
-   }
 }
 
 //

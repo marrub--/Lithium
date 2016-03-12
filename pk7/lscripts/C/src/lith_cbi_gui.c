@@ -277,9 +277,6 @@ int UI_ButtonDraw(ui_node_t *node, int id)
    ui_node_t *node = &button->node;
    int ret = 0;
    
-   DrawSpriteAlpha("H_Z3", id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
-   id--, ret++;
-   
    if(button->label)
    {
       char color = 'j';
@@ -289,9 +286,11 @@ int UI_ButtonDraw(ui_node_t *node, int id)
       else if(button->clicked)
          color = 'g';
       
+      DrawSpriteAlpha("H_Z3", id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
+      id--, ret++;
+      
       HudMessageF(button->font, "\C%c%S", color, button->label);
       HudMessagePlain(id, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
-      
       id--, ret++;
    }
    

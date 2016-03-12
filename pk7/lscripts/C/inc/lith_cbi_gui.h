@@ -5,7 +5,7 @@
 #define UI_BUTTON_H 16
 
 #define UI_TAB_W 48
-#define UI_TAB_H 14
+#define UI_TAB_H 11
 
 // ---------------------------------------------------------------------------
 // Node Types.
@@ -131,6 +131,12 @@ ui_node_t *UI_NodeListGetByID(struct dlist_s *list, int id);
 
 //
 // ui_node_t
+
+int UI_NodeDraw(ui_node_t *node, int id);
+void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t cur);
+bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t cur, bool left);
+bool UI_NodeHold(ui_node_t *node, player_t *p, cursor_t cur, bool left);
+void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs);
 
 [[__optional_args(5)]]
 ui_node_t *UI_NodeAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs);
