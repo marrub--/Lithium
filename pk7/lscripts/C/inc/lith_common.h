@@ -77,9 +77,6 @@
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
-// Misc.
-bool ButtonPressed(struct player_s *p, int bt);
-
 // Random
 [[__optional_args(1)]]
 int Random(int max, int min);
@@ -94,8 +91,10 @@ void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
 
-// Strings
+// Utilities
 __str StrUpper(__str in);
+bool ButtonPressed(struct player_s *p, int bt);
+void *cpyalloc(size_t num, size_t size, void *src);
 
 // Math
 accum lerpk(accum a, accum b, accum t);

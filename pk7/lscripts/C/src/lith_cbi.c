@@ -9,21 +9,21 @@
 //
 
 static
-void Menu_TextUpdateFunc(cbi_node_t *node, player_t *p, cursor_t cur)
+void Menu_TextUpdateFunc(ui_node_t *node, player_t *p, cursor_t cur)
 {
-   cbi_text_t *text = (cbi_text_t *)node;
-   cbi_node_t *node = &text->node;
+   ui_text_t *text = (ui_text_t *)node;
+   ui_node_t *node = &text->node;
    
    text->text = StrParam("yay it works %i", ACS_Timer());
 }
 
 static
-bool Menu_ButtonClickFunc(cbi_node_t *node, player_t *p, cursor_t cur, bool left)
+bool Menu_ButtonClickFunc(ui_node_t *node, player_t *p, cursor_t cur, bool left)
 {
-   cbi_button_t *button = (cbi_button_t *)node;
-   cbi_node_t *node = &button->node;
+   ui_button_t *button = (ui_button_t *)node;
+   ui_node_t *node = &button->node;
    
-   if(left && bpcldi(node->x, node->y, node->x + CBI_BUTTON_W, node->y + CBI_BUTTON_H, cur.x, cur.y))
+   if(left && bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur.x, cur.y))
       Log("yay it works");
    
    return false;
@@ -34,20 +34,31 @@ void Lith_PlayerInitCBI(player_t *p)
 {
    cbi_t *cbi = &p->cbi;
    
-   cbi_node_t *ctr;
-   ctr = CBI_SpriteAlloc(SPRAF_ALPHA, 0, 0, 0, null, "H_Z1", 0.7);
-   ctr->children = DList_Create();
+   // Main tab control
+   ui_node_t *tabs = UI_TabAlloc(NODEAF_ALLOCCHILDREN, 0, 13, 13, null, (__str[]){ "Statistics", "Settings" });
    
-   cbi_nodefuncs_t textfuncs = { .Update = Menu_TextUpdateFunc };
-   cbi_nodefuncs_t btnfuncs = { .Click = Menu_ButtonClickFunc };
-   CBI_InsertNode(ctr->children, CBI_ButtonAlloc(BTNAF_RESPOND_LEFT, 0, 20, 20, &btnfuncs, "button"));
-   CBI_InsertNode(ctr->children, CBI_TextAlloc(0, 0, 8, 8, &textfuncs, "yay it works"));
-   CBI_InsertNode(ctr->children, CBI_TextAlloc(TXTAF_RAINBOWS, 0, 10, 10, &textfuncs, "yay it works"));
-   CBI_InsertNode(ctr->children, CBI_TextAlloc(0, 0, 12, 12, &textfuncs, "yay it works"));
+   {
+      ui_nodefuncs_t textfuncs = { .Update = Menu_TextUpdateFunc };
+      ui_nodefuncs_t btnfuncs = { .Click = Menu_ButtonClickFunc };
+      ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
+      
+      UI_InsertNode(tab->children, UI_ButtonAlloc(BTNAF_RESPOND_LEFT, 0, 50, 50, &btnfuncs, "button"));
+      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 38, 38, &textfuncs, "yay it works"));
+      UI_InsertNode(tab->children, UI_TextAlloc(TXTAF_RAINBOWS, 0, 40, 40, &textfuncs, "yay it works"));
+      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 42, 42, &textfuncs, "yay it works"));
+      
+      UI_InsertNode(tabs->children, tab);
+   }
+   
+   UI_InsertNode(tabs->children, UI_NodeAlloc());
+   
+   // Main container
+   ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "H_Z1", 0.7);
+   UI_InsertNode(ctr->children, tabs);
    
    // Main list
    cbi->ui = DList_Create();
-   CBI_InsertNode(cbi->ui, ctr);
+   UI_InsertNode(cbi->ui, ctr);
    
    cbi->wasinit = true;
 }
@@ -71,7 +82,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(cbi->cur.x > 320) cbi->cur.x = 320;
       if(cbi->cur.y > 200) cbi->cur.y = 200;
       
-      CBI_NodeListUpdate(cbi->ui, p, cbi->cur);
+      UI_NodeListUpdate(cbi->ui, p, cbi->cur);
       
       int click = 0;
       int hold = 0;
@@ -84,10 +95,10 @@ void Lith_PlayerUpdateCBI(player_t *p)
       else if(p->buttons & BT_ALTATTACK)
          hold = 1;
       
-      if(click && !CBI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
+      if(click && !UI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
          ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
       else if(hold)
-         CBI_NodeListHold(cbi->ui, p, cbi->cur, hold == 2);
+         UI_NodeListHold(cbi->ui, p, cbi->cur, hold == 2);
    }
 }
 
@@ -100,7 +111,7 @@ void Lith_PlayerDrawCBI(player_t *p)
    
    DrawSpritePlain("H_Z2", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
    
-   CBI_NodeListDraw(cbi->ui, hid_end_cbi);
+   UI_NodeListDraw(cbi->ui, hid_end_cbi);
 }
 
 //

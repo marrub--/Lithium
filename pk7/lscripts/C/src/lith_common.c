@@ -143,6 +143,12 @@ bool bpcldi(int x, int y, int z, int w, int x2, int y2)
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }
 
+void *cpyalloc(size_t num, size_t size, void *src)
+{
+   void *dest = calloc(num, size);
+   memcpy(dest, src, num * size);
+   return dest;
+}
 
 //
 // ---------------------------------------------------------------------------

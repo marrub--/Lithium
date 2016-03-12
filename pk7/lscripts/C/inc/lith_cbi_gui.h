@@ -1,68 +1,82 @@
 #ifndef LITH_CBI_GUI_H
 #define LITH_CBI_GUI_H
 
-#define CBI_BUTTON_W 48
-#define CBI_BUTTON_H 16
+#define UI_BUTTON_W 48
+#define UI_BUTTON_H 16
+
+#define UI_TAB_W 48
+#define UI_TAB_H 14
 
 // ---------------------------------------------------------------------------
 // Node Types.
 //
 
-typedef int (*cbi_drawfunc_t)(struct cbi_node_s *, int);
-typedef void (*cbi_updatefunc_t)(struct cbi_node_s *, struct player_s *, cursor_t);
-typedef bool (*cbi_clickfunc_t)(struct cbi_node_s *, struct player_s *, cursor_t, bool);
-typedef cbi_clickfunc_t cbi_holdfunc_t;
+typedef int (*ui_drawfunc_t)(struct ui_node_s *, int);
+typedef void (*ui_updatefunc_t)(struct ui_node_s *, struct player_s *, cursor_t);
+typedef bool (*ui_clickfunc_t)(struct ui_node_s *, struct player_s *, cursor_t, bool);
+typedef ui_clickfunc_t ui_holdfunc_t;
 
-typedef struct cbi_nodefuncs_s
+typedef struct ui_nodefuncs_s
 {
-   cbi_drawfunc_t Draw;
-   cbi_updatefunc_t Update;
-   cbi_clickfunc_t Click;
-   cbi_holdfunc_t Hold;
-} cbi_nodefuncs_t;
+   ui_drawfunc_t Draw;
+   ui_updatefunc_t Update;
+   ui_clickfunc_t Click;
+   ui_holdfunc_t Hold;
+} ui_nodefuncs_t;
 
-typedef struct cbi_node_s
+typedef struct ui_node_s
 {
    int x, y;
    int id;
    bool visible;
    
-   cbi_nodefuncs_t basefuncs;
-   cbi_nodefuncs_t userfuncs;
+   ui_nodefuncs_t basefuncs;
+   ui_nodefuncs_t userfuncs;
    
    struct dlist_s *children;
-} cbi_node_t;
+} ui_node_t;
 
-typedef struct cbi_text_s
+typedef struct ui_text_s
 {
-   cbi_node_t node;
+   ui_node_t node;
    
    __str text;
    __str font;
    bool rainbows;
    fixed alignx;
    fixed aligny;
-} cbi_text_t;
+} ui_text_t;
 
-typedef struct cbi_sprite_s
+typedef struct ui_sprite_s
 {
-   cbi_node_t node;
+   ui_node_t node;
    
    __str name;
    fixed alpha;
    fixed alignx;
    fixed aligny;
-} cbi_sprite_t;
+} ui_sprite_t;
 
-typedef struct cbi_button_s
+typedef struct ui_button_s
 {
-   cbi_node_t node;
+   ui_node_t node;
    
    __str font;
    __str label;
    int clicked;
    int respond;
-} cbi_button_t;
+} ui_button_t;
+
+typedef struct ui_tab_s
+{
+   ui_node_t node;
+   
+   __str *names;
+   int curtab;
+   int hover;
+   int clicked;
+   int ntabs;
+} ui_tab_t;
 
 //
 // ---------------------------------------------------------------------------
@@ -70,7 +84,8 @@ typedef struct cbi_button_s
 enum
 {
    // Bits 0 - 4 reserved for generic flags.
-   NODEAF_NOTVISIBLE = 1 << 0,
+   NODEAF_NOTVISIBLE    = 1 << 0,
+   NODEAF_ALLOCCHILDREN = 1 << 1,
 };
 
 enum
@@ -103,40 +118,46 @@ enum
 // Node Functions.
 //
 
-#define CBI_InsertNode(list, node) \
+#define UI_InsertNode(list, node) \
    DList_InsertBack(list, (listdata_t){ (node) })
 
 //
 
-int CBI_NodeListDraw(struct dlist_s *list, int id);
-void CBI_NodeListUpdate(struct dlist_s *list, player_t *p, cursor_t cur);
-bool CBI_NodeListClick(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
-bool CBI_NodeListHold(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
-cbi_node_t *CBI_NodeListGetByID(struct dlist_s *list, int id);
+int UI_NodeListDraw(struct dlist_s *list, int id);
+void UI_NodeListUpdate(struct dlist_s *list, player_t *p, cursor_t cur);
+bool UI_NodeListClick(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
+bool UI_NodeListHold(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
+ui_node_t *UI_NodeListGetByID(struct dlist_s *list, int id);
 
 //
-// cbi_node_t
+// ui_node_t
 
 [[__optional_args(5)]]
-cbi_node_t *CBI_NodeAlloc(int flags, int id, int x, int y, cbi_nodefuncs_t *userfuncs);
+ui_node_t *UI_NodeAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs);
 
 //
-// cbi_text_t
+// ui_text_t
 
 [[__optional_args(2)]]
-cbi_node_t *CBI_TextAlloc(int flags, int id, int x, int y, cbi_nodefuncs_t *userfuncs, __str text, __str font);
+ui_node_t *UI_TextAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str text, __str font);
 
 //
-// cbi_sprite_t
+// ui_sprite_t
 
 [[__optional_args(2)]]
-cbi_node_t *CBI_SpriteAlloc(int flags, int id, int x, int y, cbi_nodefuncs_t *userfuncs, __str name, fixed alpha);
+ui_node_t *UI_SpriteAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str name, fixed alpha);
 
 //
-// cbi_button_t
+// ui_button_t
 
 [[__optional_args(2)]]
-cbi_node_t *CBI_ButtonAlloc(int flags, int id, int x, int y, cbi_nodefuncs_t *userfuncs, __str label, __str font);
+ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str label, __str font);
+
+//
+// ui_tab_t
+
+[[__optional_args(1)]]
+ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *names);
 
 //
 // ---------------------------------------------------------------------------
