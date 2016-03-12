@@ -8,25 +8,52 @@
 // Computer-Brain Interface (CBI) Scripts.
 //
 
+enum
+{
+   //
+   // uid_base to uid_base + 100 reserved for Statistics 
+   //
+   
+   uid_none,
+   
+   uid_base = 100,
+   
+   // Statistics
+   uid_base_stats = uid_base,
+   uid_end_stats  = uid_base + 100,
+   
+   uid_stat_name = uid_base_stats,
+   uid_stat_score_sum,
+   uid_stat_score_used,
+   uid_stat_health_sum,
+   uid_stat_health_used,
+   uid_stat_armor_sum,
+   uid_stat_armor_used,
+   uid_stat_weapons_held,
+   uid_stat_secrets_found,
+   
+   uid_statS,
+   uid_statE = uid_stat_score_sum,
+};
+
 static
-void Menu_TextUpdateFunc(ui_node_t *node, player_t *p, cursor_t cur)
+void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
 {
    ui_text_t *text = (ui_text_t *)node;
    ui_node_t *node = &text->node;
    
-   text->text = StrParam("yay it works %i", ACS_Timer());
-}
-
-static
-bool Menu_ButtonClickFunc(ui_node_t *node, player_t *p, cursor_t cur, bool left)
-{
-   ui_button_t *button = (ui_button_t *)node;
-   ui_node_t *node = &button->node;
-   
-   if(left && bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur.x, cur.y))
-      Log("yay it works");
-   
-   return false;
+   switch(node->id)
+   {
+   case uid_stat_name: text->text = StrParam("\Cj%S", p->name); break;
+   case uid_stat_score_sum: text->text = StrParam("Score Sum: %lli", p->scoresum); break;
+   case uid_stat_score_used: text->text = StrParam("Score Used: %lli", p->scoreused); break;
+	case uid_stat_health_sum: text->text = StrParam("Health Sum: %li", p->healthsum); break;
+	case uid_stat_health_used: text->text = StrParam("Health Used: %li", p->healthused); break;
+	case uid_stat_armor_sum: text->text = StrParam("Armor Sum: %li", p->armorsum); break;
+	case uid_stat_armor_used: text->text = StrParam("Armor Used: %li", p->armorused); break;
+	case uid_stat_weapons_held: text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
+	case uid_stat_secrets_found: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
+   }
 }
 
 [[__call("ScriptI")]]
@@ -35,22 +62,20 @@ void Lith_PlayerInitCBI(player_t *p)
    cbi_t *cbi = &p->cbi;
    
    // Main tab control
-   ui_node_t *tabs = UI_TabAlloc(NODEAF_ALLOCCHILDREN, 0, 13, 13, null, (__str[]){ "Statistics", "Settings" });
+   __str tabnames[] = { "Statistics", "Upgrades", "BIP", "Settings", null };
+   ui_node_t *tabs = UI_TabAlloc(NODEAF_ALLOCCHILDREN, 0, 13, 13, null, tabnames);
    
    {
-      ui_nodefuncs_t textfuncs = { .Update = Menu_TextUpdateFunc };
-      ui_nodefuncs_t btnfuncs = { .Click = Menu_ButtonClickFunc };
+      ui_nodefuncs_t statfunc = { .Update = Menu_Stats_TextUpdate };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
-      UI_InsertNode(tab->children, UI_ButtonAlloc(BTNAF_RESPOND_LEFT, 0, 50, 50, &btnfuncs, "button"));
-      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 38, 38, &textfuncs, "yay it works"));
-      UI_InsertNode(tab->children, UI_TextAlloc(TXTAF_RAINBOWS, 0, 40, 40, &textfuncs, "yay it works"));
-      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 42, 42, &textfuncs, "yay it works"));
+      UI_InsertNode(tab->children, UI_TextAlloc(0, uid_stat_name, 20, 30, &statfunc, null, "SMALLFNT"));
+      
+      for(int base = uid_statE, i = base; i < uid_statS; i++)
+         UI_InsertNode(tab->children, UI_TextAlloc(0, i, 23, 40 + ((i - base) * 8), &statfunc));
       
       UI_InsertNode(tabs->children, tab);
    }
-   
-   UI_InsertNode(tabs->children, UI_NodeAlloc());
    
    // Main container
    ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "H_Z1", 0.7);
