@@ -122,10 +122,10 @@ silence lsounds/Silence.flac
 
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
 
-effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac
-effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac
-effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac
-effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac
+effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic
+effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // same
+effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac // same
+effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac // same
 
 $random effects/puff/ricochet {
    effects/puff/ricochet1
@@ -136,15 +136,15 @@ $random effects/puff/ricochet {
 //
 // Player
 
-player/pong1       lsounds/Player/Pong1.flac
-player/pong2       lsounds/Player/Pong2.flac
-player/pong3       lsounds/Player/Pong3.flac
-player/score1      lsounds/Player/Score1.flac
-player/score2      lsounds/Player/Score2.flac
-player/score3      lsounds/Player/Score3.flac
-player/rocketboost lsounds/Player/RocketBoost.flac
-player/doublejump  lsounds/Player/DoubleJump.flac
-player/slide       lsounds/Player/Slide.flac
+player/pong1       lsounds/Player/Pong1.flac       // NullpoMino
+player/pong2       lsounds/Player/Pong2.flac       // same
+player/pong3       lsounds/Player/Pong3.flac       // same
+player/score1      lsounds/Player/Score1.flac      // Self-made (punched my mic and edited it)
+player/score2      lsounds/Player/Score2.flac      // same
+player/score3      lsounds/Player/Score3.flac      // same
+player/rocketboost lsounds/Player/RocketBoost.flac // ???
+player/doublejump  lsounds/Player/DoubleJump.flac  // DemonSteele
+player/slide       lsounds/Player/Slide.flac       // same
 $volume player/doublejump 0.7
 
 $random player/score {
