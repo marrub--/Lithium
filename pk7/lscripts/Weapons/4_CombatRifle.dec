@@ -39,26 +39,27 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 0 A_JumpIf(CallACS("Lith_GetRifleFiremode") == rifle_firemode_grenade, "FireGrenade")
       CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRIF A 0 A_FireCustomMissile(
-         "Lith_RifleBullet",         frandom(-4, 4), true, 0, 0, 0, frandom(-1.6, 1.6))
+         "Lith_RifleBullet",         frandom(-5.77, 5.77), true, 0, 0, 0, frandom(-2, 2))
       CRIF A 0 A_FireCustomMissile(
-         "Lith_RifleBulletPainless", frandom(-4, 4), true, 0, 0, 0, frandom(-1.6, 1.6))
+         "Lith_RifleBulletPainless", frandom(-5.44, 5.44), true, 0, 0, 0, frandom(-2, 2))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF A 2 A_WeaponReady(LITH_BOBONLY)
       CRIF A 4 A_ReFire
       goto Ready
    FireBurst:
-      CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
+      CRIF A 0 A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON)
       CRIF A 0 A_FireCustomMissile(
-         "Lith_RifleBullet", frandom(-2, 2), true, 0, 0, 0, frandom(-1.6, 1.6))
+         "Lith_RifleBullet", frandom(-1, 1), true, 0, 0, 0, frandom(-1.33, 1.33))
       CRIF A 0 A_FireCustomMissile(
-         "Lith_RifleBullet", frandom(-2, 2), true, 0, 0, 0, frandom(-1.6, 1.6))
+         "Lith_RifleBullet", frandom(-1, 1), true, 0, 0, 0, frandom(-1.33, 1.33))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
+      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
       CRIF A 0 A_GiveInventory("Lith_RifleBurstIter", 1)
       CRIF A 0 A_JumpIf(CountInv("Lith_RifleBurstIter") < 5, "FireBurst")
       CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
-      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 7 A_WeaponReady(LITH_BOBONLY)
       goto Ready
    FireGrenade:
       CRIF A 3 A_WeaponReady(LITH_BOBONLY)

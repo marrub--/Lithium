@@ -36,14 +36,17 @@ weapons/ssg/load         lsounds/SuperShotgun/Load.flac         // General 6000,
 weapons/ssg/pickup       lsounds/SuperShotgun/Pickup.flac       // General 6000, Fallout: New Vegas, Killing Floor
 weapons/ssg/draw         lsounds/SuperShotgun/Draw.flac         // Painkiller, Fallout: New Vegas, Firearms: Source
 
-weapons/rifle/fire1    lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
-weapons/rifle/fire2    lsounds/CombatRifle/Fire2.flac       // same
-weapons/rifle/fire3    lsounds/CombatRifle/Fire3.flac       // same
-weapons/rifle/rldmount lsounds/CombatRifle/ReloadMount.flac // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
-weapons/rifle/pickup   lsounds/CombatRifle/Pickup.flac      // Halo 3
-weapons/rifle/draw     lsounds/CombatRifle/Draw.flac        // same
-weapons/rifle/firemode lsounds/CombatRifle/SetFiremode.flac // Fallout: New Vegas, Deus Ex
-weapons/rifle/grenade  lsounds/CombatRifle/FireGrenade.flac // Fallout: New Vegas
+weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
+weapons/rifle/fire2      lsounds/CombatRifle/Fire2.flac       // same
+weapons/rifle/fire3      lsounds/CombatRifle/Fire3.flac       // same
+weapons/rifle/firesnipe1 lsounds/CombatRifle/FireSnipe1.flac  // same
+weapons/rifle/firesnipe2 lsounds/CombatRifle/FireSnipe2.flac  // same
+weapons/rifle/firesnipe3 lsounds/CombatRifle/FireSnipe3.flac  // same
+weapons/rifle/rldmount   lsounds/CombatRifle/ReloadMount.flac // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
+weapons/rifle/pickup     lsounds/CombatRifle/Pickup.flac      // Halo 3
+weapons/rifle/draw       lsounds/CombatRifle/Draw.flac        // same
+weapons/rifle/firemode   lsounds/CombatRifle/SetFiremode.flac // Fallout: New Vegas, Deus Ex
+weapons/rifle/grenade    lsounds/CombatRifle/FireGrenade.flac // Fallout: New Vegas
 
 weapons/rifle/grenadebounce1 lsounds/CombatRifle/GrenadeBounce1.flac // Halo 3
 weapons/rifle/grenadebounce2 lsounds/CombatRifle/GrenadeBounce2.flac // same
@@ -58,6 +61,11 @@ $random weapons/rifle/fire {
    weapons/rifle/fire1
    weapons/rifle/fire2
    weapons/rifle/fire3 }
+
+$random weapons/rifle/firesnipe {
+   weapons/rifle/firesnipe1
+   weapons/rifle/firesnipe2
+   weapons/rifle/firesnipe3 }
 
 weapons/rocket/firel1 lsounds/RocketLauncher/FireLeft.flac   // FEAR
 weapons/rocket/firel2 lsounds/RocketLauncher/FireLeft1.flac  // same
