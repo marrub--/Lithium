@@ -105,6 +105,8 @@ typedef struct ui_list_s
    int selected;
    int clicked;
    float position;
+   int end_h;
+   int btn_h;
 } ui_list_t;
 
 //

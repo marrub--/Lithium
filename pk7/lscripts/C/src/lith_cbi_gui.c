@@ -329,10 +329,7 @@ int UI_TabDraw(ui_node_t *node, int id)
          DrawSpriteAlpha("lgfx/UI/Tab.png", id--, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
          
          HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
-         HudMessagePlain(id--,
-            0.0 + node->x + (UI_TAB_W * i) + (UI_TAB_W / 2),
-            0.0 + node->y + (UI_TAB_H / 2),
-            TICSECOND);
+         HudMessagePlain(id--, 0.0 + node->x + (UI_TAB_W * i) + (UI_TAB_W / 2), 0.0 + node->y + (UI_TAB_H / 2), TICSECOND);
       }
    }
    
@@ -435,14 +432,23 @@ int UI_ListDraw(ui_node_t *node, int id)
    
    DrawSpritePlain("lgfx/UI/ListCapTop.png", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND);
    DrawSpritePlain("lgfx/UI/ListCapBottom.png", id--, 0.1 + node->x, 0.1 + node->y + ((UI_LIST_H * list->height) - UI_LISTCAP_H), TICSECOND);
+   DrawSpritePlain("lgfx/UI/ListScrollNotch.png", id--, 0.1 + node->x - 3, 0.1 + node->y + UI_LISTCAP_H + (int)(list->position * list->end_h), TICSECOND);
    
    if(list->labels)
    {
       int i = 0;
+      int label_size = UI_LISTBTN_H * list->nlabels;
       
       ACS_SetHudClipRect(node->x + UI_LISTSCR_W, node->y, UI_LISTBTN_W, UI_LISTSCR_H * list->height);
       for(__str *p = list->labels; i < list->nlabels; p++, i++)
       {
+         int addy = (UI_LISTBTN_H * i) - (int)(list->position * list->btn_h);
+         
+         if(addy > label_size)
+            break;
+         else if(addy + UI_LISTBTN_H < 0)
+            continue;
+         
          int color = 'j';
          
          if(list->clicked && i == list->selected)
@@ -452,7 +458,6 @@ int UI_ListDraw(ui_node_t *node, int id)
          else if(i == list->hover)
             color = 'f';
          
-         int addy = UI_LISTBTN_H * i;
          DrawSpriteAlpha("lgfx/UI/ListButton.png", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
          HudMessageF("CBIFONT", "\C%c%S", color, *p);
          HudMessagePlain(id--, 0.0 + node->x + UI_LISTSCR_W + (UI_LISTBTN_W / 2), 0.0 + node->y + addy + (UI_LISTBTN_H / 2), TICSECOND);
@@ -474,6 +479,39 @@ void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    if(list->clicked > 0)
       list->clicked--;
    
+   int starty = node->y + UI_LISTCAP_H;
+   if(cur->hold & CLICK_LEFT && bpcldi(node->x - 4, starty, UI_LISTSCR_W + node->x, list->end_h + starty, cur->x, cur->y))
+      list->position = (cur->y - starty) / (float)list->end_h;
+   
+   if(bpcldi(node->x + UI_LISTSCR_W, node->y, node->x + UI_LISTSCR_W + UI_LISTBTN_W, node->y + (UI_LISTSCR_H * list->height), cur->x, cur->y))
+   {
+      int label_size = UI_LISTBTN_H * list->nlabels;
+      for(int i = 0; i < list->nlabels; i++)
+      {
+         int addy = (UI_LISTBTN_H * i) - (int)(list->position * list->btn_h);
+         
+         if(addy > label_size)
+            break;
+         else if(addy + UI_LISTBTN_H < 0)
+            continue;
+         
+         int y = node->y + addy;
+         if(l1xcldi(y, y + UI_LISTBTN_H, cur->y))
+         {
+            if(cur->click & CLICK_LEFT && i != list->selected)
+            {
+               ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+               list->clicked = 5;
+               list->selected = i;
+            }
+            else
+               list->hover = i;
+            
+            break;
+         }
+      }
+   }
+   
    UI_NodeUpdate(node, p, cur);
 }
 
@@ -482,6 +520,7 @@ ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfun
    ui_list_t *node = calloc(1, sizeof(ui_list_t));
    
    node->height = height ? height : 1;
+   node->end_h = (UI_LISTSCR_H * node->height) - (UI_LISTCAP_H * 2);
    
    if(labels)
    {
@@ -491,6 +530,7 @@ ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfun
          nlabels++;
       
       node->nlabels = nlabels;
+      node->btn_h = (UI_LISTBTN_H * node->nlabels) - (UI_LISTSCR_H * node->height);
       node->labels = cpyalloc(nlabels, sizeof(__str), labels);
    }
    
