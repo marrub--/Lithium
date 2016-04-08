@@ -25,7 +25,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       loop
    Ready:
       PKSG A 1 A_WeaponReady
-      PKSG A 0 A_TakeInventory("Lith_ShotgunJustFrame")
+      PKSG A 0 A_TakeInventory("Lith_ShotgunJustFrame", 1)
       loop
    Deselect:
       PKSG A 0

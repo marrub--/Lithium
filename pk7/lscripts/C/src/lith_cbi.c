@@ -33,10 +33,6 @@ void Lith_KeyOpenCBI()
 //
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Computer-Brain Interface (CBI) Scripts.
-//
-
 enum
 {
    //
@@ -72,6 +68,14 @@ enum
    uid_upgrade_list = uid_base_upgrade,
 };
 
+// ---------------------------------------------------------------------------
+// Upgrades.
+//
+
+//
+// Description.
+//
+
 static
 void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
@@ -83,8 +87,6 @@ void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t *cur
    
    if(i >= 0)
       text->text = Language("LITH_TXT_UPGRADE_%S", upgrade_enums[i]);
-   
-   UI_NodeUpdate(node, p, cur);
 }
 
 static
@@ -100,6 +102,14 @@ int Menu_Upgrades_DescriptionPostDraw(ui_node_t *node, int id)
    ACS_SetHudClipRect(0, 0, 0, 0);
    return 0;
 }
+
+// ---------------------------------------------------------------------------
+// Statistics.
+//
+
+//
+// Main text script.
+//
 
 static
 void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
@@ -119,26 +129,17 @@ void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    case uid_stat_weapons_held:  text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
    case uid_stat_secrets_found: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
    }
-   
-   UI_NodeUpdate(node, p, cur);
 }
 
+// ---------------------------------------------------------------------------
+// Computer-Brain Interface (CBI) Scripts.
+//
+
 static
-bool Menu_Main_XClick(ui_node_t *node, player_t *p, cursor_t *cur)
+void Menu_Main_XUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
-   if(UI_NodeClick(node, p, cur))
-      return true;
-   
-   if(!(cur->click & CLICK_LEFT))
-      return false;
-   
-   if(bpcldi(node->x, node->y, node->x + 11, node->y + 11, cur->x, cur->y))
-   {
+   if(cur->click & CLICK_LEFT && bpcldi(node->x, node->y, node->x + UI_XBUTTON_W, node->y + UI_XBUTTON_H, cur->x, cur->y))
       Lith_KeyOpenCBI();
-      return true;
-   }
-   
-   return false;
 }
 
 [[__call("ScriptI")]]
@@ -185,7 +186,7 @@ void Lith_PlayerInitCBI(player_t *p)
    }
    
    // Main container
-   ui_nodefuncs_t xfunc = { .Click = Menu_Main_XClick };
+   ui_nodefuncs_t xfunc = { .Update = Menu_Main_XUpdate };
    ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "lgfx/UI/Background.png", 0.7);
    UI_InsertNode(ctr, UI_SpriteAlloc(0, 0, 296, 13, &xfunc, "lgfx/UI/ExitButton.png"));
    UI_InsertNode(ctr, tabs);
@@ -211,10 +212,14 @@ void Lith_PlayerUpdateCBI(player_t *p)
       else
          cbi->cur.y -= p->pitchv * 800.0f;
       
-      if(cbi->cur.x < 0) cbi->cur.x = 0;
-      if(cbi->cur.y < 0) cbi->cur.y = 0;
-      if(cbi->cur.x > 320) cbi->cur.x = 320;
-      if(cbi->cur.y > 200) cbi->cur.y = 200;
+      if(cbi->cur.x < 0)
+         cbi->cur.x = 0;
+      if(cbi->cur.y < 0)
+         cbi->cur.y = 0;
+      if(cbi->cur.x > 320)
+         cbi->cur.x = 320;
+      if(cbi->cur.y > 200)
+         cbi->cur.y = 200;
       
       cbi->cur.click = CLICK_NONE;
       if(ButtonPressedUI(p, BT_ATTACK))
@@ -223,9 +228,6 @@ void Lith_PlayerUpdateCBI(player_t *p)
          cbi->cur.click |= CLICK_RIGHT;
       
       UI_NodeListUpdate(cbi->ui, p, &cbi->cur);
-      
-      if(cbi->cur.click && !UI_NodeListClick(cbi->ui, p, &cbi->cur))
-         ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
    }
 }
 

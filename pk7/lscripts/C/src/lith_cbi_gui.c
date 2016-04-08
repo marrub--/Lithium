@@ -64,21 +64,6 @@ void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t *cur)
    }
 }
 
-bool UI_NodeListClick(dlist_t *list, player_t *p, cursor_t *cur)
-{
-   for(slist_t *rover = list->head; rover; rover = rover->next)
-   {
-      ui_node_t *node = rover->data.vp;
-      
-      if(node->visible)
-         if((node->userfuncs.Click && node->userfuncs.Click(node, p, cur)) ||
-            node->basefuncs.Click(node, p, cur))
-            return true;
-   }
-   
-   return false;
-}
-
 ui_node_t *UI_NodeListGetByID(dlist_t *list, int id)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
@@ -114,14 +99,6 @@ void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
       UI_NodeListUpdate(node->children, p, cur);
 }
 
-bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   if(node->children)
-      return UI_NodeListClick(node->children, p, cur);
-   
-   return false;
-}
-
 void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs)
 {
    flags = flags & 0x1F; // We only care about the first 5 bits.
@@ -134,7 +111,6 @@ void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs
    node->basefuncs.Draw     = UI_NodeDraw;
    node->basefuncs.PostDraw = null;
    node->basefuncs.Update   = UI_NodeUpdate;
-   node->basefuncs.Click    = UI_NodeClick;
    
    if(flags & NODEAF_ALLOCCHILDREN)
       node->children = DList_Create();
@@ -267,12 +243,12 @@ int UI_ButtonDraw(ui_node_t *node, int id)
    {
       char color = 'j';
       
-      if(button->clicked < 0)
-         color = 'f';
-      else if(button->clicked)
+      if(button->clicked)
          color = 'g';
+      else if(button->hover)
+         color = 'f';
       
-      DrawSpriteAlpha("Button", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
+      DrawSpriteAlpha("lgfx/UI/Button.png", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
       
       HudMessageF(button->font, "\C%c%S", color, button->label);
       HudMessagePlain(id--, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
@@ -287,37 +263,21 @@ void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    ui_button_t *button = (ui_button_t *)node;
    ui_node_t *node = &button->node;
    
-   if(button->clicked < 0)
-      button->clicked = 0;
-   else if(button->clicked > 0)
+   if(button->clicked)
       button->clicked--;
-   
-   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y) && button->clicked == 0)
-      button->clicked = -1;
-   
-   UI_NodeUpdate(node, p, cur);
-}
-
-bool UI_ButtonClick(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_button_t *button = (ui_button_t *)node;
-   ui_node_t *node = &button->node;
-   
-   if(UI_NodeClick(node, p, cur))
-      return true;
-   
-   if((  cur->click & CLICK_LEFT  && !(button->respond == 1 || button->respond == 3)) ||
-      (!(cur->click & CLICK_LEFT) && !(button->respond == 2 || button->respond == 3)))
-      return false;
    
    if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
    {
-      ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-      button->clicked = 5;
-      return true;
+      if(cur->click & CLICK_LEFT)
+      {
+         ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+         button->clicked = 5;
+      }
+      else
+         button->hover = true;
    }
    
-   return false;
+   UI_NodeUpdate(node, p, cur);
 }
 
 ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str label, __str font)
@@ -335,7 +295,6 @@ ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userf
    UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
    node->node.basefuncs.Draw   = UI_ButtonDraw;
    node->node.basefuncs.Update = UI_ButtonUpdate;
-   node->node.basefuncs.Click  = UI_ButtonClick;
    
    return &node->node;
 }
@@ -381,25 +340,41 @@ void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_tab_t *tab = (ui_tab_t *)node;
    ui_node_t *node = &tab->node;
+   int i;
    
    tab->hover = -1;
    
    if(tab->clicked > 0)
       tab->clicked--;
    
-   {
-      int i = 0;
-      for(slist_t *rover = node->children->head; rover; rover = rover->next, i++)
+   
+   if(cur->click & CLICK_LEFT)
+      for(i = 0; i < tab->ntabs; i++)
       {
-         ui_node_t *node = rover->data.vp;
          if(i == tab->curtab)
-            node->visible = true;
-         else
-            node->visible = false;
+            continue;
+         
+         int x = node->x + (UI_TAB_W * i);
+         if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
+         {
+            ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+            tab->clicked = 5;
+            tab->curtab = i;
+            break;
+         }
       }
+   
+   i = 0;
+   for(slist_t *rover = node->children->head; rover; rover = rover->next, i++)
+   {
+      ui_node_t *node = rover->data.vp;
+      if(i == tab->curtab)
+         node->visible = true;
+      else
+         node->visible = false;
    }
    
-   for(int i = 0; i < tab->ntabs; i++)
+   for(i = 0; i < tab->ntabs; i++)
    {
       if(tab->clicked && i == tab->curtab)
          continue;
@@ -413,35 +388,6 @@ void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    }
    
    UI_NodeUpdate(node, p, cur);
-}
-
-bool UI_TabClick(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_tab_t *tab = (ui_tab_t *)node;
-   ui_node_t *node = &tab->node;
-   
-   if(UI_NodeClick(node, p, cur))
-      return true;
-   
-   if(!(cur->click & CLICK_LEFT))
-      return false;
-   
-   for(int i = 0; i < tab->ntabs; i++)
-   {
-      if(i == tab->curtab)
-         continue;
-      
-      int x = node->x + (UI_TAB_W * i);
-      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
-      {
-         ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-         tab->clicked = 5;
-         tab->curtab = i;
-         return true;
-      }
-   }
-   
-   return false;
 }
 
 ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *names)
@@ -462,7 +408,6 @@ ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfunc
    UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
    node->node.basefuncs.Draw   = UI_TabDraw;
    node->node.basefuncs.Update = UI_TabUpdate;
-   node->node.basefuncs.Click  = UI_TabClick;
    
    return &node->node;
 }
@@ -528,20 +473,6 @@ void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    UI_NodeUpdate(node, p, cur);
 }
 
-bool UI_ListClick(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_list_t *list = (ui_list_t *)node;
-   ui_node_t *node = &list->node;
-   
-   if(UI_NodeClick(node, p, cur))
-      return true;
-   
-   if(!(cur->click & CLICK_LEFT))
-      return false;
-   
-   return false;
-}
-
 ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *labels, int height)
 {
    ui_list_t *node = calloc(1, sizeof(ui_list_t));
@@ -562,7 +493,6 @@ ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfun
    UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
    node->node.basefuncs.Draw   = UI_ListDraw;
    node->node.basefuncs.Update = UI_ListUpdate;
-   node->node.basefuncs.Click  = UI_ListClick;
    
    return &node->node;
 }
