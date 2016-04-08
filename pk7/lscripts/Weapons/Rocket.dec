@@ -3,7 +3,7 @@ actor Lith_Rocket
    Scale 0.5
    Radius 5
    Height 4
-   Speed 40
+   Speed 35
    Damage (60)
    DeathSound "weapons/rocklx"
    

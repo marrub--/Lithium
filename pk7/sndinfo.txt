@@ -137,9 +137,6 @@ $random effects/puff/ricochet {
 //
 // Player
 
-player/pong1       lsounds/Player/Pong1.flac       // NullpoMino
-player/pong2       lsounds/Player/Pong2.flac       // same
-player/pong3       lsounds/Player/Pong3.flac       // same
 player/score1      lsounds/Player/Score1.flac      // Self-made (punched my mic and edited it)
 player/score2      lsounds/Player/Score2.flac      // same
 player/score3      lsounds/Player/Score3.flac      // same

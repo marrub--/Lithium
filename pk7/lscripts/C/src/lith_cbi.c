@@ -88,6 +88,20 @@ void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
 }
 
 static
+int Menu_Upgrades_DescriptionPreDraw(ui_node_t *node, int id)
+{
+   ACS_SetHudClipRect(node->x, node->y, 200, 150, 200);
+   return 0;
+}
+
+static
+int Menu_Upgrades_DescriptionPostDraw(ui_node_t *node, int id)
+{
+   ACS_SetHudClipRect(0, 0, 0, 0);
+   return 0;
+}
+
+static
 void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
 {
    ui_text_t *text = (ui_text_t *)node;
@@ -151,7 +165,11 @@ void Lith_PlayerInitCBI(player_t *p)
    
    // Upgrades
    {
-      ui_nodefuncs_t upgrfunc = { .Update = Menu_Upgrades_DescriptionUpdate };
+      ui_nodefuncs_t upgrfunc = {
+         .Update = Menu_Upgrades_DescriptionUpdate,
+         .PreDraw = Menu_Upgrades_DescriptionPreDraw,
+         .PostDraw = Menu_Upgrades_DescriptionPostDraw
+      };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
       UI_InsertNode(tab->children, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));

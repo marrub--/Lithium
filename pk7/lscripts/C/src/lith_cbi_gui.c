@@ -19,10 +19,20 @@ int UI_NodeListDraw(dlist_t *list, int id)
       
       if(node->visible)
       {
+         if(node->basefuncs.PreDraw)
+            id -= node->basefuncs.PreDraw(node, id);
+         if(node->userfuncs.PreDraw)
+            id -= node->userfuncs.PreDraw(node, id);
+         
          id -= node->basefuncs.Draw(node, id);
          
          if(node->userfuncs.Draw)
             id -= node->userfuncs.Draw(node, id);
+         
+         if(node->basefuncs.PostDraw)
+            id -= node->basefuncs.PostDraw(node, id);
+         if(node->userfuncs.PostDraw)
+            id -= node->userfuncs.PostDraw(node, id);
       }
       
       if(id < hid_cbi_underflow)
@@ -137,10 +147,12 @@ void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs
    node->id = id;
    node->x = x;
    node->y = y;
-   node->basefuncs.Draw   = UI_NodeDraw;
-   node->basefuncs.Update = UI_NodeUpdate;
-   node->basefuncs.Click  = UI_NodeClick;
-   node->basefuncs.Hold   = UI_NodeHold;
+   node->basefuncs.PreDraw  = null;
+   node->basefuncs.Draw     = UI_NodeDraw;
+   node->basefuncs.PostDraw = null;
+   node->basefuncs.Update   = UI_NodeUpdate;
+   node->basefuncs.Click    = UI_NodeClick;
+   node->basefuncs.Hold     = UI_NodeHold;
    
    if(flags & NODEAF_ALLOCCHILDREN)
       node->children = DList_Create();

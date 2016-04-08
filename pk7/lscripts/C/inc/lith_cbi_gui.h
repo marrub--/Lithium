@@ -27,7 +27,9 @@ typedef ui_clickfunc_t ui_holdfunc_t;
 
 typedef struct ui_nodefuncs_s
 {
+   ui_drawfunc_t PreDraw;
    ui_drawfunc_t Draw;
+   ui_drawfunc_t PostDraw;
    ui_updatefunc_t Update;
    ui_clickfunc_t Click;
    ui_holdfunc_t Hold;

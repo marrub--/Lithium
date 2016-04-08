@@ -1,60 +1,82 @@
 [enu default]
 
-// -----------------------------------------------------|
-LITH_TXT_UPGRADE_JetBooster =
-   "Cost: ---\n"
-   "Effect: Lets you press the Speed key while in\n"
-   "the air to let you fly for a short time.\n"
+//
+// Body
+//
+
+LITH_TXT_UPGRADE_JetBooster = // Jet Booster
+   "Cost: ---\n\n"
+   "Effect: Lets you press the Speed key while in the air to let you fly for a short time.\n\n"
    "Description: Jet boosters built into your suit.";
 
-LITH_TXT_UPGRADE_CyberLegs =
-   "Cost: 900,000scr\n"
-   "Effect: Allows you to jump higher, and sprint\n"
-   "by holding the Speed key.\n"
-   "Description: Implement glorious Culter Dei\n"
-   "technology, letting you augment your legs for\n"
-   "combat effectiveness.";
+LITH_TXT_UPGRADE_CyberLegs = // Cyber Legs
+   "Cost: 900,000scr\n\n"
+   "Effect: Allows you to jump higher, and sprint by holding the Speed key.\n\n"
+   "Description: Implement glorious Culter Dei"
+   " technology, letting you augment your legs for combat effectiveness.";
 
-LITH_TXT_UPGRADE_GaussShotty =
-   "Cost: 770,430scr\n"
-   "Effect: Turns your shotgun into a gauss rifle.\n"
-   "Description: Re-build the internal mechanisms\n"
-   "to turn the Railgun part of your shotgun into\n"
-   "the intended mechanism, which had to be\n"
-   "reproduced from decades of research.";
+LITH_TXT_UPGRADE_ReactArmour = // R. Armour
+   "Cost: 3,200,200scr\n\n"
+   "Effect: Makes your armour \"react\" to being hit, switching a mode with four settings"
+   " to the type of damage it took, making you take far less damage from that type of damage.\n\n"
+   "Description: Integrate your armour with a highly advanced Yh-0 reactive plating system,"
+   " made by an avian nation formed on the planet DURLA-Prime.";
 
-LITH_TXT_UPGRADE_ReactArmour =
-   "Cost: 3,200,200scr\n"
-   "Effect: Makes your armour \"react\" to\n"
-   "being hit, switching a mode with four settings\n"
-   "to the type of damage it took, making you\n"
-   "take far less damage from that type of damage.\n"
-   "Description: Integrate your armour with a\n"
-   "highly advanced Yh-0 reactive plating system,\n"
-   "made by an avian nation formed on the\n"
-   "planet DURLA-Prime.";
+LITH_TXT_UPGRADE_Splitter = // Split Me
+   "Cost: 800,000scr\n\n"
+   "Effect: Press \"split self\" to split your torso from your legs.\n\n"
+   "Description: some bullshit";
 
-LITH_TXT_UPGRADE_SeriousMode =
-   "Cost: ---\n"
-   "Effect: Make enemies invisible, and always fast.\n"
+//
+// Weapons
+//
+
+LITH_TXT_UPGRADE_GaussShotty = // Gauss Shotgun
+   "Cost: 770,430scr\n\n"
+   "Effect: Turns your shotgun into a gauss rifle.\n\n"
+   "Description: Re-build the internal mechanisms to turn the Railgun part of your shotgun into"
+   " the intended mechanism, which had to be reproduced from decades of research.";
+
+LITH_TXT_UPGRADE_RifleModes = // Modal Rifle
+   "Cost: 340,100scr\n\n"
+   "Effect: Gives your rifle a sniper firing mode.\n\n"
+   "Description: Some kind of wonder of technology is applied to your rifle"
+   " to make it act as two rifles. How the hell does that even work?";
+
+LITH_TXT_UPGRADE_PlasLaser = // Plasmatic Laz.
+   "Cost: 340,100scr\n\n"
+   "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
+   "Description: Replace the energy transformer in your plasma rifle"
+   " to use ion focusing instead of whatever magic bullshit it uses right now.";
+
+//
+// Downgrades
+//
+
+LITH_TXT_UPGRADE_SeriousMode = // Serious Mode
+   "Cost: ---\n\n"
+   "Effect: Make enemies invisible, and always fast.\n\n"
    "Description: Are you Serious?";
 
-LITH_TXT_UPGRADE_Implying =
-   "Cost: ---\n"
-   "Effect: Oh god why did I add something Kegan\n"
-   "suggested to me this was not a good idea\n"
+LITH_TXT_UPGRADE_RetroWeps = // Retro Weapons
+   "Cost: ---\n\n"
+   "Effect: All of your weapons fire projectiles straight from contra, and have their original animation sets.";
+
+LITH_TXT_UPGRADE_lolsords = // Steele Mode
+   "Cost: ---\n\n"
+   "Effect: You get a sword.\n"
+   "It is literally your only weapon.";
+
+//
+// :v
+//
+
+LITH_TXT_UPGRADE_Implying = // >Implicating
+   "Cost: ---\n\n"
+   "Effect: Oh god why did I add something Kegan suggested to me this was not a good idea\n\n"
    "Description: God damn it.";
 
-LITH_TXT_UPGRADE_ZharkovMode =
-   "Cost: 1scr\n"
-   "Effect: Turns you into Zharkov,\n"
-   "destroyer of worlds.\n"
-   "Description: None needed.";
-
-/*LITH_TXT_UPGRADE_02 =
-   "cost: days you will never get back\n"
-   "stats:\n"
-   "   speed +9999\n"
-   "descriptino: kil federales by explode their faces\n"
-   "faster with this upgrad taht give\n"
-   "you sbupreru legs";*/
+LITH_TXT_UPGRADE_ZharkovMode = // Zharkov Mode
+   "Cost: -100scr\n\n"
+   "Effect: Turns you into Zharkov, destroyer of worlds.";
+//

@@ -12,11 +12,11 @@
 #include "lscripts/Entities/Monsters/Revenant.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
-#include "lscripts/Weapons/1_Fist.dec"           // Fitsicuf
-#include "lscripts/Weapons/2_Pistol.dec"         // Postil
-#include "lscripts/Weapons/3_Shotgun.dec"        // Shtegnu
-#include "lscripts/Weapons/4_CombatRifle.dec"    // Cmobta Riffel
-#include "lscripts/Weapons/5_RocketLauncher.dec" // Ruckebt Laurence
-#include "lscripts/Weapons/6_PlasmaRifle.dec"    // Spalmo Rinfer
-#include "lscripts/Weapons/7_BFG9000.dec"        // Biffgee Nintendo
+#include "lscripts/Weapons/1_Fist.dec"
+#include "lscripts/Weapons/2_Pistol.dec"
+#include "lscripts/Weapons/3_Shotgun.dec"
+#include "lscripts/Weapons/4_CombatRifle.dec"
+#include "lscripts/Weapons/5_RocketLauncher.dec"
+#include "lscripts/Weapons/6_PlasmaRifle.dec"
+#include "lscripts/Weapons/7_BFG9000.dec"
 
