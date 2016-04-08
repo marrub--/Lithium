@@ -67,24 +67,17 @@ $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe2
    weapons/rifle/firesnipe3 }
 
-weapons/rocket/firel1 lsounds/RocketLauncher/FireLeft.flac   // FEAR
-weapons/rocket/firel2 lsounds/RocketLauncher/FireLeft1.flac  // same
-weapons/rocket/firel3 lsounds/RocketLauncher/FireLeft2.flac  // same
-weapons/rocket/firer1 lsounds/RocketLauncher/FireRight.flac  // Alliance of Valiant Arms, FEAR
-weapons/rocket/firer2 lsounds/RocketLauncher/FireRight1.flac // same
-weapons/rocket/firer3 lsounds/RocketLauncher/FireRight2.flac // same
-weapons/rocket/pickup lsounds/RocketLauncher/Pickup.flac     // FEAR, Doom 3, Firearms: Source
-weapons/rocket/draw   lsounds/RocketLauncher/Draw.flac       // FEAR, Doom 3
+weapons/rocket/fire1  lsounds/RocketLauncher/Fire.flac   // FEAR
+weapons/rocket/fire2  lsounds/RocketLauncher/Fire1.flac  // same
+weapons/rocket/fire3  lsounds/RocketLauncher/Fire2.flac  // same
+weapons/rocket/pickup lsounds/RocketLauncher/Pickup.flac // FEAR, Doom 3, Firearms: Source
+weapons/rocket/draw   lsounds/RocketLauncher/Draw.flac   // FEAR, Doom 3
+weapons/rocket/load   lsounds/RocketLauncher/Load.flac   // same
 
-$random weapons/rocket/firel {
-   weapons/rocket/firel1
-   weapons/rocket/firel2
-   weapons/rocket/firel3 }
-
-$random weapons/rocket/firer {
-   weapons/rocket/firer1
-   weapons/rocket/firer2
-   weapons/rocket/firer3 }
+$random weapons/rocket/fire {
+   weapons/rocket/fire1
+   weapons/rocket/fire2
+   weapons/rocket/fire3 }
 
 weapons/plasma/fire    lsounds/PlasmaRifle/Fire.flac      // Devil May Cry 3
 weapons/plasma/altfire lsounds/PlasmaRifle/AltFire.flac   // same

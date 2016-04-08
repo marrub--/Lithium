@@ -18,12 +18,12 @@ void Lith_GetWeaponType(player_t *p)
 {
    struct weaponid { __str class; int type, flag; };
    static struct weaponid const weaponids[] = {
-      { "Lith_Pistol",         weapon_pistol,         weaponf_pistol         },
-      { "Lith_Shotgun",        weapon_shotgun,        weaponf_shotgun        },
-      { "Lith_CombatRifle",    weapon_combatrifle,    weaponf_combatrifle    },
-      { "Lith_RocketLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
-      { "Lith_PlasmaRifle",    weapon_plasmarifle,    weaponf_plasmarifle    },
-      { "Lith_BFG9000",        weapon_bfg9000,        weaponf_bfg9000        }
+      { "Lith_Pistol",          weapon_pistol,         weaponf_pistol         },
+      { "Lith_Shotgun",         weapon_shotgun,        weaponf_shotgun        },
+      { "Lith_CombatRifle",     weapon_combatrifle,    weaponf_combatrifle    },
+      { "Lith_GrenadeLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
+      { "Lith_PlasmaRifle",     weapon_plasmarifle,    weaponf_plasmarifle    },
+      { "Lith_BFG9000",         weapon_bfg9000,        weaponf_bfg9000        }
    };
    
    p->weapontype = weapon_unknown;

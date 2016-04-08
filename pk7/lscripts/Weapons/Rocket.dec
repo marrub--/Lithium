@@ -24,23 +24,4 @@ actor Lith_Rocket
    }
 }
 
-actor Lith_HomingRocket : Lith_Rocket
-{
-   Speed 35
-   Damage (45)
-   
-   +SEEKERMISSILE
-   
-   states
-   {
-   Spawn:
-      MISL A 2 bright A_SeekerMissile(0, 2, SMF_LOOK)
-      loop
-   Death:
-      MISL B 8 bright A_Explode(24, 32)
-      MISL C 6 bright
-      MISL D 4 bright
-      stop
-   }
-}
 
