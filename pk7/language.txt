@@ -43,11 +43,22 @@ LITH_TXT_UPGRADE_RifleModes = // Modal Rifle
    "Description: Some kind of wonder of technology is applied to your rifle"
    " to make it act as two rifles. How the hell does that even work?";
 
+LITH_TXT_UPGRADE_ChargeNader = // C. Launcher
+   "Cost: 850,000scr\n\n"
+   "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade launcher.\n\n"
+   "Description: Employ a modification made by Unreal-Weapons, Inc. into your grenade launcher,"
+   " allowing it to hold multiple grenades and plummet them all at once.";
+
 LITH_TXT_UPGRADE_PlasLaser = // Plasmatic Laz.
-   "Cost: 340,100scr\n\n"
+   "Cost: 1,400,000scr\n\n"
    "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
    "Description: Replace the energy transformer in your plasma rifle"
    " to use ion focusing instead of whatever magic bullshit it uses right now.";
+
+LITH_TXT_UPGRADE_OmegaRail = // Omega Railgun
+   "Cost: 2,600,700scr\n\n"
+   "Effect: Makes your Omega Cannon into the Omega Railgun!\n\n"
+   "Description: Surge the power of the gods through your Omega Cannon.";
 
 //
 // Downgrades

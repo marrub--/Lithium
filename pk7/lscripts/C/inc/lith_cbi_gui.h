@@ -8,7 +8,10 @@
 #define UI_TAB_H 11
 
 #define UI_LIST_W 64
-#define UI_LIST_H 12
+#define UI_LIST_H 8
+
+#define UI_LISTBTN_W 64
+#define UI_LISTBTN_H 12
 
 #define UI_LISTSCR_W 4
 #define UI_LISTSCR_H 8
@@ -44,6 +47,7 @@ typedef struct ui_node_s
    ui_nodefuncs_t basefuncs;
    ui_nodefuncs_t userfuncs;
    
+   struct ui_node_s *parent;
    struct dlist_s *children;
 } ui_node_t;
 
@@ -141,10 +145,7 @@ enum
 // Node Functions.
 //
 
-#define UI_InsertNode(list, node) \
-   DList_InsertBack(list, (listdata_t){ (node) })
-
-//
+void UI_InsertNode(ui_node_t *parent, ui_node_t *child);
 
 int UI_NodeListDraw(struct dlist_s *list, int id);
 void UI_NodeListUpdate(struct dlist_s *list, player_t *p, cursor_t cur);

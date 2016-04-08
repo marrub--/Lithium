@@ -1,6 +1,12 @@
 #ifndef LITH_CBI_H
 #define LITH_CBI_H
 
+typedef struct cursor_s
+{
+   fixed x;
+   fixed y;
+} cursor_t;
+
 // BIP - Biotic Information Panel
 typedef struct bip_s
 {
@@ -12,17 +18,11 @@ typedef struct cbi_s
 {
    struct dlist_s *ui;
    
-   struct cursor_s
-   {
-      fixed x;
-      fixed y;
-   } cur;
+   cursor_t cur;
    
    bool wasinit;
    bool open;
 } cbi_t;
-
-typedef struct cursor_s cursor_t;
 
 [[__call("ScriptI")]]
 void Lith_PlayerInitCBI(struct player_s *p);

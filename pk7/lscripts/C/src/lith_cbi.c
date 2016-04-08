@@ -78,7 +78,7 @@ void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    ui_text_t *text = (ui_text_t *)node;
    ui_node_t *node = &text->node;
    
-   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(p->cbi.ui, uid_upgrade_list);
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
    int i = list ? list->selected : -1;
    
    if(i >= 0)
@@ -155,12 +155,12 @@ void Lith_PlayerInitCBI(player_t *p)
       ui_nodefuncs_t statfunc = { .Update = Menu_Stats_TextUpdate };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
-      UI_InsertNode(tab->children, UI_TextAlloc(0, uid_stat_name, 20, 30, &statfunc, null, "SMALLFNT"));
+      UI_InsertNode(tab, UI_TextAlloc(0, uid_stat_name, 20, 30, &statfunc, null, "SMALLFNT"));
       
       for(int base = uid_statE, i = base; i < uid_statS; i++)
-         UI_InsertNode(tab->children, UI_TextAlloc(0, i, 23, 40 + ((i - base) * 8), &statfunc));
+         UI_InsertNode(tab, UI_TextAlloc(0, i, 23, 40 + ((i - base) * 8), &statfunc));
       
-      UI_InsertNode(tabs->children, tab);
+      UI_InsertNode(tabs, tab);
    }
    
    // Upgrades
@@ -172,27 +172,27 @@ void Lith_PlayerInitCBI(player_t *p)
       };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
-      UI_InsertNode(tab->children, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));
-      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
+      UI_InsertNode(tab, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));
+      UI_InsertNode(tab, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
       
-      UI_InsertNode(tabs->children, tab);
+      UI_InsertNode(tabs, tab);
    }
    
    // BIP (TODO)
    {
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
-      UI_InsertNode(tabs->children, tab);
+      UI_InsertNode(tabs, tab);
    }
    
    // Main container
    ui_nodefuncs_t xfunc = { .Click = Menu_Main_XClick };
-   ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "H_Z1", 0.7);
-   UI_InsertNode(ctr->children, UI_SpriteAlloc(0, 0, 296, 13, &xfunc, "H_Z9"));
-   UI_InsertNode(ctr->children, tabs);
+   ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "lgfx/UI/Background.png", 0.7);
+   UI_InsertNode(ctr, UI_SpriteAlloc(0, 0, 296, 13, &xfunc, "lgfx/UI/ExitButton.png"));
+   UI_InsertNode(ctr, tabs);
    
    // Main list
    cbi->ui = DList_Create();
-   UI_InsertNode(cbi->ui, ctr);
+   DList_InsertBack(cbi->ui, (listdata_t){ ctr });
    
    cbi->wasinit = true;
 }
@@ -243,7 +243,7 @@ void Lith_PlayerDrawCBI(player_t *p)
    
    ACS_SetHudSize(320, 200);
    
-   DrawSpritePlain("H_Z2", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
+   DrawSpritePlain("lgfx/UI/Cursor.png", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
    
    UI_NodeListDraw(cbi->ui, hid_end_cbi);
 }

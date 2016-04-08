@@ -6,7 +6,9 @@ U(Splitter,    "Split Me")
 // Weapons
 U(GaussShotty, "Gauss Shotgun")
 U(RifleModes,  "Modal Rifle")
+U(ChargeNader, "C. Launcher")
 U(PlasLaser,   "Plasmatic Laz.")
+U(OmegaRail,   "Omega Railgun")
 // Downgrades
 U(SeriousMode, "Serious Mode")
 U(RetroWeps,   "Retro Weapons")

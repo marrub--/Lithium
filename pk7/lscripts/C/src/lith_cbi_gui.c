@@ -9,6 +9,12 @@
 // Node Functions.
 //
 
+void UI_InsertNode(ui_node_t *parent, ui_node_t *child)
+{
+   child->parent = parent;
+   DList_InsertBack(parent->children, (listdata_t){ child });
+}
+
 int UI_NodeListDraw(dlist_t *list, int id)
 {
    int idbase = id;
@@ -290,7 +296,7 @@ int UI_ButtonDraw(ui_node_t *node, int id)
       else if(button->clicked)
          color = 'g';
       
-      DrawSpriteAlpha("H_Z3", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
+      DrawSpriteAlpha("Button", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
       
       HudMessageF(button->font, "\C%c%S", color, button->label);
       HudMessagePlain(id--, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
@@ -381,7 +387,7 @@ int UI_TabDraw(ui_node_t *node, int id)
          else if(i == tab->hover)
             color = 'f';
          
-         DrawSpriteAlpha("H_Z4", id--, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
+         DrawSpriteAlpha("lgfx/UI/Tab.png", id--, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
          
          HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
          HudMessagePlain(id--,
@@ -495,24 +501,21 @@ int UI_ListDraw(ui_node_t *node, int id)
    ui_node_t *node = &list->node;
    int idbase = id;
    
+   for(int i = 0; i < list->height; i++)
    {
-      int addy = 0;
-      
-      for(int i = 0; i < list->height; i++)
-      {
-         DrawSpritePlain("H_Z11", id--, 0.1 + node->x, 0.1 + node->y + addy, TICSECOND);
-         DrawSpriteAlpha("H_Z12", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
-         addy += UI_LISTSCR_H;
-      }
-      
-      DrawSpritePlain("H_Z13", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND);
-      DrawSpritePlain("H_Z14", id--, 0.1 + node->x, 0.1 + node->y + (addy - UI_LISTCAP_H), TICSECOND);
+      int addy = UI_LIST_H * i;
+      DrawSpritePlain("lgfx/UI/ListScrollbar.png", id--, 0.1 + node->x, 0.1 + node->y + addy, TICSECOND);
+      DrawSpriteAlpha("lgfx/UI/ListBackground.png", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
    }
+   
+   DrawSpritePlain("lgfx/UI/ListCapTop.png", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND);
+   DrawSpritePlain("lgfx/UI/ListCapBottom.png", id--, 0.1 + node->x, 0.1 + node->y + ((UI_LIST_H * list->height) - UI_LISTCAP_H), TICSECOND);
    
    if(list->labels)
    {
       int i = 0;
-      ACS_SetHudClipRect(node->x + UI_LISTSCR_W, node->y, UI_LIST_W, UI_LISTSCR_H * list->height);
+      
+      ACS_SetHudClipRect(node->x + UI_LISTSCR_W, node->y, UI_LISTBTN_W, UI_LISTSCR_H * list->height);
       for(__str *p = list->labels; i < list->nlabels; p++, i++)
       {
          int color = 'j';
@@ -524,12 +527,10 @@ int UI_ListDraw(ui_node_t *node, int id)
          else if(i == list->hover)
             color = 'f';
          
-         DrawSpriteAlpha("H_Z10", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + (UI_LIST_H * i), TICSECOND, 0.7);
+         int addy = UI_LISTBTN_H * i;
+         DrawSpriteAlpha("lgfx/UI/ListButton.png", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
          HudMessageF("CBIFONT", "\C%c%S", color, *p);
-         HudMessagePlain(id--,
-            0.0 + node->x + UI_LISTSCR_W + (UI_LIST_W / 2),
-            0.0 + node->y + (UI_LIST_H * i) + (UI_LIST_H / 2),
-            TICSECOND);
+         HudMessagePlain(id--, 0.0 + node->x + UI_LISTSCR_W + (UI_LISTBTN_W / 2), 0.0 + node->y + addy + (UI_LISTBTN_H / 2), TICSECOND);
       }
       ACS_SetHudClipRect(0, 0, 0, 0);
    }
@@ -548,20 +549,6 @@ void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    if(list->clicked > 0)
       list->clicked--;
    
-   if(bpcldi(node->x, node->y, node->x + UI_LIST_W, node->y + (UI_LIST_W * list->nlabels), cur.x, cur.y))
-      for(int i = 0; i < list->nlabels; i++)
-      {
-         if(list->clicked && i == list->selected)
-            continue;
-         
-         int y = node->y + (UI_LIST_H * i);
-         if(l1xcldi(y, y + UI_LIST_H, cur.y))
-         {
-            list->hover = i;
-            break;
-         }
-      }
-   
    UI_NodeUpdate(node, p, cur);
 }
 
@@ -575,22 +562,6 @@ bool UI_ListClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
    
    if(!left)
       return false;
-   
-   if(bpcldi(node->x, node->y, node->x + UI_LIST_W, node->y + (UI_LIST_W * list->nlabels), cur.x, cur.y))
-      for(int i = 0; i < list->nlabels; i++)
-      {
-         if(i == list->selected)
-            continue;
-         
-         int y = node->y + (UI_LIST_H * i);
-         if(l1xcldi(y, y + UI_LIST_H, cur.y))
-         {
-            ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-            list->clicked = 5;
-            list->selected = i;
-            return true;
-         }
-      }
    
    return false;
 }
