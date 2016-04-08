@@ -11,7 +11,7 @@
 
 int UI_NodeListDraw(dlist_t *list, int id)
 {
-   int ret = 0;
+   int idbase = id;
    
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
@@ -19,23 +19,17 @@ int UI_NodeListDraw(dlist_t *list, int id)
       
       if(node->visible)
       {
-         int i;
-         
-         i = node->basefuncs.Draw(node, id);
-         id -= i, ret += i;
+         id -= node->basefuncs.Draw(node, id);
          
          if(node->userfuncs.Draw)
-         {
-            i = node->userfuncs.Draw(node, id);
-            id -= i, ret += i;
-         }
+            id -= node->userfuncs.Draw(node, id);
       }
       
       if(id < hid_cbi_underflow)
          Log("Hud ID underflow in UI_NodeListDraw!");
    }
    
-   return ret;
+   return idbase - id;
 }
 
 void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t cur)
@@ -172,7 +166,7 @@ int UI_TextDraw(ui_node_t *node, int id)
 {
    ui_text_t *text = (ui_text_t *)node;
    ui_node_t *node = &text->node;
-   int ret = 0;
+   int idbase = id;
    
    if(text->text)
    {
@@ -181,12 +175,11 @@ int UI_TextDraw(ui_node_t *node, int id)
       else
          HudMessageF(text->font, "%S", text->text);
       
-      HudMessagePlain(id, text->alignx + node->x, text->aligny + node->y, TICSECOND);
-      id--, ret++;
+      HudMessagePlain(id--, text->alignx + node->x, text->aligny + node->y, TICSECOND);
    }
    
-   ret += UI_NodeDraw(node, id);
-   return ret;
+   id -= UI_NodeDraw(node, id);
+   return idbase - id;
 }
 
 ui_node_t *UI_TextAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str text, __str font)
@@ -225,19 +218,18 @@ int UI_SpriteDraw(ui_node_t *node, int id)
 {
    ui_sprite_t *sprite = (ui_sprite_t *)node;
    ui_node_t *node = &sprite->node;
-   int ret = 0;
+   int idbase = id;
    
    if(sprite->name)
    {
-      DrawSpriteAlpha(sprite->name, id,
+      DrawSpriteAlpha(sprite->name, id--,
          sprite->alignx + node->x,
          sprite->aligny + node->y,
          TICSECOND, sprite->alpha);
-      id--, ret++;
    }
    
-   ret += UI_NodeDraw(node, id);
-   return ret;
+   id -= UI_NodeDraw(node, id);
+   return idbase - id;
 }
 
 ui_node_t *UI_SpriteAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str name, fixed alpha)
@@ -275,7 +267,7 @@ int UI_ButtonDraw(ui_node_t *node, int id)
 {
    ui_button_t *button = (ui_button_t *)node;
    ui_node_t *node = &button->node;
-   int ret = 0;
+   int idbase = id;
    
    if(button->label)
    {
@@ -286,16 +278,14 @@ int UI_ButtonDraw(ui_node_t *node, int id)
       else if(button->clicked)
          color = 'g';
       
-      DrawSpriteAlpha("H_Z3", id, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
-      id--, ret++;
+      DrawSpriteAlpha("H_Z3", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
       
       HudMessageF(button->font, "\C%c%S", color, button->label);
-      HudMessagePlain(id, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
-      id--, ret++;
+      HudMessagePlain(id--, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
    }
    
-   ret += UI_NodeDraw(node, id);
-   return ret;
+   id -= UI_NodeDraw(node, id);
+   return idbase - id;
 }
 
 void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t cur)
@@ -364,7 +354,7 @@ int UI_TabDraw(ui_node_t *node, int id)
 {
    ui_tab_t *tab = (ui_tab_t *)node;
    ui_node_t *node = &tab->node;
-   int ret = 0;
+   int idbase = id;
    
    if(tab->names)
    {
@@ -379,20 +369,18 @@ int UI_TabDraw(ui_node_t *node, int id)
          else if(i == tab->hover)
             color = 'f';
          
-         DrawSpriteAlpha("H_Z4", id, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
-         id--, ret++;
+         DrawSpriteAlpha("H_Z4", id--, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
          
          HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
-         HudMessagePlain(id, 
+         HudMessagePlain(id--,
             0.0 + node->x + (UI_TAB_W * i) + (UI_TAB_W / 2),
             0.0 + node->y + (UI_TAB_H / 2),
             TICSECOND);
-         id--, ret++;
       }
    }
    
-   ret += UI_NodeDraw(node, id);
-   return ret;
+   id -= UI_NodeDraw(node, id);
+   return idbase - id;
 }
 
 void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t cur)
@@ -485,6 +473,140 @@ ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfunc
    return &node->node;
 }
 
+// ---------------------------------------------------------------------------
+// ui_list_t
+//
+
+int UI_ListDraw(ui_node_t *node, int id)
+{
+   ui_list_t *list = (ui_list_t *)node;
+   ui_node_t *node = &list->node;
+   int idbase = id;
+   
+   {
+      int addy = 0;
+      
+      for(int i = 0; i < list->height; i++)
+      {
+         DrawSpritePlain("H_Z11", id--, 0.1 + node->x, 0.1 + node->y + addy, TICSECOND);
+         DrawSpriteAlpha("H_Z12", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
+         addy += UI_LISTSCR_H;
+      }
+      
+      DrawSpritePlain("H_Z13", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND);
+      DrawSpritePlain("H_Z14", id--, 0.1 + node->x, 0.1 + node->y + (addy - UI_LISTCAP_H), TICSECOND);
+   }
+   
+   if(list->labels)
+   {
+      int i = 0;
+      ACS_SetHudClipRect(node->x + UI_LISTSCR_W, node->y, UI_LIST_W, UI_LISTSCR_H * list->height);
+      for(__str *p = list->labels; i < list->nlabels; p++, i++)
+      {
+         int color = 'j';
+         
+         if(list->clicked && i == list->selected)
+            color = 'g';
+         else if(i == list->selected)
+            color = 'n';
+         else if(i == list->hover)
+            color = 'f';
+         
+         DrawSpriteAlpha("H_Z10", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + (UI_LIST_H * i), TICSECOND, 0.7);
+         HudMessageF("CBIFONT", "\C%c%S", color, *p);
+         HudMessagePlain(id--,
+            0.0 + node->x + UI_LISTSCR_W + (UI_LIST_W / 2),
+            0.0 + node->y + (UI_LIST_H * i) + (UI_LIST_H / 2),
+            TICSECOND);
+      }
+      ACS_SetHudClipRect(0, 0, 0, 0);
+   }
+   
+   id -= UI_NodeDraw(node, id);
+   return idbase - id;
+}
+
+void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+{
+   ui_list_t *list = (ui_list_t *)node;
+   ui_node_t *node = &list->node;
+   
+   list->hover = -1;
+   
+   if(list->clicked > 0)
+      list->clicked--;
+   
+   if(bpcldi(node->x, node->y, node->x + UI_LIST_W, node->y + (UI_LIST_W * list->nlabels), cur.x, cur.y))
+      for(int i = 0; i < list->nlabels; i++)
+      {
+         if(list->clicked && i == list->selected)
+            continue;
+         
+         int y = node->y + (UI_LIST_H * i);
+         if(l1xcldi(y, y + UI_LIST_H, cur.y))
+         {
+            list->hover = i;
+            break;
+         }
+      }
+   
+   UI_NodeUpdate(node, p, cur);
+}
+
+bool UI_ListClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+{
+   ui_list_t *list = (ui_list_t *)node;
+   ui_node_t *node = &list->node;
+   
+   if(UI_NodeClick(node, p, cur, left))
+      return true;
+   
+   if(!left)
+      return false;
+   
+   if(bpcldi(node->x, node->y, node->x + UI_LIST_W, node->y + (UI_LIST_W * list->nlabels), cur.x, cur.y))
+      for(int i = 0; i < list->nlabels; i++)
+      {
+         if(i == list->selected)
+            continue;
+         
+         int y = node->y + (UI_LIST_H * i);
+         if(l1xcldi(y, y + UI_LIST_H, cur.y))
+         {
+            ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
+            list->clicked = 5;
+            list->selected = i;
+            return true;
+         }
+      }
+   
+   return false;
+}
+
+ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *labels, int height)
+{
+   ui_list_t *node = calloc(1, sizeof(ui_list_t));
+   
+   node->height = height ? height : 1;
+   
+   if(labels)
+   {
+      int nlabels = 0;
+      
+      for(__str *p = labels; *p; p++)
+         nlabels++;
+      
+      node->nlabels = nlabels;
+      node->labels = cpyalloc(nlabels, sizeof(__str), labels);
+   }
+   
+   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
+   node->node.basefuncs.Draw   = UI_ListDraw;
+   node->node.basefuncs.Update = UI_ListUpdate;
+   node->node.basefuncs.Click  = UI_ListClick;
+   
+   return &node->node;
+}
 
 //
 // ---------------------------------------------------------------------------

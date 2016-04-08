@@ -2,10 +2,10 @@
 #include "lith_player.h"
 #include "lith_pickups.h"
 
-#define pickups(name, ...) static __str const pickupnames_##name[] = __VA_ARGS__;
+#define pickups(name, ...) static __str pickupnames_##name[] = __VA_ARGS__;
 #include "lith_pickupnames.h"
 
-__str const *const pickupnames[] = {
+__str *const pickupnames[] = {
    #define pickups(name, ...) [name] = pickupnames_##name,
    #include "lith_pickupnames.h"
 };
@@ -69,7 +69,7 @@ struct pickupfmt_s const pickupfmt[] = {
       "and you will drown in it. You're fucking dead, kiddo.",
 };
 
-__str const uncertainty[] = {
+__str uncertainty[] = {
    "Yes.",
    "Maybe.",
    "Hmm, yes. Indeed.",

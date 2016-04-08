@@ -7,6 +7,15 @@
 #define UI_TAB_W 48
 #define UI_TAB_H 11
 
+#define UI_LIST_W 64
+#define UI_LIST_H 12
+
+#define UI_LISTSCR_W 4
+#define UI_LISTSCR_H 8
+
+#define UI_LISTCAP_W 4
+#define UI_LISTCAP_H 4
+
 // ---------------------------------------------------------------------------
 // Node Types.
 //
@@ -77,6 +86,18 @@ typedef struct ui_tab_s
    int clicked;
    int ntabs;
 } ui_tab_t;
+
+typedef struct ui_list_s
+{
+   ui_node_t node;
+   
+   __str *labels;
+   int nlabels;
+   int hover;
+   int height;
+   int selected;
+   int clicked;
+} ui_list_t;
 
 //
 // ---------------------------------------------------------------------------
@@ -164,6 +185,12 @@ ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userf
 
 [[__optional_args(1)]]
 ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *names);
+
+//
+// ui_list_t
+
+[[__optional_args(2)]]
+ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *labels, int height);
 
 //
 // ---------------------------------------------------------------------------

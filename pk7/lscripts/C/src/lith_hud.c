@@ -75,7 +75,7 @@ void Lith_RenderHUDStringStack(player_t *p)
 [[__call("ScriptI")]]
 void Lith_PlayerHUD(player_t *p)
 {
-   static __str const weapongfx[weapon_max] = {
+   static __str weapongfx[weapon_max] = {
       [weapon_unknown]        = "H_D27",
       [weapon_pistol]         = "H_D24",
       [weapon_shotgun]        = "H_D23",
@@ -86,7 +86,7 @@ void Lith_PlayerHUD(player_t *p)
       [weapon_bfg9000]        = "H_D26"
    };
    
-   static __str const armorgfx[armor_max] = {
+   static __str armorgfx[armor_max] = {
       [armor_unknown] = "H_D27",
       [armor_none]    = "H_D28",
       [armor_bonus]   = "H_D23",

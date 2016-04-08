@@ -7,9 +7,9 @@ struct pickupfmt_s
    __str fmt;
 };
 
-extern __str const *const pickupnames[];
+extern __str *const pickupnames[];
 extern struct pickupfmt_s const pickupfmt[];
-extern __str const uncertainty[];
+extern __str uncertainty[];
 
 extern int const pickupnamesmax;
 extern int const pickupfmtmax;

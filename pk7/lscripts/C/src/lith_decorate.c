@@ -11,7 +11,7 @@
 [[__call("ScriptI"), __address(200), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
-   static __str const pickupsounds[] = {
+   static __str pickupsounds[] = {
       [weapon_unknown] = "MMMMHMHMMMHMMM",
       [weapon_pistol] = "weapons/pistol/pickup",
       [weapon_shotgun] = "weapons/shotgun/pickup",
@@ -31,7 +31,7 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
    {
-      __str const *names = pickupnames[user_pickupparm];
+      __str *names = pickupnames[user_pickupparm];
       int namesmax;
       
       for(namesmax = 1; names[namesmax]; namesmax++);

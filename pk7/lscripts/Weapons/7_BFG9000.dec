@@ -50,12 +50,18 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       goto Ready
    FireEmpty:
       CNNG A 2 A_PlaySound("weapons/cannon/empty", 7)
-      CNNG A 2 offset(0, 29)
-      CNNG A 2 offset(0, 35)
-      CNNG A 2 offset(0, 45)
-      CNNG A 2 offset(0, 44)
-      CNNG A 2 offset(0, 37)
-      CNNG A 2 offset(0, 32)
+      CNNG A 1 offset(0, 28)
+      CNNG A 1 offset(0, 29)
+      CNNG A 1 offset(0, 32)
+      CNNG A 1 offset(0, 35)
+      CNNG A 1 offset(0, 40)
+      CNNG A 1 offset(0, 42)
+      CNNG A 1 offset(0, 43)
+      CNNG A 1 offset(0, 44)
+      CNNG A 1 offset(0, 40)
+      CNNG A 1 offset(0, 37)
+      CNNG A 1 offset(0, 34)
+      CNNG A 1 offset(0, 32)
       CNNG A 1 A_ReFire
       goto Ready
    Spawn:

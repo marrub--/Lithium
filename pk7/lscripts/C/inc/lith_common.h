@@ -74,6 +74,8 @@
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
+#define Language(...) StrParam("%LS", StrParam(__VA_ARGS__))
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -100,7 +102,8 @@ void *cpyalloc(size_t num, size_t size, void *src);
 accum lerpk(accum a, accum b, accum t);
 float lerpf(float a, float b, float t);
 float normf(float x, float min, float max);
-bool bpcldi(int x, int y, int z, int w, int x2, int y2);
+bool bpcldi(int x, int y, int z, int w, int x2, int y2); // Box / Point collision (integer)
+bool l1xcldi(int lx1, int lx2, int x); // Line (1-d) / X collision (integer)
 
 // Constants
 static float const pi  = 3.14159265358979323846f;

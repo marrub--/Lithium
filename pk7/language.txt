@@ -1,0 +1,60 @@
+[enu default]
+
+// -----------------------------------------------------|
+LITH_TXT_UPGRADE_JETBOOST =
+   "Cost: ---\n"
+   "Effect: Lets you press the Speed key while in\n"
+   "the air to let you fly for a short time.\n"
+   "Description: Jet boosters built into your suit.";
+
+LITH_TXT_UPGRADE_CYBERLEG =
+   "Cost: 900,000scr\n"
+   "Effect: Allows you to jump higher, and sprint\n"
+   "by holding the Speed key.\n"
+   "Description: Implement glorious Culter Dei\n"
+   "technology, letting you augment your legs for\n"
+   "combat effectiveness.";
+
+LITH_TXT_UPGRADE_GAUSSGUN =
+   "Cost: 770,430scr\n"
+   "Effect: Turns your shotgun into a gauss rifle.\n"
+   "Description: Re-build the internal mechanisms\n"
+   "to turn the Railgun part of your shotgun into\n"
+   "the intended mechanism, which had to be\n"
+   "reproduced from decades of research.";
+
+LITH_TXT_UPGRADE_REACTIVE =
+   "Cost: 3,200,200scr\n"
+   "Effect: Makes your armour \"react\" to\n"
+   "being hit, switching a mode with four settings\n"
+   "to the type of damage it took, making you\n"
+   "take far less damage from that type of damage.\n"
+   "Description: Integrate your armour with a\n"
+   "highly advanced Yh-0 reactive plating system,\n"
+   "made by an avian nation formed on the\n"
+   "planet DURLA-Prime.";
+
+LITH_TXT_UPGRADE_SERIOUSM =
+   "Cost: ---\n"
+   "Effect: Make enemies invisible, and always fast.\n"
+   "Description: Are you Serious?";
+
+LITH_TXT_UPGRADE_IMPLYING =
+   "Cost: ---\n"
+   "Effect: Oh god why did I add something Kegan\n"
+   "suggested to me this was not a good idea\n"
+   "Description: God damn it.";
+
+LITH_TXT_UPGRADE_ZHARKOVM =
+   "Cost: 1scr\n"
+   "Effect: Turns you into Zharkov,\n"
+   "destroyer of worlds.\n"
+   "Description: None needed.";
+
+/*LITH_TXT_UPGRADE_02 =
+   "cost: days you will never get back\n"
+   "stats:\n"
+   "   speed +9999\n"
+   "descriptino: kil federales by explode their faces\n"
+   "faster with this upgrad taht give\n"
+   "you sbupreru legs";*/

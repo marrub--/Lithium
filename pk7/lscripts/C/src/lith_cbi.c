@@ -40,7 +40,8 @@ void Lith_KeyOpenCBI()
 enum
 {
    //
-   // uid_base to uid_base + 100 reserved for Statistics 
+   // uid_base      to uid_base + 99  reserved for Statistics
+   // uid_base + 99 to uid_base + 199 reserved for Upgrades
    //
    
    uid_none,
@@ -48,10 +49,10 @@ enum
    uid_base = 100,
    
    // Statistics
-   uid_base_stats = uid_base,
-   uid_end_stats  = uid_base + 100,
+   uid_base_stat = uid_base,
+   uid_end_stat  = uid_base + 99,
    
-   uid_stat_name = uid_base_stats,
+   uid_stat_name = uid_base_stat,
    uid_stat_score_sum,
    uid_stat_score_used,
    uid_stat_health_sum,
@@ -63,7 +64,39 @@ enum
    
    uid_statS,
    uid_statE = uid_stat_score_sum,
+   
+   // Upgrades
+   uid_base_upgrade = uid_base + 100,
+   uid_end_upgrade  = uid_base + 199,
+   
+   uid_upgrade_list = uid_base_upgrade,
 };
+
+enum
+{
+   #define U(en, name) UPGR_##en,
+   #include "lith_upgrades.h"
+};
+
+static __str upgradenames[] = {
+   #define U(en, name) [UPGR_##en] = #en,
+   #include "lith_upgrades.h"
+};
+
+static
+void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+{
+   ui_text_t *text = (ui_text_t *)node;
+   ui_node_t *node = &text->node;
+   
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(p->cbi.ui, uid_upgrade_list);
+   int i = list ? list->selected : -1;
+   
+   if(i >= 0)
+      text->text = Language("LITH_TXT_UPGRADE_%S", upgradenames[i]);
+   
+   UI_NodeUpdate(node, p, cur);
+}
 
 static
 void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
@@ -131,6 +164,23 @@ void Lith_PlayerInitCBI(player_t *p)
       
       for(int base = uid_statE, i = base; i < uid_statS; i++)
          UI_InsertNode(tab->children, UI_TextAlloc(0, i, 23, 40 + ((i - base) * 8), &statfunc));
+      
+      UI_InsertNode(tabs->children, tab);
+   }
+   
+   // Upgrades
+   {
+      ui_nodefuncs_t upgrfunc = { .Update = Menu_Upgrades_DescriptionUpdate };
+      ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
+      
+      __str listnames[] = {
+         #define U(en, name) [UPGR_##en] = name,
+         #include "lith_upgrades.h"
+         null
+      };
+      
+      UI_InsertNode(tab->children, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, listnames, 19));
+      UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
       
       UI_InsertNode(tabs->children, tab);
    }
