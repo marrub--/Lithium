@@ -14,6 +14,7 @@ typedef struct cursor_s
    fixed x;
    fixed y;
    int click;
+   int hold;
 } cursor_t;
 
 // BIP - Biotic Information Panel

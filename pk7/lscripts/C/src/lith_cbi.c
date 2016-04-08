@@ -73,6 +73,16 @@ enum
 //
 
 //
+// Buy button.
+//
+
+static
+void Menu_Upgrades_BuyClick(ui_node_t *node, player_t *p, cursor_t *cur)
+{
+   Log("buy button pressed");
+}
+
+//
 // Description.
 //
 
@@ -171,10 +181,12 @@ void Lith_PlayerInitCBI(player_t *p)
          .PreDraw = Menu_Upgrades_DescriptionPreDraw,
          .PostDraw = Menu_Upgrades_DescriptionPostDraw
       };
+      ui_nodefuncs_t buyfunc = { .Click = Menu_Upgrades_BuyClick };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
       UI_InsertNode(tab, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));
       UI_InsertNode(tab, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
+      UI_InsertNode(tab, UI_ButtonAlloc(0, 0, 259, 170, &buyfunc, "Buy"));
       
       UI_InsertNode(tabs, tab);
    }
@@ -222,10 +234,17 @@ void Lith_PlayerUpdateCBI(player_t *p)
          cbi->cur.y = 200;
       
       cbi->cur.click = CLICK_NONE;
+      cbi->cur.hold = CLICK_NONE;
+      
       if(ButtonPressedUI(p, BT_ATTACK))
          cbi->cur.click |= CLICK_LEFT;
+      else if(p->buttons & BT_ATTACK)
+         cbi->cur.hold |= CLICK_LEFT;
+      
       if(ButtonPressedUI(p, BT_ALTATTACK))
          cbi->cur.click |= CLICK_RIGHT;
+      else if(p->buttons & BT_ALTATTACK)
+         cbi->cur.hold |= CLICK_RIGHT;
       
       UI_NodeListUpdate(cbi->ui, p, &cbi->cur);
    }

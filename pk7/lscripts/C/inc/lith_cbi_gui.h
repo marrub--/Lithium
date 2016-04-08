@@ -35,6 +35,7 @@ typedef struct ui_nodefuncs_s
    ui_drawfunc_t Draw;
    ui_drawfunc_t PostDraw;
    ui_updatefunc_t Update;
+   ui_updatefunc_t Click;
 } ui_nodefuncs_t;
 
 typedef struct ui_node_s

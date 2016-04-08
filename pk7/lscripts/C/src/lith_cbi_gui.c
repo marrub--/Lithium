@@ -266,12 +266,16 @@ void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    if(button->clicked)
       button->clicked--;
    
+   button->hover = false;
    if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
    {
       if(cur->click & CLICK_LEFT)
       {
          ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
          button->clicked = 5;
+         
+         if(node->userfuncs.Click)
+            node->userfuncs.Click(node, p, cur);
       }
       else
          button->hover = true;
