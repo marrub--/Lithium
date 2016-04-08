@@ -73,7 +73,7 @@ enum
 };
 
 static
-void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_text_t *text = (ui_text_t *)node;
    ui_node_t *node = &text->node;
@@ -102,7 +102,7 @@ int Menu_Upgrades_DescriptionPostDraw(ui_node_t *node, int id)
 }
 
 static
-void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_text_t *text = (ui_text_t *)node;
    ui_node_t *node = &text->node;
@@ -124,15 +124,15 @@ void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
 }
 
 static
-bool Menu_Main_XClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+bool Menu_Main_XClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
-   if(UI_NodeClick(node, p, cur, left))
+   if(UI_NodeClick(node, p, cur))
       return true;
    
-   if(!left)
+   if(!(cur->click & CLICK_LEFT))
       return false;
    
-   if(bpcldi(node->x, node->y, node->x + 11, node->y + 11, cur.x, cur.y))
+   if(bpcldi(node->x, node->y, node->x + 11, node->y + 11, cur->x, cur->y))
    {
       Lith_KeyOpenCBI();
       return true;
@@ -216,23 +216,16 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(cbi->cur.x > 320) cbi->cur.x = 320;
       if(cbi->cur.y > 200) cbi->cur.y = 200;
       
-      UI_NodeListUpdate(cbi->ui, p, cbi->cur);
-      
-      int click = 0;
-      int hold = 0;
+      cbi->cur.click = CLICK_NONE;
       if(ButtonPressedUI(p, BT_ATTACK))
-         click = 2;
-      else if(ButtonPressedUI(p, BT_ALTATTACK))
-         click = 1;
-      else if(p->buttons & BT_ATTACK)
-         hold = 2;
-      else if(p->buttons & BT_ALTATTACK)
-         hold = 1;
+         cbi->cur.click |= CLICK_LEFT;
+      if(ButtonPressedUI(p, BT_ALTATTACK))
+         cbi->cur.click |= CLICK_RIGHT;
       
-      if(click && !UI_NodeListClick(cbi->ui, p, cbi->cur, click == 2))
+      UI_NodeListUpdate(cbi->ui, p, &cbi->cur);
+      
+      if(cbi->cur.click && !UI_NodeListClick(cbi->ui, p, &cbi->cur))
          ACS_LocalAmbientSound("player/cbi/clickinvalid", 127);
-      else if(hold)
-         UI_NodeListHold(cbi->ui, p, cbi->cur, hold == 2);
    }
 }
 

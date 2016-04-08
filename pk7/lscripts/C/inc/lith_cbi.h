@@ -1,10 +1,19 @@
 #ifndef LITH_CBI_H
 #define LITH_CBI_H
 
+enum
+{
+   CLICK_NONE,
+   CLICK_LEFT  = 1 << 0,
+   CLICK_RIGHT = 1 << 1,
+   CLICK_BOTH  = CLICK_LEFT | CLICK_RIGHT
+};
+
 typedef struct cursor_s
 {
    fixed x;
    fixed y;
+   int click;
 } cursor_t;
 
 // BIP - Biotic Information Panel

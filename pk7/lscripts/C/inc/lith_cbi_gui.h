@@ -24,9 +24,8 @@
 //
 
 typedef int (*ui_drawfunc_t)(struct ui_node_s *, int);
-typedef void (*ui_updatefunc_t)(struct ui_node_s *, struct player_s *, cursor_t);
-typedef bool (*ui_clickfunc_t)(struct ui_node_s *, struct player_s *, cursor_t, bool);
-typedef ui_clickfunc_t ui_holdfunc_t;
+typedef void (*ui_updatefunc_t)(struct ui_node_s *, player_t *, cursor_t *);
+typedef bool (*ui_clickfunc_t)(struct ui_node_s *, player_t *, cursor_t *);
 
 typedef struct ui_nodefuncs_s
 {
@@ -35,7 +34,6 @@ typedef struct ui_nodefuncs_s
    ui_drawfunc_t PostDraw;
    ui_updatefunc_t Update;
    ui_clickfunc_t Click;
-   ui_holdfunc_t Hold;
 } ui_nodefuncs_t;
 
 typedef struct ui_node_s
@@ -103,6 +101,7 @@ typedef struct ui_list_s
    int height;
    int selected;
    int clicked;
+   float position;
 } ui_list_t;
 
 //
@@ -148,18 +147,16 @@ enum
 void UI_InsertNode(ui_node_t *parent, ui_node_t *child);
 
 int UI_NodeListDraw(struct dlist_s *list, int id);
-void UI_NodeListUpdate(struct dlist_s *list, player_t *p, cursor_t cur);
-bool UI_NodeListClick(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
-bool UI_NodeListHold(struct dlist_s *list, player_t *p, cursor_t cur, bool left);
+void UI_NodeListUpdate(struct dlist_s *list, player_t *p, cursor_t *cur);
+bool UI_NodeListClick(struct dlist_s *list, player_t *p, cursor_t *cur);
 ui_node_t *UI_NodeListGetByID(struct dlist_s *list, int id);
 
 //
 // ui_node_t
 
 int UI_NodeDraw(ui_node_t *node, int id);
-void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t cur);
-bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t cur, bool left);
-bool UI_NodeHold(ui_node_t *node, player_t *p, cursor_t cur, bool left);
+void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t *cur);
+bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t *cur);
 void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs);
 
 [[__optional_args(5)]]

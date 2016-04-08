@@ -48,7 +48,7 @@ int UI_NodeListDraw(dlist_t *list, int id)
    return idbase - id;
 }
 
-void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t cur)
+void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t *cur)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
@@ -64,30 +64,15 @@ void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t cur)
    }
 }
 
-bool UI_NodeListClick(dlist_t *list, player_t *p, cursor_t cur, bool left)
+bool UI_NodeListClick(dlist_t *list, player_t *p, cursor_t *cur)
 {
    for(slist_t *rover = list->head; rover; rover = rover->next)
    {
       ui_node_t *node = rover->data.vp;
       
       if(node->visible)
-         if((node->userfuncs.Click && node->userfuncs.Click(node, p, cur, left)) ||
-            node->basefuncs.Click(node, p, cur, left))
-            return true;
-   }
-   
-   return false;
-}
-
-bool UI_NodeListHold(dlist_t *list, player_t *p, cursor_t cur, bool left)
-{
-   for(slist_t *rover = list->head; rover; rover = rover->next)
-   {
-      ui_node_t *node = rover->data.vp;
-      
-      if(node->visible)
-         if((node->userfuncs.Hold && node->userfuncs.Hold(node, p, cur, left)) ||
-            node->basefuncs.Hold(node, p, cur, left))
+         if((node->userfuncs.Click && node->userfuncs.Click(node, p, cur)) ||
+            node->basefuncs.Click(node, p, cur))
             return true;
    }
    
@@ -123,24 +108,16 @@ int UI_NodeDraw(ui_node_t *node, int id)
    return 0;
 }
 
-void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    if(node->children)
       UI_NodeListUpdate(node->children, p, cur);
 }
 
-bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+bool UI_NodeClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    if(node->children)
-      return UI_NodeListClick(node->children, p, cur, left);
-   
-   return false;
-}
-
-bool UI_NodeHold(ui_node_t *node, player_t *p, cursor_t cur, bool left)
-{
-   if(node->children)
-      return UI_NodeListHold(node->children, p, cur, left);
+      return UI_NodeListClick(node->children, p, cur);
    
    return false;
 }
@@ -158,7 +135,6 @@ void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs
    node->basefuncs.PostDraw = null;
    node->basefuncs.Update   = UI_NodeUpdate;
    node->basefuncs.Click    = UI_NodeClick;
-   node->basefuncs.Hold     = UI_NodeHold;
    
    if(flags & NODEAF_ALLOCCHILDREN)
       node->children = DList_Create();
@@ -306,7 +282,7 @@ int UI_ButtonDraw(ui_node_t *node, int id)
    return idbase - id;
 }
 
-void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_button_t *button = (ui_button_t *)node;
    ui_node_t *node = &button->node;
@@ -316,25 +292,25 @@ void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    else if(button->clicked > 0)
       button->clicked--;
    
-   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur.x, cur.y) && button->clicked == 0)
+   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y) && button->clicked == 0)
       button->clicked = -1;
    
    UI_NodeUpdate(node, p, cur);
 }
 
-bool UI_ButtonClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+bool UI_ButtonClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_button_t *button = (ui_button_t *)node;
    ui_node_t *node = &button->node;
    
-   if(UI_NodeClick(node, p, cur, left))
+   if(UI_NodeClick(node, p, cur))
       return true;
    
-   if((left  && !(button->respond == 1 || button->respond == 3)) ||
-      (!left && !(button->respond == 2 || button->respond == 3)))
+   if((  cur->click & CLICK_LEFT  && !(button->respond == 1 || button->respond == 3)) ||
+      (!(cur->click & CLICK_LEFT) && !(button->respond == 2 || button->respond == 3)))
       return false;
    
-   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur.x, cur.y))
+   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
    {
       ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
       button->clicked = 5;
@@ -401,7 +377,7 @@ int UI_TabDraw(ui_node_t *node, int id)
    return idbase - id;
 }
 
-void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_tab_t *tab = (ui_tab_t *)node;
    ui_node_t *node = &tab->node;
@@ -429,7 +405,7 @@ void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t cur)
          continue;
       
       int x = node->x + (UI_TAB_W * i);
-      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur.x, cur.y))
+      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
       {
          tab->hover = i;
          break;
@@ -439,15 +415,15 @@ void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    UI_NodeUpdate(node, p, cur);
 }
 
-bool UI_TabClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+bool UI_TabClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_tab_t *tab = (ui_tab_t *)node;
    ui_node_t *node = &tab->node;
    
-   if(UI_NodeClick(node, p, cur, left))
+   if(UI_NodeClick(node, p, cur))
       return true;
    
-   if(!left)
+   if(!(cur->click & CLICK_LEFT))
       return false;
    
    for(int i = 0; i < tab->ntabs; i++)
@@ -456,7 +432,7 @@ bool UI_TabClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
          continue;
       
       int x = node->x + (UI_TAB_W * i);
-      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur.x, cur.y))
+      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
       {
          ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
          tab->clicked = 5;
@@ -539,7 +515,7 @@ int UI_ListDraw(ui_node_t *node, int id)
    return idbase - id;
 }
 
-void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t cur)
+void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_list_t *list = (ui_list_t *)node;
    ui_node_t *node = &list->node;
@@ -552,15 +528,15 @@ void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    UI_NodeUpdate(node, p, cur);
 }
 
-bool UI_ListClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
+bool UI_ListClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
    ui_list_t *list = (ui_list_t *)node;
    ui_node_t *node = &list->node;
    
-   if(UI_NodeClick(node, p, cur, left))
+   if(UI_NodeClick(node, p, cur))
       return true;
    
-   if(!left)
+   if(!(cur->click & CLICK_LEFT))
       return false;
    
    return false;
