@@ -6,7 +6,22 @@
 #include "lith_cbi.h"
 #include <math.h>
 
+// ---------------------------------------------------------------------------
+// Data.
+//
+
 player_t players[MAX_PLAYERS];
+
+struct weaponid { __str class; int type, flag; };
+static struct weaponid const weaponids[] = {
+   { "Lith_Pistol",          weapon_pistol,         weaponf_pistol         },
+   { "Lith_Shotgun",         weapon_shotgun,        weaponf_shotgun        },
+   { "Lith_CombatRifle",     weapon_combatrifle,    weaponf_combatrifle    },
+   { "Lith_GrenadeLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
+   { "Lith_PlasmaRifle",     weapon_plasmarifle,    weaponf_plasmarifle    },
+   { "Lith_BFG9000",         weapon_bfg9000,        weaponf_bfg9000        }
+};
+static int const weaponids_max = sizeof(weaponids) / sizeof(*weaponids);
 
 // ---------------------------------------------------------------------------
 // Scripts.
@@ -16,20 +31,10 @@ player_t players[MAX_PLAYERS];
 static
 void Lith_GetWeaponType(player_t *p)
 {
-   struct weaponid { __str class; int type, flag; };
-   static struct weaponid const weaponids[] = {
-      { "Lith_Pistol",          weapon_pistol,         weaponf_pistol         },
-      { "Lith_Shotgun",         weapon_shotgun,        weaponf_shotgun        },
-      { "Lith_CombatRifle",     weapon_combatrifle,    weaponf_combatrifle    },
-      { "Lith_GrenadeLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
-      { "Lith_PlasmaRifle",     weapon_plasmarifle,    weaponf_plasmarifle    },
-      { "Lith_BFG9000",         weapon_bfg9000,        weaponf_bfg9000        }
-   };
-   
    p->weapontype = weapon_unknown;
    p->weapons = 0;
    
-   for(int i = 0; i < sizeof(weaponids) / sizeof(*weaponids); i++)
+   for(int i = 0; i < weaponids_max; i++)
    {
       struct weaponid const *id = &weaponids[i];
       

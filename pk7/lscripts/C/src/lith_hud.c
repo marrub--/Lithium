@@ -142,7 +142,7 @@ void Lith_PlayerHUD(player_t *p)
             fixed y = 200.2;
             DrawSpritePlain("H_W2", hid_weapon1 + i, x, y, 0.1);
             HudMessageF("SMALLFNT", "%i", i + 1);
-            HudMessageParams(HUDMSG_PLAIN, hid_weapon1text + i, CR_BLUE, x + 5, y - 2, 0.1);
+            HudMessageParams(HUDMSG_PLAIN, hid_weapon1text + i, p->weapontype == (i + 1) ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
          }
    }
    
