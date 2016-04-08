@@ -26,7 +26,15 @@ weapons/shotgun/close   lsounds/Shotgun/PumpClose.flac // same
 weapons/shotgun/zoomin  lsounds/Shotgun/ScopeIn.flac   // Halo 3, EYE: Divine Cybermancy
 weapons/shotgun/zoomout lsounds/Shotgun/ScopeOut.flac  // same
 weapons/shotgun/pickup  lsounds/Shotgun/Pickup.flac    // Halo 3, EYE: Divine Cybermancy, General 6000
+weapons/shotgun/just1   lsounds/Shotgun/Just1.flac     // Halo 3
+weapons/shotgun/just2   lsounds/Shotgun/Just2.flac     // same
+weapons/shotgun/just3   lsounds/Shotgun/Just3.flac     // same
 $alias weapons/shotgun/draw weapons/shotgun/open
+
+$random weapons/shotgun/just {
+   weapons/shotgun/just1
+   weapons/shotgun/just2
+   weapons/shotgun/just3 }
 
 weapons/ssg/charge       lsounds/SuperShotgun/Charge.flac       // Killing Floor
 weapons/ssg/chargefinish lsounds/SuperShotgun/ChargeFinish.flac // same
