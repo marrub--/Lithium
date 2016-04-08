@@ -13,6 +13,11 @@ bool ButtonPressed(player_t *p, int bt)
    return p->buttons & bt && !(p->oldbuttons & bt);
 }
 
+bool ButtonPressedUI(player_t *p, int bt)
+{
+   return !(p->buttons & bt) && p->oldbuttons & bt;
+}
+
 int Random(int max, int min)
 {
    if(max < min)

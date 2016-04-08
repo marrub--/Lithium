@@ -96,6 +96,7 @@ void Log(__str fmt, ...);
 // Utilities
 __str StrUpper(__str in);
 bool ButtonPressed(struct player_s *p, int bt);
+bool ButtonPressedUI(struct player_s *p, int bt);
 void *cpyalloc(size_t num, size_t size, void *src);
 
 // Math

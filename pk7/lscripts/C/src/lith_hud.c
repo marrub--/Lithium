@@ -22,7 +22,7 @@ void Lith_RenderHUDWaves(player_t *p)
    pos = (10 + timer) % 160;
    DrawSpriteFade(StrParam("H_D1%i", frame),
       hid_scope_sineS - pos,
-      20.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
+      300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
       5.1 + pos,
       1.5, 0.3);
    
@@ -33,7 +33,7 @@ void Lith_RenderHUDWaves(player_t *p)
       pos = (7 + timer) % 160;
       DrawSpriteFade(roundk(a, 2) != 0.0 ? "H_D16" : "H_D46",
          hid_scope_squareS - pos,
-         20.1 + (a >= 0) * 7.0,
+         300.1 + (a >= 0) * 7.0,
          5.1 + pos,
          1.9, 0.1);
    }
@@ -43,7 +43,7 @@ void Lith_RenderHUDWaves(player_t *p)
    
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade("H_D14", hid_scope_triS - pos, 20.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
+   DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
 }
 
 [[__call("ScriptI")]]

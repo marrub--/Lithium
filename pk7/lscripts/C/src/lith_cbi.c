@@ -109,23 +109,15 @@ void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    case uid_stat_name:          text->text = StrParam("\Cj%S", p->name); break;
    case uid_stat_score_sum:     text->text = StrParam("Score Sum: %lli", p->scoresum); break;
    case uid_stat_score_used:    text->text = StrParam("Score Used: %lli", p->scoreused); break;
-	case uid_stat_health_sum:    text->text = StrParam("Health Sum: %li", p->healthsum); break;
-	case uid_stat_health_used:   text->text = StrParam("Health Used: %li", p->healthused); break;
-	case uid_stat_armor_sum:     text->text = StrParam("Armor Sum: %li", p->armorsum); break;
-	case uid_stat_armor_used:    text->text = StrParam("Armor Used: %li", p->armorused); break;
-	case uid_stat_weapons_held:  text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
-	case uid_stat_secrets_found: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
+   case uid_stat_health_sum:    text->text = StrParam("Health Sum: %li", p->healthsum); break;
+   case uid_stat_health_used:   text->text = StrParam("Health Used: %li", p->healthused); break;
+   case uid_stat_armor_sum:     text->text = StrParam("Armor Sum: %li", p->armorsum); break;
+   case uid_stat_armor_used:    text->text = StrParam("Armor Used: %li", p->armorused); break;
+   case uid_stat_weapons_held:  text->text = StrParam("Weapons Held: %i", p->weaponsheld); break;
+   case uid_stat_secrets_found: text->text = StrParam("Secrets Found: %i", p->secretsfound); break;
    }
    
    UI_NodeUpdate(node, p, cur);
-}
-
-[[__call("ScriptI")]]
-static
-void Menu_Main_XClickEvent()
-{
-   ACS_Delay(10);
-   Lith_KeyOpenCBI();
 }
 
 static
@@ -139,7 +131,7 @@ bool Menu_Main_XClick(ui_node_t *node, player_t *p, cursor_t cur, bool left)
    
    if(bpcldi(node->x, node->y, node->x + 11, node->y + 11, cur.x, cur.y))
    {
-      Menu_Main_XClickEvent();
+      Lith_KeyOpenCBI();
       return true;
    }
    
@@ -185,6 +177,12 @@ void Lith_PlayerInitCBI(player_t *p)
       UI_InsertNode(tabs->children, tab);
    }
    
+   // BIP (TODO)
+   {
+      ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
+      UI_InsertNode(tabs->children, tab);
+   }
+   
    // Main container
    ui_nodefuncs_t xfunc = { .Click = Menu_Main_XClick };
    ui_node_t *ctr = UI_SpriteAlloc(SPRAF_ALPHA | NODEAF_ALLOCCHILDREN, 0, 0, 0, null, "H_Z1", 0.7);
@@ -221,9 +219,9 @@ void Lith_PlayerUpdateCBI(player_t *p)
       
       int click = 0;
       int hold = 0;
-      if(ButtonPressed(p, BT_ATTACK))
+      if(ButtonPressedUI(p, BT_ATTACK))
          click = 2;
-      else if(ButtonPressed(p, BT_ALTATTACK))
+      else if(ButtonPressedUI(p, BT_ALTATTACK))
          click = 1;
       else if(p->buttons & BT_ATTACK)
          hold = 2;

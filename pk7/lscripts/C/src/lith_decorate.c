@@ -196,8 +196,7 @@ void Lith_PistolBulletTrace(bool hitactor)
    {
       int pufftid = ACS_UniqueTID();
       
-      ACS_LineAttack(0, angle, pitch, 20 / (user_thingshit + 1), "Lith_PistolPuff",
-         "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
+      ACS_LineAttack(0, angle, pitch, 20 / (user_thingshit + 1), "Lith_PistolPuff", "PlayerMissile", 0.0, FHF_NORANDOMPUFFZ, pufftid);
       
       if(!hitactor)
          user_timesshot++;
