@@ -1,13 +1,13 @@
 [enu default]
 
 // -----------------------------------------------------|
-LITH_TXT_UPGRADE_JETBOOST =
+LITH_TXT_UPGRADE_JetBooster =
    "Cost: ---\n"
    "Effect: Lets you press the Speed key while in\n"
    "the air to let you fly for a short time.\n"
    "Description: Jet boosters built into your suit.";
 
-LITH_TXT_UPGRADE_CYBERLEG =
+LITH_TXT_UPGRADE_CyberLegs =
    "Cost: 900,000scr\n"
    "Effect: Allows you to jump higher, and sprint\n"
    "by holding the Speed key.\n"
@@ -15,7 +15,7 @@ LITH_TXT_UPGRADE_CYBERLEG =
    "technology, letting you augment your legs for\n"
    "combat effectiveness.";
 
-LITH_TXT_UPGRADE_GAUSSGUN =
+LITH_TXT_UPGRADE_GaussShotty =
    "Cost: 770,430scr\n"
    "Effect: Turns your shotgun into a gauss rifle.\n"
    "Description: Re-build the internal mechanisms\n"
@@ -23,7 +23,7 @@ LITH_TXT_UPGRADE_GAUSSGUN =
    "the intended mechanism, which had to be\n"
    "reproduced from decades of research.";
 
-LITH_TXT_UPGRADE_REACTIVE =
+LITH_TXT_UPGRADE_ReactArmour =
    "Cost: 3,200,200scr\n"
    "Effect: Makes your armour \"react\" to\n"
    "being hit, switching a mode with four settings\n"
@@ -34,18 +34,18 @@ LITH_TXT_UPGRADE_REACTIVE =
    "made by an avian nation formed on the\n"
    "planet DURLA-Prime.";
 
-LITH_TXT_UPGRADE_SERIOUSM =
+LITH_TXT_UPGRADE_SeriousMode =
    "Cost: ---\n"
    "Effect: Make enemies invisible, and always fast.\n"
    "Description: Are you Serious?";
 
-LITH_TXT_UPGRADE_IMPLYING =
+LITH_TXT_UPGRADE_Implying =
    "Cost: ---\n"
    "Effect: Oh god why did I add something Kegan\n"
    "suggested to me this was not a good idea\n"
    "Description: God damn it.";
 
-LITH_TXT_UPGRADE_ZHARKOVM =
+LITH_TXT_UPGRADE_ZharkovMode =
    "Cost: 1scr\n"
    "Effect: Turns you into Zharkov,\n"
    "destroyer of worlds.\n"

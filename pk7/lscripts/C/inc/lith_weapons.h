@@ -6,7 +6,6 @@ enum
    weapon_unknown,
    weapon_pistol,
    weapon_shotgun,
-   weapon_supershotgun,
    weapon_combatrifle,
    weapon_rocketlauncher,
    weapon_plasmarifle,

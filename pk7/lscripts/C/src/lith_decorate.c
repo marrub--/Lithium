@@ -15,7 +15,6 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
       [weapon_unknown] = "MMMMHMHMMMHMMM",
       [weapon_pistol] = "weapons/pistol/pickup",
       [weapon_shotgun] = "weapons/shotgun/pickup",
-      [weapon_supershotgun] = "weapons/ssg/pickup",
       [weapon_combatrifle] = "weapons/rifle/pickup",
       [weapon_rocketlauncher] = "weapons/rocket/pickup",
       [weapon_plasmarifle] = "weapons/plasma/pickup",

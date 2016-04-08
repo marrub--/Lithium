@@ -79,7 +79,6 @@ void Lith_PlayerHUD(player_t *p)
       [weapon_unknown]        = "H_D27",
       [weapon_pistol]         = "H_D24",
       [weapon_shotgun]        = "H_D23",
-      [weapon_supershotgun]   = "H_D23",
       [weapon_combatrifle]    = "H_D22",
       [weapon_rocketlauncher] = "H_D21",
       [weapon_plasmarifle]    = "H_D25",
@@ -148,14 +147,9 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Ammo
-   if(p->weapontype == weapon_pistol || p->weapontype == weapon_supershotgun)
+   if(p->weapontype == weapon_pistol)
    {
-      int count;
-      
-      if(p->weapontype == weapon_pistol)
-         count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
-      else if(p->weapontype == weapon_supershotgun)
-         count = ACS_CheckInventory("Lith_SuperShotgunCharge");
+      int count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
       
       DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
       

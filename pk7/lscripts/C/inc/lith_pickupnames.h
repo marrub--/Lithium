@@ -29,15 +29,6 @@ pickups(weapon_shotgun, {
    null
 })
 
-pickups(weapon_supershotgun, {
-   "Super Shotgun",
-   "Sbepru Shtetgenu",
-   "Sugoi Shotgun-desu",
-   "Soapy Shitgun",
-   "Super Famigun",
-   null
-})
-
 pickups(weapon_combatrifle, {
    "Combat Rifle",
    "Cmobta Riffel",

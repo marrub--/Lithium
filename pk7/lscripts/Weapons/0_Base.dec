@@ -230,3 +230,5 @@ actor Lith_Weapon : Weapon
    }
 }
 
+actor Lith_FuckSuperShotguns : Lith_Dummy replaces SuperShotgun {}
+

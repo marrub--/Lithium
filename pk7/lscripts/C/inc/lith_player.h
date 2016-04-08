@@ -5,6 +5,7 @@
 
 #include "lith_weapons.h"
 #include "lith_cbi.h"
+#include "lith_upgrades.h"
 
 enum
 {
@@ -20,11 +21,10 @@ enum
 {
    weaponf_pistol         = 1 << 0,
    weaponf_shotgun        = 1 << 1,
-   weaponf_supershotgun   = 1 << 2,
-   weaponf_combatrifle    = 1 << 3,
-   weaponf_rocketlauncher = 1 << 4,
-   weaponf_plasmarifle    = 1 << 5,
-   weaponf_bfg9000        = 1 << 6
+   weaponf_combatrifle    = 1 << 2,
+   weaponf_rocketlauncher = 1 << 3,
+   weaponf_plasmarifle    = 1 << 4,
+   weaponf_bfg9000        = 1 << 5
 };
 
 enum
@@ -45,6 +45,7 @@ enum
 
 typedef long long int score_t;
 
+// That's a lot of data!
 typedef struct player_s
 {
    // Status data
@@ -72,6 +73,9 @@ typedef struct player_s
    // CBI
    cbi_t cbi;
    bip_t bip;
+   
+   // Upgrades
+   upgrades_t upgrades;
    
    // Statistics
    int weaponsheld;

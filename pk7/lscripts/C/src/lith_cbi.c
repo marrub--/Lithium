@@ -72,17 +72,6 @@ enum
    uid_upgrade_list = uid_base_upgrade,
 };
 
-enum
-{
-   #define U(en, name) UPGR_##en,
-   #include "lith_upgrades.h"
-};
-
-static __str upgradenames[] = {
-   #define U(en, name) [UPGR_##en] = #en,
-   #include "lith_upgrades.h"
-};
-
 static
 void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
 {
@@ -93,7 +82,7 @@ void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t cur)
    int i = list ? list->selected : -1;
    
    if(i >= 0)
-      text->text = Language("LITH_TXT_UPGRADE_%S", upgradenames[i]);
+      text->text = Language("LITH_TXT_UPGRADE_%S", upgrade_enums[i]);
    
    UI_NodeUpdate(node, p, cur);
 }
@@ -165,13 +154,7 @@ void Lith_PlayerInitCBI(player_t *p)
       ui_nodefuncs_t upgrfunc = { .Update = Menu_Upgrades_DescriptionUpdate };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
-      __str listnames[] = {
-         #define U(en, name) [UPGR_##en] = name,
-         #include "lith_upgrades.h"
-         null
-      };
-      
-      UI_InsertNode(tab->children, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, listnames, 19));
+      UI_InsertNode(tab->children, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));
       UI_InsertNode(tab->children, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
       
       UI_InsertNode(tabs->children, tab);

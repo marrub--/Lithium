@@ -20,7 +20,6 @@ void Lith_GetWeaponType(player_t *p)
    static struct weaponid const weaponids[] = {
       { "Lith_Pistol",         weapon_pistol,         weaponf_pistol         },
       { "Lith_Shotgun",        weapon_shotgun,        weaponf_shotgun        },
-      { "Lith_SuperShotgun",   weapon_supershotgun,   weaponf_supershotgun   },
       { "Lith_CombatRifle",    weapon_combatrifle,    weaponf_combatrifle    },
       { "Lith_RocketLauncher", weapon_rocketlauncher, weaponf_rocketlauncher },
       { "Lith_PlasmaRifle",    weapon_plasmarifle,    weaponf_plasmarifle    },
@@ -207,10 +206,6 @@ void Lith_ResetPlayer(player_t *p)
    // is bad practice
    ACS_TakeInventory("Lith_PistolScopedToken", 999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
-   ACS_TakeInventory("Lith_MinigunWindup", 999);
-   ACS_TakeInventory("Lith_MinigunWinddown", 999);
-   ACS_TakeInventory("Lith_SuperShotgunCharge", 999);
-   ACS_TakeInventory("Lith_SuperShotgunChargeIter", 999);
    
    // i cri tears of pain for APROP_SpawnHealth
    if(!p->maxhealth)
