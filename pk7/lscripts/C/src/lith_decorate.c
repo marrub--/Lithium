@@ -81,7 +81,7 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_UniqueTID()
+int Lith_UniqueTID(void)
 {
    return ACS_UniqueTID();
 }
@@ -97,7 +97,7 @@ int Lith_GetCVar(int var)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_UpdateScore()
+void Lith_UpdateScore(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    
@@ -151,7 +151,7 @@ bool Lith_FireScore(int amount)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_SwitchRifleFiremode()
+void Lith_SwitchRifleFiremode(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    int max = rifle_firemode_max;
@@ -164,7 +164,7 @@ void Lith_SwitchRifleFiremode()
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetRifleFiremode()
+int Lith_GetRifleFiremode(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    return p->riflefiremode;

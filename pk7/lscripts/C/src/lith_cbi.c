@@ -9,7 +9,7 @@
 //
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_KeyOpenCBI()
+void Lith_KeyOpenCBI(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    

@@ -257,7 +257,7 @@ static
 void Lith_GiveSecretScore(int playernum, int mul)
 {
    [[__call("ScriptS"), __extern("ACS")]]
-   extern void Lith_UpdateScore();
+   extern void Lith_UpdateScore(void);
    player_t *p = &players[playernum];
    
    ACS_SetActivator(p->tid);
@@ -338,7 +338,7 @@ void Lith_PlayerStats(player_t *p)
 //
 
 [[__call("ScriptI"), __script("Open")]]
-void Lith_World()
+void Lith_World(void)
 {
    int maxsecrets = ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
    int prevsecrets = 0;
@@ -361,14 +361,14 @@ void Lith_World()
 }
 
 [[__call("ScriptI"), __script("Disconnect")]]
-void Lith_PlayerDisconnect()
+void Lith_PlayerDisconnect(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    p->active = false;
 }
 
 [[__call("ScriptI"), __script("Enter")]]
-void Lith_Player()
+void Lith_Player(void)
 {
    register player_t *p = &players[ACS_PlayerNumber()];
    
