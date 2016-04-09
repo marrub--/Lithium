@@ -44,6 +44,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       loop
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_ShotgunJustFrame", 1, "FireJust")
+      goto Fire1
    FireJust:
       TNT1 A 0 A_TakeInventory("Lith_ShotgunJustFrame", 0x7FFFFFFF)
       TNT1 A 0 A_FireBullets(5.3, 2.3, 8, 4, "BulletPuff")
