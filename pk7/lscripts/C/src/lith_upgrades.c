@@ -1,6 +1,10 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_upgrades.h"
+#include "lith_hudid.h"
+
+static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr);
+static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
 
 // ---------------------------------------------------------------------------
 // Data.
@@ -8,23 +12,23 @@
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    // Body
-   [UPGR_JetBooster]  = { 0         , true,  null, null, null },
-   [UPGR_CyberLegs]   = { 900000    , false, null, null, null },
-   [UPGR_ReactArmour] = { 3200200   , false, null, null, null },
-   [UPGR_Splitter]    = { 800000    , false, null, null, null },
+   [UPGR_JetBooster]  = { 0         , true,  null, null, Upgr_JetBooster_Update },
+   [UPGR_CyberLegs]   = { 900000    , false },
+   [UPGR_ReactArmour] = { 3200200   , false },
+   [UPGR_Splitter]    = { 800000    , false },
    // Weapons
-   [UPGR_GaussShotty] = { 770430    , false, null, null, null },
-   [UPGR_RifleModes]  = { 340100    , false, null, null, null },
-   [UPGR_ChargeNader] = { 850000    , false, null, null, null },
-   [UPGR_PlasLaser]   = { 1400000   , false, null, null, null },
-   [UPGR_OmegaRail]   = { 2600700   , false, null, null, null },
+   [UPGR_GaussShotty] = { 770430    , false },
+   [UPGR_RifleModes]  = { 340100    , false },
+   [UPGR_ChargeNader] = { 850000    , false },
+   [UPGR_PlasLaser]   = { 1400000   , false },
+   [UPGR_OmegaRail]   = { 2600700   , false },
    // Downgrades
-   [UPGR_SeriousMode] = { 0         , false, null, null, null },
-   [UPGR_RetroWeps]   = { 0         , false, null, null, null },
-   [UPGR_lolsords]    = { 0         , false, null, null, null },
+   [UPGR_SeriousMode] = { 0         , false },
+   [UPGR_RetroWeps]   = { 0         , false },
+   [UPGR_lolsords]    = { 0         , false },
    // :v
-   [UPGR_Implying]    = { 0         , false, null, null, null },
-   [UPGR_ZharkovMode] = { -100      , false, null, null, null },
+   [UPGR_Implying]    = { 0         , false, null, null, Upgr_Implying_Update },
+   [UPGR_ZharkovMode] = { -100      , false },
 };
 
 static __str upgrade_enums[] = {
@@ -38,6 +42,61 @@ __str upgrade_names[] = {
    #include "lith_upgradenames.h"
    null
 };
+
+// ---------------------------------------------------------------------------
+// Callbacks.
+//
+
+static
+void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
+{
+   fixed grounddist = p->z - p->floorz;
+   
+   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 &&
+      p->rocketcharge >= rocketcharge_max)
+   {
+      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      
+      ACS_PlaySound(0, "player/rocketboost");
+      ACS_GiveInventory("Lith_RocketBooster", 1);
+      ACS_SetActorVelocity(0,
+         p->velx + (ACS_Cos(angle) * 16.0),
+         p->vely + (ACS_Sin(angle) * 16.0),
+         10.0,
+         false, true);
+      
+      p->rocketcharge = 0;
+      p->leaped = false;
+   }
+}
+
+static
+void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
+{
+   static __str strings[] = {
+      "\Cd>implying",
+      "\Cd>",
+      "\Cd>>>>>>>>>",
+      "\Cd>>>>>>>>>>>>>>>",
+      "\Cq<",
+      "\Cd>doombabbies",
+      "\Cd>doom shitters",
+      "\Cd>>>>>>>clip",
+   };
+   static int const num_strings = sizeof(strings) / sizeof(*strings);
+   static int const id_max = hid_implyingE - hid_implyingS;
+   
+   int id = upgr->user_int[0];
+   for(int i = 0, n = ACS_Random(0, 40); i < n; i++)
+   {
+      id = ++id % id_max;
+      
+      HudMessageF("BIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
+      HudMessageFade(hid_implyingE + id, ACS_RandomFixed(0.0, 1.0), ACS_RandomFixed(0.0, 1.0), ACS_RandomFixed(0.1, 0.4), 0.1);
+   }
+   
+   upgr->user_int[0] = id;
+}
 
 // ---------------------------------------------------------------------------
 // Scripts.
@@ -110,4 +169,8 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
          upgr->info->Update(p, upgr);
    }
 }
+
+//
+//
+// ---------------------------------------------------------------------------
 

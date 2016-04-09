@@ -19,6 +19,7 @@ typedef struct upgrade_s
    upgradeinfo_t const *info;
    __str name;
    __str description;
+   int user_int[8];
 } upgrade_t;
 
 enum

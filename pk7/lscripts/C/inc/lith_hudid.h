@@ -39,6 +39,8 @@ enum
    hid_end_misc  = hid_base + 40999,
    
    hid_ack = hid_base_misc,
+   hid_implyingE,
+   hid_implyingS = hid_implyingE + 200,
    
    // Scope
    hid_base_scope = hid_base + 41000,

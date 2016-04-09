@@ -6,12 +6,12 @@
 
 LITH_TXT_UPGRADE_JetBooster = // Jet Booster
    "Cost: ---\n\n"
-   "Effect: Lets you press the Speed key while in the air to let you fly for a short time.\n\n"
+   "Effect: Lets you press the \"speed\" key while in the air to let you fly for a short time.\n\n"
    "Description: Jet boosters built into your suit.";
 
 LITH_TXT_UPGRADE_CyberLegs = // Cyber Legs
    "Cost: 900,000scr\n\n"
-   "Effect: Allows you to jump higher, and sprint by holding the Speed key.\n\n"
+   "Effect: Allows you to jump higher, and sprint by holding the \"speed\" key.\n\n"
    "Description: Implement glorious Culter Dei"
    " technology, letting you augment your legs for combat effectiveness.";
 

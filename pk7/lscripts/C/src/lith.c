@@ -230,23 +230,6 @@ void Lith_PlayerMove(player_t *p)
       
       p->leaped = true;
    }
-   
-   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 &&
-      p->rocketcharge >= rocketcharge_max)
-   {
-      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
-      
-      ACS_PlaySound(0, "player/rocketboost");
-      ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(angle) * 16.0),
-         p->vely + (ACS_Sin(angle) * 16.0),
-         10.0,
-         false, true);
-      
-      p->rocketcharge = 0;
-      p->leaped = false;
-   }
 }
 
 //
@@ -462,10 +445,11 @@ void Lith_Player()
       if(p->health > 0)
       {
          Lith_PlayerUpdateCBI(p);
-         Lith_PlayerUpdateUpgrades(p);
          
          if(!p->frozen)
             Lith_PlayerMove(p);
+         
+         Lith_PlayerUpdateUpgrades(p);
       }
       else
          p->cbi.open = false;
