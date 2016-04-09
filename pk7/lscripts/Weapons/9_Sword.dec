@@ -1,113 +1,8 @@
-actor Lith_SwordHipcher
-{
-   RenderStyle Add
-   Alpha 0.25
-   
-   +NOINTERACTION
-   
-   states
-   {
-   Spawn:
-      SMOK A 15 A_FadeOut(0.1)
-      wait
-   }
-}
+#include "lscripts/Weapons/SwordSwing.dec"
 
-actor Lith_SwordHitler
+actor Lith_SwordCharge : Inventory
 {
-   RenderStyle Add
-   Scale 0.5
-   
-   +NOINTERACTION
-   
-   states
-   {
-   Spawn:
-      SHKR B 0
-      SHKR BBBBBBBB 0 A_SpawnItemEx("Lith_SwordHipcher",
-                                    frandom(-24,24),frandom(-24,24),frandom(-24,24),
-                                    frandom(-8,8),frandom(-8,8),frandom(-8,8),
-                                    0, SXF_NOCHECKPOSITION, 240)
-      SHKR B 1 bright A_FadeOut(0.1)
-      wait
-   }
-}
-
-actor Lith_SwordHither
-{
-   RenderStyle Add
-   Scale 0.5
-   
-   +NOINTERACTION
-   
-   states
-   {
-   Spawn:
-      SHKR B 0
-      SHKR B 1 bright A_FadeOut(0.1)
-      wait
-   }
-}
-
-actor Lith_SwordHitter
-{
-   Radius 6
-   Height 6
-   Speed 40
-   Damage 30
-   
-   Projectile
-   +RIPPER
-   
-   var int user_cx;
-   var int user_cy;
-   
-   states
-   {
-   Spawn:
-      TNT1 A 0
-      TNT1 A 3 A_PlaySound("weapons/sword/attack")
-      TNT1 A 0 A_SetUserVar(user_cx, sin(angle) * FIX)
-      TNT1 A 0 A_SetUserVar(user_cy, cos(angle) * FIX)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHitler", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (2 *(user_cx/FIX)), (2 *(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (4 *(user_cx/FIX)), (4 *(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (6 *(user_cx/FIX)), (6 *(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (8 *(user_cx/FIX)), (8 *(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (10*(user_cx/FIX)), (10*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (12*(user_cx/FIX)), (12*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (14*(user_cx/FIX)), (14*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (16*(user_cx/FIX)), (16*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (18*(user_cx/FIX)), (18*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (20*(user_cx/FIX)), (20*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (22*(user_cx/FIX)), (22*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (24*(user_cx/FIX)), (24*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (26*(user_cx/FIX)), (26*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (28*(user_cx/FIX)), (28*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (30*(user_cx/FIX)), (30*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", (32*(user_cx/FIX)), (32*(user_cy/FIX)), 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
-      TNT1 A 1
-      wait
-   }
-}
-
-actor Lith_SwordBlitter
-{
-   Speed 0
-   
-   Projectile
-   +NOBLOCKMAP
-   
-   states
-   {
-   Spawn:
-      TNT1 A 0
-      TNT1 A 0 A_CustomMissile("Lith_SwordHitter",   8, 0, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 1 A_CustomMissile("Lith_SwordHitter",  16, 0, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 0 A_CustomMissile("Lith_SwordHitter",  -8, 0, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 1 A_CustomMissile("Lith_SwordHitter", -16, 0, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      stop
-   }
+   Inventory.MaxAmount 25
 }
 
 actor Lith_Sword : Lith_Weapon
@@ -117,10 +12,12 @@ actor Lith_Sword : Lith_Weapon
    Weapon.SlotNumber 1
    
    +WEAPON.MELEEWEAPON
+   +WEAPON.NOAUTOFIRE
    
    states
    {
    Ready:
+      SORD A 0 A_TakeInventory("Lith_SwordCharge", 0x7FFFFFFF)
       SORD A 1 A_WeaponReady
       Loop
    Deselect:
@@ -134,10 +31,35 @@ actor Lith_Sword : Lith_Weapon
       SORD A 1
       Loop
    Fire:
-      PUNG B 1 A_SpawnItemEx("Lith_SwordBlitter", 0, 0, 24, 0, 0, 0, 0, SXF_SETTARGET | SXF_NOCHECKPOSITION)
-      PUNG CD 1
-      PUNG C 10
-      PUNG B 1 A_ReFire
+      SORD A 0
+      goto Ready
+   AltFire:
+      SORD A 0 A_JumpIfInventory("Lith_SwordCharge", 1, "AltFireSkipSound")
+      SORD A 0 A_PlaySound("weapons/sword/charge")
+   AltFireSkipSound:
+      SORD A 1 A_WeaponReady(LITH_BOBONLY)
+      SORD A 0 A_JumpIfInventory("Lith_SwordCharge", 0, "AltFireForReal")
+      SORD A 0 A_GiveInventory("Lith_SwordCharge", 1)
+      SORD A 0 A_Refire
+      goto Ready
+   AltFireForReal:
+      SORD A 15 A_PlaySound("weapons/sword/chargeup", CHAN_WEAPON)
+      SORD AB 2
+      SORD CD 1
+      TNT1 A 5
+      SORD E 1 A_PlaySound("weapons/sword/swing", 7)
+      SORD F 1 A_SpawnItemEx("Lith_SwordBlitter", 0, 0, 24, 0, 0, 0, 0, SXF_SETTARGET | SXF_NOCHECKPOSITION)
+      SORD GH 1
+      TNT1 A 4
+      SORD A 1 offset(-17, 50)
+      SORD A 1 offset(-13, 49)
+      SORD A 1 offset(-10, 46)
+      SORD A 1 offset(-8 , 43)
+      SORD A 1 offset(-4 , 40)
+      SORD A 1 offset(-2 , 38)
+      SORD A 1 offset(-1 , 35)
+      SORD A 1 offset(-1 , 33)
+      SORD A 1 offset(0  , 32)
       Goto Ready
    Spawn:
       FIST A 0

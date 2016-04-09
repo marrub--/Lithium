@@ -29,8 +29,8 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    // Downgrades
    [UPGR_SeriousMode] = { 0         , false },
    [UPGR_RetroWeps]   = { 0         , false },
-   [UPGR_lolsords]    = { 1000      , false, Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
-   // [UPGR_lolsords]    = { 0         , true,  Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
+   // [UPGR_lolsords]    = { 1000      , false, Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
+   [UPGR_lolsords]    = { 0         , true,  Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
    // :v
    [UPGR_Implying]    = { 0         , false, null, null, Upgr_Implying_Update },
    [UPGR_ZharkovMode] = { -100      , false },

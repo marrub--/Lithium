@@ -77,9 +77,7 @@ actor Lith_PlasmaBolt
                                   -((user_trailstep * 10.0) * vely) / -35.0,
                              2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
                              0, 0, 0,
-                             0,
-                             SXF_ABSOLUTEANGLE |
-                             SXF_NOCHECKPOSITION)
+                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION)
       loop
    TrailDone:
       TNT1 A 0 A_SetUserVar(user_trailstep, 0)
@@ -118,9 +116,7 @@ actor Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
                                   -((user_trailstep * 10.0) * vely) / -35.0,
                              2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
                              0, 0, 0,
-                             0,
-                             SXF_ABSOLUTEANGLE |
-                             SXF_NOCHECKPOSITION)
+                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION)
       loop
    TrailDone:
       TNT1 A 0 A_SetUserVar(user_trailstep, 0)

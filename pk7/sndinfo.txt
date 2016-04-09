@@ -96,9 +96,10 @@ weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 
 // sord
-weapons/sword/charge lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View
-weapons/sword/attack lsounds/Sword/Charge1.flac // same
-weapons/sword/swing  lsounds/Sword/Swing.flac   // same
+weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View
+weapons/sword/attack   lsounds/Sword/Charge1.flac // same
+weapons/sword/swing    lsounds/Sword/Swing.flac   // same
+weapons/sword/charge   lsounds/Sword/Charge2.flac // same
 
 //
 // Enemies
