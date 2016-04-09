@@ -30,12 +30,9 @@ actor Lith_CannonBall
       CBAL A 1 bright A_SetAngle(user_angle / 65536.0)
       loop
    Death:
-      CBAL B 0
-      {
-         A_SetScale(2);
-         A_NoGravity;
-         return state("Splodey");
-      }
+      CBAL B 0 A_SetScale(2)
+      CBAL B 0 A_NoGravity
+      CBAL B 0 A_Jump(256, "Splodey")
    Splodey:
       CBAL BBBB 0 A_Explode
       goto Death1

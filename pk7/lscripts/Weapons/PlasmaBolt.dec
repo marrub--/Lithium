@@ -10,7 +10,7 @@ actor Lith_PlasmaBoltTrail
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 { return state("Particles"); }
+      TNT1 A 0 A_Jump(256, "Particles")
    SpawnPick:
       TNT1 A 0 A_Jump(256, "SpawnA", "SpawnB")
    SpawnA:
@@ -68,26 +68,22 @@ actor Lith_PlasmaBolt
    {
    Spawn:
       TNT1 A 3
+      TNT1 A 0 A_Jump(256, "Trail")
    Trail:
-      TNT1 A 0
-      {
-         if(user_trailstep >= 5)
-         {
-            A_SetUserVar(user_trailstep, 0);
-            return state("Step");
-         }
-         
-         A_SetUserVar(user_trailstep, user_trailstep + 1);
-         A_SpawnItemEx("Lith_PlasmaBoltTrail_Green",
-                  ((user_trailstep * 10.0) * velx) / -35.0,
-                 -((user_trailstep * 10.0) * vely) / -35.0,
-            2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
-            0, 0, 0,
-            0,
-            SXF_ABSOLUTEANGLE |
-            SXF_NOCHECKPOSITION);
-         return state("Trail");
-      }
+      TNT1 A 0 A_JumpIf(user_trailstep >= 5, "TrailDone")
+      TNT1 A 0 A_SetUserVar(user_trailstep, user_trailstep + 1)
+      TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Green",
+                                   ((user_trailstep * 10.0) * velx) / -35.0,
+                                  -((user_trailstep * 10.0) * vely) / -35.0,
+                             2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
+                             0, 0, 0,
+                             0,
+                             SXF_ABSOLUTEANGLE |
+                             SXF_NOCHECKPOSITION)
+      loop
+   TrailDone:
+      TNT1 A 0 A_SetUserVar(user_trailstep, 0)
+      goto Step
    Step:
       TNT1 A 1
       goto Trail
@@ -115,25 +111,20 @@ actor Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
    states
    {
    Trail:
-      TNT1 A 0
-      {
-         if(user_trailstep >= 10)
-         {
-            A_SetUserVar(user_trailstep, 0);
-            return state("Step");
-         }
-         
-         A_SetUserVar(user_trailstep, user_trailstep + 1);
-         A_SpawnItemEx("Lith_PlasmaBoltTrail_Red",
-                  ((user_trailstep * 10.0) * velx) / -35.0,
-                 -((user_trailstep * 10.0) * vely) / -35.0,
-            2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
-            0, 0, 0,
-            0,
-            SXF_ABSOLUTEANGLE |
-            SXF_NOCHECKPOSITION);
-         return state("Trail");
-      }
+      TNT1 A 0 A_JumpIf(user_trailstep >= 10, "TrailDone")
+      TNT1 A 0 A_SetUserVar(user_trailstep, user_trailstep + 1)
+      TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Red",
+                                   ((user_trailstep * 10.0) * velx) / -35.0,
+                                  -((user_trailstep * 10.0) * vely) / -35.0,
+                             2.0 + ((user_trailstep * 10.0) * velz) / -35.0,
+                             0, 0, 0,
+                             0,
+                             SXF_ABSOLUTEANGLE |
+                             SXF_NOCHECKPOSITION)
+      loop
+   TrailDone:
+      TNT1 A 0 A_SetUserVar(user_trailstep, 0)
+      goto Step
    Death:
       TNT1 AAAA 0 A_SpawnParticle(Red, SPF_FULLBRIGHT, 15, 4, 0,
          frandom[Lith_PlasmaBolt](-5, 5),

@@ -1,18 +1,7 @@
 //
 // Weapons
 
-weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Killing Floor
-weapons/minigun/fire1  lsounds/Minigun/FireFast.flac    // same
-weapons/minigun/fire2  lsounds/Minigun/FireMedium.flac  // same
-weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // Serious Sam: The First Encounter HD
-weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // same
-weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // same
-weapons/minigun/click  lsounds/Minigun/Click.flac       // same
-weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
-$volume weapons/minigun/fire 0.7
-$volume weapons/minigun/fire1 0.7
-$volume weapons/minigun/fire2 0.7
-
+// Pistol
 weapons/pistol/fire    lsounds/Pistol/Fire.flac     // Killing Floor
 weapons/pistol/reload  lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
 weapons/pistol/zoomin  lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
@@ -20,6 +9,7 @@ weapons/pistol/zoomout lsounds/Pistol/ScopeOut.flac // same
 weapons/pistol/pickup  lsounds/Pistol/Pickup.flac   // Fallout 4
 $alias weapons/pistol/draw weapons/pistol/pickup
 
+// Shotgun
 weapons/shotgun/fire    lsounds/Shotgun/FireFull.flac  // Killing Floor, General 6000
 weapons/shotgun/open    lsounds/Shotgun/PumpOpen.flac  // General 6000
 weapons/shotgun/close   lsounds/Shotgun/PumpClose.flac // same
@@ -36,14 +26,7 @@ $random weapons/shotgun/just {
    weapons/shotgun/just2
    weapons/shotgun/just3 }
 
-weapons/ssg/charge       lsounds/SuperShotgun/Charge.flac       // Killing Floor
-weapons/ssg/chargefinish lsounds/SuperShotgun/ChargeFinish.flac // same
-weapons/ssg/close        lsounds/SuperShotgun/Close.flac        // Killing Floor, ???
-weapons/ssg/open         lsounds/SuperShotgun/Open.flac         // same
-weapons/ssg/load         lsounds/SuperShotgun/Load.flac         // General 6000, Fallout: New Vegas
-weapons/ssg/pickup       lsounds/SuperShotgun/Pickup.flac       // General 6000, Fallout: New Vegas, Killing Floor
-weapons/ssg/draw         lsounds/SuperShotgun/Draw.flac         // Painkiller, Fallout: New Vegas, Firearms: Source
-
+// Combat Rifle
 weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
 weapons/rifle/fire2      lsounds/CombatRifle/Fire2.flac       // same
 weapons/rifle/fire3      lsounds/CombatRifle/Fire3.flac       // same
@@ -75,6 +58,7 @@ $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe2
    weapons/rifle/firesnipe3 }
 
+// Grenade Launcher
 weapons/rocket/fire1  lsounds/RocketLauncher/Fire.flac   // FEAR
 weapons/rocket/fire2  lsounds/RocketLauncher/Fire1.flac  // same
 weapons/rocket/fire3  lsounds/RocketLauncher/Fire2.flac  // same
@@ -87,6 +71,7 @@ $random weapons/rocket/fire {
    weapons/rocket/fire2
    weapons/rocket/fire3 }
 
+// Plasma Rifle
 weapons/plasma/fire    lsounds/PlasmaRifle/Fire.flac      // Devil May Cry 3
 weapons/plasma/altfire lsounds/PlasmaRifle/AltFire.flac   // same
 weapons/plasma/pickup  lsounds/PlasmaRifle/Pickup.flac    // Alliance of Valiant Arms
@@ -102,12 +87,18 @@ $random weapons/plasma/explode {
    weapons/plasma/explode2
    weapons/plasma/explode3 }
 
+// Omega Cannon
 weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD
 weapons/cannon/prepare lsounds/Cannon/Prepare.flac   // same
 weapons/cannon/explode lsounds/Cannon/Explode.flac   // same
 weapons/cannon/empty   lsounds/Cannon/FireEmpty.flac // Killing Floor
 weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
+
+// sord
+weapons/sword/charge lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View
+weapons/sword/attack lsounds/Sword/Charge1.flac // same
+weapons/sword/swing  lsounds/Sword/Swing.flac   // same
 
 //
 // Enemies

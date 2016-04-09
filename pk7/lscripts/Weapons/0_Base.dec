@@ -29,26 +29,13 @@ actor Lith_WeaponSprite
    states
    {
    Spawn:
-      "####" "#" 1 bright
-      {
-         A_SetUserVar(user_floatangle,  (user_floatangle  + 2) % 360);
-         A_SetUserVar(user_floatzangle, (user_floatzangle + 3) % 360);
-         
-         A_SetUserVar(user_origx, x * FIX);
-         A_SetUserVar(user_origy, y * FIX);
-         A_SetUserVar(user_origz, z * FIX);
-         
-         A_Warp(AAPTR_MASTER,
-            cos(user_floatangle) * 4.0,
-            sin(user_floatangle) * 4.0,
-            16.0 + (sin(user_floatzangle) * 12.0),
-            0.0, WARPF_NOCHECKPOSITION);
-      }
-      "####" "#" 0 bright A_Warp(AAPTR_MASTER,
-         user_origx / FIX,
-         user_origy / FIX,
-         user_origz / FIX,
-         0, WARPF_ABSOLUTEPOSITION)
+      "####" "#" 0 A_SetUserVar(user_floatangle,  (user_floatangle  + 2) % 360)
+      "####" "#" 0 A_SetUserVar(user_floatzangle, (user_floatzangle + 3) % 360)
+      "####" "#" 0 A_SetUserVar(user_origx, x * FIX)
+      "####" "#" 0 A_SetUserVar(user_origy, y * FIX)
+      "####" "#" 0 A_SetUserVar(user_origz, z * FIX)
+      "####" "#" 1 bright A_Warp(AAPTR_MASTER, cos(user_floatangle) * 4.0, sin(user_floatangle) * 4.0, 16.0 + (sin(user_floatzangle) * 12.0), 0.0, WARPF_NOCHECKPOSITION)
+      "####" "#" 0 bright A_Warp(AAPTR_MASTER, user_origx / FIX, user_origy / FIX, user_origz / FIX, 0, WARPF_ABSOLUTEPOSITION)
       loop
    }
 }
@@ -73,85 +60,34 @@ actor Lith_Weapon : Weapon
    
    states
    {
-   DummyState: // Actually jumping to this state will cause a crash.
-      TNT1 A 0 // Only use this in functions.
-      loop
    SpawnLoop:
       "####" "#" 1
-      "####" "#" 0 bright
-      {
-         Thing_ChangeTID(0, CallACS("Lith_UniqueTID"));
-         A_SetUserVar("user_spritetid", CallACS("Lith_UniqueTID"));
-         // 226:ACS_ExecuteAlways
-         A_SetSpecial(226, 200, 0, user_pickupparm, user_spritetid);
-         A_SpawnItemEx("Lith_WeaponSprite",
-            0, 0, 0,
-            0, 0, 0,
-            0, SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER, 0,
-            user_spritetid);
-      }
+      "####" "#" 0 Thing_ChangeTID(0, CallACS("Lith_UniqueTID"))
+      "####" "#" 0 A_SetUserVar("user_spritetid", CallACS("Lith_UniqueTID"))
+      "####" "#" 0 A_SetSpecial(226, 200, 0, user_pickupparm, user_spritetid) // 226:ACS_ExecuteAlways
+      "####" "#" 0 A_SpawnItemEx("Lith_WeaponSprite", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER, 0, user_spritetid)
    SpawnLoopForRealYo:
-      TNT1 A 1
-      {
-         if(!A_CheckSight("DummyState"))
-         {
-            A_SetUserVar(user_glowangle,  (user_glowangle   + 5) % 360);
-            A_SetUserVar(user_glowzangle, (user_glowzangle  + 2) % 360);
-            
-            // xyz
-            A_SpawnItemEx("Lith_WeaponGlow",
-               sin(user_glowangle) * 32.0,
-               cos(user_glowangle) * 32.0,
-               24.0 + (sin(user_glowzangle) * 9.0),
-               0, 0, 0,
-               0);
-            
-            // yz
-            A_SpawnItemEx("Lith_WeaponGlow",
-               0,
-               sin(user_glowangle) * 32.0,
-               24.0 + (cos(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-            
-            A_SpawnItemEx("Lith_WeaponGlow",
-               cos(user_glowangle) * 32.0,
-               sin(user_glowangle) * 32.0,
-               24.0 + (sin(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-            
-            A_SpawnItemEx("Lith_WeaponGlow",
-               cos(user_glowangle) * 32.0,
-               ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-               24.0 + (sin(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-            
-            // xz
-            A_SpawnItemEx("Lith_WeaponGlow",
-               sin(user_glowangle) * 32.0,
-               0,
-               24.0 + (cos(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-            
-           A_SpawnItemEx("Lith_WeaponGlow",
-               sin(user_glowangle) * 32.0,
-               cos(user_glowangle) * 32.0,
-               24.0 + (sin(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-            
-           A_SpawnItemEx("Lith_WeaponGlow",
-               ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-               cos(user_glowangle) * 32.0,
-               24.0 + (sin(user_glowangle) * 32.0),
-               0, 0, 0,
-               0);
-         }
-      }
+      TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
+      TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
+      
+      // xyz
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", sin(user_glowangle) * 32.0, cos(user_glowangle) * 32.0, 24.0 + (sin(user_glowzangle) * 9.0), 0, 0, 0, 0)
+      
+      // yz
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", 0, sin(user_glowangle) * 32.0, 24.0 + (cos(user_glowangle) * 32.0), 0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", cos(user_glowangle) * 32.0, sin(user_glowangle) * 32.0, 24.0 + (sin(user_glowangle) * 32.0), 0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", cos(user_glowangle) * 32.0, ((1.0 - sin(user_glowangle)) * 32.0) - 32.0, 24.0 + (sin(user_glowangle) * 32.0), 0, 0, 0, 0)
+      
+      // xz
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", sin(user_glowangle) * 32.0, 0, 24.0 + (cos(user_glowangle) * 32.0), 0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", sin(user_glowangle) * 32.0, cos(user_glowangle) * 32.0, 24.0 + (sin(user_glowangle) * 32.0), 0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_WeaponGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0, cos(user_glowangle) * 32.0, 24.0 + (sin(user_glowangle) * 32.0), 0, 0, 0, 0)
       loop
+   LoopButDontShowThatShitOffDawg:
+      TNT1 A 1
+      TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      goto SpawnLoopForRealYo
    }
 }
 
