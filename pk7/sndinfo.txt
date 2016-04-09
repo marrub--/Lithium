@@ -99,7 +99,34 @@ weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View
 weapons/sword/attack   lsounds/Sword/Charge1.flac // same
 weapons/sword/swing    lsounds/Sword/Swing.flac   // same
+weapons/sword/swing1   lsounds/Sword/Swing1.flac  // same
 weapons/sword/charge   lsounds/Sword/Charge2.flac // same
+
+weapons/sword/normal1 lsounds/Sword/Swing2.flac // Ninja Gaiden Black
+weapons/sword/normal2 lsounds/Sword/Swing3.flac // same
+weapons/sword/normal3 lsounds/Sword/Swing4.flac // same
+weapons/sword/normal4 lsounds/Sword/Swing5.flac // same
+weapons/sword/normal5 lsounds/Sword/Swing6.flac // same
+
+$random weapons/sword/normal {
+   weapons/sword/normal1
+   weapons/sword/normal2
+   weapons/sword/normal3
+   weapons/sword/normal4
+   weapons/sword/normal5 }
+
+weapons/sword/hit1 lsounds/Sword/Hit1.flac // Ninja Gaiden Black
+weapons/sword/hit2 lsounds/Sword/Hit2.flac // same
+weapons/sword/hit3 lsounds/Sword/Hit3.flac // same
+weapons/sword/hit4 lsounds/Sword/Hit4.flac // same
+weapons/sword/hit5 lsounds/Sword/Hit5.flac // same
+
+$random weapons/sword/hit {
+   weapons/sword/hit1
+   weapons/sword/hit2
+   weapons/sword/hit3
+   weapons/sword/hit4
+   weapons/sword/hit5 }
 
 //
 // Enemies

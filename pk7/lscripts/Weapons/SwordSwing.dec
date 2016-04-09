@@ -60,9 +60,13 @@ actor Lith_SwordHitter
    +RIPPER
    
    var int user_trailstep;
+   var int user_delta;
    
    states
    {
+   ded:
+      TNT1 A 0
+      stop
    Spawn:
       TNT1 A 0
       TNT1 A 3 A_PlaySound("weapons/sword/attack")
@@ -74,11 +78,14 @@ actor Lith_SwordHitter
                                   -((user_trailstep * 4.0) * vely) / -35.0,
                              2.0 + ((user_trailstep * 4.0) * velz) / -35.0,
                              0, 0, 0,
-                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION)
+                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION,
+                             user_delta * 40)
       loop
    TrailDone:
       TNT1 A 0 A_SetUserVar(user_trailstep, 0)
       TNT1 A 0 A_SpawnItemEx("Lith_SwordHitler", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+      TNT1 A 0 A_SetUserVar(user_delta, user_delta + 1)
+      TNT1 A 0 A_JumpIf(user_delta >= 15, "ded")
       TNT1 A 1
       goto SpawnLoop
    }
