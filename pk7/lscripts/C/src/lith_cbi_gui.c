@@ -293,7 +293,7 @@ ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userf
    
    node->label = label;
    node->font  = font ? font : "CBIFONT";
-   node->active = (flags & BTNAF_START_INACTIVE) ? false : true;
+   node->active = !(flags & BTNAF_START_INACTIVE);
    
    UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
    node->node.basefuncs.Draw   = UI_ButtonDraw;

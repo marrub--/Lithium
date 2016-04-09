@@ -6,7 +6,7 @@
 // Data.
 //
 
-upgradeinfo_t const upgrade_info[UPGR_MAX] = {
+static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    // Body
    [UPGR_JetBooster]  = { 0         , true,  null, null, null },
    [UPGR_CyberLegs]   = { 900000    , false, null, null, null },

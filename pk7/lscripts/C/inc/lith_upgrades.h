@@ -28,7 +28,6 @@ enum
    UPGR_MAX
 };
 
-extern upgradeinfo_t const upgrade_info[];
 extern __str upgrade_names[];
 
 void Upgr_ToggleActive(struct player_s *p, upgrade_t *upgr);
