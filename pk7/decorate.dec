@@ -19,4 +19,5 @@
 #include "lscripts/Weapons/5_RocketLauncher.dec"
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
 #include "lscripts/Weapons/7_BFG9000.dec"
+#include "lscripts/Weapons/9_Sword.dec"
 

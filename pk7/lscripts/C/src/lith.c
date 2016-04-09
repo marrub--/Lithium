@@ -39,6 +39,7 @@ void Lith_ResetPlayer(player_t *p)
 {
    p->active = true;
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   ACS_SetAirControl(0.77);
    
    if(!p->cbi.wasinit)
       Lith_PlayerInitCBI(p);
@@ -194,16 +195,12 @@ void Lith_PlayerMove(player_t *p)
       if(grounddist == 0.0)
          p->leaped = false;
       
-      if(p->buttons & BT_SPEED && grounddist <= 16.0)
+      if(p->buttons & BT_SPEED && (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
          ACS_PlaySound(0, "player/slide");
-         ACS_SetActorVelocity(0,
-            p->velx + (ACS_Cos(angle) * 24.0),
-            p->vely + (ACS_Sin(angle) * 24.0),
-            -30.0,
-            false, true);
+         ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0, false, true);
          
          p->slidecharge = 0;
       }
@@ -216,11 +213,7 @@ void Lith_PlayerMove(player_t *p)
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
-      ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(angle) * 12.0),
-         p->vely + (ACS_Sin(angle) * 12.0),
-         10.0,
-         false, true);
+      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0, false, true);
       
       p->leaped = true;
    }

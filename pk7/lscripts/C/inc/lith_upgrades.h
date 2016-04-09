@@ -20,6 +20,7 @@ typedef struct upgrade_s
    __str name;
    __str description;
    int user_int[8];
+   __str user_str[8];
 } upgrade_t;
 
 enum

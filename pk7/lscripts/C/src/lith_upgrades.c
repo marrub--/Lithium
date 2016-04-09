@@ -4,8 +4,11 @@
 #include "lith_hudid.h"
 
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr);
-static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
 static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr);
+static void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr);
+static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr);
+static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr);
+static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
 
 // ---------------------------------------------------------------------------
 // Data.
@@ -26,7 +29,8 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    // Downgrades
    [UPGR_SeriousMode] = { 0         , false },
    [UPGR_RetroWeps]   = { 0         , false },
-   [UPGR_lolsords]    = { 0         , false },
+   [UPGR_lolsords]    = { 1000      , false, Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
+   // [UPGR_lolsords]    = { 0         , true,  Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
    // :v
    [UPGR_Implying]    = { 0         , false, null, null, Upgr_Implying_Update },
    [UPGR_ZharkovMode] = { -100      , false },
@@ -48,50 +52,87 @@ __str upgrade_names[] = {
 // Callbacks.
 //
 
+// --------------------------------------
+// JetBooster
+//
+
 static
 void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
    fixed grounddist = p->z - p->floorz;
    
-   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 &&
-      p->rocketcharge >= rocketcharge_max)
+   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 && p->rocketcharge >= rocketcharge_max)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0,
-         p->velx + (ACS_Cos(angle) * 16.0),
-         p->vely + (ACS_Sin(angle) * 16.0),
-         10.0,
-         false, true);
+      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0, false, true);
       
       p->rocketcharge = 0;
       p->leaped = false;
    }
 }
 
+// --------------------------------------
+// RifleModes
+//
+
+static
+void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   p->riflefiremode = 0;
+}
+
+// --------------------------------------
+// lolsords
+//
+
+static
+void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
+{
+   upgr->user_str[0] = p->weaponclass;
+   ACS_GiveInventory("Lith_Sword", 1);
+}
+
+static
+void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   ACS_TakeInventory("Lith_Sword", 1);
+   ACS_SetWeapon(upgr->user_str[0]);
+}
+
+static
+void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetWeapon("Lith_Sword");
+}
+
+// --------------------------------------
+// Implying
+//
+
 static
 void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
 {
    static __str strings[] = {
-      "\Cd>implying",
-      "\Cd>doombabbies",
-      "\Cd>implying",
-      "\Cd>doom shitters",
-      "\Cd>>>>>>>clip",
-      "\Cd>implying",
-      "\CjReport and ignore.",
-      "\Cjcaleb when?",
-      "\Cd>implying",
-      "\Cd>",
-      "\Cd>>>",
-      "\Cd>>>>>>",
-      "\Cjis this compatible with brutal doom?",
-      "\Cd>>>>>>>>>",
-      "\Cd>>>>>>>>>>>>",
-      "\Cd>>>>>>>>>>>>>>>",
-      "\Cq<",
+      "\Cd" ">implying",
+      "\Cd" ">doombabbies",
+      "\Cd" ">implying",
+      "\Cd" ">doom shitters",
+      "\Cd" ">>>>>>>clip",
+      "\Cd" ">implying",
+      "\Cj" "Report and ignore.",
+      "\Cj" "caleb when?",
+      "\Cd" ">implying",
+      "\Cd" ">",
+      "\Cd" ">>>",
+      "\Cd" ">>>>>>",
+      "\Cj" "is this compatible with brutal doom?",
+      "\Cd" ">>>>>>>>>",
+      "\Cd" ">>>>>>>>>>>>",
+      "\Cd" ">>>>>>>>>>>>>>>",
+      "\Cq" "<",
    };
    static int const num_strings = sizeof(strings) / sizeof(*strings);
    static int const id_max = hid_implyingE - hid_implyingS;
@@ -106,12 +147,6 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    }
    
    upgr->user_int[0] = id;
-}
-
-static
-void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
-{
-   p->riflefiremode = 0;
 }
 
 // ---------------------------------------------------------------------------

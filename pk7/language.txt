@@ -74,7 +74,7 @@ LITH_TXT_UPGRADE_RetroWeps = // Retro Weapons
    "Effect: All of your weapons fire projectiles straight from contra, and have their original animation sets.";
 
 LITH_TXT_UPGRADE_lolsords = // Steele Mode
-   "Cost: ---\n\n"
+   "Cost: 1000folds\n\n"
    "Effect: You get a sword.\n"
    "It is literally your only weapon.";
 

@@ -2,6 +2,10 @@ actor Lith_Player : DoomPlayer
 {
    Player.StartItem "Lith_Pistol"
    Player.StartItem "Lith_Fist"
+   Player.SideMove 2, 1
+   Player.ForwardMove 2, 1
+   Player.ViewHeight 54
+   Player.AttackZOffset 8
    DamageFactor PlayerMissile, 0
    Species "Lith_Player"
 }
