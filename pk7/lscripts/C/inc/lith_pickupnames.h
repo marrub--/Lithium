@@ -40,7 +40,7 @@ pickups(weapon_combatrifle, {
 })
 
 pickups(weapon_rocketlauncher, {
-   "Dual Rocket Launchers",
+   "Grenade Launcher",
    "Ruckebt Laurence",
    "Rawket Lawnchair",
    "Rokkit Luncher",

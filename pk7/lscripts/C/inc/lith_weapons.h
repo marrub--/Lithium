@@ -16,7 +16,7 @@ enum
 enum
 {
    rifle_firemode_auto,
-   rifle_firemode_burst,
    rifle_firemode_grenade,
+   rifle_firemode_burst,
    rifle_firemode_max
 };

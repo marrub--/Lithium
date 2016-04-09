@@ -189,12 +189,6 @@ void Lith_PlayerMove(player_t *p)
 {
    fixed grounddist = p->z - p->floorz;
    
-   if(p->rocketcharge < rocketcharge_max)
-      p->rocketcharge++;
-   
-   if(p->slidecharge < slidecharge_max)
-      p->slidecharge++;
-   
    if(p->slidecharge >= slidecharge_max)
    {
       if(grounddist == 0.0)
@@ -445,6 +439,12 @@ void Lith_Player()
       if(p->health > 0)
       {
          Lith_PlayerUpdateCBI(p);
+         
+         if(p->rocketcharge < rocketcharge_max)
+            p->rocketcharge++;
+         
+         if(p->slidecharge < slidecharge_max)
+            p->slidecharge++;
          
          if(!p->frozen)
             Lith_PlayerMove(p);

@@ -90,10 +90,8 @@ int Lith_UniqueTID()
 int Lith_GetCVar(int var)
 {
    switch(var)
-   {
    case lith_weapons_zoomfactor:
       return bitsk(ACS_GetCVarFixed("lith_weapons_zoomfactor"));
-   }
    
    return -1;
 }
@@ -156,7 +154,12 @@ bool Lith_FireScore(int amount)
 void Lith_SwitchRifleFiremode()
 {
    player_t *p = &players[ACS_PlayerNumber()];
-   p->riflefiremode = (p->riflefiremode + 1) % rifle_firemode_max;
+   int max = rifle_firemode_max;
+   
+   if(!p->upgrades[UPGR_RifleModes].active)
+      max--;
+   
+   p->riflefiremode = (++p->riflefiremode) % max;
    ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
 }
 

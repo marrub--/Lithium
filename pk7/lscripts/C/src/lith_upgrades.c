@@ -5,6 +5,7 @@
 
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr);
 static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
+static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr);
 
 // ---------------------------------------------------------------------------
 // Data.
@@ -18,7 +19,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    [UPGR_Splitter]    = { 800000    , false },
    // Weapons
    [UPGR_GaussShotty] = { 770430    , false },
-   [UPGR_RifleModes]  = { 340100    , false },
+   [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate },
    [UPGR_ChargeNader] = { 850000    , false },
    [UPGR_PlasLaser]   = { 1400000   , false },
    [UPGR_OmegaRail]   = { 2600700   , false },
@@ -75,13 +76,22 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
 {
    static __str strings[] = {
       "\Cd>implying",
-      "\Cd>",
-      "\Cd>>>>>>>>>",
-      "\Cd>>>>>>>>>>>>>>>",
-      "\Cq<",
       "\Cd>doombabbies",
+      "\Cd>implying",
       "\Cd>doom shitters",
       "\Cd>>>>>>>clip",
+      "\Cd>implying",
+      "\CjReport and ignore.",
+      "\Cjcaleb when?",
+      "\Cd>implying",
+      "\Cd>",
+      "\Cd>>>",
+      "\Cd>>>>>>",
+      "\Cjis this compatible with brutal doom?",
+      "\Cd>>>>>>>>>",
+      "\Cd>>>>>>>>>>>>",
+      "\Cd>>>>>>>>>>>>>>>",
+      "\Cq<",
    };
    static int const num_strings = sizeof(strings) / sizeof(*strings);
    static int const id_max = hid_implyingE - hid_implyingS;
@@ -96,6 +106,12 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    }
    
    upgr->user_int[0] = id;
+}
+
+static
+void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   p->riflefiremode = 0;
 }
 
 // ---------------------------------------------------------------------------

@@ -158,12 +158,9 @@ void Lith_PlayerHUD(player_t *p)
    }
    else if(p->weapontype == weapon_combatrifle)
    {
-      DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2, 0.1);
-      DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3),
-         hid_ammo,
-         320.2,
-         168.2 + (p->riflefiremode * 16),
-         0.1);
+      int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
+      DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2 + addy, 0.1);
+      DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_ammo, 320.2, 168.2 + (p->riflefiremode * 16) + addy, 0.1);
    }
    
    // Health
@@ -187,12 +184,7 @@ void Lith_PlayerHUD(player_t *p)
    // Weapon indicator
    {
       int time78 = time % 78;
-      DrawSpriteFade(weapongfx[p->weapontype],
-         hid_healthbg_fx,
-         77.1 - time78,
-         187.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0),
-         0.2,
-         0.7);
+      DrawSpriteFade(weapongfx[p->weapontype], hid_healthbg_fx, 77.1 - time78, 187.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0), 0.2, 0.7);
    }
    
    // Slide indicator
@@ -231,12 +223,7 @@ void Lith_PlayerHUD(player_t *p)
    // Armor indicator
    {
       int time78 = (8 + time) % 78;
-      DrawSpriteFade(armorgfx[p->armortype],
-         hid_armorbg_fx,
-         77.1 - time78,
-         175.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0),
-         0.2,
-         0.7);
+      DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fx, 77.1 - time78, 175.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0), 0.2, 0.7);
    }
    
    // Score
