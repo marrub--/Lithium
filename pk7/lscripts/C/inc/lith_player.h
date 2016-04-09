@@ -43,9 +43,8 @@ enum
    key_blueskull   = 1 << key_blueskull_bit,
 };
 
-typedef long long int score_t;
-
 // That's a lot of data!
+// edit: Holy shit, that's really a lot of data!
 typedef struct player_s
 {
    // Status data
@@ -75,7 +74,8 @@ typedef struct player_s
    bip_t bip;
    
    // Upgrades
-   upgrades_t upgrades;
+   bool upgrades_wasinit;
+   upgrade_t upgrades[UPGR_MAX];
    
    // Statistics
    int weaponsheld;

@@ -23,7 +23,7 @@ int UI_NodeListDraw(dlist_t *list, int id)
    {
       ui_node_t *node = rover->data.vp;
       
-      if(node->visible)
+      if(node->visible && !node->nodraw)
       {
          if(node->basefuncs.PreDraw)
             id -= node->basefuncs.PreDraw(node, id);
@@ -104,6 +104,7 @@ void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs
    flags = flags & 0x1F; // We only care about the first 5 bits.
    
    node->visible = !(flags & NODEAF_NOTVISIBLE);
+   node->nodraw = flags & NODEAF_NODRAW;
    node->id = id;
    node->x = x;
    node->y = y;
@@ -245,6 +246,8 @@ int UI_ButtonDraw(ui_node_t *node, int id)
       
       if(button->clicked)
          color = 'g';
+      else if(!button->active)
+         color = 'u';
       else if(button->hover)
          color = 'f';
       
@@ -267,7 +270,7 @@ void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
       button->clicked--;
    
    button->hover = false;
-   if(bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
+   if(button->active && bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
    {
       if(cur->click & CLICK_LEFT)
       {
@@ -290,11 +293,7 @@ ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userf
    
    node->label = label;
    node->font  = font ? font : "CBIFONT";
-   
-   if(flags & BTNAF_RESPOND_LEFT)
-      node->respond += 1;
-   if(flags & BTNAF_RESPOND_RIGHT)
-      node->respond += 2;
+   node->active = (flags & BTNAF_START_INACTIVE) ? false : true;
    
    UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
    node->node.basefuncs.Draw   = UI_ButtonDraw;

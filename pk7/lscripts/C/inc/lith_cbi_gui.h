@@ -43,6 +43,7 @@ typedef struct ui_node_s
    int x, y;
    int id;
    bool visible;
+   bool nodraw;
    
    ui_nodefuncs_t basefuncs;
    ui_nodefuncs_t userfuncs;
@@ -80,7 +81,7 @@ typedef struct ui_button_s
    __str label;
    bool hover;
    int clicked;
-   int respond;
+   bool active;
 } ui_button_t;
 
 typedef struct ui_tab_s
@@ -117,6 +118,7 @@ enum
    // Bits 0 - 4 reserved for generic flags.
    NODEAF_NOTVISIBLE    = 1 << 0,
    NODEAF_ALLOCCHILDREN = 1 << 1,
+   NODEAF_NODRAW        = 1 << 2,
 };
 
 enum
@@ -139,10 +141,7 @@ enum
 
 enum
 {
-   BTNAF_RESPOND_LEFT  = 1 << 5,
-   BTNAF_RESPOND_RIGHT = 1 << 6,
-   
-   BTNAF_RESPOND_BOTH = BTNAF_RESPOND_LEFT | BTNAF_RESPOND_RIGHT,
+   BTNAF_START_INACTIVE = 1 << 5,
 };
 
 // ---------------------------------------------------------------------------

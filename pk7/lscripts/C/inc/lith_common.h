@@ -114,5 +114,8 @@ static int const rocketcharge_max = 35 * 7;
 static int const slidecharge_max = 35 * 1.2;
 static int const hudstrstack_max = 20;
 
+// Types
+typedef long long int score_t;
+
 #endif
 

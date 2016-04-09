@@ -27,6 +27,61 @@ static int const weaponids_max = sizeof(weaponids) / sizeof(*weaponids);
 // Scripts.
 //
 
+//
+// Lith_ResetPlayer
+//
+// Reset some things on the player when a new map starts.
+//
+
+[[__call("ScriptI")]]
+static
+void Lith_ResetPlayer(player_t *p)
+{
+   p->active = true;
+   ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   
+   if(!p->cbi.wasinit)
+      Lith_PlayerInitCBI(p);
+   
+   if(!p->upgrades_wasinit)
+      Lith_PlayerInitUpgrades(p);
+   
+   // pls not exit map with murder thingies out
+   // is bad practice
+   ACS_TakeInventory("Lith_PistolScopedToken", 999);
+   ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
+   
+   // i cri tears of pain for APROP_SpawnHealth
+   if(!p->maxhealth)
+      p->maxhealth = ACS_GetActorProperty(0, APROP_Health);
+   
+   if(p->hudstrstack)
+   {
+      DList_Free(p->hudstrstack);
+      p->hudstrstack = null;
+   }
+   
+   p->lastscopetoken = false;
+   
+   p->slidecharge = slidecharge_max;
+   p->rocketcharge = rocketcharge_max;
+   p->leaped = false;
+   
+   p->bobyaw = 0.0f;
+   p->bobpitch = 0.0f;
+   
+   p->addyaw = 0.0f;
+   p->addpitch = 0.0f;
+   
+   p->scoreaccum = 0;
+}
+
+//
+// Lith_GetWeaponType
+//
+// Update information on what kind of weapons we have.
+//
+
 [[__call("ScriptI")]]
 static
 void Lith_GetWeaponType(player_t *p)
@@ -45,6 +100,12 @@ void Lith_GetWeaponType(player_t *p)
          p->weapontype = id->type;
    }
 }
+
+//
+// Lith_GetArmorType
+//
+// Update information on what kind of armour we have.
+//
 
 [[__call("ScriptI")]]
 static
@@ -66,6 +127,12 @@ void Lith_GetArmorType(player_t *p)
          break;
       }
 }
+
+//
+// Lith_PlayerRender
+//
+// Render the heads-up display.
+//
 
 [[__call("ScriptI")]]
 static
@@ -109,6 +176,12 @@ void Lith_PlayerRender(player_t *p)
       ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_alpha"));
    }
 }
+
+//
+// Lith_PlayerMove
+//
+// Update movement of the player, like sliding and jumping.
+//
 
 [[__call("ScriptI")]]
 static
@@ -176,6 +249,12 @@ void Lith_PlayerMove(player_t *p)
    }
 }
 
+//
+// Lith_PlayerDamageBob
+//
+// Update view bobbing when you get damaged.
+//
+
 [[__call("ScriptI")]]
 static
 void Lith_PlayerDamageBob(player_t *p)
@@ -197,45 +276,11 @@ void Lith_PlayerDamageBob(player_t *p)
    p->bobpitch = lerpf(p->bobpitch, 0.0f, 0.1f);
 }
 
-[[__call("ScriptI")]]
-static
-void Lith_ResetPlayer(player_t *p)
-{
-   p->active = true;
-   ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-   
-   if(!p->cbi.wasinit)
-      Lith_PlayerInitCBI(p);
-   
-   // pls not exit map with murder thingies out
-   // is bad practice
-   ACS_TakeInventory("Lith_PistolScopedToken", 999);
-   ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
-   
-   // i cri tears of pain for APROP_SpawnHealth
-   if(!p->maxhealth)
-      p->maxhealth = ACS_GetActorProperty(0, APROP_Health);
-   
-   if(p->hudstrstack)
-   {
-      DList_Free(p->hudstrstack);
-      p->hudstrstack = null;
-   }
-   
-   p->lastscopetoken = false;
-   
-   p->slidecharge = slidecharge_max;
-   p->rocketcharge = rocketcharge_max;
-   p->leaped = false;
-   
-   p->bobyaw = 0.0f;
-   p->bobpitch = 0.0f;
-   
-   p->addyaw = 0.0f;
-   p->addpitch = 0.0f;
-   
-   p->scoreaccum = 0;
-}
+//
+// Lith_GiveSecretScore
+//
+// Give score to the player when they enter a secret area.
+//
 
 [[__call("ScriptI")]]
 static
@@ -251,6 +296,12 @@ void Lith_GiveSecretScore(int playernum, int mul)
    p->secretsfound++;
 }
 
+//
+// Lith_PlayerView
+//
+// Update additive view.
+//
+
 [[__call("ScriptI")]]
 static
 void Lith_PlayerView(player_t *p)
@@ -262,6 +313,12 @@ void Lith_PlayerView(player_t *p)
       p->addpitch = p->bobpitch * bobmul;
    }
 }
+
+//
+// Lith_PlayerScore
+//
+// Update score accumulator.
+//
 
 [[__call("ScriptI")]]
 static
@@ -281,6 +338,12 @@ void Lith_PlayerScore(player_t *p)
    else if(p->scoreaccumtime < 0)
       p->scoreaccumtime++;
 }
+
+//
+// Lith_PlayerStats
+//
+// Update statistics.
+//
 
 [[__call("ScriptI")]]
 static
@@ -343,6 +406,7 @@ void Lith_Player()
    
    while(p->active)
    {
+      // -- Update data
       // Status data
       p->x = ACS_GetActorX(0);
       p->y = ACS_GetActorY(0);
@@ -398,6 +462,7 @@ void Lith_Player()
       if(p->health > 0)
       {
          Lith_PlayerUpdateCBI(p);
+         Lith_PlayerUpdateUpgrades(p);
          
          if(!p->frozen)
             Lith_PlayerMove(p);

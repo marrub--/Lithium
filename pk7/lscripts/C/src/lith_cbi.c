@@ -66,6 +66,8 @@ enum
    uid_end_upgrade  = uid_base + 199,
    
    uid_upgrade_list = uid_base_upgrade,
+   uid_upgrade_own,
+   uid_upgrade_active
 };
 
 // ---------------------------------------------------------------------------
@@ -79,7 +81,77 @@ enum
 static
 void Menu_Upgrades_BuyClick(ui_node_t *node, player_t *p, cursor_t *cur)
 {
-   Log("buy button pressed");
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
+   
+   Upgr_Buy(p, upgr);
+}
+
+static
+void Menu_Upgrades_BuyUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
+{
+   ui_button_t *button = (ui_button_t *)node;
+   ui_node_t *node = &button->node;
+   
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
+   
+   button->active = Upgr_CanBuy(p, upgr);
+}
+
+//
+// Activate button.
+//
+
+static
+void Menu_Upgrades_ActivateClick(ui_node_t *node, player_t *p, cursor_t *cur)
+{
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
+   
+   Upgr_ToggleActive(p, upgr);
+}
+
+static
+void Menu_Upgrades_ActivateUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
+{
+   ui_button_t *button = (ui_button_t *)node;
+   ui_node_t *node = &button->node;
+   
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
+   
+   button->active = upgr->owned;
+   button->label = upgr->active ? "Deactivate" : "Activate";
+}
+
+//
+// 'Active' text.
+//
+
+static
+void Menu_Upgrades_ActiveUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
+{
+   ui_text_t *text = (ui_text_t *)node;
+   ui_node_t *node = &text->node;
+   
+   ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
+   
+   if(node->id == uid_upgrade_own)
+      node->nodraw = !upgr->owned;
+   else if(node->id == uid_upgrade_active)
+      node->nodraw = !upgr->active;
 }
 
 //
@@ -93,10 +165,11 @@ void Menu_Upgrades_DescriptionUpdate(ui_node_t *node, player_t *p, cursor_t *cur
    ui_node_t *node = &text->node;
    
    ui_list_t *list = (ui_list_t *)UI_NodeListGetByID(node->parent->children, uid_upgrade_list);
-   int i = list ? list->selected : -1;
+   if(!list)
+      return;
+   upgrade_t *upgr = &p->upgrades[list->selected];
    
-   if(i >= 0)
-      text->text = Language("LITH_TXT_UPGRADE_%S", upgrade_enums[i]);
+   text->text = upgr->description;
 }
 
 static
@@ -142,7 +215,7 @@ void Menu_Stats_TextUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
 }
 
 // ---------------------------------------------------------------------------
-// Computer-Brain Interface (CBI) Scripts.
+// Main menu.
 //
 
 static
@@ -151,6 +224,10 @@ void Menu_Main_XUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
    if(cur->click & CLICK_LEFT && bpcldi(node->x, node->y, node->x + UI_XBUTTON_W, node->y + UI_XBUTTON_H, cur->x, cur->y))
       Lith_KeyOpenCBI();
 }
+
+// ---------------------------------------------------------------------------
+// Computer-Brain Interface (CBI) Scripts.
+//
 
 [[__call("ScriptI")]]
 void Lith_PlayerInitCBI(player_t *p)
@@ -181,12 +258,23 @@ void Lith_PlayerInitCBI(player_t *p)
          .PreDraw = Menu_Upgrades_DescriptionPreDraw,
          .PostDraw = Menu_Upgrades_DescriptionPostDraw
       };
-      ui_nodefuncs_t buyfunc = { .Click = Menu_Upgrades_BuyClick };
+      ui_nodefuncs_t buyfunc = {
+         .Click = Menu_Upgrades_BuyClick,
+         .Update = Menu_Upgrades_BuyUpdate
+      };
+      ui_nodefuncs_t activefunc = { .Update = Menu_Upgrades_ActiveUpdate };
+      ui_nodefuncs_t activatefunc = {
+         .Click = Menu_Upgrades_ActivateClick,
+         .Update = Menu_Upgrades_ActivateUpdate
+      };
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       
       UI_InsertNode(tab, UI_ListAlloc(0, uid_upgrade_list, 20, 30, null, upgrade_names, 19));
       UI_InsertNode(tab, UI_TextAlloc(0, 0, 95, 30, &upgrfunc));
+      UI_InsertNode(tab, UI_TextAlloc(0, uid_upgrade_own, 209, 159, &activefunc, "You own this upgrade."));
+      UI_InsertNode(tab, UI_TextAlloc(0, uid_upgrade_active, 207, 151, &activefunc, "This upgrade is active."));
       UI_InsertNode(tab, UI_ButtonAlloc(0, 0, 259, 170, &buyfunc, "Buy"));
+      UI_InsertNode(tab, UI_ButtonAlloc(0, 0, 209, 170, &activatefunc));
       
       UI_InsertNode(tabs, tab);
    }
