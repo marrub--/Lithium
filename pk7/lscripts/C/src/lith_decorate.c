@@ -167,48 +167,6 @@ int Lith_GetRifleFiremode()
    return p->riflefiremode;
 }
 
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_SpawnWeaponText(int user_pickupparm, int user_spritetid)
-{
-   if(ACS_GetCVar("lith_sv_noweapontext"))
-      return;
-   
-   fixed x = ACS_GetActorX(0);
-   fixed y = ACS_GetActorY(0);
-   fixed z = ACS_GetActorZ(0);
-   
-   __str str;
-   
-   if(ACS_GetCVar("lith_sv_stupidpickups"))
-   {
-      int namesmax;
-      
-      for(namesmax = 1; pickupnames[user_pickupparm][namesmax]; namesmax++);
-      
-      str = StrUpper(pickupnames[user_pickupparm][ACS_Random(1, namesmax - 1)]);
-   }
-   else
-      str = StrUpper(pickupnames[user_pickupparm][0]);
-   
-   int len = ACS_StrLen(str);
-   for(int i = 0; str[i]; i++)
-   {
-      if(str[i] != ' ')
-      {
-         int temptid = ACS_UniqueTID();
-         ACS_SpawnForced("Lith_WeaponText", x, y, z, temptid);
-         ACS_SetUserVariable(temptid, "user_char", str[i]);
-         ACS_SetUserVariable(temptid, "user_dist", (len / 2 - i) * 8);
-         
-         int mastertid = ACS_ActivatorTID();
-         ACS_SetActivator(temptid);
-         ACS_SetPointer(AAPTR_MASTER, mastertid);
-         ACS_Thing_ChangeTID(0, user_spritetid);
-         ACS_SetActivator(mastertid);
-      }
-   }
-}
-
 //
 // ---------------------------------------------------------------------------
 
