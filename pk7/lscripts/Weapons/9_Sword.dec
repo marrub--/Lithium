@@ -6,14 +6,10 @@ actor Lith_SwordPuff : XPuff
    {
    PuffNormal:
       XPUF A 0 A_PlaySound("weapons/sword/swing1", 7)
-      XPUF Q 0 A_Jump(32, "PuffNormalAlt")
-      XPUF QRSTU 1 bright
-      goto PuffNormalEnd
+      goto Super::PuffNormal
    PuffMirrored:
       XPUF A 0 A_PlaySound("weapons/sword/swing1", 7)
-      XPUF V 0 A_Jump(32, "PuffMirroredAlt")
-      XPUF VWXYZ 1 bright
-      goto PuffMirroredEnd
+      goto Super::PuffMirrored
    }
 }
 

@@ -170,6 +170,13 @@ int Lith_GetRifleFiremode(void)
    return p->riflefiremode;
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_ShotgunHasGauss(void)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   return p->upgrades[UPGR_GaussShotty].active;
+}
+
 //
 // ---------------------------------------------------------------------------
 

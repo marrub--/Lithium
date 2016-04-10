@@ -10,6 +10,29 @@ actor Lith_ShotgunJustFrame : Inventory
    Inventory.MaxAmount 3
 }
 
+actor Lith_GaussPuff
+{
+   RenderStyle Translucent
+   
+   +PUFFGETSOWNER
+   +NOGRAVITY
+   +NOBLOCKMAP
+   +FLOORCLIP
+   +EXTREMEDEATH
+   +FORCEXYBILLBOARD
+   -ALLOWPARTICLES
+   
+   States
+   {
+   Spawn:
+      BLLT A 0
+      BLLT A 0 A_PlaySound("weapons/shotgun/gauss/puff")
+      BLLT A 0 A_Explode(64, 24, 0)
+      BLLT A 1 bright A_FadeOut(0.05)
+      wait
+   }
+}
+
 actor Lith_Shotgun : Lith_Weapon replaces Shotgun
 {
    Tag "Shotgun"
@@ -42,39 +65,62 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       PKSG AAA 0 A_Raise
       PKSG A 1
       loop
+   //
+   //
+   //
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_ShotgunJustFrame", 1, "FireJust")
-      goto Fire1
+   FireCheck:
+      TNT1 A 0 A_JumpIf(CallACS("Lith_ShotgunHasGauss"), "FireGauss")
+      goto FireRail
    FireJust:
       TNT1 A 0 A_TakeInventory("Lith_ShotgunJustFrame", 0x7FFFFFFF)
       TNT1 A 0 A_FireBullets(5.3, 2.3, 8, 4, "BulletPuff")
       TNT1 A 0 A_PlaySound("weapons/shotgun/just", 7)
-      TNT1 A 0 A_RailAttack(70, 0, false, None, LightBlue, RGF_SILENT | RGF_FULLBRIGHT, 128, "BulletPuff", 0, 0, 0, 48, 3, 3)
-   Fire1:
+      TNT1 A 0 A_RailAttack(70, 0, false, None, LightBlue, RGF_SILENT | RGF_FULLBRIGHT, 128,
+                            "BulletPuff", 0, 0, 0, 48, 3, 3)
+      goto FireCheck
+   FireFinish:
+      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "AltReady")
+      goto Ready
+   //
+   // Gauss fire
+   //
+   FireGauss:
+      TNT1 A 0 A_FireBullets(0, 0, 1, 22, "Lith_GaussPuff")
+      TNT1 A 0 A_RailAttack(12, 0, false, LightBlue, Blue, RGF_NOPIERCING|RGF_FULLBRIGHT, 0,
+                            "Lith_Dummy", 0, 0, 0, 3, frandom(0.5, 1), 0)
+      TNT1 A 0 A_PlaySound("weapons/shotgun/gauss/fire", CHAN_WEAPON)
+      TNT1 A 0 A_Recoil(0.777)
+      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "FireFinish_Gauss_Scoped")
+      // ---
+      PKSG I 1 A_GunFlash("FlashGauss")
+      PKSG IJJKJI 1
+      PKSG A 7 A_ReFire
+      goto FireFinish
+   FireFinish_Gauss_Scoped:
+      SCOP A 2 bright
+      SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
+      SCOP A 0 A_ReFire
+      SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
+      goto FireFinish
+   //
+   // Rail fire
+   //
+   FireRail:
       TNT1 A 0 A_FireBullets(5.3, 2.3, 8, 6, "BulletPuff")
       TNT1 A 0 A_RailAttack(105, 0, true, None, Green, RGF_SILENT | RGF_FULLBRIGHT, 2,
                             "BulletPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0)
       TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawner", 0, 0, 0, 6)
       TNT1 A 0 A_PlaySound("weapons/shotgun/fire", CHAN_WEAPON)
       TNT1 A 0 A_Recoil(0.7)
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "FireFinish_Scoped")
-      goto FireFinish_NoScopeThough_DidntHaveThe700ForTheScope
-   FireFinish_Scoped:
-      SCOP A 4 bright
-      SCOP A 25
-      SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
-      SCOP A 0 A_ReFire
-      SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
-      goto FireFinish
-   FireFinish_NoScopeThough_DidntHaveThe700ForTheScope:
+      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "FireFinish_Rail_Scoped")
+      // ---
       PKSG I 1 A_GunFlash
-      PKSG IJJ 1
-      PKSG KJI 1
+      PKSG IJJKJI 1
       PKSG B 2
       PKSG C 1
-      PKSG D 2
-      PKSG E 2
-      PKSG F 2
+      PKSG DEF 2
       PKSG G 1
       PKSG H 3
       PKSG GFEDC 2
@@ -82,9 +128,16 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       PKSG A 3
       PKSG A 7 A_ReFire
       goto FireFinish
-   FireFinish:
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "AltReady")
-      goto Ready
+   FireFinish_Rail_Scoped:
+      SCOP A 4 bright
+      SCOP A 24
+      SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
+      SCOP A 0 A_ReFire
+      SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB)
+      goto FireFinish
+   //
+   //
+   //
    AltFire:
       "####" A 1
       "####" A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "ScopeOut")
@@ -102,6 +155,10 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    Flash:
       SHTF A 2 Bright A_Light1
       SHTF B 2 Bright A_Light2
+      goto LightDone
+   FlashGauss:
+      SHTF C 1 Bright A_Light1
+      SHTF D 1 Bright A_Light2
       goto LightDone
    Spawn:
       SHOT A 0

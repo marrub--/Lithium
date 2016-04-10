@@ -1,0 +1,11 @@
+decal Lith_GaussScorch
+{
+   pic BLLTA0
+   add 1.0
+   fullbright
+   shade "00 00 00"
+   animator GoAway
+}
+
+generator Lith_GaussPuff Lith_GaussScorch
+
