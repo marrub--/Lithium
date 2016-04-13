@@ -51,6 +51,7 @@ typedef struct player_s
    bool active;
    bool dead;
    int tid;
+   int number;
    int cameratid;
    
    fixed x, y, z;
@@ -138,5 +139,7 @@ typedef struct player_s
 } player_t;
 
 extern player_t players[MAX_PLAYERS];
+
+void Lith_GiveScore(player_t *p, score_t score);
 
 #endif

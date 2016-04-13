@@ -12,7 +12,12 @@
 
 player_t players[MAX_PLAYERS];
 
-struct weaponid { __str class; int type, flag; };
+struct weaponid
+{
+   __str class;
+   int type, flag;
+};
+
 static struct weaponid const weaponids[] = {
    { "Lith_Pistol",          weapon_pistol,         weaponf_pistol         },
    { "Lith_Shotgun",         weapon_shotgun,        weaponf_shotgun        },
@@ -21,11 +26,229 @@ static struct weaponid const weaponids[] = {
    { "Lith_PlasmaRifle",     weapon_plasmarifle,    weaponf_plasmarifle    },
    { "Lith_BFG9000",         weapon_bfg9000,        weaponf_bfg9000        }
 };
+
 static int const weaponids_max = sizeof(weaponids) / sizeof(*weaponids);
+
+static void Lith_PlayerUpdateData(player_t *p);
+static void Lith_PlayerRunScripts(player_t *p);
+static void Lith_ResetPlayer(player_t *p);
+static void Lith_GetWeaponType(player_t *p);
+static void Lith_GetArmorType(player_t *p);
+static void Lith_PlayerRender(player_t *p);
+static void Lith_PlayerMove(player_t *p);
+static void Lith_PlayerDamageBob(player_t *p);
+static void Lith_PlayerView(player_t *p);
+static void Lith_PlayerScore(player_t *p);
+static void Lith_PlayerStats(player_t *p);
+
+// ---------------------------------------------------------------------------
+// External functions.
+//
+
+void Lith_GiveScore(player_t *p, score_t score)
+{
+   double mul = minmax(score / 10000.0f, 0.1f, 1.0f);
+   
+   if(ACS_GetUserCVar(p->number, "lith_player_scoresound"))
+      ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, 0.62f * mul, false, ATTN_STATIC);
+   
+   p->score          += score;
+   p->scoresum       += score;
+   p->scoreaccum     += score;
+   p->scoreaccumtime += 20 * mul;
+}
+
+// ---------------------------------------------------------------------------
+// Callback scripts.
+//
+
+[[__call("ScriptI"), __script("Enter")]]
+static
+void Lith_PlayerEntry(void)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   Lith_ResetPlayer(p);
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+   {
+      p->score += 0xFFFFFFFFFFFFFFFFll;
+      for(int i = 1; i < weaponids_max; i++)
+         ACS_GiveInventory(weaponids[i].class, 1);
+      
+      for(int i = 0; i < UPGR_MAX; i++)
+         if(!p->upgrades[i].owned)
+            Upgr_SetOwned(p, &p->upgrades[i]);
+   }
+   
+   while(p->active)
+   {
+      Lith_PlayerUpdateData(p);
+      
+      // This can be changed any time, so save it here.
+      score_t curscore = p->score;
+      
+      Lith_PlayerRunScripts(p);
+      
+      // Update view
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
+      
+      // Tic passes
+      ACS_Delay(1);
+      
+      // Update previous-tic values
+      p->lastscopetoken = p->scopetoken;
+      
+      p->prevhealth = p->health;
+      p->prevarmor = p->armor;
+      p->prevscore = curscore;
+      
+      // Reset view for next tic
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
+   }
+}
+
+[[__call("ScriptI"), __script("Death")]]
+static
+void Lith_PlayerDeath(void)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   p->dead = true;
+   p->score = 0;
+   p->cbi.open = false;
+   p->upgrades_wasinit = false;
+   
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      upgrade_t *upgr = &p->upgrades[i];
+      
+      if(upgr->active)
+         Upgr_ToggleActive(p, upgr);
+      
+      upgr->owned = false;
+   }
+}
+
+[[__call("ScriptI"), __script("Respawn")]]
+static
+void Lith_PlayerRespawn(void)
+{
+   Lith_ResetPlayer(&players[ACS_PlayerNumber()]);
+}
+
+[[__call("ScriptI"), __script("Disconnect")]]
+static
+void Lith_PlayerDisconnect(void)
+{
+   players[ACS_PlayerNumber()].active = false;
+}
+
+//
+// ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
 // Scripts.
 //
+
+//
+// Lith_PlayerUpdateData
+//
+// Update all of the player's data.
+//
+
+static
+void Lith_PlayerUpdateData(player_t *p)
+{
+   // Status data
+   p->x      = ACS_GetActorX(0);
+   p->y      = ACS_GetActorY(0);
+   p->z      = ACS_GetActorZ(0);
+   p->floorz = ACS_GetActorFloorZ(0);
+   
+   p->velx = ACS_GetActorVelX(0);
+   p->vely = ACS_GetActorVelY(0);
+   p->velz = ACS_GetActorVelZ(0);
+   
+   p->pitch = ACS_GetActorPitch(0) - p->addpitch;
+   p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
+   p->roll  = ACS_GetActorRoll(0);
+   
+   p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
+   p->yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
+   
+   p->forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
+   p->sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
+   p->upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
+   
+   p->buttons    = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
+   p->oldbuttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
+   
+   p->health = ACS_GetActorProperty(0, APROP_Health);
+   p->armor  = ACS_CheckInventory("BasicArmor");
+   
+   // Type / class
+   p->name        = StrParam("%tS", p->number);
+   p->weaponclass = ACS_GetWeapon();
+   p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
+   
+   Lith_GetWeaponType(p);
+   Lith_GetArmorType(p);
+   
+   // Inventory
+   p->berserk = ACS_CheckInventory("PowerStrength");
+   p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
+                   ACS_CheckInventory("Lith_PistolScopedToken");
+   
+   p->keys  = ACS_CheckInventory("RedCard")     << key_red_bit;
+   p->keys |= ACS_CheckInventory("YellowCard")  << key_yellow_bit;
+   p->keys |= ACS_CheckInventory("BlueCard")    << key_blue_bit;
+   p->keys |= ACS_CheckInventory("RedSkull")    << key_redskull_bit;
+   p->keys |= ACS_CheckInventory("YellowSkull") << key_yellowskull_bit;
+   p->keys |= ACS_CheckInventory("BlueSkull")   << key_blueskull_bit;
+}
+
+//
+// Lith_PlayerRunScripts
+//
+// Run main loop scripts.
+//
+
+static
+void Lith_PlayerRunScripts(player_t *p)
+{
+   // Logic
+   if(!p->dead)
+   {
+      Lith_PlayerStats(p);
+      Lith_PlayerScore(p);
+      Lith_PlayerDamageBob(p);
+      
+      Lith_PlayerUpdateCBI(p);
+      
+      if(p->rocketcharge < rocketcharge_max)
+         p->rocketcharge++;
+      
+      if(p->slidecharge < slidecharge_max)
+         p->slidecharge++;
+      
+      if(!p->frozen)
+         Lith_PlayerMove(p);
+      
+      Lith_PlayerUpdateUpgrades(p);
+      
+      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+      Lith_PlayerView(p);
+   }
+   
+   // Rendering
+   Lith_PlayerHUD(p);
+   Lith_PlayerRender(p);
+   
+   if(p->cbi.open)
+      Lith_PlayerDrawCBI(p);
+}
 
 //
 // Lith_ResetPlayer
@@ -33,12 +256,12 @@ static int const weaponids_max = sizeof(weaponids) / sizeof(*weaponids);
 // Reset some things on the player when a new map starts.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_ResetPlayer(player_t *p)
 {
    p->active = true;
    p->dead = false;
+   p->number = ACS_PlayerNumber();
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    ACS_SetAirControl(0.77);
    
@@ -90,7 +313,6 @@ void Lith_ResetPlayer(player_t *p)
 // Update information on what kind of weapons we have.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_GetWeaponType(player_t *p)
 {
@@ -115,7 +337,6 @@ void Lith_GetWeaponType(player_t *p)
 // Update information on what kind of armour we have.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_GetArmorType(player_t *p)
 {
@@ -142,7 +363,6 @@ void Lith_GetArmorType(player_t *p)
 // Render the heads-up display.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerRender(player_t *p)
 {
@@ -191,7 +411,6 @@ void Lith_PlayerRender(player_t *p)
 // Update movement of the player, like sliding and jumping.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerMove(player_t *p)
 {
@@ -202,12 +421,16 @@ void Lith_PlayerMove(player_t *p)
       if(grounddist == 0.0)
          p->leaped = false;
       
-      if(p->buttons & BT_SPEED && (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
+      if(p->buttons & BT_SPEED &&
+         (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
          ACS_PlaySound(0, "player/slide");
-         ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0, false, true);
+         ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 32.0),
+                                 p->vely + (ACS_Sin(angle) * 32.0),
+                                 0,
+                              false, true);
          
          p->slidecharge = 0;
       }
@@ -220,7 +443,10 @@ void Lith_PlayerMove(player_t *p)
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
-      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0, false, true);
+      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 4.0),
+                              p->vely + (ACS_Sin(angle) * 4.0),
+                              12.0,
+                           false, true);
       
       p->leaped = true;
    }
@@ -232,7 +458,6 @@ void Lith_PlayerMove(player_t *p)
 // Update view bobbing when you get damaged.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerDamageBob(player_t *p)
 {
@@ -254,31 +479,11 @@ void Lith_PlayerDamageBob(player_t *p)
 }
 
 //
-// Lith_GiveSecretScore
-//
-// Give score to the player when they enter a secret area.
-//
-
-[[__call("ScriptI")]]
-static
-void Lith_GiveSecretScore(player_t *p, int mul)
-{
-   [[__call("ScriptS"), __extern("ACS")]]
-   extern void Lith_UpdateScore(void);
-   
-   ACS_SetActivator(p->tid);
-   ACS_GiveInventory("Lith_ScoreCount", 9000 * mul);
-   Lith_UpdateScore();
-   p->secretsfound++;
-}
-
-//
 // Lith_PlayerView
 //
 // Update additive view.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerView(player_t *p)
 {
@@ -296,7 +501,6 @@ void Lith_PlayerView(player_t *p)
 // Update score accumulator.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerScore(player_t *p)
 {
@@ -318,7 +522,6 @@ void Lith_PlayerScore(player_t *p)
 // Update statistics.
 //
 
-[[__call("ScriptI")]]
 static
 void Lith_PlayerStats(player_t *p)
 {
@@ -331,184 +534,6 @@ void Lith_PlayerStats(player_t *p)
       p->armorused += p->prevarmor - p->armor;
    else if(p->armor > p->prevarmor && ACS_Timer() != 1)
       p->armorsum += p->armor - p->prevarmor;
-}
-
-//
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Callback scripts.
-//
-
-[[__call("ScriptI"), __script("Lightning")]]
-void Lith_Lightning(void)
-{
-   if(ACS_Random(0, 1000000) == 666)
-      ACS_Thing_Destroy(0, true, 0);
-}
-
-[[__call("ScriptI"), __script("Respawn")]]
-void Lith_PlayerRespawn(void)
-{
-   Lith_ResetPlayer(&players[ACS_PlayerNumber()]);
-}
-
-[[__call("ScriptI"), __script("Death")]]
-void Lith_PlayerDeath(void)
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   p->dead = true;
-   p->score = 0;
-   p->cbi.open = false;
-   p->upgrades_wasinit = false;
-   
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
-      
-      if(upgr->active)
-         Upgr_ToggleActive(p, upgr);
-      
-      upgr->owned = false;
-   }
-}
-
-[[__call("ScriptI"), __script("Open")]]
-void Lith_World(void)
-{
-   int maxsecrets = ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
-   int prevsecrets = 0;
-   
-   ACS_Delay(1);
-   
-   for(;;)
-   {
-      int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
-      
-      if(secrets > prevsecrets)
-         for(int i = 0; i < MAX_PLAYERS; i++)
-            if(players[i].active)
-               Lith_GiveSecretScore(&players[i], secrets - prevsecrets);
-      
-      prevsecrets = secrets;
-      
-      ACS_Delay(1);
-   }
-}
-
-[[__call("ScriptI"), __script("Disconnect")]]
-void Lith_PlayerDisconnect(void)
-{
-   players[ACS_PlayerNumber()].active = false;
-}
-
-[[__call("ScriptI"), __script("Enter")]]
-void Lith_Player(void)
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   
-   Lith_ResetPlayer(p);
-   
-   while(p->active)
-   {
-      // -- Update data
-      // Status data
-      p->x = ACS_GetActorX(0);
-      p->y = ACS_GetActorY(0);
-      p->z = ACS_GetActorZ(0);
-      p->velx = ACS_GetActorVelX(0);
-      p->vely = ACS_GetActorVelY(0);
-      p->velz = ACS_GetActorVelZ(0);
-      p->yaw = ACS_GetActorAngle(0) - p->addyaw;
-      p->pitch = ACS_GetActorPitch(0) - p->addpitch;
-      p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
-      p->yawv = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
-      p->roll = ACS_GetActorRoll(0);
-      p->forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
-      p->sidev = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
-      p->upv = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
-      p->floorz = ACS_GetActorFloorZ(0);
-      p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-      p->oldbuttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
-      p->name = StrParam("%tS", 0);
-      
-      p->health = ACS_GetActorProperty(0, APROP_Health);
-      p->armor = ACS_CheckInventory("BasicArmor");
-      
-      // This can be changed any time during script / playsim run, so save it here
-      score_t curscore = p->score;
-      
-      // Type / class
-      p->weaponclass = ACS_GetWeapon();
-      p->armorclass = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
-      
-      Lith_GetWeaponType(p);
-      Lith_GetArmorType(p);
-      
-      // Inventory
-      p->berserk = ACS_CheckInventory("PowerStrength");
-      p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
-         ACS_CheckInventory("Lith_PistolScopedToken");
-      
-      p->keys = 0;
-      p->keys |= ACS_CheckInventory("RedCard")     << key_red_bit;
-      p->keys |= ACS_CheckInventory("YellowCard")  << key_yellow_bit;
-      p->keys |= ACS_CheckInventory("BlueCard")    << key_blue_bit;
-      p->keys |= ACS_CheckInventory("RedSkull")    << key_redskull_bit;
-      p->keys |= ACS_CheckInventory("YellowSkull") << key_yellowskull_bit;
-      p->keys |= ACS_CheckInventory("BlueSkull")   << key_blueskull_bit;
-      
-      // Run scripts
-      
-      // -- Logic
-      if(!p->dead)
-      {
-         Lith_PlayerStats(p);
-         Lith_PlayerScore(p);
-         Lith_PlayerDamageBob(p);
-         
-         Lith_PlayerUpdateCBI(p);
-         
-         if(p->rocketcharge < rocketcharge_max)
-            p->rocketcharge++;
-         
-         if(p->slidecharge < slidecharge_max)
-            p->slidecharge++;
-         
-         if(!p->frozen)
-            Lith_PlayerMove(p);
-         
-         Lith_PlayerUpdateUpgrades(p);
-         
-         ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-         Lith_PlayerView(p);
-      }
-      
-      // -- Rendering
-      Lith_PlayerHUD(p);
-      Lith_PlayerRender(p);
-      
-      if(p->cbi.open)
-         Lith_PlayerDrawCBI(p);
-      
-      // Update view
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
-      
-      // Tic passes
-      ACS_Delay(1);
-      
-      // Update previous-tic values
-      p->lastscopetoken = p->scopetoken;
-      
-      p->prevhealth = p->health;
-      p->prevarmor = p->armor;
-      p->prevscore = curscore;
-      
-      // Reset view for next tic
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
-   }
 }
 
 //

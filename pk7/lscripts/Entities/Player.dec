@@ -23,3 +23,19 @@ actor Lith_CameraHax // fuck
    +NOINTERACTION
 }
 
+actor Lith_FakeItemPickup : Inventory
+{
+   Inventory.MaxAmount 0x7FFFFFFF
+   Inventory.PickupMessage "You siphoned some score from the weapon."
+   Inventory.PickupSound ""
+   Radius 20
+   Height 16
+   
+   states
+   {
+   Spawn:
+      FIST A 1 bright
+      loop
+   }
+}
+

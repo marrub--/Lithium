@@ -8,7 +8,7 @@
 // Key Scripts.
 //
 
-[[__call("ScriptS"), __extern("ACS")]]
+[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyOpenCBI(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];

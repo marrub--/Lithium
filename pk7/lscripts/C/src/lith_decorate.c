@@ -104,13 +104,7 @@ void Lith_UpdateScore(void)
    double rmul = RandomFloat(1.0f, 6.0f);
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * rmul;
    
-   if(ACS_GetCVar("lith_player_scoresound"))
-      ACS_LocalAmbientSound("player/score", minmax(score / 5000.0f, 0.1f, 1.0f) * 80);
-   
-   p->score += score;
-   p->scoresum += score;
-   p->scoreaccum += score;
-   p->scoreaccumtime = 35 * rmul;
+   Lith_GiveScore(p, score);
    
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
@@ -181,6 +175,25 @@ int Lith_ShotgunHasGauss(void)
 fixed Lith_Velocity(fixed velx, fixed vely)
 {
    return pymagk(velx, vely);
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_PickupScore(int user_pickupparm, int user_spritetid)
+{
+   ACS_SetActivatorToTarget(0);
+   
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   if(!(p->weapons & (1 << (user_pickupparm - 1))))
+      return true;
+   
+   ACS_SpawnForced("Lith_FakeItemPickup", p->x, p->y, p->z);
+   ACS_SetActorVelocity(0, 0.001, 0, 0, true, false);
+   Lith_GiveScore(p, 11100 * user_pickupparm);
+   
+   ACS_Thing_Remove(user_spritetid);
+   
+   return false;
 }
 
 //

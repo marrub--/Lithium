@@ -82,4 +82,3 @@ int const pickupnamesmax = sizeof(pickupnames) / sizeof(*pickupnames);
 int const pickupfmtmax   = sizeof(pickupfmt)   / sizeof(*pickupfmt);
 int const uncertaintymax = sizeof(uncertainty) / sizeof(*uncertainty);
 
-

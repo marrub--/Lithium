@@ -45,7 +45,7 @@ actor Lith_Rocket
       TNT1 A 0 A_SetUserVar(user_trailstep, 0)
       TNT1 A 0 A_JumpIf(CallACS("Lith_Velocity", velx*FIX, vely*FIX)/FIX >= 25, "Done")
       TNT1 A 0 A_SetUserVar(user_speedstep, user_speedstep + 1)
-      TNT1 A 0 A_ScaleVelocity(1.0 + (user_speedstep / 70.0))
+      TNT1 A 0 A_ScaleVelocity(1.0 + (user_speedstep / 20.0))
    Done:
       MISL A 1 bright
       goto Spawn
