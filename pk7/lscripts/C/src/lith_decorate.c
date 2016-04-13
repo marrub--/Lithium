@@ -177,6 +177,12 @@ int Lith_ShotgunHasGauss(void)
    return p->upgrades[UPGR_GaussShotty].active;
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+fixed Lith_Velocity(fixed velx, fixed vely)
+{
+   return pymagk(velx, vely);
+}
+
 //
 // ---------------------------------------------------------------------------
 

@@ -1,0 +1,2 @@
+cameratexture LITHCAM1 320 200
+

@@ -160,6 +160,40 @@ void *cpyalloc(size_t num, size_t size, void *src)
    return dest;
 }
 
+float pymagf(float x, float y)
+{
+   return sqrt((x * x) + (y * y));
+}
+
+accum pymagk(accum x, accum y)
+{
+   return ACS_FixedSqrt((x * x) + (y * y));
+}
+
+float angle2df(float x1, float y1, float x2, float y2)
+{
+   float x = x2 - x1;
+   float y = y2 - y1;
+   return atan2(y, x);
+}
+
+accum dist2dk(accum x1, accum y1, accum x2, accum y2)
+{
+   return ACS_VectorLength(x1 - x2, y1 - y2);
+}
+
+float dist2df(float x1, float y1, float x2, float y2)
+{
+   float x = x1 - x2;
+   float y = y1 - y2;
+   return sqrt(x*x + y*y);
+}
+
+accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2)
+{
+   return ACS_VectorLength(ACS_VectorLength(x1 - x2, y1 - y2), z1 - z2);
+}
+
 //
 // ---------------------------------------------------------------------------
 

@@ -15,3 +15,11 @@ actor Lith_RocketBooster : PowerFlight
    Powerup.Duration 60
 }
 
+actor Lith_CameraHax // fuck
+{
+   Radius 2
+   Height 2
+   
+   +NOINTERACTION
+}
+

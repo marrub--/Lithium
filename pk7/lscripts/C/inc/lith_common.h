@@ -105,6 +105,12 @@ float lerpf(float a, float b, float t);
 float normf(float x, float min, float max);
 bool bpcldi(int x, int y, int z, int w, int x2, int y2); // Box / Point collision (integer)
 bool l1xcldi(int lx1, int lx2, int x); // Line (1-d) / X collision (integer)
+float pymagf(float x, float y);
+accum pymagk(accum x, accum y);
+float angle2df(float x1, float y1, float x2, float y2);
+accum dist2dk(accum x1, accum y1, accum x2, accum y2);
+float dist2df(float x1, float y1, float x2, float y2);
+accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2);
 
 // Constants
 static float const pi  = 3.14159265358979323846f;
@@ -116,6 +122,61 @@ static int const hudstrstack_max = 20;
 
 // Types
 typedef long long int score_t;
+
+struct vec2
+{
+   union
+   {
+      struct
+      {
+         union { float u, x, p; };
+         union { float v, y; };
+      };
+      float fl[2];
+   };
+};
+
+struct vec3
+{
+   union
+   {
+      struct
+      {
+         union { float u, x, p; };
+         union { float v, y; };
+         union { float s, z, r; };
+      };
+      struct { struct vec2 v2; float v2_z; };
+      float fl[3];
+   };
+};
+
+struct vec4
+{
+   union
+   {
+      struct
+      {
+         union { float u, x, p; };
+         union { float v, y; };
+         union { float s, z, r; };
+         union { float t, w; };
+      };
+      struct { struct vec2 v2_1, v2_2; };
+      struct { struct vec3 v3; float v3_w; };
+      float fl[4];
+   };
+};
+
+struct mat4
+{
+   union
+   {
+      struct { struct vec4 c1, c2, c3, c4; };
+      struct vec4 vec[4];
+      float fl[4][4];
+   };
+};
 
 #endif
 

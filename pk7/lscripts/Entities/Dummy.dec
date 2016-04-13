@@ -1,3 +1,10 @@
 actor Lith_Dummy
 {
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      stop
+   }
 }

@@ -16,7 +16,7 @@ void Lith_RenderHUDWaves(player_t *p)
    int timer = ACS_Timer();
    int pos;
    
-   ACS_SetHudSize(320, 200, false);
+   ACS_SetHudSize(320, 200);
    
    // Sine (health)
    pos = (10 + timer) % 160;
@@ -57,7 +57,7 @@ void Lith_RenderHUDStringStack(player_t *p)
       DList_DeleteFront(p->hudstrstack);
    }
    
-   ACS_SetHudSize(320, 200, false);
+   ACS_SetHudSize(320, 200);
    ACS_SetFont("CONFONT");
    
    for(slist_t *rover = p->hudstrstack->head; rover; rover = rover->next, i++)
@@ -98,7 +98,7 @@ void Lith_PlayerHUD(player_t *p)
    int hid_armorbg_fx  = hid_armorbg_fxS  - (time % 32);
    int hid_slideind_fx = hid_slideind_fxS - (time % 11);
    
-   ACS_SetHudSize(320, 200, false);
+   ACS_SetHudSize(320, 200);
    
    // ACK
    if(ACS_PlayerCount() > 1 && ACS_GetCVar("lith_sv_ack"))

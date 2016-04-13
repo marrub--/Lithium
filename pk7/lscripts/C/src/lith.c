@@ -41,6 +41,12 @@ void Lith_ResetPlayer(player_t *p)
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    ACS_SetAirControl(0.77);
    
+   ACS_SpawnForced("Lith_CameraHax", ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0),
+                                     p->cameratid = ACS_UniqueTID());
+   ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
+   
+   p->viewheight = ACS_GetActorViewHeight(0);
+   
    if(!p->cbi.wasinit)
       Lith_PlayerInitCBI(p);
    
@@ -386,14 +392,15 @@ void Lith_Player(void)
       p->velz = ACS_GetActorVelZ(0);
       p->yaw = ACS_GetActorAngle(0) - p->addyaw;
       p->pitch = ACS_GetActorPitch(0) - p->addpitch;
-      p->pitchv = ACS_GetPlayerInputFixed(0, INPUT_PITCH);
-      p->yawv = ACS_GetPlayerInputFixed(0, INPUT_YAW);
-      p->forwardv = ACS_GetPlayerInputFixed(0, INPUT_FORWARDMOVE);
-      p->sidev = ACS_GetPlayerInputFixed(0, INPUT_SIDEMOVE);
-      p->upv = ACS_GetPlayerInputFixed(0, INPUT_UPMOVE);
+      p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
+      p->yawv = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
+      p->roll = ACS_GetActorRoll(0);
+      p->forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
+      p->sidev = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
+      p->upv = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
       p->floorz = ACS_GetActorFloorZ(0);
-      p->buttons = ACS_GetPlayerInput(0, INPUT_BUTTONS);
-      p->oldbuttons = ACS_GetPlayerInput(0, INPUT_OLDBUTTONS);
+      p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
+      p->oldbuttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
       p->name = StrParam("%tS", 0);
       
       p->health = ACS_GetActorProperty(0, APROP_Health);

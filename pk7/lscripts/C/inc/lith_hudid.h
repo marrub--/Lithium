@@ -55,6 +55,10 @@ enum
    hid_scope_stringstackE,
    hid_scope_stringstackS = hid_scope_stringstackE + 200,
    
+   hid_rifle_scope_xhair,
+   hid_rifle_scope_img,
+   hid_rifle_scope_cam,
+   
    hid_scope_clearS = hid_scope_sineE,
    hid_scope_clearE = hid_scope_stringstackS,
    

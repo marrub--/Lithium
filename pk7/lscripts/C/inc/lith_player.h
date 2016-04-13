@@ -50,11 +50,12 @@ typedef struct player_s
    // Status data
    bool active;
    int tid;
+   int cameratid;
    
    fixed x, y, z;
    fixed velx, vely, velz;
    fixed floorz;
-   float pitch, yaw;
+   float pitch, yaw, roll;
    
    fixed pitchv, yawv;
    fixed forwardv, sidev, upv;
@@ -63,6 +64,8 @@ typedef struct player_s
    int maxhealth;
    int health;
    int armor;
+   
+   fixed viewheight;
    
    // Score
    score_t score;

@@ -1,6 +1,7 @@
 actor Lith_ZombieMan : ZombieMan replaces ZombieMan
 {
    DropItem "Lith_Dummy"
+   MinMissileChance 120
    
    var int user_shots;
    
@@ -30,6 +31,7 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
 actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
 {
    DropItem "Lith_Dummy"
+   MinMissileChance 120
    
    states
    {

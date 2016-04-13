@@ -1,5 +1,11 @@
 #include "lscripts/Constants.dec"
 
+damagetype Lith_NoDamage
+{
+   Factor 0
+   ReplaceFactor
+}
+
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/BulletPuff.dec"
 

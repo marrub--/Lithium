@@ -2,9 +2,11 @@
 #include "lith_player.h"
 #include "lith_upgrades.h"
 #include "lith_hudid.h"
+#include <math.h>
 
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr);
 static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr);
+static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr);
 static void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr);
 static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr);
 static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr);
@@ -22,7 +24,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    [UPGR_Splitter]    = { 800000    , false },
    // Weapons
    [UPGR_GaussShotty] = { 770430    , false },
-   [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate },
+   [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate, Upgr_RifleModes_Update },
    [UPGR_ChargeNader] = { 850000    , false },
    [UPGR_PlasLaser]   = { 1400000   , false },
    [UPGR_OmegaRail]   = { 2600700   , false },
@@ -66,7 +68,9 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0, false, true);
+      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 16.0),
+                              p->vely + (ACS_Sin(angle) * 16.0),
+                           10.0, false, true);
       
       p->rocketcharge = 0;
       p->leaped = false;
@@ -81,6 +85,23 @@ static
 void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->riflefiremode = 0;
+}
+
+static
+void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
+{
+   if(p->weapontype == weapon_combatrifle && p->riflefiremode == rifle_firemode_burst)
+   {
+      ACS_Warp(p->cameratid, 0, 0, p->viewheight, 0,
+               WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+               WARPF_COPYINTERPOLATION | WARPF_COPYPITCH);
+      
+      ACS_SetHudSize(320, 200);
+      ACS_SetHudClipRect(40, 100, 240, 40);
+      DrawSpritePlain("lgfx/RifleScope.png", hid_rifle_scope_img, 40.1, 100.1, TICSECOND);
+      DrawSpritePlain("LITHCAM1", hid_rifle_scope_cam, 0.1, 0.1, TICSECOND);
+      ACS_SetHudClipRect(0, 0, 0, 0);
+   }
 }
 
 // --------------------------------------
@@ -142,7 +163,10 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
       id = ++id % id_max;
       
       HudMessageF("BIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
-      HudMessageFade(hid_implyingE + id, ACS_RandomFixed(0.0, 1.0), ACS_RandomFixed(0.0, 1.0), ACS_RandomFixed(0.1, 0.4), 0.1);
+      HudMessageFade(hid_implyingE + id, ACS_RandomFixed(0.0, 1.0),
+                                         ACS_RandomFixed(0.0, 1.0),
+                                         ACS_RandomFixed(0.1, 0.4),
+                     0.1);
    }
    
    upgr->user_int[0] = id;

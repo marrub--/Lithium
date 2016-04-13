@@ -1,21 +1,54 @@
-actor Lith_Rocket
+actor Lith_RocketTrail
 {
-   Scale 0.5
-   Radius 5
-   Height 4
-   Speed 35
-   Damage (60)
-   DeathSound "weapons/rocklx"
+   RenderStyle Add
+   Scale 0.085
    
-   Projectile
-   +RANDOMIZE
-   +ROCKETTRAIL
+   +NOINTERACTION
    
    states
    {
    Spawn:
-      MISL A 1 bright
+      SMOK A 1 A_FadeOut(0.05)
+      wait
+   }
+}
+
+actor Lith_Rocket
+{
+   Scale 0.7
+   Radius 2
+   Height 2
+   Speed 5
+   Damage (60)
+   DeathSound "weapons/rocklx"
+   
+   Projectile
+   +ROCKETTRAIL
+   
+   var int user_trailstep;
+   var int user_speedstep;
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_JumpIf(user_trailstep >= 4, "TrailDone")
+      TNT1 A 0 A_SetUserVar(user_trailstep, user_trailstep + 1)
+      TNT1 A 0 A_SpawnItemEx("Lith_RocketTrail",
+                                   ((user_trailstep * 8.0) * velx) / -35.0,
+                                  -((user_trailstep * 8.0) * vely) / -35.0,
+                             4.0 + ((user_trailstep * 8.0) * velz) / -35.0,
+                             frandom(-0.5,0.5), frandom(-0.5,0.5), 0,
+                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION)
       loop
+   TrailDone:
+      TNT1 A 0 A_SetUserVar(user_trailstep, 0)
+      TNT1 A 0 A_JumpIf(CallACS("Lith_Velocity", velx*FIX, vely*FIX)/FIX >= 25, "Done")
+      TNT1 A 0 A_SetUserVar(user_speedstep, user_speedstep + 1)
+      TNT1 A 0 A_ScaleVelocity(1.0 + (user_speedstep / 70.0))
+   Done:
+      MISL A 1 bright
+      goto Spawn
    Death:
       MISL B 8 bright A_Explode(48, 64)
       MISL C 6 bright
