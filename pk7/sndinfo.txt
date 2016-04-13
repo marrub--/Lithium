@@ -21,13 +21,22 @@ weapons/shotgun/just2   lsounds/Shotgun/Just2.flac     // same
 weapons/shotgun/just3   lsounds/Shotgun/Just3.flac     // same
 $alias weapons/shotgun/draw weapons/shotgun/open
 
-weapons/shotgun/gauss/fire lsounds/Shotgun/Gauss/ShootGunBang.flac // Descent 2 XL, Descent 2
-weapons/shotgun/gauss/puff lsounds/Shotgun/Gauss/Fire.flac         // same
+weapons/shotgun/gauss/fire    lsounds/Shotgun/Gauss/ShootGunBang.flac // Descent 2 XL
+weapons/shotgun/gauss/puff    lsounds/Shotgun/Gauss/Fire.flac         // same
+weapons/shotgun/gauss/spark1  lsounds/Shotgun/Gauss/Spark1.flac       // Fallout 4
+weapons/shotgun/gauss/spark2  lsounds/Shotgun/Gauss/Spark2.flac       // same
+weapons/shotgun/gauss/spark3  lsounds/Shotgun/Gauss/Spark3.flac       // same
 
 $random weapons/shotgun/just {
    weapons/shotgun/just1
    weapons/shotgun/just2
    weapons/shotgun/just3 }
+
+$random weapons/shotgun/gauss/spark {
+   weapons/shotgun/gauss/spark1
+   weapons/shotgun/gauss/spark2
+   weapons/shotgun/gauss/spark3
+   weapons/shotgun/gauss/spark4 }
 
 // Combat Rifle
 weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
