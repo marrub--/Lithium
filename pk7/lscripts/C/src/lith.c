@@ -38,6 +38,7 @@ static
 void Lith_ResetPlayer(player_t *p)
 {
    p->active = true;
+   p->dead = false;
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    ACS_SetAirControl(0.77);
    
@@ -260,11 +261,10 @@ void Lith_PlayerDamageBob(player_t *p)
 
 [[__call("ScriptI")]]
 static
-void Lith_GiveSecretScore(int playernum, int mul)
+void Lith_GiveSecretScore(player_t *p, int mul)
 {
    [[__call("ScriptS"), __extern("ACS")]]
    extern void Lith_UpdateScore(void);
-   player_t *p = &players[playernum];
    
    ACS_SetActivator(p->tid);
    ACS_GiveInventory("Lith_ScoreCount", 9000 * mul);
@@ -300,9 +300,6 @@ void Lith_PlayerView(player_t *p)
 static
 void Lith_PlayerScore(player_t *p)
 {
-   if(p->health < 1)
-      p->score = 0;
-   
    if(!p->scoreaccumtime || p->score < p->prevscore)
    {
       p->scoreaccum = 0;
@@ -343,6 +340,39 @@ void Lith_PlayerStats(player_t *p)
 // Callback scripts.
 //
 
+[[__call("ScriptI"), __script("Lightning")]]
+void Lith_Lightning(void)
+{
+   if(ACS_Random(0, 1000000) == 666)
+      ACS_Thing_Destroy(0, true, 0);
+}
+
+[[__call("ScriptI"), __script("Respawn")]]
+void Lith_PlayerRespawn(void)
+{
+   Lith_ResetPlayer(&players[ACS_PlayerNumber()]);
+}
+
+[[__call("ScriptI"), __script("Death")]]
+void Lith_PlayerDeath(void)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   p->dead = true;
+   p->score = 0;
+   p->cbi.open = false;
+   p->upgrades_wasinit = false;
+   
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      upgrade_t *upgr = &p->upgrades[i];
+      
+      if(upgr->active)
+         Upgr_ToggleActive(p, upgr);
+      
+      upgr->owned = false;
+   }
+}
+
 [[__call("ScriptI"), __script("Open")]]
 void Lith_World(void)
 {
@@ -358,7 +388,7 @@ void Lith_World(void)
       if(secrets > prevsecrets)
          for(int i = 0; i < MAX_PLAYERS; i++)
             if(players[i].active)
-               Lith_GiveSecretScore(i, secrets - prevsecrets);
+               Lith_GiveSecretScore(&players[i], secrets - prevsecrets);
       
       prevsecrets = secrets;
       
@@ -369,14 +399,13 @@ void Lith_World(void)
 [[__call("ScriptI"), __script("Disconnect")]]
 void Lith_PlayerDisconnect(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
-   p->active = false;
+   players[ACS_PlayerNumber()].active = false;
 }
 
 [[__call("ScriptI"), __script("Enter")]]
 void Lith_Player(void)
 {
-   register player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = &players[ACS_PlayerNumber()];
    
    Lith_ResetPlayer(p);
    
@@ -432,12 +461,12 @@ void Lith_Player(void)
       // Run scripts
       
       // -- Logic
-      Lith_PlayerStats(p);
-      Lith_PlayerScore(p);
-      Lith_PlayerDamageBob(p);
-      
-      if(p->health > 0)
+      if(!p->dead)
       {
+         Lith_PlayerStats(p);
+         Lith_PlayerScore(p);
+         Lith_PlayerDamageBob(p);
+         
          Lith_PlayerUpdateCBI(p);
          
          if(p->rocketcharge < rocketcharge_max)
@@ -450,12 +479,10 @@ void Lith_Player(void)
             Lith_PlayerMove(p);
          
          Lith_PlayerUpdateUpgrades(p);
+         
+         ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+         Lith_PlayerView(p);
       }
-      else
-         p->cbi.open = false;
-      
-      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-      Lith_PlayerView(p);
       
       // -- Rendering
       Lith_PlayerHUD(p);

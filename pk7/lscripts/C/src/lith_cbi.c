@@ -13,7 +13,7 @@ void Lith_KeyOpenCBI(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    
-   if(p->health < 1)
+   if(p->dead)
       return;
    
    p->cbi.open = !p->cbi.open;
@@ -301,7 +301,7 @@ void Lith_PlayerInitCBI(player_t *p)
 [[__call("ScriptI")]]
 void Lith_PlayerUpdateCBI(player_t *p)
 {
-   register cbi_t *cbi = &p->cbi;
+   cbi_t *cbi = &p->cbi;
    
    if(cbi->open)
    {
@@ -341,11 +341,12 @@ void Lith_PlayerUpdateCBI(player_t *p)
 [[__call("ScriptI")]]
 void Lith_PlayerDrawCBI(player_t *p)
 {
-   register cbi_t *cbi = &p->cbi;
+   cbi_t *cbi = &p->cbi;
    
    ACS_SetHudSize(320, 200);
    
-   DrawSpritePlain("lgfx/UI/Cursor.png", hid_cbi_cursor, 0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
+   DrawSpritePlain("lgfx/UI/Cursor.png", hid_cbi_cursor,
+                   0.1 + (int)cbi->cur.x, 0.1 + (int)cbi->cur.y, TICSECOND);
    
    UI_NodeListDraw(cbi->ui, hid_end_cbi);
 }

@@ -49,6 +49,7 @@ typedef struct player_s
 {
    // Status data
    bool active;
+   bool dead;
    int tid;
    int cameratid;
    

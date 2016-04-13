@@ -166,19 +166,22 @@ void Lith_PlayerHUD(player_t *p)
    // Health
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, 0.0);
    
-   HudMessageF("BIGFONT", p->health < 1 ? "---" : "%i", p->health);
+   HudMessageF("BIGFONT", p->dead ? "---" : "%i", p->health);
    HudMessageParams(HUDMSG_PLAIN, hid_health, CR_RED, 2.1, 200.2, 0.0);
    
-   if(p->health > 0 && p->health < p->prevhealth)
+   if(!p->dead)
    {
-      fixed ft = minmax((p->prevhealth - p->health) / 30.0, 0.1, 3.0);
-      HudMessageF("BIGFONT", "%i", p->health);
-      HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_YELLOW, 2.1, 200.2, 0.1, ft);
-   }
-   else if(p->health > p->prevhealth)
-   {
-      HudMessageF("BIGFONT", "%i", p->health);
-      HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_PURPLE, 2.1, 200.2, 0.1, 0.2);
+      if(p->health < p->prevhealth)
+      {
+         fixed ft = minmax((p->prevhealth - p->health) / 30.0, 0.1, 3.0);
+         HudMessageF("BIGFONT", "%i", p->health);
+         HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_YELLOW, 2.1, 200.2, 0.1, ft);
+      }
+      else if(p->health > p->prevhealth)
+      {
+         HudMessageF("BIGFONT", "%i", p->health);
+         HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_PURPLE, 2.1, 200.2, 0.1, 0.2);
+      }
    }
    
    // Weapon indicator
