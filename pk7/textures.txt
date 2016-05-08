@@ -16,6 +16,24 @@ Sprite PLSJB0, 320, 200
 	}
 }
 
+Sprite PLSJC0, 320, 200
+{
+	Patch PLSFC0, 0, 0
+	{
+		UseOffsets
+		Translation "192:207=112:127"
+	}
+}
+
+Sprite PLSJD0, 320, 200
+{
+	Patch PLSFD0, 0, 0
+	{
+		UseOffsets
+		Translation "192:207=112:127"
+	}
+}
+
 Sprite PLSKA0, 320, 200
 {
 	Patch PLSFA0, 0, 0
@@ -30,6 +48,33 @@ Sprite PLSKB0, 320, 200
 	Patch PLSFB0, 0, 0
 	{
 		UseOffsets
+		Translation "192:207=168:191"
+	}
+}
+
+Sprite PLSKC0, 320, 200
+{
+	Patch PLSFC0, 0, 0
+	{
+		UseOffsets
+		Translation "192:207=168:191"
+	}
+}
+
+Sprite PLSKD0, 320, 200
+{
+	Patch PLSFD0, 0, 0
+	{
+		UseOffsets
+		Translation "192:207=168:191"
+	}
+}
+
+Sprite BLL2A0, 31, 25
+{
+	Offset 16, 13
+	Patch BLLTA0, 0, 0
+	{
 		Translation "192:207=168:191"
 	}
 }

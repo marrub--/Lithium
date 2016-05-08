@@ -68,6 +68,7 @@ actor Lith_RocketHax
    Damage 0
    
    Monster Projectile
+   +SKYEXPLODE
    
    states
    {
@@ -97,6 +98,7 @@ actor Lith_SpiralRocket
    
    Monster Projectile
    +ROCKETTRAIL
+   +SKYEXPLODE
    
    var int user_trailstep;
    var int user_speedstep;
@@ -111,8 +113,8 @@ actor Lith_SpiralRocket
       MISL A 0 A_SetUserVar(user_spiraldist,   random(0, 359))
       MISL A 0 A_SetUserVar(user_spiralanglez, user_spiraldist)
    SpawnLoop:
-      MISL A 0 A_SetUserVar(user_spiraldist,   (user_spiraldist + 5)   % 360)
-      MISL A 0 A_SetUserVar(user_spiralanglez, (user_spiralanglez + 5) % 360)
+      MISL A 0 A_SetUserVar(user_spiraldist,   (user_spiraldist + 7)   % 360)
+      MISL A 0 A_SetUserVar(user_spiralanglez, (user_spiralanglez + 7) % 360)
       MISL A 0 A_Warp(AAPTR_MASTER, cos(90.0) * (sin(user_spiraldist) * 12.0),
                                     sin(90.0) * (sin(user_spiraldist) * 12.0),
                                     cos(user_spiralanglez) * 12.0,
@@ -129,7 +131,7 @@ actor Lith_SpiralRocket
       loop
    TrailDone:
       MISL A 0 A_SetUserVar(user_trailstep, 0)
-      MISL A 0 A_JumpIf(CallACS("Lith_Velocity", CallACS("Lith_VelHax",1)*FIX, CallACS("Lith_VelHax",2)*FIX)/FIX >= 25, "Done")
+      MISL A 0 A_JumpIf(CallACS("Lith_Velocity", CallACS("Lith_VelHax",1)*FIX, CallACS("Lith_VelHax",2)*FIX)/FIX >= 30, "Done")
       MISL A 0 A_SetUserVar(user_speedstep, user_speedstep + 1)
       MISL A 0 A_ScaleVelocity(1.0 + (user_speedstep / 20.0), AAPTR_MASTER)
    Done:

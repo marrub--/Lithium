@@ -53,7 +53,7 @@ actor Lith_GunSmokeSpawner
       TNT1 AA 0 A_SpawnItemEx("Lith_GunSmoke",
          0, 0, 0,
          
-         velx + frandom[Lith_GunSmoke](0.2, 0.2),
+         velx + frandom[Lith_GunSmoke](-0.2, 0.2),
          vely + frandom[Lith_GunSmoke](-0.2, 0.2),
          velz,
          
