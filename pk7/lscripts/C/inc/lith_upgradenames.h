@@ -15,6 +15,6 @@ U(RetroWeps,   "Retro Weapons")
 U(lolsords,    "Steele Mode")
 // :v
 U(Implying,    "\Cd>Implicating")
-U(ZharkovMode, "Zharkov Mode")
+// U(ZharkovMode, "Zharkov Mode")
 
 #undef U

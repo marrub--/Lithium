@@ -17,24 +17,26 @@ static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
 //
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-   // Body
+// Body
    [UPGR_JetBooster]  = { 0         , true,  null, null, Upgr_JetBooster_Update },
    [UPGR_CyberLegs]   = { 900000    , false },
    [UPGR_ReactArmour] = { 3200200   , false },
    [UPGR_Splitter]    = { 800000    , false },
-   // Weapons
+// Weapons
    [UPGR_GaussShotty] = { 770430    , false },
    [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate, Upgr_RifleModes_Update },
    [UPGR_ChargeNader] = { 850000    , false },
-   [UPGR_PlasLaser]   = { 1400000   , false },
+// [UPGR_ChargeNader] = { 0         , true },
+// [UPGR_PlasLaser]   = { 1400000   , false },
+   [UPGR_PlasLaser]   = { 0         , true },
    [UPGR_OmegaRail]   = { 2600700   , false },
-   // Downgrades
+// Downgrades
    [UPGR_SeriousMode] = { 0         , false },
    [UPGR_RetroWeps]   = { 0         , false },
    [UPGR_lolsords]    = { 1000      , false, Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
-   // :v
+// :v
    [UPGR_Implying]    = { 0         , false, null, null, Upgr_Implying_Update },
-   [UPGR_ZharkovMode] = { -100      , false },
+// [UPGR_ZharkovMode] = { -100      , false },
 };
 
 static __str upgrade_enums[] = {
@@ -68,8 +70,8 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 16.0),
-                              p->vely + (ACS_Sin(angle) * 16.0),
+      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 16.0),
+                              p->vely + (sink(angle) * 16.0),
                            10.0, false, true);
       
       p->rocketcharge = 0;

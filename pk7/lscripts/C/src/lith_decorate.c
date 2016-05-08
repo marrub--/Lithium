@@ -54,12 +54,6 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_SuperOmegaRandom(int min, int max)
-{
-   return Random(max, min);
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
 int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
    static fixed A;
@@ -71,8 +65,8 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       fixed dy = RandomFixed(mdy, 0.0);
       fixed a = RandomFixed(1.0, -1.0);
       
-      A = ACS_Sin(a) * dx;
-      P = ACS_Cos(a) * dy;
+      A = sink(a) * dx;
+      P = cosk(a) * dy;
       
       return bitsk(A);
    }
@@ -121,13 +115,15 @@ void Lith_GiveScoreToTarget(int amount)
       
       ACS_SetActivatorToTarget(0);
    }
-   else if(ACS_PlayerNumber() == -1)
+   
+   if(ACS_PlayerNumber() == -1)
       return;
    
    ACS_GiveInventory("Lith_ScoreCount", amount);
    Lith_UpdateScore();
 }
 
+// TODO: replace with shop
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_FireScore(int amount)
 {
@@ -158,10 +154,20 @@ void Lith_SwitchRifleFiremode(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetRifleFiremode(void)
+int Lith_GetPlayerData(int info)
 {
    player_t *p = &players[ACS_PlayerNumber()];
-   return p->riflefiremode;
+   
+   switch(info)
+   {
+   case pdata_rifle_firemode: return p->riflefiremode;
+   case pdata_shotgun_gauss:  return p->upgrades[UPGR_GaussShotty].active;
+   case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeNader].active;
+   case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
+   case pdata_buttons:        return p->buttons;
+   }
+   
+   return -1;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -194,6 +200,20 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
    ACS_Thing_Remove(user_spritetid);
    
    return false;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_VelHax(int fuck)
+{
+   ACS_SetActivator(0, AAPTR_MASTER);
+   switch(fuck)
+   {
+   case 1: return ACS_GetActorVelX(0);
+   case 2: return ACS_GetActorVelY(0);
+   case 3: return ACS_GetActorVelZ(0);
+   }
+   
+   return -1;
 }
 
 //

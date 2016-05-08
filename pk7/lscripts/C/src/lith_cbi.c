@@ -279,7 +279,7 @@ void Lith_PlayerInitCBI(player_t *p)
       UI_InsertNode(tabs, tab);
    }
    
-   // BIP (TODO)
+   // TODO: BIP
    {
       ui_node_t *tab = UI_NodeAlloc(NODEAF_ALLOCCHILDREN);
       UI_InsertNode(tabs, tab);

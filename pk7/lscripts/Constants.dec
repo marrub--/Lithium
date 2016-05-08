@@ -1,8 +1,36 @@
 #include "lscripts/C/inc/lith_cvars.h"
 #include "lscripts/C/inc/lith_weapons.h"
+#include "lscripts/C/inc/lith_pdata.h"
 
 const float FIX = 65536.0;
 const int IFIX = 65536;
+
+// ACS interfacing
+const int BT_ATTACK     = 0x00000001;
+const int BT_USE        = 0x00000002;
+const int BT_JUMP       = 0x00000004;
+const int BT_CROUCH     = 0x00000008;
+const int BT_TURN180    = 0x00000010;
+const int BT_ALTATTACK  = 0x00000020;
+const int BT_RELOAD     = 0x00000040;
+const int BT_ZOOM       = 0x00000080;
+const int BT_SPEED      = 0x00000100;
+const int BT_STRAFE     = 0x00000200;
+const int BT_MOVERIGHT  = 0x00000400;
+const int BT_MOVELEFT   = 0x00000800;
+const int BT_BACK       = 0x00001000;
+const int BT_FORWARD    = 0x00002000;
+const int BT_RIGHT      = 0x00004000;
+const int BT_LEFT       = 0x00008000;
+const int BT_LOOKUP     = 0x00010000;
+const int BT_LOOKDOWN   = 0x00020000;
+const int BT_MOVEUP     = 0x00040000;
+const int BT_MOVEDOWN   = 0x00080000;
+const int BT_SHOWSCORES = 0x00100000;
+const int BT_USER1      = 0x00200000;
+const int BT_USER2      = 0x00400000;
+const int BT_USER3      = 0x00800000;
+const int BT_USER4      = 0x01000000;
 
 // Score values.
 const int Score_Clip      = 11  * 100;

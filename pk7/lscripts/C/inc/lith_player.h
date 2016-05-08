@@ -6,6 +6,7 @@
 #include "lith_weapons.h"
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
+#include "lith_pdata.h"
 
 enum
 {
@@ -43,8 +44,9 @@ enum
    key_blueskull   = 1 << key_blueskull_bit,
 };
 
-// That's a lot of data!
-// edit: Holy shit, that's really a lot of data!
+// 7/4/2016: That's a lot of data!
+// edit 9/4/2016: Holy shit, that's really a lot of data!
+// edit 7/5/2016: JESUS TAKE THE WHEEL
 typedef struct player_s
 {
    // Status data

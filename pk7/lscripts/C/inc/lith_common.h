@@ -12,6 +12,9 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define sink ACS_Sin
+#define cosk ACS_Cos
+
 #define max(x, y) ((x) < (y) ? (y) : (x))
 #define min(x, y) ((x) > (y) ? (y) : (x))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))

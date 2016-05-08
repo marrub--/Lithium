@@ -71,12 +71,16 @@ $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe3 }
 
 // Grenade Launcher
-weapons/rocket/fire1  lsounds/RocketLauncher/Fire.flac   // FEAR
-weapons/rocket/fire2  lsounds/RocketLauncher/Fire1.flac  // same
-weapons/rocket/fire3  lsounds/RocketLauncher/Fire2.flac  // same
-weapons/rocket/pickup lsounds/RocketLauncher/Pickup.flac // FEAR, Doom 3, Firearms: Source
-weapons/rocket/draw   lsounds/RocketLauncher/Draw.flac   // FEAR, Doom 3
-weapons/rocket/load   lsounds/RocketLauncher/Load.flac   // same
+weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac    // FEAR
+weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.flac   // same
+weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.flac   // same
+weapons/rocket/pickup  lsounds/RocketLauncher/Pickup.flac  // FEAR, Doom 3, Firearms: Source
+weapons/rocket/draw    lsounds/RocketLauncher/Draw.flac    // FEAR, Doom 3
+weapons/rocket/load    lsounds/RocketLauncher/Load.flac    // same
+weapons/rocket/lock    lsounds/RocketLauncher/Lock.flac    // Unreal Tournament '99
+weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac  // same
+weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac  // Killing Floor
+weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac // same
 
 $random weapons/rocket/fire {
    weapons/rocket/fire1
@@ -161,6 +165,8 @@ $attenuation enemies/chainguy/fire 0.5
 silence lsounds/Silence.flac
 
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
+
+effects/rocket/fly lsounds/RocketLauncher/RocketFly.flac // Unreal Tournament '99
 
 effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic
 effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // same

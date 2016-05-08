@@ -54,7 +54,7 @@ actor Lith_Weapon : Weapon
    Inventory.PickupSound ""
    Inventory.PickupMessage ""
    
-   +NOGRAVITY
+   // Apparently because science and ZDoom™ +NOGRAVITY isn't needed. What.
    +INVENTORY.UNTOSSABLE // Now needed so statistics don't fuck up.
    
    var int user_glowangle;

@@ -427,8 +427,8 @@ void Lith_PlayerMove(player_t *p)
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
          ACS_PlaySound(0, "player/slide");
-         ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 32.0),
-                                 p->vely + (ACS_Sin(angle) * 32.0),
+         ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 32.0),
+                                 p->vely + (sink(angle) * 32.0),
                                  0,
                               false, true);
          
@@ -443,8 +443,8 @@ void Lith_PlayerMove(player_t *p)
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
-      ACS_SetActorVelocity(0, p->velx + (ACS_Cos(angle) * 4.0),
-                              p->vely + (ACS_Sin(angle) * 4.0),
+      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 4.0),
+                              p->vely + (sink(angle) * 4.0),
                               12.0,
                            false, true);
       

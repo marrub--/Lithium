@@ -22,13 +22,13 @@ void Lith_RenderHUDWaves(player_t *p)
    pos = (10 + timer) % 160;
    DrawSpriteFade(StrParam("H_D1%i", frame),
       hid_scope_sineS - pos,
-      300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
+      300.1 + roundk(sink(pos / 32.0) * 7.0, 0),
       5.1 + pos,
       1.5, 0.3);
    
    // Square
    {
-      fixed a = ACS_Cos(pos / 32.0);
+      fixed a = cosk(pos / 32.0);
       
       pos = (7 + timer) % 160;
       DrawSpriteFade(roundk(a, 2) != 0.0 ? "H_D16" : "H_D46",
