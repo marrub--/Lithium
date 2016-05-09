@@ -15,7 +15,6 @@ user bool lith_player_scoresound = true;
 // Server
 server bool lith_sv_ack = true;
 server bool lith_sv_stupidpickups = false;
-server bool lith_sv_noweapontext = false;
 
 // Debugging
 server noarchive bool __lith_debug_on = false;

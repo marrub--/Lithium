@@ -92,7 +92,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
                                       CallACS("Lith_CircleSpread", 0, 0, true) / FIX)
       PLSG A 0 A_PlaySound("weapons/plasma/fire", CHAN_WEAPON)
       PLSJ A 1 offset(0, 37) bright
-      PLSJ B 1 offset(0, 36) bright
+      PLSJ C 1 offset(0, 36) bright
       PLSG A 1 offset(0, 32)
       PLSG A 4 A_ReFire
       goto Ready
@@ -106,7 +106,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       PLSK A 0 A_FireCustomMissile("Lith_PenetratingPlasmaBolt", frandom(-2.7, -1.9), 0, 0, -9)
       PLSK A 0 A_FireCustomMissile("Lith_PenetratingPlasmaBolt", frandom(2.7, 1.9), 0, 0, -9)
       PLSK A 1 offset(0, 37) bright A_PlaySound("weapons/plasma/altfire", CHAN_WEAPON)
-      PLSK B 1 offset(0, 36) bright
+      PLSK C 1 offset(0, 36) bright
       PLSG A 1 offset(0, 35)
       PLSG A 1 offset(0, 34)
       PLSG A 1 offset(0, 32)
@@ -129,11 +129,11 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       PLSK A 2 offset(0, 35) bright A_GunFlash("FireLaserReal")
    FireLaserLoop:
       TNT1 A 0 A_JumpIf(CallACS("Lith_FireScore", 1750), "FireEmpty")
-      PLSK C 1  offset(1, 39) bright A_GunFlash("FireLaserReal")
-      PLSK DD 1 offset(3, 38) bright A_GunFlash("FireLaserReal")
-      PLSK B 1  offset(2, 37) bright A_GunFlash("FireLaserReal")
-      PLSK D 1  offset(4, 40) bright A_GunFlash("FireLaserReal")
-      PLSK A 2  offset(2, 37) bright A_ReFire("FireLaserLoop")
+      PLSK B 1  offset(0, 39) bright A_GunFlash("FireLaserReal")
+      PLSK BB 1 offset(-2, 38) bright A_GunFlash("FireLaserReal")
+      PLSK B 1  offset(1, 37) bright A_GunFlash("FireLaserReal")
+      PLSK B 1  offset(-1, 40) bright A_GunFlash("FireLaserReal")
+      PLSK C 2  offset(1, 37) bright A_ReFire("FireLaserLoop")
    FireLaserDone:
       PLSG A 0 A_StopSound(CHAN_7)
       PLSG A 0 A_StopSound(CHAN_6)
