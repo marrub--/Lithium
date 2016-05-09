@@ -70,9 +70,9 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG A 0 A_PlaySound("weapons/rocket/lock", CHAN_5)
       GRLG A 0 A_GiveInventory("Lith_RocketLoaded", 1)
    // TODO: this needs animation, bug someone to sprite that
-      GRLG A 11
+      GRLG A 9
       GRLG A 1 A_GunFlash("HackyChecks")
-      GRLG A 11
+      GRLG A 9
    weebs3:
       GRLG A 0 A_ReFire("weebs1")
    👌👌👌🍆🍆: // If anyone touches unicode support, the mod will perish!

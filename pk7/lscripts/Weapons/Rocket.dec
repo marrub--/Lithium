@@ -1,7 +1,7 @@
 actor Lith_RocketTrail
 {
    RenderStyle Add
-   Scale 0.085
+   Scale 0.082
    
    +NOINTERACTION
    
@@ -19,7 +19,7 @@ actor Lith_Rocket
    Radius 2
    Height 2
    Speed 5
-   Damage (60)
+   Damage (70)
    DeathSound "weapons/rocklx"
    
    Projectile
@@ -52,14 +52,14 @@ actor Lith_Rocket
       MISL A 1 bright
       goto SpawnLoop
    Death:
-      MISL B 8 bright A_Explode(48, 64)
+      MISL B 8 bright A_Explode
       MISL C 6 bright
       MISL D 4 bright
       stop
    }
 }
 
-actor Lith_RocketHax
+actor Lith_RocketHax : Lith_MonsterHax
 {
    Scale 0.7
    Radius 2
@@ -67,7 +67,7 @@ actor Lith_RocketHax
    Speed 10
    Damage 0
    
-   Monster Projectile
+   Projectile
    +SKYEXPLODE
    
    states
@@ -87,16 +87,16 @@ actor Lith_RocketHax
    }
 }
 
-actor Lith_SpiralRocket
+actor Lith_SpiralRocket : Lith_MonsterHax
 {
    Scale 0.7
    Radius 2
    Height 2
    Speed 0
-   Damage (60)
+   Damage (74)
    DeathSound "weapons/rocklx"
    
-   Monster Projectile
+   Projectile
    +ROCKETTRAIL
    +SKYEXPLODE
    
@@ -139,7 +139,7 @@ actor Lith_SpiralRocket
       MISL A 0 A_Warp(AAPTR_MASTER)
       goto SpawnLoop
    Death:
-      MISL B 8 bright A_Explode(48, 64)
+      MISL B 8 bright A_Explode
       MISL C 6 bright
       MISL D 4 bright
       stop

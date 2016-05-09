@@ -26,9 +26,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    [UPGR_GaussShotty] = { 770430    , false },
    [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate, Upgr_RifleModes_Update },
    [UPGR_ChargeNader] = { 850000    , false },
-// [UPGR_ChargeNader] = { 0         , true },
-// [UPGR_PlasLaser]   = { 1400000   , false },
-   [UPGR_PlasLaser]   = { 0         , true },
+   [UPGR_PlasLaser]   = { 1400000   , false },
    [UPGR_OmegaRail]   = { 2600700   , false },
 // Downgrades
    [UPGR_SeriousMode] = { 0         , false },

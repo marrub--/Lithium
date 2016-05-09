@@ -7,7 +7,8 @@ enum
    pdata_shotgun_gauss,
    pdata_rocket_unreal,
    pdata_plasma_laser,
-   pdata_buttons
+   pdata_buttons,
+   pdata_has_sigil
 };
 
 

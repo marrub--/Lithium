@@ -6,6 +6,16 @@ damagetype Lith_NoDamage
    ReplaceFactor
 }
 
+actor Lith_MonsterHax
+{
+   Monster
+   -COUNTKILL
+   -CANPUSHWALLS
+   -CANUSEWALLS
+   -ACTIVATEMCROSS
+   -CANPASS
+}
+
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/BulletPuff.dec"
 
@@ -16,6 +26,7 @@ damagetype Lith_NoDamage
 #include "lscripts/Entities/Monsters/Demons.dec"
 #include "lscripts/Entities/Monsters/LostSoul.dec"
 #include "lscripts/Entities/Monsters/Revenant.dec"
+#include "lscripts/Entities/Items/DivisionSigil.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
 #include "lscripts/Weapons/1_Fist.dec"

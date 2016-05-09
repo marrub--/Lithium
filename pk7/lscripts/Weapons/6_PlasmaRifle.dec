@@ -118,7 +118,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
    FireLaserReal:
    // Fuck copy-pasting this.
       TNT1 A 0 A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ)
-      TNT1 A 0 A_RailAttack(14, 0, false, None, Red, RGF_SILENT|RGF_FULLBRIGHT, 0, 0, 0, 0, 0, 1, 0, 0, "Lith_PlasmaLaze")
+      TNT1 A 0 A_RailAttack(14, 0, false, None, Red, RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 1, 0, 0, "Lith_PlasmaLaze")
       stop
    FireLaser:
       TNT1 A 0 A_JumpIf(CallACS("Lith_FireScore", 1750), "FireEmpty")

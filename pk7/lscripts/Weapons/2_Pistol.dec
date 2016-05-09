@@ -19,7 +19,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    
    +WEAPON.NOAUTOFIRE
    
-   const int loadmax = 7;
+   const int Lith_PistolLoadMax = 7;
    
    states
    {
@@ -44,7 +44,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
       PISG A 1
       loop
    Fire:
-      TNT1 A 0 A_JumpIfInventory("Lith_PistolShotsFired", loadmax, "Reload")
+      TNT1 A 0 A_JumpIfInventory("Lith_PistolShotsFired", Lith_PistolLoadMax, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_PistolShotsFired", 1)
       TNT1 A 0 A_FireBullets(0, 0, -1, 20, "BulletPuff", FBF_NORANDOM)
       TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)

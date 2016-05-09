@@ -7,6 +7,7 @@
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
+#include "lith_sigil.h"
 
 enum
 {
@@ -70,6 +71,9 @@ typedef struct player_s
    int armor;
    
    fixed viewheight;
+   
+   // 🌌 「÷」 0
+   sigil_t sigil;
    
    // Score
    score_t score;

@@ -2,3 +2,8 @@ statusbar fullscreen, fullscreenoffsets
 {
 }
 
+statusbar inventoryfullscreen, fullscreenoffsets // ZDoom HUD overlay.
+{
+	drawinventorybar Doom, translucent, 1, INDEXFONT, -16+center, 145;
+}
+

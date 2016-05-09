@@ -3,6 +3,7 @@
 #include "lith_cvars.h"
 #include "lith_player.h"
 #include "lith_pickups.h"
+#include "lith_hudid.h"
 
 // ---------------------------------------------------------------------------
 // DECORATE scripts.
@@ -81,6 +82,12 @@ int Lith_UniqueTID(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
+int Lith_Timer(void)
+{
+   return ACS_Timer();
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetCVar(int var)
 {
    switch(var)
@@ -156,6 +163,9 @@ void Lith_SwitchRifleFiremode(void)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetPlayerData(int info)
 {
+   if(ACS_PlayerNumber() < 0)
+      return -1;
+   
    player_t *p = &players[ACS_PlayerNumber()];
    
    switch(info)
@@ -165,6 +175,7 @@ int Lith_GetPlayerData(int info)
    case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeNader].active;
    case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
    case pdata_buttons:        return p->buttons;
+   case pdata_has_sigil:      return p->sigil.acquired;
    }
    
    return -1;
@@ -221,6 +232,55 @@ int Lith_Oscillate()
 {
    static bool x;
    return x = !x;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetSigil()
+{
+   ACS_SetResultValue(1); // q_q
+   
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   p->sigil.acquired = true;
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+      return 1;
+   
+   p->frozen++;
+   ACS_GiveInventory("Lith_TimeHax", 1);
+   ACS_GiveInventory("Lith_TimeHax2", 1);
+   
+   ACS_SetActorVelocity(0, 0.0, 0.0, 0.0, false, true);
+   ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
+   
+   ACS_Delay(3);
+   
+   __str title_text = "D I V I S I O N  S I G I L";
+   
+   __str subtitle_text = "Warning: This item is unfathomably dangerous.\n"
+         "                Use it only at the world's expense.";
+   
+   int title_len = ACS_StrLen(title_text);
+   int subtitle_len = ACS_StrLen(subtitle_text);
+   
+   fixed title_time = (TICSECOND * 5) * title_len;
+   fixed subtitle_time = (TICSECOND * 2) * subtitle_len;
+   
+   HudMessageF("BIGFONT", title_text);
+   HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 0.5, 0.45, 1.0 + subtitle_time, TICSECOND * 5, 0.3);
+   
+   HudMessageF("SMALLFNT", subtitle_text);
+   HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 0.5, 0.5, 1.0 + title_time, TICSECOND * 2, 0.3);
+   
+   ACS_Delay((subtitle_time + title_time + 1.0) * 35.0);
+   
+   ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 4);
+   
+   ACS_TakeInventory("PowerTimeFreezer", 1);
+   ACS_TakeInventory("Lith_TimeHax2", 1);
+   p->frozen--;
+   
+   return 1; // q_q
 }
 
 //

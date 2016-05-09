@@ -42,6 +42,16 @@ struct pickupfmt_s const pickupfmt[] = {
    0, "\Cg%S. Finally.",
    0, "The %S. %S",
    0, "I don't know about you, but I quite like the %S. I'll pick it up for you.",
+   0, "...\nHuh? You do something? I wasn't paying attention.",
+   0, "The %S. It is very much a %S.",
+   0, "%S, desu.",
+   0, "?? ??? ???? ?? ????????? ???? ??",
+   0, "My %S lies over the ocean, my %S lies over the sea.",
+   0, "Liberated the %S from gypsies.",
+   0, "Granted the %S true independence.",
+   0, "The %S, for maximum %S-ing.",
+   1, "Brutal %S, featuring 5x more explosions! .. %S",
+   2, "aeiou",
    2, "What the fuck did you just fucking say about me, you little bitch?\n"
       "I'll have you know I graduated top of my class in the Navy Seals,\n"
       "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"

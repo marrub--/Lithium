@@ -24,7 +24,7 @@ C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_list.c -o bin/lith_list.ir
 C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1300 --alloc-min Sta "" 1000000000 ^
    -llithlib ^
    bin/lith_list.ir ^
-   -o ..\..\acs\lithlist.bin
+   -o ..\..\acs\lithmisc.bin
 
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_common.c -o bin/lith_common.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_player.c -o bin/lith_player.ir
@@ -37,7 +37,7 @@ C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_cbi.c -o bin/lith_cbi.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_cbi_gui.c -o bin/lith_cbi_gui.ir
 C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1400 --alloc-min Sta "" 3000000000 ^
    -llithlib ^
-   -llithlist ^
+   -llithmisc ^
    bin/lith_common.ir ^
    bin/lith_player.ir ^
    bin/lith_world.ir ^

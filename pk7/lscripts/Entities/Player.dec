@@ -23,6 +23,19 @@ actor Lith_CameraHax // fuck
    +NOINTERACTION
 }
 
+// This code taken from Heavenly Knight / Ass Magic.
+// Which I made. I don't even remember if I released it.
+actor Lith_TimeHax : PowerTimeFreezer
+{
+   Powerup.Duration 1
+}
+
+actor Lith_TimeHax2 : PowerTimeFreezer
+{
+   Powerup.Duration -80
+}
+// end
+
 actor Lith_FakeItemPickup : Inventory
 {
    Inventory.MaxAmount 0x7FFFFFFF

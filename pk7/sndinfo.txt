@@ -188,12 +188,14 @@ $random effects/puff/ricochet {
 //
 // Player
 
-player/score1      lsounds/Player/Score1.flac      // Self-made (punched my mic and edited it)
-player/score2      lsounds/Player/Score2.flac      // 〃
-player/score3      lsounds/Player/Score3.flac      // 〃
-player/rocketboost lsounds/Player/RocketBoost.flac // ???
-player/doublejump  lsounds/Player/DoubleJump.flac  // DemonSteele
-player/slide       lsounds/Player/Slide.flac       // 〃
+player/score1      lsounds/Player/Score1.flac              // Self-made (punched my mic and edited it)
+player/score2      lsounds/Player/Score2.flac              // 〃
+player/score3      lsounds/Player/Score3.flac              // 〃
+player/rocketboost lsounds/Player/RocketBoost.flac         // ???
+player/doublejump  lsounds/Player/DoubleJump.flac          // DemonSteele
+player/slide       lsounds/Player/Slide.flac               // 〃
+player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, Fallout 4
+
 $volume player/doublejump 0.7
 
 $random player/score {
