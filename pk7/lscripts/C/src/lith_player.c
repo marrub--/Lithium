@@ -115,6 +115,7 @@ static
 void Lith_PlayerDeath(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
+   
    p->dead = true;
    p->score = 0;
    p->cbi.open = false;
@@ -129,6 +130,13 @@ void Lith_PlayerDeath(void)
       
       upgr->owned = false;
    }
+   
+   do
+      ACS_Delay(1);
+   while(p->active && p->health <= 0);
+   
+   if(p->active)
+      Lith_ResetPlayer(p);
 }
 
 [[__call("ScriptI"), __script("Respawn")]]
