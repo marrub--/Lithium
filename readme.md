@@ -1,4 +1,7 @@
 Lithium
 -------
 
-A mod about shooting guns until things die.
+A mod in which you shoot things until they die.
+
+See the wiki for gameplay details.
+
