@@ -24,10 +24,10 @@ actor Lith_CannonBall
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_SetUserVar(user_angle, angle * 65536.0)
+      TNT1 A 0 A_SetUserVar(user_angle, angle * FIX)
       TNT1 A 2
    SpawnLoop:
-      CBAL A 1 bright A_SetAngle(user_angle / 65536.0)
+      CBAL A 1 bright A_SetAngle(user_angle / FIX)
       loop
    Death:
       CBAL B 0 A_SetScale(2)

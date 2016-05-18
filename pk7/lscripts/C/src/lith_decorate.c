@@ -64,7 +64,7 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
    {
       fixed dx = RandomFixed(mdx, 0.0);
       fixed dy = RandomFixed(mdy, 0.0);
-      fixed a = RandomFixed(1.0, -1.0);
+      fixed a  = RandomFixed(1.0, -1.0);
       
       A = sink(a) * dx;
       P = cosk(a) * dy;
@@ -115,14 +115,6 @@ void Lith_GiveScoreToTarget(int amount)
 {
    ACS_SetActivatorToTarget(0);
    
-   if(!ACS_StrICmp(ACS_GetActorClass(0), "Lith_PistolPuff"))
-   {
-      for(int i = 0, n = min(ACS_GetUserVariable(0, "user_thingshit"), 3); i < n; i++)
-         amount *= 1.5f;
-      
-      ACS_SetActivatorToTarget(0);
-   }
-   
    if(ACS_PlayerNumber() == -1)
       return;
    
@@ -170,12 +162,18 @@ int Lith_GetPlayerData(int info)
    
    switch(info)
    {
-   case pdata_rifle_firemode: return p->riflefiremode;
-   case pdata_shotgun_gauss:  return p->upgrades[UPGR_GaussShotty].active;
-   case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeNader].active;
-   case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
-   case pdata_buttons:        return p->buttons;
-   case pdata_has_sigil:      return p->sigil.acquired;
+   case pdata_rifle_firemode:
+      return p->riflefiremode;
+   case pdata_shotgun_gauss:
+      return p->upgrades[UPGR_GaussShotty].active;
+   case pdata_rocket_unreal:
+      return p->upgrades[UPGR_ChargeNader].active;
+   case pdata_plasma_laser:
+      return p->upgrades[UPGR_PlasLaser].active;
+   case pdata_buttons:
+      return p->buttons;
+   case pdata_has_sigil:
+      return p->sigil.acquired;
    }
    
    return -1;
@@ -217,6 +215,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
 int Lith_VelHax(int fuck)
 {
    ACS_SetActivator(0, AAPTR_MASTER);
+   
    switch(fuck)
    {
    case 1: return ACS_GetActorVelX(0);
@@ -258,7 +257,7 @@ int Lith_GetSigil()
    __str title_text = "D I V I S I O N  S I G I L";
    
    __str subtitle_text = "Warning: This item is unfathomably dangerous.\n"
-         "                Use it only at the world's expense.";
+                  "                Use only at the expense of your world.";
    
    int title_len = ACS_StrLen(title_text);
    int subtitle_len = ACS_StrLen(subtitle_text);

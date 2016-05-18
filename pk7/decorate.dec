@@ -16,17 +16,35 @@ actor Lith_MonsterHax
    -CANPASS
 }
 
+//
+// Misc. Entities
+
+#include "lscripts/Entities/Dummy.dec"
+#include "lscripts/Entities/Player.dec"
+
+//
+// Effects
+
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/BulletPuff.dec"
 
-#include "lscripts/Entities/Dummy.dec"
-#include "lscripts/Entities/ScoreItems.dec"
-#include "lscripts/Entities/Player.dec"
+//
+// Monsters
+
 #include "lscripts/Entities/Monsters/Zombies.dec"
 #include "lscripts/Entities/Monsters/Demons.dec"
 #include "lscripts/Entities/Monsters/LostSoul.dec"
 #include "lscripts/Entities/Monsters/Revenant.dec"
+#include "lscripts/Entities/Monsters/Archvile.dec"
+
+//
+// Items
+
+#include "lscripts/Entities/Items/Score.dec"
 #include "lscripts/Entities/Items/DivisionSigil.dec"
+
+//
+// Weapons
 
 #include "lscripts/Weapons/0_Base.dec"
 #include "lscripts/Weapons/1_Fist.dec"

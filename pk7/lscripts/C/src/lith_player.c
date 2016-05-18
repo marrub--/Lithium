@@ -253,9 +253,6 @@ void Lith_PlayerRunScripts(player_t *p)
    // Rendering
    Lith_PlayerHUD(p);
    Lith_PlayerRender(p);
-   
-   if(p->cbi.open)
-      Lith_PlayerDrawCBI(p);
 }
 
 //
@@ -278,9 +275,6 @@ void Lith_ResetPlayer(player_t *p)
    ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
    
    p->viewheight = ACS_GetActorViewHeight(0);
-   
-   if(!p->cbi.wasinit)
-      Lith_PlayerInitCBI(p);
    
    if(!p->upgrades_wasinit)
       Lith_PlayerInitUpgrades(p);

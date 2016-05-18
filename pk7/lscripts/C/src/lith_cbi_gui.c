@@ -1,545 +1,297 @@
 #include "lith_common.h"
-#include "lith_player.h"
-#include "lith_hudid.h"
-#include "lith_list.h"
-#include "lith_cbi_gui.h"
-#include <math.h>
+#include "lith_cbi.h"
 
-// ---------------------------------------------------------------------------
-// Node Functions.
+//
+// GUI_Auto
+//
+// Offset x/y coordinates and check for clipping.
+// Check if mouse is colliding with us, and if it's being clicked.
 //
 
-void UI_InsertNode(ui_node_t *parent, ui_node_t *child)
+static
+void GUI_Auto(int id, bool active, gui_state_t *gst, int *x, int *y, int dim_x, int dim_y, int clickmask)
 {
-   child->parent = parent;
-   DList_InsertBack(parent->children, (listdata_t){ child });
-}
-
-int UI_NodeListDraw(dlist_t *list, int id)
-{
-   int idbase = id;
+   struct gui_clip_s *clip = &gst->clip;
    
-   for(slist_t *rover = list->head; rover; rover = rover->next)
-   {
-      ui_node_t *node = rover->data.vp;
-      
-      if(node->visible && !node->nodraw)
-      {
-         if(node->basefuncs.PreDraw)
-            id -= node->basefuncs.PreDraw(node, id);
-         if(node->userfuncs.PreDraw)
-            id -= node->userfuncs.PreDraw(node, id);
-         
-         id -= node->basefuncs.Draw(node, id);
-         
-         if(node->userfuncs.Draw)
-            id -= node->userfuncs.Draw(node, id);
-         
-         if(node->basefuncs.PostDraw)
-            id -= node->basefuncs.PostDraw(node, id);
-         if(node->userfuncs.PostDraw)
-            id -= node->userfuncs.PostDraw(node, id);
-      }
-      
-      if(id < hid_cbi_underflow)
-         Log("Hud ID underflow in UI_NodeListDraw!");
-   }
+   *x += gst->ofsx;
+   *y += gst->ofsy;
    
-   return idbase - id;
-}
-
-void UI_NodeListUpdate(dlist_t *list, player_t *p, cursor_t *cur)
-{
-   for(slist_t *rover = list->head; rover; rover = rover->next)
+   if(active &&
+      bpcldi(*x, *y, *x + dim_x, *y + dim_y, gst->cur.x, gst->cur.y) &&
+      (!clip->on || bpcldi(clip->x, clip->y, clip->x + clip->w, clip->y + clip->h, gst->cur.x, gst->cur.y)))
    {
-      ui_node_t *node = rover->data.vp;
+      gst->hot = id;
       
-      if(node->visible)
-      {
-         node->basefuncs.Update(node, p, cur);
-         
-         if(node->userfuncs.Update)
-            node->userfuncs.Update(node, p, cur);
-      }
+      if(gst->active == GUI_EMPTY_ID && gst->cur.click & clickmask)
+         gst->active = id;
    }
 }
 
-ui_node_t *UI_NodeListGetByID(dlist_t *list, int id)
-{
-   for(slist_t *rover = list->head; rover; rover = rover->next)
-   {
-      ui_node_t *node = rover->data.vp;
-      ui_node_t *cnode;
-      
-      if(node->id == id)
-         return node;
-      else if(node->children)
-         if((cnode = UI_NodeListGetByID(node->children, id)))
-            return cnode;
-   }
-   
-   return null;
-}
+#define DEFAULT(n) if(!parm.n) parm.n = parm_default.n;
 
-// ---------------------------------------------------------------------------
-// ui_node_t
+//
+// GUI_Button
 //
 
-int UI_NodeDraw(ui_node_t *node, int id)
+[[__optional_args(3)]]
+bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bool inactive, gui_button_parm_t const *parm_)
 {
-   if(node->children)
-      return UI_NodeListDraw(node->children, id);
+   static gui_button_parm_t parm_default = {
+      .clickmask = GUI_CLICK_LEFT,
+      .c_default = 'j',
+      .c_active = 'g',
+      .c_hot = 'k',
+      .c_inactive = 'u',
+      .f_font = "CBIFONT",
+      .f_gfx_def = "lgfx/UI/Button.png",
+      .f_gfx_hot = "lgfx/UI/ButtonHot.png",
+      .s_clicked = "player/cbi/buttonpress",
+      .dim_x = GUI_BUTTON_W,
+      .dim_y = GUI_BUTTON_H,
+   };
    
-   return 0;
-}
-
-void UI_NodeUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   if(node->children)
-      UI_NodeListUpdate(node->children, p, cur);
-}
-
-void UI_NodeReset(ui_node_t *node, int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs)
-{
-   flags = flags & 0x1F; // We only care about the first 5 bits.
+   static gui_button_parm_t parm;
    
-   node->visible = !(flags & NODEAF_NOTVISIBLE);
-   node->nodraw = flags & NODEAF_NODRAW;
-   node->id = id;
-   node->x = x;
-   node->y = y;
-   node->basefuncs.PreDraw  = null;
-   node->basefuncs.Draw     = UI_NodeDraw;
-   node->basefuncs.PostDraw = null;
-   node->basefuncs.Update   = UI_NodeUpdate;
+   //
+   // Set up structured parameters.
    
-   if(flags & NODEAF_ALLOCCHILDREN)
-      node->children = DList_Create();
-   
-   if(userfuncs)
-      memcpy(&node->userfuncs, userfuncs, sizeof(ui_nodefuncs_t));
+   if(parm_)
+   {
+      parm = *parm_;
+      DEFAULT(clickmask);
+      DEFAULT(c_default); DEFAULT(c_active); DEFAULT(c_hot); DEFAULT(c_inactive);
+      DEFAULT(f_font); DEFAULT(f_gfx_def); DEFAULT(f_gfx_hot);
+      DEFAULT(s_clicked);
+      DEFAULT(dim_x); DEFAULT(dim_y);
+   }
    else
-      memset(&node->userfuncs, 0, sizeof(ui_nodefuncs_t));
-}
-
-ui_node_t *UI_NodeAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs)
-{
-   ui_node_t *node = calloc(1, sizeof(ui_node_t));
-   UI_NodeReset(node, flags, id, x, y, userfuncs);
-   return node;
-}
-
-// ---------------------------------------------------------------------------
-// ui_text_t
-//
-
-int UI_TextDraw(ui_node_t *node, int id)
-{
-   ui_text_t *text = (ui_text_t *)node;
-   ui_node_t *node = &text->node;
-   int idbase = id;
+      parm = parm_default;
    
-   if(text->text)
-   {
-      if(text->rainbows)
-         HudMessageRainbowsF(text->font, "%S", text->text);
-      else
-         HudMessageF(text->font, "%S", text->text);
-      
-      HudMessagePlain(id--, text->alignx + node->x, text->aligny + node->y, TICSECOND);
-   }
+   GUI_Auto(id, !inactive, gst, &x, &y, parm.dim_x, parm.dim_y, parm.clickmask);
    
-   id -= UI_NodeDraw(node, id);
-   return idbase - id;
-}
-
-ui_node_t *UI_TextAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str text, __str font)
-{
-   ui_text_t *node = calloc(1, sizeof(ui_text_t));
+   //
+   // Draw button.
    
-   node->text = text;
-   node->font = font ? font : "CBIFONT";
-   node->rainbows = flags & TXTAF_RAINBOWS;
-   
-   if(flags & TXTAF_ALIGNX_CENTER)
-      node->alignx = 0.0;
-   else if(flags & TXTAF_ALIGNX_RIGHT)
-      node->alignx = 0.2;
+   if(gst->hot == id)
+      DrawSpritePlain(parm.f_gfx_hot, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
    else
-      node->alignx = 0.1;
+      DrawSpritePlain(parm.f_gfx_def, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
    
-   if(flags & TXTAF_ALIGNY_CENTER)
-      node->aligny = 0.0;
-   else if(flags & TXTAF_ALIGNY_BOTTOM)
-      node->aligny = 0.2;
+   //
+   // [opt] Draw text.
+   
+   if(text)
+   {
+      char color = parm.c_default;
+      
+      if(inactive)
+         color = parm.c_inactive;
+      else if(gst->active == id)
+         color = parm.c_active;
+      else if(gst->hot == id)
+         color = parm.c_hot;
+      
+      HudMessageF(parm.f_font, "\C%c%S", color, text);
+      HudMessagePlain((*hid)--, (parm.dim_x/2) + x, (parm.dim_y/2) + y, TICSECOND);
+   }
+   
+   //
+   // Check if click ended. If so, play a sound and return true.
+   
+   if(!(gst->cur.click & parm.clickmask) && gst->hot == id && gst->active == id)
+   {
+      ACS_LocalAmbientSound(parm.s_clicked, 127);
+      return true;
+   }
    else
-      node->aligny = 0.1;
-   
-   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
-   node->node.basefuncs.Draw = UI_TextDraw;
-   
-   return &node->node;
+      return false;
 }
 
-// ---------------------------------------------------------------------------
-// ui_sprite_t
+//
+// GUI_ScrollBarVertical
 //
 
-int UI_SpriteDraw(ui_node_t *node, int id)
+static
+bool GUI_ScrollBarVertical(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm)
 {
-   ui_sprite_t *sprite = (ui_sprite_t *)node;
-   ui_node_t *node = &sprite->node;
-   int idbase = id;
+   // REAL THINGS
+   int height = size / parm->dim_scrl_y;
+   int realheight = height * parm->dim_scrl_y; // yay, integer rounding abuse!
    
-   if(sprite->name)
-   {
-      DrawSpriteAlpha(sprite->name, id--,
-         sprite->alignx + node->x,
-         sprite->aligny + node->y,
-         TICSECOND, sprite->alpha);
-   }
+   // MAGICAL THINGS
+   int capheight = realheight - (parm->dim_cap_y * 2);
+   int ypos = (parm->dim_cap_y + capheight * *pos) / 65536;
+   int capy = y + parm->dim_cap_y;
    
-   id -= UI_NodeDraw(node, id);
-   return idbase - id;
-}
-
-ui_node_t *UI_SpriteAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str name, fixed alpha)
-{
-   ui_sprite_t *node = calloc(1, sizeof(ui_sprite_t));
+   // CODE THINGS
+   GUI_Auto(id, true, gst, &x, &capy, parm->dim_scrl_x, capheight, parm->clickmask);
    
-   node->name = name;
-   node->alpha = (flags & SPRAF_ALPHA) ? alpha : 1.0;
+   //
+   // Draw each section of the scroll bar
    
-   if(flags & SPRAF_ALIGNX_CENTER)
-      node->alignx = 0.0;
-   else if(flags & SPRAF_ALIGNX_RIGHT)
-      node->alignx = 0.2;
+   for(int i = 0; i < height; i++)
+      DrawSpritePlain(parm->f_gfx_scrl, (*hid)--, 0.1 + x, 0.1 + y + (parm->dim_scrl_y * i), TICSECOND);
+   
+   DrawSpritePlain(parm->f_gfx_capS, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
+   DrawSpritePlain(parm->f_gfx_capE, (*hid)--, 0.1 + x, 0.1 + y + ((parm->dim_scrl_y * height) - parm->dim_cap_y), TICSECOND);
+   
+   //
+   // Draw the notch thingy
+   
+   if(gst->active == id || gst->hot == id)
+      DrawSpritePlain(parm->f_gfx_notch_hot, (*hid)--, 0.1 + x - parm->ofs_notch, 0.1 + capy + ypos, TICSECOND);
    else
-      node->alignx = 0.1;
+      DrawSpritePlain(parm->f_gfx_notch, (*hid)--, 0.1 + x - parm->ofs_notch, 0.1 + capy + ypos, TICSECOND);
    
-   if(flags & SPRAF_ALIGNY_CENTER)
-      node->aligny = 0.0;
-   else if(flags & SPRAF_ALIGNY_BOTTOM)
-      node->aligny = 0.2;
+   //
+   // Check for input.
+   
+   if(gst->active == id)
+   {
+      int mpos = minmax(gst->cur.y - capy, 0, capheight);
+      int v = (mpos * 65536) / capheight;
+      if(*pos != v)
+      {
+         *pos = v;
+         return true;
+      }
+   }
+   
+   return false;
+}
+
+//
+// GUI_ScrollBar
+//
+
+[[__optional_args(1)]]
+bool GUI_ScrollBar(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm_)
+{
+   static gui_scroll_parm_t parm_default = {
+      .clickmask = GUI_CLICK_LEFT,
+      .vertical = false,
+      // TODO: split these graphics
+      .f_gfx_capS = "lgfx/UI/ScrollLeft.png",
+      .f_gfx_capE = "lgfx/UI/ScrollRight.png",
+      .f_gfx_scrl = "lgfx/UI/ScrollMid.png",
+      .f_gfx_notch = "lgfx/UI/ScrollerNotch.png",
+      .f_gfx_notch_hot = "lgfx/UI/ScrollerNotchHot.png",
+      /* .dim_cap_x = GUI_SCRLCAP_W,
+      .dim_cap_y = GUI_SCRLCAP_H,
+      .dim_scrl_x = GUI_SCRL_W,
+      .dim_scrl_y = GUI_SCRL_H,
+      .ofs_notch = GUI_SCRL_NOTCH_OFS */
+   };
+   
+   static gui_scroll_parm_t parm;
+   
+   //
+   // Set up structured parameters.
+   
+   if(parm_)
+   {
+      parm = *parm_;
+      DEFAULT(clickmask);
+      DEFAULT(f_gfx_capS); DEFAULT(f_gfx_capE); DEFAULT(f_gfx_scrl);
+      DEFAULT(f_gfx_notch);
+      DEFAULT(dim_cap_x); DEFAULT(dim_cap_y); DEFAULT(dim_scrl_x); DEFAULT(dim_scrl_y);
+   }
    else
-      node->aligny = 0.1;
+      parm = parm_default;
    
-   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
-   node->node.basefuncs.Draw = UI_SpriteDraw;
+   //
+   // Do the thing.
    
-   return &node->node;
+   if(parm.vertical)
+      return GUI_ScrollBarVertical(id, gst, hid, x, y, size, pos, &parm);
+   else
+   {
+      // TODO
+      // return GUI_ScrollBarHorizontal(id, gst, hid, x, y, size, pos, &parm);
+      return false;
+   }
 }
 
-// ---------------------------------------------------------------------------
-// ui_button_t
+#undef DEFAULT
+
+//
+// GUI_BeginOffset
 //
 
-int UI_ButtonDraw(ui_node_t *node, int id)
+void GUI_BeginOffset(gui_state_t *gst, int x, int y)
 {
-   ui_button_t *button = (ui_button_t *)node;
-   ui_node_t *node = &button->node;
-   int idbase = id;
-   
-   if(button->label)
-   {
-      char color = 'j';
-      
-      if(button->clicked)
-         color = 'g';
-      else if(!button->active)
-         color = 'u';
-      else if(button->hover)
-         color = 'f';
-      
-      DrawSpriteAlpha("lgfx/UI/Button.png", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND, 0.7);
-      
-      HudMessageF(button->font, "\C%c%S", color, button->label);
-      HudMessagePlain(id--, (UI_BUTTON_W / 2) + node->x, (UI_BUTTON_H / 2) + node->y, TICSECOND);
-   }
-   
-   id -= UI_NodeDraw(node, id);
-   return idbase - id;
-}
-
-void UI_ButtonUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_button_t *button = (ui_button_t *)node;
-   ui_node_t *node = &button->node;
-   
-   if(button->clicked)
-      button->clicked--;
-   
-   button->hover = false;
-   if(button->active && bpcldi(node->x, node->y, node->x + UI_BUTTON_W, node->y + UI_BUTTON_H, cur->x, cur->y))
-   {
-      if(cur->click & CLICK_LEFT)
-      {
-         ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-         button->clicked = 5;
-         
-         if(node->userfuncs.Click)
-            node->userfuncs.Click(node, p, cur);
-      }
-      else
-         button->hover = true;
-   }
-   
-   UI_NodeUpdate(node, p, cur);
-}
-
-ui_node_t *UI_ButtonAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str label, __str font)
-{
-   ui_button_t *node = calloc(1, sizeof(ui_button_t));
-   
-   node->label = label;
-   node->font  = font ? font : "CBIFONT";
-   node->active = !(flags & BTNAF_START_INACTIVE);
-   
-   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
-   node->node.basefuncs.Draw   = UI_ButtonDraw;
-   node->node.basefuncs.Update = UI_ButtonUpdate;
-   
-   return &node->node;
-}
-
-// ---------------------------------------------------------------------------
-// ui_tab_t
-//
-
-int UI_TabDraw(ui_node_t *node, int id)
-{
-   ui_tab_t *tab = (ui_tab_t *)node;
-   ui_node_t *node = &tab->node;
-   int idbase = id;
-   
-   if(tab->names)
-   {
-      for(int i = 0; i < tab->ntabs; i++)
-      {
-         char color = 'j';
-         
-         if(tab->clicked && i == tab->curtab)
-            color = 'g';
-         else if(i == tab->curtab)
-            color = 'n';
-         else if(i == tab->hover)
-            color = 'f';
-         
-         DrawSpriteAlpha("lgfx/UI/Tab.png", id--, 0.1 + node->x + (UI_TAB_W * i), 0.1 + node->y, TICSECOND, 0.7);
-         
-         HudMessageF("CBIFONT", "\C%c%S", color, tab->names[i]);
-         HudMessagePlain(id--, 0.0 + node->x + (UI_TAB_W * i) + (UI_TAB_W / 2), 0.0 + node->y + (UI_TAB_H / 2), TICSECOND);
-      }
-   }
-   
-   id -= UI_NodeDraw(node, id);
-   return idbase - id;
-}
-
-void UI_TabUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_tab_t *tab = (ui_tab_t *)node;
-   ui_node_t *node = &tab->node;
-   int i;
-   
-   tab->hover = -1;
-   
-   if(tab->clicked > 0)
-      tab->clicked--;
-   
-   
-   if(cur->click & CLICK_LEFT)
-      for(i = 0; i < tab->ntabs; i++)
-      {
-         if(i == tab->curtab)
-            continue;
-         
-         int x = node->x + (UI_TAB_W * i);
-         if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
-         {
-            ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-            tab->clicked = 5;
-            tab->curtab = i;
-            break;
-         }
-      }
-   
-   i = 0;
-   for(slist_t *rover = node->children->head; rover; rover = rover->next, i++)
-   {
-      ui_node_t *node = rover->data.vp;
-      if(i == tab->curtab)
-         node->visible = true;
-      else
-         node->visible = false;
-   }
-   
-   for(i = 0; i < tab->ntabs; i++)
-   {
-      if(tab->clicked && i == tab->curtab)
-         continue;
-      
-      int x = node->x + (UI_TAB_W * i);
-      if(bpcldi(x, node->y, x + UI_TAB_W, node->y + UI_TAB_H, cur->x, cur->y))
-      {
-         tab->hover = i;
-         break;
-      }
-   }
-   
-   UI_NodeUpdate(node, p, cur);
-}
-
-ui_node_t *UI_TabAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *names)
-{
-   ui_tab_t *node = calloc(1, sizeof(ui_tab_t));
-   
-   if(names)
-   {
-      int ntabs = 0;
-      
-      for(__str *p = names; *p; p++)
-         ntabs++;
-      
-      node->ntabs = ntabs;
-      node->names = cpyalloc(ntabs, sizeof(__str), names);
-   }
-   
-   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
-   node->node.basefuncs.Draw   = UI_TabDraw;
-   node->node.basefuncs.Update = UI_TabUpdate;
-   
-   return &node->node;
-}
-
-// ---------------------------------------------------------------------------
-// ui_list_t
-//
-
-int UI_ListDraw(ui_node_t *node, int id)
-{
-   ui_list_t *list = (ui_list_t *)node;
-   ui_node_t *node = &list->node;
-   int idbase = id;
-   
-   for(int i = 0; i < list->height; i++)
-   {
-      int addy = UI_LIST_H * i;
-      DrawSpritePlain("lgfx/UI/ListScrollbar.png", id--, 0.1 + node->x, 0.1 + node->y + addy, TICSECOND);
-      DrawSpriteAlpha("lgfx/UI/ListBackground.png", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
-   }
-   
-   DrawSpritePlain("lgfx/UI/ListCapTop.png", id--, 0.1 + node->x, 0.1 + node->y, TICSECOND);
-   DrawSpritePlain("lgfx/UI/ListCapBottom.png", id--, 0.1 + node->x, 0.1 + node->y + ((UI_LIST_H * list->height) - UI_LISTCAP_H), TICSECOND);
-   DrawSpritePlain("lgfx/UI/ListScrollNotch.png", id--, 0.1 + node->x - 3, 0.1 + node->y + UI_LISTCAP_H + (int)(list->position * list->end_h), TICSECOND);
-   
-   if(list->labels)
-   {
-      int i = 0;
-      int label_size = UI_LISTBTN_H * list->nlabels;
-      
-      ACS_SetHudClipRect(node->x + UI_LISTSCR_W, node->y, UI_LISTBTN_W, UI_LISTSCR_H * list->height);
-      for(__str *p = list->labels; i < list->nlabels; p++, i++)
-      {
-         int addy = (UI_LISTBTN_H * i) - (int)(list->position * list->btn_h);
-         
-         if(addy > label_size)
-            break;
-         else if(addy + UI_LISTBTN_H < 0)
-            continue;
-         
-         int color = 'j';
-         
-         if(list->clicked && i == list->selected)
-            color = 'g';
-         else if(i == list->selected)
-            color = 'n';
-         else if(i == list->hover)
-            color = 'f';
-         
-         DrawSpriteAlpha("lgfx/UI/ListButton.png", id--, 0.1 + node->x + UI_LISTSCR_W, 0.1 + node->y + addy, TICSECOND, 0.7);
-         HudMessageF("CBIFONT", "\C%c%S", color, *p);
-         HudMessagePlain(id--, 0.0 + node->x + UI_LISTSCR_W + (UI_LISTBTN_W / 2), 0.0 + node->y + addy + (UI_LISTBTN_H / 2), TICSECOND);
-      }
-      ACS_SetHudClipRect(0, 0, 0, 0);
-   }
-   
-   id -= UI_NodeDraw(node, id);
-   return idbase - id;
-}
-
-void UI_ListUpdate(ui_node_t *node, player_t *p, cursor_t *cur)
-{
-   ui_list_t *list = (ui_list_t *)node;
-   ui_node_t *node = &list->node;
-   
-   list->hover = -1;
-   
-   if(list->clicked > 0)
-      list->clicked--;
-   
-   int starty = node->y + UI_LISTCAP_H;
-   if(cur->hold & CLICK_LEFT && bpcldi(node->x - 4, starty, UI_LISTSCR_W + node->x, list->end_h + starty, cur->x, cur->y))
-      list->position = (cur->y - starty) / (float)list->end_h;
-   
-   if(bpcldi(node->x + UI_LISTSCR_W, node->y, node->x + UI_LISTSCR_W + UI_LISTBTN_W, node->y + (UI_LISTSCR_H * list->height), cur->x, cur->y))
-   {
-      int label_size = UI_LISTBTN_H * list->nlabels;
-      for(int i = 0; i < list->nlabels; i++)
-      {
-         int addy = (UI_LISTBTN_H * i) - (int)(list->position * list->btn_h);
-         
-         if(addy > label_size)
-            break;
-         else if(addy + UI_LISTBTN_H < 0)
-            continue;
-         
-         int y = node->y + addy;
-         if(l1xcldi(y, y + UI_LISTBTN_H, cur->y))
-         {
-            if(cur->click & CLICK_LEFT && i != list->selected)
-            {
-               ACS_LocalAmbientSound("player/cbi/buttonpress", 127);
-               list->clicked = 5;
-               list->selected = i;
-            }
-            else
-               list->hover = i;
-            
-            break;
-         }
-      }
-   }
-   
-   UI_NodeUpdate(node, p, cur);
-}
-
-ui_node_t *UI_ListAlloc(int flags, int id, int x, int y, ui_nodefuncs_t *userfuncs, __str *labels, int height)
-{
-   ui_list_t *node = calloc(1, sizeof(ui_list_t));
-   
-   node->height = height ? height : 1;
-   node->end_h = (UI_LISTSCR_H * node->height) - (UI_LISTCAP_H * 2);
-   
-   if(labels)
-   {
-      int nlabels = 0;
-      
-      for(__str *p = labels; *p; p++)
-         nlabels++;
-      
-      node->nlabels = nlabels;
-      node->btn_h = (UI_LISTBTN_H * node->nlabels) - (UI_LISTSCR_H * node->height);
-      node->labels = cpyalloc(nlabels, sizeof(__str), labels);
-   }
-   
-   UI_NodeReset(&node->node, flags, id, x, y, userfuncs);
-   node->node.basefuncs.Draw   = UI_ListDraw;
-   node->node.basefuncs.Update = UI_ListUpdate;
-   
-   return &node->node;
+   gst->ofsx = x;
+   gst->ofsy = y;
 }
 
 //
-// ---------------------------------------------------------------------------
+// GUI_EndOffset
+//
+
+void GUI_EndOffset(gui_state_t *gst)
+{
+   gst->ofsx = 0;
+   gst->ofsy = 0;
+}
+
+//
+// GUI_BeginClip
+//
+
+void GUI_BeginClip(gui_state_t *gst, int x, int y, int w, int h)
+{
+   if(gst->clip.on)
+      return;
+   
+   gst->clip.on = true;
+   
+   gst->clip.x = x;
+   gst->clip.y = y;
+   gst->clip.w = w;
+   gst->clip.h = h;
+   
+   ACS_SetHudClipRect(x, y, w, h);
+}
+
+//
+// GUI_EndClip
+//
+
+void GUI_EndClip(gui_state_t *gst)
+{
+   if(!gst->clip.on)
+      return;
+   
+   gst->clip.on = false;
+   ACS_SetHudClipRect(0, 0, 0, 0);
+}
+
+//
+// GUI_Begin
+//
+
+void GUI_Begin(gui_state_t *gst)
+{
+   ACS_SetHudSize(320, 200);
+   
+   gst->hot = GUI_EMPTY_ID;
+}
+
+//
+// GUI_End
+//
+
+void GUI_End(gui_state_t *gst)
+{
+   if(gst->cur.click == GUI_CLICK_NONE)
+      gst->active = GUI_EMPTY_ID;
+   else if(gst->active == GUI_EMPTY_ID)
+      gst->active = GUI_INVALID_ID;
+   
+   if(gst->clip.on)
+      GUI_EndClip(gst);
+   
+   if(gst->ofsx || gst->ofsy)
+      GUI_EndOffset(gst);
+}
 
