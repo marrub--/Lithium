@@ -186,22 +186,45 @@ typedef struct bip_s
 enum
 {
    TAB_UPGRADES,
-   TAB_BIP,
    TAB_SHOP,
+   TAB_BIP,
    TAB_STATISTICS,
    TAB_SETTINGS
+};
+
+enum
+{
+   CBI_TABST_MAIN,
+   CBI_TABST_NUM
+};
+
+enum
+{
+   CBI_SCRLST_UPGRADES,
+   CBI_SCRLST_SHOP,
+   CBI_SCRLST_NUM
+};
+
+enum
+{
+   CBI_LSTST_UPGRADES,
+   CBI_LSTST_SHOP,
+   CBI_LSTST_NUM
 };
 
 typedef struct cbi_s
 {
    struct {
       gui_state_t ggst;
-      int tabst[1];
-      int scrlst[1];
-      int lstst[1];
+      int tabst[CBI_TABST_NUM];
+      int scrlst[CBI_SCRLST_NUM];
+      int lstst[CBI_LSTST_NUM];
    } gst;
    bool open;
 } cbi_t;
+
+[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
+void Lith_KeyOpenCBI(void);
 
 [[__call("ScriptI")]]
 void Lith_PlayerUpdateCBI(struct player_s *p);

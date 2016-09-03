@@ -23,7 +23,10 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       CNNG A 1
       loop
    Fire:
-      CNNG A 0 A_JumpIf(CallACS("Lith_FireScore", 28000), "FireEmpty")
+      CNNG A 0 A_JumpIfInventory("Lith_CannonAmmo", 2, "FireReal")
+      goto FireEmpty
+   FireReal:
+      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 2)
       CNNG A 15 A_PlaySound("weapons/cannon/prepare", CHAN_WEAPON)
       CNNG B 2 bright
       CNNG B 2 bright offset(0, 35)
@@ -34,7 +37,10 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       CNNG A 10 offset(0, 32) A_ReFire
       goto Ready
    AltFire:
-      CNNG A 0 A_JumpIf(CallACS("Lith_FireScore", 58000), "FireEmpty")
+      CNNG A 0 A_JumpIfInventory("Lith_CannonAmmo", 1, "AltFireReal")
+      goto FireEmpty
+   AltFireReal:
+      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 1)
       CNNG A 20 A_PlaySound("weapons/cannon/prepare", CHAN_WEAPON)
       CNNG B 2 bright
       CNNG B 2 bright offset(0, 29)

@@ -101,6 +101,7 @@ __str StrUpper(__str in);
 bool ButtonPressed(struct player_s *p, int bt);
 bool ButtonPressedUI(struct player_s *p, int bt);
 void *cpyalloc(size_t num, size_t size, void *src);
+unsigned StrHash(__str s);
 
 // Math
 accum lerpk(accum a, accum b, accum t);
@@ -120,7 +121,7 @@ static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
 static int const rocketcharge_max = 35 * 7;
-static int const slidecharge_max = 35 * 1.2;
+static int const slidecharge_max = 35 * 0.8;
 static int const hudstrstack_max = 20;
 
 // Types

@@ -32,8 +32,10 @@ actor Lith_MonsterHax
 // Monsters
 
 #include "lscripts/Entities/Monsters/Zombies.dec"
+#include "lscripts/Entities/Monsters/Imp.dec"
 #include "lscripts/Entities/Monsters/Demons.dec"
 #include "lscripts/Entities/Monsters/LostSoul.dec"
+//#include "lscripts/Entities/Monsters/Cacodemon.dec"
 #include "lscripts/Entities/Monsters/Revenant.dec"
 #include "lscripts/Entities/Monsters/Archvile.dec"
 

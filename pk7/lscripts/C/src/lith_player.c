@@ -35,7 +35,6 @@ static void Lith_ResetPlayer(player_t *p);
 static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
 static void Lith_PlayerRender(player_t *p);
-static void Lith_PlayerMove(player_t *p);
 static void Lith_PlayerDamageBob(player_t *p);
 static void Lith_PlayerView(player_t *p);
 static void Lith_PlayerScore(player_t *p);
@@ -47,6 +46,8 @@ static void Lith_PlayerStats(player_t *p);
 
 void Lith_GiveScore(player_t *p, score_t score)
 {
+   score *= p->scoremul;
+   
    double mul = minmax(score / 10000.0f, 0.1f, 1.0f);
    
    if(ACS_GetUserCVar(p->number, "lith_player_scoresound"))
@@ -241,9 +242,6 @@ void Lith_PlayerRunScripts(player_t *p)
       if(p->slidecharge < slidecharge_max)
          p->slidecharge++;
       
-      if(!p->frozen)
-         Lith_PlayerMove(p);
-      
       Lith_PlayerUpdateUpgrades(p);
       
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
@@ -268,16 +266,11 @@ void Lith_ResetPlayer(player_t *p)
    p->dead = false;
    p->number = ACS_PlayerNumber();
    ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-   ACS_SetAirControl(0.77);
    
-   ACS_SpawnForced("Lith_CameraHax", ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0),
-                                     p->cameratid = ACS_UniqueTID());
+   ACS_SpawnForced("Lith_CameraHax", ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0), p->cameratid = ACS_UniqueTID());
    ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
    
    p->viewheight = ACS_GetActorViewHeight(0);
-   
-   if(!p->upgrades_wasinit)
-      Lith_PlayerInitUpgrades(p);
    
    // pls not exit map with murder thingies out
    // is bad practice
@@ -307,6 +300,10 @@ void Lith_ResetPlayer(player_t *p)
    p->addpitch = 0.0f;
    
    p->scoreaccum = 0;
+   p->scoremul = 1.3;
+   
+   if(!p->upgrades_wasinit)
+      Lith_PlayerInitUpgrades(p);
 }
 
 //
@@ -404,53 +401,6 @@ void Lith_PlayerRender(player_t *p)
    {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
       ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_alpha"));
-   }
-}
-
-//
-// Lith_PlayerMove
-//
-// Update movement of the player, like sliding and jumping.
-//
-
-static
-void Lith_PlayerMove(player_t *p)
-{
-   fixed grounddist = p->z - p->floorz;
-   
-   if(p->slidecharge >= slidecharge_max)
-   {
-      if(grounddist == 0.0)
-         p->leaped = false;
-      
-      if(p->buttons & BT_SPEED &&
-         (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
-      {
-         fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
-         
-         ACS_PlaySound(0, "player/slide");
-         ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 32.0),
-                                 p->vely + (sink(angle) * 32.0),
-                                 0,
-                              false, true);
-         
-         p->slidecharge = 0;
-      }
-   }
-   
-   if(ButtonPressed(p, BT_JUMP) &&
-      !ACS_CheckInventory("Lith_RocketBooster") && !p->leaped &&
-      ((grounddist <= 16.0 && p->slidecharge < slidecharge_max) || grounddist > 16.0))
-   {
-      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
-      
-      ACS_PlaySound(0, "player/doublejump");
-      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 4.0),
-                              p->vely + (sink(angle) * 4.0),
-                              12.0,
-                           false, true);
-      
-      p->leaped = true;
    }
 }
 

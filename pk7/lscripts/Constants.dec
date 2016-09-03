@@ -45,8 +45,9 @@ const int Score_Backpack  = (Score_Clip + Score_ShellBox + Score_Rocket + Score_
 
 const int Score_ZombieMan   = Score_Clip      * 1.5;
 const int Score_ShotgunGuy  = Score_Shell     * 1.5;
+const int Score_Imp         = Score_Shell     * 2.0;
 const int Score_ChaingunGuy = Score_ClipBox   * 1.5;
-const int Score_LostSoul    = Score_Shell     * 2.0;
+const int Score_LostSoul    = Score_Shell     * 2.5;
 const int Score_Demon       = Score_ShellBox  * 1.5;
 const int Score_Revenant    = Score_Rocket    * 2.0;
 const int Score_Archvile    = Score_RocketBox * 2.0;

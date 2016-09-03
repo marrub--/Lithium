@@ -147,9 +147,14 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Ammo
-   if(p->weapontype == weapon_pistol)
+   if(p->weapontype == weapon_pistol || p->weapontype == weapon_plasmarifle)
    {
-      int count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
+      int count;
+      
+      if(p->weapontype == weapon_pistol)
+         count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
+      else if(p->weapontype == weapon_plasmarifle)
+         count = ACS_CheckInventory("Lith_PlasmaAmmo");
       
       DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
       

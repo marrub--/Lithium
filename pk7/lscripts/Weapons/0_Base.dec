@@ -1,3 +1,5 @@
+#include "lscripts/Weapons/Ammo.dec"
+
 actor Lith_WeaponGlow
 {
    RenderStyle "Add"

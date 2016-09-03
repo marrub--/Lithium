@@ -122,23 +122,6 @@ void Lith_GiveScoreToTarget(int amount)
    Lith_UpdateScore();
 }
 
-// TODO: replace with shop
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_FireScore(int amount)
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   
-   if(p->score - amount < 0)
-   {
-      p->scoreaccumtime = -2;
-      return true;
-   }
-   
-   p->score -= amount;
-   p->scoreused += amount;
-   return false;
-}
-
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
@@ -167,7 +150,7 @@ int Lith_GetPlayerData(int info)
    case pdata_shotgun_gauss:
       return p->upgrades[UPGR_GaussShotty].active;
    case pdata_rocket_unreal:
-      return p->upgrades[UPGR_ChargeNader].active;
+      return p->upgrades[UPGR_ChargeRPG].active;
    case pdata_plasma_laser:
       return p->upgrades[UPGR_PlasLaser].active;
    case pdata_buttons:
@@ -234,11 +217,21 @@ int Lith_Oscillate()
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
+int Lith_OscillateN(int n)
+{
+   static int x;
+   return x %= n, x++;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetSigil()
 {
    ACS_SetResultValue(1); // q_q
    
    player_t *p = &players[ACS_PlayerNumber()];
+   
+   if(p->cbi.open)
+      Lith_KeyOpenCBI();
    
    p->sigil.acquired = true;
    

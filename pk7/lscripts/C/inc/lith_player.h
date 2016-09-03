@@ -79,6 +79,7 @@ typedef struct player_s
    score_t score;
    score_t scoreaccum;
    int scoreaccumtime;
+   double scoremul;
    
    // CBI
    cbi_t cbi;

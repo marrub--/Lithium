@@ -4,50 +4,54 @@
 #include "lith_hudid.h"
 #include <math.h>
 
-static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr);
-static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr);
-static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr);
-static void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr);
-static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr);
-static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr);
-static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr);
+#define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr)
+#define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr)
+#define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr)
+
+A(JetBooster); D(JetBooster); U(JetBooster);
+A(ReflexWetw); D(ReflexWetw); U(ReflexWetw);
+D(RifleModes); U(RifleModes);
+A(lolsords); D(lolsords); U(lolsords);
+U(Implying);
+
+#undef A
+#undef D
+#undef U
 
 // ---------------------------------------------------------------------------
 // Data.
 //
 
+#define A(n) Upgr_##n##_Activate
+#define D(n) Upgr_##n##_Deactivate
+#define U(n) Upgr_##n##_Update
+
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
+// { "-----------", ----------, -----, ... },
 // Body
-   [UPGR_JetBooster]  = { 0         , true,  null, null, Upgr_JetBooster_Update },
-   [UPGR_CyberLegs]   = { 900000    , false },
-   [UPGR_ReactArmour] = { 3200200   , false },
-   [UPGR_Splitter]    = { 800000    , false },
+   { "JetBooster",  0         , true,  A(JetBooster), D(JetBooster), U(JetBooster) },
+   { "ReflexWetw",  0         , true,  A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
+   { "CyberLegs",   900000    , false },
+   { "ReactArmour", 3200200   , false },
+   { "Splitter",    800000    , false },
 // Weapons
-   [UPGR_GaussShotty] = { 770430    , false },
-   [UPGR_RifleModes]  = { 340100    , false, null, Upgr_RifleModes_Deactivate, Upgr_RifleModes_Update },
-   [UPGR_ChargeNader] = { 850000    , false },
-   [UPGR_PlasLaser]   = { 1400000   , false },
-   [UPGR_OmegaRail]   = { 2600700   , false },
+   { "GaussShotty", 770430    , false },
+   { "RifleModes",  340100    , false, null, D(RifleModes), U(RifleModes)},
+   { "ChargeRPG",   850000    , false },
+   { "PlasLaser",   1400000   , false },
+   { "OmegaRail",   2600700   , false },
 // Downgrades
-   [UPGR_SeriousMode] = { 0         , false },
-   [UPGR_RetroWeps]   = { 0         , false },
-   [UPGR_lolsords]    = { 1000      , false, Upgr_lolsords_Activate, Upgr_lolsords_Deactivate, Upgr_lolsords_Update },
+   { "SeriousMode", 0         , false },
+   { "RetroWeps",   0         , false },
+   { "lolsords",    1000      , false, A(lolsords), D(lolsords), U(lolsords) },
 // :v
-   [UPGR_Implying]    = { 0         , false, null, null, Upgr_Implying_Update },
-// [UPGR_ZharkovMode] = { -100      , false },
+   { "Implying",    0         , false, null, null, U(Implying) },
+// { "ZharkovMode", -100      , false },
 };
 
-static __str upgrade_enums[] = {
-   #define U(en, name) [UPGR_##en] = #en,
-   #include "lith_upgradenames.h"
-   null
-};
-
-__str upgrade_names[] = {
-   #define U(en, name) [UPGR_##en] = name,
-   #include "lith_upgradenames.h"
-   null
-};
+#undef A
+#undef D
+#undef U
 
 // ---------------------------------------------------------------------------
 // Callbacks.
@@ -58,8 +62,23 @@ __str upgrade_names[] = {
 //
 
 static
+void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
+{
+   p->scoremul -= 0.15;
+}
+
+static
+void Upgr_JetBooster_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   p->scoremul += 0.15;
+}
+
+static
 void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
+   if(p->frozen)
+      return;
+   
    fixed grounddist = p->z - p->floorz;
    
    if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 && p->rocketcharge >= rocketcharge_max)
@@ -68,12 +87,77 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 16.0),
-                              p->vely + (sink(angle) * 16.0),
+      ACS_SetActorVelocity(0,
+                           p->velx + (cosk(angle) * 16.0),
+                           p->vely + (sink(angle) * 16.0),
                            10.0, false, true);
       
       p->rocketcharge = 0;
       p->leaped = false;
+   }
+}
+
+// --------------------------------------
+// ReflexWetw
+//
+
+static
+void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
+{
+   p->scoremul -= 0.15;
+   ACS_SetAirControl(0.77);
+   ACS_SetActorPropertyFixed(0, APROP_Speed, 1.0);
+}
+
+static
+void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   p->scoremul += 0.15;
+   ACS_SetAirControl(0.00390625);
+   ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7);
+}
+
+static
+void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
+{
+   if(p->frozen)
+      return;
+   
+   fixed grounddist = p->z - p->floorz;
+   
+   if(p->slidecharge >= slidecharge_max)
+   {
+      if(grounddist == 0.0)
+         p->leaped = false;
+      
+      if(p->buttons & BT_SPEED &&
+         (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
+      {
+         fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+         
+         ACS_PlaySound(0, "player/slide");
+         ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 32.0),
+                                 p->vely + (sink(angle) * 32.0),
+                                 0,
+                              false, true);
+         
+         p->slidecharge = 0;
+      }
+   }
+   
+   if(ButtonPressed(p, BT_JUMP) &&
+      !ACS_CheckInventory("Lith_RocketBooster") && !p->leaped &&
+      ((grounddist <= 16.0 && p->slidecharge < slidecharge_max) || grounddist > 16.0))
+   {
+      fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      
+      ACS_PlaySound(0, "player/doublejump");
+      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 4.0),
+                              p->vely + (sink(angle) * 4.0),
+                              12.0,
+                           false, true);
+      
+      p->leaped = true;
    }
 }
 
@@ -163,9 +247,10 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
       id = ++id % id_max;
       
       HudMessageF("BIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
-      HudMessageFade(hid_implyingE + id, ACS_RandomFixed(0.0, 1.0),
-                                         ACS_RandomFixed(0.0, 1.0),
-                                         ACS_RandomFixed(0.1, 0.4),
+      HudMessageFade(hid_implyingE + id,
+                     ACS_RandomFixed(0.0, 1.0),
+                     ACS_RandomFixed(0.0, 1.0),
+                     ACS_RandomFixed(0.1, 0.4),
                      0.1);
    }
    
@@ -222,10 +307,9 @@ void Lith_PlayerInitUpgrades(player_t *p)
    for(int i = 0; i < UPGR_MAX; i++)
    {
       upgrade_t *upgr = &p->upgrades[i];
+      memset(upgr, 0, sizeof(upgr));
       
       upgr->info = &upgrade_info[i];
-      upgr->name = upgrade_names[i];
-      upgr->description = Language("LITH_TXT_UPGRADE_%S", upgrade_enums[i]);
       
       if(upgr->info->cost == 0)
          Upgr_SetOwned(p, upgr);

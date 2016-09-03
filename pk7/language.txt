@@ -1,33 +1,70 @@
 [enu default]
 
-LITH_PKUP_SIGIL = "\cgDivision Sigil.";
+// ---------------------------------------------------------------------------
+// Pickups
+//
 
+LITH_PKUP_SIGIL = "\cgDivision Sigil.";
 LITH_INV_SIGIL = "\cgDi\civi\cksi\cdon \chSi\ctgi\cal.";
+
+// ---------------------------------------------------------------------------
+// Shop
+//
+
+LITH_TXT_SHOP_TITLE_PlasmaAmmo = "Plasma Ammo";
+LITH_TXT_SHOP_DESCR_PlasmaAmmo =
+   "Highly corrosive magical\n"
+   "energy focused through your\n"
+   "plasma rifle.\n"
+   "Produced by A.O.F inc.";
+
+LITH_TXT_SHOP_TITLE_CannonAmmo = "Cannon Ammo";
+LITH_TXT_SHOP_DESCR_CannonAmmo =
+   "Some kind of demonic charge\n"
+   "powering your Omega Cannon.\n"
+   "Gathered by researchers long\n"
+   "ago, now only found through\n"
+   "black market rings.";
+
+LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";
+LITH_TXT_SHOP_DESCR_DivSigil = "A mistake of the universe.";
+
+// ---------------------------------------------------------------------------
+// Upgrades
+//
+
+LITH_COST = "Cost";
 
 //
 // Body
 //
 
-LITH_TXT_UPGRADE_JetBooster = // Jet Booster
-   "Cost: ---\n\n"
+LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
+LITH_TXT_UPGRADE_DESCR_JetBooster =
    "Effect: Lets you press the \"speed\" key while in the air to let you fly for a short time.\n\n"
    "Description: Jet boosters built into your suit.";
 
-LITH_TXT_UPGRADE_CyberLegs = // Cyber Legs
-   "Cost: 900,000scr\n\n"
+LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
+LITH_TXT_UPGRADE_DESCR_ReflexWetw =
+   "Effect: Lets you move quicker, easier and more efficiently.\n\n"
+   "Description: Cybernetic wetware that improves your reflexes and "
+   "implicit agility. I don't know why you would ever turn this off.";
+
+LITH_TXT_UPGRADE_TITLE_CyberLegs = "Cyber Legs";
+LITH_TXT_UPGRADE_DESCR_CyberLegs =
    "Effect: Allows you to jump higher, and sprint by holding the \"speed\" key.\n\n"
    "Description: Implement glorious Culter Dei"
    " technology, letting you augment your legs for combat effectiveness.";
 
-LITH_TXT_UPGRADE_ReactArmour = // R. Armour
-   "Cost: 3,200,200scr\n\n"
+LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armour";
+LITH_TXT_UPGRADE_DESCR_ReactArmour =
    "Effect: Makes your armour \"react\" to being hit, switching a mode with four settings"
    " to the type of damage it took, making you take far less damage from that type of damage.\n\n"
    "Description: Integrate your armour with a highly advanced Yh-0 reactive plating system,"
    " made by an avian nation formed on the planet DURLA-Prime.";
 
-LITH_TXT_UPGRADE_Splitter = // Split Me
-   "Cost: 800,000scr\n\n"
+LITH_TXT_UPGRADE_TITLE_Splitter = "B. Splitter";
+LITH_TXT_UPGRADE_DESCR_Splitter =
    "Effect: Press \"split self\" to split your torso from your legs.\n\n"
    "Description: some bullshit";
 
@@ -35,32 +72,32 @@ LITH_TXT_UPGRADE_Splitter = // Split Me
 // Weapons
 //
 
-LITH_TXT_UPGRADE_GaussShotty = // Gauss Shotgun
-   "Cost: 770,430scr\n\n"
+LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
+LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
    "Description: Re-build the internal mechanisms to turn the Railgun part of your shotgun into"
    " the intended mechanism, which had to be reproduced from decades of research.";
 
-LITH_TXT_UPGRADE_RifleModes = // Modal Rifle
-   "Cost: 340,100scr\n\n"
+LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
+LITH_TXT_UPGRADE_DESCR_RifleModes =
    "Effect: Gives your rifle a sniper firing mode.\n\n"
    "Description: Some kind of wonder of technology is applied to your rifle"
    " to make it act as two rifles. How the hell does that even work?";
 
-LITH_TXT_UPGRADE_ChargeNader = // C. Launcher
-   "Cost: 850,000scr\n\n"
+LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
+LITH_TXT_UPGRADE_DESCR_ChargeRPG =
    "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade launcher.\n\n"
    "Description: Employ a modification made by Unreal-Weapons, Inc. into your grenade launcher,"
    " allowing it to hold multiple grenades and plummet them all at once.";
 
-LITH_TXT_UPGRADE_PlasLaser = // Plasmatic Laz.
-   "Cost: 1,400,000scr\n\n"
+LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
+LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
    "Description: Replace the energy transformer in your plasma rifle"
    " to use ion focusing instead of whatever magic bullshit it uses right now.";
 
-LITH_TXT_UPGRADE_OmegaRail = // Omega Railgun
-   "Cost: 2,600,700scr\n\n"
+LITH_TXT_UPGRADE_TITLE_OmegaRail = "Omega Railgun";
+LITH_TXT_UPGRADE_DESCR_OmegaRail =
    "Effect: Makes your Omega Cannon into the Omega Railgun!\n\n"
    "Description: Surge the power of the gods through your Omega Cannon.";
 
@@ -68,17 +105,17 @@ LITH_TXT_UPGRADE_OmegaRail = // Omega Railgun
 // Downgrades
 //
 
-LITH_TXT_UPGRADE_SeriousMode = // Serious Mode
-   "Cost: ---\n\n"
+LITH_TXT_UPGRADE_TITLE_SeriousMode = "Serious Mode";
+LITH_TXT_UPGRADE_DESCR_SeriousMode =
    "Effect: Make enemies invisible, and always fast.\n\n"
    "Description: Are you Serious?";
 
-LITH_TXT_UPGRADE_RetroWeps = // Retro Weapons
-   "Cost: ---\n\n"
+LITH_TXT_UPGRADE_TITLE_RetroWeps = "Retro Weapons";
+LITH_TXT_UPGRADE_DESCR_RetroWeps =
    "Effect: All of your weapons fire projectiles straight from contra, and have their original animation sets.";
 
-LITH_TXT_UPGRADE_lolsords = // Steele Mode
-   "Cost: 1000folds\n\n"
+LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
+LITH_TXT_UPGRADE_DESCR_lolsords =
    "Effect: You get a sword.\n"
    "It is literally your only weapon.";
 
@@ -86,12 +123,13 @@ LITH_TXT_UPGRADE_lolsords = // Steele Mode
 // :v
 //
 
-LITH_TXT_UPGRADE_Implying = // >Implicating
-   "Cost: ---\n\n"
+LITH_TXT_UPGRADE_TITLE_Implying = ">Implicating";
+LITH_TXT_UPGRADE_DESCR_Implying =
    "Effect: Oh god why did I add something Kegan suggested to me this was not a good idea\n\n"
    "Description: God damn it.";
 
-LITH_TXT_UPGRADE_ZharkovMode = // Zharkov Mode
-   "Cost: -100scr\n\n"
+LITH_TXT_UPGRADE_TITLE_ZharkovMode = "Zharkov Mode";
+LITH_TXT_UPGRADE_DESCR_ZharkovMode =
    "Effect: Turns you into Zharkov, destroyer of worlds.";
-//
+
+// EOF
