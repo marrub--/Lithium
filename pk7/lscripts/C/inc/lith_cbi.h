@@ -226,7 +226,7 @@ typedef struct cbi_s
 [[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyOpenCBI(void);
 
-[[__call("ScriptI")]]
+[[__call("ScriptS")]]
 void Lith_PlayerUpdateCBI(struct player_s *p);
 
 #endif

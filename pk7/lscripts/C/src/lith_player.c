@@ -63,7 +63,7 @@ void Lith_GiveScore(player_t *p, score_t score)
 // Callback scripts.
 //
 
-[[__call("ScriptI"), __script("Enter")]]
+[[__call("ScriptS"), __script("Enter")]]
 static
 void Lith_PlayerEntry(void)
 {
@@ -111,7 +111,7 @@ void Lith_PlayerEntry(void)
    }
 }
 
-[[__call("ScriptI"), __script("Death")]]
+[[__call("ScriptS"), __script("Death")]]
 static
 void Lith_PlayerDeath(void)
 {
@@ -132,22 +132,21 @@ void Lith_PlayerDeath(void)
       upgr->owned = false;
    }
    
-   do
-      ACS_Delay(1);
+   do ACS_Delay(1);
    while(p->active && p->health <= 0);
    
    if(p->active)
       Lith_ResetPlayer(p);
 }
 
-[[__call("ScriptI"), __script("Respawn")]]
+[[__call("ScriptS"), __script("Respawn")]]
 static
 void Lith_PlayerRespawn(void)
 {
    Lith_ResetPlayer(&players[ACS_PlayerNumber()]);
 }
 
-[[__call("ScriptI"), __script("Disconnect")]]
+[[__call("ScriptS"), __script("Disconnect")]]
 static
 void Lith_PlayerDisconnect(void)
 {

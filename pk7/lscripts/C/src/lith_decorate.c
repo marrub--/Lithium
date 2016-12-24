@@ -9,7 +9,7 @@
 // DECORATE scripts.
 //
 
-[[__call("ScriptI"), __address(200), __extern("ACS")]]
+[[__call("ScriptI"), __address(14242), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
    static __str pickupsounds[] = {

@@ -5,7 +5,7 @@
 // Callback scripts.
 //
 
-[[__call("ScriptI"), __script("Open")]]
+[[__call("ScriptS"), __script("Open")]]
 static
 void Lith_World(void)
 {

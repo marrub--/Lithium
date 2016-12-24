@@ -8,7 +8,7 @@
 // HUD Scripts.
 //
 
-[[__call("ScriptI")]]
+[[__call("ScriptS")]]
 void Lith_RenderHUDWaves(player_t *p)
 {
    fixed health = (fixed)p->health / (fixed)p->maxhealth;
@@ -46,7 +46,7 @@ void Lith_RenderHUDWaves(player_t *p)
    DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
 }
 
-[[__call("ScriptI")]]
+[[__call("ScriptS")]]
 void Lith_RenderHUDStringStack(player_t *p)
 {
    size_t i = 0;
@@ -72,7 +72,7 @@ void Lith_RenderHUDStringStack(player_t *p)
    }
 }
 
-[[__call("ScriptI")]]
+[[__call("ScriptS")]]
 void Lith_PlayerHUD(player_t *p)
 {
    static __str weapongfx[weapon_max] = {

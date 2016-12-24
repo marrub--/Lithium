@@ -200,7 +200,7 @@ int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 // Lith_PlayerUpdateCBI
 //
 
-[[__call("ScriptI")]]
+[[__call("ScriptS")]]
 void Lith_PlayerUpdateCBI(player_t *p)
 {
    if(p->cbi.open)
