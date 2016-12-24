@@ -1,35 +1,49 @@
 Lithium: Credits
-I think I missed one or two people, sorry.
-These aren't really ordered at all.
-I tried ordering them chronologically, but failed even at that. \o/
+I think I missed a few people, sorry.
 
-Yholl - Effects from LegenDoom, help with a buncha stuff
+DavidPH
+   Glorious, glorious GDCC
+   Lots of help with a lot of things
 
-Terminrerefjdfmsnf - Has way too many sound effects, for real what the hells
-(also like 2 sprites)
+Jimmy
+   Fonts!
 
-Shadowlink226 - Halo 3 sound rip
+Kate
+   Some specific, old code is based off of Error: Doom code
+   (this was originally a mod of Error: Doom, which is an awesome mod)
 
-Captain J, Solo Spaghetti, Bloax & Slax - Cannon sprites
+Kyle873
+   Said a nice thing
+   I think
+   maybe
 
-zrrion the insect - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
+Per Kristian
+   Shotgun sprites
 
-Jimmy - Fonts
+RWTerma
+   ÷
 
-Sgt. Shivers, TheRailgunner & Captain J - Combat Rifle sprites
+Sgt. Shivers
+   Shooting my shootyguns
 
-Per Kristian - Shotgun sprites
+Shadowlink226
+   Halo 3 sound rip
 
-Kate - A few stats taken from Error: Doom
+Terminrerefjdfmsnf
+   SHKRA0/B0 and a lot of sound sources
 
-Xaser - Bullet puff from Psychic
+Xaser Acheron
+   Bullet puffs
+   Probably some other stuff I took from Psychic
 
-DavidPH - GDCC, lots of help
+Yholl
+   Effects from LegenDoom
+   Help with a buncha stuff
 
-Sgt. Shivers - Shooting my shootyguns
+zrrion the insect
+   Sprites for the Grenade Launcher, Pistol and Plasma Rifle
 
-Kyle873 - Said a nice thing
-I think
-maybe
+Individual credits
 
-RWTema - ÷
+Cannon sprites: Captain J, Solo Spaghetti, Bloax & Slax
+Combat Rifle sprites: Sgt. Shivers, TheRailgunner & Captain J
