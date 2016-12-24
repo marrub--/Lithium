@@ -39,3 +39,4 @@ Sprite CBALA0, 107, 92
 	Patch CBALL, 0, 0
 }
 
+// EOF

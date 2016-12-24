@@ -1,9 +1,6 @@
-statusbar fullscreen, fullscreenoffsets
-{
-}
+statusbar fullscreen, fullscreenoffsets {}
 
-statusbar inventoryfullscreen, fullscreenoffsets // ZDoom HUD overlay.
-{
-	drawinventorybar Doom, translucent, 1, INDEXFONT, -16+center, 145;
-}
+statusbar inventoryfullscreen, fullscreenoffsets
+   {drawinventorybar Doom, translucent, 1, INDEXFONT, -16+center, 145;}
 
+// EOF

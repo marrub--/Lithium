@@ -1,7 +1,6 @@
 //
-// Weapons
-
 // Pistol
+//
 weapons/pistol/fire    lsounds/Pistol/Fire.flac     // Killing Floor
 weapons/pistol/reload  lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
 weapons/pistol/zoomin  lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
@@ -9,7 +8,9 @@ weapons/pistol/zoomout lsounds/Pistol/ScopeOut.flac // 〃
 weapons/pistol/pickup  lsounds/Pistol/Pickup.flac   // Fallout 4
 $alias weapons/pistol/draw weapons/pistol/pickup
 
+//
 // Shotgun
+//
 weapons/shotgun/fire    lsounds/Shotgun/FireFull.flac  // Killing Floor, General 6000
 weapons/shotgun/open    lsounds/Shotgun/PumpOpen.flac  // General 6000
 weapons/shotgun/close   lsounds/Shotgun/PumpClose.flac // 〃
@@ -30,15 +31,19 @@ weapons/shotgun/gauss/spark3  lsounds/Shotgun/Gauss/Spark3.flac       // 〃
 $random weapons/shotgun/just {
    weapons/shotgun/just1
    weapons/shotgun/just2
-   weapons/shotgun/just3 }
+   weapons/shotgun/just3
+}
 
 $random weapons/shotgun/gauss/spark {
    weapons/shotgun/gauss/spark1
    weapons/shotgun/gauss/spark2
    weapons/shotgun/gauss/spark3
-   weapons/shotgun/gauss/spark4 }
+   weapons/shotgun/gauss/spark4
+}
 
+//
 // Combat Rifle
+//
 weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
 weapons/rifle/fire2      lsounds/CombatRifle/Fire2.flac       // 〃
 weapons/rifle/fire3      lsounds/CombatRifle/Fire3.flac       // 〃
@@ -58,19 +63,24 @@ weapons/rifle/grenadebounce3 lsounds/CombatRifle/GrenadeBounce3.flac // 〃
 $random weapons/rifle/grenadebounce {
    weapons/rifle/grenadebounce1
    weapons/rifle/grenadebounce2
-   weapons/rifle/grenadebounce3 }
+   weapons/rifle/grenadebounce3
+}
 
 $random weapons/rifle/fire {
    weapons/rifle/fire1
    weapons/rifle/fire2
-   weapons/rifle/fire3 }
+   weapons/rifle/fire3
+}
 
 $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe1
    weapons/rifle/firesnipe2
-   weapons/rifle/firesnipe3 }
+   weapons/rifle/firesnipe3
+}
 
+//
 // Grenade Launcher
+//
 weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac    // FEAR
 weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.flac   // 〃
 weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.flac   // 〃
@@ -85,9 +95,12 @@ weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac // 〃
 $random weapons/rocket/fire {
    weapons/rocket/fire1
    weapons/rocket/fire2
-   weapons/rocket/fire3 }
+   weapons/rocket/fire3
+}
 
+//
 // Plasma Rifle
+//
 weapons/plasma/fire    lsounds/PlasmaRifle/Fire.flac      // Devil May Cry 3
 weapons/plasma/altfire lsounds/PlasmaRifle/AltFire.flac   // 〃
 weapons/plasma/pickup  lsounds/PlasmaRifle/Pickup.flac    // Alliance of Valiant Arms
@@ -101,7 +114,8 @@ weapons/plasma/explode3 lsounds/PlasmaRifle/Explode3.flac // 〃
 $random weapons/plasma/explode {
    weapons/plasma/explode1
    weapons/plasma/explode2
-   weapons/plasma/explode3 }
+   weapons/plasma/explode3
+}
 
 weapons/plasma/laser/fire_start lsounds/PlasmaRifle/Laser/FireStart.flac // Unreal Tournament '99
 weapons/plasma/laser/fire_hum   lsounds/PlasmaRifle/Laser/FireHum.flac   // 〃
@@ -109,7 +123,9 @@ weapons/plasma/laser/fire_loop  lsounds/PlasmaRifle/Laser/FireLoop.flac  // Touh
 weapons/plasma/laser/fire_end   lsounds/PlasmaRifle/Laser/FireEnd.flac   // Quake
 weapons/plasma/laser/spark      lsounds/PlasmaRifle/Laser/Spark.flac     // Fallout 4
 
+//
 // Omega Cannon
+//
 weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD
 weapons/cannon/prepare lsounds/Cannon/Prepare.flac   // 〃
 weapons/cannon/explode lsounds/Cannon/Explode.flac   // 〃
@@ -117,7 +133,9 @@ weapons/cannon/empty   lsounds/Cannon/FireEmpty.flac // Killing Floor
 weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 
+//
 // sord
+//
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View
 weapons/sword/attack   lsounds/Sword/Charge1.flac // 〃
 weapons/sword/swing    lsounds/Sword/Swing.flac   // 〃
@@ -135,7 +153,8 @@ $random weapons/sword/normal {
    weapons/sword/normal2
    weapons/sword/normal3
    weapons/sword/normal4
-   weapons/sword/normal5 }
+   weapons/sword/normal5
+}
 
 weapons/sword/hit1 lsounds/Sword/Hit1.flac // Ninja Gaiden Black
 weapons/sword/hit2 lsounds/Sword/Hit2.flac // 〃
@@ -148,67 +167,7 @@ $random weapons/sword/hit {
    weapons/sword/hit2
    weapons/sword/hit3
    weapons/sword/hit4
-   weapons/sword/hit5 }
+   weapons/sword/hit5
+}
 
-//
-// Enemies
-
-enemies/zombie/fire lsounds/ZombieMan/Fire.flac // Killing Floor
-$attenuation enemies/zombie/fire 0.5
-
-enemies/shotguy/fire lsounds/ShotGuy/Fire.flac // Killing Floor
-$attenuation enemies/shotguy/fire 0.5
-
-enemies/chainguy/fire  lsounds/ChaingunGuy/Fire.flac        // Killing Floor
-enemies/chainguy/bolt  lsounds/ChaingunGuy/Bolt.flac        // 〃
-enemies/chainguy/boltb lsounds/ChaingunGuy/BoltBack.flac    // 〃
-enemies/chainguy/boltf lsounds/ChaingunGuy/BoltForward.flac // 〃
-$attenuation enemies/chainguy/fire 0.5
-
-//
-// Effects
-
-silence lsounds/Silence.flac
-
-MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
-
-effects/rocket/fly lsounds/RocketLauncher/RocketFly.flac // Unreal Tournament '99
-
-effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic
-effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // 〃
-effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac // 〃
-effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac // 〃
-
-$random effects/puff/ricochet {
-   effects/puff/ricochet1
-   effects/puff/ricochet2
-   effects/puff/ricochet3
-   effects/puff/ricochet4 }
-
-//
-// Player
-
-player/score1      lsounds/Player/Score1.flac              // Self-made (punched my mic and edited it)
-player/score2      lsounds/Player/Score2.flac              // 〃
-player/score3      lsounds/Player/Score3.flac              // 〃
-player/rocketboost lsounds/Player/RocketBoost.flac         // ???
-player/doublejump  lsounds/Player/DoubleJump.flac          // DemonSteele
-player/slide       lsounds/Player/Slide.flac               // 〃
-player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, Fallout 4
-
-$volume player/doublejump 0.7
-
-$random player/score {
-   player/score1
-   player/score2
-   player/score3 }
-
-//
-// Player - CBI
-
-player/cbi/open         lsounds/Player/CBI/Open.flac         // Halo 3
-player/cbi/close        lsounds/Player/CBI/Close.flac        // 〃
-player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac  // Doom 3
-player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac   // 〃
-player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac // Steam
-
+// EOF

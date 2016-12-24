@@ -1,0 +1,24 @@
+//
+// Misc. Effects
+//
+silence lsounds/Silence.flac
+MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
+
+//
+// Weapons
+//
+effects/rocket/fly lsounds/RocketLauncher/RocketFly.flac // Unreal Tournament '99
+
+effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic
+effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // 〃
+effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac // 〃
+effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac // 〃
+
+$random effects/puff/ricochet {
+   effects/puff/ricochet1
+   effects/puff/ricochet2
+   effects/puff/ricochet3
+   effects/puff/ricochet4
+}
+
+// EOF

@@ -1,44 +1,10 @@
 [enu default]
 
-// ---------------------------------------------------------------------------
-// Pickups
-//
-
-LITH_PKUP_SIGIL = "\cgDivision Sigil.";
-LITH_INV_SIGIL = "\cgDi\civi\cksi\cdon \chSi\ctgi\cal.";
-
-// ---------------------------------------------------------------------------
-// Shop
-//
-
-LITH_TXT_SHOP_TITLE_PlasmaAmmo = "Plasma Ammo";
-LITH_TXT_SHOP_DESCR_PlasmaAmmo =
-   "Highly corrosive magical\n"
-   "energy focused through your\n"
-   "plasma rifle.\n"
-   "Produced by A.O.F inc.";
-
-LITH_TXT_SHOP_TITLE_CannonAmmo = "Cannon Ammo";
-LITH_TXT_SHOP_DESCR_CannonAmmo =
-   "Some kind of demonic charge\n"
-   "powering your Omega Cannon.\n"
-   "Gathered by researchers long\n"
-   "ago, now only found through\n"
-   "black market rings.";
-
-LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";
-LITH_TXT_SHOP_DESCR_DivSigil = "A mistake of the universe.";
-
-// ---------------------------------------------------------------------------
-// Upgrades
-//
-
 LITH_COST = "Cost";
 
 //
 // Body
 //
-
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
    "Effect: Lets you press the \"speed\" key while in the air to let you fly for a short time.\n\n"
@@ -71,7 +37,6 @@ LITH_TXT_UPGRADE_DESCR_Splitter =
 //
 // Weapons
 //
-
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
@@ -104,7 +69,6 @@ LITH_TXT_UPGRADE_DESCR_OmegaRail =
 //
 // Downgrades
 //
-
 LITH_TXT_UPGRADE_TITLE_SeriousMode = "Serious Mode";
 LITH_TXT_UPGRADE_DESCR_SeriousMode =
    "Effect: Make enemies invisible, and always fast.\n\n"
@@ -122,7 +86,6 @@ LITH_TXT_UPGRADE_DESCR_lolsords =
 //
 // :v
 //
-
 LITH_TXT_UPGRADE_TITLE_Implying = ">Implicating";
 LITH_TXT_UPGRADE_DESCR_Implying =
    "Effect: Oh god why did I add something Kegan suggested to me this was not a good idea\n\n"

@@ -1,0 +1,16 @@
+//
+// Zombies
+//
+enemies/zombie/fire lsounds/ZombieMan/Fire.flac // Killing Floor
+$attenuation enemies/zombie/fire 0.5
+
+enemies/shotguy/fire lsounds/ShotGuy/Fire.flac // Killing Floor
+$attenuation enemies/shotguy/fire 0.5
+
+enemies/chainguy/fire  lsounds/ChaingunGuy/Fire.flac        // Killing Floor
+enemies/chainguy/bolt  lsounds/ChaingunGuy/Bolt.flac        // 〃
+enemies/chainguy/boltb lsounds/ChaingunGuy/BoltBack.flac    // 〃
+enemies/chainguy/boltf lsounds/ChaingunGuy/BoltForward.flac // 〃
+$attenuation enemies/chainguy/fire 0.5
+
+// EOF

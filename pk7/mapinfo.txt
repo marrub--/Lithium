@@ -1,5 +1,8 @@
 gameinfo
 {
    playerclasses = "Lith_Player"
+   dimcolor = "gray"
+   dimamount = 0.1
 }
 
+// EOF
