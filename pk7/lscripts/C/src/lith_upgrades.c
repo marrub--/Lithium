@@ -27,7 +27,7 @@ U(Implying);
 #define U(n) Upgr_##n##_Update
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-// { "-----------", ----------, -----, ... },
+// { "Name-------", Cost------, Auto-, Callbacks... },
 // Body
    { "JetBooster",  0         , true,  A(JetBooster), D(JetBooster), U(JetBooster) },
    { "ReflexWetw",  0         , true,  A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
@@ -101,6 +101,19 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 // ReflexWetw
 //
 
+[[__call("ScriptS")]]
+static void DOOOOODGE(player_t *p)
+{
+   _Accum vh = p->viewheight;
+   for(int i = 0; i < 20; i++)
+   {
+      _Accum mul = 1.0 - (sink(i / 40.0) * 0.6);
+      ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
+      ACS_Delay(1);
+   }
+   ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
+}
+
 static
 void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
@@ -113,7 +126,7 @@ static
 void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul += 0.15;
-   ACS_SetAirControl(0.00390625);
+   ACS_SetAirControl(0.00390625); // why god
    ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7);
 }
 
@@ -140,6 +153,8 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
                                  p->vely + (sink(angle) * 32.0),
                                  0,
                               false, true);
+         
+         DOOOOODGE(p);
          
          p->slidecharge = 0;
       }

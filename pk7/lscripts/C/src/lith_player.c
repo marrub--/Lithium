@@ -231,7 +231,6 @@ void Lith_PlayerRunScripts(player_t *p)
    {
       Lith_PlayerStats(p);
       Lith_PlayerScore(p);
-      Lith_PlayerDamageBob(p);
       
       Lith_PlayerUpdateCBI(p);
       
@@ -244,12 +243,13 @@ void Lith_PlayerRunScripts(player_t *p)
       Lith_PlayerUpdateUpgrades(p);
       
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-      Lith_PlayerView(p);
    }
    
    // Rendering
+   Lith_PlayerDamageBob(p);
    Lith_PlayerHUD(p);
    Lith_PlayerRender(p);
+   Lith_PlayerView(p);
 }
 
 //
