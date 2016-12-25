@@ -8,3 +8,17 @@ actor Lith_Dummy
       stop
    }
 }
+
+actor Lith_GreyHam : HealthBonus
+{
+   Inventory.PickupMessage "Picked up a grey ham."
+
+   states
+   {
+   Spawn:
+      MURB A 1
+      loop
+   }
+}
+
+// EOF
