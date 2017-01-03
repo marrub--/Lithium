@@ -42,6 +42,7 @@ enum
    
    UPGR_Implying,
 // UPGR_ZharkovMode,
+   UPGR_TorgueMode,
    
    UPGR_MAX
 };

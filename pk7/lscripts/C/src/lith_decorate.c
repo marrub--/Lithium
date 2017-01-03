@@ -136,10 +136,13 @@ void Lith_SwitchRifleFiremode(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetPlayerData(int info)
+int Lith_GetPlayerData(int info, bool target)
 {
+   if(target)
+      ACS_SetActivatorToTarget(0);
+   
    if(ACS_PlayerNumber() < 0)
-      return -1;
+      return 0;
    
    player_t *p = &players[ACS_PlayerNumber()];
    
@@ -157,9 +160,11 @@ int Lith_GetPlayerData(int info)
       return p->buttons;
    case pdata_has_sigil:
       return p->sigil.acquired;
+   case pdata_EXPLOOOOOSIONS:
+      return p->upgrades[UPGR_TorgueMode].active;
    }
    
-   return -1;
+   return 0;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

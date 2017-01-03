@@ -47,6 +47,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // :v
    { "Implying",    0         , false, null, null, U(Implying) },
 // { "ZharkovMode", -100      , false },
+   { "TorgueMode",  800000000 , false },
 };
 
 #undef A
@@ -271,6 +272,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    
    upgr->user_int[0] = id;
 }
+
 
 // ---------------------------------------------------------------------------
 // Scripts.
