@@ -1,0 +1,5 @@
+make the HUD code better (mainly moving the hud graphics from graphics/HUD/H_ to lgraphics/HUD/)
+make the rocket launcher take ammo
+make (big) ammo pickups actually give you something
+
+// EOF

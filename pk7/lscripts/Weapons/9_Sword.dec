@@ -60,7 +60,7 @@ actor Lith_Sword : Lith_Weapon
       SORD BCD 1
       TNT1 A 2
       SORD E 1
-      SORD F 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, "Lith_Dummy", "weapons/sword/hit", "weapons/sword/normal")
+      SORD F 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, "Lith_DummyArmor", "weapons/sword/hit", "weapons/sword/normal")
       SORD GH 1 A_WeaponReady(WRF_NOBOB)
       TNT1 A 7 A_WeaponReady(WRF_NOBOB)
       goto FireDone
@@ -70,7 +70,7 @@ actor Lith_Sword : Lith_Weapon
       SORD A 1 offset(-17, 50)
       TNT1 A 2
       SORD I 1
-      SORD J 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, "Lith_Dummy", "weapons/sword/hit", "weapons/sword/normal")
+      SORD J 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, "Lith_DummyArmor", "weapons/sword/hit", "weapons/sword/normal")
       SORD KL 1 A_WeaponReady(WRF_NOBOB)
       TNT1 A 7 A_WeaponReady(WRF_NOBOB)
       goto FireDone

@@ -9,6 +9,8 @@ actor Lith_Dummy
    }
 }
 
+actor Lith_DummyArmor : BasicArmorBonus {}
+
 actor Lith_GreyHam : HealthBonus
 {
    Inventory.PickupMessage "Picked up a grey ham."
