@@ -50,3 +50,4 @@ C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1400 --alloc-min Sta "" 3000
    -o ..\..\acs\lithmain.bin
 
 endlocal
+pause

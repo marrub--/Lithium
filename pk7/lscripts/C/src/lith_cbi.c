@@ -184,16 +184,23 @@ int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 static
 int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
+#define Stat(n, name, f, x) \
+   HudMessageF("CBIFONT", name); HudMessagePlain(hid--, 23.1,  0.1 + 40 + (8 * n), TICSECOND); \
+   HudMessageF("CBIFONT", f, x); HudMessagePlain(hid--, 295.2, 0.1 + 40 + (8 * n), TICSECOND)
+   
    HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(hid--, 20.1, 0.1 + 30, TICSECOND);
-   HudMessageF("CBIFONT", "Secrets Found: %i", p->secretsfound); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 0), TICSECOND);
-   HudMessageF("CBIFONT", "Weapons Held: %i", p->weaponsheld); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 1), TICSECOND);
-   HudMessageF("CBIFONT", "Health Used: %li", p->healthused); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 2), TICSECOND);
-   HudMessageF("CBIFONT", "Score Used: %lli", p->scoreused); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 3), TICSECOND);
-   HudMessageF("CBIFONT", "Armor Used: %li", p->armorused); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 4), TICSECOND);
-   HudMessageF("CBIFONT", "Health Sum: %li", p->healthsum); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 5), TICSECOND);
-   HudMessageF("CBIFONT", "Score Sum: %lli", p->scoresum); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 6), TICSECOND);
-   HudMessageF("CBIFONT", "Armor Sum: %li", p->armorsum); HudMessagePlain(hid--, 23.1, 0.1 + 40 + (8 * 7), TICSECOND);
+   Stat(1, "Weapons Held",    "%i",   p->weaponsheld);
+   Stat(2, "Health Used",     "%li",  p->healthused);
+   Stat(5, "Health Sum",      "%li",  p->healthsum);
+   Stat(3, "Score Used",      "%lli", p->scoreused);
+   Stat(6, "Score Sum",       "%lli", p->scoresum);
+   Stat(4, "Armor Used",      "%li",  p->armorused);
+   Stat(7, "Armor Sum",       "%li",  p->armorsum);
+   Stat(0, "Secrets Found",   "%i",   p->secretsfound);
+   Stat(8, "Units Travelled", "%llu", p->unitstravelled);
+   
    return hid;
+#undef Stat
 }
 
 //

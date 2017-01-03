@@ -48,6 +48,7 @@ enum
 // 7/4/2016: That's a lot of data!
 // edit 9/4/2016: Holy shit, that's really a lot of data!
 // edit 7/5/2016: JESUS TAKE THE WHEEL
+// edit 3/1/2017: help
 typedef struct player_s
 {
    // Status data
@@ -58,6 +59,7 @@ typedef struct player_s
    int cameratid;
    
    fixed x, y, z;
+   fixed oldx, oldy, oldz;
    fixed velx, vely, velz;
    fixed floorz;
    float pitch, yaw, roll;
@@ -101,6 +103,8 @@ typedef struct player_s
    
    score_t scoresum;
    score_t scoreused;
+   
+   unsigned long long unitstravelled;
    
    // Type / class
    __str name;

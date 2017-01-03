@@ -170,6 +170,9 @@ static
 void Lith_PlayerUpdateData(player_t *p)
 {
    // Status data
+   p->oldx   = p->x;
+   p->oldy   = p->y;
+   p->oldz   = p->z;
    p->x      = ACS_GetActorX(0);
    p->y      = ACS_GetActorY(0);
    p->z      = ACS_GetActorZ(0);
@@ -485,6 +488,10 @@ void Lith_PlayerStats(player_t *p)
       p->armorused += p->prevarmor - p->armor;
    else if(p->armor > p->prevarmor && ACS_Timer() != 1)
       p->armorsum += p->armor - p->prevarmor;
+   
+   if(p->x != p->oldx) p->unitstravelled += abs(p->x - p->oldx);
+   if(p->y != p->oldy) p->unitstravelled += abs(p->y - p->oldy);
+   if(p->z != p->oldz) p->unitstravelled += abs(p->z - p->oldz);
 }
 
 //
