@@ -152,5 +152,6 @@ typedef struct player_s
 extern player_t players[MAX_PLAYERS];
 
 void Lith_GiveScore(player_t *p, score_t score);
+void Lith_TakeScore(player_t *p, score_t score);
 
 #endif

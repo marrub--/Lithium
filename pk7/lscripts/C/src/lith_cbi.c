@@ -50,7 +50,7 @@ void Shop_Buy(player_t *p, shopdef_t *def)
    }
    
    ACS_GiveInventory(def->class, def->count);
-   p->score -= def->cost;
+   Lith_TakeScore(p, def->cost);
 }
 
 //

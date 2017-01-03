@@ -315,7 +315,7 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
       return;
    }
    
-   p->score -= upgr->info->cost;
+   Lith_TakeScore(p, upgr->info->cost);
    Upgr_SetOwned(p, upgr);
 }
 

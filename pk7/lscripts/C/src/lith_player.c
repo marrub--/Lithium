@@ -59,6 +59,24 @@ void Lith_GiveScore(player_t *p, score_t score)
    p->scoreaccumtime += 20 * mul;
 }
 
+void Lith_TakeScore(player_t *p, score_t score)
+{
+   if(p->score - score >= 0)
+   {
+      p->score     -= score;
+      p->scoreused += score;
+   }
+   else
+   {
+      score_t delta = p->score;
+      p->score = 0;
+      p->scoreused += delta;
+   }
+   
+   p->scoreaccum     = 0;
+   p->scoreaccumtime = 0;
+}
+
 // ---------------------------------------------------------------------------
 // Callback scripts.
 //
