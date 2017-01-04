@@ -35,6 +35,7 @@ C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_pickups.c -o bin/lith_pickups.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_upgrades.c -o bin/lith_upgrades.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_cbi.c -o bin/lith_cbi.ir
 C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_cbi_gui.c -o bin/lith_cbi_gui.ir
+C:\gdcc\gdcc-cc.exe %CFLAGS% -c src/lith_bip.c -o bin/lith_bip.ir
 C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1400 --alloc-min Sta "" 3000000000 ^
    -llithlib ^
    -llithmisc ^
@@ -47,6 +48,7 @@ C:\gdcc\gdcc-ld.exe %LFLAGS% --func-minimum ScriptI 1400 --alloc-min Sta "" 3000
    bin/lith_upgrades.ir ^
    bin/lith_cbi.ir ^
    bin/lith_cbi_gui.ir ^
+   bin/lith_bip.ir ^
    -o ..\..\acs\lithmain.bin
 
 endlocal

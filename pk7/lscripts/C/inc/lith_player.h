@@ -8,6 +8,7 @@
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
 #include "lith_sigil.h"
+#include "lith_bip.h"
 
 enum
 {
@@ -54,6 +55,7 @@ typedef struct player_s
    // Status data
    bool active;
    bool dead;
+   bool staticinit;
    int tid;
    int number;
    int cameratid;
@@ -88,7 +90,6 @@ typedef struct player_s
    bip_t bip;
    
    // Upgrades
-   bool upgrades_wasinit;
    upgrade_t upgrades[UPGR_MAX];
    
    // Statistics

@@ -202,6 +202,29 @@ unsigned StrHash(__str s)
    return ret;
 }
 
+__str Language(__str fmt, ...)
+{
+   va_list vl;
+   
+   ACS_BeginPrint();
+   
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+   
+   __str ret = StrParam("%LS", ACS_EndStrParam());
+   
+   if(ret[0] == '$')
+   {
+      __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
+      __str new = StrParam("%LS", sub);
+      if(ACS_StrCmp(sub, new) != 0)
+         ret = new;
+   }
+   
+   return ret;
+}
+
 //
 // ---------------------------------------------------------------------------
 

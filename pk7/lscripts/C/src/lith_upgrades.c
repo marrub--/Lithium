@@ -29,25 +29,25 @@ U(Implying);
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // { "Name-------", Cost------, Auto-, Callbacks... },
 // Body
-   { "JetBooster",  0         , true,  A(JetBooster), D(JetBooster), U(JetBooster) },
-   { "ReflexWetw",  0         , true,  A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
-   { "CyberLegs",   900000    , false },
-   { "ReactArmour", 3200200   , false },
-   { "Splitter",    800000    , false },
+   { "JetBooster",  0         , true,  null, A(JetBooster), D(JetBooster), U(JetBooster) },
+   { "ReflexWetw",  0         , true,  null, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
+   { "CyberLegs",   900000    , false, null },
+   { "ReactArmour", 3200200   , false, null },
+   { "Splitter",    800000    , false, null },
 // Weapons
-   { "GaussShotty", 770430    , false },
-   { "RifleModes",  340100    , false, null, D(RifleModes), U(RifleModes)},
-   { "ChargeRPG",   850000    , false },
-   { "PlasLaser",   1400000   , false },
-   { "OmegaRail",   2600700   , false },
+   { "GaussShotty", 770430    , false, "ShotgunUpgr" },
+   { "RifleModes",  340100    , false, null, null, D(RifleModes), U(RifleModes)},
+   { "ChargeRPG",   850000    , false, null },
+   { "PlasLaser",   1400000   , false, null },
+   { "OmegaRail",   2600700   , false, null },
 // Downgrades
-   { "SeriousMode", 0         , false },
-   { "RetroWeps",   0         , false },
-   { "lolsords",    1000      , false, A(lolsords), D(lolsords), U(lolsords) },
+   { "SeriousMode", 0         , false, null },
+   { "RetroWeps",   0         , false, null },
+   { "lolsords",    1000      , false, null, A(lolsords), D(lolsords), U(lolsords) },
 // :v
-   { "Implying",    0         , false, null, null, U(Implying) },
-// { "ZharkovMode", -100      , false },
-   { "TorgueMode",  800000000 , false },
+   { "Implying",    0         , false, null, null, null, U(Implying) },
+// { "ZharkovMode", -100      , false, null },
+   { "TorgueMode",  800000000 , false, null },
 };
 
 #undef A
@@ -296,6 +296,9 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
       return;
    }
    
+   if(upgr->info->bipunlock)
+      Lith_UnlockBIPPage(&p->bip, upgr->info->bipunlock);
+   
    if(upgr->info->auto_activate)
       Upgr_ToggleActive(p, upgr);
    
@@ -331,8 +334,6 @@ void Lith_PlayerInitUpgrades(player_t *p)
       if(upgr->info->cost == 0)
          Upgr_SetOwned(p, upgr);
    }
-   
-   p->upgrades_wasinit = true;
 }
 
 void Lith_PlayerUpdateUpgrades(player_t *p)

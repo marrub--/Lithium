@@ -8,6 +8,7 @@ typedef struct upgradeinfo_s
    __str name;
    score_t cost; // If this is exactly 0, you already own it.
    bool auto_activate; // If this is true, as soon as you own it you'll activate it.
+   __str bipunlock;
    
    upgr_update_t Activate;
    upgr_update_t Deactivate;

@@ -27,7 +27,7 @@ LITH_TXT_UPGRADE_DESCR_ReactArmour =
    "Effect: Makes your armour \"react\" to being hit, switching a mode with four settings"
    " to the type of damage it took, making you take far less damage from that type of damage.\n\n"
    "Description: Integrate your armour with a highly advanced Yh-0 reactive plating system,"
-   " made by an avian nation formed on the planet DURLA-Prime.";
+   " made by an avian nation formed on the planet Durla Prime.";
 
 LITH_TXT_UPGRADE_TITLE_Splitter = "B. Splitter";
 LITH_TXT_UPGRADE_DESCR_Splitter =
@@ -40,8 +40,8 @@ LITH_TXT_UPGRADE_DESCR_Splitter =
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
-   "Description: Re-build the internal mechanisms to turn the Railgun part of your shotgun into"
-   " the intended mechanism, which had to be reproduced from decades of research.";
+   "Description: Re-build the internal mechanisms to turn the railgun part of your shotgun into"
+   " an improved mechanism, removing the unnecessary shell loader.";
 
 LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
 LITH_TXT_UPGRADE_DESCR_RifleModes =

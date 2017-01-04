@@ -77,8 +77,6 @@
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
-#define Language(...) StrParam("%LS", StrParam(__VA_ARGS__))
-
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -181,6 +179,8 @@ struct mat4
       float fl[4][4];
    };
 };
+
+__str Language(__str fmt, ...);
 
 #endif
 

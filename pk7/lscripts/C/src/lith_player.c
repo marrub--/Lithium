@@ -138,7 +138,7 @@ void Lith_PlayerDeath(void)
    p->dead = true;
    p->score = 0;
    p->cbi.open = false;
-   p->upgrades_wasinit = false;
+   p->staticinit = false;
    
    for(int i = 0; i < UPGR_MAX; i++)
    {
@@ -322,8 +322,12 @@ void Lith_ResetPlayer(player_t *p)
    p->scoreaccum = 0;
    p->scoremul = 1.3;
    
-   if(!p->upgrades_wasinit)
+   if(!p->staticinit)
+   {
       Lith_PlayerInitUpgrades(p);
+      Lith_PlayerInitBIP(p);
+      p->staticinit = true;
+   }
 }
 
 //

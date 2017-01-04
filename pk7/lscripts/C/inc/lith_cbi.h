@@ -20,8 +20,8 @@
 #define GUI_LISTSCR_W (4)
 #define GUI_LISTSCR_H (8)
 
-#define GUI_LISTBTN_W (64)
-#define GUI_LISTBTN_H (12)
+#define GUI_LISTBTN_W (80)
+#define GUI_LISTBTN_H (9)
 
 #define GUI_LISTCAP_W (4)
 #define GUI_LISTCAP_H (4)
@@ -169,15 +169,6 @@ void GUI_BeginClip(gui_state_t *gst, int x, int y, int w, int h);
 void GUI_EndClip(gui_state_t *gst);
 void GUI_Begin(gui_state_t *gst);
 void GUI_End(gui_state_t *gst);
-
-// ---------------------------------------------------------------------------
-// BIP - Biotic Information Panel
-//
-
-typedef struct bip_s
-{
-   void *no_data;
-} bip_t;
 
 // ---------------------------------------------------------------------------
 // CBI - Computer/Brain Interface

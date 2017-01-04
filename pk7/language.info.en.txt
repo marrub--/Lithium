@@ -1,0 +1,87 @@
+[enu default]
+
+LITH_TXT_INFO_SHORT_Pistol = "Pistol";
+LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
+LITH_TXT_INFO_DESCR_Pistol =
+   "Originally a vanilla mod Ka Haa'umi pistol manufactured by Omakeda, this "
+   "gun has been repaired enough times that it's practically indestructable "
+   "now. Having used it for a whole decade, this pistol still services you "
+   "today, without fail.";
+
+LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
+LITH_TXT_INFO_TITLE_Shotgun = "Hiku Mk.2 Shotgun";
+LITH_TXT_INFO_DESCR_Shotgun =
+   "Manufactured by Omakeda, this shotgun fires both regular 12-gague buck "
+   "and a small plasma charge at the same time. This enables the shotgun to "
+   "be used both as a rifle with railgun-like capabilities and a "
+   "standard shotgun.\n\n"
+   "The plasma charge is powered by a small self-replenishing battery lodged "
+   "in the firing mechanism.\n\n"
+   "Most military models come with a CB-Scope.";
+
+LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
+LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun: Gauss";
+LITH_TXT_INFO_DESCR_ShotgunUpgr =
+   "During the short Avian-Sapiens war of\n1401 NE, A.O.F Inc. ran a line of "
+   "modified Hiku Mk.2 shotguns that removed the shell firing mechanism and "
+   "replaced it with a high-power photon condenser.\n\n"
+   "This both removes the need to chamber rounds and gives a nice boost in "
+   "fire rate. The gun is, essentially, completely different in use.";
+
+LITH_TXT_INFO_SHORT_DurlaPrime = "Durla Prime";
+LITH_TXT_INFO_TITLE_DurlaPrime = "$LITH_TXT_INFO_SHORT_DurlaPrime";
+LITH_TXT_INFO_DESCR_DurlaPrime =
+   "A planet in the Aetos-Vi solar system whose dominant species is a "
+   "humanoid avian creature, given the name \"Peristeras\" or, "
+   "colloquially, \"Perists\".\n\n"
+   "When humans arrived on Durla Prime, the Peristeras were highly "
+   "frightened by the presence of an alien, sentient being, and war broke "
+   "loose. Refusing to attack, the humans ended the war a mere month later, "
+   "after learning to communicate with the avian species.";
+
+LITH_TXT_INFO_SHORT_Earth = "Earth";
+LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
+LITH_TXT_INFO_DESCR_Earth =
+   "The year is 1649 New Era. After a near-apocalypse in 3031, humanity "
+   "collectively decided to mark a new era dedicated to progressing travel "
+   "and communications across the galaxy.\n\n"
+   "Earth has stayed largely the same as it was in the Common Era, thanks "
+   "to advances in science. By 1000 NE, most of the population on Earth "
+   "had moved to other inhabitable planets, but still a large population "
+   "remains on the blue planet.";
+
+LITH_TXT_INFO_SHORT_AllPoint = "AllPoint";
+LITH_TXT_INFO_TITLE_AllPoint = "AllPoint Precision Firearms";
+LITH_TXT_INFO_DESCR_AllPoint =
+   "Established mid first-century NE, AllPoint present heavy sniper "
+   "rifles and plasma weapons for military and private use.\n\n"
+   "Despite producing mainly precision arms, their best-selling weaponry "
+   "is known for its terrible accuracy, but big punch.\n\n"
+   "Reguarding this infamy, its current CEO has this to say: \"Look here, "
+   "reporter guy, if you want me to talk about our weapons, I'll talk about "
+   "all of our fine armaments; but if you just want me to talk about our "
+   "'best-sellers', maybe you should just go look at the damned "
+   "advertisements.\"";
+
+LITH_TXT_INFO_SHORT_AOF = "A.O.F";
+LITH_TXT_INFO_TITLE_AOF = "A.O.F Inc.";
+LITH_TXT_INFO_DESCR_AOF =
+   "Not much is known about this shady corporation on the outside, and "
+   "reports from insiders don't paint a pretty picture.\n\n"
+   "In 1345 NE, a major attack on A.O.F left them nearly out of the picture. "
+   "However, with slow, concise social manipulation and government funding, "
+   "they finally made it back onto the market in 1370.\n\n"
+   "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
+   "robotics.";
+
+LITH_TXT_INFO_SHORT_Omakeda = "Omakeda";
+LITH_TXT_INFO_TITLE_Omakeda = "Omakeda Defense Co.";
+LITH_TXT_INFO_DESCR_Omakeda =
+   "Based in Hawaii, Omakeda Defense Co. produce self-defense and hunting "
+   "weaponry for civilians. Due to their high quality and fair pricing, "
+   "militaries and mercenaries around the world use their armaments as "
+   "well.\n\n"
+   "Known for their innovative firearm design, Omakeda is one of the "
+   "highest profiting, most popular firearms manufacturer on Earth.";
+
+// EOF

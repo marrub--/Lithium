@@ -51,7 +51,7 @@ void Lith_RenderHUDStringStack(player_t *p)
 {
    size_t i = 0;
    
-   if((ACS_Timer() % 5) == 0)
+   if((ACS_Timer() % 3) == 0)
    {
       DList_InsertBack(p->hudstrstack, (listdata_t){ .str = StrParam("%.4X", Random(0x0000, 0x7FFF)) });
       DList_DeleteFront(p->hudstrstack);

@@ -72,13 +72,13 @@ bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bo
    //
    // Draw button.
    
-   if(gst->hot == id)
+   if(gst->hot == id && ACS_StrCmp(parm.f_gfx_hot, "") != 0)
       DrawSpritePlain(parm.f_gfx_hot, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
-   else
+   else if(ACS_StrCmp(parm.f_gfx_def, "") != 0)
       DrawSpritePlain(parm.f_gfx_def, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
    
    //
-   // [opt] Draw text.
+   // Draw text.
    
    if(text)
    {
@@ -92,7 +92,7 @@ bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bo
          color = parm.c_hot;
       
       HudMessageF(parm.f_font, "\C%c%S", color, text);
-      HudMessagePlain((*hid)--, (parm.dim_x/2) + x, (parm.dim_y/2) + y, TICSECOND);
+      HudMessagePlain((*hid)--, (parm.dim_x/2) + x + 0.4, (parm.dim_y/2) + y, TICSECOND);
    }
    
    //

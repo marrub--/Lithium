@@ -5,7 +5,7 @@ LITH_TXT_SHOP_DESCR_PlasmaAmmo =
    "Highly corrosive magical\n"
    "energy focused through your\n"
    "plasma rifle.\n"
-   "Produced by A.O.F inc.";
+   "Produced by A.O.F Inc.";
 
 LITH_TXT_SHOP_TITLE_CannonAmmo = "Cannon Ammo";
 LITH_TXT_SHOP_DESCR_CannonAmmo =

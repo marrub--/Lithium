@@ -29,6 +29,11 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    ACS_Thing_Remove(user_spritetid);
    ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
    
+   switch(user_pickupparm)
+   {
+   case weapon_shotgun: Lith_UnlockBIPPage(&p->bip, "Shotgun"); break;
+   }
+   
    if(ACS_GetCVar("lith_sv_stupidpickups"))
    {
       __str *names = pickupnames[user_pickupparm];

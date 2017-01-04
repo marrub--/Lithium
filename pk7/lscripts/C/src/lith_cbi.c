@@ -75,6 +75,9 @@ void Lith_KeyOpenCBI(void)
       return;
    
    p->cbi.open = !p->cbi.open;
+   p->bip.curcategory = BIP_CATEGORY_MAIN;
+   p->bip.curpage     = null;
+   p->bip.curpagenum  = -1;
    
    if(p->cbi.open)
    {
@@ -120,13 +123,20 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    int sel = cbi->gst.lstst[CBI_LSTST_UPGRADES];
    upgrade_t *upgr = &p->upgrades[sel];
    
-   ACS_SetHudClipRect(95, 30, 200, 150, 200);
+   ACS_SetHudClipRect(111, 30, 184, 150, 184);
    
-   __str lol = (sel == UPGR_lolsords) ? "folds" : "scr";
-   __str cost = upgr->info->cost ? StrParam("%llu%S", upgr->info->cost, lol) : "---";
+   __str mark;
+   switch(sel)
+   {
+   case UPGR_lolsords:   mark = "folds"; break;
+   case UPGR_TorgueMode: mark = "$";     break;
+   default:              mark = "scr";   break;
+   }
+   
+   __str cost = upgr->info->cost ? StrParam("%llu%S", upgr->info->cost, mark) : "---";
    
    HudMessageF("CBIFONT", "%S: %S\n\n%S", Language("LITH_COST"), cost, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
-   HudMessagePlain(hid--, 95.1, 30.1, TICSECOND);
+   HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
@@ -161,7 +171,6 @@ int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
          cbi->gst.lstst[CBI_LSTST_SHOP] = i;
    }
    
-   GUI_EndOffset(gst);
    GUI_END_LIST(gst);
    
    shopdef_t *def = &shopdefs[cbi->gst.lstst[CBI_LSTST_SHOP]];
@@ -169,7 +178,7 @@ int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    __str cost = def->cost ? StrParam("%lluscr", def->cost) : "---";
    
    HudMessageF("CBIFONT", "%S: %S\n\n%S", Language("LITH_COST"), cost, Language("LITH_TXT_SHOP_DESCR_%S", def->name));
-   HudMessagePlain(hid--, 95.1, 30.1, TICSECOND);
+   HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
    
    if(GUI_Button(GUI_ID("sBUY"), gst, &hid, 259, 170, "Buy", !Shop_CanBuy(p, def)))
       Shop_Buy(p, def);
@@ -185,22 +194,115 @@ static
 int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
 #define Stat(n, name, f, x) \
-   HudMessageF("CBIFONT", name); HudMessagePlain(hid--, 23.1,  0.1 + 40 + (8 * n), TICSECOND); \
-   HudMessageF("CBIFONT", f, x); HudMessagePlain(hid--, 295.2, 0.1 + 40 + (8 * n), TICSECOND)
+   HudMessageF("CBIFONT", name); HudMessagePlain(hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
+   HudMessageF("CBIFONT", f, x); HudMessagePlain(hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND)
    
-   HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(hid--, 20.1, 0.1 + 30, TICSECOND);
-   Stat(1, "Weapons Held",    "%i",   p->weaponsheld);
-   Stat(2, "Health Used",     "%li",  p->healthused);
-   Stat(5, "Health Sum",      "%li",  p->healthsum);
-   Stat(3, "Score Used",      "%lli", p->scoreused);
-   Stat(6, "Score Sum",       "%lli", p->scoresum);
-   Stat(4, "Armor Used",      "%li",  p->armorused);
-   Stat(7, "Armor Sum",       "%li",  p->armorsum);
-   Stat(0, "Secrets Found",   "%i",   p->secretsfound);
-   Stat(8, "Units Travelled", "%llu", p->unitstravelled);
+   HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(hid--, 20.1, 60.1, TICSECOND);
+   Stat(0,  "Weapons Held",      "%i",   p->weaponsheld);
+   Stat(1,  "Health Used",       "%li",  p->healthused);
+   Stat(2,  "Health Sum",        "%li",  p->healthsum);
+   Stat(3,  "Score Used",        "%lli", p->scoreused);
+   Stat(4,  "Score Sum",         "%lli", p->scoresum);
+   Stat(5,  "Armor Used",        "%li",  p->armorused);
+   Stat(6,  "Armor Sum",         "%li",  p->armorsum);
+   Stat(7,  "Secrets Found",     "%i",   p->secretsfound);
+   Stat(8,  "Units Travelled",   "%llu", p->unitstravelled);
+   Stat(9,  "Enemies Defeated",  "%i",   0);
+   Stat(10, "Bosses Defeated",   "%i",   0);
+   Stat(11, "Upgrades Owned",    "%i",   0);
+   Stat(12, "Items Bought",      "%i",   0);
+   Stat(13, "Rituals Performed", "%i",   0);
+#undef Stat
+   return hid;
+}
+
+//
+// CBI_Tab_BIP
+//
+static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+{
+   static gui_button_parm_t const btnp = {
+      .f_gfx_def = "",
+      .f_gfx_hot = "",
+      .dim_x = 180,
+      .dim_y = 9
+   };
+   static gui_button_parm_t const backbtnp = {
+      .f_gfx_def = "",
+      .f_gfx_hot = "",
+      .dim_y = 9
+   };
+   
+   bip_t *bip = &p->bip;
+   int avail, max;
+   
+   if(bip->curcategory == BIP_CATEGORY_MAIN)
+   {
+      HudMessageF("CBIFONT", "\CTINFO");
+      HudMessagePlain(hid--, 160.4, 70.1, TICSECOND);
+      
+#define LITH_X(n, id, name, capt) \
+      if(GUI_Button(GUI_ID("b" #id), gst, &hid, 70, 80 + (n * 10), capt, false, &btnp)) \
+      { \
+         bip->curcategory = BIP_CATEGORY_##name; \
+         bip->curpagenum  = -1; \
+         bip->curpage     = null; \
+      }
+#include "lith_bip.h"
+      
+      avail = bip->pageavail;
+      max   = bip->pagemax;
+   }
+   else
+   {
+      GUI_BEGIN_LIST(GUI_ID("bSCL"), gst, &hid, 20, 50, 130, &bip->scroll);
+      
+      dlist_t *l = bip->infogr[bip->curcategory];
+      size_t n = DList_GetLength(l);
+      size_t i = 0;
+      for(slist_t *rover = l->head; rover; rover = rover->next, i++)
+      {
+         bippage_t *page = rover->data.vp;
+         GUI_LIST_OFFSETS(i, n, 130, cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
+         
+         __str id   = StrParam("bN%.2i", i);
+         __str name = StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));
+         
+         if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, !page->unlocked || bip->curpagenum == i, &gui_listbtnparm))
+         {
+            bip->curpagenum = i;
+            bip->curpage    = page;
+         }
+      }
+      
+      GUI_END_LIST(gst);
+      
+      if(bip->curpage)
+      {
+         ACS_SetHudClipRect(111, 40, 184, 140, 184);
+         
+         HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
+         HudMessagePlain(hid--, 200.4, 45.1, TICSECOND);
+         HudMessageF("CBIFONT", "%S", Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name));
+         HudMessagePlain(hid--, 111.1, 60.1, TICSECOND);
+         
+         ACS_SetHudClipRect(0, 0, 0, 0);
+      }
+      
+      if(GUI_Button(GUI_ID("bBBT"), gst, &hid, 20, 38, "<BACK", false, &backbtnp))
+         bip->curcategory = BIP_CATEGORY_MAIN;
+      
+      avail = bip->categoryavail[bip->curcategory];
+      max   = bip->categorymax[bip->curcategory];
+   }
+   
+   HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
+   HudMessagePlain(hid--, 20.1, 30.1, TICSECOND);
+   
+   HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
+   HudMessagePlain(hid--, 300.2, 30.1, TICSECOND);
    
    return hid;
-#undef Stat
 }
 
 //
@@ -256,10 +358,10 @@ void Lith_PlayerUpdateCBI(player_t *p)
       
       switch(cbi->gst.tabst[CBI_TABST_MAIN])
       {
-      case TAB_UPGRADES: hid = CBI_Tab_Upgrades(p, hid, cbi, gst); break;
-      case TAB_SHOP: hid = CBI_Tab_Shop(p, hid, cbi, gst); break;
+      case TAB_UPGRADES:   hid = CBI_Tab_Upgrades(p, hid, cbi, gst);   break;
+      case TAB_SHOP:       hid = CBI_Tab_Shop(p, hid, cbi, gst);       break;
       case TAB_STATISTICS: hid = CBI_Tab_Statistics(p, hid, cbi, gst); break;
-      case TAB_BIP:
+      case TAB_BIP:        hid = CBI_Tab_BIP(p, hid, cbi, gst);        break;
       case TAB_SETTINGS:
          HudMessageRainbowsF("BIGFONT", "404 Page Not Found");
          HudMessagePlain(hid--, 40.1, 40.1, TICSECOND);

@@ -40,7 +40,8 @@ MAIN_SOURCES= \
 	$(SRC)/lith_pickups.c  \
 	$(SRC)/lith_upgrades.c \
 	$(SRC)/lith_cbi.c      \
-	$(SRC)/lith_cbi_gui.c
+	$(SRC)/lith_cbi_gui.c  \
+	$(SRC)/lith_bip.c
 
 ## Output
 
