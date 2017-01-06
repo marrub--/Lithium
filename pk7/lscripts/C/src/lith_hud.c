@@ -176,13 +176,13 @@ void Lith_PlayerHUD(player_t *p)
    
    if(!p->dead)
    {
-      if(p->health < p->prevhealth)
+      if(p->health < p->old.health)
       {
-         fixed ft = minmax((p->prevhealth - p->health) / 30.0, 0.1, 3.0);
+         fixed ft = minmax((p->old.health - p->health) / 30.0, 0.1, 3.0);
          HudMessageF("BIGFONT", "%i", p->health);
          HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_YELLOW, 2.1, 200.2, 0.1, ft);
       }
-      else if(p->health > p->prevhealth)
+      else if(p->health > p->old.health)
       {
          HudMessageF("BIGFONT", "%i", p->health);
          HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_PURPLE, 2.1, 200.2, 0.1, 0.2);
@@ -216,13 +216,13 @@ void Lith_PlayerHUD(player_t *p)
    HudMessageF("BIGFONT", "%i", p->armor);
    HudMessageParams(HUDMSG_PLAIN, hid_armor, CR_GREEN, 2.1, 188.2, 0.0);
    
-   if(p->armor < p->prevarmor)
+   if(p->armor < p->old.armor)
    {
-      fixed ft = minmax((p->prevarmor - p->armor) / 30.0, 0.1, 3.0);
+      fixed ft = minmax((p->old.armor - p->armor) / 30.0, 0.1, 3.0);
       HudMessageF("BIGFONT", "%i", p->armor);
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, CR_YELLOW, 2.1, 188.2, 0.1, ft);
    }
-   else if(p->armor > p->prevarmor)
+   else if(p->armor > p->old.armor)
    {
       HudMessageF("BIGFONT", "%i", p->armor);
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, CR_PURPLE, 2.1, 188.2, 0.1, 0.2);
@@ -243,14 +243,14 @@ void Lith_PlayerHUD(player_t *p)
       HudMessageF("SMALLFNT", "%lli", p->score);
       HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 320.2, 22.1, 0.1);
       
-      if(p->score > p->prevscore)
+      if(p->score > p->old.score)
       {
          HudMessageF("SMALLFNT", "%lli", p->score);
          HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_ORANGE, 320.2, 22.1, 0.1, 0.2);
       }
-      else if(p->score < p->prevscore)
+      else if(p->score < p->old.score)
       {
-         fixed ft = minmax((p->prevscore - p->score) / 3000.0, 0.1, 3.0);
+         fixed ft = minmax((p->old.score - p->score) / 3000.0, 0.1, 3.0);
          HudMessageF("SMALLFNT", "%lli", p->score);
          HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_YELLOW, 320.2, 22.1, 0.1, ft);
       }

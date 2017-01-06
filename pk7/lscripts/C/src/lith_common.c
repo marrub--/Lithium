@@ -10,12 +10,12 @@
 
 bool ButtonPressed(player_t *p, int bt)
 {
-   return p->buttons & bt && !(p->oldbuttons & bt);
+   return p->buttons & bt && !(p->old.buttons & bt);
 }
 
 bool ButtonPressedUI(player_t *p, int bt)
 {
-   return !(p->buttons & bt) && p->oldbuttons & bt;
+   return !(p->buttons & bt) && p->old.buttons & bt;
 }
 
 int Random(int max, int min)

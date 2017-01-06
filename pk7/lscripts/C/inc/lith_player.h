@@ -46,10 +46,32 @@ enum
    key_blueskull   = 1 << key_blueskull_bit,
 };
 
+typedef struct player_delta_s
+{
+   int health;
+   int armor;
+   
+   fixed x, y, z;
+   fixed floorz;
+   
+   fixed velx, vely, velz;
+   fixed pitchv, yawv;
+   fixed forwardv, sidev, upv;
+   
+   float pitch, yaw, roll;
+   
+   int buttons;
+   
+   score_t score;
+   
+   bool scopetoken;
+} player_delta_t;
+
 // 7/4/2016: That's a lot of data!
 // edit 9/4/2016: Holy shit, that's really a lot of data!
 // edit 7/5/2016: JESUS TAKE THE WHEEL
 // edit 3/1/2017: help
+// edit 6/1/2017: there's so much data that I had to split it
 typedef struct player_s
 {
    // Status data
@@ -60,19 +82,10 @@ typedef struct player_s
    int number;
    int cameratid;
    
-   fixed x, y, z;
-   fixed oldx, oldy, oldz;
-   fixed velx, vely, velz;
-   fixed floorz;
-   float pitch, yaw, roll;
-   
-   fixed pitchv, yawv;
-   fixed forwardv, sidev, upv;
-   int buttons;
+   [[__anonymous]] player_delta_t cur;
+   player_delta_t old;
    
    int maxhealth;
-   int health;
-   int armor;
    
    fixed viewheight;
    
@@ -80,7 +93,6 @@ typedef struct player_s
    sigil_t sigil;
    
    // Score
-   score_t score;
    score_t scoreaccum;
    int scoreaccumtime;
    double scoremul;
@@ -116,13 +128,6 @@ typedef struct player_s
    int weapontype;
    int armortype;
    
-   // From previous tic
-   int oldbuttons;
-   
-   int prevhealth;
-   int prevarmor;
-   score_t prevscore;
-   
    // Additive view
    float addpitch;
    float addyaw;
@@ -131,8 +136,6 @@ typedef struct player_s
    float bobyaw;
    
    // Weapons
-   bool scopetoken;
-   bool lastscopetoken;
    int riflefiremode;
    struct dlist_s *hudstrstack;
    

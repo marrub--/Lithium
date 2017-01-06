@@ -117,11 +117,8 @@ void Lith_PlayerEntry(void)
       ACS_Delay(1);
       
       // Update previous-tic values
-      p->lastscopetoken = p->scopetoken;
-      
-      p->prevhealth = p->health;
-      p->prevarmor = p->armor;
-      p->prevscore = curscore;
+      p->old = p->cur;
+      p->old.score = curscore;
       
       // Reset view for next tic
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
@@ -188,9 +185,6 @@ static
 void Lith_PlayerUpdateData(player_t *p)
 {
    // Status data
-   p->oldx   = p->x;
-   p->oldy   = p->y;
-   p->oldz   = p->z;
    p->x      = ACS_GetActorX(0);
    p->y      = ACS_GetActorY(0);
    p->z      = ACS_GetActorZ(0);
@@ -211,8 +205,8 @@ void Lith_PlayerUpdateData(player_t *p)
    p->sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
    p->upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
    
-   p->buttons    = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-   p->oldbuttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
+   p->buttons     = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
+   p->old.buttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
    
    p->health = ACS_GetActorProperty(0, APROP_Health);
    p->armor  = ACS_CheckInventory("BasicArmor");
@@ -307,7 +301,7 @@ void Lith_ResetPlayer(player_t *p)
       p->hudstrstack = null;
    }
    
-   p->lastscopetoken = false;
+   p->old.scopetoken = false;
    
    p->slidecharge = slidecharge_max;
    p->rocketcharge = rocketcharge_max;
@@ -389,7 +383,7 @@ void Lith_GetArmorType(player_t *p)
 static
 void Lith_PlayerRender(player_t *p)
 {
-   if(p->lastscopetoken && !p->scopetoken)
+   if(p->old.scopetoken && !p->scopetoken)
    {
       if(p->hudstrstack)
       {
@@ -403,7 +397,7 @@ void Lith_PlayerRender(player_t *p)
          HudMessagePlain(i, 0.0, 0.0, 0.0);
       }
    }
-   else if(p->scopetoken && !p->lastscopetoken)
+   else if(p->scopetoken && !p->old.scopetoken)
    {
       p->hudstrstack = DList_Create();
       
@@ -437,12 +431,12 @@ void Lith_PlayerRender(player_t *p)
 static
 void Lith_PlayerDamageBob(player_t *p)
 {
-   if(!p->berserk && p->health < p->prevhealth)
+   if(!p->berserk && p->health < p->old.health)
    {
       float angle = RandomFloat(tau, -tau);
       float distance;
       
-      distance = (p->prevhealth - p->health) / (float)p->maxhealth;
+      distance = (p->old.health - p->health) / (float)p->maxhealth;
       distance *= 0.2f;
       distance *= (200 - p->armor) / 200.0f;
       
@@ -480,7 +474,7 @@ void Lith_PlayerView(player_t *p)
 static
 void Lith_PlayerScore(player_t *p)
 {
-   if(!p->scoreaccumtime || p->score < p->prevscore)
+   if(!p->scoreaccumtime || p->score < p->old.score)
    {
       p->scoreaccum = 0;
       p->scoreaccumtime = 0;
@@ -501,19 +495,19 @@ void Lith_PlayerScore(player_t *p)
 static
 void Lith_PlayerStats(player_t *p)
 {
-   if(p->health < p->prevhealth)
-      p->healthused += p->prevhealth - p->health;
-   else if(p->health > p->prevhealth && ACS_Timer() != 1)
-      p->healthsum += p->health - p->prevhealth;
+   if(p->health < p->old.health)
+      p->healthused += p->old.health - p->health;
+   else if(p->health > p->old.health && ACS_Timer() != 1)
+      p->healthsum += p->health - p->old.health;
    
-   if(p->armor < p->prevarmor)
-      p->armorused += p->prevarmor - p->armor;
-   else if(p->armor > p->prevarmor && ACS_Timer() != 1)
-      p->armorsum += p->armor - p->prevarmor;
+   if(p->armor < p->old.armor)
+      p->armorused += p->old.armor - p->armor;
+   else if(p->armor > p->old.armor && ACS_Timer() != 1)
+      p->armorsum += p->armor - p->old.armor;
    
-   if(p->x != p->oldx) p->unitstravelled += abs(p->x - p->oldx);
-   if(p->y != p->oldy) p->unitstravelled += abs(p->y - p->oldy);
-   if(p->z != p->oldz) p->unitstravelled += abs(p->z - p->oldz);
+   if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
+   if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
+   if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
 }
 
 //
