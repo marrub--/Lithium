@@ -56,13 +56,14 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRIF A 4 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 3 A_WeaponReady(LITH_BOBONLY)
       CRIF A 0 A_GiveInventory("Lith_RifleBurstIter", 1)
       CRIF A 0 A_JumpIfInventory("Lith_RifleBurstIter", 5, "FireBurstDone")
       goto FireBurst
    FireBurstDone:
       CRIF A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
-      CRIF A 7 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 6 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 6 A_Refire
       goto Ready
    FireGrenade:
       CRIF A 3 A_WeaponReady(LITH_BOBONLY)
