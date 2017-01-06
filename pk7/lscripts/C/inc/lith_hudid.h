@@ -70,11 +70,11 @@ enum
    hid_jettext,
    hid_jetbg,
    
-   hid_weapon1text,
-   hid_weapon7text = hid_weapon1text + 8,
+   hid_weapontextE,
+   hid_weapontextS = hid_weapontextE + 32,
    
-   hid_weapon1,
-   hid_weapon7 = hid_weapon1 + 8,
+   hid_weaponE,
+   hid_weaponS = hid_weaponE + 32,
    
    hid_weapontext,
    hid_weaponbg,

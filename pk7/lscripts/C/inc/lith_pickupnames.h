@@ -29,7 +29,7 @@ pickups(weapon_shotgun, {
    null
 })
 
-pickups(weapon_combatrifle, {
+pickups(weapon_rifle, {
    "Combat Rifle",
    "Cmobta Riffel",
    "Combit Raffle",
@@ -39,7 +39,7 @@ pickups(weapon_combatrifle, {
    null
 })
 
-pickups(weapon_rocketlauncher, {
+pickups(weapon_launcher, {
    "Grenade Launcher",
    "Ruckebt Laurence",
    "Rawket Lawnchair",
@@ -48,7 +48,7 @@ pickups(weapon_rocketlauncher, {
    null
 })
 
-pickups(weapon_plasmarifle, {
+pickups(weapon_plasma, {
    "Plasma Rifle",
    "Spalmo Rinfer",
    "Layzuh Beem",
@@ -58,7 +58,7 @@ pickups(weapon_plasmarifle, {
    null
 })
 
-pickups(weapon_bfg9000, {
+pickups(weapon_bfg, {
    "Omega Cannon",
    "Biffgee Nintendo",
    "BFG 8000",

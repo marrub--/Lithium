@@ -79,10 +79,10 @@ void Lith_PlayerHUD(player_t *p)
       [weapon_unknown]        = "H_D27",
       [weapon_pistol]         = "H_D24",
       [weapon_shotgun]        = "H_D23",
-      [weapon_combatrifle]    = "H_D22",
-      [weapon_rocketlauncher] = "H_D21",
-      [weapon_plasmarifle]    = "H_D25",
-      [weapon_bfg9000]        = "H_D26"
+      [weapon_rifle]    = "H_D22",
+      [weapon_launcher] = "H_D21",
+      [weapon_plasma]    = "H_D25",
+      [weapon_bfg]        = "H_D26"
    };
    
    static __str armorgfx[armor_max] = {
@@ -135,33 +135,37 @@ void Lith_PlayerHUD(player_t *p)
       HudMessageParams(HUDMSG_ALPHA, hid_weapontext, CR_LIGHTBLUE, 80.1, 192.2, 0.1, 0.3);
       DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, 0.1);
       
-      for(int i = 0; i < 8; i++)
+      for(int i = weapon_min; i < weapon_max; i++)
          if(p->weapons & (1 << i))
          {
             fixed x = (10 * i) + 80.1;
             fixed y = 200.2;
-            DrawSpritePlain("H_W2", hid_weapon1 + i, x, y, 0.1);
-            HudMessageF("SMALLFNT", "%i", i + 1);
-            HudMessageParams(HUDMSG_PLAIN, hid_weapon1text + i, p->weapontype == (i + 1) ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
+            DrawSpritePlain("H_W2", hid_weaponE + i, x, y, 0.1);
+            HudMessageF("SMALLFNT", "%i", i);
+            HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
          }
    }
    
    // Ammo
-   if(p->weapontype == weapon_pistol || p->weapontype == weapon_plasmarifle)
+   if(p->weapontype == weapon_pistol ||
+      p->weapontype == weapon_plasma ||
+      p->weapontype == weapon_bfg)
    {
       int count;
       
       if(p->weapontype == weapon_pistol)
          count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
-      else if(p->weapontype == weapon_plasmarifle)
+      else if(p->weapontype == weapon_plasma)
          count = ACS_CheckInventory("Lith_PlasmaAmmo");
+      else if(p->weapontype == weapon_bfg)
+         count = ACS_CheckInventory("Lith_CannonAmmo");
       
       DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
       
       HudMessageF("BIGFONT", "%i", count);
       HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, 0.1);
    }
-   else if(p->weapontype == weapon_combatrifle)
+   else if(p->weapontype == weapon_rifle)
    {
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
       DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2 + addy, 0.1);
@@ -268,18 +272,12 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Keys
-   if(p->keys & key_redskull)
-      DrawSpritePlain("H_KS1", hid_key_redskull, 8.1, 144.1, 0.1);
-   if(p->keys & key_yellowskull)
-      DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
-   if(p->keys & key_blueskull)
-      DrawSpritePlain("H_KS3", hid_key_blueskull, 8.1, 160.1, 0.1);
-   if(p->keys & key_red)
-      DrawSpritePlain("H_KC1", hid_key_red, 0.1, 140.1, 0.1);
-   if(p->keys & key_yellow)
-      DrawSpritePlain("H_KC2", hid_key_yellow, 0.1, 148.1, 0.1);
-   if(p->keys & key_blue)
-      DrawSpritePlain("H_KC3", hid_key_blue, 0.1, 156.1, 0.1);
+   if(p->keys.redskull)    DrawSpritePlain("H_KS1", hid_key_redskull, 8.1, 144.1, 0.1);
+   if(p->keys.yellowskull) DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
+   if(p->keys.blueskull)   DrawSpritePlain("H_KS3", hid_key_blueskull, 8.1, 160.1, 0.1);
+   if(p->keys.redcard)     DrawSpritePlain("H_KC1", hid_key_red, 0.1, 140.1, 0.1);
+   if(p->keys.yellowcard)  DrawSpritePlain("H_KC2", hid_key_yellow, 0.1, 148.1, 0.1);
+   if(p->keys.bluecard)    DrawSpritePlain("H_KC3", hid_key_blue, 0.1, 156.1, 0.1);
 }
 
 

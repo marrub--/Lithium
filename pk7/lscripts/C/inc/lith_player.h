@@ -20,52 +20,38 @@ enum
    armor_max
 };
 
-enum
-{
-   weaponf_pistol         = 1 << 0,
-   weaponf_shotgun        = 1 << 1,
-   weaponf_combatrifle    = 1 << 2,
-   weaponf_rocketlauncher = 1 << 3,
-   weaponf_plasmarifle    = 1 << 4,
-   weaponf_bfg9000        = 1 << 5
-};
-
-enum
-{
-   key_red_bit         = 0,
-   key_yellow_bit      = 1,
-   key_blue_bit        = 2,
-   key_redskull_bit    = 3,
-   key_yellowskull_bit = 4,
-   key_blueskull_bit   = 5,
-   key_red         = 1 << key_red_bit,
-   key_yellow      = 1 << key_yellow_bit,
-   key_blue        = 1 << key_blue_bit,
-   key_redskull    = 1 << key_redskull_bit,
-   key_yellowskull = 1 << key_yellowskull_bit,
-   key_blueskull   = 1 << key_blueskull_bit,
-};
-
 typedef struct player_delta_s
 {
+   // Status
    int health;
    int armor;
+   score_t score;
    
+   // Position
    fixed x, y, z;
    fixed floorz;
+   float pitch, yaw, roll;
    
+   // Movement
    fixed velx, vely, velz;
    fixed pitchv, yawv;
    fixed forwardv, sidev, upv;
    
-   float pitch, yaw, roll;
-   
+   // Input
    int buttons;
-   
-   score_t score;
-   
    bool scopetoken;
+   int frozen;
 } player_delta_t;
+
+typedef struct keycards_s
+{
+   bool redcard     : 1;
+   bool yellowcard  : 1;
+   bool bluecard    : 1;
+   bool redskull    : 1;
+   bool yellowskull : 1;
+   bool blueskull   : 1;
+} keycards_t;
 
 // 7/4/2016: That's a lot of data!
 // edit 9/4/2016: Holy shit, that's really a lot of data!
@@ -85,9 +71,16 @@ typedef struct player_s
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
    
+   // State without delta
    int maxhealth;
-   
    fixed viewheight;
+   
+   // Additive view
+   float addpitch;
+   float addyaw;
+   
+   float bobpitch;
+   float bobyaw;
    
    // 🌌 「÷」 0
    sigil_t sigil;
@@ -128,29 +121,19 @@ typedef struct player_s
    int weapontype;
    int armortype;
    
-   // Additive view
-   float addpitch;
-   float addyaw;
-   
-   float bobpitch;
-   float bobyaw;
-   
    // Weapons
    int riflefiremode;
    struct dlist_s *hudstrstack;
    
    // Inventory
    bool berserk;
+   keycards_t keys;
    int weapons;
-   int keys;
    
    // Movement
    int slidecharge;
    int rocketcharge;
    bool leaped;
-   
-   // Miscellaneous
-   int frozen;
 } player_t;
 
 extern player_t players[MAX_PLAYERS];

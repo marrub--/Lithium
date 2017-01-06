@@ -19,8 +19,8 @@ LITH_TXT_UPGRADE_DESCR_ReflexWetw =
 
 LITH_TXT_UPGRADE_TITLE_CyberLegs = "Cyber Legs";
 LITH_TXT_UPGRADE_DESCR_CyberLegs =
-   "Effect: Allows you to jump higher, and sprint by holding "
-   "the \"speed\" key.\n\n"
+   "Effect: Allows you to jump higher, move faster, and damage things you "
+   "jump onto.\n\n"
    "Description: Implement Culter Dei technology into your legs, "
    " greatly increasing your agility.";
 

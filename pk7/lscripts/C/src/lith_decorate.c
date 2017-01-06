@@ -5,21 +5,21 @@
 #include "lith_pickups.h"
 #include "lith_hudid.h"
 
-// ---------------------------------------------------------------------------
-// DECORATE scripts.
+//----------------------------------------------------------------------------
+// Scripts
 //
 
 [[__call("ScriptI"), __address(14242), __extern("ACS")]]
 void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
 {
    static __str pickupsounds[] = {
-      [weapon_unknown] = "MMMMHMHMMMHMMM",
-      [weapon_pistol] = "weapons/pistol/pickup",
-      [weapon_shotgun] = "weapons/shotgun/pickup",
-      [weapon_combatrifle] = "weapons/rifle/pickup",
-      [weapon_rocketlauncher] = "weapons/rocket/pickup",
-      [weapon_plasmarifle] = "weapons/plasma/pickup",
-      [weapon_bfg9000] = "weapons/cannon/pickup"
+      [weapon_unknown]  = "MMMMHMHMMMHMMM",
+      [weapon_pistol]   = "weapons/pistol/pickup",
+      [weapon_shotgun]  = "weapons/shotgun/pickup",
+      [weapon_rifle]    = "weapons/rifle/pickup",
+      [weapon_launcher] = "weapons/rocket/pickup",
+      [weapon_plasma]   = "weapons/plasma/pickup",
+      [weapon_bfg]      = "weapons/cannon/pickup"
    };
    
    player_t *p = &players[ACS_PlayerNumber()];
@@ -31,7 +31,12 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    
    switch(user_pickupparm)
    {
-   case weapon_shotgun: Lith_UnlockBIPPage(&p->bip, "Shotgun"); break;
+   case weapon_pistol:   Lith_UnlockBIPPage(&p->bip, "Pistol");   break;
+   case weapon_shotgun:  Lith_UnlockBIPPage(&p->bip, "Shotgun");  break;
+   case weapon_rifle:    Lith_UnlockBIPPage(&p->bip, "Rifle");    break;
+   case weapon_launcher: Lith_UnlockBIPPage(&p->bip, "Launcher"); break;
+   case weapon_plasma:   Lith_UnlockBIPPage(&p->bip, "Plasma");   break;
+   case weapon_bfg:      Lith_UnlockBIPPage(&p->bip, "Cannon");   break;
    }
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
@@ -153,30 +158,16 @@ int Lith_GetPlayerData(int info, bool target)
    
    switch(info)
    {
-   case pdata_rifle_firemode:
-      return p->riflefiremode;
-   case pdata_shotgun_gauss:
-      return p->upgrades[UPGR_GaussShotty].active;
-   case pdata_rocket_unreal:
-      return p->upgrades[UPGR_ChargeRPG].active;
-   case pdata_plasma_laser:
-      return p->upgrades[UPGR_PlasLaser].active;
-   case pdata_buttons:
-      return p->buttons;
-   case pdata_has_sigil:
-      return p->sigil.acquired;
-   case pdata_EXPLOOOOOSIONS:
-      return p->upgrades[UPGR_TorgueMode].active;
+   case pdata_rifle_firemode: return p->riflefiremode;
+   case pdata_shotgun_gauss:  return p->upgrades[UPGR_GaussShotty].active;
+   case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeRPG].active;
+   case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
+   case pdata_buttons:        return p->buttons;
+   case pdata_has_sigil:      return p->sigil.acquired;
+   case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;
    }
    
    return 0;
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_ShotgunHasGauss(void)
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   return p->upgrades[UPGR_GaussShotty].active;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -192,7 +183,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
    
    player_t *p = &players[ACS_PlayerNumber()];
    
-   if(!(p->weapons & (1 << (user_pickupparm - 1))))
+   if(!(p->weapons & (1 << user_pickupparm)))
       return true;
    
    ACS_SpawnForced("Lith_FakeItemPickup", p->x, p->y, p->z);
@@ -285,7 +276,5 @@ int Lith_GetSigil()
    return 1; // q_q
 }
 
-//
-// ---------------------------------------------------------------------------
-
+// EOF
 

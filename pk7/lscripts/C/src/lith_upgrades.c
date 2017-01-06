@@ -10,9 +10,10 @@
 
 A(JetBooster); D(JetBooster); U(JetBooster);
 A(ReflexWetw); D(ReflexWetw); U(ReflexWetw);
-D(RifleModes); U(RifleModes);
-A(lolsords); D(lolsords); U(lolsords);
-U(Implying);
+               D(RifleModes); U(RifleModes);
+A(lolsords);   D(lolsords);   U(lolsords);
+                              U(Implying);
+A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
 
 #undef A
 #undef D
@@ -31,12 +32,12 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // Body
    { "JetBooster",  0         , true,  "JetBooster", A(JetBooster), D(JetBooster), U(JetBooster) },
    { "ReflexWetw",  0         , true,  "ReflexWetw", A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
-   { "CyberLegs",   900000    , false, "CyberLegs" },
+   { "CyberLegs",   900000    , false, "CyberLegs",  A(CyberLegs),  D(CyberLegs),  U(CyberLegs) },
    { "ReactArmour", 3200200   , false, "Yh0" },
 // Weapons
    { "GaussShotty", 770430    , false, "ShotgunUpgr" },
    { "RifleModes",  340100    , false, "RifleUpgr", null, D(RifleModes), U(RifleModes)},
-   { "ChargeRPG",   850000    , false, "LauncheUpgr" },
+   { "ChargeRPG",   850000    , false, "LauncherUpgr" },
    { "PlasLaser",   1400000   , false, "PlasmaUpgr" },
    { "OmegaRail",   2600700   , false, "CannonUpgr" },
 // Extras
@@ -177,6 +178,24 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 }
 
 // --------------------------------------
+// CyberLegs
+//
+
+static void Upgr_CyberLegs_Activate(player_t *p, upgrade_t *upgr)
+{
+   //p->speedmul += 0.5;
+}
+
+static void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   //p->speedmul -= 0.5;
+}
+
+static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
+{
+}
+
+// --------------------------------------
 // RifleModes
 //
 
@@ -189,7 +208,7 @@ void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 static
 void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 {
-   if(p->weapontype == weapon_combatrifle && p->riflefiremode == rifle_firemode_burst)
+   if(p->weapontype == weapon_rifle && p->riflefiremode == rifle_firemode_burst)
    {
       ACS_Warp(p->cameratid, 0, 0, p->viewheight, 0,
                WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |

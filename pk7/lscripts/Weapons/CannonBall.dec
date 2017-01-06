@@ -1,10 +1,9 @@
 actor Lith_CannonBall
 {
-   // Some actor properties taken from Error: Doom
    Radius 51
    Height 32
    Scale 3.5
-   Damage (80)
+   Damage (90)
    Speed 42
    Gravity 0.55
    BounceType Doom
@@ -49,7 +48,7 @@ actor Lith_SmallCannonBall : Lith_CannonBall
    Radius 29
    Height 16
    Scale 2
-   Damage (40)
+   Damage (50)
    
    states
    {
