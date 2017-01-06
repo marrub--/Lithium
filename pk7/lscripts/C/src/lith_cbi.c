@@ -296,8 +296,9 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
       max   = bip->categorymax[bip->curcategory];
    }
    
+   DrawSpriteAlpha("lgfx/UI/bip.png", hid--, 20.1, 30.1, TICSECOND, 0.6);
    HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
-   HudMessagePlain(hid--, 20.1, 30.1, TICSECOND);
+   HudMessagePlain(hid--, 35.1, 30.1, TICSECOND);
    
    HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
    HudMessagePlain(hid--, 300.2, 30.1, TICSECOND);

@@ -42,14 +42,19 @@ typedef struct bippage_s
 
 typedef struct bip_s
 {
+   // Stats
    int categoryavail[BIP_CATEGORY_MAX];
    int categorymax[BIP_CATEGORY_MAX];
    int pageavail;
    int pagemax;
+   
+   // State
    bippage_t *curpage;
    int curpagenum;
    int curcategory;
    int scroll;
+   
+   // Info
    struct dlist_s *infogr[BIP_CATEGORY_MAX];
 } bip_t;
 
@@ -58,6 +63,8 @@ void Lith_PlayerInitBIP(struct player_s *p);
 
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name);
 bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name);
+
+void Lith_UnlockAllBIPPages(bip_t *bip);
 
 #endif
 

@@ -58,11 +58,14 @@ static void Lith_PlayerEntry(void)
    {
       p->score += 0xFFFFFFFFFFFFFFFFll;
       for(int i = weapon_min; i < weapon_max; i++)
-         ACS_GiveInventory(weaponclasses[i], 1);
+         if(weaponclasses[i] != null)
+            ACS_GiveInventory(weaponclasses[i], 1);
       
       for(int i = 0; i < UPGR_MAX; i++)
          if(!p->upgrades[i].owned)
             Upgr_SetOwned(p, &p->upgrades[i]);
+      
+      Lith_UnlockAllBIPPages(&p->bip);
    }
    
    while(p->active)

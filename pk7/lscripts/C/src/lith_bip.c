@@ -81,5 +81,17 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
    return page;
 }
 
+void Lith_UnlockAllBIPPages(bip_t *bip)
+{
+   bip->pageavail = bip->pagemax;
+   
+   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+      bip->categoryavail[i] = bip->categorymax[i];
+   
+   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+      for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
+         ((bippage_t *)rover->data.vp)->unlocked = true;
+}
+
 // EOF
 
