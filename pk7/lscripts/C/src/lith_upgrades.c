@@ -27,27 +27,26 @@ U(Implying);
 #define U(n) Upgr_##n##_Update
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-// { "Name-------", Cost------, Auto-, Callbacks... },
+// { "Name-------", Cost------, Auto-, BIP-, Callbacks... },
 // Body
-   { "JetBooster",  0         , true,  null, A(JetBooster), D(JetBooster), U(JetBooster) },
-   { "ReflexWetw",  0         , true,  null, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
-   { "CyberLegs",   900000    , false, null },
-   { "ReactArmour", 3200200   , false, null },
-   { "Splitter",    800000    , false, null },
+   { "JetBooster",  0         , true,  "JetBooster", A(JetBooster), D(JetBooster), U(JetBooster) },
+   { "ReflexWetw",  0         , true,  "ReflexWetw", A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
+   { "CyberLegs",   900000    , false, "CyberLegs" },
+   { "ReactArmour", 3200200   , false, "Yh0" },
 // Weapons
    { "GaussShotty", 770430    , false, "ShotgunUpgr" },
-   { "RifleModes",  340100    , false, null, null, D(RifleModes), U(RifleModes)},
-   { "ChargeRPG",   850000    , false, null },
-   { "PlasLaser",   1400000   , false, null },
-   { "OmegaRail",   2600700   , false, null },
-// Downgrades
-   { "SeriousMode", 0         , false, null },
-   { "RetroWeps",   0         , false, null },
-   { "lolsords",    1000      , false, null, A(lolsords), D(lolsords), U(lolsords) },
-// :v
-   { "Implying",    0         , false, null, null, null, U(Implying) },
-// { "ZharkovMode", -100      , false, null },
+   { "RifleModes",  340100    , false, "RifleUpgr", null, D(RifleModes), U(RifleModes)},
+   { "ChargeRPG",   850000    , false, "LauncheUpgr" },
+   { "PlasLaser",   1400000   , false, "PlasmaUpgr" },
+   { "OmegaRail",   2600700   , false, "CannonUpgr" },
+// Extras
    { "TorgueMode",  800000000 , false, null },
+   { "RetroWeps",   9999990   , false, null },
+   { "7777777",     823543000 , false, null },
+   { "lolsords",    1000000   , false, null, A(lolsords), D(lolsords), U(lolsords) },
+// Downgrades
+   { "Implying",    0         , false, null, null, null, U(Implying) },
+   { "SeriousMode", 0         , false, null },
 };
 
 #undef A
@@ -211,6 +210,7 @@ void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 static
 void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 {
+   p->scoremul += 0.2;
    upgr->user_str[0] = p->weaponclass;
    ACS_GiveInventory("Lith_Sword", 1);
 }
@@ -218,6 +218,7 @@ void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 static
 void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 {
+   p->scoremul -= 0.2;
    ACS_TakeInventory("Lith_Sword", 1);
    ACS_SetWeapon(upgr->user_str[0]);
 }

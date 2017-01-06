@@ -29,7 +29,6 @@ enum
    UPGR_ReflexWetw,
    UPGR_CyberLegs,
    UPGR_ReactArmour,
-   UPGR_Splitter,
    
    UPGR_GaussShotty,
    UPGR_RifleModes,
@@ -37,13 +36,13 @@ enum
    UPGR_PlasLaser,
    UPGR_OmegaRail,
    
-   UPGR_SeriousMode,
+   UPGR_TorgueMode,
    UPGR_RetroWeps,
+   UPGR_7777777,
    UPGR_lolsords,
    
    UPGR_Implying,
-// UPGR_ZharkovMode,
-   UPGR_TorgueMode,
+   UPGR_SeriousMode,
    
    UPGR_MAX
 };

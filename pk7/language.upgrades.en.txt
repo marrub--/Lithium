@@ -7,32 +7,30 @@ LITH_COST = "Cost";
 //
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
-   "Effect: Lets you press the \"speed\" key while in the air to let you fly for a short time.\n\n"
+   "Effect: Lets you press the \"speed\" key while in the air to let you fly "
+   "for a short time.\n\n"
    "Description: Jet boosters built into your suit.";
 
 LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
 LITH_TXT_UPGRADE_DESCR_ReflexWetw =
    "Effect: Lets you move quicker, easier and more efficiently.\n\n"
    "Description: Cybernetic wetware that improves your reflexes and "
-   "implicit agility. I don't know why you would ever turn this off.";
+   "implicit agility.";
 
 LITH_TXT_UPGRADE_TITLE_CyberLegs = "Cyber Legs";
 LITH_TXT_UPGRADE_DESCR_CyberLegs =
-   "Effect: Allows you to jump higher, and sprint by holding the \"speed\" key.\n\n"
-   "Description: Implement glorious Culter Dei"
-   " technology, letting you augment your legs for combat effectiveness.";
+   "Effect: Allows you to jump higher, and sprint by holding "
+   "the \"speed\" key.\n\n"
+   "Description: Implement Culter Dei technology into your legs, "
+   " greatly increasing your agility.";
 
 LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armour";
 LITH_TXT_UPGRADE_DESCR_ReactArmour =
-   "Effect: Makes your armour \"react\" to being hit, switching a mode with four settings"
-   " to the type of damage it took, making you take far less damage from that type of damage.\n\n"
-   "Description: Integrate your armour with a highly advanced Yh-0 reactive plating system,"
-   " made by an avian nation formed on the planet Durla Prime.";
-
-LITH_TXT_UPGRADE_TITLE_Splitter = "B. Splitter";
-LITH_TXT_UPGRADE_DESCR_Splitter =
-   "Effect: Press \"split self\" to split your torso from your legs.\n\n"
-   "Description: some bullshit";
+   "Effect: Makes your armour \"react\" to being hit, switching a mode to "
+   "the type of damage it took, making you take far less damage of that "
+   "kind until hit by another.\n\n"
+   "Description: Integrate your armour with a highly advanced Yh-0 reactive "
+   "plating system, made by an avian nation formed on the planet Durla Prime.";
 
 //
 // Weapons
@@ -40,8 +38,8 @@ LITH_TXT_UPGRADE_DESCR_Splitter =
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
-   "Description: Re-build the internal mechanisms to turn the railgun part of your shotgun into"
-   " an improved mechanism, removing the unnecessary shell loader.";
+   "Description: Re-build the internal mechanisms to turn the railgun part "
+   "of your shotgun into a new one, removing the unnecessary shell loader.";
 
 LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
 LITH_TXT_UPGRADE_DESCR_RifleModes =
@@ -51,9 +49,11 @@ LITH_TXT_UPGRADE_DESCR_RifleModes =
 
 LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_DESCR_ChargeRPG =
-   "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade launcher.\n\n"
-   "Description: Employ a modification made by Unreal-Weapons, Inc. into your grenade launcher,"
-   " allowing it to hold multiple grenades and plummet them all at once.";
+   "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade "
+   "launcher.\n\n"
+   "Description: A modification made by Unreal-Weapons, Inc. which "
+   "allows your grenade launcher to hold multiple grenades and plummet "
+   "them all at once.";
 
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
@@ -67,37 +67,47 @@ LITH_TXT_UPGRADE_DESCR_OmegaRail =
    "Description: Surge the power of the gods through your Omega Cannon.";
 
 //
-// Downgrades
+// Extras
 //
-LITH_TXT_UPGRADE_TITLE_SeriousMode = "Serious Mode";
-LITH_TXT_UPGRADE_DESCR_SeriousMode =
-   "Effect: Make enemies invisible, and always fast.\n\n"
-   "Description: Are you Serious?";
+LITH_TXT_UPGRADE_TITLE_TorgueMode = "\cgEXPLOOSIONS";
+LITH_TXT_UPGRADE_DESCR_TorgueMode =
+   "EFFECT: WHAT THE F*CK DO YOU THINK!?\n\n"
+   "DESCRIPTION: ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS "
+   "UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S "
+   "ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO "
+   "RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO "
+   "A SICK GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK "
+   "ACTUALLY BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE "
+   "BACK WITH A GUITAR MADE OF BANDAGES LATER";
 
 LITH_TXT_UPGRADE_TITLE_RetroWeps = "Retro Weapons";
 LITH_TXT_UPGRADE_DESCR_RetroWeps =
-   "Effect: All of your weapons fire projectiles straight from contra, and have their original animation sets.";
+   "Effect: All of your weapons fire projectiles straight from contra, and "
+   "have their original animation sets from Doom.";
 
 LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
+
+LITH_TXT_UPGRADE_TITLE_7777777 = "7777777 Mode";
+LITH_TXT_UPGRADE_DESCR_7777777 =
+   "Effect: Instates cosmic horror and spurious time travel into your very "
+   "being, causing you to instantly implode upon activation.\n\n"
+   "Description: get yholl to write things";
 LITH_TXT_UPGRADE_DESCR_lolsords =
    "Effect: You get a sword.\n"
    "It is literally your only weapon.";
 
 //
-// :v
+// Downgrades
 //
 LITH_TXT_UPGRADE_TITLE_Implying = ">Implicating";
 LITH_TXT_UPGRADE_DESCR_Implying =
-   "Effect: Oh god why did I add something Kegan suggested to me this was not a good idea\n\n"
+   "Effect: Oh god why did I add something Kegan suggested to me this was "
+   "not a good idea\n\n"
    "Description: God damn it.";
 
-LITH_TXT_UPGRADE_TITLE_ZharkovMode = "Zharkov Mode";
-LITH_TXT_UPGRADE_DESCR_ZharkovMode =
-   "Effect: Turns you into Zharkov, destroyer of worlds.";
-
-LITH_TXT_UPGRADE_TITLE_TorgueMode = "\cgEXPLOOSIONS";
-LITH_TXT_UPGRADE_DESCR_TorgueMode =
-   "EFFECT: WHAT THE F*CK DO YOU THINK!?\n\n"
-   "DESCRIPTION: ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER";
+LITH_TXT_UPGRADE_TITLE_SeriousMode = "Serious Mode";
+LITH_TXT_UPGRADE_DESCR_SeriousMode =
+   "Effect: Make enemies invisible, and always fast.\n\n"
+   "Description: Are you Serious?";
 
 // EOF
