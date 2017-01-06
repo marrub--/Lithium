@@ -40,28 +40,9 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    }
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
-   {
-      __str *names = pickupnames[user_pickupparm];
-      int namesmax;
-      
-      for(namesmax = 1; names[namesmax]; namesmax++);
-      
-      int ifmt = ACS_Random(0, pickupfmtmax - 1);
-      int iname = ACS_Random(1, namesmax - 1);
-      
-      if(pickupfmt[ifmt].flag == 2)
-         ifmt = ACS_Random(0, pickupfmtmax - 1);
-      
-      __str fmt = StrParam("\Cj%S", pickupfmt[ifmt].fmt);
-      int flag = pickupfmt[ifmt].flag;
-      
-      if(flag == 1)
-         Log(fmt, names[iname], uncertainty[ACS_Random(0, uncertaintymax - 2)]);
-      else
-         Log(fmt, names[iname], uncertainty[ACS_Random(0, uncertaintymax - 1)]);
-   }
+      Lith_StupidPickup(user_pickupparm);
    else
-      Log(pickupfmt[0].fmt, pickupnames[user_pickupparm][0]);
+      Lith_IntelligentPickup(user_pickupparm);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
