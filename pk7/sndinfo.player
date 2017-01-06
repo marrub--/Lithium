@@ -1,7 +1,7 @@
 //
 // Player
 //
-player/score1      lsounds/Player/Score1.flac              // Self-made (punched my mic and edited it)
+player/score1      lsounds/Player/Score1.flac              // Self-made
 player/score2      lsounds/Player/Score2.flac              // 〃
 player/score3      lsounds/Player/Score3.flac              // 〃
 player/rocketboost lsounds/Player/RocketBoost.flac         // ???
@@ -17,7 +17,8 @@ $random player/score {
    player/score3
 }
 
-$playersound player male *jump lsounds/Player/Jump.flac // General 6000
+$playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
+$playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 
 //
 // CBI

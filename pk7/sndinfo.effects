@@ -3,6 +3,7 @@
 //
 silence lsounds/Silence.flac
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
+misc/teleport lsounds/Teleport.flac
 
 //
 // Weapons
