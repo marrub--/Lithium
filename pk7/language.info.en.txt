@@ -42,9 +42,9 @@ LITH_TXT_INFO_DESCR_DurlaPrime =
 LITH_TXT_INFO_SHORT_Earth = "Earth";
 LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
 LITH_TXT_INFO_DESCR_Earth =
-   "The year is 1649 New Era. After a near-apocalypse in 3031, humanity "
-   "collectively decided to mark a new era dedicated to progressing travel "
-   "and communications across the galaxy.\n\n"
+   "The year is 1649 New Era. After an event that almost led to an apocalpse "
+   "in 3031, humanity collectively decided to mark a new era dedicated to "
+   "progressing travel and communications across the galaxy.\n\n"
    "Earth has stayed largely the same as it was in the Common Era, thanks "
    "to advances in science. By 1000 NE, most of the population on Earth "
    "had moved to other inhabitable planets, but still a large population "
