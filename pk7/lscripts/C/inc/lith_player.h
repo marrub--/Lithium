@@ -74,6 +74,7 @@ typedef struct player_s
    // State without delta
    int maxhealth;
    fixed viewheight;
+   fixed speedmul;
    
    // Additive view
    float addpitch;

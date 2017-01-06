@@ -245,6 +245,7 @@ static void Lith_PlayerRunScripts(player_t *p)
       Lith_PlayerUpdateUpgrades(p);
       
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+      ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
    }
    
    // Rendering

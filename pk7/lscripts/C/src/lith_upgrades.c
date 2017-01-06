@@ -119,16 +119,16 @@ static
 void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul -= 0.15;
+   p->speedmul += 0.3;
    ACS_SetAirControl(0.77);
-   ACS_SetActorPropertyFixed(0, APROP_Speed, 1.0);
 }
 
 static
 void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul += 0.15;
+   p->speedmul -= 0.3;
    ACS_SetAirControl(0.00390625); // why god
-   ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7);
 }
 
 static
@@ -183,12 +183,12 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 
 static void Upgr_CyberLegs_Activate(player_t *p, upgrade_t *upgr)
 {
-   //p->speedmul += 0.5;
+   p->speedmul += 0.2;
 }
 
 static void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   //p->speedmul -= 0.5;
+   p->speedmul -= 0.2;
 }
 
 static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
