@@ -6,7 +6,7 @@ actor Lith_Player : DoomPlayer
    Player.ForwardMove 2, 1
    Player.ViewHeight 54
    Player.AttackZOffset 8
-   DamageFactor PlayerMissile, 0
+   DamageFactor "PlayerMissile", 0
    Species "Lith_Player"
 }
 
@@ -51,4 +51,19 @@ actor Lith_FakeItemPickup : Inventory
       loop
    }
 }
+
+actor Lith_ExplodoBoots
+{
+   DamageType "PlayerMissile"
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_Explode(40, 128, 0)
+      stop
+   }
+}
+
+// EOF
 

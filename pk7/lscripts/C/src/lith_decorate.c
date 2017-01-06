@@ -35,7 +35,10 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    case weapon_shotgun:  Lith_UnlockBIPPage(&p->bip, "Shotgun");  break;
    case weapon_rifle:    Lith_UnlockBIPPage(&p->bip, "Rifle");    break;
    case weapon_launcher: Lith_UnlockBIPPage(&p->bip, "Launcher"); break;
-   case weapon_plasma:   Lith_UnlockBIPPage(&p->bip, "Plasma");   break;
+   case weapon_plasma:
+      ACS_GiveInventory("Lith_PlasmaAmmo", 2000);
+      Lith_UnlockBIPPage(&p->bip, "Plasma");
+      break;
    case weapon_bfg:      Lith_UnlockBIPPage(&p->bip, "Cannon");   break;
    }
    

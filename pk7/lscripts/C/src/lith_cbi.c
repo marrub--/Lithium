@@ -22,7 +22,7 @@ typedef struct shopdef_s
 static
 shopdef_t shopdefs[] = {
 // { "------------", ----------, ... },
-   { "PlasmaAmmo",   14000     , 140, "Lith_PlasmaAmmo" },
+   { "PlasmaAmmo",   14000     , 400, "Lith_PlasmaAmmo" },
    { "CannonAmmo",   30000     ,   6, "Lith_CannonAmmo" },
    { "DivSigil",     7772944   ,   1, "Lith_DivisionSigil" },
 };

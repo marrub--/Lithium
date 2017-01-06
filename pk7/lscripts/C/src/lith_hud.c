@@ -138,7 +138,7 @@ void Lith_PlayerHUD(player_t *p)
       for(int i = weapon_min; i < weapon_max; i++)
          if(p->weapons & (1 << i))
          {
-            fixed x = (10 * i) + 80.1;
+            fixed x = (10 * (i - weapon_min)) + 80.1;
             fixed y = 200.2;
             DrawSpritePlain("H_W2", hid_weaponE + i, x, y, 0.1);
             HudMessageF("SMALLFNT", "%i", i);

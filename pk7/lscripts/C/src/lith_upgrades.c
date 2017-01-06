@@ -28,26 +28,26 @@ A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
 #define U(n) Upgr_##n##_Update
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-// { "Name-------", Cost------, Auto-, BIP-, Callbacks... },
+// {"Name-------", Cost------, Auto-, BIP-----------, Callbacks...},
 // Body
-   { "JetBooster",  0         , true,  "JetBooster", A(JetBooster), D(JetBooster), U(JetBooster) },
-   { "ReflexWetw",  0         , true,  "ReflexWetw", A(ReflexWetw), D(ReflexWetw), U(ReflexWetw) },
-   { "CyberLegs",   900000    , false, "CyberLegs",  A(CyberLegs),  D(CyberLegs),  U(CyberLegs) },
-   { "ReactArmour", 3200200   , false, "Yh0" },
+   {"JetBooster",  0         , true , "JetBooster",   A(JetBooster), D(JetBooster), U(JetBooster)},
+   {"ReflexWetw",  0         , true , "ReflexWetw",   A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
+   {"CyberLegs",   900000    , false, "CyberLegs",    A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
+   {"ReactArmour", 3200200   , false, "Yh0"},
 // Weapons
-   { "GaussShotty", 770430    , false, "ShotgunUpgr" },
-   { "RifleModes",  340100    , false, "RifleUpgr", null, D(RifleModes), U(RifleModes)},
-   { "ChargeRPG",   850000    , false, "LauncherUpgr" },
-   { "PlasLaser",   1400000   , false, "PlasmaUpgr" },
-   { "OmegaRail",   2600700   , false, "CannonUpgr" },
+   {"GaussShotty", 770430    , false, "ShotgunUpgr"},
+   {"RifleModes",  340100    , false, "RifleUpgr",    null, D(RifleModes), U(RifleModes)},
+   {"ChargeRPG",   850000    , false, "LauncherUpgr"},
+   {"PlasLaser",   1400000   , false, "PlasmaUpgr"},
+   {"OmegaRail",   2600700   , false, "CannonUpgr"},
 // Extras
-   { "TorgueMode",  800000000 , false, null },
-   { "RetroWeps",   9999990   , false, null },
-   { "7777777",     823543000 , false, null },
-   { "lolsords",    1000000   , false, null, A(lolsords), D(lolsords), U(lolsords) },
+   {"TorgueMode",  800000000 , false, null},
+   {"RetroWeps",   9999990   , false, null},
+   {"7777777",     823543000 , false, null},
+   {"lolsords",    1000000   , false, null,           A(lolsords), D(lolsords), U(lolsords)},
 // Downgrades
-   { "Implying",    0         , false, null, null, null, U(Implying) },
-   { "SeriousMode", 0         , false, null },
+   {"Implying",    0         , false, null,           null, null, U(Implying)},
+   {"SeriousMode", 0         , false, null},
 };
 
 #undef A
@@ -193,6 +193,21 @@ static void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
 
 static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
 {
+   fixed absvel = absk(p->old.velz) * 10.0k;
+   
+   if(p->velz == 0 && absvel > 100)
+   {
+      // TODO: play landing sound from EYE
+      for(fixed i = absvel; i >= 100; i -= 100)
+      {
+         int tid;
+         int fuckyou = p->tid;
+         ACS_SpawnForced("Lith_ExplodoBoots", p->x, p->y, p->z, tid = ACS_UniqueTID());
+         ACS_SetActivator(tid);
+         ACS_SetPointer(AAPTR_TARGET, fuckyou);
+         ACS_SetActivator(fuckyou);
+      }
+   }
 }
 
 // --------------------------------------

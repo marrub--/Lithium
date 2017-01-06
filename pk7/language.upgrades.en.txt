@@ -85,13 +85,18 @@ LITH_TXT_UPGRADE_DESCR_RetroWeps =
    "Effect: All of your weapons fire projectiles straight from contra, and "
    "have their original animation sets from Doom.";
 
-LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
-
 LITH_TXT_UPGRADE_TITLE_7777777 = "7777777 Mode";
 LITH_TXT_UPGRADE_DESCR_7777777 =
    "Effect: Instates cosmic horror and spurious time travel into your very "
    "being, causing you to instantly implode upon activation.\n\n"
-   "Description: get yholl to write things";
+   "Description:\n"
+   "\cd~text interface terminal malfunction error ~2992dud\n\n"
+   "\cdhelo i am of durnadle winner of ai beauty contets i will "
+   "give u anti-physics powers becaus i did some calculations and found the "
+   "universe is stupid so i am doing my best to flip off reality for a "
+   "thousand years";
+
+LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
 LITH_TXT_UPGRADE_DESCR_lolsords =
    "Effect: You get a sword.\n"
    "It is literally your only weapon.";
