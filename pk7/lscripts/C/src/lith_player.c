@@ -73,7 +73,7 @@ static void Lith_PlayerEntry(void)
       Lith_PlayerUpdateData(p);
       
       // This can be changed any time, so save it here.
-      score_t curscore = p->score;
+      player_delta_t olddelta = p->cur;
       
       Lith_PlayerRunScripts(p);
       
@@ -85,8 +85,7 @@ static void Lith_PlayerEntry(void)
       ACS_Delay(1);
       
       // Update previous-tic values
-      p->old = p->cur;
-      p->old.score = curscore;
+      p->old = olddelta;
       
       // Reset view for next tic
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
@@ -247,7 +246,8 @@ static void Lith_PlayerRunScripts(player_t *p)
       
       Lith_PlayerUpdateUpgrades(p);
       
-      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+      if(p->frozen != p->old.frozen)
+         ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
       ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
    }
    
