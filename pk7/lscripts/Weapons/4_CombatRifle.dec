@@ -12,8 +12,6 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    Weapon.UpSound "weapons/rifle/draw"
    Weapon.SlotNumber 4
    
-   +WEAPON.NOALERT
-   
    states
    {
    OhFuck:

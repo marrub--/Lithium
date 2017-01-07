@@ -57,6 +57,7 @@ actor Lith_Weapon : Weapon
    Inventory.PickupMessage ""
    
    +INVENTORY.UNTOSSABLE
+   +WEAPON.NOALERT
    
    var int user_glowangle;
    var int user_glowzangle;

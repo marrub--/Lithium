@@ -86,7 +86,6 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    Weapon.SlotNumber 3
    
    +WEAPON.NOAUTOFIRE
-   +WEAPON.NOALERT
    
    states
    {

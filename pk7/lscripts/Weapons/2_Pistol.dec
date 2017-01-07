@@ -18,7 +18,6 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    Weapon.UpSound "weapons/pistol/draw"
    
    +WEAPON.NOAUTOFIRE
-   +WEAPON.NOALERT
    
    const int Lith_PistolLoadMax = 7;
    
