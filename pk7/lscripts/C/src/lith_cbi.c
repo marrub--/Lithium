@@ -278,7 +278,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       // Cursor position state.
       gst->cur.x -= p->yawv * 800.0f;
       
-      if(ACS_GetUserCVar(p->number, "invertmouse"))
+      if(ACS_GetUserCVar(p->number, "lith_player_invertmouse"))
          gst->cur.y += p->pitchv * 800.0f;
       else
          gst->cur.y -= p->pitchv * 800.0f;

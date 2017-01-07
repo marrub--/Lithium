@@ -35,8 +35,7 @@ enum
    hid_base_misc = hid_base + 40000,
    hid_end_misc  = hid_base + 40999,
    
-   hid_ack = hid_base_misc,
-   hid_implyingE,
+   hid_implyingE = hid_base_misc,
    hid_implyingS = hid_implyingE + 200,
    hid_sigil_title,
    hid_sigil_subtitle,

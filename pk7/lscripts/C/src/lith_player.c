@@ -6,6 +6,7 @@
 #include "lith_cbi.h"
 #include <math.h>
 
+
 //----------------------------------------------------------------------------
 // External Objects
 //
@@ -99,21 +100,7 @@ static void Lith_PlayerDeath(void)
    player_t *p = &players[ACS_PlayerNumber()];
    
    p->dead = true;
-   
-   // :^)
-   p->score = 0;
    p->cbi.open = false;
-   p->staticinit = false;
-   
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
-      
-      if(upgr->active)
-         Upgr_ToggleActive(p, upgr);
-      
-      upgr->owned = false;
-   }
 }
 
 [[__call("ScriptS"), __script("Respawn")]]

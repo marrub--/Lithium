@@ -100,13 +100,6 @@ void Lith_PlayerHUD(player_t *p)
    
    ACS_SetHudSize(320, 200);
    
-   // ACK
-   if(ACS_PlayerCount() > 1 && ACS_GetCVar("lith_sv_ack"))
-   {
-      HudMessageF("SMALLFNT", "Out of sync with: ZDoom");
-      HudMessageParams(HUDMSG_PLAIN, hid_ack, CR_GREEN, 160.5, 0.1, 0.1);
-   }
-   
    // Jet
    if(p->rocketcharge != rocketcharge_max)
    {
