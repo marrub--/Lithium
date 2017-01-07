@@ -63,8 +63,12 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 {
    for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
       for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
-         if(ACS_StrCmp(((bippage_t *)rover->data.vp)->name, name) == 0)
-            return rover->data.vp;
+   {
+      bippage_t *page = rover->data.vp;
+      if(ACS_StrCmp(page->name, name) == 0)
+         return page;
+   }
+   
    return null;
 }
 

@@ -307,8 +307,8 @@ static void Lith_ResetPlayer(player_t *p)
    
    if(!p->staticinit)
    {
-      Lith_PlayerInitUpgrades(p);
       Lith_PlayerInitBIP(p);
+      Lith_PlayerInitUpgrades(p);
       p->staticinit = true;
    }
 }
