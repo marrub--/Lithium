@@ -90,7 +90,7 @@ int Lith_GetCVar(int var)
 {
    switch(var)
    case lith_weapons_zoomfactor:
-      return bitsk(ACS_GetCVarFixed("lith_weapons_zoomfactor"));
+      return bitsk(ACS_GetUserCVarFixed(ACS_PlayerNumber(), "lith_weapons_zoomfactor"));
    
    return -1;
 }

@@ -406,12 +406,12 @@ static void Lith_PlayerRender(player_t *p)
       Lith_RenderHUDStringStack(p);
       
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_scopealpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
    }
    else
    {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_alpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
    }
 }
 
@@ -446,9 +446,9 @@ static void Lith_PlayerDamageBob(player_t *p)
 //
 static void Lith_PlayerView(player_t *p)
 {
-   if(ACS_GetCVar("lith_player_damagebob"))
+   if(ACS_GetUserCVar(p->number, "lith_player_damagebob"))
    {
-      float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
+      float bobmul = ACS_GetUserCVarFixed(p->number, "lith_player_damagebobmul");
       p->addyaw = p->bobyaw * bobmul;
       p->addpitch = p->bobpitch * bobmul;
    }
