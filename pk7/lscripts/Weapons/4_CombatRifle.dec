@@ -109,6 +109,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 2 A_WeaponReady(LITH_BOBONLY)
       CRIF A 0 ACS_NamedExecuteAlways("Lith_SwitchRifleFiremode", 0)
       CRIF DEF 1 A_WeaponReady(LITH_BOBONLY)
+      CRIF A 7 A_WeaponReady(WRF_NOSECONDARY)
       goto Ready
    Spawn:
       RIFL A 0

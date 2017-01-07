@@ -26,22 +26,23 @@ void Lith_PlayerInitBIP(player_t *p)
    
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Pistol",       Unlocks("Omakeda"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "ShotgunUpgr",  Unlocks("Omakeda", "AOF", "DurlaPrime"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "ShotgunUpgr",  Unlocks("Shotgun", "AOF", "DurlaPrime"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Rifle",        Unlocks("AllPoint"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("AllPoint"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("AllPoint", "Rifle"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Launcher",     Unlocks("Sym43"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "LauncherUpgr", Unlocks("Sym43", "UnrealArms"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Plasma",       Unlocks("AllPoint"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "PlasmaUpgr",   Unlocks("AllPoint"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Cannon",       Unlocks("Cid"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "CannonUpgr",   Unlocks("Cid"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "CannonUpgr",   Unlocks("Cannon"));
    
    AddToBIP(bip, BIP_CATEGORY_UPGRADES, "JetBooster");
    AddToBIP(bip, BIP_CATEGORY_UPGRADES, "ReflexWetw");
    AddToBIP(bip, BIP_CATEGORY_UPGRADES, "CyberLegs", Unlocks("CulterDei"));
    AddToBIP(bip, BIP_CATEGORY_UPGRADES, "Yh0",       Unlocks("DurlaPrime"));
    
-   AddToBIP(bip, BIP_CATEGORY_PLACES, "DurlaPrime", Unlocks("Earth"));
+   AddToBIP(bip, BIP_CATEGORY_PLACES, "AetosVi");
+   AddToBIP(bip, BIP_CATEGORY_PLACES, "DurlaPrime", Unlocks("Earth", "AetosVi"));
    AddToBIP(bip, BIP_CATEGORY_PLACES, "Earth");
    
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "AllPoint");
@@ -49,7 +50,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Cid");
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "CulterDei");
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Omakeda", Unlocks("Earth"));
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Sym43");
+   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "UnrealArms");
    
    for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)

@@ -22,7 +22,7 @@ LITH_TXT_UPGRADE_DESCR_CyberLegs =
    "Effect: Allows you to jump higher, move faster, and damage things you "
    "jump onto.\n\n"
    "Description: Implement Culter Dei technology into your legs, "
-   " greatly increasing your agility.";
+   "greatly increasing your agility.";
 
 LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armour";
 LITH_TXT_UPGRADE_DESCR_ReactArmour =
@@ -44,8 +44,8 @@ LITH_TXT_UPGRADE_DESCR_GaussShotty =
 LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
 LITH_TXT_UPGRADE_DESCR_RifleModes =
    "Effect: Gives your rifle a sniper firing mode.\n\n"
-   "Description: Some kind of wonder of technology is applied to your rifle"
-   " to make it act as two rifles. How the hell does that even work?";
+   "Description: A complete replacement for the firing mechanism which adds "
+   "a third mode, allowing you to burst-fire accurate, deadly shots.";
 
 LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_DESCR_ChargeRPG =
