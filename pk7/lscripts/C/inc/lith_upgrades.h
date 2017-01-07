@@ -44,6 +44,7 @@ typedef struct upgradeinfo_s
    bool auto_activate; // If this is true, as soon as you own it you'll activate it.
    __str bipunlock;
    int category;
+   fixed scoreadd;
    
    upgr_update_t Activate;
    upgr_update_t Deactivate;

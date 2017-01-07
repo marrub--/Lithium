@@ -13,13 +13,16 @@
 #define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr)
 #define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr)
 
-A(JetBooster); D(JetBooster); U(JetBooster);
+                              U(JetBooster);
 A(ReflexWetw); D(ReflexWetw); U(ReflexWetw);
-               D(RifleModes); U(RifleModes);
-A(lolsords);   D(lolsords);   U(lolsords);
-                              U(Implying);
 A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
+
+               D(RifleModes); U(RifleModes);
+
 A(7777777);    D(7777777);    U(7777777);
+A(lolsords);   D(lolsords);   U(lolsords);
+
+                              U(Implying);
 
 #undef A
 #undef D
@@ -30,30 +33,30 @@ A(7777777);    D(7777777);    U(7777777);
 // Static Objects
 //
 
-#define A(n) Upgr_##n##_Activate
-#define D(n) Upgr_##n##_Deactivate
-#define U(n) Upgr_##n##_Update
+#define A(n) .Activate = Upgr_##n##_Activate
+#define D(n) .Deactivate = Upgr_##n##_Deactivate
+#define U(n) .Update = Upgr_##n##_Update
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-// {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Callbacks...},
-   {"JetBooster",  0         , true , "JetBooster",   UC_Body, A(JetBooster), D(JetBooster), U(JetBooster)},
-   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
-   {"CyberLegs",   900000    , false, "CyberLegs",    UC_Body, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
-   {"ReactArmour", 3200200   , false, "Yh0",          UC_Body},
+// {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
+   {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.15, U(JetBooster)},
+   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
+   {"CyberLegs",   900000    , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
+   {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00},
    
-   {"GaussShotty", 770430    , false, "ShotgunUpgr",  UC_Weap},
-   {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap, null, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   850000    , false, "LauncherUpgr", UC_Weap},
-   {"PlasLaser",   1400000   , false, "PlasmaUpgr",   UC_Weap},
-   {"OmegaRail",   2600700   , false, "CannonUpgr",   UC_Weap},
+   {"GaussShotty", 770430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
+   {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
+   {"ChargeRPG",   850000    , false, "LauncherUpgr", UC_Weap,  0.00},
+   {"PlasLaser",   1400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
+   {"OmegaRail",   2600700   , false, "CannonUpgr",   UC_Weap,  0.00},
    
-   {"TorgueMode",  800000000 , false, null,           UC_Extr},
-   {"RetroWeps",   9999990   , false, null,           UC_Extr},
-   {"7777777",     82354300  , false, null,           UC_Extr, A(7777777),  D(7777777),  U(7777777)},
-   {"lolsords",    1000000   , false, null,           UC_Extr, A(lolsords), D(lolsords), U(lolsords)},
+   {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
+   {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
+   {"7777777",     82354300  , false, null,           UC_Extr,  0.10, A(7777777),  D(7777777),  U(7777777)},
+   {"lolsords",    1000000   , false, null,           UC_Extr,  0.20, A(lolsords), D(lolsords), U(lolsords)},
    
-   {"Implying",    0         , false, null,           UC_Down, null, null, U(Implying)},
-   {"SeriousMode", 0         , false, null,           UC_Down},
+   {"Implying",    0         , false, null,           UC_Down,  0.20, U(Implying)},
+   {"SeriousMode", 0         , false, null,           UC_Down,  1.00},
 };
 
 #undef A
@@ -68,16 +71,6 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 //---------------------------------------
 // JetBooster
 //
-
-static void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
-{
-   p->scoremul -= 0.15;
-}
-
-static void Upgr_JetBooster_Deactivate(player_t *p, upgrade_t *upgr)
-{
-   p->scoremul += 0.15;
-}
 
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
@@ -120,14 +113,12 @@ static void DOOOOODGE(player_t *p)
 
 static void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
-   p->scoremul -= 0.15;
    p->speedmul += 0.3;
    ACS_SetAirControl(0.77);
 }
 
 static void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   p->scoremul += 0.15;
    p->speedmul -= 0.3;
    ACS_SetAirControl(0.00390625); // why god
 }
@@ -250,7 +241,7 @@ static void Upgr_7777777_Deactivate(player_t *p, upgrade_t *upgr)
 
 static void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
 {
-   fixed vel = -1.5;
+   fixed vel = -2;
    if(p->velz > 0) vel += p->velz;
    Lith_SetPlayerVelocity(p, p->velx, p->vely, vel, false, true);
 }
@@ -261,14 +252,12 @@ static void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
 
 static void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 {
-   p->scoremul += 0.2;
    upgr->user_str[0] = p->weaponclass;
    ACS_GiveInventory("Lith_Sword", 1);
 }
 
 static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   p->scoremul -= 0.2;
    ACS_TakeInventory("Lith_Sword", 1);
    ACS_SetWeapon(upgr->user_str[0]);
 }
@@ -333,9 +322,15 @@ void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
    upgr->active = !upgr->active;
    
    if(upgr->active && upgr->info->Activate)
+   {
       upgr->info->Activate(p, upgr);
+      p->scoremul += upgr->info->scoreadd;
+   }
    else if(!upgr->active && upgr->info->Deactivate)
+   {
       upgr->info->Deactivate(p, upgr);
+      p->scoremul -= upgr->info->scoreadd;
+   }
 }
 
 void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
