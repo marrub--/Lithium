@@ -125,7 +125,18 @@ static void Lith_PlayerRespawn(void)
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   players[ACS_PlayerNumber()].active = false;
+   memset(&players[ACS_PlayerNumber()], 0, sizeof(player_t));
+}
+
+[[__call("ScriptS"), __script("Unloading")]]
+static void Lith_PlayerUnloading(void)
+{
+   for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
+      if(p->active)
+   {
+      ACS_SetActivator(p->tid);
+      Lith_PlayerDeinitUpgrades(p);
+   }
 }
 
 
@@ -211,7 +222,7 @@ static void Lith_PlayerUpdateData(player_t *p)
    Lith_GetWeaponType(p);
    Lith_GetArmorType(p);
    
-   p->berserk = ACS_CheckInventory("PowerStrength");
+   p->berserk    = ACS_CheckInventory("PowerStrength");
    p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
                    ACS_CheckInventory("Lith_PistolScopedToken");
    
@@ -311,6 +322,8 @@ static void Lith_ResetPlayer(player_t *p)
       Lith_PlayerInitUpgrades(p);
       p->staticinit = true;
    }
+   else
+      Lith_PlayerReinitUpgrades(p);
 }
 
 //

@@ -28,6 +28,7 @@ void Lith_World(void)
       
       prevsecrets = secrets;
       
+#if 0
       // Eeeeeeeeeghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
       for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
          if(p->active && ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"))
@@ -35,6 +36,7 @@ void Lith_World(void)
             ACS_Thing_Remove(ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"));
             ACS_TakeActorInventory(p->tid, "Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
          }
+#endif
       
       ACS_Delay(1);
    }

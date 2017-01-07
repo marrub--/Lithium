@@ -53,7 +53,7 @@ typedef struct upgradeinfo_s
 
 typedef struct upgrade_s
 {
-   bool active, owned;
+   bool active : 1, owned : 1, wasactive : 1;
    upgradeinfo_t const *info;
    int user_int[8];
    __str user_str[8];
@@ -68,6 +68,8 @@ void Upgr_Buy(struct player_s *p, upgrade_t *upgr);
 
 void Lith_PlayerInitUpgrades(struct player_s *p);
 void Lith_PlayerUpdateUpgrades(struct player_s *p);
+void Lith_PlayerDeinitUpgrades(struct player_s *p);
+void Lith_PlayerReinitUpgrades(struct player_s *p);
 
 #endif
 

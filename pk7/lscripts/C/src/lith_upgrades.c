@@ -392,5 +392,31 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
    }
 }
 
+void Lith_PlayerDeinitUpgrades(player_t *p)
+{
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      upgrade_t *upgr = &p->upgrades[i];
+      if(upgr->active)
+      {
+         upgr->wasactive = true;
+         Upgr_ToggleActive(p, upgr);
+      }
+   }
+}
+
+void Lith_PlayerReinitUpgrades(player_t *p)
+{
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      upgrade_t *upgr = &p->upgrades[i];
+      if(upgr->wasactive)
+      {
+         upgr->wasactive = false;
+         Upgr_ToggleActive(p, upgr);
+      }
+   }
+}
+
 // EOF
 
