@@ -6,7 +6,7 @@ actor Lith_Player : DoomPlayer
    Player.ForwardMove 2, 1
    Player.ViewHeight 54
    Player.AttackZOffset 8
-   DamageFactor "PlayerMissile", 0
+   DamageFactor "Lith_PlayerMissile", 0
    Species "Lith_Player"
 }
 
@@ -54,7 +54,7 @@ actor Lith_FakeItemPickup : Inventory
 
 actor Lith_ExplodoBoots
 {
-   DamageType "PlayerMissile"
+   DamageType "Lith_PlayerMissile"
    
    states
    {

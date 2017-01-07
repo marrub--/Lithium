@@ -21,41 +21,41 @@ void Lith_PlayerInitBIP(player_t *p)
 {
    bip_t *bip = &p->bip;
    
-   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
       bip->infogr[i] = DList_Create();
    
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Pistol",       Unlocks("Omakeda"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "ShotgunUpgr",  Unlocks("Shotgun", "AOF", "DurlaPrime"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Rifle",        Unlocks("AllPoint"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("Rifle"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Launcher",     Unlocks("Sym43"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Plasma",       Unlocks("AllPoint", "MDDO"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Cannon",       Unlocks("Cid"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "CannonUpgr",   Unlocks("Cannon"));
+   AddToBIP(bip, BIPC_WEAPONS, "Pistol",       Unlocks("Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",  Unlocks("Shotgun", "AOF", "DurlaPrime"));
+   AddToBIP(bip, BIPC_WEAPONS, "Rifle",        Unlocks("AllPoint"));
+   AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",    Unlocks("Rifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "Launcher",     Unlocks("Sym43"));
+   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
+   AddToBIP(bip, BIPC_WEAPONS, "Plasma",       Unlocks("AllPoint", "MDDO"));
+   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
+   AddToBIP(bip, BIPC_WEAPONS, "Cannon",       Unlocks("Cid"));
+   AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",   Unlocks("Cannon"));
    
-   AddToBIP(bip, BIP_CATEGORY_UPGRADES, "JetBooster");
-   AddToBIP(bip, BIP_CATEGORY_UPGRADES, "ReflexWetw");
-   AddToBIP(bip, BIP_CATEGORY_UPGRADES, "CyberLegs", Unlocks("CulterDei"));
-   AddToBIP(bip, BIP_CATEGORY_UPGRADES, "Yh0",       Unlocks("DurlaPrime"));
+   AddToBIP(bip, BIPC_UPGRADES, "JetBooster");
+   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw");
+   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs", Unlocks("CulterDei"));
+   AddToBIP(bip, BIPC_UPGRADES, "Yh0",       Unlocks("DurlaPrime"));
    
-   AddToBIP(bip, BIP_CATEGORY_PLACES, "AetosVi");
-   AddToBIP(bip, BIP_CATEGORY_PLACES, "DurlaPrime", Unlocks("Earth", "AetosVi"));
-   AddToBIP(bip, BIP_CATEGORY_PLACES, "Earth");
+   AddToBIP(bip, BIPC_PLACES, "AetosVi");
+   AddToBIP(bip, BIPC_PLACES, "DurlaPrime", Unlocks("Earth", "AetosVi"));
+   AddToBIP(bip, BIPC_PLACES, "Earth");
    
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "AllPoint");
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "AOF");
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Cid");
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "CulterDei");
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "MDDO",    Unlocks("OFMD"));
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "OFMD");
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Omakeda", Unlocks("Earth"));
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
-   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "UnrealArms");
+   AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
+   AddToBIP(bip, BIPC_CORPORATIONS, "AOF");
+   AddToBIP(bip, BIPC_CORPORATIONS, "Cid");
+   AddToBIP(bip, BIPC_CORPORATIONS, "CulterDei");
+   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",    Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "OFMD");
+   AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda", Unlocks("Earth"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms");
    
-   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
       bip->pagemax += bip->categorymax[i] = DList_GetLength(bip->infogr[i]);
    
    Lith_UnlockBIPPage(bip, "Pistol");
@@ -63,7 +63,7 @@ void Lith_PlayerInitBIP(player_t *p)
 
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 {
-   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
       for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
    {
       bippage_t *page = rover->data.vp;
@@ -92,10 +92,10 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
 {
    bip->pageavail = bip->pagemax;
    
-   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
       bip->categoryavail[i] = bip->categorymax[i];
    
-   for(int i = BIP_CATEGORY_MIN; i < BIP_CATEGORY_MAX; i++)
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
       for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
          ((bippage_t *)rover->data.vp)->unlocked = true;
 }

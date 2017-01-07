@@ -90,6 +90,7 @@ float RandomFloat(float max, float min);
 
 // Printing
 __str StrParam(__str fmt, ...);
+__str Language(__str fmt, ...);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
@@ -100,6 +101,8 @@ bool ButtonPressed(struct player_s *p, int bt);
 bool ButtonPressedUI(struct player_s *p, int bt);
 void *cpyalloc(size_t num, size_t size, void *src);
 unsigned StrHash(__str s);
+[[__optional_args(2)]]
+bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 
 // Math
 accum lerpk(accum a, accum b, accum t);
@@ -124,63 +127,6 @@ static int const hudstrstack_max = 20;
 
 // Types
 typedef long long int score_t;
-
-struct vec2
-{
-   union
-   {
-      struct
-      {
-         union { float u, x, p; };
-         union { float v, y; };
-      };
-      float fl[2];
-   };
-};
-
-struct vec3
-{
-   union
-   {
-      struct
-      {
-         union { float u, x, p; };
-         union { float v, y; };
-         union { float s, z, r; };
-      };
-      struct { struct vec2 v2; float v2_z; };
-      float fl[3];
-   };
-};
-
-struct vec4
-{
-   union
-   {
-      struct
-      {
-         union { float u, x, p; };
-         union { float v, y; };
-         union { float s, z, r; };
-         union { float t, w; };
-      };
-      struct { struct vec2 v2_1, v2_2; };
-      struct { struct vec3 v3; float v3_w; };
-      float fl[4];
-   };
-};
-
-struct mat4
-{
-   union
-   {
-      struct { struct vec4 c1, c2, c3, c4; };
-      struct vec4 vec[4];
-      float fl[4][4];
-   };
-};
-
-__str Language(__str fmt, ...);
 
 #endif
 

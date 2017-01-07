@@ -3,12 +3,9 @@
 #include "lith_hudid.h"
 #include "lith_list.h"
 
-// ---------------------------------------------------------------------------
-// Shop Scripts.
-//
 
-//
-// shopdef_t
+//----------------------------------------------------------------------------
+// Static Objects
 //
 
 typedef struct shopdef_s
@@ -19,29 +16,34 @@ typedef struct shopdef_s
    __str class;
 } shopdef_t;
 
-static
-shopdef_t shopdefs[] = {
-// { "------------", ----------, ... },
-   { "PlasmaAmmo",   14000     , 400, "Lith_PlasmaAmmo" },
-   { "CannonAmmo",   30000     ,   6, "Lith_CannonAmmo" },
-   { "DivSigil",     7772944   ,   1, "Lith_DivisionSigil" },
+static shopdef_t shopdefs[] = {
+// {"Name--------", Cost------, Cnt, Class---------------},
+   {"PlasmaAmmo",   14000     , 400, "Lith_PlasmaAmmo"   },
+   {"CannonAmmo",   30000     ,   6, "Lith_CannonAmmo"   },
+// {"DivSigil",     7772944   ,   1, "Lith_DivisionSigil"},
 };
+
+static size_t const shopdefsnum = sizeof(shopdefs) / sizeof(*shopdefs);
+
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
 
 //
 // Shop_CanBuy
 //
-
 bool Shop_CanBuy(player_t *p, shopdef_t *def)
 {
-   return ACS_CheckInventory(def->class) < ACS_GetMaxInventory(0, def->class) && p->score - def->cost >= 0;
+   int cur = ACS_CheckInventory(def->class);
+   int max = ACS_GetMaxInventory(0, def->class);
+   return cur < max && p->score - def->cost >= 0;
 }
 
 //
 // Shop_Buy
 //
-
-static
-void Shop_Buy(player_t *p, shopdef_t *def)
+static void Shop_Buy(player_t *p, shopdef_t *def)
 {
    if(!Shop_CanBuy(p, def))
    {
@@ -51,59 +53,13 @@ void Shop_Buy(player_t *p, shopdef_t *def)
    
    ACS_GiveInventory(def->class, def->count);
    Lith_TakeScore(p, def->cost);
+   p->itemsbought++;
 }
-
-//
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Key Scripts.
-//
-
-//
-// Lith_KeyOpenCBI
-//
-// Called when the CBI is toggled.
-//
-
-[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
-void Lith_KeyOpenCBI(void)
-{
-   player_t *p = &players[ACS_PlayerNumber()];
-   
-   if(p->dead)
-      return;
-   
-   p->cbi.open = !p->cbi.open;
-   p->bip.curcategory = BIP_CATEGORY_MAIN;
-   p->bip.curpage     = null;
-   p->bip.curpagenum  = -1;
-   
-   if(p->cbi.open)
-   {
-      p->frozen++;
-      ACS_LocalAmbientSound("player/cbi/open", 127);
-   }
-   else
-   {
-      p->frozen--;
-      ACS_LocalAmbientSound("player/cbi/close", 127);
-   }
-}
-
-//
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Computer-Brain Interface (CBI) Scripts.
-//
 
 //
 // CBI_Tab_Upgrades
 //
-
-static
-int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+static int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
    GUI_BEGIN_LIST(GUI_ID("uSCL"), gst, &hid, 20, 30, 152, &cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
    
@@ -152,17 +108,13 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 //
 // CBI_Tab_Shop
 //
-
-static
-int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+static int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
-   int defcount = sizeof(shopdefs) / sizeof(*shopdefs);
-   
    GUI_BEGIN_LIST(GUI_ID("sSCL"), gst, &hid, 20, 30, 152, &cbi->gst.scrlst[CBI_SCRLST_SHOP]);
    
-   for(int i = 0; i < defcount; i++)
+   for(int i = 0; i < shopdefsnum; i++)
    {
-      GUI_LIST_OFFSETS(i, defcount, 152, cbi->gst.scrlst[CBI_SCRLST_SHOP]);
+      GUI_LIST_OFFSETS(i, shopdefsnum, 152, cbi->gst.scrlst[CBI_SCRLST_SHOP]);
       
       __str id = StrParam("sN%.2i", i);
       __str fullname = Language("LITH_TXT_SHOP_TITLE_%S", shopdefs[i].name);
@@ -189,9 +141,7 @@ int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 //
 // CBI_Tab_Statistics
 //
-
-static
-int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+static int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
 #define Stat(n, name, f, x) \
    HudMessageF("CBIFONT", name); HudMessagePlain(hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
@@ -207,11 +157,12 @@ int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    Stat(6,  "Armor Sum",         "%li",  p->armorsum);
    Stat(7,  "Secrets Found",     "%i",   p->secretsfound);
    Stat(8,  "Units Travelled",   "%llu", p->unitstravelled);
-   Stat(9,  "Enemies Defeated",  "%i",   0);
-   Stat(10, "Bosses Defeated",   "%i",   0);
-   Stat(11, "Upgrades Owned",    "%i",   0);
-   Stat(12, "Items Bought",      "%i",   0);
-   Stat(13, "Rituals Performed", "%i",   0);
+// Stat(9,  "Enemies Defeated",  "%i",   0);
+// Stat(10, "Bosses Defeated",   "%i",   0);
+   Stat(9,  "Upgrades Owned",    "%i",   p->upgradesowned);
+   Stat(10, "Items Bought",      "%i",   p->itemsbought);
+// Stat(13, "Rituals Performed", "%i",   0);
+   
 #undef Stat
    return hid;
 }
@@ -227,6 +178,7 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
       .dim_x = 180,
       .dim_y = 9
    };
+   
    static gui_button_parm_t const backbtnp = {
       .f_gfx_def = "",
       .f_gfx_hot = "",
@@ -236,7 +188,7 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    bip_t *bip = &p->bip;
    int avail, max;
    
-   if(bip->curcategory == BIP_CATEGORY_MAIN)
+   if(bip->curcategory == BIPC_MAIN)
    {
       HudMessageF("CBIFONT", "\CTINFO");
       HudMessagePlain(hid--, 160.4, 70.1, TICSECOND);
@@ -244,7 +196,7 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 #define LITH_X(n, id, name, capt) \
       if(GUI_Button(GUI_ID("b" #id), gst, &hid, 70, 80 + (n * 10), capt, false, &btnp)) \
       { \
-         bip->curcategory = BIP_CATEGORY_##name; \
+         bip->curcategory = BIPC_##name; \
          bip->curpagenum  = -1; \
          bip->curpage     = null; \
       }
@@ -290,7 +242,7 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
       }
       
       if(GUI_Button(GUI_ID("bBBT"), gst, &hid, 20, 38, "<BACK", false, &backbtnp))
-         bip->curcategory = BIP_CATEGORY_MAIN;
+         bip->curcategory = BIPC_MAIN;
       
       avail = bip->categoryavail[bip->curcategory];
       max   = bip->categorymax[bip->curcategory];
@@ -306,17 +258,20 @@ static int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    return hid;
 }
 
+
+//----------------------------------------------------------------------------
+// External Functions
+//
+
 //
 // Lith_PlayerUpdateCBI
 //
-
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateCBI(player_t *p)
 {
    if(p->cbi.open)
    {
-      cbi_t *cbi = &p->cbi;
-      
+      cbi_t       *cbi = &p->cbi;
       gui_state_t *gst = &cbi->gst.ggst;
       
       //
@@ -375,6 +330,40 @@ void Lith_PlayerUpdateCBI(player_t *p)
    }
 }
 
+
+//----------------------------------------------------------------------------
+// Scripts
 //
-// ---------------------------------------------------------------------------
+
+//
+// Lith_KeyOpenCBI
+//
+// Called when the CBI is toggled.
+//
+[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
+void Lith_KeyOpenCBI(void)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   
+   if(p->dead)
+      return;
+   
+   p->cbi.open = !p->cbi.open;
+   p->bip.curcategory = BIPC_MAIN;
+   p->bip.curpage     = null;
+   p->bip.curpagenum  = -1;
+   
+   if(p->cbi.open)
+   {
+      p->frozen++;
+      ACS_LocalAmbientSound("player/cbi/open", 127);
+   }
+   else
+   {
+      p->frozen--;
+      ACS_LocalAmbientSound("player/cbi/close", 127);
+   }
+}
+
+// EOF
 

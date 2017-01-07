@@ -27,7 +27,11 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    p->weaponsheld++;
    
    ACS_Thing_Remove(user_spritetid);
-   ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
+   
+   if(!p->upgrades[UPGR_7777777].active)
+      ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
+   else
+      ACS_LocalAmbientSound("marathon/pickup", 127);
    
    switch(user_pickupparm)
    {
@@ -149,6 +153,7 @@ int Lith_GetPlayerData(int info, bool target)
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;
+   case pdata_marathon_mode:  return p->upgrades[UPGR_7777777].active;
    }
    
    return 0;
@@ -171,7 +176,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
       return true;
    
    ACS_SpawnForced("Lith_FakeItemPickup", p->x, p->y, p->z);
-   ACS_SetActorVelocity(0, 0.001, 0, 0, true, false);
+   Lith_SetPlayerVelocity(p, 0.001, 0, 0, true, false);
    Lith_GiveScore(p, 11100 * user_pickupparm);
    
    ACS_Thing_Remove(user_spritetid);
@@ -227,7 +232,7 @@ int Lith_GetSigil()
    ACS_GiveInventory("Lith_TimeHax", 1);
    ACS_GiveInventory("Lith_TimeHax2", 1);
    
-   ACS_SetActorVelocity(0, 0.0, 0.0, 0.0, false, true);
+   Lith_SetPlayerVelocity(p, 0.0, 0.0, 0.0, false, true);
    ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
    
    ACS_Delay(3);

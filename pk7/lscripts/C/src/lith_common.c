@@ -225,6 +225,25 @@ __str Language(__str fmt, ...)
    return ret;
 }
 
+[[__optional_args(2)]]
+bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob)
+{
+   if(add)
+   {
+      p->velx += velx;
+      p->vely += vely;
+      p->velz += velz;
+   }
+   else
+   {
+      p->velx = velx;
+      p->vely = vely;
+      p->velz = velz;
+   }
+   
+   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
+}
+
 //
 // ---------------------------------------------------------------------------
 

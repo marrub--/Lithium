@@ -1,27 +1,15 @@
 #ifndef LITH_UPGRADES_H
 #define LITH_UPGRADES_H
 
-typedef void (*upgr_update_t)(struct player_s *, struct upgrade_s *);
-
-typedef struct upgradeinfo_s
+enum
 {
-   __str name;
-   score_t cost; // If this is exactly 0, you already own it.
-   bool auto_activate; // If this is true, as soon as you own it you'll activate it.
-   __str bipunlock;
-   
-   upgr_update_t Activate;
-   upgr_update_t Deactivate;
-   upgr_update_t Update;
-} upgradeinfo_t;
-
-typedef struct upgrade_s
-{
-   bool active, owned;
-   upgradeinfo_t const *info;
-   int user_int[8];
-   __str user_str[8];
-} upgrade_t;
+   UC_MIN,
+   UC_Body = UC_MIN,
+   UC_Weap,
+   UC_Extr,
+   UC_Down,
+   UC_MAX
+};
 
 enum
 {
@@ -46,6 +34,31 @@ enum
    
    UPGR_MAX
 };
+
+typedef void (*upgr_update_t)(struct player_s *, struct upgrade_s *);
+
+typedef struct upgradeinfo_s
+{
+   __str name;
+   score_t cost; // If this is exactly 0, you already own it.
+   bool auto_activate; // If this is true, as soon as you own it you'll activate it.
+   __str bipunlock;
+   int category;
+   
+   upgr_update_t Activate;
+   upgr_update_t Deactivate;
+   upgr_update_t Update;
+} upgradeinfo_t;
+
+typedef struct upgrade_s
+{
+   bool active, owned;
+   upgradeinfo_t const *info;
+   int user_int[8];
+   __str user_str[8];
+} upgrade_t;
+
+typedef upgrade_t upgrades_t[UPGR_MAX];
 
 void Upgr_ToggleActive(struct player_s *p, upgrade_t *upgr);
 void Upgr_SetOwned(struct player_s *p, upgrade_t *upgr);

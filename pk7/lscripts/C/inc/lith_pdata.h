@@ -1,6 +1,3 @@
-// This file will be included both by DECORATE and C.
-// Please take care.
-
 enum
 {
    pdata_rifle_firemode,
@@ -9,7 +6,8 @@ enum
    pdata_plasma_laser,
    pdata_buttons,
    pdata_has_sigil,
-   pdata_EXPLOOOOOSIONS
+   pdata_EXPLOOOOOSIONS,
+   pdata_marathon_mode
 };
 
 

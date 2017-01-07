@@ -23,11 +23,11 @@ LITH_X(7, COR, CORPORATIONS, "Companies and Corporations")
 
 enum
 {
-   BIP_CATEGORY_MIN,
-#define LITH_X(n, id, name, capt) BIP_CATEGORY_##name = n,
+   BIPC_MIN,
+#define LITH_X(n, id, name, capt) BIPC_##name = n,
 #include "lith_bip.h"
-   BIP_CATEGORY_MAX,
-   BIP_CATEGORY_MAIN
+   BIPC_MAX,
+   BIPC_MAIN
 };
 
 typedef __str bip_unlocks_t[MAX_BIP_UNLOCKS];
@@ -43,8 +43,8 @@ typedef struct bippage_s
 typedef struct bip_s
 {
    // Stats
-   int categoryavail[BIP_CATEGORY_MAX];
-   int categorymax[BIP_CATEGORY_MAX];
+   int categoryavail[BIPC_MAX];
+   int categorymax[BIPC_MAX];
    int pageavail;
    int pagemax;
    
@@ -55,7 +55,7 @@ typedef struct bip_s
    int scroll;
    
    // Info
-   struct dlist_s *infogr[BIP_CATEGORY_MAX];
+   struct dlist_s *infogr[BIPC_MAX];
 } bip_t;
 
 [[__call("ScriptS")]]

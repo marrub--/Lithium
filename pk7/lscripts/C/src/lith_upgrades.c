@@ -4,6 +4,11 @@
 #include "lith_hudid.h"
 #include <math.h>
 
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
 #define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr)
 #define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr)
 #define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr)
@@ -14,13 +19,15 @@ A(ReflexWetw); D(ReflexWetw); U(ReflexWetw);
 A(lolsords);   D(lolsords);   U(lolsords);
                               U(Implying);
 A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
+A(7777777);    D(7777777);    U(7777777);
 
 #undef A
 #undef D
 #undef U
 
-// ---------------------------------------------------------------------------
-// Data.
+
+//----------------------------------------------------------------------------
+// Static Objects
 //
 
 #define A(n) Upgr_##n##_Activate
@@ -28,57 +35,53 @@ A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
 #define U(n) Upgr_##n##_Update
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
-// {"Name-------", Cost------, Auto-, BIP-----------, Callbacks...},
-// Body
-   {"JetBooster",  0         , true , "JetBooster",   A(JetBooster), D(JetBooster), U(JetBooster)},
-   {"ReflexWetw",  0         , true , "ReflexWetw",   A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
-   {"CyberLegs",   900000    , false, "CyberLegs",    A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
-   {"ReactArmour", 3200200   , false, "Yh0"},
-// Weapons
-   {"GaussShotty", 770430    , false, "ShotgunUpgr"},
-   {"RifleModes",  340100    , false, "RifleUpgr",    null, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   850000    , false, "LauncherUpgr"},
-   {"PlasLaser",   1400000   , false, "PlasmaUpgr"},
-   {"OmegaRail",   2600700   , false, "CannonUpgr"},
-// Extras
-   {"TorgueMode",  800000000 , false, null},
-   {"RetroWeps",   9999990   , false, null},
-   {"7777777",     823543000 , false, null},
-   {"lolsords",    1000000   , false, null,           A(lolsords), D(lolsords), U(lolsords)},
-// Downgrades
-   {"Implying",    0         , false, null,           null, null, U(Implying)},
-   {"SeriousMode", 0         , false, null},
+// {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Callbacks...},
+   {"JetBooster",  0         , true , "JetBooster",   UC_Body, A(JetBooster), D(JetBooster), U(JetBooster)},
+   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
+   {"CyberLegs",   900000    , false, "CyberLegs",    UC_Body, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
+   {"ReactArmour", 3200200   , false, "Yh0",          UC_Body},
+   
+   {"GaussShotty", 770430    , false, "ShotgunUpgr",  UC_Weap},
+   {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap, null, D(RifleModes), U(RifleModes)},
+   {"ChargeRPG",   850000    , false, "LauncherUpgr", UC_Weap},
+   {"PlasLaser",   1400000   , false, "PlasmaUpgr",   UC_Weap},
+   {"OmegaRail",   2600700   , false, "CannonUpgr",   UC_Weap},
+   
+   {"TorgueMode",  800000000 , false, null,           UC_Extr},
+   {"RetroWeps",   9999990   , false, null,           UC_Extr},
+   {"7777777",     82354300  , false, null,           UC_Extr, A(7777777),  D(7777777),  U(7777777)},
+   {"lolsords",    1000000   , false, null,           UC_Extr, A(lolsords), D(lolsords), U(lolsords)},
+   
+   {"Implying",    0         , false, null,           UC_Down, null, null, U(Implying)},
+   {"SeriousMode", 0         , false, null,           UC_Down},
 };
 
 #undef A
 #undef D
 #undef U
 
-// ---------------------------------------------------------------------------
-// Callbacks.
+
+//----------------------------------------------------------------------------
+// Static Functions
 //
 
-// --------------------------------------
+//---------------------------------------
 // JetBooster
 //
 
-static
-void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
+static void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul -= 0.15;
 }
 
-static
-void Upgr_JetBooster_Deactivate(player_t *p, upgrade_t *upgr)
+static void Upgr_JetBooster_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul += 0.15;
 }
 
-static
-void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
+static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
-   if(p->frozen)
-      return;
+   if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
@@ -88,7 +91,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      ACS_SetActorVelocity(0,
+      Lith_SetPlayerVelocity(p,
                            p->velx + (cosk(angle) * 16.0),
                            p->vely + (sink(angle) * 16.0),
                            10.0, false, true);
@@ -98,7 +101,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
    }
 }
 
-// --------------------------------------
+//---------------------------------------
 // ReflexWetw
 //
 
@@ -115,27 +118,23 @@ static void DOOOOODGE(player_t *p)
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
 }
 
-static
-void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
+static void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul -= 0.15;
    p->speedmul += 0.3;
    ACS_SetAirControl(0.77);
 }
 
-static
-void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
+static void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul += 0.15;
    p->speedmul -= 0.3;
    ACS_SetAirControl(0.00390625); // why god
 }
 
-static
-void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
+static void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
-   if(p->frozen)
-      return;
+   if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
@@ -150,7 +149,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
          ACS_PlaySound(0, "player/slide");
-         ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 32.0),
+         Lith_SetPlayerVelocity(p, p->velx + (cosk(angle) * 32.0),
                                  p->vely + (sink(angle) * 32.0),
                                  0,
                               false, true);
@@ -168,7 +167,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
-      ACS_SetActorVelocity(0, p->velx + (cosk(angle) * 4.0),
+      Lith_SetPlayerVelocity(p, p->velx + (cosk(angle) * 4.0),
                               p->vely + (sink(angle) * 4.0),
                               12.0,
                            false, true);
@@ -177,7 +176,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
    }
 }
 
-// --------------------------------------
+//---------------------------------------
 // CyberLegs
 //
 
@@ -210,18 +209,16 @@ static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
    }
 }
 
-// --------------------------------------
+//---------------------------------------
 // RifleModes
 //
 
-static
-void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
+static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->riflefiremode = 0;
 }
 
-static
-void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
+static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 {
    if(p->weapontype == weapon_rifle && p->riflefiremode == rifle_firemode_burst)
    {
@@ -237,38 +234,55 @@ void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
    }
 }
 
-// --------------------------------------
+//---------------------------------------
+// 7777777
+//
+
+static void Upgr_7777777_Activate(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetActorPropertyFixed(0, APROP_Gravity, 0.0);
+}
+
+static void Upgr_7777777_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetActorPropertyFixed(0, APROP_Gravity, 1.0);
+}
+
+static void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
+{
+   fixed vel = -1.5;
+   if(p->velz > 0) vel += p->velz;
+   Lith_SetPlayerVelocity(p, p->velx, p->vely, vel, false, true);
+}
+
+//---------------------------------------
 // lolsords
 //
 
-static
-void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
+static void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul += 0.2;
    upgr->user_str[0] = p->weaponclass;
    ACS_GiveInventory("Lith_Sword", 1);
 }
 
-static
-void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
+static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->scoremul -= 0.2;
    ACS_TakeInventory("Lith_Sword", 1);
    ACS_SetWeapon(upgr->user_str[0]);
 }
 
-static
-void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
+static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
 {
    ACS_SetWeapon("Lith_Sword");
 }
 
-// --------------------------------------
+//---------------------------------------
 // Implying
 //
 
-static
-void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
+static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
 {
    static __str strings[] = {
       "\Cd" ">implying",
@@ -289,6 +303,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
       "\Cd" ">>>>>>>>>>>>>>>",
       "\Cq" "<",
    };
+   
    static int const num_strings = sizeof(strings) / sizeof(*strings);
    static int const id_max = hid_implyingE - hid_implyingS;
    
@@ -309,8 +324,8 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
 }
 
 
-// ---------------------------------------------------------------------------
-// Scripts.
+//----------------------------------------------------------------------------
+// External Functions
 //
 
 void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
@@ -338,6 +353,7 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
       Upgr_ToggleActive(p, upgr);
    
    upgr->owned = true;
+   p->upgradesowned++;
 }
 
 bool Upgr_CanBuy(player_t *p, upgrade_t *upgr)
@@ -381,7 +397,5 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
    }
 }
 
-//
-//
-// ---------------------------------------------------------------------------
+// EOF
 

@@ -7,7 +7,7 @@ actor Lith_CannonBall
    Speed 42
    Gravity 0.55
    BounceType Doom
-   DamageType "PlayerMissile"
+   DamageType "Lith_PlayerMissile"
    SeeSound "weapons/cannon/fire"
    DeathSound "weapons/cannon/explode"
    

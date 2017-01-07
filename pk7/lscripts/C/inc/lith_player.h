@@ -96,11 +96,13 @@ typedef struct player_s
    bip_t bip;
    
    // Upgrades
-   upgrade_t upgrades[UPGR_MAX];
+   upgrades_t upgrades;
    
    // Statistics
    int weaponsheld;
    int secretsfound;
+   int itemsbought;
+   int upgradesowned;
    
    long healthsum;
    long healthused;
