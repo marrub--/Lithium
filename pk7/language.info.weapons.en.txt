@@ -1,0 +1,85 @@
+[enu default]
+
+LITH_TXT_INFO_SHORT_Pistol = "Pistol";
+LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
+LITH_TXT_INFO_DESCR_Pistol =
+   "Originally a vanilla mod Ka Haa'umi pistol manufactured by Omakeda, this "
+   "gun has been repaired enough times that it's practically indestructable "
+   "now.\n\n"
+   "Having used it for a whole decade, this pistol still services you "
+   "today, without fail.\n\n"
+   "Fires seven custom high-grade vacuum-enabled .374 Express rounds. Can be "
+   "reloaded easily, since you duct-taped a mag holder on the side. Features "
+   "a small CB-Scope similar to that of most other Omakeda weapons.";
+
+LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
+LITH_TXT_INFO_TITLE_Shotgun = "Hiku Mk.2 Shotgun";
+LITH_TXT_INFO_DESCR_Shotgun =
+   "Manufactured by Omakeda, this shotgun fires both regular 8-gauge buck "
+   "and a small plasma charge at the same time. This enables the shotgun to "
+   "be used both as a rifle with railgun-like capabilities and a "
+   "standard shotgun.\n\n"
+   "The plasma charge is powered by a small self-replenishing battery lodged "
+   "in the firing mechanism.\n\n"
+   "Most military models come with a CB-Scope.";
+
+LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
+LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun: Gauss";
+LITH_TXT_INFO_DESCR_ShotgunUpgr =
+   "During the short Avian-Sapiens war of\n1401 NE, A.O.F Inc. ran a line of "
+   "modified Hiku Mk.2 shotguns that removed the shell firing mechanism and "
+   "replaced it with a high-power photon condenser.\n\n"
+   "This both removes the need to chamber rounds and gives a nice boost in "
+   "fire rate. The gun is, essentially, completely different in use.";
+
+LITH_TXT_INFO_SHORT_Rifle = "Combat Rifle";
+LITH_TXT_INFO_TITLE_Rifle = "AllPoint 75-b Assault Rifle";
+LITH_TXT_INFO_DESCR_Rifle =
+   "AllPoint's 75-b model full-auto AR, produced for military and government "
+   "enforcer use. Also the single best-selling weapon in AllPoint's "
+   "catalog.\n\n"
+   "Firing 1,050 rounds per minute of .467 caliber teflon-plated death, "
+   "this beautiful gun works in both harsh atmospheres and vacuums thanks to "
+   "a super-tough exterior made out of titanium.\n\n"
+   "Comes with an inbuilt undermount-like grenade launcher. Holds only one "
+   "grenade at a time, but packs a great punch.";
+
+LITH_TXT_INFO_SHORT_RifleUpgr = "$LITH_TXT_UPGRADE_TITLE_RifleModes";
+LITH_TXT_INFO_TITLE_RifleUpgr = "AllPoint 75-c Modal Trigger";
+LITH_TXT_INFO_DESCR_RifleUpgr =
+   "Looking at the design failures in the 75-b, AllPoint seeked to make an "
+   "improvement by way of a modification. Thus, they gathered, they could "
+   "take parts from their 80-g Sniper Rifle and fit them snugly into a combat "
+   "rifle.\n\n"
+   "The 75-c Modal Trigger enables a third firing mode in which four two-"
+   "round bursts are fired sequentially. Using this mode also enables a "
+   "partial CB-Scope, which unfortunately does little more than obstruct "
+   "your view.";
+
+LITH_TXT_INFO_SHORT_Launcher = "Grenade Launcher";
+LITH_TXT_INFO_TITLE_Launcher = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";
+LITH_TXT_INFO_DESCR_Launcher =
+   "Boasting extreme speed, highly modifiable parts, and a sleek exterior "
+   "design, the D.671 will eradicate any foe you put against it.\n\n"
+   "After SYM4.3 put it on the market, this weapon was ultimately ignored "
+   "because of lack of advertising and early rumors regarding how weakly "
+   "rockets are initially propelled out the rifle.\n\n"
+   "This seems to use nanomachines or some similar technology to propel "
+   "rockets after they've been ignited and left the barrel; thus causing a "
+   "small lag before the rocket takes off fully.";
+
+LITH_TXT_INFO_SHORT_Plasma = "Plasma Rifle";
+LITH_TXT_INFO_TITLE_Plasma = "AllPoint 68-n Plasma Rifle";
+LITH_TXT_INFO_DESCR_Plasma =
+   "In 1025 NE a paramilitary group commissioned Maxim-Danil Defense Org to "
+   "make several high-grade weapons. After MDDO went defunct, their assets "
+   "were sold to several companies.\n\n"
+   "One of those weapons, owned now by AllPoint and sold as the \"68-n Plasma "
+   "Rifle\", is their second best selling weapon.\n\n"
+   "The primary fire mode emits 7.52tW per bolt at approximately 2,800 "
+   "bolts per minute, and the secondary emits 1,260 30.96tW penetrating bolts "
+   "per minute. This thing will make swiss cheese out of anything in its "
+   "path.";
+
+// EOF
+

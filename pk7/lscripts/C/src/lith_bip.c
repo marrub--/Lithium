@@ -31,7 +31,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("Rifle"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Launcher",     Unlocks("Sym43"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Plasma",       Unlocks("AllPoint"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Plasma",       Unlocks("AllPoint", "MDDO"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Cannon",       Unlocks("Cid"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "CannonUpgr",   Unlocks("Cannon"));
@@ -49,6 +49,8 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "AOF");
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Cid");
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "CulterDei");
+   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "MDDO",    Unlocks("OFMD"));
+   AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "OFMD");
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Omakeda", Unlocks("Earth"));
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
    AddToBIP(bip, BIP_CATEGORY_CORPORATIONS, "UnrealArms");

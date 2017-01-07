@@ -1,0 +1,51 @@
+[enu default]
+
+LITH_TXT_INFO_SHORT_AllPoint = "AllPoint";
+LITH_TXT_INFO_TITLE_AllPoint = "AllPoint Precision Firearms";
+LITH_TXT_INFO_DESCR_AllPoint =
+   "Established mid first-century NE, AllPoint present heavy sniper "
+   "rifles and plasma weapons for military and private use.\n\n"
+   "Despite producing mainly precision arms, their best-selling weaponry "
+   "is known for its terrible accuracy, but big punch.\n\n"
+   "Reguarding this infamy, its current CEO has this to say: \"Look here, "
+   "reporter guy, if you want me to talk about our weapons, I'll talk about "
+   "all of our fine armaments; but if you just want me to talk about our "
+   "'best-sellers', maybe you should just go look at the damned "
+   "advertisements.\"";
+
+LITH_TXT_INFO_SHORT_AOF = "A.O.F";
+LITH_TXT_INFO_TITLE_AOF = "A.O.F Inc.";
+LITH_TXT_INFO_DESCR_AOF =
+   "Not much is known about this shady corporation on the outside, and "
+   "reports from insiders never painted a very pretty picture.\n\n"
+   "In 1345 NE, a major attack on A.O.F left them nearly out of the picture. "
+   "However, with slow, concise social manipulation and government funding, "
+   "they finally made it back onto the market in 1370.\n\n"
+   "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
+   "robotics.";
+
+LITH_TXT_INFO_SHORT_Omakeda = "Omakeda";
+LITH_TXT_INFO_TITLE_Omakeda = "Omakeda Defense Co.";
+LITH_TXT_INFO_DESCR_Omakeda =
+   "Based in Hawaii, Omakeda Defense Co. produce self-defense and hunting "
+   "weaponry for civilians. Due to their high quality and fair pricing, "
+   "militaries and mercenaries around the world use their armaments as "
+   "well.\n\n"
+   "Known for their innovative firearm design, Omakeda is one of the "
+   "highest profiting, most popular firearms manufacturer on Earth.";
+
+LITH_TXT_INFO_SHORT_Sym43 = "SYM4.3";
+LITH_TXT_INFO_TITLE_Sym43 = "SYM4.3 WEAPONS INCORPORATED";
+LITH_TXT_INFO_DESCR_Sym43 =
+   "Currently beleived to be based somewhere in the Aetos-Vi solar system, "
+   "SYM4.3 create and distribute explosive weapons. For distribution, they "
+   "assign a standardized anonymous designation, and sell the weapons via "
+   "proxy in their name.\n\n"
+   "They have (according to their published sales reports) sold weaponry to "
+   "over three quarters of all currently known mercenary, military and "
+   "government bodies.\n\n"
+   "Weapons confirmed to be made by them have appeared in countless historic "
+   "battles, having existed for over 700 years now.";
+
+// EOF
+

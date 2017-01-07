@@ -1,0 +1,25 @@
+[enu default]
+
+LITH_TXT_INFO_SHORT_DurlaPrime = "Durla Prime";
+LITH_TXT_INFO_TITLE_DurlaPrime = "$LITH_TXT_INFO_SHORT_DurlaPrime";
+LITH_TXT_INFO_DESCR_DurlaPrime =
+   "A planet in the Aetos-Vi solar system whose dominant species is a "
+   "humanoid avian creature, given the name \"Peristeras\" or, "
+   "colloquially, \"Perists\".\n\n"
+   "When humans arrived on Durla Prime, the Peristeras were highly "
+   "frightened by the presence of an alien, sentient being, and war broke "
+   "loose. Refusing to attack, the humans ended the war a mere month later, "
+   "after learning to communicate with the avian species.";
+
+LITH_TXT_INFO_SHORT_Earth = "Earth";
+LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
+LITH_TXT_INFO_DESCR_Earth =
+   "The year is 1649 New Era. After an event that almost led to an apocalpse "
+   "in 3031, humanity collectively decided to mark a new era dedicated to "
+   "progressing travel and communications across the galaxy.\n\n"
+   "Earth has stayed largely the same as it was in the Common Era, thanks "
+   "to advances in science. By 1000 NE, most of the population on Earth "
+   "had moved to other inhabitable planets, but still a large population "
+   "remains on the blue planet.";
+
+// EOF
