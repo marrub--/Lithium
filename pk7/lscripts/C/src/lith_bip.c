@@ -28,7 +28,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "ShotgunUpgr",  Unlocks("Shotgun", "AOF", "DurlaPrime"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Rifle",        Unlocks("AllPoint"));
-   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("AllPoint", "Rifle"));
+   AddToBIP(bip, BIP_CATEGORY_WEAPONS, "RifleUpgr",    Unlocks("Rifle"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Launcher",     Unlocks("Sym43"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
    AddToBIP(bip, BIP_CATEGORY_WEAPONS, "Plasma",       Unlocks("AllPoint"));
