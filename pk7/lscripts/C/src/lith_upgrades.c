@@ -9,20 +9,20 @@
 // Static Functions
 //
 
-#define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr)
-#define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr)
-#define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr)
+#define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr);
+#define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
+#define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
 
-                              U(JetBooster);
-A(ReflexWetw); D(ReflexWetw); U(ReflexWetw);
-A(CyberLegs);  D(CyberLegs);  U(CyberLegs);
+                            U(JetBooster)
+A(ReflexWetw) D(ReflexWetw) U(ReflexWetw)
+A(CyberLegs)  D(CyberLegs)  U(CyberLegs)
 
-               D(RifleModes); U(RifleModes);
+              D(RifleModes) U(RifleModes)
 
-A(7777777);    D(7777777);    U(7777777);
-A(lolsords);   D(lolsords);   U(lolsords);
+A(7777777)    D(7777777)    U(7777777)
+A(lolsords)   D(lolsords)   U(lolsords)
 
-                              U(Implying);
+                            U(Implying)
 
 #undef A
 #undef D
@@ -312,6 +312,15 @@ static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    upgr->user_int[0] = id;
 }
 
+//
+
+// FIXME
+[[__call("ScriptS")]]
+static void HAXHAXHAX(player_t *p, upgrade_t *upgr)
+{
+   upgr->info->Update(p, upgr);
+}
+
 
 //----------------------------------------------------------------------------
 // External Functions
@@ -388,7 +397,7 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
    {
       upgrade_t *upgr = &p->upgrades[i];
       if(upgr->active && upgr->info->Update)
-         upgr->info->Update(p, upgr);
+         HAXHAXHAX(p, upgr);
    }
 }
 

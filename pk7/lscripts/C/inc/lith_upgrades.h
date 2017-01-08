@@ -35,7 +35,7 @@ enum
    UPGR_MAX
 };
 
-typedef void (*upgr_update_t)(struct player_s *, struct upgrade_s *);
+typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
 
 typedef struct upgradeinfo_s
 {
@@ -46,9 +46,7 @@ typedef struct upgradeinfo_s
    int category;
    fixed scoreadd;
    
-   upgr_update_t Activate;
-   upgr_update_t Deactivate;
-   upgr_update_t Update;
+   upgr_cb_t Activate, Deactivate, Update;
 } upgradeinfo_t;
 
 typedef struct upgrade_s
