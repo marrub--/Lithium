@@ -206,21 +206,16 @@ static void HUD_Jet(player_t *p)
 
 static void HUD_Weapons(player_t *p)
 {
+   DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, 0.1);
+   
    if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
-   {
-      HudMessageF("SMALLFNT", "Weapons");
-      HudMessageParams(HUDMSG_ALPHA, hid_weapontext, CR_LIGHTBLUE, 80.1, 192.2, 0.1, 0.3);
-      DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, 0.1);
-      
       for(int i = weapon_min; i < weapon_max; i++)
          if(p->weapons & (1 << i))
-         {
-            fixed x = (10 * (i - weapon_min)) + 80.1;
-            fixed y = 200.2;
-            DrawSpritePlain("H_W2", hid_weaponE + i, x, y, 0.1);
-            HudMessageF("SMALLFNT", "%i", i);
-            HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
-         }
+   {
+      fixed x = (10 * (i - weapon_min)) + 80.1;
+      fixed y = 200.2;
+      HudMessageF("INDEXFONT_DOOM", "%i", i);
+      HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
    }
 }
 
