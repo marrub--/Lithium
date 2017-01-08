@@ -202,6 +202,13 @@ void DList_Free(dlist_t *list)
    free(list);
 }
 
+void DList_Remove(dlist_t *dl, slist_t *list)
+{
+   if(dl->head == list) dl->head = dl->head->next;
+   if(dl->tail == list) dl->tail = dl->tail->prev;
+   SList_Destroy(list, 1);
+}
+
 //
 // ---------------------------------------------------------------------------
 

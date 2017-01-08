@@ -1,6 +1,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_pickups.h"
+#include "lith_hud.h"
 
 #define name(p) {sizeof(p) / sizeof(*p), p}
 
@@ -167,7 +168,7 @@ static struct pickupname_s const pickupnames[weapon_max] = {
 static size_t const pickupfmtnum   = sizeof(pickupfmt)   / sizeof(*pickupfmt);
 static size_t const uncertaintynum = sizeof(uncertainty) / sizeof(*uncertainty);
 
-void Lith_StupidPickup(int weapon)
+void Lith_StupidPickup(player_t *p, int weapon)
 {
    struct pickupname_s const *names = &pickupnames[weapon];
    
@@ -178,22 +179,22 @@ void Lith_StupidPickup(int weapon)
    if(pickupfmt[ifmt].flag & 2)
       ifmt = ACS_Random(0, pickupfmtnum - 1);
    
-   __str fmt = StrParam("\Cj%S", pickupfmt[ifmt].fmt);
-   int flag = pickupfmt[ifmt].flag;
+   __str fmt  = pickupfmt[ifmt].fmt;
+   int   flag = pickupfmt[ifmt].flag;
    
    if(flag & 1 && flag & 4)
-      Log(fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
+      Lith_Log(p, fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
    else if(flag & 1)
-      Log(fmt, names->ptr[iname], names->ptr[iname]);
+      Lith_Log(p, fmt, names->ptr[iname], names->ptr[iname]);
    else if(flag & 4)
-      Log(fmt, names->ptr[iname], uncertainty[iunc]);
+      Lith_Log(p, fmt, names->ptr[iname], uncertainty[iunc]);
    else
-      Log(fmt, names->ptr[iname]);
+      Lith_Log(p, fmt, names->ptr[iname]);
 }
 
-void Lith_IntelligentPickup(int weapon)
+void Lith_IntelligentPickup(player_t *p, int weapon)
 {
-   Log(pickupfmt[0].fmt, pickupnames[weapon].ptr[0]);
+   Lith_Log(p, pickupfmt[0].fmt, pickupnames[weapon].ptr[0]);
 }
 
 // EOF

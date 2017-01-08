@@ -23,7 +23,7 @@ actor Lith_DivisionSigilSprite
 actor Lith_DivisionSigil : CustomInventory
 {
    Inventory.Icon "DIVSIGI1"
-   Inventory.PickupMessage "$LITH_PKUP_SIGIL"
+   Inventory.PickupMessage ""
    Inventory.MaxAmount 1
    Tag "$LITH_INV_SIGIL"
    

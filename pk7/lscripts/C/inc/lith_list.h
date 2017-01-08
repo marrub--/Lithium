@@ -42,6 +42,7 @@ void DList_DeleteBack(dlist_t *list);
 size_t DList_GetLength(dlist_t *list);
 void DList_Destroy(dlist_t *list);
 void DList_Free(dlist_t *list);
+void DList_Remove(dlist_t *dl, slist_t *list);
 
 #endif
 

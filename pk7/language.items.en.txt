@@ -1,6 +1,5 @@
 [enu default]
 
-LITH_PKUP_SIGIL = "\cgDivision Sigil.";
 LITH_INV_SIGIL = "\cgDi\civi\cksi\cdon \chSi\ctgi\cal.";
 
 // EOF

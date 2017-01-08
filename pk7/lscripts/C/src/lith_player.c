@@ -98,6 +98,7 @@ static void Lith_PlayerDisconnect(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
    Lith_DeallocateBIP(&p->bip);
+   if(p->log)         DList_Free(p->log);
    if(p->hudstrstack) DList_Free(p->hudstrstack);
    memset(p, 0, sizeof(player_t));
 }
@@ -123,6 +124,9 @@ void Lith_GiveScore(player_t *p, score_t score)
    score *= p->scoremul;
    
    double mul = minmax(score / 10000.0f, 0.1f, 1.0f);
+   
+   if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
+      Lith_Log(p, "You gained brouzouf.");
    
    if(ACS_GetUserCVar(p->number, "lith_player_scoresound"))
       ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, 0.62f * mul, false, ATTN_STATIC);
@@ -274,6 +278,11 @@ static void Lith_ResetPlayer(player_t *p)
    
    //
    // Reset data
+   
+   if(p->log)
+      DList_Free(p->log);
+   
+   p->log = DList_Create();
    
    if(p->hudstrstack)
    {

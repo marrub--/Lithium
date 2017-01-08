@@ -4,8 +4,27 @@
 #include "lith_hudid.h"
 #include "lith_hud.h"
 
-// ---------------------------------------------------------------------------
-// HUD Scripts.
+#include <stdio.h>
+
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
+[[__call("ScriptS")]] static void HUD_Log(player_t *p);
+static void HUD_Jet(player_t *p);
+static void HUD_Weapons(player_t *p);
+static void HUD_Ammo(player_t *p);
+static void HUD_Health(player_t *p);
+static void HUD_SlideInd(player_t *p, int time, int hid);
+static void HUD_Armor(player_t *p);
+static void HUD_IndicatorBar(player_t *p, int time, __str image, int hid, int yadd);
+static void HUD_Score(player_t *p);
+static void HUD_KeyInd(player_t *p);
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
 //
 
 [[__call("ScriptS")]]
@@ -63,12 +82,7 @@ void Lith_RenderHUDStringStack(player_t *p)
    for(slist_t *rover = p->hudstrstack->head; rover; rover = rover->next, i++)
    {
       HudMessage("%S", rover->data.str);
-      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND,
-         hid_scope_stringstackS - i,
-         CR_RED,
-         320.2,
-         0.1 + (i * 9),
-         0.0, 0.5);
+      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 320.2, 0.1 + (i * 9), 0.0, 0.5);
    }
 }
 
@@ -100,7 +114,75 @@ void Lith_PlayerHUD(player_t *p)
    
    ACS_SetHudSize(320, 200);
    
-   // Jet
+   HUD_Log(p);
+   HUD_Jet(p);
+   HUD_Weapons(p);
+   HUD_Ammo(p);
+   HUD_Health(p);
+   HUD_IndicatorBar(p, time, weapongfx[p->weapontype], hid_healthbg_fx, 12);
+   HUD_SlideInd(p, time, hid_slideind_fx);
+   HUD_Armor(p);
+   HUD_IndicatorBar(p, time, armorgfx[p->armortype], hid_armorbg_fx, 0);
+   HUD_Score(p);
+   HUD_KeyInd(p);
+}
+
+void Lith_Log(player_t *p, __str fmt, ...)
+{
+   logdata_t *logdata = null;
+   
+   for(int i = 0; i < LOG_MAX; i++)
+      if(p->logdata[i].time == 0)
+         logdata = &p->logdata[i];
+   
+   if(!logdata)
+   {
+      logdata = p->log->head->data.vp;
+      DList_DeleteFront(p->log);
+   }
+   
+   va_list vl;
+   
+   ACS_BeginPrint(); va_start(vl, fmt); __vnprintf_str(fmt, vl); va_end(vl);
+   logdata->info = ACS_EndStrParam();
+   logdata->time = 140;
+   
+   DList_InsertBack(p->log, (listdata_t){.vp = logdata});
+}
+
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
+[[__call("ScriptS")]]
+static void HUD_Log(player_t *p)
+{
+   int i = 0;
+   ACS_SetHudSize(480, 300);
+   for(slist_t *rover = p->log->head; rover;)
+   {
+      logdata_t *logdata = rover->data.vp;
+      
+      if(logdata->time == 0)
+      {
+         slist_t *next = rover->next;
+         DList_Remove(p->log, rover);
+         rover = next;
+         continue;
+      }
+      else logdata->time--;
+      
+      HudMessageF("LOGFONT", "%S", logdata->info);
+      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT, hid_logE + i, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1);
+      
+      rover = rover->next;
+      i++;
+   }
+}
+
+static void HUD_Jet(player_t *p)
+{
    if(p->rocketcharge != rocketcharge_max)
    {
       fixed rocket = p->rocketcharge / (fixed)rocketcharge_max;
@@ -120,8 +202,10 @@ void Lith_PlayerHUD(player_t *p)
             0.1, 0.5, 0.5);
       }
    }
-   
-   // Weapon Display
+}
+
+static void HUD_Weapons(player_t *p)
+{
    if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
    {
       HudMessageF("SMALLFNT", "Weapons");
@@ -138,8 +222,10 @@ void Lith_PlayerHUD(player_t *p)
             HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
          }
    }
-   
-   // Ammo
+}
+
+static void HUD_Ammo(player_t *p)
+{
    if(p->weapontype == weapon_pistol ||
       p->weapontype == weapon_plasma ||
       p->weapontype == weapon_bfg)
@@ -164,8 +250,10 @@ void Lith_PlayerHUD(player_t *p)
       DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2 + addy, 0.1);
       DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_ammo, 320.2, 168.2 + (p->riflefiremode * 16) + addy, 0.1);
    }
-   
-   // Health
+}
+
+static void HUD_Health(player_t *p)
+{
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, 0.0);
    
    HudMessageF("BIGFONT", p->dead ? "---" : "%i", p->health);
@@ -185,29 +273,25 @@ void Lith_PlayerHUD(player_t *p)
          HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_PURPLE, 2.1, 200.2, 0.1, 0.2);
       }
    }
+}
+
+static void HUD_SlideInd(player_t *p, int time, int hid)
+{
+   int time11 = time % 11;
+   float slide = p->slidecharge / (float)slidecharge_max;
    
-   // Weapon indicator
-   {
-      int time78 = time % 78;
-      DrawSpriteFade(weapongfx[p->weapontype], hid_healthbg_fx, 77.1 - time78, 187.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0), 0.2, 0.7);
-   }
-   
-   // Slide indicator
-   {
-      int time11 = time % 11;
-      float slide = p->slidecharge / (float)slidecharge_max;
-      
-      DrawSprite(slide != 1.0f ? "H_D21" : "H_D24",
-         HUDMSG_FADEOUT | HUDMSG_ALPHA,
-         hid_slideind_fx,
-         77.1 - time11,
-         188.1 + (11 - time11),
-         (fixed)(0.3f * slide),
-         (fixed)(0.6f * slide),
-         0.8);
-   }
-   
-   // Armor
+   DrawSprite(slide != 1.0f ? "H_D21" : "H_D24",
+      HUDMSG_FADEOUT | HUDMSG_ALPHA,
+      hid,
+      77.1 - time11,
+      188.1 + (11 - time11),
+      (fixed)(0.3f * slide),
+      (fixed)(0.6f * slide),
+      0.8);
+}
+
+static void HUD_Armor(player_t *p)
+{
    DrawSpritePlain("H_B1", hid_armorbg, 0.1, 188.2, 0.0);
    
    HudMessageF("BIGFONT", "%i", p->armor);
@@ -224,47 +308,46 @@ void Lith_PlayerHUD(player_t *p)
       HudMessageF("BIGFONT", "%i", p->armor);
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, CR_PURPLE, 2.1, 188.2, 0.1, 0.2);
    }
+}
+
+static void HUD_IndicatorBar(player_t *p, int time, __str image, int hid, int yadd)
+{
+   int pos = (8 + time) % 78;
    
-   // Armor indicator
-   {
-      int time78 = (8 + time) % 78;
-      DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fx, 77.1 - time78, 175.1 + (time78 < 11 ? (11 - (time78 % 12)) : 0), 0.2, 0.7);
-   }
+   if(pos < 11) yadd += 11 - (pos % 12);
    
-   // Score
+   DrawSpriteFade(image, hid, 77.1 - pos, 175.1 + yadd, 0.2, 0.7);
+}
+
+static void HUD_Score(player_t *p)
+{
    if(ACS_GetUserCVar(p->number, "lith_hud_showscore"))
    {
-      HudMessageF("SMALLFNT", "Score");
-      HudMessageParams(HUDMSG_ALPHA, hid_scorelabel, CR_LIGHTBLUE, 320.2, 18.1, 0.1, 0.3);
-      
-      HudMessageF("SMALLFNT", "%lli", p->score);
-      HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 320.2, 22.1, 0.1);
+      HudMessageF("CNFONT", "%lli\Cnscr", p->score);
+      HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 320.2, 10.1, 0.1);
       
       if(p->score > p->old.score)
       {
-         HudMessageF("SMALLFNT", "%lli", p->score);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_ORANGE, 320.2, 22.1, 0.1, 0.2);
+         HudMessageF("CNFONT", "%lli\Cnscr", p->score);
+         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_ORANGE, 320.2, 10.1, 0.1, 0.2);
       }
       else if(p->score < p->old.score)
       {
          fixed ft = minmax((p->old.score - p->score) / 3000.0, 0.1, 3.0);
-         HudMessageF("SMALLFNT", "%lli", p->score);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_YELLOW, 320.2, 22.1, 0.1, ft);
+         HudMessageF("CNFONT", "%lli\Cnscr", p->score);
+         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_PURPLE, 320.2, 10.1, 0.1, ft);
       }
       
       if(p->scoreaccumtime > 0)
       {
-         HudMessageF("SMALLFNT", "%+lli", p->scoreaccum);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scoreaccum, CR_WHITE, 320.2, 30.1, 0.1, 0.4);
-      }
-      else if(p->scoreaccumtime < 0)
-      {
-         HudMessageF("SMALLFNT", "%lli", p->score);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_PURPLE, 320.2, 22.1, 0.1, 0.2);
+         HudMessageF("CNFONT", "%+lli", p->scoreaccum);
+         HudMessageParams(HUDMSG_FADEOUT, hid_scoreaccum, CR_WHITE, 320.2, 20.1, 0.1, 0.4);
       }
    }
-   
-   // Keys
+}
+
+static void HUD_KeyInd(player_t *p)
+{
    if(p->keys.redskull)    DrawSpritePlain("H_KS1", hid_key_redskull, 8.1, 144.1, 0.1);
    if(p->keys.yellowskull) DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
    if(p->keys.blueskull)   DrawSpritePlain("H_KS3", hid_key_blueskull, 8.1, 160.1, 0.1);
@@ -273,7 +356,5 @@ void Lith_PlayerHUD(player_t *p)
    if(p->keys.bluecard)    DrawSpritePlain("H_KC3", hid_key_blue, 0.1, 156.1, 0.1);
 }
 
-
-//
-// ---------------------------------------------------------------------------
+// EOF
 

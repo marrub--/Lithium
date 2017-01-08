@@ -3,14 +3,11 @@
 
 enum
 {
-   //
    // hid_base         to hid_base + 99    reserved for Testing
    // hid_base +   100 to hid_base + 39999 reserved for CBI
    // hid_base + 40000 to hid_base + 40999 reserved for Misc.
    // hid_base + 41000 to hid_base + 41999 reserved for Scope
    // hid_base + 42000 to hid_base + 42999 reserved for HUD
-   //
-   
    hid_base = 500000,
    
    // Testing
@@ -64,7 +61,10 @@ enum
    hid_base_hud = hid_base + 42000,
    hid_end_hud  = hid_base + 42999,
    
-   hid_jetE = hid_base_hud,
+   hid_logE = hid_base_hud,
+   hid_logS = hid_logE + 20,
+   
+   hid_jetE,
    hid_jetS = hid_jetE + 15,
    hid_jettext,
    hid_jetbg,
@@ -99,7 +99,6 @@ enum
    hid_scorehit,
    hid_score,
    hid_scoreaccum,
-   hid_scorelabel,
    
    hid_key_blue,
    hid_key_yellow,

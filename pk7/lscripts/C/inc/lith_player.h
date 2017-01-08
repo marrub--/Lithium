@@ -1,14 +1,15 @@
 #ifndef LITH_PLAYER_H
 #define LITH_PLAYER_H
 
-#define MAX_PLAYERS 8
-
 #include "lith_weapons.h"
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
 #include "lith_sigil.h"
 #include "lith_bip.h"
+
+#define MAX_PLAYERS 8
+#define LOG_MAX 10
 
 enum
 {
@@ -53,6 +54,12 @@ typedef struct keycards_s
    bool blueskull   : 1;
 } keycards_t;
 
+typedef struct logdata_s
+{
+   __str info;
+   int time;
+} logdata_t;
+
 // 7/4/2016: That's a lot of data!
 // edit 9/4/2016: Holy shit, that's really a lot of data!
 // edit 7/5/2016: JESUS TAKE THE WHEEL
@@ -67,6 +74,8 @@ typedef struct player_s
    int tid;
    int number;
    int cameratid;
+   logdata_t logdata[LOG_MAX];
+   struct dlist_s *log;
    
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;

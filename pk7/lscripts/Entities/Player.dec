@@ -36,22 +36,6 @@ actor Lith_TimeHax2 : PowerTimeFreezer
 }
 // end
 
-actor Lith_FakeItemPickup : Inventory
-{
-   Inventory.MaxAmount 0x7FFFFFFF
-   Inventory.PickupMessage "You sold the weapon for Score."
-   Inventory.PickupSound ""
-   Radius 99
-   Height 99
-   
-   states
-   {
-   Spawn:
-      FIST A 1 bright
-      loop
-   }
-}
-
 actor Lith_ExplodoBoots
 {
    DamageType "Lith_PlayerMissile"

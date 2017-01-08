@@ -4,6 +4,7 @@
 #include "lith_player.h"
 #include "lith_pickups.h"
 #include "lith_hudid.h"
+#include "lith_hud.h"
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -51,9 +52,9 @@ void Lith_WeaponPickup(int user_pickupparm, int user_tid)
    }
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
-      Lith_StupidPickup(user_pickupparm);
+      Lith_StupidPickup(p, user_pickupparm);
    else
-      Lith_IntelligentPickup(user_pickupparm);
+      Lith_IntelligentPickup(p, user_pickupparm);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -179,8 +180,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
    if(!(p->weapons & (1 << user_pickupparm)))
       return true;
    
-   ACS_SpawnForced("Lith_FakeItemPickup", p->x, p->y, p->z);
-   Lith_SetPlayerVelocity(p, 0.001, 0, 0, true, false);
+   Lith_Log(p, "You sold the weapon for Score.");
    Lith_GiveScore(p, 11100 * user_pickupparm);
    
    ACS_Thing_Remove(user_spritetid);

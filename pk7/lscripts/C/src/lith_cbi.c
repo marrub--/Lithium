@@ -278,7 +278,12 @@ void Lith_PlayerUpdateCBI(player_t *p)
       // Cursor position state
       gst->cur.x -= p->yawv * 800.0f;
       
-      if(ACS_GetUserCVar(p->number, "lith_player_invertmouse"))
+      bool inverted = ACS_GetUserCVar(p->number, "lith_player_invertmouse");
+      
+      if(ACS_GameType() == GAME_SINGLE_PLAYER)
+         inverted = inverted || ACS_GetCVar("invertmouse");
+      
+      if(inverted)
          gst->cur.y += p->pitchv * 800.0f;
       else
          gst->cur.y -= p->pitchv * 800.0f;
@@ -307,7 +312,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(GUI_Button(GUI_ID("Exit"), gst, &hid, 296, 13, null, false, &gui_exitparm))
          Lith_KeyOpenCBI();
       
-      static __str tabnames[5] = {"Upgrades", "Shop", "Info ", "Statistics", "Settings"};
+      static __str tabnames[5] = {"Upgrades", "Shop", "Info", "Statistics", "Settings"};
       for(int i = 0; i < 5; i++)
          if(GUI_Button(GUI_ID(tabnames[i]), gst, &hid, 13 + (GUI_TAB_W * i), 13, tabnames[i], cbi->gst.tabst[CBI_TABST_MAIN] == i, &gui_tabparm))
             cbi->gst.tabst[CBI_TABST_MAIN] = i;
