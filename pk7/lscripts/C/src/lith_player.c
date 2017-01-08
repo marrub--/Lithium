@@ -197,6 +197,7 @@ static void Lith_PlayerUpdateData(player_t *p)
    p->name        = StrParam("%tS", p->number);
    p->weaponclass = ACS_GetWeapon();
    p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
+   p->maxarmor    = ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT);
    
    Lith_GetWeaponType(p);
    Lith_GetArmorType(p);

@@ -1,0 +1,262 @@
+actor Lith_CustomInventory : CustomInventory
+{
+   Inventory.PickupMessage ""
+   
+   states
+   {
+   Nope:
+      TNT1 A 0
+      fail
+   }
+}
+
+actor Lith_AllMap : Lith_CustomInventory replaces Allmap
+{
+   Inventory.PickupSound "misc/p_pkup"
+   +COUNTITEM
+   +INVENTORY.FANCYPICKUPSOUND
+   
+   states
+   {
+   Spawn:
+      PMAP ABCDCB 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_allmap)
+      TNT1 A 0 A_GiveInventory("Allmap")
+      stop
+   }
+}
+
+actor Lith_ArmorBonus : Lith_CustomInventory replaces ArmorBonus
+{
+   +COUNTITEM
+   
+   states
+   {
+   Spawn:
+      BON2 ABCDCB 6
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_armorbonus)
+      TNT1 A 0 A_GiveInventory("ArmorBonus")
+      stop
+   }
+}
+
+actor Lith_Backpack : Lith_ScoreItem replaces Backpack
+{
+   states
+   {
+   Spawn:
+      BPAK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Backpack)
+      BPAK A 0 A_GiveInventory("Lith_RocketAmmo", 20)
+      BPAK A 0 A_GiveInventory("Lith_PlasmaAmmo", 2000)
+      BPAK A 0 A_GiveInventory("Lith_CannonAmmo", 4)
+      BPAK A -1
+      stop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_backpack)
+      goto Super::Pickup
+   }
+}
+
+actor Lith_Berserk : Lith_CustomInventory replaces Berserk
+{
+   Inventory.PickupSound "misc/p_pkup"
+   +COUNTITEM
+   +INVENTORY.FANCYPICKUPSOUND
+   
+   states
+   {
+   Spawn:
+      PSTR A -1
+      stop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_berserk)
+      TNT1 A 0 A_GiveInventory("Berserk")
+      stop
+   }
+}
+
+actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
+{
+   states
+   {
+   Spawn:
+      ARM2 A 6
+      ARM2 B 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 200), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_bluearmor)
+      TNT1 A 0 A_GiveInventory("BlueArmor")
+      stop
+   }
+}
+
+actor Lith_BlurSphere : Lith_CustomInventory replaces BlurSphere
+{
+   +COUNTITEM
+   +VISIBILITYPULSE
+   
+   states
+   {
+   Spawn:
+      PINS ABCD 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_blursphere)
+      TNT1 A 0 A_GiveInventory("BlurSphere")
+      stop
+   }
+}
+
+actor Lith_GreenArmor : Lith_CustomInventory replaces GreenArmor
+{
+   states
+   {
+   Spawn:
+      ARM1 A 6
+      ARM1 B 7 bright
+      loop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 100), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_greenarmor)
+      TNT1 A 0 A_GiveInventory("GreenArmor")
+      stop
+   }
+}
+
+actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
+{
+   +COUNTITEM
+   
+   states
+   {
+   Spawn:
+      BON1 ABCDCB 6
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_healthbonus)
+      TNT1 A 0 A_GiveInventory("HealthBonus")
+      stop
+   }
+}
+
+actor Lith_Infrared : Lith_CustomInventory replaces Infrared
+{
+   +COUNTITEM
+   
+   states
+   {
+   Spawn:
+      PVIS A 6 bright
+      PVIS B 6
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_infrared)
+      TNT1 A 0 A_GiveInventory("Infrared")
+      stop
+   }
+}
+
+actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces InvulnerabilitySphere
+{
+   +COUNTITEM
+   +INVENTORY.BIGPOWERUP
+   
+   states
+   {
+   Spawn:
+      PINV ABCD 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_invulnerability)
+      TNT1 A 0 A_GiveInventory("InvulnerabilitySphere")
+      stop
+   }
+}
+
+actor Lith_Medikit : Lith_CustomInventory replaces Medikit
+{
+   states
+   {
+   Spawn:
+      MEDI A -1
+      stop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 25), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_medikit)
+      TNT1 A 0 A_GiveInventory("Medikit")
+      stop
+   }
+}
+
+actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
+{
+   Inventory.PickupSound "misc/p_pkup"
+   +COUNTITEM
+   
+   states
+   {
+   Spawn:
+      MEGA ABCD 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_megasphere)
+      TNT1 A 0 A_GiveInventory("BlueArmor")
+      TNT1 A 0 A_GiveInventory("MegasphereHealth")
+      stop
+   }
+}
+
+actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
+{
+   states
+   {
+   Spawn:
+      SUIT A -1 bright
+      stop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_radsuit)
+      TNT1 A 0 A_GiveInventory("RadSuit")
+      stop
+   }
+}
+
+actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
+{
+   Inventory.PickupSound "misc/p_pkup"
+   +COUNTITEM
+   +INVENTORY.FANCYPICKUPSOUND
+   
+   states
+   {
+   Spawn:
+      SOUL ABCDCB 6 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_soulsphere)
+      TNT1 A 0 A_GiveInventory("SoulSphere")
+      stop
+   }
+}
+
+actor Lith_Stimpack : Lith_CustomInventory replaces Stimpack
+{
+   states
+   {
+   Spawn:
+      STIM A -1
+      stop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 10), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_stimpack)
+      TNT1 A 0 A_GiveInventory("Stimpack")
+      stop
+   }
+}
+
+// EOF
+

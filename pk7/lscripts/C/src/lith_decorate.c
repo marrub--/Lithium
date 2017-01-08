@@ -215,6 +215,21 @@ int Lith_OscillateN(int n)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
+bool Lith_CheckHealth(int n)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   return p->health < p->maxhealth - n;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_CheckArmor(int n)
+{
+   player_t *p = &players[ACS_PlayerNumber()];
+   return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
+}
+
+#if 0
+[[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetSigil()
 {
    ACS_SetResultValue(1); // q_q
@@ -265,6 +280,7 @@ int Lith_GetSigil()
    
    return 1; // q_q
 }
+#endif
 
 // EOF
 

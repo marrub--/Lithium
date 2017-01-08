@@ -1,0 +1,21 @@
+[enu default]
+
+LITH_TXT_LOG_DEFAULT     = ":^)";
+LITH_TXT_LOG_ALLMAP      = ">>>>> CB-Map acquired.";
+LITH_TXT_LOG_ARMORBONUS  = ">>> Armor Bonus";
+LITH_TXT_LOG_BACKPACK    = ">>>>> Backpack and Discount Card acquired.";
+LITH_TXT_LOG_BERSERK     = ">>>>> B\cgeRs-rk \\\\\\\\-[ ~error09671 ]";
+LITH_TXT_LOG_BLUEARMOR   = ">>> Blue Armor";
+LITH_TXT_LOG_BLURSPHERE  = ">>>>> Blur Sphere acquired.";
+LITH_TXT_LOG_GREENARMOR  = ">>> Green Armor";
+LITH_TXT_LOG_HEALTHBONUS = ">>> Health Bonus";
+LITH_TXT_LOG_INFRARED    = ">>>>> CB-Goggles acquired.";
+LITH_TXT_LOG_INVULNERABILITY = "\cj>>>>>> Invulnerability!";
+LITH_TXT_LOG_MEDIKIT     = ">>> Medikit";
+LITH_TXT_LOG_MEGASPHERE  = ">>>> Mega Sphere!";
+LITH_TXT_LOG_RADSUIT     = ">>>>> Radiation Shielding Suit acquired.";
+LITH_TXT_LOG_SOULSPHERE  = ">>>> Super Charge!";
+LITH_TXT_LOG_STIMPACK    = ">>> Stimpak";
+
+// EOF
+

@@ -4,16 +4,11 @@
 #include "lith_hudid.h"
 #include "lith_hud.h"
 
-#include <stdio.h>
-
-#define LOG_TIME 140
-
 
 //----------------------------------------------------------------------------
 // Static Functions
 //
 
-[[__call("ScriptS")]] static void HUD_Log(player_t *p);
 [[__call("ScriptS")]] static void HUD_StringStack(player_t *p);
 [[__call("ScriptS")]] static void HUD_Waves(player_t *p);
 static void HUD_Scope(player_t *p);
@@ -63,7 +58,7 @@ void Lith_PlayerHUD(player_t *p)
    
    ACS_SetHudSize(320, 200);
    
-   HUD_Log(p);
+   Lith_HUD_Log(p);
    HUD_Scope(p);
    HUD_Jet(p);
    HUD_Weapons(p);
@@ -77,71 +72,10 @@ void Lith_PlayerHUD(player_t *p)
    HUD_KeyInd(p);
 }
 
-//
-// Lith_Log
-//
-void Lith_Log(player_t *p, __str fmt, ...)
-{
-   logdata_t *logdata = null;
-   
-   for(int i = 0; i < LOG_MAX; i++)
-      if(p->logdata[i].time == 0)
-         logdata = &p->logdata[i];
-   
-   if(!logdata)
-   {
-      logdata = p->log->head->data.vp;
-      DList_DeleteFront(p->log);
-   }
-   
-   va_list vl;
-   
-   ACS_BeginPrint(); va_start(vl, fmt); __vnprintf_str(fmt, vl); va_end(vl);
-   logdata->info = ACS_EndStrParam();
-   logdata->time = LOG_TIME;
-   
-   DList_InsertBack(p->log, (listdata_t){.vp = logdata});
-}
-
 
 //----------------------------------------------------------------------------
 // Static Functions
 //
-
-//
-// HUD_Log
-//
-[[__call("ScriptS")]]
-static void HUD_Log(player_t *p)
-{
-   int i = 0;
-   ACS_SetHudSize(480, 300);
-   for(slist_t *rover = p->log->head; rover;)
-   {
-      logdata_t *logdata = rover->data.vp;
-      
-      if(logdata->time == 0)
-      {
-         slist_t *next = rover->next;
-         DList_Remove(p->log, rover);
-         rover = next;
-         continue;
-      }
-      else logdata->time--;
-      
-      HudMessageF("LOGFONT", "%S", logdata->info);
-      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT, hid_logE + i, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1);
-      
-      if(logdata->time > LOG_TIME - 10)
-      {
-         HudMessageF("LOGFONT", "%S", logdata->info);
-         HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1);
-      }
-      
-      rover = rover->next;
-      i++;
-   }
-}
 
 //
 // HUD_StringStack

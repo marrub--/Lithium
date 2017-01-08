@@ -179,7 +179,7 @@ void Lith_StupidPickup(player_t *p, int weapon)
    if(pickupfmt[ifmt].flag & 2)
       ifmt = ACS_Random(0, pickupfmtnum - 1);
    
-   __str fmt  = pickupfmt[ifmt].fmt;
+   __str fmt  = StrParam(">%S", pickupfmt[ifmt].fmt);
    int   flag = pickupfmt[ifmt].flag;
    
    if(flag & 1 && flag & 4)
@@ -194,7 +194,7 @@ void Lith_StupidPickup(player_t *p, int weapon)
 
 void Lith_IntelligentPickup(player_t *p, int weapon)
 {
-   Lith_Log(p, pickupfmt[0].fmt, pickupnames[weapon].ptr[0]);
+   Lith_Log(p, StrParam(">%S", pickupfmt[0].fmt), pickupnames[weapon].ptr[0]);
 }
 
 // EOF

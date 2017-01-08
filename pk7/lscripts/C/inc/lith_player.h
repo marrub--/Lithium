@@ -7,9 +7,9 @@
 #include "lith_pdata.h"
 #include "lith_sigil.h"
 #include "lith_bip.h"
+#include "lith_log.h"
 
 #define MAX_PLAYERS 8
-#define LOG_MAX 7
 
 #define Lith_ForPlayer() \
    for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++) \
@@ -64,12 +64,6 @@ typedef struct keycards_s
    bool blueskull   : 1;
 } keycards_t;
 
-typedef struct logdata_s
-{
-   __str info;
-   int time;
-} logdata_t;
-
 // 7/4/2016: That's a lot of data!
 // edit 9/4/2016: Holy shit, that's really a lot of data!
 // edit 7/5/2016: JESUS TAKE THE WHEEL
@@ -93,6 +87,7 @@ typedef struct player_s
    
    // State without delta
    int maxhealth;
+   int maxarmor;
    fixed jumpheight;
    fixed viewheight;
    

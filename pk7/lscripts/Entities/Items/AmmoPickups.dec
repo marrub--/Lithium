@@ -91,19 +91,5 @@ actor Lith_CellPack : Lith_ScoreItem replaces CellPack
    }
 }
 
-actor Lith_Backpack : Lith_ScoreItem replaces Backpack
-{
-   states
-   {
-   Spawn:
-      BPAK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Backpack)
-      BPAK A 0 A_GiveInventory("Lith_RocketAmmo", 20)
-      BPAK A 0 A_GiveInventory("Lith_PlasmaAmmo", 2000)
-      BPAK A 0 A_GiveInventory("Lith_CannonAmmo", 4)
-      BPAK A -1
-      stop
-   }
-}
-
 // EOF
 

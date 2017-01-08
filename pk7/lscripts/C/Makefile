@@ -36,6 +36,7 @@ MAIN_SOURCES= \
 	$(SRC)/lith_player.c   \
 	$(SRC)/lith_world.c    \
 	$(SRC)/lith_hud.c      \
+	$(SRC)/lith_log.c      \
 	$(SRC)/lith_decorate.c \
 	$(SRC)/lith_pickups.c  \
 	$(SRC)/lith_upgrades.c \
