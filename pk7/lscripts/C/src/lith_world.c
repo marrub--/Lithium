@@ -9,8 +9,9 @@
 static
 void Lith_World(void)
 {
-   int maxsecrets = ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
    int prevsecrets = 0;
+   
+   ACS_SetAirControl(0.77);
    
    ACS_Delay(1);
    

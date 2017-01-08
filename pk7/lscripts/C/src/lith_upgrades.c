@@ -115,13 +115,11 @@ static void DOOOOODGE(player_t *p)
 static void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul += 0.3;
-   ACS_SetAirControl(0.77);
 }
 
 static void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.3;
-   ACS_SetAirControl(0.00390625); // why god
 }
 
 [[__call("ScriptS")]]

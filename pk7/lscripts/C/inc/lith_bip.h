@@ -1,11 +1,11 @@
 #if defined(LITH_X)
 
 LITH_X(0, WEP, WEAPONS,      "Weapons")
-LITH_X(1, ENE, ENEMIES,      "Enemies")
-LITH_X(2, ITE, ITEMS,        "Items")
+//LITH_X(1, ENE, ENEMIES,      "Enemies")
+//LITH_X(2, ITE, ITEMS,        "Items")
 LITH_X(3, UPG, UPGRADES,     "Upgrades")
-LITH_X(4, ABI, ABILITIES,    "Abilities")
-LITH_X(5, YOU, YOURSELF,     "Yourself")
+//LITH_X(4, ABI, ABILITIES,    "Abilities")
+//LITH_X(5, YOU, YOURSELF,     "Yourself")
 LITH_X(6, PLA, PLACES,       "Places")
 LITH_X(7, COR, CORPORATIONS, "Companies and Corporations")
 
