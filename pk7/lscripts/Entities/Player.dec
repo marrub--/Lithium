@@ -39,7 +39,7 @@ actor Lith_TimeHax2 : PowerTimeFreezer
 actor Lith_FakeItemPickup : Inventory
 {
    Inventory.MaxAmount 0x7FFFFFFF
-   Inventory.PickupMessage "You siphoned some score from the weapon."
+   Inventory.PickupMessage "You sold the weapon for Score."
    Inventory.PickupSound ""
    Radius 99
    Height 99

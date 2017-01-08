@@ -275,10 +275,10 @@ void Lith_PlayerUpdateCBI(player_t *p)
       gui_state_t *gst = &cbi->gst.ggst;
       
       //
-      // Cursor position state.
+      // Cursor position state
       gst->cur.x -= p->yawv * 800.0f;
       
-      if(ACS_GetCVar("invertmouse"))
+      if(ACS_GetUserCVar(p->number, "lith_player_invertmouse"))
          gst->cur.y += p->pitchv * 800.0f;
       else
          gst->cur.y -= p->pitchv * 800.0f;
@@ -287,7 +287,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       gst->cur.y = minmax(gst->cur.y, 0, 200);
       
       //
-      // Click state.
+      // Click state
       gst->cur.click = GUI_CLICK_NONE;
       
       if(p->buttons & BT_ATTACK)
@@ -297,7 +297,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
          gst->cur.click |= GUI_CLICK_RIGHT;
       
       //
-      // GUI.
+      // GUI
       int hid = hid_end_cbi;
       
       GUI_Begin(gst);
@@ -307,7 +307,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(GUI_Button(GUI_ID("Exit"), gst, &hid, 296, 13, null, false, &gui_exitparm))
          Lith_KeyOpenCBI();
       
-      static __str tabnames[5] = { "Upgrades", "Shop", "BIP ", "Statistics", "Settings" };
+      static __str tabnames[5] = {"Upgrades", "Shop", "Info ", "Statistics", "Settings"};
       for(int i = 0; i < 5; i++)
          if(GUI_Button(GUI_ID(tabnames[i]), gst, &hid, 13 + (GUI_TAB_W * i), 13, tabnames[i], cbi->gst.tabst[CBI_TABST_MAIN] == i, &gui_tabparm))
             cbi->gst.tabst[CBI_TABST_MAIN] = i;

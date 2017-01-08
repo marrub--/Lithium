@@ -39,7 +39,7 @@ void Lith_RenderHUDWaves(player_t *p)
    }
    
    ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-   ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_scopealpha"));
+   ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
    
    // Triangle
    pos = (5 + timer) % 160;
@@ -100,13 +100,6 @@ void Lith_PlayerHUD(player_t *p)
    
    ACS_SetHudSize(320, 200);
    
-   // ACK
-   if(ACS_PlayerCount() > 1 && ACS_GetCVar("lith_sv_ack"))
-   {
-      HudMessageF("SMALLFNT", "Out of sync with: ZDoom");
-      HudMessageParams(HUDMSG_PLAIN, hid_ack, CR_GREEN, 0.5, 0.0, 0.1);
-   }
-   
    // Jet
    if(p->rocketcharge != rocketcharge_max)
    {
@@ -129,7 +122,7 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Weapon Display
-   if(ACS_GetCVar("lith_hud_showweapons"))
+   if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
    {
       HudMessageF("SMALLFNT", "Weapons");
       HudMessageParams(HUDMSG_ALPHA, hid_weapontext, CR_LIGHTBLUE, 80.1, 192.2, 0.1, 0.3);
@@ -239,7 +232,7 @@ void Lith_PlayerHUD(player_t *p)
    }
    
    // Score
-   if(ACS_GetCVar("lith_hud_showscore"))
+   if(ACS_GetUserCVar(p->number, "lith_hud_showscore"))
    {
       HudMessageF("SMALLFNT", "Score");
       HudMessageParams(HUDMSG_ALPHA, hid_scorelabel, CR_LIGHTBLUE, 320.2, 18.1, 0.1, 0.3);

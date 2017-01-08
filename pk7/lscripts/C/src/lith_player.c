@@ -6,6 +6,7 @@
 #include "lith_cbi.h"
 #include <math.h>
 
+
 //----------------------------------------------------------------------------
 // External Objects
 //
@@ -54,20 +55,6 @@ static void Lith_PlayerEntry(void)
    
    Lith_ResetPlayer(p);
    
-   if(ACS_GetCVar("__lith_debug_on"))
-   {
-      p->score += 0xFFFFFFFFFFFFFFFFll;
-      for(int i = weapon_min; i < weapon_max; i++)
-         if(weaponclasses[i] != null)
-            ACS_GiveInventory(weaponclasses[i], 1);
-      
-      for(int i = 0; i < UPGR_MAX; i++)
-         if(!p->upgrades[i].owned)
-            Upgr_SetOwned(p, &p->upgrades[i]);
-      
-      Lith_UnlockAllBIPPages(&p->bip);
-   }
-   
    while(p->active)
    {
       Lith_PlayerUpdateData(p);
@@ -97,23 +84,7 @@ static void Lith_PlayerEntry(void)
 static void Lith_PlayerDeath(void)
 {
    player_t *p = &players[ACS_PlayerNumber()];
-   
    p->dead = true;
-   
-   // :^)
-   p->score = 0;
-   p->cbi.open = false;
-   p->staticinit = false;
-   
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
-      
-      if(upgr->active)
-         Upgr_ToggleActive(p, upgr);
-      
-      upgr->owned = false;
-   }
 }
 
 [[__call("ScriptS"), __script("Respawn")]]
@@ -125,7 +96,10 @@ static void Lith_PlayerRespawn(void)
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   memset(&players[ACS_PlayerNumber()], 0, sizeof(player_t));
+   player_t *p = &players[ACS_PlayerNumber()];
+   Lith_DeallocateBIP(&p->bip);
+   if(p->hudstrstack) DList_Free(p->hudstrstack);
+   memset(p, 0, sizeof(player_t));
 }
 
 [[__call("ScriptS"), __script("Unloading")]]
@@ -276,24 +250,30 @@ static void Lith_PlayerRunScripts(player_t *p)
 //
 static void Lith_ResetPlayer(player_t *p)
 {
+   //
+   // Constant data
+   
    p->active = true;
    p->dead = false;
    p->number = ACS_PlayerNumber();
-   ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-   
-   ACS_SpawnForced("Lith_CameraHax", ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0), p->cameratid = ACS_UniqueTID());
-   ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
-   
-   p->viewheight = ACS_GetActorViewHeight(0);
-   
-   // pls not exit map with murder thingies out
-   // is bad practice
-   ACS_TakeInventory("Lith_PistolScopedToken", 999);
-   ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    
    // i cri tears of pain for APROP_SpawnHealth
-   if(!p->maxhealth)
-      p->maxhealth = ACS_GetActorProperty(0, APROP_Health);
+   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
+   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
+   
+   //
+   // Map-static data
+   
+   memset(&p->old, 0, sizeof(player_delta_t));
+   ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   
+   // This keeps spawning more camera actors when you die, but that should be
+   // OK as long as you don't die 2 billion times.
+   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid = ACS_UniqueTID());
+   ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
+   
+   //
+   // Reset data
    
    if(p->hudstrstack)
    {
@@ -301,11 +281,16 @@ static void Lith_ResetPlayer(player_t *p)
       p->hudstrstack = null;
    }
    
-   p->old.scopetoken = false;
+   // pls not exit map with murder thingies out
+   // is bad practice
+   ACS_TakeInventory("Lith_PistolScopedToken",  999);
+   ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    
-   p->slidecharge = slidecharge_max;
+   p->slidecharge  = slidecharge_max;
    p->rocketcharge = rocketcharge_max;
    p->leaped = false;
+   p->cbi.open = false;
+   p->frozen = 0;
    
    p->bobyaw = 0.0f;
    p->bobpitch = 0.0f;
@@ -316,6 +301,9 @@ static void Lith_ResetPlayer(player_t *p)
    p->scoreaccum = 0;
    p->scoremul = 1.3;
    
+   //
+   // Static data
+   
    if(!p->staticinit)
    {
       Lith_PlayerInitBIP(p);
@@ -324,6 +312,20 @@ static void Lith_ResetPlayer(player_t *p)
    }
    else
       Lith_PlayerReinitUpgrades(p);
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+   {
+      p->score += 0xFFFFFFFFFFFFFFFFll;
+      for(int i = weapon_min; i < weapon_max; i++)
+         if(weaponclasses[i] != null)
+            ACS_GiveInventory(weaponclasses[i], 1);
+      
+      for(int i = 0; i < UPGR_MAX; i++)
+         if(!p->upgrades[i].owned)
+            Upgr_SetOwned(p, &p->upgrades[i]);
+      
+      Lith_UnlockAllBIPPages(&p->bip);
+   }
 }
 
 //
@@ -406,12 +408,12 @@ static void Lith_PlayerRender(player_t *p)
       Lith_RenderHUDStringStack(p);
       
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_scopealpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
    }
    else
    {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetCVarFixed("lith_weapons_alpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
    }
 }
 
@@ -446,9 +448,9 @@ static void Lith_PlayerDamageBob(player_t *p)
 //
 static void Lith_PlayerView(player_t *p)
 {
-   if(ACS_GetCVar("lith_player_damagebob"))
+   if(ACS_GetUserCVar(p->number, "lith_player_damagebob"))
    {
-      float bobmul = ACS_GetCVarFixed("lith_player_damagebobmul");
+      float bobmul = ACS_GetUserCVarFixed(p->number, "lith_player_damagebobmul");
       p->addyaw = p->bobyaw * bobmul;
       p->addpitch = p->bobpitch * bobmul;
    }
