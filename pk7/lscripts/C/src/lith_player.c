@@ -37,11 +37,11 @@ static void Lith_PlayerRunScripts(player_t *p);
 static void Lith_ResetPlayer(player_t *p);
 static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
-static void Lith_PlayerRender(player_t *p);
 static void Lith_PlayerDamageBob(player_t *p);
 static void Lith_PlayerView(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
+static void Lith_PlayerDeltaStats(player_t *p);
 
 
 //----------------------------------------------------------------------------
@@ -221,29 +221,17 @@ static void Lith_PlayerRunScripts(player_t *p)
    // Logic
    if(!p->dead)
    {
-      Lith_PlayerStats(p);
-      Lith_PlayerScore(p);
-      
-      Lith_PlayerUpdateCBI(p);
-      
-      if(p->rocketcharge < rocketcharge_max)
-         p->rocketcharge++;
-      
-      if(p->slidecharge < slidecharge_max)
-         p->slidecharge++;
-      
-      Lith_PlayerUpdateUpgrades(p);
-      
-      if(p->frozen != p->old.frozen)
-         ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-      ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+      Lith_PlayerStats(p);          // Update statistics
+      Lith_PlayerScore(p);          // Update score
+      Lith_PlayerUpdateCBI(p);      // Update CBI
+      Lith_PlayerUpdateUpgrades(p); // Update Upgrades
+      Lith_PlayerDeltaStats(p);     // Update delta'd info
    }
    
    // Rendering
-   Lith_PlayerDamageBob(p);
-   Lith_PlayerHUD(p);
-   Lith_PlayerRender(p);
-   Lith_PlayerView(p);
+   Lith_PlayerDamageBob(p); // Update damage bobbing
+   Lith_PlayerHUD(p);       // Draw HUD
+   Lith_PlayerView(p);      // Update additive view
 }
 
 //
@@ -380,52 +368,6 @@ static void Lith_GetArmorType(player_t *p)
 }
 
 //
-// Lith_PlayerRender
-//
-// Render the heads-up display.
-//
-static void Lith_PlayerRender(player_t *p)
-{
-   if(p->old.scopetoken && !p->scopetoken)
-   {
-      if(p->hudstrstack)
-      {
-         DList_Free(p->hudstrstack);
-         p->hudstrstack = null;
-      }
-      
-      for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
-      {
-         HudMessage("");
-         HudMessagePlain(i, 0.0, 0.0, 0.0);
-      }
-   }
-   else if(p->scopetoken && !p->old.scopetoken)
-   {
-      p->hudstrstack = DList_Create();
-      
-      for(int i = 0; i < hudstrstack_max; i++)
-         DList_InsertBack(p->hudstrstack, (listdata_t){
-            .str = StrParam("%x", Random(0x1000, 0x7FFF))
-         });
-   }
-   
-   if(p->scopetoken)
-   {
-      Lith_RenderHUDWaves(p);
-      Lith_RenderHUDStringStack(p);
-      
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
-   }
-   else
-   {
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
-   }
-}
-
-//
 // Lith_PlayerDamageBob
 //
 // Update view bobbing when you get damaged.
@@ -503,6 +445,15 @@ static void Lith_PlayerStats(player_t *p)
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
    if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
+}
+
+//
+// Lith_PlayerDeltaStats
+//
+static void Lith_PlayerDeltaStats(player_t *p)
+{
+   if(p->frozen != p->old.frozen)     ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+   if(p->speedmul != p->old.speedmul) ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
 }
 
 // EOF

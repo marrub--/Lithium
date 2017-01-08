@@ -61,7 +61,10 @@ enum
    hid_base_hud = hid_base + 42000,
    hid_end_hud  = hid_base + 42999,
    
-   hid_logE = hid_base_hud,
+   hid_logAddE = hid_base_hud,
+   hid_logAddS = hid_logAddE + 20,
+   
+   hid_logE,
    hid_logS = hid_logE + 20,
    
    hid_jetE,

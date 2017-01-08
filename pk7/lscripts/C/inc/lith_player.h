@@ -45,6 +45,7 @@ typedef struct player_delta_s
    fixed velx, vely, velz;
    fixed pitchv, yawv;
    fixed forwardv, sidev, upv;
+   fixed speedmul;
    
    // Input
    int buttons;
@@ -91,7 +92,6 @@ typedef struct player_s
    // State without delta
    int maxhealth;
    fixed viewheight;
-   fixed speedmul;
    
    // Additive view
    float addpitch;

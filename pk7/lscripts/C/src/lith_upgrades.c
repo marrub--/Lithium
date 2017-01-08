@@ -75,6 +75,9 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 [[__call("ScriptS")]]
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
+   if(p->rocketcharge < rocketcharge_max)
+      p->rocketcharge++;
+   
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
@@ -125,6 +128,9 @@ static void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 static void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
+   if(p->slidecharge < slidecharge_max)
+      p->slidecharge++;
+   
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
