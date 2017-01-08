@@ -51,7 +51,7 @@ static void Lith_PlayerDeltaStats(player_t *p);
 [[__call("ScriptS"), __script("Enter")]]
 static void Lith_PlayerEntry(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    Lith_ResetPlayer(p);
    
@@ -85,20 +85,20 @@ static void Lith_PlayerEntry(void)
 [[__call("ScriptS"), __script("Death")]]
 static void Lith_PlayerDeath(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    p->dead = true;
 }
 
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
-   Lith_ResetPlayer(&players[ACS_PlayerNumber()]);
+   Lith_ResetPlayer(Lith_LocalPlayer);
 }
 
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    Lith_DeallocateBIP(&p->bip);
    if(p->log)         DList_Free(p->log);
    if(p->hudstrstack) DList_Free(p->hudstrstack);
@@ -251,11 +251,6 @@ static void Lith_ResetPlayer(player_t *p)
    p->dead = false;
    p->number = ACS_PlayerNumber();
    
-   // i cri tears of pain for APROP_SpawnHealth
-   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
-   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
-   
    //
    // Map-static data
    
@@ -288,21 +283,27 @@ static void Lith_ResetPlayer(player_t *p)
    
    p->slidecharge  = slidecharge_max;
    p->rocketcharge = rocketcharge_max;
-   p->leaped = false;
+   p->leaped   = false;
    p->cbi.open = false;
-   p->frozen = 0;
+   p->frozen   = 0;
    
-   p->bobyaw = 0.0f;
+   p->bobyaw   = 0.0f;
    p->bobpitch = 0.0f;
    
-   p->addyaw = 0.0f;
+   p->addyaw   = 0.0f;
    p->addpitch = 0.0f;
    
    p->scoreaccum = 0;
-   p->scoremul = 1.3;
+   p->scoremul   = 1.3;
    
    //
    // Static data
+   
+   // i cri tears of pain for APROP_SpawnHealth
+   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
+   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
+   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
+   if(!p->discount)   p->discount   = 1.0;
    
    if(!p->staticinit)
    {

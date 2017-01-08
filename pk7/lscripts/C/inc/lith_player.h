@@ -19,6 +19,9 @@
    Lith_ForPlayer() \
       Lith_GiveScore(p, score)
 
+#define Lith_LocalPlayer (&players[ACS_PlayerNumber()])
+#define Lith_PlayerDiscount(n) (score_t)((n) * p->discount)
+
 enum
 {
    armor_none,
@@ -90,6 +93,7 @@ typedef struct player_s
    int maxarmor;
    fixed jumpheight;
    fixed viewheight;
+   double discount;
    
    // Additive view
    float addpitch;

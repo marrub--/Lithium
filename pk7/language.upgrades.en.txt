@@ -59,13 +59,13 @@ LITH_TXT_UPGRADE_DESCR_ChargeRPG =
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
-   "Description: Replace the energy transformer in your plasma rifle"
-   " to use ion focusing instead of whatever magic bullshit it uses right now.";
+   "Description: write things";
 
-LITH_TXT_UPGRADE_TITLE_OmegaRail = "Omega Railgun";
+LITH_TXT_UPGRADE_TITLE_OmegaRail = "Punc. Cannon";
 LITH_TXT_UPGRADE_DESCR_OmegaRail =
-   "Effect: Makes your Omega Cannon into the Omega Railgun!\n\n"
-   "Description: Surge the power of the gods through your Omega Cannon.";
+   "Effect: Your cannon now shoots explosive bolts that send huge shocks "
+   "through walls.\n\n"
+   "Description: write things";
 
 //
 // Extras
@@ -114,7 +114,7 @@ LITH_TXT_UPGRADE_DESCR_Implying =
 LITH_TXT_UPGRADE_TITLE_UNCEUNCE = "UNCE UNCE";
 LITH_TXT_UPGRADE_DESCR_UNCEUNCE =
    "Effect: UNCE UNCE UNCE UNCE UNCE UNCE\n\n"
-   "Description: UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE"
+   "Description: UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE "
    "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
 
 // EOF

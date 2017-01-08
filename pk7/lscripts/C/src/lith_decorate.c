@@ -23,7 +23,7 @@ void Lith_WeaponPickup(int user_pickupparm, int user_tid)
       [weapon_bfg]      = "weapons/cannon/pickup"
    };
    
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    if(p->weapons & (1 << user_pickupparm))
       return;
@@ -123,7 +123,7 @@ void Lith_EmitScore(int amount)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    int max = rifle_firemode_max;
    
    if(!p->upgrades[UPGR_RifleModes].active)
@@ -142,7 +142,7 @@ int Lith_GetPlayerData(int info, bool target)
    if(ACS_PlayerNumber() < 0)
       return 0;
    
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    switch(info)
    {
@@ -172,7 +172,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
    
    ACS_SetActivatorToTarget(0);
    
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    if(!(p->weapons & (1 << user_pickupparm)))
       return true;
@@ -217,15 +217,21 @@ int Lith_OscillateN(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    return p->health < p->maxhealth - n;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_Discount()
+{
+   Lith_LocalPlayer->discount = 0.75;
 }
 
 #if 0
@@ -234,7 +240,7 @@ int Lith_GetSigil()
 {
    ACS_SetResultValue(1); // q_q
    
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    if(p->cbi.open)
       Lith_KeyOpenCBI();

@@ -38,7 +38,7 @@ bool Shop_CanBuy(player_t *p, shopdef_t *def)
 {
    int cur = ACS_CheckInventory(def->class);
    int max = ACS_GetMaxInventory(0, def->class);
-   return cur < max && p->score - def->cost >= 0;
+   return cur < max && p->score - Lith_PlayerDiscount(def->cost) >= 0;
 }
 
 //
@@ -53,7 +53,7 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
    }
    
    ACS_GiveInventory(def->class, def->count);
-   Lith_TakeScore(p, def->cost);
+   Lith_TakeScore(p, Lith_PlayerDiscount(def->cost));
    p->itemsbought++;
 }
 
@@ -96,15 +96,25 @@ static int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    __str mark;
    switch(sel)
    {
-   case UPGR_lolsords:   mark = "folds"; break;
-   case UPGR_TorgueMode: mark = "$";     break;
-   default:              mark = "scr";   break;
+   case UPGR_lolsords:   mark = "\Cjfolds"; break;
+   case UPGR_TorgueMode: mark = "\Cd$";     break;
+   default:              mark = "\Cnscr";   break;
    }
    
-   __str cost = upgr->info->cost ? StrParam("%llu%S", upgr->info->cost, mark) : "---";
+   __str cost = upgr->info->cost ? StrParam("%lli%S", Lith_PlayerDiscount(upgr->info->cost), mark) : "---";
    
-   HudMessageF("CBIFONT", "%LS: %S\n\n%LS: %S\n\n%S", "LITH_COST", cost, "LITH_CATEGORY", upgrcateg[upgr->info->category], Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+   HudMessageF("CBIFONT", "%LS: %S", "LITH_COST", cost);
    HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
+   
+   HudMessageF("CBIFONT", "%LS: %S", "LITH_CATEGORY", upgrcateg[upgr->info->category]);
+   HudMessagePlain(hid--, 111.1, 40.1, TICSECOND);
+   
+   if(sel != UPGR_UNCEUNCE)
+      HudMessageF        ("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+   else
+      HudMessageRainbowsF("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+   
+   HudMessagePlain(hid--, 111.1, 50.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
@@ -139,9 +149,9 @@ static int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    
    shopdef_t *def = &shopdefs[cbi->gst.lstst[CBI_LSTST_SHOP]];
    
-   __str cost = def->cost ? StrParam("%lluscr", def->cost) : "---";
+   __str cost = def->cost ? StrParam("%lli\Cnscr", Lith_PlayerDiscount(def->cost)) : "---";
    
-   HudMessageF("CBIFONT", "%S: %S\n\n%S", Language("LITH_COST"), cost, Language("LITH_TXT_SHOP_DESCR_%S", def->name));
+   HudMessageF("CBIFONT", "%LS: %S\n\n%S", "LITH_COST", cost, Language("LITH_TXT_SHOP_DESCR_%S", def->name));
    HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
    
    if(GUI_Button(GUI_ID("sBUY"), gst, &hid, 259, 170, "Buy", !Shop_CanBuy(p, def)))
@@ -360,7 +370,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
 [[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyOpenCBI(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    if(p->dead)
       return;

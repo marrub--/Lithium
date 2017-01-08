@@ -19,7 +19,7 @@
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_LogName(int name)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   player_t *p = Lith_LocalPlayer;
    
    __str ls;
    

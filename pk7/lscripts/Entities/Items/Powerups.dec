@@ -56,6 +56,7 @@ actor Lith_Backpack : Lith_ScoreItem replaces Backpack
       BPAK A -1
       stop
    Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_Discount", 0)
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_backpack)
       goto Super::Pickup
    }

@@ -127,4 +127,5 @@ actor Lith_Weapon : Weapon
 }
 
 actor Lith_FuckSuperShotguns : Lith_Dummy replaces SuperShotgun {}
+actor Lith_FuckChainsaws : Lith_Dummy replaces Chainsaw {}
 

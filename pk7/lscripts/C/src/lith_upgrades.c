@@ -395,7 +395,7 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
 
 bool Upgr_CanBuy(player_t *p, upgrade_t *upgr)
 {
-   return !upgr->owned && (p->score - upgr->info->cost) >= 0;
+   return !upgr->owned && (p->score - Lith_PlayerDiscount(upgr->info->cost)) >= 0;
 }
 
 void Upgr_Buy(player_t *p, upgrade_t *upgr)
@@ -406,7 +406,7 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
       return;
    }
    
-   Lith_TakeScore(p, upgr->info->cost);
+   Lith_TakeScore(p, Lith_PlayerDiscount(upgr->info->cost));
    Upgr_SetOwned(p, upgr);
 }
 
