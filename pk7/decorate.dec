@@ -40,8 +40,10 @@ actor Lith_MonsterHax
 //
 // Items
 
+#include "lscripts/Entities/Items/Ammo.dec"
 #include "lscripts/Entities/Items/Score.dec"
-#include "lscripts/Entities/Items/DivisionSigil.dec"
+#include "lscripts/Entities/Items/AmmoPickups.dec"
+//#include "lscripts/Entities/Items/DivisionSigil.dec"
 
 //
 // Weapons

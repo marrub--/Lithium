@@ -81,16 +81,17 @@ $random weapons/rifle/firesnipe {
 //
 // Grenade Launcher
 //
-weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac    // FEAR
-weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.flac   // 〃
-weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.flac   // 〃
-weapons/rocket/pickup  lsounds/RocketLauncher/Pickup.flac  // FEAR, Doom 3, Firearms: Source
-weapons/rocket/draw    lsounds/RocketLauncher/Draw.flac    // FEAR, Doom 3
-weapons/rocket/load    lsounds/RocketLauncher/Load.flac    // 〃
-weapons/rocket/lock    lsounds/RocketLauncher/Lock.flac    // Unreal Tournament '99
-weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac  // 〃
-weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac  // Killing Floor
-weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac // 〃
+weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac      // FEAR
+weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.flac     // 〃
+weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.flac     // 〃
+weapons/rocket/empty   lsounds/RocketLauncher/FireEmpty.flac // Killing Floor
+weapons/rocket/pickup  lsounds/RocketLauncher/Pickup.flac    // FEAR, Doom 3, Firearms: Source
+weapons/rocket/draw    lsounds/RocketLauncher/Draw.flac      // FEAR, Doom 3
+weapons/rocket/load    lsounds/RocketLauncher/Load.flac      // 〃
+weapons/rocket/lock    lsounds/RocketLauncher/Lock.flac      // Unreal Tournament '99
+weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac    // 〃
+weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac    // Killing Floor
+weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac   // 〃
 
 $random weapons/rocket/fire {
    weapons/rocket/fire1

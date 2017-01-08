@@ -1,3 +1,8 @@
+actor Lith_RocketAmmo : Ammo
+{
+   Inventory.MaxAmount 200
+}
+
 actor Lith_PlasmaAmmo : Ammo
 {
    Inventory.MaxAmount 14000
@@ -7,4 +12,6 @@ actor Lith_CannonAmmo : Ammo
 {
    Inventory.MaxAmount 40
 }
+
+// EOF
 

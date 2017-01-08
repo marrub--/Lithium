@@ -221,26 +221,30 @@ static void HUD_Weapons(player_t *p)
 
 static void HUD_Ammo(player_t *p)
 {
-   if(p->weapontype == weapon_pistol ||
-      p->weapontype == weapon_plasma ||
-      p->weapontype == weapon_bfg)
+   switch(p->weapontype)
+   {
+   case weapon_pistol: case weapon_launcher: case weapon_plasma: case weapon_bfg:
    {
       int count;
       
-      if(p->weapontype == weapon_pistol)      count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
-      else if(p->weapontype == weapon_plasma) count =     ACS_CheckInventory("Lith_PlasmaAmmo");
-      else if(p->weapontype == weapon_bfg)    count =     ACS_CheckInventory("Lith_CannonAmmo");
+           if(p->weapontype == weapon_pistol)   count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
+      else if(p->weapontype == weapon_launcher) count =     ACS_CheckInventory("Lith_RocketAmmo");
+      else if(p->weapontype == weapon_plasma)   count =     ACS_CheckInventory("Lith_PlasmaAmmo");
+      else if(p->weapontype == weapon_bfg)      count =     ACS_CheckInventory("Lith_CannonAmmo");
       
       DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
       
       HudMessageF("BIGFONT", "%i", count);
       HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, 0.1);
+      break;
    }
-   else if(p->weapontype == weapon_rifle)
+   case weapon_rifle:
    {
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
       DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2 + addy, 0.1);
       DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_ammo, 320.2, 168.2 + (p->riflefiremode * 16) + addy, 0.1);
+      break;
+   }
    }
 }
 

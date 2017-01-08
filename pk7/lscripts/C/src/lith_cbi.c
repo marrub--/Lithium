@@ -18,8 +18,9 @@ typedef struct shopdef_s
 
 static shopdef_t shopdefs[] = {
 // {"Name--------", Cost------, Cnt, Class---------------},
-   {"PlasmaAmmo",   14000     , 400, "Lith_PlasmaAmmo"   },
-   {"CannonAmmo",   30000     ,   6, "Lith_CannonAmmo"   },
+   {"RocketAmmo",   9000      ,   5, "Lith_RocketAmmo"   },
+   {"PlasmaAmmo",   75750     ,1000, "Lith_PlasmaAmmo"   },
+   {"CannonAmmo",   113625    ,   1, "Lith_CannonAmmo"   },
 // {"DivSigil",     7772944   ,   1, "Lith_DivisionSigil"},
 };
 

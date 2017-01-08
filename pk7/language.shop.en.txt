@@ -1,5 +1,13 @@
 [enu default]
 
+LITH_TXT_SHOP_TITLE_RocketAmmo = "Rocket Ammo";
+LITH_TXT_SHOP_DESCR_RocketAmmo =
+   "Rocket propelled grenades\n"
+   "produced by SYM4.3 for your\n"
+   "launcher.\n"
+   "Delicious high-yield explosives\n"
+   "right at your fingertips.";
+
 LITH_TXT_SHOP_TITLE_PlasmaAmmo = "Plasma Ammo";
 LITH_TXT_SHOP_DESCR_PlasmaAmmo =
    "Highly corrosive magical\n"
