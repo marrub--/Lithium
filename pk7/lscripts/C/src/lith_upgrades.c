@@ -180,11 +180,13 @@ static void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 static void Upgr_CyberLegs_Activate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul += 0.2;
+   p->jumpboost += 0.5;
 }
 
 static void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.2;
+   p->jumpboost -= 0.5;
 }
 
 [[__call("ScriptS")]]

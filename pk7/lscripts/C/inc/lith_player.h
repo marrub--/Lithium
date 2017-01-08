@@ -46,6 +46,7 @@ typedef struct player_delta_s
    fixed pitchv, yawv;
    fixed forwardv, sidev, upv;
    fixed speedmul;
+   fixed jumpboost;
    
    // Input
    int buttons;
@@ -91,6 +92,7 @@ typedef struct player_s
    
    // State without delta
    int maxhealth;
+   fixed jumpheight;
    fixed viewheight;
    
    // Additive view

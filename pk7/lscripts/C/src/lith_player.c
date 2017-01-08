@@ -250,6 +250,7 @@ static void Lith_ResetPlayer(player_t *p)
    
    // i cri tears of pain for APROP_SpawnHealth
    if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
+   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
    if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
    
    //
@@ -452,8 +453,9 @@ static void Lith_PlayerStats(player_t *p)
 //
 static void Lith_PlayerDeltaStats(player_t *p)
 {
-   if(p->frozen != p->old.frozen)     ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-   if(p->speedmul != p->old.speedmul) ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+   if(p->frozen != p->old.frozen)       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+   if(p->speedmul != p->old.speedmul)   ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+   if(p->jumpboost != p->old.jumpboost) ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * (1 + p->jumpboost));
 }
 
 // EOF
