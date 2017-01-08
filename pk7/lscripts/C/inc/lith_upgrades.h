@@ -36,6 +36,7 @@ enum
 };
 
 typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
+[[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
 
 typedef struct upgradeinfo_s
 {
@@ -46,7 +47,8 @@ typedef struct upgradeinfo_s
    int category;
    fixed scoreadd;
    
-   upgr_cb_t Activate, Deactivate, Update;
+   upgr_cb_t Activate, Deactivate;
+   upgr_update_cb_t Update;
 } upgradeinfo_t;
 
 typedef struct upgrade_s

@@ -227,12 +227,9 @@ static void HUD_Ammo(player_t *p)
    {
       int count;
       
-      if(p->weapontype == weapon_pistol)
-         count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
-      else if(p->weapontype == weapon_plasma)
-         count = ACS_CheckInventory("Lith_PlasmaAmmo");
-      else if(p->weapontype == weapon_bfg)
-         count = ACS_CheckInventory("Lith_CannonAmmo");
+      if(p->weapontype == weapon_pistol)      count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
+      else if(p->weapontype == weapon_plasma) count =     ACS_CheckInventory("Lith_PlasmaAmmo");
+      else if(p->weapontype == weapon_bfg)    count =     ACS_CheckInventory("Lith_CannonAmmo");
       
       DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
       

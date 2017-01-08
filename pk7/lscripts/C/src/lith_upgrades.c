@@ -11,7 +11,7 @@
 
 #define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr);
 #define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
-#define U(n) static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
+#define U(n) [[__call("ScriptS")]] static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
 
                             U(JetBooster)
 A(ReflexWetw) D(ReflexWetw) U(ReflexWetw)
@@ -72,6 +72,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // JetBooster
 //
 
+[[__call("ScriptS")]]
 static void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
    if(p->frozen) return;
@@ -123,6 +124,7 @@ static void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
    ACS_SetAirControl(0.00390625); // why god
 }
 
+[[__call("ScriptS")]]
 static void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
    if(p->frozen) return;
@@ -181,6 +183,7 @@ static void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
    p->speedmul -= 0.2;
 }
 
+[[__call("ScriptS")]]
 static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
 {
    fixed absvel = absk(p->old.velz) * 10.0k;
@@ -209,6 +212,7 @@ static void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
    p->riflefiremode = 0;
 }
 
+[[__call("ScriptS")]]
 static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 {
    if(p->weapontype == weapon_rifle && p->riflefiremode == rifle_firemode_burst)
@@ -239,6 +243,7 @@ static void Upgr_7777777_Deactivate(player_t *p, upgrade_t *upgr)
    ACS_SetActorPropertyFixed(0, APROP_Gravity, 1.0);
 }
 
+[[__call("ScriptS")]]
 static void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
 {
    fixed vel = -2;
@@ -262,6 +267,7 @@ static void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
    ACS_SetWeapon(upgr->user_str[0]);
 }
 
+[[__call("ScriptS")]]
 static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
 {
    ACS_SetWeapon("Lith_Sword");
@@ -271,6 +277,7 @@ static void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
 // Implying
 //
 
+[[__call("ScriptS")]]
 static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
 {
    static __str strings[] = {
@@ -310,15 +317,6 @@ static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    }
    
    upgr->user_int[0] = id;
-}
-
-//
-
-// FIXME
-[[__call("ScriptS")]]
-static void HAXHAXHAX(player_t *p, upgrade_t *upgr)
-{
-   upgr->info->Update(p, upgr);
 }
 
 
@@ -397,7 +395,7 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
    {
       upgrade_t *upgr = &p->upgrades[i];
       if(upgr->active && upgr->info->Update)
-         HAXHAXHAX(p, upgr);
+         upgr->info->Update(p, upgr);
    }
 }
 
