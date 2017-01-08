@@ -1,0 +1,22 @@
+actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_SpiderDemon)
+      goto Super::Death
+   }
+}
+
+actor Lith_CyberDemon : Cyberdemon replaces Cyberdemon
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_CyberDemon)
+      goto Super::Death
+   }
+}
+
+// EOF
+

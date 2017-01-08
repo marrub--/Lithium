@@ -32,23 +32,42 @@ const int X_BT_USER2      = 0x00400000;
 const int X_BT_USER3      = 0x00800000;
 const int X_BT_USER4      = 0x01000000;
 
-// Score values.
-const int Score_Clip      = 11  * 100;
-const int Score_ClipBox   = 51  * 100;
-const int Score_Shell     = 5   * 100 * 2;
-const int Score_ShellBox  = 21  * 100 * 2;
-const int Score_Rocket    = 2   * 100 * 4;
-const int Score_RocketBox = 6   * 100 * 4;
-const int Score_Cell      = 21  * 100 * 5;
-const int Score_CellPack  = 101 * 100 * 5;
+// Score values
+const int Score_Clip      = 1100;
+const int Score_ClipBox   = 5100;
+const int Score_Shell     = 1500;
+const int Score_ShellBox  = 5500;
+const int Score_Rocket    = 1900;
+const int Score_RocketBox = 6000;
+const int Score_Cell      = 10500;
+const int Score_CellPack  = 50500;
 const int Score_Backpack  = (Score_Clip + Score_ShellBox + Score_Rocket + Score_Cell) * 5;
 
-const int Score_ZombieMan   = Score_Clip      * 1.5;
-const int Score_ShotgunGuy  = Score_Shell     * 1.5;
-const int Score_Imp         = Score_Shell     * 2.0;
-const int Score_ChaingunGuy = Score_ClipBox   * 1.5;
-const int Score_LostSoul    = Score_Shell     * 2.5;
-const int Score_Demon       = Score_ShellBox  * 1.5;
-const int Score_Revenant    = Score_Rocket    * 2.0;
-const int Score_Archvile    = Score_RocketBox * 2.0;
+// Tier 1
+const int Score_ZombieMan     = 1000;
+const int Score_ShotgunGuy    = 1500;
+const int Score_Imp           = 1500;
+const int Score_ChaingunGuy   = 2000;
+
+// Tier 2
+const int Score_Demon         = 3000;
+const int Score_LostSoul      = 4000;
+
+// Tier 3
+const int Score_HellKnight    = 7000;
+const int Score_Revenant      = 7500;
+const int Score_Cacodemon     = 8000;
+const int Score_Arachnotron   = 8000;
+const int Score_Mancubus      = 9000;
+const int Score_BaronOfHell   = 15000;
+
+// Tier 4
+const int Score_PainElemental = 40000;
+const int Score_Archvile      = 40000;
+
+// Tier 5
+const int Score_SpiderDemon   = 100000;
+const int Score_CyberDemon    = 200000;
+
+// EOF
 

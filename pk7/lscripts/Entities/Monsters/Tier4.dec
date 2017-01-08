@@ -1,0 +1,25 @@
+actor Lith_PainElemental : PainElemental replaces PainElemental
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_PainElemental)
+      goto Super::Death
+   }
+}
+
+actor Lith_Archvile : Archvile replaces Archvile
+{
+   Health 800
+   PainChance 2
+   
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Archvile)
+      goto Super::Death
+   }
+}
+
+// EOF
+

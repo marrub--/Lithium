@@ -84,6 +84,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    Tag "Shotgun"
    Weapon.UpSound "weapons/shotgun/draw"
    Weapon.SlotNumber 3
+   DamageType "Lith_Shotgun"
    
    +WEAPON.NOAUTOFIRE
    

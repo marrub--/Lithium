@@ -104,23 +104,14 @@ int Lith_GetCVar(int var)
 void Lith_UpdateScore(void)
 {
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(1.0f, 6.0f);
-   
-   Lith_ForPlayer()
-      Lith_GiveScore(p, score);
-   
+   Lith_GiveAllScore(score);
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_GiveScoreToTarget(int amount)
+void Lith_EmitScore(int amount)
 {
-   ACS_SetActivatorToTarget(0);
-   
-   if(ACS_PlayerNumber() < 0)
-      return;
-   
-   ACS_GiveInventory("Lith_ScoreCount", amount);
-   Lith_UpdateScore();
+   Lith_GiveAllScore(amount);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

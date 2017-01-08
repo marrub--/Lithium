@@ -9,11 +9,15 @@
 #include "lith_bip.h"
 
 #define MAX_PLAYERS 8
-#define LOG_MAX 10
+#define LOG_MAX 7
 
 #define Lith_ForPlayer() \
    for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++) \
       if(p->active)
+
+#define Lith_GiveAllScore(score) \
+   Lith_ForPlayer() \
+      Lith_GiveScore(p, score)
 
 enum
 {

@@ -1,0 +1,66 @@
+actor Lith_HellKnight : HellKnight replaces HellKnight
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_HellKnight)
+      goto Super::Death
+   }
+}
+
+actor Lith_Revenant : Revenant replaces Revenant
+{
+   Health 400
+   
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Revenant)
+      goto Super::Death
+   }
+}
+
+actor Lith_Cacodemon : Cacodemon replaces Cacodemon
+{
+   DamageFactor "Lith_Shotgun", 0.6
+   
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Cacodemon)
+      goto Super::Death
+   }
+}
+
+actor Lith_Arachnotron : Arachnotron replaces Arachnotron
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Arachnotron)
+      goto Super::Death
+   }
+}
+
+actor Lith_Mancubus : Fatso replaces Fatso
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Mancubus)
+      goto Super::Death
+   }
+}
+
+actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_BaronOfHell)
+      goto Super::Death
+   }
+}
+
+// EOF
+
