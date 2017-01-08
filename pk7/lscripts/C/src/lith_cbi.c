@@ -62,17 +62,28 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
 //
 static int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
 {
+   static __str const upgrcateg[UC_MAX] = {
+      [UC_Body] = "\ChBody",
+      [UC_Weap] = "\CaWeapon",
+      [UC_Extr] = "\CfExtra",
+      [UC_Down] = "\CtDowngrade"
+   };
+   
    GUI_BEGIN_LIST(GUI_ID("uSCL"), gst, &hid, 20, 30, 152, &cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
    
    for(int i = 0; i < UPGR_MAX; i++)
    {
       GUI_LIST_OFFSETS(i, UPGR_MAX, 152, cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
       
-      __str id = StrParam("uN%.2i", i);
+      __str id   = StrParam("uN%.2i", i);
       __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", p->upgrades[i].info->name);
+      __str mark = upgrcateg[p->upgrades[i].info->category];
       
       if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, cbi->gst.lstst[CBI_LSTST_UPGRADES] == i, &gui_listbtnparm))
          cbi->gst.lstst[CBI_LSTST_UPGRADES] = i;
+      
+      HudMessageF("CBIFONT", "%.3S", mark);
+      HudMessagePlain(hid--, gst->ofsx + 1.1, 4 + gst->ofsy + addy, TICSECOND);
    }
    
    GUI_END_LIST(gst);
@@ -92,7 +103,7 @@ static int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    
    __str cost = upgr->info->cost ? StrParam("%llu%S", upgr->info->cost, mark) : "---";
    
-   HudMessageF("CBIFONT", "%S: %S\n\n%S", Language("LITH_COST"), cost, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+   HudMessageF("CBIFONT", "%LS: %S\n\n%LS: %S\n\n%S", "LITH_COST", cost, "LITH_CATEGORY", upgrcateg[upgr->info->category], Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);

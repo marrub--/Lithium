@@ -1,6 +1,7 @@
 [enu default]
 
 LITH_COST = "Cost";
+LITH_CATEGORY = "Category";
 
 //
 // Body
