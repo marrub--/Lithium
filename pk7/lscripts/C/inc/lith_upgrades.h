@@ -25,12 +25,12 @@ enum
    UPGR_OmegaRail,
    
    UPGR_TorgueMode,
-   UPGR_RetroWeps,
+// UPGR_RetroWeps,
    UPGR_7777777,
    UPGR_lolsords,
    
    UPGR_Implying,
-   UPGR_SeriousMode,
+   UPGR_UNCEUNCE,
    
    UPGR_MAX
 };

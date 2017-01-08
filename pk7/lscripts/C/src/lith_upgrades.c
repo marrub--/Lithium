@@ -23,6 +23,7 @@ A(7777777)    D(7777777)    U(7777777)
 A(lolsords)   D(lolsords)   U(lolsords)
 
                             U(Implying)
+A(UNCEUNCE)   D(UNCEUNCE)   U(UNCEUNCE)
 
 #undef A
 #undef D
@@ -51,12 +52,12 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    {"OmegaRail",   2600700   , false, "CannonUpgr",   UC_Weap,  0.00},
    
    {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
-   {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
+// {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
    {"7777777",     82354300  , false, null,           UC_Extr,  0.10, A(7777777),  D(7777777),  U(7777777)},
    {"lolsords",    1000000   , false, null,           UC_Extr,  0.20, A(lolsords), D(lolsords), U(lolsords)},
    
    {"Implying",    0         , false, null,           UC_Down,  0.20, U(Implying)},
-   {"SeriousMode", 0         , false, null,           UC_Down,  1.00},
+   {"UNCEUNCE",    0         , false, null,           UC_Down,  0.30, A(UNCEUNCE), D(UNCEUNCE), U(UNCEUNCE)},
 };
 
 #undef A
@@ -323,6 +324,34 @@ static void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    }
    
    upgr->user_int[0] = id;
+}
+
+
+//---------------------------------------
+// UNCEUNCE
+//
+
+static void Upgr_UNCEUNCE_Activate(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetMusic("lmusic/Unce.flac");
+}
+
+static void Upgr_UNCEUNCE_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetMusic("*");
+   ACS_FadeTo(0, 0, 0, 0, 0);
+}
+
+[[__call("ScriptS")]]
+static void Upgr_UNCEUNCE_Update(player_t *p, upgrade_t *upgr)
+{
+   fixed reeeed = ACS_Sin(p->ticks / 35.0) + 1.0 / 2.0;
+   fixed greeen = ACS_Cos(p->ticks / 24.0) + 1.0 / 2.0;
+   fixed bluuue = ACS_Sin(p->ticks / 13.0) + 1.0 / 2.0;
+   
+   ACS_FadeTo(reeeed * 255, greeen * 255, bluuue * 255, 0.6, TICSECOND);
+   p->bobpitch += bluuue * 0.015;
+   p->bobyaw   += greeen * 0.01;
 }
 
 

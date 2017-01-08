@@ -84,6 +84,7 @@ typedef struct player_s
    int tid;
    int number;
    int cameratid;
+   long ticks;
    logdata_t logdata[LOG_MAX];
    struct dlist_s *log;
    

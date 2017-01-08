@@ -77,6 +77,8 @@ static void Lith_PlayerEntry(void)
       // Reset view for next tic
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
+      
+      p->ticks++;
    }
 }
 
@@ -384,11 +386,11 @@ static void Lith_PlayerDamageBob(player_t *p)
       distance *= 0.2f;
       distance *= (200 - p->armor) / 200.0f;
       
-      p->bobyaw = sinf(angle) * distance;
+      p->bobyaw   = sinf(angle) * distance;
       p->bobpitch = cosf(angle) * distance;
    }
    
-   p->bobyaw = lerpf(p->bobyaw, 0.0f, 0.1f);
+   p->bobyaw   = lerpf(p->bobyaw,   0.0f, 0.1f);
    p->bobpitch = lerpf(p->bobpitch, 0.0f, 0.1f);
 }
 
@@ -402,8 +404,8 @@ static void Lith_PlayerView(player_t *p)
    if(ACS_GetUserCVar(p->number, "lith_player_damagebob"))
    {
       float bobmul = ACS_GetUserCVarFixed(p->number, "lith_player_damagebobmul");
-      p->addyaw = p->bobyaw * bobmul;
       p->addpitch = p->bobpitch * bobmul;
+      p->addyaw   = p->bobyaw   * bobmul;
    }
 }
 

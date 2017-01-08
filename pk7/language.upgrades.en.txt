@@ -111,9 +111,10 @@ LITH_TXT_UPGRADE_DESCR_Implying =
    "not a good idea\n\n"
    "Description: God damn it.";
 
-LITH_TXT_UPGRADE_TITLE_SeriousMode = "Serious Mode";
-LITH_TXT_UPGRADE_DESCR_SeriousMode =
-   "Effect: Make enemies invisible, and always fast.\n\n"
-   "Description: Are you Serious?";
+LITH_TXT_UPGRADE_TITLE_UNCEUNCE = "UNCE UNCE";
+LITH_TXT_UPGRADE_DESCR_UNCEUNCE =
+   "Effect: UNCE UNCE UNCE UNCE UNCE UNCE\n\n"
+   "Description: UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE"
+   "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
 
 // EOF
