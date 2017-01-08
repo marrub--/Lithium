@@ -100,5 +100,17 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
          ((bippage_t *)rover->data.vp)->unlocked = true;
 }
 
+[[__call("ScriptS")]]
+void Lith_DeallocateBIP(bip_t *bip)
+{
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+   {
+      for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
+         free(rover->data.vp);
+      
+      DList_Free(bip->infogr[i]);
+   }
+}
+
 // EOF
 

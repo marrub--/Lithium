@@ -10,7 +10,7 @@
 //
 
 [[__call("ScriptI"), __address(14242), __extern("ACS")]]
-void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
+void Lith_WeaponPickup(int user_pickupparm, int user_tid)
 {
    static __str pickupsounds[] = {
       [weapon_unknown]  = "MMMMHMHMMMHMMM",
@@ -24,9 +24,13 @@ void Lith_WeaponPickup(int user_pickupparm, int user_spritetid)
    
    player_t *p = &players[ACS_PlayerNumber()];
    
+   if(p->weapons & (1 << user_pickupparm))
+      return;
+   
    p->weaponsheld++;
    
-   ACS_Thing_Remove(user_spritetid);
+   if(!ACS_GetCVar("sv_weaponstay"))
+      ACS_Thing_Remove(user_tid);
    
    if(!p->upgrades[UPGR_7777777].active)
       ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
@@ -98,12 +102,10 @@ int Lith_GetCVar(int var)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
-   player_t *p = &players[ACS_PlayerNumber()];
+   score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(1.0f, 6.0f);
    
-   double rmul = RandomFloat(1.0f, 6.0f);
-   score_t score = ACS_CheckInventory("Lith_ScoreCount") * rmul;
-   
-   Lith_GiveScore(p, score);
+   for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
+      Lith_GiveScore(p, score);
    
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
@@ -113,7 +115,7 @@ void Lith_GiveScoreToTarget(int amount)
 {
    ACS_SetActivatorToTarget(0);
    
-   if(ACS_PlayerNumber() == -1)
+   if(ACS_PlayerNumber() < 0)
       return;
    
    ACS_GiveInventory("Lith_ScoreCount", amount);
@@ -168,6 +170,8 @@ fixed Lith_Velocity(fixed velx, fixed vely)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_PickupScore(int user_pickupparm, int user_spritetid)
 {
+   if(ACS_GetCVar("sv_weaponstay")) return true;
+   
    ACS_SetActivatorToTarget(0);
    
    player_t *p = &players[ACS_PlayerNumber()];
