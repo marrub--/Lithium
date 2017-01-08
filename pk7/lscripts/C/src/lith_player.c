@@ -106,8 +106,7 @@ static void Lith_PlayerDisconnect(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_PlayerUnloading(void)
 {
-   for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
-      if(p->active)
+   Lith_ForPlayer()
    {
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);

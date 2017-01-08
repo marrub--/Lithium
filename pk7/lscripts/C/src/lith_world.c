@@ -19,23 +19,22 @@ void Lith_World(void)
       int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       
       if(secrets > prevsecrets)
-         for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
-            if(p->active)
-            {
-               Lith_GiveScore(p, 9000 * (secrets - prevsecrets));
-               p->secretsfound++;
-            }
+         Lith_ForPlayer()
+         {
+            Lith_GiveScore(p, 9000 * (secrets - prevsecrets));
+            p->secretsfound++;
+         }
       
       prevsecrets = secrets;
       
 #if 0
       // Eeeeeeeeeghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-      for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
-         if(p->active && ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"))
-         {
-            ACS_Thing_Remove(ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"));
-            ACS_TakeActorInventory(p->tid, "Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
-         }
+      Lith_ForPlayer()
+         if(ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"))
+      {
+         ACS_Thing_Remove(ACS_CheckActorInventory(p->tid, "Lith_DivisionSigilSpriteTID"));
+         ACS_TakeActorInventory(p->tid, "Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
+      }
 #endif
       
       ACS_Delay(1);

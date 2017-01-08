@@ -105,7 +105,7 @@ void Lith_UpdateScore(void)
 {
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(1.0f, 6.0f);
    
-   for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++)
+   Lith_ForPlayer()
       Lith_GiveScore(p, score);
    
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
