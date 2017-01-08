@@ -43,12 +43,18 @@ void Lith_WeaponPickup(int user_pickupparm, int user_tid)
    case weapon_pistol:   Lith_UnlockBIPPage(&p->bip, "Pistol");   break;
    case weapon_shotgun:  Lith_UnlockBIPPage(&p->bip, "Shotgun");  break;
    case weapon_rifle:    Lith_UnlockBIPPage(&p->bip, "Rifle");    break;
-   case weapon_launcher: Lith_UnlockBIPPage(&p->bip, "Launcher"); break;
+   case weapon_launcher:
+      ACS_GiveInventory("Lith_RocketAmmo", 20);
+      Lith_UnlockBIPPage(&p->bip, "Launcher");
+      break;
    case weapon_plasma:
       ACS_GiveInventory("Lith_PlasmaAmmo", 2000);
       Lith_UnlockBIPPage(&p->bip, "Plasma");
       break;
-   case weapon_bfg:      Lith_UnlockBIPPage(&p->bip, "Cannon");   break;
+   case weapon_bfg:
+      ACS_GiveInventory("Lith_CannonAmmo", 2);
+      Lith_UnlockBIPPage(&p->bip, "Cannon");
+      break;
    }
    
    if(ACS_GetCVar("lith_sv_stupidpickups"))
