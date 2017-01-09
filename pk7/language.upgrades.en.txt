@@ -8,30 +8,30 @@ LITH_CATEGORY = "Category";
 //
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
-   "Effect: Lets you press the \"speed\" key while in the air to let you fly "
-   "for a short time.\n\n"
-   "Description: Jet boosters built into your suit.";
+   "Effect: Lets you press the \"speed\" key while in the air to fly for a "
+   "short time.\n\n"
+   "Jet boosters built into your boots.";
 
 LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
 LITH_TXT_UPGRADE_DESCR_ReflexWetw =
    "Effect: Lets you move quicker, easier and more efficiently.\n\n"
-   "Description: Cybernetic wetware that improves your reflexes and "
+   "Cybernetic wetware that improves your reflexes and "
    "implicit agility.";
 
 LITH_TXT_UPGRADE_TITLE_CyberLegs = "Cyber Legs";
 LITH_TXT_UPGRADE_DESCR_CyberLegs =
    "Effect: Allows you to jump higher, move faster, and damage things you "
    "jump onto.\n\n"
-   "Description: Implement Culter Dei technology into your legs, "
+   "Implement Culter Dei technology into your legs, "
    "greatly increasing your agility.";
 
 LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armour";
 LITH_TXT_UPGRADE_DESCR_ReactArmour =
-   "Effect: Makes your armour \"react\" to being hit, switching a mode to "
+   "Effect: Makes your armour \"react\" to being hit, switching its mode to "
    "the type of damage it took, making you take far less damage of that "
-   "kind until hit by another.\n\n"
-   "Description: Integrate your armour with a highly advanced Yh-0 reactive "
-   "plating system, made by an avian nation formed on the planet Durla Prime.";
+   "type until hit by another.\n\n"
+   "Integrate your armour with a highly advanced Yh-0 reactive "
+   "plating system, made avians on Durla Prime.";
 
 //
 // Weapons
@@ -39,33 +39,36 @@ LITH_TXT_UPGRADE_DESCR_ReactArmour =
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
-   "Description: Re-build the internal mechanisms to turn the railgun part "
+   "Re-build the internal mechanisms to turn the railgun part "
    "of your shotgun into a new one, removing the unnecessary shell loader.";
 
 LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
 LITH_TXT_UPGRADE_DESCR_RifleModes =
    "Effect: Gives your rifle a sniper firing mode.\n\n"
-   "Description: A complete replacement for the firing mechanism which adds "
-   "a third mode, allowing you to burst-fire accurate, deadly shots.";
+   "A complete replacement for the firing mechanism which adds "
+   "a third mode, allowing you to burst-fire accurate, painful shots.";
 
 LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_DESCR_ChargeRPG =
    "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade "
    "launcher.\n\n"
-   "Description: A modification made by Unreal-Weapons, Inc. which "
+   "A modification made by Unreal-Weapons, Inc. which "
    "allows your grenade launcher to hold multiple grenades and plummet "
    "them all at once.";
 
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
-   "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
-   "Description: write things";
+   "Effect: Makes your plasma rifle emit red-hot laser beams.\n\n"
+   "Switches out the ion emitter with an ion condenser, that "
+   "can fire out laser beams strong enough to cut clean through adamantium.";
 
 LITH_TXT_UPGRADE_TITLE_Punct = "Punc. Cannon";
 LITH_TXT_UPGRADE_DESCR_Punct =
    "Effect: Your cannon now shoots explosive bolts that send huge shocks "
    "through walls.\n\n"
-   "Description: write things";
+   "Via adding new magic translation buffers to your weapon, "
+   "it can create extreme-yield explosive bolts from the same charge as "
+   "the cannon type does.";
 
 //
 // Extras
@@ -73,7 +76,7 @@ LITH_TXT_UPGRADE_DESCR_Punct =
 LITH_TXT_UPGRADE_TITLE_TorgueMode = "\cgEXPLOOSIONS";
 LITH_TXT_UPGRADE_DESCR_TorgueMode =
    "EFFECT: WHAT THE F*CK DO YOU THINK!?\n\n"
-   "DESCRIPTION: ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS "
+   "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS "
    "UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S "
    "ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO "
    "RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO "
@@ -109,12 +112,12 @@ LITH_TXT_UPGRADE_TITLE_Implying = ">Implicating";
 LITH_TXT_UPGRADE_DESCR_Implying =
    "Effect: Oh god why did I add something Kegan suggested to me this was "
    "not a good idea\n\n"
-   "Description: God damn it.";
+   "God damn it.";
 
 LITH_TXT_UPGRADE_TITLE_UNCEUNCE = "UNCE UNCE";
 LITH_TXT_UPGRADE_DESCR_UNCEUNCE =
    "Effect: UNCE UNCE UNCE UNCE UNCE UNCE\n\n"
-   "Description: UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE "
+   "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE "
    "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
 
 // EOF
