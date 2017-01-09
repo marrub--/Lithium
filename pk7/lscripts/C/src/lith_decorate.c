@@ -219,7 +219,7 @@ int Lith_OscillateN(int n)
 bool Lith_CheckHealth(int n)
 {
    player_t *p = Lith_LocalPlayer;
-   return p->health < p->maxhealth - n;
+   return p->health < p->maxhealth;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
