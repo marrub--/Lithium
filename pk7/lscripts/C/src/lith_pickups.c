@@ -179,7 +179,7 @@ void Lith_StupidPickup(player_t *p, int weapon)
    if(pickupfmt[ifmt].flag & 2)
       ifmt = ACS_Random(0, pickupfmtnum - 1);
    
-   __str fmt  = StrParam(">%S", pickupfmt[ifmt].fmt);
+   __str fmt  = StrParam("> %S", pickupfmt[ifmt].fmt);
    int   flag = pickupfmt[ifmt].flag;
    
    if(flag & 1 && flag & 4)

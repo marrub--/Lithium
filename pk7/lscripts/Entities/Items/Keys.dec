@@ -1,0 +1,92 @@
+actor Lith_RedCard : Lith_CustomInventory replaces RedCard
+{
+   states
+   {
+   Spawn:
+      RKEY A 10
+      RKEY B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_redcard)
+      TNT1 A 0 A_GiveInventory("RedCard")
+      stop
+   }
+}
+
+actor Lith_BlueCard : Lith_CustomInventory replaces BlueCard
+{
+   states
+   {
+   Spawn:
+      BKEY A 10
+      BKEY B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_bluecard)
+      TNT1 A 0 A_GiveInventory("BlueCard")
+      stop
+   }
+}
+
+actor Lith_YellowCard : Lith_CustomInventory replaces YellowCard
+{
+   states
+   {
+   Spawn:
+      YKEY A 10
+      YKEY B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_yellowcard)
+      TNT1 A 0 A_GiveInventory("YellowCard")
+      stop
+   }
+}
+
+actor Lith_RedSkull : Lith_CustomInventory replaces RedSkull
+{
+   states
+   {
+   Spawn:
+      RSKU A 10
+      RSKU B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_redskull)
+      TNT1 A 0 A_GiveInventory("RedSkull")
+      stop
+   }
+}
+
+actor Lith_BlueSkull : Lith_CustomInventory replaces BlueSkull
+{
+   states
+   {
+   Spawn:
+      BSKU A 10
+      BSKU B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_blueskull)
+      TNT1 A 0 A_GiveInventory("BlueSkull")
+      stop
+   }
+}
+
+actor Lith_YellowSkull : Lith_CustomInventory replaces YellowSkull
+{
+   states
+   {
+   Spawn:
+      YSKU A 10
+      YSKU B 10 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_yellowskull)
+      TNT1 A 0 A_GiveInventory("YellowSkull")
+      stop
+   }
+}
+
+// EOF
+

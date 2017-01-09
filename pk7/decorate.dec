@@ -44,6 +44,7 @@ actor Lith_MonsterHax
 #include "lscripts/Entities/Items/Score.dec"
 #include "lscripts/Entities/Items/AmmoPickups.dec"
 #include "lscripts/Entities/Items/Powerups.dec"
+#include "lscripts/Entities/Items/Keys.dec"
 //#include "lscripts/Entities/Items/DivisionSigil.dec"
 
 //

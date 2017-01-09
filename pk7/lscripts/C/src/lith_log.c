@@ -42,6 +42,12 @@ void Lith_LogName(int name)
    N(log_radsuit,    "RADSUIT")
    N(log_soulsphere, "SOULSPHERE")
    N(log_stimpack,   "STIMPACK")
+   N(log_redcard,    "REDCARD")
+   N(log_bluecard,   "BLUECARD")
+   N(log_yellowcard, "YELLOWCARD")
+   N(log_redskull,    "REDSKULL")
+   N(log_blueskull,   "BLUECARD")
+   N(log_yellowskull, "YELLOWSKULL")
 #undef N
    }
    

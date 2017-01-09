@@ -179,7 +179,7 @@ int Lith_PickupScore(int user_pickupparm, int user_spritetid)
    if(!(p->weapons & (1 << user_pickupparm)))
       return true;
    
-   Lith_Log(p, "You sold the weapon for Score.");
+   Lith_Log(p, "> You sold the weapon for Score.");
    Lith_GiveScore(p, 11100 * user_pickupparm);
    
    ACS_Thing_Remove(user_spritetid);

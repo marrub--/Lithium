@@ -127,7 +127,7 @@ void Lith_GiveScore(player_t *p, score_t score)
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
    
    if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
-      Lith_Log(p, "You gained brouzouf.");
+      Lith_Log(p, "> You gained brouzouf.");
    
    if(ACS_GetUserCVar(p->number, "lith_player_scoresound") && mul > 0.1)
       ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, 0.62f * mul, false, ATTN_STATIC);

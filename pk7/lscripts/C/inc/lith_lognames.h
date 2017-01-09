@@ -17,6 +17,12 @@ enum
    log_radsuit,
    log_soulsphere,
    log_stimpack,
+   log_redcard,
+   log_bluecard,
+   log_yellowcard,
+   log_redskull,
+   log_blueskull,
+   log_yellowskull,
    log_max
 };
 
