@@ -24,7 +24,7 @@ LITH_TXT_INFO_DESCR_Shotgun =
    "Most military models come with a CB-Scope.";
 
 LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
-LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun: Gauss";
+LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun Gauss Mod";
 LITH_TXT_INFO_DESCR_ShotgunUpgr =
    "During the short Avian-Sapiens war of\n1401 NE, A.O.F Inc. ran a line of "
    "modified Hiku Mk.2 shotguns that removed the shell firing mechanism and "
@@ -68,6 +68,18 @@ LITH_TXT_INFO_DESCR_Launcher =
    "rockets after they've been ignited and left the barrel; thus causing a "
    "small lag before the rocket takes off fully.";
 
+LITH_TXT_INFO_SHORT_LauncherUpgr = "$LITH_TXT_UPGRADE_TITLE_ChargeRPG";
+LITH_TXT_INFO_TITLE_LauncherUpgr = "UE-1 \"Eight-ball\" Revolving Launcher";
+LITH_TXT_INFO_DESCR_LauncherUpgr =
+   "Explosives are fun, as we all know, and Unreal Arms agreed with the "
+   "sentiment. Eight high-yield rocket-propelled grenades are loaded one at "
+   "a time into the launcher until finally the load is unleashed.\n\n"
+   "The secondary trigger can be held to select the mode of fire -- the "
+   "default mode shoots all eight in a horizontal line forward. The second "
+   "mode shoots the rockets in a spiral pattern for maximum damage on one "
+   "area, and the third and final mode hurls all of the grenades out of "
+   "their rocket casings.";
+
 LITH_TXT_INFO_SHORT_Plasma = "Plasma Rifle";
 LITH_TXT_INFO_TITLE_Plasma = "AllPoint 68-n Plasma Rifle";
 LITH_TXT_INFO_DESCR_Plasma =
@@ -80,6 +92,43 @@ LITH_TXT_INFO_DESCR_Plasma =
    "bolts per minute, and the secondary emits 1,260 30.96tW penetrating bolts "
    "per minute. This thing will make swiss cheese out of anything in its "
    "path.";
+
+LITH_TXT_INFO_SHORT_PlasmaUpgr = "$LITH_TXT_UPGRADE_TITLE_PlasLaser";
+LITH_TXT_INFO_TITLE_PlasmaUpgr = "AllPoint 68-o Plasmatic Laser";
+LITH_TXT_INFO_DESCR_PlasmaUpgr =
+   "Having their second best-seller also be complete trash at aiming pissed "
+   "AllPoint staff off so much that they completely redesigned the weapon's "
+   "internals to boast a 37.96tW high-speed ion condenser that fires death "
+   "out of your rifle hotter than the sun.\n\n"
+   "No, really. It's probably hotter than the sun. If you were like, 700km "
+   "away from it or something, but still.\n\n"
+   "The upgrade was, unfortunately, woefully expensive. It has been sold "
+   "only to private investors for quite some time now, but thankfully, your "
+   "employer is one of them.";
+
+LITH_TXT_INFO_SHORT_Cannon = "Omega Cannon";
+LITH_TXT_INFO_TITLE_Cannon = "$LITH_TXT_INFO_SHORT_Cannon";
+LITH_TXT_INFO_DESCR_Cannon =
+   "This weapon was developed in another dimensional plane, where magic is "
+   "still usable. Employs an extremely complex magical pattern buffer that "
+   "takes in condensed demonic energy and spits out whatever it pleases.\n\n"
+   "The pattern buffer that yours has is an explosive cannonball, which "
+   "can steamroll pretty much anything. Comes with a CB-Scope, but it isn't "
+   "usable for some reason.\n\n"
+   "This weapon was acquired by your employers via the black market group "
+   "\"Cid\" for a hefty price. Take care of it.";
+
+LITH_TXT_INFO_SHORT_CannonUpgr = "$LITH_TXT_UPGRADE_TITLE_Punct";
+LITH_TXT_INFO_TITLE_CannonUpgr = "Omega Cannon Punctuator Buffer";
+LITH_TXT_INFO_DESCR_CannonUpgr =
+   "A pattern buffer for your Omega Cannon which emits an explosive bolt "
+   "that does damage by penetrating walls with explosives, via magic.\n\n"
+   "How this buffer was sent here is unknown, as no living being in this "
+   "dimension can enter the Super Dimension, where it was created.\n\n"
+   "Popular theory among black market traders suggests that it could have "
+   "been sent here because the creator of the Omega Cannon wasn't satisfied "
+   "with its power, and wanted whoever attained it to be all-powerful.\n"
+   "Also, the CB-Scope works again, somehow.";
 
 // EOF
 
