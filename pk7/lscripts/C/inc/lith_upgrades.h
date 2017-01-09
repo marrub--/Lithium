@@ -22,7 +22,7 @@ enum
    UPGR_RifleModes,
    UPGR_ChargeRPG,
    UPGR_PlasLaser,
-   UPGR_OmegaRail,
+   UPGR_Punct,
    
    UPGR_TorgueMode,
 // UPGR_RetroWeps,

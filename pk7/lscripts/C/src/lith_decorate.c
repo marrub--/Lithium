@@ -150,6 +150,7 @@ int Lith_GetPlayerData(int info, bool target)
    case pdata_shotgun_gauss:  return p->upgrades[UPGR_GaussShotty].active;
    case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeRPG].active;
    case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
+   case pdata_punctuator:     return p->upgrades[UPGR_Punct].active;
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;

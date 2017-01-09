@@ -61,8 +61,8 @@ LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Effect: Makes your plasma rifle fire instant-hit lasers.\n\n"
    "Description: write things";
 
-LITH_TXT_UPGRADE_TITLE_OmegaRail = "Punc. Cannon";
-LITH_TXT_UPGRADE_DESCR_OmegaRail =
+LITH_TXT_UPGRADE_TITLE_Punct = "Punc. Cannon";
+LITH_TXT_UPGRADE_DESCR_Punct =
    "Effect: Your cannon now shoots explosive bolts that send huge shocks "
    "through walls.\n\n"
    "Description: write things";

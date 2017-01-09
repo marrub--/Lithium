@@ -36,10 +36,10 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "Cannon",       Unlocks("Cid"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",   Unlocks("Cannon"));
    
-   AddToBIP(bip, BIPC_UPGRADES, "JetBooster");
-   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw");
-   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs", Unlocks("CulterDei"));
-   AddToBIP(bip, BIPC_UPGRADES, "Yh0",       Unlocks("DurlaPrime"));
+   AddToBIP(bip, BIPC_UPGRADES, "JetBooster", Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw", Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",  Unlocks("CulterDei"));
+   AddToBIP(bip, BIPC_UPGRADES, "Yh0",        Unlocks("DurlaPrime"));
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
    AddToBIP(bip, BIPC_PLACES, "DurlaPrime", Unlocks("Earth", "AetosVi"));

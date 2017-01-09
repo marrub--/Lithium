@@ -18,6 +18,7 @@ A(ReflexWetw) D(ReflexWetw) U(ReflexWetw)
 A(CyberLegs)  D(CyberLegs)  U(CyberLegs)
 
               D(RifleModes) U(RifleModes)
+              D(Punct)
 
 A(7777777)    D(7777777)    U(7777777)
 A(lolsords)   D(lolsords)   U(lolsords)
@@ -49,7 +50,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
    {"ChargeRPG",   850000    , false, "LauncherUpgr", UC_Weap,  0.00},
    {"PlasLaser",   1400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
-   {"OmegaRail",   2600700   , false, "CannonUpgr",   UC_Weap,  0.00},
+   {"Punct",       3600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(Punct)},
    
    {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
@@ -234,6 +235,15 @@ static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
       DrawSpritePlain("LITHCAM1", hid_rifle_scope_cam, 0.1, 0.1, TICSECOND);
       ACS_SetHudClipRect(0, 0, 0, 0);
    }
+}
+
+//---------------------------------------
+// Punct
+//
+
+static void Upgr_Punct_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   ACS_GiveInventory("Lith_GTFO", 1);
 }
 
 //---------------------------------------

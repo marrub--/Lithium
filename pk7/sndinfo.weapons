@@ -135,6 +135,12 @@ weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 
 //
+// Punctuator Cannon
+//
+weapons/punct/fire lsounds/Punctuator/Fire.flac // FEAR
+weapons/punct/load lsounds/Punctuator/Load.flac // 〃
+
+//
 // sord
 //
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View

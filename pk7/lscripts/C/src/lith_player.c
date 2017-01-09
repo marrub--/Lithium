@@ -203,7 +203,8 @@ static void Lith_PlayerUpdateData(player_t *p)
    Lith_GetArmorType(p);
    
    p->berserk    = ACS_CheckInventory("PowerStrength");
-   p->scopetoken = ACS_CheckInventory("Lith_ShotgunScopedToken") ||
+   p->scopetoken = ACS_CheckInventory("Lith_CannonScopedToken") ||
+                   ACS_CheckInventory("Lith_ShotgunScopedToken") ||
                    ACS_CheckInventory("Lith_PistolScopedToken");
    
    p->keys.redcard     = ACS_CheckInventory("RedCard");
@@ -280,6 +281,7 @@ static void Lith_ResetPlayer(player_t *p)
    // is bad practice
    ACS_TakeInventory("Lith_PistolScopedToken",  999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
+   ACS_TakeInventory("Lith_CannonScopedToken",  999);
    
    p->slidecharge  = slidecharge_max;
    p->rocketcharge = rocketcharge_max;

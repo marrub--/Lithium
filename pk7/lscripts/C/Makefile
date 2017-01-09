@@ -42,7 +42,8 @@ MAIN_SOURCES= \
 	$(SRC)/lith_upgrades.c \
 	$(SRC)/lith_cbi.c      \
 	$(SRC)/lith_cbi_gui.c  \
-	$(SRC)/lith_bip.c
+	$(SRC)/lith_bip.c      \
+	$(SRC)/lith_weapons.c
 
 ## Output
 
