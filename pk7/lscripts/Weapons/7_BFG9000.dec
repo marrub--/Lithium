@@ -81,7 +81,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    Fire:
       "####" A 0 A_JumpIfInventory("Lith_CannonAmmo", 1, 1)
       goto FireEmpty
-      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 1)
+      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 1, TIF_NOTAKEINFINITE)
       CNNG A 0 A_AlertMonsters
       //
       CNNG A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_punctuator), "FirePunct")
@@ -160,7 +160,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       //
       CNNG A 0 A_JumpIfInventory("Lith_CannonAmmo", 2, 1)
       goto FireEmpty
-      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 2)
+      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 2, TIF_NOTAKEINFINITE)
       CNNG A 0 A_AlertMonsters
    //
    // FireCannonBig

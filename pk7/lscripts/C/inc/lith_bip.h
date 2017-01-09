@@ -63,6 +63,7 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name);
 bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name);
 void Lith_UnlockAllBIPPages(bip_t *bip);
 [[__call("ScriptS")]] void Lith_DeallocateBIP(bip_t *bip);
+void Lith_PlayerLoseBIPPages(bip_t *bip);
 
 #endif
 

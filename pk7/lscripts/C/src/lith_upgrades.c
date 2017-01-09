@@ -4,6 +4,10 @@
 #include "lith_hudid.h"
 #include <math.h>
 
+#define ForUpgrade() \
+   for(int i = 0; i < UPGR_MAX; i++) \
+      __with(upgrade_t *upgr = &p->upgrades[i];)
+
 
 //----------------------------------------------------------------------------
 // Static Functions
@@ -420,6 +424,8 @@ static void Upgr_UNCEUNCE_Update(player_t *p, upgrade_t *upgr)
 
 void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
 {
+   if(!upgr->owned) return;
+   
    upgr->active = !upgr->active;
    
    if(upgr->active && upgr->info->Activate)
@@ -442,14 +448,14 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
       return;
    }
    
+   upgr->owned = true;
+   p->upgradesowned++;
+   
    if(upgr->info->bipunlock)
       Lith_UnlockBIPPage(&p->bip, upgr->info->bipunlock);
    
    if(upgr->info->auto_activate)
       Upgr_ToggleActive(p, upgr);
-   
-   upgr->owned = true;
-   p->upgradesowned++;
 }
 
 bool Upgr_CanBuy(player_t *p, upgrade_t *upgr)
@@ -495,27 +501,25 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 
 void Lith_PlayerDeinitUpgrades(player_t *p)
 {
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
-      if(upgr->active)
-      {
-         upgr->wasactive = true;
-         Upgr_ToggleActive(p, upgr);
-      }
-   }
+   ForUpgrade()
+      if(upgr->   active)
+         upgr->wasactive = true,  Upgr_ToggleActive(p, upgr);
 }
 
 void Lith_PlayerReinitUpgrades(player_t *p)
 {
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
+   ForUpgrade()
       if(upgr->wasactive)
-      {
-         upgr->wasactive = false;
-         Upgr_ToggleActive(p, upgr);
-      }
+         upgr->wasactive = false, Upgr_ToggleActive(p, upgr);
+}
+
+void Lith_PlayerLoseUpgrades(player_t *p)
+{
+   ForUpgrade()
+      if(upgr->info->cost != 0 && upgr->owned)
+   {
+      upgr->owned = false;
+      p->upgradesowned--;
    }
 }
 

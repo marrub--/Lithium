@@ -26,13 +26,13 @@ actor Lith_Player : DoomPlayer
 }
 
 actor Lith_RA_Hax       : PowerProtection {Powerup.Duration 0x7FFFFFFF}
-actor Lith_RA_Bullets   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.01}
-actor Lith_RA_Energy    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.01 DamageFactor "Railgun", 0.01 DamageFactor "Electric", 0.01}
-actor Lith_RA_Fire      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.01 DamageFactor "Fire", 0.01}
-actor Lith_RA_FireMagic : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.01}
-actor Lith_RA_Magic     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.01}
-actor Lith_RA_Melee     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.01 DamageFactor "Melee", 0.01}
-actor Lith_RA_Shrapnel  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.01}
+actor Lith_RA_Bullets   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.05}
+actor Lith_RA_Energy    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.05 DamageFactor "Railgun", 0.05 DamageFactor "Electric", 0.05}
+actor Lith_RA_Fire      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.05 DamageFactor "Fire", 0.05}
+actor Lith_RA_FireMagic : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.05}
+actor Lith_RA_Magic     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.05}
+actor Lith_RA_Melee     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.01 DamageFactor "Melee", 0.05}
+actor Lith_RA_Shrapnel  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.05}
 
 actor Lith_RocketBooster : PowerFlight
 {

@@ -70,6 +70,7 @@ void Lith_PlayerInitUpgrades(struct player_s *p);
 void Lith_PlayerUpdateUpgrades(struct player_s *p);
 void Lith_PlayerDeinitUpgrades(struct player_s *p);
 void Lith_PlayerReinitUpgrades(struct player_s *p);
+void Lith_PlayerLoseUpgrades(struct player_s *p);
 
 #endif
 

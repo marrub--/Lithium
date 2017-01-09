@@ -5,6 +5,17 @@
 
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
+#define ForCategory() \
+   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+
+#define ForPage() \
+   for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next) \
+      __with(bippage_t *page = rover->data.vp;)
+
+#define ForCategoryAndPage() \
+   ForCategory() \
+      ForPage()
+
 [[__optional_args(1)]]
 void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
@@ -21,7 +32,7 @@ void Lith_PlayerInitBIP(player_t *p)
 {
    bip_t *bip = &p->bip;
    
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+   ForCategory()
       bip->infogr[i] = DList_Create();
    
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",       Unlocks("Omakeda"));
@@ -55,21 +66,15 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms");
    
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+   ForCategory()
       bip->pagemax += bip->categorymax[i] = DList_GetLength(bip->infogr[i]);
-   
-   Lith_UnlockBIPPage(bip, "Pistol");
 }
 
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 {
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
-      for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
-   {
-      bippage_t *page = rover->data.vp;
+   ForCategoryAndPage()
       if(ACS_StrCmp(page->name, name) == 0)
          return page;
-   }
    
    return null;
 }
@@ -77,6 +82,7 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
 {
    bippage_t *page = Lith_FindBIPPage(bip, name);
+   
    if(page && !page->unlocked)
    {
       bip->pageavail++;
@@ -85,6 +91,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
       for(int i = 0; i < MAX_BIP_UNLOCKS && page->unlocks[i]; i++)
          Lith_UnlockBIPPage(bip, page->unlocks[i]);
    }
+   
    return page;
 }
 
@@ -92,24 +99,31 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
 {
    bip->pageavail = bip->pagemax;
    
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
-      bip->categoryavail[i] = bip->categorymax[i];
-   
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
-      for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
-         ((bippage_t *)rover->data.vp)->unlocked = true;
+   ForCategory()        bip->categoryavail[i] = bip->categorymax[i];
+   ForCategoryAndPage() page->unlocked = true;
 }
 
 [[__call("ScriptS")]]
 void Lith_DeallocateBIP(bip_t *bip)
 {
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+   ForCategory()
    {
-      for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next)
+      ForPage()
          free(rover->data.vp);
-      
       DList_Free(bip->infogr[i]);
    }
+}
+
+void Lith_PlayerLoseBIPPages(bip_t *bip)
+{
+   ForCategory()
+   {
+      ForPage()
+         page->unlocked = false;
+      bip->categoryavail[i] = 0;
+   }
+   
+   bip->pageavail = 0;
 }
 
 // EOF

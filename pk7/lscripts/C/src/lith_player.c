@@ -87,6 +87,15 @@ static void Lith_PlayerDeath(void)
 {
    player_t *p = Lith_LocalPlayer;
    p->dead = true;
+   
+   Lith_PlayerDeinitUpgrades(p);
+   
+   if(ACS_GameType() == GAME_SINGLE_PLAYER || ACS_GetCVar("sv_cooploseinventory"))
+   {
+      Lith_PlayerLoseUpgrades(p);
+      Lith_PlayerLoseBIPPages(&p->bip);
+      p->score = p->scoreaccum = p->scoreaccumtime = 0;
+   }
 }
 
 [[__call("ScriptS"), __script("Respawn")]]
@@ -148,7 +157,7 @@ void Lith_TakeScore(player_t *p, score_t score)
    else
    {
       score_t delta = p->score;
-      p->score = 0;
+      p->score      = 0;
       p->scoreused += delta;
    }
    
@@ -241,7 +250,7 @@ static void Lith_PlayerRunScripts(player_t *p)
 //
 // Lith_ResetPlayer
 //
-// Reset some things on the player when a new map starts.
+// Reset some things on the player when they spawn.
 //
 static void Lith_ResetPlayer(player_t *p)
 {
@@ -330,6 +339,8 @@ static void Lith_ResetPlayer(player_t *p)
       
       Lith_UnlockAllBIPPages(&p->bip);
    }
+   
+   Lith_UnlockBIPPage(&p->bip, "Pistol");
 }
 
 //
