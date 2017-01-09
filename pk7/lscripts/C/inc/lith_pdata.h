@@ -8,7 +8,9 @@ enum
    pdata_buttons,
    pdata_has_sigil,
    pdata_EXPLOOOOOSIONS,
-   pdata_marathon_mode
+   pdata_marathon_mode,
+   pdata_yh0armor,
+   pdata_max
 };
 
 

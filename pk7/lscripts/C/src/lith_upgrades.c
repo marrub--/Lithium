@@ -13,18 +13,19 @@
 #define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
 #define U(n) [[__call("ScriptS")]] static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
 
-                            U(JetBooster)
-A(ReflexWetw) D(ReflexWetw) U(ReflexWetw)
-A(CyberLegs)  D(CyberLegs)  U(CyberLegs)
+                             U(JetBooster)
+A(ReflexWetw) D(ReflexWetw)  U(ReflexWetw)
+A(CyberLegs)  D(CyberLegs)   U(CyberLegs)
+              D(ReactArmour)
 
-              D(RifleModes) U(RifleModes)
+              D(RifleModes)  U(RifleModes)
               D(Punct)
 
-A(7777777)    D(7777777)    U(7777777)
-A(lolsords)   D(lolsords)   U(lolsords)
+A(7777777)    D(7777777)     U(7777777)
+A(lolsords)   D(lolsords)    U(lolsords)
 
-                            U(Implying)
-A(UNCEUNCE)   D(UNCEUNCE)   U(UNCEUNCE)
+                             U(Implying)
+A(UNCEUNCE)   D(UNCEUNCE)    U(UNCEUNCE)
 
 #undef A
 #undef D
@@ -44,7 +45,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.15, U(JetBooster)},
    {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
    {"CyberLegs",   900000    , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
-   {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00},
+   {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
    
    {"GaussShotty", 770430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
@@ -209,6 +210,52 @@ static void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
          ACS_SetActivator(fuckyou);
       }
    }
+}
+
+//---------------------------------------
+// ReactArmour
+//
+
+static void Lith_RA_Take(void)
+{
+   ACS_TakeInventory("Lith_RA_Bullets",   999);
+   ACS_TakeInventory("Lith_RA_Energy",    999);
+   ACS_TakeInventory("Lith_RA_Fire",      999);
+   ACS_TakeInventory("Lith_RA_FireMagic", 999);
+   ACS_TakeInventory("Lith_RA_Magic",     999);
+   ACS_TakeInventory("Lith_RA_Melee",     999);
+   ACS_TakeInventory("Lith_RA_Shrapnel",  999);
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_RA_Give(int num)
+{
+   if(!Lith_LocalPlayer->upgrades[UPGR_ReactArmour].active) return;
+   
+   __str name;
+   
+   switch(num)
+   {
+   case 1: name = "Bullets";   break;
+   case 2: name = "Energy";    break;
+   case 3: name = "Fire";      break;
+   case 4: name = "FireMagic"; break;
+   case 5: name = "Magic";     break;
+   case 6: name = "Melee";     break;
+   case 7: name = "Shrapnel";  break;
+   }
+   
+   if(!ACS_CheckInventory(name))
+   {
+      Lith_RA_Take();
+      Lith_Log(Lith_LocalPlayer, ">>>>> Activating Armor->%S()", name);
+      ACS_GiveInventory(StrParam("Lith_RA_%S", name), 1);
+   }
+}
+
+static void Upgr_ReactArmour_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   Lith_RA_Take();
 }
 
 //---------------------------------------

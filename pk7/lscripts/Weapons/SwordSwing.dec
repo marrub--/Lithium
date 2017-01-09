@@ -55,8 +55,11 @@ actor Lith_SwordHitter
    Height 6
    Speed 40
    Damage 30
+   Species "Lith_Player"
+   DamageType "Lith_Melee"
    
    Projectile
+   +MTHRUSPECIES
    +RIPPER
    
    var int user_trailstep;

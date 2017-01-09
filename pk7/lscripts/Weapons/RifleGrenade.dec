@@ -8,8 +8,11 @@ actor Lith_RifleGrenade
    BounceCount 2
    Gravity 0.5
    BounceSound "weapons/rifle/grenadebounce"
+   Species "Lith_Player"
+   DamageType "Lith_Shrapnel"
    
    Projectile
+   +MTHRUSPECIES
    -NOGRAVITY
    
    states

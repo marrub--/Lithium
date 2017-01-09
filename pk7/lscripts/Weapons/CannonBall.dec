@@ -7,6 +7,7 @@ actor Lith_CannonBall
    Speed 42
    Gravity 0.55
    BounceType Doom
+   Species "Lith_Player"
    DamageType "Lith_PlayerMissile"
    SeeSound "weapons/cannon/fire"
    DeathSound "weapons/cannon/explode"
@@ -15,6 +16,7 @@ actor Lith_CannonBall
    +RIPPER
    +BOUNCEONACTORS
    +BOUNCEAUTOOFFFLOORONLY
+   +MTHRUSPECIES
    -NOGRAVITY
    
    var int user_angle;

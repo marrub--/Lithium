@@ -8,7 +8,31 @@ actor Lith_Player : DoomPlayer
    Player.AttackZOffset 8
    DamageFactor "Lith_PlayerMissile", 0
    Species "Lith_Player"
+   
+   states
+   {
+   Pain.Lith_Bullets:   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1) goto Super::Pain
+   Pain.Railgun:
+   Pain.Electric:
+   Pain.Lith_Energy:    TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2) goto Super::Pain
+   Pain.Fire:
+   Pain.Lith_Fire:      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 3) goto Super::Pain
+   Pain.Lith_FireMagic: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 4) goto Super::Pain
+   Pain.Lith_Magic:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 5) goto Super::Pain
+   Pain.Melee:
+   Pain.Lith_Melee:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6) goto Super::Pain
+   Pain.Lith_Shrapnel:  TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7) goto Super::Pain
+   }
 }
+
+actor Lith_RA_Hax       : PowerProtection {Powerup.Duration 0x7FFFFFFF}
+actor Lith_RA_Bullets   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.01}
+actor Lith_RA_Energy    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.01 DamageFactor "Railgun", 0.01 DamageFactor "Electric", 0.01}
+actor Lith_RA_Fire      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.01 DamageFactor "Fire", 0.01}
+actor Lith_RA_FireMagic : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.01}
+actor Lith_RA_Magic     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.01}
+actor Lith_RA_Melee     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.01 DamageFactor "Melee", 0.01}
+actor Lith_RA_Shrapnel  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.01}
 
 actor Lith_RocketBooster : PowerFlight
 {
@@ -23,8 +47,6 @@ actor Lith_CameraHax // fuck
    +NOINTERACTION
 }
 
-// This code taken from Heavenly Knight / Ass Magic.
-// Which I made. I don't even remember if I released it.
 actor Lith_TimeHax : PowerTimeFreezer
 {
    Powerup.Duration 1
@@ -34,7 +56,6 @@ actor Lith_TimeHax2 : PowerTimeFreezer
 {
    Powerup.Duration -80
 }
-// end
 
 actor Lith_ExplodoBoots
 {

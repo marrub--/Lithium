@@ -1,3 +1,8 @@
+actor Lith_CyberRocket : Rocket replaces Rocket
+{
+   DamageType "Lith_Shrapnel"
+}
+
 actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
 {
    states

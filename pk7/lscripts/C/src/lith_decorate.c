@@ -155,6 +155,7 @@ int Lith_GetPlayerData(int info, bool target)
    case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;
    case pdata_marathon_mode:  return p->upgrades[UPGR_7777777].active;
+   case pdata_yh0armor:       return p->upgrades[UPGR_ReactArmour].active;
    }
    
    return 0;

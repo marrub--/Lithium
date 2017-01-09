@@ -25,6 +25,8 @@ actor XPuff replaces BulletPuff
 {
    RenderStyle Add
    Alpha 0.9
+   DamageType "Lith_Bullets"
+   Species "Lith_Player"
    
    +NOGRAVITY
    +NOBLOCKMAP
@@ -32,6 +34,7 @@ actor XPuff replaces BulletPuff
    +NOEXTREMEDEATH
    +FORCEXYBILLBOARD
    +PUFFGETSOWNER
+   +MTHRUSPECIES
    -ALLOWPARTICLES
    
    States

@@ -5,6 +5,8 @@ actor Lith_PlasmaHit
    RenderStyle Add
    Alpha 0.25
    Scale 0.65
+   Species "Lith_Player"
+   DamageType "Lith_Energy"
    
    +BRIGHT
    +NOINTERACTION
@@ -15,6 +17,7 @@ actor Lith_PlasmaHit
    +FLOORCLIP
    +EXTREMEDEATH
    +FORCEXYBILLBOARD
+   +MTHRUSPECIES
    -ALLOWPARTICLES
    
    States
@@ -46,12 +49,12 @@ actor Lith_PlasmaHit
 
 actor Lith_PlasmaLaze
 {
+   RenderStyle Add
+   Scale 0.3
+   
    +NOINTERACTION
    +FORCEXYBILLBOARD
    +NOINTERACTION
-   
-   RenderStyle Add
-   Scale 0.3
    
    states
    {

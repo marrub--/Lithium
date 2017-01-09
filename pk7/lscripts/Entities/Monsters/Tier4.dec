@@ -15,6 +15,14 @@ actor Lith_Archvile : Archvile replaces Archvile
    
    states
    {
+   Missile:
+      VILE G 0 Bright A_VileStart
+      VILE G 10 Bright A_FaceTarget
+      VILE H 8 Bright A_VileTarget
+      VILE IJKLMN 8 Bright A_FaceTarget
+      VILE O 8 Bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "Lith_FireMagic")
+      VILE P 20 Bright
+      goto Super::See
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Archvile)
       goto Super::Death

@@ -4,6 +4,7 @@ actor Lith_Fist : Lith_Weapon replaces Fist // why would you pick up a fist
    Weapon.Kickback 100
    Weapon.SlotNumber 1
    AttackSound "*fist"
+   DamageType "Lith_Melee"
    
    +WEAPON.WIMPY_WEAPON
    +WEAPON.MELEEWEAPON

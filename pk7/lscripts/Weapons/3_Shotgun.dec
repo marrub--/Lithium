@@ -50,6 +50,8 @@ actor Lith_GaussExplosion
 actor Lith_GaussPuff
 {
    RenderStyle Translucent
+   Species "Lith_Player"
+   DamageType "Lith_Energy"
    
    +BRIGHT
    +PUFFONACTORS
@@ -59,6 +61,7 @@ actor Lith_GaussPuff
    +FLOORCLIP
    +EXTREMEDEATH
    +FORCEXYBILLBOARD
+   +MTHRUSPECIES
    -ALLOWPARTICLES
    
    States
@@ -84,7 +87,6 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    Tag "Shotgun"
    Weapon.UpSound "weapons/shotgun/draw"
    Weapon.SlotNumber 3
-   DamageType "Lith_Shotgun"
    
    +WEAPON.NOAUTOFIRE
    

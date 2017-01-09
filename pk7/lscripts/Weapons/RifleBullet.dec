@@ -33,6 +33,10 @@ actor Lith_RifleBullet : FastProjectile
    Radius 2
    Height 2
    Mass 9999
+   DamageType "Lith_Bullets"
+   Species "Lith_Player"
+   
+   +MTHRUSPECIES
    
    states
    {

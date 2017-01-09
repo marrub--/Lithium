@@ -58,9 +58,11 @@ actor Lith_PlasmaBolt
    Height 12
    Speed 55
    Damage (10)
-   DamageType "Plasma"
+   DamageType "Lith_Energy"
+   Species "Lith_Player"
    
    Projectile
+   +MTHRUSPECIES
    
    var int user_trailstep;
 

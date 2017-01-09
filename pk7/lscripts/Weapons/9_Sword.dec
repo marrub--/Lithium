@@ -2,6 +2,8 @@
 
 actor Lith_SwordPuff : XPuff
 {
+   DamageType "Lith_Melee"
+   
    states
    {
    PuffNormal:

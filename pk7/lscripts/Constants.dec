@@ -45,30 +45,30 @@ const int Score_CellPack  = 50500;
 const int Score_Backpack  = (Score_Clip + Score_ShellBox + Score_Rocket + Score_Cell) * 5;
 
 // Tier 1
-const int Score_ZombieMan     = 1000;
-const int Score_ShotgunGuy    = 1500;
-const int Score_Imp           = 1500;
-const int Score_ChaingunGuy   = 2000;
+const int Score_ZombieMan     = 1000; // Bullets
+const int Score_ShotgunGuy    = 1500; // Bullets
+const int Score_Imp           = 1500; // Fire
+const int Score_ChaingunGuy   = 2000; // Bullets
 
 // Tier 2
-const int Score_Demon         = 3000;
-const int Score_LostSoul      = 4000;
+const int Score_Demon         = 3000; // Melee
+const int Score_LostSoul      = 4000; // Melee
 
 // Tier 3
-const int Score_HellKnight    = 7000;
-const int Score_Revenant      = 7500;
-const int Score_Cacodemon     = 8000;
-const int Score_Arachnotron   = 8000;
-const int Score_Mancubus      = 9000;
-const int Score_BaronOfHell   = 15000;
+const int Score_HellKnight    = 7000;  // Melee, Magic
+const int Score_Revenant      = 7500;  // Melee, Shrapnel
+const int Score_Cacodemon     = 8000;  // Melee, Energy
+const int Score_Arachnotron   = 8000;  // Energy
+const int Score_Mancubus      = 9000;  // Fire
+const int Score_BaronOfHell   = 15000; // Melee, Magic
 
 // Tier 4
-const int Score_PainElemental = 40000;
-const int Score_Archvile      = 40000;
+const int Score_PainElemental = 40000; // None
+const int Score_Archvile      = 40000; // FireMagic
 
 // Tier 5
-const int Score_SpiderDemon   = 100000;
-const int Score_CyberDemon    = 200000;
+const int Score_SpiderDemon   = 100000; // Bullets
+const int Score_CyberDemon    = 200000; // Shrapnel
 
 // EOF
 

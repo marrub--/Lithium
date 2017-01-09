@@ -27,10 +27,14 @@ actor Lith_PunctuatorExplosion
 
 actor Lith_PunctuatorPuff
 {
+   Species "Lith_Player"
+   DamageType "Lith_Shrapnel"
+   
    +NOINTERACTION
    +PUFFONACTORS
    +NODECAL
    +BLOODLESSIMPACT
+   +MTHRUSPECIES
    
    states
    {

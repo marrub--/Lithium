@@ -14,9 +14,6 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    
    states
    {
-   OhFuck:
-      TNT1 A 1 A_Log("oh god what the fuck")
-      stop
    Ready:
       CRIF A 1 A_WeaponReady
       wait
