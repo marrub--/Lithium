@@ -57,7 +57,7 @@ actor Lith_PlasmaBolt
    Radius 12
    Height 12
    Speed 55
-   Damage (10)
+   Damage (11)
    DamageType "Lith_Energy"
    Species "Lith_Player"
    

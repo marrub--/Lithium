@@ -47,7 +47,7 @@ actor Lith_Revenant : Revenant replaces Revenant
 
 actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 {
-   DamageFactor "Lith_Shotgun", 0.6
+   DamageFactor "Lith_Bullets", 0.6
    
    states
    {
@@ -59,6 +59,8 @@ actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 
 actor Lith_Arachnotron : Arachnotron replaces Arachnotron
 {
+   DamageFactor "Lith_Energy", 0.6
+   
    states
    {
    Death:

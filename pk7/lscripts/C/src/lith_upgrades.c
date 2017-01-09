@@ -44,14 +44,14 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
    {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.15, U(JetBooster)},
    {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
-   {"CyberLegs",   900000    , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
+   {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
    {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
    
-   {"GaussShotty", 770430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
+   {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   850000    , false, "LauncherUpgr", UC_Weap,  0.00},
-   {"PlasLaser",   1400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
-   {"Punct",       3600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(Punct)},
+   {"ChargeRPG",   1150000   , false, "LauncherUpgr", UC_Weap,  0.00},
+   {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
+   {"Punct",       5600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(Punct)},
    
    {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
@@ -245,11 +245,13 @@ void Lith_RA_Give(int num)
    case 7: name = "Shrapnel";  break;
    }
    
-   if(!ACS_CheckInventory(name))
+   __str class = StrParam("Lith_RA_%S", name);
+   
+   if(!ACS_CheckInventory(class))
    {
       Lith_RA_Take();
       Lith_Log(Lith_LocalPlayer, ">>>>> Activating Armor->%S()", name);
-      ACS_GiveInventory(StrParam("Lith_RA_%S", name), 1);
+      ACS_GiveInventory(class, 1);
    }
 }
 
