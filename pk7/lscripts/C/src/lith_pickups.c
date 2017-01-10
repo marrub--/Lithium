@@ -139,7 +139,7 @@ static struct pickupfmt_s const pickupfmt[] = {
       "seven hundred ways, and that's just with my bare hands. Not only am I\n"
       "extensively trained in unarmed combat, but I have access to the entire\n"
       "arsenal of the United States Marine Corps and I will use it to its full\n"
-      "extent to wipe your miserable ass off the face of the continent, you little shit."
+      "extent to wipe your miserable ass off the face of the continent, you little shit.\n"
       "If only you could have known what unholy retribution your little \"clever\"\n"
       "comment was about to bring down upon you, maybe you would have held\n"
       "your fucking tongue. But you couldn't, you didn't, and now you're paying\n"

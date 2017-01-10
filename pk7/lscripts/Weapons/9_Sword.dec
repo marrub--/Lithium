@@ -28,6 +28,7 @@ actor Lith_Sword : Lith_Weapon
    
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
+   +WEAPON.CHEATNOTWEAPON
    
    states
    {

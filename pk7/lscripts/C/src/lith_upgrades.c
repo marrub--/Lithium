@@ -283,8 +283,8 @@ static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
                WARPF_COPYINTERPOLATION | WARPF_COPYPITCH);
       
       ACS_SetHudSize(320, 200);
-      ACS_SetHudClipRect(40, 100, 240, 40);
-      DrawSpritePlain("lgfx/RifleScope.png", hid_rifle_scope_img, 40.1, 100.1, TICSECOND);
+      ACS_SetHudClipRect(40, 90, 240, 40);
+      DrawSpritePlain("lgfx/RifleScope.png", hid_rifle_scope_img, 40.1, 90.1, TICSECOND);
       DrawSpritePlain("LITHCAM1", hid_rifle_scope_cam, 0.1, 0.1, TICSECOND);
       ACS_SetHudClipRect(0, 0, 0, 0);
    }

@@ -34,13 +34,13 @@ static void HUD_KeyInd(player_t *p);
 void Lith_PlayerHUD(player_t *p)
 {
    static __str weapongfx[weapon_max] = {
-      [weapon_unknown]        = "H_D27",
-      [weapon_pistol]         = "H_D24",
-      [weapon_shotgun]        = "H_D23",
+      [weapon_unknown]  = "H_D27",
+      [weapon_pistol]   = "H_D24",
+      [weapon_shotgun]  = "H_D23",
       [weapon_rifle]    = "H_D22",
       [weapon_launcher] = "H_D21",
-      [weapon_plasma]    = "H_D25",
-      [weapon_bfg]        = "H_D26"
+      [weapon_plasma]   = "H_D25",
+      [weapon_bfg]      = "H_D26"
    };
    
    static __str armorgfx[armor_max] = {
