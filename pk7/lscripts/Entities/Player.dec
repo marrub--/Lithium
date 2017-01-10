@@ -72,5 +72,20 @@ actor Lith_ExplodoBoots
    }
 }
 
+actor Lith_EXPLOOOSION
+{
+   DamageType "Lith_PlayerMissile"
+   
+   states
+   {
+   Spawn:
+      MEXP A  0 nodelay A_Explode
+      MEXP AB 2 bright
+      MEXP CD 3 bright
+      MEXP EF 4 bright
+      stop
+   }
+}
+
 // EOF
 

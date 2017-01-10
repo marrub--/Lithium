@@ -138,6 +138,9 @@ void Lith_GiveScore(player_t *p, score_t score)
    if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
       Lith_Log(p, "> You gained brouzouf.");
    
+   if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0)
+      ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
+   
    if(ACS_GetUserCVar(p->number, "lith_player_scoresound") && mul > 0.1)
       ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, 0.62f * mul, false, ATTN_STATIC);
    
