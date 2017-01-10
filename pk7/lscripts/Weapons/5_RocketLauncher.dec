@@ -61,7 +61,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG A 1 offset(0, 33)
       GRLG A 1 offset(0, 32)
       GRLG A 4
-      GRLG A 4 A_ReFire
+      GRLG AAAA 1 A_ReFire
       goto Ready
    
    FireEmpty:
@@ -75,7 +75,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG A 1 offset(0, 33)
       GRLG A 1 offset(0, 32)
       GRLG A 5
-      GRLG A 4 A_ReFire
+      GRLG AAAA 1 A_ReFire
       goto Ready
    
    FireUnreal:
