@@ -20,7 +20,7 @@ LITH_TXT_LOG_REDCARD     = ">>>>> \cgRed KeyDisk\cl acquired.";
 LITH_TXT_LOG_BLUECARD    = ">>>>> \chBlue KeyDisk\cl acquired.";
 LITH_TXT_LOG_YELLOWCARD  = ">>>>> \ckYellow KeyDisk\cl acquired.";
 LITH_TXT_LOG_REDSKULL    = ">>>>> \cgRed Skull\cl acquired.";
-LITH_TXT_LOG_BLUECARD    = ">>>>> \chBlue Skull\cl acquired.";
+LITH_TXT_LOG_BLUESKULL   = ">>>>> \chBlue Skull\cl acquired.";
 LITH_TXT_LOG_YELLOWSKULL = ">>>>> \ckYellow Skull\cl acquired.";
 
 // EOF
