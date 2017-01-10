@@ -15,23 +15,21 @@ LITH_TXT_UPGRADE_DESCR_JetBooster =
 LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
 LITH_TXT_UPGRADE_DESCR_ReflexWetw =
    "Effect: Lets you move quicker, easier and more efficiently.\n\n"
-   "Cybernetic wetware that improves your reflexes and "
-   "implicit agility.";
+   "Cybernetic wetware that improves your reflexes and implicit agility.";
 
-LITH_TXT_UPGRADE_TITLE_CyberLegs = "Cyber Legs";
+LITH_TXT_UPGRADE_TITLE_CyberLegs = "Move Wetware";
 LITH_TXT_UPGRADE_DESCR_CyberLegs =
    "Effect: Allows you to jump higher, move faster, and damage things you "
    "jump onto.\n\n"
-   "Implement Culter Dei technology into your legs, "
-   "greatly increasing your agility.";
+   "Improved reflex wetware, which gives an even larger combat advantage.";
 
-LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armour";
+LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armor";
 LITH_TXT_UPGRADE_DESCR_ReactArmour =
-   "Effect: Makes your armour \"react\" to being hit, switching its mode to "
+   "Effect: Makes your armor \"react\" to being hit, switching its mode to "
    "the type of damage it took, making you take far less damage of that "
    "type until hit by another.\n\n"
-   "Integrate your armour with a highly advanced Yh-0 reactive "
-   "plating system, made avians on Durla Prime.";
+   "Integrate your armor with a highly advanced Yh-0 reactive plating "
+   "system, made avians on Durla Prime.";
 
 //
 // Weapons
@@ -39,36 +37,35 @@ LITH_TXT_UPGRADE_DESCR_ReactArmour =
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
-   "Re-build the internal mechanisms to turn the railgun part "
-   "of your shotgun into a new one, removing the unnecessary shell loader.";
+   "Re-build the internal mechanisms to turn the railgun part of your "
+   "shotgun into a new one, removing the unnecessary shell loader.";
 
 LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
 LITH_TXT_UPGRADE_DESCR_RifleModes =
    "Effect: Gives your rifle a sniper firing mode.\n\n"
-   "A complete replacement for the firing mechanism which adds "
-   "a third mode, allowing you to burst-fire accurate, painful shots.";
+   "A complete replacement for the firing mechanism which adds a third mode, "
+   "allowing you to burst-fire accurate, painful shots.";
 
 LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_DESCR_ChargeRPG =
    "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade "
    "launcher.\n\n"
-   "A modification made by Unreal-Weapons, Inc. which "
-   "allows your grenade launcher to hold multiple grenades and plummet "
-   "them all at once.";
+   "A modification made by Unreal-Weapons, Inc. which allows your grenade "
+   "launcher to hold multiple grenades and plummet them all at once.";
 
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Effect: Makes your plasma rifle emit red-hot laser beams.\n\n"
-   "Switches out the ion emitter with an ion condenser, that "
-   "can fire out laser beams strong enough to cut clean through adamantium.";
+   "Switches out the ion emitter with an ion condenser, that can fire out "
+   "laser beams strong enough to cut clean through adamantium.";
 
 LITH_TXT_UPGRADE_TITLE_Punct = "Punc. Cannon";
 LITH_TXT_UPGRADE_DESCR_Punct =
    "Effect: Your cannon now shoots explosive bolts that send huge shocks "
    "through walls.\n\n"
-   "Via adding new magic translation buffers to your weapon, "
-   "it can create extreme-yield explosive bolts from the same charge as "
-   "the cannon type does.";
+   "Via adding new magic translation buffers to your weapon, it can create "
+   "extreme-yield explosive bolts from the same charge as the cannon type "
+   "does.";
 
 //
 // Extras
@@ -76,24 +73,25 @@ LITH_TXT_UPGRADE_DESCR_Punct =
 LITH_TXT_UPGRADE_TITLE_TorgueMode = "\cgEXPLOOSIONS";
 LITH_TXT_UPGRADE_DESCR_TorgueMode =
    "EFFECT: WHAT THE F*CK DO YOU THINK!?\n\n"
-   "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS "
-   "UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S "
-   "ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO "
-   "RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO "
-   "A SICK GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK "
-   "ACTUALLY BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE "
-   "BACK WITH A GUITAR MADE OF BANDAGES LATER";
+   "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT "
+   "ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE "
+   "EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND "
+   "WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK "
+   "GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY "
+   "BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE BACK WITH "
+   "A GUITAR MADE OF BANDAGES LATER";
 
+/*
 LITH_TXT_UPGRADE_TITLE_RetroWeps = "Retro Weapons";
 LITH_TXT_UPGRADE_DESCR_RetroWeps =
    "Effect: All of your weapons fire projectiles straight from contra, and "
    "have their original animation sets from Doom.";
+*/
 
 LITH_TXT_UPGRADE_TITLE_7777777 = "7777777 Mode";
 LITH_TXT_UPGRADE_DESCR_7777777 =
    "Effect: Instates cosmic horror and spurious time travel into your very "
    "being, causing you to instantly implode upon activation.\n\n"
-   "Description:\n"
    "\cd~text interface terminal malfunction error ~2992dud\n\n"
    "\cdhelo i am of durnadle winner of ai beauty contets i will "
    "give u anti-physics powers becaus i did some calculations and found the "
@@ -102,8 +100,7 @@ LITH_TXT_UPGRADE_DESCR_7777777 =
 
 LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
 LITH_TXT_UPGRADE_DESCR_lolsords =
-   "Effect: You get a sword.\n"
-   "It is literally your only weapon.";
+   "Effect: You get a sword. It is literally your only weapon.";
 
 //
 // Downgrades

@@ -49,7 +49,7 @@ void Lith_PlayerInitBIP(player_t *p)
    
    AddToBIP(bip, BIPC_UPGRADES, "JetBooster", Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw", Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",  Unlocks("CulterDei"));
+   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "Yh0",        Unlocks("DurlaPrime"));
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
