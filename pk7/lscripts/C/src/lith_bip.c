@@ -53,9 +53,9 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_UPGRADES, "Yh0",        Unlocks("DurlaPrime"));
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
-   AddToBIP(bip, BIPC_PLACES, "DurlaPrime", Unlocks("Earth", "AetosVi"));
+   AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
    AddToBIP(bip, BIPC_PLACES, "Earth");
-   AddToBIP(bip, BIPC_PLACES, "SuperDimension");
+   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("Cannon"));
    
    AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
    AddToBIP(bip, BIPC_CORPORATIONS, "AOF");
