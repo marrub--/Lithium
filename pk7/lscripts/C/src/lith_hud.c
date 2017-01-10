@@ -217,7 +217,7 @@ static void HUD_Jet(player_t *p)
 //
 static void HUD_Weapons(player_t *p)
 {
-   DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, 0.1);
+   DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, TICSECOND);
    
    if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
       for(int i = weapon_min; i < weapon_max; i++)
@@ -226,7 +226,7 @@ static void HUD_Weapons(player_t *p)
       fixed x = (10 * (i - weapon_min)) + 80.1;
       fixed y = 200.2;
       HudMessageF("INDEXFONT_DOOM", "%i", i + 1);
-      HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
+      HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, TICSECOND);
    }
 }
 
@@ -235,28 +235,39 @@ static void HUD_Weapons(player_t *p)
 //
 static void HUD_Ammo(player_t *p)
 {
+   __str ammotype = "H_A2";
+   __str count;
+   
    switch(p->weapontype)
    {
-   case weapon_pistol: case weapon_launcher: case weapon_plasma: case weapon_bfg:
-   {
-      int count;
-      
-           if(p->weapontype == weapon_pistol)   count = 7 - ACS_CheckInventory("Lith_PistolShotsFired");
-      else if(p->weapontype == weapon_launcher) count =     ACS_CheckInventory("Lith_RocketAmmo");
-      else if(p->weapontype == weapon_plasma)   count =     ACS_CheckInventory("Lith_PlasmaAmmo");
-      else if(p->weapontype == weapon_bfg)      count =     ACS_CheckInventory("Lith_CannonAmmo");
-      
-      DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, 0.1);
-      
-      HudMessageF("BIGFONT", "%i", count);
-      HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, 0.1);
-      break;
-   }
    case weapon_rifle:
    {
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
-      DrawSpritePlain("H_W3", hid_ammobg, 320.2, 200.2 + addy, 0.1);
-      DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_ammo, 320.2, 168.2 + (p->riflefiremode * 16) + addy, 0.1);
+      DrawSpritePlain("H_W3", hid_riflemodebg, 241.2, 200.2 + addy, TICSECOND);
+      DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_riflemode, 241.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
+   }
+   case weapon_pistol:
+      ammotype = "H_A1";
+   case weapon_launcher: case weapon_plasma: case weapon_bfg:
+   {
+      if(p->weapontype == weapon_pistol)
+         count = StrParam("%i/7", 7 - ACS_CheckInventory("Lith_PistolShotsFired"));
+      else if(p->weapontype == weapon_rifle)
+         count = StrParam("%i/80", 80 - ACS_CheckInventory("Lith_RifleShotsFired"));
+      else if(p->weapontype == weapon_launcher)
+         count = StrParam("%i", ACS_CheckInventory("Lith_RocketAmmo"));
+      else if(p->weapontype == weapon_plasma)
+         count = StrParam("%i", ACS_CheckInventory("Lith_PlasmaAmmo"));
+      else if(p->weapontype == weapon_bfg)
+         count = StrParam("%i", ACS_CheckInventory("Lith_CannonAmmo"));
+      
+      DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, TICSECOND);
+      
+      HudMessageF("BIGFONT", "%S", count);
+      HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, TICSECOND);
+      
+      DrawSpritePlain(ammotype, hid_ammotype, 320.2, 200.2, TICSECOND);
+      
       break;
    }
    }

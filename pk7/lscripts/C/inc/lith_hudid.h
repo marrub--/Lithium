@@ -80,7 +80,10 @@ enum
    hid_weaponbg,
    
    hid_ammo,
+   hid_ammotype,
    hid_ammobg,
+   hid_riflemode,
+   hid_riflemodebg,
    
    hid_slideind_fxE,
    hid_slideind_fxS = hid_slideind_fxE + 11,
