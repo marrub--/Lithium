@@ -275,6 +275,12 @@ static void Lith_ResetPlayer(player_t *p)
    //
    // Reset data
    
+   // i cri tears of pain for APROP_SpawnHealth
+   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
+   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
+   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
+   if(!p->discount)   p->discount   = 1.0;
+   
    if(p->log)
       DList_Free(p->log);
    
@@ -288,6 +294,7 @@ static void Lith_ResetPlayer(player_t *p)
    
    // pls not exit map with murder thingies out
    // is bad practice
+   ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
    ACS_TakeInventory("Lith_PistolScopedToken",  999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    ACS_TakeInventory("Lith_CannonScopedToken",  999);
@@ -309,12 +316,6 @@ static void Lith_ResetPlayer(player_t *p)
    
    //
    // Static data
-   
-   // i cri tears of pain for APROP_SpawnHealth
-   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
-   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
-   if(!p->discount)   p->discount   = 1.0;
    
    if(!p->staticinit)
    {
