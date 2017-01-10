@@ -3,7 +3,7 @@
 //
 silence lsounds/Silence.flac
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
-misc/teleport lsounds/Teleport.flac
+misc/teleport lsounds/Teleport.flac // Self-made
 
 //
 // Weapons
@@ -20,6 +20,64 @@ $random effects/puff/ricochet {
    effects/puff/ricochet2
    effects/puff/ricochet3
    effects/puff/ricochet4
+}
+
+//
+//
+//
+items/healthbonus1 lsounds/bdup/DSHBON1.wav
+items/healthbonus2 lsounds/bdup/DSHBON2.wav
+items/healthbonus3 lsounds/bdup/DSHBON3.wav
+items/healthbonus4 lsounds/bdup/DSHBON4.wav
+items/healthbonus5 lsounds/bdup/DSHBON5.wav
+items/healthbonus6 lsounds/bdup/DSHBON6.wav
+items/healthbonus7 lsounds/bdup/DSHBON7.wav
+items/healthbonus8 lsounds/bdup/DSHBON8.wav
+items/healthbonus9 lsounds/bdup/DSHBON9.ogg
+items/healthbonus10 lsounds/bdup/DSHBON10.ogg
+items/healthbonus11 lsounds/bdup/DSHBON11.ogg
+items/healthbonus12 lsounds/bdup/DSHBON12.ogg
+items/healthbonus13 lsounds/bdup/DSHBON13.ogg
+items/healthbonus14 lsounds/bdup/DSHBON14.ogg
+
+$random items/healthbonusrandom {
+   items/healthbonus1
+   items/healthbonus2
+   items/healthbonus3
+   items/healthbonus4
+   items/healthbonus5
+   items/healthbonus6
+   items/healthbonus7
+   items/healthbonus8
+   items/healthbonus9
+   items/healthbonus10
+   items/healthbonus11
+   items/healthbonus12
+   items/healthbonus13
+   items/healthbonus14
+}
+
+$random items/healthbonus {
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   items/healthbonusrandom
 }
 
 // EOF

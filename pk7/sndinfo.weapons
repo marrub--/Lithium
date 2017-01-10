@@ -28,6 +28,8 @@ weapons/shotgun/gauss/spark1  lsounds/Shotgun/Gauss/Spark1.flac       // Fallout
 weapons/shotgun/gauss/spark2  lsounds/Shotgun/Gauss/Spark2.flac       // 〃
 weapons/shotgun/gauss/spark3  lsounds/Shotgun/Gauss/Spark3.flac       // 〃
 
+$limit weapons/shotgun/gauss/puff 0
+
 $random weapons/shotgun/just {
    weapons/shotgun/just1
    weapons/shotgun/just2
@@ -123,6 +125,8 @@ weapons/plasma/laser/fire_hum   lsounds/PlasmaRifle/Laser/FireHum.flac   // 〃
 weapons/plasma/laser/fire_loop  lsounds/PlasmaRifle/Laser/FireLoop.flac  // Touhou 9: Phantasmagoria of Flower View
 weapons/plasma/laser/fire_end   lsounds/PlasmaRifle/Laser/FireEnd.flac   // Quake
 weapons/plasma/laser/spark      lsounds/PlasmaRifle/Laser/Spark.flac     // Fallout 4
+
+$limit weapons/plasma/explode 0
 
 //
 // Omega Cannon
