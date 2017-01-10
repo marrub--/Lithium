@@ -59,13 +59,12 @@ void Lith_PlayerInitBIP(player_t *p)
    
    AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
    AddToBIP(bip, BIPC_CORPORATIONS, "AOF");
-   AddToBIP(bip, BIPC_CORPORATIONS, "Cid");
-   AddToBIP(bip, BIPC_CORPORATIONS, "CulterDei");
-   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",    Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "Cid",        Unlocks("SuperDimension", "Earth"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",       Unlocks("OFMD"));
    AddToBIP(bip, BIPC_CORPORATIONS, "OFMD");
-   AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda", Unlocks("Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",   Unlocks("AetosVi"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms");
+   AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda",    Unlocks("Earth"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
    ForCategory()
       bip->pagemax += bip->categorymax[i] = DList_GetLength(bip->infogr[i]);

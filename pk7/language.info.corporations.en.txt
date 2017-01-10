@@ -24,6 +24,35 @@ LITH_TXT_INFO_DESCR_AOF =
    "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
    "robotics.";
 
+LITH_TXT_INFO_SHORT_Cid = "Cid";
+LITH_TXT_INFO_TITLE_Cid = "$LITH_TXT_INFO_SHORT_Cid";
+LITH_TXT_INFO_DESCR_Cid =
+   "Cid is a black market trading group, presumed to be a duo. They sell "
+   "artifacts from the Super Dimension, ultra-high-grade weapons, and "
+   "anonymously donate to several charities on Earth.\n\n"
+   "This group has gone under several aliases over the past 200 years, and "
+   "is one of the strongest, longest standing black market groups ever.";
+
+LITH_TXT_INFO_SHORT_MDDO = "MDDO";
+LITH_TXT_INFO_TITLE_MDDO = "Maxim-Danil Defense Org";
+LITH_TXT_INFO_DESCR_MDDO =
+   "A now-defunct weapons manufacturer on Mars, founded and funded by the "
+   "famous Maxim-Danil duo. Created weapons of all kinds on commission "
+   "for military and paramilitary groups.\n\n"
+   "Defunded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
+
+LITH_TXT_INFO_SHORT_OFMD = "OFMD";
+LITH_TXT_INFO_TITLE_OFMD = "Optic Fiber Maxim-Danil";
+LITH_TXT_INFO_DESCR_OFMD =
+   "Originally, this company only produced optic fiber cables for consumer "
+   "use, but later branched out to create all kinds of computation "
+   "technology.\n\n"
+   "Optic Fiber Maxim-Danil are currently conducting a seek-and-destroy "
+   "operation in concert with militaries of Earth on all demonic threats "
+   "found to be emitting themselves from another dimensional plane.\n\n"
+   "For now, OFMD are your employers, and supply you with money, weaponry "
+   "and cyber-tech.";
+
 LITH_TXT_INFO_SHORT_Omakeda = "Omakeda";
 LITH_TXT_INFO_TITLE_Omakeda = "Omakeda Defense Co.";
 LITH_TXT_INFO_DESCR_Omakeda =
@@ -46,6 +75,16 @@ LITH_TXT_INFO_DESCR_Sym43 =
    "government bodies.\n\n"
    "Weapons confirmed to be made by them have appeared in countless historic "
    "battles, having existed for over 700 years now.";
+
+LITH_TXT_INFO_SHORT_UnrealArms = "Unreal Arms";
+LITH_TXT_INFO_TITLE_UnrealArms = "$LITH_TXT_INFO_SHORT_UnrealArms";
+LITH_TXT_INFO_DESCR_UnrealArms =
+   "A company currently residing in the Aetos Vi system, but run by humans. "
+   "Manufactures high-grade exotic weaponry both on commission and for "
+   "mass production.\n\n"
+   "They create what are dubbed \"some of the nicest-feeling weapons you can "
+   "get your hands on\", and yet still can sell them for a nice price thanks "
+   "to good shipping architecture in the Aetos Vi system.";
 
 // EOF
 

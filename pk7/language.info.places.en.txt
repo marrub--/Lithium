@@ -38,7 +38,7 @@ LITH_TXT_INFO_SHORT_SuperDimension = "Super Dimension";
 LITH_TXT_INFO_TITLE_SuperDimension = "$LITH_TXT_INFO_SHORT_SuperDimension";
 LITH_TXT_INFO_DESCR_SuperDimension =
    "The first hyperdimension found through observation of cuts in the "
-   "universe, presumably created intentionally by beings there.\n\n"
+   "universe, presumed to be created intentionally by beings there.\n\n"
    "Several artifacts have come from this dimension: the Omega Cannon, "
    "the Division Sigil, and the Cup of Blood.\n\n"
    "Of these artifacts, you can acquire two. The Omega Cannon, a weapon, "
