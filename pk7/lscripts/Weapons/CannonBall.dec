@@ -1,9 +1,9 @@
 actor Lith_CannonBall
 {
-   Radius 51
+   Radius 50
    Height 32
    Scale 3.5
-   Damage (90)
+   Damage (120)
    Speed 42
    Gravity 0.55
    BounceType Doom
@@ -35,7 +35,7 @@ actor Lith_CannonBall
       CBAL B 0 A_NoGravity
       CBAL B 0 A_Jump(256, "Splodey")
    Splodey:
-      CBAL BBBB 0 A_Explode
+      TNT1 AAAAAA 0 A_Explode
       goto Death1
    Death1:
       CBAL B 8 bright
@@ -47,15 +47,15 @@ actor Lith_CannonBall
 
 actor Lith_SmallCannonBall : Lith_CannonBall
 {
-   Radius 29
+   Radius 30
    Height 16
    Scale 2
-   Damage (50)
+   Damage (60)
    
    states
    {
    Splodey:
-      CBAL BB 0 A_Explode
+      TNT1 AAA 0 A_Explode
       goto Death1
    }
 }
