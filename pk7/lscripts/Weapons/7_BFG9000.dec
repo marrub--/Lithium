@@ -12,6 +12,9 @@ actor Lith_GTFO : Inventory
 
 actor Lith_PunctuatorExplosion
 {
+   RenderStyle "Add"
+   Alpha 0.2
+   Scale 0.9
    DamageType "Lith_PlayerMissile"
    
    +BLOODLESSIMPACT
@@ -21,6 +24,10 @@ actor Lith_PunctuatorExplosion
    {
    Spawn:
       TNT1 A 0 nodelay A_Explode(32, 64, 0)
+      TNT1 A random(1, 5)
+      MEXP AB 1 bright
+      MEXP CD 2 bright
+      MEXP EF 3 bright
       stop
    }
 }

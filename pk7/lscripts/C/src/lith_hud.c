@@ -225,7 +225,7 @@ static void HUD_Weapons(player_t *p)
    {
       fixed x = (10 * (i - weapon_min)) + 80.1;
       fixed y = 200.2;
-      HudMessageF("INDEXFONT_DOOM", "%i", i);
+      HudMessageF("INDEXFONT_DOOM", "%i", i + 1);
       HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, 0.1);
    }
 }
