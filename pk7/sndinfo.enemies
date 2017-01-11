@@ -1,10 +1,12 @@
 //
 // Zombies
 //
-enemies/zombie/fire lsounds/ZombieMan/Fire.flac // Killing Floor
+enemies/zombie/ready lsounds/ZombieMan/Ready.flac // Fallout 3
+enemies/zombie/fire  lsounds/ZombieMan/Fire.flac  // Killing Floor
 $attenuation enemies/zombie/fire 0.5
 
-enemies/shotguy/fire lsounds/ShotGuy/Fire.flac // Killing Floor
+enemies/shotguy/ready lsounds/ShotGuy/Ready.flac // Fallout: New Vegas
+enemies/shotguy/fire  lsounds/ShotGuy/Fire.flac  // Killing Floor
 $attenuation enemies/shotguy/fire 0.5
 
 enemies/chainguy/fire  lsounds/ChaingunGuy/Fire.flac        // Killing Floor
