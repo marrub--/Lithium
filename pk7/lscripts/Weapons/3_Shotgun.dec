@@ -49,7 +49,7 @@ actor Lith_GaussExplosion
 
 actor Lith_GaussPuff
 {
-   RenderStyle Translucent
+   RenderStyle "Translucent"
    Species "Lith_Player"
    DamageType "Lith_Energy"
    
@@ -84,7 +84,7 @@ actor Lith_GaussPuff
 
 actor Lith_Shotgun : Lith_Weapon replaces Shotgun
 {
-   Tag "Shotgun"
+   Tag "$LITH_TXT_INFO_SHORT_Shotgun"
    Weapon.UpSound "weapons/shotgun/draw"
    Weapon.SlotNumber 3
    

@@ -13,7 +13,7 @@ actor Lith_RifleBurstIter : Inventory
 
 actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
 {
-   Tag "Combat Rifle"
+   Tag "$LITH_TXT_INFO_SHORT_Rifle"
    Weapon.UpSound "weapons/rifle/draw"
    Weapon.SlotNumber 4
    

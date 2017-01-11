@@ -10,7 +10,7 @@ actor Lith_PistolScopedToken : Inventory
 
 actor Lith_Pistol : Lith_Weapon replaces Pistol
 {
-   Tag "Pistol"
+   Tag "$LITH_TXT_INFO_SHORT_Pistol"
    Weapon.SlotNumber 2
    Weapon.BobSpeed 3
    Weapon.BobRangeX 0.2
