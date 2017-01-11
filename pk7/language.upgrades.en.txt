@@ -31,6 +31,14 @@ LITH_TXT_UPGRADE_DESCR_ReactArmour =
    "Integrate your armor with a highly advanced Yh-0 reactive plating "
    "system, made avians on Durla Prime.";
 
+LITH_TXT_UPGRADE_TITLE_DefenseNuke = "Def. Mini Nuke";
+LITH_TXT_UPGRADE_DESCR_DefenseNuke =
+   "Effect: When you enter a level, a large explosion is created around you, "
+   "defending you from any initial threats.\n"
+   "\cgNote: This alerts monsters when you enter a map.\n\n"
+   "Implant a slow-charging self-defense explosive into your armor, keeping "
+   "threats away while you're distracted.";
+
 //
 // Weapons
 //
@@ -59,8 +67,8 @@ LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Switches out the ion emitter with an ion condenser, that can fire out "
    "laser beams strong enough to cut clean through adamantium.";
 
-LITH_TXT_UPGRADE_TITLE_Punct = "Punc. Cannon";
-LITH_TXT_UPGRADE_DESCR_Punct =
+LITH_TXT_UPGRADE_TITLE_PunctCannon = "Punct. Cannon";
+LITH_TXT_UPGRADE_DESCR_PunctCannon =
    "Effect: Your cannon now shoots explosive bolts that send huge shocks "
    "through walls.\n\n"
    "Via adding new magic translation buffers to your weapon, it can create "

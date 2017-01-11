@@ -16,24 +16,29 @@
 #define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr);
 #define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
 #define U(n) [[__call("ScriptS")]] static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
+#define E(n) static void Upgr_##n##_Enter(player_t *p, upgrade_t *upgr);
 
-                             U(JetBooster)
-A(ReflexWetw) D(ReflexWetw)  U(ReflexWetw)
-A(CyberLegs)  D(CyberLegs)   U(CyberLegs)
-              D(ReactArmour)
-
-              D(RifleModes)  U(RifleModes)
-              D(Punct)
-
-A(7777777)    D(7777777)     U(7777777)
-A(lolsords)   D(lolsords)    U(lolsords)
-
-                             U(Implying)
-A(UNCEUNCE)   D(UNCEUNCE)    U(UNCEUNCE)
+// A(-----------) D(-----------) U(-----------) E(-----------)
+                                 U(JetBooster)
+   A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)
+   A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
+                  D(ReactArmour)
+                                                E(DefenseNuke)
+//------------------------------------------------------------
+                  D(RifleModes)  U(RifleModes)
+                  D(PunctCannon)
+//------------------------------------------------------------
+   A(7777777)     D(7777777)     U(7777777)
+   A(lolsords)    D(lolsords)    U(lolsords)
+//------------------------------------------------------------
+                                 U(Implying)
+   A(UNCEUNCE)    D(UNCEUNCE)    U(UNCEUNCE)
+//------------------------------------------------------------
 
 #undef A
 #undef D
 #undef U
+#undef E
 
 
 //----------------------------------------------------------------------------
@@ -43,6 +48,7 @@ A(UNCEUNCE)   D(UNCEUNCE)    U(UNCEUNCE)
 #define A(n) .Activate = Upgr_##n##_Activate
 #define D(n) .Deactivate = Upgr_##n##_Deactivate
 #define U(n) .Update = Upgr_##n##_Update
+#define E(n) .Enter = Upgr_##n##_Enter
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
@@ -50,12 +56,13 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
    {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
    {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
+   {"DefenseNuke", 3100300   , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
    
    {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
    {"ChargeRPG",   1150000   , false, "LauncherUpgr", UC_Weap,  0.00},
    {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
-   {"Punct",       5600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(Punct)},
+   {"PunctCannon", 5600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(PunctCannon)},
    
    {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
@@ -69,6 +76,7 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 #undef A
 #undef D
 #undef U
+#undef E
 
 
 //----------------------------------------------------------------------------
@@ -265,6 +273,15 @@ static void Upgr_ReactArmour_Deactivate(player_t *p, upgrade_t *upgr)
 }
 
 //---------------------------------------
+// DefenseNuke
+//
+
+static void Upgr_DefenseNuke_Enter(player_t *p, upgrade_t *upgr)
+{
+   ACS_GiveInventory("Lith_Nuke", 1);
+}
+
+//---------------------------------------
 // RifleModes
 //
 
@@ -291,10 +308,10 @@ static void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 }
 
 //---------------------------------------
-// Punct
+// PunctCannon
 //
 
-static void Upgr_Punct_Deactivate(player_t *p, upgrade_t *upgr)
+static void Upgr_PunctCannon_Deactivate(player_t *p, upgrade_t *upgr)
 {
    ACS_GiveInventory("Lith_GTFO", 1);
 }
@@ -491,12 +508,16 @@ void Lith_PlayerInitUpgrades(player_t *p)
 
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgrade_t *upgr = &p->upgrades[i];
+   ForUpgrade()
       if(upgr->active && upgr->info->Update)
          upgr->info->Update(p, upgr);
-   }
+}
+
+void Lith_PlayerEnterUpgrades(player_t *p)
+{
+   ForUpgrade()
+      if(upgr->active && upgr->info->Enter)
+         upgr->info->Enter(p, upgr);
 }
 
 void Lith_PlayerDeinitUpgrades(player_t *p)

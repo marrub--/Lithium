@@ -17,6 +17,7 @@ enum
    UPGR_ReflexWetw,
    UPGR_CyberLegs,
    UPGR_ReactArmour,
+   UPGR_DefenseNuke,
    
    UPGR_GaussShotty,
    UPGR_RifleModes,
@@ -47,8 +48,10 @@ typedef struct upgradeinfo_s
    int category;
    fixed scoreadd;
    
-   upgr_cb_t Activate, Deactivate;
+   upgr_cb_t        Activate;
+   upgr_cb_t        Deactivate;
    upgr_update_cb_t Update;
+   upgr_cb_t        Enter;
 } upgradeinfo_t;
 
 typedef struct upgrade_s
@@ -68,6 +71,7 @@ void Upgr_Buy(struct player_s *p, upgrade_t *upgr);
 
 void Lith_PlayerInitUpgrades(struct player_s *p);
 void Lith_PlayerUpdateUpgrades(struct player_s *p);
+void Lith_PlayerEnterUpgrades(struct player_s *p);
 void Lith_PlayerDeinitUpgrades(struct player_s *p);
 void Lith_PlayerReinitUpgrades(struct player_s *p);
 void Lith_PlayerLoseUpgrades(struct player_s *p);

@@ -54,6 +54,7 @@ static void Lith_PlayerEntry(void)
    player_t *p = Lith_LocalPlayer;
    
    Lith_ResetPlayer(p);
+   Lith_PlayerEnterUpgrades(p);
    
    while(p->active)
    {
