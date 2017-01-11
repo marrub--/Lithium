@@ -1,11 +1,11 @@
 #if defined(LITH_X)
 
   LITH_X(0, WEP, WEAPONS,      "Weapons")
+// TODO
 //LITH_X(1, ENE, ENEMIES,      "Enemies")
+// Add when things like the Division Sigil are in
 //LITH_X(2, ITE, ITEMS,        "Items")
   LITH_X(1, UPG, UPGRADES,     "Upgrades")
-//LITH_X(4, ABI, ABILITIES,    "Abilities")
-//LITH_X(5, YOU, YOURSELF,     "Yourself")
   LITH_X(2, PLA, PLACES,       "Places")
   LITH_X(3, COR, CORPORATIONS, "Companies and Corporations")
 

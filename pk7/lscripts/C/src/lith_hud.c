@@ -87,8 +87,10 @@ static void HUD_StringStack(player_t *p)
    
    if((ACS_Timer() % 3) == 0)
    {
-      DList_InsertBack(p->hudstrstack, (listdata_t){ .str = StrParam("%.4X", Random(0x0000, 0x7FFF)) });
-      DList_DeleteFront(p->hudstrstack);
+      DList_InsertBack(p->hudstrstack, (listdata_t){ .str = StrParam("%.8X", Random(0, 0x7FFFFFFF)) });
+      
+      if(DList_GetLength(p->hudstrstack) == hudstrstack_max)
+         DList_DeleteFront(p->hudstrstack);
    }
    
    ACS_SetHudSize(320, 200);
@@ -97,7 +99,7 @@ static void HUD_StringStack(player_t *p)
    for(slist_t *rover = p->hudstrstack->head; rover; rover = rover->next, i++)
    {
       HudMessage("%S", rover->data.str);
-      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 320.2, 0.1 + (i * 9), 0.0, 0.5);
+      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 300.2, 20.1 + (i * 9), 0.0, 0.5);
    }
 }
 
@@ -119,7 +121,7 @@ static void HUD_Waves(player_t *p)
    DrawSpriteFade(StrParam("H_D1%i", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(sink(pos / 32.0) * 7.0, 0),
-      5.1 + pos,
+      25.1 + pos,
       1.5, 0.3);
    
    // Square
@@ -130,13 +132,13 @@ static void HUD_Waves(player_t *p)
       DrawSpriteFade(roundk(a, 2) != 0.0 ? "H_D16" : "H_D46",
          hid_scope_squareS - pos,
          300.1 + (a >= 0) * 7.0,
-         5.1 + pos,
+         25.1 + pos,
          1.9, 0.1);
    }
    
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
+   DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
 
 //
@@ -159,14 +161,7 @@ static void HUD_Scope(player_t *p)
       }
    }
    else if(p->scopetoken && !p->old.scopetoken)
-   {
       p->hudstrstack = DList_Create();
-      
-      for(int i = 0; i < hudstrstack_max; i++)
-         DList_InsertBack(p->hudstrstack, (listdata_t){
-            .str = StrParam("%x", Random(0x1000, 0x7FFF))
-         });
-   }
    
    if(p->scopetoken)
    {

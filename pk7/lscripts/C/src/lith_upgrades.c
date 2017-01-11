@@ -13,10 +13,10 @@
 // Static Functions
 //
 
-#define A(n) static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr);
-#define D(n) static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
+#define A(n)                       static void Upgr_##n##_Activate(player_t *p, upgrade_t *upgr);
+#define D(n)                       static void Upgr_##n##_Deactivate(player_t *p, upgrade_t *upgr);
 #define U(n) [[__call("ScriptS")]] static void Upgr_##n##_Update(player_t *p, upgrade_t *upgr);
-#define E(n) static void Upgr_##n##_Enter(player_t *p, upgrade_t *upgr);
+#define E(n)                       static void Upgr_##n##_Enter(player_t *p, upgrade_t *upgr);
 
 // A(-----------) D(-----------) U(-----------) E(-----------)
                                  U(JetBooster)
@@ -45,10 +45,10 @@
 // Static Objects
 //
 
-#define A(n) .Activate = Upgr_##n##_Activate
+#define A(n) .Activate   = Upgr_##n##_Activate
 #define D(n) .Deactivate = Upgr_##n##_Deactivate
-#define U(n) .Update = Upgr_##n##_Update
-#define E(n) .Enter = Upgr_##n##_Enter
+#define U(n) .Update     = Upgr_##n##_Update
+#define E(n) .Enter      = Upgr_##n##_Enter
 
 static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
 // {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
