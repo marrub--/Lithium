@@ -57,6 +57,8 @@ weapons/rifle/pickup     lsounds/CombatRifle/Pickup.flac      // Halo 3
 weapons/rifle/draw       lsounds/CombatRifle/Draw.flac        // 〃
 weapons/rifle/firemode   lsounds/CombatRifle/SetFiremode.flac // Fallout: New Vegas, Deus Ex
 weapons/rifle/grenade    lsounds/CombatRifle/FireGrenade.flac // Fallout: New Vegas
+weapons/rifle/reloadout  lsounds/CombatRifle/ReloadOut.flac   // ???
+weapons/rifle/reloadin   lsounds/CombatRifle/ReloadIn.flac    // ???
 
 weapons/rifle/grenadebounce1 lsounds/CombatRifle/GrenadeBounce1.flac // Halo 3
 weapons/rifle/grenadebounce2 lsounds/CombatRifle/GrenadeBounce2.flac // 〃
