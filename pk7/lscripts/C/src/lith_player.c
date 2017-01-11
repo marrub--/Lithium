@@ -8,7 +8,7 @@
 
 
 //----------------------------------------------------------------------------
-// External Objects
+// Extern Objects
 //
 
 player_t players[MAX_PLAYERS];
@@ -32,9 +32,9 @@ static __str const weaponclasses[weapon_max] = {
 // Static Functions
 //
 
-static void Lith_PlayerUpdateData(player_t *p);
-static void Lith_PlayerRunScripts(player_t *p);
-static void Lith_ResetPlayer(player_t *p);
+[[__call("ScriptS")]] static void Lith_PlayerUpdateData(player_t *p);
+[[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
+[[__call("ScriptS")]] static void Lith_ResetPlayer(player_t *p);
 static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
 static void Lith_PlayerDamageBob(player_t *p);
@@ -178,6 +178,7 @@ void Lith_TakeScore(player_t *p, score_t score)
 //
 // Update all of the player's data.
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerUpdateData(player_t *p)
 {
    p->x      = ACS_GetActorX(0);
@@ -232,6 +233,7 @@ static void Lith_PlayerUpdateData(player_t *p)
 //
 // Run main loop scripts.
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
    // Logic
@@ -255,6 +257,7 @@ static void Lith_PlayerRunScripts(player_t *p)
 //
 // Reset some things on the player when they spawn.
 //
+[[__call("ScriptS")]]
 static void Lith_ResetPlayer(player_t *p)
 {
    //
