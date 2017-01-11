@@ -1,12 +1,14 @@
 Lithium: Credits
 I think I missed a few people, sorry.
 
+Sound credits are all in the "sndinfo" files in comments.
+
 DavidPH
    Glorious, glorious GDCC
    Lots of help with a lot of things
 
 Jimmy
-   Fonts!
+   Fonts! All of them.
 
 Kate
    Some specific, old code is based off of Error: Doom code
@@ -45,7 +47,8 @@ Xaser Acheron
 Yholl
    Effects from LegenDoom
    Help with a buncha stuff
-   Descriptions and ideas for Torgue Mode and 7777777
+   Descriptions for some of the extra upgrades
+   Ideas for a lot of stuff
    Marathon resources
 
 zrrion the insect

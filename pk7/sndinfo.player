@@ -9,6 +9,8 @@ player/doublejump  lsounds/Player/DoubleJump.flac          // DemonSteele
 player/slide       lsounds/Player/Slide.flac               // 〃
 player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, Fallout 4
 player/nuke        lsounds/Player/Nuke.flac                // Touhou 13
+player/death1      lsounds/Player/DeathCharge.flac         // 〃
+player/death2      lsounds/Player/Death.flac               // 〃
 
 $volume player/doublejump 0.7
 

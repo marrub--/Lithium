@@ -134,9 +134,6 @@ static void HUD_Waves(player_t *p)
          1.9, 0.1);
    }
    
-   ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-   ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
-   
    // Triangle
    pos = (5 + timer) % 160;
    DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 5.1 + pos, 1.2, 0.2);
@@ -175,14 +172,6 @@ static void HUD_Scope(player_t *p)
    {
       HUD_Waves(p);
       HUD_StringStack(p);
-      
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
-   }
-   else
-   {
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
    }
 }
 

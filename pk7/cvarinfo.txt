@@ -15,6 +15,7 @@ user bool lith_player_invertmouse = false;
 
 // Server
 server bool lith_sv_stupidpickups = false;
+server bool lith_sv_revenge = true;
 
 // Debugging
 server noarchive bool __lith_debug_on = false;

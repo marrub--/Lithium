@@ -102,6 +102,9 @@ typedef struct player_s
    float bobpitch;
    float bobyaw;
    
+   float extrpitch;
+   float extryaw;
+   
    // 🌌 「÷」 0
    sigil_t sigil;
    

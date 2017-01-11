@@ -39,6 +39,7 @@ static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
 static void Lith_PlayerDamageBob(player_t *p);
 static void Lith_PlayerView(player_t *p);
+static void Lith_PlayerStyle(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
 static void Lith_PlayerDeltaStats(player_t *p);
@@ -87,15 +88,26 @@ static void Lith_PlayerEntry(void)
 static void Lith_PlayerDeath(void)
 {
    player_t *p = Lith_LocalPlayer;
+   bool singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
+   
    p->dead = true;
    
    Lith_PlayerDeinitUpgrades(p);
    
-   if(ACS_GameType() == GAME_SINGLE_PLAYER || ACS_GetCVar("sv_cooploseinventory"))
+   if(singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
       Lith_PlayerLoseUpgrades(p);
       Lith_PlayerLoseBIPPages(&p->bip);
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
+   }
+   
+   if(singleplayer && ACS_GetCVar("lith_sv_revenge"))
+   {
+      ACS_LocalAmbientSound("player/death1", 127);
+      ACS_Delay(35);
+      ACS_GiveInventory("Lith_PlayerDeath", 1);
+      ACS_Delay(25);
+      ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
    }
 }
 
@@ -203,7 +215,6 @@ static void Lith_PlayerUpdateData(player_t *p)
    p->upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
    
    p->buttons     = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-   p->old.buttons = ACS_GetPlayerInput(-1, INPUT_OLDBUTTONS);
    
    p->health = ACS_GetActorProperty(0, APROP_Health);
    p->armor  = ACS_CheckInventory("BasicArmor");
@@ -237,9 +248,9 @@ static void Lith_PlayerUpdateData(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
-   // Logic
    if(!p->dead)
    {
+      // Logic
       Lith_PlayerStats(p);          // Update statistics
       Lith_PlayerScore(p);          // Update score
       Lith_PlayerUpdateCBI(p);      // Update CBI
@@ -249,8 +260,9 @@ static void Lith_PlayerRunScripts(player_t *p)
    
    // Rendering
    Lith_PlayerDamageBob(p); // Update damage bobbing
-   Lith_PlayerHUD(p);       // Draw HUD
    Lith_PlayerView(p);      // Update additive view
+   Lith_PlayerHUD(p);       // Draw HUD
+   Lith_PlayerStyle(p);     // Change player render style
 }
 
 //
@@ -312,11 +324,14 @@ static void Lith_ResetPlayer(player_t *p)
    p->cbi.open = false;
    p->frozen   = 0;
    
-   p->bobyaw   = 0.0f;
-   p->bobpitch = 0.0f;
-   
-   p->addyaw   = 0.0f;
    p->addpitch = 0.0f;
+   p->addyaw   = 0.0f;
+   
+   p->bobpitch = 0.0f;
+   p->bobyaw   = 0.0f;
+   
+   p->extrpitch = 0.0f;
+   p->extryaw   = 0.0f;
    
    p->scoreaccum = 0;
    p->scoremul   = 1.3;
@@ -414,8 +429,8 @@ static void Lith_PlayerDamageBob(player_t *p)
       p->bobpitch = cosf(angle) * distance;
    }
    
-   p->bobyaw   = lerpf(p->bobyaw,   0.0f, 0.1f);
    p->bobpitch = lerpf(p->bobpitch, 0.0f, 0.1f);
+   p->bobyaw   = lerpf(p->bobyaw,   0.0f, 0.1f);
 }
 
 //
@@ -425,11 +440,36 @@ static void Lith_PlayerDamageBob(player_t *p)
 //
 static void Lith_PlayerView(player_t *p)
 {
+   float addp = 0, addy = 0;
+   
    if(ACS_GetUserCVar(p->number, "lith_player_damagebob"))
    {
       float bobmul = ACS_GetUserCVarFixed(p->number, "lith_player_damagebobmul");
-      p->addpitch = p->bobpitch * bobmul;
-      p->addyaw   = p->bobyaw   * bobmul;
+      addp += p->bobpitch * bobmul;
+      addy += p->bobyaw   * bobmul;
+   }
+   
+   p->extrpitch = lerpf(p->extrpitch, 0.0f, 0.1f);
+   p->extryaw   = lerpf(p->extryaw,   0.0f, 0.1f);
+   
+   p->addpitch = addp + p->extrpitch;
+   p->addyaw   = addy + p->extryaw;
+}
+
+//
+// Lith_PlayerStyle
+//
+static void Lith_PlayerStyle(player_t *p)
+{
+   if(p->scopetoken)
+   {
+      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
+   }
+   else
+   {
+      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
    }
 }
 
