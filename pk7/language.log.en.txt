@@ -1,27 +1,27 @@
 [enu default]
 
-LITH_TXT_LOG_DEFAULT     = ":^)";
-LITH_TXT_LOG_ALLMAP      = ">>>>> CB-Map acquired.";
-LITH_TXT_LOG_ARMORBONUS  = ">>> Armor Bonus";
-LITH_TXT_LOG_BACKPACK    = ">>>>> Backpack and Discount Card acquired.";
-LITH_TXT_LOG_BERSERK     = ">>>>> B\cgeRs-rk \\\\\\\\-[ ~error09671 ]";
-LITH_TXT_LOG_BLUEARMOR   = ">>> Blue Armor";
-LITH_TXT_LOG_BLURSPHERE  = ">>>>> Blur Sphere acquired.";
-LITH_TXT_LOG_GREENARMOR  = ">>> Green Armor";
-LITH_TXT_LOG_HEALTHBONUS = ">>> Health Bonus";
-LITH_TXT_LOG_INFRARED    = ">>>>> CB-Goggles acquired.";
-LITH_TXT_LOG_INVULNERABILITY = "\cj>>>>>> Invulnerability!";
-LITH_TXT_LOG_MEDIKIT     = ">>> Medikit";
-LITH_TXT_LOG_MEGASPHERE  = ">>>> Mega Sphere!";
-LITH_TXT_LOG_RADSUIT     = ">>>>> Radiation Shielding Suit acquired.";
-LITH_TXT_LOG_SOULSPHERE  = ">>>> Super Charge!";
-LITH_TXT_LOG_STIMPACK    = ">>> Stimpak";
-LITH_TXT_LOG_REDCARD     = ">>>>> \cgRed KeyDisk\cl acquired.";
-LITH_TXT_LOG_BLUECARD    = ">>>>> \chBlue KeyDisk\cl acquired.";
-LITH_TXT_LOG_YELLOWCARD  = ">>>>> \ckYellow KeyDisk\cl acquired.";
-LITH_TXT_LOG_REDSKULL    = ">>>>> \cgRed Skull\cl acquired.";
-LITH_TXT_LOG_BLUESKULL   = ">>>>> \chBlue Skull\cl acquired.";
-LITH_TXT_LOG_YELLOWSKULL = ">>>>> \ckYellow Skull\cl acquired.";
+LITH_TXT_LOG_Default     = ":^)";
+LITH_TXT_LOG_AllMap      = ">>>>> CB-Map acquired.";
+LITH_TXT_LOG_ArmorBonus  = ">>> Armor Bonus";
+LITH_TXT_LOG_Backpack    = ">>>>> Backpack and Discount Card acquired.";
+LITH_TXT_LOG_Berserk     = ">>>>> B\cgeRs-rk \\\\\\\\-[ ~error09671 ]";
+LITH_TXT_LOG_BlueArmor   = ">>> Blue Armor";
+LITH_TXT_LOG_BlurSphere  = ">>>>> Blur Sphere acquired.";
+LITH_TXT_LOG_GreenArmor  = ">>> Green Armor";
+LITH_TXT_LOG_HealthBonus = ">>> Health Bonus";
+LITH_TXT_LOG_InfraRed    = ">>>>> CB-Goggles acquired.";
+LITH_TXT_LOG_Invulnerability = "\cj>>>>>> Invulnerability!";
+LITH_TXT_LOG_Medikit     = ">>> Medikit";
+LITH_TXT_LOG_MegaSphere  = ">>>> Mega Sphere!";
+LITH_TXT_LOG_RadSuit     = ">>>>> Radiation Shielding Suit acquired.";
+LITH_TXT_LOG_SoulSphere  = ">>>> Super Charge!";
+LITH_TXT_LOG_StimPack    = ">>> Stimpak";
+LITH_TXT_LOG_RedCard     = ">>>>> \cgRed KeyDisk\cl acquired.";
+LITH_TXT_LOG_BlueCard    = ">>>>> \chBlue KeyDisk\cl acquired.";
+LITH_TXT_LOG_YellowCard  = ">>>>> \ckYellow KeyDisk\cl acquired.";
+LITH_TXT_LOG_RedSkull    = ">>>>> \cgRed Skull\cl acquired.";
+LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull\cl acquired.";
+LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull\cl acquired.";
 
 // EOF
 
