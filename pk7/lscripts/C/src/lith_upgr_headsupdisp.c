@@ -25,9 +25,8 @@ static void HUD_Weapons(player_t *p)
 {
    DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, TICSECOND);
    
-   if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
-      for(int i = weapon_min; i < weapon_max; i++)
-         if(p->weapons & (1 << i))
+   for(int i = weapon_min; i < weapon_max; i++)
+      if(p->weapons & (1 << i))
    {
       fixed x = (10 * (i - weapon_min)) + 80.1;
       fixed y = 200.2;
@@ -155,28 +154,25 @@ static void HUD_Armor(player_t *p)
 //
 static void HUD_Score(player_t *p)
 {
-   if(ACS_GetUserCVar(p->number, "lith_hud_showscore"))
+   HudMessageF("CNFONT", "%lli\Cnscr", p->score);
+   HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 320.2, 10.1, 0.1);
+   
+   if(p->score > p->old.score)
    {
       HudMessageF("CNFONT", "%lli\Cnscr", p->score);
-      HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 320.2, 10.1, 0.1);
-      
-      if(p->score > p->old.score)
-      {
-         HudMessageF("CNFONT", "%lli\Cnscr", p->score);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_ORANGE, 320.2, 10.1, 0.1, 0.2);
-      }
-      else if(p->score < p->old.score)
-      {
-         fixed ft = minmax((p->old.score - p->score) / 3000.0, 0.1, 3.0);
-         HudMessageF("CNFONT", "%lli\Cnscr", p->score);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_PURPLE, 320.2, 10.1, 0.1, ft);
-      }
-      
-      if(p->scoreaccumtime > 0)
-      {
-         HudMessageF("CNFONT", "%+lli", p->scoreaccum);
-         HudMessageParams(HUDMSG_FADEOUT, hid_scoreaccum, CR_WHITE, 320.2, 20.1, 0.1, 0.4);
-      }
+      HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_ORANGE, 320.2, 10.1, 0.1, 0.2);
+   }
+   else if(p->score < p->old.score)
+   {
+      fixed ft = minmax((p->old.score - p->score) / 3000.0, 0.1, 3.0);
+      HudMessageF("CNFONT", "%lli\Cnscr", p->score);
+      HudMessageParams(HUDMSG_FADEOUT, hid_scorehit, CR_PURPLE, 320.2, 10.1, 0.1, ft);
+   }
+   
+   if(p->scoreaccumtime > 0)
+   {
+      HudMessageF("CNFONT", "%+lli", p->scoreaccum);
+      HudMessageParams(HUDMSG_FADEOUT, hid_scoreaccum, CR_WHITE, 320.2, 20.1, 0.1, 0.4);
    }
 }
 
@@ -185,12 +181,12 @@ static void HUD_Score(player_t *p)
 //
 static void HUD_KeyInd(player_t *p)
 {
-   if(p->keys.redskull)    DrawSpritePlain("H_KS1", hid_key_redskull, 8.1, 144.1, 0.1);
+   if(p->keys.redskull)    DrawSpritePlain("H_KS1", hid_key_redskull,    8.1, 144.1, 0.1);
    if(p->keys.yellowskull) DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
-   if(p->keys.blueskull)   DrawSpritePlain("H_KS3", hid_key_blueskull, 8.1, 160.1, 0.1);
-   if(p->keys.redcard)     DrawSpritePlain("H_KC1", hid_key_red, 0.1, 140.1, 0.1);
-   if(p->keys.yellowcard)  DrawSpritePlain("H_KC2", hid_key_yellow, 0.1, 148.1, 0.1);
-   if(p->keys.bluecard)    DrawSpritePlain("H_KC3", hid_key_blue, 0.1, 156.1, 0.1);
+   if(p->keys.blueskull)   DrawSpritePlain("H_KS3", hid_key_blueskull,   8.1, 160.1, 0.1);
+   if(p->keys.redcard)     DrawSpritePlain("H_KC1", hid_key_red,         0.1, 140.1, 0.1);
+   if(p->keys.yellowcard)  DrawSpritePlain("H_KC2", hid_key_yellow,      0.1, 148.1, 0.1);
+   if(p->keys.bluecard)    DrawSpritePlain("H_KC3", hid_key_blue,        0.1, 156.1, 0.1);
 }
 
 
@@ -208,8 +204,10 @@ void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
    
    // Inventory
    HUD_KeyInd(p);
-   HUD_Weapons(p);
-   HUD_Score(p);
+   if(ACS_GetUserCVar(p->number, "lith_hud_showscore"))
+      HUD_Score(p);
+   if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
+      HUD_Weapons(p);
    
    // Status
    HUD_Ammo(p);

@@ -1,11 +1,6 @@
 #include "lith_upgrades_common.h"
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
-
-static int const slidecharge_max = 35 * 0.8;
+#define CHARGE_MAX (35 * 0.8)
 
 
 //----------------------------------------------------------------------------
@@ -41,7 +36,7 @@ static void DOOOOODGE(player_t *p)
 void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul += 0.3;
-   upgr->user_int[u_charge] = slidecharge_max;
+   upgr->user_int[u_charge] = CHARGE_MAX;
    upgr->user_int[u_leaped] = 0;
 }
 
@@ -59,14 +54,14 @@ void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
-   if(upgr->user_int[u_charge] < slidecharge_max)
+   if(upgr->user_int[u_charge] < CHARGE_MAX)
       upgr->user_int[u_charge]++;
    
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
-   if(upgr->user_int[u_charge] >= slidecharge_max)
+   if(upgr->user_int[u_charge] >= CHARGE_MAX)
    {
       if(grounddist == 0.0)
          upgr->user_int[u_leaped] = 0;
@@ -87,7 +82,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
    
    if(ButtonPressed(p, BT_JUMP) &&
       !ACS_CheckInventory("Lith_RocketBooster") && !upgr->user_int[u_leaped] &&
-      ((grounddist <= 16.0 && upgr->user_int[u_charge] < slidecharge_max) || grounddist > 16.0))
+      ((grounddist <= 16.0 && upgr->user_int[u_charge] < CHARGE_MAX) || grounddist > 16.0))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
@@ -106,7 +101,7 @@ void Upgr_ReflexWetw_Render(player_t *p, upgrade_t *upgr)
    if(p->upgrades[UPGR_HeadsUpDisp].active)
    {
       int  time11 = p->ticks % 11;
-      float slide = upgr->user_int[u_charge] / (float)slidecharge_max;
+      float slide = upgr->user_int[u_charge] / (float)CHARGE_MAX;
       
       DrawSprite(slide != 1.0f ? "H_D21" : "H_D24",
          HUDMSG_FADEOUT | HUDMSG_ALPHA,

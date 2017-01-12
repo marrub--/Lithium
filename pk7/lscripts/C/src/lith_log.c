@@ -8,6 +8,12 @@
 
 #define LOG_TIME 140
 
+#define DrawMsg(hid, flags) \
+   ( \
+      HudMessageF("LOGFONT", "%S", logdata->info), \
+      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|flags, hid, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1) \
+   )
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -81,13 +87,11 @@ void Lith_Log(player_t *p, __str fmt, ...)
 }
 
 //
-// Lith_HUD_Log
+// Lith_PlayerUpdateLog
 //
 [[__call("ScriptS")]]
-void Lith_HUD_Log(player_t *p)
+void Lith_PlayerUpdateLog(player_t *p)
 {
-   int i = 0;
-   ACS_SetHudSize(480, 300);
    for(slist_t *rover = p->log->head; rover;)
    {
       logdata_t *logdata = rover->data.vp;
@@ -101,17 +105,27 @@ void Lith_HUD_Log(player_t *p)
       }
       else logdata->time--;
       
-      HudMessageF("LOGFONT", "%S", logdata->info);
-      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT, hid_logE + i, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1);
+      rover = rover->next;
+   }
+}
+
+//
+// Lith_HUD_Log
+//
+[[__call("ScriptS")]]
+void Lith_HUD_Log(player_t *p)
+{
+   ACS_SetHudSize(480, 300);
+   
+   int i = 0;
+   for(slist_t *rover = p->log->head; rover; rover = rover->next, i++)
+   {
+      logdata_t *logdata = rover->data.vp;
+      
+      DrawMsg(hid_logE + i, HUDMSG_PLAIN);
       
       if(logdata->time > LOG_TIME - 10)
-      {
-         HudMessageF("LOGFONT", "%S", logdata->info);
-         HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1);
-      }
-      
-      rover = rover->next;
-      i++;
+         DrawMsg(hid_logAddE + i, HUDMSG_ADDBLEND);
    }
 }
 

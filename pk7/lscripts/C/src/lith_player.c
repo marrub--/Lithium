@@ -262,6 +262,7 @@ static void Lith_PlayerRunScripts(player_t *p)
       Lith_PlayerUpdateCBI(p);      // Update CBI
       Lith_PlayerUpdateUpgrades(p); // Update Upgrades
       Lith_PlayerDeltaStats(p);     // Update delta'd info
+      Lith_PlayerUpdateLog(p);      // Update log data
    }
    
    // Rendering

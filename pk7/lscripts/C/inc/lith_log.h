@@ -12,6 +12,7 @@ typedef struct logdata_s
 } logdata_t;
 
 void Lith_Log(struct player_s *p, __str fmt, ...);
+[[__call("ScriptS")]] void Lith_PlayerUpdateLog(struct player_s *p);
 [[__call("ScriptS")]] void Lith_HUD_Log(struct player_s *p);
 
 #endif

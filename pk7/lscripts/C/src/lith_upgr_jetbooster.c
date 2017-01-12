@@ -1,11 +1,6 @@
 #include "lith_upgrades_common.h"
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
-
-static int const rocketcharge_max = 35 * 7;
+#define CHARGE_MAX (35 * 7)
 
 
 //----------------------------------------------------------------------------
@@ -17,7 +12,7 @@ static int const rocketcharge_max = 35 * 7;
 //
 void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 {
-   upgr->user_int[u_charge] = rocketcharge_max;
+   upgr->user_int[u_charge] = CHARGE_MAX;
 }
 
 //
@@ -26,14 +21,14 @@ void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
-   if(upgr->user_int[u_charge] < rocketcharge_max)
+   if(upgr->user_int[u_charge] < CHARGE_MAX)
       upgr->user_int[u_charge]++;
    
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
-   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 && upgr->user_int[u_charge] >= rocketcharge_max)
+   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 && upgr->user_int[u_charge] >= CHARGE_MAX)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
@@ -54,9 +49,9 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
 {
-   if(upgr->user_int[u_charge] != rocketcharge_max && p->upgrades[UPGR_HeadsUpDisp].active)
+   if(upgr->user_int[u_charge] != CHARGE_MAX && p->upgrades[UPGR_HeadsUpDisp].active)
    {
-      fixed rocket = upgr->user_int[u_charge] / (fixed)rocketcharge_max;
+      fixed rocket = upgr->user_int[u_charge] / (fixed)CHARGE_MAX;
       int max = (hid_jetS - hid_jetE) * rocket;
       
       DrawSpriteFade("H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);
