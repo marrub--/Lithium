@@ -3,7 +3,6 @@
 #include "lith_player.h"
 #include "lith_pickups.h"
 #include "lith_hudid.h"
-#include "lith_hud.h"
 
 //----------------------------------------------------------------------------
 // Scripts

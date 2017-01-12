@@ -4,6 +4,11 @@
    for(int i = 0; i < UPGR_MAX; i++) \
       __with(upgrade_t *upgr = &p->upgrades[i];)
 
+#define DefnCallback(name) \
+   ForUpgrade() \
+      if(upgr->active && upgr->info->name) \
+         upgr->info->name(p, upgr);
+
 
 //----------------------------------------------------------------------------
 // Static Objects
@@ -13,12 +18,16 @@
 #define D(n) .Deactivate = Upgr_##n##_Deactivate
 #define U(n) .Update     = Upgr_##n##_Update
 #define E(n) .Enter      = Upgr_##n##_Enter
+#define R(n) .Render     = Upgr_##n##_Render
+#define AD(n) A(n), D(n)
+#define ADU(n) AD(n), U(n)
 
-static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
+static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
 // {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
-   {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.15, U(JetBooster)},
-   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
-   {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
+   {"HeadsUpDisp", 0         , true , "HeadsUpDisp",  UC_Body, -0.10, R(HeadsUpDisp)},
+   {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.10, A(JetBooster),   U(JetBooster), R(JetBooster)},
+   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.10, ADU(ReflexWetw), R(ReflexWetw)},
+   {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, ADU(CyberLegs)},
    {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
    {"DefenseNuke", 580030    , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
    {"Adrenaline",  1801000   , false, "Adrenaline",   UC_Body,  0.00, U(Adrenaline)},
@@ -31,23 +40,32 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    
    {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
-   {"7777777",     82354300  , false, null,           UC_Extr,  0.10, A(7777777),  D(7777777),  U(7777777)},
-   {"lolsords",    1000000   , false, null,           UC_Extr,  0.20, A(lolsords), D(lolsords), U(lolsords)},
+   {"7777777",     82354300  , false, null,           UC_Extr,  0.10, ADU(7777777)},
+   {"lolsords",    1000000   , false, null,           UC_Extr,  0.20, ADU(lolsords)},
    
    {"Implying",    0         , false, null,           UC_Down,  0.20, U(Implying)},
-   {"UNCEUNCE",    0         , false, null,           UC_Down,  0.30, A(UNCEUNCE), D(UNCEUNCE), U(UNCEUNCE)},
+   {"UNCEUNCE",    0         , false, null,           UC_Down,  0.30, ADU(UNCEUNCE)},
 };
 
-#undef A
-#undef D
-#undef U
-#undef E
 
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
+[[__call("ScriptS")]]
+static void RenderProxy(player_t *p, upgrade_t *upgr)
+{
+   ACS_SetHudSize(320, 200);
+   upgr->info->Render(p, upgr);
+}
 
 //----------------------------------------------------------------------------
 // External Functions
 //
 
+//
+// Upgr_ToggleActive
+//
 void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
 {
    if(!upgr->owned) return;
@@ -66,6 +84,9 @@ void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
    }
 }
 
+//
+// Upgr_SetOwned
+//
 void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
 {
    if(upgr->owned)
@@ -84,11 +105,17 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
       Upgr_ToggleActive(p, upgr);
 }
 
+//
+// Upgr_CanBuy
+//
 bool Upgr_CanBuy(player_t *p, upgrade_t *upgr)
 {
    return !upgr->owned && (p->score - Lith_PlayerDiscount(upgr->info->cost)) >= 0;
 }
 
+//
+// Upgr_Buy
+//
 void Upgr_Buy(player_t *p, upgrade_t *upgr)
 {
    if(!Upgr_CanBuy(p, upgr))
@@ -101,6 +128,9 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
    Upgr_SetOwned(p, upgr);
 }
 
+//
+// Lith_PlayerInitUpgrades
+//
 void Lith_PlayerInitUpgrades(player_t *p)
 {
    for(int i = 0; i < UPGR_MAX; i++)
@@ -108,27 +138,16 @@ void Lith_PlayerInitUpgrades(player_t *p)
       upgrade_t *upgr = &p->upgrades[i];
       memset(upgr, 0, sizeof(upgr));
       
-      upgr->info = &upgrade_info[i];
+      upgr->info = &upgradeinfo[i];
       
       if(upgr->info->cost == 0)
          Upgr_SetOwned(p, upgr);
    }
 }
 
-void Lith_PlayerUpdateUpgrades(player_t *p)
-{
-   ForUpgrade()
-      if(upgr->active && upgr->info->Update)
-         upgr->info->Update(p, upgr);
-}
-
-void Lith_PlayerEnterUpgrades(player_t *p)
-{
-   ForUpgrade()
-      if(upgr->active && upgr->info->Enter)
-         upgr->info->Enter(p, upgr);
-}
-
+//
+// Lith_PlayerDeinitUpgrades
+//
 void Lith_PlayerDeinitUpgrades(player_t *p)
 {
    ForUpgrade()
@@ -136,6 +155,9 @@ void Lith_PlayerDeinitUpgrades(player_t *p)
          upgr->wasactive = true,  Upgr_ToggleActive(p, upgr);
 }
 
+//
+// Lith_PlayerReinitUpgrades
+//
 void Lith_PlayerReinitUpgrades(player_t *p)
 {
    ForUpgrade()
@@ -143,6 +165,9 @@ void Lith_PlayerReinitUpgrades(player_t *p)
          upgr->wasactive = false, Upgr_ToggleActive(p, upgr);
 }
 
+//
+// Lith_PlayerLoseUpgrades
+//
 void Lith_PlayerLoseUpgrades(player_t *p)
 {
    ForUpgrade()
@@ -151,6 +176,32 @@ void Lith_PlayerLoseUpgrades(player_t *p)
       upgr->owned = false;
       p->upgradesowned--;
    }
+}
+
+//
+// Lith_PlayerUpdateUpgrades
+//
+void Lith_PlayerUpdateUpgrades(player_t *p)
+{
+   DefnCallback(Update);
+}
+
+//
+// Lith_PlayerRenderUpgrades
+//
+void Lith_PlayerRenderUpgrades(player_t *p)
+{
+   ForUpgrade()
+      if(upgr->active && upgr->info->Render)
+         RenderProxy(p, upgr);
+}
+
+//
+// Lith_PlayerEnterUpgrades
+//
+void Lith_PlayerEnterUpgrades(player_t *p)
+{
+   DefnCallback(Enter);
 }
 
 // EOF

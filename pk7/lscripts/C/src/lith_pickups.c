@@ -1,7 +1,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_pickups.h"
-#include "lith_hud.h"
 
 #define name(p) {sizeof(p) / sizeof(*p), p}
 

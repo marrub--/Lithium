@@ -1,15 +1,15 @@
 #include "lith_common.h"
 #include "lith_cbi.h"
 
+#define GenDefault(n) if(!parm.n) parm.n = parm_default.n;
+
 //
 // GUI_Auto
 //
 // Offset x/y coordinates and check for clipping.
 // Check if mouse is colliding with us, and if it's being clicked.
 //
-
-static
-void GUI_Auto(int id, bool active, gui_state_t *gst, int *x, int *y, int dim_x, int dim_y, int clickmask)
+static void GUI_Auto(int id, bool active, gui_state_t *gst, int *x, int *y, int dim_x, int dim_y, int clickmask)
 {
    struct gui_clip_s *clip = &gst->clip;
    
@@ -27,12 +27,9 @@ void GUI_Auto(int id, bool active, gui_state_t *gst, int *x, int *y, int dim_x, 
    }
 }
 
-#define DEFAULT(n) if(!parm.n) parm.n = parm_default.n;
-
 //
 // GUI_Button
 //
-
 [[__optional_args(3)]]
 bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bool inactive, gui_button_parm_t const *parm_)
 {
@@ -58,11 +55,11 @@ bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bo
    if(parm_)
    {
       parm = *parm_;
-      DEFAULT(clickmask);
-      DEFAULT(c_default); DEFAULT(c_active); DEFAULT(c_hot); DEFAULT(c_inactive);
-      DEFAULT(f_font); DEFAULT(f_gfx_def); DEFAULT(f_gfx_hot);
-      DEFAULT(s_clicked);
-      DEFAULT(dim_x); DEFAULT(dim_y);
+      GenDefault(clickmask);
+      GenDefault(c_default); GenDefault(c_active);  GenDefault(c_hot); GenDefault(c_inactive);
+      GenDefault(f_font);    GenDefault(f_gfx_def); GenDefault(f_gfx_hot);
+      GenDefault(s_clicked);
+      GenDefault(dim_x); GenDefault(dim_y);
    }
    else
       parm = parm_default;
@@ -110,9 +107,7 @@ bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bo
 //
 // GUI_ScrollBarVertical
 //
-
-static
-bool GUI_ScrollBarVertical(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm)
+static bool GUI_ScrollBarVertical(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm)
 {
    // REAL THINGS
    int height = size / parm->dim_scrl_y;
@@ -163,7 +158,6 @@ bool GUI_ScrollBarVertical(int id, gui_state_t *gst, int *hid, int x, int y, int
 //
 // GUI_ScrollBar
 //
-
 [[__optional_args(1)]]
 bool GUI_ScrollBar(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm_)
 {
@@ -191,10 +185,10 @@ bool GUI_ScrollBar(int id, gui_state_t *gst, int *hid, int x, int y, int size, i
    if(parm_)
    {
       parm = *parm_;
-      DEFAULT(clickmask);
-      DEFAULT(f_gfx_capS); DEFAULT(f_gfx_capE); DEFAULT(f_gfx_scrl);
-      DEFAULT(f_gfx_notch);
-      DEFAULT(dim_cap_x); DEFAULT(dim_cap_y); DEFAULT(dim_scrl_x); DEFAULT(dim_scrl_y);
+      GenDefault(clickmask);
+      GenDefault(f_gfx_capS); GenDefault(f_gfx_capE); GenDefault(f_gfx_scrl);
+      GenDefault(f_gfx_notch);
+      GenDefault(dim_cap_x);  GenDefault(dim_cap_y);  GenDefault(dim_scrl_x); GenDefault(dim_scrl_y);
    }
    else
       parm = parm_default;
@@ -212,12 +206,9 @@ bool GUI_ScrollBar(int id, gui_state_t *gst, int *hid, int x, int y, int size, i
    }
 }
 
-#undef DEFAULT
-
 //
 // GUI_BeginOffset
 //
-
 void GUI_BeginOffset(gui_state_t *gst, int x, int y)
 {
    gst->ofsx = x;
@@ -227,7 +218,6 @@ void GUI_BeginOffset(gui_state_t *gst, int x, int y)
 //
 // GUI_EndOffset
 //
-
 void GUI_EndOffset(gui_state_t *gst)
 {
    gst->ofsx = 0;
@@ -237,7 +227,6 @@ void GUI_EndOffset(gui_state_t *gst)
 //
 // GUI_BeginClip
 //
-
 void GUI_BeginClip(gui_state_t *gst, int x, int y, int w, int h)
 {
    if(gst->clip.on)
@@ -256,7 +245,6 @@ void GUI_BeginClip(gui_state_t *gst, int x, int y, int w, int h)
 //
 // GUI_EndClip
 //
-
 void GUI_EndClip(gui_state_t *gst)
 {
    if(!gst->clip.on)
@@ -269,7 +257,6 @@ void GUI_EndClip(gui_state_t *gst)
 //
 // GUI_Begin
 //
-
 void GUI_Begin(gui_state_t *gst)
 {
    ACS_SetHudSize(320, 200);
@@ -280,7 +267,6 @@ void GUI_Begin(gui_state_t *gst)
 //
 // GUI_End
 //
-
 void GUI_End(gui_state_t *gst)
 {
    if(gst->cur.click == GUI_CLICK_NONE)
@@ -295,3 +281,4 @@ void GUI_End(gui_state_t *gst)
       GUI_EndOffset(gst);
 }
 
+// EOF

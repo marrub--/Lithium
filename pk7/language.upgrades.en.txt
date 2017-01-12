@@ -6,6 +6,11 @@ LITH_CATEGORY = "Category";
 //
 // Body
 //
+LITH_TXT_UPGRADE_TITLE_HeadsUpDisp = "Heads Up Disp.";
+LITH_TXT_UPGRADE_DESCR_HeadsUpDisp =
+   "Effect: Shows vital information.\n\n"
+   "A Heads Up Display built into your C/B Interface.";
+
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
    "Effect: Lets you press the \"speed\" key while in the air to fly for a "

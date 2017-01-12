@@ -12,6 +12,7 @@ MAKELIB=gdcc-makelib
 
 BIN=../../acs
 SRC=src
+INC=inc
 IR=bin
 
 ## Compiler flags
@@ -28,7 +29,6 @@ MAIN_SOURCES= \
 	$(SRC)/lith_list.c \
 	$(SRC)/lith_player.c \
 	$(SRC)/lith_world.c \
-	$(SRC)/lith_hud.c \
 	$(SRC)/lith_log.c \
 	$(SRC)/lith_decorate.c \
 	$(SRC)/lith_pickups.c \
@@ -37,6 +37,7 @@ MAIN_SOURCES= \
 	$(SRC)/lith_upgr_adrenaline.c \
 	$(SRC)/lith_upgr_cyberlegs.c \
 	$(SRC)/lith_upgr_defensenuke.c \
+	$(SRC)/lith_upgr_headsupdisp.c \
 	$(SRC)/lith_upgr_implying.c \
 	$(SRC)/lith_upgr_jetbooster.c \
 	$(SRC)/lith_upgr_lolsords.c \
@@ -73,8 +74,8 @@ $(BIN)/lithmain.bin: $(MAIN_OUTPUT)
 
 ## ir/*.ir
 
-$(IR)/%.ir: $(SRC)/%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+$(IR)/%.ir: $(SRC)/%.c $(wildcard $(INC)/*.h)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 ## ir/lib*.ir
 

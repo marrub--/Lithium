@@ -2,7 +2,6 @@
 #include "lith_player.h"
 #include "lith_list.h"
 #include "lith_hudid.h"
-#include "lith_hud.h"
 #include "lith_cbi.h"
 #include <math.h>
 
@@ -43,6 +42,11 @@ static void Lith_PlayerStyle(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
 static void Lith_PlayerDeltaStats(player_t *p);
+[[__call("ScriptS")]] static void Lith_PlayerHUD(player_t *p);
+
+static void HUD_StringStack(player_t *p);
+static void HUD_Waves(player_t *p);
+static void HUD_Scope(player_t *p);
 
 
 //----------------------------------------------------------------------------
@@ -261,10 +265,11 @@ static void Lith_PlayerRunScripts(player_t *p)
    }
    
    // Rendering
-   Lith_PlayerDamageBob(p); // Update damage bobbing
-   Lith_PlayerView(p);      // Update additive view
-   Lith_PlayerHUD(p);       // Draw HUD
-   Lith_PlayerStyle(p);     // Change player render style
+   Lith_PlayerDamageBob(p);      // Update damage bobbing
+   Lith_PlayerView(p);           // Update additive view
+   Lith_PlayerRenderUpgrades(p); // Render Upgrades
+   Lith_PlayerHUD(p);            // Draw HUD
+   Lith_PlayerStyle(p);          // Change player render style
 }
 
 //
@@ -320,9 +325,6 @@ static void Lith_ResetPlayer(player_t *p)
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    ACS_TakeInventory("Lith_CannonScopedToken",  999);
    
-   p->slidecharge  = slidecharge_max;
-   p->rocketcharge = rocketcharge_max;
-   p->leaped   = false;
    p->cbi.open = false;
    p->frozen   = 0;
    
@@ -345,7 +347,7 @@ static void Lith_ResetPlayer(player_t *p)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      Lith_Log(p, "> Lithium 2.0 :: Compiled %S", __DATE__);
+      Lith_Log(p, "> Lithium 1.1 :: Compiled %S", __DATE__);
       p->staticinit = true;
    }
    else
@@ -521,9 +523,110 @@ static void Lith_PlayerStats(player_t *p)
 //
 static void Lith_PlayerDeltaStats(player_t *p)
 {
-   if(p->frozen != p->old.frozen)       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-   if(p->speedmul != p->old.speedmul)   ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+   if(p->frozen    != p->old.frozen)    ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+   if(p->speedmul  != p->old.speedmul)  ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
    if(p->jumpboost != p->old.jumpboost) ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * (1 + p->jumpboost));
+}
+
+//
+// Lith_PlayerHUD
+//
+[[__call("ScriptS")]]
+static void Lith_PlayerHUD(player_t *p)
+{
+   ACS_SetHudSize(320, 200);
+   HUD_Scope(p);
+}
+
+//
+// HUD_StringStack
+//
+static void HUD_StringStack(player_t *p)
+{
+   size_t i = 0;
+   
+   if((ACS_Timer() % 3) == 0)
+   {
+      DList_InsertBack(p->hudstrstack, (listdata_t){ .str = StrParam("%.8X", Random(0, 0x7FFFFFFF)) });
+      
+      if(DList_GetLength(p->hudstrstack) == hudstrstack_max)
+         DList_DeleteFront(p->hudstrstack);
+   }
+   
+   ACS_SetHudSize(320, 200);
+   ACS_SetFont("CONFONT");
+   
+   for(slist_t *rover = p->hudstrstack->head; rover; rover = rover->next, i++)
+   {
+      HudMessage("%S", rover->data.str);
+      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 300.2, 20.1 + (i * 9), 0.0, 0.5);
+   }
+}
+
+//
+// HUD_Waves
+//
+static void HUD_Waves(player_t *p)
+{
+   fixed health = (fixed)p->health / (fixed)p->maxhealth;
+   int frame = minmax(health * 4, 1, 5);
+   int timer = ACS_Timer();
+   int pos;
+   
+   ACS_SetHudSize(320, 200);
+   
+   // Sine (health)
+   pos = (10 + timer) % 160;
+   DrawSpriteFade(StrParam("H_D1%i", frame),
+      hid_scope_sineS - pos,
+      300.1 + roundk(sink(pos / 32.0) * 7.0, 0),
+      25.1 + pos,
+      1.5, 0.3);
+   
+   // Square
+   {
+      fixed a = cosk(pos / 32.0);
+      
+      pos = (7 + timer) % 160;
+      DrawSpriteFade(roundk(a, 2) != 0.0 ? "H_D16" : "H_D46",
+         hid_scope_squareS - pos,
+         300.1 + (a >= 0) * 7.0,
+         25.1 + pos,
+         1.9, 0.1);
+   }
+   
+   // Triangle
+   pos = (5 + timer) % 160;
+   DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+}
+
+//
+// HUD_Scope
+//
+static void HUD_Scope(player_t *p)
+{
+   if(p->old.scopetoken && !p->scopetoken)
+   {
+      if(p->hudstrstack)
+      {
+         DList_Free(p->hudstrstack);
+         p->hudstrstack = null;
+      }
+      
+      for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
+      {
+         HudMessage("");
+         HudMessagePlain(i, 0.0, 0.0, 0.0);
+      }
+   }
+   else if(p->scopetoken && !p->old.scopetoken)
+      p->hudstrstack = DList_Create();
+   
+   if(p->scopetoken)
+   {
+      HUD_Waves(p);
+      HUD_StringStack(p);
+   }
 }
 
 // EOF

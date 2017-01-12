@@ -154,11 +154,6 @@ typedef struct player_s
    bool berserk;
    keycards_t keys;
    int weapons;
-   
-   // Movement
-   int slidecharge;
-   int rocketcharge;
-   bool leaped;
 } player_t;
 
 extern player_t players[MAX_PLAYERS];

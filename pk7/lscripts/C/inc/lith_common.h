@@ -121,8 +121,6 @@ accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2);
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
-static int const rocketcharge_max = 35 * 7;
-static int const slidecharge_max = 35 * 0.8;
 static int const hudstrstack_max = 20;
 
 // Types
