@@ -64,7 +64,9 @@ static void Lith_PlayerEntry(void)
       // This can be changed any time, so save it here.
       player_delta_t olddelta = p->cur;
       
+      // Run logic and rendering
       Lith_PlayerRunScripts(p);
+      ACS_TakeInventory("Lith_AdrenalineToken", 1);
       
       // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);

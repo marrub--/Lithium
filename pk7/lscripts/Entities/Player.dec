@@ -34,6 +34,11 @@ actor Lith_RA_Magic     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.05}
 actor Lith_RA_Melee     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.01 DamageFactor "Melee", 0.05}
 actor Lith_RA_Shrapnel  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.05}
 
+actor Lith_AdrenalineToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
 actor Lith_RocketBooster : PowerFlight
 {
    Powerup.Duration 60

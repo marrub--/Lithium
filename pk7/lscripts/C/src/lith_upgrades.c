@@ -24,6 +24,7 @@
    A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
                   D(ReactArmour)
                                                 E(DefenseNuke)
+                                 U(Adrenaline)
 //------------------------------------------------------------
                   D(RifleModes)  U(RifleModes)
                   D(PunctCannon)
@@ -56,7 +57,8 @@ static upgradeinfo_t const upgrade_info[UPGR_MAX] = {
    {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.15, A(ReflexWetw), D(ReflexWetw), U(ReflexWetw)},
    {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, A(CyberLegs),  D(CyberLegs),  U(CyberLegs)},
    {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
-   {"DefenseNuke", 3100300   , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
+   {"DefenseNuke", 2800300   , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
+   {"Adrenaline",  3401000   , false, "Adrenaline",   UC_Body,  0.00, U(Adrenaline)},
    
    {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
@@ -279,6 +281,34 @@ static void Upgr_ReactArmour_Deactivate(player_t *p, upgrade_t *upgr)
 static void Upgr_DefenseNuke_Enter(player_t *p, upgrade_t *upgr)
 {
    ACS_GiveInventory("Lith_Nuke", 1);
+}
+
+//---------------------------------------
+// Adrenaline
+//
+
+[[__call("ScriptS")]]
+static void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
+{
+   if(upgr->user_int[0] < 1050)
+      upgr->user_int[0]++;
+   else if(ACS_CheckInventory("Lith_AdrenalineToken"))
+   {
+      ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+      Lith_Log(p, ">>>>> Adrenaline administered.");
+      
+      upgr->user_int[0] = upgr->user_int[1] = 0;
+      
+      ACS_GiveInventory("Lith_TimeHax2", 1);
+      ACS_Delay(35);
+      ACS_TakeInventory("Lith_TimeHax2", 1);
+   }
+   else if(!upgr->user_int[1])
+   {
+      ACS_PlaySound(0, "player/adren/ready", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+      Lith_Log(p, ">>>>> Adrenaline injector ready.");
+      upgr->user_int[1] = 1;
+   }
 }
 
 //---------------------------------------

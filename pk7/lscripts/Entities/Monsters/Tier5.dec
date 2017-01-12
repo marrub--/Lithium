@@ -1,12 +1,29 @@
 actor Lith_CyberRocket : Rocket replaces Rocket
 {
    DamageType "Lith_Shrapnel"
+   
+   states
+   {
+   Spawn:
+      MISL A 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      loop
+   }
 }
 
 actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
 {
    states
    {
+   Missile:
+      SPID A 2 bright
+      SPID A 0 A_PlaySound("enemies/chainguy/bolt", CHAN_WEAPON|CHAN_NOPAUSE)
+      SPID A 0 A_GiveToTarget("Lith_AdrenalineToken", 1)
+      SPID A 20 bright A_FaceTarget
+   MissileLoop:
+      SPID G 4 bright A_SPosAttackUseAtkSound
+      SPID H 4 bright A_SPosAttackUseAtkSound
+      SPID H 1 bright A_SpidRefire
+      loop
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_SpiderDemon)
       goto Super::Death

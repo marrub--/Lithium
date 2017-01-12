@@ -18,6 +18,7 @@ enum
    UPGR_CyberLegs,
    UPGR_ReactArmour,
    UPGR_DefenseNuke,
+   UPGR_Adrenaline,
    
    UPGR_GaussShotty,
    UPGR_RifleModes,

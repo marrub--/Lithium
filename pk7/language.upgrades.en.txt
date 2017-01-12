@@ -39,6 +39,14 @@ LITH_TXT_UPGRADE_DESCR_DefenseNuke =
    "Implant a slow-charging self-defense explosive into your armor, keeping "
    "threats away while you're distracted.";
 
+LITH_TXT_UPGRADE_TITLE_Adrenaline = "Adrenaline Inj.";
+LITH_TXT_UPGRADE_DESCR_Adrenaline =
+   "Effect: When being targeted by enemies or nearing a projectile, time "
+   "will stop for one second. Needs to be charged for a minute to "
+   "activate.\n\n"
+   "Implants an adrenaline injector into your skin, which reacts to sudden "
+   "impulses and sound cues.";
+
 //
 // Weapons
 //

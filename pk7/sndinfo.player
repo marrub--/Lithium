@@ -11,6 +11,8 @@ player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, F
 player/nuke        lsounds/Player/Nuke.flac                // Touhou 13
 player/death1      lsounds/Player/DeathCharge.flac         // 〃
 player/death2      lsounds/Player/Death.flac               // 〃
+player/adren/inj   lsounds/Player/AdrenalineInject.flac    // Killing Floor
+player/adren/ready lsounds/Player/InjectorReady.flac       // 〃
 
 $volume player/doublejump 0.7
 
