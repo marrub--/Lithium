@@ -1,3 +1,2 @@
 lithmain
 lithlib
-lithmisc

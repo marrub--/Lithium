@@ -14,35 +14,40 @@ BIN=../../acs
 SRC=src
 IR=bin
 
-## IR Directories
-
-IRLIB=$(IR)/lib
-
 ## Compiler flags
 
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
 CFLAGS=$(TARGET) -iinc -Dnull=NULL
-FNMIN=--func-minimum ScriptI
 ALLOCMIN=--alloc-min Sta ""
 
 ## Sources
 
-MISC_SOURCES= \
-	$(SRC)/lith_list.c   \
-	$(SRC)/lith_common.c
-
 MAIN_SOURCES= \
-	$(SRC)/lith_player.c   \
-	$(SRC)/lith_world.c    \
-	$(SRC)/lith_hud.c      \
-	$(SRC)/lith_log.c      \
+	$(SRC)/lith_common.c \
+	$(SRC)/lith_list.c \
+	$(SRC)/lith_player.c \
+	$(SRC)/lith_world.c \
+	$(SRC)/lith_hud.c \
+	$(SRC)/lith_log.c \
 	$(SRC)/lith_decorate.c \
-	$(SRC)/lith_pickups.c  \
+	$(SRC)/lith_pickups.c \
 	$(SRC)/lith_upgrades.c \
-	$(SRC)/lith_cbi.c      \
-	$(SRC)/lith_cbi_gui.c  \
-	$(SRC)/lith_bip.c      \
+	$(SRC)/lith_upgr_7777777.c \
+	$(SRC)/lith_upgr_adrenaline.c \
+	$(SRC)/lith_upgr_cyberlegs.c \
+	$(SRC)/lith_upgr_defensenuke.c \
+	$(SRC)/lith_upgr_implying.c \
+	$(SRC)/lith_upgr_jetbooster.c \
+	$(SRC)/lith_upgr_lolsords.c \
+	$(SRC)/lith_upgr_punctcannon.c \
+	$(SRC)/lith_upgr_reactarmour.c \
+	$(SRC)/lith_upgr_reflexwetw.c \
+	$(SRC)/lith_upgr_riflemodes.c \
+	$(SRC)/lith_upgr_unceunce.c \
+	$(SRC)/lith_cbi.c \
+	$(SRC)/lith_cbi_gui.c \
+	$(SRC)/lith_bip.c \
 	$(SRC)/lith_weapons.c
 
 ## Output
@@ -56,33 +61,27 @@ MAIN_OUTPUT=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 
 ## all
 
-all: $(BIN)/lithlib.bin $(BIN)/lithmisc.bin $(BIN)/lithmain.bin
+all: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
 
 ## bin/lith*.bin
 
-$(BIN)/lithlib.bin: $(IRLIB)/libc.ir $(IRLIB)/libGDCC.ir
-	$(LD) $(LFLAGS) $(FNMIN) 1200 $(ALLOCMIN) 300000000  $^ -o $@
-
-$(BIN)/lithmisc.bin: $(MISC_OUTPUT)
-	$(LD) $(LFLAGS) $(FNMIN) 1300 $(ALLOCMIN) 1000000000 $^ -o $@ \
-		-llithlib
+$(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
+	$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
 
 $(BIN)/lithmain.bin: $(MAIN_OUTPUT)
-	$(LD) $(LFLAGS) $(FNMIN) 1400 $(ALLOCMIN) 3000000000 $^ -o $@ \
-		-llithlib \
-		-llithmisc
+	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
 
 ## ir/*.ir
 
 $(IR)/%.ir: $(SRC)/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-## irlib/lib*.ir
+## ir/lib*.ir
 
-$(IRLIB)/libc.ir:
+$(IR)/libc.ir:
 	$(MAKELIB) $(TARGET) -c libc -o $@
 
-$(IRLIB)/libGDCC.ir:
+$(IR)/libGDCC.ir:
 	$(MAKELIB) $(TARGET) -c libGDCC -o $@
 
 ## EOF

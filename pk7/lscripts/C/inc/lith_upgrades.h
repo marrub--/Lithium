@@ -1,6 +1,10 @@
 #ifndef LITH_UPGRADES_H
 #define LITH_UPGRADES_H
 
+//----------------------------------------------------------------------------
+// Type Definitions
+//
+
 enum
 {
    UC_MIN,
@@ -37,9 +41,19 @@ enum
    UPGR_MAX
 };
 
+//
+// upgr_cb_t
+//
 typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
+
+//
+// upgr_update_cb_t
+//
 [[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
 
+//
+// upgradeinfo_t
+//
 typedef struct upgradeinfo_s
 {
    __str name;
@@ -55,6 +69,9 @@ typedef struct upgradeinfo_s
    upgr_cb_t        Enter;
 } upgradeinfo_t;
 
+//
+// upgrade_t
+//
 typedef struct upgrade_s
 {
    bool active : 1, owned : 1, wasactive : 1;
@@ -63,7 +80,43 @@ typedef struct upgrade_s
    __str user_str[8];
 } upgrade_t;
 
+//
+// upgrades_t
+//
 typedef upgrade_t upgrades_t[UPGR_MAX];
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+#define A(n)                       void Upgr_##n##_Activate(struct player_s *p, upgrade_t *upgr);
+#define D(n)                       void Upgr_##n##_Deactivate(struct player_s *p, upgrade_t *upgr);
+#define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update(struct player_s *p, upgrade_t *upgr);
+#define E(n)                       void Upgr_##n##_Enter(struct player_s *p, upgrade_t *upgr);
+
+// A(-----------) D(-----------) U(-----------) E(-----------)
+                                 U(JetBooster)
+   A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)
+   A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
+                  D(ReactArmour)
+                                                E(DefenseNuke)
+                                 U(Adrenaline)
+//------------------------------------------------------------
+                  D(RifleModes)  U(RifleModes)
+                  D(PunctCannon)
+//------------------------------------------------------------
+   A(7777777)     D(7777777)     U(7777777)
+   A(lolsords)    D(lolsords)    U(lolsords)
+//------------------------------------------------------------
+                                 U(Implying)
+   A(UNCEUNCE)    D(UNCEUNCE)    U(UNCEUNCE)
+//------------------------------------------------------------
+
+#undef A
+#undef D
+#undef U
+#undef E
 
 void Upgr_ToggleActive(struct player_s *p, upgrade_t *upgr);
 void Upgr_SetOwned(struct player_s *p, upgrade_t *upgr);

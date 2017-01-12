@@ -1,0 +1,54 @@
+#include "lith_upgrades_common.h"
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Update
+//
+[[__call("ScriptS")]]
+void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
+{
+   static __str strings[] = {
+      "\Cd" ">implying",
+      "\Cd" ">doombabbies",
+      "\Cd" ">implying",
+      "\Cd" ">doom shitters",
+      "\Cd" ">>>>>>>clip",
+      "\Cd" ">implying",
+      "\Cj" "Report and ignore.",
+      "\Cj" "caleb when?",
+      "\Cd" ">implying",
+      "\Cd" ">",
+      "\Cd" ">>>",
+      "\Cd" ">>>>>>",
+      "\Cj" "is this compatible with brutal doom?",
+      "\Cd" ">>>>>>>>>",
+      "\Cd" ">>>>>>>>>>>>",
+      "\Cd" ">>>>>>>>>>>>>>>",
+      "\Cq" "<",
+   };
+   
+   static int const num_strings = sizeof(strings) / sizeof(*strings);
+   static int const id_max = hid_implyingE - hid_implyingS;
+   
+   int id = upgr->user_int[0];
+   for(int i = 0, n = ACS_Random(0, 40); i < n; i++)
+   {
+      id = ++id % id_max;
+      
+      HudMessageF("BIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
+      HudMessageFade(hid_implyingE + id,
+                     ACS_RandomFixed(0.0, 1.0),
+                     ACS_RandomFixed(0.0, 1.0),
+                     ACS_RandomFixed(0.1, 0.4),
+                     0.1);
+   }
+   
+   upgr->user_int[0] = id;
+}
+
+// EOF
+
