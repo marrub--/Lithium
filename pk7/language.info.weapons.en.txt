@@ -118,7 +118,7 @@ LITH_TXT_INFO_DESCR_Cannon =
    "This weapon was acquired by your employers via the black market group "
    "\"Cid\" for a hefty price. Take care of it.";
 
-LITH_TXT_INFO_SHORT_CannonUpgr = "$LITH_TXT_UPGRADE_TITLE_Punct";
+LITH_TXT_INFO_SHORT_CannonUpgr = "$LITH_TXT_UPGRADE_TITLE_PunctCannon";
 LITH_TXT_INFO_TITLE_CannonUpgr = "Omega Cannon Punctuator Buffer";
 LITH_TXT_INFO_DESCR_CannonUpgr =
    "A pattern buffer for your Omega Cannon which emits an explosive bolt "
