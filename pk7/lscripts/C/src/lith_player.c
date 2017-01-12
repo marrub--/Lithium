@@ -345,7 +345,7 @@ static void Lith_ResetPlayer(player_t *p)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      Lith_Log(p, "> Lithium 1.0 :: Compiled %S", __DATE__);
+      Lith_Log(p, "> Lithium 2.0 :: Compiled %S", __DATE__);
       p->staticinit = true;
    }
    else
