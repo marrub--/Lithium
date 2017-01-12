@@ -55,6 +55,7 @@ actor Lith_PlasmaLaze
    +NOINTERACTION
    +FORCEXYBILLBOARD
    +NOINTERACTION
+   +NOTIMEFREEZE
    
    states
    {
