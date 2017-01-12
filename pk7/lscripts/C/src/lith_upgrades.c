@@ -38,7 +38,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
    {"PunctCannon", 5600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(PunctCannon)},
    
-   {"TorgueMode",  800000000 , false, null,           UC_Extr,  0.00},
+   {"TorgueMode",  80000000  , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
    {"7777777",     82354300  , false, null,           UC_Extr,  0.10, ADU(7777777)},
    {"lolsords",    1000000   , false, null,           UC_Extr,  0.20, ADU(lolsords)},
