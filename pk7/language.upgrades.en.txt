@@ -19,7 +19,8 @@ LITH_TXT_UPGRADE_DESCR_JetBooster =
 
 LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
 LITH_TXT_UPGRADE_DESCR_ReflexWetw =
-   "Effect: Lets you move quicker, easier and more efficiently.\n\n"
+   "Effect: Lets you move quicker, easier and more efficiently. Allows you "
+   "to double jump and slide/dodge.\n\n"
    "Cybernetic wetware that improves your reflexes and implicit agility.";
 
 LITH_TXT_UPGRADE_TITLE_CyberLegs = "Move Wetware";

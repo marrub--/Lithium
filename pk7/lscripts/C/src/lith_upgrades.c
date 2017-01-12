@@ -24,9 +24,9 @@
 
 static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
 // {"Name-------", Cost------, Auto-, BIP-----------, UC_Cat-, Score, Callbacks...},
-   {"HeadsUpDisp", 0         , true , "HeadsUpDisp",  UC_Body, -0.10, R(HeadsUpDisp)},
-   {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.10, A(JetBooster),   U(JetBooster), R(JetBooster)},
-   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.10, ADU(ReflexWetw), R(ReflexWetw)},
+   {"HeadsUpDisp", 0         , true , "HeadsUpDisp",  UC_Body, -0.05, R(HeadsUpDisp)},
+   {"JetBooster",  0         , true , "JetBooster",   UC_Body, -0.05, A(JetBooster),   U(JetBooster), R(JetBooster)},
+   {"ReflexWetw",  0         , true , "ReflexWetw",   UC_Body, -0.05, ADU(ReflexWetw), R(ReflexWetw)},
    {"CyberLegs",   1520000   , false, "CyberLegs",    UC_Body,  0.00, ADU(CyberLegs)},
    {"ReactArmour", 3200200   , false, "Yh0",          UC_Body,  0.00, D(ReactArmour)},
    {"DefenseNuke", 580030    , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
