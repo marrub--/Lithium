@@ -21,4 +21,14 @@ $attenuation enemies/chainguy/fire 0.5
 enemies/mancubus/fire lsounds/Mancubus/Fire.flac // FEAR, Doom
 $attenuation enemies/mancubus/fire 0.5
 
+//
+// Cyberdemon
+//
+enemies/cyberdemon/ready    lsounds/Cyberdemon/Ready.flac    // FEAR
+enemies/cyberdemon/fire     lsounds/Cyberdemon/Fire.flac     // 〃
+enemies/cyberdemon/firedone lsounds/Cyberdemon/FireDone.flac // 〃
+$attenuation enemies/cyberdemon/ready 0.3
+$attenuation enemies/cyberdemon/fire 0.25
+$attenuation enemies/cyberdemon/firedone 0.25
+
 // EOF
