@@ -24,6 +24,9 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
    MissileEnd:
       POSS E 8
       goto See
+   XDeath:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ZombieMan * 1.5)
+      goto Super::XDeath
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ZombieMan)
       goto Super::Death
@@ -48,6 +51,9 @@ actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
       SPOS F 10 bright
       SPOS E 10
       goto See
+   XDeath:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ShotgunGuy * 1.5)
+      goto Super::XDeath
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ShotgunGuy)
       goto Super::Death
@@ -95,6 +101,9 @@ actor Lith_Imp : DoomImp replaces DoomImp
       TROO G 6 A_CustomComboAttack("Lith_ImpBall", 32, 3 * random(1, 8), "imp/melee")
       TROO G 2
       goto See
+   XDeath:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp * 1.5)
+      goto Super::XDeath
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp)
       goto Super::Death
@@ -117,6 +126,9 @@ actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
       CPOS FE 4 bright A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "enemies/chainguy/fire", 3.0 / 4.0, frandom(1, 4) * 3.0)
       CPOS F 1 A_CPosRefire
       loop
+   XDeath:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ChaingunGuy * 1.5)
+      goto Super::XDeath
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ChaingunGuy)
       goto Super::Death
