@@ -216,7 +216,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       goto Ready
    ScopeIn:
       "####" A 0 A_GiveInventory("Lith_ShotgunScopedToken", 1)
-      "####" A 0 A_ZoomFactor(CallACS("Lith_GetCVar", lith_weapons_zoomfactor) / FIX)
+      "####" A 0 A_ZoomFactor(CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX)
       "####" A 0 A_PlaySound("weapons/shotgun/zoomin", 6)
       goto AltReady
    Spawn:

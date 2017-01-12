@@ -1,6 +1,5 @@
 #include "lith_common.h"
 #include "lith_weapons.h"
-#include "lith_cvars.h"
 #include "lith_player.h"
 #include "lith_pickups.h"
 #include "lith_hudid.h"
@@ -97,16 +96,6 @@ int Lith_Timer(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetCVar(int var)
-{
-   switch(var)
-   case lith_weapons_zoomfactor:
-      return bitsk(ACS_GetUserCVarFixed(ACS_PlayerNumber(), "lith_weapons_zoomfactor"));
-   
-   return -1;
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(1.0f, 6.0f);
@@ -156,6 +145,7 @@ int Lith_GetPlayerData(int info, bool target)
    case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;
    case pdata_marathon_mode:  return p->upgrades[UPGR_7777777].active;
    case pdata_yh0armor:       return p->upgrades[UPGR_ReactArmour].active;
+   case pdata_weapon_zoom:    return bitsk(ACS_GetUserCVarFixed(p->number, "lith_weapons_zoomfactor"));
    }
    
    return 0;

@@ -1,4 +1,3 @@
-#include "lscripts/C/inc/lith_cvars.h"
 #include "lscripts/C/inc/lith_weapons.h"
 #include "lscripts/C/inc/lith_pdata.h"
 #include "lscripts/C/inc/lith_lognames.h"

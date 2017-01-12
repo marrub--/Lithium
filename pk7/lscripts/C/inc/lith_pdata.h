@@ -10,6 +10,7 @@ enum
    pdata_EXPLOOOOOSIONS,
    pdata_marathon_mode,
    pdata_yh0armor,
+   pdata_weapon_zoom,
    pdata_max
 };
 
