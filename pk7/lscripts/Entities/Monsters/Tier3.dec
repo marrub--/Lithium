@@ -10,6 +10,16 @@ actor Lith_BaronBall : BaronBall replaces BaronBall
    }
 }
 
+actor Lith_HellKnight : HellKnight replaces HellKnight
+{
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_HellKnight)
+      goto Super::Death
+   }
+}
+
 actor Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 {
    DamageType "Lith_Shrapnel"
@@ -25,52 +35,6 @@ actor Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
    }
 }
 
-actor Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
-{
-   DamageType "Lith_Energy"
-   
-   states
-   {
-   Spawn:
-      BAL2 AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
-      loop
-   }
-}
-
-actor Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
-{
-   DamageType "Lith_Energy"
-   
-   states
-   {
-   Spawn:
-      APLS AAAAABBBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
-      loop
-   }
-}
-
-actor Lith_FatShot : FatShot replaces FatShot
-{
-   DamageType "Lith_Fire"
-   
-   states
-   {
-   Spawn:
-      MANF AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
-      loop
-   }
-}
-
-actor Lith_HellKnight : HellKnight replaces HellKnight
-{
-   states
-   {
-   Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_HellKnight)
-      goto Super::Death
-   }
-}
-
 actor Lith_Revenant : Revenant replaces Revenant
 {
    Health 400
@@ -80,6 +44,18 @@ actor Lith_Revenant : Revenant replaces Revenant
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Revenant)
       goto Super::Death
+   }
+}
+
+actor Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
+{
+   DamageType "Lith_Energy"
+   
+   states
+   {
+   Spawn:
+      BAL2 AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      loop
    }
 }
 
@@ -95,6 +71,18 @@ actor Lith_Cacodemon : Cacodemon replaces Cacodemon
    }
 }
 
+actor Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
+{
+   DamageType "Lith_Energy"
+   
+   states
+   {
+   Spawn:
+      APLS AAAAABBBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      loop
+   }
+}
+
 actor Lith_Arachnotron : Arachnotron replaces Arachnotron
 {
    DamageFactor "Lith_Energy", 0.6
@@ -107,10 +95,38 @@ actor Lith_Arachnotron : Arachnotron replaces Arachnotron
    }
 }
 
-actor Lith_Mancubus : Fatso replaces Fatso
+actor Lith_FatShot : FatShot replaces FatShot
 {
+   DamageType "Lith_Fire"
+   Damage (7 * random(1, 8))
+   Speed 10
+   
    states
    {
+   Spawn:
+      MANF AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      loop
+   }
+}
+
+actor Lith_Mancubus : Fatso replaces Fatso
+{
+   PainChance 50
+   
+   states
+   {
+   Missile:
+      FATT G 10 A_FatRaise
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5)
+      FATT HH 5 bright A_FatAttack1
+      FATT IG 6 A_FaceTarget
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5)
+      FATT HH 5 bright A_FatAttack2
+      FATT IG 6 A_FaceTarget
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5)
+      FATT HH 5 bright A_FatAttack3
+      FATT IG 6 A_FaceTarget
+      goto See
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Mancubus)
       goto Super::Death

@@ -15,4 +15,10 @@ enemies/chainguy/boltb lsounds/ChaingunGuy/BoltBack.flac    // 〃
 enemies/chainguy/boltf lsounds/ChaingunGuy/BoltForward.flac // 〃
 $attenuation enemies/chainguy/fire 0.5
 
+//
+// Mancubus
+//
+enemies/mancubus/fire lsounds/Mancubus/Fire.flac // FEAR, Doom
+$attenuation enemies/mancubus/fire 0.5
+
 // EOF
