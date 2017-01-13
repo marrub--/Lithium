@@ -71,41 +71,41 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
 //
 
 //
-// CBI_Tab_Shop
+// Lith_CBITab_Shop
 //
-int CBI_Tab_Shop(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
 {
-   GUI_BEGIN_LIST(GUI_ID("sSCL"), gst, &hid, 20, 30, 152, &cbi->gst.scrlst[CBI_SCRLST_SHOP]);
+   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, btnlist.w, 152, btnlist.h * shopdefsnum);
    
    for(int i = 0; i < shopdefsnum; i++)
    {
-      GUI_LIST_OFFSETS(i, shopdefsnum, 152, cbi->gst.scrlst[CBI_SCRLST_SHOP]);
+      int y = btnlist.h * i;
       
-      __str id   = StrParam("sN%.2i", i);
+      if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, btnlist.h))
+         continue;
+      
       __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopdefs[i].name);
       
-      if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, cbi->gst.lstst[CBI_LSTST_SHOP] == i, &gui_listbtnparm))
-         cbi->gst.lstst[CBI_LSTST_SHOP] = i;
+      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_shopsel].i, .preset = &btnlist))
+         g->st[st_shopsel].i = i;
    }
    
-   GUI_END_LIST(gst);
+   Lith_GUI_ScrollEnd(g, st_shopscr);
    
-   shopdef_t *def = &shopdefs[cbi->gst.lstst[CBI_LSTST_SHOP]];
+   shopdef_t *def = &shopdefs[g->st[st_shopsel].i];
    
    ACS_SetHudClipRect(111, 30, 184, 150, 184);
    
    HudMessageF("CBIFONT", "%LS: %lli\Cnscr", "LITH_COST", def->cost);
-   HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
    
    HudMessageF("CBIFONT", "%S", Language("LITH_TXT_SHOP_DESCR_%S", def->name));
-   HudMessagePlain(hid--, 111.1, 40.1, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
-   if(GUI_Button(GUI_ID("sBUY"), gst, &hid, 259, 170, "Buy", !Shop_CanBuy(p, def)))
+   if(Lith_GUI_Button(g, "Buy", 259, 170, !Shop_CanBuy(p, def)))
       Shop_Buy(p, def);
-   
-   return hid;
 }
 
 // EOF

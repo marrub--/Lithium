@@ -9,15 +9,22 @@
 //
 
 //
-// CBI_Tab_Statistics
+// Lith_CBITab_Settings
 //
-static int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
+{
+}
+
+//
+// Lith_CBITab_Statistics
+//
+static void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
 {
 #define Stat(n, name, f, x) \
-   HudMessageF("CBIFONT", name); HudMessagePlain(hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
-   HudMessageF("CBIFONT", f, x); HudMessagePlain(hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND)
+   HudMessageF("CBIFONT", name); HudMessagePlain(g->hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
+   HudMessageF("CBIFONT", f, x); HudMessagePlain(g->hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND)
    
-   HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(hid--, 20.1, 60.1, TICSECOND);
+   HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
    Stat(0,  "Weapons Held",      "%i",   p->weaponsheld);
    Stat(1,  "Health Used",       "%li",  p->healthused);
    Stat(2,  "Health Sum",        "%li",  p->healthsum);
@@ -34,13 +41,16 @@ static int CBI_Tab_Statistics(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst
 // Stat(13, "Rituals Performed", "%i",   0);
    
 #undef Stat
-   return hid;
 }
 
 
 //----------------------------------------------------------------------------
-// External Functions
+// Extern Functions
 //
+
+void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p);
+void Lith_CBITab_Shop(gui_state_t *g, player_t *p);
+void Lith_CBITab_BIP(gui_state_t *g, player_t *p);
 
 //
 // Lith_PlayerUpdateCBI
@@ -50,68 +60,41 @@ void Lith_PlayerUpdateCBI(player_t *p)
 {
    if(p->cbi.open)
    {
-      cbi_t       *cbi = &p->cbi;
-      gui_state_t *gst = &cbi->gst.ggst;
+      gui_state_t *g = &p->cbi.guistate;
       
-      //
-      // Cursor position state
-      gst->cur.x -= p->yawv * 800.0f;
+      Lith_GUI_UpdateState(g, p);
+      Lith_GUI_Begin(g);
       
-      bool inverted = ACS_GetUserCVar(p->number, "lith_player_invertmouse");
+      DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.7);
       
-      if(ACS_GameType() == GAME_SINGLE_PLAYER)
-         inverted = inverted || ACS_GetCVar("invertmouse");
+      static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Statistics", "Settings"};
+      for(int i = 0; i < cbi_tab_max; i++)
+         if(Lith_GUI_Button_Id(g, i, tabnames[i], btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &btntab))
+            g->st[st_maintab].i = i;
       
-      if(inverted)
-         gst->cur.y += p->pitchv * 800.0f;
-      else
-         gst->cur.y -= p->pitchv * 800.0f;
-      
-      gst->cur.x = minmax(gst->cur.x, 0, 320);
-      gst->cur.y = minmax(gst->cur.y, 0, 200);
-      
-      //
-      // Click state
-      gst->cur.click = GUI_CLICK_NONE;
-      
-      if(p->buttons & BT_ATTACK)
-         gst->cur.click |= GUI_CLICK_LEFT;
-      
-      if(p->buttons & BT_ALTATTACK)
-         gst->cur.click |= GUI_CLICK_RIGHT;
-      
-      //
-      // GUI
-      int hid = hid_end_cbi;
-      
-      GUI_Begin(gst);
-      
-      DrawSpriteAlpha("lgfx/UI/Background.png", hid--, 0.1, 0.1, TICSECOND, 0.7);
-      
-      if(GUI_Button(GUI_ID("Exit"), gst, &hid, 296, 13, null, false, &gui_exitparm))
-         Lith_KeyOpenCBI();
-      
-      static __str tabnames[5] = {"Upgrades", "Shop", "Info", "Statistics", "Settings"};
-      for(int i = 0; i < 5; i++)
-         if(GUI_Button(GUI_ID(tabnames[i]), gst, &hid, 13 + (GUI_TAB_W * i), 13, tabnames[i], cbi->gst.tabst[CBI_TABST_MAIN] == i, &gui_tabparm))
-            cbi->gst.tabst[CBI_TABST_MAIN] = i;
-      
-      switch(cbi->gst.tabst[CBI_TABST_MAIN])
+      switch(g->st[st_maintab].i)
       {
-      case TAB_UPGRADES:   hid = CBI_Tab_Upgrades(p, hid, cbi, gst);   break;
-      case TAB_SHOP:       hid = CBI_Tab_Shop(p, hid, cbi, gst);       break;
-      case TAB_STATISTICS: hid = CBI_Tab_Statistics(p, hid, cbi, gst); break;
-      case TAB_BIP:        hid = CBI_Tab_BIP(p, hid, cbi, gst);        break;
-      case TAB_SETTINGS:
-         HudMessageRainbowsF("BIGFONT", "404 Page Not Found");
-         HudMessagePlain(hid--, 40.1, 40.1, TICSECOND);
-         break;
+      case cbi_tab_upgrades:   Lith_CBITab_Upgrades  (g, p); break;
+      case cbi_tab_shop:       Lith_CBITab_Shop      (g, p); break;
+      case cbi_tab_bip:        Lith_CBITab_BIP       (g, p); break;
+      case cbi_tab_statistics: Lith_CBITab_Statistics(g, p); break;
+      case cbi_tab_settings:   Lith_CBITab_Settings  (g, p); break;
       }
       
-      DrawSpritePlain("lgfx/UI/Cursor.png", hid--, 0.1 + (int)gst->cur.x, 0.1 + (int)gst->cur.y, TICSECOND);
-      
-      GUI_End(gst);
+      Lith_GUI_End(g);
    }
+}
+
+//
+// Lith_PlayerResetCBI
+//
+void Lith_PlayerResetCBI(player_t *p)
+{
+   p->cbi.open = false;
+   p->cbi.guistate.cx = 320 / 2;
+   p->cbi.guistate.cy = 200 / 2;
+   
+   Lith_GUI_Init(&p->cbi.guistate, st_max);
 }
 
 

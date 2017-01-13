@@ -6,10 +6,10 @@
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
 #define ForCategory() \
-   for(int i = BIPC_MIN; i < BIPC_MAX; i++)
+   for(int categ = BIPC_MIN; categ < BIPC_MAX; categ++)
 
 #define ForPage() \
-   for(slist_t *rover = bip->infogr[i]->head; rover; rover = rover->next) \
+   for(slist_t *rover = bip->infogr[categ]->head; rover; rover = rover->next) \
       __with(bippage_t *page = rover->data.vp;)
 
 #define ForCategoryAndPage() \
@@ -49,7 +49,7 @@ void Lith_PlayerInitBIP(player_t *p)
    bip_t *bip = &p->bip;
    
    ForCategory()
-      bip->infogr[i] = DList_Create();
+      bip->infogr[categ] = DList_Create();
    
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",       Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
@@ -85,7 +85,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
    ForCategory()
-      bip->pagemax += bip->categorymax[i] = DList_GetLength(bip->infogr[i]);
+      bip->pagemax += bip->categorymax[categ] = DList_GetLength(bip->infogr[categ]);
 }
 
 //
@@ -126,7 +126,7 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
 {
    bip->pageavail = bip->pagemax;
    
-   ForCategory()        bip->categoryavail[i] = bip->categorymax[i];
+   ForCategory()        bip->categoryavail[categ] = bip->categorymax[categ];
    ForCategoryAndPage() page->unlocked = true;
 }
 
@@ -140,7 +140,7 @@ void Lith_DeallocateBIP(bip_t *bip)
    {
       ForPage()
          free(rover->data.vp);
-      DList_Free(bip->infogr[i]);
+      DList_Free(bip->infogr[categ]);
    }
 }
 
@@ -153,40 +153,27 @@ void Lith_PlayerLoseBIPPages(bip_t *bip)
    {
       ForPage()
          page->unlocked = false;
-      bip->categoryavail[i] = 0;
+      bip->categoryavail[categ] = 0;
    }
    
    bip->pageavail = 0;
 }
 
 //
-// CBI_Tab_BIP
+// Lith_CBITab_BIP
 //
-int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 {
-   static gui_button_parm_t const btnp = {
-      .f_gfx_def = "",
-      .f_gfx_hot = "",
-      .dim_x = 180,
-      .dim_y = 9
-   };
-   
-   static gui_button_parm_t const backbtnp = {
-      .f_gfx_def = "",
-      .f_gfx_hot = "",
-      .dim_y = 9
-   };
-   
    bip_t *bip = &p->bip;
    int avail, max;
    
    if(bip->curcategory == BIPC_MAIN)
    {
       HudMessageF("CBIFONT", "\CTINFO");
-      HudMessagePlain(hid--, 160.4, 70.1, TICSECOND);
+      HudMessagePlain(g->hid--, 160.4, 70.1, TICSECOND);
       
 #define LITH_X(n, id, name, capt) \
-      if(GUI_Button(GUI_ID("b" #id), gst, &hid, 70, 80 + (n * 10), capt, false, &btnp)) \
+      if(Lith_GUI_Button_Id(g, n, capt, 70, 80 + (n * 10), .preset = &btnbipmain)) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpagenum  = -1; \
@@ -199,55 +186,58 @@ int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    }
    else
    {
-      GUI_BEGIN_LIST(GUI_ID("bSCL"), gst, &hid, 20, 50, 130, &bip->scroll);
-      
       dlist_t *l = bip->infogr[bip->curcategory];
       size_t n = DList_GetLength(l);
       size_t i = 0;
+      
+      Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 130, btnlist.h * n);
+      
       for(slist_t *rover = l->head; rover; rover = rover->next, i++)
       {
+         int y = btnlist.h * i;
+         
+         if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
+            continue;
+         
          bippage_t *page = rover->data.vp;
-         GUI_LIST_OFFSETS(i, n, 130, cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
          
-         __str id   = StrParam("bN%.2i", i);
-         __str name = StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));
+         __str name =
+            StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));
          
-         if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, !page->unlocked || bip->curpagenum == i, &gui_listbtnparm))
+         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpagenum == i, .preset = &btnlist))
          {
             bip->curpagenum = i;
             bip->curpage    = page;
          }
       }
       
-      GUI_END_LIST(gst);
+      Lith_GUI_ScrollEnd(g, st_bipscr);
+      
+      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, &btnbipback))
+         bip->curcategory = BIPC_MAIN;
       
       if(bip->curpage)
       {
          ACS_SetHudClipRect(111, 40, 184, 140, 184);
          
          HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
-         HudMessagePlain(hid--, 200.4, 45.1, TICSECOND);
+         HudMessagePlain(g->hid--, 200.4, 45.1, TICSECOND);
          HudMessageF("CBIFONT", "%S", Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name));
-         HudMessagePlain(hid--, 111.1, 60.1, TICSECOND);
+         HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
          
          ACS_SetHudClipRect(0, 0, 0, 0);
       }
-      
-      if(GUI_Button(GUI_ID("bBBT"), gst, &hid, 20, 38, "<BACK", false, &backbtnp))
-         bip->curcategory = BIPC_MAIN;
       
       avail = bip->categoryavail[bip->curcategory];
       max   = bip->categorymax[bip->curcategory];
    }
    
-   DrawSpriteAlpha("lgfx/UI/bip.png", hid--, 20.1, 30.1, TICSECOND, 0.6);
+   DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 30.1, TICSECOND, 0.6);
    HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
-   HudMessagePlain(hid--, 35.1, 30.1, TICSECOND);
+   HudMessagePlain(g->hid--, 35.1, 30.1, TICSECOND);
    
    HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
-   HudMessagePlain(hid--, 300.2, 30.1, TICSECOND);
-   
-   return hid;
+   HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
 }
 
 // EOF

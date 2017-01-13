@@ -103,7 +103,7 @@ void Upgr_ReflexWetw_Render(player_t *p, upgrade_t *upgr)
       int  time11 = p->ticks % 11;
       float slide = upgr->user_int[u_charge] / (float)CHARGE_MAX;
       
-      DrawSprite(slide != 1.0f ? "H_D21" : "H_D24",
+      DrawSprite(slide < 0.95f ? "H_D21" : "H_D24",
          HUDMSG_FADEOUT | HUDMSG_ALPHA,
          hid_slideind_fxS - time11,
          77.1 - time11,

@@ -1,103 +1,240 @@
 #include "lith_common.h"
-#include "lith_cbi.h"
+#include "lith_player.h"
+#include "lith_hudid.h"
 
-#define GenDefault(n) if(!parm.n) parm.n = parm_default.n;
+#define GenPreset(type, def) \
+   type const *pre; \
+   if(a->preset) pre = a->preset; \
+   else          pre = &def
+
+
+//----------------------------------------------------------------------------
+// Extern Objects
+//
+
+gui_button_preset_t const btndefault = {
+   .gfx  = "lgfx/UI/Button.png",
+   .hot  = "lgfx/UI/ButtonHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .cdef = 'j',
+   .cact = 'g',
+   .chot = 'k',
+   .cdis = 'u',
+   .font = "CBIFONT",
+   .w = 48,
+   .h = 16
+};
+
+gui_button_preset_t const btntab = {
+   .gfx  = "lgfx/UI/Tab.png",
+   .hot  = "lgfx/UI/TabHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .cdef = 'j',
+   .cact = 'g',
+   .chot = 'k',
+   .cdis = 'n',
+   .font = "CBIFONT",
+   .w = 48,
+   .h = 11
+};
+
+gui_button_preset_t const btnexit = {
+   .gfx  = "lgfx/UI/ExitButton.png",
+   .hot  = "lgfx/UI/ExitButtonHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .w = 11,
+   .h = 11
+};
+
+gui_button_preset_t const btnlist = {
+   .gfx  = "lgfx/UI/ListButton.png",
+   .hot  = "lgfx/UI/ListButtonHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .cdef = 'j',
+   .cact = 'g',
+   .chot = 'k',
+   .cdis = 'u',
+   .font = "CBIFONT",
+   .w = 80,
+   .h = 9
+};
+
+gui_button_preset_t const btnbipmain = {
+   .snd  = "player/cbi/buttonpress",
+   .cdef = 'j',
+   .cact = 'g',
+   .chot = 'k',
+   .cdis = 'n',
+   .font = "CBIFONT",
+   .w = 180,
+   .h = 9
+};
+
+gui_button_preset_t const btnbipback = {
+   .snd  = "player/cbi/buttonpress",
+   .cdef = 'j',
+   .cact = 'g',
+   .chot = 'k',
+   .cdis = 'n',
+   .font = "CBIFONT",
+   .w = 48,
+   .h = 9
+};
+
+gui_scroll_preset_t const scrdefault = {
+   .capS = "lgfx/UI/ListCapTop.png",
+   .capE = "lgfx/UI/ListCapBottom.png",
+   .scrl = "lgfx/UI/ListScrollbar.png",
+   .scrlw = 8,
+   .scrlh = 8,
+   .notchgfx = "lgfx/UI/ListScrollNotch.png",
+   .notchhot = "lgfx/UI/ListScrollNotchHot.png",
+   .notchofs = 3
+};
+
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
 
 //
 // GUI_Auto
 //
-// Offset x/y coordinates and check for clipping.
-// Check if mouse is colliding with us, and if it's being clicked.
-//
-static void GUI_Auto(int id, bool active, gui_state_t *gst, int *x, int *y, int dim_x, int dim_y, int clickmask)
+void GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h)
 {
-   struct gui_clip_s *clip = &gst->clip;
+   x += g->ox;
+   y += g->oy;
    
-   *x += gst->ofsx;
-   *y += gst->ofsy;
-   
-   if(active &&
-      bpcldi(*x, *y, *x + dim_x, *y + dim_y, gst->cur.x, gst->cur.y) &&
-      (!clip->on || bpcldi(clip->x, clip->y, clip->x + clip->w, clip->y + clip->h, gst->cur.x, gst->cur.y)))
+   // check clip versus cursor (if clipping), then check control versus cursor
+   if(!g->useclip || bpcldi(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
+      if(bpcldi(x, y, x + w, y + h, g->cx, g->cy))
    {
-      gst->hot = id;
+      g->hot = id;
       
-      if(gst->active == GUI_EMPTY_ID && gst->cur.click & clickmask)
-         gst->active = id;
+      if(g->active == 0 && g->clicklft)
+         g->active = id;
    }
 }
 
+
+//----------------------------------------------------------------------------
+// Extern Functions
 //
-// GUI_Button
+
 //
-[[__optional_args(3)]]
-bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bool inactive, gui_button_parm_t const *parm_)
+// Lith_GUI_Init
+//
+void Lith_GUI_Init(gui_state_t *g, size_t maxst)
 {
-   static gui_button_parm_t parm_default = {
-      .clickmask = GUI_CLICK_LEFT,
-      .c_default = 'j',
-      .c_active = 'g',
-      .c_hot = 'k',
-      .c_inactive = 'u',
-      .f_font = "CBIFONT",
-      .f_gfx_def = "lgfx/UI/Button.png",
-      .f_gfx_hot = "lgfx/UI/ButtonHot.png",
-      .s_clicked = "player/cbi/buttonpress",
-      .dim_x = GUI_BUTTON_W,
-      .dim_y = GUI_BUTTON_H,
-   };
+   if(g->st) free(g->st);
+   g->st = calloc(maxst, sizeof(gui_stateitem_t));
+}
+
+//
+// Lith_GUI_UpdateState
+//
+void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
+{
+   bool inverted = ACS_GetUserCVar(p->number, "lith_player_invertmouse");
    
-   static gui_button_parm_t parm;
+   // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
+   // This breaks network sync so we can only do it in singleplayer.
+   if(ACS_GameType() == GAME_SINGLE_PLAYER)
+      inverted |= ACS_GetCVar("invertmouse");
    
-   //
-   // Set up structured parameters.
+   g->old = g->cur;
    
-   if(parm_)
+                g->cx -= p->yawv   * 800.0f;
+   if(inverted) g->cy += p->pitchv * 800.0f;
+   else         g->cy -= p->pitchv * 800.0f;
+   
+   g->cx = minmax(g->cx, 0, 320);
+   g->cy = minmax(g->cy, 0, 200);
+   
+   g->clicklft = p->buttons & BT_ATTACK;
+   g->clickrgt = p->buttons & BT_ALTATTACK;
+   g->clickany = g->clicklft || g->clickrgt;
+}
+
+//
+// Lith_GUI_Begin
+//
+void Lith_GUI_Begin(gui_state_t *g)
+{
+   g->hid = hid_end_cbi;
+   g->hot = 0;
+   
+   ACS_SetHudSize(320, 200);
+}
+
+//
+// Lith_GUI_End
+//
+void Lith_GUI_End(gui_state_t *g)
+{
+   DrawSpritePlain("lgfx/UI/Cursor.png", g->hid--, (int)g->cx + 0.1, (int)g->cy + 0.1, TICSECOND);
+   
+   if(!g->clickany)
+      g->active = 0;
+}
+
+//
+// Lith_GUI_Clip
+//
+void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h)
+{
+   g->useclip = true;
+   g->clpxE = x + w;
+   g->clpyE = y + h;
+   
+   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h);
+}
+
+//
+// Lith_GUI_ClipRelease
+//
+void Lith_GUI_ClipRelease(gui_state_t *g)
+{
+   g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
+   ACS_SetHudClipRect(0, 0, 0, 0);
+}
+
+//
+// Lith_GUI_Button_Impl
+//
+bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a)
+{
+   GenPreset(gui_button_preset_t, btndefault);
+   
+   if(!a->disabled)
+      GUI_Auto(g, id, a->x, a->y, pre->w, pre->h);
+   
    {
-      parm = *parm_;
-      GenDefault(clickmask);
-      GenDefault(c_default); GenDefault(c_active);  GenDefault(c_hot); GenDefault(c_inactive);
-      GenDefault(f_font);    GenDefault(f_gfx_def); GenDefault(f_gfx_hot);
-      GenDefault(s_clicked);
-      GenDefault(dim_x); GenDefault(dim_y);
+   __str graphic;
+   
+   if(g->hot == id && pre->hot) graphic = pre->hot;
+   else                         graphic = pre->gfx;
+   
+   if(graphic)
+      DrawSpritePlain(graphic, g->hid--, a->x + g->ox + 0.1, a->y + g->oy + 0.1, TICSECOND);
    }
-   else
-      parm = parm_default;
    
-   GUI_Auto(id, !inactive, gst, &x, &y, parm.dim_x, parm.dim_y, parm.clickmask);
-   
-   //
-   // Draw button.
-   
-   if(gst->hot == id && ACS_StrCmp(parm.f_gfx_hot, "") != 0)
-      DrawSpritePlain(parm.f_gfx_hot, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
-   else if(ACS_StrCmp(parm.f_gfx_def, "") != 0)
-      DrawSpritePlain(parm.f_gfx_def, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
-   
-   //
-   // Draw text.
-   
-   if(text)
+   if(a->label)
    {
-      char color = parm.c_default;
+      char color;
       
-      if(inactive)
-         color = parm.c_inactive;
-      else if(gst->active == id)
-         color = parm.c_active;
-      else if(gst->hot == id)
-         color = parm.c_hot;
+           if(a->disabled)     color = pre->cdis;
+      else if(g->active == id) color = pre->cact;
+      else if(g->hot    == id) color = pre->chot;
+      else                     color = pre->cdef;
       
-      HudMessageF(parm.f_font, "\C%c%S", color, text);
-      HudMessagePlain((*hid)--, (parm.dim_x/2) + x + 0.4, (parm.dim_y/2) + y, TICSECOND);
+      HudMessageF(pre->font, "\C%c%S", color, a->label);
+      HudMessagePlain(g->hid--, (pre->w / 2) + a->x + g->ox + 0.4, (pre->h / 2) + a->y + g->oy, TICSECOND);
    }
    
-   //
-   // Check if click ended. If so, play a sound and return true.
-   
-   if(!(gst->cur.click & parm.clickmask) && gst->hot == id && gst->active == id)
+   if(g->hot == id && g->active == id && !g->clicklft)
    {
-      ACS_LocalAmbientSound(parm.s_clicked, 127);
+      ACS_LocalAmbientSound(pre->snd, 127);
       return true;
    }
    else
@@ -105,180 +242,99 @@ bool GUI_Button(int id, gui_state_t *gst, int *hid, int x, int y, __str text, bo
 }
 
 //
-// GUI_ScrollBarVertical
+// Lith_GUI_ScrollBegin_Impl
 //
-static bool GUI_ScrollBarVertical(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm)
+void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
 {
-   // REAL THINGS
-   int height = size / parm->dim_scrl_y;
-   int realheight = height * parm->dim_scrl_y; // yay, integer rounding abuse!
+   GenPreset(gui_scroll_preset_t, scrdefault);
    
-   // MAGICAL THINGS
-   int capheight = realheight - (parm->dim_cap_y * 2);
-   int ypos = (parm->dim_cap_y + capheight * *pos) / 65536;
-   int capy = y + parm->dim_cap_y;
+   gui_scroll_state_t *scr = &g->st[a->st].scrl; // scrollbar state
    
-   // CODE THINGS
-   GUI_Auto(id, true, gst, &x, &capy, parm->dim_scrl_x, capheight, parm->clickmask);
+   // sizes
+   int caph   = pre->scrlh / 2;          // size of cap
+   int blocks = (a->h / pre->scrlh) - 1; // height in graphical blocks minus caps
+   int h      = (blocks * pre->scrlh);   // height in pixels minus caps
+   int realh  = h + pre->scrlh;          // height in pixels plus caps
+   int vofs   = 0; // offset in pixels of the content
    
-   //
-   // Draw each section of the scroll bar
+   if(a->contenth > realh)
+      vofs = (a->contenth - realh) * scr->y;
    
-   for(int i = 0; i < height; i++)
-      DrawSpritePlain(parm->f_gfx_scrl, (*hid)--, 0.1 + x, 0.1 + y + (parm->dim_scrl_y * i), TICSECOND);
+   // set the scrollbar's offset
+   scr->ox = a->x + pre->scrlw; // offset by scrollbar width
+   scr->oy = a->y - vofs;       // offset by scrollbar notch pos
    
-   DrawSpritePlain(parm->f_gfx_capS, (*hid)--, 0.1 + x, 0.1 + y, TICSECOND);
-   DrawSpritePlain(parm->f_gfx_capE, (*hid)--, 0.1 + x, 0.1 + y + ((parm->dim_scrl_y * height) - parm->dim_cap_y), TICSECOND);
+   // convenience variables
+   int x   = a->x + pre->scrlw + g->ox; // base x to draw from
+   int y   = a->y              + g->oy; // base y to draw from
+   int ory = y;                         // copy of y since it'll be changed later
    
-   //
-   // Draw the notch thingy
+   // check collision - height is minus caps, and y is offset by the top cap
+   GUI_Auto(g, id, x - pre->scrlw, y + caph, pre->scrlw, h);
    
-   if(gst->active == id || gst->hot == id)
-      DrawSpritePlain(parm->f_gfx_notch_hot, (*hid)--, 0.1 + x - parm->ofs_notch, 0.1 + capy + ypos, TICSECOND);
-   else
-      DrawSpritePlain(parm->f_gfx_notch, (*hid)--, 0.1 + x - parm->ofs_notch, 0.1 + capy + ypos, TICSECOND);
-   
-   //
-   // Check for input.
-   
-   if(gst->active == id)
+   // move scroll notch
+   if(g->active == id)
    {
-      int mpos = minmax(gst->cur.y - capy, 0, capheight);
-      int v = (mpos * 65536) / capheight;
-      if(*pos != v)
-      {
-         *pos = v;
-         return true;
-      }
+      // needs to be two expressions because minmax copies the expression
+      scr->y = (g->cy - y) / (float)h;
+      scr->y = minmax(scr->y, 0, 1);
    }
    
-   return false;
-}
-
-//
-// GUI_ScrollBar
-//
-[[__optional_args(1)]]
-bool GUI_ScrollBar(int id, gui_state_t *gst, int *hid, int x, int y, int size, int *pos, gui_scroll_parm_t const *parm_)
-{
-   static gui_scroll_parm_t parm_default = {
-      .clickmask = GUI_CLICK_LEFT,
-      .vertical = false,
-      // TODO: split these graphics
-      .f_gfx_capS = "lgfx/UI/ScrollLeft.png",
-      .f_gfx_capE = "lgfx/UI/ScrollRight.png",
-      .f_gfx_scrl = "lgfx/UI/ScrollMid.png",
-      .f_gfx_notch = "lgfx/UI/ScrollerNotch.png",
-      .f_gfx_notch_hot = "lgfx/UI/ScrollerNotchHot.png",
-      /* .dim_cap_x = GUI_SCRLCAP_W,
-      .dim_cap_y = GUI_SCRLCAP_H,
-      .dim_scrl_x = GUI_SCRL_W,
-      .dim_scrl_y = GUI_SCRL_H,
-      .ofs_notch = GUI_SCRL_NOTCH_OFS */
-   };
+   // draw top cap
+   DrawSpritePlain(pre->capS, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+   y += caph;
    
-   static gui_scroll_parm_t parm;
-   
-   //
-   // Set up structured parameters.
-   
-   if(parm_)
+   // draw middle of bar
+   for(int i = 0; i < blocks; i++)
    {
-      parm = *parm_;
-      GenDefault(clickmask);
-      GenDefault(f_gfx_capS); GenDefault(f_gfx_capE); GenDefault(f_gfx_scrl);
-      GenDefault(f_gfx_notch);
-      GenDefault(dim_cap_x);  GenDefault(dim_cap_y);  GenDefault(dim_scrl_x); GenDefault(dim_scrl_y);
+      DrawSpritePlain(pre->scrl, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+      y += pre->scrlh;
    }
-   else
-      parm = parm_default;
    
-   //
-   // Do the thing.
+   // draw bottom cap
+   DrawSpritePlain(pre->capE, g->hid--, x + 0.2, y + 0.1, TICSECOND);
    
-   if(parm.vertical)
-      return GUI_ScrollBarVertical(id, gst, hid, x, y, size, pos, &parm);
-   else
-   {
-      // TODO
-      // return GUI_ScrollBarHorizontal(id, gst, hid, x, y, size, pos, &parm);
-      return false;
-   }
+   // set the top and bottom for occlusion
+   scr->occludeS = vofs;
+   scr->occludeE = realh + vofs;
+   
+   // draw notch
+   DrawSpritePlain(pre->notchgfx, g->hid--, x + 0.2, ory + (h * scr->y) + caph + 0.1, TICSECOND);
+   
+   // setup offsets
+   g->ox += scr->ox;
+   g->oy += scr->oy;
+   
+   // setup clip
+   Lith_GUI_Clip(g, x, ory, a->w, realh);
 }
 
 //
-// GUI_BeginOffset
+// Lith_GUI_ScrollEnd
 //
-void GUI_BeginOffset(gui_state_t *gst, int x, int y)
+void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st)
 {
-   gst->ofsx = x;
-   gst->ofsy = y;
+   gui_scroll_state_t *scr = &g->st[st].scrl;
+   
+   // reset offsets 
+   g->ox -= scr->ox;
+   g->oy -= scr->oy;
+   
+   // reset clip
+   Lith_GUI_ClipRelease(g);
 }
 
 //
-// GUI_EndOffset
+// Lith_GUI_ScrollOcclude
 //
-void GUI_EndOffset(gui_state_t *gst)
+bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h)
 {
-   gst->ofsx = 0;
-   gst->ofsy = 0;
-}
-
-//
-// GUI_BeginClip
-//
-void GUI_BeginClip(gui_state_t *gst, int x, int y, int w, int h)
-{
-   if(gst->clip.on)
-      return;
+   gui_scroll_state_t *scr = &g->st[st].scrl;
    
-   gst->clip.on = true;
-   
-   gst->clip.x = x;
-   gst->clip.y = y;
-   gst->clip.w = w;
-   gst->clip.h = h;
-   
-   ACS_SetHudClipRect(x, y, w, h);
-}
-
-//
-// GUI_EndClip
-//
-void GUI_EndClip(gui_state_t *gst)
-{
-   if(!gst->clip.on)
-      return;
-   
-   gst->clip.on = false;
-   ACS_SetHudClipRect(0, 0, 0, 0);
-}
-
-//
-// GUI_Begin
-//
-void GUI_Begin(gui_state_t *gst)
-{
-   ACS_SetHudSize(320, 200);
-   
-   gst->hot = GUI_EMPTY_ID;
-}
-
-//
-// GUI_End
-//
-void GUI_End(gui_state_t *gst)
-{
-   if(gst->cur.click == GUI_CLICK_NONE)
-      gst->active = GUI_EMPTY_ID;
-   else if(gst->active == GUI_EMPTY_ID)
-      gst->active = GUI_INVALID_ID;
-   
-   if(gst->clip.on)
-      GUI_EndClip(gst);
-   
-   if(gst->ofsx || gst->ofsy)
-      GUI_EndOffset(gst);
+   return
+      y > scr->occludeE ||                // too low to be seen
+      (h && (y + h) - scr->occludeS < 0); // too high to be seen (if height is available)
 }
 
 // EOF
+

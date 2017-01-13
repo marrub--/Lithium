@@ -326,7 +326,8 @@ static void Lith_ResetPlayer(player_t *p)
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    ACS_TakeInventory("Lith_CannonScopedToken",  999);
    
-   p->cbi.open = false;
+   Lith_PlayerResetCBI(p);
+   
    p->frozen   = 0;
    
    p->addpitch = 0.0f;
@@ -349,6 +350,7 @@ static void Lith_ResetPlayer(player_t *p)
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
       Lith_Log(p, "> Lithium 1.1 :: Compiled %S", __DATE__);
+      Lith_Log(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       p->staticinit = true;
    }
    else

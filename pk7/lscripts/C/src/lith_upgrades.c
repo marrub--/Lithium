@@ -206,9 +206,9 @@ void Lith_PlayerEnterUpgrades(player_t *p)
 }
 
 //
-// CBI_Tab_Upgrades
+// Lith_CBITab_Upgrades
 //
-int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 {
    static __str const upgrcateg[UC_MAX] = {
       [UC_Body] = "\ChBody",
@@ -217,26 +217,27 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
       [UC_Down] = "\CtDowngrade"
    };
    
-   GUI_BEGIN_LIST(GUI_ID("uSCL"), gst, &hid, 20, 30, 152, &cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
+   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 30, btnlist.w, 152, btnlist.h * UPGR_MAX);
    
    for(int i = 0; i < UPGR_MAX; i++)
    {
-      GUI_LIST_OFFSETS(i, UPGR_MAX, 152, cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
+      int y = btnlist.h * i;
       
-      __str id   = StrParam("uN%.2i", i);
+      if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, btnlist.h))
+         continue;
+      
       __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", p->upgrades[i].info->name);
-      __str mark = upgrcateg[p->upgrades[i].info->category];
       
-      if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, cbi->gst.lstst[CBI_LSTST_UPGRADES] == i, &gui_listbtnparm))
-         cbi->gst.lstst[CBI_LSTST_UPGRADES] = i;
+      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_upgrsel].i, .preset = &btnlist))
+         g->st[st_upgrsel].i = i;
       
-      HudMessageF("CBIFONT", "%.3S", mark);
-      HudMessagePlain(hid--, gst->ofsx + 1.1, 4 + gst->ofsy + addy, TICSECOND);
+      HudMessageF("CBIFONT", "%.3S", upgrcateg[p->upgrades[i].info->category]);
+      HudMessagePlain(g->hid--, g->ox + 2.1, g->oy + y + 1.1, TICSECOND);
    }
    
-   GUI_END_LIST(gst);
+   Lith_GUI_ScrollEnd(g, st_upgrscr);
    
-   int sel = cbi->gst.lstst[CBI_LSTST_UPGRADES];
+   int sel = g->st[st_upgrsel].i;
    upgrade_t *upgr = &p->upgrades[sel];
    
    __str mark;
@@ -253,16 +254,16 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    ACS_SetHudClipRect(111, 30, 184, 150, 184);
    
    HudMessageF("CBIFONT", "%LS: %S", "LITH_COST", cost);
-   HudMessagePlain(hid--, 111.1, 30.1, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
    
    HudMessageF("CBIFONT", "%LS: %S", "LITH_CATEGORY", upgrcateg[upgr->info->category]);
-   HudMessagePlain(hid--, 111.1, 40.1, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
    
    if(upgr->info->scoreadd != 0.0)
    {
       __str color = upgr->info->scoreadd < 0 ? "\Ca" : "\Cn";
       HudMessageF("CBIFONT", "%LS: %S%i\Cl%%", "LITH_SCOREMULT", color, ceilk(100.0 * (upgr->info->scoreadd + 1.0)));
-      HudMessagePlain(hid--, 111.1, 50.1, TICSECOND);
+      HudMessagePlain(g->hid--, 111.1, 50.1, TICSECOND);
       yofs = 10;
    }
    
@@ -271,17 +272,15 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    else
       HudMessageRainbowsF("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    
-   HudMessagePlain(hid--, 111.1, 50.1 + yofs, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 50.1 + yofs, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
-   if(GUI_Button(GUI_ID("uBUY"), gst, &hid, 259, 170, "Buy", !Upgr_CanBuy(p, upgr)))
+   if(Lith_GUI_Button(g, "Buy", 259, 170, !Upgr_CanBuy(p, upgr)))
       Upgr_Buy(p, upgr);
    
-   if(GUI_Button(GUI_ID("uACT"), gst, &hid, 209, 170, upgr->active ? "Deactivate" : "Activate", !upgr->owned))
+   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 209, 170, !upgr->owned))
       Upgr_ToggleActive(p, upgr);
-   
-   return hid;
 }
 
 // EOF

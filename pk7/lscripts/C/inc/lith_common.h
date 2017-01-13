@@ -16,7 +16,7 @@
 #define cosk ACS_Cos
 
 #define max(x, y) ((x) < (y) ? (y) : (x))
-#define min(x, y) ((x) > (y) ? (y) : (x))
+#define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))
 
 #define HudMessageF(font, ...) \
