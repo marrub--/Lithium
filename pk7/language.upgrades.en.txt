@@ -2,6 +2,7 @@
 
 LITH_COST = "Cost";
 LITH_CATEGORY = "Category";
+LITH_SCOREMULT = "Score Multiplier";
 
 //
 // Body

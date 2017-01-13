@@ -194,6 +194,13 @@ accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2)
    return ACS_VectorLength(ACS_VectorLength(x1 - x2, y1 - y2), z1 - z2);
 }
 
+int ceilk(accum n)
+{
+   union { int_k_t i; accum a; } u = { .a = n };
+   if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.a + 1;
+   else             return (int)u.a;
+}
+
 unsigned StrHash(__str s)
 {
    unsigned ret = 0;

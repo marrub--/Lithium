@@ -116,6 +116,7 @@ float angle2df(float x1, float y1, float x2, float y2);
 accum dist2dk(accum x1, accum y1, accum x2, accum y2);
 float dist2df(float x1, float y1, float x2, float y2);
 accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2);
+int ceilk(accum n);
 
 // Constants
 static float const pi  = 3.14159265358979323846f;

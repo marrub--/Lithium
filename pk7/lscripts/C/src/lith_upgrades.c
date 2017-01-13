@@ -247,6 +247,7 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    }
    
    __str cost = upgr->info->cost ? StrParam("%lli%S", Lith_PlayerDiscount(upgr->info->cost), mark) : "---";
+   int   yofs = 0;
    
    ACS_SetHudClipRect(111, 30, 184, 150, 184);
    
@@ -256,12 +257,20 @@ int CBI_Tab_Upgrades(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
    HudMessageF("CBIFONT", "%LS: %S", "LITH_CATEGORY", upgrcateg[upgr->info->category]);
    HudMessagePlain(hid--, 111.1, 40.1, TICSECOND);
    
+   if(upgr->info->scoreadd != 0.0)
+   {
+      __str color = upgr->info->scoreadd < 0 ? "\Ca" : "\Cn";
+      HudMessageF("CBIFONT", "%LS: %S%i\Cl%%", "LITH_SCOREMULT", color, ceilk(100.0 * (upgr->info->scoreadd + 1.0)));
+      HudMessagePlain(hid--, 111.1, 50.1, TICSECOND);
+      yofs = 10;
+   }
+   
    if(sel != UPGR_UNCEUNCE)
       HudMessageF        ("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    else
       HudMessageRainbowsF("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    
-   HudMessagePlain(hid--, 111.1, 50.1, TICSECOND);
+   HudMessagePlain(hid--, 111.1, 50.1 + yofs, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
