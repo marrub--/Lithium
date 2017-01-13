@@ -45,6 +45,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    
    {"Implying",    0         , false, null,           UC_Down,  0.20, U(Implying)},
    {"UNCEUNCE",    0         , false, null,           UC_Down,  0.30, ADU(UNCEUNCE)},
+   {"InstaDeath",  0         , false, null,           UC_Down,  0.50, U(InstaDeath)},
 };
 
 

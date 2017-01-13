@@ -40,6 +40,7 @@ enum
    
    UPGR_Implying,
    UPGR_UNCEUNCE,
+   UPGR_InstaDeath,
    
    UPGR_MAX
 };
@@ -126,6 +127,7 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
 //---------------------------------------------------------------------------
                                  U(Implying)
    A(UNCEUNCE)    D(UNCEUNCE)    U(UNCEUNCE)
+                                 U(InstaDeath)
 //---------------------------------------------------------------------------
 
 #undef A

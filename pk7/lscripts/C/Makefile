@@ -39,6 +39,7 @@ MAIN_SOURCES= \
 	$(SRC)/lith_upgr_defensenuke.c \
 	$(SRC)/lith_upgr_headsupdisp.c \
 	$(SRC)/lith_upgr_implying.c \
+	$(SRC)/lith_upgr_instadeath.c \
 	$(SRC)/lith_upgr_jetbooster.c \
 	$(SRC)/lith_upgr_lolsords.c \
 	$(SRC)/lith_upgr_punctcannon.c \
