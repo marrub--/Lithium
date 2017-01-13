@@ -16,8 +16,16 @@
    ForCategory() \
       ForPage()
 
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
+//
+// AddToBIP
+//
 [[__optional_args(1)]]
-void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
+static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
    bippage_t  *page = calloc(1, sizeof(bippage_t));
                page->name     = name;
@@ -27,6 +35,14 @@ void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
    DList_InsertBack(bip->infogr[categ], (listdata_t){.vp = page});
 }
 
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_PlayerInitBIP
+//
 [[__call("ScriptS")]]
 void Lith_PlayerInitBIP(player_t *p)
 {
@@ -72,6 +88,9 @@ void Lith_PlayerInitBIP(player_t *p)
       bip->pagemax += bip->categorymax[i] = DList_GetLength(bip->infogr[i]);
 }
 
+//
+// Lith_FindBIPPage
+//
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 {
    ForCategoryAndPage()
@@ -81,6 +100,9 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
    return null;
 }
 
+//
+// Lith_UnlockBIPPage
+//
 bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
 {
    bippage_t *page = Lith_FindBIPPage(bip, name);
@@ -97,6 +119,9 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
    return page;
 }
 
+//
+// Lith_UnlockAllBIPPages
+//
 void Lith_UnlockAllBIPPages(bip_t *bip)
 {
    bip->pageavail = bip->pagemax;
@@ -105,6 +130,9 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
    ForCategoryAndPage() page->unlocked = true;
 }
 
+//
+// Lith_DeallocateBIP
+//
 [[__call("ScriptS")]]
 void Lith_DeallocateBIP(bip_t *bip)
 {
@@ -116,6 +144,9 @@ void Lith_DeallocateBIP(bip_t *bip)
    }
 }
 
+//
+// Lith_PlayerLoseBIPPages
+//
 void Lith_PlayerLoseBIPPages(bip_t *bip)
 {
    ForCategory()
@@ -126,6 +157,97 @@ void Lith_PlayerLoseBIPPages(bip_t *bip)
    }
    
    bip->pageavail = 0;
+}
+
+//
+// CBI_Tab_BIP
+//
+int CBI_Tab_BIP(player_t *p, int hid, cbi_t *cbi, gui_state_t *gst)
+{
+   static gui_button_parm_t const btnp = {
+      .f_gfx_def = "",
+      .f_gfx_hot = "",
+      .dim_x = 180,
+      .dim_y = 9
+   };
+   
+   static gui_button_parm_t const backbtnp = {
+      .f_gfx_def = "",
+      .f_gfx_hot = "",
+      .dim_y = 9
+   };
+   
+   bip_t *bip = &p->bip;
+   int avail, max;
+   
+   if(bip->curcategory == BIPC_MAIN)
+   {
+      HudMessageF("CBIFONT", "\CTINFO");
+      HudMessagePlain(hid--, 160.4, 70.1, TICSECOND);
+      
+#define LITH_X(n, id, name, capt) \
+      if(GUI_Button(GUI_ID("b" #id), gst, &hid, 70, 80 + (n * 10), capt, false, &btnp)) \
+      { \
+         bip->curcategory = BIPC_##name; \
+         bip->curpagenum  = -1; \
+         bip->curpage     = null; \
+      }
+#include "lith_bip.h"
+      
+      avail = bip->pageavail;
+      max   = bip->pagemax;
+   }
+   else
+   {
+      GUI_BEGIN_LIST(GUI_ID("bSCL"), gst, &hid, 20, 50, 130, &bip->scroll);
+      
+      dlist_t *l = bip->infogr[bip->curcategory];
+      size_t n = DList_GetLength(l);
+      size_t i = 0;
+      for(slist_t *rover = l->head; rover; rover = rover->next, i++)
+      {
+         bippage_t *page = rover->data.vp;
+         GUI_LIST_OFFSETS(i, n, 130, cbi->gst.scrlst[CBI_SCRLST_UPGRADES]);
+         
+         __str id   = StrParam("bN%.2i", i);
+         __str name = StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));
+         
+         if(GUI_Button(GUI_ID(id), gst, &hid, 0, addy, name, !page->unlocked || bip->curpagenum == i, &gui_listbtnparm))
+         {
+            bip->curpagenum = i;
+            bip->curpage    = page;
+         }
+      }
+      
+      GUI_END_LIST(gst);
+      
+      if(bip->curpage)
+      {
+         ACS_SetHudClipRect(111, 40, 184, 140, 184);
+         
+         HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
+         HudMessagePlain(hid--, 200.4, 45.1, TICSECOND);
+         HudMessageF("CBIFONT", "%S", Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name));
+         HudMessagePlain(hid--, 111.1, 60.1, TICSECOND);
+         
+         ACS_SetHudClipRect(0, 0, 0, 0);
+      }
+      
+      if(GUI_Button(GUI_ID("bBBT"), gst, &hid, 20, 38, "<BACK", false, &backbtnp))
+         bip->curcategory = BIPC_MAIN;
+      
+      avail = bip->categoryavail[bip->curcategory];
+      max   = bip->categorymax[bip->curcategory];
+   }
+   
+   DrawSpriteAlpha("lgfx/UI/bip.png", hid--, 20.1, 30.1, TICSECOND, 0.6);
+   HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
+   HudMessagePlain(hid--, 35.1, 30.1, TICSECOND);
+   
+   HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
+   HudMessagePlain(hid--, 300.2, 30.1, TICSECOND);
+   
+   return hid;
 }
 
 // EOF

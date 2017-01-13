@@ -1,7 +1,7 @@
 [enu default]
 
 LITH_TXT_LOG_Default     = ":^)";
-LITH_TXT_LOG_AllMap      = ">>>>> CB-Map acquired.";
+LITH_TXT_LOG_AllMap      = ">>>>> Area Map acquired.";
 LITH_TXT_LOG_ArmorBonus  = ">>> Armor Bonus";
 LITH_TXT_LOG_Backpack    = ">>>>> Backpack and Discount Card acquired.";
 LITH_TXT_LOG_Berserk     = ">>>>> B\cgeRs-rk \\\\\\\\-[ ~error09671 ]";

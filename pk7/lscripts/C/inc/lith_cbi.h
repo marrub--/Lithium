@@ -220,5 +220,9 @@ void Lith_KeyOpenCBI(void);
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateCBI(struct player_s *p);
 
+int CBI_Tab_BIP(struct player_s *p, int hid, cbi_t *cbi, gui_state_t *gst);
+int CBI_Tab_Shop(struct player_s *p, int hid, cbi_t *cbi, gui_state_t *gst);
+int CBI_Tab_Upgrades(struct player_s *p, int hid, cbi_t *cbi, gui_state_t *gst);
+
 #endif
 

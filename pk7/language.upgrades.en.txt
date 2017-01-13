@@ -9,7 +9,7 @@ LITH_CATEGORY = "Category";
 LITH_TXT_UPGRADE_TITLE_HeadsUpDisp = "Heads Up Disp.";
 LITH_TXT_UPGRADE_DESCR_HeadsUpDisp =
    "Effect: Shows vital information.\n\n"
-   "A Heads Up Display built into your C/B Interface.";
+   "A Heads Up Display program built into your Computer/Brain Interface.";
 
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
