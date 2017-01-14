@@ -1,17 +1,17 @@
-// Weapons
-user float lith_weapons_zoomfactor = 3.0;
-user float lith_weapons_alpha = 1.0;
-user float lith_weapons_scopealpha = 0.2;
-
-// HUD
-user bool lith_hud_showscore = true;
-user bool lith_hud_showweapons = true;
-
 // Player
 user float lith_player_damagebobmul = 0.6;
 user bool lith_player_damagebob = true;
 user bool lith_player_scoresound = true;
 user bool lith_player_invertmouse = false;
+
+// Weapons
+user float lith_weapons_zoomfactor = 3.0;
+user float lith_weapons_scopealpha = 0.2;
+user float lith_weapons_alpha = 1.0;
+
+// HUD
+user bool lith_hud_showscore = true;
+user bool lith_hud_showweapons = true;
 
 // Server
 server bool lith_sv_stupidpickups = false;

@@ -26,6 +26,7 @@ enum
    st_shopsel,
    st_shopscr,
    st_bipscr,
+   st_settingscr,
    st_max
 };
 

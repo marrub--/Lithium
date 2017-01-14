@@ -82,14 +82,24 @@ gui_button_preset_t const btnbipback = {
 };
 
 gui_scroll_preset_t const scrdefault = {
-   .capS = "lgfx/UI/ListCapTop.png",
-   .capE = "lgfx/UI/ListCapBottom.png",
-   .scrl = "lgfx/UI/ListScrollbar.png",
+   .capS  = "lgfx/UI/ListCapTop.png",
+   .capE  = "lgfx/UI/ListCapBottom.png",
+   .scrl  = "lgfx/UI/ListScrollbar.png",
    .scrlw = 8,
    .scrlh = 8,
    .notchgfx = "lgfx/UI/ListScrollNotch.png",
    .notchhot = "lgfx/UI/ListScrollNotchHot.png",
    .notchofs = 3
+};
+
+gui_slider_preset_t const slddefault = {
+   .gfx    = "lgfx/UI/Slider.png",
+   .snd    = "player/cbi/slidertick",
+   .notch  = "lgfx/UI/SliderNotch.png",
+   .notchhot = "lgfx/UI/SliderNotchHot.png",
+   .pad = 2,
+   .w   = 80,
+   .h = 7
 };
 
 
@@ -237,8 +247,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a)
       ACS_LocalAmbientSound(pre->snd, 127);
       return true;
    }
-   else
-      return false;
+   else return false;
 }
 
 //
@@ -265,12 +274,17 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    scr->oy = a->y - vofs;       // offset by scrollbar notch pos
    
    // convenience variables
-   int x   = a->x + pre->scrlw + g->ox; // base x to draw from
-   int y   = a->y              + g->oy; // base y to draw from
-   int ory = y;                         // copy of y since it'll be changed later
+   int x = a->x + pre->scrlw; // base x to draw from
+   int y = a->y;              // base y to draw from
    
    // check collision - height is minus caps, and y is offset by the top cap
    GUI_Auto(g, id, x - pre->scrlw, y + caph, pre->scrlw, h);
+   
+   // add offset
+   x += g->ox;
+   y += g->oy;
+   
+   int ory = y; // copy of y since it'll be changed later
    
    // move scroll notch
    if(g->active == id)
@@ -299,7 +313,10 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    scr->occludeE = realh + vofs;
    
    // draw notch
-   DrawSpritePlain(pre->notchgfx, g->hid--, x + 0.2, ory + (h * scr->y) + caph + 0.1, TICSECOND);
+   {
+   __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notchgfx;
+   DrawSpritePlain(graphic, g->hid--, x + 0.2, ory + (h * scr->y) + caph + 0.1, TICSECOND);
+   }
    
    // setup offsets
    g->ox += scr->ox;
@@ -329,11 +346,68 @@ void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st)
 //
 bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h)
 {
-   gui_scroll_state_t *scr = &g->st[st].scrl;
+   gui_scroll_state_t const *scr = &g->st[st].scrl;
    
    return
       y > scr->occludeE ||                // too low to be seen
       (h && (y + h) - scr->occludeS < 0); // too high to be seen (if height is available)
+}
+
+//
+// Lith_GUI_Slider_Impl
+//
+float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
+{
+   GenPreset(gui_slider_preset_t, slddefault);
+   
+   int w = pre->w - (pre->pad * 2);
+   
+   int x = a->x + pre->pad;
+   int y = a->y;
+   
+   GUI_Auto(g, id, x, y, w, pre->h);
+   
+   x += g->ox;
+   y += g->oy;
+   
+   // get a normalized (in range (0, w)) value
+   float val;
+   
+   val = ((a->val - a->minima) / (a->maxima - a->minima)) * (float)w;
+   val = minmax(val, 0, w);
+   
+   float orig = val;
+   
+   // move scroll notch
+   if(g->active == id)
+   {
+      val = g->cx - x;
+      val = minmax(val, 0, w);
+   }
+   
+   // get result-normalized value
+   float norm = ((val / (float)w) * a->maxima) + a->minima;
+   
+   // draw graphic
+   DrawSpritePlain(pre->gfx, g->hid--, (x - pre->pad) + 0.1, y + (pre->h / 2), TICSECOND);
+   
+   // draw notch
+   {
+   __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notch;
+   DrawSpritePlain(graphic, g->hid--, x + val - 1 + 0.1, y + 0.1, TICSECOND);
+   }
+   
+   // draw value
+   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)norm);
+   HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
+   
+   // if we've moved it, we return a difference
+   if(g->active == id && !g->clicklft && val != orig)
+      return norm - a->val;
+   
+   // otherwise we return 0
+   else
+      return 0;
 }
 
 // EOF

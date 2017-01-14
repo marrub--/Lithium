@@ -6,6 +6,8 @@
 #define Lith_GUI_Button_Id(g, id, ...) Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
 #define Lith_GUI_ScrollBegin(g, ...) Lith_GUI_ScrollBegin_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id + LineHash, &(gui_scroll_args_t){__VA_ARGS__})
+#define Lith_GUI_Slider(g, ...) Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Slider_Id(g, id, ...) Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
 
 
 //----------------------------------------------------------------------------
@@ -98,6 +100,27 @@ typedef struct gui_scroll_args_s
    gui_scroll_preset_t const *preset;
 } gui_scroll_args_t;
 
+typedef struct gui_slider_preset_s
+{
+   __str gfx;
+   __str snd;
+   __str notch;
+   __str notchhot;
+   int pad;
+   int w;
+   int h;
+} gui_slider_preset_t;
+
+typedef struct gui_slider_args_s
+{
+   int x;
+   int y;
+   float minima;
+   float maxima;
+   float val;
+   gui_slider_preset_t const *preset;
+} gui_slider_args_t;
+
 
 //----------------------------------------------------------------------------
 // Extern Objects
@@ -110,6 +133,7 @@ extern gui_button_preset_t const btnlist;
 extern gui_button_preset_t const btnbipmain;
 extern gui_button_preset_t const btnbipback;
 extern gui_scroll_preset_t const scrdefault;
+extern gui_slider_preset_t const slddefault;
 
 
 //----------------------------------------------------------------------------
@@ -126,6 +150,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a);
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a);
 void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st);
 [[__optional_args(1)]] bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h);
+float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a);
 
 #endif
 
