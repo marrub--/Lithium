@@ -50,13 +50,19 @@ static void HUD_Ammo(player_t *p)
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
       DrawSpritePlain("H_W3", hid_riflemodebg, 241.2, 200.2 + addy, TICSECOND);
       DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_riflemode, 241.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
+      goto load;
    }
+   case weapon_shotgun:
+      if(!p->upgrades[UPGR_GaussShotty].active) break;
    case weapon_pistol:
+   load:
       ammotype = "H_A1";
    case weapon_launcher: case weapon_plasma: case weapon_bfg:
    {
       if(p->weapontype == weapon_pistol)
          count = StrParam("%i/7", 7 - ACS_CheckInventory("Lith_PistolShotsFired"));
+      else if(p->weapontype == weapon_shotgun)
+         count = StrParam("%i/10", 10 - ACS_CheckInventory("Lith_GaussShotsFired"));
       else if(p->weapontype == weapon_rifle)
          count = StrParam("%i/80", 80 - ACS_CheckInventory("Lith_RifleShotsFired"));
       else if(p->weapontype == weapon_launcher)

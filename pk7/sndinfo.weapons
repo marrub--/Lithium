@@ -22,11 +22,14 @@ weapons/shotgun/just2   lsounds/Shotgun/Just2.flac     // 〃
 weapons/shotgun/just3   lsounds/Shotgun/Just3.flac     // 〃
 $alias weapons/shotgun/draw weapons/shotgun/open
 
-weapons/shotgun/gauss/fire    lsounds/Shotgun/Gauss/ShootGunBang.flac // Descent 2 XL
-weapons/shotgun/gauss/puff    lsounds/Shotgun/Gauss/Fire.flac         // 〃
-weapons/shotgun/gauss/spark1  lsounds/Shotgun/Gauss/Spark1.flac       // Fallout 4
-weapons/shotgun/gauss/spark2  lsounds/Shotgun/Gauss/Spark2.flac       // 〃
-weapons/shotgun/gauss/spark3  lsounds/Shotgun/Gauss/Spark3.flac       // 〃
+weapons/shotgun/gauss/fire       lsounds/Shotgun/Gauss/ShootGunBang.flac // Descent 2 XL
+weapons/shotgun/gauss/puff       lsounds/Shotgun/Gauss/Fire.flac         // 〃
+weapons/shotgun/gauss/spark1     lsounds/Shotgun/Gauss/Spark1.flac       // Fallout 4
+weapons/shotgun/gauss/spark2     lsounds/Shotgun/Gauss/Spark2.flac       // 〃
+weapons/shotgun/gauss/spark3     lsounds/Shotgun/Gauss/Spark3.flac       // 〃
+weapons/shotgun/gauss/reloadout  lsounds/Shotgun/Gauss/ReloadOut.flac    // General 6000
+weapons/shotgun/gauss/reloadin   lsounds/Shotgun/Gauss/ReloadIn.flac     // 〃
+weapons/shotgun/gauss/reloadpump lsounds/Shotgun/Gauss/ReloadPump.flac   // 〃
 
 $limit weapons/shotgun/gauss/puff 0
 

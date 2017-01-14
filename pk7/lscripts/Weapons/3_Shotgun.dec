@@ -1,5 +1,10 @@
 #include "lscripts/Weapons/ShotgunTrail.dec"
 
+actor Lith_GaussShotsFired : Inventory
+{
+   Inventory.MaxAmount 10
+}
+
 actor Lith_ShotgunScopedToken : Inventory
 {
    Inventory.MaxAmount 1
@@ -93,10 +98,10 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    states
    {
    AltReady:
-      SCOP A 1 A_WeaponReady(WRF_NOBOB)
+      SCOP A 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
       loop
    Ready:
-      PKSG A 1 A_WeaponReady
+      PKSG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
       PKSG A 0 A_TakeInventory("Lith_ShotgunJustFrame", 1)
       loop
    Deselect:
@@ -137,6 +142,8 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
    // Gauss fire
    //
    FireGauss:
+      TNT1 A 0 A_JumpIfInventory("Lith_GaussShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_GaussShotsFired", 1)
       TNT1 A 0 A_AlertMonsters
       TNT1 A 0 A_FireBullets(0, 0, 1, 22, "Lith_GaussPuff")
       TNT1 A 0 A_Quake(1, 5, 0, 64)
@@ -187,7 +194,7 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       PKSG GFEDC 2
       PKSG B 1
       PKSG A 3
-      PKSG A 7 A_ReFire
+      PKSG AAAAAAA 1 A_ReFire
       goto FireFinish
    FireFinish_Rail_Scoped:
       SCOP A 1 bright A_Light1
@@ -202,6 +209,54 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       SHTF A 2 Bright A_Light1
       SHTF B 2 Bright A_Light2
       goto LightDone
+   //
+   // Reload
+   //
+   Reload:
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_shotgun_gauss), 1)
+      goto FireFinish
+      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, 1)
+      goto Reload1
+      TNT1 A 0 A_PlaySound("weapons/shotgun/zoomout", 6)
+      TNT1 A 0 A_TakeInventory("Lith_ShotgunScopedToken", 999)
+      TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT)
+   Reload1:
+      TNT1 A 0 A_JumpIfInventory("Lith_GaussShotsFired", 1, 1)
+      goto FireFinish
+      PKSG A 1
+      PKSG A 1 offset(-2, 34)
+      PKSG A 1 offset(-4, 37)
+      PKSG A 1 offset(-9, 43) A_PlaySound("weapons/shotgun/gauss/reloadout", CHAN_6)
+      PKSG A 1 offset(-12, 47)
+      PKSG A 1 offset(-14, 52)
+      PKSG A 2 offset(-12, 55)
+      PKSG A 3 offset(-11, 57)
+      PKSG A 8 offset(-10, 60)
+      PKSG A 8 offset(-11, 60)
+      PKSG A 0 A_TakeInventory("Lith_GaussShotsFired", 999)
+      PKSG A 2 offset(-13, 59) A_PlaySound("weapons/shotgun/gauss/reloadin", CHAN_7)
+      PKSG A 2 offset(-11, 49)
+      PKSG A 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(3, 56) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(8, 52) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(10, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(8, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 1 offset(7, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG A 2 offset(5, 43) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
+      PKSG B 2 offset(2, 37)
+      PKSG C 1 offset(0, 32) A_PlaySound("weapons/shotgun/open", CHAN_6)
+      PKSG DEF 2
+      PKSG G 1 A_PlaySound("weapons/shotgun/close", CHAN_7)
+      PKSG H 3
+      PKSG GFEDC 2
+      PKSG B 1
+      PKSG A 3
+      PKSG A 7 A_ReFire
+      goto FireFinish
    //
    //
    //

@@ -57,7 +57,7 @@ LITH_TXT_UPGRADE_DESCR_Adrenaline =
 //
 // Weapons
 //
-LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Shotgun";
+LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Rifle";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"
    "Re-build the internal mechanisms to turn the railgun part of your "
