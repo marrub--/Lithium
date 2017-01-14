@@ -73,8 +73,14 @@ LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_DESCR_ChargeRPG =
    "Effect: Lets you hold \"fire\" to queue extra grenades in your grenade "
    "launcher.\n\n"
-   "A modification made by Unreal-Weapons, Inc. which allows your grenade "
-   "launcher to hold multiple grenades and plummet them all at once.";
+   "Allows your grenade launcher to hold multiple rockets and fire them all "
+   "at once.\n\n"
+   "Hold fire to load more grenades, and hold alt-fire to change the firing "
+   "mode.\n\n"
+   "There are three firing modes:\n"
+   " Rocket Line (default) - Fires rockets in a horizontal line.\n"
+   " Spiral - Fires rockets in a spiral pattern for maximum point damage.\n"
+   " Grenade Dump - Dumps all of the grenades out of the launcher directly.";
 
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
