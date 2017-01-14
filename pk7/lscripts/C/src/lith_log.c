@@ -54,6 +54,8 @@ void Lith_LogName(int name)
    N(log_redskull,    "RedSkull")
    N(log_blueskull,   "BlueSkull")
    N(log_yellowskull, "YellowSkull")
+   N(log_doggosphere, "DoggoSphere")
+   N(log_dogs,        "Dogs")
 #undef N
    }
    

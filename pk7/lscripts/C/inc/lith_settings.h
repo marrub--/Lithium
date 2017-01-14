@@ -10,8 +10,8 @@ Float("Scope opacity",  "lith_weapons_scopealpha", 0.0f, 1.0f)
 Float("Weapon opacity", "lith_weapons_alpha", 0.0f, 1.0f)
 
 Category("Heads Up Display")
-Bool("Show Score on HUD",   "lith_hud_showscore")
-Bool("Show Weapons on HUD", "lith_hud_showweapons")
+Bool("Show score",   "lith_hud_showscore")
+Bool("Show weapons", "lith_hud_showweapons")
 
 if(ACS_GameType() == GAME_SINGLE_PLAYER)
 {

@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_hudid.h"
 
+#include <math.h>
+
 //----------------------------------------------------------------------------
 // Scripts
 //
@@ -148,6 +150,56 @@ bool Lith_CheckArmor(int n)
 void Lith_Discount()
 {
    Lith_LocalPlayer->discount = 0.85;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_DOGS()
+{
+   player_t *p = Lith_LocalPlayer;
+   
+   int tid = ACS_UniqueTID();
+   
+   ACS_SetMusic("lmusic/DOGS.flac");
+   
+   for(int i = 0; i < (35 * 30) / 10; i++)
+   {
+      fixed ang = ACS_RandomFixed(0, 1);
+      fixed dst = ACS_RandomFixed(0, 64);
+      ACS_SpawnForced("Lith_Steggles", p->x + cosk(ang) * dst, p->y + sink(ang) * dst, p->z + 8, tid);
+      ACS_GiveInventory("Lith_Alerter", 1);
+      ACS_Delay(10);
+   }
+   
+   ACS_Delay(35);
+   
+   ACS_SetMusic("lsounds/Silence.flac");
+   
+   ACS_SetActorProperty(tid, APROP_MasterTID, p->tid);
+   ACS_SetActorState(tid, "PureSteggleEnergy");
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SteggleEnergy()
+{
+   player_t *p = &players[GetPlayerNumber(0, AAPTR_FRIENDPLAYER)];
+   
+   ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
+   
+   for(;;)
+   {
+      fixed x = ACS_GetActorX(0);
+      fixed y = ACS_GetActorY(0);
+      fixed z = ACS_GetActorZ(0);
+      
+      fixed nx = lerpk(x, p->x, 0.01);
+      fixed ny = lerpk(y, p->y, 0.01);
+      fixed nz = lerpk(z, p->z, 0.01);
+      
+      ACS_Warp(0, nx, ny, nz, 0, WARPF_ABSOLUTEPOSITION|WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+      ACS_SetActorAngle(0, ACS_VectorAngle(p->x - x, p->y - y));
+      
+      ACS_Delay(1);
+   }
 }
 
 #if 0

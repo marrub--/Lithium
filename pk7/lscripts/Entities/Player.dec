@@ -175,5 +175,58 @@ actor Lith_PlayerDeathNuke : Lith_Nuke
    }
 }
 
+actor Lith_RealSpectralSteggles
+{
+   RenderStyle "Add"
+   Alpha 0.8
+   Mass 5
+   
+   +NOBLOCKMAP
+   +NOTELEPORT
+   
+   states
+   {
+   Spawn:
+      DOGS A 0 nodelay A_PlaySound("dog/sight")
+      DOGS A 24
+      stop
+   }
+}
+
+actor Lith_SpectralSteggles : CustomInventory
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_JumpIfInventory("Lith_Dogs", 1, "Dogs")
+      TNT1 A 0 A_RailWait
+      stop
+   Dogs:
+      TNT1 A 0 A_SpawnItemEx("Lith_RealSpectralSteggles", 0, 0, 32, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+      stop
+   }
+}
+
+actor Lith_Blood : Blood replaces Blood
+{
+   states
+   {
+   Spawn:
+      BLUD CBA 8
+      BLUD A 0 A_RadiusGive("Lith_SpectralSteggles", 64, RGF_PLAYERS)
+      stop
+   }
+}
+
+actor Lith_Alerter : CustomInventory
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_AlertMonsters
+      stop
+   }
+}
+
 // EOF
 

@@ -251,6 +251,20 @@ bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, boo
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
 }
 
+[[__call("ScriptS")]]
+int GetTID(int tid, int ptr)
+{
+   ACS_SetActivator(tid, ptr);
+   return ACS_ActivatorTID();
+}
+
+[[__call("ScriptS")]]
+int GetPlayerNumber(int tid, int ptr)
+{
+   ACS_SetActivator(tid, ptr);
+   return ACS_PlayerNumber();
+}
+
 //
 // ---------------------------------------------------------------------------
 

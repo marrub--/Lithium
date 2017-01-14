@@ -103,6 +103,8 @@ void *cpyalloc(size_t num, size_t size, void *src);
 unsigned StrHash(__str s);
 [[__optional_args(2)]]
 bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
+[[__call("ScriptS")]] int GetTID(int tid, int ptr);
+[[__call("ScriptS")]] int GetPlayerNumber(int tid, int ptr);
 
 // Math
 accum lerpk(accum a, accum b, accum t);

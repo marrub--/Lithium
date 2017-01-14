@@ -22,6 +22,8 @@ LITH_TXT_LOG_YellowCard  = ">>>>> \ckYellow KeyDisk\cl acquired.";
 LITH_TXT_LOG_RedSkull    = ">>>>> \cgRed Skull\cl acquired.";
 LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull\cl acquired.";
 LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull\cl acquired.";
+LITH_TXT_LOG_DoggoSphere = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
+LITH_TXT_LOG_Dogs        = "> Picked up dogs.";
 
 // EOF
 

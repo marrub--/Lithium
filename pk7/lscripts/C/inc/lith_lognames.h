@@ -23,6 +23,8 @@ enum
    log_redskull,
    log_blueskull,
    log_yellowskull,
+   log_doggosphere,
+   log_dogs,
    log_max
 };
 

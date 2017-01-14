@@ -151,9 +151,10 @@ typedef struct player_s
    struct dlist_s *hudstrstack;
    
    // Inventory
-   bool berserk;
    keycards_t keys;
    int weapons;
+   
+   bool berserk : 1;
 } player_t;
 
 extern player_t players[MAX_PLAYERS];
