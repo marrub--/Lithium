@@ -14,6 +14,8 @@ player/death2      lsounds/Player/Death.flac               // 〃
 player/adren/inj   lsounds/Player/AdrenalineInject.flac    // Killing Floor
 player/adren/ready lsounds/Player/InjectorReady.flac       // 〃
 
+$volume player/death2 0.7
+$volume player/nuke 0.7
 $volume player/doublejump 0.7
 
 $random player/score {

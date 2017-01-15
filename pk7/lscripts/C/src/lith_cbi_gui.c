@@ -383,6 +383,10 @@ float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    {
       val = g->cx - x;
       val = minmax(val, 0, w);
+      
+      // play sound
+      if(g->cx != g->old.cx)
+         ACS_LocalAmbientSound(pre->snd, 60);
    }
    
    // get result-normalized value

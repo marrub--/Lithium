@@ -40,11 +40,15 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG AAA 0 A_Raise
       GRLG A 1
       loop
+   AltFire:
+      GRLG A 0 A_JumpIf(!CallACS("Lith_GetPlayerData", pdata_rocket_unreal), "Ready")
+      goto FireReal
    Fire:
       GRLG A 1
       GRLG A 0 A_JumpIfInventory("Lith_RocketAmmo", 1, 1)
       goto FireEmpty
       GRLG A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_rocket_unreal), "FireUnreal")
+   FireReal:
       GRLG A 0 A_AlertMonsters
       GRLG A 0 A_PlaySound("weapons/rocket/fire", CHAN_WEAPON)
       GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE)
@@ -79,10 +83,10 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       goto Ready
    
    FireUnreal:
-      GRLG A 8
       GRLG A 0 A_GiveInventory("Lith_RocketLoaded", 1)
       GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE)
    FireUnrealRefire:
+      GRLG A 2
       GRLG A 0 A_JumpIfInventory("Lith_RocketLoaded", 0, "FireUnrealReal")
       GRLG A 0 A_JumpIfInventory("Lith_RocketIterated", 0, "FireUnrealLoad")
       GRLG A 0 A_GiveInventory("Lith_RocketIterated", 1)
@@ -97,9 +101,9 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLR D 1
       GRLR D 1 A_GunFlash("HackyChecks")
       GRLR EFGH 2
-      GRLG A 1
    
    FireUnrealCheckRefire:
+      GRLG A 2
       GRLG A 0 A_ReFire("FireUnrealRefire")
    FireUnrealReal:
       GRLG A 0 A_TakeInventory("Lith_RocketIterated", 1)

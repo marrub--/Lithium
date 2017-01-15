@@ -75,6 +75,7 @@ typedef struct upgradeinfo_s
    __str bipunlock;
    int category;
    fixed scoreadd;
+   int wepclass;
    
    upgr_cb_t        Activate;
    upgr_cb_t        Deactivate;

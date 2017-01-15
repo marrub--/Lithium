@@ -1,11 +1,11 @@
 #include "lith_upgrades_common.h"
 
-#define ForUpgrade() \
+#define ForUpgrade(name) \
    for(int i = 0; i < UPGR_MAX; i++) \
-      __with(upgrade_t *upgr = &p->upgrades[i];)
+      __with(upgrade_t *name = &p->upgrades[i];)
 
 #define DefnCallback(name) \
-   ForUpgrade() \
+   ForUpgrade(upgr) \
       if(upgr->active && upgr->info->name) \
          upgr->info->name(p, upgr);
 
@@ -32,11 +32,11 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"DefenseNuke", 580030    , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
    {"Adrenaline",  1801000   , false, "Adrenaline",   UC_Body,  0.00, U(Adrenaline)},
    
-   {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00},
-   {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   1150000   , false, "LauncherUpgr", UC_Weap,  0.00},
-   {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00},
-   {"PunctCannon", 5600700   , false, "CannonUpgr",   UC_Weap,  0.00, D(PunctCannon)},
+   {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00, weapon_shotgun},
+   {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, weapon_rifle, D(RifleModes), U(RifleModes)},
+   {"ChargeRPG",   1150000   , false, "LauncherUpgr", UC_Weap,  0.00, weapon_launcher},
+   {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00, weapon_plasma},
+   {"PunctCannon", 5600700   , false, "CannonUpgr",   UC_Weap,  0.00, weapon_bfg, D(PunctCannon)},
    
    {"TorgueMode",  80000000  , false, null,           UC_Extr,  0.00},
 // {"RetroWeps",   9999990   , false, null,           UC_Extr,  0.00},
@@ -72,6 +72,11 @@ void Upgr_ToggleActive(player_t *p, upgrade_t *upgr)
    if(!upgr->owned) return;
    
    upgr->active = !upgr->active;
+   
+   if(upgr->active && upgr->info->wepclass)
+      ForUpgrade(other)
+         if(other != upgr && other->active && other->info->wepclass == upgr->info->wepclass)
+            Upgr_ToggleActive(p, other);
    
    if(upgr->active && upgr->info->Activate)
    {
@@ -151,7 +156,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
 //
 void Lith_PlayerDeinitUpgrades(player_t *p)
 {
-   ForUpgrade()
+   ForUpgrade(upgr)
       if(upgr->active)
          upgr->wasactive = true,  Upgr_ToggleActive(p, upgr);
 }
@@ -161,7 +166,7 @@ void Lith_PlayerDeinitUpgrades(player_t *p)
 //
 void Lith_PlayerReinitUpgrades(player_t *p)
 {
-   ForUpgrade()
+   ForUpgrade(upgr)
       if(upgr->wasactive)
          upgr->wasactive = false, Upgr_ToggleActive(p, upgr);
 }
@@ -171,7 +176,7 @@ void Lith_PlayerReinitUpgrades(player_t *p)
 //
 void Lith_PlayerLoseUpgrades(player_t *p)
 {
-   ForUpgrade()
+   ForUpgrade(upgr)
       if(upgr->info->cost != 0 && upgr->owned)
    {
       upgr->owned = false;
@@ -192,7 +197,7 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 //
 void Lith_PlayerRenderUpgrades(player_t *p)
 {
-   ForUpgrade()
+   ForUpgrade(upgr)
       if(upgr->active && upgr->info->Render)
          RenderProxy(p, upgr);
 }
