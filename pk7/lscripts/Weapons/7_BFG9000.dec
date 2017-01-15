@@ -23,7 +23,7 @@ actor Lith_PunctuatorExplosion
    states
    {
    Spawn:
-      TNT1 A 0 nodelay A_Explode(32, 64, 0)
+      TNT1 AA 0 nodelay A_Explode(128, 128, 0)
       TNT1 A random(1, 5)
       MEXP AB 1 bright
       MEXP CD 2 bright
@@ -35,7 +35,7 @@ actor Lith_PunctuatorExplosion
 actor Lith_PunctuatorPuff
 {
    Species "Lith_Player"
-   DamageType "Lith_Shrapnel"
+   DamageType "Lith_PlayerMissile"
    
    +NOINTERACTION
    +PUFFONACTORS
@@ -46,6 +46,7 @@ actor Lith_PunctuatorPuff
    states
    {
    Spawn:
+      TNT1 AA 0 nodelay A_Explode(128, 128, 0)
       MEXP AB 2 bright
       MEXP CD 3 bright
       MEXP EF 4 bright
@@ -185,7 +186,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       CNNG A 1 bright offset(-1, 36)
       CNNG A 2 bright offset(1, 37)
       CNNG A 3 bright offset(1, 38)
-      CNNG C 2 bright offset(0, 62) A_FireCustomMissile("Lith_CannonBall")
+      CNNG C 2 bright offset(0, 62) A_FireCustomMissile("Lith_CannonBall", 0, false, 0, -24)
       CNNG C 1 bright offset(0, 57)
       CNNG C 1 bright offset(0, 47)
       CNNG C 1 bright offset(0, 44)
@@ -200,7 +201,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    //
    FireCannonSmall:
       CNNG C 1 bright offset(0, 48)
-      CNNG C 1 bright offset(0, 57) A_FireCustomMissile("Lith_SmallCannonBall")
+      CNNG C 1 bright offset(0, 57) A_FireCustomMissile("Lith_SmallCannonBall", 0, false, 0, -16)
       CNNG C 1 bright offset(0, 55)
       CNNG C 1 bright offset(0, 53)
       CNNG C 1 bright offset(0, 49)
