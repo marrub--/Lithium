@@ -32,10 +32,10 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"DefenseNuke", 580030    , false, "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
    {"Adrenaline",  1801000   , false, "Adrenaline",   UC_Body,  0.00, U(Adrenaline)},
    
-   {"GaussShotty", 779430    , false, "ShotgunUpgr",  UC_Weap,  0.00, weapon_shotgun},
+   {"GaussShotty", 1779430   , false, "ShotgunUpgr",  UC_Weap,  0.00, weapon_shotgun},
    {"RifleModes",  340100    , false, "RifleUpgr",    UC_Weap,  0.00, weapon_rifle, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   1150000   , false, "LauncherUpgr", UC_Weap,  0.00, weapon_launcher},
-   {"PlasLaser",   3400000   , false, "PlasmaUpgr",   UC_Weap,  0.00, weapon_plasma},
+   {"ChargeRPG",   1050000   , false, "LauncherUpgr", UC_Weap,  0.00, weapon_launcher},
+   {"PlasLaser",   2300000   , false, "PlasmaUpgr",   UC_Weap,  0.00, weapon_plasma},
    {"PunctCannon", 5600700   , false, "CannonUpgr",   UC_Weap,  0.00, weapon_bfg, D(PunctCannon)},
    
    {"TorgueMode",  80000000  , false, null,           UC_Extr,  0.00},

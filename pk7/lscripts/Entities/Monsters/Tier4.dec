@@ -20,7 +20,10 @@ actor Lith_Archvile : Archvile replaces Archvile
       VILE G 10 bright A_FaceTarget
       VILE H 8 bright A_VileTarget
       VILE IJKLM 8 bright A_FaceTarget
+      VILE N 0 bright A_JumpIfTargetInLOS(1)
+      goto Missile1
       VILE N 0 bright A_GiveToTarget("Lith_AdrenalineToken", 1)
+   Missile1:
       VILE N 8 bright A_FaceTarget
       VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "Lith_FireMagic")
       VILE P 20 bright

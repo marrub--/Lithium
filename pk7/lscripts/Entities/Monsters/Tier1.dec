@@ -92,6 +92,9 @@ actor Lith_Imp : DoomImp replaces DoomImp
    
    states
    {
+   Spawn:
+      TROO AB 10 A_Look
+      loop
    See:
       TROO AAABBBCCCDDD 1 A_Chase
       loop
@@ -101,12 +104,20 @@ actor Lith_Imp : DoomImp replaces DoomImp
       TROO G 6 A_CustomComboAttack("Lith_ImpBall", 32, 3 * random(1, 8), "imp/melee")
       TROO G 2
       goto See
+   Pain:
+      TROO H 2
+      TROO H 2 A_Pain
+      goto See
    XDeath:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp * 1.5)
       goto Super::XDeath
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp)
       goto Super::Death
+   Raise:
+      TROO ML 8
+      TROO KJI 6
+      goto See
    }
 }
 

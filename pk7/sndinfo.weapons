@@ -143,6 +143,8 @@ weapons/cannon/empty   lsounds/Cannon/FireEmpty.flac // Killing Floor
 weapons/cannon/pickup  lsounds/Cannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 
+$limit weapons/cannon/explode 0
+
 //
 // Punctuator Cannon
 //
