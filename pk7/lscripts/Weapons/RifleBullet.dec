@@ -28,7 +28,7 @@ actor Lith_MarathonBulletPuff
 
 actor Lith_RifleBullet : FastProjectile
 {
-   Damage (6.0 * frandom(1.0, 2.8))
+   Damage (3 * random(1, 3))
    Speed 512
    Radius 2
    Height 2
@@ -72,6 +72,7 @@ actor Lith_RifleBullet : FastProjectile
 
 actor Lith_RifleBulletPainless : Lith_RifleBullet
 {
+   Damage (4 * random(1, 3))
    +PAINLESS
 }
 
