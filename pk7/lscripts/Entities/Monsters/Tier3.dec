@@ -1,22 +1,118 @@
-actor Lith_BaronBall : BaronBall replaces BaronBall
+actor Lith_PKTrail1
 {
+   Radius 6
+   Height 6
+   Damage 8
+   RenderStyle "Add"
+   Alpha 1
+   DeathSound "baron/shotx"
+   Species "Lith_HellKnight"
    DamageType "Lith_Magic"
+   
+   Projectile
+   +MTHRUSPECIES
+   
+   const int Lith_WarpFlags = WARPF_NOCHECKPOSITION|WARPF_COPYINTERPOLATION|WARPF_COPYPITCH;
+   
+   var int user_ofs;
    
    states
    {
    Spawn:
-      BAL7 AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      TNT1 A 0 nodelay A_SetUserVar(user_ofs, 1)
+   SpawnLoop:
+      BAL7 AAAABBBB 1 bright A_Warp(AAPTR_MASTER, -32 * user_ofs,0,0, 0, Lith_WarpFlags)
       loop
+   Death:
+      BAL7 CDE 6 bright
+      stop
+   }
+}
+
+actor Lith_PKTrail2 : Lith_PKTrail1 {states {Spawn: TNT1 A 0 nodelay A_SetUserVar(user_ofs, 2) goto SpawnLoop}}
+actor Lith_PKTrail3 : Lith_PKTrail1 {states {Spawn: TNT1 A 0 nodelay A_SetUserVar(user_ofs, 3) goto SpawnLoop}}
+
+actor Lith_PolarKnight
+{
+   Scale 0.45
+   Radius 7
+   Height 7
+   Speed 5
+   Damage 8
+   RenderStyle "Add"
+   Alpha 0.8
+   SeeSound "enemies/hellknight/throw"
+   Decal "BaronScorch"
+   DamageType "Lith_Magic"
+   Species "Lith_HellKnight"
+   
+   Projectile
+   +SEEKERMISSILE
+   +SCREENSEEKER
+   +MTHRUSPECIES
+   +SKYEXPLODE
+   
+   const int Lith_SpawnFlags = SXF_ORIGINATOR|SXF_SETMASTER;
+   
+   var int user_tids[3];
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      
+      TNT1 A 0 A_SetUserArray(user_tids, 0, CallACS("Lith_UniqueTID"))
+      TNT1 A 0 A_SetUserArray(user_tids, 1, CallACS("Lith_UniqueTID"))
+      TNT1 A 0 A_SetUserArray(user_tids, 2, CallACS("Lith_UniqueTID"))
+      
+      TNT1 A 0 A_SpawnItemEx("Lith_PKTrail1", 0,0,0, 0,0,0, 0, Lith_SpawnFlags, 0, user_tids[0])
+      TNT1 A 0 A_SpawnItemEx("Lith_PKTrail2", 0,0,0, 0,0,0, 0, Lith_SpawnFlags, 0, user_tids[1])
+      TNT1 A 0 A_SpawnItemEx("Lith_PKTrail3", 0,0,0, 0,0,0, 0, Lith_SpawnFlags, 0, user_tids[2])
+   SpawnLoop:
+      TNT1 A 0 A_JumpIf(speed > 15, 2)
+      TNT1 A 0 A_SetSpeed(speed + 1)
+      TNT1 A 0 A_RadiusGive("Lith_AdrenalineToken", 64, RGF_PLAYERS)
+      BLLT F 1 bright A_SeekerMissile(0.01, 1)
+      loop
+   Death:
+      BLLT F 0 A_JumpIf(alpha < 0.1, "DeathDone")
+      BLLT F 1 bright A_FadeOut(0.08)
+      loop
+   DeathDone:
+      TNT1 A 0 Thing_Remove(user_tids[0])
+      TNT1 A 0 Thing_Remove(user_tids[1])
+      TNT1 A 0 Thing_Remove(user_tids[2])
+      stop
    }
 }
 
 actor Lith_HellKnight : HellKnight replaces HellKnight
 {
+   Health 600
+   Speed 4
+   DamageFactor "Lith_Bullets", 0.6
+   Species "Lith_HellKnight"
+   
    states
    {
+   Spawn:
+      BOS2 AB 10 A_Look
+      loop
+   See:
+      BOS2 AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+      loop
+   Melee:
+   Missile:
+      BOS2 EF 6 A_FaceTarget
+      BOS2 G 4 A_CustomComboAttack("Lith_PolarKnight", 32, 10 * random(1, 8), "baron/melee")
+      goto See
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_HellKnight)
       goto Super::Death
+   Raise:
+      BOS2 O 8
+      BOS2 NMLKJI 8
+      goto See
    }
 }
 
@@ -130,6 +226,18 @@ actor Lith_Mancubus : Fatso replaces Fatso
    Death:
       "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Mancubus)
       goto Super::Death
+   }
+}
+
+actor Lith_BaronBall : BaronBall replaces BaronBall
+{
+   DamageType "Lith_Magic"
+   
+   states
+   {
+   Spawn:
+      BAL7 AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      loop
    }
 }
 

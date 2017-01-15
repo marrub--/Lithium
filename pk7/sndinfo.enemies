@@ -22,6 +22,11 @@ enemies/mancubus/fire lsounds/Mancubus/Fire.flac // FEAR, Doom
 $attenuation enemies/mancubus/fire 0.5
 
 //
+// Hell Knight
+//
+enemies/hellknight/throw lsounds/HellKnight/Throw.flac // Touhou 7
+
+//
 // Cyberdemon
 //
 enemies/cyberdemon/ready    lsounds/Cyberdemon/Ready.flac    // FEAR
