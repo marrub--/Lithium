@@ -119,6 +119,9 @@ void Lith_PlayerUpdateCBI(player_t *p)
       
       DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.7);
       
+      if(Lith_GUI_Button(g, .x = 296, 13, .preset = &btnexit))
+         Lith_KeyOpenCBI();
+      
       static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Statistics", "Settings"};
       for(int i = 0; i < cbi_tab_max; i++)
          if(Lith_GUI_Button_Id(g, i, tabnames[i], btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &btntab))

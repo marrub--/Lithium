@@ -41,7 +41,6 @@ gui_button_preset_t const btntab = {
 gui_button_preset_t const btnexit = {
    .gfx  = "lgfx/UI/ExitButton.png",
    .hot  = "lgfx/UI/ExitButtonHot.png",
-   .snd  = "player/cbi/buttonpress",
    .w = 11,
    .h = 11
 };
@@ -244,7 +243,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a)
    
    if(g->hot == id && g->active == id && !g->clicklft)
    {
-      ACS_LocalAmbientSound(pre->snd, 127);
+      if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
       return true;
    }
    else return false;
