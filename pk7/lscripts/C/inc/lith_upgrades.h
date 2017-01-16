@@ -2,6 +2,8 @@
 #define LITH_UPGRADES_H
 
 #include "lith_common.h"
+#include "lith_upgradenames.h"
+
 
 //----------------------------------------------------------------------------
 // Type Definitions
@@ -19,39 +21,12 @@ enum
 
 enum
 {
-   UPGR_HeadsUpDisp,
-   UPGR_JetBooster,
-   UPGR_ReflexWetw,
-   UPGR_CyberLegs,
-   UPGR_ReactArmour,
-   UPGR_DefenseNuke,
-   UPGR_Adrenaline,
-   
-   UPGR_GaussShotty,
-   UPGR_RifleModes,
-   UPGR_ChargeRPG,
-   UPGR_PlasLaser,
-   UPGR_Punct,
-   
-   UPGR_TorgueMode,
-// UPGR_RetroWeps,
-   UPGR_7777777,
-   UPGR_lolsords,
-   
-   UPGR_Implying,
-   UPGR_UNCEUNCE,
-   UPGR_InstaDeath,
-   
-   UPGR_MAX
-};
-
-enum
-{
-   u_charge     = 0,
-   u_hudid      = 0,
-   u_origweapon = 0,
-   u_leaped     = 1,
-   u_readied    = 1,
+   u_charge      = 0,
+   u_hudid       = 0,
+   u_origweapon  = 0,
+   u_activearmor = 0,
+   u_leaped      = 1,
+   u_readied     = 1,
 };
 
 //
@@ -70,8 +45,7 @@ typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
 typedef struct upgradeinfo_s
 {
    __str name;
-   score_t cost; // If this is exactly 0, you already own it.
-   bool auto_activate; // If this is true, as soon as you own it you'll activate it.
+   score_t cost;
    __str bipunlock;
    int category;
    fixed scoreadd;
@@ -105,6 +79,9 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
 // Extern Functions
 //
 
+// NB: These are included here and not in lith_upgrades.c so the
+//     function signatures can be checked by the compiler.
+
 #define A(n)                       void Upgr_##n##_Activate(struct player_s *p, upgrade_t *upgr);
 #define D(n)                       void Upgr_##n##_Deactivate(struct player_s *p, upgrade_t *upgr);
 #define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update(struct player_s *p, upgrade_t *upgr);
@@ -116,7 +93,7 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
    A(JetBooster)                 U(JetBooster)                 R(JetBooster)
    A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)                 R(ReflexWetw)
    A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
-                  D(ReactArmour)
+                  D(ReactArmor)
                                                 E(DefenseNuke)
                                  U(Adrenaline)
 //---------------------------------------------------------------------------

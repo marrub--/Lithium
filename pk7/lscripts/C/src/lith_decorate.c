@@ -49,7 +49,7 @@ void Lith_SwitchRifleFiremode(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetPlayerData(int info, bool target)
+int Lith_GetPlayerData(int info, int permutation, bool target)
 {
    if(target)
       ACS_SetActivatorToTarget(0);
@@ -61,16 +61,10 @@ int Lith_GetPlayerData(int info, bool target)
    
    switch(info)
    {
+   case pdata_upgrade:        return p->upgrades[permutation].active;
    case pdata_rifle_firemode: return p->riflefiremode;
-   case pdata_shotgun_gauss:  return p->upgrades[UPGR_GaussShotty].active;
-   case pdata_rocket_unreal:  return p->upgrades[UPGR_ChargeRPG].active;
-   case pdata_plasma_laser:   return p->upgrades[UPGR_PlasLaser].active;
-   case pdata_punctuator:     return p->upgrades[UPGR_Punct].active;
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
-   case pdata_EXPLOOOOOSIONS: return p->upgrades[UPGR_TorgueMode].active;
-   case pdata_marathon_mode:  return p->upgrades[UPGR_7777777].active;
-   case pdata_yh0armor:       return p->upgrades[UPGR_ReactArmour].active;
    case pdata_weapon_zoom:    return bitsk(ACS_GetUserCVarFixed(p->number, "lith_weapons_zoomfactor"));
    }
    

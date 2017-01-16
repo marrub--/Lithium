@@ -43,7 +43,7 @@ MAIN_SOURCES= \
 	$(SRC)/lith_upgr_jetbooster.c \
 	$(SRC)/lith_upgr_lolsords.c \
 	$(SRC)/lith_upgr_punctcannon.c \
-	$(SRC)/lith_upgr_reactarmour.c \
+	$(SRC)/lith_upgr_reactarmor.c \
 	$(SRC)/lith_upgr_reflexwetw.c \
 	$(SRC)/lith_upgr_riflemodes.c \
 	$(SRC)/lith_upgr_unceunce.c \

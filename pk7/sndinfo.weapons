@@ -132,6 +132,7 @@ weapons/plasma/laser/fire_end   lsounds/PlasmaRifle/Laser/FireEnd.flac   // Quak
 weapons/plasma/laser/spark      lsounds/PlasmaRifle/Laser/Spark.flac     // Fallout 4
 
 $limit weapons/plasma/explode 0
+$volume weapons/plasma/explode 0.5
 
 //
 // Omega Cannon
@@ -150,6 +151,16 @@ $limit weapons/cannon/explode 0
 //
 weapons/punct/fire lsounds/Punctuator/Fire.flac // FEAR
 weapons/punct/load lsounds/Punctuator/Load.flac // 〃
+
+//
+// Omega Railgun
+//
+weapons/rail/fire   lsounds/Railgun/Fire.flac   // FEAR, Descent 2
+weapons/rail/impact lsounds/Railgun/Impact.flac // Descent 2
+weapons/rail/charge lsounds/Railgun/Charge.flac // FEAR, ???
+
+$limit weapons/rail/impact 0
+$attenuation weapons/rail/impact 0.8
 
 //
 // sord

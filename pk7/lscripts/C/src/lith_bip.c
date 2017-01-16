@@ -62,6 +62,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
    AddToBIP(bip, BIPC_WEAPONS, "Cannon",       Unlocks("Cid"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",   Unlocks("Cannon", "SuperDimension"));
+   AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",   Unlocks("Cannon"));
    
    AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));

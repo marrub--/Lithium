@@ -41,7 +41,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       TNT1 A 0 A_JumpIfInventory("Lith_RifleShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_RifleShotsFired", 1)
       
-      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_marathon_mode), 3)
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRIF A 0 A_Jump(256, 2)
       CRIF A 0 A_PlaySound("marathon/rifle/fire", CHAN_WEAPON)
@@ -78,7 +78,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    FireGrenade:
       CRIF A 3 A_WeaponReady(LITH_BOBONLY)
       
-      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_marathon_mode), 3)
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRIF A 0 A_PlaySound("weapons/rifle/grenade", CHAN_WEAPON)
       CRIF A 0 A_Jump(256, 2)
       CRIF A 0 A_PlaySound("marathon/rifle/grenade", CHAN_WEAPON)
@@ -90,7 +90,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 5
       // oh jesus
       
-      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_marathon_mode), 3)
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRIF A 0 A_PlaySound("weapons/rifle/rldmount", CHAN_6)
       CRIF A 0 A_Jump(256, 2)
       CRIF A 0 A_PlaySound("marathon/rifle/reload", CHAN_6)

@@ -30,13 +30,18 @@ LITH_TXT_UPGRADE_DESCR_CyberLegs =
    "jump onto.\n\n"
    "Improved reflex wetware, which gives an even larger combat advantage.";
 
-LITH_TXT_UPGRADE_TITLE_ReactArmour = "R. Armor";
-LITH_TXT_UPGRADE_DESCR_ReactArmour =
+LITH_TXT_UPGRADE_TITLE_ReactArmor = "R. Armor";
+LITH_TXT_UPGRADE_DESCR_ReactArmor =
    "Effect: Makes your armor \"react\" to being hit, switching its mode to "
    "the type of damage it took, making you take far less damage of that "
    "type until hit by another.\n\n"
    "Integrate your armor with a highly advanced Yh-0 reactive plating "
    "system, made avians on Durla Prime.";
+
+LITH_TXT_UPGRADE_TITLE_ReactArmor2 = "R. Armor 2";
+LITH_TXT_UPGRADE_DESCR_ReactArmor2 =
+   "Effect: Improves the damage resistence of the Reactive Armor.\n\n"
+   "Upgrades the Yh0 plating system, reducing damage taken twice over.";
 
 LITH_TXT_UPGRADE_TITLE_DefenseNuke = "Def. Mini Nuke";
 LITH_TXT_UPGRADE_DESCR_DefenseNuke =
@@ -76,11 +81,7 @@ LITH_TXT_UPGRADE_DESCR_ChargeRPG =
    "Allows your grenade launcher to hold multiple rockets and fire them all "
    "at once.\n\n"
    "Hold fire to load more grenades, and hold alt-fire to change the firing "
-   "mode.\n\n"
-   "There are three firing modes:\n"
-   " Rocket Line (default) - Fires rockets in a horizontal line.\n"
-   " Spiral - Fires rockets in a spiral pattern for maximum point damage.\n"
-   " Grenade Dump - Dumps all of the grenades out of the launcher directly.";
+   "mode.";
 
 LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
@@ -92,9 +93,16 @@ LITH_TXT_UPGRADE_TITLE_PunctCannon = "Punct. Cannon";
 LITH_TXT_UPGRADE_DESCR_PunctCannon =
    "Effect: Your cannon now shoots explosive bolts that send huge shocks "
    "through walls.\n\n"
-   "Via adding new magic translation buffers to your weapon, it can create "
+   "By adding new magic translation buffers to your weapon, it can create "
    "extreme-yield explosive bolts from the same charge as the cannon type "
    "does.";
+
+LITH_TXT_UPGRADE_TITLE_OmegaRail = "Omega Railgun";
+LITH_TXT_UPGRADE_DESCR_OmegaRail =
+   "Effect: Your cannon fires highly deadly, pinpoint accurate plasmatic "
+   "death.\n\n"
+   "Implements a plasma charger in your cannon, made with reverse-engineered "
+   "magical compounds.";
 
 //
 // Extras

@@ -11,7 +11,9 @@ actor Lith_Player : DoomPlayer
    
    states
    {
+   Pain.Bullet:
    Pain.Lith_Bullets:   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1) goto Super::Pain
+   Pain.Plasma:
    Pain.Railgun:
    Pain.Electric:
    Pain.Lith_Energy:    TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2) goto Super::Pain
@@ -25,14 +27,23 @@ actor Lith_Player : DoomPlayer
    }
 }
 
-actor Lith_RA_Hax       : PowerProtection {Powerup.Duration 0x7FFFFFFF}
-actor Lith_RA_Bullets   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.05}
-actor Lith_RA_Energy    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.05 DamageFactor "Railgun", 0.05 DamageFactor "Electric", 0.05}
-actor Lith_RA_Fire      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.05 DamageFactor "Fire", 0.05}
-actor Lith_RA_FireMagic : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.05}
-actor Lith_RA_Magic     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.05}
-actor Lith_RA_Melee     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.01 DamageFactor "Melee", 0.05}
-actor Lith_RA_Shrapnel  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.05}
+actor Lith_RA_Hax : PowerProtection {Powerup.Duration 0x7FFFFFFF}
+
+actor Lith_RA_Bullets1   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.15 DamageFactor "Bullet", 0.15}
+actor Lith_RA_Energy1    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.15 DamageFactor "Railgun", 0.15 DamageFactor "Electric", 0.15 DamageFactor "Plasma", 0.15}
+actor Lith_RA_Fire1      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.15 DamageFactor "Fire", 0.15}
+actor Lith_RA_FireMagic1 : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.15}
+actor Lith_RA_Magic1     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.15}
+actor Lith_RA_Melee1     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.15 DamageFactor "Melee", 0.15}
+actor Lith_RA_Shrapnel1  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.15}
+
+actor Lith_RA_Bullets2   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.08 DamageFactor "Bullet", 0.08}
+actor Lith_RA_Energy2    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.08 DamageFactor "Railgun", 0.08 DamageFactor "Electric", 0.08 DamageFactor "Plasma", 0.08}
+actor Lith_RA_Fire2      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.08 DamageFactor "Fire", 0.08}
+actor Lith_RA_FireMagic2 : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.08}
+actor Lith_RA_Magic2     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.08}
+actor Lith_RA_Melee2     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.08 DamageFactor "Melee", 0.08}
+actor Lith_RA_Shrapnel2  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.08}
 
 actor Lith_AdrenalineToken : Inventory
 {
