@@ -128,8 +128,8 @@ static void Lith_PlayerDisconnect(void)
 {
    player_t *p = Lith_LocalPlayer;
    Lith_DeallocateBIP(&p->bip);
-   if(p->log)         DList_Free(p->log);
-   if(p->hudstrstack) DList_Free(p->hudstrstack);
+   Lith_ListFree(&p->log);
+   Lith_ListFree(&p->hudstrlist, free);
    memset(p, 0, sizeof(player_t));
 }
 
@@ -308,16 +308,8 @@ static void Lith_ResetPlayer(player_t *p)
    if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
    if(!p->discount)   p->discount   = 1.0;
    
-   if(p->log)
-      DList_Free(p->log);
-   
-   p->log = DList_Create();
-   
-   if(p->hudstrstack)
-   {
-      DList_Free(p->hudstrstack);
-      p->hudstrstack = null;
-   }
+   Lith_ListFree(&p->log);
+   Lith_ListFree(&p->hudstrlist, free);
    
    // pls not exit map with murder thingies out
    // is bad practice
@@ -546,22 +538,32 @@ static void Lith_PlayerHUD(player_t *p)
 //
 static void HUD_StringStack(player_t *p)
 {
-   size_t i = 0;
+   typedef struct hudstr_s
+   {
+      __str str;
+      list_t link;
+   } hudstr_t;
    
    if((ACS_Timer() % 3) == 0)
    {
-      DList_InsertBack(p->hudstrstack, (listdata_t){ .str = StrParam("%.8X", Random(0, 0x7FFFFFFF)) });
+      hudstr_t *hudstr = calloc(1, sizeof(hudstr_t));
+      Lith_LinkDefault(&hudstr->link, hudstr);
+      hudstr->str = StrParam("%.8X", Random(0, 0x7FFFFFFF));
       
-      if(DList_GetLength(p->hudstrstack) == hudstrstack_max)
-         DList_DeleteFront(p->hudstrstack);
+      Lith_ListLink(&p->hudstrlist, &hudstr->link);
+      
+      if(Lith_ListSize(&p->hudstrlist) == HUDSTRS_MAX)
+         Lith_ListUnlink(p->hudstrlist.next, free);
    }
    
    ACS_SetHudSize(320, 200);
    ACS_SetFont("CONFONT");
    
-   for(slist_t *rover = p->hudstrstack->head; rover; rover = rover->next, i++)
+   size_t i = 0;
+   for(list_t *rover = p->hudstrlist.prev; rover != &p->hudstrlist; rover = rover->prev, i++)
    {
-      HudMessage("%S", rover->data.str);
+      hudstr_t *hudstr = rover->object;
+      HudMessage("%S", hudstr->str);
       HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 300.2, 20.1 + (i * 9), 0.0, 0.5);
    }
 }
@@ -610,11 +612,7 @@ static void HUD_Scope(player_t *p)
 {
    if(p->old.scopetoken && !p->scopetoken)
    {
-      if(p->hudstrstack)
-      {
-         DList_Free(p->hudstrstack);
-         p->hudstrstack = null;
-      }
+      Lith_ListFree(&p->hudstrlist, free);
       
       for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
       {
@@ -622,8 +620,6 @@ static void HUD_Scope(player_t *p)
          HudMessagePlain(i, 0.0, 0.0, 0.0);
       }
    }
-   else if(p->scopetoken && !p->old.scopetoken)
-      p->hudstrstack = DList_Create();
    
    if(p->scopetoken)
    {

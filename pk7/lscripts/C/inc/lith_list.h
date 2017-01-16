@@ -3,46 +3,49 @@
 
 #include <stddef.h>
 
+
+//----------------------------------------------------------------------------
+// Type Definitions
+//
+
+// To clarify how these new linked list structures work:
+// You put a list_t in your structure (or anywhere, you could allocate one)
+// and run LinkDefault on it to construct it proper.
+//
+// You can then have a head node which you iterate over. The head itself is
+// a dummy node with no object, but you can iterate over it bidirectionally,
+// as the back is head->prev and the front is head->next.
+//
+// This removes any real need to reverse a linked list, and you can insert
+// backwards. Just be careful that all the nodes get constructed correctly.
+//
+// You can delete an entire list (destroying objects with a custom function or
+// not at all) with ListFree, and get the size of a headed list with ListSize.
+
+typedef void (*list_deleter_t)(void *);
+
 typedef union listdata_u
 {
    void *vp;
    __str str;
 } listdata_t;
 
-typedef struct slist_s
+typedef struct list_s
 {
-   listdata_t data;
-   
-   struct slist_s *next;
-   struct slist_s *prev;
-} slist_t;
+   void *object;
+   struct list_s *prev, *next;
+} list_t;
 
-typedef struct dlist_s
-{
-   slist_t *head;
-   slist_t *tail;
-} dlist_t;
 
-[[__optional_args(1)]]
-slist_t *SList_Create(listdata_t data);
-[[__optional_args(1)]]
-slist_t *SList_InsertNext(slist_t *list, listdata_t data);
-[[__optional_args(1)]]
-slist_t *SList_InsertPrev(slist_t *list, listdata_t data);
-[[__optional_args(1)]]
-size_t SList_Destroy(slist_t *list, size_t maxlength);
-size_t SList_GetLength(slist_t *list);
+//----------------------------------------------------------------------------
+// Extern Functions
+//
 
-[[__optional_args(1)]]
-dlist_t *DList_Create(size_t length);
-void DList_InsertBack(dlist_t *list, listdata_t data);
-void DList_InsertFront(dlist_t *list, listdata_t data);
-void DList_DeleteFront(dlist_t *list);
-void DList_DeleteBack(dlist_t *list);
-size_t DList_GetLength(dlist_t *list);
-void DList_Destroy(dlist_t *list);
-void DList_Free(dlist_t *list);
-void DList_Remove(dlist_t *dl, slist_t *list);
+[[__optional_args(1)]] void Lith_LinkDefault(list_t *list, void *object);
+void Lith_ListLink(list_t *head, list_t *list);
+[[__optional_args(1)]] void Lith_ListUnlink(list_t *list, list_deleter_t deleter);
+size_t Lith_ListSize(list_t *head);
+[[__optional_args(1)]] void Lith_ListFree(list_t *list, list_deleter_t deleter);
 
 #endif
 

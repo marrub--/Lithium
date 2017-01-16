@@ -193,7 +193,7 @@ void Lith_StupidPickup(player_t *p, int weapon)
 
 void Lith_IntelligentPickup(player_t *p, int weapon)
 {
-   Lith_Log(p, StrParam(">%S", pickupfmt[0].fmt), pickupnames[weapon].ptr[0]);
+   Lith_Log(p, StrParam("> %S", pickupfmt[0].fmt), pickupnames[weapon].ptr[0]);
 }
 
 // EOF

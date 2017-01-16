@@ -14,6 +14,8 @@
 #elif !defined(LITH_BIP_H)
 #define LITH_BIP_H
 
+#include "lith_list.h"
+
 
 //----------------------------------------------------------------------------
 // BIP - Biotic Information Panel
@@ -34,9 +36,10 @@ typedef __str bip_unlocks_t[MAX_BIP_UNLOCKS];
 
 typedef struct bippage_s
 {
-   __str name;
-   int   category;
-   bool  unlocked;
+   __str  name;
+   int    category;
+   bool   unlocked;
+   list_t link;
    bip_unlocks_t unlocks;
 } bippage_t;
 
@@ -55,7 +58,7 @@ typedef struct bip_s
    int scroll;
    
    // Info
-   struct dlist_s *infogr[BIPC_MAX];
+   list_t infogr[BIPC_MAX];
 } bip_t;
 
 [[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player_s *p);

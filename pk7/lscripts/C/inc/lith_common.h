@@ -124,7 +124,6 @@ int ceilk(accum n);
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
-static int const hudstrstack_max = 20;
 
 // Types
 typedef long long int score_t;

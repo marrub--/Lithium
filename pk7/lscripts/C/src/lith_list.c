@@ -1,214 +1,53 @@
 #include "lith_list.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
-// ---------------------------------------------------------------------------
-// Doubly-linked lists.
+
+//----------------------------------------------------------------------------
+// Extern Functions
 //
 
-slist_t *SList_Create(listdata_t data)
+void Lith_LinkDefault(list_t *list, void *object)
 {
-   slist_t *node = malloc(sizeof(slist_t));
-   node->data = data;
-   node->next = null;
-   node->prev = null;
-   return node;
+   list->prev = list->next = list;
+   list->object = object;
 }
 
-slist_t *SList_InsertNext(slist_t *list, listdata_t data)
+void Lith_ListLink(list_t *head, list_t *list)
 {
-   if(list->next)
-   {
-      slist_t *rover = list->next;
-      list->next = SList_Create(data);
-      list->next->next = rover;
-      list->next->prev = list;
-      rover->prev = list->next;
-   }
-   else
-   {
-      list->next = SList_Create(data);
-      list->next->prev = list;
-   }
+   (list->prev = head->prev)->next = list;
+   (list->next = head      )->prev = list;
+}
+
+void Lith_ListUnlink(list_t *list, list_deleter_t deleter)
+{
+   list->prev->next = list->next;
+   list->next->prev = list->prev;
+   list->prev = list->next = list;
    
-   return list->next;
+   if(deleter) deleter(list->object);
 }
 
-slist_t *SList_InsertPrev(slist_t *list, listdata_t data)
+size_t Lith_ListSize(list_t *head)
 {
-   if(list->prev)
-   {
-      slist_t *rover = list->prev;
-      list->prev = SList_Create(data);
-      list->prev->next = list;
-      list->prev->prev = rover;
-      rover->next = list->prev;
-   }
-   else
-   {
-      list->prev = SList_Create(data);
-      list->prev->next = list;
-   }
-   
-   return list->prev;
+   size_t count = 0;
+   for(list_t *rover = head->next; rover != head; rover = rover->next)
+      count++;
+   return count;
 }
 
-size_t SList_Destroy(slist_t *list, size_t maxlength)
+void Lith_ListFree(list_t *list, list_deleter_t deleter)
 {
-   size_t i = 0;
-   
-   for(slist_t *rover = list; rover && (maxlength == 0 || i < maxlength); i++)
+   if(list->next == null)
+      Lith_LinkDefault(list);
+   else while(list->next->object)
    {
-      slist_t *next = rover->next;
-      
-      if(rover->next)
-         rover->next->prev = rover->prev;
-      
-      if(rover->prev)
-         rover->prev->next = rover->next;
-      
-      free(rover);
-      rover = next;
-   }
-   
-   return i;
-}
-
-size_t SList_GetLength(slist_t *list)
-{
-   size_t size = 0;
-   for(slist_t *rover = list; rover; rover = rover->next, size++);
-   return size;
-}
-
-//
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Dynamic lists.
-//
-
-dlist_t *DList_Create(size_t length)
-{
-   dlist_t *list = malloc(sizeof(dlist_t));
-   memset(list, 0, sizeof(dlist_t));
-   
-   if(length > 0)
-   {
-      list->head = SList_Create((listdata_t){ null });
-      list->tail = list->head;
-      
-      if(length > 1)
-      {
-         slist_t *rover = list->head;
-         size_t i = 0;
-         
-         length -= 1;
-         while(i < length)
-         {
-            SList_InsertNext(rover);
-            
-            if(++i < length)
-               rover = rover->next;
-         }
-         
-         list->tail = rover;
-      }
-   }
-   
-   return list;
-}
-
-void DList_InsertBack(dlist_t *list, listdata_t data)
-{
-   if(list->tail)
-   {
-      list->tail = SList_InsertNext(list->tail, data);
-   }
-   else
-   {
-      list->head = SList_Create(data);
-      list->tail = list->head;
+      list_t *ptr = list->next;
+      Lith_ListUnlink(ptr);
+      if(deleter) deleter(ptr->object);
    }
 }
 
-void DList_InsertFront(dlist_t *list, listdata_t data)
-{
-   if(list->head)
-   {
-      list->head = SList_InsertPrev(list->head, data);
-   }
-   else
-   {
-      list->head = SList_Create(data);
-      list->tail = list->head;
-   }
-}
-
-void DList_DeleteFront(dlist_t *list)
-{
-   if(list->head)
-   {
-      if(list->tail == list->head)
-      {
-         DList_Destroy(list);
-      }
-      else
-      {
-         slist_t *rover = list->head->next;
-         SList_Destroy(list->head, 1);
-         list->head = rover;
-      }
-   }
-}
-
-void DList_DeleteBack(dlist_t *list)
-{
-   if(list->tail)
-   {
-      if(list->tail == list->head)
-      {
-         DList_Destroy(list);
-      }
-      else
-      {
-         slist_t *rover = list->tail->prev;
-         SList_Destroy(list->tail, 1);
-         list->tail = rover;
-      }
-   }
-}
-
-size_t DList_GetLength(dlist_t *list)
-{
-   if(!list->head)
-   {
-      return 0;
-   }
-   
-   return SList_GetLength(list->head);
-}
-
-void DList_Destroy(dlist_t *list)
-{
-   SList_Destroy(list->head);
-   list->head = null;
-   list->tail = null;
-}
-
-void DList_Free(dlist_t *list)
-{
-   SList_Destroy(list->head);
-   free(list);
-}
-
-void DList_Remove(dlist_t *dl, slist_t *list)
-{
-   if(dl->head == list) dl->head = dl->head->next;
-   if(dl->tail == list) dl->tail = dl->tail->prev;
-   SList_Destroy(list, 1);
-}
-
-//
-// ---------------------------------------------------------------------------
+// EOF
 

@@ -9,8 +9,8 @@
    for(int categ = BIPC_MIN; categ < BIPC_MAX; categ++)
 
 #define ForPage() \
-   for(slist_t *rover = bip->infogr[categ]->head; rover; rover = rover->next) \
-      __with(bippage_t *page = rover->data.vp;)
+   for(list_t *rover = bip->infogr[categ].next; rover != &bip->infogr[categ]; rover = rover->next) \
+      __with(bippage_t *page = rover->object;)
 
 #define ForCategoryAndPage() \
    ForCategory() \
@@ -28,11 +28,12 @@
 static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
    bippage_t  *page = calloc(1, sizeof(bippage_t));
+   Lith_LinkDefault(&page->link, page);
                page->name     = name;
                page->category = categ;
                page->unlocked = false;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
-   DList_InsertBack(bip->infogr[categ], (listdata_t){.vp = page});
+   Lith_ListLink(&bip->infogr[categ], &page->link);
 }
 
 
@@ -49,7 +50,7 @@ void Lith_PlayerInitBIP(player_t *p)
    bip_t *bip = &p->bip;
    
    ForCategory()
-      bip->infogr[categ] = DList_Create();
+      Lith_LinkDefault(&bip->infogr[categ]);
    
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",       Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
@@ -86,7 +87,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
    ForCategory()
-      bip->pagemax += bip->categorymax[categ] = DList_GetLength(bip->infogr[categ]);
+      bip->pagemax += bip->categorymax[categ] = Lith_ListSize(&bip->infogr[categ]);
 }
 
 //
@@ -138,11 +139,7 @@ void Lith_UnlockAllBIPPages(bip_t *bip)
 void Lith_DeallocateBIP(bip_t *bip)
 {
    ForCategory()
-   {
-      ForPage()
-         free(rover->data.vp);
-      DList_Free(bip->infogr[categ]);
-   }
+      Lith_ListFree(&bip->infogr[categ], free);
 }
 
 //
@@ -187,20 +184,20 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    }
    else
    {
-      dlist_t *l = bip->infogr[bip->curcategory];
-      size_t n = DList_GetLength(l);
+      list_t *list = &bip->infogr[bip->curcategory];
+      size_t n = Lith_ListSize(list);
       size_t i = 0;
       
       Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 130, btnlist.h * n);
       
-      for(slist_t *rover = l->head; rover; rover = rover->next, i++)
+      for(list_t *rover = list->next; rover != list; rover = rover->next, i++)
       {
          int y = btnlist.h * i;
          
          if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
             continue;
          
-         bippage_t *page = rover->data.vp;
+         bippage_t *page = rover->object;
          
          __str name =
             StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));

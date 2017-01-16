@@ -8,8 +8,10 @@
 #include "lith_sigil.h"
 #include "lith_bip.h"
 #include "lith_log.h"
+#include "lith_list.h"
 
 #define MAX_PLAYERS 8
+#define HUDSTRS_MAX 20
 
 #define Lith_ForPlayer() \
    for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++) \
@@ -82,8 +84,7 @@ typedef struct player_s
    int number;
    int cameratid;
    long ticks;
-   logdata_t logdata[LOG_MAX];
-   struct dlist_s *log;
+   list_t log;
    
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
@@ -148,7 +149,7 @@ typedef struct player_s
    
    // Weapons
    int riflefiremode;
-   struct dlist_s *hudstrstack;
+   list_t hudstrlist;
    
    // Inventory
    keycards_t keys;

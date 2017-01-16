@@ -67,25 +67,23 @@ void Lith_LogName(int name)
 //
 void Lith_Log(player_t *p, __str fmt, ...)
 {
-   logdata_t *logdata = null;
-   
-   for(int i = 0; i < LOG_MAX; i++)
-      if(p->logdata[i].time == 0)
-         logdata = &p->logdata[i];
-   
-   if(!logdata)
-   {
-      logdata = p->log->head->data.vp;
-      DList_DeleteFront(p->log);
-   }
-   
    va_list vl;
    
-   ACS_BeginPrint(); va_start(vl, fmt); __vnprintf_str(fmt, vl); va_end(vl);
+   logdata_t *logdata = calloc(1, sizeof(logdata_t));
+   Lith_LinkDefault(&logdata->link, logdata);
+   
+   ACS_BeginPrint();
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+   
    logdata->info = ACS_EndStrParam();
    logdata->time = LOG_TIME;
    
-   DList_InsertBack(p->log, (listdata_t){.vp = logdata});
+   Lith_ListLink(&p->log, &logdata->link);
+   
+   if(Lith_ListSize(&p->log) > LOG_MAX)
+      Lith_ListUnlink(p->log.next, free);
 }
 
 //
@@ -94,20 +92,21 @@ void Lith_Log(player_t *p, __str fmt, ...)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateLog(player_t *p)
 {
-   for(slist_t *rover = p->log->head; rover;)
+   for(list_t *rover = p->log.next; rover != &p->log;)
    {
-      logdata_t *logdata = rover->data.vp;
+      logdata_t *logdata = rover->object;
       
       if(logdata->time == 0)
       {
-         slist_t *next = rover->next;
-         DList_Remove(p->log, rover);
+         list_t *next = rover->next;
+         Lith_ListUnlink(rover, free);
          rover = next;
-         continue;
       }
-      else logdata->time--;
-      
-      rover = rover->next;
+      else
+      {
+         logdata->time--;
+         rover = rover->next;
+      }
    }
 }
 
@@ -120,9 +119,9 @@ void Lith_HUD_Log(player_t *p)
    ACS_SetHudSize(480, 300);
    
    int i = 0;
-   for(slist_t *rover = p->log->head; rover; rover = rover->next, i++)
+   for(list_t *rover = p->log.next; rover != &p->log; rover = rover->next, i++)
    {
-      logdata_t *logdata = rover->data.vp;
+      logdata_t *logdata = rover->object;
       
       DrawMsg(hid_logE + i, HUDMSG_PLAIN);
       
