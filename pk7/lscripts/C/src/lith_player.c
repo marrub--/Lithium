@@ -55,6 +55,9 @@ static void HUD_Scope(player_t *p);
 // Scripts
 //
 
+//
+// Lith_PlayerEntry
+//
 [[__call("ScriptS"), __script("Enter")]]
 static void Lith_PlayerEntry(void)
 {
@@ -88,10 +91,18 @@ static void Lith_PlayerEntry(void)
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
       
+      // Validate TID. If the map changes this we need to make sure it's
+      // still correct.
+      if(p->tid != ACS_ActivatorTID())
+         p->tid = ACS_ActivatorTID();
+      
       p->ticks++;
    }
 }
 
+//
+// Lith_PlayerDeath
+//
 [[__call("ScriptS"), __script("Death")]]
 static void Lith_PlayerDeath(void)
 {
@@ -119,12 +130,18 @@ static void Lith_PlayerDeath(void)
    }
 }
 
+//
+// Lith_PlayerRespawn
+//
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
    Lith_ResetPlayer(Lith_LocalPlayer);
 }
 
+//
+// Lith_PlayerDisconnect
+//
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
@@ -135,6 +152,9 @@ static void Lith_PlayerDisconnect(void)
    memset(p, 0, sizeof(player_t));
 }
 
+//
+// Lith_PlayerUnloading
+//
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_PlayerUnloading(void)
 {
@@ -294,7 +314,12 @@ static void Lith_ResetPlayer(player_t *p)
    // Map-static data
    
    memset(&p->old, 0, sizeof(player_delta_t));
-   ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   
+   // If the map sets the TID on the first tic, it could already be set here.
+   if(ACS_ActivatorTID() != 0)
+      p->tid = ACS_ActivatorTID();
+   else
+      ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
    
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
