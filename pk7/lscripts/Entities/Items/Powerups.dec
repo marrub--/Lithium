@@ -284,7 +284,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
    states
    {
    Spawn:
-      MEGA ABCD 6 bright
+      MEGA ABCDB 6 bright
       loop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_megasphere)
@@ -322,7 +322,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
    states
    {
    Spawn:
-      SOUL ABCDCB 6 bright
+      SOUL ABCDB 6 bright
       loop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_soulsphere)

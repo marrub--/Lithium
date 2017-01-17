@@ -3,6 +3,8 @@
 #include "lith_list.h"
 #include "lith_hudid.h"
 #include "lith_cbi.h"
+#include "lith_version.h"
+
 #include <math.h>
 
 
@@ -341,7 +343,7 @@ static void Lith_ResetPlayer(player_t *p)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      Lith_Log(p, "> Lithium 1.1 :: Compiled %S", __DATE__);
+      Lith_Log(p, "> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       Lith_Log(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       p->staticinit = true;
    }
