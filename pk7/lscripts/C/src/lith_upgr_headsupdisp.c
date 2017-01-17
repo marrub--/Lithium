@@ -64,7 +64,7 @@ static void HUD_Ammo(player_t *p)
       else if(p->weapontype == weapon_shotgun)
          count = StrParam("%i/10", 10 - ACS_CheckInventory("Lith_GaussShotsFired"));
       else if(p->weapontype == weapon_rifle)
-         count = StrParam("%i/80", 80 - ACS_CheckInventory("Lith_RifleShotsFired"));
+         count = StrParam("%i/40", 40 - ACS_CheckInventory("Lith_RifleShotsFired"));
       else if(p->weapontype == weapon_launcher)
          count = StrParam("%i", ACS_CheckInventory("Lith_RocketAmmo"));
       else if(p->weapontype == weapon_plasma)

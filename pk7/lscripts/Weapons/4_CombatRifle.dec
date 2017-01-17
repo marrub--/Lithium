@@ -3,7 +3,7 @@
 
 actor Lith_RifleShotsFired : Inventory
 {
-   Inventory.MaxAmount 80
+   Inventory.MaxAmount 40
 }
 
 actor Lith_RifleBurstIter : Inventory
