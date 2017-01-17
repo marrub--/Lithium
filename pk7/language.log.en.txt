@@ -1,27 +1,27 @@
 [enu default]
 
 LITH_TXT_LOG_Default     = ":^)";
-LITH_TXT_LOG_AllMap      = ">>>>> Area Map acquired.";
+LITH_TXT_LOG_AllMap      = ">>>>> Area Map";
 LITH_TXT_LOG_ArmorBonus  = ">>> Armor Bonus";
-LITH_TXT_LOG_Backpack    = ">>>>> Backpack and Discount Card acquired.";
+LITH_TXT_LOG_Backpack    = ">>>>> Backpack + Discount Card";
 LITH_TXT_LOG_Berserk     = ">>>>> B\cgeRs-rk \\\\\\\\-[ ~error09671 ]";
 LITH_TXT_LOG_BlueArmor   = ">>> Blue Armor";
-LITH_TXT_LOG_BlurSphere  = ">>>>> Blur Sphere acquired.";
+LITH_TXT_LOG_BlurSphere  = ">>>>> Blur Sphere";
 LITH_TXT_LOG_GreenArmor  = ">>> Green Armor";
 LITH_TXT_LOG_HealthBonus = ">>> Health Bonus";
-LITH_TXT_LOG_InfraRed    = ">>>>> CB-Goggles acquired.";
+LITH_TXT_LOG_InfraRed    = ">>>>> CB-Goggles";
 LITH_TXT_LOG_Invulnerability = "\cj>>>>>> Invulnerability!";
 LITH_TXT_LOG_Medikit     = ">>> Medikit";
-LITH_TXT_LOG_MegaSphere  = ">>>> Mega Sphere!";
-LITH_TXT_LOG_RadSuit     = ">>>>> Radiation Shielding Suit acquired.";
+LITH_TXT_LOG_MegaSphere  = ">>>> Mega Charge!";
+LITH_TXT_LOG_RadSuit     = ">>>>> Radiation Shielding Suit";
 LITH_TXT_LOG_SoulSphere  = ">>>> Super Charge!";
 LITH_TXT_LOG_StimPack    = ">>> Stimpak";
-LITH_TXT_LOG_RedCard     = ">>>>> \cgRed KeyDisk\cl acquired.";
-LITH_TXT_LOG_BlueCard    = ">>>>> \chBlue KeyDisk\cl acquired.";
-LITH_TXT_LOG_YellowCard  = ">>>>> \ckYellow KeyDisk\cl acquired.";
-LITH_TXT_LOG_RedSkull    = ">>>>> \cgRed Skull\cl acquired.";
-LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull\cl acquired.";
-LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull\cl acquired.";
+LITH_TXT_LOG_RedCard     = ">>>>> \cgRed KeyDisk";
+LITH_TXT_LOG_BlueCard    = ">>>>> \chBlue KeyDisk";
+LITH_TXT_LOG_YellowCard  = ">>>>> \ckYellow KeyDisk";
+LITH_TXT_LOG_RedSkull    = ">>>>> \cgRed Skull";
+LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull";
+LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull";
 LITH_TXT_LOG_DoggoSphere = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 LITH_TXT_LOG_Dogs        = "> Picked up dogs.";
 

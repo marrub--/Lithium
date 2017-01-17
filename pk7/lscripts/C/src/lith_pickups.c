@@ -119,6 +119,13 @@ static struct pickupfmt_s const pickupfmt[] = {
    1, "The %S, for maximum %S-ing.",
    4, "Brutal %S, featuring 5x more explosions! .. %S",
    2, "aeiou",
+   0, "What is a man? A miserable pile of %Ss!",
+   0, "The %S was delicious.",
+   0, "There's plenty of %Ss in the sea, but you're the only one for me.",
+   0, "Disassembled the %S and reassembled it into your inventory.",
+   0, "The %S is keepin' it real, as usual.",
+   0, "The %S finds you agreeable, and lets you pick it up.",
+   0, "You have attained true %S.",
    2, "What the fuck did you just fucking say about me, you little bitch?\n"
       "I'll have you know I graduated top of my class in the Navy Seals,\n"
       "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"
@@ -151,7 +158,11 @@ static __str uncertainty[] = {
    "Maybe.",
    "Hmm, yes. Indeed.",
    "Yeah.",
-   "Yep."
+   "Yep.",
+   "Ye.",
+   "Mmyes.",
+   "Yes. No. Yes?",
+   "Yes, no, maybe. I don't know."
 };
 
 static struct pickupname_s const pickupnames[weapon_max] = {
