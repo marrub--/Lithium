@@ -1,0 +1,27 @@
+actor TeleFogRing
+{
+	RenderStyle Add
+	
+	+NOINTERACTION
+	+BRIGHT
+	
+	States
+	{
+	Spawn:
+		TELE AAAAA 2 A_FadeOut(0.1)
+		Stop
+	}
+}
+
+actor P67TeleFog : TeleportFog replaces TeleportFog
+{
+	States
+	{
+	Spawn:
+		TNT1 AAAA 5 A_SpawnItemEx("TeleFogRing", 0,0,0, 0,0,4)
+		Stop
+	}
+}
+
+// EOF
+

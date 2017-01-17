@@ -27,6 +27,7 @@ actor Lith_MonsterHax
 
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/BulletPuff.dec"
+#include "lscripts/Effects/TeleFog.dec"
 
 //
 // Monsters
