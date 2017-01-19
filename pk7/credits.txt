@@ -27,6 +27,7 @@ Jimmy
 Kate
    Some specific, old code is based off of Error: Doom code
    (This was originally a mod of Error: Doom, which is an awesome mod!)
+   Blank sphere used as a base for the the Blursphere
 
 Kyle873
    Said a nice thing

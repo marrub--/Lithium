@@ -9,6 +9,7 @@ player/doublejump  lsounds/Player/DoubleJump.flac          // DemonSteele
 player/slide       lsounds/Player/Slide.flac               // 〃
 player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, Fallout 4
 player/nuke        lsounds/Player/Nuke.flac                // Touhou 13
+player/barrier     lsounds/Player/Barrier.flac             // 〃
 player/death1      lsounds/Player/DeathCharge.flac         // 〃
 player/death2      lsounds/Player/Death.flac               // 〃
 player/adren/inj   lsounds/Player/AdrenalineInject.flac    // Killing Floor
@@ -17,6 +18,8 @@ player/adren/ready lsounds/Player/InjectorReady.flac       // 〃
 $volume player/death2 0.7
 $volume player/nuke 0.7
 $volume player/doublejump 0.7
+
+$limit player/barrier 0
 
 $random player/score {
    player/score1

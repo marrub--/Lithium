@@ -80,6 +80,9 @@
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
+// To make pitch values down=0, up=1
+#define PITCH_BASE -0.5
+
 // Random
 [[__optional_args(1)]]
 int Random(int max, int min);

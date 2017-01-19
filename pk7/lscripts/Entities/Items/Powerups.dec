@@ -13,6 +13,7 @@ actor Lith_CustomInventory : CustomInventory
 actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 {
    Inventory.PickupSound "misc/p_pkup"
+   
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
    
@@ -65,6 +66,7 @@ actor Lith_Backpack : Lith_ScoreItem replaces Backpack
 actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 {
    Inventory.PickupSound "misc/p_pkup"
+   
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
    
@@ -96,89 +98,8 @@ actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
    }
 }
 
-actor Lith_BlurSphere : Lith_CustomInventory
-{
-   Inventory.PickupSound "misc/p_pkup"
-   
-   +COUNTITEM
-   +VISIBILITYPULSE
-   +INVENTORY.BIGPOWERUP
-   +INVENTORY.FANCYPICKUPSOUND
-   
-   states
-   {
-   Spawn:
-      PINS ABCD 6 bright
-      loop
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_blursphere)
-      TNT1 A 0 A_GiveInventory("BlurSphere")
-      stop
-   }
-}
-
-actor Lith_Dogs : CustomInventory
-{
-   Inventory.MaxAmount 1
-   Inventory.InterHubAmount 0
-   
-   +INVENTORY.UNDROPPABLE
-   
-   states
-   {
-   Pickup:
-      TNT1 A 0 A_GiveInventory("HealthBonus", 1)
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_dogs)
-      stop
-   Use:
-      TNT1 A 0
-      fail
-   }
-}
-
-actor Lith_Steggles : MBFHelperDog
-{
-   Health 10000000
-   PainChance 0
-   
-   +THRUACTORS
-   +FRIENDLY
-   
-   states
-   {
-   Energize:
-      DOGS A 0 A_GiveToTarget("Lith_Dogs", 1)
-      stop
-   PureSteggleEnergy:
-      DOGS A 0 A_ChangeFlag("NOCLIP", true)
-      DOGS A 0 A_ChangeFlag("NOBLOCKMAP", true)
-      DOGS A 0 A_ChangeFlag("NOGRAVITY", true)
-      DOGS A 0 A_SetTranslucent(0.8, 1)
-      DOGS A 0 ACS_NamedExecuteAlways("Lith_SteggleEnergy", 0)
-      DOGS A 1 A_JumpIfCloser(radius, "Energize")
-      wait
-   }
-}
-
-actor Lith_SteggleSphere : Lith_CustomInventory
-{
-   Inventory.PickupSound "misc/p_pkup"
-   
-   +COUNTITEM
-   +INVENTORY.BIGPOWERUP
-   +INVENTORY.FANCYPICKUPSOUND
-   
-   states
-   {
-   Spawn:
-      DOGO ABCB 6 bright
-      loop
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_doggosphere)
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_DOGS", 0)
-      stop
-   }
-}
+#include "lscripts/Entities/Items/BlurSphere.dec"
+#include "lscripts/Entities/Items/SteggleSphere.dec"
 
 actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
 {
@@ -205,6 +126,7 @@ actor Lith_GreenArmor : Lith_CustomInventory replaces GreenArmor
 actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
 {
    Inventory.PickupSound "items/healthbonus"
+   
    +COUNTITEM
    
    states
@@ -243,6 +165,7 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
 {
    Inventory.PickupSound "misc/p_pkup"
    
+   +FLOATBOB
    +COUNTITEM
    +INVENTORY.BIGPOWERUP
    +INVENTORY.FANCYPICKUPSOUND
@@ -278,6 +201,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
    Inventory.PickupSound "misc/p_pkup"
    
+   +FLOATBOB
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
    
@@ -316,6 +240,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
 {
    Inventory.PickupSound "misc/p_pkup"
    
+   +FLOATBOB
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
    
