@@ -45,6 +45,7 @@ actor Lith_CyberRocket : Rocket replaces Rocket
 
 actor Lith_CyberDemon : Cyberdemon replaces Cyberdemon
 {
+   Health 7000
    PainChance 0
    
    +MISSILEMORE
