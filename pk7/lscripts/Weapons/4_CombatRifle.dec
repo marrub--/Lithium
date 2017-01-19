@@ -41,8 +41,9 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       TNT1 A 0 A_JumpIfInventory("Lith_RifleShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_RifleShotsFired", 1)
       
-      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRIF A 0 A_AlertMonsters
+      
+      CRIF A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRIF A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRIF A 0 A_Jump(256, 2)
       CRIF A 0 A_PlaySound("marathon/rifle/fire", CHAN_WEAPON)
