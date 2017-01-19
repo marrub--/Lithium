@@ -33,7 +33,7 @@ LITH_TXT_INFO_DESCR_CyberLegs =
    "Couldn't be deployed initially to you due to complications in shipping "
    "to a combat zone.";
 
-LITH_TXT_INFO_SHORT_Yh0 = "$LITH_TXT_UPGRADE_TITLE_ReactArmour";
+LITH_TXT_INFO_SHORT_Yh0 = "$LITH_TXT_UPGRADE_TITLE_ReactArmor";
 LITH_TXT_INFO_TITLE_Yh0 = "Yh-0 Reactive Plating System";
 LITH_TXT_INFO_DESCR_Yh0 =
    "Developed by avians of the planet Durla Prime, this armor plating is "
@@ -44,6 +44,14 @@ LITH_TXT_INFO_DESCR_Yh0 =
    "the plating to each system, can only use one at a time.\n\n"
    "Works over your currently equipped armor, so damage from even rockets "
    "may be lowered into what feels like a small tickle.";
+
+LITH_TXT_INFO_SHORT_DefenseNuke = "$LITH_TXT_UPGRADE_TITLE_DefenseNuke";
+LITH_TXT_INFO_TITLE_DefenseNuke = "Defensive Atomic Bomb";
+LITH_TXT_INFO_DESCR_DefenseNuke = "<classified by OFMD clearance scanner>";
+
+LITH_TXT_INFO_SHORT_Adrenaline = "$LITH_TXT_UPGRADE_TITLE_Adrenaline";
+LITH_TXT_INFO_TITLE_Adrenaline = "Senxans Automatic Adrenaline Injector";
+LITH_TXT_INFO_DESCR_Adrenaline = "<classified by OFMD clearance scanner>";
 
 // EOF
 

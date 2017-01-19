@@ -25,7 +25,7 @@ static __str const weaponclasses[weapon_max] = {
    [weapon_rifle]    = "Lith_CombatRifle",
    [weapon_launcher] = "Lith_GrenadeLauncher",
    [weapon_plasma]   = "Lith_PlasmaRifle",
-   [weapon_bfg]      = "Lith_BFG9000",
+   [weapon_bfg]      = "Lith_Weapon_OmegaCannon",
 };
 
 

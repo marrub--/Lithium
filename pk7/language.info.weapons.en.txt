@@ -119,7 +119,7 @@ LITH_TXT_INFO_DESCR_Cannon =
    "\"Cid\" for a hefty price. Take care of it.";
 
 LITH_TXT_INFO_SHORT_CannonUpgr = "$LITH_TXT_UPGRADE_TITLE_PunctCannon";
-LITH_TXT_INFO_TITLE_CannonUpgr = "Omega Cannon Punctuator Buffer";
+LITH_TXT_INFO_TITLE_CannonUpgr = "Omega Cannon: Punctuator Buffer";
 LITH_TXT_INFO_DESCR_CannonUpgr =
    "A pattern buffer for your Omega Cannon which emits an explosive bolt "
    "that does damage by penetrating walls with explosives, via magic.\n\n"
@@ -129,6 +129,17 @@ LITH_TXT_INFO_DESCR_CannonUpgr =
    "been sent here because the creator of the Omega Cannon wasn't satisfied "
    "with its power, and wanted whoever attained it to be all-powerful.\n"
    "Also, the CB-Scope works again, somehow.";
+
+LITH_TXT_INFO_SHORT_CannonUpg2 = "$LITH_TXT_UPGRADE_TITLE_OmegaRail";
+LITH_TXT_INFO_TITLE_CannonUpg2 = "Omega Cannon: Railgun";
+LITH_TXT_INFO_DESCR_CannonUpg2 =
+   "With years of reverse engineering research put into the Omega Cannon "
+   "by several groups, a photon accelerator was developed which could use "
+   "the Omega Cannon's pattern buffer system to create abhorrent amounts "
+   "of energy.\n\n"
+   "With this, a gigantic red beam of destruction with an ungodly amount "
+   "of heat and energy is fired out of the cannon, causing most anything in "
+   "its path to be absolutely destroyed.";
 
 // EOF
 
