@@ -218,6 +218,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       {
          ACS_SetHudClipRect(111, 40, 184, 140, 184);
          
+         if(bip->curcategory == BIPC_CORPORATIONS)
+            DrawSpriteAlpha(StrParam("lgfx/UI/Corps/%S.png", bip->curpage->name), g->hid--, 296.2, 180.2, TICSECOND, 0.5);
+         
+         DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
+         
          HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
          HudMessagePlain(g->hid--, 200.4, 45.1, TICSECOND);
          HudMessageF("CBIFONT", "%S", Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name));

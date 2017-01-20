@@ -69,7 +69,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       goto Ready
    
    FireEmpty:
-      GRLG A 1 bright
+      GRLG A 1
       GRLG A 2 offset(0, 41)
       GRLG A 1 offset(0, 45)
       GRLG A 1 offset(0, 43)
