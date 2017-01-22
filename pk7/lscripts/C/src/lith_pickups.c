@@ -93,7 +93,7 @@ static struct pickupfmt_s const pickupfmt[] = {
    0, "It's not like the %S wanted you to pick it up or anything.",
    0, "It's a %S... I think.",
    4, "You thought you picked up a %S ... %S",
-   0, "1 in 3 of every %Ss do not approve of being picked up.",
+   0, "1 in 3 %Ss do not approve of being picked up.",
    0, "Studies show that normal people do not steal %Ss.",
    0, "OH NO, NOT %S",
    4, "What? Is that.. %S? ... %S",

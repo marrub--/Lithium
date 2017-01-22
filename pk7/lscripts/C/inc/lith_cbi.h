@@ -15,6 +15,7 @@ enum
    cbi_tab_bip,
    cbi_tab_statistics,
    cbi_tab_settings,
+   cbi_tab_log,
    cbi_tab_max
 };
 
@@ -27,6 +28,8 @@ enum
    st_shopscr,
    st_bipscr,
    st_settingscr,
+   st_logscr,
+   st_logsel,
    st_max
 };
 

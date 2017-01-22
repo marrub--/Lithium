@@ -5,16 +5,9 @@
 
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
-#define ForCategory() \
-   for(int categ = BIPC_MIN; categ < BIPC_MAX; categ++)
-
-#define ForPage() \
-   for(list_t *rover = bip->infogr[categ].next; rover != &bip->infogr[categ]; rover = rover->next) \
-      __with(bippage_t *page = rover->object;)
-
-#define ForCategoryAndPage() \
-   ForCategory() \
-      ForPage()
+#define ForCategory() for(int categ = BIPC_MIN; categ < BIPC_MAX; categ++)
+#define ForPage() Lith_ForList(bippage_t *page, bip->infogr[categ])
+#define ForCategoryAndPage() ForCategory() ForPage()
 
 
 //----------------------------------------------------------------------------
@@ -190,14 +183,12 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 130, btnlist.h * n);
       
-      for(list_t *rover = list->next; rover != list; rover = rover->next, i++)
+      Lith_ForListIter(bippage_t *page, *list, i++)
       {
          int y = btnlist.h * i;
          
          if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
             continue;
-         
-         bippage_t *page = rover->object;
          
          __str name =
             StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));

@@ -27,39 +27,39 @@ void Lith_LogName(int name)
 {
    player_t *p = Lith_LocalPlayer;
    
-   __str ls;
-   
    switch(name)
    {
-#define N(name, str) case name: ls = "LITH_TXT_LOG_" str; break;
-   N(log_default,     "Default")
-   N(log_allmap,      "AllMap")
-   N(log_armorbonus,  "ArmorBonus")
-   N(log_backpack,    "Backpack")
-   N(log_berserk,     "Berserk")
-   N(log_bluearmor,   "BlueArmor")
-   N(log_blursphere,  "BlurSphere")
-   N(log_greenarmor,  "GreenArmor")
-   N(log_healthbonus, "HealthBonus")
-   N(log_infrared,    "InfraRed")
-   N(log_invulnerability, "Invulnerability")
-   N(log_medikit,     "Medikit")
-   N(log_megasphere,  "MegaSphere")
-   N(log_radsuit,     "RadSuit")
-   N(log_soulsphere,  "SoulSphere")
-   N(log_stimpack,    "StimPack")
-   N(log_redcard,     "RedCard")
-   N(log_bluecard,    "BlueCard")
-   N(log_yellowcard,  "YellowCard")
-   N(log_redskull,    "RedSkull")
-   N(log_blueskull,   "BlueSkull")
-   N(log_yellowskull, "YellowSkull")
-   N(log_doggosphere, "DoggoSphere")
-   N(log_dogs,        "Dogs")
-#undef N
+#define BOTH(name, str) case name: Lith_Log (p, "%LS", "LITH_TXT_LOG_" str); break;
+#define FULL(name, str) case name: Lith_LogF(p, "%LS", "LITH_TXT_LOG_" str); break;
+#define HUDS(name, str) case name: Lith_LogH(p, "%LS", "LITH_TXT_LOG_" str); break;
+   BOTH(log_default,     "Default")
+   BOTH(log_allmap,      "AllMap")
+   HUDS(log_armorbonus,  "ArmorBonus")
+   BOTH(log_backpack,    "Backpack")
+   BOTH(log_berserk,     "Berserk")
+   BOTH(log_bluearmor,   "BlueArmor")
+   BOTH(log_blursphere,  "BlurSphere")
+   BOTH(log_greenarmor,  "GreenArmor")
+   HUDS(log_healthbonus, "HealthBonus")
+   BOTH(log_infrared,    "InfraRed")
+   BOTH(log_invulnerability, "Invulnerability")
+   BOTH(log_medikit,     "Medikit")
+   BOTH(log_megasphere,  "MegaSphere")
+   BOTH(log_radsuit,     "RadSuit")
+   BOTH(log_soulsphere,  "SoulSphere")
+   BOTH(log_stimpack,    "StimPack")
+   BOTH(log_redcard,     "RedCard")
+   BOTH(log_bluecard,    "BlueCard")
+   BOTH(log_yellowcard,  "YellowCard")
+   BOTH(log_redskull,    "RedSkull")
+   BOTH(log_blueskull,   "BlueSkull")
+   BOTH(log_yellowskull, "YellowSkull")
+   BOTH(log_doggosphere, "DoggoSphere")
+   BOTH(log_dogs,        "Dogs")
+#undef BOTH
+#undef FULL
+#undef HUDS
    }
-   
-   Lith_Log(p, "%LS", ls);
 }
 
 //
@@ -69,21 +69,66 @@ void Lith_Log(player_t *p, __str fmt, ...)
 {
    va_list vl;
    
-   logdata_t *logdata = calloc(1, sizeof(logdata_t));
-   Lith_LinkDefault(&logdata->link, logdata);
-   
-   ACS_BeginPrint();
    va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
+   logdata_t *logdata = Lith_LogV(p, fmt, vl);
    va_end(vl);
    
-   logdata->info = ACS_EndStrParam();
    logdata->time = LOG_TIME;
+   Lith_ListLink(&p->loginfo.hud, &logdata->link);
+   Lith_ListLink(&p->loginfo.full, &logdata->linkfull);
    
-   Lith_ListLink(&p->log, &logdata->link);
+   if(Lith_ListSize(&p->loginfo.hud) > LOG_MAX)
+      free(Lith_ListUnlink(p->loginfo.hud.next));
+}
+
+//
+// Lith_LogF
+//
+void Lith_LogF(player_t *p, __str fmt, ...)
+{
+   va_list vl;
    
-   if(Lith_ListSize(&p->log) > LOG_MAX)
-      Lith_ListUnlink(p->log.next, free);
+   va_start(vl, fmt);
+   logdata_t *logdata = Lith_LogV(p, fmt, vl);
+   va_end(vl);
+   
+   Lith_ListLink(&p->loginfo.full, &logdata->linkfull);
+}
+
+//
+// Lith_LogH
+//
+void Lith_LogH(player_t *p, __str fmt, ...)
+{
+   va_list vl;
+   
+   va_start(vl, fmt);
+   logdata_t *logdata = Lith_LogV(p, fmt, vl);
+   va_end(vl);
+   
+   logdata->time = LOG_TIME;
+   Lith_ListLink(&p->loginfo.hud, &logdata->link);
+   
+   if(Lith_ListSize(&p->loginfo.hud) > LOG_MAX)
+      free(Lith_ListUnlink(p->loginfo.hud.next));
+}
+
+//
+// Lith_LogV
+//
+logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
+{
+   logdata_t *logdata = calloc(1, sizeof(logdata_t));
+   Lith_LinkDefault(&logdata->link, logdata);
+   Lith_LinkDefault(&logdata->linkfull, logdata);
+   
+   ACS_BeginPrint();
+   __vnprintf_str(fmt, vl);
+   
+   logdata->info = ACS_EndStrParam();
+   logdata->from = ACS_GetLevelInfo(LEVELINFO_LEVELNUM);
+   
+   return logdata;
 }
 
 //
@@ -92,14 +137,14 @@ void Lith_Log(player_t *p, __str fmt, ...)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateLog(player_t *p)
 {
-   for(list_t *rover = p->log.next; rover != &p->log;)
+   for(list_t *rover = p->loginfo.hud.next; rover != &p->loginfo.hud;)
    {
       logdata_t *logdata = rover->object;
       
       if(logdata->time == 0)
       {
          list_t *next = rover->next;
-         Lith_ListUnlink(rover, free);
+         Lith_ListUnlink(rover);
          rover = next;
       }
       else
@@ -119,15 +164,35 @@ void Lith_HUD_Log(player_t *p)
    ACS_SetHudSize(480, 300);
    
    int i = 0;
-   for(list_t *rover = p->log.next; rover != &p->log; rover = rover->next, i++)
+   Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
    {
-      logdata_t *logdata = rover->object;
-      
       DrawMsg(hid_logE + i, HUDMSG_PLAIN);
       
       if(logdata->time > LOG_TIME - 10)
          DrawMsg(hid_logAddE + i, HUDMSG_ADDBLEND);
    }
+}
+
+//
+// Lith_PlayerLogEntry
+//
+void Lith_PlayerLogEntry(player_t *p)
+{
+   logmap_t *logmap = calloc(1, sizeof(logmap_t));
+   Lith_LinkDefault(&logmap->link, logmap);
+   
+   logmap->levelnum = ACS_GetLevelInfo(LEVELINFO_LEVELNUM);
+   logmap->name = StrParam("%tS", PRINTNAME_LEVELNAME); // :|
+   
+   Lith_ListLink(&p->loginfo.maps, &logmap->link);
+   
+   int seconds = 53 + (p->ticks / 35);
+   int minutes = 30 + (seconds  / 60);
+   int hours   = 14 + (minutes  / 60);
+   int days    = 25 + (hours    / 24); // pls
+   
+   Lith_LogF(p, "Entered %S at %0.2i:%0.2i:%0.2i %i/7/1649 NE",
+      logmap->name, hours % 24, minutes % 60, seconds % 60, days);
 }
 
 // EOF

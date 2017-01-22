@@ -132,6 +132,8 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
       return;
    }
    
+   Lith_LogF(p, "> Bought %LS", StrParam("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name));
+   
    Lith_TakeScore(p, Lith_PlayerDiscount(upgr->info->cost));
    Upgr_SetOwned(p, upgr);
 }

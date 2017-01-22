@@ -38,8 +38,8 @@ static __str const weaponclasses[weapon_max] = {
 [[__call("ScriptS")]] static void Lith_ResetPlayer(player_t *p);
 static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
-static void Lith_PlayerDamageBob(player_t *p);
-static void Lith_PlayerView(player_t *p);
+[[__call("ScriptS")]] static void Lith_PlayerDamageBob(player_t *p);
+[[__call("ScriptS")]] static void Lith_PlayerView(player_t *p);
 static void Lith_PlayerStyle(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
@@ -64,6 +64,7 @@ static void Lith_PlayerEntry(void)
    player_t *p = Lith_LocalPlayer;
    
    Lith_ResetPlayer(p);
+   Lith_PlayerLogEntry(p);
    Lith_PlayerEnterUpgrades(p);
    
    while(p->active)
@@ -147,7 +148,8 @@ static void Lith_PlayerDisconnect(void)
 {
    player_t *p = Lith_LocalPlayer;
    Lith_DeallocateBIP(&p->bip);
-   Lith_ListFree(&p->log);
+   Lith_ListFree(&p->loginfo.hud);
+   Lith_ListFree(&p->loginfo.full, free);
    Lith_ListFree(&p->hudstrlist, free);
    memset(p, 0, sizeof(player_t));
 }
@@ -172,6 +174,9 @@ static void Lith_PlayerUnloading(void)
 
 void Lith_GiveScore(player_t *p, score_t score)
 {
+   if(score == 0)
+      return;
+   
    score *= p->scoremul;
    
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
@@ -189,6 +194,9 @@ void Lith_GiveScore(player_t *p, score_t score)
    p->scoresum       += score;
    p->scoreaccum     += score;
    p->scoreaccumtime += 35 * (mul * 2.0);
+   
+   if(ACS_GetUserCVar(p->number, "lith_player_scorelog"))
+      Lith_LogH(p, "> +\Cj%lli\Cnscr", score);
 }
 
 void Lith_TakeScore(player_t *p, score_t score)
@@ -335,8 +343,10 @@ static void Lith_ResetPlayer(player_t *p)
    if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
    if(!p->discount)   p->discount   = 1.0;
    
-   Lith_ListFree(&p->log);
+   Lith_ListFree(&p->loginfo.hud);
    Lith_ListFree(&p->hudstrlist, free);
+   if(!p->loginfo.full.next) Lith_LinkDefault(&p->loginfo.full);
+   if(!p->loginfo.maps.next) Lith_LinkDefault(&p->loginfo.maps);
    
    // pls not exit map with murder thingies out
    // is bad practice
@@ -368,8 +378,8 @@ static void Lith_ResetPlayer(player_t *p)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      Lith_Log(p, "> Lithium " Lith_Version " :: Compiled %S", __DATE__);
-      Lith_Log(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+      Lith_Log (p, "> Lithium " Lith_Version " :: Compiled %S", __DATE__);
+      Lith_LogH(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       p->staticinit = true;
    }
    else
@@ -440,6 +450,7 @@ static void Lith_GetArmorType(player_t *p)
 //
 // Update view bobbing when you get damaged.
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerDamageBob(player_t *p)
 {
    if(!p->berserk && p->health < p->old.health)
@@ -464,6 +475,7 @@ static void Lith_PlayerDamageBob(player_t *p)
 //
 // Update additive view.
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerView(player_t *p)
 {
    float addp = 0, addy = 0;
@@ -580,7 +592,7 @@ static void HUD_StringStack(player_t *p)
       Lith_ListLink(&p->hudstrlist, &hudstr->link);
       
       if(Lith_ListSize(&p->hudstrlist) == HUDSTRS_MAX)
-         Lith_ListUnlink(p->hudstrlist.next, free);
+         free(Lith_ListUnlink(p->hudstrlist.next));
    }
    
    ACS_SetHudSize(320, 200);

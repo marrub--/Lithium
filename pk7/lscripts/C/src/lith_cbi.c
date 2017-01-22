@@ -9,6 +9,59 @@
 //
 
 //
+// Lith_CBITab_Log
+//
+static void Lith_CBITab_Log(gui_state_t *g, player_t *p)
+{
+   size_t num = 0;
+   int i = 0;
+   
+   logmap_t *selmap;
+   list_t *sel = g->st[st_logsel].vp;
+   
+   if((sel = g->st[st_logsel].vp) == null)
+      sel = p->loginfo.maps.next;
+   
+   if(Lith_GUI_Button(g, .x = 25, 28, .preset = &btnprev))
+      if((sel = sel->prev) == &p->loginfo.maps)
+         sel = sel->prev;
+   
+   if(Lith_GUI_Button(g, .x = 25 + btnprev.w, 28, .preset = &btnnext))
+      if((sel = sel->next) == &p->loginfo.maps)
+         sel = sel->next;
+   
+   g->st[st_logsel].vp = sel;
+   selmap = sel->object;
+   
+   HudMessageF("CBIFONT", "%S", selmap->name);
+   HudMessagePlain(g->hid--, 28.1 + btnprev.w + btnnext.w, 30.1, TICSECOND);
+   
+   Lith_ForList(logdata_t *logdata, p->loginfo.full)
+      num += (logdata->from == selmap->levelnum);
+   
+   Lith_GUI_ScrollBegin(g, st_logscr, 15, 40, 280, 148, num * 8);
+   
+   Lith_ForList(logdata_t *logdata, p->loginfo.full)
+   {
+      if(logdata->from != selmap->levelnum)
+         continue;
+      
+      int y = 8 * i++;
+      
+      if(Lith_GUI_ScrollOcclude(g, st_logscr, y, 8))
+         continue;
+      
+      DrawSpritePlain("lgfx/UI/LogList.png", g->hid--, g->ox + 0.1, y + g->oy + 0.1, TICSECOND);
+      
+      HudMessageF("CBIFONT", "%S", logdata->info);
+      HudMessageParams(0, g->hid--, CR_GREEN, g->ox + 2.1, y + g->oy + 1.1, TICSECOND);
+   }
+   
+   
+   Lith_GUI_ScrollEnd(g, st_logscr);
+}
+
+//
 // Lith_CBITab_Settings
 //
 static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
@@ -122,7 +175,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       if(Lith_GUI_Button(g, .x = 296, 13, .preset = &btnexit))
          Lith_KeyOpenCBI();
       
-      static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Statistics", "Settings"};
+      static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Statistics", "Settings", "Log"};
       for(int i = 0; i < cbi_tab_max; i++)
          if(Lith_GUI_Button_Id(g, i, tabnames[i], btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &btntab))
             g->st[st_maintab].i = i;
@@ -134,6 +187,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
       case cbi_tab_bip:        Lith_CBITab_BIP       (g, p); break;
       case cbi_tab_statistics: Lith_CBITab_Statistics(g, p); break;
       case cbi_tab_settings:   Lith_CBITab_Settings  (g, p); break;
+      case cbi_tab_log:        Lith_CBITab_Log       (g, p); break;
       }
       
       Lith_GUI_End(g);

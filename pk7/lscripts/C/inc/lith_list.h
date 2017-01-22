@@ -3,6 +3,14 @@
 
 #include <stddef.h>
 
+#define Lith_ForList(var, name) \
+   for(list_t *rover = (name).next; rover != &(name); rover = rover->next) \
+      __with(var = rover->object;)
+
+#define Lith_ForListIter(var, name, ...) \
+   for(list_t *rover = (name).next; rover != &(name); rover = rover->next, __VA_ARGS__) \
+      __with(var = rover->object;)
+
 
 //----------------------------------------------------------------------------
 // Type Definitions
@@ -22,14 +30,6 @@
 // You can delete an entire list (destroying objects with a custom function or
 // not at all) with ListFree, and get the size of a headed list with ListSize.
 
-typedef void (*list_deleter_t)(void *);
-
-typedef union listdata_u
-{
-   void *vp;
-   __str str;
-} listdata_t;
-
 typedef struct list_s
 {
    void *object;
@@ -43,9 +43,9 @@ typedef struct list_s
 
 [[__optional_args(1)]] void Lith_LinkDefault(list_t *list, void *object);
 void Lith_ListLink(list_t *head, list_t *list);
-[[__optional_args(1)]] void Lith_ListUnlink(list_t *list, list_deleter_t deleter);
+void *Lith_ListUnlink(list_t *list);
 size_t Lith_ListSize(list_t *head);
-[[__optional_args(1)]] void Lith_ListFree(list_t *list, list_deleter_t deleter);
+[[__optional_args(1)]] void Lith_ListFree(list_t *head, void (*deleter)(void *));
 
 #endif
 

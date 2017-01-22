@@ -20,13 +20,13 @@ void Lith_ListLink(list_t *head, list_t *list)
    (list->next = head      )->prev = list;
 }
 
-void Lith_ListUnlink(list_t *list, list_deleter_t deleter)
+void *Lith_ListUnlink(list_t *list)
 {
    list->prev->next = list->next;
    list->next->prev = list->prev;
    list->prev = list->next = list;
    
-   if(deleter) deleter(list->object);
+   return list->object;
 }
 
 size_t Lith_ListSize(list_t *head)
@@ -37,16 +37,17 @@ size_t Lith_ListSize(list_t *head)
    return count;
 }
 
-void Lith_ListFree(list_t *list, list_deleter_t deleter)
+void Lith_ListFree(list_t *head, void (*deleter)(void *))
 {
-   if(list->next == null)
-      Lith_LinkDefault(list);
-   else while(list->next->object)
-   {
-      list_t *ptr = list->next;
-      Lith_ListUnlink(ptr);
-      if(deleter) deleter(ptr->object);
-   }
+   if(head->next)
+      while(head->next != head)
+      {
+         list_t *rover = head->next;
+         Lith_ListUnlink(rover);
+         if(deleter) deleter(rover->object);
+      }
+   else
+      Lith_LinkDefault(head);
 }
 
 // EOF

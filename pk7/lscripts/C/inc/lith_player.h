@@ -84,7 +84,7 @@ typedef struct player_s
    int number;
    int cameratid;
    long ticks;
-   list_t log;
+   loginfo_t loginfo;
    
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;

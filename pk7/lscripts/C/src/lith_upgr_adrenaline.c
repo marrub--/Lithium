@@ -21,7 +21,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
       upgr->user_int[u_charge] = upgr->user_int[u_readied] = 0;
       
       ACS_GiveInventory("Lith_TimeHax2", 1);
-      ACS_Delay(35);
+      ACS_Delay(36);
       ACS_TakeInventory("Lith_TimeHax2", 1);
    }
    else if(!upgr->user_int[u_readied])

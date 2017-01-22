@@ -34,7 +34,7 @@ gui_button_preset_t const btntab = {
    .chot = 'k',
    .cdis = 'n',
    .font = "CBIFONT",
-   .w = 48,
+   .w = 46,
    .h = 11
 };
 
@@ -42,6 +42,22 @@ gui_button_preset_t const btnexit = {
    .gfx  = "lgfx/UI/ExitButton.png",
    .hot  = "lgfx/UI/ExitButtonHot.png",
    .w = 11,
+   .h = 11
+};
+
+gui_button_preset_t const btnnext = {
+   .gfx  = "lgfx/UI/BtnNext.png",
+   .hot  = "lgfx/UI/BtnNextHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .w = 8,
+   .h = 11
+};
+
+gui_button_preset_t const btnprev = {
+   .gfx  = "lgfx/UI/BtnPrev.png",
+   .hot  = "lgfx/UI/BtnPrevHot.png",
+   .snd  = "player/cbi/buttonpress",
+   .w = 8,
    .h = 11
 };
 

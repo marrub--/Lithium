@@ -29,6 +29,7 @@ typedef union gui_stateitem_s
 {
    int i;
    gui_scroll_state_t scrl;
+   void *vp;
 } gui_stateitem_t;
 
 typedef struct gui_delta_s
@@ -129,6 +130,8 @@ typedef struct gui_slider_args_s
 extern gui_button_preset_t const btndefault;
 extern gui_button_preset_t const btntab;
 extern gui_button_preset_t const btnexit;
+extern gui_button_preset_t const btnnext;
+extern gui_button_preset_t const btnprev;
 extern gui_button_preset_t const btnlist;
 extern gui_button_preset_t const btnbipmain;
 extern gui_button_preset_t const btnbipback;
