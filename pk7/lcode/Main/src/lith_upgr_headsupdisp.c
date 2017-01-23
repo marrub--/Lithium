@@ -25,13 +25,13 @@ static void HUD_Weapons(player_t *p)
 {
    DrawSpritePlain("H_W1", hid_weaponbg, 80.1, 200.2, TICSECOND);
    
-   for(int i = weapon_min; i < weapon_max; i++)
-      if(p->weapons & (1 << i))
+   for(int i = 0; i < SLOT_MAX; i++)
+      if(p->hasslot[i])
    {
-      fixed x = (10 * (i - weapon_min)) + 80.1;
+      fixed x = (10 * i) + 70.1;
       fixed y = 200.2;
-      HudMessageF("INDEXFONT_DOOM", "%i", i + 1);
-      HudMessageParams(HUDMSG_PLAIN, hid_weapontextE + i, p->weapontype == i ? CR_YELLOW : CR_BLUE, x + 5, y - 2, TICSECOND);
+      HudMessageF("INDEXFONT_DOOM", "%S%i", (p->curweapon->slot == i) ? "\Ck" : "\Ch", i);
+      HudMessagePlain(hid_weapontextE + i, x + 5, y - 2, TICSECOND);
    }
 }
 
@@ -40,48 +40,51 @@ static void HUD_Weapons(player_t *p)
 //
 static void HUD_Ammo(player_t *p)
 {
-   __str ammotype = "H_A2";
+   __str ammotype;
    __str count;
    
-   switch(p->weapontype)
-   {
-   case weapon_rifle:
+   weaponinfo_t const *info = p->curweapon;
+   
+   if(info->type == weapon_rifle)
    {
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
       DrawSpritePlain("H_W3", hid_riflemodebg, 241.2, 200.2 + addy, TICSECOND);
       DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_riflemode, 241.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
-      goto load;
    }
-   case weapon_shotgun:
-      if(!p->upgrades[UPGR_GaussShotty].active) break;
-   case weapon_pistol:
-   load:
-      ammotype = "H_A1";
-   case weapon_launcher: case weapon_plasma: case weapon_bfg:
+   
+   if(info->ammotype == AT_None)
+      return;
+   
+   switch(info->type)
    {
-      if(p->weapontype == weapon_pistol)
-         count = StrParam("%i/7", 7 - ACS_CheckInventory("Lith_PistolShotsFired"));
-      else if(p->weapontype == weapon_shotgun)
-         count = StrParam("%i/10", 10 - ACS_CheckInventory("Lith_GaussShotsFired"));
-      else if(p->weapontype == weapon_rifle)
-         count = StrParam("%i/40", 40 - ACS_CheckInventory("Lith_RifleShotsFired"));
-      else if(p->weapontype == weapon_launcher)
-         count = StrParam("%i", ACS_CheckInventory("Lith_RocketAmmo"));
-      else if(p->weapontype == weapon_plasma)
-         count = StrParam("%i", ACS_CheckInventory("Lith_PlasmaAmmo"));
-      else if(p->weapontype == weapon_bfg)
-         count = StrParam("%i", ACS_CheckInventory("Lith_CannonAmmo"));
-      
-      DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, TICSECOND);
-      
-      HudMessageF("BIGFONT", "%S", count);
-      HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, TICSECOND);
-      
-      DrawSpritePlain(ammotype, hid_ammotype, 320.2, 200.2, TICSECOND);
-      
-      break;
+   case weapon_pistol:   ammotype = "Lith_PistolShotsFired";   break;
+   case weapon_revolver: ammotype = "Lith_RevolverShotsFired"; break;
+   case weapon_shotgun:
+      if(p->upgrades[UPGR_GaussShotty].active)
+                         ammotype = "Lith_GaussShotsFired";
+      else return;                                          break;
+   case weapon_rifle:    ammotype = "Lith_RifleShotsFired"; break;
+   case weapon_launcher: ammotype = "Lith_RocketAmmo"; break;
+   case weapon_plasma:   ammotype = "Lith_PlasmaAmmo"; break;
+   case weapon_bfg:      ammotype = "Lith_CannonAmmo"; break;
    }
+   
+   if(info->ammotype == AT_Mag)
+   {
+      int max = ACS_GetMaxInventory(0, ammotype);
+      int cur = ACS_CheckInventory(ammotype);
+   
+      count = StrParam("%i/%i", max - cur, max);
    }
+   else if(info->ammotype == AT_Ammo)
+      count = StrParam("%i", ACS_CheckInventory(ammotype));
+   
+   DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, TICSECOND);
+   
+   HudMessageF("BIGFONT", "%S", count);
+   HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, TICSECOND);
+   
+   DrawSpritePlain((info->ammotype == AT_Mag) ? "H_A1" : "H_A2", hid_ammotype, 320.2, 200.2, TICSECOND);
 }
 
 //
@@ -89,14 +92,15 @@ static void HUD_Ammo(player_t *p)
 //
 static void HUD_Health(player_t *p)
 {
-   static __str weapongfx[weapon_max] = {
-      [weapon_unknown]  = "H_D27",
-      [weapon_pistol]   = "H_D24",
-      [weapon_shotgun]  = "H_D23",
-      [weapon_rifle]    = "H_D22",
-      [weapon_launcher] = "H_D21",
-      [weapon_plasma]   = "H_D25",
-      [weapon_bfg]      = "H_D26"
+   static __str weapongfx[SLOT_MAX] = {
+      [0] = "H_D27",
+      [1] = "H_D28",
+      [2] = "H_D24",
+      [3] = "H_D23",
+      [4] = "H_D22",
+      [5] = "H_D21",
+      [6] = "H_D25",
+      [7] = "H_D26"
    };
    
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, TICSECOND);
@@ -119,7 +123,7 @@ static void HUD_Health(player_t *p)
       }
    }
    
-   HUD_IndicatorLine(p, p->ticks, weapongfx[p->weapontype], hid_healthbg_fxS - (p->ticks % 32), 12);
+   HUD_IndicatorLine(p, p->ticks, weapongfx[p->curweapon->slot], hid_healthbg_fxS - (p->ticks % 32), 12);
 }
 
 //

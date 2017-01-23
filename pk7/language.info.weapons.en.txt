@@ -12,6 +12,8 @@ LITH_TXT_INFO_DESCR_Pistol =
    "reloaded easily, since you duct-taped a mag holder on the side. Features "
    "a small CB-Scope similar to that of most other Omakeda weapons.";
 
+LITH_TXT_INFO_SHORT_Revolver = "Revolver"; // Yep.
+
 LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
 LITH_TXT_INFO_TITLE_Shotgun = "Hiku Mk.2 Shotgun";
 LITH_TXT_INFO_DESCR_Shotgun =
@@ -32,9 +34,9 @@ LITH_TXT_INFO_DESCR_ShotgunUpgr =
    "This both removes the need to chamber rounds and gives a nice boost in "
    "fire rate. The gun is, essentially, completely different in use.";
 
-LITH_TXT_INFO_SHORT_Rifle = "Combat Rifle";
-LITH_TXT_INFO_TITLE_Rifle = "AllPoint 75-b Assault Rifle";
-LITH_TXT_INFO_DESCR_Rifle =
+LITH_TXT_INFO_SHORT_CombatRifle = "Combat Rifle";
+LITH_TXT_INFO_TITLE_CombatRifle = "AllPoint 75-b Assault Rifle";
+LITH_TXT_INFO_DESCR_CombatRifle =
    "AllPoint's 75-b model full-auto AR, produced for military and government "
    "enforcer use. Also the single best-selling weapon in AllPoint's "
    "catalog.\n\n"
@@ -56,9 +58,9 @@ LITH_TXT_INFO_DESCR_RifleUpgr =
    "partial CB-Scope, which unfortunately does little more than obstruct "
    "your view.";
 
-LITH_TXT_INFO_SHORT_Launcher = "Grenade Launcher";
-LITH_TXT_INFO_TITLE_Launcher = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";
-LITH_TXT_INFO_DESCR_Launcher =
+LITH_TXT_INFO_SHORT_GrenadeLauncher = "Grenade Launcher";
+LITH_TXT_INFO_TITLE_GrenadeLauncher = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";
+LITH_TXT_INFO_DESCR_GrenadeLauncher =
    "Boasting extreme speed, highly modifiable parts, and a sleek exterior "
    "design, the D.671 will eradicate any foe you put against it.\n\n"
    "After SYM4.3 put it on the market, this weapon was ultimately ignored "
@@ -80,9 +82,9 @@ LITH_TXT_INFO_DESCR_LauncherUpgr =
    "area, and the third and final mode hurls all of the grenades out of "
    "their rocket casings.";
 
-LITH_TXT_INFO_SHORT_Plasma = "Plasma Rifle";
-LITH_TXT_INFO_TITLE_Plasma = "AllPoint 68-n Plasma Rifle";
-LITH_TXT_INFO_DESCR_Plasma =
+LITH_TXT_INFO_SHORT_PlasmaRifle = "Plasma Rifle";
+LITH_TXT_INFO_TITLE_PlasmaRifle = "AllPoint 68-n Plasma Rifle";
+LITH_TXT_INFO_DESCR_PlasmaRifle =
    "In 1025 NE a paramilitary group commissioned Maxim-Danil Defense Org to "
    "make several high-grade weapons. After MDDO went defunct, their assets "
    "were sold to several companies.\n\n"
@@ -106,9 +108,9 @@ LITH_TXT_INFO_DESCR_PlasmaUpgr =
    "only to private investors for quite some time now, but thankfully, your "
    "employer is one of them.";
 
-LITH_TXT_INFO_SHORT_Cannon = "Omega Cannon";
-LITH_TXT_INFO_TITLE_Cannon = "$LITH_TXT_INFO_SHORT_Cannon";
-LITH_TXT_INFO_DESCR_Cannon =
+LITH_TXT_INFO_SHORT_BFG9000 = "Omega Cannon";
+LITH_TXT_INFO_TITLE_BFG9000 = "$LITH_TXT_INFO_SHORT_Cannon";
+LITH_TXT_INFO_DESCR_BFG9000 =
    "This weapon was developed in another dimensional plane, where magic is "
    "still usable. Employs an extremely complex magical pattern buffer that "
    "takes in condensed demonic energy and spits out whatever it pleases.\n\n"

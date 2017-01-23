@@ -130,7 +130,7 @@ static void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", f, x); HudMessagePlain(g->hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND)
    
    HudMessageF("SMALLFNT", "\Cj%S", p->name); HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
-   Stat(0,  "Weapons Held",      "%i",   p->weaponsheld);
+   Stat(0,  "Weapons Found",     "%i",   p->weaponsheld);
    Stat(1,  "Health Used",       "%li",  p->healthused);
    Stat(2,  "Health Sum",        "%li",  p->healthsum);
    Stat(3,  "Score Used",        "%lli", p->scoreused);

@@ -38,6 +38,9 @@ LITH_TXT_SHOP_DESCR_RadSuit =
    "A radiation shielding suit which lets you walk through hazardous "
    "materials.";
 
+LITH_TXT_SHOP_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
+LITH_TXT_SHOP_DESCR_Revolver = "A powerful handgun. Holds 6 bullets.";
+
 /*
 LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";
 LITH_TXT_SHOP_DESCR_DivSigil = "A mistake of the universe.";

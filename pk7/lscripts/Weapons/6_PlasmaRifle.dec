@@ -72,7 +72,7 @@ actor Lith_PlasmaLaze
 
 actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
 {
-   Tag "$LITH_TXT_INFO_SHORT_Plasma"
+   Tag "$LITH_TXT_INFO_SHORT_PlasmaRifle"
    Weapon.UpSound "weapons/plasma/draw"
    Weapon.SlotNumber 6
    

@@ -274,9 +274,9 @@ actor Lith_Shotgun : Lith_Weapon replaces Shotgun
       SHTG I 1
       SHTG H 3
       SHTG G 1 offset(-13, 32)
-      SHTG G 1 offset(0, 32)
+      SHTG G 1 offset(1, 32)
       SHTG F 1 offset(-9, 32)
-      SHTG F 1 offset(0, 32)
+      SHTG F 1 offset(1, 32)
       SHTG A 3
       SHTG A 7 A_ReFire
       goto FireFinish

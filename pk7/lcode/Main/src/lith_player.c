@@ -17,27 +17,12 @@ player_t players[MAX_PLAYERS];
 
 
 //----------------------------------------------------------------------------
-// Static Objects
-//
-
-static __str const weaponclasses[weapon_max] = {
-   [weapon_pistol]   = "Lith_Pistol",
-   [weapon_shotgun]  = "Lith_Shotgun",
-   [weapon_rifle]    = "Lith_CombatRifle",
-   [weapon_launcher] = "Lith_GrenadeLauncher",
-   [weapon_plasma]   = "Lith_PlasmaRifle",
-   [weapon_bfg]      = "Lith_BFG9000",
-};
-
-
-//----------------------------------------------------------------------------
 // Static Functions
 //
 
 [[__call("ScriptS")]] static void Lith_PlayerUpdateData(player_t *p);
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
 [[__call("ScriptS")]] static void Lith_ResetPlayer(player_t *p);
-static void Lith_GetWeaponType(player_t *p);
 static void Lith_GetArmorType(player_t *p);
 [[__call("ScriptS")]] static void Lith_PlayerDamageBob(player_t *p);
 [[__call("ScriptS")]] static void Lith_PlayerView(player_t *p);
@@ -392,8 +377,8 @@ static void Lith_ResetPlayer(player_t *p)
    {
       p->score += 0xFFFFFFFFFFFFFFFFll;
       for(int i = weapon_min; i < weapon_max; i++)
-         if(weaponclasses[i] != null)
-            ACS_GiveInventory(weaponclasses[i], 1);
+         if(weaponinfo[i].class != null)
+            ACS_GiveInventory(weaponinfo[i].class, 1);
       
       for(int i = 0; i < UPGR_MAX; i++)
          if(!p->upgrades[i].owned)
@@ -403,25 +388,6 @@ static void Lith_ResetPlayer(player_t *p)
    }
    
    Lith_UnlockBIPPage(&p->bip, "Pistol");
-}
-
-//
-// Lith_GetWeaponType
-//
-// Update information on what kind of weapons we have.
-//
-static void Lith_GetWeaponType(player_t *p)
-{
-   p->weapontype = weapon_unknown;
-   p->weapons = 0;
-   for(int i = weapon_min; i < weapon_max; i++)
-   {
-      if(ACS_CheckInventory(weaponclasses[i])) p->weapons |= 1 << i;
-      else                                     p->weapons &= ~(1 << i);
-      
-      if(p->weapontype == weapon_unknown && ACS_StrICmp(p->weaponclass, weaponclasses[i]) == 0)
-         p->weapontype = i;
-   }
 }
 
 //
@@ -439,6 +405,8 @@ static void Lith_GetArmorType(player_t *p)
       p->armortype = armor_green;
    else if(Check(BlueArmor) || Check(BlueArmorForMegasphere) || Check(EnchantedShield))
       p->armortype = armor_blue;
+   else if(Check(None))
+      p->armortype = armor_none;
    else
       p->armortype = armor_unknown;
    

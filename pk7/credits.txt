@@ -49,6 +49,7 @@ RWTerma
 Sgt. Shivers
    Shooting my shootyguns
    Shotgun sprites
+   Revolver sprites (from Powerslave originally)
 
 Shadowlink226
    Halo 3 sound rip

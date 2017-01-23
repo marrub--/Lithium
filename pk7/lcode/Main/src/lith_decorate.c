@@ -64,7 +64,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    case pdata_upgrade:        return p->upgrades[permutation].active;
    case pdata_rifle_firemode: return p->riflefiremode;
    case pdata_buttons:        return p->buttons;
-   case pdata_has_sigil:      return p->sigil.acquired;
+// case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_weapon_zoom:    return bitsk(ACS_GetUserCVarFixed(p->number, "lith_weapons_zoomfactor"));
    }
    
@@ -75,26 +75,6 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
 fixed Lith_Velocity(fixed velx, fixed vely)
 {
    return pymagk(velx, vely);
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_PickupScore(int user_pickupparm, int user_spritetid)
-{
-   if(ACS_GetCVar("sv_weaponstay")) return true;
-   
-   ACS_SetActivatorToTarget(0);
-   
-   player_t *p = Lith_LocalPlayer;
-   
-   if(!(p->weapons & (1 << user_pickupparm)))
-      return true;
-   
-   Lith_Log(p, "> You sold the weapon for Score.");
-   Lith_GiveScore(p, 11100 * user_pickupparm);
-   
-   ACS_Thing_Remove(user_spritetid);
-   
-   return false;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

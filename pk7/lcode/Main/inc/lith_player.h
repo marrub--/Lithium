@@ -1,7 +1,6 @@
 #ifndef LITH_PLAYER_H
 #define LITH_PLAYER_H
 
-#include "lith_weapons.h"
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
@@ -9,6 +8,7 @@
 #include "lith_bip.h"
 #include "lith_log.h"
 #include "lith_list.h"
+#include "lith_weaponinfo.h"
 
 #define MAX_PLAYERS 8
 #define HUDSTRS_MAX 20
@@ -74,6 +74,7 @@ typedef struct keycards_s
 // edit 7/5/2016: JESUS TAKE THE WHEEL
 // edit 3/1/2017: help
 // edit 6/1/2017: there's so much data that I had to split it
+// edit 23/1/2017: D E S T R O Y
 typedef struct player_s
 {
    // Status data
@@ -85,6 +86,7 @@ typedef struct player_s
    int cameratid;
    long ticks;
    loginfo_t loginfo;
+   __str name;
    
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
@@ -107,7 +109,7 @@ typedef struct player_s
    float extryaw;
    
    // 🌌 「÷」 0
-   sigil_t sigil;
+   // sigil_t sigil;
    
    // Score
    score_t scoreaccum;
@@ -138,22 +140,20 @@ typedef struct player_s
    
    unsigned long long unitstravelled;
    
-   // Type / class
-   __str name;
-   
-   __str weaponclass;
-   __str armorclass;
-   
-   int weapontype;
-   int armortype;
-   
    // Weapons
    int riflefiremode;
    list_t hudstrlist;
    
    // Inventory
+   bool hasweapon[weapon_max];
+   bool hasslot[SLOT_MAX];
+   weaponinfo_t const *curweapon;
+   
+   __str weaponclass;
+   __str armorclass;
+   
+   int armortype;
    keycards_t keys;
-   int weapons;
    
    bool berserk : 1;
 } player_t;

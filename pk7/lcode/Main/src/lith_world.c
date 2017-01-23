@@ -16,6 +16,7 @@ bool Lith_MapVariable mapinit;
 //
 
 [[__extern("ACS"), __call("LangACS")]] void Lith_SetupBalance(void);
+void Lith_SetupWeaponsTables(void);
 
 
 //----------------------------------------------------------------------------
@@ -27,9 +28,11 @@ static void Lith_World(void)
 {
    int prevsecrets = 0;
    
-   mapinit = true;
    Lith_SetupBalance();
+   Lith_SetupWeaponsTables();
    ACS_SetAirControl(0.77);
+   
+   mapinit = true;
    
    for(;;)
    {

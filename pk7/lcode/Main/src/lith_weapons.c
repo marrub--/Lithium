@@ -4,63 +4,131 @@
 
 #include <math.h>
 
+#define ValidateWeapon(parm) (parm < weapon_max && parm >= weapon_min)
+
+
+//----------------------------------------------------------------------------
+// Extern Objects
+//
+
+weaponinfo_t weaponinfo[weapon_max] = {
+// {S, "Type-----------", "Pickup Sound-----------", AT_Type},
+   {0, null,              "MMMMHMHMMMHMMM"},
+   {1, "Fist",            "MMMMHMHMMMHMMM"},
+   {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag},
+   {2, "Revolver",        "weapons/revolver/pickup", AT_Mag},
+   {3, "Shotgun",         "weapons/shotgun/pickup",  AT_Mag},
+   {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag},
+   {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo},
+   {6, "PlasmaRifle",     "weapons/plasma/pickup",   AT_Ammo},
+   {7, "BFG9000",         "weapons/cannon/pickup",   AT_Ammo},
+};
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_SetupWeaponsTables
+//
+void Lith_SetupWeaponsTables(void)
+{
+   for(int i = 0; i < weapon_max; i++)
+   {
+      weaponinfo[i].type = i;
+      weaponinfo[i].class = StrParam("Lith_%S", weaponinfo[i].name);
+   }
+}
+
+//
+// Lith_GetWeaponType
+//
+// Update information on what kind of weapons we have.
+//
+void Lith_GetWeaponType(player_t *p)
+{
+   weaponinfo_t *weapon = null;
+   
+   for(int i = 0; i < SLOT_MAX; i++)
+      p->hasslot[i] = false;
+   
+   for(int i = weapon_min; i < weapon_max; i++)
+   {
+      weaponinfo_t *info = &weaponinfo[i];
+      
+      p->hasslot[info->slot] |= p->hasweapon[i] = ACS_CheckInventory(info->class);
+      
+      if(!weapon && ACS_StrICmp(p->weaponclass, info->class) == 0)
+         weapon = info;
+   }
+   
+   p->curweapon = weapon ? weapon : &weaponinfo[weapon_unknown];
+}
+
+
 //----------------------------------------------------------------------------
 // Scripts
 //
 
+//
+// Lith_WeaponPickup
+//
 [[__call("ScriptI"), __address(14242), __extern("ACS")]]
-void Lith_WeaponPickup(int user_pickupparm, int user_tid)
+void Lith_WeaponPickup(int parm, int tid)
 {
-   static __str pickupsounds[] = {
-      [weapon_unknown]  = "MMMMHMHMMMHMMM",
-      [weapon_pistol]   = "weapons/pistol/pickup",
-      [weapon_shotgun]  = "weapons/shotgun/pickup",
-      [weapon_rifle]    = "weapons/rifle/pickup",
-      [weapon_launcher] = "weapons/rocket/pickup",
-      [weapon_plasma]   = "weapons/plasma/pickup",
-      [weapon_bfg]      = "weapons/cannon/pickup"
-   };
-   
    player_t *p = Lith_LocalPlayer;
    
-   if(p->weapons & (1 << user_pickupparm))
+   if(!ValidateWeapon(parm) || p->hasweapon[parm])
       return;
+   
+   weaponinfo_t *info = &weaponinfo[parm];
    
    p->weaponsheld++;
    
    if(!ACS_GetCVar("sv_weaponstay"))
-      ACS_Thing_Remove(user_tid);
+      ACS_Thing_Remove(tid);
    
    if(!p->upgrades[UPGR_7777777].active)
-      ACS_LocalAmbientSound(pickupsounds[user_pickupparm], 127);
+      ACS_LocalAmbientSound(info->pickupsound, 127);
    else
       ACS_LocalAmbientSound("marathon/pickup", 127);
    
-   switch(user_pickupparm)
+   if(info->name) Lith_UnlockBIPPage(&p->bip, info->name);
+   
+   switch(parm)
    {
-   case weapon_pistol:   Lith_UnlockBIPPage(&p->bip, "Pistol");   break;
-   case weapon_shotgun:  Lith_UnlockBIPPage(&p->bip, "Shotgun");  break;
-   case weapon_rifle:    Lith_UnlockBIPPage(&p->bip, "Rifle");    break;
-   case weapon_launcher:
-      ACS_GiveInventory("Lith_RocketAmmo", 20);
-      Lith_UnlockBIPPage(&p->bip, "Launcher");
-      break;
-   case weapon_plasma:
-      ACS_GiveInventory("Lith_PlasmaAmmo", 2000);
-      Lith_UnlockBIPPage(&p->bip, "Plasma");
-      break;
-   case weapon_bfg:
-      ACS_GiveInventory("Lith_CannonAmmo", 2);
-      Lith_UnlockBIPPage(&p->bip, "Cannon");
-      break;
+   case weapon_launcher: ACS_GiveInventory("Lith_RocketAmmo", 10);   break;
+   case weapon_plasma:   ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
+   case weapon_bfg:      ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
    }
    
-   if(ACS_GetCVar("lith_sv_stupidpickups"))
-      Lith_StupidPickup(p, user_pickupparm);
-   else
-      Lith_IntelligentPickup(p, user_pickupparm);
+   Lith_PickupMessage(p, info);
 }
 
+//
+// Lith_PickupScore
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_PickupScore(int parm, int spritetid)
+{
+   ACS_SetActivatorToTarget(0);
+   player_t *p = Lith_LocalPlayer;
+   
+   if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !p->hasweapon[parm])
+      return true;
+   
+   Lith_Log(p, "> You sold the weapon for Score.");
+   Lith_GiveScore(p, 11100 * parm);
+   
+   ACS_Thing_Remove(spritetid);
+   
+   return false;
+}
+
+//
+// Lith_CircleSpread
+//
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
@@ -82,6 +150,9 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       return bitsk(P);
 }
 
+//
+// Lith_PunctuatorFire
+//
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PunctuatorFire(void)
 {

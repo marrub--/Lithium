@@ -34,7 +34,7 @@ actor Lith_Fist : Lith_Weapon replaces Fist // why would you pick up a fist
       Goto Ready
    Spawn:
       FIST A 0 // don't do this
-      FIST A 0 A_SetUserVar(user_pickupparm, weapon_unknown)
+      FIST A 0 A_SetUserVar(user_pickupparm, weapon_fist)
       goto SpawnLoop // pls
    }
 }

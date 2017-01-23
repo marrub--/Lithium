@@ -24,6 +24,7 @@ static shopdef_t shopdefs[] = {
    {"RocketAmmo",   9000      ,   5, "Lith_RocketAmmo"      },
    {"PlasmaAmmo",   75750     ,1000, "Lith_PlasmaAmmo"      },
    {"CannonAmmo",   113625    ,   1, "Lith_CannonAmmo"      },
+   {"Revolver",     1000000   ,   1, "Lith_Revolver"        },
    {"Allmap",       100000    ,   1, "Allmap"               },
    {"Berserk",      150000    ,   1, "Berserk"              },
    {"BlurSphere",   70000     ,   1, "BlurSphere"           },

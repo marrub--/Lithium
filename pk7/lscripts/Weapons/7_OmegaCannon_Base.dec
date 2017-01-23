@@ -1,6 +1,6 @@
 actor Lith_Weapon_OmegaCannon_Base : Lith_Weapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Cannon"
+   Tag "$LITH_TXT_INFO_SHORT_BFG9000"
    Weapon.UpSound "weapons/cannon/draw"
    Weapon.SlotNumber 7
    Weapon.BobStyle InverseSmooth

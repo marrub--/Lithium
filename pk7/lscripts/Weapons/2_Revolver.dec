@@ -1,0 +1,74 @@
+actor Lith_RevolverShotsFired : Inventory
+{
+   Inventory.MaxAmount 6
+}
+
+actor Lith_Revolver : Lith_Weapon
+{
+   Tag "$LITH_TXT_INFO_SHORT_Revolver"
+   Weapon.SlotNumber 2
+   Weapon.BobSpeed 2.5
+   Weapon.BobRangeX 0.2
+   Weapon.BobRangeY 0.3
+   Weapon.UpSound "weapons/revolver/draw"
+   
+   +WEAPON.NOAUTOFIRE
+   
+   states
+   {
+   Ready:
+      REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+      wait
+   Deselect:
+      REVO AAA 0 A_Lower
+      REVO A 1
+      loop
+   Select:
+      REVO AAA 0 A_Raise
+      REVO A 1
+      loop
+   Fire:
+      TNT1 A 0 A_JumpIfInventory("Lith_RevolverShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_RevolverShotsFired", 1)
+      TNT1 A 0 A_AlertMonsters
+      TNT1 A 0 A_FireBullets(0, 0, -1, 45)
+      TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)
+      TNT1 A 0 A_PlaySound("weapons/revolver/fire", CHAN_WEAPON)
+      REVO B 1 bright A_WeaponReady(LITH_BOBONLY)
+      REVO CD 1 bright A_WeaponReady(LITH_BOBONLY)
+      REVO EFD 2 A_WeaponReady(LITH_BOBONLY)
+      REVO AAA 1 A_WeaponReady(WRF_ALLOWRELOAD)
+      goto Ready
+   Reload:
+      TNT1 A 0 A_JumpIfInventory("Lith_RevolverShotsFired", 1, 1)
+      goto Ready
+      REVO A 0 A_PlaySound("weapons/revolver/reload", 7)
+      REVO A 1 offset(0, 33)
+      REVO A 1 offset(0, 34)
+      REVO A 1 offset(0, 35)
+      REVO A 1 offset(-1, 37)
+      REVO A 1 offset(-4, 40)
+      REVO G 1 offset(-7, 42)
+      REVO G 1 offset(-9, 48)
+      REVO H 1 offset(-11, 50)
+      REVO H 1 offset(-12, 55)
+      REVO I 1 offset(-13, 64)
+      REVO I 1 offset(-13, 69)
+      TNT1 A 20
+      TNT1 A 0 A_TakeInventory("Lith_RevolverShotsFired", 999)
+      REVO J 1 offset(2, 64)
+      REVO J 1 offset(2, 55)
+      REVO K 1 offset(2, 50)
+      REVO K 1 offset(2, 45)
+      REVO K 1 offset(1, 40)
+      REVO A 1 offset(1, 35)
+      REVO A 1 offset(1, 33)
+      REVO A 1 offset(1, 32)
+      goto Ready
+   Spawn:
+      REVL A 0
+      REVL A 0 A_SetUserVar(user_pickupparm, weapon_revolver)
+      goto SpawnLoop
+   }
+}
+

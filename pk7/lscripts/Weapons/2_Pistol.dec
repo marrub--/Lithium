@@ -1,6 +1,6 @@
 actor Lith_PistolShotsFired : Inventory
 {
-   Inventory.MaxAmount 7
+   Inventory.MaxAmount 14
 }
 
 actor Lith_PistolScopedToken : Inventory

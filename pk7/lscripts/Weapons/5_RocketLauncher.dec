@@ -17,7 +17,7 @@ actor Lith_RocketAltMode : Inventory
 
 actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
 {
-   Tag "$LITH_TXT_INFO_SHORT_Launcher"
+   Tag "$LITH_TXT_INFO_SHORT_GrenadeLauncher"
    Weapon.UpSound "weapons/rocket/draw"
    Weapon.SlotNumber 5
    Weapon.BobStyle Smooth

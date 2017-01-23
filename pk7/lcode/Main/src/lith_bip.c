@@ -45,18 +45,18 @@ void Lith_PlayerInitBIP(player_t *p)
    ForCategory()
       Lith_LinkDefault(&bip->infogr[categ]);
    
-   AddToBIP(bip, BIPC_WEAPONS, "Pistol",       Unlocks("Omakeda"));
-   AddToBIP(bip, BIPC_WEAPONS, "Shotgun",      Unlocks("Omakeda"));
-   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",  Unlocks("Shotgun", "AOF", "DurlaPrime"));
-   AddToBIP(bip, BIPC_WEAPONS, "Rifle",        Unlocks("AllPoint"));
-   AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",    Unlocks("Rifle"));
-   AddToBIP(bip, BIPC_WEAPONS, "Launcher",     Unlocks("Sym43"));
-   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr", Unlocks("Launcher", "UnrealArms"));
-   AddToBIP(bip, BIPC_WEAPONS, "Plasma",       Unlocks("AllPoint", "MDDO"));
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",   Unlocks("Plasma"));
-   AddToBIP(bip, BIPC_WEAPONS, "Cannon",       Unlocks("Cid"));
-   AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",   Unlocks("Cannon", "SuperDimension"));
-   AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",   Unlocks("Cannon"));
+   AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
+   AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
+   AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
+   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
+   AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
+   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
+   AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
+   AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
    
    AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
@@ -68,7 +68,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
    AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
    AddToBIP(bip, BIPC_PLACES, "Earth");
-   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("Cannon"));
+   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("BFG9000"));
    
    AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
    AddToBIP(bip, BIPC_CORPORATIONS, "AOF");

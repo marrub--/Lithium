@@ -54,6 +54,7 @@ actor Lith_MonsterHax
 #include "lscripts/Weapons/0_Base.dec"
 #include "lscripts/Weapons/1_Fist.dec"
 #include "lscripts/Weapons/2_Pistol.dec"
+#include "lscripts/Weapons/2_Revolver.dec"
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/4_CombatRifle.dec"
 #include "lscripts/Weapons/5_RocketLauncher.dec"

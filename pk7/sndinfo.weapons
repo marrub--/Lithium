@@ -9,6 +9,14 @@ weapons/pistol/pickup  lsounds/Pistol/Pickup.flac   // Fallout 4
 $alias weapons/pistol/draw weapons/pistol/pickup
 
 //
+// Revolver
+//
+weapons/revolver/fire   lsounds/Revolver/Fire.flac   // Killing Floor
+weapons/revolver/draw   lsounds/Revolver/Draw.flac   // 〃
+weapons/revolver/pickup lsounds/Revolver/Pickup.flac // 〃
+weapons/revolver/reload lsounds/Revolver/Reload.flac // Serious Sam: The First Encounter HD
+
+//
 // Shotgun
 //
 weapons/shotgun/fire    lsounds/Shotgun/FireFull.flac  // Killing Floor, General 6000

@@ -17,14 +17,12 @@ struct pickupname_s
 };
 
 static __str names_unknown[] = {
-   "Unknown Weapon",
    "Literally What The Fuck",
    "How Even",
    "Why Are You Doing This"
 };
 
 static __str names_pistol[] = {
-   "Pistol",
    "Postil",
    "Peestol",
    "Pinstool",
@@ -35,8 +33,14 @@ static __str names_pistol[] = {
    "hurty peestal"
 };
 
+static __str names_revolver[] = {
+   "Rvleolr",
+   "Revolrvo",
+   "Volvo",
+   "Rebolber :=DD"
+};
+
 static __str names_shotgun[] = {
-   "Shotgun",
    "Shtegnu",
    "Shartgun",
    "Shitgun",
@@ -45,7 +49,6 @@ static __str names_shotgun[] = {
 };
 
 static __str names_rifle[] = {
-   "Combat Rifle",
    "Cmobta Riffel",
    "Combit Raffle",
    "Combat Rifl",
@@ -54,14 +57,12 @@ static __str names_rifle[] = {
 };
 
 static __str names_launcher[] = {
-   "Grenade Launcher",
    "Ruckebt Laurence",
    "Rawket Lawnchair",
    "Rokkit Luncher"
 };
 
 static __str names_plasma[] = {
-   "Plasma Rifle",
    "Spalmo Rinfer",
    "Layzuh Beem",
    "Shooty-pew-pew Gun",
@@ -69,11 +70,22 @@ static __str names_plasma[] = {
 };
 
 static __str names_bfg[] = {
-   "Omega Cannon",
    "Biffgee Nintendo",
    "BFG 8000",
    "Biffug 9999",
    "Bilmap Frignarp Gnu 9"
+};
+
+static struct pickupname_s const pickupnames[weapon_max] = {
+   [weapon_unknown]  = name(names_unknown),
+   [weapon_fist]     = name(names_unknown),
+   [weapon_pistol]   = name(names_pistol),
+   [weapon_revolver] = name(names_revolver),
+   [weapon_shotgun]  = name(names_shotgun),
+   [weapon_rifle]    = name(names_rifle),
+   [weapon_launcher] = name(names_launcher),
+   [weapon_plasma]   = name(names_plasma),
+   [weapon_bfg]      = name(names_bfg)
 };
 
 // Flags
@@ -165,20 +177,10 @@ static __str uncertainty[] = {
    "Yes, no, maybe. I don't know."
 };
 
-static struct pickupname_s const pickupnames[weapon_max] = {
-   [weapon_unknown]  = name(names_unknown),
-   [weapon_pistol]   = name(names_pistol),
-   [weapon_shotgun]  = name(names_shotgun),
-   [weapon_rifle]    = name(names_rifle),
-   [weapon_launcher] = name(names_launcher),
-   [weapon_plasma]   = name(names_plasma),
-   [weapon_bfg]      = name(names_bfg)
-};
-
 static size_t const pickupfmtnum   = sizeof(pickupfmt)   / sizeof(*pickupfmt);
 static size_t const uncertaintynum = sizeof(uncertainty) / sizeof(*uncertainty);
 
-void Lith_StupidPickup(player_t *p, int weapon)
+static void Lith_StupidPickup(player_t *p, int weapon)
 {
    struct pickupname_s const *names = &pickupnames[weapon];
    
@@ -202,9 +204,14 @@ void Lith_StupidPickup(player_t *p, int weapon)
       Lith_Log(p, fmt, names->ptr[iname]);
 }
 
-void Lith_IntelligentPickup(player_t *p, int weapon)
+void Lith_PickupMessage(player_t *p, weaponinfo_t *info)
 {
-   Lith_Log(p, StrParam("> %S", pickupfmt[0].fmt), pickupnames[weapon].ptr[0]);
+   if(ACS_GetCVar("lith_sv_stupidpickups"))
+      Lith_StupidPickup(p, info->type);
+   else if(info->name)
+      Lith_Log(p, "> You got the %LS!", StrParam("LITH_TXT_INFO_SHORT_%S", info->name));
+   else
+      Lith_Log(p, "> Acquired impossible object");
 }
 
 // EOF
