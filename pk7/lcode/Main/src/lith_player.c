@@ -4,6 +4,7 @@
 #include "lith_hudid.h"
 #include "lith_cbi.h"
 #include "lith_version.h"
+#include "lith_world.h"
 
 #include <math.h>
 
@@ -62,6 +63,8 @@ static void HUD_Scope(player_t *p);
 static void Lith_PlayerEntry(void)
 {
    player_t *p = Lith_LocalPlayer;
+   
+   while(!mapinit) ACS_Delay(1);
    
    Lith_ResetPlayer(p);
    Lith_PlayerLogEntry(p);

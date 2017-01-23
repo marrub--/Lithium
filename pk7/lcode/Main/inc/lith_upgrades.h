@@ -45,11 +45,11 @@ typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
 typedef struct upgradeinfo_s
 {
    __str name;
-   score_t cost;
    __str bipunlock;
    int category;
    fixed scoreadd;
    int wepclass;
+   score_t cost;
    
    upgr_cb_t        Activate;
    upgr_cb_t        Deactivate;

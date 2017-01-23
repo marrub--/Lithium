@@ -66,13 +66,13 @@ MAIN_OUTPUT=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 
 all: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
 
-## bin/lith*.bin
+## acs/*.bin
 
 $(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
 	$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
 
 $(BIN)/lithmain.bin: $(MAIN_OUTPUT)
-	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
+	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib -ltrbohtlr
 
 ## ir/*.ir
 
