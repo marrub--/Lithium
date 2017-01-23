@@ -1,4 +1,4 @@
-actor Lith_Weapon_OmegaCannon : Lith_Weapon_OmegaRailgun replaces BFG9000
+actor Lith_BFG9000 : Lith_Weapon_OmegaRailgun replaces BFG9000
 {
    -WEAPON.CHEATNOTWEAPON
    
@@ -91,6 +91,7 @@ actor Lith_CannonBall
    +BOUNCEONACTORS
    +BOUNCEAUTOOFFFLOORONLY
    +MTHRUSPECIES
+   +EXPLODEONWATER
    -NOGRAVITY
    
    var int user_angle;
