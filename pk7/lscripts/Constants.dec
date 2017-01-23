@@ -33,6 +33,16 @@ const int X_BT_USER2      = 0x00400000;
 const int X_BT_USER3      = 0x00800000;
 const int X_BT_USER4      = 0x01000000;
 
+// Ammo values
+const int AmmoAmt_Rocket        = 1;
+const int AmmoAmt_RocketBox     = 5;
+const int AmmoAmt_Cell          = 500;
+const int AmmoAmt_CellPack      = 1500;
+const int AmmoAmt_CannonPack    = 1;
+const int AmmoAmt_RocketBackpk  = 20;
+const int AmmoAmt_CellBackpk    = 2000;
+const int AmmoAmt_CannonBackpk  = 4;
+
 // Score values
 const int Score_Clip      = 1100;
 const int Score_ClipBox   = 5100;

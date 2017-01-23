@@ -60,6 +60,7 @@ actor Lith_SwordHitter
    
    Projectile
    +MTHRUSPECIES
+   +EXPLODEONWATER
    +RIPPER
    
    var int user_trailstep;
@@ -111,6 +112,7 @@ actor Lith_SwordBlitter
    
    Projectile
    +NOBLOCKMAP
+   +EXPLODEONWATER
    
    states
    {

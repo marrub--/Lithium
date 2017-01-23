@@ -1,0 +1,24 @@
+#include "lith_balance_common.acs"
+
+function void Lith_SetupBalance(void)
+{
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_CyberLegs,   1520000);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_ReactArmor,  2700200);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_ReactArmor2, 2500200);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_DefenseNuke, 580030);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_Adrenaline,  1801000);
+   
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_GaussShotty, 1079430);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_RifleModes,  340100);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_ChargeRPG,   1550000);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_PlasLaser,   2300000);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_PunctCannon, 5100700);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_OmegaRail,   5800100);
+   
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_TorgueMode,  80000000);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_7777777,     82354300);
+   ACS_NamedExecuteWithResult("Lith_SetUpgrCost", UPGR_lolsords,    1000000);
+}
+
+// EOF
+

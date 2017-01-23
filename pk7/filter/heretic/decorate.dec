@@ -1,0 +1,304 @@
+actor Lith_Heretic_Blaster    : RandomSpawner replaces Blaster    {DropItem "Lith_CombatRifle", 255}
+actor Lith_Heretic_Crossbow   : RandomSpawner replaces Crossbow   {DropItem "Lith_Shotgun", 255}
+actor Lith_Heretic_GoldWand   : RandomSpawner replaces GoldWand   {DropItem "Lith_Pistol", 255}
+actor Lith_Heretic_Mace       : RandomSpawner replaces Mace       {DropItem "Lith_PlasmaRifle", 255}
+actor Lith_Heretic_PhoenixRod : RandomSpawner replaces PhoenixRod {DropItem "Lith_GrenadeLauncher", 255}
+actor Lith_Heretic_SkullRod   : RandomSpawner replaces SkullRod   {DropItem "Lith_BFG9000", 255}
+actor Lith_Heretic_Staff      : RandomSpawner replaces Staff      {DropItem "Lith_Fist", 255}
+
+actor Lith_Heretic_ArtiInvisibility : Lith_BlurSphereReplacer replaces ArtiInvisibility
+{
+}
+
+actor Lith_Heretic_BlasterAmmo : Lith_ScoreItem replaces BlasterAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip)
+   SpawnLoop:
+      AMB1 ABC 4
+      loop
+   }
+}
+
+actor Lith_Heretic_BlasterHefty : Lith_ScoreItem replaces BlasterHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox)
+   SpawnLoop:
+      AMB2 ABC 4
+      loop
+   }
+}
+
+actor Lith_Heretic_CrossbowAmmo : Lith_ScoreItem replaces CrossbowAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Shell)
+      AMC1 A -1
+      stop
+   }
+}
+
+actor Lith_Heretic_CrossbowHefty : Lith_ScoreItem replaces CrossbowHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ShellBox)
+   SpawnLoop:
+      AMC2 ABC 5
+      loop
+   }
+}
+
+actor Lith_Heretic_GoldWandAmmo : Lith_ScoreItem replaces GoldWandAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip)
+      AMG1 A -1
+      stop
+   }
+}
+
+actor Lith_Heretic_GoldWandHefty : Lith_ScoreItem replaces GoldWandHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox)
+   SpawnLoop:
+      AMG2 ABC 4
+      loop
+   }
+}
+
+actor Lith_Heretic_MaceAmmo : Lith_ScoreItem replaces MaceAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip * 1.2)
+      AMM1 A -1
+      stop
+   }
+}
+
+actor Lith_Heretic_MaceHefty : Lith_ScoreItem replaces MaceHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox * 1.2)
+      AMM2 A -1
+      stop
+   }
+}
+
+actor Lith_Heretic_PhoenixRodAmmo : Lith_ScoreItem replaces PhoenixRodAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Rocket)
+      TNT1 A 0 A_GiveInventory("Lith_RocketAmmo", AmmoAmt_Rocket)
+   SpawnLoop:
+      AMP1 ABC 4
+      stop
+   }
+}
+
+actor Lith_Heretic_PhoenixRodHefty : Lith_ScoreItem replaces PhoenixRodHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_RocketBox)
+      TNT1 A 0 A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBox)
+   SpawnLoop:
+      AMP2 ABC 4
+      stop
+   }
+}
+
+actor Lith_Heretic_SkullRodAmmo : Lith_ScoreItem replaces SkullRodAmmo
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Cell)
+      TNT1 A 0 A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_Cell)
+   SpawnLoop:
+      AMS1 AB 5
+      stop
+   }
+}
+
+actor Lith_Heretic_SkullRodHefty : Lith_ScoreItem replaces SkullRodHefty
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_CellPack)
+      TNT1 A 0 A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellPack)
+      TNT1 A 0 A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonPack)
+   SpawnLoop:
+      AMS2 AB 5
+      stop
+   }
+}
+
+actor Lith_Heretic_Key : Lith_CustomInventory
+{
+   +NOTDMATCH
+   Radius 20
+   Height 16
+   Inventory.PickupSound "misc/k_pkup"
+}
+
+actor Lith_Heretic_KeyBlue : Lith_Heretic_Key replaces KeyBlue
+{
+   states
+   {
+   Spawn:
+      BKYY ABCDEFGHIJ 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_bluecard)
+      TNT1 A 0 A_GiveInventory("KeyBlue")
+      stop
+   }
+}
+
+actor Lith_Heretic_KeyGreen : Lith_Heretic_Key replaces KeyGreen
+{
+   states
+   {
+   Spawn:
+      AKYY ABCDEFGHIJ 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_redcard)
+      TNT1 A 0 A_GiveInventory("KeyGreen")
+      stop
+   }
+}
+
+actor Lith_Heretic_KeyYellow : Lith_Heretic_Key replaces KeyYellow
+{
+   states
+   {
+   Spawn:
+      CKYY ABCDEFGHI 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_yellowcard)
+      TNT1 A 0 A_GiveInventory("KeyYellow")
+      stop
+   }
+}
+
+actor Lith_Heretic_BagOfHolding : Lith_ScoreItem replaces BagOfHolding
+{
+   +COUNTITEM
+   +FLOATBOB
+   
+   states
+   {
+   Spawn:
+      BAGH A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Backpack)
+      BAGH A 0 A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk)
+      BAGH A 0 A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk)
+      BAGH A 0 A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk)
+   SpawnLoop:
+      BAGH ABCDECB 5 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_Discount", 0)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_backpack)
+      goto Super::Pickup
+   }
+}
+
+actor Lith_Heretic_CrystalVial : Lith_CustomInventory replaces CrystalVial
+{
+   +FLOATBOB
+   
+   states
+   {
+   Spawn:
+      PTN1 ABC 3
+      loop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 10), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_stimpack)
+      TNT1 A 0 A_GiveInventory("CrystalVial")
+      stop
+   }
+}
+
+actor Lith_Heretic_EnchantedShield : Lith_CustomInventory replaces EnchantedShield
+{
+   +FLOATBOB
+   
+   states
+   {
+   Spawn:
+      SHD2 AB 5 bright
+      SHD2 CDEC 5
+      SHD2 B 5 bright
+      loop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 200), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_bluearmor)
+      TNT1 A 0 A_GiveInventory("EnchantedShield")
+      stop
+   }
+}
+
+actor Lith_Heretic_SilverShield : Lith_CustomInventory replaces SilverShield
+{
+   +FLOATBOB
+   
+   states
+   {
+   Spawn:
+      SHLD A -1
+      stop
+   Pickup:
+      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 100), "Nope")
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_greenarmor)
+      TNT1 A 0 A_GiveInventory("SilverShield")
+      stop
+   }
+}
+
+actor Lith_Heretic_SuperMap : Lith_CustomInventory replaces SuperMap
+{
+   Inventory.PickupSound "misc/p_pkup"
+   
+   +COUNTITEM
+   +INVENTORY.FANCYPICKUPSOUND
+   +FLOATBOB
+   
+   states
+   {
+   Spawn:
+      SPMP A 6 bright
+      SPMP BCB 6
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_allmap)
+      TNT1 A 0 A_GiveInventory("SuperMap")
+      stop
+   }
+}
+
+// EOF

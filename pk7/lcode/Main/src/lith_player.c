@@ -271,9 +271,9 @@ static void Lith_PlayerUpdateData(player_t *p)
                    ACS_CheckInventory("Lith_ShotgunScopedToken") ||
                    ACS_CheckInventory("Lith_PistolScopedToken");
    
-   p->keys.redcard     = ACS_CheckInventory("RedCard");
-   p->keys.yellowcard  = ACS_CheckInventory("YellowCard");
-   p->keys.bluecard    = ACS_CheckInventory("BlueCard");
+   p->keys.redcard     = ACS_CheckInventory("RedCard")    || ACS_CheckInventory("KeyGreen");
+   p->keys.yellowcard  = ACS_CheckInventory("YellowCard") || ACS_CheckInventory("KeyYellow");
+   p->keys.bluecard    = ACS_CheckInventory("BlueCard")   || ACS_CheckInventory("KeyBlue");
    p->keys.redskull    = ACS_CheckInventory("RedSkull");
    p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
    p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
@@ -431,21 +431,18 @@ static void Lith_GetWeaponType(player_t *p)
 //
 static void Lith_GetArmorType(player_t *p)
 {
-   static struct { __str class; int type; } const armorids[] = {
-      { "None",                   armor_none  },
-      { "ArmorBonus",             armor_bonus },
-      { "GreenArmor",             armor_green },
-      { "BlueArmor",              armor_blue  },
-      { "BlueArmorForMegasphere", armor_blue  }
-   };
+#define Check(name) ACS_StrICmp(p->armorclass, #name) == 0
    
-   p->armortype = armor_unknown;
-   for(int i = 0; i < sizeof(armorids) / sizeof(*armorids); i++)
-      if(!ACS_StrICmp(p->armorclass, armorids[i].class))
-      {
-         p->armortype = armorids[i].type;
-         break;
-      }
+   if(Check(ArmorBonus))
+      p->armortype = armor_bonus;
+   else if(Check(GreenArmor) || Check(SilverShield))
+      p->armortype = armor_green;
+   else if(Check(BlueArmor) || Check(BlueArmorForMegasphere) || Check(EnchantedShield))
+      p->armortype = armor_blue;
+   else
+      p->armortype = armor_unknown;
+   
+#undef Check
 }
 
 //

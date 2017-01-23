@@ -27,6 +27,7 @@ actor Lith_Rocket
    Projectile
    +ROCKETTRAIL
    +MTHRUSPECIES
+   +EXPLODEONWATER
    
    var int user_trailstep;
    var int user_speedstep;
@@ -73,6 +74,7 @@ actor Lith_RocketHax : Lith_MonsterHax
    
    Projectile
    +SKYEXPLODE
+   +EXPLODEONWATER
    
    states
    {
@@ -105,6 +107,7 @@ actor Lith_SpiralRocket : Lith_MonsterHax
    Projectile
    +ROCKETTRAIL
    +MTHRUSPECIES
+   +EXPLODEONWATER
    +SKYEXPLODE
    
    var int user_trailstep;

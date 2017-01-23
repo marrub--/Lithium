@@ -129,6 +129,7 @@ actor Lith_OmegaRailHax : FastProjectile
    +NOBLOCKMAP
    +THRUACTORS
    +EXTREMEDEATH
+   +EXPLODEONWATER
    
    states
    {

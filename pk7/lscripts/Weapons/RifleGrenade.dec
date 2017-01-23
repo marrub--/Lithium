@@ -29,6 +29,7 @@ actor Lith_RifleGrenade
    
    Projectile
    +MTHRUSPECIES
+   +EXPLODEONWATER
    -NOGRAVITY
    
    states
