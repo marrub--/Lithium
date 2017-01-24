@@ -15,7 +15,7 @@ actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
       SPID H 1 bright A_SpidRefire
       loop
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_SpiderDemon)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_SpiderDemon)
       goto Super::Death
    }
 }
@@ -95,7 +95,7 @@ actor Lith_CyberDemon : Cyberdemon replaces Cyberdemon
       CYBR E 1 bright A_FaceTarget
       goto See
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_CyberDemon)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_CyberDemon)
       goto Super::Death
    }
 }

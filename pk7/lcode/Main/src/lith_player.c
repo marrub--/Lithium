@@ -162,27 +162,35 @@ static void Lith_PlayerUnloading(void)
 
 void Lith_GiveScore(player_t *p, score_t score)
 {
+   // Could cause division by zero
    if(score == 0)
       return;
    
+   // Multiply score by the player's multiplier
    score *= p->scoremul;
    
+   // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
+   double vol = 0.62 * mul;
    
+   // Play a sound when we pick up score
+   if(!IsSmallNumber(vol) && ACS_GetUserCVar(p->number, "lith_player_scoresound"))
+      ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
+   
+   //
    if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
       Lith_Log(p, "> You gained brouzouf.");
    
    if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0)
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
    
-   if(ACS_GetUserCVar(p->number, "lith_player_scoresound") && mul > 0.1)
-      ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, 0.62f * mul, false, ATTN_STATIC);
-   
+   // Add score and set score accumulator
    p->score          += score;
    p->scoresum       += score;
    p->scoreaccum     += score;
-   p->scoreaccumtime += 35 * (mul * 2.0);
+   p->scoreaccumtime += 20 * (mul * 2.0);
    
+   // Log score
    if(ACS_GetUserCVar(p->number, "lith_player_scorelog"))
       Lith_LogH(p, "> +\Cj%lli\Cnscr", score);
 }
@@ -356,8 +364,9 @@ static void Lith_ResetPlayer(player_t *p)
    p->extrpitch = 0.0f;
    p->extryaw   = 0.0f;
    
-   p->scoreaccum = 0;
-   p->scoremul   = 1.3;
+   p->scoreaccum     = 0;
+   p->scoreaccumtime = 0;
+   p->scoremul       = 1.3;
    
    //
    // Static data

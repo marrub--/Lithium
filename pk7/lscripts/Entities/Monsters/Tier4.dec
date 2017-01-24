@@ -3,7 +3,7 @@ actor Lith_PainElemental : PainElemental replaces PainElemental
    states
    {
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_PainElemental)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_PainElemental)
       goto Super::Death
    }
 }
@@ -29,7 +29,7 @@ actor Lith_Archvile : Archvile replaces Archvile
       VILE P 20 bright
       goto Super::See
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Archvile)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Archvile)
       goto Super::Death
    }
 }

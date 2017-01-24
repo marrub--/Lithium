@@ -26,10 +26,17 @@ void Lith_SetupWeaponsTables(void);
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
+   static bool staticinit;
+   
    int prevsecrets = 0;
    
-   Lith_SetupBalance();
-   Lith_SetupWeaponsTables();
+   if(!staticinit)
+   {
+      Lith_SetupBalance();
+      Lith_SetupWeaponsTables();
+      
+      staticinit = true;
+   }
    ACS_SetAirControl(0.77);
    
    mapinit = true;

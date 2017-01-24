@@ -14,8 +14,9 @@
 #define HUDSTRS_MAX 20
 
 #define Lith_ForPlayer() \
-   for(player_t *p = &players[0]; p < &players[MAX_PLAYERS]; p++) \
-      if(p->active)
+   for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
+      __with(player_t *p = &players[_piter];) \
+         if(p->active)
 
 #define Lith_GiveAllScore(score) \
    Lith_ForPlayer() \

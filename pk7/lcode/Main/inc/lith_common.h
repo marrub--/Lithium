@@ -12,6 +12,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define IsSmallNumber(x) ((x) > -0.001 && (x) < -0.001)
+
 #define sink ACS_Sin
 #define cosk ACS_Cos
 

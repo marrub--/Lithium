@@ -116,6 +116,7 @@ __str StrUpper(__str in)
 
 accum lerpk(accum a, accum b, accum t)
 {
+   if(IsSmallNumber(a)) return 0;
    accum ret = ((1.0 - t) * a) + (t * b);
    
    if(roundk(ret, 10) == b)
@@ -128,6 +129,7 @@ accum lerpk(accum a, accum b, accum t)
 
 float lerpf(float a, float b, float t)
 {
+   if(IsSmallNumber(a)) return 0;
    float ret = ((1.0 - t) * a) + (t * b);
    
    if((round(ret << 10) >> 10) == b)

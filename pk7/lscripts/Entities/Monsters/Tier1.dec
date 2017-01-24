@@ -31,10 +31,10 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
       POSS E 8
       goto See
    XDeath:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ZombieMan * 1.5)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ZombieMan * 1.5)
       goto Super::XDeath
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ZombieMan)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ZombieMan)
       goto Super::Death
    }
 }
@@ -64,10 +64,10 @@ actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
       SPOS E 10
       goto See
    XDeath:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ShotgunGuy * 1.5)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ShotgunGuy * 1.5)
       goto Super::XDeath
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ShotgunGuy)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ShotgunGuy)
       goto Super::Death
    }
 }
@@ -121,10 +121,10 @@ actor Lith_Imp : DoomImp replaces DoomImp
       TROO H 2 A_Pain
       goto See
    XDeath:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp * 1.5)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp * 1.5)
       goto Super::XDeath
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Imp)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp)
       goto Super::Death
    Raise:
       TROO ML 8
@@ -159,10 +159,10 @@ actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
       CPOS F 1 A_CPosRefire
       goto MissileLoop
    XDeath:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ChaingunGuy * 1.5)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ChaingunGuy * 1.5)
       goto Super::XDeath
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_ChaingunGuy)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_ChaingunGuy)
       goto Super::Death
    }
 }

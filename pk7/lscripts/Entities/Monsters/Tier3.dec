@@ -72,7 +72,7 @@ actor Lith_HellKnight : HellKnight replaces HellKnight
       BOS2 H 2 A_Pain
       goto See
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_HellKnight)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_HellKnight)
       goto Super::Death
    Raise:
       BOS2 O 8
@@ -138,7 +138,7 @@ actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
       BOSS H 1 A_Pain
       goto See
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_BaronOfHell)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_BaronOfHell)
       goto Super::Death
    Raise:
       BOSS O 8
@@ -169,7 +169,7 @@ actor Lith_Revenant : Revenant replaces Revenant
    states
    {
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Revenant)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Revenant)
       goto Super::Death
    }
 }
@@ -193,7 +193,7 @@ actor Lith_Cacodemon : Cacodemon replaces Cacodemon
    states
    {
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Cacodemon)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Cacodemon)
       goto Super::Death
    }
 }
@@ -217,7 +217,7 @@ actor Lith_Arachnotron : Arachnotron replaces Arachnotron
    states
    {
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Arachnotron)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Arachnotron)
       goto Super::Death
    }
 }
@@ -255,7 +255,7 @@ actor Lith_Mancubus : Fatso replaces Fatso
       FATT IG 6 A_FaceTarget
       goto See
    Death:
-      "####" "#" 0 ACS_NamedExecuteAlways("Lith_EmitScore", 0, Score_Mancubus)
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Mancubus)
       goto Super::Death
    }
 }
