@@ -22,7 +22,7 @@
 #define AD(n) A(n), D(n)
 #define ADU(n) AD(n), U(n)
 
-static upgradeinfo_t upgradeinfo[UPGR_MAX] = {
+static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
 // {"Name-------", BIP-----------, Default Cost, UC_Cat-, Score, Callbacks...},
    {"HeadsUpDisp", "HeadsUpDisp",  0           , UC_Body, -0.05, R(HeadsUpDisp)},
    {"JetBooster",  "JetBooster",   0           , UC_Body, -0.05, A(JetBooster),   U(JetBooster), R(JetBooster)},
@@ -220,7 +220,8 @@ void Lith_PlayerEnterUpgrades(player_t *p)
 [[__extern("ACS"), __call("ScriptS")]]
 void Lith_SetUpgrCost(int upgr, int cost)
 {
-   upgradeinfo[upgr].cost = cost;
+   upgradeinfo_t *info = (upgradeinfo_t *)&upgradeinfo[upgr];
+   info->cost = cost;
 }
 
 //

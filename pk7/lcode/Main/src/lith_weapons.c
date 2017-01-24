@@ -1,6 +1,5 @@
 #include "lith_common.h"
 #include "lith_player.h"
-#include "lith_pickups.h"
 
 #include <math.h>
 
@@ -11,23 +10,25 @@
 // Extern Objects
 //
 
-weaponinfo_t weaponinfo[weapon_max] = {
-// {S, "Type-----------", "Pickup Sound-----------", AT_Type},
+weaponinfo_t const weaponinfo[weapon_max] = {
+// {S, "Type-----------", "Pickup Sound-----------", AT_Type,  "Ammo Class------------"},
    {0, null,              "MMMMHMHMMMHMMM"},
    {1, "Fist",            "MMMMHMHMMMHMMM"},
-   {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag},
-   {2, "Revolver",        "weapons/revolver/pickup", AT_Mag},
-   {3, "Shotgun",         "weapons/shotgun/pickup",  AT_Mag},
-   {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag},
-   {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo},
-   {6, "PlasmaRifle",     "weapons/plasma/pickup",   AT_Ammo},
-   {7, "BFG9000",         "weapons/cannon/pickup",   AT_Ammo},
+   {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag,  "Lith_PistolShotsFired"},
+   {2, "Revolver",        "weapons/revolver/pickup", AT_Mag,  "Lith_RevolverShotsFired"},
+   {3, "Shotgun",         "weapons/shotgun/pickup"},
+   {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag,  "Lith_RifleShotsFired"},
+   {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo, "Lith_RocketAmmo"},
+   {6, "PlasmaRifle",     "weapons/plasma/pickup",   AT_Ammo, "Lith_PlasmaAmmo"},
+   {7, "BFG9000",         "weapons/cannon/pickup",   AT_Ammo, "Lith_CannonAmmo"},
 };
 
 
 //----------------------------------------------------------------------------
 // Extern Functions
 //
+
+void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
 
 //
 // Lith_SetupWeaponsTables
@@ -36,34 +37,48 @@ void Lith_SetupWeaponsTables(void)
 {
    for(int i = 0; i < weapon_max; i++)
    {
-      weaponinfo[i].type = i;
-      weaponinfo[i].class = StrParam("Lith_%S", weaponinfo[i].name);
+      weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
+      info->type  = i;
+      info->class = StrParam("Lith_%S", info->name);
    }
 }
 
 //
-// Lith_GetWeaponType
+// Lith_PlayerUpdateWeapon
 //
-// Update information on what kind of weapons we have.
+// Update information on what weapons we have.
 //
-void Lith_GetWeaponType(player_t *p)
+void Lith_PlayerUpdateWeapon(player_t *p)
 {
-   weaponinfo_t *weapon = null;
+   weaponinfo_t const *unknown = &weaponinfo[weapon_unknown];
+   weaponinfo_t const *weapon = unknown;
    
+   // clear slots
    for(int i = 0; i < SLOT_MAX; i++)
       p->hasslot[i] = false;
    
    for(int i = weapon_min; i < weapon_max; i++)
    {
-      weaponinfo_t *info = &weaponinfo[i];
+      weaponinfo_t const *info = &weaponinfo[i];
       
+      // get all the weapons and slot numbers we have
       p->hasslot[info->slot] |= p->hasweapon[i] = ACS_CheckInventory(info->class);
       
-      if(!weapon && ACS_StrICmp(p->weaponclass, info->class) == 0)
+      // check for currently held weapon
+      if(weapon == unknown && ACS_StrICmp(p->weaponclass, info->class) == 0)
          weapon = info;
    }
    
-   p->curweapon = weapon ? weapon : &weaponinfo[weapon_unknown];
+   // setup the current weapon's information
+   p->curweapon.info      = weapon;
+   p->curweapon.ammotype  = weapon->defammotype;
+   p->curweapon.ammoclass = weapon->defammoclass;
+   
+   if(weapon->type == weapon_shotgun && p->upgrades[UPGR_GaussShotty].active)
+   {
+      p->curweapon.ammotype  = AT_Mag;
+      p->curweapon.ammoclass = "Lith_GaussShotsFired";
+   }
 }
 
 
@@ -82,7 +97,7 @@ void Lith_WeaponPickup(int parm, int tid)
    if(!ValidateWeapon(parm) || p->hasweapon[parm])
       return;
    
-   weaponinfo_t *info = &weaponinfo[parm];
+   weaponinfo_t const *info = &weaponinfo[parm];
    
    p->weaponsheld++;
    

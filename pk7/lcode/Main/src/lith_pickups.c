@@ -1,6 +1,5 @@
 #include "lith_common.h"
 #include "lith_player.h"
-#include "lith_pickups.h"
 
 #define name(p) {sizeof(p) / sizeof(*p), p}
 
@@ -204,7 +203,7 @@ static void Lith_StupidPickup(player_t *p, int weapon)
       Lith_Log(p, fmt, names->ptr[iname]);
 }
 
-void Lith_PickupMessage(player_t *p, weaponinfo_t *info)
+void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
 {
    if(ACS_GetCVar("lith_sv_stupidpickups"))
       Lith_StupidPickup(p, info->type);

@@ -17,14 +17,22 @@ typedef struct weaponinfo_s
    int slot;
    __str name;
    __str pickupsound;
-   int ammotype; // this is mainly used for occluding calls
+   int defammotype;
+   __str defammoclass;
    __str class;
    int type;
 } weaponinfo_t;
 
-extern weaponinfo_t weaponinfo[weapon_max];
+typedef struct activeweapon_s
+{
+   weaponinfo_t const *info;
+   int ammotype;
+   __str ammoclass;
+} activeweapon_t;
 
-void Lith_GetWeaponType(struct player_s *p);
+extern weaponinfo_t const weaponinfo[weapon_max];
+
+void Lith_PlayerUpdateWeapon(struct player_s *p);
 
 #endif
 

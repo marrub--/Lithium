@@ -256,7 +256,6 @@ static void Lith_PlayerUpdateData(player_t *p)
    p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
    p->maxarmor    = ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT);
    
-   Lith_GetWeaponType(p);
    Lith_GetArmorType(p);
    
    p->berserk    = ACS_CheckInventory("PowerStrength");
@@ -280,13 +279,16 @@ static void Lith_PlayerUpdateData(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
+   // Data
+   Lith_PlayerUpdateWeapon(p); // Update weapon info
+   Lith_PlayerStats(p);        // Update statistics
+   Lith_PlayerScore(p);        // Update score
+   
    if(!p->dead)
    {
       // Logic
-      Lith_PlayerStats(p);          // Update statistics
-      Lith_PlayerScore(p);          // Update score
       Lith_PlayerUpdateCBI(p);      // Update CBI
-      Lith_PlayerUpdateUpgrades(p); // Update Upgrades
+      Lith_PlayerUpdateUpgrades(p); // Update upgrades
       Lith_PlayerDeltaStats(p);     // Update delta'd info
       Lith_PlayerUpdateLog(p);      // Update log data
    }

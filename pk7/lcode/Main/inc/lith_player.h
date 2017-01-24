@@ -148,7 +148,7 @@ typedef struct player_s
    // Inventory
    bool hasweapon[weapon_max];
    bool hasslot[SLOT_MAX];
-   weaponinfo_t const *curweapon;
+   activeweapon_t curweapon;
    
    __str weaponclass;
    __str armorclass;

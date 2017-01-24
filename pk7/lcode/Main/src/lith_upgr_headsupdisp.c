@@ -30,7 +30,7 @@ static void HUD_Weapons(player_t *p)
    {
       fixed x = (10 * i) + 70.1;
       fixed y = 200.2;
-      HudMessageF("INDEXFONT_DOOM", "%S%i", (p->curweapon->slot == i) ? "\Ck" : "\Ch", i);
+      HudMessageF("INDEXFONT_DOOM", "%S%i", (p->curweapon.info->slot == i) ? "\Ck" : "\Ch", i);
       HudMessagePlain(hid_weapontextE + i, x + 5, y - 2, TICSECOND);
    }
 }
@@ -40,10 +40,10 @@ static void HUD_Weapons(player_t *p)
 //
 static void HUD_Ammo(player_t *p)
 {
-   __str ammotype;
    __str count;
    
-   weaponinfo_t const *info = p->curweapon;
+   activeweapon_t const *weapon = &p->curweapon;
+   weaponinfo_t const *info = weapon->info;
    
    if(info->type == weapon_rifle)
    {
@@ -52,39 +52,27 @@ static void HUD_Ammo(player_t *p)
       DrawSpritePlain(StrParam("H_W%i", (rifle_firemode_max - p->riflefiremode) + 3), hid_riflemode, 241.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
    }
    
-   if(info->ammotype == AT_None)
-      return;
-   
-   switch(info->type)
+   switch(weapon->ammotype)
    {
-   case weapon_pistol:   ammotype = "Lith_PistolShotsFired";   break;
-   case weapon_revolver: ammotype = "Lith_RevolverShotsFired"; break;
-   case weapon_shotgun:
-      if(p->upgrades[UPGR_GaussShotty].active)
-                         ammotype = "Lith_GaussShotsFired";
-      else return;                                          break;
-   case weapon_rifle:    ammotype = "Lith_RifleShotsFired"; break;
-   case weapon_launcher: ammotype = "Lith_RocketAmmo"; break;
-   case weapon_plasma:   ammotype = "Lith_PlasmaAmmo"; break;
-   case weapon_bfg:      ammotype = "Lith_CannonAmmo"; break;
-   }
-   
-   if(info->ammotype == AT_Mag)
+   case AT_None: return;
+   case AT_Mag:
    {
-      int max = ACS_GetMaxInventory(0, ammotype);
-      int cur = ACS_CheckInventory(ammotype);
-   
+      int max = ACS_GetMaxInventory(0, weapon->ammoclass);
+      int cur = ACS_CheckInventory(weapon->ammoclass);
+      
       count = StrParam("%i/%i", max - cur, max);
+      break;
    }
-   else if(info->ammotype == AT_Ammo)
-      count = StrParam("%i", ACS_CheckInventory(ammotype));
+   case AT_Ammo:
+      count = StrParam("%i", ACS_CheckInventory(weapon->ammoclass)); break;
+   }
    
    DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, TICSECOND);
    
    HudMessageF("DBIGFONT", "%S", count);
    HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, TICSECOND);
    
-   DrawSpritePlain((info->ammotype == AT_Mag) ? "H_A1" : "H_A2", hid_ammotype, 320.2, 200.2, TICSECOND);
+   DrawSpritePlain((weapon->ammotype == AT_Mag) ? "H_A1" : "H_A2", hid_ammotype, 320.2, 200.2, TICSECOND);
 }
 
 //
@@ -123,7 +111,7 @@ static void HUD_Health(player_t *p)
       }
    }
    
-   HUD_IndicatorLine(p, p->ticks, weapongfx[p->curweapon->slot], hid_healthbg_fxS - (p->ticks % 32), 12);
+   HUD_IndicatorLine(p, p->ticks, weapongfx[p->curweapon.info->slot], hid_healthbg_fxS - (p->ticks % 32), 12);
 }
 
 //
