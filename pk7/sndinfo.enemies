@@ -4,16 +4,19 @@
 enemies/zombie/ready lsounds/ZombieMan/Ready.flac // Fallout 3
 enemies/zombie/fire  lsounds/ZombieMan/Fire.flac  // Killing Floor
 $attenuation enemies/zombie/fire 0.5
+$limit enemies/zombie/fire 0
 
 enemies/shotguy/ready lsounds/ShotGuy/Ready.flac // Fallout: New Vegas
 enemies/shotguy/fire  lsounds/ShotGuy/Fire.flac  // Killing Floor
 $attenuation enemies/shotguy/fire 0.5
+$limit enemies/shotguy/fire 0
 
 enemies/chainguy/fire  lsounds/ChaingunGuy/Fire.flac        // Killing Floor
 enemies/chainguy/bolt  lsounds/ChaingunGuy/Bolt.flac        // 〃
 enemies/chainguy/boltb lsounds/ChaingunGuy/BoltBack.flac    // 〃
 enemies/chainguy/boltf lsounds/ChaingunGuy/BoltForward.flac // 〃
 $attenuation enemies/chainguy/fire 0.5
+$limit enemies/chainguy/fire 0
 
 //
 // Mancubus

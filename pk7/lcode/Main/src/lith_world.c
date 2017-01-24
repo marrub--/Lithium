@@ -37,6 +37,11 @@ static void Lith_World(void)
       
       staticinit = true;
    }
+   
+   if(ACS_GameSkill() == skill_extrahard)
+      Lith_ForPlayer()
+         p->scoremul += 0.15;
+   
    ACS_SetAirControl(0.77);
    
    mapinit = true;

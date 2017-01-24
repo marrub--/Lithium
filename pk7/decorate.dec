@@ -38,6 +38,8 @@ actor Lith_MonsterHax
 #include "lscripts/Entities/Monsters/Tier4.dec"
 #include "lscripts/Entities/Monsters/Tier5.dec"
 
+#include "lscripts/Entities/Monsters/XHTier1.dec"
+
 //
 // Items
 

@@ -1,0 +1,64 @@
+actor Lith_XH_ZombieMan : Lith_ZombieMan
+{
+   MinMissileChance 120
+   
+   states
+   {
+   MissileFire:
+      POSS F 4 bright A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "", 3.0 / 4.0, frandom(1, 4) * 3.0)
+      goto MissileDone
+   }
+}
+
+actor Lith_XH_ShotgunGuy : Lith_ShotgunGuy
+{
+   MinMissileChance 120
+   
+   states
+   {
+   MissileFire:
+      SPOS FFF 0 A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "", 4.0 / 5.0, frandom(1, 5) * 2.4)
+      goto MissileDone
+   }
+}
+
+actor Lith_XH_ChaingunGuy : Lith_ChaingunGuy
+{
+   states
+   {
+   MissileFire:
+      CPOS FE 4 bright A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "enemies/chainguy/fire", 3.0 / 4.0, frandom(1, 4) * 3.0)
+      goto MissileDone
+   }
+}
+
+actor Lith_XH_ImpBall : Lith_ImpBall
+{
+   Speed 24
+   FastSpeed 48
+}
+
+actor Lith_XH_Imp : Lith_Imp
+{
+   Speed 8
+   Health 80
+   MinMissileChance 140
+   
+   +MISSILEMORE
+   
+   states
+   {
+   See:
+      TROO AAABBBCCCDDD 1 A_Chase
+      loop
+   Melee:
+   Missile:
+      TROO EF 6 A_FaceTarget
+      TROO G 5 A_CustomComboAttack("Lith_XH_ImpBall", 32, 3 * random(1, 8), "imp/melee")
+      TROO G 2
+      goto See
+   }
+}
+
+// EOF
+

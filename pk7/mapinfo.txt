@@ -5,4 +5,73 @@ gameinfo
    dimamount = 0.1
 }
 
+clearskills
+
+skill tourist
+{
+   DamageFactor = 0.1
+   SpawnFilter = 5
+   Name = "I'm just a tourist"
+   Key = "t"
+   RespawnTime = 0.5
+   EasyBossBrain
+   EasyKey
+   MonsterHealth = 0.1
+   ArmorFactor = 2
+   TotalInfighting
+   HealthFactor = 2
+}
+
+skill easy
+{
+   DamageFactor = 0.9
+   SpawnFilter = 2
+   Name = "Throw me a bone"
+   Key = "b"
+   Aggressiveness = -0.3
+   MonsterHealth = 0.9
+}
+
+skill normal
+{
+   SpawnFilter = 3
+   Name = "Hurt me plenty"
+   Key = "h"
+   DefaultSkill
+}
+
+skill hard
+{
+   SpawnFilter = 4
+   Name = "Ultra-Violence!"
+   Key = "u"
+}
+
+skill extrahard
+{
+   SpawnFilter = 5
+   Name = "Prepare to die!"
+   Key = "p"
+   DamageFactor = 1.05
+   Aggressiveness = 0.1
+   
+   ReplaceActor = "ZombieMan",   "Lith_XH_ZombieMan"
+   ReplaceActor = "ShotgunGuy",  "Lith_XH_ShotgunGuy"
+   ReplaceActor = "DoomImp",     "Lith_XH_Imp"
+   ReplaceActor = "ChaingunGuy", "Lith_XH_ChaingunGuy"
+}
+
+skill nightmare
+{
+   DamageFactor = 2
+   SpawnFilter = 5
+   Name = "Absolute Nightmare!"
+   Key = "t"
+   RespawnTime = 0.5
+   MonsterHealth = 0.5
+   ArmorFactor = 2
+   NoInfighting
+   HealthFactor = 2
+}
+
 // EOF
