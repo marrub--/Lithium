@@ -81,7 +81,7 @@ static void HUD_Ammo(player_t *p)
    
    DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2, TICSECOND);
    
-   HudMessageF("BIGFONT", "%S", count);
+   HudMessageF("DBIGFONT", "%S", count);
    HudMessageParams(HUDMSG_PLAIN, hid_ammo, CR_RED, 318.2, 200.2, TICSECOND);
    
    DrawSpritePlain((info->ammotype == AT_Mag) ? "H_A1" : "H_A2", hid_ammotype, 320.2, 200.2, TICSECOND);
@@ -105,7 +105,7 @@ static void HUD_Health(player_t *p)
    
    DrawSpritePlain(p->berserk ? "H_B4" : "H_B1", hid_healthbg, 0.1, 200.2, TICSECOND);
    
-   HudMessageF("BIGFONT", p->dead ? "---" : "%i", p->health);
+   HudMessageF("DBIGFONT", p->dead ? "---" : "%i", p->health);
    HudMessageParams(HUDMSG_PLAIN, hid_health, CR_RED, 2.1, 200.2, TICSECOND);
    
    if(!p->dead)
@@ -113,12 +113,12 @@ static void HUD_Health(player_t *p)
       if(p->health < p->old.health)
       {
          fixed ft = minmax((p->old.health - p->health) / 30.0, 0.1, 3.0);
-         HudMessageF("BIGFONT", "%i", p->health);
+         HudMessageF("DBIGFONT", "%i", p->health);
          HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_YELLOW, 2.1, 200.2, 0.1, ft);
       }
       else if(p->health > p->old.health)
       {
-         HudMessageF("BIGFONT", "%i", p->health);
+         HudMessageF("DBIGFONT", "%i", p->health);
          HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, CR_PURPLE, 2.1, 200.2, 0.1, 0.2);
       }
    }
@@ -141,18 +141,18 @@ static void HUD_Armor(player_t *p)
    
    DrawSpritePlain("H_B1", hid_armorbg, 0.1, 188.2, TICSECOND);
    
-   HudMessageF("BIGFONT", "%i", p->armor);
+   HudMessageF("DBIGFONT", "%i", p->armor);
    HudMessageParams(HUDMSG_PLAIN, hid_armor, CR_GREEN, 2.1, 188.2, TICSECOND);
    
    if(p->armor < p->old.armor)
    {
       fixed ft = minmax((p->old.armor - p->armor) / 30.0, 0.1, 3.0);
-      HudMessageF("BIGFONT", "%i", p->armor);
+      HudMessageF("DBIGFONT", "%i", p->armor);
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, CR_YELLOW, 2.1, 188.2, 0.1, ft);
    }
    else if(p->armor > p->old.armor)
    {
-      HudMessageF("BIGFONT", "%i", p->armor);
+      HudMessageF("DBIGFONT", "%i", p->armor);
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, CR_PURPLE, 2.1, 188.2, 0.1, 0.2);
    }
    

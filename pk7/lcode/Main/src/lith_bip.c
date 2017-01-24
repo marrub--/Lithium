@@ -46,6 +46,7 @@ void Lith_PlayerInitBIP(player_t *p)
       Lith_LinkDefault(&bip->infogr[categ]);
    
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "PistolUpgr",      Unlocks("Pistol", "Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
@@ -58,6 +59,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
    
+   AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp", Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",   Unlocks("OFMD"));

@@ -17,6 +17,7 @@ static void RA_Take(int n)
    ACS_TakeInventory(StrParam("Lith_RA_Magic%i", n),     999);
    ACS_TakeInventory(StrParam("Lith_RA_Melee%i", n),     999);
    ACS_TakeInventory(StrParam("Lith_RA_Shrapnel%i", n),  999);
+   ACS_TakeInventory(StrParam("Lith_RA_Ice%i", n),       999);
 }
 
 //
@@ -55,6 +56,7 @@ void Lith_RA_Give(int num)
    case 5: name = "Magic";     break;
    case 6: name = "Melee";     break;
    case 7: name = "Shrapnel";  break;
+   case 8: name = "Ice";       break;
    }
    
    if(upgr->user_int[u_activearmor] != num)
@@ -64,7 +66,7 @@ void Lith_RA_Give(int num)
       RA_Take(1);
       RA_Take(2);
       
-      Lith_Log(p, ">>>>> Activating Armor->%S()", name);
+      Lith_LogH(p, ">>>>> Activating Armor->%S()", name);
       
       if(p->upgrades[UPGR_ReactArmor2].active)
          RA_Give(name, 2);

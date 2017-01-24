@@ -209,7 +209,7 @@ void Lith_PickupMessage(player_t *p, weaponinfo_t *info)
    if(ACS_GetCVar("lith_sv_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      Lith_Log(p, "> You got the %LS!", StrParam("LITH_TXT_INFO_SHORT_%S", info->name));
+      Lith_Log(p, "> You got the %S!", Language("LITH_TXT_INFO_SHORT_%S", info->name));
    else
       Lith_Log(p, "> Acquired impossible object");
 }

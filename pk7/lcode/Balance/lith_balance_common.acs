@@ -1,30 +1,6 @@
 #library "trbohtlr"
-
 #include "zcommon.acs"
-
-#define UPGR_HeadsUpDisp 0
-#define UPGR_JetBooster 1
-#define UPGR_ReflexWetw 2
-#define UPGR_CyberLegs 3
-#define UPGR_ReactArmor 4
-#define UPGR_ReactArmor2 5
-#define UPGR_DefenseNuke 6
-#define UPGR_Adrenaline 7
-
-#define UPGR_GaussShotty 8
-#define UPGR_RifleModes 9
-#define UPGR_ChargeRPG 10
-#define UPGR_PlasLaser 11
-#define UPGR_PunctCannon 12
-#define UPGR_OmegaRail 13
-
-#define UPGR_TorgueMode 14
-#define UPGR_7777777 15
-#define UPGR_lolsords 16
-
-#define UPGR_Implying 17
-#define UPGR_UNCEUNCE 18
-#define UPGR_InstaDeath 19
+#include "../Main/inc/lith_upgradenames.h"
 
 // EOF
 

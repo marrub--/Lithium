@@ -46,10 +46,10 @@ typedef struct upgradeinfo_s
 {
    __str name;
    __str bipunlock;
+   score_t cost;
    int category;
    fixed scoreadd;
    int wepclass;
-   score_t cost;
    
    upgr_cb_t        Activate;
    upgr_cb_t        Deactivate;

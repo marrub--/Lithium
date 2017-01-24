@@ -39,7 +39,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    {
       id = ++id % id_max;
       
-      HudMessageF("BIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
+      HudMessageF("DBIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
       HudMessageFade(hid_implyingE + id,
                      ACS_RandomFixed(0.0, 1.0),
                      ACS_RandomFixed(0.0, 1.0),

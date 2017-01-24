@@ -251,7 +251,7 @@ int Lith_GetSigil()
    fixed title_time = (TICSECOND * 5) * title_len;
    fixed subtitle_time = (TICSECOND * 2) * subtitle_len;
    
-   HudMessageF("BIGFONT", title_text);
+   HudMessageF("DBIGFONT", title_text);
    HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 0.5, 0.45, 1.0 + subtitle_time, TICSECOND * 5, 0.3);
    
    HudMessageF("SMALLFNT", subtitle_text);

@@ -63,6 +63,7 @@ const int Score_ChaingunGuy   = 2000; // Bullets
 // Tier 2
 const int Score_Demon         = 3000; // Melee
 const int Score_LostSoul      = 500;  // Melee
+const int Score_Nitrogolem    = 4000; // Melee, FireMagic
 
 // Tier 3
 const int Score_HellKnight    = 7000;  // Melee, Magic
@@ -79,6 +80,9 @@ const int Score_Archvile      = 40000; // FireMagic
 // Tier 5
 const int Score_SpiderDemon   = 100000; // Bullets
 const int Score_CyberDemon    = 200000; // Shrapnel
+
+// Tier 6
+const int Score_DSparil       = 1000000; // Energy
 
 // EOF
 

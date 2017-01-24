@@ -23,30 +23,31 @@
 #define ADU(n) AD(n), U(n)
 
 static upgradeinfo_t upgradeinfo[UPGR_MAX] = {
-// {"Name-------", BIP-----------, UC_Cat-, Score, Callbacks...},
-   {"HeadsUpDisp", "HeadsUpDisp",  UC_Body, -0.05, R(HeadsUpDisp)},
-   {"JetBooster",  "JetBooster",   UC_Body, -0.05, A(JetBooster),   U(JetBooster), R(JetBooster)},
-   {"ReflexWetw",  "ReflexWetw",   UC_Body, -0.05, ADU(ReflexWetw), R(ReflexWetw)},
-   {"CyberLegs",   "CyberLegs",    UC_Body,  0.00, ADU(CyberLegs)},
-   {"ReactArmor",  "Yh0",          UC_Body,  0.00, D(ReactArmor)},
-   {"ReactArmor2", "Yh0",          UC_Body,  0.00},
-   {"DefenseNuke", "DefenseNuke",  UC_Body,  0.00, E(DefenseNuke)},
-   {"Adrenaline",  "Adrenaline",   UC_Body,  0.00, U(Adrenaline)},
+// {"Name-------", BIP-----------, Default Cost, UC_Cat-, Score, Callbacks...},
+   {"HeadsUpDisp", "HeadsUpDisp",  0           , UC_Body, -0.05, R(HeadsUpDisp)},
+   {"JetBooster",  "JetBooster",   0           , UC_Body, -0.05, A(JetBooster),   U(JetBooster), R(JetBooster)},
+   {"ReflexWetw",  "ReflexWetw",   0           , UC_Body, -0.05, ADU(ReflexWetw), R(ReflexWetw)},
+   {"CyberLegs",   "CyberLegs",    1220000     , UC_Body,  0.00, ADU(CyberLegs)},
+   {"ReactArmor",  "Yh0",          2700200     , UC_Body,  0.00, D(ReactArmor)},
+   {"ReactArmor2", "Yh0",          2500200     , UC_Body,  0.00},
+   {"DefenseNuke", "DefenseNuke",  580030      , UC_Body,  0.00, E(DefenseNuke)},
+   {"Adrenaline",  "Adrenaline",   1801000     , UC_Body,  0.00, U(Adrenaline)},
    
-   {"GaussShotty", "ShotgunUpgr",  UC_Weap,  0.00, weapon_shotgun},
-   {"RifleModes",  "RifleUpgr",    UC_Weap,  0.00, weapon_rifle, D(RifleModes), U(RifleModes)},
-   {"ChargeRPG",   "LauncherUpgr", UC_Weap,  0.00, weapon_launcher},
-   {"PlasLaser",   "PlasmaUpgr",   UC_Weap,  0.00, weapon_plasma},
-   {"PunctCannon", "CannonUpgr",   UC_Weap,  0.00, weapon_bfg, D(PunctCannon)},
-   {"OmegaRail",   "CannonUpg2",   UC_Weap,  0.00, weapon_bfg},
+   {"AutoPistol",  "PistolUpgr",   140940      , UC_Weap,  0.00, weapon_pistol},
+   {"GaussShotty", "ShotgunUpgr",  1079430     , UC_Weap,  0.00, weapon_shotgun},
+   {"RifleModes",  "RifleUpgr",    340100      , UC_Weap,  0.00, weapon_rifle, D(RifleModes), U(RifleModes)},
+   {"ChargeRPG",   "LauncherUpgr", 1550000     , UC_Weap,  0.00, weapon_launcher},
+   {"PlasLaser",   "PlasmaUpgr",   2300000     , UC_Weap,  0.00, weapon_plasma},
+   {"PunctCannon", "CannonUpgr",   5100700     , UC_Weap,  0.00, weapon_bfg, D(PunctCannon)},
+   {"OmegaRail",   "CannonUpg2",   5800100     , UC_Weap,  0.00, weapon_bfg},
    
-   {"TorgueMode",  null,           UC_Extr,  0.00},
-   {"7777777",     null,           UC_Extr,  0.10, ADU(7777777)},
-   {"lolsords",    null,           UC_Extr,  0.20, ADU(lolsords)},
+   {"TorgueMode",  null,           80000000    , UC_Extr,  0.00},
+   {"7777777",     null,           82354300    , UC_Extr,  0.10, ADU(7777777)},
+   {"lolsords",    null,           1000000     , UC_Extr,  0.20, ADU(lolsords)},
    
-   {"Implying",    null,           UC_Down,  0.20, U(Implying)},
-   {"UNCEUNCE",    null,           UC_Down,  0.30, ADU(UNCEUNCE)},
-   {"InstaDeath",  null,           UC_Down,  0.50, U(InstaDeath)},
+   {"Implying",    null,           0           , UC_Down,  0.20, U(Implying)},
+   {"UNCEUNCE",    null,           0           , UC_Down,  0.30, ADU(UNCEUNCE)},
+   {"InstaDeath",  null,           0           , UC_Down,  0.50, U(InstaDeath)},
 };
 
 
@@ -131,7 +132,7 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
       return;
    }
    
-   Lith_LogF(p, "> Bought %LS", StrParam("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name));
+   Lith_LogF(p, "> Bought %S", Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name));
    
    Lith_TakeScore(p, Lith_PlayerDiscount(upgr->info->cost));
    Upgr_SetOwned(p, upgr);

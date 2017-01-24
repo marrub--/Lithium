@@ -99,7 +99,7 @@ actor Lith_SpiralRocket : Lith_MonsterHax
    Radius 2
    Height 2
    Speed 0
-   Damage (74)
+   Damage (80)
    DeathSound "weapons/rocklx"
    Species "Lith_Player"
    DamageType "Lith_Shrapnel"

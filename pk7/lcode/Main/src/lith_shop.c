@@ -61,7 +61,7 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
       return;
    }
    
-   Lith_LogF(p, "> Bought %LS", StrParam("LITH_TXT_SHOP_TITLE_%S", def->name));
+   Lith_LogF(p, "> Bought %S", Language("LITH_TXT_SHOP_TITLE_%S", def->name));
    
    ACS_GiveInventory(def->class, def->count);
    Lith_TakeScore(p, Lith_PlayerDiscount(def->cost));

@@ -1,11 +1,12 @@
 //
 // Pistol
 //
-weapons/pistol/fire    lsounds/Pistol/Fire.flac     // Killing Floor
-weapons/pistol/reload  lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
-weapons/pistol/zoomin  lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
-weapons/pistol/zoomout lsounds/Pistol/ScopeOut.flac // 〃
-weapons/pistol/pickup  lsounds/Pistol/Pickup.flac   // Fallout 4
+weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor
+weapons/pistol/fireauto lsounds/Pistol/FireAuto.flac // Killing Floor, ???
+weapons/pistol/reload   lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
+weapons/pistol/zoomin   lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
+weapons/pistol/zoomout  lsounds/Pistol/ScopeOut.flac // 〃
+weapons/pistol/pickup   lsounds/Pistol/Pickup.flac   // Fallout 4
 $alias weapons/pistol/draw weapons/pistol/pickup
 
 //
