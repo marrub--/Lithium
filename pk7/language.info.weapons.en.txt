@@ -12,7 +12,12 @@ LITH_TXT_INFO_DESCR_Pistol =
    "reloaded easily, since you duct-taped a mag holder on the side. Features "
    "a small CB-Scope similar to that of most other Omakeda weapons.";
 
-LITH_TXT_INFO_SHORT_Revolver = "Revolver"; // Yep.
+LITH_TXT_INFO_SHORT_Revolver = "Revolver";
+LITH_TXT_INFO_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
+LITH_TXT_INFO_DESCR_Revolver =
+   "Other than this weapon being made on Earth, all you need to know about "
+   "it is that it fires six teflon-plated .50 Action Express rounds and "
+   "loads with a break on the top. Crack some skulls with it.";
 
 LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
 LITH_TXT_INFO_TITLE_Shotgun = "Hiku Mk.2 Shotgun";
@@ -71,7 +76,7 @@ LITH_TXT_INFO_DESCR_GrenadeLauncher =
    "small lag before the rocket takes off fully.";
 
 LITH_TXT_INFO_SHORT_LauncherUpgr = "$LITH_TXT_UPGRADE_TITLE_ChargeRPG";
-LITH_TXT_INFO_TITLE_LauncherUpgr = "UE-1 \"Eight-ball\" Revolving Launcher";
+LITH_TXT_INFO_TITLE_LauncherUpgr = "UE-1 \"Eight-Ball\" Revolving Launcher";
 LITH_TXT_INFO_DESCR_LauncherUpgr =
    "Explosives are fun, as we all know, and Unreal Arms agreed with the "
    "sentiment. Eight high-yield rocket-propelled grenades are loaded one at "

@@ -23,14 +23,14 @@ static shopdef_t shopdefs[] = {
 // {"Name--------", Cost------, Cnt, Class------------------},
    {"RocketAmmo",   9000      ,   5, "Lith_RocketAmmo"      },
    {"PlasmaAmmo",   75750     ,1000, "Lith_PlasmaAmmo"      },
-   {"CannonAmmo",   113625    ,   1, "Lith_CannonAmmo"      },
+   {"CannonAmmo",   113620    ,   1, "Lith_CannonAmmo"      },
    {"Revolver",     500000    ,   1, "Lith_Revolver"        },
    {"Allmap",       100000    ,   1, "Allmap"               },
    {"Berserk",      150000    ,   1, "Berserk"              },
    {"BlurSphere",   70000     ,   1, "BlurSphere"           },
    {"Infrared",     70000     ,   1, "Infrared"             },
    {"RadSuit",      100000    ,   1, "RadSuit"              },
-// {"DivSigil",     7772944   ,   1, "Lith_DivisionSigil"   },
+// {"DivSigil",     7772940   ,   1, "Lith_DivisionSigil"   },
 };
 
 static size_t const shopdefsnum = sizeof(shopdefs) / sizeof(*shopdefs);
@@ -62,6 +62,8 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
    }
    
    Lith_LogF(p, "> Bought %S", Language("LITH_TXT_SHOP_TITLE_%S", def->name));
+   
+   Lith_UnlockBIPPage(&p->bip, def->name);
    
    ACS_GiveInventory(def->class, def->count);
    Lith_TakeScore(p, Lith_PlayerDiscount(def->cost));

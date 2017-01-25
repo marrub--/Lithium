@@ -62,6 +62,12 @@ LITH_TXT_UPGRADE_DESCR_Adrenaline =
 //
 // Weapons
 //
+LITH_TXT_UPGRADE_TITLE_AutoPistol = "Auto Pistol";
+LITH_TXT_UPGRADE_DESCR_AutoPistol =
+   "Effect: Makes your pistol fire in full auto.\n\n"
+   "Simply changes the trigger mechanism a bit to make the pistol fire "
+   "automatically.";
+
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Rifle";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"

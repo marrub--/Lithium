@@ -46,7 +46,7 @@ void Lith_PlayerInitBIP(player_t *p)
       Lith_LinkDefault(&bip->infogr[categ]);
    
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
-   AddToBIP(bip, BIPC_WEAPONS, "PistolUpgr",      Unlocks("Pistol", "Omakeda"));
+   AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
