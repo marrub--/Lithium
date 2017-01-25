@@ -41,8 +41,17 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG A 1
       loop
    AltFire:
-      GRLG A 0 A_JumpIf(!CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_ChargeRPG), "Ready")
-      goto FireReal
+      GRLG A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_ChargeRPG), "FireReal")
+      
+      GRLG A 1
+      GRLG A 0 A_JumpIfInventory("Lith_RocketAmmo", 1, 1)
+      goto FireEmpty
+      GRLG A 1
+      GRLG A 0 A_AlertMonsters
+      GRLG A 0 A_PlaySound("weapons/rocket/grenade", CHAN_WEAPON)
+      GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE)
+      GRLG A 0 A_FireCustomMissile("Lith_RifleGrenade")
+      goto FireAnim
    Fire:
       GRLG A 1
       GRLG A 0 A_JumpIfInventory("Lith_RocketAmmo", 1, 1)
@@ -55,17 +64,19 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       GRLG A 0 A_FireCustomMissile("Lith_Rocket")
    FireAnim:
       GRLG A 0 A_TakeInventory("Lith_RocketAltMode", 2)
-      GRLG B 1 bright
-      GRLG C 2 offset(0, 41)
-      GRLG D 1 offset(0, 45)
-      GRLG D 1 offset(0, 43)
-      GRLG E 1 offset(0, 40) A_PlaySound("weapons/rocket/load", CHAN_7)
+      GRLG B 2 bright
+      GRLG C 1 bright offset(0, 33)
+      GRLG CD 1 bright offset(0, 34)
+      GRLG D 1 offset(0, 56)
+      GRLG E 1 offset(0, 59) A_PlaySound("weapons/rocket/load", CHAN_7)
+      GRLG A 1 offset(0, 56)
+      GRLG A 1 offset(0, 50)
+      GRLG A 1 offset(0, 45)
       GRLG A 1 offset(0, 38)
-      GRLG A 1 offset(0, 36)
+      GRLG A 1 offset(0, 35)
+      GRLG A 1 offset(0, 34)
       GRLG A 1 offset(0, 33)
-      GRLG A 1 offset(0, 32)
-      GRLG A 4
-      GRLG AAAA 1 A_ReFire
+      GRLG AAAA 1 offset(0, 32) A_ReFire
       goto Ready
    
    FireEmpty:
@@ -97,7 +108,8 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       goto FireUnrealReal
       GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE)
       GRLG A 0 A_GiveInventory("Lith_RocketLoaded", 1)
-      GRLR ABCD 2
+      GRLR A 1
+      GRLR BCD 2
       GRLR D 1
       GRLR D 1 A_GunFlash("HackyChecks")
       GRLR EFGH 2

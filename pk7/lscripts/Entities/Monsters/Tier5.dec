@@ -28,6 +28,7 @@ actor Lith_CyberRocket : Rocket replaces Rocket
    Height 4
    Speed 25
    Damage (15 * random(1, 8))
+   DeathSound "explosion"
    
    states
    {
