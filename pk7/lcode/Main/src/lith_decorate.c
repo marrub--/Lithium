@@ -133,7 +133,7 @@ void Lith_DOGS()
    
    int tid = ACS_UniqueTID();
    
-   ACS_SetMusic("lmusic/DOGS.flac");
+   ACS_SetMusic("lmusic/DOGS.ogg");
    
    for(int i = 0; i < (35 * 30) / 10; i++)
    {

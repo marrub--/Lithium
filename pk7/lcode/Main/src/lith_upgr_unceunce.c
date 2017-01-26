@@ -10,7 +10,7 @@
 //
 void Upgr_UNCEUNCE_Activate(player_t *p, upgrade_t *upgr)
 {
-   ACS_SetMusic("lmusic/Unce.flac");
+   ACS_SetMusic("lmusic/Unce.ogg");
 }
 
 //

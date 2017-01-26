@@ -48,6 +48,7 @@ actor Lith_SteggleSphere : Lith_CustomInventory
    +COUNTITEM
    +INVENTORY.BIGPOWERUP
    +INVENTORY.FANCYPICKUPSOUND
+   +FLOATBOB
    
    states
    {
