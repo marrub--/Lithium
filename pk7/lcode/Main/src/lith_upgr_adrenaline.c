@@ -16,7 +16,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
    else if(ACS_CheckInventory("Lith_AdrenalineToken"))
    {
       ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      Lith_Log(p, ">>>>> Adrenaline administered.");
+      Lith_LogH(p, ">>>>> Adrenaline administered.");
       
       upgr->user_int[u_charge] = upgr->user_int[u_readied] = 0;
       
@@ -27,7 +27,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
    else if(!upgr->user_int[u_readied])
    {
       ACS_PlaySound(0, "player/adren/ready", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      Lith_Log(p, ">>>>> Adrenaline injector ready.");
+      Lith_LogH(p, ">>>>> Adrenaline injector ready.");
       upgr->user_int[u_readied] = 1;
    }
 }

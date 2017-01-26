@@ -181,15 +181,11 @@ void Lith_Barrier()
 {
    player_t *p = Lith_LocalPlayer;
    
-   ACS_GiveInventory("Lith_HasBarrier", 1);
-   
    for(int i = 0; p->active && i < 35 * 30; i++)
    {
       ACS_GiveInventory("Lith_BarrierSpell", 1);
       ACS_Delay(1);
    }
-   
-   ACS_TakeInventory("Lith_HasBarrier", 1);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -197,12 +193,12 @@ void Lith_BarrierBullets()
 {
    player_t *p = &players[GetPlayerNumber(0, AAPTR_TARGET)];
    
-   fixed ang =  ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
-   fixed xang = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));
+   fixed ang   = ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
+   fixed xang  = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));
    fixed zdiff = p->z - ACS_GetActorZ(0);
-   fixed s = ACS_Sin(ang) * 48.0;
-   fixed c = ACS_Cos(ang) * 48.0;
-   fixed z = (p->z + p->viewheight / 2) - (zdiff / 2);
+   fixed s     = ACS_Sin(ang) * 48.0;
+   fixed c     = ACS_Cos(ang) * 48.0;
+   fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);
    
    ACS_SpawnForced("Lith_BarrierFX", p->x + c, p->y + s, z);
    ACS_LineAttack(p->tid, ang + ACS_RandomFixed(-0.1, 0.1), PITCH_BASE + ACS_RandomFixed(0.45, 0.55), 10);

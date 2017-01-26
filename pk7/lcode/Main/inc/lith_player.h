@@ -97,7 +97,7 @@ typedef struct player_s
    int maxarmor;
    fixed jumpheight;
    fixed viewheight;
-   double discount;
+   float discount;
    
    // Additive view
    float addpitch;
