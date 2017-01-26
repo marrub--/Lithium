@@ -122,6 +122,10 @@ actor Lith_Weapon : Weapon
       TNT1 A 1
       TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
       goto SpawnLoopForRealYo
+   
+   DummyFlash:
+      TNT1 A 0 A_AlertMonsters
+      stop
    }
 }
 

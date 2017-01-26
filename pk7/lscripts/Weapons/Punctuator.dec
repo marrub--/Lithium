@@ -1,0 +1,56 @@
+actor Lith_CannonScopedToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+actor Lith_GTFO : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+actor Lith_PunctuatorExplosion
+{
+   RenderStyle "Add"
+   Alpha 0.2
+   Scale 0.9
+   DamageType "Lith_PlayerMissile"
+   
+   +BLOODLESSIMPACT
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      TNT1 AA 0 nodelay A_Explode(128, 128, 0)
+      TNT1 A random(1, 5)
+      MEXP AB 1 bright
+      MEXP CD 2 bright
+      MEXP EF 3 bright
+      stop
+   }
+}
+
+actor Lith_PunctuatorPuff
+{
+   Species "Lith_Player"
+   DamageType "Lith_PlayerMissile"
+   
+   +NOINTERACTION
+   +PUFFONACTORS
+   +NODECAL
+   +BLOODLESSIMPACT
+   +MTHRUSPECIES
+   
+   states
+   {
+   Spawn:
+      TNT1 AA 0 nodelay A_Explode(128, 128, 0)
+      MEXP AB 2 bright
+      MEXP CD 3 bright
+      MEXP EF 4 bright
+      stop
+   }
+}
+
+// EOF
+

@@ -61,12 +61,7 @@ actor Lith_MonsterHax
 #include "lscripts/Weapons/4_CombatRifle.dec"
 #include "lscripts/Weapons/5_RocketLauncher.dec"
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
-
-#include "lscripts/Weapons/7_OmegaCannon_Base.dec"
-#include "lscripts/Weapons/7_PunctuatorCannon_Upgr.dec"
-#include "lscripts/Weapons/7_OmegaRailgun_Upgr.dec"
 #include "lscripts/Weapons/7_OmegaCannon.dec"
-
 #include "lscripts/Weapons/9_Sword.dec"
 
 // EOF
