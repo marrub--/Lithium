@@ -2,9 +2,6 @@
 
 function void Lith_SetupBalance(void)
 {
-   // what the fuck, zdoom? @_@
-   str fuck = "asdf";
-   fuck = 0;
 }
 
 // EOF
