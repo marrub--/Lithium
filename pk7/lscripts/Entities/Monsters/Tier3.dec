@@ -52,6 +52,7 @@ actor Lith_HellKnight : HellKnight replaces HellKnight
    Speed 4
    DamageFactor "Lith_Bullets", 0.6
    Species "Lith_HellKnight"
+   Tag "$LITH_TXT_INFO_SHORT_HellKnight"
    
    states
    {
@@ -104,6 +105,7 @@ actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
    PainChance 55
    DamageFactor "Lith_Bullets", 0.6
+   Tag "$LITH_TXT_INFO_SHORT_BaronOfHell"
    
    +MISSILEMORE
    
@@ -165,6 +167,7 @@ actor Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 actor Lith_Revenant : Revenant replaces Revenant
 {
    Health 400
+   Tag "$LITH_TXT_INFO_SHORT_Revenant"
    
    states
    {
@@ -189,6 +192,7 @@ actor Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
 actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 {
    DamageFactor "Lith_Bullets", 0.6
+   Tag "$LITH_TXT_INFO_SHORT_Cacodemon"
    
    states
    {
@@ -213,6 +217,7 @@ actor Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
 actor Lith_Arachnotron : Arachnotron replaces Arachnotron
 {
    DamageFactor "Lith_Energy", 0.6
+   Tag "$LITH_TXT_INFO_SHORT_Arachnotron"
    
    states
    {
@@ -239,6 +244,7 @@ actor Lith_FatShot : FatShot replaces FatShot
 actor Lith_Mancubus : Fatso replaces Fatso
 {
    PainChance 50
+   Tag "$LITH_TXT_INFO_SHORT_Mancubus"
    
    states
    {

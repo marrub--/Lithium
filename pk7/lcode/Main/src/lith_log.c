@@ -25,7 +25,7 @@
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_LogName(int name)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    switch(name)
    {

@@ -13,17 +13,17 @@
 #define MAX_PLAYERS 8
 #define HUDSTRS_MAX 20
 
-#define Lith_ForPlayer() \
+#define ForPlayer() \
    for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
       __with(player_t *p = &players[_piter];) \
          if(p->active)
 
 #define Lith_GiveAllScore(score) \
-   Lith_ForPlayer() \
+   ForPlayer() \
       Lith_GiveScore(p, score)
 
-#define Lith_LocalPlayer (&players[ACS_PlayerNumber()])
-#define Lith_PlayerDiscount(n) (score_t)((n) * p->discount)
+#define LocalPlayer (&players[ACS_PlayerNumber()])
+#define PlayerDiscount(n) (score_t)((n) * p->discount)
 
 enum
 {
@@ -45,7 +45,7 @@ typedef struct player_delta_s
    // Position
    fixed x, y, z;
    fixed floorz;
-   float pitch, yaw, roll;
+   fixed pitch, yaw;
    
    // Movement
    fixed velx, vely, velz;
@@ -93,6 +93,7 @@ typedef struct player_s
    player_delta_t old;
    
    // State without delta
+   float pitchf, yawf; // pitch/yaw in precalculated sane radian format
    int maxhealth;
    int maxarmor;
    fixed jumpheight;

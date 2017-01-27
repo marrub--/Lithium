@@ -4,6 +4,7 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
    DropItem "Lith_Dummy"
    MinMissileChance 150
    Speed 9
+   Tag "$LITH_TXT_INFO_SHORT_ZombieMan"
    
    var int user_shots;
    
@@ -47,6 +48,7 @@ actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
    DropItem "Lith_Dummy"
    MinMissileChance 150
    Speed 9
+   Tag "$LITH_TXT_INFO_SHORT_ShotgunGuy"
    
    states
    {
@@ -103,6 +105,7 @@ actor Lith_Imp : DoomImp replaces DoomImp
    Scale 0.9
    Radius 18
    Height 50
+   Tag "$LITH_TXT_INFO_SHORT_Imp"
    
    states
    {
@@ -139,6 +142,7 @@ actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
 {
    DropItem "Lith_Dummy"
    Speed 9
+   Tag "$LITH_TXT_INFO_SHORT_ChaingunGuy"
    
    states
    {

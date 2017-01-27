@@ -39,7 +39,7 @@ static void Lith_World(void)
    }
    
    if(ACS_GameSkill() == skill_extrahard)
-      Lith_ForPlayer()
+      ForPlayer()
          p->scoremul += 0.15;
    
    ACS_SetAirControl(0.77);
@@ -51,7 +51,7 @@ static void Lith_World(void)
       int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       
       if(secrets > prevsecrets)
-         Lith_ForPlayer()
+         ForPlayer()
          {
             Lith_GiveScore(p, 9000 * (secrets - prevsecrets));
             p->secretsfound++;

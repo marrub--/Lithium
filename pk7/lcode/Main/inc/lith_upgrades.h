@@ -4,6 +4,14 @@
 #include "lith_common.h"
 #include "lith_upgradenames.h"
 
+#define UserData_Adrenaline data.u01
+#define UserData_Implying   data.u02
+#define UserData_JetBooster data.u03
+#define UserData_lolsords   data.u04
+#define UserData_ReactArmor data.u05
+#define UserData_ReflexWetw data.u06
+#define UserData_VitalScan  data.u07
+
 
 //----------------------------------------------------------------------------
 // Type Definitions
@@ -19,14 +27,34 @@ enum
    UC_MAX
 };
 
-enum
+union upgradedata_u
 {
-   u_charge      = 0,
-   u_hudid       = 0,
-   u_origweapon  = 0,
-   u_activearmor = 0,
-   u_leaped      = 1,
-   u_readied     = 1,
+   struct
+   {
+      int charge;
+      bool readied;
+   } u01;
+   
+   struct {int hudid;}        u02;
+   struct {int charge;}       u03;
+   struct {__str origweapon;} u04;
+   struct {int activearmor;}  u05;
+   
+   struct
+   {
+      int charge;
+      bool leaped;
+   } u06;
+   
+   struct
+   {
+      bool target;
+      __str tagstr;
+      int health;
+      int maxhealth;
+      float angle;
+      float old;
+   } u07;
 };
 
 //
@@ -65,8 +93,7 @@ typedef struct upgrade_s
 {
    bool active : 1, owned : 1, wasactive : 1;
    upgradeinfo_t const *info;
-   int user_int[8];
-   __str user_str[8];
+   union upgradedata_u data;
 } upgrade_t;
 
 //
@@ -96,6 +123,7 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
                   D(ReactArmor)
                                                 E(DefenseNuke)
                                  U(Adrenaline)
+                                 U(VitalScan)                  R(VitalScan)
 //---------------------------------------------------------------------------
                   D(RifleModes)  U(RifleModes)
                   D(PunctCannon)

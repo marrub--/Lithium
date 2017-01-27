@@ -47,7 +47,7 @@ bool Shop_CanBuy(player_t *p, shopdef_t *def)
 {
    int cur = ACS_CheckInventory(def->class);
    int max = ACS_GetMaxInventory(0, def->class);
-   return (max == 0 || cur < max) && p->score - Lith_PlayerDiscount(def->cost) >= 0;
+   return (max == 0 || cur < max) && p->score - PlayerDiscount(def->cost) >= 0;
 }
 
 //
@@ -66,7 +66,7 @@ static void Shop_Buy(player_t *p, shopdef_t *def)
    Lith_UnlockBIPPage(&p->bip, def->name);
    
    ACS_GiveInventory(def->class, def->count);
-   Lith_TakeScore(p, Lith_PlayerDiscount(def->cost));
+   Lith_TakeScore(p, PlayerDiscount(def->cost));
    p->itemsbought++;
 }
 

@@ -38,7 +38,7 @@ void Lith_EmitScore(int amount)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    int max = rifle_firemode_max;
    
    if(!p->upgrades[UPGR_RifleModes].active)
@@ -57,7 +57,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    if(ACS_PlayerNumber() < 0)
       return 0;
    
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    switch(info)
    {
@@ -109,27 +109,27 @@ int Lith_OscillateN(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    return p->health < p->maxhealth;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Discount()
 {
-   Lith_LocalPlayer->discount = 0.85;
+   LocalPlayer->discount = 0.85;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_DOGS()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    int tid = ACS_UniqueTID();
    
@@ -179,7 +179,7 @@ void Lith_SteggleEnergy()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Barrier()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    for(int i = 0; p->active && i < 35 * 30; i++)
    {
@@ -217,7 +217,7 @@ int Lith_GetSigil()
 {
    ACS_SetResultValue(1); // q_q
    
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(p->cbi.open)
       Lith_KeyOpenCBI();

@@ -83,6 +83,14 @@ void Lith_PlayerInitBIP(player_t *p)
    
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = Lith_ListSize(&bip->infogr[categ]);
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+   {
+      bip->pageavail = bip->pagemax;
+      
+      ForCategory()        bip->categoryavail[categ] = bip->categorymax[categ];
+      ForCategoryAndPage() page->unlocked = true;
+   }
 }
 
 //
@@ -114,17 +122,6 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
    }
    
    return page;
-}
-
-//
-// Lith_UnlockAllBIPPages
-//
-void Lith_UnlockAllBIPPages(bip_t *bip)
-{
-   bip->pageavail = bip->pagemax;
-   
-   ForCategory()        bip->categoryavail[categ] = bip->categorymax[categ];
-   ForCategoryAndPage() page->unlocked = true;
 }
 
 //

@@ -92,7 +92,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
 [[__call("ScriptI"), __address(14242), __extern("ACS")]]
 void Lith_WeaponPickup(int parm, int tid)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(!ValidateWeapon(parm) || p->hasweapon[parm])
       return;
@@ -128,7 +128,7 @@ void Lith_WeaponPickup(int parm, int tid)
 int Lith_PickupScore(int parm, int spritetid)
 {
    ACS_SetActivatorToTarget(0);
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !p->hasweapon[parm])
       return true;
@@ -163,44 +163,6 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
    }
    else
       return bitsk(P);
-}
-
-//
-// Lith_PunctuatorFire
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_PunctuatorFire(void)
-{
-   player_t *p = Lith_LocalPlayer;
-   int ptid = ACS_UniqueTID();
-   
-   ACS_LineAttack(0, p->yaw, p->pitch, 128, "Lith_PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);
-   
-   if(ACS_ThingCount(T_NONE, ptid))
-   {
-      fixed x = ACS_GetActorX(ptid);
-      fixed y = ACS_GetActorY(ptid);
-      fixed z = ACS_GetActorZ(ptid);
-      
-      float yaw = atan2f(y - p->y, x - p->x);
-      
-      float cx = cos(yaw);
-      float cy = sin(yaw);
-      
-      for(int i = 0; i < 10; i++)
-      {
-         float sx = x + (cx * (32 * i));
-         float sy = y + (cy * (32 * i));
-         
-         int etid = ACS_UniqueTID();
-         
-         ACS_SpawnForced("Lith_PunctuatorExplosion", sx, sy, z, etid);
-         
-         ACS_SetActivator(etid);
-         ACS_SetPointer(AAPTR_TARGET, p->tid);
-         ACS_SetActivator(p->tid);
-      }
-   }
 }
 
 // EOF

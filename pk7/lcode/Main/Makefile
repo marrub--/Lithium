@@ -47,6 +47,7 @@ MAIN_SOURCES= \
 	$(SRC)/lith_upgr_reflexwetw.c \
 	$(SRC)/lith_upgr_riflemodes.c \
 	$(SRC)/lith_upgr_unceunce.c \
+	$(SRC)/lith_upgr_vitalscan.c \
 	$(SRC)/lith_cbi.c \
 	$(SRC)/lith_cbi_gui.c \
 	$(SRC)/lith_bip.c \

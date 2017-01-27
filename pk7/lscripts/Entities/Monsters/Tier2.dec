@@ -3,6 +3,7 @@ actor Lith_Demon : Demon replaces Demon
    Radius 29
    MeleeRange 52
    Health 200
+   Tag "$LITH_TXT_INFO_SHORT_Demon"
    
    states
    {
@@ -29,6 +30,7 @@ actor Lith_Spectre : Lith_Demon replaces Spectre
    +SHADOW
    RenderStyle OptFuzzy
    Alpha 0.5
+   Tag "$LITH_TXT_INFO_SHORT_Spectre"
 }
 
 actor Lith_LostSoul : LostSoul replaces LostSoul
@@ -36,6 +38,7 @@ actor Lith_LostSoul : LostSoul replaces LostSoul
    Health 70
    RenderStyle Add
    Alpha 0.7
+   Tag "$LITH_TXT_INFO_SHORT_LostSoul"
    
    +QUICKTORETALIATE
    +THRUSPECIES

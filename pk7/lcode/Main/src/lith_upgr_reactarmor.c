@@ -1,5 +1,7 @@
 #include "lith_upgrades_common.h"
 
+#define UserData upgr->UserData_ReactArmor
+
 
 //----------------------------------------------------------------------------
 // Static Functions
@@ -39,7 +41,7 @@ static void RA_Give(__str name, int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_RA_Give(int num)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    upgrade_t *upgr = &p->upgrades[UPGR_ReactArmor];
    
    if(!upgr->active)
@@ -59,9 +61,9 @@ void Lith_RA_Give(int num)
    case 8: name = "Ice";       break;
    }
    
-   if(upgr->user_int[u_activearmor] != num)
+   if(UserData.activearmor != num)
    {
-      upgr->user_int[u_activearmor] = num;
+      UserData.activearmor = num;
       
       RA_Take(1);
       RA_Take(2);
@@ -80,7 +82,7 @@ void Lith_RA_Give(int num)
 //
 void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   upgr->user_int[u_activearmor] = 0;
+   UserData.activearmor = 0;
    
    RA_Take(1);
    RA_Take(2);

@@ -67,6 +67,8 @@ enum
    hid_logE,
    hid_logS = hid_logE + 20,
    
+   hid_vitalscanner,
+   
    hid_jetE,
    hid_jetS = hid_jetE + 15,
    hid_jettext,

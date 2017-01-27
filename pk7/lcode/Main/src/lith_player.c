@@ -47,7 +47,7 @@ static void HUD_Scope(player_t *p);
 [[__call("ScriptS"), __script("Enter")]]
 static void Lith_PlayerEntry(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    while(!mapinit) ACS_Delay(1);
    
@@ -95,7 +95,7 @@ static void Lith_PlayerEntry(void)
 [[__call("ScriptS"), __script("Death")]]
 static void Lith_PlayerDeath(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    bool singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
    
    p->dead = true;
@@ -125,7 +125,7 @@ static void Lith_PlayerDeath(void)
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
-   Lith_ResetPlayer(Lith_LocalPlayer);
+   Lith_ResetPlayer(LocalPlayer);
 }
 
 //
@@ -134,7 +134,7 @@ static void Lith_PlayerRespawn(void)
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    Lith_DeallocateBIP(&p->bip);
    Lith_ListFree(&p->loginfo.hud);
    Lith_ListFree(&p->loginfo.full, free);
@@ -148,7 +148,7 @@ static void Lith_PlayerDisconnect(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_PlayerUnloading(void)
 {
-   Lith_ForPlayer()
+   ForPlayer()
    {
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);
@@ -237,7 +237,9 @@ static void Lith_PlayerUpdateData(player_t *p)
    
    p->pitch = ACS_GetActorPitch(0) - p->addpitch;
    p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
-   p->roll  = ACS_GetActorRoll(0);
+   
+   p->pitchf = (p->pitch - 0.5) * pi;
+   p->yawf   = p->yaw * tau - pi;
    
    p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
    p->yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
@@ -386,16 +388,11 @@ static void Lith_ResetPlayer(player_t *p)
    
    if(ACS_GetCVar("__lith_debug_on"))
    {
-      p->score += 0xFFFFFFFFFFFFFFFFll;
+      p->score = 0xFFFFFFFFFFFFFFFFll;
+      
       for(int i = weapon_min; i < weapon_max; i++)
          if(weaponinfo[i].class != null)
             ACS_GiveInventory(weaponinfo[i].class, 1);
-      
-      for(int i = 0; i < UPGR_MAX; i++)
-         if(!p->upgrades[i].owned)
-            Upgr_SetOwned(p, &p->upgrades[i]);
-      
-      Lith_UnlockAllBIPPages(&p->bip);
    }
    
    Lith_UnlockBIPPage(&p->bip, "Pistol");

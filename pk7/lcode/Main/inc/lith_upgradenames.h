@@ -8,6 +8,7 @@ enum
    UPGR_ReactArmor2,
    UPGR_DefenseNuke,
    UPGR_Adrenaline,
+   UPGR_VitalScan,
    
    UPGR_AutoPistol,
    UPGR_GaussShotty,

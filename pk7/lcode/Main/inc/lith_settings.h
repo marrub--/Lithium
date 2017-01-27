@@ -13,6 +13,7 @@ Bool("Modal Rifle scope", "lith_weapons_riflescope")
 Category("Heads Up Display")
 Bool("Show score",   "lith_hud_showscore")
 Bool("Show weapons", "lith_hud_showweapons")
+Bool("Sliding Vital Scanner", "lith_hud_movescanner")
 
 if(ACS_GameType() == GAME_SINGLE_PLAYER)
 {

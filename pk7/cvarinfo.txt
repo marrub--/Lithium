@@ -14,6 +14,7 @@ user bool lith_weapons_riflescope = false;
 // HUD
 user bool lith_hud_showscore = true;
 user bool lith_hud_showweapons = true;
+user bool lith_hud_movescanner = false;
 
 // Server
 server bool lith_sv_stupidpickups = false;
@@ -21,5 +22,6 @@ server bool lith_sv_revenge = true;
 
 // Debugging
 server noarchive bool __lith_debug_on = false;
+server noarchive string __lith_debug_upgrade;
 
 // EOF

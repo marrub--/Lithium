@@ -1,5 +1,7 @@
 actor Lith_PainElemental : PainElemental replaces PainElemental
 {
+   Tag "$LITH_TXT_INFO_SHORT_PainElemental"
+   
    states
    {
    Death:
@@ -12,6 +14,7 @@ actor Lith_Archvile : Archvile replaces Archvile
 {
    Health 800
    PainChance 2
+   Tag "$LITH_TXT_INFO_SHORT_Archvile"
    
    states
    {

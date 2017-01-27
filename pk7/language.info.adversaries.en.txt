@@ -1,0 +1,28 @@
+[enu default]
+
+// Posessed humans
+LITH_TXT_INFO_SHORT_ZombieMan        = "Former Human";
+LITH_TXT_INFO_SHORT_ShotgunGuy       = "Former Sergeant";
+LITH_TXT_INFO_SHORT_ChaingunGuy      = "Former Corporal";
+
+// Hell denizens
+LITH_TXT_INFO_SHORT_Imp              = "Hell Trooper";
+LITH_TXT_INFO_SHORT_Demon            = "Hell Sergeant";
+LITH_TXT_INFO_SHORT_HellKnight       = "Hell Knight";
+LITH_TXT_INFO_SHORT_BaronOfHell      = "Hell Baron";
+
+// Demons
+LITH_TXT_INFO_SHORT_Cyberdemon       = "Cyber-Demon";
+LITH_TXT_INFO_SHORT_Cacodemon        = "Caco-Demon";
+LITH_TXT_INFO_SHORT_Arachnotron      = "Spider Demon";
+
+// Special enemies
+LITH_TXT_INFO_SHORT_Archvile         = "Archvile";
+LITH_TXT_INFO_SHORT_Revenant         = "Revenant";
+LITH_TXT_INFO_SHORT_Mancubus         = "Mancubus";
+LITH_TXT_INFO_SHORT_Spectre          = "Spectre";
+LITH_TXT_INFO_SHORT_LostSoul         = "Lost Soul";
+LITH_TXT_INFO_SHORT_SpiderMastermind = "Spider Mastermind";
+
+// EOF
+

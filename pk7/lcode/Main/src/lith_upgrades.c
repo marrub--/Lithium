@@ -32,6 +32,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"ReactArmor2", "Yh0",          2500200     , UC_Body,  0.00},
    {"DefenseNuke", "DefenseNuke",  580030      , UC_Body,  0.00, E(DefenseNuke)},
    {"Adrenaline",  "Adrenaline",   1801000     , UC_Body,  0.00, U(Adrenaline)},
+   {"VitalScan",   "VitalScan",    801500      , UC_Body,  0.00, U(VitalScan), R(VitalScan)},
    
    {"AutoPistol",  null,           140940      , UC_Weap,  0.00, weapon_pistol},
    {"GaussShotty", "ShotgunUpgr",  1079430     , UC_Weap,  0.00, weapon_shotgun},
@@ -61,6 +62,7 @@ static void RenderProxy(player_t *p, upgrade_t *upgr)
    ACS_SetHudSize(320, 200);
    upgr->info->Render(p, upgr);
 }
+
 
 //----------------------------------------------------------------------------
 // External Functions
@@ -118,7 +120,7 @@ void Upgr_SetOwned(player_t *p, upgrade_t *upgr)
 //
 bool Upgr_CanBuy(player_t *p, upgrade_t *upgr)
 {
-   return !upgr->owned && (p->score - Lith_PlayerDiscount(upgr->info->cost)) >= 0;
+   return !upgr->owned && (p->score - PlayerDiscount(upgr->info->cost)) >= 0;
 }
 
 //
@@ -134,7 +136,7 @@ void Upgr_Buy(player_t *p, upgrade_t *upgr)
    
    Lith_LogF(p, "> Bought %S", Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name));
    
-   Lith_TakeScore(p, Lith_PlayerDiscount(upgr->info->cost));
+   Lith_TakeScore(p, PlayerDiscount(upgr->info->cost));
    Upgr_SetOwned(p, upgr);
 }
 
@@ -152,6 +154,15 @@ void Lith_PlayerInitUpgrades(player_t *p)
       
       if(upgr->info->cost == 0)
          Upgr_SetOwned(p, upgr);
+      
+      if(ACS_GetCVar("__lith_debug_on"))
+      {
+         if(upgr->info->cost != 0)
+            Upgr_SetOwned(p, upgr);
+         
+         if(ACS_StrCmp(ACS_GetCVarString("__lith_debug_upgrade"), upgr->info->name) == 0)
+            Upgr_ToggleActive(p, upgr);
+      }
    }
 }
 
@@ -267,7 +278,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    default:              mark = "\Cnscr";   break;
    }
    
-   __str cost = upgr->info->cost ? StrParam("%lli%S", Lith_PlayerDiscount(upgr->info->cost), mark) : "---";
+   __str cost = upgr->info->cost ? StrParam("%lli%S", PlayerDiscount(upgr->info->cost), mark) : "---";
    int   yofs = 0;
    
    ACS_SetHudClipRect(111, 30, 184, 150, 184);

@@ -1,5 +1,7 @@
 #include "lith_upgrades_common.h"
 
+#define UserData upgr->UserData_Implying
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -34,7 +36,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
    static int const num_strings = sizeof(strings) / sizeof(*strings);
    static int const id_max = hid_implyingE - hid_implyingS;
    
-   int id = upgr->user_int[u_hudid];
+   int id = UserData.hudid;
    for(int i = 0, n = ACS_Random(0, 40); i < n; i++)
    {
       id = ++id % id_max;
@@ -47,7 +49,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
                      0.1);
    }
    
-   upgr->user_int[u_hudid] = id;
+   UserData.hudid = id;
 }
 
 // EOF

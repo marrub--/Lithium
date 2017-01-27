@@ -219,7 +219,7 @@ void Lith_PlayerResetCBI(player_t *p)
 [[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyOpenCBI(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(p->dead)
       return;
