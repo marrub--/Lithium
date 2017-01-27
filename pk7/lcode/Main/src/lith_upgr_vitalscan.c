@@ -15,9 +15,9 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
    
-   if((UserData.target = ACS_CheckFlag(0, "COUNTKILL")))
+   if((UserData.target = ACS_CheckFlag(0, "COUNTKILL") || ACS_PlayerNumber() != -1))
    {
-      UserData.tagstr    = ACS_GetActorPropertyString(0, APROP_NameTag);
+      UserData.tagstr    = StrParam("%tS", 0);
       UserData.health    = ACS_GetActorProperty(0, APROP_Health);
       UserData.maxhealth = ACS_GetActorProperty(0, APROP_SpawnHealth);
       UserData.angle     = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));
