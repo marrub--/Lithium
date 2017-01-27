@@ -1,0 +1,46 @@
+actor Lith_MonsterHax
+{
+   Monster
+   -COUNTKILL
+   -CANPUSHWALLS
+   -CANUSEWALLS
+   -ACTIVATEMCROSS
+   -CANPASS
+}
+
+actor Lith_Alerter : CustomInventory
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_AlertMonsters
+      stop
+   }
+}
+
+actor Lith_CameraHax
+{
+   Radius 2
+   Height 2
+   
+   +NOINTERACTION
+}
+
+actor Lith_TimeHax : PowerTimeFreezer
+{
+   Powerup.Duration 1
+}
+
+actor Lith_TimeHax2 : PowerTimeFreezer
+{
+   Powerup.Duration -80
+}
+
+actor Lith_UniqueID : Inventory
+{
+   Inventory.MaxAmount 0x7FFFFFFF
+   +INVENTORY.UNDROPPABLE
+}
+
+// EOF
+

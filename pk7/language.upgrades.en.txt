@@ -59,6 +59,13 @@ LITH_TXT_UPGRADE_DESCR_Adrenaline =
    "Implants an adrenaline injector into your skin, which reacts to sudden "
    "impulses and sound cues.";
 
+LITH_TXT_UPGRADE_TITLE_VitalScan = "Vital Scanner";
+LITH_TXT_UPGRADE_DESCR_VitalScan =
+   "Effect: While aiming at living things, you can see their health and how "
+   "much damage is being dealt to them on your HUD.\n\n"
+   "A set of nanobots are deployed to get vitality information on targets "
+   "you aim at.";
+
 //
 // Weapons
 //

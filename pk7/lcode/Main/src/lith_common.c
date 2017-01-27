@@ -4,20 +4,33 @@
 #include <math.h>
 #include <ctype.h>
 
-// ---------------------------------------------------------------------------
-// Functions.
+//----------------------------------------------------------------------------
+// Extern Functions
 //
 
+//
+// ButtonPressed
+//
 bool ButtonPressed(player_t *p, int bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
 
+//
+// ButtonPressedUI
+//
+// In world stuff, generally it's expected that something is pressed when
+// you hit the button, immediately.  However, with UIs, generally we expect
+// things to be clicked when the button is released.
+//
 bool ButtonPressedUI(player_t *p, int bt)
 {
    return !(p->buttons & bt) && p->old.buttons & bt;
 }
 
+//
+// Random
+//
 int Random(int max, int min)
 {
    if(max < min)
@@ -30,11 +43,17 @@ int Random(int max, int min)
    return min + (rand() % (max - min + 1));
 }
 
+//
+// RandomFixed
+//
 fixed RandomFixed(fixed max, fixed min)
 {
    return kbits(Random(bitsk(max), bitsk(min)));
 }
 
+//
+// RandomFloat
+//
 float RandomFloat(float max, float min)
 {
    if(max < min)
@@ -47,6 +66,9 @@ float RandomFloat(float max, float min)
    return (rand() / (float)RAND_MAX) * (max - min) + min;
 }
 
+//
+// StrParam
+//
 __str StrParam(__str fmt, ...)
 {
    va_list vl;
@@ -60,6 +82,9 @@ __str StrParam(__str fmt, ...)
    return ACS_EndStrParam();
 }
 
+//
+// HudMessage
+//
 void HudMessage(__str fmt, ...)
 {
    va_list vl;
@@ -73,9 +98,12 @@ void HudMessage(__str fmt, ...)
    ACS_MoreHudMessage();
 }
 
+//
+// HudMessageRainbows
+//
 void HudMessageRainbows(__str fmt, ...)
 {
-   static char const chars[] = { 'g', 'i', 'k', 'd', 'h', 't', 'r' };
+   static char const chars[] = {'g', 'i', 'k', 'd', 'h', 't', 'r'};
    char ch = chars[(ACS_Timer() / 4) % sizeof(chars)];
    va_list vl;
    
@@ -91,6 +119,9 @@ void HudMessageRainbows(__str fmt, ...)
    ACS_MoreHudMessage();
 }
 
+//
+// Log
+//
 void Log(__str fmt, ...)
 {
    va_list vl;
@@ -104,6 +135,9 @@ void Log(__str fmt, ...)
    ACS_EndLog();
 }
 
+//
+// StrUpper
+//
 __str StrUpper(__str in)
 {
    ACS_BeginStrParam();
@@ -114,45 +148,59 @@ __str StrUpper(__str in)
    return ACS_EndStrParam();
 }
 
+//
+// lerpk
+//
 accum lerpk(accum a, accum b, accum t)
 {
    accum ret = ((1.0 - t) * a) + (t * b);
    
    if(roundk(ret, 10) == b)
-   {
       return b;
-   }
    
    return ret;
 }
 
+//
+// lerpf
+//
 float lerpf(float a, float b, float t)
 {
    float ret = ((1.0 - t) * a) + (t * b);
    
    if((round(ret << 10) >> 10) == b)
-   {
       return b;
-   }
    
    return ret;
 }
 
+//
+// normf
+//
 float normf(float x, float min, float max)
 {
    return (x - min) / (max - min);
 }
 
+//
+// bpcldi
+//
 bool bpcldi(int x, int y, int z, int w, int x2, int y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }
 
+//
+// l1xcldi
+//
 bool l1xcldi(int lx1, int lx2, int x)
 {
    return x >= lx1 && x < lx2;
 }
 
+//
+// cpyalloc
+//
 void *cpyalloc(size_t num, size_t size, void *src)
 {
    void *dest = calloc(num, size);
@@ -160,16 +208,25 @@ void *cpyalloc(size_t num, size_t size, void *src)
    return dest;
 }
 
+//
+// pymagf
+//
 float pymagf(float x, float y)
 {
    return sqrt((x * x) + (y * y));
 }
 
+//
+// pymagk
+//
 accum pymagk(accum x, accum y)
 {
    return ACS_FixedSqrt((x * x) + (y * y));
 }
 
+//
+// angle2df
+//
 float angle2df(float x1, float y1, float x2, float y2)
 {
    float x = x2 - x1;
@@ -177,30 +234,45 @@ float angle2df(float x1, float y1, float x2, float y2)
    return atan2(y, x);
 }
 
+//
+// dist2dk
+//
 accum dist2dk(accum x1, accum y1, accum x2, accum y2)
 {
    return ACS_VectorLength(x1 - x2, y1 - y2);
 }
 
+//
+// dist2df
+//
 float dist2df(float x1, float y1, float x2, float y2)
 {
    float x = x1 - x2;
    float y = y1 - y2;
-   return sqrt(x*x + y*y);
+   return pymagf(x, y);
 }
 
+//
+// dist3dk
+//
 accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2)
 {
-   return ACS_VectorLength(ACS_VectorLength(x1 - x2, y1 - y2), z1 - z2);
+   return ACS_VectorLength(dist2dk(x1, x2, y1, y2), z1 - z2);
 }
 
+//
+// ceilk
+//
 int ceilk(accum n)
 {
-   union { int_k_t i; accum a; } u = { .a = n };
+   union {int_k_t i; accum a;} u = {.a = n};
    if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.a + 1;
    else             return (int)u.a;
 }
 
+//
+// StrHash
+//
 unsigned StrHash(__str s)
 {
    unsigned ret = 0;
@@ -209,6 +281,9 @@ unsigned StrHash(__str s)
    return ret;
 }
 
+//
+// Language
+//
 __str Language(__str fmt, ...)
 {
    va_list vl;
@@ -232,39 +307,56 @@ __str Language(__str fmt, ...)
    return ret;
 }
 
-[[__optional_args(2)]]
+//
+// Lith_SetPlayerVelocity
+//
 bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob)
 {
    if(add)
-   {
-      p->velx += velx;
-      p->vely += vely;
-      p->velz += velz;
-   }
+      p->velx += velx, p->vely += vely, p->velz += velz;
    else
-   {
-      p->velx = velx;
-      p->vely = vely;
-      p->velz = velz;
-   }
+      p->velx = velx, p->vely = vely, p->velz = velz;
    
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
 }
 
+//
+// Lith_GetTID
+//
 [[__call("ScriptS")]]
-int GetTID(int tid, int ptr)
+int Lith_GetTID(int tid, int ptr)
 {
    ACS_SetActivator(tid, ptr);
    return ACS_ActivatorTID();
 }
 
+//
+// Lith_GetPlayerNumber
+//
 [[__call("ScriptS")]]
-int GetPlayerNumber(int tid, int ptr)
+int Lith_GetPlayerNumber(int tid, int ptr)
 {
    ACS_SetActivator(tid, ptr);
    return ACS_PlayerNumber();
 }
 
 //
-// ---------------------------------------------------------------------------
+// Lith_CheckActorInventory
+//
+int Lith_CheckActorInventory(int tid, __str item)
+{
+   if(tid == 0) return ACS_CheckInventory(item);
+   else         return ACS_CheckActorInventory(tid, item);
+}
+
+//
+// Lith_GiveActorInventory
+//
+void Lith_GiveActorInventory(int tid, __str item, int amount)
+{
+   if(tid == 0) ACS_GiveInventory(item, amount);
+   else         ACS_GiveActorInventory(tid, item, amount);
+}
+
+// EOF
 

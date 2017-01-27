@@ -6,20 +6,11 @@ damagetype Lith_NoDamage
    ReplaceFactor
 }
 
-actor Lith_MonsterHax
-{
-   Monster
-   -COUNTKILL
-   -CANPUSHWALLS
-   -CANUSEWALLS
-   -ACTIVATEMCROSS
-   -CANPASS
-}
-
 //
 // Misc. Entities
 
 #include "lscripts/Entities/Dummy.dec"
+#include "lscripts/Entities/Hacks.dec"
 #include "lscripts/Entities/Player.dec"
 
 //

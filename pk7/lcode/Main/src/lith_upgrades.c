@@ -32,7 +32,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"ReactArmor2", "Yh0",          2500200     , UC_Body,  0.00},
    {"DefenseNuke", "DefenseNuke",  580030      , UC_Body,  0.00, E(DefenseNuke)},
    {"Adrenaline",  "Adrenaline",   1801000     , UC_Body,  0.00, U(Adrenaline)},
-   {"VitalScan",   "VitalScan",    801500      , UC_Body,  0.00, U(VitalScan), R(VitalScan)},
+   {"VitalScan",   "VitalScanner", 801500      , UC_Body,  0.00, U(VitalScan), R(VitalScan)},
    
    {"AutoPistol",  null,           140940      , UC_Weap,  0.00, weapon_pistol},
    {"GaussShotty", "ShotgunUpgr",  1079430     , UC_Weap,  0.00, weapon_shotgun},

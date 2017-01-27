@@ -1,5 +1,11 @@
 [enu default]
 
+LITH_TXT_INFO_DESCR_Classified = "<classified by OFMD clearance scanner>";
+
+LITH_TXT_INFO_SHORT_HeadsUpDisp = "$LITH_TXT_UPGRADE_TITLE_HeadsUpDisp";
+LITH_TXT_INFO_TITLE_HeadsUpDisp = "Heads Up Display";
+LITH_TXT_INFO_DESCR_HeadsUpDisp = "$LITH_TXT_INFO_DESCR_Classified";
+
 LITH_TXT_INFO_SHORT_JetBooster = "$LITH_TXT_UPGRADE_TITLE_JetBooster";
 LITH_TXT_INFO_TITLE_JetBooster = "Pe'i tha E. Jet Boots";
 LITH_TXT_INFO_DESCR_JetBooster =
@@ -47,11 +53,15 @@ LITH_TXT_INFO_DESCR_Yh0 =
 
 LITH_TXT_INFO_SHORT_DefenseNuke = "$LITH_TXT_UPGRADE_TITLE_DefenseNuke";
 LITH_TXT_INFO_TITLE_DefenseNuke = "Defensive Atomic Bomb";
-LITH_TXT_INFO_DESCR_DefenseNuke = "<classified by OFMD clearance scanner>";
+LITH_TXT_INFO_DESCR_DefenseNuke = "$LITH_TXT_INFO_DESCR_Classified";
 
 LITH_TXT_INFO_SHORT_Adrenaline = "$LITH_TXT_UPGRADE_TITLE_Adrenaline";
 LITH_TXT_INFO_TITLE_Adrenaline = "Senxans Automatic Adrenaline Injector";
-LITH_TXT_INFO_DESCR_Adrenaline = "<classified by OFMD clearance scanner>";
+LITH_TXT_INFO_DESCR_Adrenaline = "$LITH_TXT_INFO_DESCR_Classified";
+
+LITH_TXT_INFO_SHORT_VitalScanner = "$LITH_TXT_UPGRADE_TITLE_VitalScan";
+LITH_TXT_INFO_TITLE_VitalScanner = "Mitkeru Vital Scanner";
+LITH_TXT_INFO_DESCR_VitalScanner = "$LITH_TXT_INFO_DESCR_Classified";
 
 // EOF
 

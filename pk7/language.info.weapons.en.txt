@@ -114,7 +114,7 @@ LITH_TXT_INFO_DESCR_PlasmaUpgr =
    "employer is one of them.";
 
 LITH_TXT_INFO_SHORT_BFG9000 = "Omega Cannon";
-LITH_TXT_INFO_TITLE_BFG9000 = "$LITH_TXT_INFO_SHORT_Cannon";
+LITH_TXT_INFO_TITLE_BFG9000 = "$LITH_TXT_INFO_SHORT_BFG9000";
 LITH_TXT_INFO_DESCR_BFG9000 =
    "This weapon was developed in another dimensional plane, where magic is "
    "still usable. Employs an extremely complex magical pattern buffer that "

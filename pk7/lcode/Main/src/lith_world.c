@@ -8,7 +8,9 @@
 //
 
 __addrdef __mod_arr Lith_MapVariable;
+
 bool Lith_MapVariable mapinit;
+int  Lith_MapVariable mapid;
 
 
 //----------------------------------------------------------------------------
@@ -18,6 +20,24 @@ bool Lith_MapVariable mapinit;
 [[__extern("ACS"), __call("LangACS")]] void Lith_SetupBalance(void);
 void Lith_SetupWeaponsTables(void);
 
+int Lith_UniqueID(int tid)
+{
+   int pn;
+   
+   // Players return a unique identifier of -playernumber
+   if((pn = Lith_GetPlayerNumber(tid)) != -1)
+      return -(pn + 1);
+   
+   // If we already have a unique identifier, just return that,
+   int id = Lith_CheckActorInventory(tid, "Lith_UniqueID");
+   
+   // otherwise we have to give a new unique identifier.
+   if(id == 0)
+      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
+   
+   return id;
+}
+
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -26,27 +46,33 @@ void Lith_SetupWeaponsTables(void);
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
-   static bool staticinit;
+   static bool gsinit;
    
-   int prevsecrets = 0;
-   
-   if(!staticinit)
+   // Init global/static state. This is only done once and is necessary so
+   // the balance module can run and so the weapon tables can be built.
+   if(!gsinit)
    {
       Lith_SetupBalance();
       Lith_SetupWeaponsTables();
       
-      staticinit = true;
+      gsinit = true;
    }
    
-   if(ACS_GameSkill() == skill_extrahard)
+   // Give players some extra score if they're playing on extra hard or above.
+   if(ACS_GameSkill() >= skill_extrahard)
       ForPlayer()
          p->scoremul += 0.15;
    
+   // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
    
+   // Sigil for when players are ready to go, because ENTER scripts can, for
+   // some god damn reason, run before OPEN scripts.
    mapinit = true;
    
-   for(;;)
+   // Now we just check for secrets being gained, so we can give score to
+   // players when they're found.
+   for(int prevsecrets = 0;;)
    {
       int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       

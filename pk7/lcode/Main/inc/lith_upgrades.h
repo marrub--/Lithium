@@ -48,28 +48,20 @@ union upgradedata_u
    
    struct
    {
-      bool target;
+      int target;
+      int oldtarget;
       __str tagstr;
       int health;
+      int oldhealth;
       int maxhealth;
       float angle;
       float old;
    } u07;
 };
 
-//
-// upgr_cb_t
-//
-typedef void (*upgr_cb_t)(struct player_s *, struct upgrade_s *);
-
-//
-// upgr_update_cb_t
-//
+                      typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);
 [[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
 
-//
-// upgradeinfo_t
-//
 typedef struct upgradeinfo_s
 {
    __str name;

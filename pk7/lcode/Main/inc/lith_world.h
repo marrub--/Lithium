@@ -16,6 +16,9 @@ enum
 __addrdef extern __mod_arr Lith_MapVariable;
 
 extern bool Lith_MapVariable mapinit;
+extern int  Lith_MapVariable mapid;
+
+int Lith_UniqueID(int tid);
 
 #endif
 
