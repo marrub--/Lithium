@@ -49,6 +49,8 @@ static void Lith_PlayerEntry(void)
 {
    player_t *p = LocalPlayer;
    
+reinit:
+   
    while(!mapinit) ACS_Delay(1);
    
    Lith_ResetPlayer(p);
@@ -57,6 +59,9 @@ static void Lith_PlayerEntry(void)
    
    while(p->active)
    {
+      if(p->reinit)
+         goto reinit;
+      
       Lith_PlayerUpdateData(p);
       
       // This can be changed any time, so save it here.
@@ -125,7 +130,16 @@ static void Lith_PlayerDeath(void)
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
-   Lith_ResetPlayer(LocalPlayer);
+   LocalPlayer->reinit = true;
+}
+
+//
+// Lith_PlayerReturn
+//
+[[__call("ScriptS"), __script("Return")]]
+static void Lith_PlayerReturn(void)
+{
+   LocalPlayer->reinit = true;
 }
 
 //
@@ -135,24 +149,13 @@ static void Lith_PlayerRespawn(void)
 static void Lith_PlayerDisconnect(void)
 {
    player_t *p = LocalPlayer;
+   
    Lith_DeallocateBIP(&p->bip);
    Lith_ListFree(&p->loginfo.hud);
    Lith_ListFree(&p->loginfo.full, free);
    Lith_ListFree(&p->hudstrlist, free);
+   
    memset(p, 0, sizeof(player_t));
-}
-
-//
-// Lith_PlayerUnloading
-//
-[[__call("ScriptS"), __script("Unloading")]]
-static void Lith_PlayerUnloading(void)
-{
-   ForPlayer()
-   {
-      ACS_SetActivator(p->tid);
-      Lith_PlayerDeinitUpgrades(p);
-   }
 }
 
 
@@ -315,7 +318,7 @@ static void Lith_ResetPlayer(player_t *p)
    // Constant data
    
    p->active = true;
-   p->dead = false;
+   p->reinit = p->dead = false;
    p->number = ACS_PlayerNumber();
    
    //

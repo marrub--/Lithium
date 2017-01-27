@@ -20,6 +20,9 @@ int  Lith_MapVariable mapid;
 [[__extern("ACS"), __call("LangACS")]] void Lith_SetupBalance(void);
 void Lith_SetupWeaponsTables(void);
 
+//
+// Lith_UniqueID
+//
 int Lith_UniqueID(int tid)
 {
    int pn;
@@ -43,6 +46,9 @@ int Lith_UniqueID(int tid)
 // Scripts
 //
 
+//
+// Lith_World
+//
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
@@ -86,6 +92,19 @@ static void Lith_World(void)
       prevsecrets = secrets;
       
       ACS_Delay(1);
+   }
+}
+
+//
+// Lith_WorldUnload
+//
+[[__call("ScriptS"), __script("Unloading")]]
+static void Lith_WorldUnload(void)
+{
+   ForPlayer()
+   {
+      ACS_SetActivator(p->tid);
+      Lith_PlayerDeinitUpgrades(p);
    }
 }
 

@@ -82,6 +82,8 @@ typedef struct player_s
    bool active;
    bool dead;
    bool staticinit;
+   bool reinit;
+   
    int tid;
    int number;
    int cameratid;
