@@ -115,6 +115,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount);
 
 // Math
 accum lerpk(accum a, accum b, accum t);
+long accum lerplk(long accum a, long accum b, long accum t);
 float lerpf(float a, float b, float t);
 float normf(float x, float min, float max);
 bool bpcldi(int bx1, int by1, int bx2, int by2, int x2, int y2); // Box / Point collision (integer)

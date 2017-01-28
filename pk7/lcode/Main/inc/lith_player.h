@@ -18,9 +18,9 @@
       __with(player_t *p = &players[_piter];) \
          if(p->active)
 
-#define Lith_GiveAllScore(score) \
+#define Lith_GiveAllScore(score, nomul) \
    ForPlayer() \
-      Lith_GiveScore(p, score)
+      Lith_GiveScore(p, score, nomul)
 
 #define LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
@@ -129,7 +129,6 @@ typedef struct player_s
    
    // Statistics
    int weaponsheld;
-   int secretsfound;
    int itemsbought;
    int upgradesowned;
    
@@ -142,7 +141,7 @@ typedef struct player_s
    score_t scoresum;
    score_t scoreused;
    
-   unsigned long long unitstravelled;
+   int unitstravelled;
    
    // Weapons
    int riflefiremode;
@@ -164,7 +163,8 @@ typedef struct player_s
 
 extern player_t players[MAX_PLAYERS];
 
-void Lith_GiveScore(player_t *p, score_t score);
+[[__optional_args(1)]]
+void Lith_GiveScore(player_t *p, score_t score, bool nomul);
 void Lith_TakeScore(player_t *p, score_t score);
 
 #endif

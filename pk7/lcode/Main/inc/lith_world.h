@@ -13,10 +13,29 @@ enum
    skill_nightmare
 };
 
+typedef struct payoutinfo_s
+{
+   int killnum, killmax;
+   int itemnum, itemmax;
+   
+   long fixed killpct;
+   long fixed itempct;
+   
+   int killscr;
+   int itemscr;
+   
+   int total;
+   int tax;
+} payoutinfo_t;
+
 __addrdef extern __mod_arr Lith_MapVariable;
+__addrdef extern __hub_arr Lith_WorldVariable;
 
 extern bool Lith_MapVariable mapinit;
 extern int  Lith_MapVariable mapid;
+
+extern int secretsfound;
+extern payoutinfo_t payout;
 
 int Lith_UniqueID(int tid);
 

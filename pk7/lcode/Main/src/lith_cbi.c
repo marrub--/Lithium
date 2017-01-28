@@ -2,6 +2,7 @@
 #include "lith_player.h"
 #include "lith_hudid.h"
 #include "lith_list.h"
+#include "lith_world.h"
 
 
 //----------------------------------------------------------------------------
@@ -137,7 +138,7 @@ static void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    Stat(4,  "Score Sum",         "%lli", p->scoresum);
    Stat(5,  "Armor Used",        "%li",  p->armorused);
    Stat(6,  "Armor Sum",         "%li",  p->armorsum);
-   Stat(7,  "Secrets Found",     "%i",   p->secretsfound);
+   Stat(7,  "Secrets Found",     "%i",   secretsfound);
    Stat(8,  "Units Travelled",   "%llu", p->unitstravelled);
 // Stat(9,  "Enemies Defeated",  "%i",   0);
 // Stat(10, "Bosses Defeated",   "%i",   0);

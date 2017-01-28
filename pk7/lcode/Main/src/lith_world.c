@@ -8,9 +8,13 @@
 //
 
 __addrdef __mod_arr Lith_MapVariable;
+__addrdef __hub_arr Lith_WorldVariable;
 
 bool Lith_MapVariable mapinit;
 int  Lith_MapVariable mapid;
+
+int secretsfound;
+payoutinfo_t payout;
 
 
 //----------------------------------------------------------------------------
@@ -19,6 +23,7 @@ int  Lith_MapVariable mapid;
 
 [[__extern("ACS"), __call("LangACS")]] void Lith_SetupBalance(void);
 void Lith_SetupWeaponsTables(void);
+[[__call("ScriptS")]] void Lith_PlayerPayout(player_t *p);
 
 //
 // Lith_UniqueID
@@ -52,7 +57,12 @@ int Lith_UniqueID(int tid)
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
+   static bool gamestart = true;
    static bool gsinit;
+   
+   int prevsecrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+   int prevkills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
+   int previtems   = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
    
    // Init global/static state. This is only done once and is necessary so
    // the balance module can run and so the weapon tables can be built.
@@ -76,20 +86,62 @@ static void Lith_World(void)
    // some god damn reason, run before OPEN scripts.
    mapinit = true;
    
-   // Now we just check for secrets being gained, so we can give score to
-   // players when they're found.
-   for(int prevsecrets = 0;;)
+   // Delay so we can make sure players are initialized.
+   ACS_Delay(1);
+   
+   // Payout is world-static.
+   if(!gamestart && ACS_Timer() <= 2)
+   {
+      long fixed taxpct = ACS_RandomFixed(1 / 100.0, 5 / 100.0);
+      
+#define GenPay(name) \
+      if(payout.name##max) \
+      { \
+         payout.name##pct = (payout.name##num / (long fixed)payout.name##max) * 100; \
+         payout.name##scr = payout.name##pct * 500; \
+      } \
+      else \
+         payout.killpct = payout.killscr = 0;
+      
+      GenPay(kill)
+      GenPay(item)
+      
+#undef GenPay
+      
+      payout.total  = payout.killscr + payout.itemscr;
+      payout.total -= payout.tax = payout.total * taxpct;
+      
+      ForPlayer()
+         Lith_PlayerPayout(p);
+      
+      memset(&payout, 0, sizeof(payout));
+   }
+   
+   payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+   payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+   
+   gamestart = false;
+   
+   // Now we just check for things being gained so players get proper score.
+   for(;;)
    {
       int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+      int kills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
+      int items   = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
       
       if(secrets > prevsecrets)
-         ForPlayer()
-         {
-            Lith_GiveScore(p, 9000 * (secrets - prevsecrets));
-            p->secretsfound++;
-         }
+      {
+         int delta = secrets - prevsecrets;
+         Lith_GiveAllScore(9000 * delta, true);
+         secretsfound += delta;
+      }
+      
+      if(kills > prevkills) payout.killnum += kills - prevkills;
+      if(items > previtems) payout.itemnum += items - previtems;
       
       prevsecrets = secrets;
+      prevkills   = kills;
+      previtems   = items;
       
       ACS_Delay(1);
    }

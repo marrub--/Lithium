@@ -162,6 +162,19 @@ accum lerpk(accum a, accum b, accum t)
 }
 
 //
+// lerplk
+//
+long accum lerplk(long accum a, long accum b, long accum t)
+{
+   long accum ret = ((1.0lk - t) * a) + (t * b);
+   
+   if(roundlk(ret, 10) == b)
+      return b;
+   
+   return ret;
+}
+
+//
 // lerpf
 //
 float lerpf(float a, float b, float t)

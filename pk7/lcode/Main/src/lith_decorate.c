@@ -25,14 +25,14 @@ int Lith_Timer(void)
 void Lith_UpdateScore(void)
 {
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(1.0f, 6.0f);
-   Lith_GiveAllScore(score);
+   Lith_GiveAllScore(score, false);
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_EmitScore(int amount)
 {
-   Lith_GiveAllScore(amount);
+   Lith_GiveAllScore(amount, false);
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

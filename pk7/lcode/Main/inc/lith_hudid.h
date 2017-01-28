@@ -4,11 +4,12 @@
 enum
 {
    // hid_base         to hid_base + 99    reserved for Testing
-   // hid_base +   100 to hid_base + 39999 reserved for CBI
+   // hid_base +   100 to hid_base + 199   reserved for Payout
+   // hid_base +   200 to hid_base + 39999 reserved for CBI
    // hid_base + 40000 to hid_base + 40999 reserved for Misc.
    // hid_base + 41000 to hid_base + 41999 reserved for Scope
    // hid_base + 42000 to hid_base + 42999 reserved for HUD
-   hid_base = 500000,
+   hid_base = 0x100000,
    
    // Testing
    hid_base_test = hid_base,
@@ -24,8 +25,12 @@ enum
    hid_test8,
    hid_test9,
    
+   // Payout
+   hid_base_payout = hid_base + 100,
+   hid_end_payout  = hid_base + 199,
+   
    // CBI
-   hid_base_cbi = hid_base + 100,
+   hid_base_cbi = hid_base + 200,
    hid_end_cbi  = hid_base + 39999,
    
    // Misc.
