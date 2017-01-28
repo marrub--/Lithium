@@ -172,8 +172,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRIF A 0 A_GunFlash("DummyFlash")
       
       CRIF A 0 A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON)
-      CRIF A 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
-      CRIF A 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
+      CRIF AAA 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
       CRIF B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF C 1 bright A_WeaponReady(LITH_BOBONLY)
       CRIF A 3 A_WeaponReady(LITH_BOBONLY)
