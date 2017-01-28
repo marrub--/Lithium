@@ -3,6 +3,8 @@
 
 #include "lith_weapons.h"
 
+#define HasWeapon(p, w) (p)->weapon.inv[(w)].owned
+
 #define SLOT_MAX 8
 
 enum
@@ -23,12 +25,21 @@ typedef struct weaponinfo_s
    int type;
 } weaponinfo_t;
 
-typedef struct activeweapon_s
+typedef struct invweapon_s
 {
    weaponinfo_t const *info;
+   bool owned;
+   int autoreload;
    int ammotype;
    __str ammoclass;
-} activeweapon_t;
+} invweapon_t;
+
+typedef struct weapondata_s
+{
+   bool slot[SLOT_MAX];
+   invweapon_t inv[weapon_max];
+   invweapon_t *cur;
+} weapondata_t;
 
 extern weaponinfo_t const weaponinfo[weapon_max];
 

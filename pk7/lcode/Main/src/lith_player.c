@@ -32,6 +32,7 @@ static void Lith_PlayerStats(player_t *p);
 static void Lith_PlayerDeltaStats(player_t *p);
 [[__call("ScriptS")]] static void Lith_PlayerHUD(player_t *p);
 
+static void ValidateTID(player_t *p);
 static void HUD_StringStack(player_t *p);
 static void HUD_Waves(player_t *p);
 static void HUD_Scope(player_t *p);
@@ -84,10 +85,8 @@ reinit:
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
       
-      // Validate TID. If the map changes this we need to make sure it's
-      // still correct.
-      if(p->tid != ACS_ActivatorTID())
-         p->tid = ACS_ActivatorTID();
+      // If the map changes this we need to make sure it's still correct.
+      ValidateTID(p);
       
       p->ticks++;
    }
@@ -255,6 +254,7 @@ void Lith_PlayerPayout(player_t *p)
    payoutinfo_t pay = payout;
    
    ACS_SetActivator(p->tid);
+   ACS_Delay(25);
    ACS_SetHudSize(320, 200);
    
    for(int i = 0; i < 35*3; i++)
@@ -360,7 +360,6 @@ static void Lith_PlayerUpdateData(player_t *p)
    
    Lith_GetArmorType(p);
    
-   p->berserk    = ACS_CheckInventory("PowerStrength");
    p->scopetoken = ACS_CheckInventory("Lith_CannonScopedToken") ||
                    ACS_CheckInventory("Lith_ShotgunScopedToken") ||
                    ACS_CheckInventory("Lith_PistolScopedToken");
@@ -424,10 +423,8 @@ static void Lith_ResetPlayer(player_t *p)
    memset(&p->old, 0, sizeof(player_delta_t));
    
    // If the map sets the TID on the first tic, it could already be set here.
-   if(ACS_ActivatorTID() != 0)
-      p->tid = ACS_ActivatorTID();
-   else
-      ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   p->tid = 0;
+   ValidateTID(p);
    
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
@@ -529,7 +526,7 @@ static void Lith_GetArmorType(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerDamageBob(player_t *p)
 {
-   if(!p->berserk && p->health < p->old.health)
+   if(!ACS_CheckInventory("PowerStrength") && p->health < p->old.health)
    {
       float angle = RandomFloat(tau, -tau);
       float distance;
@@ -646,6 +643,17 @@ static void Lith_PlayerHUD(player_t *p)
 {
    ACS_SetHudSize(320, 200);
    HUD_Scope(p);
+}
+
+//
+// ValidateTID
+//
+static void ValidateTID(player_t *p)
+{
+   if(ACS_ActivatorTID() == 0)
+      ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
+   else if(p->tid != ACS_ActivatorTID())
+      p->tid = ACS_ActivatorTID();
 }
 
 //

@@ -7,6 +7,13 @@
 
 
 //----------------------------------------------------------------------------
+// Extern Functions
+//
+
+void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
+
+
+//----------------------------------------------------------------------------
 // Extern Objects
 //
 
@@ -25,59 +32,19 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
 
 //----------------------------------------------------------------------------
-// Extern Functions
+// Static Functions
 //
 
-void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
-
 //
-// Lith_SetupWeaponsTables
+// GiveWeaponItem
 //
-void Lith_SetupWeaponsTables(void)
+static void GiveWeaponItem(int parm)
 {
-   for(int i = 0; i < weapon_max; i++)
+   switch(parm)
    {
-      weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
-      info->type  = i;
-      info->class = StrParam("Lith_%S", info->name);
-   }
-}
-
-//
-// Lith_PlayerUpdateWeapon
-//
-// Update information on what weapons we have.
-//
-void Lith_PlayerUpdateWeapon(player_t *p)
-{
-   weaponinfo_t const *unknown = &weaponinfo[weapon_unknown];
-   weaponinfo_t const *weapon = unknown;
-   
-   // clear slots
-   for(int i = 0; i < SLOT_MAX; i++)
-      p->hasslot[i] = false;
-   
-   for(int i = weapon_min; i < weapon_max; i++)
-   {
-      weaponinfo_t const *info = &weaponinfo[i];
-      
-      // get all the weapons and slot numbers we have
-      p->hasslot[info->slot] |= p->hasweapon[i] = ACS_CheckInventory(info->class);
-      
-      // check for currently held weapon
-      if(weapon == unknown && ACS_StrICmp(p->weaponclass, info->class) == 0)
-         weapon = info;
-   }
-   
-   // setup the current weapon's information
-   p->curweapon.info      = weapon;
-   p->curweapon.ammotype  = weapon->defammotype;
-   p->curweapon.ammoclass = weapon->defammoclass;
-   
-   if(weapon->type == weapon_shotgun && p->upgrades[UPGR_GaussShotty].active)
-   {
-      p->curweapon.ammotype  = AT_Mag;
-      p->curweapon.ammoclass = "Lith_GaussShotsFired";
+   case weapon_launcher: ACS_GiveInventory("Lith_RocketAmmo", 10);   break;
+   case weapon_plasma:   ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
+   case weapon_bfg:      ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
    }
 }
 
@@ -94,7 +61,7 @@ void Lith_WeaponPickup(int parm, int tid)
 {
    player_t *p = LocalPlayer;
    
-   if(!ValidateWeapon(parm) || p->hasweapon[parm])
+   if(!ValidateWeapon(parm) || HasWeapon(p, parm))
       return;
    
    weaponinfo_t const *info = &weaponinfo[parm];
@@ -111,13 +78,7 @@ void Lith_WeaponPickup(int parm, int tid)
    
    if(info->name) Lith_UnlockBIPPage(&p->bip, info->name);
    
-   switch(parm)
-   {
-   case weapon_launcher: ACS_GiveInventory("Lith_RocketAmmo", 10);   break;
-   case weapon_plasma:   ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
-   case weapon_bfg:      ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
-   }
-   
+   GiveWeaponItem(parm);
    Lith_PickupMessage(p, info);
 }
 
@@ -130,9 +91,10 @@ int Lith_PickupScore(int parm, int spritetid)
    ACS_SetActivatorToTarget(0);
    player_t *p = LocalPlayer;
    
-   if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !p->hasweapon[parm])
+   if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !HasWeapon(p, parm))
       return true;
    
+   GiveWeaponItem(parm);
    Lith_Log(p, "> You sold the weapon for Score.");
    Lith_GiveScore(p, 11100 * parm);
    
@@ -163,6 +125,73 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
    }
    else
       return bitsk(P);
+}
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_SetupWeaponsTables
+//
+void Lith_SetupWeaponsTables(void)
+{
+   for(int i = 0; i < weapon_max; i++)
+   {
+      weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
+      info->type  = i;
+      info->class = StrParam("Lith_%S", info->name);
+   }
+}
+
+//
+// Lith_PlayerUpdateWeapon
+//
+// Update information on what weapons we have.
+//
+void Lith_PlayerUpdateWeapon(player_t *p)
+{
+   weapondata_t *w = &p->weapon;
+   invweapon_t *unknown = &w->inv[weapon_unknown];
+   
+   // Reset data temporarily.
+   w->cur = unknown;
+   for(int i = 0; i < SLOT_MAX; i++)
+      w->slot[i] = false;
+   
+   // Iterate over each weapon setting information on it.
+   for(int i = weapon_min; i < weapon_max; i++)
+   {
+      weaponinfo_t const *info = &weaponinfo[i];
+      invweapon_t *wep = &w->inv[i];
+      
+      w->slot[info->slot] |= wep->owned = ACS_CheckInventory(info->class);
+      
+      wep->info      = info;
+      wep->owned     = ACS_CheckInventory(info->class);
+      wep->ammotype  = info->defammotype;
+      wep->ammoclass = info->defammoclass;
+      
+      if(i == weapon_shotgun && p->upgrades[UPGR_GaussShotty].active)
+      {
+         wep->ammotype = AT_Mag;
+         wep->ammoclass = "Lith_GaussShotsFired";
+      }
+      
+      // Check for currently held weapon.
+      if(w->cur == unknown && ACS_StrICmp(p->weaponclass, info->class) == 0)
+         w->cur = wep;
+      
+      if(p->upgrades[UPGR_AutoReload].active && wep->owned && wep->ammotype == AT_Mag)
+      {
+         if(wep->autoreload >= 35 * 5)
+            ACS_TakeInventory(wep->ammoclass, 999);
+         
+         if(w->cur != wep) wep->autoreload++;
+         else              wep->autoreload = 0;
+      }
+   }
 }
 
 // EOF

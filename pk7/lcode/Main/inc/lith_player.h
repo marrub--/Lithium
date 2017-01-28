@@ -143,22 +143,17 @@ typedef struct player_s
    
    int unitstravelled;
    
-   // Weapons
+   // Inventory
+   weapondata_t weapon;
+   
    int riflefiremode;
    list_t hudstrlist;
-   
-   // Inventory
-   bool hasweapon[weapon_max];
-   bool hasslot[SLOT_MAX];
-   activeweapon_t curweapon;
    
    __str weaponclass;
    __str armorclass;
    
    int armortype;
    keycards_t keys;
-   
-   bool berserk : 1;
 } player_t;
 
 extern player_t players[MAX_PLAYERS];

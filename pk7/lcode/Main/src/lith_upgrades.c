@@ -34,6 +34,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {"Adrenaline",  "Adrenaline",   1801000     , UC_Body,  0.00, U(Adrenaline)},
    {"VitalScan",   "VitalScanner", 801500      , UC_Body,  0.00, U(VitalScan), R(VitalScan)},
    
+   {"AutoReload",  "AutoReload",   950050      , UC_Weap,  0.00},
    {"AutoPistol",  null,           140940      , UC_Weap,  0.00, weapon_pistol},
    {"GaussShotty", "ShotgunUpgr",  1079430     , UC_Weap,  0.00, weapon_shotgun},
    {"RifleModes",  "RifleUpgr",    340100      , UC_Weap,  0.00, weapon_rifle, D(RifleModes), U(RifleModes)},

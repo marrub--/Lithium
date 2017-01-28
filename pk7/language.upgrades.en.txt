@@ -69,6 +69,11 @@ LITH_TXT_UPGRADE_DESCR_VitalScan =
 //
 // Weapons
 //
+LITH_TXT_UPGRADE_TITLE_AutoReload = "Auto Reload";
+LITH_TXT_UPGRADE_DESCR_AutoReload =
+   "Effect: Weapons in your inventory automatically reload after 5 seconds.\n\n"
+   "magic";
+
 LITH_TXT_UPGRADE_TITLE_AutoPistol = "Auto Pistol";
 LITH_TXT_UPGRADE_DESCR_AutoPistol =
    "Effect: Makes your pistol fire in full auto.\n\n"

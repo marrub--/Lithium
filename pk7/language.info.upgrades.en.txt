@@ -63,5 +63,9 @@ LITH_TXT_INFO_SHORT_VitalScanner = "$LITH_TXT_UPGRADE_TITLE_VitalScan";
 LITH_TXT_INFO_TITLE_VitalScanner = "Mitkeru Vital Scanner";
 LITH_TXT_INFO_DESCR_VitalScanner = "$LITH_TXT_INFO_DESCR_Classified";
 
+LITH_TXT_INFO_SHORT_AutoReload = "$LITH_TXT_UPGRADE_TITLE_AutoReload";
+LITH_TXT_INFO_TITLE_AutoReload = "Kmeru Automatic Loading System";
+LITH_TXT_INFO_DESCR_AutoReload = "$LITH_TXT_INFO_DESCR_Classified";
+
 // EOF
 

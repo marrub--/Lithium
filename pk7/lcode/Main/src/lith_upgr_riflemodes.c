@@ -20,7 +20,7 @@ void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 {
    if(ACS_GetUserCVar(p->number, "lith_weapons_riflescope") &&
-      p->curweapon.info->type == weapon_rifle &&
+      p->weapon.cur->info->type == weapon_rifle &&
       p->riflefiremode == rifle_firemode_burst)
    {
       ACS_Warp(p->cameratid, 0, 0, p->viewheight, 0,

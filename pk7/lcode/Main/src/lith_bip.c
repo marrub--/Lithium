@@ -67,6 +67,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke");
    AddToBIP(bip, BIPC_UPGRADES, "Adrenaline");
    AddToBIP(bip, BIPC_UPGRADES, "VitalScanner");
+   AddToBIP(bip, BIPC_UPGRADES, "AutoReload");
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
    AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
