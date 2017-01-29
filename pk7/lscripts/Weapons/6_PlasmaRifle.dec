@@ -6,6 +6,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
    Tag "$LITH_TXT_INFO_SHORT_PlasmaRifle"
    Weapon.UpSound "weapons/plasma/draw"
    Weapon.SlotNumber 6
+   Weapon.SlotPriority 1
    
    states
    {

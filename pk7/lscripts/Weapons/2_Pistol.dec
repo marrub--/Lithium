@@ -12,6 +12,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
 {
    Tag "$LITH_TXT_INFO_SHORT_Pistol"
    Weapon.SlotNumber 2
+   Weapon.SlotPriority 1
    Weapon.BobSpeed 3
    Weapon.BobRangeX 0.2
    Weapon.BobRangeY 0.3
@@ -54,7 +55,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
       TNT1 A 0 A_JumpIfInventory("Lith_PistolShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_PistolShotsFired", 1)
       TNT1 A 0 A_AlertMonsters
-      TNT1 A 0 A_FireBullets(0, 0, -1, 20, "BulletPuff", FBF_NORANDOM)
+      TNT1 A 0 A_FireBullets(0, 0, -1, 30, "BulletPuff", FBF_NORANDOM)
       TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_AutoPistol), 3)

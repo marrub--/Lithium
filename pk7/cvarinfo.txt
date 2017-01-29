@@ -15,7 +15,7 @@ user bool lith_weapons_riflescope = false;
 // HUD
 user bool lith_hud_showscore = true;
 user bool lith_hud_showweapons = true;
-user bool lith_hud_movescanner = false;
+user bool lith_hud_movescanner = true;
 
 // Server
 server bool lith_sv_stupidpickups = false;

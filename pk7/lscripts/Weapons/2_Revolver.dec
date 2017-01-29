@@ -7,6 +7,7 @@ actor Lith_Revolver : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Revolver"
    Weapon.SlotNumber 2
+   Weapon.SlotPriority 0.9
    Weapon.BobSpeed 2.5
    Weapon.BobRangeX 0.2
    Weapon.BobRangeY 0.3

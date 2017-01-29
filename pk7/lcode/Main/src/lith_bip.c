@@ -49,6 +49,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
+   AddToBIP(bip, BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
    AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
    AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));

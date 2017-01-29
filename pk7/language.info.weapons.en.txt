@@ -30,6 +30,16 @@ LITH_TXT_INFO_DESCR_Shotgun =
    "in the firing mechanism.\n\n"
    "Most military models come with a CB-Scope.";
 
+LITH_TXT_INFO_SHORT_LazShotgun = "Laser Shotgun";
+LITH_TXT_INFO_TITLE_LazShotgun = "Kaether Photon Rifle";
+LITH_TXT_INFO_DESCR_LazShotgun =
+   "Made during a war on Earth by a long nameless company, this weapon excels "
+   "in penetrating enemies with pure energy.\n\n"
+   "A superconducting coil in the middle is used to channel tons of energy "
+   "into a photon accelerator at extremely quick speeds, recharged by cocking "
+   "the gun.\n\n"
+   "Great for cooking chicken.";
+
 LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
 LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun Gauss Mod";
 LITH_TXT_INFO_DESCR_ShotgunUpgr =

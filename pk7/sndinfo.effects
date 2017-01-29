@@ -5,6 +5,8 @@ silence lsounds/Silence.flac
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
 misc/teleport lsounds/Teleport.flac // Self-made
 explosion DSBAREXP
+misc/chat lsounds/Chat.flac
+misc/chat2 lsounds/Chat.flac
 $limit explosion 0
 $attenuation explosion 0.7
 

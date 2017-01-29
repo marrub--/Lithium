@@ -56,6 +56,15 @@ $random weapons/shotgun/gauss/spark {
 }
 
 //
+// Laser Shotgun
+//
+weapons/lshotgun/fire  lsounds/LazShotgun/Fire.flac  // Fallout: New Vegas
+weapons/lshotgun/open  lsounds/LazShotgun/Open.flac  // Fallout: New Vegas, FEAR
+weapons/lshotgun/close lsounds/LazShotgun/Close.flac // 〃
+weapons/lshotgun/draw  lsounds/LazShotgun/Draw.flac  // Doom 3, Fallout: New Vegas
+$alias weapons/lshotgun/pickup weapons/lshotgun/open
+
+//
 // Combat Rifle
 //
 weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
