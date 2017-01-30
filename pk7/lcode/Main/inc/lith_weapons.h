@@ -9,6 +9,7 @@ enum
    weapon_lazshotgun,
 // weapon_ssg,
    weapon_rifle,
+   weapon_sniper,
    weapon_launcher,
    weapon_plasma,
    weapon_bfg,

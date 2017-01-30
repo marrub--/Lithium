@@ -73,11 +73,6 @@ zrrion the insect
 
 --- Individual Credits
 
-Laser Shotgun sprites
-   Mike12 - Vented shotgun
-   GAA1992, Cage & Scuba Steve - Auto shotgun
-   Marrub - Redraw of sights and design
-
 Cannon sprites
    Minigunner - Centered DNF enforcer gun
    Solo Spaghetti - Skull SSG
@@ -89,3 +84,13 @@ Combat Rifle sprites
    Sgt. Shivers - Model rip
    TheRailgunner - Edit of model rip
    Marrub - Small edits
+
+Laser Shotgun sprites
+   Mike12 - Vented shotgun
+   GAA1992, Cage & Scuba Steve - Auto shotgun
+   Marrub - Redraw of sights and design
+
+Sniper Rifle sprites
+   MrEnchanter - Sniper rifle sprite
+   Marrub - Redrawing and detailing, re-handing
+   Sgt. Shivers - Firing animation

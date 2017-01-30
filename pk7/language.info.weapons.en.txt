@@ -61,6 +61,15 @@ LITH_TXT_INFO_DESCR_CombatRifle =
    "Comes with an inbuilt undermount-like grenade launcher. Holds only one "
    "grenade at a time, but packs a great punch.";
 
+LITH_TXT_INFO_SHORT_SniperRifle = "Sniper Rifle";
+LITH_TXT_INFO_TITLE_SniperRifle = "Facer AM-49d Sniper Rifle";
+LITH_TXT_INFO_DESCR_SniperRifle =
+   "An extremely strong rifle which fires .50 BMG rounds, able to destroy "
+   "most living targets completely and penetrate weakly armored vehicles.\n\n"
+   "The main production of these weapons spanned about 20 years, and they "
+   "were sold to mercenaries in bulk. For a long time, this rifle had been "
+   "the sniper's main weapon of choice.";
+
 LITH_TXT_INFO_SHORT_RifleUpgr = "$LITH_TXT_UPGRADE_TITLE_RifleModes";
 LITH_TXT_INFO_TITLE_RifleUpgr = "AllPoint 75-c Modal Trigger";
 LITH_TXT_INFO_DESCR_RifleUpgr =

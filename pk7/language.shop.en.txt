@@ -44,6 +44,9 @@ LITH_TXT_SHOP_DESCR_Revolver = "A powerful handgun. Holds 6 bullets.";
 LITH_TXT_SHOP_TITLE_LazShotgun = "$LITH_TXT_INFO_SHORT_LazShotgun";
 LITH_TXT_SHOP_DESCR_LazShotgun = "Piercing laser shotgun.";
 
+LITH_TXT_SHOP_TITLE_SniperRifle = "$LITH_TXT_INFO_SHORT_SniperRifle";
+LITH_TXT_SHOP_DESCR_SniperRifle = "Scoped bolt-action rifle.";
+
 /*
 LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";
 LITH_TXT_SHOP_DESCR_DivSigil = "A mistake of the universe.";

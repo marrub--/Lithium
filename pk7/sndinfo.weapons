@@ -104,6 +104,19 @@ $random weapons/rifle/firesnipe {
 }
 
 //
+// Sniper Rifle
+//
+weapons/sniper/fire        lsounds/SniperRifle/Fire.flac        // Fallout: New Vegas, Firearms: Source
+weapons/sniper/boltback    lsounds/SniperRifle/BoltBack.flac    // Fallout: New Vegas, FEAR, Firearms: Source
+weapons/sniper/boltforward lsounds/SniperRifle/BoltForward.flac // 〃
+weapons/sniper/magout      lsounds/SniperRifle/MagOut.flac      // Halo 3
+weapons/sniper/magin       lsounds/SniperRifle/MagIn.flac       // 〃
+weapons/sniper/draw        lsounds/SniperRifle/Draw.flac        // 〃
+
+$alias weapons/sniper/zoomin  weapons/shotgun/zoomin
+$alias weapons/sniper/zoomout weapons/shotgun/zoomout
+
+//
 // Grenade Launcher
 //
 weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac        // FEAR

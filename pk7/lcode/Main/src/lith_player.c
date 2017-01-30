@@ -361,6 +361,7 @@ static void Lith_PlayerUpdateData(player_t *p)
    Lith_GetArmorType(p);
    
    p->scopetoken = ACS_CheckInventory("Lith_CannonScopedToken") ||
+                   ACS_CheckInventory("Lith_SniperScopedToken") ||
                    ACS_CheckInventory("Lith_ShotgunScopedToken") ||
                    ACS_CheckInventory("Lith_PistolScopedToken");
    
