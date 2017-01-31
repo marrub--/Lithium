@@ -1,6 +1,17 @@
 //
 // Misc. Effects
 //
+$rolloff * custom 0 2025
+
+menu/activate lsounds/Player/CBI/Open.flac
+menu/backup   lsounds/MenuBack.flac
+menu/prompt   lsounds/Player/CBI/Open.flac
+menu/cursor   lsounds/MenuMove.flac
+menu/change   lsounds/Player/CBI/SliderTick.flac
+menu/invalid  lsounds/Player/CBI/ClickInvalid.flac
+menu/dismiss  lsounds/Player/CBI/Close.flac
+menu/choose   lsounds/Player/CBI/ButtonPress.flac
+menu/clear    lsounds/MenuBack.flac
 silence lsounds/Silence.flac
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
 misc/teleport lsounds/Teleport.flac // Self-made
