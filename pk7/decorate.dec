@@ -30,6 +30,7 @@ damagetype Lith_NoDamage
 #include "lscripts/Entities/Monsters/Tier5.dec"
 
 #include "lscripts/Entities/Monsters/XHTier1.dec"
+#include "lscripts/Entities/Monsters/XHTier5.dec"
 
 //
 // Items

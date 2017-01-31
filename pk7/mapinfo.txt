@@ -59,6 +59,7 @@ skill extrahard
    ReplaceActor = "ShotgunGuy",  "Lith_XH_ShotgunGuy"
    ReplaceActor = "DoomImp",     "Lith_XH_Imp"
    ReplaceActor = "ChaingunGuy", "Lith_XH_ChaingunGuy"
+   ReplaceActor = "Cyberdemon",  "Lith_XH_Cyberdemon"
 }
 
 skill nightmare

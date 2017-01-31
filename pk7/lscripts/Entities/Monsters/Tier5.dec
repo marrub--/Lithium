@@ -12,6 +12,7 @@ actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
       SPID A 0 A_PlaySound("enemies/chainguy/bolt", CHAN_WEAPON|CHAN_NOPAUSE)
       SPID A 0 A_GiveToTarget("Lith_AdrenalineToken", 1)
       SPID A 20 bright A_FaceTarget
+      SPID A 0 A_Jump(256, "MissileLoop")
    MissileLoop:
       SPID G 4 bright A_SPosAttackUseAtkSound
       SPID H 4 bright A_SPosAttackUseAtkSound
@@ -64,40 +65,22 @@ actor Lith_Cyberdemon : Cyberdemon replaces Cyberdemon
       CYBR E 0 A_PlaySound("enemies/cyberdemon/ready", CHAN_5)
       CYBR E 12 A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
-      CYBR E 1 bright A_FaceTarget
-      CYBR F 0 bright A_PlaySound("enemies/cyberdemon/fire", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       CYBR F 0 bright A_PlaySound("enemies/cyberdemon/firedone", CHAN_6)
-      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-0.1, 0.1))
+      CYBR F 3 bright A_CustomMissile("Lith_CyberRocket", 40, -13)
       CYBR E 1 bright A_FaceTarget
       goto See
    Death:
