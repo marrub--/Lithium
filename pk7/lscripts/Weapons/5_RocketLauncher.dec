@@ -21,7 +21,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
    Weapon.UpSound "weapons/rocket/draw"
    Weapon.SlotNumber 5
    Weapon.SlotPriority 1
-   Weapon.BobStyle Smooth
+   Weapon.BobStyle "Smooth"
    Weapon.BobSpeed 1.3
    Weapon.BobRangeY 1.1
    Weapon.BobRangeX 0.9
@@ -36,7 +36,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       goto SpawnLoop
    
    Ready:
-      GRLG A 1 A_WeaponReady(WRF_ALLOWUSER1 | WRF_ALLOWUSER2)
+      GRLG A 1 A_WeaponReady
       wait
    
    Deselect:
@@ -177,4 +177,6 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
       stop
    }
 }
+
+// EOF
 

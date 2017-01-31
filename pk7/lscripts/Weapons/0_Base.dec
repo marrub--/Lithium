@@ -55,6 +55,7 @@ actor Lith_Weapon : Weapon
    
    +INVENTORY.UNTOSSABLE
    +WEAPON.NOALERT
+   +NOTIMEFREEZE // This is needed so you can pick up weapons while time is frozen.
    
    var int user_glowangle;
    var int user_glowzangle;

@@ -452,6 +452,11 @@ static void Lith_ResetPlayer(player_t *p)
    ACS_TakeInventory("Lith_PistolScopedToken",  999);
    ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
    ACS_TakeInventory("Lith_CannonScopedToken",  999);
+   ACS_TakeInventory("Lith_SniperScopedToken",  999);
+   ACS_TakeInventory("Lith_RifleBurstIter",     999);
+   ACS_TakeInventory("Lith_RocketLoaded",       999);
+   ACS_TakeInventory("Lith_RocketIterated",     999);
+   ACS_TakeInventory("Lith_RocketAltMode",      999);
    
    Lith_PlayerResetCBI(p);
    

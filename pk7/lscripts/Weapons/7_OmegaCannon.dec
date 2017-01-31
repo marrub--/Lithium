@@ -8,7 +8,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    Weapon.UpSound "weapons/cannon/draw"
    Weapon.SlotNumber 7
    Weapon.SlotPriority 1
-   Weapon.BobStyle InverseSmooth
+   Weapon.BobStyle "InverseSmooth"
    Weapon.BobRangeX 2.0
    Weapon.BobSpeed 0.85
    Decal "Scorch"

@@ -1,4 +1,14 @@
 //
+// Knife
+//
+weapons/knife/swing1   lsounds/Knife/Fire1.flac   // Serious Sam: The First Encounter HD
+weapons/knife/swing2   lsounds/Knife/Fire2.flac   // 〃
+weapons/knife/hitflesh lsounds/Knife/Hit.flac     // Killing Floor
+weapons/knife/hitwall  lsounds/Knife/HitWall.flac // 〃
+
+$limit weapons/knife/hitflesh 0
+
+//
 // Pistol
 //
 weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor

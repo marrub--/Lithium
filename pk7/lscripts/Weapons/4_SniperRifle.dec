@@ -1,6 +1,6 @@
 actor Lith_SniperBullet : FastProjectile
 {
-   Damage (100)
+   Damage (202)
    Speed 1024
    Radius 1
    Height 1
@@ -19,12 +19,12 @@ actor Lith_SniperBullet : FastProjectile
       wait
    Death:
       TNT1 A 0
-      TNT1 A 0 A_Explode(20, 128, 0)
+      TNT1 A 0 A_Explode(25, 128, 0)
       TNT1 A 0 A_SpawnItemEx("BulletPuff")
       stop
    XDeath:
       TNT1 A 0
-      TNT1 A 0 A_Explode(20, 128, 0)
+      TNT1 A 0 A_Explode(25, 128, 0)
       stop
    }
 }

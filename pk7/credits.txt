@@ -50,6 +50,7 @@ Sgt. Shivers
    Shooting my shootyguns
    Shotgun sprites
    Revolver sprites (from Powerslave originally)
+   knif
 
 Shadowlink226
    Halo 3 sound rip
@@ -67,6 +68,7 @@ Yholl
    Descriptions for some of the extra upgrades
    Ideas for a lot of stuff
    Marathon resources
+   knif
 
 zrrion the insect
    Full sprites for the Grenade Launcher, Pistol and Plasma Rifle
