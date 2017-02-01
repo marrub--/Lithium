@@ -106,6 +106,10 @@ LITH_TXT_INFO_DESCR_LauncherUpgr =
    "area, and the third and final mode hurls all of the grenades out of "
    "their rocket casings.";
 
+LITH_TXT_INFO_SHORT_MissileLauncher = "Missile Launcher";
+LITH_TXT_INFO_TITLE_MissileLauncher = "";
+LITH_TXT_INFO_DESCR_MissileLauncher = "";
+
 LITH_TXT_INFO_SHORT_PlasmaRifle = "Plasma Rifle";
 LITH_TXT_INFO_TITLE_PlasmaRifle = "AllPoint 68-n Plasma Rifle";
 LITH_TXT_INFO_DESCR_PlasmaRifle =

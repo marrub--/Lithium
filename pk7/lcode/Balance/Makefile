@@ -10,7 +10,7 @@ BIN_DOOM=../../acs
 BIN_HTIC=../../filter/heretic/acs
 
 ## Sources
-SRC_MAIN=../Main/inc/lith_upgradenames.h
+SRC_MAIN=../Main/inc/lith_upgradenames.h lith_balance_common.acs
 SRC_DOOM=$(SRC_MAIN) lith_balance_default.acs
 SRC_HTIC=$(SRC_MAIN) lith_balance_heretic.acs
 

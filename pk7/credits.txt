@@ -69,6 +69,7 @@ Yholl
    Ideas for a lot of stuff
    Marathon resources
    knif
+   Missile Launcher code
 
 zrrion the insect
    Full sprites for the Grenade Launcher, Pistol and Plasma Rifle

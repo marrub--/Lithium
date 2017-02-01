@@ -11,6 +11,7 @@ enum
    weapon_rifle,
    weapon_sniper,
    weapon_launcher,
+   weapon_missile,
    weapon_plasma,
    weapon_bfg,
    weapon_max

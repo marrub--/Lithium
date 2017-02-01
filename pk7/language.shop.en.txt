@@ -47,6 +47,9 @@ LITH_TXT_SHOP_DESCR_LazShotgun = "Piercing laser shotgun.";
 LITH_TXT_SHOP_TITLE_SniperRifle = "$LITH_TXT_INFO_SHORT_SniperRifle";
 LITH_TXT_SHOP_DESCR_SniperRifle = "Scoped bolt-action rifle.";
 
+LITH_TXT_SHOP_TITLE_MissileLauncher = "$LITH_TXT_INFO_SHORT_MissileLauncher";
+LITH_TXT_SHOP_DESCR_MissileLauncher = "Mini-missile launcher.";
+
 /*
 LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";
 LITH_TXT_SHOP_DESCR_DivSigil = "A mistake of the universe.";

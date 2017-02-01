@@ -28,6 +28,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag,  "Lith_RifleShotsFired"},
    {4, "SniperRifle",     "weapons/sniper/pickup",   AT_Mag,  "Lith_SniperShotsFired"},
    {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo, "Lith_RocketAmmo"},
+   {5, "MissileLauncher", "weapons/missile/pickup",  AT_Ammo, "Lith_RocketAmmo"},
    {6, "PlasmaRifle",     "weapons/plasma/pickup",   AT_Ammo, "Lith_PlasmaAmmo"},
    {7, "BFG9000",         "weapons/cannon/pickup",   AT_Ammo, "Lith_CannonAmmo"},
 };
