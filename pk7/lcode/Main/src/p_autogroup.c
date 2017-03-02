@@ -23,7 +23,8 @@ void Lith_KeyBuyAutoGroup(int group)
       if(!p->upgrades[i].owned && p->upgrades[i].autogroups[group])
       {  total++;
          if(Lith_UpgrBuy(p, &p->upgrades[i]))
-            success++;}
+         {  success++;
+            Lith_UpgrToggle(p, &p->upgrades[i]);}}
    
    char color;
    
