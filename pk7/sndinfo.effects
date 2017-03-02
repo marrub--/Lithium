@@ -21,6 +21,22 @@ misc/chat2 lsounds/Chat.flac
 $limit explosion 0
 $attenuation explosion 0.7
 
+$random misc/quitsound {
+   enemies/zombie/ready
+   enemies/shotguy/ready
+   enemies/chainguy/bolt
+   enemies/hellknight/throw
+   enemies/cyberdemon/ready
+   misc/teleport
+   misc/chat
+   item/barrier
+   marathon/hitsolid
+   weapons/revolver/pickup
+   weapons/shotgun/pickup
+   weapons/sniper/draw
+   weapons/sword/hit
+}
+
 //
 // Weapons
 //

@@ -1,5 +1,7 @@
 [enu default]
 
+LITH_TXT_INFO_SHORT_Gameboy = "Game Nanhai";
+
 LITH_TXT_INFO_SHORT_Pistol = "Pistol";
 LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
 LITH_TXT_INFO_DESCR_Pistol =
@@ -8,9 +10,9 @@ LITH_TXT_INFO_DESCR_Pistol =
    "now.\n\n"
    "Having used it for a whole decade, this pistol still services you "
    "today, without fail.\n\n"
-   "Fires seven custom high-grade vacuum-enabled .374 Express rounds. Can be "
-   "reloaded easily, since you duct-taped a mag holder on the side. Features "
-   "a small CB-Scope similar to that of most other Omakeda weapons.";
+   "Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can "
+   "be reloaded easily, since you duct-taped a mag holder on the side. "
+   "Features a small CB-Scope similar to that of most other Omakeda weapons.";
 
 LITH_TXT_INFO_SHORT_Revolver = "Revolver";
 LITH_TXT_INFO_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";

@@ -35,10 +35,21 @@ $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 //
 // CBI
 //
-player/cbi/open         lsounds/Player/CBI/Open.flac         // Halo 3
-player/cbi/close        lsounds/Player/CBI/Close.flac        // 〃
-player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac  // Doom 3
-player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac   // 〃
-player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac // Steam
+player/cbi/open         lsounds/Player/CBI/Open.flac             // Halo 3
+player/cbi/close        lsounds/Player/CBI/Close.flac            // 〃
+player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac      // Doom 3
+player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // 〃
+player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac     // Steam
+player/cbi/clickon      lsounds/Player/CBI/ClickOn.flac          // 3maze - Buttons and Switches
+player/cbi/clickoff     lsounds/Player/CBI/ClickOff.flac         // 〃
+player/cbi/auto/toggle  lsounds/Player/CBI/AutoGroupToggle.flac  // Deus Ex
+player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Keeper - Dark Sci-Fi UI Sounds
+player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
+
+//
+// Gameboy
+//
+$alias player/gb/open player/cbi/open
+$alias player/gb/close player/cbi/close
 
 // EOF

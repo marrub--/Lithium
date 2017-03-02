@@ -72,7 +72,7 @@ LITH_TXT_UPGRADE_DESCR_VitalScan =
 LITH_TXT_UPGRADE_TITLE_AutoReload = "Auto Reload";
 LITH_TXT_UPGRADE_DESCR_AutoReload =
    "Effect: Weapons in your inventory automatically reload after 5 seconds.\n\n"
-   "magic";
+   "Automated reloading system for your backpack.";
 
 LITH_TXT_UPGRADE_TITLE_AutoPistol = "Auto Pistol";
 LITH_TXT_UPGRADE_DESCR_AutoPistol =
@@ -125,7 +125,7 @@ LITH_TXT_UPGRADE_DESCR_OmegaRail =
 //
 // Extras
 //
-LITH_TXT_UPGRADE_TITLE_TorgueMode = "\cgEXPLOOSIONS";
+LITH_TXT_UPGRADE_TITLE_TorgueMode = "EXPLOOSIONS";
 LITH_TXT_UPGRADE_DESCR_TorgueMode =
    "EFFECT: WHAT THE F*CK DO YOU THINK!?\n\n"
    "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT "

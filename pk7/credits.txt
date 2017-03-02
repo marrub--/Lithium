@@ -22,7 +22,7 @@ HorrorMovieGuy
    SteggleSphere sprites
 
 Jimmy
-   Fonts! All of them.
+   Fonts! All of them, except the SMALLFNT.
 
 Kate
    Some specific, old code is based off of Error: Doom code
@@ -97,3 +97,6 @@ Sniper Rifle sprites
    MrEnchanter - Sniper rifle sprite
    Marrub - Redrawing and detailing, re-handing
    Sgt. Shivers - Firing animation
+
+Title screen music
+   505 - Shredder (hYmns)

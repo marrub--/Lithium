@@ -1,4 +1,4 @@
-actor TeleFogRing
+actor Lith_TeleFogRing
 {
 	RenderStyle Add
 	
@@ -13,12 +13,12 @@ actor TeleFogRing
 	}
 }
 
-actor P67TeleFog : TeleportFog replaces TeleportFog
+actor Lith_P67TeleFog : TeleportFog replaces TeleportFog
 {
 	States
 	{
 	Spawn:
-		TNT1 AAAA 5 A_SpawnItemEx("TeleFogRing", 0,0,0, 0,0,4)
+		TNT1 AAAA 5 A_SpawnItemEx("Lith_TeleFogRing", 0,0,0, 0,0,4)
 		Stop
 	}
 }

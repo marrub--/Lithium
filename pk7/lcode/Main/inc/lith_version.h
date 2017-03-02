@@ -1,4 +1,4 @@
-#define Lith_Version "1.2 (Lithium Carbonate)"
+#define Lith_Version "1.3 (Zabuyelite)"
 
 // EOF
 

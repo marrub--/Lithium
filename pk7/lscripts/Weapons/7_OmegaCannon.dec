@@ -92,6 +92,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       CNNG A 2 bright offset(1, 37)
       CNNG A 3 bright offset(1, 38)
       CNNG A 0 bright A_GunFlash("DummyFlash")
+      CNNG A 0 bright A_PlaySound("weapons/cannon/fire", CHAN_5)
       CNNG C 2 bright offset(0, 62) A_FireCustomMissile("Lith_CannonBall", 0, false, 0, -24, FPF_NOAUTOAIM)
       CNNG C 1 bright offset(0, 57)
       CNNG C 1 bright offset(0, 47)
@@ -104,6 +105,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       goto Ready
    
    FireCannonSmall:
+      CNNG A 0 bright A_PlaySound("weapons/cannon/fire", CHAN_5)
       CNNG C 1 bright offset(0, 48) A_GunFlash("DummyFlash")
       CNNG C 1 bright offset(0, 57) A_FireCustomMissile("Lith_SmallCannonBall", 0, false, 0, -16, FPF_NOAUTOAIM)
       CNNG C 1 bright offset(0, 55)

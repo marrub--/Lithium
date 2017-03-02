@@ -32,6 +32,8 @@ damagetype Lith_NoDamage
 #include "lscripts/Entities/Monsters/XHTier1.dec"
 #include "lscripts/Entities/Monsters/XHTier5.dec"
 
+#include "lscripts/Entities/TitleMap.dec"
+
 //
 // Items
 
@@ -58,6 +60,7 @@ damagetype Lith_NoDamage
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
 #include "lscripts/Weapons/7_OmegaCannon.dec"
 #include "lscripts/Weapons/9_Sword.dec"
+#include "lscripts/Weapons/9_Gameboy.dec"
 
 // EOF
 

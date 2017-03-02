@@ -10,9 +10,9 @@ BIN_DOOM=../../acs
 BIN_HTIC=../../filter/heretic/acs
 
 ## Sources
-SRC_MAIN=../Main/inc/lith_upgradenames.h lith_balance_common.acs
-SRC_DOOM=$(SRC_MAIN) lith_balance_default.acs
-SRC_HTIC=$(SRC_MAIN) lith_balance_heretic.acs
+SRC_MAIN=../Main/inc/lith_upgradenames.h
+SRC_DOOM=lith_balance_default.acs $(SRC_MAIN)
+SRC_HTIC=lith_balance_heretic.acs $(SRC_MAIN)
 
 ## Output
 OUT=trbohtlr.bin
@@ -27,9 +27,9 @@ all: $(BIN_DOOM)/$(OUT) $(BIN_HTIC)/$(OUT)
 
 ## */trbohtlr.bin
 $(BIN_DOOM)/$(OUT): $(SRC_DOOM)
-	$(ACC) $^ -o $@
+	$(ACC) $< -o $@
 
 $(BIN_HTIC)/$(OUT): $(SRC_HTIC)
-	$(ACC) $^ -o $@
+	$(ACC) $< -o $@
 
 ## EOF

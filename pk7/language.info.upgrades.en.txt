@@ -1,10 +1,14 @@
 [enu default]
 
-LITH_TXT_INFO_DESCR_Classified = "<classified by OFMD clearance scanner>";
-
 LITH_TXT_INFO_SHORT_HeadsUpDisp = "$LITH_TXT_UPGRADE_TITLE_HeadsUpDisp";
 LITH_TXT_INFO_TITLE_HeadsUpDisp = "Heads Up Display";
-LITH_TXT_INFO_DESCR_HeadsUpDisp = "$LITH_TXT_INFO_DESCR_Classified";
+LITH_TXT_INFO_DESCR_HeadsUpDisp =
+   "This is a military issue Heads Up Display program, which tracks vital "
+   "signs, munitions, armor status, and more with numeric signifiers.\n\n"
+   "Originally designed by a former video game designer, a great amount of "
+   "effort had to be put into fine-tuning this program to tell you exactly "
+   "when you're about to die, your armor is about to break and get you killed, "
+   "or you're about to run out of ammunition, and then die.";
 
 LITH_TXT_INFO_SHORT_JetBooster = "$LITH_TXT_UPGRADE_TITLE_JetBooster";
 LITH_TXT_INFO_TITLE_JetBooster = "Pe'i tha E. Jet Boots";
@@ -53,19 +57,41 @@ LITH_TXT_INFO_DESCR_Yh0 =
 
 LITH_TXT_INFO_SHORT_DefenseNuke = "$LITH_TXT_UPGRADE_TITLE_DefenseNuke";
 LITH_TXT_INFO_TITLE_DefenseNuke = "Defensive Atomic Bomb";
-LITH_TXT_INFO_DESCR_DefenseNuke = "$LITH_TXT_INFO_DESCR_Classified";
+LITH_TXT_INFO_DESCR_DefenseNuke =
+   "An extremely deadly slow-charge bomb that activates as you enter a "
+   "dangerous area.\n\n"
+   "Unfortunately, due to this weapon being extravagantly loud, anything in "
+   "the area will also be alerted to your presence. Be careful with this "
+   "thing!";
 
 LITH_TXT_INFO_SHORT_Adrenaline = "$LITH_TXT_UPGRADE_TITLE_Adrenaline";
 LITH_TXT_INFO_TITLE_Adrenaline = "Senxans Automatic Adrenaline Injector";
-LITH_TXT_INFO_DESCR_Adrenaline = "$LITH_TXT_INFO_DESCR_Classified";
+LITH_TXT_INFO_DESCR_Adrenaline =
+   "A rather brute upgrade that gathers wasted adrenaline from your body and "
+   "injects it back into you all at once when you're in danger.\n\n"
+   "This gives the effect of time stopping for a moment as you move with "
+   "extreme swiftness, triggered by proximity to projectiles and being "
+   "targeted by enemies.\n\n"
+   "Using this without going insane or otherwise passing out requires "
+   "intense training given only to military forces.";
 
 LITH_TXT_INFO_SHORT_VitalScanner = "$LITH_TXT_UPGRADE_TITLE_VitalScan";
-LITH_TXT_INFO_TITLE_VitalScanner = "Mitkeru Vital Scanner";
-LITH_TXT_INFO_DESCR_VitalScanner = "$LITH_TXT_INFO_DESCR_Classified";
+LITH_TXT_INFO_TITLE_VitalScanner = "Mit'keru Vital Scanner";
+LITH_TXT_INFO_DESCR_VitalScanner =
+   "A small nanomachine emitter is strapped to your belt, which fires out "
+   "nanos programmed to grab vital signs of enemies under your crosshair, "
+   "and display them in a numeric value on your heads up display.\n\n"
+   "Unfortunately, the range of this emitter is not as great as it could "
+   "be, and is for the most part only usable in close-quarters.";
 
 LITH_TXT_INFO_SHORT_AutoReload = "$LITH_TXT_UPGRADE_TITLE_AutoReload";
-LITH_TXT_INFO_TITLE_AutoReload = "Kmeru Automatic Loading System";
-LITH_TXT_INFO_DESCR_AutoReload = "$LITH_TXT_INFO_DESCR_Classified";
+LITH_TXT_INFO_TITLE_AutoReload = "K'meru Automatic Loading System";
+LITH_TXT_INFO_DESCR_AutoReload =
+   "A rather small robot that can fit in your backpack, which uses a learning "
+   "algorithm to figure out how to load your guns.\n\n"
+   "Created by HLCorp for their highly advanced hazard suits, it was retooled "
+   "to work separately from them so it could be mass produced for military "
+   "needs.";
 
 // EOF
 

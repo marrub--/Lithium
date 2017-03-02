@@ -12,6 +12,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define countof(a) (sizeof((a)) / sizeof(*(a)))
+
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 
 #define sink ACS_Sin
@@ -51,6 +53,16 @@
       ACS_EndHudMessage(fadetime) \
    )
 
+#define HudMessageAlpha(id, x, y, hold, alpha) \
+   ( \
+      HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
+   )
+
+#define HudMessageAdd(id, x, y, hold, alpha) \
+   ( \
+      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, id, CR_UNTRANSLATED, x, y, hold, alpha) \
+   )
+
 #define DrawSprite(name, flags, id, x, y, hold, ...) \
    ( \
       ACS_SetFont(name), \
@@ -85,13 +97,11 @@
 // To make pitch values down=0, up=1
 #define PITCH_BASE -0.5
 
+// Types
+typedef long long int score_t;
+
 // Random
-[[__optional_args(1)]]
-int Random(int max, int min);
-[[__optional_args(1)]]
-fixed RandomFixed(fixed max, fixed min);
-[[__optional_args(1)]]
-float RandomFloat(float max, float min);
+[[__optional_args(1)]] float RandomFloat(float max, float min);
 
 // Printing
 __str StrParam(__str fmt, ...);
@@ -99,6 +109,7 @@ __str Language(__str fmt, ...);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
+void PrintBold(__str fmt, ...);
 
 // Utilities
 __str StrUpper(__str in);
@@ -112,6 +123,9 @@ bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed ve
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
+__str Lith_ScoreSep(score_t num);
+char *Lith_strcpy_str(char *dest, char __str_ars const *src);
+int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 
 // Math
 accum lerpk(accum a, accum b, accum t);
@@ -132,9 +146,6 @@ int ceilk(accum n);
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
 static float const tau = pi * 2.0f;
-
-// Types
-typedef long long int score_t;
 
 #endif
 

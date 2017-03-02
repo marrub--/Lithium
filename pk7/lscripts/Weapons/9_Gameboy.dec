@@ -1,0 +1,37 @@
+actor Lith_Gameboy : Lith_Weapon
+{
+   Tag "$LITH_TXT_INFO_SHORT_Gameboy"
+   Weapon.SlotNumber 9
+   Weapon.BobStyle "Smooth"
+   Weapon.BobSpeed 1
+   
+   +WEAPON.WIMPY_WEAPON
+   
+   states
+   {
+   Spawn:
+      FIST A 0
+      FIST A 0 A_SetUserVar(user_pickupparm, weapon_gameboy)
+      goto SpawnLoop
+   
+   Ready:
+      GMBG A 1 A_WeaponReady
+      loop
+   
+   Deselect:
+      GMBG A 0 A_Lower
+      GMBG A 1 A_Lower
+      loop
+   Select:
+      GMBG A 0 A_Raise
+      GMBG A 1 A_Raise
+      loop
+   
+   Fire:
+      GMBG A 0 ACS_NamedExecuteWithResult("Lith_UseGameboy")
+      goto Ready
+   }
+}
+
+// EOF
+

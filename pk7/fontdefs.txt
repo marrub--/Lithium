@@ -1,0 +1,17 @@
+ALIENFONT
+{
+   "/" "lgfx/AlienNumbers/47.png"
+   "0" "lgfx/AlienNumbers/48.png"
+   "1" "lgfx/AlienNumbers/49.png"
+   "2" "lgfx/AlienNumbers/50.png"
+   "3" "lgfx/AlienNumbers/51.png"
+   "4" "lgfx/AlienNumbers/52.png"
+   "5" "lgfx/AlienNumbers/53.png"
+   "6" "lgfx/AlienNumbers/54.png"
+   "7" "lgfx/AlienNumbers/55.png"
+   "8" "lgfx/AlienNumbers/56.png"
+   "9" "lgfx/AlienNumbers/57.png"
+}
+
+// EOF
+

@@ -1,6 +1,7 @@
-#include "lith_balance_common.acs"
+#library "trbohtlr"
+#include "zcommon.acs"
 
-function void Lith_SetupBalance(void)
+function void Lith_GSInit_Balance(void)
 {
 }
 

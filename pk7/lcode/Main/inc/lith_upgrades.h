@@ -3,6 +3,7 @@
 
 #include "lith_common.h"
 #include "lith_upgradenames.h"
+#include "lith_shopdef.h"
 
 #define UserData_Adrenaline data.u01
 #define UserData_Implying   data.u02
@@ -12,9 +13,14 @@
 #define UserData_ReflexWetw data.u06
 #define UserData_VitalScan  data.u07
 
+#define NUMAUTOGROUPS 4
+
+#define Lith_UpgrBuy(p, upgr) \
+   Lith_ShopBuy(p, &(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S")
+
 
 //----------------------------------------------------------------------------
-// Type Definitions
+// Types
 //
 
 enum
@@ -27,6 +33,21 @@ enum
    UC_MAX
 };
 
+enum
+{
+   ug_none,
+   ug_pistol,
+   ug_shotgun,
+   ug_rifle,
+   ug_launcher,
+   ug_plasma,
+   ug_bfg,
+   ug_max
+};
+
+//
+// upgradedata_u
+//
 union upgradedata_u
 {
    struct
@@ -56,20 +77,22 @@ union upgradedata_u
       int maxhealth;
       float angle;
       float old;
+      bool freak;
    } u07;
 };
 
                       typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);
 [[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
 
+//
+// upgradeinfo_t
+//
 typedef struct upgradeinfo_s
 {
-   __str name;
-   __str bipunlock;
-   score_t cost;
+   [[__anonymous]] shopdef_t shopdef;
    int category;
    fixed scoreadd;
-   int wepclass;
+   int group;
    
    upgr_cb_t        Activate;
    upgr_cb_t        Deactivate;
@@ -83,9 +106,14 @@ typedef struct upgradeinfo_s
 //
 typedef struct upgrade_s
 {
-   bool active : 1, owned : 1, wasactive : 1;
+   bool active    : 1;
+   bool owned     : 1;
+   bool wasactive : 1; // for reinitializing on map load
+   
    upgradeinfo_t const *info;
    union upgradedata_u data;
+   
+   bool autogroups[NUMAUTOGROUPS];
 } upgrade_t;
 
 //
@@ -95,49 +123,24 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
 
 
 //----------------------------------------------------------------------------
+// Extern Objects
+//
+
+extern __str Lith_AutoGroupNames[NUMAUTOGROUPS];
+
+
+//----------------------------------------------------------------------------
 // Extern Functions
 //
 
-// NB: These are included here and not in lith_upgrades.c so the
-//     function signatures can be checked by the compiler.
-
+// These are included here so the compiler may check the function signatures.
 #define A(n)                       void Upgr_##n##_Activate(struct player_s *p, upgrade_t *upgr);
 #define D(n)                       void Upgr_##n##_Deactivate(struct player_s *p, upgrade_t *upgr);
 #define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update(struct player_s *p, upgrade_t *upgr);
 #define E(n)                       void Upgr_##n##_Enter(struct player_s *p, upgrade_t *upgr);
 #define R(n)                       void Upgr_##n##_Render(struct player_s *p, upgrade_t *upgr);
+#include "lith_upgradefuncs.h"
 
-// A(-----------) D(-----------) U(-----------) E(-----------) R(-----------)
-                                                               R(HeadsUpDisp)
-   A(JetBooster)                 U(JetBooster)                 R(JetBooster)
-   A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)                 R(ReflexWetw)
-   A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
-                  D(ReactArmor)
-                                                E(DefenseNuke)
-                                 U(Adrenaline)
-                                 U(VitalScan)                  R(VitalScan)
-//---------------------------------------------------------------------------
-                  D(RifleModes)  U(RifleModes)
-                  D(PunctCannon)
-//---------------------------------------------------------------------------
-   A(7777777)     D(7777777)     U(7777777)
-   A(lolsords)    D(lolsords)    U(lolsords)
-//---------------------------------------------------------------------------
-                                 U(Implying)
-   A(UNCEUNCE)    D(UNCEUNCE)    U(UNCEUNCE)
-                                 U(InstaDeath)
-//---------------------------------------------------------------------------
-
-#undef A
-#undef D
-#undef U
-#undef E
-#undef R
-
-void Upgr_ToggleActive(struct player_s *p, upgrade_t *upgr);
-void Upgr_SetOwned(struct player_s *p, upgrade_t *upgr);
-bool Upgr_CanBuy(struct player_s *p, upgrade_t *upgr);
-void Upgr_Buy(struct player_s *p, upgrade_t *upgr);
 
 void Lith_PlayerInitUpgrades(struct player_s *p);
 void Lith_PlayerDeinitUpgrades(struct player_s *p);
@@ -147,6 +150,8 @@ void Lith_PlayerLoseUpgrades(struct player_s *p);
 void Lith_PlayerUpdateUpgrades(struct player_s *p);
 void Lith_PlayerRenderUpgrades(struct player_s *p);
 void Lith_PlayerEnterUpgrades(struct player_s *p);
+
+bool Lith_UpgrToggle(struct player_s *p, upgrade_t *upgr);
 
 #endif
 

@@ -72,7 +72,8 @@ enum
    hid_logE,
    hid_logS = hid_logE + 20,
    
-   hid_vitalscanner,
+   hid_vitalscannerhp,
+   hid_vitalscannertag,
    hid_vitalscanhitE,
    hid_vitalscanhitS = hid_vitalscanhitE + 5,
    
@@ -80,6 +81,9 @@ enum
    hid_jetS = hid_jetE + 15,
    hid_jettext,
    hid_jetbg,
+   
+   hid_weaponcurE,
+   hid_weaponcurS = hid_weaponcurE + 9,
    
    hid_weapontextE,
    hid_weapontextS = hid_weapontextE + 9,

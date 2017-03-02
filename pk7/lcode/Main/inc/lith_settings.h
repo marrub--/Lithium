@@ -3,6 +3,8 @@ Float("Damage bob multiplier", "lith_player_damagebobmul", 0.0f, 1.0f)
 Bool("Bob view when damaged", "lith_player_damagebob")
 Bool("Make a sound when score is gained", "lith_player_scoresound")
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse")
+Bool("Log score gained",                  "lith_player_scorelog")
+Bool("Play sound on results screen",      "lith_player_resultssound")
 
 Category("Weapons")
 Float("Scope zoom factor", "lith_weapons_zoomfactor", 1.0f, 10.0f)

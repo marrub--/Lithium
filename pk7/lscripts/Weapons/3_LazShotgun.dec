@@ -47,7 +47,7 @@ actor Lith_LazShotgun : Lith_Weapon
    
    Fire:
       TNT1 A 0 A_AlertMonsters
-      TNT1 AAAAAAA 0 A_RailAttack(6 * random(1, 4), 0, true, "None", "Red", RGF_SILENT | RGF_FULLBRIGHT, 2, "BulletPuff", 4, 4, 0, 10, 5, 0, "Lith_LazShotgunTrail", -8)
+      TNT1 AAAAAAA 0 A_RailAttack(7 * random(1, 4), 0, true, "None", "Red", RGF_SILENT | RGF_FULLBRIGHT, 2, "BulletPuff", 4, 4, 0, 10, 5, 0, "Lith_LazShotgunTrail", -8)
       TNT1 A 0 A_PlaySound("weapons/lshotgun/fire", CHAN_WEAPON)
       TNT1 A 0 A_Recoil(0.5)
       LSHF A 2 bright A_SetPitch(pitch - 0.75)

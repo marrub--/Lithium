@@ -2,8 +2,12 @@
 #define LITH_CBI_GUI_H
 
 #define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
+
+// すまん
 #define Lith_GUI_Button(g, ...) Lith_GUI_Button_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_Button_Id(g, id, ...) Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
+#define Lith_GUI_Checkbox(g, ...) Lith_GUI_Checkbox_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Checkbox_Id(g, id, ...) Lith_GUI_Checkbox_Impl(g, id + LineHash, &(gui_checkb_args_t){__VA_ARGS__})
 #define Lith_GUI_ScrollBegin(g, ...) Lith_GUI_ScrollBegin_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id + LineHash, &(gui_scroll_args_t){__VA_ARGS__})
 #define Lith_GUI_Slider(g, ...) Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
@@ -22,7 +26,7 @@ typedef struct gui_scroll_state_s
    int oy;
    int occludeS;
    int occludeE;
-   float y;
+   double y;
 } gui_scroll_state_t;
 
 typedef union gui_stateitem_s
@@ -47,6 +51,7 @@ typedef struct gui_state_s
    
    int hid;
    int ox, oy;
+   int w, h;
    
    id_t active, hot;
    
@@ -58,13 +63,13 @@ typedef struct gui_state_s
 
 typedef struct gui_button_preset_s
 {
-   __str  gfx;
-   __str  hot;
-   __str  snd;
-   char  cdef;
-   char  cact;
-   char  chot;
-   char  cdis;
+   __str gfx;
+   __str hot;
+   __str snd;
+   __str cdef;
+   __str cact;
+   __str chot;
+   __str cdis;
    __str font;
    int   w;
    int   h;
@@ -73,10 +78,36 @@ typedef struct gui_button_preset_s
 typedef struct gui_button_args_s
 {
    __str label;
-   int x, y;
-   bool disabled;
+   int   x, y;
+   bool  disabled;
+   __str color;
    gui_button_preset_t const *preset;
 } gui_button_args_t;
+
+typedef struct gui_checkb_preset_s
+{
+   __str gfx;
+   __str hot;
+   __str dis;
+   __str sndup;
+   __str snddn;
+   __str chkgfx;
+   __str chkhot;
+   __str chkact;
+   __str chkdis;
+   __str font;
+   int w;
+   int h;
+} gui_checkb_preset_t;
+
+typedef struct gui_checkb_args_s
+{
+   bool on;
+   int x, y;
+   __str label;
+   bool disabled;
+   gui_checkb_preset_t const *preset;
+} gui_checkb_args_t;
 
 typedef struct gui_scroll_preset_s
 {
@@ -87,7 +118,6 @@ typedef struct gui_scroll_preset_s
    int scrlh;
    __str notchgfx;
    __str notchhot;
-   int notchofs;
 } gui_scroll_preset_t;
 
 typedef struct gui_scroll_args_s
@@ -133,8 +163,12 @@ extern gui_button_preset_t const btnexit;
 extern gui_button_preset_t const btnnext;
 extern gui_button_preset_t const btnprev;
 extern gui_button_preset_t const btnlist;
+extern gui_button_preset_t const btnlistsel;
+extern gui_button_preset_t const btnlistactive;
+extern gui_button_preset_t const btnlistactivated;
 extern gui_button_preset_t const btnbipmain;
 extern gui_button_preset_t const btnbipback;
+extern gui_checkb_preset_t const cbxdefault;
 extern gui_scroll_preset_t const scrdefault;
 extern gui_slider_preset_t const slddefault;
 
@@ -145,11 +179,13 @@ extern gui_slider_preset_t const slddefault;
 
 void Lith_GUI_Init(gui_state_t *g, size_t maxst);
 void Lith_GUI_UpdateState(gui_state_t *g, struct player_s *p);
-void Lith_GUI_Begin(gui_state_t *g);
+[[__optional_args(2)]] void Lith_GUI_Begin(gui_state_t *g, int w, int h);
 void Lith_GUI_End(gui_state_t *g);
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
 void Lith_GUI_ClipRelease(gui_state_t *g);
+
 bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a);
+bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t *a);
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a);
 void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st);
 [[__optional_args(1)]] bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h);

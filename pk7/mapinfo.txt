@@ -1,9 +1,19 @@
+//----------------------------------------------------------------------------
+// Game Info
+//
+
 gameinfo
 {
-   playerclasses = "Lith_Player"
-   dimcolor = "gray"
-   dimamount = 0.1
+   PlayerClasses = "Lith_Player"
+   DimColor = "gray"
+   DimAmount = 0.1
+   QuitSound = "misc/quitsound"
 }
+
+
+//----------------------------------------------------------------------------
+// Skill Info
+//
 
 clearskills
 
@@ -54,6 +64,7 @@ skill extrahard
    Key = "p"
    DamageFactor = 1.05
    Aggressiveness = 0.1
+   MustConfirm = "$LITH_SKILL_EXTRAHARD"
    
    ReplaceActor = "ZombieMan",   "Lith_XH_ZombieMan"
    ReplaceActor = "ShotgunGuy",  "Lith_XH_ShotgunGuy"
@@ -73,6 +84,80 @@ skill nightmare
    ArmorFactor = 2
    NoInfighting
    HealthFactor = 2
+   MustConfirm = "$LITH_SKILL_NIGHTMARE"
+}
+
+
+//----------------------------------------------------------------------------
+// Map Info
+//
+
+map TITLEMAP "Lithium Title"
+{
+   Sky1 = "LITHSKRD", 0.05
+   Sky2 = "LITHSKS1"
+   Music = "lmusic/Title.ogg"
+
+   DoubleSky
+}
+
+
+//----------------------------------------------------------------------------
+// Intermission Info
+//
+
+intermission Inter_Cast
+{
+   Image
+   {
+      Background = "flats/ZZLITHBG.png"
+      Time = -1
+   }
+   
+   Wiper
+   {
+      WipeType = Burn
+      Time = 4
+      Background = "lgfx/End/Doom2.png"
+   }
+   
+   TextScreen
+   {
+      TextLump = "end_doom2.txt"
+      TextColor = "Red"
+      Background = "lgfx/End/Doom2.png"
+   }
+   
+   Wiper
+   {
+      WipeType = Melt
+      Time = 10
+      Background = "graphics/TITLEPIC.png"
+   }
+   
+   TextScreen
+   {
+      Background = "graphics/TITLEPIC.png"
+      TextSpeed = 6
+      TextColor = "White"
+      Text = "The end."
+      Position = 135, 100
+   }
+   
+   Wiper
+   {
+      WipeType = CrossFade
+      Time = 10
+      Background = "flats/ZZLITHBG.png"
+   }
+   
+   Image
+   {
+      Background = "flats/ZZLITHBG.png"
+      Time = 1
+   }
+   
+   GotoTitle{}
 }
 
 // EOF

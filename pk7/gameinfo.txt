@@ -1,0 +1,4 @@
+StartupType = "Heretic"
+
+// EOF
+

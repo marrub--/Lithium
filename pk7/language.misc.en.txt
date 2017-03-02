@@ -1,0 +1,137 @@
+[enu default]
+
+SECRETMESSAGE = "\cnA secret is revealed!";
+
+DOSY = "(Press Y to quit.)";
+PRESSYN = "Press Y or N.";
+PRESSKEY = "Press a key.";
+
+TXT_YES = "[Yes]";
+TXT_NO  = "[No]";
+
+QUITMSG   = "Wait, don't go!\nI still have to sell you the expansion pack!";
+QUITMSG1  = "Hold it, your contract isn't complete yet!";
+QUITMSG2  = "There are still explosions to be had,\nare you really sure?";
+QUITMSG3  = "Get out! Get out!\nGo and do your job!";
+QUITMSG4  = "I got nothing.";
+QUITMSG5  = "Leave before I make you leave!";
+QUITMSG6  = "Super, now I can get back to emitting bees at your house!";
+QUITMSG7  = "HEY\nHEY\nDIE";
+QUITMSG8  = "If you leave, I'll personally\nsend pizzas to your doorstep.";
+QUITMSG9  = "Look at this wuss!";
+QUITMSG10 = "C'mon,\njust 5 more minutes?";
+QUITMSG11 = "I'm rooting for you whichever way you go!";
+QUITMSG12 = "Exit?";
+QUITMSG13 = "Wait, there's a youkai waiting for you at the exit!";
+QUITMSG14 = "Get outta here, and get me some money too.";
+
+LITH_DEATHMSG_01 = "YOU ARE DEAD, DEAD, DEAD";
+LITH_DEATHMSG_02 = "YOU DED";
+LITH_DEATHMSG_03 = "MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.";
+LITH_DEATHMSG_04 = "PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.";
+LITH_DEATHMSG_05 = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
+LITH_DEATHMSG_06 = "THE SKELETONS KNOW.";
+LITH_DEATHMSG_07 = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
+LITH_DEATHMSG_08 = "IT'S OKAY IT'S NOT LIKE EVERYONE WAS DEPENDING ON YOU OR ANYTHING";
+LITH_DEATHMSG_09 = "CONTRACT TERMINATED. REASON: DIED, LOL.";
+LITH_DEATHMSG_10 = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
+LITH_DEATHMSG_11 = "HAHAHAHA!";
+LITH_DEATHMSG_12 = "YOU SHOULDN'T HAVE DONE THAT.";
+LITH_DEATHMSG_13 = "WOW! LOOK AT THOSE DEMON FEET.";
+LITH_DEATHMSG_14 = "OUCH! THAT HAD TO HURT.";
+LITH_DEATHMSG_15 = "LOOK AT ME! I'M FLAT!";
+LITH_DEATHMSG_16 = "THANKS FOR PLAYING!";
+LITH_DEATHMSG_17 = "YOU LAZY @&$#!";
+LITH_DEATHMSG_18 = "HAVE YOU HAD ENOUGH?";
+LITH_DEATHMSG_19 = "THE DEMONS GAVE YOU THE BOOT!";
+LITH_DEATHMSG_20 = "AT LEAST YOU PLAY BETTER THAN KAISER!";
+
+LITH_SKILL_EXTRAHARD = "Are you sure?\nThis one is extra hard.";
+LITH_SKILL_NIGHTMARE = "Are you sure?\nThis one isn't even remotely fair.";
+
+BGFLAT06 = "ZZLITHBG"; // enter starport
+BGFLAT11 = "ZZLITHBG"; // enter city
+BGFLAT20 = "ZZLITHBG"; // enter hell
+BGFLAT30 = "ZZLITHBG"; // win game
+BGFLAT15 = "ZZLITHBG"; // secret level
+BGFLAT31 = "ZZLITHBG"; // super secret level
+
+C1TEXT =
+   ">>>>>[[[[INCOMING MESSAGE]]]]\n"
+   "\n"
+   "> Remote: ALambert@corp.OFMD\n"
+   "> Date: Loading...\n"
+   "> Title:\n"
+   "\n"
+   "An explosion of some sort just happened nearby, it seems that\n"
+   "the demons are reconstructing the world around you. You would\n"
+   "best be careful not to trigger any other, er, events.\n"
+   "Enough of those and the whole world around you might collapse!\n"
+   "\n"
+   "You've been making good progress so far. Your military superiors\n"
+   "seem to be considering giving you a promotion, even.\n"
+   "\n"
+   "Lambert out.";
+
+C2TEXT =
+   ">>>>>[[[[INCOMING MESSAGE]]]]\n"
+   "\n"
+   "> Remote: ALambert@corp.OFMD\n"
+   "> Date: Loading...\n"
+   "> Title:\n"
+   "\n"
+   "There has been a change of plans going down the whole chain of\n"
+   "command.  Your status as a military operative is now cancelled,\n"
+   "and you are to enter a full-on suicide mission funded by OFMD\n"
+   "alone.\n"
+   "\n"
+   "There is an artifact nearby that we have sent you.  Once it is\n"
+   "in your posession, immediately destroy it, and you will be\n"
+   "transported to a city somewhere in Hell.  Command will await\n"
+   "afterwards.\n"
+   "\n"
+   "Lambert out.";
+
+C3TEXT =
+   ">>>>>[[[[INCOMING MESSAGE]]]]\n"
+   "\n"
+   "> Remote: ALambert@corp.OFMD\n"
+   "> Date: Loading...\n"
+   "> Title:\n"
+   "\n"
+   "Now that you have entered the city, you m\\r-3434[[\n"
+   "SYSTEM ERROR 0x4E4943456A6F6244554D42415353\n"
+   ">>>>>[[[[procedure resetting terminal]]]]\n"
+   ">>>>>[[[[status: heap corrupted]]]]\n"
+   ">>>>>[[[[error handler malfunction error]]]]\n"
+   ">>>>>[[[[failure to proceed]]]]\n"
+   "\n"
+   "You turn off your communications program and get up.";
+
+C4TEXT =
+   "As you destroy the enormous demon, the only thought that\n"
+   "your befuddled mind can muster is that, honestly, you've\n"
+   "probably done more work than you were supposed to.\n"
+   "\n"
+   "But, still, now that it's all over, you can die easy.\n"
+   "You lay down in a puddle of blood, murk and dead freaks,\n"
+   "and rest.\n"
+   "\n"
+   "You awaken in a hospital bed, cyberware disabled and\n"
+   "a government-looking man sitting in a chair next to you.";
+
+C5TEXT =
+   "You wander into a hidden part of Hell, built\n"
+   "by humans sent here millenia ago.\n"
+   "\n"
+   "You wonder to yourself what awaits you in\n"
+   "this corner of the demonic den...";
+
+C6TEXT =
+   "Now you've done it, this place just goes\n"
+   "deeper and just gets weirder.\n"
+   "\n"
+   "Well, just another paycheck in your wallet.";
+
+// EOF
+

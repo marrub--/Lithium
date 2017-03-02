@@ -188,6 +188,15 @@ weapons/cannon/draw    lsounds/Cannon/Draw.flac      // Fallout: New Vegas
 
 $limit weapons/cannon/explode 0
 
+weapons/cannon/impactfloor lsounds/Cannon/ImpactFloor.flac
+weapons/cannon/impactwall  lsounds/Cannon/ImpactWall.flac
+
+$limit weapons/cannon/impactfloor 0
+$limit weapons/cannon/impactwall 0
+
+$attenuation weapons/cannon/impactfloor 0.8
+$attenuation weapons/cannon/impactwall 0.8
+
 //
 // Punctuator Cannon
 //

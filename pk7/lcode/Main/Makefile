@@ -25,38 +25,48 @@ ALLOCMIN=--alloc-min Sta ""
 ## Sources
 
 MAIN_SOURCES= \
-	$(SRC)/lith_common.c \
-	$(SRC)/lith_list.c \
-	$(SRC)/lith_player.c \
-	$(SRC)/lith_world.c \
-	$(SRC)/lith_log.c \
-	$(SRC)/lith_decorate.c \
-	$(SRC)/lith_pickups.c \
-	$(SRC)/lith_upgrades.c \
-	$(SRC)/lith_upgr_7777777.c \
-	$(SRC)/lith_upgr_adrenaline.c \
-	$(SRC)/lith_upgr_cyberlegs.c \
-	$(SRC)/lith_upgr_defensenuke.c \
-	$(SRC)/lith_upgr_headsupdisp.c \
-	$(SRC)/lith_upgr_implying.c \
-	$(SRC)/lith_upgr_instadeath.c \
-	$(SRC)/lith_upgr_jetbooster.c \
-	$(SRC)/lith_upgr_lolsords.c \
-	$(SRC)/lith_upgr_punctcannon.c \
-	$(SRC)/lith_upgr_reactarmor.c \
-	$(SRC)/lith_upgr_reflexwetw.c \
-	$(SRC)/lith_upgr_riflemodes.c \
-	$(SRC)/lith_upgr_unceunce.c \
-	$(SRC)/lith_upgr_vitalscan.c \
-	$(SRC)/lith_cbi.c \
-	$(SRC)/lith_cbi_gui.c \
-	$(SRC)/lith_bip.c \
-	$(SRC)/lith_weapons.c \
-	$(SRC)/lith_shop.c
+	$(SRC)/m_common.c \
+	$(SRC)/m_list.c \
+	$(SRC)/p_player.c \
+	$(SRC)/w_world.c \
+	$(SRC)/w_decorate.c \
+	$(SRC)/m_pickups.c \
+	$(SRC)/p_upgrades.c \
+	$(SRC)/u_7777777.c \
+	$(SRC)/u_adrenaline.c \
+	$(SRC)/u_cyberlegs.c \
+	$(SRC)/u_defensenuke.c \
+	$(SRC)/u_headsupdisp.c \
+	$(SRC)/u_implying.c \
+	$(SRC)/u_instadeath.c \
+	$(SRC)/u_jetbooster.c \
+	$(SRC)/u_lolsords.c \
+	$(SRC)/u_punctcannon.c \
+	$(SRC)/u_reactarmor.c \
+	$(SRC)/u_reflexwetw.c \
+	$(SRC)/u_riflemodes.c \
+	$(SRC)/u_unceunce.c \
+	$(SRC)/u_vitalscan.c \
+	$(SRC)/p_cbi.c \
+	$(SRC)/p_cbi_gui.c \
+	$(SRC)/p_bip.c \
+	$(SRC)/p_weapons.c \
+	$(SRC)/p_log.c \
+	$(SRC)/p_shop.c \
+	$(SRC)/p_games.c \
+	$(SRC)/m_namegen.c \
+	$(SRC)/m_netfile.c \
+	$(SRC)/p_savedata.c \
+	$(SRC)/p_shopdef.c \
+	$(SRC)/p_data.c \
+	$(SRC)/p_payout.c \
+	$(SRC)/p_render.c \
+	$(SRC)/p_save.c \
+	$(SRC)/p_autogroup.c \
+	$(SRC)/base64.c
 
 ## Output
 
-MISC_OUTPUT=$(MISC_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 MAIN_OUTPUT=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 
 ##

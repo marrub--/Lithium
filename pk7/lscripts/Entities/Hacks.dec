@@ -42,5 +42,18 @@ actor Lith_UniqueID : Inventory
    +INVENTORY.UNDROPPABLE
 }
 
+actor Lith_EnemyChecker : CustomInventory
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_ChangeFlag("NOCLIP", true)
+      TNT1 A 0 A_ChangeFlag("COUNTKILL", false)
+      TNT1 A 0 A_Die
+      TNT1 A 0 A_RailWait
+      stop
+   }
+}
+
 // EOF
 

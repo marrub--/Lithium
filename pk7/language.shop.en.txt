@@ -10,24 +10,10 @@ LITH_TXT_SHOP_DESCR_PlasmaAmmo =
    "Highly condensed energy cells used by your plasma rifle.\n\n"
    "Produced by A.O.F Inc.";
 
-LITH_TXT_SHOP_TITLE_CannonAmmo = "Cannon Ammo";
-LITH_TXT_SHOP_DESCR_CannonAmmo =
-   "Some kind of demonic charge powering your Omega Cannon.\n\n"
-   "Gathered by researchers long ago, now only found through the black "
-   "market.";
-
 LITH_TXT_SHOP_TITLE_Allmap = "Area Map";
 LITH_TXT_SHOP_DESCR_Allmap =
    "A map of the area for your Automap. Reveals all locations you have and "
    "haven't seen.";
-
-LITH_TXT_SHOP_TITLE_Berserk = "Berserk";
-LITH_TXT_SHOP_DESCR_Berserk =
-   "A black medikit which heals you completely and strengthens you immensely.";
-
-LITH_TXT_SHOP_TITLE_BlurSphere = "Blur Sphere";
-LITH_TXT_SHOP_DESCR_BlurSphere =
-   "A magical cloaking device which makes you nearly invisible.";
 
 LITH_TXT_SHOP_TITLE_Infrared = "CB-Goggles";
 LITH_TXT_SHOP_DESCR_Infrared =
@@ -49,6 +35,9 @@ LITH_TXT_SHOP_DESCR_SniperRifle = "Scoped bolt-action rifle.";
 
 LITH_TXT_SHOP_TITLE_MissileLauncher = "$LITH_TXT_INFO_SHORT_MissileLauncher";
 LITH_TXT_SHOP_DESCR_MissileLauncher = "Mini-missile launcher.";
+
+LITH_TXT_SHOP_TITLE_Gameboy = "$LITH_TXT_INFO_SHORT_Gameboy";
+LITH_TXT_SHOP_DESCR_Gameboy = "A game playing system, containing several old titles.";
 
 /*
 LITH_TXT_SHOP_TITLE_DivSigil = "Div. Sigil";

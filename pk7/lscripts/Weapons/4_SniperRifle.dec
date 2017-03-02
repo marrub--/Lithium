@@ -4,13 +4,14 @@ actor Lith_SniperBullet : FastProjectile
    Speed 1024
    Radius 1
    Height 1
-   Mass 9999
+   Mass 20
    DamageType "Lith_Bullets"
    Species "Lith_Player"
    
    +MTHRUSPECIES
    +BLOODSPLATTER
    +FORCEPAIN
+   +NOEXTREMEDEATH
    
    states
    {

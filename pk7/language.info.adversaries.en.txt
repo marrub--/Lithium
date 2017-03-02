@@ -14,16 +14,16 @@ LITH_TXT_INFO_SHORT_BaronOfHell      = "Hell Baron";
 // Demons
 LITH_TXT_INFO_SHORT_Cyberdemon       = "Cyber-Demon";
 LITH_TXT_INFO_SHORT_Cacodemon        = "Caco-Demon";
-LITH_TXT_INFO_SHORT_Arachnotron      = "Spider Demon";
+LITH_TXT_INFO_SHORT_SpiderMastermind = "Spider Demon";
 
 // Special enemies
+LITH_TXT_INFO_SHORT_Arachnotron      = "Arachnotron";
 LITH_TXT_INFO_SHORT_Archvile         = "Archvile";
 LITH_TXT_INFO_SHORT_Revenant         = "Revenant";
 LITH_TXT_INFO_SHORT_Mancubus         = "Mancubus";
 LITH_TXT_INFO_SHORT_PainElemental    = "Pain Elemental";
 LITH_TXT_INFO_SHORT_Spectre          = "Spectre";
 LITH_TXT_INFO_SHORT_LostSoul         = "Lost Soul";
-LITH_TXT_INFO_SHORT_SpiderMastermind = "Spider Mastermind";
 
 // EOF
 

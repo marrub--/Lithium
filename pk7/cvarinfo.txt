@@ -1,28 +1,52 @@
 // Player
-user float lith_player_damagebobmul = 0.6;
-user bool lith_player_damagebob = true;
-user bool lith_player_scoresound = true;
-user bool lith_player_invertmouse = false;
-user bool lith_player_scorelog = false;
-user bool lith_player_resultssound = true;
+user float  lith_player_damagebobmul = 0.6;
+user bool   lith_player_damagebob = true;
+user bool   lith_player_scoresound = true;
+user bool   lith_player_invertmouse = false;
+user bool   lith_player_scorelog = false;
+user bool   lith_player_resultssound = true;
+
+// Save data
+user string lith_player_savedata_0  = "";
+user string lith_player_savedata_1  = "";
+user string lith_player_savedata_2  = "";
+user string lith_player_savedata_3  = "";
+user string lith_player_savedata_4  = "";
+user string lith_player_savedata_5  = "";
+user string lith_player_savedata_6  = "";
+user string lith_player_savedata_7  = "";
+user string lith_player_savedata_8  = "";
+user string lith_player_savedata_9  = "";
+user string lith_player_savedata_10 = "";
+user string lith_player_savedata_11 = "";
+user string lith_player_savedata_12 = "";
+user string lith_player_savedata_13 = "";
+user string lith_player_savedata_14 = "";
+user string lith_player_savedata_15 = "";
+user string lith_player_savedata_16 = "";
+user string lith_player_savedata_17 = "";
+user string lith_player_savedata_18 = "";
+user string lith_player_savedata_19 = "";
+user string lith_player_savedata_20 = "";
 
 // Weapons
-user float lith_weapons_zoomfactor = 3.0;
-user float lith_weapons_scopealpha = 0.2;
-user float lith_weapons_alpha = 1.0;
-user bool lith_weapons_riflescope = false;
+user float  lith_weapons_zoomfactor = 3.0;
+user float  lith_weapons_scopealpha = 0.2;
+user float  lith_weapons_alpha = 1.0;
+user bool   lith_weapons_riflescope = false;
 
 // HUD
-user bool lith_hud_showscore = true;
-user bool lith_hud_showweapons = true;
-user bool lith_hud_movescanner = true;
+user bool   lith_hud_showscore = true;
+user bool   lith_hud_showweapons = true;
+user bool   lith_hud_movescanner = true;
 
 // Server
-server bool lith_sv_stupidpickups = false;
-server bool lith_sv_revenge = true;
+server           bool lith_sv_stupidpickups = false;
+server           bool lith_sv_revenge       = true;
+server noarchive bool lith_sv_monsters_ok   = false;
 
 // Debugging
-server noarchive bool __lith_debug_on = false;
+server noarchive bool   __lith_debug_on = false;
 server noarchive string __lith_debug_upgrade;
 
 // EOF
