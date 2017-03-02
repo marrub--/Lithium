@@ -3,7 +3,7 @@ actor Lith_PKTrail
    Speed 14
    Radius 6
    Height 6
-   Damage 8
+   Damage 2
    RenderStyle "Add"
    Alpha 1
    DamageType "Lith_Magic"
@@ -27,7 +27,7 @@ actor Lith_PolarKnight
    Radius 5
    Height 5
    Speed 14
-   Damage 8
+   Damage 7
    RenderStyle "Add"
    Alpha 0.8
    SeeSound "enemies/hellknight/throw"
@@ -50,7 +50,6 @@ actor Lith_PolarKnight
 actor Lith_HellKnight : HellKnight replaces HellKnight
 {
    Speed 4
-   DamageFactor "Lith_Bullets", 0.6
    Species "Lith_HellKnight"
    Tag "$LITH_TXT_INFO_SHORT_HellKnight"
    
@@ -166,7 +165,7 @@ actor Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 
 actor Lith_Revenant : Revenant replaces Revenant
 {
-   Health 400
+   Health 350
    Tag "$LITH_TXT_INFO_SHORT_Revenant"
    
    states
@@ -230,7 +229,7 @@ actor Lith_Arachnotron : Arachnotron replaces Arachnotron
 actor Lith_FatShot : FatShot replaces FatShot
 {
    DamageType "Lith_Fire"
-   Damage (7 * random(1, 8))
+   Damage 7
    Speed 10
    
    states

@@ -19,7 +19,7 @@ actor Lith_Rocket
    Radius 2
    Height 2
    Speed 5
-   Damage 30
+   Damage 20
    DeathSound "explosion"
    Species "Lith_Player"
    DamageType "Lith_Shrapnel"
@@ -86,8 +86,8 @@ actor Lith_RocketDamageHax
 {
    Species "Lith_Player"
    DamageType "Lith_Shrapnel"
-   Speed 32
-   Damage 30
+   Speed 16
+   Damage 20
    Radius 2
    Height 2
    
@@ -97,7 +97,7 @@ actor Lith_RocketDamageHax
    states
    {
    Spawn:
-      TNT1 A 2
+      TNT1 A 4
       stop
    }
 }

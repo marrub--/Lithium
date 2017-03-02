@@ -1,6 +1,6 @@
 actor Lith_SniperBullet : FastProjectile
 {
-   Damage (202)
+   Damage (214)
    Speed 1024
    Radius 1
    Height 1

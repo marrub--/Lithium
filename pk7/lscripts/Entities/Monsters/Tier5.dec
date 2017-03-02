@@ -2,7 +2,7 @@ actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
 {
    Health 4000
    PainChance 0
-   DamageFactor "Lith_Energy", 0.2 // :^)
+   DamageFactor "Lith_Energy", 0.5 // :^)
    Tag "$LITH_TXT_INFO_SHORT_SpiderMastermind"
    
    states
@@ -52,7 +52,7 @@ actor Lith_Cyberdemon : Cyberdemon replaces Cyberdemon
 {
    Health 7000
    PainChance 0
-   DamageFactor "Lith_Energy", 0.2 // :^)
+   DamageFactor "Lith_Energy", 0.5 // :^)
    Tag "$LITH_TXT_INFO_SHORT_Cyberdemon"
    
    +MISSILEMORE

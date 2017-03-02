@@ -1,5 +1,6 @@
 actor Lith_ZombieMan : ZombieMan replaces ZombieMan
 {
+   Health 30
    AttackSound ""
    DropItem "Lith_Dummy"
    MinMissileChance 150
@@ -44,6 +45,7 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
 
 actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
 {
+   Health 35
    AttackSound ""
    DropItem "Lith_Dummy"
    MinMissileChance 150
@@ -140,6 +142,7 @@ actor Lith_Imp : DoomImp replaces DoomImp
 
 actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
 {
+   Health 60
    DropItem "Lith_Dummy"
    Speed 9
    Tag "$LITH_TXT_INFO_SHORT_ChaingunGuy"

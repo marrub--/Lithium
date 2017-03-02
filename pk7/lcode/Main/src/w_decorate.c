@@ -6,7 +6,7 @@
 #include <math.h>
 
 //----------------------------------------------------------------------------
-// Scripts
+// Extern Functions
 //
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -84,20 +84,6 @@ int Lith_VelHax(int fuck)
    }
    
    return -1;
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_Oscillate()
-{
-   static bool x;
-   return x = !x;
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_OscillateN(int n)
-{
-   static int x;
-   return x %= n, x++;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
