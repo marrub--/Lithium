@@ -90,7 +90,7 @@ actor Lith_ImpBall : DoomImpBall
    states
    {
    Spawn:
-      BAL1 AAAABBBB 1 bright A_RadiusGive("Lith_AdrenalineToken", 48, RGF_PLAYERS)
+      BAL1 AB 4 bright
       loop
    Death:
       BAL1 A 0 A_SetScale(1.0)

@@ -68,7 +68,6 @@ reinit:
       
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
-      ACS_TakeInventory("Lith_AdrenalineToken", 1);
       
       // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);

@@ -5,7 +5,7 @@
    A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
                   D(ReactArmor)
                                                 E(DefenseNuke)
-                                 U(Adrenaline)
+   A(Adrenaline)                 U(Adrenaline)
                                  U(VitalScan)                  R(VitalScan)
 //---------------------------------------------------------------------------
                   D(RifleModes)  U(RifleModes)
