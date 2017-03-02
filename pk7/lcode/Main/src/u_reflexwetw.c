@@ -15,11 +15,11 @@
 [[__call("ScriptS")]]
 static void DOOOOODGE(player_t *p)
 {
-   _Accum vh = p->viewheight;
+   fixed vh = p->viewheight;
    
    for(int i = 0; i < 20; i++)
    {
-      _Accum mul = 1.0 - (sink(i / 40.0) * 0.6);
+      fixed mul = 1.0 - (sink(i / 40.0) * 0.6);
       ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
       ACS_Delay(1);
    }

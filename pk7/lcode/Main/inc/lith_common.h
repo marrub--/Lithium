@@ -99,6 +99,7 @@
 
 // Types
 typedef long long int score_t;
+typedef long fixed fixed64_t;
 
 // Random
 [[__optional_args(1)]] float RandomFloat(float max, float min);
@@ -128,19 +129,19 @@ char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 
 // Math
-accum lerpk(accum a, accum b, accum t);
-long accum lerplk(long accum a, long accum b, long accum t);
+fixed lerpk(fixed a, fixed b, fixed t);
+fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 float normf(float x, float min, float max);
 bool bpcldi(int bx1, int by1, int bx2, int by2, int x2, int y2); // Box / Point collision (integer)
 bool l1xcldi(int lx1, int lx2, int x); // Line (1-d) / X collision (integer)
 float pymagf(float x, float y);
-accum pymagk(accum x, accum y);
+fixed pymagk(fixed x, fixed y);
 float angle2df(float x1, float y1, float x2, float y2);
-accum dist2dk(accum x1, accum y1, accum x2, accum y2);
+fixed dist2dk(fixed x1, fixed y1, fixed x2, fixed y2);
 float dist2df(float x1, float y1, float x2, float y2);
-accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2);
-int ceilk(accum n);
+fixed dist3dk(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2);
+int ceilk(fixed n);
 
 // Constants
 static float const pi  = 3.14159265358979323846f;

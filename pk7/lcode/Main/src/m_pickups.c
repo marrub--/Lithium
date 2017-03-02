@@ -1,7 +1,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-#define name(p) {sizeof(p) / sizeof(*p), p}
+#define name(p) {countof(p), p}
 
 struct pickupfmt_s
 {
@@ -176,8 +176,8 @@ static __str uncertainty[] = {
    "Yes, no, maybe. I don't know."
 };
 
-static size_t const pickupfmtnum   = sizeof(pickupfmt)   / sizeof(*pickupfmt);
-static size_t const uncertaintynum = sizeof(uncertainty) / sizeof(*uncertainty);
+static size_t const pickupfmtnum   = countof(pickupfmt);
+static size_t const uncertaintynum = countof(uncertainty);
 
 static void Lith_StupidPickup(player_t *p, int weapon)
 {

@@ -146,9 +146,9 @@ typedef struct gui_slider_args_s
 {
    int x;
    int y;
-   float minima;
-   float maxima;
-   float val;
+   double minima;
+   double maxima;
+   double val;
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 
@@ -189,7 +189,7 @@ bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t *a);
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a);
 void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st);
 [[__optional_args(1)]] bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h);
-float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a);
+double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a);
 
 #endif
 

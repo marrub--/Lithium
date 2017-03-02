@@ -7,6 +7,8 @@ user bool   lith_player_scorelog = false;
 user bool   lith_player_resultssound = true;
 
 // Save data
+// These are 200 bytes of storage per, so overall we have around 4kb available.
+// If this isn't enough more of these can be added trivially (ACS assumes nothing)
 user string lith_player_savedata_0  = "";
 user string lith_player_savedata_1  = "";
 user string lith_player_savedata_2  = "";

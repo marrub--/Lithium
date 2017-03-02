@@ -144,9 +144,9 @@ __str StrUpper(__str in)
 //
 // lerpk
 //
-accum lerpk(accum a, accum b, accum t)
+fixed lerpk(fixed a, fixed b, fixed t)
 {
-   accum ret = ((1.0 - t) * a) + (t * b);
+   fixed ret = ((1.0 - t) * a) + (t * b);
    
    if(roundk(ret, 10) == b)
       return b;
@@ -157,9 +157,9 @@ accum lerpk(accum a, accum b, accum t)
 //
 // lerplk
 //
-long accum lerplk(long accum a, long accum b, long accum t)
+fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t)
 {
-   long accum ret = ((1.0lk - t) * a) + (t * b);
+   fixed64_t ret = ((1.0lk - t) * a) + (t * b);
    
    if(roundlk(ret, 10) == b)
       return b;
@@ -225,7 +225,7 @@ float pymagf(float x, float y)
 //
 // pymagk
 //
-accum pymagk(accum x, accum y)
+fixed pymagk(fixed x, fixed y)
 {
    return ACS_FixedSqrt((x * x) + (y * y));
 }
@@ -243,7 +243,7 @@ float angle2df(float x1, float y1, float x2, float y2)
 //
 // dist2dk
 //
-accum dist2dk(accum x1, accum y1, accum x2, accum y2)
+fixed dist2dk(fixed x1, fixed y1, fixed x2, fixed y2)
 {
    return ACS_VectorLength(x1 - x2, y1 - y2);
 }
@@ -261,7 +261,7 @@ float dist2df(float x1, float y1, float x2, float y2)
 //
 // dist3dk
 //
-accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2)
+fixed dist3dk(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
 {
    return ACS_VectorLength(dist2dk(x1, x2, y1, y2), z1 - z2);
 }
@@ -269,9 +269,9 @@ accum dist3dk(accum x1, accum y1, accum z1, accum x2, accum y2, accum z2)
 //
 // ceilk
 //
-int ceilk(accum n)
+int ceilk(fixed n)
 {
-   union {int_k_t i; accum a;} u = {.a = n};
+   union {int_k_t i; fixed a;} u = {.a = n};
    if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.a + 1;
    else             return (int)u.a;
 }

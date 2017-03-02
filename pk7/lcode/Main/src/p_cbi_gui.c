@@ -449,11 +449,11 @@ bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h)
 //
 // Lith_GUI_Slider_Impl
 //
-float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
+double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
 {
    GenPreset(gui_slider_preset_t, slddefault);
    
-   int w = pre->w - (pre->pad * 2);
+   double w = pre->w - (pre->pad * 2);
    
    int x = a->x + pre->pad;
    int y = a->y;
@@ -463,27 +463,30 @@ float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    x += g->ox;
    y += g->oy;
    
-   // get a normalized (in range (0, w)) value
-   float val;
+   // get a normalized value
+   double aval;
    
-   val = ((a->val - a->minima) / (a->maxima - a->minima)) * (float)w;
-   val = minmax(val, 0, w);
+   aval = (a->val - a->minima) / (a->maxima - a->minima);
+   aval = minmax(aval, 0, 1);
    
-   float orig = val;
+   double val;
    
    // move scroll notch
    if(g->active == id)
    {
-      val = g->cx - x;
-      val = minmax(val, 0, w);
+      val  = g->cx - x;
+      val  = minmax(val, 0, w);
+      val /= w;
       
       // play sound
-      if(g->cx != g->old.cx)
+      if(g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
          ACS_LocalAmbientSound(pre->snd, 60);
    }
+   else
+      val = aval;
    
    // get result-normalized value
-   float norm = ((val / (float)w) * a->maxima) + a->minima;
+   double norm = val * (a->maxima - a->minima) + a->minima;
    
    // draw graphic
    DrawSpritePlain(pre->gfx, g->hid--, (x - pre->pad) + 0.1, y + (pre->h / 2), TICSECOND);
@@ -491,15 +494,15 @@ float Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    // draw notch
    {
    __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notch;
-   DrawSpritePlain(graphic, g->hid--, x + val - 1 + 0.1, y + 0.1, TICSECOND);
+   DrawSpritePlain(graphic, g->hid--, x + (int)(val * w) - 1 + 0.1, y + 0.1, TICSECOND);
    }
    
    // draw value
-   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)norm);
+   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(norm + 0.001));
    HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
    
    // if we've moved it, we return a difference
-   if(g->active == id && !g->clicklft && val != orig)
+   if(g->active == id && !g->clicklft && !IsSmallNumber(aval - val))
       return norm - a->val;
    
    // otherwise we return 0

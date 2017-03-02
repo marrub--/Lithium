@@ -18,8 +18,8 @@ typedef struct payoutinfo_s
    int killnum, killmax;
    int itemnum, itemmax;
    
-   long fixed killpct;
-   long fixed itempct;
+   fixed64_t killpct;
+   fixed64_t itempct;
    
    int killscr;
    int itemscr;

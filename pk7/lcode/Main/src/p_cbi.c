@@ -54,7 +54,7 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    }
 
 #define Float(label, cvar, minima, maxima) \
-   __with(float set = ACS_GetUserCVarFixed(p->number, cvar), diff;) \
+   __with(double set = ACS_GetUserCVarFixed(p->number, cvar), diff;) \
    { \
       Label(label); \
       if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \

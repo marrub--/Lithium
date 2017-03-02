@@ -73,12 +73,12 @@ void Lith_EmitScore(int amount)
 //
 static void Lith_DoPayout(void)
 {
-   long fixed taxpct = ACS_RandomFixed(1 / 100.0, 5 / 100.0);
+   fixed64_t taxpct = ACS_RandomFixed(1 / 100.0, 5 / 100.0);
    
    #define GenPay(name) \
       if(payout.name##max) \
       { \
-         payout.name##pct = (payout.name##num / (long fixed)payout.name##max) * 100; \
+         payout.name##pct = (payout.name##num / (fixed64_t)payout.name##max) * 100; \
          payout.name##scr = payout.name##pct * 500; \
       }
    

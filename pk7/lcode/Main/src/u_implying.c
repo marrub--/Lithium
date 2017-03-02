@@ -33,7 +33,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
       "\Cq" "<",
    };
    
-   static int const num_strings = sizeof(strings) / sizeof(*strings);
+   static int const num_strings = countof(strings);
    static int const id_max = hid_implyingE - hid_implyingS;
    
    int id = UserData.hudid;

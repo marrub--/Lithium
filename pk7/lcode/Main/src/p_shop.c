@@ -33,7 +33,7 @@ static shopitem_t shopitems[] = {
 // {{"DivSigil",        "DivSigil",        7772940},    1, "Lith_DivisionSigil"   },
 };
 
-static size_t const shopitemsnum = sizeof(shopitems) / sizeof(*shopitems);
+static size_t const shopitemsnum = countof(shopitems);
 
 
 //----------------------------------------------------------------------------
