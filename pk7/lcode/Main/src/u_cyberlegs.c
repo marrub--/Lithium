@@ -31,9 +31,8 @@ void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
 {
    fixed absvel = absk(p->old.velz) * 10.0k;
    
-   if(p->velz == 0 && absvel > 100)
+   if(p->velz == 0 && absvel > 160)
    {
-      // TODO: play landing sound from EYE
       for(fixed i = absvel; i >= 100; i -= 100)
       {
          int tid;
