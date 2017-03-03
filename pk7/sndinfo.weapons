@@ -48,9 +48,8 @@ weapons/shotgun/gauss/spark2     lsounds/Shotgun/Gauss/Spark2.flac       // 〃
 weapons/shotgun/gauss/spark3     lsounds/Shotgun/Gauss/Spark3.flac       // 〃
 weapons/shotgun/gauss/reloadout  lsounds/Shotgun/Gauss/ReloadOut.flac    // General 6000
 weapons/shotgun/gauss/reloadin   lsounds/Shotgun/Gauss/ReloadIn.flac     // 〃
-weapons/shotgun/gauss/reloadpump lsounds/Shotgun/Gauss/ReloadPump.flac   // 〃
 
-$limit weapons/shotgun/gauss/puff 0
+weapons/shotgun/poison/fire lsounds/Shotgun/Poison/FireFull.flac // FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, General 6000
 
 $random weapons/shotgun/just {
    weapons/shotgun/just1
@@ -64,6 +63,9 @@ $random weapons/shotgun/gauss/spark {
    weapons/shotgun/gauss/spark3
    weapons/shotgun/gauss/spark4
 }
+
+$limit weapons/shotgun/gauss/puff 0
+$limit weapons/shotgun/gauss/spark 0
 
 //
 // Laser Shotgun

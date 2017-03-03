@@ -13,6 +13,7 @@ enum
    
    UPGR_AutoPistol,
    UPGR_GaussShotty,
+   UPGR_PoisonShot,
    UPGR_RifleModes,
    UPGR_ChargeRPG,
    UPGR_PlasLaser,

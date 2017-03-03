@@ -26,7 +26,7 @@ static shopitem_t shopitems[] = {
    {{"LazShotgun",      "LazShotgun",      1800000},    1, "Lith_LazShotgun"      },
    {{"SniperRifle",     "SniperRifle",     1800000},    1, "Lith_SniperRifle"     },
 // {{"MissileLauncher", "MissileLauncher", 2500000},    1, "Lith_MissileLauncher" },
-   {{"Gameboy",         null,              10000  },    1, "Lith_Gameboy"         },
+// {{"Gameboy",         null,              10000  },    1, "Lith_Gameboy"         },
    {{"Allmap",          null,              100000 },    1, "Allmap"               },
    {{"Infrared",        null,              70000  },    1, "Infrared"             },
    {{"RadSuit",         null,              100000 },    1, "RadSuit"              },

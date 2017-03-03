@@ -23,10 +23,10 @@ actor Lith_PuffSmoke
 
 actor Lith_BulletPuff replaces BulletPuff
 {
-   RenderStyle Add
-   Alpha 0.9
+   RenderStyle "Add"
    DamageType "Lith_Bullets"
    Species "Lith_Player"
+   Alpha 0.9
    
    +NOGRAVITY
    +NOBLOCKMAP

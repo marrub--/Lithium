@@ -193,6 +193,32 @@ bool Lith_BarrierCheck()
    return ACS_CheckFlag(0, "COUNTKILL");
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_PoisonFXTicker()
+{
+   for(int i = 0; i < 20; i++)
+   {
+      ACS_Delay(1);
+      
+      if(ACS_CheckInventory("Lith_PoisonFXReset"))
+      {
+         ACS_TakeInventory("Lith_PoisonFXReset", 999);
+         ACS_TakeInventory("Lith_PoisonFXTimer", 999);
+         ACS_GiveInventory("Lith_PoisonFXGiverGiver", 1);
+         return;
+      }
+   }
+   
+   if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+      return;
+   
+   if(ACS_CheckInventory("Lith_PoisonFXTimer"))
+   {
+      ACS_GiveInventory("Lith_PoisonFXGiver", 1);
+      ACS_TakeInventory("Lith_PoisonFXTimer", 1);
+   }
+}
+
 #if 0
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetSigil()
