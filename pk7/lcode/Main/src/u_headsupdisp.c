@@ -75,7 +75,7 @@ static void HUD_Ammo(player_t *p)
    
    int y = 0;
    
-   if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
+   if(Lith_GetPCVarInt(p, "lith_hud_showweapons"))
       y = 13;
    
    DrawSpritePlain("H_B2", hid_ammobg, 320.2, 200.2 - y, TICSECOND);
@@ -213,9 +213,9 @@ void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
    
    // Inventory
    HUD_KeyInd(p);
-   if(ACS_GetUserCVar(p->number, "lith_hud_showscore"))
+   if(Lith_GetPCVarInt(p, "lith_hud_showscore"))
       HUD_Score(p);
-   if(ACS_GetUserCVar(p->number, "lith_hud_showweapons"))
+   if(Lith_GetPCVarInt(p, "lith_hud_showweapons"))
       HUD_Weapons(p);
    
    // Status

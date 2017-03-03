@@ -19,7 +19,7 @@ void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_RifleModes_Update(player_t *p, upgrade_t *upgr)
 {
-   if(ACS_GetUserCVar(p->number, "lith_weapons_riflescope") &&
+   if(Lith_GetPCVarInt(p, "lith_weapons_riflescope") &&
       p->weapon.cur->info->type == weapon_rifle &&
       p->riflefiremode == rifle_firemode_burst)
    {

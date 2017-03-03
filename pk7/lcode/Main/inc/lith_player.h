@@ -27,6 +27,14 @@
 #define LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
+#define Lith_GetPCVarInt(p, ...)       ACS_GetUserCVar      ((p)->number, __VA_ARGS__)
+#define Lith_GetPCVarFixed(p, ...)  ACS_GetUserCVarFixed ((p)->number, __VA_ARGS__)
+#define Lith_GetPCVarString(p, ...) ACS_GetUserCVarString((p)->number, __VA_ARGS__)
+
+#define Lith_SetPCVarInt(p, ...)       ACS_SetUserCVar      ((p)->number, __VA_ARGS__)
+#define Lith_SetPCVarFixed(p, ...)  ACS_SetUserCVarFixed ((p)->number, __VA_ARGS__)
+#define Lith_SetPCVarString(p, ...) ACS_SetUserCVarString((p)->number, __VA_ARGS__)
+
 
 //----------------------------------------------------------------------------
 // Types

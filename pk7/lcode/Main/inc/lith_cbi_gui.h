@@ -149,6 +149,7 @@ typedef struct gui_slider_args_s
    double minima;
    double maxima;
    double val;
+   bool integ;
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 

@@ -59,7 +59,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    case pdata_rifle_firemode: return p->riflefiremode;
    case pdata_buttons:        return p->buttons;
 // case pdata_has_sigil:      return p->sigil.acquired;
-   case pdata_weapon_zoom:    return bitsk(ACS_GetUserCVarFixed(p->number, "lith_weapons_zoomfactor"));
+   case pdata_weapon_zoom:    return bitsk(Lith_GetPCVarFixed(p, "lith_weapons_zoomfactor"));
    }
    
    return 0;

@@ -15,7 +15,13 @@ Bool("Modal Rifle scope",  "lith_weapons_riflescope")
 Category("Heads Up Display")
 Bool("Show score",   "lith_hud_showscore")
 Bool("Show weapons", "lith_hud_showweapons")
-Bool("Sliding Vital Scanner", "lith_hud_movescanner")
+
+Category("Vital Scanner")
+Bool("Slide to target", "lith_scanner_slide")
+Int("X offset",         "lith_scanner_xoffs", -160, 160)
+Int("Y offset",         "lith_scanner_yoffs", -180, 20)
+Enum("Color",           "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set))
+Bool("Alternate font",  "lith_scanner_altfont")
 
 if(ACS_GameType() == GAME_SINGLE_PLAYER)
 {
@@ -28,6 +34,8 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
 #undef Bool
 #undef ServerBool
 #undef Float
+#undef Enum
+#undef Int
 
 // EOF
 

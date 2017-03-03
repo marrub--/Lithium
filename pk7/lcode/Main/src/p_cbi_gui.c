@@ -2,6 +2,9 @@
 #include "lith_player.h"
 #include "lith_hudid.h"
 
+#include <math.h>
+
+
 #define GenPreset(type, def) \
    type const *pre; \
    if(a->preset) pre = a->preset; \
@@ -186,7 +189,7 @@ void Lith_GUI_Init(gui_state_t *g, size_t maxst)
 //
 void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
 {
-   bool inverted = ACS_GetUserCVar(p->number, "lith_player_invertmouse");
+   bool inverted = Lith_GetPCVarInt(p, "lith_player_invertmouse");
    
    // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
    // This breaks network sync so we can only do it in singleplayer.
@@ -488,17 +491,23 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    // get result-normalized value
    double norm = val * (a->maxima - a->minima) + a->minima;
    
+   if(a->integ) norm = round(norm);
+   
    // draw graphic
    DrawSpritePlain(pre->gfx, g->hid--, (x - pre->pad) + 0.1, y + (pre->h / 2), TICSECOND);
    
    // draw notch
    {
-   __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notch;
+   __str graphic;
+   
+   if(g->hot == id || g->active == id) graphic = pre->notchhot;
+   else                                graphic = pre->notch;
+   
    DrawSpritePlain(graphic, g->hid--, x + (int)(val * w) - 1 + 0.1, y + 0.1, TICSECOND);
    }
    
    // draw value
-   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(norm + 0.001));
+   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(round(norm * 100.0) / 100.0));
    HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
    
    // if we've moved it, we return a difference

@@ -52,9 +52,9 @@ void Lith_PlayerView(player_t *p)
 {
    float addp = 0, addy = 0;
    
-   if(ACS_GetUserCVar(p->number, "lith_player_damagebob"))
+   if(Lith_GetPCVarInt(p, "lith_player_damagebob"))
    {
-      float bobmul = ACS_GetUserCVarFixed(p->number, "lith_player_damagebobmul");
+      float bobmul = Lith_GetPCVarFixed(p, "lith_player_damagebobmul");
       addp += p->bobpitch * bobmul;
       addy += p->bobyaw   * bobmul;
    }
@@ -74,12 +74,12 @@ void Lith_PlayerStyle(player_t *p)
    if(p->scopetoken)
    {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_scopealpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, Lith_GetPCVarFixed(p, "lith_weapons_scopealpha"));
    }
    else
    {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, ACS_GetUserCVarFixed(p->number, "lith_weapons_alpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, Lith_GetPCVarFixed(p, "lith_weapons_alpha"));
    }
 }
 

@@ -71,12 +71,13 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
 {
    if(!p->upgrades[UPGR_HeadsUpDisp].active || !UserData.target) return;
    
-   int ofs = 0;
+   int ox = Lith_GetPCVarInt(p, "lith_scanner_xoffs");
+   int oy = Lith_GetPCVarInt(p, "lith_scanner_yoffs");
    
-   if(ACS_GetUserCVar(p->number, "lith_hud_movescanner"))
+   if(Lith_GetPCVarInt(p, "lith_scanner_slide"))
    {
       float diff = p->yawf - UserData.angle;
-      ofs = (UserData.old = lerpf(UserData.old, atan2f(sinf(diff), cosf(diff)), 0.1)) * 64;
+      ox += (UserData.old = lerpf(UserData.old, atan2f(sinf(diff), cosf(diff)), 0.1)) * 64;
    }
    
    if(UserData.health < UserData.oldhealth)
@@ -84,22 +85,25 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
       int delta = UserData.oldhealth - UserData.health;
       
       HudMessageF("CBIFONT", "-%i", delta);
-      HudMessageParams(HUDMSG_FADEOUT, hid_vitalscanhitS, CR_RED, 160.4 + ofs, 196.2, 0.1, 0.4);
+      HudMessageParams(HUDMSG_FADEOUT, hid_vitalscanhitS, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
       
       for(int i = 1; i < 5; i++)
       {
          if(delta < 100 * i) break;
          
          HudMessageF("CBIFONT", "-%i", delta);
-         HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vitalscanhitS - i, CR_RED, 160.4 + ofs, 196.2, 0.1, 0.4);
+         HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vitalscanhitS - i, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
       }
    }
    
-   HudMessageF("CBIFONT", "%S", UserData.tagstr);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannertag, CR_WHITE, 160.4 + ofs, 180.2, 0.1, 0.4);
+   char color = Lith_GetPCVarInt(p, "lith_scanner_color") & 0x7F;
+   __str font = Lith_GetPCVarInt(p, "lith_scanner_altfont") ? "SMALLFONT" : "CBIFONT";
    
-   HudMessageF(UserData.freak ? "ALIENFONT" : "CBIFONT", "%i/%i", UserData.health, UserData.maxhealth);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannerhp, CR_WHITE, 160.4 + ofs, 188.2, 0.1, 0.4);
+   HudMessageF(font, "\C%c%S", color, UserData.tagstr);
+   HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannertag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
+   
+   HudMessageF(UserData.freak ? "ALIENFONT" : font, "%i/%i", UserData.health, UserData.maxhealth);
+   HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannerhp, CR_WHITE, 160.4 + ox, 188.2 + oy, 0.1, 0.4);
 }
 
 // EOF

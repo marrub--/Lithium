@@ -1,9 +1,9 @@
 // Player
 user float  lith_player_damagebobmul = 0.6;
-user bool   lith_player_damagebob = true;
-user bool   lith_player_scoresound = true;
-user bool   lith_player_invertmouse = false;
-user bool   lith_player_scorelog = false;
+user bool   lith_player_damagebob    = true;
+user bool   lith_player_scoresound   = true;
+user bool   lith_player_invertmouse  = false;
+user bool   lith_player_scorelog     = false;
 user bool   lith_player_resultssound = true;
 
 // Save data
@@ -34,13 +34,19 @@ user string lith_player_savedata_20 = "";
 // Weapons
 user float  lith_weapons_zoomfactor = 3.0;
 user float  lith_weapons_scopealpha = 0.2;
-user float  lith_weapons_alpha = 1.0;
+user float  lith_weapons_alpha      = 1.0;
 user bool   lith_weapons_riflescope = false;
 
 // HUD
-user bool   lith_hud_showscore = true;
+user bool   lith_hud_showscore   = true;
 user bool   lith_hud_showweapons = true;
-user bool   lith_hud_movescanner = true;
+
+// Vital Scanner
+user bool   lith_scanner_slide   = true;
+user int    lith_scanner_xoffs   = 0;
+user int    lith_scanner_yoffs   = 0;
+user int    lith_scanner_color   = 106; // 'j'
+user bool   lith_scanner_altfont = false;
 
 // Server
 server           bool lith_sv_stupidpickups = false;
