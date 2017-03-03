@@ -90,6 +90,7 @@ int Lith_VelHax(int fuck)
 bool Lith_CheckHealth(int n)
 {
    player_t *p = LocalPlayer;
+   p->health = ACS_GetActorProperty(0, APROP_Health);
    return p->health < p->maxhealth;
 }
 
@@ -97,6 +98,7 @@ bool Lith_CheckHealth(int n)
 bool Lith_CheckArmor(int n)
 {
    player_t *p = LocalPlayer;
+   p->armor = ACS_CheckInventory("BasicArmor");
    return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
 }
 
