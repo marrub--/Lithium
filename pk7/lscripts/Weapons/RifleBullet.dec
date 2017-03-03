@@ -26,6 +26,7 @@ actor Lith_RifleBullet : FastProjectile
    
    +MTHRUSPECIES
    +BLOODSPLATTER
+   +FORCERADIUSDMG
    
    states
    {

@@ -49,6 +49,7 @@ actor Lith_CannonBall
    +MTHRUSPECIES
    +EXPLODEONWATER
    +USEBOUNCESTATE
+   +FORCERADIUSDMG
    -NOGRAVITY
    
    var int user_angle;

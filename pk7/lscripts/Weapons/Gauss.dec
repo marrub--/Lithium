@@ -43,7 +43,7 @@ actor Lith_GaussPuff
    Crash:
       BLLT A 0
       BLLT A 0 A_PlaySound("weapons/shotgun/gauss/puff")
-      BLLT A 0 A_Explode(64, 24, 0)
+      BLLT A 0
       BLLT A 1 A_FadeOut(0.05)
       wait
    Spawn:

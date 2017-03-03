@@ -12,6 +12,7 @@ actor Lith_SniperBullet : FastProjectile
    +BLOODSPLATTER
    +FORCEPAIN
    +NOEXTREMEDEATH
+   +FORCERADIUSDMG
    
    states
    {

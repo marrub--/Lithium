@@ -17,6 +17,7 @@ actor Lith_PunctuatorExplosion
    
    +BLOODLESSIMPACT
    +NOINTERACTION
+   +FORCERADIUSDMG
    
    states
    {
@@ -40,6 +41,7 @@ actor Lith_PunctuatorPuff
    +NODECAL
    +BLOODLESSIMPACT
    +MTHRUSPECIES
+   +FORCERADIUSDMG
    
    states
    {

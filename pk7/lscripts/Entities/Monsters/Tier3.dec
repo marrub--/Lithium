@@ -84,6 +84,7 @@ actor Lith_HellKnight : HellKnight replaces HellKnight
 actor Lith_BaronBallSound : BaronBall replaces BaronBall
 {
    DamageType "Lith_Magic"
+   Damage 4
    
    states
    {
@@ -152,9 +153,14 @@ actor Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 {
    DamageType "Lith_Shrapnel"
    
+   var int user_timer;
+   
    states
    {
    Spawn:
+      FATB A 0
+      FATB A 0 A_JumpIf(user_timer > 35 * 15, "Death")
+      FATB A 0 A_SetUserVar(user_timer, user_timer + 1)
       FATB AB 1 bright A_Tracer
       loop
    }
