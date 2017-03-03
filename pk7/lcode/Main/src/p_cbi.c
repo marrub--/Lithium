@@ -28,6 +28,15 @@ __str ColorName(char ch)
 }
 
 //
+// ToggleAutoBuy
+//
+void ToggleAutoBuy(player_t *p, int num)
+{
+   p->autobuy[num] = !p->autobuy[num];
+   Lith_PlayerSaveData(p);
+}
+
+//
 // Lith_CBITab_Settings
 //
 static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
@@ -38,8 +47,9 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Bool(...) y += 10;
 #define ServerBool(...) y += 10;
 #define Float(...) y += 10;
-#define Enum(...) y += 10;
 #define Int(...) y += 10;
+#define Enum(...) y += 10;
+#define CBox(...) y += 10;
 #include "lith_settings.h"
    
    Lith_GUI_ScrollBegin(g, st_settingscr, 15, 30, 280, 192, y);
@@ -95,14 +105,20 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    __with(int set = Lith_GetPCVarInt(p, cvar);) \
    { \
       Label(label); \
-      if(Lith_GUI_Button_Id(g, 0, .x = 280 - (btnnext.w*2), y, set == minima, .preset = &btnprev)) \
+      if(Lith_GUI_Button_Id(g, 0, .x = 280 - (btnnexts.w*2), y, set == minima, .preset = &btnprevs)) \
          Lith_SetPCVarInt(p, cvar, set - 1); \
-      if(Lith_GUI_Button_Id(g, 1, .x = 280 -  btnnext.w   , y, set == maxima, .preset = &btnnext)) \
+      if(Lith_GUI_Button_Id(g, 1, .x = 280 -  btnnexts.w   , y, set == maxima, .preset = &btnnexts)) \
          Lith_SetPCVarInt(p, cvar, set + 1); \
       HudMessageF("CBIFONT", fmt, __VA_ARGS__); \
       HudMessagePlain(g->hid--, g->ox + 200.1, g->oy + y + 0.1, TICSECOND); \
       y += 10; \
    }
+
+#define CBox(label, on, ...) \
+   Label(label); \
+   if(Lith_GUI_Checkbox(g, on, 240, y + 5, .preset = &cbxsmall)) \
+      __VA_ARGS__; \
+   y += 10;
 
 #include "lith_settings.h"
 #undef Label

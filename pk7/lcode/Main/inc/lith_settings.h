@@ -1,3 +1,9 @@
+Category("Auto-Groups")
+CBox("Automatically buy group #1", p->autobuy[0], ToggleAutoBuy(p, 0))
+CBox("Automatically buy group #2", p->autobuy[1], ToggleAutoBuy(p, 1))
+CBox("Automatically buy group #3", p->autobuy[2], ToggleAutoBuy(p, 2))
+CBox("Automatically buy group #4", p->autobuy[3], ToggleAutoBuy(p, 3))
+
 Category("Player")
 Float("Damage bob multiplier", "lith_player_damagebobmul", 0.0f, 1.0f)
 Bool("Bob view when damaged",  "lith_player_damagebob")
@@ -34,8 +40,9 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
 #undef Bool
 #undef ServerBool
 #undef Float
-#undef Enum
 #undef Int
+#undef Enum
+#undef CBox
 
 // EOF
 

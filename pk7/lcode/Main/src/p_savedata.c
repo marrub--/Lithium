@@ -69,7 +69,7 @@ crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers,
    void const *data, size_t size)
 {
-   savechunk_t chunk = {iden, vers};
+   savechunk_t chunk = {iden, vers & 0x7F};
    
    if(data)
    {
@@ -122,40 +122,70 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
 {
    rewind(save->fp);
    
+   if(ACS_GetCVar("__lith_debug_save"))
+      Log("Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
+   
    for(int i = 0;; i++)
    {
       savechunk_t chunk;
       Lith_FRead32(&chunk, sizeof(chunk), 4, save->fp);
       
       // End of file reached, or we reached the EOF chunk.
-      if(feof(save->fp) || chunk.iden == Ident_Lend)
+      if(chunk.iden == Ident_Lend || feof(save->fp))
          break;
       
       // If the chunk description matches, process it.
-      else if(chunk.iden == iden && chunk.vers == vers)
+      else if(chunk.iden == iden && (chunk.vrfl & Save_VersMask) == vers)
       {
          if(chunk.size)
          {
-            unsigned char *data = calloc(1, chunk.size);
+            unsigned char *data;
+            
+            data = calloc(1, chunk.size);
             Lith_FRead32(data, chunk.size, 4, save->fp);
             
-            // Check the hash validity. If it isn't valid, skip the chunk.
-            crc64_t hash = Lith_CRC64(data, chunk.size);
-            if(chunk.hash != hash)
+            memchunk_t mchnk = {.savechunk = chunk, .data = data};
+            
+            mchnk.vers = (chunk.vrfl & Save_VersMask);
+            mchnk.flag = (chunk.vrfl & Save_FlagMask) >> Save_FlagShft;
+            
+            if(!(mchnk.flag & SF_SkipHash))
             {
-               free(data);
-               continue;
+               // Check the hash validity. If it isn't valid, skip the chunk.
+               crc64_t hash = Lith_CRC64(data, chunk.size);
+               
+               if(chunk.hash != hash)
+               {
+                  if(ACS_GetCVar("__lith_debug_save"))
+                     Log("Lith_LoadChunk: Hash check failed");
+                  
+                  free(data);
+                  continue;
+               }
             }
             
+            else if(ACS_GetCVar("__lith_debug_save"))
+               Log("Lith_LoadChunk: Skipping hash check");
+            
             if(chunker)
-               chunker(save, &(memchunk_t){.savechunk = chunk, .data = data});
+               chunker(save, &mchnk);
             
             free(data);
          }
          
+         if(ACS_GetCVar("__lith_debug_save"))
+            Log("Lith_LoadChunk: Found valid chunk at %i", i);
+         
          return i;
       }
+      
+      // Chunk not correct, skip data
+      else
+         fseek(save->fp, chunk.size * 4, SEEK_CUR);
    }
+   
+   if(ACS_GetCVar("__lith_debug_save"))
+      Log("Lith_LoadChunk: Couldn't find anything");
    
    return -1;
 }

@@ -163,6 +163,8 @@ extern gui_button_preset_t const btntab;
 extern gui_button_preset_t const btnexit;
 extern gui_button_preset_t const btnnext;
 extern gui_button_preset_t const btnprev;
+extern gui_button_preset_t const btnnexts;
+extern gui_button_preset_t const btnprevs;
 extern gui_button_preset_t const btnlist;
 extern gui_button_preset_t const btnlistsel;
 extern gui_button_preset_t const btnlistactive;
@@ -170,6 +172,7 @@ extern gui_button_preset_t const btnlistactivated;
 extern gui_button_preset_t const btnbipmain;
 extern gui_button_preset_t const btnbipback;
 extern gui_checkb_preset_t const cbxdefault;
+extern gui_checkb_preset_t const cbxsmall;
 extern gui_scroll_preset_t const scrdefault;
 extern gui_slider_preset_t const slddefault;
 

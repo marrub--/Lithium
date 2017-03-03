@@ -1,13 +1,8 @@
 #include "lith_upgrades_common.h"
 
 #define ForUpgrade(name) \
-   for(int i = 0; i < UPGR_MAX; i++) \
-      __with(upgrade_t *name = &p->upgrades[i];)
-
-#define DefnCallback(name) \
-   ForUpgrade(upgr) \
-      if(upgr->active && upgr->info->name) \
-         upgr->info->name(p, upgr);
+   for(int _i = 0; _i < UPGR_MAX; _i++) \
+      __with(upgrade_t *name = &p->upgrades[_i];)
 
 
 //----------------------------------------------------------------------------
@@ -206,7 +201,13 @@ void Lith_PlayerLoseUpgrades(player_t *p)
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
-   DefnCallback(Update);
+   extern void Lith_CheckAutoBuy(player_t *p);
+   
+   Lith_CheckAutoBuy(p);
+   
+   ForUpgrade(upgr)
+      if(upgr->active && upgr->info->Update)
+         upgr->info->Update(p, upgr);
 }
 
 //
@@ -224,7 +225,9 @@ void Lith_PlayerRenderUpgrades(player_t *p)
 //
 void Lith_PlayerEnterUpgrades(player_t *p)
 {
-   DefnCallback(Enter);
+   ForUpgrade(upgr)
+      if(upgr->active && upgr->info->Enter)
+         upgr->info->Enter(p, upgr);
 }
 
 //

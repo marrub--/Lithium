@@ -54,7 +54,8 @@ server           bool lith_sv_revenge       = true;
 server noarchive bool lith_sv_monsters_ok   = false;
 
 // Debugging
-server noarchive bool   __lith_debug_on = false;
+server noarchive bool   __lith_debug_on   = false;
+server noarchive bool   __lith_debug_save = false;
 server noarchive string __lith_debug_upgrade;
 
 // EOF

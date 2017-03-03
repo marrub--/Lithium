@@ -63,6 +63,22 @@ gui_button_preset_t const btnprev = {
    .h = 11
 };
 
+gui_button_preset_t const btnnexts = {
+   BtnDefault,
+   .gfx  = "lgfx/UI/BtnNextSmall.png",
+   .hot  = "lgfx/UI/BtnNextSmallHot.png",
+   .w = 6,
+   .h = 9
+};
+
+gui_button_preset_t const btnprevs = {
+   BtnDefault,
+   .gfx  = "lgfx/UI/BtnPrevSmall.png",
+   .hot  = "lgfx/UI/BtnPrevSmallHot.png",
+   .w = 6,
+   .h = 9
+};
+
 gui_button_preset_t const btnlist = {
    BtnDefault,
    .gfx  = "lgfx/UI/ListButton.png",
@@ -116,11 +132,28 @@ gui_button_preset_t const btnbipback = {
 gui_checkb_preset_t const cbxdefault = {
    .gfx    = "lgfx/UI/Checkbox.png",
    .hot    = "lgfx/UI/CheckboxHot.png",
+   .dis    = "lgfx/UI/CheckboxDisabled.png",
    .sndup  = "player/cbi/clickon",
    .snddn  = "player/cbi/clickoff",
    .chkgfx = "lgfx/UI/CheckboxX.png",
    .chkhot = "lgfx/UI/CheckboxXHot.png",
    .chkact = "lgfx/UI/CheckboxXActive.png",
+   .chkdis = "lgfx/UI/CheckboxXDisabled.png",
+   .font = "CNFONT",
+   .w = 10,
+   .h = 10
+};
+
+gui_checkb_preset_t const cbxsmall = {
+   .gfx    = "lgfx/UI/CheckboxSmall.png",
+   .hot    = "lgfx/UI/CheckboxSmallHot.png",
+   .dis    = "lgfx/UI/CheckboxSmallDisabled.png",
+   .sndup  = "player/cbi/clickon",
+   .snddn  = "player/cbi/clickoff",
+   .chkgfx = "lgfx/UI/CheckboxX.png",
+   .chkhot = "lgfx/UI/CheckboxXHot.png",
+   .chkact = "lgfx/UI/CheckboxXActive.png",
+   .chkdis = "lgfx/UI/CheckboxXDisabled.png",
    .font = "CNFONT",
    .w = 10,
    .h = 10
@@ -507,7 +540,9 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    }
    
    // draw value
-   HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(round(norm * 100.0) / 100.0));
+   if(a->integ) HudMessageF("CBIFONT", "\Cj%i",     (int)(round(norm * 100.0) / 100.0));
+   else         HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(round(norm * 100.0) / 100.0));
+   
    HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
    
    // if we've moved it, we return a difference

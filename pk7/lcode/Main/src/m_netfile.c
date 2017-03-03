@@ -5,6 +5,8 @@
 
 #include "base64.h"
 
+#include <ctype.h>
+
 #define SAVE_BLOCK_SIZE 200
 
 
@@ -38,6 +40,30 @@ typedef struct memfile_t
 //----------------------------------------------------------------------------
 // Static Functions
 //
+
+//
+// PrintMem
+//
+void PrintMem(unsigned char const *data, size_t size)
+{
+   int termpos = 0;
+   
+   for(size_t i = 0; i < size; i++)
+   {
+      if(termpos + 3 > 79)
+      {
+         printf(c"\n");
+         termpos = 0;
+      }
+      
+      if(isprint(data[i])) printf(c"%c  ",  data[i]);
+      else                 printf(c"%.2X ", data[i]);
+      
+      termpos += 3;
+   }
+   
+   printf(c"\nEOF\n\n");
+}
 
 //
 // NetWrite
@@ -78,9 +104,17 @@ static int NetClose(void *nfdata)
 {
    netfile_t *nf = nfdata;
    
+   // If debugging, print out information about the buffer being written.
+   if(ACS_GetCVar("__lith_debug_save"))
+   {
+      printf(c"NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
+      printf(c"Data follows\n");
+      PrintMem((void *)nf->mem, nf->pos);
+   }
+   
    // Base64 encode the buffer.
    size_t outsize;
-   unsigned char *coded = base64_encode((unsigned char const *)nf->mem, nf->pos, &outsize);
+   unsigned char *coded = base64_encode((void *)nf->mem, nf->pos, &outsize);
    
    if(coded)
    {
@@ -221,6 +255,14 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          unsigned char *data = base64_decode((void *)input, inputsz, &size);
          
          free(input);
+         
+         // If debugging, print out information about the buffer being read.
+         if(ACS_GetCVar("__lith_debug_save"))
+         {
+            printf(c"Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
+            printf(c"Data follows\n");
+            PrintMem(data, size);
+         }
          
          if(data)
          {

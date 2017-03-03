@@ -3,6 +3,35 @@
 
 
 //----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_CheckAutoBuy
+//
+void Lith_CheckAutoBuy(player_t *p)
+{
+   int total = 0;
+   
+   for(int i = 0; i < UPGR_MAX; i++)
+      for(int j = 0; j < NUMAUTOGROUPS; j++)
+   {
+      upgrade_t *upgr = &p->upgrades[i];
+      
+      if(upgr->autogroups[j] && p->autobuy[j])
+         if(Lith_UpgrBuy(p, &p->upgrades[i]))
+            total++;
+   }
+   
+   if(total)
+   {
+      ACS_LocalAmbientSound("player/cbi/auto/buy", 127);
+      Lith_Log(p, "> Auto-bought \Cj%i\C- upgrade%S.", total, total != 1 ? "s" : "");
+   }
+}
+
+
+//----------------------------------------------------------------------------
 // Scripts
 //
 
@@ -32,8 +61,8 @@ void Lith_KeyBuyAutoGroup(int group)
    else        {color = 'g'; ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);}
    
    if(total)
-      Lith_Log(p, "> Bought \C%c%i/%i\C- upgrades in group %S\C-.",
-         color, success, total, Lith_AutoGroupNames[group]);
+      Lith_Log(p, "> Bought \C%c%i/%i\C- upgrade%S in group %S\C-.",
+         color, success, total, total != 1 ? "s" : "", Lith_AutoGroupNames[group]);
    else
       Lith_Log(p, "> No items to buy in group %S\C-.", Lith_AutoGroupNames[group]);
 }
