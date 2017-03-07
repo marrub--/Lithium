@@ -1,3 +1,8 @@
+actor Lith_ShellAmmo : Ammo
+{
+   Inventory.MaxAmount 50
+}
+
 actor Lith_RocketAmmo : Ammo
 {
    Inventory.MaxAmount 200

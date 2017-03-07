@@ -42,6 +42,20 @@ LITH_TXT_INFO_DESCR_LazShotgun =
    "the gun.\n\n"
    "Great for cooking chicken.";
 
+LITH_TXT_INFO_SHORT_SuperShotgun = "Super Shotgun";
+LITH_TXT_INFO_TITLE_SuperShotgun = "$LITH_TXT_INFO_SHORT_SuperShotgun";
+LITH_TXT_INFO_DESCR_SuperShotgun =
+   "Puts out 2x2 4ga shells made to hunt the gigantic beasts of the planet "
+   "Ch'ari.\n\n"
+   "The barrels are extremely tempered so as to not melt under harsh "
+   "environments, and have a unique dual-loading system. This dual-loading "
+   "system allows you to fire four shots in rapid succession without a large "
+   "amount of recoil by placing additional shells into both barrels.\n\n"
+   "It is currently unknown how this actually works, and it possibly uses "
+   "4-dimensional geometry.\n\n"
+   "This weapon bears manufacturer marks in a non-human language and is known "
+   "only as the Super Shotgun.";
+
 LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
 LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun Gauss Mod";
 LITH_TXT_INFO_DESCR_ShotgunUpgr =

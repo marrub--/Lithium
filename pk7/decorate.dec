@@ -48,17 +48,34 @@ damagetype Lith_NoDamage
 // Weapons
 
 #include "lscripts/Weapons/0_Base.dec"
+
+// Slot 1
 #include "lscripts/Weapons/1_Fist.dec"
+
+// Slot 2
 #include "lscripts/Weapons/2_Pistol.dec"
 #include "lscripts/Weapons/2_Revolver.dec"
+
+// Slot 3
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
+#include "lscripts/Weapons/3_SuperShotgun.dec"
+
+// Slot 4
 #include "lscripts/Weapons/4_CombatRifle.dec"
 #include "lscripts/Weapons/4_SniperRifle.dec"
+
+// Slot 5
 #include "lscripts/Weapons/5_RocketLauncher.dec"
 #include "lscripts/Weapons/5_MissileLauncher.dec"
+
+// Slot 6
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
+
+// Slot 7
 #include "lscripts/Weapons/7_OmegaCannon.dec"
+
+// Slot 9
 #include "lscripts/Weapons/9_Sword.dec"
 #include "lscripts/Weapons/9_Gameboy.dec"
 

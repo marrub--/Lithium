@@ -4,7 +4,7 @@
 #include "lcode/Main/inc/lith_upgradenames.h"
 
 const float FIX = 65536.0;
-const int IFIX = 65536;
+const int  IFIX = 65536;
 
 // ACS interfacing
 const int X_BT_ATTACK     = 0x00000001;
@@ -34,14 +34,17 @@ const int X_BT_USER3      = 0x00800000;
 const int X_BT_USER4      = 0x01000000;
 
 // Ammo values
+const int AmmoAmt_Shell         = 4;
+const int AmmoAmt_ShellBox      = 20;
 const int AmmoAmt_Rocket        = 1;
 const int AmmoAmt_RocketBox     = 5;
 const int AmmoAmt_Cell          = 500;
 const int AmmoAmt_CellPack      = 1500;
 const int AmmoAmt_CannonPack    = 4;
 
+const int AmmoAmt_ShellBackpk   = 4;
 const int AmmoAmt_RocketBackpk  = 1;
-const int AmmoAmt_CellBackpk    = 2000;
+const int AmmoAmt_CellBackpk    = 1500;
 const int AmmoAmt_CannonBackpk  = 4;
 
 // Score values

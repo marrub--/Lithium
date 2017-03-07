@@ -98,5 +98,9 @@ Sniper Rifle sprites
    Marrub - Redrawing and detailing, re-handing
    Sgt. Shivers - Firing animation
 
+Super Shotgun sprites
+   Captain J
+   Turbo
+
 Title screen music
    505 - Shredder (hYmns)

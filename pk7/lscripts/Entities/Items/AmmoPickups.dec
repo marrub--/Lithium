@@ -26,6 +26,7 @@ actor Lith_Shell : Lith_ScoreItem replaces Shell
    {
    Spawn:
       SHEL A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Shell)
+      SHEL A 0 A_GiveInventory("Lith_ShellAmmo", AmmoAmt_Shell)
       SHEL A -1
       stop
    }
@@ -37,6 +38,7 @@ actor Lith_ShellBox : Lith_ScoreItem replaces ShellBox
    {
    Spawn:
       SBOX A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ShellBox)
+      SBOX A 0 A_GiveInventory("Lith_ShellAmmo", AmmoAmt_ShellBox)
       SBOX A -1
       stop
    }

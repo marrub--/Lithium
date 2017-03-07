@@ -47,6 +47,13 @@ static __str names_shotgun[] = {
    "Shetgun"
 };
 
+static __str names_ssg[] = {
+   "Sbepru Shtetgun",
+   "Suber Shodgub",
+   "Soer Shotgan",
+   "Suupaa Shottogan"
+};
+
 static __str names_rifle[] = {
    "Cmobta Riffel",
    "Combit Raffle",
@@ -81,6 +88,7 @@ static struct pickupname_s const pickupnames[weapon_max] = {
    [weapon_pistol]   = name(names_pistol),
    [weapon_revolver] = name(names_revolver),
    [weapon_shotgun]  = name(names_shotgun),
+   [weapon_ssg]      = name(names_ssg),
    [weapon_rifle]    = name(names_rifle),
    [weapon_launcher] = name(names_launcher),
    [weapon_plasma]   = name(names_plasma),

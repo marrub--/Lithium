@@ -7,7 +7,7 @@ enum
    weapon_revolver,
    weapon_shotgun,
    weapon_lazshotgun,
-// weapon_ssg,
+   weapon_ssg,
    weapon_rifle,
    weapon_sniper,
    weapon_launcher,

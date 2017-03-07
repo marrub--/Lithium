@@ -25,6 +25,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {2, "Revolver",        "weapons/revolver/pickup", AT_Mag,  "Lith_RevolverShotsFired"},
    {3, "Shotgun",         "weapons/shotgun/pickup"},
    {3, "LazShotgun",      "weapons/lshotgun/pickup"},
+   {3, "SuperShotgun",    "weapons/ssg/pickup",      AT_Ammo, "Lith_ShellAmmo"},
    {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag,  "Lith_RifleShotsFired"},
    {4, "SniperRifle",     "weapons/sniper/pickup",   AT_Mag,  "Lith_SniperShotsFired"},
    {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo, "Lith_RocketAmmo"},
@@ -47,6 +48,7 @@ static void GiveWeaponItem(int parm)
    switch(parm)
    {
    case weapon_fist:     ACS_GiveInventory("Lith_Death",      1);    break;
+   case weapon_ssg:      ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
    case weapon_launcher: ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
    case weapon_plasma:   ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
    case weapon_bfg:      ACS_GiveInventory("Lith_CannonAmmo", 4);    break;

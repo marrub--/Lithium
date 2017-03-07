@@ -38,5 +38,64 @@ Sprite CBALA0, 107, 92
 	Offset 55, 92
 	Patch "lgfx/CannonBall.png", 0, 0
 }
+Sprite SHT2A0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG1.png", 119, 112
+}
+
+Sprite SHT2B0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG3.png", 99, 74
+}
+
+Sprite SHT2C0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG4.png", 24, 43
+}
+
+Sprite SHT2D0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG2.png", 117, 95
+}
+
+Sprite SHT2E0, 420, 200
+{
+	Offset 50, 0
+	Patch "lgfx/SuperShotgun/SSG5.png", 25, 105
+	Patch "lgfx/SuperShotgun/SSG7.png", 181, 134
+}
+
+Sprite SHT2F0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG6.png", 91, 117
+}
+
+Sprite SHT2G0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG2.png", 118, 94
+}
+
+Sprite SHT2H0, 320, 200
+{
+	Patch "lgfx/SuperShotgun/SSG3.png", 116, 90
+}
+
+Sprite SHT2I0, 320, 200
+{
+	Patch SHT2I0, 137, 103
+	Patch "lgfx/SuperShotgun/SSG1.png", 119, 113
+}
+
+Sprite SHT2J0, 320, 200
+{
+	Patch SHT2J0, 131, 95
+	Patch "lgfx/SuperShotgun/SSG1.png", 119, 114
+}
+
+Sprite SHT2Z0, 420, 200
+{
+	Offset 50, 0
+	Patch "lgfx/SuperShotgun/SSG7.png", 181, 134
+}
 
 // EOF

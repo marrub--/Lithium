@@ -68,6 +68,16 @@ $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
 
 //
+// Super Shotgun
+//
+weapons/ssg/pickup lsounds/SuperShotgun/Pickup.flac // General 6000, ???
+weapons/ssg/close  lsounds/SuperShotgun/Close.flac  // Killing Floor, ???
+weapons/ssg/open   lsounds/SuperShotgun/Open.flac   // 〃
+weapons/ssg/load   lsounds/SuperShotgun/Load.flac   // General 6000, ???
+weapons/ssg/empty  lsounds/SuperShotgun/Empty.flac  // General 6000
+$alias weapons/ssg/fire weapons/sshotf
+
+//
 // Laser Shotgun
 //
 weapons/lshotgun/fire  lsounds/LazShotgun/Fire.flac  // Fallout: New Vegas
