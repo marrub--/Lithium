@@ -162,7 +162,12 @@ void Lith_ResetPlayer(player_t *p)
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
       Lith_Log (p, "> Lithium " Lith_Version " :: Compiled %S", __DATE__);
-      Lith_LogH(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+      
+      if(ACS_GetCVar("__lith_debug_on"))
+         Lith_LogH(p, "> player_t is %u bytes long!", sizeof(player_t) * 4);
+      else
+         Lith_LogH(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+      
       p->staticinit = true;
    }
    else

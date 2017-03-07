@@ -116,8 +116,7 @@ void PrintBold(__str fmt, ...);
 __str StrUpper(__str in);
 bool ButtonPressed(struct player_s *p, int bt);
 bool ButtonPressedUI(struct player_s *p, int bt);
-void *cpyalloc(size_t num, size_t size, void *src);
-unsigned StrHash(__str s);
+unsigned StrHash(char __str_ars const *s);
 [[__optional_args(2)]]
 bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
@@ -132,15 +131,7 @@ int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
-float normf(float x, float min, float max);
-bool bpcldi(int bx1, int by1, int bx2, int by2, int x2, int y2); // Box / Point collision (integer)
-bool l1xcldi(int lx1, int lx2, int x); // Line (1-d) / X collision (integer)
-float pymagf(float x, float y);
-fixed pymagk(fixed x, fixed y);
-float angle2df(float x1, float y1, float x2, float y2);
-fixed dist2dk(fixed x1, fixed y1, fixed x2, fixed y2);
-float dist2df(float x1, float y1, float x2, float y2);
-fixed dist3dk(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2);
+bool bpcldi(int bx1, int by1, int bx2, int by2, int x2, int y2);
 int ceilk(fixed n);
 
 // Constants

@@ -7,36 +7,36 @@ Sprite BLL2A0, 31, 25
 	}
 }
 
-Graphic DIVSIGI1 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,    0 Patch DIVIA0, 0, 0 }
-Graphic DIVSIGI2 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,    0 Patch DIVIB0, 0, 0 }
-Graphic DIVSIGI3 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -1 Patch DIVIC0, 0, 0 }
-Graphic DIVSIGI4 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -2 Patch DIVID0, 0, 0 }
-Graphic DIVSIGI5 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -3 Patch DIVIE0, 0, 0 }
-Graphic DIVSIGI6 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -5 Patch DIVIF0, 0, 0 }
-Graphic DIVSIGI7 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -7 Patch DIVIG0, 0, 0 }
-Graphic DIVSIGI8 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -10 Patch DIVIH0, 0, 0 }
-Graphic DIVSIGI9 , 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -11 Patch DIVII0, 0, 0 }
-Graphic DIVSIGI10, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -13 Patch DIVIJ0, 0, 0 }
-Graphic DIVSIGI11, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -14 Patch DIVIK0, 0, 0 }
-Graphic DIVSIGI12, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -15 Patch DIVIL0, 0, 0 }
-Graphic DIVSIGI13, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -16 Patch DIVIM0, 0, 0 }
-Graphic DIVSIGI14, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -15 Patch DIVIN0, 0, 0 }
-Graphic DIVSIGI15, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -14 Patch DIVIO0, 0, 0 }
-Graphic DIVSIGI16, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -13 Patch DIVIP0, 0, 0 }
-Graphic DIVSIGI17, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -11 Patch DIVIQ0, 0, 0 }
-Graphic DIVSIGI18, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,  -10 Patch DIVIR0, 0, 0 }
-Graphic DIVSIGI19, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -8 Patch DIVIS0, 0, 0 }
-Graphic DIVSIGI20, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -5 Patch DIVIT0, 0, 0 }
-Graphic DIVSIGI21, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -4 Patch DIVIU0, 0, 0 }
-Graphic DIVSIGI22, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -2 Patch DIVIV0, 0, 0 }
-Graphic DIVSIGI23, 40, 34 { XScale 1.5 YScale 1.5 Offset   -4,   -1 Patch DIVIW0, 0, 0 }
+Graphic DIVSIGI1 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,   0 Patch DIVIA0, 0, 0 }
+Graphic DIVSIGI2 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,   0 Patch DIVIB0, 0, 0 }
+Graphic DIVSIGI3 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -1 Patch DIVIC0, 0, 0 }
+Graphic DIVSIGI4 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -2 Patch DIVID0, 0, 0 }
+Graphic DIVSIGI5 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -3 Patch DIVIE0, 0, 0 }
+Graphic DIVSIGI6 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -5 Patch DIVIF0, 0, 0 }
+Graphic DIVSIGI7 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -7 Patch DIVIG0, 0, 0 }
+Graphic DIVSIGI8 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -10 Patch DIVIH0, 0, 0 }
+Graphic DIVSIGI9 , 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -11 Patch DIVII0, 0, 0 }
+Graphic DIVSIGI10, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -13 Patch DIVIJ0, 0, 0 }
+Graphic DIVSIGI11, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -14 Patch DIVIK0, 0, 0 }
+Graphic DIVSIGI12, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -15 Patch DIVIL0, 0, 0 }
+Graphic DIVSIGI13, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -16 Patch DIVIM0, 0, 0 }
+Graphic DIVSIGI14, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -15 Patch DIVIN0, 0, 0 }
+Graphic DIVSIGI15, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -14 Patch DIVIO0, 0, 0 }
+Graphic DIVSIGI16, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -13 Patch DIVIP0, 0, 0 }
+Graphic DIVSIGI17, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -11 Patch DIVIQ0, 0, 0 }
+Graphic DIVSIGI18, 40, 34 { XScale 1.5 YScale 1.5 Offset -4, -10 Patch DIVIR0, 0, 0 }
+Graphic DIVSIGI19, 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -8 Patch DIVIS0, 0, 0 }
+Graphic DIVSIGI20, 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -5 Patch DIVIT0, 0, 0 }
+Graphic DIVSIGI21, 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -4 Patch DIVIU0, 0, 0 }
+Graphic DIVSIGI22, 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -2 Patch DIVIV0, 0, 0 }
+Graphic DIVSIGI23, 40, 34 { XScale 1.5 YScale 1.5 Offset -4,  -1 Patch DIVIW0, 0, 0 }
 
 Sprite CBALA0, 107, 92
 {
 	XScale 4.500
 	YScale 4.500
 	Offset 55, 92
-	Patch CBALL, 0, 0
+	Patch "lgfx/CannonBall.png", 0, 0
 }
 
 // EOF

@@ -137,6 +137,7 @@ static struct pickupfmt_s const pickupfmt[] = {
    0, "The %S is keepin' it real, as usual.",
    0, "The %S finds you agreeable, and lets you pick it up.",
    0, "You have attained true %S.",
+   2, "DRUGS",
    2, "What the fuck did you just fucking say about %S, you little bitch?\n"
       "I'll have you know I graduated top of my class in the Navy Seals,\n"
       "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"

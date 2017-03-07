@@ -31,7 +31,7 @@ __str Lith_RandomName(int id)
       /*無*/ "ver","xel'",
    };
    
-   static __str lul[] = {"ohgodwhat","kdzid","help","ohno","explod","why","fuck"};
+   static __str lul[] = {"ohgodwhat","kdizd","help","ohno","explod","why","fuck"};
    
    static __str names[] = {
       "Gorgoth",
@@ -174,7 +174,7 @@ __str Lith_RandomName(int id)
       "Lord of Hatred",
       "Incarnation of Death",
       "Hideous Destructor",
-      "Horrendeous Tryant",
+      "Horrendeous Tyrant",
    };
    
    __str ret = "";

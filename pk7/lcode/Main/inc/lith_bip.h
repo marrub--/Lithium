@@ -16,12 +16,12 @@
 
 #include "lith_list.h"
 
+#define MAX_BIP_UNLOCKS 5
+
 
 //----------------------------------------------------------------------------
-// BIP - Biotic Information Panel
+// Types
 //
-
-#define MAX_BIP_UNLOCKS 5
 
 enum
 {
@@ -60,6 +60,11 @@ typedef struct bip_s
    // Info
    list_t infogr[BIPC_MAX];
 } bip_t;
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
 
 [[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player_s *p);
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name);

@@ -48,7 +48,6 @@ MAIN_SOURCES= \
 	$(SRC)/u_unceunce.c \
 	$(SRC)/u_vitalscan.c \
 	$(SRC)/p_cbi.c \
-	$(SRC)/p_cbi_gui.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \
 	$(SRC)/p_log.c \
@@ -63,7 +62,13 @@ MAIN_SOURCES= \
 	$(SRC)/p_render.c \
 	$(SRC)/p_save.c \
 	$(SRC)/p_autogroup.c \
-	$(SRC)/base64.c
+	$(SRC)/base64.c \
+	$(SRC)/g_auto.c \
+	$(SRC)/g_button.c \
+	$(SRC)/g_checkbox.c \
+	$(SRC)/g_preset.c \
+	$(SRC)/g_scrollbar.c \
+	$(SRC)/g_slider.c
 
 ## Output
 

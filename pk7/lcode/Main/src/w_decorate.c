@@ -68,7 +68,9 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
 [[__call("ScriptS"), __extern("ACS")]]
 fixed Lith_Velocity(fixed velx, fixed vely)
 {
-   return pymagk(velx, vely);
+   fixed x = ACS_GetActorX(0);
+   fixed y = ACS_GetActorY(0);
+   return ACS_FixedSqrt((x * x) + (y * y));
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

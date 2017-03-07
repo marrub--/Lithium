@@ -159,7 +159,7 @@ LITH_TXT_INFO_DESCR_CannonUpgr =
    "dimension can enter the Super Dimension, where it was created.\n\n"
    "Popular theory among black market traders suggests that it could have "
    "been sent here because the creator of the Omega Cannon wasn't satisfied "
-   "with its power, and wanted whoever attained it to be all-powerful.\n"
+   "with its power, and wanted whoever attained it to be all-powerful.\n\n"
    "Also, the CB-Scope works again, somehow.";
 
 LITH_TXT_INFO_SHORT_CannonUpg2 = "$LITH_TXT_UPGRADE_TITLE_OmegaRail";

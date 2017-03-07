@@ -181,89 +181,11 @@ float lerpf(float a, float b, float t)
 }
 
 //
-// normf
-//
-float normf(float x, float min, float max)
-{
-   return (x - min) / (max - min);
-}
-
-//
 // bpcldi
 //
 bool bpcldi(int x, int y, int z, int w, int x2, int y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
-}
-
-//
-// l1xcldi
-//
-bool l1xcldi(int lx1, int lx2, int x)
-{
-   return x >= lx1 && x < lx2;
-}
-
-//
-// cpyalloc
-//
-void *cpyalloc(size_t num, size_t size, void *src)
-{
-   void *dest = calloc(num, size);
-   memcpy(dest, src, num * size);
-   return dest;
-}
-
-//
-// pymagf
-//
-float pymagf(float x, float y)
-{
-   return sqrt((x * x) + (y * y));
-}
-
-//
-// pymagk
-//
-fixed pymagk(fixed x, fixed y)
-{
-   return ACS_FixedSqrt((x * x) + (y * y));
-}
-
-//
-// angle2df
-//
-float angle2df(float x1, float y1, float x2, float y2)
-{
-   float x = x2 - x1;
-   float y = y2 - y1;
-   return atan2(y, x);
-}
-
-//
-// dist2dk
-//
-fixed dist2dk(fixed x1, fixed y1, fixed x2, fixed y2)
-{
-   return ACS_VectorLength(x1 - x2, y1 - y2);
-}
-
-//
-// dist2df
-//
-float dist2df(float x1, float y1, float x2, float y2)
-{
-   float x = x1 - x2;
-   float y = y1 - y2;
-   return pymagf(x, y);
-}
-
-//
-// dist3dk
-//
-fixed dist3dk(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
-{
-   return ACS_VectorLength(dist2dk(x1, x2, y1, y2), z1 - z2);
 }
 
 //
@@ -279,11 +201,10 @@ int ceilk(fixed n)
 //
 // StrHash
 //
-unsigned StrHash(__str s)
+unsigned StrHash(char __str_ars const *s)
 {
    unsigned ret = 0;
-   for(char __str_ars const *ss = s; *ss; ss++)
-      ret = *ss + 101 * ret;
+   for(; *s; s++) ret = *s + 101 * ret;
    return ret;
 }
 
