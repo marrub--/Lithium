@@ -167,7 +167,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
 {
    gui_state_t *g = &p->cbi.guistate;
    
-   Lith_GUI_Begin(g, 320, 240);
+   Lith_GUI_Begin(g, hid_end_cbi, 320, 240);
    Lith_GUI_UpdateState(g, p);
    
    DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.7);

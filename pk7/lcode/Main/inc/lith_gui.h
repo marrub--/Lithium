@@ -1,5 +1,5 @@
-#ifndef LITH_CBI_GUI_H
-#define LITH_CBI_GUI_H
+#ifndef LITH_GUI_H
+#define LITH_GUI_H
 
 #define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
 
@@ -12,6 +12,11 @@
 #define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id + LineHash, &(gui_scroll_args_t){__VA_ARGS__})
 #define Lith_GUI_Slider(g, ...) Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_Slider_Id(g, id, ...) Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
+
+#define Lith_GUI_GenPreset(type, def) \
+   type const *pre; \
+   if(a->preset) pre = a->preset; \
+   else          pre = &def
 
 
 //----------------------------------------------------------------------------
@@ -116,6 +121,7 @@ typedef struct gui_scroll_preset_s
    __str scrl;
    int scrlw;
    int scrlh;
+   int notchh;
    __str notchgfx;
    __str notchhot;
 } gui_scroll_preset_t;
@@ -181,9 +187,10 @@ extern gui_slider_preset_t const slddefault;
 // Extern Functions
 //
 
+void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h);
 void Lith_GUI_Init(gui_state_t *g, size_t maxst);
 void Lith_GUI_UpdateState(gui_state_t *g, struct player_s *p);
-[[__optional_args(2)]] void Lith_GUI_Begin(gui_state_t *g, int w, int h);
+[[__optional_args(2)]] void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h);
 void Lith_GUI_End(gui_state_t *g);
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
 void Lith_GUI_ClipRelease(gui_state_t *g);

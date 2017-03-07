@@ -1,7 +1,7 @@
 #ifndef LITH_GAMES_H
 #define LITH_GAMES_H
 
-#include "lith_cbi_gui.h"
+#include "lith_gui.h"
 
 
 //----------------------------------------------------------------------------

@@ -11,13 +11,10 @@ static gb_gameinfo_t const gbgameinfo[GB_GAME_MAX] = {
 // {"Name"},
    {"Pong", Lith_GB_Pong_Update},
    {"Arkanoid"},
-   {"Space Invaders"},
    {"Tetris"},
    {"PuyoPuyo"},
    {"Solitaire"},
    {"Minesweeper"},
-   {"Tri Peaks"},
-   {"Doomguy's Challenge"}
 };
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -37,7 +34,7 @@ void Lith_PlayerUpdateGB(player_t *p)
    gb_t *gb = &p->gb;
    gui_state_t *g = &gb->guistate;
    
-   Lith_GUI_Begin(g);
+   Lith_GUI_Begin(g, hid_end_gb);
    Lith_GUI_UpdateState(g, p);
    
    if(!gb->gameinfo)
