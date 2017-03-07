@@ -20,7 +20,8 @@ void Lith_CheckAutoBuy(player_t *p)
       
       if(upgr->autogroups[j] && p->autobuy[j])
          if(Lith_UpgrBuy(p, &p->upgrades[i]))
-            total++;
+         {  total++;
+            Lith_UpgrToggle(p, &p->upgrades[i]);}
    }
    
    if(total)
