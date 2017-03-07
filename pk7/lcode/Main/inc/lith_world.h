@@ -37,6 +37,7 @@ extern int  Lith_MapVariable mapid;
 extern int secretsfound;
 extern payoutinfo_t payout;
 extern int mapseed;
+extern double globalscoremul;
 
 [[__optional_args(1)]] int Lith_UniqueID(int tid);
 

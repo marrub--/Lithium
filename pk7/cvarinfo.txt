@@ -49,9 +49,10 @@ user int    lith_scanner_color   = 106; // 'j'
 user bool   lith_scanner_altfont = false;
 
 // Server
-server           bool lith_sv_stupidpickups = false;
-server           bool lith_sv_revenge       = true;
-server noarchive bool lith_sv_monsters_ok   = false;
+server           bool  lith_sv_stupidpickups = false;
+server           bool  lith_sv_revenge       = true;
+server noarchive bool  lith_sv_monsters_ok   = false;
+server           float lith_sv_scoremul      = 2.0;
 
 // Debugging
 server noarchive bool   __lith_debug_on   = false;

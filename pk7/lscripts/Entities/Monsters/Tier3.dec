@@ -104,7 +104,6 @@ actor Lith_BaronBall : Lith_BaronBallSound
 actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
    PainChance 55
-   DamageFactor "Lith_Bullets", 0.6
    Tag "$LITH_TXT_INFO_SHORT_BaronOfHell"
    
    +MISSILEMORE
@@ -193,7 +192,6 @@ actor Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
 
 actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 {
-   DamageFactor "Lith_Bullets", 0.6
    Tag "$LITH_TXT_INFO_SHORT_Cacodemon"
    
    states

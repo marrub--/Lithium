@@ -24,6 +24,7 @@ int  Lith_MapVariable mapid;
 int secretsfound;
 payoutinfo_t payout;
 int mapseed;
+double globalscoremul;
 
 
 //----------------------------------------------------------------------------
@@ -231,10 +232,12 @@ static void Lith_World(void)
    // Init a random seed for the map.
    mapseed = ACS_Random(0, 0x7FFFFFFF);
    
+   // Init global score multiplier per-map.
+   globalscoremul = ACS_GetCVarFixed("lith_sv_scoremul");
+   
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)
-      ForPlayer()
-         p->scoremul += 0.15;
+      globalscoremul += 0.15;
    
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);

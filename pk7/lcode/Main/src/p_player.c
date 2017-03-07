@@ -210,6 +210,18 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 }
 
 //
+// Lith_GetModScore
+//
+score_t Lith_GetModScore(player_t *p, score_t score, bool nomul)
+{
+   // Multiply score by the player's multiplier, and the global multiplier
+   if(!nomul)
+      score *= p->scoremul;
+   
+   return score * globalscoremul;
+}
+
+//
 // Lith_GiveScore
 //
 void Lith_GiveScore(player_t *p, score_t score, bool nomul)
@@ -218,9 +230,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    if(score == 0)
       return;
    
-   // Multiply score by the player's multiplier
-   if(!nomul)
-      score *= p->scoremul;
+   score = Lith_GetModScore(p, score, nomul);
    
    // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);

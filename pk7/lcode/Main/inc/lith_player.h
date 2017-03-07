@@ -256,6 +256,8 @@ void Lith_PlayerCloseGUI(player_t *p);
 void Lith_PlayerUseGUI(player_t *p, guiname_t type);
 
 [[__optional_args(1)]]
+score_t Lith_GetModScore(player_t *p, score_t score, bool nomul);
+[[__optional_args(1)]]
 void Lith_GiveScore(player_t *p, score_t score, bool nomul);
 void Lith_TakeScore(player_t *p, score_t score);
 
