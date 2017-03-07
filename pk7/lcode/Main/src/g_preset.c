@@ -156,7 +156,6 @@ gui_scroll_preset_t const scrdefault = {
    .scrl  = "lgfx/UI/ListScrollbar.png",
    .scrlw = 8,
    .scrlh = 8,
-   .notchh   = 3,
    .notchgfx = "lgfx/UI/ListScrollNotch.png",
    .notchhot = "lgfx/UI/ListScrollNotchHot.png"
 };

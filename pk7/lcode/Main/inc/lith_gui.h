@@ -32,6 +32,8 @@ typedef struct gui_scroll_state_s
    int occludeS;
    int occludeE;
    double y;
+   double grabpos;
+   bool grabbed;
 } gui_scroll_state_t;
 
 typedef union gui_stateitem_s
@@ -121,7 +123,6 @@ typedef struct gui_scroll_preset_s
    __str scrl;
    int scrlw;
    int scrlh;
-   int notchh;
    __str notchgfx;
    __str notchhot;
 } gui_scroll_preset_t;

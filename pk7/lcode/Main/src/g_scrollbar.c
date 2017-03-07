@@ -9,27 +9,24 @@
 //
 // Lith_GUI_ScrollBegin_Impl
 //
+// This function is excessively commented in case I need to change it.
+// Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
+//
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
 {
    Lith_GUI_GenPreset(gui_scroll_preset_t, scrdefault);
    
-   gui_scroll_state_t *scr = &g->st[a->st].scrl; // scrollbar state
+   gui_scroll_state_t *scr = &g->st[a->st].scrl;
    
    // sizes
-   int caph   = pre->scrlh / 2;          // size of cap
-   int blocks = (a->h / pre->scrlh) - 1; // height in graphical blocks minus caps
-   int h      = (blocks * pre->scrlh);   // height in pixels minus caps
-   int realh  = h + pre->scrlh;          // height in pixels plus caps
-   int vofs   = 0; // offset in pixels of the content
+   int const blockh  = pre->scrlh;              // height of graphical block
+   int const blocks  = (a->h / pre->scrlh) - 1; // height in graphical blocks minus caps
+   int const caph    = blockh / 2;              // size of cap
+   int const caps    = (a->h / caph) - 2;       // height in caps, minus caps
+   int const h       = (blocks * blockh);       // height in pixels minus caps
+   int const realh   = h + (caph * 2);          // height in pixels plus caps
    
-   if(a->contenth > realh)
-      vofs = (a->contenth - realh) * scr->y;
-   
-   // set the scrollbar's offset
-   scr->ox = a->x + pre->scrlw; // offset by scrollbar width
-   scr->oy = a->y - vofs;       // offset by scrollbar notch pos
-   
-   // convenience variables
+   // positions
    int x = a->x + pre->scrlw; // base x to draw from
    int y = a->y;              // base y to draw from
    
@@ -40,14 +37,57 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    x += g->ox;
    y += g->oy;
    
-   int ory = y; // copy of y since it'll be changed later
+   // get height of scroller
+   int notches; // height in caps of scroller
    
-   // move scroll notch
-   if(g->active == id)
+   if(a->contenth > realh) notches = (a->h / (double)a->contenth) * caps;
+   else                    notches = caps;
+   
+   int    const scrlh = notches * caph;          // height in pixels of scroller
+   double const maxy  = (h - scrlh) / (double)h; // normalized maximum y value
+   
+   // move scroller
    {
-      // needs to be two expressions because minmax copies the expression
-      scr->y = ((g->cy - y) - caph) / (double)h;
-      scr->y = minmax(scr->y, 0, 1);
+      double supposedy = scr->y * h;
+      
+      if(g->active == id)
+      {
+         double const cy = (g->cy - y) - caph;
+         
+         // if it isn't grabbed and the cursor is over the scroller,
+         // set the grab position to where the cursor is relative to it
+         if(!scr->grabbed && cy > supposedy && cy < supposedy + scrlh)
+         {
+            scr->grabbed = true;
+            scr->grabpos = cy - supposedy;
+         }
+         
+         // if the scroller is grabbed we set the position relative to where
+         // we grabbed it from, otherwise we just use the middle of it
+         if(scr->grabbed) supposedy = cy - scr->grabpos;
+         else             supposedy = cy - (scrlh / 2);
+      }
+      else
+         scr->grabbed = false;
+      
+      // finally, normalize and clamp 
+      scr->y = minmax(supposedy / (double)h, 0, maxy);
+   }
+   
+   // get offset of scroller
+   {
+      int vofs; // offset in pixels of the content
+      
+      if(a->contenth > realh) vofs = (a->contenth - realh) * (scr->y / maxy);
+      else                    vofs = 0;
+      
+      // set the scrollbar's offset
+      scr->ox = a->x + pre->scrlw; // offset by scrollbar width
+      scr->oy = a->y - vofs;       // offset by scroller pos
+      
+      // set the top and bottom for occlusion
+      scr->occludeS = vofs;
+      scr->occludeE = vofs + realh;
    }
    
    // draw top cap
@@ -64,14 +104,18 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    // draw bottom cap
    DrawSpritePlain(pre->capE, g->hid--, x + 0.2, y + 0.1, TICSECOND);
    
-   // set the top and bottom for occlusion
-   scr->occludeS = vofs;
-   scr->occludeE = realh + vofs;
+   // get base Y
+   int const ory = a->y + g->oy;
    
-   // draw notch
+   // draw scroller
    {
-   __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notchgfx;
-   DrawSpritePlain(graphic, g->hid--, x + 0.2, ory + (int)(h * scr->y) + caph, TICSECOND);
+      __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notchgfx;
+      
+      for(int i = 0; i < notches; i++)
+      {
+         int npos = caph + (h * scr->y) + (caph * i);
+         DrawSpritePlain(graphic, g->hid--, x + 0.2, ory + npos + 0.1, TICSECOND);
+      }
    }
    
    // setup offsets
