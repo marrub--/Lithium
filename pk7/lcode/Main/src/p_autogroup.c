@@ -65,7 +65,7 @@ void Lith_KeyBuyAutoGroup(int group)
       Lith_Log(p, "> Bought \C%c%i/%i\C- upgrade%S in group %S\C-.",
          color, success, total, total != 1 ? "s" : "", Lith_AutoGroupNames[group]);
    else
-      Lith_Log(p, "> No items to buy in group %S\C-.", Lith_AutoGroupNames[group]);
+      Lith_LogH(p, "> No items to buy in group %S\C-.", Lith_AutoGroupNames[group]);
 }
 
 //
@@ -89,12 +89,12 @@ void Lith_KeyToggleAutoGroup(int group)
    if(total)
    {
       ACS_LocalAmbientSound("player/cbi/auto/toggle", 127);
-      Lith_Log(p, "> Toggled group %S\C-.", Lith_AutoGroupNames[group]);
+      Lith_LogH(p, "> Toggled group %S\C-.", Lith_AutoGroupNames[group]);
    }
    else
    {
       ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);
-      Lith_Log(p, "> No items to toggle in group %S\C-.", Lith_AutoGroupNames[group]);
+      Lith_LogH(p, "> No items to toggle in group %S\C-.", Lith_AutoGroupNames[group]);
    }
 }
 
