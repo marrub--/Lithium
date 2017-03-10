@@ -32,6 +32,7 @@ actor Lith_PoisonFXGiver : CustomInventory
    Pickup:
       TNT1 A 0
       TNT1 A 0 A_DamageSelf(10, "Poison")
+      BLLT G 0 A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5)
       TNT1 A 0 A_SpawnItemEx("Lith_PoisonFX", 0,0,8, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME)
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PoisonFXTicker")
       TNT1 A 0 A_RailWait
@@ -72,7 +73,7 @@ actor Lith_PoisonBlob
    {
    Spawn:
       BLLT G 5
-      BLLT G 0 A_PlaySound("weapons/shotgun/gauss/spark", CHAN_5)
+      BLLT G 0 A_PlaySound("weapons/shotgun/poison/acid", CHAN_5)
    SpawnLoop:
       BLLT G 0 A_JumpIf(z == floorz, "Crash") // ffs
       BLLT G 1 A_FadeOut(0.01)
