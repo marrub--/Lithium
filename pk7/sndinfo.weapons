@@ -72,12 +72,13 @@ $limit weapons/shotgun/gauss/spark 0
 //
 // Super Shotgun
 //
+weapons/ssg/fire   lsounds/SuperShotgun/Fire.flac   // Per Kristian, General 6000
 weapons/ssg/pickup lsounds/SuperShotgun/Pickup.flac // General 6000, ???
 weapons/ssg/close  lsounds/SuperShotgun/Close.flac  // Killing Floor, ???
 weapons/ssg/open   lsounds/SuperShotgun/Open.flac   // 〃
 weapons/ssg/load   lsounds/SuperShotgun/Load.flac   // General 6000, ???
 weapons/ssg/empty  lsounds/SuperShotgun/Empty.flac  // General 6000
-$alias weapons/ssg/fire weapons/sshotf
+weapons/ssg/draw   lsounds/SuperShotgun/Draw.flac   // General 6000, Killing Floor, ???
 
 //
 // Laser Shotgun
