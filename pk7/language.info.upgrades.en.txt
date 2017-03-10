@@ -19,7 +19,8 @@ LITH_TXT_INFO_DESCR_JetBooster =
    "in air with a stabilizer chassis attached to the leg, so your natural "
    "instinct to screw it up is cancelled out.\n\n"
    "Powered with a small energy cell about the size of your Calcaneus that "
-   "can stay stable mid-air for approximately 7 months without deactivation.";
+   "can stay stable mid-air for approximately 7 months without fail.\n\n"
+   "Press \"run\" while mid-air to activate.";
 
 LITH_TXT_INFO_SHORT_ReflexWetw = "$LITH_TXT_UPGRADE_TITLE_ReflexWetw";
 LITH_TXT_INFO_TITLE_ReflexWetw = "Klaje Mosegon Reflex Enhancing Wetware";
@@ -89,9 +90,9 @@ LITH_TXT_INFO_TITLE_AutoReload = "K'meru Automatic Loading System";
 LITH_TXT_INFO_DESCR_AutoReload =
    "A rather small robot that can fit in your backpack, which uses a learning "
    "algorithm to figure out how to load your guns.\n\n"
-   "Created by HLCorp for their highly advanced hazard suits, it was retooled "
-   "to work separately from them so it could be mass produced for military "
-   "needs.";
+   "Originally created by HLCorp for their highly advanced hazard suits, it "
+   "was retooled to work separately from them so it could be mass produced "
+   "for military needs.";
 
 // EOF
 

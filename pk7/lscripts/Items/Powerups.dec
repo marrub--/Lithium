@@ -101,8 +101,8 @@ actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
    }
 }
 
-#include "lscripts/Entities/Items/BlurSphere.dec"
-#include "lscripts/Entities/Items/SteggleSphere.dec"
+#include "lscripts/Items/BlurSphere.dec"
+#include "lscripts/Items/SteggleSphere.dec"
 
 actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
 {

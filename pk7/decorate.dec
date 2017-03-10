@@ -1,81 +1,54 @@
 #include "lscripts/Constants.dec"
 
-damagetype Lith_NoDamage
-{
-   Factor 0
-   ReplaceFactor
-}
+#include "lscripts/Dummy.dec"
+#include "lscripts/Hacks.dec"
+#include "lscripts/Player.dec"
+#include "lscripts/Adrenaline.dec"
 
-//
-// Misc. Entities
+#include "lscripts/GunSmoke.dec"
+#include "lscripts/BulletPuff.dec"
+#include "lscripts/TeleFog.dec"
+#include "lscripts/Death.dec"
 
-#include "lscripts/Entities/Dummy.dec"
-#include "lscripts/Entities/Hacks.dec"
-#include "lscripts/Entities/Player.dec"
+#include "lscripts/Monsters/Tier1.dec"
+#include "lscripts/Monsters/Tier2.dec"
+#include "lscripts/Monsters/Tier3.dec"
+#include "lscripts/Monsters/Tier4.dec"
+#include "lscripts/Monsters/Tier5.dec"
 
-//
-// Effects
+#include "lscripts/Monsters/XHTier1.dec"
+#include "lscripts/Monsters/XHTier5.dec"
 
-#include "lscripts/Effects/GunSmoke.dec"
-#include "lscripts/Effects/BulletPuff.dec"
-#include "lscripts/Effects/TeleFog.dec"
+#include "lscripts/Monsters/TitleMap.dec"
 
-//
-// Monsters
-
-#include "lscripts/Entities/Monsters/Tier1.dec"
-#include "lscripts/Entities/Monsters/Tier2.dec"
-#include "lscripts/Entities/Monsters/Tier3.dec"
-#include "lscripts/Entities/Monsters/Tier4.dec"
-#include "lscripts/Entities/Monsters/Tier5.dec"
-
-#include "lscripts/Entities/Monsters/XHTier1.dec"
-#include "lscripts/Entities/Monsters/XHTier5.dec"
-
-#include "lscripts/Entities/TitleMap.dec"
-
-//
-// Items
-
-#include "lscripts/Entities/Items/Ammo.dec"
-#include "lscripts/Entities/Items/Score.dec"
-#include "lscripts/Entities/Items/AmmoPickups.dec"
-#include "lscripts/Entities/Items/Powerups.dec"
-#include "lscripts/Entities/Items/Keys.dec"
-//#include "lscripts/Entities/Items/DivisionSigil.dec"
-
-//
-// Weapons
+#include "lscripts/Items/Ammo.dec"
+#include "lscripts/Items/Score.dec"
+#include "lscripts/Items/AmmoPickups.dec"
+#include "lscripts/Items/Powerups.dec"
+#include "lscripts/Items/Keys.dec"
+//#include "lscripts/Items/DivisionSigil.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
 
-// Slot 1
 #include "lscripts/Weapons/1_Fist.dec"
 
-// Slot 2
 #include "lscripts/Weapons/2_Pistol.dec"
 #include "lscripts/Weapons/2_Revolver.dec"
 
-// Slot 3
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
 #include "lscripts/Weapons/3_SuperShotgun.dec"
 
-// Slot 4
 #include "lscripts/Weapons/4_CombatRifle.dec"
 #include "lscripts/Weapons/4_SniperRifle.dec"
 
-// Slot 5
 #include "lscripts/Weapons/5_RocketLauncher.dec"
 #include "lscripts/Weapons/5_MissileLauncher.dec"
 
-// Slot 6
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
 
-// Slot 7
 #include "lscripts/Weapons/7_OmegaCannon.dec"
 
-// Slot 9
 #include "lscripts/Weapons/9_Sword.dec"
 #include "lscripts/Weapons/9_Gameboy.dec"
 

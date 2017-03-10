@@ -45,15 +45,17 @@ void Lith_PlayerInitBIP(player_t *p)
    ForCategory()
       Lith_LinkDefault(&bip->infogr[categ]);
    
+   // This could be done a lot better with an array or something, but fuck it.
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
+   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpg2",     Unlocks("Shotgun"));
    AddToBIP(bip, BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
-   AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun");
+   AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
    AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
-   AddToBIP(bip, BIPC_WEAPONS, "SniperRifle");
+   AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
    AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
    AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
 // AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
@@ -63,25 +65,48 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
    
-   AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp", Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",   Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "Yh0",         Unlocks("DurlaPrime"));
-   AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke");
-   AddToBIP(bip, BIPC_UPGRADES, "Adrenaline");
-   AddToBIP(bip, BIPC_UPGRADES, "VitalScanner");
-   AddToBIP(bip, BIPC_UPGRADES, "AutoReload");
+   AddToBIP(bip, BIPC_ENEMIES, "ZombieMan");
+   AddToBIP(bip, BIPC_ENEMIES, "ShotgunGuy");
+   AddToBIP(bip, BIPC_ENEMIES, "ChaingunGuy");
+   AddToBIP(bip, BIPC_ENEMIES, "Imp");
+   AddToBIP(bip, BIPC_ENEMIES, "Demon");
+   AddToBIP(bip, BIPC_ENEMIES, "HellKnight");
+   AddToBIP(bip, BIPC_ENEMIES, "BaronOfHell");
+   AddToBIP(bip, BIPC_ENEMIES, "Cyberdemon");
+   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
+   AddToBIP(bip, BIPC_ENEMIES, "SpiderMastermind");
+   AddToBIP(bip, BIPC_ENEMIES, "Arachnotron");
+   AddToBIP(bip, BIPC_ENEMIES, "Archvile");
+   AddToBIP(bip, BIPC_ENEMIES, "Revenant");
+   AddToBIP(bip, BIPC_ENEMIES, "Mancubus");
+   AddToBIP(bip, BIPC_ENEMIES, "PainElemental");
+   AddToBIP(bip, BIPC_ENEMIES, "Spectre");
+   AddToBIP(bip, BIPC_ENEMIES, "LostSoul");
+   
+   AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp",  Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "JetBooster",   Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",   Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",    Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "Yh0",          Unlocks("DurlaPrime"));
+   AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke",  Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_UPGRADES, "Adrenaline",   Unlocks("KSKK"));
+   AddToBIP(bip, BIPC_UPGRADES, "VitalScanner", Unlocks("KSKK"));
+   AddToBIP(bip, BIPC_UPGRADES, "AutoReload",   Unlocks("KSKK"));
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
+   AddToBIP(bip, BIPC_PLACES, "ChAri");
    AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
    AddToBIP(bip, BIPC_PLACES, "Earth");
-   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("BFG9000"));
+   AddToBIP(bip, BIPC_PLACES, "Hell");
+   AddToBIP(bip, BIPC_PLACES, "Mars");
+   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("BFG9000", "SIGFPE"));
    
    AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
    AddToBIP(bip, BIPC_CORPORATIONS, "AOF");
    AddToBIP(bip, BIPC_CORPORATIONS, "Cid",        Unlocks("SuperDimension", "Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",       Unlocks("OFMD"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "Facer");
+   AddToBIP(bip, BIPC_CORPORATIONS, "KSKK",       Unlocks("Earth"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",       Unlocks("Mars", "OFMD"));
    AddToBIP(bip, BIPC_CORPORATIONS, "OFMD");
    AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda",    Unlocks("Earth"));
    AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));

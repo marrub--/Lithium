@@ -14,7 +14,7 @@ LITH_TXT_UPGRADE_DESCR_HeadsUpDisp =
 
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_DESCR_JetBooster =
-   "Effect: Lets you press the \"speed\" key while in the air to fly for a "
+   "Effect: Lets you press the \"run\" key while in the air to fly for a "
    "short time.\n\n"
    "Jet boosters built into your boots.";
 

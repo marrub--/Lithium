@@ -5,8 +5,8 @@ LITH_TXT_INFO_TITLE_AetosVi = "$LITH_TXT_INFO_SHORT_AetosVi";
 LITH_TXT_INFO_DESCR_AetosVi =
    "A planetary system 17 lightyears away from Earth that houses several "
    "planets with sentient life on them. Found approximately 700 years ago "
-   "by now, this is the second system that Humanity found, and the first "
-   "with sentient life.\n\n"
+   "now, this is the second system reached by humans, and the first with "
+   "sentient life.\n\n"
    "When the system was found, rejoice was had throughout all mankind, "
    "finally knowing that they weren't alone in the universe.\n\n"
    "Then, of course, the expeditioners were attacked by natives. But that's "
@@ -27,7 +27,7 @@ LITH_TXT_INFO_SHORT_Earth = "Earth";
 LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
 LITH_TXT_INFO_DESCR_Earth =
    "The year is 1649 New Era. After an event that almost led to an apocalpse "
-   "in 3031, humanity collectively decided to mark a new era dedicated to "
+   "in 3031 CE, humanity collectively decided to mark a new era dedicated to "
    "progressing travel and communications across the galaxy.\n\n"
    "Earth has stayed largely the same as it was in the Common Era, thanks "
    "to advances in science. By 1000 NE, most of the population on Earth "
@@ -38,9 +38,10 @@ LITH_TXT_INFO_SHORT_SuperDimension = "Super Dimension";
 LITH_TXT_INFO_TITLE_SuperDimension = "$LITH_TXT_INFO_SHORT_SuperDimension";
 LITH_TXT_INFO_DESCR_SuperDimension =
    "The first hyperdimension found through observation of cuts in the "
-   "universe, presumed to be created intentionally by beings there.\n\n"
-   "Several artifacts have come from this dimension: the Omega Cannon, "
-   "the Division Sigil, and the Cup of Blood.\n\n"
+   "universe, which were also observed to be created intentionally by beings "
+   "there.\n\n"
+   "Several artifacts have come from this dimension: The Omega Cannon, "
+   "The Division Sigil, and The Cup of Blood.\n\n"
    "Of these artifacts, you can acquire two. The Omega Cannon, a weapon, "
    "and the Division Sigil, a strange artifact able to cause disruptions in "
    "spacetime.\n\n"

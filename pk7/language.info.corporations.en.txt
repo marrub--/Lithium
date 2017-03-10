@@ -8,10 +8,9 @@ LITH_TXT_INFO_DESCR_AllPoint =
    "Despite producing mainly precision arms, their best-selling weaponry "
    "is known for its terrible accuracy, but big punch.\n\n"
    "Reguarding this infamy, its current CEO has this to say: \"Look here, "
-   "reporter guy, if you want me to talk about our weapons, I'll talk about "
+   "[...] if you want me to talk about our weapons, I'll talk about "
    "all of our fine armaments; but if you just want me to talk about our "
-   "'best-sellers', maybe you should just go look at the damned "
-   "advertisements.\"";
+   "'best-sellers', maybe you should just go back to window shopping.\"";
 
 LITH_TXT_INFO_SHORT_AOF = "A.O.F";
 LITH_TXT_INFO_TITLE_AOF = "A.O.F Inc.";
@@ -19,16 +18,16 @@ LITH_TXT_INFO_DESCR_AOF =
    "Not much is known about this shady corporation on the outside, and "
    "reports from insiders never painted a very pretty picture.\n\n"
    "In 1345 NE, a major attack on A.O.F left them nearly out of the picture. "
-   "However, with slow, concise social manipulation and government funding, "
-   "they finally made it back onto the market in 1370.\n\n"
+   "However, with slow, concise social manipulation and funding from alien "
+   "governments, they finally made it back onto the market in 1370.\n\n"
    "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
    "robotics.";
 
 LITH_TXT_INFO_SHORT_Cid = "Cid";
 LITH_TXT_INFO_TITLE_Cid = "$LITH_TXT_INFO_SHORT_Cid";
 LITH_TXT_INFO_DESCR_Cid =
-   "Cid is a black market trading group, presumed to be a duo. They sell "
-   "artifacts from the Super Dimension, ultra-high-grade weapons, and "
+   "Cid is a black market trading group, presumed to be led by a duo. They "
+   "sell artifacts from the Super Dimension, ultra-high-grade weapons, and "
    "anonymously donate to several charities on Earth.\n\n"
    "This group has gone under several aliases over the past 200 years, and "
    "is one of the strongest, longest standing black market groups ever.";
@@ -37,8 +36,8 @@ LITH_TXT_INFO_SHORT_MDDO = "MDDO";
 LITH_TXT_INFO_TITLE_MDDO = "Maxim-Danil Defense Org";
 LITH_TXT_INFO_DESCR_MDDO =
    "A now-defunct weapons manufacturer on Mars, founded and funded by the "
-   "famous Maxim-Danil duo. Created weapons of all kinds on commission "
-   "for military and paramilitary groups.\n\n"
+   "famous Maxim-Danil duo. They designed and produced weapons of all kinds "
+   "on commission for military and paramilitary groups alike.\n\n"
    "Defunded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
 
 LITH_TXT_INFO_SHORT_OFMD = "OFMD";
@@ -50,7 +49,7 @@ LITH_TXT_INFO_DESCR_OFMD =
    "Optic Fiber Maxim-Danil are currently conducting a seek-and-destroy "
    "operation in concert with militaries of Earth on all demonic threats "
    "found to be emitting themselves from another dimensional plane.\n\n"
-   "For now, OFMD are your employers, and supply you with money, weaponry "
+   "For now, OFMD are your employers, and supply you with Score, weaponry "
    "and cyber-tech.";
 
 LITH_TXT_INFO_SHORT_Omakeda = "Omakeda";
@@ -61,30 +60,31 @@ LITH_TXT_INFO_DESCR_Omakeda =
    "militaries and mercenaries around the world use their armaments as "
    "well.\n\n"
    "Known for their innovative firearm design, Omakeda is one of the "
-   "highest profiting, most popular firearms manufacturer on Earth.";
+   "highest profiting, most popular firearms manufacturers on Earth.";
 
 LITH_TXT_INFO_SHORT_Sym43 = "SYM4.3";
 LITH_TXT_INFO_TITLE_Sym43 = "SYM4.3 WEAPONS INCORPORATED";
 LITH_TXT_INFO_DESCR_Sym43 =
-   "Currently beleived to be based somewhere in the Aetos-Vi solar system, "
+   "Currently beleived to be based somewhere in the Aetos-Vi system, "
    "SYM4.3 create and distribute explosive weapons. For distribution, they "
    "assign a standardized anonymous designation, and sell the weapons via "
    "proxy in their name.\n\n"
    "They have (according to their published sales reports) sold weaponry to "
-   "over three quarters of all currently known mercenary, military and "
-   "government bodies.\n\n"
+   "over three quarters of all recorded mercenary, military and government "
+   "bodies.\n\n"
    "Weapons confirmed to be made by them have appeared in countless historic "
    "battles, having existed for over 700 years now.";
 
 LITH_TXT_INFO_SHORT_UnrealArms = "Unreal Arms";
 LITH_TXT_INFO_TITLE_UnrealArms = "$LITH_TXT_INFO_SHORT_UnrealArms";
 LITH_TXT_INFO_DESCR_UnrealArms =
-   "A company currently residing in the Aetos Vi system, but run by humans. "
-   "Manufactures high-grade exotic weaponry both on commission and for "
+   "A company currently residing in the Aetos Vi system. "
+   "They manufacture high-grade exotic weaponry both on commission and for "
    "mass production.\n\n"
-   "They create what are dubbed \"some of the nicest-feeling weapons you can "
-   "get your hands on\", and yet still can sell them for a nice price thanks "
-   "to good shipping architecture in the Aetos Vi system.";
+   "Unreal Arms create what are dubbed by critics \"some of the "
+   "nicest-feeling weapons you can get your hands on\", and yet are still "
+   "able to sell them for a nice price thanks to good shipping architecture "
+   "in the Aetos Vi system.";
 
 // EOF
 

@@ -1,3 +1,9 @@
+damagetype Lith_NoDamage
+{
+   Factor 0
+   ReplaceFactor
+}
+
 actor Lith_Dummy
 {
    +NOINTERACTION
@@ -11,6 +17,7 @@ actor Lith_Dummy
 
 actor Lith_DummyArmor : BasicArmorBonus {}
 
+// Don't remove this, it is actually used for checking if this mod is loaded.
 actor Lith_GreyHam : HealthBonus
 {
    Inventory.PickupMessage "Picked up a grey ham."
