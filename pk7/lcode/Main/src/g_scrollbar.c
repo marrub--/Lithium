@@ -1,6 +1,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+#include <math.h>
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -19,12 +21,12 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    gui_scroll_state_t *scr = &g->st[a->st].scrl;
    
    // sizes
-   int const blockh  = pre->scrlh;              // height of graphical block
-   int const blocks  = (a->h / pre->scrlh) - 1; // height in graphical blocks minus caps
-   int const caph    = blockh / 2;              // size of cap
-   int const caps    = (a->h / caph) - 2;       // height in caps, minus caps
-   int const h       = (blocks * blockh);       // height in pixels minus caps
-   int const realh   = h + (caph * 2);          // height in pixels plus caps
+   int const blockh  = pre->scrlh;          // height of graphical block
+   int const blocks  = (a->h / blockh) - 1; // height in graphical blocks minus caps
+   int const caph    = blockh / 2;          // size of cap
+   int const caps    = blocks * 2;          // height in caps, minus caps
+   int const h       = blocks * blockh;     // height in pixels minus caps
+   int const realh   = h + (caph * 2);      // height in pixels plus caps
    
    // positions
    int x = a->x + pre->scrlw; // base x to draw from
@@ -38,7 +40,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    y += g->oy;
    
    // get height of scroller
-   int notches; // height in caps of scroller
+   int notches; // height of scroller in caps
    
    if(a->contenth > realh) notches = (a->h / (double)a->contenth) * caps;
    else                    notches = caps;
@@ -71,15 +73,16 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
          scr->grabbed = false;
       
       // finally, normalize and clamp 
-      scr->y = minmax(supposedy / (double)h, 0, maxy);
+      scr->y = supposedy / (double)h;
+      scr->y = minmax(scr->y, 0, maxy);
    }
    
    // get offset of scroller
    {
-      int vofs; // offset in pixels of the content
+      int vofs = 0; // offset in pixels of the content
       
-      if(a->contenth > realh) vofs = (a->contenth - realh) * (scr->y / maxy);
-      else                    vofs = 0;
+      if(a->contenth > realh)
+         vofs = round((a->contenth - realh) * (scr->y / maxy));
       
       // set the scrollbar's offset
       scr->ox = a->x + pre->scrlw; // offset by scrollbar width
@@ -98,7 +101,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    for(int i = 0; i < blocks; i++)
    {
       DrawSpritePlain(pre->scrl, g->hid--, x + 0.2, y + 0.1, TICSECOND);
-      y += pre->scrlh;
+      y += blockh;
    }
    
    // draw bottom cap
@@ -113,7 +116,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
       
       for(int i = 0; i < notches; i++)
       {
-         int npos = caph + (h * scr->y) + (caph * i);
+         int const npos = round(caph + (h * scr->y) + (caph * i));
          DrawSpritePlain(graphic, g->hid--, x + 0.2, ory + npos + 0.1, TICSECOND);
       }
    }
