@@ -18,7 +18,7 @@ void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
 //
 
 weaponinfo_t const weaponinfo[weapon_max] = {
-// {S, "Type-----------", "Pickup Sound-----------", AT_Type,  "Ammo Class------------"},
+// {S, "Type-----------", Cost----, "Pickup Sound-----------", AT_Type,  "Ammo Class------------"},
    {0, null,              "MMMMHMHMMMHMMM"},
    {1, "Fist",            "MMMMHMHMMMHMMM"},
    {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag,  "Lith_PistolShotsFired"},
@@ -95,15 +95,19 @@ void Lith_WeaponPickup(int parm, int tid)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_PickupScore(int parm, int spritetid)
 {
+   __str tag = ACS_GetActorPropertyString(0, APROP_NameTag);
+   
    ACS_SetActivatorToTarget(0);
    player_t *p = LocalPlayer;
    
    if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !HasWeapon(p, parm))
       return true;
    
+   score_t score = 11100ll * weaponinfo[parm].slot;
+   
    GiveWeaponItem(parm);
-   Lith_Log(p, "> You sold the weapon for Score.");
-   Lith_GiveScore(p, 11100 * parm);
+   Lith_Log(p, "> Sold a %S for %lli\Cnscr\C-.", tag, score);
+   Lith_GiveScore(p, score);
    
    ACS_Thing_Remove(spritetid);
    
