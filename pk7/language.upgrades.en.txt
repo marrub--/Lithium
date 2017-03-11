@@ -80,6 +80,12 @@ LITH_TXT_UPGRADE_DESCR_AutoPistol =
    "Simply changes the trigger mechanism a bit to make the pistol fire "
    "automatically.";
 
+LITH_TXT_UPGRADE_TITLE_PoisonShot = "Poison Shot";
+LITH_TXT_UPGRADE_DESCR_PoisonShot =
+   "Effect: Makes your shotgun fire poison pellets that do 10 damage every "
+   "half-second after hitting a target.\n\n"
+   "Installs a poison injector into the shell loading mechanism.";
+
 LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Rifle";
 LITH_TXT_UPGRADE_DESCR_GaussShotty =
    "Effect: Turns your shotgun into a gauss rifle.\n\n"

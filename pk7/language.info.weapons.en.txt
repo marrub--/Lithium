@@ -32,6 +32,26 @@ LITH_TXT_INFO_DESCR_Shotgun =
    "in the firing mechanism.\n\n"
    "Most military models come with a CB-Scope.";
 
+LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
+LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun Gauss Mod";
+LITH_TXT_INFO_DESCR_ShotgunUpgr =
+   "During the short Avian-Sapiens war of\n1401 NE, A.O.F Inc. ran a line of "
+   "modified Hiku Mk.2 shotguns that removed the shell firing mechanism and "
+   "replaced it with a high-power photon condenser.\n\n"
+   "This both removes the need to chamber rounds and gives a nice boost in "
+   "fire rate. The gun is, essentially, completely different in use.";
+
+LITH_TXT_INFO_SHORT_ShotgunUpg2 = "$LITH_TXT_UPGRADE_TITLE_PoisonShot";
+LITH_TXT_INFO_TITLE_ShotgunUpg2 = "Hiku Mk.2 Shotgun Poison Mod";
+LITH_TXT_INFO_DESCR_ShotgunUpg2 =
+   "A modification for the Hiku Mk.1 shotgun made by A.O.F Inc. for research "
+   "purposes. Uses a rather small container of poison that refills itself "
+   "automatically, contained in the loading mechanism, to infect enemies with "
+   "deadly corrosive acid fused with deadly neurotoxin.\n\n"
+   "This rather terrifying upgrade was never upaded to the Mk.2 model. The "
+   "internal structure is similar enough that you can still use it, "
+   "but the plasma firing mechanism must be disabled.";
+
 LITH_TXT_INFO_SHORT_LazShotgun = "Laser Shotgun";
 LITH_TXT_INFO_TITLE_LazShotgun = "Kaether Photon Rifle";
 LITH_TXT_INFO_DESCR_LazShotgun =
@@ -56,15 +76,6 @@ LITH_TXT_INFO_DESCR_SuperShotgun =
    "This weapon bears manufacturer marks in a non-human language and is known "
    "only as the Super Shotgun.";
 
-LITH_TXT_INFO_SHORT_ShotgunUpgr = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
-LITH_TXT_INFO_TITLE_ShotgunUpgr = "Hiku Mk.2 Shotgun Gauss Mod";
-LITH_TXT_INFO_DESCR_ShotgunUpgr =
-   "During the short Avian-Sapiens war of\n1401 NE, A.O.F Inc. ran a line of "
-   "modified Hiku Mk.2 shotguns that removed the shell firing mechanism and "
-   "replaced it with a high-power photon condenser.\n\n"
-   "This both removes the need to chamber rounds and gives a nice boost in "
-   "fire rate. The gun is, essentially, completely different in use.";
-
 LITH_TXT_INFO_SHORT_CombatRifle = "Combat Rifle";
 LITH_TXT_INFO_TITLE_CombatRifle = "AllPoint 75-b Assault Rifle";
 LITH_TXT_INFO_DESCR_CombatRifle =
@@ -77,15 +88,6 @@ LITH_TXT_INFO_DESCR_CombatRifle =
    "Comes with an inbuilt undermount-like grenade launcher. Holds only one "
    "grenade at a time, but packs a great punch.";
 
-LITH_TXT_INFO_SHORT_SniperRifle = "Sniper Rifle";
-LITH_TXT_INFO_TITLE_SniperRifle = "Facer AM-49d Sniper Rifle";
-LITH_TXT_INFO_DESCR_SniperRifle =
-   "An extremely strong rifle which fires .50 BMG rounds, able to destroy "
-   "most living targets completely and penetrate weakly armored vehicles.\n\n"
-   "The main production of these weapons spanned about 20 years, and they "
-   "were sold to mercenaries in bulk. For a long time, this rifle had been "
-   "the sniper's main weapon of choice.";
-
 LITH_TXT_INFO_SHORT_RifleUpgr = "$LITH_TXT_UPGRADE_TITLE_RifleModes";
 LITH_TXT_INFO_TITLE_RifleUpgr = "AllPoint 75-c Modal Trigger";
 LITH_TXT_INFO_DESCR_RifleUpgr =
@@ -97,6 +99,15 @@ LITH_TXT_INFO_DESCR_RifleUpgr =
    "round bursts are fired sequentially. Using this mode also enables a "
    "partial CB-Scope, which unfortunately does little more than obstruct "
    "your view.";
+
+LITH_TXT_INFO_SHORT_SniperRifle = "Sniper Rifle";
+LITH_TXT_INFO_TITLE_SniperRifle = "Facer AM-49d Sniper Rifle";
+LITH_TXT_INFO_DESCR_SniperRifle =
+   "An extremely strong rifle which fires .50 BMG rounds, able to destroy "
+   "most living targets completely and penetrate weakly armored vehicles.\n\n"
+   "The main production of these weapons spanned about 20 years, and they "
+   "were sold to mercenaries in bulk. For a long time, this rifle had been "
+   "the sniper's main weapon of choice.";
 
 LITH_TXT_INFO_SHORT_GrenadeLauncher = "Grenade Launcher";
 LITH_TXT_INFO_TITLE_GrenadeLauncher = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";

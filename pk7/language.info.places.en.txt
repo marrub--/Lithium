@@ -12,16 +12,32 @@ LITH_TXT_INFO_DESCR_AetosVi =
    "Then, of course, the expeditioners were attacked by natives. But that's "
    "fine details.";
 
+LITH_TXT_INFO_SHORT_ChAri = "Ch'ari";
+LITH_TXT_INFO_TITLE_ChAri = "$LITH_TXT_INFO_SHORT_ChAri";
+LITH_TXT_INFO_DESCR_ChAri =
+   "A planet in the Aetos-Vi planetary system composed of four land masses "
+   "and a large amount of water, populated by a highly intelligent "
+   "light-manipulating race known as the Kiri.\n\n"
+   "Previously, humans also lived on this planet, but were driven out by "
+   "a large-\nscale terrorist enactment.\n\n"
+   "Ch'ari is generally dull and dark-grey looking save for the water, but "
+   "the communications of the Kiri light up the darkness in a beautiful "
+   "fashion.\n\n"
+   "Its inhabitants include fish and plant life, as well as land-dwelling "
+   "beasts such as giant mammoth-like creatures and the two-legged Falx.";
+
 LITH_TXT_INFO_SHORT_DurlaPrime = "Durla Prime";
 LITH_TXT_INFO_TITLE_DurlaPrime = "$LITH_TXT_INFO_SHORT_DurlaPrime";
 LITH_TXT_INFO_DESCR_DurlaPrime =
    "A planet in the Aetos-Vi planetary system whose dominant species is a "
-   "humanoid avian creature, given the name \"Peristeras\" or, "
-   "colloquially, \"Perists\".\n\n"
+   "humanoid avian creature, the \"Peristera\" or, colloquially, \"Perist\"."
+   "\n\n"
    "When humans arrived on Durla Prime, the Peristeras were highly "
    "frightened by the presence of an alien, sentient being, and war broke "
    "loose. Refusing to attack, the humans ended the war a mere month later, "
-   "after learning to communicate with the avian species.";
+   "after learning to communicate with the avian species.\n\n"
+   "The planet is extremely similar to Earth, even having grass and trees "
+   "mostly resembling their counterparts.";
 
 LITH_TXT_INFO_SHORT_Earth = "Earth";
 LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
@@ -30,9 +46,21 @@ LITH_TXT_INFO_DESCR_Earth =
    "in 3031 CE, humanity collectively decided to mark a new era dedicated to "
    "progressing travel and communications across the galaxy.\n\n"
    "Earth has stayed largely the same as it was in the Common Era, thanks "
-   "to advances in science. By 1000 NE, most of the population on Earth "
-   "had moved to other inhabitable planets, but still a large population "
-   "remains on the blue planet.";
+   "to advances in science.\n\n"
+   "By 1000 NE, most of the population on Earth had moved to other "
+   "inhabitable planets, but still a large population remains on the blue "
+   "planet.";
+
+LITH_TXT_INFO_SHORT_Mars = "Mars";
+LITH_TXT_INFO_TITLE_Mars = "$LITH_TXT_INFO_SHORT_Mars";
+LITH_TXT_INFO_DESCR_Mars =
+   "In 2714 CE, a huge interplanetary workload boom began, spawning numerous "
+   "factories and artificial workplaces on Mars manned by robots.\n\n"
+   "Thanks to advances in terrestrial travel, the ability to transfer goods "
+   "between Mars and Earth became cheap enough to be profitable during the "
+   "periods where Mars is closer to Earth.\n\n"
+   "Still to this day many companies on Earth -- and even some intragalactic "
+   "corporations like OFMD -- use Mars as a place to house autonomous work.";
 
 LITH_TXT_INFO_SHORT_SuperDimension = "Super Dimension";
 LITH_TXT_INFO_TITLE_SuperDimension = "$LITH_TXT_INFO_SHORT_SuperDimension";

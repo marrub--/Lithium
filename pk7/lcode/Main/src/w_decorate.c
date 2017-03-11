@@ -198,7 +198,7 @@ bool Lith_BarrierCheck()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PoisonFXTicker()
 {
-   for(int i = 0; i < 20; i++)
+   for(int i = 0; i < 17; i++)
    {
       ACS_Delay(1);
       
@@ -223,9 +223,9 @@ void Lith_PoisonFXTicker()
 
 #if 0
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetSigil()
+void Lith_GetSigil()
 {
-   ACS_SetResultValue(1); // q_q
+   ACS_SetResultValue(1);
    
    player_t *p = LocalPlayer;
    
@@ -270,8 +270,6 @@ int Lith_GetSigil()
    ACS_TakeInventory("PowerTimeFreezer", 1);
    ACS_TakeInventory("Lith_TimeHax2", 1);
    p->frozen--;
-   
-   return 1; // q_q
 }
 #endif
 

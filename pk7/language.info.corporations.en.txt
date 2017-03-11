@@ -32,6 +32,29 @@ LITH_TXT_INFO_DESCR_Cid =
    "This group has gone under several aliases over the past 200 years, and "
    "is one of the strongest, longest standing black market groups ever.";
 
+LITH_TXT_INFO_SHORT_Facer = "Facer";
+LITH_TXT_INFO_TITLE_Facer = "$LITH_TXT_INFO_SHORT_Facer";
+LITH_TXT_INFO_DESCR_Facer =
+   "Facer (pronounced \"phaser\") was a company that produced precision "
+   "firearms around 2403 CE. Based in Paris, France, the company started out "
+   "as a two-man production, designing simple but powerful sniper rifles for "
+   "attracting military or revolutionary forces.\n\n"
+   "Unfortunately, neither bought in due to lack of any real strife at the "
+   "time. However, through word of mouth and lots of street-sales, Facer "
+   "finally took off as a civilian hunting weapons seller.\n\n"
+   "The company was resigned in 2480 after the death of its founders.";
+
+LITH_TXT_INFO_SHORT_KSKK = "KSKK";
+LITH_TXT_INFO_TITLE_KSKK = "Kazami Sensou Kenkyuu Kaihatsu";
+LITH_TXT_INFO_DESCR_KSKK =
+   "A limited R&D company acting mainly in partnership with the military of "
+   "the Great Empire of Kazami on Earth. Due to the strange and generally "
+   "complex needs of the Kazami army, this company has developed a great many "
+   "technologically advanced devices with a relatively small budget.\n\n"
+   "Thanks to connections between OFMD and the Kazami government (from the "
+   "circumstances of this operation,) KSKK has agreed to re-enter production "
+   "of their more useful creations.";
+
 LITH_TXT_INFO_SHORT_MDDO = "MDDO";
 LITH_TXT_INFO_TITLE_MDDO = "Maxim-Danil Defense Org";
 LITH_TXT_INFO_DESCR_MDDO =
