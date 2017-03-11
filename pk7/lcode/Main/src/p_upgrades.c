@@ -343,9 +343,19 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    if(upgr->info->scoreadd != 0.0)
    {
       __str color = upgr->info->scoreadd < 0 ? "\Ca" : "\Cn";
+      
       HudMessageF("CBIFONT", "%LS: %S%i\Cl%%", "LITH_SCOREMULT", color, ceilk(100.0 * (upgr->info->scoreadd + 1.0)));
       HudMessagePlain(g->hid--, 111.1, 50.1, TICSECOND);
-      yofs = 10;
+      
+      double after;
+      if(upgr->active) after = p->scoremul - upgr->info->scoreadd;
+      else             after = p->scoremul + upgr->info->scoreadd;
+      
+      color = after - p->scoremul < 0 ? "\Ca" : "\Cn";
+      HudMessageF("CBIFONT", "%LS: \Cj%i\C-%% -> %S%i\C-%%", "LITH_TOTALMULT", ceilk(100.0 * p->scoremul), color, ceilk(100.0 * after));
+      HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
+      
+      yofs = 20;
    }
    
    if(sel != UPGR_UNCEUNCE)
