@@ -68,7 +68,11 @@ MAIN_SOURCES= \
 	$(SRC)/g_checkbox.c \
 	$(SRC)/g_preset.c \
 	$(SRC)/g_scrollbar.c \
-	$(SRC)/g_slider.c
+	$(SRC)/g_slider.c \
+	$(SRC)/stdlib.c \
+	$(SRC)/token.c \
+	$(SRC)/tokenstream.c \
+	$(SRC)/manifest.c
 
 ## Output
 
