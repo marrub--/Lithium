@@ -245,14 +245,18 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
          if(other != upgr && other->active && other->info->group == upgr->info->group)
             Lith_UpgrToggle(p, other);
    
-   if(upgr->active && upgr->info->Activate)
+   if(upgr->active)
    {
-      upgr->info->Activate(p, upgr);
+      if(upgr->info->Activate)
+         upgr->info->Activate(p, upgr);
+
       p->scoremul += upgr->info->scoreadd;
    }
-   else if(!upgr->active && upgr->info->Deactivate)
+   else
    {
-      upgr->info->Deactivate(p, upgr);
+      if(upgr->info->Deactivate)
+         upgr->info->Deactivate(p, upgr);
+
       p->scoremul -= upgr->info->scoreadd;
    }
    
