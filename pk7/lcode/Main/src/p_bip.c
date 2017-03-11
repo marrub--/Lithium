@@ -227,6 +227,9 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          {
             bip->curpagenum = i;
             bip->curpage    = page;
+            bip->curpagedsc = Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name);
+            bip->curpagelen = ACS_StrLen(bip->curpagedsc);
+            bip->curpagepos = 0;
          }
       }
       
@@ -237,6 +240,9 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       if(bip->curpage)
       {
+         if(bip->curpagepos < bip->curpagelen) bip->curpagepos += 10;
+         else                                  bip->curpagepos  = bip->curpagelen;
+         
          ACS_SetHudClipRect(111, 40, 184, 180, 184);
          
          if(bip->curcategory == BIPC_CORPORATIONS)
@@ -246,7 +252,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          
          HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
          HudMessagePlain(g->hid--, 200.4, 45.1, TICSECOND);
-         HudMessageF("CBIFONT", "%S", Language("LITH_TXT_INFO_DESCR_%S", bip->curpage->name));
+         
+         HudMessageF("CBIFONT", "%.*S", bip->curpagepos, bip->curpagedsc);
          HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
          
          ACS_SetHudClipRect(0, 0, 0, 0);

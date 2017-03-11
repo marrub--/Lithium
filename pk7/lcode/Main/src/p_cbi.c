@@ -33,7 +33,7 @@ __str ColorName(char ch)
 void ToggleAutoBuy(player_t *p, int num)
 {
    p->autobuy[num] = !p->autobuy[num];
-   Lith_PlayerSaveData(p);
+   p->saveData();
 }
 
 //

@@ -12,6 +12,9 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define property __prop
+#define prop_arg __arg
+
 #define countof(a) (sizeof((a)) / sizeof(*(a)))
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)

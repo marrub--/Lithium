@@ -26,7 +26,7 @@ alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 alias lith_k_qbuy_1 "pukename Lith_KeyBuyAutoGroup 1"
 alias lith_k_qbuy_2 "pukename Lith_KeyBuyAutoGroup 2"
 alias lith_k_qbuy_3 "pukename Lith_KeyBuyAutoGroup 3"
-alias lith_k_qbuy_4 "pukename Lith_KeyBuyAutoGroup 4
+alias lith_k_qbuy_4 "pukename Lith_KeyBuyAutoGroup 4"
 
 alias lith_k_qtoggle_1 "pukename Lith_KeyToggleAutoGroup 1"
 alias lith_k_qtoggle_2 "pukename Lith_KeyToggleAutoGroup 2"

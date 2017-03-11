@@ -391,7 +391,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       if(Lith_GUI_Checkbox_Id(g, i, upgr->autogroups[i], 170 + (i * 20), 210, Lith_AutoGroupNames[i]))
       {
          upgr->autogroups[i] = !upgr->autogroups[i];
-         Lith_PlayerSaveData(p);
+         p->saveData();
       }
 }
 

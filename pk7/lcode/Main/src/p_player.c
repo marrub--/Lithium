@@ -51,10 +51,10 @@ static void Lith_PlayerEntry(void)
 reinit:
    while(!mapinit) ACS_Delay(1);
    
-   Lith_ResetPlayer(p);
+   p->reset();
    Lith_PlayerLogEntry(p);
    Lith_PlayerEnterUpgrades(p);
-   Lith_PlayerLoadData(p);
+   p->loadData();
    
    while(p->active)
    {

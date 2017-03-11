@@ -42,6 +42,8 @@ void Lith_CheckAutoBuy(player_t *p)
 [[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyBuyAutoGroup(int group)
 {
+   if(ACS_Timer() < 10) return;
+
    if(group < 1 || group > NUMAUTOGROUPS) return;
    
    group -= 1;
@@ -74,6 +76,8 @@ void Lith_KeyBuyAutoGroup(int group)
 [[__call("ScriptS"), __extern("ACS"), __script("Net")]]
 void Lith_KeyToggleAutoGroup(int group)
 {
+   if(ACS_Timer() < 10) return;
+
    if(group < 1 || group > NUMAUTOGROUPS) return;
    
    group -= 1;

@@ -22,7 +22,7 @@
 
 #define Lith_GiveAllScore(score, nomul) \
    ForPlayer() \
-      Lith_GiveScore(p, score, nomul)
+      p->giveScore(score, nomul)
 
 #define LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
@@ -218,6 +218,38 @@ typedef struct player_invdata_s
    // sigil_t sigil;
 } player_invdata_t;
 
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+void Lith_PlayerCloseGUI(struct player_s *p);
+void Lith_PlayerUseGUI(struct player_s *p, guiname_t type);
+
+[[__optional_args(1)]]
+score_t Lith_GetModScore(struct player_s *p, score_t score, bool nomul);
+[[__optional_args(1)]]
+void Lith_GiveScore(struct player_s *p, score_t score, bool nomul);
+void Lith_TakeScore(struct player_s *p, score_t score);
+
+void Lith_ValidatePlayerTID(struct player_s *p);
+
+[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player_s *p);
+
+[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player_s *p);
+[[__call("ScriptS")]] void Lith_ResetPlayer(struct player_s *p);
+
+[[__call("ScriptS")]] void Lith_PlayerDamageBob(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerView(struct player_s *p);
+                      void Lith_PlayerStyle(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerHUD(struct player_s *p);
+
+
+//----------------------------------------------------------------------------
+// Types
+//
+
 //
 // player_t
 //
@@ -228,9 +260,16 @@ typedef struct player_invdata_s
 // edit 6/1/2017: there's so much data that I had to split it
 // edit 23/1/2017: D E S T R O Y
 // edit 26/2/2017: There is yet again so much data that I had to split it.
+// edit 11/3/2017: NOW WITH PROPERTY HELL
 //
 typedef struct player_s
 {
+   property reset     {call: Lith_ResetPlayer(this)}
+   property loadData  {call: Lith_PlayerLoadData(this)}
+   property saveData  {call: Lith_PlayerSaveData(this)}
+   property giveScore {call: Lith_GiveScore(this, prop_arg)}
+   property takeScore {call: Lith_TakeScore(this, prop_arg)}
+   
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;
    [[__anonymous]] player_staticdata_t staticdata;
@@ -246,32 +285,5 @@ typedef struct player_s
 //
 
 extern player_t players[MAX_PLAYERS];
-
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
-
-void Lith_PlayerCloseGUI(player_t *p);
-void Lith_PlayerUseGUI(player_t *p, guiname_t type);
-
-[[__optional_args(1)]]
-score_t Lith_GetModScore(player_t *p, score_t score, bool nomul);
-[[__optional_args(1)]]
-void Lith_GiveScore(player_t *p, score_t score, bool nomul);
-void Lith_TakeScore(player_t *p, score_t score);
-
-void Lith_ValidatePlayerTID(player_t *p);
-
-[[__call("ScriptS")]] void Lith_PlayerLoadData(player_t *p);
-[[__call("ScriptS")]] void Lith_PlayerSaveData(player_t *p);
-
-[[__call("ScriptS")]] void Lith_PlayerUpdateData(player_t *p);
-[[__call("ScriptS")]] void Lith_ResetPlayer(player_t *p);
-
-[[__call("ScriptS")]] void Lith_PlayerDamageBob(player_t *p);
-[[__call("ScriptS")]] void Lith_PlayerView(player_t *p);
-                      void Lith_PlayerStyle(player_t *p);
-[[__call("ScriptS")]] void Lith_PlayerHUD(player_t *p);
 
 #endif

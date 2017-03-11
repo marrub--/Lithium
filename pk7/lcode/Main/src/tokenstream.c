@@ -17,6 +17,12 @@
 #include "Lth.h"
 
 
+// Static Functions ----------------------------------------------------------|
+
+static int Lth_TokenFileStream_getc(struct Lth_TokenStreamBuf *cookie);
+static int Lth_TokenFileStream_bumpc(struct Lth_TokenStreamBuf *cookie);
+
+
 // Type Definitions ----------------------------------------------------------|
 
 //
@@ -26,8 +32,9 @@ typedef struct Lth_TokenStreamBuf
 {
    char  *beg, *itr, *end;
    size_t len;
-   int (*getc )(struct Lth_TokenStreamBuf *);
-   int (*bumpc)(struct Lth_TokenStreamBuf *);
+   
+   __prop getc  {call: Lth_TokenFileStream_getc(this)}
+   __prop bumpc {call: Lth_TokenFileStream_bumpc(this)}
 } Lth_TokenStreamBuf;
 
 
@@ -66,29 +73,29 @@ static ssize_t Lth_TokenFileStream_read(void *cookie_, char *buf, size_t size)
 
    for(ssize_t i = 0; i < size;)
    {
-      if(cookie->getc(cookie) == '/')
+      if(cookie->getc() == '/')
       {
-         cookie->bumpc(cookie);
-         if(cookie->getc(cookie) == '*')
+         cookie->bumpc();
+         if(cookie->getc() == '*')
          {
-            for(cookie->bumpc(cookie); !(cookie->bumpc(cookie) == '*' && cookie->getc(cookie) == '/');)
-               if(cookie->getc(cookie) == EOF)
+            for(cookie->bumpc(); !(cookie->bumpc() == '*' && cookie->getc() == '/');)
+               if(cookie->getc() == EOF)
                   return i;
             buf[i++] = ' ';
          }
-         else if(cookie->getc(cookie) == '/')
+         else if(cookie->getc() == '/')
          {
-            do if(cookie->bumpc(cookie) == EOF) return i;
-            while(cookie->getc(cookie) != '\n');
+            do if(cookie->bumpc() == EOF) return i;
+            while(cookie->getc() != '\n');
             buf[i++] = ' ';
          }
          else
             buf[i++] = '/';
       }
-      else if(cookie->getc(cookie) == EOF)
+      else if(cookie->getc() == EOF)
          return i;
       else
-         buf[i++] = cookie->bumpc(cookie);
+         buf[i++] = cookie->bumpc();
    }
 
    return size;
@@ -120,8 +127,6 @@ static FILE *Lth_TokenFileStreamOpen(void *data, size_t size)
    cookie->beg = data;
    cookie->itr = data;
    cookie->end = cookie->beg + size;
-   cookie->getc = Lth_TokenFileStream_getc;
-   cookie->bumpc = Lth_TokenFileStream_bumpc;
 
    return fopencookie(cookie, "r", io_funcs);
 }

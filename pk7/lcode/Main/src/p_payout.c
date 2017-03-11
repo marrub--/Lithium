@@ -101,7 +101,7 @@ void Lith_PlayerPayout(player_t *p)
    
    ACS_Delay(20);
    
-   Lith_GiveScore(p, pay.total, true);
+   p->giveScore(pay.total, true);
    
 #undef Left
 #undef Right

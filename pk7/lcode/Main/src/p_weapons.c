@@ -106,8 +106,8 @@ int Lith_PickupScore(int parm, int spritetid)
    score_t score = 11100ll * weaponinfo[parm].slot;
    
    GiveWeaponItem(parm);
-   Lith_Log(p, "> Sold a %S for %lli\Cnscr\C-.", tag, score);
-   Lith_GiveScore(p, score);
+   Lith_Log(p, "> Sold a %S for %lli\Cnscr\C-.", tag, Lith_GetModScore(p, score));
+   p->giveScore(score);
    
    ACS_Thing_Remove(spritetid);
    

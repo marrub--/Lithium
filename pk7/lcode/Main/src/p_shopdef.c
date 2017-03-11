@@ -38,7 +38,7 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt)
    if(def->bipunlock)
       Lith_UnlockBIPPage(&p->bip, def->bipunlock);
    
-   Lith_TakeScore(p, Lith_ShopGetCost(p, def));
+   p->takeScore(Lith_ShopGetCost(p, def));
    
    def->shopBuy(p, def, obj);
    
