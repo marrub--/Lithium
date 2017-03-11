@@ -1,0 +1,8 @@
+[default]
+
+"Upgrades.lthm" =
+   "[ChargeRPG]\n"
+   "Cost = 1850000\n"
+   "\n"
+   "// EOF\n"
+   "\n";

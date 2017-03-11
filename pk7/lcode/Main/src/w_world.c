@@ -213,13 +213,10 @@ static void Lith_World(void)
    // Init global/static state. This is only done once per game.
    if(!gsinit)
    {
-      [[__extern("ACS"), __call("LangACS")]]
-      extern void Lith_GSInit_Balance(void);
       extern void Lith_GSInit_Upgrade(void);
       extern void Lith_GSInit_Shop(void);
       extern void Lith_GSInit_Weapon(void);
       
-      Lith_GSInit_Balance();
       Lith_GSInit_Upgrade();
       Lith_GSInit_Shop();
       Lith_GSInit_Weapon();

@@ -92,7 +92,7 @@ $(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
 	$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
 
 $(BIN)/lithmain.bin: $(MAIN_OUTPUT)
-	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib -ltrbohtlr
+	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
 
 ## ir/*.ir
 

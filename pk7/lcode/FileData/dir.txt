@@ -1,0 +1,12 @@
+This is a list of files to be processed into ZDoom's LANGUAGE format by
+the compilefs.lua script.
+
+Lines that start with "in" change the currently processed file, and lines that
+have an arrow in them are files to process. Otherwise, they're ignored.
+
+The left hand side is the real file, and the right hand side is its alias.
+
+Note that you can only use text files here. Any binary files will break ZDoom.
+
+in filter/heretic/language.fs.txt
+heretic/Upgrades.lthm -> Upgrades.lthm

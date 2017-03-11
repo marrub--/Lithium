@@ -1,5 +1,7 @@
 #include "lith_upgrades_common.h"
 
+#include "Lth_manifest.h"
+
 #define ForUpgrade(name) \
    for(int _i = 0; _i < UPGR_MAX; _i++) \
       __with(upgrade_t *name = &p->upgrades[_i];)
@@ -93,6 +95,31 @@ static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *def, void *upgr)
    Lith_UpgrSetOwned(p, upgr);
 }
 
+//
+// LoadBalance
+//
+void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
+{
+   Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(c"Upgrades.lthm");
+   
+   if(!rsrc)
+   {
+      Lth_ResourceMapDestroy(rsrc);
+      return;
+   }
+   
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      __str  name     = upgradeinfo[i].name;
+      int   *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
+      fixed *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
+      if(cost)     upgradeinfo_mut[i].cost     = *cost;
+      if(scoreadd) upgradeinfo_mut[i].scoreadd = *scoreadd;
+   }
+   
+   Lth_ResourceMapDestroy(rsrc);
+}
+
 
 //----------------------------------------------------------------------------
 // External Functions
@@ -112,29 +139,13 @@ void Lith_GSInit_Upgrade(void)
    #define R(n) upgradeinfo_mut[UPGR_##n].Render     = Upgr_##n##_Render;
    #include "lith_upgradefuncs.h"
    
+   LoadBalance(upgradeinfo_mut);
+   
    for(int i = 0; i < UPGR_MAX; i++)
    {
       upgradeinfo_t *info = &upgradeinfo_mut[i];
       info->shopBuy    = Lith_UpgrShopBuy;
       info->shopCanBuy = Lith_UpgrCanBuy;
-   }
-}
-
-//
-// Lith_SetUpgrCost
-//
-[[__extern("ACS"), __call("ScriptS")]]
-void Lith_SetUpgrCost(__str upgr, int cost)
-{
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgradeinfo_t *info = (upgradeinfo_t *)&upgradeinfo[i];
-      
-      if(ACS_StrCmp(info->name, upgr) == 0)
-      {
-         info->cost = cost;
-         break;
-      }
    }
 }
 

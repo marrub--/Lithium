@@ -111,7 +111,7 @@ typedef struct upgrade_s
    bool wasactive : 1; // for reinitializing on map load
    
    upgradeinfo_t const *info;
-   union upgradedata_u data;
+   union upgradedata_u  data;
    
    bool autogroups[NUMAUTOGROUPS];
 } upgrade_t;
@@ -134,11 +134,11 @@ extern __str Lith_AutoGroupNames[NUMAUTOGROUPS];
 //
 
 // These are included here so the compiler may check the function signatures.
-#define A(n)                       void Upgr_##n##_Activate(struct player_s *p, upgrade_t *upgr);
+#define A(n)                       void Upgr_##n##_Activate  (struct player_s *p, upgrade_t *upgr);
 #define D(n)                       void Upgr_##n##_Deactivate(struct player_s *p, upgrade_t *upgr);
-#define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update(struct player_s *p, upgrade_t *upgr);
-#define E(n)                       void Upgr_##n##_Enter(struct player_s *p, upgrade_t *upgr);
-#define R(n)                       void Upgr_##n##_Render(struct player_s *p, upgrade_t *upgr);
+#define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update    (struct player_s *p, upgrade_t *upgr);
+#define E(n)                       void Upgr_##n##_Enter     (struct player_s *p, upgrade_t *upgr);
+#define R(n)                       void Upgr_##n##_Render    (struct player_s *p, upgrade_t *upgr);
 #include "lith_upgradefuncs.h"
 
 
