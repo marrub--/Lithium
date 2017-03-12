@@ -32,10 +32,11 @@ user string lith_player_savedata_19 = "";
 user string lith_player_savedata_20 = "";
 
 // Weapons
-user float  lith_weapons_zoomfactor = 3.0;
-user float  lith_weapons_scopealpha = 0.2;
-user float  lith_weapons_alpha      = 1.0;
-user bool   lith_weapons_riflescope = false;
+user float  lith_weapons_zoomfactor     = 3.0;
+user float  lith_weapons_scopealpha     = 0.2;
+user float  lith_weapons_alpha          = 1.0;
+user bool   lith_weapons_riflescope     = false;
+user bool   lith_weapons_riflemodeclear = false;
 
 // HUD
 user bool   lith_hud_showscore   = true;

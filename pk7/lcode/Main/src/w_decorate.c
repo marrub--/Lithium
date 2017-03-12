@@ -221,6 +221,15 @@ void Lith_PoisonFXTicker()
    }
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_ResetRifleMode()
+{
+   player_t *p = LocalPlayer;
+   
+   if(Lith_GetPCVarInt(p, "lith_weapons_riflemodeclear"))
+      p->riflefiremode = rifle_firemode_auto;
+}
+
 #if 0
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()

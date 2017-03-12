@@ -38,6 +38,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    
    Select:
       CRFG A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
+      CRFG A 0 ACS_NamedExecuteWithResult("Lith_ResetRifleMode")
    SelectLoop:
       CRFG AAA 0 A_Raise
       CRFG A 1
