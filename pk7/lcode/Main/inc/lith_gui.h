@@ -36,11 +36,19 @@ typedef struct gui_scroll_state_s
    bool grabbed;
 } gui_scroll_state_t;
 
+typedef struct gui_typeon_state_s
+{
+   __str txt;
+   int   len;
+   int   pos;
+} gui_typeon_state_t;
+
 typedef union gui_stateitem_s
 {
    int i;
-   gui_scroll_state_t scrl;
    void *vp;
+   gui_scroll_state_t scrl;
+   gui_typeon_state_t type;
 } gui_stateitem_t;
 
 typedef struct gui_delta_s
@@ -195,6 +203,8 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player_s *p);
 void Lith_GUI_End(gui_state_t *g);
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
 void Lith_GUI_ClipRelease(gui_state_t *g);
+void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text);
+gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st);
 
 bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a);
 bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t *a);

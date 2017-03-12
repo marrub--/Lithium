@@ -207,6 +207,8 @@ void Lith_PlayerResetCBI(player_t *p)
    p->cbi.guistate.cy = 200 / 2;
    
    Lith_GUI_Init(&p->cbi.guistate, st_max);
+   
+   p->cbi.guistate.st[st_upgrselold].i = -1;
 }
 
 

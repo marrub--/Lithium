@@ -23,10 +23,13 @@ enum
 {
    st_maintab,
    st_upgrsel,
+   st_upgrselold,
    st_upgrscr,
+   st_upgrtypeon,
    st_shopsel,
    st_shopscr,
    st_bipscr,
+   st_biptypeon,
    st_settingscr,
    st_logscr,
    st_logsel,

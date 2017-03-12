@@ -106,5 +106,27 @@ void Lith_GUI_ClipRelease(gui_state_t *g)
    ACS_SetHudClipRect(0, 0, 0, 0);
 }
 
+//
+// Lith_GUI_TypeOn
+//
+void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text)
+{
+   gui_typeon_state_t *typeon = &g->st[st].type;
+   
+   typeon->txt = text;
+   typeon->len = ACS_StrLen(text);
+   typeon->pos = 0;
+}
+
+//
+// Lith_GUI_TypeOnUpdate
+//
+gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st)
+{
+   gui_typeon_state_t *typeon = &g->st[st].type;
+   if((typeon->pos += ACS_Random(2, 15)) > typeon->len) typeon->pos = typeon->len;
+   return typeon;
+}
+
 // EOF
 

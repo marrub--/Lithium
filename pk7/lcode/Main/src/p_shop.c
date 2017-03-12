@@ -109,7 +109,7 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
    
    HudMessageF("CBIFONT", "%S", Language("LITH_TXT_SHOP_DESCR_%S", item->name));
-   HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
+   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 40.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    

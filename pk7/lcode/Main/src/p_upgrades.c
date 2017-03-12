@@ -329,6 +329,12 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    int sel = g->st[st_upgrsel].i;
    upgrade_t *upgr = &p->upgrades[sel];
    
+   if(g->st[st_upgrselold].i != g->st[st_upgrsel].i)
+   {
+      Lith_GUI_TypeOn(g, st_upgrtypeon, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+      g->st[st_upgrselold].i = g->st[st_upgrsel].i;
+   }
+   
    __str mark;
    switch(sel)
    {
@@ -372,10 +378,12 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", "----------------------------------------------");
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_GREEN, 111.1, 100.1, TICSECOND);
    
+   gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_upgrtypeon);
+   
    if(sel != UPGR_UNCEUNCE)
-      HudMessageF        ("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+      HudMessageF        ("CBIFONT", "%.*S", typeon->pos, typeon->txt);
    else
-      HudMessageRainbowsF("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+      HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
    
    HudMessagePlain(g->hid--, 111.1, 110.1, TICSECOND);
    

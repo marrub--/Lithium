@@ -53,11 +53,6 @@ typedef struct bip_s
    int curpagenum;
    int curcategory;
    int scroll;
-
-   // Per-page state
-   __str curpagedsc;
-   int   curpagelen;
-   int   curpagepos;
    
    // Info
    list_t infogr[BIPC_MAX];
