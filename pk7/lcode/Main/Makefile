@@ -47,6 +47,7 @@ MAIN_SOURCES= \
 	$(SRC)/u_riflemodes.c \
 	$(SRC)/u_unceunce.c \
 	$(SRC)/u_vitalscan.c \
+	$(SRC)/u_zoom.c \
 	$(SRC)/p_cbi.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \

@@ -12,6 +12,7 @@
 #define UserData_ReactArmor data.u05
 #define UserData_ReflexWetw data.u06
 #define UserData_VitalScan  data.u07
+#define UserData_Zoom       data.u08
 
 #define NUMAUTOGROUPS 4
 
@@ -79,6 +80,12 @@ union upgradedata_u
       float old;
       bool freak;
    } u07;
+   
+   struct
+   {
+      int zoom;
+      float vzoom;
+   } u08;
 };
 
                       typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);

@@ -44,8 +44,14 @@ enum
    
    hid_implyingE = hid_base_misc,
    hid_implyingS = hid_implyingE + 200,
+   
    hid_sigil_title,
    hid_sigil_subtitle,
+   
+   hid_zoomvignette,
+   hid_zoombase,
+   hid_zoomcomp,
+   hid_zoomcam = hid_zoomcomp + 8,
    
    // Scope
    hid_base_scope = hid_base + 41000,

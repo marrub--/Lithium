@@ -72,7 +72,7 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
    
    // if we've moved it, we return a difference
-   if(g->active == id && !g->clicklft && !IsSmallNumber(aval - val))
+   if(g->active == id && !g->clicklft && !CloseEnough(aval, val))
       return norm - a->val;
    
    // otherwise we return 0

@@ -66,7 +66,7 @@ void Lith_PlayerUpdateData(player_t *p)
    p->pitch = ACS_GetActorPitch(0) - p->addpitch;
    p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
    
-   p->pitchf = (p->pitch - 0.5) * pi;
+   p->pitchf = ((-p->pitch + 0.25) * 2) * pi;
    p->yawf   = p->yaw * tau - pi;
    
    p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
@@ -99,6 +99,10 @@ void Lith_PlayerUpdateData(player_t *p)
    p->keys.redskull    = ACS_CheckInventory("RedSkull");
    p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
    p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
+   
+   ACS_Warp(p->cameratid, 4, 0, ACS_GetActorViewHeight(0), 0,
+            WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+            WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH);
 }
 
 //
@@ -128,7 +132,6 @@ void Lith_ResetPlayer(player_t *p)
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
    ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid = ACS_UniqueTID());
-   ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
    
    //
    // Reset data

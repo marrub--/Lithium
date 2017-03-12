@@ -2,13 +2,14 @@
                                                                R(HeadsUpDisp)
    A(JetBooster)                 U(JetBooster)                 R(JetBooster)
    A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)                 R(ReflexWetw)
+                  D(Zoom)        U(Zoom)                       R(Zoom)
    A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
                   D(ReactArmor)
                                                 E(DefenseNuke)
    A(Adrenaline)                 U(Adrenaline)
                                  U(VitalScan)                  R(VitalScan)
 //---------------------------------------------------------------------------
-                  D(RifleModes)  U(RifleModes)
+                  D(RifleModes)                                R(RifleModes)
                   D(PunctCannon)
 //---------------------------------------------------------------------------
    A(7777777)     D(7777777)     U(7777777)

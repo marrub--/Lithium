@@ -28,6 +28,12 @@ LITH_TXT_UPGRADE_EFFEC_ReflexWetw =
 LITH_TXT_UPGRADE_DESCR_ReflexWetw =
    "Cybernetic wetware that improves your reflexes and implicit agility.";
 
+LITH_TXT_UPGRADE_TITLE_Zoom = "Zoom Wetware";
+LITH_TXT_UPGRADE_EFFEC_Zoom =
+   "Allows you to press the zoom keys to zoom in and out.";
+LITH_TXT_UPGRADE_DESCR_Zoom =
+   "Drivers for zooming software, which utilizes your eye implants.";
+
 LITH_TXT_UPGRADE_TITLE_CyberLegs = "Move Wetware";
 LITH_TXT_UPGRADE_EFFEC_CyberLegs =
    "Allows you to jump higher and move faster.\n"

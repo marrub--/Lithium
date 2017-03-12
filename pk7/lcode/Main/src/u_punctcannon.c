@@ -6,14 +6,6 @@
 //
 
 //
-// Deactivate
-//
-void Upgr_PunctCannon_Deactivate(player_t *p, upgrade_t *upgr)
-{
-   ACS_GiveInventory("Lith_GTFO", 1);
-}
-
-//
 // Lith_PunctuatorFire
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -30,7 +22,7 @@ void Lith_PunctuatorFire(void)
       fixed y = ACS_GetActorY(ptid);
       fixed z = ACS_GetActorZ(ptid);
       
-      float yaw = atan2f(y - p->y, x - p->x);
+      float yaw = atan2f(p->y - y, p->x - x);
       
       float cx = sin(p->pitchf) * cos(yaw);
       float cy = sin(p->pitchf) * sin(yaw);
@@ -51,6 +43,14 @@ void Lith_PunctuatorFire(void)
          ACS_SetActivator(p->tid);
       }
    }
+}
+
+//
+// Deactivate
+//
+void Upgr_PunctCannon_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   ACS_GiveInventory("Lith_GTFO", 1);
 }
 
 // EOF

@@ -18,6 +18,7 @@
 #define countof(a) (sizeof((a)) / sizeof(*(a)))
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
+#define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #define sink ACS_Sin
 #define cosk ACS_Cos
@@ -136,6 +137,7 @@ int ceilk(fixed n);
 // Constants
 static float const pi  = 3.14159265358979323846f;
 static float const pi2 = pi / 2.0f;
+static float const pi4 = pi / 4.0f;
 static float const tau = pi * 2.0f;
 
 #endif

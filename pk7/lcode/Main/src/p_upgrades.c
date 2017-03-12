@@ -16,6 +16,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {{"HeadsUpDisp", "HeadsUpDisp",  0       }, UC_Body, -0.05},
    {{"JetBooster",  "JetBooster",   0       }, UC_Body, -0.05},
    {{"ReflexWetw",  "ReflexWetw",   0       }, UC_Body, -0.05},
+   {{"Zoom",        null,           0       }, UC_Body,  0.00},
    {{"CyberLegs",   "CyberLegs",    1220000 }, UC_Body,  0.00},
    {{"ReactArmor",  "Yh0",          2700200 }, UC_Body,  0.00},
    {{"ReactArmor2", "Yh0",          2500200 }, UC_Body,  0.00},
