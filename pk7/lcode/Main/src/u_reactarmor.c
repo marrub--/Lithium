@@ -68,7 +68,7 @@ void Lith_RA_Give(int num)
       RA_Take(1);
       RA_Take(2);
       
-      Lith_LogH(p, ">>>>> Activating Armor->%S()", name);
+      p->logH(">>>>> Activating Armor->%S()", name);
       
       if(p->upgrades[UPGR_ReactArmor2].active)
          RA_Give(name, 2);

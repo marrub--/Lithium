@@ -244,6 +244,9 @@ void Lith_ValidatePlayerTID(struct player_s *p);
 [[__call("ScriptS")]] void Lith_PlayerView(struct player_s *p);
                       void Lith_PlayerStyle(struct player_s *p);
 [[__call("ScriptS")]] void Lith_PlayerHUD(struct player_s *p);
+[[__optional_args(2)]]
+bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
+bool Lith_ButtonPressed(struct player_s *p, int bt);
 
 
 //----------------------------------------------------------------------------
@@ -269,6 +272,12 @@ typedef struct player_s
    property saveData  {call: Lith_PlayerSaveData(this)}
    property giveScore {call: Lith_GiveScore(this, prop_arg)}
    property takeScore {call: Lith_TakeScore(this, prop_arg)}
+   property log       {call: Lith_Log (this, prop_arg)}
+   property logF      {call: Lith_LogF(this, prop_arg)}
+   property logH      {call: Lith_LogH(this, prop_arg)}
+   property setVel    {call: Lith_SetPlayerVelocity(this, prop_arg)}
+   property useGUI    {call: Lith_PlayerUseGUI(this, prop_arg)}
+   property buttonPressed {call: Lith_ButtonPressed(this, prop_arg)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

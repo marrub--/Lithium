@@ -203,13 +203,13 @@ static void Lith_StupidPickup(player_t *p, int weapon)
    int   flag = pickupfmt[ifmt].flag;
    
    if(flag & 1 && flag & 4)
-      Lith_Log(p, fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
+      p->log(fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
    else if(flag & 1)
-      Lith_Log(p, fmt, names->ptr[iname], names->ptr[iname]);
+      p->log(fmt, names->ptr[iname], names->ptr[iname]);
    else if(flag & 4)
-      Lith_Log(p, fmt, names->ptr[iname], uncertainty[iunc]);
+      p->log(fmt, names->ptr[iname], uncertainty[iunc]);
    else
-      Lith_Log(p, fmt, names->ptr[iname]);
+      p->log(fmt, names->ptr[iname]);
 }
 
 void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
@@ -217,9 +217,9 @@ void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
    if(ACS_GetCVar("lith_sv_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      Lith_Log(p, "> You got the %S!", Language("LITH_TXT_INFO_SHORT_%S", info->name));
+      p->log("> You got the %S!", Language("LITH_TXT_INFO_SHORT_%S", info->name));
    else
-      Lith_Log(p, "> Acquired impossible object");
+      p->log("> Acquired impossible object");
 }
 
 // EOF

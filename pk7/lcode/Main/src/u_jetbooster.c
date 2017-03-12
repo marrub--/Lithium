@@ -30,16 +30,13 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
    
    fixed grounddist = p->z - p->floorz;
    
-   if(ButtonPressed(p, BT_SPEED) && grounddist > 16.0 && UserData.charge >= CHARGE_MAX)
+   if(p->buttonPressed(BT_SPEED) && grounddist > 16.0 && UserData.charge >= CHARGE_MAX)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/rocketboost");
       ACS_GiveInventory("Lith_RocketBooster", 1);
-      Lith_SetPlayerVelocity(p,
-                           p->velx + (cosk(angle) * 16.0),
-                           p->vely + (sink(angle) * 16.0),
-                           10.0, false, true);
+      p->setVel(p->velx + (cosk(angle) * 16.0), p->vely + (sink(angle) * 16.0), 10.0, false, true);
       
       UserData.charge = 0;
       p->upgrades[UPGR_ReflexWetw].UserData_ReflexWetw.leaped = 0;

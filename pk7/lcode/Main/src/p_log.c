@@ -29,9 +29,9 @@ void Lith_LogName(int name)
    
    switch(name)
    {
-#define BOTH(name, str) case name: Lith_Log (p, "%LS", "LITH_TXT_LOG_" str); break;
-#define FULL(name, str) case name: Lith_LogF(p, "%LS", "LITH_TXT_LOG_" str); break;
-#define HUDS(name, str) case name: Lith_LogH(p, "%LS", "LITH_TXT_LOG_" str); break;
+#define BOTH(name, str) case name: p->log ("%LS", "LITH_TXT_LOG_" str); break;
+#define FULL(name, str) case name: p->logF("%LS", "LITH_TXT_LOG_" str); break;
+#define HUDS(name, str) case name: p->logH("%LS", "LITH_TXT_LOG_" str); break;
    BOTH(log_default,     "Default")
    BOTH(log_allmap,      "AllMap")
    HUDS(log_armorbonus,  "ArmorBonus")
@@ -191,7 +191,7 @@ void Lith_PlayerLogEntry(player_t *p)
    int hours   = 14 + (minutes  / 60);
    int days    = 25 + (hours    / 24); // pls
    
-   Lith_LogF(p, "Entered %S at %0.2i:%0.2i:%0.2i %i/7/1649 NE",
+   p->logF("Entered %S at %0.2i:%0.2i:%0.2i %i/7/1649 NE",
       logmap->name, hours % 24, minutes % 60, seconds % 60, days);
 }
 

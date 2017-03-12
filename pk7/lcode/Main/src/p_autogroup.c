@@ -11,6 +11,7 @@
 //
 void Lith_CheckAutoBuy(player_t *p)
 {
+   __str name;
    int total = 0;
    
    for(int i = 0; i < UPGR_MAX; i++)
@@ -18,16 +19,22 @@ void Lith_CheckAutoBuy(player_t *p)
    {
       upgrade_t *upgr = &p->upgrades[i];
       
-      if(upgr->autogroups[j] && p->autobuy[j])
-         if(Lith_UpgrBuy(p, &p->upgrades[i]))
-         {  total++;
-            Lith_UpgrToggle(p, &p->upgrades[i]);}
+      if(upgr->autogroups[j] && p->autobuy[j] && Lith_UpgrBuy(p, upgr))
+      {
+         total++;
+         name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
+         Lith_UpgrToggle(p, upgr);
+      }
    }
    
    if(total)
    {
       ACS_LocalAmbientSound("player/cbi/auto/buy", 127);
-      Lith_Log(p, "> Auto-bought \Cj%i\C- upgrade%S.", total, total != 1 ? "s" : "");
+      
+      if(total != 1)
+         p->log("> Auto-bought \Cj%i\C- upgrades.", total);
+      else
+         p->log("> Auto-bought \Cj%S\C-.", name);
    }
 }
 
@@ -64,10 +71,10 @@ void Lith_KeyBuyAutoGroup(int group)
    else        {color = 'g'; ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);}
    
    if(total)
-      Lith_Log(p, "> Bought \C%c%i/%i\C- upgrade%S in group %S\C-.",
+      p->log("> Bought \C%c%i/%i\C- upgrade%S in group %S\C-.",
          color, success, total, total != 1 ? "s" : "", Lith_AutoGroupNames[group]);
    else
-      Lith_LogH(p, "> No items to buy in group %S\C-.", Lith_AutoGroupNames[group]);
+      p->logH("> No items to buy in group %S\C-.", Lith_AutoGroupNames[group]);
 }
 
 //
@@ -93,12 +100,12 @@ void Lith_KeyToggleAutoGroup(int group)
    if(total)
    {
       ACS_LocalAmbientSound("player/cbi/auto/toggle", 127);
-      Lith_LogH(p, "> Toggled group %S\C-.", Lith_AutoGroupNames[group]);
+      p->logH("> Toggled group %S\C-.", Lith_AutoGroupNames[group]);
    }
    else
    {
       ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);
-      Lith_LogH(p, "> No items to toggle in group %S\C-.", Lith_AutoGroupNames[group]);
+      p->logH("> No items to toggle in group %S\C-.", Lith_AutoGroupNames[group]);
    }
 }
 

@@ -29,7 +29,7 @@ void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
 {
    fixed vel = -2;
    if(p->velz > 0) vel += p->velz;
-   Lith_SetPlayerVelocity(p, p->velx, p->vely, vel, false, true);
+   p->setVel(p->velx, p->vely, vel, false, true);
 }
 
 // EOF

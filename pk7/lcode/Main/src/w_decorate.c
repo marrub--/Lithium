@@ -241,7 +241,7 @@ void Lith_GetSigil()
    ACS_GiveInventory("Lith_TimeHax", 1);
    ACS_GiveInventory("Lith_TimeHax2", 1);
    
-   Lith_SetPlayerVelocity(p, 0.0, 0.0, 0.0, false, true);
+   p->setVel(0.0, 0.0, 0.0, false, true);
    ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
    
    ACS_Delay(3);

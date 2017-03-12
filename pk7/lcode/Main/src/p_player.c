@@ -242,7 +242,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    
    //
    if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
-      Lith_Log(p, "> You gained brouzouf.");
+      p->log("> You gained brouzouf.");
    
    if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0)
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
@@ -255,7 +255,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    
    // Log score
    if(Lith_GetPCVarInt(p, "lith_player_scorelog"))
-      Lith_LogH(p, "> +\Cj%lli\Cnscr", score);
+      p->logH("> +\Cj%lli\Cnscr", score);
 }
 
 //

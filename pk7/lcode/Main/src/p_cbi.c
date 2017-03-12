@@ -173,7 +173,7 @@ void Lith_PlayerUpdateCBI(player_t *p)
    DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.7);
    
    if(Lith_GUI_Button(g, .x = 296, 13, .preset = &btnexit))
-      Lith_PlayerUseGUI(p, GUI_CBI);
+      p->useGUI(GUI_CBI);
    
    static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Statistics", "Settings", "Log"};
    for(int i = 0; i < cbi_tab_max; i++)
@@ -231,7 +231,7 @@ void Lith_KeyOpenCBI(void)
    p->bip.curpage     = null;
    p->bip.curpagenum  = -1;
    
-   Lith_PlayerUseGUI(p, GUI_CBI);
+   p->useGUI(GUI_CBI);
 }
 
 // EOF

@@ -74,7 +74,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
          ACS_PlaySound(0, "player/slide");
-         Lith_SetPlayerVelocity(p, p->velx + (cosk(angle) * 32.0), p->vely + (sink(angle) * 32.0), 0, false, true);
+         p->setVel(p->velx + (cosk(angle) * 32.0), p->vely + (sink(angle) * 32.0), 0, false, true);
          
          DOOOOODGE(p);
          
@@ -82,14 +82,14 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
       }
    }
    
-   if(ButtonPressed(p, BT_JUMP) &&
+   if(p->buttonPressed(BT_JUMP) &&
       !ACS_CheckInventory("Lith_RocketBooster") && !UserData.leaped &&
       ((grounddist <= 16.0 && UserData.charge < CHARGE_MAX) || grounddist > 16.0))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
-      Lith_SetPlayerVelocity(p, p->velx + (cosk(angle) * 4.0), p->vely + (sink(angle) * 4.0), 12.0, false, true);
+      p->setVel(p->velx + (cosk(angle) * 4.0), p->vely + (sink(angle) * 4.0), 12.0, false, true);
       
       UserData.leaped = 1;
    }

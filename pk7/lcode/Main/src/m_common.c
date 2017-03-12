@@ -9,26 +9,6 @@
 //
 
 //
-// ButtonPressed
-//
-bool ButtonPressed(player_t *p, int bt)
-{
-   return p->buttons & bt && !(p->old.buttons & bt);
-}
-
-//
-// ButtonPressedUI
-//
-// In world stuff, generally it's expected that something is pressed when
-// you hit the button, immediately.  However, with UIs, generally we expect
-// things to be clicked when the button is released.
-//
-bool ButtonPressedUI(player_t *p, int bt)
-{
-   return !(p->buttons & bt) && p->old.buttons & bt;
-}
-
-//
 // RandomFloat
 //
 float RandomFloat(float max, float min)
@@ -232,19 +212,6 @@ __str Language(__str fmt, ...)
    }
    
    return ret;
-}
-
-//
-// Lith_SetPlayerVelocity
-//
-bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob)
-{
-   if(add)
-      p->velx += velx, p->vely += vely, p->velz += velz;
-   else
-      p->velx = velx, p->vely = vely, p->velz = velz;
-   
-   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
 }
 
 //

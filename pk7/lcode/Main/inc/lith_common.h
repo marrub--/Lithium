@@ -117,11 +117,7 @@ void PrintBold(__str fmt, ...);
 
 // Utilities
 __str StrUpper(__str in);
-bool ButtonPressed(struct player_s *p, int bt);
-bool ButtonPressedUI(struct player_s *p, int bt);
 unsigned StrHash(char __str_ars const *s);
-[[__optional_args(2)]]
-bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 int Lith_CheckActorInventory(int tid, __str item);

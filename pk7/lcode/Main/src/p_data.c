@@ -15,6 +15,27 @@ static void Lith_GetArmorType(player_t *p);
 //
 
 //
+// Lith_ButtonPressed
+//
+bool Lith_ButtonPressed(player_t *p, int bt)
+{
+   return p->buttons & bt && !(p->old.buttons & bt);
+}
+
+//
+// Lith_SetPlayerVelocity
+//
+bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob)
+{
+   if(add)
+      p->velx += velx, p->vely += vely, p->velz += velz;
+   else
+      p->velx = velx, p->vely = vely, p->velz = velz;
+   
+   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
+}
+
+//
 // Lith_ValidatePlayerTID
 //
 void Lith_ValidatePlayerTID(player_t *p)
@@ -161,12 +182,12 @@ void Lith_ResetPlayer(player_t *p)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      Lith_Log (p, "> Lithium " Lith_Version " :: Compiled %S", __DATE__);
+      p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       
       if(ACS_GetCVar("__lith_debug_on"))
-         Lith_LogH(p, "> player_t is %u bytes long!", sizeof(player_t) * 4);
+         p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
       else
-         Lith_LogH(p, "> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+         p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       
       p->staticinit = true;
    }

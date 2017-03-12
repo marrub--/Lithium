@@ -25,7 +25,7 @@ void Lith_UseGameboy(void)
    if(p->dead)
       return;
    
-   Lith_PlayerUseGUI(p, GUI_GB);
+   p->useGUI(GUI_GB);
 }
 
 [[__call("ScriptS")]]

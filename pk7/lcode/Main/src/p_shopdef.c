@@ -33,7 +33,7 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt)
    if(!Lith_ShopCanBuy(p, def, obj))
       return false;
    
-   Lith_LogF(p, "> Bought %LS", StrParam(namefmt, def->name));
+   p->logF("> Bought %LS", StrParam(namefmt, def->name));
    
    if(def->bipunlock)
       Lith_UnlockBIPPage(&p->bip, def->bipunlock);
