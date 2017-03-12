@@ -33,6 +33,11 @@ void Lith_ValidatePlayerTID(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateData(player_t *p)
 {
+   p->x      = ACS_GetActorX(0);
+   p->y      = ACS_GetActorY(0);
+   p->z      = ACS_GetActorZ(0);
+   p->floorz = ACS_GetActorFloorZ(0);
+
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);
    p->velz = ACS_GetActorVelZ(0);
