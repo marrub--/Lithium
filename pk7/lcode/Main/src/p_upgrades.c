@@ -338,12 +338,11 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    }
    
    __str cost = "---";
-   int   yofs = 0;
    
    if(upgr->info->cost)
       cost = StrParam("%S%S", Lith_ScoreSep(Lith_ShopGetCost(p, &upgr->info->shopdef)), mark);
    
-   ACS_SetHudClipRect(111, 30, 184, 150, 184);
+   ACS_SetHudClipRect(111, 30, 190, 170, 184);
    
    HudMessageF("CBIFONT", "%LS: %S", "LITH_COST", cost);
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
@@ -365,30 +364,34 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       color = after - p->scoremul < 0 ? "\Ca" : "\Cn";
       HudMessageF("CBIFONT", "%LS: \Cj%i\C-%% -> %S%i\C-%%", "LITH_TOTALMULT", ceilk(100.0 * p->scoremul), color, ceilk(100.0 * after));
       HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
-      
-      yofs = 20;
    }
+   
+   HudMessageF("CBIFONT", "Effect: %S", Language("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name));
+   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 70.1, TICSECOND);
+   
+   HudMessageF("CBIFONT", "----------------------------------------------");
+   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_GREEN, 111.1, 100.1, TICSECOND);
    
    if(sel != UPGR_UNCEUNCE)
       HudMessageF        ("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    else
       HudMessageRainbowsF("CBIFONT", "%S", Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
    
-   HudMessagePlain(g->hid--, 111.1, 50.1 + yofs, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 110.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
-   if(Lith_GUI_Button(g, "Buy", 259, 170, !Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr)))
+   if(Lith_GUI_Button(g, "Buy", 111, 205, !Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr);
    
-   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 209, 170, !upgr->owned))
+   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->owned))
       Lith_UpgrToggle(p, upgr);
    
    HudMessageF("CNFONT", "Auto-Groups");
-   HudMessagePlain(g->hid--, 200.0, 195, TICSECOND);
+   HudMessagePlain(g->hid--, 255, 205, TICSECOND);
    
    for(int i = 0; i < NUMAUTOGROUPS; i++)
-      if(Lith_GUI_Checkbox_Id(g, i, upgr->autogroups[i], 170 + (i * 20), 210, Lith_AutoGroupNames[i]))
+      if(Lith_GUI_Checkbox_Id(g, i, upgr->autogroups[i], 225 + (i * 20), 215, Lith_AutoGroupNames[i]))
       {
          upgr->autogroups[i] = !upgr->autogroups[i];
          p->saveData();
