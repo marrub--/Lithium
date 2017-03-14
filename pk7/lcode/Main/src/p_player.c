@@ -158,10 +158,10 @@ static void Lith_PlayerDisconnect(void)
    
    Lith_DeallocateBIP(&p->bip);
    
-   Lith_ListFree(&p->loginfo.hud);
-   Lith_ListFree(&p->hudstrlist,   free);
-   Lith_ListFree(&p->loginfo.full, free);
-   Lith_ListFree(&p->loginfo.maps, free);
+   p->loginfo.hud.free();
+   p->hudstrlist.free(free);
+   p->loginfo.full.free(free);
+   p->loginfo.maps.free(free);
    
    memset(p, 0, sizeof(player_t));
 }
@@ -218,7 +218,7 @@ score_t Lith_GetModScore(player_t *p, score_t score, bool nomul)
    if(!nomul)
       score *= p->scoremul;
    
-   return score * globalscoremul;
+   return score * world.scoremul;
 }
 
 //

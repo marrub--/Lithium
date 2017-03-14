@@ -1,7 +1,3 @@
-##
-## Definitions
-##
-
 ## Compiler
 
 CC=gdcc-cc
@@ -10,16 +6,19 @@ MAKELIB=gdcc-makelib
 
 ## Directories
 
-BIN=../../acs
-SRC=src
-INC=inc
+BIN=../acs
+SRC=Main/src
+INC=Main/inc
 IR=bin
+
+LITHOS_SRC=LithOS3/lithos_c/src
+LITHOS_INC=LithOS3/lithos_c/inc
 
 ## Compiler flags
 
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET) -iinc -Dnull=NULL
+CFLAGS=$(TARGET) -i$(LITHOS_INC)
 ALLOCMIN=--alloc-min Sta ""
 
 ## Sources
@@ -69,19 +68,14 @@ MAIN_SOURCES= \
 	$(SRC)/g_checkbox.c \
 	$(SRC)/g_preset.c \
 	$(SRC)/g_scrollbar.c \
-	$(SRC)/g_slider.c \
-	$(SRC)/stdlib.c \
-	$(SRC)/token.c \
-	$(SRC)/tokenstream.c \
-	$(SRC)/manifest.c
+	$(SRC)/g_slider.c
 
-## Output
+MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
+MAIN_HEADERS=$(wildcard $(INC)/*.h)
 
-MAIN_OUTPUT=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
-
-##
-## Rules
-##
+LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
+LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
+LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(IR)/lithos_%.ir)
 
 ## all
 
@@ -92,15 +86,16 @@ all: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
 $(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
 	$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
 
-$(BIN)/lithmain.bin: $(MAIN_OUTPUT)
+$(BIN)/lithmain.bin: $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
 	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
 
 ## ir/*.ir
 
-$(IR)/%.ir: $(SRC)/%.c $(wildcard $(INC)/*.h)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(IR)/%.ir: $(SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
+	$(CC) $(CFLAGS) -i$(INC) -Dnull=NULL -c $< -o $@
 
-## ir/lib*.ir
+$(IR)/lithos_%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(IR)/libc.ir:
 	$(MAKELIB) $(TARGET) -c libc -o $@

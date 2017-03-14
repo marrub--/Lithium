@@ -180,7 +180,7 @@ __str Lith_RandomName(int id)
    __str ret = "";
    
    if(id)
-      srand(mapseed + id);
+      srand(world.mapseed + id);
    else
       srand(ACS_Random(0, 0x7FFFFFFF));
    

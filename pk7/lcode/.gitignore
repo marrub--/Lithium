@@ -1,4 +1,2 @@
-Balance/compile.bat
-Main/bin/**
-Main/compile.bat
+bin/**
 compile.bat

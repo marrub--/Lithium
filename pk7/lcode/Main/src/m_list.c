@@ -59,12 +59,12 @@ void Lith_ListFree(list_t *head, void (*deleter)(void *))
       while(head->next != head)
       {
          list_t *rover = head->next;
-         Lith_ListUnlink(rover);
+         rover->unlink();
          if(deleter) deleter(rover->object);
       }
    }
    else
-      Lith_LinkDefault(head);
+      head->construct();
 }
 
 // EOF

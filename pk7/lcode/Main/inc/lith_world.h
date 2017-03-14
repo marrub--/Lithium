@@ -28,16 +28,28 @@ typedef struct payoutinfo_s
    int tax;
 } payoutinfo_t;
 
+typedef struct worldinfo_s
+{
+   property mapsecrets {get: ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS)}
+   property mapkills   {get: ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS)}
+   property mapitems   {get: ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS)}
+   property mapnum     {get: ACS_GetLevelInfo(LEVELINFO_LEVELNUM)}
+   property mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
+   property mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
+   
+   int mapseed;
+   
+   int secretsfound;
+   double scoremul;
+} worldinfo_t;
+
 __addrdef extern __mod_arr Lith_MapVariable;
 __addrdef extern __hub_arr Lith_WorldVariable;
 
 extern bool Lith_MapVariable mapinit;
-extern int  Lith_MapVariable mapid;
 
-extern int secretsfound;
+extern worldinfo_t world;
 extern payoutinfo_t payout;
-extern int mapseed;
-extern double globalscoremul;
 
 [[__optional_args(1)]] int Lith_UniqueID(int tid);
 

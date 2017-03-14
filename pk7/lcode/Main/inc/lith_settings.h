@@ -35,11 +35,14 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
    Category("Single-Player")
    ServerBool("Explode on death",       "lith_sv_revenge")
    ServerBool("Stupid pickup messages", "lith_sv_stupidpickups")
+   ServerFloat("Score multiplier (changes on new map)", "lith_sv_scoremul", 0, 10)
+   ServerBool("Are you serious?",       "lith_sv_seriousmode")
 }
 
 #undef Category
 #undef Bool
 #undef ServerBool
+#undef ServerFloat
 #undef Float
 #undef Int
 #undef Enum

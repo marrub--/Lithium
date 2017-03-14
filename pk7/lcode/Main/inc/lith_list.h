@@ -1,6 +1,8 @@
 #ifndef LITH_LIST_H
 #define LITH_LIST_H
 
+#include "lith_common.h"
+
 #include <stddef.h>
 
 #define Lith_ForList(var, name) \
@@ -10,6 +12,17 @@
 #define Lith_ForListIter(var, name, ...) \
    for(list_t *rover = (name).next; rover != &(name); rover = rover->next, __VA_ARGS__) \
       __with(var = rover->object;)
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+[[__optional_args(1)]] void Lith_LinkDefault(struct list_s *list, void *object);
+void Lith_ListLink(struct list_s *head, struct list_s *list);
+void *Lith_ListUnlink(struct list_s *list);
+size_t Lith_ListSize(struct list_s *head);
+[[__optional_args(1)]] void Lith_ListFree(struct list_s *head, void (*deleter)(void *));
 
 
 //----------------------------------------------------------------------------
@@ -32,20 +45,15 @@
 
 typedef struct list_s
 {
+   property construct {call: Lith_LinkDefault(this)}
+   property link      {call: Lith_ListLink(prop_arg, this)}
+   property unlink    {call: Lith_ListUnlink(this)}
+   property size      {get:  Lith_ListSize(this)}
+   property free      {call: Lith_ListFree(this)}
+   
    void *object;
    struct list_s *prev, *next;
 } list_t;
-
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
-
-[[__optional_args(1)]] void Lith_LinkDefault(list_t *list, void *object);
-void Lith_ListLink(list_t *head, list_t *list);
-void *Lith_ListUnlink(list_t *list);
-size_t Lith_ListSize(list_t *head);
-[[__optional_args(1)]] void Lith_ListFree(list_t *head, void (*deleter)(void *));
 
 #endif
 

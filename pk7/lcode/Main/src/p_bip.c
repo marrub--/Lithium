@@ -25,8 +25,8 @@ static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unl
                page->category = categ;
                page->unlocked = false;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
-   Lith_LinkDefault(&page->link, page);
-   Lith_ListLink(&bip->infogr[categ], &page->link);
+   page->link.construct(page);
+   page->link.link(&bip->infogr[categ]);
 }
 
 
@@ -43,7 +43,7 @@ void Lith_PlayerInitBIP(player_t *p)
    bip_t *bip = &p->bip;
    
    ForCategory()
-      Lith_LinkDefault(&bip->infogr[categ]);
+      bip->infogr[categ].construct();
    
    // This could be done a lot better with an array or something, but fuck it.
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
@@ -113,7 +113,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
    ForCategory()
-      bip->pagemax += bip->categorymax[categ] = Lith_ListSize(&bip->infogr[categ]);
+      bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;
    
    if(ACS_GetCVar("__lith_debug_on"))
    {
@@ -162,7 +162,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
 void Lith_DeallocateBIP(bip_t *bip)
 {
    ForCategory()
-      Lith_ListFree(&bip->infogr[categ], free);
+      bip->infogr[categ].free(free);
 }
 
 //
@@ -208,7 +208,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    else
    {
       list_t *list = &bip->infogr[bip->curcategory];
-      size_t n = Lith_ListSize(list);
+      size_t n = list->size;
       size_t i = 0;
       
       Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 170, btnlist.h * n);

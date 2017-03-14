@@ -104,16 +104,14 @@ void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
    Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(c"Upgrades.lthm");
    
    if(!rsrc)
-   {
-      Lth_ResourceMapDestroy(rsrc);
       return;
-   }
    
    for(int i = 0; i < UPGR_MAX; i++)
    {
-      __str  name     = upgradeinfo[i].name;
-      int   *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
-      fixed *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
+      __str name = upgradeinfo[i].name;
+      
+      int   const *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
+      fixed const *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
       if(cost)     upgradeinfo_mut[i].cost     = *cost;
       if(scoreadd) upgradeinfo_mut[i].scoreadd = *scoreadd;
    }

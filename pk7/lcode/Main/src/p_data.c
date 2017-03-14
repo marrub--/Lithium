@@ -143,10 +143,10 @@ void Lith_ResetPlayer(player_t *p)
    if(!p->discount)   p->discount   = 1.0;
    
    // Any linked lists on the player need to be initialized here.
-   Lith_ListFree(&p->loginfo.hud);
-   Lith_ListFree(&p->hudstrlist, free);
-   if(!p->loginfo.full.next) Lith_LinkDefault(&p->loginfo.full);
-   if(!p->loginfo.maps.next) Lith_LinkDefault(&p->loginfo.maps);
+   p->loginfo.hud.free();
+   p->hudstrlist.free(free);
+   if(!p->loginfo.full.next) p->loginfo.full.construct();
+   if(!p->loginfo.maps.next) p->loginfo.maps.construct();
    
    // pls not exit map with murder thingies out
    // is bad practice

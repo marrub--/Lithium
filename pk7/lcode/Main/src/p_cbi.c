@@ -46,6 +46,7 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Category(...) y += 20;
 #define Bool(...) y += 10;
 #define ServerBool(...) y += 10;
+#define ServerFloat(...) y += 10;
 #define Float(...) y += 10;
 #define Int(...) y += 10;
 #define Enum(...) y += 10;
@@ -80,6 +81,15 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
       Label(label); \
       if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - btnlist.w, y, .preset = &btnlist)) \
          ACS_SetCVar(cvar, !on); \
+      y += 10; \
+   }
+
+#define ServerFloat(label, cvar, minima, maxima) \
+   __with(double set = ACS_GetCVarFixed(cvar), diff;) \
+   { \
+      Label(label); \
+      if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
+         ACS_SetCVarFixed(cvar, set + diff); \
       y += 10; \
    }
 
@@ -143,7 +153,7 @@ static void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    Stat(4,  "Score Sum",         "%lli", p->scoresum);
    Stat(5,  "Armor Used",        "%li",  p->armorused);
    Stat(6,  "Armor Sum",         "%li",  p->armorsum);
-   Stat(7,  "Secrets Found",     "%i",   secretsfound);
+   Stat(7,  "Secrets Found",     "%i",   world.secretsfound);
    Stat(8,  "Units Travelled",   "%i",   p->unitstravelled);
 // Stat(9,  "Enemies Defeated",  "%i",   0);
 // Stat(10, "Bosses Defeated",   "%i",   0);

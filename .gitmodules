@@ -1,0 +1,3 @@
+[submodule "pk7/lcode/LithOS3"]
+	path = pk7/lcode/LithOS3
+	url = https://github.com/Project-Golan/LithOS3

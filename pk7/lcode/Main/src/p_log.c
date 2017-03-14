@@ -3,6 +3,7 @@
 #include "lith_player.h"
 #include "lith_list.h"
 #include "lith_hudid.h"
+#include "lith_world.h"
 
 #include <stdio.h>
 
@@ -74,11 +75,11 @@ void Lith_Log(player_t *p, __str fmt, ...)
    va_end(vl);
    
    logdata->time = LOG_TIME;
-   Lith_ListLink(&p->loginfo.hud, &logdata->link);
-   Lith_ListLink(&p->loginfo.full, &logdata->linkfull);
+   logdata->link    .link(&p->loginfo.hud);
+   logdata->linkfull.link(&p->loginfo.full);
    
-   if(Lith_ListSize(&p->loginfo.hud) > LOG_MAX)
-      free(Lith_ListUnlink(p->loginfo.hud.next));
+   if(p->loginfo.hud.size > LOG_MAX)
+      free(p->loginfo.hud.next->unlink());
 }
 
 //
@@ -92,7 +93,7 @@ void Lith_LogF(player_t *p, __str fmt, ...)
    logdata_t *logdata = Lith_LogV(p, fmt, vl);
    va_end(vl);
    
-   Lith_ListLink(&p->loginfo.full, &logdata->linkfull);
+   logdata->linkfull.link(&p->loginfo.full);
 }
 
 //
@@ -107,10 +108,10 @@ void Lith_LogH(player_t *p, __str fmt, ...)
    va_end(vl);
    
    logdata->time = LOG_TIME;
-   Lith_ListLink(&p->loginfo.hud, &logdata->link);
+   logdata->link.link(&p->loginfo.hud);
    
-   if(Lith_ListSize(&p->loginfo.hud) > LOG_MAX)
-      free(Lith_ListUnlink(p->loginfo.hud.next));
+   if(p->loginfo.hud.size > LOG_MAX)
+      free(p->loginfo.hud.next->unlink());
 }
 
 //
@@ -119,14 +120,14 @@ void Lith_LogH(player_t *p, __str fmt, ...)
 logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
 {
    logdata_t *logdata = calloc(1, sizeof(logdata_t));
-   Lith_LinkDefault(&logdata->link, logdata);
-   Lith_LinkDefault(&logdata->linkfull, logdata);
+   logdata->link    .construct(logdata);
+   logdata->linkfull.construct(logdata);
    
    ACS_BeginPrint();
    __vnprintf_str(fmt, vl);
    
    logdata->info = ACS_EndStrParam();
-   logdata->from = ACS_GetLevelInfo(LEVELINFO_LEVELNUM);
+   logdata->from = world.mapnum;
    
    return logdata;
 }
@@ -144,7 +145,7 @@ void Lith_PlayerUpdateLog(player_t *p)
       if(logdata->time == 0)
       {
          list_t *next = rover->next;
-         Lith_ListUnlink(rover);
+         rover->unlink();
          rover = next;
       }
       else
@@ -179,12 +180,12 @@ void Lith_HUD_Log(player_t *p)
 void Lith_PlayerLogEntry(player_t *p)
 {
    logmap_t *logmap = calloc(1, sizeof(logmap_t));
-   Lith_LinkDefault(&logmap->link, logmap);
+   logmap->link.construct(logmap);
    
-   logmap->levelnum = ACS_GetLevelInfo(LEVELINFO_LEVELNUM);
+   logmap->levelnum = world.mapnum;
    logmap->name = StrParam("%tS", PRINTNAME_LEVELNAME); // :|
    
-   Lith_ListLink(&p->loginfo.maps, &logmap->link);
+   logmap->link.link(&p->loginfo.maps);
    
    int seconds = 53 + (p->ticks / 35);
    int minutes = 30 + (seconds  / 60);

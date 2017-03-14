@@ -2,6 +2,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+#include <math.h>
+
 
 //----------------------------------------------------------------------------
 // Static Objects
@@ -21,10 +23,8 @@ __addrdef __hub_arr Lith_WorldVariable;
 bool Lith_MapVariable mapinit;
 int  Lith_MapVariable mapid;
 
-int secretsfound;
+worldinfo_t world;
 payoutinfo_t payout;
-int mapseed;
-double globalscoremul;
 
 
 //----------------------------------------------------------------------------
@@ -193,6 +193,18 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
    }
 }
 
+//
+// Lith_MakeSerious
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_MakeSerious()
+{
+   ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+   ACS_SetActorPropertyString(0, APROP_ActiveSound, "silence");
+   ACS_SetActorPropertyString(0, APROP_DeathSound,  "silence");
+   ACS_SetActorPropertyString(0, APROP_PainSound,   "silence");
+}
+
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -226,15 +238,22 @@ static void Lith_World(void)
       gsinit = true;
    }
    
-   // Init a random seed for the map.
-   mapseed = ACS_Random(0, 0x7FFFFFFF);
+   // Init a random seed from the map.
+   world.mapseed = ACS_Random(0, 0x7FFFFFFF);
    
    // Init global score multiplier per-map.
-   globalscoremul = ACS_GetCVarFixed("lith_sv_scoremul");
+   world.scoremul = round(ACS_GetCVarFixed("lith_sv_scoremul") * 100) / 100;
+   
+   // Seriously?
+   if(ACS_GetCVar("lith_sv_seriousmode"))
+   {
+      world.scoremul += 15;
+      ACS_SpawnForced("Lith_SeriousEmitter", 0, 0, 0);
+   }
    
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)
-      globalscoremul += 0.15;
+      world.scoremul += 0.15;
    
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
@@ -253,27 +272,27 @@ static void Lith_World(void)
          Lith_DoPayout();
    }
    
-   payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
-   payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+   payout.killmax += world.mapkillmax;
+   payout.itemmax += world.mapitemmax;
    
    firstmap = false;
    
    // Now we just check for things being gained so players get proper score.
-   int prevsecrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
-   int prevkills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
-   int previtems   = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
+   int prevsecrets = world.mapsecrets;
+   int prevkills   = world.mapkills;
+   int previtems   = world.mapitems;
    
    for(;;)
    {
-      int secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
-      int kills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
-      int items   = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
+      int secrets = world.mapsecrets;
+      int kills   = world.mapkills;
+      int items   = world.mapitems;
       
       if(secrets > prevsecrets)
       {
          int delta = secrets - prevsecrets;
          Lith_GiveAllScore(9000 * delta, true);
-         secretsfound += delta;
+         world.secretsfound += delta;
       }
       
       if(kills > prevkills) payout.killnum += kills - prevkills;
