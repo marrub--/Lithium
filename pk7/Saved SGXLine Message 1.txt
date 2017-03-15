@@ -38,6 +38,12 @@ you have been sent these five weapons:
 >  expensive and dangerous piece of equipment, but you must have been sent
 >  this artifact for the purpose of destroying *something*.
 
+6. A KSKK Utsu-denka-sou assault bracelet.
+>  A weapon that may prove useful against weak and strong enemies alike, it's
+>  been sent to an unknown location, unfortunately. Don't be tricked by the
+>  appearance of it. Even if it just looks like a fancy bracelet, it is capable
+>  of outputting several tons of weight out your fist.
+
 You will also be able to purchase the weapons you designated, in your words,
 as "must-have" in the Shop.  I warn you that these weapons may not be as
 effective as you think; we spent quite a lot of time making sure that the

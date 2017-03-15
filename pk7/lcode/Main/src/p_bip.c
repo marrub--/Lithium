@@ -46,7 +46,7 @@ void Lith_PlayerInitBIP(player_t *p)
       bip->infogr[categ].construct();
    
    // This could be done a lot better with an array or something, but fuck it.
-   AddToBIP(bip, BIPC_WEAPONS, "ChargeFist");
+   AddToBIP(bip, BIPC_WEAPONS, "ChargeFist",      Unlocks("KSKK"));
    AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
    AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
    AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));

@@ -3,6 +3,11 @@
 LITH_TXT_INFO_SHORT_Gameboy = "Game Nanhai";
 
 LITH_TXT_INFO_SHORT_ChargeFist = "Charge Fist";
+LITH_TXT_INFO_TITLE_ChargeFist = "Utsu Denkasou Assault Bracelet";
+LITH_TXT_INFO_DESCR_ChargeFist =
+   "A powerful melee weapon which attaches to your left wrist. Uses energy "
+   "from your cybernetic power source to condense weight and force into "
+   "super-destructive punches.";
 
 LITH_TXT_INFO_SHORT_Pistol = "Pistol";
 LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
@@ -136,8 +141,17 @@ LITH_TXT_INFO_DESCR_LauncherUpgr =
    "their rocket casings.";
 
 LITH_TXT_INFO_SHORT_MissileLauncher = "Missile Launcher";
-LITH_TXT_INFO_TITLE_MissileLauncher = "";
-LITH_TXT_INFO_DESCR_MissileLauncher = "";
+LITH_TXT_INFO_TITLE_MissileLauncher = "X-400 Lance-missiles";
+LITH_TXT_INFO_DESCR_MissileLauncher =
+   "Have you ever wanted a weapon that fires 2,100 missiles a minute? Don't "
+   "lie to me, I know you have. This weapon delivers.\n\n"
+   "The miniature missiles the X-400 launches are medium-yield, they won't "
+   "hit as hard as your regular fare but they will pack quite a punch with "
+   "the rate you can put them out.\n\n"
+   "Has an internal revolving chamber that holds 30 rockets, fired in trios "
+   "as the cylinder revolves. New ammunition can be loaded by shoving it "
+   "carefully into the underside of the gun, similar to a shotgun, thanks "
+   "to a convenient automatic rotation as it detects newly loaded missiles.";
 
 LITH_TXT_INFO_SHORT_PlasmaRifle = "Plasma Rifle";
 LITH_TXT_INFO_TITLE_PlasmaRifle = "AllPoint 68-n Plasma Rifle";
