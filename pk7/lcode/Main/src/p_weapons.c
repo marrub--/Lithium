@@ -7,13 +7,6 @@
 
 
 //----------------------------------------------------------------------------
-// Extern Functions
-//
-
-void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
-
-
-//----------------------------------------------------------------------------
 // Extern Objects
 //
 
@@ -21,6 +14,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 // {S, "Type-----------", Cost----, "Pickup Sound-----------", AT_Type,  "Ammo Class------------"},
    {0, null,              "MMMMHMHMMMHMMM"},
    {1, "Fist",            "MMMMHMHMMMHMMM"},
+   {1, "ChargeFist",      "weapons/cfist/pickup"},
    {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag,  "Lith_PistolShotsFired"},
    {2, "Revolver",        "weapons/revolver/pickup", AT_Mag,  "Lith_RevolverShotsFired"},
    {3, "Shotgun",         "weapons/shotgun/pickup"},
@@ -66,6 +60,8 @@ static void GiveWeaponItem(int parm)
 [[__call("ScriptI"), __address(14242), __extern("ACS")]]
 void Lith_WeaponPickup(int parm, int tid)
 {
+   extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
+   
    player_t *p = LocalPlayer;
    
    if(!ValidateWeapon(parm) || HasWeapon(p, parm))
@@ -164,10 +160,9 @@ void Lith_GSInit_Weapon(void)
 void Lith_PlayerUpdateWeapon(player_t *p)
 {
    weapondata_t *w = &p->weapon;
-   invweapon_t *unknown = &w->inv[weapon_unknown];
    
    // Reset data temporarily.
-   w->cur = unknown;
+   w->cur = null;
    for(int i = 0; i < SLOT_MAX; i++)
       w->slot[i] = false;
    
@@ -191,7 +186,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       }
       
       // Check for currently held weapon.
-      if(w->cur == unknown && ACS_StrICmp(p->weaponclass, info->class) == 0)
+      if(!w->cur && ACS_StrICmp(p->weaponclass, info->class) == 0)
          w->cur = wep;
       
       if(p->upgrades[UPGR_AutoReload].active && wep->owned && wep->ammotype == AT_Mag)
@@ -203,6 +198,8 @@ void Lith_PlayerUpdateWeapon(player_t *p)
          else              wep->autoreload = 0;
       }
    }
+   
+   if(!w->cur) w->cur = &w->inv[weapon_unknown];
 }
 
 // EOF

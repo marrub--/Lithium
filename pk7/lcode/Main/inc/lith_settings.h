@@ -22,6 +22,7 @@ Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear")
 Category("Heads Up Display")
 Bool("Show score",   "lith_hud_showscore")
 Bool("Show weapons", "lith_hud_showweapons")
+Bool("Show log",     "lith_hud_showlog")
 
 Category("Vital Scanner")
 Bool("Slide to target", "lith_scanner_slide")

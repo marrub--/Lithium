@@ -12,7 +12,7 @@
 #define DrawMsg(hid, flags) \
    ( \
       HudMessageF("LOGFONT", "%S", logdata->info), \
-      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|flags, hid, CR_GREEN, 0.1, 262.2 - (10 * i), TICSECOND, 0.1) \
+      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|flags, hid, CR_GREEN, 0.1, 250.2 - (10 * i), TICSECOND, 0.1) \
    )
 
 
@@ -162,15 +162,18 @@ void Lith_PlayerUpdateLog(player_t *p)
 [[__call("ScriptS")]]
 void Lith_HUD_Log(player_t *p)
 {
-   ACS_SetHudSize(480, 300);
-   
-   int i = 0;
-   Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
+   if(Lith_GetPCVarInt(p, "lith_hud_showlog"))
    {
-      DrawMsg(hid_logE + i, HUDMSG_PLAIN);
+      ACS_SetHudSize(480, 300);
       
-      if(logdata->time > LOG_TIME - 10)
-         DrawMsg(hid_logAddE + i, HUDMSG_ADDBLEND);
+      int i = 0;
+      Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
+      {
+         DrawMsg(hid_logE + i, HUDMSG_PLAIN);
+         
+         if(logdata->time > LOG_TIME - 10)
+            DrawMsg(hid_logAddE + i, HUDMSG_ADDBLEND);
+      }
    }
 }
 

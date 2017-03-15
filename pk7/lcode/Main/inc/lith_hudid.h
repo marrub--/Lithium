@@ -105,6 +105,7 @@ enum
    
    hid_ammo,
    hid_ammotype,
+   hid_ammotypebg,
    hid_ammobg,
    hid_riflemode,
    hid_riflemodebg,
@@ -114,12 +115,14 @@ enum
    
    hid_healthhit,
    hid_health,
+   hid_healthtxt,
    hid_healthbg,
    hid_healthbg_fxE,
    hid_healthbg_fxS = hid_healthbg_fxE + 32,
    
    hid_armorhit,
    hid_armor,
+   hid_armortxt,
    hid_armorbg,
    hid_armorbg_fxE,
    hid_armorbg_fxS = hid_armorbg_fxE + 32,

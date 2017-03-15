@@ -54,8 +54,9 @@ void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
    int max = (hid_jetS - hid_jetE) * rocket;
    
    DrawSpriteFade("H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);
-   HudMessageF("SMALLFNT", "J\nE\nT");
-   HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 305.2, 150.2, 0.1, 0.5);
+   
+   HudMessageF("SMALLFNT", "Jet");
+   HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 320.2, 160.1, 0.1, 0.5);
    
    for(int i = 0; i < max; i++)
       DrawSprite(max < 4 ? "H_C2" : "H_C1",

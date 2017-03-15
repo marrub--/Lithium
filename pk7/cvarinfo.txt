@@ -41,6 +41,7 @@ user bool   lith_weapons_riflemodeclear = false;
 // HUD
 user bool   lith_hud_showscore   = true;
 user bool   lith_hud_showweapons = true;
+user bool   lith_hud_showlog     = true;
 
 // Vital Scanner
 user bool   lith_scanner_slide   = true;

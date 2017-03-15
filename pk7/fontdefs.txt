@@ -13,5 +13,31 @@ ALIENFONT
    "9" "lgfx/AlienNumbers/57.png"
 }
 
+LHUDFONTSMALL
+{
+   "1" "lgfx/HUDFontSmall/49.png"
+   "2" "lgfx/HUDFontSmall/50.png"
+   "3" "lgfx/HUDFontSmall/51.png"
+   "4" "lgfx/HUDFontSmall/52.png"
+   "5" "lgfx/HUDFontSmall/53.png"
+   "6" "lgfx/HUDFontSmall/54.png"
+   "7" "lgfx/HUDFontSmall/55.png"
+}
+
+LHUDFONT
+{
+   "/" "lgfx/HUDFont/47.png"
+   "0" "lgfx/HUDFont/48.png"
+   "1" "lgfx/HUDFont/49.png"
+   "2" "lgfx/HUDFont/50.png"
+   "3" "lgfx/HUDFont/51.png"
+   "4" "lgfx/HUDFont/52.png"
+   "5" "lgfx/HUDFont/53.png"
+   "6" "lgfx/HUDFont/54.png"
+   "7" "lgfx/HUDFont/55.png"
+   "8" "lgfx/HUDFont/56.png"
+   "9" "lgfx/HUDFont/57.png"
+}
+
 // EOF
 

@@ -163,7 +163,7 @@ static void HUD_Waves(player_t *p)
    
    // Sine (health)
    pos = (10 + timer) % 160;
-   DrawSpriteFade(StrParam("H_D1%i", frame),
+   DrawSpriteFade(StrParam("lgfx/HUD/H_D1%i.png", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(sink(pos / 32.0) * 7.0, 0),
       25.1 + pos,
@@ -174,7 +174,7 @@ static void HUD_Waves(player_t *p)
       fixed a = cosk(pos / 32.0);
       
       pos = (7 + timer) % 160;
-      DrawSpriteFade(roundk(a, 2) != 0.0 ? "H_D16" : "H_D46",
+      DrawSpriteFade(roundk(a, 2) != 0.0 ? "lgfx/HUD/H_D16.png" : "lgfx/HUD/H_D46.png",
          hid_scope_squareS - pos,
          300.1 + (a >= 0) * 7.0,
          25.1 + pos,
@@ -183,7 +183,7 @@ static void HUD_Waves(player_t *p)
    
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade("H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+   DrawSpriteFade("lgfx/HUD/H_D14.png", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
 
 // EOF
