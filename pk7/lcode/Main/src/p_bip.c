@@ -27,7 +27,7 @@ static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unl
    bippage_t  *page = calloc(1, sizeof(bippage_t));
                page->name     = name;
                page->category = categ;
-               page->unlocked = false;
+               page->unlocked = categ == BIPC_ENEMIES;
    if(ACS_StrCmp(img_l, img_s) != 0)
                page->image    = img_l;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
@@ -75,20 +75,26 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_ENEMIES, "ZombieMan");
    AddToBIP(bip, BIPC_ENEMIES, "ShotgunGuy");
    AddToBIP(bip, BIPC_ENEMIES, "ChaingunGuy");
+   
    AddToBIP(bip, BIPC_ENEMIES, "Imp");
    AddToBIP(bip, BIPC_ENEMIES, "Demon");
+   AddToBIP(bip, BIPC_ENEMIES, "Spectre");
+   
+   AddToBIP(bip, BIPC_ENEMIES, "LostSoul");
+   AddToBIP(bip, BIPC_ENEMIES, "Mancubus");
+   AddToBIP(bip, BIPC_ENEMIES, "Arachnotron");
+   
    AddToBIP(bip, BIPC_ENEMIES, "HellKnight");
    AddToBIP(bip, BIPC_ENEMIES, "BaronOfHell");
-   AddToBIP(bip, BIPC_ENEMIES, "Cyberdemon");
-   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
-   AddToBIP(bip, BIPC_ENEMIES, "SpiderMastermind");
-   AddToBIP(bip, BIPC_ENEMIES, "Arachnotron");
-   AddToBIP(bip, BIPC_ENEMIES, "Archvile");
    AddToBIP(bip, BIPC_ENEMIES, "Revenant");
-   AddToBIP(bip, BIPC_ENEMIES, "Mancubus");
+   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
+   
    AddToBIP(bip, BIPC_ENEMIES, "PainElemental");
-   AddToBIP(bip, BIPC_ENEMIES, "Spectre");
-   AddToBIP(bip, BIPC_ENEMIES, "LostSoul");
+   AddToBIP(bip, BIPC_ENEMIES, "Archvile");
+   AddToBIP(bip, BIPC_ENEMIES, "SpiderMastermind");
+   AddToBIP(bip, BIPC_ENEMIES, "Cyberdemon");
+   
+   AddToBIP(bip, BIPC_ENEMIES, "IconOfSin");
    
    AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp",  Unlocks("OFMD"));
    AddToBIP(bip, BIPC_UPGRADES, "JetBooster",   Unlocks("OFMD"));

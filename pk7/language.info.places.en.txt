@@ -51,6 +51,18 @@ LITH_TXT_INFO_DESCR_Earth =
    "inhabitable planets, but still a large population remains on the blue "
    "planet.";
 
+LITH_TXT_INFO_SHORT_Hell = "Hell";
+LITH_TXT_INFO_TITLE_Hell = "$LITH_TXT_INFO_SHORT_Hell";
+LITH_TXT_INFO_DESCR_Hell =
+   "Wether the Hell found ripping into our dimension is actually from any "
+   "known religion is not known. What is known, however, is that its "
+   "inhabitants seek to destroy and enslave everything they can get their "
+   "hands on.\n\n"
+   "Composed of several ranks, Hell is a dictatorship led by one called "
+   "the Icon of Sin, or Satan by some. The inhabitants of Hell seem to gain "
+   "some kind of energy from suffering and death, possibly an abstract power "
+   "like that previously found on Earth, thousands of years ago.";
+
 LITH_TXT_INFO_SHORT_Mars = "Mars";
 LITH_TXT_INFO_TITLE_Mars = "$LITH_TXT_INFO_SHORT_Mars";
 LITH_TXT_INFO_DESCR_Mars =
