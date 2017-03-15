@@ -190,6 +190,8 @@ weapons/missile/empty     lsounds/MissileLauncher/FireEmpty.flac // 〃
 weapons/missile/reloadout lsounds/MissileLauncher/ReloadOut.flac // 〃
 weapons/missile/reloadin  lsounds/MissileLauncher/ReloadIn.flac  // 〃
 weapons/missile/draw      lsounds/MissileLauncher/Draw.flac      // Halo 3, Doom 3
+weapons/missile/explode   lsounds/MissileLauncher/Explode.flac   // ???
+$limit weapons/missile/explode 0
 
 //
 // Plasma Rifle

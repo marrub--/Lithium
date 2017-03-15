@@ -16,8 +16,8 @@ actor Lith_MiniMissile
    Radius 2
    Height 2
    Speed 20
-   Damage 4
-   DeathSound "explosion"
+   Damage 5
+   DeathSound "weapons/missile/explode"
    Species "Lith_Player"
    DamageType "Lith_Shrapnel"
    
