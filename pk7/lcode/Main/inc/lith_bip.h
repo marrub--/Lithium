@@ -34,6 +34,7 @@ typedef __str bip_unlocks_t[MAX_BIP_UNLOCKS];
 typedef struct bippage_s
 {
    __str  name;
+   __str  image;
    int    category;
    bool   unlocked;
    list_t link;

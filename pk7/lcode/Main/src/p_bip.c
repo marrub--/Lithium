@@ -20,10 +20,16 @@
 [[__optional_args(1)]]
 static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
+   __str img_s = StrParam("LITH_TXT_INFO_IMAGE_%S", name);
+   __str img_l = StrParam("%LS", img_s);
+   
+   
    bippage_t  *page = calloc(1, sizeof(bippage_t));
                page->name     = name;
                page->category = categ;
                page->unlocked = false;
+   if(ACS_StrCmp(img_l, img_s) != 0)
+               page->image    = img_l;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
@@ -243,8 +249,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          
          ACS_SetHudClipRect(111, 40, 184, 180, 184);
          
-         if(bip->curcategory == BIPC_CORPORATIONS)
-            DrawSpriteAlpha(StrParam("lgfx/UI/Corps/%S.png", bip->curpage->name), g->hid--, 296.2, 180.2, TICSECOND, 0.5);
+         if(bip->curpage->image)
+            DrawSpriteAlpha(bip->curpage->image, g->hid--, 296.2, 180.2, TICSECOND, 0.5);
          
          DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
          
