@@ -44,12 +44,11 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    
    Fire:
       "####" A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_OmegaRail), "FireRail")
+      "####" A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_PunctCannon), "FirePunct")
       "####" A 0 A_JumpIfInventory("Lith_CannonAmmo", 1, 1)
       goto FireEmpty
       CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 1, TIF_NOTAKEINFINITE)
       CNNG A 0 A_AlertMonsters
-      //
-      CNNG A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_PunctCannon), "FirePunct")
       goto FireCannonSmall
    
    AltFire:
@@ -166,8 +165,12 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_PunctuatorFire", 0)
       stop
    FirePunct:
-      TNT1 A 0 A_PlaySound("weapons/punct/fire", CHAN_WEAPON)
-      TNT1 A 0 A_JumpIfInventory("Lith_CannonScopedToken", 1, "FirePunct_Scoped")
+      "####" A 0 A_JumpIfInventory("Lith_CannonAmmo", 2, 1)
+      goto FireEmpty
+      CNNG A 0 A_AlertMonsters
+      CNNG A 0 A_TakeInventory("Lith_CannonAmmo", 2, TIF_NOTAKEINFINITE)
+      CNNG A 0 A_PlaySound("weapons/punct/fire", CHAN_WEAPON)
+      CNNG A 0 A_JumpIfInventory("Lith_CannonScopedToken", 1, "FirePunct_Scoped")
       CNNG A 3
       CNNG A 1 bright offset(0, 36)
       CNNG B 1 bright offset(0, 38)
