@@ -53,7 +53,7 @@ actor Lith_Weapon : Weapon
    Inventory.PickupSound ""
    Inventory.PickupMessage ""
    
-   +INVENTORY.UNTOSSABLE
+   +INVENTORY.UNTOSSABLE // This is actually handled correctly but unfortunately fuck you.
    +WEAPON.NOALERT
    +NOTIMEFREEZE // This is needed so you can pick up weapons while time is frozen.
    
