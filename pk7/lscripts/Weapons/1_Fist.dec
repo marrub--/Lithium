@@ -43,7 +43,7 @@ actor Lith_Fist : Lith_Weapon replaces Fist // why would you pick up a fist
    Tag "Knife"
    Weapon.Kickback 100
    Weapon.SlotNumber 1
-   Weapon.SlotPriority 1
+   Weapon.SlotPriority 0.9
    AttackSound "*fist" // there is nothing wrong here MOVE ALONG
    DamageType "Lith_Melee"
    
