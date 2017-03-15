@@ -3,6 +3,7 @@ enum
    weapon_unknown,
    weapon_min,
    weapon_fist = weapon_min,
+   weapon_cfist,
    weapon_pistol,
    weapon_revolver,
    weapon_shotgun,

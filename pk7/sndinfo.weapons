@@ -9,6 +9,25 @@ weapons/knife/hitwall  lsounds/Knife/HitWall.flac // 〃
 $limit weapons/knife/hitflesh 0
 
 //
+// Charge Fist
+//
+weapons/cfist/pickup    lsounds/ChargeFist/Pickup.flac    // Halo 3
+weapons/cfist/fire1     lsounds/ChargeFist/Fire1.flac     // 〃
+weapons/cfist/fire2     lsounds/ChargeFist/Fire2.flac     // 〃
+weapons/cfist/fire3     lsounds/ChargeFist/Fire3.flac     // 〃
+weapons/cfist/ready     lsounds/ChargeFist/Ready.flac     // 〃
+weapons/cfist/charge    lsounds/ChargeFist/Charge.flac    // Fallout 4, Halo 3
+weapons/cfist/chargeend lsounds/ChargeFist/ChargeEnd.flac // Fallout 4
+weapons/cfist/hit       lsounds/ChargeFist/Hit.wav        // Hexen
+weapons/cfist/hitwall   lsounds/ChargeFist/HitWall.wav    // 〃
+
+$random weapons/cfist/fire {
+   weapons/cfist/fire1
+   weapons/cfist/fire2
+   weapons/cfist/fire3
+}
+
+//
 // Pistol
 //
 weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor
@@ -162,6 +181,15 @@ $random weapons/rocket/fire {
    weapons/rocket/fire2
    weapons/rocket/fire3
 }
+
+//
+// Missile Launcher
+//
+weapons/missile/fire      lsounds/MissileLauncher/Fire.flac      // FEAR
+weapons/missile/empty     lsounds/MissileLauncher/FireEmpty.flac // 〃
+weapons/missile/reloadout lsounds/MissileLauncher/ReloadOut.flac // 〃
+weapons/missile/reloadin  lsounds/MissileLauncher/ReloadIn.flac  // 〃
+weapons/missile/draw      lsounds/MissileLauncher/Draw.flac      // Halo 3, Doom 3
 
 //
 // Plasma Rifle

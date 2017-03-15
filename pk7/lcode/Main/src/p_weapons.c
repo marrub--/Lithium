@@ -51,7 +51,7 @@ static void GiveWeaponItem(int parm)
 
 
 //----------------------------------------------------------------------------
-// Scripts
+// Extern Functions
 //
 
 //
@@ -134,10 +134,17 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       return bitsk(P);
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
 //
+// Lith_ChargeFistDamage
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_ChargeFistDamage()
+{
+   int amount = ACS_CheckInventory("Lith_FistCharge");
+   ACS_TakeInventory("Lith_FistCharge", 0x7FFFFFFF);
+   
+   return amount * ACS_Random(1, 3);
+}
 
 //
 // Lith_GSInit_Weapon

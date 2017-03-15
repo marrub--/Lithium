@@ -31,6 +31,7 @@
 #include "lscripts/Weapons/0_Base.dec"
 
 #include "lscripts/Weapons/1_Fist.dec"
+#include "lscripts/Weapons/1_ChargeFist.dec"
 
 #include "lscripts/Weapons/2_Pistol.dec"
 #include "lscripts/Weapons/2_Revolver.dec"

@@ -21,6 +21,12 @@ static __str names_unknown[] = {
    "Why Are You Doing This"
 };
 
+static __str names_cfist[] = {
+   "Chaaji Fisuto",
+   "Charred Fist",
+   "Charged Mr. Fisto"
+};
+
 static __str names_pistol[] = {
    "Postil",
    "Peestol",
@@ -85,6 +91,7 @@ static __str names_bfg[] = {
 static struct pickupname_s const pickupnames[weapon_max] = {
    [weapon_unknown]  = name(names_unknown),
    [weapon_fist]     = name(names_unknown),
+   [weapon_cfist]    = name(names_cfist),
    [weapon_pistol]   = name(names_pistol),
    [weapon_revolver] = name(names_revolver),
    [weapon_shotgun]  = name(names_shotgun),
@@ -128,7 +135,7 @@ static struct pickupfmt_s const pickupfmt[] = {
    0, "\Cg%S. Finally.",
    4, "The %S. %S",
    0, "I don't know about you, but I quite like the %S. I'll pick it up for you.",
-   0, "...\nHuh? You do something? I wasn't paying attention.",
+   0, "...Huh? You do something? I wasn't paying attention.",
    1, "The %S. It is very much a %S.",
    0, "%S, desu.",
    0, "?? ??? ???? ?? ????????? ???? ??",
@@ -140,12 +147,33 @@ static struct pickupfmt_s const pickupfmt[] = {
    2, "aeiou",
    0, "What is a man? A miserable pile of %Ss!",
    0, "The %S was delicious.",
-   0, "There's plenty of %Ss in the sea, but you're the only one for me.",
+   1, "There's plenty of %Ss in the sea, but you're the only %S for me.",
    0, "Disassembled the %S and reassembled it into your inventory.",
    0, "The %S is keepin' it real, as usual.",
    0, "The %S finds you agreeable, and lets you pick it up.",
    0, "You have attained true %S.",
    2, "DRUGS",
+   0, ">%S >2012",
+   0, "TNT1 A 0 A_TakeInventory(\"%S\", 1)",
+   0, "kono %S toiu yatu ha kirei ze",
+   0, "Super rare %S acquired!",
+   0, "Sacked the %S!",
+   0, "The %S is your new waifu.",
+   0, "The %S is grateful for your presence.",
+   0, "The %S appears to be emitting hatred.",
+   0, "[%S intensifies]",
+   0, "Ah, yes, the %S.",
+   0, "Wait, the %S is resonating!",
+   0, "Oh, I guess it's an %S.",
+   0, "THIS IS SOME KIND OF %S",
+   0, "A perfectly preportioned, rare breed of %S appears. "
+      "Its natural predator, the Doomguy, picks it up.",
+   0, "O-Doom chan, what are we going to do to the demons? BOOM~",
+   0, "%S version 7.0 installed.",
+   0, "Hazardous %S contained.",
+   0, "Warning: Dangerous %S levels detected.",
+   0, "Oh, yeah, I'm *sure* the %S will help.",
+   0, "YOU WOULDN'T DOWNLOAD A %S",
    2, "What the fuck did you just fucking say about %S, you little bitch?\n"
       "I'll have you know I graduated top of my class in the Navy Seals,\n"
       "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"

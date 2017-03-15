@@ -2,6 +2,8 @@
 
 LITH_TXT_INFO_SHORT_Gameboy = "Game Nanhai";
 
+LITH_TXT_INFO_SHORT_ChargeFist = "Charge Fist";
+
 LITH_TXT_INFO_SHORT_Pistol = "Pistol";
 LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
 LITH_TXT_INFO_DESCR_Pistol =
