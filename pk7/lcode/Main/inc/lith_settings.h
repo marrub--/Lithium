@@ -23,6 +23,7 @@ Category("Heads Up Display")
 Bool("Show score",   "lith_hud_showscore")
 Bool("Show weapons", "lith_hud_showweapons")
 Bool("Show log",     "lith_hud_showlog")
+Bool("Draw log from top of screen", "lith_hud_logfromtop")
 Bool("Draw reactive armor indicator", "lith_hud_showarmorind")
 
 Category("Vital Scanner")

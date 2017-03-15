@@ -9,12 +9,6 @@
 
 #define LOG_TIME 140
 
-#define DrawMsg(hid, flags) \
-   ( \
-      HudMessageF("LOGFONT", "%S", logdata->info), \
-      HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|flags, hid, CR_GREEN, 0.1, 250.2 - (10 * i), TICSECOND, 0.1) \
-   )
-
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -169,10 +163,20 @@ void Lith_HUD_Log(player_t *p)
       int i = 0;
       Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
       {
-         DrawMsg(hid_logE + i, HUDMSG_PLAIN);
+         int const flags = HUDMSG_NOWRAP | HUDMSG_FADEOUT;
+         fixed y;
+         
+         if(Lith_GetPCVarInt(p, "lith_hud_logfromtop")) y =  20.1 + (10 * i);
+         else                                           y = 250.2 - (10 * i);
+         
+         HudMessageF("LOGFONT", "%S", logdata->info);
+         HudMessageParams(flags, hid_logE + i, CR_GREEN, 0.1, y, TICSECOND, 0.1);
          
          if(logdata->time > LOG_TIME - 10)
-            DrawMsg(hid_logAddE + i, HUDMSG_ADDBLEND);
+         {
+            HudMessageF("LOGFONT", "%S", logdata->info);
+            HudMessageParams(flags | HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, y, TICSECOND, 0.1);
+         }
       }
    }
 }
