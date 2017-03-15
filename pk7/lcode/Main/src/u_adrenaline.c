@@ -51,6 +51,8 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
       ACS_Delay(36);
       ACS_TakeInventory("Lith_TimeHax2", 1);
    }
+   
+   ACS_TakeInventory("Lith_AdrenalineToken", 1);
 }
 
 // EOF
