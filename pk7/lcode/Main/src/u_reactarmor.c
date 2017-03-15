@@ -4,6 +4,22 @@
 
 
 //----------------------------------------------------------------------------
+// Static Objects
+//
+
+static struct {__str abbr, full;} const ArmorNames[] = {
+   "BUL", "Bullets",
+   "ENE", "Energy",
+   "FIR", "Fire",
+   "XMG", "FireMagic",
+   "MAG", "Magic",
+   "MEL", "Melee",
+   "SHR", "Shrapnel",
+   "ICE", "Ice",
+};
+
+
+//----------------------------------------------------------------------------
 // Static Functions
 //
 
@@ -47,26 +63,16 @@ void Lith_RA_Give(int num)
    if(!upgr->active)
       return;
    
-   __str name;
-   
-   switch(num)
+   if(UserData.activearmor != num + 1)
    {
-   case 1: name = "Bullets";   break;
-   case 2: name = "Energy";    break;
-   case 3: name = "Fire";      break;
-   case 4: name = "FireMagic"; break;
-   case 5: name = "Magic";     break;
-   case 6: name = "Melee";     break;
-   case 7: name = "Shrapnel";  break;
-   case 8: name = "Ice";       break;
-   }
-   
-   if(UserData.activearmor != num)
-   {
-      UserData.activearmor = num;
+      __str name = ArmorNames[num].full;
+      
+      UserData.activearmor = num + 1;
       
       RA_Take(1);
       RA_Take(2);
+      
+      ACS_LocalAmbientSound("player/rarmor/mode", 127);
       
       p->logH(">>>>> Activating Armor->%S()", name);
       
@@ -86,6 +92,20 @@ void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
    
    RA_Take(1);
    RA_Take(2);
+}
+
+//
+// Render
+//
+void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
+{
+   if(UserData.activearmor && Lith_GetPCVarInt(p, "lith_hud_showarmorind"))
+   {
+      DrawSpritePlain("lgfx/HUD/SplitLeft.png", hid_rarmorbg, 12.1, 170.2, TICSECOND);
+      
+      HudMessageF("LHUDFONT", "\Cn%S", ArmorNames[UserData.activearmor - 1].abbr);
+      HudMessagePlain(hid_rarmortxt, 32.1, 161.0, TICSECOND);
+   }
 }
 
 // EOF

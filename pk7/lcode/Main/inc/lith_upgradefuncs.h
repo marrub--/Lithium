@@ -4,7 +4,7 @@
    A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)                 R(ReflexWetw)
                   D(Zoom)        U(Zoom)                       R(Zoom)
    A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
-                  D(ReactArmor)
+                  D(ReactArmor)                                R(ReactArmor)
                                                 E(DefenseNuke)
    A(Adrenaline)                 U(Adrenaline)
                                  U(VitalScan)                  R(VitalScan)

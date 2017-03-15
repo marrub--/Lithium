@@ -51,7 +51,8 @@ LITH_TXT_UPGRADE_DESCR_ReactArmor =
 
 LITH_TXT_UPGRADE_TITLE_ReactArmor2 = "R. Armor 2";
 LITH_TXT_UPGRADE_EFFEC_ReactArmor2 =
-   "Improves the damage resistence of the Reactive Armor.";
+   "Improves the damage resistence of the Reactive Armor.\n"
+   "\cgRequires the R. Armor upgrade to work.";
 LITH_TXT_UPGRADE_DESCR_ReactArmor2 =
    "Upgrades the Yh0 plating system, reducing damage taken twice over.";
 

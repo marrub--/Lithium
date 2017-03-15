@@ -12,19 +12,19 @@ actor Lith_Player : DoomPlayer
    states
    {
    Pain.Bullet:
-   Pain.Lith_Bullets:   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1) goto Super::Pain
+   Pain.Lith_Bullets:   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 0) goto Super::Pain
    Pain.Plasma:
    Pain.Railgun:
    Pain.Electric:
-   Pain.Lith_Energy:    TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2) goto Super::Pain
+   Pain.Lith_Energy:    TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1) goto Super::Pain
    Pain.Fire:
-   Pain.Lith_Fire:      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 3) goto Super::Pain
-   Pain.Lith_FireMagic: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 4) goto Super::Pain
-   Pain.Lith_Magic:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 5) goto Super::Pain
+   Pain.Lith_Fire:      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2) goto Super::Pain
+   Pain.Lith_FireMagic: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 3) goto Super::Pain
+   Pain.Lith_Magic:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 4) goto Super::Pain
    Pain.Melee:
-   Pain.Lith_Melee:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6) goto Super::Pain
-   Pain.Lith_Shrapnel:  TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7) goto Super::Pain
-   Pain.Ice:            TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 8) goto Super::Pain
+   Pain.Lith_Melee:     TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 5) goto Super::Pain
+   Pain.Lith_Shrapnel:  TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6) goto Super::Pain
+   Pain.Ice:            TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7) goto Super::Pain
    }
 }
 

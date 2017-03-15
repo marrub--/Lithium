@@ -120,6 +120,9 @@ enum
    hid_healthbg_fxE,
    hid_healthbg_fxS = hid_healthbg_fxE + 32,
    
+   hid_rarmortxt,
+   hid_rarmorbg,
+   
    hid_armorhit,
    hid_armor,
    hid_armortxt,

@@ -29,7 +29,7 @@ MAIN_SOURCES= \
 	$(SRC)/p_player.c \
 	$(SRC)/w_world.c \
 	$(SRC)/w_decorate.c \
-	$(SRC)/m_pickups.c \
+	$(SRC)/p_pickups.c \
 	$(SRC)/p_upgrades.c \
 	$(SRC)/u_7777777.c \
 	$(SRC)/u_adrenaline.c \

@@ -36,6 +36,11 @@ $playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
 $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 
 //
+// R. Armor
+//
+player/rarmor/mode lsounds/Player/RArmor/ChangeMode.flac // Halo 3
+
+//
 // CBI
 //
 player/cbi/open         lsounds/Player/CBI/Open.flac             // Halo 3
