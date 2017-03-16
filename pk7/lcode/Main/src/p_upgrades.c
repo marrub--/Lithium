@@ -127,7 +127,7 @@ void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
 //
 // Lith_GSInit_Upgrade
 //
-void Lith_GSInit_Upgrade(void)
+void Lith_GSInit_Upgrade(bool first)
 {
    upgradeinfo_t *upgradeinfo_mut = (upgradeinfo_t *)upgradeinfo;
    
@@ -138,14 +138,15 @@ void Lith_GSInit_Upgrade(void)
    #define R(n) upgradeinfo_mut[UPGR_##n].Render     = Upgr_##n##_Render;
    #include "lith_upgradefuncs.h"
    
-   LoadBalance(upgradeinfo_mut);
-   
    for(int i = 0; i < UPGR_MAX; i++)
    {
       upgradeinfo_t *info = &upgradeinfo_mut[i];
       info->shopBuy    = Lith_UpgrShopBuy;
       info->shopCanBuy = Lith_UpgrCanBuy;
    }
+   
+   if(first)
+      LoadBalance(upgradeinfo_mut);
 }
 
 //

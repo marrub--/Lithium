@@ -69,7 +69,7 @@ static void Shop_Buy(player_t *p, shopdef_t const *def, void *item_)
 //
 // Lith_GSInit_Shop
 //
-void Lith_GSInit_Shop(void)
+void Lith_GSInit_Shop(bool first)
 {
    for(int i = 0; i < shopitemsnum; i++)
    {

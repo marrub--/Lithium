@@ -222,15 +222,19 @@ static void Lith_World(void)
    static bool gsinit;
    static bool firstmap = true;
    
-   // Init global/static state. This is only done once per game.
+   // Init global/static state.
+   {
+      extern void Lith_GSInit_Upgrade(bool first);
+      extern void Lith_GSInit_Shop(bool first);
+      
+      Lith_GSInit_Upgrade(!gsinit);
+      Lith_GSInit_Shop(!gsinit);
+   }
+   
    if(!gsinit)
    {
-      extern void Lith_GSInit_Upgrade(void);
-      extern void Lith_GSInit_Shop(void);
       extern void Lith_GSInit_Weapon(void);
       
-      Lith_GSInit_Upgrade();
-      Lith_GSInit_Shop();
       Lith_GSInit_Weapon();
       
       Lith_CheckIfEnemiesAreCompatible();
