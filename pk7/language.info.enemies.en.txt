@@ -99,7 +99,35 @@ LITH_TXT_INFO_DESCR_LostSoul =
    "attacking.";
 
 LITH_TXT_INFO_SHORT_Mancubus = "Mancubus";
+LITH_TXT_INFO_TITLE_Mancubus = "$LITH_TXT_INFO_SHORT_Mancubus";
+LITH_TXT_INFO_DESCR_Mancubus =
+   "Class: \cjResident\n"
+   "Threat: \ckB\n\n"
+   "A gluttonous resident of Hell whose arms are flamethrowers made to kill "
+   "and cook its targets in one fell swoop. Their general strategy is to "
+   "overwhelm you with fire by shooting in many directions.\n\n"
+   "Although they may be quite beefy, they're quite slow and generally "
+   "their attacks are as well. Dispatch them quickly and you should be fine.";
+
 LITH_TXT_INFO_SHORT_Arachnotron = "Arachnotron";
+LITH_TXT_INFO_TITLE_Arachnotron = "$LITH_TXT_INFO_SHORT_Arachnotron";
+LITH_TXT_INFO_DESCR_Arachnotron =
+   "Class: \cjResident\n"
+   "Threat: \ckB\n\n"
+   "Children of a great Spider Demon, they're equipped with plasma guns and "
+   "cybernetic legs.\n\n"
+   "Their attack is straightforward; fire plasma at you until you die. "
+   "While their attack is quite strong, they're very weak and greatly prone "
+   "to bullet and shrapnel damage.";
+
+LITH_TXT_INFO_SHORT_Cacodemon = "Cacodemon";
+LITH_TXT_INFO_TITLE_Cacodemon = "$LITH_TXT_INFO_SHORT_Cacodemon";
+LITH_TXT_INFO_DESCR_Cacodemon =
+   "Class: \cjResident\n"
+   "Threat: \ckB-\n\n"
+   "A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an "
+   "unknown reason. They're quite hearty, and their attacks are fairly "
+   "deadly, but generally the Cacodemon is not a monster to fear.";
 
 // Nobles
 LITH_TXT_INFO_SHORT_HellKnight = "Hell Knight";
@@ -125,11 +153,37 @@ LITH_TXT_INFO_DESCR_BaronOfHell =
    "strong magic energy everywhere.";
 
 LITH_TXT_INFO_SHORT_Revenant = "Revenant";
-LITH_TXT_INFO_SHORT_Cacodemon = "Caco-Demon";
+LITH_TXT_INFO_TITLE_Revenant = "$LITH_TXT_INFO_SHORT_Revenant";
+LITH_TXT_INFO_DESCR_Revenant =
+   "Class: \cfNoble\n"
+   "Threat: \ckB+\n\n"
+   "Dead souls whom have been revived into a skletal frame, with combat armor "
+   "and missile launchers. Their missiles have homing capabilities, and are "
+   "*very* painful to boot.\n\n"
+   "The Revenant is revered among demons for its honor serving after death.";
 
 // Tyrants
 LITH_TXT_INFO_SHORT_PainElemental = "Pain Elemental";
+LITH_TXT_INFO_TITLE_PainElemental = "Sin of Bellona, \"Pain Elemental\"";
+LITH_TXT_INFO_DESCR_PainElemental =
+   "Class: \cgTyrant\n"
+   "Threat: \cgA\n\n"
+   "An evil, mean-spirited demon that thrives purely off of the pain and "
+   "suffering of its enemies; it summons lost souls to battle for it, as it "
+   "itself is too weak to fight.\n\n"
+   "This enemy is both annoying and hazardous at the same time, especially if "
+   "left unchecked for an elongated period of time. Prioritize their "
+   "destruction.";
+
 LITH_TXT_INFO_SHORT_Archvile = "Archvile";
+LITH_TXT_INFO_TITLE_Archvile = "Sin of Janus, \"Arch-vile\"";
+LITH_TXT_INFO_DESCR_Archvile =
+   "Class: \cgTyrant\n"
+   "Threat: \cgA\n\n"
+   "Brutal and viscious, caster of evil magic and healer of the sinful.\n\n"
+   "The Arch-vile is a malicious, extremely dangerous being capable of "
+   "destroying anything at any range with its powerful fire magic, and "
+   "resurrecting dead enemies it comes by.";
 
 LITH_TXT_INFO_SHORT_SpiderMastermind = "Spider Demon";
 LITH_TXT_INFO_TITLE_SpiderMastermind = "Sin of Venus, \"Spider Mastermind\"";
@@ -159,7 +213,16 @@ LITH_TXT_INFO_DESCR_Cyberdemon =
 // Overlord
 LITH_TXT_INFO_SHORT_IconOfSin = "Icon of Sin";
 LITH_TXT_INFO_TITLE_IconOfSin = "Overlord of Hell, Icon of Sin";
-LITH_TXT_INFO_DESCR_IconOfSin = "";
+LITH_TXT_INFO_DESCR_IconOfSin =
+   "Class: \crOverlord\n"
+   "Threat: \crE\n\n"
+   "The catalyst of destruction, whom spawned all of Hell's monstrosities and "
+   "dictates over all; the Icon of Sin, said by some to be Satan himself, "
+   "feeds purely off of hatred and chaos and will stop at nothing to attain "
+   "everything in the world.\n\n"
+   "Currently, he lay sleeping ill under repair, as his head was torn in "
+   "twain by a force unknown. The ultimate goal of your mission is to find "
+   "him, and destroy him before Hell takes over our realm.";
 
 // EOF
 

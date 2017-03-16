@@ -15,6 +15,19 @@
 //
 
 //
+// UnlockPage
+//
+static void UnlockPage(bip_t *bip, bippage_t *page)
+{
+   bip->pageavail++;
+   bip->categoryavail[page->category]++;
+   page->unlocked = true;
+   
+   for(int i = 0; i < MAX_BIP_UNLOCKS && page->unlocks[i]; i++)
+      Lith_UnlockBIPPage(bip, page->unlocks[i]);
+}
+
+//
 // AddToBIP
 //
 [[__optional_args(1)]]
@@ -23,16 +36,17 @@ static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unl
    __str img_s = StrParam("LITH_TXT_INFO_IMAGE_%S", name);
    __str img_l = StrParam("%LS", img_s);
    
-   
    bippage_t  *page = calloc(1, sizeof(bippage_t));
                page->name     = name;
                page->category = categ;
-               page->unlocked = categ == BIPC_ENEMIES;
+               page->unlocked = false;
    if(ACS_StrCmp(img_l, img_s) != 0)
                page->image    = img_l;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
+   
+   if(categ == BIPC_ENEMIES) UnlockPage(bip, page);
 }
 
 
@@ -157,13 +171,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
    bippage_t *page = Lith_FindBIPPage(bip, name);
    
    if(page && !page->unlocked)
-   {
-      bip->pageavail++;
-      bip->categoryavail[page->category]++;
-      page->unlocked = true;
-      for(int i = 0; i < MAX_BIP_UNLOCKS && page->unlocks[i]; i++)
-         Lith_UnlockBIPPage(bip, page->unlocks[i]);
-   }
+      UnlockPage(bip, page);
    
    return page;
 }
