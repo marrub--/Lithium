@@ -1,3 +1,7 @@
+// GUI
+user float  lith_gui_xmul = 1.0;
+user float  lith_gui_ymul = 1.0;
+
 // Player
 user float  lith_player_damagebobmul = 0.6;
 user bool   lith_player_damagebob    = true;
