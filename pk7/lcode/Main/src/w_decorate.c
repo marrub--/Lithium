@@ -212,7 +212,12 @@ void Lith_PoisonFXTicker()
    }
    
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+   {
+      ACS_TakeInventory("Lith_PoisonFXReset", 999);
+      ACS_TakeInventory("Lith_PoisonFXTimer", 999);
+      ACS_TakeInventory("Lith_PoisonFXGiverGiver", 999);
       return;
+   }
    
    if(ACS_CheckInventory("Lith_PoisonFXTimer"))
    {
