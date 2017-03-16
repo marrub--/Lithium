@@ -83,10 +83,9 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       CFIS B 0 offset(183, 168) A_PlaySound("weapons/cfist/chargeend", CHAN_5)
       CFIS B 1 offset(206, 188)
       CFIS A 0 A_AlertMonsters
-      CFIS A 1 offset(-13, 153) A_PlaySound("weapons/cfist/fire", CHAN_6)
-      CFIS A 1 offset(15, 120)
-      CFIS A 1 offset(35, 94)
-      CFIS A 0 offset(35, 94) A_CustomPunch(CallACS("Lith_ChargeFistDamage"), true, CPF_PULLIN, "Lith_ChargeFistPuff", 80)
+      CFIS A 1 Offset(4, 135) A_PlaySound("weapons/cfist/fire", CHAN_6)
+      CFIS A 2 Offset(36, 93)
+      CFIS A 0 offset(35, 94) A_CustomPunch(CallACS("Lith_ChargeFistDamage"), true, CPF_PULLIN, "Lith_ChargeFistPuff", 96)
       CFIS A 0 A_JumpIfInventory("Lith_FistHit", 1, "HitRecoil")
       CFIS A 1 offset(36, 93)
       CFIS A 2 offset(40, 91)
@@ -99,17 +98,16 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       TNT1 AAAAA 1 A_ReFire
       goto Ready
    HitRecoil:
-      CFIS A 1 offset(41, 90)
-      CFIS A 4 offset(49, 85)
-      CFIS A 2 offset(52, 86)
-      CFIS A 1 offset(50, 88)
-      CFIS A 1 offset(39, 98)
-      CFIS A 1 offset(26, 110)
-      CFIS A 1 offset(24, 112)
-      CFIS A 2 offset(22, 114)
-      CFIS A 2 offset(14, 123)
-      CFIS A 1 offset(-7, 144)
-      CFIS A 1 offset(-38, 173)
+      CFIS A 3 Offset(38, 91)
+      CFIS A 1 Offset(43, 89)
+      CFIS A 1 Offset(48, 92)
+      CFIS A 1 Offset(53, 98)
+      CFIS A 1 Offset(56, 108)
+      CFIS A 1 Offset(66, 124)
+      CFIS A 1 Offset(71, 151)
+      CFIS A 1 Offset(78, 167)
+      CFIS A 1 Offset(82, 175)
+      CFIS A 1 Offset(85, 185)
       TNT1 A 1
       TNT1 AAAAA 1 A_ReFire
       goto Ready

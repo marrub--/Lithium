@@ -149,7 +149,7 @@ int Lith_ChargeFistDamage()
    // some idiot thought it was a great idea to make PickActor return 0 when
    // their TID isn't set, even though it found something.
    int oldtid, newtid;
-   if((oldtid = ACS_PickActor(0, p->yaw, p->pitch, 80, newtid = ACS_UniqueTID(), MF_SHOOTABLE, ML_BLOCKEVERYTHING | ML_BLOCKHITSCAN, PICKAF_RETURNTID)))
+   if((oldtid = ACS_PickActor(0, p->yaw, p->pitch, 96, newtid = ACS_UniqueTID(), MF_SHOOTABLE, ML_BLOCKEVERYTHING | ML_BLOCKHITSCAN, PICKAF_RETURNTID)))
    {
       ACS_GiveInventory("Lith_FistHit", 1);
       ACS_Thing_ChangeTID(newtid, oldtid);

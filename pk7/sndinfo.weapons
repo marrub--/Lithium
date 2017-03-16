@@ -7,6 +7,7 @@ weapons/knife/hitflesh lsounds/Knife/Hit.flac     // Killing Floor
 weapons/knife/hitwall  lsounds/Knife/HitWall.flac // 〃
 
 $limit weapons/knife/hitflesh 0
+$limit weapons/knife/hitwall 0
 
 //
 // Charge Fist
