@@ -39,7 +39,7 @@ actor Lith_Revolver : Lith_Weapon
       TNT1 A 0 A_JumpIfInventory("Lith_RevolverShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_RevolverShotsFired", 1)
       TNT1 A 0 A_GunFlash("DummyFlash")
-      TNT1 A 0 A_FireBullets(2, 2, 1, 20)
+      TNT1 A 0 A_FireBullets(1, 1, -1, 45)
       TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)
       TNT1 A 0 A_PlaySound("weapons/revolver/fire", CHAN_WEAPON)
       REVO B 1 bright A_WeaponReady(LITH_BOBONLY)
