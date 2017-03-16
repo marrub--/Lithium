@@ -33,23 +33,27 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
       UserData.readied = true;
    }
    
-   // Ready
-   else if(!ACS_CheckInventory("Lith_AdrenalineToken"))
-      ACS_GiveInventory("Lith_AdrenalineProjectileChecker", 1);
-   
-   // Use
+   // Ready to use
    else
    {
-      ACS_TakeInventory("Lith_AdrenalineToken", 1);
+      // Ready
+      if(!ACS_CheckInventory("Lith_AdrenalineToken"))
+         ACS_GiveInventory("Lith_AdrenalineProjectileChecker", 1);
       
-      ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      p->logH(">>>>> Adrenaline administered.");
-      
-      UserData.charge = UserData.readied = 0;
-      
-      ACS_GiveInventory("Lith_TimeHax2", 1);
-      ACS_Delay(36);
-      ACS_TakeInventory("Lith_TimeHax2", 1);
+      // Use
+      if(ACS_CheckInventory("Lith_AdrenalineToken"))
+      {
+         ACS_TakeInventory("Lith_AdrenalineToken", 1);
+         
+         ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+         p->logH(">>>>> Adrenaline administered.");
+         
+         UserData.charge = UserData.readied = 0;
+         
+         ACS_GiveInventory("Lith_TimeHax2", 1);
+         ACS_Delay(36);
+         ACS_TakeInventory("Lith_TimeHax2", 1);
+      }
    }
    
    ACS_TakeInventory("Lith_AdrenalineToken", 1);

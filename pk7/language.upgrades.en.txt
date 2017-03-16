@@ -47,7 +47,7 @@ LITH_TXT_UPGRADE_EFFEC_ReactArmor =
    "damage you took, mitigating any further damage of that type.";
 LITH_TXT_UPGRADE_DESCR_ReactArmor =
    "Integrate your armor with a highly advanced Yh-0 reactive plating "
-   "system, made avians on Durla Prime.";
+   "system, made by avians on Durla Prime.";
 
 LITH_TXT_UPGRADE_TITLE_ReactArmor2 = "R. Armor 2";
 LITH_TXT_UPGRADE_EFFEC_ReactArmor2 =
