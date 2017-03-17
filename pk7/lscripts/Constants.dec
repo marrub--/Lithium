@@ -82,11 +82,11 @@ const int Score_PainElemental = 20000; // None
 const int Score_Archvile      = 40000; // FireMagic
 
 // Tier 5
-const int Score_SpiderDemon   = 1000000; // Bullets
-const int Score_CyberDemon    = 2000000; // Shrapnel
+const int Score_SpiderDemon   = 700000;  // Bullets
+const int Score_CyberDemon    = 1500000; // Shrapnel
 
 // Tier 6
-const int Score_DSparil       = 1000000; // Energy
+const int Score_DSparil       = 10000000; // Energy
 
 // EOF
 
