@@ -62,56 +62,76 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    HudMessagePlain(g->hid--, g->ox + 2.1, g->oy + y + 0.1, TICSECOND)
    
 #define Category(name) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 20)) \
+   { \
    HudMessageF("CNFONT", "\Cn" name); \
    HudMessagePlain(g->hid--, g->ox + 140.0, g->oy + y + 5.1, TICSECOND); \
+   } \
    y += 20;
 
 #define Bool(label, cvar) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(bool on = Lith_GetPCVarInt(p, cvar);) \
    { \
       Label(label); \
       if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - btnlist.w, y, .preset = &btnlist)) \
          Lith_SetPCVarInt(p, cvar, !on); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define ServerBool(label, cvar) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(bool on = ACS_GetCVar(cvar);) \
    { \
       Label(label); \
       if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - btnlist.w, y, .preset = &btnlist)) \
          ACS_SetCVar(cvar, !on); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define ServerFloat(label, cvar, minima, maxima) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(double set = ACS_GetCVarFixed(cvar), diff;) \
    { \
       Label(label); \
       if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
          ACS_SetCVarFixed(cvar, set + diff); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define Float(label, cvar, minima, maxima) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(double set = Lith_GetPCVarFixed(p, cvar), diff;) \
    { \
       Label(label); \
       if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
          Lith_SetPCVarFixed(p, cvar, set + diff); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define Int(label, cvar, minima, maxima) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(int set = Lith_GetPCVarInt(p, cvar), diff;) \
    { \
       Label(label); \
       if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
          Lith_SetPCVarInt(p, cvar, set + diff); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define Enum(label, cvar, minima, maxima, fmt, ...) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    __with(int set = Lith_GetPCVarInt(p, cvar);) \
    { \
       Label(label); \
@@ -121,13 +141,17 @@ static void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
          Lith_SetPCVarInt(p, cvar, set + 1); \
       HudMessageF("CBIFONT", fmt, __VA_ARGS__); \
       HudMessagePlain(g->hid--, g->ox + 200.1, g->oy + y + 0.1, TICSECOND); \
-      y += 10; \
-   }
+   } \
+   } \
+   y += 10;
 
 #define CBox(label, on, ...) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
    Label(label); \
    if(Lith_GUI_Checkbox(g, on, 240, y + 5, .preset = &cbxsmall)) \
       __VA_ARGS__; \
+   } \
    y += 10;
 
 #include "lith_settings.h"
