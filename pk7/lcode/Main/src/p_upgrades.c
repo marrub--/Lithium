@@ -19,7 +19,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {{"Zoom",        null,           0       }, UC_Body,  0.00},
    {{"CyberLegs",   "CyberLegs",    1220000 }, UC_Body,  0.00},
    {{"ReactArmor",  "Yh0",          3500200 }, UC_Body,  0.00},
-   {{"ReactArmor2", "Yh0",          2800200 }, UC_Body,  0.00},
+   {{"ReactArmor2", "Yh0",          2990200 }, UC_Body,  0.00},
    {{"DefenseNuke", "DefenseNuke",  580030  }, UC_Body,  0.00},
    {{"Adrenaline",  "Adrenaline",   1801000 }, UC_Body,  0.00},
    {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  0.00},

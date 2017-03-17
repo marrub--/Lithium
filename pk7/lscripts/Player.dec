@@ -135,6 +135,16 @@ actor Lith_Death : CustomInventory
    }
 }
 
+actor Lith_Die : CustomInventory
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_Die
+      stop
+   }
+}
+
 actor Lith_Nuke : CustomInventory
 {
    states
