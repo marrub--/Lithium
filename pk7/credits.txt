@@ -59,6 +59,12 @@ Shadowlink226
 TerminusEst13
    SHKRA0/B0 and a lot of sound sources
 
+Wartorn
+   Help with HUD design
+
+WildWeasel
+   Help with making fonts, suggestions for HUD
+
 Xaser Acheron
    Bullet puffs
    Probably some other stuff I took from Psychic
@@ -102,6 +108,9 @@ Sniper Rifle sprites
 Super Shotgun sprites
    Captain J
    Turbo
+
+Gauss Shotgun ready sprite
+   GAA1992 - Shotgun edit
 
 Title screen music
    505 - Shredder (hYmns)
