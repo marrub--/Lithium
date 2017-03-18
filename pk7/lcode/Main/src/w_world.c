@@ -237,6 +237,12 @@ static void Lith_World(void)
    if(ACS_GameType() == GAME_TITLE_MAP)
       return;
    
+   if(world.mapnum == 1911777)
+   {
+      ACS_Exit_Normal(0);
+      return;
+   }
+   
    static bool gsinit;
    static bool firstmap = true;
    
@@ -318,6 +324,9 @@ static void Lith_World(void)
    
    for(;;)
    {
+      if(world.ticks > 17 * 35 * 60 * 60)
+         ACS_Teleport_NewMap(1911777, 0, 0);
+      
       int secrets = world.mapsecrets;
       int kills   = world.mapkills;
       int items   = world.mapitems;

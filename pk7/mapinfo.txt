@@ -30,6 +30,7 @@ skill tourist
    ArmorFactor = 2
    TotalInfighting
    HealthFactor = 2
+   ACSReturn = 0
 }
 
 skill easy
@@ -40,6 +41,7 @@ skill easy
    Key = "b"
    Aggressiveness = -0.3
    MonsterHealth = 0.9
+   ACSReturn = 1
 }
 
 skill normal
@@ -48,6 +50,7 @@ skill normal
    Name = "Hurt me plenty"
    Key = "h"
    DefaultSkill
+   ACSReturn = 2
 }
 
 skill hard
@@ -55,6 +58,7 @@ skill hard
    SpawnFilter = 4
    Name = "Ultra-Violence!"
    Key = "u"
+   ACSReturn = 3
 }
 
 skill extrahard
@@ -71,6 +75,8 @@ skill extrahard
    ReplaceActor = "DoomImp",     "Lith_XH_Imp"
    ReplaceActor = "ChaingunGuy", "Lith_XH_ChaingunGuy"
    ReplaceActor = "Cyberdemon",  "Lith_XH_Cyberdemon"
+   
+   ACSReturn = 4
 }
 
 skill nightmare
@@ -85,6 +91,7 @@ skill nightmare
    NoInfighting
    HealthFactor = 2
    MustConfirm = "$LITH_SKILL_NIGHTMARE"
+   ACSReturn = 5
 }
 
 
@@ -101,10 +108,52 @@ map TITLEMAP "Lithium Title"
    DoubleSky
 }
 
+map LITHTEND ""
+{
+   LevelNum = 1911777
+   Next = EndSequence, "Lith_EndGameTimeOver"
+   NoIntermission
+}
+
 
 //----------------------------------------------------------------------------
 // Intermission Info
 //
+
+intermission Lith_EndGameTimeOver
+{
+   Image
+   {
+      Background = "flats/ZZLITHBG.png"
+      Time = -1
+   }
+   
+   TextScreen
+   {
+      TextLump = "end_timeup.txt"
+      TextColor = "White"
+   }
+   
+   TextScreen
+   {
+      Text = "You turn off your communications program."
+   }
+   
+   Wiper
+   {
+      WipeType = CrossFade
+      Time = 10
+      Background = "flats/ZZLITHBG.png"
+   }
+   
+   Image
+   {
+      Background = "flats/ZZLITHBG.png"
+      Time = 1
+   }
+   
+   GotoTitle{}
+}
 
 intermission Inter_Cast
 {

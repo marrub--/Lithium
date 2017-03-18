@@ -214,12 +214,12 @@ static void HUD_Score(player_t *p)
 //
 static void HUD_KeyInd(player_t *p)
 {
-   if(p->keys.redskull)    DrawSpritePlain("H_KS1", hid_key_redskull,    8.1, 144.1, 0.1);
-   if(p->keys.yellowskull) DrawSpritePlain("H_KS2", hid_key_yellowskull, 8.1, 152.1, 0.1);
-   if(p->keys.blueskull)   DrawSpritePlain("H_KS3", hid_key_blueskull,   8.1, 160.1, 0.1);
-   if(p->keys.redcard)     DrawSpritePlain("H_KC1", hid_key_red,         0.1, 140.1, 0.1);
-   if(p->keys.yellowcard)  DrawSpritePlain("H_KC2", hid_key_yellow,      0.1, 148.1, 0.1);
-   if(p->keys.bluecard)    DrawSpritePlain("H_KC3", hid_key_blue,        0.1, 156.1, 0.1);
+   if(p->keys.redskull)    DrawSpriteAlpha("H_KS1", hid_key_redskull,    320.2, 10.1, 0.1, 0.8);
+   if(p->keys.yellowskull) DrawSpriteAlpha("H_KS2", hid_key_yellowskull, 310.2, 10.1, 0.1, 0.8);
+   if(p->keys.blueskull)   DrawSpriteAlpha("H_KS3", hid_key_blueskull,   300.2, 10.1, 0.1, 0.8);
+   if(p->keys.redcard)     DrawSpriteAlpha("H_KC1", hid_key_red,         290.2, 10.1, 0.1, 0.8);
+   if(p->keys.yellowcard)  DrawSpriteAlpha("H_KC2", hid_key_yellow,      280.2, 10.1, 0.1, 0.8);
+   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        270.2, 10.1, 0.1, 0.8);
 }
 
 //
@@ -252,6 +252,7 @@ void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
    
    // Inventory
    HUD_KeyInd(p);
+   
    if(Lith_GetPCVarInt(p, "lith_hud_showscore"))
       HUD_Score(p);
    if(Lith_GetPCVarInt(p, "lith_hud_showweapons"))
