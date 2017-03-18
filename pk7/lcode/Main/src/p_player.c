@@ -177,9 +177,9 @@ void Lith_PlayerCloseGUI(player_t *p)
 {
    if(p->activegui != GUI_NONE)
    {
+      ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
       p->activegui = GUI_NONE;
       p->frozen--;
-      ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
    }
 }
 
@@ -193,9 +193,9 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
       if(ACS_GetCVar("__lith_pausemenu_addon"))
          ACS_ScriptCall("Lith_PauseManager", "SetPaused", true);
       
+      ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
       p->activegui = type;
       p->frozen++;
-      ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
    }
    else if(p->activegui == type)
    {
