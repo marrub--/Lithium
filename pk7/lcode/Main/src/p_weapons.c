@@ -79,7 +79,7 @@ void Lith_WeaponPickup(int parm, int tid)
    else
       ACS_LocalAmbientSound("marathon/pickup", 127);
    
-   if(info->name) Lith_UnlockBIPPage(&p->bip, info->name);
+   if(info->name) p->bip.unlock(info->name);
    
    GiveWeaponItem(parm);
    Lith_PickupMessage(p, info);

@@ -1,39 +1,56 @@
 #!/usr/bin/env lua
 
-function procLine(ln)
-   return ln:gsub("\\", "\\\\"):gsub("\"", "\\\"")
+function trim(s)
+   return s:gsub("^%s*(.-)%s*$", "%1")
+end
+
+function procHead(alias)
+   out:write("\"" .. alias .. "\" =")
+end
+
+function procLine(ln, last)
+   out:write("\n   \"" .. ln:gsub("\\", "\\\\"):gsub("\"", "\\\""))
+   if not last then out:write("\\n") end
+   out:write("\"")
+end
+
+function procEnd()
+   out:write(";\n")
+end
+
+function procData(data, alias)
+   print("data> '" .. data .. "' -> '" .. alias .. "'")
+   
+   procHead(alias)
+   procLine(data, true)
+   procEnd()
 end
 
 function procFile(fname, alias)
-   if not out then
-      print(">> No output, skipping '" .. fname .. "' -> '" .. alias .. "'")
-      return
-   end
-   
    local lns = io.lines(fname)
-   if lns then
-      print("> '" .. fname .. "' -> '" .. alias .. "'")
-      out:write("\"" .. alias .. "\" =")
-      for ln in lns do
-         out:write("\n   \"" .. procLine(ln) .. "\\n\"")
-      end
-      out:write(";\n")
-   else
-      print(">> No file named '" .. fname .. "', skipping '" .. alias .. "'")
+   print("file> '" .. fname .. "' -> '" .. alias .. "'")
+   procHead(alias)
+   for ln in lns do
+      procLine(ln)
    end
+   procEnd()
 end
 
 for ln in io.lines("FileData/dir.txt") do
    if ln:sub(1, 3) == "in " then
-      print("Processing ", ln:sub(4))
+      print("\nProcessing ", ln:sub(4))
       out = io.open("../" .. ln:sub(4), "w")
-      if out then
-         out:write("[default]\n\n")
-      end
+      out:write("[default]\n\n")
    elseif out then
-      local s, e = ln:find(" -> ", 1, true)
-      if s and e then
-         procFile("FileData/" .. ln:sub(1, s-1), ln:sub(e+1))
+      local _,  s1 = ln:find("data ", 1, true)
+      local e1, s2 = ln:find("->", 1, true)
+      if s1 and e1 and s2 then
+         procData(trim(ln:sub(s1+1, e1-1)), trim(ln:sub(s2+1)))
+      else
+         local s, e = ln:find("->", 1, true)
+         if s and e then
+            procFile("FileData/" .. trim(ln:sub(1, s-1)), trim(ln:sub(e+1)))
+         end
       end
    end
 end

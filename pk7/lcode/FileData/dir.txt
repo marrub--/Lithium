@@ -1,12 +1,27 @@
 This is a list of files to be processed into ZDoom's LANGUAGE format by
 the compilefs.lua script.
 
-Lines that start with "in" change the currently processed file, and lines that
-have an arrow in them are files to process. Otherwise, they're ignored.
-
-The left hand side is the real file, and the right hand side is its alias.
-
-Note that you can only use text files here. Any binary files will break ZDoom.
-
 in filter/heretic/language.fs.txt
 heretic/Upgrades.lthm -> Upgrades.lthm
+
+in language.info.mail.txt
+mailtemplate.txt -> LITH_TXT_MAIL_TEMPLATE
+
+Saved SGXLine Message 1.txt -> LITH_TXT_MAIL_BODY_Intro
+data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Intro
+data 13:00 25/7/49          -> LITH_TXT_MAIL_TIME_Intro
+data <title omitted>        -> LITH_TXT_MAIL_NAME_Intro
+data 610                    -> LITH_TXT_MAIL_SIZE_Intro
+
+Saved SGXLine Message 2.txt -> LITH_TXT_MAIL_BODY_Cluster1
+data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster1
+data <title omitted>        -> LITH_TXT_MAIL_NAME_Cluster1
+
+Saved SGXLine Message 3.txt -> LITH_TXT_MAIL_BODY_Cluster2
+data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster2
+data <title omitted>        -> LITH_TXT_MAIL_NAME_Cluster2
+
+Saved SGXLine Message 4.txt -> LITH_TXT_MAIL_BODY_Cluster3
+data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster3
+data <title omitted>        -> LITH_TXT_MAIL_NAME_Cluster3
+

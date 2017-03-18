@@ -215,6 +215,27 @@ __str Language(__str fmt, ...)
 }
 
 //
+// LanguageNull
+//
+__str LanguageNull(__str fmt, ...)
+{
+   va_list vl;
+   
+   ACS_BeginPrint();
+   
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+   
+   __str name = ACS_EndStrParam();
+   __str alias = Language(name);
+   
+   if(ACS_StrCmp(name, alias) == 0) return null;
+   else return alias;
+   
+}
+
+//
 // Lith_GetTID
 //
 [[__call("ScriptS")]]

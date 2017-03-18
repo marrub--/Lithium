@@ -6,6 +6,7 @@
   LITH_X(2, UPG, UPGRADES,     "Upgrades")
   LITH_X(3, PLA, PLACES,       "Places")
   LITH_X(4, COR, CORPORATIONS, "Companies and Corporations")
+  LITH_X(5, MAI, MAIL,         "Mail")
 #undef LITH_X
 
 #elif !defined(LITH_BIP_H)
@@ -14,6 +15,18 @@
 #include "lith_list.h"
 
 #define MAX_BIP_UNLOCKS 5
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+[[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player_s *p);
+struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
+struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name);
+[[__call("ScriptS")]] void Lith_DeallocateBIP(struct bip_s *bip);
+void Lith_PlayerLoseBIPPages(struct bip_s *bip);
+void Lith_DeliverMail(struct bip_s *bip, __str title);
 
 
 //----------------------------------------------------------------------------
@@ -35,6 +48,9 @@ typedef struct bippage_s
 {
    __str  name;
    __str  image;
+   __str  body;
+   __str  title;
+   int    height;
    int    category;
    bool   unlocked;
    list_t link;
@@ -43,6 +59,12 @@ typedef struct bippage_s
 
 typedef struct bip_s
 {
+   property find        {call: Lith_FindBIPPage(this)}
+   property unlock      {call: Lith_UnlockBIPPage(this)}
+   property deallocate  {call: Lith_DeallocateBIP(this)}
+   property losePages   {call: Lith_PlayerLoseBIPPages(this)}
+   property deliverMail {call: Lith_DeliverMail(this)}
+   
    // Stats
    int categoryavail[BIPC_MAX];
    int categorymax[BIPC_MAX];
@@ -58,17 +80,6 @@ typedef struct bip_s
    // Info
    list_t infogr[BIPC_MAX];
 } bip_t;
-
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
-
-[[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player_s *p);
-bippage_t *Lith_FindBIPPage(bip_t *bip, __str name);
-bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name);
-[[__call("ScriptS")]] void Lith_DeallocateBIP(bip_t *bip);
-void Lith_PlayerLoseBIPPages(bip_t *bip);
 
 #endif
 

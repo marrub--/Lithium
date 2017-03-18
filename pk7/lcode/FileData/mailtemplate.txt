@@ -1,0 +1,6 @@
+>>>>>[[[[INCOMING MESSAGE]]]]
+
+> Remote: %S
+> Date: %S
+
+%S

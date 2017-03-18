@@ -28,6 +28,14 @@ typedef struct payoutinfo_s
    int tax;
 } payoutinfo_t;
 
+__str Lith_CanonTime(bool shorttime);
+
+enum game_s
+{
+   Game_Doom2,
+   Game_Episodic,
+};
+
 typedef struct worldinfo_s
 {
    property mapsecrets {get: ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS)}
@@ -36,11 +44,18 @@ typedef struct worldinfo_s
    property mapnum     {get: ACS_GetLevelInfo(LEVELINFO_LEVELNUM)}
    property mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
    property mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
+   property cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
+   property canontime  {get: Lith_CanonTime(false)}
+   property game       {get: ACS_GetCVar("__lith_game")}
+   property canontimeshort {get: Lith_CanonTime(true)}
    
+   int prevcluster;
    int mapseed;
    
    int secretsfound;
    double scoremul;
+   
+   long ticks;
 } worldinfo_t;
 
 __addrdef extern __mod_arr Lith_MapVariable;

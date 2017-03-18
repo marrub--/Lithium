@@ -1,0 +1,104 @@
+[default]
+
+"LITH_TXT_MAIL_TEMPLATE" =
+   ">>>>>[[[[INCOMING MESSAGE]]]]\n"
+   "\n"
+   "> Remote: %S\n"
+   "> Date: %S\n"
+   "\n"
+   "%S\n";
+"LITH_TXT_MAIL_BODY_Intro" =
+   "Your weapons have been deployed to various locations we were able to send\n"
+   "other people to.  Do take care of them, acquiring the correct armaments for\n"
+   "your job was quite expensive and now we've probably lost a few people.\n"
+   "\n"
+   "Besides being deployed with your pistol and combat knife (as you requested),\n"
+   "you have been sent these five weapons:\n"
+   "\n"
+   "1. A combat-modified military model Hiku Mk.2 Shotgun, manufactured by Omakeda.\n"
+   ">  This weapon was chosen because it has a powerful plasma shot that can\n"
+   ">  penetrate the demons' armour.  Besides this, it has low recoil and an easy\n"
+   ">  to handle pump-action loading system.  It has hopefully been deployed to\n"
+   ">  the most convenient location you shall come across.\n"
+   "\n"
+   "2. An AllPoint 75-b Assault Rifle.\n"
+   ">  You shall be fighting hordes of lower ranking demons and un-dead which are\n"
+   ">  quite vulnerable to small arms fire and explosives, so naturally this gun\n"
+   ">  was our first choice.  Equipped with a box magazine and inbuilt grenade\n"
+   ">  launcher, capable of eliminating most lower tier threats.\n"
+   "\n"
+   "3. A Grenade Launcher, manufactured by Sym 4.3.\n"
+   ">  With this, you can completely obliterate larger targets and crowds of\n"
+   ">  demons.  Unfortunately, due to its weight, we were not able to get it in\n"
+   ">  any convenient location.\n"
+   "\n"
+   "4. An AllPoint 68-n Plasma Rifle.\n"
+   ">  This weapon does extreme damage to anything living, but some of the tougher\n"
+   ">  demons seem to mitigate its damage.  Regardless, it has been sent to you\n"
+   ">  because it can shred through demons with high rank.\n"
+   "\n"
+   "5. The Omega Cannon.\n"
+   ">  I myself am not sure why high order would bother giving you such an\n"
+   ">  expensive and dangerous piece of equipment, but you must have been sent\n"
+   ">  this artifact for the purpose of destroying *something*.\n"
+   "\n"
+   "6. A KSKK Utsu-denka-sou assault bracelet.\n"
+   ">  A weapon that may prove useful against weak and strong enemies alike, it's\n"
+   ">  been sent to an unknown location, unfortunately. Don't be tricked by the\n"
+   ">  appearance of it. Even if it just looks like a fancy bracelet, it is capable\n"
+   ">  of outputting several tons of weight out your fist.\n"
+   "\n"
+   "You will also be able to purchase the weapons you designated, in your words,\n"
+   "as \"must-have\" in the Shop.  I warn you that these weapons may not be as\n"
+   "effective as you think; we spent quite a lot of time making sure that the\n"
+   "arms we sent you were top-notch.\n"
+   "\n"
+   "Lambert out.  Good luck, Blazkowicz.\n";
+"LITH_TXT_MAIL_SEND_Intro" =
+   "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_TIME_Intro" =
+   "13:00 25/7/49";
+"LITH_TXT_MAIL_NAME_Intro" =
+   "<title omitted>";
+"LITH_TXT_MAIL_SIZE_Intro" =
+   "610";
+"LITH_TXT_MAIL_BODY_Cluster1" =
+   "An explosion of some sort just happened nearby, it seems that the demons are\n"
+   "reconstructing the world around you. You would best be careful not to trigger\n"
+   "any other, er, events.\n"
+   "\n"
+   "Enough of those and the whole world around you might collapse!\n"
+   "\n"
+   "You've been making good progress so far. Your military superiors seem to be\n"
+   "considering giving you a promotion, even.\n"
+   "\n"
+   "Lambert out.\n";
+"LITH_TXT_MAIL_SEND_Cluster1" =
+   "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_NAME_Cluster1" =
+   "<title omitted>";
+"LITH_TXT_MAIL_BODY_Cluster2" =
+   "There has been a change of plans going down the whole chain of command.\n"
+   "Your status as a military operative is now cancelled, and you are to enter a\n"
+   "full-on suicide mission funded by OFMD alone.\n"
+   "\n"
+   "There is an artifact nearby that we have sent you.  Once it is in your\n"
+   "posession, immediately destroy it, and you will be transported to a city\n"
+   "somewhere in Hell.  Command will await afterwards.\n"
+   "\n"
+   "Lambert out.\n";
+"LITH_TXT_MAIL_SEND_Cluster2" =
+   "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_NAME_Cluster2" =
+   "<title omitted>";
+"LITH_TXT_MAIL_BODY_Cluster3" =
+   "Now that you have entered the city, you m\\\\r-3434[[\n"
+   "SYSTEM ERROR 0x4E4943456A6F6244554D42415353\n"
+   ">>>>>[[[[procedure resetting terminal]]]]\n"
+   ">>>>>[[[[status: heap corrupted]]]]\n"
+   ">>>>>[[[[error handler malfunction error]]]]\n"
+   ">>>>>[[[[failure to proceed]]]]\n";
+"LITH_TXT_MAIL_SEND_Cluster3" =
+   "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_NAME_Cluster3" =
+   "<title omitted>";

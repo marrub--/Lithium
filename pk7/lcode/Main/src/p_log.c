@@ -194,13 +194,7 @@ void Lith_PlayerLogEntry(player_t *p)
    
    logmap->link.link(&p->loginfo.maps);
    
-   int seconds = 53 + (p->ticks / 35);
-   int minutes = 30 + (seconds  / 60);
-   int hours   = 14 + (minutes  / 60);
-   int days    = 25 + (hours    / 24); // pls
-   
-   p->logF("Entered %S at %0.2i:%0.2i:%0.2i %i/7/1649 NE",
-      logmap->name, hours % 24, minutes % 60, seconds % 60, days);
+   p->logF("Entered %S at %S NE", logmap->name, world.canontime);
 }
 
 //

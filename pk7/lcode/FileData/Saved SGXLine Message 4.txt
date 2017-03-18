@@ -1,0 +1,6 @@
+Now that you have entered the city, you m\\r-3434[[
+SYSTEM ERROR 0x4E4943456A6F6244554D42415353
+>>>>>[[[[procedure resetting terminal]]]]
+>>>>>[[[[status: heap corrupted]]]]
+>>>>>[[[[error handler malfunction error]]]]
+>>>>>[[[[failure to proceed]]]]

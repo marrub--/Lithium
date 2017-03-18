@@ -200,6 +200,8 @@ void Lith_ResetPlayer(player_t *p)
       else
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       
+      p->bip.deliverMail("Intro");
+      
       p->staticinit = true;
    }
    else
@@ -214,7 +216,7 @@ void Lith_ResetPlayer(player_t *p)
             ACS_GiveInventory(weaponinfo[i].class, 1);
    }
    
-   Lith_UnlockBIPPage(&p->bip, "Pistol");
+   p->bip.unlock("Pistol");
 }
 
 

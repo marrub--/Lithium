@@ -4,12 +4,12 @@
 enum
 {
    // hid_base         to hid_base + 99    reserved for testing
-   // hid_base +   100 to hid_base + 199   reserved for Payout
-   // hid_base +   200 to hid_base + 29999 reserved for CBI
+   // hid_base +   100 to hid_base + 29999 reserved for CBI
    // hid_base + 30000 to hid_base + 39999 reserved for the Gameboy
-   // hid_base + 40000 to hid_base + 40999 reserved for Misc.
-   // hid_base + 41000 to hid_base + 41999 reserved for Scope
-   // hid_base + 42000 to hid_base + 42999 reserved for HUD
+   // hid_base + 40000 to hid_base + 40999 reserved for Payout
+   // hid_base + 41000 to hid_base + 41999 reserved for Misc.
+   // hid_base + 42000 to hid_base + 42999 reserved for Scope
+   // hid_base + 43000 to hid_base + 43999 reserved for HUD
    hid_base = 0x100000,
    
    // Testing
@@ -26,10 +26,6 @@ enum
    hid_test8,
    hid_test9,
    
-   // Payout
-   hid_base_payout = hid_base + 100,
-   hid_end_payout  = hid_base + 199,
-   
    // CBI
    hid_base_cbi = hid_base + 200,
    hid_end_cbi  = hid_base + 29999,
@@ -38,9 +34,13 @@ enum
    hid_base_gb = hid_base + 30000,
    hid_end_gb  = hid_base + 39999,
    
+   // Payout
+   hid_base_payout = hid_base + 40000,
+   hid_end_payout  = hid_base + 40999,
+   
    // Misc.
-   hid_base_misc = hid_base + 40000,
-   hid_end_misc  = hid_base + 40999,
+   hid_base_misc = hid_base + 41000,
+   hid_end_misc  = hid_base + 41999,
    
    hid_implyingE = hid_base_misc,
    hid_implyingS = hid_implyingE + 200,
@@ -54,8 +54,8 @@ enum
    hid_zoomcam = hid_zoomcomp + 8,
    
    // Scope
-   hid_base_scope = hid_base + 41000,
-   hid_end_scope  = hid_base + 41999,
+   hid_base_scope = hid_base + 42000,
+   hid_end_scope  = hid_base + 42999,
    
    hid_scope_sineE = hid_base_scope,
    hid_scope_sineS = hid_scope_sineE + 200,
@@ -74,8 +74,8 @@ enum
    hid_scope_clearE = hid_scope_stringstackS,
    
    // HUD
-   hid_base_hud = hid_base + 42000,
-   hid_end_hud  = hid_base + 42999,
+   hid_base_hud = hid_base + 43000,
+   hid_end_hud  = hid_base + 43999,
    
    hid_logAddE = hid_base_hud,
    hid_logAddS = hid_logAddE + 20,

@@ -97,7 +97,7 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h)
    g->clpxE = x + w;
    g->clpyE = y + h;
    
-   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h);
+   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h, w);
 }
 
 //

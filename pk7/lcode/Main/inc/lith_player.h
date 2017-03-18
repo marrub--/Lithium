@@ -249,6 +249,8 @@ bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed ve
 bool Lith_ButtonPressed(struct player_s *p, int bt);
 int Lith_PlayerCurWeaponType(struct player_s *p);
 
+void Lith_PlayerDeltaStats(struct player_s *p);
+
 
 //----------------------------------------------------------------------------
 // Types
@@ -271,14 +273,15 @@ typedef struct player_s
    property reset     {call: Lith_ResetPlayer(this)}
    property loadData  {call: Lith_PlayerLoadData(this)}
    property saveData  {call: Lith_PlayerSaveData(this)}
-   property giveScore {call: Lith_GiveScore(this, prop_arg)}
-   property takeScore {call: Lith_TakeScore(this, prop_arg)}
-   property log       {call: Lith_Log (this, prop_arg)}
-   property logF      {call: Lith_LogF(this, prop_arg)}
-   property logH      {call: Lith_LogH(this, prop_arg)}
-   property setVel    {call: Lith_SetPlayerVelocity(this, prop_arg)}
-   property useGUI    {call: Lith_PlayerUseGUI(this, prop_arg)}
-   property buttonPressed {call: Lith_ButtonPressed(this, prop_arg)}
+   property giveScore {call: Lith_GiveScore(this)}
+   property takeScore {call: Lith_TakeScore(this)}
+   property log       {call: Lith_Log (this)}
+   property logF      {call: Lith_LogF(this)}
+   property logH      {call: Lith_LogH(this)}
+   property setVel    {call: Lith_SetPlayerVelocity(this)}
+   property useGUI    {call: Lith_PlayerUseGUI(this)}
+   property closeGUI  {call: Lith_PlayerCloseGUI(this)}
+   property buttonPressed {call: Lith_ButtonPressed(this)}
    property weapontype {get: Lith_PlayerCurWeaponType(this)}
    
    [[__anonymous]] player_statedata_t  statedata;

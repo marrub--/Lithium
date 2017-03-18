@@ -2,6 +2,7 @@
 #include "lith_player.h"
 #include "lith_bip.h"
 #include "lith_list.h"
+#include "lith_world.h"
 
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
@@ -24,7 +25,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page)
    page->unlocked = true;
    
    for(int i = 0; i < MAX_BIP_UNLOCKS && page->unlocks[i]; i++)
-      Lith_UnlockBIPPage(bip, page->unlocks[i]);
+      bip->unlock(page->unlocks[i]);
 }
 
 //
@@ -33,15 +34,13 @@ static void UnlockPage(bip_t *bip, bippage_t *page)
 [[__optional_args(1)]]
 static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
-   __str img_s = StrParam("LITH_TXT_INFO_IMAGE_%S", name);
-   __str img_l = StrParam("%LS", img_s);
+   __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", name);
    
    bippage_t  *page = calloc(1, sizeof(bippage_t));
                page->name     = name;
                page->category = categ;
                page->unlocked = false;
-   if(ACS_StrCmp(img_l, img_s) != 0)
-               page->image    = img_l;
+   if(image)   page->image    = image;
    if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
@@ -63,7 +62,7 @@ void Lith_PlayerInitBIP(player_t *p)
    bip_t *bip = &p->bip;
    
    ForCategory()
-      bip->infogr[categ].construct();
+      bip->infogr[categ].free(free);
    
    // This could be done a lot better with an array or something, but fuck it.
    AddToBIP(bip, BIPC_WEAPONS, "ChargeFist",      Unlocks("KSKK"));
@@ -153,6 +152,34 @@ void Lith_PlayerInitBIP(player_t *p)
 }
 
 //
+// Lith_DeliverMail
+//
+void Lith_DeliverMail(bip_t *bip, __str title)
+{
+   bippage_t *page = calloc(1, sizeof(bippage_t));
+   
+   __str date = LanguageNull("LITH_TXT_MAIL_TIME_%S", title);
+   __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
+   __str send = Language("LITH_TXT_MAIL_SEND_%S", title);
+   __str name = Language("LITH_TXT_MAIL_NAME_%S", title);
+   __str body = Language("LITH_TXT_MAIL_BODY_%S", title);
+   
+   page->name  = date ? date : world.canontimeshort;
+   page->title = name;
+   page->body  = StrParam(Language("LITH_TXT_MAIL_TEMPLATE"), send, page->name, body);
+   page->category = BIPC_MAIL;
+   page->unlocked = true;
+   
+   if(size) page->height = strtoi_str(size, null, 0);
+   
+   page->link.construct(page);
+   page->link.link(&bip->infogr[BIPC_MAIL]);
+   
+   if(ACS_Random(1, 10000) == 1)
+      ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
+}
+
+//
 // Lith_FindBIPPage
 //
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
@@ -169,7 +196,7 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 //
 bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
 {
-   bippage_t *page = Lith_FindBIPPage(bip, name);
+   bippage_t *page = bip->find(name);
    
    if(page && !page->unlocked)
       UnlockPage(bip, page);
@@ -194,6 +221,8 @@ void Lith_PlayerLoseBIPPages(bip_t *bip)
 {
    ForCategory()
    {
+      if(categ == BIPC_MAIL) continue;
+      
       ForPage()
          page->unlocked = false;
       bip->categoryavail[categ] = 0;
@@ -242,14 +271,24 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
             continue;
          
-         __str name =
-            StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", Language("LITH_TXT_INFO_SHORT_%S", page->name));
+         __str name;
+         
+         if(page->category == BIPC_MAIL) name = page->name;
+         else                            name = Language("LITH_TXT_INFO_SHORT_%S", page->name);
+         
+         name = StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", name);
          
          if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpagenum == i, .preset = &btnlist))
          {
             bip->curpagenum = i;
             bip->curpage    = page;
-            Lith_GUI_TypeOn(g, st_biptypeon, Language("LITH_TXT_INFO_DESCR_%S", page->name));
+            
+            __str body;
+            
+            if(page->body) body = page->body;
+            else           body = Language("LITH_TXT_INFO_DESCR_%S", page->name);
+            
+            Lith_GUI_TypeOn(g, st_biptypeon, body);
          }
       }
       
@@ -260,22 +299,37 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       if(bip->curpage)
       {
+         bippage_t *page = bip->curpage;
+         
          gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_biptypeon);
          
-         ACS_SetHudClipRect(111, 40, 184, 180, 184);
+         int oy = 0;
          
-         if(bip->curpage->image)
-            DrawSpriteAlpha(bip->curpage->image, g->hid--, 296.2, 180.2, TICSECOND, 0.5);
+         if(page->height)
+         {
+            Lith_GUI_ScrollBegin(g, st_bipinfoscr, 100, 40, 184, 180, page->height);
+            oy = g->oy - 40;
+         }
+         else ACS_SetHudClipRect(111, 40, 184, 180, 184);
+         
+         if(page->image)
+            DrawSpriteAlpha(page->image, g->hid--, 296.2, 180.2, TICSECOND, 0.5);
          
          DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
          
-         HudMessageF("CBIFONT", "\Cj%S", Language("LITH_TXT_INFO_TITLE_%S", bip->curpage->name));
-         HudMessagePlain(g->hid--, 200.4, 45.1, TICSECOND);
+         __str title;
+         
+         if(page->title) title = page->title;
+         else            title = Language("LITH_TXT_INFO_TITLE_%S", page->name);
+         
+         HudMessageF("CBIFONT", "\Cj%S", title);
+         HudMessagePlain(g->hid--, 200.4, 45.1 + oy, TICSECOND);
          
          HudMessageF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-         HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
+         HudMessagePlain(g->hid--, 111.1, 60.1 + oy, TICSECOND);
          
-         ACS_SetHudClipRect(0, 0, 0, 0);
+         if(page->height) Lith_GUI_ScrollEnd(g, st_bipinfoscr);
+         else             ACS_SetHudClipRect(0, 0, 0, 0);
       }
       
       avail = bip->categoryavail[bip->curcategory];
@@ -286,8 +340,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
    HudMessagePlain(g->hid--, 35.1, 30.1, TICSECOND);
    
-   HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
-   HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
+   if(max)
+   {
+      HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
+      HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
+   }
 }
 
 // EOF

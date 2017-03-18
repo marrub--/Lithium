@@ -1,0 +1,1 @@
+server noarchive int __lith_game = 1;

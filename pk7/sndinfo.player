@@ -19,6 +19,7 @@ player/counterdone lsounds/Player/CounterDone.flac         // 〃
 player/hitground   lsounds/Player/HitGround.ogg            // 〃
 player/zoomin      lsounds/Player/ZoomIn.flac              // 〃
 player/zoomout     lsounds/Player/ZoomOut.flac             // 〃
+player/YOUVEGOTMAIL lsounds/Player/Mail.ogg                // AOL
 
 $volume player/death2 0.7
 $volume player/nuke 0.7

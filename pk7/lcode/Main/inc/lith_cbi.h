@@ -30,6 +30,7 @@ enum
    st_shopscr,
    st_bipscr,
    st_biptypeon,
+   st_bipinfoscr,
    st_settingscr,
    st_logscr,
    st_logsel,

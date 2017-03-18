@@ -32,6 +32,24 @@ payoutinfo_t payout;
 //
 
 //
+// Lith_CanonTime
+//
+__str Lith_CanonTime(bool shorttime)
+{
+   int seconds = 53 + (world.ticks / 35);
+   int minutes = 30 + (seconds     / 60);
+   int hours   = 14 + (minutes     / 60);
+   int days    = 25 + (hours       / 24); // pls
+   
+   if(shorttime)
+      return StrParam("%0.2i:%0.2i %i/7/49",
+         hours % 24, minutes % 60, days);
+   else
+      return StrParam("%0.2i:%0.2i:%0.2i %i/7/1649",
+         hours % 24, minutes % 60, seconds % 60, days);
+}
+
+//
 // Lith_UniqueID
 //
 int Lith_UniqueID(int tid)
@@ -271,9 +289,21 @@ static void Lith_World(void)
    // World-static init.
    if(ACS_Timer() <= 2)
    {
-      // Payout is not done on the first map start.
+      // Payout, which is not done on the first map start.
       if(!firstmap)
          Lith_DoPayout();
+      
+      if(world.game == Game_Doom2 && world.cluster != world.prevcluster)
+      {
+         switch(world.prevcluster)
+         {
+         case 5: ForPlayer() p->bip.deliverMail("Cluster1"); break;
+         case 6: ForPlayer() p->bip.deliverMail("Cluster2"); break;
+         case 7: ForPlayer() p->bip.deliverMail("Cluster3"); break;
+         }
+      }
+      
+      world.prevcluster = world.cluster;
    }
    
    payout.killmax += world.mapkillmax;
@@ -307,6 +337,8 @@ static void Lith_World(void)
       previtems   = items;
       
       ACS_Delay(1);
+      
+      world.ticks++;
    }
 }
 
@@ -320,6 +352,8 @@ static void Lith_WorldUnload(void)
    {
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);
+      p->closeGUI();
+      Lith_PlayerDeltaStats(p);
    }
 }
 

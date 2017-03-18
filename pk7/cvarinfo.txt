@@ -68,4 +68,7 @@ server noarchive bool   __lith_debug_on   = false;
 server noarchive bool   __lith_debug_save = false;
 server noarchive string __lith_debug_upgrade;
 
+// Do-not-write
+server noarchive int __lith_game = 0;
+
 // EOF

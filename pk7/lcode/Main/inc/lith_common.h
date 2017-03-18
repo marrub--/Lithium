@@ -111,6 +111,7 @@ typedef long fixed fixed64_t;
 // Printing
 __str StrParam(__str fmt, ...);
 __str Language(__str fmt, ...);
+__str LanguageNull(__str fmt, ...);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);

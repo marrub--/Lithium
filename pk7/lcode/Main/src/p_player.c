@@ -30,7 +30,6 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
-static void Lith_PlayerDeltaStats(player_t *p);
 
 
 //----------------------------------------------------------------------------
@@ -106,7 +105,7 @@ static void Lith_PlayerDeath(void)
    if(singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
       Lith_PlayerLoseUpgrades(p);
-      Lith_PlayerLoseBIPPages(&p->bip);
+      p->bip.losePages();
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
    
@@ -156,7 +155,7 @@ static void Lith_PlayerDisconnect(void)
 {
    player_t *p = LocalPlayer;
    
-   Lith_DeallocateBIP(&p->bip);
+   p->bip.deallocate();
    
    p->loginfo.hud.free();
    p->hudstrlist.free(free);
@@ -178,9 +177,9 @@ void Lith_PlayerCloseGUI(player_t *p)
 {
    if(p->activegui != GUI_NONE)
    {
+      p->activegui = GUI_NONE;
       p->frozen--;
       ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
-      p->activegui = GUI_NONE;
    }
 }
 
@@ -203,9 +202,7 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
       if(ACS_GetCVar("__lith_pausemenu_addon"))
          ACS_ScriptCall("Lith_PauseManager", "SetPaused", false);
       
-      p->activegui = GUI_NONE;
-      p->frozen--;
-      ACS_LocalAmbientSound(Lith_GUISounds[type].off, 127);
+      p->closeGUI();
    }
    else
    {
@@ -367,7 +364,7 @@ static void Lith_PlayerStats(player_t *p)
 //
 // Lith_PlayerDeltaStats
 //
-static void Lith_PlayerDeltaStats(player_t *p)
+void Lith_PlayerDeltaStats(player_t *p)
 {
    if(p->frozen    != p->old.frozen)    ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
    if(p->speedmul  != p->old.speedmul)  ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
