@@ -11,7 +11,7 @@
 //
 
 weaponinfo_t const weaponinfo[weapon_max] = {
-// {S, "Type-----------", Cost----, "Pickup Sound-----------", AT_Type,  "Ammo Class------------"},
+// {S, "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
    {0, null,              "MMMMHMHMMMHMMM"},
    {1, "Fist",            "MMMMHMHMMMHMMM"},
    {1, "ChargeFist",      "weapons/cfist/pickup"},

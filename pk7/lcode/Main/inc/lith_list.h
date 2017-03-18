@@ -6,11 +6,11 @@
 #include <stddef.h>
 
 #define Lith_ForList(var, name) \
-   for(list_t *rover = (name).next; rover != &(name); rover = rover->next) \
+   for(list_t *rover = (name).next; rover && rover != &(name); rover = rover->next) \
       __with(var = rover->object;)
 
 #define Lith_ForListIter(var, name, ...) \
-   for(list_t *rover = (name).next; rover != &(name); rover = rover->next, __VA_ARGS__) \
+   for(list_t *rover = (name).next; rover && rover != &(name); rover = rover->next, __VA_ARGS__) \
       __with(var = rover->object;)
 
 

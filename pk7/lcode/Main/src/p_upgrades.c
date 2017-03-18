@@ -30,6 +30,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0.00, ug_shotgun},
    {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0.00, ug_rifle},
    {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0.00, ug_launcher},
+   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  0.00, ug_launcher},
    {{"PlasLaser",   "PlasmaUpgr",   2300000 }, UC_Weap,  0.00, ug_plasma},
    {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0.00, ug_bfg},
    {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  0.00, ug_bfg},

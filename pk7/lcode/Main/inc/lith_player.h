@@ -247,6 +247,7 @@ void Lith_ValidatePlayerTID(struct player_s *p);
 [[__optional_args(2)]]
 bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 bool Lith_ButtonPressed(struct player_s *p, int bt);
+int Lith_PlayerCurWeaponType(struct player_s *p);
 
 
 //----------------------------------------------------------------------------
@@ -278,6 +279,7 @@ typedef struct player_s
    property setVel    {call: Lith_SetPlayerVelocity(this, prop_arg)}
    property useGUI    {call: Lith_PlayerUseGUI(this, prop_arg)}
    property buttonPressed {call: Lith_ButtonPressed(this, prop_arg)}
+   property weapontype {get: Lith_PlayerCurWeaponType(this)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

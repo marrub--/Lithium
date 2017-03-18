@@ -15,6 +15,14 @@ static void Lith_GetArmorType(player_t *p);
 //
 
 //
+// Lith_PlayerCurWeaponType
+//
+int Lith_PlayerCurWeaponType(player_t *p)
+{
+   return p->weapon.cur->info->type;
+}
+
+//
 // Lith_ButtonPressed
 //
 bool Lith_ButtonPressed(player_t *p, int bt)

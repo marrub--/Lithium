@@ -17,6 +17,7 @@ enum
    UPGR_PoisonShot,
    UPGR_RifleModes,
    UPGR_ChargeRPG,
+   UPGR_HomingRPG,
    UPGR_PlasLaser,
    UPGR_PunctCannon,
    UPGR_OmegaRail,

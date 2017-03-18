@@ -227,7 +227,7 @@ static void HUD_KeyInd(player_t *p)
 //
 static void HUD_Mode(player_t *p)
 {
-   if(p->weapon.cur->info->type == weapon_rifle)
+   if(p->weapontype == weapon_rifle)
    {
       int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
       DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 200.2 + addy, TICSECOND);

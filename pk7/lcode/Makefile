@@ -47,6 +47,7 @@ MAIN_SOURCES= \
 	$(SRC)/u_unceunce.c \
 	$(SRC)/u_vitalscan.c \
 	$(SRC)/u_zoom.c \
+	$(SRC)/u_homingrpg.c \
 	$(SRC)/p_cbi.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \

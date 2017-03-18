@@ -4,6 +4,7 @@
 #include "lith_common.h"
 #include "lith_upgradenames.h"
 #include "lith_shopdef.h"
+#include "lith_list.h"
 
 #define UserData_Adrenaline data.u01
 #define UserData_Implying   data.u02
@@ -13,6 +14,7 @@
 #define UserData_ReflexWetw data.u06
 #define UserData_VitalScan  data.u07
 #define UserData_Zoom       data.u08
+#define UserData_HomingRPG  data.u09
 
 #define NUMAUTOGROUPS 4
 
@@ -86,6 +88,8 @@ union upgradedata_u
       int zoom;
       float vzoom;
    } u08;
+   
+   struct {int id;} u09;
 };
 
                       typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);

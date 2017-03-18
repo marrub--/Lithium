@@ -44,7 +44,7 @@ void *Lith_ListUnlink(list_t *list)
 size_t Lith_ListSize(list_t *head)
 {
    size_t count = 0;
-   for(list_t *rover = head->next; rover != head; rover = rover->next)
+   for(list_t *rover = head->next; rover && rover != head; rover = rover->next)
       count++;
    return count;
 }

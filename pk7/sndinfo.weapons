@@ -176,6 +176,7 @@ weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac      // 〃
 weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac      // Killing Floor
 weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac     // 〃
 weapons/rocket/grenade lsounds/RocketLauncher/FireGrenade.flac // Quake, Quake 2
+weapons/rocket/mark    lsounds/RocketLauncher/Mark.flac        // Phantasy Star Nova
 
 $random weapons/rocket/fire {
    weapons/rocket/fire1
