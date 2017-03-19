@@ -7,6 +7,7 @@ CBox("Automatically buy group #4", p->autobuy[3], ToggleAutoBuy(p, 3))
 Category("GUI")
 Float("Horizontal cursor speed", "lith_gui_xmul", 0.1f, 2.0f)
 Float("Vertical cursor speed",   "lith_gui_ymul", 0.1f, 2.0f)
+Enum("Color Theme",              "lith_gui_theme", cbi_theme_min, cbi_theme_max-1, "%S", ThemeName(set))
 
 Category("Player")
 Float("Damage bob multiplier", "lith_player_damagebobmul", 0.0f, 1.0f)

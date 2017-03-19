@@ -97,11 +97,11 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_ENEMIES, "LostSoul");
    AddToBIP(bip, BIPC_ENEMIES, "Mancubus");
    AddToBIP(bip, BIPC_ENEMIES, "Arachnotron");
+   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
    
    AddToBIP(bip, BIPC_ENEMIES, "HellKnight");
    AddToBIP(bip, BIPC_ENEMIES, "BaronOfHell");
    AddToBIP(bip, BIPC_ENEMIES, "Revenant");
-   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
    
    AddToBIP(bip, BIPC_ENEMIES, "PainElemental");
    AddToBIP(bip, BIPC_ENEMIES, "Archvile");
@@ -175,8 +175,13 @@ void Lith_DeliverMail(bip_t *bip, __str title)
    page->link.construct(page);
    page->link.link(&bip->infogr[BIPC_MAIL]);
    
+   bip->mailreceived++;
+   
    if(ACS_Random(1, 10000) == 1)
+   {
+      bip->mailtrulyreceived++;
       ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
+   }
 }
 
 //
@@ -252,9 +257,42 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          bip->curpage     = null; \
       }
 #include "lith_bip.h"
+      if(Lith_GUI_Button(g, "Statistics", 70, 80 + (BIPC_MAX * 10), .preset = &btnbipmain))
+         bip->curcategory = BIPC_STATS;
       
       avail = bip->pageavail;
       max   = bip->pagemax;
+   }
+   else if(bip->curcategory == BIPC_STATS)
+   {
+      int n = 0;
+      
+      #define Stat(name, f, x) \
+         HudMessageF("CBIFONT", name); HudMessagePlain(g->hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
+         HudMessageF("CBIFONT", f, x); HudMessagePlain(g->hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND); \
+         n++
+      
+      HudMessageF("SMALLFNT", "\Cj%S", p->name);
+      HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+      Stat("Weapons Found",       "%i",   p->weaponsheld);
+      Stat("Health Used",         "%li",  p->healthused);
+      Stat("Health Sum",          "%li",  p->healthsum);
+      Stat("Score Used",          "%lli", p->scoreused);
+      Stat("Score Sum",           "%lli", p->scoresum);
+      Stat("Armor Used",          "%li",  p->armorused);
+      Stat("Armor Sum",           "%li",  p->armorsum);
+      Stat("Secrets Found",       "%i",   world.secretsfound);
+      Stat("Units Travelled",     "%i",   p->unitstravelled);
+      Stat("Upgrades Owned",      "%i",   p->upgradesowned);
+      Stat("Items Bought",        "%i",   p->itemsbought);
+      Stat("Mail Received",       "%i",   bip->mailreceived);
+      Stat("Seconds Played",      "%li",  p->ticks / 35l);
+      Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
+      Stat("Brouzouf Gained",     "%i",   p->brouzouf);
+      Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
+   // Stat("Rituals Performed",   "%i",   0);
+      
+      #undef Stat
    }
    else
    {
@@ -294,9 +332,6 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       Lith_GUI_ScrollEnd(g, st_bipscr);
       
-      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &btnbipback))
-         bip->curcategory = BIPC_MAIN;
-      
       if(bip->curpage)
       {
          bippage_t *page = bip->curpage;
@@ -335,6 +370,10 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       avail = bip->categoryavail[bip->curcategory];
       max   = bip->categorymax[bip->curcategory];
    }
+   
+   if(bip->curcategory != BIPC_MAIN)
+      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &btnbipback))
+         bip->curcategory = BIPC_MAIN;
    
    DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 30.1, TICSECOND, 0.6);
    HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");

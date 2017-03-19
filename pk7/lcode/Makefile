@@ -48,7 +48,7 @@ MAIN_SOURCES= \
 	$(SRC)/u_vitalscan.c \
 	$(SRC)/u_zoom.c \
 	$(SRC)/u_homingrpg.c \
-	$(SRC)/p_cbi.c \
+	$(SRC)/p_cbigui.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \
 	$(SRC)/p_log.c \
@@ -69,7 +69,8 @@ MAIN_SOURCES= \
 	$(SRC)/g_checkbox.c \
 	$(SRC)/g_preset.c \
 	$(SRC)/g_scrollbar.c \
-	$(SRC)/g_slider.c
+	$(SRC)/g_slider.c \
+	$(SRC)/p_settings.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 MAIN_HEADERS=$(wildcard $(INC)/*.h)

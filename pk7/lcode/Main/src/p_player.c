@@ -245,10 +245,16 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    
    //
    if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
+   {
+      p->brouzouf += score;
       p->log("> You gained brouzouf.");
+   }
    
    if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0)
+   {
+      p->spuriousexplosions++;
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
+   }
    
    // Add score and set score accumulator
    p->score          += score;
@@ -305,8 +311,8 @@ static void Lith_PlayerRunScripts(player_t *p)
       // Logic: Update our data.
       switch(p->activegui)
       {
-      case GUI_CBI: Lith_PlayerUpdateCBI(p); break; // Update CBI
-      case GUI_GB:  Lith_PlayerUpdateGB(p);  break; // Update Gameboy
+      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break; // Update CBI
+      case GUI_GB:  Lith_PlayerUpdateGB(p);     break; // Update Gameboy
       }
       
       Lith_PlayerUpdateUpgrades(p); // Update upgrades

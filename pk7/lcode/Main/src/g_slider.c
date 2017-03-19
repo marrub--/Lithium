@@ -15,12 +15,16 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
 {
    Lith_GUI_GenPreset(gui_slider_preset_t, slddefault);
    
-   double w = pre->w - (pre->pad * 2);
+   Lith_GUI_Prefix(pre.gfx);
+   Lith_GUI_Prefix(pre.notch);
+   Lith_GUI_Prefix(pre.notchhot);
    
-   int x = a->x + pre->pad;
+   double w = pre.w - (pre.pad * 2);
+   
+   int x = a->x + pre.pad;
    int y = a->y;
    
-   Lith_GUI_Auto(g, id, x, y, w, pre->h);
+   Lith_GUI_Auto(g, id, x, y, w, pre.h);
    
    x += g->ox;
    y += g->oy;
@@ -42,7 +46,7 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
       
       // play sound
       if(g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
-         ACS_LocalAmbientSound(pre->snd, 60);
+         ACS_LocalAmbientSound(pre.snd, 60);
    }
    else
       val = aval;
@@ -53,14 +57,14 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    if(a->integ) norm = round(norm);
    
    // draw graphic
-   DrawSpritePlain(pre->gfx, g->hid--, (x - pre->pad) + 0.1, y + (pre->h / 2), TICSECOND);
+   DrawSpritePlain(pre.gfx, g->hid--, (x - pre.pad) + 0.1, y + (pre.h / 2), TICSECOND);
    
    // draw notch
    {
    __str graphic;
    
-   if(g->hot == id || g->active == id) graphic = pre->notchhot;
-   else                                graphic = pre->notch;
+   if(g->hot == id || g->active == id) graphic = pre.notchhot;
+   else                                graphic = pre.notch;
    
    DrawSpritePlain(graphic, g->hid--, x + (int)(val * w) - 1 + 0.1, y + 0.1, TICSECOND);
    }
@@ -69,7 +73,7 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a)
    if(a->integ) HudMessageF("CBIFONT", "\Cj%i",     (int)(round(norm * 100.0) / 100.0));
    else         HudMessageF("CBIFONT", "\Cj%.1k", (fixed)(round(norm * 100.0) / 100.0));
    
-   HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
+   HudMessagePlain(g->hid--, x + (pre.w / 2) + 0.4, y + (pre.h / 2), TICSECOND);
    
    // if we've moved it, we return a difference
    if(g->active == id && !g->clicklft && !CloseEnough(aval, val))

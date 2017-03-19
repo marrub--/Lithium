@@ -169,7 +169,7 @@ void Lith_ResetPlayer(player_t *p)
    ACS_TakeInventory("Lith_RocketAltMode",      999);
    ACS_TakeInventory("Lith_MissileReset",       999);
    
-   Lith_PlayerResetCBI(p);
+   Lith_PlayerResetCBIGUI(p);
    
    p->frozen   = 0;
    

@@ -32,6 +32,7 @@ void Lith_GUI_Init(gui_state_t *g, size_t maxst)
 {
    if(g->st) free(g->st);
    g->st = calloc(maxst, sizeof(gui_stateitem_t));
+   g->gfxprefix = "lgfx/UI/";
 }
 
 //

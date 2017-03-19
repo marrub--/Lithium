@@ -123,6 +123,9 @@ typedef struct player_extdata_s
    score_t scoreaccum;
    int     scoreaccumtime;
    double  scoremul;
+   
+   int spuriousexplosions;
+   int brouzouf;
 } player_extdata_t;
 
 //

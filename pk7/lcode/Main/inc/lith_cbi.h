@@ -13,10 +13,20 @@ enum
    cbi_tab_upgrades,
    cbi_tab_shop,
    cbi_tab_bip,
-   cbi_tab_statistics,
    cbi_tab_settings,
    cbi_tab_log,
    cbi_tab_max
+};
+
+enum
+{
+   cbi_theme_min,
+   cbi_theme_green = cbi_theme_min,
+   cbi_theme_rose,
+   cbi_theme_umi,
+   cbi_theme_ender,
+   cbi_theme_orange,
+   cbi_theme_max
 };
 
 enum
@@ -40,6 +50,7 @@ enum
 typedef struct cbi_s
 {
    gui_state_t guistate;
+   int theme, oldtheme;
 } cbi_t;
 
 
@@ -48,8 +59,8 @@ typedef struct cbi_s
 //
 
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateCBI(struct player_s *p);
-void Lith_PlayerResetCBI(struct player_s *p);
+void Lith_PlayerUpdateCBIGUI(struct player_s *p);
+void Lith_PlayerResetCBIGUI(struct player_s *p);
 
 #endif
 

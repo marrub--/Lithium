@@ -39,7 +39,8 @@ enum
 #define LITH_X(n, id, name, capt) BIPC_##name = n,
 #include "lith_bip.h"
    BIPC_MAX,
-   BIPC_MAIN
+   BIPC_MAIN,
+   BIPC_STATS
 };
 
 typedef __str bip_unlocks_t[MAX_BIP_UNLOCKS];
@@ -70,6 +71,7 @@ typedef struct bip_s
    int categorymax[BIPC_MAX];
    int pageavail;
    int pagemax;
+   int mailreceived, mailtrulyreceived;
    
    // State
    bippage_t *curpage;

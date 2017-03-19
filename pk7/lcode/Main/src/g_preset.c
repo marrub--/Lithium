@@ -15,8 +15,8 @@
 
 gui_button_preset_t const btndefault = {
    BtnDefault,
-   .gfx  = "lgfx/UI/Button.png",
-   .hot  = "lgfx/UI/ButtonHot.png",
+   .gfx  = "Button.png",
+   .hot  = "ButtonHot.png",
    .cdis = "m",
    .w = 48,
    .h = 16
@@ -24,56 +24,56 @@ gui_button_preset_t const btndefault = {
 
 gui_button_preset_t const btntab = {
    BtnDefault,
-   .gfx  = "lgfx/UI/Tab.png",
-   .hot  = "lgfx/UI/TabHot.png",
+   .gfx  = "Tab.png",
+   .hot  = "TabHot.png",
    .cdis = "i",
    .w = 46,
    .h = 11
 };
 
 gui_button_preset_t const btnexit = {
-   .gfx  = "lgfx/UI/ExitButton.png",
-   .hot  = "lgfx/UI/ExitButtonHot.png",
+   .gfx  = "ExitButton.png",
+   .hot  = "ExitButtonHot.png",
    .w = 11,
    .h = 11
 };
 
 gui_button_preset_t const btnnext = {
    BtnDefault,
-   .gfx  = "lgfx/UI/BtnNext.png",
-   .hot  = "lgfx/UI/BtnNextHot.png",
+   .gfx  = "BtnNext.png",
+   .hot  = "BtnNextHot.png",
    .w = 8,
    .h = 11
 };
 
 gui_button_preset_t const btnprev = {
    BtnDefault,
-   .gfx  = "lgfx/UI/BtnPrev.png",
-   .hot  = "lgfx/UI/BtnPrevHot.png",
+   .gfx  = "BtnPrev.png",
+   .hot  = "BtnPrevHot.png",
    .w = 8,
    .h = 11
 };
 
 gui_button_preset_t const btnnexts = {
    BtnDefault,
-   .gfx  = "lgfx/UI/BtnNextSmall.png",
-   .hot  = "lgfx/UI/BtnNextSmallHot.png",
+   .gfx  = "BtnNextSmall.png",
+   .hot  = "BtnNextSmallHot.png",
    .w = 6,
    .h = 9
 };
 
 gui_button_preset_t const btnprevs = {
    BtnDefault,
-   .gfx  = "lgfx/UI/BtnPrevSmall.png",
-   .hot  = "lgfx/UI/BtnPrevSmallHot.png",
+   .gfx  = "BtnPrevSmall.png",
+   .hot  = "BtnPrevSmallHot.png",
    .w = 6,
    .h = 9
 };
 
 gui_button_preset_t const btnlist = {
    BtnDefault,
-   .gfx  = "lgfx/UI/ListButton.png",
-   .hot  = "lgfx/UI/ListButtonHot.png",
+   .gfx  = "ListButton.png",
+   .hot  = "ListButtonHot.png",
    .cdis = "u",
    .w = 80,
    .h = 9
@@ -81,8 +81,8 @@ gui_button_preset_t const btnlist = {
 
 gui_button_preset_t const btnlistsel = {
    BtnDefault,
-   .gfx  = "lgfx/UI/ListButton.png",
-   .hot  = "lgfx/UI/ListButtonHot.png",
+   .gfx  = "ListButton.png",
+   .hot  = "ListButtonHot.png",
    .cdis = "i",
    .w = 80,
    .h = 9
@@ -90,8 +90,8 @@ gui_button_preset_t const btnlistsel = {
 
 gui_button_preset_t const btnlistactive = {
    BtnDefault,
-   .gfx  = "lgfx/UI/ListButtonActive.png",
-   .hot  = "lgfx/UI/ListButtonActiveHot.png",
+   .gfx  = "ListButtonActive.png",
+   .hot  = "ListButtonActiveHot.png",
    .cdis = "i",
    .w = 80,
    .h = 9
@@ -99,8 +99,8 @@ gui_button_preset_t const btnlistactive = {
 
 gui_button_preset_t const btnlistactivated = {
    BtnDefault,
-   .gfx  = "lgfx/UI/ListButtonActivated.png",
-   .hot  = "lgfx/UI/ListButtonActiveHot.png",
+   .gfx  = "ListButtonActivated.png",
+   .hot  = "ListButtonActiveHot.png",
    .cdis = "i",
    .w = 80,
    .h = 9
@@ -121,50 +121,50 @@ gui_button_preset_t const btnbipback = {
 };
 
 gui_checkb_preset_t const cbxdefault = {
-   .gfx    = "lgfx/UI/Checkbox.png",
-   .hot    = "lgfx/UI/CheckboxHot.png",
-   .dis    = "lgfx/UI/CheckboxDisabled.png",
+   .gfx    = "Checkbox.png",
+   .hot    = "CheckboxHot.png",
+   .dis    = "CheckboxDisabled.png",
    .sndup  = "player/cbi/clickon",
    .snddn  = "player/cbi/clickoff",
-   .chkgfx = "lgfx/UI/CheckboxX.png",
-   .chkhot = "lgfx/UI/CheckboxXHot.png",
-   .chkact = "lgfx/UI/CheckboxXActive.png",
-   .chkdis = "lgfx/UI/CheckboxXDisabled.png",
+   .chkgfx = "CheckboxX.png",
+   .chkhot = "CheckboxXHot.png",
+   .chkact = "CheckboxXActive.png",
+   .chkdis = "CheckboxXDisabled.png",
    .font = "CNFONT",
    .w = 10,
    .h = 10
 };
 
 gui_checkb_preset_t const cbxsmall = {
-   .gfx    = "lgfx/UI/CheckboxSmall.png",
-   .hot    = "lgfx/UI/CheckboxSmallHot.png",
-   .dis    = "lgfx/UI/CheckboxSmallDisabled.png",
+   .gfx    = "CheckboxSmall.png",
+   .hot    = "CheckboxSmallHot.png",
+   .dis    = "CheckboxSmallDisabled.png",
    .sndup  = "player/cbi/clickon",
    .snddn  = "player/cbi/clickoff",
-   .chkgfx = "lgfx/UI/CheckboxX.png",
-   .chkhot = "lgfx/UI/CheckboxXHot.png",
-   .chkact = "lgfx/UI/CheckboxXActive.png",
-   .chkdis = "lgfx/UI/CheckboxXDisabled.png",
+   .chkgfx = "CheckboxX.png",
+   .chkhot = "CheckboxXHot.png",
+   .chkact = "CheckboxXActive.png",
+   .chkdis = "CheckboxXDisabled.png",
    .font = "CNFONT",
    .w = 10,
    .h = 10
 };
 
 gui_scroll_preset_t const scrdefault = {
-   .capS  = "lgfx/UI/ListCapTop.png",
-   .capE  = "lgfx/UI/ListCapBottom.png",
-   .scrl  = "lgfx/UI/ListScrollbar.png",
+   .capS  = "ListCapTop.png",
+   .capE  = "ListCapBottom.png",
+   .scrl  = "ListScrollbar.png",
    .scrlw = 8,
    .scrlh = 8,
-   .notchgfx = "lgfx/UI/ListScrollNotch.png",
-   .notchhot = "lgfx/UI/ListScrollNotchHot.png"
+   .notchgfx = "ListScrollNotch.png",
+   .notchhot = "ListScrollNotchHot.png"
 };
 
 gui_slider_preset_t const slddefault = {
-   .gfx    = "lgfx/UI/Slider.png",
+   .gfx    = "Slider.png",
    .snd    = "player/cbi/slidertick",
-   .notch  = "lgfx/UI/SliderNotch.png",
-   .notchhot = "lgfx/UI/SliderNotchHot.png",
+   .notch  = "SliderNotch.png",
+   .notchhot = "SliderNotchHot.png",
    .pad = 2,
    .w   = 80,
    .h = 7

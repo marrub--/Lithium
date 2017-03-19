@@ -18,10 +18,16 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
 {
    Lith_GUI_GenPreset(gui_scroll_preset_t, scrdefault);
    
+   Lith_GUI_Prefix(pre.capS);
+   Lith_GUI_Prefix(pre.capE);
+   Lith_GUI_Prefix(pre.scrl);
+   Lith_GUI_Prefix(pre.notchgfx);
+   Lith_GUI_Prefix(pre.notchhot);
+   
    gui_scroll_state_t *scr = &g->st[a->st].scrl;
    
    // sizes
-   int const blockh  = pre->scrlh;          // height of graphical block
+   int const blockh  = pre.scrlh;           // height of graphical block
    int const blocks  = (a->h / blockh) - 1; // height in graphical blocks minus caps
    int const caph    = blockh / 2;          // size of cap
    int const caps    = blocks * 2;          // height in caps, minus caps
@@ -29,11 +35,11 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    int const realh   = h + (caph * 2);      // height in pixels plus caps
    
    // positions
-   int x = a->x + pre->scrlw; // base x to draw from
-   int y = a->y;              // base y to draw from
+   int x = a->x + pre.scrlw; // base x to draw from
+   int y = a->y;             // base y to draw from
    
    // check collision - height is minus caps, and y is offset by the top cap
-   Lith_GUI_Auto(g, id, x - pre->scrlw, y + caph, pre->scrlw, h);
+   Lith_GUI_Auto(g, id, x - pre.scrlw, y + caph, pre.scrlw, h);
    
    // add offset
    x += g->ox;
@@ -85,7 +91,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
          vofs = round((a->contenth - realh) * (scr->y / maxy));
       
       // set the scrollbar's offset
-      scr->ox = a->x + pre->scrlw; // offset by scrollbar width
+      scr->ox = a->x + pre.scrlw; // offset by scrollbar width
       scr->oy = a->y - vofs;       // offset by scroller pos
       
       // set the top and bottom for occlusion
@@ -94,25 +100,25 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
    }
    
    // draw top cap
-   DrawSpritePlain(pre->capS, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+   DrawSpritePlain(pre.capS, g->hid--, x + 0.2, y + 0.1, TICSECOND);
    y += caph;
    
    // draw middle of bar
    for(int i = 0; i < blocks; i++)
    {
-      DrawSpritePlain(pre->scrl, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+      DrawSpritePlain(pre.scrl, g->hid--, x + 0.2, y + 0.1, TICSECOND);
       y += blockh;
    }
    
    // draw bottom cap
-   DrawSpritePlain(pre->capE, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+   DrawSpritePlain(pre.capE, g->hid--, x + 0.2, y + 0.1, TICSECOND);
    
    // get base Y
    int const ory = a->y + g->oy;
    
    // draw scroller
    {
-      __str graphic = g->hot == id || g->active == id ? pre->notchhot : pre->notchgfx;
+      __str graphic = g->hot == id || g->active == id ? pre.notchhot : pre.notchgfx;
       
       for(int i = 0; i < notches; i++)
       {

@@ -14,10 +14,11 @@
 #define Lith_GUI_Slider_Id(g, id, ...) Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
 
 #define Lith_GUI_GenPreset(type, def) \
-   type const *pre; \
-   if(a->preset) pre = a->preset; \
-   else          pre = &def
+   type pre; \
+   if(a->preset) pre = *a->preset; \
+   else          pre = def
 
+#define Lith_GUI_Prefix(set) if(set) set = StrParam("%S%S", g->gfxprefix, set)
 
 //----------------------------------------------------------------------------
 // Type Definitions
@@ -74,6 +75,8 @@ typedef struct gui_state_s
    int clpxS, clpyS, clpxE, clpyE;
    
    gui_stateitem_t *st;
+   
+   __str gfxprefix;
 } gui_state_t;
 
 typedef struct gui_button_preset_s
