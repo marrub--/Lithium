@@ -26,6 +26,7 @@ enum
    cbi_theme_umi,
    cbi_theme_ender,
    cbi_theme_orange,
+   cbi_theme_grey,
    cbi_theme_max
 };
 

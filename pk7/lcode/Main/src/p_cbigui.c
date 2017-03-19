@@ -28,6 +28,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
       case cbi_theme_umi:    p->cbi.guistate.gfxprefix = "lgfx/UI_Umi/";    break;
       case cbi_theme_ender:  p->cbi.guistate.gfxprefix = "lgfx/UI_Ender/";  break;
       case cbi_theme_orange: p->cbi.guistate.gfxprefix = "lgfx/UI_Orange/"; break;
+      case cbi_theme_grey:   p->cbi.guistate.gfxprefix = "lgfx/UI_Grey/";   break;
       }
    }
    

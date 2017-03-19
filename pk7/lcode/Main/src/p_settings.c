@@ -36,6 +36,7 @@ static __str ThemeName(int num)
    case cbi_theme_umi:    return "Umi";
    case cbi_theme_ender:  return "Ender";
    case cbi_theme_orange: return "Orange";
+   case cbi_theme_grey:   return "Grey";
    default:               return "Unknown";
    }
 }
