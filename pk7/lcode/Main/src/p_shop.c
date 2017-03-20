@@ -22,6 +22,7 @@ static shopitem_t shopitems[] = {
 // {{"Name-----------", "BIP------------", Cost---}, Cnt-, "Class----------------"},
    {{"RocketAmmo",      null,              9000   },    5, "Lith_RocketAmmo"      },
    {{"PlasmaAmmo",      null,              75750  }, 1000, "Lith_PlasmaAmmo"      },
+   {{"ChargeFist",      "ChargeFist",      100000 },    1, "Lith_ChargeFist"      },
    {{"Revolver",        "Revolver",        500000 },    1, "Lith_Revolver"        },
    {{"LazShotgun",      "LazShotgun",      1800000},    1, "Lith_LazShotgun"      },
    {{"SniperRifle",     "SniperRifle",     1800000},    1, "Lith_SniperRifle"     },

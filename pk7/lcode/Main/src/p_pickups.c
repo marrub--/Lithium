@@ -71,7 +71,8 @@ static __str names_rifle[] = {
 static __str names_launcher[] = {
    "Ruckebt Laurence",
    "Rawket Lawnchair",
-   "Rokkit Luncher"
+   "Rokkit Luncher",
+   "Pocket Lunchbox"
 };
 
 static __str names_plasma[] = {

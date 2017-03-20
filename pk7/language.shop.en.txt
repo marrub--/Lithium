@@ -24,6 +24,9 @@ LITH_TXT_SHOP_DESCR_RadSuit =
    "A radiation shielding suit which lets you walk through hazardous "
    "materials.";
 
+LITH_TXT_SHOP_TITLE_ChargeFist = "$LITH_TXT_INFO_SHORT_ChargeFist";
+LITH_TXT_SHOP_DESCR_ChargeFist = "A melee weapon that you can charge.";
+
 LITH_TXT_SHOP_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
 LITH_TXT_SHOP_DESCR_Revolver = "A powerful handgun. Holds 6 bullets.";
 
