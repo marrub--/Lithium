@@ -153,8 +153,8 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
       fixed y = ACS_RandomFixed(-32765, 32765);
       int tid;
       
-      // Create an Imp.
-      if(ACS_Spawn("DoomImp", x, y, 0, tid = ACS_UniqueTID(), 0))
+      // Create a zombie.
+      if(ACS_Spawn("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0))
       {
          // If it can see the player, then we need to relocate it.
          if(Lith_CheckPlayer1Sight(tid))
@@ -176,9 +176,9 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
          ACS_GiveActorInventory(tid, "Lith_EnemyChecker", 1);
          
          // This delay is very specific -- it's the amount of time before
-         // A_NoBlocking is called on an imp. This is in case the monster pack
-         // you're using (like DRLA Monsters) uses item drops for Score.
-         ACS_Delay(24);
+         // A_NoBlocking is called on a zombie. This is in case the monster
+         // pack you're using (like DRLA Monsters) uses item drops for Score.
+         ACS_Delay(16);
          
          // Get rid of the enemy.
          ACS_Thing_Remove(tid);
