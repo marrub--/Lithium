@@ -211,16 +211,10 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
    }
 }
 
+
+//----------------------------------------------------------------------------
+// Extern Functions
 //
-// Lith_CheckLegenDoom
-//
-void Lith_CheckLegenDoom()
-{
-   int tid;
-   
-   if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-      ACS_Thing_Remove(tid);
-}
 
 //
 // Lith_MakeSerious
@@ -232,6 +226,32 @@ void Lith_MakeSerious()
    ACS_SetActorPropertyString(0, APROP_ActiveSound, "silence");
    ACS_SetActorPropertyString(0, APROP_DeathSound,  "silence");
    ACS_SetActorPropertyString(0, APROP_PainSound,   "silence");
+}
+
+//
+// Lith_GetPlayerData
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetPlayerData(int info, int permutation, bool target)
+{
+   if(target)
+      ACS_SetActivatorToTarget(0);
+   
+   if(ACS_PlayerNumber() < 0)
+      return 0;
+   
+   player_t *p = LocalPlayer;
+   
+   switch(info)
+   {
+   case pdata_upgrade:        return p->upgrades[permutation].active;
+   case pdata_rifle_firemode: return p->riflefiremode;
+   case pdata_buttons:        return p->buttons;
+// case pdata_has_sigil:      return p->sigil.acquired;
+   case pdata_weapon_zoom:    return bitsk(Lith_GetPCVarFixed(p, "lith_weapons_zoomfactor"));
+   }
+   
+   return 0;
 }
 
 
@@ -273,7 +293,12 @@ static void Lith_World(void)
       Lith_GSInit_Weapon();
       
       Lith_CheckIfEnemiesAreCompatible();
-      Lith_CheckLegenDoom();
+      
+      __with(int tid;)
+         if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+            ACS_Thing_Remove(tid);
+      
+      world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
       
       gsinit = true;
    }

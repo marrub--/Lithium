@@ -43,29 +43,6 @@ void Lith_SwitchRifleFiremode(void)
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetPlayerData(int info, int permutation, bool target)
-{
-   if(target)
-      ACS_SetActivatorToTarget(0);
-   
-   if(ACS_PlayerNumber() < 0)
-      return 0;
-   
-   player_t *p = LocalPlayer;
-   
-   switch(info)
-   {
-   case pdata_upgrade:        return p->upgrades[permutation].active;
-   case pdata_rifle_firemode: return p->riflefiremode;
-   case pdata_buttons:        return p->buttons;
-// case pdata_has_sigil:      return p->sigil.acquired;
-   case pdata_weapon_zoom:    return bitsk(Lith_GetPCVarFixed(p, "lith_weapons_zoomfactor"));
-   }
-   
-   return 0;
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
 fixed Lith_Velocity(fixed velx, fixed vely)
 {
    fixed x = ACS_GetActorX(0);

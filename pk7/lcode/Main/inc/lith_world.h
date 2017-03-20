@@ -59,6 +59,7 @@ typedef struct worldinfo_s
    
    // Mod compat
    bool legendoom;
+   bool drlamonsters;
 } worldinfo_t;
 
 __addrdef extern __mod_arr Lith_MapVariable;
