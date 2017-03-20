@@ -107,7 +107,7 @@ bool Lith_CheckArmor(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Discount()
 {
-   LocalPlayer->discount = 0.85;
+   LocalPlayer->discount = 0.9;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
