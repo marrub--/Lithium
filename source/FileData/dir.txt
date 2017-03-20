@@ -1,10 +1,10 @@
 This is a list of files to be processed into ZDoom's LANGUAGE format by
 the compilefs.lua script.
 
-in filter/heretic/language.fs.txt
+in pk7/filter/heretic/language.fs.txt
 heretic/Upgrades.lthm -> Upgrades.lthm
 
-in language.info.mail.txt
+in pk7/language.info.mail.txt
 mailtemplate.txt -> LITH_TXT_MAIL_TEMPLATE
 
 Saved SGXLine Message 1.txt -> LITH_TXT_MAIL_BODY_Intro

@@ -6,13 +6,13 @@ MAKELIB=gdcc-makelib
 
 ## Directories
 
-BIN=../acs
-SRC=Main/src
-INC=Main/inc
-IR=bin
+BIN=pk7/acs
+SRC=source/Main/src
+INC=source/Main/inc
+IR=ir
 
-LITHOS_SRC=LithOS3/lithos_c/src
-LITHOS_INC=LithOS3/lithos_c/inc
+LITHOS_SRC=source/LithOS3/lithos_c/src
+LITHOS_INC=source/LithOS3/lithos_c/inc
 
 ## Compiler flags
 
