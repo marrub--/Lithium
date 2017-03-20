@@ -235,6 +235,18 @@ void Lith_ResetRifleMode()
       p->riflefiremode = rifle_firemode_auto;
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_StepSpeed()
+{
+   player_t *p = LocalPlayer;
+   
+	fixed vel = ACS_VectorLength(absk(p->velx), absk(p->vely));
+   fixed num = 1k - (vel / 24k);
+	fixed mul = minmax(num, 0.35k, 1k);
+   
+	return 6 * (mul + 0.6k);
+}
+
 #if 0
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()
