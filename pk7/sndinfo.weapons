@@ -233,6 +233,13 @@ $limit weapons/plasma/laser/spark 0
 $limit weapons/plasma/explode 0
 $volume weapons/plasma/explode 0.5
 
+weapons/plasma/part/charge    lsounds/PlasmaRifle/PartBeam/Charge.flac    // Touhou 13
+weapons/plasma/part/fire      lsounds/PlasmaRifle/PartBeam/Fire.flac      // FEAR, Halo 3
+weapons/plasma/part/reloadout lsounds/PlasmaRifle/PartBeam/ReloadOut.flac // FEAR
+weapons/plasma/part/reloadin  lsounds/PlasmaRifle/PartBeam/ReloadIn.flac  // 〃
+
+$volume weapons/plasma/part/fire 0.7
+
 //
 // Omega Cannon
 //
