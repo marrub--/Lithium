@@ -39,6 +39,12 @@ weapons/pistol/zoomout  lsounds/Pistol/ScopeOut.flac // 〃
 weapons/pistol/pickup   lsounds/Pistol/Pickup.flac   // Fallout 4
 $alias weapons/pistol/draw weapons/pistol/pickup
 
+weapons/pistol/plasma/fire lsounds/Pistol/FirePlasma.flac // Quake 2
+
+$alias weapons/pistol/plasma/explode weapons/plasmax
+$limit weapons/pistol/plasma/explode 0
+$volume weapons/pistol/plasma/explode 0.15
+
 //
 // Revolver
 //

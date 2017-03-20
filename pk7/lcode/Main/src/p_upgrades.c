@@ -26,7 +26,7 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    
    {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  0.00},
    {{"AutoPistol",  null,           140940  }, UC_Weap,  0.00, ug_pistol},
-   {{"PlasPistol",  "PistolUpgr",   160000  }, UC_Weap,  0.00, ug_pistol},
+   {{"PlasPistol",  "PistolUpgr",   340000  }, UC_Weap,  0.00, ug_pistol},
    {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  0.00, ug_shotgun},
    {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0.00, ug_shotgun},
    {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0.00},
