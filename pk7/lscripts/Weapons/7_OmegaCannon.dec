@@ -2,6 +2,16 @@
 #include "lscripts/Weapons/Punctuator.dec"
 #include "lscripts/Weapons/RailgunParticles.dec"
 
+actor Lith_CannonScopedToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+actor Lith_GTFO : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
 actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
 {
    Tag "$LITH_TXT_INFO_SHORT_BFG9000"

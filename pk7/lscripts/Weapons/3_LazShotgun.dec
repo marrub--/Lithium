@@ -4,6 +4,7 @@ actor Lith_LazShotgunTrail
    Scale 0.34
    
    +NOINTERACTION
+   +NOTIMEFREEZE
    
    states
    {

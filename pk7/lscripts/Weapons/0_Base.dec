@@ -130,5 +130,3 @@ actor Lith_Weapon : Weapon
    }
 }
 
-actor Lith_FuckChainsaws : Lith_Dummy replaces Chainsaw {}
-

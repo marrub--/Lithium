@@ -1,0 +1,35 @@
+actor Lith_MiniMissile
+{
+   Scale 0.25
+   Radius 2
+   Height 2
+   Speed 20
+   Damage 5
+   DeathSound "weapons/missile/explode"
+   Species "Lith_Player"
+   DamageType "Lith_Shrapnel"
+   
+   Projectile
+   +ROCKETTRAIL
+   +MTHRUSPECIES
+   +EXPLODEONWATER
+   
+   states
+   {
+   Spawn:
+      MISL A 0
+      MISL A 0 A_PlaySound("effects/rocket/fly", CHAN_AUTO, 0.65, true)
+   SpawnLoop:
+      MISL A 1 bright
+      wait
+   Death:
+      TNT1 A 0 A_Explode(24, 42)
+      MEXP AB 2 bright
+      MEXP CD 3 bright
+      MEXP EF 4 bright
+      stop
+   }
+}
+
+// EOF
+
