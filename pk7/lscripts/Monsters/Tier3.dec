@@ -52,6 +52,7 @@ actor Lith_HellKnight : HellKnight replaces HellKnight
    Speed 4
    Species "Lith_HellKnight"
    Tag "$LITH_TXT_INFO_SHORT_HellKnight"
+   BloodColor "DarkGreen"
    
    states
    {
@@ -105,6 +106,7 @@ actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
    PainChance 55
    Tag "$LITH_TXT_INFO_SHORT_BaronOfHell"
+   BloodColor "DarkGreen"
    
    +MISSILEMORE
    
@@ -193,6 +195,7 @@ actor Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
 actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 {
    Tag "$LITH_TXT_INFO_SHORT_Cacodemon"
+   BloodColor "Blue"
    
    states
    {
