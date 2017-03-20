@@ -56,6 +56,9 @@ typedef struct worldinfo_s
    double scoremul;
    
    long ticks;
+   
+   // Mod compat
+   bool legendoom;
 } worldinfo_t;
 
 __addrdef extern __mod_arr Lith_MapVariable;

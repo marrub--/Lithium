@@ -8,8 +8,6 @@
 // Extern Functions
 //
 
-__str Lith_RandomName(int id);
-
 //
 // Update
 //
@@ -19,6 +17,9 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
    
    bool six = ACS_StrCmp(ACS_GetActorClass(0), "RLDeVileSix", 11) == 0;
+   
+   bool legendary = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterToken");
+   bool henshin   = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterTransformed");
    
    bool validtarget =
       six ||
@@ -40,16 +41,19 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       
       if(freaktarget || boss)
       {
+         extern __str Lith_RandomName(int id);
+         
          UserData.tagstr    = Lith_RandomName(boss ? id : 0);
          UserData.oldhealth = UserData.health = ACS_Random(0, 666666);
          UserData.maxhealth = ACS_Random(0, 666666);
       }
       else
       {
-         if(six)
-            UserData.tagstr = "\Cg6";
-         else
-            UserData.tagstr = StrParam("%tS", 0);
+         char color = Lith_GetPCVarInt(p, "lith_scanner_color") & 0x7F;
+         
+              if(six)     UserData.tagstr = "\Cg6";
+         else if(henshin) UserData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
+         else             UserData.tagstr = StrParam("\C%c%tS", color, 0);
          
          UserData.oldhealth = UserData.health;
          UserData.health    = ACS_GetActorProperty(0, APROP_Health);
@@ -96,10 +100,9 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
       }
    }
    
-   char color = Lith_GetPCVarInt(p, "lith_scanner_color") & 0x7F;
    __str font = Lith_GetPCVarInt(p, "lith_scanner_altfont") ? "SMALLFONT" : "CBIFONT";
    
-   HudMessageF(font, "\C%c%S", color, UserData.tagstr);
+   HudMessageF(font, "%S", UserData.tagstr);
    HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannertag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
    
    HudMessageF(UserData.freak ? "ALIENFONT" : font, "%i/%i", UserData.health, UserData.maxhealth);

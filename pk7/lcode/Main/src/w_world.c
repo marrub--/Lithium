@@ -212,6 +212,17 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
 }
 
 //
+// Lith_CheckLegenDoom
+//
+void Lith_CheckLegenDoom()
+{
+   int tid;
+   
+   if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+      ACS_Thing_Remove(tid);
+}
+
+//
 // Lith_MakeSerious
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -262,6 +273,7 @@ static void Lith_World(void)
       Lith_GSInit_Weapon();
       
       Lith_CheckIfEnemiesAreCompatible();
+      Lith_CheckLegenDoom();
       
       gsinit = true;
    }
