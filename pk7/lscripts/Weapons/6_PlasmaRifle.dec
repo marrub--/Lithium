@@ -44,7 +44,8 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
    
    Ready:
       PLSG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      wait
+      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      loop
    
    Deselect:
       PLSG A 0 A_StopSound(CHAN_7)

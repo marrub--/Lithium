@@ -5,6 +5,9 @@
 addkeysection "Lithium - Computer/Brain Interface" Lith_CBI
 addmenukey "Open CBI" lith_k_opencbi
 
+addkeysection "Lithium - Weapons" Lith_Weapons
+addmenukey "Quick Knife" +lith_k_qknife
+
 addkeysection "Lithium - Zoom" Lith_Zoom
 addmenukey "Zoom In" lith_k_zoomin
 addmenukey "Zoom Out" lith_k_zoomout
@@ -26,6 +29,9 @@ addmenukey "Toggle Set 4" lith_k_qtoggle_4
 //
 
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
+
+alias +lith_k_qknife "+user4"
+alias -lith_k_qknife "-user4"
 
 alias lith_k_zoomin  "pukename Lith_KeyZoom  30"
 alias lith_k_zoomout "pukename Lith_KeyZoom -60"
