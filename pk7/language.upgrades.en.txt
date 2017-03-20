@@ -118,6 +118,14 @@ LITH_TXT_UPGRADE_DESCR_RifleModes =
    "A complete replacement for the firing mechanism which adds a third mode, "
    "allowing you to burst-fire accurate, painful shots.";
 
+LITH_TXT_UPGRADE_TITLE_HomingRPG = "Homing Rocket";
+LITH_TXT_UPGRADE_EFFEC_HomingRPG =
+   "Pressing altfire with the rocket launcher selects a target to be traced "
+   "by any rockets you fire afterward.";
+LITH_TXT_UPGRADE_DESCR_HomingRPG =
+   "Disperses extra nanomachines out of the rifle that push the rocket toward "
+   "the enemy with extreme accuracy.";
+
 LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
 LITH_TXT_UPGRADE_EFFEC_ChargeRPG =
    "Lets you hold \"fire\" to queue extra grenades in your grenade launcher.\n"

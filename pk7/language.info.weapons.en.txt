@@ -140,6 +140,16 @@ LITH_TXT_INFO_DESCR_LauncherUpgr =
    "area, and the third and final mode hurls all of the grenades out of "
    "their rocket casings.";
 
+LITH_TXT_INFO_SHORT_LauncherUpg2 = "$LITH_TXT_UPGRADE_TITLE_HomingRPG";
+LITH_TXT_INFO_TITLE_LauncherUpg2 = "SYM4.3 D.788 HOMING ROCKET SYSTEM";
+LITH_TXT_INFO_DESCR_LauncherUpg2 =
+   "This is a modification that adds an extra nanomachine dispenser to the "
+   "gun's PCI bus, which attaches several hundred thousand nanobots to the "
+   "grenade when it is fired that push it to angle toward the enemy.\n\n"
+   "Similar in concept to traiditonal rocket-based homing systems, this "
+   "design is both more space-efficient and much more accurate, allowing it "
+   "to be used even in a launcher as small as the D.671.";
+
 LITH_TXT_INFO_SHORT_MissileLauncher = "Missile Launcher";
 LITH_TXT_INFO_TITLE_MissileLauncher = "X-400 Lance-missiles";
 LITH_TXT_INFO_DESCR_MissileLauncher =
