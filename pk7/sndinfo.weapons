@@ -154,6 +154,9 @@ $random weapons/rifle/firesnipe {
 weapons/rcw/fire      lsounds/CombatRifle/FireLaz.flac      // Fallout 4, Fallout: New Vegas
 weapons/rcw/firesnipe lsounds/CombatRifle/FireLazSnipe.flac // 〃
 
+$volume weapons/rcw/fire 0.7
+$volume weapons/rcw/firesnipe 0.7
+
 //
 // Sniper Rifle
 //
