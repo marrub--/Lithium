@@ -75,10 +75,11 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
    AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle"));
    AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
    AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
    AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
-   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpg2");
+   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpg2",    Unlocks("GrenadeLauncher", "Sym43"));
    AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
    AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
    AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
