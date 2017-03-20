@@ -16,6 +16,7 @@ enum
    UPGR_GaussShotty,
    UPGR_PoisonShot,
    UPGR_RifleModes,
+   UPGR_LaserRCW,
    UPGR_ChargeRPG,
    UPGR_HomingRPG,
    UPGR_PlasLaser,

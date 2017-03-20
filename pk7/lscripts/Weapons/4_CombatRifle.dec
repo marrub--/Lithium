@@ -1,6 +1,23 @@
 #include "lscripts/Weapons/RifleBullet.dec"
 #include "lscripts/Weapons/RifleGrenade.dec"
 
+actor Lith_RifleLaserTrail
+{
+   RenderStyle "Add"
+   Scale 0.14
+   
+   +NOINTERACTION
+   +NOTIMEFREEZE
+   
+   states
+   {
+   Spawn:
+      BLLT E 5 bright
+      BLLT E 3 bright A_FadeOut(0.5)
+      stop
+   }
+}
+
 actor Lith_RifleShotsFired : Inventory
 {
    Inventory.MaxAmount 40
@@ -53,6 +70,13 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       
       CRFG A 0 A_GunFlash("DummyFlash")
       
+      CRFG A 0 A_JumpIf(!CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_LaserRCW), "Fire2")
+      
+      TNT1 AA 0 A_RailAttack(8, 0, true, "None", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "BulletPuff", 5.77, 3, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0)
+      CRFG A 0 A_PlaySound("weapons/rcw/fire", CHAN_WEAPON)
+      goto Fire1
+      
+   Fire2:
       CRFG A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_7777777), 3)
       CRFG A 0 A_PlaySound("weapons/rifle/fire", CHAN_WEAPON)
       CRFG A 0 A_Jump(256, 2)
@@ -63,10 +87,44 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRFG A 0 A_Jump(256, 2)
       CRFG A 0 A_FireCustomMissile("Lith_RifleBulletPainless", frandom(-5.44, 5.44), true, 0, 0, 0, frandom(-2, 2))
       CRFG A 0 A_FireCustomMissile("Lith_RifleBulletPainless", frandom(-5.44, 5.44), true, 0, 0, 0, frandom(-2, 2))
+      
+   Fire1:
       CRFG B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRFG C 1 bright A_WeaponReady(LITH_BOBONLY)
       CRFG A 2 A_WeaponReady(LITH_BOBONLY)
       CRFG AAAAAA 1 A_ReFire
+      goto Ready
+   
+   FireBurst:
+      TNT1 A 0 A_JumpIfInventory("Lith_RifleShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_RifleShotsFired", 1)
+      
+      CRFG A 0 A_GunFlash("DummyFlash")
+      
+      CRFG A 0 A_JumpIf(!CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_LaserRCW), "Fire4")
+      
+      TNT1 AAA 0 A_RailAttack(8, 0, true, "None", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "BulletPuff", 2, 2, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0)
+      CRFG A 0 A_PlaySound("weapons/rcw/firesnipe", CHAN_WEAPON)
+      goto Fire3
+      
+   Fire4:
+      CRFG A 0 A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON)
+      CRFG AAA 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
+      
+   Fire3:
+      CRFG B 1 bright A_WeaponReady(LITH_BOBONLY)
+      CRFG C 1 bright A_WeaponReady(LITH_BOBONLY)
+      CRFG A 2 A_WeaponReady(LITH_BOBONLY)
+      CRFG A 0 A_GiveInventory("Lith_RifleBurstIter", 1)
+      CRFG A 0 A_JumpIfInventory("Lith_RifleBurstIter", 5, 1)
+      goto FireBurst
+      CRFG A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
+      CRFG A 6 A_WeaponReady(LITH_BOBONLY)
+      
+      CRFG A 0 A_JumpIf(!CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_LaserRCW), 2)
+      CRFG A 2 A_WeaponReady(LITH_BOBONLY)
+      
+      CRFG AAAAAA 1 A_Refire
       goto Ready
    
    FireGrenade:
@@ -162,28 +220,6 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       CRFG A 3 offset(1, 37) A_WeaponReady(WRF_NOBOB)
       CRFG A 4 offset(1, 34) A_WeaponReady(WRF_NOBOB)
       CRFG A 4 A_WeaponReady(WRF_NOBOB)
-      goto Ready
-   
-   //
-   // Modal Rifle
-   //
-   FireBurst:
-      TNT1 A 0 A_JumpIfInventory("Lith_RifleShotsFired", 0, "Reload")
-      TNT1 A 0 A_GiveInventory("Lith_RifleShotsFired", 1)
-      
-      CRFG A 0 A_GunFlash("DummyFlash")
-      
-      CRFG A 0 A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON)
-      CRFG AAA 0 A_FireCustomMissile("Lith_RifleBullet", frandom(-0.5, 0.5), true, 0, 0, 0, frandom(-0.5, 0.5))
-      CRFG B 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRFG C 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRFG A 2 A_WeaponReady(LITH_BOBONLY)
-      CRFG A 0 A_GiveInventory("Lith_RifleBurstIter", 1)
-      CRFG A 0 A_JumpIfInventory("Lith_RifleBurstIter", 5, 1)
-      loop
-      CRFG A 0 A_TakeInventory("Lith_RifleBurstIter", 999)
-      CRFG A 6 A_WeaponReady(LITH_BOBONLY)
-      CRFG AAAAAA 1 A_Refire
       goto Ready
    }
 }

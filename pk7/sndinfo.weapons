@@ -149,6 +149,12 @@ $random weapons/rifle/firesnipe {
 }
 
 //
+// Laser RCW
+//
+weapons/rcw/fire      lsounds/CombatRifle/FireLaz.flac      // Fallout 4, Fallout: New Vegas
+weapons/rcw/firesnipe lsounds/CombatRifle/FireLazSnipe.flac // 〃
+
+//
 // Sniper Rifle
 //
 weapons/sniper/fire        lsounds/SniperRifle/Fire.flac        // Fallout: New Vegas, Firearms: Source
