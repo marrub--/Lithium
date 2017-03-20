@@ -1,6 +1,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_version.h"
+#include "lith_world.h"
 
 
 //----------------------------------------------------------------------------
@@ -130,6 +131,9 @@ void Lith_ResetPlayer(player_t *p)
    
    //
    // Map-static data
+   
+   if(world.scoregolf)
+      p->score = 0;
    
    memset(&p->old, 0, sizeof(player_delta_t));
    

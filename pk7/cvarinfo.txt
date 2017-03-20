@@ -63,6 +63,7 @@ server           bool  lith_sv_revenge       = true;
 server noarchive bool  lith_sv_monsters_ok   = false;
 server           float lith_sv_scoremul      = 2.0;
 server           bool  lith_sv_seriousmode   = false;
+server           bool  lith_sv_scoregolf     = false;
 
 // Debugging
 server noarchive bool   __lith_debug_on   = false;

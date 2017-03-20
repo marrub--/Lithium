@@ -299,6 +299,7 @@ static void Lith_World(void)
             ACS_Thing_Remove(tid);
       
       world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
+      world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       
       gsinit = true;
    }

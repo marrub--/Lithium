@@ -44,6 +44,7 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
    ServerBool("Explode on death",       "lith_sv_revenge")
    ServerBool("Stupid pickup messages", "lith_sv_stupidpickups")
    ServerFloat("Score multiplier (changes on new map)", "lith_sv_scoremul", 0, 10)
+   ServerBool("Score Golf mode",        "lith_sv_scoregolf")
    ServerBool("Are you serious?",       "lith_sv_seriousmode")
 }
 

@@ -57,6 +57,8 @@ typedef struct worldinfo_s
    
    long ticks;
    
+   bool scoregolf;
+   
    // Mod compat
    bool legendoom;
    bool drlamonsters;
