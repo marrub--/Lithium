@@ -55,7 +55,7 @@ actor Lith_LazShotgun : Lith_Weapon
       LSHF A 2 bright A_SetPitch(pitch - 0.75)
       LSHF B 1 bright
       LSHT A 4
-      LSHT BB 1 A_SetPitch(pitch + 0.25)
+      LSHT BB 1 A_SetPitch(pitch + 0.375)
       LSHT C 2 A_PlaySound("weapons/lshotgun/open", CHAN_6)
       LSHT D 2
       LSHT E 3
