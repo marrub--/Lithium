@@ -243,7 +243,7 @@ static void Lith_StupidPickup(player_t *p, int weapon)
 
 void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
 {
-   if(ACS_GetCVar("lith_sv_stupidpickups"))
+   if(Lith_GetPCVarInt(p, "lith_player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
       p->log("> You got the %S!", Language("LITH_TXT_INFO_SHORT_%S", info->name));

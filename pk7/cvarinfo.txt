@@ -4,12 +4,13 @@ user float  lith_gui_ymul = 1.0;
 user int    lith_gui_theme = 0;
 
 // Player
-user float  lith_player_damagebobmul = 0.6;
-user bool   lith_player_damagebob    = true;
-user bool   lith_player_scoresound   = true;
-user bool   lith_player_invertmouse  = false;
-user bool   lith_player_scorelog     = false;
-user bool   lith_player_resultssound = true;
+user float  lith_player_damagebobmul  = 0.6;
+user bool   lith_player_damagebob     = true;
+user bool   lith_player_scoresound    = true;
+user bool   lith_player_invertmouse   = false;
+user bool   lith_player_scorelog      = false;
+user bool   lith_player_resultssound  = true;
+user bool   lith_player_stupidpickups = false;
 
 // Save data
 // These are 200 bytes of storage per, so overall we have around 4kb available.
@@ -58,7 +59,6 @@ user int    lith_scanner_color   = 106; // 'j'
 user bool   lith_scanner_altfont = false;
 
 // Server
-server           bool  lith_sv_stupidpickups = false;
 server           bool  lith_sv_revenge       = true;
 server noarchive bool  lith_sv_monsters_ok   = false;
 server           float lith_sv_scoremul      = 2.0;
