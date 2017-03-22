@@ -1,0 +1,7 @@
+actor Lith_XH_PainElemental : Lith_PainElemental
+{
+}
+
+actor Lith_XH_Archvile : Lith_Archvile
+{
+}

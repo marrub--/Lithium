@@ -1,0 +1,23 @@
+actor Lith_XH_HellKnight : Lith_HellKnight
+{
+}
+
+actor Lith_XH_BaronOfHell : Lith_BaronOfHell
+{
+}
+
+actor Lith_XH_Revenant : Lith_Revenant
+{
+}
+
+actor Lith_XH_Cacodemon : Lith_Cacodemon
+{
+}
+
+actor Lith_XH_Arachnotron : Lith_Arachnotron
+{
+}
+
+actor Lith_XH_Mancubus : Lith_Mancubus
+{
+}
