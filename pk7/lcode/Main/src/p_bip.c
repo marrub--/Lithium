@@ -349,10 +349,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             Lith_GUI_ScrollBegin(g, st_bipinfoscr, 100, 40, 184, 180, page->height);
             oy = g->oy - 40;
          }
-         else ACS_SetHudClipRect(111, 40, 184, 180, 184);
+         else
+            ACS_SetHudClipRect(111, 40, 184, 180, 184);
          
          if(page->image)
-            DrawSpriteAlpha(page->image, g->hid--, 296.2, 180.2, TICSECOND, 0.5);
+            DrawSpriteAlpha(page->image, g->hid--, 296.2, 180.2, TICSECOND, 0.4);
          
          DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
          
@@ -361,11 +362,27 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          if(page->title) title = page->title;
          else            title = Language("LITH_TXT_INFO_TITLE_%S", page->name);
          
-         HudMessageF("CBIFONT", "\Cj%S", title);
+         HudMessageF("CBIFONT", "\Ci%S", title);
          HudMessagePlain(g->hid--, 200.4, 45.1 + oy, TICSECOND);
          
-         HudMessageF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-         HudMessagePlain(g->hid--, 111.1, 60.1 + oy, TICSECOND);
+         #define DrawText(...) \
+            HudMessageF("CBIFONT", "%.*S", typeon->pos, typeon->txt), \
+            HudMessageParams(0, g->hid--, __VA_ARGS__ + oy, TICSECOND)
+         
+         // render an outline if the page has an image
+         if(page->image)
+         {
+            DrawText(CR_BLACK, 112.1, 61.1); DrawText(CR_BLACK, 110.1, 61.1);
+            DrawText(CR_BLACK, 112.1, 59.1); DrawText(CR_BLACK, 110.1, 59.1);
+            
+            DrawText(CR_BLACK, 111.1, 59.1);
+            DrawText(CR_BLACK, 111.1, 61.1);
+            
+            DrawText(CR_BLACK, 112.1, 60.1);
+            DrawText(CR_BLACK, 110.1, 60.1);
+         }
+         
+         DrawText(CR_WHITE, 111.1, 60.1);
          
          if(page->height) Lith_GUI_ScrollEnd(g, st_bipinfoscr);
          else             ACS_SetHudClipRect(0, 0, 0, 0);
