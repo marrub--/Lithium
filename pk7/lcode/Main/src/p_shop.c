@@ -125,7 +125,7 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
    ACS_SetHudClipRect(0, 0, 0, 0);
    
    if(Lith_GUI_Button(g, "Buy", 259, 170, !Lith_ShopCanBuy(p, &item->shopdef, item)))
-      Lith_ShopBuy(p, &item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S");
+      Lith_ShopBuy(p, &item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S", false);
 }
 
 // EOF

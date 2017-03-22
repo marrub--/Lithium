@@ -19,8 +19,8 @@
 
 #define NUMAUTOGROUPS 4
 
-#define Lith_UpgrBuy(p, upgr) \
-   Lith_ShopBuy(p, &(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S")
+#define Lith_UpgrBuy(p, upgr, nodelivery) \
+   Lith_ShopBuy(p, &(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", nodelivery)
 
 
 //----------------------------------------------------------------------------

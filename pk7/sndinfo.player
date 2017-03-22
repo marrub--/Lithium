@@ -57,6 +57,14 @@ player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Ke
 player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
 
 //
+// Pickup
+//
+player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.flac // Killing Floor, ???
+player/pickup/upgrextr lsounds/Player/Pickup/UpgrExtr.flac // Phantasy Star Nova
+player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.flac // Halo 3
+player/pickup/item     lsounds/Player/Pickup/Item.flac     // Firearms: Source
+
+//
 // Gameboy
 //
 $alias player/gb/open player/cbi/open

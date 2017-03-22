@@ -413,7 +413,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    ACS_SetHudClipRect(0, 0, 0, 0);
    
    if(Lith_GUI_Button(g, "Buy", 111, 205, !Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr)))
-      Lith_UpgrBuy(p, upgr);
+      Lith_UpgrBuy(p, upgr, false);
    
    if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->owned))
       Lith_UpgrToggle(p, upgr);

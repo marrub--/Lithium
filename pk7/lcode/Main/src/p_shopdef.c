@@ -29,7 +29,7 @@ bool Lith_ShopCanBuy(player_t *p, shopdef_t const *def, void *obj)
 //
 // Lith_ShopBuy
 //
-bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt)
+bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery)
 {
    if(!Lith_ShopCanBuy(p, def, obj))
       return false;
@@ -43,7 +43,7 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt)
    
    bool delivered = false;
    
-   if(world.extras && Lith_GetPCVarInt(p, "lith_player_teleshop"))
+   if(!nodelivery && world.extras && Lith_GetPCVarInt(p, "lith_player_teleshop"))
    {
       int pufftid;
       int tid;

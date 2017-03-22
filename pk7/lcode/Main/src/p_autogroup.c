@@ -19,7 +19,7 @@ void Lith_CheckAutoBuy(player_t *p)
    {
       upgrade_t *upgr = &p->upgrades[i];
       
-      if(upgr->autogroups[j] && p->autobuy[j] && Lith_UpgrBuy(p, upgr))
+      if(upgr->autogroups[j] && p->autobuy[j] && Lith_UpgrBuy(p, upgr, true))
       {
          total++;
          name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
@@ -61,7 +61,7 @@ void Lith_KeyBuyAutoGroup(int group)
    for(int i = 0; i < UPGR_MAX; i++)
       if(!p->upgrades[i].owned && p->upgrades[i].autogroups[group])
       {  total++;
-         if(Lith_UpgrBuy(p, &p->upgrades[i]))
+         if(Lith_UpgrBuy(p, &p->upgrades[i], false))
          {  success++;
             Lith_UpgrToggle(p, &p->upgrades[i]);}}
    
