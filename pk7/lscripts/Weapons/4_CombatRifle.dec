@@ -43,8 +43,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
       goto SpawnLoop
    
    Ready:
-      CRFG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      CRFG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop
    
    Deselect:

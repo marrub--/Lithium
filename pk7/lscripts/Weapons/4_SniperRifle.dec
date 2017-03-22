@@ -30,8 +30,7 @@ actor Lith_SniperRifle : Lith_Weapon
       SCOP A 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
       loop
    Ready:
-      SNPG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      SNPG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop
    
    ReadySelector:

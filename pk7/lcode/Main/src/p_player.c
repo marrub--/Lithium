@@ -320,9 +320,6 @@ static void Lith_PlayerRunScripts(player_t *p)
       
       // Post-logic: Update the engine's data.
       Lith_PlayerDeltaStats(p); // Update delta'd info
-      
-      if(p->buttons & BT_USER4) ACS_GiveInventory("Lith_UseKnife", 1);
-      else                      ACS_TakeInventory("Lith_UseKnife", 1);
    }
    
    // Rendering

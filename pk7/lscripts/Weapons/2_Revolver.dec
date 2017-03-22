@@ -23,8 +23,7 @@ actor Lith_Revolver : Lith_Weapon
       goto SpawnLoop
    
    Ready:
-      REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop
    
    Deselect:

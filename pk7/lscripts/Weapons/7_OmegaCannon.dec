@@ -12,6 +12,11 @@ actor Lith_GTFO : Inventory
    Inventory.MaxAmount 1
 }
 
+actor Lith_OmegaRailDummy : Lith_Dummy
+{
+   Decal "Scorch"
+}
+
 actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
 {
    Tag "$LITH_TXT_INFO_SHORT_BFG9000"
@@ -21,7 +26,6 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    Weapon.BobStyle "InverseSmooth"
    Weapon.BobRangeX 2.0
    Weapon.BobSpeed 0.85
-   Decal "Scorch"
    
    +WEAPON.NOAUTOFIRE
    
@@ -34,8 +38,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    
    Ready:
       CNNG A 0 A_TakeInventory("Lith_GTFO", 999)
-      CNNG A 1 A_WeaponReady
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      CNNG A 1 A_WeaponReady(WRF_ALLOWUSER4)
       loop
    
    Deselect:
@@ -155,7 +158,7 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
       CNNG B 1 bright offset(0, 55) A_PlaySound("weapons/rail/fire", CHAN_WEAPON)
       CNNG B 1 bright offset(0, 56)
       CNNG B 0 A_FireCustomMissile("Lith_OmegaRailHax", 0, false, 0, -19)
-      CNNG C 1 bright offset(0, 57) A_RailAttack(500, 0, false, "None", "None", RGF_SILENT, 0, "Lith_Dummy", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19)
+      CNNG C 1 bright offset(0, 57) A_RailAttack(500, 0, false, "None", "None", RGF_SILENT, 0, "Lith_OmegaRailDummy", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19)
       CNNG C 1 bright offset(0, 47)
       CNNG A 1 offset(0, 42)
       CNNG A 2 offset(0, 37)

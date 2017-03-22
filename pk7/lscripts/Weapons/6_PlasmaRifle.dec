@@ -43,8 +43,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       goto SpawnLoop
    
    Ready:
-      PLSG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      PLSG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop
    
    Deselect:

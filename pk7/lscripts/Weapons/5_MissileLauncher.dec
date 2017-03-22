@@ -31,8 +31,7 @@ actor Lith_MissileLauncher : Lith_Weapon
       goto SpawnLoop
    
    Ready:
-      MISG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-      "####" "#" 0 A_JumpIfInventory("Lith_UseKnife", 1, "_UseKnife")
+      MISG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop
    
    Deselect:
