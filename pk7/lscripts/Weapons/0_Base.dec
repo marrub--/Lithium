@@ -166,6 +166,7 @@ actor Lith_Weapon : Weapon
       TNT1 AAAAA 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_NOSWITCH|WRF_ALLOWUSER4)
    _KnifeFinish:
       TNT1 AAAAAAAAA 0 A_Lower
+      TNT1 A 1
       TNT1 A 0 A_Jump(256, "Select")
    }
 }
