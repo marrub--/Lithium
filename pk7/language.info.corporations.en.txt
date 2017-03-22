@@ -91,6 +91,19 @@ LITH_TXT_INFO_DESCR_Omakeda =
    "Known for their innovative firearm design, Omakeda is one of the "
    "highest profiting, most popular firearms manufacturers on Earth.";
 
+LITH_TXT_INFO_SHORT_Semaphore = "Semaphore, Inc.";
+LITH_TXT_INFO_TITLE_Semaphore = "Semaphore, Incorporated";
+LITH_TXT_INFO_IMAGE_Semaphore = "lgfx/BIP/Semaphore.png";
+LITH_TXT_INFO_DESCR_Semaphore =
+   "Hiding out somewhere in the asteroid belt of Omicron Xevv, Semaphore, Inc "
+   "is a space ship weapons designer and manufacturer started 6 years ago in "
+   "1643 NE by a small group of scientists and businessmen.\n\n"
+   "Semaphore has over its lifetime put out a great many prototype weapons "
+   "and done fairly well with investors.\n\n"
+   "While they mainly produce weaponry made for equipping space ships, "
+   "Semaphore have also produced small-batch infantry weapons for gaguing "
+   "interest and profitability.";
+
 LITH_TXT_INFO_SHORT_Sym43 = "SYM4.3";
 LITH_TXT_INFO_TITLE_Sym43 = "SYM4.3 WEAPONS INCORPORATED";
 LITH_TXT_INFO_IMAGE_Sym43 = "lgfx/BIP/Sym43.png";

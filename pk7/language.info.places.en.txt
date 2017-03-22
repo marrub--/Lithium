@@ -74,6 +74,16 @@ LITH_TXT_INFO_DESCR_Mars =
    "Still to this day many companies on Earth -- and even some intragalactic "
    "corporations like OFMD -- use Mars as a place to house autonomous work.";
 
+LITH_TXT_INFO_SHORT_OmicronXevv = "Omicron Xevv";
+LITH_TXT_INFO_TITLE_OmicronXevv = "$LITH_TXT_INFO_SHORT_OmicronXevv";
+LITH_TXT_INFO_DESCR_OmicronXevv =
+   "A binary star system near Sirius about 2.6 parsec away from Earth. The "
+   "asteroid belt surrounding the star system has many large, well-lit and "
+   "fairly temperate asteroids suitable for humans to live on.\n\n"
+   "Omicron Xevv has been used by many small companies throughout the years "
+   "to have a secluded, free place to do research, surveillance and "
+   "development.";
+
 LITH_TXT_INFO_SHORT_SuperDimension = "Super Dimension";
 LITH_TXT_INFO_TITLE_SuperDimension = "$LITH_TXT_INFO_SHORT_SuperDimension";
 LITH_TXT_INFO_DESCR_SuperDimension =

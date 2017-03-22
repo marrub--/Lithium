@@ -75,7 +75,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
    AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
    AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
-   AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle", "Semaphore"));
    AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
    AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
    AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
@@ -83,6 +83,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
    AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
    AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
+   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpg2",      Unlocks("PlasmaRifle", "Semaphore"));
    AddToBIP(bip, BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
    AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
@@ -127,6 +128,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_PLACES, "Earth");
    AddToBIP(bip, BIPC_PLACES, "Hell");
    AddToBIP(bip, BIPC_PLACES, "Mars");
+   AddToBIP(bip, BIPC_PLACES, "OmicronXevv");
    AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("BFG9000", "SIGFPE"));
    
    AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
@@ -137,6 +139,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",       Unlocks("Mars", "OFMD"));
    AddToBIP(bip, BIPC_CORPORATIONS, "OFMD");
    AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda",    Unlocks("Earth"));
+   AddToBIP(bip, BIPC_CORPORATIONS, "Semaphore",  Unlocks("OmicronXevv"));
    AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
