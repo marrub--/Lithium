@@ -1,5 +1,0 @@
-// NB: Don't change this CVar, it's here only to check if the addon is loaded.
-server noarchive cheat bool __lith_pausemenu_addon = true;
-
-// EOF
-

@@ -5,6 +5,7 @@
 #include "lith_upgradenames.h"
 #include "lith_shopdef.h"
 #include "lith_list.h"
+#include "lith_upgradecategories.h"
 
 #define UserData_Adrenaline data.u01
 #define UserData_Implying   data.u02
@@ -25,16 +26,6 @@
 //----------------------------------------------------------------------------
 // Types
 //
-
-enum
-{
-   UC_MIN,
-   UC_Body = UC_MIN,
-   UC_Weap,
-   UC_Extr,
-   UC_Down,
-   UC_MAX
-};
 
 enum
 {
@@ -103,6 +94,7 @@ typedef struct upgradeinfo_s
    int category;
    fixed scoreadd;
    int group;
+   int id;
    
    upgr_cb_t        Activate;
    upgr_cb_t        Deactivate;
@@ -161,6 +153,7 @@ void Lith_PlayerUpdateUpgrades(struct player_s *p);
 void Lith_PlayerRenderUpgrades(struct player_s *p);
 void Lith_PlayerEnterUpgrades(struct player_s *p);
 
+void Lith_UpgrSetOwned(struct player_s *p, upgrade_t *upgr);
 bool Lith_UpgrToggle(struct player_s *p, upgrade_t *upgr);
 
 #endif

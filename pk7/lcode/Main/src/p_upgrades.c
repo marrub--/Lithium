@@ -70,23 +70,9 @@ static void RenderProxy(player_t *p, upgrade_t *upgr)
 }
 
 //
-// Lith_UpgrSetOwned
-//
-static void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
-{
-   if(upgr->owned) return;
-   
-   upgr->owned = true;
-   p->upgradesowned++;
-   
-   if(upgr->info->category == UC_Body && upgr->info->cost == 0)
-      Lith_UpgrToggle(p, upgr);
-}
-
-//
 // Lith_UpgrCanBuy
 //
-static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *def, void *upgr_)
+static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *, void *upgr_)
 {
    upgrade_t *upgr = upgr_;
    return !upgr->owned;
@@ -95,15 +81,32 @@ static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *def, void *upgr_)
 //
 // Lith_UpgrShopBuy
 //
-static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *def, void *upgr)
+static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *, void *upgr)
 {
    Lith_UpgrSetOwned(p, upgr);
 }
 
 //
+// Lith_UpgrGive
+//
+static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
+{
+   upgrade_t const *upgr = upgr_;
+   
+   ACS_SetUserVariable(tid, "lith_upgradeid", upgr->info->id);
+   
+   switch(upgr->info->category)
+   {
+   case UC_Body: ACS_SetUserVariable(tid, "lith_upgradebody", true); break;
+   case UC_Weap: ACS_SetUserVariable(tid, "lith_upgradeweap", true); break;
+   default:      ACS_SetUserVariable(tid, "lith_upgradeextr", true); break;
+   }
+}
+
+//
 // LoadBalance
 //
-void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
+static void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
 {
    Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(c"Upgrades.lthm");
    
@@ -129,6 +132,20 @@ void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
 //
 
 //
+// Lith_UpgrSetOwned
+//
+void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
+{
+   if(upgr->owned) return;
+   
+   upgr->owned = true;
+   p->upgradesowned++;
+   
+   if(upgr->info->category == UC_Body && upgr->info->cost == 0)
+      Lith_UpgrToggle(p, upgr);
+}
+
+//
 // Lith_GSInit_Upgrade
 //
 void Lith_GSInit_Upgrade(bool first)
@@ -147,6 +164,8 @@ void Lith_GSInit_Upgrade(bool first)
       upgradeinfo_t *info = &upgradeinfo_mut[i];
       info->shopBuy    = Lith_UpgrShopBuy;
       info->shopCanBuy = Lith_UpgrCanBuy;
+      info->shopGive   = Lith_UpgrGive;
+      info->id = i;
    }
    
    if(first)
@@ -168,7 +187,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
       if(upgr->info->cost == 0)
          Lith_UpgrSetOwned(p, upgr);
       
-      if(ACS_GetCVar("__lith_debug_on"))
+      if(ACS_GetCVar("__lith_debug_on") && !ACS_GetCVar("__lith_debug_noupgrades"))
       {
          if(upgr->info->cost != 0)
             Lith_UpgrSetOwned(p, upgr);

@@ -46,7 +46,6 @@ typedef struct worldinfo_s
    property mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
    property cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
    property canontime  {get: Lith_CanonTime(false)}
-   property game       {get: ACS_GetCVar("__lith_game")}
    property canontimeshort {get: Lith_CanonTime(true)}
    
    int prevcluster;
@@ -59,9 +58,15 @@ typedef struct worldinfo_s
    
    bool scoregolf;
    
+   int game;
+   
    // Mod compat
    bool legendoom;
    bool drlamonsters;
+   
+   // Extras
+   bool extras;
+   bool pauseinmenus;
 } worldinfo_t;
 
 __addrdef extern __mod_arr Lith_MapVariable;

@@ -15,12 +15,8 @@ typedef struct shopdef_s
    score_t cost;
    void (*shopBuy)   (struct player_s *p, struct shopdef_s const *def, void *obj);
    bool (*shopCanBuy)(struct player_s *p, struct shopdef_s const *def, void *obj);
+   void (*shopGive)  (int tid,            struct shopdef_s const *def, void *obj);
 } shopdef_t;
-
-extern shopdef_t const *Lith_GlobalShopdefs[];
-extern size_t           Lith_GlobalShopdefsNum;
-
-void Lith_RegisterShopDef(shopdef_t const *def);
 
 score_t Lith_ShopGetCost(struct player_s *p, shopdef_t const *def);
 bool Lith_ShopCanBuy    (struct player_s *p, shopdef_t const *def, void *obj);

@@ -224,6 +224,15 @@ int Lith_StepSpeed()
 	return 6 * (mul + 0.6k);
 }
 
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_BoughtItemPickup(int id)
+{
+   player_t *p = LocalPlayer;
+   
+   if(id) Lith_UpgrSetOwned(p, &p->upgrades[id]);
+   else   p->itemsbought++;
+}
+
 #if 0
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()

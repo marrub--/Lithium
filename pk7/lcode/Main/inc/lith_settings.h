@@ -16,6 +16,10 @@ Bool("Make a sound when score is gained", "lith_player_scoresound")
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse")
 Bool("Log score gained",                  "lith_player_scorelog")
 Bool("Play sound on results screen",      "lith_player_resultssound")
+if(world.extras)
+{
+   Bool("Teleport in bought items and upgrades", "lith_player_teleshop")
+}
 Bool("Stupid pickup messages",            "lith_player_stupidpickups")
 
 Category("Weapons")
@@ -43,8 +47,12 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
 {
    Category("Single-Player")
    ServerBool("Explode on death",       "lith_sv_revenge")
+   if(world.extras)
+   {
+      ServerBool("Pause in menus (changes on new map)", "lith_sv_pauseinmenus")
+   }
    ServerFloat("Score multiplier (changes on new map)", "lith_sv_scoremul", 0, 10)
-   ServerBool("Score Golf mode",        "lith_sv_scoregolf")
+   ServerBool("Score Golf mode (changes on new game)",  "lith_sv_scoregolf")
    ServerBool("Are you serious?",       "lith_sv_seriousmode")
 }
 

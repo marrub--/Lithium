@@ -44,7 +44,7 @@ static size_t const shopitemsnum = countof(shopitems);
 //
 // Shop_CanBuy
 //
-static bool Shop_CanBuy(player_t *p, shopdef_t const *def, void *item_)
+static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    int cur =  ACS_CheckInventory(item->classname);
@@ -55,11 +55,20 @@ static bool Shop_CanBuy(player_t *p, shopdef_t const *def, void *item_)
 //
 // Shop_Buy
 //
-static void Shop_Buy(player_t *p, shopdef_t const *def, void *item_)
+static void Shop_Buy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    ACS_GiveInventory(item->classname, item->count);
    p->itemsbought++;
+}
+
+//
+// Shop_Give
+//
+static void Shop_Give(int tid, shopdef_t const *, void *item_)
+{
+   shopitem_t *item = item_;
+   ACS_GiveActorInventory(tid, item->classname, item->count);
 }
 
 
@@ -77,6 +86,7 @@ void Lith_GSInit_Shop(bool first)
       shopitem_t *info = &shopitems[i];
       info->shopBuy    = Shop_Buy;
       info->shopCanBuy = Shop_CanBuy;
+      info->shopGive   = Shop_Give;
    }
 }
 

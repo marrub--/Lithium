@@ -299,16 +299,21 @@ static void Lith_World(void)
             ACS_Thing_Remove(tid);
       
       world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
+      world.game         = ACS_GetCVar("__lith_game");
+      world.extras       = ACS_GetCVar("__lith_extras");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       
       gsinit = true;
    }
    
+   // Map init.
+   world.pauseinmenus = ACS_GetCVar("lith_sv_pauseinmenus");
+   
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
    
    // Init global score multiplier per-map.
-   world.scoremul = round(ACS_GetCVarFixed("lith_sv_scoremul") * 100) / 100;
+   world.scoremul = round(ACS_GetCVarFixed("lith_sv_scoremul") * 10) / 10;
    
    // Seriously?
    if(ACS_GetCVar("lith_sv_seriousmode"))
