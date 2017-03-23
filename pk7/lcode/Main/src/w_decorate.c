@@ -229,8 +229,14 @@ void Lith_BoughtItemPickup(int id)
 {
    player_t *p = LocalPlayer;
    
-   if(id) Lith_UpgrSetOwned(p, &p->upgrades[id]);
-   else   p->itemsbought++;
+   if(id)
+   {
+      upgrade_t *upgr = &p->upgrades[id];
+      Lith_UpgrSetOwned(p, upgr);
+      Lith_UpgrToggle(p, upgr);
+   }
+   else
+      p->itemsbought++;
 }
 
 #if 0
