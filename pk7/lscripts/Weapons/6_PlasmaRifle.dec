@@ -17,7 +17,7 @@ actor Lith_ParticleBeam : Lith_PlasmaLaze
    {
    Spawn:
       BLLT A 0
-      BLLT A 2 A_Explode(2, 256, 0)
+      BLLT A 2 A_Explode(4, 256, 0)
       BFS1 A 1 A_FadeOut(0.1)
       wait
    }
@@ -131,7 +131,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       PLSG A 0 A_GiveInventory("Lith_PartBeamShotsFired", 1)
       PLSG A 0 A_AlertMonsters
       PLSG A 0 A_PlaySound("weapons/plasma/part/fire", CHAN_WEAPON)
-      PLSG A 0 A_RailAttack(200, 0, false, "None", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8)
+      PLSG A 0 A_RailAttack(300, 0, false, "None", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8)
       PLSF A 1 bright offset(0, 55)
       PLSF A 1 bright offset(0, 45)
       PLSF B 1 bright offset(0, 37)
