@@ -346,9 +346,9 @@ static void Lith_World(void)
       {
          switch(world.prevcluster)
          {
-         case 5: ForPlayer() p->bip.deliverMail("Cluster1"); break;
-         case 6: ForPlayer() p->bip.deliverMail("Cluster2"); break;
-         case 7: ForPlayer() p->bip.deliverMail("Cluster3"); break;
+         case 5: ForPlayer() p->deliverMail("Cluster1"); break;
+         case 6: ForPlayer() p->deliverMail("Cluster2"); break;
+         case 7: ForPlayer() p->deliverMail("Cluster3"); break;
          }
       }
       

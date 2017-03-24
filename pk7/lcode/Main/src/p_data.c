@@ -204,7 +204,7 @@ void Lith_ResetPlayer(player_t *p)
       else
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
       
-      p->bip.deliverMail("Intro");
+      p->deliverMail("Intro");
       
       p->staticinit = true;
    }

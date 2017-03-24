@@ -287,7 +287,8 @@ typedef struct player_s
    property useGUI    {call: Lith_PlayerUseGUI(this)}
    property closeGUI  {call: Lith_PlayerCloseGUI(this)}
    property buttonPressed {call: Lith_ButtonPressed(this)}
-   property weapontype {get: Lith_PlayerCurWeaponType(this)}
+   property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
+   property deliverMail {call: Lith_DeliverMail(this)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

@@ -26,7 +26,7 @@ struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
 struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name);
 [[__call("ScriptS")]] void Lith_DeallocateBIP(struct bip_s *bip);
 void Lith_PlayerLoseBIPPages(struct bip_s *bip);
-void Lith_DeliverMail(struct bip_s *bip, __str title);
+void Lith_DeliverMail(struct player_s *p, __str title);
 
 
 //----------------------------------------------------------------------------
@@ -64,7 +64,6 @@ typedef struct bip_s
    property unlock      {call: Lith_UnlockBIPPage(this)}
    property deallocate  {call: Lith_DeallocateBIP(this)}
    property losePages   {call: Lith_PlayerLoseBIPPages(this)}
-   property deliverMail {call: Lith_DeliverMail(this)}
    
    // Stats
    int categoryavail[BIPC_MAX];

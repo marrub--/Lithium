@@ -9,7 +9,7 @@ function procHead(alias)
 end
 
 function procLine(ln, last)
-   out:write("\n   \"" .. ln:gsub("\\", "\\\\"):gsub("\"", "\\\""))
+   out:write("\n   \"" .. ln:gsub("\\([^c\\]+)", "\\\\\\%1"):gsub("\"", "\\\""))
    if not last then out:write("\\n") end
    out:write("\"")
 end

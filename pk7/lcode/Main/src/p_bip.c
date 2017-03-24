@@ -158,18 +158,28 @@ void Lith_PlayerInitBIP(player_t *p)
 //
 // Lith_DeliverMail
 //
-void Lith_DeliverMail(bip_t *bip, __str title)
+void Lith_DeliverMail(player_t *p, __str title)
 {
+   enum
+   {
+      MAILF_PrintMessage = 1 << 0,
+   };
+   
+   bip_t *bip = &p->bip;
+   
    bippage_t *page = calloc(1, sizeof(bippage_t));
    
    __str date = LanguageNull("LITH_TXT_MAIL_TIME_%S", title);
    __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
-   __str send = Language("LITH_TXT_MAIL_SEND_%S", title);
-   __str name = Language("LITH_TXT_MAIL_NAME_%S", title);
+   __str send = LanguageNull("LITH_TXT_MAIL_SEND_%S", title);
+   __str name = LanguageNull("LITH_TXT_MAIL_NAME_%S", title);
    __str body = Language("LITH_TXT_MAIL_BODY_%S", title);
+   int   flag = strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
+   
+   if(!send) send = "<internal>";
    
    page->name  = date ? date : world.canontimeshort;
-   page->title = name;
+   page->title = name ? name : "<title omitted>";
    page->body  = StrParam(Language("LITH_TXT_MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
@@ -181,10 +191,15 @@ void Lith_DeliverMail(bip_t *bip, __str title)
    
    bip->mailreceived++;
    
-   if(ACS_Random(1, 10000) == 1)
+   if(flag & MAILF_PrintMessage)
    {
-      bip->mailtrulyreceived++;
-      ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
+      p->log("> Mail received from <\Cj%S\C->.", send);
+      
+      if(ACS_Random(1, 10000) == 1)
+      {
+         bip->mailtrulyreceived++;
+         ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
+      }
    }
 }
 
