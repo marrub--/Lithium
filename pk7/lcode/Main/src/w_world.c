@@ -163,8 +163,8 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
             continue;
          }
          
-         // Wait for RandomSpawner inheriting actors.
-         ACS_Delay(1);
+         // Wait for spawners.
+         ACS_Delay(2);
          
          // Make the actor undetectable.
          ACS_SetActorProperty(tid, APROP_RenderStyle, STYLE_None);
