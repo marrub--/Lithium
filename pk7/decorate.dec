@@ -29,7 +29,7 @@
 #include "lscripts/Items/AmmoPickups.dec"
 #include "lscripts/Items/Powerups.dec"
 #include "lscripts/Items/Keys.dec"
-//#include "lscripts/Items/DivisionSigil.dec"
+#include "lscripts/Items/DivisionSigil.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
 

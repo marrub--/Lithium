@@ -6,6 +6,7 @@ actor Lith_WeaponGlow
    Translation "0:255=%[0,0,0]:[0,0.5,1]"
    
    +NOINTERACTION
+   +NOTIMEFREEZE
    
    states
    {
@@ -19,6 +20,7 @@ actor Lith_WeaponGlow
 actor Lith_WeaponSprite
 {
    +NOINTERACTION
+   +NOTIMEFREEZE
    
    var int user_origx;
    var int user_origy;

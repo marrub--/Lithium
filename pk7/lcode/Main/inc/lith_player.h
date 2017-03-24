@@ -4,7 +4,6 @@
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
-#include "lith_sigil.h"
 #include "lith_bip.h"
 #include "lith_log.h"
 #include "lith_list.h"
@@ -218,7 +217,10 @@ typedef struct player_invdata_s
    } keys;
    
    // 🌌 「÷」 0
-   // sigil_t sigil;
+   struct sigil_s
+   {
+      bool acquired;
+   } sigil;
 } player_invdata_t;
 
 

@@ -239,57 +239,49 @@ void Lith_BoughtItemPickup(int id)
       p->itemsbought++;
 }
 
-#if 0
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()
 {
-   ACS_SetResultValue(1);
-   
    player_t *p = LocalPlayer;
    
-   if(p->cbi.open)
-      Lith_KeyOpenCBI();
+   p->closeGUI();
    
    p->sigil.acquired = true;
    
+   ACS_Thing_Remove(ACS_CheckInventory("Lith_DivisionSigilSpriteTID"));
+   ACS_TakeInventory("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
+   
    if(ACS_GetCVar("__lith_debug_on"))
-      return 1;
+      return;
    
    p->frozen++;
+   p->setVel(0.0, 0.0, 0.0, false, true);
+   
    ACS_GiveInventory("Lith_TimeHax", 1);
    ACS_GiveInventory("Lith_TimeHax2", 1);
    
-   p->setVel(0.0, 0.0, 0.0, false, true);
    ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
+   ACS_SetHudSize(320, 200);
    
    ACS_Delay(3);
    
-   __str title_text = "D I V I S I O N  S I G I L";
+   HudMessageF("DBIGFONT", "D I V I S I O N  S I G I L");
+   HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TICSECOND * 5, 0.3);
    
-   __str subtitle_text = "Warning: This item is unfathomably dangerous.\n"
-                  "                Use only at the expense of your world.";
+   HudMessageF("SMALLFNT",
+      "=== Warning ===\n"
+      "This item is unfathomably dangerous.\n"
+      "Use at the expense of your world.");
+   HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TICSECOND * 2, 0.3);
    
-   int title_len = ACS_StrLen(title_text);
-   int subtitle_len = ACS_StrLen(subtitle_text);
+   ACS_Delay(35 * 7);
    
-   fixed title_time = (TICSECOND * 5) * title_len;
-   fixed subtitle_time = (TICSECOND * 2) * subtitle_len;
-   
-   HudMessageF("DBIGFONT", title_text);
-   HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 0.5, 0.45, 1.0 + subtitle_time, TICSECOND * 5, 0.3);
-   
-   HudMessageF("SMALLFNT", subtitle_text);
-   HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 0.5, 0.5, 1.0 + title_time, TICSECOND * 2, 0.3);
-   
-   ACS_Delay((subtitle_time + title_time + 1.0) * 35.0);
-   
-   ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 4);
+   ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 5);
    
    ACS_TakeInventory("PowerTimeFreezer", 1);
    ACS_TakeInventory("Lith_TimeHax2", 1);
    p->frozen--;
 }
-#endif
 
 // EOF
 
