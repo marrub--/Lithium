@@ -118,15 +118,15 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
       goto FireEmpty
       PLSG A 0 A_JumpIfInventory("Lith_PartBeamShotsFired", 0, "Reload")
       PLSG A 3 A_PlaySound("weapons/plasma/part/charge", CHAN_6)
-      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 5, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2)
+      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 5, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "None", -2)
       PLSG A 3
-      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 4, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2)
+      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 4, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "None", -2)
       PLSG A 2
-      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 3, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2)
+      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 3, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "None", -2)
       PLSG A 1
-      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 2, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2)
+      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 2, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "None", -2)
       PLSG A 1
-      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 2, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2)
+      PLSG A 3 A_RailAttack(0, 0, false, "None", "White", RGF_SILENT|RGF_FULLBRIGHT, 2, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "None", -2)
       PLSK A 0 A_TakeInventory("Lith_PlasmaAmmo", 200, TIF_NOTAKEINFINITE)
       PLSG A 0 A_GiveInventory("Lith_PartBeamShotsFired", 1)
       PLSG A 0 A_AlertMonsters
