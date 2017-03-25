@@ -346,6 +346,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             else           body = Language("LITH_TXT_INFO_DESCR_%S", page->name);
             
             Lith_GUI_TypeOn(g, st_biptypeon, body);
+            
+            Lith_GUI_ScrollReset(g, st_bipinfoscr);
          }
       }
       

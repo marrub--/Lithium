@@ -20,6 +20,9 @@
 
 #define Lith_GUI_Prefix(set) if(set) set = StrParam("%S%S", g->gfxprefix, set)
 
+#define Lith_GUI_ScrollReset(g, stn) \
+   memset(&g->st[stn].scrl, 0, sizeof(gui_scroll_state_t));
+
 //----------------------------------------------------------------------------
 // Type Definitions
 //
