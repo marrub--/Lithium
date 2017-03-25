@@ -1,0 +1,4 @@
+user float lith_player_damagebobmul = 0.6;
+
+// EOF
+
