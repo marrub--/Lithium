@@ -33,7 +33,10 @@ enum
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
    
-   UPGR_MAX
+   UPGR_BASE_MAX,
+   
+   // Extras addon stuff
+   UPGR_DarkCannon = 666,
 };
 
 // EOF

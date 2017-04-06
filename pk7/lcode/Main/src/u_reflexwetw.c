@@ -69,7 +69,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          UserData.leaped = 0;
       
       if(p->buttons & BT_SPEED &&
-         (grounddist <= 16.0 || !p->upgrades[UPGR_JetBooster].active))
+         (grounddist <= 16.0 || !p->getUpgr(UPGR_JetBooster)->active))
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
          
@@ -100,7 +100,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_ReflexWetw_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->upgrades[UPGR_HeadsUpDisp].active) return;
+   if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
    
    int  time11 = p->ticks % 11;
    float slide = UserData.charge / (float)CHARGE_MAX;

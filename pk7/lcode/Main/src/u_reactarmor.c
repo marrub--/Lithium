@@ -57,8 +57,8 @@ static void RA_Give(__str name, int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_RA_Give(int num)
 {
-   player_t *p = LocalPlayer;
-   upgrade_t *upgr = &p->upgrades[UPGR_ReactArmor];
+   player_t *p = Lith_LocalPlayer;
+   upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
    
    if(!upgr->active)
       return;
@@ -76,7 +76,7 @@ void Lith_RA_Give(int num)
       
       p->logH(">>>>> Activating Armor->%S()", name);
       
-      if(p->upgrades[UPGR_ReactArmor2].active)
+      if(p->getUpgr(UPGR_ReactArmor2)->active)
          RA_Give(name, 2);
       else
          RA_Give(name, 1);

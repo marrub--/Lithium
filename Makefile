@@ -9,6 +9,7 @@ MAKELIB=gdcc-makelib
 BIN=pk7/acs
 SRC=pk7/lcode/Main/src
 INC=pk7/lcode/Main/inc
+API=api
 IR=ir
 
 LITHOS_SRC=pk7/lcode/LithOS3/lithos_c/src
@@ -73,7 +74,7 @@ MAIN_SOURCES= \
 	$(SRC)/p_settings.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
-MAIN_HEADERS=$(wildcard $(INC)/*.h)
+MAIN_HEADERS=$(wildcard $(INC)/*.h) $(wildcard $(API)/*.h)
 
 LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
 LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
@@ -94,7 +95,7 @@ $(BIN)/lithmain.bin: $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
 ## ir/*.ir
 
 $(IR)/%.ir: $(SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
-	$(CC) $(CFLAGS) -i$(INC) -Dnull=NULL -c $< -o $@
+	$(CC) $(CFLAGS) -i$(INC) -i$(API) -Dnull=NULL -c $< -o $@
 
 $(IR)/lithos_%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

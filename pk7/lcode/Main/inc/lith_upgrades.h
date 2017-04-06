@@ -5,19 +5,6 @@
 #include "lith_upgradenames.h"
 #include "lith_shopdef.h"
 #include "lith_list.h"
-#include "lith_upgradecategories.h"
-
-#define UserData_Adrenaline data.u01
-#define UserData_Implying   data.u02
-#define UserData_JetBooster data.u03
-#define UserData_lolsords   data.u04
-#define UserData_ReactArmor data.u05
-#define UserData_ReflexWetw data.u06
-#define UserData_VitalScan  data.u07
-#define UserData_Zoom       data.u08
-#define UserData_HomingRPG  data.u09
-
-#define NUMAUTOGROUPS 4
 
 #define Lith_UpgrBuy(p, upgr, nodelivery) \
    Lith_ShopBuy(p, &(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", nodelivery)
@@ -27,101 +14,7 @@
 // Types
 //
 
-enum
-{
-   ug_none,
-   ug_pistol,
-   ug_shotgun,
-   ug_launcher,
-   ug_plasma,
-   ug_bfg,
-   ug_max
-};
-
-//
-// upgradedata_u
-//
-union upgradedata_u
-{
-   struct
-   {
-      int charge;
-      bool readied;
-   } u01;
-   
-   struct {int hudid;}        u02;
-   struct {int charge;}       u03;
-   struct {__str origweapon;} u04;
-   struct {int activearmor;}  u05;
-   
-   struct
-   {
-      int charge;
-      bool leaped;
-   } u06;
-   
-   struct
-   {
-      int target;
-      int oldtarget;
-      __str tagstr;
-      int health;
-      int oldhealth;
-      int maxhealth;
-      float angle;
-      float old;
-      bool freak;
-   } u07;
-   
-   struct
-   {
-      int zoom;
-      float vzoom;
-   } u08;
-   
-   struct {int id;} u09;
-};
-
-                      typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);
-[[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
-
-//
-// upgradeinfo_t
-//
-typedef struct upgradeinfo_s
-{
-   [[__anonymous]] shopdef_t shopdef;
-   int category;
-   fixed scoreadd;
-   int group;
-   int id;
-   
-   upgr_cb_t        Activate;
-   upgr_cb_t        Deactivate;
-   upgr_update_cb_t Update;
-   upgr_cb_t        Render;
-   upgr_cb_t        Enter;
-} upgradeinfo_t;
-
-//
-// upgrade_t
-//
-typedef struct upgrade_s
-{
-   bool active    : 1;
-   bool owned     : 1;
-   bool wasactive : 1; // for reinitializing on map load
-   
-   upgradeinfo_t const *info;
-   union upgradedata_u  data;
-   
-   bool autogroups[NUMAUTOGROUPS];
-} upgrade_t;
-
-//
-// upgrades_t
-//
-typedef upgrade_t upgrades_t[UPGR_MAX];
+typedef upgrade_t upgrades_t[UPGR_STATIC_MAX];
 
 
 //----------------------------------------------------------------------------
@@ -129,6 +22,8 @@ typedef upgrade_t upgrades_t[UPGR_MAX];
 //
 
 extern __str Lith_AutoGroupNames[NUMAUTOGROUPS];
+extern upgradeinfo_t *upgradeinfo;
+extern int UPGR_MAX;
 
 
 //----------------------------------------------------------------------------

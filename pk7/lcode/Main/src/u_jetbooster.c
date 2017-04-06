@@ -39,7 +39,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       p->setVel(p->velx + (cosk(angle) * 16.0), p->vely + (sink(angle) * 16.0), 10.0, false, true);
       
       UserData.charge = 0;
-      p->upgrades[UPGR_ReflexWetw].UserData_ReflexWetw.leaped = 0;
+      p->getUpgr(UPGR_ReflexWetw)->UserData_ReflexWetw.leaped = 0;
    }
 }
 
@@ -48,7 +48,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->upgrades[UPGR_HeadsUpDisp].active || UserData.charge == CHARGE_MAX) return;
+   if(!p->getUpgr(UPGR_HeadsUpDisp)->active || UserData.charge == CHARGE_MAX) return;
    
    fixed rocket = UserData.charge / (fixed)CHARGE_MAX;
    int max = (hid_jetS - hid_jetE) * rocket;

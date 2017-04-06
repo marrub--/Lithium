@@ -11,7 +11,7 @@
 // Static Objects
 //
 
-static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
+static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
 // {{"Name-------", "BIP---------", Cost----}, UC_Cat-, Score, [Group]},
    {{"HeadsUpDisp", "HeadsUpDisp",  0       }, UC_Body, -0.05},
    {{"JetBooster",  "JetBooster",   0       }, UC_Body, -0.05},
@@ -25,18 +25,18 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  0.00},
    
    {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  0.00},
-   {{"AutoPistol",  null,           140940  }, UC_Weap,  0.00, ug_pistol},
-   {{"PlasPistol",  null,           340000  }, UC_Weap,  0.00, ug_pistol},
-   {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  0.00, ug_shotgun},
-   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0.00, ug_shotgun},
+   {{"AutoPistol",  null,           140940  }, UC_Weap,  0.00, UG_Pistol},
+   {{"PlasPistol",  null,           340000  }, UC_Weap,  0.00, UG_Pistol},
+   {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  0.00, UG_Shotgun},
+   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0.00, UG_Shotgun},
    {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0.00},
    {{"LaserRCW",    "RifleUpg2",    1008080 }, UC_Weap,  0.00},
-   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0.00, ug_launcher},
-   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  0.00, ug_launcher},
-   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, UC_Weap,  0.00, ug_plasma},
-   {{"PartBeam",    "PlasmaUpg2",   2500000 }, UC_Weap,  0.00, ug_plasma},
-   {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0.00, ug_bfg},
-   {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  0.00, ug_bfg},
+   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0.00, UG_Launcher},
+   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  0.00, UG_Launcher},
+   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, UC_Weap,  0.00, UG_Plasma},
+   {{"PartBeam",    "PlasmaUpg2",   2500000 }, UC_Weap,  0.00, UG_Plasma},
+   {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0.00, UG_BFG},
+   {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  0.00, UG_BFG},
    
    {{"TorgueMode",  null,           80000000}, UC_Extr,  0.00},
    {{"7777777",     null,           82354300}, UC_Extr,  0.10},
@@ -47,12 +47,19 @@ static upgradeinfo_t const upgradeinfo[UPGR_MAX] = {
    {{"InstaDeath",  null,           0       }, UC_Down,  0.50},
 };
 
+static upgradeinfo_t extraupgradeinfo[UPGR_EXTRA_NUM];
+
+//static int numextraupgradecallbacks;
+//static upgrade_cb_register_t extraupgradecallbacks;
+
 
 //----------------------------------------------------------------------------
 // Extern Objects
 //
 
 __str Lith_AutoGroupNames[NUMAUTOGROUPS] = {"\Ca#1", "\Cd#2", "\Cn#3", "\Ck#4"};
+upgradeinfo_t *upgradeinfo;
+int UPGR_MAX = countof(staticupgradeinfo);
 
 
 //----------------------------------------------------------------------------
@@ -104,32 +111,111 @@ static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
 }
 
 //
-// LoadBalance
+// CompUpgrInfo
 //
-static void LoadBalance(upgradeinfo_t *upgradeinfo_mut)
+static int CompUpgrInfo(void const *lhs, void const *rhs)
 {
-   Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(c"Upgrades.lthm");
+   upgradeinfo_t const *u1 = lhs;
+   upgradeinfo_t const *u2 = rhs;
+   int c1 = u1->category - u2->category;
+   if(c1 != 0) return c1;
+   else        return u1->key - u2->key;
+}
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_LoadUpgrInfoBalance
+//
+// Load extra balance info from a file.
+//
+void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname)
+{
+   Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(fname);
    
    if(!rsrc)
       return;
    
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < max; i++)
    {
-      __str name = upgradeinfo[i].name;
+      __str name = uinfo[i].name;
       
       int   const *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
       fixed const *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
-      if(cost)     upgradeinfo_mut[i].cost     = *cost;
-      if(scoreadd) upgradeinfo_mut[i].scoreadd = *scoreadd;
+      if(cost)     uinfo[i].cost     = *cost;
+      if(scoreadd) uinfo[i].scoreadd = *scoreadd;
    }
    
    Lth_ResourceMapDestroy(rsrc);
 }
 
-
-//----------------------------------------------------------------------------
-// External Functions
 //
+// Lith_RegisterBasicUpgrade
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_RegisterBasicUpgrade(int key, __str name, int cost, int category)
+{
+   extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX] =
+      (upgradeinfo_t){{name, null, cost}, category, .key=key};
+}
+
+//
+// Lith_GSInit_Upgrade
+//
+void Lith_GSInit_Upgrade(bool first)
+{
+   if(first)
+   {
+      for(int i = 0; i < countof(staticupgradeinfo); i++)
+         staticupgradeinfo[i].key = i;
+      
+      Lith_LoadUpgrInfoBalance(staticupgradeinfo, countof(staticupgradeinfo), c"Upgrades.lthm");
+      
+      upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
+      memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
+      
+      for(int i = 0; i < countof(extraupgradeinfo); i++)
+         if(extraupgradeinfo[i].name != null)
+            upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
+      
+      //SortUpgradeInfo(upgradeinfo, UPGR_MAX);
+      qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
+      
+      for(int i = 0; i < UPGR_MAX; i++)
+         upgradeinfo[i].id = i;
+   }
+   
+   // Set up function pointers for upgrade info.
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      switch(upgradeinfo[i].key)
+      {
+      #define Case(n) continue; case UPGR_##n:
+      #define A(n) upgradeinfo[i].Activate   = Upgr_##n##_Activate;
+      #define D(n) upgradeinfo[i].Deactivate = Upgr_##n##_Deactivate;
+      #define U(n) upgradeinfo[i].Update     = Upgr_##n##_Update;
+      #define E(n) upgradeinfo[i].Enter      = Upgr_##n##_Enter;
+      #define R(n) upgradeinfo[i].Render     = Upgr_##n##_Render;
+      #include "lith_upgradefuncs.h"
+         continue;
+      }
+      
+      // TODO
+      //for(int i = 0; i < numextraupgradecallbacks; i++)
+         //extraupgradecallbacks[i](&upgradeinfo[i]);
+   }
+   
+   // Load shop function pointers and IDs.
+   for(int i = 0; i < UPGR_MAX; i++)
+   {
+      upgradeinfo[i].shopBuy    = Lith_UpgrShopBuy;
+      upgradeinfo[i].shopCanBuy = Lith_UpgrCanBuy;
+      upgradeinfo[i].shopGive   = Lith_UpgrGive;
+   }
+}
 
 //
 // Lith_UpgrSetOwned
@@ -146,43 +232,21 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 }
 
 //
-// Lith_GSInit_Upgrade
-//
-void Lith_GSInit_Upgrade(bool first)
-{
-   upgradeinfo_t *upgradeinfo_mut = (upgradeinfo_t *)upgradeinfo;
-   
-   #define A(n) upgradeinfo_mut[UPGR_##n].Activate   = Upgr_##n##_Activate;
-   #define D(n) upgradeinfo_mut[UPGR_##n].Deactivate = Upgr_##n##_Deactivate;
-   #define U(n) upgradeinfo_mut[UPGR_##n].Update     = Upgr_##n##_Update;
-   #define E(n) upgradeinfo_mut[UPGR_##n].Enter      = Upgr_##n##_Enter;
-   #define R(n) upgradeinfo_mut[UPGR_##n].Render     = Upgr_##n##_Render;
-   #include "lith_upgradefuncs.h"
-   
-   for(int i = 0; i < UPGR_MAX; i++)
-   {
-      upgradeinfo_t *info = &upgradeinfo_mut[i];
-      info->shopBuy    = Lith_UpgrShopBuy;
-      info->shopCanBuy = Lith_UpgrCanBuy;
-      info->shopGive   = Lith_UpgrGive;
-      info->id = i;
-   }
-   
-   if(first)
-      LoadBalance(upgradeinfo_mut);
-}
-
-//
 // Lith_PlayerInitUpgrades
 //
 void Lith_PlayerInitUpgrades(player_t *p)
 {
+   p->upgrademap.alloc(UPGR_MAX);
+   
    for(int i = 0; i < UPGR_MAX; i++)
    {
       upgrade_t *upgr = &p->upgrades[i];
       memset(upgr, 0, sizeof(upgr));
       
       upgr->info = &upgradeinfo[i];
+      
+      p->upgrademap.elem.data[i].keyhash = upgr->info->key;
+      p->upgrademap.elem.data[i].value   = upgr;
       
       if(upgr->info->cost == 0)
          Lith_UpgrSetOwned(p, upgr);
@@ -196,6 +260,8 @@ void Lith_PlayerInitUpgrades(player_t *p)
             Lith_UpgrToggle(p, upgr);
       }
    }
+   
+   p->upgrademap.build();
 }
 
 //
@@ -328,8 +394,10 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       bool canbuy = Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr);
       
            if(!upgr->owned && !canbuy) color = "u";
-      else if(i == UPGR_TorgueMode)    color = "g";
-      else                             color = null;
+      else switch(upgr->info->key)
+               { case UPGR_TorgueMode: color = "g"; break;
+                 case UPGR_DarkCannon: color = "m"; break;
+                 default:              color = null;}
       
            if(upgr->active) preset = &btnlistactivated;
       else if(upgr->owned)  preset = &btnlistactive;
@@ -359,7 +427,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    }
    
    __str mark;
-   switch(sel)
+   switch(upgr->info->key)
    {
    case UPGR_lolsords:   mark = "\Cjfolds"; break;
    case UPGR_TorgueMode: mark = "\Cd$";     break;
@@ -403,7 +471,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    
    gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_upgrtypeon);
    
-   if(sel != UPGR_UNCEUNCE)
+   if(upgr->info->key != UPGR_UNCEUNCE)
       HudMessageF        ("CBIFONT", "%.*S", typeon->pos, typeon->txt);
    else
       HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);

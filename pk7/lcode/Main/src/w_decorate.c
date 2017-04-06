@@ -32,10 +32,10 @@ void Lith_UpdateScore(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    int max = rifle_firemode_max;
    
-   if(!p->upgrades[UPGR_RifleModes].active)
+   if(!p->getUpgr(UPGR_RifleModes)->active)
       max--;
    
    p->riflefiremode = (++p->riflefiremode) % max;
@@ -68,7 +68,7 @@ int Lith_VelHax(int fuck)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    p->health = ACS_GetActorProperty(0, APROP_Health);
    return p->health < p->maxhealth;
 }
@@ -76,7 +76,7 @@ bool Lith_CheckHealth(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    p->armor = ACS_CheckInventory("BasicArmor");
    return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
 }
@@ -84,13 +84,13 @@ bool Lith_CheckArmor(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Discount()
 {
-   LocalPlayer->discount = 0.9;
+   Lith_LocalPlayer->discount = 0.9;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_DOGS()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    int tid = ACS_UniqueTID();
    
@@ -140,7 +140,7 @@ void Lith_SteggleEnergy()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Barrier()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    for(int i = 0; p->active && i < 35 * 30; i++)
    {
@@ -206,7 +206,7 @@ void Lith_PoisonFXTicker()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_ResetRifleMode()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    if(Lith_GetPCVarInt(p, "lith_weapons_riflemodeclear"))
       p->riflefiremode = rifle_firemode_auto;
@@ -215,7 +215,7 @@ void Lith_ResetRifleMode()
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_StepSpeed()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
 	fixed vel = ACS_VectorLength(absk(p->velx), absk(p->vely));
    fixed num = 1k - (vel / 24k);
@@ -227,7 +227,7 @@ int Lith_StepSpeed()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_BoughtItemPickup(int id)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    if(id)
    {
@@ -242,7 +242,7 @@ void Lith_BoughtItemPickup(int id)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    p->closeGUI();
    

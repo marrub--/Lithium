@@ -9,7 +9,7 @@
 // Extern Objects
 //
 
-player_t players[MAX_PLAYERS];
+player_t players[Lith_MAX_PLAYERS];
 
 
 //----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ static void Lith_PlayerEntry(void)
    if(ACS_GameType() == GAME_TITLE_MAP)
       return;
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
 reinit:
    while(!mapinit) ACS_Delay(1);
@@ -95,7 +95,7 @@ reinit:
 [[__call("ScriptS"), __script("Death")]]
 static void Lith_PlayerDeath(void)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    bool singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
    
    p->dead = true;
@@ -135,7 +135,7 @@ static void Lith_PlayerDeath(void)
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
-   LocalPlayer->reinit = true;
+   Lith_LocalPlayer->reinit = true;
 }
 
 //
@@ -144,7 +144,7 @@ static void Lith_PlayerRespawn(void)
 [[__call("ScriptS"), __script("Return")]]
 static void Lith_PlayerReturn(void)
 {
-   LocalPlayer->reinit = true;
+   Lith_LocalPlayer->reinit = true;
 }
 
 //
@@ -153,7 +153,7 @@ static void Lith_PlayerReturn(void)
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    p->bip.deallocate();
    
@@ -162,6 +162,8 @@ static void Lith_PlayerDisconnect(void)
    p->loginfo.full.free(free);
    p->loginfo.maps.free(free);
    
+   p->upgrademap.destroy();
+   
    memset(p, 0, sizeof(player_t));
 }
 
@@ -169,6 +171,14 @@ static void Lith_PlayerDisconnect(void)
 //----------------------------------------------------------------------------
 // Extern Functions
 //
+
+//
+// Lith_PlayerGetNamedUpgrade
+//
+upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
+{
+   return Lth_HashMapFind(&p->upgrademap, name);
+}
 
 //
 // Lith_PlayerCloseGUI
@@ -244,13 +254,13 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
       ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
    
    //
-   if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0)
+   if(p->getUpgr(UPGR_CyberLegs)->active && ACS_Random(0, 10000) == 0)
    {
       p->brouzouf += score;
       p->log("> You gained brouzouf.");
    }
    
-   if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0)
+   if(p->getUpgr(UPGR_TorgueMode)->active && ACS_Random(0, 10) == 0)
    {
       p->spuriousexplosions++;
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);

@@ -91,7 +91,7 @@ void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    if(p->dead)
       return;

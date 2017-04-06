@@ -2,7 +2,7 @@
 #include "lith_world.h"
 
 #define UserData       upgr->UserData_HomingRPG
-#define UserDataExtern p->upgrades[UPGR_HomingRPG].UserData_HomingRPG
+#define UserDataExtern p->getUpgr(UPGR_HomingRPG)->UserData_HomingRPG
 
 
 //----------------------------------------------------------------------------

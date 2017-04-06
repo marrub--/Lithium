@@ -13,7 +13,7 @@
 [[__call("ScriptS")]]
 static void Lith_Save_agrp(savefile_t *save)
 {
-   bool any[UPGR_MAX] = {};
+   bool *any = calloc(UPGR_MAX, sizeof(bool));
    int total = 0;
    
    for(int i = 0; i < UPGR_MAX; i++)
@@ -54,6 +54,8 @@ static void Lith_Save_agrp(savefile_t *save)
       Lith_SaveWriteChunk(save, Ident_agrp, SaveV_agrp, data, size);
       free(data);
    }
+   
+   free(any);
 }
 
 //

@@ -144,12 +144,12 @@ static void HUD_Health(player_t *p)
 //
 static void HUD_Armor(player_t *p)
 {
-   static __str armorgfx[armor_max] = {
-      [armor_unknown] = "lgfx/HUD/H_D27.png",
-      [armor_none]    = "lgfx/HUD/H_D28.png",
-      [armor_bonus]   = "lgfx/HUD/H_D23.png",
-      [armor_green]   = "lgfx/HUD/H_D24.png",
-      [armor_blue]    = "lgfx/HUD/H_D25.png"
+   static __str armorgfx[ARM_max] = {
+      [ARM_unknown] = "lgfx/HUD/H_D27.png",
+      [ARM_none]    = "lgfx/HUD/H_D28.png",
+      [ARM_bonus]   = "lgfx/HUD/H_D23.png",
+      [ARM_green]   = "lgfx/HUD/H_D24.png",
+      [ARM_blue]    = "lgfx/HUD/H_D25.png"
    };
    
    DrawSpritePlain("lgfx/HUD/SplitBack.png", hid_armorbg, 0.1, 184.2, TICSECOND);
@@ -229,7 +229,7 @@ static void HUD_Mode(player_t *p)
 {
    if(p->weapontype == weapon_rifle)
    {
-      int addy = p->upgrades[UPGR_RifleModes].active ? 0 : 16;
+      int addy = p->getUpgr(UPGR_RifleModes)->active ? 0 : 16;
       DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 200.2 + addy, TICSECOND);
       DrawSpritePlain(StrParam("lgfx/HUD/H_W%i.png",
          (rifle_firemode_max - p->riflefiremode) + 3),

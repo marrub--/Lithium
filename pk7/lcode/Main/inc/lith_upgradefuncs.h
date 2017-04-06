@@ -1,31 +1,89 @@
-// A(-----------) D(-----------) U(-----------) E(-----------) R(-----------)
-                                                               R(HeadsUpDisp)
-   A(JetBooster)                 U(JetBooster)                 R(JetBooster)
-   A(ReflexWetw)  D(ReflexWetw)  U(ReflexWetw)                 R(ReflexWetw)
-                  D(Zoom)        U(Zoom)                       R(Zoom)
-   A(CyberLegs)   D(CyberLegs)   U(CyberLegs)
-                  D(ReactArmor)                                R(ReactArmor)
-                                                E(DefenseNuke)
-   A(Adrenaline)                 U(Adrenaline)
-                                 U(VitalScan)                  R(VitalScan)
-//---------------------------------------------------------------------------
-                  D(RifleModes)                                R(RifleModes)
-                                 U(HomingRPG)
-                  D(PunctCannon)
-//---------------------------------------------------------------------------
-   A(7777777)     D(7777777)     U(7777777)
-   A(lolsords)    D(lolsords)    U(lolsords)
-//---------------------------------------------------------------------------
-                                 U(Implying)
-   A(UNCEUNCE)    D(UNCEUNCE)    U(UNCEUNCE)
-                                 U(InstaDeath)
-//---------------------------------------------------------------------------
+#ifndef Case
+#define Case(...)
+#endif
+
+// Body Upgrades -------------------------------------------------------------
+   Case(HeadsUpDisp)
+      R(HeadsUpDisp)
+
+   Case(JetBooster)
+      A(JetBooster)
+      U(JetBooster)
+      R(JetBooster)
+
+   Case(ReflexWetw)
+      A(ReflexWetw)
+      D(ReflexWetw)
+      U(ReflexWetw)
+      R(ReflexWetw)
+
+   Case(Zoom)
+      D(Zoom)
+      U(Zoom)
+      R(Zoom)
+
+   Case(CyberLegs)
+      A(CyberLegs)
+      D(CyberLegs)
+      U(CyberLegs)
+
+   Case(ReactArmor)
+      D(ReactArmor)
+      R(ReactArmor)
+
+   Case(DefenseNuke)
+      E(DefenseNuke)
+
+   Case(Adrenaline)
+      A(Adrenaline)
+      U(Adrenaline)
+
+   Case(VitalScan)
+      U(VitalScan)
+      R(VitalScan)
+
+// Weapon Upgrades -----------------------------------------------------------
+   Case(RifleModes)
+      D(RifleModes)
+      R(RifleModes)
+
+   Case(HomingRPG)
+      U(HomingRPG)
+
+   Case(PunctCannon)
+      D(PunctCannon)
+
+// Extra Upgrades ------------------------------------------------------------
+   Case(7777777)
+      A(7777777)
+      D(7777777)
+      U(7777777)
+
+   Case(lolsords)
+      A(lolsords)
+      D(lolsords)
+      U(lolsords)
+
+// Downgrades ----------------------------------------------------------------
+   Case(Implying)
+      U(Implying)
+
+   Case(UNCEUNCE)
+      A(UNCEUNCE)
+      D(UNCEUNCE)
+      U(UNCEUNCE)
+
+   Case(InstaDeath)
+      U(InstaDeath)
+
+//----------------------------------------------------------------------------
 
 #undef A
 #undef D
 #undef U
 #undef E
 #undef R
+#undef Case
 
 // EOF
 

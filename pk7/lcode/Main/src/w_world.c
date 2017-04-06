@@ -11,6 +11,7 @@
 
 static bool enemiesarecompatible;
 static bool enemycheckfinished;
+static bool gsinit;
 
 
 //----------------------------------------------------------------------------
@@ -109,7 +110,7 @@ static void Lith_DoPayout(void)
    payout.total  = payout.killscr + payout.itemscr;
    payout.total -= payout.tax = payout.total * taxpct;
    
-   ForPlayer()
+   Lith_ForPlayer()
    {
       [[__call("ScriptS")]]
       extern void Lith_PlayerPayout(player_t *p);
@@ -240,11 +241,13 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    if(ACS_PlayerNumber() < 0)
       return 0;
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    switch(info)
    {
-   case pdata_upgrade:        return p->upgrades[permutation].active;
+   case pdata_upgrade:
+      __with(upgrade_t *upgr = p->getUpgr(permutation);)
+         return upgr ? upgr->active : false;
    case pdata_rifle_firemode: return p->riflefiremode;
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
@@ -252,6 +255,15 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    }
    
    return 0;
+}
+
+//
+// Lith_GSInitIsDone
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_GSInitIsDone()
+{
+   return gsinit;
 }
 
 
@@ -274,7 +286,6 @@ static void Lith_World(void)
       return;
    }
    
-   static bool gsinit;
    static bool firstmap = true;
    
    // Init global/static state.
@@ -346,9 +357,9 @@ static void Lith_World(void)
       {
          switch(world.prevcluster)
          {
-         case 5: ForPlayer() p->deliverMail("Cluster1"); break;
-         case 6: ForPlayer() p->deliverMail("Cluster2"); break;
-         case 7: ForPlayer() p->deliverMail("Cluster3"); break;
+         case 5: Lith_ForPlayer() p->deliverMail("Cluster1"); break;
+         case 6: Lith_ForPlayer() p->deliverMail("Cluster2"); break;
+         case 7: Lith_ForPlayer() p->deliverMail("Cluster3"); break;
          }
       }
       
@@ -400,7 +411,7 @@ static void Lith_World(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_WorldUnload(void)
 {
-   ForPlayer()
+   Lith_ForPlayer()
    {
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);

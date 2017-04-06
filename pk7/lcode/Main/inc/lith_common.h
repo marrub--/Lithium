@@ -12,6 +12,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#include "Lithium.h"
+
 #define property __prop
 #define prop_arg __arg
 
@@ -102,7 +104,6 @@
 #define PITCH_BASE -0.5
 
 // Types
-typedef long long int score_t;
 typedef long fixed fixed64_t;
 
 // Random

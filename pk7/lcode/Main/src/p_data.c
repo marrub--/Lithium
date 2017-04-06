@@ -237,15 +237,15 @@ static void Lith_GetArmorType(player_t *p)
 {
 #define Check(name) ACS_StrICmp(p->armorclass, #name) == 0
    if(Check(ArmorBonus))
-      p->armortype = armor_bonus;
+      p->armortype = ARM_bonus;
    else if(Check(GreenArmor) || Check(SilverShield))
-      p->armortype = armor_green;
+      p->armortype = ARM_green;
    else if(Check(BlueArmor) || Check(BlueArmorForMegasphere) || Check(EnchantedShield))
-      p->armortype = armor_blue;
+      p->armortype = ARM_blue;
    else if(Check(None))
-      p->armortype = armor_none;
+      p->armortype = ARM_none;
    else
-      p->armortype = armor_unknown;
+      p->armortype = ARM_unknown;
 #undef Check
 }
 

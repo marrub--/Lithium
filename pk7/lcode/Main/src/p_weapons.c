@@ -62,7 +62,7 @@ void Lith_WeaponPickup(int parm, int tid)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    if(!ValidateWeapon(parm) || HasWeapon(p, parm))
       return;
@@ -74,7 +74,7 @@ void Lith_WeaponPickup(int parm, int tid)
    if(!ACS_GetCVar("sv_weaponstay"))
       ACS_Thing_Remove(tid);
    
-   if(!p->upgrades[UPGR_7777777].active)
+   if(!p->getUpgr(UPGR_7777777)->active)
       ACS_LocalAmbientSound(info->pickupsound, 127);
    else
       ACS_LocalAmbientSound("marathon/pickup", 127);
@@ -94,7 +94,7 @@ int Lith_PickupScore(int parm, int spritetid)
    __str tag = ACS_GetActorPropertyString(0, APROP_NameTag);
    
    ACS_SetActivatorToTarget(0);
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !HasWeapon(p, parm))
       return true;
@@ -140,7 +140,7 @@ int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_ChargeFistDamage()
 {
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    int amount = ACS_CheckInventory("Lith_FistCharge");
    ACS_TakeInventory("Lith_FistCharge", 0x7FFFFFFF);
@@ -198,7 +198,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
       
-      if(i == weapon_shotgun && p->upgrades[UPGR_GaussShotty].active)
+      if(i == weapon_shotgun && p->getUpgr(UPGR_GaussShotty)->active)
       {
          wep->ammotype = AT_Mag;
          wep->ammoclass = "Lith_GaussShotsFired";
@@ -208,7 +208,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       if(!w->cur && ACS_StrICmp(p->weaponclass, info->class) == 0)
          w->cur = wep;
       
-      if(p->upgrades[UPGR_AutoReload].active && wep->owned && wep->ammotype == AT_Mag)
+      if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype == AT_Mag)
       {
          if(wep->autoreload >= 35 * 5)
             ACS_TakeInventory(wep->ammoclass, 999);

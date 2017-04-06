@@ -73,7 +73,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->upgrades[UPGR_HeadsUpDisp].active || !UserData.target) return;
+   if(!p->getUpgr(UPGR_HeadsUpDisp)->active || !UserData.target) return;
    
    int ox = Lith_GetPCVarInt(p, "lith_scanner_xoffs");
    int oy = Lith_GetPCVarInt(p, "lith_scanner_yoffs");

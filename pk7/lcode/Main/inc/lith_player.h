@@ -11,19 +11,21 @@
 #include "lith_games.h"
 #include "lith_shopdef.h"
 
-#define MAX_PLAYERS 8
+#include "Lth_hashmap.h"
+
+#define Lith_MAX_PLAYERS 8
 #define HUDSTRS_MAX 20
 
-#define ForPlayer() \
-   for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
+#define Lith_ForPlayer() \
+   for(int _piter = 0; _piter < Lith_MAX_PLAYERS; _piter++) \
       __with(player_t *p = &players[_piter];) \
          if(p->active)
 
 #define Lith_GiveAllScore(score, nomul) \
-   ForPlayer() \
+   Lith_ForPlayer() \
       p->giveScore(score, nomul)
 
-#define LocalPlayer (&players[ACS_PlayerNumber()])
+#define Lith_LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
 #define Lith_GetPCVarInt(p, ...)    ACS_GetUserCVar      ((p)->number, __VA_ARGS__)
@@ -41,12 +43,12 @@
 
 enum
 {
-   armor_none,
-   armor_bonus,
-   armor_green,
-   armor_blue,
-   armor_unknown,
-   armor_max
+   ARM_none,
+   ARM_bonus,
+   ARM_green,
+   ARM_blue,
+   ARM_unknown,
+   ARM_max
 };
 
 //
@@ -118,6 +120,7 @@ typedef struct player_extdata_s
    upgrades_t upgrades;
    loginfo_t  loginfo;
    bool       autobuy[NUMAUTOGROUPS];
+   Lth_HashMap upgrademap;
    
    score_t scoreaccum;
    int     scoreaccumtime;
@@ -255,6 +258,7 @@ bool Lith_ButtonPressed(struct player_s *p, int bt);
 int Lith_PlayerCurWeaponType(struct player_s *p);
 
 void Lith_PlayerDeltaStats(struct player_s *p);
+upgrade_t *Lith_PlayerGetNamedUpgrade(struct player_s *p, int name);
 
 
 //----------------------------------------------------------------------------
@@ -286,6 +290,7 @@ typedef struct player_s
    property setVel    {call: Lith_SetPlayerVelocity(this)}
    property useGUI    {call: Lith_PlayerUseGUI(this)}
    property closeGUI  {call: Lith_PlayerCloseGUI(this)}
+   property getUpgr   {call: Lith_PlayerGetNamedUpgrade(this)}
    property buttonPressed {call: Lith_ButtonPressed(this)}
    property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
    property deliverMail {call: Lith_DeliverMail(this)}
@@ -304,6 +309,6 @@ typedef struct player_s
 // Extern Objects
 //
 
-extern player_t players[MAX_PLAYERS];
+extern player_t players[Lith_MAX_PLAYERS];
 
 #endif

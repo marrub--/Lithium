@@ -55,7 +55,7 @@ void Lith_KeyBuyAutoGroup(int group)
    
    group -= 1;
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    int success = 0, total = 0;
    for(int i = 0; i < UPGR_MAX; i++)
@@ -89,7 +89,7 @@ void Lith_KeyToggleAutoGroup(int group)
    
    group -= 1;
    
-   player_t *p = LocalPlayer;
+   player_t *p = Lith_LocalPlayer;
    
    int total = 0;
    for(int i = 0; i < UPGR_MAX; i++)
