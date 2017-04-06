@@ -43,14 +43,14 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
    Fire:
       SHT2 A 0 A_JumpIfInventory("Lith_ShellAmmo", 4, 1)
       goto AltFire
-      SHT2 A 6
+      SHT2 A 2
       SHT2 A 0 A_GiveInventory("Lith_SSGIter",  2)
       SHT2 A 0 A_GiveInventory("Lith_SSGIter2", 2)
       goto Attack
    AltFire:
       SHT2 A 0 A_JumpIfInventory("Lith_ShellAmmo", 2, 1)
       goto FireEmpty
-      SHT2 A 6
+      SHT2 A 2
       SHT2 A 0 A_GiveInventory("Lith_SSGIter",  1)
       SHT2 A 0 A_GiveInventory("Lith_SSGIter2", 1)
    Attack:
