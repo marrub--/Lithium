@@ -8,6 +8,16 @@ actor Lith_SSGIter2 : Inventory
    Inventory.MaxAmount 2
 }
 
+actor Lith_SuperShotgunPickup : Lith_WeaponPickup
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_ssg)
+      stop
+   }
+}
+
 actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
 {
    Tag "$LITH_TXT_INFO_SHORT_SuperShotgun"
@@ -17,6 +27,11 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
    
    states
    {
+   Spawn:
+      TNT1 A 0
+      SGN2 A 0 A_SpawnItemEx("Lith_SuperShotgunPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      stop
+   
    Ready:
       SHT2 A 0 A_TakeInventory("Lith_SSGIter", 999)
       SHT2 A 0 A_TakeInventory("Lith_SSGIter2", 999)
@@ -92,10 +107,6 @@ actor Lith_SuperShotgun : Lith_Weapon replaces SuperShotgun
       SHT2 H 6 A_PlaySound("weapons/ssg/close", CHAN_7)
       SHT2 AAAAA 1 A_ReFire
       goto Ready
-   Spawn:
-      SGN2 A 0
-      SGN2 A 0 A_SetUserVar("user_pickupparm", weapon_ssg)
-      goto SpawnLoop
    }
 }
 

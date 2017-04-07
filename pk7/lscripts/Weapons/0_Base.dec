@@ -49,6 +49,9 @@ actor Lith_WeaponSprite
    states
    {
    Spawn:
+      "####" "#" 0
+      "####" "#" 0 A_CheckFlag("SPECIAL", 1, AAPTR_MASTER)
+      goto Done
       "####" "#" 0 A_SetUserVar(user_floatangle,  (user_floatangle  + 2) % 360)
       "####" "#" 0 A_SetUserVar(user_floatzangle, (user_floatzangle + 3) % 360)
       "####" "#" 0 A_SetUserVar(user_origx, x * FIX)
@@ -63,45 +66,30 @@ actor Lith_WeaponSprite
                                                user_origz / FIX,
                                  0, WARPF_ABSOLUTEPOSITION)
       loop
+   Done:
+      TNT1 A 0
+      stop
    }
 }
 
-actor Lith_Weapon : Weapon
+actor Lith_WeaponPickup : CustomInventory
 {
-   Weapon.BobStyle "Alpha"
-   Weapon.BobSpeed 1.5
    Inventory.PickupSound ""
    Inventory.PickupMessage ""
    
-   +INVENTORY.UNTOSSABLE // This is actually handled correctly but unfortunately fuck you.
-   +WEAPON.NOALERT
-   +NOTIMEFREEZE // This is needed so you can pick up weapons while time is frozen.
+   +INVENTORY.ALWAYSPICKUP
    
    var int user_glowangle;
    var int user_glowzangle;
    var int user_pickupparm;
-   var int user_tid;
-   
-   const int LITH_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
    
    states
    {
-   MaybeWeShouldPickUpAnyways:
-      TNT1 A 0 A_JumpIf(CallACS("Lith_PickupScore", user_pickupparm, user_tid), "SpawnLoopNoReallySeriouslyForRealThisTime")
-      TNT1 A 1
-      stop
+   Spawn:
+      "####" "#" 0
+      "####" "#" 0 A_SpawnItemEx("Lith_WeaponSprite", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER)
    SpawnLoop:
-      "####" "#" 1
-      "####" "#" 0 Thing_ChangeTID(0, CallACS("Lith_UniqueTID"))
-      "####" "#" 0 A_SetUserVar("user_tid", CallACS("Lith_UniqueTID"))
-      "####" "#" 0 A_SpawnItemEx("Lith_WeaponSprite", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER, 0, user_tid)
-   SpawnLoopForRealYo:
-      // 226:ACS_ExecuteAlways
-      TNT1 A 0 A_SetSpecial(226, 14242, 0, user_pickupparm, user_tid)
       TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
-      TNT1 A 0 A_LookEx(LOF_NOSOUNDCHECK | LOF_DONTCHASEGOAL | LOF_NOJUMP, 0, 256, 0, 360)
-      TNT1 A 0 A_JumpIfCloser(64, "MaybeWeShouldPickUpAnyways")
-   SpawnLoopNoReallySeriouslyForRealThisTime:
       TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
       TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
       
@@ -138,12 +126,39 @@ actor Lith_Weapon : Weapon
                                                 cos(user_glowangle) * 32.0,
                                                 24.0 + (sin(user_glowangle) * 32.0),
                                                 0, 0, 0, 0)
-      goto SpawnLoopForRealYo
+      loop
    LoopButDontShowThatShitOffDawg:
       TNT1 A 1
       TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
-      goto SpawnLoopForRealYo
+      goto SpawnLoop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_fist)
+      stop
+   }
+}
+
+actor Lith_Weapon : Weapon
+{
+   Weapon.BobStyle "Alpha"
+   Weapon.BobSpeed 1.5
+   Inventory.PickupSound ""
+   Inventory.PickupMessage ""
    
+   +INVENTORY.UNTOSSABLE // This is actually handled correctly but unfortunately fuck you.
+   +WEAPON.NOALERT
+   
+   const int Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
+   
+   // These flags are used for spawning pickup actors.
+   // UDMF maps have a surprising amount of control over things, so we have
+   // to use a load of flags to make this work properly.
+   const int Lith_PF = SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG |
+      SXF_TRANSFERPITCH | SXF_TRANSFERPOINTERS | SXF_TRANSFERSCALE |
+      SXF_TRANSFERSPECIAL | SXF_TRANSFERSTENCILCOL | SXF_TRANSFERALPHA |
+      SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
+   
+   states
+   {
    DummyFlash:
       TNT1 A 0 A_AlertMonsters
       stop

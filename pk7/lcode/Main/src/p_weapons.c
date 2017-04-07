@@ -49,6 +49,23 @@ static void GiveWeaponItem(int parm)
    }
 }
 
+//
+// Lith_PickupScore
+//
+static void Lith_PickupScore(player_t *p, int parm)
+{
+   if(ACS_GetCVar("sv_weaponstay"))
+      return;
+   
+   score_t score = 11100ll * weaponinfo[parm].slot;
+   
+   GiveWeaponItem(parm);
+   p->giveScore(score);
+   p->log("> Sold a %S for %lli\Cnscr\C-.",
+      Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name),
+      Lith_GetModScore(p, score));
+}
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -57,22 +74,25 @@ static void GiveWeaponItem(int parm)
 //
 // Lith_WeaponPickup
 //
-[[__call("ScriptI"), __address(14242), __extern("ACS")]]
-void Lith_WeaponPickup(int parm, int tid)
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_WeaponPickup(int parm)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
    
    player_t *p = Lith_LocalPlayer;
    
-   if(!ValidateWeapon(parm) || HasWeapon(p, parm))
+   if(!ValidateWeapon(parm))
       return;
+   
+   if(HasWeapon(p, parm))
+   {
+      Lith_PickupScore(p, parm);
+      return;
+   }
    
    weaponinfo_t const *info = &weaponinfo[parm];
    
    p->weaponsheld++;
-   
-   if(!ACS_GetCVar("sv_weaponstay"))
-      ACS_Thing_Remove(tid);
    
    if(!p->getUpgr(UPGR_7777777)->active)
       ACS_LocalAmbientSound(info->pickupsound, 127);
@@ -83,31 +103,8 @@ void Lith_WeaponPickup(int parm, int tid)
    
    GiveWeaponItem(parm);
    Lith_PickupMessage(p, info);
-}
-
-//
-// Lith_PickupScore
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_PickupScore(int parm, int spritetid)
-{
-   __str tag = ACS_GetActorPropertyString(0, APROP_NameTag);
    
-   ACS_SetActivatorToTarget(0);
-   player_t *p = Lith_LocalPlayer;
-   
-   if(ACS_GetCVar("sv_weaponstay") || !ValidateWeapon(parm) || !HasWeapon(p, parm))
-      return true;
-   
-   score_t score = 11100ll * weaponinfo[parm].slot;
-   
-   GiveWeaponItem(parm);
-   p->log("> Sold a %S for %lli\Cnscr\C-.", tag, Lith_GetModScore(p, score));
-   p->giveScore(score);
-   
-   ACS_Thing_Remove(spritetid);
-   
-   return false;
+   ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
 }
 
 //

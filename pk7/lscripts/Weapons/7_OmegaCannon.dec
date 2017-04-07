@@ -17,6 +17,16 @@ actor Lith_OmegaRailDummy : Lith_Dummy
    Decal "Scorch"
 }
 
+actor Lith_BFG9000Pickup : Lith_WeaponPickup
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_bfg)
+      stop
+   }
+}
+
 actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
 {
    Tag "$LITH_TXT_INFO_SHORT_BFG9000"
@@ -32,9 +42,9 @@ actor Lith_BFG9000 : Lith_Weapon replaces BFG9000
    states
    {
    Spawn:
-      BFUG A 0
-      BFUG A 0 A_SetUserVar("user_pickupparm", weapon_bfg)
-      goto SpawnLoop
+      TNT1 A 0
+      BFUG A 0 A_SpawnItemEx("Lith_BFG9000Pickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      stop
    
    Ready:
       CNNG A 0 A_TakeInventory("Lith_GTFO", 999)
