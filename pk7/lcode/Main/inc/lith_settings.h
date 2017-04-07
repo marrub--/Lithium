@@ -16,6 +16,7 @@ Bool("Make a sound when score is gained", "lith_player_scoresound")
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse")
 Bool("Log score gained",                  "lith_player_scorelog")
 Bool("Play sound on results screen",      "lith_player_resultssound")
+Bool("Bright weapon pickups",             "lith_player_brightweps")
 if(world.extras)
 {
    Bool("Teleport in bought items and upgrades", "lith_player_teleshop")

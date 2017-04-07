@@ -83,6 +83,69 @@ void Lith_EmitScore(int amount)
    enemiesarecompatible = true;
 }
 
+//
+// Lith_MakeSerious
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_MakeSerious()
+{
+   ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_None);
+   ACS_SetActorPropertyString(0, APROP_ActiveSound, "silence");
+   ACS_SetActorPropertyString(0, APROP_DeathSound,  "silence");
+   ACS_SetActorPropertyString(0, APROP_PainSound,   "silence");
+}
+
+//
+// Lith_GSInitIsDone
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_GSInitIsDone()
+{
+   return gsinit;
+}
+
+//
+// Lith_GetPlayerData
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetPlayerData(int info, int permutation, bool target)
+{
+   if(target)
+      ACS_SetActivatorToTarget(0);
+   
+   if(ACS_PlayerNumber() < 0)
+      return 0;
+   
+   player_t *p = Lith_LocalPlayer;
+   
+   switch(info)
+   {
+   case pdata_upgrade:
+      __with(upgrade_t *upgr = p->getUpgr(permutation);)
+         return upgr ? upgr->active : false;
+   case pdata_rifle_firemode: return p->riflefiremode;
+   case pdata_buttons:        return p->buttons;
+   case pdata_has_sigil:      return p->sigil.acquired;
+   case pdata_weapon_zoom:    return bitsk(Lith_GetPCVarFixed(p, "lith_weapons_zoomfactor"));
+   }
+   
+   return 0;
+}
+
+//
+// Lith_GetWorldData
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetWorldData(int info)
+{
+   switch(info)
+   {
+   case wdata_brightweps: return ACS_GetUserCVar(0, "lith_player_brightweps");
+   }
+   
+   return 0;
+}
+
 
 //----------------------------------------------------------------------------
 // Static Functions
@@ -210,60 +273,6 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
       
       ACS_Delay(35);
    }
-}
-
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
-
-//
-// Lith_MakeSerious
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_MakeSerious()
-{
-   ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_None);
-   ACS_SetActorPropertyString(0, APROP_ActiveSound, "silence");
-   ACS_SetActorPropertyString(0, APROP_DeathSound,  "silence");
-   ACS_SetActorPropertyString(0, APROP_PainSound,   "silence");
-}
-
-//
-// Lith_GetPlayerData
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetPlayerData(int info, int permutation, bool target)
-{
-   if(target)
-      ACS_SetActivatorToTarget(0);
-   
-   if(ACS_PlayerNumber() < 0)
-      return 0;
-   
-   player_t *p = Lith_LocalPlayer;
-   
-   switch(info)
-   {
-   case pdata_upgrade:
-      __with(upgrade_t *upgr = p->getUpgr(permutation);)
-         return upgr ? upgr->active : false;
-   case pdata_rifle_firemode: return p->riflefiremode;
-   case pdata_buttons:        return p->buttons;
-   case pdata_has_sigil:      return p->sigil.acquired;
-   case pdata_weapon_zoom:    return bitsk(Lith_GetPCVarFixed(p, "lith_weapons_zoomfactor"));
-   }
-   
-   return 0;
-}
-
-//
-// Lith_GSInitIsDone
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_GSInitIsDone()
-{
-   return gsinit;
 }
 
 

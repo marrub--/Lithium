@@ -1,0 +1,5 @@
+enum
+{
+   wdata_brightweps,
+};
+

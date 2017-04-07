@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#include "lith_wdata.h"
+
 enum
 {
    skill_tourist,

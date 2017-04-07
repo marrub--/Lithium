@@ -16,7 +16,7 @@ class Lith_DarkMatterHandler : EventHandler
    }
 }
 
-class Lith_DarkMatterDeath : CustomInventory
+class Lith_DarkMatterDeath : Actor
 {
    states
    {

@@ -11,6 +11,7 @@ user bool   lith_player_invertmouse   = false;
 user bool   lith_player_scorelog      = false;
 user bool   lith_player_resultssound  = true;
 user bool   lith_player_stupidpickups = false;
+user bool   lith_player_brightweps    = false;
 
 // Save data
 // These are 200 bytes of storage per, so overall we have around 4kb available.
