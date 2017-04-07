@@ -69,7 +69,11 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       loop
    
    Fire:
-      TNT1 A 6 offset(0, 32)
+      TNT1 A 6 offset(0, 32) A_GiveInventory("Lith_FistCharge", 35)
+      TNT1 A 0 A_ReFire("Fire1")
+      goto Release1
+   Fire1:
+      CFIS B 0 A_GiveInventory("Lith_FistCharge", 35)
       CFIS B 1 offset(264, 191) A_PlaySound("weapons/cfist/ready", CHAN_6)
       CFIS B 1 offset(240, 179) A_PlaySound("weapons/cfist/charge", CHAN_5, 1, true)
       CFIS B 1 offset(215, 162)
@@ -80,7 +84,7 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       CFIS B 2 offset(156, 133)
       CFIS B 2 offset(153, 132)
       CFIS B 3 offset(150, 131)
-      CFIS B 4 offset(149, 131) A_GiveInventory("Lith_FistCharge", 35)
+      CFIS B 4 offset(149, 131)
       CFIS B 0 offset(149, 131)
    WaitForRelease:
       CFIS B 1 offset(149, 131) A_GiveInventory("Lith_FistCharge", 2)
@@ -92,6 +96,7 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       CFIS B 1 offset(183, 168)
       CFIS B 0 offset(183, 168) A_PlaySound("weapons/cfist/chargeend", CHAN_5)
       CFIS B 1 offset(206, 188)
+   Release1:
       CFIS A 0 A_AlertMonsters
       CFIS A 1 Offset(4, 135) A_PlaySound("weapons/cfist/fire", CHAN_6)
       CFIS A 2 Offset(36, 93)
@@ -102,21 +107,18 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
       CFIS A 3 offset(43, 89)
       CFIS A 2 offset(43, 91)
       CFIS A 1 offset(30, 108)
-      CFIS A 1 offset(3, 139)
-      CFIS A 1 offset(-38, 179)
+      CFIS A 2 offset(3, 139)
+      CFIS A 2 offset(-38, 179)
       TNT1 A 1
       TNT1 AAAAA 1 A_ReFire
       goto Ready
    HitRecoil:
-      CFIS A 3 Offset(38, 91)
-      CFIS A 1 Offset(43, 89)
+      CFIS A 4 Offset(38, 91)
+      CFIS A 2 Offset(43, 89)
       CFIS A 1 Offset(48, 92)
       CFIS A 1 Offset(53, 98)
-      CFIS A 1 Offset(56, 108)
       CFIS A 1 Offset(66, 124)
-      CFIS A 1 Offset(71, 151)
       CFIS A 1 Offset(78, 167)
-      CFIS A 1 Offset(82, 175)
       CFIS A 1 Offset(85, 185)
       TNT1 A 1
       TNT1 AAAAA 1 A_ReFire
