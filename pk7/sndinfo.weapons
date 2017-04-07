@@ -284,6 +284,40 @@ $limit weapons/rail/impact 0
 $attenuation weapons/rail/impact 0.8
 
 //
+// Dark Cannon
+//
+weapons/dark/wind    lsounds/DarkCannon/Wind.flac    // Half-Life 2
+weapons/dark/water1  lsounds/DarkCannon/Water.flac   // Steam
+weapons/dark/water2  lsounds/DarkCannon/Water2.flac  // 〃
+weapons/dark/water3  lsounds/DarkCannon/Water3.flac  // 〃
+weapons/dark/fire1   lsounds/DarkCannon/Fire.flac    // Halo 3
+weapons/dark/fire2   lsounds/DarkCannon/Fire2.flac   // 〃
+weapons/dark/fire3   lsounds/DarkCannon/Fire3.flac   // 〃
+weapons/dark/impact1 lsounds/DarkCannon/Impact.flac  // 〃
+weapons/dark/impact2 lsounds/DarkCannon/Impact2.flac // 〃
+weapons/dark/impact3 lsounds/DarkCannon/Impact3.flac // 〃
+
+$random weapons/dark/water {
+   weapons/dark/water1
+   weapons/dark/water2
+   weapons/dark/water3
+}
+
+$random weapons/dark/fire {
+   weapons/dark/fire1
+   weapons/dark/fire2
+   weapons/dark/fire3
+}
+
+$random weapons/dark/impact {
+   weapons/dark/impact1
+   weapons/dark/impact2
+   weapons/dark/impact3
+}
+
+$limit weapons/dark/impact 0
+
+//
 // sord
 //
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View

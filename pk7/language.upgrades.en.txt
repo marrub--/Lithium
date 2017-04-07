@@ -179,6 +179,12 @@ LITH_TXT_UPGRADE_DESCR_OmegaRail =
    "Implements a plasma charger in your cannon, made with reverse-engineered "
    "magical compounds.";
 
+LITH_TXT_UPGRADE_TITLE_DarkCannon = "????????";
+LITH_TXT_UPGRADE_EFFEC_DarkCannon =
+   "\n\cd<fatal error while displaying information>";
+LITH_TXT_UPGRADE_DESCR_DarkCannon =
+   "What the !@#$% is this!?";
+
 //
 // Extras
 //
