@@ -9,6 +9,7 @@
 #include "lscripts/BulletPuff.dec"
 #include "lscripts/TeleFog.dec"
 #include "lscripts/Death.dec"
+#include "lscripts/PickupEffects.dec"
 
 #include "lscripts/Monsters/Tier1.dec"
 #include "lscripts/Monsters/Tier2.dec"
@@ -30,6 +31,7 @@
 #include "lscripts/Items/Powerups.dec"
 #include "lscripts/Items/Keys.dec"
 #include "lscripts/Items/DivisionSigil.dec"
+#include "lscripts/Items/CBIStuff.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
 

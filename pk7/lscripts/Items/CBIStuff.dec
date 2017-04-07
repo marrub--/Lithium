@@ -1,0 +1,108 @@
+actor Lith_CBIItem : CustomInventory
+{
+   var int user_glowangle;
+   var int user_glowzangle;
+   
+   states
+   {
+   Spawn:
+      "####" "#" 0
+      "####" "#" 0 A_SpawnItemEx("Lith_ItemSprite", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER)
+   SpawnLoop:
+      TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
+      TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
+      
+      // xyz
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
+                                              cos(user_glowangle) * 32.0,
+                                              24.0 + (sin(user_glowzangle) * 9.0),
+                                              0, 0, 0, 0)
+      
+      // yz
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", 0,
+                                              sin(user_glowangle) * 32.0,
+                                              24.0 + (cos(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", cos(user_glowangle) * 32.0,
+                                              sin(user_glowangle) * 32.0,
+                                              24.0 + (sin(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", cos(user_glowangle) * 32.0,
+                                              ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
+                                              24.0 + (sin(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      
+      // xz
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
+                                              0,
+                                              24.0 + (cos(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
+                                              cos(user_glowangle) * 32.0,
+                                              24.0 + (sin(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
+                                              cos(user_glowangle) * 32.0,
+                                              24.0 + (sin(user_glowangle) * 32.0),
+                                              0, 0, 0, 0)
+      loop
+   LoopButDontShowThatShitOffDawg:
+      TNT1 A 1
+      TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      goto SpawnLoop
+   }
+}
+
+actor Lith_ArmorInterfacePickup : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      ARM1 Z 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_NanomachineDispenserPickup : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      UCAN A 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_WeaponModDevicePickup : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      WUPG A 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_WeaponModDevice2Pickup : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      WRDP A 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_RDIPickup : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      IOBJ C 0
+      goto Super::Spawn
+   }
+}
+
+// EOF
+

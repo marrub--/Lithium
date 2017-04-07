@@ -48,6 +48,9 @@ Minigunner
 RWTerma
    ÷
 
+Seryder
+   Briefcase sprite (WUPGA0)
+
 Sgt. Shivers
    Shooting my shootyguns
    Shotgun sprites
