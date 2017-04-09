@@ -447,27 +447,28 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", "%LS: %S", "LITH_CATEGORY", upgrcateg[upgr->info->category]);
    HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
    
-   if(upgr->info->scoreadd != 0.0)
+   if(upgr->info->scoreadd != 0)
    {
-      __str color = upgr->info->scoreadd < 0 ? "\Ca" : "\Cn";
-      
-      HudMessageF("CBIFONT", "%LS: %S%i\Cl%%", "LITH_SCOREMULT", color, ceilk(100.0 * (upgr->info->scoreadd + 1.0)));
-      HudMessagePlain(g->hid--, 111.1, 50.1, TICSECOND);
-      
       double after;
       if(upgr->active) after = p->scoremul - upgr->info->scoreadd;
       else             after = p->scoremul + upgr->info->scoreadd;
       
-      color = after - p->scoremul < 0 ? "\Ca" : "\Cn";
-      HudMessageF("CBIFONT", "%LS: \Cj%i\C-%% -> %S%i\C-%%", "LITH_TOTALMULT", ceilk(100.0 * p->scoremul), color, ceilk(100.0 * after));
-      HudMessagePlain(g->hid--, 111.1, 60.1, TICSECOND);
+      char ctt = upgr->info->scoreadd < 0 ? 'a' : 'n';
+      char cfr = after - p->scoremul  > 0 ? 'a' : 'n';
+      char cto = after - p->scoremul  < 0 ? 'a' : 'n';
+      
+      HudMessageF("CBIFONT", "%LS: \C%c%i\C-%% -> \C%c%i\C-%% (\C%c%i\Cl%%)",
+         "LITH_SCOREMULT",
+         cfr, ceilk(100.0 * p->scoremul), cto, ceilk(100.0 * after),
+         ctt, ceilk(100.0 * (upgr->info->scoreadd + 1.0)));
+      HudMessagePlain(g->hid--, 111.1, 50.1, TICSECOND);
    }
    
    HudMessageF("CBIFONT", "Effect: %S", Language("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name));
-   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 70.1, TICSECOND);
+   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 60.1, TICSECOND);
    
    HudMessageF("CBIFONT", "----------------------------------------------");
-   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_GREEN, 111.1, 100.1, TICSECOND);
+   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_GREEN, 111.1, 90.1, TICSECOND);
    
    gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_upgrtypeon);
    
@@ -476,7 +477,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    else
       HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
    
-   HudMessagePlain(g->hid--, 111.1, 110.1, TICSECOND);
+   HudMessagePlain(g->hid--, 111.1, 100.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
    
@@ -486,7 +487,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->owned))
       Lith_UpgrToggle(p, upgr);
    
-   HudMessageF("CNFONT", "Auto-Groups");
+   HudMessageF("CBIFONT", "\CjActive Auto-Groups");
    HudMessagePlain(g->hid--, 255, 205, TICSECOND);
    
    for(int i = 0; i < NUMAUTOGROUPS; i++)
