@@ -280,6 +280,8 @@ void Lith_SpawnBoss(int num, int phase)
 //
 void Lith_SpawnBosses(score_t sum)
 {
+   static bool firstboss = true;
+   
    // bosses are ded
    if(world.boss3p3) return;
    
@@ -288,6 +290,12 @@ void Lith_SpawnBosses(score_t sum)
       int tid; \
       ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID()); \
       ACS_SetActorState(tid, "Boss" #num "_" #phase); \
+      if(firstboss) \
+      { \
+         firstboss = false; \
+         Lith_ForPlayer() \
+            p->deliverMail("CBI"); \
+      } \
    }
    
    else if(world.boss3p2 && sum > 111000000) SpawnBoss(3, 3)

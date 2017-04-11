@@ -24,3 +24,7 @@ data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster2
 Saved SGXLine Message 4.txt -> LITH_TXT_MAIL_BODY_Cluster3
 data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster3
 
+Saved SGXLine Message 5.txt      -> LITH_TXT_MAIL_BODY_CBI
+data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_CBI
+data 330                         -> LITH_TXT_MAIL_SIZE_CBI
+

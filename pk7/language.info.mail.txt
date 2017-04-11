@@ -82,3 +82,24 @@
    ">>>>>[[[[failure to proceed]]]]\n";
 "LITH_TXT_MAIL_SEND_Cluster3" =
    "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_BODY_CBI" =
+   "Hello, it has been forwarded to me that your Computer/Brain Interface hardware was not properly upgraded for this mission. I've had several communications errors with your secondary employers, and it is truly starting to get annoying.\n"
+   "\n"
+   "Due to failure to communicate with OFMD, I've taken it upon myself to send your hardware upgrades through several proxy agents.\n"
+   "\n"
+   "They may all be dead now. I have no idea, really. Hopefully you will survive whatever they didn't. Anyways, as for the important part of this message, here is a list of all the hardware that has been sent:\n"
+   "\n"
+   "Two CPU/RAM upgrade packages. The first one is a powerful BC-0265 processor and 500TiB of RAM. Unfortunately, something horrible appears to have happened to the agent carrying it, and so a secondary package has been sent, containing temporary replacements: a Z6808 and 100TiB of RAM.\n"
+   "\n"
+   "One Armor Interface. A PCB and a set of emplacements on your armor.\n"
+   "\n"
+   "One Weapon Modification Device, as its name implies.\n"
+   "\n"
+   "One Weapon Refactoring Device, which can perform large modifications on guns.\n"
+   "\n"
+   "See you.\n"
+   "\n";
+"LITH_TXT_MAIL_SEND_CBI" =
+   "htic0@gov.<hidden>.mailserv";
+"LITH_TXT_MAIL_SIZE_CBI" =
+   "330";
