@@ -30,6 +30,7 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
+[[__call("ScriptS")]] static void Lith_BossWarning(player_t *p);
 
 
 //----------------------------------------------------------------------------
@@ -54,6 +55,8 @@ reinit:
    Lith_PlayerLogEntry(p);
    Lith_PlayerEnterUpgrades(p);
    p->loadData();
+   
+   Lith_BossWarning(p);
    
    while(p->active)
    {
@@ -302,6 +305,18 @@ void Lith_TakeScore(player_t *p, score_t score)
 //----------------------------------------------------------------------------
 // Static Functions
 //
+
+//
+// Lith_BossWarning
+//
+[[__call("ScriptS")]]
+static void Lith_BossWarning(player_t *p)
+{
+   ACS_Delay(35);
+   
+   if(world.bossspawned)
+      p->log("> \CgWarning: High demonic energy levels detected in area.");
+}
 
 //
 // Lith_PlayerRunScripts

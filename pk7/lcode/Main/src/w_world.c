@@ -96,15 +96,6 @@ void Lith_MakeSerious()
 }
 
 //
-// Lith_GSInitIsDone
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_GSInitIsDone()
-{
-   return gsinit;
-}
-
-//
 // Lith_GetPlayerData
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -140,7 +131,9 @@ int Lith_GetWorldData(int info)
 {
    switch(info)
    {
-   case wdata_brightweps: return ACS_GetUserCVar(0, "lith_player_brightweps");
+   case wdata_brightweps:  return ACS_GetUserCVar(0, "lith_player_brightweps");
+   case wdata_gsinit:      return gsinit;
+   case wdata_bossspawned: return world.bossspawned;
    }
    
    return 0;
@@ -358,6 +351,20 @@ static void Lith_World(void)
    // World-static init.
    if(ACS_Timer() <= 2)
    {
+      // Spawn bosses.
+      world.bossspawned = false;
+      
+      Lith_ForPlayer()
+      {
+         if(p->active)
+         {
+            extern void Lith_SpawnBosses(score_t sum);
+            
+            Lith_SpawnBosses(p->scoresum);
+            break;
+         }
+      }
+      
       // Payout, which is not done on the first map start.
       if(!firstmap)
          Lith_DoPayout();

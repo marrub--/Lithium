@@ -30,6 +30,8 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       ACS_CheckFlag(0, "INVULNERABLE") ||
       ACS_CheckFlag(0, "NODAMAGE");
    
+   bool phantom = ACS_CheckInventory("Lith_IsPhantom");
+   
    bool boss = ACS_CheckFlag(0, "BOSS");
    
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
@@ -39,11 +41,11 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
    {
       int id = Lith_UniqueID();
       
-      if(freaktarget || boss)
+      if((freaktarget || boss) && !phantom)
       {
          extern __str Lith_RandomName(int id);
          
-         UserData.tagstr    = Lith_RandomName(boss ? id : 0);
+         UserData.tagstr    = Lith_RandomName(freaktarget ? 0 : id);
          UserData.oldhealth = UserData.health = ACS_Random(0, 666666);
          UserData.maxhealth = ACS_Random(0, 666666);
       }
@@ -53,6 +55,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          
               if(six)     UserData.tagstr = "\Cg6";
          else if(henshin) UserData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
+         else if(phantom) UserData.tagstr = StrParam("\Cg%tS", 0);
          else             UserData.tagstr = StrParam("\C%c%tS", color, 0);
          
          UserData.oldhealth = UserData.health;
@@ -60,7 +63,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          UserData.maxhealth = ACS_GetActorProperty(0, APROP_SpawnHealth);
       }
       
-      UserData.freak = six || freaktarget || boss;
+      UserData.freak = six || freaktarget || phantom || boss;
       UserData.angle = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));
       
       if((UserData.oldtarget = UserData.target) != (UserData.target = id))

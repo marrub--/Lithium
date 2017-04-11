@@ -71,7 +71,8 @@ MAIN_SOURCES= \
 	$(SRC)/g_preset.c \
 	$(SRC)/g_scrollbar.c \
 	$(SRC)/g_slider.c \
-	$(SRC)/p_settings.c
+	$(SRC)/p_settings.c \
+	$(SRC)/w_boss.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 MAIN_HEADERS=$(wildcard $(INC)/*.h) $(wildcard $(API)/*.h)

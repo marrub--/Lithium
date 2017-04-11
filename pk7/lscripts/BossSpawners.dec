@@ -1,0 +1,62 @@
+actor Lith_BossChecker : CustomInventory
+{
+   +INVENTORY.ALWAYSPICKUP
+   
+   states
+   {
+   Pickup:
+      TNT1 A 0
+      TNT1 A 0 A_JumpIf(health < 800, "nope")
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_bossspawned), "nope")
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBossArgs1", special, args[0], args[1], args[2])
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBossArgs2", args[3], args[4])
+      TNT1 A 0 A_Jump(256, "Pickup1")
+   nope:
+      TNT1 A 0
+      stop
+   }
+}
+
+actor Lith_BossChecker1_1 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 1, 1) stop}}
+actor Lith_BossChecker1_2 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 1, 2) stop}}
+actor Lith_BossChecker2_1 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 2, 1) stop}}
+actor Lith_BossChecker2_2 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 2, 2) stop}}
+actor Lith_BossChecker2_3 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 2, 3) stop}}
+actor Lith_BossChecker3_1 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 3, 1) stop}}
+actor Lith_BossChecker3_2 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 3, 2) stop}}
+actor Lith_BossChecker3_3 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBoss", 3, 3) stop}}
+
+actor Lith_BossSpawner
+{
+   const int flags = RGF_MONSTERS|RGF_NOSIGHT|RGF_CUBE;
+   
+   states
+   {
+   Spawn:
+      TNT1 A 1
+      TNT1 A 0 A_Log("OHNO")
+      stop
+   
+   // Boss 1 phase 1 (Weapon Mod Device)
+   // Boss 1 phase 2 (CPU Upgrade 1)
+   Boss1_1: TNT1 A 0 A_RadiusGive("Lith_BossChecker1_1", 16384, flags) stop
+   Boss1_2: TNT1 A 0 A_RadiusGive("Lith_BossChecker1_2", 16384, flags) stop
+   
+   // Boss 2 phase 1 (Armor Interface)
+   // Boss 2 phase 2 (CPU Upgrade 2)
+   // Boss 2 phase 3 (Weapon Refactoring Device)
+   Boss2_1: TNT1 A 0 A_RadiusGive("Lith_BossChecker2_1", 16384, flags) stop
+   Boss2_2: TNT1 A 0 A_RadiusGive("Lith_BossChecker2_2", 16384, flags) stop
+   Boss2_3: TNT1 A 0 A_RadiusGive("Lith_BossChecker2_3", 16384, flags) stop
+   
+   // Boss 3 phase 1
+   // Boss 3 phase 2
+   // Boss 3 phase 3 (Reality Distortion Interface)
+   Boss3_1: TNT1 A 0 A_RadiusGive("Lith_BossChecker3_1", 16384, flags) stop
+   Boss3_2: TNT1 A 0 A_RadiusGive("Lith_BossChecker3_2", 16384, flags) stop
+   Boss3_3: TNT1 A 0 A_RadiusGive("Lith_BossChecker3_3", 16384, flags) stop
+   }
+}
+
+// EOF
+

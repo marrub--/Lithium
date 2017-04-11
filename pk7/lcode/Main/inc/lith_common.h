@@ -123,6 +123,8 @@ __str StrUpper(__str in);
 unsigned StrHash(char __str_ars const *s);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
+[[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
+[[__call("ScriptS"), __optional_args(2)]] bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
 __str Lith_ScoreSep(score_t num);

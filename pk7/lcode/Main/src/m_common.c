@@ -256,6 +256,25 @@ int Lith_GetPlayerNumber(int tid, int ptr)
 }
 
 //
+// Lith_ValidPointer
+//
+[[__call("ScriptS")]]
+bool Lith_ValidPointer(int tid, int ptr)
+{
+   return ACS_SetActivator(tid, ptr);
+}
+
+//
+// Lith_SetPointer
+//
+[[__call("ScriptS")]]
+bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags)
+{
+   ACS_SetActivator(tid, ptr);
+   return ACS_SetPointer(assign, tid2, ptr2, flags);
+}
+
+//
 // Lith_CheckActorInventory
 //
 int Lith_CheckActorInventory(int tid, __str item)

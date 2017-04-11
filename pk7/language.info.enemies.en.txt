@@ -210,6 +210,17 @@ LITH_TXT_INFO_DESCR_Cyberdemon =
    "The Cyber-Demon is an extremely cruel, war-mongering beast that will "
    "destroy any target without prejudice for the glory of Hell.";
 
+LITH_TXT_INFO_SHORT_Phantom = "Phantom";
+LITH_TXT_INFO_TITLE_Phantom = "$LITH_TXT_INFO_SHORT_Phantom";
+LITH_TXT_INFO_DESCR_Phantom =
+   "Class: \cm???\n"
+   "Threat: \crE\n\n"
+   "A threat yet unexplained, the phantom seeks to destroy all and will "
+   "leave no one alive -- not even demons. They are a dark, silhouette-like "
+   "being that takes on various forms and does nothing but destroy.\n\n"
+   "Extreme caution is advised against these enemies, if you can run from "
+   "them they will only continue to chase you down.";
+
 // Overlord
 LITH_TXT_INFO_SHORT_IconOfSin = "Icon of Sin";
 LITH_TXT_INFO_TITLE_IconOfSin = "Overlord of Hell, Icon of Sin";

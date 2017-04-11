@@ -39,4 +39,47 @@ $attenuation enemies/cyberdemon/ready 0.3
 $attenuation enemies/cyberdemon/fire 0.25
 $attenuation enemies/cyberdemon/firedone 0.25
 
+//
+// Phantom
+//
+enemies/phantom/spawn1 lsounds/Phantoms/Spawn.flac  // Self-made
+enemies/phantom/spawn2 lsounds/Phantoms/Spawn2.flac // 〃
+
+$random enemies/phantom/spawned {
+   enemies/phantom/spawn1
+   enemies/phantom/spawn2
+}
+
+//
+// James
+//
+enemies/james/fire1 lsounds/Phantoms/James/Fire.flac  // Alliance of Valiant Arms
+enemies/james/fire2 lsounds/Phantoms/James/Fire2.flac // 〃
+enemies/james/fire3 lsounds/Phantoms/James/Fire3.flac // 〃
+
+$random enemies/james/fire {
+   enemies/james/fire1
+   enemies/james/fire2
+   enemies/james/fire3
+}
+
+$limit enemies/james/fire 0
+$attenuation enemies/james/fire 0.5
+
+//
+// Makarov
+//
+$alias enemies/makarov/fire weapons/shotgun/poison/fire
+$limit enemies/makarov/fire 0
+$attenuation enemies/makarov/fire 0.5
+
+$alias enemies/makarov/throw skeleton/swing
+
+//
+// Isaac
+//
+$alias enemies/isaac/fire weapons/rifle/fire
+$limit enemies/isaac/fire 0
+$attenuation enemies/isaac/fire 0.5
+
 // EOF

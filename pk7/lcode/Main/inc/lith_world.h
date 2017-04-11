@@ -62,6 +62,12 @@ typedef struct worldinfo_s
    
    int game;
    
+   // Bosses
+   bool boss1p1, boss1p2;
+   bool boss2p1, boss2p2, boss2p3;
+   bool boss3p1, boss3p2, boss3p3;
+   bool bossspawned;
+   
    // Mod compat
    bool legendoom;
    bool drlamonsters;

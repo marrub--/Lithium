@@ -10,6 +10,7 @@
 #include "lscripts/TeleFog.dec"
 #include "lscripts/Death.dec"
 #include "lscripts/PickupEffects.dec"
+#include "lscripts/BossSpawners.dec"
 #include "lscripts/RifleGrenade.dec"
 
 #include "lscripts/Monsters/Tier1.dec"
@@ -23,6 +24,11 @@
 #include "lscripts/Monsters/XHTier3.dec"
 #include "lscripts/Monsters/XHTier4.dec"
 #include "lscripts/Monsters/XHTier5.dec"
+
+#include "lscripts/Monsters/Phantom.dec"
+#include "lscripts/Monsters/James.dec"
+#include "lscripts/Monsters/Makarov.dec"
+#include "lscripts/Monsters/Isaac.dec"
 
 #include "lscripts/Monsters/TitleMap.dec"
 
