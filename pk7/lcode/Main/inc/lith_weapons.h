@@ -14,6 +14,7 @@ enum
    weapon_launcher,
    weapon_missile,
    weapon_plasma,
+   weapon_plasmadiff,
    weapon_bfg,
    weapon_gameboy,
    weapon_max

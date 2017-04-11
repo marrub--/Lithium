@@ -52,6 +52,7 @@
 #include "lscripts/Weapons/5_MissileLauncher.dec"
 
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
+#include "lscripts/Weapons/6_PlasmaDiffuser.dec"
 
 #include "lscripts/Weapons/7_OmegaCannon.dec"
 

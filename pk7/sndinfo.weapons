@@ -247,6 +247,24 @@ weapons/plasma/part/reloadin  lsounds/PlasmaRifle/PartBeam/ReloadIn.flac  // 〃
 $volume weapons/plasma/part/fire 0.7
 
 //
+// Plasma Diffuser
+//
+weapons/plasdiff/fire1 lsounds/PlasmaDiffuser/Fire.flac      // Halo 3
+weapons/plasdiff/fire2 lsounds/PlasmaDiffuser/Fire2.flac     // 〃
+weapons/plasdiff/fire3 lsounds/PlasmaDiffuser/Fire3.flac     // 〃
+weapons/plasdiff/draw  lsounds/PlasmaDiffuser/Draw.flac      // Fallout 3, Halo 3
+weapons/plasdiff/empty lsounds/PlasmaDiffuser/FireEmpty.flac // 〃
+
+$alias weapons/plasdiff/explode weapons/plasmax
+$limit weapons/plasdiff/explode 0
+
+$random weapons/plasdiff/fire {
+   weapons/plasdiff/fire1
+   weapons/plasdiff/fire2
+   weapons/plasdiff/fire3
+}
+
+//
 // Omega Cannon
 //
 weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD

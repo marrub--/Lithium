@@ -39,6 +39,9 @@ LITH_TXT_SHOP_DESCR_SniperRifle = "Scoped bolt-action rifle.";
 LITH_TXT_SHOP_TITLE_MissileLauncher = "$LITH_TXT_INFO_SHORT_MissileLauncher";
 LITH_TXT_SHOP_DESCR_MissileLauncher = "Mini-missile launcher.";
 
+LITH_TXT_SHOP_TITLE_PlasmaDiffuser = "$LITH_TXT_INFO_SHORT_PlasmaDiffuser";
+LITH_TXT_SHOP_DESCR_PlasmaDiffuser = "Classic plasma rifle.";
+
 LITH_TXT_SHOP_TITLE_Gameboy = "$LITH_TXT_INFO_SHORT_Gameboy";
 LITH_TXT_SHOP_DESCR_Gameboy = "A game playing system, containing several old titles.";
 

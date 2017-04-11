@@ -208,6 +208,14 @@ LITH_TXT_INFO_DESCR_PlasmaUpg2 =
    "This weapon has a reputation for being rather useless in defending a "
    "space ship from the inside, as it ends up melting holes in the hull.";
 
+LITH_TXT_INFO_SHORT_PlasmaDiffuser = "Plasma Diffuser";
+LITH_TXT_INFO_TITLE_PlasmaDiffuser = "SYM4.3 D.640 PLASMA DIFFUSER";
+LITH_TXT_INFO_DESCR_PlasmaDiffuser =
+   "A weapon which works similarly to the 68-n Plasma Rifle, however "
+   "preferring damage over rate of fire. The D.640's design comes from "
+   "several older models designed by MDDO, as well as newer components "
+   "patented by Semaphore Inc.";
+
 LITH_TXT_INFO_SHORT_BFG9000 = "Omega Cannon";
 LITH_TXT_INFO_TITLE_BFG9000 = "$LITH_TXT_INFO_SHORT_BFG9000";
 LITH_TXT_INFO_DESCR_BFG9000 =
