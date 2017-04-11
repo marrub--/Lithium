@@ -1,5 +1,4 @@
 #include "lscripts/Weapons/RifleBullet.dec"
-#include "lscripts/Weapons/RifleGrenade.dec"
 
 actor Lith_RifleLaserTrail
 {

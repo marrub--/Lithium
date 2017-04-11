@@ -51,10 +51,25 @@ void Lith_LogName(int name)
    BOTH(log_yellowskull, "YellowSkull")
    BOTH(log_doggosphere, "DoggoSphere")
    BOTH(log_dogs,        "Dogs")
+   BOTH(log_cbiupgr1,    "CBIUpgr1")
+   BOTH(log_cbiupgr2,    "CBIUpgr2")
+   BOTH(log_armorinter,  "ArmorInter")
+   BOTH(log_weapninter,  "WeapnInter")
+   BOTH(log_weapninte2,  "WeapnInte2")
+   BOTH(log_rdistinter,  "RDistInter")
 #undef BOTH
 #undef FULL
 #undef HUDS
    }
+}
+
+//
+// Lith_LogNameN
+//
+[[__call("ScriptI"), __address(24242), __extern("ACS")]]
+void Lith_LogNameN(int name)
+{
+   Lith_LogName(name);
 }
 
 //

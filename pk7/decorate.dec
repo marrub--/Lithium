@@ -10,6 +10,7 @@
 #include "lscripts/TeleFog.dec"
 #include "lscripts/Death.dec"
 #include "lscripts/PickupEffects.dec"
+#include "lscripts/RifleGrenade.dec"
 
 #include "lscripts/Monsters/Tier1.dec"
 #include "lscripts/Monsters/Tier2.dec"

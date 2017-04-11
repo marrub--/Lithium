@@ -1,5 +1,8 @@
-actor Lith_CBIItem : CustomInventory
+actor Lith_CBIItem : Inventory
 {
+   Inventory.PickupMessage ""
+   Inventory.PickupSound "player/pickup/upgrcbi"
+   
    var int user_glowangle;
    var int user_glowzangle;
    
@@ -54,51 +57,73 @@ actor Lith_CBIItem : CustomInventory
    }
 }
 
-actor Lith_ArmorInterfacePickup : Lith_CBIItem
+actor Lith_CBIUpgrade1 : Lith_CBIItem
 {
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_cbiupgr1)
+      CELP A 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_CBIUpgrade2 : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_cbiupgr2)
+      CELL A 0
+      goto Super::Spawn
+   }
+}
+
+actor Lith_ArmorInterface : Lith_CBIItem
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_armorinter)
       ARM1 Z 0
       goto Super::Spawn
    }
 }
 
-actor Lith_NanomachineDispenserPickup : Lith_CBIItem
+actor Lith_WeaponModDevice : Lith_CBIItem
 {
    states
    {
    Spawn:
-      UCAN A 0
-      goto Super::Spawn
-   }
-}
-
-actor Lith_WeaponModDevicePickup : Lith_CBIItem
-{
-   states
-   {
-   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_weapninter)
       WUPG A 0
       goto Super::Spawn
    }
 }
 
-actor Lith_WeaponModDevice2Pickup : Lith_CBIItem
+actor Lith_WeaponModDevice2 : Lith_CBIItem
 {
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_weapninte2)
       WRDP A 0
       goto Super::Spawn
    }
 }
 
-actor Lith_RDIPickup : Lith_CBIItem
+actor Lith_RDI : Lith_CBIItem
 {
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SetSpecial(84, 24242, log_rdistinter)
       IOBJ C 0
       goto Super::Spawn
    }

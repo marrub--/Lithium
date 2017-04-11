@@ -52,7 +52,7 @@ actor Lith_BarrierSpell : CustomInventory
 
 actor Lith_BlurSphere : Lith_CustomInventory
 {
-   Inventory.PickupSound "item/barrier"
+   Inventory.PickupSound "player/pickup/barrier"
    
    +FLOATBOB
    +COUNTITEM

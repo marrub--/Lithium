@@ -59,10 +59,12 @@ player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
 //
 // Pickup
 //
-player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.flac // Killing Floor, ???
-player/pickup/upgrextr lsounds/Player/Pickup/UpgrExtr.flac // Phantasy Star Nova
-player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.flac // Halo 3
-player/pickup/item     lsounds/Player/Pickup/Item.flac     // Firearms: Source
+player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.flac   // Killing Floor, ???
+player/pickup/upgrextr lsounds/Player/Pickup/UpgrExtr.flac   // Phantasy Star Nova
+player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.flac   // Halo 3
+player/pickup/upgrcbi  lsounds/Player/Pickup/CBIUpgrade.flac // 〃
+player/pickup/item     lsounds/Player/Pickup/Item.flac       // Firearms: Source
+player/pickup/barrier  lsounds/Player/Pickup/Barrier.flac    // Touhou 13
 
 //
 // Gameboy
