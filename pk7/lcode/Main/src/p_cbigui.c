@@ -5,6 +5,17 @@
 
 
 //----------------------------------------------------------------------------
+// Static Functions
+//
+
+static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
+{
+   HudMessageF("CBIFONT", "Performance rating: %i/%i", p->cbi.pruse, p->cbi.perf);
+   HudMessagePlain(g->hid--, 23.1,  70.1, TICSECOND);
+}
+
+
+//----------------------------------------------------------------------------
 // Extern Functions
 //
 
@@ -40,7 +51,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    if(Lith_GUI_Button(g, .x = 296, 13, .preset = &btnexit))
       p->useGUI(GUI_CBI);
    
-   static __str tabnames[cbi_tab_max] = {"Upgrades", "Shop", "Info", "Settings", "Log"};
+   static __str tabnames[cbi_tab_max] = {"Upgrades", "CBI", "Shop", "Info", "Settings", "Log"};
    for(int i = 0; i < cbi_tab_max; i++)
       if(Lith_GUI_Button_Id(g, i, tabnames[i], btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &btntab))
          g->st[st_maintab].i = i;
@@ -54,6 +65,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    switch(g->st[st_maintab].i)
    {
    case cbi_tab_upgrades:   Lith_CBITab_Upgrades(g, p); break;
+   case cbi_tab_cbi:        Lith_CBITab_CBI     (g, p); break;
    case cbi_tab_shop:       Lith_CBITab_Shop    (g, p); break;
    case cbi_tab_bip:        Lith_CBITab_BIP     (g, p); break;
    case cbi_tab_settings:   Lith_CBITab_Settings(g, p); break;

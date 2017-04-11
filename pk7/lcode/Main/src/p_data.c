@@ -195,8 +195,11 @@ void Lith_ResetPlayer(player_t *p)
    
    if(!p->staticinit)
    {
+      p->cbi.perf = 10;
+      
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
+      
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       
       if(ACS_GetCVar("__lith_debug_on"))

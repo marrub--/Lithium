@@ -11,41 +11,43 @@
 // Static Objects
 //
 
+#define Req(arg) .requires = arg
 static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
-// {{"Name-------", "BIP---------", Cost----}, UC_Cat-, Score, [Group]},
-   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, UC_Body, -0.05},
-   {{"JetBooster",  "JetBooster",   0       }, UC_Body, -0.05},
-   {{"ReflexWetw",  "ReflexWetw",   0       }, UC_Body, -0.05},
-   {{"Zoom",        null,           0       }, UC_Body,  0.00},
-   {{"CyberLegs",   "CyberLegs",    1220000 }, UC_Body,  0.00},
-   {{"ReactArmor",  "Yh0",          3500200 }, UC_Body,  0.00},
-   {{"ReactArmor2", "Yh0",          2990200 }, UC_Body,  0.00},
-   {{"DefenseNuke", "DefenseNuke",  580030  }, UC_Body,  0.00},
-   {{"Adrenaline",  "Adrenaline",   1801000 }, UC_Body,  0.00},
-   {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  0.00},
+// {{"Name-------", "BIP---------", Cost----}, UC_Cat-, Pr, Score, [Group], [Requirements]},
+   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, UC_Body,  1, -0.05},
+   {{"JetBooster",  "JetBooster",   0       }, UC_Body,  0, -0.05},
+   {{"ReflexWetw",  "ReflexWetw",   0       }, UC_Body,  5, -0.05},
+   {{"Zoom",        null,           0       }, UC_Body,  0,  0.00},
+   {{"CyberLegs",   "CyberLegs",    1220000 }, UC_Body,  4,  0.00},
+   {{"ReactArmor",  "Yh0",          3500200 }, UC_Body, 20,  0.00, Req(UR_AI)},
+   {{"ReactArmor2", "Yh0",          2990200 }, UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
+   {{"DefenseNuke", "DefenseNuke",  580030  }, UC_Body,  0,  0.00, Req(UR_AI)},
+   {{"Adrenaline",  "Adrenaline",   1801000 }, UC_Body, 10,  0.00},
+   {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  2,  0.00},
    
-   {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  0.00},
-   {{"AutoPistol",  null,           140940  }, UC_Weap,  0.00, UG_Pistol},
-   {{"PlasPistol",  null,           340000  }, UC_Weap,  0.00, UG_Pistol},
-   {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  0.00, UG_Shotgun},
-   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0.00, UG_Shotgun},
-   {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0.00},
-   {{"LaserRCW",    "RifleUpg2",    1008080 }, UC_Weap,  0.00},
-   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0.00, UG_Launcher},
-   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  0.00, UG_Launcher},
-   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, UC_Weap,  0.00, UG_Plasma},
-   {{"PartBeam",    "PlasmaUpg2",   2500000 }, UC_Weap,  0.00, UG_Plasma},
-   {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0.00, UG_BFG},
-   {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  0.00, UG_BFG},
+   {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  2,  0.00,              Req(UR_WMD)},
+   {{"AutoPistol",  null,           140940  }, UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
+   {{"PlasPistol",  null,           340000  }, UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
+   {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0,  0.00,              Req(UR_WMD)},
+   {{"LaserRCW",    "RifleUpg2",    1008080 }, UC_Weap,  1,  0.00,              Req(UR_WMD)},
+   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0,  0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
+   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  1,  0.00, UG_Launcher, Req(UR_WMD)},
+   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, UC_Weap,  0,  0.00, UG_Plasma,   Req(UR_WMD)},
+   {{"PartBeam",    "PlasmaUpg2",   2500000 }, UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
+   {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
+   {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
    
-   {{"TorgueMode",  null,           80000000}, UC_Extr,  0.00},
-   {{"7777777",     null,           82354300}, UC_Extr,  0.10},
-   {{"lolsords",    null,           1000000 }, UC_Extr,  0.20},
+   {{"TorgueMode",  null,           80000000}, UC_Extr,  8,  0.00, Req(UR_RDI)},
+   {{"7777777",     null,           82354300}, UC_Extr,  7,  0.10, Req(UR_RDI)},
+   {{"lolsords",    null,           1000000 }, UC_Extr,  0,  0.20, Req(UR_RDI)},
    
-   {{"Implying",    null,           0       }, UC_Down,  0.20},
-   {{"UNCEUNCE",    null,           0       }, UC_Down,  0.30},
-   {{"InstaDeath",  null,           0       }, UC_Down,  0.50},
+   {{"Implying",    null,           0       }, UC_Down,  0,  0.20},
+   {{"UNCEUNCE",    null,           0       }, UC_Down,  0,  0.30},
+   {{"InstaDeath",  null,           0       }, UC_Down,  0,  0.50},
 };
+#undef Req
 
 static upgradeinfo_t extraupgradeinfo[UPGR_EXTRA_NUM];
 
@@ -304,6 +306,12 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 {
    extern void Lith_CheckAutoBuy(player_t *p);
    
+   if(p->cbi.perf < 30 && ACS_CheckInventory("Lith_CBIUpgrade1"))
+      p->cbi.perf = 30;
+   
+   if(p->cbi.perf < 70 && ACS_CheckInventory("Lith_CBIUpgrade2"))
+      p->cbi.perf = 70;
+   
    Lith_CheckAutoBuy(p);
    
    ForUpgrade(upgr)
@@ -338,7 +346,29 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 {
    if(!upgr->owned) return false;
    
+   if(!upgr->active)
+   {
+      #define Req(a1, a2) \
+         (upgr->info->requires & a1 && !ACS_CheckInventory(a2))
+      
+      if(Req(UR_AI,  "Lith_ArmorInterface") ||
+         Req(UR_WMD, "Lith_WeaponModDevice") ||
+         Req(UR_WRD, "Lith_WeaponModDevice2") ||
+         Req(UR_RDI, "Lith_RDI") ||
+         
+         (upgr->info->requires & UR_RA && !p->getUpgr(UPGR_ReactArmor)->active) ||
+         p->cbi.pruse + upgr->info->perf > p->cbi.perf)
+      {
+         ACS_LocalAmbientSound("player/cbi/auto/invalid", 60);
+         return false;
+      }
+      #undef Req
+   }
+   
    upgr->active = !upgr->active;
+   
+   if(upgr->active) p->cbi.pruse += upgr->info->perf;
+   else             p->cbi.pruse -= upgr->info->perf;
    
    if(upgr->active && upgr->info->group)
       ForUpgrade(other)

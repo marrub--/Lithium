@@ -111,6 +111,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_ENEMIES, "SpiderMastermind");
    AddToBIP(bip, BIPC_ENEMIES, "Cyberdemon");
    
+   AddToBIP(bip, BIPC_ENEMIES, "Phantom");
    AddToBIP(bip, BIPC_ENEMIES, "IconOfSin");
    
    AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp",  Unlocks("OFMD"));
@@ -310,6 +311,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
       Stat("Brouzouf Gained",     "%i",   p->brouzouf);
       Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
+      Stat("Score Multiplier",    "%k",   ceilk(p->scoremul * 100.0));
    // Stat("Rituals Performed",   "%i",   0);
       
       #undef Stat

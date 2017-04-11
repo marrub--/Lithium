@@ -141,7 +141,13 @@ intermission Lith_EndGameTimeOver
    
    TextScreen
    {
-      TextLump = "end_timeup.txt"
+      TextLump = "end_timeup1.txt"
+      TextColor = "White"
+   }
+   
+   TextScreen
+   {
+      TextLump = "end_timeup2.txt"
       TextColor = "White"
    }
    

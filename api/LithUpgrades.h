@@ -62,6 +62,15 @@ enum
    UG_BASE_MAX
 };
 
+enum
+{
+   UR_AI  = 1 << 0,
+   UR_WMD = 1 << 1,
+   UR_WRD = 1 << 2,
+   UR_RDI = 1 << 3,
+   UR_RA  = 1 << 4,
+};
+
 union upgradedata_u
 {
    // Private Data
@@ -112,8 +121,10 @@ typedef struct upgradeinfo_s
    // Public Data
    [[__anonymous]] shopdef_t shopdef;
    int   category;
+   int   perf;
    fixed scoreadd;
    int   group;
+   unsigned requires;
    
    // Readonly Data
    int id, key;

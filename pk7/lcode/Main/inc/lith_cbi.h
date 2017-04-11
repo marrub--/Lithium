@@ -11,6 +11,7 @@
 enum
 {
    cbi_tab_upgrades,
+   cbi_tab_cbi,
    cbi_tab_shop,
    cbi_tab_bip,
    cbi_tab_settings,
@@ -50,8 +51,13 @@ enum
 
 typedef struct cbi_s
 {
+   // GUI
    gui_state_t guistate;
    int theme, oldtheme;
+   
+   // CBI
+   int perf;
+   int pruse;
 } cbi_t;
 
 
