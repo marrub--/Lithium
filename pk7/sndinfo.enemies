@@ -45,6 +45,8 @@ $attenuation enemies/cyberdemon/firedone 0.25
 enemies/phantom/spawn1 lsounds/Phantoms/Spawn.flac  // Self-made
 enemies/phantom/spawn2 lsounds/Phantoms/Spawn2.flac // 〃
 
+enemies/phantom/aura lsounds/Phantoms/Aura.wav // Phantasy Star Nova
+
 $random enemies/phantom/spawned {
    enemies/phantom/spawn1
    enemies/phantom/spawn2

@@ -161,6 +161,8 @@ void Lith_PhantomTeleport()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PhantomDeath(int num, int phase)
 {
+   ACS_StopSound(0, 7);
+   
    ACS_AmbientSound("player/death1", 127);
    
    ACS_Delay(35);
