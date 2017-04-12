@@ -1,6 +1,3 @@
-// Player
-user bool   lith_player_teleshop = false;
-
 // Server
 server bool lith_sv_pauseinmenus = true;
 

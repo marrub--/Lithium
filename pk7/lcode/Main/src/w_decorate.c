@@ -224,19 +224,36 @@ int Lith_StepSpeed()
 	return 6 * (mul + 0.6k);
 }
 
-[[__call("ScriptS"), __extern("ACS")]]
+[[__call("ScriptI"), __address(24243), __extern("ACS")]]
 void Lith_BoughtItemPickup(int id)
 {
    player_t *p = Lith_LocalPlayer;
    
+   int const chan = CHAN_ITEM|CHAN_NOPAUSE;
+   
    if(id)
    {
       upgrade_t *upgr = &p->upgrades[id];
-      upgr->setOwned(p);
-      upgr->toggle(p);
+      
+      if(!upgr->owned)
+      {
+         switch(upgr->info->category)
+         {
+         case UC_Body: ACS_PlaySound(0, "player/pickup/upgrbody", chan, 1, false, ATTN_NONE); break;
+         case UC_Weap: ACS_PlaySound(0, "player/pickup/upgrweap", chan, 1, false, ATTN_NONE); break;
+         case UC_Extr: ACS_PlaySound(0, "player/pickup/upgrextr", chan, 1, false, ATTN_NONE); break;
+         }
+         
+         upgr->setOwned(p);
+         upgr->toggle(p);
+      }
    }
    else
+   {
+      ACS_PlaySound(0, "player/pickup/item", chan, 1, false, ATTN_NONE);
+      
       p->itemsbought++;
+   }
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

@@ -101,13 +101,13 @@ static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
 {
    upgrade_t const *upgr = upgr_;
    
-   ACS_SetUserVariable(tid, "lith_upgradeid", upgr->info->id);
+   ACS_SetUserVariable(tid, "user_upgradeid", upgr->info->id);
    
    switch(upgr->info->category)
    {
-   case UC_Body: ACS_SetUserVariable(tid, "lith_upgradebody", true); break;
-   case UC_Weap: ACS_SetUserVariable(tid, "lith_upgradeweap", true); break;
-   default:      ACS_SetUserVariable(tid, "lith_upgradeextr", true); break;
+   case UC_Body: ACS_SetUserVariable(tid, "user_upgradebody", true); break;
+   case UC_Weap: ACS_SetUserVariable(tid, "user_upgradeweap", true); break;
+   default:      ACS_SetUserVariable(tid, "user_upgradeextr", true); break;
    }
 }
 

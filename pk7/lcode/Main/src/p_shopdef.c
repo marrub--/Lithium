@@ -43,7 +43,7 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, b
    
    bool delivered = false;
    
-   if(!nodelivery && world.extras && Lith_GetPCVarInt(p, "lith_player_teleshop"))
+   if(!nodelivery && Lith_GetPCVarInt(p, "lith_player_teleshop"))
    {
       int pufftid;
       int tid;

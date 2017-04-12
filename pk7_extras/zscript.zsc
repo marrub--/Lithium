@@ -2,7 +2,6 @@ version 2.4
 
 #include "lscripts/PauseManager.zsc"
 
-#include "lscripts/BoughtItem.zsc"
 #include "lscripts/DarkMatter.zsc"
 
 // EOF

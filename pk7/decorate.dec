@@ -12,6 +12,7 @@
 #include "lscripts/PickupEffects.dec"
 #include "lscripts/BossSpawners.dec"
 #include "lscripts/RifleGrenade.dec"
+#include "lscripts/BoughtItem.dec"
 
 #include "lscripts/Monsters/Tier1.dec"
 #include "lscripts/Monsters/Tier2.dec"
