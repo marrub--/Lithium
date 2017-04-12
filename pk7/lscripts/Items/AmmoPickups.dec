@@ -3,8 +3,8 @@ actor Lith_Clip : Lith_ScoreItem replaces Clip
    states
    {
    Spawn:
-      CLIP A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip)
-      CLIP A -1
+      SCOR A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Clip)
+      SCOR A -1
       stop
    }
 }
@@ -14,8 +14,8 @@ actor Lith_ClipBox : Lith_ScoreItem replaces ClipBox
    states
    {
    Spawn:
-      AMMO A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox)
-      AMMO A -1
+      SCOR B 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_ClipBox)
+      SCOR B -1
       stop
    }
 }

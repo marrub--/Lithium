@@ -42,6 +42,9 @@ Marrub
    More seriously, most of the content in this mod is self-made.
    Most things not credited here are probably made by me.
 
+MarlboroMike
+   Score item sprites
+
 Minigunner
    Smooth explosion sprites
 
