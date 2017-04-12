@@ -136,9 +136,16 @@ typedef struct upgradeinfo_s
    upgr_cb_t        Enter;
 } upgradeinfo_t;
 
+bool Lith_UpgrCanActivate(struct player_s *p, struct upgrade_s *upgr);
+bool Lith_UpgrToggle(struct player_s *p, struct upgrade_s *upgr);
+void Lith_UpgrSetOwned(struct player_s *p, struct upgrade_s *upgr);
 
 typedef struct upgrade_s
 {
+   __prop canUse {call: Lith_UpgrCanActivate(__arg, this)}
+   __prop toggle {call: Lith_UpgrToggle(__arg, this)}
+   __prop setOwned {call: Lith_UpgrSetOwned(__arg, this)}
+   
    // Public Data
    union upgradedata_u data;
    

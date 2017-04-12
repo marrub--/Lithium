@@ -48,8 +48,5 @@ void Lith_PlayerUpdateUpgrades(struct player_s *p);
 void Lith_PlayerRenderUpgrades(struct player_s *p);
 void Lith_PlayerEnterUpgrades(struct player_s *p);
 
-void Lith_UpgrSetOwned(struct player_s *p, upgrade_t *upgr);
-bool Lith_UpgrToggle(struct player_s *p, upgrade_t *upgr);
-
 #endif
 

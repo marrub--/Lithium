@@ -311,7 +311,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
       Stat("Brouzouf Gained",     "%i",   p->brouzouf);
       Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
-      Stat("Score Multiplier",    "%k",   ceilk(p->scoremul * 100.0));
+      Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
    // Stat("Rituals Performed",   "%i",   0);
       
       #undef Stat

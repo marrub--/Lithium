@@ -23,7 +23,7 @@ void Lith_CheckAutoBuy(player_t *p)
       {
          total++;
          name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
-         Lith_UpgrToggle(p, upgr);
+         upgr->toggle(p);
       }
    }
    
@@ -63,7 +63,7 @@ void Lith_KeyBuyAutoGroup(int group)
       {  total++;
          if(Lith_UpgrBuy(p, &p->upgrades[i], false))
          {  success++;
-            Lith_UpgrToggle(p, &p->upgrades[i]);}}
+            p->upgrades[i].toggle(p);}}
    
    char color;
    
@@ -95,7 +95,7 @@ void Lith_KeyToggleAutoGroup(int group)
    for(int i = 0; i < UPGR_MAX; i++)
       if(p->upgrades[i].owned && p->upgrades[i].autogroups[group])
       {  total++;
-         Lith_UpgrToggle(p, &p->upgrades[i]);}
+         p->upgrades[i].toggle(p);}
    
    if(total)
    {

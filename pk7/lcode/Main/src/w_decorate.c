@@ -232,8 +232,8 @@ void Lith_BoughtItemPickup(int id)
    if(id)
    {
       upgrade_t *upgr = &p->upgrades[id];
-      Lith_UpgrSetOwned(p, upgr);
-      Lith_UpgrToggle(p, upgr);
+      upgr->setOwned(p);
+      upgr->toggle(p);
    }
    else
       p->itemsbought++;
