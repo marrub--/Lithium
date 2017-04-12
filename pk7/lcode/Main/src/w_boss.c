@@ -300,14 +300,14 @@ void Lith_SpawnBosses(score_t sum)
       } \
    }
    
-   else if(world.boss3p2 && sum > 111000000) SpawnBoss(3, 3)
-   else if(world.boss3p1 && sum > 100000000) SpawnBoss(3, 2)
-   else if(world.boss2p3 && sum > 20000000)  SpawnBoss(3, 1)
-   else if(world.boss2p2 && sum > 10000000)  SpawnBoss(2, 3)
-   else if(world.boss2p1 && sum > 7000000)   SpawnBoss(2, 2)
+   else if(world.boss3p2 && sum > 128000000) SpawnBoss(3, 3)
+   else if(world.boss3p1 && sum > 64000000)  SpawnBoss(3, 2)
+   else if(world.boss2p3 && sum > 32000000)  SpawnBoss(3, 1)
+   else if(world.boss2p2 && sum > 16000000)  SpawnBoss(2, 3)
+   else if(world.boss2p1 && sum > 8000000)   SpawnBoss(2, 2)
    else if(world.boss1p2 && sum > 4000000)   SpawnBoss(2, 1)
-   else if(world.boss1p1 && sum > 1000000)   SpawnBoss(1, 2)
-   else if(                 sum > 500000)    SpawnBoss(1, 1)
+   else if(world.boss1p1 && sum > 2000000)   SpawnBoss(1, 2)
+   else if(                 sum > 1000000)   SpawnBoss(1, 1)
    
    #undef SpawnBoss
 }

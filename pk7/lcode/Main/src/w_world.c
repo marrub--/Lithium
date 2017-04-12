@@ -407,20 +407,6 @@ static void Lith_World(void)
    // World-static init.
    if(ACS_Timer() <= 2)
    {
-      // Spawn bosses.
-      world.bossspawned = false;
-      
-      Lith_ForPlayer()
-      {
-         if(p->active)
-         {
-            extern void Lith_SpawnBosses(score_t sum);
-            
-            Lith_SpawnBosses(p->scoresum);
-            break;
-         }
-      }
-      
       // Payout, which is not done on the first map start.
       if(!firstmap)
          Lith_DoPayout();
@@ -441,12 +427,28 @@ static void Lith_World(void)
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
    
+   // Spawn bosses.
+   world.bossspawned = false;
+   
+   ACS_Delay(1); // Delay another tic for monster spawners.
+   
+   Lith_ForPlayer()
+   {
+      if(p->active)
+      {
+         extern void Lith_SpawnBosses(score_t sum);
+         
+         Lith_SpawnBosses(p->scoresum);
+         break;
+      }
+   }
+   
    firstmap = false;
    
    // Now we just check for things being gained so players get proper score.
-   int prevsecrets = world.mapsecrets;
-   int prevkills   = world.mapkills;
-   int previtems   = world.mapitems;
+   int prevsecrets = 0;
+   int prevkills   = 0;
+   int previtems   = 0;
    
    for(;;)
    {
