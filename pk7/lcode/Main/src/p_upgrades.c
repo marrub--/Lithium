@@ -6,6 +6,12 @@
    for(int _i = 0; _i < UPGR_MAX; _i++) \
       __with(upgrade_t *name = &p->upgrades[_i];)
 
+#define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
+#define CheckRequires_AI      CheckRequires(UR_AI,  p->cbi.hasArmorInter)
+#define CheckRequires_WMD     CheckRequires(UR_WMD, p->cbi.hasWeapnInter)
+#define CheckRequires_WRD     CheckRequires(UR_WRD, p->cbi.hasWeapnInte2)
+#define CheckRequires_RDI     CheckRequires(UR_RDI, p->cbi.hasRDistInter)
+#define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
 //----------------------------------------------------------------------------
 // Static Objects
@@ -345,20 +351,16 @@ bool Lith_UpgrCanActivate(struct player_s *p, struct upgrade_s *upgr)
 {
    if(!upgr->active)
    {
-      #define Req(a1, a2) \
-         (upgr->info->requires & a1 && !ACS_CheckInventory(a2))
-      
-      if(Req(UR_AI,  "Lith_ArmorInterface")   ||
-         Req(UR_WMD, "Lith_WeaponModDevice")  ||
-         Req(UR_WRD, "Lith_WeaponModDevice2") ||
-         Req(UR_RDI, "Lith_RDI")              ||
+      if(CheckRequires_AI  ||
+         CheckRequires_WMD ||
+         CheckRequires_WRD ||
+         CheckRequires_RDI ||
+         CheckRequires_RA  ||
          
-         (upgr->info->requires & UR_RA && !p->getUpgr(UPGR_ReactArmor)->active) ||
          p->cbi.pruse + upgr->info->perf > p->cbi.perf)
       {
          return false;
       }
-      #undef Req
    }
    
    return upgr->owned;
@@ -578,11 +580,11 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       yofs -= 10; \
    }
    
-   if(upgr->info->requires & UR_AI)  Req("Armor Interface")
-   if(upgr->info->requires & UR_WMD) Req("Weapon Modification Device")
-   if(upgr->info->requires & UR_WRD) Req("Weapon Refactoring Device")
-   if(upgr->info->requires & UR_RDI) Req("Reality Distortion Interface")
-   if(upgr->info->requires & UR_RA)  Req("Reactive Armor")
+   if(CheckRequires_AI)  Req("Armor Interface")
+   if(CheckRequires_WMD) Req("Weapon Modification Device")
+   if(CheckRequires_WRD) Req("Weapon Refactoring Device")
+   if(CheckRequires_RDI) Req("Reality Distortion Interface")
+   if(CheckRequires_RA)  Req("Reactive Armor")
    
    #undef Req
    }

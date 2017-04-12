@@ -188,20 +188,20 @@ void Lith_PhantomDeath(int num, int phase)
    switch(num)
    {
    case 1: switch(phase)
-      {PhaseR(1, 1, "Lith_WeaponModDevice")
+      {PhaseR(1, 1, "Lith_WeapnInter")
        PhaseR(1, 2, "Lith_CBIUpgrade1")}
       break;
    
    case 2: switch(phase)
-      {PhaseR(2, 1, "Lith_ArmorInterface")
+      {PhaseR(2, 1, "Lith_ArmorInter")
        PhaseR(2, 2, "Lith_CBIUpgrade2")
-       PhaseR(2, 3, "Lith_WeaponModDevice2")}
+       PhaseR(2, 3, "Lith_WeapnInte2")}
       break;
    
    case 3: switch(phase)
       {PhaseN(3, 1)
        PhaseN(3, 2)
-       PhaseR(3, 3, "Lith_RDI")}
+       PhaseR(3, 3, "Lith_RDistInter")}
       break;
    }
    

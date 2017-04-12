@@ -2,6 +2,7 @@ actor Lith_CBIItem : Inventory
 {
    Inventory.PickupMessage ""
    Inventory.PickupSound "player/pickup/upgrcbi"
+   Inventory.MaxAmount 1
    
    var int user_glowangle;
    var int user_glowzangle;
@@ -81,7 +82,7 @@ actor Lith_CBIUpgrade2 : Lith_CBIItem
    }
 }
 
-actor Lith_ArmorInterface : Lith_CBIItem
+actor Lith_ArmorInter : Lith_CBIItem
 {
    states
    {
@@ -93,7 +94,7 @@ actor Lith_ArmorInterface : Lith_CBIItem
    }
 }
 
-actor Lith_WeaponModDevice : Lith_CBIItem
+actor Lith_WeapnInter : Lith_CBIItem
 {
    states
    {
@@ -105,7 +106,7 @@ actor Lith_WeaponModDevice : Lith_CBIItem
    }
 }
 
-actor Lith_WeaponModDevice2 : Lith_CBIItem
+actor Lith_WeapnInte2 : Lith_CBIItem
 {
    states
    {
@@ -117,7 +118,7 @@ actor Lith_WeaponModDevice2 : Lith_CBIItem
    }
 }
 
-actor Lith_RDI : Lith_CBIItem
+actor Lith_RDistInter : Lith_CBIItem
 {
    states
    {

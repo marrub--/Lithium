@@ -10,8 +10,59 @@
 
 static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 {
-   HudMessageF("CBIFONT", "Performance rating: %i/%i", p->cbi.pruse, p->cbi.perf);
-   HudMessagePlain(g->hid--, 23.1,  70.1, TICSECOND);
+   __str name;
+   int ram;
+   
+   if(p->cbi.hasUpgr2)
+   {
+      name = "KSKK Spec. BC-0265 Super High-Grade CPU";
+      ram  = 150;
+      
+      DrawSpritePlain("lgfx/UI/CPU1.png", g->hid--, .1, .1, TICSECOND);
+   }
+   else if(p->cbi.hasUpgr1)
+   {
+      name = "KSKK Spec. Z6808 High-Grade CPU";
+      ram  = 100;
+      
+      DrawSpritePlain("lgfx/UI/CPU2.png", g->hid--, .1, .1, TICSECOND);
+   }
+   else
+   {
+      name = "OFMD Spec. Nodea 541 Basic CPU";
+      ram  = 50;
+      
+      DrawSpritePlain("lgfx/UI/CPU3.png", g->hid--, .1, .1, TICSECOND);
+   }
+   
+   HudMessageF("CBIFONT", "%S", name);
+   HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+   
+   {
+   int y = 70;
+   #define Info(...) \
+      HudMessageF("CBIFONT", __VA_ARGS__); \
+      HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
+      y += 10
+   
+   Info("Performance: %i\CbPr", p->cbi.perf);
+   Info("In use: %i\CbPr", p->cbi.pruse);
+   Info("RAM: %iTiB", ram);
+   
+   y += 20;
+   
+   if(p->cbi.hasArmorInter) Info("Has Armor Interface");
+   if(p->cbi.hasWeapnInter) Info("Has Weapon Modification Device");
+   if(p->cbi.hasWeapnInte2) Info("Has Weapon Refactoring Device");
+   if(p->cbi.hasRDistInter) Info("Has Reality Distortion Interface");
+   
+   #undef Info
+   }
+   
+   if(p->cbi.hasArmorInter) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
+   if(p->cbi.hasWeapnInter) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
+   if(p->cbi.hasWeapnInte2) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
+   if(p->cbi.hasRDistInter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
 }
 
 
