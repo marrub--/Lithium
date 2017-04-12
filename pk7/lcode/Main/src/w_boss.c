@@ -307,7 +307,7 @@ void Lith_SpawnBosses(score_t sum)
    else if(world.boss2p1 && sum > 7000000)   SpawnBoss(2, 2)
    else if(world.boss1p2 && sum > 4000000)   SpawnBoss(2, 1)
    else if(world.boss1p1 && sum > 1000000)   SpawnBoss(1, 2)
-   else if(                 sum > 200000)    SpawnBoss(1, 1)
+   else if(                 sum > 500000)    SpawnBoss(1, 1)
    
    #undef SpawnBoss
 }

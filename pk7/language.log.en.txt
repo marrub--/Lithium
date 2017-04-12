@@ -24,12 +24,6 @@ LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull";
 LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull";
 LITH_TXT_LOG_DoggoSphere = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 LITH_TXT_LOG_Dogs        = "> Picked up dogs.";
-LITH_TXT_LOG_CBIUpgr1    = "> Installed KSKK Spec. High-Grade CPU";
-LITH_TXT_LOG_CBIUpgr2    = "> Installed KSKK Spec. Super High-Grade CPU";
-LITH_TXT_LOG_ArmorInter  = "> Installed Armor Interface";
-LITH_TXT_LOG_WeapnInter  = "> Installed Weapon Modification Device";
-LITH_TXT_LOG_WeapnInte2  = "> Installed Weapon Refactoring Device";
-LITH_TXT_LOG_RDistInter  = "> Installed Reality Distortion Interface";
 
 // EOF
 

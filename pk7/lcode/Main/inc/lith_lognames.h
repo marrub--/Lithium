@@ -25,12 +25,6 @@ enum
    log_yellowskull,
    log_doggosphere,
    log_dogs,
-   log_cbiupgr1,
-   log_cbiupgr2,
-   log_armorinter,
-   log_weapninter,
-   log_weapninte2,
-   log_rdistinter,
    log_max
 };
 

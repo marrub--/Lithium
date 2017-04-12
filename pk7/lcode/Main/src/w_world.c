@@ -268,6 +268,27 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
    }
 }
 
+//
+// Lith_PickupCBIItem
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_PickupCBIItem(int num)
+{
+   player_t *p = Lith_LocalPlayer;
+   
+   switch(num)
+   {
+   #define Case(n, name, msg, ...) case n: world.cbi.name = true; p->log(msg); __VA_ARGS__; break
+   Case(1, hasupgr1,   "> Installed KSKK Spec. High-Grade CPU",       world.cbi.perf = 30);
+   Case(2, hasupgr2,   "> Installed KSKK Spec. Super High-Grade CPU", world.cbi.perf = 70);
+   Case(3, armorinter, "> Installed Armor Interface");
+   Case(4, weapninter, "> Installed Weapon Modification Device");
+   Case(5, weapninte2, "> Installed Weapon Refactoring Device");
+   Case(6, rdistinter, "> Installed Reality Distortion Interface");
+   #undef Case
+   }
+}
+
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -315,6 +336,7 @@ static void Lith_World(void)
       world.game         = ACS_GetCVar("__lith_game");
       world.extras       = ACS_GetCVar("__lith_extras");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
+      world.cbi.perf     = 10;
       
       gsinit = true;
    }

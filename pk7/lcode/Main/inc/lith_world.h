@@ -68,6 +68,18 @@ typedef struct worldinfo_s
    bool boss3p1, boss3p2, boss3p3;
    bool bossspawned;
    
+   // CBI global information
+   struct
+   {
+      int  perf;
+      bool armorinter : 1;
+      bool weapninter : 1;
+      bool weapninte2 : 1;
+      bool rdistinter : 1;
+      bool hasupgr1   : 1;
+      bool hasupgr2   : 1;
+   } cbi;
+   
    // Mod compat
    bool legendoom;
    bool drlamonsters;

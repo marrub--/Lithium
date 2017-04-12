@@ -51,20 +51,10 @@ enum
 
 typedef struct cbi_s
 {
-   // GUI
    gui_state_t guistate;
    int theme, oldtheme;
    
-   // CBI
-   int perf;
    int pruse;
-   
-   property hasUpgr1      {get: ACS_CheckInventory("Lith_CBIUpgrade1")}
-   property hasUpgr2      {get: ACS_CheckInventory("Lith_CBIUpgrade2")}
-   property hasArmorInter {get: ACS_CheckInventory("Lith_ArmorInter")}
-   property hasWeapnInter {get: ACS_CheckInventory("Lith_WeapnInter")}
-   property hasWeapnInte2 {get: ACS_CheckInventory("Lith_WeapnInte2")}
-   property hasRDistInter {get: ACS_CheckInventory("Lith_RDistInter")}
 } cbi_t;
 
 

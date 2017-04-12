@@ -2,6 +2,7 @@
 #include "lith_player.h"
 #include "lith_hudid.h"
 #include "lith_list.h"
+#include "lith_world.h"
 
 
 //----------------------------------------------------------------------------
@@ -13,14 +14,14 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
    __str name;
    int ram;
    
-   if(p->cbi.hasUpgr2)
+   if(world.cbi.hasupgr2)
    {
       name = "KSKK Spec. BC-0265 Super High-Grade CPU";
       ram  = 150;
       
       DrawSpritePlain("lgfx/UI/CPU1.png", g->hid--, .1, .1, TICSECOND);
    }
-   else if(p->cbi.hasUpgr1)
+   else if(world.cbi.hasupgr1)
    {
       name = "KSKK Spec. Z6808 High-Grade CPU";
       ram  = 100;
@@ -45,24 +46,24 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
       HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
       y += 10
    
-   Info("Performance: %i\CbPr", p->cbi.perf);
+   Info("Performance: %i\CbPr", world.cbi.perf);
    Info("In use: %i\CbPr", p->cbi.pruse);
    Info("RAM: %iTiB", ram);
    
    y += 20;
    
-   if(p->cbi.hasArmorInter) Info("Has Armor Interface");
-   if(p->cbi.hasWeapnInter) Info("Has Weapon Modification Device");
-   if(p->cbi.hasWeapnInte2) Info("Has Weapon Refactoring Device");
-   if(p->cbi.hasRDistInter) Info("Has Reality Distortion Interface");
+   if(world.cbi.armorinter) Info("Has Armor Interface");
+   if(world.cbi.weapninter) Info("Has Weapon Modification Device");
+   if(world.cbi.weapninte2) Info("Has Weapon Refactoring Device");
+   if(world.cbi.rdistinter) Info("Has Reality Distortion Interface");
    
    #undef Info
    }
    
-   if(p->cbi.hasArmorInter) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
-   if(p->cbi.hasWeapnInter) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
-   if(p->cbi.hasWeapnInte2) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
-   if(p->cbi.hasRDistInter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+   if(world.cbi.armorinter) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
+   if(world.cbi.weapninter) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
+   if(world.cbi.weapninte2) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
+   if(world.cbi.rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
 }
 
 

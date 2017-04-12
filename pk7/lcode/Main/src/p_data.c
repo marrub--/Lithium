@@ -195,8 +195,6 @@ void Lith_ResetPlayer(player_t *p)
    
    if(!p->staticinit)
    {
-      p->cbi.perf = 10;
-      
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
       

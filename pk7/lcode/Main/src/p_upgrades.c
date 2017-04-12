@@ -1,4 +1,5 @@
 #include "lith_upgrades_common.h"
+#include "lith_world.h"
 
 #include "Lth_manifest.h"
 
@@ -7,10 +8,10 @@
       __with(upgrade_t *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
-#define CheckRequires_AI      CheckRequires(UR_AI,  p->cbi.hasArmorInter)
-#define CheckRequires_WMD     CheckRequires(UR_WMD, p->cbi.hasWeapnInter)
-#define CheckRequires_WRD     CheckRequires(UR_WRD, p->cbi.hasWeapnInte2)
-#define CheckRequires_RDI     CheckRequires(UR_RDI, p->cbi.hasRDistInter)
+#define CheckRequires_AI      CheckRequires(UR_AI,  world.cbi.armorinter)
+#define CheckRequires_WMD     CheckRequires(UR_WMD, world.cbi.weapninter)
+#define CheckRequires_WRD     CheckRequires(UR_WRD, world.cbi.weapninte2)
+#define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbi.rdistinter)
 #define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
 //----------------------------------------------------------------------------
@@ -311,12 +312,6 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 {
    extern void Lith_CheckAutoBuy(player_t *p);
    
-   if(p->cbi.perf < 30 && ACS_CheckInventory("Lith_CBIUpgrade1"))
-      p->cbi.perf = 30;
-   
-   if(p->cbi.perf < 70 && ACS_CheckInventory("Lith_CBIUpgrade2"))
-      p->cbi.perf = 70;
-   
    Lith_CheckAutoBuy(p);
    
    ForUpgrade(upgr)
@@ -357,7 +352,7 @@ bool Lith_UpgrCanActivate(struct player_s *p, struct upgrade_s *upgr)
          CheckRequires_RDI ||
          CheckRequires_RA  ||
          
-         p->cbi.pruse + upgr->info->perf > p->cbi.perf)
+         p->cbi.pruse + upgr->info->perf > world.cbi.perf)
       {
          return false;
       }
@@ -523,14 +518,14 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    
    if(upgr->info->perf)
    {
-      char cr = upgr->info->perf + p->cbi.pruse > p->cbi.perf ? 'a' : 'j';
+      char cr = upgr->info->perf + p->cbi.pruse > world.cbi.perf ? 'a' : 'j';
       
       if(upgr->active)
          HudMessageF("CBIFONT", "\Cj%i\C- - \Cj%i\C-/\Cj%i\CbPr",
-            p->cbi.pruse, upgr->info->perf, p->cbi.perf);
+            p->cbi.pruse, upgr->info->perf, world.cbi.perf);
       else
          HudMessageF("CBIFONT", "\C%c%i\C- + \C%c%i\C-/\Cj%i\CbPr",
-            cr, p->cbi.pruse, cr, upgr->info->perf, p->cbi.perf);
+            cr, p->cbi.pruse, cr, upgr->info->perf, world.cbi.perf);
       
       HudMessagePlain(g->hid--, 300.2, 40.1, TICSECOND);
    }
