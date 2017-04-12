@@ -13,6 +13,9 @@ static bool enemiesarecompatible;
 static bool enemycheckfinished;
 static bool gsinit;
 
+static int Lith_MapVariable upgradesspawned[8];
+static int Lith_MapVariable upgradesspawnediter;
+
 
 //----------------------------------------------------------------------------
 // Extern Objects
@@ -137,6 +140,40 @@ int Lith_GetWorldData(int info)
    }
    
    return 0;
+}
+
+//
+// Lith_PickupCBIItem
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_PickupCBIItem(int num)
+{
+   static void Lith_InstallCBIItem(int num);
+   
+   player_t *p = Lith_LocalPlayer;
+   
+   switch(num)
+   {
+   #define Case(n, msg) case n: p->log(msg); break
+   Case(1, "> Installed KSKK Spec. High-Grade CPU");
+   Case(2, "> Installed KSKK Spec. Super High-Grade CPU");
+   Case(3, "> Installed Armor Interface");
+   Case(4, "> Installed Weapon Modification Device");
+   Case(5, "> Installed Weapon Refactoring Device");
+   Case(6, "> Installed Reality Distortion Interface");
+   #undef Case
+   }
+   
+   Lith_InstallCBIItem(num);
+}
+
+//
+// Lith_CBIItemWasSpawned
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_CBIItemWasSpawned(int num)
+{
+   upgradesspawned[upgradesspawnediter++] = num;
 }
 
 
@@ -269,22 +306,19 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
 }
 
 //
-// Lith_PickupCBIItem
+// Lith_InstallCBIItem
 //
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_PickupCBIItem(int num)
+static void Lith_InstallCBIItem(int num)
 {
-   player_t *p = Lith_LocalPlayer;
-   
    switch(num)
    {
-   #define Case(n, name, msg, ...) case n: world.cbi.name = true; p->log(msg); __VA_ARGS__; break
-   Case(1, hasupgr1,   "> Installed KSKK Spec. High-Grade CPU",       world.cbi.perf = 30);
-   Case(2, hasupgr2,   "> Installed KSKK Spec. Super High-Grade CPU", world.cbi.perf = 70);
-   Case(3, armorinter, "> Installed Armor Interface");
-   Case(4, weapninter, "> Installed Weapon Modification Device");
-   Case(5, weapninte2, "> Installed Weapon Refactoring Device");
-   Case(6, rdistinter, "> Installed Reality Distortion Interface");
+   #define Case(n, name, ...) case n: world.cbi.name = true; __VA_ARGS__; break
+   Case(1, hasupgr1, world.cbi.perf = 30);
+   Case(2, hasupgr2, world.cbi.perf = 70);
+   Case(3, armorinter);
+   Case(4, weapninter);
+   Case(5, weapninte2);
+   Case(6, rdistinter);
    #undef Case
    }
 }
@@ -449,6 +483,9 @@ static void Lith_World(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_WorldUnload(void)
 {
+   for(int i = 0; i < upgradesspawnediter; i++)
+      Lith_InstallCBIItem(upgradesspawned[i]);
+   
    Lith_ForPlayer()
    {
       ACS_SetActivator(p->tid);

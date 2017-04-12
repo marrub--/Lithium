@@ -64,6 +64,8 @@ actor Lith_CBIUpgrade1 : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 1)
       CELP A 0
       goto Super::Spawn
    Pickup:
@@ -77,6 +79,8 @@ actor Lith_CBIUpgrade2 : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 2)
       CELL A 0
       goto Super::Spawn
    Pickup:
@@ -90,6 +94,8 @@ actor Lith_ArmorInter : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 3)
       ARM1 Z 0
       goto Super::Spawn
    Pickup:
@@ -103,6 +109,8 @@ actor Lith_WeapnInter : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 4)
       WUPG A 0
       goto Super::Spawn
    Pickup:
@@ -116,6 +124,8 @@ actor Lith_WeapnInte2 : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 5)
       WRDP A 0
       goto Super::Spawn
    Pickup:
@@ -129,6 +139,8 @@ actor Lith_RDistInter : Lith_CBIItem
    states
    {
    Spawn:
+      TNT1 A 0
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 6)
       IOBJ C 0
       goto Super::Spawn
    Pickup:
