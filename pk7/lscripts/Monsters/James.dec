@@ -46,16 +46,16 @@ actor Lith_JamesRevolverBullet : FastProjectile
 actor Lith_Boss_James : Lith_Phantom
 {
    Tag "James, Vanagloriam Est"
-   Health 1500
+   Health 1000
    
    states
    {
    See:
-      PLAY AAAABBBBCCCCDDDD 1 A_Chase("Melee", "Missile", CHF_FASTCHASE)
+      PLAY AAAABBBBCCCCDDDD 1 A_Chase("Melee", "Missile", user_phase > 1 ? CHF_FASTCHASE : 0)
       loop
    
    Missile:
-      PLAY E 0 A_JumpIf(user_phase != 2, "Missile1")
+      PLAY E 0 A_JumpIf(user_phase < 2, "Missile1")
       PLAY F 0 A_JumpIf(user_meleetime > 0, "Missile1")
       PLAY E 0 A_JumpIfCloser(384, "Lunge")
    
@@ -70,7 +70,7 @@ actor Lith_Boss_James : Lith_Phantom
       loop
    
    Melee:
-      PLAY F 0 A_JumpIf(user_phase != 2, "Missile")
+      PLAY F 0 A_JumpIf(user_phase < 2, "Missile")
       PLAY F 0 A_JumpIf(user_meleetime > 0, "Missile")
       PLAY F 0 A_SetUserVar(user_meleetime, 35)
       PLAY F 0 A_FaceTarget

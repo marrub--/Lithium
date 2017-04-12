@@ -31,8 +31,8 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"Adrenaline",  "Adrenaline",   1801000 }, UC_Body, 10,  0.00},
    {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  2,  0.00},
    
-   {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  2,  0.00,              Req(UR_WMD)},
-   {{"AutoPistol",  null,           140940  }, UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
+   {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  2,  0.00},
+   {{"AutoPistol",  null,           140940  }, UC_Weap,  0,  0.00, UG_Pistol},
    {{"PlasPistol",  null,           340000  }, UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
    {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
    {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
