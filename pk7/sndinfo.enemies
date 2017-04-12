@@ -45,7 +45,17 @@ $attenuation enemies/cyberdemon/firedone 0.25
 enemies/phantom/spawn1 lsounds/Phantoms/Spawn.flac  // Self-made
 enemies/phantom/spawn2 lsounds/Phantoms/Spawn2.flac // 〃
 
-enemies/phantom/aura lsounds/Phantoms/Aura.wav // Phantasy Star Nova
+enemies/phantom/lunge1 lsounds/Phantoms/Lunge.flac  // Ninja Gaiden Black
+enemies/phantom/lunge2 lsounds/Phantoms/Lunge2.flac // 〃
+enemies/phantom/lunge3 lsounds/Phantoms/Lunge3.flac // 〃
+
+enemies/phantom/aura lsounds/Phantoms/Aura.flac // Phantasy Star Nova
+
+$random enemies/phantom/lunge {
+   enemies/phantom/lunge1
+   enemies/phantom/lunge2
+   enemies/phantom/lunge3
+}
 
 $random enemies/phantom/spawned {
    enemies/phantom/spawn1
@@ -59,6 +69,18 @@ enemies/james/fire1 lsounds/Phantoms/James/Fire.flac  // Alliance of Valiant Arm
 enemies/james/fire2 lsounds/Phantoms/James/Fire2.flac // 〃
 enemies/james/fire3 lsounds/Phantoms/James/Fire3.flac // 〃
 
+enemies/james/knife1 lsounds/Phantoms/James/Knife.flac  // ???
+enemies/james/knife2 lsounds/Phantoms/James/Knife2.flac // 〃
+enemies/james/knife3 lsounds/Phantoms/James/Knife3.flac // 〃
+
+$alias enemies/james/knifehit weapons/knife/hitflesh
+
+$random enemies/james/knife {
+   enemies/james/knife1
+   enemies/james/knife2
+   enemies/james/knife3
+}
+
 $random enemies/james/fire {
    enemies/james/fire1
    enemies/james/fire2
@@ -71,17 +93,91 @@ $attenuation enemies/james/fire 0.5
 //
 // Makarov
 //
-$alias enemies/makarov/fire weapons/shotgun/poison/fire
+enemies/makarov/fire1 lsounds/Phantoms/Makarov/Fire.flac  // Fallout: New Vegas
+enemies/makarov/fire2 lsounds/Phantoms/Makarov/Fire2.flac // 〃
+
+enemies/makarov/pump1 lsounds/Phantoms/Makarov/Pump.flac  // ???
+enemies/makarov/pump2 lsounds/Phantoms/Makarov/Pump2.flac // 〃
+
+enemies/makarov/chainthrow lsounds/Phantoms/Makarov/ChainThrow.flac // ???
+enemies/makarov/chainhit   lsounds/Phantoms/Makarov/ChainHit.flac   // 〃
+
+enemies/makarov/throw1 lsounds/Phantoms/Makarov/Throw.flac  // ???
+enemies/makarov/throw2 lsounds/Phantoms/Makarov/Throw2.flac // 〃
+enemies/makarov/throw3 lsounds/Phantoms/Makarov/Throw3.flac // 〃
+
+enemies/makarov/scythe1 lsounds/Phantoms/Makarov/ScytheSwing.flac  // ???, Killing Floor
+enemies/makarov/scythe2 lsounds/Phantoms/Makarov/ScytheSwing2.flac // 〃
+
+enemies/makarov/scythehit1 lsounds/Phantoms/Makarov/ScytheHit.flac  // Killing Floor
+enemies/makarov/scythehit2 lsounds/Phantoms/Makarov/ScytheHit2.flac // 〃
+
+$random enemies/makarov/scythe {
+   enemies/makarov/scythe1
+   enemies/makarov/scythe2
+}
+
+$random enemies/makarov/scythehit {
+   enemies/makarov/scythehit1
+   enemies/makarov/scythehit2
+}
+
+$random enemies/makarov/fire {
+   enemies/makarov/fire1
+   enemies/makarov/fire2
+}
+
+$random enemies/makarov/pump {
+   enemies/makarov/pump1
+   enemies/makarov/pump2
+}
+
+$random enemies/makarov/throw {
+   enemies/makarov/throw1
+   enemies/makarov/throw2
+   enemies/makarov/throw3
+}
+
 $limit enemies/makarov/fire 0
 $attenuation enemies/makarov/fire 0.5
 
-$alias enemies/makarov/throw skeleton/swing
+$limit enemies/makarov/pump 0
 
 //
 // Isaac
 //
-$alias enemies/isaac/fire weapons/rifle/fire
+enemies/isaac/fire1 lsounds/Phantoms/Isaac/Fire.flac  // ???, Halo 3
+enemies/isaac/fire2 lsounds/Phantoms/Isaac/Fire2.flac // 〃
+
+$random enemies/isaac/fire {
+   enemies/isaac/fire1
+   enemies/isaac/fire2
+}
+
 $limit enemies/isaac/fire 0
 $attenuation enemies/isaac/fire 0.5
+
+//
+// Michael
+//
+enemies/michael/swing1 lsounds/Phantoms/Michael/Swing.ogg  // Fallout 4
+enemies/michael/swing2 lsounds/Phantoms/Michael/Swing2.ogg // 〃
+enemies/michael/swing3 lsounds/Phantoms/Michael/Swing3.ogg // 〃
+
+enemies/michael/hit1 lsounds/Phantoms/Michael/Hit.ogg  // Halo 3
+enemies/michael/hit2 lsounds/Phantoms/Michael/Hit2.ogg // 〃
+enemies/michael/hit3 lsounds/Phantoms/Michael/Hit3.ogg // 〃
+
+$random enemies/michael/swing {
+   enemies/michael/swing1
+   enemies/michael/swing2
+   enemies/michael/swing3
+}
+
+$random enemies/michael/hit {
+   enemies/michael/hit1
+   enemies/michael/hit2
+   enemies/michael/hit3
+}
 
 // EOF
