@@ -323,6 +323,26 @@ static void Lith_InstallCBIItem(int num)
    }
 }
 
+//
+// SpawnBoss
+//
+[[__call("ScriptS")]]
+static void SpawnBoss()
+{
+   ACS_Delay(1); // Delay another tic for monster spawners.
+   
+   Lith_ForPlayer()
+   {
+      if(p->active)
+      {
+         extern void Lith_SpawnBosses(score_t sum);
+         
+         Lith_SpawnBosses(p->scoresum);
+         break;
+      }
+   }
+}
+
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -377,6 +397,7 @@ static void Lith_World(void)
    
    // Map init.
    world.pauseinmenus = ACS_GetCVar("lith_sv_pauseinmenus");
+   world.bossspawned  = false;
    
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
@@ -407,6 +428,8 @@ static void Lith_World(void)
    // World-static init.
    if(ACS_Timer() <= 2)
    {
+      SpawnBoss();
+      
       // Payout, which is not done on the first map start.
       if(!firstmap)
          Lith_DoPayout();
@@ -426,22 +449,6 @@ static void Lith_World(void)
    
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
-   
-   // Spawn bosses.
-   world.bossspawned = false;
-   
-   ACS_Delay(1); // Delay another tic for monster spawners.
-   
-   Lith_ForPlayer()
-   {
-      if(p->active)
-      {
-         extern void Lith_SpawnBosses(score_t sum);
-         
-         Lith_SpawnBosses(p->scoresum);
-         break;
-      }
-   }
    
    firstmap = false;
    

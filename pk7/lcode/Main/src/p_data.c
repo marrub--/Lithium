@@ -214,7 +214,8 @@ void Lith_ResetPlayer(player_t *p)
    
    if(ACS_GetCVar("__lith_debug_on"))
    {
-      p->score = 0xFFFFFFFFFFFFFFFFll;
+      if(!ACS_GetCVar("__lith_debug_noscore"))
+         p->score = 0xFFFFFFFFFFFFFFFFll;
       
       for(int i = weapon_min; i < weapon_max; i++)
          if(weaponinfo[i].class != null)

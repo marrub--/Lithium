@@ -67,10 +67,23 @@ server           float lith_sv_scoremul      = 2.0;
 server           bool  lith_sv_seriousmode   = false;
 server           bool  lith_sv_scoregolf     = false;
 
+// Bosses
+server int lith_sv_boss1p1_scr = 1000000;
+server int lith_sv_boss1p2_scr = 4000000;
+
+server int lith_sv_boss2p1_scr = 8000000;
+server int lith_sv_boss2p2_scr = 1600000;
+server int lith_sv_boss2p3_scr = 32000000;
+
+server int lith_sv_boss3p1_scr = 64000000;
+server int lith_sv_boss3p2_scr = 128000000;
+server int lith_sv_boss3p3_scr = 256000000;
+
 // Debugging
 server noarchive bool   __lith_debug_on   = false;
 server noarchive bool   __lith_debug_save = false;
 server noarchive bool   __lith_debug_noupgrades = false;
+server noarchive bool   __lith_debug_noscore = false;
 server noarchive string __lith_debug_upgrade;
 
 // EOF

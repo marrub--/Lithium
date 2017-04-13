@@ -179,6 +179,8 @@ void Lith_PhantomDeath(int num, int phase)
    #define PhaseR(num, phasenum, reward) \
       case phasenum: \
       world.boss##num##p##phasenum = true; \
+      if(ACS_GetCVar("__lith_debug_on")) \
+         Log("Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
       ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
       break;
    
@@ -258,6 +260,9 @@ void Lith_SpawnBoss(int num, int phase)
    
    ACS_SetUserVariable(bosstid, "user_phase", phase);
    
+   if(ACS_GetCVar("__lith_debug_on"))
+      Log("Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
+   
    switch(phase)
    {
    case 2:
@@ -292,6 +297,8 @@ void Lith_SpawnBosses(score_t sum)
       int tid; \
       ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID()); \
       ACS_SetActorState(tid, "Boss" #num "_" #phase); \
+      if(ACS_GetCVar("__lith_debug_on")) \
+         Log("Lith_SpawnBosses: Spawning boss " #num " phase " #phase); \
       if(firstboss) \
       { \
          firstboss = false; \
@@ -300,14 +307,14 @@ void Lith_SpawnBosses(score_t sum)
       } \
    }
    
-   else if(world.boss3p2 && sum > 128000000) SpawnBoss(3, 3)
-   else if(world.boss3p1 && sum > 64000000)  SpawnBoss(3, 2)
-   else if(world.boss2p3 && sum > 32000000)  SpawnBoss(3, 1)
-   else if(world.boss2p2 && sum > 16000000)  SpawnBoss(2, 3)
-   else if(world.boss2p1 && sum > 8000000)   SpawnBoss(2, 2)
-   else if(world.boss1p2 && sum > 4000000)   SpawnBoss(2, 1)
-   else if(world.boss1p1 && sum > 2000000)   SpawnBoss(1, 2)
-   else if(                 sum > 1000000)   SpawnBoss(1, 1)
+   else if( world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3)
+   else if( world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2)
+   else if( world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1)
+   else if( world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3)
+   else if( world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2)
+   else if( world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1)
+   else if( world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2)
+   else if(!world.boss1p1 && sum > world.boss1p1scr) SpawnBoss(1, 1)
    
    #undef SpawnBoss
 }

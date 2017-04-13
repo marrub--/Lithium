@@ -68,6 +68,17 @@ typedef struct worldinfo_s
    bool boss3p1, boss3p2, boss3p3;
    bool bossspawned;
    
+   property boss1p1scr {get: ACS_GetCVar("lith_sv_boss1p1_scr")}
+   property boss1p2scr {get: ACS_GetCVar("lith_sv_boss1p2_scr")}
+   
+   property boss2p1scr {get: ACS_GetCVar("lith_sv_boss2p1_scr")}
+   property boss2p2scr {get: ACS_GetCVar("lith_sv_boss2p2_scr")}
+   property boss2p3scr {get: ACS_GetCVar("lith_sv_boss2p3_scr")}
+   
+   property boss3p1scr {get: ACS_GetCVar("lith_sv_boss3p1_scr")}
+   property boss3p2scr {get: ACS_GetCVar("lith_sv_boss3p2_scr")}
+   property boss3p3scr {get: ACS_GetCVar("lith_sv_boss3p3_scr")}
+   
    // CBI global information
    struct
    {
