@@ -289,9 +289,6 @@ void Lith_SpawnBosses(score_t sum)
 {
    static bool firstboss = true;
    
-   // bosses are ded
-   if(world.boss3p3) return;
-   
    #define SpawnBoss(num, phase) \
    { \
       int tid; \
@@ -307,14 +304,14 @@ void Lith_SpawnBosses(score_t sum)
       } \
    }
    
-   else if( world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3)
-   else if( world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2)
-   else if( world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1)
-   else if( world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3)
-   else if( world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2)
-   else if( world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1)
-   else if( world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2)
-   else if(!world.boss1p1 && sum > world.boss1p1scr) SpawnBoss(1, 1)
+        if(!world.boss1p1 && sum > world.boss1p1scr) SpawnBoss(1, 1)
+   else if(!world.boss1p2 && sum > world.boss1p2scr) SpawnBoss(1, 2)
+   else if(!world.boss2p1 && sum > world.boss2p1scr) SpawnBoss(2, 1)
+   else if(!world.boss2p2 && sum > world.boss2p2scr) SpawnBoss(2, 2)
+   else if(!world.boss2p3 && sum > world.boss2p3scr) SpawnBoss(2, 3)
+   else if(!world.boss3p1 && sum > world.boss3p1scr) SpawnBoss(3, 1)
+   else if(!world.boss3p2 && sum > world.boss3p2scr) SpawnBoss(3, 2)
+   else if(!world.boss3p3 && sum > world.boss3p3scr) SpawnBoss(3, 3)
    
    #undef SpawnBoss
 }
