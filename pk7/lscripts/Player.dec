@@ -51,7 +51,11 @@ actor Lith_Player : DoomPlayer
    }
 }
 
-actor Lith_RA_Hax : PowerProtection {Powerup.Duration 0x7FFFFFFF}
+actor Lith_RA_Hax : PowerProtection
+{
+   Powerup.Duration 0x7FFFFFFF
+   ActiveSound "player/rarmor/damage"
+}
 
 actor Lith_RA_Bullets1   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.3 DamageFactor "Bullet", 0.3}
 actor Lith_RA_Energy1    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.3 DamageFactor "Railgun", 0.3 DamageFactor "Electric", 0.3 DamageFactor "Plasma", 0.3}

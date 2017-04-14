@@ -40,7 +40,8 @@ $playersound player male *land    lsounds/Player/Land.wav     // Hexen
 //
 // R. Armor
 //
-player/rarmor/mode lsounds/Player/RArmor/ChangeMode.flac // Halo 3
+player/rarmor/mode   lsounds/Player/RArmor/ChangeMode.flac // Halo 3
+player/rarmor/damage lsounds/Player/RArmor/Damage.flac     // Touhou 13
 
 //
 // CBI
