@@ -304,14 +304,17 @@ void Lith_SpawnBosses(score_t sum)
       } \
    }
    
-        if(!world.boss1p1 && sum > world.boss1p1scr) SpawnBoss(1, 1)
-   else if(!world.boss1p2 && sum > world.boss1p2scr) SpawnBoss(1, 2)
-   else if(!world.boss2p1 && sum > world.boss2p1scr) SpawnBoss(2, 1)
-   else if(!world.boss2p2 && sum > world.boss2p2scr) SpawnBoss(2, 2)
-   else if(!world.boss2p3 && sum > world.boss2p3scr) SpawnBoss(2, 3)
-   else if(!world.boss3p1 && sum > world.boss3p1scr) SpawnBoss(3, 1)
-   else if(!world.boss3p2 && sum > world.boss3p2scr) SpawnBoss(3, 2)
-   else if(!world.boss3p3 && sum > world.boss3p3scr) SpawnBoss(3, 3)
+   // WHY ARE CONDITIONS SO HARD IT TOOK ME 5 TRIES TO GET THIS RIGHT
+   // AAAAGH
+   
+        if(!world.boss1p1 &&                  sum > world.boss1p1scr) SpawnBoss(1, 1)
+   else if(!world.boss1p2 && world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2)
+   else if(!world.boss2p1 && world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1)
+   else if(!world.boss2p2 && world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2)
+   else if(!world.boss2p3 && world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3)
+   else if(!world.boss3p1 && world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1)
+   else if(!world.boss3p2 && world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2)
+   else if(!world.boss3p3 && world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3)
    
    #undef SpawnBoss
 }
