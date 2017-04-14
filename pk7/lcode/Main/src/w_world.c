@@ -176,6 +176,15 @@ void Lith_CBIItemWasSpawned(int num)
    upgradesspawned[upgradesspawnediter++] = num;
 }
 
+//
+// Lith_GSInitIsDone
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_GSInitIsDone()
+{
+   return Lith_GetWorldData(wdata_gsinit);
+}
+
 
 //----------------------------------------------------------------------------
 // Static Functions
