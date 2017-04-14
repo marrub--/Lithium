@@ -58,6 +58,13 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
 
 static upgradeinfo_t extraupgradeinfo[UPGR_EXTRA_NUM];
 
+static __str const upgrcateg[UC_MAX] = {
+   [UC_Body] = "\CnBody",
+   [UC_Weap] = "\CaWeapon",
+   [UC_Extr] = "\CfExtra",
+   [UC_Down] = "\CtDowngrade"
+};
+
 //static int numextraupgradecallbacks;
 //static upgrade_cb_register_t extraupgradecallbacks;
 
@@ -396,21 +403,43 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
    return true;
 }
 
+
+//----------------------------------------------------------------------------
+// GUI
 //
-// Lith_CBITab_Upgrades
+
 //
-void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
+// GUIUpgradesList
+//
+static void GUIUpgradesList(gui_state_t *g, player_t *p)
 {
-   static __str const upgrcateg[UC_MAX] = {
-      [UC_Body] = "\CnBody",
-      [UC_Weap] = "\CaWeapon",
-      [UC_Extr] = "\CfExtra",
-      [UC_Down] = "\CtDowngrade"
-   };
+   if(Lith_GUI_Button(g, .x = 88, 27, .preset = &btnprev))
+      if(g->st[st_upgrfilter].i-- <= 0)
+         g->st[st_upgrfilter].i = UC_MAX;
    
-   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 30, btnlist.w, 192, btnlist.h * (UPGR_MAX + UC_MAX));
+   if(Lith_GUI_Button(g, .x = 88 + btnprev.w, 27, .preset = &btnnext))
+      if(g->st[st_upgrfilter].i++ >= UC_MAX)
+         g->st[st_upgrfilter].i = 0;
    
+   int numbtns = UPGR_MAX + UC_MAX;
+   int filter  = g->st[st_upgrfilter].i - 1;
+   
+   if(filter != -1)
    {
+      numbtns = 0;
+      for(int i = 0; i < UPGR_MAX; i++)
+         if(p->upgrades[i].info->category == filter)
+            numbtns++;
+      
+      HudMessageF("CBIFONT", "Filter: %S", upgrcateg[filter]);
+   }
+   else
+      HudMessageF("CBIFONT", "Filter: \CjAll");
+   
+   HudMessagePlain(g->hid--, 15.1, 28.1, TICSECOND);
+   
+   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 38, btnlist.w, 184, btnlist.h * numbtns);
+   
    int curcategory = UC_MAX;
    int y = 0;
    
@@ -424,13 +453,21 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       {
          curcategory = upgr->info->category;
          changed = true;
-         y += btnlist.h;
+         
+         if(filter == -1)
+            y += btnlist.h;
+      }
+      
+      if(filter != -1 && curcategory != filter)
+      {
+         y -= btnlist.h;
+         continue;
       }
       
       if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, btnlist.h))
          continue;
       
-      if(changed)
+      if(changed && filter == -1)
       {
          HudMessageF("CBIFONT", "%S", upgrcateg[curcategory]);
          HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - btnlist.h) + 1.1, TICSECOND);
@@ -461,20 +498,44 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
             DrawSpritePlain(StrParam("lgfx/UI/Group%i.png", i + 1), g->hid--,
                g->ox + btnlist.w + 0.2, g->oy + y + 1.1, TICSECOND);
    }
-   }
    
    Lith_GUI_ScrollEnd(g, st_upgrscr);
+}
+
+//
+// GUIUpgradeRequirements
+//
+static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
+{
+   int y = 0;
    
-   int sel = g->st[st_upgrsel].i;
-   upgrade_t *upgr = &p->upgrades[sel];
-   
-   if(g->st[st_upgrselold].i != g->st[st_upgrsel].i)
-   {
-      Lith_GUI_TypeOn(g, st_upgrtypeon, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
-      g->st[st_upgrselold].i = g->st[st_upgrsel].i;
+   #define Req(name) \
+   { \
+      HudMessageF("CBIFONT", "\CgRequires " name "."); \
+      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND); \
+      y -= 10; \
    }
    
+   if(CheckRequires_AI)  Req("Armor Interface")
+   if(CheckRequires_WMD) Req("Weapon Modification Device")
+   if(CheckRequires_WRD) Req("Weapon Refactoring Device")
+   if(CheckRequires_RDI) Req("Reality Distortion Interface")
+   if(CheckRequires_RA)  Req("Reactive Armor")
+   
+   #undef Req
+}
+
+//
+// GUIUpgradeDescription
+//
+static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
+{
+   ACS_SetHudClipRect(111, 30, 190, 170, 184);
+   
+   // Cost
    __str mark;
+   __str cost;
+   
    switch(upgr->info->key)
    {
    case UPGR_lolsords:   mark = "\Cjfolds"; break;
@@ -482,19 +543,17 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
    default:              mark = "\Cnscr";   break;
    }
    
-   __str cost = "Free";
-   
-   if(upgr->info->cost)
-      cost = StrParam("%S%S", Lith_ScoreSep(Lith_ShopGetCost(p, &upgr->info->shopdef)), mark);
-   
-   ACS_SetHudClipRect(111, 30, 190, 170, 184);
+   if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(Lith_ShopGetCost(p, &upgr->info->shopdef)), mark);
+   else                 cost = "Free";
    
    HudMessageF("CBIFONT", "%S", cost);
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
    
+   // Category
    HudMessageF("CBIFONT", "%S", upgrcateg[upgr->info->category]);
    HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
    
+   // Score multiplier
    if(upgr->info->scoreadd != 0)
    {
       char cr, op;
@@ -516,6 +575,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
    }
    
+   // Performance rating
    if(upgr->info->perf)
    {
       char cr = upgr->info->perf + p->cbi.pruse > world.cbi.perf ? 'a' : 'j';
@@ -530,23 +590,35 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
       HudMessagePlain(g->hid--, 300.2, 40.1, TICSECOND);
    }
    
+   // Effect
    HudMessageF("CBIFONT", "Effect: %S", Language("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name));
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 50.1, TICSECOND);
    
+   // Separator
    HudMessageF("CBIFONT", "----------------------------------------------");
    HudMessagePlain(g->hid--, 111.1, 80.1, TICSECOND);
    
+   // Description
+   if(g->st[st_upgrselold].i != g->st[st_upgrsel].i)
+   {
+      Lith_GUI_TypeOn(g, st_upgrtypeon, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+      g->st[st_upgrselold].i = g->st[st_upgrsel].i;
+   }
+   
    gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_upgrtypeon);
    
-   if(upgr->info->key != UPGR_UNCEUNCE)
-      HudMessageF        ("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-   else
-      HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-   
+   if(upgr->info->key != UPGR_UNCEUNCE) HudMessageF        ("CBIFONT", "%.*S", typeon->pos, typeon->txt);
+   else                                 HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
    HudMessagePlain(g->hid--, 111.1, 90.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
-   
+}
+
+//
+// GUIUpgradeButtons
+//
+static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
+{
    if(Lith_GUI_Button(g, "Buy", 111, 205, !Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
    
@@ -564,25 +636,20 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
          p->saveData();
       }
    }
+}
+
+//
+// Lith_CBITab_Upgrades
+//
+void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
+{
+   GUIUpgradesList(g, p);
    
-   {
-   int yofs = 0;
+   upgrade_t *upgr = &p->upgrades[g->st[st_upgrsel].i];
    
-   #define Req(name) \
-   { \
-      HudMessageF("CBIFONT", "\CgRequires " name "."); \
-      HudMessagePlain(g->hid--, 111.1, 200 + yofs + 0.2, TICSECOND); \
-      yofs -= 10; \
-   }
-   
-   if(CheckRequires_AI)  Req("Armor Interface")
-   if(CheckRequires_WMD) Req("Weapon Modification Device")
-   if(CheckRequires_WRD) Req("Weapon Refactoring Device")
-   if(CheckRequires_RDI) Req("Reality Distortion Interface")
-   if(CheckRequires_RA)  Req("Reactive Armor")
-   
-   #undef Req
-   }
+   GUIUpgradeDescription (g, p, upgr);
+   GUIUpgradeButtons     (g, p, upgr);
+   GUIUpgradeRequirements(g, p, upgr);
 }
 
 // EOF

@@ -38,6 +38,7 @@ enum
    st_upgrselold,
    st_upgrscr,
    st_upgrtypeon,
+   st_upgrfilter,
    st_shopsel,
    st_shopscr,
    st_bipscr,
