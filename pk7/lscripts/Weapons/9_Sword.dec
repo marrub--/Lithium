@@ -22,7 +22,7 @@ actor Lith_SwordCharge : Inventory
 
 actor Lith_Sword : Lith_Weapon
 {
-   Tag "sord"
+   Tag "$LITH_TXT_INFO_SHORT_Sword"
    Weapon.Kickback 100
    Weapon.SlotNumber 1
    

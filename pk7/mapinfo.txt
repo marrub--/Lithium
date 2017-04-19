@@ -4,7 +4,7 @@
 
 gameinfo
 {
-   PlayerClasses = "Lith_Player"
+   PlayerClasses = "Lith_MarinePlayer", "Lith_MagePlayer"
    DimColor = "gray"
    DimAmount = 0.1
    QuitSound = "misc/quitsound"

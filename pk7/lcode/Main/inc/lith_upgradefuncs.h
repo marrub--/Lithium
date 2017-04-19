@@ -3,78 +3,85 @@
 #endif
 
 // Body Upgrades -------------------------------------------------------------
-   Case(HeadsUpDisp)
-      R(HeadsUpDisp)
+Case(HeadsUpDisp)
+   A(HeadsUpDisp)
+   D(HeadsUpDisp)
+   R(HeadsUpDisp)
 
-   Case(JetBooster)
-      A(JetBooster)
-      U(JetBooster)
-      R(JetBooster)
+Case(HeadsUpDis2)
+   A(HeadsUpDis2)
+   D(HeadsUpDis2)
+   R(HeadsUpDis2)
 
-   Case(ReflexWetw)
-      A(ReflexWetw)
-      D(ReflexWetw)
-      U(ReflexWetw)
-      R(ReflexWetw)
+Case(JetBooster)
+   A(JetBooster)
+   U(JetBooster)
+   R(JetBooster)
 
-   Case(Zoom)
-      D(Zoom)
-      U(Zoom)
-      R(Zoom)
+Case(ReflexWetw)
+   A(ReflexWetw)
+   D(ReflexWetw)
+   U(ReflexWetw)
+   R(ReflexWetw)
 
-   Case(CyberLegs)
-      A(CyberLegs)
-      D(CyberLegs)
-      U(CyberLegs)
+Case(Zoom)
+   D(Zoom)
+   U(Zoom)
+   R(Zoom)
 
-   Case(ReactArmor)
-      D(ReactArmor)
-      R(ReactArmor)
+Case(CyberLegs)
+   A(CyberLegs)
+   D(CyberLegs)
+   U(CyberLegs)
 
-   Case(DefenseNuke)
-      E(DefenseNuke)
+Case(ReactArmor)
+   D(ReactArmor)
+   R(ReactArmor)
 
-   Case(Adrenaline)
-      A(Adrenaline)
-      U(Adrenaline)
+Case(DefenseNuke)
+   E(DefenseNuke)
 
-   Case(VitalScan)
-      U(VitalScan)
-      R(VitalScan)
+Case(Adrenaline)
+   A(Adrenaline)
+   U(Adrenaline)
+
+Case(VitalScan)
+   U(VitalScan)
+   R(VitalScan)
 
 // Weapon Upgrades -----------------------------------------------------------
-   Case(RifleModes)
-      D(RifleModes)
-      R(RifleModes)
+Case(RifleModes)
+   D(RifleModes)
+   R(RifleModes)
 
-   Case(HomingRPG)
-      U(HomingRPG)
+Case(HomingRPG)
+   U(HomingRPG)
 
-   Case(PunctCannon)
-      D(PunctCannon)
+Case(PunctCannon)
+   D(PunctCannon)
 
 // Extra Upgrades ------------------------------------------------------------
-   Case(7777777)
-      A(7777777)
-      D(7777777)
-      U(7777777)
+Case(7777777)
+   A(7777777)
+   D(7777777)
+   U(7777777)
 
-   Case(lolsords)
-      A(lolsords)
-      D(lolsords)
-      U(lolsords)
+Case(lolsords)
+   A(lolsords)
+   D(lolsords)
+   U(lolsords)
 
 // Downgrades ----------------------------------------------------------------
-   Case(Implying)
-      U(Implying)
+Case(Implying)
+   U(Implying)
 
-   Case(UNCEUNCE)
-      A(UNCEUNCE)
-      D(UNCEUNCE)
-      U(UNCEUNCE)
+Case(UNCEUNCE)
+   A(UNCEUNCE)
+   D(UNCEUNCE)
+   U(UNCEUNCE)
 
-   Case(InstaDeath)
-      U(InstaDeath)
+Case(InstaDeath)
+   U(InstaDeath)
 
 //----------------------------------------------------------------------------
 

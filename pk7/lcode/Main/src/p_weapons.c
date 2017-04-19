@@ -11,23 +11,29 @@
 //
 
 weaponinfo_t const weaponinfo[weapon_max] = {
-// {S, "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
-   {0, null,              "MMMMHMHMMMHMMM"},
-   {1, "Fist",            "MMMMHMHMMMHMMM"},
-   {1, "ChargeFist",      "weapons/cfist/pickup"},
-   {2, "Pistol",          "weapons/pistol/pickup",   AT_Mag,  "Lith_PistolShotsFired"},
-   {2, "Revolver",        "weapons/revolver/pickup", AT_Mag,  "Lith_RevolverShotsFired"},
-   {3, "Shotgun",         "weapons/shotgun/pickup"},
-   {3, "LazShotgun",      "weapons/lshotgun/pickup"},
-   {3, "SuperShotgun",    "weapons/ssg/pickup",      AT_Ammo, "Lith_ShellAmmo"},
-   {4, "CombatRifle",     "weapons/rifle/pickup",    AT_Mag,  "Lith_RifleShotsFired"},
-   {4, "SniperRifle",     "weapons/sniper/pickup",   AT_Mag,  "Lith_SniperShotsFired"},
-   {5, "GrenadeLauncher", "weapons/rocket/pickup",   AT_Ammo, "Lith_RocketAmmo"},
-   {5, "MissileLauncher", "weapons/missile/pickup",  AT_Ammo, "Lith_RocketAmmo"},
-   {6, "PlasmaRifle",     "weapons/plasma/pickup",   AT_Ammo, "Lith_PlasmaAmmo"},
-   {6, "PlasmaDiffuser",  "weapons/plasdiff/pickup", AT_Ammo, "Lith_PlasmaAmmo"},
-   {7, "BFG9000",         "weapons/cannon/pickup",   AT_Ammo, "Lith_CannonAmmo"},
-   {0, "Gameboy",         "MMMMHMHMMMHMMM"},
+// {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
+   {0, pclass_any,       null,              "MMMMHMHMMMHMMM"},
+   
+   // Marine Weapons
+   {1, pclass_marine,    "Fist",            "MMMMHMHMMMHMMM"},
+   {1, pclass_marine,    "ChargeFist",      "weapons/cfist/pickup"},
+   {2, pclass_marine,    "Pistol",          "weapons/pistol/pickup",    AT_Mag,  "Lith_PistolShotsFired"},
+   {2, pclass_marine,    "Revolver",        "weapons/revolver/pickup",  AT_Mag,  "Lith_RevolverShotsFired"},
+   {3, pclass_marine,    "Shotgun",         "weapons/shotgun/pickup"},
+   {3, pclass_marine,    "LazShotgun",      "weapons/lshotgun/pickup"},
+   {3, pclass_marine,    "SuperShotgun",    "weapons/ssg/pickup",       AT_Ammo, "Lith_ShellAmmo"},
+   {4, pclass_marine,    "CombatRifle",     "weapons/rifle/pickup",     AT_Mag,  "Lith_RifleShotsFired"},
+   {4, pclass_marine,    "SniperRifle",     "weapons/sniper/pickup",    AT_Mag,  "Lith_SniperShotsFired"},
+   {5, pclass_marine,    "GrenadeLauncher", "weapons/rocket/pickup",    AT_Ammo, "Lith_RocketAmmo"},
+   {5, pclass_marine,    "MissileLauncher", "weapons/missile/pickup",   AT_Ammo, "Lith_RocketAmmo"},
+   {6, pclass_marine,    "PlasmaRifle",     "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
+   {6, pclass_marine,    "PlasmaDiffuser",  "weapons/plasdiff/pickup",  AT_Ammo, "Lith_PlasmaAmmo"},
+   {7, pclass_marine,    "BFG9000",         "weapons/cannon/pickup",    AT_Ammo, "Lith_CannonAmmo"},
+   
+   // Cyber-Mage Weapons
+   {1, pclass_cybermage, "CFist",           "MMMMHMHMMMHMMM"},
+   {2, pclass_cybermage, "CRevolver",       "weapons/crevolver/pickup", AT_Mag,  "Lith_CRevolverShotsFired"},
+   {3, pclass_cybermage, "Delear",          "weapons/delear/pickup",    AT_Ammo, "Lith_DelearAmmo"},
 };
 
 
@@ -55,9 +61,6 @@ static void GiveWeaponItem(int parm)
 //
 static void Lith_PickupScore(player_t *p, int parm)
 {
-   if(ACS_GetCVar("sv_weaponstay"))
-      return;
-   
    score_t score = 11100ll * weaponinfo[parm].slot;
    
    GiveWeaponItem(parm);
@@ -76,19 +79,58 @@ static void Lith_PickupScore(player_t *p, int parm)
 // Lith_WeaponPickup
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_WeaponPickup(int parm)
+bool Lith_WeaponPickup(int name)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
    
+   bool weaponstay = ACS_GetCVar("sv_weaponstay");
    player_t *p = Lith_LocalPlayer;
+   int parm = weapon_unknown;
+   
+   switch(p->pclass)
+   {
+   #define Case(name, set) case name: parm = set; break
+   case pclass_marine:
+      switch(name)
+      {
+      Case(wepnam_fist,           weapon_fist);
+      Case(wepnam_chainsaw,       weapon_cfist);
+      Case(wepnam_pistol,         weapon_pistol);
+      Case(wepnam_shotgun,        weapon_shotgun);
+      Case(wepnam_supershotgun,   weapon_ssg);
+      Case(wepnam_chaingun,       weapon_rifle);
+      Case(wepnam_rocketlauncher, weapon_launcher);
+      Case(wepnam_plasmarifle,    weapon_plasma);
+      Case(wepnam_bfg9000,        weapon_bfg);
+      }
+      break;
+   
+   case pclass_cybermage:
+      switch(name)
+      {
+      Case(wepnam_fist,           weapon_c_fist);
+      Case(wepnam_chainsaw,       weapon_cfist);
+      Case(wepnam_pistol,         weapon_c_mateba);
+      Case(wepnam_shotgun,        weapon_c_delear);
+      Case(wepnam_supershotgun,   weapon_unknown);
+      Case(wepnam_chaingun,       weapon_unknown);
+      Case(wepnam_rocketlauncher, weapon_unknown);
+      Case(wepnam_plasmarifle,    weapon_unknown);
+      Case(wepnam_bfg9000,        weapon_unknown);
+      }
+      break;
+   #undef Case
+   }
    
    if(!ValidateWeapon(parm))
-      return;
+      return true;
    
    if(HasWeapon(p, parm))
    {
-      Lith_PickupScore(p, parm);
-      return;
+      if(!weaponstay)
+         Lith_PickupScore(p, parm);
+      
+      return !weaponstay;
    }
    
    weaponinfo_t const *info = &weaponinfo[parm];
@@ -106,6 +148,8 @@ void Lith_WeaponPickup(int parm)
    Lith_PickupMessage(p, info);
    
    ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
+   
+   return !weaponstay;
 }
 
 //

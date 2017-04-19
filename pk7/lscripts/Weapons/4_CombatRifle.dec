@@ -27,17 +27,7 @@ actor Lith_RifleBurstIter : Inventory
    Inventory.MaxAmount 5
 }
 
-actor Lith_CombatRiflePickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_rifle)
-      stop
-   }
-}
-
-actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
+actor Lith_CombatRifle : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_CombatRifle"
    Weapon.UpSound "weapons/rifle/draw"
@@ -48,7 +38,7 @@ actor Lith_CombatRifle : Lith_Weapon replaces Chaingun
    {
    Spawn:
       TNT1 A 0
-      RIFL A 0 A_SpawnItemEx("Lith_CombatRiflePickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      TNT1 A 0 A_SpawnItemEx("Lith_ChaingunPickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
    Ready:

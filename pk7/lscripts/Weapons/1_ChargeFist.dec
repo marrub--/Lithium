@@ -25,17 +25,7 @@ actor Lith_ChargeFistPuff
    }
 }
 
-actor Lith_ChargeFistPickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_cfist)
-      stop
-   }
-}
-
-actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
+actor Lith_ChargeFist : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_ChargeFist"
    Weapon.Kickback 100
@@ -51,7 +41,7 @@ actor Lith_ChargeFist : Lith_Weapon replaces Chainsaw
    {
    Spawn:
       TNT1 A 0
-      CFIS Z 0 A_SpawnItemEx("Lith_ChargeFistPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      TNT1 A 0 A_SpawnItemEx("Lith_ChainsawPickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
    Ready:

@@ -1,0 +1,209 @@
+actor Lith_DelearDotTrail
+{
+   Scale 0.4
+   RenderStyle "Add"
+   
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      BLLT J 0 bright A_SetScale(scalex * 0.8)
+      BLLT J 1 bright A_FadeOut(0.1)
+      loop
+   }
+}
+
+actor Lith_DelearSprite : Lith_DelearDotTrail
+{
+   states
+   {
+   Spawn:
+      BLLT J 2 bright
+      stop
+   }
+}
+
+actor Lith_DelearExplosion
+{
+   RenderStyle "Add"
+   Scale 0.35
+   
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      MICX ABCDEFG 1 bright
+      stop
+   }
+}
+
+actor Lith_DelearDot : FastProjectile
+{
+   Speed 60
+   Radius 4
+   Height 2
+   Damage (25 * random(1, 2))
+   DamageType "Lith_Magic"
+   MissileType "Lith_DelearDotTrail"
+   MissileHeight 8
+   
+   ClearFlags
+   Projectile
+   
+   states
+   {
+   Spawn:
+      TNT1 A 1
+      wait
+   Death:
+      TNT1 A 0 A_SpawnItemEx("Lith_DelearExplosion")
+      stop
+   }
+}
+
+actor Lith_DelearShotsFired : Inventory
+{
+   Inventory.MaxAmount 16
+}
+
+actor Lith_Delear : Lith_CWeapon
+{
+   Tag "$LITH_TXT_INFO_SHORT_Delear"
+   Weapon.SlotNumber 3
+   Weapon.SlotPriority 1
+   Weapon.BobStyle "Normal"
+   Weapon.BobSpeed 0.3
+   Weapon.BobRangeX 0.8
+   Weapon.BobRangeY 0.5
+   Weapon.UpSound "weapons/delear/draw"
+   
+   -WEAPON.NOAUTOFIRE
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SpawnItemEx("Lith_ShotgunPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      stop
+   
+   Ready:
+      TNT1 A 0 A_JumpIfInventory("Lith_DelearShotsFired", 16, "Ready1")
+      DLRG P 0 A_JumpIfInventory("Lith_DelearShotsFired", 15, "Ready1")
+      DLRG O 0 A_JumpIfInventory("Lith_DelearShotsFired", 14, "Ready1")
+      DLRG N 0 A_JumpIfInventory("Lith_DelearShotsFired", 13, "Ready1")
+      DLRG M 0 A_JumpIfInventory("Lith_DelearShotsFired", 12, "Ready1")
+      DLRG L 0 A_JumpIfInventory("Lith_DelearShotsFired", 11, "Ready1")
+      DLRG K 0 A_JumpIfInventory("Lith_DelearShotsFired", 10, "Ready1")
+      DLRG J 0 A_JumpIfInventory("Lith_DelearShotsFired",  9, "Ready1")
+      DLRG I 0 A_JumpIfInventory("Lith_DelearShotsFired",  8, "Ready1")
+      DLRG H 0 A_JumpIfInventory("Lith_DelearShotsFired",  7, "Ready1")
+      DLRG G 0 A_JumpIfInventory("Lith_DelearShotsFired",  6, "Ready1")
+      DLRG F 0 A_JumpIfInventory("Lith_DelearShotsFired",  5, "Ready1")
+      DLRG E 0 A_JumpIfInventory("Lith_DelearShotsFired",  4, "Ready1")
+      DLRG D 0 A_JumpIfInventory("Lith_DelearShotsFired",  3, "Ready1")
+      DLRG C 0 A_JumpIfInventory("Lith_DelearShotsFired",  2, "Ready1")
+      DLRG B 0 A_JumpIfInventory("Lith_DelearShotsFired",  1, "Ready1")
+      DLRG A 0
+      
+   Ready1:
+      "####" "#" 1 bright A_WeaponReady
+      loop
+   
+   Deselect:
+      TNT1 AAA 0 A_Lower
+      TNT1 A 1
+      loop
+   Select:
+      TNT1 AAA 0 A_Raise
+      TNT1 A 1
+      loop
+   
+   Fire:
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 0, "Reload")
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 1, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -8,  18)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 2, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -12, 16)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 3, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -16, 14)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 4, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -20, 12)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 5, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -8,  8)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 6, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -12, 6)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 7, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -16, 4)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 8, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, -20, 2)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 9, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 8,  18)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 10, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 12, 16)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 11, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 16, 14)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 12, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 20, 12)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 13, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 8,  8)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 14, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 12, 6)
+      goto FireDone
+      "####" "#" 0 A_JumpIfInventory("Lith_DelearShotsFired", 15, 2)
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 16, 4)
+      goto FireDone
+      "####" "#" 0 A_FireCustomMissile("Lith_DelearDot", 0, false, 20, 2)
+   FireDone:
+      "####" "#" 0 A_GunFlash("DummyFlash")
+      "####" "#" 0 A_GiveInventory("Lith_DelearShotsFired", 1)
+      "####" "#" 0 A_PlaySound("weapons/delear/fire", CHAN_WEAPON)
+      "####" "#" 3 bright
+      goto Ready
+   
+   Reload:
+      TNT1 A 0 A_JumpIfInventory("Lith_DelearShotsFired", 1, 1)
+      goto Ready
+      TNT1 A 0 A_PlaySound("weapons/delear/open", 7)
+      TNT1 A 1 offset(0, 33)
+      TNT1 A 1 offset(0, 34)
+      TNT1 A 1 offset(0, 35)
+      TNT1 A 1 offset(-1, 37)
+      TNT1 A 1 offset(-4, 40)
+      TNT1 A 1 offset(-7, 42)
+      TNT1 A 1 offset(-9, 48)
+      TNT1 A 1 offset(-11, 50)
+      TNT1 A 1 offset(-12, 55)
+      TNT1 A 1 offset(-13, 64)
+      TNT1 A 1 offset(-13, 69)
+      TNT1 A 10
+      TNT1 A 10 A_PlaySound("weapons/delear/charge", 6)
+      TNT1 A 0 A_TakeInventory("Lith_DelearShotsFired", 999)
+      TNT1 A 1 offset(2, 64)
+      TNT1 A 1 offset(2, 55)
+      TNT1 A 1 offset(2, 50)
+      TNT1 A 1 offset(2, 45)
+      TNT1 A 1 offset(1, 40) A_PlaySound("weapons/delear/close", 7)
+      TNT1 A 1 offset(1, 35)
+      TNT1 A 1 offset(1, 33)
+      TNT1 A 1 offset(1, 32)
+      goto Ready
+   }
+}
+
+// EOF
+

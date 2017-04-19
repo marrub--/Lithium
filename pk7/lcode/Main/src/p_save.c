@@ -13,10 +13,10 @@
 [[__call("ScriptS")]]
 static void Lith_Save_agrp(savefile_t *save)
 {
-   bool *any = calloc(UPGR_MAX, sizeof(bool));
+   bool *any = calloc(save->p->upgrmax, sizeof(bool));
    int total = 0;
    
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < save->p->upgrmax; i++)
    {
       for(int j = 0; j < NUMAUTOGROUPS; j++)
          if(save->p->upgrades[i].autogroups[j]) {any[i] = true; break;}
@@ -29,7 +29,7 @@ static void Lith_Save_agrp(savefile_t *save)
       save_autogroup_t *data = calloc(total,  sizeof(save_autogroup_t));
       size_t            size =        total * sizeof(save_autogroup_t);
       
-      for(int i = 0, def = 0; i < UPGR_MAX; i++)
+      for(int i = 0, def = 0; i < save->p->upgrmax; i++)
          if(any[i])
       {
          upgrade_t const *upgr = &save->p->upgrades[i];
@@ -81,7 +81,7 @@ static void Lith_Load_agrp(savefile_t *save, memchunk_t *chunk)
       }
       
       // Unpack groups.
-      for(int i = 0; i < UPGR_MAX; i++)
+      for(int i = 0; i < save->p->upgrmax; i++)
       {
          upgrade_t const *upgr = &save->p->upgrades[i];
          

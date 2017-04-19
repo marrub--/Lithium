@@ -43,6 +43,14 @@
 
 enum
 {
+   pclass_marine,
+   pclass_cybermage,
+   pclass_max,
+   pclass_any = pclass_max,
+};
+
+enum
+{
    ARM_none,
    ARM_bonus,
    ARM_green,
@@ -118,9 +126,11 @@ typedef struct player_extdata_s
    float      discount;
    bip_t      bip;
    upgrades_t upgrades;
+   int        upgrmax;
    loginfo_t  loginfo;
    bool       autobuy[NUMAUTOGROUPS];
    Lth_HashMap upgrademap;
+   bool       hudenabled;
    
    score_t scoreaccum;
    int     scoreaccumtime;
@@ -256,6 +266,7 @@ void Lith_ValidatePlayerTID(struct player_s *p);
 bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 bool Lith_ButtonPressed(struct player_s *p, int bt);
 int Lith_PlayerCurWeaponType(struct player_s *p);
+int Lith_PlayerGetClass(struct player_s *p);
 
 void Lith_PlayerDeltaStats(struct player_s *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player_s *p, int name);
@@ -294,6 +305,7 @@ typedef struct player_s
    property buttonPressed {call: Lith_ButtonPressed(this)}
    property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
    property deliverMail {call: Lith_DeliverMail(this)}
+   property pclass    {get: Lith_PlayerGetClass(this)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

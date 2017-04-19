@@ -17,6 +17,7 @@ enum
 typedef struct weaponinfo_s
 {
    int slot;
+   int pclass;
    __str name;
    __str pickupsound;
    int defammotype;

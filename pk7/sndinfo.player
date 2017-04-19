@@ -1,5 +1,5 @@
 //
-// Player
+// Generic Player
 //
 player/score1      lsounds/Player/Score1.flac              // Self-made
 player/score2      lsounds/Player/Score2.flac              // 〃
@@ -36,6 +36,17 @@ $random player/score {
 $playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
 $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 $playersound player male *land    lsounds/Player/Land.wav     // Hexen
+
+//
+// Cyber-Mage
+//
+$playersound    cybermage male *death   lsounds/Player/Mage/Death.flac
+$playersound    cybermage male *xdeath  lsounds/Player/Mage/XDeath.flac
+$playersound    cybermage male *pain100 lsounds/Player/Mage/PainSmall.flac
+$playersounddup cybermage male *pain75  *pain100
+$playersound    cybermage male *pain50  lsounds/Player/Mage/Pain.flac
+$playersounddup cybermage male *pain25  *pain50
+$playersound    cybermage male *grunt   lsounds/Player/Mage/Grunt.flac
 
 //
 // R. Armor

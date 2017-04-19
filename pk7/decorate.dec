@@ -42,16 +42,20 @@
 #include "lscripts/Items/CBIStuff.dec"
 
 #include "lscripts/Weapons/0_Base.dec"
+#include "lscripts/Weapons/0_Pickups.dec"
 
 #include "lscripts/Weapons/1_Fist.dec"
+#include "lscripts/Weapons/1_CFist.dec"
 #include "lscripts/Weapons/1_ChargeFist.dec"
 
 #include "lscripts/Weapons/2_Pistol.dec"
 #include "lscripts/Weapons/2_Revolver.dec"
+#include "lscripts/Weapons/2_CRevolver.dec"
 
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
 #include "lscripts/Weapons/3_SuperShotgun.dec"
+#include "lscripts/Weapons/3_Delear.dec"
 
 #include "lscripts/Weapons/4_CombatRifle.dec"
 #include "lscripts/Weapons/4_SniperRifle.dec"

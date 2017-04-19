@@ -54,6 +54,16 @@ weapons/revolver/pickup lsounds/Revolver/Pickup.flac // 〃
 weapons/revolver/reload lsounds/Revolver/Reload.flac // Serious Sam: The First Encounter HD
 
 //
+// Mateba
+//
+weapons/crevolver/fire  lsounds/Mateba/Fire.flac  // ???
+weapons/crevolver/open  lsounds/Mateba/Open.flac  // ???
+weapons/crevolver/eject lsounds/Mateba/Eject.flac // Killing Floor
+weapons/crevolver/load  lsounds/Mateba/Load.flac  // 〃
+weapons/crevolver/close lsounds/Mateba/Close.flac // Half-Life 2, Fallout 4
+weapons/crevolver/draw  lsounds/Mateba/Draw.flac  // ???
+
+//
 // Shotgun
 //
 weapons/shotgun/fire    lsounds/Shotgun/FireFull.flac  // Killing Floor, General 6000
@@ -94,6 +104,14 @@ $alias weapons/shotgun/poison/acid weapons/shotgun/gauss/spark
 
 $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
+
+//
+// Delear
+//
+weapons/delear/fire   lsounds/Delear/Fire.flac   // Devil May Cry 3
+weapons/delear/open   lsounds/Delear/Open.flac   // Devil May Cry 3, ???
+weapons/delear/charge lsounds/Delear/Charge.flac // Devil May Cry 3, Deus Ex
+weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
 
 //
 // Super Shotgun

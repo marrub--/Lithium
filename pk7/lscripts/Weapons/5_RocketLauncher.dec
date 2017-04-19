@@ -16,17 +16,7 @@ actor Lith_RocketAltMode : Inventory
    Inventory.MaxAmount 2
 }
 
-actor Lith_GrenadeLauncherPickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_launcher)
-      stop
-   }
-}
-
-actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
+actor Lith_GrenadeLauncher : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_GrenadeLauncher"
    Weapon.UpSound "weapons/rocket/draw"
@@ -43,7 +33,7 @@ actor Lith_GrenadeLauncher : Lith_Weapon replaces RocketLauncher
    {
    Spawn:
       TNT1 A 0
-      LAUN A 0 A_SpawnItemEx("Lith_GrenadeLauncherPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      TNT1 A 0 A_SpawnItemEx("Lith_RocketLauncherPickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
    Ready:

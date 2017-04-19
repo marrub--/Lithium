@@ -65,29 +65,34 @@ void Lith_PlayerInitBIP(player_t *p)
       bip->infogr[categ].free(free);
    
    // This could be done a lot better with an array or something, but fuck it.
-   AddToBIP(bip, BIPC_WEAPONS, "ChargeFist",      Unlocks("KSKK"));
-   AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
-   AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
-   AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
-   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
-   AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpg2",     Unlocks("Shotgun"));
-   AddToBIP(bip, BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
-   AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
-   AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
-   AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
-   AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle", "Semaphore"));
-   AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
-   AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
-   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
-   AddToBIP(bip, BIPC_WEAPONS, "LauncherUpg2",    Unlocks("GrenadeLauncher", "Sym43"));
-   AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpg2",      Unlocks("PlasmaRifle", "Semaphore"));
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaDiffuser",  Unlocks("Sym43", "MDDO", "Semaphore"));
-   AddToBIP(bip, BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
-   AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
-   AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
+   // edit: I now am glad that I didn't make this an array or something.
+   
+   if(p->pclass == pclass_marine)
+   {
+      AddToBIP(bip, BIPC_WEAPONS, "ChargeFist",      Unlocks("KSKK"));
+      AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
+      AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
+      AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
+      AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
+      AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpg2",     Unlocks("Shotgun"));
+      AddToBIP(bip, BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
+      AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
+      AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
+      AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
+      AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle", "Semaphore"));
+      AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
+      AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
+      AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
+      AddToBIP(bip, BIPC_WEAPONS, "LauncherUpg2",    Unlocks("GrenadeLauncher", "Sym43"));
+      AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
+      AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
+      AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
+      AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpg2",      Unlocks("PlasmaRifle", "Semaphore"));
+      AddToBIP(bip, BIPC_WEAPONS, "PlasmaDiffuser",  Unlocks("Sym43", "MDDO", "Semaphore"));
+      AddToBIP(bip, BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
+      AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
+      AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
+   }
    
    AddToBIP(bip, BIPC_ENEMIES, "ZombieMan");
    AddToBIP(bip, BIPC_ENEMIES, "ShotgunGuy");

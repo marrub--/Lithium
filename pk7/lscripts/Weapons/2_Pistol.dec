@@ -50,17 +50,7 @@ actor Lith_PlasmaPistolShot
    }
 }
 
-actor Lith_PistolPickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_pistol)
-      stop
-   }
-}
-
-actor Lith_Pistol : Lith_Weapon replaces Pistol
+actor Lith_Pistol : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Pistol"
    Weapon.SlotNumber 2
@@ -76,7 +66,7 @@ actor Lith_Pistol : Lith_Weapon replaces Pistol
    {
    Spawn:
       TNT1 A 0
-      PIST A 0 A_SpawnItemEx("Lith_PistolPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      TNT1 A 0 A_SpawnItemEx("Lith_PistolPickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
    AltReady:

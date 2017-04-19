@@ -84,5 +84,15 @@ actor Lith_ItemSprite
    }
 }
 
+actor Lith_ItemSpriteMarine : Lith_ItemSprite
+{
+   VisibleToPlayerClass "Lith_MarinePlayer"
+}
+
+actor Lith_ItemSpriteMage : Lith_ItemSprite
+{
+   VisibleToPlayerClass "Lith_MagePlayer"
+}
+
 // EOF
 

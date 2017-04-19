@@ -14,7 +14,7 @@ void Lith_CheckAutoBuy(player_t *p)
    __str name;
    int total = 0;
    
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < p->upgrmax; i++)
       for(int j = 0; j < NUMAUTOGROUPS; j++)
    {
       upgrade_t *upgr = &p->upgrades[i];
@@ -58,7 +58,7 @@ void Lith_KeyBuyAutoGroup(int group)
    player_t *p = Lith_LocalPlayer;
    
    int success = 0, total = 0;
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < p->upgrmax; i++)
       if(!p->upgrades[i].owned && p->upgrades[i].autogroups[group])
       {  total++;
          if(Lith_UpgrBuy(p, &p->upgrades[i], false))
@@ -92,7 +92,7 @@ void Lith_KeyToggleAutoGroup(int group)
    player_t *p = Lith_LocalPlayer;
    
    int total = 0;
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < p->upgrmax; i++)
       if(p->upgrades[i].owned && p->upgrades[i].autogroups[group])
       {  total++;
          p->upgrades[i].toggle(p);}

@@ -33,7 +33,7 @@ actor Lith_DiffPlasma : Lith_PlasmaBolt
    }
 }
 
-actor Lith_PlasmaDiffuser : Lith_Weapon
+actor Lith_PlasmaDiffuser : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_PlasmaDiffuser"
    Weapon.UpSound "weapons/plasdiff/draw"

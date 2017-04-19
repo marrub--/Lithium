@@ -1,7 +1,0 @@
-#include "htic_ammo.dec"
-#include "htic_enemies.dec"
-#include "htic_keys.dec"
-#include "htic_powerups.dec"
-#include "htic_weapons.dec"
-
-// EOF

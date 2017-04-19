@@ -1,4 +1,6 @@
 cameratexture LITHCAM1 320 200
 cameratexture LITHCAM2 480 300
-texture DIVSIGI1 range DIVSIGI23 tics 1
 
+texture DIVSIGI1 range DIVSIGI23 tics 1
+texture LITHMPT1 range LITHMPT4 tics 2
+texture LITHCPT1 range LITHCPT4 tics 2

@@ -59,6 +59,7 @@ enum
    UG_Launcher,
    UG_Plasma,
    UG_BFG,
+   UG_HUD,
    UG_BASE_MAX
 };
 
@@ -120,6 +121,7 @@ typedef struct upgradeinfo_s
 {
    // Public Data
    [[__anonymous]] shopdef_t shopdef;
+   int   pclass;
    int   category;
    int   perf;
    fixed scoreadd;

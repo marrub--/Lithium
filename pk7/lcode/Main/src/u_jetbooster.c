@@ -48,7 +48,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->getUpgr(UPGR_HeadsUpDisp)->active || UserData.charge == CHARGE_MAX) return;
+   if(!p->hudenabled || UserData.charge == CHARGE_MAX) return;
    
    fixed rocket = UserData.charge / (fixed)CHARGE_MAX;
    int max = (hid_jetS - hid_jetE) * rocket;

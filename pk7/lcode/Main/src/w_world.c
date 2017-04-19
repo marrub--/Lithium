@@ -257,7 +257,7 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
       int tid;
       
       // Create a zombie.
-      if(ACS_Spawn("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0))
+      if(ACS_SpawnForced("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0))
       {
          // If it can see the player, then we need to relocate it.
          if(Lith_CheckPlayer1Sight(tid))

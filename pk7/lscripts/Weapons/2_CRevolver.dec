@@ -1,0 +1,84 @@
+actor Lith_CRevolverShotsFired : Inventory
+{
+   Inventory.MaxAmount 12
+}
+
+actor Lith_CRevolver : Lith_CWeapon
+{
+   Tag "$LITH_TXT_INFO_SHORT_CRevolver"
+   Weapon.SlotNumber 2
+   Weapon.SlotPriority 1
+   Weapon.BobSpeed 2.5
+   Weapon.BobRangeX 0.2
+   Weapon.BobRangeY 0.3
+   Weapon.UpSound "weapons/crevolver/draw"
+   
+   +WEAPON.NOAUTOFIRE
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_SpawnItemEx("Lith_PistolPickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      stop
+   
+   Ready:
+      MTBG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+      loop
+   
+   Deselect:
+      MTBG AAA 0 A_Lower
+      MTBG A 1
+      loop
+   Select:
+      MTBG AAA 0 A_Raise
+      MTBG A 1
+      loop
+   
+   Fire:
+      TNT1 A 0 A_JumpIfInventory("Lith_CRevolverShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_CRevolverShotsFired", 1)
+      TNT1 A 0 A_GunFlash("DummyFlash")
+      TNT1 A 0 A_FireBullets(2, 2, -1, 50, "BulletPuff", FBF_NORANDOM)
+      TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)
+      TNT1 A 0 A_PlaySound("weapons/crevolver/fire", CHAN_WEAPON)
+      MTBG B 1 bright offset(0, 50)
+      MTBG C 1 bright offset(0, 46)
+      MTBG A 1 offset(0, 40)
+      MTBG A 1 offset(0, 37)
+      MTBG A 1 offset(0, 34) A_WeaponReady(WRF_NOBOB)
+      MTBG A 1 offset(0, 33) A_WeaponReady(WRF_NOBOB)
+      MTBG A 1 offset(0, 32) A_WeaponReady(WRF_NOBOB)
+      MTBG A 1 A_WeaponReady(WRF_NOBOB)
+      goto Ready
+   
+   Reload:
+      TNT1 A 0 A_JumpIfInventory("Lith_CRevolverShotsFired", 1, 1)
+      goto Ready
+      MTBG A 0 A_PlaySound("weapons/crevolver/open", 7)
+      MTBG A 1 offset(0, 33)
+      MTBG A 1 offset(0, 34)
+      MTBG A 1 offset(0, 35)
+      MTBG A 1 offset(-1, 37)
+      MTBG A 1 offset(-4, 40)
+      MTBG A 1 offset(-7, 42)
+      MTBG A 1 offset(-9, 48)
+      MTBG A 1 offset(-11, 50)
+      MTBG A 1 offset(-12, 55) A_PlaySound("weapons/crevolver/eject", 7)
+      MTBG A 1 offset(-13, 64)
+      MTBG A 1 offset(-13, 69)
+      TNT1 A 10
+      TNT1 A 10 A_PlaySound("weapons/crevolver/load", 7)
+      TNT1 A 0 A_TakeInventory("Lith_CRevolverShotsFired", 999)
+      MTBG A 1 offset(2, 64)
+      MTBG A 1 offset(2, 55)
+      MTBG A 1 offset(2, 50)
+      MTBG A 1 offset(2, 45)
+      MTBG A 1 offset(1, 40) A_PlaySound("weapons/crevolver/close", 7)
+      MTBG A 1 offset(1, 35)
+      MTBG A 1 offset(1, 33)
+      MTBG A 1 offset(1, 32)
+      goto Ready
+   }
+}
+

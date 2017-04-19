@@ -24,6 +24,14 @@ int Lith_PlayerCurWeaponType(player_t *p)
 }
 
 //
+// Lith_PlayerGetClass
+//
+int Lith_PlayerGetClass(player_t *p)
+{
+   return ACS_PlayerClass(p->number);
+}
+
+//
 // Lith_ButtonPressed
 //
 bool Lith_ButtonPressed(player_t *p, int bt)

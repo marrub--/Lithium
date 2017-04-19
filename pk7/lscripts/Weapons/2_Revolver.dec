@@ -3,17 +3,7 @@ actor Lith_RevolverShotsFired : Inventory
    Inventory.MaxAmount 6
 }
 
-actor Lith_RevolverPickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_revolver)
-      stop
-   }
-}
-
-actor Lith_Revolver : Lith_Weapon
+actor Lith_Revolver : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Revolver"
    Weapon.SlotNumber 2
@@ -27,11 +17,6 @@ actor Lith_Revolver : Lith_Weapon
    
    states
    {
-   Spawn:
-      TNT1 A 0
-      REVL A 0 A_SpawnItemEx("Lith_RevolverPickup", 0,0,0, 0,0,0, 0, Lith_PF)
-      stop
-   
    Ready:
       REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
       loop

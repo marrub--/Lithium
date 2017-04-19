@@ -5,12 +5,9 @@ actor Lith_Step : Inventory
 
 actor Lith_Player : DoomPlayer
 {
-   Player.StartItem "Lith_Pistol"
-   Player.StartItem "Lith_Fist"
    Player.SideMove 2, 1
    Player.ForwardMove 2, 1
-   Player.ViewHeight 48
-   Player.AttackZOffset 15
+   Player.AirCapacity 0
    DamageFactor "Lith_PlayerMissile", 0
    Species "Lith_Player"
    
@@ -49,6 +46,31 @@ actor Lith_Player : DoomPlayer
    Pain.Lith_Shrapnel:  TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6) goto Super::Pain
    Pain.Ice:            TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7) goto Super::Pain
    }
+}
+
+actor Lith_MarinePlayer : Lith_Player
+{
+   Player.StartItem "Lith_Pistol"
+   Player.StartItem "Lith_Fist"
+   Player.DisplayName "Marine"
+   Player.SoundClass "marine"
+   Player.SpawnClass "Fighter"
+   Player.Portrait "LITHMPT1"
+   Player.ViewHeight 48
+   Player.AttackZOffset 15
+}
+
+actor Lith_MagePlayer : Lith_Player
+{
+   Player.StartItem "Lith_CRevolver"
+   Player.StartItem "Lith_CFist"
+   Player.DisplayName "Cyber-Mage"
+   Player.SoundClass "cybermage"
+   Player.SpawnClass "Mage"
+   Player.Portrait "LITHCPT1"
+   Player.ViewHeight 45
+   Player.AttackZOffset 12
+   Player.JumpZ 9
 }
 
 actor Lith_RA_Hax : PowerProtection

@@ -12,7 +12,7 @@ actor Lith_MissileReset : Inventory // yhole has forever tainted your work
    inventory.maxamount 5
 }
 
-actor Lith_MissileLauncher : Lith_Weapon
+actor Lith_MissileLauncher : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_MissileLauncher"
    Weapon.UpSound "weapons/missile/draw"

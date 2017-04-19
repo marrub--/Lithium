@@ -28,17 +28,7 @@ actor Lith_PartBeamShotsFired : Inventory
    Inventory.MaxAmount 5
 }
 
-actor Lith_PlasmaRiflePickup : Lith_WeaponPickup
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", weapon_plasma)
-      stop
-   }
-}
-
-actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
+actor Lith_PlasmaRifle : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_PlasmaRifle"
    Weapon.UpSound "weapons/plasma/draw"
@@ -49,7 +39,7 @@ actor Lith_PlasmaRifle : Lith_Weapon replaces PlasmaRifle
    {
    Spawn:
       TNT1 A 0
-      PLAS A 0 A_SpawnItemEx("Lith_PlasmaRiflePickup", 0,0,0, 0,0,0, 0, Lith_PF)
+      TNT1 A 0 A_SpawnItemEx("Lith_PlasmaRiflePickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
    Ready:

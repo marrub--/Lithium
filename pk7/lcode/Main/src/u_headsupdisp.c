@@ -243,6 +243,22 @@ static void HUD_Mode(player_t *p)
 //
 
 //
+// Activate
+//
+void Upgr_HeadsUpDisp_Activate(player_t *p, upgrade_t *upgr)
+{
+   p->hudenabled = true;
+}
+
+//
+// Disable
+//
+void Upgr_HeadsUpDisp_Deactivate(player_t *p, upgrade_t *upgr)
+{
+   p->hudenabled = false;
+}
+
+//
 // Render
 //
 void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)

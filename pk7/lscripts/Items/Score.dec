@@ -6,6 +6,7 @@ actor Lith_ScoreCount : Inventory
 actor Lith_ScoreItem : CustomInventory
 {
    Inventory.PickupMessage ""
+   Inventory.PickupSound ""
    +INVENTORY.TRANSFER
    
    states

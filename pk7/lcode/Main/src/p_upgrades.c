@@ -4,7 +4,7 @@
 #include "Lth_manifest.h"
 
 #define ForUpgrade(name) \
-   for(int _i = 0; _i < UPGR_MAX; _i++) \
+   for(int _i = 0; _i < p->upgrmax; _i++) \
       __with(upgrade_t *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
@@ -20,39 +20,40 @@
 
 #define Req(arg) .requires = arg
 static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
-// {{"Name-------", "BIP---------", Cost----}, UC_Cat-, Pr, Score, [Group], [Requirements]},
-   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, UC_Body,  1, -0.05},
-   {{"JetBooster",  "JetBooster",   0       }, UC_Body,  0, -0.05},
-   {{"ReflexWetw",  "ReflexWetw",   0       }, UC_Body,  5, -0.05},
-   {{"Zoom",        null,           0       }, UC_Body,  0,  0.00},
-   {{"CyberLegs",   "CyberLegs",    1220000 }, UC_Body,  4,  0.00},
-   {{"ReactArmor",  "Yh0",          3500200 }, UC_Body, 20,  0.00, Req(UR_AI)},
-   {{"ReactArmor2", "Yh0",          2990200 }, UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
-   {{"DefenseNuke", "DefenseNuke",  580030  }, UC_Body,  0,  0.00, Req(UR_AI)},
-   {{"Adrenaline",  "Adrenaline",   1801000 }, UC_Body, 10,  0.00},
-   {{"VitalScan",   "VitalScanner", 601700  }, UC_Body,  2,  0.00},
-   
-   {{"AutoReload",  "AutoReload",   950050  }, UC_Weap,  2,  0.00},
-   {{"AutoPistol",  null,           140940  }, UC_Weap,  0,  0.00, UG_Pistol},
-   {{"PlasPistol",  null,           340000  }, UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
-   {{"GaussShotty", "ShotgunUpgr",  1079430 }, UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
-   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
-   {{"RifleModes",  "RifleUpgr",    340100  }, UC_Weap,  0,  0.00,              Req(UR_WMD)},
-   {{"LaserRCW",    "RifleUpg2",    1008080 }, UC_Weap,  1,  0.00,              Req(UR_WMD)},
-   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, UC_Weap,  0,  0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
-   {{"HomingRPG",   "LauncherUpg2", 2505010 }, UC_Weap,  1,  0.00, UG_Launcher, Req(UR_WMD)},
-   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, UC_Weap,  0,  0.00, UG_Plasma,   Req(UR_WMD)},
-   {{"PartBeam",    "PlasmaUpg2",   2500000 }, UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
-   {{"PunctCannon", "CannonUpgr",   5100700 }, UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
-   {{"OmegaRail",   "CannonUpg2",   5800100 }, UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
-   
-   {{"TorgueMode",  null,           80000000}, UC_Extr,  8,  0.00, Req(UR_RDI)},
-   {{"7777777",     null,           82354300}, UC_Extr,  7,  0.10, Req(UR_RDI)},
-   {{"lolsords",    null,           1000000 }, UC_Extr,  0,  0.20, Req(UR_RDI)},
-   
-   {{"Implying",    null,           0       }, UC_Down,  0,  0.20},
-   {{"UNCEUNCE",    null,           0       }, UC_Down,  0,  0.30},
-   {{"InstaDeath",  null,           0       }, UC_Down,  0,  0.50},
+// {{"Name-------", "BIP---------", Cost----}, pclass_name,      UC_Cat-, Pr, Score, [Group], [Requirements]},
+   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, pclass_marine,    UC_Body,  1, -0.05, UG_HUD},
+   {{"HeadsUpDis2", "HeadsUpDis2",  0       }, pclass_cybermage, UC_Body,  1, -0.05, UG_HUD},
+   {{"JetBooster",  "JetBooster",   0       }, pclass_marine,    UC_Body,  0, -0.05},
+   {{"ReflexWetw",  "ReflexWetw",   0       }, pclass_any,       UC_Body,  5, -0.05},
+   {{"Zoom",        null,           0       }, pclass_any,       UC_Body,  0,  0.00},
+   {{"CyberLegs",   "CyberLegs",    1220000 }, pclass_marine,    UC_Body,  4,  0.00},
+   {{"ReactArmor",  "Yh0",          3500200 }, pclass_marine,    UC_Body, 20,  0.00, Req(UR_AI)},
+   {{"ReactArmor2", "Yh0",          2990200 }, pclass_marine,    UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
+   {{"DefenseNuke", "DefenseNuke",  580030  }, pclass_marine,    UC_Body,  0,  0.00, Req(UR_AI)},
+   {{"Adrenaline",  "Adrenaline",   1801000 }, pclass_marine,    UC_Body, 10,  0.00},
+   {{"VitalScan",   "VitalScanner", 601700  }, pclass_any,       UC_Body,  2,  0.00},
+
+   {{"AutoReload",  "AutoReload",   950050  }, pclass_any,       UC_Weap,  2,  0.00},
+   {{"AutoPistol",  null,           140940  }, pclass_marine,    UC_Weap,  0,  0.00, UG_Pistol},
+   {{"PlasPistol",  null,           340000  }, pclass_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
+   {{"GaussShotty", "ShotgunUpgr",  1079430 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"RifleModes",  "RifleUpgr",    340100  }, pclass_marine,    UC_Weap,  0,  0.00,              Req(UR_WMD)},
+   {{"LaserRCW",    "RifleUpg2",    1008080 }, pclass_marine,    UC_Weap,  1,  0.00,              Req(UR_WMD)},
+   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
+   {{"HomingRPG",   "LauncherUpg2", 2505010 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Launcher, Req(UR_WMD)},
+   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Plasma,   Req(UR_WMD)},
+   {{"PartBeam",    "PlasmaUpg2",   2500000 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
+   {{"PunctCannon", "CannonUpgr",   5100700 }, pclass_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
+   {{"OmegaRail",   "CannonUpg2",   5800100 }, pclass_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
+
+   {{"TorgueMode",  null,           80000000}, pclass_marine,    UC_Extr,  8,  0.00, Req(UR_RDI)},
+   {{"7777777",     null,           82354300}, pclass_marine,    UC_Extr,  7,  0.10, Req(UR_RDI)},
+   {{"lolsords",    null,           1000000 }, pclass_marine,    UC_Extr,  0,  0.20, Req(UR_RDI)},
+
+   {{"Implying",    null,           0       }, pclass_any,       UC_Down,  0,  0.20},
+   {{"UNCEUNCE",    null,           0       }, pclass_any,       UC_Down,  0,  0.30},
+   {{"InstaDeath",  null,           0       }, pclass_any,       UC_Down,  0,  0.50},
 };
 #undef Req
 
@@ -196,7 +197,6 @@ void Lith_GSInit_Upgrade(bool first)
          if(extraupgradeinfo[i].name != null)
             upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
       
-      //SortUpgradeInfo(upgradeinfo, UPGR_MAX);
       qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
       
       for(int i = 0; i < UPGR_MAX; i++)
@@ -251,32 +251,46 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 //
 void Lith_PlayerInitUpgrades(player_t *p)
 {
-   p->upgrademap.alloc(UPGR_MAX);
+   #define CheckPClass() (upgradeinfo[i].pclass == pclass_any || upgradeinfo[i].pclass == p->pclass)
    
    for(int i = 0; i < UPGR_MAX; i++)
+      if(CheckPClass())
+         p->upgrmax++;
+   
+   p->upgrademap.alloc(p->upgrmax);
+   
+   memset(p->upgrades, 0, sizeof(p->upgrades));
+   
+   for(int i = 0, j = 0; i < UPGR_MAX; i++)
    {
-      upgrade_t *upgr = &p->upgrades[i];
-      memset(upgr, 0, sizeof(upgr));
-      
-      upgr->info = &upgradeinfo[i];
-      
-      p->upgrademap.elem.data[i].keyhash = upgr->info->key;
-      p->upgrademap.elem.data[i].value   = upgr;
-      
-      if(upgr->info->cost == 0)
-         upgr->setOwned(p);
-      
-      if(ACS_GetCVar("__lith_debug_on") && !ACS_GetCVar("__lith_debug_noupgrades"))
+      if(CheckPClass())
       {
-         if(upgr->info->cost != 0)
+         upgrade_t *upgr = &p->upgrades[j];
+         
+         upgr->info = &upgradeinfo[i];
+         
+         p->upgrademap.elem.data[j].keyhash = upgr->info->key;
+         p->upgrademap.elem.data[j].value   = upgr;
+         
+         if(upgr->info->cost == 0)
             upgr->setOwned(p);
          
-         if(ACS_StrCmp(ACS_GetCVarString("__lith_debug_upgrade"), upgr->info->name) == 0)
-            upgr->toggle(p);
+         if(ACS_GetCVar("__lith_debug_on") && !ACS_GetCVar("__lith_debug_noupgrades"))
+         {
+            if(upgr->info->cost != 0)
+               upgr->setOwned(p);
+            
+            if(ACS_StrCmp(ACS_GetCVarString("__lith_debug_upgrade"), upgr->info->name) == 0)
+               upgr->toggle(p);
+         }
+         
+         j++;
       }
    }
    
    p->upgrademap.build();
+   
+   #undef CheckPClass
 }
 
 //
@@ -421,13 +435,13 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
       if(g->st[st_upgrfilter].i++ >= UC_MAX)
          g->st[st_upgrfilter].i = 0;
    
-   int numbtns = UPGR_MAX + UC_MAX;
+   int numbtns = p->upgrmax + UC_MAX;
    int filter  = g->st[st_upgrfilter].i - 1;
    
    if(filter != -1)
    {
       numbtns = 0;
-      for(int i = 0; i < UPGR_MAX; i++)
+      for(int i = 0; i < p->upgrmax; i++)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
       
@@ -443,7 +457,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
    int curcategory = UC_MAX;
    int y = 0;
    
-   for(int i = 0; i < UPGR_MAX; i++, y += btnlist.h)
+   for(int i = 0; i < p->upgrmax; i++, y += btnlist.h)
    {
       bool changed = false;
       
