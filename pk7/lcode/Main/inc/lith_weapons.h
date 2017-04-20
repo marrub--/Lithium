@@ -23,6 +23,7 @@ enum
    weapon_c_fist,
    weapon_c_mateba,
    weapon_c_delear,
+   weapon_c_sniper,
    
    weapon_max
 };

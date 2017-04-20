@@ -105,10 +105,7 @@ void Lith_PlayerUpdateData(player_t *p)
    
    Lith_GetArmorType(p);
    
-   p->scopetoken = ACS_CheckInventory("Lith_CannonScopedToken") ||
-                   ACS_CheckInventory("Lith_SniperScopedToken") ||
-                   ACS_CheckInventory("Lith_ShotgunScopedToken") ||
-                   ACS_CheckInventory("Lith_PistolScopedToken");
+   p->scopetoken = ACS_CheckInventory("Lith_WeaponScopedToken");
    
    p->keys.redcard     = ACS_CheckInventory("RedCard")    || ACS_CheckInventory("KeyGreen");
    p->keys.yellowcard  = ACS_CheckInventory("YellowCard") || ACS_CheckInventory("KeyYellow");
@@ -171,10 +168,7 @@ void Lith_ResetPlayer(player_t *p)
    // pls not exit map with murder thingies out
    // is bad practice
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
-   ACS_TakeInventory("Lith_PistolScopedToken",  999);
-   ACS_TakeInventory("Lith_ShotgunScopedToken", 999);
-   ACS_TakeInventory("Lith_CannonScopedToken",  999);
-   ACS_TakeInventory("Lith_SniperScopedToken",  999);
+   ACS_TakeInventory("Lith_WeaponScopedToken",  999);
    ACS_TakeInventory("Lith_RifleBurstIter",     999);
    ACS_TakeInventory("Lith_RocketLoaded",       999);
    ACS_TakeInventory("Lith_RocketIterated",     999);

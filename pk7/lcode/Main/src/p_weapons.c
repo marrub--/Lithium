@@ -32,8 +32,9 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    
    // Cyber-Mage Weapons
    {1, pclass_cybermage, "CFist",           "MMMMHMHMMMHMMM"},
-   {2, pclass_cybermage, "CRevolver",       "weapons/crevolver/pickup", AT_Mag,  "Lith_CRevolverShotsFired"},
+   {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
    {3, pclass_cybermage, "Delear",          "weapons/delear/pickup",    AT_Ammo, "Lith_DelearAmmo"},
+   {5, pclass_cybermage, "IonRifle",        "weapons/ionrifle/pickup",  AT_Ammo, "Lith_RocketAmmo"},
 };
 
 
@@ -65,9 +66,9 @@ static void Lith_PickupScore(player_t *p, int parm)
    
    GiveWeaponItem(parm);
    p->giveScore(score);
-   p->log("> Sold a %S for %lli\Cnscr\C-.",
+   p->log("> Sold the %S for %lli\Cnscr\C-.",
       Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name),
-      Lith_GetModScore(p, score));
+      p->getModScore(score));
 }
 
 
@@ -111,10 +112,10 @@ bool Lith_WeaponPickup(int name)
       Case(wepnam_fist,           weapon_c_fist);
       Case(wepnam_chainsaw,       weapon_cfist);
       Case(wepnam_pistol,         weapon_c_mateba);
-      Case(wepnam_shotgun,        weapon_c_delear);
+      Case(wepnam_shotgun,        weapon_unknown);
       Case(wepnam_supershotgun,   weapon_unknown);
       Case(wepnam_chaingun,       weapon_unknown);
-      Case(wepnam_rocketlauncher, weapon_unknown);
+      Case(wepnam_rocketlauncher, weapon_c_sniper);
       Case(wepnam_plasmarifle,    weapon_unknown);
       Case(wepnam_bfg9000,        weapon_unknown);
       }

@@ -246,7 +246,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    if(score == 0)
       return;
    
-   score = Lith_GetModScore(p, score, nomul);
+   score = p->getModScore(score, nomul);
    
    // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);

@@ -62,7 +62,7 @@ actor Lith_MarinePlayer : Lith_Player
 
 actor Lith_MagePlayer : Lith_Player
 {
-   Player.StartItem "Lith_CRevolver"
+   Player.StartItem "Lith_Mateba"
    Player.StartItem "Lith_CFist"
    Player.DisplayName "Cyber-Mage"
    Player.SoundClass "cybermage"

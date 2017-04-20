@@ -50,7 +50,7 @@
 
 #include "lscripts/Weapons/2_Pistol.dec"
 #include "lscripts/Weapons/2_Revolver.dec"
-#include "lscripts/Weapons/2_CRevolver.dec"
+#include "lscripts/Weapons/2_Mateba.dec"
 
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
@@ -62,6 +62,7 @@
 
 #include "lscripts/Weapons/5_RocketLauncher.dec"
 #include "lscripts/Weapons/5_MissileLauncher.dec"
+#include "lscripts/Weapons/5_IonRifle.dec"
 
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
 #include "lscripts/Weapons/6_PlasmaDiffuser.dec"

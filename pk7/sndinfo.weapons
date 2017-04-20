@@ -56,12 +56,12 @@ weapons/revolver/reload lsounds/Revolver/Reload.flac // Serious Sam: The First E
 //
 // Mateba
 //
-weapons/crevolver/fire  lsounds/Mateba/Fire.flac  // ???
-weapons/crevolver/open  lsounds/Mateba/Open.flac  // ???
-weapons/crevolver/eject lsounds/Mateba/Eject.flac // Killing Floor
-weapons/crevolver/load  lsounds/Mateba/Load.flac  // 〃
-weapons/crevolver/close lsounds/Mateba/Close.flac // Half-Life 2, Fallout 4
-weapons/crevolver/draw  lsounds/Mateba/Draw.flac  // ???
+weapons/mateba/fire  lsounds/Mateba/Fire.flac  // ???
+weapons/mateba/open  lsounds/Mateba/Open.flac  // ???
+weapons/mateba/eject lsounds/Mateba/Eject.flac // Killing Floor
+weapons/mateba/load  lsounds/Mateba/Load.flac  // 〃
+weapons/mateba/close lsounds/Mateba/Close.flac // Half-Life 2, Fallout 4
+weapons/mateba/draw  lsounds/Mateba/Draw.flac  // ???
 
 //
 // Shotgun
@@ -193,6 +193,18 @@ weapons/sniper/draw        lsounds/SniperRifle/Draw.flac        // 〃
 
 $alias weapons/sniper/zoomin  weapons/shotgun/zoomin
 $alias weapons/sniper/zoomout weapons/shotgun/zoomout
+
+//
+// Ion Rifle
+//
+weapons/ionrifle/fire    lsounds/IonRifle/Fire.flac    // Fallout: New Vegas
+weapons/ionrifle/eject   lsounds/IonRifle/Eject.flac   // Killing Floor
+weapons/ionrifle/load    lsounds/IonRifle/Load.flac    // 〃
+weapons/ionrifle/magout  lsounds/IonRifle/MagOut.flac  // Halo 3
+weapons/ionrifle/magin   lsounds/IonRifle/MagIn.flac   // 〃
+weapons/ionrifle/zoomout lsounds/IonRifle/ZoomOut.flac // 〃
+weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac  // 〃
+weapons/ionrifle/empty   lsounds/IonRifle/FireEmpty.flac // Killing Floor
 
 //
 // Grenade Launcher

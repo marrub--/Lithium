@@ -83,11 +83,6 @@ actor Lith_Delear : Lith_CWeapon
    
    states
    {
-   Spawn:
-      TNT1 A 0
-      TNT1 A 0 A_SpawnItemEx("Lith_ShotgunPickup", 0,0,0, 0,0,0, 0, Lith_PF)
-      stop
-   
    Ready:
       TNT1 A 0 A_JumpIfInventory("Lith_DelearShotsFired", 16, "Ready1")
       DLRG P 0 A_JumpIfInventory("Lith_DelearShotsFired", 15, "Ready1")

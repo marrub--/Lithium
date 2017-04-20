@@ -4,8 +4,9 @@ LITH_TXT_INFO_SHORT_Sword   = "sord";
 LITH_TXT_INFO_SHORT_Gameboy = "Game Nanhai";
 
 LITH_TXT_INFO_SHORT_CFist = "Knife";
-LITH_TXT_INFO_SHORT_CRevolver = "Mateba";
+LITH_TXT_INFO_SHORT_Mateba = "Mateba";
 LITH_TXT_INFO_SHORT_Delear = "Delear Spell";
+LITH_TXT_INFO_SHORT_IonRifle = "Ion Rifle";
 
 LITH_TXT_INFO_SHORT_Fist = "Knife";
 

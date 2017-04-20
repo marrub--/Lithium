@@ -306,6 +306,7 @@ typedef struct player_s
    property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
    property deliverMail {call: Lith_DeliverMail(this)}
    property pclass    {get: Lith_PlayerGetClass(this)}
+   property getModScore {call: Lith_GetModScore(this)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

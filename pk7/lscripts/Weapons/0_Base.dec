@@ -1,3 +1,8 @@
+actor Lith_WeaponScopedToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
 actor Lith_Weapon : Weapon
 {
    Weapon.BobStyle "Alpha"

@@ -2,11 +2,6 @@
 #include "lscripts/Weapons/Gauss.dec"
 #include "lscripts/Weapons/PoisonBullet.dec"
 
-actor Lith_ShotgunScopedToken : Inventory
-{
-   Inventory.MaxAmount 1
-}
-
 actor Lith_ShotgunJustFrame : Inventory
 {
    Inventory.MaxAmount 3
@@ -42,7 +37,7 @@ actor Lith_Shotgun : Lith_MWeapon
       goto Ready
    
    Deselect:
-      SHTG A 0 A_TakeInventory("Lith_ShotgunScopedToken", 1)
+      SHTG A 0 A_TakeInventory("Lith_WeaponScopedToken", 1)
       SHTG A 0 A_ZoomFactor(1.0)
    DeselectLoop:
       SHTG AAA 0 A_Lower
@@ -70,7 +65,7 @@ actor Lith_Shotgun : Lith_MWeapon
       TNT1 A 0 A_RailAttack(20, 0, false, "None", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "BulletPuff", 0, 0, 0, 48, 3, 3)
       goto FireCheck
    FireFinish:
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "AltReady")
+      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "AltReady")
       goto Ready
    FirePoison:
       TNT1 A 0 A_AlertMonsters
@@ -88,7 +83,7 @@ actor Lith_Shotgun : Lith_MWeapon
       TNT1 A 0 A_PlaySound("weapons/shotgun/fire", CHAN_WEAPON)
       TNT1 A 0 A_Recoil(0.7)
    FireFinish_Rail:
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "FireFinish_Rail_Scoped")
+      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Rail_Scoped")
       // ---
       SHTG B 2 bright A_Light(1)
       SHTG C 2 bright A_Light(2)
@@ -133,15 +128,15 @@ actor Lith_Shotgun : Lith_MWeapon
    
    AltFire:
       "####" "#" 1
-      "####" "#" 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "ScopeOut")
+      "####" "#" 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut")
       goto ScopeIn
    ScopeOut:
-      "####" "#" 0 A_TakeInventory("Lith_ShotgunScopedToken", 1)
+      "####" "#" 0 A_TakeInventory("Lith_WeaponScopedToken", 1)
       "####" "#" 0 A_ZoomFactor(1.0, ZOOM_INSTANT)
       "####" "#" 0 A_PlaySound("weapons/shotgun/zoomout", 6)
       goto Ready
    ScopeIn:
-      "####" "#" 0 A_GiveInventory("Lith_ShotgunScopedToken", 1)
+      "####" "#" 0 A_GiveInventory("Lith_WeaponScopedToken", 1)
       "####" "#" 0 A_ZoomFactor(CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX)
       "####" "#" 0 A_PlaySound("weapons/shotgun/zoomin", 6)
       goto AltReady
@@ -149,10 +144,10 @@ actor Lith_Shotgun : Lith_MWeapon
    Reload:
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_GaussShotty), 1)
       goto FireFinish
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, 1)
+      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, 1)
       goto Reload1
       TNT1 A 0 A_PlaySound("weapons/shotgun/zoomout", 6)
-      TNT1 A 0 A_TakeInventory("Lith_ShotgunScopedToken", 999)
+      TNT1 A 0 A_TakeInventory("Lith_WeaponScopedToken", 999)
       TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT)
    Reload1:
       TNT1 A 0 A_JumpIfInventory("Lith_GaussShotsFired", 1, 1)
@@ -199,7 +194,7 @@ actor Lith_Shotgun : Lith_MWeapon
                             "Lith_Dummy", 0.05, 0.05, 0, 5, frandom(0.35, 1), 0.5)
       TNT1 A 0 A_PlaySound("weapons/shotgun/gauss/fire", CHAN_WEAPON)
       TNT1 A 0 A_Recoil(0.777)
-      TNT1 A 0 A_JumpIfInventory("Lith_ShotgunScopedToken", 1, "FireFinish_Gauss_Scoped")
+      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Gauss_Scoped")
       // ---
       SHTG N 1
       SHTG L 1 A_Light(3)
