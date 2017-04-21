@@ -89,6 +89,8 @@ enum
    hid_ammobg,
    hid_riflemode,
    hid_riflemodebg,
+   hid_rifleheat = hid_riflemode,
+   hid_rifleheatbg = hid_riflemodebg,
    
    hid_slideind_fxE,
    hid_slideind_fxS = hid_slideind_fxE + 11,

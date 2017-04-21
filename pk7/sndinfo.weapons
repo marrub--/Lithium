@@ -106,6 +106,16 @@ $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
 
 //
+// Shotgun (Cyber-Mage)
+//
+weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, General 6000
+weapons/cshotgun/load   lsounds/CShotgun/Load.flac      // Halo 3
+weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // General 6000
+weapons/cshotgun/empty  lsounds/CShotgun/FireEmpty.flac // EYE: Divine Cybermancy
+weapons/cshotgun/pickup lsounds/CShotgun/Pickup.flac    // FEAR, General 6000
+weapons/cshotgun/draw   lsounds/CShotgun/Draw.flac      // General 6000
+
+//
 // Delear
 //
 weapons/delear/fire   lsounds/Delear/Fire.flac   // Devil May Cry 3
@@ -172,14 +182,24 @@ $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe3
 }
 
-//
-// Laser RCW
-//
 weapons/rcw/fire      lsounds/CombatRifle/FireLaz.flac      // Fallout 4, Fallout: New Vegas
 weapons/rcw/firesnipe lsounds/CombatRifle/FireLazSnipe.flac // 〃
 
 $volume weapons/rcw/fire 0.7
 $volume weapons/rcw/firesnipe 0.7
+
+//
+// SMG
+//
+weapons/smg/fire     lsounds/SMG/Fire.flac         // FEAR
+weapons/smg/firedone lsounds/SMG/FireDone.flac     // 〃
+weapons/smg/eject    lsounds/SMG/EjectRod.flac     // Killing Floor
+weapons/smg/insert   lsounds/SMG/InsertRod.flac    // 〃
+weapons/smg/heat     lsounds/SMG/HeatDisperse.flac // Self-made
+weapons/smg/open     lsounds/SMG/TopOpen.flac      // Half-Life 2
+weapons/smg/close    lsounds/SMG/TopClose.flac     // 〃
+weapons/smg/magout   lsounds/SMG/MagOut.flac       // 〃
+weapons/smg/magin    lsounds/SMG/MagIn.flac        // EYE: Divine Cybermancy
 
 //
 // Sniper Rifle

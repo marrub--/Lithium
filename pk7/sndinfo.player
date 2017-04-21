@@ -16,10 +16,10 @@ player/adren/inj   lsounds/Player/AdrenalineInject.flac    // Killing Floor
 player/adren/ready lsounds/Player/InjectorReady.flac       // 〃
 player/counter     lsounds/Player/Counter.flac             // Halo 3
 player/counterdone lsounds/Player/CounterDone.flac         // 〃
-player/hitground   lsounds/Player/HitGround.ogg            // 〃
 player/zoomin      lsounds/Player/ZoomIn.flac              // 〃
 player/zoomout     lsounds/Player/ZoomOut.flac             // 〃
 player/YOUVEGOTMAIL lsounds/Player/Mail.ogg                // AOL
+player/hitground   lsounds/Player/HitGround.flac           // EYE: Divine Cybermancy
 
 $volume player/death2 0.7
 $volume player/nuke 0.7
@@ -60,7 +60,7 @@ player/rarmor/damage lsounds/Player/RArmor/Damage.flac     // Touhou 13
 player/cbi/open         lsounds/Player/CBI/Open.flac             // Halo 3
 player/cbi/close        lsounds/Player/CBI/Close.flac            // 〃
 player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac      // Doom 3
-player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // 〃
+player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // Phantasy Star Nova
 player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac     // Steam
 player/cbi/clickon      lsounds/Player/CBI/ClickOn.flac          // 3maze - Buttons and Switches
 player/cbi/clickoff     lsounds/Player/CBI/ClickOff.flac         // 〃

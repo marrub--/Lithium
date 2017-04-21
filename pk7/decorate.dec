@@ -49,20 +49,22 @@
 #include "lscripts/Weapons/1_ChargeFist.dec"
 
 #include "lscripts/Weapons/2_Pistol.dec"
-#include "lscripts/Weapons/2_Revolver.dec"
 #include "lscripts/Weapons/2_Mateba.dec"
+#include "lscripts/Weapons/2_Revolver.dec"
 
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
-#include "lscripts/Weapons/3_SuperShotgun.dec"
+#include "lscripts/Weapons/3_CShotgun.dec"
 #include "lscripts/Weapons/3_Delear.dec"
+#include "lscripts/Weapons/3_SuperShotgun.dec"
 
 #include "lscripts/Weapons/4_CombatRifle.dec"
+#include "lscripts/Weapons/4_SMG.dec"
 #include "lscripts/Weapons/4_SniperRifle.dec"
 
 #include "lscripts/Weapons/5_RocketLauncher.dec"
-#include "lscripts/Weapons/5_MissileLauncher.dec"
 #include "lscripts/Weapons/5_IonRifle.dec"
+#include "lscripts/Weapons/5_MissileLauncher.dec"
 
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
 #include "lscripts/Weapons/6_PlasmaDiffuser.dec"

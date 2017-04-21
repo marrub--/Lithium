@@ -61,6 +61,14 @@ static void HUD_Ammo(player_t *p)
    
    DrawSpritePlain("lgfx/HUD_C/SplitFront.png", hid_ammobg, 320.2, 199.2, TICSECOND);
    DrawSpritePlain(typegfx, hid_ammotype, 316.2, 196.2, TICSECOND);
+   
+   if(p->weapontype == weapon_c_smg)
+   {
+      DrawSpritePlain("lgfx/HUD_C/BarSmall.png", hid_rifleheatbg, 320.2, 171.2, TICSECOND);
+      ACS_SetHudClipRect(320-63, 171-9, (ACS_CheckInventory("Lith_SMGHeat")/500.k) * 63, 9);
+      DrawSpritePlain("lgfx/HUD_C/HeatBar.png", hid_rifleheat, 320.2, 171.2, TICSECOND);
+      ACS_SetHudClipRect(0, 0, 0, 0);
+   }
 }
 
 //
