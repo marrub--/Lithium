@@ -200,6 +200,7 @@ weapons/smg/open     lsounds/SMG/TopOpen.flac      // Half-Life 2
 weapons/smg/close    lsounds/SMG/TopClose.flac     // 〃
 weapons/smg/magout   lsounds/SMG/MagOut.flac       // 〃
 weapons/smg/magin    lsounds/SMG/MagIn.flac        // EYE: Divine Cybermancy
+weapons/smg/draw     lsounds/SMG/Draw.flac         // Halo 3
 
 //
 // Sniper Rifle
@@ -225,6 +226,7 @@ weapons/ionrifle/magin   lsounds/IonRifle/MagIn.flac   // 〃
 weapons/ionrifle/zoomout lsounds/IonRifle/ZoomOut.flac // 〃
 weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac  // 〃
 weapons/ionrifle/empty   lsounds/IonRifle/FireEmpty.flac // Killing Floor
+weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallout 3
 
 //
 // Grenade Launcher
