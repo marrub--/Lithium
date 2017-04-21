@@ -116,7 +116,7 @@ static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
 {
    upgrade_t const *upgr = upgr_;
    
-   ACS_SetUserVariable(tid, "user_upgradeid", upgr->info->id);
+   ACS_SetUserVariable(tid, "user_upgradeid", upgr->info->key);
    
    switch(upgr->info->category)
    {

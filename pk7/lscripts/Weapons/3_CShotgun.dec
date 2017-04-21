@@ -20,7 +20,7 @@ actor Lith_CShotgun : Lith_CWeapon
       stop
    
    Ready:
-      SHTG A 1 A_WeaponReady
+      SHTG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
       loop
    
    Deselect:

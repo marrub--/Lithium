@@ -252,7 +252,7 @@ void Lith_BoughtItemPickup(int id)
    
    if(id)
    {
-      upgrade_t *upgr = &p->upgrades[id];
+      upgrade_t *upgr = p->getUpgr(id);
       
       if(!upgr->owned)
       {
