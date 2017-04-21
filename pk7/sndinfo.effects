@@ -58,8 +58,22 @@ $random effects/puff/ricochet {
 //
 // Ambience
 //
-amb/rain lsounds/Ambience/Rain.ogg // ???
-amb/wind lsounds/Ambience/Wind.ogg // ???
+amb/rain      lsounds/Ambience/Rain.ogg          // ???
+amb/wind      lsounds/Ambience/Wind.ogg          // ???
+amb/bigcomp   lsounds/Ambience/BigComputer.ogg   // EYE: Divine Cybermancy
+amb/alarmdist lsounds/Ambience/AlarmDistant.flac // Half-Life 2
+amb/ship      lsounds/Ambience/Ship.flac         // 〃
+amb/field     lsounds/Ambience/NoEntry.flac      // 〃
+amb/vent      lsounds/Ambience/VentPump.wav      // 〃
+amb/computer  lsounds/Ambience/Computer.wav      // Quake
+
+$ambient 42421 amb/alarmdist point 0.2 random 10 40 1.0
+$ambient 42422 amb/bigcomp   point 1.5 continuous   0.7
+$ambient 42423 amb/ship      world     continuous   0.1
+$ambient 42424 amb/field     point 2.0 continuous   1.0
+$ambient 42425 amb/field     point 4.0 continuous   1.0
+$ambient 42426 amb/vent      point 5.0 continuous   0.5
+$ambient 42427 amb/computer  point 2.0 continuous   1.0
 
 //
 //

@@ -14,6 +14,9 @@ ______________________________________________________________________________
 
 --- Credits
 
+abbuw
+   Vent texture
+
 DavidPH
    Glorious, glorious GDCC
    Lots of help with a lot of things
