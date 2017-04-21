@@ -5,27 +5,27 @@
 
 #include <math.h>
 
-//----------------------------------------------------------------------------
-// Static Objects
-//
-
-static int decvars[8];
-
 
 //----------------------------------------------------------------------------
 // Extern Functions
 //
 
 [[__call("ScriptS"), __extern("ACS")]]
+bool Lith_CheckCeilingSky()
+{
+   return !ACS_CheckActorCeilingTexture(0, "F_SKY1");
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 void Lith_SetVar(int num, int set)
 {
-   decvars[num - 1] = set;
+   Lith_LocalPlayer->decvars[num - 1] = set;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetVar(int num)
 {
-   return decvars[num - 1];
+   return Lith_LocalPlayer->decvars[num - 1];
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

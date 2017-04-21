@@ -119,6 +119,15 @@ map TITLEMAP "Lithium Title"
    DoubleSky
 }
 
+map TESTMAP "Test Map"
+{
+   LevelNum = 888777
+   Sky1 = "LITHBGS4", 0.1
+   Sky2 = "LITHSKD2"
+   
+   DoubleSky
+}
+
 map LITHTEND ""
 {
    LevelNum = 1911777

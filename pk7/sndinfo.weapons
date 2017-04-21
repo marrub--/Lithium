@@ -97,7 +97,6 @@ $random weapons/shotgun/gauss/spark {
    weapons/shotgun/gauss/spark1
    weapons/shotgun/gauss/spark2
    weapons/shotgun/gauss/spark3
-   weapons/shotgun/gauss/spark4
 }
 
 $alias weapons/shotgun/poison/acid weapons/shotgun/gauss/spark

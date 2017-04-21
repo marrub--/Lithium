@@ -352,6 +352,34 @@ static void SpawnBoss()
    }
 }
 
+//
+// Lith_FadeInAmbSound
+//
+[[__call("ScriptS")]]
+static void Lith_FadeInAmbSound(int tid, __str sound, int chan)
+{
+   ACS_PlaySound(tid, sound, chan, 0.1, true, ATTN_NONE);
+   
+   for(fixed i = 0.2; i <= 1.0; i += 0.1)
+   {
+      ACS_Delay(2);
+      ACS_SoundVolume(tid, chan, i);
+   }
+}
+
+//
+// Lith_FadeOutAmbSound
+//
+[[__call("ScriptS")]]
+static void Lith_FadeOutAmbSound(int tid, int chan)
+{
+   for(fixed i = 1.0; i >= 0.0; i -= 0.1)
+   {
+      ACS_SoundVolume(tid, chan, i);
+      ACS_Delay(2);
+   }
+}
+
 
 //----------------------------------------------------------------------------
 // Scripts
@@ -488,6 +516,27 @@ static void Lith_World(void)
       prevsecrets = secrets;
       prevkills   = kills;
       previtems   = items;
+      
+      if(world.mapnum == 888777)
+      {
+         player_t *p = &players[0];
+         
+         if(p->undersky)
+         {
+            if(!p->old.undersky)
+            {
+               Lith_FadeInAmbSound(p->weathertid, "amb/wind", CHAN_BODY);
+               Lith_FadeInAmbSound(p->weathertid, "amb/rain", CHAN_VOICE);
+            }
+            
+            ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
+         }
+         else if(p->old.undersky)
+         {
+            Lith_FadeOutAmbSound(p->weathertid, CHAN_BODY);
+            Lith_FadeOutAmbSound(p->weathertid, CHAN_VOICE);
+         }
+      }
       
       ACS_Delay(1);
       

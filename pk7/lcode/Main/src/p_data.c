@@ -71,10 +71,18 @@ void Lith_ValidatePlayerTID(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateData(player_t *p)
 {
+   int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+      WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
+   
+   ACS_Warp(p->cameratid,  4,   0, ACS_GetActorViewHeight(0), 0, warpflags);
+   ACS_Warp(p->weathertid, 256, 0, ACS_GetActorViewHeight(0), 0, warpflags);
+   
    p->x      = ACS_GetActorX(0);
    p->y      = ACS_GetActorY(0);
    p->z      = ACS_GetActorZ(0);
    p->floorz = ACS_GetActorFloorZ(0);
+   p->undersky = ACS_CheckActorCeilingTexture(0, "F_SKY1") ||
+                 (ACS_CheckSight(0, p->weathertid, 0) && ACS_CheckActorCeilingTexture(p->weathertid, "F_SKY1"));
 
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);
@@ -113,10 +121,6 @@ void Lith_PlayerUpdateData(player_t *p)
    p->keys.redskull    = ACS_CheckInventory("RedSkull");
    p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
    p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
-   
-   ACS_Warp(p->cameratid, 4, 0, ACS_GetActorViewHeight(0), 0,
-            WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
-            WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH);
 }
 
 //
@@ -148,7 +152,8 @@ void Lith_ResetPlayer(player_t *p)
    
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
-   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid = ACS_UniqueTID());
+   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
+   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
    
    //
    // Reset data

@@ -30,7 +30,7 @@ $random misc/quitsound {
    enemies/cyberdemon/ready
    misc/teleport
    misc/chat
-   item/barrier
+   player/barrier
    marathon/hitsolid
    weapons/revolver/pickup
    weapons/shotgun/pickup
@@ -54,6 +54,12 @@ $random effects/puff/ricochet {
    effects/puff/ricochet3
    effects/puff/ricochet4
 }
+
+//
+// Ambience
+//
+amb/rain lsounds/Ambience/Rain.ogg // ???
+amb/wind lsounds/Ambience/Wind.ogg // ???
 
 //
 //

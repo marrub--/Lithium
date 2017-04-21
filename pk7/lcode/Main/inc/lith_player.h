@@ -86,6 +86,7 @@ typedef struct player_delta_s
    fixed x, y, z;
    fixed floorz;
    fixed pitch, yaw;
+   bool  undersky;
    
    // Movement
    fixed velx, vely, velz;
@@ -131,6 +132,7 @@ typedef struct player_extdata_s
    bool       autobuy[NUMAUTOGROUPS];
    Lth_HashMap upgrademap;
    bool       hudenabled;
+   int        decvars[8];
    
    score_t scoreaccum;
    int     scoreaccumtime;
@@ -171,6 +173,7 @@ typedef struct player_viewdata_s
    float extryaw;
    
    int cameratid;
+   int weathertid;
 } player_viewdata_t;
 
 //

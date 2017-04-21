@@ -1,6 +1,7 @@
 #include "lscripts/Constants.dec"
 
 #include "lscripts/Dummy.dec"
+#include "lscripts/Rain.dec"
 #include "lscripts/Hacks.dec"
 #include "lscripts/Player.dec"
 #include "lscripts/Adrenaline.dec"
