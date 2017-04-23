@@ -82,6 +82,9 @@ actor Lith_Steggles : MBFHelperDog
 
 actor Lith_SteggleSphere : Lith_CustomInventory
 {
+   //$Category "Powerups"
+   
+   Tag "Steggle Sphere"
    Inventory.PickupSound "misc/p_pkup"
    
    +COUNTITEM

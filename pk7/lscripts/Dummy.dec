@@ -21,6 +21,9 @@ actor Lith_DummyArmor : BasicArmorBonus {}
 // Don't remove this, it is actually used for checking if this mod is loaded.
 actor Lith_GreyHam : HealthBonus
 {
+   //$Category "Health and Armor"
+   
+   Tag "Grey Ham"
    Inventory.PickupMessage "Picked up a grey ham."
 
    states

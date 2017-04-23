@@ -99,20 +99,19 @@ reinit:
 static void Lith_PlayerDeath(void)
 {
    player_t *p = Lith_LocalPlayer;
-   bool singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
    
    p->dead = true;
    
    Lith_PlayerDeinitUpgrades(p);
    
-   if(singleplayer || ACS_GetCVar("sv_cooploseinventory"))
+   if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
       Lith_PlayerLoseUpgrades(p);
       p->bip.losePages();
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
    
-   if(singleplayer)
+   if(world.singleplayer)
    {
       if(ACS_GetCVar("lith_sv_revenge"))
       {

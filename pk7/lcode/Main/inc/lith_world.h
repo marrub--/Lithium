@@ -50,8 +50,11 @@ typedef struct worldinfo_s
    property canontime  {get: Lith_CanonTime(false)}
    property canontimeshort {get: Lith_CanonTime(true)}
    
+   bool singleplayer;
+   int mapscleared;
    int prevcluster;
    int mapseed;
+   bool unloaded;
    
    int secretsfound;
    double scoremul;

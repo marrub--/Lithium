@@ -353,30 +353,61 @@ static void SpawnBoss()
 }
 
 //
-// Lith_FadeInAmbSound
+// DoRain
 //
 [[__call("ScriptS")]]
-static void Lith_FadeInAmbSound(int tid, __str sound, int chan)
+static void DoRain()
 {
-   ACS_PlaySound(tid, sound, chan, 0.1, true, ATTN_NONE);
+   player_t *p = &players[0];
+   ACS_SetActivator(p->tid);
    
-   for(fixed i = 0.2; i <= 1.0; i += 0.1)
+   bool wasundersky = false;
+   bool undersky;
+   for(;;)
    {
-      ACS_Delay(2);
-      ACS_SoundVolume(tid, chan, i);
-   }
-}
-
-//
-// Lith_FadeOutAmbSound
-//
-[[__call("ScriptS")]]
-static void Lith_FadeOutAmbSound(int tid, int chan)
-{
-   for(fixed i = 1.0; i >= 0.0; i -= 0.1)
-   {
-      ACS_SoundVolume(tid, chan, i);
-      ACS_Delay(2);
+      undersky = ACS_CheckActorCeilingTexture(0, "F_SKY1");
+      
+      if(undersky)
+         ACS_TakeInventory("Lith_SMGHeat", 1);
+      
+      for(int r = 0; !undersky && r < 8; r++)
+         for(int h = 1; !undersky && h <= 2; h++)
+      {
+         int rad = 64 << r;
+         int x   = p->x + ACS_Cos(p->yaw) * rad;
+         int y   = p->y + ACS_Sin(p->yaw) * rad;
+         int z   = p->z + 64 / h;
+         
+         int tid = ACS_UniqueTID();
+         ACS_SpawnForced("Lith_CameraHax", x, y, z, tid);
+         
+         undersky = (ACS_CheckSight(0, tid, 0) && ACS_CheckActorCeilingTexture(tid, "F_SKY1"));
+         
+         ACS_Thing_Remove(tid);
+      }
+      
+      if(undersky)
+      {
+         if(!wasundersky)
+         {
+            ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  1.0, true, ATTN_NONE);
+            ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 1.0, true, ATTN_NONE);
+         }
+         
+         if(world.mapscleared >= 20 && world.mapnum < 0x7FFF)
+            ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
+         else
+            ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
+      }
+      else if(wasundersky)
+      {
+         ACS_PlaySound(p->weathertid, "amb/windout", CHAN_BODY,  1.0, false, ATTN_NONE);
+         ACS_PlaySound(p->weathertid, "amb/rainout", CHAN_VOICE, 1.0, false, ATTN_NONE);
+      }
+      
+      ACS_Delay(1);
+      
+      wasundersky = undersky;
    }
 }
 
@@ -399,8 +430,6 @@ static void Lith_World(void)
       ACS_Exit_Normal(0);
       return;
    }
-   
-   static bool firstmap = true;
    
    // Init global/static state.
    {
@@ -428,6 +457,7 @@ static void Lith_World(void)
       world.extras       = ACS_GetCVar("__lith_extras");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       world.cbi.perf     = 10;
+      world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
       gsinit = true;
    }
@@ -456,21 +486,43 @@ static void Lith_World(void)
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
    
+   // World-static pre-player init.
+   bool doworldinit = false;
+   
+   if(ACS_Timer() <= 2)
+   {
+      if(world.unloaded)
+         world.mapscleared++;
+      
+      if(ACS_GetCVar("lith_sv_sky") && world.mapnum < 0x7FFF)
+      {
+              if(world.mapscleared >= 20) {ACS_ChangeSky("LITHSKRD", "LITHSKRD"); ACS_SetSkyScrollSpeed(1, 0.01);}
+         else if(world.mapscleared >= 10)  ACS_ChangeSky("LITHSKDE", "LITHSKDE");
+         else                              ACS_ChangeSky("LITHSKS1", "LITHSKS1");
+      }
+      
+      doworldinit = true;
+   }
+   
+   // World unloaded flag can be reset now.
+   world.unloaded = false;
+   
    // Sigil for when Lith_PlayerEntry can run.
    mapinit = true;
    
    // Delay so we can make sure players are initialized.
    ACS_Delay(1);
    
-   // World-static init.
-   if(ACS_Timer() <= 2)
+   // World-static post-player init.
+   if(doworldinit)
    {
       SpawnBoss();
       
-      // Payout, which is not done on the first map start.
-      if(!firstmap)
+      // Payout, which is not done on the first map.
+      if(world.mapscleared != 0)
          Lith_DoPayout();
       
+      // Cluster messages.
       if(world.game == Game_Doom2 && world.cluster != world.prevcluster)
       {
          switch(world.prevcluster)
@@ -487,12 +539,12 @@ static void Lith_World(void)
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
    
-   firstmap = false;
-   
-   // Now we just check for things being gained so players get proper score.
    int prevsecrets = 0;
    int prevkills   = 0;
    int previtems   = 0;
+   
+   if(ACS_GetCVar("lith_sv_rain") || world.mapnum == 888777)
+      DoRain();
    
    for(;;)
    {
@@ -517,27 +569,6 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
       
-      if(world.mapnum == 888777)
-      {
-         player_t *p = &players[0];
-         
-         if(p->undersky)
-         {
-            if(!p->old.undersky)
-            {
-               Lith_FadeInAmbSound(p->weathertid, "amb/wind", CHAN_BODY);
-               Lith_FadeInAmbSound(p->weathertid, "amb/rain", CHAN_VOICE);
-            }
-            
-            ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
-         }
-         else if(p->old.undersky)
-         {
-            Lith_FadeOutAmbSound(p->weathertid, CHAN_BODY);
-            Lith_FadeOutAmbSound(p->weathertid, CHAN_VOICE);
-         }
-      }
-      
       ACS_Delay(1);
       
       world.ticks++;
@@ -550,6 +581,8 @@ static void Lith_World(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_WorldUnload(void)
 {
+   world.unloaded = true;
+   
    for(int i = 0; i < upgradesspawnediter; i++)
       Lith_InstallCBIItem(upgradesspawned[i]);
    

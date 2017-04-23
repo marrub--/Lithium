@@ -12,6 +12,7 @@ actor Lith_CustomInventory : CustomInventory
 
 actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 {
+   Tag "Computer Area Map"
    Inventory.PickupSound "misc/p_pkup"
    
    +COUNTITEM
@@ -31,6 +32,7 @@ actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 
 actor Lith_ArmorBonus : Lith_CustomInventory replaces ArmorBonus
 {
+   Tag "Armor Bonus"
    +COUNTITEM
    
    states
@@ -47,6 +49,7 @@ actor Lith_ArmorBonus : Lith_CustomInventory replaces ArmorBonus
 
 actor Lith_Backpack : Lith_ScoreItem replaces Backpack
 {
+   Tag "Backpack"
    +COUNTITEM
    
    states
@@ -68,6 +71,7 @@ actor Lith_Backpack : Lith_ScoreItem replaces Backpack
 
 actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 {
+   Tag "Berserk"
    Inventory.PickupSound "misc/p_pkup"
    
    +COUNTITEM
@@ -87,6 +91,8 @@ actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 
 actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
 {
+   Tag "Blue Armor"
+   
    states
    {
    Spawn:
@@ -106,12 +112,15 @@ actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
 
 actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
 {
+   Tag "Barrier"
    DropItem "Lith_BlurSphere", 255, 9999
    DropItem "Lith_SteggleSphere", 255, 1
 }
 
 actor Lith_GreenArmor : Lith_CustomInventory replaces GreenArmor
 {
+   Tag "Green Armor"
+   
    states
    {
    Spawn:
@@ -128,6 +137,7 @@ actor Lith_GreenArmor : Lith_CustomInventory replaces GreenArmor
 
 actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
 {
+   Tag "Health Bonus"
    Inventory.PickupSound "items/healthbonus"
    
    +COUNTITEM
@@ -146,6 +156,7 @@ actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
 
 actor Lith_Infrared : Lith_CustomInventory replaces Infrared
 {
+   Tag "CB-Goggles"
    Inventory.PickupSound "misc/p_pkup"
    
    +COUNTITEM
@@ -166,6 +177,7 @@ actor Lith_Infrared : Lith_CustomInventory replaces Infrared
 
 actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces InvulnerabilitySphere
 {
+   Tag "Invulnerability"
    Inventory.PickupSound "misc/p_pkup"
    
    +FLOATBOB
@@ -187,6 +199,8 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
 
 actor Lith_Medikit : Lith_CustomInventory replaces Medikit
 {
+   Tag "Medikit"
+   
    states
    {
    Spawn:
@@ -202,6 +216,7 @@ actor Lith_Medikit : Lith_CustomInventory replaces Medikit
 
 actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
+   Tag "Tao'chyan"
    Inventory.PickupSound "misc/p_pkup"
    
    +FLOATBOB
@@ -223,6 +238,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 
 actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
 {
+   Tag "Radiation Shielding Suit"
    Inventory.PickupSound "misc/p_pkup"
    
    +INVENTORY.FANCYPICKUPSOUND
@@ -241,6 +257,7 @@ actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
 
 actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
 {
+   Tag "Heart"
    Inventory.PickupSound "misc/p_pkup"
    
    +FLOATBOB
@@ -261,6 +278,8 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
 
 actor Lith_Stimpack : Lith_CustomInventory replaces Stimpack
 {
+   Tag "Stimpack"
+   
    states
    {
    Spawn:

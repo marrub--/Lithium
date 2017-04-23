@@ -1,5 +1,7 @@
 actor Lith_CBIItem : CustomInventory
 {
+   //$Category "CBI Items"
+   
    Inventory.PickupMessage ""
    Inventory.PickupSound "player/pickup/upgrcbi"
    
@@ -61,6 +63,8 @@ actor Lith_CBIItem : CustomInventory
 
 actor Lith_CBIUpgrade1 : Lith_CBIItem
 {
+   Tag "KSKK Spec. High-Grade CPU"
+   
    states
    {
    Spawn:
@@ -76,6 +80,8 @@ actor Lith_CBIUpgrade1 : Lith_CBIItem
 
 actor Lith_CBIUpgrade2 : Lith_CBIItem
 {
+   Tag "KSKK Spec. Super High-Grade CPU"
+   
    states
    {
    Spawn:
@@ -91,6 +97,8 @@ actor Lith_CBIUpgrade2 : Lith_CBIItem
 
 actor Lith_ArmorInter : Lith_CBIItem
 {
+   Tag "Armor Interface"
+   
    states
    {
    Spawn:
@@ -106,6 +114,8 @@ actor Lith_ArmorInter : Lith_CBIItem
 
 actor Lith_WeapnInter : Lith_CBIItem
 {
+   Tag "Weapon Modification Device"
+   
    states
    {
    Spawn:
@@ -121,6 +131,8 @@ actor Lith_WeapnInter : Lith_CBIItem
 
 actor Lith_WeapnInte2 : Lith_CBIItem
 {
+   Tag "Weapon Refactoring Device"
+   
    states
    {
    Spawn:
@@ -136,6 +148,8 @@ actor Lith_WeapnInte2 : Lith_CBIItem
 
 actor Lith_RDistInter : Lith_CBIItem
 {
+   Tag "Reality Distortion Interface"
+   
    states
    {
    Spawn:

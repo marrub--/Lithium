@@ -86,7 +86,6 @@ typedef struct player_delta_s
    fixed x, y, z;
    fixed floorz;
    fixed pitch, yaw;
-   bool  undersky;
    
    // Movement
    fixed velx, vely, velz;

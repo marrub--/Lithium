@@ -124,6 +124,7 @@ map TESTMAP "Test Map"
    LevelNum = 888777
    Sky1 = "LITHBGS4", 0.1
    Sky2 = "LITHSKD2"
+   Next = 1
    
    DoubleSky
 }
@@ -133,6 +134,25 @@ map LITHTEND ""
    LevelNum = 1911777
    Next = EndSequence, "Lith_EndGameTimeOver"
    NoIntermission
+}
+
+
+//----------------------------------------------------------------------------
+// Editor Numbers
+//
+
+DoomEdNums
+{
+   22420 = Lith_CBIUpgrade1
+   22421 = Lith_CBIUpgrade2
+   22422 = Lith_ArmorInter
+   22423 = Lith_WeapnInter
+   22424 = Lith_WeapnInte2
+   22425 = Lith_RDistInter
+   
+   22426 = Lith_SteggleSphere
+   22427 = Lith_BlurSphere
+   22428 = Lith_GreyHam
 }
 
 

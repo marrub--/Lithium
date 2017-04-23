@@ -52,6 +52,9 @@ actor Lith_BarrierSpell : CustomInventory
 
 actor Lith_BlurSphere : Lith_CustomInventory
 {
+   //$Category "Powerups"
+   
+   Tag "Fragma"
    Inventory.PickupSound "player/pickup/barrier"
    
    +FLOATBOB

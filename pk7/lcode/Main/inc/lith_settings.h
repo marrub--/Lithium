@@ -43,7 +43,11 @@ Bool("Alternate font",  "lith_scanner_altfont")
 
 if(ACS_GameType() == GAME_SINGLE_PLAYER)
 {
-   Category("Single-Player")
+   Category("Single-Player Visuals")
+   ServerBool("Rain in outside areas",  "lith_sv_rain")
+   ServerBool("Replace skies",          "lith_sv_sky")
+   
+   Category("Single-Player Gameplay")
    ServerBool("Explode on death",       "lith_sv_revenge")
    if(world.extras)
    {

@@ -52,13 +52,13 @@ static void GiveWeaponItem(int parm)
    switch(parm)
    {
    case weapon_c_fist:
-   case weapon_fist:     ACS_GiveInventory("Lith_Death",      1);    break;
-   case weapon_c_shotgun:
-   case weapon_ssg:      ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
-   case weapon_c_sniper:
-   case weapon_launcher: ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
-   case weapon_plasma:   ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
-   case weapon_bfg:      ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
+   case weapon_fist:      ACS_GiveInventory("Lith_Death",      1);    break;
+   case weapon_c_shotgun: ACS_GiveInventory("Lith_ShellAmmo",  5);    break;
+   case weapon_ssg:       ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
+   case weapon_c_sniper:  ACS_GiveInventory("Lith_RocketAmmo", 6);    break;
+   case weapon_launcher:  ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
+   case weapon_plasma:    ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
+   case weapon_bfg:       ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
    }
 }
 

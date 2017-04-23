@@ -45,6 +45,8 @@
 #include "lscripts/Weapons/0_Base.dec"
 #include "lscripts/Weapons/0_Pickups.dec"
 
+//$GZDB_SKIP
+
 #include "lscripts/Weapons/1_Fist.dec"
 #include "lscripts/Weapons/1_CFist.dec"
 #include "lscripts/Weapons/1_ChargeFist.dec"

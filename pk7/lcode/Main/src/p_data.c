@@ -74,15 +74,13 @@ void Lith_PlayerUpdateData(player_t *p)
    int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
    
-   ACS_Warp(p->cameratid,  4,   0, ACS_GetActorViewHeight(0), 0, warpflags);
-   ACS_Warp(p->weathertid, 256, 0, ACS_GetActorViewHeight(0), 0, warpflags);
+   ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
+   ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    
    p->x      = ACS_GetActorX(0);
    p->y      = ACS_GetActorY(0);
    p->z      = ACS_GetActorZ(0);
    p->floorz = ACS_GetActorFloorZ(0);
-   p->undersky = ACS_CheckActorCeilingTexture(0, "F_SKY1") ||
-                 (ACS_CheckSight(0, p->weathertid, 0) && ACS_CheckActorCeilingTexture(p->weathertid, "F_SKY1"));
 
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);

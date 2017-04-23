@@ -1,5 +1,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
+#include "lith_world.h"
 
 
 //----------------------------------------------------------------------------
@@ -44,7 +45,7 @@ void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
    
    // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
    // This breaks network sync so we can only do it in singleplayer.
-   if(ACS_GameType() == GAME_SINGLE_PLAYER)
+   if(world.singleplayer)
       inverted |= ACS_GetCVar("invertmouse");
    
    g->old = g->cur;

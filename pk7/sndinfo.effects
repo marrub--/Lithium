@@ -60,6 +60,8 @@ $random effects/puff/ricochet {
 //
 amb/rain      lsounds/Ambience/Rain.ogg          // ???
 amb/wind      lsounds/Ambience/Wind.ogg          // ???
+amb/rainout   lsounds/Ambience/RainOut.ogg       // ???
+amb/windout   lsounds/Ambience/WindOut.ogg       // ???
 amb/bigcomp   lsounds/Ambience/BigComputer.ogg   // EYE: Divine Cybermancy
 amb/alarmdist lsounds/Ambience/AlarmDistant.flac // Half-Life 2
 amb/ship      lsounds/Ambience/Ship.flac         // 〃
