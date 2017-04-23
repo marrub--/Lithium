@@ -1,25 +1,25 @@
 //
 // Generic Player
 //
-player/score1      lsounds/Player/Score1.flac              // Self-made
-player/score2      lsounds/Player/Score2.flac              // 〃
-player/score3      lsounds/Player/Score3.flac              // 〃
-player/rocketboost lsounds/Player/RocketBoost.flac         // ???
-player/doublejump  lsounds/Player/DoubleJump.flac          // DemonSteele
-player/slide       lsounds/Player/Slide.flac               // 〃
-player/getsigil    lsounds/Player/DivisionSigilPickup.flac // Resident Evil 4, Fallout 4
-player/nuke        lsounds/Player/Nuke.flac                // Touhou 13
-player/barrier     lsounds/Player/Barrier.flac             // 〃
-player/death1      lsounds/Player/DeathCharge.flac         // 〃
-player/death2      lsounds/Player/Death.flac               // 〃
-player/adren/inj   lsounds/Player/AdrenalineInject.flac    // Killing Floor
-player/adren/ready lsounds/Player/InjectorReady.flac       // 〃
-player/counter     lsounds/Player/Counter.flac             // Halo 3
-player/counterdone lsounds/Player/CounterDone.flac         // 〃
-player/zoomin      lsounds/Player/ZoomIn.flac              // 〃
-player/zoomout     lsounds/Player/ZoomOut.flac             // 〃
-player/YOUVEGOTMAIL lsounds/Player/Mail.ogg                // AOL
-player/hitground   lsounds/Player/HitGround.flac           // EYE: Divine Cybermancy
+player/score1      lsounds/Player/Score1.flac             // Self-made
+player/score2      lsounds/Player/Score2.flac             // 〃
+player/score3      lsounds/Player/Score3.flac             // 〃
+player/rocketboost lsounds/Player/RocketBoost.flac        // ???
+player/doublejump  lsounds/Player/DoubleJump.flac         // DemonSteele
+player/slide       lsounds/Player/Slide.flac              // 〃
+player/getsigil    lsounds/Player/DivisionSigilPickup.ogg // Resident Evil 4, Fallout 4
+player/nuke        lsounds/Player/Nuke.ogg                // Touhou 13
+player/barrier     lsounds/Player/Barrier.flac            // 〃
+player/death1      lsounds/Player/DeathCharge.ogg         // 〃
+player/death2      lsounds/Player/Death.ogg               // 〃
+player/adren/inj   lsounds/Player/AdrenalineInject.flac   // Killing Floor
+player/adren/ready lsounds/Player/InjectorReady.flac      // 〃
+player/counter     lsounds/Player/Counter.flac            // Halo 3
+player/counterdone lsounds/Player/CounterDone.flac        // 〃
+player/zoomin      lsounds/Player/ZoomIn.flac             // 〃
+player/zoomout     lsounds/Player/ZoomOut.flac            // 〃
+player/YOUVEGOTMAIL lsounds/Player/Mail.ogg               // AOL
+player/hitground   lsounds/Player/HitGround.flac          // EYE: Divine Cybermancy
 
 $volume player/death2 0.7
 $volume player/nuke 0.7
@@ -71,11 +71,11 @@ player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
 //
 // Pickup
 //
-player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.flac   // Killing Floor, ???
+player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.ogg    // Killing Floor, ???
 player/pickup/upgrextr lsounds/Player/Pickup/UpgrExtr.flac   // Phantasy Star Nova
-player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.flac   // Halo 3
+player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.ogg    // Halo 3
 player/pickup/upgrcbi  lsounds/Player/Pickup/CBIUpgrade.flac // 〃
-player/pickup/item     lsounds/Player/Pickup/Item.flac       // Firearms: Source
+player/pickup/item     lsounds/Player/Pickup/Item.ogg        // Firearms: Source
 player/pickup/barrier  lsounds/Player/Pickup/Barrier.flac    // Touhou 13
 
 //

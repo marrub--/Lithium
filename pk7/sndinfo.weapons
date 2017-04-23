@@ -17,7 +17,7 @@ weapons/cfist/fire1     lsounds/ChargeFist/Fire1.flac     // 〃
 weapons/cfist/fire2     lsounds/ChargeFist/Fire2.flac     // 〃
 weapons/cfist/fire3     lsounds/ChargeFist/Fire3.flac     // 〃
 weapons/cfist/ready     lsounds/ChargeFist/Ready.flac     // 〃
-weapons/cfist/charge    lsounds/ChargeFist/Charge.flac    // Fallout 4, Halo 3
+weapons/cfist/charge    lsounds/ChargeFist/Charge.ogg     // Fallout 4, Halo 3
 weapons/cfist/chargeend lsounds/ChargeFist/ChargeEnd.flac // Fallout 4
 weapons/cfist/hit       lsounds/ChargeFist/Hit.wav        // Hexen
 weapons/cfist/hitwall   lsounds/ChargeFist/HitWall.wav    // 〃
@@ -48,7 +48,7 @@ $volume weapons/pistol/plasma/explode 0.15
 //
 // Revolver
 //
-weapons/revolver/fire   lsounds/Revolver/Fire.flac   // Killing Floor
+weapons/revolver/fire   lsounds/Revolver/Fire.ogg    // Killing Floor
 weapons/revolver/draw   lsounds/Revolver/Draw.flac   // 〃
 weapons/revolver/pickup lsounds/Revolver/Pickup.flac // 〃
 weapons/revolver/reload lsounds/Revolver/Reload.flac // Serious Sam: The First Encounter HD
@@ -85,7 +85,7 @@ weapons/shotgun/gauss/spark3     lsounds/Shotgun/Gauss/Spark3.flac       // 〃
 weapons/shotgun/gauss/reloadout  lsounds/Shotgun/Gauss/ReloadOut.flac    // General 6000
 weapons/shotgun/gauss/reloadin   lsounds/Shotgun/Gauss/ReloadIn.flac     // 〃
 
-weapons/shotgun/poison/fire lsounds/Shotgun/Poison/FireFull.flac // FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, General 6000
+weapons/shotgun/poison/fire lsounds/Shotgun/Poison/FireFull.ogg // FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, General 6000
 
 $random weapons/shotgun/just {
    weapons/shotgun/just1
@@ -125,7 +125,7 @@ weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
 //
 // Super Shotgun
 //
-weapons/ssg/fire   lsounds/SuperShotgun/Fire.flac   // Per Kristian, General 6000
+weapons/ssg/fire   lsounds/SuperShotgun/Fire.ogg    // Per Kristian, General 6000
 weapons/ssg/pickup lsounds/SuperShotgun/Pickup.flac // General 6000, ???
 weapons/ssg/close  lsounds/SuperShotgun/Close.flac  // Killing Floor, ???
 weapons/ssg/open   lsounds/SuperShotgun/Open.flac   // 〃
@@ -181,8 +181,8 @@ $random weapons/rifle/firesnipe {
    weapons/rifle/firesnipe3
 }
 
-weapons/rcw/fire      lsounds/CombatRifle/FireLaz.flac      // Fallout 4, Fallout: New Vegas
-weapons/rcw/firesnipe lsounds/CombatRifle/FireLazSnipe.flac // 〃
+weapons/rcw/fire      lsounds/CombatRifle/FireLaz.ogg      // Fallout 4, Fallout: New Vegas
+weapons/rcw/firesnipe lsounds/CombatRifle/FireLazSnipe.ogg // 〃
 
 $volume weapons/rcw/fire 0.7
 $volume weapons/rcw/firesnipe 0.7
@@ -204,7 +204,7 @@ weapons/smg/draw     lsounds/SMG/Draw.flac         // Halo 3
 //
 // Sniper Rifle
 //
-weapons/sniper/fire        lsounds/SniperRifle/Fire.flac        // Fallout: New Vegas, Firearms: Source
+weapons/sniper/fire        lsounds/SniperRifle/Fire.ogg         // Fallout: New Vegas, Firearms: Source
 weapons/sniper/boltback    lsounds/SniperRifle/BoltBack.flac    // Fallout: New Vegas, FEAR, Firearms: Source
 weapons/sniper/boltforward lsounds/SniperRifle/BoltForward.flac // 〃
 weapons/sniper/magout      lsounds/SniperRifle/MagOut.flac      // Halo 3
@@ -230,19 +230,19 @@ weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallo
 //
 // Grenade Launcher
 //
-weapons/rocket/fire1   lsounds/RocketLauncher/Fire.flac        // FEAR
-weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.flac       // 〃
-weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.flac       // 〃
-weapons/rocket/empty   lsounds/RocketLauncher/FireEmpty.flac   // Killing Floor
-weapons/rocket/pickup  lsounds/RocketLauncher/Pickup.flac      // FEAR, Doom 3, Firearms: Source
-weapons/rocket/draw    lsounds/RocketLauncher/Draw.flac        // FEAR, Doom 3
-weapons/rocket/load    lsounds/RocketLauncher/Load.flac        // 〃
-weapons/rocket/lock    lsounds/RocketLauncher/Lock.flac        // Unreal Tournament '99
-weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac      // 〃
-weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac      // Killing Floor
-weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac     // 〃
-weapons/rocket/grenade lsounds/RocketLauncher/FireGrenade.flac // Quake, Quake 2
-weapons/rocket/mark    lsounds/RocketLauncher/Mark.flac        // Phantasy Star Nova
+weapons/rocket/fire1   lsounds/RocketLauncher/Fire.ogg        // FEAR
+weapons/rocket/fire2   lsounds/RocketLauncher/Fire1.ogg       // 〃
+weapons/rocket/fire3   lsounds/RocketLauncher/Fire2.ogg       // 〃
+weapons/rocket/empty   lsounds/RocketLauncher/FireEmpty.flac  // Killing Floor
+weapons/rocket/pickup  lsounds/RocketLauncher/Pickup.flac     // FEAR, Doom 3, Firearms: Source
+weapons/rocket/draw    lsounds/RocketLauncher/Draw.flac       // FEAR, Doom 3
+weapons/rocket/load    lsounds/RocketLauncher/Load.flac       // 〃
+weapons/rocket/lock    lsounds/RocketLauncher/Lock.flac       // Unreal Tournament '99
+weapons/rocket/launch  lsounds/RocketLauncher/Launch.flac     // 〃
+weapons/rocket/setalt  lsounds/RocketLauncher/SetAlt.flac     // Killing Floor
+weapons/rocket/setalt1 lsounds/RocketLauncher/SetAlt1.flac    // 〃
+weapons/rocket/grenade lsounds/RocketLauncher/FireGrenade.ogg // Quake, Quake 2
+weapons/rocket/mark    lsounds/RocketLauncher/Mark.flac       // Phantasy Star Nova
 
 $random weapons/rocket/fire {
    weapons/rocket/fire1
@@ -291,7 +291,7 @@ $limit weapons/plasma/explode 0
 $volume weapons/plasma/explode 0.5
 
 weapons/plasma/part/charge    lsounds/PlasmaRifle/PartBeam/Charge.flac    // Touhou 13
-weapons/plasma/part/fire      lsounds/PlasmaRifle/PartBeam/Fire.flac      // FEAR, Halo 3
+weapons/plasma/part/fire      lsounds/PlasmaRifle/PartBeam/Fire.ogg       // FEAR, Halo 3
 weapons/plasma/part/reloadout lsounds/PlasmaRifle/PartBeam/ReloadOut.flac // FEAR
 weapons/plasma/part/reloadin  lsounds/PlasmaRifle/PartBeam/ReloadIn.flac  // 〃
 
@@ -355,16 +355,16 @@ $attenuation weapons/rail/impact 0.8
 //
 // Dark Cannon
 //
-weapons/dark/wind    lsounds/DarkCannon/Wind.flac    // Half-Life 2
-weapons/dark/water1  lsounds/DarkCannon/Water.flac   // Steam
-weapons/dark/water2  lsounds/DarkCannon/Water2.flac  // 〃
+weapons/dark/wind    lsounds/DarkCannon/Wind.ogg     // Half-Life 2
+weapons/dark/water1  lsounds/DarkCannon/Water.ogg    // Steam
+weapons/dark/water2  lsounds/DarkCannon/Water2.ogg   // 〃
 weapons/dark/water3  lsounds/DarkCannon/Water3.flac  // 〃
-weapons/dark/fire1   lsounds/DarkCannon/Fire.flac    // Halo 3
-weapons/dark/fire2   lsounds/DarkCannon/Fire2.flac   // 〃
-weapons/dark/fire3   lsounds/DarkCannon/Fire3.flac   // 〃
-weapons/dark/impact1 lsounds/DarkCannon/Impact.flac  // 〃
-weapons/dark/impact2 lsounds/DarkCannon/Impact2.flac // 〃
-weapons/dark/impact3 lsounds/DarkCannon/Impact3.flac // 〃
+weapons/dark/fire1   lsounds/DarkCannon/Fire.ogg     // Halo 3
+weapons/dark/fire2   lsounds/DarkCannon/Fire2.ogg    // 〃
+weapons/dark/fire3   lsounds/DarkCannon/Fire3.ogg    // 〃
+weapons/dark/impact1 lsounds/DarkCannon/Impact.ogg   // 〃
+weapons/dark/impact2 lsounds/DarkCannon/Impact2.ogg  // 〃
+weapons/dark/impact3 lsounds/DarkCannon/Impact3.ogg  // 〃
 
 $random weapons/dark/water {
    weapons/dark/water1

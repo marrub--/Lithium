@@ -281,7 +281,7 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
          // This delay is very specific -- it's the amount of time before
          // A_NoBlocking is called on a zombie. This is in case the monster
          // pack you're using (like DRLA Monsters) uses item drops for Score.
-         ACS_Delay(16);
+         ACS_Delay(17);
          
          // Get rid of the enemy.
          ACS_Thing_Remove(tid);
@@ -456,9 +456,9 @@ static void Lith_World(void)
       world.game         = ACS_GetCVar("__lith_game");
       world.extras       = ACS_GetCVar("__lith_extras");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
-      world.cbi.perf     = 10;
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
+      world.cbi.perf = 10;
       if(ACS_GetCVar("lith_sv_nobosses") || ACS_GetCVar("__lith_debug_on"))
          for(int i = 1; i < 7; i++)
             Lith_InstallCBIItem(i);

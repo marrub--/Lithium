@@ -41,7 +41,7 @@ $random misc/quitsound {
 //
 // Weapons
 //
-effects/rocket/fly lsounds/RocketLauncher/RocketFly.flac // Unreal Tournament '99
+effects/rocket/fly lsounds/RocketLauncher/RocketFly.ogg // Unreal Tournament '99
 
 effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic
 effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // 〃
