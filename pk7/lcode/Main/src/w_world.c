@@ -459,6 +459,10 @@ static void Lith_World(void)
       world.cbi.perf     = 10;
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
+      if(ACS_GetCVar("lith_sv_nobosses") || ACS_GetCVar("__lith_debug_on"))
+         for(int i = 1; i < 7; i++)
+            Lith_InstallCBIItem(i);
+      
       gsinit = true;
    }
    
@@ -516,7 +520,8 @@ static void Lith_World(void)
    // World-static post-player init.
    if(doworldinit)
    {
-      SpawnBoss();
+      if(!ACS_GetCVar("lith_sv_nobosses"))
+         SpawnBoss();
       
       // Payout, which is not done on the first map.
       if(world.mapscleared != 0)
