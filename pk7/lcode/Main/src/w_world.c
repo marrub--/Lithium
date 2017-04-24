@@ -443,8 +443,10 @@ static void Lith_World(void)
    if(!gsinit)
    {
       extern void Lith_GSInit_Weapon(void);
+      extern void Lith_GSInit_DlgStrTable(void);
       
       Lith_GSInit_Weapon();
+      Lith_GSInit_DlgStrTable();
       
       Lith_CheckIfEnemiesAreCompatible();
       
@@ -467,8 +469,10 @@ static void Lith_World(void)
    }
    
    // Map init.
+   extern void Lith_LoadMapDialogue(void);
+   Lith_LoadMapDialogue();
+   
    world.pauseinmenus = ACS_GetCVar("lith_sv_pauseinmenus");
-   world.bossspawned  = false;
    
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
@@ -495,6 +499,8 @@ static void Lith_World(void)
    
    if(ACS_Timer() <= 2)
    {
+      world.bossspawned = false;
+      
       if(world.unloaded)
          world.mapscleared++;
       

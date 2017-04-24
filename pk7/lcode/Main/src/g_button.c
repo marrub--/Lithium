@@ -13,8 +13,11 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a)
 {
    Lith_GUI_GenPreset(gui_button_preset_t, btndefault);
    
-   Lith_GUI_Prefix(pre.gfx);
-   Lith_GUI_Prefix(pre.hot);
+   if(!pre.external)
+   {
+      Lith_GUI_Prefix(pre.gfx);
+      Lith_GUI_Prefix(pre.hot);
+   }
    
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x, a->y, pre.w, pre.h);

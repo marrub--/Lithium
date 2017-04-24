@@ -38,7 +38,7 @@ end
 
 for ln in io.lines("FileData/dir.txt") do
    if ln:sub(1, 3) == "in " then
-      print("\nProcessing ", ln:sub(4))
+      print("proc> " .. ln:sub(4))
       out = io.open("../" .. ln:sub(4), "w")
       out:write("[default]\n\n")
    elseif out then
@@ -54,5 +54,7 @@ for ln in io.lines("FileData/dir.txt") do
       end
    end
 end
+
+print()
 
 -- EOF

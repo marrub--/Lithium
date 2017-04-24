@@ -1,14 +1,28 @@
-This is a list of files to be processed into ZDoom's LANGUAGE format by
-the compilefs.lua script.
+-- This is a list of files to be processed into LANGUAGE by compilefs.lua. ---
+
+-- Heretic -------------------------------------------------------------------
 
 in filter/heretic/language.fs.txt
+
 heretic/Upgrades.lthm -> Upgrades.lthm
 
+
+-- Dialogue ------------------------------------------------------------------
+
+in language.info.dialogue.txt
+
+Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
+
+
+-- CBI Mail ------------------------------------------------------------------
+
 in language.info.mail.txt
+
 mailtemplate.txt -> LITH_TXT_MAIL_TEMPLATE
 
 The flags for messages are as follows,
 bit 1 - Prints a message when received
+
 
 Saved SGXLine Message 1.txt -> LITH_TXT_MAIL_BODY_Intro
 data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Intro
@@ -27,4 +41,6 @@ data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster3
 Saved SGXLine Message 5.txt      -> LITH_TXT_MAIL_BODY_CBI
 data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_CBI
 data 330                         -> LITH_TXT_MAIL_SIZE_CBI
+data 1                           -> LITH_TXT_MAIL_FLAG_CBI
 
+EOF

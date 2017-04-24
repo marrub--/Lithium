@@ -24,7 +24,8 @@ static __str names_unknown[] = {
 static __str names_cfist[] = {
    "Chaaji Fisuto",
    "Charred Fist",
-   "Charged Mr. Fisto"
+   "Charged Mr. Fisto",
+   "Chargle Fargle"
 };
 
 static __str names_pistol[] = {
@@ -35,7 +36,8 @@ static __str names_pistol[] = {
    "Pistell",
    "Pistuh",
    "Listep",
-   "hurty peestal"
+   "hurty peestal",
+   "Pete Stool"
 };
 
 static __str names_revolver[] = {
@@ -50,14 +52,18 @@ static __str names_shotgun[] = {
    "Shartgun",
    "Shitgun",
    "Shtognu",
-   "Shetgun"
+   "Shetgun",
+   "Sug Glug"
 };
 
 static __str names_ssg[] = {
    "Sbepru Shtetgun",
    "Suber Shodgub",
    "Soer Shotgan",
-   "Suupaa Shottogan"
+   "Suupaa Shottogan",
+   "Susser Sarsaparilla",
+   "Shovel Subbutt",
+   "Suggle Kruggle"
 };
 
 static __str names_rifle[] = {
@@ -79,14 +85,22 @@ static __str names_plasma[] = {
    "Spalmo Rinfer",
    "Layzuh Beem",
    "Shooty-pew-pew Gun",
-   "Elfir Amsalp"
+   "Elfir Amsalp",
+   "Pulsmer Rifram",
+   "Plisplam Fimfam",
+   "Plastic Hamdonk"
 };
 
 static __str names_bfg[] = {
    "Biffgee Nintendo",
    "BFG 8000",
    "Biffug 9999",
-   "Bilmap Frignarp Gnu 9"
+   "Bilmap Frignarp Gnu 9",
+   "Frosty Balga Gams"
+};
+
+static __str names_smg[] = {
+   "Chug Smug",
 };
 
 static struct pickupname_s const pickupnames[weapon_max] = {
@@ -100,7 +114,8 @@ static struct pickupname_s const pickupnames[weapon_max] = {
    [weapon_rifle]    = name(names_rifle),
    [weapon_launcher] = name(names_launcher),
    [weapon_plasma]   = name(names_plasma),
-   [weapon_bfg]      = name(names_bfg)
+   [weapon_bfg]      = name(names_bfg),
+   [weapon_c_smg]    = name(names_smg)
 };
 
 // Flags
@@ -156,7 +171,6 @@ static struct pickupfmt_s const pickupfmt[] = {
    2, "DRUGS",
    0, ">%S >2012",
    0, "TNT1 A 0 A_TakeInventory(\"%S\", 1)",
-   0, "kono %S toiu yatu ha kirei ze",
    0, "Super rare %S acquired!",
    0, "Sacked the %S!",
    0, "The %S is your new waifu.",
@@ -169,12 +183,15 @@ static struct pickupfmt_s const pickupfmt[] = {
    0, "THIS IS SOME KIND OF %S",
    0, "A perfectly preportioned, rare breed of %S appears. "
       "Its natural predator, the Doomguy, picks it up.",
-   0, "O-Doom chan, what are we going to do to the demons? BOOM~",
    0, "%S version 7.0 installed.",
    0, "Hazardous %S contained.",
    0, "Warning: Dangerous %S levels detected.",
    0, "Oh, yeah, I'm *sure* the %S will help.",
    0, "YOU WOULDN'T DOWNLOAD A %S",
+   0, "Vital %S destroyed.",
+   0, "Explosive %S apparatus destroyed.",
+   0, "The %S shoots back at you, but you were stronger.",
+   0, "why are you reading this? eyes on the road, dumpass.",
    2, "What the fuck did you just fucking say about %S, you little bitch?\n"
       "I'll have you know I graduated top of my class in the Navy Seals,\n"
       "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"

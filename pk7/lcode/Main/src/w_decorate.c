@@ -10,6 +10,15 @@
 // Extern Functions
 //
 
+[[__call("ScriptI"), __address(24244), __extern("ACS")]]
+void Lith_RunDialogueInt(int num)
+{
+   [[__call("ScriptS"), __extern("ACS")]]
+   extern void Lith_RunDialogue(int num);
+   
+   Lith_RunDialogue(num);
+}
+
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckCeilingSky()
 {

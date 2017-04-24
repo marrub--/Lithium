@@ -1,111 +1,111 @@
+// Code from Fuck Super Shotguns, which I made. I probably released that one.
 actor Lith_TitleMarine : ScriptedMarine
 {
-  Speed 4
-  PainChance 0
-  MaxTargetRange 16384
-  MinMissileChance 2
-  Species "Lith_Player"
-  
-  +FRIENDLY
-  +MISSILEMORE
-  +MISSILEEVENMORE
-  +DONTHARMCLASS
-  +DONTHARMSPECIES
-  +NOINFIGHTING
-  +INVULNERABLE
-  
-  States
-  {
-  See:
-    "####" A 0 A_JumpIfCloser(128, "RunAway")
-    "####" AAAA 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
-    "####" BBB 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
-    "####" B 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" CCCC 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
-    "####" DDD 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
-    "####" D 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    Loop
-  Missile.Shotgun:
-    "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_M_CheckAttack
-    "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 bright A_CustomBulletAttack(5, 0, 10, 10, "Lith_Dummy")
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" F 0 A_JumpIfCloser(128, "RunAway")
-    Goto See
-  Missile.Chaingun:
-    "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_FaceTarget
-    "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_CustomBulletAttack(0, 0, 3, 5, "Lith_Dummy")
-    "####" F 1 bright A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_CustomBulletAttack(0, 0, 3, 5, "Lith_Dummy")
-    "####" F 1 bright A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-  Missile.ChaingunLoop:
-    "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 0 A_CustomBulletAttack(5, 0, 3, 5, "Lith_Dummy")
-    "####" F 1 bright A_FaceTarget
-    "####" F 0 A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 0 A_CustomBulletAttack(5, 0, 3, 5, "Lith_Dummy")
-    "####" F 1 bright A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" F 0 A_FaceTarget
-    "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" F 0 A_JumpIfCloser(128, "RunAway")
-    "####" F 0 A_Jump(32, "RunAway")
-    "####" A 0 A_M_Refire
-    Goto Missile.ChaingunLoop
-    "####" A 0
-    Goto See
-  RunAway:
-    "####" A 0 A_ChangeFlag("FRIGHTENED", 1)
-    "####" AAAABBBBCCCCDDDD 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" A 0 A_JumpIfCloser(128, "RunAway")
-    "####" A 0 A_ChangeFlag("FRIGHTENED", 0)
-    Goto See
-  Missile:
-    "####" A 0 A_JumpIfCloser(128, "RunAway")
-    "####" A 0 A_Jump(256, "Missile.Shotgun", "Missile.Chaingun")
-    Stop
-  Melee:
-    "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_M_Saw
-    "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
-    "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
-    "####" E 0 A_M_SawRefire
-    Goto Melee
-    "####" A 0
-    Goto See
-  }
+   Speed 4
+   PainChance 0
+   MaxTargetRange 16384
+   MinMissileChance 2
+   Species "Lith_Player"
+
+   +FRIENDLY
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   +DONTHARMCLASS
+   +DONTHARMSPECIES
+   +NOINFIGHTING
+   +INVULNERABLE
+
+   States
+   {
+   See:
+      "####" A 0 A_JumpIfCloser(128, "RunAway")
+      "####" AAAA 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
+      "####" BBB 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
+      "####" B 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" CCCC 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
+      "####" DDD 1 A_Chase("Melee", "Missile", CHF_NIGHTMAREFAST)
+      "####" D 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      Loop
+   Missile.Shotgun:
+      "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_M_CheckAttack
+      "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 bright A_CustomBulletAttack(5, 0, 10, 10, "Lith_Dummy")
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" F 0 A_JumpIfCloser(128, "RunAway")
+      "####" A 0 A_Jump(256, "See")
+   Missile.Chaingun:
+      "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_FaceTarget
+      "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_CustomBulletAttack(0, 0, 3, 5, "Lith_Dummy")
+      "####" F 1 bright A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_CustomBulletAttack(0, 0, 3, 5, "Lith_Dummy")
+      "####" F 1 bright A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+   Missile.ChaingunLoop:
+      "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 0 A_CustomBulletAttack(5, 0, 3, 5, "Lith_Dummy")
+      "####" F 1 bright A_FaceTarget
+      "####" F 0 A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 0 A_CustomBulletAttack(5, 0, 3, 5, "Lith_Dummy")
+      "####" F 1 bright A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" F 0 A_FaceTarget
+      "####" F 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" F 0 A_JumpIfCloser(128, "RunAway")
+      "####" F 0 A_Jump(32, "RunAway")
+      "####" A 0 A_M_Refire
+      "####" A 0 A_Jump(256, "Missile.ChaingunLoop")
+      "####" A 0
+      "####" A 0 A_Jump(256, "See")
+   RunAway:
+   "####" A 0 A_ChangeFlag("FRIGHTENED", 1)
+      "####" AAAABBBBCCCCDDDD 1 A_Chase("Melee", "Missile", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" A 0 A_JumpIfCloser(128, "RunAway")
+      "####" A 0 A_ChangeFlag("FRIGHTENED", 0)
+      "####" A 0 A_Jump(256, "See")
+   Missile:
+      "####" A 0 A_JumpIfCloser(128, "RunAway")
+      "####" A 0 A_Jump(256, "Missile.Shotgun", "Missile.Chaingun")
+   Melee:
+      "####" E 0 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_M_Saw
+      "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_Chase("", "", CHF_NIGHTMAREFAST)
+      "####" E 1 A_Chase("", "", CHF_FASTCHASE | CHF_NIGHTMAREFAST)
+      "####" E 0 A_M_SawRefire
+      "####" A 0 A_Jump(256, "Melee")
+      "####" A 0
+      "####" A 0 A_Jump(256, "See")
+   }
 }
 
 actor Lith_TitleImpBall : Lith_XH_ImpBall

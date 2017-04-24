@@ -120,6 +120,16 @@ gui_button_preset_t const btnbipback = {
    .h = 9
 };
 
+gui_button_preset_t const btndlgsel = {
+   BtnDefault,
+   .gfx  = "lgfx/Dialogue/SelectBack.png",
+   .hot  = "lgfx/Dialogue/SelectBackHot.png",
+   .cdis = "i",
+   .w = 240,
+   .h = 14,
+   .external = true
+};
+
 gui_checkb_preset_t const cbxdefault = {
    .gfx    = "Checkbox.png",
    .hot    = "CheckboxHot.png",

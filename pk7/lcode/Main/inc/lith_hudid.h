@@ -4,12 +4,13 @@
 enum
 {
    // hid_base         to hid_base + 99    reserved for testing
-   // hid_base +   100 to hid_base + 29999 reserved for CBI
+   // hid_base +   100 to hid_base + 999   reserved for dialogue
+   // hid_base +  1000 to hid_base + 29999 reserved for CBI
    // hid_base + 30000 to hid_base + 39999 reserved for the Gameboy
-   // hid_base + 40000 to hid_base + 40999 reserved for Payout
-   // hid_base + 41000 to hid_base + 41999 reserved for Misc.
+   // hid_base + 40000 to hid_base + 40999 reserved for payout
+   // hid_base + 41000 to hid_base + 41999 reserved for misc.
    // hid_base + 42000 to hid_base + 42999 reserved for HUD
-   // hid_base + 43000 to hid_base + 44999 reserved for Scope
+   // hid_base + 43000 to hid_base + 44999 reserved for scopes
    hid_base = 0x100000,
    
    // Testing
@@ -26,8 +27,12 @@ enum
    hid_test8,
    hid_test9,
    
+   // Dialogue
+   hid_base_dialogue = hid_base + 100,
+   hid_end_dialogue  = hid_base + 999,
+   
    // CBI
-   hid_base_cbi = hid_base + 200,
+   hid_base_cbi = hid_base + 1000,
    hid_end_cbi  = hid_base + 29999,
    
    // Gameboy

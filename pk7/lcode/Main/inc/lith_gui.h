@@ -92,6 +92,7 @@ typedef struct gui_button_preset_s
    __str chot;
    __str cdis;
    __str font;
+   bool  external;
    int   w;
    int   h;
 } gui_button_preset_t;
@@ -192,6 +193,7 @@ extern gui_button_preset_t const btnlistactive;
 extern gui_button_preset_t const btnlistactivated;
 extern gui_button_preset_t const btnbipmain;
 extern gui_button_preset_t const btnbipback;
+extern gui_button_preset_t const btndlgsel;
 extern gui_checkb_preset_t const cbxdefault;
 extern gui_checkb_preset_t const cbxsmall;
 extern gui_scroll_preset_t const scrdefault;

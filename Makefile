@@ -19,7 +19,7 @@ LITHOS_INC=pk7/lcode/LithOS3/lithos_c/inc
 
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET) -i$(LITHOS_INC)
+CFLAGS=$(TARGET) -i$(LITHOS_INC) --sys-include $(LITHOS_INC)
 ALLOCMIN=--alloc-min Sta ""
 
 ## Sources
@@ -73,7 +73,9 @@ MAIN_SOURCES= \
 	$(SRC)/g_scrollbar.c \
 	$(SRC)/g_slider.c \
 	$(SRC)/p_settings.c \
-	$(SRC)/w_boss.c
+	$(SRC)/w_boss.c \
+	$(SRC)/w_dialogue.c \
+	$(SRC)/p_dialogue.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 MAIN_HEADERS=$(wildcard $(INC)/*.h) $(wildcard $(API)/*.h)
@@ -89,23 +91,29 @@ all: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
 ## acs/*.bin
 
 $(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
-	$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
+	@echo LD $@
+	@$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
 
 $(BIN)/lithmain.bin: $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
-	$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
+	@echo LD $@
+	@$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
 
 ## ir/*.ir
 
 $(IR)/%.ir: $(SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
-	$(CC) $(CFLAGS) -i$(INC) -i$(API) -Dnull=NULL -c $< -o $@
+	@echo CC $<
+	@$(CC) $(CFLAGS) -i$(INC) -i$(API) -Dnull=NULL -c $< -o $@
 
 $(IR)/lithos_%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo CC $<
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(IR)/libc.ir:
-	$(MAKELIB) $(TARGET) -c libc -o $@
+	@echo MAKELIB $@
+	@$(MAKELIB) $(TARGET) -c libc -o $@
 
 $(IR)/libGDCC.ir:
-	$(MAKELIB) $(TARGET) -c libGDCC -o $@
+	@echo MAKELIB $@
+	@$(MAKELIB) $(TARGET) -c libGDCC -o $@
 
 ## EOF

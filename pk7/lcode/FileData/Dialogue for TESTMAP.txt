@@ -1,0 +1,33 @@
+dialogue number 1
+
+page 0
+{
+   name "Jacques";
+   icon "AOF";
+   remote "jacques.p42710@corp.AOF";
+   
+   text "...";
+   
+   if item Lith_DivisionSigil page 7;
+   
+   option "Say hello" page 2;
+   option "Exit"      exit;
+}
+
+page 2
+{
+   if class Marine    text "Who are you?";
+   if class CyberMage text "Right. The Cybernati.";
+   
+   option "Exit" exit;
+}
+
+page 7
+{
+   text "...?";
+   
+   option "Exit" exit;
+}
+
+// EOF
+

@@ -132,6 +132,7 @@ typedef struct player_extdata_s
    Lth_HashMap upgrademap;
    bool       hudenabled;
    int        decvars[8];
+   bool       indialogue;
    
    score_t scoreaccum;
    int     scoreaccumtime;

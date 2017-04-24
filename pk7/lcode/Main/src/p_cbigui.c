@@ -96,7 +96,9 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    }
    
    Lith_GUI_Begin(g, hid_end_cbi, 320, 240);
-   Lith_GUI_UpdateState(g, p);
+   
+   if(!p->indialogue)
+      Lith_GUI_UpdateState(g, p);
    
    DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TICSECOND, 0.7);
    
@@ -133,7 +135,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 void Lith_PlayerResetCBIGUI(player_t *p)
 {
    p->cbi.guistate.cx = 320 / 2;
-   p->cbi.guistate.cy = 200 / 2;
+   p->cbi.guistate.cy = 240 / 2;
    
    Lith_GUI_Init(&p->cbi.guistate, st_max);
    

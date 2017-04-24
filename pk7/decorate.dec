@@ -33,6 +33,7 @@
 #include "lscripts/Monsters/Isaac.dec"
 
 #include "lscripts/Monsters/TitleMap.dec"
+#include "lscripts/TestMap.dec"
 
 #include "lscripts/Items/Ammo.dec"
 #include "lscripts/Items/Score.dec"

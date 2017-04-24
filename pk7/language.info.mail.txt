@@ -103,3 +103,5 @@
    "htic0@gov.<hidden>.mailserv";
 "LITH_TXT_MAIL_SIZE_CBI" =
    "330";
+"LITH_TXT_MAIL_FLAG_CBI" =
+   "1";

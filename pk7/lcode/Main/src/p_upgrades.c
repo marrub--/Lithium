@@ -1,7 +1,7 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
-#include "Lth_manifest.h"
+#include <Lth.h>
 
 #define ForUpgrade(name) \
    for(int _i = 0; _i < p->upgrmax; _i++) \

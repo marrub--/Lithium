@@ -14,6 +14,9 @@ ______________________________________________________________________________
 
 --- Credits
 
+Anthony Cole
+   Test map marine sprites
+
 abbuw
    Vent texture
 
@@ -74,6 +77,7 @@ Wartorn
 
 WildWeasel
    Help with making fonts, suggestions for HUD
+   Sleeves for Cyber-Mage
 
 Xaser Acheron
    Bullet puffs
@@ -87,6 +91,9 @@ Yholl
    Marathon resources
    knif
    Missile Launcher code
+
+Zombie
+   Image used as a base for the SPAS sprite
 
 zrrion the insect
    Full sprites for the Grenade Launcher, Pistol and Plasma Rifle

@@ -109,6 +109,9 @@ actor Lith_DivisionSigilSprite
 
 actor Lith_DivisionSigil : CustomInventory
 {
+   //$Category "Items"
+   //$Sprite "DIVIA0"
+   
    Inventory.Icon "DIVSIGI1"
    Inventory.PickupMessage ""
    Inventory.PickupSound ""
