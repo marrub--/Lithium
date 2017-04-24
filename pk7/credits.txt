@@ -27,6 +27,9 @@ DavidPH
 HorrorMovieGuy
    SteggleSphere sprites
 
+JetPlane
+   Image used as a base for the SMG sprite
+
 Jimmy
    Fonts! All of them, except the SMALLFNT.
 
