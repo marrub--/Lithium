@@ -65,6 +65,7 @@ Sgt. Shivers
    Shotgun sprites
    Revolver sprites (from Powerslave originally)
    knif
+   Mateba reload sprites
 
 Shadowlink226
    Halo 3 sound rip
