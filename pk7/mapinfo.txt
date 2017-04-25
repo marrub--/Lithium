@@ -155,6 +155,7 @@ DoomEdNums
    22428 = Lith_GreyHam
    22429 = Lith_Map_Jacques
    22430 = Lith_DivisionSigil
+   22431 = Lith_Chair
 }
 
 

@@ -9,3 +9,15 @@ decal Lith_GaussScorch
 
 generator Lith_GaussPuff Lith_GaussScorch
 
+decal Lith_DoomPoster1 {pic LITHFDPS}
+decal Lith_DoomPoster2 {pic LITH64PS}
+decal Lith_DoomPoster3 {pic LITHD2PS}
+decal Lith_DoomPoster4 {pic LITHE4PS}
+
+decalgroup Lith_DoomPoster 60
+{
+   Lith_DoomPoster1 1
+   Lith_DoomPoster2 1
+   Lith_DoomPoster3 1
+   Lith_DoomPoster4 1
+}
