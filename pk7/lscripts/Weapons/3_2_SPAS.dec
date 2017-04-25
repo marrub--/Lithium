@@ -1,9 +1,9 @@
-actor Lith_CShotgunShotsFired : Inventory
+actor Lith_SPASShotsFired : Inventory
 {
    Inventory.MaxAmount 5
 }
 
-actor Lith_CShotgun : Lith_CWeapon
+actor Lith_SPAS : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_CShotgun"
    Weapon.UpSound "weapons/cshotgun/draw"
@@ -36,8 +36,8 @@ actor Lith_CShotgun : Lith_CWeapon
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_ShellAmmo", 1, 1)
       goto FireEmpty
-      TNT1 A 0 A_JumpIfInventory("Lith_CShotgunShotsFired", 0, "Reload")
-      TNT1 A 0 A_GiveInventory("Lith_CShotgunShotsFired", 1)
+      TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_SPASShotsFired", 1)
       TNT1 A 0 A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE)
       TNT1 A 0 A_AlertMonsters
       TNT1 A 0 A_FireBullets(11, 5, 12, 5)
@@ -51,7 +51,7 @@ actor Lith_CShotgun : Lith_CWeapon
       goto Ready
    
    Reload:
-      TNT1 A 0 A_JumpIfInventory("Lith_CShotgunShotsFired", 1, 1)
+      TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 1, 1)
       goto Ready
       CSHG A 1
       CSHG A 1 offset(-2, 34)
@@ -63,7 +63,7 @@ actor Lith_CShotgun : Lith_CWeapon
       CSHG A 3 offset(-11, 57)
       CSHG A 8 offset(-10, 60)
       CSHG A 8 offset(-11, 60)
-      CSHG A 0 A_TakeInventory("Lith_CShotgunShotsFired", 999)
+      CSHG A 0 A_TakeInventory("Lith_SPASShotsFired", 999)
       CSHG A 2 offset(-13, 59) A_PlaySound("weapons/cshotgun/pump", CHAN_7)
       CSHG E 1 offset(-10, 57)
       CSHG F 1 offset(-8, 55)

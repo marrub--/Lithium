@@ -120,21 +120,6 @@ static void HUD_KeyInd(player_t *p)
    if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        130.2, 11.1, 0.1, 0.8);
 }
 
-//
-// HUD_Mode
-//
-static void HUD_Mode(player_t *p)
-{
-   if(p->weapontype == weapon_rifle)
-   {
-      int addy = p->getUpgr(UPGR_RifleModes)->active ? 0 : 16;
-      DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 200.2 + addy, TICSECOND);
-      DrawSpritePlain(StrParam("lgfx/HUD/H_W%i.png",
-         (rifle_firemode_max - p->riflefiremode) + 3),
-         hid_riflemode, 215.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
-   }
-}
-
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -171,8 +156,6 @@ void Upgr_HeadsUpDis2_Render(player_t *p, upgrade_t *upgr)
       HUD_Score(p);
    if(Lith_GetPCVarInt(p, "lith_hud_showweapons"))
       HUD_Weapons(p);
-   
-   HUD_Mode(p);
    
    // Status
    HUD_Ammo(p);

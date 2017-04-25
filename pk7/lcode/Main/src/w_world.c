@@ -46,10 +46,10 @@ __str Lith_CanonTime(bool shorttime)
    int days    = 25 + (hours       / 24); // pls
    
    if(shorttime)
-      return StrParam("%0.2i:%0.2i %i/7/49",
+      return StrParam("%0.2i:%0.2i %i-7-49",
          hours % 24, minutes % 60, days);
    else
-      return StrParam("%0.2i:%0.2i:%0.2i %i/7/1649",
+      return StrParam("%0.2i:%0.2i:%0.2i %i-7-1649",
          hours % 24, minutes % 60, seconds % 60, days);
 }
 

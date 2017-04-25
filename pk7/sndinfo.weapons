@@ -387,6 +387,14 @@ $random weapons/dark/impact {
 $limit weapons/dark/impact 0
 
 //
+// Star Destroyer
+//
+weapons/shipgun/explode lsounds/StarDestroyer/Explode.flac // Halo 3
+
+$limit weapons/shipgun/explode 0
+$attenuation weapons/shipgun/explode 0.6
+
+//
 // sord
 //
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View

@@ -33,10 +33,13 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    // Cyber-Mage Weapons
    {1, pclass_cybermage, "CFist",           "YOUSONOFABITCH"},
    {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
-   {3, pclass_cybermage, "CShotgun",        "weapons/cshotgun/pickup",  AT_Ammo, "Lith_ShellAmmo"},
-   {3, pclass_cybermage, "Delear",          "weapons/delear/pickup",    AT_Ammo, "Lith_DelearAmmo"},
+   {3, pclass_cybermage, "SPAS",            "weapons/cshotgun/pickup",  AT_Ammo, "Lith_ShellAmmo"},
+   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",           AT_Ammo, "Lith_DelearAmmo"},
    {4, pclass_cybermage, "SMG",             "weapons/smg/pickup",       AT_Mag,  "Lith_SMGShotsFired"},
    {5, pclass_cybermage, "IonRifle",        "weapons/ionrifle/pickup",  AT_Ammo, "Lith_RocketAmmo"},
+   {6, pclass_cybermage, "CPlasmaRifle",    "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
+   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Ammo, "Lith_StarShotAmmo"},
+   {7, pclass_cybermage, "StarDestroyer",   "weapons/shipgun/pickup",   AT_Ammo, "Lith_CannonAmmo"},
 };
 
 
@@ -53,11 +56,12 @@ static void GiveWeaponItem(int parm)
    {
    case weapon_c_fist:
    case weapon_fist:      ACS_GiveInventory("Lith_Death",      1);    break;
-   case weapon_c_shotgun: ACS_GiveInventory("Lith_ShellAmmo",  5);    break;
+   case weapon_c_spas:    ACS_GiveInventory("Lith_ShellAmmo",  5);    break;
    case weapon_ssg:       ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
    case weapon_c_sniper:  ACS_GiveInventory("Lith_RocketAmmo", 6);    break;
    case weapon_launcher:  ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
    case weapon_plasma:    ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
+   case weapon_c_shipgun: ACS_GiveInventory("Lith_CannonAmmo", 5);    break;
    case weapon_bfg:       ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
    }
 }
@@ -118,11 +122,11 @@ bool Lith_WeaponPickup(int name)
       Case(wepnam_chainsaw,       weapon_cfist);
       Case(wepnam_pistol,         weapon_c_mateba);
       Case(wepnam_shotgun,        weapon_unknown);
-      Case(wepnam_supershotgun,   weapon_c_shotgun);
+      Case(wepnam_supershotgun,   weapon_c_spas);
       Case(wepnam_chaingun,       weapon_c_smg);
       Case(wepnam_rocketlauncher, weapon_c_sniper);
-      Case(wepnam_plasmarifle,    weapon_unknown);
-      Case(wepnam_bfg9000,        weapon_unknown);
+      Case(wepnam_plasmarifle,    weapon_c_plasma);
+      Case(wepnam_bfg9000,        weapon_c_shipgun);
       }
       break;
    #undef Case
@@ -162,24 +166,24 @@ bool Lith_WeaponPickup(int name)
 // Lith_CircleSpread
 //
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
+fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
    static fixed A;
    static fixed P;
    
    if(!getpitch)
    {
-      fixed dx = ACS_RandomFixed(mdx, 0.0);
-      fixed dy = ACS_RandomFixed(mdy, 0.0);
+      fixed dx = ACS_RandomFixed(mdx,  0.0);
+      fixed dy = ACS_RandomFixed(mdy,  0.0);
       fixed a  = ACS_RandomFixed(1.0, -1.0);
       
       A = sink(a) * dx;
       P = cosk(a) * dy;
       
-      return bitsk(A);
+      return A;
    }
    else
-      return bitsk(P);
+      return P;
 }
 
 //
@@ -228,14 +232,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
 {
    weapondata_t *w = &p->weapon;
    
-   {
-   int heat = ACS_CheckInventory("Lith_SMGHeat");
-        if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
-   else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
-   else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
-   else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
-   else                ACS_TakeInventory("Lith_SMGHeat", 1);
-   }
+   w->prev = w->cur;
    
    // Reset data temporarily.
    w->cur = null;
@@ -257,7 +254,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       
       if(i == weapon_shotgun && p->getUpgr(UPGR_GaussShotty)->active)
       {
-         wep->ammotype = AT_Mag;
+         wep->ammotype  = AT_Mag;
          wep->ammoclass = "Lith_GaussShotsFired";
       }
       
@@ -276,6 +273,40 @@ void Lith_PlayerUpdateWeapon(player_t *p)
    }
    
    if(!w->cur) w->cur = &w->inv[weapon_unknown];
+}
+
+//
+// Lith_PlayerUpdateWeapons
+//
+void Lith_PlayerUpdateWeapons(player_t *p)
+{
+   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");)
+           if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
+      else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
+      else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
+      else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
+      else                ACS_TakeInventory("Lith_SMGHeat", 1);
+   
+   if(p->weapontype == weapon_c_starshot)
+   {
+      
+   }
+}
+
+//
+// Lith_StarShotSelect
+//
+void Lith_StarShotSelect()
+{
+   Log("Lith_StarShotSelect");
+}
+
+//
+// Lith_StarShotDeselect
+//
+void Lith_StarShotDeselect()
+{
+   Log("Lith_StarShotDeselect");
 }
 
 // EOF

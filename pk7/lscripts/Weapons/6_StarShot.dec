@@ -1,0 +1,41 @@
+actor Lith_StarShot : Lith_CWeapon
+{
+   Tag "$LITH_TXT_INFO_SHORT_StarShot"
+   Weapon.SlotNumber 6
+   Weapon.SlotPriority 1
+   Weapon.BobStyle "Normal"
+   Weapon.BobSpeed 0.3
+   Weapon.BobRangeX 0.8
+   Weapon.BobRangeY 0.5
+   Weapon.UpSound "weapons/starshot/draw"
+   
+   -WEAPON.NOAUTOFIRE
+   
+   states
+   {
+   Ready:
+      PISG A 1 bright A_WeaponReady
+      loop
+   
+   Deselect:
+      PISG A 0 ACS_NamedExecuteWithResult("Lith_StarShotDeselect")
+   DeselectLoop:
+      PISG AAA 0 A_Lower
+      PISG A 1
+      loop
+   Select:
+      PISG A 0 ACS_NamedExecuteWithResult("Lith_StarShotSelect")
+   SelectLoop:
+      PISG AAA 0 A_Raise
+      PISG A 1
+      loop
+   
+   Fire:
+      PISG A 0 A_GunFlash("DummyFlash")
+      PISG A 3 bright
+      goto Ready
+   }
+}
+
+// EOF
+

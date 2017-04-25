@@ -340,6 +340,7 @@ static void Lith_PlayerRunScripts(player_t *p)
       }
       
       Lith_PlayerUpdateUpgrades(p); // Update upgrades
+      Lith_PlayerUpdateWeapons(p);  // Update weapons
       Lith_PlayerUpdateLog(p);      // Update log data
       
       // Post-logic: Update the engine's data.

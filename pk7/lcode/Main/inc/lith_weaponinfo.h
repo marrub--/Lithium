@@ -40,11 +40,14 @@ typedef struct weapondata_s
    bool slot[SLOT_MAX];
    invweapon_t inv[weapon_max];
    invweapon_t *cur;
+   invweapon_t *prev;
+   int sshottid[2];
 } weapondata_t;
 
 extern weaponinfo_t const weaponinfo[weapon_max];
 
 void Lith_PlayerUpdateWeapon(struct player_s *p);
+void Lith_PlayerUpdateWeapons(struct player_s *p);
 
 #endif
 

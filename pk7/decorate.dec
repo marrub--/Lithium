@@ -48,26 +48,22 @@
 
 //$GZDB_SKIP
 
+// Marine weapons
 #include "lscripts/Weapons/1_Fist.dec"
-#include "lscripts/Weapons/1_CFist.dec"
 #include "lscripts/Weapons/1_ChargeFist.dec"
 
 #include "lscripts/Weapons/2_Pistol.dec"
-#include "lscripts/Weapons/2_Mateba.dec"
 #include "lscripts/Weapons/2_Revolver.dec"
 
 #include "lscripts/Weapons/3_Shotgun.dec"
 #include "lscripts/Weapons/3_LazShotgun.dec"
-#include "lscripts/Weapons/3_CShotgun.dec"
-#include "lscripts/Weapons/3_Delear.dec"
-#include "lscripts/Weapons/3_SuperShotgun.dec"
+
+#include "lscripts/Weapons/3_2_SuperShotgun.dec"
 
 #include "lscripts/Weapons/4_CombatRifle.dec"
-#include "lscripts/Weapons/4_SMG.dec"
 #include "lscripts/Weapons/4_SniperRifle.dec"
 
 #include "lscripts/Weapons/5_RocketLauncher.dec"
-#include "lscripts/Weapons/5_IonRifle.dec"
 #include "lscripts/Weapons/5_MissileLauncher.dec"
 
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
@@ -75,6 +71,25 @@
 
 #include "lscripts/Weapons/7_OmegaCannon.dec"
 
+// Cyber-Mage weapons
+#include "lscripts/Weapons/1_CFist.dec"
+
+#include "lscripts/Weapons/2_Mateba.dec"
+
+#include "lscripts/Weapons/3_Delear.dec"
+
+#include "lscripts/Weapons/3_2_SPAS.dec"
+
+#include "lscripts/Weapons/4_SMG.dec"
+
+#include "lscripts/Weapons/5_IonRifle.dec"
+
+#include "lscripts/Weapons/6_CPlasmaRifle.dec"
+#include "lscripts/Weapons/6_StarShot.dec"
+
+#include "lscripts/Weapons/7_StarDestroyer.dec"
+
+// Misc.
 #include "lscripts/Weapons/9_Sword.dec"
 #include "lscripts/Weapons/9_Gameboy.dec"
 
