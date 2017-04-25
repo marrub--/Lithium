@@ -6,14 +6,16 @@ actor Lith_RainDrop
    Height 2
    Radius 2
    
-   +MISSILE
+   +NOTRIGGER
    +NOBLOCKMAP
+   +DROPOFF
+   +NOTELEPORT
    -NOGRAVITY
    
    states
    {
    Spawn:
-      RNDR A 1 A_JumpIf(waterlevel > 0, "Death")
+      RNDR A 1 A_JumpIf(waterlevel > 0 || velz == 0, "Death")
       loop
    Death:
       RNDR BCDEFGH 3 A_FadeOut(0.15)
