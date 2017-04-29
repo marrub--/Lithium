@@ -20,6 +20,8 @@ player/zoomin      lsounds/Player/ZoomIn.flac             // 〃
 player/zoomout     lsounds/Player/ZoomOut.flac            // 〃
 player/YOUVEGOTMAIL lsounds/Player/Mail.ogg               // AOL
 player/hitground   lsounds/Player/HitGround.flac          // EYE: Divine Cybermancy
+player/trmopen     lsounds/Terminal/Open.wav              // Marathon
+player/trmswitch   lsounds/Terminal/Switch.wav            // 〃
 
 $volume player/death2 0.7
 $volume player/nuke 0.7

@@ -21,7 +21,7 @@ actor Lith_MapMarine : Lith_TitleMarine
       TNT1 A 0 A_SetUserVar(user_init, 1)
       TNT1 A 0 A_SetSpecial(84, 24244, args[0])
    Idle:
-      NMA6 A 4 A_LookEx(LOF_NOSOUNDCHECK)
+      NMA6 A 4
       loop
    Missile.Shotgun:
       goto Missile.Chaingun

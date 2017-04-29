@@ -81,6 +81,7 @@ typedef struct player_delta_s
    int     health;
    int     armor;
    score_t score;
+   bool    indialogue;
    
    // Position
    fixed x, y, z;
@@ -132,7 +133,6 @@ typedef struct player_extdata_s
    Lth_HashMap upgrademap;
    bool       hudenabled;
    int        decvars[8];
-   bool       indialogue;
    
    score_t scoreaccum;
    int     scoreaccumtime;

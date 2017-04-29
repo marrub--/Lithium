@@ -38,19 +38,24 @@ payoutinfo_t payout;
 //
 // Lith_CanonTime
 //
-__str Lith_CanonTime(bool shorttime)
+__str Lith_CanonTime(int type)
 {
    int seconds = 53 + (world.ticks / 35);
    int minutes = 30 + (seconds     / 60);
    int hours   = 14 + (minutes     / 60);
    int days    = 25 + (hours       / 24); // pls
    
-   if(shorttime)
-      return StrParam("%0.2i:%0.2i %i-7-49",
-         hours % 24, minutes % 60, days);
-   else
+   switch(type)
+   {
+   case CANONTIME_FULL:
       return StrParam("%0.2i:%0.2i:%0.2i %i-7-1649",
          hours % 24, minutes % 60, seconds % 60, days);
+   case CANONTIME_SHORT:
+      return StrParam("%0.2i:%0.2i %i-7-49",
+         hours % 24, minutes % 60, days);
+   case CANONTIME_DATE:
+      return StrParam("%i-7-1649", days);
+   }
 }
 
 //
@@ -443,10 +448,10 @@ static void Lith_World(void)
    if(!gsinit)
    {
       extern void Lith_GSInit_Weapon(void);
-      extern void Lith_GSInit_DlgStrTable(void);
+      extern void Lith_GSInit_Dialogue(void);
       
       Lith_GSInit_Weapon();
-      Lith_GSInit_DlgStrTable();
+      Lith_GSInit_Dialogue();
       
       Lith_CheckIfEnemiesAreCompatible();
       
@@ -559,7 +564,7 @@ static void Lith_World(void)
    
    for(;;)
    {
-      if(world.ticks > 17 * 35 * 60 * 60)
+      if(world.ticks > 17 * 35 * 60 * 60 && world.mapnum < 0x7FFF)
          ACS_Teleport_NewMap(1911777, 0, 0);
       
       int secrets = world.mapsecrets;

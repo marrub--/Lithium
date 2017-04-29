@@ -5,6 +5,9 @@
 
 #include <Lth.h>
 
+#define LogTok(s, tok) \
+   Log(s " (type %i string %s)", tok->type, tok->str ? tok->str : c"no string")
+
 
 //----------------------------------------------------------------------------
 // Static Functions
@@ -25,6 +28,14 @@ enum
    STR_MAX,
 };
 
+typedef struct dlgfunc_s
+{
+   __str name;
+   __str args;
+   int   code;
+   int   lit[4];
+} dlgfunc_t;
+
 typedef struct dlgparsestate_s
 {
    property nextCode {call: NextCode(this)}
@@ -42,6 +53,7 @@ typedef struct dlgparsestate_s
 //
 
 static Lth_HashMap dlgstrtable;
+static Lth_HashMap dlgfunctable;
 
 
 //----------------------------------------------------------------------------
@@ -81,6 +93,7 @@ static void GetCode_Cond(dlgparsestate_t *d)
       {
       case STR_item:  code = DCD_JNITEM;  break;
       case STR_class: code = DCD_JNCLASS; break;
+      default: Log("GetCode_Cond: invalid conditional"); return;
       }
    }
    
@@ -96,8 +109,9 @@ static void GetCode_Cond(dlgparsestate_t *d)
       {
          switch((int)dlgstrtable.findcstr(tok->str))
          {
-         case STR_Marine:    *d->nextCode() = pclass_marine;    break;
-         case STR_CyberMage: *d->nextCode() = pclass_cybermage; break;
+         case STR_Marine:    *d->nextCode() = pclass_marine;     break;
+         case STR_CyberMage: *d->nextCode() = pclass_cybermage;  break;
+         default: Log("GetCode_Cond: invalid playerclass type"); return;
          }
       }
       else
@@ -146,39 +160,78 @@ static void GetCode_Generic(dlgparsestate_t *d, Lth_Token const *tok)
    if(ACS_GetCVar("__lith_debug_on"))
       Log("call: %s", tok->str);
    
-   // Get the code to generate.
-   int code = DCD_NOP;
-   switch((int)dlgstrtable.findcstr(tok->str))
+   // Get the function to generate.
+   dlgfunc_t const *func = dlgfunctable.findcstr(tok->str);
+   if(!func)
    {
-   case STR_exit:   code = DCD_DIE;    break;
-   case STR_icon:   code = DCD_ICON;   break;
-   case STR_name:   code = DCD_NAME;   break;
-   case STR_page:   code = DCD_JPAGE;  break;
-   case STR_text:   code = DCD_TEXT;   break;
-   case STR_remote: code = DCD_REMOTE; break;
+      Log("GetCode_Generic: invalid function in dialogue code");
+      return;
    }
    
    // Generate code.
-   *d->nextCode() = code;
+   *d->nextCode() = func->code;
+   
+   // Get arguments.
+   int args[8] = {}, i = 0, l = 0;
+   
+   while(func->args[i])
+   {
+      if(func->args[i] == 'L')
+      {
+         args[i++] = func->lit[l++];
+         continue;
+      }
+      
+      if(!(tok = d->tkstr->bump())->str)
+      {
+         LogTok("GetCode_Generic: invalid token in argument list", tok);
+         return;
+      }
+      
+      switch(func->args[i])
+      {
+      case 'I': args[i++] = strtoi(tok->str, null, 0);    break;
+      case 'S': args[i++] = (int)Lth_strentdup(tok->str); break;
+      }
+      
+      if(ACS_GetCVar("__lith_debug_on"))
+         Log("arg %i: %s", i, tok->str);
+      
+      if(!d->tkstr->drop(Lth_TOK_Comma) || d->tkstr->drop(Lth_TOK_Semico))
+         break;
+   }
+   
+   // Fill in unfinished arguments.
+   for(; func->args[i];)
+   {
+      switch(func->args[i])
+      {
+      case 'I': args[i++] = 0;              break;
+      case 'S': args[i++] = (int)"";        break;
+      case 'L': args[i++] = func->lit[l++]; break;
+      }
+      
+      if(ACS_GetCVar("__lith_debug_on"))
+         Log("arg %i emptied", i, tok->str);
+   }
    
    // Generate arguments.
-   while(!d->tkstr->drop(Lth_TOK_Semico))
-   {
-      switch((tok = d->tkstr->bump())->type)
-      {
-      case Lth_TOK_String:
-      case Lth_TOK_Identi:
-         *d->nextCode() = (int)Lth_strentdup(tok->str);
-         if(ACS_GetCVar("__lith_debug_on"))
-            Log("> %s", tok->str);
-         break;
-      case Lth_TOK_Number:
-         *d->nextCode() = strtoi(tok->str, null, 0);
-         if(ACS_GetCVar("__lith_debug_on"))
-            Log("> %i", strtoi(tok->str, null, 0));
-         break;
-      }
-   }
+   for(int a = 0; a < i; a++)
+      *d->nextCode() = args[a];
+}
+
+//
+// GetCode_Text
+//
+static void GetCode_Text(dlgparsestate_t *d)
+{
+   int ch;
+   
+   *d->nextCode() = DCD_ADDTEXT;
+   
+   ACS_BeginPrint();
+   while((ch = fgetc(d->tkstr->fp)) != '\n') ACS_PrintChar(ch);
+   *d->nextCode() = (int)ACS_EndStrParam();
 }
 
 //
@@ -190,14 +243,20 @@ static void GetCode_Line(dlgparsestate_t *d)
 {
    Lth_Token const *tok = d->tkstr->bump();
    
-   if(tok->type == Lth_TOK_Identi)
+   switch(tok->type)
    {
+   case Lth_TOK_Identi:
       switch((int)dlgstrtable.findcstr(tok->str))
       {
       case STR_if:     GetCode_Cond(d);         break;
       case STR_option: GetCode_Option(d);       break;
       default:         GetCode_Generic(d, tok); break;
       }
+      break;
+   case Lth_TOK_GT: GetCode_Text(d); break;
+   case Lth_TOK_Semico: break;
+   case Lth_TOK_EOF: break;
+   default: LogTok("GetCode_Line: invalid token in line", tok);
    }
 }
 
@@ -210,7 +269,7 @@ static void GetBlock(dlgparsestate_t *d)
 {
    d->tkstr->drop(Lth_TOK_BraceO);
    
-   while(!d->tkstr->drop(Lth_TOK_BraceC))
+   while(!d->tkstr->drop(Lth_TOK_BraceC) && !d->tkstr->drop(Lth_TOK_EOF))
       GetCode_Line(d);
 }
 
@@ -228,25 +287,60 @@ static void GetStatement(dlgparsestate_t *d)
 }
 
 //
+// SetupDialogue
+//
+static void SetupDialogue(dlgparsestate_t *d, int num)
+{
+   dlgdef_t *last = d->def;
+   
+   d->def = malloc(sizeof(dlgdef_t));
+   
+   if(!last) dlgdefs    = d->def;
+   else      last->next = d->def;
+   
+   d->def->num  = num;
+   d->def->next = null;
+}
+
+//
 // GetDecl_Dialogue
 //
 static void GetDecl_Dialogue(dlgparsestate_t *d)
 {
-   d->tkstr->drop(Lth_TOK_Identi);
-   
    Lth_Token const *tok = d->tkstr->bump();
    if(tok->type == Lth_TOK_Number)
    {
-      dlgdef_t *last = d->def;
+      SetupDialogue(d, strtoi(tok->str, null, 0));
       
-      d->def = malloc(sizeof(dlgdef_t));
-      
-      if(!last) dlgdefs    = d->def;
-      else      last->next = d->def;
-      
-      d->def->num  = strtoi(tok->str, null, 0);
-      d->def->next = null;
+      if(ACS_GetCVar("__lith_debug_on"))
+         Log("\n---\ndialogue %i (%i)\n---", d->def->num, d->codeptr);
    }
+}
+
+//
+// GetDecl_Terminal
+//
+static void GetDecl_Terminal(dlgparsestate_t *d)
+{
+   Lth_Token const *tok = d->tkstr->bump();
+   if(tok->type == Lth_TOK_Number)
+   {
+      SetupDialogue(d, -strtoi(tok->str, null, 0));
+      
+      if(ACS_GetCVar("__lith_debug_on"))
+         Log("\n---\nterminal %i (%i)\n---", -d->def->num, d->codeptr);
+   }
+}
+
+//
+// SetupPage
+//
+static void SetupPage(dlgparsestate_t *d, int num)
+{
+   d->def->pages[num] = d->codeptr;
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+      Log("--- page %i (%i)", num, d->codeptr);
 }
 
 //
@@ -257,17 +351,22 @@ static void GetDecl_Page(dlgparsestate_t *d)
    Lth_Token const *tok = d->tkstr->bump();
    
    if(tok->type == Lth_TOK_Number)
-   {
-      int num = strtoi(tok->str, null, 0);
-      d->def->pages[num] = d->codeptr;
-      
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("page %i = %i", num, d->codeptr);
-   }
+      SetupPage(d, strtoi(tok->str, null, 0));
    
    GetStatement(d);
    
-   *d->nextCode() = DCD_WAIT;
+   *d->nextCode() = DCD_DLGWAIT;
+   *d->nextCode() = DCD_DIE;
+}
+
+//
+// GetDecl_TrmPage
+//
+static void GetDecl_TrmPage(dlgparsestate_t *d, int num)
+{
+   SetupPage(d, num);
+   GetStatement(d);
+   *d->nextCode() = DCD_TRMWAIT;
    *d->nextCode() = DCD_DIE;
 }
 
@@ -277,12 +376,40 @@ static void GetDecl_Page(dlgparsestate_t *d)
 //
 
 //
-// Lith_GSInit_DlgStrTable
+// Lith_GSInit_Dialogue
 //
-// Loads all string indices into the global dlgstrtable.
+// Loads all string indices into the global dlgstrtable, and all function
+// prototypes into the global dlgfunctable.
 //
-void Lith_GSInit_DlgStrTable(void)
+void Lith_GSInit_Dialogue(void)
 {
+   static dlgfunc_t const funcs[] = {
+      {"die",  "", DCD_DIE},
+      {"exit", "", DCD_DIE},
+      
+      {"page", "I", DCD_JPAGE},
+      
+      {"script",      "IIIII", DCD_SCRIPTI},
+      {"scriptnamed", "SIIII", DCD_SCRIPTS},
+      {"trace",       "S",     DCD_TRACE},
+      
+      {"text",     "S",  DCD_SETTEXT},
+      {"local",    "S",  DCD_SETTEXTLOCAL},
+      {"addtext",  "S",  DCD_ADDTEXT},
+      {"addlocal", "S",  DCD_ADDTEXTLOCAL},
+      {"setstr",   "IS", DCD_SETSTRING},
+      {"name",     "LS", DCD_SETSTRING, DSTR_NAME},
+      {"icon",     "LS", DCD_SETSTRING, DSTR_ICON},
+      {"remote",   "LS", DCD_SETSTRING, DSTR_REMOTE},
+      
+      {"wait", "", DCD_DLGWAIT},
+      
+      {"logon",  "S", DCD_LOGON},
+      {"logoff", "S", DCD_LOGOFF},
+      {"info",   "",  DCD_INFO},
+      {"pict",   "S", DCD_PICT},
+   };
+   
    #pragma GDCC STRENT_LITERAL OFF
    
    dlgstrtable.alloc(STR_MAX);
@@ -293,6 +420,16 @@ void Lith_GSInit_DlgStrTable(void)
    #include "lith_dlgstrtable.h"
    
    dlgstrtable.build();
+   
+   dlgfunctable.alloc(countof(funcs));
+   
+   for(int i = 0; i < countof(funcs); i++)
+   {
+      dlgfunctable.elem.data[i].keyhash = Lth_Hash_str(funcs[i].name);
+      dlgfunctable.elem.data[i].value   = (void *)&funcs[i];
+   }
+   
+   dlgfunctable.build();
 }
 
 //
@@ -327,16 +464,23 @@ void Lith_LoadMapDialogue(void)
       for(;;)
       {
          Lth_Token const *tok = d.tkstr->bump();
+         int str;
          
          switch(tok->type)
          {
          case Lth_TOK_Identi:
-            switch((int)dlgstrtable.findcstr(tok->str))
+            switch((str = (int)dlgstrtable.findcstr(tok->str)))
             {
-            case STR_dialogue: GetDecl_Dialogue(&d); break;
-            case STR_page:     GetDecl_Page(&d);     break;
+            case STR_dialogue:   GetDecl_Dialogue(&d); break;
+            case STR_page:       GetDecl_Page    (&d); break;
+            case STR_terminal:   GetDecl_Terminal(&d); break;
+            case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
+            case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
+            case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
+            default: Log("Lith_LoadMapDialogue: invalid toplevel identifier %s", tok->str);
             }
             break;
+         default: LogTok("Lith_LoadMapDialogue: invalid toplevel token", tok);
          case Lth_TOK_EOF:
             goto done;
          }

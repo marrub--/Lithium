@@ -66,5 +66,13 @@ LHUDFONT
    "Z" "lgfx/HUDFont/90.png"
 }
 
+LTRMFONT
+{
+   SpaceWidth 10
+   Count 94
+   Base 0
+   Template LITHC%d
+}
+
 // EOF
 

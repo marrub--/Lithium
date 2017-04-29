@@ -15,6 +15,13 @@ enum
    skill_nightmare
 };
 
+enum
+{
+   CANONTIME_FULL,
+   CANONTIME_SHORT,
+   CANONTIME_DATE
+};
+
 typedef struct payoutinfo_s
 {
    int killnum, killmax;
@@ -30,7 +37,7 @@ typedef struct payoutinfo_s
    int tax;
 } payoutinfo_t;
 
-__str Lith_CanonTime(bool shorttime);
+__str Lith_CanonTime(int type);
 
 enum game_s
 {
@@ -47,8 +54,9 @@ typedef struct worldinfo_s
    property mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
    property mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
    property cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
-   property canontime  {get: Lith_CanonTime(false)}
-   property canontimeshort {get: Lith_CanonTime(true)}
+   property canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
+   property canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
+   property canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
    
    bool singleplayer;
    int mapscleared;

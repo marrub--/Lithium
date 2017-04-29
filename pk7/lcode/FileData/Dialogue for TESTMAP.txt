@@ -1,32 +1,72 @@
-dialogue number 1
+// Dialogue ------------------------------------------------------------------
+
+dialogue 1
 
 page 0
 {
-   name "Jacques";
-   icon "AOF";
-   remote "jacques.p42710@corp.AOF";
+   name "Jacques"
+   icon "AOF"
+   remote "jacques.p42710@corp.AOF"
    
-   text "...";
+   if item Lith_DivisionSigil page 7
    
-   if item Lith_DivisionSigil page 7;
+   >...
    
-   option "Say hello" page 2;
-   option "Exit"      exit;
+   option "Say hello" page 2
+   option "Exit"      exit
 }
 
 page 2
 {
-   if class Marine    text "Who are you?";
-   if class CyberMage text "Right. The Cybernati.";
+   if class Marine    >Who are you?
+   if class CyberMage >Right. The Cybernati.
    
-   option "Exit" exit;
+   option "emit skeltal"
+   {
+      script 2
+      page 2
+   }
+   
+   option "Thanks, bye!" exit
 }
 
 page 7
 {
-   text "...?";
+   >thousands are sailing
+   >the same self    the only self
+   >
+   >self willed the peril of a thousand fates
+   >
+   >a line of infinite ends    finite finishing
+   >the one remains oblique and pure
+   >
+   >arching to the single point of consciousness
+   >
+   >find yourself
+   >starting back
    
-   option "Exit" exit;
+   option "Thanks, bye!" exit
+}
+
+// Terminals -----------------------------------------------------------------
+
+terminal 1
+
+unfinished
+{
+   remote "test@org.example"
+   
+   logon 01602
+   >\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+   
+   info
+   >test text, information block
+   
+   pict "AOF"
+   >test with picture
+   >and multiple lines of text
+   
+   logoff 01602
 }
 
 // EOF
