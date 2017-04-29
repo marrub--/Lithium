@@ -49,7 +49,7 @@ typedef struct dlgoption_s
 
 typedef struct dlgcurstate_s
 {
-   __str strings[4];
+   __str trmpict;
    int trmaction;
    int trmtimer;
 } dlgcurstate_t;
@@ -58,6 +58,7 @@ typedef struct dlgvmstate_s
 {
    int stk[32], *sptr;
    __str text;
+   __str strings[4];
    dlgoption_t options[8];
    int guiaction;
    int numoptions;
@@ -151,11 +152,11 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
             y -= 10;
          }
          
-         DrawSpritePlain(StrParam("lgfx/Terminal/%S.png", vmstate->strings[DSTR_PICT]), g->hid--, middlex, y, TICSECOND);
+         DrawSpritePlain(StrParam("lgfx/Terminal/%S.png", vmstate->trmpict), g->hid--, middlex, y, TICSECOND);
       }
       break;
    case TACT_PICT:
-      DrawSpritePlain(StrParam("lgfx/Terminal/%S.png", vmstate->strings[DSTR_PICT]), g->hid--, middleleftx, middley, TICSECOND);
+      DrawSpritePlain(StrParam("lgfx/Terminal/%S.png", vmstate->trmpict), g->hid--, middleleftx, middley, TICSECOND);
       HudMessageF("LTRMFONT", "%S", vmstate->text);
       HudMessagePlain(g->hid--, middlex+.1, top+.1, TICSECOND);
       break;
@@ -353,7 +354,7 @@ void Lith_RunDialogue(int num)
       logincommon:
          vmstate.next.trmtimer = 35;
       pictcommon:
-         vmstate.next.strings[DSTR_PICT] = NextCodeStr;
+         vmstate.next.trmpict = NextCodeStr;
       terminalcommon:
          if(vmstate.trmaction != TACT_NONE)
          {
