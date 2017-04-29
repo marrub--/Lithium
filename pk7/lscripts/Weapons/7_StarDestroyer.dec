@@ -99,15 +99,15 @@ actor Lith_StarProjectile
       BLLT L 0 bright A_SetUserVar(user_soundtimer, 3)
       BLLT L 0 bright A_PlaySound("weapons/dark/fire", CHAN_5)
    Spawn2:
-      BLLT L 0 bright A_CustomMissile("Lith_StarWoosh1", 0, frandom(-2,2), angle-180, CMF_TRACKOWNER|CMF_ABSOLUTEANGLE)
       BLLT LLLLL 0 bright A_CustomMissile("Lith_StarShrapnel",
          CallACS("Lith_CircleSpread", 32*FIX, 32*FIX, false)/FIX,
          CallACS("Lith_CircleSpread", 32*FIX, 32*FIX, true)/FIX,
          0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
       goto Spawn4
    Spawn3:
-      BLLT L 0 A_ChangeVelocity(velx*1.1, vely*1.1, velz*1.1, CVF_REPLACE)
+      BLLT L 0 bright A_ChangeVelocity(velx*1.1, vely*1.1, velz*1.1, CVF_REPLACE)
    Spawn4:
+      BLLT L 0 bright A_CustomMissile("Lith_StarWoosh1", 0, frandom(-2,2), angle-180, CMF_TRACKOWNER|CMF_ABSOLUTEANGLE)
       BLLT L 0 bright A_CustomMissile("Lith_StarWoosh2", 0, 0, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
       BLLT L 0 bright A_Quake(1, 2, 0, 512)
       BLLT L 0 bright A_Quake(3, 2, 0, 256)
