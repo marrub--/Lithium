@@ -151,6 +151,17 @@ static void GetCode_Option(dlgparsestate_t *d)
 }
 
 //
+// GetCode_Exec
+//
+// Parses and generates code for an exec statement.
+//
+static void GetCode_Exec(dlgparsestate_t *d)
+{
+   *d->nextCode() = DCD_TRMWAIT;
+   GetStatement(d);
+}
+
+//
 // GetCode_Generic
 //
 // Parses and generates code for a generic statement.
@@ -250,6 +261,7 @@ static void GetCode_Line(dlgparsestate_t *d)
       {
       case STR_if:     GetCode_Cond(d);         break;
       case STR_option: GetCode_Option(d);       break;
+      case STR_exec:   GetCode_Exec(d);         break;
       default:         GetCode_Generic(d, tok); break;
       }
       break;
@@ -392,6 +404,8 @@ void Lith_GSInit_Dialogue(void)
       {"script",      "IIIII", DCD_SCRIPTI},
       {"scriptnamed", "SIIII", DCD_SCRIPTS},
       {"trace",       "S",     DCD_TRACE},
+      {"intralevelteleport", "I", DCD_TELEPORT_INTRALEVEL},
+      {"interlevelteleport", "I", DCD_TELEPORT_INTERLEVEL},
       
       {"text",     "S",  DCD_SETTEXT},
       {"local",    "S",  DCD_SETTEXTLOCAL},
@@ -402,12 +416,13 @@ void Lith_GSInit_Dialogue(void)
       {"icon",     "LS", DCD_SETSTRING, DSTR_ICON},
       {"remote",   "LS", DCD_SETSTRING, DSTR_REMOTE},
       
-      {"wait", "", DCD_DLGWAIT},
+      {"dlgwait", "", DCD_DLGWAIT},
       
       {"logon",  "S", DCD_LOGON},
       {"logoff", "S", DCD_LOGOFF},
       {"info",   "",  DCD_INFO},
       {"pict",   "S", DCD_PICT},
+      {"trmwait", "", DCD_TRMWAIT},
    };
    
    #pragma GDCC STRENT_LITERAL OFF

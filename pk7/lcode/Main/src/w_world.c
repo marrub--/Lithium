@@ -399,7 +399,7 @@ static void DoRain()
             ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 1.0, true, ATTN_NONE);
          }
          
-         if(world.mapscleared >= 20 && world.mapnum < 0x7FFF)
+         if(world.mapscleared >= 20 && !world.islithmap)
             ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
          else
             ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
@@ -477,6 +477,7 @@ static void Lith_World(void)
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
    
+   world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
    world.pauseinmenus = ACS_GetCVar("lith_sv_pauseinmenus");
    
    // Init a random seed from the map.
@@ -509,7 +510,7 @@ static void Lith_World(void)
       if(world.unloaded)
          world.mapscleared++;
       
-      if(ACS_GetCVar("lith_sv_sky") && world.mapnum < 0x7FFF)
+      if(ACS_GetCVar("lith_sv_sky") && !world.islithmap)
       {
               if(world.mapscleared >= 20) {ACS_ChangeSky("LITHSKRD", "LITHSKRD"); ACS_SetSkyScrollSpeed(1, 0.01);}
          else if(world.mapscleared >= 10)  ACS_ChangeSky("LITHSKDE", "LITHSKDE");
@@ -559,12 +560,12 @@ static void Lith_World(void)
    int prevkills   = 0;
    int previtems   = 0;
    
-   if(ACS_GetCVar("lith_sv_rain") || world.mapnum == 888777)
+   if((ACS_GetCVar("lith_sv_rain") || world.mapnum == 18883000) && !ACS_GetLineUDMFInt(1888300, "user_lith_norain"))
       DoRain();
    
    for(;;)
    {
-      if(world.ticks > 17 * 35 * 60 * 60 && world.mapnum < 0x7FFF)
+      if(world.ticks > 17 * 35 * 60 * 60 && !world.islithmap)
          ACS_Teleport_NewMap(1911777, 0, 0);
       
       int secrets = world.mapsecrets;

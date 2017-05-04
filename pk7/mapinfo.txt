@@ -121,7 +121,7 @@ map TITLEMAP "Lithium Title"
 
 map TESTMAP "Test Map"
 {
-   LevelNum = 888777
+   LevelNum = 18883000
    Sky1 = "LITHBGS4", 0.1
    Sky2 = "LITHSKD2"
    Next = 1
@@ -156,6 +156,7 @@ DoomEdNums
    22429 = Lith_Map_Jacques
    22430 = Lith_DivisionSigil
    22431 = Lith_Chair
+   22432 = Lith_BoomBarrel
 }
 
 

@@ -121,7 +121,11 @@ gui_button_preset_t const btnbipback = {
 };
 
 gui_button_preset_t const btndlgsel = {
-   BtnDefault,
+   .snd  = "player/cbi/buttonpress",
+   .cdef = "j",
+   .cact = "g",
+   .chot = "d",
+   .font = "CBIFONT",
    .gfx  = "lgfx/Dialogue/SelectBack.png",
    .hot  = "lgfx/Dialogue/SelectBackHot.png",
    .cdis = "i",

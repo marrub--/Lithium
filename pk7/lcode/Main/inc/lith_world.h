@@ -63,6 +63,7 @@ typedef struct worldinfo_s
    int prevcluster;
    int mapseed;
    bool unloaded;
+   bool islithmap;
    
    int secretsfound;
    double scoremul;

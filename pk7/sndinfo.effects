@@ -15,6 +15,7 @@ menu/clear    lsounds/MenuBack.flac
 silence lsounds/Silence.flac
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg
 YOUSONOFABITCH lsounds/YOUSONOFABITCH.ogg
+misc/booom    lsounds/boom.flac
 misc/teleport lsounds/Teleport.flac // Self-made
 explosion DSBAREXP
 misc/chat lsounds/Chat.flac

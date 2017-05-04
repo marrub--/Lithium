@@ -50,5 +50,10 @@ actor Lith_Chair
    }
 }
 
+actor Lith_BoomBarrel : ExplosiveBarrel
+{
+   DeathSound "misc/booom"
+}
+
 // EOF
 

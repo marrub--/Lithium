@@ -86,14 +86,18 @@ dlgdef_t *Lith_MapVariable dlgdefs;
 [[__call("ScriptS")]]
 static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 {
+   int const sizetx  = 640;
+   int const sizety  = 400;
    int const sizex   = 480;
    int const sizey   = 300;
    int const right   = sizex;
    int const bottom  = sizey*.75;
-   int const top     = sizey*.1;
+   int const top     = sizey*.08;
    int const middlex = right/2;
    int const middley = bottom/2;
    int const middleleftx = middlex/2;
+   int const topt    = sizety*.08;
+   int const leftt   = sizetx/2-32;
    
    __str remote = vmstate->strings[DSTR_REMOTE] ? vmstate->strings[DSTR_REMOTE] : "<unknown>@raddr.4E19";
    
@@ -119,13 +123,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    HudMessageParams(0, g->hid--, CR_RED, right+.2, 0.1, TICSECOND);
    
    // Bottom-left text
-   switch(vmstate->trmaction)
-   {
-   case TACT_LOGON:
-   case TACT_LOGOFF: HudMessageF("LTRMFONT", "<55.883.115.7>");             break;
-   default:          HudMessageF("LTRMFONT", "Forward/Backward To Scroll"); break;
-   }
-   
+   HudMessageF("LTRMFONT", "<55.883.115.7>");
    HudMessageParams(0, g->hid--, CR_RED, 0.1, bottom+.2, TICSECOND);
    
    // Bottom-right text
@@ -157,8 +155,11 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       break;
    case TACT_PICT:
       DrawSpritePlain(StrParam("lgfx/Terminal/%S.png", vmstate->trmpict), g->hid--, middleleftx, middley, TICSECOND);
+      ACS_SetHudSize(sizetx, sizety, false);
+      ACS_SetHudClipRect(leftt, topt, 300, 300, 300);
       HudMessageF("LTRMFONT", "%S", vmstate->text);
-      HudMessagePlain(g->hid--, middlex+.1, top+.1, TICSECOND);
+      HudMessagePlain(g->hid--, leftt+.1, topt+.1, TICSECOND);
+      ACS_SetHudClipRect(0, 0, 0, 0);
       break;
    case TACT_INFO:
       HudMessageF("LTRMFONT", "%S", vmstate->text);
@@ -311,8 +312,8 @@ void Lith_RunDialogue(int num)
             ACS_NamedExecuteWithResult(sc, a1, a2, a3, a4);
          DoNextCode;
       Op(DCD_TRACE): Log("%S", NextCodeStr); DoNextCode;
-      Op(DCD_TELEPORT_INTERLEVEL):
-      Op(DCD_TELEPORT_INTRALEVEL): DoNextCode;
+      Op(DCD_TELEPORT_INTRALEVEL): ACS_Teleport(0, NextCode, false);    DoNextCode;
+      Op(DCD_TELEPORT_INTERLEVEL): ACS_Teleport_NewMap(NextCode, 0, 0); DoNextCode;
       
       Op(DCD_SETSTRING): __with(int num = NextCode; __str str = NextCodeStr;) vmstate.strings[num] = str; DoNextCode;
       Op(DCD_SETTEXT):      vmstate.text =                                   NextCodeStr;  DoNextCode;
@@ -352,7 +353,7 @@ void Lith_RunDialogue(int num)
       Op(DCD_TRMWAIT): goto terminalcommon;
       
       logincommon:
-         vmstate.next.trmtimer = 35;
+         vmstate.next.trmtimer = 42;
       pictcommon:
          vmstate.next.trmpict = NextCodeStr;
       terminalcommon:
@@ -376,6 +377,7 @@ void Lith_RunDialogue(int num)
          }
          
          vmstate.cur = vmstate.next;
+         vmstate.next.trmaction = TACT_NONE;
          vmstate.next.trmtimer = 0;
       guiaction:
          __with(int action = vmstate.guiaction;)

@@ -65,7 +65,7 @@ MAIN_SOURCES= \
 	$(SRC)/p_render.c \
 	$(SRC)/p_save.c \
 	$(SRC)/p_autogroup.c \
-	$(SRC)/base64.c \
+	$(SRC)/m_base64.c \
 	$(SRC)/g_auto.c \
 	$(SRC)/g_button.c \
 	$(SRC)/g_checkbox.c \
