@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "Lithium.h"
 
@@ -105,6 +106,7 @@
 
 // Types
 typedef long fixed fixed64_t;
+typedef uint64_t crc64_t;
 
 // Random
 [[__optional_args(1)]] float RandomFloat(float max, float min);
@@ -130,6 +132,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount);
 __str Lith_ScoreSep(score_t num);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
+[[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
 
 // Math
 fixed lerpk(fixed a, fixed b, fixed t);

@@ -4,9 +4,65 @@
 #include <math.h>
 #include <ctype.h>
 
+
+//----------------------------------------------------------------------------
+// Static Objects
+//
+
+// Most CRC tables are 256 in length because they're on plebeian platforms
+// that don't have the glorious 32-bit byte, but we have better!
+// ;_;
+static crc64_t crctable[512];
+
+
+//----------------------------------------------------------------------------
+// Static Functions
+//
+
+//
+// InitCRC64
+//
+static void InitCRC64()
+{
+   crc64_t const polynomial = 0xC96C5795D7870F42; // ECMA 182
+   
+   for(crc64_t i = 0; i < 512; i++)
+   {
+      crc64_t remainder = i;
+      
+      for(int j = 0; j < 8; j++)
+         if(remainder & 1)
+            remainder = (remainder >> 1) ^ polynomial;
+         else
+            remainder >>= 1;
+      
+      crctable[i] = remainder;
+   }
+}
+
+
 //----------------------------------------------------------------------------
 // Extern Functions
 //
+
+//
+// Lith_CRC64
+//
+crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
+{
+   static bool crcinit;
+   unsigned char const *ptr = data;
+   
+   if(!crcinit)
+      crcinit = true, InitCRC64();
+   
+   result = ~result;
+   
+   for(size_t i = 0; i < len; i++)
+      result = crctable[(result ^ ptr[i]) & 0x1FF] ^ (result >> 8);
+   
+   return ~result;
+}
 
 //
 // RandomFloat

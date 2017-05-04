@@ -17,27 +17,27 @@ user bool   lith_player_teleshop      = false;
 // Save data
 // These are 200 bytes of storage per, so overall we have around 4kb available.
 // If this isn't enough more of these can be added trivially (ACS assumes nothing)
-user string lith_player_savedata_0  = "";
-user string lith_player_savedata_1  = "";
-user string lith_player_savedata_2  = "";
-user string lith_player_savedata_3  = "";
-user string lith_player_savedata_4  = "";
-user string lith_player_savedata_5  = "";
-user string lith_player_savedata_6  = "";
-user string lith_player_savedata_7  = "";
-user string lith_player_savedata_8  = "";
-user string lith_player_savedata_9  = "";
-user string lith_player_savedata_10 = "";
-user string lith_player_savedata_11 = "";
-user string lith_player_savedata_12 = "";
-user string lith_player_savedata_13 = "";
-user string lith_player_savedata_14 = "";
-user string lith_player_savedata_15 = "";
-user string lith_player_savedata_16 = "";
-user string lith_player_savedata_17 = "";
-user string lith_player_savedata_18 = "";
-user string lith_player_savedata_19 = "";
-user string lith_player_savedata_20 = "";
+user string lith_psave_0  = "";
+user string lith_psave_1  = "";
+user string lith_psave_2  = "";
+user string lith_psave_3  = "";
+user string lith_psave_4  = "";
+user string lith_psave_5  = "";
+user string lith_psave_6  = "";
+user string lith_psave_7  = "";
+user string lith_psave_8  = "";
+user string lith_psave_9  = "";
+user string lith_psave_10 = "";
+user string lith_psave_11 = "";
+user string lith_psave_12 = "";
+user string lith_psave_13 = "";
+user string lith_psave_14 = "";
+user string lith_psave_15 = "";
+user string lith_psave_16 = "";
+user string lith_psave_17 = "";
+user string lith_psave_18 = "";
+user string lith_psave_19 = "";
+user string lith_psave_20 = "";
 
 // Weapons
 user float  lith_weapons_zoomfactor     = 3.0;

@@ -7,7 +7,7 @@
 
 #include <ctype.h>
 
-#define SAVE_BLOCK_SIZE 200
+#define SAVE_BLOCK_SIZE 230
 
 
 //----------------------------------------------------------------------------

@@ -1,6 +1,15 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_savedata.h"
+#include "lith_netfile.h"
+
+
+//----------------------------------------------------------------------------
+// Static Objects
+//
+
+static int const sizeof_agrp = 12 + 1;
+static int const sizeof_abuy = 1;
 
 
 //----------------------------------------------------------------------------
@@ -13,46 +22,50 @@
 [[__call("ScriptS")]]
 static void Lith_Save_agrp(savefile_t *save)
 {
-   bool *any = calloc(save->p->upgrmax, sizeof(bool));
+   bool *any = calloc(UPGR_MAX, sizeof(bool));
    int total = 0;
    
-   for(int i = 0; i < save->p->upgrmax; i++)
+   for(int i = 0; i < UPGR_MAX; i++)
    {
       for(int j = 0; j < NUMAUTOGROUPS; j++)
-         if(save->p->upgrades[i].autogroups[j]) {any[i] = true; break;}
+      {
+         upgrade_t const *upgr = save->p->getUpgr(i);
+         
+         if(upgr && upgr->autogroups[j])
+         {
+            any[i] = true;
+            break;
+         }
+      }
       
-      if(any[i]) total++;
+      if(any[i])
+         total++;
    }
    
    if(total)
    {
-      save_autogroup_t *data = calloc(total,  sizeof(save_autogroup_t));
-      size_t            size =        total * sizeof(save_autogroup_t);
+      Lith_SaveWriteChunk(save, Ident_agrp, SaveV_agrp, total * sizeof_agrp);
       
-      for(int i = 0, def = 0; i < save->p->upgrmax; i++)
+      for(int i = 0; i < UPGR_MAX; i++)
          if(any[i])
       {
-         upgrade_t const *upgr = &save->p->upgrades[i];
+         upgrade_t const *upgr = save->p->getUpgr(i);
          
-         // Pack the name into three 4-byte values.
-         for(int j = 0; j < 3; j++)
+         if(upgr)
          {
-            data[def].name[j] |= upgr->info->name[j * 4 + 0] <<  0;
-            data[def].name[j] |= upgr->info->name[j * 4 + 1] <<  8;
-            data[def].name[j] |= upgr->info->name[j * 4 + 2] << 16;
-            data[def].name[j] |= upgr->info->name[j * 4 + 3] << 24;
+            char name[12] = {};
+            Lith_strcpy_str(name, upgr->info->name);
+            
+            // Pack the groups into a bitfield.
+            unsigned groups = 0;
+            for(int j = 0; j < NUMAUTOGROUPS; j++)
+               if(upgr->autogroups[j])
+                  groups |= 1 << j;
+            
+            Lith_FWrite32(name,    12, 1, save->fp);
+            Lith_FWrite32(&groups, 1,  1, save->fp);
          }
-         
-         // Pack the groups into a bitfield.
-         for(int j = 0; j < NUMAUTOGROUPS; j++)
-            if(upgr->autogroups[j])
-               data[def].groups |= 1 << j;
-         
-         def++;
       }
-      
-      Lith_SaveWriteChunk(save, Ident_agrp, SaveV_agrp, data, size);
-      free(data);
    }
    
    free(any);
@@ -62,33 +75,29 @@ static void Lith_Save_agrp(savefile_t *save)
 // Lith_Load_agrp
 //
 [[__call("ScriptS")]]
-static void Lith_Load_agrp(savefile_t *save, memchunk_t *chunk)
+static void Lith_Load_agrp(savefile_t *save, savechunk_t *chunk)
 {
-   save_autogroup_t *data = chunk->data;
-   size_t size = chunk->size / sizeof(save_autogroup_t);
+   if((chunk->size % sizeof_agrp) != 0) return;
    
-   for(int def = 0; def < size; def++)
+   size_t num = chunk->size / sizeof_agrp;
+   
+   for(int def = 0; def < num; def++)
    {
-      char unpackedname[12];
+      char name[12];
+      unsigned groups;
       
-      // Unpack name.
-      for(int i = 0; i < 3; i++)
-      {
-         unpackedname[i * 4 + 0] = (data[def].name[i] & 0x000000FF) >>  0;
-         unpackedname[i * 4 + 1] = (data[def].name[i] & 0x0000FF00) >>  8;
-         unpackedname[i * 4 + 2] = (data[def].name[i] & 0x00FF0000) >> 16;
-         unpackedname[i * 4 + 3] = (data[def].name[i] & 0xFF000000) >> 24;
-      }
+      Lith_FRead32(&name,   12, 1, save->fp);
+      Lith_FRead32(&groups, 1,  1, save->fp);
       
       // Unpack groups.
       for(int i = 0; i < save->p->upgrmax; i++)
       {
          upgrade_t const *upgr = &save->p->upgrades[i];
          
-         if(Lith_strcmp_str(unpackedname, upgr->info->name) == 0)
+         if(Lith_strcmp_str(name, upgr->info->name) == 0)
          {
             for(int j = 0; j < NUMAUTOGROUPS; j++)
-               upgr->autogroups[j] = data[def].groups & (1 << j);
+               upgr->autogroups[j] = groups & (1 << j);
             
             break;
          }
@@ -109,21 +118,25 @@ static void Lith_Save_abuy(savefile_t *save)
          groups |= 1 << i;
    
    if(groups)
-      Lith_SaveWriteChunk(save, Ident_abuy, SaveV_abuy, &(save_autobuy_t){groups}, sizeof(save_autobuy_t));
+   {
+      Lith_FWrite32(&groups, 1, 1, save->fp);
+      Lith_SaveWriteChunk(save, Ident_abuy, SaveV_abuy, sizeof_abuy);
+   }
 }
 
 //
 // Lith_Load_abuy
 //
 [[__call("ScriptS")]]
-static void Lith_Load_abuy(savefile_t *save, memchunk_t *chunk)
+static void Lith_Load_abuy(savefile_t *save, savechunk_t *chunk)
 {
-   if(chunk->size != sizeof(save_autobuy_t)) return;
+   if(chunk->size != sizeof_abuy) return;
    
-   save_autobuy_t *data = chunk->data;
+   uint32_t groups;
+   Lith_FRead32(&groups, 1, 1, save->fp);
    
    for(int i = 0; i < NUMAUTOGROUPS; i++)
-      save->p->autobuy[i] = (data->groups & (1 << i)) != 0;
+      save->p->autobuy[i] = (groups & (1 << i)) != 0;
 }
 
 
