@@ -339,7 +339,7 @@ void Lith_PlayerLoseUpgrades(player_t *p)
 // Lith_PlayerUpdateUpgrades
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
-{   
+{
    ForUpgrade(upgr)
       if(upgr->active && upgr->info->Update)
          upgr->info->Update(p, upgr);

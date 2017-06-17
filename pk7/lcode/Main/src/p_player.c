@@ -345,6 +345,9 @@ static void Lith_PlayerRunScripts(player_t *p)
       
       // Post-logic: Update the engine's data.
       Lith_PlayerDeltaStats(p); // Update delta'd info
+      
+      if(world.grafZoneEntered && world.pauseinmenus)
+         ACS_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
    }
    
    // Rendering

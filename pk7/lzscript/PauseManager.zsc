@@ -17,8 +17,15 @@ class Lith_PauseManager play
          {
             players[i].cheats &= ~CF_TOTALLYFROZEN;
             players[i].mo.viewbob = 1;
+            players[i].psprites.tics = players[i].psprites.curState.tics;
          }
       }
+   }
+   
+   static void PauseTick(int player)
+   {
+      if(level.frozen)
+         players[player].psprites.tics = -1;
    }
 }
 
