@@ -181,15 +181,6 @@ void Lith_CBIItemWasSpawned(int num)
    upgradesspawned[upgradesspawnediter++] = num;
 }
 
-//
-// Lith_GSInitIsDone
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_GSInitIsDone()
-{
-   return Lith_GetWorldData(wdata_gsinit);
-}
-
 
 //----------------------------------------------------------------------------
 // Static Functions
@@ -436,32 +427,36 @@ static void Lith_World(void)
       return;
    }
    
-   // Init global/static state.
+   // Init global/static state. Check compatibility first.
+   __with(int tid;)
    {
-      extern void Lith_GSInit_Upgrade(bool first);
-      extern void Lith_GSInit_Shop(bool first);
+      if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+         ACS_Thing_Remove(tid);
+      if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+         ACS_Thing_Remove(tid);
+   }
+   
+   world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
+   
+   {
+      extern void Lith_GInit_Shop();
       
-      Lith_GSInit_Upgrade(!gsinit);
-      Lith_GSInit_Shop(!gsinit);
+      Lith_GInit_Shop();
    }
    
    if(!gsinit)
    {
+      extern void Lith_GSInit_Upgrade(void);
       extern void Lith_GSInit_Weapon(void);
       extern void Lith_GSInit_Dialogue(void);
       
+      Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
       Lith_GSInit_Dialogue();
       
       Lith_CheckIfEnemiesAreCompatible();
-      
-      __with(int tid;)
-         if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-            ACS_Thing_Remove(tid);
-      
-      world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
+         
       world.game         = ACS_GetCVar("__lith_game");
-      world.extras       = ACS_GetCVar("__lith_extras");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
@@ -471,6 +466,12 @@ static void Lith_World(void)
             Lith_InstallCBIItem(i);
       
       gsinit = true;
+   }
+   else
+   {
+      extern void Lith_GSReinit_Upgrade();
+      
+      Lith_GSReinit_Upgrade();
    }
    
    // Map init.

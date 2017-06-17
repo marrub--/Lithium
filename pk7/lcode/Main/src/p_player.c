@@ -202,7 +202,7 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 {
    if(p->activegui == GUI_NONE)
    {
-      if(world.extras && world.pauseinmenus)
+      if(world.grafZoneEntered && world.pauseinmenus)
          ACS_ScriptCall("Lith_PauseManager", "SetPaused", true);
       
       ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
@@ -211,7 +211,7 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
    }
    else if(p->activegui == type)
    {
-      if(world.extras && world.pauseinmenus)
+      if(world.grafZoneEntered && world.pauseinmenus)
          ACS_ScriptCall("Lith_PauseManager", "SetPaused", false);
       
       p->closeGUI();

@@ -108,7 +108,7 @@ typedef struct worldinfo_s
    bool drlamonsters;
    
    // Extras
-   bool extras;
+   bool grafZoneEntered;
    bool pauseinmenus;
 } worldinfo_t;
 

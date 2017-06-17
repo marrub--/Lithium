@@ -137,6 +137,17 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
    else        return u1->key - u2->key;
 }
 
+//
+// RegisterBasicUpgrade
+//
+static void RegisterBasicUpgrade(upgradeinfo_t *upgr)
+{
+   if(upgr)
+      extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX] = *upgr;
+   else
+      Log("%s: Failed to register upgrade!", __func__);
+}
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -168,40 +179,10 @@ void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname)
 }
 
 //
-// Lith_RegisterBasicUpgrade
+// Lith_GSReinit_Upgrade
 //
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_RegisterBasicUpgrade(int key, __str name, int cost, int category)
+void Lith_GSReinit_Upgrade(void)
 {
-   extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX] =
-      (upgradeinfo_t){{name, null, cost}, category, .key=key};
-}
-
-//
-// Lith_GSInit_Upgrade
-//
-void Lith_GSInit_Upgrade(bool first)
-{
-   if(first)
-   {
-      for(int i = 0; i < countof(staticupgradeinfo); i++)
-         staticupgradeinfo[i].key = i;
-      
-      Lith_LoadUpgrInfoBalance(staticupgradeinfo, countof(staticupgradeinfo), c"Upgrades.lthm");
-      
-      upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
-      memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
-      
-      for(int i = 0; i < countof(extraupgradeinfo); i++)
-         if(extraupgradeinfo[i].name != null)
-            upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
-      
-      qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
-      
-      for(int i = 0; i < UPGR_MAX; i++)
-         upgradeinfo[i].id = i;
-   }
-   
    // Set up function pointers for upgrade info.
    for(int i = 0; i < UPGR_MAX; i++)
    {
@@ -229,6 +210,35 @@ void Lith_GSInit_Upgrade(bool first)
       upgradeinfo[i].shopCanBuy = Lith_UpgrCanBuy;
       upgradeinfo[i].shopGive   = Lith_UpgrGive;
    }
+}
+
+//
+// Lith_GSInit_Upgrade
+//
+void Lith_GSInit_Upgrade(void)
+{
+   if(world.grafZoneEntered)
+      RegisterBasicUpgrade(&(upgradeinfo_t)
+         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_any, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
+   
+   for(int i = 0; i < countof(staticupgradeinfo); i++)
+      staticupgradeinfo[i].key = i;
+   
+   Lith_LoadUpgrInfoBalance(staticupgradeinfo, countof(staticupgradeinfo), c"Upgrades.lthm");
+   
+   upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
+   memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
+   
+   for(int i = 0; i < countof(extraupgradeinfo); i++)
+      if(extraupgradeinfo[i].name != null)
+         upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
+   
+   qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
+   
+   for(int i = 0; i < UPGR_MAX; i++)
+      upgradeinfo[i].id = i;
+   
+   Lith_GSReinit_Upgrade();
 }
 
 //

@@ -1,18 +1,21 @@
-class Lith_DarkMatterHandler : EventHandler
+class Lith_DarkMatterDie : CustomInventory
 {
-   override void WorldThingDamaged(WorldEvent e)
+   states(item)
    {
-      if(e.damageType == "Lith_DarkMatter")
+   Pickup:
+      TNT1 A 0
       {
-         e.thing.A_SetRenderStyle(frandom(0.1, 0.9), STYLE_Subtract);
+         self.A_SetRenderStyle(frandom(0.1, 0.9), STYLE_Subtract);
          
          for(int i = 0; i < 77; i++)
-            e.thing.A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-32,32), frandom(-32,32), frandom(0, 64), frandom(-2, 2), frandom(-2, 2), frandom(1, 2), 0, SXF_NOCHECKPOSITION);
+            self.A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-32,32), frandom(-32,32), frandom(0, 64), frandom(-2, 2), frandom(-2, 2), frandom(1, 2), 0, SXF_NOCHECKPOSITION);
          
-         e.thing.A_Die();
+         self.A_Die();
          
-         Actor.Spawn("Lith_DarkMatterDeath").target = e.thing;
+         Actor.Spawn("Lith_DarkMatterDeath").target = self;
+         return true;
       }
+      stop;
    }
 }
 
@@ -124,7 +127,7 @@ class Lith_DarkMatter : Actor
       BLLT F 0 A_PlaySound("weapons/dark/wind", CHAN_5, 1, true, ATTN_NONE);
       BLLT F 1
       {
-         A_Explode(10000, 128, 0);
+         A_RadiusGive("Lith_DarkMatterDie", 128, RGF_MONSTERS|RGF_NOTARGET);
          
          if(random(0, 20) == 2)
             A_PlaySound("weapons/dark/water", CHAN_6, 1, false, 0.25);

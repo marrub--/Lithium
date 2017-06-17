@@ -1,0 +1,10 @@
+version 2.4
+
+#include "lzscript/PauseManager.zsc"
+#include "lzscript/DarkMatter.zsc"
+
+class Lith_GrafZone : Actor
+{
+}
+
+// EOF

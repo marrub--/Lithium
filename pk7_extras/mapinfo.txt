@@ -1,4 +1,0 @@
-gameinfo
-{
-   EventHandlers = "Lith_DarkMatterHandler"
-}

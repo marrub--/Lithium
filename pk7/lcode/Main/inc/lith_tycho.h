@@ -153,8 +153,6 @@ typedef struct upgrade_s
 } upgrade_t;
 
 void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname);
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_RegisterBasicUpgrade(int key, __str name, int cost, int category);
 
 #endif
 

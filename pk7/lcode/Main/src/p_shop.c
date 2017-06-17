@@ -78,9 +78,9 @@ static void Shop_Give(int tid, shopdef_t const *, void *item_)
 //
 
 //
-// Lith_GSInit_Shop
+// Lith_GInit_Shop
 //
-void Lith_GSInit_Shop(bool first)
+void Lith_GInit_Shop(void)
 {
    for(int i = 0; i < shopitemsnum; i++)
    {

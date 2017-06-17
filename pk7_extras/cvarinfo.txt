@@ -1,8 +1,0 @@
-// Server
-server bool lith_sv_pauseinmenus = true;
-
-// Do-not-write
-server noarchive cheat bool __lith_extras = true;
-
-// EOF
-

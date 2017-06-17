@@ -68,6 +68,7 @@ server noarchive bool  lith_sv_monsters_ok   = false;
 server           float lith_sv_scoremul      = 2.0;
 server           bool  lith_sv_seriousmode   = false;
 server           bool  lith_sv_scoregolf     = false;
+server           bool  lith_sv_pauseinmenus  = true;
 
 // Bosses
 server bool lith_sv_nobosses    = false;

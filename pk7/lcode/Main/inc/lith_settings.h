@@ -43,7 +43,7 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
    
    Category("Single-Player Gameplay")
    ServerBool("Explode on death",       "lith_sv_revenge")
-   if(world.extras)
+   if(world.grafZoneEntered)
    {
       ServerBool("Pause in menus (changes on new map)", "lith_sv_pauseinmenus")
    }
