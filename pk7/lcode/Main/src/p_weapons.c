@@ -285,15 +285,14 @@ void Lith_PlayerUpdateWeapons(player_t *p)
       else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
       else                ACS_TakeInventory("Lith_SMGHeat", 1);
    
-   if(p->weapontype == weapon_c_starshot)
-   {
-      
-   }
+   if(p->weapontype == weapon_c_delear)
+      ACS_GiveInventory("Lith_DelearSpriteDisplay", 1);
 }
 
 //
 // Lith_StarShotSelect
 //
+[[__call("ScriptS"), __extern("ACS")]]
 void Lith_StarShotSelect()
 {
    Log("Lith_StarShotSelect");
@@ -302,6 +301,7 @@ void Lith_StarShotSelect()
 //
 // Lith_StarShotDeselect
 //
+[[__call("ScriptS"), __extern("ACS")]]
 void Lith_StarShotDeselect()
 {
    Log("Lith_StarShotDeselect");
