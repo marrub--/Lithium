@@ -389,7 +389,10 @@ $limit weapons/dark/impact 0
 //
 // Star Destroyer
 //
-weapons/shipgun/explode lsounds/StarDestroyer/Explode.flac // Halo 3
+weapons/shipgun/explode lsounds/StarDestroyer/Explode.flac   // Halo 3
+weapons/shipgun/fire    lsounds/StarDestroyer/Fire.flac      // 〃
+weapons/shipgun/prepare lsounds/StarDestroyer/Charge.flac    // Halo 3, Devil May Cry 2
+weapons/shipgun/empty   lsounds/StarDestroyer/FireEmpty.flac // Counter-Strike: Source, Phantasy Star Online
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6

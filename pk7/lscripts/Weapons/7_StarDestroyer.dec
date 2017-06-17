@@ -28,15 +28,12 @@ actor Lith_StarShrapnel
 
 actor Lith_StarWoosh1
 {
-   Damage (2)
    Radius 8
    Height 8
    Scale 0.7
-   Speed 3
    RenderStyle "Add"
    
-   Projectile
-   +NODAMAGETHRUST
+   +NOINTERACTION
    
    states
    {
@@ -54,8 +51,6 @@ actor Lith_StarWoosh1
 
 actor Lith_StarWoosh2 : Lith_StarWoosh1
 {
-   Speed 4
-   
    states
    {
    Spawn:
@@ -72,7 +67,7 @@ actor Lith_StarProjectile
 {
    Damage (20)
    Speed 2
-   Scale 0.7
+   Scale 0.15
    Radius 32
    Height 8
    Mass 500
@@ -88,27 +83,32 @@ actor Lith_StarProjectile
    states
    {
    Spawn:
-      TNT1 A 0
+      TNT1 A 4
       TNT1 A 0 A_PlaySound("weapons/dark/wind", CHAN_7, 1.0, true)
    Spawn1:
       BLLT L 0 bright A_AlertMonsters
       BLLT L 0 bright A_SetUserVar(user_rushtimer, user_rushtimer + 1)
-      BLLT L 0 bright A_JumpIf(user_rushtimer > 35*7, "Spawn3")
+      BLLT L 0 bright A_JumpIf(user_rushtimer > 35*7, "Rush")
+      BLLT L 0 bright A_JumpIf(scalex < 0.7, "ScaleUp")
+   SoundCheck:
       BLLT L 0 bright A_SetUserVar(user_soundtimer, user_soundtimer - 1)
-      BLLT L 0 bright A_JumpIf(user_soundtimer > 0, "Spawn2")
+      BLLT L 0 bright A_JumpIf(user_soundtimer > 0, "DoMissile")
       BLLT L 0 bright A_SetUserVar(user_soundtimer, 3)
       BLLT L 0 bright A_PlaySound("weapons/dark/fire", CHAN_5)
-   Spawn2:
+   DoMissile:
       BLLT LLLLL 0 bright A_CustomMissile("Lith_StarShrapnel",
-         CallACS("Lith_CircleSpread", 32*FIX, 32*FIX, false)/FIX,
-         CallACS("Lith_CircleSpread", 32*FIX, 32*FIX, true)/FIX,
+         CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, false)/FIX,
+         CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, true)/FIX,
          0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
-      goto Spawn4
-   Spawn3:
+      goto DoWoosh
+   ScaleUp:
+      BLLT L 0 bright A_SetScale(scalex * 1.01)
+      goto SoundCheck
+   Rush:
       BLLT L 0 bright A_ChangeVelocity(velx*1.1, vely*1.1, velz*1.1, CVF_REPLACE)
-   Spawn4:
-      BLLT L 0 bright A_CustomMissile("Lith_StarWoosh1", 0, frandom(-2,2), angle-180, CMF_TRACKOWNER|CMF_ABSOLUTEANGLE)
-      BLLT L 0 bright A_CustomMissile("Lith_StarWoosh2", 0, 0, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
+   DoWoosh:
+      BLLT L 0 bright A_SpawnItemEx("Lith_StarWoosh1", 0,0,0, 4,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION)
+      BLLT L 0 bright A_SpawnItemEx("Lith_StarWoosh2", 0,0,0, 3,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION)
       BLLT L 0 bright A_Quake(1, 2, 0, 512)
       BLLT L 0 bright A_Quake(3, 2, 0, 256)
       BLLT L 0 bright A_Quake(5, 2, 0, 64)
@@ -145,59 +145,61 @@ actor Lith_StarDestroyer : Lith_CWeapon
       stop
    
    Ready:
-      PISG A 1 A_WeaponReady
+      SDSG AABBCCDDEEFFGGHH 1 A_WeaponReady
       loop
    
    Deselect:
-      PISG AAA 0 A_Lower
-      PISG A 1
+      SDSG AAA 0 A_Lower
+      SDSG A 1
       loop
    
    Select:
-      PISG AA 0 A_Raise
-      PISG A 1
+      SDSG AA 0 A_Raise
+      SDSG A 1
       loop
    
    Fire:
-      PISG A 0 A_JumpIfInventory("Lith_CannonAmmo", 5, 1)
+      SDSG A 0 A_JumpIfInventory("Lith_CannonAmmo", 5, 1)
       goto FireEmpty
-      PISG A 0 A_TakeInventory("Lith_CannonAmmo", 5, TIF_NOTAKEINFINITE)
-      PISG A 0 A_AlertMonsters
-      PISG A 10 A_PlaySound("weapons/shipgun/prepare", CHAN_WEAPON)
-      PISG A 1 bright
-      PISG A 1 bright offset(-1, 33)
-      PISG A 1 bright offset(-1, 34)
-      PISG A 1 bright offset(-1, 36)
-      PISG A 2 bright offset(1, 37)
-      PISG A 3 bright offset(1, 38)
-      PISG A 0 bright A_GunFlash("DummyFlash")
-      PISG A 0 bright A_PlaySound("weapons/shipgun/fire", CHAN_5)
-      PISG C 2 bright offset(0, 62) A_FireCustomMissile("Lith_StarProjectile")
-      PISG C 1 bright offset(0, 57)
-      PISG C 1 bright offset(0, 47)
-      PISG C 1 bright offset(0, 44)
-      PISG B 1 bright offset(0, 40)
-      PISG B 1 bright offset(0, 37)
-      PISG B 1 bright offset(0, 35)
-      PISG B 1 bright offset(0, 32)
-      PISG AAAAAAAAAAAAAAAAAAAA 1 offset(0, 32) A_ReFire
+      SDSG A 1 A_PlaySound("weapons/shipgun/prepare", CHAN_WEAPON)
+      SDSG ABCDEFFGGHHAABCDEFGH 1 bright
+      SDSG ABBCCDDEFG 1 bright offset(0, 33)
+      SDSG HADEFHBCGH 1 bright offset(0, 34)
+      SDSG A 0 A_TakeInventory("Lith_CannonAmmo", 5, TIF_NOTAKEINFINITE)
+      SDSG A 0 A_AlertMonsters
+      SDSG A 1 bright
+      SDSG A 1 bright offset(-1, 33)
+      SDSG A 1 bright offset(-1, 34)
+      SDSG A 1 bright offset(-1, 36)
+      SDSG A 2 bright offset(1, 37)
+      SDSF A 3 bright offset(1, 38)
+      SDSF A 0 bright A_GunFlash("DummyFlash")
+      SDSF A 0 bright A_PlaySound("weapons/shipgun/fire", CHAN_5)
+      SDSF B 2 bright offset(0, 62) A_FireCustomMissile("Lith_StarProjectile")
+      SDSF C 1 bright offset(0, 57)
+      SDSF D 1 bright offset(0, 47)
+      SDSF E 1 bright offset(0, 44)
+      SDSF F 1 bright offset(0, 40)
+      SDSF G 1 bright offset(0, 37)
+      SDSF H 1 bright offset(0, 35)
+      SDSG AABBCCDDEEFFGGHH 1 offset(0, 32) A_ReFire
       goto Ready
    
    FireEmpty:
-      PISG A 2 A_PlaySound("weapons/shipgun/empty", 7)
-      PISG A 1 offset(0, 28)
-      PISG A 1 offset(0, 29)
-      PISG A 1 offset(0, 32)
-      PISG A 1 offset(0, 35)
-      PISG A 1 offset(0, 40)
-      PISG A 1 offset(0, 42)
-      PISG A 1 offset(0, 43)
-      PISG A 1 offset(0, 44)
-      PISG A 1 offset(0, 40)
-      PISG A 1 offset(0, 37)
-      PISG A 1 offset(0, 34)
-      PISG A 1 offset(0, 32)
-      PISG A 1 A_ReFire
+      SDSG A 2 A_PlaySound("weapons/shipgun/empty", 7)
+      SDSG B 1 offset(0, 28)
+      SDSG C 1 offset(0, 29)
+      SDSG D 1 offset(0, 32)
+      SDSG E 1 offset(0, 35)
+      SDSG F 1 offset(0, 40)
+      SDSG G 1 offset(0, 42)
+      SDSG H 1 offset(0, 43)
+      SDSG A 1 offset(0, 44)
+      SDSG B 1 offset(0, 40)
+      SDSG C 1 offset(0, 37)
+      SDSG D 1 offset(0, 34)
+      SDSG EFG 1 offset(0, 32)
+      SDSG H 1 A_ReFire
       goto Ready
    }
 }
