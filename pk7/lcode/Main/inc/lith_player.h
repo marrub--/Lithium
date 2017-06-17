@@ -124,19 +124,21 @@ typedef struct player_statedata_s
 //
 typedef struct player_extdata_s
 {
-   float      discount;
-   bip_t      bip;
-   upgrades_t upgrades;
-   int        upgrmax;
-   loginfo_t  loginfo;
-   bool       autobuy[NUMAUTOGROUPS];
+   bip_t bip;
+   
+   upgrade_t   upgrades[UPGR_STATIC_MAX];
    Lth_HashMap upgrademap;
-   bool       hudenabled;
-   int        decvars[8];
+   int         upgrmax;
+   
+   loginfo_t loginfo;
+   bool      hudenabled;
+   
+   int decvars[8];
    
    score_t scoreaccum;
    int     scoreaccumtime;
    double  scoremul;
+   float   discount;
    
    int spuriousexplosions;
    int brouzouf;
@@ -308,7 +310,7 @@ typedef struct player_s
    property buttonPressed {call: Lith_ButtonPressed(this)}
    property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
    property deliverMail {call: Lith_DeliverMail(this)}
-   property pclass    {get: Lith_PlayerGetClass(this)}
+   property pclass      {get: Lith_PlayerGetClass(this)}
    property getModScore {call: Lith_GetModScore(this)}
    
    [[__anonymous]] player_statedata_t  statedata;

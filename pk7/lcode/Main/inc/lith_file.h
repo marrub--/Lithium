@@ -1,5 +1,5 @@
-#ifndef LITH_NETFILE_H
-#define LITH_NETFILE_H
+#ifndef LITH_FILE_H
+#define LITH_FILE_H
 
 #include <stdio.h>
 

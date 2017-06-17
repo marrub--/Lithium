@@ -16,19 +16,6 @@
 #define Ident_Lend FourCC('L', 'e', 'n', 'd')
 #define SaveV_Lend 0
 
-// agrp: Auto-group information.
-// Ver. 1: Initial data set. Stores string index and bit field.
-// Ver. 2: Fixed names being packed backwards.
-// Ver. 3: Improved compression.
-#define Ident_agrp FourCC('a', 'g', 'r', 'p')
-#define SaveV_agrp 3
-
-// abuy: Auto-buy information.
-// Ver. 1: Initial data set. Stores a single bitfield.
-// Ver. 2: Improved compression.
-#define Ident_abuy FourCC('a', 'b', 'u', 'y')
-#define SaveV_abuy 1
-
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00
 #define Save_FlagShft 8

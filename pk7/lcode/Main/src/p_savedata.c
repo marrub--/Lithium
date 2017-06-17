@@ -1,6 +1,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
-#include "lith_netfile.h"
+#include "lith_file.h"
 #include "lith_savedata.h"
 
 
@@ -13,6 +13,8 @@
 //
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size)
 {
+   if(ACS_GetCVar("__lith_debug_save"))
+      Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
    Lith_FWrite32(&(savechunk_t){iden, vers & Save_VersMask, size}, sizeof(savechunk_t), 4, save->fp);
 }
 

@@ -1,9 +1,3 @@
-Category("Auto-Groups")
-CBox("Automatically buy group #1", p->autobuy[0], ToggleAutoBuy(p, 0))
-CBox("Automatically buy group #2", p->autobuy[1], ToggleAutoBuy(p, 1))
-CBox("Automatically buy group #3", p->autobuy[2], ToggleAutoBuy(p, 2))
-CBox("Automatically buy group #4", p->autobuy[3], ToggleAutoBuy(p, 3))
-
 Category("GUI")
 Float("Horizontal cursor speed", "lith_gui_xmul", 0.1f, 2.0f)
 Float("Vertical cursor speed",   "lith_gui_ymul", 0.1f, 2.0f)

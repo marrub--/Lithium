@@ -1,7 +1,7 @@
 #define _GNU_SOURCE // Needed for fopencookie. See: man 7 feature_test_macros
 
 #include "lith_common.h"
-#include "lith_netfile.h"
+#include "lith_file.h"
 
 #include "base64.h"
 
@@ -15,18 +15,6 @@
 //
 
 //
-// netfile_t
-//
-typedef struct netfile_s
-{
-   __str pcvar;
-   int   pnum;
-   char  *mem;
-   size_t len;
-   size_t pos;
-} netfile_t;
-
-//
 // memfile_t
 //
 typedef struct memfile_t
@@ -35,6 +23,17 @@ typedef struct memfile_t
    size_t         len;
    size_t         pos;
 } memfile_t;
+
+//
+// netfile_t
+//
+typedef struct netfile_s
+{
+   [[__anonymous]]
+   memfile_t memfile;
+   __str     pcvar;
+   int       pnum;
+} netfile_t;
 
 
 //----------------------------------------------------------------------------
@@ -63,35 +62,6 @@ void PrintMem(unsigned char const *data, size_t size)
    }
    
    printf(c"\nEOF\n\n");
-}
-
-//
-// NetWrite
-//
-// fwrite for netfiles.
-// Basic buffer management.
-//
-static ssize_t NetWrite(void *nfdata, char const *buf, size_t size)
-{
-   netfile_t *nf = nfdata;
-   
-   size_t avail = nf->len - nf->pos;
-   
-   if(size >= avail)
-   {
-      size_t len = nf->len + nf->len / 2 + size + 1;
-      char *mem = realloc(nf->mem, len);
-      
-      if(!mem)
-         return 0;
-      
-      nf->len = len;
-      nf->mem = mem;
-   }
-   
-   memcpy(nf->mem + nf->pos, buf, size);
-   nf->mem[nf->pos += size] = '\0';
-   return size;
 }
 
 //
@@ -139,8 +109,6 @@ static int NetClose(void *nfdata)
       
       free(coded);
    }
-   else
-      ACS_SetUserCVarString(nf->pnum, nf->pcvar, s""); // Oh well!
    
    free(nf->mem);
    free(nf);
@@ -161,6 +129,32 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
 
    memcpy(buf, mem->mem + mem->pos, size);
    mem->pos += size;
+   return size;
+}
+
+//
+// MemWrite
+//
+//
+static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
+{
+   memfile_t *mem = memdata;
+   size_t avail = mem->len - mem->pos;
+   
+   if(size >= avail)
+   {
+      size_t len = mem->len + mem->len / 2 + size + 1;
+      void  *newmem = realloc(mem->mem, len);
+      
+      if(!mem)
+         return 0;
+      
+      mem->len = len;
+      mem->mem = newmem;
+   }
+   
+   memcpy(mem->mem + mem->pos, buf, size);
+   mem->mem[mem->pos += size] = '\0';
    return size;
 }
 
@@ -222,7 +216,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
       nf->pnum  = pnum;
       
       fp = fopencookie(nf, c"w", (cookie_io_functions_t){
-         .write = NetWrite,
+         .write = MemWrite,
          .close = NetClose
       });
    }

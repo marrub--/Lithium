@@ -9,7 +9,6 @@ MAKELIB=gdcc-makelib
 BIN=pk7/acs
 SRC=pk7/lcode/Main/src
 INC=pk7/lcode/Main/inc
-API=api
 IR=ir
 
 LITHOS_SRC=pk7/lcode/LithOS3/lithos_c/src
@@ -57,14 +56,13 @@ MAIN_SOURCES= \
 	$(SRC)/p_shop.c \
 	$(SRC)/p_games.c \
 	$(SRC)/m_namegen.c \
-	$(SRC)/m_netfile.c \
+	$(SRC)/m_file.c \
 	$(SRC)/p_savedata.c \
 	$(SRC)/p_shopdef.c \
 	$(SRC)/p_data.c \
 	$(SRC)/p_payout.c \
 	$(SRC)/p_render.c \
 	$(SRC)/p_save.c \
-	$(SRC)/p_autogroup.c \
 	$(SRC)/m_base64.c \
 	$(SRC)/g_auto.c \
 	$(SRC)/g_button.c \
@@ -78,7 +76,7 @@ MAIN_SOURCES= \
 	$(SRC)/p_dialogue.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
-MAIN_HEADERS=$(wildcard $(INC)/*.h) $(wildcard $(API)/*.h)
+MAIN_HEADERS=$(wildcard $(INC)/*.h)
 
 LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
 LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
@@ -102,7 +100,7 @@ $(BIN)/lithmain.bin: $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
 
 $(IR)/%.ir: $(SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
 	@echo CC $<
-	@$(CC) $(CFLAGS) -i$(INC) -i$(API) -Dnull=NULL -c $< -o $@
+	@$(CC) $(CFLAGS) -i$(INC) -Dnull=NULL -c $< -o $@
 
 $(IR)/lithos_%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
 	@echo CC $<

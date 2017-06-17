@@ -215,6 +215,9 @@ void Lith_DeliverMail(player_t *p, __str title)
 //
 bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 {
+   if(!name)
+      return null;
+   
    ForCategoryAndPage()
       if(ACS_StrCmp(page->name, name) == 0)
          return page;

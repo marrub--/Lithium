@@ -47,8 +47,8 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"PunctCannon", "CannonUpgr",   5100700 }, pclass_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
    {{"OmegaRail",   "CannonUpg2",   5800100 }, pclass_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
 
-   {{"TorgueMode",  null,           80000000}, pclass_marine,    UC_Extr,  8,  0.00, Req(UR_RDI)},
-   {{"7777777",     null,           82354300}, pclass_marine,    UC_Extr,  7,  0.10, Req(UR_RDI)},
+   {{"TorgueMode",  null,           8000000 }, pclass_marine,    UC_Extr,  8,  0.00, Req(UR_RDI)},
+   {{"7777777",     null,           8235430 }, pclass_marine,    UC_Extr,  7,  0.10, Req(UR_RDI)},
    {{"lolsords",    null,           1000000 }, pclass_marine,    UC_Extr,  0,  0.20, Req(UR_RDI)},
 
    {{"Implying",    null,           0       }, pclass_any,       UC_Down,  0,  0.20},
@@ -74,7 +74,6 @@ static __str const upgrcateg[UC_MAX] = {
 // Extern Objects
 //
 
-__str Lith_AutoGroupNames[NUMAUTOGROUPS] = {"\Ca#1", "\Cd#2", "\Cn#3", "\Ck#4"};
 upgradeinfo_t *upgradeinfo;
 int UPGR_MAX = countof(staticupgradeinfo);
 
@@ -330,11 +329,7 @@ void Lith_PlayerLoseUpgrades(player_t *p)
 // Lith_PlayerUpdateUpgrades
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
-{
-   extern void Lith_CheckAutoBuy(player_t *p);
-   
-   Lith_CheckAutoBuy(p);
-   
+{   
    ForUpgrade(upgr)
       if(upgr->active && upgr->info->Update)
          upgr->info->Update(p, upgr);
@@ -506,11 +501,6 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
       
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_upgrsel].i, .color = color, .preset = preset))
          g->st[st_upgrsel].i = i;
-      
-      for(int i = 0; i < NUMAUTOGROUPS; i++)
-         if(upgr->autogroups[i])
-            DrawSpritePlain(StrParam("lgfx/UI/Group%i.png", i + 1), g->hid--,
-               g->ox + btnlist.w + 0.2, g->oy + y + 1.1, TICSECOND);
    }
    
    Lith_GUI_ScrollEnd(g, st_upgrscr);
@@ -638,18 +628,6 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
    
    if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
-   
-   HudMessageF("CBIFONT", "\CjActive Auto-Groups");
-   HudMessagePlain(g->hid--, 255, 205, TICSECOND);
-   
-   for(int i = 0; i < NUMAUTOGROUPS; i++)
-   {
-      if(Lith_GUI_Checkbox_Id(g, i, upgr->autogroups[i], 225 + (i * 20), 215, Lith_AutoGroupNames[i]))
-      {
-         upgr->autogroups[i] = !upgr->autogroups[i];
-         p->saveData();
-      }
-   }
 }
 
 //

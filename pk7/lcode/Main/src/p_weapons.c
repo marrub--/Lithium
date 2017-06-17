@@ -147,12 +147,10 @@ bool Lith_WeaponPickup(int name)
    
    p->weaponsheld++;
    
-   if(!p->getUpgr(UPGR_7777777)->active)
-      ACS_LocalAmbientSound(info->pickupsound, 127);
-   else
-      ACS_LocalAmbientSound("marathon/pickup", 127);
+   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
+   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
    
-   if(info->name) p->bip.unlock(info->name);
+   p->bip.unlock(info->name);
    
    GiveWeaponItem(parm);
    Lith_PickupMessage(p, info);

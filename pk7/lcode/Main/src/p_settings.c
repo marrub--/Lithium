@@ -42,15 +42,6 @@ static __str ThemeName(int num)
    }
 }
 
-//
-// ToggleAutoBuy
-//
-static void ToggleAutoBuy(player_t *p, int num)
-{
-   p->autobuy[num] = !p->autobuy[num];
-   p->saveData();
-}
-
 
 //----------------------------------------------------------------------------
 // Extern Functions

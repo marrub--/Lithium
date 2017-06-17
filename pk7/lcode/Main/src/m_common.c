@@ -9,10 +9,7 @@
 // Static Objects
 //
 
-// Most CRC tables are 256 in length because they're on plebeian platforms
-// that don't have the glorious 32-bit byte, but we have better!
-// ;_;
-static crc64_t crctable[512];
+static crc64_t crctable[256]; // NB: Don't try to hash non-8-bit data.
 
 
 //----------------------------------------------------------------------------
@@ -26,7 +23,7 @@ static void InitCRC64()
 {
    crc64_t const polynomial = 0xC96C5795D7870F42; // ECMA 182
    
-   for(crc64_t i = 0; i < 512; i++)
+   for(crc64_t i = 0; i < 256; i++)
    {
       crc64_t remainder = i;
       
@@ -59,7 +56,7 @@ crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
    result = ~result;
    
    for(size_t i = 0; i < len; i++)
-      result = crctable[(result ^ ptr[i]) & 0x1FF] ^ (result >> 8);
+      result = crctable[(result ^ ptr[i]) & 0xFF] ^ (result >> 8);
    
    return ~result;
 }

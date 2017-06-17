@@ -159,6 +159,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       ACS_SetHudClipRect(leftt, topt, 300, 300, 300);
       HudMessageF("LTRMFONT", "%S", vmstate->text);
       HudMessagePlain(g->hid--, leftt+.1, topt+.1, TICSECOND);
+      ACS_SetHudSize(g->w, g->h, false);
       ACS_SetHudClipRect(0, 0, 0, 0);
       break;
    case TACT_INFO:

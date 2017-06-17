@@ -12,6 +12,7 @@ heretic/Upgrades.lthm -> Upgrades.lthm
 in language.info.dialogue.txt
 
 Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
+Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 
 -- CBI Mail ------------------------------------------------------------------

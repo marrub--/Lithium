@@ -1,41 +1,32 @@
-//----------------------------------------------------------------------------
-//
-// Copyright (c) 2017 Project Golan
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the "Software"),
-// to deal in the Software without restriction, including without limitation
-// the rights to use, copy, modify, merge, publish, distribute, sublicense,
-// and/or sell copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-// DEALINGS IN THE SOFTWARE.
-//
-//----------------------------------------------------------------------------
-//
-// LithUpgrades.h
-//
-// Upgrades API.
-//
-// Don't include this file manually, include <Lithium.h> instead.
-//
-//----------------------------------------------------------------------------
+#ifndef LITH_TYCHO_H
+#define LITH_TYCHO_H
 
-#include "LithUpgradeCategory.h"
+#include <stdfix.h>
+#include <stdbool.h>
+
+typedef long long int score_t;
+
+typedef struct shopdef_s
+{
+   // Public Data
+   __str name;
+   __str bipunlock;
+   score_t cost;
+   
+   // Private Data
+   void (*shopBuy)   (struct player_s *p, struct shopdef_s const *def, void *obj);
+   bool (*shopCanBuy)(struct player_s *p, struct shopdef_s const *def, void *obj);
+   void (*shopGive)  (int tid,            struct shopdef_s const *def, void *obj);
+} shopdef_t;
+
+#define UC_Body 0
+#define UC_Weap 1
+#define UC_Extr 2
+#define UC_Down 3
+#define UC_MAX  4
 
 #define UPGR_STATIC_MAX 80
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
-
-#define NUMAUTOGROUPS 4
 
 #define UserData_Adrenaline data.u01
 #define UserData_Implying   data.u02
@@ -144,15 +135,14 @@ void Lith_UpgrSetOwned(struct player_s *p, struct upgrade_s *upgr);
 
 typedef struct upgrade_s
 {
-   __prop canUse {call: Lith_UpgrCanActivate(__arg, this)}
-   __prop toggle {call: Lith_UpgrToggle(__arg, this)}
+   __prop canUse   {call: Lith_UpgrCanActivate(__arg, this)}
+   __prop toggle   {call: Lith_UpgrToggle(__arg, this)}
    __prop setOwned {call: Lith_UpgrSetOwned(__arg, this)}
    
    // Public Data
    union upgradedata_u data;
    
    // Readonly Data
-   bool autogroups[NUMAUTOGROUPS];
    upgradeinfo_t const *info;
    
    bool active : 1;
@@ -166,5 +156,5 @@ void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname);
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_RegisterBasicUpgrade(int key, __str name, int cost, int category);
 
-// EOF
+#endif
 

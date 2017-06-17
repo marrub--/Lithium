@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#include "Lithium.h"
+#include "lith_tycho.h"
 
 #define property __prop
 #define prop_arg __arg

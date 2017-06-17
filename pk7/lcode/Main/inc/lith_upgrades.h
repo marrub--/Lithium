@@ -11,17 +11,9 @@
 
 
 //----------------------------------------------------------------------------
-// Types
-//
-
-typedef upgrade_t upgrades_t[UPGR_STATIC_MAX];
-
-
-//----------------------------------------------------------------------------
 // Extern Objects
 //
 
-extern __str Lith_AutoGroupNames[NUMAUTOGROUPS];
 extern upgradeinfo_t *upgradeinfo;
 extern int UPGR_MAX;
 
