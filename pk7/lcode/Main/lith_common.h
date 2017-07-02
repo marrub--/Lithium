@@ -1,6 +1,10 @@
 #ifndef LITH_COMMON_H
 #define LITH_COMMON_H
 
+#if KDEV
+typedef void const *__str;
+#endif
+
 #pragma GDCC FIXED_LITERAL ON
 #pragma GDCC STRENT_LITERAL ON
 
@@ -17,6 +21,9 @@
 
 #define property __prop
 #define prop_arg __arg
+#define ifauto(type, name, ...) \
+   __with(type name = (__VA_ARGS__);) \
+      if(name)
 
 #define countof(a) (sizeof((a)) / sizeof(*(a)))
 

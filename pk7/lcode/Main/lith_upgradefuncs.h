@@ -71,6 +71,9 @@ Case(lolsords)
    D(lolsords)
    U(lolsords)
 
+Case(Goldeneye)
+   U(Goldeneye)
+
 // Downgrades ----------------------------------------------------------------
 Case(Implying)
    U(Implying)

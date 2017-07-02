@@ -29,6 +29,7 @@ enum
    UPGR_TorgueMode,
    UPGR_7777777,
    UPGR_lolsords,
+   UPGR_Goldeneye,
    
    UPGR_Implying,
    UPGR_UNCEUNCE,
@@ -36,7 +37,7 @@ enum
    
    UPGR_BASE_MAX,
    
-   // Extras addon stuff
+   // 「GRAF ZONE」
    UPGR_DarkCannon = 666,
 };
 

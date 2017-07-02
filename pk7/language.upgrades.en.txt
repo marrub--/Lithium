@@ -178,10 +178,8 @@ LITH_TXT_UPGRADE_DESCR_OmegaRail =
    "magical compounds.";
 
 LITH_TXT_UPGRADE_TITLE_DarkCannon = "????????";
-LITH_TXT_UPGRADE_EFFEC_DarkCannon =
-   "\n\cd<fatal error while displaying information>";
-LITH_TXT_UPGRADE_DESCR_DarkCannon =
-   "What the !@#$% is this!?";
+LITH_TXT_UPGRADE_EFFEC_DarkCannon = "\n\cd<fatal error while displaying information>";
+LITH_TXT_UPGRADE_DESCR_DarkCannon = "What the !@#$% is this!?";
 
 //
 // Extras
@@ -210,9 +208,10 @@ LITH_TXT_UPGRADE_DESCR_7777777 =
    "thousand years";
 
 LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
-LITH_TXT_UPGRADE_EFFEC_lolsords =
-   "You get a sword. It is literally your only weapon.";
-LITH_TXT_UPGRADE_DESCR_lolsords = "";
+LITH_TXT_UPGRADE_EFFEC_lolsords = "You get a sword. It is literally your only weapon.";
+
+LITH_TXT_UPGRADE_TITLE_Goldeneye = "007 Mode";
+LITH_TXT_UPGRADE_EFFEC_Goldeneye = "Get the true Goldeneye 007(tm) experience!";
 
 //
 // Downgrades

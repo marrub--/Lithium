@@ -151,6 +151,7 @@ weapons/rifle/fire3      lsounds/CombatRifle/Fire3.flac       // 〃
 weapons/rifle/firesnipe1 lsounds/CombatRifle/FireSnipe1.flac  // 〃
 weapons/rifle/firesnipe2 lsounds/CombatRifle/FireSnipe2.flac  // 〃
 weapons/rifle/firesnipe3 lsounds/CombatRifle/FireSnipe3.flac  // 〃
+weapons/rifle/firero     lsounds/CombatRifle/FireRunOut.flac  // Counter-Strike: Source
 weapons/rifle/rldmount   lsounds/CombatRifle/ReloadMount.flac // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
 weapons/rifle/pickup     lsounds/CombatRifle/Pickup.flac      // Halo 3
 weapons/rifle/draw       lsounds/CombatRifle/Draw.flac        // 〃

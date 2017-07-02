@@ -26,6 +26,20 @@ actor Lith_StarShrapnel
    }
 }
 
+actor Lith_StarShrapnelHoming : Lith_StarShrapnel
+{
+   Damage (30)
+   Scale 1.4
+   Translation "160:167=192:199", "224:231=192:199"
+   
+   states
+   {
+   Spawn:
+      BLLT M 4 bright A_SeekerMissile(0, 360, SMF_LOOK)
+      loop
+   }
+}
+
 actor Lith_StarWoosh1
 {
    Radius 8
@@ -79,6 +93,7 @@ actor Lith_StarProjectile
    
    var int user_soundtimer;
    var int user_rushtimer;
+   var int user_homingshrapneltimer;
    
    states
    {
@@ -91,6 +106,9 @@ actor Lith_StarProjectile
       BLLT L 0 bright A_JumpIf(user_rushtimer > 35*7, "Rush")
       BLLT L 0 bright A_JumpIf(scalex < 0.7, "ScaleUp")
    SoundCheck:
+      BLLT L 0 bright A_SetUserVar(user_homingshrapneltimer, user_homingshrapneltimer + 1)
+      BLLT L 0 bright A_JumpIf(user_homingshrapneltimer >= 10, "DoHomingMissile")
+   SoundCheck1:
       BLLT L 0 bright A_SetUserVar(user_soundtimer, user_soundtimer - 1)
       BLLT L 0 bright A_JumpIf(user_soundtimer > 0, "DoMissile")
       BLLT L 0 bright A_SetUserVar(user_soundtimer, 3)
@@ -101,6 +119,13 @@ actor Lith_StarProjectile
          CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, true)/FIX,
          0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
       goto DoWoosh
+   DoHomingMissile:
+      BLLT L 0 bright A_SetUserVar(user_homingshrapneltimer, 0)
+      BLLT LL 0 bright A_CustomMissile("Lith_StarShrapnelHoming",
+         CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, false)/FIX,
+         CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, true)/FIX,
+         0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
+      goto SoundCheck1
    ScaleUp:
       BLLT L 0 bright A_SetScale(scalex * 1.01)
       goto SoundCheck

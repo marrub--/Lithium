@@ -47,9 +47,10 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"PunctCannon", "CannonUpgr",   5100700 }, pclass_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
    {{"OmegaRail",   "CannonUpg2",   5800100 }, pclass_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
 
-   {{"TorgueMode",  null,           8000000 }, pclass_marine,    UC_Extr,  8,  0.00, Req(UR_RDI)},
-   {{"7777777",     null,           8235430 }, pclass_marine,    UC_Extr,  7,  0.10, Req(UR_RDI)},
-   {{"lolsords",    null,           1000000 }, pclass_marine,    UC_Extr,  0,  0.20, Req(UR_RDI)},
+   {{"TorgueMode",  null,           8000000 }, pclass_any,       UC_Extr,  8,  0.00, Req(UR_RDI)},
+   {{"7777777",     null,           8235430 }, pclass_any,       UC_Extr,  7,  0.10, Req(UR_RDI)},
+   {{"lolsords",    null,           1000000 }, pclass_any,       UC_Extr,  0,  0.20, Req(UR_RDI)},
+   {{"Goldeneye",   null,           70000   }, pclass_any,       UC_Extr,  0,  0.07, Req(UR_RDI)},
 
    {{"Implying",    null,           0       }, pclass_any,       UC_Down,  0,  0.20},
    {{"UNCEUNCE",    null,           0       }, pclass_any,       UC_Down,  0,  0.30},
@@ -605,7 +606,8 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    }
    
    // Effect
-   HudMessageF("CBIFONT", "Effect: %S", Language("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name));
+   ifauto(__str, effect, LanguageNull("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name))
+      HudMessageF("CBIFONT", "Effect: %S", effect);
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 50.1, TICSECOND);
    
    // Separator
@@ -615,7 +617,10 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    // Description
    if(g->st[st_upgrselold].i != g->st[st_upgrsel].i)
    {
-      Lith_GUI_TypeOn(g, st_upgrtypeon, Language("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name));
+      ifauto(__str, descr, LanguageNull("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name))
+         Lith_GUI_TypeOn(g, st_upgrtypeon, descr);
+      else
+         Lith_GUI_TypeOn(g, st_upgrtypeon, "");
       g->st[st_upgrselold].i = g->st[st_upgrsel].i;
    }
    
@@ -645,6 +650,8 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 {
+   DrawSpriteAlpha("lgfx/UI/ItemBG.png", g->hid--, 113.1, 95.1, TICSECOND, 0.5);
+   
    GUIUpgradesList(g, p);
    
    upgrade_t *upgr = &p->upgrades[g->st[st_upgrsel].i];

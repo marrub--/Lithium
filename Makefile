@@ -7,8 +7,8 @@ MAKELIB=gdcc-makelib
 ## Directories
 
 BIN=pk7/acs
-SRC=pk7/lcode/Main/src
-INC=pk7/lcode/Main/inc
+SRC=pk7/lcode/Main
+INC=$(SRC)
 IR=ir
 
 LITHOS_SRC=pk7/lcode/LithOS3/lithos_c/src
@@ -49,6 +49,7 @@ MAIN_SOURCES= \
 	$(SRC)/u_zoom.c \
 	$(SRC)/u_homingrpg.c \
 	$(SRC)/u_headsupdis2.c \
+	$(SRC)/u_goldeneye.c \
 	$(SRC)/p_cbigui.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \

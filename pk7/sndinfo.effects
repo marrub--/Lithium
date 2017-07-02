@@ -56,6 +56,32 @@ $random effects/puff/ricochet {
    effects/puff/ricochet4
 }
 
+effects/geexplosion1  lsounds/GEExplosion/expl1.wav  // GoldenEye 007
+effects/geexplosion2  lsounds/GEExplosion/expl2.wav  // 〃
+effects/geexplosion3  lsounds/GEExplosion/expl3.wav  // 〃
+effects/geexplosion4  lsounds/GEExplosion/expl4.wav  // 〃
+effects/geexplosion5  lsounds/GEExplosion/expl5.wav  // 〃
+effects/geexplosion6  lsounds/GEExplosion/expl6.wav  // 〃
+effects/geexplosion7  lsounds/GEExplosion/expl7.wav  // 〃
+effects/geexplosion8  lsounds/GEExplosion/expl8.wav  // 〃
+effects/geexplosion9  lsounds/GEExplosion/expl9.wav  // 〃
+effects/geexplosion10 lsounds/GEExplosion/expl10.wav // 〃
+effects/geexplosion11 lsounds/GEExplosion/expl11.wav // 〃
+
+$random effects/geexplosion {
+    effects/geexplosion1
+    effects/geexplosion2
+    effects/geexplosion3
+    effects/geexplosion4
+    effects/geexplosion5
+    effects/geexplosion6
+    effects/geexplosion7
+    effects/geexplosion8
+    effects/geexplosion9
+    effects/geexplosion10
+    effects/geexplosion11
+}
+
 //
 // Ambience
 //

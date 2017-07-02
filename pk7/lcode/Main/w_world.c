@@ -65,16 +65,17 @@ int Lith_UniqueID(int tid)
 {
    int pn;
    
-   // Players return a unique identifier of -playernumber
+   // Negative values are for players.
    if((pn = Lith_GetPlayerNumber(tid)) != -1)
       return -(pn + 1);
    
-   // If we already have a unique identifier, just return that,
+   // If we already have a unique identifier, return that.
    int id = Lith_CheckActorInventory(tid, "Lith_UniqueID");
    
-   // otherwise we have to give a new unique identifier.
+   // Otherwise we have to give a new unique identifier.
+   // Monsters occupy the first area of ID allocation.
    if(id == 0)
-      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
+      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = /*DMON_MAX +*/ ++mapid);
    
    return id;
 }
@@ -348,12 +349,71 @@ static void SpawnBoss()
    }
 }
 
+#if 0
+//
+// Lith_MonsterInfo
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_MonsterInfo()
+{
+   static __str names[] = {
+      "ZombieMan",
+      "ShotgunGuy",
+      "ChaingunGuy",
+      "DoomImp",
+      "Demon",
+      "Spectre",
+      "LostSoul",
+      "Fatso",
+      "Arachnotron",
+      "Cacodemon",
+      "HellKnight",
+      "Revenant",
+      "PainElemental",
+      "Archvile",
+      "SpiderMastermind",
+      "Cyberdemon"
+   };
+   
+   __str cname = GetActorClass(0);
+   
+   for(int i = 0; i < countof(names); i++)
+   {
+      [[__call("ScriptS")]]
+      extern void Lith_MonsterMain(void);
+      
+      if(strstr_str(cname, names[i]))
+      {
+         ifauto(dmon_t, m, AllocDmon())
+            Lith_MonsterMain(m);
+         return;
+      }
+   }
+}
+
+//
+// SetupMonsterInfo
+//
+[[__call("ScriptS")]]
+static void SetupMonsterInfo()
+{
+   while(!enemiesarecompatible)
+      ACS_Delay(1);
+   
+   ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
+}
+#endif
+
 //
 // DoRain
 //
 [[__call("ScriptS")]]
 static void DoRain()
 {
+   // Doesn't work in multiplayer, sorry!
+   if(ACS_PlayerCount() > 1)
+      return;
+   
    player_t *p = &players[0];
    ACS_SetActivator(p->tid);
    
@@ -536,6 +596,8 @@ static void Lith_World(void)
       if(!ACS_GetCVar("lith_sv_nobosses"))
          SpawnBoss();
       
+      //SetupMonsterInfo();
+      
       // Payout, which is not done on the first map.
       if(world.mapscleared != 0)
          Lith_DoPayout();
@@ -561,6 +623,7 @@ static void Lith_World(void)
    int prevkills   = 0;
    int previtems   = 0;
    
+   // Line 1888300 is used as a control line for mod features.
    if((ACS_GetCVar("lith_sv_rain") || world.mapnum == 18883000) && !ACS_GetLineUDMFInt(1888300, "user_lith_norain"))
       DoRain();
    

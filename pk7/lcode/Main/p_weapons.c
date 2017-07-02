@@ -290,6 +290,18 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 }
 
 //
+// Lith_RifleFireRunOut
+//
+[[__call("ScriptS"), __extern("ACS")]]
+fixed Lith_RifleFireRunOut(bool ro)
+{
+   player_t *p = Lith_LocalPlayer;
+   __str cl = p->weapon.inv[weapon_rifle].ammoclass;
+   fixed ret = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
+   return ro ? ret * 1.2 : 1.0 - (ret * 0.35);
+}
+
+//
 // Lith_StarShotSelect
 //
 [[__call("ScriptS"), __extern("ACS")]]

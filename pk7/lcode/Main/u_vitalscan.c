@@ -18,28 +18,31 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
    
    bool six = ACS_StrCmp(ACS_GetActorClass(0), "RLDeVileSix", 11) == 0;
    
-   bool legendary = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterToken");
-   bool henshin   = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterTransformed");
-   
    bool validtarget =
       six ||
       ACS_CheckFlag(0, "COUNTKILL") ||
       ACS_PlayerNumber() != -1;
-   
-   bool freaktarget =
-      ACS_CheckFlag(0, "INVULNERABLE") ||
-      ACS_CheckFlag(0, "NODAMAGE");
-   
-   bool phantom = ACS_CheckInventory("Lith_IsPhantom");
-   
-   bool boss = ACS_CheckFlag(0, "BOSS");
    
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
       UserData.target = UserData.oldtarget = 0;
    
    else if(validtarget)
    {
+      bool legendary = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterToken");
+      bool henshin   = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterTransformed");
+      
+      bool freaktarget =
+         ACS_CheckFlag(0, "INVULNERABLE") ||
+         ACS_CheckFlag(0, "NODAMAGE");
+      
+      bool phantom = ACS_CheckInventory("Lith_IsPhantom");
+      
+      bool boss = ACS_CheckFlag(0, "BOSS");
+      
       int id = Lith_UniqueID();
+      //dmon_t *m = Dmon(id);
+      
+      //if(m) UserData.m = m;
       
       if((freaktarget || boss) && !phantom)
       {

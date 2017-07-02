@@ -37,7 +37,6 @@ typedef struct shopdef_s
 #define UserData_VitalScan  data.u07
 #define UserData_Zoom       data.u08
 #define UserData_HomingRPG  data.u09
-#define UserData_Custom     data.u10
 
                       typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);
 [[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
@@ -65,7 +64,6 @@ enum
 
 union upgradedata_u
 {
-   // Private Data
    struct
    {
       int charge;
@@ -103,9 +101,6 @@ union upgradedata_u
    } u08;
    
    struct {int id;} u09;
-   
-   // Public Data
-   struct {void *userdata;} u10;
 };
 
 typedef struct upgradeinfo_s

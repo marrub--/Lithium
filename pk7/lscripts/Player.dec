@@ -171,6 +171,22 @@ actor Lith_EXPLOOOSION
    }
 }
 
+actor Lith_GEExplosion
+{
+   DamageType "Lith_PlayerMissile"
+   
+   states
+   {
+   Spawn:
+      MEXP A 0 bright
+      MEXP A 0 bright A_PlaySound("effects/geexplosion")
+      MEXP AB 2 bright
+      MEXP CD 3 bright
+      MEXP EF 4 bright
+      stop
+   }
+}
+
 actor Lith_Death : CustomInventory
 {
    states

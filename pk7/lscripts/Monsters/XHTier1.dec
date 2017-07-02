@@ -5,6 +5,10 @@ actor Lith_XH_ZombieMan : Lith_ZombieMan
    states
    {
    MissileFire:
+      POSS F 0 bright A_JumpIfCloser(1024, 3)
+      POSS F 4 bright A_WolfAttack(WAF_NORANDOM, "enemies/chainguy/fire", 1.0 / 5.0, frandom(1, 8) * 3.0)
+      POSS E 4 bright A_MonsterRefire(30, "MissileDone")
+      goto MissileFire
       POSS F 4 bright A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "", 3.0 / 4.0, frandom(1, 4) * 3.0)
       goto MissileDone
    }
