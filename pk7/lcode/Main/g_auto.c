@@ -125,12 +125,46 @@ void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text)
 }
 
 //
+// Lith_RemoveTextColors
+//
+__str Lith_RemoveTextColors(__str str, int size)
+{
+   char *buf = calloc(1, size);
+   int j = 0;
+   
+   for(int i = 0; i < size; i++)
+   {
+      if(str[i] == '\C')
+      {
+         i++;
+         if(str[i] == '[')
+            while(str[i] && str[i++] != ']');
+         else
+            i++;
+      }
+      
+      if(!str[i])
+         break;
+      
+      buf[j++] = str[i];
+   }
+   
+   __str ret = StrParam("%s", buf);
+   free(buf);
+   return ret;
+}
+
+//
 // Lith_GUI_TypeOnUpdate
 //
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st)
 {
    gui_typeon_state_t *typeon = &g->st[st].type;
-   if((typeon->pos += ACS_Random(2, 15)) > typeon->len) typeon->pos = typeon->len;
+   int num = ACS_Random(2, 15);
+   
+   if((typeon->pos += num) > typeon->len)
+      typeon->pos = typeon->len;
+   
    return typeon;
 }
 

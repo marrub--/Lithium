@@ -393,24 +393,27 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          HudMessageF("CBIFONT", "\Ci%S", title);
          HudMessagePlain(g->hid--, 200.4, 45.1 + oy, TICSECOND);
          
-         #define DrawText(...) \
-            HudMessageF("CBIFONT", "%.*S", typeon->pos, typeon->txt), \
+         #define DrawText(txt, pos, ...) \
+            HudMessageF("CBIFONT", "%.*S", pos, txt), \
             HudMessageParams(0, g->hid--, __VA_ARGS__ + oy, TICSECOND)
          
          // render an outline if the page has an image
          if(page->image)
          {
-            DrawText(CR_BLACK, 112.1, 61.1); DrawText(CR_BLACK, 110.1, 61.1);
-            DrawText(CR_BLACK, 112.1, 59.1); DrawText(CR_BLACK, 110.1, 59.1);
+            __str s = Lith_RemoveTextColors(typeon->txt, typeon->pos);
+            int len = ACS_StrLen(s);
             
-            DrawText(CR_BLACK, 111.1, 59.1);
-            DrawText(CR_BLACK, 111.1, 61.1);
+            DrawText(s, len, CR_BLACK, 112.1, 61.1); DrawText(s, len, CR_BLACK, 110.1, 61.1);
+            DrawText(s, len, CR_BLACK, 112.1, 59.1); DrawText(s, len, CR_BLACK, 110.1, 59.1);
             
-            DrawText(CR_BLACK, 112.1, 60.1);
-            DrawText(CR_BLACK, 110.1, 60.1);
+            DrawText(s, len, CR_BLACK, 111.1, 59.1);
+            DrawText(s, len, CR_BLACK, 111.1, 61.1);
+            
+            DrawText(s, len, CR_BLACK, 112.1, 60.1);
+            DrawText(s, len, CR_BLACK, 110.1, 60.1);
          }
          
-         DrawText(CR_WHITE, 111.1, 60.1);
+         DrawText(typeon->txt, typeon->pos, CR_WHITE, 111.1, 60.1);
          
          if(page->height) Lith_GUI_ScrollEnd(g, st_bipinfoscr);
          else             ACS_SetHudClipRect(0, 0, 0, 0);

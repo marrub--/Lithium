@@ -212,6 +212,7 @@ void Lith_GUI_End(gui_state_t *g);
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
 void Lith_GUI_ClipRelease(gui_state_t *g);
 void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text);
+__str Lith_RemoveTextColors(__str str, int size);
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st);
 
 bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t *a);
