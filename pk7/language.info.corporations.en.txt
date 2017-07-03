@@ -25,6 +25,19 @@ LITH_TXT_INFO_DESCR_AOF =
    "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
    "robotics.";
 
+LITH_TXT_INFO_SHORT_AOF2 = "$LITH_TXT_INFO_SHORT_AOF";
+LITH_TXT_INFO_TITLE_AOF2 = "A.O.F Inc. [Bishop-Class Clearance]";
+LITH_TXT_INFO_IMAGE_AOF2 = "$LITH_TXT_INFO_IMAGE_AOF";
+LITH_TXT_INFO_DESCR_AOF2 =
+   "A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and "
+   "\cm--------\cj for the purposes of exposing the universal secret of "
+   "magic and restoring the world to what it once was pre-calamity.\n\n"
+   "Ranks of members whom fight for them include knights, bishops and "
+   "infiltrators; these are assigned based on their skill set and the needs "
+   "of the corporation.\n\n"
+   "A.O.F Inc. also mass produces ammunition for energy weapons, robotics "
+   "and modifications for existing weapons.";
+
 LITH_TXT_INFO_SHORT_Cid = "Cid";
 LITH_TXT_INFO_TITLE_Cid = "$LITH_TXT_INFO_SHORT_Cid";
 LITH_TXT_INFO_IMAGE_Cid = "lgfx/BIP/Cid.png";
@@ -48,7 +61,7 @@ LITH_TXT_INFO_DESCR_Facer =
    "The company was resigned in 2480 after the death of its founders.";
 
 LITH_TXT_INFO_SHORT_KSKK = "KSKK";
-LITH_TXT_INFO_TITLE_KSKK = "Kazami Sensou Kenkyuu Kaihatsu";
+LITH_TXT_INFO_TITLE_KSKK = "Kazami Sensou Kenkyuu Kaihatsu GK";
 LITH_TXT_INFO_IMAGE_KSKK = "lgfx/BIP/KSKK.png";
 LITH_TXT_INFO_DESCR_KSKK =
    "A limited R&D company acting mainly in partnership with the military of "
@@ -66,6 +79,14 @@ LITH_TXT_INFO_DESCR_MDDO =
    "famous Maxim-Danil duo. They designed and produced weapons of all kinds "
    "on commission for military and paramilitary groups alike.\n\n"
    "Defunded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
+
+LITH_TXT_INFO_SHORT_Newvec = "Newvec";
+LITH_TXT_INFO_TITLE_Newvec = "Newvec Armory Incorporated";
+LITH_TXT_INFO_DESCR_Newvec =
+   "Newvec is a firearms company started a mere four years ago 1645. While "
+   "they don't have much reputation as of now, they have a few very strong "
+   "backers providing them funding. Newvec mostly produces weapons on "
+   "commission, and only sells weapons to the public via online shipping.";
 
 LITH_TXT_INFO_SHORT_OFMD = "OFMD";
 LITH_TXT_INFO_TITLE_OFMD = "Optic Fiber Maxim-Danil";

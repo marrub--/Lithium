@@ -160,6 +160,8 @@ actor Lith_EXPLOOOSION
 {
    DamageType "Lith_PlayerMissile"
    
+   +NOGRAVITY
+   
    states
    {
    Spawn:
@@ -174,6 +176,8 @@ actor Lith_EXPLOOOSION
 actor Lith_GEExplosion
 {
    DamageType "Lith_PlayerMissile"
+   
+   +NOGRAVITY
    
    states
    {

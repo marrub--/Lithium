@@ -1,20 +1,174 @@
 [enu default]
 
+//
+// Misc.
+//
 LITH_TXT_INFO_SHORT_Sword   = "sord";
 LITH_TXT_INFO_SHORT_Gameboy = "Game Nanhai";
 
-LITH_TXT_INFO_SHORT_CFist = "Knife";
-LITH_TXT_INFO_SHORT_Mateba = "Mateba";
-LITH_TXT_INFO_SHORT_Delear = "Delear Spell";
-LITH_TXT_INFO_SHORT_IonRifle = "Ion Rifle";
+//
+// Shop Weapons
+//
+LITH_TXT_INFO_SHORT_Revolver = "Revolver";
+LITH_TXT_INFO_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
+LITH_TXT_INFO_DESCR_Revolver =
+   "Other than this weapon being made on Earth, all you need to know about "
+   "it is that it fires six teflon-plated .50 Action Express rounds and "
+   "loads with a break on the top. Crack some skulls with it.";
 
+LITH_TXT_INFO_SHORT_LazShotgun = "Laser Shotgun";
+LITH_TXT_INFO_TITLE_LazShotgun = "Kaether Photon Rifle";
+LITH_TXT_INFO_DESCR_LazShotgun =
+   "Made during a war on Earth by a long nameless company, this weapon excels "
+   "in penetrating enemies with pure energy.\n\n"
+   "A superconducting coil in the middle is used to channel tons of energy "
+   "into a photon accelerator at extremely quick speeds, recharged by cocking "
+   "the gun.\n\n"
+   "Great for cooking chicken.";
+
+LITH_TXT_INFO_SHORT_SniperRifle = "Sniper Rifle";
+LITH_TXT_INFO_TITLE_SniperRifle = "Facer AM-49d Sniper Rifle";
+LITH_TXT_INFO_DESCR_SniperRifle =
+   "An extremely strong rifle which fires .50 BMG rounds, able to destroy "
+   "most living targets completely and penetrate weakly armored vehicles.\n\n"
+   "The main production of these weapons spanned about 20 years, and they "
+   "were sold to mercenaries in bulk. For a long time, this rifle had been "
+   "the sniper's main weapon of choice.";
+
+LITH_TXT_INFO_SHORT_MissileLauncher = "Missile Launcher";
+LITH_TXT_INFO_TITLE_MissileLauncher = "X-400 Lance-missiles";
+LITH_TXT_INFO_DESCR_MissileLauncher =
+   "Have you ever wanted a weapon that fires 2,100 missiles a minute? Don't "
+   "lie to me, I know you have. This weapon delivers.\n\n"
+   "The miniature missiles the X-400 launches are medium-yield, they won't "
+   "hit as hard as regular fare, but they will pack quite a punch with "
+   "the rate you can put them out.\n\n"
+   "Has an internal revolving chamber that holds 30 rockets, fired in trios "
+   "as the cylinder revolves. New ammunition can be loaded by shoving it "
+   "carefully into the underside of the gun, similar to a shotgun, thanks "
+   "to a convenient automatic rotation as it detects newly loaded missiles.";
+
+LITH_TXT_INFO_SHORT_PlasmaDiffuser = "Plasma Diffuser";
+LITH_TXT_INFO_TITLE_PlasmaDiffuser = "SYM4.3 D.640 PLASMA DIFFUSER";
+LITH_TXT_INFO_DESCR_PlasmaDiffuser =
+   "A weapon which works similarly to the 68-n Plasma Rifle, however "
+   "preferring damage over rate of fire. The D.640's design comes from "
+   "several older models designed by MDDO, as well as newer components "
+   "patented by Semaphore Inc.";
+
+//
+// Cyber-Mage
+//
+LITH_TXT_INFO_SHORT_CFist = "Knife";
+
+LITH_TXT_INFO_SHORT_Mateba = "Mateba";
+LITH_TXT_INFO_TITLE_Mateba = "Mateba R119";
+LITH_TXT_INFO_DESCR_Mateba =
+   "A re-creation of the classic Mateba Model 6 Unica revolver, which was "
+   "rather popular a few thousand years ago from its (at the time) unique "
+   "design and style.\n\n"
+   "This version is suited for a left-handed user, with a barrel that opens "
+   "to the right. The weapon loads twelve .454 Casull rounds much like the "
+   "Mateba Grifone variant.\n\n"
+   "Due to the original design being lost in time, this revolver sports "
+   "several accuracy deficiencies, but nonetheless has the classic look and "
+   "feel of the original gun. Produced by A.O.F Inc. for knight-class units.";
+
+LITH_TXT_INFO_SHORT_ShockRifle = "";
+
+LITH_TXT_INFO_SHORT_SPAS = "Shotgun";
+LITH_TXT_INFO_TITLE_SPAS = "NV48 12-Gauge Shotgun";
+LITH_TXT_INFO_DESCR_SPAS =
+    "The first (and currently only) shotgun produced by Newvec corp, "
+    "an extended production line was fulfilled by contract from A.O.F Inc. "
+    "for knight-class units thanks to the overwhelming firepower and "
+    "cheapness of this weapon.\n\n"
+    "It fires any standard high-potency 12-gauge shell, and loads 5 shots. "
+    "The design is extremely simple, but it does not overheat or jam often, "
+    "is cheap to produce, and is very, very powerful.";
+
+LITH_TXT_INFO_SHORT_SMG = "Sub-Machine Gun";
+LITH_TXT_INFO_TITLE_SMG = "SYM4.3 D.22 MODEL M SUBMACHINE GUN";
+LITH_TXT_INFO_DESCR_SMG =
+    "This rather oddly shaped submachine gun was mass-produced by Omakeda "
+    "during their earlier years, when they were still getting their designs "
+    "down. While the gun has overheating issues, it mitigates this by "
+    "allowing the user to feed coolant tubes directly into it, and counter-\n"
+    "balances the issue by having both great fire-rate and great over-all "
+    "projectile damage.\n\n"
+    "The weapon fires modified high velocity, armor piercing, vacuum enabled "
+    "5.7x28mm bullets, manufactured by various nameless companies, and loads "
+    "bullpup. It has since been rebranded by SYM4.3, who now produce it for "
+    "Omakeda with royalties.";
+
+LITH_TXT_INFO_SHORT_IonRifle = "Ion Rifle";
+LITH_TXT_INFO_TITLE_IonRifle = "KDA-[Thrown] Model 11 Ion Rifle";
+LITH_TXT_INFO_DESCR_IonRifle =
+   "Produced by KSKK under the pseudonym \"Kazami Defense Arms\" (for "
+   "various legal reasons.) Fires volatile ions at railgun speeds, which "
+   "go straight through just about any being with flesh until resulting in "
+   "a violent, explosive impact.\n\n"
+   "Works best when aimed in the middle of crowds of enemies, or aimed "
+   "through the middle of a line of enemies.";
+
+LITH_TXT_INFO_SHORT_CPlasmaRifle = "Plasma Rifle";
+LITH_TXT_INFO_TITLE_CPlasmaRifle = "$LITH_TXT_INFO_SHORT_PlasmaRifle";
+LITH_TXT_INFO_DESCR_CPlasmaRifle = "$LITH_TXT_INFO_DESCR_PlasmaRifle";
+
+LITH_TXT_INFO_SHORT_StarDestroyer = "Star Destroyer";
+LITH_TXT_INFO_TITLE_StarDestroyer = "The Star Destroyer";
+LITH_TXT_INFO_DESCR_StarDestroyer =
+    "An atrocious weapon supposedly made from the life research of seven "
+    "mages of Hell, the Star Destroyer was made with the sole purpose of "
+    "destroying whatever created it so hard that it would never, ever come "
+    "back again.\n\n"
+    "The weapon's inner workings still elude many, but what is known is that "
+    "it condenses demonic energy far more than any other known artifact; "
+    "the weapon then takes this hyper-condensed energy and emits it into a "
+    "very small, circular disc buffer on the top of the weapon. The "
+    "resulting projectile grows in size as it disperses energy infront of "
+    "it, causing hundreds of smaller projectiles to come out as it rips "
+    "through anything in its path.";
+
+LITH_TXT_INFO_SHORT_Delear = "Delear";
+LITH_TXT_INFO_TITLE_Delear = "\cdDelerentur Ex\c-, \ciAurantiorum\c- 24";
+LITH_TXT_INFO_DESCR_Delear =
+    "The 24th method of the \ciAurantia\c- mode, a rather basic attack which "
+    "fires sixteen orange dots in a sequence from two sides, over two rows. "
+    "The simplicity of casting and ease of use makes this spell a rather "
+    "common sight.\n\n"
+    "The design was created by first century mage Johnathon Booker and was "
+    "later further simplified by various spellcasters. Your version of it "
+    "prefers a flat shape rather than a curved one that most use.";
+
+LITH_TXT_INFO_SHORT_Hulgyon = "Hulgyon";
+LITH_TXT_INFO_TITLE_Hulgyon = "\cdHumarentur Ex\c-, \ciAurantiorum\c- 16";
+LITH_TXT_INFO_DESCR_Hulgyon =
+    "The 16th method of the \ciAurantia\c- mode. Intermediate attack that "
+    "creates several piercing pillars of light forward of the user. One of "
+    "the few classical methods still in use, created by Apollo in 3021 CE.";
+
+LITH_TXT_INFO_SHORT_StarShot = "Hosh'danma";
+LITH_TXT_INFO_TITLE_StarShot = "\cdDisploderentur Ex\c-, \ciAurantiorum\c- 8";
+LITH_TXT_INFO_DESCR_StarShot =
+    "The 8th method of the \ciAurantia\c- mode. An advanced attack which "
+    "summons two star-shaped sigils that fire projectiles out at will before "
+    "fading out. Created by several dozen spellcasters at A.O.F Inc. for "
+    "bishop-class units to deploy with, and has been used several "
+    "high-profile destroy-and-conceal missions, including the West Steel "
+    "Corp. incident, where it was used to destroy several micro-fighters and "
+    "around 195 personell aboard the enemy ship.";
+
+//
+// Marine
+//
 LITH_TXT_INFO_SHORT_Fist = "Knife";
 
 LITH_TXT_INFO_SHORT_ChargeFist = "Charge Fist";
 LITH_TXT_INFO_TITLE_ChargeFist = "Utsu Denkasou Assault Bracelet";
 LITH_TXT_INFO_DESCR_ChargeFist =
-   "A powerful melee weapon which attaches to your left wrist. Uses energy "
-   "from your cybernetic power source to condense weight and force into "
+   "A powerful melee weapon which attaches to the left wrist. Uses energy "
+   "from a cybernetic power source to condense weight and force into "
    "super-destructive punches.";
 
 LITH_TXT_INFO_SHORT_Pistol = "Pistol";
@@ -28,13 +182,6 @@ LITH_TXT_INFO_DESCR_Pistol =
    "Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can "
    "be reloaded easily, since you duct-taped a mag holder on the side. "
    "Features a small CB-Scope similar to that of most other Omakeda weapons.";
-
-LITH_TXT_INFO_SHORT_Revolver = "Revolver";
-LITH_TXT_INFO_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
-LITH_TXT_INFO_DESCR_Revolver =
-   "Other than this weapon being made on Earth, all you need to know about "
-   "it is that it fires six teflon-plated .50 Action Express rounds and "
-   "loads with a break on the top. Crack some skulls with it.";
 
 LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
 LITH_TXT_INFO_TITLE_Shotgun = "Hiku Mk.2 Shotgun";
@@ -64,18 +211,8 @@ LITH_TXT_INFO_DESCR_ShotgunUpg2 =
    "automatically, contained in the loading mechanism, to infect enemies with "
    "deadly corrosive acid fused with deadly neurotoxin.\n\n"
    "This rather terrifying upgrade was never upaded to the Mk.2 model. The "
-   "internal structure is similar enough that you can still use it, "
-   "but the plasma firing mechanism must be disabled.";
-
-LITH_TXT_INFO_SHORT_LazShotgun = "Laser Shotgun";
-LITH_TXT_INFO_TITLE_LazShotgun = "Kaether Photon Rifle";
-LITH_TXT_INFO_DESCR_LazShotgun =
-   "Made during a war on Earth by a long nameless company, this weapon excels "
-   "in penetrating enemies with pure energy.\n\n"
-   "A superconducting coil in the middle is used to channel tons of energy "
-   "into a photon accelerator at extremely quick speeds, recharged by cocking "
-   "the gun.\n\n"
-   "Great for cooking chicken.";
+   "internal structure is similar enough that one may still use it with the "
+   "Mk.2, but the plasma firing mechanism must be disabled.";
 
 LITH_TXT_INFO_SHORT_SuperShotgun = "Super Shotgun";
 LITH_TXT_INFO_TITLE_SuperShotgun = "$LITH_TXT_INFO_SHORT_SuperShotgun";
@@ -123,15 +260,6 @@ LITH_TXT_INFO_DESCR_RifleUpg2 =
    "rifle is increased quite a lot, as it now fires 4tW penetrating beams "
    "capable of ripping into most unarmored vehicles.";
 
-LITH_TXT_INFO_SHORT_SniperRifle = "Sniper Rifle";
-LITH_TXT_INFO_TITLE_SniperRifle = "Facer AM-49d Sniper Rifle";
-LITH_TXT_INFO_DESCR_SniperRifle =
-   "An extremely strong rifle which fires .50 BMG rounds, able to destroy "
-   "most living targets completely and penetrate weakly armored vehicles.\n\n"
-   "The main production of these weapons spanned about 20 years, and they "
-   "were sold to mercenaries in bulk. For a long time, this rifle had been "
-   "the sniper's main weapon of choice.";
-
 LITH_TXT_INFO_SHORT_GrenadeLauncher = "Grenade Launcher";
 LITH_TXT_INFO_TITLE_GrenadeLauncher = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";
 LITH_TXT_INFO_DESCR_GrenadeLauncher =
@@ -166,19 +294,6 @@ LITH_TXT_INFO_DESCR_LauncherUpg2 =
    "design is both more space-efficient and much more accurate, allowing it "
    "to be used even in a launcher as small as the D.671.";
 
-LITH_TXT_INFO_SHORT_MissileLauncher = "Missile Launcher";
-LITH_TXT_INFO_TITLE_MissileLauncher = "X-400 Lance-missiles";
-LITH_TXT_INFO_DESCR_MissileLauncher =
-   "Have you ever wanted a weapon that fires 2,100 missiles a minute? Don't "
-   "lie to me, I know you have. This weapon delivers.\n\n"
-   "The miniature missiles the X-400 launches are medium-yield, they won't "
-   "hit as hard as your regular fare but they will pack quite a punch with "
-   "the rate you can put them out.\n\n"
-   "Has an internal revolving chamber that holds 30 rockets, fired in trios "
-   "as the cylinder revolves. New ammunition can be loaded by shoving it "
-   "carefully into the underside of the gun, similar to a shotgun, thanks "
-   "to a convenient automatic rotation as it detects newly loaded missiles.";
-
 LITH_TXT_INFO_SHORT_PlasmaRifle = "Plasma Rifle";
 LITH_TXT_INFO_TITLE_PlasmaRifle = "AllPoint 68-n Plasma Rifle";
 LITH_TXT_INFO_DESCR_PlasmaRifle =
@@ -197,8 +312,8 @@ LITH_TXT_INFO_TITLE_PlasmaUpgr = "AllPoint 68-o Plasmatic Laser";
 LITH_TXT_INFO_DESCR_PlasmaUpgr =
    "Having their second best-seller also be complete trash at aiming pissed "
    "AllPoint staff off so much that they completely redesigned the weapon's "
-   "internals to boast a 37.96tW high-speed ion condenser that fires death "
-   "out of your rifle hotter than the sun.\n\n"
+   "internals to boast a 37.96tW high-speed ion condenser that fires pure "
+   "death out of the rifle hotter than the sun.\n\n"
    "No, really. It's probably hotter than the sun. If you were like, 700km "
    "away from it or something, but still.\n\n"
    "The upgrade was, unfortunately, woefully expensive. It has been sold "
@@ -216,21 +331,13 @@ LITH_TXT_INFO_DESCR_PlasmaUpg2 =
    "This weapon has a reputation for being rather useless in defending a "
    "space ship from the inside, as it ends up melting holes in the hull.";
 
-LITH_TXT_INFO_SHORT_PlasmaDiffuser = "Plasma Diffuser";
-LITH_TXT_INFO_TITLE_PlasmaDiffuser = "SYM4.3 D.640 PLASMA DIFFUSER";
-LITH_TXT_INFO_DESCR_PlasmaDiffuser =
-   "A weapon which works similarly to the 68-n Plasma Rifle, however "
-   "preferring damage over rate of fire. The D.640's design comes from "
-   "several older models designed by MDDO, as well as newer components "
-   "patented by Semaphore Inc.";
-
 LITH_TXT_INFO_SHORT_BFG9000 = "Omega Cannon";
 LITH_TXT_INFO_TITLE_BFG9000 = "$LITH_TXT_INFO_SHORT_BFG9000";
 LITH_TXT_INFO_DESCR_BFG9000 =
    "This weapon was developed in another dimensional plane, where magic is "
    "still usable. Employs an extremely complex magical pattern buffer that "
    "takes in condensed demonic energy and spits out whatever it pleases.\n\n"
-   "The pattern buffer that yours has is an explosive cannonball, which "
+   "The currently installed pattern buffer is an explosive cannonball, which "
    "can steamroll pretty much anything. Comes with a CB-Scope, but it isn't "
    "usable for some reason.\n\n"
    "This weapon was acquired by your employers via the black market group "
@@ -239,7 +346,7 @@ LITH_TXT_INFO_DESCR_BFG9000 =
 LITH_TXT_INFO_SHORT_CannonUpgr = "$LITH_TXT_UPGRADE_TITLE_PunctCannon";
 LITH_TXT_INFO_TITLE_CannonUpgr = "Omega Cannon: Punctuator Buffer";
 LITH_TXT_INFO_DESCR_CannonUpgr =
-   "A pattern buffer for your Omega Cannon which emits an explosive bolt "
+   "A pattern buffer for the Omega Cannon which emits an explosive bolt "
    "that does damage by penetrating walls with explosives, via magic.\n\n"
    "How this buffer was sent here is unknown, as no living being in this "
    "dimension can enter the Super Dimension, where it was created.\n\n"
