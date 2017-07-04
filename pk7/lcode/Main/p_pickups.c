@@ -37,7 +37,8 @@ static __str names_pistol[] = {
    "Pistuh",
    "Listep",
    "hurty peestal",
-   "Pete Stool"
+   "Pete Stool",
+   "Bandity Pistal"
 };
 
 static __str names_revolver[] = {
@@ -99,23 +100,111 @@ static __str names_bfg[] = {
    "Frosty Balga Gams"
 };
 
-static __str names_smg[] = {
+static __str names_c_mateba[] = {
+   "Metabolism",
+   "Materberb",
+   "Beet Tam",
+   "Able Temabl",
+   "Tomato",
+   "Material Defender",
+   "Murdererererer",
+   "Mad Bee",
+   "Matatebb",
+   "Marteba",
+   "Metabe",
+   "Mercury Poisoning"
+};
+
+static __str names_c_smg[] = {
    "Chug Smug",
+   "Real Supersand",
+   "Secure Gambler",
+   "Sag Mill",
+   "Santa Surprise",
+   "Sandlebar Snorkel",
+   "Submarine Screendoor",
+   "Sbubby Mcgungus",
+   "Slow Reggae",
+   "Adolescent Assault Rifle"
+};
+
+static __str names_c_sniper[] = {
+   "Iron Raffle",
+   "Eye on Rustle",
+   "Onion Riffraff",
+   "Plasmagun's Lazy Cousin",
+   "Homemade Pringle Cannon",
+   "Idle Riffraff",
+   "Ionic Breeze",
+   "Ix Rix",
+   "Io Rofl",
+   "100% Ion",
+   "Ions of Ion",
+   "Slight Chance of Ions Today",
+   "Illegal Rat",
+   "Ion Juicer"
+};
+
+static __str names_c_delear[] = {
+   "Dleay",
+   "Bob Dylan",
+   "Delet Ears",
+   "Dala Llama",
+   "Datadoor",
+   "die pls",
+   "Delicious",
+   "Del Taco",
+   "Deleleleleelear",
+   "Deadlreadl"
+};
+
+static __str names_c_starshot[] = {
+   "Stock Image",
+   "Star Gnu",
+   "Stelr Emitroid",
+   "Silly Blatt",
+   "Stot Stot",
+   "Shart Shot",
+   "Stargle Shargle",
+   "Stumgus Sungus"
+};
+
+static __str names_c_shipgun[] = {
+   "Stahp Blastroyer",
+   "Rats Derkler",
+   "Fnukni Gigagnu",
+   "Solarr Bitchmace",
+   "Stan Distro",
+   "Technicolor Bangstick",
+   "Shooty Shooty Point 'n Shooty",
+   "The Entire Doomsday Engine",
+   "Deleterious Thisus",
+   "S.S. Enterprise",
+   "Stungle Dungle",
+   "Srassa Drass"
 };
 
 static struct pickupname_s const pickupnames[weapon_max] = {
-   [weapon_unknown]  = name(names_unknown),
-   [weapon_fist]     = name(names_unknown),
-   [weapon_cfist]    = name(names_cfist),
-   [weapon_pistol]   = name(names_pistol),
-   [weapon_revolver] = name(names_revolver),
-   [weapon_shotgun]  = name(names_shotgun),
-   [weapon_ssg]      = name(names_ssg),
-   [weapon_rifle]    = name(names_rifle),
-   [weapon_launcher] = name(names_launcher),
-   [weapon_plasma]   = name(names_plasma),
-   [weapon_bfg]      = name(names_bfg),
-   [weapon_c_smg]    = name(names_smg)
+   [weapon_unknown]    = name(names_unknown),
+   [weapon_fist]       = name(names_unknown),
+   [weapon_cfist]      = name(names_cfist),
+   [weapon_pistol]     = name(names_pistol),
+   [weapon_revolver]   = name(names_revolver),
+   [weapon_shotgun]    = name(names_shotgun),
+   [weapon_ssg]        = name(names_ssg),
+   [weapon_rifle]      = name(names_rifle),
+   [weapon_launcher]   = name(names_launcher),
+   [weapon_plasma]     = name(names_plasma),
+   [weapon_bfg]        = name(names_bfg),
+   [weapon_c_fist]     = name(names_unknown),
+   [weapon_c_mateba]   = name(names_c_mateba),
+   [weapon_c_spas]     = name(names_shotgun),
+   [weapon_c_delear]   = name(names_c_delear),
+   [weapon_c_smg]      = name(names_c_smg),
+   [weapon_c_sniper]   = name(names_c_sniper),
+   [weapon_c_plasma]   = name(names_plasma),
+   [weapon_c_starshot] = name(names_c_starshot),
+   [weapon_c_shipgun]  = name(names_c_shipgun),
 };
 
 // Flags
