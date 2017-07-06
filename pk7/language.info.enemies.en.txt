@@ -18,38 +18,38 @@ LITH_TXT_INFO_DESCR_RankThreatTest =
 
 // Non-residents
 LITH_TXT_INFO_SHORT_ZombieMan = "Former Human";
-LITH_TXT_INFO_TITLE_ZombieMan = "Posessed Human Rifleman";
+LITH_TXT_INFO_TITLE_ZombieMan = "Possessed Human Rifleman";
 LITH_TXT_INFO_DESCR_ZombieMan =
    "Class: \cuNon-resident\n"
    "Threat: \csD\n\n"
-   "Humans which have been abducted and posessed by Hell's forces. Some seem "
+   "Humans which have been abducted and possessed by Hell's forces. Some seem "
    "to he artificially created by Hell, while others appear to actually be "
    "humans that were defeated by its forces.\n\n"
    "The rifleman is slow and shambling, but still their rifle packs a punch, "
    "and they're capable of burst-firing somewhat accurate shots.";
 
 LITH_TXT_INFO_SHORT_ShotgunGuy = "Former Sergeant";
-LITH_TXT_INFO_TITLE_ShotgunGuy = "Posessed Human Shotgunner";
+LITH_TXT_INFO_TITLE_ShotgunGuy = "Possessed Human Sergeant";
 LITH_TXT_INFO_DESCR_ShotgunGuy =
    "Class: \cuNon-resident\n"
    "Threat: \csD\n\n"
-   "Humans which have been abducted and posessed by Hell's forces. Some seem "
+   "Humans which have been abducted and possessed by Hell's forces. Some seem "
    "to he artificially created by Hell, while others appear to actually be "
    "humans that were defeated by its forces.\n\n"
-   "The shotgunner is rather quick with his gun, but not very accurate. "
+   "The sergeant is rather quick with his gun, but not very accurate. "
    "Watch out for them at close-range, you may notice that a face full of "
    "buckshot hurts.";
 
 LITH_TXT_INFO_SHORT_ChaingunGuy = "Former Corporal";
-LITH_TXT_INFO_TITLE_ChaingunGuy = "Posessed Human Chaingunner";
+LITH_TXT_INFO_TITLE_ChaingunGuy = "Possessed Human Corporal";
 LITH_TXT_INFO_DESCR_ChaingunGuy =
    "Class: \cuNon-resident\n"
    "Threat: \ciC-\n\n"
-   "Humans which have been abducted and posessed by Hell's forces. Some seem "
+   "Humans which have been abducted and possessed by Hell's forces. Some seem "
    "to he artificially created by Hell, while others appear to actually be "
    "humans that were defeated by its forces.\n\n"
-   "Chaingunners are terrible at aiming, but put out so much lead that "
-   "you're bound to get hit. A lot. ... By the way, why don't these guys drop "
+   "Corporal are terrible at aiming, but put out so much lead that you're "
+   "bound to get hit. A lot. ... By the way, why don't these guys drop "
    "their chainguns?";
 
 // Subordinates
@@ -91,7 +91,7 @@ LITH_TXT_INFO_DESCR_LostSoul =
    "Class: \cjResident\n"
    "Threat: \csD++\n\n"
    "Souls which have been trapped by Hell's forces, they are corrupted and "
-   "forced to posess any enemy of Hell.\n\n"
+   "forced to possess any enemy of Hell.\n\n"
    "Alone, they aren't very dangerous; all they can really do is lunge "
    "themselves at you and bite you. In groups, they can be extremely "
    "annoying, and potentially deadly.\n\n"
@@ -157,9 +157,9 @@ LITH_TXT_INFO_TITLE_Revenant = "$LITH_TXT_INFO_SHORT_Revenant";
 LITH_TXT_INFO_DESCR_Revenant =
    "Class: \cfNoble\n"
    "Threat: \ckB+\n\n"
-   "Dead souls whom have been revived into a skletal frame, with combat armor "
-   "and missile launchers. Their missiles have homing capabilities, and are "
-   "*very* painful to boot.\n\n"
+   "Dead souls whom have been revived into a skeletal frame, with combat "
+   "armor and missile launchers. Their missiles have homing capabilities, and "
+   "are *very* painful to boot.\n\n"
    "The Revenant is revered among demons for its honor serving after death.";
 
 // Tyrants
@@ -180,7 +180,7 @@ LITH_TXT_INFO_TITLE_Archvile = "Sin of Janus, \"Arch-vile\"";
 LITH_TXT_INFO_DESCR_Archvile =
    "Class: \cgTyrant\n"
    "Threat: \cgA\n\n"
-   "Brutal and viscious, caster of evil magic and healer of the sinful.\n\n"
+   "Brutal and viscous, caster of evil magic and healer of the sinful.\n\n"
    "The Arch-vile is a malicious, extremely dangerous being capable of "
    "destroying anything at any range with its powerful fire magic, and "
    "resurrecting dead enemies it comes by.";
@@ -207,7 +207,7 @@ LITH_TXT_INFO_DESCR_Cyberdemon =
    "path.\n\n"
    "Equipped with a self-cooling rocket propelled grenade launcher on their "
    "left arm, a cybernetic hoof, and height twice that of a normal man. "
-   "The Cyber-Demon is an extremely cruel, war-mongering beast that will "
+   "The Cyber-Demon is an extremely cruel, warmongering beast that will "
    "destroy any target without prejudice for the glory of Hell.";
 
 LITH_TXT_INFO_SHORT_Phantom = "Phantom";

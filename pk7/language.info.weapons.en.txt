@@ -13,7 +13,7 @@ LITH_TXT_INFO_SHORT_Revolver = "Revolver";
 LITH_TXT_INFO_TITLE_Revolver = "$LITH_TXT_INFO_SHORT_Revolver";
 LITH_TXT_INFO_DESCR_Revolver =
    "Other than this weapon being made on Earth, all you need to know about "
-   "it is that it fires six teflon-plated .50 Action Express rounds and "
+   "it is that it fires six Teflon-plated .50 Action Express rounds and "
    "loads with a break on the top. Crack some skulls with it.";
 
 LITH_TXT_INFO_SHORT_LazShotgun = "Laser Shotgun";
@@ -81,7 +81,7 @@ LITH_TXT_INFO_TITLE_SPAS = "NV48 12-Gauge Shotgun";
 LITH_TXT_INFO_DESCR_SPAS =
    "The first (and currently only) shotgun produced by Newvec corp, "
    "an extended production line was fulfilled by contract from A.O.F Inc. "
-   "for knight-class units thanks to the overwhelming firepower and "
+   "for knight-class units thanks to the overwhelming fire-power and "
    "cheapness of this weapon.\n\n"
    "It fires any standard high-potency 12-gauge shell, and loads 5 shots. "
    "The design is extremely simple, but it does not overheat or jam often, "
@@ -98,7 +98,7 @@ LITH_TXT_INFO_DESCR_SMG =
    "projectile damage.\n\n"
    "The weapon fires modified high velocity, armor piercing, vacuum enabled "
    "5.7x28mm bullets, manufactured by various nameless companies, and loads "
-   "bullpup. It has since been rebranded by SYM4.3, who now produce it for "
+   "bullpup. It has since been re-branded by SYM4.3, who now produce it for "
    "Omakeda with royalties.";
 
 LITH_TXT_INFO_SHORT_IonRifle = "Ion Rifle";
@@ -131,7 +131,7 @@ LITH_TXT_INFO_DESCR_StarDestroyer =
    "it condenses demonic energy far more than any other known artifact; "
    "the weapon then takes this hyper-condensed energy and emits it into a "
    "very small, circular disc buffer on the top of the weapon.\n\n"
-   "The resulting projectile grows in size as it disperses energy infront of "
+   "The resulting projectile grows in size as it disperses energy in front of "
    "it, causing hundreds of smaller projectiles to come out as it rips "
    "through anything in its path.";
 
@@ -162,7 +162,7 @@ LITH_TXT_INFO_DESCR_StarShot =
    "bishop-class units to deploy with, and has been used several "
    "high-profile destroy-and-conceal missions, including the West Steel "
    "Corp. incident, where it was used to destroy several micro-fighters and "
-   "around 195 personell aboard the enemy ship.";
+   "around 195 personnel aboard the enemy ship.";
 
 //
 // Marine
@@ -180,12 +180,12 @@ LITH_TXT_INFO_SHORT_Pistol = "Pistol";
 LITH_TXT_INFO_TITLE_Pistol = "Custom Ka Haa'umi Pistol";
 LITH_TXT_INFO_DESCR_Pistol =
    "Originally a vanilla mod Ka Haa'umi pistol manufactured by Omakeda, this "
-   "gun has been repaired enough times that it's practically indestructable "
+   "gun has been repaired enough times that it's practically indestructible "
    "now.\n\n"
    "Having used it for a whole decade, this pistol still services you "
    "today, without fail.\n\n"
    "Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can "
-   "be reloaded easily, since you duct-taped a mag holder on the side. "
+   "be reloaded easily, since you duct-taped a magazine holder on the side. "
    "Features a small CB-Scope similar to that of most other Omakeda weapons.";
 
 LITH_TXT_INFO_SHORT_Shotgun = "Shotgun";
@@ -215,7 +215,7 @@ LITH_TXT_INFO_DESCR_ShotgunUpg2 =
    "purposes. Uses a rather small container of poison that refills itself "
    "automatically, contained in the loading mechanism, to infect enemies with "
    "deadly corrosive acid fused with deadly neurotoxin.\n\n"
-   "This rather terrifying upgrade was never upaded to the Mk.2 model. The "
+   "This rather terrifying upgrade was never updated to the Mk.2 model. The "
    "internal structure is similar enough that one may still use it with the "
    "Mk.2, but the plasma firing mechanism must be disabled.";
 
@@ -239,7 +239,7 @@ LITH_TXT_INFO_DESCR_CombatRifle =
    "AllPoint's 75-b model full-auto AR, produced for military and government "
    "enforcer use. Also the single best-selling weapon in AllPoint's "
    "catalog.\n\n"
-   "Firing 1,050 rounds per minute of .467 caliber teflon-plated death, "
+   "Firing 1,050 rounds per minute of .467 caliber Teflon-plated death, "
    "this beautiful gun works in both harsh atmospheres and vacuums thanks to "
    "a super-tough exterior made out of titanium.\n\n"
    "Comes with an inbuilt undermount-like grenade launcher. Holds only one "
@@ -248,7 +248,7 @@ LITH_TXT_INFO_DESCR_CombatRifle =
 LITH_TXT_INFO_SHORT_RifleUpgr = "$LITH_TXT_UPGRADE_TITLE_RifleModes";
 LITH_TXT_INFO_TITLE_RifleUpgr = "AllPoint 75-c Modal Trigger";
 LITH_TXT_INFO_DESCR_RifleUpgr =
-   "Looking at the design failures in the 75-b, AllPoint seeked to make an "
+   "Looking at the design failures in the 75-b, AllPoint sought to make an "
    "improvement by way of a modification. Thus, they gathered, they could "
    "take parts from their 80-g Sniper Rifle and fit them snugly into a combat "
    "rifle.\n\n"
@@ -295,7 +295,7 @@ LITH_TXT_INFO_DESCR_LauncherUpg2 =
    "This is a modification that adds an extra nanomachine dispenser to the "
    "gun's PCI bus, which attaches several hundred thousand nanobots to the "
    "grenade when it is fired that push it to angle toward the enemy.\n\n"
-   "Similar in concept to traiditonal rocket-based homing systems, this "
+   "Similar in concept to traditional rocket-based homing systems, this "
    "design is both more space-efficient and much more accurate, allowing it "
    "to be used even in a launcher as small as the D.671.";
 
@@ -309,7 +309,7 @@ LITH_TXT_INFO_DESCR_PlasmaRifle =
    "Rifle\", is their second best selling weapon.\n\n"
    "The primary fire mode emits 7.52tW per bolt at approximately 2,800 "
    "bolts per minute, and the secondary emits 1,260 30.96tW penetrating bolts "
-   "per minute. This thing will make swiss cheese out of anything in its "
+   "per minute. This thing will make Swiss cheese out of anything in its "
    "path.";
 
 LITH_TXT_INFO_SHORT_PlasmaUpgr = "$LITH_TXT_UPGRADE_TITLE_PlasLaser";
@@ -343,7 +343,7 @@ LITH_TXT_INFO_DESCR_BFG9000 =
    "still usable. Employs an extremely complex magical pattern buffer that "
    "takes in condensed demonic energy and spits out whatever it pleases.\n\n"
    "The currently installed pattern buffer is an explosive cannonball, which "
-   "can steamroll pretty much anything. Comes with a CB-Scope, but it isn't "
+   "can steam-roll pretty much anything. Comes with a CB-Scope, but it isn't "
    "usable for some reason.\n\n"
    "This weapon was acquired by your employers via the black market group "
    "\"Cid\" for a hefty price. Take care of it.";

@@ -8,7 +8,7 @@ LITH_TXT_INFO_DESCR_AllPoint =
    "rifles and plasma weapons for military and private use.\n\n"
    "Despite producing mainly precision arms, their best-selling weaponry "
    "is known for its terrible accuracy, but big punch.\n\n"
-   "Reguarding this infamy, its current CEO has this to say: \"Look here, "
+   "Regarding this infamy, its current CEO has this to say: \"Look here, "
    "[...] if you want me to talk about our weapons, I'll talk about "
    "all of our fine armaments; but if you just want me to talk about our "
    "'best-sellers', maybe you should just go back to window shopping.\"";
@@ -22,7 +22,7 @@ LITH_TXT_INFO_DESCR_AOF =
    "In 1345 NE, a major attack on A.O.F left them nearly out of the picture. "
    "However, with slow, concise social manipulation and funding from alien "
    "governments, they finally made it back onto the market in 1370.\n\n"
-   "A.O.F mainly produce weapon modifications, plasmatic ammunition, and "
+   "A.O.F mainly produce weapon modifications, plasma ammunition, and "
    "robotics.";
 
 LITH_TXT_INFO_SHORT_AOF2 = "$LITH_TXT_INFO_SHORT_AOF";
@@ -78,7 +78,7 @@ LITH_TXT_INFO_DESCR_MDDO =
    "A now-defunct weapons manufacturer on Mars, founded and funded by the "
    "famous Maxim-Danil duo. They designed and produced weapons of all kinds "
    "on commission for military and paramilitary groups alike.\n\n"
-   "Defunded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
+   "De-funded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
 
 LITH_TXT_INFO_SHORT_Newvec = "Newvec";
 LITH_TXT_INFO_TITLE_Newvec = "Newvec Armory Incorporated";
@@ -122,14 +122,14 @@ LITH_TXT_INFO_DESCR_Semaphore =
    "Semaphore has over its lifetime put out a great many prototype weapons "
    "and done fairly well with investors.\n\n"
    "While they mainly produce weaponry made for equipping space ships, "
-   "Semaphore have also produced small-batch infantry weapons for gaguing "
+   "Semaphore have also produced small-batch infantry weapons for gauging "
    "interest and profitability.";
 
 LITH_TXT_INFO_SHORT_Sym43 = "SYM4.3";
 LITH_TXT_INFO_TITLE_Sym43 = "SYM4.3 WEAPONS INCORPORATED";
 LITH_TXT_INFO_IMAGE_Sym43 = "lgfx/BIP/Sym43.png";
 LITH_TXT_INFO_DESCR_Sym43 =
-   "Currently beleived to be based somewhere in the Aetos-Vi system, "
+   "Currently believed to be based somewhere in the Aetos-Vi system, "
    "SYM4.3 create and distribute explosive weapons. For distribution, they "
    "assign a standardized anonymous designation, and sell the weapons via "
    "proxy in their name.\n\n"

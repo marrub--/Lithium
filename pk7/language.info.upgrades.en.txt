@@ -29,7 +29,7 @@ LITH_TXT_INFO_DESCR_ReflexWetw =
    "to move, enhancing your speed, and giving you new movement options.\n\n"
    "This software has been deemed vital to your mission, and has been "
    "provided to you with yet more upgrades.\n\n"
-   "You can jump while midair by pressing \"jump\" again, hurtling your body "
+   "You can jump while mid-air by pressing \"jump\" again, hurtling your body "
    "upwards with sheer force.\n\n"
    "You can also now slide in any direction with ease by pressing \"run\".";
 

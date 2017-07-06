@@ -42,7 +42,7 @@ LITH_TXT_INFO_DESCR_DurlaPrime =
 LITH_TXT_INFO_SHORT_Earth = "Earth";
 LITH_TXT_INFO_TITLE_Earth = "$LITH_TXT_INFO_SHORT_Earth";
 LITH_TXT_INFO_DESCR_Earth =
-   "The year is 1649 New Era. After an event that almost led to an apocalpse "
+   "The year is 1649 New Era. After an event that almost led to an apocalypse "
    "in 3031 CE, humanity collectively decided to mark a new era dedicated to "
    "progressing travel and communications across the galaxy.\n\n"
    "Earth has stayed largely the same as it was in the Common Era, thanks "
@@ -54,7 +54,7 @@ LITH_TXT_INFO_DESCR_Earth =
 LITH_TXT_INFO_SHORT_Hell = "Hell";
 LITH_TXT_INFO_TITLE_Hell = "$LITH_TXT_INFO_SHORT_Hell";
 LITH_TXT_INFO_DESCR_Hell =
-   "Wether the Hell found ripping into our dimension is actually from any "
+   "Whether the Hell found ripping into our dimension is actually from any "
    "known religion is not known. What is known, however, is that its "
    "inhabitants seek to destroy and enslave everything they can get their "
    "hands on.\n\n"
@@ -71,7 +71,7 @@ LITH_TXT_INFO_DESCR_Mars =
    "Thanks to advances in terrestrial travel, the ability to transfer goods "
    "between Mars and Earth became cheap enough to be profitable during the "
    "periods where Mars is closer to Earth.\n\n"
-   "Still to this day many companies on Earth -- and even some intragalactic "
+   "Still to this day many companies on Earth -- and even some intra-galactic "
    "corporations like OFMD -- use Mars as a place to house autonomous work.";
 
 LITH_TXT_INFO_SHORT_OmicronXevv = "Omicron Xevv";
@@ -94,7 +94,7 @@ LITH_TXT_INFO_DESCR_SuperDimension =
    "The Division Sigil, and The Cup of Blood.\n\n"
    "Of these artifacts, you can acquire two. The Omega Cannon, a weapon, "
    "and the Division Sigil, a strange artifact able to cause disruptions in "
-   "spacetime.\n\n"
+   "space-time.\n\n"
    "The latter is only allowed to you in case you can't stop the Demons.";
 
 // EOF

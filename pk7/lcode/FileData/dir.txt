@@ -4,7 +4,7 @@
 
 in filter/heretic/language.fs.txt
 
-heretic/Upgrades.lthm -> Upgrades.lthm
+Heretic_Upgrades.lthm -> Upgrades.lthm
 
 
 -- Dialogue ------------------------------------------------------------------

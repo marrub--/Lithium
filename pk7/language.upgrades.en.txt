@@ -13,6 +13,12 @@ LITH_TXT_UPGRADE_EFFEC_HeadsUpDisp =
 LITH_TXT_UPGRADE_DESCR_HeadsUpDisp =
    "A Heads Up Display program built into your Computer/Brain Interface.";
 
+LITH_TXT_UPGRADE_TITLE_HeadsUpDis2 = "Heads Up Disp.";
+LITH_TXT_UPGRADE_EFFEC_HeadsUpDis2 =
+   "Shows vital information.";
+LITH_TXT_UPGRADE_DESCR_HeadsUpDis2 =
+   "A Heads Up Display program.";
+
 LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
 LITH_TXT_UPGRADE_EFFEC_JetBooster =
    "Lets you press the \"run\" key while in the air to fly for a short time.";
@@ -50,7 +56,7 @@ LITH_TXT_UPGRADE_DESCR_ReactArmor =
 
 LITH_TXT_UPGRADE_TITLE_ReactArmor2 = "R. Armor 2";
 LITH_TXT_UPGRADE_EFFEC_ReactArmor2 =
-   "Improves the damage resistence of the Reactive Armor.";
+   "Improves the damage resistance of the Reactive Armor.";
 LITH_TXT_UPGRADE_DESCR_ReactArmor2 =
    "Upgrades the Yh0 plating system, reducing damage taken twice over.";
 
@@ -131,8 +137,8 @@ LITH_TXT_UPGRADE_DESCR_LaserRCW =
 
 LITH_TXT_UPGRADE_TITLE_HomingRPG = "Homing Rocket";
 LITH_TXT_UPGRADE_EFFEC_HomingRPG =
-   "Pressing altfire with the rocket launcher selects a target to be traced "
-   "by any rockets you fire afterward.";
+   "Pressing alt-fire with the rocket launcher selects a target to be traced "
+   "by any rockets you fire afterwards.";
 LITH_TXT_UPGRADE_DESCR_HomingRPG =
    "Disperses extra nanomachines out of the rifle that push the rocket toward "
    "the enemy with extreme accuracy.";
@@ -152,7 +158,7 @@ LITH_TXT_UPGRADE_EFFEC_PlasLaser =
    "Makes your plasma rifle emit red-hot laser beams.";
 LITH_TXT_UPGRADE_DESCR_PlasLaser =
    "Switches out the ion emitter with an ion condenser, that can fire out "
-   "laser beams strong enough to cut clean through adamantium.";
+   "laser beams strong enough to cut clean through Adamantium.";
 
 LITH_TXT_UPGRADE_TITLE_PartBeam = "Particle Beam";
 LITH_TXT_UPGRADE_EFFEC_PartBeam =

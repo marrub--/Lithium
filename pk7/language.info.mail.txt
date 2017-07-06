@@ -70,7 +70,7 @@
    "There has been a change of plans going down the whole chain of command.\n"
    "Your status as a military operative is now cancelled, and you are to enter a full-on suicide mission funded by OFMD alone.\n"
    "\n"
-   "There is an artifact nearby that we have sent you.  Once it is in your posession, immediately destroy it, and you will be transported to a city somewhere in Hell.  Command will await afterwards.\n"
+   "There is an artifact nearby that we have sent you.  Once it is in your possession, immediately destroy it, and you will be transported to a city somewhere in Hell.  Command will await afterwards.\n"
    "\n"
    "Lambert out.\n";
 "LITH_TXT_MAIL_SEND_Cluster2" =

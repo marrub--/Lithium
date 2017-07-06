@@ -33,7 +33,7 @@ LITH_TXT_SHOP_DESCR_Revolver =
 
 LITH_TXT_SHOP_TITLE_LazShotgun = "$LITH_TXT_INFO_SHORT_LazShotgun";
 LITH_TXT_SHOP_DESCR_LazShotgun =
-    "Piercing laser shotgun. Doesn't take upgrades.";
+    "Piercing laser shotgun.\n\nDoesn't take upgrades.";
 
 LITH_TXT_SHOP_TITLE_SniperRifle = "$LITH_TXT_INFO_SHORT_SniperRifle";
 LITH_TXT_SHOP_DESCR_SniperRifle =
