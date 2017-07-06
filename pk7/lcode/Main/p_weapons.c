@@ -60,6 +60,7 @@ static void GiveWeaponItem(int parm)
    case weapon_ssg:       ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
    case weapon_c_sniper:  ACS_GiveInventory("Lith_RocketAmmo", 6);    break;
    case weapon_launcher:  ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
+   case weapon_c_plasma:
    case weapon_plasma:    ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
    case weapon_c_shipgun: ACS_GiveInventory("Lith_CannonAmmo", 5);    break;
    case weapon_bfg:       ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
@@ -235,7 +236,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
    // Reset data temporarily.
    w->cur = null;
    for(int i = 0; i < SLOT_MAX; i++)
-      w->slot[i] = false;
+      w->slot[i] = 0;
    
    // Iterate over each weapon setting information on it.
    for(int i = weapon_min; i < weapon_max; i++)
@@ -243,7 +244,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
       
-      w->slot[info->slot] |= wep->owned = ACS_CheckInventory(info->class);
+      w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->class));
       
       wep->info      = info;
       wep->owned     = ACS_CheckInventory(info->class);

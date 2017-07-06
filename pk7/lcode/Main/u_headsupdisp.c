@@ -26,18 +26,27 @@ static void HUD_Weapons(player_t *p)
    DrawSpritePlain("lgfx/HUD/Bar.png", hid_weaponbg, 279.2, 199.2, TICSECOND);
    
    for(int i = 1; i < SLOT_MAX; i++)
-      if(p->weapon.slot[i])
    {
-      fixed x = 282.2 - (8 * (SLOT_MAX - i));
-      fixed y = 198.2;
-      
-      HudMessageF("LHUDFONTSMALL", "%i", i);
-      HudMessagePlain(hid_weapontextE + i, x, y, TICSECOND);
-      
-      if(p->weapon.cur->info->slot == i)
+      int slot = p->weapon.slot[i];
+      if(slot)
       {
-         HudMessageF("LHUDFONTSMALL", "\Ck%i", i);
-         HudMessageFade(hid_weaponcurE + i, x, y, TICSECOND, 0.2);
+         int const ncolor[] = {
+            CR_UNTRANSLATED,
+            CR_LIGHTBLUE,
+            CR_BRICK
+         };
+         
+         fixed x = 282.2 - (8 * (SLOT_MAX - i));
+         fixed y = 198.2;
+         
+         HudMessageF("LHUDFONTSMALL", "%i", i);
+         HudMessageParams(0, hid_weapontextE + i, ncolor[min(slot - 1, countof(ncolor))], x, y, TICSECOND);
+         
+         if(p->weapon.cur->info->slot == i)
+         {
+            HudMessageF("LHUDFONTSMALL", "\Ck%i", i);
+            HudMessageFade(hid_weaponcurE + i, x, y, TICSECOND, 0.2);
+         }
       }
    }
 }

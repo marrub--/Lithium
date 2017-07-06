@@ -37,7 +37,7 @@ typedef struct invweapon_s
 
 typedef struct weapondata_s
 {
-   bool slot[SLOT_MAX];
+   int slot[SLOT_MAX];
    invweapon_t inv[weapon_max];
    invweapon_t *cur;
    invweapon_t *prev;

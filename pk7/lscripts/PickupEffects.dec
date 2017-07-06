@@ -62,6 +62,9 @@ actor Lith_ItemSprite
    {
    Spawn:
       "####" "#" 0
+      "####" "#" 0 A_SetUserVar(user_floatangle,  random(0, 360))
+      "####" "#" 0 A_SetUserVar(user_floatzangle, random(0, 360))
+   SpawnLoop:
       "####" "#" 0 A_CheckFlag("SPECIAL", 1, AAPTR_MASTER)
       goto Done
       "####" "#" 0 A_SetUserVar(user_floatangle,  (user_floatangle  + 2) % 360)
