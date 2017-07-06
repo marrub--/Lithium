@@ -1,6 +1,7 @@
 #include "lith_upgrades_common.h"
 
 #define UserData upgr->UserData_Adrenaline
+#define CHARGE_MAX (30 * 35)
 
 
 //----------------------------------------------------------------------------
@@ -22,7 +23,7 @@ void Upgr_Adrenaline_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
 {
    // Charge
-   if(UserData.charge < 30 * 35)
+   if(UserData.charge < CHARGE_MAX)
       UserData.charge++;
    
    // Prepare
@@ -57,6 +58,26 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
    }
    
    ACS_TakeInventory("Lith_AdrenalineToken", 1);
+}
+
+//
+// Render
+//
+void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
+{
+   if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
+   
+   int timemod = p->ticks % 45;
+   float amt = UserData.charge / (float)CHARGE_MAX;
+   
+   DrawSprite(UserData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
+      HUDMSG_FADEOUT | HUDMSG_ALPHA,
+      hid_adrenind_fxS - timemod,
+      77.1 - timemod,
+      185.1,
+      (fixed)(0.3f * amt),
+      (fixed)(0.6f * amt),
+      0.8);
 }
 
 // EOF

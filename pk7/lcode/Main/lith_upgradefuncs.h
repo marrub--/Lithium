@@ -44,6 +44,7 @@ Case(DefenseNuke)
 Case(Adrenaline)
    A(Adrenaline)
    U(Adrenaline)
+   R(Adrenaline)
 
 Case(VitalScan)
    U(VitalScan)
