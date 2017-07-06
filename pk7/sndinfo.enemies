@@ -30,6 +30,13 @@ $attenuation enemies/mancubus/fire 0.5
 enemies/hellknight/throw lsounds/HellKnight/Throw.flac // Touhou 7
 
 //
+// Spider Mastermind
+//
+enemies/spiderdemon/ready    lsounds/SpiderMastermind/Arm.flac      // ???
+enemies/spiderdemon/fire     lsounds/SpiderMastermind/Fire.flac     // FEAR
+enemies/spiderdemon/firestop lsounds/SpiderMastermind/FireStop.flac // 〃
+
+//
 // Cyberdemon
 //
 enemies/cyberdemon/ready    lsounds/Cyberdemon/Ready.flac    // FEAR

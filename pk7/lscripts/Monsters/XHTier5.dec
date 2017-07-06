@@ -1,13 +1,5 @@
 actor Lith_XH_SpiderMastermind : Lith_SpiderMastermind
 {
-   states
-   {
-   MissileLoop:
-      SPID G 2 bright A_SPosAttackUseAtkSound
-      SPID H 2 bright A_SPosAttackUseAtkSound
-      SPID H 1 bright A_SpidRefire
-      loop
-   }
 }
 
 actor Lith_XH_Cyberdemon : Lith_Cyberdemon

@@ -1,3 +1,51 @@
+actor Lith_SpiderMastermindBulletTrail
+{
+   RenderStyle "Add"
+   Scale 0.8
+   Alpha 0.8
+   
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      PUFF A 1 A_FadeOut
+      wait
+   }
+}
+
+actor Lith_SpiderMastermindBullet : FastProjectile
+{
+   MissileType "Lith_SpiderMastermindBulletTrail"
+   RenderStyle "Translucent"
+   Species "Lith_SpiderMastermind"
+   DamageType "Lith_Bullets"
+   Alpha 0.9
+   Scale 0.2
+   Radius 2
+   Height 2
+   Damage (3 * random(1, 5))
+   Speed 256
+   
+   +BLOODSPLATTER
+   +MTHRUSPECIES
+   +DONTHURTSPECIES
+   
+   states
+   {
+   Spawn:
+      TNT1 A 1
+      wait
+   Crash:
+   Death:
+      PUFF CD 4
+      stop
+   XDeath:
+      TNT1 A 0
+      stop
+   }
+}
+
 actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
 {
    Health 4000
@@ -7,18 +55,23 @@ actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
    
    states
    {
+   See:
+      "####" "#" 0 A_StopSound(CHAN_WEAPON)
+      goto Super::See
    Missile:
       SPID A 2 bright
-      SPID A 0 A_PlaySound("enemies/chainguy/bolt", CHAN_WEAPON|CHAN_NOPAUSE)
+      SPID A 0 A_PlaySound("enemies/spiderdemon/ready", CHAN_5|CHAN_NOPAUSE, 1, false, 0.3)
       SPID A 0 A_GiveToTarget("Lith_AdrenalineToken", 1)
       SPID A 20 bright A_FaceTarget
-      SPID A 0 A_Jump(256, "MissileLoop")
+      SPID A 0 A_PlaySound("enemies/spiderdemon/fire", CHAN_WEAPON, 1, true, 0.4)
    MissileLoop:
-      SPID G 4 bright A_SPosAttackUseAtkSound
-      SPID H 4 bright A_SPosAttackUseAtkSound
-      SPID H 1 bright A_SpidRefire
+      SPID G 0 bright A_CustomMissile("Lith_SpiderMastermindBullet", 32, 0, frandom(-15, 15), CMF_OFFSETPITCH, frandom(-5, 7))
+      SPID G 1 bright
+      SPID H 0 bright A_CustomMissile("Lith_SpiderMastermindBullet", 32, 0, frandom(-5, 5), CMF_OFFSETPITCH, frandom(-3, 5))
+      SPID H 1 bright A_MonsterRefire(40, "See")
       loop
    Death:
+      "####" "#" 0 A_StopSound(CHAN_WEAPON)
       "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_SpiderDemon)
       goto Super::Death
    }

@@ -1,5 +1,11 @@
 actor Lith_XH_PainElemental : Lith_PainElemental
 {
+   states
+   {
+   Death:
+      "####" "#" 0 A_Explode
+      goto Super::Death
+   }
 }
 
 actor Lith_XH_Archvile : Lith_Archvile
