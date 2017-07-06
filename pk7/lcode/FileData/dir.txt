@@ -19,29 +19,45 @@ Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 in language.info.mail.txt
 
-mailtemplate.txt -> LITH_TXT_MAIL_TEMPLATE
+Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
-The flags for messages are as follows,
+Message flags apply to all variations of a message and will not use any suffix.
+The flags for messages are as follows:
 bit 1 - Prints a message when received
+bit 2 - Message is the same for all player classes
 
+data 1 -> LITH_TXT_MAIL_FLAG_Phantom
 
-Saved SGXLine Message 1.txt -> LITH_TXT_MAIL_BODY_Intro
-data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Intro
-data 13:00 25/7/49          -> LITH_TXT_MAIL_TIME_Intro
-data 610                    -> LITH_TXT_MAIL_SIZE_Intro
+Intro (Marine).txt      -> LITH_TXT_MAIL_BODY_Intro
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Intro
+data 13:00 25/7/49      -> LITH_TXT_MAIL_TIME_Intro
+data 610                -> LITH_TXT_MAIL_SIZE_Intro
 
-Saved SGXLine Message 2.txt -> LITH_TXT_MAIL_BODY_Cluster1
-data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster1
+Chapter 1 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster1
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster1
 
-Saved SGXLine Message 3.txt -> LITH_TXT_MAIL_BODY_Cluster2
-data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster2
+Chapter 2 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster2
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster2
 
-Saved SGXLine Message 4.txt -> LITH_TXT_MAIL_BODY_Cluster3
-data ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster3
+Chapter 3 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster3
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster3
 
-Saved SGXLine Message 5.txt      -> LITH_TXT_MAIL_BODY_CBI
-data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_CBI
-data 330                         -> LITH_TXT_MAIL_SIZE_CBI
-data 1                           -> LITH_TXT_MAIL_FLAG_CBI
+Phantom Met (Marine).txt         -> LITH_TXT_MAIL_BODY_Phantom
+data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_Phantom
+data 330                         -> LITH_TXT_MAIL_SIZE_Phantom
+
+Intro (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_IntroJem
+data Saved Message     -> LITH_TXT_MAIL_NAME_IntroJem
+data <hidden>@corp.AOF -> LITH_TXT_MAIL_SEND_IntroJem
+data 13:00 25/7/49     -> LITH_TXT_MAIL_TIME_IntroJem
+data 280               -> LITH_TXT_MAIL_SIZE_IntroJem
+
+Chapter 1 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster1Jem
+data Saved Text 104        -> LITH_TXT_MAIL_NAME_Cluster1Jem
+data 232                   -> LITH_TXT_MAIL_SIZE_Cluster1Jem
+
+Chapter 2 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster2Jem
+data Saved Text 152        -> LITH_TXT_MAIL_NAME_Cluster2Jem
+data 200                   -> LITH_TXT_MAIL_SIZE_Cluster2Jem
 
 EOF

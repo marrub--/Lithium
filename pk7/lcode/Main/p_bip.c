@@ -188,12 +188,13 @@ void Lith_PlayerInitBIP(player_t *p)
 //
 // Lith_DeliverMail
 //
-void Lith_DeliverMail(player_t *p, __str title)
+void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
-   enum
-   {
-      MAILF_PrintMessage = 1 << 0,
-   };
+   int flag = strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
+   flag |= flags;
+   
+   if(!(flags & MAILF_AllPlayers) && p->pclass == pclass_cybermage)
+      title = StrParam("%SJem", title);
    
    bip_t *bip = &p->bip;
    
@@ -203,8 +204,7 @@ void Lith_DeliverMail(player_t *p, __str title)
    __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
    __str send = LanguageNull("LITH_TXT_MAIL_SEND_%S", title);
    __str name = LanguageNull("LITH_TXT_MAIL_NAME_%S", title);
-   __str body = Language("LITH_TXT_MAIL_BODY_%S", title);
-   int   flag = strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
+   __str body = Language    ("LITH_TXT_MAIL_BODY_%S", title);
    
    if(!send) send = "<internal>";
    

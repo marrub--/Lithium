@@ -30,6 +30,7 @@ struct phantom_s
 
 static int Lith_MapVariable bossargs[6];
 static int Lith_MapVariable bosstid;
+static bool firstboss = true;
 
 
 //----------------------------------------------------------------------------
@@ -283,40 +284,42 @@ void Lith_SpawnBoss(int num, int phase)
 }
 
 //
+// SpawnBoss
+//
+static void SpawnBoss(int num, int phase)
+{
+   int tid;
+   
+   ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID());
+   ACS_SetActorState(tid, StrParam("Boss%i_%i", num, phase));
+   
+   if(ACS_GetCVar("__lith_debug_on"))
+      Log("Lith_SpawnBosses: Spawning boss %i phase %i", num, phase);
+   
+   if(firstboss)
+   {
+      firstboss = false;
+      Lith_ForPlayer()
+         p->deliverMail("Phantom");
+   }
+}
+
+//
 // Lith_SpawnBosses
 //
 void Lith_SpawnBosses(score_t sum)
 {
-   static bool firstboss = true;
-   
-   #define SpawnBoss(num, phase) \
-   { \
-      int tid; \
-      ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID()); \
-      ACS_SetActorState(tid, "Boss" #num "_" #phase); \
-      if(ACS_GetCVar("__lith_debug_on")) \
-         Log("Lith_SpawnBosses: Spawning boss " #num " phase " #phase); \
-      if(firstboss) \
-      { \
-         firstboss = false; \
-         Lith_ForPlayer() \
-            p->deliverMail("CBI"); \
-      } \
-   }
-   
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 5 TRIES TO GET THIS RIGHT
    // AAAAGH
    
-        if(!world.boss1p1 &&                  sum > world.boss1p1scr) SpawnBoss(1, 1)
-   else if(!world.boss1p2 && world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2)
-   else if(!world.boss2p1 && world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1)
-   else if(!world.boss2p2 && world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2)
-   else if(!world.boss2p3 && world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3)
-   else if(!world.boss3p1 && world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1)
-   else if(!world.boss3p2 && world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2)
-   else if(!world.boss3p3 && world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3)
-   
-   #undef SpawnBoss
+        if(!world.boss1p1 &&                  sum > world.boss1p1scr) SpawnBoss(1, 1);
+   else if(!world.boss1p2 && world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2);
+   else if(!world.boss2p1 && world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1);
+   else if(!world.boss2p2 && world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2);
+   else if(!world.boss2p3 && world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3);
+   else if(!world.boss3p1 && world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1);
+   else if(!world.boss3p2 && world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2);
+   else if(!world.boss3p3 && world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3);
 }
 
 // EOF

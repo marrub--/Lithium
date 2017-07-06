@@ -32,6 +32,7 @@ JetPlane
 
 Jimmy
    Fonts! All of them, except the SMALLFNT.
+   Added some missing characters to the CBIFONT for me (which he also made)
 
 Kate
    Some specific, old code is based off of Error: Doom code

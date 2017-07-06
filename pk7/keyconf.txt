@@ -12,17 +12,6 @@ addkeysection "Lithium - Zoom" Lith_Zoom
 addmenukey "Zoom In" lith_k_zoomin
 addmenukey "Zoom Out" lith_k_zoomout
 
-addkeysection "Lithium - Auto-Groups" Lith_AutoGroups
-addmenukey "Buy Set 1" lith_k_qbuy_1
-addmenukey "Buy Set 2" lith_k_qbuy_2
-addmenukey "Buy Set 3" lith_k_qbuy_3
-addmenukey "Buy Set 4" lith_k_qbuy_4
-
-addmenukey "Toggle Set 1" lith_k_qtoggle_1
-addmenukey "Toggle Set 2" lith_k_qtoggle_2
-addmenukey "Toggle Set 3" lith_k_qtoggle_3
-addmenukey "Toggle Set 4" lith_k_qtoggle_4
-
 
 //----------------------------------------------------------------------------
 // Aliases
@@ -36,15 +25,9 @@ alias -lith_k_qknife "-user4"
 alias lith_k_zoomin  "pukename Lith_KeyZoom  30"
 alias lith_k_zoomout "pukename Lith_KeyZoom -60"
 
-alias lith_k_qbuy_1 "pukename Lith_KeyBuyAutoGroup 1"
-alias lith_k_qbuy_2 "pukename Lith_KeyBuyAutoGroup 2"
-alias lith_k_qbuy_3 "pukename Lith_KeyBuyAutoGroup 3"
-alias lith_k_qbuy_4 "pukename Lith_KeyBuyAutoGroup 4"
-
-alias lith_k_qtoggle_1 "pukename Lith_KeyToggleAutoGroup 1"
-alias lith_k_qtoggle_2 "pukename Lith_KeyToggleAutoGroup 2"
-alias lith_k_qtoggle_3 "pukename Lith_KeyToggleAutoGroup 3"
-alias lith_k_qtoggle_4 "pukename Lith_KeyToggleAutoGroup 4"
+alias lith_puketrm "pukename Lith_RunTerminal %1"
+alias lith_pukedlg "pukename Lith_RunDialogue %1"
+alias lith_pukemail "pukename Lith_GiveMail %1"
 
 
 //----------------------------------------------------------------------------

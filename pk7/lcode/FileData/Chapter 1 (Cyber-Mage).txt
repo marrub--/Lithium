@@ -1,0 +1,16 @@
+l[]];;\cg444444\cj41414191918 --------
+\cm    scr_exec(SCR_FINISH, 0, NULL);
+\cmdone:
+\cm    return 0;
+\cm}
+\cm]]]]]]]]]]EOF
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+Notes:
+
+40 thousand lines dumped so far, maybe 30-40% done? Estimated total ~200k SLoC
+ROM is about half C source, quarter XMb5 using SKVM, the rest is scripts
+Important bits already dumped, the custom lock remover does not skimp on anything
+
+Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.

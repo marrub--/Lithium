@@ -122,6 +122,25 @@ void Lith_PlayerUpdateData(player_t *p)
 }
 
 //
+// Lith_GiveMail
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveMail(int num)
+{
+   __str names[] = {
+      "Intro",
+      "Cluster1",
+      "Cluster2",
+      "Cluster3",
+      "Phantom"
+   };
+   
+   num %= countof(names);
+   
+   Lith_LocalPlayer->deliverMail(names[num]);
+}
+
+//
 // Lith_ResetPlayer
 //
 // Reset some things on the player when they spawn.
@@ -209,7 +228,7 @@ void Lith_ResetPlayer(player_t *p)
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
       else
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
-      
+
       p->deliverMail("Intro");
       
       p->staticinit = true;

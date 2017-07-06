@@ -1,0 +1,11 @@
+l[]];;\cg444444\cj41414191918 --------
+\cm    io_buf_get(0x1C, fp, out);
+\cm    string_explode(out, bufs, bufs_num = ARRAY_SIZE(bufs));
+\cm    for (i = 0; i < bufs_num; i++) {{{
+\cm        9339mv__word_of]]q]qq]qq]]]]]]]````````\\\\\\\\<<
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+It's all gone now. I'm glad I was smarter than to assume I was going insane, though now I wonder what the other deceivers must have gone through.
+
+The core of hell is still far yonder, but still my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.
