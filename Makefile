@@ -18,7 +18,7 @@ LITHOS_INC=pk7/lcode/LithOS3/lithos_c/inc
 
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET) -i$(LITHOS_INC) --sys-include $(LITHOS_INC)
+CFLAGS=$(TARGET) -i$(LITHOS_INC) --sys-include $(LITHOS_INC) --no-warn-unused-initializer
 ALLOCMIN=--alloc-min Sta ""
 
 ## Sources

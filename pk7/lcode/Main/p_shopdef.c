@@ -37,7 +37,8 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, b
    p->logF("> Bought %S", Language(namefmt, def->name));
    
    if(def->bipunlock)
-      p->bip.unlock(def->bipunlock);
+      if(!p->bip.unlock(def->bipunlock) && p->pclass == pclass_cybermage)
+         p->bip.unlock(StrParam("%SJem", def->bipunlock));
    
    p->takeScore(Lith_ShopGetCost(p, def));
    

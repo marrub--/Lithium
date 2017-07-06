@@ -136,13 +136,23 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_ENEMIES, "Phantom");
    AddToBIP(bip, BIPC_ENEMIES, "IconOfSin");
    
-   AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp",  Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "JetBooster",   Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",   Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",    Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "Yh0",          Unlocks("DurlaPrime"));
-   AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke",  Unlocks("OFMD"));
-   AddToBIP(bip, BIPC_UPGRADES, "Adrenaline",   Unlocks("KSKK"));
+   switch(p->pclass)
+   {
+   case pclass_marine:
+      AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp", Unlocks("OFMD"));
+      AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
+      AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
+      AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",   Unlocks("OFMD"));
+      AddToBIP(bip, BIPC_UPGRADES, "Yh0",         Unlocks("DurlaPrime"));
+      AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke", Unlocks("OFMD"));
+      AddToBIP(bip, BIPC_UPGRADES, "Adrenaline",  Unlocks("KSKK"));
+      break;
+   case pclass_cybermage:
+      AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDispJem");
+      AddToBIP(bip, BIPC_UPGRADES, "ReflexWetwJem");
+      break;
+   }
+   
    AddToBIP(bip, BIPC_UPGRADES, "VitalScanner", Unlocks("KSKK"));
    AddToBIP(bip, BIPC_UPGRADES, "AutoReload",   Unlocks("KSKK"));
    

@@ -245,8 +245,12 @@ void Lith_ResetPlayer(player_t *p)
          if(weaponinfo[i].class != null)
             ACS_GiveInventory(weaponinfo[i].class, 1);
    }
-   
-   p->bip.unlock("Pistol");
+
+   switch(p->pclass)
+   {
+   case pclass_marine:    p->bip.unlock("Pistol"); break;
+   case pclass_cybermage: p->bip.unlock("Mateba"); break;
+   }
 }
 
 

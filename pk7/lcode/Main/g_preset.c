@@ -8,6 +8,17 @@
    .chot = "k", \
    .font = "CBIFONT"
 
+#define CbxDefault \
+   .sndup  = "player/cbi/clickon", \
+   .snddn  = "player/cbi/clickoff", \
+   .w = 10, \
+   .h = 10, \
+   .font = "CNFONT", \
+   .chkgfx = "CheckboxX.png", \
+   .chkhot = "CheckboxXHot.png", \
+   .chkact = "CheckboxXActive.png", \
+   .chkdis = "CheckboxXDisabled.png"
+
 
 //----------------------------------------------------------------------------
 // Extern Objects
@@ -121,11 +132,8 @@ gui_button_preset_t const btnbipback = {
 };
 
 gui_button_preset_t const btndlgsel = {
-   .snd  = "player/cbi/buttonpress",
-   .cdef = "j",
-   .cact = "g",
+   BtnDefault,
    .chot = "d",
-   .font = "CBIFONT",
    .gfx  = "lgfx/Dialogue/SelectBack.png",
    .hot  = "lgfx/Dialogue/SelectBackHot.png",
    .cdis = "i",
@@ -135,33 +143,17 @@ gui_button_preset_t const btndlgsel = {
 };
 
 gui_checkb_preset_t const cbxdefault = {
+   CbxDefault,
    .gfx    = "Checkbox.png",
    .hot    = "CheckboxHot.png",
-   .dis    = "CheckboxDisabled.png",
-   .sndup  = "player/cbi/clickon",
-   .snddn  = "player/cbi/clickoff",
-   .chkgfx = "CheckboxX.png",
-   .chkhot = "CheckboxXHot.png",
-   .chkact = "CheckboxXActive.png",
-   .chkdis = "CheckboxXDisabled.png",
-   .font = "CNFONT",
-   .w = 10,
-   .h = 10
+   .dis    = "CheckboxDisabled.png"
 };
 
 gui_checkb_preset_t const cbxsmall = {
+   CbxDefault,
    .gfx    = "CheckboxSmall.png",
    .hot    = "CheckboxSmallHot.png",
-   .dis    = "CheckboxSmallDisabled.png",
-   .sndup  = "player/cbi/clickon",
-   .snddn  = "player/cbi/clickoff",
-   .chkgfx = "CheckboxX.png",
-   .chkhot = "CheckboxXHot.png",
-   .chkact = "CheckboxXActive.png",
-   .chkdis = "CheckboxXDisabled.png",
-   .font = "CNFONT",
-   .w = 10,
-   .h = 10
+   .dis    = "CheckboxSmallDisabled.png"
 };
 
 gui_scroll_preset_t const scrdefault = {
