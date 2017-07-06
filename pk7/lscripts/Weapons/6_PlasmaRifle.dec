@@ -73,8 +73,8 @@ actor Lith_PlasmaRifle : Lith_MWeapon
                                       0, 0, -9, 0,
                                       CallACS("Lith_CircleSpread", 0, 0, true) / FIX)
       PLSJ A 1 offset(0, 37) bright
-      PLSJ C 1 offset(0, 36) bright
-      PLSG A 1 offset(0, 32)
+      PLSJ B 1 offset(0, 36) bright
+      PLSJ C 1 offset(0, 32)
       PLSG AAAA 1 A_ReFire
       goto Ready
    
