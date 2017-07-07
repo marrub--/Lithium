@@ -1,3 +1,14 @@
+actor Lith_MonsterID : Inventory
+{
+   Inventory.MaxAmount 0x7FFFFFFF
+   +INVENTORY.UNDROPPABLE
+}
+
+actor Lith_MonsterInvalid : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
 actor Lith_RunMonsterInfo : CustomInventory
 {
    +INVENTORY.ALWAYSPICKUP
@@ -5,7 +16,12 @@ actor Lith_RunMonsterInfo : CustomInventory
    states
    {
    Pickup:
+      TNT1 A 0 A_JumpIfInventory("Lith_MonsterID", 1, "Nope")
+      TNT1 A 0 A_JumpIfInventory("Lith_MonsterInvalid", 1, "Nope")
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MonsterInfo")
+      stop
+   Nope:
+      TNT1 A 0
       stop
    }
 }

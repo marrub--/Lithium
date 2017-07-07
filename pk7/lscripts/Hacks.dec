@@ -42,12 +42,6 @@ actor Lith_UniqueID : Inventory
    +INVENTORY.UNDROPPABLE
 }
 
-actor Lith_MonsterID : Inventory
-{
-   Inventory.MaxAmount 0x7FFFFFFF
-   +INVENTORY.UNDROPPABLE
-}
-
 actor Lith_EnemyChecker : CustomInventory
 {
    states

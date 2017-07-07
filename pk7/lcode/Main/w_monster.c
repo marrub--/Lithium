@@ -85,9 +85,6 @@ void Lith_MonsterMain(dmon_t *m)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_MonsterInfo()
 {
-   if(ACS_CheckInventory("Lith_MonsterID"))
-      return;
-   
    __str cname = ACS_GetActorClass(0);
    
    for(int i = 0; i < countof(searchnames); i++) {
@@ -97,6 +94,9 @@ void Lith_MonsterInfo()
          return;
       }
    }
+   
+   // If the monster failed all checks, give them this so we don't need to recheck every tick.
+   ACS_GiveInventory("Lith_MonsterInvalid", 1);
 }
 
 // EOF
