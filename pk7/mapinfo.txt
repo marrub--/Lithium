@@ -8,6 +8,8 @@ gameinfo
    DimColor = "gray"
    DimAmount = 0.1
    QuitSound = "misc/quitsound"
+   PrecacheSounds = "amb/rain", "amb/wind"
+   AddEventHandlers = "Lith_Events"
 }
 
 

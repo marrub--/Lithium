@@ -44,6 +44,7 @@ enum
    st_bipscr,
    st_biptypeon,
    st_bipinfoscr,
+   st_bipsearch,
    st_settingscr,
    st_logscr,
    st_logsel,

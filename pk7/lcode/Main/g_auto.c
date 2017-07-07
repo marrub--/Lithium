@@ -143,13 +143,13 @@ __str Lith_RemoveTextColors(__str str, int size)
             i++;
       }
       
-      if(!str[i])
+      if(i >= size || j >= size || !str[i])
          break;
       
       buf[j++] = str[i];
    }
    
-   __str ret = StrParam("%s", buf);
+   __str ret = StrParam("%.*s", j, buf);
    free(buf);
    return ret;
 }

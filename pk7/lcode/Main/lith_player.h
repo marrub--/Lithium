@@ -28,13 +28,13 @@
 #define Lith_LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
-#define Lith_GetPCVarInt(p, ...)    ACS_GetUserCVar      ((p)->number, __VA_ARGS__)
-#define Lith_GetPCVarFixed(p, ...)  ACS_GetUserCVarFixed ((p)->number, __VA_ARGS__)
-#define Lith_GetPCVarString(p, ...) ACS_GetUserCVarString((p)->number, __VA_ARGS__)
+#define Lith_GetPCVarInt(p, ...)    ACS_GetUserCVar      ((p)->num, __VA_ARGS__)
+#define Lith_GetPCVarFixed(p, ...)  ACS_GetUserCVarFixed ((p)->num, __VA_ARGS__)
+#define Lith_GetPCVarString(p, ...) ACS_GetUserCVarString((p)->num, __VA_ARGS__)
 
-#define Lith_SetPCVarInt(p, ...)    ACS_SetUserCVar      ((p)->number, __VA_ARGS__)
-#define Lith_SetPCVarFixed(p, ...)  ACS_SetUserCVarFixed ((p)->number, __VA_ARGS__)
-#define Lith_SetPCVarString(p, ...) ACS_SetUserCVarString((p)->number, __VA_ARGS__)
+#define Lith_SetPCVarInt(p, ...)    ACS_SetUserCVar      ((p)->num, __VA_ARGS__)
+#define Lith_SetPCVarFixed(p, ...)  ACS_SetUserCVarFixed ((p)->num, __VA_ARGS__)
+#define Lith_SetPCVarString(p, ...) ACS_SetUserCVarString((p)->num, __VA_ARGS__)
 
 
 //----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ typedef struct player_statedata_s
    bool reinit;
    
    int   tid;
-   int   number;
+   int   num;
    long  ticks;
    __str name;
    
@@ -134,6 +134,8 @@ typedef struct player_extdata_s
    bool      hudenabled;
    
    int decvars[8];
+   char txtbuf[8];
+   int tbptr;
    
    score_t scoreaccum;
    int     scoreaccumtime;
@@ -275,6 +277,7 @@ int Lith_PlayerGetClass(struct player_s *p);
 
 void Lith_PlayerDeltaStats(struct player_s *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player_s *p, int name);
+void Lith_ClearTextBuf(struct player_s *p);
 
 
 //----------------------------------------------------------------------------
@@ -312,6 +315,7 @@ typedef struct player_s
    property deliverMail {call: Lith_DeliverMail(this)}
    property pclass      {get: Lith_PlayerGetClass(this)}
    property getModScore {call: Lith_GetModScore(this)}
+   property clearTextBuf {call: Lith_ClearTextBuf(this)}
    
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

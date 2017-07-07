@@ -6,14 +6,59 @@
 
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
-#define ForCategory() for(int categ = BIPC_MIN; categ < BIPC_MAX; categ++)
+#define ForCategory() for(int categ = 0; categ < BIPC_MAX; categ++)
 #define ForPage() Lith_ForList(bippage_t *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
 
 
 //----------------------------------------------------------------------------
+// Types
+//
+
+struct page_info
+{
+   __str shname;
+   __str flname;
+   __str body;
+};
+
+
+//----------------------------------------------------------------------------
 // Static Functions
 //
+
+//
+// GetPageInfo
+//
+struct page_info GetPageInfo(bippage_t const *page)
+{
+   struct page_info pinf;
+   
+   pinf.shname = page->category == BIPC_MAIL
+      ? page->name
+      : Language("LITH_TXT_INFO_SHORT_%S", page->name);
+   
+   pinf.body = page->body
+      ? page->body
+      : Language("LITH_TXT_INFO_DESCR_%S", page->name);
+   
+   pinf.flname = page->title
+      ? page->title
+      : Language("LITH_TXT_INFO_TITLE_%S", page->name);
+   
+   return pinf;
+}
+
+//
+// SetCurPage
+//
+void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
+{
+   bip->curpage = page;
+   
+   Lith_GUI_TypeOn(g, st_biptypeon, body);
+   Lith_GUI_ScrollReset(g, st_bipinfoscr);
+}
 
 //
 // UnlockPage
@@ -308,18 +353,28 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    
    if(bip->curcategory == BIPC_MAIN)
    {
+      int n = 0;
+      
       HudMessageF("CBIFONT", "\CTINFO");
       HudMessagePlain(g->hid--, 160.4, 70.1, TICSECOND);
       
-#define LITH_X(n, id, name, capt) \
-      if(Lith_GUI_Button_Id(g, n, capt, 70, 80 + (n * 10), .preset = &btnbipmain)) \
+      bip->lastcategory = BIPC_MAIN;
+      
+      if(world.grafZoneEntered)
+      {
+         if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &btnbipmain))
+            bip->curcategory = BIPC_SEARCH;
+         n += 10;
+      }
+#define LITH_X(name, capt) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 70, 80 + n, .preset = &btnbipmain)) \
       { \
          bip->curcategory = BIPC_##name; \
-         bip->curpagenum  = -1; \
          bip->curpage     = null; \
-      }
+      } \
+      n += 10;
 #include "lith_bip.h"
-      if(Lith_GUI_Button(g, "Statistics", 70, 80 + (BIPC_MAX * 10), .preset = &btnbipmain))
+      if(Lith_GUI_Button(g, "Statistics", 70, 80 + n, .preset = &btnbipmain))
          bip->curcategory = BIPC_STATS;
       
       avail = bip->pageavail;
@@ -353,9 +408,70 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Stat("Brouzouf Gained",     "%i",   p->brouzouf);
       Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
       Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
-   // Stat("Rituals Performed",   "%i",   0);
+//    Stat("Rituals Performed",   "%i",   0);
       
       #undef Stat
+   }
+   else if(bip->curcategory == BIPC_SEARCH)
+   {
+      gui_textbox_state_t *st = Lith_GUI_TextBox(g, st_bipsearch, 23, 65, p->num, p->txtbuf);
+      p->clearTextBuf();
+      
+      bip->lastcategory = BIPC_MAIN;
+      
+      ifauto(char *, c, strchr(st->txtbuf, '\n'))
+      {
+         __str query = StrParam("%.*s", c - st->txtbuf, st->txtbuf);
+         
+         bip->resnum = bip->rescur = st->tbptr = 0;
+         
+         ForCategoryAndPage()
+         {
+            if(bip->resnum >= countof(bip->result))
+               break;
+            
+            struct page_info pinf = GetPageInfo(page);
+            
+            if(strstr_str(pinf.shname, query) ||
+               strstr_str(pinf.flname, query) ||
+               strstr_str(pinf.body,   query))
+               bip->result[bip->resnum++] = page;
+         }
+         
+         if(bip->resnum == 0)
+            ACS_LocalAmbientSound("player/cbi/findfail", 127);
+      }
+      
+      if(bip->resnum)
+      {
+         for(int i = 0; i < bip->rescur; i++)
+         {
+            bippage_t *page = bip->result[i];
+            struct page_info pinf = GetPageInfo(page);
+            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 80 + (i * 10), .preset = &btnbipmain))
+            {
+               bip->lastcategory = bip->curcategory;
+               bip->curcategory = page->category;
+               SetCurPage(g, bip, page, pinf.body);
+            }
+         }
+         
+         if((ACS_Timer() % ACS_Random(10, 20)) == 0)
+         {
+            if(bip->rescur != bip->resnum)
+            {
+               if(++bip->rescur == bip->resnum)
+                  ACS_LocalAmbientSound("player/cbi/finddone", 127);
+               else
+                  ACS_LocalAmbientSound("player/cbi/find", 127);
+            }
+         }
+      }
+      else
+      {
+         HudMessageF("CBIFONT", "\CmNo results");
+         HudMessagePlain(g->hid--, 70, 80, TICSECOND);
+      }
    }
    else
    {
@@ -372,27 +488,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
             continue;
          
-         __str name;
+         struct page_info pinf = GetPageInfo(page);
+         __str name = StrParam("%S%S", bip->curpage == page ? "\Ci" : "", pinf.shname);
          
-         if(page->category == BIPC_MAIL) name = page->name;
-         else                            name = Language("LITH_TXT_INFO_SHORT_%S", page->name);
-         
-         name = StrParam("%S%S", bip->curpagenum == i ? "\Ci" : "", name);
-         
-         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpagenum == i, .preset = &btnlist))
-         {
-            bip->curpagenum = i;
-            bip->curpage    = page;
-            
-            __str body;
-            
-            if(page->body) body = page->body;
-            else           body = Language("LITH_TXT_INFO_DESCR_%S", page->name);
-            
-            Lith_GUI_TypeOn(g, st_biptypeon, body);
-            
-            Lith_GUI_ScrollReset(g, st_bipinfoscr);
-         }
+         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, .preset = &btnlist))
+            SetCurPage(g, bip, page, pinf.body);
       }
       
       Lith_GUI_ScrollEnd(g, st_bipscr);
@@ -400,6 +500,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       if(bip->curpage)
       {
          bippage_t *page = bip->curpage;
+         struct page_info pinf = GetPageInfo(page);
          
          gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_biptypeon);
          
@@ -418,16 +519,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          
          DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
          
-         __str title;
-         
-         if(page->title) title = page->title;
-         else            title = Language("LITH_TXT_INFO_TITLE_%S", page->name);
-         
-         HudMessageF("CBIFONT", "\Ci%S", title);
+         HudMessageF("CBIFONT", "\Ci%S", pinf.flname);
          HudMessagePlain(g->hid--, 200.4, 45.1 + oy, TICSECOND);
          
          #define DrawText(txt, pos, ...) \
-            HudMessageF("CBIFONT", "%.*S", pos, txt), \
+            HudMessageF("CBIFONT", "%.*S%S", pos, txt, pos == typeon->len ? Ticker("\n|", "") : "|"), \
             HudMessageParams(0, g->hid--, __VA_ARGS__ + oy, TICSECOND)
          
          // render an outline if the page has an image
@@ -458,7 +554,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    
    if(bip->curcategory != BIPC_MAIN)
       if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &btnbipback))
-         bip->curcategory = BIPC_MAIN;
+         bip->curcategory = bip->lastcategory;
    
    DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 30.1, TICSECOND, 0.6);
    HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");

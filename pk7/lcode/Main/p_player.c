@@ -202,8 +202,8 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 {
    if(p->activegui == GUI_NONE)
    {
-      if(world.grafZoneEntered && world.pauseinmenus)
-         ACS_ScriptCall("Lith_PauseManager", "SetPaused", true);
+      if(world.pauseinmenus)
+         Lith_ScriptCall("Lith_PauseManager", "SetPaused", true);
       
       ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
       p->activegui = type;
@@ -211,8 +211,8 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
    }
    else if(p->activegui == type)
    {
-      if(world.grafZoneEntered && world.pauseinmenus)
-         ACS_ScriptCall("Lith_PauseManager", "SetPaused", false);
+      if(world.pauseinmenus)
+         Lith_ScriptCall("Lith_PauseManager", "SetPaused", false);
       
       p->closeGUI();
    }
@@ -346,8 +346,8 @@ static void Lith_PlayerRunScripts(player_t *p)
       // Post-logic: Update the engine's data.
       Lith_PlayerDeltaStats(p); // Update delta'd info
       
-      if(world.grafZoneEntered && world.pauseinmenus)
-         ACS_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
+      if(world.pauseinmenus)
+         Lith_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
    }
    
    // Rendering

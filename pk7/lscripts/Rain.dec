@@ -10,6 +10,7 @@ actor Lith_RainDrop
    +NOBLOCKMAP
    +DROPOFF
    +NOTELEPORT
+   +NOTIMEFREEZE
    -NOGRAVITY
    
    states
@@ -30,6 +31,7 @@ actor Lith_BloodRainDrop : Lith_RainDrop
 
 actor Lith_RainDropSpawner
 {
+   +NOTIMEFREEZE
    states
    {
    Spawn:

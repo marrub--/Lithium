@@ -71,6 +71,7 @@ MAIN_SOURCES= \
 	$(SRC)/g_preset.c \
 	$(SRC)/g_scrollbar.c \
 	$(SRC)/g_slider.c \
+	$(SRC)/g_textbox.c \
 	$(SRC)/p_settings.c \
 	$(SRC)/w_boss.c \
 	$(SRC)/w_dialogue.c \

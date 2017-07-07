@@ -25,7 +25,7 @@ savefile_t *Lith_SaveBegin(player_t *p)
 {
    savefile_t *save = calloc(1, sizeof(savefile_t));
    
-   if((save->fp = Lith_NFOpen(p->number, "lith_psave", 'w')))
+   if((save->fp = Lith_NFOpen(p->num, "lith_psave", 'w')))
    {
       save->p = p;
       Lith_SaveWriteChunk(save, Ident_Lith, SaveV_Lith, 0);
@@ -96,7 +96,7 @@ savefile_t *Lith_LoadBegin(player_t *p)
 {
    savefile_t *save = calloc(1, sizeof(savefile_t));
    
-   if((save->fp = Lith_NFOpen(p->number, "lith_psave", 'r')))
+   if((save->fp = Lith_NFOpen(p->num, "lith_psave", 'r')))
    {
       save->p = p;
       

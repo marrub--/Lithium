@@ -37,6 +37,17 @@ typedef void const *__str;
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))
 
+#define Ticker(on, off) ((ACS_Timer() % 35) < 17 ? (on) : (off))
+
+#define Lith_ScriptCall(...) \
+   (world.grafZoneEntered ? ACS_ScriptCall(__VA_ARGS__) : 0)
+
+#define Lith_ScriptCallFixed(...) \
+   (world.grafZoneEntered ? ACS_ScriptCallFixed(__VA_ARGS__) : 0)
+
+#define Lith_ScriptCallString(...) \
+   (world.grafZoneEntered ? ACS_ScriptCallString(__VA_ARGS__) : "")
+
 #define HudMessageF(font, ...) \
    ( \
       ACS_SetFont(font), \

@@ -1,7 +1,50 @@
-version 2.4
+version "2.5"
 
 #include "lzscript/PauseManager.zsc"
 #include "lzscript/DarkMatter.zsc"
+
+class Lith_Server : Actor
+{
+   bool GrabInput[MAXPLAYERS];
+   
+   static void SetInput(int pnum, bool on)
+   {
+      Instance().GrabInput[pnum % MAXPLAYERS] = on;
+   }
+   
+   static clearscope Lith_Server Instance()
+   {
+      return Lith_Server(ThinkerIterator.Create("Lith_Server").Next());
+   }
+}
+
+class Lith_Events : StaticEventHandler
+{
+   override void WorldLoaded(WorldEvent evt)
+   {
+      if(evt.IsReopen)
+         return;
+      
+      Actor.Spawn("Lith_Server");
+   }
+   
+   override bool InputProcess(InputEvent evt)
+   {
+      if(Lith_Server.Instance().GrabInput[consoleplayer] && evt.Type == InputEvent.Type_KeyDown && evt.KeyString)
+      {
+         EventHandler.SendNetworkEvent("Lith_Key", evt.KeyChar);
+         return true;
+      }
+      
+      return false;
+   }
+   
+   override void NetworkProcess(ConsoleEvent evt)
+   {
+      if(evt.name == "Lith_Key")
+         CallACS("Lith_KeyDown", evt.player, evt.args[0]);
+   }
+}
 
 class Lith_GrafZone : Actor
 {

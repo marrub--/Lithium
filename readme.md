@@ -24,6 +24,10 @@ All of the C code in this project is copyrighted unless otherwise stated. Do not
 
 All DECORATE code or other such code in the `pk7` folder is public domain as defined by [the CC0 license](http://creativecommons.org/publicdomain/zero/1.0/).
 
+The LithOS3 library is distributed under the MIT license as detailed in `pk7/LICENSE.lithos3.txt`.
+
+GDCC's libc implementation is distributed under the LGPL license as detailed in `pk7/copylib.txt`.
+
 All other resources (sprites, sounds, etc.) are owned by their respective creators.
 
 Respect content creators, ask permission before using something from this mod.

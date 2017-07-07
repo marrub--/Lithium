@@ -164,7 +164,6 @@ void Lith_KeyOpenCBI(void)
    
    p->bip.curcategory = BIPC_MAIN;
    p->bip.curpage     = null;
-   p->bip.curpagenum  = -1;
    
    p->useGUI(GUI_CBI);
 }

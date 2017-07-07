@@ -12,6 +12,8 @@
 #define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id + LineHash, &(gui_scroll_args_t){__VA_ARGS__})
 #define Lith_GUI_Slider(g, ...) Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_Slider_Id(g, id, ...) Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
+#define Lith_GUI_TextBox(g, ...) Lith_GUI_TextBox_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_TextBox_Id(g, id, ...) Lith_GUI_TextBox_Impl(g, id + LineHash, &(gui_textbox_args_t){__VA_ARGS__})
 
 #define Lith_GUI_GenPreset(type, def) \
    type pre; \
@@ -47,12 +49,19 @@ typedef struct gui_typeon_state_s
    int   pos;
 } gui_typeon_state_t;
 
+typedef struct gui_textbox_state_s
+{
+   char txtbuf[32];
+   int tbptr;
+} gui_textbox_state_t;
+
 typedef union gui_stateitem_s
 {
    int i;
    void *vp;
    gui_scroll_state_t scrl;
    gui_typeon_state_t type;
+   gui_textbox_state_t tb;
 } gui_stateitem_t;
 
 typedef struct gui_delta_s
@@ -175,6 +184,15 @@ typedef struct gui_slider_args_s
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 
+typedef struct gui_textbox_args_s
+{
+   size_t st;
+   int x;
+   int y;
+   int pnum;
+   char *inbuf;
+} gui_textbox_args_t;
+
 
 //----------------------------------------------------------------------------
 // Extern Objects
@@ -221,6 +239,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a);
 void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st);
 [[__optional_args(1)]] bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h);
 double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t *a);
+gui_textbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_textbox_args_t *a);
 
 #endif
 

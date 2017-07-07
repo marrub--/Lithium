@@ -28,7 +28,7 @@ int Lith_PlayerCurWeaponType(player_t *p)
 //
 int Lith_PlayerGetClass(player_t *p)
 {
-   return ACS_PlayerClass(p->number);
+   return ACS_PlayerClass(p->num);
 }
 
 //
@@ -74,6 +74,8 @@ void Lith_PlayerUpdateData(player_t *p)
    int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
    
+   Lith_ScriptCall("Lith_Server", "SetInput", p->num, false);
+   
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    
@@ -104,7 +106,7 @@ void Lith_PlayerUpdateData(player_t *p)
    p->health = ACS_GetActorProperty(0, APROP_Health);
    p->armor  = ACS_CheckInventory("BasicArmor");
    
-   p->name        = StrParam("%tS", p->number);
+   p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
    p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
    p->maxarmor    = ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT);
@@ -141,6 +143,27 @@ void Lith_GiveMail(int num)
 }
 
 //
+// Lith_ClearTextBuf
+//
+void Lith_ClearTextBuf(player_t *p)
+{
+   memset(p->txtbuf, 0, sizeof(p->txtbuf));
+   p->tbptr = 0;
+}
+
+//
+// Lith_KeyDown
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_KeyDown(int pnum, int ch)
+{
+   player_t *p = &players[pnum];
+   
+   if(p->tbptr + 1 < countof(p->txtbuf))
+      p->txtbuf[p->tbptr++] = ch;
+}
+
+//
 // Lith_ResetPlayer
 //
 // Reset some things on the player when they spawn.
@@ -153,7 +176,7 @@ void Lith_ResetPlayer(player_t *p)
    
    p->active = true;
    p->reinit = p->dead = false;
-   p->number = ACS_PlayerNumber();
+   p->num    = ACS_PlayerNumber();
    
    //
    // Map-static data

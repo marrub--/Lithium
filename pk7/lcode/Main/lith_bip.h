@@ -1,12 +1,12 @@
 #if defined(LITH_X)
-  LITH_X(0, WEP, WEAPONS,      "Weapons")
-  LITH_X(1, ENE, ENEMIES,      "Adversaries")
-// Add when things like the Division Sigil are in
-//LITH_X( , ITE, ITEMS,        "Items")
-  LITH_X(2, UPG, UPGRADES,     "Upgrades")
-  LITH_X(3, PLA, PLACES,       "Places")
-  LITH_X(4, COR, CORPORATIONS, "Companies and Corporations")
-  LITH_X(5, MAI, MAIL,         "Mail")
+  LITH_X(WEAPONS,      "Weapons")
+  LITH_X(ENEMIES,      "Adversaries")
+// TODO: Add when things like the Division Sigil are in
+//LITH_X(ITEMS,        "Items")
+  LITH_X(UPGRADES,     "Upgrades")
+  LITH_X(PLACES,       "Places")
+  LITH_X(CORPORATIONS, "Companies and Corporations")
+  LITH_X(MAIL,         "Mail")
 #undef LITH_X
 
 #elif !defined(LITH_BIP_H)
@@ -35,12 +35,12 @@ void Lith_PlayerLoseBIPPages(struct bip_s *bip);
 
 enum
 {
-   BIPC_MIN,
-#define LITH_X(n, id, name, capt) BIPC_##name = n,
+#define LITH_X(name, capt) BIPC_##name,
 #include "lith_bip.h"
    BIPC_MAX,
    BIPC_MAIN,
-   BIPC_STATS
+   BIPC_STATS,
+   BIPC_SEARCH
 };
 
 enum
@@ -82,7 +82,11 @@ typedef struct bip_s
    bippage_t *curpage;
    int curpagenum;
    int curcategory;
+   int lastcategory;
    int scroll;
+   bippage_t *result[8];
+   int resnum;
+   int rescur;
    
    // Info
    list_t infogr[BIPC_MAX];
