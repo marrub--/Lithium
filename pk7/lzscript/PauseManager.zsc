@@ -3,6 +3,7 @@ class Lith_PauseManager play
    static void SetPaused(bool on)
    {
       level.frozen = on;
+      Lith_Server.Instance().Paused = on;
       
       for(int i = 0; i < MAXPLAYERS; i++)
       {
@@ -24,7 +25,7 @@ class Lith_PauseManager play
    
    static void PauseTick(int player)
    {
-      if(level.frozen)
+      if(Lith_Server.Instance().Paused)
          players[player].psprites.tics = -1;
    }
 }

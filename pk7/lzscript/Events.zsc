@@ -1,0 +1,30 @@
+class Lith_Events : StaticEventHandler
+{
+   override void WorldLoaded(WorldEvent evt)
+   {
+      if(evt.IsReopen)
+         return;
+      
+      Actor.Spawn("Lith_Server");
+   }
+   
+   override bool InputProcess(InputEvent evt)
+   {
+      if(Lith_Server.Instance().GrabInput[consoleplayer] && evt.Type == InputEvent.Type_KeyDown && evt.KeyString)
+      {
+         EventHandler.SendNetworkEvent("Lith_Key", evt.KeyChar);
+         return true;
+      }
+      
+      return false;
+   }
+   
+   override void NetworkProcess(ConsoleEvent evt)
+   {
+      if(evt.name == "Lith_Key")
+         CallACS("Lith_KeyDown", evt.player, evt.args[0]);
+   }
+}
+
+// EOF
+

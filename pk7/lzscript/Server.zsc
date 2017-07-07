@@ -1,0 +1,18 @@
+class Lith_Server : Actor
+{
+   bool GrabInput[MAXPLAYERS];
+   bool Paused;
+   
+   static void SetInput(int pnum, bool on)
+   {
+      Instance().GrabInput[pnum % MAXPLAYERS] = on;
+   }
+   
+   static clearscope Lith_Server Instance()
+   {
+      return Lith_Server(ThinkerIterator.Create("Lith_Server").Next());
+   }
+}
+
+// EOF
+
