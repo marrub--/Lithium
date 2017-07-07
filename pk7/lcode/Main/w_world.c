@@ -432,7 +432,26 @@ static void Lith_World(void)
       return;
    }
    
-   // Init global/static state. Check compatibility first.
+   world.dbgLevel = ACS_GetCVar("__lith_debug_level");
+   
+   // Init global state.
+   if(ACS_GetCVar("__lith_debug_all"))
+   {
+      world.dbgItems = true;
+      world.dbgBIP   = true;
+      world.dbgScore = true;
+      world.dbgUpgr  = true;
+      world.dbgSave  = true;
+   }
+   else
+   {
+      world.dbgItems = ACS_GetCVar("__lith_debug_items");
+      world.dbgBIP   = ACS_GetCVar("__lith_debug_bip");
+      world.dbgScore = ACS_GetCVar("__lith_debug_score");
+      world.dbgUpgr  = ACS_GetCVar("__lith_debug_upgrades");
+      world.dbgSave  = ACS_GetCVar("__lith_debug_save");
+   }
+   
    __with(int tid;)
    {
       if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
@@ -466,7 +485,7 @@ static void Lith_World(void)
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
       world.cbi.perf = 10;
-      if(ACS_GetCVar("lith_sv_nobosses") || ACS_GetCVar("__lith_debug_level"))
+      if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
          for(int i = 1; i < 7; i++)
             Lith_InstallCBIItem(i);
       

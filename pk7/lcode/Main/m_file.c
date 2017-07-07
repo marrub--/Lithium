@@ -2,6 +2,7 @@
 
 #include "lith_common.h"
 #include "lith_file.h"
+#include "lith_world.h"
 
 #include "base64.h"
 
@@ -75,7 +76,7 @@ static int NetClose(void *nfdata)
    netfile_t *nf = nfdata;
    
    // If debugging, print out information about the buffer being written.
-   if(ACS_GetCVar("__lith_debug_save"))
+   if(world.dbgSave)
    {
       printf(c"NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
       printf(c"Data follows\n");
@@ -251,7 +252,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          free(input);
          
          // If debugging, print out information about the buffer being read.
-         if(ACS_GetCVar("__lith_debug_save"))
+         if(world.dbgSave)
          {
             printf(c"Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
             printf(c"Data follows\n");

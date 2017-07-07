@@ -84,10 +84,12 @@ server int  lith_sv_boss3p2_scr = 128000000;
 server int  lith_sv_boss3p3_scr = 256000000;
 
 // Debugging
-server noarchive int    __lith_debug_level = 0;
-server noarchive bool   __lith_debug_save = false;
-server noarchive bool   __lith_debug_noupgrades = false;
-server noarchive bool   __lith_debug_noscore = false;
-server noarchive string __lith_debug_upgrade;
+server noarchive int    __lith_debug_level      = 0;
+server noarchive bool   __lith_debug_all        = false;
+server noarchive bool   __lith_debug_items      = false;
+server noarchive bool   __lith_debug_bip        = false;
+server noarchive bool   __lith_debug_score      = false;
+server noarchive bool   __lith_debug_upgrades   = false;
+server noarchive bool   __lith_debug_save       = false;
 
 // EOF

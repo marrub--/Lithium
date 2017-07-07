@@ -110,6 +110,14 @@ typedef struct worldinfo_s
    // Extras
    bool grafZoneEntered;
    bool pauseinmenus;
+   
+   // Debugging
+   int dbgLevel;
+   bool dbgItems  : 1;
+   bool dbgBIP    : 1;
+   bool dbgScore  : 1;
+   bool dbgUpgr   : 1;
+   bool dbgSave   : 1;
 } worldinfo_t;
 
 __addrdef extern __mod_arr lmvar;

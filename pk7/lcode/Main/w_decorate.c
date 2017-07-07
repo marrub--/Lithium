@@ -2,6 +2,7 @@
 #include "lith_weapons.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
+#include "lith_world.h"
 
 #include <math.h>
 
@@ -296,7 +297,7 @@ void Lith_GetSigil()
    ACS_Thing_Remove(ACS_CheckInventory("Lith_DivisionSigilSpriteTID"));
    ACS_TakeInventory("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
    
-   if(ACS_GetCVar("__lith_debug_level"))
+   if(world.dbgLevel)
       return;
    
    p->frozen++;

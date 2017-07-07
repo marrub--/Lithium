@@ -282,17 +282,8 @@ void Lith_PlayerInitUpgrades(player_t *p)
          p->upgrademap.elem.data[j].keyhash = upgr->info->key;
          p->upgrademap.elem.data[j].value   = upgr;
          
-         if(upgr->info->cost == 0)
+         if(upgr->info->cost == 0 || world.dbgUpgr)
             upgr->setOwned(p);
-         
-         if(ACS_GetCVar("__lith_debug_level") && !ACS_GetCVar("__lith_debug_noupgrades"))
-         {
-            if(upgr->info->cost != 0)
-               upgr->setOwned(p);
-            
-            if(ACS_StrCmp(ACS_GetCVarString("__lith_debug_upgrade"), upgr->info->name) == 0)
-               upgr->toggle(p);
-         }
          
          j++;
       }

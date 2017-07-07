@@ -247,7 +247,7 @@ void Lith_ResetPlayer(player_t *p)
       
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       
-      if(ACS_GetCVar("__lith_debug_level"))
+      if(world.dbgLevel)
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
       else
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
@@ -259,15 +259,13 @@ void Lith_ResetPlayer(player_t *p)
    else
       Lith_PlayerReinitUpgrades(p);
    
-   if(ACS_GetCVar("__lith_debug_level"))
-   {
-      if(!ACS_GetCVar("__lith_debug_noscore"))
-         p->score = 0xFFFFFFFFFFFFFFFFll;
-      
+   if(world.dbgScore)
+      p->score = 0xFFFFFFFFFFFFFFFFll;
+   
+   if(world.dbgItems)
       for(int i = weapon_min; i < weapon_max; i++)
          if(weaponinfo[i].class != null)
             ACS_GiveInventory(weaponinfo[i].class, 1);
-   }
 
    switch(p->pclass)
    {

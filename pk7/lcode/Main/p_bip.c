@@ -231,7 +231,7 @@ void Lith_PlayerInitBIP(player_t *p)
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;
    
-   if(ACS_GetCVar("__lith_debug_level"))
+   if(world.dbgBIP)
    {
       bip->pageavail = bip->pagemax;
       
