@@ -1,5 +1,6 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
+#include "lith_monster.h"
 
 #define UserData upgr->UserData_VitalScan
 
@@ -40,9 +41,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       bool boss = ACS_CheckFlag(0, "BOSS");
       
       int id = Lith_UniqueID();
-      //dmon_t *m = Dmon(id);
-      
-      //if(m) UserData.m = m;
+      dmon_t *m = DmonPtr();
       
       if((freaktarget || boss) && !phantom)
       {
@@ -59,6 +58,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
               if(six)     UserData.tagstr = "\Cg6";
          else if(henshin) UserData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
          else if(phantom) UserData.tagstr = StrParam("\Cg%tS", 0);
+         else if(m)       UserData.tagstr = StrParam("\C%c%tS lv.%i", color, 0, m->level);
          else             UserData.tagstr = StrParam("\C%c%tS", color, 0);
          
          UserData.oldhealth = UserData.health;

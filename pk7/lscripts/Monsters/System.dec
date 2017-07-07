@@ -1,0 +1,25 @@
+actor Lith_RunMonsterInfo : CustomInventory
+{
+   +INVENTORY.ALWAYSPICKUP
+   
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MonsterInfo")
+      stop
+   }
+}
+
+actor Lith_MonsterInfoEmitter
+{
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_RadiusGive("Lith_RunMonsterInfo", 16384, RGF_MONSTERS|RGF_NOSIGHT|RGF_CUBE)
+      stop
+   }
+}
+
+// EOF
+

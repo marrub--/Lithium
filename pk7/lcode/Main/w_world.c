@@ -1,6 +1,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
+#include "lith_monster.h"
 
 #include <math.h>
 
@@ -73,9 +74,8 @@ int Lith_UniqueID(int tid)
    int id = Lith_CheckActorInventory(tid, "Lith_UniqueID");
    
    // Otherwise we have to give a new unique identifier.
-   // Monsters occupy the first area of ID allocation.
    if(id == 0)
-      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = /*DMON_MAX +*/ ++mapid);
+      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
    
    return id;
 }
@@ -349,61 +349,6 @@ static void SpawnBoss()
    }
 }
 
-#if 0
-//
-// Lith_MonsterInfo
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_MonsterInfo()
-{
-   static __str names[] = {
-      "ZombieMan",
-      "ShotgunGuy",
-      "ChaingunGuy",
-      "DoomImp",
-      "Demon",
-      "Spectre",
-      "LostSoul",
-      "Fatso",
-      "Arachnotron",
-      "Cacodemon",
-      "HellKnight",
-      "Revenant",
-      "PainElemental",
-      "Archvile",
-      "SpiderMastermind",
-      "Cyberdemon"
-   };
-   
-   __str cname = GetActorClass(0);
-   
-   for(int i = 0; i < countof(names); i++)
-   {
-      [[__call("ScriptS")]]
-      extern void Lith_MonsterMain(void);
-      
-      if(strstr_str(cname, names[i]))
-      {
-         ifauto(dmon_t, m, AllocDmon())
-            Lith_MonsterMain(m);
-         return;
-      }
-   }
-}
-
-//
-// SetupMonsterInfo
-//
-[[__call("ScriptS")]]
-static void SetupMonsterInfo()
-{
-   while(!enemiesarecompatible)
-      ACS_Delay(1);
-   
-   ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
-}
-#endif
-
 //
 // DoRain
 //
@@ -596,8 +541,6 @@ static void Lith_World(void)
       if(!ACS_GetCVar("lith_sv_nobosses"))
          SpawnBoss();
       
-      //SetupMonsterInfo();
-      
       // Payout, which is not done on the first map.
       if(world.mapscleared != 0)
          Lith_DoPayout();
@@ -649,6 +592,9 @@ static void Lith_World(void)
       prevsecrets = secrets;
       prevkills   = kills;
       previtems   = items;
+      
+      if(enemiesarecompatible)
+         ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
       
       ACS_Delay(1);
       

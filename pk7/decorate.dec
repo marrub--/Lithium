@@ -15,6 +15,8 @@
 #include "lscripts/RifleGrenade.dec"
 #include "lscripts/BoughtItem.dec"
 
+#include "lscripts/Monsters/System.dec"
+
 #include "lscripts/Monsters/Tier1.dec"
 #include "lscripts/Monsters/Tier2.dec"
 #include "lscripts/Monsters/Tier3.dec"
@@ -33,6 +35,7 @@
 #include "lscripts/Monsters/Isaac.dec"
 
 #include "lscripts/Monsters/TitleMap.dec"
+
 #include "lscripts/Maps.dec"
 
 #include "lscripts/Items/Ammo.dec"

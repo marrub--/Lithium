@@ -3,22 +3,23 @@
 
 #include "lith_common.h"
 #include "lith_list.h"
+#include "lith_world.h"
 
 #define DMON_MAX 0x7FFF
-#define DMONHASH_MAX 0x7FFF
 
-typedef struct dmon_s
+struct dmon
 {
    bool active;
    int id;
-   list_t link;
    
    int level;
-} dmon_t;
+};
 
+typedef struct dmon lwvar dmon_t;
+
+[[__call("ScriptS"), __optional_args(2)]] dmon_t *DmonPtr(int tid, int ptr);
 dmon_t *Dmon(int id);
-
-extern list_t dmonhash[DMONHASH_MAX];
+dmon_t *AllocDmon(void);
 
 #endif//LITH_MONSTER_H
 
