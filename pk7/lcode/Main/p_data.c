@@ -247,7 +247,7 @@ void Lith_ResetPlayer(player_t *p)
       
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       
-      if(ACS_GetCVar("__lith_debug_on"))
+      if(ACS_GetCVar("__lith_debug_level"))
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
       else
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
@@ -259,7 +259,7 @@ void Lith_ResetPlayer(player_t *p)
    else
       Lith_PlayerReinitUpgrades(p);
    
-   if(ACS_GetCVar("__lith_debug_on"))
+   if(ACS_GetCVar("__lith_debug_level"))
    {
       if(!ACS_GetCVar("__lith_debug_noscore"))
          p->score = 0xFFFFFFFFFFFFFFFFll;

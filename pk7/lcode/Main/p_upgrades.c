@@ -285,7 +285,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
          if(upgr->info->cost == 0)
             upgr->setOwned(p);
          
-         if(ACS_GetCVar("__lith_debug_on") && !ACS_GetCVar("__lith_debug_noupgrades"))
+         if(ACS_GetCVar("__lith_debug_level") && !ACS_GetCVar("__lith_debug_noupgrades"))
          {
             if(upgr->info->cost != 0)
                upgr->setOwned(p);

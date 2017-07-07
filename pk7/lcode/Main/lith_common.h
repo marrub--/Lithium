@@ -29,6 +29,9 @@ typedef void const *__str;
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
+#define LogDebug(level, ...) \
+   do if(ACS_GetCVar("__lith_debug_level") >= (level)) Log(__VA_ARGS__); \
+   while(0)
 
 #define sink ACS_Sin
 #define cosk ACS_Cos
@@ -121,6 +124,14 @@ typedef void const *__str;
 
 // To make pitch values down=0, up=1
 #define PITCH_BASE -0.5
+
+// Debug log verbosity
+enum
+{
+   log_boss = 1,
+   log_dlg,
+   log_dmon
+};
 
 // Types
 typedef long fixed fixed64_t;

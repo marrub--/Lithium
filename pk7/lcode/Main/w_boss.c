@@ -180,8 +180,7 @@ void Lith_PhantomDeath(int num, int phase)
    #define PhaseR(num, phasenum, reward) \
       case phasenum: \
       world.boss##num##p##phasenum = true; \
-      if(ACS_GetCVar("__lith_debug_on")) \
-         Log("Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
+      LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
       ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
       break;
    
@@ -261,8 +260,7 @@ void Lith_SpawnBoss(int num, int phase)
    
    ACS_SetUserVariable(bosstid, "user_phase", phase);
    
-   if(ACS_GetCVar("__lith_debug_on"))
-      Log("Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
+   LogDebug(log_boss, "Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
    
    switch(phase)
    {
@@ -293,8 +291,7 @@ static void SpawnBoss(int num, int phase)
    ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID());
    ACS_SetActorState(tid, StrParam("Boss%i_%i", num, phase));
    
-   if(ACS_GetCVar("__lith_debug_on"))
-      Log("Lith_SpawnBosses: Spawning boss %i phase %i", num, phase);
+   LogDebug(log_boss, "Lith_SpawnBosses: Spawning boss %i phase %i", num, phase);
    
    if(firstboss)
    {

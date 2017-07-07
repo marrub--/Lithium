@@ -69,8 +69,7 @@ static int *NextCode(dlgparsestate_t *d)
    {
       d->def->code = realloc(d->def->code, sizeof(int) * (d->codesiz += 128));
       
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("reallocating code to size %i", d->codesiz);
+      LogDebug(log_dlg, "reallocating code to size %i", d->codesiz);
    }
    
    return d->def->code + d->codeptr++;
@@ -168,8 +167,7 @@ static void GetCode_Exec(dlgparsestate_t *d)
 //
 static void GetCode_Generic(dlgparsestate_t *d, Lth_Token const *tok)
 {
-   if(ACS_GetCVar("__lith_debug_on"))
-      Log("call: %s", tok->str);
+   LogDebug(log_dlg, "call: %s", tok->str);
    
    // Get the function to generate.
    dlgfunc_t const *func = dlgfunctable.findcstr(tok->str);
@@ -205,8 +203,7 @@ static void GetCode_Generic(dlgparsestate_t *d, Lth_Token const *tok)
       case 'S': args[i++] = (int)Lth_strentdup(tok->str); break;
       }
       
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("arg %i: %s", i, tok->str);
+      LogDebug(log_dlg, "arg %i: %s", i, tok->str);
       
       if(!d->tkstr->drop(Lth_TOK_Comma) || d->tkstr->drop(Lth_TOK_Semico))
          break;
@@ -222,8 +219,7 @@ static void GetCode_Generic(dlgparsestate_t *d, Lth_Token const *tok)
       case 'L': args[i++] = func->lit[l++]; break;
       }
       
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("arg %i emptied", i, tok->str);
+      LogDebug(log_dlg, "arg %i emptied", i, tok->str);
    }
    
    // Generate arguments.
@@ -324,8 +320,7 @@ static void GetDecl_Dialogue(dlgparsestate_t *d)
    {
       SetupDialogue(d, strtoi(tok->str, null, 0));
       
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("\n---\ndialogue %i (%i)\n---", d->def->num, d->codeptr);
+      LogDebug(log_dlg, "\n---\ndialogue %i (%i)\n---", d->def->num, d->codeptr);
    }
 }
 
@@ -339,8 +334,7 @@ static void GetDecl_Terminal(dlgparsestate_t *d)
    {
       SetupDialogue(d, -strtoi(tok->str, null, 0));
       
-      if(ACS_GetCVar("__lith_debug_on"))
-         Log("\n---\nterminal %i (%i)\n---", -d->def->num, d->codeptr);
+      LogDebug(log_dlg, "\n---\nterminal %i (%i)\n---", -d->def->num, d->codeptr);
    }
 }
 
@@ -351,8 +345,7 @@ static void SetupPage(dlgparsestate_t *d, int num)
 {
    d->def->pages[num] = d->codeptr;
    
-   if(ACS_GetCVar("__lith_debug_on"))
-      Log("--- page %i (%i)", num, d->codeptr);
+   LogDebug(log_dlg, "--- page %i (%i)", num, d->codeptr);
 }
 
 //

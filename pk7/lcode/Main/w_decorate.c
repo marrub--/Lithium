@@ -296,7 +296,7 @@ void Lith_GetSigil()
    ACS_Thing_Remove(ACS_CheckInventory("Lith_DivisionSigilSpriteTID"));
    ACS_TakeInventory("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
    
-   if(ACS_GetCVar("__lith_debug_on"))
+   if(ACS_GetCVar("__lith_debug_level"))
       return;
    
    p->frozen++;
