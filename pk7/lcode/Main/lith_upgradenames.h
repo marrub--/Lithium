@@ -5,12 +5,12 @@ enum
    UPGR_JetBooster,
    UPGR_ReflexWetw,
    UPGR_Zoom,
+   UPGR_VitalScan,
    UPGR_CyberLegs,
    UPGR_ReactArmor,
    UPGR_ReactArmor2,
    UPGR_DefenseNuke,
    UPGR_Adrenaline,
-   UPGR_VitalScan,
    
    UPGR_AutoReload,
    UPGR_AutoPistol,
