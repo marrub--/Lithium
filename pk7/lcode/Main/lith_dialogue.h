@@ -91,7 +91,7 @@ typedef struct dlgdef_s
 // Extern Objects
 //
 
-extern dlgdef_t *Lith_MapVariable dlgdefs;
+extern dlgdef_t *lmvar dlgdefs;
 
 #endif
 

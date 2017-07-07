@@ -73,7 +73,7 @@ typedef struct dlgvmstate_s
 // Extern Objects
 //
 
-dlgdef_t *Lith_MapVariable dlgdefs;
+dlgdef_t *lmvar dlgdefs;
 
 
 //----------------------------------------------------------------------------

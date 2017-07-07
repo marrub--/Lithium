@@ -28,8 +28,8 @@ struct phantom_s
 // Static Objects
 //
 
-static int Lith_MapVariable bossargs[6];
-static int Lith_MapVariable bosstid;
+static int lmvar bossargs[6];
+static int lmvar bosstid;
 static bool firstboss = true;
 
 

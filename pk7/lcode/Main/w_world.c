@@ -13,19 +13,19 @@ static bool enemiesarecompatible;
 static bool enemycheckfinished;
 static bool gsinit;
 
-static int Lith_MapVariable upgradesspawned[8];
-static int Lith_MapVariable upgradesspawnediter;
+static int lmvar upgradesspawned[8];
+static int lmvar upgradesspawnediter;
 
 
 //----------------------------------------------------------------------------
 // Extern Objects
 //
 
-__addrdef __mod_arr Lith_MapVariable;
-__addrdef __hub_arr Lith_WorldVariable;
+__addrdef __mod_arr lmvar;
+__addrdef __hub_arr lwvar;
 
-bool Lith_MapVariable mapinit;
-int  Lith_MapVariable mapid;
+bool lmvar mapinit;
+int  lmvar mapid;
 
 worldinfo_t world;
 payoutinfo_t payout;
@@ -521,7 +521,7 @@ static void Lith_World(void)
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
       world.cbi.perf = 10;
-      if(ACS_GetCVar("lith_sv_nobosses") || ACS_GetCVar("__lith_debug_on"))
+      if(ACS_GetCVar("lith_sv_nobosses") || ACS_GetCVar("__lith_debug_level"))
          for(int i = 1; i < 7; i++)
             Lith_InstallCBIItem(i);
       

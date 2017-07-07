@@ -112,10 +112,10 @@ typedef struct worldinfo_s
    bool pauseinmenus;
 } worldinfo_t;
 
-__addrdef extern __mod_arr Lith_MapVariable;
-__addrdef extern __hub_arr Lith_WorldVariable;
+__addrdef extern __mod_arr lmvar;
+__addrdef extern __hub_arr lwvar;
 
-extern bool Lith_MapVariable mapinit;
+extern bool lmvar mapinit;
 
 extern worldinfo_t world;
 extern payoutinfo_t payout;
