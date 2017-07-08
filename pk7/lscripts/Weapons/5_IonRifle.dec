@@ -211,6 +211,7 @@ actor Lith_IonRifle : Lith_CWeapon
       "####" "#" 1 offset(5, 38)
       "####" "#" 1 offset(2, 35)
       "####" "#" 5 offset(1, 32)
+      "####" "#" 0 A_JumpIfInventory("Lith_IonRifleShotsFired", 0, "Reload")
       goto ReadySelector
    
    AltFire:
