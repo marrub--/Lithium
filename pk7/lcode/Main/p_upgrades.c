@@ -332,6 +332,9 @@ void Lith_PlayerLoseUpgrades(player_t *p)
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
+   if(Lith_ScriptCall("Lith_PauseManager", "GetPaused"))
+      return;
+
    ForUpgrade(upgr)
       if(upgr->active && upgr->info->Update)
          upgr->info->Update(p, upgr);

@@ -22,6 +22,11 @@ class Lith_PauseManager play
          }
       }
    }
+
+   static bool GetPaused()
+   {
+      return Lith_Server.Instance().Paused;
+   }
    
    static void PauseTick(int player)
    {
