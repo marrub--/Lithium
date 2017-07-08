@@ -1,4 +1,21 @@
 #include "lith_monster.h"
+#include <math.h>
+
+
+//----------------------------------------------------------------------------
+// Types
+//
+
+struct dminfo {
+   fixed x, y, z;
+   fixed r, h;
+   int health;
+};
+
+
+//----------------------------------------------------------------------------
+// Static Objects
+//
 
 static __str searchnames[] = {
    "ZombieMan",
@@ -9,79 +26,131 @@ static __str searchnames[] = {
    "Spectre",
    "LostSoul",
    "Fatso",
+   "Mancubus",
    "Arachnotron",
    "Cacodemon",
-   "HellKnight",
+   "Knight",
+   "Baron",
    "Revenant",
    "PainElemental",
    "Archvile",
    "SpiderMastermind",
-   "Cyberdemon"
+   "Cyberdemon",
+   "James",
+   "Makarov",
+   "Isaac"
 };
 
-// This is lazy-allocated. Don't touch.
-[[__no_init]] dmon_t dmonalloc[DMON_MAX];
-int lwvar curid;
 
-[[__call("ScriptS")]]
-dmon_t *DmonPtr(int tid, int ptr)
-{
-   if(tid || ptr)
-      ACS_SetActivator(tid, ptr);
-   ifauto(int, id, ACS_CheckInventory("Lith_MonsterID"))
-      return Dmon(id - 1);
-   else
-      return null;
-}
+//----------------------------------------------------------------------------
+// Static Functions
+//
 
-dmon_t *Dmon(int id)
-{
-   if(dmonalloc[id].active)
-      return &dmonalloc[id];
-   else
-      return null;
-}
-
-dmon_t *AllocDmon(void)
-{
-   dmon_t *m = &dmonalloc[curid];
-   *m = (struct dmon){};
-   
-   m->active = true;
-   m->id = curid;
-   
-   curid++;
-   
-   return m;
-}
-
+//
+// WaitResurrect
+//
 [[__call("SScriptS")]]
 static void WaitResurrect(dmon_t *m)
 {
    while(ACS_GetActorProperty(0, APROP_Health) <= 0)
-      ACS_Delay(1);
+      ACS_Delay(2);
    
    LogDebug(log_dmon, "monster %i resurrected", m->id);
 }
 
+//
+// GetInfo
+//
+static void GetInfo(struct dminfo *mi)
+{
+   mi->x = ACS_GetActorX(0);
+   mi->y = ACS_GetActorY(0);
+   mi->z = ACS_GetActorZ(0);
+   
+   mi->r = ACS_GetActorPropertyFixed(0, APROP_Radius);
+   mi->h = ACS_GetActorPropertyFixed(0, APROP_Height);
+   
+   mi->health = ACS_GetActorProperty(0, APROP_Health);
+}
+
+//
+// ShowBarrier
+//
+static void ShowBarrier(struct dminfo const *mi, fixed alpha)
+{
+   ACS_GiveInventory("Lith_MonsterBarrierLook", 1);
+   
+   for(int i = 0; i < world.a_cur; i++) {
+      struct polar *a = &world.a_angles[i];
+      fixed dst = mi->r / 2 + a->dst / 4;
+      fixed x = mi->x + ACS_Cos(a->ang) * dst;
+      fixed y = mi->y + ACS_Sin(a->ang) * dst;
+      int tid = ACS_UniqueTID();
+      ACS_SpawnForced("Lith_MonsterBarrier", x, y, mi->z + mi->h / 2, tid);
+      ACS_SetActorPropertyFixed(tid, APROP_Alpha, (1 - a->dst / 256) * alpha);
+   }
+}
+
+//
+// BaseMonsterLevel
+//
+static void BaseMonsterLevel(dmon_t *m)
+{
+   fixed rng1 = ACS_RandomFixed(1, 5);
+   fixed rng2 = ACS_RandomFixed(1, 100);
+   fixed bias;
+
+   switch(world.game) {
+   case Game_Episodic: bias = world.mapscleared / 8.0;  break;
+   default:            bias = world.mapscleared / 30.0; break;
+   }
+   
+   bias = bias * ACS_RandomFixed(1, 1.5);
+   m->rank  = minmax(rng1 * bias * 2, 1, 5);
+   m->level = minmax(rng2 * bias * 1, 1, 100);
+}
+
+
+//----------------------------------------------------------------------------
+// Extern Functions
+//
+
+//
+// Lith_MonsterMain
+//
 [[__call("ScriptS")]]
 void Lith_MonsterMain(dmon_t *m)
 {
    ACS_GiveInventory("Lith_MonsterID", m->id + 1);
-   m->level = ACS_Random(0, 100);
+
+   struct dminfo mi;
+   m->mi = &mi;
    
-   LogDebug(log_dmon, "monster %i running on %S", m->id, ACS_GetActorClass(0));
+   BaseMonsterLevel(m);
+
+   LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S", m->id, m->rank, m->level, ACS_GetActorClass(0));
    
    for(;;) {
-      if(ACS_GetActorProperty(0, APROP_Health) <= 0) {
-         LogDebug(log_dmon, "monster %i is dead", m->id);
+      GetInfo(m->mi);
+      
+      if(mi.health <= 0) {
+         LogDebug(log_dmon, "monster %i is ded", m->id);
+         // TODO: give extra score based on rank
          WaitResurrect(m);
+      }
+      
+      if(m->level > 20) {
+         ShowBarrier(m->mi, m->level / 100.0);
+         // TODO: resistances
       }
       
       ACS_Delay(1);
    }
 }
 
+//
+// Lith_MonsterInfo
+//
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_MonsterInfo()
 {
@@ -94,6 +163,9 @@ void Lith_MonsterInfo()
          return;
       }
    }
+   
+   if(ACS_CheckFlag(0, "COUNTKILL"))
+      LogDebug(log_dmon, "invalid monster %S", cname);
    
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
    ACS_GiveInventory("Lith_MonsterInvalid", 1);

@@ -130,12 +130,18 @@ enum
 {
    log_boss = 1,
    log_dlg,
-   log_dmon
+   log_dmon,
+   log_dmonV
 };
 
 // Types
 typedef long fixed fixed64_t;
 typedef uint64_t crc64_t;
+
+struct polar {
+   fixed ang;
+   fixed dst;
+};
 
 // Random
 [[__optional_args(1)]] float RandomFloat(float max, float min);
@@ -164,6 +170,7 @@ int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 [[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
 
 // Math
+float mag2f(float x, float y);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);

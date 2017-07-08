@@ -9,7 +9,7 @@
 // Extern Objects
 //
 
-player_t players[Lith_MAX_PLAYERS];
+[[__no_init]] player_t players[Lith_MAX_PLAYERS];
 
 
 //----------------------------------------------------------------------------

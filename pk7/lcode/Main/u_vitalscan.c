@@ -58,13 +58,15 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
               if(six)     UserData.tagstr = "\Cg6";
          else if(henshin) UserData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
          else if(phantom) UserData.tagstr = StrParam("\Cg%tS", 0);
-         else if(m)       UserData.tagstr = StrParam("\C%c%tS lv.%i", color, 0, m->level);
          else             UserData.tagstr = StrParam("\C%c%tS", color, 0);
          
          UserData.oldhealth = UserData.health;
          UserData.health    = ACS_GetActorProperty(0, APROP_Health);
          UserData.maxhealth = ACS_GetActorProperty(0, APROP_SpawnHealth);
       }
+
+      if(m)
+         UserData.tagstr = StrParam("%S lv.%ir%i", UserData.tagstr, m->level, m->rank);
       
       UserData.freak = six || freaktarget || phantom || boss;
       UserData.angle = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));

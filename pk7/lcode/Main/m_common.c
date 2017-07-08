@@ -9,7 +9,7 @@
 // Static Objects
 //
 
-static crc64_t crctable[256]; // NB: Don't try to hash non-8-bit data.
+[[__no_init]] static crc64_t crctable[256]; // NB: Don't try to hash non-8-bit data.
 
 
 //----------------------------------------------------------------------------
@@ -175,6 +175,14 @@ __str StrUpper(__str in)
 }
 
 //
+// mag2f
+//
+float mag2f(float x, float y)
+{
+   return sqrtf(x * x + y * y);
+}
+
+//
 // lerpk
 //
 fixed lerpk(fixed a, fixed b, fixed t)
@@ -294,7 +302,8 @@ __str LanguageNull(__str fmt, ...)
 [[__call("ScriptS")]]
 int Lith_GetTID(int tid, int ptr)
 {
-   ACS_SetActivator(tid, ptr);
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
    return ACS_ActivatorTID();
 }
 
@@ -304,7 +313,8 @@ int Lith_GetTID(int tid, int ptr)
 [[__call("ScriptS")]]
 int Lith_GetPlayerNumber(int tid, int ptr)
 {
-   ACS_SetActivator(tid, ptr);
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
    return ACS_PlayerNumber();
 }
 
@@ -314,7 +324,10 @@ int Lith_GetPlayerNumber(int tid, int ptr)
 [[__call("ScriptS")]]
 bool Lith_ValidPointer(int tid, int ptr)
 {
-   return ACS_SetActivator(tid, ptr);
+   if(tid || ptr)
+      return ACS_SetActivator(tid, ptr);
+   else
+      return true;
 }
 
 //
@@ -323,7 +336,8 @@ bool Lith_ValidPointer(int tid, int ptr)
 [[__call("ScriptS")]]
 bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags)
 {
-   ACS_SetActivator(tid, ptr);
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
    return ACS_SetPointer(assign, tid2, ptr2, flags);
 }
 
@@ -350,7 +364,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
 //
 __str Lith_ScoreSep(score_t num)
 {
-   static char out[48];
+   char out[48] = {};
    
    if(num)
    {

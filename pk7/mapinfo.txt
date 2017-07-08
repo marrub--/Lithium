@@ -83,6 +83,7 @@ skill extrahard
    ReplaceActor = "Arachnotron",      "Lith_XH_Arachnotron"
    ReplaceActor = "Cacodemon",        "Lith_XH_Cacodemon"
    ReplaceActor = "HellKnight",       "Lith_XH_HellKnight"
+   ReplaceActor = "BaronOfHell",      "Lith_XH_BaronOfHell"
    ReplaceActor = "Revenant",         "Lith_XH_Revenant"
    ReplaceActor = "PainElemental",    "Lith_XH_PainElemental"
    ReplaceActor = "Archvile",         "Lith_XH_Archvile"

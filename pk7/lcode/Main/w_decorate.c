@@ -6,17 +6,32 @@
 
 #include <math.h>
 
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_BeginAngles(int x, int y)
+{
+   world.a_cur = 0;
+   memset(world.a_angles, 0, sizeof(world.a_angles));
+   world.a_x = x;
+   world.a_y = y;
+}
 
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+[[__call("ScriptS"), __extern("ACS")]]
+fixed Lith_AddAngle(int x, int y)
+{
+   if(world.a_cur > countof(world.a_angles))
+      return 0;
+   
+   struct polar *pa = &world.a_angles[world.a_cur++];
+   pa->ang = ACS_VectorAngle(x - world.a_x, y - world.a_y);
+   pa->dst = mag2f(x - world.a_x, y - world.a_y);
+   return pa->ang;
+}
 
 [[__call("ScriptI"), __address(24244), __extern("ACS")]]
 void Lith_RunDialogueInt(int num)
 {
    [[__call("ScriptS"), __extern("ACS")]]
    extern void Lith_RunDialogue(int num);
-   
    Lith_RunDialogue(num);
 }
 

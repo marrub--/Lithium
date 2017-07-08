@@ -28,8 +28,8 @@ __addrdef __hub_arr lwvar;
 bool lmvar mapinit;
 int  lmvar mapid;
 
-worldinfo_t world;
-payoutinfo_t payout;
+[[__no_init]] worldinfo_t world;
+[[__no_init]] payoutinfo_t payout;
 
 
 //----------------------------------------------------------------------------
@@ -462,11 +462,8 @@ static void Lith_World(void)
    
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
    
-   {
-      extern void Lith_GInit_Shop();
-      
-      Lith_GInit_Shop();
-   }
+   extern void Lith_GInit_Shop();
+   Lith_GInit_Shop();
    
    if(!gsinit)
    {

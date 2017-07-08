@@ -7,12 +7,15 @@
 
 #define DMON_MAX 0x7FFF
 
-struct dmon
-{
+struct dmon {
    bool active;
    int id;
    
+   int exp;
    int level;
+   int rank;
+   
+   struct dminfo *mi;
 };
 
 typedef struct dmon lwvar dmon_t;

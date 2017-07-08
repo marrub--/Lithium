@@ -344,6 +344,17 @@ void Lith_PlayerLoseBIPPages(bip_t *bip)
 }
 
 //
+// CheckMatch
+//
+[[__call("ScriptS")]]
+static bool CheckMatch(struct page_info *pinf, __str query)
+{
+   return strcasestr_str(pinf->shname, query) ||
+          strcasestr_str(pinf->flname, query) ||
+          strcasestr_str(pinf->body,   query);
+}
+
+//
 // Lith_CBITab_BIP
 //
 void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
@@ -432,9 +443,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             
             struct page_info pinf = GetPageInfo(page);
             
-            if(strstr_str(pinf.shname, query) ||
-               strstr_str(pinf.flname, query) ||
-               strstr_str(pinf.body,   query))
+            if(CheckMatch(&pinf, query))
                bip->result[bip->resnum++] = page;
          }
          

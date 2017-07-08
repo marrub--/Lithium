@@ -87,5 +87,17 @@ actor Lith_SeriousEmitter
    }
 }
 
+actor Lith_GetAngles : CustomInventory
+{
+   +INVENTORY.ALWAYSPICKUP
+   
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_AddAngle", x, y)
+      stop
+   }
+}
+
 // EOF
 

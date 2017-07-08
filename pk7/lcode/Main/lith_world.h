@@ -111,6 +111,11 @@ typedef struct worldinfo_s
    bool grafZoneEntered;
    bool pauseinmenus;
    
+   // DECORATE data
+   int a_x, a_y;
+   struct polar a_angles[8];
+   int a_cur;
+   
    // Debugging
    int dbgLevel;
    bool dbgItems  : 1;
