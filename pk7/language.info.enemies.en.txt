@@ -1,6 +1,6 @@
 [enu default]
 
-LITH_TXT_INFO_DESCR_RankThreatTest =
+"LITH_TXT_INFO_DESCR_RankThreatTest" =
    "Rank:\n"
    "   \cuNon-resident\n"
    "   \csSubordinate\n"
@@ -17,223 +17,186 @@ LITH_TXT_INFO_DESCR_RankThreatTest =
    "   \crE";
 
 // Non-residents
-LITH_TXT_INFO_SHORT_ZombieMan = "Former Human";
-LITH_TXT_INFO_TITLE_ZombieMan = "Possessed Human Rifleman";
-LITH_TXT_INFO_DESCR_ZombieMan =
+"LITH_TXT_INFO_SHORT_ZombieMan" = "Former Human";
+"LITH_TXT_INFO_TITLE_ZombieMan" = "Possessed Human Rifleman";
+"LITH_TXT_INFO_DESCR_ZombieMan" =
    "Class: \cuNon-resident\n"
-   "Threat: \csD\n\n"
-   "Humans which have been abducted and possessed by Hell's forces. Some seem "
-   "to he artificially created by Hell, while others appear to actually be "
-   "humans that were defeated by its forces.\n\n"
-   "The rifleman is slow and shambling, but still their rifle packs a punch, "
-   "and they're capable of burst-firing somewhat accurate shots.";
-
-LITH_TXT_INFO_SHORT_ShotgunGuy = "Former Sergeant";
-LITH_TXT_INFO_TITLE_ShotgunGuy = "Possessed Human Sergeant";
-LITH_TXT_INFO_DESCR_ShotgunGuy =
+   "Threat: \csD\n"
+   "\n"
+   "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
+   "\n"
+   "The rifleman is slow and shambling, but still their rifle packs a punch, and they're capable of burst-firing somewhat accurate shots.";
+"LITH_TXT_INFO_SHORT_ShotgunGuy" = "Former Sergeant";
+"LITH_TXT_INFO_TITLE_ShotgunGuy" = "Possessed Human Sergeant";
+"LITH_TXT_INFO_DESCR_ShotgunGuy" =
    "Class: \cuNon-resident\n"
-   "Threat: \csD\n\n"
-   "Humans which have been abducted and possessed by Hell's forces. Some seem "
-   "to he artificially created by Hell, while others appear to actually be "
-   "humans that were defeated by its forces.\n\n"
-   "The sergeant is rather quick with his gun, but not very accurate. "
-   "Watch out for them at close-range, you may notice that a face full of "
-   "buckshot hurts.";
-
-LITH_TXT_INFO_SHORT_ChaingunGuy = "Former Corporal";
-LITH_TXT_INFO_TITLE_ChaingunGuy = "Possessed Human Corporal";
-LITH_TXT_INFO_DESCR_ChaingunGuy =
+   "Threat: \csD\n"
+   "\n"
+   "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
+   "\n"
+   "The sergeant is rather quick with his gun, but not very accurate. Watch out for them at close-range, you may notice that a face full of buckshot hurts.";
+"LITH_TXT_INFO_SHORT_ChaingunGuy" = "Former Corporal";
+"LITH_TXT_INFO_TITLE_ChaingunGuy" = "Possessed Human Corporal";
+"LITH_TXT_INFO_DESCR_ChaingunGuy" =
    "Class: \cuNon-resident\n"
-   "Threat: \ciC-\n\n"
-   "Humans which have been abducted and possessed by Hell's forces. Some seem "
-   "to he artificially created by Hell, while others appear to actually be "
-   "humans that were defeated by its forces.\n\n"
-   "Corporal are terrible at aiming, but put out so much lead that you're "
-   "bound to get hit. A lot. ... By the way, why don't these guys drop "
-   "their chainguns?";
+   "Threat: \ciC-\n"
+   "\n"
+   "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
+   "\n"
+   "Corporals are generally terrible at aiming, but put out so much lead that you're bound to get hit. A lot. ... By the way, why don't these guys drop their chainguns?";
 
 // Subordinates
-LITH_TXT_INFO_SHORT_Imp = "Hell Trooper";
-LITH_TXT_INFO_TITLE_Imp = "Hell Trooper \"Imp\"";
-LITH_TXT_INFO_DESCR_Imp =
+"LITH_TXT_INFO_SHORT_Imp" = "Hell Trooper";
+"LITH_TXT_INFO_TITLE_Imp" = "Hell Trooper \"Imp\"";
+"LITH_TXT_INFO_DESCR_Imp" =
    "Class: \csSubordinate\n"
-   "Threat: \csD+\n\n"
-   "Small-time grunts of Hell, they do little more than stall while the "
-   "bigger threats come to play. They throw fire-balls out of their hands, "
-   "which while not very strong, can be deadly in large amounts.\n\n"
+   "Threat: \csD+\n"
+   "\n"
+   "Small-time grunts of Hell, they do little more than stall while the bigger threats come to play. They throw fire-balls out of their hands, which while not very strong, can be deadly in large amounts.\n"
+   "\n"
    "Their claws and spikes hurt like hell, so try not to get too close.";
-
-LITH_TXT_INFO_SHORT_Demon = "Hell Sergeant";
-LITH_TXT_INFO_TITLE_Demon = "Hell Sergeant \"Demon\"";
-LITH_TXT_INFO_DESCR_Demon =
+"LITH_TXT_INFO_SHORT_Demon" = "Hell Sergeant";
+"LITH_TXT_INFO_TITLE_Demon" = "Hell Sergeant \"Demon\"";
+"LITH_TXT_INFO_DESCR_Demon" =
    "Class: \csSubordinate\n"
-   "Threat: \ciC\n\n"
-   "These demons are known for their distinctive pink-colored skin and "
-   "tendency to rush-attack their prey. Deadly at close range, not so much "
-   "past that as they have no projectile attacks.\n\n"
-   "Their bodies are rather strong-built, and can resist several point-blank "
-   "shotgun blasts without dying.";
-
-LITH_TXT_INFO_SHORT_Spectre = "Spectre";
-LITH_TXT_INFO_TITLE_Spectre = "Hell Sergeant \"Spectre\"";
-LITH_TXT_INFO_DESCR_Spectre =
+   "Threat: \ciC\n"
+   "\n"
+   "These demons are known for their distinctive pink-colored skin and tendency to rush-attack their prey. Deadly at close range, not so much past that as they have no projectile attacks.\n"
+   "\n"
+   "Their bodies are rather strong-built, and can resist several point-blank shotgun blasts without dying.";
+"LITH_TXT_INFO_SHORT_Spectre" = "Spectre";
+"LITH_TXT_INFO_TITLE_Spectre" = "Hell Sergeant \"Spectre\"";
+"LITH_TXT_INFO_DESCR_Spectre" =
    "Class: \csSubordinate\n"
-   "Threat: \ciC+\n\n"
-   "Demons which also happen to have cloaking magic active over their "
-   "bodies.\n\n"
-   "They tend to not make a sound until they lunge at you, so be sure to "
-   "keep an eye out for cracks in the air around you.";
+   "Threat: \ciC+\n"
+   "\n"
+   "Demons which also happen to have cloaking magic active over their bodies.\n"
+   "\n"
+   "They tend to not make a sound until they lunge at you, so be sure to keep an eye out for cracks in the air around you.";
 
 // Residents
-LITH_TXT_INFO_SHORT_LostSoul = "Lost Soul";
-LITH_TXT_INFO_TITLE_LostSoul = "$LITH_TXT_INFO_SHORT_LostSoul";
-LITH_TXT_INFO_DESCR_LostSoul =
+"LITH_TXT_INFO_SHORT_LostSoul" = "Lost Soul";
+"LITH_TXT_INFO_TITLE_LostSoul" = "$LITH_TXT_INFO_SHORT_LostSoul";
+"LITH_TXT_INFO_DESCR_LostSoul" =
    "Class: \cjResident\n"
-   "Threat: \csD++\n\n"
-   "Souls which have been trapped by Hell's forces, they are corrupted and "
-   "forced to possess any enemy of Hell.\n\n"
-   "Alone, they aren't very dangerous; all they can really do is lunge "
-   "themselves at you and bite you. In groups, they can be extremely "
-   "annoying, and potentially deadly.\n\n"
-   "They have a tendency to turn semi-invisible and stalk around before "
-   "attacking.";
-
-LITH_TXT_INFO_SHORT_Mancubus = "Mancubus";
-LITH_TXT_INFO_TITLE_Mancubus = "$LITH_TXT_INFO_SHORT_Mancubus";
-LITH_TXT_INFO_DESCR_Mancubus =
+   "Threat: \csD++\n"
+   "\n"
+   "Souls which have been trapped by Hell's forces, they are corrupted and forced to possess any enemy of Hell.\n"
+   "\n"
+   "Alone, they aren't very dangerous; all they can really do is lunge themselves at you and bite you. In groups, they can be extremely annoying, and potentially deadly.\n"
+   "\n"
+   "They have a tendency to turn semi-invisible and stalk around before attacking.";
+"LITH_TXT_INFO_SHORT_Mancubus" = "Mancubus";
+"LITH_TXT_INFO_TITLE_Mancubus" = "$LITH_TXT_INFO_SHORT_Mancubus";
+"LITH_TXT_INFO_DESCR_Mancubus" =
    "Class: \cjResident\n"
-   "Threat: \ckB\n\n"
-   "A gluttonous resident of Hell whose arms are flamethrowers made to kill "
-   "and cook its targets in one fell swoop. Their general strategy is to "
-   "overwhelm you with fire by shooting in many directions.\n\n"
-   "Although they may be quite beefy, they're quite slow and generally "
-   "their attacks are as well. Dispatch them quickly and you should be fine.";
-
-LITH_TXT_INFO_SHORT_Arachnotron = "Arachnotron";
-LITH_TXT_INFO_TITLE_Arachnotron = "$LITH_TXT_INFO_SHORT_Arachnotron";
-LITH_TXT_INFO_DESCR_Arachnotron =
+   "Threat: \ckB\n"
+   "\n"
+   "A gluttonous resident of Hell whose arms are flamethrowers made to kill and cook its targets in one fell swoop. Their general strategy is to overwhelm you with fire by shooting in many directions.\n"
+   "\n"
+   "Although they may be quite beefy, they're quite slow and generally their attacks are as well. Dispatch them quickly and you should be fine.";
+"LITH_TXT_INFO_SHORT_Arachnotron" = "Arachnotron";
+"LITH_TXT_INFO_TITLE_Arachnotron" = "$LITH_TXT_INFO_SHORT_Arachnotron";
+"LITH_TXT_INFO_DESCR_Arachnotron" =
    "Class: \cjResident\n"
-   "Threat: \ckB\n\n"
-   "Children of a great Spider Demon, they're equipped with plasma guns and "
-   "cybernetic legs.\n\n"
-   "Their attack is straightforward; fire plasma at you until you die. "
-   "While their attack is quite strong, they're very weak and greatly prone "
-   "to bullet and shrapnel damage.";
-
-LITH_TXT_INFO_SHORT_Cacodemon = "Cacodemon";
-LITH_TXT_INFO_TITLE_Cacodemon = "$LITH_TXT_INFO_SHORT_Cacodemon";
-LITH_TXT_INFO_DESCR_Cacodemon =
+   "Threat: \ckB\n"
+   "\n"
+   "Children of a great Spider Demon, they're equipped with plasma guns and cybernetic legs.\n"
+   "\n"
+   "Their attack is straightforward; fire plasma at you until you die, and then some. While their attack is quite strong, they're very weak and greatly prone to bullet and shrapnel damage.";
+"LITH_TXT_INFO_SHORT_Cacodemon" = "Cacodemon";
+"LITH_TXT_INFO_TITLE_Cacodemon" = "$LITH_TXT_INFO_SHORT_Cacodemon";
+"LITH_TXT_INFO_DESCR_Cacodemon" =
    "Class: \cjResident\n"
-   "Threat: \ckB-\n\n"
-   "A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an "
-   "unknown reason. They're quite hearty, and their attacks are fairly "
-   "deadly, but generally the Cacodemon is not a monster to fear.";
+   "Threat: \ckB-\n"
+   "\n"
+   "A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an unknown reason. They're quite hearty, and their attacks are fairly deadly, but generally the Cacodemon is not a monster to fear.";
 
 // Nobles
-LITH_TXT_INFO_SHORT_HellKnight = "Hell Knight";
-LITH_TXT_INFO_TITLE_HellKnight = "$LITH_TXT_INFO_SHORT_HellKnight";
-LITH_TXT_INFO_DESCR_HellKnight =
+"LITH_TXT_INFO_SHORT_HellKnight" = "Hell Knight";
+"LITH_TXT_INFO_TITLE_HellKnight" = "$LITH_TXT_INFO_SHORT_HellKnight";
+"LITH_TXT_INFO_DESCR_HellKnight" =
    "Class: \cfNoble\n"
-   "Threat: \ckB\n\n"
-   "The weakest of Hell's nobles, they serve the military as grunts to head "
-   "assaults on weak targets and seek-and-destroy missions.\n\n"
-   "They throw long, thin magic attacks that corrode skin and bone. With "
-   "skin only just more durable than iron, these demons are deadly in groups.";
-
-LITH_TXT_INFO_SHORT_BaronOfHell = "Hell Baron";
-LITH_TXT_INFO_TITLE_BaronOfHell = "$LITH_TXT_INFO_SHORT_BaronOfHell";
-LITH_TXT_INFO_DESCR_BaronOfHell =
+   "Threat: \ckB\n"
+   "\n"
+   "The weakest of Hell's nobles, they serve the military as grunts to head assaults on weak targets and seek-and-destroy missions.\n"
+   "\n"
+   "They throw long, thin magic attacks that corrode skin and bone. With skin only just more durable than iron, these demons are deadly in groups.";
+"LITH_TXT_INFO_SHORT_BaronOfHell" = "Hell Baron";
+"LITH_TXT_INFO_TITLE_BaronOfHell" = "$LITH_TXT_INFO_SHORT_BaronOfHell";
+"LITH_TXT_INFO_DESCR_BaronOfHell" =
    "Class: \cfNoble\n"
-   "Threat: \ckB++\n\n"
-   "Stronger Hell nobles with red skin, horns and hooves. Similar in "
-   "appearance to Knights, but despite this, they differ in attack and "
-   "strategy.\n\n"
-   "Barons prefer to lead missions, plan overall tactics of an attack, and "
-   "destroy their foes in glory. They attack in 45 degree angles, throwing "
-   "strong magic energy everywhere.";
-
-LITH_TXT_INFO_SHORT_Revenant = "Revenant";
-LITH_TXT_INFO_TITLE_Revenant = "$LITH_TXT_INFO_SHORT_Revenant";
-LITH_TXT_INFO_DESCR_Revenant =
+   "Threat: \ckB++\n"
+   "\n"
+   "Stronger Hell nobles with red skin, horns and hooves. Similar in appearance to Knights, but despite this, they differ in attack and strategy.\n"
+   "\n"
+   "Barons prefer to lead missions, plan overall tactics of an attack, and destroy their foes in glory. They attack in 45 degree angles, throwing strong magic energy everywhere.";
+"LITH_TXT_INFO_SHORT_Revenant" = "Revenant";
+"LITH_TXT_INFO_TITLE_Revenant" = "$LITH_TXT_INFO_SHORT_Revenant";
+"LITH_TXT_INFO_DESCR_Revenant" =
    "Class: \cfNoble\n"
-   "Threat: \ckB+\n\n"
-   "Dead souls whom have been revived into a skeletal frame, with combat "
-   "armor and missile launchers. Their missiles have homing capabilities, and "
-   "are *very* painful to boot.\n\n"
+   "Threat: \ckB+\n"
+   "\n"
+   "Dead souls whom have been revived into a skeletal frame, with combat armor and missile launchers. Their missiles have homing capabilities, and are *very* painful to boot.\n"
+   "\n"
    "The Revenant is revered among demons for its honor serving after death.";
 
 // Tyrants
-LITH_TXT_INFO_SHORT_PainElemental = "Pain Elemental";
-LITH_TXT_INFO_TITLE_PainElemental = "Sin of Bellona, \"Pain Elemental\"";
-LITH_TXT_INFO_DESCR_PainElemental =
+"LITH_TXT_INFO_SHORT_PainElemental" = "Pain Elemental";
+"LITH_TXT_INFO_TITLE_PainElemental" = "Sin of Bellona, \"Pain Elemental\"";
+"LITH_TXT_INFO_DESCR_PainElemental" =
    "Class: \cgTyrant\n"
-   "Threat: \cgA\n\n"
-   "An evil, mean-spirited demon that thrives purely off of the pain and "
-   "suffering of its enemies; it summons lost souls to battle for it, as it "
-   "itself is too weak to fight.\n\n"
-   "This enemy is both annoying and hazardous at the same time, especially if "
-   "left unchecked for an elongated period of time. Prioritize their "
-   "destruction.";
-
-LITH_TXT_INFO_SHORT_Archvile = "Archvile";
-LITH_TXT_INFO_TITLE_Archvile = "Sin of Janus, \"Arch-vile\"";
-LITH_TXT_INFO_DESCR_Archvile =
+   "Threat: \cgA\n"
+   "\n"
+   "An evil, mean-spirited demon that thrives purely off of the pain and suffering of its enemies; it summons lost souls to battle for it, as it itself is too weak to fight.\n"
+   "\n"
+   "This enemy is both annoying and hazardous at the same time, especially if left unchecked for an elongated period of time. Prioritize their destruction.";
+"LITH_TXT_INFO_SHORT_Archvile" = "Archvile";
+"LITH_TXT_INFO_TITLE_Archvile" = "Sin of Janus, \"Arch-vile\"";
+"LITH_TXT_INFO_DESCR_Archvile" =
    "Class: \cgTyrant\n"
-   "Threat: \cgA\n\n"
-   "Brutal and viscous, caster of evil magic and healer of the sinful.\n\n"
-   "The Arch-vile is a malicious, extremely dangerous being capable of "
-   "destroying anything at any range with its powerful fire magic, and "
-   "resurrecting dead enemies it comes by.";
-
-LITH_TXT_INFO_SHORT_SpiderMastermind = "Spider Demon";
-LITH_TXT_INFO_TITLE_SpiderMastermind = "Sin of Venus, \"Spider Mastermind\"";
-LITH_TXT_INFO_DESCR_SpiderMastermind =
+   "Threat: \cgA\n"
+   "\n"
+   "Brutal and viscous, caster of evil magic and healer of the sinful.\n"
+   "\n"
+   "The Arch-vile is a malicious, extremely dangerous being capable of destroying anything at any range with its powerful fire magic, and resurrecting dead enemies it comes by.";
+"LITH_TXT_INFO_SHORT_SpiderMastermind" = "Spider Demon";
+"LITH_TXT_INFO_TITLE_SpiderMastermind" = "Sin of Venus, \"Spider Mastermind\"";
+"LITH_TXT_INFO_DESCR_SpiderMastermind" =
    "Class: \cgTyrant\n"
-   "Threat: \cgA++\n\n"
-   "The Spider Mastermind is a gigantic cybernetic arachnid with a chaingun. "
-   "That alone should tell you how dangerous this species is, but to make "
-   "matters worse, they also have loads of offspring. Cybernetic "
-   "arachnid offspring.\n\n"
-   "The Spider Mastermind also appears to be responsible for planning distant "
-   "wars, manipulating the chain of command in Hell to their will.";
-
-LITH_TXT_INFO_SHORT_Cyberdemon = "Cyber-Demon";
-LITH_TXT_INFO_TITLE_Cyberdemon = "Sin of Mars, \"Cyber-Demon\"";
-LITH_TXT_INFO_DESCR_Cyberdemon =
+   "Threat: \cgA++\n"
+   "\n"
+   "The Spider Mastermind is a gigantic cybernetic arachnid with a chaingun. That alone should tell you how dangerous this species is, but to make matters worse, they also have loads of offspring. Cybernetic arachnid offspring.\n"
+   "\n"
+   "The Spider Mastermind also appears to be responsible for planning distant wars of Hell, manipulating the chain of command to their will.";
+"LITH_TXT_INFO_SHORT_Cyberdemon" = "Cyber-Demon";
+"LITH_TXT_INFO_TITLE_Cyberdemon" = "Sin of Mars, \"Cyber-Demon\"";
+"LITH_TXT_INFO_DESCR_Cyberdemon" =
    "Class: \cgTyrant\n"
-   "Threat: \cgA++\n\n"
-   "An extremely deadly species forged of metal and flesh intertwined, the "
-   "Cyber-Demon is purpose-built to destroy absolutely anything in its "
-   "path.\n\n"
-   "Equipped with a self-cooling rocket propelled grenade launcher on their "
-   "left arm, a cybernetic hoof, and height twice that of a normal man. "
-   "The Cyber-Demon is an extremely cruel, warmongering beast that will "
-   "destroy any target without prejudice for the glory of Hell.";
+   "Threat: \cgA++\n"
+   "\n"
+   "An extremely deadly species forged of metal and flesh intertwined, the Cyber-Demon is purpose-built to destroy absolutely anything in its path.\n"
+   "\n"
+   "Equipped with a self-cooling rocket propelled grenade launcher on their left arm, a cybernetic hoof, and height twice that of a normal man. The Cyber-Demon is an extremely cruel, warmongering beast that will destroy any target without prejudice for the glory of Hell.";
 
-LITH_TXT_INFO_SHORT_Phantom = "Phantom";
-LITH_TXT_INFO_TITLE_Phantom = "$LITH_TXT_INFO_SHORT_Phantom";
-LITH_TXT_INFO_DESCR_Phantom =
+// terror
+"LITH_TXT_INFO_SHORT_Phantom" = "Phantom";
+"LITH_TXT_INFO_TITLE_Phantom" = "$LITH_TXT_INFO_SHORT_Phantom";
+"LITH_TXT_INFO_DESCR_Phantom" =
    "Class: \cm???\n"
-   "Threat: \crE\n\n"
-   "A threat yet unexplained, the phantom seeks to destroy all and will "
-   "leave no one alive -- not even demons. They are a dark, silhouette-like "
-   "being that takes on various forms and does nothing but destroy.\n\n"
-   "Extreme caution is advised against these enemies, if you can run from "
-   "them they will only continue to chase you down.";
+   "Threat: \crE\n"
+   "\n"
+   "A threat yet unexplained, the phantom seeks to destroy all and will leave no one alive -- not even demons. They are a dark, silhouette-like being that takes on various forms and does nothing but destroy.\n"
+   "\n"
+   "Extreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.";
 
 // Overlord
-LITH_TXT_INFO_SHORT_IconOfSin = "Icon of Sin";
-LITH_TXT_INFO_TITLE_IconOfSin = "Overlord of Hell, Icon of Sin";
-LITH_TXT_INFO_DESCR_IconOfSin =
+"LITH_TXT_INFO_SHORT_IconOfSin" = "Icon of Sin";
+"LITH_TXT_INFO_TITLE_IconOfSin" = "Overlord of Hell, Icon of Sin";
+"LITH_TXT_INFO_DESCR_IconOfSin" =
    "Class: \crOverlord\n"
-   "Threat: \crE\n\n"
-   "The catalyst of destruction, whom spawned all of Hell's monstrosities and "
-   "dictates over all; the Icon of Sin, said by some to be Satan himself, "
-   "feeds purely off of hatred and chaos and will stop at nothing to attain "
-   "everything in the world.\n\n"
-   "Currently, he lay sleeping ill under repair, as his head was torn in "
-   "twain by a force unknown. The ultimate goal of your mission is to find "
-   "him, and destroy him before Hell takes over our realm.";
-
-// EOF
-
+   "Threat: \crE\n"
+   "\n"
+   "The catalyst of destruction, whom spawned all of Hell's monstrosities and dictates over all; the Icon of Sin, said by some to be Satan himself, feeds purely off of hatred and chaos and will stop at nothing to attain everything in the world.\n"
+   "\n"
+   "Currently, he lay sleeping ill under repair, as his head was torn in twain by a force unknown. The ultimate goal of your mission is to find him, and destroy him before Hell takes over our realm.";

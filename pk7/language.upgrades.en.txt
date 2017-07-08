@@ -1,244 +1,175 @@
 [enu default]
 
-LITH_COST      = "Cost";
-LITH_CATEGORY  = "Category";
-LITH_SCOREMULT = "Score Multiplier";
+"LITH_COST" = "Cost";
+"LITH_CATEGORY" = "Category";
+"LITH_SCOREMULT" = "Score Multiplier";
 
-//
 // Body
-//
-LITH_TXT_UPGRADE_TITLE_HeadsUpDisp = "Heads Up Disp.";
-LITH_TXT_UPGRADE_EFFEC_HeadsUpDisp =
+"LITH_TXT_UPGRADE_TITLE_HeadsUpDisp" = "Heads Up Disp.";
+"LITH_TXT_UPGRADE_EFFEC_HeadsUpDisp" =
    "Shows vital information.";
-LITH_TXT_UPGRADE_DESCR_HeadsUpDisp =
+"LITH_TXT_UPGRADE_DESCR_HeadsUpDisp" =
    "A Heads Up Display program built into your Computer/Brain Interface.";
-
-LITH_TXT_UPGRADE_TITLE_HeadsUpDis2 = "Heads Up Disp.";
-LITH_TXT_UPGRADE_EFFEC_HeadsUpDis2 =
+"LITH_TXT_UPGRADE_TITLE_HeadsUpDis2" = "Heads Up Disp.";
+"LITH_TXT_UPGRADE_EFFEC_HeadsUpDis2" =
    "Shows vital information.";
-LITH_TXT_UPGRADE_DESCR_HeadsUpDis2 =
+"LITH_TXT_UPGRADE_DESCR_HeadsUpDis2" =
    "A Heads Up Display program.";
-
-LITH_TXT_UPGRADE_TITLE_JetBooster = "Jet Booster";
-LITH_TXT_UPGRADE_EFFEC_JetBooster =
+"LITH_TXT_UPGRADE_TITLE_JetBooster" = "Jet Booster";
+"LITH_TXT_UPGRADE_EFFEC_JetBooster" =
    "Lets you press the \"run\" key while in the air to fly for a short time.";
-LITH_TXT_UPGRADE_DESCR_JetBooster =
+"LITH_TXT_UPGRADE_DESCR_JetBooster" =
    "Jet boosters built into your boots.";
-
-LITH_TXT_UPGRADE_TITLE_ReflexWetw = "Reflex Wetware";
-LITH_TXT_UPGRADE_EFFEC_ReflexWetw =
+"LITH_TXT_UPGRADE_TITLE_ReflexWetw" = "Reflex Wetware";
+"LITH_TXT_UPGRADE_EFFEC_ReflexWetw" =
    "Lets you move quicker, easier and more efficiently.\n"
-   "Allows you to double jump by pressing jump mid-air and slide by pressing "
-   "run.";
-LITH_TXT_UPGRADE_DESCR_ReflexWetw =
+   "Allows you to double jump by pressing jump mid-air and slide by pressing run.";
+"LITH_TXT_UPGRADE_DESCR_ReflexWetw" =
    "Cybernetic wetware that improves your reflexes and implicit agility.";
-
-LITH_TXT_UPGRADE_TITLE_Zoom = "Zoom Wetware";
-LITH_TXT_UPGRADE_EFFEC_Zoom =
+"LITH_TXT_UPGRADE_TITLE_Zoom" = "Zoom Wetware";
+"LITH_TXT_UPGRADE_EFFEC_Zoom" =
    "Allows you to press the zoom keys to zoom in and out.";
-LITH_TXT_UPGRADE_DESCR_Zoom =
+"LITH_TXT_UPGRADE_DESCR_Zoom" =
    "Drivers for zooming software, which utilizes your eye implants.";
-
-LITH_TXT_UPGRADE_TITLE_CyberLegs = "Move Wetware";
-LITH_TXT_UPGRADE_EFFEC_CyberLegs =
+"LITH_TXT_UPGRADE_TITLE_CyberLegs" = "Move Wetware";
+"LITH_TXT_UPGRADE_EFFEC_CyberLegs" =
    "Allows you to jump higher and move faster.\n"
    "Damages enemies landed on.";
-LITH_TXT_UPGRADE_DESCR_CyberLegs =
+"LITH_TXT_UPGRADE_DESCR_CyberLegs" =
    "Improved reflex wetware, which gives an even larger combat advantage.";
-
-LITH_TXT_UPGRADE_TITLE_ReactArmor = "R. Armor";
-LITH_TXT_UPGRADE_EFFEC_ReactArmor =
-   "Makes your armor react to being hit, switching its mode to the type of "
-   "damage you took, mitigating any further damage of that type.";
-LITH_TXT_UPGRADE_DESCR_ReactArmor =
-   "Integrate your armor with a highly advanced Yh-0 reactive plating "
-   "system, made by avians on Durla Prime.";
-
-LITH_TXT_UPGRADE_TITLE_ReactArmor2 = "R. Armor 2";
-LITH_TXT_UPGRADE_EFFEC_ReactArmor2 =
+"LITH_TXT_UPGRADE_TITLE_ReactArmor" = "R. Armor";
+"LITH_TXT_UPGRADE_EFFEC_ReactArmor" =
+   "Makes your armor react to being hit, switching its mode to the type of damage you took, mitigating any further damage of that type.";
+"LITH_TXT_UPGRADE_DESCR_ReactArmor" =
+   "Integrate your armor with a highly advanced Yh-0 reactive plating system, made by avians on Durla Prime.";
+"LITH_TXT_UPGRADE_TITLE_ReactArmor2" = "R. Armor 2";
+"LITH_TXT_UPGRADE_EFFEC_ReactArmor2" =
    "Improves the damage resistance of the Reactive Armor.";
-LITH_TXT_UPGRADE_DESCR_ReactArmor2 =
+"LITH_TXT_UPGRADE_DESCR_ReactArmor2" =
    "Upgrades the Yh0 plating system, reducing damage taken twice over.";
+"LITH_TXT_UPGRADE_TITLE_DefenseNuke" = "Def. Mini Nuke";
+"LITH_TXT_UPGRADE_EFFEC_DefenseNuke" =
+   "When you enter a level, sets off a huge explosion, defending you from initial threats. \cgThis alerts monsters when you enter a map.";
+"LITH_TXT_UPGRADE_DESCR_DefenseNuke" =
+   "Implant a slow-charging self-defense explosive into your armor, keeping threats away while you're distracted.";
+"LITH_TXT_UPGRADE_TITLE_Adrenaline" = "Adrenaline Inj.";
+"LITH_TXT_UPGRADE_EFFEC_Adrenaline" =
+   "When being targeted by enemies or nearing a projectile, time will stop for one second. Needs to be charged for 30 seconds to activate.";
+"LITH_TXT_UPGRADE_DESCR_Adrenaline" =
+   "Implants an adrenaline injector into your skin, which reacts to sudden impulses and sound cues.";
+"LITH_TXT_UPGRADE_TITLE_VitalScan" = "Vital Scanner";
+"LITH_TXT_UPGRADE_EFFEC_VitalScan" =
+   "While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD. Customizable via settings menu.";
+"LITH_TXT_UPGRADE_DESCR_VitalScan" =
+   "A set of nanobots are deployed to get vitality information on targets you aim at.";
 
-LITH_TXT_UPGRADE_TITLE_DefenseNuke = "Def. Mini Nuke";
-LITH_TXT_UPGRADE_EFFEC_DefenseNuke =
-   "When you enter a level, sets off a huge explosion, defending you from "
-   "initial threats. \cgThis alerts monsters when you enter a map.";
-LITH_TXT_UPGRADE_DESCR_DefenseNuke =
-   "Implant a slow-charging self-defense explosive into your armor, keeping "
-   "threats away while you're distracted.";
-
-LITH_TXT_UPGRADE_TITLE_Adrenaline = "Adrenaline Inj.";
-LITH_TXT_UPGRADE_EFFEC_Adrenaline =
-   "When being targeted by enemies or nearing a projectile, time will stop "
-   "for one second. Needs to be charged for 30 seconds to activate.";
-LITH_TXT_UPGRADE_DESCR_Adrenaline =
-   "Implants an adrenaline injector into your skin, which reacts to sudden "
-   "impulses and sound cues.";
-
-LITH_TXT_UPGRADE_TITLE_VitalScan = "Vital Scanner";
-LITH_TXT_UPGRADE_EFFEC_VitalScan =
-   "While aiming at living things, you can see their health and how much "
-   "damage is being dealt to them on your HUD. Customizable via settings "
-   "menu.";
-LITH_TXT_UPGRADE_DESCR_VitalScan =
-   "A set of nanobots are deployed to get vitality information on targets "
-   "you aim at.";
-
-//
 // Weapons
-//
-LITH_TXT_UPGRADE_TITLE_AutoReload = "Auto Reload";
-LITH_TXT_UPGRADE_EFFEC_AutoReload =
+"LITH_TXT_UPGRADE_TITLE_AutoReload" = "Auto Reload";
+"LITH_TXT_UPGRADE_EFFEC_AutoReload" =
    "Weapons in your inventory automatically reload after 5 seconds.";
-LITH_TXT_UPGRADE_DESCR_AutoReload =
+"LITH_TXT_UPGRADE_DESCR_AutoReload" =
    "Automated reloading system for your backpack.";
-
-LITH_TXT_UPGRADE_TITLE_AutoPistol = "Auto Pistol";
-LITH_TXT_UPGRADE_EFFEC_AutoPistol =
+"LITH_TXT_UPGRADE_TITLE_AutoPistol" = "Auto Pistol";
+"LITH_TXT_UPGRADE_EFFEC_AutoPistol" =
    "Makes your pistol fire in full auto.";
-LITH_TXT_UPGRADE_DESCR_AutoPistol =
-   "Simply changes the trigger mechanism a bit to make the pistol fire "
-   "automatically.";
-
-LITH_TXT_UPGRADE_TITLE_PlasPistol = "Plasma Pistol";
-LITH_TXT_UPGRADE_EFFEC_PlasPistol =
+"LITH_TXT_UPGRADE_DESCR_AutoPistol" =
+   "Simply changes the trigger mechanism a bit to make the pistol fire automatically.";
+"LITH_TXT_UPGRADE_TITLE_PlasPistol" = "Plasma Pistol";
+"LITH_TXT_UPGRADE_EFFEC_PlasPistol" =
    "Makes your pistol fire strong plasma.";
-LITH_TXT_UPGRADE_DESCR_PlasPistol =
+"LITH_TXT_UPGRADE_DESCR_PlasPistol" =
    "Changes the internal mechanisms of the gun to fire charged plasma.";
-
-LITH_TXT_UPGRADE_TITLE_PoisonShot = "Poison Shot";
-LITH_TXT_UPGRADE_EFFEC_PoisonShot =
-   "Makes your shotgun fire poison pellets that do 10 damage every "
-   "half-second after hitting a target.";
-LITH_TXT_UPGRADE_DESCR_PoisonShot =
+"LITH_TXT_UPGRADE_TITLE_PoisonShot" = "Poison Shot";
+"LITH_TXT_UPGRADE_EFFEC_PoisonShot" =
+   "Makes your shotgun fire poison pellets that do 10 damage every half-second after hitting a target.";
+"LITH_TXT_UPGRADE_DESCR_PoisonShot" =
    "Installs a poison injector into the shell loading mechanism.";
-
-LITH_TXT_UPGRADE_TITLE_GaussShotty = "Gauss Rifle";
-LITH_TXT_UPGRADE_EFFEC_GaussShotty =
+"LITH_TXT_UPGRADE_TITLE_GaussShotty" = "Gauss Rifle";
+"LITH_TXT_UPGRADE_EFFEC_GaussShotty" =
    "Turns your shotgun into a gauss rifle.";
-LITH_TXT_UPGRADE_DESCR_GaussShotty =
-   "Re-build the internal mechanisms to turn the railgun part of your "
-   "shotgun into a new one, removing the shell loader entirely.";
-
-LITH_TXT_UPGRADE_TITLE_RifleModes = "Modal Rifle";
-LITH_TXT_UPGRADE_EFFEC_RifleModes =
+"LITH_TXT_UPGRADE_DESCR_GaussShotty" =
+   "Re-build the internal mechanisms to turn the railgun part of your shotgun into a new one, removing the shell loader entirely.";
+"LITH_TXT_UPGRADE_TITLE_RifleModes" = "Modal Rifle";
+"LITH_TXT_UPGRADE_EFFEC_RifleModes" =
    "Gives your rifle a sniper firing mode.";
-LITH_TXT_UPGRADE_DESCR_RifleModes =
-   "A complete replacement for the trigger mechanism which adds a third mode, "
-   "allowing you to burst-fire accurate, painful shots.";
-
-LITH_TXT_UPGRADE_TITLE_LaserRCW = "Laser Rifle";
-LITH_TXT_UPGRADE_EFFEC_LaserRCW =
+"LITH_TXT_UPGRADE_DESCR_RifleModes" =
+   "A complete replacement for the trigger mechanism which adds a third mode, allowing you to burst-fire accurate, painful shots.";
+"LITH_TXT_UPGRADE_TITLE_LaserRCW" = "Laser Rifle";
+"LITH_TXT_UPGRADE_EFFEC_LaserRCW" =
    "Makes your rifle fire penetrating lasers.\n"
    "Modal Rifle may be used with this upgrade.";
-LITH_TXT_UPGRADE_DESCR_LaserRCW =
+"LITH_TXT_UPGRADE_DESCR_LaserRCW" =
    "Uses a standard photon accelerator to fire lasers out of your rifle.";
-
-LITH_TXT_UPGRADE_TITLE_HomingRPG = "Homing Rocket";
-LITH_TXT_UPGRADE_EFFEC_HomingRPG =
-   "Pressing alt-fire with the rocket launcher selects a target to be traced "
-   "by any rockets you fire afterwards.";
-LITH_TXT_UPGRADE_DESCR_HomingRPG =
-   "Disperses extra nanomachines out of the rifle that push the rocket toward "
-   "the enemy with extreme accuracy.";
-
-LITH_TXT_UPGRADE_TITLE_ChargeRPG = "C. Launcher";
-LITH_TXT_UPGRADE_EFFEC_ChargeRPG =
+"LITH_TXT_UPGRADE_TITLE_HomingRPG" = "Homing Rocket";
+"LITH_TXT_UPGRADE_EFFEC_HomingRPG" =
+   "Pressing alt-fire with the rocket launcher selects a target to be traced by any rockets you fire afterwards.";
+"LITH_TXT_UPGRADE_DESCR_HomingRPG" =
+   "Disperses extra nanomachines out of the rifle that push the rocket toward the enemy with extreme accuracy.";
+"LITH_TXT_UPGRADE_TITLE_ChargeRPG" = "C. Launcher";
+"LITH_TXT_UPGRADE_EFFEC_ChargeRPG" =
    "Lets you hold \"fire\" to queue extra grenades in your grenade launcher.\n"
    "Can fire rockets in a line, spiral, or grenade dump.";
-LITH_TXT_UPGRADE_DESCR_ChargeRPG =
-   "Allows your grenade launcher to hold multiple rockets and fire them all "
-   "at once.\n\n"
-   "Hold fire to load more grenades, and then hold alt-fire to change the "
-   "firing mode.";
-
-LITH_TXT_UPGRADE_TITLE_PlasLaser = "Plasmatic Las.";
-LITH_TXT_UPGRADE_EFFEC_PlasLaser =
+"LITH_TXT_UPGRADE_DESCR_ChargeRPG" =
+   "Allows your grenade launcher to hold multiple rockets and fire them all at once.\n"
+   "\n"
+   "Hold fire to load more grenades, and then hold alt-fire to change the firing mode.";
+"LITH_TXT_UPGRADE_TITLE_PlasLaser" = "Plasmatic Las.";
+"LITH_TXT_UPGRADE_EFFEC_PlasLaser" =
    "Makes your plasma rifle emit red-hot laser beams.";
-LITH_TXT_UPGRADE_DESCR_PlasLaser =
-   "Switches out the ion emitter with an ion condenser, that can fire out "
-   "laser beams strong enough to cut clean through Adamantium.";
-
-LITH_TXT_UPGRADE_TITLE_PartBeam = "Particle Beam";
-LITH_TXT_UPGRADE_EFFEC_PartBeam =
+"LITH_TXT_UPGRADE_DESCR_PlasLaser" =
+   "Switches out the ion emitter with an ion condenser, that can fire out laser beams strong enough to cut clean through Adamantium.";
+"LITH_TXT_UPGRADE_TITLE_PartBeam" = "Particle Beam";
+"LITH_TXT_UPGRADE_EFFEC_PartBeam" =
    "Makes your plasma rifle fire a deadly long-range particle beam.";
-LITH_TXT_UPGRADE_DESCR_PartBeam =
-   "Replaces the weapon's ion emitter with an ion accelerator, that fires "
-   "bursts of ions that are then super-charged.";
-
-LITH_TXT_UPGRADE_TITLE_PunctCannon = "Punct. Cannon";
-LITH_TXT_UPGRADE_EFFEC_PunctCannon =
-   "Your cannon now shoots explosive bolts that send huge shocks through "
-   "walls.";
-LITH_TXT_UPGRADE_DESCR_PunctCannon =
-   "By adding new magic translation buffers to your weapon, it can create "
-   "extreme-yield explosive bolts from the same charge as the cannon type "
-   "does.";
-
-LITH_TXT_UPGRADE_TITLE_OmegaRail = "Omega Railgun";
-LITH_TXT_UPGRADE_EFFEC_OmegaRail =
+"LITH_TXT_UPGRADE_DESCR_PartBeam" =
+   "Replaces the weapon's ion emitter with an ion accelerator, that fires bursts of ions that are then super-charged.";
+"LITH_TXT_UPGRADE_TITLE_PunctCannon" = "Punct. Cannon";
+"LITH_TXT_UPGRADE_EFFEC_PunctCannon" =
+   "Your cannon now shoots explosive bolts that send huge shocks through walls.";
+"LITH_TXT_UPGRADE_DESCR_PunctCannon" =
+   "By adding new magic translation buffers to your weapon, it can create extreme-yield explosive bolts from the same charge as the cannon type does.";
+"LITH_TXT_UPGRADE_TITLE_OmegaRail" = "Omega Railgun";
+"LITH_TXT_UPGRADE_EFFEC_OmegaRail" =
    "Your cannon fires highly deadly, pinpoint accurate plasmatic death.";
-LITH_TXT_UPGRADE_DESCR_OmegaRail =
-   "Implements a plasma charger in your cannon, made with reverse-engineered "
-   "magical compounds.";
+"LITH_TXT_UPGRADE_DESCR_OmegaRail" =
+   "Implements a plasma charger in your cannon, made with reverse-engineered magical compounds.";
+"LITH_TXT_UPGRADE_TITLE_DarkCannon" = "????????";
+"LITH_TXT_UPGRADE_EFFEC_DarkCannon" =
+   "\cd<fatal error while displaying information>";
+"LITH_TXT_UPGRADE_DESCR_DarkCannon" =
+   "What the !@#$% is this!?";
 
-LITH_TXT_UPGRADE_TITLE_DarkCannon = "????????";
-LITH_TXT_UPGRADE_EFFEC_DarkCannon = "\n\cd<fatal error while displaying information>";
-LITH_TXT_UPGRADE_DESCR_DarkCannon = "What the !@#$% is this!?";
-
-//
 // Extras
-//
-LITH_TXT_UPGRADE_TITLE_TorgueMode = "EXPLOOSIONS";
-LITH_TXT_UPGRADE_EFFEC_TorgueMode =
+"LITH_TXT_UPGRADE_TITLE_TorgueMode" = "EXPLOOSIONS";
+"LITH_TXT_UPGRADE_EFFEC_TorgueMode" =
    "WHAT THE F*CK DO YOU THINK!?";
-LITH_TXT_UPGRADE_DESCR_TorgueMode =
-   "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT "
-   "ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE "
-   "EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND "
-   "WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK "
-   "GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY "
-   "BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE BACK WITH "
-   "A GUITAR MADE OF BANDAGES LATER";
+"LITH_TXT_UPGRADE_DESCR_TorgueMode" =
+   "ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER";
+"LITH_TXT_UPGRADE_TITLE_7777777" = "7777777 Mode";
+"LITH_TXT_UPGRADE_EFFEC_7777777" =
+   "Instates cosmic horror and spurious time travel into your very being, causing you to instantly implode upon activation.";
+"LITH_TXT_UPGRADE_DESCR_7777777" =
+   "\cd~text interface terminal malfunction error ~2992dud\n"
+   "\n"
+   "\cdhelo i am of durnadle winner of ai beauty contets i will give u anti-physics powers becaus i did some calculations and found the universe is stupid so i am doing my best to flip off reality for a thousand years";
+"LITH_TXT_UPGRADE_TITLE_lolsords" = "Steele Mode";
+"LITH_TXT_UPGRADE_EFFEC_lolsords" =
+   "You get a sword. It is literally your only weapon.";
+"LITH_TXT_UPGRADE_TITLE_Goldeneye" = "007 Mode";
+"LITH_TXT_UPGRADE_EFFEC_Goldeneye" =
+   "Get the true Goldeneye 007(tm) experience!";
 
-LITH_TXT_UPGRADE_TITLE_7777777 = "7777777 Mode";
-LITH_TXT_UPGRADE_EFFEC_7777777 =
-   "Instates cosmic horror and spurious time travel into your very being, "
-   "causing you to instantly implode upon activation.";
-LITH_TXT_UPGRADE_DESCR_7777777 =
-   "\cd~text interface terminal malfunction error ~2992dud\n\n"
-   "\cdhelo i am of durnadle winner of ai beauty contets i will "
-   "give u anti-physics powers becaus i did some calculations and found the "
-   "universe is stupid so i am doing my best to flip off reality for a "
-   "thousand years";
-
-LITH_TXT_UPGRADE_TITLE_lolsords = "Steele Mode";
-LITH_TXT_UPGRADE_EFFEC_lolsords = "You get a sword. It is literally your only weapon.";
-
-LITH_TXT_UPGRADE_TITLE_Goldeneye = "007 Mode";
-LITH_TXT_UPGRADE_EFFEC_Goldeneye = "Get the true Goldeneye 007(tm) experience!";
-
-//
 // Downgrades
-//
-LITH_TXT_UPGRADE_TITLE_Implying = ">Implicating";
-LITH_TXT_UPGRADE_EFFEC_Implying =
-   "Oh god why did I add something Kegan suggested to me this was not a good "
-   "idea";
-LITH_TXT_UPGRADE_DESCR_Implying =
+"LITH_TXT_UPGRADE_TITLE_Implying" = ">Implicating";
+"LITH_TXT_UPGRADE_EFFEC_Implying" =
+   "Oh god why did I add something Kegan suggested to me this was not a good idea";
+"LITH_TXT_UPGRADE_DESCR_Implying" =
    "God damn it.";
-
-LITH_TXT_UPGRADE_TITLE_UNCEUNCE = "UNCE UNCE";
-LITH_TXT_UPGRADE_EFFEC_UNCEUNCE =
+"LITH_TXT_UPGRADE_TITLE_UNCEUNCE" = "UNCE UNCE";
+"LITH_TXT_UPGRADE_EFFEC_UNCEUNCE" =
    "UNCE UNCE UNCE UNCE UNCE UNCE";
-LITH_TXT_UPGRADE_DESCR_UNCEUNCE =
-   "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE "
-   "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
-
-LITH_TXT_UPGRADE_TITLE_InstaDeath = "Instant Death";
-LITH_TXT_UPGRADE_EFFEC_InstaDeath =
+"LITH_TXT_UPGRADE_DESCR_UNCEUNCE" =
+   "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
+"LITH_TXT_UPGRADE_TITLE_InstaDeath" = "Instant Death";
+"LITH_TXT_UPGRADE_EFFEC_InstaDeath" =
    "Upon losing health, you instantly die.";
-LITH_TXT_UPGRADE_DESCR_InstaDeath = "";
-
-// EOF

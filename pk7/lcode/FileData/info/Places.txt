@@ -1,0 +1,72 @@
+== LITH_TXT_INFO_SHORT_AetosVi | Aetos Vi
+== LITH_TXT_INFO_TITLE_AetosVi | $LITH_TXT_INFO_SHORT_AetosVi
+@@ LITH_TXT_INFO_DESCR_AetosVi
+A planetary system 17 lightyears away from Earth that houses several planets with sentient life on them. Found approximately 700 years ago now, this is the second system reached by humans, and the first with sentient life.
+
+When the system was found, rejoice was had throughout all mankind, finally knowing that they weren't alone in the universe.
+
+Then, of course, the expeditioners were attacked by natives. But that's fine details.
+
+== LITH_TXT_INFO_SHORT_ChAri | Ch'ari
+== LITH_TXT_INFO_TITLE_ChAri | $LITH_TXT_INFO_SHORT_ChAri
+@@ LITH_TXT_INFO_DESCR_ChAri
+A planet in the Aetos-Vi planetary system composed of four land masses and a large amount of water, populated by a highly intelligent light-manipulating race known as the Kiri.
+
+Previously, humans also lived on this planet, but were driven out by a large-
+scale terrorist enactment.
+
+Ch'ari is generally dull and dark-grey looking save for the water, but the communications of the Kiri light up the darkness in a beautiful fashion.
+
+Its inhabitants include fish and plant life, as well as land-dwelling beasts such as giant mammoth-like creatures and the two-legged Falx.
+
+== LITH_TXT_INFO_SHORT_DurlaPrime | Durla Prime
+== LITH_TXT_INFO_TITLE_DurlaPrime | $LITH_TXT_INFO_SHORT_DurlaPrime
+@@ LITH_TXT_INFO_DESCR_DurlaPrime
+A planet in the Aetos-Vi planetary system whose dominant species is a humanoid avian creature, the "Peristera" or, colloquially, "Perist".
+
+When humans arrived on Durla Prime, the Peristeras were highly frightened by the presence of an alien, sentient being, and war broke loose. Refusing to attack, the humans ended the war a mere month later, after learning to communicate with the avian species.
+
+The planet is extremely similar to Earth, even having grass and trees mostly resembling their counterparts.
+
+== LITH_TXT_INFO_SHORT_Earth | Earth
+== LITH_TXT_INFO_TITLE_Earth | $LITH_TXT_INFO_SHORT_Earth
+@@ LITH_TXT_INFO_DESCR_Earth
+The year is 1649 New Era. After an event that almost led to an apocalypse in 3031 CE, humanity collectively decided to mark a new era dedicated to progressing travel and communications across the galaxy.
+
+Earth has stayed largely the same as it was in the Common Era, thanks to advances in science.
+
+By 1000 NE, most of the population on Earth had moved to other inhabitable planets, but still a large population remains on the blue planet.
+
+== LITH_TXT_INFO_SHORT_Hell | Hell
+== LITH_TXT_INFO_TITLE_Hell | $LITH_TXT_INFO_SHORT_Hell
+@@ LITH_TXT_INFO_DESCR_Hell
+Whether the Hell found ripping into our dimension is actually from any known religion is not known. What is known, however, is that its inhabitants seek to destroy and enslave everything they can get their hands on.
+
+Composed of several ranks, Hell is a dictatorship led by one called the Icon of Sin, or Satan by some. The inhabitants of Hell seem to gain some kind of energy from suffering and death, possibly an abstract power like that previously found on Earth, thousands of years ago.
+
+== LITH_TXT_INFO_SHORT_Mars | Mars
+== LITH_TXT_INFO_TITLE_Mars | $LITH_TXT_INFO_SHORT_Mars
+@@ LITH_TXT_INFO_DESCR_Mars
+In 2714 CE, a huge interplanetary workload boom began, spawning numerous factories and artificial workplaces on Mars manned by robots.
+
+Thanks to advances in terrestrial travel, the ability to transfer goods between Mars and Earth became cheap enough to be profitable during the periods where Mars is closer to Earth.
+
+Still to this day many companies on Earth -- and even some intra-galactic corporations like OFMD -- use Mars as a place to house autonomous work.
+
+== LITH_TXT_INFO_SHORT_OmicronXevv | Omicron Xevv
+== LITH_TXT_INFO_TITLE_OmicronXevv | $LITH_TXT_INFO_SHORT_OmicronXevv
+@@ LITH_TXT_INFO_DESCR_OmicronXevv
+A binary star system near Sirius about 2.6 parsec away from Earth. The asteroid belt surrounding the star system has many large, well-lit and fairly temperate asteroids suitable for humans to live on.
+
+Omicron Xevv has been used by many small companies throughout the years to have a secluded, free place to do research, surveillance and development.
+
+== LITH_TXT_INFO_SHORT_SuperDimension | Super Dimension
+== LITH_TXT_INFO_TITLE_SuperDimension | $LITH_TXT_INFO_SHORT_SuperDimension
+@@ LITH_TXT_INFO_DESCR_SuperDimension
+The first hyperdimension found through observation of cuts in the universe, which were also observed to be created intentionally by beings there.
+
+Several artifacts have come from this dimension: The Omega Cannon, The Division Sigil, and The Cup of Blood.
+
+Of these artifacts, you can acquire two. The Omega Cannon, a weapon, and the Division Sigil, a strange artifact able to cause disruptions in space-time.
+
+The latter will only be allowed to you if you can't stop the Demons.

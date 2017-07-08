@@ -1,10 +1,37 @@
--- This is a list of files to be processed into LANGUAGE by compilefs.lua. ---
+This is a list of files to be processed into LANGUAGE by compilefs.lua.
 
 -- Heretic -------------------------------------------------------------------
 
 in filter/heretic/language.fs.txt
 
 Heretic_Upgrades.lthm -> Upgrades.lthm
+
+
+-- Info Pages ----------------------------------------------------------------
+
+in language.info.corporations.en.txt
+parsefile info/Corporations.txt
+
+in language.info.enemies.en.txt
+parsefile info/Enemies.txt
+
+in language.info.places.en.txt
+parsefile info/Places.txt
+
+in language.info.upgrades.en.txt
+parsefile info/Upgrades.txt
+
+in language.info.weapons.en.txt
+parsefile info/Weapons.txt
+
+
+-- CBI Pages ----------------------------------------------------------------
+
+in language.shop.en.txt
+parsefile Shop.txt
+
+in language.upgrades.en.txt
+parsefile Upgrades.txt
 
 
 -- Dialogue ------------------------------------------------------------------
