@@ -19,8 +19,26 @@ weapons/cfist/fire3     lsounds/ChargeFist/Fire3.flac     // 〃
 weapons/cfist/ready     lsounds/ChargeFist/Ready.flac     // 〃
 weapons/cfist/charge    lsounds/ChargeFist/Charge.ogg     // Fallout 4, Halo 3
 weapons/cfist/chargeend lsounds/ChargeFist/ChargeEnd.flac // Fallout 4
-weapons/cfist/hit       lsounds/ChargeFist/Hit.wav        // Hexen
-weapons/cfist/hitwall   lsounds/ChargeFist/HitWall.wav    // 〃
+weapons/cfist/hit1      lsounds/ChargeFist/HitFlesh1.ogg  // Shadow Complex
+weapons/cfist/hit2      lsounds/ChargeFist/HitFlesh2.ogg  // 〃
+weapons/cfist/hit3      lsounds/ChargeFist/HitFlesh3.ogg  // 〃
+weapons/cfist/hitwall1  lsounds/ChargeFist/HitWall1.ogg   // 〃
+weapons/cfist/hitwall2  lsounds/ChargeFist/HitWall2.ogg   // 〃
+weapons/cfist/hitwall3  lsounds/ChargeFist/HitWall3.ogg   // 〃
+weapons/cfist/hitwall4  lsounds/ChargeFist/HitWall4.ogg   // 〃
+
+$random weapons/cfist/hit {
+   weapons/cfist/hit1
+   weapons/cfist/hit2
+   weapons/cfist/hit3
+}
+
+$random weapons/cfist/hitwall {
+   weapons/cfist/hitwall1
+   weapons/cfist/hitwall2
+   weapons/cfist/hitwall3
+   weapons/cfist/hitwall4
+}
 
 $random weapons/cfist/fire {
    weapons/cfist/fire1

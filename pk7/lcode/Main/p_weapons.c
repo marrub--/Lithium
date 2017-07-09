@@ -191,21 +191,8 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_ChargeFistDamage()
 {
-   player_t *p = Lith_LocalPlayer;
-   
    int amount = ACS_CheckInventory("Lith_FistCharge");
    ACS_TakeInventory("Lith_FistCharge", 0x7FFFFFFF);
-   
-   // We need to set the actor's TID even though we don't use it, because
-   // some idiot thought it was a great idea to make PickActor return 0 when
-   // their TID isn't set, even though it found something.
-   int oldtid, newtid;
-   if((oldtid = ACS_PickActor(0, p->yaw, p->pitch, 96, newtid = ACS_UniqueTID(), MF_SHOOTABLE, ML_BLOCKEVERYTHING | ML_BLOCKHITSCAN, PICKAF_RETURNTID)))
-   {
-      ACS_GiveInventory("Lith_FistHit", 1);
-      ACS_Thing_ChangeTID(newtid, oldtid);
-   }
-   
    return amount * ACS_Random(1, 3);
 }
 

@@ -99,6 +99,7 @@ Yholl
    Marathon resources
    knif
    Missile Launcher code
+   Made the Charge Fist not suck
 
 Zombie
    Image used as a base for the SPAS sprite
