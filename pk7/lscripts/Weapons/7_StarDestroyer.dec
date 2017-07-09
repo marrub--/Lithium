@@ -82,7 +82,7 @@ actor Lith_StarProjectile
    Damage (20)
    Speed 2
    Scale 0.15
-   Radius 32
+   Radius 8
    Height 8
    Mass 500
    RenderStyle "Add"
@@ -114,6 +114,7 @@ actor Lith_StarProjectile
       BLLT L 0 bright A_SetUserVar(user_soundtimer, 3)
       BLLT L 0 bright A_PlaySound("weapons/dark/fire", CHAN_5)
    DoMissile:
+      BLLT L 0 bright A_Explode(40, 8 + 45 * scalex, 0)
       BLLT LLLLL 0 bright A_CustomMissile("Lith_StarShrapnel",
          CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, false)/FIX,
          CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, true)/FIX,
