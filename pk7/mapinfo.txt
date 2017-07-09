@@ -216,23 +216,26 @@ intermission Inter_Cast
       Time = -1
    }
    
+   Fader
+   {
+      Music = "lmusic/asdfn2.ogg"
+      DrawConditional = "Lith_MarinePlayer", "lgfx/End/Marine1.png", 0, 0
+      DrawConditional = "Lith_MagePlayer",   "lgfx/End/CyberMage1.png", 0, 0
+      Background = "flats/ZZLITHBG.png"
+      Time = 10
+      FadeType = FadeIn
+   }
+   
+   Image
+   {
+      DrawConditional = "Lith_MarinePlayer", "lgfx/End/Marine1.png", 0, 0
+      DrawConditional = "Lith_MagePlayer",   "lgfx/End/CyberMage1.png", 0, 0
+      Background = "flats/ZZLITHBG.png"
+   }
+   
    Wiper
    {
       WipeType = Burn
-      Time = 4
-      Background = "lgfx/End/Doom2.png"
-   }
-   
-   TextScreen
-   {
-      TextLump = "end_doom2.txt"
-      TextColor = "Red"
-      Background = "lgfx/End/Doom2.png"
-   }
-   
-   Wiper
-   {
-      WipeType = Melt
       Time = 10
       Background = "graphics/TITLEPIC.png"
    }
