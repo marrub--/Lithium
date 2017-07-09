@@ -1,5 +1,6 @@
 enum
 {
+   // Body
    UPGR_HeadsUpDisp,
    UPGR_HeadsUpDis2,
    UPGR_JetBooster,
@@ -12,6 +13,10 @@ enum
    UPGR_DefenseNuke,
    UPGR_Adrenaline,
    
+   // Body (Cyber-Mage)
+   UPGR_SoulCleaver,
+   
+   // Weapons
    UPGR_AutoReload,
    UPGR_AutoPistol,
    UPGR_PlasPistol,
@@ -25,6 +30,19 @@ enum
    UPGR_PartBeam,
    UPGR_PunctCannon,
    UPGR_OmegaRail,
+   
+   // Weapons (Cyber-Mage)
+   UPGR_Mateba_A,
+   UPGR_SPAS_A,
+   UPGR_SPAS_B,
+   UPGR_SMG_A,
+   UPGR_SMG_B,
+   UPGR_SMG_C,
+   UPGR_IonRifle_A,
+   UPGR_IonRifle_B,
+   UPGR_CPlasma_A,
+   UPGR_ShipGun_A,
+   UPGR_ShipGun_B,
    
    UPGR_TorgueMode,
    UPGR_7777777,

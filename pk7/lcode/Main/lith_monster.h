@@ -11,6 +11,7 @@ struct dmon {
    bool active;
    int id;
    
+   bool wasdead;
    int exp;
    int level;
    int rank;

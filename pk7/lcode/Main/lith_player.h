@@ -15,6 +15,7 @@
 
 #define Lith_MAX_PLAYERS 8
 #define HUDSTRS_MAX 20
+#define INVALID_PLAYER (&players[-1])
 
 #define Lith_ForPlayer() \
    for(int _piter = 0; _piter < Lith_MAX_PLAYERS; _piter++) \
@@ -278,6 +279,7 @@ int Lith_PlayerGetClass(struct player_s *p);
 void Lith_PlayerDeltaStats(struct player_s *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player_s *p, int name);
 void Lith_ClearTextBuf(struct player_s *p);
+struct player_s *Lith_GetPlayer(int tid, int ptr);
 
 
 //----------------------------------------------------------------------------

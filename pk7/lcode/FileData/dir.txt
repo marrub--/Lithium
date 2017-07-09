@@ -48,8 +48,7 @@ in language.info.mail.txt
 
 Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
-Message flags apply to all variations of a message and will not use any suffix.
-The flags for messages are as follows:
+The flags for mail messages are as follows:
 bit 1 - Prints a message when received
 bit 2 - Message is the same for all player classes
 

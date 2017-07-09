@@ -133,6 +133,18 @@
    "Your cannon fires highly deadly, pinpoint accurate plasmatic death.";
 "LITH_TXT_UPGRADE_DESCR_OmegaRail" =
    "Implements a plasma charger in your cannon, made with reverse-engineered magical compounds.";
+"LITH_TXT_UPGRADE_TITLE_SoulCleaver" = "Soul Cleaver";
+"LITH_TXT_UPGRADE_TITLE_Mateba_A" = "Finalizer";
+"LITH_TXT_UPGRADE_TITLE_SPAS_A" = "Void Breath";
+"LITH_TXT_UPGRADE_TITLE_SPAS_B" = "Shell Autoloader";
+"LITH_TXT_UPGRADE_TITLE_SMG_A" = "SMG Trimag";
+"LITH_TXT_UPGRADE_TITLE_SMG_B" = "Seeker Rounds";
+"LITH_TXT_UPGRADE_TITLE_SMG_C" = "Safety System";
+"LITH_TXT_UPGRADE_TITLE_IonRifle_A" = "Rad. Ionizer";
+"LITH_TXT_UPGRADE_TITLE_IonRifle_B" = "Overloader";
+"LITH_TXT_UPGRADE_TITLE_CPlasma_A" = "Pulse Charger";
+"LITH_TXT_UPGRADE_TITLE_ShipGun_A" = "Longinus Solspear";
+"LITH_TXT_UPGRADE_TITLE_ShipGun_B" = "Surge of Destiny";
 "LITH_TXT_UPGRADE_TITLE_DarkCannon" = "????????";
 "LITH_TXT_UPGRADE_EFFEC_DarkCannon" =
    "\cd<fatal error while displaying information>";

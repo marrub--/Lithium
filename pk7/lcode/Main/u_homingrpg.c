@@ -32,8 +32,7 @@ static int CheckTarget(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_HomingMissile()
 {
-   player_t *p = &players[Lith_GetPlayerNumber(0, AAPTR_TARGET)];
-   
+   player_t *p = Lith_GetPlayer(0, AAPTR_TARGET);
    ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
 }
 

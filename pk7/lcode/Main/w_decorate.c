@@ -160,7 +160,7 @@ void Lith_DOGS()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SteggleEnergy()
 {
-   player_t *p = &players[Lith_GetPlayerNumber(0, AAPTR_FRIENDPLAYER)];
+   player_t *p = Lith_GetPlayer(0, AAPTR_FRIENDPLAYER);
    
    ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
    
@@ -196,7 +196,7 @@ void Lith_Barrier()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_BarrierBullets()
 {
-   player_t *p = &players[Lith_GetPlayerNumber(0, AAPTR_TARGET)];
+   player_t *p = Lith_GetPlayer(0, AAPTR_TARGET);
    
    fixed ang   = ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
    fixed xang  = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));

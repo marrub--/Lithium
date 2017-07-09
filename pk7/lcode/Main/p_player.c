@@ -175,6 +175,15 @@ static void Lith_PlayerDisconnect(void)
 //
 
 //
+// Lith_GetPlayer
+//
+player_t *Lith_GetPlayer(int tid, int ptr)
+{
+   player_t *p = &players[Lith_GetPlayerNumber((tid), (ptr))];
+   return p == INVALID_PLAYER ? null : p;
+}
+
+//
 // Lith_PlayerGetNamedUpgrade
 //
 upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)

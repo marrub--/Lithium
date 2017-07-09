@@ -1,4 +1,5 @@
 #include "lith_monster.h"
+#include "lith_player.h"
 #include <math.h>
 
 
@@ -105,11 +106,28 @@ static void BaseMonsterLevel(dmon_t *m)
    default:            bias = world.mapscleared / 30.0; break;
    }
    
+   bias += ACS_GameSkill() / skill_nightmare / 2.0;
+   
    bias = bias * ACS_RandomFixed(1, 1.5);
    m->rank  = minmax(rng1 * bias * 2, 1, 5);
    m->level = minmax(rng2 * bias * 1, 1, 100);
 }
 
+//
+// OnDeath
+//
+static void OnDeath(dmon_t *m)
+{
+   LogDebug(log_dmon, "monster %i is ded", m->id);
+   m->wasdead = true;
+   
+   ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET)) {
+      if(p->getUpgr(UPGR_SoulCleaver)->active)
+         ACS_Spawn("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 4);
+   }
+   
+   // TODO: give extra score based on rank
+}
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -127,19 +145,17 @@ void Lith_MonsterMain(dmon_t *m)
    m->mi = &mi;
    
    BaseMonsterLevel(m);
-
    LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S", m->id, m->rank, m->level, ACS_GetActorClass(0));
    
    for(;;) {
       GetInfo(m->mi);
       
       if(mi.health <= 0) {
-         LogDebug(log_dmon, "monster %i is ded", m->id);
-         // TODO: give extra score based on rank
+         OnDeath(m);
          WaitResurrect(m);
       }
       
-      if(m->level > 20) {
+      if(m->rank >= 2) {
          ShowBarrier(m->mi, m->level / 100.0);
          // TODO: resistances
       }
