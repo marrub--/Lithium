@@ -1,13 +1,18 @@
 #include "lith_monster.h"
+#include "lith_world.h"
+
+#define DMON_MAX 0x7FFF
 
 
 //----------------------------------------------------------------------------
 // Static Objects
 //
 
+__addrdef __gbl_arr dmonarr;
+
 // This is lazy-allocated. Don't touch or GDCC will break your computer's face.
 [[__no_init]] dmon_t dmonalloc[DMON_MAX];
-int lwvar dmonid;
+int dmonarr dmonid;
 
 
 //----------------------------------------------------------------------------

@@ -3,9 +3,6 @@
 
 #include "lith_common.h"
 #include "lith_list.h"
-#include "lith_world.h"
-
-#define DMON_MAX 0x7FFF
 
 struct dmon {
    bool active;
@@ -19,7 +16,12 @@ struct dmon {
    struct dminfo *mi;
 };
 
-typedef struct dmon lwvar dmon_t;
+__addrdef extern __gbl_arr dmonarr;
+
+typedef struct dmon dmonarr dmon_t;
+
+extern dmon_t dmonalloc[];
+extern int dmonarr dmonid;
 
 [[__call("ScriptS"), __optional_args(2)]] dmon_t *DmonPtr(int tid, int ptr);
 dmon_t *Dmon(int id);

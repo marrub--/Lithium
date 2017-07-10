@@ -165,7 +165,7 @@ This enemy is both annoying and hazardous at the same time, especially if left u
 Class: \cgTyrant
 Threat: \cgA
 
-Brutal and viscous, caster of evil magic and healer of the sinful.
+Brutal and vicious, caster of evil magic and healer of the sinful.
 
 The Arch-vile is a malicious, extremely dangerous being capable of destroying anything at any range with its powerful fire magic, and resurrecting dead enemies it comes by.
 

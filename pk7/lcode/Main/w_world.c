@@ -527,6 +527,7 @@ static void Lith_World(void)
    
    if(ACS_Timer() <= 2)
    {
+      dmonid = 0;
       world.bossspawned = false;
       
       if(world.unloaded)

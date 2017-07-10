@@ -157,7 +157,7 @@
    "Class: \cgTyrant\n"
    "Threat: \cgA\n"
    "\n"
-   "Brutal and viscous, caster of evil magic and healer of the sinful.\n"
+   "Brutal and vicious, caster of evil magic and healer of the sinful.\n"
    "\n"
    "The Arch-vile is a malicious, extremely dangerous being capable of destroying anything at any range with its powerful fire magic, and resurrecting dead enemies it comes by.";
 "LITH_TXT_INFO_SHORT_SpiderMastermind" = "Spider Demon";
