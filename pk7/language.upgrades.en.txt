@@ -4,7 +4,7 @@
 "LITH_CATEGORY" = "Category";
 "LITH_SCOREMULT" = "Score Multiplier";
 
-// Body
+// Body ----------------------------------------------------------------------
 "LITH_TXT_UPGRADE_TITLE_HeadsUpDisp" = "Heads Up Disp.";
 "LITH_TXT_UPGRADE_EFFEC_HeadsUpDisp" =
    "Shows vital information.";
@@ -62,8 +62,13 @@
    "While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD. Customizable via settings menu.";
 "LITH_TXT_UPGRADE_DESCR_VitalScan" =
    "A set of nanobots are deployed to get vitality information on targets you aim at.";
+"LITH_TXT_UPGRADE_TITLE_SoulCleaver" = "Soul Cleaver";
+"LITH_TXT_UPGRADE_EFFEC_SoulCleaver" =
+   "When living things die, they emit a projectile that will seek other enemies for a short time.";
+"LITH_TXT_UPGRADE_DESCR_SoulCleaver" =
+   "Creates an artificial soul on your targets and makes it destroy their neighbors.";
 
-// Weapons
+// Weapons -------------------------------------------------------------------
 "LITH_TXT_UPGRADE_TITLE_AutoReload" = "Auto Reload";
 "LITH_TXT_UPGRADE_EFFEC_AutoReload" =
    "Weapons in your inventory automatically reload after 5 seconds.";
@@ -133,7 +138,6 @@
    "Your cannon fires highly deadly, pinpoint accurate plasmatic death.";
 "LITH_TXT_UPGRADE_DESCR_OmegaRail" =
    "Implements a plasma charger in your cannon, made with reverse-engineered magical compounds.";
-"LITH_TXT_UPGRADE_TITLE_SoulCleaver" = "Soul Cleaver";
 "LITH_TXT_UPGRADE_TITLE_Mateba_A" = "Finalizer";
 "LITH_TXT_UPGRADE_TITLE_SPAS_A" = "Void Breath";
 "LITH_TXT_UPGRADE_TITLE_SPAS_B" = "Shell Autoloader";
@@ -151,7 +155,7 @@
 "LITH_TXT_UPGRADE_DESCR_DarkCannon" =
    "What the !@#$% is this!?";
 
-// Extras
+// Extras --------------------------------------------------------------------
 "LITH_TXT_UPGRADE_TITLE_TorgueMode" = "EXPLOOSIONS";
 "LITH_TXT_UPGRADE_EFFEC_TorgueMode" =
    "WHAT THE F*CK DO YOU THINK!?";
@@ -171,7 +175,7 @@
 "LITH_TXT_UPGRADE_EFFEC_Goldeneye" =
    "Get the true Goldeneye 007(tm) experience!";
 
-// Downgrades
+// Downgrades ----------------------------------------------------------------
 "LITH_TXT_UPGRADE_TITLE_Implying" = ">Implicating";
 "LITH_TXT_UPGRADE_EFFEC_Implying" =
    "Oh god why did I add something Kegan suggested to me this was not a good idea";

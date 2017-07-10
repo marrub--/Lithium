@@ -1,11 +1,11 @@
 [enu default]
 
 
-// Misc.
+// Misc. ---------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Sword" = "sord";
 "LITH_TXT_INFO_SHORT_Gameboy" = "Game Nanhai";
 
-// Shop Weapons
+// Shop Weapons --------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Revolver" = "Revolver";
 "LITH_TXT_INFO_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
 "LITH_TXT_INFO_DESCR_Revolver" =
@@ -37,7 +37,7 @@
 "LITH_TXT_INFO_DESCR_PlasmaDiffuser" =
    "A weapon which works similarly to the 68-n Plasma Rifle, however preferring damage over rate of fire. The D.640's design comes from several older models designed by MDDO, as well as newer components patented by Semaphore Inc.";
 
-// Cyber-Mage
+// Cyber-Mage ----------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_CFist" = "Knife";
 "LITH_TXT_INFO_SHORT_Mateba" = "Mateba";
 "LITH_TXT_INFO_TITLE_Mateba" = "Mateba R119";
@@ -47,6 +47,12 @@
    "This version is suited for a left-handed user, with a barrel that opens to the right. The weapon loads twelve .454 Casull rounds much like the Mateba Grifone variant.\n"
    "\n"
    "Due to the original design being lost in time, this revolver sports several accuracy deficiencies, but nonetheless has the classic look and feel of the original gun. Produced by A.O.F Inc. for knight-class units.";
+"LITH_TXT_INFO_SHORT_MatebaUpgr" = "$LITH_TXT_UPGRADE_TITLE_Mateba_A";
+"LITH_TXT_INFO_TITLE_MatebaUpgr" = "\cdFinirentur\c-, \cgRussorum\c- 19";
+"LITH_TXT_INFO_DESCR_MatebaUpgr" =
+   "The 19th method of the \cgRussum\c- mode, Finirentur, known as the Finalizer, is a very powerful red magic that creates a sigil infront of the user which then fires out a projectile at fairly high speed. This projectile is capable of instantly deceasing any mid-heavily wounded, living being.\n"
+   "\n"
+   "The Mateba R119 Finalizer channeler is capable of firing this intense magic, however it is limited to the last shot of the cylinder so as to not potentially overload the user. While this modification was created by A.O.F Inc, the Finirentur method was created recently by mages of Neptune 11 in Algidistari.";
 "LITH_TXT_INFO_SHORT_ShockRifle" = "Electro-Rifle";
 "LITH_TXT_INFO_SHORT_SPAS" = "Shotgun";
 "LITH_TXT_INFO_TITLE_SPAS" = "NV48 12-Gauge Shotgun";
@@ -94,7 +100,7 @@
 "LITH_TXT_INFO_DESCR_StarShot" =
    "The 8th method of the \ciAurantia\c- mode. An advanced attack which summons two star-shaped sigils that fire projectiles out at will before fading out. Created by several dozen spellcasters at A.O.F Inc. for bishop-class units to deploy with, and has been used several high-profile destroy-and-conceal missions, including the West Steel Corp. incident, where it was used to destroy several micro-fighters and around 195 personnel aboard the enemy ship.";
 
-// Marine
+// Marine --------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Fist" = "Knife";
 "LITH_TXT_INFO_SHORT_ChargeFist" = "Charge Fist";
 "LITH_TXT_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";

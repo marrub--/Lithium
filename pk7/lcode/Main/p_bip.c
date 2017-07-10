@@ -151,12 +151,23 @@ void Lith_PlayerInitBIP(player_t *p)
       break;
    case pclass_cybermage:
       AddToBIP(bip, BIPC_WEAPONS, "Mateba",        Unlocks("AOF2"));
+      AddToBIP(bip, BIPC_WEAPONS, "MatebaUpgr",    Unlocks("AOF2", "Algidistari"));
       AddToBIP(bip, BIPC_WEAPONS, "ShockRifle");
       AddToBIP(bip, BIPC_WEAPONS, "SPAS",          Unlocks("AOF2", "Newvec"));
+      AddToBIP(bip, BIPC_WEAPONS, "SPASUpgr");
+      AddToBIP(bip, BIPC_WEAPONS, "SPASUpg2");
       AddToBIP(bip, BIPC_WEAPONS, "SMG",           Unlocks("Omakeda", "Sym43"));
+      AddToBIP(bip, BIPC_WEAPONS, "SMGUpgr");
+      AddToBIP(bip, BIPC_WEAPONS, "SMGUpg2");
+      AddToBIP(bip, BIPC_WEAPONS, "SMGUpg3");
       AddToBIP(bip, BIPC_WEAPONS, "IonRifle",      Unlocks("KSKK"));
+      AddToBIP(bip, BIPC_WEAPONS, "IonRifleUpgr");
+      AddToBIP(bip, BIPC_WEAPONS, "IonRifleUpg2");
       AddToBIP(bip, BIPC_WEAPONS, "CPlasmaRifle",  Unlocks("AllPoint", "MDDO"));
+      AddToBIP(bip, BIPC_WEAPONS, "CPlasmaUpgr");
       AddToBIP(bip, BIPC_WEAPONS, "StarDestroyer", Unlocks("Hell"));
+      AddToBIP(bip, BIPC_WEAPONS, "ShipGunUpgr");
+      AddToBIP(bip, BIPC_WEAPONS, "ShipGunUpg2");
       
       AddToBIP(bip, BIPC_WEAPONS, "Delear");
       AddToBIP(bip, BIPC_WEAPONS, "Hulgyon");
@@ -209,6 +220,7 @@ void Lith_PlayerInitBIP(player_t *p)
    case pclass_cybermage:
       AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDispJem");
       AddToBIP(bip, BIPC_UPGRADES, "ReflexWetwJem");
+      AddToBIP(bip, BIPC_UPGRADES, "SoulCleaver");
       break;
    }
    
@@ -216,6 +228,7 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_UPGRADES, "AutoReload",   Unlocks("KSKK"));
    
    AddToBIP(bip, BIPC_PLACES, "AetosVi");
+   AddToBIP(bip, BIPC_PLACES, "Algidistari");
    AddToBIP(bip, BIPC_PLACES, "ChAri");
    AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
    AddToBIP(bip, BIPC_PLACES, "Earth");

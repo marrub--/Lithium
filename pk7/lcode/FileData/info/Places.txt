@@ -7,6 +7,13 @@ When the system was found, rejoice was had throughout all mankind, finally knowi
 
 Then, of course, the expeditioners were attacked by natives. But that's fine details.
 
+== LITH_TXT_INFO_SHORT_Algidistari | Algidistari
+== LITH_TXT_INFO_TITLE_Algidistari | $LITH_TXT_INFO_SHORT_Algidistari
+@@ LITH_TXT_INFO_DESCR_Algidistari
+Algidistari is a planetary system 45 lightyears in distance from Earth. While it has many planets in its main sequence, and many rocks, it is for the most part not suitable for human life due to its cold atmosphere caused by a small central star.
+
+Several of the planets in this system such as Neptune 11 are quite large and are semi-habitable, thus becoming quite suitable for mages of the \chCaeruleum\c- mode to test magic on.
+
 == LITH_TXT_INFO_SHORT_ChAri | Ch'ari
 == LITH_TXT_INFO_TITLE_ChAri | $LITH_TXT_INFO_SHORT_ChAri
 @@ LITH_TXT_INFO_DESCR_ChAri
