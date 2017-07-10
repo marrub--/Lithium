@@ -74,12 +74,13 @@ weapons/revolver/reload lsounds/Revolver/Reload.flac // Serious Sam: The First E
 //
 // Mateba
 //
-weapons/mateba/fire  lsounds/Mateba/Fire.flac  // ???
-weapons/mateba/open  lsounds/Mateba/Open.flac  // ???
-weapons/mateba/eject lsounds/Mateba/Eject.flac // Killing Floor
-weapons/mateba/load  lsounds/Mateba/Load.flac  // 〃
-weapons/mateba/close lsounds/Mateba/Close.flac // Half-Life 2, Fallout 4
-weapons/mateba/draw  lsounds/Mateba/Draw.flac  // ???
+weapons/mateba/fire     lsounds/Mateba/Fire.flac    // ???
+weapons/mateba/open     lsounds/Mateba/Open.flac    // ???
+weapons/mateba/eject    lsounds/Mateba/Eject.flac   // Killing Floor
+weapons/mateba/load     lsounds/Mateba/Load.flac    // 〃
+weapons/mateba/close    lsounds/Mateba/Close.flac   // Half-Life 2, Fallout 4
+weapons/mateba/draw     lsounds/Mateba/Draw.flac    // ???
+weapons/mateba/finalize lsounds/Mateba/Finalize.ogg // Monster Girl Quest
 
 //
 // Shotgun

@@ -7,6 +7,12 @@
 #include <math.h>
 
 [[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetSpawnHealth(void)
+{
+   return ACS_GetActorProperty(0, APROP_SpawnHealth);
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 void Lith_BeginAngles(int x, int y)
 {
    world.a_cur = 0;

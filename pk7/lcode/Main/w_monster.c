@@ -20,6 +20,7 @@ struct dminfo {
 //
 
 static __str searchnames[] = {
+   // Doom 2
    "ZombieMan",
    "ShotgunGuy",
    "ChaingunGuy",
@@ -38,6 +39,8 @@ static __str searchnames[] = {
    "Archvile",
    "SpiderMastermind",
    "Cyberdemon",
+   
+   // Lithium
    "James",
    "Makarov",
    "Isaac"
