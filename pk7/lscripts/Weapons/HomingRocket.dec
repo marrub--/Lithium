@@ -3,6 +3,7 @@ actor Lith_TargetMarker
    RenderStyle "Add"
    Scale 1.7
    
+   +NOTIMEFREEZE
    +NOINTERACTION
    
    states

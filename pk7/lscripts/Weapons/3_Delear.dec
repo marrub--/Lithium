@@ -3,6 +3,7 @@ actor Lith_DelearDotTrail
    Scale 0.4
    RenderStyle "Add"
    
+   +NOTIMEFREEZE
    +NOINTERACTION
    
    states

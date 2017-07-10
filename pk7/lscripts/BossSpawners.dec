@@ -28,6 +28,8 @@ actor Lith_BossChecker3_3 : Lith_BossChecker {states {Pickup1: TNT1 A 0 ACS_Name
 
 actor Lith_BossSpawner
 {
+   +NOTIMEFREEZE
+   
    const int flags = RGF_MONSTERS|RGF_NOSIGHT|RGF_CUBE;
    
    states

@@ -96,6 +96,7 @@ actor Lith_MonsterSoul
 
 actor Lith_RunMonsterInfo : CustomInventory
 {
+   +NOTIMEFREEZE
    +INVENTORY.ALWAYSPICKUP
    
    states
@@ -114,6 +115,7 @@ actor Lith_RunMonsterInfo : CustomInventory
 actor Lith_MonsterInfoEmitter
 {
    +NOTIMEFREEZE
+   
    states
    {
    Spawn:

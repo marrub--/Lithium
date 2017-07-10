@@ -318,7 +318,7 @@ void Lith_TakeScore(player_t *p, score_t score)
 [[__call("ScriptS")]]
 static void Lith_BossWarning(player_t *p)
 {
-   ACS_Delay(35);
+   ACS_Delay(35 * 5);
    
    if(world.bossspawned)
       p->log("> \CgWarning: High demonic energy levels detected in area.");

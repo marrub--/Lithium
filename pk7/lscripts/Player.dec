@@ -127,6 +127,7 @@ actor Lith_ExplodoBoots
    Height 0
    Radius 0
    
+   +NOTIMEFREEZE
    +NOGRAVITY
    +NOBLOCKMAP
    +PAINLESS
@@ -160,6 +161,7 @@ actor Lith_EXPLOOOSION
 {
    DamageType "Lith_PlayerMissile"
    
+   +NOTIMEFREEZE
    +NOGRAVITY
    
    states
@@ -177,6 +179,7 @@ actor Lith_GEExplosion
 {
    DamageType "Lith_PlayerMissile"
    
+   +NOTIMEFREEZE
    +NOGRAVITY
    
    states

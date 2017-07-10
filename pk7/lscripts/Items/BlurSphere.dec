@@ -9,6 +9,7 @@ actor Lith_BarrierFX
    RenderStyle "Add"
    Scale 0.3
    
+   +NOTIMEFREEZE
    +NOINTERACTION
    
    states
