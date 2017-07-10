@@ -1,5 +1,7 @@
 actor Lith_RedCard : Lith_CustomInventory replaces RedCard
 {
+   Inventory.PickupSound "player/pickup/redkey"
+   
    states
    {
    Spawn:
@@ -15,6 +17,8 @@ actor Lith_RedCard : Lith_CustomInventory replaces RedCard
 
 actor Lith_BlueCard : Lith_CustomInventory replaces BlueCard
 {
+   Inventory.PickupSound "player/pickup/bluekey"
+   
    states
    {
    Spawn:
@@ -30,6 +34,8 @@ actor Lith_BlueCard : Lith_CustomInventory replaces BlueCard
 
 actor Lith_YellowCard : Lith_CustomInventory replaces YellowCard
 {
+   Inventory.PickupSound "player/pickup/yellowkey"
+   
    states
    {
    Spawn:
@@ -45,6 +51,8 @@ actor Lith_YellowCard : Lith_CustomInventory replaces YellowCard
 
 actor Lith_RedSkull : Lith_CustomInventory replaces RedSkull
 {
+   Inventory.PickupSound "player/pickup/redskull"
+   
    states
    {
    Spawn:
@@ -60,6 +68,8 @@ actor Lith_RedSkull : Lith_CustomInventory replaces RedSkull
 
 actor Lith_BlueSkull : Lith_CustomInventory replaces BlueSkull
 {
+   Inventory.PickupSound "player/pickup/blueskull"
+   
    states
    {
    Spawn:
@@ -75,6 +85,8 @@ actor Lith_BlueSkull : Lith_CustomInventory replaces BlueSkull
 
 actor Lith_YellowSkull : Lith_CustomInventory replaces YellowSkull
 {
+   Inventory.PickupSound "player/pickup/yellowskull"
+   
    states
    {
    Spawn:

@@ -85,12 +85,18 @@ $random player/cbi/keypress {
 //
 // Pickup
 //
-player/pickup/upgrbody lsounds/Player/Pickup/UpgrBody.ogg    // Killing Floor, ???
-player/pickup/upgrextr lsounds/Player/Pickup/UpgrExtr.flac   // Phantasy Star Nova
-player/pickup/upgrweap lsounds/Player/Pickup/UpgrWeap.ogg    // Halo 3
-player/pickup/upgrcbi  lsounds/Player/Pickup/CBIUpgrade.flac // 〃
-player/pickup/item     lsounds/Player/Pickup/Item.ogg        // Firearms: Source
-player/pickup/barrier  lsounds/Player/Pickup/Barrier.flac    // Touhou 13
+player/pickup/upgrbody    lsounds/Player/Pickup/UpgrBody.ogg     // Killing Floor, ???
+player/pickup/upgrextr    lsounds/Player/Pickup/UpgrExtr.flac    // Phantasy Star Nova
+player/pickup/upgrweap    lsounds/Player/Pickup/UpgrWeap.ogg     // Halo 3
+player/pickup/upgrcbi     lsounds/Player/Pickup/CBIUpgrade.flac  // 〃
+player/pickup/item        lsounds/Player/Pickup/Item.ogg         // Firearms: Source
+player/pickup/barrier     lsounds/Player/Pickup/Barrier.flac     // Touhou 13
+player/pickup/redkey      lsounds/Player/Pickup/RedKey.flac      // ???
+player/pickup/yellowkey   lsounds/Player/Pickup/YellowKey.flac   // 〃
+player/pickup/bluekey     lsounds/Player/Pickup/BlueKey.flac     // 〃
+player/pickup/redskull    lsounds/Player/Pickup/RedSkull.flac    // Halo 3
+player/pickup/yellowskull lsounds/Player/Pickup/YellowSkull.flac // 〃
+player/pickup/blueskull   lsounds/Player/Pickup/BlueSkull.flac   // 〃
 
 //
 // Gameboy
