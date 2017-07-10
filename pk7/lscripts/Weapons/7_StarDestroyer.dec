@@ -158,8 +158,8 @@ actor Lith_StarDestroyer : Lith_CWeapon
    Weapon.SlotNumber 7
    Weapon.SlotPriority 1
    Weapon.BobStyle "InverseSmooth"
-   Weapon.BobRangeX 2.0
-   Weapon.BobSpeed 0.85
+   Weapon.BobRangeX 1.7
+   Weapon.BobSpeed 0.7
    
    +WEAPON.NOAUTOFIRE
    

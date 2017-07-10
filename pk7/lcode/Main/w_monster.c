@@ -1,5 +1,6 @@
 #include "lith_monster.h"
 #include "lith_player.h"
+#include "lith_world.h"
 #include <math.h>
 
 
@@ -48,10 +49,10 @@ static __str searchnames[] = {
 //
 
 //
-// WaitResurrect
+// WaitForResurrect
 //
 [[__call("SScriptS")]]
-static void WaitResurrect(dmon_t *m)
+static void WaitForResurrect(dmon_t *m)
 {
    while(ACS_GetActorProperty(0, APROP_Health) <= 0)
       ACS_Delay(2);
@@ -106,11 +107,29 @@ static void BaseMonsterLevel(dmon_t *m)
    default:            bias = world.mapscleared / 30.0; break;
    }
    
-   bias += ACS_GameSkill() / skill_nightmare / 2.0;
+   bias += (ACS_GameSkill() / skill_nightmare) / 2.0;
    
    bias = bias * ACS_RandomFixed(1, 1.5);
    m->rank  = minmax(rng1 * bias * 2, 1, 5);
    m->level = minmax(rng2 * bias * 1, 1, 100);
+}
+
+//
+// SoulCleave
+//
+// Spawn a Monster Soul and temporarily set the species of it until the
+// actor is no longer solid, so it won't explode immediately.
+//
+[[__call("ScriptS")]]
+static void SoulCleave(dmon_t *m, player_t *p)
+{
+   int tid = ACS_UniqueTID();
+   ACS_SpawnForced("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 16, tid);
+   Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+   ACS_SetActorPropertyString(tid, APROP_Species, ACS_GetActorPropertyString(0, APROP_Species));
+   for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++)
+      ACS_Delay(1);
+   ACS_SetActorPropertyString(tid, APROP_Species, "Lith_Player");
 }
 
 //
@@ -123,11 +142,12 @@ static void OnDeath(dmon_t *m)
    
    ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET)) {
       if(p->getUpgr(UPGR_SoulCleaver)->active)
-         ACS_Spawn("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 4);
+         SoulCleave(m, p);
    }
    
-   // TODO: give extra score based on rank
+   Lith_GiveAllScore(m->rank * 500, false);
 }
+
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -152,7 +172,7 @@ void Lith_MonsterMain(dmon_t *m)
       
       if(mi.health <= 0) {
          OnDeath(m);
-         WaitResurrect(m);
+         WaitForResurrect(m);
       }
       
       if(m->rank >= 2) {
