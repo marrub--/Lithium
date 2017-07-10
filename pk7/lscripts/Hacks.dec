@@ -23,6 +23,7 @@ actor Lith_CameraHax
    Radius 2
    Height 2
    
+   +NOTIMEFREEZE
    +NOINTERACTION
 }
 
@@ -78,6 +79,7 @@ actor Lith_MakeSerious : CustomInventory
 
 actor Lith_SeriousEmitter
 {
+   +NOTIMEFREEZE
    states
    {
    Spawn:

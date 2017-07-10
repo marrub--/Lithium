@@ -16,6 +16,7 @@ actor Lith_MonsterBarrier
    YScale 0.6
    VSpeed 2
    
+   +NOTIMEFREEZE
    +NOINTERACTION
    
    states
@@ -46,6 +47,7 @@ actor Lith_MonsterSoulEffect
    RenderStyle "Add"
    Scale 0.25
    
+   +NOTIMEFREEZE
    +NOINTERACTION
    +BRIGHT
    
@@ -111,6 +113,7 @@ actor Lith_RunMonsterInfo : CustomInventory
 
 actor Lith_MonsterInfoEmitter
 {
+   +NOTIMEFREEZE
    states
    {
    Spawn:
