@@ -37,6 +37,7 @@ enum
 {
 #define LITH_X(name, capt) BIPC_##name,
 #include "lith_bip.h"
+   BIPC_EXTRA,
    BIPC_MAX,
    BIPC_MAIN,
    BIPC_STATS,

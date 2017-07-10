@@ -24,6 +24,9 @@ parsefile info/Upgrades.txt
 in language.info.weapons.en.txt
 parsefile info/Weapons.txt
 
+in language.info.omake.en.txt
+parsefile info/Extra.txt
+
 
 -- CBI Pages ----------------------------------------------------------------
 

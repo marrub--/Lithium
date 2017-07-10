@@ -28,9 +28,20 @@ struct page_info
 //
 
 //
+// DecryptBody
+//
+static __str DecryptBody(char __str_ars const *str)
+{
+   ACS_BeginPrint();
+   for(; *str; str++)
+      ACS_PrintChar(!isprint(*str) ? *str : *str ^ 7);
+   return ACS_EndStrParam();
+}
+
+//
 // GetPageInfo
 //
-struct page_info GetPageInfo(bippage_t const *page)
+static struct page_info GetPageInfo(bippage_t const *page)
 {
    struct page_info pinf;
    
@@ -45,6 +56,9 @@ struct page_info GetPageInfo(bippage_t const *page)
    pinf.flname = page->title
       ? page->title
       : Language("LITH_TXT_INFO_TITLE_%S", page->name);
+   
+   if(page->category == BIPC_EXTRA)
+      pinf.body = DecryptBody(pinf.body);
    
    return pinf;
 }
@@ -90,7 +104,7 @@ static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unl
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
    
-   if(categ == BIPC_ENEMIES) UnlockPage(bip, page);
+   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page);
 }
 
 
@@ -228,6 +242,12 @@ void Lith_PlayerInitBIP(player_t *p)
    AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));
    AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
    
+   AddToBIP(bip, BIPC_EXTRA, "Extra1");
+   AddToBIP(bip, BIPC_EXTRA, "Extra2");
+   AddToBIP(bip, BIPC_EXTRA, "Extra3");
+   AddToBIP(bip, BIPC_EXTRA, "Extra4");
+   AddToBIP(bip, BIPC_EXTRA, "Extra5");
+   
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;
    
@@ -333,7 +353,7 @@ void Lith_PlayerLoseBIPPages(bip_t *bip)
 {
    ForCategory()
    {
-      if(categ == BIPC_MAIL) continue;
+      if(categ == BIPC_MAIL || categ == BIPC_EXTRA) continue;
       
       ForPage()
          page->unlocked = false;
@@ -432,14 +452,39 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       ifauto(char *, c, strchr(st->txtbuf, '\n'))
       {
-         __str query = StrParam("%.*s", c - st->txtbuf, st->txtbuf);
+         // That's a lot of numbers...
+         crc64_t const extranames[] = {
+            0x5F38B6C56F0A6D84L,
+            0x90215131A36573D7L,
+            0xC54EC0A7C6836A5BL,
+            0xB315B81438717BA6L,
+            0x9FD558A2C8C8D163L,
+         };
+         
+         int size = c - st->txtbuf;
+         __str query = StrParam("%.*s", size, st->txtbuf);
+         crc64_t crc = Lith_CRC64(st->txtbuf, c - st->txtbuf);
          
          bip->resnum = bip->rescur = st->tbptr = 0;
+         
+         for(int i = 0; i < countof(extranames); i++)
+         {
+            if(crc == extranames[i])
+            {
+               list_t *link = bip->infogr[BIPC_EXTRA].next;
+               for(int j = 0; j < i; j++)
+                  link = link->next;
+               bip->result[bip->resnum++] = link->object;
+            }
+         }
          
          ForCategoryAndPage()
          {
             if(bip->resnum >= countof(bip->result))
                break;
+            
+            if(!page->unlocked || page->category == BIPC_EXTRA)
+               continue;
             
             struct page_info pinf = GetPageInfo(page);
             
@@ -490,7 +535,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       
       Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 170, btnlist.h * n);
       
-      Lith_ForListIter(bippage_t *page, *list, i++)
+      if(bip->curcategory != BIPC_EXTRA)
+         Lith_ForListIter(bippage_t *page, *list, i++)
       {
          int y = btnlist.h * i;
          
