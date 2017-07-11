@@ -57,6 +57,7 @@ typedef struct worldinfo_s
    property canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
    property canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
    property canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
+   property difficulty     {get: ACS_GetCVar("lith_sv_difficulty")}
    
    bool singleplayer;
    int mapscleared;
@@ -75,9 +76,7 @@ typedef struct worldinfo_s
    int game;
    
    // Bosses
-   bool boss1p1, boss1p2;
-   bool boss2p1, boss2p2, boss2p3;
-   bool boss3p1, boss3p2, boss3p3;
+   bool boss[3][3];
    bool bossspawned;
    
    property boss1p1scr {get: ACS_GetCVar("lith_sv_boss1p1_scr")}
@@ -115,6 +114,7 @@ typedef struct worldinfo_s
    int a_x, a_y;
    struct polar a_angles[8];
    int a_cur;
+   int decvars[8];
    
    // Debugging
    int dbgLevel;

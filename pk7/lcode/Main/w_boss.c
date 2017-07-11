@@ -179,31 +179,40 @@ void Lith_PhantomDeath(int num, int phase)
    
    #define PhaseR(num, phasenum, reward) \
       case phasenum: \
-      world.boss##num##p##phasenum = true; \
-      LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
-      ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
-      break;
+         world.boss[num][phasenum] = true; \
+         LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
+         ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
+         break
    
    #define PhaseN(num, phasenum) \
-      case phasenum: world.boss##num##p##phasenum = true; break;
+      case phasenum: world.boss[num][phasenum] = true; break
    
    switch(num)
    {
-   case 1: switch(phase)
-      {PhaseR(1, 1, "Lith_WeapnInter")
-       PhaseR(1, 2, "Lith_CBIUpgrade1")}
+   case 1:
+      switch(phase)
+      {
+      PhaseR(1, 1, "Lith_WeapnInter");
+      PhaseR(1, 2, "Lith_CBIUpgrade1");
+      }
       break;
    
-   case 2: switch(phase)
-      {PhaseR(2, 1, "Lith_ArmorInter")
-       PhaseR(2, 2, "Lith_CBIUpgrade2")
-       PhaseR(2, 3, "Lith_WeapnInte2")}
+   case 2:
+      switch(phase)
+      {
+      PhaseR(2, 1, "Lith_ArmorInter");
+      PhaseR(2, 2, "Lith_CBIUpgrade2");
+      PhaseR(2, 3, "Lith_WeapnInte2");
+      }
       break;
    
-   case 3: switch(phase)
-      {PhaseN(3, 1)
-       PhaseN(3, 2)
-       PhaseR(3, 3, "Lith_RDistInter")}
+   case 3:
+      switch(phase)
+      {
+      PhaseN(3, 1);
+      PhaseN(3, 2);
+      PhaseR(3, 3, "Lith_RDistInter");
+      }
       break;
    }
    
@@ -248,16 +257,12 @@ void Lith_SpawnBoss(int num, int phase)
    fixed angle = ACS_GetActorAngle(0);
    
    bosstid = ACS_ActivatorTID();
-   
-   if(!bosstid) bosstid = ACS_UniqueTID();
+   bosstid = bosstid ? bosstid : ACS_UniqueTID();
    
    ACS_Thing_Remove(0);
    
    ACS_SpawnForced(names[num - 1], x, y, z, bosstid, angle);
-   
-   ACS_SetThingSpecial(bosstid, bossargs[0], bossargs[1], bossargs[2],
-      bossargs[3], bossargs[4], bossargs[5]);
-   
+   ACS_SetThingSpecial(bosstid, bossargs[0], bossargs[1], bossargs[2], bossargs[3], bossargs[4], bossargs[5]);
    ACS_SetUserVariable(bosstid, "user_phase", phase);
    
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
@@ -309,14 +314,14 @@ void Lith_SpawnBosses(score_t sum)
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 5 TRIES TO GET THIS RIGHT
    // AAAAGH
    
-        if(!world.boss1p1 &&                  sum > world.boss1p1scr) SpawnBoss(1, 1);
-   else if(!world.boss1p2 && world.boss1p1 && sum > world.boss1p2scr) SpawnBoss(1, 2);
-   else if(!world.boss2p1 && world.boss1p2 && sum > world.boss2p1scr) SpawnBoss(2, 1);
-   else if(!world.boss2p2 && world.boss2p1 && sum > world.boss2p2scr) SpawnBoss(2, 2);
-   else if(!world.boss2p3 && world.boss2p2 && sum > world.boss2p3scr) SpawnBoss(2, 3);
-   else if(!world.boss3p1 && world.boss2p3 && sum > world.boss3p1scr) SpawnBoss(3, 1);
-   else if(!world.boss3p2 && world.boss3p1 && sum > world.boss3p2scr) SpawnBoss(3, 2);
-   else if(!world.boss3p3 && world.boss3p2 && sum > world.boss3p3scr) SpawnBoss(3, 3);
+        if(!world.boss[1][1] &&                     sum > world.boss1p1scr) SpawnBoss(1, 1);
+   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss1p2scr) SpawnBoss(1, 2);
+   else if(!world.boss[2][1] && world.boss[1][2] && sum > world.boss2p1scr) SpawnBoss(2, 1);
+   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss2p2scr) SpawnBoss(2, 2);
+   else if(!world.boss[2][3] && world.boss[2][2] && sum > world.boss2p3scr) SpawnBoss(2, 3);
+   else if(!world.boss[3][1] && world.boss[2][3] && sum > world.boss3p1scr) SpawnBoss(3, 1);
+   else if(!world.boss[3][2] && world.boss[3][1] && sum > world.boss3p2scr) SpawnBoss(3, 2);
+   else if(!world.boss[3][3] && world.boss[3][2] && sum > world.boss3p3scr) SpawnBoss(3, 3);
 }
 
 // EOF

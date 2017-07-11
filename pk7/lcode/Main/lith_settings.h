@@ -35,16 +35,15 @@ Int("Y offset",         "lith_scanner_yoffs", -180, 20)
 Enum("Color",           "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set))
 Bool("Alternate font",  "lith_scanner_altfont")
 
-if(ACS_GameType() == GAME_SINGLE_PLAYER)
-{
+if(ACS_GameType() == GAME_SINGLE_PLAYER) {
    Category("Single-Player Visuals")
    ServerBool("Rain in outside areas",  "lith_sv_rain")
    ServerBool("Replace skies",          "lith_sv_sky")
    
    Category("Single-Player Gameplay")
+   ServerInt("Difficulty Base",         "lith_sv_difficulty", 1, 40)
    ServerBool("Explode on death",       "lith_sv_revenge")
-   if(world.grafZoneEntered)
-   {
+   if(world.grafZoneEntered) {
       ServerBool("Pause in menus (changes on new map)", "lith_sv_pauseinmenus")
    }
    ServerFloat("Score multiplier (changes on new map)", "lith_sv_scoremul", 0, 10)
@@ -54,10 +53,11 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER)
 
 #undef Category
 #undef Bool
-#undef ServerBool
-#undef ServerFloat
 #undef Float
 #undef Int
+#undef ServerBool
+#undef ServerFloat
+#undef ServerInt
 #undef Enum
 #undef CBox
 

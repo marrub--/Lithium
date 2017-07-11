@@ -56,10 +56,11 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    
 #define Category(...) y += 20;
 #define Bool(...) y += 10;
-#define ServerBool(...) y += 10;
-#define ServerFloat(...) y += 10;
 #define Float(...) y += 10;
 #define Int(...) y += 10;
+#define ServerBool(...) y += 10;
+#define ServerFloat(...) y += 10;
+#define ServerInt(...) y += 10;
 #define Enum(...) y += 10;
 #define CBox(...) y += 10;
 #include "lith_settings.h"
@@ -92,6 +93,30 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    } \
    y += 10;
 
+#define Float(label, cvar, minima, maxima) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
+   __with(double set = Lith_GetPCVarFixed(p, cvar), diff;) \
+   { \
+      Label(label); \
+      if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
+         Lith_SetPCVarFixed(p, cvar, set + diff); \
+   } \
+   } \
+   y += 10;
+
+#define Int(label, cvar, minima, maxima) \
+   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+   { \
+   __with(int set = Lith_GetPCVarInt(p, cvar), diff;) \
+   { \
+      Label(label); \
+      if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
+         Lith_SetPCVarInt(p, cvar, set + diff); \
+   } \
+   } \
+   y += 10;
+
 #define ServerBool(label, cvar) \
    if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
    { \
@@ -116,26 +141,14 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    } \
    y += 10;
 
-#define Float(label, cvar, minima, maxima) \
+#define ServerInt(label, cvar, minima, maxima) \
    if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
    { \
-   __with(double set = Lith_GetPCVarFixed(p, cvar), diff;) \
-   { \
-      Label(label); \
-      if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
-         Lith_SetPCVarFixed(p, cvar, set + diff); \
-   } \
-   } \
-   y += 10;
-
-#define Int(label, cvar, minima, maxima) \
-   if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
-   { \
-   __with(int set = Lith_GetPCVarInt(p, cvar), diff;) \
+   __with(int set = ACS_GetCVar(cvar), diff;) \
    { \
       Label(label); \
       if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
-         Lith_SetPCVarInt(p, cvar, set + diff); \
+         ACS_SetCVar(cvar, set + diff); \
    } \
    } \
    y += 10;

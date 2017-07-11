@@ -256,11 +256,11 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    
    // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
-   double vol = 0.62 * mul;
+   double vol = 0.7 * mul;
    
    // Play a sound when we pick up score
    if(!IsSmallNumber(vol) && Lith_GetPCVarInt(p, "lith_player_scoresound"))
-      ACS_PlaySound(p->tid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
+      ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
    
    //
    if(p->getUpgr(UPGR_CyberLegs)->active && ACS_Random(0, 10000) == 0)

@@ -61,6 +61,7 @@ user int    lith_scanner_color   = 106; // 'j'
 user bool   lith_scanner_altfont = false;
 
 // Server
+server           int   lith_sv_difficulty    = 1;
 server           bool  lith_sv_rain          = false;
 server           bool  lith_sv_sky           = false;
 server           bool  lith_sv_revenge       = true;

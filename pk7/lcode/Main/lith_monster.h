@@ -4,9 +4,30 @@
 #include "lith_common.h"
 #include "lith_list.h"
 
+enum mtype {
+   mtype_unknown,
+   mtype_zombie,
+   mtype_imp,
+   mtype_demon,
+   mtype_lostsoul,
+   mtype_mancubus,
+   mtype_arachnotron,
+   mtype_cacodemon,
+   mtype_hellknight,
+   mtype_baron,
+   mtype_revenant,
+   mtype_painelemental,
+   mtype_archvile,
+   mtype_mastermind,
+   mtype_cyberdemon,
+   mtype_phantom,
+   mtype_max
+};
+
 struct dmon {
    bool active;
    int id;
+   enum mtype type;
    
    bool wasdead;
    int exp;

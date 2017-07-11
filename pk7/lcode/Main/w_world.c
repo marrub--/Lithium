@@ -412,65 +412,53 @@ static void DoRain()
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Scripts
 //
-
+// GetDebugInfo
 //
-// Lith_World
-//
-[[__call("ScriptS"), __script("Open")]]
-static void Lith_World(void)
+static void GetDebugInfo(void)
 {
-   if(ACS_GameType() == GAME_TITLE_MAP)
-      return;
-   
-   if(world.mapnum == 1911777)
-   {
-      ACS_Exit_Normal(0);
-      return;
-   }
+   bool all = ACS_GetCVar("__lith_debug_all");
    
    world.dbgLevel = ACS_GetCVar("__lith_debug_level");
+   world.dbgItems = all || ACS_GetCVar("__lith_debug_items");
+   world.dbgBIP   = all || ACS_GetCVar("__lith_debug_bip");
+   world.dbgScore = all || ACS_GetCVar("__lith_debug_score");
+   world.dbgUpgr  = all || ACS_GetCVar("__lith_debug_upgrades");
+   world.dbgSave  = all || ACS_GetCVar("__lith_debug_save");
+}
+
+//
+// CheckCompat
+//
+static void CheckCompat(void)
+{
+   int tid;
    
-   // Init global state.
-   if(ACS_GetCVar("__lith_debug_all"))
-   {
-      world.dbgItems = true;
-      world.dbgBIP   = true;
-      world.dbgScore = true;
-      world.dbgUpgr  = true;
-      world.dbgSave  = true;
-   }
-   else
-   {
-      world.dbgItems = ACS_GetCVar("__lith_debug_items");
-      world.dbgBIP   = ACS_GetCVar("__lith_debug_bip");
-      world.dbgScore = ACS_GetCVar("__lith_debug_score");
-      world.dbgUpgr  = ACS_GetCVar("__lith_debug_upgrades");
-      world.dbgSave  = ACS_GetCVar("__lith_debug_save");
-   }
-   
-   __with(int tid;)
-   {
-      if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-         ACS_Thing_Remove(tid);
-      if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-         ACS_Thing_Remove(tid);
-   }
+   if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+      ACS_Thing_Remove(tid);
+   if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
+      ACS_Thing_Remove(tid);
    
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
-   
+}
+
+//
+// GSInit
+//
+static void GSInit(void)
+{
    extern void Lith_GInit_Shop();
+   extern void Lith_GSReinit_Upgrade(void);
+   extern void Lith_GSInit_Upgrade(void);
+   extern void Lith_GSInit_Weapon(void);
+   extern void Lith_GSInit_Dialogue(void);
+   
+   GetDebugInfo();
+   CheckCompat();
    Lith_GInit_Shop();
    
    if(!gsinit)
    {
-      extern void Lith_GSInit_Upgrade(void);
-      extern void Lith_GSInit_Weapon(void);
-      extern void Lith_GSInit_Dialogue(void);
-      
       Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
       Lith_GSInit_Dialogue();
@@ -489,13 +477,14 @@ static void Lith_World(void)
       gsinit = true;
    }
    else
-   {
-      extern void Lith_GSReinit_Upgrade();
-      
       Lith_GSReinit_Upgrade();
-   }
-   
-   // Map init.
+}
+
+//
+// MInit
+//
+static void MInit(void)
+{
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
    
@@ -521,71 +510,111 @@ static void Lith_World(void)
    
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
+}
+
+//
+// WSInit
+//
+static void WSInit(void)
+{
+   dmonid = 0;
+   world.bossspawned = false;
+   
+   if(world.unloaded)
+      world.mapscleared++;
+   
+   if(ACS_GetCVar("lith_sv_sky") && !world.islithmap)
+   {
+      if(world.mapscleared >= 20)
+      {
+         ACS_ChangeSky("LITHSKRD", "LITHSKRD");
+         ACS_SetSkyScrollSpeed(1, 0.01);
+      }
+      else if(world.mapscleared >= 10)
+         ACS_ChangeSky("LITHSKDE", "LITHSKDE");
+      else
+         ACS_ChangeSky("LITHSKS1", "LITHSKS1");
+   }
+}
+
+//
+// WInit
+//
+static void WInit(void)
+{
+   if(!ACS_GetCVar("lith_sv_nobosses"))
+      SpawnBoss();
+   
+   // Payout, which is not done on the first map.
+   if(world.mapscleared != 0)
+      Lith_DoPayout();
+   
+   // Cluster messages.
+   if(world.game == Game_Doom2 && world.cluster != world.prevcluster)
+      switch(world.prevcluster)
+   {
+   case 5: Lith_ForPlayer() p->deliverMail("Cluster1"); break;
+   case 6: Lith_ForPlayer() p->deliverMail("Cluster2"); break;
+   case 7: Lith_ForPlayer() p->deliverMail("Cluster3"); break;
+   }
+   
+   world.prevcluster = world.cluster;
+}
+
+
+//----------------------------------------------------------------------------
+// Scripts
+//
+
+//
+// Lith_World
+//
+[[__call("ScriptS"), __script("Open")]]
+static void Lith_World(void)
+{
+   if(ACS_GameType() == GAME_TITLE_MAP)
+      return;
+   
+   if(world.mapnum == 1911777)
+   {
+      ACS_Exit_Normal(0);
+      return;
+   }
+   
+   GSInit(); // Init global state.
+   MInit();  // Map init.
    
    // World-static pre-player init.
    bool doworldinit = false;
    
    if(ACS_Timer() <= 2)
    {
-      dmonid = 0;
-      world.bossspawned = false;
-      
-      if(world.unloaded)
-         world.mapscleared++;
-      
-      if(ACS_GetCVar("lith_sv_sky") && !world.islithmap)
-      {
-              if(world.mapscleared >= 20) {ACS_ChangeSky("LITHSKRD", "LITHSKRD"); ACS_SetSkyScrollSpeed(1, 0.01);}
-         else if(world.mapscleared >= 10)  ACS_ChangeSky("LITHSKDE", "LITHSKDE");
-         else                              ACS_ChangeSky("LITHSKS1", "LITHSKS1");
-      }
-      
+      WSInit();
       doworldinit = true;
    }
    
-   // World unloaded flag can be reset now.
-   world.unloaded = false;
+   world.unloaded = false; // World unloaded flag can be reset now.
+   mapinit = true;         // Sigil for when Lith_PlayerEntry can run.
    
-   // Sigil for when Lith_PlayerEntry can run.
-   mapinit = true;
-   
-   // Delay so we can make sure players are initialized.
-   ACS_Delay(1);
+   ACS_Delay(1); // Delay so players get initialized.
    
    // World-static post-player init.
    if(doworldinit)
-   {
-      if(!ACS_GetCVar("lith_sv_nobosses"))
-         SpawnBoss();
-      
-      // Payout, which is not done on the first map.
-      if(world.mapscleared != 0)
-         Lith_DoPayout();
-      
-      // Cluster messages.
-      if(world.game == Game_Doom2 && world.cluster != world.prevcluster)
-      {
-         switch(world.prevcluster)
-         {
-         case 5: Lith_ForPlayer() p->deliverMail("Cluster1"); break;
-         case 6: Lith_ForPlayer() p->deliverMail("Cluster2"); break;
-         case 7: Lith_ForPlayer() p->deliverMail("Cluster3"); break;
-         }
-      }
-      
-      world.prevcluster = world.cluster;
-   }
+      WInit();
    
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
    
+   // Line 1888300 is used as a control line for mod features.
+   // Check for if rain should be used.
+   if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
+      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")))
+      DoRain();
+   
+   // Main loop.
    int prevsecrets = 0;
    int prevkills   = 0;
    int previtems   = 0;
-   
-   // Line 1888300 is used as a control line for mod features.
-   if((ACS_GetCVar("lith_sv_rain") || world.mapnum == 18883000) && !ACS_GetLineUDMFInt(1888300, "user_lith_norain"))
-      DoRain();
    
    for(;;)
    {
@@ -614,7 +643,6 @@ static void Lith_World(void)
          ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
       
       ACS_Delay(1);
-      
       world.ticks++;
    }
 }

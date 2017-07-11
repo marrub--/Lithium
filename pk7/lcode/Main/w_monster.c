@@ -1,3 +1,6 @@
+// NB: The style in this file is different. Instead of using Allman style,
+//     K&R style is used due to the density of this code.
+
 #include "lith_monster.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -19,31 +22,34 @@ struct dminfo {
 // Static Objects
 //
 
-static __str searchnames[] = {
+static struct {
+   enum mtype type;
+   __str name;
+} const searchnames[] = {
    // Doom 2
-   "ZombieMan",
-   "ShotgunGuy",
-   "ChaingunGuy",
-   "Imp",
-   "Demon",
-   "Spectre",
-   "LostSoul",
-   "Fatso",
-   "Mancubus",
-   "Arachnotron",
-   "Cacodemon",
-   "Knight",
-   "Baron",
-   "Revenant",
-   "PainElemental",
-   "Archvile",
-   "SpiderMastermind",
-   "Cyberdemon",
+   mtype_zombie,        "ZombieMan",
+   mtype_zombie,        "ShotgunGuy",
+   mtype_zombie,        "ChaingunGuy",
+   mtype_imp,           "Imp",
+   mtype_demon,         "Demon",
+   mtype_demon,         "Spectre",
+   mtype_lostsoul,      "LostSoul",
+   mtype_mancubus,      "Fatso",
+   mtype_mancubus,      "Mancubus",
+   mtype_arachnotron,   "Arachnotron",
+   mtype_cacodemon,     "Cacodemon",
+   mtype_hellknight,    "Knight",
+   mtype_baron,         "Baron",
+   mtype_revenant,      "Revenant",
+   mtype_painelemental, "PainElemental",
+   mtype_archvile,      "Archvile",
+   mtype_mastermind,    "SpiderMastermind",
+   mtype_cyberdemon,    "Cyberdemon",
    
    // Lithium
-   "James",
-   "Makarov",
-   "Isaac"
+   mtype_phantom, "James",
+   mtype_phantom, "Makarov",
+   mtype_phantom, "Isaac"
 };
 
 
@@ -101,8 +107,8 @@ static void ShowBarrier(struct dminfo const *mi, fixed alpha)
 //
 static void BaseMonsterLevel(dmon_t *m)
 {
-   fixed rng1 = ACS_RandomFixed(1, 5);
-   fixed rng2 = ACS_RandomFixed(1, 100);
+   fixed rn1 = ACS_RandomFixed(1, 5);
+   fixed rn2 = ACS_RandomFixed(1, 100);
    fixed bias;
 
    switch(world.game) {
@@ -110,11 +116,12 @@ static void BaseMonsterLevel(dmon_t *m)
    default:            bias = world.mapscleared / 30.0; break;
    }
    
-   bias += (ACS_GameSkill() / skill_nightmare) / 2.0;
+   bias += (ACS_GameSkill() / (fixed)skill_nightmare) * 0.1;
+   bias += world.difficulty / 100.0;
+   bias *= ACS_RandomFixed(1, 1.5);
    
-   bias = bias * ACS_RandomFixed(1, 1.5);
-   m->rank  = minmax(rng1 * bias * 2, 1, 5);
-   m->level = minmax(rng2 * bias * 1, 1, 100);
+   m->rank  = minmax(rn1 * bias * 2, 1, 5);
+   m->level = minmax(rn2 * bias * 1, 1, 100);
 }
 
 //
@@ -128,10 +135,13 @@ static void SoulCleave(dmon_t *m, player_t *p)
 {
    int tid = ACS_UniqueTID();
    ACS_SpawnForced("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 16, tid);
+   
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    ACS_SetActorPropertyString(tid, APROP_Species, ACS_GetActorPropertyString(0, APROP_Species));
+   
    for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++)
       ACS_Delay(1);
+   
    ACS_SetActorPropertyString(tid, APROP_Species, "Lith_Player");
 }
 
@@ -196,9 +206,11 @@ void Lith_MonsterInfo()
    __str cname = ACS_GetActorClass(0);
    
    for(int i = 0; i < countof(searchnames); i++) {
-      if(strstr_str(cname, searchnames[i])) {
-         ifauto(dmon_t *, m, AllocDmon())
+      if(strstr_str(cname, searchnames[i].name)) {
+         ifauto(dmon_t *, m, AllocDmon()) {
+            m->type = searchnames[i].type;
             Lith_MonsterMain(m);
+         }
          return;
       }
    }
