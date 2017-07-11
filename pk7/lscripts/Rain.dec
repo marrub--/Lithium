@@ -32,6 +32,7 @@ actor Lith_BloodRainDrop : Lith_RainDrop
 actor Lith_RainDropSpawner
 {
    +NOTIMEFREEZE
+   
    states
    {
    Spawn:
@@ -59,6 +60,7 @@ actor Lith_BloodRainDropSpawner : Lith_RainDropSpawner
 
 actor Lith_SpawnRain : CustomInventory
 {
+   +NOTIMEFREEZE
    +INVENTORY.ALWAYSPICKUP
    
    states

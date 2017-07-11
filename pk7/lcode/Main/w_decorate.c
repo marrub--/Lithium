@@ -245,7 +245,9 @@ void Lith_PoisonFXTicker()
 {
    for(int i = 0; i < 17; i++)
    {
-      ACS_Delay(1);
+      do
+         ACS_Delay(1);
+      while(Lith_ScriptCall("Lith_PauseManager", "GetPaused"));
       
       if(ACS_CheckInventory("Lith_PoisonFXReset"))
       {
