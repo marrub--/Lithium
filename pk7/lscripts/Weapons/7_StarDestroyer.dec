@@ -199,8 +199,13 @@ actor Lith_StarDestroyer : Lith_CWeapon
       SDSG A 1 bright offset(-1, 36)
       SDSG A 2 bright offset(1, 37)
       SDSF A 3 bright offset(1, 38)
-      SDSF A 0 bright A_GunFlash("DummyFlash")
-      SDSF A 0 bright A_PlaySound("weapons/shipgun/fire", CHAN_5)
+      SDSF A 0 A_GunFlash("DummyFlash")
+      
+      SDSF A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_grafzone), 3)
+      SDSF A 0 A_PlaySound("weapons/shipgun/fire", CHAN_5)
+      SDSF A 0 A_Jump(256, 2)
+      SDSF A 0 A_PlaySound("weapons/shipgun/firemono", CHAN_5)
+      
       SDSF B 2 bright offset(0, 62) A_FireCustomMissile("Lith_StarProjectile")
       SDSF C 1 bright offset(0, 57)
       SDSF D 1 bright offset(0, 47)
