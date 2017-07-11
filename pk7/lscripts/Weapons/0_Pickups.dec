@@ -150,7 +150,8 @@ actor Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun
    {
    Spawn:
       TNT1 A 0
-      RIFL A 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
+      RIFL A 0 A_SpawnItemEx("Lith_ItemSpriteMarine", 0,0,0, 0,0,0, 0, Lith_ISF)
+      CSMG Z 0 A_SpawnItemEx("Lith_ItemSpriteMage",   0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chaingun)

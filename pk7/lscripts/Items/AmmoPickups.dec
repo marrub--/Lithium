@@ -22,6 +22,8 @@ actor Lith_ClipBox : Lith_ScoreItem replaces ClipBox
 
 actor Lith_Shell : Lith_ScoreItem replaces Shell
 {
+   Inventory.PickupSound "player/pickup/shells"
+   
    states
    {
    Spawn:
@@ -34,6 +36,8 @@ actor Lith_Shell : Lith_ScoreItem replaces Shell
 
 actor Lith_ShellBox : Lith_ScoreItem replaces ShellBox
 {
+   Inventory.PickupSound "player/pickup/shellb"
+   
    states
    {
    Spawn:
@@ -46,6 +50,8 @@ actor Lith_ShellBox : Lith_ScoreItem replaces ShellBox
 
 actor Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
 {
+   Inventory.PickupSound "player/pickup/rockets"
+   
    states
    {
    Spawn:
@@ -58,6 +64,8 @@ actor Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
 
 actor Lith_RocketBox : Lith_ScoreItem replaces RocketBox
 {
+   Inventory.PickupSound "player/pickup/rocketb"
+   
    states
    {
    Spawn:
@@ -70,6 +78,8 @@ actor Lith_RocketBox : Lith_ScoreItem replaces RocketBox
 
 actor Lith_Cell : Lith_ScoreItem replaces Cell
 {
+   Inventory.PickupSound "player/pickup/cells"
+   
    states
    {
    Spawn:
@@ -82,6 +92,8 @@ actor Lith_Cell : Lith_ScoreItem replaces Cell
 
 actor Lith_CellPack : Lith_ScoreItem replaces CellPack
 {
+   Inventory.PickupSound "player/pickup/cellb"
+   
    states
    {
    Spawn:

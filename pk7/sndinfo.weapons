@@ -81,6 +81,7 @@ weapons/mateba/load     lsounds/Mateba/Load.flac    // 〃
 weapons/mateba/close    lsounds/Mateba/Close.flac   // Half-Life 2, Fallout 4
 weapons/mateba/draw     lsounds/Mateba/Draw.flac    // ???
 weapons/mateba/finalize lsounds/Mateba/Finalize.ogg // Monster Girl Quest
+$alias weapons/mateba/pickup weapons/mateba/draw
 
 //
 // Shotgun
@@ -220,6 +221,7 @@ weapons/smg/close    lsounds/SMG/TopClose.flac     // 〃
 weapons/smg/magout   lsounds/SMG/MagOut.flac       // 〃
 weapons/smg/magin    lsounds/SMG/MagIn.flac        // EYE: Divine Cybermancy
 weapons/smg/draw     lsounds/SMG/Draw.flac         // Halo 3
+weapons/smg/pickup   lsounds/SMG/Pickup.flac       // FEAR
 
 //
 // Sniper Rifle
@@ -237,15 +239,16 @@ $alias weapons/sniper/zoomout weapons/shotgun/zoomout
 //
 // Ion Rifle
 //
-weapons/ionrifle/fire    lsounds/IonRifle/Fire.flac    // Fallout: New Vegas
-weapons/ionrifle/eject   lsounds/IonRifle/Eject.flac   // Killing Floor
-weapons/ionrifle/load    lsounds/IonRifle/Load.flac    // 〃
-weapons/ionrifle/magout  lsounds/IonRifle/MagOut.flac  // Halo 3
-weapons/ionrifle/magin   lsounds/IonRifle/MagIn.flac   // 〃
-weapons/ionrifle/zoomout lsounds/IonRifle/ZoomOut.flac // 〃
-weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac  // 〃
+weapons/ionrifle/fire    lsounds/IonRifle/Fire.flac      // Fallout: New Vegas
+weapons/ionrifle/eject   lsounds/IonRifle/Eject.flac     // Killing Floor
+weapons/ionrifle/load    lsounds/IonRifle/Load.flac      // 〃
+weapons/ionrifle/magout  lsounds/IonRifle/MagOut.flac    // Halo 3
+weapons/ionrifle/magin   lsounds/IonRifle/MagIn.flac     // 〃
+weapons/ionrifle/zoomout lsounds/IonRifle/ZoomOut.flac   // 〃
+weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac    // 〃
 weapons/ionrifle/empty   lsounds/IonRifle/FireEmpty.flac // Killing Floor
 weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallout 3
+weapons/ionrifle/pickup  lsounds/IonRifle/Pickup.flac    // Killing Floor, Halo 3
 
 //
 // Grenade Launcher
@@ -413,6 +416,8 @@ weapons/shipgun/explode lsounds/StarDestroyer/Explode.flac   // Halo 3
 weapons/shipgun/fire    lsounds/StarDestroyer/Fire.flac      // 〃
 weapons/shipgun/prepare lsounds/StarDestroyer/Charge.flac    // Halo 3, Devil May Cry 2
 weapons/shipgun/empty   lsounds/StarDestroyer/FireEmpty.flac // Counter-Strike: Source, Phantasy Star Online
+weapons/shipgun/draw    lsounds/StarDestroyer/Draw.flac      // Fallout: New Vegas
+weapons/shipgun/pickup  lsounds/StarDestroyer/Pickup.flac    // Halo 3, Doom 3
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6

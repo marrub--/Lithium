@@ -50,6 +50,8 @@ actor Lith_ArmorBonus : Lith_CustomInventory replaces ArmorBonus
 actor Lith_Backpack : Lith_ScoreItem replaces Backpack
 {
    Tag "Backpack"
+   Inventory.PickupSound "player/pickup/item"
+   
    +COUNTITEM
    
    states

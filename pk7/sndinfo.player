@@ -97,6 +97,12 @@ player/pickup/bluekey     lsounds/Player/Pickup/BlueKey.flac     // 〃
 player/pickup/redskull    lsounds/Player/Pickup/RedSkull.flac    // Halo 3
 player/pickup/yellowskull lsounds/Player/Pickup/YellowSkull.flac // 〃
 player/pickup/blueskull   lsounds/Player/Pickup/BlueSkull.flac   // 〃
+player/pickup/cells       lsounds/Player/Pickup/CellSmall.flac   // ???
+player/pickup/cellb       lsounds/Player/Pickup/CellPack.flac    // 〃
+player/pickup/shells      lsounds/Player/Pickup/ShellSmall.ogg   // 〃
+player/pickup/shellb      lsounds/Player/Pickup/ShellPack.ogg    // 〃
+player/pickup/rockets     lsounds/Player/Pickup/RocketSmall.flac // Halo 3
+player/pickup/rocketb     lsounds/Player/Pickup/RocketBig.flac   // Quake 2
 
 //
 // Gameboy
