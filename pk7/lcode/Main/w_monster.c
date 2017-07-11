@@ -154,6 +154,8 @@ static void OnDeath(dmon_t *m)
    m->wasdead = true;
    
    ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET)) {
+      if(p->sigil.acquired && m->type == mtype_imp && m->level >= 50)
+         ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
       if(p->getUpgr(UPGR_SoulCleaver)->active)
          SoulCleave(m, p);
    }

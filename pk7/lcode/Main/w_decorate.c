@@ -48,15 +48,33 @@ bool Lith_CheckCeilingSky()
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_SetVar(int num, int set)
+int Lith_SetVar(int num, int set)
 {
-   Lith_LocalPlayer->decvars[num - 1] = set;
+   return Lith_LocalPlayer->decvars[num - 1] = set;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetVar(int num)
 {
    return Lith_LocalPlayer->decvars[num - 1];
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_SetWVar(int num, int set)
+{
+   return world.decvars[num - 1] = set;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_IncWVar(int num)
+{
+   return world.decvars[num - 1]++;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetWVar(int num)
+{
+   return world.decvars[num - 1];
 }
 
 [[__call("ScriptS"), __extern("ACS")]]

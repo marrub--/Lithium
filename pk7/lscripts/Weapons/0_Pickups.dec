@@ -17,35 +17,35 @@ actor Lith_WeaponPickup : CustomInventory
       TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
       
       // xyz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", sin(user_glowangle) * 32.0,
                                               cos(user_glowangle) * 32.0,
                                               24.0 + (sin(user_glowzangle) * 9.0),
                                               0, 0, 0, 0)
       
       // yz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", 0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", 0,
                                               sin(user_glowangle) * 32.0,
                                               24.0 + (cos(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", cos(user_glowangle) * 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", cos(user_glowangle) * 32.0,
                                               sin(user_glowangle) * 32.0,
                                               24.0 + (sin(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", cos(user_glowangle) * 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", cos(user_glowangle) * 32.0,
                                               ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
                                               24.0 + (sin(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
       
       // xz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", sin(user_glowangle) * 32.0,
                                               0,
                                               24.0 + (cos(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", sin(user_glowangle) * 32.0,
                                               cos(user_glowangle) * 32.0,
                                               24.0 + (sin(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
+      TNT1 A 0 A_SpawnItemEx("Lith_WeapGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
                                               cos(user_glowangle) * 32.0,
                                               24.0 + (sin(user_glowangle) * 32.0),
                                               0, 0, 0, 0)
