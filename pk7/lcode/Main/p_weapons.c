@@ -136,6 +136,11 @@ bool Lith_WeaponPickup(int name)
    if(!ValidateWeapon(parm))
       return true;
    
+   weaponinfo_t const *info = &weaponinfo[parm];
+   
+   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
+   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
+   
    if(HasWeapon(p, parm))
    {
       if(!weaponstay)
@@ -144,13 +149,7 @@ bool Lith_WeaponPickup(int name)
       return !weaponstay;
    }
    
-   weaponinfo_t const *info = &weaponinfo[parm];
-   
    p->weaponsheld++;
-   
-   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
-   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
-   
    p->bip.unlock(info->name);
    
    GiveWeaponItem(parm);
