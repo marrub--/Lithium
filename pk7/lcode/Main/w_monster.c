@@ -6,6 +6,10 @@
 #include "lith_world.h"
 #include <math.h>
 
+#define HasResistances(m) ((m)->rank >= 2)
+#define MAXRANK 5
+#define MAXLEVEL 100
+
 
 //----------------------------------------------------------------------------
 // Types
@@ -15,6 +19,7 @@ struct dminfo {
    fixed x, y, z;
    fixed r, h;
    int health;
+   int lastlevel;
 };
 
 
@@ -54,6 +59,20 @@ static struct {
 
 
 //----------------------------------------------------------------------------
+// Extern Objects
+//
+
+__str const dmgtype_names[dmgtype_max] = {
+   "Bullets",
+   "Energy",
+   "Fire",
+   "Magic",
+   "Melee",
+   "Shrapnel"
+};
+
+
+//----------------------------------------------------------------------------
 // Static Functions
 //
 
@@ -85,6 +104,31 @@ static void GetInfo(struct dminfo *mi)
 }
 
 //
+// ApplyLevels
+//
+static void ApplyLevels(dmon_t *m, int prev)
+{
+   GetInfo(m->mi);
+   
+   for(int i = prev + 1; i <= m->level; i++) {
+      if(i % 10 == 0 && HasResistances(m)) {
+         int r;
+         do
+            r = ACS_Random(1, dmgtype_max)-1;
+         while(m->resist[r] == 0);
+         m->resist[r] += 2;
+      }
+   }
+   
+   ACS_SetActorProperty(0, APROP_Health, m->mi->health + (m->level - prev) * m->rank);
+   
+   for(int i = 0; i < dmgtype_max; i++) {
+      ifauto(int, resist, m->resist[i] / 15.0)
+         ACS_GiveInventory(StrParam("Lith_M_%S%i", dmgtype_names[i], min(resist, MAXRANK)), 1);
+   }
+}
+
+//
 // ShowBarrier
 //
 static void ShowBarrier(dmon_t const *m, fixed alpha)
@@ -93,13 +137,15 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    
    for(int i = 0; i < world.a_cur; i++) {
       struct polar *a = &world.a_angles[i];
+      
       fixed dst = m->mi->r / 2 + a->dst / 4;
-      fixed x = m->mi->x + ACS_Cos(a->ang) * dst;
-      fixed y = m->mi->y + ACS_Sin(a->ang) * dst;
-      int tid = ACS_UniqueTID();
+      fixed x   = m->mi->x + ACS_Cos(a->ang) * dst;
+      fixed y   = m->mi->y + ACS_Sin(a->ang) * dst;
+      int   tid = ACS_UniqueTID();
       __str bar = m->rank >= 5 ? "Lith_MonsterHeptaura" : "Lith_MonsterBarrier";
+      
       ACS_SpawnForced(bar, x, y, m->mi->z + m->mi->h / 2, tid);
-      ACS_SetActorPropertyFixed(tid, APROP_Alpha, (1 - a->dst / 256) * alpha);
+      ACS_SetActorPropertyFixed(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
    }
 }
 
@@ -108,8 +154,8 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
 //
 static void BaseMonsterLevel(dmon_t *m)
 {
-   fixed rn1 = ACS_RandomFixed(1, 5);
-   fixed rn2 = ACS_RandomFixed(1, 100);
+   fixed rn1 = ACS_RandomFixed(1, MAXRANK);
+   fixed rn2 = ACS_RandomFixed(1, MAXLEVEL);
    fixed bias;
 
    switch(world.game) {
@@ -121,8 +167,15 @@ static void BaseMonsterLevel(dmon_t *m)
    bias += world.difficulty / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
    
-   m->rank  = minmax(rn1 * bias * 2, 1, 5);
-   m->level = minmax(rn2 * bias * 1, 1, 100);
+   m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
+   m->level = minmax(rn2 * bias * 1, 1, MAXLEVEL);
+   
+   if(HasResistances(m)) {
+      for(int i = 0; i < m->rank; i++)
+         m->resist[ACS_Random(1, dmgtype_max)-1] += 5;
+   }
+   
+   ApplyLevels(m, 0);
 }
 
 //
@@ -155,8 +208,9 @@ static void OnDeath(dmon_t *m)
    m->wasdead = true;
    
    ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET)) {
-      if(p->sigil.acquired && m->type == mtype_imp && m->level >= 50)
+      if(p->sigil.acquired && m->type == mtype_imp && m->level >= 50 && m->rank >= 4)
          ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
+      
       if(p->getUpgr(UPGR_SoulCleaver)->active)
          SoulCleave(m, p);
    }
@@ -181,7 +235,8 @@ void Lith_MonsterMain(dmon_t *m)
    m->mi = &mi;
    
    BaseMonsterLevel(m);
-   LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S", m->id, m->rank, m->level, ACS_GetActorClass(0));
+   LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
+      m->id, m->rank, m->level, ACS_GetActorClass(0));
    
    for(;;) {
       GetInfo(m->mi);
@@ -191,10 +246,8 @@ void Lith_MonsterMain(dmon_t *m)
          WaitForResurrect(m);
       }
       
-      if(m->rank >= 2) {
-         ShowBarrier(m, m->level / 100.0);
-         // TODO: resistances
-      }
+      if(HasResistances(m))
+         ShowBarrier(m, m->level / (fixed)MAXLEVEL);
       
       ACS_Delay(1);
    }

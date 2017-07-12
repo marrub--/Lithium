@@ -4,6 +4,16 @@
 #include "lith_common.h"
 #include "lith_list.h"
 
+enum {
+   dmgtype_bullets,
+   dmgtype_energy,
+   dmgtype_fire,
+   dmgtype_magic,
+   dmgtype_melee,
+   dmgtype_shrapnel,
+   dmgtype_max
+};
+
 enum mtype {
    mtype_unknown,
    mtype_zombie,
@@ -33,6 +43,7 @@ struct dmon {
    int exp;
    int level;
    int rank;
+   int resist[dmgtype_max];
    
    struct dminfo *mi;
 };
@@ -40,6 +51,8 @@ struct dmon {
 __addrdef extern __gbl_arr dmonarr;
 
 typedef struct dmon dmonarr dmon_t;
+
+extern __str const dmgtype_names[dmgtype_max];
 
 extern dmon_t dmonalloc[];
 extern int dmonarr dmonid;

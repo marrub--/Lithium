@@ -9,6 +9,47 @@ actor Lith_MonsterInvalid : Inventory
    Inventory.MaxAmount 1
 }
 
+actor Lith_MResist : PowerProtection
+{
+   Powerup.Duration 0x7FFFFFFF
+   ActiveSound "player/rarmor/damage"
+}
+
+actor Lith_M_Bullets1 :Lith_MResist{DamageFactor "Lith_Bullets",  0.80 DamageFactor "Bullet",  0.80}
+actor Lith_M_Energy1  :Lith_MResist{DamageFactor "Lith_Energy",   0.80 DamageFactor "Railgun", 0.80 DamageFactor "Electric", 0.80 DamageFactor "Plasma", 0.80}
+actor Lith_M_Fire1    :Lith_MResist{DamageFactor "Lith_Fire",     0.80 DamageFactor "Fire",    0.80}
+actor Lith_M_Magic1   :Lith_MResist{DamageFactor "Lith_Magic",    0.80}
+actor Lith_M_Melee1   :Lith_MResist{DamageFactor "Lith_Melee",    0.80 DamageFactor "Melee", 0.80}
+actor Lith_M_Shrapnel1:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.80}
+
+actor Lith_M_Bullets2 :Lith_MResist{DamageFactor "Lith_Bullets",  0.60 DamageFactor "Bullet",  0.60}
+actor Lith_M_Energy2  :Lith_MResist{DamageFactor "Lith_Energy",   0.60 DamageFactor "Railgun", 0.60 DamageFactor "Electric", 0.60 DamageFactor "Plasma", 0.60}
+actor Lith_M_Fire2    :Lith_MResist{DamageFactor "Lith_Fire",     0.60 DamageFactor "Fire",    0.60}
+actor Lith_M_Magic2   :Lith_MResist{DamageFactor "Lith_Magic",    0.60}
+actor Lith_M_Melee2   :Lith_MResist{DamageFactor "Lith_Melee",    0.60 DamageFactor "Melee", 0.60}
+actor Lith_M_Shrapnel2:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.60}
+
+actor Lith_M_Bullets3 :Lith_MResist{DamageFactor "Lith_Bullets",  0.40 DamageFactor "Bullet",  0.40}
+actor Lith_M_Energy3  :Lith_MResist{DamageFactor "Lith_Energy",   0.40 DamageFactor "Railgun", 0.40 DamageFactor "Electric", 0.40 DamageFactor "Plasma", 0.40}
+actor Lith_M_Fire3    :Lith_MResist{DamageFactor "Lith_Fire",     0.40 DamageFactor "Fire",    0.40}
+actor Lith_M_Magic3   :Lith_MResist{DamageFactor "Lith_Magic",    0.40}
+actor Lith_M_Melee3   :Lith_MResist{DamageFactor "Lith_Melee",    0.40 DamageFactor "Melee", 0.40}
+actor Lith_M_Shrapnel3:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.40}
+
+actor Lith_M_Bullets4 :Lith_MResist{DamageFactor "Lith_Bullets",  0.20 DamageFactor "Bullet",  0.20}
+actor Lith_M_Energy4  :Lith_MResist{DamageFactor "Lith_Energy",   0.20 DamageFactor "Railgun", 0.20 DamageFactor "Electric", 0.20 DamageFactor "Plasma", 0.20}
+actor Lith_M_Fire4    :Lith_MResist{DamageFactor "Lith_Fire",     0.20 DamageFactor "Fire",    0.20}
+actor Lith_M_Magic4   :Lith_MResist{DamageFactor "Lith_Magic",    0.20}
+actor Lith_M_Melee4   :Lith_MResist{DamageFactor "Lith_Melee",    0.20 DamageFactor "Melee", 0.20}
+actor Lith_M_Shrapnel4:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.20}
+
+actor Lith_M_Bullets5 :Lith_MResist{DamageFactor "Lith_Bullets",  0.10 DamageFactor "Bullet",  0.10}
+actor Lith_M_Energy5  :Lith_MResist{DamageFactor "Lith_Energy",   0.10 DamageFactor "Railgun", 0.10 DamageFactor "Electric", 0.10 DamageFactor "Plasma", 0.10}
+actor Lith_M_Fire5    :Lith_MResist{DamageFactor "Lith_Fire",     0.10 DamageFactor "Fire",    0.10}
+actor Lith_M_Magic5   :Lith_MResist{DamageFactor "Lith_Magic",    0.10}
+actor Lith_M_Melee5   :Lith_MResist{DamageFactor "Lith_Melee",    0.10 DamageFactor "Melee", 0.10}
+actor Lith_M_Shrapnel5:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.10}
+
 actor Lith_MonsterBarrier
 {
    RenderStyle "Add"
@@ -44,7 +85,7 @@ actor Lith_MonsterHeptaura
    Spawn:
       LBAR B 1
    SpawnLoop:
-      LBAR B 1 A_FadeOut(0.07)
+      LBAR B 1 A_FadeOut(frandom(0.06, 0.08))
       loop
    }
 }
