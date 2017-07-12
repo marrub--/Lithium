@@ -73,10 +73,8 @@ actor Lith_DelearShotsFired : Inventory
    Inventory.MaxAmount 16
 }
 
-actor Lith_DelearSpriteDisplay : CustomInventory
+actor Lith_DelearSpriteDisplay : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    const int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY;
    
    states

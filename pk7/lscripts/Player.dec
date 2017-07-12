@@ -194,7 +194,7 @@ actor Lith_GEExplosion
    }
 }
 
-actor Lith_Death : CustomInventory
+actor Lith_Death : Lith_CustomFunction
 {
    states
    {
@@ -207,7 +207,7 @@ actor Lith_Death : CustomInventory
    }
 }
 
-actor Lith_Die : CustomInventory
+actor Lith_Die : Lith_CustomFunction
 {
    states
    {
@@ -217,7 +217,7 @@ actor Lith_Die : CustomInventory
    }
 }
 
-actor Lith_Nuke : CustomInventory
+actor Lith_Nuke : Lith_CustomFunction
 {
    states
    {

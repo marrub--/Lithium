@@ -1,7 +1,5 @@
-actor Lith_BossChecker : CustomInventory
+actor Lith_BossChecker : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

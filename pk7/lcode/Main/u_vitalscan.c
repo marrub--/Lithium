@@ -32,22 +32,20 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       bool legendary = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterToken");
       bool henshin   = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterTransformed");
       
-      bool freaktarget =
-         ACS_CheckFlag(0, "INVULNERABLE") ||
-         ACS_CheckFlag(0, "NODAMAGE");
-      
       bool phantom = ACS_CheckInventory("Lith_IsPhantom");
       
-      bool boss = ACS_CheckFlag(0, "BOSS");
+      bool freak  = ACS_CheckFlag(0, "INVULNERABLE") || ACS_CheckFlag(0, "NODAMAGE");
+      bool boss   = ACS_CheckFlag(0, "BOSS");
+      bool shadow = ACS_CheckFlag(0, "SHADOW");
       
       int id = Lith_UniqueID();
       dmon_t *m = DmonPtr();
       
-      if((freaktarget || boss) && !phantom)
+      if((freak || boss) && !phantom)
       {
          extern __str Lith_RandomName(int id);
          
-         UserData.tagstr    = Lith_RandomName(freaktarget ? 0 : id);
+         UserData.tagstr    = Lith_RandomName(freak ? 0 : id);
          UserData.oldhealth = UserData.health = ACS_Random(0, 666666);
          UserData.maxhealth = ACS_Random(0, 666666);
       }
@@ -66,9 +64,12 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       }
 
       if(m)
-         UserData.tagstr = StrParam("%S lv.%ir%i", UserData.tagstr, m->level, m->rank);
+      {
+         int level = shadow ? m->level - ACS_Random(-5, 5) : m->level;
+         UserData.tagstr = StrParam("%S lv.%ir%i", UserData.tagstr, level, m->rank);
+      }
       
-      UserData.freak = six || freaktarget || phantom || boss;
+      UserData.freak = six || freak || phantom || boss;
       UserData.angle = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));
       
       if((UserData.oldtarget = UserData.target) != (UserData.target = id))

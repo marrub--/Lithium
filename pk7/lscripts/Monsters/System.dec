@@ -29,10 +29,28 @@ actor Lith_MonsterBarrier
    }
 }
 
-actor Lith_MonsterBarrierLook : CustomInventory
+actor Lith_MonsterHeptaura
 {
-   +INVENTORY.ALWAYSPICKUP
+   RenderStyle "Add"
+   XScale 0.2
+   YScale 0.4
+   VSpeed 2
    
+   +NOTIMEFREEZE
+   +NOINTERACTION
+   
+   states
+   {
+   Spawn:
+      LBAR B 1
+   SpawnLoop:
+      LBAR B 1 A_FadeOut(0.07)
+      loop
+   }
+}
+
+actor Lith_MonsterBarrierLook : Lith_CustomFunction
+{
    states
    {
    Pickup:
@@ -94,11 +112,8 @@ actor Lith_MonsterSoul
    }
 }
 
-actor Lith_RunMonsterInfo : CustomInventory
+actor Lith_RunMonsterInfo : Lith_CustomFunction
 {
-   +NOTIMEFREEZE
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

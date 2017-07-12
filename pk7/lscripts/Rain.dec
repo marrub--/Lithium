@@ -58,11 +58,8 @@ actor Lith_BloodRainDropSpawner : Lith_RainDropSpawner
    }
 }
 
-actor Lith_SpawnRain : CustomInventory
+actor Lith_SpawnRain : Lith_CustomFunction
 {
-   +NOTIMEFREEZE
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

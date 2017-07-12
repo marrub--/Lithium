@@ -87,17 +87,18 @@ static void GetInfo(struct dminfo *mi)
 //
 // ShowBarrier
 //
-static void ShowBarrier(struct dminfo const *mi, fixed alpha)
+static void ShowBarrier(dmon_t const *m, fixed alpha)
 {
    ACS_GiveInventory("Lith_MonsterBarrierLook", 1);
    
    for(int i = 0; i < world.a_cur; i++) {
       struct polar *a = &world.a_angles[i];
-      fixed dst = mi->r / 2 + a->dst / 4;
-      fixed x = mi->x + ACS_Cos(a->ang) * dst;
-      fixed y = mi->y + ACS_Sin(a->ang) * dst;
+      fixed dst = m->mi->r / 2 + a->dst / 4;
+      fixed x = m->mi->x + ACS_Cos(a->ang) * dst;
+      fixed y = m->mi->y + ACS_Sin(a->ang) * dst;
       int tid = ACS_UniqueTID();
-      ACS_SpawnForced("Lith_MonsterBarrier", x, y, mi->z + mi->h / 2, tid);
+      __str bar = m->rank >= 5 ? "Lith_MonsterHeptaura" : "Lith_MonsterBarrier";
+      ACS_SpawnForced(bar, x, y, m->mi->z + m->mi->h / 2, tid);
       ACS_SetActorPropertyFixed(tid, APROP_Alpha, (1 - a->dst / 256) * alpha);
    }
 }
@@ -191,7 +192,7 @@ void Lith_MonsterMain(dmon_t *m)
       }
       
       if(m->rank >= 2) {
-         ShowBarrier(m->mi, m->level / 100.0);
+         ShowBarrier(m, m->level / 100.0);
          // TODO: resistances
       }
       

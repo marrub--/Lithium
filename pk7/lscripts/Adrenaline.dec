@@ -3,7 +3,7 @@ actor Lith_AdrenalineToken : Inventory
    Inventory.MaxAmount 1
 }
 
-actor Lith_AdrenalineProjectileProjectileChecker : CustomInventory
+actor Lith_AdrenalineProjectileProjectileChecker : Lith_CustomFunction
 {
    states
    {
@@ -19,7 +19,7 @@ actor Lith_AdrenalineProjectileProjectileChecker : CustomInventory
    }
 }
 
-actor Lith_AdrenalineProjectileChecker : CustomInventory
+actor Lith_AdrenalineProjectileChecker : Lith_CustomFunction
 {
    states
    {

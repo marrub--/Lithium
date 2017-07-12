@@ -23,7 +23,7 @@ actor Lith_BarrierFX
    }
 }
 
-actor Lith_BarrierProtection : CustomInventory
+actor Lith_BarrierProtection : Lith_CustomFunction
 {
    states
    {
@@ -40,7 +40,7 @@ actor Lith_BarrierProtection : CustomInventory
    }
 }
 
-actor Lith_BarrierSpell : CustomInventory
+actor Lith_BarrierSpell : Lith_CustomFunction
 {
    states
    {

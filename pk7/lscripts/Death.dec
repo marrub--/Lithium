@@ -34,7 +34,7 @@ actor Lith_PlayerDeathParticle2
    }
 }
 
-actor Lith_PlayerDeath : CustomInventory
+actor Lith_PlayerDeath : Lith_CustomFunction
 {
    states
    {

@@ -1,3 +1,9 @@
+actor Lith_CustomFunction : CustomInventory
+{
+   +INVENTORY.ALWAYSPICKUP
+   +NOTIMEFREEZE
+}
+
 actor Lith_MonsterHax
 {
    Monster
@@ -8,7 +14,7 @@ actor Lith_MonsterHax
    -CANPASS
 }
 
-actor Lith_Alerter : CustomInventory
+actor Lith_Alerter : Lith_CustomFunction
 {
    states
    {
@@ -43,7 +49,7 @@ actor Lith_UniqueID : Inventory
    +INVENTORY.UNDROPPABLE
 }
 
-actor Lith_EnemyChecker : CustomInventory
+actor Lith_EnemyChecker : Lith_CustomFunction
 {
    states
    {
@@ -61,10 +67,8 @@ actor Lith_SeriousStrength : PowerStrength
    DamageFactor 3
 }
 
-actor Lith_MakeSerious : CustomInventory
+actor Lith_MakeSerious : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -80,6 +84,7 @@ actor Lith_MakeSerious : CustomInventory
 actor Lith_SeriousEmitter
 {
    +NOTIMEFREEZE
+   
    states
    {
    Spawn:
@@ -89,10 +94,8 @@ actor Lith_SeriousEmitter
    }
 }
 
-actor Lith_GetAngles : CustomInventory
+actor Lith_GetAngles : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

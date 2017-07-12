@@ -3,10 +3,8 @@ actor Lith_MatebaShotsFired : Inventory
    Inventory.MaxAmount 12
 }
 
-actor Lith_Finalizer : CustomInventory
+actor Lith_Finalizer : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

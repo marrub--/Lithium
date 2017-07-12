@@ -51,10 +51,8 @@ actor Lith_MakarovGrenade : Lith_RifleGrenade
    +DONTHURTSPECIES
 }
 
-actor Lith_MakarovChainStopper : CustomInventory
+actor Lith_MakarovChainStopper : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:

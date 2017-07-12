@@ -19,10 +19,8 @@ actor Lith_PhantomAuraFX
    }
 }
 
-actor Lith_PhantomAura : CustomInventory
+actor Lith_PhantomAura : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -48,10 +46,8 @@ actor Lith_PhantomTeleportFX
    }
 }
 
-actor Lith_PhantomTeleport : CustomInventory
+actor Lith_PhantomTeleport : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -60,10 +56,8 @@ actor Lith_PhantomTeleport : CustomInventory
    }
 }
 
-actor Lith_PhantomPhase2Flags : CustomInventory
+actor Lith_PhantomPhase2Flags : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -72,10 +66,8 @@ actor Lith_PhantomPhase2Flags : CustomInventory
    }
 }
 
-actor Lith_PhantomPhase3Flags : CustomInventory
+actor Lith_PhantomPhase3Flags : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -85,10 +77,8 @@ actor Lith_PhantomPhase3Flags : CustomInventory
    }
 }
 
-actor Lith_PhantomTarget : CustomInventory
+actor Lith_PhantomTarget : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -103,10 +93,8 @@ actor Lith_PhantomTarget : CustomInventory
    }
 }
 
-actor Lith_PhantomHunt : CustomInventory
+actor Lith_PhantomHunt : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
@@ -115,17 +103,14 @@ actor Lith_PhantomHunt : CustomInventory
    }
 }
 
-actor Lith_PhantomLOSCheck : CustomInventory
+actor Lith_PhantomLOSCheck : Lith_CustomFunction
 {
-   +INVENTORY.ALWAYSPICKUP
-   
    states
    {
    Pickup:
       TNT1 A 0 A_JumpIfTargetInLOS("Nope")
       TNT1 A 0 A_ClearTarget
       stop
-   
    Nope:
       TNT1 A 0
       stop

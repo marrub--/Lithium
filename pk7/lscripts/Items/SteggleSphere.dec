@@ -19,7 +19,7 @@ actor Lith_RealSpectralSteggles
    }
 }
 
-actor Lith_SpectralSteggles : CustomInventory
+actor Lith_SpectralSteggles : Lith_CustomFunction
 {
    Mass 2
    
@@ -29,7 +29,6 @@ actor Lith_SpectralSteggles : CustomInventory
    {
    Pickup:
       TNT1 A 0 A_JumpIfInventory("Lith_Dogs", 1, "Dogs")
-      TNT1 A 0 A_RailWait
       stop
    Dogs:
       TNT1 A 0 A_SpawnItemEx("Lith_RealSpectralSteggles", 0, 0, 32, 10, 0, 9, frandom(0, 360), SXF_NOCHECKPOSITION|SXF_SETTARGET)
