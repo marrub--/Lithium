@@ -11,7 +11,7 @@
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PunctuatorFire(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    int ptid = ACS_UniqueTID();
    
    ACS_LineAttack(0, p->yaw, p->pitch, 128, "Lith_PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);

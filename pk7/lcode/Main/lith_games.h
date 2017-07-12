@@ -39,7 +39,7 @@ typedef struct gb_s
 // Extern Functions
 //
 
-[[__call("ScriptS")]] void Lith_PlayerUpdateGB(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerUpdateGB(struct player *p);
 
 #endif
 

@@ -18,7 +18,7 @@ void Lith_KeyZoom(int amt)
 {
    if(ACS_Timer() < 10) return;
    
-   player_t  *p    = Lith_LocalPlayer;
+   player_t  *p    = LocalPlayer;
    upgrade_t *upgr = p->getUpgr(UPGR_Zoom);
    
    if(upgr->active)       UserData.zoom += amt;   

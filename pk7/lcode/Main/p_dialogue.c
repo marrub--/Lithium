@@ -227,7 +227,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 void Lith_RunDialogue(int num)
 {
    // external state
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(p->indialogue)
       return;

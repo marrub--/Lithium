@@ -9,7 +9,7 @@
 // Extern Objects
 //
 
-[[__no_init]] player_t players[Lith_MAX_PLAYERS];
+[[__no_init]] player_t players[MAX_PLAYERS];
 
 
 //----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ static void Lith_PlayerEntry(void)
    if(ACS_GameType() == GAME_TITLE_MAP)
       return;
    
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
 reinit:
    while(!mapinit) ACS_Delay(1);
@@ -98,7 +98,7 @@ reinit:
 [[__call("ScriptS"), __script("Death")]]
 static void Lith_PlayerDeath(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    p->dead = true;
    
@@ -137,7 +137,7 @@ static void Lith_PlayerDeath(void)
 [[__call("ScriptS"), __script("Respawn")]]
 static void Lith_PlayerRespawn(void)
 {
-   Lith_LocalPlayer->reinit = true;
+   LocalPlayer->reinit = true;
 }
 
 //
@@ -146,7 +146,7 @@ static void Lith_PlayerRespawn(void)
 [[__call("ScriptS"), __script("Return")]]
 static void Lith_PlayerReturn(void)
 {
-   Lith_LocalPlayer->reinit = true;
+   LocalPlayer->reinit = true;
 }
 
 //
@@ -155,7 +155,7 @@ static void Lith_PlayerReturn(void)
 [[__call("ScriptS"), __script("Disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    p->bip.deallocate();
    
@@ -342,8 +342,8 @@ static void Lith_PlayerRunScripts(player_t *p)
       // Logic: Update our data.
       switch(p->activegui)
       {
-      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break; // Update CBI
-      case GUI_GB:  Lith_PlayerUpdateGB(p);     break; // Update Gameboy
+      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;
+      case GUI_GB:  Lith_PlayerUpdateGB(p);     break;
       }
       
       Lith_PlayerUpdateUpgrades(p); // Update upgrades

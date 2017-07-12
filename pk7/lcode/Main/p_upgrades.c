@@ -375,7 +375,7 @@ void Lith_PlayerEnterUpgrades(player_t *p)
 //
 // Lith_UpgrCanActivate
 //
-bool Lith_UpgrCanActivate(struct player_s *p, struct upgrade_s *upgr)
+bool Lith_UpgrCanActivate(player_t *p, struct upgrade_s *upgr)
 {
    if(!upgr->active)
    {

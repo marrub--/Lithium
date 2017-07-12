@@ -14,8 +14,8 @@ typedef struct shopdef_s
    score_t cost;
    
    // Private Data
-   void (*shopBuy)   (struct player_s *p, struct shopdef_s const *def, void *obj);
-   bool (*shopCanBuy)(struct player_s *p, struct shopdef_s const *def, void *obj);
+   void (*shopBuy)   (struct player *p, struct shopdef_s const *def, void *obj);
+   bool (*shopCanBuy)(struct player *p, struct shopdef_s const *def, void *obj);
    void (*shopGive)  (int tid,            struct shopdef_s const *def, void *obj);
 } shopdef_t;
 
@@ -38,8 +38,8 @@ typedef struct shopdef_s
 #define UserData_Zoom       data.u08
 #define UserData_HomingRPG  data.u09
 
-                      typedef void (*upgr_cb_t)       (struct player_s *, struct upgrade_s *);
-[[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player_s *, struct upgrade_s *);
+                      typedef void (*upgr_cb_t)       (struct player *, struct upgrade_s *);
+[[__call("ScriptS")]] typedef void (*upgr_update_cb_t)(struct player *, struct upgrade_s *);
 
 enum
 {
@@ -125,9 +125,9 @@ typedef struct upgradeinfo_s
    upgr_cb_t        Enter;
 } upgradeinfo_t;
 
-bool Lith_UpgrCanActivate(struct player_s *p, struct upgrade_s *upgr);
-bool Lith_UpgrToggle(struct player_s *p, struct upgrade_s *upgr);
-void Lith_UpgrSetOwned(struct player_s *p, struct upgrade_s *upgr);
+bool Lith_UpgrCanActivate(struct player *p, struct upgrade_s *upgr);
+bool Lith_UpgrToggle(struct player *p, struct upgrade_s *upgr);
+void Lith_UpgrSetOwned(struct player *p, struct upgrade_s *upgr);
 
 typedef struct upgrade_s
 {

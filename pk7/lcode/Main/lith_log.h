@@ -31,13 +31,13 @@ typedef struct loginfo_s
    list_t maps;
 } loginfo_t;
 
-void Lith_Log(struct player_s *p, __str fmt, ...);  // log to hud and full log
-void Lith_LogF(struct player_s *p, __str fmt, ...); // log to full log only
-void Lith_LogH(struct player_s *p, __str fmt, ...); // log to hud only
-logdata_t *Lith_LogV(struct player_s *p, __str fmt, va_list vl); // vararg
-[[__call("ScriptS")]] void Lith_PlayerUpdateLog(struct player_s *p);
-[[__call("ScriptS")]] void Lith_HUD_Log(struct player_s *p);
-void Lith_PlayerLogEntry(struct player_s *p);
+void Lith_Log(struct player *p, __str fmt, ...);  // log to hud and full log
+void Lith_LogF(struct player *p, __str fmt, ...); // log to full log only
+void Lith_LogH(struct player *p, __str fmt, ...); // log to hud only
+logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl); // vararg
+[[__call("ScriptS")]] void Lith_PlayerUpdateLog(struct player *p);
+[[__call("ScriptS")]] void Lith_HUD_Log(struct player *p);
+void Lith_PlayerLogEntry(struct player *p);
 
 #endif
 

@@ -65,8 +65,8 @@ typedef struct cbi_s
 //
 
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateCBIGUI(struct player_s *p);
-void Lith_PlayerResetCBIGUI(struct player_s *p);
+void Lith_PlayerUpdateCBIGUI(struct player *p);
+void Lith_PlayerResetCBIGUI(struct player *p);
 
 #endif
 

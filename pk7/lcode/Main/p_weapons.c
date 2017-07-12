@@ -95,7 +95,7 @@ bool Lith_WeaponPickup(int name)
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
    
    bool weaponstay = ACS_GetCVar("sv_weaponstay");
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    int parm = weapon_unknown;
    
    switch(p->pclass)
@@ -282,7 +282,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 fixed Lith_RifleFireRunOut(bool ro)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    __str cl = p->weapon.inv[weapon_rifle].ammoclass;
    fixed ret = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
    return ro ? ret * 1.2 : 1.0 - (ret * 0.35);

@@ -50,13 +50,13 @@ bool Lith_CheckCeilingSky()
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_SetVar(int num, int set)
 {
-   return Lith_LocalPlayer->decvars[num - 1] = set;
+   return LocalPlayer->decvars[num - 1] = set;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetVar(int num)
 {
-   return Lith_LocalPlayer->decvars[num - 1];
+   return LocalPlayer->decvars[num - 1];
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -100,7 +100,7 @@ void Lith_UpdateScore(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    int max = rifle_firemode_max;
    
    if(!p->getUpgr(UPGR_RifleModes)->active)
@@ -136,7 +136,7 @@ int Lith_VelHax(int fuck)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    p->health = ACS_GetActorProperty(0, APROP_Health);
    return p->health < p->maxhealth;
 }
@@ -144,7 +144,7 @@ bool Lith_CheckHealth(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    p->armor = ACS_CheckInventory("BasicArmor");
    return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
 }
@@ -152,13 +152,13 @@ bool Lith_CheckArmor(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Discount()
 {
-   Lith_LocalPlayer->discount = 0.9;
+   LocalPlayer->discount = 0.9;
 }
 
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_DOGS()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    int tid = ACS_UniqueTID();
    
@@ -208,7 +208,7 @@ void Lith_SteggleEnergy()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Barrier()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    for(int i = 0; p->active && i < 35 * 30; i++)
    {
@@ -276,7 +276,7 @@ void Lith_PoisonFXTicker()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_ResetRifleMode()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(Lith_GetPCVarInt(p, "lith_weapons_riflemodeclear"))
       p->riflefiremode = rifle_firemode_auto;
@@ -285,7 +285,7 @@ void Lith_ResetRifleMode()
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_StepSpeed()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
 	fixed vel = ACS_VectorLength(absk(p->velx), absk(p->vely));
    fixed num = 1k - (vel / 24k);
@@ -297,7 +297,7 @@ int Lith_StepSpeed()
 [[__call("ScriptI"), __address(24243), __extern("ACS")]]
 void Lith_BoughtItemPickup(int id)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    int const chan = CHAN_ITEM|CHAN_NOPAUSE;
    
@@ -329,7 +329,7 @@ void Lith_BoughtItemPickup(int id)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    p->closeGUI();
    

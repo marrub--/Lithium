@@ -116,7 +116,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    if(ACS_PlayerNumber() < 0)
       return 0;
    
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    switch(info)
    {
@@ -157,7 +157,7 @@ void Lith_PickupCBIItem(int num)
 {
    static void Lith_InstallCBIItem(int num);
    
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    switch(num)
    {

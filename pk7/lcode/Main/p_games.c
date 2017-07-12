@@ -20,7 +20,7 @@ static gb_gameinfo_t const gbgameinfo[GB_GAME_MAX] = {
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UseGameboy(void)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    
    if(p->dead)
       return;

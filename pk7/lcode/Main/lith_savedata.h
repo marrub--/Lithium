@@ -51,7 +51,7 @@ typedef struct savechunk_s
 typedef struct savefile_s
 {
    FILE *fp;
-   struct player_s *p;
+   struct player *p;
 } savefile_t;
 
 [[__call("ScriptS")]] typedef void (*loadchunker_t)(savefile_t *save, savechunk_t *chunk);
@@ -62,12 +62,12 @@ typedef struct savefile_s
 //
 
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size);
-savefile_t *Lith_SaveBegin(struct player_s *p);
+savefile_t *Lith_SaveBegin(struct player *p);
 [[__call("ScriptS")]] void Lith_SaveEnd(savefile_t *save);
 
 [[__optional_args(1)]]
 int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t chunker);
-savefile_t *Lith_LoadBegin(struct player_s *p);
+savefile_t *Lith_LoadBegin(struct player *p);
 void Lith_LoadEnd(savefile_t *save);
 
 #endif

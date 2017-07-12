@@ -46,8 +46,8 @@ typedef struct weapondata_s
 
 extern weaponinfo_t const weaponinfo[weapon_max];
 
-void Lith_PlayerUpdateWeapon(struct player_s *p);
-void Lith_PlayerUpdateWeapons(struct player_s *p);
+void Lith_PlayerUpdateWeapon(struct player *p);
+void Lith_PlayerUpdateWeapons(struct player *p);
 
 #endif
 

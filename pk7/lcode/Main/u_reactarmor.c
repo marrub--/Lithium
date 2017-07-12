@@ -57,7 +57,7 @@ static void RA_Give(__str name, int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_RA_Give(int num)
 {
-   player_t *p = Lith_LocalPlayer;
+   player_t *p = LocalPlayer;
    upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
    
    if(!upgr->active)

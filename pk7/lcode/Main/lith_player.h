@@ -1,6 +1,7 @@
 #ifndef LITH_PLAYER_H
 #define LITH_PLAYER_H
 
+#include "lith_common.h"
 #include "lith_cbi.h"
 #include "lith_upgrades.h"
 #include "lith_pdata.h"
@@ -13,12 +14,12 @@
 
 #include "Lth_hashmap.h"
 
-#define Lith_MAX_PLAYERS 8
+#define MAX_PLAYERS 8
 #define HUDSTRS_MAX 20
 #define INVALID_PLAYER (&players[-1])
 
 #define Lith_ForPlayer() \
-   for(int _piter = 0; _piter < Lith_MAX_PLAYERS; _piter++) \
+   for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
       __with(player_t *p = &players[_piter];) \
          if(p->active)
 
@@ -26,7 +27,7 @@
    Lith_ForPlayer() \
       p->giveScore(score, nomul)
 
-#define Lith_LocalPlayer (&players[ACS_PlayerNumber()])
+#define LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
 #define Lith_GetPCVarInt(p, ...)    ACS_GetUserCVar      ((p)->num, __VA_ARGS__)
@@ -249,37 +250,39 @@ typedef struct player_invdata_s
 // Extern Functions
 //
 
-void Lith_PlayerCloseGUI(struct player_s *p);
-void Lith_PlayerUseGUI(struct player_s *p, guiname_t type);
+void Lith_PlayerCloseGUI(struct player *p);
+void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 
 [[__optional_args(1)]]
-score_t Lith_GetModScore(struct player_s *p, score_t score, bool nomul);
+score_t Lith_GetModScore(struct player *p, score_t score, bool nomul);
 [[__optional_args(1)]]
-void Lith_GiveScore(struct player_s *p, score_t score, bool nomul);
-void Lith_TakeScore(struct player_s *p, score_t score);
+void Lith_GiveScore(struct player *p, score_t score, bool nomul);
+void Lith_TakeScore(struct player *p, score_t score);
 
-void Lith_ValidatePlayerTID(struct player_s *p);
+void Lith_ValidatePlayerTID(struct player *p);
 
-[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player_s *p);
-[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
 
-[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player_s *p);
-[[__call("ScriptS")]] void Lith_ResetPlayer(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
+[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
 
-[[__call("ScriptS")]] void Lith_PlayerDamageBob(struct player_s *p);
-[[__call("ScriptS")]] void Lith_PlayerView(struct player_s *p);
-                      void Lith_PlayerStyle(struct player_s *p);
-[[__call("ScriptS")]] void Lith_PlayerHUD(struct player_s *p);
+[[__call("ScriptS")]] void Lith_PlayerDamageBob(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerView(struct player *p);
+                      void Lith_PlayerStyle(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerHUD(struct player *p);
 [[__optional_args(2)]]
-bool Lith_SetPlayerVelocity(struct player_s *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
-bool Lith_ButtonPressed(struct player_s *p, int bt);
-int Lith_PlayerCurWeaponType(struct player_s *p);
-int Lith_PlayerGetClass(struct player_s *p);
+bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
+bool Lith_ButtonPressed(struct player *p, int bt);
+int Lith_PlayerCurWeaponType(struct player *p);
+int Lith_PlayerGetClass(struct player *p);
 
-void Lith_PlayerDeltaStats(struct player_s *p);
-upgrade_t *Lith_PlayerGetNamedUpgrade(struct player_s *p, int name);
-void Lith_ClearTextBuf(struct player_s *p);
-struct player_s *Lith_GetPlayer(int tid, int ptr);
+void Lith_PlayerDeltaStats(struct player *p);
+upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
+void Lith_ClearTextBuf(struct player *p);
+struct player *Lith_GetPlayer(int tid, int ptr);
+
+void Lith_PlayerMagicMenu(struct player *p);
 
 
 //----------------------------------------------------------------------------
@@ -297,8 +300,9 @@ struct player_s *Lith_GetPlayer(int tid, int ptr);
 // edit 23/1/2017: D E S T R O Y
 // edit 26/2/2017: There is yet again so much data that I had to split it.
 // edit 11/3/2017: NOW WITH PROPERTY HELL
+// edit 11/7/2017: and now it's over 5000 bytes.
 //
-typedef struct player_s
+typedef struct player
 {
    property reset     {call: Lith_ResetPlayer(this)}
    property loadData  {call: Lith_PlayerLoadData(this)}
@@ -333,6 +337,6 @@ typedef struct player_s
 // Extern Objects
 //
 
-extern player_t players[Lith_MAX_PLAYERS];
+extern player_t players[MAX_PLAYERS];
 
 #endif

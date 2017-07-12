@@ -3,7 +3,7 @@
 
 #define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
 
-// すまん
+// fug
 #define Lith_GUI_Button(g, ...) Lith_GUI_Button_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_Button_Id(g, id, ...) Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
 #define Lith_GUI_Checkbox(g, ...) Lith_GUI_Checkbox_Id(g, 0, __VA_ARGS__)
@@ -224,7 +224,7 @@ extern gui_slider_preset_t const slddefault;
 
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h);
 void Lith_GUI_Init(gui_state_t *g, size_t maxst);
-void Lith_GUI_UpdateState(gui_state_t *g, struct player_s *p);
+void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 [[__optional_args(2)]] void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h);
 void Lith_GUI_End(gui_state_t *g);
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
