@@ -127,12 +127,12 @@ $limit weapons/shotgun/gauss/spark 0
 //
 // Shotgun (Cyber-Mage)
 //
-weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, General 6000
+weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, Dynamic Range
 weapons/cshotgun/load   lsounds/CShotgun/Load.flac      // Halo 3
-weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // General 6000
+weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // Dynamic Range
 weapons/cshotgun/empty  lsounds/CShotgun/FireEmpty.flac // EYE: Divine Cybermancy
-weapons/cshotgun/pickup lsounds/CShotgun/Pickup.flac    // FEAR, General 6000
-weapons/cshotgun/draw   lsounds/CShotgun/Draw.flac      // General 6000
+weapons/cshotgun/pickup lsounds/CShotgun/Pickup.flac    // FEAR, Dynamic Range
+weapons/cshotgun/draw   lsounds/CShotgun/Draw.flac      // Dynamic Range
 
 //
 // Delear
