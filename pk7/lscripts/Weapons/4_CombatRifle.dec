@@ -34,6 +34,8 @@ actor Lith_CombatRifle : Lith_MWeapon
    Weapon.SlotNumber 4
    Weapon.SlotPriority 1
    
+   +WEAPON.NOAUTOAIM
+   
    states
    {
    Spawn:
