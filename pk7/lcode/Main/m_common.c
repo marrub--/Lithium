@@ -267,9 +267,9 @@ __str Language(__str fmt, ...)
    if(ret[0] == '$')
    {
       __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
-      __str new = StrParam("%LS", sub);
-      if(ACS_StrCmp(sub, new) != 0)
-         ret = new;
+      __str nex = StrParam("%LS", sub);
+      if(sub != nex)
+         ret = nex;
    }
    
    return ret;
@@ -291,7 +291,7 @@ __str LanguageNull(__str fmt, ...)
    __str name = ACS_EndStrParam();
    __str alias = Language(name);
    
-   if(ACS_StrCmp(name, alias) == 0) return null;
+   if(name == alias) return null;
    else return alias;
    
 }

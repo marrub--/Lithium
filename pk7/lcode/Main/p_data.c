@@ -264,8 +264,8 @@ void Lith_ResetPlayer(player_t *p)
    
    if(world.dbgItems)
       for(int i = weapon_min; i < weapon_max; i++)
-         if(weaponinfo[i].class != null)
-            ACS_GiveInventory(weaponinfo[i].class, 1);
+         if(weaponinfo[i].classname != null)
+            ACS_GiveInventory(weaponinfo[i].classname, 1);
 
    switch(p->pclass)
    {

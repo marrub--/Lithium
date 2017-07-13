@@ -22,7 +22,7 @@ typedef struct weaponinfo_s
    __str pickupsound;
    int defammotype;
    __str defammoclass;
-   __str class;
+   __str classname;
    int type;
 } weaponinfo_t;
 

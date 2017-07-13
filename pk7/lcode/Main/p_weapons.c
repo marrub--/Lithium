@@ -204,7 +204,7 @@ void Lith_GSInit_Weapon(void)
    {
       weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
       info->type  = i;
-      info->class = StrParam("Lith_%S", info->name);
+      info->classname = StrParam("Lith_%S", info->name);
    }
 }
 
@@ -230,21 +230,30 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
       
-      w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->class));
+      w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->classname));
       
       wep->info      = info;
-      wep->owned     = ACS_CheckInventory(info->class);
+      wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
       
-      if(i == weapon_shotgun && p->getUpgr(UPGR_GaussShotty)->active)
+      switch(i)
       {
-         wep->ammotype  = AT_Mag;
-         wep->ammoclass = "Lith_GaussShotsFired";
+      case weapon_shotgun:
+         if(p->getUpgr(UPGR_GaussShotty)->active)
+         {
+            wep->ammotype  = AT_Mag;
+            wep->ammoclass = "Lith_GaussShotsFired";
+         }
+         break;
+      case weapon_c_smg:
+         if(p->getUpgr(UPGR_SMG_A)->active)
+            wep->ammoclass = "Lith_SMGShotsFired2";
+         break;
       }
       
       // Check for currently held weapon.
-      if(!w->cur && ACS_StrICmp(p->weaponclass, info->class) == 0)
+      if(!w->cur && ACS_StrICmp(p->weaponclass, info->classname) == 0)
          w->cur = wep;
       
       if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype == AT_Mag)

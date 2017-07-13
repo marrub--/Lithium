@@ -330,7 +330,7 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
       return null;
    
    ForCategoryAndPage()
-      if(ACS_StrCmp(page->name, name) == 0)
+      if(page->name == name)
          return page;
    
    return null;

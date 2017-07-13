@@ -219,6 +219,7 @@ weapons/smg/heat     lsounds/SMG/HeatDisperse.flac // Self-made
 weapons/smg/open     lsounds/SMG/TopOpen.flac      // Half-Life 2
 weapons/smg/close    lsounds/SMG/TopClose.flac     // 〃
 weapons/smg/magout   lsounds/SMG/MagOut.flac       // 〃
+weapons/smg/magin2   lsounds/SMG/MagInLong.flac    // 〃
 weapons/smg/magin    lsounds/SMG/MagIn.flac        // EYE: Divine Cybermancy
 weapons/smg/draw     lsounds/SMG/Draw.flac         // Halo 3
 weapons/smg/pickup   lsounds/SMG/Pickup.flac       // FEAR
