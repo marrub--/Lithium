@@ -1,0 +1,53 @@
+actor Lith_Heretic_Key : Lith_CustomInventory
+{
+   Radius 20
+   Height 16
+   Inventory.PickupSound "misc/k_pkup"
+   
+   +NOTDMATCH
+}
+
+actor Lith_Heretic_KeyBlue : Lith_Heretic_Key replaces KeyBlue
+{
+   states
+   {
+   Spawn:
+      BKYY ABCDEFGHIJ 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_bluecard)
+      TNT1 A 0 A_GiveInventory("KeyBlue")
+      stop
+   }
+}
+
+actor Lith_Heretic_KeyGreen : Lith_Heretic_Key replaces KeyGreen
+{
+   states
+   {
+   Spawn:
+      AKYY ABCDEFGHIJ 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_redcard)
+      TNT1 A 0 A_GiveInventory("KeyGreen")
+      stop
+   }
+}
+
+actor Lith_Heretic_KeyYellow : Lith_Heretic_Key replaces KeyYellow
+{
+   states
+   {
+   Spawn:
+      CKYY ABCDEFGHI 3 bright
+      loop
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_yellowcard)
+      TNT1 A 0 A_GiveInventory("KeyYellow")
+      stop
+   }
+}
+
+// EOF
+

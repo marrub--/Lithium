@@ -51,6 +51,18 @@ static struct {
    mtype_mastermind,    "SpiderMastermind",
    mtype_cyberdemon,    "Cyberdemon",
    
+   // Heretic
+   mtype_imp,         "Gargoyle",
+   mtype_demon,       "Golem",
+   mtype_demon,       "Nitrogolem",
+   mtype_demon,       "Sabreclaw",
+   mtype_mancubus,    "Disciple",
+   mtype_arachnotron, "Ophidian",
+   mtype_hellknight,  "Warrior",
+   mtype_cacodemon,   "IronLich",
+   mtype_mastermind,  "Maulotaur",
+   mtype_cyberdemon,  "DSparil",
+   
    // Lithium
    mtype_phantom, "James",
    mtype_phantom, "Makarov",

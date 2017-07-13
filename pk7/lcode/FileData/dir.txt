@@ -1,12 +1,5 @@
 This is a list of files to be processed into LANGUAGE by compilefs.lua.
 
--- Heretic -------------------------------------------------------------------
-
-in filter/heretic/language.fs.txt
-
-Heretic_Upgrades.lthm -> Upgrades.lthm
-
-
 -- Info Pages ----------------------------------------------------------------
 
 in language.info.corporations.en.txt
