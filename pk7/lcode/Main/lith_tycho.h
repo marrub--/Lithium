@@ -93,6 +93,7 @@ union upgradedata_u
       float angle;
       float old;
       bool freak;
+      int rank;
    } u07;
    
    struct

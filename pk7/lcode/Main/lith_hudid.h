@@ -72,6 +72,8 @@ enum
    hid_vitalscannertag,
    hid_vitalscanhitE,
    hid_vitalscanhitS = hid_vitalscanhitE + 5,
+   hid_vitalscanrankE,
+   hid_vitalscanrankS = hid_vitalscanrankE + 20,
    
    hid_jetE,
    hid_jetS = hid_jetE + 15,

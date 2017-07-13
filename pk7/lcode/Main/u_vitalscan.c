@@ -66,7 +66,8 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       if(m)
       {
          int level = shadow ? m->level - ACS_Random(-5, 5) : m->level;
-         UserData.tagstr = StrParam("%S lv.%ir%i", UserData.tagstr, level, m->rank);
+         UserData.tagstr = StrParam("%S lv.%i", UserData.tagstr, level);
+         UserData.rank = m->rank;
       }
       
       UserData.freak = six || freak || phantom || boss;
@@ -110,6 +111,15 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    }
    
    __str font = Lith_GetPCVarInt(p, "lith_scanner_altfont") ? "SMALLFONT" : "CBIFONT";
+   
+   if(UserData.rank)
+   {
+      for(int i = 1; i <= UserData.rank; i++)
+      {
+         DrawSpriteFade(StrParam("lgfx/UI/Rank%i.png", i), hid_vitalscanrankS - (i - 1),
+            108.1 + ox + (i * 6), 181.1 + oy, 0.1, 0.1);
+      }
+   }
    
    HudMessageF(font, "%S", UserData.tagstr);
    HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannertag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
