@@ -10,7 +10,7 @@ actor Lith_PlasmaBoltTrail
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_Jump(256, "Particles")
+      TNT1 A 0 A_JumpIf(true, "Particles")
    SpawnPick:
       TNT1 A 0 A_Jump(256, "SpawnA", "SpawnB")
    SpawnA:
@@ -84,7 +84,7 @@ actor Lith_PlasmaBolt
    {
    Spawn:
       TNT1 A 3
-      TNT1 A 0 A_Jump(256, "Trail")
+      TNT1 A 0 A_JumpIf(true, "Trail")
    Trail:
       TNT1 A 0 A_JumpIf(user_trailstep >= 5, "TrailDone")
       TNT1 A 0 A_SetUserVar(user_trailstep, user_trailstep + 1)
@@ -100,7 +100,7 @@ actor Lith_PlasmaBolt
       goto Step
    Step:
       TNT1 A 1
-      TNT1 A 0 A_Jump(256, "Trail")
+      TNT1 A 0 A_JumpIf(true, "Trail")
    Death:
       TNT1 AAAA 0 A_SpawnParticle("Green", SPF_FULLBRIGHT, 15, 4, 0,
          frandom(-5, 5),frandom(-5, 5),frandom(-5, 5),

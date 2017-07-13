@@ -21,7 +21,7 @@ actor Lith_ZombieMan : ZombieMan replaces ZombieMan
       POSS E 5 A_FaceTarget
       POSS F 0 bright A_PlaySound("enemies/zombie/fire", CHAN_WEAPON)
       POSS F 0 bright A_JumpIfInTargetInventory("Lith_HasBarrier", 1, 2)
-      POSS F 0 A_Jump(256, "MissileFire")
+      POSS F 0 A_JumpIf(true, "MissileFire")
       POSS F 4 bright ACS_NamedExecuteAlways("Lith_BarrierBullets", 0)
       goto MissileDone
    MissileFire:
@@ -61,7 +61,7 @@ actor Lith_ShotgunGuy : ShotgunGuy replaces ShotgunGuy
       SPOS E 10 A_FaceTarget
       SPOS F 0 bright A_PlaySound("enemies/shotguy/fire", CHAN_WEAPON)
       SPOS F 0 bright A_JumpIfInTargetInventory("Lith_HasBarrier", 1, 2)
-      SPOS F 0 A_Jump(256, "MissileFire")
+      SPOS F 0 A_JumpIf(true, "MissileFire")
       SPOS F 0 bright ACS_NamedExecuteAlways("Lith_BarrierBullets", 0)
       goto MissileDone
    MissileFire:
@@ -126,7 +126,7 @@ actor Lith_Imp : DoomImp replaces DoomImp
    Pain:
       TROO H 2
       TROO H 2 A_Pain
-      TROO H 0 A_Jump(256, "See")
+      TROO H 0 A_JumpIf(true, "See")
    XDeath:
       "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp * 1.5)
       goto Super::XDeath
@@ -136,7 +136,7 @@ actor Lith_Imp : DoomImp replaces DoomImp
    Raise:
       TROO ML 8
       TROO KJI 6
-      TROO A 0 A_Jump(256, "See")
+      TROO A 0 A_JumpIf(true, "See")
    }
 }
 
@@ -157,7 +157,7 @@ actor Lith_ChaingunGuy : ChaingunGuy replaces ChaingunGuy
       CPOS E 12 A_FaceTarget
    MissileLoop:
       CPOS F 0 bright A_JumpIfInTargetInventory("Lith_HasBarrier", 1, 2)
-      CPOS F 0 A_Jump(256, "MissileFire")
+      CPOS F 0 A_JumpIf(true, "MissileFire")
       CPOS F 0 A_PlaySound("enemies/chainguy/fire")
       CPOS F 4 bright ACS_NamedExecuteAlways("Lith_BarrierBullets", 0)
       CPOS E 0 A_PlaySound("enemies/chainguy/fire")

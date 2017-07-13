@@ -76,7 +76,7 @@ actor Lith_MWeapon : Lith_Weapon
    _KnifeFinish:
       TNT1 AAAAAAAAA 0 A_Lower
       TNT1 A 1
-      TNT1 A 0 A_Jump(256, "Select")
+      TNT1 A 0 A_JumpIf(true, "Select")
    }
 }
 

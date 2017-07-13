@@ -8,7 +8,7 @@ actor Lith_BossChecker : Lith_CustomFunction
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_bossspawned), "nope")
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBossArgs1", special, args[0], args[1], args[2])
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SpawnBossArgs2", args[3], args[4])
-      TNT1 A 0 A_Jump(256, "Pickup1")
+      TNT1 A 0 A_JumpIf(true, "Pickup1")
    nope:
       TNT1 A 0
       stop
