@@ -43,6 +43,7 @@ struct dmon {
    int exp;
    int level;
    int rank;
+   int maxhealth;
    int resist[dmgtype_max];
    
    struct dminfo *mi;

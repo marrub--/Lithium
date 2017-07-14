@@ -12,7 +12,6 @@ actor Lith_MonsterInvalid : Inventory
 actor Lith_MResist : PowerProtection
 {
    Powerup.Duration 0x7FFFFFFF
-   ActiveSound "player/rarmor/damage"
 }
 
 actor Lith_M_Bullets1 :Lith_MResist{DamageFactor "Lith_Bullets",  0.80 DamageFactor "Bullet",  0.80}

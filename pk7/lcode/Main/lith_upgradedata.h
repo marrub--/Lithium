@@ -62,10 +62,12 @@ struct upgr_data_VitalScan {
    int   health;
    int   oldhealth;
    int   maxhealth;
-   float angle;
-   float old;
-   bool  freak;
-   int   rank;
+   float cangle;
+   float oangle;
+   fixed splitfrac;
+   unsigned split : 3;
+   unsigned rank  : 4;
+   bool     freak : 1;
 };
 
 struct upgr_data_Zoom {

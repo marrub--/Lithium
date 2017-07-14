@@ -132,7 +132,11 @@ static void ApplyLevels(dmon_t *m, int prev)
       }
    }
    
-   ACS_SetActorProperty(0, APROP_Health, m->mi->health + (m->level - prev) * m->rank);
+   if(m->level >= 5) {
+      int newh = (m->level - prev) * m->rank * ACS_RandomFixed(0.8, 1.2);
+      ACS_SetActorProperty(0, APROP_Health, m->mi->health + newh);
+      m->maxhealth += newh;
+   }
    
    for(int i = 0; i < dmgtype_max; i++) {
       ifauto(int, resist, m->resist[i] / 15.0)
@@ -246,7 +250,11 @@ void Lith_MonsterMain(dmon_t *m)
    struct dminfo mi;
    m->mi = &mi;
    
+   GetInfo(m->mi);
+   m->maxhealth = m->mi->health;
+   
    BaseMonsterLevel(m);
+   
    LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
    
