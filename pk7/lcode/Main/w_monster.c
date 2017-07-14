@@ -258,7 +258,7 @@ void Lith_MonsterMain(dmon_t *m)
          WaitForResurrect(m);
       }
       
-      if(HasResistances(m))
+      if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / (fixed)MAXLEVEL);
       
       ACS_Delay(1);

@@ -12,6 +12,7 @@ user bool   lith_player_scorelog      = false;
 user bool   lith_player_resultssound  = true;
 user bool   lith_player_stupidpickups = false;
 user bool   lith_player_brightweps    = false;
+user bool   lith_player_noitemfx      = false;
 user bool   lith_player_teleshop      = false;
 
 // Save data

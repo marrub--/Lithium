@@ -141,6 +141,7 @@ int Lith_GetWorldData(int info)
    switch(info)
    {
    case wdata_brightweps:  return ACS_GetUserCVar(0, "lith_player_brightweps");
+   case wdata_noitemfx:    return ACS_GetUserCVar(0, "lith_player_noitemfx");
    case wdata_gsinit:      return gsinit;
    case wdata_bossspawned: return world.bossspawned;
    case wdata_grafzone:    return world.grafZoneEntered;
