@@ -88,12 +88,6 @@ $random effects/geexplosion {
 //
 // Ambience
 //
-doors/dr1_open lsounds/Ambience/DoorOpen.flac      // Doom 3
-doors/dr1_clos lsounds/Ambience/DoorClose.flac     // 〃
-doors/dr2_open lsounds/Ambience/DoorOpenFast.flac  // 〃
-doors/dr2_clos lsounds/Ambience/DoorCloseFast.flac // 〃
-plats/pt1_strt lsounds/Ambience/PlatformStart.flac // 〃
-plats/pt1_stop lsounds/Ambience/PlatformStop.flac  // 〃
 amb/rain       lsounds/Ambience/Rain.ogg           // ???
 amb/wind       lsounds/Ambience/Wind.ogg           // 〃
 amb/rainout    lsounds/Ambience/RainOut.ogg        // 〃
