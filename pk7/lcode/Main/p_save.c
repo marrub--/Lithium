@@ -15,9 +15,7 @@ void Lith_PlayerSaveData(player_t *p)
 {
    savefile_t *save;
    if((save = Lith_SaveBegin(p)))
-   {
       Lith_SaveEnd(save);
-   }
 }
 
 //
@@ -28,9 +26,7 @@ void Lith_PlayerLoadData(player_t *p)
 {
    savefile_t *save;
    if((save = Lith_LoadBegin(p)))
-   {
       Lith_LoadEnd(save);
-   }
 }
 
 // EOF

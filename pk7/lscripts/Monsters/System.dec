@@ -49,6 +49,26 @@ actor Lith_M_Magic5   :Lith_MResist{DamageFactor "Lith_Magic",    0.10}
 actor Lith_M_Melee5   :Lith_MResist{DamageFactor "Lith_Melee",    0.10 DamageFactor "Melee", 0.10}
 actor Lith_M_Shrapnel5:Lith_MResist{DamageFactor "Lith_Shrapnel", 0.10}
 
+actor Lith_MonsterNoPain : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_ChangeFlag("NOPAIN", true)
+      stop
+   }
+}
+
+actor Lith_MonsterUsePain : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_ChangeFlag("NOPAIN", false)
+      stop
+   }
+}
+
 actor Lith_MonsterBarrier
 {
    RenderStyle "Add"
@@ -143,7 +163,7 @@ actor Lith_MonsterSoul
    SpawnLoop:
       BLLT N 0 A_SpawnItemEx("Lith_MonsterSoulEffect")
       BLLT N 0 A_SeekerMissile(0, 360, SMF_LOOK|SMF_PRECISE, 256, 1)
-      BLLT N 1 A_FadeOut
+      BLLT N 1 A_FadeOut(0.05)
       loop
    Death:
       BLLT N 0 A_PlaySound("ghost/hit", CHAN_5, 1, false, 0.5)

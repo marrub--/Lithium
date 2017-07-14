@@ -20,6 +20,7 @@ struct dminfo {
    fixed r, h;
    int health;
    int lastlevel;
+   int painwait;
 };
 
 
@@ -123,12 +124,16 @@ static void ApplyLevels(dmon_t *m, int prev)
    GetInfo(m->mi);
    
    for(int i = prev + 1; i <= m->level; i++) {
-      if(i % 10 == 0 && HasResistances(m)) {
-         int r;
-         do {
-            r = ACS_Random(1, dmgtype_max)-1;
-         } while(m->resist[r] == 0);
-         m->resist[r] += 2;
+      if(i % 10 == 0) {
+         if(HasResistances(m)) {
+            int r;
+            do {
+               r = ACS_Random(1, dmgtype_max)-1;
+            } while(m->resist[r] == 0);
+            m->resist[r] += 2;
+         }
+         
+         m->painresist++;
       }
    }
    
@@ -198,6 +203,20 @@ static void BaseMonsterLevel(dmon_t *m)
 }
 
 //
+// ApplyPainResist
+//
+static void ApplyPainResist(dmon_t *m)
+{
+   if(!m->mi->painwait) {
+      ACS_GiveInventory("Lith_MonsterUsePain", 1);
+      m->mi->painwait = m->painresist;
+   } else {
+      ACS_GiveInventory("Lith_MonsterNoPain", 1);
+      m->mi->painwait--;
+   }
+}
+
+//
 // SoulCleave
 //
 // Spawn a Monster Soul and temporarily set the species of it until the
@@ -208,6 +227,7 @@ static void SoulCleave(dmon_t *m, player_t *p)
 {
    int tid = ACS_UniqueTID();
    ACS_SpawnForced("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 16, tid);
+   ACS_SetActorProperty(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
    
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    ACS_SetActorPropertyString(tid, APROP_Species, ACS_GetActorPropertyString(0, APROP_Species));
@@ -248,11 +268,11 @@ static void OnDeath(dmon_t *m)
 [[__call("ScriptS")]]
 void Lith_MonsterMain(dmon_t *m)
 {
-   ACS_GiveInventory("Lith_MonsterID", m->id + 1);
-
-   struct dminfo mi;
-   m->mi = &mi;
+   struct dminfo mi = {};
    
+   ACS_GiveInventory("Lith_MonsterID", m->id + 1);
+   
+   m->mi = &mi;
    GetInfo(m->mi);
    m->maxhealth = m->mi->health;
    
@@ -271,6 +291,9 @@ void Lith_MonsterMain(dmon_t *m)
       
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / (fixed)MAXLEVEL);
+      
+      if(m->painresist)
+         ApplyPainResist(m);
       
       ACS_Delay(1);
    }

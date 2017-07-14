@@ -297,23 +297,5 @@ fixed Lith_RifleFireRunOut(bool ro)
    return ro ? ret * 1.2 : 1.0 - (ret * 0.35);
 }
 
-//
-// Lith_StarShotSelect
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_StarShotSelect()
-{
-   Log("Lith_StarShotSelect");
-}
-
-//
-// Lith_StarShotDeselect
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_StarShotDeselect()
-{
-   Log("Lith_StarShotDeselect");
-}
-
 // EOF
 
