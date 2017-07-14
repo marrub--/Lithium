@@ -17,8 +17,6 @@ typedef void const *__str;
 #include <string.h>
 #include <stdint.h>
 
-#include "lith_tycho.h"
-
 #define property __prop
 #define prop_arg __arg
 #define ifauto(type, name, ...) \
@@ -135,6 +133,7 @@ enum
 };
 
 // Types
+typedef long long int score_t;
 typedef long fixed fixed64_t;
 typedef uint64_t crc64_t;
 

@@ -14,6 +14,34 @@
 #define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbi.rdistinter)
 #define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
+
+//----------------------------------------------------------------------------
+// Types
+//
+
+enum
+{
+   UG_None,
+   UG_Pistol,
+   UG_Shotgun,
+   UG_Rifle,
+   UG_Launcher,
+   UG_Plasma,
+   UG_BFG,
+   UG_HUD,
+   UG_BASE_MAX
+};
+
+enum
+{
+   UR_AI  = 1 << 0,
+   UR_WMD = 1 << 1,
+   UR_WRD = 1 << 2,
+   UR_RDI = 1 << 3,
+   UR_RA  = 1 << 4,
+};
+
+
 //----------------------------------------------------------------------------
 // Static Objects
 //
@@ -289,6 +317,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
       {
          upgrade_t *upgr = &p->upgrades[j];
          
+         upgr->dataptr = &p->upgrdata;
          upgr->info = &upgradeinfo[i];
          
          p->upgrademap.elem.data[j].keyhash = upgr->info->key;

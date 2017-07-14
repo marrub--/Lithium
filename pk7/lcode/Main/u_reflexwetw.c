@@ -1,6 +1,6 @@
 #include "lith_upgrades_common.h"
 
-#define UserData upgr->UserData_ReflexWetw
+#define UData UData_ReflexWetw(upgr)
 
 #define CHARGE_MAX (35 * 0.8)
 
@@ -38,8 +38,8 @@ static void DOOOOODGE(player_t *p)
 void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 {
    p->speedmul += 0.3;
-   UserData.charge = CHARGE_MAX;
-   UserData.leaped = 0;
+   UData.charge = CHARGE_MAX;
+   UData.leaped = 0;
 }
 
 //
@@ -56,17 +56,17 @@ void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
-   if(UserData.charge < CHARGE_MAX)
-      UserData.charge++;
+   if(UData.charge < CHARGE_MAX)
+      UData.charge++;
    
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
-   if(UserData.charge >= CHARGE_MAX)
+   if(UData.charge >= CHARGE_MAX)
    {
       if(grounddist == 0.0)
-         UserData.leaped = 0;
+         UData.leaped = 0;
       
       if(p->buttons & BT_SPEED &&
          (grounddist <= 16.0 || !p->getUpgr(UPGR_JetBooster)->active))
@@ -78,20 +78,20 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          
          DOOOOODGE(p);
          
-         UserData.charge = 0;
+         UData.charge = 0;
       }
    }
    
    if(p->buttonPressed(BT_JUMP) &&
-      !ACS_CheckInventory("Lith_RocketBooster") && !UserData.leaped &&
-      ((grounddist <= 16.0 && UserData.charge < CHARGE_MAX) || grounddist > 16.0))
+      !ACS_CheckInventory("Lith_RocketBooster") && !UData.leaped &&
+      ((grounddist <= 16.0 && UData.charge < CHARGE_MAX) || grounddist > 16.0))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
       ACS_PlaySound(0, "player/doublejump");
       p->setVel(p->velx + (cosk(angle) * 4.0), p->vely + (sink(angle) * 4.0), 12.0, false, true);
       
-      UserData.leaped = 1;
+      UData.leaped = 1;
    }
 }
 
@@ -103,7 +103,7 @@ void Upgr_ReflexWetw_Render(player_t *p, upgrade_t *upgr)
    if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
    
    int  time11 = p->ticks % 11;
-   float slide = UserData.charge / (float)CHARGE_MAX;
+   float slide = UData.charge / (float)CHARGE_MAX;
    
    DrawSprite(slide < 0.95f ? "lgfx/HUD/H_D21.png" : "lgfx/HUD/H_D24.png",
       HUDMSG_FADEOUT | HUDMSG_ALPHA,

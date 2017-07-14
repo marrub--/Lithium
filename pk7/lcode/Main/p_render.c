@@ -146,7 +146,7 @@ static void HUD_StringStack(player_t *p)
       
       hudstr->link.link(&p->hudstrlist);
       
-      if(p->hudstrlist.size == HUDSTRS_MAX)
+      if(p->hudstrlist.size == 20)
          free(p->hudstrlist.next->unlink());
    }
    

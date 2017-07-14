@@ -1,6 +1,6 @@
 #include "lith_upgrades_common.h"
 
-#define UserData upgr->UserData_Adrenaline
+#define UData UData_Adrenaline(upgr)
 #define CHARGE_MAX (30 * 35)
 
 
@@ -23,15 +23,15 @@ void Upgr_Adrenaline_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
 {
    // Charge
-   if(UserData.charge < CHARGE_MAX)
-      UserData.charge++;
+   if(UData.charge < CHARGE_MAX)
+      UData.charge++;
    
    // Prepare
-   else if(!UserData.readied)
+   else if(!UData.readied)
    {
       ACS_PlaySound(0, "player/adren/ready", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
       p->logH(">>>>> Adrenaline injector ready.");
-      UserData.readied = true;
+      UData.readied = true;
    }
    
    // Ready to use
@@ -49,7 +49,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
          ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
          p->logH(">>>>> Adrenaline administered.");
          
-         UserData.charge = UserData.readied = 0;
+         UData.charge = UData.readied = 0;
          
          ACS_GiveInventory("Lith_TimeHax2", 1);
          ACS_Delay(36);
@@ -68,9 +68,9 @@ void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
    if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
    
    int timemod = p->ticks % 45;
-   float amt = UserData.charge / (float)CHARGE_MAX;
+   float amt = UData.charge / (float)CHARGE_MAX;
    
-   DrawSprite(UserData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
+   DrawSprite(UData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
       HUDMSG_FADEOUT | HUDMSG_ALPHA,
       hid_adrenind_fxS - timemod,
       77.1 - timemod,

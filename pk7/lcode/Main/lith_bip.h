@@ -14,8 +14,6 @@
 
 #include "lith_list.h"
 
-#define MAX_BIP_UNLOCKS 5
-
 
 //----------------------------------------------------------------------------
 // Extern Functions
@@ -50,7 +48,7 @@ enum
    MAILF_AllPlayers   = 1 << 1,
 };
 
-typedef __str bip_unlocks_t[MAX_BIP_UNLOCKS];
+typedef __str bip_unlocks_t[5];
 
 typedef struct bippage_s
 {

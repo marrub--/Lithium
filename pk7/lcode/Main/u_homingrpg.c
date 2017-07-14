@@ -1,8 +1,7 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
-#define UserData       upgr->UserData_HomingRPG
-#define UserDataExtern p->getUpgr(UPGR_HomingRPG)->UserData_HomingRPG
+#define UData UData_HomingRPG(upgr)
 
 
 //----------------------------------------------------------------------------
@@ -47,11 +46,11 @@ void Upgr_HomingRPG_Update(player_t *p, upgrade_t *upgr)
       if(p->buttons & BT_ALTATTACK)
       {
          int id;
-         if((id = CheckTarget(p)) && id != UserData.id)
+         if((id = CheckTarget(p)) && id != UData.id)
          {
             ACS_LocalAmbientSound("weapons/rocket/mark", 127);
             ACS_SetPointer(AAPTR_TRACER, 0, AAPTR_PLAYER_GETTARGET);
-            UserData.id = id;
+            UData.id = id;
          }
       }
       

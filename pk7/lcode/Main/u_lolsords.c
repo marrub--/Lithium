@@ -1,6 +1,6 @@
 #include "lith_upgrades_common.h"
 
-#define UserData upgr->UserData_lolsords
+#define UData UData_lolsords(upgr)
 
 
 //----------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 //
 void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 {
-   UserData.origweapon = p->weaponclass;
+   UData.origweapon = p->weaponclass;
    ACS_GiveInventory("Lith_Sword", 1);
 }
 
@@ -22,7 +22,7 @@ void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 {
    ACS_TakeInventory("Lith_Sword", 1);
-   ACS_SetWeapon(UserData.origweapon);
+   ACS_SetWeapon(UData.origweapon);
 }
 
 //

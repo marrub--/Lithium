@@ -1,6 +1,6 @@
 #include "lith_upgrades_common.h"
 
-#define UserData upgr->UserData_JetBooster
+#define UData UData_JetBooster(upgr)
 
 #define CHARGE_MAX (35 * 7)
 
@@ -14,7 +14,7 @@
 //
 void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 {
-   UserData.charge = CHARGE_MAX;
+   UData.charge = CHARGE_MAX;
 }
 
 //
@@ -23,14 +23,14 @@ void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
-   if(UserData.charge < CHARGE_MAX)
-      UserData.charge++;
+   if(UData.charge < CHARGE_MAX)
+      UData.charge++;
    
    if(p->frozen) return;
    
    fixed grounddist = p->z - p->floorz;
    
-   if(p->buttonPressed(BT_SPEED) && grounddist > 16.0 && UserData.charge >= CHARGE_MAX)
+   if(p->buttonPressed(BT_SPEED) && grounddist > 16.0 && UData.charge >= CHARGE_MAX)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
       
@@ -38,8 +38,8 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
       ACS_GiveInventory("Lith_RocketBooster", 1);
       p->setVel(p->velx + (cosk(angle) * 16.0), p->vely + (sink(angle) * 16.0), 10.0, false, true);
       
-      UserData.charge = 0;
-      p->getUpgr(UPGR_ReflexWetw)->UserData_ReflexWetw.leaped = 0;
+      UData.charge = 0;
+      UData_ReflexWetw(p->getUpgr(UPGR_ReflexWetw)).leaped = 0;
    }
 }
 
@@ -48,9 +48,9 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->hudenabled || UserData.charge == CHARGE_MAX) return;
+   if(!p->hudenabled || UData.charge == CHARGE_MAX) return;
    
-   fixed rocket = UserData.charge / (fixed)CHARGE_MAX;
+   fixed rocket = UData.charge / (fixed)CHARGE_MAX;
    int max = (hid_jetS - hid_jetE) * rocket;
    
    DrawSpriteFade("H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);

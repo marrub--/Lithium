@@ -3,6 +3,7 @@
 
 #include "lith_common.h"
 #include "lith_upgradenames.h"
+#include "lith_upgradedata.h"
 #include "lith_shopdef.h"
 #include "lith_list.h"
 

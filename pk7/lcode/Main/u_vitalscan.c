@@ -2,7 +2,7 @@
 #include "lith_world.h"
 #include "lith_monster.h"
 
-#define UserData upgr->UserData_VitalScan
+#define UData UData_VitalScan(upgr)
 
 
 //----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       ACS_PlayerNumber() != -1;
    
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
-      UserData.target = UserData.oldtarget = 0;
+      UData.target = UData.oldtarget = 0;
    
    else if(validtarget)
    {
@@ -45,36 +45,36 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       {
          extern __str Lith_RandomName(int id);
          
-         UserData.tagstr    = Lith_RandomName(freak ? 0 : id);
-         UserData.oldhealth = UserData.health = ACS_Random(0, 666666);
-         UserData.maxhealth = ACS_Random(0, 666666);
+         UData.tagstr    = Lith_RandomName(freak ? 0 : id);
+         UData.oldhealth = UData.health = ACS_Random(0, 666666);
+         UData.maxhealth = ACS_Random(0, 666666);
       }
       else
       {
          char color = Lith_GetPCVarInt(p, "lith_scanner_color") & 0x7F;
          
-              if(six)     UserData.tagstr = "\Cg6";
-         else if(henshin) UserData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
-         else if(phantom) UserData.tagstr = StrParam("\Cg%tS", 0);
-         else             UserData.tagstr = StrParam("\C%c%tS", color, 0);
+              if(six)     UData.tagstr = "\Cg6";
+         else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
+         else if(phantom) UData.tagstr = StrParam("\Cg%tS", 0);
+         else             UData.tagstr = StrParam("\C%c%tS", color, 0);
          
-         UserData.oldhealth = UserData.health;
-         UserData.health    = ACS_GetActorProperty(0, APROP_Health);
-         UserData.maxhealth = ACS_GetActorProperty(0, APROP_SpawnHealth);
+         UData.oldhealth = UData.health;
+         UData.health    = ACS_GetActorProperty(0, APROP_Health);
+         UData.maxhealth = ACS_GetActorProperty(0, APROP_SpawnHealth);
       }
 
       if(m)
       {
          int level = shadow ? m->level - ACS_Random(-5, 5) : m->level;
-         UserData.tagstr = StrParam("%S lv.%i", UserData.tagstr, level);
-         UserData.rank = m->rank;
+         UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
+         UData.rank = m->rank;
       }
       
-      UserData.freak = six || freak || phantom || boss;
-      UserData.angle = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));
+      UData.freak = six || freak || phantom || boss;
+      UData.angle = atan2f(p->y - ACS_GetActorY(0), p->x - ACS_GetActorX(0));
       
-      if((UserData.oldtarget = UserData.target) != (UserData.target = id))
-         UserData.oldhealth = UserData.health;
+      if((UData.oldtarget = UData.target) != (UData.target = id))
+         UData.oldhealth = UData.health;
    }
 }
 
@@ -83,28 +83,26 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->hudenabled || !UserData.target) return;
+   if(!p->hudenabled || !UData.target) return;
    
    int ox = Lith_GetPCVarInt(p, "lith_scanner_xoffs");
    int oy = Lith_GetPCVarInt(p, "lith_scanner_yoffs");
    
    if(Lith_GetPCVarInt(p, "lith_scanner_slide"))
    {
-      float diff = p->yawf - UserData.angle;
-      ox += (UserData.old = lerpf(UserData.old, atan2f(sinf(diff), cosf(diff)), 0.1)) * 64;
+      float diff = p->yawf - UData.angle;
+      ox += (UData.old = lerpf(UData.old, atan2f(sinf(diff), cosf(diff)), 0.1)) * 64;
    }
    
-   if(UserData.health < UserData.oldhealth)
+   if(UData.health < UData.oldhealth)
    {
-      int delta = UserData.oldhealth - UserData.health;
+      int delta = UData.oldhealth - UData.health;
       
       HudMessageF("CBIFONT", "-%i", delta);
       HudMessageParams(HUDMSG_FADEOUT, hid_vitalscanhitS, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
       
-      for(int i = 1; i < 5; i++)
+      for(int i = 1; i < 5 && delta >= 100 * i; i++)
       {
-         if(delta < 100 * i) break;
-         
          HudMessageF("CBIFONT", "-%i", delta);
          HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vitalscanhitS - i, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
       }
@@ -112,19 +110,19 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    
    __str font = Lith_GetPCVarInt(p, "lith_scanner_altfont") ? "SMALLFONT" : "CBIFONT";
    
-   if(UserData.rank)
+   if(UData.rank)
    {
-      for(int i = 1; i <= UserData.rank; i++)
+      for(int i = 1; i <= UData.rank; i++)
       {
          DrawSpriteFade(StrParam("lgfx/UI/Rank%i.png", i), hid_vitalscanrankS - (i - 1),
             108.1 + ox + (i * 6), 181.1 + oy, 0.1, 0.1);
       }
    }
    
-   HudMessageF(font, "%S", UserData.tagstr);
+   HudMessageF(font, "%S", UData.tagstr);
    HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannertag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
    
-   HudMessageF(UserData.freak ? "ALIENFONT" : font, "%i/%i", UserData.health, UserData.maxhealth);
+   HudMessageF(UData.freak ? "ALIENFONT" : font, "%i/%i", UData.health, UData.maxhealth);
    HudMessageParams(HUDMSG_FADEOUT, hid_vitalscannerhp, CR_WHITE, 160.4 + ox, 188.2 + oy, 0.1, 0.4);
 }
 

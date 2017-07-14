@@ -17,7 +17,8 @@ user bool   lith_player_teleshop      = false;
 
 // Save data
 // These are 200 bytes of storage per, so overall we have around 4kb available.
-// If this isn't enough more of these can be added trivially (ACS assumes nothing)
+// If this isn't enough more of these can be added trivially (ACS doesn't
+// assume the amount of available storage)
 user string lith_psave_0  = "";
 user string lith_psave_1  = "";
 user string lith_psave_2  = "";

@@ -83,7 +83,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page)
    bip->categoryavail[page->category]++;
    page->unlocked = true;
    
-   for(int i = 0; i < MAX_BIP_UNLOCKS && page->unlocks[i]; i++)
+   for(int i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++)
       bip->unlock(page->unlocks[i]);
 }
 

@@ -15,7 +15,6 @@
 #include "Lth_hashmap.h"
 
 #define MAX_PLAYERS 8
-#define HUDSTRS_MAX 20
 #define INVALID_PLAYER (&players[-1])
 
 #define Lith_ForPlayer() \
@@ -128,6 +127,7 @@ typedef struct player_extdata_s
 {
    bip_t bip;
    
+   struct upgr_data upgrdata;
    upgrade_t   upgrades[UPGR_STATIC_MAX];
    Lth_HashMap upgrademap;
    int         upgrmax;
@@ -301,6 +301,7 @@ void Lith_PlayerMagicMenu(struct player *p);
 // edit 26/2/2017: There is yet again so much data that I had to split it.
 // edit 11/3/2017: NOW WITH PROPERTY HELL
 // edit 11/7/2017: and now it's over 5000 bytes.
+// edit 14/7/2017: lol nevermind it's only 2kb now
 //
 typedef struct player
 {
