@@ -125,15 +125,17 @@ static void ApplyLevels(dmon_t *m, int prev)
    for(int i = prev + 1; i <= m->level; i++) {
       if(i % 10 == 0 && HasResistances(m)) {
          int r;
-         do
+         do {
             r = ACS_Random(1, dmgtype_max)-1;
-         while(m->resist[r] == 0);
+         } while(m->resist[r] == 0);
          m->resist[r] += 2;
       }
    }
    
    if(m->level >= 5) {
-      int newh = (m->level - prev) * m->rank * ACS_RandomFixed(0.8, 1.2);
+      fixed rn = m->rank / 10.0;
+      int hp10 = m->maxhealth / 10;
+      int newh = (m->level - prev) * hp10 * ACS_RandomFixed(rn - 0.1, rn + 0.1);
       ACS_SetActorProperty(0, APROP_Health, m->mi->health + newh);
       m->maxhealth += newh;
    }
@@ -175,10 +177,11 @@ static void BaseMonsterLevel(dmon_t *m)
    fixed bias;
 
    switch(world.game) {
-   case Game_Episodic: bias = world.mapscleared / 8.0;  break;
-   default:            bias = world.mapscleared / 30.0; break;
+   case Game_Episodic: bias = world.mapscleared / 10.0; break;
+   default:            bias = world.mapscleared / 40.0; break;
    }
    
+   bias *= bias;
    bias += (ACS_GameSkill() / (fixed)skill_nightmare) * 0.1;
    bias += world.difficulty / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);

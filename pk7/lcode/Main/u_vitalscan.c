@@ -58,6 +58,11 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          
          UData.oldhealth = UData.health;
          UData.health    = chp;
+         
+         if(m)
+            UData.maxhealth = m->maxhealth;
+         else
+            UData.maxhealth = shp;
       }
 
       if(m) {
@@ -67,11 +72,9 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          int splith = m->maxhealth / (fixed)nsplit;
          UData.tagstr    = StrParam("%S lv.%i", UData.tagstr, level);
          UData.rank      = m->rank;
-         UData.maxhealth = m->maxhealth;
          UData.splitfrac = (chp - (splith * (split - 1))) / (fixed)splith;
          UData.split     = minmax(split, 1, 7);
       } else {
-         UData.maxhealth = shp;
          UData.splitfrac = chp / (fixed)shp;
          UData.split = 1;
       }

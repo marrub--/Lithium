@@ -644,6 +644,9 @@ static void Lith_World(void)
       if(enemiesarecompatible)
          ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
       
+      extern void DmonDebugInfo(void);
+      DmonDebugInfo();
+      
       ACS_Delay(1);
       world.ticks++;
    }

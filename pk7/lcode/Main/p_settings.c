@@ -44,7 +44,7 @@ if(ACS_GameType() == GAME_SINGLE_PLAYER) {
    ServerBool("Replace skies",          "lith_sv_sky");
    
    Category("Single-Player Gameplay");
-   ServerInt("Difficulty Base",         "lith_sv_difficulty", 1, 40);
+   ServerInt("Difficulty Base",         "lith_sv_difficulty", 1, 100);
    ServerBool("Explode on death",       "lith_sv_revenge");
    if(world.grafZoneEntered)
       ServerBool("Pause in menus (changes on new map)", "lith_sv_pauseinmenus");

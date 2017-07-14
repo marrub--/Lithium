@@ -20,6 +20,37 @@ int dmonarr dmonid;
 //
 
 //
+// DmonDebugInfo
+//
+void DmonDebugInfo(void)
+{
+   static int lmvar idprev;
+   
+   if(world.dbgLevel < log_dmon)
+      return;
+   
+   if(idprev < dmonid) {
+      int hilvl = 0, lolvl = 0;
+      int hirnk = 0, lornk = 0;
+      
+      for(int i = idprev; i < dmonid; i++) {
+         dmon_t *m = &dmonalloc[i];
+         if(m->level < lolvl) lolvl = m->level;
+         if(m->level > hilvl) hilvl = m->level;
+         if(m->rank  < lornk) lornk = m->rank;
+         if(m->rank  > hirnk) hirnk = m->rank;
+      }
+      
+      Log("\Cghighest\C- level enemy: lv.%i", hilvl);
+      Log("\Chlowest \C- level enemy: lv.%i", lolvl);
+      Log("\Cghighest\C- rank enemy:  r%i", hirnk);
+      Log("\Chlowest \C- rank enemy:  r%i", lornk);
+   }
+   
+   idprev = dmonid;
+}
+
+//
 // DmonPtr
 //
 [[__call("ScriptS")]]
