@@ -30,7 +30,6 @@ struct phantom_s
 
 static int lmvar bossargs[6];
 static int lmvar bosstid;
-static bool firstboss = true;
 
 
 //----------------------------------------------------------------------------
@@ -287,16 +286,19 @@ void Lith_SpawnBoss(int num, int phase)
 }
 
 //
-// SpawnBoss
+// Lith_TriggerBoss
 //
-static void SpawnBoss(int num, int phase)
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_TriggerBoss(int num, int phase)
 {
+   static bool firstboss = true;
+   
    int tid;
    
    ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID());
    ACS_SetActorState(tid, StrParam("Boss%i_%i", num, phase));
    
-   LogDebug(log_boss, "Lith_SpawnBosses: Spawning boss %i phase %i", num, phase);
+   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %i phase %i", num, phase);
    
    if(firstboss)
    {
@@ -314,14 +316,14 @@ void Lith_SpawnBosses(score_t sum)
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 5 TRIES TO GET THIS RIGHT
    // AAAAGH
    
-        if(!world.boss[1][1] &&                     sum > world.boss1p1scr) SpawnBoss(1, 1);
-   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss1p2scr) SpawnBoss(1, 2);
-   else if(!world.boss[2][1] && world.boss[1][2] && sum > world.boss2p1scr) SpawnBoss(2, 1);
-   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss2p2scr) SpawnBoss(2, 2);
-   else if(!world.boss[2][3] && world.boss[2][2] && sum > world.boss2p3scr) SpawnBoss(2, 3);
-   else if(!world.boss[3][1] && world.boss[2][3] && sum > world.boss3p1scr) SpawnBoss(3, 1);
-   else if(!world.boss[3][2] && world.boss[3][1] && sum > world.boss3p2scr) SpawnBoss(3, 2);
-   else if(!world.boss[3][3] && world.boss[3][2] && sum > world.boss3p3scr) SpawnBoss(3, 3);
+        if(!world.boss[1][1] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
+   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
+   else if(!world.boss[2][1] && world.boss[1][2] && sum > world.boss2p1scr) Lith_TriggerBoss(2, 1);
+   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss2p2scr) Lith_TriggerBoss(2, 2);
+   else if(!world.boss[2][3] && world.boss[2][2] && sum > world.boss2p3scr) Lith_TriggerBoss(2, 3);
+   else if(!world.boss[3][1] && world.boss[2][3] && sum > world.boss3p1scr) Lith_TriggerBoss(3, 1);
+   else if(!world.boss[3][2] && world.boss[3][1] && sum > world.boss3p2scr) Lith_TriggerBoss(3, 2);
+   else if(!world.boss[3][3] && world.boss[3][2] && sum > world.boss3p3scr) Lith_TriggerBoss(3, 3);
 }
 
 // EOF

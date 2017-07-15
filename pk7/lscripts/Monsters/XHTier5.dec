@@ -1,5 +1,6 @@
 actor Lith_XH_SpiderMastermind : Lith_SpiderMastermind
 {
+   +MISSILEEVENMORE
 }
 
 actor Lith_XH_Cyberdemon : Lith_Cyberdemon

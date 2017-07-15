@@ -53,6 +53,8 @@ actor Lith_SpiderMastermind : SpiderMastermind replaces SpiderMastermind
    DamageFactor "Lith_Energy", 0.5 // :^)
    Tag "$LITH_TXT_INFO_SHORT_SpiderMastermind"
    
+   +MISSILEMORE
+   
    states
    {
    See:
