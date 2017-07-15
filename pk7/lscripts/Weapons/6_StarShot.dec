@@ -12,6 +12,7 @@ actor Lith_Star
    Scale 0.7
    Mass 0
    RenderStyle "Add"
+   DamageType "Lith_Magic"
    SeeSound "weapons/sshot/fire"
    
    Projectile
@@ -66,6 +67,7 @@ actor Lith_StarShot : Lith_CWeapon
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_StarShotShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_StarShotShotsFired", randompick(2, 4, 6))
+      TNT1 A 0 A_AlertMonsters
       TNT1 A 0 A_PlaySound("weapons/sshot/firero", CHAN_7, CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX)
       TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-3,3), false, -20, 10)
       TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-3,3), false,  20, 10)
