@@ -84,7 +84,7 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"IonRifle_A",  "IonRifleUpgr", 10      }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
    {{"IonRifle_B",  "IonRifleUpg2", 10      }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
    {{"CPlasma_A",   "CPlasmaUpgr",  10      }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Plasma},
-   {{"ShipGun_A",   "ShipGunUpgr",  10      }, pclass_cybermage, UC_Weap,  0,  0.00, UG_BFG},
+   {{"ShipGun_A",   "ShipGunUpgr",  6688800 }, pclass_cybermage, UC_Weap,  0,  0.00, UG_BFG},
    {{"ShipGun_B",   "ShipGunUpg2",  10      }, pclass_cybermage, UC_Weap,  0,  0.00, UG_BFG},
 
    {{"TorgueMode",  null,           8000000 }, pclass_any,       UC_Extr,  8,  0.00, Req(UR_RDI)},
