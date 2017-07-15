@@ -146,6 +146,7 @@ typedef struct player_extdata_s
    
    int spuriousexplosions;
    int brouzouf;
+   bool hadinfrared;
 } player_extdata_t;
 
 //
@@ -267,6 +268,7 @@ void Lith_ValidatePlayerTID(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
 [[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
 
+                      void Lith_PlayerPowerupFx(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerDamageBob(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerView(struct player *p);
                       void Lith_PlayerStyle(struct player *p);

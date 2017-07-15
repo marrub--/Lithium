@@ -18,6 +18,17 @@ static void HUD_Waves(player_t *p);
 //
 
 //
+// Lith_PlayerPowerupFx
+//
+void Lith_PlayerPowerupFx(player_t *p)
+{
+   bool hasir = ACS_CheckInventory("PowerLightAmp");
+   if(!hasir && p->hadinfrared)
+      ACS_LocalAmbientSound("player/infraredoff", 127);
+   p->hadinfrared = hasir;
+}
+
+//
 // Lith_PlayerDamageBob
 //
 // Update view bobbing when you get damaged.

@@ -159,7 +159,7 @@ actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
 actor Lith_Infrared : Lith_CustomInventory replaces Infrared
 {
    Tag "CB-Goggles"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/infrared"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
