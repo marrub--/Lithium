@@ -7,8 +7,6 @@
 #include <math.h>
 
 #define HasResistances(m) ((m)->rank >= 2)
-#define MAXRANK 5
-#define MAXLEVEL 100
 
 
 //----------------------------------------------------------------------------

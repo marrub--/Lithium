@@ -30,8 +30,8 @@ void DmonDebugInfo(void)
       return;
    
    if(idprev < dmonid) {
-      int hilvl = 0, lolvl = 0;
-      int hirnk = 0, lornk = 0;
+      int hilvl = 0, lolvl = MAXLEVEL;
+      int hirnk = 0, lornk = MAXRANK;
       
       for(int i = idprev; i < dmonid; i++) {
          dmon_t *m = &dmonalloc[i];

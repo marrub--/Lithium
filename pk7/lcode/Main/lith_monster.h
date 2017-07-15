@@ -4,6 +4,9 @@
 #include "lith_common.h"
 #include "lith_list.h"
 
+#define MAXRANK 5
+#define MAXLEVEL 100
+
 enum {
    dmgtype_bullets,
    dmgtype_energy,
