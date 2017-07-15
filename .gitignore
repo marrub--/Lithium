@@ -2,3 +2,5 @@ working/*
 ir/*.ir
 compile.bat
 *.kdev4
+*.dbs
+*.wad.b*
