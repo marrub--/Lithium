@@ -247,8 +247,13 @@ static void OnDeath(dmon_t *m)
    m->wasdead = true;
    
    ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET)) {
-      if(p->sigil.acquired && m->type == mtype_imp && m->level >= 50 && m->rank >= 4)
-         ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
+      if(p->sigil.acquired) {
+         if(p->weapon.cur->info->type == weapon_c_starshot && rand() == 1)
+            ACS_Teleport_EndGame();
+         
+         if(m->type == mtype_imp && m->level >= 50 && m->rank >= 4)
+            ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
+      }
       
       if(p->getUpgr(UPGR_SoulCleaver)->active)
          SoulCleave(m, p);

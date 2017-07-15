@@ -1,3 +1,42 @@
+actor Lith_StarShotShotsFired : Inventory
+{
+   Inventory.MaxAmount 200
+}
+
+actor Lith_Star
+{
+   Damage (5)
+   Speed 32
+   Radius 2
+   Height 2
+   Scale 0.7
+   Mass 0
+   RenderStyle "Add"
+   SeeSound "weapons/sshot/fire"
+   
+   Projectile
+   +NODAMAGETHRUST
+   +SEEKERMISSILE
+   +SCREENSEEKER
+   +BRIGHT
+   
+   states
+   {
+   Spawn:
+      TNT1 A 0
+      STSH A 0 A_JumpIf(random(0, 100) < 75, "Spawn1")
+      STS2 A 0
+   Spawn1:
+      "####" ABC 1 A_SetTics(random(0, 1))
+   SpawnLoop:
+      "####" ABC 1 A_SeekerMissile(0, 2, SMF_LOOK)
+      loop
+   Death:
+      TNT1 A 0 A_PlaySound("weapons/sshot/hit", CHAN_BODY, 0.3)
+      stop
+   }
+}
+
 actor Lith_StarShot : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_StarShot"
@@ -14,25 +53,39 @@ actor Lith_StarShot : Lith_CWeapon
    states
    {
    Ready:
-      PISG A 1 bright A_WeaponReady
+      TNT1 A 1 bright A_WeaponReady
       loop
    
    Deselect:
-      PISG A 0 ACS_NamedExecuteWithResult("Lith_StarShotDeselect")
-   DeselectLoop:
-      PISG AAA 0 A_Lower
-      PISG A 1
+      TNT1 A 0 A_Lower
       loop
    Select:
-      PISG A 0 ACS_NamedExecuteWithResult("Lith_StarShotSelect")
-   SelectLoop:
-      PISG AAA 0 A_Raise
-      PISG A 1
+      TNT1 A 0 A_Raise
       loop
    
    Fire:
-      PISG A 0 A_GunFlash("DummyFlash")
-      PISG A 3 bright
+      TNT1 A 0 A_JumpIfInventory("Lith_StarShotShotsFired", 0, "Reload")
+      TNT1 A 0 A_GiveInventory("Lith_StarShotShotsFired", randompick(2, 4, 6))
+      TNT1 A 0 A_PlaySound("weapons/sshot/firero", CHAN_7, CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX)
+      TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-3,3), false, -20, 10)
+      TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-3,3), false,  20, 10)
+      TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-2,2), false, -16, 16)
+      TNT1 A 0 A_FireCustomMissile("Lith_Star", frandom(-2,2), false,  16, 16)
+      TNT1 A 0 A_Recoil(0.01)
+      TNT1 A 0 A_SetAngle(angle + frandom(-0.2, 0.2))
+      TNT1 A 0 A_Quake(1, 4, 0, 128)
+      TNT1 A 2 bright
+      goto Ready
+   
+   Reload:
+      TNT1 A 0 A_JumpIfInventory("Lith_StarShotShotsFired", 1, 1)
+      goto Ready
+      TNT1 A 0 A_PlaySound("weapons/delear/open", 6)
+      TNT1 A 22
+      TNT1 A 10 A_PlaySound("weapons/delear/charge", 5)
+      TNT1 A 0 A_TakeInventory("Lith_StarShotShotsFired", 999)
+      TNT1 A 4
+      TNT1 A 4 A_PlaySound("weapons/delear/close", 6)
       goto Ready
    }
 }

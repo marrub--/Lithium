@@ -340,6 +340,16 @@ $random weapons/plasdiff/fire {
 }
 
 //
+// Star Shot
+//
+weapons/sshot/fire   lsounds/StarShot/Fire.flac   // Halo 3
+weapons/sshot/firero lsounds/StarShot/RunOut.flac // Monster Girl Quest
+
+$alias weapons/sshot/hit weapons/shotgun/gauss/puff
+$limit weapons/sshot/hit 0
+$limit weapons/sshot/fire 0
+
+//
 // Omega Cannon
 //
 weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD
