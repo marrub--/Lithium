@@ -86,6 +86,7 @@
 #include "lscripts/Weapons/4_SMG.dec"
 
 #include "lscripts/Weapons/5_IonRifle.dec"
+#include "lscripts/Weapons/5_Hulgyon.dec"
 
 #include "lscripts/Weapons/6_CPlasmaRifle.dec"
 #include "lscripts/Weapons/6_StarShot.dec"

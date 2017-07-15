@@ -252,6 +252,12 @@ weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallo
 weapons/ionrifle/pickup  lsounds/IonRifle/Pickup.flac    // Killing Floor, Halo 3
 
 //
+// Hulgyon
+//
+weapons/hulgyon/proc lsounds/Hulgyon/Proc.flac // Touhou 13
+$limit weapons/hulgyon/proc 0
+
+//
 // Grenade Launcher
 //
 weapons/rocket/fire1   lsounds/RocketLauncher/Fire.ogg        // FEAR
