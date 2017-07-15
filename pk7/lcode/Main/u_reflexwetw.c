@@ -95,25 +95,5 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
    }
 }
 
-//
-// Render
-//
-void Upgr_ReflexWetw_Render(player_t *p, upgrade_t *upgr)
-{
-   if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
-   
-   int  time11 = p->ticks % 11;
-   float slide = UData.charge / (float)CHARGE_MAX;
-   
-   DrawSprite(slide < 0.95f ? "lgfx/HUD/H_D21.png" : "lgfx/HUD/H_D24.png",
-      HUDMSG_FADEOUT | HUDMSG_ALPHA,
-      hid_slideind_fxS - time11,
-      88.1 - time11,
-      185.1 + (11 - time11),
-      (fixed)(0.3f * slide),
-      (fixed)(0.6f * slide),
-      0.8);
-}
-
 // EOF
 

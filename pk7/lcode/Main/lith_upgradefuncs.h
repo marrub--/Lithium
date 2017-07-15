@@ -22,7 +22,6 @@ Case(ReflexWetw)
    A(ReflexWetw)
    D(ReflexWetw)
    U(ReflexWetw)
-   R(ReflexWetw)
 
 Case(Zoom)
    D(Zoom)
