@@ -286,15 +286,18 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 }
 
 //
-// Lith_RifleFireRunOut
+// Lith_AmmoRunOut
 //
 [[__call("ScriptS"), __extern("ACS")]]
-fixed Lith_RifleFireRunOut(bool ro)
+fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
    player_t *p = LocalPlayer;
-   __str cl = p->weapon.inv[weapon_rifle].ammoclass;
-   fixed ret = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
-   return ro ? ret * 1.2 : 1.0 - (ret * 0.35);
+   __str cl  = p->weapon.cur->ammoclass;
+   fixed inv = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
+   mul = mul ? mul : 1.2;
+   if(ro) inv = inv * mul;
+   else   inv = mul - inv * 0.35;
+   return minmax(inv, 0.0, 1.0);
 }
 
 // EOF
