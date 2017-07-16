@@ -19,6 +19,9 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
       ACS_LocalAmbientSound("player/manafull", 127);
    
    UData.manaperc = manaperc;
+   
+   if(manaperc < 0.5 && ACS_Timer() % 5 == 0)
+      ACS_GiveInventory("Lith_MagicAmmo", 1);
 }
 
 //
