@@ -94,6 +94,8 @@ gui_button_preset_t const btnlistactivated = {
 
 gui_button_preset_t const btnbipmain = {
    BtnDefault,
+   .gfx = null,
+   .hot = null,
    .cdis = "n",
    .w = 180,
    .h = 9
@@ -101,6 +103,8 @@ gui_button_preset_t const btnbipmain = {
 
 gui_button_preset_t const btnbipback = {
    BtnDefault,
+   .gfx = null,
+   .hot = null,
    .cdis = "n",
    .w = 48,
    .h = 9
