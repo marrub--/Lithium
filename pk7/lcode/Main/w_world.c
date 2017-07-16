@@ -396,17 +396,17 @@ static void DoRain()
             ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  1.0, true, ATTN_NONE);
             ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 1.0, true, ATTN_NONE);
          }
-         
-         if(world.mapscleared >= 20 && !world.islithmap)
-            ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
-         else
-            ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
       }
       else if(wasundersky)
       {
          ACS_PlaySound(p->weathertid, "amb/windout", CHAN_BODY,  1.0, false, ATTN_NONE);
          ACS_PlaySound(p->weathertid, "amb/rainout", CHAN_VOICE, 1.0, false, ATTN_NONE);
       }
+      
+      if(world.mapscleared >= 20 && !world.islithmap)
+         ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
+      else
+         ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
       
       ACS_Delay(1);
       
