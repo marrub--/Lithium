@@ -189,6 +189,7 @@ actor Lith_SMG : Lith_CWeapon
          CallACS("Lith_GetVar", lvar_spready)/FIX)
       
    FireAnim:
+      TNT1 A 0 offset(0, 32)
       CSMG BC 1 bright
       CSMG A 1
       CSMG A 1 A_ReFire("Fire1")
