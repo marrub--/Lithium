@@ -8,10 +8,10 @@
       __with(upgrade_t *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
-#define CheckRequires_AI      CheckRequires(UR_AI,  world.cbi.armorinter)
-#define CheckRequires_WMD     CheckRequires(UR_WMD, world.cbi.weapninter)
-#define CheckRequires_WRD     CheckRequires(UR_WRD, world.cbi.weapninte2)
-#define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbi.rdistinter)
+#define CheckRequires_AI      CheckRequires(UR_AI,  world.cbiupgr[cupg_armorinter])
+#define CheckRequires_WMD     CheckRequires(UR_WMD, world.cbiupgr[cupg_weapninter])
+#define CheckRequires_WRD     CheckRequires(UR_WRD, world.cbiupgr[cupg_weapninte2])
+#define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbiupgr[cupg_rdistinter])
 #define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
 
@@ -415,7 +415,7 @@ bool Lith_UpgrCanActivate(player_t *p, struct upgrade_s *upgr)
          CheckRequires_RDI ||
          CheckRequires_RA  ||
          
-         p->cbi.pruse + upgr->info->perf > world.cbi.perf)
+         p->cbi.pruse + upgr->info->perf > world.cbiperf)
       {
          return false;
       }
@@ -629,14 +629,14 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    // Performance rating
    if(upgr->info->perf)
    {
-      char cr = upgr->info->perf + p->cbi.pruse > world.cbi.perf ? 'a' : 'j';
+      char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
       
       if(upgr->active)
          HudMessageF("CBIFONT", "\Cj%i\C- - \Cj%i\C-/\Cj%i\CbPr",
-            p->cbi.pruse, upgr->info->perf, world.cbi.perf);
+            p->cbi.pruse, upgr->info->perf, world.cbiperf);
       else
          HudMessageF("CBIFONT", "\C%c%i\C- + \C%c%i\C-/\Cj%i\CbPr",
-            cr, p->cbi.pruse, cr, upgr->info->perf, world.cbi.perf);
+            cr, p->cbi.pruse, cr, upgr->info->perf, world.cbiperf);
       
       HudMessagePlain(g->hid--, 300.2, 40.1, TICSECOND);
    }

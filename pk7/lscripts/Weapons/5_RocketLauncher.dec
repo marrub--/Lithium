@@ -37,7 +37,7 @@ actor Lith_GrenadeLauncher : Lith_MWeapon
       stop
    
    Ready:
-      GRLG A 1 A_WeaponReady(WRF_ALLOWUSER4)
+      GRLG A 1 A_WeaponReady(WRF_ALLOWUSER4|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

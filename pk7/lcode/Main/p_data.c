@@ -212,6 +212,7 @@ void Lith_ResetPlayer(player_t *p)
    
    // pls not exit map with murder thingies out
    // is bad practice
+   ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
    ACS_TakeInventory("Lith_WeaponScopedToken",  999);
    ACS_TakeInventory("Lith_RifleBurstIter",     999);
@@ -222,7 +223,8 @@ void Lith_ResetPlayer(player_t *p)
    
    Lith_PlayerResetCBIGUI(p);
    
-   p->frozen   = 0;
+   p->frozen     = 0;
+   p->semifrozen = 0;
    
    p->addpitch = 0.0f;
    p->addyaw   = 0.0f;
@@ -263,10 +265,14 @@ void Lith_ResetPlayer(player_t *p)
       p->score = 0xFFFFFFFFFFFFFFFFll;
    
    if(world.dbgItems)
-      for(int i = weapon_min; i < weapon_max; i++)
-         if(weaponinfo[i].classname != null)
-            ACS_GiveInventory(weaponinfo[i].classname, 1);
-
+   {
+      for(int i = weapon_min; i < weapon_max; i++) {
+         weaponinfo_t const *info = &weaponinfo[i];
+         if(info->classname != null && !(info->flags & wf_magic))
+            ACS_GiveInventory(info->classname, 1);
+      }
+   }
+   
    switch(p->pclass)
    {
    case pclass_marine:    p->bip.unlock("Pistol"); break;

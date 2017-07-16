@@ -18,7 +18,7 @@ actor Lith_Revolver : Lith_MWeapon
    states
    {
    Ready:
-      REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
+      REVO A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

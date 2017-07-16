@@ -17,6 +17,26 @@ enum
 
 enum
 {
+   cupg_hasupgr1,
+   cupg_hasupgr2,
+   cupg_armorinter,
+   cupg_weapninter,
+   cupg_weapninte2,
+   cupg_rdistinter
+};
+
+enum
+{
+   cupg_c_slot3spell,
+   cupg_c_slot5spell,
+   cupg_c_armorinter,
+   cupg_c_slot6spell,
+   cupg_c_weapninte2,
+   cupg_c_rdistinter,
+};
+
+enum
+{
    CANONTIME_FULL,
    CANONTIME_SHORT,
    CANONTIME_DATE
@@ -91,16 +111,8 @@ typedef struct worldinfo_s
    property boss3p3scr {get: ACS_GetCVar("lith_sv_boss3p3_scr")}
    
    // CBI global information
-   struct
-   {
-      int  perf;
-      bool armorinter : 1;
-      bool weapninter : 1;
-      bool weapninte2 : 1;
-      bool rdistinter : 1;
-      bool hasupgr1   : 1;
-      bool hasupgr2   : 1;
-   } cbi;
+   int  cbiperf;
+   bool cbiupgr[6];
    
    // Mod compat
    bool legendoom;

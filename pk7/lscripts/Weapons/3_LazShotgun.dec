@@ -28,7 +28,7 @@ actor Lith_LazShotgun : Lith_MWeapon
    states
    {
    Ready:
-      LSHT A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
+      LSHT A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

@@ -60,6 +60,7 @@ void Lith_PhantomMain()
          ACS_GiveInventory("Lith_PhantomAura", 1);
       
       // TODO: fix this when david fixes properties
+      // 2017-07-16: david still has not fixed properties
       if(self.meleetime)
          self.meleetime = self.meleetime - 1;
       

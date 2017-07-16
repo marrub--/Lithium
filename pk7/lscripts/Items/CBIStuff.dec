@@ -10,11 +10,10 @@ actor Lith_CBIItem : CustomInventory
    var int user_glowangle;
    var int user_glowzangle;
    
+   const int Lith_ISF = SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER;
+   
    states
    {
-   Spawn:
-      "####" "#" 0
-      "####" "#" 0 A_SpawnItemEx("Lith_ItemSprite", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER)
    SpawnLoop:
       TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
       TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
@@ -70,8 +69,9 @@ actor Lith_CBIUpgrade1 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 1)
-      CELP A 0
-      goto Super::Spawn
+      CELP A 0 A_SpawnItemEx("Lith_ItemSpriteMarine", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteMage",   0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 1)
       stop
@@ -87,8 +87,9 @@ actor Lith_CBIUpgrade2 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 2)
-      CELL A 0
-      goto Super::Spawn
+      CELL A 0 A_SpawnItemEx("Lith_ItemSpriteMarine", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteMage",   0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 2)
       stop
@@ -104,8 +105,8 @@ actor Lith_ArmorInter : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 3)
-      ARM1 Z 0
-      goto Super::Spawn
+      ARM1 Z 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 3)
       stop
@@ -121,8 +122,9 @@ actor Lith_WeapnInter : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 4)
-      WUPG A 0
-      goto Super::Spawn
+      WUPG A 0 A_SpawnItemEx("Lith_ItemSpriteMarine", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteMage",   0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 4)
       stop
@@ -138,8 +140,8 @@ actor Lith_WeapnInte2 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 5)
-      WRDP A 0
-      goto Super::Spawn
+      WRDP A 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 5)
       stop
@@ -155,8 +157,8 @@ actor Lith_RDistInter : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", 6)
-      IOBJ C 0
-      goto Super::Spawn
+      IOBJ C 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
+      goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", 6)
       stop

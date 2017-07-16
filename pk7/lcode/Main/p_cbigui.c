@@ -9,19 +9,19 @@
 // Static Functions
 //
 
-static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
+static void CBITab_Marine(gui_state_t *g, player_t *p)
 {
    __str name;
    int ram;
    
-   if(world.cbi.hasupgr2)
+   if(world.cbiupgr[cupg_hasupgr2])
    {
       name = "KSKK Spec. BC-0265 Super High-Grade CPU";
       ram  = 150;
       
       DrawSpritePlain("lgfx/UI/CPU1.png", g->hid--, .1, .1, TICSECOND);
    }
-   else if(world.cbi.hasupgr1)
+   else if(world.cbiupgr[cupg_hasupgr1])
    {
       name = "KSKK Spec. Z6808 High-Grade CPU";
       ram  = 100;
@@ -39,31 +39,69 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", "%S", name);
    HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
    
-   {
    int y = 70;
    #define Info(...) \
       HudMessageF("CBIFONT", __VA_ARGS__); \
       HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
       y += 10
    
-   Info("Performance: %i\CbPr", world.cbi.perf);
+   Info("Performance: %i\CbPr", world.cbiperf);
    Info("In use: %i\CbPr", p->cbi.pruse);
    Info("RAM: %iTiB", ram);
    
    y += 20;
    
-   if(world.cbi.armorinter) Info("Has Armor Interface");
-   if(world.cbi.weapninter) Info("Has Weapon Modification Device");
-   if(world.cbi.weapninte2) Info("Has Weapon Refactoring Device");
-   if(world.cbi.rdistinter) Info("Has Reality Distortion Interface");
+   if(world.cbiupgr[cupg_armorinter]) Info("Has Armor Interface");
+   if(world.cbiupgr[cupg_weapninter]) Info("Has Weapon Modification Device");
+   if(world.cbiupgr[cupg_weapninte2]) Info("Has Weapon Refactoring Device");
+   if(world.cbiupgr[cupg_rdistinter]) Info("Has Reality Distortion Interface");
    
    #undef Info
-   }
    
-   if(world.cbi.armorinter) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
-   if(world.cbi.weapninter) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
-   if(world.cbi.weapninte2) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
-   if(world.cbi.rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_armorinter]) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_weapninter]) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_weapninte2]) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_rdistinter]) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+}
+
+static void CBITab_Mage(gui_state_t *g, player_t *p)
+{
+   DrawSpritePlain("lgfx/UI/CPU2.png", g->hid--, .1, .1, TICSECOND);
+   HudMessageF("CBIFONT", "AOF 5900001 Rev7 CPU");
+   HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+   
+   int y = 70;
+   #define Info(...) \
+      HudMessageF("CBIFONT", __VA_ARGS__); \
+      HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
+      y += 10
+   
+   Info("Performance: %i\CbPr", world.cbiperf);
+   Info("In use: %i\CbPr", p->cbi.pruse);
+   Info("RAM: 19TiB");
+   
+   y += 20;
+   
+   if(world.cbiupgr[cupg_c_slot3spell]) Info("Has Delear Spell Driver");
+   if(world.cbiupgr[cupg_c_slot5spell]) Info("Has Hulgyon Spell Driver");
+   if(world.cbiupgr[cupg_c_slot6spell]) Info("Has Star Shot Spell Driver");
+   if(world.cbiupgr[cupg_c_rdistinter]) Info("Has Reality Distortion Interface");
+   
+   #undef Info
+   
+   if(world.cbiupgr[cupg_c_slot3spell]) DrawSpritePlain("lgfx/UI/Slot3Spell.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_c_slot5spell]) DrawSpritePlain("lgfx/UI/Slot5Spell.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_c_slot6spell]) DrawSpritePlain("lgfx/UI/Slot6Spell.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
+   if(world.cbiupgr[cupg_c_rdistinter]) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+}
+
+static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
+{
+   switch(p->pclass)
+   {
+   case pclass_marine:    CBITab_Marine(g, p); break;
+   case pclass_cybermage: CBITab_Mage  (g, p); break;
+   }
 }
 
 

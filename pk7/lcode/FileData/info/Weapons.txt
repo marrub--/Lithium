@@ -39,7 +39,7 @@ Has an internal revolving chamber that holds 30 rockets, fired in trios as the c
 A weapon which works similarly to the 68-n Plasma Rifle, however preferring damage over rate of fire. The D.640's design comes from several older models designed by MDDO, as well as newer components patented by Semaphore Inc.
 
 ## Cyber-Mage ----------------------------------------------------------------
-== LITH_TXT_INFO_SHORT_CFist | Knife
+== LITH_TXT_INFO_SHORT_CFist | Spell Selector
 
 == LITH_TXT_INFO_SHORT_Mateba | Mateba
 == LITH_TXT_INFO_TITLE_Mateba | Mateba R119

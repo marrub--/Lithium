@@ -14,6 +14,11 @@ enum
    AT_Ammo
 };
 
+enum
+{
+   wf_magic = 1 << 0
+};
+
 typedef struct weaponinfo_s
 {
    int slot;
@@ -24,6 +29,7 @@ typedef struct weaponinfo_s
    __str defammoclass;
    __str classname;
    int type;
+   int flags;
 } weaponinfo_t;
 
 typedef struct invweapon_s
@@ -41,7 +47,6 @@ typedef struct weapondata_s
    invweapon_t inv[weapon_max];
    invweapon_t *cur;
    invweapon_t *prev;
-   int sshottid[2];
 } weapondata_t;
 
 extern weaponinfo_t const weaponinfo[weapon_max];

@@ -25,6 +25,33 @@
 #define Lith_GUI_ScrollReset(g, stn) \
    memset(&g->st[stn].scrl, 0, sizeof(gui_scroll_state_t));
 
+#define BtnDefault \
+   .snd  = "player/cbi/buttonpress", \
+   .cdef = "j", \
+   .cact = "g", \
+   .chot = "k", \
+   .font = "CBIFONT", \
+   .gfx  = "Button.png", \
+   .hot  = "ButtonHot.png", \
+   .cdis = "m", \
+   .w = 48, \
+   .h = 16
+
+#define CbxDefault \
+   .sndup  = "player/cbi/clickon", \
+   .snddn  = "player/cbi/clickoff", \
+   .w = 10, \
+   .h = 10, \
+   .font = "CNFONT", \
+   .chkgfx = "CheckboxX.png", \
+   .chkhot = "CheckboxXHot.png", \
+   .chkact = "CheckboxXActive.png", \
+   .chkdis = "CheckboxXDisabled.png", \
+   .gfx    = "Checkbox.png", \
+   .hot    = "CheckboxHot.png", \
+   .dis    = "CheckboxDisabled.png"
+
+
 //----------------------------------------------------------------------------
 // Type Definitions
 //

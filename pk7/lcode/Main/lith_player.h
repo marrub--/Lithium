@@ -100,6 +100,7 @@ typedef struct player_delta_s
    int  buttons;
    bool scopetoken;
    int  frozen;
+   int  semifrozen;
 } player_delta_t;
 
 //

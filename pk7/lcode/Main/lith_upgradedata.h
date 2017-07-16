@@ -82,6 +82,8 @@ struct upgr_data_HomingRPG {
 
 struct upgr_data_Magic {
    fixed manaperc;
+   gui_state_t gst;
+   bool ui : 1;
 };
 
 struct upgr_data {

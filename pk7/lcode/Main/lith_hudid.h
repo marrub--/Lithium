@@ -3,7 +3,7 @@
 
 enum
 {
-   // hid_base         to hid_base + 99    reserved for testing
+   // hid_base         to hid_base + 99    reserved for magic
    // hid_base +   100 to hid_base + 999   reserved for dialogue
    // hid_base +  1000 to hid_base + 29999 reserved for CBI
    // hid_base + 30000 to hid_base + 39999 reserved for the Gameboy
@@ -13,19 +13,9 @@ enum
    // hid_base + 43000 to hid_base + 44999 reserved for scopes
    hid_base = 0x100000,
    
-   // Testing
-   hid_base_test = hid_base,
-   hid_end_test  = hid_base + 99,
-   
-   hid_test1 = hid_base_test,
-   hid_test2,
-   hid_test3,
-   hid_test4,
-   hid_test5,
-   hid_test6,
-   hid_test7,
-   hid_test8,
-   hid_test9,
+   // Magic
+   hid_begin_magic = hid_base,
+   hid_end_magic   = hid_base + 99,
    
    // Dialogue
    hid_base_dialogue = hid_base + 100,

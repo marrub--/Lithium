@@ -1,6 +1,3 @@
-// NB: The style in this file is different. Instead of using Allman style,
-//     K&R style is used due to the density of this code.
-
 #include "lith_monster.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -63,9 +60,10 @@ static struct {
    mtype_cyberdemon,  "DSparil",
    
    // Lithium
-   mtype_phantom, "James",
-   mtype_phantom, "Makarov",
-   mtype_phantom, "Isaac"
+   mtype_phantom,    "James",
+   mtype_phantom,    "Makarov",
+   mtype_phantom,    "Isaac",
+   mtype_cyberdemon, "Steggles"
 };
 
 

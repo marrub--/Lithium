@@ -158,18 +158,30 @@ void Lith_PickupCBIItem(int num)
 {
    static void Lith_InstallCBIItem(int num);
    
+   static __str msgs_marine[] = {
+      "> Installed KSKK Spec. High-Grade CPU",
+      "> Installed KSKK Spec. Super High-Grade CPU",
+      "> Installed Armor Interface",
+      "> Installed Weapon Modification Device",
+      "> Installed Weapon Refactoring Device",
+      "> Installed Reality Distortion Interface"
+   };
+   
+   static __str msgs_mage[] = {
+      "> Installed Delear Spell Driver",
+      "> Installed Hulgyon Spell Driver",
+      "> Installed Armor Interface",
+      "> Installed Star Shot Spell Driver",
+      "> Installed Weapon Refactoring Device",
+      "> Installed Reality Distortion Interface"
+   };
+   
    player_t *p = LocalPlayer;
    
-   switch(num)
+   switch(p->pclass)
    {
-   #define Case(n, msg) case n: p->log(msg); break
-   Case(1, "> Installed KSKK Spec. High-Grade CPU");
-   Case(2, "> Installed KSKK Spec. Super High-Grade CPU");
-   Case(3, "> Installed Armor Interface");
-   Case(4, "> Installed Weapon Modification Device");
-   Case(5, "> Installed Weapon Refactoring Device");
-   Case(6, "> Installed Reality Distortion Interface");
-   #undef Case
+   case pclass_marine:    p->log(msgs_marine[num-1]); break;
+   case pclass_cybermage: p->log(msgs_mage[num-1]);   break;
    }
    
    Lith_InstallCBIItem(num);
@@ -320,13 +332,13 @@ static void Lith_InstallCBIItem(int num)
 {
    switch(num)
    {
-   #define Case(n, name, ...) case n: world.cbi.name = true; __VA_ARGS__; break
-   Case(1, hasupgr1, world.cbi.perf = 30);
-   Case(2, hasupgr2, world.cbi.perf = 70);
-   Case(3, armorinter);
-   Case(4, weapninter);
-   Case(5, weapninte2);
-   Case(6, rdistinter);
+   #define Case(n) case n: world.cbiupgr[n-1] = true
+   Case(1); world.cbiperf += 20; break;
+   Case(2); world.cbiperf += 40; break;
+   Case(3);                      break;
+   Case(4);                      break;
+   Case(5);                      break;
+   Case(6);                      break;
    #undef Case
    }
 }
@@ -471,7 +483,7 @@ static void GSInit(void)
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
       
-      world.cbi.perf = 10;
+      world.cbiperf = 10;
       if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
          for(int i = 1; i < 7; i++)
             Lith_InstallCBIItem(i);

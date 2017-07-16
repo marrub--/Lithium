@@ -44,7 +44,7 @@ actor Lith_CombatRifle : Lith_MWeapon
       stop
    
    Ready:
-      CRFG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
+      CRFG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

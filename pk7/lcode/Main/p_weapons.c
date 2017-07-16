@@ -10,6 +10,7 @@
 // Extern Objects
 //
 
+#define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
 // {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
    {0, pclass_any,       null,              "MMMMHMHMMMHMMM"},
@@ -34,14 +35,15 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {1, pclass_cybermage, "CFist",           "YOUSONOFABITCH"},
    {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
    {3, pclass_cybermage, "SPAS",            "weapons/cshotgun/pickup",  AT_Ammo, "Lith_ShellAmmo"},
-   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM"},
+   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {4, pclass_cybermage, "SMG",             "weapons/smg/pickup",       AT_Mag,  "Lith_SMGShotsFired"},
    {5, pclass_cybermage, "IonRifle",        "weapons/ionrifle/pickup",  AT_Ammo, "Lith_RocketAmmo"},
-   {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM"},
+   {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {6, pclass_cybermage, "CPlasmaRifle",    "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
-   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired"},
+   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired", F(wf_magic)},
    {7, pclass_cybermage, "StarDestroyer",   "weapons/shipgun/pickup",   AT_Ammo, "Lith_CannonAmmo"},
 };
+#undef F
 
 
 //----------------------------------------------------------------------------
@@ -268,7 +270,12 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       // Check for currently held weapon.
       if(!w->cur && ACS_StrICmp(p->weaponclass, info->classname) == 0)
          w->cur = wep;
+         
+      // Remove inactive magic weapons.
+      else if(info->flags & wf_magic)
+         ACS_TakeInventory(info->classname, 1);
       
+      // Auto-reload anything else.
       if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype == AT_Mag)
       {
          if(wep->autoreload >= 35 * 5)

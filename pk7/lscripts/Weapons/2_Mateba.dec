@@ -95,7 +95,7 @@ actor Lith_Mateba : Lith_CWeapon
       stop
    
    Ready:
-      MTBG A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+      MTBG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

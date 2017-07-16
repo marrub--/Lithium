@@ -38,7 +38,7 @@
    "A weapon which works similarly to the 68-n Plasma Rifle, however preferring damage over rate of fire. The D.640's design comes from several older models designed by MDDO, as well as newer components patented by Semaphore Inc.";
 
 // Cyber-Mage ----------------------------------------------------------------
-"LITH_TXT_INFO_SHORT_CFist" = "Knife";
+"LITH_TXT_INFO_SHORT_CFist" = "Spell Selector";
 "LITH_TXT_INFO_SHORT_Mateba" = "Mateba";
 "LITH_TXT_INFO_TITLE_Mateba" = "Mateba R119";
 "LITH_TXT_INFO_DESCR_Mateba" =

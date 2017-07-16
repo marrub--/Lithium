@@ -225,7 +225,7 @@ actor Lith_StarDestroyer : Lith_CWeapon
       stop
    
    Ready:
-      SDSG AABBCCDDEEFFGGHH 1 A_WeaponReady
+      SDSG AABBCCDDEEFFGGHH 1 A_WeaponReady(CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

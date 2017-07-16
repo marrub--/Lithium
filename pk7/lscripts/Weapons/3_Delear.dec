@@ -116,7 +116,7 @@ actor Lith_Delear : Lith_CWeapon
    states
    {
    Ready:
-      TNT1 A 1 bright A_WeaponReady
+      TNT1 A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

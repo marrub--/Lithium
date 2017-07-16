@@ -10,7 +10,7 @@ actor Lith_Gameboy : Lith_Weapon
    states
    {
    Ready:
-      GMBG A 1 A_WeaponReady
+      GMBG A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

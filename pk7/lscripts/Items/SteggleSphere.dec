@@ -59,6 +59,7 @@ actor Lith_Steggles : MBFHelperDog
 {
    Health 10000000
    PainChance 0
+   Tag "Steggles"
    
    +THRUACTORS
    +FRIENDLY

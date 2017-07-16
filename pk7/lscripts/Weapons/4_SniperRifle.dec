@@ -17,7 +17,7 @@ actor Lith_SniperRifle : Lith_MWeapon
    states
    {
    AltReady:
-      SCOP A 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
+      SCOP A 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    Ready:
       SNPG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)

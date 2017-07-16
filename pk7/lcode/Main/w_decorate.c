@@ -7,6 +7,26 @@
 #include <math.h>
 
 [[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetWRF(void)
+{
+   enum {
+      WRF_NOBOB = 1,
+      WRF_NOSWITCH = 2,
+      WRF_NOPRIMARY = 4,
+      WRF_NOSECONDARY = 8,
+      WRF_NOFIRE = WRF_NOPRIMARY | WRF_NOSECONDARY,
+      WRF_ALLOWRELOAD = 16,
+      WRF_ALLOWZOOM = 32,
+      WRF_DISABLESWITCH = 64,
+      WRF_ALLOWUSER1 = 128,
+      WRF_ALLOWUSER2 = 256,
+      WRF_ALLOWUSER3 = 512,
+      WRF_ALLOWUSER4 = 1024
+   };
+   return LocalPlayer->semifrozen ? WRF_NOFIRE : 0;
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetSpawnHealth(void)
 {
    return ACS_GetActorProperty(0, APROP_SpawnHealth);

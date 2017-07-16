@@ -1,37 +1,12 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-#define BtnDefault \
-   .snd  = "player/cbi/buttonpress", \
-   .cdef = "j", \
-   .cact = "g", \
-   .chot = "k", \
-   .font = "CBIFONT"
-
-#define CbxDefault \
-   .sndup  = "player/cbi/clickon", \
-   .snddn  = "player/cbi/clickoff", \
-   .w = 10, \
-   .h = 10, \
-   .font = "CNFONT", \
-   .chkgfx = "CheckboxX.png", \
-   .chkhot = "CheckboxXHot.png", \
-   .chkact = "CheckboxXActive.png", \
-   .chkdis = "CheckboxXDisabled.png"
-
 
 //----------------------------------------------------------------------------
 // Extern Objects
 //
 
-gui_button_preset_t const btndefault = {
-   BtnDefault,
-   .gfx  = "Button.png",
-   .hot  = "ButtonHot.png",
-   .cdis = "m",
-   .w = 48,
-   .h = 16
-};
+gui_button_preset_t const btndefault = {BtnDefault};
 
 gui_button_preset_t const btntab = {
    BtnDefault,
@@ -142,12 +117,7 @@ gui_button_preset_t const btndlgsel = {
    .external = true
 };
 
-gui_checkb_preset_t const cbxdefault = {
-   CbxDefault,
-   .gfx    = "Checkbox.png",
-   .hot    = "CheckboxHot.png",
-   .dis    = "CheckboxDisabled.png"
-};
+gui_checkb_preset_t const cbxdefault = {CbxDefault};
 
 gui_checkb_preset_t const cbxsmall = {
    CbxDefault,

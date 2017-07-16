@@ -127,7 +127,7 @@ actor Lith_IonRifle : Lith_CWeapon
       SCOP C 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
       loop
    Ready:
-      SNPG A 1 A_WeaponReady
+      SNPG A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
       loop
    
    ReadySelector:
