@@ -67,6 +67,19 @@ static struct {
    {0, mtype_phantom,    "Makarov" },
    {0, mtype_phantom,    "Isaac"   },
    {0, mtype_cyberdemon, "Steggles"},
+   
+   // Colorful Hell
+   {Score_ZombieMan,     mtype_zombie,        "Zombie"},
+   {Score_ShotgunGuy,    mtype_zombie,        "SG"    },
+   {Score_ChaingunGuy,   mtype_zombie,        "CGuy"  },
+   {Score_LostSoul,      mtype_lostsoul,      "LSoul" },
+   {Score_HellKnight,    mtype_hellknight,    "HK"    },
+   {Score_Arachnotron,   mtype_arachnotron,   "SP1"   },
+   {Score_Cacodemon,     mtype_cacodemon,     "Caco"  },
+   {Score_Archvile,      mtype_archvile,      "Arch"  },
+   {Score_PainElemental, mtype_painelemental, "PE"    },
+   {Score_SpiderDemon,   mtype_mastermind,    "Mind"  },
+   {Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
 };
 
 
