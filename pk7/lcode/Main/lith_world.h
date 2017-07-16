@@ -27,10 +27,10 @@ enum
 
 enum
 {
-   cupg_c_slot3spell,
    cupg_c_slot5spell,
-   cupg_c_armorinter,
    cupg_c_slot6spell,
+   cupg_c_armorinter,
+   cupg_c_slot3spell,
    cupg_c_weapninte2,
    cupg_c_rdistinter,
 };
