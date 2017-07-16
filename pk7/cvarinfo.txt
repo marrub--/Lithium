@@ -9,6 +9,7 @@ user bool   lith_player_damagebob     = true;
 user bool   lith_player_scoresound    = true;
 user bool   lith_player_invertmouse   = false;
 user bool   lith_player_scorelog      = false;
+user bool   lith_player_ammolog       = false;
 user bool   lith_player_resultssound  = true;
 user bool   lith_player_stupidpickups = false;
 user bool   lith_player_brightweps    = false;

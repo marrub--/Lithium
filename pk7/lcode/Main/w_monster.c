@@ -16,7 +16,6 @@ struct dminfo {
    fixed x, y, z;
    fixed r, h;
    int health;
-   int lastlevel;
    int painwait;
 };
 

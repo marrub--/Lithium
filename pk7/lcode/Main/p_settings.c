@@ -26,6 +26,7 @@ Bool("Bright weapon pickups",             "lith_player_brightweps");
 Bool("No item effects",                   "lith_player_noitemfx");
 Bool("Teleport in bought items and upgrades", "lith_player_teleshop");
 Bool("Stupid pickup messages",            "lith_player_stupidpickups");
+Bool("Log ammo pickups",                  "lith_player_ammolog");
 
 Category("Weapons");
 Float("Scope zoom factor", "lith_weapons_zoomfactor", 1.0f, 10.0f);

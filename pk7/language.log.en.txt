@@ -24,6 +24,14 @@ LITH_TXT_LOG_BlueSkull   = ">>>>> \chBlue Skull";
 LITH_TXT_LOG_YellowSkull = ">>>>> \ckYellow Skull";
 LITH_TXT_LOG_DoggoSphere = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 LITH_TXT_LOG_Dogs        = "> Picked up dogs.";
+LITH_TXT_LOG_Clip        = ">> Radio";
+LITH_TXT_LOG_ClipBox     = ">> Nonspecific Box of Ammunition";
+LITH_TXT_LOG_Shell       = ">> Shells";
+LITH_TXT_LOG_ShellBox    = ">> Box of Shells";
+LITH_TXT_LOG_Rocket      = ">> Rocket";
+LITH_TXT_LOG_RocketBox   = ">> Box of Rockets";
+LITH_TXT_LOG_Cell        = ">> Energy Charge";
+LITH_TXT_LOG_CellBox     = ">> Demonic Energy Pack";
 
 // EOF
 

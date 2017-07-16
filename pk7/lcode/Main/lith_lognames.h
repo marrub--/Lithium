@@ -25,6 +25,14 @@ enum
    log_yellowskull,
    log_doggosphere,
    log_dogs,
+   log_clip,
+   log_clipbox,
+   log_shell,
+   log_shellbox,
+   log_rocket,
+   log_rocketbox,
+   log_cell,
+   log_cellbox,
    log_max
 };
 

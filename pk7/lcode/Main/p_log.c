@@ -28,6 +28,7 @@ void Lith_LogName(int name)
 #define BOTH(name, str) case name: p->log ("%LS", "LITH_TXT_LOG_" str); break;
 #define FULL(name, str) case name: p->logF("%LS", "LITH_TXT_LOG_" str); break;
 #define HUDS(name, str) case name: p->logH("%LS", "LITH_TXT_LOG_" str); break;
+#define AMMO(name, str) case name: if(Lith_GetPCVarInt(p, "lith_player_ammolog")) p->logH("%LS", "LITH_TXT_LOG_" str); break;
    BOTH(log_default,     "Default")
    BOTH(log_allmap,      "AllMap")
    HUDS(log_armorbonus,  "ArmorBonus")
@@ -52,9 +53,18 @@ void Lith_LogName(int name)
    BOTH(log_yellowskull, "YellowSkull")
    BOTH(log_doggosphere, "DoggoSphere")
    BOTH(log_dogs,        "Dogs")
+   AMMO(log_clip,        "Clip")
+   AMMO(log_clipbox,     "ClipBox")
+   AMMO(log_shell,       "Shell")
+   AMMO(log_shellbox,    "ShellBox")
+   AMMO(log_rocket,      "Rocket")
+   AMMO(log_rocketbox,   "RocketBox")
+   AMMO(log_cell,        "Cell")
+   AMMO(log_cellbox,     "CellBox")
 #undef BOTH
 #undef FULL
 #undef HUDS
+#undef AMMO
    }
 }
 
