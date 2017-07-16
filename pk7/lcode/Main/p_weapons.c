@@ -69,6 +69,15 @@ static void GiveWeaponItem(int parm)
 }
 
 //
+// PlayWeaponPickupSound
+//
+static void PlayWeaponPickupSound(player_t *p, weaponinfo_t const *info)
+{
+   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
+   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
+}
+
+//
 // Lith_PickupScore
 //
 static void Lith_PickupScore(player_t *p, int parm)
@@ -139,26 +148,29 @@ bool Lith_WeaponPickup(int name)
    
    weaponinfo_t const *info = &weaponinfo[parm];
    
-   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
-   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
-   
    if(HasWeapon(p, parm))
    {
-      if(!weaponstay)
+      if(!weaponstay) {
+         PlayWeaponPickupSound(p, info);
          Lith_PickupScore(p, parm);
+      }
       
       return !weaponstay;
    }
-   
-   p->weaponsheld++;
-   p->bip.unlock(info->name);
-   
-   GiveWeaponItem(parm);
-   Lith_PickupMessage(p, info);
-   
-   ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
-   
-   return !weaponstay;
+   else
+   {
+      PlayWeaponPickupSound(p, info);
+      
+      p->weaponsheld++;
+      p->bip.unlock(info->name);
+      
+      GiveWeaponItem(parm);
+      Lith_PickupMessage(p, info);
+      
+      ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
+      
+      return !weaponstay;
+   }
 }
 
 //
