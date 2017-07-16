@@ -10,7 +10,6 @@
 // Static Objects
 //
 
-static bool enemiesarecompatible;
 static bool enemycheckfinished;
 static bool gsinit;
 
@@ -86,10 +85,10 @@ int Lith_UniqueID(int tid)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_EmitScore(int amount)
 {
-   if(enemycheckfinished || enemiesarecompatible)
+   if(enemycheckfinished || world.enemycompat)
       Lith_GiveAllScore(amount, false);
    
-   enemiesarecompatible = true;
+   world.enemycompat = true;
 }
 
 //
@@ -299,13 +298,14 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
          
          // If the enemy emitted score, then we can get out of the script.
          enemycheckfinished = true;
-         if(enemiesarecompatible)
+         if(world.enemycompat)
             return;
          
          break;
       }
    }
    
+#if 0
    // Let's at least be nice to the player.
    ACS_SetPlayerProperty(1, true, PROP_TOTALLYFROZEN);
    ACS_SetPlayerProperty(1, true, PROP_NOTARGET);
@@ -323,6 +323,7 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
       
       ACS_Delay(35);
    }
+#endif
 }
 
 //
@@ -653,8 +654,7 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
       
-      if(enemiesarecompatible)
-         ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
+      ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
       
       extern void DmonDebugInfo(void);
       DmonDebugInfo();

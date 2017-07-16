@@ -1,6 +1,8 @@
 #include "lith_monster.h"
 #include "lith_player.h"
 #include "lith_world.h"
+#include "lith_scorenums.h"
+
 #include <math.h>
 
 #define HasResistances(m) ((m)->rank >= 2)
@@ -24,46 +26,47 @@ struct dminfo {
 //
 
 static struct {
+   score_t score;
    enum mtype type;
    __str name;
-} const searchnames[] = {
+} const monsterinfo[] = {
    // Doom 2
-   mtype_zombie,        "ZombieMan",
-   mtype_zombie,        "ShotgunGuy",
-   mtype_zombie,        "ChaingunGuy",
-   mtype_imp,           "Imp",
-   mtype_demon,         "Demon",
-   mtype_demon,         "Spectre",
-   mtype_lostsoul,      "LostSoul",
-   mtype_mancubus,      "Fatso",
-   mtype_mancubus,      "Mancubus",
-   mtype_arachnotron,   "Arachnotron",
-   mtype_cacodemon,     "Cacodemon",
-   mtype_hellknight,    "Knight",
-   mtype_baron,         "Baron",
-   mtype_revenant,      "Revenant",
-   mtype_painelemental, "PainElemental",
-   mtype_archvile,      "Archvile",
-   mtype_mastermind,    "SpiderMastermind",
-   mtype_cyberdemon,    "Cyberdemon",
+   {Score_ZombieMan,     mtype_zombie,        "ZombieMan"       },
+   {Score_ShotgunGuy,    mtype_zombie,        "ShotgunGuy"      },
+   {Score_ChaingunGuy,   mtype_zombie,        "ChaingunGuy"     },
+   {Score_Imp,           mtype_imp,           "Imp"             },
+   {Score_Demon,         mtype_demon,         "Demon"           },
+   {Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
+   {Score_LostSoul,      mtype_lostsoul,      "LostSoul"        },
+   {Score_Mancubus,      mtype_mancubus,      "Fatso"           },
+   {Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
+   {Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
+   {Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
+   {Score_HellKnight,    mtype_hellknight,    "Knight"          },
+   {Score_BaronOfHell,   mtype_baron,         "Baron"           },
+   {Score_Revenant,      mtype_revenant,      "Revenant"        },
+   {Score_PainElemental, mtype_painelemental, "PainElemental"   },
+   {Score_Archvile,      mtype_archvile,      "Archvile"        },
+   {Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
+   {Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
    
    // Heretic
-   mtype_imp,         "Gargoyle",
-   mtype_demon,       "Golem",
-   mtype_demon,       "Nitrogolem",
-   mtype_demon,       "Sabreclaw",
-   mtype_mancubus,    "Disciple",
-   mtype_arachnotron, "Ophidian",
-   mtype_hellknight,  "Warrior",
-   mtype_cacodemon,   "IronLich",
-   mtype_mastermind,  "Maulotaur",
-   mtype_cyberdemon,  "DSparil",
+   {Score_Imp,         mtype_imp,         "Gargoyle"  },
+   {Score_Demon,       mtype_demon,       "Golem"     },
+   {Score_Nitrogolem,  mtype_demon,       "Nitrogolem"},
+   {Score_Demon * 1.5, mtype_demon,       "Sabreclaw" },
+   {Score_Cacodemon,   mtype_mancubus,    "Disciple"  },
+   {Score_Arachnotron, mtype_arachnotron, "Ophidian"  },
+   {Score_HellKnight,  mtype_hellknight,  "Warrior"   },
+   {Score_BaronOfHell, mtype_cacodemon,   "IronLich"  },
+   {Score_SpiderDemon, mtype_mastermind,  "Maulotaur" },
+   {Score_DSparil,     mtype_cyberdemon,  "DSparil"   },
    
    // Lithium
-   mtype_phantom,    "James",
-   mtype_phantom,    "Makarov",
-   mtype_phantom,    "Isaac",
-   mtype_cyberdemon, "Steggles"
+   {0, mtype_phantom,    "James"   },
+   {0, mtype_phantom,    "Makarov" },
+   {0, mtype_phantom,    "Isaac"   },
+   {0, mtype_cyberdemon, "Steggles"},
 };
 
 
@@ -276,7 +279,8 @@ static void OnDeath(dmon_t *m)
          SoulCleave(m, p);
    }
    
-   Lith_GiveAllScore(m->rank * 500, false);
+   // If enemies emit score on death we only need to give extra rank score.
+   Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
 }
 
 
@@ -329,10 +333,11 @@ void Lith_MonsterInfo()
 {
    __str cname = ACS_GetActorClass(0);
    
-   for(int i = 0; i < countof(searchnames); i++) {
-      if(strstr_str(cname, searchnames[i].name)) {
+   for(int i = 0; i < countof(monsterinfo); i++) {
+      if(strstr_str(cname, monsterinfo[i].name)) {
          ifauto(dmon_t *, m, AllocDmon()) {
-            m->type = searchnames[i].type;
+            m->type  = monsterinfo[i].type;
+            m->score = monsterinfo[i].score;
             Lith_MonsterMain(m);
          }
          return;

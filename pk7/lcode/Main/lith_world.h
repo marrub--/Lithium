@@ -85,6 +85,7 @@ typedef struct worldinfo_s
    int mapseed;
    bool unloaded;
    bool islithmap;
+   bool enemycompat;
    
    int secretsfound;
    double scoremul;

@@ -49,6 +49,7 @@ struct dmon {
    int maxhealth;
    int resist[dmgtype_max];
    int painresist;
+   score_t score;
    
    struct dminfo *mi;
 };
