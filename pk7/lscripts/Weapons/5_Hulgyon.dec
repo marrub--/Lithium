@@ -127,6 +127,9 @@ actor Lith_Hulgyon : Lith_CWeapon
       loop
    
    Fire:
+      TNT1 A 0 A_JumpIfInventory("Lith_MagicAmmo", 50, 1)
+      goto Ready
+      TNT1 A 0 A_TakeInventory("Lith_MagicAmmo", 50)
       TNT1 A 20 A_FireCustomMissile("Lith_HulgyonProjectile")
       goto Ready
    }

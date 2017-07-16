@@ -28,6 +28,14 @@ Case(Zoom)
    U(Zoom)
    R(Zoom)
 
+Case(VitalScan)
+   U(VitalScan)
+   R(VitalScan)
+
+Case(Magic)
+   U(Magic)
+   R(Magic)
+
 Case(CyberLegs)
    A(CyberLegs)
    D(CyberLegs)
@@ -44,10 +52,6 @@ Case(Adrenaline)
    A(Adrenaline)
    U(Adrenaline)
    R(Adrenaline)
-
-Case(VitalScan)
-   U(VitalScan)
-   R(VitalScan)
 
 // Weapon Upgrades -----------------------------------------------------------
 Case(RifleModes)

@@ -47,7 +47,7 @@ $random misc/quitsound {
 //
 effects/rocket/fly lsounds/RocketLauncher/RocketFly.ogg // Unreal Tournament '99
 
-effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Psychic (presumably stock)
+effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Devil May Cry 2
 effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // 〃
 effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac // 〃
 effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac // 〃

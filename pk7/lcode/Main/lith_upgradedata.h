@@ -16,6 +16,7 @@
 #define UData_VitalScan(u)  (CastUData(u)->u07)
 #define UData_Zoom(u)       (CastUData(u)->u08)
 #define UData_HomingRPG(u)  (CastUData(u)->u09)
+#define UData_Magic(u)      (CastUData(u)->u10)
 
 enum
 {
@@ -79,6 +80,10 @@ struct upgr_data_HomingRPG {
    int id;
 };
 
+struct upgr_data_Magic {
+   fixed manaperc;
+};
+
 struct upgr_data {
    struct upgr_data_Adrenaline u01;
    struct upgr_data_Implying   u02;
@@ -89,6 +94,7 @@ struct upgr_data {
    struct upgr_data_VitalScan  u07;
    struct upgr_data_Zoom       u08;
    struct upgr_data_HomingRPG  u09;
+   struct upgr_data_Magic      u10;
 };
 
 typedef struct upgradeinfo_s {

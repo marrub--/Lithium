@@ -250,6 +250,24 @@ unsigned StrHash(char __str_ars const *s)
 }
 
 //
+// LanguageV
+//
+static __str LanguageV(__str name)
+{
+   __str ret = StrParam("%LS", name);
+   
+   if(ret[0] == '$')
+   {
+      __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
+      __str nex = StrParam("%LS", sub);
+      if(sub != nex)
+         ret = nex;
+   }
+   
+   return ret;
+}
+
+//
 // Language
 //
 __str Language(__str fmt, ...)
@@ -262,17 +280,7 @@ __str Language(__str fmt, ...)
    __vnprintf_str(fmt, vl);
    va_end(vl);
    
-   __str ret = StrParam("%LS", ACS_EndStrParam());
-   
-   if(ret[0] == '$')
-   {
-      __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
-      __str nex = StrParam("%LS", sub);
-      if(sub != nex)
-         ret = nex;
-   }
-   
-   return ret;
+   return LanguageV(ACS_EndStrParam());
 }
 
 //
@@ -289,10 +297,9 @@ __str LanguageNull(__str fmt, ...)
    va_end(vl);
    
    __str name = ACS_EndStrParam();
-   __str alias = Language(name);
+   __str alias = LanguageV(name);
    
-   if(name == alias) return null;
-   else return alias;
+   return name == alias ? null : alias;
    
 }
 

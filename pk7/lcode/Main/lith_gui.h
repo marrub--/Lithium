@@ -4,16 +4,16 @@
 #define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
 
 // fug
-#define Lith_GUI_Button(g, ...) Lith_GUI_Button_Id(g, 0, __VA_ARGS__)
-#define Lith_GUI_Button_Id(g, id, ...) Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
-#define Lith_GUI_Checkbox(g, ...) Lith_GUI_Checkbox_Id(g, 0, __VA_ARGS__)
-#define Lith_GUI_Checkbox_Id(g, id, ...) Lith_GUI_Checkbox_Impl(g, id + LineHash, &(gui_checkb_args_t){__VA_ARGS__})
-#define Lith_GUI_ScrollBegin(g, ...) Lith_GUI_ScrollBegin_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Button(g, ...)             Lith_GUI_Button_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Button_Id(g, id, ...)      Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
+#define Lith_GUI_Checkbox(g, ...)           Lith_GUI_Checkbox_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Checkbox_Id(g, id, ...)    Lith_GUI_Checkbox_Impl(g, id + LineHash, &(gui_checkb_args_t){__VA_ARGS__})
+#define Lith_GUI_ScrollBegin(g, ...)        Lith_GUI_ScrollBegin_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id + LineHash, &(gui_scroll_args_t){__VA_ARGS__})
-#define Lith_GUI_Slider(g, ...) Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
-#define Lith_GUI_Slider_Id(g, id, ...) Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
-#define Lith_GUI_TextBox(g, ...) Lith_GUI_TextBox_Id(g, 0, __VA_ARGS__)
-#define Lith_GUI_TextBox_Id(g, id, ...) Lith_GUI_TextBox_Impl(g, id + LineHash, &(gui_textbox_args_t){__VA_ARGS__})
+#define Lith_GUI_Slider(g, ...)             Lith_GUI_Slider_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_Slider_Id(g, id, ...)      Lith_GUI_Slider_Impl(g, id + LineHash, &(gui_slider_args_t){__VA_ARGS__})
+#define Lith_GUI_TextBox(g, ...)            Lith_GUI_TextBox_Id(g, 0, __VA_ARGS__)
+#define Lith_GUI_TextBox_Id(g, id, ...)     Lith_GUI_TextBox_Impl(g, id + LineHash, &(gui_textbox_args_t){__VA_ARGS__})
 
 #define Lith_GUI_GenPreset(type, def) \
    type pre; \

@@ -358,7 +358,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    }
    
    // Rendering
-   Lith_PlayerPowerupFx(p);      // Update powerup effects
+   Lith_PlayerItemFx(p);         // Update item effects
    Lith_PlayerDamageBob(p);      // Update damage bobbing
    Lith_PlayerView(p);           // Update additive view
    Lith_PlayerRenderUpgrades(p); // Render Upgrades

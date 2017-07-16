@@ -92,6 +92,11 @@ enum
    hid_weaponS = hid_weaponE + 9,
    hid_weaponbg,
    
+   hid_magicammo2,
+   hid_magicammo1,
+   hid_magicammobg,
+   hid_magicsymbol,
+   
    hid_ammo,
    hid_ammotype,
    hid_ammotypebg,

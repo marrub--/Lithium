@@ -43,13 +43,15 @@ $playersound player male *land    lsounds/Player/Land.wav     // Hexen
 //
 // Cyber-Mage
 //
-$playersound    cybermage male *death   lsounds/Player/Mage/Death.flac
-$playersound    cybermage male *xdeath  lsounds/Player/Mage/XDeath.flac
-$playersound    cybermage male *pain100 lsounds/Player/Mage/PainSmall.flac
-$playersounddup cybermage male *pain75  *pain100
-$playersound    cybermage male *pain50  lsounds/Player/Mage/Pain.flac
-$playersounddup cybermage male *pain25  *pain50
-$playersound    cybermage male *grunt   lsounds/Player/Mage/Grunt.flac
+$playersound    cybermage male *death   lsounds/Player/Mage/Death.flac     // Doom
+$playersound    cybermage male *xdeath  lsounds/Player/Mage/XDeath.flac    // 〃
+$playersound    cybermage male *pain100 lsounds/Player/Mage/PainSmall.flac // 〃
+$playersounddup cybermage male *pain75  *pain100                           // 〃
+$playersound    cybermage male *pain50  lsounds/Player/Mage/Pain.flac      // 〃
+$playersounddup cybermage male *pain25  *pain50                            // 〃
+$playersound    cybermage male *grunt   lsounds/Player/Mage/Grunt.flac     // Doom 64
+
+player/manafull lsounds/Player/Mage/FullCharge.flac // Touhou 13
 
 //
 // R. Armor
@@ -107,6 +109,7 @@ player/pickup/shells      lsounds/Player/Pickup/ShellSmall.ogg   // 〃
 player/pickup/shellb      lsounds/Player/Pickup/ShellPack.ogg    // 〃
 player/pickup/rockets     lsounds/Player/Pickup/RocketSmall.flac // Halo 3
 player/pickup/rocketb     lsounds/Player/Pickup/RocketBig.flac   // Quake 2
+player/pickup/mana        lsounds/Player/Pickup/Mana.flac        // Devil May Cry 2
 
 $random player/pickup/redskull {
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1

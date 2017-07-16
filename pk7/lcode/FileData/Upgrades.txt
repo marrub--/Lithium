@@ -39,6 +39,17 @@ Allows you to press the zoom keys to zoom in and out.
 @@ LITH_TXT_UPGRADE_DESCR_Zoom
 Drivers for zooming software, which utilizes your eye implants.
 
+== LITH_TXT_UPGRADE_TITLE_VitalScan | Vital Scanner
+@@ LITH_TXT_UPGRADE_EFFEC_VitalScan
+While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD. Customizable via settings menu.
+
+@@ LITH_TXT_UPGRADE_DESCR_VitalScan
+A set of nanobots are deployed to get vitality information on targets you aim at.
+
+== LITH_TXT_UPGRADE_TITLE_Magic | Mana Absorber
+@@ LITH_TXT_UPGRADE_EFFEC_Magic
+Killed enemies will drop mana. Enables mana display on the HUD.
+
 == LITH_TXT_UPGRADE_TITLE_CyberLegs | Move Wetware
 @@ LITH_TXT_UPGRADE_EFFEC_CyberLegs
 Allows you to jump higher and move faster.
@@ -74,13 +85,6 @@ When being targeted by enemies or nearing a projectile, time will stop for one s
 
 @@ LITH_TXT_UPGRADE_DESCR_Adrenaline
 Implants an adrenaline injector into your skin, which reacts to sudden impulses and sound cues.
-
-== LITH_TXT_UPGRADE_TITLE_VitalScan | Vital Scanner
-@@ LITH_TXT_UPGRADE_EFFEC_VitalScan
-While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD. Customizable via settings menu.
-
-@@ LITH_TXT_UPGRADE_DESCR_VitalScan
-A set of nanobots are deployed to get vitality information on targets you aim at.
 
 == LITH_TXT_UPGRADE_TITLE_SoulCleaver | Soul Cleaver
 @@ LITH_TXT_UPGRADE_EFFEC_SoulCleaver

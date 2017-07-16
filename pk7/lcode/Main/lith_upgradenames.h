@@ -7,6 +7,7 @@ enum
    UPGR_ReflexWetw,
    UPGR_Zoom,
    UPGR_VitalScan,
+   UPGR_Magic,
    UPGR_CyberLegs,
    UPGR_ReactArmor,
    UPGR_ReactArmor2,

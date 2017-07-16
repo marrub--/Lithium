@@ -123,6 +123,7 @@ static void ApplyLevels(dmon_t *m, int prev)
    
    for(int i = prev + 1; i <= m->level; i++) {
       if(i % 10 == 0) {
+         // if we have resistances, randomly pick a resistance we already have
          if(HasResistances(m)) {
             int r;
             do {
@@ -237,6 +238,23 @@ static void SoulCleave(dmon_t *m, player_t *p)
 }
 
 //
+// SpawnManaPickup
+//
+static void SpawnManaPickup(dmon_t *m, player_t *p)
+{
+   int i = 0;
+   do {
+      int tid = ACS_UniqueTID();
+      int x   = m->mi->x + ACS_Random(-8, 8);
+      int y   = m->mi->y + ACS_Random(-8, 8);
+      ACS_Spawn("Lith_ManaPickup", x, y, m->mi->z + 4, tid);
+      Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
+      Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+      i += 150;
+   } while(i < m->maxhealth);
+}
+
+//
 // OnDeath
 //
 static void OnDeath(dmon_t *m)
@@ -252,6 +270,9 @@ static void OnDeath(dmon_t *m)
          if(m->type == mtype_imp && m->level >= 50 && m->rank >= 4)
             ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
       }
+      
+      if(p->getUpgr(UPGR_Magic)->active && (m->type != mtype_zombie || ACS_Random(0, 50) < 10))
+         SpawnManaPickup(m, p);
       
       if(p->getUpgr(UPGR_SoulCleaver)->active)
          SoulCleave(m, p);

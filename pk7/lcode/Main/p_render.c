@@ -18,9 +18,9 @@ static void HUD_Waves(player_t *p);
 //
 
 //
-// Lith_PlayerPowerupFx
+// Lith_PlayerItemFx
 //
-void Lith_PlayerPowerupFx(player_t *p)
+void Lith_PlayerItemFx(player_t *p)
 {
    bool hasir = ACS_CheckInventory("PowerLightAmp");
    if(!hasir && p->hadinfrared)
