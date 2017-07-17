@@ -574,6 +574,39 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
    if(CheckRequires_RA)  Req("Reactive Armor")
    
    #undef Req
+   
+   // Performance rating
+   if(upgr->info->perf)
+   {
+      char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
+      
+      if(upgr->active)
+         HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPr\C-.", upgr->info->perf);
+      else
+         HudMessageF("CBIFONT", "Activating requires \C%c%i\CbPr\C-.", cr, upgr->info->perf);
+      
+      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
+      y -= 10;
+   }
+   
+   // Score multiplier
+   if(upgr->info->scoreadd != 0)
+   {
+      char  cr;
+      __str op;
+      bool  chk;
+      
+      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = "Disabling";}
+      else             {chk = upgr->info->scoreadd < 0; op = "Enabling" ;}
+      
+      int perc = abs(ceilk(100.0 * upgr->info->scoreadd));
+      if(chk) {cr = 'a'; perc = 100 - perc;}
+      else    {cr = 'n'; perc = 100 + perc;}
+      
+      HudMessageF("CBIFONT", "%S will multiply score by \C%c%i\C-%%", op, cr, perc);
+      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
+      y -= 10;
+   }
 }
 
 //
@@ -604,67 +637,11 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    HudMessageF("CBIFONT", "%S", upgrcateg[upgr->info->category]);
    HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
    
-   // Score multiplier
-   if(upgr->info->scoreadd != 0)
-   {
-      char cr, op;
-      
-      if(upgr->active)
-      {
-         cr = upgr->info->scoreadd > 0 ? 'a' : 'j';
-         op = upgr->info->scoreadd > 0 ? '-' : '+';
-      }
-      else
-      {
-         cr = upgr->info->scoreadd < 0 ? 'a' : 'j';
-         op = upgr->info->scoreadd < 0 ? '-' : '+';
-      }
-      
-      HudMessageF("CBIFONT", "\C%c%i\C- %c \C%c%i\C-%%\Cnscr",
-         cr, ceilk(100.0 * p->scoremul), op, cr,
-         abs(ceilk(100.0 * upgr->info->scoreadd)));
-      HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
-   }
-   
-   // Performance rating
-   if(upgr->info->perf)
-   {
-      char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
-      
-      if(upgr->active)
-         HudMessageF("CBIFONT", "\Cj%i\C- - \Cj%i\C-/\Cj%i\CbPr",
-            p->cbi.pruse, upgr->info->perf, world.cbiperf);
-      else
-         HudMessageF("CBIFONT", "\C%c%i\C- + \C%c%i\C-/\Cj%i\CbPr",
-            cr, p->cbi.pruse, cr, upgr->info->perf, world.cbiperf);
-      
-      HudMessagePlain(g->hid--, 300.2, 40.1, TICSECOND);
-   }
-   
    // Effect
    ifauto(__str, effect, LanguageNull("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name))
-      HudMessageF("CBIFONT", "Effect: %S", effect);
+      if(upgr->info->key == UPGR_UNCEUNCE) HudMessageRainbowsF("CBIFONT", "Effect: %S", effect);
+      else                                 HudMessageF        ("CBIFONT", "Effect: %S", effect);
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 50.1, TICSECOND);
-   
-   // Separator
-   HudMessageF("CBIFONT", "----------------------------------------------");
-   HudMessagePlain(g->hid--, 111.1, 80.1, TICSECOND);
-   
-   // Description
-   if(g->st[st_upgrselold].i != g->st[st_upgrsel].i)
-   {
-      ifauto(__str, descr, LanguageNull("LITH_TXT_UPGRADE_DESCR_%S", upgr->info->name))
-         Lith_GUI_TypeOn(g, st_upgrtypeon, descr);
-      else
-         Lith_GUI_TypeOn(g, st_upgrtypeon, "");
-      g->st[st_upgrselold].i = g->st[st_upgrsel].i;
-   }
-   
-   gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_upgrtypeon);
-   
-   if(upgr->info->key != UPGR_UNCEUNCE) HudMessageF        ("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-   else                                 HudMessageRainbowsF("CBIFONT", "%.*S", typeon->pos, typeon->txt);
-   HudMessagePlain(g->hid--, 111.1, 90.1, TICSECOND);
    
    ACS_SetHudClipRect(0, 0, 0, 0);
 }
@@ -686,7 +663,7 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 {
-   DrawSpriteAlpha("lgfx/UI/ItemBG.png", g->hid--, 113.1, 95.1, TICSECOND, 0.5);
+   //DrawSpriteAlpha("lgfx/UI/ItemBG.png", g->hid--, 113.1, 95.1, TICSECOND, 0.5);
    
    GUIUpgradesList(g, p);
    
