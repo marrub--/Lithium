@@ -22,6 +22,7 @@ actor Lith_ManaPickup : CustomInventory
    Height 4
    Scale 0.8
    Inventory.PickupSound "player/pickup/mana"
+   Inventory.PickupMessage ""
    
    +INVENTORY.ALWAYSPICKUP
    +INVENTORY.TRANSFER
