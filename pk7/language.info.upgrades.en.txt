@@ -128,4 +128,32 @@
    "its strange circumstances and the general requirement of strong, plentiful "
    "opponents to be useful in combat.";
 
+// ---------------------------------------------------------------------------
+"LITH_TXT_INFO_SHORT_HeadsUpDispJem" = "$LITH_TXT_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_TXT_INFO_TITLE_HeadsUpDispJem" = "Heads Up Display";
+"LITH_TXT_INFO_DESCR_HeadsUpDispJem" =
+   "This program is the 37th version of the standard issue heads-up display for "
+   "AOF employees. The binary remains uncredited, and the decompiled code has no "
+   "authors listed in any of the files, though is well-commented.";
+
+// ---------------------------------------------------------------------------
+"LITH_TXT_INFO_SHORT_Magic" = "$LITH_TXT_UPGRADE_TITLE_Magic";
+
+// ---------------------------------------------------------------------------
+"LITH_TXT_INFO_SHORT_ReflexWetwJem" = "$LITH_TXT_UPGRADE_TITLE_ReflexWetw";
+"LITH_TXT_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
+"LITH_TXT_INFO_DESCR_ReflexWetwJem" =
+   "Software for your Computer/Brain Interface that improves your ability to move, "
+   "enhancing your speed, and giving you new movement options."
+   "\n\n"
+   "Newer versions of this program have a backdoor built into them. This old "
+   "version was given to you by Spellcaster and Deceiver Michael as part of your "
+   "mission. The binary credits have been overwritten with \"CrAcKeD bY mEt&\"."
+   "\n\n"
+   "You can jump while mid-air by pressing \"jump\" again, hurtling your body "
+   "upwards with sheer force."
+   "\n\n"
+   "You can also slide in any direction with ease by pressing \"run\", even while "
+   "mid-air.";
+
 // EOF

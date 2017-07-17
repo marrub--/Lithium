@@ -42,7 +42,8 @@ Drivers for zooming software, which utilizes your eye implants.
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_VitalScan | Vital Scanner
 @@ LITH_TXT_UPGRADE_EFFEC_VitalScan
-While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD.
+While aiming at living things, you can see their health and how much damage is
+being dealt to them on your HUD.
 
 Customizable via settings menu.
 
@@ -67,9 +68,11 @@ Improved reflex wetware, which gives an even larger combat advantage.
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_ReactArmor | R. Armor
 @@ LITH_TXT_UPGRADE_EFFEC_ReactArmor
-Makes your armor react to being hit, switching its mode to the type of damage you took, mitigating any further damage of that type.
+Makes your armor react to being hit, switching its mode to the type of damage
+you took, mitigating any further damage of that type.
 
-Integrate your armor with a highly advanced Yh-0 reactive plating system, made by avians on Durla Prime.
+Integrate your armor with a highly advanced Yh-0 reactive plating system, made
+by avians on Durla Prime.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_ReactArmor2 | R. Armor 2
@@ -85,7 +88,8 @@ When you enter a level, sets off a huge explosion, defending you from initial th
 
 \cgThis alerts monsters when you enter a map.
 
-Implant a slow-charging self-defense explosive into your armor, keeping threats away while you're distracted.
+Implant a slow-charging self-defense explosive into your armor, keeping
+threats away while you're distracted.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_Adrenaline | Adrenaline Inj.
@@ -127,7 +131,8 @@ Changes the internal mechanisms of the gun to fire charged plasma.
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_PoisonShot | Poison Shot
 @@ LITH_TXT_UPGRADE_EFFEC_PoisonShot
-Makes your shotgun fire poison pellets that do 10 damage every half-second after hitting a target.
+Makes your shotgun fire poison pellets that do 10 damage every half-second
+after hitting a target.
 
 Installs a poison injector into the shell loading mechanism.
 
@@ -136,14 +141,16 @@ Installs a poison injector into the shell loading mechanism.
 @@ LITH_TXT_UPGRADE_EFFEC_GaussShotty
 Turns your shotgun into a gauss rifle.
 
-Re-build the internal mechanisms to turn the railgun part of your shotgun into a new one, removing the shell loader entirely.
+Re-build the internal mechanisms to turn the railgun part of your shotgun
+into a new one, removing the shell loader entirely.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_RifleModes | Modal Rifle
 @@ LITH_TXT_UPGRADE_EFFEC_RifleModes
 Gives your rifle a sniper firing mode.
 
-A complete replacement for the trigger mechanism which adds a third mode, allowing you to burst-fire accurate, painful shots.
+A complete replacement for the trigger mechanism which adds a third mode,
+allowing you to burst-fire accurate, painful shots.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_LaserRCW | Laser Rifle
@@ -157,9 +164,11 @@ Uses a standard photon accelerator to fire lasers out of your rifle.
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_HomingRPG | Homing Rocket
 @@ LITH_TXT_UPGRADE_EFFEC_HomingRPG
-Pressing alt-fire with the rocket launcher selects a target to be traced by any rockets you fire afterwards.
+Pressing alt-fire with the rocket launcher selects a target to be traced by
+any rockets you fire afterwards.
 
-Disperses extra nanomachines out of the rifle that push the rocket toward the enemy with extreme accuracy.
+Disperses extra nanomachines out of the rifle that push the rocket toward the
+enemy with extreme accuracy.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_ChargeRPG | C. Launcher
@@ -177,21 +186,24 @@ Hold fire to load more grenades, and then hold alt-fire to change the firing mod
 @@ LITH_TXT_UPGRADE_EFFEC_PlasLaser
 Makes your plasma rifle emit red-hot laser beams.
 
-Switches out the ion emitter with an ion condenser, that can fire out laser beams strong enough to cut clean through Adamantium.
+Switches out the ion emitter with an ion condenser, that can fire out laser
+beams strong enough to cut clean through Adamantium.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_PartBeam | Particle Beam
 @@ LITH_TXT_UPGRADE_EFFEC_PartBeam
 Makes your plasma rifle fire a deadly long-range particle beam.
 
-Replaces the weapon's ion emitter with an ion accelerator, that fires bursts of ions that are then super-charged.
+Replaces the weapon's ion emitter with an ion accelerator, that fires bursts
+of ions that are then super-charged.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_PunctCannon | Punct. Cannon
 @@ LITH_TXT_UPGRADE_EFFEC_PunctCannon
 Your cannon now shoots explosive bolts that send huge shocks through walls.
 
-By adding new magic translation buffers to your weapon, it can create extreme-yield explosive bolts from the same charge as the cannon type does.
+By adding new magic translation buffers to your weapon, it can create
+extreme-yield explosive bolts from the same charge as the cannon type does.
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_OmegaRail | Omega Railgun
@@ -205,20 +217,56 @@ Implements a plasma charger in your cannon, made with reverse-engineered magical
 @@ LITH_TXT_UPGRADE_EFFEC_Mateba_A
 Makes the Mateba fire a projectile that instantly kills monsters below 40% health on its last shot.
 
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_SPAS_A | Void Breath
+@@ LITH_TXT_UPGRADE_EFFEC_SPAS_A
+Not implemented
+
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_SPAS_B | Shell Autoloader
+@@ LITH_TXT_UPGRADE_EFFEC_SPAS_B
+Not implemented
 
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_SMG_A | SMG Trimag
+@@ LITH_TXT_UPGRADE_EFFEC_SMG_A
+Triples the SMG's magazine size, but makes it slower to reload.
+
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_SMG_B | Seeker Rounds
+@@ LITH_TXT_UPGRADE_EFFEC_SMG_B
+Makes the SMG's rounds home in on targets in a small cone.
+
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_SMG_C | Safety System
+@@ LITH_TXT_UPGRADE_EFFEC_SMG_C
+When the SMG is about to overheat, makes it stop firing for a short time.
 
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_IonRifle_A | Rad. Ionizer
+@@ LITH_TXT_UPGRADE_EFFEC_IonRifle_A
+Not implemented
+
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_IonRifle_B | Overloader
+@@ LITH_TXT_UPGRADE_EFFEC_IonRifle_B
+Not implemented
 
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_CPlasma_A | Pulse Charger
+@@ LITH_TXT_UPGRADE_EFFEC_CPlasma_A
+Not implemented
 
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_ShipGun_A | Longinus Solspear
+@@ LITH_TXT_UPGRADE_EFFEC_ShipGun_A
+The Star Destroyer will fire fast, piercing beams that bounce around and
+destroy everything in their path.
+
+##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_ShipGun_B | Surge of Destiny
+@@ LITH_TXT_UPGRADE_EFFEC_ShipGun_B
+Not implemented
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_DarkCannon | ????????
@@ -228,16 +276,24 @@ What the !@#$% is this!?
 ## Extras --------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_TorgueMode | EXPLOOSIONS
 @@ LITH_TXT_UPGRADE_EFFEC_TorgueMode
-ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT ONLY THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE EXPLOSIVE THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND WITH WUSSY LASERS AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK GUITAR SOLO JUST FOR YOU NO CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER
+ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT ONLY
+THE MOST EXPLOSION FILLED IN THIS ENTIRE MOD, IT'S ACTUALLY MORE EXPLOSIVE
+THAN 99% OF ALL GAMES! YOU AREN'T SOME PUSSY WHO RUNS AROUND WITH WUSSY LASERS
+AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK GUITAR SOLO JUST FOR YOU NO
+CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING
+IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_7777777 | 7777777 Mode
 @@ LITH_TXT_UPGRADE_EFFEC_7777777
-Instates cosmic horror and spurious time travel into your very being, causing you to instantly implode upon activation.
+Instates cosmic horror and spurious time travel into your very being, causing
+you to instantly implode upon activation.
 
 \cd~text interface terminal malfunction error ~2992dud
 
-\cdhelo i am of durnadle winner of ai beauty contets i will give u anti-physics powers becaus i did some calculations and found the universe is stupid so i am doing my best to flip off reality for a thousand years
+\cdhelo i am of durnadle winner of ai beauty contets i will give u
+anti-physics powers becaus i did some calculations and found the universe is
+stupid so i am doing my best to flip off reality for a thousand years
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_lolsords | Steele Mode
@@ -257,7 +313,9 @@ Oh god why did I add something Kegan suggested to me this was not a good idea
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_UNCEUNCE | UNCE UNCE
 @@ LITH_TXT_UPGRADE_EFFEC_UNCEUNCE
-UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
+UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
+UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
+UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 
 ##----------------------------------------------------------------------------
 == LITH_TXT_UPGRADE_TITLE_InstaDeath | Instant Death

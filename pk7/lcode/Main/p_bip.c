@@ -220,6 +220,7 @@ void Lith_PlayerInitBIP(player_t *p)
    case pclass_cybermage:
       AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDispJem");
       AddToBIP(bip, BIPC_UPGRADES, "ReflexWetwJem");
+      AddToBIP(bip, BIPC_UPGRADES, "Magic");
       AddToBIP(bip, BIPC_UPGRADES, "SoulCleaver");
       break;
    }

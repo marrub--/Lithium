@@ -92,6 +92,8 @@
    "It fires any standard high-potency 12-gauge shell, and loads 5 shots. The "
    "design is extremely simple, but it does not overheat or jam often, is cheap to "
    "produce, and is very, very powerful.";
+"LITH_TXT_INFO_SHORT_SPASUpgr" = "$LITH_TXT_UPGRADE_TITLE_SPAS_A";
+"LITH_TXT_INFO_SHORT_SPASUpg2" = "$LITH_TXT_UPGRADE_TITLE_SPAS_B";
 "LITH_TXT_INFO_SHORT_SMG" = "Sub-Machine Gun";
 "LITH_TXT_INFO_TITLE_SMG" = "SYM4.3 D.22 MODEL M SUBMACHINE GUN";
 "LITH_TXT_INFO_DESCR_SMG" =
@@ -105,6 +107,9 @@
    "5.7x28mm bullets, manufactured by various nameless companies, and loads "
    "bullpup. It has since been re-branded by SYM4.3, who now produce it for "
    "Omakeda with royalties.";
+"LITH_TXT_INFO_SHORT_SMGUpgr" = "$LITH_TXT_UPGRADE_TITLE_SMG_A";
+"LITH_TXT_INFO_SHORT_SMGUpg2" = "$LITH_TXT_UPGRADE_TITLE_SMG_B";
+"LITH_TXT_INFO_SHORT_SMGUpg3" = "$LITH_TXT_UPGRADE_TITLE_SMG_C";
 "LITH_TXT_INFO_SHORT_IonRifle" = "Ion Rifle";
 "LITH_TXT_INFO_TITLE_IonRifle" = "KDA-[Thrown] Model 11 Ion Rifle";
 "LITH_TXT_INFO_DESCR_IonRifle" =
@@ -120,9 +125,12 @@
    "This is in part required due to the immense heat that would be caused by "
    "opening the weapon prematurely after firing, and the complexity that would be "
    "needed to have a fully automatic round cycling system.";
+"LITH_TXT_INFO_SHORT_IonRifleUpgr" = "$LITH_TXT_UPGRADE_TITLE_IonRifle_A";
+"LITH_TXT_INFO_SHORT_IonRifleUpg2" = "$LITH_TXT_UPGRADE_TITLE_IonRifle_B";
 "LITH_TXT_INFO_SHORT_CPlasmaRifle" = "Plasma Rifle";
 "LITH_TXT_INFO_TITLE_CPlasmaRifle" = "$LITH_TXT_INFO_SHORT_PlasmaRifle";
 "LITH_TXT_INFO_DESCR_CPlasmaRifle" = "$LITH_TXT_INFO_DESCR_PlasmaRifle";
+"LITH_TXT_INFO_SHORT_CPlasmaUpgr" = "$LITH_TXT_UPGRADE_TITLE_CPlasma_A";
 "LITH_TXT_INFO_SHORT_StarDestroyer" = "Star Destroyer";
 "LITH_TXT_INFO_TITLE_StarDestroyer" = "The Star Destroyer";
 "LITH_TXT_INFO_DESCR_StarDestroyer" =
@@ -138,6 +146,8 @@
    "The resulting projectile grows in size as it disperses energy in front of it, "
    "causing hundreds of smaller projectiles to come out as it rips through "
    "anything in its path.";
+"LITH_TXT_INFO_SHORT_ShipGunUpgr" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_A";
+"LITH_TXT_INFO_SHORT_ShipGunUpg2" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_B";
 "LITH_TXT_INFO_SHORT_Delear" = "Delear";
 "LITH_TXT_INFO_TITLE_Delear" = "\cdDelerentur Ex\c-, \ciAurantiorum\c- 24";
 "LITH_TXT_INFO_DESCR_Delear" =
