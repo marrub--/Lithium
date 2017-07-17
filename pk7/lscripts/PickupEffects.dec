@@ -65,10 +65,10 @@ actor Lith_ItemSprite
       "####" "#" 0
       "####" "#" 0 A_SetUserVar(user_floatangle,  random(0, 360))
       "####" "#" 0 A_SetUserVar(user_floatzangle, random(0, 360))
-      "####" "#" 0 A_JumpIf(true, "SpawnLoop")
+      "####" "#" 0 A_Jump(256, "SpawnLoop")
    SpawnLoop:
       "####" "#" 0 A_CheckFlag("SPECIAL", 2, AAPTR_MASTER)
-      "####" "#" 0 A_JumpIf(true, "Done")
+      "####" "#" 0 A_Jump(256, "Done")
       
       "####" "#" 0 A_SetUserVar(user_floatangle,  (user_floatangle  + 2) % 360)
       "####" "#" 0 A_SetUserVar(user_floatzangle, (user_floatzangle + 3) % 360)
@@ -83,7 +83,7 @@ actor Lith_ItemSprite
                                                user_origy / FIX,
                                                user_origz / FIX,
                                  0, WARPF_ABSOLUTEPOSITION)
-      "####" "#" 0 A_JumpIf(true, "SpawnLoop")
+      "####" "#" 0 A_Jump(256, "SpawnLoop")
    Done:
       "####" "#" 0
       stop

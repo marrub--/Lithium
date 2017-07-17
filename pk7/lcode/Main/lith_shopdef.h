@@ -10,15 +10,13 @@ enum
 
 typedef struct shopdef_s
 {
-   // Public Data
    __str name;
    __str bipunlock;
    score_t cost;
    
-   // Private Data
    void (*shopBuy)   (struct player *p, struct shopdef_s const *def, void *obj);
    bool (*shopCanBuy)(struct player *p, struct shopdef_s const *def, void *obj);
-   void (*shopGive)  (int tid,            struct shopdef_s const *def, void *obj);
+   bool (*shopGive)  (struct player *p, struct shopdef_s const *def, void *obj, int tid);
 } shopdef_t;
 
 score_t Lith_ShopGetCost(struct player *p, shopdef_t const *def);

@@ -153,7 +153,7 @@ static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *, void *upgr)
 //
 // Lith_UpgrGive
 //
-static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
+static bool Lith_UpgrGive(player_t *, shopdef_t const *, void *upgr_, int tid)
 {
    upgrade_t const *upgr = upgr_;
    
@@ -165,6 +165,8 @@ static void Lith_UpgrGive(int tid, shopdef_t const *, void *upgr_)
    case UC_Weap: ACS_SetUserVariable(tid, "user_upgradeweap", true); break;
    default:      ACS_SetUserVariable(tid, "user_upgradeextr", true); break;
    }
+   
+   return true;
 }
 
 //

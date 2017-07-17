@@ -11,6 +11,7 @@ typedef struct shopitem_s
    [[__anonymous]] shopdef_t shopdef;
    int count;
    __str classname;
+   bool isafuckingstupidweaponthatneedsaspecialsnowflakecasejustforthisstupidgoddamnbugorwhateveritis;
 } shopitem_t;
 
 
@@ -19,20 +20,20 @@ typedef struct shopitem_s
 //
 
 static shopitem_t shopitems[] = {
-// {{"Name-----------", "BIP------------", Cost---}, Cnt-, "Class----------------"},
-   {{"RocketAmmo",      null,              9000   },    5, "Lith_RocketAmmo"      },
-   {{"PlasmaAmmo",      null,              75750  }, 1000, "Lith_PlasmaAmmo"      },
-   {{"ChargeFist",      "ChargeFist",      100000 },    1, "Lith_ChargeFist"      },
-   {{"Revolver",        "Revolver",        500000 },    1, "Lith_Revolver"        },
-   {{"LazShotgun",      "LazShotgun",      1800000},    1, "Lith_LazShotgun"      },
-   {{"SniperRifle",     "SniperRifle",     1800000},    1, "Lith_SniperRifle"     },
-   {{"MissileLauncher", "MissileLauncher", 2500000},    1, "Lith_MissileLauncher" },
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000},    1, "Lith_PlasmaDiffuser"  },
-// {{"Gameboy",         null,              10000  },    1, "Lith_Gameboy"         },
-   {{"Allmap",          null,              100000 },    1, "Allmap"               },
-   {{"Infrared",        null,              70000  },    1, "Infrared"             },
-   {{"RadSuit",         null,              100000 },    1, "RadSuit"              },
-// {{"DivSigil",        "DivSigil",        7772940},    1, "Lith_DivisionSigil"   },
+// {{"Name-----------", "BIP------------", Cost---}, Cnt-, "Class---------------"},
+   {{"RocketAmmo",      null,              9000   },    5, "Lith_RocketAmmo"     },
+   {{"PlasmaAmmo",      null,              75750  }, 1000, "Lith_PlasmaAmmo"     },
+   {{"ChargeFist",      "ChargeFist",      100000 },    1, "Lith_ChargeFist",      true},
+   {{"Revolver",        "Revolver",        500000 },    1, "Lith_Revolver",        true},
+   {{"LazShotgun",      "LazShotgun",      1800000},    1, "Lith_LazShotgun",      true},
+   {{"SniperRifle",     "SniperRifle",     1800000},    1, "Lith_SniperRifle",     true},
+   {{"MissileLauncher", "MissileLauncher", 2500000},    1, "Lith_MissileLauncher", true},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000},    1, "Lith_PlasmaDiffuser",  true},
+// {{"Gameboy",         null,              10000  },    1, "Lith_Gameboy",         true},
+   {{"Allmap",          null,              100000 },    1, "Allmap"              },
+   {{"Infrared",        null,              70000  },    1, "Infrared"            },
+   {{"RadSuit",         null,              100000 },    1, "RadSuit"             },
+// {{"DivSigil",        "DivSigil",        7772940},    1, "Lith_DivisionSigil"  },
 };
 
 static size_t const shopitemsnum = countof(shopitems);
@@ -59,17 +60,24 @@ static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
 static void Shop_Buy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
-   ACS_GiveInventory(item->classname, item->count);
    p->itemsbought++;
+   ACS_GiveInventory(item->classname, item->count);
 }
 
 //
 // Shop_Give
 //
-static void Shop_Give(int tid, shopdef_t const *, void *item_)
+static bool Shop_Give(player_t *p, shopdef_t const *, void *item_, int tid)
 {
    shopitem_t *item = item_;
-   ACS_GiveActorInventory(tid, item->classname, item->count);
+   p->itemsbought++;
+   if(item->isafuckingstupidweaponthatneedsaspecialsnowflakecasejustforthisstupidgoddamnbugorwhateveritis) {
+      Lith_GiveActorInventory(p->tid, item->classname, item->count);
+      return false;
+   } else {
+      Lith_GiveActorInventory(tid, item->classname, item->count);
+      return true;
+   }
 }
 
 

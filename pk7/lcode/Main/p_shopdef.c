@@ -57,8 +57,11 @@ bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, b
       
       if((x || y || z) && ACS_Spawn("Lith_BoughtItem", x, y, z, tid = ACS_UniqueTID()))
       {
-         p->logH("> \CjItem delivered.");
-         def->shopGive(tid, def, obj);
+         if(def->shopGive(p, def, obj, tid))
+            p->logH("> \CjItem delivered.");
+         else
+            ACS_Thing_Remove(tid);
+         
          delivered = true;
       }
       else

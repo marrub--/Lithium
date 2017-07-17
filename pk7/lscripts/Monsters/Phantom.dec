@@ -147,9 +147,9 @@ actor Lith_Phantom
       TNT1 A 0 A_JumpIf(user_donespawn, "Spawn1")
       TNT1 A 0 A_GiveInventory("Lith_IsPhantom", 1)
       TNT1 A 0 A_SetUserVar(user_donespawn, true)
-      TNT1 A 0 A_JumpIf(true, "PostInit")
+      TNT1 A 0 A_Jump(256, "PostInit")
    PostInit:
-      TNT1 A 0 A_JumpIf(true, "CallPhantomMain")
+      TNT1 A 0 A_Jump(256, "CallPhantomMain")
    CallPhantomMain:
       TNT1 A 0 A_PlaySound("enemies/phantom/aura", CHAN_7, 0.7, true, 0.7)
       TNT1 A 0 ACS_NamedExecute("Lith_PhantomMain")
