@@ -2,13 +2,13 @@
 
 "LITH_TXT_SHOP_TITLE_RocketAmmo" = "Rocket Ammo";
 "LITH_TXT_SHOP_DESCR_RocketAmmo" =
-   "Rocket propelled grenades produced by SYM4.3 for your launcher.\n"
-   "\n"
+   "Rocket propelled grenades produced by SYM4.3 for your launcher."
+   "\n\n"
    "Delicious high-yield explosives right at your fingertips.";
 "LITH_TXT_SHOP_TITLE_PlasmaAmmo" = "Plasma Ammo";
 "LITH_TXT_SHOP_DESCR_PlasmaAmmo" =
-   "Highly condensed energy cells used by your plasma rifle.\n"
-   "\n"
+   "Highly condensed energy cells used by your plasma rifle."
+   "\n\n"
    "Produced by A.O.F Inc.";
 "LITH_TXT_SHOP_TITLE_Allmap" = "Area Map";
 "LITH_TXT_SHOP_DESCR_Allmap" =
@@ -24,28 +24,28 @@
    "A melee weapon that you can charge.";
 "LITH_TXT_SHOP_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
 "LITH_TXT_SHOP_DESCR_Revolver" =
-   "A powerful handgun. Holds 6 bullets.\n"
-   "\n"
+   "A powerful handgun. Holds 6 bullets."
+   "\n\n"
    "Doesn't take upgrades.";
 "LITH_TXT_SHOP_TITLE_LazShotgun" = "$LITH_TXT_INFO_SHORT_LazShotgun";
 "LITH_TXT_SHOP_DESCR_LazShotgun" =
-   "Piercing laser shotgun.\n"
-   "\n"
+   "Piercing laser shotgun."
+   "\n\n"
    "Doesn't take upgrades.";
 "LITH_TXT_SHOP_TITLE_SniperRifle" = "$LITH_TXT_INFO_SHORT_SniperRifle";
 "LITH_TXT_SHOP_DESCR_SniperRifle" =
-   "Scoped bolt-action rifle.\n"
-   "\n"
+   "Scoped bolt-action rifle."
+   "\n\n"
    "Doesn't take upgrades.";
 "LITH_TXT_SHOP_TITLE_MissileLauncher" = "$LITH_TXT_INFO_SHORT_MissileLauncher";
 "LITH_TXT_SHOP_DESCR_MissileLauncher" =
-   "Mini-missile launcher.\n"
-   "\n"
+   "Mini-missile launcher."
+   "\n\n"
    "Doesn't take upgrades.";
 "LITH_TXT_SHOP_TITLE_PlasmaDiffuser" = "$LITH_TXT_INFO_SHORT_PlasmaDiffuser";
 "LITH_TXT_SHOP_DESCR_PlasmaDiffuser" =
-   "Classic plasma rifle.\n"
-   "\n"
+   "Classic plasma rifle."
+   "\n\n"
    "Doesn't take upgrades.";
 "LITH_TXT_SHOP_TITLE_Gameboy" = "$LITH_TXT_INFO_SHORT_Gameboy";
 "LITH_TXT_SHOP_DESCR_Gameboy" =

@@ -1,0 +1,176 @@
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_AllPoint | AllPoint
+== LITH_TXT_INFO_TITLE_AllPoint | AllPoint Precision Firearms
+== LITH_TXT_INFO_IMAGE_AllPoint | lgfx/BIP/AllPoint.png
+@@ LITH_TXT_INFO_DESCR_AllPoint
+Established mid first-century NE, AllPoint present heavy sniper rifles and
+plasma weapons for military and private use.
+
+Despite producing mainly precision arms, their best-selling weaponry is known
+for having terrible accuracy, but big punch.
+
+Regarding this infamy, its current CEO has this to say: "Look here, [...] if
+you want me to talk about our weapons, I'll talk about all of our fine
+armaments; but if you just want me to talk about our 'best-sellers', maybe you
+should just go back to window shopping."
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_AOF | A.O.F
+== LITH_TXT_INFO_TITLE_AOF | A.O.F Inc.
+== LITH_TXT_INFO_IMAGE_AOF | lgfx/BIP/AOF.png
+@@ LITH_TXT_INFO_DESCR_AOF
+Not much is known about this shady corporation on the outside, and reports
+from insiders never painted a very pretty picture.
+
+In 1345 NE, a major attack on A.O.F left them nearly out of the picture.
+However, with slow, concise social manipulation and funding from alien
+governments, they finally made it back onto the market in 1370.
+
+A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_AOF2 | $LITH_TXT_INFO_SHORT_AOF
+== LITH_TXT_INFO_TITLE_AOF2 | A.O.F Inc. [Bishop-Class Clearance]
+== LITH_TXT_INFO_IMAGE_AOF2 | $LITH_TXT_INFO_IMAGE_AOF
+@@ LITH_TXT_INFO_DESCR_AOF2
+A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and
+\cm--------\cj for the purposes of exposing the universal secret of magic and
+restoring the world to what it once was pre-calamity.
+
+Ranks of members whom fight for them include knights, bishops and
+infiltrators; these are assigned based on their skill set and the needs of the
+corporation.
+
+A.O.F Inc. also mass produces ammunition for energy weapons, robotics and
+modifications for existing weapons.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Cid | Cid
+== LITH_TXT_INFO_TITLE_Cid | $LITH_TXT_INFO_SHORT_Cid
+== LITH_TXT_INFO_IMAGE_Cid | lgfx/BIP/Cid.png
+@@ LITH_TXT_INFO_DESCR_Cid
+Cid is a black market trading group, presumed to be led by four men. They sell
+artifacts from the Super Dimension, ultra-high-grade weapons, and anonymously
+donate to several charities on Earth.
+
+This group has gone under several aliases over the past 200 years, and is one
+of the strongest, longest standing black market groups ever.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Facer | Facer
+== LITH_TXT_INFO_TITLE_Facer | $LITH_TXT_INFO_SHORT_Facer
+@@ LITH_TXT_INFO_DESCR_Facer
+Facer (pronounced "phaser") was a company that produced precision firearms
+around 2403 CE. Based in Paris, France, the company started out as a two-man
+production, designing simple but powerful sniper rifles for attracting
+military or revolutionary forces.
+
+Unfortunately, neither bought in due to lack of any real strife at the time.
+However, through word of mouth and lots of street-sales, Facer finally took
+off as a civilian hunting weapons seller.
+
+The company was resigned in 2480 after the death of its remaining founder.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_KSKK | KSKK
+== LITH_TXT_INFO_TITLE_KSKK | Kazami Sensou Kenkyuu Kaihatsu GK
+== LITH_TXT_INFO_IMAGE_KSKK | lgfx/BIP/KSKK.png
+@@ LITH_TXT_INFO_DESCR_KSKK
+A limited R&D company acting mainly in partnership with the military of the
+Great Empire of Kazami on Earth. Due to the strange and generally complex
+needs of the Kazami army, this company has developed a great many
+technologically advanced devices with a relatively small budget.
+
+Thanks to connections between OFMD and the Kazami government (from the
+circumstances of this operation,) KSKK has agreed to re-enter production of
+their more useful creations.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_MDDO | MDDO
+== LITH_TXT_INFO_TITLE_MDDO | Maxim-Danil Defense Org
+@@ LITH_TXT_INFO_DESCR_MDDO
+A now-defunct weapons manufacturer on Mars, founded and funded by the famous
+Maxim-Danil duo. They designed and produced weapons of all kinds on commission
+for military and paramilitary groups alike.
+
+De-funded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Newvec | Newvec
+== LITH_TXT_INFO_TITLE_Newvec | Newvec Armory Incorporated
+@@ LITH_TXT_INFO_DESCR_Newvec
+Newvec is a firearms company started a mere four years ago 1645. While they
+don't have much reputation as of now, they have a few very strong backers
+providing them funding. Newvec mostly produces weapons on commission, and only
+sells weapons to the public via online shipping.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_OFMD | OFMD
+== LITH_TXT_INFO_TITLE_OFMD | Optic Fiber Maxim-Danil
+== LITH_TXT_INFO_IMAGE_OFMD | lgfx/BIP/OFMD.png
+@@ LITH_TXT_INFO_DESCR_OFMD
+Originally, this company only produced optic fiber cables for consumer use,
+but later branched out to create all kinds of computation technology.
+
+Optic Fiber Maxim-Danil are currently conducting a seek-and-destroy operation
+in concert with militaries of Earth on all demonic threats found to be
+emitting themselves from another dimensional plane.
+
+For now, OFMD are your employers, and supply you with Score, weaponry and
+cyber-tech.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Omakeda | Omakeda
+== LITH_TXT_INFO_TITLE_Omakeda | Omakeda Defense Co.
+== LITH_TXT_INFO_IMAGE_Omakeda | lgfx/BIP/Omakeda.png
+@@ LITH_TXT_INFO_DESCR_Omakeda
+Based in Hawaii, Omakeda Defense Co. produce self-defense and hunting weaponry
+for civilians. Due to their high quality and fair pricing, militaries 
+mercenaries around the world use their armaments as well.
+
+Known for their innovative firearm design, Omakeda is one of the highest
+profiting, most popular firearms manufacturers on Earth.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Semaphore | Semaphore, Inc.
+== LITH_TXT_INFO_TITLE_Semaphore | Semaphore, Incorporated
+== LITH_TXT_INFO_IMAGE_Semaphore | lgfx/BIP/Semaphore.png
+@@ LITH_TXT_INFO_DESCR_Semaphore
+Hiding out somewhere in the asteroid belt of Omicron Xevv, Semaphore, Inc is a
+space ship weapons designer and manufacturer started 6 years ago in 1643 NE by
+a small group of scientists and businessmen.
+
+Semaphore has over its lifetime put out a great many prototype weapons and
+done fairly well with investors.
+
+While they mainly produce weaponry made for equipping space ships, Semaphore
+have also produced small-batch infantry weapons for gauging interest and
+profitability.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_Sym43 | SYM4.3
+== LITH_TXT_INFO_TITLE_Sym43 | SYM4.3 WEAPONS INCORPORATED
+== LITH_TXT_INFO_IMAGE_Sym43 | lgfx/BIP/Sym43.png
+@@ LITH_TXT_INFO_DESCR_Sym43
+Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3 create
+and distribute explosive weapons. For distribution, they assign a standardized
+anonymous designation, and sell the weapons via proxy in their name.
+
+They have (according to their published sales reports) sold weaponry to over
+three quarters of all recorded mercenary, military and government bodies.
+
+Weapons confirmed to be made by them have appeared in countless historic
+battles, having existed for over 700 years now.
+
+##----------------------------------------------------------------------------
+== LITH_TXT_INFO_SHORT_UnrealArms | Unreal Arms
+== LITH_TXT_INFO_TITLE_UnrealArms | $LITH_TXT_INFO_SHORT_UnrealArms
+@@ LITH_TXT_INFO_DESCR_UnrealArms
+A company currently residing in the Aetos Vi system. They manufacture
+high-grade exotic weaponry both on commission and for mass production.
+
+Unreal Arms create what are dubbed by critics "some of the nicest-feeling
+weapons you can get your hands on", and yet are still able to sell them for a
+nice price thanks to good shipping architecture in the Aetos Vi system.
+
+## EOF

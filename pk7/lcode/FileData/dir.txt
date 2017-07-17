@@ -3,22 +3,22 @@ This is a list of files to be processed into LANGUAGE by compilefs.lua.
 -- Info Pages ----------------------------------------------------------------
 
 in language.info.corporations.en.txt
-parsefile info/Corporations.txt
+parsefile Info_Corporations.txt
 
 in language.info.enemies.en.txt
-parsefile info/Enemies.txt
+parsefile Info_Enemies.txt
 
 in language.info.places.en.txt
-parsefile info/Places.txt
+parsefile Info_Places.txt
 
 in language.info.upgrades.en.txt
-parsefile info/Upgrades.txt
+parsefile Info_Upgrades.txt
 
 in language.info.weapons.en.txt
-parsefile info/Weapons.txt
+parsefile Info_Weapons.txt
 
 in language.info.omake.en.txt
-parsefile info/Extra.txt
+parsefile Info_Extra.txt
 
 
 -- CBI Pages ----------------------------------------------------------------

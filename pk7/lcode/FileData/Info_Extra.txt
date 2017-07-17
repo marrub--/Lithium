@@ -1,5 +1,5 @@
 == LITH_TXT_INFO_TITLE_Extra1 | Nan Kosi Mal
-@@ LITH_TXT_INFO_DESCR_Extra1
+%% LITH_TXT_INFO_DESCR_Extra1
 Bisu~'6(2
 
 Sob'whniskbttibtt'ha'jhts'fdsnhit'fic'niafds'wuhcrdsnhit'tsnkk'ehsobut'jb'njjbitbk~+'ns t'knlb'ihehc~'bqbi'dfubt'na'fkk'sob~ ub'chni`'nt'wnkni`'rw'sufto'sh'eb'wrs'nish'fi'bickbtt'tsubfj'ha'\cr`fuef`b\cm)
@@ -9,7 +9,7 @@ Sofs t'fkth'thjbsoni`'sofs'ehsobut'jb+'fdsrfkk~)'Sobub t'shh'jrdo'\cr`fuef`b\cm)
 J~'phuc'pft'erunbc'\cohib'oricubc'jnkknjbsubt'\cqarusobu'chpi\cm'tnidb'sont'sohr`os<
 
 == LITH_TXT_INFO_TITLE_Extra2 | Px-5]404 None
-@@ LITH_TXT_INFO_DESCR_Extra2
+%% LITH_TXT_INFO_DESCR_Extra2
 Bisu~'5(2
 
 N'fj'ihs'f'jfi'ha'fdsnhi+'th'sob'\cr`fuef`b\cm'wuhekbj'pnkk'wbutnts)
@@ -19,7 +19,7 @@ Sobub'nt'ohpbqbu'thjbsoni`'sh'eb'tfnc'fehrs'\ccniqhkrisfu~'fdsnhi\cm)'N j'fkk'fe
 Sobub t'f'akhp'sh'ns)'Bqbi'thjbsoni`'ft'\coardlni`'tsrwnc\cm'ft'mrts'lnkkni`'oricubct'ha'jnduhit'ha'crts'dfi'eb'bisbusfnini`'na'ns t'`hs'sob'un`os'akhp)'@bs'nish'ns)'@bs'jfc'fic'\cslnkk'sob'eftnkntl\cm)
 
 == LITH_TXT_INFO_TITLE_Extra3 | Pointles$ Numbers3
-@@ LITH_TXT_INFO_DESCR_Extra3
+%% LITH_TXT_INFO_DESCR_Extra3
 Bisu~'4(2
 
 Sob~ ub'hetbttbc'pnso'ns<'N'chi s'lihp'po~+'sobub t'thjbsoni`'pbnuc'fehrs'sobj'N'`rbtt)'Ers'sob~ ub'hetbttbc'pnso'sobtb'wfssbuit'sob~'jfcb'rw)'Ns t'onkfunhrt+'fdsrfkk~+'N j'kfr`oni`'j~'ftt'haa'un`os'ihp'mrts'sonilni`'fehrs'ns)
@@ -29,7 +29,7 @@ Jf~eb'~hr'ihsndbc'ns'shh+'fkk'ha'sobtb'soni`t'N qb'punssbi'fub'mrts'whniskbtt'wf
 Ers'sofs t'hlf~)'Ns t'tsnkk'arii~)'Sobub kk'eb'jhub)'Sobub kk'eb'jrdo'jhub'auhj'jb)'Sobub kk'eb'jrdo'jhub)'Sobub kk'eb'th'jrdo'jhub'chpi'ni'sont'\cvfshkk'ha'jntbu~\cm)
 
 == LITH_TXT_INFO_TITLE_Extra4 | Clarity
-@@ LITH_TXT_INFO_DESCR_Extra4
+%% LITH_TXT_INFO_DESCR_Extra4
 Bisu~'3(2
 
 \c`Tbqbi'oricubc'~bfut\cm'f`h+'jfi'pfklbc'aubbk~'hi'ont'wkfibs)'Sobi+'ob'dfubc'jhub'fehrs'`bssni`'sob'fttohkbt'haa'sob'wkfibs+'fic'sobi'sob~'lnkkbc'bfdohsobu+'knlb'sob~'ch)'Fic'sob'fttohkbt'fub'`bssni`'lnkkbc'e~'fknbit'ihp+'th'sob~'pbub'crje'sh'kbfqb'fi~pf~t)
@@ -39,7 +39,7 @@ Ahu'thjb'ubfthi'sob'\cr`fuef`b\cm'wuhekbj'tsnkk'oft'ihs'ebbi'ubthkqbc)'N'phicbu'
 Ih'jfssbu)'N kk'knqb)'Sobub t'jhub'sh'eb'chib)'Jrdo'jhub'sh'eb'chib)'Th'jrdo'jhub'sh'eb'chib)
 
 == LITH_TXT_INFO_TITLE_Extra5 | D.3.2.2
-@@ LITH_TXT_INFO_DESCR_Extra5
+%% LITH_TXT_INFO_DESCR_Extra5
 Bisu~'2(2
 
 *************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
@@ -47,3 +47,5 @@ Bisu~'2(2
 6370?57?'Wkf}jf'Fqbirb
 
 NSBUFSB
+
+## EOF

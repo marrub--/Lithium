@@ -8,14 +8,16 @@ function procHead(alias)
    out:write("\"" .. alias .. "\" =")
 end
 
-function procLine(ln, last, only)
-   if not only then
+function procLine(ln, noeol, nobreak)
+   if not nobreak then
       out:write("\n   ")
    else
       out:write(" ")
    end
-   out:write("\"" .. ln:gsub("\\", "\\\\"):gsub('"', "\\\""):gsub("\\\\c", "\\c"))
-   if not last then out:write("\\n") end
+   out:write("\"" .. ln:gsub("\\", "\\\\"):gsub('"', "\\\""):gsub("\\\\c", "\\c"):gsub("\n", "\\n"))
+   if not noeol then
+      out:write("\\n")
+   end
    out:write("\"")
 end
 
@@ -55,15 +57,23 @@ function procIn(fname)
    out:write("[enu default]\n\n")
 end
 
-function procBuf(outbuf)
+function procBuf(buf)
    local m
-   if trim(outbuf[#outbuf]) == "" then
-      m = #outbuf - 1
+   if trim(buf.lns[#buf.lns]) == "" then
+      m = #buf.lns - 1
    else
-      m = #outbuf
+      m = #buf.lns
    end
    for i = 1, m do
-      procLine(outbuf[i], i == m)
+      local ln = buf.lns[i]
+      if buf.trimlines then
+         if ln == "" then
+            ln = "\n\n"
+         elseif i ~= m and buf.lns[i + 1] ~= "" then
+            ln = ln .. " "
+         end
+      end
+      procLine(ln, i == m or buf.trimlines)
    end
    procEnd()
 end
@@ -74,41 +84,57 @@ function procFileParse(fname)
    end
    
    local lns = io.lines(fname)
-   local outbuf
+   local buf = nil
    for ln in lns do
-      local sub3 = ln:sub(1, 3)
-      if sub3 == "== " then
-         if outbuf then
-            procBuf(outbuf)
-            outbuf = nil
+      -- single line
+      if ln:sub(1, 3) == "== " then
+         if buf then
+            procBuf(buf)
+            buf = nil
          end
          local e, s = ln:find("|", 1, true)
          if e and s then
             procData(trim(ln:sub(s+1)), trim(ln:sub(4, e-1)))
          end
-      elseif sub3 == "@@ " then
-         if outbuf then
-            procBuf(outbuf)
+      
+      -- info page multiline
+      elseif ln:sub(1, 3) == "@@ " then
+         if buf then
+            procBuf(buf)
          end
-         outbuf = {}
+         buf = {lns = {}, trimlines = true}
          local alias = trim(ln:sub(4))
          if dbgon then
             print("dmln> '" .. alias .. "'")
          end
          procHead(alias)
-      elseif sub3 == "## " then
-         if outbuf then
-            procBuf(outbuf)
-            outbuf = nil
+      
+      -- regular multiline
+      elseif ln:sub(1, 3) == "%% " then
+         if buf then
+            procBuf(buf)
+         end
+         buf = {lns = {}, trimlines = false}
+         local alias = trim(ln:sub(4))
+         if dbgon then
+            print("dmln> '" .. alias .. "'")
+         end
+         procHead(alias)
+      
+      -- comment
+      elseif ln:sub(1, 2) == "##" then
+         if buf then
+            procBuf(buf)
+            buf = nil
          end
          out:write("\n// " .. ln:sub(4) .. "\n")
-      elseif outbuf then
-         table.insert(outbuf, ln)
+      elseif buf then
+         table.insert(buf.lns, ln)
       end
    end
    
-   if outbuf then
-      procBuf(outbuf)
+   if buf then
+      procBuf(buf)
    end
 end
 
