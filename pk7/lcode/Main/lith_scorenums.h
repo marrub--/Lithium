@@ -7,7 +7,7 @@ const int Score_Rocket    = 3000;
 const int Score_RocketBox = 6000;
 const int Score_Cell      = 4000;
 const int Score_CellPack  = 7000;
-const int Score_Backpack  = (Score_Clip + Score_ShellBox + Score_Rocket + Score_Cell) * 5;
+const int Score_Backpack  = 10000;
 
 // Tier 1
 const int Score_ZombieMan     = 1000; // Bullets

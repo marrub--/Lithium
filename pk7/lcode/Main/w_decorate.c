@@ -112,7 +112,7 @@ int Lith_Timer(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
-   score_t score = ACS_CheckInventory("Lith_ScoreCount") * RandomFloat(.5, 2);
+   score_t score = ACS_CheckInventory("Lith_ScoreCount") * (double)RandomFloat(0.5, 1.5);
    Lith_GiveAllScore(score, false);
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }

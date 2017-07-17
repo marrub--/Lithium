@@ -458,6 +458,24 @@ static void CheckCompat(void)
 }
 
 //
+// UpdateGame
+//
+static void UpdateGame(void)
+{
+   #define Update(n) \
+      if(ACS_GetCVarFixed("__lith_version") < n) \
+         __with(ACS_SetCVarFixed("__lith_version", n);)
+   
+   // Update version 1.4 to 1.5r1
+   Update(15.1) {
+      // Score multiplier default changed from 2.0 to 1.25
+      ACS_SetCVarFixed("lith_sv_scoremul", 1.25);
+   }
+   
+   #undef Update
+}
+
+//
 // GSInit
 //
 static void GSInit(void)
@@ -468,6 +486,7 @@ static void GSInit(void)
    extern void Lith_GSInit_Weapon(void);
    extern void Lith_GSInit_Dialogue(void);
    
+   UpdateGame();
    GetDebugInfo();
    CheckCompat();
    Lith_GInit_Shop();

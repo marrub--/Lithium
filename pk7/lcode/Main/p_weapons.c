@@ -84,7 +84,7 @@ static void PlayWeaponPickupSound(player_t *p, weaponinfo_t const *info)
 //
 static void Lith_PickupScore(player_t *p, int parm)
 {
-   score_t score = 11100ll * weaponinfo[parm].slot;
+   score_t score = 4000 * weaponinfo[parm].slot;
    
    GiveWeaponItem(parm);
    p->giveScore(score);
