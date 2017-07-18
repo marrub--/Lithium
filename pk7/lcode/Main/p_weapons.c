@@ -1,5 +1,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
+#include "lith_monster.h"
 
 #include <math.h>
 
@@ -318,6 +319,19 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
    if(ro) inv = inv * mul;
    else   inv = mul - inv * 0.35;
    return minmax(inv, 0.0, 1.0);
+}
+
+//
+// Lith_GetFinalizerMaxHealth
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetFinalizerMaxHealth(void)
+{
+   int sh = ACS_GetActorProperty(0, APROP_SpawnHealth);
+   ifauto(dmon_t *, m, DmonPtr())
+      return sh + (m->maxhealth - sh) * 0.5;
+   else
+      return sh;
 }
 
 // EOF

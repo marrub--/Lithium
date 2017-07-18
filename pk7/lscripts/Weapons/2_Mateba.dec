@@ -9,7 +9,7 @@ actor Lith_Finalizer : Lith_CustomFunction
    {
    Pickup:
       TNT1 A 0 A_CheckFlag("BOSS", "Nope")
-      TNT1 A 0 A_JumpIf(((health*1.0) / CallACS("Lith_GetSpawnHealth")) > 0.4, "Nope")
+      TNT1 A 0 A_JumpIf(((health*1.0) / CallACS("Lith_GetFinalizerMaxHealth")) > 0.5, "Nope")
       TNT1 A 0 A_Die
       stop
    Nope:
