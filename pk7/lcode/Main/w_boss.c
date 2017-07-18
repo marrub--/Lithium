@@ -179,13 +179,13 @@ void Lith_PhantomDeath(int num, int phase)
    
    #define PhaseR(num, phasenum, reward) \
       case phasenum: \
-         world.boss[num][phasenum] = true; \
+         world.boss[num - 1][phasenum - 1] = true; \
          LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
          ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
          break
    
    #define PhaseN(num, phasenum) \
-      case phasenum: world.boss[num][phasenum] = true; break
+      case phasenum: world.boss[num - 1][phasenum - 1] = true; break
    
    switch(num)
    {
@@ -314,8 +314,8 @@ void Lith_TriggerBoss(int num, int phase)
 //
 void Lith_SpawnBosses(score_t sum)
 {
-   // WHY ARE CONDITIONS SO HARD IT TOOK ME 5 TRIES TO GET THIS RIGHT
-   // AAAAGH
+   // WHY ARE CONDITIONS SO HARD IT TOOK ME 6 TRIES TO GET THIS RIGHT
+   // NOTE: INCREMENT THIS COUNTER EVERY TIME I GET IT WRONG
    
         if(!world.boss[1][1] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
    else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
