@@ -314,17 +314,17 @@ void Lith_TriggerBoss(int num, int phase)
 //
 void Lith_SpawnBosses(score_t sum)
 {
-   // WHY ARE CONDITIONS SO HARD IT TOOK ME 6 TRIES TO GET THIS RIGHT
+   // WHY ARE CONDITIONS SO HARD IT TOOK ME 7 TRIES TO GET THIS RIGHT
    // NOTE: INCREMENT THIS COUNTER EVERY TIME I GET IT WRONG
    
-        if(!world.boss[1][1] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
-   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
-   else if(!world.boss[2][1] && world.boss[1][2] && sum > world.boss2p1scr) Lith_TriggerBoss(2, 1);
-   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss2p2scr) Lith_TriggerBoss(2, 2);
-   else if(!world.boss[2][3] && world.boss[2][2] && sum > world.boss2p3scr) Lith_TriggerBoss(2, 3);
-   else if(!world.boss[3][1] && world.boss[2][3] && sum > world.boss3p1scr) Lith_TriggerBoss(3, 1);
-   else if(!world.boss[3][2] && world.boss[3][1] && sum > world.boss3p2scr) Lith_TriggerBoss(3, 2);
-   else if(!world.boss[3][3] && world.boss[3][2] && sum > world.boss3p3scr) Lith_TriggerBoss(3, 3);
+        if(!world.boss[0][0] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
+   else if(!world.boss[0][1] && world.boss[0][0] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
+   else if(!world.boss[1][0] && world.boss[0][1] && sum > world.boss2p1scr) Lith_TriggerBoss(2, 1);
+   else if(!world.boss[1][1] && world.boss[1][0] && sum > world.boss2p2scr) Lith_TriggerBoss(2, 2);
+   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss2p3scr) Lith_TriggerBoss(2, 3);
+   else if(!world.boss[2][0] && world.boss[1][2] && sum > world.boss3p1scr) Lith_TriggerBoss(3, 1);
+   else if(!world.boss[2][1] && world.boss[2][0] && sum > world.boss3p2scr) Lith_TriggerBoss(3, 2);
+   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss3p3scr) Lith_TriggerBoss(3, 3);
 }
 
 // EOF
