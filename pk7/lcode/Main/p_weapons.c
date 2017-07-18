@@ -256,8 +256,7 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       switch(i)
       {
       case weapon_shotgun:
-         if(p->getUpgr(UPGR_GaussShotty)->active)
-         {
+         if(p->getUpgr(UPGR_GaussShotty)->active) {
             wep->ammotype  = AT_Mag;
             wep->ammoclass = "Lith_GaussShotsFired";
          }

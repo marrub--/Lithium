@@ -67,7 +67,7 @@ actor Lith_Clip : Lith_ScoreItem replaces Clip
       SCOR A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_clip)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_clip)
       goto Super::Pickup
    }
 }
@@ -81,7 +81,7 @@ actor Lith_ClipBox : Lith_ScoreItem replaces ClipBox
       SCOR B -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_clipbox)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_clipbox)
       goto Super::Pickup
    }
 }
@@ -98,7 +98,7 @@ actor Lith_Shell : Lith_ScoreItem replaces Shell
       SHEL A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_shell)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_shell)
       goto Super::Pickup
    }
 }
@@ -115,7 +115,7 @@ actor Lith_ShellBox : Lith_ScoreItem replaces ShellBox
       SBOX A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_shellbox)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_shellbox)
       goto Super::Pickup
    }
 }
@@ -132,7 +132,7 @@ actor Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
       ROCK A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_rocket)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_rocket)
       goto Super::Pickup
    }
 }
@@ -149,7 +149,7 @@ actor Lith_RocketBox : Lith_ScoreItem replaces RocketBox
       BROK A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_rocketbox)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_rocketbox)
       goto Super::Pickup
    }
 }
@@ -166,7 +166,7 @@ actor Lith_Cell : Lith_ScoreItem replaces Cell
       CELL A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_cell)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_cell)
       goto Super::Pickup
    }
 }
@@ -184,7 +184,7 @@ actor Lith_CellPack : Lith_ScoreItem replaces CellPack
       CELP A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_cellbox)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_cellbox)
       goto Super::Pickup
    }
 }

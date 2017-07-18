@@ -25,10 +25,10 @@ void Lith_LogName(int name)
    
    switch(name)
    {
-#define BOTH(name) case log_##name: p->log ("%LS", "LITH_TXT_LOG_" #name); break;
-#define FULL(name) case log_##name: p->logF("%LS", "LITH_TXT_LOG_" #name); break;
-#define HUDS(name) case log_##name: p->logH("%LS", "LITH_TXT_LOG_" #name); break;
-#define AMMO(name) case log_##name: if(Lith_GetPCVarInt(p, "lith_player_ammolog")) p->logH("%LS", "LITH_TXT_LOG_" #name); break;
+#define BOTH(name) case msg_##name: p->log ("%LS", "LITH_TXT_LOG_" #name); break;
+#define FULL(name) case msg_##name: p->logF("%LS", "LITH_TXT_LOG_" #name); break;
+#define HUDS(name) case msg_##name: p->logH("%LS", "LITH_TXT_LOG_" #name); break;
+#define AMMO(name) case msg_##name: if(Lith_GetPCVarInt(p, "lith_player_ammolog")) p->logH("%LS", "LITH_TXT_LOG_" #name); break;
    BOTH(allmap)
    HUDS(armorbonus)
    BOTH(backpack)
