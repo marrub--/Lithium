@@ -188,13 +188,13 @@ actor Lith_Solspear
    +BRIGHT
    +RIPPER
    
-   const int flags = SXF_TRANSFERPOINTERS;
+   const int flags = SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION;
    
    states
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -8, 0,0, 0,0,0, 0, flags)
+      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -8 ,0,0, 0,0,0, 0, flags)
       TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -16,0,0, 0,0,0, 0, flags)
       TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -24,0,0, 0,0,0, 0, flags)
       TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -32,0,0, 0,0,0, 0, flags)
