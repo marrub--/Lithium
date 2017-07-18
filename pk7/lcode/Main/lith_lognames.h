@@ -11,7 +11,7 @@ enum
    log_greenarmor,
    log_healthbonus,
    log_infrared,
-   log_invulnerability,
+   log_invuln,
    log_medikit,
    log_megasphere,
    log_radsuit,

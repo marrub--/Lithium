@@ -38,6 +38,12 @@ Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
 Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 
+-- Misc ----------------------------------------------------------------------
+
+in language.log.en.txt
+parsefile Log.txt
+
+
 -- CBI Mail ------------------------------------------------------------------
 
 in language.info.mail.txt

@@ -157,30 +157,12 @@ void Lith_PickupCBIItem(int num)
 {
    static void Lith_InstallCBIItem(int num);
    
-   static __str msgs_marine[] = {
-      [cupg_hasupgr1  ] = "> Installed KSKK Spec. High-Grade CPU",
-      [cupg_hasupgr2  ] = "> Installed KSKK Spec. Super High-Grade CPU",
-      [cupg_armorinter] = "> Installed Armor Interface",
-      [cupg_weapninter] = "> Installed Weapon Modification Device",
-      [cupg_weapninte2] = "> Installed Weapon Refactoring Device",
-      [cupg_rdistinter] = "> Installed Reality Distortion Interface"
-   };
-   
-   static __str msgs_mage[] = {
-      [cupg_c_slot3spell] = "> Installed Delear Spell Driver",
-      [cupg_c_slot5spell] = "> Installed Hulgyon Spell Driver",
-      [cupg_c_slot6spell] = "> Installed Star Shot Spell Driver",
-      [cupg_c_armorinter] = "> Installed Armor Interface",
-      [cupg_c_weapninte2] = "> Installed Weapon Refactoring Device",
-      [cupg_c_rdistinter] = "> Installed Reality Distortion Interface"
-   };
-   
    player_t *p = LocalPlayer;
    
    switch(p->pclass)
    {
-   case pclass_marine:    p->log(msgs_marine[num-1]); break;
-   case pclass_cybermage: p->log(msgs_mage[num-1]);   break;
+   case pclass_marine:    p->log(Language("LITH_TXT_LOG_CBI_M%i", num)); break;
+   case pclass_cybermage: p->log(Language("LITH_TXT_LOG_CBI_C%i", num)); break;
    }
    
    Lith_InstallCBIItem(num);

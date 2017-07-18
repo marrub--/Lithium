@@ -181,7 +181,7 @@ The 16th method of the \ciAurantia\c- mode. Intermediate attack that creates
 several piercing pillars of light forward of the user. One of the few
 classical methods still in use, created by Apollo in 3021 CE.
 
-== LITH_TXT_INFO_SHORT_StarShot | Star Shot
+== LITH_TXT_INFO_SHORT_StarShot | Hosh'danma
 == LITH_TXT_INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
 @@ LITH_TXT_INFO_DESCR_StarShot
 The 8th method of the \ciAurantia\c- mode. An advanced attack which summons

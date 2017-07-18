@@ -193,7 +193,7 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
       PINV ABCD 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_invulnerability)
+      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, log_invuln)
       TNT1 A 0 A_GiveInventory("InvulnerabilitySphere")
       stop
    }
