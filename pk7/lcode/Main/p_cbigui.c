@@ -117,7 +117,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 {
    gui_state_t *g = &p->cbi.guistate;
    
-   p->cbi.theme = Lith_GetPCVarInt(p, "lith_gui_theme");
+   p->cbi.theme = p->getCVarI("lith_gui_theme");
    
    if(p->cbi.theme != p->cbi.oldtheme)
    {

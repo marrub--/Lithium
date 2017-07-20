@@ -259,7 +259,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    double vol = 0.7 * mul;
    
    // Play a sound when we pick up score
-   if(!IsSmallNumber(vol) && Lith_GetPCVarInt(p, "lith_player_scoresound"))
+   if(!IsSmallNumber(vol) && p->getCVarI("lith_player_scoresound"))
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
    
    //
@@ -282,7 +282,7 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    p->scoreaccumtime += 20 * (mul * 2.0);
    
    // Log score
-   if(Lith_GetPCVarInt(p, "lith_player_scorelog"))
+   if(p->getCVarI("lith_player_scorelog"))
       p->logH("> +\Cj%lli\Cnscr", score);
 }
 

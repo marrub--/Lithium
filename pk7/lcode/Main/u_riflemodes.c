@@ -18,7 +18,7 @@ void Upgr_RifleModes_Deactivate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_RifleModes_Render(player_t *p, upgrade_t *upgr)
 {
-   if(Lith_GetPCVarInt(p, "lith_weapons_riflescope") &&
+   if(p->getCVarI("lith_weapons_riflescope") &&
       p->weapontype == weapon_rifle &&
       p->riflefiremode == rifle_firemode_burst)
    {

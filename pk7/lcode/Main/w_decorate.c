@@ -292,7 +292,7 @@ void Lith_ResetRifleMode()
 {
    player_t *p = LocalPlayer;
    
-   if(Lith_GetPCVarInt(p, "lith_weapons_riflemodeclear"))
+   if(p->getCVarI("lith_weapons_riflemodeclear"))
       p->riflefiremode = rifle_firemode_auto;
 }
 

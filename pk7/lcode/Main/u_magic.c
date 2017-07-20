@@ -92,9 +92,7 @@ void Lith_SetMagicUI(bool on)
    
    if(on && !p->indialogue)
    {
-      // TODO: fix this when david fixes bitfield read-and-write
-      p->indialogue = true;
-      UData.ui = true;
+      p->indialogue = UData.ui = true;
       p->semifrozen++;
       ACS_SetPlayerProperty(0, true, PROP_INSTANTWEAPONSWITCH);
       UData.gst.gfxprefix = "lgfx/UI/";
@@ -104,9 +102,7 @@ void Lith_SetMagicUI(bool on)
    }
    else if(!on && UData.ui)
    {
-      // TODO: fix this when david fixes bitfield read-and-write
-      p->indialogue = false;
-      UData.ui = false;
+      p->indialogue = UData.ui = false;
       p->semifrozen--;
       ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
       memset(&UData.gst, 0, sizeof(UData.gst));

@@ -99,7 +99,7 @@ void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
 {
-   if(UData.activearmor && Lith_GetPCVarInt(p, "lith_hud_showarmorind"))
+   if(UData.activearmor && p->getCVarI("lith_hud_showarmorind"))
    {
       DrawSpritePlain("lgfx/HUD/SplitLeft.png", hid_rarmorbg, 12.1, 170.2, TICSECOND);
       

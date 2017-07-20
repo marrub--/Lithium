@@ -29,14 +29,6 @@
 #define LocalPlayer (&players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
-#define Lith_GetPCVarInt(p, ...)    ACS_GetUserCVar      ((p)->num, __VA_ARGS__)
-#define Lith_GetPCVarFixed(p, ...)  ACS_GetUserCVarFixed ((p)->num, __VA_ARGS__)
-#define Lith_GetPCVarString(p, ...) ACS_GetUserCVarString((p)->num, __VA_ARGS__)
-
-#define Lith_SetPCVarInt(p, ...)    ACS_SetUserCVar      ((p)->num, __VA_ARGS__)
-#define Lith_SetPCVarFixed(p, ...)  ACS_SetUserCVarFixed ((p)->num, __VA_ARGS__)
-#define Lith_SetPCVarString(p, ...) ACS_SetUserCVarString((p)->num, __VA_ARGS__)
-
 
 //----------------------------------------------------------------------------
 // Types
@@ -83,19 +75,19 @@ typedef struct player_delta_s
    int     armor;
    score_t score;
    bool    indialogue;
-   
+
    // Position
    fixed x, y, z;
    fixed floorz;
    fixed pitch, yaw;
-   
+
    // Movement
    fixed velx, vely, velz;
    fixed pitchv, yawv;
    fixed forwardv, sidev, upv;
    fixed speedmul;
    fixed jumpboost;
-   
+
    // Input
    int  buttons;
    bool scopetoken;
@@ -111,12 +103,12 @@ typedef struct player_statedata_s
    bool active;
    bool dead;
    bool reinit;
-   
+
    int   tid;
    int   num;
    long  ticks;
    __str name;
-   
+
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
 } player_statedata_t;
@@ -127,24 +119,24 @@ typedef struct player_statedata_s
 typedef struct player_extdata_s
 {
    bip_t bip;
-   
+
    struct upgr_data upgrdata;
    upgrade_t   upgrades[UPGR_STATIC_MAX];
    Lth_HashMap upgrademap;
    int         upgrmax;
-   
+
    loginfo_t loginfo;
    bool      hudenabled;
-   
+
    int decvars[8];
    char txtbuf[8];
    int tbptr;
-   
+
    score_t scoreaccum;
    int     scoreaccumtime;
    double  scoremul;
    float   discount;
-   
+
    int spuriousexplosions;
    int brouzouf;
    bool hadinfrared;
@@ -170,16 +162,16 @@ typedef struct player_viewdata_s
    // pitch/yaw in precalculated sane radian format
    float pitchf;
    float yawf;
-   
+
    float addpitch;
    float addyaw;
-   
+
    float bobpitch;
    float bobyaw;
-   
+
    float extrpitch;
    float extryaw;
-   
+
    int cameratid;
    int weathertid;
 } player_viewdata_t;
@@ -202,16 +194,16 @@ typedef struct player_statdata_s
    int weaponsheld;
    int itemsbought;
    int upgradesowned;
-   
+
    long healthsum;
    long healthused;
-   
+
    long armorsum;
    long armorused;
-   
+
    score_t scoresum;
    score_t scoreused;
-   
+
    int unitstravelled;
 } player_statdata_t;
 
@@ -221,15 +213,15 @@ typedef struct player_statdata_s
 typedef struct player_invdata_s
 {
    weapondata_t weapon;
-   
+
    int    riflefiremode;
    list_t hudstrlist;
-   
+
    __str weaponclass;
    __str armorclass;
-   
+
    int armortype;
-   
+
    struct keycards_s
    {
       bool redcard     : 1;
@@ -239,7 +231,7 @@ typedef struct player_invdata_s
       bool yellowskull : 1;
       bool blueskull   : 1;
    } keys;
-   
+
    // 🌌 「÷」 0
    struct sigil_s
    {
@@ -319,12 +311,18 @@ typedef struct player
    property closeGUI  {call: Lith_PlayerCloseGUI(this)}
    property getUpgr   {call: Lith_PlayerGetNamedUpgrade(this)}
    property buttonPressed {call: Lith_ButtonPressed(this)}
-   property weapontype  {get:  Lith_PlayerCurWeaponType(this)}
-   property deliverMail {call: Lith_DeliverMail(this)}
-   property pclass      {get: Lith_PlayerGetClass(this)}
-   property getModScore {call: Lith_GetModScore(this)}
-   property clearTextBuf {call: Lith_ClearTextBuf(this)}
-   
+   property weapontype    {get:  Lith_PlayerCurWeaponType(this)}
+   property deliverMail   {call: Lith_DeliverMail(this)}
+   property pclass        {get: Lith_PlayerGetClass(this)}
+   property getModScore   {call: Lith_GetModScore(this)}
+   property clearTextBuf  {call: Lith_ClearTextBuf(this)}
+   property getCVarI {call: ACS_GetUserCVar      (->num)}
+   property getCVarK {call: ACS_GetUserCVarFixed (->num)}
+   property getCVarS {call: ACS_GetUserCVarString(->num)}
+   property setCVarI {call: ACS_SetUserCVar      (->num)}
+   property setCVarK {call: ACS_SetUserCVarFixed (->num)}
+   property setCVarS {call: ACS_SetUserCVarString(->num)}
+
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;
    [[__anonymous]] player_staticdata_t staticdata;

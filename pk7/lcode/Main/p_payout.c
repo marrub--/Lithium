@@ -84,7 +84,7 @@ void Lith_PlayerPayout(player_t *p)
          Left("Primary Account"); Right("%STRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
       }
       
-      if(Lith_GetPCVarInt(p, "lith_player_resultssound"))
+      if(p->getCVarI("lith_player_resultssound"))
       {
          if(counting)
             if(i < 35)

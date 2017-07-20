@@ -49,7 +49,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          UData.oldhealth = UData.health = ACS_Random(0, 666666);
          UData.maxhealth = ACS_Random(0, 666666);
       } else {
-         char color = Lith_GetPCVarInt(p, "lith_scanner_color") & 0x7F;
+         char color = p->getCVarI("lith_scanner_color") & 0x7F;
          
               if(six)     UData.tagstr = "\Cg6";
          else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
@@ -95,10 +95,10 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    if(!p->hudenabled || !UData.target)
       return;
    
-   int ox = Lith_GetPCVarInt(p, "lith_scanner_xoffs");
-   int oy = Lith_GetPCVarInt(p, "lith_scanner_yoffs");
+   int ox = p->getCVarI("lith_scanner_xoffs");
+   int oy = p->getCVarI("lith_scanner_yoffs");
    
-   if(Lith_GetPCVarInt(p, "lith_scanner_slide")) {
+   if(p->getCVarI("lith_scanner_slide")) {
       float diff = p->yawf - UData.cangle;
       ox += (UData.oangle = lerpf(UData.oangle, atan2f(sinf(diff), cosf(diff)), 0.1)) * 64;
    }
@@ -125,7 +125,7 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    }
    
    // Tag and health
-   bool  afnt = Lith_GetPCVarInt(p, "lith_scanner_altfont");
+   bool  afnt = p->getCVarI("lith_scanner_altfont");
    __str font = afnt ? "SMALLFONT" : "CBIFONT";
    
    HudMessageF(font, "%S", UData.tagstr);
@@ -135,7 +135,7 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 188.2 + oy, 0.1, 0.4);
    
    // Health bar
-   if(Lith_GetPCVarInt(p, "lith_scanner_bar")) {
+   if(p->getCVarI("lith_scanner_bar")) {
       int y = afnt ? 168 : 171;
       ACS_SetHudClipRect(120 + ox, y + oy, 80 * UData.splitfrac, 2);
       DrawSpritePlain(StrParam("lgfx/UI/HealthBar%i.png", UData.split), hid_vscbar, 120.1+ox, y+.1+oy, 0.1);

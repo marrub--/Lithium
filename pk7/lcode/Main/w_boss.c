@@ -9,17 +9,16 @@
 
 struct phantom_s
 {
-   property x   {get: ACS_GetActorX(0)}
-   property y   {get: ACS_GetActorY(0)}
-   property z   {get: ACS_GetActorZ(0)}
-   property ang {get: ACS_GetActorAngle(0)}
-   property health {get: ACS_GetActorProperty(0, APROP_Health)}
-   property meleetime
-   {
-      get: ACS_GetUserVariable(0, "user_meleetime"),
-      set: ACS_SetUserVariable(0, "user_meleetime")
+   property x   {get: ACS_GetActorX(->tid)}
+   property y   {get: ACS_GetActorY(->tid)}
+   property z   {get: ACS_GetActorZ(->tid)}
+   property ang {get: ACS_GetActorAngle(->tid)}
+   property health {get: ACS_GetActorProperty(->tid, APROP_Health)}
+   property meleetime {
+      get: ACS_GetUserVariable(->tid, "user_meleetime"),
+      set: ACS_SetUserVariable(->tid, "user_meleetime")
    }
-   
+
    int tid;
 };
 
@@ -43,27 +42,27 @@ static int lmvar bosstid;
 void Lith_PhantomMain()
 {
    struct phantom_s self;
-   
+
    self.tid = bosstid;
-   
+
    ACS_AmbientSound("enemies/phantom/spawned", 127);
-   
+
    for(;;)
    {
       if(Lith_GetPlayerNumber(0, AAPTR_TARGET) == -1)
          ACS_GiveInventory("Lith_PhantomLOSCheck", 1);
-      
+
       if(!Lith_ValidPointer(0, AAPTR_TARGET))
          ACS_GiveInventory("Lith_PhantomHunt", 1);
-      
+
       if((ACS_Timer() % 10) == 0)
          ACS_GiveInventory("Lith_PhantomAura", 1);
-      
+
       // TODO: fix this when david fixes properties
       // 2017-07-16: david still has not fixed properties
       if(self.meleetime)
          self.meleetime = self.meleetime - 1;
-      
+
       ACS_Delay(1);
    }
 }
@@ -75,21 +74,21 @@ void Lith_PhantomMain()
 void Lith_PhantomMain2()
 {
    struct phantom_s self;
-   
+
    self.tid = ACS_UniqueTID();
-   
+
    for(;;)
    {
       if((ACS_Timer() % 10) == 0)
          ACS_GiveInventory("Lith_PhantomAura", 1);
-      
+
       // TODO: fix this when david fixes properties
       if(self.meleetime)
          self.meleetime = self.meleetime - 1;
-      
+
       if(self.health <= 0)
          return;
-      
+
       ACS_Delay(1);
    }
 }
@@ -123,17 +122,17 @@ void Lith_PhantomTarget()
    {
       int tid = ACS_ActivatorTID();
       bool unique;
-      
+
       if(!tid)
       {
          ACS_Thing_ChangeTID(0, tid = ACS_UniqueTID());
          unique = true;
       }
-      
+
       ACS_SetActivator(bosstid);
       ACS_SetPointer(AAPTR_TARGET, tid);
       ACS_SetActorState(0, "See");
-      
+
       if(unique)
          ACS_Thing_ChangeTID(tid, 0);
    }
@@ -146,9 +145,9 @@ void Lith_PhantomTarget()
 void Lith_PhantomTeleport()
 {
    fixed ang = ACS_GetActorAngle(0);
-   
+
    ACS_ThrustThing(ang * 256, 64, true, 0);
-   
+
    for(int i = 0; i < 15; i++)
    {
       ACS_GiveInventory("Lith_PhantomTeleport", 1);
@@ -163,30 +162,30 @@ void Lith_PhantomTeleport()
 void Lith_PhantomDeath(int num, int phase)
 {
    ACS_StopSound(0, 7);
-   
+
    ACS_AmbientSound("player/death1", 127);
-   
+
    ACS_Delay(35);
-   
+
    ACS_NamedTerminate("Lith_PhantomMain", 0);
    ACS_GiveInventory("Lith_PlayerDeath", 1);
-   
+
    ACS_Delay(25);
-   
+
    ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
-   
+
    ACS_Delay(25);
-   
+
    #define PhaseR(num, phasenum, reward) \
       case phasenum: \
          world.boss[num - 1][phasenum - 1] = true; \
          LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
          ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
          break
-   
+
    #define PhaseN(num, phasenum) \
       case phasenum: world.boss[num - 1][phasenum - 1] = true; break
-   
+
    switch(num)
    {
    case 1:
@@ -196,7 +195,7 @@ void Lith_PhantomDeath(int num, int phase)
       PhaseR(1, 2, "Lith_CBIUpgrade1");
       }
       break;
-   
+
    case 2:
       switch(phase)
       {
@@ -205,7 +204,7 @@ void Lith_PhantomDeath(int num, int phase)
       PhaseR(2, 3, "Lith_WeapnInte2");
       }
       break;
-   
+
    case 3:
       switch(phase)
       {
@@ -215,7 +214,7 @@ void Lith_PhantomDeath(int num, int phase)
       }
       break;
    }
-   
+
    #undef PhaseR
    #undef PhaseN
 }
@@ -249,24 +248,24 @@ void Lith_SpawnBossArgs2(int arg3, int arg4)
 void Lith_SpawnBoss(int num, int phase)
 {
    __str names[] = {"Lith_Boss_James", "Lith_Boss_Makarov", "Lith_Boss_Isaac"};
-   
+
    fixed x = ACS_GetActorX(0);
    fixed y = ACS_GetActorY(0);
    fixed z = ACS_GetActorZ(0);
-   
+
    fixed angle = ACS_GetActorAngle(0);
-   
+
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
-   
+
    ACS_Thing_Remove(0);
-   
+
    ACS_SpawnForced(names[num - 1], x, y, z, bosstid, angle);
    ACS_SetThingSpecial(bosstid, bossargs[0], bossargs[1], bossargs[2], bossargs[3], bossargs[4], bossargs[5]);
    ACS_SetUserVariable(bosstid, "user_phase", phase);
-   
+
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
-   
+
    switch(phase)
    {
    case 2:
@@ -282,7 +281,7 @@ void Lith_SpawnBoss(int num, int phase)
       Lith_GiveActorInventory(bosstid, "Lith_PhantomPhase3Flags", 1);
       break;
    }
-   
+
    world.bossspawned = true;
 }
 
@@ -293,14 +292,14 @@ void Lith_SpawnBoss(int num, int phase)
 void Lith_TriggerBoss(int num, int phase)
 {
    static bool firstboss = true;
-   
+
    int tid;
-   
+
    ACS_SpawnForced("Lith_BossSpawner", 0, 0, 0, tid = ACS_UniqueTID());
    ACS_SetActorState(tid, StrParam("Boss%i_%i", num, phase));
-   
+
    LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %i phase %i", num, phase);
-   
+
    if(firstboss)
    {
       firstboss = false;
@@ -316,7 +315,7 @@ void Lith_SpawnBosses(score_t sum)
 {
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 7 TRIES TO GET THIS RIGHT
    // NOTE: INCREMENT THIS COUNTER EVERY TIME I GET IT WRONG
-   
+
         if(!world.boss[0][0] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
    else if(!world.boss[0][1] && world.boss[0][0] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
    else if(!world.boss[1][0] && world.boss[0][1] && sum > world.boss2p1scr) Lith_TriggerBoss(2, 1);

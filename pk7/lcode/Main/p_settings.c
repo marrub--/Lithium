@@ -54,7 +54,7 @@ if(p->num == 0) {
    Category("World");
    ServerBool("Rain in outside areas", "lith_sv_rain");
    ServerBool("Replace skies",         "lith_sv_sky");
-   
+
    Category("Game Modes");
    ServerBool("Score Golf mode",  "lith_sv_scoregolf");
    ServerBool("Are you serious?", "lith_sv_seriousmode");
@@ -95,7 +95,7 @@ static __str ColorName(char ch)
       "Olive", "Dark Green", "Dark Red", "Dark Brown", "Purple", "Dark Grey",
       "Cyan"
    };
-   
+
    if(ch < 'a' || ch > 'v') return "Unknown";
    else                     return colors[ch - 'a'];
 }
@@ -128,7 +128,7 @@ static __str ThemeName(int num)
 void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 {
    int y = 0;
-   
+
 #define Category(...) y += 20
 #define Bool(...) y += 10
 #define Float(...) y += 10
@@ -140,17 +140,17 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define CBox(...) y += 10
 #define FromUI
 #include "p_settings.c"
-   
+
    Lith_GUI_ScrollBegin(g, st_settingscr, 15, 30, 280, 192, y);
-   
+
    y = 0;
-   
+
 #define Label(label) \
    do { \
       HudMessageF("CBIFONT", label); \
       HudMessagePlain(g->hid--, g->ox + 2.1, g->oy + y + 0.1, TICSECOND); \
    } while(0)
-   
+
 #define Category(name) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 20)) \
@@ -164,11 +164,11 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Bool(label, cvar) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
-         __with(bool on = Lith_GetPCVarInt(p, cvar);) \
+         __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
          if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - btnlist.w, y, .preset = &btnlist)) \
-            Lith_SetPCVarInt(p, cvar, !on); \
+            p->setCVarI(cvar, !on); \
       } \
       y += 10; \
    } while(0)
@@ -176,11 +176,11 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Float(label, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
-         __with(double set = Lith_GetPCVarFixed(p, cvar), diff;) \
+         __with(double set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
          if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
-            Lith_SetPCVarFixed(p, cvar, set + diff); \
+            p->setCVarK(cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
@@ -188,11 +188,11 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Int(label, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
-         __with(int set = Lith_GetPCVarInt(p, cvar), diff;) \
+         __with(int set = p->getCVarI(cvar), diff;) \
       { \
          Label(label); \
          if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
-            Lith_SetPCVarInt(p, cvar, set + diff); \
+            p->setCVarI(cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
@@ -236,13 +236,13 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define Enum(label, cvar, minima, maxima, fmt, ...) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
-         __with(int set = Lith_GetPCVarInt(p, cvar);) \
+         __with(int set = p->getCVarI(cvar);) \
       { \
          Label(label); \
          if(Lith_GUI_Button_Id(g, 0, .x = 280 - (btnnexts.w*2), y, set == minima, .preset = &btnprevs)) \
-            Lith_SetPCVarInt(p, cvar, set - 1); \
+            p->setCVarI(cvar, set - 1); \
          if(Lith_GUI_Button_Id(g, 1, .x = 280 -  btnnexts.w   , y, set == maxima, .preset = &btnnexts)) \
-            Lith_SetPCVarInt(p, cvar, set + 1); \
+            p->setCVarI(cvar, set + 1); \
          HudMessageF("CBIFONT", fmt, __VA_ARGS__); \
          HudMessagePlain(g->hid--, g->ox + 200.1, g->oy + y + 0.1, TICSECOND); \
       } \
@@ -263,7 +263,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define FromUI
 #include "p_settings.c"
 #undef Label
-   
+
    Lith_GUI_ScrollEnd(g, st_settingscr);
 }
 
