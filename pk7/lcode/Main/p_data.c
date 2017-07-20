@@ -2,6 +2,7 @@
 #include "lith_player.h"
 #include "lith_version.h"
 #include "lith_world.h"
+#include "lith_monster.h"
 
 
 //----------------------------------------------------------------------------
@@ -249,10 +250,12 @@ void Lith_ResetPlayer(player_t *p)
       
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
       
-      if(world.dbgLevel)
+      if(world.dbgLevel) {
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
-      else
+         PrintDmonAllocSize(p);
+      } else {
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+      }
 
       p->deliverMail("Intro");
       
