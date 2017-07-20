@@ -4,11 +4,17 @@ function trim(s)
    return s:gsub("^%s*(.-)%s*$", "%1")
 end
 
+function delr(s)
+   return s:gsub("\r", "")
+end
+
 function procHead(alias)
+   alias = delr(alias)
    out:write("\"" .. alias .. "\" =")
 end
 
 function procLine(ln, noeol, nobreak)
+   ln = delr(ln)
    if not nobreak then
       out:write("\n   ")
    else
@@ -40,7 +46,7 @@ function procFile(fname, alias)
       print("file> '" .. alias .. "'")
    end
    
-   local lns = io.lines(fname)
+   local lns = io.open(fname, "rb"):lines()
    procHead(alias)
    for ln in lns do
       procLine(ln)
@@ -53,7 +59,7 @@ function procIn(fname)
       print("proc> " .. fname)
    end
    
-   out = io.open("../" .. fname, "w")
+   out = io.open("../" .. fname, "wb")
    out:write("[enu default]\n\n")
 end
 
@@ -83,9 +89,10 @@ function procFileParse(fname)
       print("pfil> '" .. fname .. "'")
    end
    
-   local lns = io.lines(fname)
+   local lns = io.open(fname, "rb"):lines()
    local buf = nil
    for ln in lns do
+      ln = delr(ln)
       -- single line
       if ln:sub(1, 3) == "== " then
          if buf then
@@ -147,9 +154,10 @@ function procOutput(ln, e, s)
    end
 end
 
-for ln in io.lines("FileData/dir.txt") do
+for ln in io.open("FileData/dir.txt", "rb"):lines() do
+   ln = delr(ln)
    if ln:sub(1, 3) == "in " then -- find "in" directive
-      procIn(ln:sub(4))
+      procIn(trim(ln:sub(4)))
    elseif out and ln:sub(1, 10) == "parsefile " then -- find "parsefile" directive
       procFileParse("FileData/" .. trim(ln:sub(11)))
    elseif out then

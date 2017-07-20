@@ -49,10 +49,10 @@
 "LITH_TXT_LOG_CBI_M6" = "> Installed Reality Distortion Interface";
 
 // CBI Upgrades (Cyber-Mage) -------------------------------------------------
-"LITH_TXT_LOG_CBI_C1" = "> Installed Delear Spell Driver";
-"LITH_TXT_LOG_CBI_C2" = "> Installed Hulgyon Spell Driver";
+"LITH_TXT_LOG_CBI_C1" = "> Installed Hulgyon Spell Driver";
+"LITH_TXT_LOG_CBI_C2" = "> Installed Hosh'danma Spell Driver";
 "LITH_TXT_LOG_CBI_C3" = "> Installed Armor Interface";
-"LITH_TXT_LOG_CBI_C4" = "> Installed Hosh'danma Spell Driver";
+"LITH_TXT_LOG_CBI_C4" = "> Installed Delear Spell Driver";
 "LITH_TXT_LOG_CBI_C5" = "> Installed Weapon Refactoring Device";
 "LITH_TXT_LOG_CBI_C6" = "> Installed Reality Distortion Interface";
 
