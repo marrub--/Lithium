@@ -322,6 +322,8 @@ typedef struct player
    property setCVarI {call: ACS_SetUserCVar      (->num)}
    property setCVarK {call: ACS_SetUserCVarFixed (->num)}
    property setCVarS {call: ACS_SetUserCVarString(->num)}
+   property mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
+   property manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
 
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

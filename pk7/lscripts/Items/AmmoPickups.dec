@@ -28,6 +28,7 @@ actor Lith_ManaPickup : CustomInventory
    +INVENTORY.TRANSFER
    +INVENTORY.NOSCREENFLASH
    +NOGRAVITY
+   +NOCLIP
    +SEEKERMISSILE
    
    var int user_deathwait;

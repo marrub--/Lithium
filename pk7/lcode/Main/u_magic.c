@@ -19,48 +19,48 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       int x, y;
       __str name;
    };
-   
+
    static struct magic_info const minf[] = {
       {cupg_c_slot3spell, 160,  50, "Delear"  },
       {cupg_c_slot5spell,  80, 100, "Hulgyon" },
       {cupg_c_slot6spell, 240, 100, "StarShot"},
    };
-   
+
    gui_state_t *g = &UData.gst;
-   
+
    Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
    Lith_GUI_UpdateState(g, p);
-   
+
    DrawSpritePlain("lgfx/UI/MagicSelectBack.png", g->hid--, 0.1, 0.1, TICSECOND);
-   
+
    bool any = false;
    for(int i = 0; i < countof(minf); i++)
    {
       struct magic_info const *m = &minf[i];
-      
+
       if(!world.cbiupgr[m->st])
          continue;
-      
+
       gui_button_preset_t btnpre = {BtnDefault, .w = 80, .h = 80};
-      
+
       btnpre.gfx = StrParam("%S.png",    m->name);
       btnpre.hot = StrParam("%SSel.png", m->name);
-      
+
       __str name = Language("LITH_TXT_INFO_SHORT_%S", m->name);
       if(Lith_GUI_Button_Id(g, i, name, m->x - 40, m->y - 40, .preset = &btnpre)) {
          __str cn = StrParam("Lith_%S", m->name);
          ACS_GiveInventory(cn, 1);
          ACS_SetWeapon(cn);
       }
-      
+
       any = true;
    }
-   
+
    if(!any) {
       HudMessageF("CBIFONT", "No Spells Available");
       HudMessagePlain(g->hid--, g->w/2, g->h/2, TICSECOND);
    }
-   
+
    Lith_GUI_End(g);
 }
 
@@ -89,7 +89,7 @@ void Lith_SetMagicUI(bool on)
 {
    player_t *p = LocalPlayer;
    upgrade_t *upgr = p->getUpgr(UPGR_Magic);
-   
+
    if(on && !p->indialogue)
    {
       p->indialogue = UData.ui = true;
@@ -115,26 +115,26 @@ void Lith_SetMagicUI(bool on)
 [[__call("ScriptS")]]
 void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
 {
-   fixed manaperc = ACS_CheckInventory("Lith_MagicAmmo") / (fixed)ACS_GetMaxInventory(0, "Lith_MagicAmmo");
-   
+   fixed manaperc = p->mana / (fixed)p->manamax;
+
    if(UData.manaperc < 1 && manaperc == 1)
       ACS_LocalAmbientSound("player/manafull", 127);
-   
+
    UData.manaperc = manaperc;
-   
+
    if(manaperc < 0.5 && ACS_Timer() % 5 == 0)
       ACS_GiveInventory("Lith_MagicAmmo", 1);
-   
+
    if(p->weapontype != weapon_c_fist) {
       if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
          Lith_SetMagicUI(true);
       else if(!(p->buttons & BT_USER4) && p->old.buttons & BT_USER4)
          Lith_SetMagicUI(false);
    }
-   
+
    if(UData.ui)
       UpdateMagicUI(p, upgr);
-   
+
    if(manaperc >= 0.7)
       for(int i = 0; i < 5 * manaperc; i++)
    {
@@ -160,14 +160,14 @@ void Upgr_Magic_Render(player_t *p, upgrade_t *upgr)
 {
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 33);
    int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 33);
-   
+
    DrawSpritePlain("lgfx/HUD_C/MagicIcon.png", hid_magicsymbol, 75.1, 199.2, TICSECOND);
    DrawSpritePlain("lgfx/HUD_C/BarVert.png",   hid_magicammobg, 67.1, 199.2, TICSECOND);
-   
+
    ACS_SetHudClipRect(68, 198 - hprc, 5, hprc);
    DrawSpritePlain("lgfx/HUD_C/ManaBar1.png",  hid_magicammo1,  68.1, 198.2, TICSECOND);
    ACS_SetHudClipRect(0, 0, 0, 0);
-   
+
    ACS_SetHudClipRect(68, 198 - fprc, 5, fprc);
    DrawSpritePlain("lgfx/HUD_C/ManaBar2.png",  hid_magicammo2,  68.1, 198.2, TICSECOND);
    ACS_SetHudClipRect(0, 0, 0, 0);

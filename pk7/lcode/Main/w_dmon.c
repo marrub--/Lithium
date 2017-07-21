@@ -25,7 +25,7 @@ int dmonarr dmonid;
 //
 void PrintDmonAllocSize(player_t *p)
 {
-   p->logH("> dmonalloc is %u bytes long!", sizeof(dmonalloc) * 4);
+   p->logH("> dmonalloc is %.2k megabytes!", (sizeof(dmonalloc) * 4) / 1024 / 1024.0);
 }
 
 //
@@ -34,14 +34,14 @@ void PrintDmonAllocSize(player_t *p)
 void DmonDebugInfo(void)
 {
    static int lmvar idprev;
-   
+
    if(world.dbgLevel < log_dmon)
       return;
-   
+
    if(idprev < dmonid) {
       int hilvl = 0, lolvl = MAXLEVEL;
       int hirnk = 0, lornk = MAXRANK;
-      
+
       for(int i = idprev; i < dmonid; i++) {
          dmon_t *m = &dmonalloc[i];
          if(m->level < lolvl) lolvl = m->level;
@@ -49,13 +49,13 @@ void DmonDebugInfo(void)
          if(m->rank  < lornk) lornk = m->rank;
          if(m->rank  > hirnk) hirnk = m->rank;
       }
-      
+
       Log("\Cghighest\C- level enemy: lv.%i", hilvl);
       Log("\Chlowest \C- level enemy: lv.%i", lolvl);
       Log("\Cghighest\C- rank enemy:  r%i", hirnk);
       Log("\Chlowest \C- rank enemy:  r%i", lornk);
    }
-   
+
    idprev = dmonid;
 }
 
@@ -92,12 +92,12 @@ dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];
    *m = (struct dmon){};
-   
+
    m->active = true;
    m->id = dmonid;
-   
+
    dmonid++;
-   
+
    return m;
 }
 
