@@ -324,7 +324,8 @@ void Lith_MonsterMain(dmon_t *m)
    LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
-   for(;;) {
+   for(;;)
+   {
       GetInfo(m->mi);
 
       if(mi.health <= 0) {
@@ -350,8 +351,10 @@ void Lith_MonsterInfo()
 {
    __str cname = ACS_GetActorClass(0);
 
-   for(int i = 0; i < countof(monsterinfo); i++) {
-      if(strstr_str(cname, monsterinfo[i].name)) {
+   for(int i = 0; i < countof(monsterinfo); i++)
+   {
+      if(strstr_str(cname, monsterinfo[i].name))
+      {
          ifauto(dmon_t *, m, AllocDmon()) {
             m->type  = monsterinfo[i].type;
             m->score = monsterinfo[i].score;

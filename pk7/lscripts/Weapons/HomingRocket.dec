@@ -21,8 +21,8 @@ actor Lith_HomingRocket : Lith_Rocket
    states
    {
    Spawn:
-      TNT1 A 0
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_HomingMissile")
+      MISL A 0
+      MISL A 0 ACS_NamedExecuteWithResult("Lith_HomingMissile")
       goto Super::Spawn
    SpawnLoop:
       MISL A 0 A_SpawnItemEx("Lith_RocketTrail", 0, 0, 4, frandom(-0.5,0.5), frandom(-0.5,0.5), 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION)
