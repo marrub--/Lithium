@@ -43,7 +43,11 @@ void Lith_PlayerDamageBob(player_t *p)
       float angle = RandomFloat(tau, -tau);
       float distance;
 
-      distance = (p->old.health - p->health) / (float)p->maxhealth;
+      if(p->bobyaw + p->bobpitch > 0.05)
+         angle = lerpf(angle, atan2f(p->bobpitch, p->bobyaw), 0.25f);
+
+      distance  = mag2f(p->bobyaw, p->bobpitch);
+      distance += (p->old.health - p->health) / (float)p->maxhealth;
       distance *= 0.2f;
       distance *= (200 - p->armor) / 200.0f;
 
