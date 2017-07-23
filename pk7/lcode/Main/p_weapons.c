@@ -15,7 +15,7 @@
 weaponinfo_t const weaponinfo[weapon_max] = {
 // {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
    {0, pclass_any,       null,              "MMMMHMHMMMHMMM"},
-   
+
    // Marine Weapons
    {1, pclass_marine,    "Fist",            "MMMMHMHMMMHMMM"},
    {1, pclass_marine,    "ChargeFist",      "weapons/cfist/pickup"},
@@ -31,7 +31,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {6, pclass_marine,    "PlasmaRifle",     "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
    {6, pclass_marine,    "PlasmaDiffuser",  "weapons/plasdiff/pickup",  AT_Ammo, "Lith_PlasmaAmmo"},
    {7, pclass_marine,    "BFG9000",         "weapons/cannon/pickup",    AT_Ammo, "Lith_CannonAmmo"},
-   
+
    // Cyber-Mage Weapons
    {1, pclass_cybermage, "CFist",           "YOUSONOFABITCH"},
    {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
@@ -86,7 +86,7 @@ static void PlayWeaponPickupSound(player_t *p, weaponinfo_t const *info)
 static void Lith_PickupScore(player_t *p, int parm)
 {
    score_t score = 4000 * weaponinfo[parm].slot;
-   
+
    GiveWeaponItem(parm);
    p->giveScore(score);
    p->log("> Sold the %S for %lli\Cnscr\C-.",
@@ -106,11 +106,11 @@ static void Lith_PickupScore(player_t *p, int parm)
 bool Lith_WeaponPickup(int name)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
-   
+
    bool weaponstay = ACS_GetCVar("sv_weaponstay");
    player_t *p = LocalPlayer;
    int parm = weapon_unknown;
-   
+
    switch(p->pclass)
    {
    #define Case(name, set) case name: parm = set; break
@@ -128,7 +128,7 @@ bool Lith_WeaponPickup(int name)
       Case(wepnam_bfg9000,        weapon_bfg);
       }
       break;
-   
+
    case pclass_cybermage:
       switch(name)
       {
@@ -145,33 +145,33 @@ bool Lith_WeaponPickup(int name)
       break;
    #undef Case
    }
-   
+
    if(!ValidateWeapon(parm))
       return true;
-   
+
    weaponinfo_t const *info = &weaponinfo[parm];
-   
+
    if(HasWeapon(p, parm))
    {
       if(!weaponstay) {
          PlayWeaponPickupSound(p, info);
          Lith_PickupScore(p, parm);
       }
-      
+
       return !weaponstay;
    }
    else
    {
       PlayWeaponPickupSound(p, info);
-      
+
       p->weaponsheld++;
       p->bip.unlock(info->name);
-      
+
       GiveWeaponItem(parm);
       Lith_PickupMessage(p, info);
-      
+
       ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
-      
+
       return !weaponstay;
    }
 }
@@ -184,16 +184,16 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
    static fixed A;
    static fixed P;
-   
+
    if(!getpitch)
    {
       fixed dx = ACS_RandomFixed(mdx,  0.0);
       fixed dy = ACS_RandomFixed(mdy,  0.0);
       fixed a  = ACS_RandomFixed(1.0, -1.0);
-      
+
       A = sink(a) * dx;
       P = cosk(a) * dy;
-      
+
       return A;
    }
    else
@@ -232,27 +232,27 @@ void Lith_GSInit_Weapon(void)
 void Lith_PlayerUpdateWeapon(player_t *p)
 {
    weapondata_t *w = &p->weapon;
-   
+
    w->prev = w->cur;
-   
+
    // Reset data temporarily.
    w->cur = null;
    for(int i = 0; i < SLOT_MAX; i++)
       w->slot[i] = 0;
-   
+
    // Iterate over each weapon setting information on it.
    for(int i = weapon_min; i < weapon_max; i++)
    {
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
-      
+
       w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->classname));
-      
+
       wep->info      = info;
       wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
-      
+
       switch(i)
       {
       case weapon_shotgun:
@@ -266,26 +266,26 @@ void Lith_PlayerUpdateWeapon(player_t *p)
             wep->ammoclass = "Lith_SMGShotsFired2";
          break;
       }
-      
+
       // Check for currently held weapon.
       if(!w->cur && ACS_StrICmp(p->weaponclass, info->classname) == 0)
          w->cur = wep;
-         
+
       // Remove inactive magic weapons.
       else if(info->flags & wf_magic)
          ACS_TakeInventory(info->classname, 1);
-      
+
       // Auto-reload anything else.
       if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype == AT_Mag)
       {
          if(wep->autoreload >= 35 * 5)
             ACS_TakeInventory(wep->ammoclass, 999);
-         
+
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
       }
    }
-   
+
    if(!w->cur) w->cur = &w->inv[weapon_unknown];
 }
 
@@ -300,7 +300,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
       else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
       else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
       else                ACS_TakeInventory("Lith_SMGHeat", 1);
-   
+
    if(p->weapontype == weapon_c_delear)
       ACS_GiveInventory("Lith_DelearSpriteDisplay", 1);
 }
@@ -331,6 +331,57 @@ int Lith_GetFinalizerMaxHealth(void)
       return sh + (m->maxhealth - sh) * 0.5;
    else
       return sh;
+}
+
+//
+// Lith_SwitchRifleMode
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SwitchRifleFiremode(void)
+{
+   player_t *p = LocalPlayer;
+   int max = rifle_firemode_max;
+
+   if(!p->getUpgr(UPGR_RifleModes)->active)
+      max--;
+
+   p->riflefiremode = (++p->riflefiremode) % max;
+   ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
+}
+
+//
+// Lith_ResetRifleMode
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_ResetRifleMode()
+{
+   player_t *p = LocalPlayer;
+
+   if(p->getCVarI("lith_weapons_riflemodeclear"))
+      p->riflefiremode = rifle_firemode_auto;
+}
+
+//
+// Lith_GetWRF
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_GetWRF(void)
+{
+   enum {
+      WRF_NOBOB = 1,
+      WRF_NOSWITCH = 2,
+      WRF_NOPRIMARY = 4,
+      WRF_NOSECONDARY = 8,
+      WRF_NOFIRE = WRF_NOPRIMARY | WRF_NOSECONDARY,
+      WRF_ALLOWRELOAD = 16,
+      WRF_ALLOWZOOM = 32,
+      WRF_DISABLESWITCH = 64,
+      WRF_ALLOWUSER1 = 128,
+      WRF_ALLOWUSER2 = 256,
+      WRF_ALLOWUSER3 = 512,
+      WRF_ALLOWUSER4 = 1024
+   };
+   return LocalPlayer->semifrozen ? WRF_NOFIRE : 0;
 }
 
 // EOF

@@ -417,5 +417,14 @@ void Lith_RunTerminal(int num)
    Lith_RunDialogue(-num);
 }
 
+//
+// Lith_RunDialogueInt
+//
+[[__call("ScriptI"), __address(24244), __extern("ACS")]]
+void Lith_RunDialogueInt(int num)
+{
+   Lith_RunDialogue(num);
+}
+
 // EOF
 

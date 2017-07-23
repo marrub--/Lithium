@@ -25,14 +25,6 @@ int Lith_PlayerCurWeaponType(player_t *p)
 }
 
 //
-// Lith_PlayerGetClass
-//
-int Lith_PlayerGetClass(player_t *p)
-{
-   return ACS_PlayerClass(p->num);
-}
-
-//
 // Lith_ButtonPressed
 //
 bool Lith_ButtonPressed(player_t *p, int bt)
@@ -49,7 +41,7 @@ bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, boo
       p->velx += velx, p->vely += vely, p->velz += velz;
    else
       p->velx = velx, p->vely = vely, p->velz = velz;
-   
+
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
 }
 
@@ -74,12 +66,12 @@ void Lith_PlayerUpdateData(player_t *p)
 {
    int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
-   
+
    Lith_ScriptCall("Lith_Server", "SetInput", p->num, false);
-   
+
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
-   
+
    p->x      = ACS_GetActorX(0);
    p->y      = ACS_GetActorY(0);
    p->z      = ACS_GetActorZ(0);
@@ -88,34 +80,34 @@ void Lith_PlayerUpdateData(player_t *p)
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);
    p->velz = ACS_GetActorVelZ(0);
-   
+
    p->pitch = ACS_GetActorPitch(0) - p->addpitch;
    p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
-   
+
    p->pitchf = ((-p->pitch + 0.25) * 2) * pi;
    p->yawf   = p->yaw * tau - pi;
-   
+
    p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
    p->yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
-   
+
    p->forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
    p->sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
    p->upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
-   
+
    p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-   
+
    p->health = ACS_GetActorProperty(0, APROP_Health);
    p->armor  = ACS_CheckInventory("BasicArmor");
-   
+
    p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
    p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
    p->maxarmor    = ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT);
-   
+
    Lith_GetArmorType(p);
-   
+
    p->scopetoken = ACS_CheckInventory("Lith_WeaponScopedToken");
-   
+
    p->keys.redcard     = ACS_CheckInventory("RedCard")    || ACS_CheckInventory("KeyGreen");
    p->keys.yellowcard  = ACS_CheckInventory("YellowCard") || ACS_CheckInventory("KeyYellow");
    p->keys.bluecard    = ACS_CheckInventory("BlueCard")   || ACS_CheckInventory("KeyBlue");
@@ -137,9 +129,9 @@ void Lith_GiveMail(int num)
       "Cluster3",
       "Phantom"
    };
-   
+
    num %= countof(names);
-   
+
    LocalPlayer->deliverMail(names[num]);
 }
 
@@ -159,7 +151,7 @@ void Lith_ClearTextBuf(player_t *p)
 void Lith_KeyDown(int pnum, int ch)
 {
    player_t *p = &players[pnum];
-   
+
    if(p->tbptr + 1 < countof(p->txtbuf))
       p->txtbuf[p->tbptr++] = ch;
 }
@@ -174,43 +166,43 @@ void Lith_ResetPlayer(player_t *p)
 {
    //
    // Constant data
-   
+
    p->active = true;
    p->reinit = p->dead = false;
    p->num    = ACS_PlayerNumber();
-   
+
    //
    // Map-static data
-   
+
    if(world.scoregolf)
       p->score = 0;
-   
+
    memset(&p->old, 0, sizeof(player_delta_t));
-   
+
    // If the map sets the TID on the first tic, it could already be set here.
    p->tid = 0;
    Lith_ValidatePlayerTID(p);
-   
+
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
    ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
    ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
-   
+
    //
    // Reset data
-   
+
    // i cri tears of pain for APROP_SpawnHealth
    if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
    if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
    if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
    if(!p->discount)   p->discount   = 1.0;
-   
+
    // Any linked lists on the player need to be initialized here.
    p->loginfo.hud.free();
    p->hudstrlist.free(free);
    if(!p->loginfo.full.next) p->loginfo.full.construct();
    if(!p->loginfo.maps.next) p->loginfo.maps.construct();
-   
+
    // pls not exit map with murder thingies out
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
@@ -221,35 +213,35 @@ void Lith_ResetPlayer(player_t *p)
    ACS_TakeInventory("Lith_RocketIterated",     999);
    ACS_TakeInventory("Lith_RocketAltMode",      999);
    ACS_TakeInventory("Lith_MissileReset",       999);
-   
+
    Lith_PlayerResetCBIGUI(p);
-   
+
    p->frozen     = 0;
    p->semifrozen = 0;
-   
+
    p->addpitch = 0.0f;
    p->addyaw   = 0.0f;
-   
+
    p->bobpitch = 0.0f;
    p->bobyaw   = 0.0f;
-   
+
    p->extrpitch = 0.0f;
    p->extryaw   = 0.0f;
-   
+
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
    p->scoremul       = 1.3;
-   
+
    //
    // Static data
-   
+
    if(!p->staticinit)
    {
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
-      
+
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
-      
+
       if(world.dbgLevel) {
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
          PrintDmonAllocSize(p);
@@ -258,15 +250,15 @@ void Lith_ResetPlayer(player_t *p)
       }
 
       p->deliverMail("Intro");
-      
+
       p->staticinit = true;
    }
    else
       Lith_PlayerReinitUpgrades(p);
-   
+
    if(world.dbgScore)
       p->score = 0xFFFFFFFFFFFFFFFFll;
-   
+
    if(world.dbgItems)
    {
       for(int i = weapon_min; i < weapon_max; i++) {
@@ -275,7 +267,7 @@ void Lith_ResetPlayer(player_t *p)
             ACS_GiveInventory(info->classname, 1);
       }
    }
-   
+
    switch(p->pclass)
    {
    case pclass_marine:    p->bip.unlock("Pistol"); break;

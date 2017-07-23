@@ -130,7 +130,8 @@ static void HUD_Health(player_t *p)
       if(p->health < p->old.health)
       {
          cr = CR_YELLOW;
-         ft = minmax((p->old.health - p->health) / 30.0, 0.1, 3.0);
+         ft = (p->old.health - p->health) / 30.0;
+         ft = minmax(ft, 0.1, 3.0);
       }
       else if(p->health > p->old.health)
       {

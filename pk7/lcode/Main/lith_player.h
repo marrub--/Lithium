@@ -15,7 +15,6 @@
 #include "Lth_hashmap.h"
 
 #define MAX_PLAYERS 8
-#define INVALID_PLAYER (&players[-1])
 
 #define Lith_ForPlayer() \
    for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
@@ -270,7 +269,6 @@ void Lith_ValidatePlayerTID(struct player *p);
 bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 bool Lith_ButtonPressed(struct player *p, int bt);
 int Lith_PlayerCurWeaponType(struct player *p);
-int Lith_PlayerGetClass(struct player *p);
 
 void Lith_PlayerDeltaStats(struct player *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
@@ -313,7 +311,7 @@ typedef struct player
    property buttonPressed {call: Lith_ButtonPressed(this)}
    property weapontype    {get:  Lith_PlayerCurWeaponType(this)}
    property deliverMail   {call: Lith_DeliverMail(this)}
-   property pclass        {get: Lith_PlayerGetClass(this)}
+   property pclass        {get:  ACS_PlayerClass(->num)}
    property getModScore   {call: Lith_GetModScore(this)}
    property clearTextBuf  {call: Lith_ClearTextBuf(this)}
    property getCVarI {call: ACS_GetUserCVar      (->num)}

@@ -45,49 +45,49 @@ static void Lith_PlayerEntry(void)
 {
    if(ACS_GameType() == GAME_TITLE_MAP)
       return;
-   
+
    player_t *p = LocalPlayer;
-   
+
 reinit:
    while(!mapinit) ACS_Delay(1);
-   
+
    p->reset();
    Lith_PlayerLogEntry(p);
    Lith_PlayerEnterUpgrades(p);
    p->loadData();
-   
+
    Lith_BossWarning(p);
-   
+
    while(p->active)
    {
       if(p->reinit)
          goto reinit;
-      
+
       Lith_PlayerUpdateData(p);
-      
+
       // This can be changed any time, so save it here.
       player_delta_t olddelta = p->cur;
-      
+
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
-      
+
       // Update view
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
-      
+
       // Tic passes
       ACS_Delay(1);
-      
+
       // Update previous-tic values
       p->old = olddelta;
-      
+
       // Reset view for next tic
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
-      
+
       // If the map changes this we need to make sure it's still correct.
       Lith_ValidatePlayerTID(p);
-      
+
       p->ticks++;
    }
 }
@@ -99,18 +99,18 @@ reinit:
 static void Lith_PlayerDeath(void)
 {
    player_t *p = LocalPlayer;
-   
+
    p->dead = true;
-   
+
    Lith_PlayerDeinitUpgrades(p);
-   
+
    if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
       Lith_PlayerLoseUpgrades(p);
       p->bip.losePages();
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
-   
+
    if(world.singleplayer)
    {
       if(ACS_GetCVar("lith_sv_revenge"))
@@ -122,7 +122,7 @@ static void Lith_PlayerDeath(void)
          ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
          ACS_Delay(25);
       }
-      
+
       for(;;)
       {
          ACS_Delay(35 * 5);
@@ -156,16 +156,16 @@ static void Lith_PlayerReturn(void)
 static void Lith_PlayerDisconnect(void)
 {
    player_t *p = LocalPlayer;
-   
+
    p->bip.deallocate();
-   
+
    p->loginfo.hud.free();
    p->hudstrlist.free(free);
    p->loginfo.full.free(free);
    p->loginfo.maps.free(free);
-   
+
    p->upgrademap.destroy();
-   
+
    memset(p, 0, sizeof(player_t));
 }
 
@@ -175,12 +175,28 @@ static void Lith_PlayerDisconnect(void)
 //
 
 //
+// Lith_StepSpeed
+//
+[[__call("ScriptS"), __extern("ACS")]]
+int Lith_StepSpeed()
+{
+   player_t *p = LocalPlayer;
+
+	fixed vel = ACS_VectorLength(absk(p->velx), absk(p->vely));
+   fixed num = 1k - (vel / 24k);
+	fixed mul = minmax(num, 0.35k, 1k);
+
+	return 6 * (mul + 0.6k);
+}
+
+//
 // Lith_GetPlayer
 //
 player_t *Lith_GetPlayer(int tid, int ptr)
 {
-   player_t *p = &players[Lith_GetPlayerNumber((tid), (ptr))];
-   return p == INVALID_PLAYER ? null : p;
+   int pnum = Lith_GetPlayerNumber(tid, ptr);
+   if(pnum >= 0) return &players[pnum];
+   else          return null;
 }
 
 //
@@ -200,7 +216,7 @@ void Lith_PlayerCloseGUI(player_t *p)
    {
       if(world.pauseinmenus)
          Lith_ScriptCall("Lith_PauseManager", "SetPaused", false);
-      
+
       ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
       p->activegui = GUI_NONE;
       p->frozen--;
@@ -216,7 +232,7 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
    {
       if(world.pauseinmenus)
          Lith_ScriptCall("Lith_PauseManager", "SetPaused", true);
-      
+
       ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
       p->activegui = type;
       p->frozen++;
@@ -239,7 +255,7 @@ score_t Lith_GetModScore(player_t *p, score_t score, bool nomul)
    // Multiply score by the player's multiplier, and the global multiplier
    if(!nomul)
       score *= p->scoremul;
-   
+
    return score * world.scoremul;
 }
 
@@ -251,36 +267,36 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    // Could cause division by zero
    if(score == 0)
       return;
-   
+
    score = p->getModScore(score, nomul);
-   
+
    // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
    double vol = 0.7 * mul;
-   
+
    // Play a sound when we pick up score
    if(!IsSmallNumber(vol) && p->getCVarI("lith_player_scoresound"))
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
-   
+
    //
    if(p->getUpgr(UPGR_CyberLegs)->active && ACS_Random(0, 10000) == 0)
    {
       p->brouzouf += score;
       p->log("> You gained brouzouf.");
    }
-   
+
    if(p->getUpgr(UPGR_TorgueMode)->active && ACS_Random(0, 10) == 0)
    {
       p->spuriousexplosions++;
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
    }
-   
+
    // Add score and set score accumulator
    p->score          += score;
    p->scoresum       += score;
    p->scoreaccum     += score;
    p->scoreaccumtime += 20 * (mul * 2.0);
-   
+
    // Log score
    if(p->getCVarI("lith_player_scorelog"))
       p->logH("> +\Cj%lli\Cnscr", score);
@@ -293,16 +309,15 @@ void Lith_TakeScore(player_t *p, score_t score)
 {
    if(p->score - score >= 0)
    {
-      p->score     -= score;
       p->scoreused += score;
+      p->score     -= score;
    }
    else
    {
-      score_t delta = p->score;
+      p->scoreused += p->score;
       p->score      = 0;
-      p->scoreused += delta;
    }
-   
+
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
 }
@@ -319,7 +334,7 @@ void Lith_TakeScore(player_t *p, score_t score)
 static void Lith_BossWarning(player_t *p)
 {
    ACS_Delay(35 * 5);
-   
+
    if(world.bossspawned)
       p->log("> \CgWarning: High demonic energy levels detected in area.");
 }
@@ -334,9 +349,11 @@ static void Lith_PlayerRunScripts(player_t *p)
 {
    // Pre-logic: Update data from the engine.
    Lith_PlayerUpdateWeapon(p); // Update weapon info
-   Lith_PlayerStats(p);        // Update statistics
    Lith_PlayerScore(p);        // Update score
-   
+
+   if(ACS_Timer() > 4)
+      Lith_PlayerStats(p); // Update statistics
+
    if(!p->dead)
    {
       // Logic: Update our data.
@@ -345,18 +362,18 @@ static void Lith_PlayerRunScripts(player_t *p)
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;
       case GUI_GB:  Lith_PlayerUpdateGB(p);     break;
       }
-      
+
       Lith_PlayerUpdateUpgrades(p); // Update upgrades
       Lith_PlayerUpdateWeapons(p);  // Update weapons
       Lith_PlayerUpdateLog(p);      // Update log data
-      
+
       // Post-logic: Update the engine's data.
       Lith_PlayerDeltaStats(p); // Update delta'd info
-      
+
       if(world.pauseinmenus)
          Lith_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
    }
-   
+
    // Rendering
    Lith_PlayerItemFx(p);         // Update item effects
    Lith_PlayerDamageBob(p);      // Update damage bobbing
@@ -376,16 +393,16 @@ static void Lith_PlayerScore(player_t *p)
       p->scoreaccum = 0;
       p->scoreaccumtime = 0;
    }
-   
+
    if(p->scoreaccumtime > 0)
       p->scoreaccumtime--;
    else if(p->scoreaccumtime < 0)
       p->scoreaccumtime++;
-   
+
    if(world.scoregolf)
    {
       p->score += 200000;
-      
+
       if(p->score > 0x7FFFFFFF)
       {
          Log("Game over!");
@@ -403,12 +420,12 @@ static void Lith_PlayerStats(player_t *p)
       p->healthused += p->old.health - p->health;
    else if(p->health > p->old.health && ACS_Timer() != 1)
       p->healthsum += p->health - p->old.health;
-   
+
    if(p->armor < p->old.armor)
       p->armorused += p->old.armor - p->armor;
    else if(p->armor > p->old.armor && ACS_Timer() != 1)
       p->armorsum += p->armor - p->old.armor;
-   
+
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
    if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
