@@ -27,8 +27,8 @@ __addrdef __hub_arr lwvar;
 bool lmvar mapinit;
 int  lmvar mapid;
 
-[[__no_init]] worldinfo_t world;
-[[__no_init]] payoutinfo_t payout;
+worldinfo_t world;
+payoutinfo_t payout;
 
 
 //----------------------------------------------------------------------------
