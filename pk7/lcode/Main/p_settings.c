@@ -155,7 +155,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 20)) \
       { \
-         HudMessageF("CNFONT", "\Cn" name); \
+         HudMessageF("CHFONT", "\Cn" name); \
          HudMessagePlain(g->hid--, g->ox + 140.0, g->oy + y + 5.1, TICSECOND); \
       } \
       y += 20; \
