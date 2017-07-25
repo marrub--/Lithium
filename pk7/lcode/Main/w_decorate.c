@@ -7,33 +7,6 @@
 #include <math.h>
 
 //
-// Lith_BeginAngles
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_BeginAngles(int x, int y)
-{
-   world.a_cur = 0;
-   memset(world.a_angles, 0, sizeof(world.a_angles));
-   world.a_x = x;
-   world.a_y = y;
-}
-
-//
-// Lith_AddAngle
-//
-[[__call("ScriptS"), __extern("ACS")]]
-fixed Lith_AddAngle(int x, int y)
-{
-   if(world.a_cur > countof(world.a_angles))
-      return 0;
-
-   struct polar *pa = &world.a_angles[world.a_cur++];
-   pa->ang = ACS_VectorAngle(x - world.a_x, y - world.a_y);
-   pa->dst = mag2f(x - world.a_x, y - world.a_y);
-   return pa->ang;
-}
-
-//
 // Lith_CheckCeilingSky
 //
 [[__call("ScriptS"), __extern("ACS")]]

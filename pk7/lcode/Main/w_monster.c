@@ -168,6 +168,24 @@ static void ApplyLevels(dmon_t *m, int prev)
 //
 static void ShowBarrier(dmon_t const *m, fixed alpha)
 {
+   bool anyplayer = false;
+
+   // Optimization: Check for players nearby first.
+   int const xw1 = m->mi->x - 192;
+   int const xw2 = m->mi->x + 192;
+   int const yw1 = m->mi->y - 192;
+   int const yw2 = m->mi->y + 192;
+   Lith_ForPlayer() {
+      if(bpcldi(xw1, yw1, xw2, yw2, p->x, p->y)) {
+         anyplayer = true;
+         break;
+      }
+   }
+
+   if(!anyplayer)
+      return;
+
+   world.begAngles(m->mi->x, m->mi->y);
    ACS_GiveInventory("Lith_MonsterBarrierLook", 1);
 
    for(int i = 0; i < world.a_cur; i++) {
