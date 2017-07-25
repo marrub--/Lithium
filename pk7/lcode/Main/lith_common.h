@@ -18,7 +18,6 @@ typedef void const *__str;
 #include <stdint.h>
 
 #define property __prop
-#define prop_arg __arg
 #define ifauto(type, name, ...) \
    __with(type name = (__VA_ARGS__);) \
       if(name)

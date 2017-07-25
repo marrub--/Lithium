@@ -156,16 +156,16 @@ static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *, void *upgr)
 static bool Lith_UpgrGive(player_t *, shopdef_t const *, void *upgr_, int tid)
 {
    upgrade_t const *upgr = upgr_;
-   
+
    ACS_SetUserVariable(tid, "user_upgradeid", upgr->info->key);
-   
+
    switch(upgr->info->category)
    {
    case UC_Body: ACS_SetUserVariable(tid, "user_upgradebody", true); break;
    case UC_Weap: ACS_SetUserVariable(tid, "user_upgradeweap", true); break;
    default:      ACS_SetUserVariable(tid, "user_upgradeextr", true); break;
    }
-   
+
    return true;
 }
 
@@ -205,20 +205,20 @@ static void RegisterBasicUpgrade(upgradeinfo_t *upgr)
 void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname)
 {
    Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(fname);
-   
+
    if(!rsrc)
       return;
-   
+
    for(int i = 0; i < max; i++)
    {
       __str name = uinfo[i].name;
-      
+
       int   const *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
       fixed const *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
       if(cost)     uinfo[i].cost     = *cost;
       if(scoreadd) uinfo[i].scoreadd = *scoreadd;
    }
-   
+
    Lth_ResourceMapDestroy(rsrc);
 }
 
@@ -241,12 +241,12 @@ void Lith_GSReinit_Upgrade(void)
       #include "lith_upgradefuncs.h"
          continue;
       }
-      
+
       // TODO
       //for(int i = 0; i < numextraupgradecallbacks; i++)
          //extraupgradecallbacks[i](&upgradeinfo[i]);
    }
-   
+
    // Load shop function pointers and IDs.
    for(int i = 0; i < UPGR_MAX; i++)
    {
@@ -264,24 +264,24 @@ void Lith_GSInit_Upgrade(void)
    if(world.grafZoneEntered)
       RegisterBasicUpgrade(&(upgradeinfo_t)
          {{"DarkCannon", null, 0x7FFFFFFF}, pclass_any, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
-   
+
    for(int i = 0; i < countof(staticupgradeinfo); i++)
       staticupgradeinfo[i].key = i;
-   
+
    Lith_LoadUpgrInfoBalance(staticupgradeinfo, countof(staticupgradeinfo), c"Upgrades.lthm");
-   
+
    upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
    memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
-   
+
    for(int i = 0; i < countof(extraupgradeinfo); i++)
       if(extraupgradeinfo[i].name != null)
          upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
-   
+
    qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
-   
+
    for(int i = 0; i < UPGR_MAX; i++)
       upgradeinfo[i].id = i;
-   
+
    Lith_GSReinit_Upgrade();
 }
 
@@ -291,10 +291,10 @@ void Lith_GSInit_Upgrade(void)
 void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 {
    if(upgr->owned) return;
-   
+
    upgr->owned = true;
    p->upgradesowned++;
-   
+
    if(upgr->info->category == UC_Body && upgr->info->cost == 0)
       upgr->toggle(p);
 }
@@ -305,36 +305,36 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 void Lith_PlayerInitUpgrades(player_t *p)
 {
    #define CheckPClass() (upgradeinfo[i].pclass == pclass_any || upgradeinfo[i].pclass == p->pclass)
-   
+
    for(int i = 0; i < UPGR_MAX; i++)
       if(CheckPClass())
          p->upgrmax++;
-   
+
    p->upgrademap.alloc(p->upgrmax);
-   
+
    memset(p->upgrades, 0, sizeof(p->upgrades));
-   
+
    for(int i = 0, j = 0; i < UPGR_MAX; i++)
    {
       if(CheckPClass())
       {
          upgrade_t *upgr = &p->upgrades[j];
-         
+
          upgr->dataptr = &p->upgrdata;
          upgr->info = &upgradeinfo[i];
-         
+
          p->upgrademap.elem.data[j].keyhash = upgr->info->key;
          p->upgrademap.elem.data[j].value   = upgr;
-         
+
          if(upgr->info->cost == 0 || world.dbgUpgr)
             upgr->setOwned(p);
-         
+
          j++;
       }
    }
-   
+
    p->upgrademap.build();
-   
+
    #undef CheckPClass
 }
 
@@ -407,7 +407,7 @@ void Lith_PlayerEnterUpgrades(player_t *p)
 //
 // Lith_UpgrCanActivate
 //
-bool Lith_UpgrCanActivate(player_t *p, struct upgrade_s *upgr)
+bool Lith_UpgrCanActivate(player_t *p, upgrade_t *upgr)
 {
    if(!upgr->active)
    {
@@ -416,13 +416,13 @@ bool Lith_UpgrCanActivate(player_t *p, struct upgrade_s *upgr)
          CheckRequires_WRD ||
          CheckRequires_RDI ||
          CheckRequires_RA  ||
-         
+
          p->cbi.pruse + upgr->info->perf > world.cbiperf)
       {
          return false;
       }
    }
-   
+
    return upgr->owned;
 }
 
@@ -432,17 +432,17 @@ bool Lith_UpgrCanActivate(player_t *p, struct upgrade_s *upgr)
 bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 {
    if(!upgr->canUse(p)) return false;
-   
+
    upgr->active = !upgr->active;
-   
+
    if(upgr->active) p->cbi.pruse += upgr->info->perf;
    else             p->cbi.pruse -= upgr->info->perf;
-   
+
    if(upgr->active && upgr->info->group)
       ForUpgrade(other)
          if(other != upgr && other->active && other->info->group == upgr->info->group)
             other->toggle(p);
-   
+
    if(upgr->active)
    {
       if(upgr->info->Activate)
@@ -457,7 +457,7 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 
       p->scoremul -= upgr->info->scoreadd;
    }
-   
+
    return true;
 }
 
@@ -474,84 +474,84 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
    if(Lith_GUI_Button(g, .x = 88, 27, .preset = &btnprev))
       if(g->st[st_upgrfilter].i-- <= 0)
          g->st[st_upgrfilter].i = UC_MAX;
-   
+
    if(Lith_GUI_Button(g, .x = 88 + btnprev.w, 27, .preset = &btnnext))
       if(g->st[st_upgrfilter].i++ >= UC_MAX)
          g->st[st_upgrfilter].i = 0;
-   
+
    int numbtns = p->upgrmax + UC_MAX;
    int filter  = g->st[st_upgrfilter].i - 1;
-   
+
    if(filter != -1)
    {
       numbtns = 0;
       for(int i = 0; i < p->upgrmax; i++)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
-      
+
       HudMessageF("CBIFONT", "Filter: %S", upgrcateg[filter]);
    }
    else
       HudMessageF("CBIFONT", "Filter: \CjAll");
-   
+
    HudMessagePlain(g->hid--, 15.1, 28.1, TICSECOND);
-   
+
    Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 38, btnlist.w, 184, btnlist.h * numbtns);
-   
+
    int curcategory = UC_MAX;
    int y = 0;
-   
+
    for(int i = 0; i < p->upgrmax; i++, y += btnlist.h)
    {
       bool changed = false;
-      
+
       upgrade_t *upgr = &p->upgrades[i];
-      
+
       if(upgr->info->category != curcategory)
       {
          curcategory = upgr->info->category;
          changed = true;
-         
+
          if(filter == -1)
             y += btnlist.h;
       }
-      
+
       if(filter != -1 && curcategory != filter)
       {
          y -= btnlist.h;
          continue;
       }
-      
+
       if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, btnlist.h))
          continue;
-      
+
       if(changed && filter == -1)
       {
          HudMessageF("CBIFONT", "%S", upgrcateg[curcategory]);
          HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - btnlist.h) + 1.1, TICSECOND);
       }
-      
+
       __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
       __str color;
-      
+
       gui_button_preset_t const *preset;
-      
-      bool canbuy = Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr);
-      
+
+      bool canbuy = p->canBuy(&upgr->info->shopdef, upgr);
+
            if(!upgr->owned && !canbuy) color = "u";
       else switch(upgr->info->key)
                { case UPGR_TorgueMode: color = "g"; break;
                  case UPGR_DarkCannon: color = "m"; break;
                  default:              color = null;}
-      
+
            if(upgr->active) preset = &btnlistactivated;
       else if(upgr->owned)  preset = &btnlistactive;
       else                  preset = &btnlistsel;
-      
+
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_upgrsel].i, .color = color, .preset = preset))
          g->st[st_upgrsel].i = i;
    }
-   
+
    Lith_GUI_ScrollEnd(g, st_upgrscr);
 }
 
@@ -561,50 +561,50 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 {
    int y = 0;
-   
+
    #define Req(name) \
    { \
       HudMessageF("CBIFONT", "\CgRequires " name "."); \
       HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND); \
       y -= 10; \
    }
-   
+
    if(CheckRequires_AI)  Req("Armor Interface")
    if(CheckRequires_WMD) Req("Weapon Modification Device")
    if(CheckRequires_WRD) Req("Weapon Refactoring Device")
    if(CheckRequires_RDI) Req("Reality Distortion Interface")
    if(CheckRequires_RA)  Req("Reactive Armor")
-   
+
    #undef Req
-   
+
    // Performance rating
    if(upgr->info->perf)
    {
       char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
-      
+
       if(upgr->active)
          HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPr\C-.", upgr->info->perf);
       else
          HudMessageF("CBIFONT", "Activating requires \C%c%i\CbPr\C-.", cr, upgr->info->perf);
-      
+
       HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
       y -= 10;
    }
-   
+
    // Score multiplier
    if(upgr->info->scoreadd != 0)
    {
       char  cr;
       __str op;
       bool  chk;
-      
+
       if(upgr->active) {chk = upgr->info->scoreadd > 0; op = "Disabling";}
       else             {chk = upgr->info->scoreadd < 0; op = "Enabling" ;}
-      
+
       int perc = abs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
-      
+
       HudMessageF("CBIFONT", "%S will multiply score by \C%c%i\C-%%", op, cr, perc);
       HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
       y -= 10;
@@ -617,34 +617,34 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
 {
    ACS_SetHudClipRect(111, 30, 190, 170, 184);
-   
+
    // Cost
    __str mark;
    __str cost;
-   
+
    switch(upgr->info->key)
    {
    case UPGR_lolsords:   mark = "\Cjfolds"; break;
    case UPGR_TorgueMode: mark = "\Cd$";     break;
    default:              mark = "\Cnscr";   break;
    }
-   
-   if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(Lith_ShopGetCost(p, &upgr->info->shopdef)), mark);
+
+   if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = "Free";
-   
+
    HudMessageF("CBIFONT", "%S", cost);
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
-   
+
    // Category
    HudMessageF("CBIFONT", "%S", upgrcateg[upgr->info->category]);
    HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
-   
+
    // Effect
    ifauto(__str, effect, LanguageNull("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name))
       if(upgr->info->key == UPGR_UNCEUNCE) HudMessageRainbowsF("CBIFONT", "Effect: %S", effect);
       else                                 HudMessageF        ("CBIFONT", "Effect: %S", effect);
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 50.1, TICSECOND);
-   
+
    ACS_SetHudClipRect(0, 0, 0, 0);
 }
 
@@ -653,9 +653,9 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 {
-   if(Lith_GUI_Button(g, "Buy", 111, 205, !Lith_ShopCanBuy(p, &upgr->info->shopdef, upgr)))
+   if(Lith_GUI_Button(g, "Buy", 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
-   
+
    if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
 }
@@ -666,11 +666,11 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 {
    //DrawSpriteAlpha("lgfx/UI/ItemBG.png", g->hid--, 113.1, 95.1, TICSECOND, 0.5);
-   
+
    GUIUpgradesList(g, p);
-   
+
    upgrade_t *upgr = &p->upgrades[g->st[st_upgrsel].i];
-   
+
    GUIUpgradeDescription (g, p, upgr);
    GUIUpgradeButtons     (g, p, upgr);
    GUIUpgradeRequirements(g, p, upgr);

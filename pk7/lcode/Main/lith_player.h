@@ -296,32 +296,48 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 //
 typedef struct player
 {
-   property reset     {call: Lith_ResetPlayer(this)}
-   property loadData  {call: Lith_PlayerLoadData(this)}
-   property saveData  {call: Lith_PlayerSaveData(this)}
-   property giveScore {call: Lith_GiveScore(this)}
-   property takeScore {call: Lith_TakeScore(this)}
-   property log       {call: Lith_Log (this)}
-   property logF      {call: Lith_LogF(this)}
-   property logH      {call: Lith_LogH(this)}
-   property setVel    {call: Lith_SetPlayerVelocity(this)}
-   property useGUI    {call: Lith_PlayerUseGUI(this)}
-   property closeGUI  {call: Lith_PlayerCloseGUI(this)}
-   property getUpgr   {call: Lith_PlayerGetNamedUpgrade(this)}
-   property buttonPressed {call: Lith_ButtonPressed(this)}
+   // state
+   property reset    {call: Lith_ResetPlayer(this)}
+   property loadData {call: Lith_PlayerLoadData(this)}
+   property saveData {call: Lith_PlayerSaveData(this)}
    property weapontype    {get:  Lith_PlayerCurWeaponType(this)}
-   property deliverMail   {call: Lith_DeliverMail(this)}
-   property pclass        {get:  ACS_PlayerClass(->num)}
-   property getModScore   {call: Lith_GetModScore(this)}
-   property clearTextBuf  {call: Lith_ClearTextBuf(this)}
+   property buttonPressed {call: Lith_ButtonPressed(this)}
+   property setVel  {call: Lith_SetPlayerVelocity(this)}
+   property pclass  {get:  ACS_PlayerClass(->num)}
+   property mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
+   property manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
+
+   // score
+   property giveScore   {call: Lith_GiveScore(this)}
+   property takeScore   {call: Lith_TakeScore(this)}
+   property getModScore {call: Lith_GetModScore(this)}
+
+   // log
+   property log  {call: Lith_Log (this)}
+   property logF {call: Lith_LogF(this)}
+   property logH {call: Lith_LogH(this)}
+
+   // gui
+   property useGUI   {call: Lith_PlayerUseGUI(this)}
+   property closeGUI {call: Lith_PlayerCloseGUI(this)}
+
+   // misc
+   property getUpgr      {call: Lith_PlayerGetNamedUpgrade(this)}
+   property deliverMail  {call: Lith_DeliverMail(this)}
+   property clearTextBuf {call: Lith_ClearTextBuf(this)}
+
+   // cvars
    property getCVarI {call: ACS_GetUserCVar      (->num)}
    property getCVarK {call: ACS_GetUserCVarFixed (->num)}
    property getCVarS {call: ACS_GetUserCVarString(->num)}
    property setCVarI {call: ACS_SetUserCVar      (->num)}
    property setCVarK {call: ACS_SetUserCVarFixed (->num)}
    property setCVarS {call: ACS_SetUserCVarString(->num)}
-   property mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
-   property manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
+
+   // shop
+   property getCost {call: Lith_ShopGetCost(this)}
+   property canBuy  {call: Lith_ShopCanBuy(this)}
+   property buy     {call: Lith_ShopBuy(this)}
 
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

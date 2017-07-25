@@ -27,8 +27,8 @@ enum
    UC_MAX
 };
 
-                      typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade_s *);
-[[__call("ScriptS")]] typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade_s *);
+                      typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
+[[__call("ScriptS")]] typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
 
 struct upgr_data_Adrenaline {
    int  charge;
@@ -99,7 +99,7 @@ struct upgr_data {
    struct upgr_data_Magic      u10;
 };
 
-typedef struct upgradeinfo_s {
+typedef struct upgradeinfo {
    [[__anonymous]] shopdef_t shopdef;
    int   pclass;
    int   category;
@@ -107,9 +107,9 @@ typedef struct upgradeinfo_s {
    fixed scoreadd;
    int   group;
    unsigned requires;
-   
+
    int id, key;
-   
+
    upgr_fn_cb_t Activate;
    upgr_fn_cb_t Deactivate;
    upgr_sc_cb_t Update;
@@ -117,19 +117,19 @@ typedef struct upgradeinfo_s {
    upgr_fn_cb_t Enter;
 } upgradeinfo_t;
 
-bool Lith_UpgrCanActivate(struct player *p, struct upgrade_s *upgr);
-bool Lith_UpgrToggle(struct player *p, struct upgrade_s *upgr);
-void Lith_UpgrSetOwned(struct player *p, struct upgrade_s *upgr);
+bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr);
+bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr);
+void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr);
 
-typedef struct upgrade_s {
+typedef struct upgrade {
    __prop canUse   {call: Lith_UpgrCanActivate(__arg, this)}
    __prop toggle   {call: Lith_UpgrToggle(__arg, this)}
    __prop setOwned {call: Lith_UpgrSetOwned(__arg, this)}
-   
+
    void *dataptr;
-   
+
    upgradeinfo_t const *info;
-   
+
    bool active    : 1;
    bool owned     : 1;
    bool wasactive : 1; // for reinitializing on map load

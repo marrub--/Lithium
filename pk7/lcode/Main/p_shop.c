@@ -105,36 +105,36 @@ void Lith_GInit_Shop(void)
 void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
 {
    Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, btnlist.w, 192, btnlist.h * shopitemsnum);
-   
+
    for(int i = 0; i < shopitemsnum; i++)
    {
       int y = btnlist.h * i;
-      
+
       if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, btnlist.h))
          continue;
-      
+
       __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopitems[i].name);
-      
+
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_shopsel].i, .preset = &btnlistsel))
          g->st[st_shopsel].i = i;
    }
-   
+
    Lith_GUI_ScrollEnd(g, st_shopscr);
-   
+
    shopitem_t *item = &shopitems[g->st[st_shopsel].i];
-   
+
    ACS_SetHudClipRect(111, 30, 184, 150, 184);
-   
-   HudMessageF("CBIFONT", "%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(Lith_ShopGetCost(p, &item->shopdef)));
+
+   HudMessageF("CBIFONT", "%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
-   
+
    HudMessageF("CBIFONT", "%S", Language("LITH_TXT_SHOP_DESCR_%S", item->name));
    HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 40.1, TICSECOND);
-   
+
    ACS_SetHudClipRect(0, 0, 0, 0);
-   
-   if(Lith_GUI_Button(g, "Buy", 259, 170, !Lith_ShopCanBuy(p, &item->shopdef, item)))
-      Lith_ShopBuy(p, &item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S", false);
+
+   if(Lith_GUI_Button(g, "Buy", 259, 170, !p->canBuy(&item->shopdef, item)))
+      p->buy(&item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S", false);
 }
 
 // EOF

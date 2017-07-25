@@ -8,7 +8,7 @@
 #include "lith_list.h"
 
 #define Lith_UpgrBuy(p, upgr, nodelivery) \
-   Lith_ShopBuy(p, &(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", nodelivery)
+   p->buy(&(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", nodelivery)
 
 
 //----------------------------------------------------------------------------
