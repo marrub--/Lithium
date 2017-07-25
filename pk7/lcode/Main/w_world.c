@@ -658,7 +658,8 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
 
-      ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
+      if(enemycheckfinished)
+         ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
 
       extern void DmonDebugInfo(void);
       DmonDebugInfo();

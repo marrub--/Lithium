@@ -71,7 +71,7 @@ actor Lith_SpawnRain : Lith_CustomFunction
    }
 }
 
-actor Lith_SpawnBloodRain : Lith_SpawnRain
+actor Lith_SpawnBloodRain : Lith_CustomFunction
 {
    states
    {
