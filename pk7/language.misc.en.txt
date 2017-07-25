@@ -56,5 +56,21 @@ BGFLAT30 = "ZZLITHBG"; // win game
 BGFLAT15 = "ZZLITHBG"; // secret level
 BGFLAT31 = "ZZLITHBG"; // super secret level
 
+MENU_NGAME  = "* (New-Game)";
+MENU_LOADG  = "* (Load-Game)";
+MENU_SAVEG  = "* (Save-Game)";
+MENU_OPTION = "* (Options)";
+MENU_QUITG  = "* (Quit-Game)";
+MENU_CHOOSECLASS  = "Your Class Is:";
+MENU_WHICHEPISODE = "Your Story Is:";
+MENU_CHOOSESKILL  = "Your Skill Is:";
+
+DIFF_TOURIST = "> I'm just a tourist.";
+DIFF_EASY    = "> Throw me a bone.";
+DIFF_NORMAL  = "> Hurt me plenty.";
+DIFF_HARD    = "> Ultra-Violence!";
+DIFF_XHARD   = "> Watch me die!";
+DIFF_NMARE   = "> Crazed Nightmare!";
+
 // EOF
 

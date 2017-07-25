@@ -5,8 +5,8 @@
 gameinfo
 {
    PlayerClasses = "Lith_MarinePlayer", "Lith_MagePlayer"
-   DimColor = "gray"
-   DimAmount = 0.1
+   DimColor = "Black"
+   DimAmount = 0.25
    QuitSound = "misc/quitsound"
    PrecacheSounds = "amb/rain", "amb/wind"
    AddEventHandlers = "Lith_Events"
@@ -23,7 +23,7 @@ skill tourist
 {
    DamageFactor = 0.1
    SpawnFilter = 5
-   Name = "I'm just a tourist"
+   Name = "$DIFF_TOURIST"
    Key = "t"
    RespawnTime = 0.5
    EasyBossBrain
@@ -39,7 +39,7 @@ skill easy
 {
    DamageFactor = 0.9
    SpawnFilter = 2
-   Name = "Throw me a bone"
+   Name = "$DIFF_EASY"
    Key = "b"
    Aggressiveness = -0.3
    MonsterHealth = 0.9
@@ -49,7 +49,7 @@ skill easy
 skill normal
 {
    SpawnFilter = 3
-   Name = "Hurt me plenty"
+   Name = "$DIFF_NORMAL"
    Key = "h"
    DefaultSkill
    ACSReturn = 2
@@ -58,7 +58,7 @@ skill normal
 skill hard
 {
    SpawnFilter = 4
-   Name = "Ultra-Violence!"
+   Name = "$DIFF_HARD"
    Key = "u"
    ACSReturn = 3
 }
@@ -66,7 +66,7 @@ skill hard
 skill extrahard
 {
    SpawnFilter = 5
-   Name = "Prepare to die!"
+   Name = "$DIFF_XHARD"
    Key = "p"
    DamageFactor = 1.05
    Aggressiveness = 0.1
@@ -97,7 +97,7 @@ skill nightmare
 {
    DamageFactor = 2
    SpawnFilter = 5
-   Name = "Absolute Nightmare!"
+   Name = "$DIFF_NMARE"
    Key = "t"
    RespawnTime = 0.5
    MonsterHealth = 0.5

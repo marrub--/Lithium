@@ -31,8 +31,10 @@ JetPlane
    Image used as a base for the SMG sprite
 
 Jimmy
-   Fonts! All of them, except the SMALLFNT.
+   Fonts! All of them, except the SMALLFNT, alien font and HUD font.
    Added some missing characters to the CBIFONT for me (which he also made)
+   Really, like, this guy is kind of crazy great.
+   Made the MENUDEFs for me (which I edited.)
 
 Kate
    Some specific, old code is based off of Error: Doom code

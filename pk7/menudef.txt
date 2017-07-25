@@ -1,0 +1,64 @@
+DefaultListMenu
+{
+   Font "BIGFONT", "Green"
+   Selector "-", -20, 2
+   Linespacing 16
+}
+
+ListMenu "MainMenu"
+{
+   StaticPatch 100, 10, "lgfx/Title.png"
+   Position 97, 72
+
+   TextItem "$MENU_NGAME", "n", "PlayerclassMenu"
+   IfOption(SwapMenu)
+   {
+      TextItem "$MENU_LOADG", "l", "LoadGameMenu"
+      TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
+      TextItem "$MENU_OPTION","o", "OptionsMenu"
+   }
+   Else
+   {
+      TextItem "$MENU_OPTION","o", "OptionsMenu"
+      TextItem "$MENU_LOADG", "l", "LoadGameMenu"
+      TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
+   }
+   TextItem "$MENU_QUITG", "q", "QuitMenu"
+}
+
+ListMenu "PlayerclassMenu"
+{
+   NetgameMessage "$NEWGAME"
+   StaticTextCentered 160, 30, "$MENU_CHOOSECLASS"
+   Position 48, 63
+   PlayerDisplay 190, 63, "20 00 00", "80 00 40"
+   MouseWindow 0, 220
+}
+
+ListMenu "EpisodeMenu"
+{
+   NetgameMessage "$NEWGAME"
+   StaticTextCentered 160, 30, "$MENU_WHICHEPISODE"
+   Position 48, 63
+}
+
+ListMenu "SkillMenu"
+{
+   StaticTextCentered 160, 30, "$MENU_CHOOSESKILL"
+   Position 48, 63
+}
+
+ListMenu "LoadGameMenu"
+{
+   NetgameMessage "$LOADNET"
+   StaticTextCentered 160, -20, "$MENU_LOADG"
+   Position 80, 54
+   Class "LoadMenu"
+}
+
+ListMenu "SaveGameMenu"
+{
+   StaticTextCentered 160, -20, "$MENU_SAVEG"
+   Position 80, 54
+   Class "SaveMenu"
+}
