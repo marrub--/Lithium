@@ -23,7 +23,7 @@ actor Lith_MiniMissile
       MISL A 1 bright
       wait
    Death:
-      TNT1 A 0 A_Explode(24, 42)
+      TNT1 A 0 A_Explode(32, 42)
       MEXP AB 2 bright
       MEXP CD 3 bright
       MEXP EF 4 bright
