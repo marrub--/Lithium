@@ -312,7 +312,8 @@ void Lith_PlayerInitUpgrades(player_t *p)
 
    p->upgrademap.alloc(p->upgrmax);
 
-   memset(p->upgrades, 0, sizeof(p->upgrades));
+   for(int i = 0; i < countof(p->upgrades); i++)
+      p->upgrades[i] = (upgrade_t){};
 
    for(int i = 0, j = 0; i < UPGR_MAX; i++)
    {

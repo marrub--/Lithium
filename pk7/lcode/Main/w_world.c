@@ -42,7 +42,8 @@ payoutinfo_t payout;
 void Lith_BeginAngles(int x, int y)
 {
    world.a_cur = 0;
-   memset(world.a_angles, 0, sizeof(world.a_angles));
+   for(int i = 0; i < countof(world.a_angles); i++)
+      world.a_angles[i] = (struct polar){};
    world.a_x = x;
    world.a_y = y;
 }
@@ -239,7 +240,7 @@ static void Lith_DoPayout(void)
       Lith_PlayerPayout(p);
    }
 
-   memset(&payout, 0, sizeof(payout));
+   payout = (payoutinfo_t){};
 }
 
 //

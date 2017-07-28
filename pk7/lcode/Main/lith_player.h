@@ -346,6 +346,8 @@ typedef struct player
    [[__anonymous]] player_guidata_t    guidata;
    [[__anonymous]] player_statdata_t   statdata;
    [[__anonymous]] player_invdata_t    invdata;
+
+   bool wasinit;
 } player_t;
 
 

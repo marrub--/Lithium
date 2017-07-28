@@ -23,7 +23,7 @@
 #define Lith_GUI_Prefix(set) if(set) set = StrParam("%S%S", g->gfxprefix, set)
 
 #define Lith_GUI_ScrollReset(g, stn) \
-   memset(&g->st[stn].scrl, 0, sizeof(gui_scroll_state_t));
+   ((g)->st[(stn)].scrl = (gui_scroll_state_t){})
 
 #define BtnDefault \
    .snd  = "player/cbi/buttonpress", \
@@ -103,18 +103,18 @@ typedef struct gui_state_s
 {
    [[__anonymous]] gui_delta_t cur;
    gui_delta_t old;
-   
+
    int hid;
    int ox, oy;
    int w, h;
-   
+
    id_t active, hot;
-   
+
    bool useclip;
    int clpxS, clpyS, clpxE, clpyE;
-   
+
    gui_stateitem_t *st;
-   
+
    __str gfxprefix;
 } gui_state_t;
 

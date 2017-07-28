@@ -165,6 +165,13 @@ void Lith_KeyDown(int pnum, int ch)
 void Lith_ResetPlayer(player_t *p)
 {
    //
+   // Init
+   if(!p->wasinit) {
+      *p = (player_t){};
+      p->wasinit = true;
+   }
+
+   //
    // Constant data
 
    p->active = true;
@@ -177,7 +184,7 @@ void Lith_ResetPlayer(player_t *p)
    if(world.scoregolf)
       p->score = 0;
 
-   memset(&p->old, 0, sizeof(player_delta_t));
+   p->old = (player_delta_t){};
 
    // If the map sets the TID on the first tic, it could already be set here.
    p->tid = 0;

@@ -105,7 +105,7 @@ void Lith_SetMagicUI(bool on)
       p->indialogue = UData.ui = false;
       p->semifrozen--;
       ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
-      memset(&UData.gst, 0, sizeof(UData.gst));
+      UData.gst = (gui_state_t){};
    }
 }
 

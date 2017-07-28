@@ -166,7 +166,7 @@ static void Lith_PlayerDisconnect(void)
 
    p->upgrademap.destroy();
 
-   memset(p, 0, sizeof(player_t));
+   memset(p, 0, sizeof(*p));
 }
 
 
