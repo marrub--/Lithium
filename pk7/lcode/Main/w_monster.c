@@ -150,7 +150,7 @@ static void ApplyLevels(dmon_t *m, int prev)
    }
 
    if(m->level >= 5) {
-      float rn = m->rank / 10.0;
+      float rn = m->rank / 10.f;
       int hp10 = m->maxhealth / 10;
       int newh = (m->level - prev) * hp10 * RandomFloat(rn - .1f, rn + .1f);
       ACS_SetActorProperty(0, APROP_Health, m->mi->health + newh);

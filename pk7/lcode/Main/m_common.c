@@ -73,7 +73,7 @@ float RandomFloat(float max, float min)
       max = temp;
    }
 
-   return (ACS_RandomFixed(0, 1000) / 1000.f) * (max - min) + min;
+   return (ACS_Random(0, 0x1000000) / 0x1.0p24) * (max - min) + min;
 }
 
 //
