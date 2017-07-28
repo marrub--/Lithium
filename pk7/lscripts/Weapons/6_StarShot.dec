@@ -5,7 +5,7 @@ actor Lith_StarShotShotsFired : Inventory
 
 actor Lith_Star
 {
-   Damage (15)
+   Damage (5*random(3,5))
    Speed 32
    Radius 2
    Height 2
