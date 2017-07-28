@@ -1,7 +1,3 @@
-#include "lscripts/Weapons/Cannonball.dec"
-#include "lscripts/Weapons/Punctuator.dec"
-#include "lscripts/Weapons/RailgunParticles.dec"
-
 actor Lith_GTFO : Inventory
 {
    Inventory.MaxAmount 1

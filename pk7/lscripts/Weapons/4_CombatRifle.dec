@@ -1,5 +1,3 @@
-#include "lscripts/Weapons/RifleBullet.dec"
-
 actor Lith_RifleLaserTrail
 {
    RenderStyle "Add"

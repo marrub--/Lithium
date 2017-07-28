@@ -1,5 +1,3 @@
-#include "lscripts/Weapons/MiniMissile.dec"
-
 actor Lith_MissileShotsFired : Inventory
 {
    Inventory.MaxAmount 10

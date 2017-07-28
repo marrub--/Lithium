@@ -1,5 +1,3 @@
-#include "lscripts/Weapons/SniperBullet.dec"
-
 actor Lith_SniperShotsFired : Inventory
 {
    Inventory.MaxAmount 8

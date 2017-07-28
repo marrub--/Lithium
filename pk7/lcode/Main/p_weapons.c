@@ -1,3 +1,4 @@
+// vim: columns=130
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_monster.h"
@@ -13,36 +14,40 @@
 
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
-// {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"},
+// {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"[, flags]},
    {0, pclass_any,       null,              "MMMMHMHMMMHMMM"},
+
+   // All-class Weapons
+   {1, pclass_any,       "ChargeFist",      "weapons/cfist/pickup"},
+   {2, pclass_any,       "Revolver",        "weapons/revolver/pickup",  AT_Mag,  "Lith_RevolverShotsFired"},
+   {3, pclass_any,       "LazShotgun",      "weapons/lshotgun/pickup"},
+   {5, pclass_any,       "MissileLauncher", "weapons/missile/pickup",   AT_Ammo, "Lith_RocketAmmo"},
+   {6, pclass_any,       "PlasmaDiffuser",  "weapons/plasdiff/pickup",  AT_Ammo, "Lith_PlasmaAmmo"},
 
    // Marine Weapons
    {1, pclass_marine,    "Fist",            "MMMMHMHMMMHMMM"},
-   {1, pclass_marine,    "ChargeFist",      "weapons/cfist/pickup"},
    {2, pclass_marine,    "Pistol",          "weapons/pistol/pickup",    AT_Mag,  "Lith_PistolShotsFired"},
-   {2, pclass_marine,    "Revolver",        "weapons/revolver/pickup",  AT_Mag,  "Lith_RevolverShotsFired"},
    {3, pclass_marine,    "Shotgun",         "weapons/shotgun/pickup"},
-   {3, pclass_marine,    "LazShotgun",      "weapons/lshotgun/pickup"},
    {3, pclass_marine,    "SuperShotgun",    "weapons/ssg/pickup",       AT_Ammo, "Lith_ShellAmmo"},
    {4, pclass_marine,    "CombatRifle",     "weapons/rifle/pickup",     AT_Mag,  "Lith_RifleShotsFired"},
    {4, pclass_marine,    "SniperRifle",     "weapons/sniper/pickup",    AT_Mag,  "Lith_SniperShotsFired"},
    {5, pclass_marine,    "GrenadeLauncher", "weapons/rocket/pickup",    AT_Ammo, "Lith_RocketAmmo"},
-   {5, pclass_marine,    "MissileLauncher", "weapons/missile/pickup",   AT_Ammo, "Lith_RocketAmmo"},
    {6, pclass_marine,    "PlasmaRifle",     "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
-   {6, pclass_marine,    "PlasmaDiffuser",  "weapons/plasdiff/pickup",  AT_Ammo, "Lith_PlasmaAmmo"},
    {7, pclass_marine,    "BFG9000",         "weapons/cannon/pickup",    AT_Ammo, "Lith_CannonAmmo"},
 
    // Cyber-Mage Weapons
    {1, pclass_cybermage, "CFist",           "YOUSONOFABITCH"},
    {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
+   {3, pclass_cybermage, "ShockRifle",      "weapons/erifle/pickup",    AT_Mag,  "Lith_ShockRifleShotsFired"},
    {3, pclass_cybermage, "SPAS",            "weapons/cshotgun/pickup",  AT_Ammo, "Lith_ShellAmmo"},
-   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {4, pclass_cybermage, "SMG",             "weapons/smg/pickup",       AT_Mag,  "Lith_SMGShotsFired"},
    {5, pclass_cybermage, "IonRifle",        "weapons/ionrifle/pickup",  AT_Ammo, "Lith_RocketAmmo"},
-   {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {6, pclass_cybermage, "CPlasmaRifle",    "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
-   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired", F(wf_magic)},
    {7, pclass_cybermage, "StarDestroyer",   "weapons/shipgun/pickup",   AT_Ammo, "Lith_CannonAmmo"},
+
+   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
+   {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM",                                               F(wf_magic)},
+   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired", F(wf_magic)},
 };
 #undef F
 

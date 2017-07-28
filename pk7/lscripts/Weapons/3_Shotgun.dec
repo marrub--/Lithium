@@ -1,7 +1,3 @@
-#include "lscripts/Weapons/ShotgunTrail.dec"
-#include "lscripts/Weapons/Gauss.dec"
-#include "lscripts/Weapons/PoisonBullet.dec"
-
 actor Lith_ShotgunJustFrame : Inventory
 {
    Inventory.MaxAmount 3

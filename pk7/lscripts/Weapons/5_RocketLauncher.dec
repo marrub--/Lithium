@@ -1,6 +1,3 @@
-#include "lscripts/Weapons/Rocket.dec"
-#include "lscripts/Weapons/HomingRocket.dec"
-
 actor Lith_RocketLoaded : Inventory
 {
    Inventory.MaxAmount 8

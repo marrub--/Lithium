@@ -2,35 +2,39 @@ enum
 {
    weapon_unknown,
    weapon_min,
-   
-   // Marine Weapons
-   weapon_fist = weapon_min,
-   weapon_cfist,
-   weapon_pistol,
+
+   // All-class Weapons
+   weapon_cfist = weapon_min,
    weapon_revolver,
-   weapon_shotgun,
    weapon_lazshotgun,
+   weapon_sniper,
+   weapon_missile,
+   weapon_plasmadiff,
+
+   // Marine Weapons
+   weapon_fist,
+   weapon_pistol,
+   weapon_shotgun,
    weapon_ssg,
    weapon_rifle,
-   weapon_sniper,
    weapon_launcher,
-   weapon_missile,
    weapon_plasma,
-   weapon_plasmadiff,
    weapon_bfg,
-   
+
    // Cyber-Mage Weapons
    weapon_c_fist,
    weapon_c_mateba,
+   weapon_c_erifle,
    weapon_c_spas,
-   weapon_c_delear,
    weapon_c_smg,
    weapon_c_sniper,
-   weapon_c_hulgyon,
    weapon_c_plasma,
-   weapon_c_starshot,
    weapon_c_shipgun,
-   
+
+   weapon_c_delear,
+   weapon_c_hulgyon,
+   weapon_c_starshot,
+
    weapon_max
 };
 
@@ -45,7 +49,7 @@ enum
    wepnam_rocketlauncher,
    wepnam_plasmarifle,
    wepnam_bfg9000,
-   
+
    wepnam_max,
 };
 

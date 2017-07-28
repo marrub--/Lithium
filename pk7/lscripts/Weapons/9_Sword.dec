@@ -1,5 +1,3 @@
-#include "lscripts/Weapons/SwordSwing.dec"
-
 actor Lith_SwordPuff : Lith_BulletPuff
 {
    DamageType "Lith_Melee"

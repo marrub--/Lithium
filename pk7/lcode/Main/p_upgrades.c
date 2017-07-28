@@ -1,3 +1,4 @@
+// vim: columns=130
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 

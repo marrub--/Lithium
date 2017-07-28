@@ -51,47 +51,52 @@
 
 //$GZDB_SKIP
 
-// Marine weapons
-#include "lscripts/Weapons/1_Fist.dec"
+#include "lscripts/Weapons/ShotgunTrail.dec"
+#include "lscripts/Weapons/Gauss.dec"
+#include "lscripts/Weapons/PoisonBullet.dec"
+#include "lscripts/Weapons/RifleBullet.dec"
+#include "lscripts/Weapons/SniperBullet.dec"
+#include "lscripts/Weapons/MiniMissile.dec"
+#include "lscripts/Weapons/Rocket.dec"
+#include "lscripts/Weapons/HomingRocket.dec"
+#include "lscripts/Weapons/PlasmaBolt.dec"
+#include "lscripts/Weapons/PlasmaLaser.dec"
+#include "lscripts/Weapons/Cannonball.dec"
+#include "lscripts/Weapons/Punctuator.dec"
+#include "lscripts/Weapons/RailgunParticles.dec"
+#include "lscripts/Weapons/SwordSwing.dec"
+
+// All-class Weapons
+#include "lscripts/Weapons/2_Revolver.dec"
+#include "lscripts/Weapons/3_LazShotgun.dec"
+#include "lscripts/Weapons/4_SniperRifle.dec"
+#include "lscripts/Weapons/5_MissileLauncher.dec"
+#include "lscripts/Weapons/6_PlasmaDiffuser.dec"
 #include "lscripts/Weapons/1_ChargeFist.dec"
 
+// Marine Weapons
+#include "lscripts/Weapons/1_Fist.dec"
 #include "lscripts/Weapons/2_Pistol.dec"
-#include "lscripts/Weapons/2_Revolver.dec"
-
 #include "lscripts/Weapons/3_Shotgun.dec"
-#include "lscripts/Weapons/3_LazShotgun.dec"
-
 #include "lscripts/Weapons/3_2_SuperShotgun.dec"
-
 #include "lscripts/Weapons/4_CombatRifle.dec"
-#include "lscripts/Weapons/4_SniperRifle.dec"
-
 #include "lscripts/Weapons/5_RocketLauncher.dec"
-#include "lscripts/Weapons/5_MissileLauncher.dec"
-
 #include "lscripts/Weapons/6_PlasmaRifle.dec"
-#include "lscripts/Weapons/6_PlasmaDiffuser.dec"
-
 #include "lscripts/Weapons/7_OmegaCannon.dec"
 
-// Cyber-Mage weapons
+// Cyber-Mage Weapons
 #include "lscripts/Weapons/1_CFist.dec"
-
 #include "lscripts/Weapons/2_Mateba.dec"
+#include "lscripts/Weapons/3_ShockRifle.dec"
+#include "lscripts/Weapons/3_2_SPAS.dec"
+#include "lscripts/Weapons/4_SMG.dec"
+#include "lscripts/Weapons/5_IonRifle.dec"
+#include "lscripts/Weapons/6_CPlasmaRifle.dec"
+#include "lscripts/Weapons/7_StarDestroyer.dec"
 
 #include "lscripts/Weapons/3_Delear.dec"
-
-#include "lscripts/Weapons/3_2_SPAS.dec"
-
-#include "lscripts/Weapons/4_SMG.dec"
-
-#include "lscripts/Weapons/5_IonRifle.dec"
 #include "lscripts/Weapons/5_Hulgyon.dec"
-
-#include "lscripts/Weapons/6_CPlasmaRifle.dec"
 #include "lscripts/Weapons/6_StarShot.dec"
-
-#include "lscripts/Weapons/7_StarDestroyer.dec"
 
 // Misc.
 #include "lscripts/Weapons/9_Sword.dec"

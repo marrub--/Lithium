@@ -1,6 +1,3 @@
-#include "lscripts/Weapons/PlasmaBolt.dec"
-#include "lscripts/Weapons/PlasmaLaser.dec"
-
 actor Lith_ParticleBeam : Lith_PlasmaLaze
 {
    RenderStyle "Add"
