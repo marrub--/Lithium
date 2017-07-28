@@ -5,7 +5,7 @@ actor Lith_SniperShotsFired : Inventory
    Inventory.MaxAmount 8
 }
 
-actor Lith_SniperRifle : Lith_MWeapon
+actor Lith_SniperRifle : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_SniperRifle"
    Weapon.UpSound "weapons/sniper/draw"
@@ -20,7 +20,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       SCOP A 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    Ready:
-      SNPG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4)
+      SNPG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    ReadySelector:

@@ -16,7 +16,7 @@ actor Lith_LazShotgunTrail
    }
 }
 
-actor Lith_LazShotgun : Lith_MWeapon
+actor Lith_LazShotgun : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_LazShotgun"
    Weapon.UpSound "weapons/lshotgun/draw"

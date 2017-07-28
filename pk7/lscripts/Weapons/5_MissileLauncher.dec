@@ -7,12 +7,12 @@ actor Lith_MissileShotsFired : Inventory
 
 actor Lith_MissileReset : Inventory // yhole has forever tainted your work
 {
+   Inventory.MaxAmount 5
    +INVENTORY.UNTOSSABLE
    +INVENTORY.IGNORESKILL
-   inventory.maxamount 5
 }
 
-actor Lith_MissileLauncher : Lith_MWeapon
+actor Lith_MissileLauncher : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_MissileLauncher"
    Weapon.UpSound "weapons/missile/draw"
