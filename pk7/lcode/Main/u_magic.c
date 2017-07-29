@@ -147,7 +147,7 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
       ACS_Spawn("Lith_ManaLeak", p->x + x, p->y + y, p->z + z, tid);
       ACS_SetUserVariable(tid, "user_x", x);
       ACS_SetUserVariable(tid, "user_y", y);
-      ACS_SetActorPropertyFixed(tid, APROP_Alpha, manaperc);
+      ACS_SetActorPropertyFixed(tid, APROP_Alpha, manaperc / 2);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
       Lith_GivePlayerZ(tid, p, "user_z");
    }

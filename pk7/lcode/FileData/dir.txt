@@ -58,7 +58,7 @@ data 1 -> LITH_TXT_MAIL_FLAG_Phantom
 
 Intro (Marine).txt      -> LITH_TXT_MAIL_BODY_Intro
 data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Intro
-data 13:00 25/7/49      -> LITH_TXT_MAIL_TIME_Intro
+data 13:00 25-7-49      -> LITH_TXT_MAIL_TIME_Intro
 data 610                -> LITH_TXT_MAIL_SIZE_Intro
 
 Chapter 1 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster1
@@ -77,7 +77,7 @@ data 330                         -> LITH_TXT_MAIL_SIZE_Phantom
 Intro (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_IntroJem
 data Saved Message     -> LITH_TXT_MAIL_NAME_IntroJem
 data <hidden>@corp.AOF -> LITH_TXT_MAIL_SEND_IntroJem
-data 13:00 25/7/49     -> LITH_TXT_MAIL_TIME_IntroJem
+data 13:00 25-7-49     -> LITH_TXT_MAIL_TIME_IntroJem
 data 280               -> LITH_TXT_MAIL_SIZE_IntroJem
 
 Chapter 1 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster1Jem

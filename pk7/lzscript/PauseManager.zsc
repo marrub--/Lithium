@@ -30,7 +30,7 @@ class Lith_PauseManager play
    
    static void PauseTick(int player)
    {
-      if(Lith_Server.Instance().Paused)
+      if(Lith_Server.Instance() && Lith_Server.Instance().Paused)
          players[player].psprites.tics = -1;
    }
 }

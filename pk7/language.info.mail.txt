@@ -50,7 +50,7 @@
    "\n"
    "Lambert out.  Good luck, Blazkowicz.\n";
 "LITH_TXT_MAIL_SEND_Intro" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_TIME_Intro" = "13:00 25/7/49";
+"LITH_TXT_MAIL_TIME_Intro" = "13:00 25-7-49";
 "LITH_TXT_MAIL_SIZE_Intro" = "610";
 "LITH_TXT_MAIL_BODY_Cluster1" =
    "An explosion of some sort just happened nearby, it seems that the demons are reconstructing the world around you. You would best be careful not to trigger any other, er, events.\n"
@@ -128,7 +128,7 @@
    "\cd>>>>>[[[[reloading mail daemon]]]]\n";
 "LITH_TXT_MAIL_NAME_IntroJem" = "Saved Message";
 "LITH_TXT_MAIL_SEND_IntroJem" = "<hidden>@corp.AOF";
-"LITH_TXT_MAIL_TIME_IntroJem" = "13:00 25/7/49";
+"LITH_TXT_MAIL_TIME_IntroJem" = "13:00 25-7-49";
 "LITH_TXT_MAIL_SIZE_IntroJem" = "280";
 "LITH_TXT_MAIL_BODY_Cluster1Jem" =
    "l[]];;\cg444444\cj41414191918 --------\n"

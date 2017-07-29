@@ -354,7 +354,9 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / (fixed)MAXLEVEL);
 
-      if(m->painresist)
+      // Strange optimization: This causes horrible lag in the ZScript VM,
+      // but in ZDoom 2.8.1 it's completely fine. What the fuck.
+      if(!world.grafZoneEntered && m->painresist)
          ApplyPainResist(m);
 
       ACS_Delay(1);
