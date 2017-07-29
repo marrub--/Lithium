@@ -69,7 +69,7 @@ float RandomFloat(float max, float min)
    if(max < min)
       swap(float, min, max);
 
-   return (ACS_Random(0, 0x100000) / 0x1.0p20) * (max - min) + min;
+   return (ACS_Random(0, 1000) / 1000.f) * (max - min) + min;
 }
 
 //
