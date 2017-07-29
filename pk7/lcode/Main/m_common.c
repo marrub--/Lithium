@@ -67,13 +67,9 @@ crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
 float RandomFloat(float max, float min)
 {
    if(max < min)
-   {
-      float temp = min;
-      min = max;
-      max = temp;
-   }
+      swap(float, min, max);
 
-   return (ACS_Random(0, 0x1000000) / 0x1.0p24) * (max - min) + min;
+   return (ACS_Random(0, 0x100000) / 0x1.0p20) * (max - min) + min;
 }
 
 //

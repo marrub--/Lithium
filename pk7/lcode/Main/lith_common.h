@@ -23,6 +23,12 @@ typedef void const *__str;
       if(name)
 
 #define countof(a) (sizeof((a)) / sizeof(*(a)))
+#define swap(t, a, b) \
+   do { \
+      t _tmp = a; \
+      a = b; \
+      b = _tmp; \
+   } while(0)
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
