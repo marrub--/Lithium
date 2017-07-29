@@ -2,8 +2,8 @@
 // Misc. Effects
 //
 misc/teleport  lsounds/Teleport.flac      // Self-made
-menu/backup    lsounds/MenuBack.flac      // 〃
-menu/cursor    lsounds/MenuMove.flac      // 〃
+menu/backup    lsounds/Menu/Back.flac     // 〃
+menu/cursor    lsounds/Menu/Move.flac     // 〃
 silence        lsounds/Silence.flac       // 〃
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg // ?????
 YOUSONOFABITCH lsounds/YOUSONOFABITCH.ogg // ???????????
@@ -11,6 +11,9 @@ misc/booom     lsounds/boom.flac          // ??????????????
 explosion      DSBAREXP                   // Whatever you have loaded :y
 misc/chat      lsounds/Chat.flac          // FEAR
 ghost/hit      lsounds/GhostHit.flac      // Touhou 13
+
+intermission/tick      lsounds/Menu/InterTick.flac // Halo 3
+intermission/nextstage lsounds/Menu/InterNext.flac // Halo 3, Phantasy Star Online
 
 $rolloff * custom 0 2025
 
@@ -25,6 +28,21 @@ $alias menu/change   player/cbi/slidertick
 $alias ghost/spawn   player/pickup/barrier
 $limit explosion 0
 $attenuation explosion 0.7
+
+$random intermission/paststats {
+   weapons/pistol/pickup
+   weapons/revolver/pickup
+   weapons/shotgun/pickup
+   weapons/cshotgun/pickup
+   weapons/ssg/pickup
+   weapons/rifle/pickup
+   weapons/smg/pickup
+   weapons/ionrifle/pickup
+   weapons/rocket/pickup
+   weapons/plasma/pickup
+   weapons/cannon/pickup
+   weapons/shipgun/pickup
+}
 
 $random misc/quitsound {
    enemies/zombie/ready
