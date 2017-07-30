@@ -3,7 +3,6 @@
 
 #define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
 
-// fug
 #define Lith_GUI_Button(g, ...)             Lith_GUI_Button_Id(g, 0, __VA_ARGS__)
 #define Lith_GUI_Button_Id(g, id, ...)      Lith_GUI_Button_Impl(g, id + LineHash, &(gui_button_args_t){__VA_ARGS__})
 #define Lith_GUI_Checkbox(g, ...)           Lith_GUI_Checkbox_Id(g, 0, __VA_ARGS__)
@@ -21,39 +20,17 @@
    else          pre = def
 
 #define Lith_GUI_Prefix(set) if(set) set = StrParam("%S%S", g->gfxprefix, set)
+#define Lith_GUI_Prefix1(g, pre, mem) \
+   (!(pre)->external \
+      ? ((pre)->mem ? StrParam("%S%S", (g)->gfxprefix, (pre)->mem) : null) \
+      : (pre)->mem)
 
 #define Lith_GUI_ScrollReset(g, stn) \
    ((g)->st[(stn)].scrl = (gui_scroll_state_t){})
 
-#define BtnDefault \
-   .snd  = "player/cbi/buttonpress", \
-   .cdef = "j", \
-   .cact = "g", \
-   .chot = "k", \
-   .font = "CBIFONT", \
-   .gfx  = "Button.png", \
-   .hot  = "ButtonHot.png", \
-   .cdis = "m", \
-   .w = 48, \
-   .h = 16
 
-#define CbxDefault \
-   .sndup  = "player/cbi/clickon", \
-   .snddn  = "player/cbi/clickoff", \
-   .w = 10, \
-   .h = 10, \
-   .font = "CNFONT", \
-   .chkgfx = "CheckboxX.png", \
-   .chkhot = "CheckboxXHot.png", \
-   .chkact = "CheckboxXActive.png", \
-   .chkdis = "CheckboxXDisabled.png", \
-   .gfx    = "Checkbox.png", \
-   .hot    = "CheckboxHot.png", \
-   .dis    = "CheckboxDisabled.png"
-
-
-//----------------------------------------------------------------------------
-// Type Definitions
+//-----------------------------------------------------------------------------
+// Types
 //
 
 typedef unsigned id_t;
@@ -128,9 +105,9 @@ typedef struct gui_button_preset_s
    __str chot;
    __str cdis;
    __str font;
-   bool  external;
    int   w;
    int   h;
+   bool  external;
 } gui_button_preset_t;
 
 typedef struct gui_button_args_s
@@ -153,16 +130,15 @@ typedef struct gui_checkb_preset_s
    __str chkhot;
    __str chkact;
    __str chkdis;
-   __str font;
-   int w;
-   int h;
+   bool  external;
+   int   w;
+   int   h;
 } gui_checkb_preset_t;
 
 typedef struct gui_checkb_args_s
 {
    bool on;
    int x, y;
-   __str label;
    bool disabled;
    gui_checkb_preset_t const *preset;
 } gui_checkb_args_t;
@@ -172,20 +148,21 @@ typedef struct gui_scroll_preset_s
    __str capS;
    __str capE;
    __str scrl;
-   int scrlw;
-   int scrlh;
    __str notchgfx;
    __str notchhot;
+   bool  external;
+   int   scrlw;
+   int   scrlh;
 } gui_scroll_preset_t;
 
 typedef struct gui_scroll_args_s
 {
    size_t st;
-   int x;
-   int y;
-   int w;
-   int h;
-   int contenth;
+   int    x;
+   int    y;
+   int    w;
+   int    h;
+   int    contenth;
    gui_scroll_preset_t const *preset;
 } gui_scroll_args_t;
 
@@ -195,33 +172,35 @@ typedef struct gui_slider_preset_s
    __str snd;
    __str notch;
    __str notchhot;
-   int pad;
-   int w;
-   int h;
+   __str font;
+   bool  external;
+   int   pad;
+   int   w;
+   int   h;
 } gui_slider_preset_t;
 
 typedef struct gui_slider_args_s
 {
-   int x;
-   int y;
+   int    x;
+   int    y;
    double minima;
    double maxima;
    double val;
-   bool integ;
+   bool   integ;
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 
 typedef struct gui_textbox_args_s
 {
    size_t st;
-   int x;
-   int y;
-   int pnum;
-   char *inbuf;
+   int    x;
+   int    y;
+   int    pnum;
+   char  *inbuf;
 } gui_textbox_args_t;
 
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Extern Objects
 //
 
@@ -245,7 +224,7 @@ extern gui_scroll_preset_t const scrdefault;
 extern gui_slider_preset_t const slddefault;
 
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Extern Functions
 //
 
