@@ -125,6 +125,11 @@ $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
 
 //
+// Shock Rifle
+//
+weapons/crifle/fire lsounds/ShockRifle/Fire.flac // Return to Castle Wolfenstein, Half-Life 2
+
+//
 // Shotgun (Cyber-Mage)
 //
 weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, Dynamic Range

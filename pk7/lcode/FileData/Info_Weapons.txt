@@ -85,7 +85,7 @@ potentially overload the user. While this modification was created by A.O.F
 Inc, the Finirentur method was created recently by mages of Neptune 11 in
 Algidistari.
 
-== LITH_TXT_INFO_SHORT_ShockRifle | Electro-Rifle
+== LITH_TXT_INFO_SHORT_ShockRifle | Shock Rifle
 
 == LITH_TXT_INFO_SHORT_SPAS | Shotgun
 == LITH_TXT_INFO_TITLE_SPAS | NV48 12-Gauge Shotgun

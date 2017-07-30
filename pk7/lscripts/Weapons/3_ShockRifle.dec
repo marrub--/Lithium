@@ -6,7 +6,7 @@ actor Lith_ShockRifleShotsFired : Inventory
 actor Lith_ShockRifle : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_ShockRifle"
-   Weapon.UpSound "weapons/shotgun/draw"
+   Weapon.UpSound "weapons/crifle/draw"
    Weapon.SlotNumber 3
    Weapon.SlotPriority 1
    

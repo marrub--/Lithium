@@ -24,7 +24,7 @@ enum
    // Cyber-Mage Weapons
    weapon_c_fist,
    weapon_c_mateba,
-   weapon_c_erifle,
+   weapon_c_rifle,
    weapon_c_spas,
    weapon_c_smg,
    weapon_c_sniper,

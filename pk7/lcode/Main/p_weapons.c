@@ -140,7 +140,7 @@ bool Lith_WeaponPickup(int name)
       Case(wepnam_fist,           weapon_c_fist);
       Case(wepnam_chainsaw,       weapon_cfist);
       Case(wepnam_pistol,         weapon_c_mateba);
-      Case(wepnam_shotgun,        weapon_unknown);
+      Case(wepnam_shotgun,        weapon_c_rifle);
       Case(wepnam_supershotgun,   weapon_c_spas);
       Case(wepnam_chaingun,       weapon_c_smg);
       Case(wepnam_rocketlauncher, weapon_c_sniper);
