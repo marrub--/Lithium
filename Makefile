@@ -7,12 +7,13 @@ MAKELIB=gdcc-makelib
 ## Directories
 
 BIN=pk7/acs
-SRC=pk7/lcode/Main
+SRCDIR=pk7/lcode
+SRC=$(SRCDIR)/Main
 INC=$(SRC)
 IR=ir
 
-LITHOS_SRC=pk7/lcode/LithOS3/lithos_c/src
-LITHOS_INC=pk7/lcode/LithOS3/lithos_c/inc
+LITHOS_SRC=$(SRCDIR)/LithOS3/lithos_c/src
+LITHOS_INC=$(SRCDIR)/LithOS3/lithos_c/inc
 
 ## Compiler flags
 
@@ -89,7 +90,12 @@ LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(IR)/lithos_%.ir)
 
 ## all
 
-all: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
+.PHONY: bin text
+
+all: text bin
+bin: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
+text: $(SRCDIR)/compilefs.lua
+	@cd $(SRCDIR); lua compilefs.lua
 
 ## acs/*.bin
 

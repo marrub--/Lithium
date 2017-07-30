@@ -41,13 +41,22 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       if(!world.cbiupgr[m->st])
          continue;
 
-      gui_button_preset_t btnpre = {BtnDefault, .w = 80, .h = 80};
-
-      btnpre.gfx = StrParam("%S.png",    m->name);
-      btnpre.hot = StrParam("%SSel.png", m->name);
+      gui_button_preset_t pre = {
+         .gfx      = StrParam("lgfx/UI/%S.png",    m->name),
+         .hot      = StrParam("lgfx/UI/%SSel.png", m->name),
+         .snd      = "player/cbi/buttonpress",
+         .cdef     = "j",
+         .cact     = "g",
+         .chot     = "k",
+         .cdis     = "m",
+         .font     = "cbifont",
+         .external = true,
+         .w        = 80,
+         .h        = 80
+      };
 
       __str name = Language("LITH_TXT_INFO_SHORT_%S", m->name);
-      if(Lith_GUI_Button_Id(g, i, name, m->x - 40, m->y - 40, .preset = &btnpre)) {
+      if(Lith_GUI_Button_Id(g, i, name, m->x - 40, m->y - 40, .preset = &pre)) {
          __str cn = StrParam("Lith_%S", m->name);
          ACS_GiveInventory(cn, 1);
          ACS_SetWeapon(cn);
