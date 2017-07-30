@@ -1,6 +1,6 @@
 actor Lith_StarShrapnel
 {
-   Damage (15)
+   Damage (10)
    Speed 32
    Radius 2
    Height 2
@@ -10,13 +10,12 @@ actor Lith_StarShrapnel
    
    Projectile
    +NODAMAGETHRUST
-   +SEEKERMISSILE
    +SCREENSEEKER
    
    states
    {
    Spawn:
-      BLLT M 4 bright A_SeekerMissile(0, 2, SMF_LOOK)
+      BLLT M 4 bright
       loop
    Death:
       MICX A 0 bright A_PlaySound("weapons/dark/impact", CHAN_BODY, 0.3)
@@ -35,7 +34,7 @@ actor Lith_StarShrapnelHoming : Lith_StarShrapnel
    states
    {
    Spawn:
-      BLLT M 4 bright A_SeekerMissile(0, 360, SMF_LOOK)
+      BLLT M 4 bright A_SeekerMissile(45, 360, SMF_LOOK)
       loop
    }
 }
@@ -79,7 +78,7 @@ actor Lith_StarWoosh2 : Lith_StarWoosh1
 
 actor Lith_StarProjectile
 {
-   Damage (20)
+   Damage 20
    Speed 2
    Scale 0.15
    Radius 8
@@ -90,6 +89,7 @@ actor Lith_StarProjectile
    Projectile
    +RIPPER
    +FORCERADIUSDMG
+   +SEEKERMISSILE
    
    var int user_soundtimer;
    var int user_rushtimer;
@@ -119,7 +119,7 @@ actor Lith_StarProjectile
          CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, false)/FIX,
          CallACS("Lith_CircleSpread", 45*scalex*FIX, 45*scalex*FIX, true)/FIX,
          0, CMF_TRACKOWNER|CMF_AIMDIRECTION)
-      goto DoWoosh
+      goto DoSeek
    DoHomingMissile:
       BLLT L 0 bright A_SetUserVar(user_homingshrapneltimer, 0)
       BLLT LL 0 bright A_CustomMissile("Lith_StarShrapnelHoming",
@@ -130,7 +130,11 @@ actor Lith_StarProjectile
    ScaleUp:
       BLLT L 0 bright A_SetScale(scalex * 1.01)
       goto SoundCheck
+   DoSeek:
+      BLLT L 0 bright A_SeekerMissile(0, 1, SMF_LOOK)
+      goto DoWoosh
    Rush:
+      BLLT L 0 bright A_ChangeFlag("RIPPER", false)
       BLLT L 0 bright A_ChangeVelocity(velx*1.1, vely*1.1, velz*1.1, CVF_REPLACE)
    DoWoosh:
       BLLT L 0 bright A_SpawnItemEx("Lith_StarWoosh1", 0,0,0, 4,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION)
@@ -182,7 +186,7 @@ actor Lith_Solspear
    BounceSound "weapons/dark/fire"
    BounceFactor 1
    WallBounceFactor 1
-   BounceCount 20
+   BounceCount 15
    
    Projectile
    +BRIGHT
