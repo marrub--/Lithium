@@ -8,6 +8,11 @@ actor Lith_OmegaRailDummy : Lith_Dummy
    Decal "Scorch"
 }
 
+// Replaced by ZScript if available
+actor Lith_DarkMatter
+{
+}
+
 actor Lith_BFG9000 : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_BFG9000"
