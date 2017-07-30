@@ -21,13 +21,13 @@ enum
 
 enum
 {
-   cbi_theme_min,
-   cbi_theme_green = cbi_theme_min,
+   cbi_theme_green,
    cbi_theme_rose,
    cbi_theme_umi,
    cbi_theme_ender,
    cbi_theme_orange,
    cbi_theme_grey,
+   cbi_theme_bassilla,
    cbi_theme_max
 };
 
@@ -55,7 +55,7 @@ typedef struct cbi_s
 {
    gui_state_t guistate;
    int theme, oldtheme;
-   
+
    int pruse;
 } cbi_t;
 

@@ -9,7 +9,7 @@ if(p->num == 0) {
 Category("GUI");
 Float("Horizontal cursor speed", "lith_gui_xmul", 0.1f, 2.0f);
 Float("Vertical cursor speed",   "lith_gui_ymul", 0.1f, 2.0f);
-Enum("Color Theme",              "lith_gui_theme", cbi_theme_min, cbi_theme_max-1, "%S", ThemeName(set));
+Enum("Color Theme",              "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
 if(world.grafZoneEntered)
    ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
@@ -107,13 +107,14 @@ static __str ThemeName(int num)
 {
    switch(num)
    {
-   case cbi_theme_green:  return "Green";
-   case cbi_theme_rose:   return "Rose";
-   case cbi_theme_umi:    return "Umi";
-   case cbi_theme_ender:  return "Ender";
-   case cbi_theme_orange: return "Orange";
-   case cbi_theme_grey:   return "Grey";
-   default:               return "Unknown";
+   case cbi_theme_green:    return "Green";
+   case cbi_theme_rose:     return "Rose";
+   case cbi_theme_umi:      return "Umi";
+   case cbi_theme_ender:    return "Ender";
+   case cbi_theme_orange:   return "Orange";
+   case cbi_theme_grey:     return "Grey";
+   case cbi_theme_bassilla: return "Bassilla";
+   default:                 return "Unknown";
    }
 }
 

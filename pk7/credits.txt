@@ -148,5 +148,9 @@ Ion Rifle sprites
    monkeybtm6 - Weapon rip from Disruptor
    torridGristle - Assault rifle sprite
 
+Bassilla GUI theme
+   Kurashiki - Bassilla art
+   Sgt. Shivers - Putting everything together
+
 Title screen music
    505 - Shredder (hYmns)
