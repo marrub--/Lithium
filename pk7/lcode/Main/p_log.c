@@ -169,23 +169,25 @@ void Lith_HUD_Log(player_t *p)
    if(p->getCVarI("lith_hud_showlog"))
    {
       ACS_SetHudSize(480, 300);
+      ACS_SetFont("LOGFONT");
 
       int i = 0;
       Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
       {
-         int const flags = HUDMSG_NOWRAP | HUDMSG_FADEOUT;
          fixed y;
 
-         if(p->getCVarI("lith_hud_logfromtop")) y =  20.1 + (10 * i);
-         else                                   y = 250.2 - (10 * i);
+         if(p->pclass == pclass_cybermage) y = -10;
+         else                              y = 0;
+         if(p->getCVarI("lith_hud_logfromtop")) y +=  20.1 + (10 * i);
+         else                                   y += 250.2 - (10 * i);
 
-         HudMessageF("LOGFONT", "%S", logdata->info);
-         HudMessageParams(flags, hid_logE + i, CR_GREEN, 0.1, y, TICSECOND, 0.1);
+         HudMessage("%S", logdata->info);
+         HudMessageParams(HUDMSG_NOWRAP, hid_logE + i, CR_GREEN, 0.1, y, TICSECOND);
 
          if(logdata->time > LOG_TIME - 10)
          {
-            HudMessageF("LOGFONT", "%S", logdata->info);
-            HudMessageParams(flags | HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, y, TICSECOND, 0.1);
+            HudMessage("%S", logdata->info);
+            HudMessageParams(HUDMSG_NOWRAP | HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, y, TICSECOND, 0.15);
          }
       }
    }
