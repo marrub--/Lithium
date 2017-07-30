@@ -2,6 +2,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_monster.h"
+#include "lith_hudid.h"
 
 #include <math.h>
 
@@ -45,7 +46,8 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {6, pclass_cybermage, "CPlasmaRifle",    "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
    {7, pclass_cybermage, "StarDestroyer",   "weapons/shipgun/pickup",   AT_Ammo, "Lith_CannonAmmo"},
 
-   {3, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
+   {1, pclass_cybermage, "Blade",           "MMMMHMHMMMHMMM",                                               F(wf_magic)},
+   {2, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM",                                               F(wf_magic)},
    {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired", F(wf_magic)},
 };
@@ -367,6 +369,16 @@ void Lith_ResetRifleMode()
 }
 
 //
+// Lith_Blade
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_Blade(bool hit)
+{
+   ACS_SetHudSize(800, 600);
+   DrawSprite(hit ? "lgfx/BladeHit.png" : "lgfx/Blade.png", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
+}
+
+//
 // Lith_GetWRF
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -386,7 +398,14 @@ int Lith_GetWRF(void)
       WRF_ALLOWUSER3 = 512,
       WRF_ALLOWUSER4 = 1024
    };
-   return LocalPlayer->semifrozen ? WRF_NOFIRE : 0;
+
+   player_t *p = LocalPlayer;
+   if(!p) return 0;
+
+   int flags = 0;
+   if(p->semifrozen)              flags |= WRF_NOFIRE;
+   if(p->pclass == pclass_marine) flags |= WRF_ALLOWUSER4;
+   return flags;
 }
 
 // EOF

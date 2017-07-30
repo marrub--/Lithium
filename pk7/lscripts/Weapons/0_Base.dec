@@ -28,16 +28,13 @@ actor Lith_Weapon : Weapon
    DummyFlash:
       TNT1 A 0 A_AlertMonsters
       stop
-   }
-}
-
-actor Lith_MWeapon : Lith_Weapon
-{
-   Inventory.RestrictedTo "Lith_MarinePlayer"
-   
-   states
-   {
    User4:
+      /* TODO: use this when another class uses this key
+      "####" "#" 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_marine,    "_UseKnife")
+      "####" "#" 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_cybermage, "Ready")
+      "####" "#" 0 A_Log("Lith_Weapon: the universe exploded")
+      */
+   _UseKnife:
       "####" "#" 3 offset(2, 34)
       "####" "#" 1 offset(5, 41)
       "####" "#" 1 offset(10, 58)
@@ -78,6 +75,11 @@ actor Lith_MWeapon : Lith_Weapon
       TNT1 A 1
       TNT1 A 0 A_Jump(256, "Select")
    }
+}
+
+actor Lith_MWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_MarinePlayer"
 }
 
 actor Lith_CWeapon : Lith_Weapon

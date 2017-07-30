@@ -140,10 +140,9 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    if(target)
       ACS_SetActivatorToTarget(0);
 
-   if(ACS_PlayerNumber() < 0)
-      return 0;
-
    player_t *p = LocalPlayer;
+
+   if(!p) return 0;
 
    switch(info)
    {
@@ -154,9 +153,9 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_weapon_zoom:    return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
+   case pdata_pclass:         return p->pclass;
+   default:                   return 0;
    }
-
-   return 0;
 }
 
 //

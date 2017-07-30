@@ -25,21 +25,14 @@
    Lith_ForPlayer() \
       p->giveScore(score, nomul)
 
-#define LocalPlayer (&players[ACS_PlayerNumber()])
+#define LocalPlayer \
+   (ACS_PlayerNumber() < 0 ? null : &players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
 
 
 //----------------------------------------------------------------------------
 // Types
 //
-
-enum
-{
-   pclass_marine,
-   pclass_cybermage,
-   pclass_max,
-   pclass_any = pclass_max,
-};
 
 enum
 {

@@ -68,7 +68,7 @@ actor Lith_Pistol : Lith_MWeapon
       SCOP B 1 A_WeaponReady(WRF_ALLOWRELOAD | WRF_NOBOB)
       loop
    Ready:
-      PISG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER4|CallACS("Lith_GetWRF"))
+      PISG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:

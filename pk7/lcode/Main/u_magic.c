@@ -21,6 +21,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    };
 
    static struct magic_info const minf[] = {
+      {-1,                 90, 150, "Blade"   },
       {cupg_c_slot3spell, 160,  50, "Delear"  },
       {cupg_c_slot5spell,  80, 100, "Hulgyon" },
       {cupg_c_slot6spell, 240, 100, "StarShot"},
@@ -38,7 +39,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    {
       struct magic_info const *m = &minf[i];
 
-      if(!world.cbiupgr[m->st])
+      if(m->st >= 0 && !world.cbiupgr[m->st])
          continue;
 
       gui_button_preset_t pre = {

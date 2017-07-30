@@ -31,6 +31,7 @@ enum
    weapon_c_plasma,
    weapon_c_shipgun,
 
+   weapon_c_blade,
    weapon_c_delear,
    weapon_c_hulgyon,
    weapon_c_starshot,

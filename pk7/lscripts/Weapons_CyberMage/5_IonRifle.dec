@@ -124,7 +124,7 @@ actor Lith_IonRifle : Lith_CWeapon
    states
    {
    AltReady:
-      SCOP C 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
+      SCOP C 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    Ready:
       IONG A 1 A_WeaponReady(CallACS("Lith_GetWRF"))

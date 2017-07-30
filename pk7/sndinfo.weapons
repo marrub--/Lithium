@@ -47,6 +47,12 @@ $random weapons/cfist/fire {
 }
 
 //
+// Blade
+//
+weapons/blade/slash lsounds/Blade/Slash.ogg // Monster Girl Quest
+weapons/blade/hit   lsounds/Blade/Hit.ogg   // 〃
+
+//
 // Pistol
 //
 weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor
