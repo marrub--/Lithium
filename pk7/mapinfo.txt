@@ -21,6 +21,7 @@ gameinfo
    PauseSign = "lgfx/Pause.png"
    InfoPage = "HELP"
    IntermissionCounter = true
+   IntermissionMusic = "lmusic/alchemis.it"
    QuitSound = "misc/quitsound"
    PrecacheSounds = "amb/rain", "amb/wind"
    AddEventHandlers = "Lith_Events"
