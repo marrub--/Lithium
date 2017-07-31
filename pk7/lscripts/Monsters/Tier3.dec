@@ -1,8 +1,8 @@
 actor Lith_PKTrail
 {
    Speed 14
-   Radius 4
-   Height 6
+   Radius 2
+   Height 5
    Damage 2
    RenderStyle "Add"
    Alpha 1
