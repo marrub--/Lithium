@@ -7,6 +7,20 @@ gameinfo
    PlayerClasses = "Lith_MarinePlayer", "Lith_MagePlayer"
    DimColor = "Black"
    DimAmount = 0.25
+   MenuFontColor_Title = "Green"
+   MenuFontColor_Label = "White"
+   MenuFontColor_Value = "Purple"
+   MenuFontColor_Action = "White"
+   MenuFontColor_Header = "Green"
+   MenuFontColor_Highlight = "Green"
+   MenuFontColor_Selection = "Green"
+   NoRandomPlayerClass = true
+   BorderFlat = "ZZLITHBG"
+   AdvisoryTime = 0
+   DrawReadThis = false
+   PauseSign = "lgfx/Pause.png"
+   InfoPage = "HELP"
+   IntermissionCounter = true
    QuitSound = "misc/quitsound"
    PrecacheSounds = "amb/rain", "amb/wind"
    AddEventHandlers = "Lith_Events"
@@ -117,7 +131,7 @@ map TITLEMAP "Lithium Title"
 {
    Sky1 = "LITHSKRD", 0.05
    Sky2 = "LITHSKS1"
-   Music = "lmusic/Title.ogg"
+   Music = "lmusic/Shredder.ogg"
 
    DoubleSky
 }
