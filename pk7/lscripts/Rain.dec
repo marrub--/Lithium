@@ -7,7 +7,7 @@ actor Lith_RainDrop
    Radius 2
    XScale 0.5
    YScale 2.0
-   RenderStyle Add
+   RenderStyle "Add"
    Alpha 0.25
    
    +NOTRIGGER
@@ -20,13 +20,13 @@ actor Lith_RainDrop
    states
    {
    Spawn:
-      RNDR A 0 NoDelay A_ChangeVelocity (FRandom (-2, 2), FRandom (-2, 2), FRandom (-12, -16), CVF_REPLACE)
+      RNDR A 0 nodelay A_ChangeVelocity(frandom(-2, 2), frandom(-2, 2), frandom(-12, -16), CVF_REPLACE)
    Looping:
       RNDR A 1 A_JumpIf(waterlevel > 0 || velz == 0, "Death")
       loop
    Death:
-      RNDR A 0 A_SetScale (1, 1)
-      RNDR A 0 A_ChangeVelocity (0, 0, 0, CVF_REPLACE)
+      RNDR A 0 A_SetScale(1, 1)
+      RNDR A 0 A_ChangeVelocity(0, 0, 0, CVF_REPLACE)
       RNDR BCDEFGH 3 A_FadeOut(0.0375)
       stop
    }
@@ -34,9 +34,9 @@ actor Lith_RainDrop
 
 actor Lith_BloodRainDrop : Lith_RainDrop
 {
-   RenderStyle Translucent
+   RenderStyle "Subtract"
    Alpha 0.5
-   Translation "80:111=[128,0,0]:[0,0,0]"
+   Translation "80:111=[0,64,64]:[0,128,128]"
 }
 
 actor Lith_RainDropSpawner
