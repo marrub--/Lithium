@@ -1,11 +1,11 @@
 [enu default]
 
 
-// Misc. ---------------------------------------------------------------------
+// Misc. ----------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Sword" = "sord";
 "LITH_TXT_INFO_SHORT_Gameboy" = "Game Nanhai";
 
-// Shop Weapons --------------------------------------------------------------
+// Shop Weapons ---------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Revolver" = "Revolver";
 "LITH_TXT_INFO_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
 "LITH_TXT_INFO_DESCR_Revolver" =
@@ -52,7 +52,7 @@
    "damage over rate of fire. The D.640's design comes from several older models "
    "designed by MDDO, as well as newer components patented by Semaphore Inc.";
 
-// Cyber-Mage ----------------------------------------------------------------
+// Cyber-Mage -----------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_CFist" = "Spell Selector";
 "LITH_TXT_INFO_SHORT_Mateba" = "Mateba";
 "LITH_TXT_INFO_TITLE_Mateba" = "Mateba R119";
@@ -174,7 +174,7 @@
    "missions, including the West Steel Corp. incident, where it was used to "
    "destroy several micro-fighters and around 195 personnel aboard the enemy ship.";
 
-// Marine --------------------------------------------------------------------
+// Marine ---------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Fist" = "Knife";
 "LITH_TXT_INFO_SHORT_ChargeFist" = "Charge Fist";
 "LITH_TXT_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";

@@ -13,9 +13,6 @@
 static bool enemycheckfinished;
 static bool gsinit;
 
-static int lmvar upgradesspawned[countof(world.cbiupgr)];
-static int lmvar upgradesspawnediter;
-
 
 //----------------------------------------------------------------------------
 // Extern Objects
@@ -176,34 +173,6 @@ int Lith_GetWorldData(int info)
    return 0;
 }
 
-//
-// Lith_PickupCBIItem
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_PickupCBIItem(int num)
-{
-   static void Lith_InstallCBIItem(int num);
-
-   player_t *p = LocalPlayer;
-
-   switch(p->pclass)
-   {
-   case pclass_marine:    p->log(Language("LITH_TXT_LOG_CBI_M%i", num)); break;
-   case pclass_cybermage: p->log(Language("LITH_TXT_LOG_CBI_C%i", num)); break;
-   }
-
-   Lith_InstallCBIItem(num);
-}
-
-//
-// Lith_CBIItemWasSpawned
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_CBIItemWasSpawned(int num)
-{
-   upgradesspawned[upgradesspawnediter++] = num;
-}
-
 
 //-----------------------------------------------------------------------------
 // Static Functions
@@ -313,47 +282,6 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
          break;
       }
    }
-
-#if 0
-   // Let's at least be nice to the player.
-   ACS_SetPlayerProperty(1, true, PROP_TOTALLYFROZEN);
-   ACS_SetPlayerProperty(1, true, PROP_NOTARGET);
-   ACS_SetPlayerProperty(1, true, PROP_BUDDHA);
-
-   ACS_FadeTo(0, 0, 0, 0.5, 1);
-   ACS_AmbientSound("misc/chat", 127);
-
-   for(;;)
-   {
-      PrintBold("\CjThe monster mod you are using is \Cgnot compatible\Cj "
-         "with Lithium.\n\CjPlease unload it.\n\n\CjIf you are \Cnabsolutely "
-         "certain\Cj that it will work, or if you don't care,\n\Cjopen the "
-         "console and type \"\Cdlith_sv_monsters_ok true\Cj\".");
-
-      ACS_Delay(35);
-   }
-#endif
-}
-
-//
-// Lith_InstallCBIItem
-//
-static void Lith_InstallCBIItem(int num)
-{
-   if(world.cbiupgr[num])
-      return;
-
-   switch(num)
-   {
-   #define Case(n) case n: world.cbiupgr[n-1] = true
-   Case(1); world.cbiperf += 20; break;
-   Case(2); world.cbiperf += 40; break;
-   Case(3);                      break;
-   Case(4);                      break;
-   Case(5);                      break;
-   Case(6);                      break;
-   #undef Case
-   }
 }
 
 //
@@ -364,15 +292,10 @@ static void SpawnBoss()
 {
    ACS_Delay(1); // Delay another tic for monster spawners.
 
-   Lith_ForPlayer()
-   {
-      if(p->active)
-      {
-         extern void Lith_SpawnBosses(score_t sum);
-
-         Lith_SpawnBosses(p->scoresum);
-         break;
-      }
+   Lith_ForPlayer() {
+      extern void Lith_SpawnBosses(score_t sum);
+      Lith_SpawnBosses(p->scoresum);
+      break;
    }
 }
 
@@ -446,7 +369,7 @@ static void GetDebugInfo(void)
 {
    bool all = ACS_GetCVar("__lith_debug_all");
 
-   world.dbgLevel = ACS_GetCVar("__lith_debug_level");
+   world.dbgLevel =        ACS_GetCVar("__lith_debug_level");
    world.dbgItems = all || ACS_GetCVar("__lith_debug_items");
    world.dbgBIP   = all || ACS_GetCVar("__lith_debug_bip");
    world.dbgScore = all || ACS_GetCVar("__lith_debug_score");
@@ -503,6 +426,7 @@ static void GSInit(void)
    extern void Lith_GSInit_Upgrade(void);
    extern void Lith_GSInit_Weapon(void);
    extern void Lith_GSInit_Dialogue(void);
+   extern void Lith_InstallCBIItem(int num);
 
    UpdateGame();
    GetDebugInfo();
@@ -523,7 +447,7 @@ static void GSInit(void)
 
       world.cbiperf = 10;
       if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
-         for(int i = 1; i < 7; i++)
+         for(int i = 0; i < cupg_max; i++)
             Lith_InstallCBIItem(i);
 
       gsinit = true;
@@ -677,8 +601,7 @@ static void Lith_World(void)
       int kills   = world.mapkills;
       int items   = world.mapitems;
 
-      if(secrets > prevsecrets)
-      {
+      if(secrets > prevsecrets) {
          int delta = secrets - prevsecrets;
          Lith_GiveAllScore(9000 * delta, true);
          world.secretsfound += delta;
@@ -691,11 +614,11 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
 
-      if(enemycheckfinished)
+      if(enemycheckfinished) {
+         extern void DmonDebugInfo(void);
          ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
-
-      extern void DmonDebugInfo(void);
-      DmonDebugInfo();
+         DmonDebugInfo();
+      }
 
       ACS_Delay(1);
       world.ticks++;
@@ -708,13 +631,12 @@ static void Lith_World(void)
 [[__call("ScriptS"), __script("Unloading")]]
 static void Lith_WorldUnload(void)
 {
+   extern void Lith_InstallSpawnedCBIItems(void);
    world.unloaded = true;
 
-   for(int i = 0; i < upgradesspawnediter; i++)
-      Lith_InstallCBIItem(upgradesspawned[i]);
+   Lith_InstallSpawnedCBIItems();
 
-   Lith_ForPlayer()
-   {
+   Lith_ForPlayer() {
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);
       p->closeGUI();

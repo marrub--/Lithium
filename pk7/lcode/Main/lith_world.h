@@ -17,26 +17,6 @@ enum
 
 enum
 {
-   cupg_hasupgr1,
-   cupg_hasupgr2,
-   cupg_armorinter,
-   cupg_weapninter,
-   cupg_weapninte2,
-   cupg_rdistinter
-};
-
-enum
-{
-   cupg_c_slot5spell,
-   cupg_c_slot6spell,
-   cupg_c_armorinter,
-   cupg_c_slot3spell,
-   cupg_c_weapninte2,
-   cupg_c_rdistinter,
-};
-
-enum
-{
    CANONTIME_FULL,
    CANONTIME_SHORT,
    CANONTIME_DATE
@@ -84,22 +64,18 @@ typedef struct worldinfo_s
    property begAngles      {call: Lith_BeginAngles()}
    property addAngles      {call: Lith_AddAngle()}
 
-   bool singleplayer;
-   int mapscleared;
-   int prevcluster;
-   int mapseed;
-   bool unloaded;
-   bool islithmap;
-   bool enemycompat;
-
-   int secretsfound;
+   bool   singleplayer;
+   int    mapscleared;
+   int    prevcluster;
+   int    mapseed;
+   bool   unloaded;
+   bool   islithmap;
+   bool   enemycompat;
+   int    secretsfound;
    double scoremul;
-
-   long ticks;
-
-   bool scoregolf;
-
-   int game;
+   long   ticks;
+   bool   scoregolf;
+   int    game;
 
    // Bosses
    bool boss[3][3];
@@ -118,7 +94,7 @@ typedef struct worldinfo_s
 
    // CBI global information
    int  cbiperf;
-   bool cbiupgr[6];
+   bool cbiupgr[cupg_max];
 
    // Mod compat
    bool legendoom;
@@ -135,7 +111,7 @@ typedef struct worldinfo_s
    int decvars[8];
 
    // Debugging
-   int dbgLevel;
+   int  dbgLevel;
    bool dbgItems  : 1;
    bool dbgBIP    : 1;
    bool dbgScore  : 1;

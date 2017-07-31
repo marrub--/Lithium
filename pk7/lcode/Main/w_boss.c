@@ -123,8 +123,7 @@ void Lith_PhantomTarget()
       int tid = ACS_ActivatorTID();
       bool unique;
 
-      if(!tid)
-      {
+      if(!tid) {
          ACS_Thing_ChangeTID(0, tid = ACS_UniqueTID());
          unique = true;
       }
@@ -148,8 +147,7 @@ void Lith_PhantomTeleport()
 
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
-   for(int i = 0; i < 15; i++)
-   {
+   for(int i = 0; i < 15; i++) {
       ACS_GiveInventory("Lith_PhantomTeleport", 1);
       ACS_Delay(1);
    }
@@ -300,8 +298,7 @@ void Lith_TriggerBoss(int num, int phase)
 
    LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %i phase %i", num, phase);
 
-   if(firstboss)
-   {
+   if(firstboss) {
       firstboss = false;
       Lith_ForPlayer()
          p->deliverMail("Phantom");

@@ -20,11 +20,22 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       __str name;
    };
 
+   // clockwise:
+   // 1: 160, 190
+   // 2: 100, 160
+   // 3: 80,  100
+   // 4: 160,  50
+   // 5: 240, 100
+   // 6: 240, 160
+   // 7: 160, 120
    static struct magic_info const minf[] = {
-      {-1,                 90, 150, "Blade"   },
-      {cupg_c_slot3spell, 160,  50, "Delear"  },
-      {cupg_c_slot5spell,  80, 100, "Hulgyon" },
-      {cupg_c_slot6spell, 240, 100, "StarShot"},
+      {-1,                160, 190, "Blade"   },
+      {-1,                100, 160, "Delear"  },
+      {cupg_c_slot3spell,  80, 100, "Fire"    },
+      {cupg_c_slot4spell, 160,  50, "Slot4"   },
+      {cupg_c_slot5spell, 240, 100, "Hulgyon" },
+      {cupg_c_slot6spell, 240, 160, "StarShot"},
+      {cupg_c_slot7spell, 160, 120, "Cercle"  },
    };
 
    gui_state_t *g = &UData.gst;

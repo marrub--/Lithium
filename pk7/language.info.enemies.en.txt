@@ -1,7 +1,7 @@
 [enu default]
 
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_DESCR_RankThreatTest" =
    "Rank:\n"
    "   \cuNon-resident\n"
@@ -18,7 +18,7 @@
    "   \cgA\n"
    "   \crE";
 
-// Non-residents -------------------------------------------------------------
+// Non-residents --------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_ZombieMan" = "Former Human";
 "LITH_TXT_INFO_TITLE_ZombieMan" = "Possessed Human Rifleman";
 "LITH_TXT_INFO_DESCR_ZombieMan" =
@@ -47,7 +47,7 @@
    "\n"
    "Corporals are generally terrible at aiming, but put out so much lead that you're bound to get hit. A lot. ... By the way, why don't these guys drop their chainguns?";
 
-// Subordinates
+// Subordinates ---------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Imp" = "Hell Trooper";
 "LITH_TXT_INFO_TITLE_Imp" = "Hell Trooper \"Imp\"";
 "LITH_TXT_INFO_DESCR_Imp" =
@@ -76,7 +76,7 @@
    "\n"
    "They tend to not make a sound until they lunge at you, so be sure to keep an eye out for cracks in the air around you.";
 
-// Residents -----------------------------------------------------------------
+// Residents ------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_LostSoul" = "Lost Soul";
 "LITH_TXT_INFO_TITLE_LostSoul" = "$LITH_TXT_INFO_SHORT_LostSoul";
 "LITH_TXT_INFO_DESCR_LostSoul" =
@@ -114,7 +114,7 @@
    "\n"
    "A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an unknown reason. They're quite hearty, and their attacks are fairly deadly, but generally the Cacodemon is not a monster to fear.";
 
-// Nobles --------------------------------------------------------------------
+// Nobles ---------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_HellKnight" = "Hell Knight";
 "LITH_TXT_INFO_TITLE_HellKnight" = "$LITH_TXT_INFO_SHORT_HellKnight";
 "LITH_TXT_INFO_DESCR_HellKnight" =
@@ -143,7 +143,7 @@
    "\n"
    "The Revenant is revered among demons for its honor serving after death.";
 
-// Tyrants -------------------------------------------------------------------
+// Tyrants --------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_PainElemental" = "Pain Elemental";
 "LITH_TXT_INFO_TITLE_PainElemental" = "Sin of Bellona, \"Pain Elemental\"";
 "LITH_TXT_INFO_DESCR_PainElemental" =
@@ -181,7 +181,7 @@
    "\n"
    "Equipped with a self-cooling rocket propelled grenade launcher on their left arm, a cybernetic hoof, and height twice that of a normal man. The Cyber-Demon is an extremely cruel, warmongering beast that will destroy any target without prejudice for the glory of Hell.";
 
-// ??? -----------------------------------------------------------------------
+// ??? ------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Phantom" = "Phantom";
 "LITH_TXT_INFO_TITLE_Phantom" = "$LITH_TXT_INFO_SHORT_Phantom";
 "LITH_TXT_INFO_DESCR_Phantom" =
@@ -192,7 +192,7 @@
    "\n"
    "Extreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.";
 
-// Overlord ------------------------------------------------------------------
+// Overlord -------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_IconOfSin" = "Icon of Sin";
 "LITH_TXT_INFO_TITLE_IconOfSin" = "Overlord of Hell, Icon of Sin";
 "LITH_TXT_INFO_DESCR_IconOfSin" =

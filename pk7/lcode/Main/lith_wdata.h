@@ -7,3 +7,23 @@ enum
    wdata_grafzone,
 };
 
+enum
+{
+   cupg_weapninter,
+   cupg_hasupgr1,
+   cupg_armorinter,
+   cupg_hasupgr2,
+   cupg_weapninte2,
+   cupg_rdistinter,
+   cupg_max
+};
+
+enum
+{
+   cupg_c_slot3spell,
+   cupg_c_slot4spell,
+   cupg_c_slot5spell,
+   cupg_c_slot6spell,
+   cupg_c_slot7spell,
+   cupg_c_rdistinter,
+};

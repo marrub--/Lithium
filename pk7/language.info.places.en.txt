@@ -1,7 +1,7 @@
 [enu default]
 
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_AetosVi" = "Aetos Vi";
 "LITH_TXT_INFO_TITLE_AetosVi" = "$LITH_TXT_INFO_SHORT_AetosVi";
 "LITH_TXT_INFO_DESCR_AetosVi" =
@@ -15,7 +15,7 @@
    "Then, of course, the expeditioners were attacked by natives. "
    "But that's fine details.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Algidistari" = "Algidistari";
 "LITH_TXT_INFO_TITLE_Algidistari" = "$LITH_TXT_INFO_SHORT_Algidistari";
 "LITH_TXT_INFO_DESCR_Algidistari" =
@@ -28,7 +28,7 @@
    "are semi-habitable, thus becoming quite suitable for mages of the "
    "\chCaeruleum\c- mode to test magic on.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_ChAri" = "Ch'ari";
 "LITH_TXT_INFO_TITLE_ChAri" = "$LITH_TXT_INFO_SHORT_ChAri";
 "LITH_TXT_INFO_DESCR_ChAri" =
@@ -45,7 +45,7 @@
    "Its inhabitants include fish and plant life, as well as land-dwelling beasts "
    "such as giant mammoth-like creatures and the two-legged Falx.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_DurlaPrime" = "Durla Prime";
 "LITH_TXT_INFO_TITLE_DurlaPrime" = "$LITH_TXT_INFO_SHORT_DurlaPrime";
 "LITH_TXT_INFO_DESCR_DurlaPrime" =
@@ -60,7 +60,7 @@
    "The planet is extremely similar to Earth, even having grass and trees that "
    "mostly resemble their earthly counterparts.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Earth" = "Earth";
 "LITH_TXT_INFO_TITLE_Earth" = "$LITH_TXT_INFO_SHORT_Earth";
 "LITH_TXT_INFO_DESCR_Earth" =
@@ -74,7 +74,7 @@
    "By 1000 NE, most of the population on Earth had moved to other inhabitable "
    "planets, but still a large population remains on the blue planet.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Hell" = "Hell";
 "LITH_TXT_INFO_TITLE_Hell" = "$LITH_TXT_INFO_SHORT_Hell";
 "LITH_TXT_INFO_DESCR_Hell" =
@@ -87,7 +87,7 @@
    "energy from suffering and death, possibly an abstract power like that "
    "previously found on Earth, thousands of years ago.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Mars" = "Mars";
 "LITH_TXT_INFO_TITLE_Mars" = "$LITH_TXT_INFO_SHORT_Mars";
 "LITH_TXT_INFO_DESCR_Mars" =
@@ -101,7 +101,7 @@
    "Still to this day many companies on Earth -- and even some intra-galactic "
    "corporations like OFMD -- use Mars as a place to house autonomous work.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_OmicronXevv" = "Omicron Xevv";
 "LITH_TXT_INFO_TITLE_OmicronXevv" = "$LITH_TXT_INFO_SHORT_OmicronXevv";
 "LITH_TXT_INFO_DESCR_OmicronXevv" =
@@ -112,7 +112,7 @@
    "Omicron Xevv has been used by many small companies throughout the years to "
    "have a secluded, free place to do research, surveillance and development.";
 
-// ---------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_SuperDimension" = "Super Dimension";
 "LITH_TXT_INFO_TITLE_SuperDimension" = "$LITH_TXT_INFO_SHORT_SuperDimension";
 "LITH_TXT_INFO_DESCR_SuperDimension" =

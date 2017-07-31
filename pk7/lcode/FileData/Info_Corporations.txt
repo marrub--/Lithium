@@ -1,4 +1,4 @@
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_AllPoint | AllPoint
 == LITH_TXT_INFO_TITLE_AllPoint | AllPoint Precision Firearms
 == LITH_TXT_INFO_IMAGE_AllPoint | lgfx/BIP/AllPoint.png
@@ -14,7 +14,7 @@ you want me to talk about our weapons, I'll talk about all of our fine
 armaments; but if you just want me to talk about our 'best-sellers', maybe you
 should just go back to window shopping."
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_AOF | A.O.F
 == LITH_TXT_INFO_TITLE_AOF | A.O.F Inc.
 == LITH_TXT_INFO_IMAGE_AOF | lgfx/BIP/AOF.png
@@ -28,7 +28,7 @@ governments, they finally made it back onto the market in 1370.
 
 A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_AOF2 | $LITH_TXT_INFO_SHORT_AOF
 == LITH_TXT_INFO_TITLE_AOF2 | A.O.F Inc. [Bishop-Class Clearance]
 == LITH_TXT_INFO_IMAGE_AOF2 | $LITH_TXT_INFO_IMAGE_AOF
@@ -44,7 +44,7 @@ corporation.
 A.O.F Inc. also mass produces ammunition for energy weapons, robotics and
 modifications for existing weapons.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Cid | Cid
 == LITH_TXT_INFO_TITLE_Cid | $LITH_TXT_INFO_SHORT_Cid
 == LITH_TXT_INFO_IMAGE_Cid | lgfx/BIP/Cid.png
@@ -56,7 +56,7 @@ donate to several charities on Earth.
 This group has gone under several aliases over the past 200 years, and is one
 of the strongest, longest standing black market groups ever.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Facer | Facer
 == LITH_TXT_INFO_TITLE_Facer | $LITH_TXT_INFO_SHORT_Facer
 @@ LITH_TXT_INFO_DESCR_Facer
@@ -71,7 +71,7 @@ off as a civilian hunting weapons seller.
 
 The company was resigned in 2480 after the death of its remaining founder.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_KSKK | KSKK
 == LITH_TXT_INFO_TITLE_KSKK | Kazami Sensou Kenkyuu Kaihatsu GK
 == LITH_TXT_INFO_IMAGE_KSKK | lgfx/BIP/KSKK.png
@@ -85,7 +85,7 @@ Thanks to connections between OFMD and the Kazami government (from the
 circumstances of this operation,) KSKK has agreed to re-enter production of
 their more useful creations.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_MDDO | MDDO
 == LITH_TXT_INFO_TITLE_MDDO | Maxim-Danil Defense Org
 @@ LITH_TXT_INFO_DESCR_MDDO
@@ -95,7 +95,7 @@ for military and paramilitary groups alike.
 
 De-funded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Newvec | Newvec
 == LITH_TXT_INFO_TITLE_Newvec | Newvec Armory Incorporated
 @@ LITH_TXT_INFO_DESCR_Newvec
@@ -104,7 +104,7 @@ don't have much reputation as of now, they have a few very strong backers
 providing them funding. Newvec mostly produces weapons on commission, and only
 sells weapons to the public via online shipping.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_OFMD | OFMD
 == LITH_TXT_INFO_TITLE_OFMD | Optic Fiber Maxim-Danil
 == LITH_TXT_INFO_IMAGE_OFMD | lgfx/BIP/OFMD.png
@@ -119,7 +119,7 @@ emitting themselves from another dimensional plane.
 For now, OFMD are your employers, and supply you with Score, weaponry and
 cyber-tech.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Omakeda | Omakeda
 == LITH_TXT_INFO_TITLE_Omakeda | Omakeda Defense Co.
 == LITH_TXT_INFO_IMAGE_Omakeda | lgfx/BIP/Omakeda.png
@@ -131,7 +131,7 @@ mercenaries around the world use their armaments as well.
 Known for their innovative firearm design, Omakeda is one of the highest
 profiting, most popular firearms manufacturers on Earth.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Semaphore | Semaphore, Inc.
 == LITH_TXT_INFO_TITLE_Semaphore | Semaphore, Incorporated
 == LITH_TXT_INFO_IMAGE_Semaphore | lgfx/BIP/Semaphore.png
@@ -147,7 +147,7 @@ While they mainly produce weaponry made for equipping space ships, Semaphore
 have also produced small-batch infantry weapons for gauging interest and
 profitability.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_Sym43 | SYM4.3
 == LITH_TXT_INFO_TITLE_Sym43 | SYM4.3 WEAPONS INCORPORATED
 == LITH_TXT_INFO_IMAGE_Sym43 | lgfx/BIP/Sym43.png
@@ -162,7 +162,7 @@ three quarters of all recorded mercenary, military and government bodies.
 Weapons confirmed to be made by them have appeared in countless historic
 battles, having existed for over 700 years now.
 
-##----------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 == LITH_TXT_INFO_SHORT_UnrealArms | Unreal Arms
 == LITH_TXT_INFO_TITLE_UnrealArms | $LITH_TXT_INFO_SHORT_UnrealArms
 @@ LITH_TXT_INFO_DESCR_UnrealArms

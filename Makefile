@@ -79,7 +79,8 @@ MAIN_SOURCES= \
 	$(SRC)/w_dialogue.c \
 	$(SRC)/p_dialogue.c \
 	$(SRC)/w_monster.c \
-	$(SRC)/w_dmon.c
+	$(SRC)/w_dmon.c \
+	$(SRC)/w_cbi.c
 
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
 MAIN_HEADERS=$(wildcard $(INC)/*.h)

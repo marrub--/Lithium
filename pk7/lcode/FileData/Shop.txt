@@ -63,3 +63,5 @@ A game playing system, containing several old titles.
 == LITH_TXT_SHOP_TITLE_DivSigil | Div. Sigil
 @@ LITH_TXT_SHOP_DESCR_DivSigil
 A mistake of the universe.
+
+## EOF
