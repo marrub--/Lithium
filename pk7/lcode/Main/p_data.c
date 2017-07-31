@@ -275,11 +275,10 @@ void Lith_ResetPlayer(player_t *p)
       }
    }
 
-   switch(p->pclass)
-   {
-   case pclass_marine:    p->bip.unlock("Pistol"); break;
-   case pclass_cybermage: p->bip.unlock("Mateba"); break;
-   }
+   p->bip.unlock("Pistol");
+   p->bip.unlock("Mateba");
+   p->bip.unlock("Blade");
+   p->bip.unlock("Delear");
 }
 
 

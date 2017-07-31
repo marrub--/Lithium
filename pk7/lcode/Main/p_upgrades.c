@@ -329,7 +329,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
          p->upgrademap.elem.data[j].value   = upgr;
 
          if(upgr->info->cost == 0 || world.dbgUpgr)
-            upgr->setOwned(p);
+            Lith_UpgrBuy(p, upgr, true);
 
          j++;
       }

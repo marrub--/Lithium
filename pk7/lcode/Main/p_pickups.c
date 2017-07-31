@@ -115,6 +115,13 @@ static __str names_c_mateba[] = {
    "Mercury Poisoning"
 };
 
+static __str names_c_rifle[] = {
+   "Sock Rifle",
+   "Shock Stifle",
+   "Stock Knifle",
+   "ShohS RifiR",
+};
+
 static __str names_c_smg[] = {
    "Chug Smug",
    "Real Supersand",
@@ -198,13 +205,14 @@ static struct pickupname_s const pickupnames[weapon_max] = {
    [weapon_bfg]        = name(names_bfg),
    [weapon_c_fist]     = name(names_unknown),
    [weapon_c_mateba]   = name(names_c_mateba),
+   [weapon_c_rifle]    = name(names_c_rifle),
    [weapon_c_spas]     = name(names_shotgun),
-   [weapon_c_delear]   = name(names_c_delear),
    [weapon_c_smg]      = name(names_c_smg),
    [weapon_c_sniper]   = name(names_c_sniper),
    [weapon_c_plasma]   = name(names_plasma),
    [weapon_c_starshot] = name(names_c_starshot),
    [weapon_c_shipgun]  = name(names_c_shipgun),
+   [weapon_c_delear]   = name(names_c_delear),
 };
 
 // Flags
@@ -326,17 +334,17 @@ static size_t const uncertaintynum = countof(uncertainty);
 static void Lith_StupidPickup(player_t *p, int weapon)
 {
    struct pickupname_s const *names = &pickupnames[weapon];
-   
+
    int ifmt  = ACS_Random(0, pickupfmtnum   - 1);
    int iname = ACS_Random(1, names->num     - 1);
    int iunc  = ACS_Random(0, uncertaintynum - 1);
-   
+
    if(pickupfmt[ifmt].flag & 2)
       ifmt = ACS_Random(0, pickupfmtnum - 1);
-   
+
    __str fmt  = StrParam("> %S", pickupfmt[ifmt].fmt);
    int   flag = pickupfmt[ifmt].flag;
-   
+
    if(flag & 1 && flag & 4)
       p->log(fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
    else if(flag & 1)
