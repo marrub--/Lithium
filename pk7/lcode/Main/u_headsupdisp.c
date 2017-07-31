@@ -59,36 +59,47 @@ static void HUD_Ammo(player_t *p)
    invweapon_t  const *wep  = p->weapon.cur;
    weaponinfo_t const *info = wep->info;
 
-   __str typegfx;
+   __str typegfx = null;
    __str typebg;
 
    int y;
 
-   if(wep->ammotype == AT_Mag)
+   if(p->getCVarI("lith_hud_showweapons")) {
+      typebg = "lgfx/HUD/SplitRight.png";
+      y = 14;
+   } else {
+      typebg = "lgfx/HUD/SplitFront.png";
+      y = 0;
+   }
+
+   if(wep->ammotype & AT_NMag)
    {
-      int max = ACS_GetMaxInventory(0, wep->ammoclass);
-      int cur = ACS_CheckInventory(wep->ammoclass);
+      int max = ACS_GetMaxInventory(0, wep->magclass);
+      int cur = ACS_CheckInventory(wep->magclass);
 
       typegfx = "lgfx/HUD/MAG.png";
-
       HudMessageF("LHUDFONT", "%i/%i", max - cur, max);
+      HudMessagePlain(hid_ammo1, 224.1, 190.0-y, TICSECOND);
    }
-   else if(wep->ammotype == AT_Ammo)
+
+   if(wep->ammotype & AT_Ammo)
    {
+      int x = 0;
+
+      if(wep->ammotype & AT_NMag) {
+         DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg2, 220.2, 199.2-y, TICSECOND);
+         x = -59;
+      }
+
       typegfx = "lgfx/HUD/AMMO.png";
-
       HudMessageF("LHUDFONT", "%i", ACS_CheckInventory(wep->ammoclass));
+      HudMessagePlain(hid_ammo2, x+224.1, 190.0-y, TICSECOND);
    }
-   else
-      return;
 
-   if(p->getCVarI("lith_hud_showweapons")) {y = 14; typebg = "lgfx/HUD/SplitRight.png";}
-   else                                    {y = 0;  typebg = "lgfx/HUD/SplitFront.png";}
-
-   HudMessagePlain(hid_ammo, 224.1, 190.0 - y, TICSECOND);
+   if(!typegfx) return;
 
    DrawSpritePlain(typebg, hid_ammotypebg, 320.2, 199.2, TICSECOND);
-   DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg, 279.2, 199.2 - y, TICSECOND);
+   DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg1, 279.2, 199.2-y, TICSECOND);
 
    DrawSpritePlain(typegfx, hid_ammotype, 282.1, 197.2, TICSECOND);
 }

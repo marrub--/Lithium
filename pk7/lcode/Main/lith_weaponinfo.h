@@ -9,9 +9,10 @@
 
 enum
 {
-   AT_None,
-   AT_Mag,
-   AT_Ammo
+   AT_None = 0,
+   AT_NMag = 1 << 0,
+   AT_Ammo = 1 << 1,
+   AT_AMag = AT_NMag | AT_Ammo,
 };
 
 enum
@@ -27,6 +28,7 @@ typedef struct weaponinfo_s
    __str pickupsound;
    int defammotype;
    __str defammoclass;
+   __str defmagclass;
    __str classname;
    int type;
    int flags;
@@ -39,6 +41,7 @@ typedef struct invweapon_s
    int autoreload;
    int ammotype;
    __str ammoclass;
+   __str magclass;
 } invweapon_t;
 
 typedef struct weapondata_s

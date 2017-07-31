@@ -13,44 +13,49 @@
 // Extern Objects
 //
 
+#define A(a) "Lith_" a "Ammo"
+#define M(a) "Lith_" a "ShotsFired"
+#define P(a) "weapons/" a "/pickup"
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
-// {S, pclass_type,      "Type-----------", "Pickup Sound-----------", AT_Type, "Ammo Class------------"[, flags]},
-   {0, pclass_any,       null,              "MMMMHMHMMMHMMM"},
+   {0, pclass_any, null, "MMMMHMHMMMHMMM"},
 
    // All-class Weapons
-   {1, pclass_any,       "ChargeFist",      "weapons/cfist/pickup"},
-   {2, pclass_any,       "Revolver",        "weapons/revolver/pickup",  AT_Mag,  "Lith_RevolverShotsFired"},
-   {3, pclass_any,       "LazShotgun",      "weapons/lshotgun/pickup"},
-   {4, pclass_marine,    "SniperRifle",     "weapons/sniper/pickup",    AT_Mag,  "Lith_SniperShotsFired"},
-   {5, pclass_any,       "MissileLauncher", "weapons/missile/pickup",   AT_Ammo, "Lith_RocketAmmo"},
-   {6, pclass_any,       "PlasmaDiffuser",  "weapons/plasdiff/pickup",  AT_Ammo, "Lith_PlasmaAmmo"},
+   {1, pclass_any, "ChargeFist",      P("cfist"),    AT_None,                          },
+   {2, pclass_any, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
+   {3, pclass_any, "LazShotgun",      P("lshotgun"), AT_None,                          },
+   {4, pclass_any, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
+   {5, pclass_any, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
+   {6, pclass_any, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
 
    // Marine Weapons
-   {1, pclass_marine,    "Fist",            "MMMMHMHMMMHMMM"},
-   {2, pclass_marine,    "Pistol",          "weapons/pistol/pickup",    AT_Mag,  "Lith_PistolShotsFired"},
-   {3, pclass_marine,    "Shotgun",         "weapons/shotgun/pickup"},
-   {3, pclass_marine,    "SuperShotgun",    "weapons/ssg/pickup",       AT_Ammo, "Lith_ShellAmmo"},
-   {4, pclass_marine,    "CombatRifle",     "weapons/rifle/pickup",     AT_Mag,  "Lith_RifleShotsFired"},
-   {5, pclass_marine,    "GrenadeLauncher", "weapons/rocket/pickup",    AT_Ammo, "Lith_RocketAmmo"},
-   {6, pclass_marine,    "PlasmaRifle",     "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
-   {7, pclass_marine,    "BFG9000",         "weapons/cannon/pickup",    AT_Ammo, "Lith_CannonAmmo"},
+   {1, pclass_marine, "Fist",            "MMMMHMHMMMHMMM", AT_None,            },
+   {2, pclass_marine, "Pistol",          P("pistol"),      AT_NMag, M("Pistol")},
+   {3, pclass_marine, "Shotgun",         P("shotgun"),     AT_None,            },
+   {3, pclass_marine, "SuperShotgun",    P("ssg"),         AT_Ammo, A("Shell") },
+   {4, pclass_marine, "CombatRifle",     P("rifle"),       AT_NMag, M("Rifle") },
+   {5, pclass_marine, "GrenadeLauncher", P("rocket"),      AT_Ammo, A("Rocket")},
+   {6, pclass_marine, "PlasmaRifle",     P("plasma"),      AT_Ammo, A("Plasma")},
+   {7, pclass_marine, "BFG9000",         P("cannon"),      AT_Ammo, A("Cannon")},
 
    // Cyber-Mage Weapons
-   {1, pclass_cybermage, "CFist",           "YOUSONOFABITCH"},
-   {2, pclass_cybermage, "Mateba",          "weapons/mateba/pickup",    AT_Mag,  "Lith_MatebaShotsFired"},
-   {3, pclass_cybermage, "ShockRifle",      "weapons/erifle/pickup",    AT_Mag,  "Lith_ShockRifleShotsFired"},
-   {3, pclass_cybermage, "SPAS",            "weapons/cshotgun/pickup",  AT_Ammo, "Lith_ShellAmmo"},
-   {4, pclass_cybermage, "SMG",             "weapons/smg/pickup",       AT_Mag,  "Lith_SMGShotsFired"},
-   {5, pclass_cybermage, "IonRifle",        "weapons/ionrifle/pickup",  AT_Ammo, "Lith_RocketAmmo"},
-   {6, pclass_cybermage, "CPlasmaRifle",    "weapons/plasma/pickup",    AT_Ammo, "Lith_PlasmaAmmo"},
-   {7, pclass_cybermage, "StarDestroyer",   "weapons/shipgun/pickup",   AT_Ammo, "Lith_CannonAmmo"},
+   {1, pclass_cybermage, "CFist",         "YOUSONOFABITCH", AT_None,                           },
+   {2, pclass_cybermage, "Mateba",        P("mateba"),      AT_NMag, M("Mateba")               },
+   {3, pclass_cybermage, "ShockRifle",    P("erifle"),      AT_NMag, M("ShockRifle")           },
+   {3, pclass_cybermage, "SPAS",          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
+   {4, pclass_cybermage, "SMG",           P("smg"),         AT_NMag, M("SMG")                  },
+   {5, pclass_cybermage, "IonRifle",      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
+   {6, pclass_cybermage, "CPlasmaRifle",  P("plasma"),      AT_Ammo, A("Plasma")               },
+   {7, pclass_cybermage, "StarDestroyer", P("shipgun"),     AT_Ammo, A("Cannon")               },
 
-   {1, pclass_cybermage, "Blade",           "MMMMHMHMMMHMMM",                                               F(wf_magic)},
-   {2, pclass_cybermage, "Delear",          "MMMMHMHMMMHMMM",                                               F(wf_magic)},
-   {5, pclass_cybermage, "Hulgyon",         "MMMMHMHMMMHMMM",                                               F(wf_magic)},
-   {6, pclass_cybermage, "StarShot",        "MMMMHMHMMMHMMM",           AT_Mag,  "Lith_StarShotShotsFired", F(wf_magic)},
+   {1, pclass_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {2, pclass_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
+   {5, pclass_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {6, pclass_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
 };
+#undef A
+#undef M
+#undef P
 #undef F
 
 
@@ -259,12 +264,13 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
+      wep->magclass  = info->defmagclass;
 
       switch(i)
       {
       case weapon_shotgun:
          if(p->getUpgr(UPGR_GaussShotty)->active) {
-            wep->ammotype  = AT_Mag;
+            wep->ammotype  = AT_NMag;
             wep->ammoclass = "Lith_GaussShotsFired";
          }
          break;
@@ -273,6 +279,10 @@ void Lith_PlayerUpdateWeapon(player_t *p)
             wep->ammoclass = "Lith_SMGShotsFired2";
          break;
       }
+
+      // Set magazine class if this weapon doesn't take ammo.
+      if(wep->ammotype & AT_NMag && !(wep->ammotype & AT_Ammo))
+         wep->magclass = wep->ammoclass;
 
       // Check for currently held weapon.
       if(!w->cur && ACS_StrICmp(p->weaponclass, info->classname) == 0)
@@ -283,10 +293,10 @@ void Lith_PlayerUpdateWeapon(player_t *p)
          ACS_TakeInventory(info->classname, 1);
 
       // Auto-reload anything else.
-      if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype == AT_Mag)
+      if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5)
-            ACS_TakeInventory(wep->ammoclass, 999);
+            ACS_TakeInventory(wep->magclass, 999);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
@@ -301,12 +311,13 @@ void Lith_PlayerUpdateWeapon(player_t *p)
 //
 void Lith_PlayerUpdateWeapons(player_t *p)
 {
-   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");)
+   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");) {
            if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
       else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
       else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
       else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
       else                ACS_TakeInventory("Lith_SMGHeat", 1);
+   }
 
    if(p->weapontype == weapon_c_delear)
       ACS_GiveInventory("Lith_DelearSpriteDisplay", 1);
@@ -319,7 +330,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
    player_t *p = LocalPlayer;
-   __str cl  = p->weapon.cur->ammoclass;
+   __str cl  = p->weapon.cur->magclass;
    fixed inv = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
    mul = mul ? mul : 1.2;
    if(ro) inv = inv * mul;
