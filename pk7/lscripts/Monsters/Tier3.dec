@@ -107,6 +107,7 @@ actor Lith_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
    PainChance 55
    Tag "$LITH_TXT_INFO_SHORT_BaronOfHell"
+   Species "Lith_HellKnight"
    BloodColor "DarkGreen"
    
    +MISSILEMORE
