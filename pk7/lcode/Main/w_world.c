@@ -484,6 +484,12 @@ static void UpdateGame(void)
       ACS_SetCVarFixed("lith_sv_scoremul", 1.25);
    }
 
+   // Update version 1.5r1 to 1.5r2
+   Update(15.2) {
+      // Base difficulty default changed from 1 to 10
+      ACS_SetCVar("lith_sv_difficulty", 10);
+   }
+
    #undef Update
 }
 

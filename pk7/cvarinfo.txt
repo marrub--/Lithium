@@ -67,7 +67,7 @@ user bool   lith_scanner_altfont = false;
 // Server
 server float __lith_version;
 
-server           int   lith_sv_difficulty    = 1;
+server           int   lith_sv_difficulty    = 10;
 server           bool  lith_sv_rain          = false;
 server           bool  lith_sv_sky           = false;
 server           bool  lith_sv_revenge       = true;
