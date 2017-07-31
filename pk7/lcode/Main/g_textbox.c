@@ -10,19 +10,19 @@
 //
 // Lith_GUI_TextBox_Impl
 //
-gui_textbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_textbox_args_t *a)
+gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_args_t const *a)
 {
-   gui_textbox_state_t *st = &g->st[a->st].tb;
-   
+   gui_txtbox_state_t *st = &g->st[a->st].tb;
+
    Lith_GUI_Auto(g, id, a->x, a->y, 8 * countof(st->txtbuf), 10);
-   
+
    bool hot = g->hot == id;
    if(hot)
       Lith_ScriptCall("Lith_Server", "SetInput", a->pnum, true);
-   
+
    if(*a->inbuf)
       ACS_LocalAmbientSound("player/cbi/keypress", 30);
-   
+
    for(char *c = a->inbuf; *c; c++)
    {
       switch(*c)
@@ -39,18 +39,18 @@ gui_textbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_textbox_
          break;
       }
    }
-   
+
    st->txtbuf[st->tbptr] = '\0';
-   
+
    DrawSpritePlain("lgfx/UI/TextBoxBack.png", g->hid--, (a->x - 3) + g->ox + .1, (a->y - 3) + g->oy + .1, TICSECOND);
-   
+
    if(st->tbptr)
       HudMessageF("CBIFONT", "%.*s%S", st->tbptr, st->txtbuf, hot ? Ticker("|", "") : "");
    else
       HudMessageF("CBIFONT", "\C%cType here...", hot ? 'c' : 'm');
-   
+
    HudMessagePlain(g->hid--, a->x + g->ox + .1, a->y + g->oy + .1, TICSECOND);
-   
+
    return st;
 }
 

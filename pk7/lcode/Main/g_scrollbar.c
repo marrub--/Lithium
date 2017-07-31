@@ -9,7 +9,7 @@
 // This function is excessively commented in case I need to change it.
 // Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
 //
-void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t *a)
+void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const *a)
 {
    gui_scroll_preset_t const *pre = a->preset ? a->preset : &scrdefault;
    gui_scroll_state_t *scr = &g->st[a->st].scrl;
