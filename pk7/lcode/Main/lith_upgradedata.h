@@ -128,6 +128,8 @@ typedef struct upgrade {
 
    void *dataptr;
 
+   struct upgrade *next, **prev;
+
    upgradeinfo_t const *info;
 
    bool active    : 1;

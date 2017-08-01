@@ -4,6 +4,8 @@
 #include "lith_list.h"
 #include "lith_world.h"
 
+#include <ctype.h>
+
 #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
 #define ForCategory() for(int categ = 0; categ < BIPC_MAX; categ++)

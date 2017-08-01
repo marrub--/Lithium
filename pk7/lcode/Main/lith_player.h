@@ -12,7 +12,7 @@
 #include "lith_games.h"
 #include "lith_shopdef.h"
 
-#include "Lth_hashmap.h"
+#include <GDCC/HashMap.h>
 
 #define MAX_PLAYERS 8
 
@@ -33,6 +33,8 @@
 //----------------------------------------------------------------------------
 // Types
 //
+
+GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
 enum
 {
@@ -113,9 +115,9 @@ typedef struct player_extdata_s
    bip_t bip;
 
    struct upgr_data upgrdata;
-   upgrade_t   upgrades[UPGR_STATIC_MAX];
-   Lth_HashMap upgrademap;
-   int         upgrmax;
+   upgrade_t        upgrades[UPGR_STATIC_MAX];
+   upgrademap_t     upgrademap;
+   int              upgrmax;
 
    loginfo_t loginfo;
    bool      hudenabled;

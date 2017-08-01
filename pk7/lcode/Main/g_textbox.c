@@ -2,6 +2,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+#include <ctype.h>
+
 
 //----------------------------------------------------------------------------
 // Extern Functions

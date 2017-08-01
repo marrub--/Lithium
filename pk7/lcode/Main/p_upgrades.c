@@ -2,8 +2,6 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
-#include <Lth.h>
-
 #define ForUpgrade(name) \
    for(int _i = 0; _i < p->upgrmax; _i++) \
       __with(upgrade_t *name = &p->upgrades[_i];)
@@ -185,43 +183,18 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
 //
 // RegisterBasicUpgrade
 //
-static void RegisterBasicUpgrade(upgradeinfo_t *upgr)
+static void RegisterBasicUpgrade(int key, upgradeinfo_t const *upgr)
 {
-   if(upgr)
-      extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX] = *upgr;
-   else
-      Log("%s: Failed to register upgrade!", __func__);
+   if(upgr) {
+      extraupgradeinfo[UPGR_MAX   - UPGR_BASE_MAX] = *upgr;
+      extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX].key = key;
+   }
 }
 
 
 //----------------------------------------------------------------------------
 // Extern Functions
 //
-
-//
-// Lith_LoadUpgrInfoBalance
-//
-// Load extra balance info from a file.
-//
-void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname)
-{
-   Lth_ResourceMap *rsrc = Lth_ManifestLoad_extern(fname);
-
-   if(!rsrc)
-      return;
-
-   for(int i = 0; i < max; i++)
-   {
-      __str name = uinfo[i].name;
-
-      int   const *cost     = Lth_HashMapFind(&rsrc->map, StrParam("%S.Cost",     name));
-      fixed const *scoreadd = Lth_HashMapFind(&rsrc->map, StrParam("%S.ScoreAdd", name));
-      if(cost)     uinfo[i].cost     = *cost;
-      if(scoreadd) uinfo[i].scoreadd = *scoreadd;
-   }
-
-   Lth_ResourceMapDestroy(rsrc);
-}
 
 //
 // Lith_GSReinit_Upgrade
@@ -263,13 +236,11 @@ void Lith_GSReinit_Upgrade(void)
 void Lith_GSInit_Upgrade(void)
 {
    if(world.grafZoneEntered)
-      RegisterBasicUpgrade(&(upgradeinfo_t)
-         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_any, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
+      RegisterBasicUpgrade(UPGR_DarkCannon, &(upgradeinfo_t const)
+         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_any, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
 
    for(int i = 0; i < countof(staticupgradeinfo); i++)
       staticupgradeinfo[i].key = i;
-
-   Lith_LoadUpgrInfoBalance(staticupgradeinfo, countof(staticupgradeinfo), c"Upgrades.lthm");
 
    upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
    memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
@@ -311,7 +282,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
       if(CheckPClass())
          p->upgrmax++;
 
-   p->upgrademap.alloc(p->upgrmax);
+   upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
 
    for(int i = 0; i < countof(p->upgrades); i++)
       p->upgrades[i] = (upgrade_t){};
@@ -325,8 +296,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
          upgr->dataptr = &p->upgrdata;
          upgr->info = &upgradeinfo[i];
 
-         p->upgrademap.elem.data[j].keyhash = upgr->info->key;
-         p->upgrademap.elem.data[j].value   = upgr;
+         p->upgrademap.insert(upgr);
 
          if(upgr->info->cost == 0 || world.dbgUpgr)
             Lith_UpgrBuy(p, upgr, true);
@@ -334,8 +304,6 @@ void Lith_PlayerInitUpgrades(player_t *p)
          j++;
       }
    }
-
-   p->upgrademap.build();
 
    #undef CheckPClass
 }

@@ -164,7 +164,7 @@ static void Lith_PlayerDisconnect(void)
    p->loginfo.full.free(free);
    p->loginfo.maps.free(free);
 
-   p->upgrademap.destroy();
+   upgrademap_t_dtor(&p->upgrademap);
 
    memset(p, 0, sizeof(*p));
 }
@@ -173,6 +173,22 @@ static void Lith_PlayerDisconnect(void)
 //----------------------------------------------------------------------------
 // Extern Functions
 //
+
+#define upgrademap_t_GetKey(o) ((o)->info->key)
+#define upgrademap_t_GetNext(o) (&(o)->next)
+#define upgrademap_t_GetPrev(o) (&(o)->prev)
+#define upgrademap_t_HashKey(k) (k)
+#define upgrademap_t_HashObj(o) ((o)->info->key)
+#define upgrademap_t_KeyCmp(l, r) ((l) - (r))
+GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
+
+//
+// Lith_PlayerGetNamedUpgrade
+//
+upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
+{
+   return p->upgrademap.find(name);
+}
 
 //
 // Lith_StepSpeed
@@ -197,14 +213,6 @@ player_t *Lith_GetPlayer(int tid, int ptr)
    int pnum = Lith_GetPlayerNumber(tid, ptr);
    if(pnum >= 0) return &players[pnum];
    else          return null;
-}
-
-//
-// Lith_PlayerGetNamedUpgrade
-//
-upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
-{
-   return Lth_HashMapFind(&p->upgrademap, name);
 }
 
 //

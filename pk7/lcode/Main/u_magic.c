@@ -109,6 +109,8 @@ static void Lith_GivePlayerZ(int tid, player_t *p, __str name)
 void Lith_SetMagicUI(bool on)
 {
    player_t *p = LocalPlayer;
+   if(!p->active) return;
+
    upgrade_t *upgr = p->getUpgr(UPGR_Magic);
 
    if(on && !p->indialogue)
