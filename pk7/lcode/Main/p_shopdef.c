@@ -29,12 +29,12 @@ bool Lith_ShopCanBuy(player_t *p, shopdef_t const *def, void *obj)
 //
 // Lith_ShopBuy
 //
-bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery)
+bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog)
 {
    if(!p->canBuy(def, obj))
       return false;
 
-   p->logF("> Bought %S", Language(namefmt, def->name));
+   if(!nolog) p->logF("> Bought %S", Language(namefmt, def->name));
 
    if(def->bipunlock)
       if(!p->bip.unlock(def->bipunlock) && p->pclass == pclass_cybermage)

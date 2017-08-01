@@ -21,7 +21,7 @@ typedef struct shopdef
 
 score_t Lith_ShopGetCost(struct player *p, shopdef_t const *def);
 bool Lith_ShopCanBuy    (struct player *p, shopdef_t const *def, void *obj);
-bool Lith_ShopBuy       (struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery);
+[[__optional_args(1)]] bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog);
 
 #endif
 
