@@ -162,6 +162,7 @@ void PrintBold(__str fmt, ...);
 // Strings
 __str StrUpper(__str in);
 unsigned StrHash(char __str_ars const *s);
+unsigned CStrHash(char const *s);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 

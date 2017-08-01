@@ -235,14 +235,25 @@ int ceilk(fixed n)
    else             return (int)u.a;
 }
 
+#define StrHashImpl() \
+   unsigned ret = 0; \
+   for(; *s; s++) ret = *s + 101 * ret; \
+   return ret
+
 //
 // StrHash
 //
 unsigned StrHash(char __str_ars const *s)
 {
-   unsigned ret = 0;
-   for(; *s; s++) ret = *s + 101 * ret;
-   return ret;
+   StrHashImpl();
+}
+
+//
+// CStrHash
+//
+unsigned CStrHash(char const *s)
+{
+   StrHashImpl();
 }
 
 //
@@ -403,18 +414,16 @@ char *Lith_strcpy_str(char *dest, char __str_ars const *src)
    return dest;
 }
 
+#define StrCmpImpl() \
+   for(; *s1 && *s2; ++s1, ++s2) {if(*s1 != *s2) return *s1 - *s2;} \
+   return *s1 - *s2
+
 //
 // Lith_strcmp_str
 //
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
 {
-   for(; *s1 && *s2; ++s1, ++s2)
-   {
-      if(*s1 != *s2)
-         return *s1 - *s2;
-   }
-
-   return *s1 - *s2;
+   StrCmpImpl();
 }
 
 // EOF
