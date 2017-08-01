@@ -526,15 +526,23 @@ static void WInit(void)
       Lith_DoPayout();
 
    // Cluster messages.
-   if(world.game == Game_Doom2 && world.cluster != world.prevcluster)
-      switch(world.prevcluster)
-   {
-   case 5: Lith_ForPlayer() p->deliverMail("Cluster1"); break;
-   case 6: Lith_ForPlayer() p->deliverMail("Cluster2"); break;
-   case 7: Lith_ForPlayer() p->deliverMail("Cluster3"); break;
-   }
+   #define Message(cmp, n, name) \
+      if(world.cluster cmp && !msgs[n]) { \
+         Lith_ForPlayer() \
+            p->deliverMail(name, true); \
+         msgs[n] = true; \
+      } else ((void)0)
 
-   world.prevcluster = world.cluster;
+   static bool msgs[5];
+
+   if(world.game == Game_Doom2)
+   {
+      Message(>= 6,  0, "Cluster1");
+      Message(>= 7,  1, "Cluster2");
+      Message(== 8,  2, "Cluster3");
+      Message(== 9,  3, "Secret1");
+      Message(== 10, 4, "Secret2");
+   }
 }
 
 

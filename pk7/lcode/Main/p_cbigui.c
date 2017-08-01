@@ -196,8 +196,11 @@ void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;
 
-   withplayer(LocalPlayer)
+   withplayer(LocalPlayer) {
+      p->bip.curcategory = BIPC_MAIN;
+      p->bip.curpage = null;
       p->useGUI(GUI_CBI);
+   }
 }
 
 // EOF
