@@ -5,6 +5,9 @@
 
 #include <math.h>
 
+#define InSecret \
+   (world.game == Game_Doom2 && (world.cluster == 9 || world.cluster == 10))
+
 
 //-----------------------------------------------------------------------------
 // Static Objects
@@ -350,7 +353,7 @@ static void DoRain()
          ACS_PlaySound(p->weathertid, "amb/rainout", CHAN_VOICE, 1.0, false, ATTN_NONE);
       }
 
-      if(world.mapscleared >= 20 && !world.islithmap)
+      if((world.mapscleared >= 20 || InSecret) && !world.islithmap)
          ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
       else
          ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
@@ -501,7 +504,7 @@ static void WSInit(void)
 
    if(ACS_GetCVar("lith_sv_sky") && !world.islithmap)
    {
-      if(world.mapscleared >= 20)
+      if(world.mapscleared >= 20 || InSecret)
       {
          ACS_ChangeSky("LITHSKRD", "LITHSKRD");
          ACS_SetSkyScrollSpeed(1, 0.01);

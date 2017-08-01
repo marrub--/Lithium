@@ -280,6 +280,8 @@ void Lith_ResetPlayer(player_t *p)
    p->bip.unlock("Mateba");
    p->bip.unlock("Blade");
    p->bip.unlock("Delear");
+   p->bip.unlock("Hulgyon");
+   p->bip.unlock("StarShot");
 }
 
 

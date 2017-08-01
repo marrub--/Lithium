@@ -1,3 +1,4 @@
+// vim: columns=100
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_bip.h"
@@ -90,10 +91,10 @@ static void UnlockPage(bip_t *bip, bippage_t *page)
 }
 
 //
-// AddToBIP
+// AddToBIP_
 //
 [[__optional_args(1)]]
-static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
+static void AddToBIP_(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
 {
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", name);
 
@@ -108,6 +109,7 @@ static void AddToBIP(bip_t *bip, int categ, __str name, bip_unlocks_t const *unl
 
    if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page);
 }
+#define AddToBIP(...) AddToBIP_(bip, __VA_ARGS__)
 
 
 //----------------------------------------------------------------------------
@@ -128,141 +130,139 @@ void Lith_PlayerInitBIP(player_t *p)
    // This could be done a lot better with an array or something, but fuck it.
    // edit: I now am glad that I didn't make this an array or something.
 
-   AddToBIP(bip, BIPC_WEAPONS, "ChargeFist", Unlocks("KSKK"));
+   AddToBIP(BIPC_WEAPONS, "ChargeFist", Unlocks("KSKK"));
 
    switch(p->pclass)
    {
    case pclass_marine:
-      AddToBIP(bip, BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
-      AddToBIP(bip, BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
-      AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
-      AddToBIP(bip, BIPC_WEAPONS, "ShotgunUpg2",     Unlocks("Shotgun"));
-      AddToBIP(bip, BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
-      AddToBIP(bip, BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
-      AddToBIP(bip, BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
-      AddToBIP(bip, BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle", "Semaphore"));
-      AddToBIP(bip, BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
-      AddToBIP(bip, BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
-      AddToBIP(bip, BIPC_WEAPONS, "LauncherUpg2",    Unlocks("GrenadeLauncher", "Sym43"));
-      AddToBIP(bip, BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
-      AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
-      AddToBIP(bip, BIPC_WEAPONS, "PlasmaUpg2",      Unlocks("PlasmaRifle", "Semaphore"));
-      AddToBIP(bip, BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
-      AddToBIP(bip, BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
-      AddToBIP(bip, BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
+      AddToBIP(BIPC_WEAPONS, "Pistol",          Unlocks("Omakeda"));
+      AddToBIP(BIPC_WEAPONS, "Shotgun",         Unlocks("Omakeda"));
+      AddToBIP(BIPC_WEAPONS, "ShotgunUpgr",     Unlocks("Shotgun", "AOF", "DurlaPrime"));
+      AddToBIP(BIPC_WEAPONS, "ShotgunUpg2",     Unlocks("Shotgun"));
+      AddToBIP(BIPC_WEAPONS, "SuperShotgun",    Unlocks("ChAri"));
+      AddToBIP(BIPC_WEAPONS, "CombatRifle",     Unlocks("AllPoint"));
+      AddToBIP(BIPC_WEAPONS, "RifleUpgr",       Unlocks("CombatRifle"));
+      AddToBIP(BIPC_WEAPONS, "RifleUpg2",       Unlocks("CombatRifle", "Semaphore"));
+      AddToBIP(BIPC_WEAPONS, "GrenadeLauncher", Unlocks("Sym43"));
+      AddToBIP(BIPC_WEAPONS, "LauncherUpgr",    Unlocks("GrenadeLauncher", "UnrealArms"));
+      AddToBIP(BIPC_WEAPONS, "LauncherUpg2",    Unlocks("GrenadeLauncher", "Sym43"));
+      AddToBIP(BIPC_WEAPONS, "PlasmaRifle",     Unlocks("AllPoint", "MDDO"));
+      AddToBIP(BIPC_WEAPONS, "PlasmaUpgr",      Unlocks("PlasmaRifle"));
+      AddToBIP(BIPC_WEAPONS, "PlasmaUpg2",      Unlocks("PlasmaRifle", "Semaphore"));
+      AddToBIP(BIPC_WEAPONS, "BFG9000",         Unlocks("Cid"));
+      AddToBIP(BIPC_WEAPONS, "CannonUpgr",      Unlocks("BFG9000", "SuperDimension"));
+      AddToBIP(BIPC_WEAPONS, "CannonUpg2",      Unlocks("BFG9000"));
       break;
    case pclass_cybermage:
-      AddToBIP(bip, BIPC_WEAPONS, "Mateba",        Unlocks("AOF2"));
-      AddToBIP(bip, BIPC_WEAPONS, "MatebaUpgr",    Unlocks("AOF2", "Algidistari"));
-      AddToBIP(bip, BIPC_WEAPONS, "ShockRifle");
-      AddToBIP(bip, BIPC_WEAPONS, "SPAS",          Unlocks("AOF2", "Newvec"));
-      AddToBIP(bip, BIPC_WEAPONS, "SPASUpgr");
-      AddToBIP(bip, BIPC_WEAPONS, "SPASUpg2");
-      AddToBIP(bip, BIPC_WEAPONS, "SMG",           Unlocks("Omakeda", "Sym43"));
-      AddToBIP(bip, BIPC_WEAPONS, "SMGUpgr");
-      AddToBIP(bip, BIPC_WEAPONS, "SMGUpg2");
-      AddToBIP(bip, BIPC_WEAPONS, "SMGUpg3");
-      AddToBIP(bip, BIPC_WEAPONS, "IonRifle",      Unlocks("KSKK"));
-      AddToBIP(bip, BIPC_WEAPONS, "IonRifleUpgr");
-      AddToBIP(bip, BIPC_WEAPONS, "IonRifleUpg2");
-      AddToBIP(bip, BIPC_WEAPONS, "CPlasmaRifle",  Unlocks("AllPoint", "MDDO"));
-      AddToBIP(bip, BIPC_WEAPONS, "CPlasmaUpgr");
-      AddToBIP(bip, BIPC_WEAPONS, "StarDestroyer", Unlocks("Hell"));
-      AddToBIP(bip, BIPC_WEAPONS, "ShipGunUpgr");
-      AddToBIP(bip, BIPC_WEAPONS, "ShipGunUpg2");
+      AddToBIP(BIPC_WEAPONS, "Mateba",        Unlocks("AOF2"));
+      AddToBIP(BIPC_WEAPONS, "MatebaUpgr",    Unlocks("AOF2", "Algidistari"));
+      AddToBIP(BIPC_WEAPONS, "ShockRifle");
+      AddToBIP(BIPC_WEAPONS, "SPAS",          Unlocks("AOF2", "Newvec"));
+      AddToBIP(BIPC_WEAPONS, "SPASUpgr");
+      AddToBIP(BIPC_WEAPONS, "SPASUpg2");
+      AddToBIP(BIPC_WEAPONS, "SMG",           Unlocks("Omakeda", "Sym43"));
+      AddToBIP(BIPC_WEAPONS, "SMGUpgr");
+      AddToBIP(BIPC_WEAPONS, "SMGUpg2");
+      AddToBIP(BIPC_WEAPONS, "SMGUpg3");
+      AddToBIP(BIPC_WEAPONS, "IonRifle",      Unlocks("KSKK"));
+      AddToBIP(BIPC_WEAPONS, "IonRifleUpgr");
+      AddToBIP(BIPC_WEAPONS, "IonRifleUpg2");
+      AddToBIP(BIPC_WEAPONS, "CPlasmaRifle",  Unlocks("AllPoint", "MDDO"));
+      AddToBIP(BIPC_WEAPONS, "CPlasmaUpgr");
+      AddToBIP(BIPC_WEAPONS, "StarDestroyer", Unlocks("Hell"));
+      AddToBIP(BIPC_WEAPONS, "ShipGunUpgr");
+      AddToBIP(BIPC_WEAPONS, "ShipGunUpg2");
 
-      AddToBIP(bip, BIPC_WEAPONS, "Delear");
-      AddToBIP(bip, BIPC_WEAPONS, "Hulgyon");
-      AddToBIP(bip, BIPC_WEAPONS, "StarShot");
+      AddToBIP(BIPC_WEAPONS, "Delear");
+      AddToBIP(BIPC_WEAPONS, "Hulgyon");
+      AddToBIP(BIPC_WEAPONS, "StarShot");
       break;
    }
 
-   AddToBIP(bip, BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
-   AddToBIP(bip, BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
-   AddToBIP(bip, BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
-   AddToBIP(bip, BIPC_WEAPONS, "MissileLauncher");
-   AddToBIP(bip, BIPC_WEAPONS, "PlasmaDiffuser",  Unlocks("Sym43", "MDDO", "Semaphore"));
+   AddToBIP(BIPC_WEAPONS, "Revolver",        Unlocks("Earth"));
+   AddToBIP(BIPC_WEAPONS, "LazShotgun",      Unlocks("Earth"));
+   AddToBIP(BIPC_WEAPONS, "SniperRifle",     Unlocks("Facer"));
+   AddToBIP(BIPC_WEAPONS, "MissileLauncher");
+   AddToBIP(BIPC_WEAPONS, "PlasmaDiffuser",  Unlocks("Sym43", "MDDO", "Semaphore"));
 
-   AddToBIP(bip, BIPC_ENEMIES, "ZombieMan");
-   AddToBIP(bip, BIPC_ENEMIES, "ShotgunGuy");
-   AddToBIP(bip, BIPC_ENEMIES, "ChaingunGuy");
+   AddToBIP(BIPC_ENEMIES, "ZombieMan");
+   AddToBIP(BIPC_ENEMIES, "ShotgunGuy");
+   AddToBIP(BIPC_ENEMIES, "ChaingunGuy");
 
-   AddToBIP(bip, BIPC_ENEMIES, "Imp");
-   AddToBIP(bip, BIPC_ENEMIES, "Demon");
-   AddToBIP(bip, BIPC_ENEMIES, "Spectre");
+   AddToBIP(BIPC_ENEMIES, "Imp");
+   AddToBIP(BIPC_ENEMIES, "Demon");
+   AddToBIP(BIPC_ENEMIES, "Spectre");
 
-   AddToBIP(bip, BIPC_ENEMIES, "LostSoul");
-   AddToBIP(bip, BIPC_ENEMIES, "Mancubus");
-   AddToBIP(bip, BIPC_ENEMIES, "Arachnotron");
-   AddToBIP(bip, BIPC_ENEMIES, "Cacodemon");
+   AddToBIP(BIPC_ENEMIES, "LostSoul");
+   AddToBIP(BIPC_ENEMIES, "Mancubus");
+   AddToBIP(BIPC_ENEMIES, "Arachnotron");
+   AddToBIP(BIPC_ENEMIES, "Cacodemon");
 
-   AddToBIP(bip, BIPC_ENEMIES, "HellKnight");
-   AddToBIP(bip, BIPC_ENEMIES, "BaronOfHell");
-   AddToBIP(bip, BIPC_ENEMIES, "Revenant");
+   AddToBIP(BIPC_ENEMIES, "HellKnight");
+   AddToBIP(BIPC_ENEMIES, "BaronOfHell");
+   AddToBIP(BIPC_ENEMIES, "Revenant");
 
-   AddToBIP(bip, BIPC_ENEMIES, "PainElemental");
-   AddToBIP(bip, BIPC_ENEMIES, "Archvile");
-   AddToBIP(bip, BIPC_ENEMIES, "SpiderMastermind");
-   AddToBIP(bip, BIPC_ENEMIES, "Cyberdemon");
+   AddToBIP(BIPC_ENEMIES, "PainElemental");
+   AddToBIP(BIPC_ENEMIES, "Archvile");
+   AddToBIP(BIPC_ENEMIES, "SpiderMastermind");
+   AddToBIP(BIPC_ENEMIES, "Cyberdemon");
 
-   AddToBIP(bip, BIPC_ENEMIES, "Phantom");
-   AddToBIP(bip, BIPC_ENEMIES, "IconOfSin");
+   AddToBIP(BIPC_ENEMIES, "Phantom");
+   AddToBIP(BIPC_ENEMIES, "IconOfSin");
 
    switch(p->pclass)
    {
    case pclass_marine:
-      AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDisp", Unlocks("OFMD"));
-      AddToBIP(bip, BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
-      AddToBIP(bip, BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
-      AddToBIP(bip, BIPC_UPGRADES, "CyberLegs",   Unlocks("OFMD"));
-      AddToBIP(bip, BIPC_UPGRADES, "Yh0",         Unlocks("DurlaPrime"));
-      AddToBIP(bip, BIPC_UPGRADES, "DefenseNuke", Unlocks("OFMD"));
-      AddToBIP(bip, BIPC_UPGRADES, "Adrenaline",  Unlocks("KSKK"));
+      AddToBIP(BIPC_UPGRADES, "HeadsUpDisp", Unlocks("OFMD"));
+      AddToBIP(BIPC_UPGRADES, "JetBooster",  Unlocks("OFMD"));
+      AddToBIP(BIPC_UPGRADES, "ReflexWetw",  Unlocks("OFMD"));
+      AddToBIP(BIPC_UPGRADES, "CyberLegs",   Unlocks("OFMD"));
+      AddToBIP(BIPC_UPGRADES, "Yh0",         Unlocks("DurlaPrime"));
+      AddToBIP(BIPC_UPGRADES, "DefenseNuke", Unlocks("OFMD"));
+      AddToBIP(BIPC_UPGRADES, "Adrenaline",  Unlocks("KSKK"));
       break;
    case pclass_cybermage:
-      AddToBIP(bip, BIPC_UPGRADES, "HeadsUpDispJem");
-      AddToBIP(bip, BIPC_UPGRADES, "ReflexWetwJem");
-      AddToBIP(bip, BIPC_UPGRADES, "Magic");
-      AddToBIP(bip, BIPC_UPGRADES, "SoulCleaver");
+      AddToBIP(BIPC_UPGRADES, "HeadsUpDispJem");
+      AddToBIP(BIPC_UPGRADES, "ReflexWetwJem");
+      AddToBIP(BIPC_UPGRADES, "Magic");
+      AddToBIP(BIPC_UPGRADES, "SoulCleaver");
       break;
    }
 
-   AddToBIP(bip, BIPC_UPGRADES, "VitalScanner", Unlocks("KSKK"));
-   AddToBIP(bip, BIPC_UPGRADES, "AutoReload",   Unlocks("KSKK"));
+   AddToBIP(BIPC_UPGRADES, "VitalScanner", Unlocks("KSKK"));
+   AddToBIP(BIPC_UPGRADES, "AutoReload",   Unlocks("KSKK"));
 
-   AddToBIP(bip, BIPC_PLACES, "AetosVi");
-   AddToBIP(bip, BIPC_PLACES, "Algidistari");
-   AddToBIP(bip, BIPC_PLACES, "ChAri");
-   AddToBIP(bip, BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
-   AddToBIP(bip, BIPC_PLACES, "Earth");
-   AddToBIP(bip, BIPC_PLACES, "Hell");
-   AddToBIP(bip, BIPC_PLACES, "Mars");
-   AddToBIP(bip, BIPC_PLACES, "OmicronXevv");
-   AddToBIP(bip, BIPC_PLACES, "SuperDimension", Unlocks("BFG9000", "SIGFPE"));
+   AddToBIP(BIPC_PLACES, "AetosVi");
+   AddToBIP(BIPC_PLACES, "Algidistari");
+   AddToBIP(BIPC_PLACES, "ChAri");
+   AddToBIP(BIPC_PLACES, "DurlaPrime",     Unlocks("Earth", "AetosVi"));
+   AddToBIP(BIPC_PLACES, "Earth");
+   AddToBIP(BIPC_PLACES, "Hell");
+   AddToBIP(BIPC_PLACES, "Mars");
+   AddToBIP(BIPC_PLACES, "OmicronXevv");
+   AddToBIP(BIPC_PLACES, "SuperDimension", Unlocks("BFG9000", "SIGFPE"));
 
-   AddToBIP(bip, BIPC_CORPORATIONS, "AllPoint");
+   AddToBIP(BIPC_CORPORATIONS, "AllPoint");
 
-   if(p->pclass == pclass_cybermage)
-      AddToBIP(bip, BIPC_CORPORATIONS, "AOF2");
-   else
-      AddToBIP(bip, BIPC_CORPORATIONS, "AOF");
+   if(p->pclass == pclass_cybermage) AddToBIP(BIPC_CORPORATIONS, "AOF2");
+   else                              AddToBIP(BIPC_CORPORATIONS, "AOF");
 
-   AddToBIP(bip, BIPC_CORPORATIONS, "Cid",        Unlocks("SuperDimension", "Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "Facer");
-   AddToBIP(bip, BIPC_CORPORATIONS, "KSKK",       Unlocks("Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "MDDO",       Unlocks("Mars", "OFMD"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "Newvec",     Unlocks("Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "OFMD");
-   AddToBIP(bip, BIPC_CORPORATIONS, "Omakeda",    Unlocks("Earth"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "Semaphore",  Unlocks("OmicronXevv"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));
-   AddToBIP(bip, BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
+   AddToBIP(BIPC_CORPORATIONS, "Cid",        Unlocks("SuperDimension", "Earth"));
+   AddToBIP(BIPC_CORPORATIONS, "Facer");
+   AddToBIP(BIPC_CORPORATIONS, "KSKK",       Unlocks("Earth"));
+   AddToBIP(BIPC_CORPORATIONS, "MDDO",       Unlocks("Mars", "OFMD"));
+   AddToBIP(BIPC_CORPORATIONS, "Newvec",     Unlocks("Earth"));
+   AddToBIP(BIPC_CORPORATIONS, "OFMD");
+   AddToBIP(BIPC_CORPORATIONS, "Omakeda",    Unlocks("Earth"));
+   AddToBIP(BIPC_CORPORATIONS, "Semaphore",  Unlocks("OmicronXevv"));
+   AddToBIP(BIPC_CORPORATIONS, "Sym43",      Unlocks("AetosVi"));
+   AddToBIP(BIPC_CORPORATIONS, "UnrealArms", Unlocks("AetosVi"));
 
-   AddToBIP(bip, BIPC_EXTRA, "Extra1");
-   AddToBIP(bip, BIPC_EXTRA, "Extra2");
-   AddToBIP(bip, BIPC_EXTRA, "Extra3");
-   AddToBIP(bip, BIPC_EXTRA, "Extra4");
-   AddToBIP(bip, BIPC_EXTRA, "Extra5");
+   AddToBIP(BIPC_EXTRA, "Extra1");
+   AddToBIP(BIPC_EXTRA, "Extra2");
+   AddToBIP(BIPC_EXTRA, "Extra3");
+   AddToBIP(BIPC_EXTRA, "Extra4");
+   AddToBIP(BIPC_EXTRA, "Extra5");
 
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;
