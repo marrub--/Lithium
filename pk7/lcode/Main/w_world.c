@@ -374,6 +374,7 @@ static void GetDebugInfo(void)
    world.dbgScore = all || ACS_GetCVar("__lith_debug_score");
    world.dbgUpgr  = all || ACS_GetCVar("__lith_debug_upgrades");
    world.dbgSave  = all || ACS_GetCVar("__lith_debug_save");
+   world.dbgNoMon =        ACS_GetCVar("__lith_debug_nomonsters");
 }
 
 //
@@ -613,7 +614,7 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
 
-      if(enemycheckfinished) {
+      if(enemycheckfinished && !world.dbgNoMon) {
          extern void DmonDebugInfo(void);
          ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
          DmonDebugInfo();
