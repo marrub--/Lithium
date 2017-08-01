@@ -228,8 +228,7 @@ void Lith_RunDialogue(int num)
 {
    // external state
    player_t *p = LocalPlayer;
-
-   if(p->indialogue)
+   if(NoPlayer(p) || p->dead || p->indialogue)
       return;
 
    // Get the dialogue by number.

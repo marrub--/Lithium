@@ -58,24 +58,26 @@ static void RA_Give(__str name, int n)
 void Lith_RA_Give(int num)
 {
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return;
+
    upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
-   
+
    if(!upgr->active)
       return;
-   
+
    if(UData.activearmor != num + 1)
    {
       __str name = ArmorNames[num].full;
-      
+
       UData.activearmor = num + 1;
-      
+
       RA_Take(1);
       RA_Take(2);
-      
+
       ACS_LocalAmbientSound("player/rarmor/mode", 127);
-      
+
       p->logH(">>>>> Activating Armor->%S()", name);
-      
+
       if(p->getUpgr(UPGR_ReactArmor2)->active)
          RA_Give(name, 2);
       else
@@ -89,7 +91,7 @@ void Lith_RA_Give(int num)
 void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
 {
    UData.activearmor = 0;
-   
+
    RA_Take(1);
    RA_Take(2);
 }
@@ -102,7 +104,7 @@ void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
    if(UData.activearmor && p->getCVarI("lith_hud_showarmorind"))
    {
       DrawSpritePlain("lgfx/HUD/SplitLeft.png", hid_rarmorbg, 12.1, 170.2, TICSECOND);
-      
+
       HudMessageF("LHUDFONT", "\Cn%S", ArmorNames[UData.activearmor - 1].abbr);
       HudMessagePlain(hid_rarmortxt, 32.1, 161.0, TICSECOND);
    }

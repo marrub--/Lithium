@@ -23,7 +23,8 @@ bool Lith_CheckCeilingSky()
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_SetVar(int num, int set)
 {
-   return LocalPlayer->decvars[num - 1] = set;
+   withplayer(LocalPlayer) return p->decvars[num - 1] = set;
+   return 0;
 }
 
 //
@@ -32,7 +33,8 @@ int Lith_SetVar(int num, int set)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetVar(int num)
 {
-   return LocalPlayer->decvars[num - 1];
+   withplayer(LocalPlayer) return p->decvars[num - 1];
+   return 0;
 }
 
 //
@@ -126,9 +128,11 @@ int Lith_VelHax(int fuck)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   player_t *p = LocalPlayer;
-   p->health = ACS_GetActorProperty(0, APROP_Health);
-   return p->health < p->maxhealth;
+   withplayer(LocalPlayer) {
+      p->health = ACS_GetActorProperty(0, APROP_Health);
+      return p->health < p->maxhealth;
+   }
+   return 0;
 }
 
 //
@@ -137,9 +141,12 @@ bool Lith_CheckHealth(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   player_t *p = LocalPlayer;
-   p->armor = ACS_CheckInventory("BasicArmor");
-   return p->maxarmor < n || p->armor == 0 || p->maxarmor == 0 || p->armor < n;
+   withplayer(LocalPlayer) {
+      p->armor = ACS_CheckInventory("BasicArmor");
+      return p->maxarmor  < n || p->armor == 0 ||
+             p->maxarmor == 0 || p->armor  < n;
+   }
+   return 0;
 }
 
 //
@@ -148,7 +155,8 @@ bool Lith_CheckArmor(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Discount()
 {
-   LocalPlayer->discount = 0.9;
+   withplayer(LocalPlayer)
+      p->discount = 0.9;
 }
 
 //
@@ -158,6 +166,7 @@ void Lith_Discount()
 void Lith_DOGS()
 {
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return;
 
    int tid = ACS_UniqueTID();
 
@@ -213,9 +222,8 @@ void Lith_SteggleEnergy()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Barrier()
 {
-   player_t *p = LocalPlayer;
-
-   for(int i = 0; p->active && i < 35 * 30; i++)
+   withplayer(LocalPlayer)
+      for(int i = 0; p->active && i < 35 * 30; i++)
    {
       ACS_GiveInventory("Lith_BarrierSpell", 1);
       ACS_Delay(1);
@@ -295,6 +303,7 @@ void Lith_BoughtItemPickup(int id)
 {
    int const chan = CHAN_ITEM|CHAN_NOPAUSE;
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return;
 
    if(id)
    {
@@ -328,6 +337,7 @@ void Lith_BoughtItemPickup(int id)
 void Lith_GetSigil()
 {
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return;
 
    p->closeGUI();
 

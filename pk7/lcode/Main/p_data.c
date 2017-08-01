@@ -132,7 +132,8 @@ void Lith_GiveMail(int num)
 
    num %= countof(names);
 
-   LocalPlayer->deliverMail(names[num]);
+   withplayer(LocalPlayer)
+      p->deliverMail(names[num]);
 }
 
 //

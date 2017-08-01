@@ -236,6 +236,7 @@ void Lith_PlayerCloseGUI(player_t *p)
 //
 void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 {
+   if(p->dead) return;
    if(p->activegui == GUI_NONE)
    {
       if(world.pauseinmenus)

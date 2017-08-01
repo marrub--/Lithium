@@ -28,6 +28,10 @@
 #define LocalPlayer \
    (ACS_PlayerNumber() < 0 ? null : &players[ACS_PlayerNumber()])
 #define PlayerDiscount(n) (score_t)((n) * p->discount)
+#define NoPlayer(p) (!(p) || !(p)->active)
+#define withplayer(player) \
+   __with(player_t *p = (player);) \
+      if(!NoPlayer(p))
 
 
 //----------------------------------------------------------------------------

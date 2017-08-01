@@ -20,12 +20,13 @@ void Lith_KeyZoom(int amt)
 {
    if(ACS_Timer() < 10) return;
 
-   player_t  *p    = LocalPlayer;
-   upgrade_t *upgr = p->getUpgr(UPGR_Zoom);
-
-   if(upgr->active)    UData.zoom += amt;
-   if(UData.zoom < 0)  UData.zoom  = 0;
-   if(UData.zoom > 80) UData.zoom  = 80;
+   withplayer(LocalPlayer)
+   {
+      upgrade_t *upgr = p->getUpgr(UPGR_Zoom);
+      if(upgr->active)    UData.zoom += amt;
+      if(UData.zoom < 0)  UData.zoom  = 0;
+      if(UData.zoom > 80) UData.zoom  = 80;
+   }
 }
 
 

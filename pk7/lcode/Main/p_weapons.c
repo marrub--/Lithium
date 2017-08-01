@@ -119,8 +119,10 @@ bool Lith_WeaponPickup(int name)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
 
-   bool weaponstay = ACS_GetCVar("sv_weaponstay");
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return false;
+
+   bool weaponstay = ACS_GetCVar("sv_weaponstay");
    int parm = weapon_unknown;
 
    switch(p->pclass)
@@ -330,6 +332,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
    player_t *p = LocalPlayer;
+   if(NoPlayer(p)) return 0;
    __str cl  = p->weapon.cur->magclass;
    fixed inv = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
    mul = mul ? mul : 1.2;
@@ -357,14 +360,16 @@ int Lith_GetFinalizerMaxHealth(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   player_t *p = LocalPlayer;
    int max = rifle_firemode_max;
 
-   if(!p->getUpgr(UPGR_RifleModes)->active)
-      max--;
+   withplayer(LocalPlayer)
+   {
+      if(!p->getUpgr(UPGR_RifleModes)->active)
+         max--;
 
-   p->riflefiremode = (++p->riflefiremode) % max;
-   ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
+      p->riflefiremode = (++p->riflefiremode) % max;
+      ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
+   }
 }
 
 //
@@ -373,10 +378,9 @@ void Lith_SwitchRifleFiremode(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_ResetRifleMode()
 {
-   player_t *p = LocalPlayer;
-
-   if(p->getCVarI("lith_weapons_riflemodeclear"))
-      p->riflefiremode = rifle_firemode_auto;
+   withplayer(LocalPlayer)
+      if(p->getCVarI("lith_weapons_riflemodeclear"))
+         p->riflefiremode = rifle_firemode_auto;
 }
 
 //
@@ -411,7 +415,7 @@ int Lith_GetWRF(void)
    };
 
    player_t *p = LocalPlayer;
-   if(!p) return 0;
+   if(NoPlayer(p)) return 0;
 
    int flags = 0;
    if(p->semifrozen)              flags |= WRF_NOFIRE;

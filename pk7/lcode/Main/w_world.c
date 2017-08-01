@@ -138,8 +138,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
       ACS_SetActivatorToTarget(0);
 
    player_t *p = LocalPlayer;
-
-   if(!p) return 0;
+   if(NoPlayer(p)) return 0;
 
    switch(info)
    {
