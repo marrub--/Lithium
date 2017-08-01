@@ -167,7 +167,7 @@ void Lith_DOGS()
    {
       fixed ang = ACS_RandomFixed(0, 1);
       fixed dst = ACS_RandomFixed(0, 64);
-      ACS_SpawnForced("Lith_Steggles", p->x + cosk(ang) * dst, p->y + sink(ang) * dst, p->z + 8, tid);
+      ACS_SpawnForced("Lith_Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
       ACS_GiveInventory("Lith_Alerter", 1);
       ACS_Delay(10);
    }

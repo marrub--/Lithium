@@ -16,14 +16,14 @@
 static void DOOOOODGE(player_t *p)
 {
    fixed vh = p->viewheight;
-   
+
    for(int i = 0; i < 20; i++)
    {
-      fixed mul = 1.0 - (sink(i / 40.0) * 0.6);
+      fixed mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
       ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
       ACS_Delay(1);
    }
-   
+
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
 }
 
@@ -58,39 +58,39 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
 {
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
-   
+
    if(p->frozen) return;
-   
+
    fixed grounddist = p->z - p->floorz;
-   
+
    if(UData.charge >= CHARGE_MAX)
    {
       if(grounddist == 0.0)
          UData.leaped = 0;
-      
+
       if(p->buttons & BT_SPEED &&
          (grounddist <= 16.0 || !p->getUpgr(UPGR_JetBooster)->active))
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
-         
+
          ACS_PlaySound(0, "player/slide");
-         p->setVel(p->velx + (cosk(angle) * 32.0), p->vely + (sink(angle) * 32.0), 0, false, true);
-         
+         p->setVel(p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0, false, true);
+
          DOOOOODGE(p);
-         
+
          UData.charge = 0;
       }
    }
-   
+
    if(p->buttonPressed(BT_JUMP) &&
       !ACS_CheckInventory("Lith_RocketBooster") && !UData.leaped &&
       ((grounddist <= 16.0 && UData.charge < CHARGE_MAX) || grounddist > 16.0))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
-      
+
       ACS_PlaySound(0, "player/doublejump");
-      p->setVel(p->velx + (cosk(angle) * 4.0), p->vely + (sink(angle) * 4.0), 12.0, false, true);
-      
+      p->setVel(p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0, false, true);
+
       UData.leaped = 1;
    }
 }

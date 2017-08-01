@@ -197,13 +197,13 @@ static void HUD_Waves(player_t *p)
    pos = (10 + timer) % 160;
    DrawSpriteFade(StrParam("lgfx/HUD/H_D1%i.png", frame),
       hid_scope_sineS - pos,
-      300.1 + roundk(sink(pos / 32.0) * 7.0, 0),
+      300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
       25.1 + pos,
       1.5, 0.3);
 
    // Square
    {
-      fixed a = cosk(pos / 32.0);
+      fixed a = ACS_Cos(pos / 32.0);
 
       pos = (7 + timer) % 160;
       DrawSpriteFade(roundk(a, 2) != 0.0 ? "lgfx/HUD/H_D16.png" : "lgfx/HUD/H_D46.png",

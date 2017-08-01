@@ -1,10 +1,6 @@
 #ifndef LITH_COMMON_H
 #define LITH_COMMON_H
 
-#if KDEV
-typedef void const *__str;
-#endif
-
 #pragma GDCC FIXED_LITERAL ON
 #pragma GDCC STRENT_LITERAL ON
 
@@ -36,14 +32,12 @@ typedef void const *__str;
    do if(ACS_GetCVar("__lith_debug_level") >= (level)) Log(__VA_ARGS__); \
    while(0)
 
-#define sink ACS_Sin
-#define cosk ACS_Cos
-
 #define max(x, y) ((x) < (y) ? (y) : (x))
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))
 
-#define Ticker(on, off) ((ACS_Timer() % 35) < 17 ? (on) : (off))
+#define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
+#define Ticker(on, off) (TickerT(17, on, off))
 
 #define Lith_ScriptCall(...) \
    (world.grafZoneEntered ? ACS_ScriptCall(__VA_ARGS__) : 0)
@@ -126,7 +120,13 @@ typedef void const *__str;
 #define TICSECOND (0.029)
 
 // To make pitch values down=0, up=1
-#define PITCH_BASE -0.5
+#define PITCH_BASE (-0.5)
+
+// π!
+#define pi  (3.14159265358979323846f)
+#define pi2 (pi / 2.0f)
+#define pi4 (pi / 4.0f)
+#define tau (pi * 2.0f)
 
 // Debug log verbosity
 enum
@@ -159,9 +159,13 @@ void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
 void PrintBold(__str fmt, ...);
 
-// Utilities
+// Strings
 __str StrUpper(__str in);
 unsigned StrHash(char __str_ars const *s);
+char *Lith_strcpy_str(char *dest, char __str_ars const *src);
+int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
+
+// Utilities
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
@@ -169,8 +173,6 @@ unsigned StrHash(char __str_ars const *s);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
 __str Lith_ScoreSep(score_t num);
-char *Lith_strcpy_str(char *dest, char __str_ars const *src);
-int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
 [[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
 
 // Math
@@ -180,12 +182,6 @@ fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 bool bpcldi(int bx1, int by1, int bx2, int by2, int x2, int y2);
 int ceilk(fixed n);
-
-// Constants
-static float const pi  = 3.14159265358979323846f;
-static float const pi2 = pi / 2.0f;
-static float const pi4 = pi / 4.0f;
-static float const tau = pi * 2.0f;
 
 #endif
 

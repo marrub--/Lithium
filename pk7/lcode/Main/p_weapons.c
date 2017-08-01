@@ -203,8 +203,8 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       fixed dy = ACS_RandomFixed(mdy,  0.0);
       fixed a  = ACS_RandomFixed(1.0, -1.0);
 
-      A = sink(a) * dx;
-      P = cosk(a) * dy;
+      A = ACS_Sin(a) * dx;
+      P = ACS_Cos(a) * dy;
 
       return A;
    }
