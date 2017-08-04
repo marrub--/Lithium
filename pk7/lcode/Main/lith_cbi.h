@@ -28,6 +28,7 @@ enum
    cbi_theme_orange,
    cbi_theme_grey,
    cbi_theme_bassilla,
+   cbi_theme_ghost,
    cbi_theme_max
 };
 
