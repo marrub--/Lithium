@@ -25,7 +25,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
    // Charge
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
-   
+
    // Prepare
    else if(!UData.readied)
    {
@@ -33,30 +33,30 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
       p->logH(">>>>> Adrenaline injector ready.");
       UData.readied = true;
    }
-   
+
    // Ready to use
    else
    {
       // Ready
       if(!ACS_CheckInventory("Lith_AdrenalineToken"))
          ACS_GiveInventory("Lith_AdrenalineProjectileChecker", 1);
-      
+
       // Use
       if(ACS_CheckInventory("Lith_AdrenalineToken"))
       {
          ACS_TakeInventory("Lith_AdrenalineToken", 1);
-         
+
          ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
          p->logH(">>>>> Adrenaline administered.");
-         
+
          UData.charge = UData.readied = 0;
-         
+
          ACS_GiveInventory("Lith_TimeHax2", 1);
          ACS_Delay(36);
          ACS_TakeInventory("Lith_TimeHax2", 1);
       }
    }
-   
+
    ACS_TakeInventory("Lith_AdrenalineToken", 1);
 }
 
@@ -66,11 +66,11 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
 void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
 {
    if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
-   
+
    int timemod = p->ticks % 45;
    float amt = UData.charge / (float)CHARGE_MAX;
-   
-   DrawSprite(UData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
+
+   DrawSpriteXX(UData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
       HUDMSG_FADEOUT | HUDMSG_ALPHA,
       hid_adrenind_fxS - timemod,
       77.1 - timemod,

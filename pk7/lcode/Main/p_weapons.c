@@ -390,7 +390,7 @@ void Lith_ResetRifleMode()
 void Lith_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
-   DrawSprite(hit ? "lgfx/BladeHit.png" : "lgfx/Blade.png", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
+   DrawSpriteX(hit ? "lgfx/BladeHit.png" : "lgfx/Blade.png", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
 }
 
 //

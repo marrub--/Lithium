@@ -88,34 +88,6 @@
       HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
-#define DrawSprite(name, flags, id, x, y, hold, ...) \
-   ( \
-      ACS_SetFont(name), \
-      HudMessage("A"), \
-      HudMessageParams((flags) | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold, __VA_ARGS__) \
-   )
-
-#define DrawSpriteFade(name, id, x, y, hold, fadetime) \
-   ( \
-      ACS_SetFont(name), \
-      HudMessage("A"), \
-      HudMessageFade(id, x, y, hold, fadetime) \
-   )
-
-#define DrawSpritePlain(name, id, x, y, hold) \
-   ( \
-      ACS_SetFont(name), \
-      HudMessage("A"), \
-      HudMessagePlain(id, x, y, hold) \
-   )
-
-#define DrawSpriteAlpha(name, id, x, y, hold, alpha) \
-   ( \
-      ACS_SetFont(name), \
-      HudMessage("A"), \
-      HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
-   )
-
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -154,6 +126,13 @@ struct polar {
 __str StrParam(__str fmt, ...);
 __str Language(__str fmt, ...);
 __str LanguageNull(__str fmt, ...);
+extern void (*DrawSprite)(__str name, int flags, int id, fixed x, fixed y, fixed hold);
+extern void (*DrawSpriteX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
+extern void (*DrawSpriteXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
+extern void (*DrawSpriteXXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
+extern void (*DrawSpritePlain)(__str name, int id, fixed x, fixed y, fixed hold);
+extern void (*DrawSpriteAlpha)(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
+extern void (*DrawSpriteFade)(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);

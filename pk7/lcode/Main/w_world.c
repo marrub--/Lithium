@@ -430,16 +430,18 @@ static void UpdateGame(void)
 //
 static void GSInit(void)
 {
-   extern void Lith_GInit_Shop();
+   extern void SetupSpriteBlitter(void);
+   extern void Lith_GInit_Shop(void);
    extern void Lith_GSReinit_Upgrade(void);
    extern void Lith_GSInit_Upgrade(void);
    extern void Lith_GSInit_Weapon(void);
    extern void Lith_GSInit_Dialogue(void);
    extern void Lith_InstallCBIItem(int num);
 
+   CheckCompat();
+   SetupSpriteBlitter();
    UpdateGame();
    GetDebugInfo();
-   CheckCompat();
    Lith_GInit_Shop();
 
    if(!gsinit)

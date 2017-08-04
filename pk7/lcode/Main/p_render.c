@@ -126,11 +126,11 @@ void Lith_PlayerHUD(player_t *p)
       if(p->pclass == pclass_cybermage)
       {
          int time = (ACS_Timer() % 16) / 4;
-         DrawSprite(StrParam("lgfx/HUD_C/ScopeOverlay%i.png", time + 1),
+         DrawSpriteXX(StrParam("lgfx/HUD_C/ScopeOverlay%i.png", time + 1),
             HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
 
          for(int i = 0; i < 200; i++)
-            DrawSprite("lgfx/HUD/H_D41.png", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
+            DrawSpriteXX("lgfx/HUD/H_D41.png", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
                hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
       }
       else
