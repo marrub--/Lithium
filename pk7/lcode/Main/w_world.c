@@ -495,6 +495,26 @@ static void MInit(void)
 
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
+
+   // Set up translations.
+   for(int i = 0; i < 8; i++)
+   {
+      static struct {int r,g,b;} const trs[8] = {
+         {0xF5,0x22,0x22},
+         {0xF5,0x22,0xC4},
+         {0xC0,0x22,0xF5},
+         {0x50,0x22,0xF5},
+         {0x22,0xF5,0xF5},
+         {0x22,0xF5,0x8C},
+         {0xF5,0xF5,0x22},
+         {0xF5,0xB2,0x22},
+      };
+      ACS_CreateTranslationStart(42470 + i);
+      ACS_CreateTranslationRGB(80, 111,
+         trs[i].r,   trs[i].g,   trs[i].b,
+         trs[i].r/4, trs[i].g/4, trs[i].b/4);
+      ACS_CreateTranslationEnd();
+   }
 }
 
 //

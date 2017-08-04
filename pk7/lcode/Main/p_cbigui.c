@@ -1,3 +1,4 @@
+// vim: columns=140
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
