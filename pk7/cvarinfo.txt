@@ -67,15 +67,14 @@ user bool   lith_scanner_altfont = false;
 // Server
 server float __lith_version;
 
-server           int   lith_sv_difficulty    = 10;
-server           bool  lith_sv_rain          = false;
-server           bool  lith_sv_sky           = false;
-server           bool  lith_sv_revenge       = true;
-server noarchive bool  lith_sv_monsters_ok   = false;
-server           float lith_sv_scoremul      = 1.25;
-server           bool  lith_sv_seriousmode   = false;
-server           bool  lith_sv_scoregolf     = false;
-server           bool  lith_sv_pauseinmenus  = true;
+server int   lith_sv_difficulty    = 10;
+server bool  lith_sv_rain          = false;
+server bool  lith_sv_sky           = false;
+server bool  lith_sv_revenge       = true;
+server float lith_sv_scoremul      = 1.25;
+server bool  lith_sv_seriousmode   = false;
+server bool  lith_sv_scoregolf     = false;
+server bool  lith_sv_pauseinmenus  = true;
 
 // Bosses
 server bool lith_sv_nobosses    = false;

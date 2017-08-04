@@ -64,6 +64,7 @@ typedef struct worldinfo_s
    property begAngles      {call: Lith_BeginAngles()}
    property addAngles      {call: Lith_AddAngle()}
 
+   bool   gsinit;
    bool   singleplayer;
    int    mapscleared;
    int    prevcluster;
@@ -71,6 +72,7 @@ typedef struct worldinfo_s
    bool   unloaded;
    bool   islithmap;
    bool   enemycompat;
+   bool   enemycheck;
    int    secretsfound;
    double scoremul;
    long   ticks;

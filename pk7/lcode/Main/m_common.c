@@ -129,6 +129,7 @@ static void A_DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, f
    ACS_EndHudMessage(fadetime);
 }
 
+#if 0
 //
 // Z_DrawSprite
 //
@@ -177,7 +178,7 @@ static void Z_DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, 
 static void Z_DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
 {
 }
-
+#endif
 
 
 //----------------------------------------------------------------------------

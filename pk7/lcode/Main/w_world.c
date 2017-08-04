@@ -16,14 +16,6 @@
 
 
 //-----------------------------------------------------------------------------
-// Static Objects
-//
-
-static bool enemycheckfinished;
-static bool gsinit;
-
-
-//-----------------------------------------------------------------------------
 // Extern Objects
 //
 
@@ -119,10 +111,42 @@ int Lith_UniqueID(int tid)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_EmitScore(int amount)
 {
-   if(enemycheckfinished || world.enemycompat)
+   if(world.enemycheck)
       Lith_GiveAllScore(amount, false);
 
    world.enemycompat = true;
+}
+
+//
+// Lith_CheckEnemyCompat
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_CheckEnemyCompat(int tid)
+{
+   if(strstr_str(ACS_GetActorClass(tid), "Lith_"))
+      world.enemycompat = true;
+   else
+   {
+      // Wait for spawners.
+      ACS_Delay(2);
+
+      // Make the actor undetectable.
+      ACS_SetActorProperty(tid, APROP_RenderStyle, STYLE_None);
+      ACS_SetActorPropertyString(tid, APROP_ActiveSound, "silence");
+      ACS_SetActorPropertyString(tid, APROP_AttackSound, "silence");
+      ACS_SetActorPropertyString(tid, APROP_DeathSound,  "silence");
+      ACS_SetActorPropertyString(tid, APROP_PainSound,   "silence");
+      ACS_SetActorPropertyString(tid, APROP_SeeSound,    "silence");
+      ACS_GiveActorInventory(tid, "Lith_EnemyChecker", 1);
+
+      // This delay is very specific -- it's the amount of time before
+      // A_NoBlocking is called on a zombie. This is in case the monster
+      // pack you're using uses item drops for Score.
+      ACS_Delay(17);
+   }
+
+   world.enemycheck = true;
+   ACS_Thing_Remove(tid);
 }
 
 //
@@ -173,9 +197,10 @@ int Lith_GetWorldData(int info)
    {
    case wdata_brightweps:  return ACS_GetUserCVar(0, "lith_player_brightweps");
    case wdata_noitemfx:    return ACS_GetUserCVar(0, "lith_player_noitemfx");
-   case wdata_gsinit:      return gsinit;
+   case wdata_gsinit:      return world.gsinit;
    case wdata_bossspawned: return world.bossspawned;
    case wdata_grafzone:    return world.grafZoneEntered;
+   case wdata_enemycheck:  return world.enemycheck;
    }
 
    return 0;
@@ -235,16 +260,8 @@ static bool Lith_CheckPlayer1Sight(int tid)
 [[__call("ScriptS")]]
 static void Lith_CheckIfEnemiesAreCompatible(void)
 {
-   // If we have nomonsters on we have no reason to detect this.
-   if(ACS_GetCVar("sv_nomonsters"))
+   if(ACS_GetCVar("sv_nomonsters") || world.grafZoneEntered)
       return;
-
-   // If the user's confirmed the monsters are OK, we don't need to check.
-   if(ACS_GetCVar("lith_sv_monsters_ok"))
-   {
-      enemycheckfinished = true;
-      return;
-   }
 
    for(;;)
    {
@@ -252,41 +269,8 @@ static void Lith_CheckIfEnemiesAreCompatible(void)
       fixed y = ACS_RandomFixed(-32765, 32765);
       int tid;
 
-      // Create a zombie.
-      if(ACS_SpawnForced("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0))
-      {
-         // If it can see the player, then we need to relocate it.
-         if(Lith_CheckPlayer1Sight(tid))
-         {
-            ACS_Thing_Remove(tid);
-            continue;
-         }
-
-         // Wait for spawners.
-         ACS_Delay(2);
-
-         // Make the actor undetectable.
-         ACS_SetActorProperty(tid, APROP_RenderStyle, STYLE_None);
-         ACS_SetActorPropertyString(tid, APROP_ActiveSound, "silence");
-         ACS_SetActorPropertyString(tid, APROP_AttackSound, "silence");
-         ACS_SetActorPropertyString(tid, APROP_DeathSound,  "silence");
-         ACS_SetActorPropertyString(tid, APROP_PainSound,   "silence");
-         ACS_SetActorPropertyString(tid, APROP_SeeSound,    "silence");
-         ACS_GiveActorInventory(tid, "Lith_EnemyChecker", 1);
-
-         // This delay is very specific -- it's the amount of time before
-         // A_NoBlocking is called on a zombie. This is in case the monster
-         // pack you're using (like DRLA Monsters) uses item drops for Score.
-         ACS_Delay(17);
-
-         // Get rid of the enemy.
-         ACS_Thing_Remove(tid);
-
-         // If the enemy emitted score, then we can get out of the script.
-         enemycheckfinished = true;
-         if(world.enemycompat)
-            return;
-
+      if(ACS_SpawnForced("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0)) {
+         Lith_CheckEnemyCompat(tid);
          break;
       }
    }
@@ -444,7 +428,7 @@ static void GSInit(void)
    GetDebugInfo();
    Lith_GInit_Shop();
 
-   if(!gsinit)
+   if(!world.gsinit)
    {
       Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
@@ -461,7 +445,7 @@ static void GSInit(void)
          for(int i = 0; i < cupg_max; i++)
             Lith_InstallCBIItem(i);
 
-      gsinit = true;
+      world.gsinit = true;
    }
    else
       Lith_GSReinit_Upgrade();
@@ -653,9 +637,10 @@ static void Lith_World(void)
       prevkills   = kills;
       previtems   = items;
 
-      if(enemycheckfinished && !world.dbgNoMon) {
+      if(world.enemycheck && !world.dbgNoMon) {
          extern void DmonDebugInfo(void);
-         ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
+         if(!world.grafZoneEntered)
+            ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
          DmonDebugInfo();
       }
 
