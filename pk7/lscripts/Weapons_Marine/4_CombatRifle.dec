@@ -10,7 +10,12 @@ actor Lith_RifleLaserTrail
    {
    Spawn:
       BLLT E 5 bright
-      BLLT E 3 bright A_FadeOut(0.5)
+   SpawnLoop:
+      BLLT E 1 bright A_SetScale(scalex - 0.035)
+      BLLT E 0 bright A_JumpIf(scalex < 0.05, "Done")
+      loop
+   Done:
+      TNT1 A 0
       stop
    }
 }
