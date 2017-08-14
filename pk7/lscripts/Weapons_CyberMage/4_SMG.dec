@@ -109,6 +109,7 @@ actor Lith_SMG : Lith_CWeapon
    
    const int lvar_spreadx = 1;
    const int lvar_spready = 2;
+   const int lvar_recoil = 3;
    
    states
    {
@@ -135,6 +136,7 @@ actor Lith_SMG : Lith_CWeapon
       
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_SMGHeat", 0, "ReloadHeat")
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_recoil, 0.1*FIX)
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SMG_A), 3)
       TNT1 A 0 A_JumpIfInventory("Lith_SMGShotsFired", 0, "Reload")
@@ -164,8 +166,10 @@ actor Lith_SMG : Lith_CWeapon
       TNT1 A 0 
       
       TNT1 A 0 A_GunFlash("DummyFlash")
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spreadx, frandom(-5, 5)*FIX)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spready, frandom(-1, 1)*FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spreadx, frandom(-5, 5) * (CallACS("Lith_GetVar", lvar_recoil) / FIX) * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spready, frandom(-1, 1) * (CallACS("Lith_GetVar", lvar_recoil) / FIX) * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_AddVar", lvar_recoil, 0.05 * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MinVar", lvar_recoil, 1 * FIX)
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SMG_B), "FireTrace")
       
