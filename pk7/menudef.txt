@@ -2,7 +2,7 @@ DefaultListMenu
 {
    Font "BIGFONT", "Green"
    Selector "-", -20, 2
-   Linespacing 16
+   LineSpacing 16
 }
 
 ListMenu "MainMenu"
@@ -23,6 +23,7 @@ ListMenu "MainMenu"
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
    }
+   TextItem "$MENU_UPDAT", "u", "Update1_5b"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
 }
 
@@ -62,3 +63,141 @@ ListMenu "SaveGameMenu"
    Position 80, 54
    Class "SaveMenu"
 }
+
+ListMenu "Update1_5b"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5b"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_5a2"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_5b_Page2"
+}
+
+ListMenu "Update1_5b_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5b_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_5a2"
+}
+
+ListMenu "Update1_5a2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5a2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_5a"
+}
+
+ListMenu "Update1_5a"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5a"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_4"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_5a_Page2"
+}
+
+ListMenu "Update1_5a_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5a_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_4"
+}
+
+ListMenu "Update1_4"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_4"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_3_1"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_4_Page2"
+}
+
+ListMenu "Update1_4_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_4_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_3_1"
+}
+
+ListMenu "Update1_3_1"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_3_1"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_3"
+}
+
+ListMenu "Update1_3"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_3"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_2"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_3_Page2"
+}
+
+ListMenu "Update1_3_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_3_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_2"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_3_Page3"
+}
+
+ListMenu "Update1_3_Page3"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_3_Page3"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_2"
+}
+
+ListMenu "Update1_2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_1"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_2_Page2"
+}
+
+ListMenu "Update1_2_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_2_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_1"
+}
+
+ListMenu "Update1_1"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_1"
+   TextItem "No more updates :)", "", "Update1_1"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_1_Page2"
+}
+
+ListMenu "Update1_1_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_1_Page2"
+   TextItem "No more updates :)", "", "Update1_1_Page2"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_1_Page3"
+}
+
+ListMenu "Update1_1_Page3"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_1_Page3"
+   TextItem "No more updates :)", "", "Update1_1_Page3"
+}
+
+// EOF

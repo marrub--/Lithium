@@ -1,76 +1,417 @@
 [enu default]
 
-SECRETMESSAGE = "\cnA secret is revealed!";
 
-DOSY = "(Press Y to quit.)";
-PRESSYN = "Press Y or N.";
-PRESSKEY = "Press a key.";
+// Misc ----------------------------------------------------------------------|
+"SECRETMESSAGE" = "\cnA secret is revealed!";
+"BGFLAT06" = "ZZLITHBG";
+"BGFLAT11" = "ZZLITHBG";
+"BGFLAT20" = "ZZLITHBG";
+"BGFLAT30" = "ZZLITHBG";
+"BGFLAT15" = "ZZLITHBG";
+"BGFLAT31" = "ZZLITHBG";
 
-TXT_YES = "[Yes]";
-TXT_NO  = "[No]";
+// Quit Messages -------------------------------------------------------------|
+"QUITMSG1" = "Hold it, your contract isn't complete yet!";
+"QUITMSG4" = "I got nothing.";
+"QUITMSG5" = "Leave before I make you leave!";
+"QUITMSG6" = "Super, now I can get back to emitting bees at your house!";
+"QUITMSG9" = "Look at this wuss!";
+"QUITMSG11" = "I'm rooting for you whichever way you go!";
+"QUITMSG12" = "Exit?";
+"QUITMSG13" = "Wait, there's a youkai waiting for you at the exit!";
+"QUITMSG14" = "Get outta here, and get me some money too.";
+"QUITMSG" =
+   "Wait, don't go!\n"
+   "I still have to sell you the expansion pack!";
+"QUITMSG2" =
+   "There are still explosions to be had,\n"
+   "are you really sure?";
+"QUITMSG3" =
+   "Get out! Get out!\n"
+   "Go and do your job!";
+"QUITMSG8" =
+   "If you leave, I'll personally\n"
+   "send pizzas to your doorstep.";
+"QUITMSG10" =
+   "C'mon,\n"
+   "just 5 more minutes?";
+"QUITMSG7" =
+   "HEY\n"
+   "HEY\n"
+   "DIE";
 
-QUITMSG   = "Wait, don't go!\nI still have to sell you the expansion pack!";
-QUITMSG1  = "Hold it, your contract isn't complete yet!";
-QUITMSG2  = "There are still explosions to be had,\nare you really sure?";
-QUITMSG3  = "Get out! Get out!\nGo and do your job!";
-QUITMSG4  = "I got nothing.";
-QUITMSG5  = "Leave before I make you leave!";
-QUITMSG6  = "Super, now I can get back to emitting bees at your house!";
-QUITMSG7  = "HEY\nHEY\nDIE";
-QUITMSG8  = "If you leave, I'll personally\nsend pizzas to your doorstep.";
-QUITMSG9  = "Look at this wuss!";
-QUITMSG10 = "C'mon,\njust 5 more minutes?";
-QUITMSG11 = "I'm rooting for you whichever way you go!";
-QUITMSG12 = "Exit?";
-QUITMSG13 = "Wait, there's a youkai waiting for you at the exit!";
-QUITMSG14 = "Get outta here, and get me some money too.";
+// Death Messages ------------------------------------------------------------|
+"LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";
+"LITH_DEATHMSG_02" = "YOU DED";
+"LITH_DEATHMSG_03" = "MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.";
+"LITH_DEATHMSG_04" = "PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.";
+"LITH_DEATHMSG_05" = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
+"LITH_DEATHMSG_06" = "THE SKELETONS KNOW.";
+"LITH_DEATHMSG_07" = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
+"LITH_DEATHMSG_08" = "IT'S OKAY IT'S NOT LIKE EVERYONE WAS DEPENDING ON YOU OR ANYTHING";
+"LITH_DEATHMSG_09" = "CONTRACT TERMINATED. REASON: DIED, LOL.";
+"LITH_DEATHMSG_10" = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
+"LITH_DEATHMSG_11" = "HAHAHAHA!";
+"LITH_DEATHMSG_12" = "YOU SHOULDN'T HAVE DONE THAT.";
+"LITH_DEATHMSG_13" = "WOW! LOOK AT THOSE DEMON FEET.";
+"LITH_DEATHMSG_14" = "OUCH! THAT HAD TO HURT.";
+"LITH_DEATHMSG_15" = "LOOK AT ME! I'M FLAT!";
+"LITH_DEATHMSG_16" = "THANKS FOR PLAYING!";
+"LITH_DEATHMSG_17" = "YOU LAZY @&$#!";
+"LITH_DEATHMSG_18" = "HAVE YOU HAD ENOUGH?";
+"LITH_DEATHMSG_19" = "THE DEMONS GAVE YOU THE BOOT!";
+"LITH_DEATHMSG_20" = "AT LEAST YOU PLAY BETTER THAN KAISER!";
 
-LITH_DEATHMSG_01 = "YOU ARE DEAD, DEAD, DEAD";
-LITH_DEATHMSG_02 = "YOU DED";
-LITH_DEATHMSG_03 = "MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.";
-LITH_DEATHMSG_04 = "PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.";
-LITH_DEATHMSG_05 = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
-LITH_DEATHMSG_06 = "THE SKELETONS KNOW.";
-LITH_DEATHMSG_07 = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
-LITH_DEATHMSG_08 = "IT'S OKAY IT'S NOT LIKE EVERYONE WAS DEPENDING ON YOU OR ANYTHING";
-LITH_DEATHMSG_09 = "CONTRACT TERMINATED. REASON: DIED, LOL.";
-LITH_DEATHMSG_10 = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
-LITH_DEATHMSG_11 = "HAHAHAHA!";
-LITH_DEATHMSG_12 = "YOU SHOULDN'T HAVE DONE THAT.";
-LITH_DEATHMSG_13 = "WOW! LOOK AT THOSE DEMON FEET.";
-LITH_DEATHMSG_14 = "OUCH! THAT HAD TO HURT.";
-LITH_DEATHMSG_15 = "LOOK AT ME! I'M FLAT!";
-LITH_DEATHMSG_16 = "THANKS FOR PLAYING!";
-LITH_DEATHMSG_17 = "YOU LAZY @&$#!";
-LITH_DEATHMSG_18 = "HAVE YOU HAD ENOUGH?";
-LITH_DEATHMSG_19 = "THE DEMONS GAVE YOU THE BOOT!";
-LITH_DEATHMSG_20 = "AT LEAST YOU PLAY BETTER THAN KAISER!";
+// Menus ---------------------------------------------------------------------|
+"MENU_NGAME" = "* (New-Game)";
+"MENU_OPTION" = "* (Options)";
+"MENU_LOADG" = "* (Load-Game)";
+"MENU_SAVEG" = "* (Save-Game)";
+"MENU_UPDAT" = "* (Update-Notes)";
+"MENU_QUITG" = "* (Quit-Game)";
+"MENU_CHOOSECLASS" = "Your Class Is:";
+"MENU_WHICHEPISODE" = "Your Story Is:";
+"MENU_CHOOSESKILL" = "Your Skill Is:";
+"DIFF_TOURIST" = "> I'm just a tourist.";
+"DIFF_EASY" = "> Throw me a bone.";
+"DIFF_NORMAL" = "> Hurt me plenty.";
+"DIFF_HARD" = "> Ultra-Violence!";
+"DIFF_XHARD" = "> Watch me die!";
+"DIFF_NMARE" = "> Crazed Nightmare!";
+"LITH_SKILL_EXTRAHARD" =
+   "Are you sure?\n"
+   "This one is extra hard.";
+"LITH_SKILL_NIGHTMARE" =
+   "Are you sure?\n"
+   "This one isn't even remotely fair.";
+"DOSY" = "(Press Y to quit.)";
+"PRESSYN" = "Press Y or N.";
+"PRESSKEY" = "Press a key.";
+"TXT_YES" = "[Yes]";
+"TXT_NO" = "[No]";
 
-LITH_SKILL_EXTRAHARD = "Are you sure?\nThis one is extra hard.";
-LITH_SKILL_NIGHTMARE = "Are you sure?\nThis one isn't even remotely fair.";
+// Updates -------------------------------------------------------------------|
+"LITH_TXT_UPDATE_DOWN" = "vv More";
+"LITH_TXT_UPDATE_PREV" = "<< Previous Update";
 
-BGFLAT06 = "ZZLITHBG"; // enter starport
-BGFLAT11 = "ZZLITHBG"; // enter city
-BGFLAT20 = "ZZLITHBG"; // enter hell
-BGFLAT30 = "ZZLITHBG"; // win game
-BGFLAT15 = "ZZLITHBG"; // secret level
-BGFLAT31 = "ZZLITHBG"; // super secret level
+// Header format:
 
-MENU_NGAME  = "* (New-Game)";
-MENU_LOADG  = "* (Load-Game)";
-MENU_SAVEG  = "* (Save-Game)";
-MENU_OPTION = "* (Options)";
-MENU_QUITG  = "* (Quit-Game)";
-MENU_CHOOSECLASS  = "Your Class Is:";
-MENU_WHICHEPISODE = "Your Story Is:";
-MENU_CHOOSESKILL  = "Your Skill Is:";
+// \cf(\ciDate\cf) \cjFrom \cnOld\cj to \cfNew\cj:
 
-DIFF_TOURIST = "> I'm just a tourist.";
-DIFF_EASY    = "> Throw me a bone.";
-DIFF_NORMAL  = "> Hurt me plenty.";
-DIFF_HARD    = "> Ultra-Violence!";
-DIFF_XHARD   = "> Watch me die!";
-DIFF_NMARE   = "> Crazed Nightmare!";
+// Specifiers:
 
-// EOF
+// Addition = \cd+
 
+// Changed  = \cj|
+
+// Removed  = \cg-
+
+// Subspace = \cb]
+"LITH_TXT_UPDATE_1_5b" =
+   "\cf(\ciJul. 17, 2017\cf) \cjFrom \cn1.5 alpha 2\cj to \cf1.5 beta\cj:\n"
+   "\cd+ Enemies now have a level and rank, which determine their health\n"
+   "\cd  and resistances, et al.\n"
+   "\cd+ Added 3 spells for Cyber-Mage: Delear, Hulgyon and Star Shot.\n"
+   "\cd+ Added a spell selection menu.\n"
+   "\cd+ Added Mana.\n"
+   "\cd+ Added support for monster mods that don't account for Lithium.\n"
+   "\cd+ Added extra support for Colorful Hell.\n"
+   "\cd+ Added new upgrades for Cyber-Mage, half of which are\n"
+   "\cd  not implemented yet. The implemented ones include:\n"
+   "\cb] Soul Cleaver\n"
+   "\cb] Finalizer\n"
+   "\cb] SMG Trimag\n"
+   "\cb] Seeker Rounds\n"
+   "\cb] Safety System\n"
+   "\cb] Longinus Solspear\n"
+   "\cj| Improved the settings menu.\n"
+   "\cj| Fixed extremely terrible balance issues.\n"
+   "\cj| Fixed rain only spawning in your line of sight.\n"
+   "\cj| Fixed horrible performance issues with the pause-in-menus setting.\n"
+   "\cj| Made weapon pickup sounds play when selling the weapon.\n"
+   "\cj| Made the Star Destroyer sound slightly nicer in OpenAL.";
+"LITH_TXT_UPDATE_1_5b_Page2" =
+   "\cj| Made the Combat Rifle never auto-aim.\n"
+   "\cj| Fixed the Barrier powerup not displaying stacked uses properly.\n"
+   "\cj| Made the Spider Mastermind slightly more dangerous.\n"
+   "\cj| Made the SPAS reload faster.\n"
+   "\cj| Made the upgrades screen prettier.\n"
+   "\cd+ Re-added Heretic support.\n"
+   "\cd+ Added a \"log ammo pickups\" setting.\n"
+   "\cd+ Added more info pages.\n"
+   "\cd+ Added more unique pickup sounds.\n"
+   "\cd+ Added a \"no item effects\" setting.\n"
+   "\cd+ Added a pickup sprite for Cyber-Mage's shotgun.\n"
+   "\cj| Decreased memory usage.\n"
+   "\cj| Made the Charge Fist not suck, thanks to Yholl.\n"
+   "\cj| Made the Vital Scanner an implicit upgrade, as it is now necessary.\n"
+   "\cj| Made the Ion Rifle reload automatically on its final shot.\n"
+   "\cj| Fixed upgrades being updated while the game is paused.\n"
+   "\cj| Made the Star Destroyer's projectile smaller.\n"
+   "\cj| Fixed infinite noise emittance with sv_weaponstay on.\n"
+   "\cd+ Added new endings for both player classes.\n"
+   "\cd+ Added more debugging settings.\n"
+   "\cd+ Added something.\n"
+   "\cg- Removed the slide indicator from the HUD";
+"LITH_TXT_UPDATE_1_5a2" =
+   "\cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.5 alpha\cj to \cf1.5 alpha 2\cj:\n"
+   "\cj| Fixed pausing weapons being caused from external sources\n"
+   "\cj  (which broke the adrenaline upgrade completely.)";
+"LITH_TXT_UPDATE_1_5a" =
+   "\cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.4\cj to \cf1.5 alpha\cj:\n"
+   "\cd+ Added searching to the info panel.\n"
+   "\cd+ Added an adrenaline indicator to the HUD.\n"
+   "\cd+ Added a test map (named TESTMAP).\n"
+   "\cd+ Added some environment/ambience settings.\n"
+   "\cd  May act slightly weird sometimes.\n"
+   "\cd+ Added map spawn IDs for stuff.\n"
+   "\cd+ Added a No Bosses CVar (lith_sv_nobosses).\n"
+   "\cd+ Added dialogue and terminal systems. Don't ask.\n"
+   "\cd+ Added 007 Mode extra upgrade.\n"
+   "\cd+ Added behaviour for several Extra Hard enemies.\n"
+   "\cj| Fixed some rather major bugs.\n"
+   "\cj| Merged extras addon with the main mod.\n"
+   "\cb] ZScript is auto-detected, so it only enables ZScript-only features\n"
+   "\cb  when available.\n"
+   "\cb] The mod still mainly targets ZDoom 2.8.1, however running it in newer\n"
+   "\cb  GZDoom versions is now stable and will give you extra features.\n"
+   "\cj| Fixed a lot of spelling errors.\n"
+   "\cj| Made the HUD weapon numbers change color when you have more\n"
+   "\cj  weapons in that slot.\n"
+   "\cj| Fixed the Spider Mastermind not being terrifying enough.\n"
+   "\cj| Made the rifle clickier as it runs out of ammo.";
+"LITH_TXT_UPDATE_1_5a_Page2" =
+   "\cj| Compressed some sounds, reducing the overall file size.\n"
+   "\cj| Fixed some weird balance issues.\n"
+   "\cj| Fixed chaingunners using the wrong sound.\n"
+   "\cj| Replaced slider ticking sound to be less terrible.\n"
+   "\cj| Changed the ground hit sound for the Move Wetware upgrade.\n"
+   "\cj| Fixed bought upgrades actually not giving the right upgrade\n"
+   "\cj  sometimes. WHOOPS\n"
+   "\cj| Decreased the price of extra upgrades to be slightly more obtainable.\n"
+   "\cj| Fixed pause in menus not pausing weapon states.\n"
+   "\cg- Removed autogroups due to their hard-to-maintain nature. May add\n"
+   "\cg  them back in 1.5 beta in some way.\n"
+   "\cg- Removed heretic support. 2hard4me\n"
+   "\cd+ Added fun";
+"LITH_TXT_UPDATE_1_4" =
+   "\cf(\ciApr. 14, 2017\cf) \cjFrom \cn1.3.1\cj to \cf1.4\cj:\n"
+   "\cd+ Added Phantoms.\n"
+   "\cd+ Added a CBI upgrades/performance system.\n"
+   "\cd+ Added GUI themes.\n"
+   "\cd+ Added a Plasma Pistol upgrade.\n"
+   "\cd+ Added a Particle Beam upgrade.\n"
+   "\cd+ Added a Laser Rifle upgrade.\n"
+   "\cd+ Added a Homing Rocket upgrade.\n"
+   "\cd+ Added new sprites for the Gauss Rifle.\n"
+   "\cd+ Added a Quick Knife buttom.\n"
+   "\cd+ Added a mail system.\n"
+   "\cd+ Added LegenDoom Lite compatibility.\n"
+   "\cd+ Added a score golf mode.\n"
+   "\cd+ Added a teleport-in-items setting.\n"
+   "\cd+ Added a bright weapon pickups setting.\n"
+   "\cd+ Released Extras addon.\n"
+   "\cd+ Released Damage Bob Only mod.\n"
+   "\cd+ Added filtering to the upgrades screen.\n"
+   "\cj| Improved the Upgrades screen.\n"
+   "\cj| Fixed performance issues with the Settings screen.\n"
+   "\cj| Replaced the HUD's background color with black.\n"
+   "\cj| Made the SSG faster, and stronger.";
+"LITH_TXT_UPDATE_1_4_Page2" =
+   "\cj| Fixed the Combat Rifle and Sniper Rifle not actually being hitscan.\n"
+   "\cj| Gave Hell Knights/Barons and Cacodemons proper blood colors.\n"
+   "\cj| Re-fixed shop buy messages logging wrong.\n"
+   "\cj| Added the Charge Fist to the shop.\n"
+   "\cj| Fixed some of the info pages.\n"
+   "\cj| Fixed weapon pickups murdering framerate while the level is frozen.\n"
+   "\cj| Fixed the Laser Shotgun not resetting pitch all the way.\n"
+   "\cj| Fixed CVarInfo error under certain games.\n"
+   "\cj| Made weapon pickups look better in OpenGL.\n"
+   "\cj| Fixed weapon pickups breaking in maps with specials attached\n"
+   "\cj  to weapons.\n"
+   "\cj| Buffed the Charge Fist.\n"
+   "\cj| Replaced bullet pickup graphics.\n"
+   "\cj| Added a noise when getting hit with Reactive Armor protection.\n"
+   "\cj| Improved the readability of info pages with images.\n"
+   "\cj| Decreased the backpack discount percentage.\n"
+   "\cj| Moved the Settings screen to the BIP.\n"
+   "\cj| Moved keys on the HUD to the top of the screen.\n"
+   "\cj| Fixed obituary messages with the Instant Death downgrade.\n"
+   "\cj| Slightly rebalanced score given by enemies.\n"
+   "\cg- Removed fun\n"
+   "\cd+ Definitely did not add evil gost.";
+"LITH_TXT_UPDATE_1_3_1" =
+   "\cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.3\cj to \cf1.3.1\cj:\n"
+   "\cj| Fixed maps with ACS scripts in them occasionally causing\n"
+   "\cj  reality to collapse.\n"
+   "\cj| Gave the charge fist a better animation and range.\n"
+   "\cj| Fixed resurrected enemies not getting poisoned.\n"
+   "\cj| Increased shell ammo to 60.\n"
+   "\cd+ Added a setting for cursor speed.";
+"LITH_TXT_UPDATE_1_3" =
+   "\cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.2\cj to \cf1.3\cj:\n"
+   "\cj| Rebalanced a lot of stuff, mainly weapons and score amounts.\n"
+   "\cj| Made the cannon a lot easier to use.\n"
+   "\cj| Redid the GUI a bit. Mainly, stretched it from 320x200 to 320x240.\n"
+   "\cj| Improved scrollbars significantly.\n"
+   "\cj| Re-did the heads up display.\n"
+   "\cd+ Added Auto-Groups, which let you quickly toggle or buy upgrades,\n"
+   "\cd  as well as auto-buy them.\n"
+   "\cd+ Added the Super Shotgun.\n"
+   "\cd+ Added the Missile Launcher.\n"
+   "\cd+ Added the Charge Fist (replaces chainsaw.)\n"
+   "\cd+ Added a pickup sprite for the Omega Cannon.\n"
+   "\cd+ Added a Poison Shotgun upgrade.\n"
+   "\cd+ Added indicators for mode changes/current mode of the reactive\n"
+   "\cd  armor upgrade.\n"
+   "\cd+ Added a display for current score multiplier on the upgrades screen.\n"
+   "\cd+ Added a setting for clearing the combat rifle's mode when\n"
+   "\cd  switching weapons.\n"
+   "\cd+ Added a setting for hiding the log.\n"
+   "\cd+ Added a setting for drawing the log from the top of the screen.\n"
+   "\cd+ Added settings for the Vital Scanner upgrade.\n"
+   "\cd+ Added enemy compatibility checker.";
+"LITH_TXT_UPDATE_1_3_Page2" =
+   "\cd+ Added a titlemap and title music.\n"
+   "\cd+ Added (badly written) intermission texts.\n"
+   "\cd+ Added a pretty loading screen.\n"
+   "\cd+ Added missing info pages.\n"
+   "\cd+ Added info pages for enemies, some companies I forgot to mention,\n"
+   "\cd  and new places.\n"
+   "\cd+ Added an implicit upgrade for zooming in on stuff.\n"
+   "\cd+ Added serious mode.\n"
+   "\cj| Polished the upgrades panel.\n"
+   "\cj| Polished the info panel.\n"
+   "\cj| Made the Move Wetware's ground stomp actually useful.\n"
+   "\cj| Made sold weapon messages more descriptive.\n"
+   "\cj| Fixed sold weapon prices being wrong.\n"
+   "\cj| Fixed bad wording in a lot of the info pages.\n"
+   "\cj| Fixed bad wording in some upgrade descriptions.\n"
+   "\cj| Fixed GUI sliders being wonky.\n"
+   "\cj| Fixed the sniper rifle making things fly into oblivion.\n"
+   "\cj| Made the vital scanner freak out on strong enemies.\n"
+   "\cj| Fixed Auto Reload not having a description.\n"
+   "\cj| Fixed the pistol's info page.\n"
+   "\cj| Fixed the arachnotron/spider mastermind names being wrong.\n"
+   "\cj| Changed some miscallaneous text.";
+"LITH_TXT_UPDATE_1_3_Page3" =
+   "\cj| Improved the way the Adrenaline upgrade works.\n"
+   "\cj| Fixed items being picked up too much.\n"
+   "\cj| Fixed score multiplier not being applied occasionally.\n"
+   "\cj| Made the Punctuator Cannon take more ammo.\n"
+   "\cj| Nerfed the reactive armor upgrade.\n"
+   "\cj| Fixed rockets acting weird at certain angles.\n"
+   "\cj| Made the Vital Scanner upgrade cheaper.\n"
+   "\cg- Removed some items from the shop.";
+"LITH_TXT_UPDATE_1_2" =
+   "\cf(\ciFeb. 1, 2017\cf) \cjFrom \cn1.1\cj to \cf1.2\cj:\n"
+   "\cd+ Added logos for companies in the BIP\n"
+   "\cd+ Added a log tab to the CBI for showing things you've done or used\n"
+   "\cd+ Added lith_player_scorelog for logging any score you gain to the HUD\n"
+   "\cd+ Added Heretic support\n"
+   "\cd+ Added new pickup sprites for the shotgun, plasma rifle and combat rifle\n"
+   "\cd+ Added a Revolver weapon to the shop\n"
+   "\cd+ Added new skill definitions - tourist, easy, normal, hard, extra hard,\n"
+   "\cd  and nightmare\n"
+   "\cd+ Added an automatic pistol upgrade\n"
+   "\cd+ Gave the grenade launcher an actual grenade firing altfire\n"
+   "\cd+ Added a Vital Scanner upgrade, which lets you see an enemy's health\n"
+   "\cd  and the damage you deal to them\n"
+   "\cd+ Added a new debugging cvar\n"
+   "\cd+ Added a payout system, where you get paid based on percentages\n"
+   "\cd  when you beat a level or hub\n"
+   "\cd+ Added an Auto Reload upgrade, which loads your guns for you while\n"
+   "\cd  they're not selected\n"
+   "\cd+ Added a Laser Shotgun weapon to the shop\n"
+   "\cd+ Added a Sniper Rifle weapon to the shop\n"
+   "\cd+ Added a knife which replaces the fist\n"
+   "\cd+ Added menu sounds and a smallfont replacement";
+"LITH_TXT_UPDATE_1_2_Page2" =
+   "\cj| Made the pistol do more damage\n"
+   "\cj| Probably fixed more crashes\n"
+   "\cj| Made combat rifle spit blood better\n"
+   "\cj| Made the cannon a bit easier to aim\n"
+   "\cj| Fixed revenant missiles changing state when adrenaline is activated\n"
+   "\cj| Fixed all the crashes ever probably\n"
+   "\cj| Changed the pistol's capacity to 14 rounds instead of 7\n"
+   "\cj| Moved murderous enemies to the Extra Hard skill\n"
+   "\cj| Fixed not being able to pick up weaons sometimes\n"
+   "\cj| Made the pistol, rocket launcher and shotgun's firing animations better\n"
+   "\cj| Fixed the spiral rocket attack not being strong enough and not doing\n"
+   "\cj  damage to Cyberdemons\n"
+   "\cj| Gave the Gauss Rifle 5 extra rounds\n"
+   "\cj| Fixed scopes being offset wrong\n"
+   "\cj| Buffed the rocket launcher's attacks\n"
+   "\cj| Nerfed the shotgun's attacks\n"
+   "\cj| Fixed the barrier powerup acting weirdly sometimes\n"
+   "\cj| Fixed flashes not showing up on players in co-op\n"
+   "\cj| Reduced file size by compressing music\n"
+   "\cj| Made the punctuator cannon's attacks pitchable\n"
+   "\cj| Buffed bosses quite a bit\n"
+   "\cj| Buffed some weapons";
+"LITH_TXT_UPDATE_1_1" =
+   "\cf(\ciJan. 19, 2017\cf) \cjFrom \cn1.0\cj to \cf1.1\cj:\n"
+   "\cd+ Added an indicator for weapons that take ammo and ones that have\n"
+   "\cd  magazines\n"
+   "\cd+ Added reloading to the rifle, which now has a 40-round magazine that\n"
+   "\cd  must be reloaded but doesn't take ammo\n"
+   "\cd+ Added the Defensive Mini Nuke upgrade\n"
+   "\cd+ Made the player explode on death in singleplayer, togglable\n"
+   "\cd  with lith_sv_revenge\n"
+   "\cd+ Gave grenades a small smoke trail\n"
+   "\cd+ Added weapon readying sounds to the Former Human and Former\n"
+   "\cd  Sergeant\n"
+   "\cd+ Added the Adrenaline Injector upgrade\n"
+   "\cd+ Moved the HUD into an upgrade, so it can be disabled (also gives you\n"
+   "\cd  extra score)\n"
+   "\cd+ Gave the Mancubus a new attack\n"
+   "\cd+ Gave the Cyberdemon a new attack\n"
+   "\cd+ Added powerups to the shop\n"
+   "\cd+ Added a score multiplier view to the upgrades shop so you can see\n"
+   "\cd  what gives how much\n"
+   "\cd+ Added the Instant Death downgrade\n"
+   "\cd+ Added reloading to the Gauss Shotgun (now Gauss Rifle), which has a\n"
+   "\cd  10-round magazine";
+"LITH_TXT_UPDATE_1_1_Page2" =
+   "\cd+ Added a settings page to the CBI which lets you set up CVars\n"
+   "\cd+ Gave the Hell Knight a new attack\n"
+   "\cd+ Gave the Omega Cannon new sprites, new effects and better balance\n"
+   "\cd+ Added the Reactive Armor 2 upgrade\n"
+   "\cd+ Added the Omega Railgun upgrade!\n"
+   "\cd+ Gave the Shotgun new sprites/animations by Sgt. Shivers\n"
+   "\cd+ Gave the Megasphere and Soulsphere new sprites\n"
+   "\cd+ Added a custom Teleport Fog effect\n"
+   "\cd+ Gave the Baron of Hell a new attack\n"
+   "\cd+ Made the Blur Sphere into a Barrier powerup\n"
+   "\cd+ Added fun\n"
+   "\cj| Fixed the laser rifle making too many particles, destroying FPS (sadly\n"
+   "\cj  it doesn't look as nice anymore)\n"
+   "\cj| Fixed a potential script overrun in the first tic that could cause\n"
+   "\cj  weird bugs\n"
+   "\cj| Fixed deselecting the Punctuator Cannon while scoped breaking things\n"
+   "\cj| Fixed the Blue Skull Key giving a wrong pickup message\n"
+   "\cj| Made inputs a bit snappier\n"
+   "\cj| Improved scope visuals\n"
+   "\cj| Fixed enemies not giving score on XDeath\n"
+   "\cj| Changed the price of Torgue Mode";
+"LITH_TXT_UPDATE_1_1_Page3" =
+   "\cj| Changed the amount of score the base upgrades take, making it easier\n"
+   "\cj  to obtain score\n"
+   "\cj| Improved GUI behaviour\n"
+   "\cj| Fixed powerups not having the correct sound\n"
+   "\cj| Improved the Charge Launcher description\n"
+   "\cj| Nerfed the Gauss Rifle and the Combat Rifle further\n"
+   "\cj| Made the Charge Launcher better\n"
+   "\cj| Tweaked prices on upgrades\n"
+   "\cj| Fixed cannon explosion sounds sometimes not playing\n"
+   "\cj| Nerfed the Reactive Armor\n"
+   "\cj| Probably fixed a ton of crashes\n"
+   "\cj| Fixed there not being a space inbetween pickup messages and the\n"
+   "\cj  forward arrow\n"
+   "\cj| Fixed a bunch of things not alerting monsters\n"
+   "\cj| Fixed inconsistencies log messages\n"
+   "\cj| Made the scope on the Combat Rifle's burst fire mode optional (disabled\n"
+   "\cj  by default)\n"
+   "\cj| Fixed the Lost Souls giving too much Score\n"
+   "\cj| Added Thing ID validation to the player, which should possibly fix more\n"
+   "\cj  advanced ZDoom maps breaking";

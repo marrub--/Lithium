@@ -49,7 +49,7 @@ actor Lith_DelearDot : FastProjectile
    Speed 60
    Radius 4
    Height 2
-   Damage (25 * random(1, 2))
+   Damage (20 * random(1, 2))
    DamageType "Lith_Magic"
    MissileType "Lith_DelearDotTrail"
    MissileHeight 8

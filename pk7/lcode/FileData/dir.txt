@@ -43,6 +43,9 @@ Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 in language.log.en.txt
 parsefile Log.txt
 
+in language.misc.en.txt
+parsefile Misc.txt
+
 
 -- CBI Mail ------------------------------------------------------------------
 

@@ -394,17 +394,8 @@ static void UpdateGame(void)
       if(ACS_GetCVarFixed("__lith_version") < n) \
          __with(ACS_SetCVarFixed("__lith_version", n);)
 
-   // Update version 1.4 to 1.5r1
-   Update(15.1) {
-      // Score multiplier default changed from 2.0 to 1.25
-      ACS_SetCVarFixed("lith_sv_scoremul", 1.25);
-   }
-
-   // Update version 1.5r1 to 1.5r2
-   Update(15.2) {
-      // Base difficulty default changed from 1 to 10
-      ACS_SetCVar("lith_sv_difficulty", 10);
-   }
+   Update(15.1) ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0 -> 1.25
+   Update(15.2) ACS_SetCVar("lith_sv_difficulty", 10); // 1 -> 10
 
    #undef Update
 }
