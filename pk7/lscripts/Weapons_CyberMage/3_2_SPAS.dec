@@ -1,6 +1,6 @@
 actor Lith_SPASShotsFired : Inventory
 {
-   Inventory.MaxAmount 5
+   Inventory.MaxAmount 8
 }
 
 actor Lith_SPAS : Lith_CWeapon
@@ -33,30 +33,54 @@ actor Lith_SPAS : Lith_CWeapon
       CSHG A 1
       loop
    
+   ReloadCheck:
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SPAS_B), "Fire1")
+      goto Reload
+
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_ShellAmmo", 1, 1)
       goto FireEmpty
-      TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 0, "Reload")
-      TNT1 A 0 A_GiveInventory("Lith_SPASShotsFired", 1)
+      TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 0, "ReloadCheck")
       TNT1 A 0 A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE)
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SPAS_B), "Fire1")
+      TNT1 A 0 A_GiveInventory("Lith_SPASShotsFired", 1)
       
+   Fire1:
       // don't ask
       TNT1 A 0 A_JumpIf(z - floorz < 16, 3)
       TNT1 A 0 A_Recoil(20)
       TNT1 A 0 A_FireBullets(11, 5, 3, 3)
       
       TNT1 A 0 A_AlertMonsters
-      TNT1 A 0 A_FireBullets(11, 5, 12, 5)
+      TNT1 A 0 A_FireBullets(11, 5, 12, 4)
       TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawner", 0, 0, 0, 6)
       TNT1 A 0 A_PlaySound("weapons/cshotgun/fire", CHAN_WEAPON)
       TNT1 A 0 A_Recoil(0.7)
-      CSHG B 2 bright A_Light(1)
-      CSHG C 2 bright A_Light(2)
-      CSHG D 2 A_Light(0)
-      CSHG A 2
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SPAS_B), "FireAnim2")
+
+   FireAnim:
+      CSHG B 1 bright offset(0, 35) A_Light(1)
+      CSHG B 1 bright offset(0, 35)
+      CSHG C 1 bright offset(0, 34) A_Light(2)
+      CSHG C 1 bright offset(0, 33)
+      CSHG D 1 offset(0, 33) A_Light(0)
+      CSHG D 1 offset(0, 32)
+      goto Ready
+
+   FireAnim2:
+      CSHG B 1 bright offset(0, 35) A_Light(1)
+      CSHG B 1 bright offset(0, 35)
+      CSHG C 1 bright offset(0, 34)
+      CSHG C 1 bright offset(0, 34) A_Light(2)
+      CSHG D 1 bright offset(0, 33)
+      CSHG D 1 bright offset(0, 33)
+      CSHG D 1 offset(0, 33) A_Light(0)
+      CSHG A 1 offset(0, 32)
+      CSHG A 3
       goto Ready
    
    Reload:
+      TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SPAS_B), "Ready")
       TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 1, 1)
       goto Ready
       CSHG A 1

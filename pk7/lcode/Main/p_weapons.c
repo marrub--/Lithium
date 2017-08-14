@@ -72,7 +72,7 @@ static void GiveWeaponItem(int parm)
    {
    case weapon_c_fist:
    case weapon_fist:      ACS_GiveInventory("Lith_Death",      1);    break;
-   case weapon_c_spas:    ACS_GiveInventory("Lith_ShellAmmo",  5);    break;
+   case weapon_c_spas:    ACS_GiveInventory("Lith_ShellAmmo",  8);    break;
    case weapon_ssg:       ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
    case weapon_c_sniper:  ACS_GiveInventory("Lith_RocketAmmo", 6);    break;
    case weapon_launcher:  ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
@@ -275,6 +275,10 @@ void Lith_PlayerUpdateWeapon(player_t *p)
             wep->ammotype  = AT_NMag;
             wep->ammoclass = "Lith_GaussShotsFired";
          }
+         break;
+      case weapon_c_spas:
+         if(p->getUpgr(UPGR_SPAS_B)->active)
+            wep->ammotype = AT_Ammo;
          break;
       case weapon_c_smg:
          if(p->getUpgr(UPGR_SMG_A)->active)
