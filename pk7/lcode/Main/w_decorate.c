@@ -6,6 +6,39 @@
 
 #include <math.h>
 
+// How to make DECORATE into a decent VM: Registers!
+
+#define PVarFunc(fn, expr) \
+   [[__call("ScriptS"), __extern("ACS")]] \
+   int fn \
+   { \
+      withplayer(LocalPlayer) { \
+         int *val = &p->decvars[var - 1]; \
+         return expr; \
+      } \
+      return 0; \
+   }
+
+#define WVarFunc(fn, expr) \
+   [[__call("ScriptS"), __extern("ACS")]] \
+   int fn {int *val = &world.decvars[var - 1]; return expr;}
+
+#define RegisterMachine(reg, name) \
+   reg(Lith_Get##name(int var         ), *val       ) \
+   reg(Lith_Inc##name(int var         ), *val++     ) \
+   reg(Lith_Dec##name(int var         ), *val--     ) \
+   reg(Lith_Set##name(int var, int num), *val  = num) \
+   reg(Lith_Add##name(int var, int num), *val += num) \
+   reg(Lith_Sub##name(int var, int num), *val -= num) \
+   reg(Lith_Mul##name(int var, int num), *val *= num) \
+   reg(Lith_Div##name(int var, int num), *val /= num) \
+   reg(Lith_Mod##name(int var, int num), *val %= num) \
+   reg(Lith_Min##name(int var, int num), *val = min(*val, num)) \
+   reg(Lith_Max##name(int var, int num), *val = max(*val, num))
+
+RegisterMachine(PVarFunc, Var)
+RegisterMachine(WVarFunc, WVar)
+
 //
 // Lith_CheckCeilingSky
 //
@@ -13,55 +46,6 @@
 bool Lith_CheckCeilingSky()
 {
    return !ACS_CheckActorCeilingTexture(0, "F_SKY1");
-}
-
-// How to make DECORATE into a decent VM: Registers!
-
-//
-// Lith_SetVar
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_SetVar(int num, int set)
-{
-   withplayer(LocalPlayer) return p->decvars[num - 1] = set;
-   return 0;
-}
-
-//
-// Lith_GetVar
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetVar(int num)
-{
-   withplayer(LocalPlayer) return p->decvars[num - 1];
-   return 0;
-}
-
-//
-// Lith_SetWVar
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_SetWVar(int num, int set)
-{
-   return world.decvars[num - 1] = set;
-}
-
-//
-// Lith_IncWVar
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_IncWVar(int num)
-{
-   return world.decvars[num - 1]++;
-}
-
-//
-// Lith_GetWVar
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetWVar(int num)
-{
-   return world.decvars[num - 1];
 }
 
 //
