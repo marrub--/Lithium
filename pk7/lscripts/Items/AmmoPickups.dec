@@ -62,6 +62,8 @@ actor Lith_ManaPickup : CustomInventory
 
 actor Lith_Clip : Lith_ScoreItem replaces Clip
 {
+   Inventory.PickupSound "player/pickup/scoresmall"
+
    states
    {
    Spawn:
@@ -76,6 +78,8 @@ actor Lith_Clip : Lith_ScoreItem replaces Clip
 
 actor Lith_ClipBox : Lith_ScoreItem replaces ClipBox
 {
+   Inventory.PickupSound "player/pickup/scorebig"
+
    states
    {
    Spawn:
