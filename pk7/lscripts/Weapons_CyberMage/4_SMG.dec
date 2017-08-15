@@ -136,7 +136,7 @@ actor Lith_SMG : Lith_CWeapon
       
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_SMGHeat", 0, "ReloadHeat")
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_recoil, 0.1*FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("LPVarSet", lvar_recoil, 0.1*FIX)
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SMG_A), 3)
       TNT1 A 0 A_JumpIfInventory("Lith_SMGShotsFired", 0, "Reload")
@@ -166,31 +166,31 @@ actor Lith_SMG : Lith_CWeapon
       TNT1 A 0 
       
       TNT1 A 0 A_GunFlash("DummyFlash")
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spreadx, frandom(-5, 5) * (CallACS("Lith_GetVar", lvar_recoil) / FIX) * FIX)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_SetVar", lvar_spready, frandom(-1, 1) * (CallACS("Lith_GetVar", lvar_recoil) / FIX) * FIX)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_AddVar", lvar_recoil, 0.05 * FIX)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MinVar", lvar_recoil, 1 * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("LPVarSet", lvar_spreadx, frandom(-5, 5) * (CallACS("LPVarGet", lvar_recoil) / FIX) * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("LPVarSet", lvar_spready, frandom(-1, 1) * (CallACS("LPVarGet", lvar_recoil) / FIX) * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("LPVarAdd", lvar_recoil, 0.05 * FIX)
+      TNT1 A 0 ACS_NamedExecuteWithResult("LPVarMin", lvar_recoil, 1 * FIX)
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SMG_B), "FireTrace")
       
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SMG_A), 4)
       TNT1 AA 0 A_FireCustomMissile("Lith_SMGTracer",
-         CallACS("Lith_GetVar", lvar_spreadx)/FIX, false, 0, 0, 0,
-         CallACS("Lith_GetVar", lvar_spready)/FIX)
+         CallACS("LPVarGet", lvar_spreadx)/FIX, false, 0, 0, 0,
+         CallACS("LPVarGet", lvar_spready)/FIX)
       TNT1 A 0 A_Jump(256, 3)
       TNT1 AA 0 A_FireCustomMissile("Lith_SMGTracer2",
-         CallACS("Lith_GetVar", lvar_spreadx)/FIX, false, 0, 0, 0,
-         CallACS("Lith_GetVar", lvar_spready)/FIX)
+         CallACS("LPVarGet", lvar_spreadx)/FIX, false, 0, 0, 0,
+         CallACS("LPVarGet", lvar_spready)/FIX)
       
       TNT1 AA 0 A_FireBullets(
-         CallACS("Lith_GetVar", lvar_spreadx)/FIX,
-         CallACS("Lith_GetVar", lvar_spready)/FIX, -1, 8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE)
+         CallACS("LPVarGet", lvar_spreadx)/FIX,
+         CallACS("LPVarGet", lvar_spready)/FIX, -1, 8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE)
       goto FireAnim
       
    FireTrace:
       TNT1 AA 0 A_FireCustomMissile("Lith_SMGTracer3",
-         CallACS("Lith_GetVar", lvar_spreadx)/FIX, false, 0, 0, 0,
-         CallACS("Lith_GetVar", lvar_spready)/FIX)
+         CallACS("LPVarGet", lvar_spreadx)/FIX, false, 0, 0, 0,
+         CallACS("LPVarGet", lvar_spready)/FIX)
       
    FireAnim:
       TNT1 A 0 offset(0, 32)

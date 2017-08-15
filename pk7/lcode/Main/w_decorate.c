@@ -24,19 +24,19 @@
    int fn {int *val = &world.decvars[var - 1]; return expr;}
 
 #define RegisterMachine(reg, name) \
-   reg(Lith_Get##name(int var         ), *val       ) \
-   reg(Lith_Inc##name(int var         ), *val++     ) \
-   reg(Lith_Dec##name(int var         ), *val--     ) \
-   reg(Lith_Set##name(int var, int num), *val  = num) \
-   reg(Lith_Add##name(int var, int num), *val += num) \
-   reg(Lith_Sub##name(int var, int num), *val -= num) \
-   reg(Lith_Mul##name(int var, int num), *val *= num) \
-   reg(Lith_Div##name(int var, int num), *val /= num) \
-   reg(Lith_Mod##name(int var, int num), *val %= num) \
-   reg(Lith_Min##name(int var, int num), *val = min(*val, num)) \
-   reg(Lith_Max##name(int var, int num), *val = max(*val, num))
+   reg(L##name##Get(int var         ), (*val)       ) \
+   reg(L##name##Inc(int var         ), (*val)++     ) \
+   reg(L##name##Dec(int var         ), (*val)--     ) \
+   reg(L##name##Set(int var, int num), (*val)  = num) \
+   reg(L##name##Add(int var, int num), (*val) += num) \
+   reg(L##name##Sub(int var, int num), (*val) -= num) \
+   reg(L##name##Mul(int var, int num), (*val) *= num) \
+   reg(L##name##Div(int var, int num), (*val) /= num) \
+   reg(L##name##Mod(int var, int num), (*val) %= num) \
+   reg(L##name##Min(int var, int num), (*val) = min(*val, num)) \
+   reg(L##name##Max(int var, int num), (*val) = max(*val, num))
 
-RegisterMachine(PVarFunc, Var)
+RegisterMachine(PVarFunc, PVar)
 RegisterMachine(WVarFunc, WVar)
 
 //
