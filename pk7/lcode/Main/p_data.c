@@ -216,11 +216,6 @@ void Lith_ResetPlayer(player_t *p)
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
    ACS_TakeInventory("Lith_WeaponScopedToken",  999);
-   ACS_TakeInventory("Lith_RifleBurstIter",     999);
-   ACS_TakeInventory("Lith_RocketLoaded",       999);
-   ACS_TakeInventory("Lith_RocketIterated",     999);
-   ACS_TakeInventory("Lith_RocketAltMode",      999);
-   ACS_TakeInventory("Lith_MissileReset",       999);
 
    Lith_PlayerResetCBIGUI(p);
 
