@@ -149,9 +149,10 @@ $random weapons/crifle/zap {
 $volume weapons/crifle/zap 0.15
 
 //
-// Shotgun (Cyber-Mage)
+// SPAS
 //
 weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, Dynamic Range
+weapons/cshotgun/fire2  lsounds/CShotgun/Fire2.flac     // 〃
 weapons/cshotgun/load   lsounds/CShotgun/Load.flac      // Halo 3
 weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // Dynamic Range
 weapons/cshotgun/empty  lsounds/CShotgun/FireEmpty.flac // EYE: Divine Cybermancy
