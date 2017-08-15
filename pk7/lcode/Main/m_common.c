@@ -65,7 +65,7 @@ static void InitCRC64()
 static void A_DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 {
    DrawSpriteBegin(name);
-   ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
+   ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage();
 }
 
@@ -75,7 +75,7 @@ static void A_DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed 
 static void A_DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
 {
    DrawSpriteBegin(name);
-   ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
+   ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage(a1);
 }
 
@@ -85,7 +85,7 @@ static void A_DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed
 static void A_DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
 {
    DrawSpriteBegin(name);
-   ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
+   ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage(a1, a2);
 }
 
@@ -95,7 +95,7 @@ static void A_DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixe
 void A_DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
 {
    DrawSpriteBegin(name);
-   ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
+   ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage(a1, a2, a3);
 }
 
