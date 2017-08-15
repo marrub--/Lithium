@@ -30,6 +30,16 @@ payoutinfo_t payout;
 
 
 //-----------------------------------------------------------------------------
+// Static Objects
+//
+
+static bool  lmvar rain_chk;
+static fixed lmvar rain_px;
+static fixed lmvar rain_py;
+static fixed lmvar rain_dist;
+
+
+//-----------------------------------------------------------------------------
 // Extern Functions
 //
 
@@ -207,15 +217,83 @@ int Lith_GetWorldData(int info)
    return 0;
 }
 
+//
+// Lith_RainDropSpawn
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_RainDropSpawn()
+{
+   if(ACS_CheckActorCeilingTexture(0, "F_SKY1"))
+   {
+      if(rain_chk) {
+         fixed dist = absk(mag2f(ACS_GetActorX(0) - rain_px,
+                                 ACS_GetActorY(0) - rain_py));
+         if(dist < rain_dist)
+            rain_dist = dist;
+      }
+      return true;
+   }
+   else
+      return false;
+}
+
 
 //-----------------------------------------------------------------------------
 // Static Functions
 //
 
 //
-// Lith_DoPayout
+// DoRain
 //
-static void Lith_DoPayout(void)
+[[__call("ScriptS")]]
+static void DoRain()
+{
+   // Doesn't work in multiplayer, sorry!
+   if(ACS_PlayerCount() > 1)
+      return;
+
+   player_t *p = &players[0];
+   ACS_SetActivator(p->tid);
+
+   ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.01, true, ATTN_NONE);
+   ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.01, true, ATTN_NONE);
+
+   fixed skydist;
+   fixed curskydist;
+   for(;;)
+   {
+      if((skydist = !ACS_CheckActorCeilingTexture(0, "F_SKY1"))) {
+         rain_chk = true;
+         rain_dist = 1024;
+         rain_px = p->x;
+         rain_py = p->y;
+      } else {
+         rain_chk = false;
+         ACS_TakeInventory("Lith_SMGHeat", 1);
+      }
+
+      if((InHell || InSecret) && !world.islithmap)
+         ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
+      else
+         ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
+
+      ACS_Delay(1);
+
+      if(rain_chk) {
+         skydist = rain_dist / 1024.0;
+         skydist = minmax(skydist, 0, 1);
+      }
+
+      curskydist = lerpk(curskydist, skydist, 0.035);
+      ACS_SoundVolume(p->weathertid, CHAN_BODY,  1 - curskydist);
+      ACS_SoundVolume(p->weathertid, CHAN_VOICE, 1 - curskydist);
+   }
+}
+
+//
+// DoPayout
+//
+static void DoPayout(void)
 {
    fixed64_t taxpct = ACS_RandomFixed(1 / 100.0, 5 / 100.0);
 
@@ -246,20 +324,10 @@ static void Lith_DoPayout(void)
 }
 
 //
-// Lith_CheckPlayer1Sight
+// CheckEnemyCompat
 //
 [[__call("ScriptS")]]
-static bool Lith_CheckPlayer1Sight(int tid)
-{
-   ACS_SetActivator(0, AAPTR_PLAYER1);
-   return ACS_CheckSight(0, tid, 0);
-}
-
-//
-// Lith_CheckIfEnemiesAreCompatible
-//
-[[__call("ScriptS")]]
-static void Lith_CheckIfEnemiesAreCompatible(void)
+static void CheckEnemyCompat(void)
 {
    if(ACS_GetCVar("sv_nomonsters") || world.grafZoneEntered)
       return;
@@ -293,69 +361,6 @@ static void SpawnBoss()
 }
 
 //
-// DoRain
-//
-[[__call("ScriptS")]]
-static void DoRain()
-{
-   // Doesn't work in multiplayer, sorry!
-   if(ACS_PlayerCount() > 1)
-      return;
-
-   player_t *p = &players[0];
-   ACS_SetActivator(p->tid);
-
-   bool wasundersky = false;
-   bool undersky;
-   for(;;)
-   {
-      undersky = ACS_CheckActorCeilingTexture(0, "F_SKY1");
-
-      if(undersky)
-         ACS_TakeInventory("Lith_SMGHeat", 1);
-
-      for(int r = 0; !undersky && r < 8; r++)
-         for(int h = 1; !undersky && h <= 2; h++)
-      {
-         int rad = 64 << r;
-         int x   = p->x + ACS_Cos(p->yaw) * rad;
-         int y   = p->y + ACS_Sin(p->yaw) * rad;
-         int z   = p->z + 64 / h;
-
-         int tid = ACS_UniqueTID();
-         ACS_SpawnForced("Lith_CameraHax", x, y, z, tid);
-
-         undersky = (ACS_CheckSight(0, tid, 0) && ACS_CheckActorCeilingTexture(tid, "F_SKY1"));
-
-         ACS_Thing_Remove(tid);
-      }
-
-      if(undersky)
-      {
-         if(!wasundersky)
-         {
-            ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  1.0, true, ATTN_NONE);
-            ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 1.0, true, ATTN_NONE);
-         }
-      }
-      else if(wasundersky)
-      {
-         ACS_PlaySound(p->weathertid, "amb/windout", CHAN_BODY,  1.0, false, ATTN_NONE);
-         ACS_PlaySound(p->weathertid, "amb/rainout", CHAN_VOICE, 1.0, false, ATTN_NONE);
-      }
-
-      if((InHell || InSecret) && !world.islithmap)
-         ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
-      else
-         ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
-
-      ACS_Delay(1);
-
-      wasundersky = undersky;
-   }
-}
-
-//
 // GetDebugInfo
 //
 static void GetDebugInfo(void)
@@ -372,16 +377,14 @@ static void GetDebugInfo(void)
 }
 
 //
-// CheckCompat
+// CheckModCompat
 //
-static void CheckCompat(void)
+static void CheckModCompat(void)
 {
    int tid;
 
-   if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-      ACS_Thing_Remove(tid);
-   if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone", 0, 0, 0, tid = ACS_UniqueTID(), 0)))
-      ACS_Thing_Remove(tid);
+   if((world.legendoom       = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone",            0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
 }
@@ -414,7 +417,7 @@ static void GSInit(void)
    extern void Lith_GSInit_Dialogue(void);
    extern void Lith_InstallCBIItem(int num);
 
-   CheckCompat();
+   CheckModCompat();
    SetupSpriteBlitter();
    UpdateGame();
    GetDebugInfo();
@@ -426,7 +429,7 @@ static void GSInit(void)
       Lith_GSInit_Weapon();
       Lith_GSInit_Dialogue();
 
-      Lith_CheckIfEnemiesAreCompatible();
+      CheckEnemyCompat();
 
       world.game         = ACS_GetCVar("__lith_game");
       world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
@@ -530,7 +533,7 @@ static void WInit(void)
 
    // Payout, which is not done on the first map.
    if(world.mapscleared != 0)
-      Lith_DoPayout();
+      DoPayout();
 
    // Cluster messages.
    #define Message(cmp, n, name) \

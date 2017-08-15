@@ -350,6 +350,14 @@ float mag2f(float x, float y)
 }
 
 //
+// mag2k
+//
+fixed mag2k(fixed x, fixed y)
+{
+   return ACS_FixedSqrt(x * x + y * y);
+}
+
+//
 // lerpk
 //
 fixed lerpk(fixed a, fixed b, fixed t)

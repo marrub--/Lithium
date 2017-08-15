@@ -40,15 +40,6 @@ RegisterMachine(PVarFunc, Var)
 RegisterMachine(WVarFunc, WVar)
 
 //
-// Lith_CheckCeilingSky
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_CheckCeilingSky()
-{
-   return !ACS_CheckActorCeilingTexture(0, "F_SKY1");
-}
-
-//
 // Lith_UniqueTID
 //
 [[__call("ScriptS"), __extern("ACS")]]

@@ -157,6 +157,7 @@ __str Lith_ScoreSep(score_t num);
 
 // Math
 float mag2f(float x, float y);
+fixed mag2k(fixed x, fixed y);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
