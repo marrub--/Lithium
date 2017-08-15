@@ -29,6 +29,27 @@ static struct {
    enum mtype type;
    __str name;
 } const monsterinfo[] = {
+#if 0
+   // Hexen
+   {Score_ShotgunGuy,  mtype_imp,         "Ettin"        },
+   {Score_Imp,         mtype_lostsoul,    "FireDemon"    },
+   {Score_Arachnotron, mtype_arachnotron, "CentaurLeader"},
+   {Score_Demon,       mtype_demon,       "Centaur"      },
+   {Score_Mancubus,    mtype_hellknight,  "IceGuy"       },
+   {Score_Arachnotron, mtype_hellknight,  "Serpent"      },
+   {Score_Mancubus,    mtype_hellknight,  "SerpentLeader"},
+   {Score_HellKnight,  mtype_hellknight,  "Demon1"       },
+   {Score_BaronOfHell, mtype_baron,       "Demon2"       },
+   {Score_Cacodemon,   mtype_mancubus,    "Bishop"       },
+   {Score_HellKnight,  mtype_lostsoul,    "Wraith"       },
+   {Score_CyberDemon,  mtype_cyberdemon,  "Dragon"       },
+   {Score_CyberDemon,  mtype_phantom,     "ClericBoss"   },
+   {Score_CyberDemon,  mtype_phantom,     "FighterBoss"  },
+   {Score_CyberDemon,  mtype_phantom,     "MageBoss"     },
+   {Score_CyberDemon,  mtype_cyberdemon,  "Heresiarch"   },
+   {Score_DSparil * 2, mtype_cyberdemon,  "Korax"        },
+#endif
+
    // Doom 2
    {Score_ZombieMan,     mtype_zombie,        "ZombieMan"       },
    {Score_ShotgunGuy,    mtype_zombie,        "ShotgunGuy"      },

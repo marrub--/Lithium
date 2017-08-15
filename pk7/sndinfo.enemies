@@ -187,4 +187,14 @@ $random enemies/michael/hit {
    enemies/michael/hit3
 }
 
+//
+// Ophidian
+//
+enemies/ophidian/ice  lsounds/Ophidian/IceAttack.flac // Touhou 9
+enemies/ophidian/fire lsounds/Mancubus/Fire.flac      // FEAR, Doom
+$limit ophidian/ice 0
+$limit ophidian/fire 0
+$attenuation ophidian/ice 0.6
+$attenuation ophidian/fire 0.6
+
 // EOF

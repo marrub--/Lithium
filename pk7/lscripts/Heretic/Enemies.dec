@@ -74,7 +74,7 @@ actor Lith_Heretic_OphidianIceProjectile : SnakeProjA replaces SnakeProjA
    states
    {
    Spawn:
-      TNT1 A 0 nodelay A_PlaySound("ophidian/ice")
+      TNT1 A 0 nodelay A_PlaySound("enemies/ophidian/ice")
       goto Super::Spawn
    }
 }
@@ -87,7 +87,7 @@ actor Lith_Heretic_OphidianFireProjectile : SnakeProjB replaces SnakeProjB
    states
    {
    Spawn:
-      TNT1 A 0 nodelay A_PlaySound("ophidian/fire")
+      TNT1 A 0 nodelay A_PlaySound("enemies/ophidian/fire")
       goto Super::Spawn
    }
 }

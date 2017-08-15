@@ -1,12 +1,12 @@
 [enu default]
 
-LITH_TXT_LOG_Backpack    = ">>> Bag of Holding + Discount Card";
-LITH_TXT_LOG_BlueArmor   = ">>> Enchanted Shield";
-LITH_TXT_LOG_GreenArmor  = ">>> Silver Shield";
-LITH_TXT_LOG_StimPack    = ">>> Crystal Vial";
-LITH_TXT_LOG_RedCard     = ">>>>> \cqGreen Key";
-LITH_TXT_LOG_BlueCard    = ">>>>> \chBlue Key";
-LITH_TXT_LOG_YellowCard  = ">>>>> \ckYellow Key";
+LITH_TXT_LOG_Backpack   = ">>> Bag of Holding + Discount Card";
+LITH_TXT_LOG_BlueArmor  = ">>> Enchanted Shield";
+LITH_TXT_LOG_GreenArmor = ">>> Silver Shield";
+LITH_TXT_LOG_StimPack   = ">>> Crystal Vial";
+LITH_TXT_LOG_RedCard    = ">>>>> \cqGreen Key";
+LITH_TXT_LOG_BlueCard   = ">>>>> \chBlue Key";
+LITH_TXT_LOG_YellowCard = ">>>>> \ckYellow Key";
 
 // EOF
 

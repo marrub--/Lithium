@@ -98,5 +98,12 @@
 #include "lscripts/Weapons_CyberMage/Magic/5_Hulgyon.dec"
 #include "lscripts/Weapons_CyberMage/Magic/6_StarShot.dec"
 
+#include "lscripts/Heretic/Ammo.dec"
+#include "lscripts/Heretic/Enemies.dec"
+#include "lscripts/Heretic/Keys.dec"
+#include "lscripts/Heretic/Powerups.dec"
+
+#include "lscripts/Strife.dec"
+
 // EOF
 
