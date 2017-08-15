@@ -23,6 +23,8 @@ void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 {
+   UData.discharged = UData.charge > 60 && UData.charge < CHARGE_MAX;
+
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
 
@@ -59,7 +61,7 @@ void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
    HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 320.2, 160.1, 0.1, 0.5);
 
    for(int i = 0; i < max; i++)
-      DrawSpriteXX(max < 4 ? "H_C2" : "H_C1",
+      DrawSpriteXX(UData.discharged ? "H_C1" : "H_C2",
          HUDMSG_FADEOUT | HUDMSG_ADDBLEND | HUDMSG_ALPHA,
          hid_jetS - i,
          320.2,

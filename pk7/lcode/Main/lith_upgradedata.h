@@ -41,6 +41,7 @@ struct upgr_data_Implying {
 
 struct upgr_data_JetBooster {
    int charge;
+   bool discharged : 1;
 };
 
 struct upgr_data_lolsords {
