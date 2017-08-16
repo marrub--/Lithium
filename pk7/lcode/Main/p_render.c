@@ -158,6 +158,14 @@ void Lith_PlayerHUD(player_t *p)
             DrawSpriteXX("lgfx/HUD/H_D41.png", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
                hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
       }
+      else if(p->pclass == pclass_informant)
+      {
+         if(ACS_Timer() % 5 == 0) {
+            DrawSpriteXX("lgfx/HUD_I/ScopeOverlay.png",
+               HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE,
+               0.1, 0.1, TICSECOND*5, TICSECOND*ACS_Random(1,5), ACS_RandomFixed(0.7, 1.0));
+         }
+      }
       else
       {
          HUD_Waves(p);
