@@ -52,6 +52,7 @@ MAIN_SOURCES= \
 	$(SRC)/u_headsupdis2.c \
 	$(SRC)/u_goldeneye.c \
 	$(SRC)/u_magic.c \
+	$(SRC)/u_headsupdis3.c \
 	$(SRC)/p_cbigui.c \
 	$(SRC)/p_bip.c \
 	$(SRC)/p_weapons.c \

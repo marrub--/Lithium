@@ -273,6 +273,7 @@ void Lith_PlayerDeltaStats(struct player *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 void Lith_ClearTextBuf(struct player *p);
 struct player *Lith_GetPlayer(int tid, int ptr);
+void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols, char scol, int bx, int by);
 
 
 //----------------------------------------------------------------------------

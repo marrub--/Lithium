@@ -11,6 +11,7 @@ Str(Marine, "Marine")
 Str(option, "option")
 Str(page,   "page")
 Str(terminal,   "terminal")
+Str(Informant,  "Informant")
 Str(unfinished, "unfinished")
 
 #undef Str

@@ -126,7 +126,7 @@ static void HUD_KeyInd(player_t *p)
 //
 // Activate
 //
-void Upgr_HeadsUpDis2_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Activate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
 }
@@ -134,7 +134,7 @@ void Upgr_HeadsUpDis2_Activate(player_t *p, upgrade_t *upgr)
 //
 // Disable
 //
-void Upgr_HeadsUpDis2_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
 }
@@ -142,7 +142,7 @@ void Upgr_HeadsUpDis2_Deactivate(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_HeadsUpDis2_Render(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
 {
    // Log
    Lith_HUD_Log(p);

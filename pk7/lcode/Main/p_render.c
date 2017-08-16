@@ -20,6 +20,31 @@ static void HUD_Waves(player_t *p);
 //
 
 //
+// Lith_HUD_DrawWeaponSlots
+//
+void Lith_HUD_DrawWeaponSlots(player_t *p, int const *ncol, int ncols, char scol, int bx, int by)
+{
+   for(int i = 1; i < SLOT_MAX; i++)
+   {
+      int slot = p->weapon.slot[i];
+      if(slot)
+      {
+         fixed x = bx+.2 - (8 * (SLOT_MAX - i));
+         fixed y = by+.2;
+
+         HudMessageF("LHUDFONTSMALL", "%i", i);
+         HudMessageParams(0, hid_weapontextE + i, ncol[min(slot - 1, ncols)], x, y, TICSECOND);
+
+         if(p->weapon.cur->info->slot == i)
+         {
+            HudMessageF("LHUDFONTSMALL", "\C%c%i", scol, i);
+            HudMessageFade(hid_weaponcurE + i, x, y, TICSECOND, 0.2);
+         }
+      }
+   }
+}
+
+//
 // Lith_PlayerItemFx
 //
 void Lith_PlayerItemFx(player_t *p)

@@ -136,6 +136,7 @@ static void GetCode_Cond(dlgparsestate_t *d)
          {
          case STR_Marine:    *d->nextCode() = pclass_marine;     break;
          case STR_CyberMage: *d->nextCode() = pclass_cybermage;  break;
+         case STR_Informant: *d->nextCode() = pclass_informant;  break;
          default: Log("GetCode_Cond: invalid playerclass type"); return;
          }
       }

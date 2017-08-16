@@ -4,7 +4,7 @@
 
 gameinfo
 {
-   PlayerClasses = "Lith_MarinePlayer", "Lith_MagePlayer"
+   PlayerClasses = "Lith_MarinePlayer", "Lith_CyberMagePlayer", "Lith_InformantPlayer"
    DimColor = "Black"
    DimAmount = 0.25
    MenuFontColor_Title = "Green"
@@ -234,8 +234,8 @@ intermission Inter_Cast
    Fader
    {
       Music = "lmusic/asdfn2.ogg"
-      DrawConditional = "Lith_MarinePlayer", "lgfx/End/Marine1.png", 0, 0
-      DrawConditional = "Lith_MagePlayer",   "lgfx/End/CyberMage1.png", 0, 0
+      DrawConditional = "Lith_MarinePlayer",    "lgfx/End/Marine1.png", 0, 0
+      DrawConditional = "Lith_CyberMagePlayer", "lgfx/End/CyberMage1.png", 0, 0
       Background = "flats/ZZLITHBG.png"
       Time = 10
       FadeType = FadeIn
@@ -243,8 +243,8 @@ intermission Inter_Cast
    
    Image
    {
-      DrawConditional = "Lith_MarinePlayer", "lgfx/End/Marine1.png", 0, 0
-      DrawConditional = "Lith_MagePlayer",   "lgfx/End/CyberMage1.png", 0, 0
+      DrawConditional = "Lith_MarinePlayer",    "lgfx/End/Marine1.png", 0, 0
+      DrawConditional = "Lith_CyberMagePlayer", "lgfx/End/CyberMage1.png", 0, 0
       Background = "flats/ZZLITHBG.png"
    }
    

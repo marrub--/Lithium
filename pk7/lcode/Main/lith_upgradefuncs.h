@@ -13,6 +13,11 @@ Case(HeadsUpDis2)
    D(HeadsUpDis2)
    R(HeadsUpDis2)
 
+Case(HeadsUpDis3)
+   A(HeadsUpDis3)
+   D(HeadsUpDis3)
+   R(HeadsUpDis3)
+
 Case(JetBooster)
    A(JetBooster)
    U(JetBooster)

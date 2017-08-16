@@ -14,10 +14,11 @@ actor Lith_ItemGlow
       PBAL A 0
       PBAL A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_noitemfx), "Nope")
       PBAL A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_marine, "SpawnDone")
-      PBAL C 0 //A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_cybermage, "SpawnDone")
+      PBAL C 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_cybermage, "SpawnDone")
+      PBAL D 0 //A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_informant, "SpawnDone")
    SpawnDone:
-      PBAL "#" 5 bright
-      PBAL "#" 1 bright A_FadeOut(1.0 / 35.0)
+      "####" "#" 5 bright
+      "####" "#" 1 bright A_FadeOut(1.0 / 35.0)
       wait
    Nope:
       TNT1 A 0
@@ -93,14 +94,19 @@ actor Lith_ItemSprite
    }
 }
 
-actor Lith_ItemSpriteMarine : Lith_ItemSprite
+actor Lith_ItemSpriteM : Lith_ItemSprite
 {
    VisibleToPlayerClass "Lith_MarinePlayer"
 }
 
-actor Lith_ItemSpriteMage : Lith_ItemSprite
+actor Lith_ItemSpriteC : Lith_ItemSprite
 {
-   VisibleToPlayerClass "Lith_MagePlayer"
+   VisibleToPlayerClass "Lith_CyberMagePlayer"
+}
+
+actor Lith_ItemSpriteI : Lith_ItemSprite
+{
+   VisibleToPlayerClass "Lith_InformantPlayer"
 }
 
 // EOF

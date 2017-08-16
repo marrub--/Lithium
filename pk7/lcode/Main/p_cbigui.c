@@ -65,7 +65,7 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
    if(world.cbiupgr[cupg_rdistinter]) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
 }
 
-static void CBITab_Mage(gui_state_t *g, player_t *p)
+static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 {
    DrawSpritePlain("lgfx/UI/CPU2.png", g->hid--, .1, .1, TICSECOND);
    HudMessageF("CBIFONT", "AOF 5900001 Rev7 CPU");
@@ -100,8 +100,8 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 {
    switch(p->pclass)
    {
-   case pclass_marine:    CBITab_Marine(g, p); break;
-   case pclass_cybermage: CBITab_Mage  (g, p); break;
+   case pclass_marine:    CBITab_Marine   (g, p); break;
+   case pclass_cybermage: CBITab_CyberMage(g, p); break;
    }
 }
 

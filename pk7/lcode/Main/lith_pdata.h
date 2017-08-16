@@ -12,6 +12,7 @@ enum
 {
    pclass_marine,
    pclass_cybermage,
+   pclass_informant,
    pclass_max,
    pclass_any = pclass_max,
 };

@@ -50,6 +50,7 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
 // {{"Name-------", "BIP---------", Cost----}, pclass_name,      UC_Cat-, Pr, Score, [Group], [Requirements]},
    {{"HeadsUpDisp", "HeadsUpDisp",  0       }, pclass_marine,    UC_Body,  1, -0.05, UG_HUD},
    {{"HeadsUpDis2", "HeadsUpDisp",  0       }, pclass_cybermage, UC_Body,  1, -0.05, UG_HUD},
+   {{"HeadsUpDis3", "HeadsUpDisp",  0       }, pclass_informant, UC_Body,  1, -0.05, UG_HUD},
    {{"JetBooster",  "JetBooster",   0       }, pclass_marine,    UC_Body,  0, -0.05},
    {{"ReflexWetw",  "ReflexWetw",   0       }, pclass_any,       UC_Body,  5, -0.05},
    {{"Zoom",        null,           0       }, pclass_any,       UC_Body,  0,  0.00},
