@@ -49,8 +49,8 @@
 "LITH_TXT_LOG_CBI_MRDistInter" = "> Installed Reality Distortion Interface";
 
 // CBI Upgrades (Cyber-Mage) --------------------------------------------------
-"LITH_TXT_LOG_CBI_CSlot3Spell" = "> Installed Slot 3 Spell Driver";
-"LITH_TXT_LOG_CBI_CSlot4Spell" = "> Installed Slot 4 Spell Driver";
+"LITH_TXT_LOG_CBI_CSlot3Spell" = "> Installed Fire Spell Driver";
+"LITH_TXT_LOG_CBI_CSlot4Spell" = "> Installed Rend Spell Driver";
 "LITH_TXT_LOG_CBI_CSlot5Spell" = "> Installed Hulgyon Spell Driver";
 "LITH_TXT_LOG_CBI_CSlot6Spell" = "> Installed Hosh'danma Spell Driver";
 "LITH_TXT_LOG_CBI_CSlot7Spell" = "> Installed Cercle de la Mort Spell Driver";

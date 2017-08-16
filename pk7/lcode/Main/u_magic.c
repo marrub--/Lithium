@@ -23,7 +23,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    // clockwise:
    // 1: 160, 190
    // 2: 100, 160
-   // 3: 80,  100
+   // 3:  80, 100
    // 4: 160,  50
    // 5: 240, 100
    // 6: 240, 160
@@ -32,7 +32,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       {-1,                160, 190, "Blade"   },
       {-1,                100, 160, "Delear"  },
       {cupg_c_slot3spell,  80, 100, "Fire"    },
-      {cupg_c_slot4spell, 160,  50, "Slot4"   },
+      {cupg_c_slot4spell, 160,  50, "Rend"    },
       {cupg_c_slot5spell, 240, 100, "Hulgyon" },
       {cupg_c_slot6spell, 240, 160, "StarShot"},
       {cupg_c_slot7spell, 160, 120, "Cercle"  },
@@ -50,7 +50,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    {
       struct magic_info const *m = &minf[i];
 
-      if(m->st >= 0 && !world.cbiupgr[m->st])
+      if(m->st != -1 && !world.cbiupgr[m->st])
          continue;
 
       gui_button_preset_t pre = {

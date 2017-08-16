@@ -240,6 +240,9 @@ void Lith_ResetPlayer(player_t *p)
 
    if(!p->staticinit)
    {
+      if(world.dbgScore)
+         p->score = 0xFFFFFFFFFFFFFFFFll;
+
       Lith_PlayerInitBIP(p);
       Lith_PlayerInitUpgrades(p);
 
@@ -258,9 +261,6 @@ void Lith_ResetPlayer(player_t *p)
    }
    else
       Lith_PlayerReinitUpgrades(p);
-
-   if(world.dbgScore)
-      p->score = 0xFFFFFFFFFFFFFFFFll;
 
    if(world.dbgItems)
    {

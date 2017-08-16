@@ -50,8 +50,11 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
    {1, pclass_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {2, pclass_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
+   {3, pclass_cybermage, "Fire",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {4, pclass_cybermage, "Rend",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {5, pclass_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {6, pclass_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
+   {7, pclass_cybermage, "Cercle",   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
 };
 #undef A
 #undef M

@@ -33,8 +33,11 @@ enum
 
    weapon_c_blade,
    weapon_c_delear,
+   weapon_c_fire,
+   weapon_c_rend,
    weapon_c_hulgyon,
    weapon_c_starshot,
+   weapon_c_cercle,
 
    weapon_max
 };

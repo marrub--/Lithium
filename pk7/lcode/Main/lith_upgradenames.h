@@ -7,16 +7,16 @@ enum
    UPGR_ReflexWetw,
    UPGR_Zoom,
    UPGR_VitalScan,
-   UPGR_Magic,
    UPGR_CyberLegs,
    UPGR_ReactArmor,
    UPGR_ReactArmor2,
    UPGR_DefenseNuke,
    UPGR_Adrenaline,
-   
+
    // Body (Cyber-Mage)
+   UPGR_Magic,
    UPGR_SoulCleaver,
-   
+
    // Weapons
    UPGR_AutoReload,
    UPGR_AutoPistol,
@@ -31,7 +31,7 @@ enum
    UPGR_PartBeam,
    UPGR_PunctCannon,
    UPGR_OmegaRail,
-   
+
    // Weapons (Cyber-Mage)
    UPGR_Mateba_A,
    UPGR_SPAS_A,
@@ -44,18 +44,18 @@ enum
    UPGR_CPlasma_A,
    UPGR_ShipGun_A,
    UPGR_ShipGun_B,
-   
+
    UPGR_TorgueMode,
    UPGR_7777777,
    UPGR_lolsords,
    UPGR_Goldeneye,
-   
+
    UPGR_Implying,
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
-   
+
    UPGR_BASE_MAX,
-   
+
    // 「GRAF ZONE」
    UPGR_DarkCannon = 666,
 };

@@ -54,12 +54,12 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"ReflexWetw",  "ReflexWetw",   0       }, pclass_any,       UC_Body,  5, -0.05},
    {{"Zoom",        null,           0       }, pclass_any,       UC_Body,  0,  0.00},
    {{"VitalScan",   "VitalScanner", 0       }, pclass_any,       UC_Body,  2,  0.00},
-   {{"Magic",       "Magic",        0       }, pclass_cybermage, UC_Body,  0,  0.00},
    {{"CyberLegs",   "CyberLegs",    1220000 }, pclass_marine,    UC_Body,  4,  0.00},
    {{"ReactArmor",  "Yh0",          3500200 }, pclass_marine,    UC_Body, 20,  0.00, Req(UR_AI)},
    {{"ReactArmor2", "Yh0",          2990200 }, pclass_marine,    UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
    {{"DefenseNuke", "DefenseNuke",  580030  }, pclass_marine,    UC_Body,  0,  0.00, Req(UR_AI)},
    {{"Adrenaline",  "Adrenaline",   1801000 }, pclass_marine,    UC_Body, 10,  0.00},
+   {{"Magic",       "Magic",        0       }, pclass_cybermage, UC_Body,  0,  0.00},
    {{"SoulCleaver", "SoulCleaver",  1100000 }, pclass_cybermage, UC_Body, 10,  0.00},
 
    {{"AutoReload",  "AutoReload",   950050  }, pclass_any,       UC_Weap,  2,  0.00},
