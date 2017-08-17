@@ -167,26 +167,40 @@ void Lith_HUD_Log(player_t *p)
 {
    if(p->getCVarI("lith_hud_showlog"))
    {
+      int cr;
+      switch(p->pclass) {
+      case pclass_cybermage: cr = CR_RED;       break;
+      case pclass_informant: cr = CR_LIGHTBLUE; break;
+      default:               cr = CR_GREEN;     break;
+      }
+
       ACS_SetHudSize(480, 300);
       ACS_SetFont("LOGFONT");
 
       int i = 0;
       Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
       {
-         fixed y;
+         int y = 10 * i;
+         fixed align;
 
-         if(p->pclass == pclass_cybermage) y = -10;
-         else                              y = 0;
-         if(p->getCVarI("lith_hud_logfromtop")) y +=  20.1 + (10 * i);
-         else                                   y += 250.2 - (10 * i);
+         if(p->getCVarI("lith_hud_logfromtop")) {
+            y = 20 + y;
+            align = 0.1;
+         } else {
+            y = 250 - y;
+            align = 0.2;
+
+            if(p->pclass == pclass_cybermage || p->pclass == pclass_informant)
+               y -= 10;
+         }
 
          HudMessage("%S", logdata->info);
-         HudMessageParams(HUDMSG_NOWRAP, hid_logE + i, CR_GREEN, 0.1, y, TICSECOND);
+         HudMessageParams(HUDMSG_NOWRAP, hid_logE + i, cr, 0.1, y+align, TICSECOND);
 
          if(logdata->time > LOG_TIME - 10)
          {
             HudMessage("%S", logdata->info);
-            HudMessageParams(HUDMSG_NOWRAP | HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid_logAddE + i, CR_GREEN, 0.1, y, TICSECOND, 0.15);
+            HudMessageParams(HUDMSG_NOWRAP | HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid_logAddE + i, cr, 0.1, y+align, TICSECOND, 0.15);
          }
       }
    }
