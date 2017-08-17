@@ -160,11 +160,10 @@ void Lith_PlayerHUD(player_t *p)
       }
       else if(p->pclass == pclass_informant)
       {
-         if(ACS_Timer() % 5 == 0) {
-            DrawSpriteXX("lgfx/HUD_I/ScopeOverlay.png",
-               HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE,
-               0.1, 0.1, TICSECOND*5, TICSECOND*ACS_Random(1,5), ACS_RandomFixed(0.7, 1.0));
-         }
+         fixed a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
+         DrawSpriteX("lgfx/HUD_I/ScopeOverlay.png",
+            HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1,
+            TICSECOND, a);
       }
       else
       {

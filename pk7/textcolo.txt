@@ -3,5 +3,10 @@ Lith_Grey
    #3D3D3D #BFBFBF
 }
 
+Lith_Purple
+{
+   #301875 #8C3BF8
+}
+
 // EOF
 

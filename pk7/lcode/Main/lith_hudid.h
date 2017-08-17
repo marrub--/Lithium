@@ -121,7 +121,7 @@ enum
    hid_armortxt,
    hid_armorbg,
    hid_armorbg_fxE,
-   hid_armorbg_fxS = hid_armorbg_fxE + 32,
+   hid_armorbg_fxS = hid_armorbg_fxE + 42,
 
    hid_scorehit,
    hid_score,

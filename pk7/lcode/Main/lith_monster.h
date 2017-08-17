@@ -41,7 +41,7 @@ struct dmon {
    bool active;
    int id;
    enum mtype type;
-   
+
    bool wasdead;
    int exp;
    int level;
@@ -50,7 +50,7 @@ struct dmon {
    int resist[dmgtype_max];
    int painresist;
    score_t score;
-   
+
    struct dminfo *mi;
 };
 
@@ -60,7 +60,6 @@ typedef struct dmon dmonarr dmon_t;
 
 extern __str const dmgtype_names[dmgtype_max];
 
-extern dmon_t dmonalloc[];
 extern int dmonarr dmonid;
 
 [[__call("ScriptS"), __optional_args(2)]] dmon_t *DmonPtr(int tid, int ptr);

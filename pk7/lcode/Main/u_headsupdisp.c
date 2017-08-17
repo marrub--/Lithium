@@ -8,9 +8,9 @@
 //
 // HUD_IndicatorLine
 //
-static void HUD_IndicatorLine(player_t *p, int time, __str image, int hid, int yadd)
+static void HUD_IndicatorLine(player_t *p, __str image, int hid, int yadd)
 {
-   int pos = (8 + time) % 57;
+   int pos = (8 + p->ticks) % 57;
 
    if(pos < 11)
       yadd += 11 - (pos % 12);
@@ -140,7 +140,7 @@ static void HUD_Health(player_t *p)
       }
    }
 
-   HUD_IndicatorLine(p, p->ticks, weapongfx[p->weapon.cur->info->slot], hid_healthbg_fxS - (p->ticks % 32), 9);
+   HUD_IndicatorLine(p, weapongfx[p->weapon.cur->info->slot], hid_healthbg_fxS - (p->ticks % 32), 9);
 }
 
 //
@@ -148,7 +148,7 @@ static void HUD_Health(player_t *p)
 //
 static void HUD_Armor(player_t *p)
 {
-   static __str armorgfx[ARM_max] = {
+   static __str const armorgfx[ARM_max] = {
       [ARM_unknown] = "lgfx/HUD/H_D27.png",
       [ARM_none]    = "lgfx/HUD/H_D28.png",
       [ARM_bonus]   = "lgfx/HUD/H_D23.png",
@@ -183,7 +183,7 @@ static void HUD_Armor(player_t *p)
       HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, cr, 34.1, 176.0, 0.1, ft);
    }
 
-   HUD_IndicatorLine(p, p->ticks, armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 32), -7);
+   HUD_IndicatorLine(p, armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 32), -7);
 }
 
 //
