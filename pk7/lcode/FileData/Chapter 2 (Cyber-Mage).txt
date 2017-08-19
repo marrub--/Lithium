@@ -1,11 +1,15 @@
 l[]];;\cg444444\cj41414191918 --------
-\cm    io_buf_get(0x1C, fp, out);
-\cm    string_explode(out, bufs, bufs_num = ARRAY_SIZE(bufs));
-\cm    for (i = 0; i < bufs_num; i++) {{{
+\cm    io_buf_get 0x1C, fp, out;
+\cm    string_explode out, bufs, bufs_num = bufs.length / 8;
+\cm    for(i in (iter 0, bufs_num)) {{{
 \cm        9339mv__word_of]]q]qq]qq]]]]]]]````````\\\\\\\\<<
 \cd>>>>>[[[[datastream corruption detected]]]]
 \cd>>>>>[[[[reloading mail daemon]]]]
 
 It's all gone now. I'm glad I was smarter than to assume I was going insane, though now I wonder what the other deceivers must have gone through.
 
-The core of hell is still far yonder, but still my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.
+The core of hell is still far yonder, but yet my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.
+
+The kernel and ROM etc. sources are all done dumping, the utilities are still going but those aren't important and have already been scanned for ASIC code.
+
+Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.

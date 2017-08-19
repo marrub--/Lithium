@@ -1,4 +1,4 @@
-\cd>>>>>[[[[INCOMING MESSAGE]]]]
+\cd>>>>>[[[[RELAYING MESSAGE]]]]
 
 \cd> Remote: <\cj%S\cd>
 \cd> Date: \cj%S

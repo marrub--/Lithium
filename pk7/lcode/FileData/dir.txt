@@ -1,6 +1,6 @@
 This is a list of files to be processed into LANGUAGE by compilefs.lua.
 
--- Info Pages ----------------------------------------------------------------
+-- Info Pages -----------------------------------------------------------------
 
 in language.info.corporations.en.txt
 parsefile Info_Corporations.txt
@@ -21,7 +21,7 @@ in language.info.omake.en.txt
 parsefile Info_Extra.txt
 
 
--- CBI Pages ----------------------------------------------------------------
+-- CBI Pages ------------------------------------------------------------------
 
 in language.shop.en.txt
 parsefile Shop.txt
@@ -30,7 +30,7 @@ in language.upgrades.en.txt
 parsefile Upgrades.txt
 
 
--- Dialogue ------------------------------------------------------------------
+-- Dialogue -------------------------------------------------------------------
 
 in language.info.dialogue.txt
 
@@ -38,7 +38,7 @@ Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
 Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 
--- Misc ----------------------------------------------------------------------
+-- Misc -----------------------------------------------------------------------
 
 in language.log.en.txt
 parsefile Log.txt
@@ -47,7 +47,7 @@ in language.misc.en.txt
 parsefile Misc.txt
 
 
--- CBI Mail ------------------------------------------------------------------
+-- CBI Mail -------------------------------------------------------------------
 
 in language.info.mail.txt
 
@@ -89,6 +89,10 @@ data 232                   -> LITH_TXT_MAIL_SIZE_Cluster1Jem
 
 Chapter 2 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster2Jem
 data Saved Text 152        -> LITH_TXT_MAIL_NAME_Cluster2Jem
-data 200                   -> LITH_TXT_MAIL_SIZE_Cluster2Jem
+data 280                   -> LITH_TXT_MAIL_SIZE_Cluster2Jem
+
+Chapter 3 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster3Jem
+data Saved Text 244        -> LITH_TXT_MAIL_NAME_Cluster3Jem
+data 210                   -> LITH_TXT_MAIL_SIZE_Cluster3Jem
 
 EOF

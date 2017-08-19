@@ -1,7 +1,7 @@
 [enu default]
 
 "LITH_TXT_MAIL_TEMPLATE" =
-   "\cd>>>>>[[[[INCOMING MESSAGE]]]]\n"
+   "\cd>>>>>[[[[RELAYING MESSAGE]]]]\n"
    "\n"
    "\cd> Remote: <\cj%S\cd>\n"
    "\cd> Date: \cj%S\n"
@@ -151,15 +151,31 @@
 "LITH_TXT_MAIL_SIZE_Cluster1Jem" = "232";
 "LITH_TXT_MAIL_BODY_Cluster2Jem" =
    "l[]];;\cg444444\cj41414191918 --------\n"
-   "\cm    io_buf_get(0x1C, fp, out);\n"
-   "\cm    string_explode(out, bufs, bufs_num = ARRAY_SIZE(bufs));\n"
-   "\cm    for (i = 0; i < bufs_num; i++) {{{\n"
+   "\cm    io_buf_get 0x1C, fp, out;\n"
+   "\cm    string_explode out, bufs, bufs_num = bufs.length / 8;\n"
+   "\cm    for(i in (iter 0, bufs_num)) {{{\n"
    "\cm        9339mv__word_of]]q]qq]qq]]]]]]]````````\\\\\\\\\\\\\\\\<<\n"
    "\cd>>>>>[[[[datastream corruption detected]]]]\n"
    "\cd>>>>>[[[[reloading mail daemon]]]]\n"
    "\n"
    "It's all gone now. I'm glad I was smarter than to assume I was going insane, though now I wonder what the other deceivers must have gone through.\n"
    "\n"
-   "The core of hell is still far yonder, but still my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.\n";
+   "The core of hell is still far yonder, but yet my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.\n"
+   "\n"
+   "The kernel and ROM etc. sources are all done dumping, the utilities are still going but those aren't important and have already been scanned for ASIC code.\n"
+   "\n"
+   "Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.\n";
 "LITH_TXT_MAIL_NAME_Cluster2Jem" = "Saved Text 152";
-"LITH_TXT_MAIL_SIZE_Cluster2Jem" = "200";
+"LITH_TXT_MAIL_SIZE_Cluster2Jem" = "280";
+"LITH_TXT_MAIL_BODY_Cluster3Jem" =
+   "I've entered a strange realm that doesn't seem to make sense. This must really be Hell itself; no mistaking it now.\n"
+   "\n"
+   "The air is so humid and hot that I've begun sweating. That can't happen. I can't sweat. There isn't anything to sweat. I'm scared. This has to be an illusion... or does reality not matter in this place?\n"
+   "\n"
+   "In any case, now that I'm here, there's no turning back. I have to destroy whatever corrupted them, I'm sure they're here... I saw it in their eyes, they were yelling at me visions of their true selves that could not be described with human eyes. That only I could know.\n"
+   "\n"
+   "Though my mind had just been regained, now sanity may lie out of my hands.\n"
+   "\n"
+   "It doesn't matter. I will see this through.\n";
+"LITH_TXT_MAIL_NAME_Cluster3Jem" = "Saved Text 244";
+"LITH_TXT_MAIL_SIZE_Cluster3Jem" = "210";

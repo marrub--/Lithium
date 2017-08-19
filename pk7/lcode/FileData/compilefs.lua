@@ -59,7 +59,7 @@ function procIn(fname)
       print("proc> " .. fname)
    end
    
-   out = io.open("../" .. fname, "wb")
+   out = io.open("../../" .. fname, "wb")
    out:write("[enu default]\n\n")
 end
 
@@ -150,16 +150,16 @@ function procOutput(ln, e, s)
    if sd then
       procData(trim(ln:sub(sd+1, e-1)), trim(ln:sub(s+1)))
    else
-      procFile("FileData/" .. trim(ln:sub(1, s-2)), trim(ln:sub(e+2)))
+      procFile(trim(ln:sub(1, s-2)), trim(ln:sub(e+2)))
    end
 end
 
-for ln in io.open("FileData/dir.txt", "rb"):lines() do
+for ln in io.open("dir.txt", "rb"):lines() do
    ln = delr(ln)
    if ln:sub(1, 3) == "in " then -- find "in" directive
       procIn(trim(ln:sub(4)))
    elseif out and ln:sub(1, 10) == "parsefile " then -- find "parsefile" directive
-      procFileParse("FileData/" .. trim(ln:sub(11)))
+      procFileParse(trim(ln:sub(11)))
    elseif out then
       local e, s = ln:find("->", 1, true)
       if e and s then
