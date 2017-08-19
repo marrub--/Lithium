@@ -591,11 +591,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
          if(page->height)
          {
-            Lith_GUI_ScrollBegin(g, st_bipinfoscr, 100, 40, 184, 180, page->height);
+            Lith_GUI_ScrollBegin(g, st_bipinfoscr, 100, 40, 200, 180, page->height, 184);
             oy = g->oy - 40;
          }
          else
-            ACS_SetHudClipRect(111, 40, 184, 180, 184);
+            ACS_SetHudClipRect(111, 40, 200, 180, 184);
 
          if(page->image)
             DrawSpriteAlpha(page->image, g->hid--, 296.2, 180.2, TICSECOND, 0.4);

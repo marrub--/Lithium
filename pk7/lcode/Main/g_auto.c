@@ -14,13 +14,13 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h)
 {
    x += g->ox;
    y += g->oy;
-   
+
    // check clip versus cursor (if clipping), then check control versus cursor
    if(!g->useclip || bpcldi(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
       if(bpcldi(x, y, x + w, y + h, g->cx, g->cy))
    {
       g->hot = id;
-      
+
       if(g->active == 0 && g->clicklft)
          g->active = id;
    }
@@ -43,24 +43,24 @@ void Lith_GUI_Init(gui_state_t *g, size_t maxst)
 void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
 {
    bool inverted = p->getCVarI("lith_player_invertmouse");
-   
+
    // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
    // This breaks network sync so we can only do it in singleplayer.
    if(world.singleplayer)
       inverted |= ACS_GetCVar("invertmouse");
-   
+
    g->old = g->cur;
-   
+
    fixed xmul = p->getCVarK("lith_gui_xmul");
    fixed ymul = p->getCVarK("lith_gui_ymul");
-   
+
                 g->cx -= p->yawv   * (800.0f * xmul);
    if(inverted) g->cy += p->pitchv * (800.0f * ymul);
    else         g->cy -= p->pitchv * (800.0f * ymul);
-   
+
    g->cx = minmax(g->cx, 0, g->w);
    g->cy = minmax(g->cy, 0, g->h);
-   
+
    g->clicklft = p->buttons & BT_ATTACK;
    g->clickrgt = p->buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
@@ -73,10 +73,10 @@ void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h)
 {
    if(!w) w = 320;
    if(!h) h = 200;
-   
+
    g->hid = basehid;
    g->hot = 0;
-   
+
    ACS_SetHudSize(g->w = w, g->h = h);
 }
 
@@ -86,7 +86,7 @@ void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h)
 void Lith_GUI_End(gui_state_t *g)
 {
    DrawSpritePlain("lgfx/UI/Cursor.png", g->hid--, (int)g->cx + 0.1, (int)g->cy + 0.1, TICSECOND);
-   
+
    if(!g->clickany)
       g->active = 0;
 }
@@ -94,13 +94,14 @@ void Lith_GUI_End(gui_state_t *g)
 //
 // Lith_GUI_Clip
 //
-void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h)
+void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 {
    g->useclip = true;
    g->clpxE = x + w;
    g->clpyE = y + h;
-   
-   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h, w);
+
+   if(ww == 0) ww = w;
+   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h, ww);
 }
 
 //
@@ -118,7 +119,7 @@ void Lith_GUI_ClipRelease(gui_state_t *g)
 void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text)
 {
    gui_typeon_state_t *typeon = &g->st[st].type;
-   
+
    typeon->txt = text;
    typeon->len = ACS_StrLen(text);
    typeon->pos = 0;
@@ -131,7 +132,7 @@ __str Lith_RemoveTextColors(__str str, int size)
 {
    char *buf = calloc(1, size);
    int j = 0;
-   
+
    for(int i = 0; i < size; i++)
    {
       if(str[i] == '\C')
@@ -142,13 +143,13 @@ __str Lith_RemoveTextColors(__str str, int size)
          else
             i++;
       }
-      
+
       if(i >= size || j >= size || !str[i])
          break;
-      
+
       buf[j++] = str[i];
    }
-   
+
    __str ret = StrParam("%.*s", j, buf);
    free(buf);
    return ret;
@@ -161,10 +162,10 @@ gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st)
 {
    gui_typeon_state_t *typeon = &g->st[st].type;
    int num = ACS_Random(2, 15);
-   
+
    if((typeon->pos += num) > typeon->len)
       typeon->pos = typeon->len;
-   
+
    return typeon;
 }
 

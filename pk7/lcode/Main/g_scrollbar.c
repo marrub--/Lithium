@@ -126,7 +126,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    g->oy += scr->oy;
 
    // setup clip
-   Lith_GUI_Clip(g, x, ory, a->w, realh);
+   Lith_GUI_Clip(g, x, ory, a->w, realh, a->ww);
 }
 
 //

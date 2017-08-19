@@ -165,6 +165,7 @@ typedef struct gui_scroll_args_s
    int    w;
    int    h;
    int    contenth;
+   int    ww;
    gui_scroll_preset_t const *preset;
 } gui_scroll_args_t;
 
@@ -235,7 +236,7 @@ void Lith_GUI_Init(gui_state_t *g, size_t maxst);
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 [[__optional_args(2)]] void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h);
 void Lith_GUI_End(gui_state_t *g);
-void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h);
+[[__optional_args(1)]] void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww);
 void Lith_GUI_ClipRelease(gui_state_t *g);
 void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text);
 __str Lith_RemoveTextColors(__str str, int size);
