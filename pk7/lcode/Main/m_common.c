@@ -397,9 +397,9 @@ float lerpf(float a, float b, float t)
 }
 
 //
-// bpcldi
+// aabb
 //
-bool bpcldi(int x, int y, int z, int w, int x2, int y2)
+bool aabb(int x, int y, int z, int w, int x2, int y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }

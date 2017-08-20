@@ -197,7 +197,7 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    int const yw1 = m->mi->y - 192;
    int const yw2 = m->mi->y + 192;
    Lith_ForPlayer() {
-      if(bpcldi(xw1, yw1, xw2, yw2, p->x, p->y)) {
+      if(aabb(xw1, yw1, xw2, yw2, p->x, p->y)) {
          anyplayer = true;
          break;
       }

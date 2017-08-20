@@ -1,11 +1,9 @@
 [enu default]
 
-
-// Misc. ----------------------------------------------------------------------
 "LITH_TXT_INFO_SHORT_Sword" = "sord";
 "LITH_TXT_INFO_SHORT_Gameboy" = "Game Nanhai";
 
-// Shop Weapons ---------------------------------------------------------------
+// Shop Weapons --------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Revolver" = "Revolver";
 "LITH_TXT_INFO_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
 "LITH_TXT_INFO_DESCR_Revolver" =
@@ -52,7 +50,7 @@
    "damage over rate of fire. The D.640's design comes from several older models "
    "designed by MDDO, as well as newer components patented by Semaphore Inc.";
 
-// Cyber-Mage -----------------------------------------------------------------
+// Cyber-Mage ----------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CFist" = "Spell Selector";
 "LITH_TXT_INFO_SHORT_Mateba" = "Mateba";
 "LITH_TXT_INFO_TITLE_Mateba" = "Mateba R119";
@@ -94,6 +92,17 @@
    "produce, and is very, very powerful.";
 "LITH_TXT_INFO_SHORT_SPASUpgr" = "$LITH_TXT_UPGRADE_TITLE_SPAS_A";
 "LITH_TXT_INFO_SHORT_SPASUpg2" = "$LITH_TXT_UPGRADE_TITLE_SPAS_B";
+"LITH_TXT_INFO_TITLE_SPASUpg2" = "NV48-1 Shell Auto-loader";
+"LITH_TXT_INFO_DESCR_SPASUpg2" =
+   "An upgrade for the NV48 which uses a small magic buffer to automatically load "
+   "shells from a four-dimensional area. A rather simple, yet effective solution, "
+   "which also is used to accelerate shots slightly more, causing more damaging "
+   "projectiles."
+   "\n\n"
+   "Somehow, the accelerated shots also seem to blend into eachother slightly."
+   "\n\n"
+   "The weapon must be fired a bit slower (and is forced to) due to the violent "
+   "nature of the magic being used, and the added recoil.";
 "LITH_TXT_INFO_SHORT_SMG" = "Sub-Machine Gun";
 "LITH_TXT_INFO_TITLE_SMG" = "SYM4.3 D.22 MODEL M SUBMACHINE GUN";
 "LITH_TXT_INFO_DESCR_SMG" =
@@ -108,8 +117,26 @@
    "bullpup. It has since been re-branded by SYM4.3, who now produce it for "
    "Omakeda with royalties.";
 "LITH_TXT_INFO_SHORT_SMGUpgr" = "$LITH_TXT_UPGRADE_TITLE_SMG_A";
+"LITH_TXT_INFO_TITLE_SMGUpgr" = "Arms Annex F474";
+"LITH_TXT_INFO_DESCR_SMGUpgr" =
+   "The AA/F474 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which "
+   "attaches a magic buffer into the magazine upon insertion, causing it to "
+   "over-load another two magazines worth of ammunition while firing."
+   "\n\n"
+   "This magic buffer is unfortunately unstable, as it has to be recreated every "
+   "load, and so care must be taken while reloading the gun to not move too "
+   "suddenly and cause the buffer to rip. If this did occur, the weapon would "
+   "displode, and bullets would fly out constantly.";
 "LITH_TXT_INFO_SHORT_SMGUpg2" = "$LITH_TXT_UPGRADE_TITLE_SMG_B";
 "LITH_TXT_INFO_SHORT_SMGUpg3" = "$LITH_TXT_UPGRADE_TITLE_SMG_C";
+"LITH_TXT_INFO_TITLE_SMGUpg3" = "SYM4.3 D.24 MODEL M SAFE TRIGGER";
+"LITH_TXT_INFO_DESCR_SMGUpg3" =
+   "Complaints from users of the Model M SMG were not many for SYM4.3, however they "
+   "were actually the most abundant of complaints the company had ever received."
+   "\n\n"
+   "In the interest of their public face, they convinced the company producing the "
+   "gun to make a replacement for the hammer that could detect the heat of the "
+   "barrel and stop firing until it has sufficiently cooled down.";
 "LITH_TXT_INFO_SHORT_IonRifle" = "Ion Rifle";
 "LITH_TXT_INFO_TITLE_IonRifle" = "KDA-[Thrown] Model 11 Ion Rifle";
 "LITH_TXT_INFO_DESCR_IonRifle" =
@@ -148,6 +175,8 @@
    "anything in its path.";
 "LITH_TXT_INFO_SHORT_ShipGunUpgr" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_A";
 "LITH_TXT_INFO_SHORT_ShipGunUpg2" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_B";
+
+// Cyber-Mage Magic ----------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Delear" = "Delear";
 "LITH_TXT_INFO_TITLE_Delear" = "\cdDelerentur Ex\c-, \ciAurantiorum\c- 24";
 "LITH_TXT_INFO_DESCR_Delear" =
@@ -174,7 +203,7 @@
    "missions, including the West Steel Corp. incident, where it was used to "
    "destroy several micro-fighters and around 195 personnel aboard the enemy ship.";
 
-// Marine ---------------------------------------------------------------------
+// Marine --------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Fist" = "Knife";
 "LITH_TXT_INFO_SHORT_ChargeFist" = "Charge Fist";
 "LITH_TXT_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";
@@ -378,5 +407,3 @@
    "With this, a gigantic red beam of destruction with an ungodly amount of heat "
    "and energy is fired out of the cannon, causing most anything in its path to be "
    "absolutely destroyed.";
-
-// EOF

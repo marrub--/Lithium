@@ -16,8 +16,8 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h)
    y += g->oy;
 
    // check clip versus cursor (if clipping), then check control versus cursor
-   if(!g->useclip || bpcldi(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
-      if(bpcldi(x, y, x + w, y + h, g->cx, g->cy))
+   if(!g->useclip || aabb(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
+      if(aabb(x, y, x + w, y + h, g->cx, g->cy))
    {
       g->hot = id;
 

@@ -15,7 +15,13 @@ in language.info.upgrades.en.txt
 parsefile Info_Upgrades.txt
 
 in language.info.weapons.en.txt
-parsefile Info_Weapons.txt
+
+data sord        -> LITH_TXT_INFO_SHORT_Sword
+data Game Nanhai -> LITH_TXT_INFO_SHORT_Gameboy
+
+parsefile Info_Weapons_Shop.txt
+parsefile Info_Weapons_CyberMage.txt
+parsefile Info_Weapons_Marine.txt
 
 in language.info.omake.en.txt
 parsefile Info_Extra.txt

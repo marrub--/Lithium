@@ -255,11 +255,10 @@ static void DoRain()
    player_t *p = &players[0];
    ACS_SetActivator(p->tid);
 
-   ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.01, true, ATTN_NONE);
-   ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.01, true, ATTN_NONE);
+   ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
+   ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.001, true, ATTN_NONE);
 
-   fixed skydist;
-   fixed curskydist;
+   fixed skydist = 0, curskydist = 0;
    for(;;)
    {
       if((skydist = !ACS_CheckActorCeilingTexture(0, "F_SKY1"))) {

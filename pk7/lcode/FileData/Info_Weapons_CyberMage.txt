@@ -1,0 +1,170 @@
+## Cyber-Mage ----------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_CFist | Spell Selector
+
+== LITH_TXT_INFO_SHORT_Mateba | Mateba
+== LITH_TXT_INFO_TITLE_Mateba | Mateba R119
+@@ LITH_TXT_INFO_DESCR_Mateba
+A re-creation of the classic Mateba Model 6 Unica revolver, which was rather
+popular a few thousand years ago from its (at the time) unique design and
+style.
+
+This version is suited for a left-handed user, with a barrel that opens to the
+right. The weapon loads twelve .454 Casull rounds much like the Mateba Grifone
+variant.
+
+Due to the original design being lost in time, this revolver sports several
+accuracy deficiencies, but nonetheless has the classic look and feel of the
+original gun. Produced by A.O.F Inc. for knight-class units.
+
+== LITH_TXT_INFO_SHORT_MatebaUpgr | $LITH_TXT_UPGRADE_TITLE_Mateba_A
+== LITH_TXT_INFO_TITLE_MatebaUpgr | \cdFinirentur\c-, \cgRussorum\c- 19
+@@ LITH_TXT_INFO_DESCR_MatebaUpgr
+The 19th method of the \cgRussum\c- mode, Finirentur, known as the Finalizer,
+is a very powerful red magic that creates a sigil infront of the user which
+then fires out a projectile at fairly high speed. This projectile is capable
+of instantly deceasing any mid-heavily wounded, living being.
+
+The Mateba R119 Finalizer channeler is capable of firing this intense magic,
+however it is limited to the last shot of the cylinder so as to not
+potentially overload the user. While this modification was created by A.O.F
+Inc, the Finirentur method was created recently by mages of Neptune 11 in
+Algidistari.
+
+== LITH_TXT_INFO_SHORT_ShockRifle | Shock Rifle
+
+== LITH_TXT_INFO_SHORT_SPAS | Shotgun
+== LITH_TXT_INFO_TITLE_SPAS | NV48 12-Gauge Shotgun
+@@ LITH_TXT_INFO_DESCR_SPAS
+The first (and currently only) shotgun produced by Newvec corp, an extended
+production line was fulfilled by contract from A.O.F Inc. for knight-class
+units thanks to the overwhelming fire-power and cheapness of this weapon.
+
+It fires any standard high-potency 12-gauge shell, and loads 5 shots. The
+design is extremely simple, but it does not overheat or jam often, is cheap to
+produce, and is very, very powerful.
+
+== LITH_TXT_INFO_SHORT_SPASUpgr | $LITH_TXT_UPGRADE_TITLE_SPAS_A
+
+== LITH_TXT_INFO_SHORT_SPASUpg2 | $LITH_TXT_UPGRADE_TITLE_SPAS_B
+== LITH_TXT_INFO_TITLE_SPASUpg2 | NV48-1 Shell Auto-loader
+@@ LITH_TXT_INFO_DESCR_SPASUpg2
+An upgrade for the NV48 which uses a small magic buffer to automatically load
+shells from a four-dimensional area. A rather simple, yet effective solution,
+which also is used to accelerate shots slightly more, causing more damaging
+projectiles.
+
+Somehow, the accelerated shots also seem to blend into eachother slightly.
+
+The weapon must be fired a bit slower (and is forced to) due to the violent
+nature of the magic being used, and the added recoil.
+
+== LITH_TXT_INFO_SHORT_SMG | Sub-Machine Gun
+== LITH_TXT_INFO_TITLE_SMG | SYM4.3 D.22 MODEL M SUBMACHINE GUN
+@@ LITH_TXT_INFO_DESCR_SMG
+This rather oddly shaped submachine gun was mass-produced by Omakeda during
+their earlier years, when they were still getting their designs down. While
+the gun has overheating issues, it mitigates this by allowing the user to feed
+coolant tubes directly into it, and counter-balances the issue by having both
+great fire-rate and great over-all projectile damage.
+
+The weapon fires modified high velocity, armor piercing, vacuum enabled
+5.7x28mm bullets, manufactured by various nameless companies, and loads
+bullpup. It has since been re-branded by SYM4.3, who now produce it for
+Omakeda with royalties.
+
+== LITH_TXT_INFO_SHORT_SMGUpgr | $LITH_TXT_UPGRADE_TITLE_SMG_A
+== LITH_TXT_INFO_TITLE_SMGUpgr | Arms Annex F474
+@@ LITH_TXT_INFO_DESCR_SMGUpgr
+The AA/F474 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which
+attaches a magic buffer into the magazine upon insertion, causing it to
+over-load another two magazines worth of ammunition while firing.
+
+This magic buffer is unfortunately unstable, as it has to be recreated every
+load, and so care must be taken while reloading the gun to not move too
+suddenly and cause the buffer to rip. If this did occur, the weapon would
+displode, and bullets would fly out constantly.
+
+== LITH_TXT_INFO_SHORT_SMGUpg2 | $LITH_TXT_UPGRADE_TITLE_SMG_B
+
+== LITH_TXT_INFO_SHORT_SMGUpg3 | $LITH_TXT_UPGRADE_TITLE_SMG_C
+== LITH_TXT_INFO_TITLE_SMGUpg3 | SYM4.3 D.24 MODEL M SAFE TRIGGER
+@@ LITH_TXT_INFO_DESCR_SMGUpg3
+Complaints from users of the Model M SMG were not many for SYM4.3, however they
+were actually the most abundant of complaints the company had ever received.
+
+In the interest of their public face, they convinced the company producing the
+gun to make a replacement for the hammer that could detect the heat of the
+barrel and stop firing until it has sufficiently cooled down.
+
+== LITH_TXT_INFO_SHORT_IonRifle | Ion Rifle
+== LITH_TXT_INFO_TITLE_IonRifle | KDA-[Thrown] Model 11 Ion Rifle
+@@ LITH_TXT_INFO_DESCR_IonRifle
+Produced by KSKK under the pseudonym "Kazami Defense Arms" (for various legal
+reasons.) Fires volatile ions at railgun speeds, which go straight
+through just about any being with flesh until resulting in a violent,
+explosive impact.
+
+The rifle uses a relatively complex loading mechanism for the safety of the
+user; one must first release the bolt with a safety guard near the trigger
+mechanism, open the bolt, wait for a round to cycle and close it.
+
+This is in part required due to the immense heat that would be caused by
+opening the weapon prematurely after firing, and the complexity that would be
+needed to have a fully automatic round cycling system.
+
+== LITH_TXT_INFO_SHORT_IonRifleUpgr | $LITH_TXT_UPGRADE_TITLE_IonRifle_A
+== LITH_TXT_INFO_SHORT_IonRifleUpg2 | $LITH_TXT_UPGRADE_TITLE_IonRifle_B
+
+== LITH_TXT_INFO_SHORT_CPlasmaRifle | Plasma Rifle
+== LITH_TXT_INFO_TITLE_CPlasmaRifle | $LITH_TXT_INFO_SHORT_PlasmaRifle
+== LITH_TXT_INFO_DESCR_CPlasmaRifle | $LITH_TXT_INFO_DESCR_PlasmaRifle
+
+== LITH_TXT_INFO_SHORT_CPlasmaUpgr | $LITH_TXT_UPGRADE_TITLE_CPlasma_A
+
+== LITH_TXT_INFO_SHORT_StarDestroyer | Star Destroyer
+== LITH_TXT_INFO_TITLE_StarDestroyer | The Star Destroyer
+@@ LITH_TXT_INFO_DESCR_StarDestroyer
+An atrocious weapon supposedly made from the life research of seven mages of
+Hell, the Star Destroyer was made with the sole purpose of destroying whatever
+created it so hard that it would never, ever come back again.
+
+The weapon's inner workings still elude many, but what is known is that it
+condenses demonic energy far more than any other known artifact; the weapon
+then takes this hyper-condensed energy and emits it into a very small,
+circular disc buffer on the top of the weapon.
+
+The resulting projectile grows in size as it disperses energy in front of it,
+causing hundreds of smaller projectiles to come out as it rips through
+anything in its path.
+
+== LITH_TXT_INFO_SHORT_ShipGunUpgr | $LITH_TXT_UPGRADE_TITLE_ShipGun_A
+== LITH_TXT_INFO_SHORT_ShipGunUpg2 | $LITH_TXT_UPGRADE_TITLE_ShipGun_B
+
+## Cyber-Mage Magic ----------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_Delear | Delear
+== LITH_TXT_INFO_TITLE_Delear | \cdDelerentur Ex\c-, \ciAurantiorum\c- 24
+@@ LITH_TXT_INFO_DESCR_Delear
+The 24th method of the \ciAurantia\c- mode, a rather basic attack which fires
+sixteen orange dots in a sequence from two sides, over two rows. The
+simplicity of casting and ease of use makes this spell a rather common sight.
+
+The design was created by first century mage Johnathon Booker and was later
+further simplified by various spellcasters. Your version of it prefers a flat
+shape rather than a curved one that most use.
+
+== LITH_TXT_INFO_SHORT_Hulgyon | Hulgyon
+== LITH_TXT_INFO_TITLE_Hulgyon | \cdHumarentur Ex\c-, \ciAurantiorum\c- 16
+@@ LITH_TXT_INFO_DESCR_Hulgyon
+The 16th method of the \ciAurantia\c- mode. Intermediate attack that creates
+several piercing pillars of light forward of the user. One of the few
+classical methods still in use, created by Apollo in 3021 CE.
+
+== LITH_TXT_INFO_SHORT_StarShot | Hosh'danma
+== LITH_TXT_INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
+@@ LITH_TXT_INFO_DESCR_StarShot
+The 8th method of the \ciAurantia\c- mode. An advanced attack which summons
+two star-shaped sigils that fire projectiles out at will before fading out.
+Created by several dozen spellcasters at A.O.F Inc. for bishop-class units to
+deploy with, and has been used several high-profile destroy-and-conceal
+missions, including the West Steel Corp. incident, where it was used to
+destroy several micro-fighters and around 195 personnel aboard the enemy ship.
