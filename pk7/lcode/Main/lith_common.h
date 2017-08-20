@@ -168,10 +168,11 @@ fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 bool aabb(int bx1, int by1, int bx2, int by2, int x2, int y2);
 int ceilk(fixed n);
-struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t);
-struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3, float t);
 int bzpolyi(int a, int b, float t);
 float bzpolyf(float a, float b, float t);
+struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t);
+struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3, float t);
+struct polar ctopol(fixed x, fixed y);
 
 // Address Space Definitions -------------------------------------------------|
 __addrdef extern __mod_arr lmvar;

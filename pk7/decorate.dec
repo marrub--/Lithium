@@ -95,6 +95,7 @@
 
 #include "lscripts/Weapons_CyberMage/Magic/1_Blade.dec"
 #include "lscripts/Weapons_CyberMage/Magic/2_Delear.dec"
+#include "lscripts/Weapons_CyberMage/Magic/3_Feuer.dec"
 #include "lscripts/Weapons_CyberMage/Magic/4_Rend.dec"
 #include "lscripts/Weapons_CyberMage/Magic/5_Hulgyon.dec"
 #include "lscripts/Weapons_CyberMage/Magic/6_StarShot.dec"

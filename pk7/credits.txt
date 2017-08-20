@@ -62,6 +62,9 @@ MarlboroMike
 Minigunner
    Smooth explosion sprites
 
+Monkeybtm6
+   BLLTR0 sprite
+
 RWTerma
    ÷
 

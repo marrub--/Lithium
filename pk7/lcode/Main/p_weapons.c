@@ -47,7 +47,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
    {1, pcl_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {2, pcl_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
-   {3, pcl_cybermage, "Fire",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {3, pcl_cybermage, "Feuer",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {4, pcl_cybermage, "Rend",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {5, pcl_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {6, pcl_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
@@ -403,6 +403,57 @@ void Lith_Rend(bool hit, int set)
                        : StrParam("lgfx/Weapon/Rend%i.png", num);
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 2, 0.1);
+}
+
+//
+// Lith_Feuer
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_Feuer(bool left, bool fire)
+{
+   withplayer(LocalPlayer)
+   {
+      if(fire) {
+         ACS_FadeTo(255, 255, 225, 0.3, 0);
+         ACS_FadeTo(255, 255, 225, 0, 0.5);
+      }
+
+      __str actor = fire ? "Lith_FeuerExplosion" : "Lith_FeuerTest";
+      int pufftid;
+      ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024, FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+
+      int sx = p->x;
+      int sy = p->y;
+      int sz = p->z + 32;
+      int ex = ACS_GetActorX(pufftid);
+      int ey = ACS_GetActorY(pufftid);
+      int ez = ACS_GetActorZ(pufftid);
+
+      struct polar cpp = ctopol(ex - sx, ey - sy);
+      cpp.dst /= 4;
+      if(left) cpp.ang += 0.07;
+      else     cpp.ang -= 0.07;
+
+      int cx = sx + ACS_Cos(cpp.ang) * cpp.dst;
+      int cy = sy + ACS_Sin(cpp.ang) * cpp.dst;
+      fixed max = fire ? 20 : 70;
+
+      for(int i = 0; i < max; i++) {
+         struct vec2i v = qbezieri(sx, sy, cx, cy, ex, ey, i / max);
+         int tid;
+         ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, ez, i / max), tid = ACS_UniqueTID());
+         if(fire) {
+            Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+            ACS_Delay(1);
+         }
+      }
+
+      if(fire) {
+         int tid;
+         ACS_SpawnForced("Lith_FeuerFinal", ex, ey, ez, tid = ACS_UniqueTID());
+         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+      }
+   }
 }
 
 //

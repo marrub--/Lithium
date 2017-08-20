@@ -166,4 +166,12 @@ struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t)
    BezierImpl(int, struct vec2i, bzpolyi);
 }
 
+//
+// ctopol
+//
+struct polar ctopol(fixed x, fixed y)
+{
+   return (struct polar){ACS_VectorAngle(x, y), mag2f(x, y)};
+}
+
 // EOF

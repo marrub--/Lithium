@@ -462,6 +462,16 @@ weapons/delear/charge lsounds/Delear/Charge.flac // Devil May Cry 3, Deus Ex
 weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
 
 //
+// Feuer
+//
+weapons/feuer/explode lsounds/Feuer/Explode.ogg // Monster Girl Quest
+weapons/feuer/fire    lsounds/Feuer/Fire.wav    // Touhou 13
+weapons/feuer/final   lsounds/Feuer/Final.flac  // 〃
+
+$limit weapons/feuer/explode 0
+$volume weapons/feuer/fire 0.9
+
+//
 // Rend
 //
 weapons/rend/slash1  lsounds/Rend/Fire1.flac   // ???

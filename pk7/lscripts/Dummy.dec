@@ -6,12 +6,16 @@ damagetype Lith_NoDamage
 
 actor Lith_Dummy
 {
-   +NOINTERACTION
+   +NOTIMEFREEZE
    +ALWAYSPUFF
-   
+   +PUFFONACTORS
+   +NOGRAVITY
+   +BLOODLESSIMPACT
+
    states
    {
    Spawn:
+      TNT1 A 1
       stop
    }
 }

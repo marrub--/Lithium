@@ -28,7 +28,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    static struct magic_info const minf[] = {
       {-1,                160, 190, "Blade"   },
       {-1,                100, 160, "Delear"  },
-      {cupg_c_slot3spell,  80, 100, "Fire"    },
+      {cupg_c_slot3spell,  80, 100, "Feuer"   },
       {cupg_c_slot4spell, 160,  50, "Rend"    },
       {cupg_c_slot5spell, 240, 100, "Hulgyon" },
       {cupg_c_slot6spell, 240, 160, "StarShot"},
