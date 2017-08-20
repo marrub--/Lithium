@@ -3,10 +3,7 @@
 
 #include "lith_gui.h"
 
-
-//----------------------------------------------------------------------------
-// Type Definitions
-//
+// Type Definitions ----------------------------------------------------------|
 
 enum
 {
@@ -34,10 +31,7 @@ typedef struct gb_s
    gb_gameinfo_t const *gameinfo;
 } gb_t;
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]] void Lith_PlayerUpdateGB(struct player *p);
 

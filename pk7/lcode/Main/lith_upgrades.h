@@ -10,18 +10,12 @@
 #define Lith_UpgrBuy(p, upgr, ...) \
    p->buy(&(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", __VA_ARGS__)
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 extern upgradeinfo_t *upgradeinfo;
 extern int UPGR_MAX;
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 // These are included here so the compiler may check the function signatures.
 #define A(n)                       void Upgr_##n##_Activate  (struct player *p, upgrade_t *upgr);

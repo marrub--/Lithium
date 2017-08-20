@@ -2,10 +2,7 @@
 
 #define UData UData_ReactArmor(upgr)
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 static struct {__str abbr, full;} const ArmorNames[] = {
    "BUL", "Bullets",
@@ -18,10 +15,7 @@ static struct {__str abbr, full;} const ArmorNames[] = {
    "ICE", "Ice",
 };
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // RA_Take
@@ -46,10 +40,7 @@ static void RA_Give(__str name, int n)
    ACS_GiveInventory(StrParam("Lith_RA_%S%i", name, n), 1);
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_RA_Give

@@ -4,10 +4,7 @@
 #include "lith_world.h"
 #include <ctype.h>
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_RandomName
@@ -30,9 +27,9 @@ __str Lith_RandomName(int id)
       /*え*/ "eh","er",
       /*無*/ "ver","xel'",
    };
-   
+
    static __str lul[] = {"ohgodwhat","kdizd","help","ohno","explod","why","fuck"};
-   
+
    static __str names[] = {
       "Gorgoth",
       "Merdiklo",
@@ -144,7 +141,7 @@ __str Lith_RandomName(int id)
       "P'Noon Ikl",
       "Olok",
    };
-   
+
    static __str suffixes[] = {
       "Supreme",
       "Lord of Brimstone",
@@ -176,14 +173,14 @@ __str Lith_RandomName(int id)
       "Hideous Destructor",
       "Horrendeous Tyrant",
    };
-   
+
    __str ret = "";
-   
+
    if(id)
       srand(world.mapseed + id);
    else
       srand(ACS_Random(0, 0x7FFFFFFF));
-   
+
    if(id && (rand() % 10) == 0)
       ret = names[rand() % countof(names)];
    else
@@ -192,10 +189,10 @@ __str Lith_RandomName(int id)
             ret = StrParam("%S%S", ret, lul[rand() % countof(lul)]);
          else
             ret = StrParam("%S%S", ret, syllables[rand() % countof(syllables)]);
-   
+
    if(id)
       ret = StrParam("%S, the %S", ret, suffixes[rand() % countof(suffixes)]);
-   
+
    return StrParam("\Cg%c%S", toupper(ACS_StrLeft(ret, 1)[0]), ACS_StrRight(ret, ACS_StrLen(ret) - 1));
 }
 

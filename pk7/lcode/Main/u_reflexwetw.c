@@ -4,10 +4,7 @@
 
 #define CHARGE_MAX (35 * 0.8)
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // DOOOOODGE
@@ -27,10 +24,7 @@ static void DOOOOODGE(player_t *p)
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Activate

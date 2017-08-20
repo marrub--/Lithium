@@ -10,10 +10,7 @@
 #define ForPage() Lith_ForList(bippage_t *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 struct page_info
 {
@@ -22,10 +19,7 @@ struct page_info
    __str body;
 };
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // DecryptBody
@@ -107,10 +101,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, __str name, bip_unlocks_
    if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page, pclass);
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_PlayerInitBIP

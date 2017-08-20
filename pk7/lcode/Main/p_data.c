@@ -4,17 +4,11 @@
 #include "lith_world.h"
 #include "lith_monster.h"
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 static void Lith_GetArmorType(player_t *p);
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_PlayerCurWeaponType
@@ -294,10 +288,7 @@ void Lith_ResetPlayer(player_t *p)
    p->bipUnlock("StarShot");
 }
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // Lith_GetArmorType

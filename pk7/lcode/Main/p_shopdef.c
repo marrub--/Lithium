@@ -3,10 +3,7 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_ShopGetCost

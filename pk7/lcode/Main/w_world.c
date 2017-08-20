@@ -14,10 +14,7 @@
 #define OnEarth \
    (world.game == Game_Doom2 && world.cluster == 7)
 
-
-//-----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 __addrdef __mod_arr lmvar;
 __addrdef __hub_arr lwvar;
@@ -28,20 +25,14 @@ int  lmvar mapid;
 worldinfo_t world;
 payoutinfo_t payout;
 
-
-//-----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 static bool  lmvar rain_chk;
 static fixed lmvar rain_px;
 static fixed lmvar rain_py;
 static fixed lmvar rain_dist;
 
-
-//-----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_BeginAngles
@@ -237,10 +228,7 @@ bool Lith_RainDropSpawn()
       return false;
 }
 
-
-//-----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // DoRain
@@ -554,10 +542,7 @@ static void WInit(void)
    }
 }
 
-
-//-----------------------------------------------------------------------------
-// Scripts
-//
+// Scripts -------------------------------------------------------------------|
 
 //
 // Lith_World

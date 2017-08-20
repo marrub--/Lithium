@@ -4,10 +4,7 @@
 
 #define DMON_MAX 0x7FFF
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 __addrdef __mod_arr dmonarr;
 
@@ -15,10 +12,7 @@ __addrdef __mod_arr dmonarr;
 [[__no_init]] static dmon_t dmonalloc[DMON_MAX];
 int dmonarr dmonid;
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // PrintDmonAllocSize

@@ -3,9 +3,7 @@
 #include "lith_savedata.h"
 #include "lith_file.h"
 
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_PlayerSaveData

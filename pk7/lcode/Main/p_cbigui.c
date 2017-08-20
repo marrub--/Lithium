@@ -5,10 +5,7 @@
 #include "lith_list.h"
 #include "lith_world.h"
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 static void CBITab_Marine(gui_state_t *g, player_t *p)
 {
@@ -105,10 +102,7 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_PlayerUpdateCBIGUI
@@ -185,10 +179,7 @@ void Lith_PlayerResetCBIGUI(player_t *p)
    p->cbi.oldtheme = -1;
 }
 
-
-//----------------------------------------------------------------------------
-// Scripts
-//
+// Scripts -------------------------------------------------------------------|
 
 //
 // Lith_KeyOpenCBI

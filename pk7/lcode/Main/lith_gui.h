@@ -30,10 +30,7 @@
 #define Lith_GUI_ScrollReset(g, stn) \
    ((g)->st[(stn)].scrl = (gui_scroll_state_t){})
 
-
-//-----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 typedef unsigned id_t;
 
@@ -202,10 +199,7 @@ typedef struct gui_txtbox_args_s
    char  *inbuf;
 } gui_txtbox_args_t;
 
-
-//-----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 extern gui_button_preset_t const btndefault;
 extern gui_button_preset_t const btntab;
@@ -226,10 +220,7 @@ extern gui_checkb_preset_t const cbxsmall;
 extern gui_scroll_preset_t const scrdefault;
 extern gui_slider_preset_t const slddefault;
 
-
-//-----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h);
 void Lith_GUI_Init(gui_state_t *g, size_t maxst);

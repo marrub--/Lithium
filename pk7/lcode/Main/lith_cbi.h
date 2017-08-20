@@ -3,10 +3,7 @@
 
 #include "lith_gui.h"
 
-
-//----------------------------------------------------------------------------
-// Type Definitions
-//
+// Type Definitions ----------------------------------------------------------|
 
 enum
 {
@@ -60,10 +57,7 @@ typedef struct cbi_s
    int pruse;
 } cbi_t;
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateCBIGUI(struct player *p);

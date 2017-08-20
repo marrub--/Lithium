@@ -1,4 +1,3 @@
-#define Lith_Version "1.5 BETA (Pegmatite)"
+#define Lith_Version "1.5 (Pegmatite)"
 
 // EOF
-

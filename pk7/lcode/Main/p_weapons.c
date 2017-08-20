@@ -8,10 +8,7 @@
 
 #define ValidateWeapon(parm) (parm < weapon_max && parm >= weapon_min)
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 #define A(a) "Lith_" a "Ammo"
 #define M(a) "Lith_" a "ShotsFired"
@@ -61,10 +58,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 #undef P
 #undef F
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // GiveWeaponItem
@@ -109,10 +103,7 @@ static void Lith_PickupScore(player_t *p, int parm)
       p->getModScore(score));
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_WeaponPickup

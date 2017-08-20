@@ -2,10 +2,7 @@
 #define _GNU_SOURCE
 #include "lith_upgrades_common.h"
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_PunctuatorFire

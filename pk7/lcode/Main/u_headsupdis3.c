@@ -1,9 +1,6 @@
 #include "lith_upgrades_common.h"
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // HUD_Ammo
@@ -99,10 +96,7 @@ static void HUD_KeyInd(player_t *p)
    if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        130.2, 11.1, 0.1, 0.8);
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Activate

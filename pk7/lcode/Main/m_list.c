@@ -3,10 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_LinkDefault
@@ -34,7 +31,7 @@ void *Lith_ListUnlink(list_t *list)
    list->prev->next = list->next;
    list->next->prev = list->prev;
    list->prev = list->next = list;
-   
+
    return list->object;
 }
 

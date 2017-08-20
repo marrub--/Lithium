@@ -1,7 +1,7 @@
 [enu default]
 
 
-// Health ---------------------------------------------------------------------
+// Health --------------------------------------------------------------------|
 "LITH_TXT_LOG_ArmorBonus" = ">>> Armor Bonus";
 "LITH_TXT_LOG_BlueArmor" = ">>> Blue Armor";
 "LITH_TXT_LOG_GreenArmor" = ">>> Green Armor";
@@ -11,7 +11,7 @@
 "LITH_TXT_LOG_SoulSphere" = ">>>> Super Charge!";
 "LITH_TXT_LOG_StimPack" = ">>> Stimpak";
 
-// Keys -----------------------------------------------------------------------
+// Keys ----------------------------------------------------------------------|
 "LITH_TXT_LOG_RedCard" = ">>>>> \cgRed KeyDisk";
 "LITH_TXT_LOG_BlueCard" = ">>>>> \chBlue KeyDisk";
 "LITH_TXT_LOG_YellowCard" = ">>>>> \ckYellow KeyDisk";
@@ -19,7 +19,7 @@
 "LITH_TXT_LOG_BlueSkull" = ">>>>> \chBlue Skull";
 "LITH_TXT_LOG_YellowSkull" = ">>>>> \ckYellow Skull";
 
-// Powerups -------------------------------------------------------------------
+// Powerups ------------------------------------------------------------------|
 "LITH_TXT_LOG_RadSuit" = ">>>>> Radiation Shielding Suit";
 "LITH_TXT_LOG_InfraRed" = ">>>>> CB-Goggles";
 "LITH_TXT_LOG_Invuln" = "\cj>>>>>> Invulnerability!";
@@ -30,7 +30,7 @@
 "LITH_TXT_LOG_DoggoSphere" = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 "LITH_TXT_LOG_Dogs" = "> Picked up dogs.";
 
-// Ammo -----------------------------------------------------------------------
+// Ammo ----------------------------------------------------------------------|
 "LITH_TXT_LOG_Clip" = ">> Radio";
 "LITH_TXT_LOG_ClipBox" = ">> Nonspecific Box of Ammunition";
 "LITH_TXT_LOG_Shell" = ">> Shells";
@@ -40,7 +40,7 @@
 "LITH_TXT_LOG_Cell" = ">> Energy Charge";
 "LITH_TXT_LOG_CellBox" = ">> Demonic Energy Pack";
 
-// CBI Upgrades (Marine) ------------------------------------------------------
+// CBI Upgrades (Marine) -----------------------------------------------------|
 "LITH_TXT_LOG_CBI_MUpgr1" = "> Installed KSKK Spec. High-Grade CPU";
 "LITH_TXT_LOG_CBI_MUpgr2" = "> Installed KSKK Spec. Super High-Grade CPU";
 "LITH_TXT_LOG_CBI_MArmorInter" = "> Installed Armor Interface";
@@ -48,7 +48,7 @@
 "LITH_TXT_LOG_CBI_MWeapnInte2" = "> Installed Weapon Refactoring Device";
 "LITH_TXT_LOG_CBI_MRDistInter" = "> Installed Reality Distortion Interface";
 
-// CBI Upgrades (Cyber-Mage) --------------------------------------------------
+// CBI Upgrades (Cyber-Mage) -------------------------------------------------|
 "LITH_TXT_LOG_CBI_CSlot3Spell" = "> Installed Feuer Spell Driver";
 "LITH_TXT_LOG_CBI_CSlot4Spell" = "> Installed Romyetya Spell Driver";
 "LITH_TXT_LOG_CBI_CSlot5Spell" = "> Installed Hulgyon Spell Driver";

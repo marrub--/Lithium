@@ -4,17 +4,11 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 [[__no_init]] player_t players[MAX_PLAYERS];
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
    {},
@@ -22,20 +16,14 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
    {"player/gb/open",  "player/gb/close" },
 };
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
 static void Lith_PlayerScore(player_t *p);
 static void Lith_PlayerStats(player_t *p);
 [[__call("ScriptS")]] static void Lith_BossWarning(player_t *p);
 
-
-//----------------------------------------------------------------------------
-// Scripts
-//
+// Scripts -------------------------------------------------------------------|
 
 //
 // Lith_PlayerEntry
@@ -169,10 +157,7 @@ static void Lith_PlayerDisconnect(void)
    memset(p, 0, sizeof(*p));
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 #define upgrademap_t_GetKey(o) ((o)->info->key)
 #define upgrademap_t_GetNext(o) (&(o)->next)
@@ -331,10 +316,7 @@ void Lith_TakeScore(player_t *p, score_t score)
    p->scoreaccumtime = 0;
 }
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // Lith_BossWarning

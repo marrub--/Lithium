@@ -2,10 +2,7 @@
 
 #define UData UData_Implying(upgr)
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Update
@@ -32,15 +29,15 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
       "\Cd" ">>>>>>>>>>>>>>>",
       "\Cq" "<",
    };
-   
+
    static int const num_strings = countof(strings);
    static int const id_max = hid_implyingE - hid_implyingS;
-   
+
    int id = UData.hudid;
    for(int i = 0, n = ACS_Random(0, 40); i < n; i++)
    {
       id = ++id % id_max;
-      
+
       HudMessageF("DBIGFONT", "%S", strings[ACS_Random(0, num_strings - 1)]);
       HudMessageFade(hid_implyingE + id,
                      ACS_RandomFixed(0.0, 1.0),
@@ -48,7 +45,7 @@ void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
                      ACS_RandomFixed(0.1, 0.4),
                      0.1);
    }
-   
+
    UData.hudid = id;
 }
 

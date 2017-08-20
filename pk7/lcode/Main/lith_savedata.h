@@ -20,10 +20,7 @@
 #define Save_FlagMask 0xFFFFFF00
 #define Save_FlagShft 8
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 typedef uint32_t ident_t;
 
@@ -56,10 +53,7 @@ typedef struct savefile_s
 
 [[__call("ScriptS")]] typedef void (*loadchunker_t)(savefile_t *save, savechunk_t *chunk);
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size);
 savefile_t *Lith_SaveBegin(struct player *p);

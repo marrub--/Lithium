@@ -3,10 +3,7 @@
 
 #define UData UData_Magic(upgr)
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // UpdateMagicUI
@@ -97,10 +94,7 @@ static void Lith_GivePlayerZ(int tid, player_t *p, __str name)
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_SetMagicUI

@@ -1,10 +1,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 typedef struct shopitem_s
 {
@@ -14,10 +11,7 @@ typedef struct shopitem_s
    bool isafuckingstupidweaponthatneedsaspecialsnowflakecasejustforthisstupidgoddamnbugorwhateveritis;
 } shopitem_t;
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 static shopitem_t shopitems[] = {
 // {{"Name-----------", "BIP------------", Cost---}, Cnt-, "Class---------------"},
@@ -38,10 +32,7 @@ static shopitem_t shopitems[] = {
 
 static size_t const shopitemsnum = countof(shopitems);
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // Shop_CanBuy
@@ -80,10 +71,7 @@ static bool Shop_Give(player_t *p, shopdef_t const *, void *item_, int tid)
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_GInit_Shop

@@ -8,18 +8,12 @@
 #define LogTok(s, tok) \
    Log(s " (type %i string %s)", tok->type, tok->str ? tok->str : c"no string")
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 static int *NextCode(struct dlgparsestate_s *d);
 static void GetStatement(struct dlgparsestate_s *d);
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 enum
 {
@@ -57,18 +51,12 @@ typedef struct dlgparsestate_s
 GDCC_HashMap_Decl(strtable_t,  char const *, struct strent)
 GDCC_HashMap_Decl(functable_t, char const *, struct dlgfunc)
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 static strtable_t  stbl;
 static functable_t ftbl;
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 #define strtable_t_GetKey(o) ((o)->key)
 #define strtable_t_GetNext(o) (&(o)->next)
@@ -402,10 +390,7 @@ static void GetDecl_TrmPage(dlgparsestate_t *d, int num)
    *d->nextCode() = DCD_DIE;
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_GSInit_Dialogue

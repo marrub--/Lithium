@@ -33,10 +33,7 @@
    __with(player_t *p = (player);) \
       if(!NoPlayer(p))
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
@@ -238,10 +235,7 @@ typedef struct player_invdata_s
    } sigil;
 } player_invdata_t;
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 void Lith_PlayerCloseGUI(struct player *p);
 void Lith_PlayerUseGUI(struct player *p, guiname_t type);
@@ -276,10 +270,7 @@ void Lith_ClearTextBuf(struct player *p);
 struct player *Lith_GetPlayer(int tid, int ptr);
 void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols, char scol, int bx, int by);
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 //
 // player_t
@@ -351,10 +342,7 @@ typedef struct player
    bool wasinit;
 } player_t;
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 extern player_t players[MAX_PLAYERS];
 

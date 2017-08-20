@@ -13,10 +13,7 @@
    for(list_t *rover = (name).next; rover && rover != &(name); rover = rover->next, __VA_ARGS__) \
       __with(var = rover->object;)
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 [[__optional_args(1)]] void Lith_LinkDefault(struct list_s *list, void *object);
 void Lith_ListLink(struct list_s *head, struct list_s *list);
@@ -24,10 +21,7 @@ void *Lith_ListUnlink(struct list_s *list);
 size_t Lith_ListSize(struct list_s *head);
 [[__optional_args(1)]] void Lith_ListFree(struct list_s *head, void (*deleter)(void *));
 
-
-//----------------------------------------------------------------------------
-// Type Definitions
-//
+// Type Definitions ----------------------------------------------------------|
 
 // To clarify how these new linked list structures work:
 // You put a list_t in your structure (or anywhere, you could allocate one)

@@ -1,4 +1,4 @@
-##-----------------------------------------------------------------------------
+##----------------------------------------------------------------------------|
 %% LITH_TXT_INFO_DESCR_RankThreatTest
 Rank:
    \cuNon-resident
@@ -15,7 +15,7 @@ Threat:
    \cgA
    \crE
 
-## Non-residents --------------------------------------------------------------
+## Non-residents -------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_ZombieMan | Former Human
 == LITH_TXT_INFO_TITLE_ZombieMan | Possessed Human Rifleman
 %% LITH_TXT_INFO_DESCR_ZombieMan
@@ -46,7 +46,7 @@ Humans which have been abducted and possessed by Hell's forces. Some seem to he 
 
 Corporals are generally terrible at aiming, but put out so much lead that you're bound to get hit. A lot. ... By the way, why don't these guys drop their chainguns?
 
-## Subordinates ---------------------------------------------------------------
+## Subordinates --------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_Imp | Hell Trooper
 == LITH_TXT_INFO_TITLE_Imp | Hell Trooper "Imp"
 %% LITH_TXT_INFO_DESCR_Imp
@@ -77,7 +77,7 @@ Demons which also happen to have cloaking magic active over their bodies.
 
 They tend to not make a sound until they lunge at you, so be sure to keep an eye out for cracks in the air around you.
 
-## Residents ------------------------------------------------------------------
+## Residents -----------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_LostSoul | Lost Soul
 == LITH_TXT_INFO_TITLE_LostSoul | $LITH_TXT_INFO_SHORT_LostSoul
 %% LITH_TXT_INFO_DESCR_LostSoul
@@ -118,7 +118,7 @@ Threat: \ckB-
 
 A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an unknown reason. They're quite hearty, and their attacks are fairly deadly, but generally the Cacodemon is not a monster to fear.
 
-## Nobles ---------------------------------------------------------------------
+## Nobles --------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_HellKnight | Hell Knight
 == LITH_TXT_INFO_TITLE_HellKnight | $LITH_TXT_INFO_SHORT_HellKnight
 %% LITH_TXT_INFO_DESCR_HellKnight
@@ -149,7 +149,7 @@ Dead souls whom have been revived into a skeletal frame, with combat armor and m
 
 The Revenant is revered among demons for its honor serving after death.
 
-## Tyrants --------------------------------------------------------------------
+## Tyrants -------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_PainElemental | Pain Elemental
 == LITH_TXT_INFO_TITLE_PainElemental | Sin of Bellona, "Pain Elemental"
 %% LITH_TXT_INFO_DESCR_PainElemental
@@ -190,7 +190,7 @@ An extremely deadly species forged of metal and flesh intertwined, the Cyber-Dem
 
 Equipped with a self-cooling rocket propelled grenade launcher on their left arm, a cybernetic hoof, and height twice that of a normal man. The Cyber-Demon is an extremely cruel, warmongering beast that will destroy any target without prejudice for the glory of Hell.
 
-## ??? ------------------------------------------------------------------------
+## ??? -----------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_Phantom | Phantom
 == LITH_TXT_INFO_TITLE_Phantom | $LITH_TXT_INFO_SHORT_Phantom
 %% LITH_TXT_INFO_DESCR_Phantom
@@ -201,7 +201,7 @@ A threat yet unexplained, the phantom seeks to destroy all and will leave no one
 
 Extreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.
 
-## Overlord -------------------------------------------------------------------
+## Overlord ------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_IconOfSin | Icon of Sin
 == LITH_TXT_INFO_TITLE_IconOfSin | Overlord of Hell, Icon of Sin
 %% LITH_TXT_INFO_DESCR_IconOfSin

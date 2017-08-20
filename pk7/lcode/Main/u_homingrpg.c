@@ -3,10 +3,7 @@
 
 #define UData UData_HomingRPG(upgr)
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // CheckTarget
@@ -20,10 +17,7 @@ static int CheckTarget(player_t *p)
       return 0;
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_HomingMissile
@@ -53,7 +47,7 @@ void Upgr_HomingRPG_Update(player_t *p, upgrade_t *upgr)
             UData.id = id;
          }
       }
-      
+
       if(ACS_SetActivator(0, AAPTR_TRACER) && ACS_GetActorProperty(0, APROP_Health) > 0)
          ACS_SpawnForced("Lith_TargetMarker",
             ACS_GetActorX(0),

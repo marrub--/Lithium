@@ -6,18 +6,12 @@
 
 #include <math.h>
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 static void HUD_StringStack(player_t *p);
 static void HUD_Waves(player_t *p);
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_HUD_DrawWeaponSlots
@@ -173,10 +167,7 @@ void Lith_PlayerHUD(player_t *p)
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // HUD_StringStack

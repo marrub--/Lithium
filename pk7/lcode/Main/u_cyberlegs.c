@@ -1,9 +1,6 @@
 #include "lith_upgrades_common.h"
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Activate
@@ -30,7 +27,7 @@ void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
 void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
 {
    fixed absvel = absk(p->old.velz) * 10.0k;
-   
+
    if(p->velz == 0 && absvel > 160)
    {
       for(fixed i = absvel; i >= 100; i -= 100)

@@ -13,10 +13,7 @@
 #define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbiupgr[cupg_rdistinter])
 #define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 enum
 {
@@ -40,10 +37,7 @@ enum
    UR_RA  = 1 << 4,
 };
 
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
+// Static Objects ------------------------------------------------------------|
 
 #define Req(arg) .requires = arg
 static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
@@ -111,18 +105,12 @@ static __str const upgrcateg[UC_MAX] = {
 //static int numextraupgradecallbacks;
 //static upgrade_cb_register_t extraupgradecallbacks;
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
+// Extern Objects ------------------------------------------------------------|
 
 upgradeinfo_t *upgradeinfo;
 int UPGR_MAX = countof(staticupgradeinfo);
 
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
+// Static Functions ----------------------------------------------------------|
 
 //
 // RenderProxy
@@ -192,10 +180,7 @@ static void RegisterBasicUpgrade(int key, upgradeinfo_t const *upgr)
    }
 }
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_GSReinit_Upgrade
@@ -432,10 +417,7 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
    return true;
 }
 
-
-//----------------------------------------------------------------------------
-// GUI
-//
+// GUI -----------------------------------------------------------------------|
 
 //
 // GUIUpgradesList
@@ -648,4 +630,3 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 }
 
 // EOF
-

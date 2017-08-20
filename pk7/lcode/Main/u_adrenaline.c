@@ -3,10 +3,7 @@
 #define UData UData_Adrenaline(upgr)
 #define CHARGE_MAX (30 * 35)
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Activate

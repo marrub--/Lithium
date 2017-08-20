@@ -14,10 +14,7 @@
 
 #include "lith_list.h"
 
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
+// Extern Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player *p);
 struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
@@ -26,10 +23,7 @@ struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
 void Lith_PlayerLoseBIPPages(struct bip_s *bip);
 [[__optional_args(1)]] void Lith_DeliverMail(struct player *p, __str title, int flags);
 
-
-//----------------------------------------------------------------------------
-// Types
-//
+// Types ---------------------------------------------------------------------|
 
 enum
 {
