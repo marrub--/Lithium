@@ -41,7 +41,7 @@ actor Lith_Star
 actor Lith_StarShot : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_StarShot"
-   Weapon.SlotNumber 6
+   Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/starshot/draw"
    

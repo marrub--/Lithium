@@ -47,12 +47,6 @@ $random weapons/cfist/fire {
 }
 
 //
-// Blade
-//
-weapons/blade/slash lsounds/Blade/Slash.ogg // Monster Girl Quest
-weapons/blade/hit   lsounds/Blade/Hit.ogg   // 〃
-
-//
 // Pistol
 //
 weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor
@@ -158,14 +152,6 @@ weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // Dynamic Range
 weapons/cshotgun/empty  lsounds/CShotgun/FireEmpty.flac // EYE: Divine Cybermancy
 weapons/cshotgun/pickup lsounds/CShotgun/Pickup.flac    // FEAR, Dynamic Range
 weapons/cshotgun/draw   lsounds/CShotgun/Draw.flac      // Dynamic Range
-
-//
-// Delear
-//
-weapons/delear/fire   lsounds/Delear/Fire.flac   // Devil May Cry 3
-weapons/delear/open   lsounds/Delear/Open.flac   // Devil May Cry 3, ???
-weapons/delear/charge lsounds/Delear/Charge.flac // Devil May Cry 3, Deus Ex
-weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
 
 //
 // Super Shotgun
@@ -277,12 +263,6 @@ weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallo
 weapons/ionrifle/pickup  lsounds/IonRifle/Pickup.flac    // Killing Floor, Halo 3
 
 //
-// Hulgyon
-//
-weapons/hulgyon/proc lsounds/Hulgyon/Proc.flac // Touhou 13
-$limit weapons/hulgyon/proc 0
-
-//
 // Grenade Launcher
 //
 weapons/rocket/fire1   lsounds/RocketLauncher/Fire.ogg        // FEAR
@@ -371,16 +351,6 @@ $random weapons/plasdiff/fire {
 }
 
 //
-// Star Shot
-//
-weapons/sshot/fire   lsounds/StarShot/Fire.flac   // Halo 3
-weapons/sshot/firero lsounds/StarShot/RunOut.flac // Monster Girl Quest
-
-$alias weapons/sshot/hit weapons/shotgun/gauss/puff
-$limit weapons/sshot/hit 0
-$limit weapons/sshot/fire 0
-
-//
 // Omega Cannon
 //
 weapons/cannon/fire    lsounds/Cannon/Fire.flac      // Serious Sam: The First Encounter HD
@@ -465,6 +435,53 @@ weapons/shipgun/pickup   lsounds/StarDestroyer/Pickup.flac       // Halo 3, Doom
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
+
+//
+// Blade
+//
+weapons/blade/slash lsounds/Blade/Slash.ogg // Monster Girl Quest
+weapons/blade/hit   lsounds/Blade/Hit.ogg   // 〃
+
+//
+// Delear
+//
+weapons/delear/fire   lsounds/Delear/Fire.flac   // Devil May Cry 3
+weapons/delear/open   lsounds/Delear/Open.flac   // Devil May Cry 3, ???
+weapons/delear/charge lsounds/Delear/Charge.flac // Devil May Cry 3, Deus Ex
+weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
+
+//
+// Rend
+//
+weapons/rend/slash1  lsounds/Rend/Fire1.flac   // ???
+weapons/rend/slash2  lsounds/Rend/Fire2.flac   // ???
+weapons/rend/slash3  lsounds/Rend/Fire3.flac   // ???
+weapons/rend/end     lsounds/Rend/End.flac     // Phantasy Star Nova
+weapons/rend/reflect lsounds/Rend/Reflect.flac // 〃
+
+$random weapons/rend/slash {
+   weapons/rend/slash1
+   weapons/rend/slash2
+   weapons/rend/slash3
+}
+
+$alias weapons/rend/hit weapons/blade/hit
+
+//
+// Hulgyon
+//
+weapons/hulgyon/proc lsounds/Hulgyon/Proc.flac // Touhou 13
+$limit weapons/hulgyon/proc 0
+
+//
+// Star Shot
+//
+weapons/sshot/fire   lsounds/StarShot/Fire.flac   // Halo 3
+weapons/sshot/firero lsounds/StarShot/RunOut.flac // Monster Girl Quest
+
+$alias weapons/sshot/hit weapons/shotgun/gauss/puff
+$limit weapons/sshot/hit 0
+$limit weapons/sshot/fire 0
 
 //
 // sord

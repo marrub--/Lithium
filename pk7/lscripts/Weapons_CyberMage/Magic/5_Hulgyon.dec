@@ -106,7 +106,7 @@ actor Lith_HulgyonProjectile
 actor Lith_Hulgyon : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Hulgyon"
-   Weapon.SlotNumber 5
+   Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/hulgyon/draw"
    

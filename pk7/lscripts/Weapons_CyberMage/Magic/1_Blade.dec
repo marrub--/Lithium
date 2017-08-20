@@ -32,7 +32,7 @@ actor Lith_BladeHit : FastProjectile
 actor Lith_Blade : Lith_CWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Blade"
-   Weapon.SlotNumber 1
+   Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/blade/draw"
 
