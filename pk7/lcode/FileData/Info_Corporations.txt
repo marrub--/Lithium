@@ -29,10 +29,10 @@ governments, they finally made it back onto the market in 1370.
 A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.
 
 ##-----------------------------------------------------------------------------
-== LITH_TXT_INFO_SHORT_AOF2 | $LITH_TXT_INFO_SHORT_AOF
-== LITH_TXT_INFO_TITLE_AOF2 | A.O.F Inc. [Bishop-Class Clearance]
-== LITH_TXT_INFO_IMAGE_AOF2 | $LITH_TXT_INFO_IMAGE_AOF
-@@ LITH_TXT_INFO_DESCR_AOF2
+== LITH_TXT_INFO_SHORT_AOFJem | $LITH_TXT_INFO_SHORT_AOF
+== LITH_TXT_INFO_TITLE_AOFJem | A.O.F Inc. [Bishop-Class Clearance]
+== LITH_TXT_INFO_IMAGE_AOFJem | $LITH_TXT_INFO_IMAGE_AOF
+@@ LITH_TXT_INFO_DESCR_AOFJem
 A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and
 \cm--------\cj for the purposes of exposing the universal secret of magic and
 restoring the world to what it once was pre-calamity.

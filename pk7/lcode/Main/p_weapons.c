@@ -182,7 +182,7 @@ bool Lith_WeaponPickup(int name)
       PlayWeaponPickupSound(p, info);
 
       p->weaponsheld++;
-      p->bip.unlock(info->name);
+      p->bipUnlock(info->name);
 
       GiveWeaponItem(parm);
       Lith_PickupMessage(p, info);

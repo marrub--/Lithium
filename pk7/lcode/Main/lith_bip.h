@@ -5,7 +5,7 @@
 //LITH_X(ITEMS,        "Items")
   LITH_X(UPGRADES,     "Upgrades")
   LITH_X(PLACES,       "Places")
-  LITH_X(CORPORATIONS, "Companies and Corporations")
+  LITH_X(CORPORATIONS, "Companies")
   LITH_X(MAIL,         "Mail")
 #undef LITH_X
 
@@ -21,7 +21,7 @@
 
 [[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player *p);
 struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
-struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name);
+[[__optional_args(1)]] struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name, int pclass);
 [[__call("ScriptS")]] void Lith_DeallocateBIP(struct bip_s *bip);
 void Lith_PlayerLoseBIPPages(struct bip_s *bip);
 [[__optional_args(1)]] void Lith_DeliverMail(struct player *p, __str title, int flags);
@@ -69,14 +69,14 @@ typedef struct bip_s
    property unlock     {call: Lith_UnlockBIPPage(this)}
    property deallocate {call: Lith_DeallocateBIP(this)}
    property losePages  {call: Lith_PlayerLoseBIPPages(this)}
-   
+
    // Stats
    int categoryavail[BIPC_MAX];
    int categorymax[BIPC_MAX];
    int pageavail;
    int pagemax;
    int mailreceived, mailtrulyreceived;
-   
+
    // State
    bippage_t *curpage;
    int curpagenum;
@@ -86,7 +86,7 @@ typedef struct bip_s
    bippage_t *result[8];
    int resnum;
    int rescur;
-   
+
    // Info
    list_t infogr[BIPC_MAX];
 } bip_t;

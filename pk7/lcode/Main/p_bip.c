@@ -66,7 +66,7 @@ static struct page_info GetPageInfo(bippage_t const *page)
 //
 // SetCurPage
 //
-void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
+static void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
 {
    bip->curpage = page;
 
@@ -77,21 +77,21 @@ void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
 //
 // UnlockPage
 //
-static void UnlockPage(bip_t *bip, bippage_t *page)
+static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 {
    bip->pageavail++;
    bip->categoryavail[page->category]++;
    page->unlocked = true;
 
    for(int i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++)
-      bip->unlock(page->unlocks[i]);
+      bip->unlock(page->unlocks[i], pclass);
 }
 
 //
 // AddToBIP_
 //
 [[__optional_args(1)]]
-static void AddToBIP_(bip_t *bip, int categ, __str name, bip_unlocks_t const *unlocks)
+static void AddToBIP_(bip_t *bip, int categ, int pclass, __str name, bip_unlocks_t const *unlocks)
 {
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", name);
 
@@ -104,7 +104,7 @@ static void AddToBIP_(bip_t *bip, int categ, __str name, bip_unlocks_t const *un
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
 
-   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page);
+   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page, pclass);
 }
 
 
@@ -126,7 +126,7 @@ void Lith_PlayerInitBIP(player_t *p)
    // This could be done a lot better with an array or something, but fuck it.
    // edit: I now am glad that I didn't make this an array or something.
 
-   #define AddToBIP(...) AddToBIP_(bip, categ,  __VA_ARGS__)
+   #define AddToBIP(...) AddToBIP_(bip, categ, p->pclass, __VA_ARGS__)
    #define Category(c) categ = c
    #define Unlocks(...) &(bip_unlocks_t const){__VA_ARGS__}
 
@@ -157,10 +157,10 @@ void Lith_PlayerInitBIP(player_t *p)
       AddToBIP("CannonUpg2",      Unlocks("BFG9000"));
       break;
    case pclass_cybermage:
-      AddToBIP("Mateba",        Unlocks("AOF2"));
-      AddToBIP("MatebaUpgr",    Unlocks("AOF2", "Algidistari"));
+      AddToBIP("Mateba",        Unlocks("AOF"));
+      AddToBIP("MatebaUpgr",    Unlocks("AOF", "Algidistari"));
       AddToBIP("ShockRifle");
-      AddToBIP("SPAS",          Unlocks("AOF2", "Newvec"));
+      AddToBIP("SPAS",          Unlocks("AOF", "Newvec"));
       AddToBIP("SPASUpgr");
       AddToBIP("SPASUpg2");
       AddToBIP("SMG",           Unlocks("Omakeda", "Sym43"));
@@ -255,7 +255,7 @@ void Lith_PlayerInitBIP(player_t *p)
    Category(BIPC_CORPORATIONS); // -------------------------------------------|
    AddToBIP("AllPoint");
 
-   if(p->pclass == pclass_cybermage) AddToBIP("AOF2");
+   if(p->pclass == pclass_cybermage) AddToBIP("AOFJem");
    else                              AddToBIP("AOF");
 
    AddToBIP("Cid",        Unlocks("SuperDimension", "Earth"));
@@ -298,8 +298,13 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
    int flag = flags | strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
 
-   if(!(flags & MAILF_AllPlayers) && p->pclass == pclass_cybermage)
-      title = StrParam("%SJem", title);
+   if(!(flags & MAILF_AllPlayers)) {
+      switch(p->pclass) {
+      case pclass_marine:    title = StrParam("%SStan", title); break;
+      case pclass_cybermage: title = StrParam("%SJem",  title); break;
+      case pclass_informant: title = StrParam("%SFulk", title); break;
+      }
+   }
 
    bip_t *bip = &p->bip;
 
@@ -356,12 +361,24 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 //
 // Lith_UnlockBIPPage
 //
-bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name)
+bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
 {
    bippage_t *page = bip->find(name);
 
+   if(!page && pclass)
+   {
+      __str suf;
+      switch(pclass) {
+      case pclass_marine:    suf = StrParam("%SStan", name); break;
+      case pclass_cybermage: suf = StrParam("%SJem",  name); break;
+      case pclass_informant: suf = StrParam("%SFulk", name); break;
+      default: suf = null; break;
+      }
+      if(suf) page = bip->find(suf);
+   }
+
    if(page && !page->unlocked)
-      UnlockPage(bip, page);
+      UnlockPage(bip, page, pclass);
 
    return page;
 }

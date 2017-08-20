@@ -178,6 +178,7 @@ void Lith_ResetPlayer(player_t *p)
    p->active = true;
    p->reinit = p->dead = false;
    p->num    = ACS_PlayerNumber();
+   p->bipPtr = &p->bip;
 
    __with(__str cl = ACS_GetActorClass(0);) {
            if(cl == "Lith_MarinePlayer"   ) p->pclass = pclass_marine;
@@ -285,12 +286,12 @@ void Lith_ResetPlayer(player_t *p)
       }
    }
 
-   p->bip.unlock("Pistol");
-   p->bip.unlock("Mateba");
-   p->bip.unlock("Blade");
-   p->bip.unlock("Delear");
-   p->bip.unlock("Hulgyon");
-   p->bip.unlock("StarShot");
+   p->bipUnlock("Pistol");
+   p->bipUnlock("Mateba");
+   p->bipUnlock("Blade");
+   p->bipUnlock("Delear");
+   p->bipUnlock("Hulgyon");
+   p->bipUnlock("StarShot");
 }
 
 

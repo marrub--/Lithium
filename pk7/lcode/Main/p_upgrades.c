@@ -238,7 +238,7 @@ void Lith_GSInit_Upgrade(void)
 {
    if(world.grafZoneEntered)
       RegisterBasicUpgrade(UPGR_DarkCannon, &(upgradeinfo_t const)
-         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_any, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
+         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
 
    for(int i = 0; i < countof(staticupgradeinfo); i++)
       staticupgradeinfo[i].key = i;
@@ -277,7 +277,7 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 //
 void Lith_PlayerInitUpgrades(player_t *p)
 {
-   #define CheckPClass() (upgradeinfo[i].pclass == pclass_any || upgradeinfo[i].pclass == p->pclass)
+   #define CheckPClass() (upgradeinfo[i].pclass & p->pclass)
 
    for(int i = 0; i < UPGR_MAX; i++)
       if(CheckPClass())

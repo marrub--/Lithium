@@ -117,7 +117,7 @@ typedef struct player_statedata_s
 //
 typedef struct player_extdata_s
 {
-   bip_t bip;
+   bip_t bip, *bipPtr;
 
    struct upgr_data upgrdata;
    upgrade_t        upgrades[UPGR_STATIC_MAX];
@@ -325,6 +325,7 @@ typedef struct player
    property getUpgr      {call: Lith_PlayerGetNamedUpgrade(this)}
    property deliverMail  {call: Lith_DeliverMail(this)}
    property clearTextBuf {call: Lith_ClearTextBuf(this)}
+   property bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
 
    // cvars
    property getCVarI {call: ACS_GetUserCVar      (->num)}
