@@ -252,6 +252,7 @@ $alias weapons/sniper/zoomout weapons/shotgun/zoomout
 // Ion Rifle
 //
 weapons/ionrifle/fire    lsounds/IonRifle/Fire.flac      // Fallout: New Vegas
+weapons/ionrifle/fire2   lsounds/IonRifle/Fire2.flac     // 〃
 weapons/ionrifle/eject   lsounds/IonRifle/Eject.flac     // Killing Floor
 weapons/ionrifle/load    lsounds/IonRifle/Load.flac      // 〃
 weapons/ionrifle/magout  lsounds/IonRifle/MagOut.flac    // Halo 3
@@ -261,6 +262,16 @@ weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac    // 〃
 weapons/ionrifle/empty   lsounds/IonRifle/FireEmpty.flac // Killing Floor
 weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallout 3
 weapons/ionrifle/pickup  lsounds/IonRifle/Pickup.flac    // Killing Floor, Halo 3
+weapons/ionrifle/cfire1  lsounds/IonRifle/Charged1.flac  // Halo 3
+weapons/ionrifle/cfire2  lsounds/IonRifle/Charged2.flac  // 〃
+weapons/ionrifle/charge  lsounds/IonRifle/Charge.flac    // Quake 2
+
+$random weapons/ionrifle/cfire {
+   weapons/ionrifle/cfire1
+   weapons/ionrifle/cfire2
+}
+
+$alias weapons/ionrifle/heat weapons/smg/heat
 
 //
 // Grenade Launcher
