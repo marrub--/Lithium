@@ -1,0 +1,24 @@
+actor Lith_InformantPlayer : Lith_Player
+{
+   Player.StartItem "Lith_HeavyBlade"
+   Player.StartItem "Lith_SmallBlade"
+   Player.DisplayName "Informant"
+   Player.SoundClass "informant"
+   Player.SpawnClass 2
+   Player.Portrait "LITHIPT1"
+   Player.ViewHeight 45
+   Player.AttackZOffset 12
+   Player.JumpZ 9
+}
+
+actor Lith_ItemSpriteI : Lith_ItemSprite
+{
+   VisibleToPlayerClass "Lith_InformantPlayer"
+}
+
+actor Lith_IWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_InformantPlayer"
+}
+
+// EOF

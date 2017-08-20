@@ -106,6 +106,7 @@ typedef struct player_statedata_s
    int   num;
    long  ticks;
    __str name;
+   int   pclass;
 
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
@@ -303,7 +304,6 @@ typedef struct player
    property weapontype    {get:  Lith_PlayerCurWeaponType(this)}
    property buttonPressed {call: Lith_ButtonPressed(this)}
    property setVel  {call: Lith_SetPlayerVelocity(this)}
-   property pclass  {get:  ACS_PlayerClass(->num)}
    property mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
    property manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
 

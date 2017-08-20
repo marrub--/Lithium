@@ -179,6 +179,20 @@ void Lith_ResetPlayer(player_t *p)
    p->reinit = p->dead = false;
    p->num    = ACS_PlayerNumber();
 
+   __with(__str cl = ACS_GetActorClass(0);) {
+           if(cl == "Lith_MarinePlayer"   ) p->pclass = pclass_marine;
+      else if(cl == "Lith_CyberMagePlayer") p->pclass = pclass_cybermage;
+      else if(cl == "Lith_InformantPlayer") p->pclass = pclass_informant;
+      else if(cl == "Lith_WandererPlayer" ) p->pclass = pclass_wanderer;
+      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pclass_assassin;
+      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pclass_darklord;
+      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pclass_thoth;
+      else {
+         Log("Invalid player class detected!");
+         abort();
+      }
+   }
+
    //
    // Map-static data
 

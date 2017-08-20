@@ -87,10 +87,5 @@ actor Lith_CWeapon : Lith_Weapon
    Inventory.RestrictedTo "Lith_CyberMagePlayer"
 }
 
-actor Lith_IWeapon : Lith_Weapon
-{
-   Inventory.RestrictedTo "Lith_InformantPlayer"
-}
-
 // EOF
 

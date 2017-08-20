@@ -104,10 +104,5 @@ actor Lith_ItemSpriteC : Lith_ItemSprite
    VisibleToPlayerClass "Lith_CyberMagePlayer"
 }
 
-actor Lith_ItemSpriteI : Lith_ItemSprite
-{
-   VisibleToPlayerClass "Lith_InformantPlayer"
-}
-
 // EOF
 
