@@ -181,13 +181,13 @@ void Lith_ResetPlayer(player_t *p)
    p->bipPtr = &p->bip;
 
    __with(__str cl = ACS_GetActorClass(0);) {
-           if(cl == "Lith_MarinePlayer"   ) p->pclass = pclass_marine;
-      else if(cl == "Lith_CyberMagePlayer") p->pclass = pclass_cybermage;
-      else if(cl == "Lith_InformantPlayer") p->pclass = pclass_informant;
-      else if(cl == "Lith_WandererPlayer" ) p->pclass = pclass_wanderer;
-      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pclass_assassin;
-      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pclass_darklord;
-      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pclass_thoth;
+           if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
+      else if(cl == "Lith_CyberMagePlayer") p->pclass = pcl_cybermage;
+      else if(cl == "Lith_InformantPlayer") p->pclass = pcl_informant;
+      else if(cl == "Lith_WandererPlayer" ) p->pclass = pcl_wanderer;
+      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
+      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
+      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
       else {
          Log("Invalid player class detected!");
          abort();

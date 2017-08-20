@@ -100,16 +100,7 @@
 #define pi4 (pi / 4.0f)
 #define tau (pi * 2.0f)
 
-// Debug log verbosity
-enum
-{
-   log_boss = 1,
-   log_dlg,
-   log_dmon,
-   log_dmonV
-};
-
-// Types
+// Types ---------------------------------------------------------------------|
 typedef long long int score_t;
 typedef long fixed fixed64_t;
 typedef uint64_t crc64_t;
@@ -119,13 +110,23 @@ struct polar {
    fixed dst;
 };
 
-// Random
-[[__optional_args(1)]] float RandomFloat(float max, float min);
+struct vec2f {
+   float x, y;
+};
 
-// Printing
-__str StrParam(__str fmt, ...);
-__str Language(__str fmt, ...);
-__str LanguageNull(__str fmt, ...);
+struct vec2i {
+   int x, y;
+};
+
+enum
+{
+   log_boss = 1,
+   log_dlg,
+   log_dmon,
+   log_dmonV
+};
+
+// Printing ------------------------------------------------------------------|
 extern void (*DrawSprite)(__str name, int flags, int id, fixed x, fixed y, fixed hold);
 extern void (*DrawSpriteX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
 extern void (*DrawSpriteXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
@@ -138,24 +139,28 @@ void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
 void PrintBold(__str fmt, ...);
 
-// Strings
+// Strings -------------------------------------------------------------------|
 __str StrUpper(__str in);
 unsigned StrHash(char __str_ars const *s);
 unsigned CStrHash(char const *s);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
+__str Lith_ScoreSep(score_t num);
+__str Language(__str fmt, ...);
+__str LanguageNull(__str fmt, ...);
+__str StrParam(__str fmt, ...);
 
-// Utilities
+// Utilities -----------------------------------------------------------------|
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(2)]] bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
-__str Lith_ScoreSep(score_t num);
-[[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
 
-// Math
+// Math ----------------------------------------------------------------------|
+[[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
+[[__optional_args(1)]] float RandomFloat(float max, float min);
 float mag2f(float x, float y);
 fixed mag2k(fixed x, fixed y);
 fixed lerpk(fixed a, fixed b, fixed t);
@@ -163,6 +168,14 @@ fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 bool aabb(int bx1, int by1, int bx2, int by2, int x2, int y2);
 int ceilk(fixed n);
+struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t);
+struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3, float t);
+int bzpolyi(int a, int b, float t);
+float bzpolyf(float a, float b, float t);
+
+// Address Space Definitions -------------------------------------------------|
+__addrdef extern __mod_arr lmvar;
+__addrdef extern __hub_arr lwvar;
 
 #endif
 

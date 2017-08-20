@@ -63,9 +63,9 @@ void Lith_PickupCBIItem(int num)
    };
    Lith_ForPlayer() {
       switch(p->pclass) {
-      case pclass_marine:
+      case pcl_marine:
          p->log(Language("LITH_TXT_LOG_CBI_M%S", mnam[num])); break;
-      case pclass_cybermage:
+      case pcl_cybermage:
          p->log(Language("LITH_TXT_LOG_CBI_C%S", cnam[num])); break;
       }
    }

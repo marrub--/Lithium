@@ -47,7 +47,7 @@ typedef struct netfile_s
 void PrintMem(unsigned char const *data, size_t size)
 {
    int termpos = 0;
-   
+
    for(size_t i = 0; i < size; i++)
    {
       if(termpos + 3 > 79)
@@ -55,13 +55,13 @@ void PrintMem(unsigned char const *data, size_t size)
          printf(c"\n");
          termpos = 0;
       }
-      
+
       if(isprint(data[i])) printf(c"%c  ",  data[i]);
       else                 printf(c"%.2X ", data[i]);
-      
+
       termpos += 3;
    }
-   
+
    printf(c"\nEOF\n\n");
 }
 
@@ -74,7 +74,7 @@ void PrintMem(unsigned char const *data, size_t size)
 static int NetClose(void *nfdata)
 {
    netfile_t *nf = nfdata;
-   
+
    // If debugging, print out information about the buffer being written.
    if(world.dbgSave)
    {
@@ -82,38 +82,38 @@ static int NetClose(void *nfdata)
       printf(c"Data follows\n");
       PrintMem((void *)nf->mem, nf->pos);
    }
-   
+
    // Base64 encode the buffer.
    size_t outsize;
    unsigned char *coded = base64_encode((void *)nf->mem, nf->pos, &outsize);
-   
+
    if(coded)
    {
       int cvarnum = 0;
-      
+
       for(unsigned char const *itr = coded; outsize; cvarnum++)
       {
          size_t itrsize;
-         
+
          if(outsize <= SAVE_BLOCK_SIZE)
             itrsize = outsize;
          else
             itrsize = SAVE_BLOCK_SIZE;
-         
+
          ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), StrParam("%.*s", itrsize, itr));
-         
+
          itr     += itrsize;
          outsize -= itrsize;
       }
-      
+
       ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), "");
-      
+
       free(coded);
    }
-   
+
    free(nf->mem);
    free(nf);
-   
+
    return 0;
 }
 
@@ -141,19 +141,19 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
 {
    memfile_t *mem = memdata;
    size_t avail = mem->len - mem->pos;
-   
+
    if(size >= avail)
    {
       size_t len = mem->len + mem->len / 2 + size + 1;
       void  *newmem = realloc(mem->mem, len);
-      
+
       if(!mem)
          return 0;
-      
+
       mem->len = len;
       mem->mem = newmem;
    }
-   
+
    memcpy(mem->mem + mem->pos, buf, size);
    mem->mem[mem->pos += size] = '\0';
    return size;
@@ -191,7 +191,7 @@ static int MemClose(void *memdata)
    memfile_t *mem = memdata;
    free(mem->mem);
    free(mem);
-   
+
    return 0;
 }
 
@@ -208,14 +208,14 @@ static int MemClose(void *memdata)
 FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 {
    FILE *fp = null;
-   
+
    if(rw == 'w')
    {
       netfile_t *nf = calloc(1, sizeof(netfile_t));
-      
+
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
-      
+
       fp = fopencookie(nf, c"w", (cookie_io_functions_t){
          .write = MemWrite,
          .close = NetClose
@@ -226,31 +226,31 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
       // Get inputs from all possible CVars.
       char  *input   = null;
       size_t inputsz = 0;
-      
+
       for(int cvarnum;; cvarnum++)
       {
          __str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
-         
+
          if(inlen)
          {
             input = realloc(input, inputsz + inlen + 1);
             Lith_strcpy_str(input + inputsz, cvar);
-            
+
             inputsz += inlen;
          }
          else
             break;
       }
-      
+
       if(input)
       {
          // Decode the base64 input.
          size_t size;
          unsigned char *data = base64_decode((void *)input, inputsz, &size);
-         
+
          free(input);
-         
+
          // If debugging, print out information about the buffer being read.
          if(world.dbgSave)
          {
@@ -258,14 +258,14 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
             printf(c"Data follows\n");
             PrintMem(data, size);
          }
-         
+
          if(data)
          {
             memfile_t *mem = calloc(1, sizeof(memfile_t));
-            
+
             mem->mem = data;
             mem->len = size;
-            
+
             fp = fopencookie(mem, c"r", (cookie_io_functions_t){
                .read  = MemRead,
                .seek  = MemSeek,
@@ -274,7 +274,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          }
       }
    }
-   
+
    return fp;
 }
 
@@ -309,7 +309,7 @@ size_t Lith_FRead32(void *buf, size_t count, size_t bytes, FILE *fp)
    for(char *itr = buf; count--;)
    {
       int c = 0, t;
-      
+
       for(int i = 0; i < bytes; i++, res++)
       {
          if((t = fgetc(fp)) == EOF)
@@ -317,13 +317,13 @@ size_t Lith_FRead32(void *buf, size_t count, size_t bytes, FILE *fp)
             *itr = c;
             return res;
          }
-         
+
          c |= (t & 0xFF) << (i * 8);
       }
-      
+
       *itr++ = c;
    }
-   
+
    return res;
 }
 

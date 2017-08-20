@@ -33,6 +33,7 @@ void Lith_PlayerLoseBIPPages(struct bip_s *bip);
 
 enum
 {
+   BIPC_NONE,
 #define LITH_X(name, capt) BIPC_##name,
 #include "lith_bip.h"
    BIPC_EXTRA,
@@ -49,6 +50,14 @@ enum
 };
 
 typedef __str bip_unlocks_t[5];
+
+struct page_initializer
+{
+   int pclass;
+   __str name;
+   bip_unlocks_t unlocks;
+   int category;
+};
 
 typedef struct bippage_s
 {
@@ -90,6 +99,8 @@ typedef struct bip_s
    // Info
    list_t infogr[BIPC_MAX];
 } bip_t;
+
+extern struct page_initializer const bip_pages[];
 
 #endif
 

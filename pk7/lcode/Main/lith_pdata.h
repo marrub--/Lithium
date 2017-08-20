@@ -10,20 +10,23 @@ enum
 
 enum
 {
-   pclass_unknown,
-   pclass_marine    = 1 << 0,
-   pclass_cybermage = 1 << 1,
-   pclass_informant = 1 << 2,
-   pclass_wanderer  = 1 << 3,
-   pclass_assassin  = 1 << 4,
-   pclass_darklord  = 1 << 5,
-   pclass_thoth     = 1 << 6,
-   pclass_any = pclass_marine    |
-                pclass_cybermage |
-                pclass_informant |
-                pclass_wanderer  |
-                pclass_assassin  |
-                pclass_darklord  |
-                pclass_thoth
+   pcl_unknown,
+   pcl_marine    = 1 << 0,
+   pcl_cybermage = 1 << 1,
+   pcl_informant = 1 << 2,
+   pcl_wanderer  = 1 << 3,
+   pcl_assassin  = 1 << 4,
+   pcl_darklord  = 1 << 5,
+   pcl_thoth     = 1 << 6,
+   pcl_outcasts   = pcl_marine | pcl_cybermage,
+   pcl_missioners = pcl_informant | pcl_wanderer,
+   pcl_intruders  = pcl_assassin | pcl_darklord | pcl_thoth,
+   pcl_any = pcl_marine    |
+             pcl_cybermage |
+             pcl_informant |
+             pcl_wanderer  |
+             pcl_assassin  |
+             pcl_darklord  |
+             pcl_thoth
 };
 

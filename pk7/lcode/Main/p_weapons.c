@@ -1,4 +1,4 @@
-// vim: columns=130
+// vim: columns=110
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_monster.h"
@@ -18,43 +18,43 @@
 #define P(a) "weapons/" a "/pickup"
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
-   {0, pclass_any, null, "MMMMHMHMMMHMMM"},
+   {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
    // All-class Weapons
-   {1, pclass_any, "ChargeFist",      P("cfist"),    AT_None,                          },
-   {2, pclass_any, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
-   {3, pclass_any, "LazShotgun",      P("lshotgun"), AT_None,                          },
-   {4, pclass_any, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
-   {5, pclass_any, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
-   {6, pclass_any, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
+   {1, pcl_any, "ChargeFist",      P("cfist"),    AT_None,                          },
+   {2, pcl_any, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
+   {3, pcl_any, "LazShotgun",      P("lshotgun"), AT_None,                          },
+   {4, pcl_any, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
+   {5, pcl_any, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
+   {6, pcl_any, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
 
    // Marine Weapons
-   {1, pclass_marine, "Fist",            "MMMMHMHMMMHMMM", AT_None,            },
-   {2, pclass_marine, "Pistol",          P("pistol"),      AT_NMag, M("Pistol")},
-   {3, pclass_marine, "Shotgun",         P("shotgun"),     AT_None,            },
-   {3, pclass_marine, "SuperShotgun",    P("ssg"),         AT_Ammo, A("Shell") },
-   {4, pclass_marine, "CombatRifle",     P("rifle"),       AT_NMag, M("Rifle") },
-   {5, pclass_marine, "GrenadeLauncher", P("rocket"),      AT_Ammo, A("Rocket")},
-   {6, pclass_marine, "PlasmaRifle",     P("plasma"),      AT_Ammo, A("Plasma")},
-   {7, pclass_marine, "BFG9000",         P("cannon"),      AT_Ammo, A("Cannon")},
+   {1, pcl_marine, "Fist",            "MMMMHMHMMMHMMM", AT_None,            },
+   {2, pcl_marine, "Pistol",          P("pistol"),      AT_NMag, M("Pistol")},
+   {3, pcl_marine, "Shotgun",         P("shotgun"),     AT_None,            },
+   {3, pcl_marine, "SuperShotgun",    P("ssg"),         AT_Ammo, A("Shell") },
+   {4, pcl_marine, "CombatRifle",     P("rifle"),       AT_NMag, M("Rifle") },
+   {5, pcl_marine, "GrenadeLauncher", P("rocket"),      AT_Ammo, A("Rocket")},
+   {6, pcl_marine, "PlasmaRifle",     P("plasma"),      AT_Ammo, A("Plasma")},
+   {7, pcl_marine, "BFG9000",         P("cannon"),      AT_Ammo, A("Cannon")},
 
    // Cyber-Mage Weapons
-   {1, pclass_cybermage, "CFist",         "YOUSONOFABITCH", AT_None,                           },
-   {2, pclass_cybermage, "Mateba",        P("mateba"),      AT_NMag, M("Mateba")               },
-   {3, pclass_cybermage, "ShockRifle",    P("erifle"),      AT_NMag, M("ShockRifle")           },
-   {3, pclass_cybermage, "SPAS",          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
-   {4, pclass_cybermage, "SMG",           P("smg"),         AT_NMag, M("SMG")                  },
-   {5, pclass_cybermage, "IonRifle",      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
-   {6, pclass_cybermage, "CPlasmaRifle",  P("plasma"),      AT_Ammo, A("Plasma")               },
-   {7, pclass_cybermage, "StarDestroyer", P("shipgun"),     AT_Ammo, A("Cannon")               },
+   {1, pcl_cybermage, "CFist",         "YOUSONOFABITCH", AT_None,                           },
+   {2, pcl_cybermage, "Mateba",        P("mateba"),      AT_NMag, M("Mateba")               },
+   {3, pcl_cybermage, "ShockRifle",    P("erifle"),      AT_NMag, M("ShockRifle")           },
+   {3, pcl_cybermage, "SPAS",          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
+   {4, pcl_cybermage, "SMG",           P("smg"),         AT_NMag, M("SMG")                  },
+   {5, pcl_cybermage, "IonRifle",      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
+   {6, pcl_cybermage, "CPlasmaRifle",  P("plasma"),      AT_Ammo, A("Plasma")               },
+   {7, pcl_cybermage, "StarDestroyer", P("shipgun"),     AT_Ammo, A("Cannon")               },
 
-   {1, pclass_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {2, pclass_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
-   {3, pclass_cybermage, "Fire",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {4, pclass_cybermage, "Rend",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {5, pclass_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {6, pclass_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
-   {7, pclass_cybermage, "Cercle",   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {1, pcl_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {2, pcl_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
+   {3, pcl_cybermage, "Fire",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {4, pcl_cybermage, "Rend",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {5, pcl_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {6, pcl_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
+   {7, pcl_cybermage, "Cercle",   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
 };
 #undef A
 #undef M
@@ -131,7 +131,7 @@ bool Lith_WeaponPickup(int name)
    switch(p->pclass)
    {
    #define Case(name, set) case name: parm = set; break
-   case pclass_marine:
+   case pcl_marine:
       switch(name)
       {
       Case(wepnam_fist,           weapon_fist);
@@ -146,7 +146,7 @@ bool Lith_WeaponPickup(int name)
       }
       break;
 
-   case pclass_cybermage:
+   case pcl_cybermage:
       switch(name)
       {
       Case(wepnam_fist,           weapon_c_fist);
@@ -439,8 +439,8 @@ int Lith_GetWRF(void)
    if(NoPlayer(p)) return 0;
 
    int flags = 0;
-   if(p->semifrozen)              flags |= WRF_NOFIRE;
-   if(p->pclass == pclass_marine) flags |= WRF_ALLOWUSER4;
+   if(p->semifrozen)           flags |= WRF_NOFIRE;
+   if(p->pclass == pcl_marine) flags |= WRF_ALLOWUSER4;
    return flags;
 }
 

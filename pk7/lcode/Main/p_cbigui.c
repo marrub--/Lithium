@@ -100,8 +100,8 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 {
    switch(p->pclass)
    {
-   case pclass_marine:    CBITab_Marine   (g, p); break;
-   case pclass_cybermage: CBITab_CyberMage(g, p); break;
+   case pcl_marine:    CBITab_Marine   (g, p); break;
+   case pcl_cybermage: CBITab_CyberMage(g, p); break;
    }
 }
 

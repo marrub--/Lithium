@@ -7,22 +7,12 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
-
-//----------------------------------------------------------------------------
-// Types
-//
-
 struct dminfo {
    fixed x, y, z;
    fixed r, h;
    int health;
    int painwait;
 };
-
-
-//----------------------------------------------------------------------------
-// Static Objects
-//
 
 static struct {
    score_t score;
@@ -102,11 +92,6 @@ static struct {
    {Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
 };
 
-
-//----------------------------------------------------------------------------
-// Extern Objects
-//
-
 __str const dmgtype_names[dmgtype_max] = {
    "Bullets",
    "Energy",
@@ -115,11 +100,6 @@ __str const dmgtype_names[dmgtype_max] = {
    "Melee",
    "Shrapnel"
 };
-
-
-//----------------------------------------------------------------------------
-// Static Functions
-//
 
 //
 // WaitForResurrect
@@ -338,11 +318,6 @@ static void OnDeath(dmon_t *m)
    // If enemies emit score on death we only need to give extra rank score.
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
 }
-
-
-//----------------------------------------------------------------------------
-// Extern Functions
-//
 
 //
 // Lith_MonsterMain

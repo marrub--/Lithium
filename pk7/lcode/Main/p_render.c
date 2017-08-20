@@ -148,7 +148,7 @@ void Lith_PlayerHUD(player_t *p)
 
    if(p->scopetoken)
    {
-      if(p->pclass == pclass_cybermage)
+      if(p->pclass == pcl_cybermage)
       {
          int time = (ACS_Timer() % 16) / 4;
          DrawSpriteXX(StrParam("lgfx/HUD_C/ScopeOverlay%i.png", time + 1),
@@ -158,7 +158,7 @@ void Lith_PlayerHUD(player_t *p)
             DrawSpriteXX("lgfx/HUD/H_D41.png", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
                hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
       }
-      else if(p->pclass == pclass_informant)
+      else if(p->pclass == pcl_informant)
       {
          fixed a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
          DrawSpriteX("lgfx/HUD_I/ScopeOverlay.png",

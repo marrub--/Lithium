@@ -13,9 +13,9 @@ actor Lith_ItemGlow
    Spawn:
       PBAL A 0
       PBAL A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_noitemfx), "Nope")
-      PBAL A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_marine, "SpawnDone")
-      PBAL C 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_cybermage, "SpawnDone")
-      PBAL D 0 //A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pclass_informant, "SpawnDone")
+      PBAL A 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pcl_marine, "SpawnDone")
+      PBAL C 0 A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pcl_cybermage, "SpawnDone")
+      PBAL D 0 //A_JumpIf(CallACS("Lith_GetWorldData", wdata_pclass) == pcl_informant, "SpawnDone")
    SpawnDone:
       "####" "#" 5 bright
       "####" "#" 1 bright A_FadeOut(1.0 / 35.0)

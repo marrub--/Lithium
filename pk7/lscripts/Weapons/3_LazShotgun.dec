@@ -29,8 +29,8 @@ actor Lith_LazShotgun : Lith_Weapon
    {
    Ready:
       // bullshit hack
-      LSHT A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_marine, "ReadyLoop")
-      CLST A 0 //A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_cybermage, "ReadyLoop")
+      LSHT A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pcl_marine, "ReadyLoop")
+      CLST A 0 //A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pcl_cybermage, "ReadyLoop")
    ReadyLoop:
       "####" A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
@@ -41,8 +41,8 @@ actor Lith_LazShotgun : Lith_Weapon
       loop
    
    Select:
-      LSHT A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_marine, "SelectLoop")
-      CLST A 0 //A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pclass_cybermage, "SelectLoop")
+      LSHT A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pcl_marine, "SelectLoop")
+      CLST A 0 //A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pcl_cybermage, "SelectLoop")
    SelectLoop:
       "####" AAA 0 A_Raise
       "####" A 1

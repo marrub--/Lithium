@@ -122,9 +122,6 @@ typedef struct worldinfo_s
    bool dbgNoMon : 1;
 } worldinfo_t;
 
-__addrdef extern __mod_arr lmvar;
-__addrdef extern __hub_arr lwvar;
-
 extern bool lmvar mapinit;
 
 extern worldinfo_t world;

@@ -1,4 +1,4 @@
-// vim: columns=130
+// vim: columns=120
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
@@ -47,55 +47,55 @@ enum
 
 #define Req(arg) .requires = arg
 static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
-// {{"Name-------", "BIP---------", Cost----}, pclass_name,      UC_Cat-, Pr, Score, [Group], [Requirements]},
-   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, pclass_marine,    UC_Body,  1, -0.05, UG_HUD},
-   {{"HeadsUpDis2", "HeadsUpDisp",  0       }, pclass_cybermage, UC_Body,  1, -0.05, UG_HUD},
-   {{"HeadsUpDis3", "HeadsUpDisp",  0       }, pclass_informant, UC_Body,  1, -0.05, UG_HUD},
-   {{"JetBooster",  "JetBooster",   0       }, pclass_marine,    UC_Body,  0, -0.05},
-   {{"ReflexWetw",  "ReflexWetw",   0       }, pclass_any,       UC_Body,  5, -0.05},
-   {{"Zoom",        null,           0       }, pclass_any,       UC_Body,  0,  0.00},
-   {{"VitalScan",   "VitalScanner", 0       }, pclass_any,       UC_Body,  2,  0.00},
-   {{"CyberLegs",   "CyberLegs",    1220000 }, pclass_marine,    UC_Body,  4,  0.00},
-   {{"ReactArmor",  "Yh0",          3500200 }, pclass_marine,    UC_Body, 20,  0.00, Req(UR_AI)},
-   {{"ReactArmor2", "Yh0",          2990200 }, pclass_marine,    UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
-   {{"DefenseNuke", "DefenseNuke",  580030  }, pclass_marine,    UC_Body,  0,  0.00, Req(UR_AI)},
-   {{"Adrenaline",  "Adrenaline",   1801000 }, pclass_marine,    UC_Body, 10,  0.00},
-   {{"Magic",       "Magic",        0       }, pclass_cybermage, UC_Body,  0,  0.00},
-   {{"SoulCleaver", "SoulCleaver",  1100000 }, pclass_cybermage, UC_Body, 10,  0.00},
+// {{"Name-------", "BIP---------", Cost----}, pcl_name,      UC_Cat-, Pr, Score, [Group], [Requirements]},
+   {{"HeadsUpDisp", "HeadsUpDisp",  0       }, pcl_marine,    UC_Body,  1, -0.05, UG_HUD},
+   {{"HeadsUpDis2", "HeadsUpDisp",  0       }, pcl_cybermage, UC_Body,  1, -0.05, UG_HUD},
+   {{"HeadsUpDis3", "HeadsUpDisp",  0       }, pcl_informant, UC_Body,  1, -0.05, UG_HUD},
+   {{"JetBooster",  "JetBooster",   0       }, pcl_marine,    UC_Body,  0, -0.05},
+   {{"ReflexWetw",  "ReflexWetw",   0       }, pcl_any,       UC_Body,  5, -0.05},
+   {{"Zoom",        null,           0       }, pcl_any,       UC_Body,  0,  0.00},
+   {{"VitalScan",   "VitalScanner", 0       }, pcl_any,       UC_Body,  2,  0.00},
+   {{"CyberLegs",   "CyberLegs",    1220000 }, pcl_marine,    UC_Body,  4,  0.00},
+   {{"ReactArmor",  "Yh0",          3500200 }, pcl_marine,    UC_Body, 20,  0.00, Req(UR_AI)},
+   {{"ReactArmor2", "Yh0",          2990200 }, pcl_marine,    UC_Body, 10,  0.00, Req(UR_AI|UR_RA)},
+   {{"DefenseNuke", "DefenseNuke",  580030  }, pcl_marine,    UC_Body,  0,  0.00, Req(UR_AI)},
+   {{"Adrenaline",  "Adrenaline",   1801000 }, pcl_marine,    UC_Body, 10,  0.00},
+   {{"Magic",       "Magic",        0       }, pcl_cybermage, UC_Body,  0,  0.00},
+   {{"SoulCleaver", "SoulCleaver",  1100000 }, pcl_cybermage, UC_Body, 10,  0.00},
 
-   {{"AutoReload",  "AutoReload",   950050  }, pclass_any,       UC_Weap,  2,  0.00},
-   {{"AutoPistol",  null,           140940  }, pclass_marine,    UC_Weap,  0,  0.00, UG_Pistol},
-   {{"PlasPistol",  null,           340000  }, pclass_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
-   {{"GaussShotty", "ShotgunUpgr",  1079430 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
-   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
-   {{"RifleModes",  "RifleUpgr",    340100  }, pclass_marine,    UC_Weap,  0,  0.00,              Req(UR_WMD)},
-   {{"LaserRCW",    "RifleUpg2",    1008080 }, pclass_marine,    UC_Weap,  1,  0.00,              Req(UR_WMD)},
-   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
-   {{"HomingRPG",   "LauncherUpg2", 2505010 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Launcher, Req(UR_WMD)},
-   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, pclass_marine,    UC_Weap,  0,  0.00, UG_Plasma,   Req(UR_WMD)},
-   {{"PartBeam",    "PlasmaUpg2",   2500000 }, pclass_marine,    UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
-   {{"PunctCannon", "CannonUpgr",   5100700 }, pclass_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
-   {{"OmegaRail",   "CannonUpg2",   5800100 }, pclass_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
-   {{"Mateba_A",    "MatebaUpgr",   614100  }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Pistol},
-   {{"SPAS_A",      "SPASUpgr",     0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
-   {{"SPAS_B",      "SPASUpg2",     0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
-   {{"SMG_A",       "SMGUpgr",      2055000 }, pclass_cybermage, UC_Weap,  0,  0.00},
-   {{"SMG_B",       "SMGUpg2",      2888000 }, pclass_cybermage, UC_Weap,  0,  0.00},
-   {{"SMG_C",       "SMGUpg3",      998900  }, pclass_cybermage, UC_Weap,  0,  0.00},
-   {{"IonRifle_A",  "IonRifleUpgr", 0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
-   {{"IonRifle_B",  "IonRifleUpg2", 0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
-   {{"CPlasma_A",   "CPlasmaUpgr",  0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_Plasma},
-   {{"ShipGun_A",   "ShipGunUpgr",  6688800 }, pclass_cybermage, UC_Weap,  0,  0.00, UG_BFG},
-   {{"ShipGun_B",   "ShipGunUpg2",  0       }, pclass_cybermage, UC_Weap,  0,  0.00, UG_BFG},
+   {{"AutoReload",  "AutoReload",   950050  }, pcl_any,       UC_Weap,  2,  0.00},
+   {{"AutoPistol",  null,           140940  }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol},
+   {{"PlasPistol",  null,           340000  }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
+   {{"GaussShotty", "ShotgunUpgr",  1079430 }, pcl_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"PoisonShot",  "ShotgunUpg2",  1010420 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Shotgun,  Req(UR_WMD)},
+   {{"RifleModes",  "RifleUpgr",    340100  }, pcl_marine,    UC_Weap,  0,  0.00,              Req(UR_WMD)},
+   {{"LaserRCW",    "RifleUpg2",    1008080 }, pcl_marine,    UC_Weap,  1,  0.00,              Req(UR_WMD)},
+   {{"ChargeRPG",   "LauncherUpgr", 1550000 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
+   {{"HomingRPG",   "LauncherUpg2", 2505010 }, pcl_marine,    UC_Weap,  1,  0.00, UG_Launcher, Req(UR_WMD)},
+   {{"PlasLaser",   "PlasmaUpgr",   2250000 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Plasma,   Req(UR_WMD)},
+   {{"PartBeam",    "PlasmaUpg2",   2500000 }, pcl_marine,    UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
+   {{"PunctCannon", "CannonUpgr",   5100700 }, pcl_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
+   {{"OmegaRail",   "CannonUpg2",   5800100 }, pcl_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
+   {{"Mateba_A",    "MatebaUpgr",   614100  }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Pistol},
+   {{"SPAS_A",      "SPASUpgr",     0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
+   {{"SPAS_B",      "SPASUpg2",     0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
+   {{"SMG_A",       "SMGUpgr",      2055000 }, pcl_cybermage, UC_Weap,  0,  0.00},
+   {{"SMG_B",       "SMGUpg2",      2888000 }, pcl_cybermage, UC_Weap,  0,  0.00},
+   {{"SMG_C",       "SMGUpg3",      998900  }, pcl_cybermage, UC_Weap,  0,  0.00},
+   {{"IonRifle_A",  "IonRifleUpgr", 0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
+   {{"IonRifle_B",  "IonRifleUpg2", 0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
+   {{"CPlasma_A",   "CPlasmaUpgr",  0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Plasma},
+   {{"ShipGun_A",   "ShipGunUpgr",  6688800 }, pcl_cybermage, UC_Weap,  0,  0.00, UG_BFG},
+   {{"ShipGun_B",   "ShipGunUpg2",  0       }, pcl_cybermage, UC_Weap,  0,  0.00, UG_BFG},
 
-   {{"TorgueMode",  null,           8000000 }, pclass_any,       UC_Extr,  8,  0.00, Req(UR_RDI)},
-   {{"7777777",     null,           8235430 }, pclass_any,       UC_Extr,  7,  0.10, Req(UR_RDI)},
-   {{"lolsords",    null,           1000000 }, pclass_any,       UC_Extr,  0,  0.20, Req(UR_RDI)},
-   {{"Goldeneye",   null,           70000   }, pclass_any,       UC_Extr,  0,  0.07, Req(UR_RDI)},
+   {{"TorgueMode",  null,           8000000 }, pcl_any,       UC_Extr,  8,  0.00, Req(UR_RDI)},
+   {{"7777777",     null,           8235430 }, pcl_any,       UC_Extr,  7,  0.10, Req(UR_RDI)},
+   {{"lolsords",    null,           1000000 }, pcl_any,       UC_Extr,  0,  0.20, Req(UR_RDI)},
+   {{"Goldeneye",   null,           70000   }, pcl_any,       UC_Extr,  0,  0.07, Req(UR_RDI)},
 
-   {{"Implying",    null,           0       }, pclass_any,       UC_Down,  0,  0.20},
-   {{"UNCEUNCE",    null,           0       }, pclass_any,       UC_Down,  0,  0.30},
-   {{"InstaDeath",  null,           0       }, pclass_any,       UC_Down,  0,  0.50},
+   {{"Implying",    null,           0       }, pcl_any,       UC_Down,  0,  0.20},
+   {{"UNCEUNCE",    null,           0       }, pcl_any,       UC_Down,  0,  0.30},
+   {{"InstaDeath",  null,           0       }, pcl_any,       UC_Down,  0,  0.50},
 };
 #undef Req
 
@@ -238,7 +238,7 @@ void Lith_GSInit_Upgrade(void)
 {
    if(world.grafZoneEntered)
       RegisterBasicUpgrade(UPGR_DarkCannon, &(upgradeinfo_t const)
-         {{"DarkCannon", null, 0x7FFFFFFF}, pclass_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
+         {{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
 
    for(int i = 0; i < countof(staticupgradeinfo); i++)
       staticupgradeinfo[i].key = i;
