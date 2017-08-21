@@ -7,37 +7,44 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
-struct dminfo {
+struct dmon_stat {
    fixed x, y, z;
    fixed r, h;
    int health;
    int painwait;
 };
 
-static struct {
+struct monster_info {
    score_t score;
    enum mtype type;
    __str name;
-} const monsterinfo[] = {
+   int flags;
+};
+
+enum {
+   mif_fullmatch = 1 << 0
+};
+
+static struct monster_info const monsterinfo[] = {
 #if 0
    // Hexen
-   {Score_ShotgunGuy,  mtype_imp,         "Ettin"        },
-   {Score_Imp,         mtype_lostsoul,    "FireDemon"    },
-   {Score_Arachnotron, mtype_arachnotron, "CentaurLeader"},
-   {Score_Demon,       mtype_demon,       "Centaur"      },
-   {Score_Mancubus,    mtype_hellknight,  "IceGuy"       },
-   {Score_Arachnotron, mtype_hellknight,  "Serpent"      },
-   {Score_Mancubus,    mtype_hellknight,  "SerpentLeader"},
-   {Score_HellKnight,  mtype_hellknight,  "Demon1"       },
-   {Score_BaronOfHell, mtype_baron,       "Demon2"       },
-   {Score_Cacodemon,   mtype_mancubus,    "Bishop"       },
-   {Score_HellKnight,  mtype_lostsoul,    "Wraith"       },
-   {Score_CyberDemon,  mtype_cyberdemon,  "Dragon"       },
-   {Score_CyberDemon,  mtype_phantom,     "ClericBoss"   },
-   {Score_CyberDemon,  mtype_phantom,     "FighterBoss"  },
-   {Score_CyberDemon,  mtype_phantom,     "MageBoss"     },
-   {Score_CyberDemon,  mtype_cyberdemon,  "Heresiarch"   },
-   {Score_DSparil * 2, mtype_cyberdemon,  "Korax"        },
+   {Score_ShotgunGuy,  mtype_imp,         "Ettin",         mif_fullmatch},
+   {Score_Imp,         mtype_lostsoul,    "FireDemon",     mif_fullmatch},
+   {Score_Arachnotron, mtype_arachnotron, "CentaurLeader", mif_fullmatch},
+   {Score_Demon,       mtype_demon,       "Centaur",       mif_fullmatch},
+   {Score_Mancubus,    mtype_hellknight,  "IceGuy",        mif_fullmatch},
+   {Score_Mancubus,    mtype_hellknight,  "SerpentLeader", mif_fullmatch},
+   {Score_Arachnotron, mtype_hellknight,  "Serpent",       mif_fullmatch},
+   {Score_HellKnight,  mtype_hellknight,  "Demon1",        mif_fullmatch},
+   {Score_BaronOfHell, mtype_baron,       "Demon2",        mif_fullmatch},
+   {Score_Cacodemon,   mtype_mancubus,    "Bishop",        mif_fullmatch},
+   {Score_HellKnight,  mtype_lostsoul,    "Wraith",        mif_fullmatch},
+   {Score_CyberDemon,  mtype_cyberdemon,  "Dragon",        mif_fullmatch},
+   {Score_CyberDemon,  mtype_phantom,     "ClericBoss",    mif_fullmatch},
+   {Score_CyberDemon,  mtype_phantom,     "FighterBoss",   mif_fullmatch},
+   {Score_CyberDemon,  mtype_phantom,     "MageBoss",      mif_fullmatch},
+   {Score_CyberDemon,  mtype_cyberdemon,  "Heresiarch",    mif_fullmatch},
+   {Score_DSparil * 2, mtype_cyberdemon,  "Korax",         mif_fullmatch},
 #endif
 
    // Doom 2
@@ -105,7 +112,7 @@ __str const dmgtype_names[dmgtype_max] = {
 // WaitForResurrect
 //
 [[__call("SScriptS")]]
-static void WaitForResurrect(dmon_t *m)
+static void WaitForResurrect(dmon_t const *m)
 {
    while(ACS_GetActorProperty(0, APROP_Health) <= 0)
       ACS_Delay(2);
@@ -116,16 +123,16 @@ static void WaitForResurrect(dmon_t *m)
 //
 // GetInfo
 //
-static void GetInfo(struct dminfo *mi)
+static void GetInfo(struct dmon_stat *ms)
 {
-   mi->x = ACS_GetActorX(0);
-   mi->y = ACS_GetActorY(0);
-   mi->z = ACS_GetActorZ(0);
+   ms->x = ACS_GetActorX(0);
+   ms->y = ACS_GetActorY(0);
+   ms->z = ACS_GetActorZ(0);
 
-   mi->r = ACS_GetActorPropertyFixed(0, APROP_Radius);
-   mi->h = ACS_GetActorPropertyFixed(0, APROP_Height);
+   ms->r = ACS_GetActorPropertyFixed(0, APROP_Radius);
+   ms->h = ACS_GetActorPropertyFixed(0, APROP_Height);
 
-   mi->health = ACS_GetActorProperty(0, APROP_Health);
+   ms->health = ACS_GetActorProperty(0, APROP_Health);
 }
 
 //
@@ -133,16 +140,17 @@ static void GetInfo(struct dminfo *mi)
 //
 static void ApplyLevels(dmon_t *m, int prev)
 {
-   GetInfo(m->mi);
+   GetInfo(m->ms);
 
-   for(int i = prev + 1; i <= m->level; i++) {
-      if(i % 10 == 0) {
+   for(int i = prev + 1; i <= m->level; i++)
+   {
+      if(i % 10 == 0)
+      {
          // if we have resistances, randomly pick a resistance we already have
-         if(HasResistances(m)) {
+         if(HasResistances(m))
+         {
             int r;
-            do {
-               r = ACS_Random(1, dmgtype_max)-1;
-            } while(m->resist[r] == 0);
+            do {r = ACS_Random(0, dmgtype_max-1);} while(m->resist[r] == 0);
             m->resist[r] += 2;
          }
 
@@ -150,17 +158,20 @@ static void ApplyLevels(dmon_t *m, int prev)
       }
    }
 
-   if(m->level >= 5) {
+   if(m->level >= 5)
+   {
       float rn = m->rank / 10.f;
       int hp10 = m->maxhealth / 10;
       int newh = (m->level - prev) * hp10 * RandomFloat(rn - .1f, rn + .1f);
-      ACS_SetActorProperty(0, APROP_Health, m->mi->health + newh);
+      ACS_SetActorProperty(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
 
    for(int i = 0; i < dmgtype_max; i++) {
-      ifauto(int, resist, m->resist[i] / 15.0)
-         ACS_GiveInventory(StrParam("Lith_M_%S%i", dmgtype_names[i], min(resist, MAXRANK)), 1);
+      ifauto(int, resist, m->resist[i] / 15.0) {
+         ACS_GiveInventory(StrParam("Lith_M_%S%i", dmgtype_names[i],
+            min(resist, MAXRANK)), 1);
+      }
    }
 }
 
@@ -172,10 +183,8 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    bool anyplayer = false;
 
    // Optimization: Check for players nearby first.
-   int const xw1 = m->mi->x - 192;
-   int const xw2 = m->mi->x + 192;
-   int const yw1 = m->mi->y - 192;
-   int const yw2 = m->mi->y + 192;
+   int const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
+   int const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
    Lith_ForPlayer() {
       if(aabb(xw1, yw1, xw2, yw2, p->x, p->y)) {
          anyplayer = true;
@@ -186,20 +195,21 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    if(!anyplayer)
       return;
 
-   world.begAngles(m->mi->x, m->mi->y);
+   world.begAngles(m->ms->x, m->ms->y);
    ACS_GiveInventory("Lith_MonsterBarrierLook", 1);
 
    for(int i = 0; i < world.a_cur; i++) {
       struct polar *a = &world.a_angles[i];
 
-      fixed dst = m->mi->r / 2 + a->dst / 4;
-      fixed x   = m->mi->x + ACS_Cos(a->ang) * dst;
-      fixed y   = m->mi->y + ACS_Sin(a->ang) * dst;
+      fixed dst = m->ms->r / 2 + a->dst / 4;
+      fixed x   = m->ms->x + ACS_Cos(a->ang) * dst;
+      fixed y   = m->ms->y + ACS_Sin(a->ang) * dst;
       int   tid = ACS_UniqueTID();
       __str bar = m->rank >= 5 ? "Lith_MonsterHeptaura" : "Lith_MonsterBarrier";
 
-      ACS_SpawnForced(bar, x, y, m->mi->z + m->mi->h / 2, tid);
-      ACS_SetActorPropertyFixed(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
+      ACS_SpawnForced(bar, x, y, m->ms->z + m->ms->h / 2, tid);
+      ACS_SetActorPropertyFixed(tid, APROP_Alpha,
+         (1 - a->dst / (256 * (m->rank - 1))) * alpha);
    }
 }
 
@@ -238,12 +248,12 @@ static void BaseMonsterLevel(dmon_t *m)
 //
 static void ApplyPainResist(dmon_t *m)
 {
-   if(!m->mi->painwait) {
+   if(!m->ms->painwait) {
       ACS_GiveInventory("Lith_MonsterUsePain", 1);
-      m->mi->painwait = m->painresist;
+      m->ms->painwait = m->painresist;
    } else {
       ACS_GiveInventory("Lith_MonsterNoPain", 1);
-      m->mi->painwait--;
+      m->ms->painwait--;
    }
 }
 
@@ -257,11 +267,12 @@ static void ApplyPainResist(dmon_t *m)
 static void SoulCleave(dmon_t *m, player_t *p)
 {
    int tid = ACS_UniqueTID();
-   ACS_SpawnForced("Lith_MonsterSoul", m->mi->x, m->mi->y, m->mi->z + 16, tid);
+   ACS_SpawnForced("Lith_MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
    ACS_SetActorProperty(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
-   ACS_SetActorPropertyString(tid, APROP_Species, ACS_GetActorPropertyString(0, APROP_Species));
+   ACS_SetActorPropertyString(tid, APROP_Species,
+      ACS_GetActorPropertyString(0, APROP_Species));
 
    for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++)
       ACS_Delay(1);
@@ -277,9 +288,9 @@ static void SpawnManaPickup(dmon_t *m, player_t *p)
    int i = 0;
    do {
       int tid = ACS_UniqueTID();
-      int x   = m->mi->x + ACS_Random(-8, 8);
-      int y   = m->mi->y + ACS_Random(-8, 8);
-      ACS_Spawn("Lith_ManaPickup", x, y, m->mi->z + 4, tid);
+      int x   = m->ms->x + ACS_Random(-8, 8);
+      int y   = m->ms->y + ACS_Random(-8, 8);
+      ACS_Spawn("Lith_ManaPickup", x, y, m->ms->z + 4, tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       i += 150;
@@ -302,7 +313,7 @@ static void OnDeath(dmon_t *m)
             ACS_Teleport_EndGame();
 
          if(m->type == mtype_imp && m->level >= 50 && m->rank >= 4)
-            ACS_SpawnForced("Lith_ClawOfImp", m->mi->x, m->mi->y, m->mi->z);
+            ACS_SpawnForced("Lith_ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
       }
 
       if(p->getUpgr(UPGR_Magic)->active && p->mana != p->manamax &&
@@ -325,13 +336,13 @@ static void OnDeath(dmon_t *m)
 [[__call("ScriptS")]]
 void Lith_MonsterMain(dmon_t *m)
 {
-   struct dminfo mi = {};
+   struct dmon_stat ms = {};
 
    ACS_GiveInventory("Lith_MonsterID", m->id + 1);
 
-   m->mi = &mi;
-   GetInfo(m->mi);
-   m->maxhealth = m->mi->health;
+   m->ms = &ms;
+   GetInfo(m->ms);
+   m->maxhealth = m->ms->health;
 
    BaseMonsterLevel(m);
 
@@ -340,9 +351,9 @@ void Lith_MonsterMain(dmon_t *m)
 
    for(;;)
    {
-      GetInfo(m->mi);
+      GetInfo(m->ms);
 
-      if(mi.health <= 0) {
+      if(ms.health <= 0) {
          OnDeath(m);
          WaitForResurrect(m);
       }
@@ -372,11 +383,15 @@ void Lith_MonsterInfo(int tid)
 
    for(int i = 0; i < countof(monsterinfo); i++)
    {
-      if(strstr_str(cname, monsterinfo[i].name))
+      struct monster_info const *mi = &monsterinfo[i];
+      bool init;
+      if(mi->flags & mif_fullmatch) init = cname == mi->name;
+      else                          init = strstr_str(cname, mi->name);
+      if(init)
       {
          ifauto(dmon_t *, m, AllocDmon()) {
-            m->type  = monsterinfo[i].type;
-            m->score = monsterinfo[i].score;
+            m->type  = mi->type;
+            m->score = mi->score;
             Lith_MonsterMain(m);
          }
          return;

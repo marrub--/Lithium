@@ -7,7 +7,7 @@
 #define MAXRANK 5
 #define MAXLEVEL 100
 
-enum {
+enum dmgtype {
    dmgtype_bullets,
    dmgtype_energy,
    dmgtype_fire,
@@ -51,7 +51,7 @@ struct dmon {
    int painresist;
    score_t score;
 
-   struct dminfo *mi;
+   struct dmon_stat *ms;
 };
 
 __addrdef extern __mod_arr dmonarr;
