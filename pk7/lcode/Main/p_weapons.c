@@ -457,6 +457,18 @@ void Lith_Feuer(bool left, bool fire)
 }
 
 //
+// Lith_SurgeOfDestiny
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SurgeOfDestiny(void)
+{
+   for(int i = 0; i < (35 * 7) / 2; i++) {
+      ACS_GiveInventory("Lith_SurgeOfDestiny", 1);
+      ACS_Delay(2);
+   }
+}
+
+//
 // Lith_GetWRF
 //
 [[__call("ScriptS"), __extern("ACS")]]

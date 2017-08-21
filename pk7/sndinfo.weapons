@@ -435,14 +435,15 @@ $limit weapons/dark/impact 0
 //
 // Star Destroyer
 //
-weapons/shipgun/explode  lsounds/StarDestroyer/Explode.flac      // Halo 3
-weapons/shipgun/fire     lsounds/StarDestroyer/Fire.flac         // 〃
-weapons/shipgun/firemono lsounds/StarDestroyer/FireMono.flac     // 〃
-weapons/shipgun/firesol  lsounds/StarDestroyer/FireSolspear.flac // Halo 3, Fallout 4
-weapons/shipgun/prepare  lsounds/StarDestroyer/Charge.flac       // Halo 3, Devil May Cry 2
-weapons/shipgun/empty    lsounds/StarDestroyer/FireEmpty.flac    // Counter-Strike: Source, Phantasy Star Online
-weapons/shipgun/draw     lsounds/StarDestroyer/Draw.flac         // Fallout: New Vegas
-weapons/shipgun/pickup   lsounds/StarDestroyer/Pickup.flac       // Halo 3, Doom 3
+weapons/shipgun/explode   lsounds/StarDestroyer/Explode.flac      // Halo 3
+weapons/shipgun/fire      lsounds/StarDestroyer/Fire.flac         // 〃
+weapons/shipgun/firemono  lsounds/StarDestroyer/FireMono.flac     // 〃
+weapons/shipgun/firesol   lsounds/StarDestroyer/FireSolspear.flac // Halo 3, Fallout 4
+weapons/shipgun/prepare   lsounds/StarDestroyer/Charge.flac       // Halo 3, Devil May Cry 2
+weapons/shipgun/empty     lsounds/StarDestroyer/FireEmpty.flac    // Counter-Strike: Source, Phantasy Star Online
+weapons/shipgun/draw      lsounds/StarDestroyer/Draw.flac         // Fallout: New Vegas
+weapons/shipgun/pickup    lsounds/StarDestroyer/Pickup.flac       // Halo 3, Doom 3
+weapons/shipgun/firesurge lsounds/StarDestroyer/FireSurge.flac    // Doom 3, Quake 2
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
