@@ -68,23 +68,23 @@ bit 2 - Message is the same for all player classes
 
 data 1 -> LITH_TXT_MAIL_FLAG_Phantom
 
-Intro (Marine).txt      -> LITH_TXT_MAIL_BODY_Intro
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Intro
-data 13:00 25-7-49      -> LITH_TXT_MAIL_TIME_Intro
-data 610                -> LITH_TXT_MAIL_SIZE_Intro
+Intro (Marine).txt      -> LITH_TXT_MAIL_BODY_IntroStan
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_IntroStan
+data 13:00 25-7-49      -> LITH_TXT_MAIL_TIME_IntroStan
+data 610                -> LITH_TXT_MAIL_SIZE_IntroStan
 
-Chapter 1 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster1
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster1
+Chapter 1 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster1Stan
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster1Stan
 
-Chapter 2 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster2
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster2
+Chapter 2 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster2Stan
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster2Stan
 
-Chapter 3 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster3
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster3
+Chapter 3 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster3Stan
+data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster3Stan
 
-Phantom Met (Marine).txt         -> LITH_TXT_MAIL_BODY_Phantom
-data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_Phantom
-data 330                         -> LITH_TXT_MAIL_SIZE_Phantom
+Phantom Met (Marine).txt         -> LITH_TXT_MAIL_BODY_PhantomStan
+data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_PhantomStan
+data 330                         -> LITH_TXT_MAIL_SIZE_PhantomStan
 
 Intro (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_IntroJem
 data Saved Message     -> LITH_TXT_MAIL_NAME_IntroJem

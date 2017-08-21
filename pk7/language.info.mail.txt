@@ -8,7 +8,7 @@
    "\n"
    "%S\n";
 "LITH_TXT_MAIL_FLAG_Phantom" = "1";
-"LITH_TXT_MAIL_BODY_Intro" =
+"LITH_TXT_MAIL_BODY_IntroStan" =
    "Your weapons have been deployed to various locations we were able to send other people to.  Do take care of them, acquiring the correct armaments for your job was quite expensive and now we've probably lost a few people.\n"
    "\n"
    "Besides being deployed with your pistol and combat knife (as you requested), you have been sent these five weapons:\n"
@@ -49,10 +49,10 @@
    "You will also be able to purchase the weapons you designated, in your words, as \"must-have\" in the Shop.  I warn you that these weapons may not be as effective as you think; we spent quite a lot of time making sure that the arms we sent you were top-notch.\n"
    "\n"
    "Lambert out.  Good luck, Blazkowicz.\n";
-"LITH_TXT_MAIL_SEND_Intro" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_TIME_Intro" = "13:00 25-7-49";
-"LITH_TXT_MAIL_SIZE_Intro" = "610";
-"LITH_TXT_MAIL_BODY_Cluster1" =
+"LITH_TXT_MAIL_SEND_IntroStan" = "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_TIME_IntroStan" = "13:00 25-7-49";
+"LITH_TXT_MAIL_SIZE_IntroStan" = "610";
+"LITH_TXT_MAIL_BODY_Cluster1Stan" =
    "An explosion of some sort just happened nearby, it seems that the demons are reconstructing the world around you. You would best be careful not to trigger any other, er, events.\n"
    "\n"
    "Enough of those and the whole world around you might collapse!\n"
@@ -60,24 +60,24 @@
    "You've been making good progress so far. Your military superiors seem to be considering giving you a promotion, even.\n"
    "\n"
    "Lambert out.\n";
-"LITH_TXT_MAIL_SEND_Cluster1" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_Cluster2" =
+"LITH_TXT_MAIL_SEND_Cluster1Stan" = "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_BODY_Cluster2Stan" =
    "There has been a change of plans going down the whole chain of command.\n"
    "Your status as a military operative is now cancelled, and you are to enter a full-on suicide mission funded by OFMD alone.\n"
    "\n"
    "There is an artifact nearby that we have sent you.  Once it is in your possession, immediately destroy it, and you will be transported to a city somewhere in Hell.  Command will await afterwards.\n"
    "\n"
    "Lambert out.\n";
-"LITH_TXT_MAIL_SEND_Cluster2" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_Cluster3" =
+"LITH_TXT_MAIL_SEND_Cluster2Stan" = "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_BODY_Cluster3Stan" =
    "Now that you have entered the city, you m\\\\r-3434[[\n"
    "\cgSYSTEM ERROR 0x4E4943456A6F6244554D42415353\n"
    "\cd>>>>>[[[[procedure resetting terminal]]]]\n"
    "\cd>>>>>[[[[status: heap corrupted]]]]\n"
    "\cd>>>>>[[[[error handler malfunction error]]]]\n"
    "\cd>>>>>[[[[failure to proceed]]]]\n";
-"LITH_TXT_MAIL_SEND_Cluster3" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_Phantom" =
+"LITH_TXT_MAIL_SEND_Cluster3Stan" = "ALambert@corp.OFMD";
+"LITH_TXT_MAIL_BODY_PhantomStan" =
    "Hello, it has been forwarded to me that your Computer/Brain Interface hardware was not properly upgraded for this mission. I've had several communications errors with your secondary employers, and it is truly starting to get annoying.\n"
    "\n"
    "Due to failure to communicate with OFMD, I've taken it upon myself to send your hardware upgrades through several proxy agents.\n"
@@ -94,8 +94,8 @@
    "\n"
    "See you.\n"
    "\n";
-"LITH_TXT_MAIL_SEND_Phantom" = "htic0@gov.<hidden>.mailserv";
-"LITH_TXT_MAIL_SIZE_Phantom" = "330";
+"LITH_TXT_MAIL_SEND_PhantomStan" = "htic0@gov.<hidden>.mailserv";
+"LITH_TXT_MAIL_SIZE_PhantomStan" = "330";
 "LITH_TXT_MAIL_BODY_IntroJem" =
    "l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`\n"
    "\cm// sio.c basic screen inp-1[3\\4[`pk;\n"
