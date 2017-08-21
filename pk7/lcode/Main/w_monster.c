@@ -361,6 +361,9 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / (fixed)MAXLEVEL);
 
+      if(ACS_CheckInventory("Lith_Ionized") && ACS_Timer() % 10 == 0)
+         ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
+
       // Strange optimization: This causes horrible lag in the ZScript VM,
       // but in ZDoom 2.8.1 it's completely fine. What the fuck.
       if(!world.grafZoneEntered && m->painresist)

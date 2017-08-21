@@ -58,6 +58,7 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"SoulCleaver", "SoulCleaver",  1100000}, pcl_cybermage, UC_Body, 10,  0.00},
 
    {{"AutoReload",  "AutoReload",   950050 }, pcl_outcasts,  UC_Weap,  2,  0.00},
+
    {{"AutoPistol",  null,           140940 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol},
    {{"PlasPistol",  null,           340000 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
    {{"GaussShotty", "ShotgunUpgr",  1079430}, pcl_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
@@ -70,14 +71,15 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
    {{"PartBeam",    "PlasmaUpg2",   2500000}, pcl_marine,    UC_Weap,  1,  0.00, UG_Plasma,   Req(UR_WMD|UR_WRD)},
    {{"PunctCannon", "CannonUpgr",   5100700}, pcl_marine,    UC_Weap,  0,  0.00, UG_BFG,      Req(UR_WMD)},
    {{"OmegaRail",   "CannonUpg2",   5800100}, pcl_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
+
    {{"Mateba_A",    "MatebaUpgr",   614100 }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Pistol},
    {{"SPAS_A",      "SPASUpgr",     0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
    {{"SPAS_B",      "SPASUpg2",     0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
    {{"SMG_A",       "SMGUpgr",      2055000}, pcl_cybermage, UC_Weap,  0,  0.00},
    {{"SMG_B",       "SMGUpg2",      2888000}, pcl_cybermage, UC_Weap,  0,  0.00},
    {{"SMG_C",       "SMGUpg3",      998900 }, pcl_cybermage, UC_Weap,  0,  0.00},
-   {{"IonRifle_A",  "IonRifleUpgr", 0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
-   {{"IonRifle_B",  "IonRifleUpg2", 0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Launcher},
+   {{"IonRifle_A",  "IonRifleUpgr", 0      }, pcl_cybermage, UC_Weap,  0,  0.00},
+   {{"IonRifle_B",  "IonRifleUpg2", 0      }, pcl_cybermage, UC_Weap,  0,  0.00},
    {{"CPlasma_A",   "CPlasmaUpgr",  0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Plasma},
    {{"ShipGun_A",   "ShipGunUpgr",  6688800}, pcl_cybermage, UC_Weap,  0,  0.00, UG_BFG},
    {{"ShipGun_B",   "ShipGunUpg2",  0      }, pcl_cybermage, UC_Weap,  0,  0.00, UG_BFG},
