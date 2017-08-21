@@ -32,7 +32,6 @@ actor Lith_MarinePlayer : Lith_Player
    Player.StartItem "Lith_Fist"
    Player.DisplayName "Marine"
    Player.SoundClass "marine"
-   Player.SpawnClass 1
    Player.Portrait "LITHMPT1"
    Player.ViewHeight 48
    Player.AttackZOffset 15
@@ -44,7 +43,6 @@ actor Lith_CyberMagePlayer : Lith_Player
    Player.StartItem "Lith_CFist"
    Player.DisplayName "Cyber-Mage"
    Player.SoundClass "cybermage"
-   Player.SpawnClass 3
    Player.Portrait "LITHCPT1"
    Player.ViewHeight 45
    Player.AttackZOffset 12
