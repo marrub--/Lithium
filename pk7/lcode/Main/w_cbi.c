@@ -5,6 +5,42 @@
 static int lmvar cbispawn[cupg_max];
 static int lmvar cbispawniter;
 
+struct cupgdef
+{
+   int pclass;
+   int key;
+   __str msg;
+   __str bipunlock;
+};
+
+static struct cupgdef const cdefs[] = {
+   {pcl_marine, cupg_weapninter, "MWeapnInter", "WeapnInter"},
+   {pcl_marine, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
+   {pcl_marine, cupg_armorinter, "MArmorInter", "ArmorInter"},
+   {pcl_marine, cupg_hasupgr1,   "MUpgr1",      "CBIUpgr1"  },
+   {pcl_marine, cupg_hasupgr2,   "MUpgr2",      "CBIUpgr2"  },
+   {pcl_marine, cupg_rdistinter, "MRDistInter"              },
+
+   {pcl_cybermage, cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
+   {pcl_cybermage, cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
+   {pcl_cybermage, cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
+   {pcl_cybermage, cupg_c_slot6spell, "CSlot6Spell", "StarShot"},
+   {pcl_cybermage, cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
+   {pcl_cybermage, cupg_c_rdistinter, "CRDistInter"            },
+};
+
+//
+// GetCUpgr
+//
+struct cupgdef const *GetCUpgr(int pclass, int num)
+{
+   for(int i = 0; i < countof(cdefs); i++) {
+      struct cupgdef const *c = &cdefs[i];
+      if(c->pclass & pclass && c->key == num)
+         return c;
+   }
+}
+
 //
 // Lith_InstallCBIItem
 //
@@ -21,16 +57,8 @@ void Lith_InstallCBIItem(int num)
    }
 
    Lith_ForPlayer() {
-      if(num == cupg_c_slot3spell) p->bipUnlock("Feuer");
-      if(num == cupg_c_slot4spell) p->bipUnlock("Rend");
-      if(num == cupg_c_slot5spell) p->bipUnlock("Hulgyon");
-      if(num == cupg_c_slot6spell) p->bipUnlock("StarShot");
-      if(num == cupg_c_slot7spell) p->bipUnlock("Cercle");
-      if(num == cupg_weapninter) p->bipUnlock("WeapnInter");
-      if(num == cupg_weapninte2) p->bipUnlock("WeapnInte2");
-      if(num == cupg_armorinter) p->bipUnlock("ArmorInter");
-      if(num == cupg_hasupgr1  ) p->bipUnlock("CBIUpgr1");
-      if(num == cupg_hasupgr2  ) p->bipUnlock("CBIUpgr2");
+      ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
+         if(c->bipunlock) p->bipUnlock(c->bipunlock);
    }
 }
 
@@ -58,35 +86,9 @@ void Lith_CBIItemWasSpawned(int num)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PickupCBIItem(int num)
 {
-   __str mnam[] = {
-      [cupg_hasupgr1  ] = "Upgr1",
-      [cupg_hasupgr2  ] = "Upgr2",
-      [cupg_armorinter] = "ArmorInter",
-      [cupg_weapninter] = "WeapnInter",
-      [cupg_weapninte2] = "WeapnInte2",
-      [cupg_rdistinter] = "RDistInter",
-   };
-
-   __str cnam[] = {
-      [cupg_c_slot3spell] = "Slot3Spell",
-      [cupg_c_slot4spell] = "Slot4Spell",
-      [cupg_c_slot5spell] = "Slot5Spell",
-      [cupg_c_slot6spell] = "Slot6Spell",
-      [cupg_c_slot7spell] = "Slot7Spell",
-      [cupg_c_rdistinter] = "RDistInter",
-   };
-
-   Lith_ForPlayer()
-   {
-      switch(p->pclass)
-      {
-      case pcl_marine:
-         p->log(Language("LITH_TXT_LOG_CBI_M%S", mnam[num]));
-         break;
-      case pcl_cybermage:
-         p->log(Language("LITH_TXT_LOG_CBI_C%S", cnam[num]));
-         break;
-      }
+   Lith_ForPlayer() {
+      ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
+         if(c->msg) p->log("%S", Language("LITH_TXT_LOG_CBI_%S", c->msg));
    }
 
    Lith_InstallCBIItem(num);

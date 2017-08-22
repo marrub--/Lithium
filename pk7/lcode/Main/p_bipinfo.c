@@ -44,7 +44,7 @@ struct page_initializer const bip_pages[] = {
 
    {pcl_cybermage, "Blade"},
    {pcl_cybermage, "Delear",   {"Earth"}},
-   {pcl_cybermage, "Fire"},
+   {pcl_cybermage, "Feuer"},
    {pcl_cybermage, "Rend"},
    {pcl_cybermage, "Hulgyon",  {"Heaven"}},
    {pcl_cybermage, "StarShot", {"AOF"}},

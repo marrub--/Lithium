@@ -21,12 +21,6 @@ enum
    pcl_outcasts   = pcl_marine | pcl_cybermage,
    pcl_missioners = pcl_informant | pcl_wanderer,
    pcl_intruders  = pcl_assassin | pcl_darklord | pcl_thoth,
-   pcl_any = pcl_marine    |
-             pcl_cybermage |
-             pcl_informant |
-             pcl_wanderer  |
-             pcl_assassin  |
-             pcl_darklord  |
-             pcl_thoth
+   pcl_any        = pcl_outcasts | pcl_missioners | pcl_intruders,
 };
 
