@@ -142,12 +142,10 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
    int flag = flags | strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
 
-   if(!(flags & MAILF_AllPlayers)) {
-      switch(p->pclass) {
-      case pcl_marine:    title = StrParam("%SStan", title); break;
-      case pcl_cybermage: title = StrParam("%SJem",  title); break;
-      case pcl_informant: title = StrParam("%SFulk", title); break;
-      }
+   if(!(flags & MAILF_AllPlayers))
+      ifauto(__str, discrim, p->discrim)
+   {
+      title = StrParam("%S%S", title, p->discrim);
    }
 
    bip_t *bip = &p->bip;
@@ -210,15 +208,9 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
    bippage_t *page = bip->find(name);
 
    if(!page && pclass)
+      ifauto(__str, discrim, Lith_PlayerDiscriminator(pclass))
    {
-      __str suf;
-      switch(pclass) {
-      case pcl_marine:    suf = StrParam("%SStan", name); break;
-      case pcl_cybermage: suf = StrParam("%SJem",  name); break;
-      case pcl_informant: suf = StrParam("%SFulk", name); break;
-      default: suf = null; break;
-      }
-      if(suf) page = bip->find(suf);
+      page = bip->find(StrParam("%S%S", name, discrim));
    }
 
    if(page && !page->unlocked)

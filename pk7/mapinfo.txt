@@ -161,12 +161,12 @@ map LITHTEND ""
 
 DoomEdNums
 {
-   22420 = Lith_CBIUpgrade1
-   22421 = Lith_CBIUpgrade2
-   22422 = Lith_ArmorInter
-   22423 = Lith_WeapnInter
-   22424 = Lith_WeapnInte2
-   22425 = Lith_RDistInter
+   22420 = Lith_BossReward1
+   22421 = Lith_BossReward2
+   22422 = Lith_BossReward3
+   22423 = Lith_BossReward4
+   22424 = Lith_BossReward5
+   22425 = Lith_BossReward6
    
    22426 = Lith_SteggleSphere
    22427 = Lith_BlurSphere

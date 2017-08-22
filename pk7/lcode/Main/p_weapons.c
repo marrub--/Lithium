@@ -18,12 +18,12 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
    // All-class Weapons
-   {1, pcl_any, "ChargeFist",      P("cfist"),    AT_None,                          },
-   {2, pcl_any, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
-   {3, pcl_any, "LazShotgun",      P("lshotgun"), AT_None,                          },
-   {4, pcl_any, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
-   {5, pcl_any, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
-   {6, pcl_any, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
+   {1, pcl_outcasts, "ChargeFist",      P("cfist"),    AT_None,                          },
+   {2, pcl_outcasts, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
+   {3, pcl_outcasts, "LazShotgun",      P("lshotgun"), AT_None,                          },
+   {4, pcl_outcasts, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
+   {5, pcl_outcasts, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
+   {6, pcl_outcasts, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
 
    // Marine Weapons
    {1, pcl_marine, "Fist",            "MMMMHMHMMMHMMM", AT_None,            },

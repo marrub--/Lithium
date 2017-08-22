@@ -239,15 +239,12 @@ typedef struct player_invdata_s
 
 void Lith_PlayerCloseGUI(struct player *p);
 void Lith_PlayerUseGUI(struct player *p, guiname_t type);
-
 [[__optional_args(1)]]
 score_t Lith_GetModScore(struct player *p, score_t score, bool nomul);
 [[__optional_args(1)]]
 void Lith_GiveScore(struct player *p, score_t score, bool nomul);
 void Lith_TakeScore(struct player *p, score_t score);
-
 void Lith_ValidatePlayerTID(struct player *p);
-
 [[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
 
@@ -263,12 +260,12 @@ void Lith_ValidatePlayerTID(struct player *p);
 bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
 bool Lith_ButtonPressed(struct player *p, int bt);
 int Lith_PlayerCurWeaponType(struct player *p);
-
 void Lith_PlayerDeltaStats(struct player *p);
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 void Lith_ClearTextBuf(struct player *p);
 struct player *Lith_GetPlayer(int tid, int ptr);
 void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols, char scol, int bx, int by);
+__str Lith_PlayerDiscriminator(int pclass);
 
 // Types ---------------------------------------------------------------------|
 
@@ -317,6 +314,7 @@ typedef struct player
    property deliverMail  {call: Lith_DeliverMail(this)}
    property clearTextBuf {call: Lith_ClearTextBuf(this)}
    property bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
+   property discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
 
    // cvars
    property getCVarI {call: ACS_GetUserCVar      (->num)}

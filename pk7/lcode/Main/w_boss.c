@@ -165,47 +165,44 @@ void Lith_PhantomDeath(int num, int phase)
 
    ACS_Delay(25);
 
-   #define PhaseR(num, phasenum, reward) \
+   #define Phase(num, phasenum) \
       case phasenum: \
          world.boss[num - 1][phasenum - 1] = true; \
          LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
-         ACS_SpawnForced(reward, ACS_GetActorX(0), ACS_GetActorY(0), ACS_GetActorZ(0)); \
-         break
 
-   #define PhaseN(num, phasenum) \
-      case phasenum: world.boss[num - 1][phasenum - 1] = true; break
-
+   int x = ACS_GetActorX(0);
+   int y = ACS_GetActorY(0);
+   int z = ACS_GetActorZ(0);
    switch(num)
    {
    case 1:
       switch(phase)
       {
-      PhaseR(1, 1, "Lith_WeapnInter");
-      PhaseR(1, 2, "Lith_CBIUpgrade1");
+      Phase(1, 1) ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
+      Phase(1, 2) ACS_SpawnForced("Lith_BossReward2", x, y, z); break;
       }
       break;
 
    case 2:
       switch(phase)
       {
-      PhaseR(2, 1, "Lith_ArmorInter");
-      PhaseR(2, 2, "Lith_CBIUpgrade2");
-      PhaseR(2, 3, "Lith_WeapnInte2");
+      Phase(2, 1) ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
+      Phase(2, 2) ACS_SpawnForced("Lith_BossReward4", x, y, z); break;
+      Phase(2, 3) ACS_SpawnForced("Lith_BossReward5", x, y, z); break;
       }
       break;
 
    case 3:
       switch(phase)
       {
-      PhaseN(3, 1);
-      PhaseN(3, 2);
-      PhaseR(3, 3, "Lith_RDistInter");
+      Phase(3, 1) break;
+      Phase(3, 2) break;
+      Phase(3, 3) ACS_SpawnForced("Lith_BossReward6", x, y, z); break;
       }
       break;
    }
 
-   #undef PhaseR
-   #undef PhaseN
+   #undef Phase
 }
 
 //

@@ -176,6 +176,23 @@ upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
 }
 
 //
+// Lith_PlayerDiscriminator
+//
+__str Lith_PlayerDiscriminator(int pclass)
+{
+   switch(pclass) {
+   case pcl_marine:    return "Stan";
+   case pcl_cybermage: return "Jem";
+   case pcl_informant: return "Fulk";
+   case pcl_wanderer:  return "Luke";
+   case pcl_assassin:  return "Omi";
+   case pcl_darklord:  return "Ari";
+   case pcl_thoth:     return "Kiri";
+   default: return null;
+   }
+}
+
+//
 // Lith_StepSpeed
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -294,6 +311,15 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    // Log score
    if(p->getCVarI("lith_player_scorelog"))
       p->logH("> +\Cj%lli\Cnscr", score);
+}
+
+//
+// Lith_GiveMeAllOfTheScore
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveMeAllOfTheScore(void)
+{
+   withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
 }
 
 //

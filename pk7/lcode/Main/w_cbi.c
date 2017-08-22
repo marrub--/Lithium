@@ -19,6 +19,19 @@ void Lith_InstallCBIItem(int num)
    case cupg_hasupgr1: world.cbiperf += 20; break;
    case cupg_hasupgr2: world.cbiperf += 40; break;
    }
+
+   Lith_ForPlayer() {
+      if(num == cupg_c_slot3spell) p->bipUnlock("Feuer");
+      if(num == cupg_c_slot4spell) p->bipUnlock("Rend");
+      if(num == cupg_c_slot5spell) p->bipUnlock("Hulgyon");
+      if(num == cupg_c_slot6spell) p->bipUnlock("StarShot");
+      if(num == cupg_c_slot7spell) p->bipUnlock("Cercle");
+      if(num == cupg_weapninter) p->bipUnlock("WeapnInter");
+      if(num == cupg_weapninte2) p->bipUnlock("WeapnInte2");
+      if(num == cupg_armorinter) p->bipUnlock("ArmorInter");
+      if(num == cupg_hasupgr1  ) p->bipUnlock("CBIUpgr1");
+      if(num == cupg_hasupgr2  ) p->bipUnlock("CBIUpgr2");
+   }
 }
 
 //
@@ -53,6 +66,7 @@ void Lith_PickupCBIItem(int num)
       [cupg_weapninte2] = "WeapnInte2",
       [cupg_rdistinter] = "RDistInter",
    };
+
    __str cnam[] = {
       [cupg_c_slot3spell] = "Slot3Spell",
       [cupg_c_slot4spell] = "Slot4Spell",
@@ -61,12 +75,17 @@ void Lith_PickupCBIItem(int num)
       [cupg_c_slot7spell] = "Slot7Spell",
       [cupg_c_rdistinter] = "RDistInter",
    };
-   Lith_ForPlayer() {
-      switch(p->pclass) {
+
+   Lith_ForPlayer()
+   {
+      switch(p->pclass)
+      {
       case pcl_marine:
-         p->log(Language("LITH_TXT_LOG_CBI_M%S", mnam[num])); break;
+         p->log(Language("LITH_TXT_LOG_CBI_M%S", mnam[num]));
+         break;
       case pcl_cybermage:
-         p->log(Language("LITH_TXT_LOG_CBI_C%S", cnam[num])); break;
+         p->log(Language("LITH_TXT_LOG_CBI_C%S", cnam[num]));
+         break;
       }
    }
 

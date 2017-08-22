@@ -1,36 +1,38 @@
+// vim: columns=120
 #include "lith_common.h"
 #include "lith_player.h"
 
 // Types ---------------------------------------------------------------------|
 
+enum {
+   sif_weapon = 1 << 0,
+};
+
 typedef struct shopitem_s
 {
    [[__anonymous]] shopdef_t shopdef;
+   int pclass;
    int count;
    __str classname;
-   bool isafuckingstupidweaponthatneedsaspecialsnowflakecasejustforthisstupidgoddamnbugorwhateveritis;
+   int flags;
 } shopitem_t;
 
 // Static Objects ------------------------------------------------------------|
 
 static shopitem_t shopitems[] = {
-// {{"Name-----------", "BIP------------", Cost---}, Cnt-, "Class---------------"},
-   {{"RocketAmmo",      null,              9000   },    5, "Lith_RocketAmmo"     },
-   {{"PlasmaAmmo",      null,              75750  }, 1000, "Lith_PlasmaAmmo"     },
-   {{"ChargeFist",      "ChargeFist",      100000 },    1, "Lith_ChargeFist",      true},
-   {{"Revolver",        "Revolver",        500000 },    1, "Lith_Revolver",        true},
-   {{"LazShotgun",      "LazShotgun",      1800000},    1, "Lith_LazShotgun",      true},
-   {{"SniperRifle",     "SniperRifle",     1800000},    1, "Lith_SniperRifle",     true},
-   {{"MissileLauncher", "MissileLauncher", 2500000},    1, "Lith_MissileLauncher", true},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000},    1, "Lith_PlasmaDiffuser",  true},
-// {{"Gameboy",         null,              10000  },    1, "Lith_Gameboy",         true},
-   {{"Allmap",          null,              100000 },    1, "Allmap"              },
-   {{"Infrared",        null,              70000  },    1, "Infrared"            },
-   {{"RadSuit",         null,              100000 },    1, "RadSuit"             },
-// {{"DivSigil",        "DivSigil",        7772940},    1, "Lith_DivisionSigil"  },
+// {{"Name-----------", "BIP------------", Cost---}, pcl_name,     Cnt-, "Class---------------", [Flags]   },
+   {{"RocketAmmo",      null,              9000   }, pcl_any,      5,    "Lith_RocketAmmo"                 },
+   {{"PlasmaAmmo",      null,              75750  }, pcl_any,      1000, "Lith_PlasmaAmmo"                 },
+   {{"ChargeFist",      "ChargeFist",      100000 }, pcl_marine,   1,    "Lith_ChargeFist",      sif_weapon},
+   {{"Revolver",        "Revolver",        500000 }, pcl_outcasts, 1,    "Lith_Revolver",        sif_weapon},
+   {{"LazShotgun",      "LazShotgun",      1800000}, pcl_outcasts, 1,    "Lith_LazShotgun",      sif_weapon},
+   {{"SniperRifle",     "SniperRifle",     1800000}, pcl_outcasts, 1,    "Lith_SniperRifle",     sif_weapon},
+   {{"MissileLauncher", "MissileLauncher", 2500000}, pcl_outcasts, 1,    "Lith_MissileLauncher", sif_weapon},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, pcl_outcasts, 1,    "Lith_PlasmaDiffuser",  sif_weapon},
+   {{"Allmap",          null,              100000 }, pcl_any,      1,    "Allmap"                          },
+   {{"Infrared",        null,              70000  }, pcl_any,      1,    "Infrared"                        },
+   {{"RadSuit",         null,              100000 }, pcl_any,      1,    "RadSuit"                         },
 };
-
-static size_t const shopitemsnum = countof(shopitems);
 
 // Static Functions ----------------------------------------------------------|
 
@@ -62,7 +64,7 @@ static bool Shop_Give(player_t *p, shopdef_t const *, void *item_, int tid)
 {
    shopitem_t *item = item_;
    p->itemsbought++;
-   if(item->isafuckingstupidweaponthatneedsaspecialsnowflakecasejustforthisstupidgoddamnbugorwhateveritis) {
+   if(item->flags & sif_weapon) {
       Lith_GiveActorInventory(p->tid, item->classname, item->count);
       return false;
    } else {
@@ -78,7 +80,7 @@ static bool Shop_Give(player_t *p, shopdef_t const *, void *item_, int tid)
 //
 void Lith_GInit_Shop(void)
 {
-   for(int i = 0; i < shopitemsnum; i++)
+   for(int i = 0; i < countof(shopitems); i++)
    {
       shopitem_t *info = &shopitems[i];
       info->shopBuy    = Shop_Buy;
@@ -92,19 +94,25 @@ void Lith_GInit_Shop(void)
 //
 void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
 {
-   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, btnlist.w, 192, btnlist.h * shopitemsnum);
+   int nitems = 0;
+   for(int i = 0; i < countof(shopitems); i++) {
+      if(shopitems[i].pclass & p->pclass)
+         nitems++;
+   }
 
-   for(int i = 0; i < shopitemsnum; i++)
+   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, btnlist.w, 192, btnlist.h * nitems);
+
+   for(int i = 0, y = 0; i < countof(shopitems); i++)
    {
-      int y = btnlist.h * i;
-
-      if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, btnlist.h))
+      if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
       __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopitems[i].name);
 
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_shopsel].i, .preset = &btnlistsel))
          g->st[st_shopsel].i = i;
+
+      y += btnlistsel.h;
    }
 
    Lith_GUI_ScrollEnd(g, st_shopscr);

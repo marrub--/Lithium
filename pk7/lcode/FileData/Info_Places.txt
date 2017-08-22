@@ -102,7 +102,7 @@ corporations like OFMD -- use Mars as a place to house autonomous work.
 == LITH_TXT_INFO_SHORT_OmicronXevv | Omicron Xevv
 == LITH_TXT_INFO_TITLE_OmicronXevv | $LITH_TXT_INFO_SHORT_OmicronXevv
 @@ LITH_TXT_INFO_DESCR_OmicronXevv
-A binary star system near Sirius about 2.6 parsec away from Earth. The
+A binary star system near Sirius about 8 lightyears away from Earth. The
 asteroid belt surrounding the star system has many large, well-lit and fairly
 temperate asteroids suitable for humans to live on.
 
@@ -123,5 +123,23 @@ Of these artifacts, you can acquire two. The Omega Cannon, a weapon, and the
 Division Sigil, a strange artifact able to cause disruptions in space-time.
 
 The latter will only be allowed to you if you can't stop the Demons.
+
+##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_Heaven | The God Cage
+== LITH_TXT_INFO_TITLE_Heaven | $LITH_TXT_INFO_SHORT_Heaven
+@@ LITH_TXT_INFO_DESCR_Heaven
+A strange dimension. The beings of the God Cage are the most powerful beings in
+all of existence, capable of destroying reality itself if they thought it best.
+
+The God Cage itself is a finite dimension, possibly the first of any. While it
+cannot be visually described, it is known that all particles in this dimension
+are made of pure, primordial magic of which is untouchable by any outside
+source; hence the name, a caged dimension for only the Gods to roam.
+
+Hermes is the only known God capable of holding a physical form outside of the
+God Cage, and moreover the only one capable of outside communication.
+His demise during the events of the calamity have halted all further knowledge
+about the dimension, leaving it merely the mental shape of a huge chrome
+cylinder box.
 
 ## EOF

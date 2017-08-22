@@ -89,6 +89,15 @@
    "their more useful creations.";
 
 // ---------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_KSKKJem" = "$LITH_TXT_INFO_SHORT_KSKK";
+"LITH_TXT_INFO_TITLE_KSKKJem" = "$LITH_TXT_INFO_TITLE_KSKK";
+"LITH_TXT_INFO_IMAGE_KSKKJem" = "$LITH_TXT_INFO_IMAGE_KSKK";
+"LITH_TXT_INFO_DESCR_KSKKJem" =
+   "Kazami Sensou Kenkyuu Kaihatsu (Kazami Military R&D) is a godo kaisha "
+   "business organization based in the Great Empire of Kazami, on Earth. They "
+   "research, develop and produce a large variety of products for the Kazami army.";
+
+// ---------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_MDDO" = "MDDO";
 "LITH_TXT_INFO_TITLE_MDDO" = "Maxim-Danil Defense Org";
 "LITH_TXT_INFO_DESCR_MDDO" =
@@ -121,6 +130,18 @@
    "\n\n"
    "For now, OFMD are your employers, and supply you with Score, weaponry and "
    "cyber-tech.";
+
+// ---------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_OFMDJem" = "$LITH_TXT_INFO_SHORT_OFMD";
+"LITH_TXT_INFO_TITLE_OFMDJem" = "$LITH_TXT_INFO_TITLE_OFMD";
+"LITH_TXT_INFO_IMAGE_OFMDJem" = "$LITH_TXT_INFO_IMAGE_OFMD";
+"LITH_TXT_INFO_DESCR_OFMDJem" =
+   "Optic Fiber Maxim-Danil is a company which mainly produces electronics, and is "
+   "one of the top-selling brands on the market for cables, computer parts, and "
+   "other such common technology."
+   "\n\n"
+   "Originally, this company only produced optic fiber cables for consumer use, "
+   "but later branched out to create all kinds of computation technology.";
 
 // ---------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Omakeda" = "Omakeda";

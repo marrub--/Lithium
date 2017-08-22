@@ -275,7 +275,7 @@ void Lith_ResetPlayer(player_t *p)
    {
       for(int i = weapon_min; i < weapon_max; i++) {
          weaponinfo_t const *info = &weaponinfo[i];
-         if(info->classname != null && !(info->flags & wf_magic))
+         if(info->classname != null && info->pclass & p->pclass && !(info->flags & wf_magic))
             ACS_GiveInventory(info->classname, 1);
       }
    }
@@ -284,8 +284,6 @@ void Lith_ResetPlayer(player_t *p)
    p->bipUnlock("Mateba");
    p->bipUnlock("Blade");
    p->bipUnlock("Delear");
-   p->bipUnlock("Hulgyon");
-   p->bipUnlock("StarShot");
 }
 
 // Static Functions ----------------------------------------------------------|
