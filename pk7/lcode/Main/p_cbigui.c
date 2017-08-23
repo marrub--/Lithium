@@ -1,9 +1,11 @@
-// vim: columns=140
+// vim: columns=120
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
 #include "lith_list.h"
 #include "lith_world.h"
+
+#define HasUpgr(name) if(world.cbiupgr[name])
 
 // Static Functions ----------------------------------------------------------|
 
@@ -14,14 +16,14 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 
    if(world.cbiupgr[cupg_hasupgr2])
    {
-      name = "KSKK Spec. BC-0265 Super High-Grade CPU";
+      name = Language("LITH_TXT_INFO_TITLE_CBIUpgr2");
       ram  = 150;
 
       DrawSpritePlain("lgfx/UI/CPU1.png", g->hid--, .1, .1, TICSECOND);
    }
    else if(world.cbiupgr[cupg_hasupgr1])
    {
-      name = "KSKK Spec. Z6808 High-Grade CPU";
+      name = Language("LITH_TXT_INFO_TITLE_CBIUpgr1");
       ram  = 100;
 
       DrawSpritePlain("lgfx/UI/CPU2.png", g->hid--, .1, .1, TICSECOND);
@@ -49,17 +51,17 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 
    y += 20;
 
-   if(world.cbiupgr[cupg_armorinter]) Info("Has Armor Interface");
-   if(world.cbiupgr[cupg_weapninter]) Info("Has Weapon Modification Device");
-   if(world.cbiupgr[cupg_weapninte2]) Info("Has Weapon Refactoring Device");
-   if(world.cbiupgr[cupg_rdistinter]) Info("Has Reality Distortion Interface");
+   HasUpgr(cupg_armorinter) Info("Has Armor Interface");
+   HasUpgr(cupg_weapninter) Info("Has Weapon Modification Device");
+   HasUpgr(cupg_weapninte2) Info("Has Weapon Refactoring Device");
+   HasUpgr(cupg_rdistinter) Info("Has Reality Distortion Interface");
 
    #undef Info
 
-   if(world.cbiupgr[cupg_armorinter]) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_weapninter]) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_weapninte2]) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_rdistinter]) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+   HasUpgr(cupg_armorinter) DrawSpritePlain("lgfx/UI/ArmorInter.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
+   HasUpgr(cupg_weapninter) DrawSpritePlain("lgfx/UI/WeapnInter.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
+   HasUpgr(cupg_weapninte2) DrawSpritePlain("lgfx/UI/WeapnInte2.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
+   HasUpgr(cupg_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
 }
 
 static void CBITab_CyberMage(gui_state_t *g, player_t *p)
@@ -80,17 +82,21 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 
    y += 20;
 
-   if(world.cbiupgr[cupg_c_slot3spell]) Info("Has Delear Spell Driver");
-   if(world.cbiupgr[cupg_c_slot5spell]) Info("Has Hulgyon Spell Driver");
-   if(world.cbiupgr[cupg_c_slot6spell]) Info("Has Star Shot Spell Driver");
-   if(world.cbiupgr[cupg_c_rdistinter]) Info("Has Reality Distortion Interface");
+   HasUpgr(cupg_c_slot3spell) Info("Has Feuer Spell Driver");
+   HasUpgr(cupg_c_slot4spell) Info("Has Romyetya Spell Driver");
+   HasUpgr(cupg_c_slot5spell) Info("Has Hulgyon Spell Driver");
+   HasUpgr(cupg_c_slot6spell) Info("Has Hosh'danma Spell Driver");
+   HasUpgr(cupg_c_slot7spell) Info("Has Cercle de la Mort Spell Driver");
+   HasUpgr(cupg_c_rdistinter) Info("Has Reality Distortion Interface");
 
    #undef Info
 
-   if(world.cbiupgr[cupg_c_slot3spell]) DrawSpritePlain("lgfx/UI/Slot3Spell.png", g->hid--, 300.2, 48*1 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_c_slot5spell]) DrawSpritePlain("lgfx/UI/Slot5Spell.png", g->hid--, 300.2, 48*2 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_c_slot6spell]) DrawSpritePlain("lgfx/UI/Slot6Spell.png", g->hid--, 300.2, 48*3 + .1 - 20, TICSECOND);
-   if(world.cbiupgr[cupg_c_rdistinter]) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
+   HasUpgr(cupg_c_slot3spell) DrawSpritePlain("lgfx/UI/Slot3Spell.png", g->hid--, 300.2, 48*1+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot4spell) DrawSpritePlain("lgfx/UI/Slot4Spell.png", g->hid--, 300.2, 48*2+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot5spell) DrawSpritePlain("lgfx/UI/Slot5Spell.png", g->hid--, 300.2, 48*3+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot6spell) DrawSpritePlain("lgfx/UI/Slot6Spell.png", g->hid--, 300.2, 48*4+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot7spell) DrawSpritePlain("lgfx/UI/Slot7Spell.png", g->hid--, 252.2, 48*1+.1-20, TICSECOND);
+   HasUpgr(cupg_c_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 252.2, 48*2+.1-20, TICSECOND);
 }
 
 static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)

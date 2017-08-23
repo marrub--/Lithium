@@ -99,11 +99,11 @@ struct page_initializer const bip_pages[] = {
    {pcl_outcasts, "VitalScanner", {"KSKK"}},
    {pcl_outcasts, "AutoReload",   {"KSKK"}},
 
-   {pcl_marine, "WeapnInter"},
+   {pcl_marine, "WeapnInter", {"OFMD", "AllPoint"}},
    {pcl_marine, "WeapnInte2"},
    {pcl_marine, "ArmorInter"},
-   {pcl_marine, "CBIUpgr1"},
-   {pcl_marine, "CBIUpgr2"},
+   {pcl_marine, "CBIUpgr1",   {"KSKK"}},
+   {pcl_marine, "CBIUpgr2",   {"KSKK"}},
 
    {.category = BIPC_PLACES},
    {pcl_outcasts,  "AetosVi"},
