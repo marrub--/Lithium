@@ -1,7 +1,7 @@
 actor Lith_Gameboy : Lith_Weapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Gameboy"
-   Weapon.SlotNumber 9
+   Weapon.SlotNumber 0
    Weapon.BobStyle "Smooth"
    Weapon.BobSpeed 1
    

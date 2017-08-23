@@ -18,7 +18,7 @@ enum
    UPGR_Magic,
    UPGR_SoulCleaver,
 
-   // Weapons
+   // Weapon
    UPGR_AutoReload,
    UPGR_AutoPistol,
    UPGR_PlasPistol,
@@ -33,7 +33,7 @@ enum
    UPGR_PunctCannon,
    UPGR_OmegaRail,
 
-   // Weapons (Cyber-Mage)
+   // Weapon (Cyber-Mage)
    UPGR_Mateba_A,
    UPGR_SPAS_A,
    UPGR_SPAS_B,
@@ -46,11 +46,13 @@ enum
    UPGR_ShipGun_A,
    UPGR_ShipGun_B,
 
+   // Extra
    UPGR_TorgueMode,
    UPGR_7777777,
    UPGR_lolsords,
    UPGR_Goldeneye,
 
+   // Downgrade
    UPGR_Implying,
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
