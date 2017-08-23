@@ -39,8 +39,8 @@ enum
 
 enum
 {
-   MAILF_PrintMessage = 1 << 0,
-   MAILF_AllPlayers   = 1 << 1,
+   MAILF_NoPrint    = 1 << 0,
+   MAILF_AllPlayers = 1 << 1,
 };
 
 typedef __str bip_unlocks_t[5];

@@ -1,7 +1,4 @@
-//----------------------------------------------------------------------------
-// Key Sections
-//
-
+// Key Sections --------------------------------------------------------------|
 addkeysection "Lithium - Computer/Brain Interface" Lith_CBI
 addmenukey "Open CBI" lith_k_opencbi
 
@@ -9,14 +6,10 @@ addkeysection "Lithium - Weapons" Lith_Weapons
 addmenukey "Quick Knife/Spell Menu" +lith_k_qact
 
 addkeysection "Lithium - Zoom" Lith_Zoom
-addmenukey "Zoom In" lith_k_zoomin
+addmenukey "Zoom In"  lith_k_zoomin
 addmenukey "Zoom Out" lith_k_zoomout
 
-
-//----------------------------------------------------------------------------
-// Aliases
-//
-
+// Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 
 alias +lith_k_qact "+user4"
@@ -25,15 +18,11 @@ alias -lith_k_qact "-user4"
 alias lith_k_zoomin  "pukename Lith_KeyZoom  30"
 alias lith_k_zoomout "pukename Lith_KeyZoom -60"
 
-alias lith_puketrm "pukename Lith_RunTerminal %1"
-alias lith_pukedlg "pukename Lith_RunDialogue %1"
-alias lith_pukemail "pukename Lith_GiveMail %1"
+alias __lith_puketrm  "pukename Lith_RunTerminal %1"
+alias __lith_pukedlg  "pukename Lith_RunDialogue %1"
+alias __lith_pukemail "pukename Lith_GiveMail %1"
 
-
-//----------------------------------------------------------------------------
-// Binds
-//
-
+// Binds ---------------------------------------------------------------------|
 defaultbind i lith_k_opencbi
 
 // EOF

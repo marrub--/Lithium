@@ -121,7 +121,10 @@ void Lith_GiveMail(int num)
       "Cluster1",
       "Cluster2",
       "Cluster3",
-      "Phantom"
+      "Phantom",
+      "JamesDefeated",
+      "MakarovDefeated",
+      "IsaacDefeated"
    };
 
    num %= countof(names);

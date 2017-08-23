@@ -173,7 +173,7 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 
    bip->mailreceived++;
 
-   if(flags & MAILF_PrintMessage)
+   if(!(flags & MAILF_NoPrint))
    {
       p->log("> Mail received from <\Cj%S\C->.", send);
 

@@ -179,7 +179,8 @@ void Lith_PhantomDeath(int num, int phase)
       switch(phase)
       {
       Phase(1, 1) ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
-      Phase(1, 2) ACS_SpawnForced("Lith_BossReward2", x, y, z); break;
+      Phase(1, 2) ACS_SpawnForced("Lith_BossReward2", x, y, z);
+                  Lith_ForPlayer() p->deliverMail("JamesDefeated"); break;
       }
       break;
 
@@ -188,7 +189,8 @@ void Lith_PhantomDeath(int num, int phase)
       {
       Phase(2, 1) ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
       Phase(2, 2) ACS_SpawnForced("Lith_BossReward4", x, y, z); break;
-      Phase(2, 3) ACS_SpawnForced("Lith_BossReward5", x, y, z); break;
+      Phase(2, 3) ACS_SpawnForced("Lith_BossReward5", x, y, z);
+                  Lith_ForPlayer() p->deliverMail("MakarovDefeated"); break;
       }
       break;
 
@@ -197,7 +199,8 @@ void Lith_PhantomDeath(int num, int phase)
       {
       Phase(3, 1) break;
       Phase(3, 2) break;
-      Phase(3, 3) ACS_SpawnForced("Lith_BossReward6", x, y, z); break;
+      Phase(3, 3) ACS_SpawnForced("Lith_BossReward6", x, y, z);
+                  Lith_ForPlayer() p->deliverMail("IsaacDefeated"); break;
       }
       break;
    }

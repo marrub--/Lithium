@@ -9,7 +9,51 @@
    "\cd> Date: \cj%S\n"
    "\n"
    "%S";
-"LITH_TXT_MAIL_FLAG_Phantom" = "1";
+"LITH_TXT_MAIL_FLAG_Intro" = "1";
+"LITH_TXT_MAIL_FLAG_JamesDefeated" = "2";
+"LITH_TXT_MAIL_FLAG_MakarovDefeated" = "2";
+"LITH_TXT_MAIL_FLAG_IsaacDefeated" = "2";
+
+//Phantom James Defeated
+"LITH_TXT_MAIL_BODY_JamesDefeated" =
+   "I\\\\\\\\\\\\othin\\\\\\\\r my 5iste\\\\\\\\\\nev6r ev\\\\\\\\\\t h[741741747][[\\\\ s\\e e\\\\\\ted bQQQQQqqqqaaaa\\other\\\\ d\\\\\\\\ words.\n"
+   "\n"
+   "I w4nte[6666655544333321[[[[ITERATE    e m\\\\\\\\\\e b\\\\ind wh\\\\\\ 1 sto\\\\ a\\ \\\\r grave. {{{{[[[[!!!!9876]4nd not j\\\\\\\\s\\\\\\ 7hug lay\\\\g de4d on the s99999f 1he \\oad -- \\\\\\\\\\ne n\\\\\\\\y c\\\\\\\\ 4bo\\t.\n"
+   "\n"
+   "[[[[Too bad.\n"
+   "\n"
+   "L[[E w[5 t00000uel f00]9hat.\n"
+   "\n"
+   "\cgThank you for putting this to an end.";
+"LITH_TXT_MAIL_SEND_JamesDefeated" = "ja00s@g0n0j0t00.1025";
+
+//Phantom Makarov Defeated
+"LITH_TXT_MAIL_BODY_MakarovDefeated" =
+   "There aren't many like you who can take such a being down. Maybe I should commend you for that, struggler.\n"
+   "\n"
+   "No, there is no need. What your victories have done is enough.\n"
+   "\n"
+   "\cgMaybe I advise you turn back.\n"
+   "\n"
+   "\crI am not the strongest of these manifestations.\n"
+   "\n"
+   "Maybe you don't need such advice.";
+"LITH_TXT_MAIL_SEND_MakarovDefeated" = "mak666v@org.r\\.\\\\\\-";
+
+//Phantom Isaac Defeated
+"LITH_TXT_MAIL_BODY_IsaacDefeated" =
+   "\caOne shan't care what he shoots, but one may take care in where he treads.\n"
+   "\n"
+   "\ca     And I think that you've treaded\n"
+   "\cr   a bit too far.\n"
+   "\n"
+   "\ca Perhaps just me.\n"
+   "\ca    Or maybe you agree?\n"
+   "\n"
+   "\ca            Here is a gift.\n"
+   "\n"
+   "\ca  I won't tell you to use it wisely.";
+"LITH_TXT_MAIL_SEND_IsaacDefeated" = "isaac@syn.400khz";
 
 //Intro (Marine)
 "LITH_TXT_MAIL_BODY_IntroStan" =
@@ -108,6 +152,18 @@
 "LITH_TXT_MAIL_SEND_PhantomStan" = "htic0@gov.<hidden>.mailserv";
 "LITH_TXT_MAIL_SIZE_PhantomStan" = "330";
 
+//Secret 1 (Marine)
+"LITH_TXT_MAIL_BODY_Secret1Stan" =
+   "This place stinks of rotten flesh! I wonder what's going on here, these blue walls sure seem out of place for Hell...\n"
+   "\n"
+   "Perhaps some sinners are waiting to eat my rockets!";
+"LITH_TXT_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+
+//Secret 2 (Marine)
+"LITH_TXT_MAIL_BODY_Secret2Stan" =
+   "Now I've done it, this place just keeps going deeper and getting weirder... Damn, it's getting hot in here! Better turn up the heat some more.";
+"LITH_TXT_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+
 //Intro (Cyber-Mage)
 "LITH_TXT_MAIL_BODY_IntroJem" =
    "l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`\n"
@@ -141,7 +197,7 @@
    "\cd>>>>>[[[[reloading mail daemon]]]]";
 "LITH_TXT_MAIL_NAME_IntroJem" = "Saved Message";
 "LITH_TXT_MAIL_SEND_IntroJem" = "<hidden>@corp.AOF";
-"LITH_TXT_MAIL_TIME_IntroJem" = "13:00 25-7-49";
+"LITH_TXT_MAIL_TIME_IntroJem" = "13:44 25-7-49";
 "LITH_TXT_MAIL_SIZE_IntroJem" = "288";
 
 //Chapter 1 (Cyber-Mage)
@@ -198,3 +254,26 @@
    "It doesn't matter. I will see this through.";
 "LITH_TXT_MAIL_NAME_Cluster3Jem" = "Saved Text 244";
 "LITH_TXT_MAIL_SIZE_Cluster3Jem" = "218";
+
+//Phantom Met (Cyber-Mage)
+"LITH_TXT_MAIL_BODY_PhantomJem" =
+   "\cg*** This is a global warning to all deceivers: If you are reading this, you are already being tracked and will be executed on sight. ***\n"
+   "\n"
+   "\cg====================================\n"
+   "\n"
+   "\cgWe have confirmed that three of you have been absorbed (see Dark Realm Properties c. 115C) and two have been executed. We will not stop until the remaining two are confirmed dead or incapacitated.\n"
+   "\n"
+   "\cgYou will not get away with this intrepid game.\n"
+   "\n"
+   "\cg  - \cnOrder";
+"LITH_TXT_MAIL_SEND_PhantomJem" = "order@corp.AOF";
+
+//Secret 1 (Cyber-Mage)
+"LITH_TXT_MAIL_BODY_Secret1Jem" =
+   "Another facet of this place, where does it end? I must destroy this place, the evil energy is overflowing here... and this architecture gives me bad vibes.";
+"LITH_TXT_MAIL_NAME_Secret1Jem" = "Saved Text 250";
+
+//Secret 2 (Cyber-Mage)
+"LITH_TXT_MAIL_BODY_Secret2Jem" =
+   "Here seems to be the end of this terrifying compartment of Hell. I'd better blaze through this one.";
+"LITH_TXT_MAIL_NAME_Secret2Jem" = "Saved Text 252";

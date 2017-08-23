@@ -525,7 +525,7 @@ static void WInit(void)
    #define Message(cmp, n, name) \
       if(world.cluster cmp && !msgs[n]) { \
          Lith_ForPlayer() \
-            p->deliverMail(name, true); \
+            p->deliverMail(name); \
          msgs[n] = true; \
       } else ((void)0)
 
