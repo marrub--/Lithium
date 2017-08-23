@@ -1,0 +1,54 @@
+The flags for mail messages are as follows:
+bit 1 - Prints a message when received
+bit 2 - Message is the same for all player classes
+
+put data: 1 -> LITH_TXT_MAIL_FLAG_Phantom
+
+-- Marine ---------------------------------------------------------------------
+comment: Intro (Marine)
+put file: Intro (Marine).txt -> LITH_TXT_MAIL_BODY_IntroStan
+put data: ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_IntroStan
+put data: 13:00 25-7-49      -> LITH_TXT_MAIL_TIME_IntroStan
+put data: 610                -> LITH_TXT_MAIL_SIZE_IntroStan
+
+comment: Chapter 1 (Marine)
+put file: Chapter 1 (Marine).txt -> LITH_TXT_MAIL_BODY_Cluster1Stan
+put data: ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster1Stan
+
+comment: Chapter 2 (Marine)
+put file: Chapter 2 (Marine).txt -> LITH_TXT_MAIL_BODY_Cluster2Stan
+put data: ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster2Stan
+
+comment: Chapter 3 (Marine)
+put file: Chapter 3 (Marine).txt -> LITH_TXT_MAIL_BODY_Cluster3Stan
+put data: ALambert@corp.OFMD     -> LITH_TXT_MAIL_SEND_Cluster3Stan
+
+comment: Phantom Met (Marine)
+put file: Phantom Met (Marine).txt    -> LITH_TXT_MAIL_BODY_PhantomStan
+put data: htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_PhantomStan
+put data: 330                         -> LITH_TXT_MAIL_SIZE_PhantomStan
+
+-- Cyber-Mage -----------------------------------------------------------------
+comment: Intro (Cyber-Mage)
+put file: Intro (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_IntroJem
+put data: Saved Message          -> LITH_TXT_MAIL_NAME_IntroJem
+put data: <hidden>@corp.AOF      -> LITH_TXT_MAIL_SEND_IntroJem
+put data: 13:00 25-7-49          -> LITH_TXT_MAIL_TIME_IntroJem
+put data: 288                    -> LITH_TXT_MAIL_SIZE_IntroJem
+
+comment: Chapter 1 (Cyber-Mage)
+put file: Chapter 1 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster1Jem
+put data: Saved Text 104             -> LITH_TXT_MAIL_NAME_Cluster1Jem
+put data: 240                        -> LITH_TXT_MAIL_SIZE_Cluster1Jem
+
+comment: Chapter 2 (Cyber-Mage)
+put file: Chapter 2 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster2Jem
+put data: Saved Text 152             -> LITH_TXT_MAIL_NAME_Cluster2Jem
+put data: 288                        -> LITH_TXT_MAIL_SIZE_Cluster2Jem
+
+comment: Chapter 3 (Cyber-Mage)
+put file: Chapter 3 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster3Jem
+put data: Saved Text 244             -> LITH_TXT_MAIL_NAME_Cluster3Jem
+put data: 218                        -> LITH_TXT_MAIL_SIZE_Cluster3Jem
+
+EOF

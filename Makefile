@@ -38,8 +38,8 @@ LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(IR)/lithos_%.ir)
 
 all: text bin
 bin: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
-text: $(SRCDIR)/FileData/compilefs.lua
-	@cd $(SRCDIR)/FileData; lua compilefs.lua
+text: $(SRCDIR)/FileData/compilefs.rb
+	@cd $(SRCDIR)/FileData; ruby compilefs.rb
 
 ## acs/*.bin
 

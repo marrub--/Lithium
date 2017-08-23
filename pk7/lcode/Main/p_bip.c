@@ -140,12 +140,12 @@ void Lith_PlayerInitBIP(player_t *p)
 //
 void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
-   int flag = flags | strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
+   flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
 
-   if(!(flags & MAILF_AllPlayers))
-      ifauto(__str, discrim, p->discrim)
-   {
-      title = StrParam("%S%S", title, p->discrim);
+   ifauto(__str, discrim, p->discrim) {
+      flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S%S", title, discrim), null, 0);
+      if(!(flags & MAILF_AllPlayers))
+         title = StrParam("%S%S", title, discrim);
    }
 
    bip_t *bip = &p->bip;
@@ -173,7 +173,7 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 
    bip->mailreceived++;
 
-   if(flag & MAILF_PrintMessage)
+   if(flags & MAILF_PrintMessage)
    {
       p->log("> Mail received from <\Cj%S\C->.", send);
 

@@ -1,107 +1,60 @@
-This is a list of files to be processed into LANGUAGE by compilefs.lua.
+This is a list of files to be processed into LANGUAGE by compilefs.
 
 -- Info Pages -----------------------------------------------------------------
-
 in language.info.corporations.en.txt
-parsefile Info_Corporations.txt
+parse file: Info_Corporations.txt
 
 in language.info.enemies.en.txt
-parsefile Info_Enemies.txt
+parse file: Info_Enemies.txt
 
 in language.info.places.en.txt
-parsefile Info_Places.txt
+parse file: Info_Places.txt
 
 in language.info.upgrades.en.txt
-parsefile Info_Upgrades.txt
+parse file: Info_Upgrades.txt
 
 in language.info.weapons.en.txt
+put data: sord        -> LITH_TXT_INFO_SHORT_Sword
+put data: Game Nanhai -> LITH_TXT_INFO_SHORT_Gameboy
 
-data sord        -> LITH_TXT_INFO_SHORT_Sword
-data Game Nanhai -> LITH_TXT_INFO_SHORT_Gameboy
-
-parsefile Info_Weapons_Shop.txt
-parsefile Info_Weapons_CyberMage.txt
-parsefile Info_Weapons_Marine.txt
+parse file: Info_Weapons_Shop.txt
+parse file: Info_Weapons_CyberMage.txt
+parse file: Info_Weapons_Marine.txt
 
 in language.info.omake.en.txt
-parsefile Info_Extra.txt
+parse file: Info_Extra.txt
 
 
 -- CBI Pages ------------------------------------------------------------------
-
 in language.shop.en.txt
-parsefile Shop.txt
+parse file: Shop.txt
 
 in language.upgrades.en.txt
-parsefile Upgrades.txt
+parse file: Upgrades.txt
 
 
 -- Dialogue -------------------------------------------------------------------
-
 in language.info.dialogue.txt
-
-Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
-Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
+put file: Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
+put file: Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 
 -- Misc -----------------------------------------------------------------------
-
 in language.log.en.txt
-parsefile Log.txt
+parse file: Log.txt
 
 in language.pickups.en.txt
-parsefile Pickups.txt
+parse file: Pickups.txt
 
 in language.misc.en.txt
-parsefile Misc.txt
+parse file: Misc.txt
 
 
 -- CBI Mail -------------------------------------------------------------------
-
 in language.info.mail.txt
 
-Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
+put file: Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
-The flags for mail messages are as follows:
-bit 1 - Prints a message when received
-bit 2 - Message is the same for all player classes
-
-data 1 -> LITH_TXT_MAIL_FLAG_Phantom
-
-Intro (Marine).txt      -> LITH_TXT_MAIL_BODY_IntroStan
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_IntroStan
-data 13:00 25-7-49      -> LITH_TXT_MAIL_TIME_IntroStan
-data 610                -> LITH_TXT_MAIL_SIZE_IntroStan
-
-Chapter 1 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster1Stan
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster1Stan
-
-Chapter 2 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster2Stan
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster2Stan
-
-Chapter 3 (Marine).txt  -> LITH_TXT_MAIL_BODY_Cluster3Stan
-data ALambert@corp.OFMD -> LITH_TXT_MAIL_SEND_Cluster3Stan
-
-Phantom Met (Marine).txt         -> LITH_TXT_MAIL_BODY_PhantomStan
-data htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_PhantomStan
-data 330                         -> LITH_TXT_MAIL_SIZE_PhantomStan
-
-Intro (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_IntroJem
-data Saved Message     -> LITH_TXT_MAIL_NAME_IntroJem
-data <hidden>@corp.AOF -> LITH_TXT_MAIL_SEND_IntroJem
-data 13:00 25-7-49     -> LITH_TXT_MAIL_TIME_IntroJem
-data 280               -> LITH_TXT_MAIL_SIZE_IntroJem
-
-Chapter 1 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster1Jem
-data Saved Text 104        -> LITH_TXT_MAIL_NAME_Cluster1Jem
-data 232                   -> LITH_TXT_MAIL_SIZE_Cluster1Jem
-
-Chapter 2 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster2Jem
-data Saved Text 152        -> LITH_TXT_MAIL_NAME_Cluster2Jem
-data 280                   -> LITH_TXT_MAIL_SIZE_Cluster2Jem
-
-Chapter 3 (Cyber-Mage).txt -> LITH_TXT_MAIL_BODY_Cluster3Jem
-data Saved Text 244        -> LITH_TXT_MAIL_NAME_Cluster3Jem
-data 210                   -> LITH_TXT_MAIL_SIZE_Cluster3Jem
+include dir_mail.txt
 
 EOF
