@@ -29,7 +29,7 @@
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar("__lith_debug_level") >= (level)) Log(__VA_ARGS__); \
+   do if(ACS_GetCVar("__lith_debug_level") & (level)) Log(__VA_ARGS__); \
    while(0)
 
 #define max(x, y) ((x) < (y) ? (y) : (x))
@@ -120,10 +120,12 @@ struct vec2i {
 
 enum
 {
-   log_boss = 1,
-   log_dlg,
-   log_dmon,
-   log_dmonV
+   log_none,
+   log_dev   = 1 << 0,
+   log_boss  = 1 << 1,
+   log_dmon  = 1 << 2,
+   log_dmonV = 1 << 3,
+   log_dlg   = 1 << 4,
 };
 
 // Printing ------------------------------------------------------------------|

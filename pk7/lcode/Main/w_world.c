@@ -145,6 +145,10 @@ void Lith_CheckEnemyCompat(int tid)
       ACS_Delay(17);
    }
 
+   LogDebug(log_dev, "Enemy compat check finished at %i", ACS_Timer());
+   if(world.enemycompat) LogDebug(log_dev, "Enemies are \Cdcompatible");
+   else                  LogDebug(log_dev, "Enemies are \Cgnot compatible");
+
    world.enemycheck = true;
    ACS_Thing_Remove(tid);
 }
