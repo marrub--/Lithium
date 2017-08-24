@@ -45,7 +45,7 @@ actor Lith_FeuerFinal
    RenderStyle "Add"
    Scale 0.3
    DamageType "Lith_Magic"
-   Damage 40
+   Damage 10
 
    Projectile
    +NOGRAVITY
@@ -69,7 +69,7 @@ actor Lith_FeuerExplosion
    RenderStyle "Add"
    Scale 0.15
    DamageType "Lith_Magic"
-   Damage 40
+   Damage (10)
 
    Projectile
    +NOGRAVITY
@@ -81,7 +81,7 @@ actor Lith_FeuerExplosion
    Death:
       BLLT LLLLL 0 A_SpawnItemEx("Lith_FeuerFX", 0,0,0, frandom(-1,1),frandom(-1,1),frandom(-1,1))
       BLLT L 0 A_PlaySound("weapons/feuer/explode", CHAN_BODY)
-      BLLT L 0 A_Explode(32, 20, 0)
+      BLLT L 0 A_Explode(5, 20, 0)
       BLLT L 5
       BLLT L 1 A_FadeOut
       wait
