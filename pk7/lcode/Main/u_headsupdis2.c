@@ -85,12 +85,20 @@ static void HUD_Health(player_t *p)
 //
 static void HUD_Armor(player_t *p)
 {
+   static __str const armorgfx[armor_max] = {
+      [armor_unknown] = "lgfx/HUD_C/ARM.png",
+      [armor_none]    = "lgfx/HUD_C/ARM.png",
+      [armor_bonus]   = "lgfx/HUD_C/ARM_Y.png",
+      [armor_green]   = "lgfx/HUD_C/ARM_G.png",
+      [armor_blue]    = "lgfx/HUD_C/ARM_B.png",
+   };
+
    DrawSpritePlain("lgfx/HUD_C/SplitBack.png", hid_armorbg, 0.1, 182.2, TICSECOND);
 
    HudMessageF("LHUDFONT", "%i", p->armor);
    HudMessageParams(0, hid_armor, CR_DARKRED, 21.1, 172.0, TICSECOND);
 
-   DrawSpritePlain("lgfx/HUD_C/ARM.png", hid_armortxt, 3.1, 178.2, TICSECOND);
+   DrawSpritePlain(armorgfx[p->armortype], hid_armortxt, 3.1, 178.2, TICSECOND);
 }
 
 //

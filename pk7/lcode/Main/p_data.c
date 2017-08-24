@@ -298,18 +298,15 @@ void Lith_ResetPlayer(player_t *p)
 //
 static void Lith_GetArmorType(player_t *p)
 {
-#define Check(name) ACS_StrICmp(p->armorclass, #name) == 0
-   if(Check(ArmorBonus))
-      p->armortype = ARM_bonus;
-   else if(Check(GreenArmor) || Check(SilverShield))
-      p->armortype = ARM_green;
-   else if(Check(BlueArmor) || Check(BlueArmorForMegasphere) || Check(EnchantedShield))
-      p->armortype = ARM_blue;
-   else if(Check(None))
-      p->armortype = ARM_none;
-   else
-      p->armortype = ARM_unknown;
-#undef Check
+   __str cl = p->armorclass;
+        if(cl == "ArmorBonus")      p->armortype = armor_bonus;
+   else if(cl == "GreenArmor" ||
+           cl == "SilverShield")    p->armortype = armor_green;
+   else if(cl == "BlueArmor" ||
+           cl == "BlueArmorForMegasphere" ||
+           cl == "EnchantedShield") p->armortype = armor_blue;
+   else if(cl == "None")            p->armortype = armor_none;
+   else                             p->armortype = armor_unknown;
 }
 
 // EOF

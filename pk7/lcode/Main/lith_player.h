@@ -39,12 +39,12 @@ GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
 enum
 {
-   ARM_none,
-   ARM_bonus,
-   ARM_green,
-   ARM_blue,
-   ARM_unknown,
-   ARM_max
+   armor_none,
+   armor_bonus,
+   armor_green,
+   armor_blue,
+   armor_unknown,
+   armor_max
 };
 
 //

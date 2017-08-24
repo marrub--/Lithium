@@ -54,12 +54,12 @@ static void HUD_Ammo(player_t *p)
 //
 static void HUD_HealthArmor(player_t *p)
 {
-   static __str const armorgfx[ARM_max] = {
-      [ARM_unknown] = "lgfx/HUD/H_D27.png",
-      [ARM_none]    = "lgfx/HUD/H_D28.png",
-      [ARM_bonus]   = "lgfx/HUD/H_D23.png",
-      [ARM_green]   = "lgfx/HUD/H_D24.png",
-      [ARM_blue]    = "lgfx/HUD/H_D25.png"
+   static __str const armorgfx[armor_max] = {
+      [armor_unknown] = "lgfx/HUD/H_D27.png",
+      [armor_none]    = "lgfx/HUD/H_D28.png",
+      [armor_bonus]   = "lgfx/HUD/H_D23.png",
+      [armor_green]   = "lgfx/HUD/H_D24.png",
+      [armor_blue]    = "lgfx/HUD/H_D25.png"
    };
 
    DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 200.2, TICSECOND);
