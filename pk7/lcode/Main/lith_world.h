@@ -50,19 +50,19 @@ __str Lith_CanonTime(int type);
 
 typedef struct worldinfo_s
 {
-   property mapsecrets {get: ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS)}
-   property mapkills   {get: ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS)}
-   property mapitems   {get: ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS)}
-   property mapnum     {get: ACS_GetLevelInfo(LEVELINFO_LEVELNUM)}
-   property mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
-   property mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
-   property cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
-   property canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
-   property canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
-   property canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
-   property difficulty     {get: ACS_GetCVar("lith_sv_difficulty")}
-   property begAngles      {call: Lith_BeginAngles()}
-   property addAngles      {call: Lith_AddAngle()}
+   attr mapsecrets {get: ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS)}
+   attr mapkills   {get: ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS)}
+   attr mapitems   {get: ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS)}
+   attr mapnum     {get: ACS_GetLevelInfo(LEVELINFO_LEVELNUM)}
+   attr mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
+   attr mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
+   attr cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
+   attr canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
+   attr canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
+   attr canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
+   attr difficulty     {get: ACS_GetCVar("lith_sv_difficulty")}
+   attr begAngles      {call: Lith_BeginAngles()}
+   attr addAngles      {call: Lith_AddAngle()}
 
    bool   gsinit;
    bool   singleplayer;
@@ -83,16 +83,16 @@ typedef struct worldinfo_s
    bool boss[3][3];
    bool bossspawned;
 
-   property boss1p1scr {get: ACS_GetCVar("lith_sv_boss1p1_scr")}
-   property boss1p2scr {get: ACS_GetCVar("lith_sv_boss1p2_scr")}
+   attr boss1p1scr {get: ACS_GetCVar("lith_sv_boss1p1_scr")}
+   attr boss1p2scr {get: ACS_GetCVar("lith_sv_boss1p2_scr")}
 
-   property boss2p1scr {get: ACS_GetCVar("lith_sv_boss2p1_scr")}
-   property boss2p2scr {get: ACS_GetCVar("lith_sv_boss2p2_scr")}
-   property boss2p3scr {get: ACS_GetCVar("lith_sv_boss2p3_scr")}
+   attr boss2p1scr {get: ACS_GetCVar("lith_sv_boss2p1_scr")}
+   attr boss2p2scr {get: ACS_GetCVar("lith_sv_boss2p2_scr")}
+   attr boss2p3scr {get: ACS_GetCVar("lith_sv_boss2p3_scr")}
 
-   property boss3p1scr {get: ACS_GetCVar("lith_sv_boss3p1_scr")}
-   property boss3p2scr {get: ACS_GetCVar("lith_sv_boss3p2_scr")}
-   property boss3p3scr {get: ACS_GetCVar("lith_sv_boss3p3_scr")}
+   attr boss3p1scr {get: ACS_GetCVar("lith_sv_boss3p1_scr")}
+   attr boss3p2scr {get: ACS_GetCVar("lith_sv_boss3p2_scr")}
+   attr boss3p3scr {get: ACS_GetCVar("lith_sv_boss3p3_scr")}
 
    // CBI global information
    int  cbiperf;

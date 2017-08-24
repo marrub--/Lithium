@@ -6,19 +6,12 @@ class Lith_Events : StaticEventHandler
          return;
       
       Actor.Spawn("Lith_Server");
-
-      // Check enemy compatibility.
-      let th = Actor.Spawn("ZombieMan", (7.7,7.7,7.7), ALLOW_REPLACE);
-      if(th) {
-         th.changeTID(CallACS("Lith_UniqueTID"));
-         CallACS("Lith_CheckEnemyCompat", th.tid);
-      }
    }
 
    override void WorldThingSpawned(WorldEvent evt)
    {
       let th = evt.thing;
-      if(th.bISMONSTER && !(th.x == 7.7 && th.y == 7.7 && th.z == 7.7))
+      if(th.bISMONSTER)
       {
          int tid = th.tid;
          th.changeTID(CallACS("Lith_UniqueTID"));

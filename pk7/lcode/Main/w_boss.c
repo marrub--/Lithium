@@ -6,12 +6,12 @@
 
 struct phantom_s
 {
-   property x   {get: ACS_GetActorX(->tid)}
-   property y   {get: ACS_GetActorY(->tid)}
-   property z   {get: ACS_GetActorZ(->tid)}
-   property ang {get: ACS_GetActorAngle(->tid)}
-   property health {get: ACS_GetActorProperty(->tid, APROP_Health)}
-   property meleetime {
+   attr x   {get: ACS_GetActorX(->tid)}
+   attr y   {get: ACS_GetActorY(->tid)}
+   attr z   {get: ACS_GetActorZ(->tid)}
+   attr ang {get: ACS_GetActorAngle(->tid)}
+   attr health {get: ACS_GetActorProperty(->tid, APROP_Health)}
+   attr meleetime {
       get: ACS_GetUserVariable(->tid, "user_meleetime"),
       set: ACS_SetUserVariable(->tid, "user_meleetime")
    }

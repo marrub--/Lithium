@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define property __prop
+#define attr __prop
 #define ifauto(type, name, ...) \
    __with(type name = (__VA_ARGS__);) \
       if(name)

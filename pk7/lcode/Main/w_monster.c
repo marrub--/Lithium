@@ -85,6 +85,12 @@ static struct monster_info const monsterinfo[] = {
    {0, mtype_phantom,    "Isaac"   },
    {0, mtype_cyberdemon, "Steggles"},
 
+   // DoomRL Arsenal Monsters
+   {Score_ZombieMan,   mtype_zombie, "FormerHuman"   },
+   {Score_ShotgunGuy,  mtype_zombie, "FormerSergeant"},
+   {Score_ChaingunGuy, mtype_zombie, "FormerCommando"},
+   {Score_ChaingunGuy, mtype_zombie, "Former"}, // hue
+
    // Colorful Hell
    {Score_ZombieMan,     mtype_zombie,        "Zombie"},
    {Score_ShotgunGuy,    mtype_zombie,        "SG"    },
@@ -401,7 +407,7 @@ void Lith_MonsterInfo(int tid)
       }
    }
 
-   LogDebug(log_dmonV, "no monster %S", cname);
+   LogDebug(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
    ACS_GiveInventory("Lith_MonsterInvalid", 1);

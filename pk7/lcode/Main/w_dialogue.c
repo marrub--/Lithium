@@ -39,7 +39,7 @@ struct dlgfunc {
 
 typedef struct dlgparsestate_s
 {
-   property nextCode {call: NextCode(this)}
+   attr nextCode {call: NextCode(this)}
 
    Lth_TokenStream *tkstr;
 

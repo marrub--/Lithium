@@ -39,11 +39,11 @@ size_t Lith_ListSize(struct list_s *head);
 
 typedef struct list_s
 {
-   property construct {call: Lith_LinkDefault(this)}
-   property link      {call: Lith_ListLink(__arg, this)}
-   property unlink    {call: Lith_ListUnlink(this)}
-   property size      {get:  Lith_ListSize(this)}
-   property free      {call: Lith_ListFree(this)}
+   attr construct {call: Lith_LinkDefault(this)}
+   attr link      {call: Lith_ListLink(__arg, this)}
+   attr unlink    {call: Lith_ListUnlink(this)}
+   attr size      {get:  Lith_ListSize(this)}
+   attr free      {call: Lith_ListFree(this)}
 
    void *object;
    struct list_s *prev, *next;

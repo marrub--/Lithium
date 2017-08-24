@@ -111,46 +111,7 @@ int Lith_UniqueID(int tid)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_EmitScore(int amount)
 {
-   if(world.enemycheck)
-      Lith_GiveAllScore(amount, false);
-
-   world.enemycompat = true;
-}
-
-//
-// Lith_CheckEnemyCompat
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_CheckEnemyCompat(int tid)
-{
-   if(strstr_str(ACS_GetActorClass(tid), "Lith_"))
-      world.enemycompat = true;
-   else
-   {
-      // Wait for spawners.
-      ACS_Delay(2);
-
-      // Make the actor undetectable.
-      ACS_SetActorProperty(tid, APROP_RenderStyle, STYLE_None);
-      ACS_SetActorPropertyString(tid, APROP_ActiveSound, "silence");
-      ACS_SetActorPropertyString(tid, APROP_AttackSound, "silence");
-      ACS_SetActorPropertyString(tid, APROP_DeathSound,  "silence");
-      ACS_SetActorPropertyString(tid, APROP_PainSound,   "silence");
-      ACS_SetActorPropertyString(tid, APROP_SeeSound,    "silence");
-      ACS_GiveActorInventory(tid, "Lith_EnemyChecker", 1);
-
-      // This delay is very specific -- it's the amount of time before
-      // A_NoBlocking is called on a zombie. This is in case the monster
-      // pack you're using uses item drops for Score.
-      ACS_Delay(17);
-   }
-
-   LogDebug(log_dev, "Enemy compat check finished at %i", ACS_Timer());
-   if(world.enemycompat) LogDebug(log_dev, "Enemies are \Cdcompatible");
-   else                  LogDebug(log_dev, "Enemies are \Cgnot compatible");
-
-   world.enemycheck = true;
-   ACS_Thing_Remove(tid);
+   Lith_GiveAllScore(amount, false);
 }
 
 //
@@ -319,19 +280,27 @@ static void DoPayout(void)
 [[__call("ScriptS")]]
 static void CheckEnemyCompat(void)
 {
-   if(ACS_GetCVar("sv_nomonsters") || world.grafZoneEntered)
+   if(ACS_GetCVar("sv_nomonsters") || world.enemycheck)
       return;
 
-   for(;;)
+   int tid;
+   if(ACS_SpawnForced("ZombieMan", 0, 0, 0, tid = ACS_UniqueTID(), 0))
    {
-      fixed x = ACS_RandomFixed(-32765, 32765);
-      fixed y = ACS_RandomFixed(-32765, 32765);
-      int tid;
+      ACS_SetActivator(tid);
+      ACS_GiveInventory("Lith_EnemyChecker", 1);
 
-      if(ACS_SpawnForced("ZombieMan", x, y, 0, tid = ACS_UniqueTID(), 0)) {
-         Lith_CheckEnemyCompat(tid);
-         break;
-      }
+      __str cl = ACS_GetActorClass(0);
+
+      LogDebug(log_dev, "Enemy check on %S", cl);
+
+      if(strstr_str(cl, "Lith_") || ACS_StrCmp(cl, "RLFormer", 8) == 0)
+         world.enemycompat = true;
+
+      if(world.enemycompat) LogDebug(log_dev, "Enemies are \Cdcompatible");
+      else                  LogDebug(log_dev, "Enemies are \Cgnot compatible");
+
+      world.enemycheck = true;
+      ACS_Thing_Remove(0);
    }
 }
 

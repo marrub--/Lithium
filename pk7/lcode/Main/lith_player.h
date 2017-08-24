@@ -286,48 +286,48 @@ __str Lith_PlayerDiscriminator(int pclass);
 typedef struct player
 {
    // state
-   property reset    {call: Lith_ResetPlayer(this)}
-   property loadData {call: Lith_PlayerLoadData(this)}
-   property saveData {call: Lith_PlayerSaveData(this)}
-   property weapontype    {get:  Lith_PlayerCurWeaponType(this)}
-   property buttonPressed {call: Lith_ButtonPressed(this)}
-   property setVel  {call: Lith_SetPlayerVelocity(this)}
-   property mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
-   property manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
+   attr reset    {call: Lith_ResetPlayer(this)}
+   attr loadData {call: Lith_PlayerLoadData(this)}
+   attr saveData {call: Lith_PlayerSaveData(this)}
+   attr weapontype    {get:  Lith_PlayerCurWeaponType(this)}
+   attr buttonPressed {call: Lith_ButtonPressed(this)}
+   attr setVel  {call: Lith_SetPlayerVelocity(this)}
+   attr mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
+   attr manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
 
    // score
-   property giveScore   {call: Lith_GiveScore(this)}
-   property takeScore   {call: Lith_TakeScore(this)}
-   property getModScore {call: Lith_GetModScore(this)}
+   attr giveScore   {call: Lith_GiveScore(this)}
+   attr takeScore   {call: Lith_TakeScore(this)}
+   attr getModScore {call: Lith_GetModScore(this)}
 
    // log
-   property log  {call: Lith_Log (this)}
-   property logF {call: Lith_LogF(this)}
-   property logH {call: Lith_LogH(this)}
+   attr log  {call: Lith_Log (this)}
+   attr logF {call: Lith_LogF(this)}
+   attr logH {call: Lith_LogH(this)}
 
    // gui
-   property useGUI   {call: Lith_PlayerUseGUI(this)}
-   property closeGUI {call: Lith_PlayerCloseGUI(this)}
+   attr useGUI   {call: Lith_PlayerUseGUI(this)}
+   attr closeGUI {call: Lith_PlayerCloseGUI(this)}
 
    // misc
-   property getUpgr      {call: Lith_PlayerGetNamedUpgrade(this)}
-   property deliverMail  {call: Lith_DeliverMail(this)}
-   property clearTextBuf {call: Lith_ClearTextBuf(this)}
-   property bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
-   property discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
+   attr getUpgr      {call: Lith_PlayerGetNamedUpgrade(this)}
+   attr deliverMail  {call: Lith_DeliverMail(this)}
+   attr clearTextBuf {call: Lith_ClearTextBuf(this)}
+   attr bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
+   attr discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
 
    // cvars
-   property getCVarI {call: ACS_GetUserCVar      (->num)}
-   property getCVarK {call: ACS_GetUserCVarFixed (->num)}
-   property getCVarS {call: ACS_GetUserCVarString(->num)}
-   property setCVarI {call: ACS_SetUserCVar      (->num)}
-   property setCVarK {call: ACS_SetUserCVarFixed (->num)}
-   property setCVarS {call: ACS_SetUserCVarString(->num)}
+   attr getCVarI {call: ACS_GetUserCVar      (->num)}
+   attr getCVarK {call: ACS_GetUserCVarFixed (->num)}
+   attr getCVarS {call: ACS_GetUserCVarString(->num)}
+   attr setCVarI {call: ACS_SetUserCVar      (->num)}
+   attr setCVarK {call: ACS_SetUserCVarFixed (->num)}
+   attr setCVarS {call: ACS_SetUserCVarString(->num)}
 
    // shop
-   property getCost {call: Lith_ShopGetCost(this)}
-   property canBuy  {call: Lith_ShopCanBuy(this)}
-   property buy     {call: Lith_ShopBuy(this)}
+   attr getCost {call: Lith_ShopGetCost(this)}
+   attr canBuy  {call: Lith_ShopCanBuy(this)}
+   attr buy     {call: Lith_ShopBuy(this)}
 
    [[__anonymous]] player_statedata_t  statedata;
    [[__anonymous]] player_extdata_t    extdata;

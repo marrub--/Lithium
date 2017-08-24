@@ -68,10 +68,10 @@ typedef struct bippage_s
 
 typedef struct bip_s
 {
-   property find       {call: Lith_FindBIPPage(this)}
-   property unlock     {call: Lith_UnlockBIPPage(this)}
-   property deallocate {call: Lith_DeallocateBIP(this)}
-   property losePages  {call: Lith_PlayerLoseBIPPages(this)}
+   attr find       {call: Lith_FindBIPPage(this)}
+   attr unlock     {call: Lith_UnlockBIPPage(this)}
+   attr deallocate {call: Lith_DeallocateBIP(this)}
+   attr losePages  {call: Lith_PlayerLoseBIPPages(this)}
 
    // Stats
    int categoryavail[BIPC_MAX];
