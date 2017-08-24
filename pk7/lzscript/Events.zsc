@@ -29,11 +29,11 @@ class Lith_Events : StaticEventHandler
    
    override bool InputProcess(InputEvent evt)
    {
-      if(Lith_Server.Instance() &&
-         Lith_Server.Instance().GrabInput[consoleplayer] &&
-         evt.Type == InputEvent.Type_KeyDown && evt.KeyString)
+      let sv = Lith_Server.Instance();
+      if(sv && sv.GrabInput[consoleplayer] &&
+         evt.Type == InputEvent.Type_KeyDown && evt.keyString)
       {
-         EventHandler.SendNetworkEvent("Lith_Key", evt.KeyChar);
+         EventHandler.SendNetworkEvent("Lith_Key", evt.keyChar);
          return true;
       }
       

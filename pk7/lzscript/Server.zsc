@@ -5,7 +5,8 @@ class Lith_Server : Actor
    
    static void SetInput(int pnum, bool on)
    {
-      Instance().GrabInput[pnum % MAXPLAYERS] = on;
+      let sv = Instance();
+      if(sv) sv.GrabInput[pnum % MAXPLAYERS] = on;
    }
    
    static clearscope Lith_Server Instance()
