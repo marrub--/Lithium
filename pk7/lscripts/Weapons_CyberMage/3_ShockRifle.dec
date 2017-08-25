@@ -91,59 +91,68 @@ actor Lith_ShockRifle : Lith_CWeapon
       stop
    
    Ready:
-      SHTG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
+      CSRG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
       loop
    
    Deselect:
-      SHTG AAA 0 A_Lower
-      SHTG A 1
+      CSRG AAA 0 A_Lower
+      CSRG A 1
       loop
    
    Select:
-      SHTG AAA 0 A_Raise
-      SHTG A 1
+      CSRG AAA 0 A_Raise
+      CSRG A 1
       loop
    
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_ShockRifleShotsFired", 0, "Reload")
       TNT1 A 0 A_GiveInventory("Lith_ShockRifleShotsFired", 1)
-      SHTG A 1
+      CSRG A 1
       TNT1 A 0 A_GunFlash("DummyFlash")
       TNT1 A 0 A_PlaySound("weapons/crifle/fire", CHAN_WEAPON)
       TNT1 A 0 A_FireBullets(1, 0, -1, 37*frandom(1,1.5), "Lith_ShockPuff", FBF_NORANDOM)
-      SHTG B 2 bright A_Light(1)
-      SHTG C 2 bright A_Light(0)
-      SHTG D 2
+      CSRG B 1 bright offset(0, 45) A_Light(1)
+      CSRG C 1 bright offset(0, 37) A_Light(0)
+      CSRG A 1 offset(0, 34)
+      CSRG A 1 offset(0, 33)
       goto Ready
 
    Reload:
       TNT1 A 0 A_JumpIfInventory("Lith_ShockRifleShotsFired", 1, 1)
       goto Ready
-      SHTG N 2
-      SHTG F 2 A_PlaySound("weapons/crifle/reloadout", CHAN_6)
-      SHTG G 2
-      SHTG H 2
-      SHTG I 2 offset(-11, 57)
-      SHTG I 5 offset(-10, 60)
-      SHTG I 5 offset(-11, 60)
-      SHTG I 0 A_TakeInventory("Lith_ShockRifleShotsFired", 999)
-      SHTG I 2 offset(-13, 59) A_PlaySound("weapons/crifle/reloadin", CHAN_7)
-      SHTG I 2 offset(-11, 49)
-      SHTG I 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 5 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(3, 56) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(10, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(8, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(7, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG I 1 offset(5, 43) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)
-      SHTG G 1 offset(-13, 32)
-      SHTG G 1 offset(1, 32)
-      SHTG F 1 offset(-9, 32)
-      SHTG F 1 offset(1, 32)
-      SHTG NNNNNNN 1 A_ReFire
+      CSRG D 1 offset(1, 32)
+      CSRG E 1 offset(3, 32)
+      CSRG F 1 offset(4, 32)
+      CSRG F 1 offset(8, 38)
+      CSRG F 1 offset(12, 45)
+      CSRG F 1 offset(16, 53)
+      CSRG F 1 offset(19, 60)
+      CSRG F 0 A_PlaySound("weapons/crifle/reloadout", CHAN_6)
+      CSRG F 1 offset(21, 64)
+      CSRG F 1 offset(23, 67)
+      CSRG F 1 offset(22, 69)
+      CSRG F 1 offset(19, 70)
+      CSRG F 7 offset(18, 72)
+      CSRG F 1 offset(17, 69)
+      CSRG F 1 offset(19, 67)
+      CSRG F 1 offset(20, 66)
+      CSRG F 1 offset(21, 62)
+      CSRG E 1 offset(20, 60)
+      CSRG E 0 A_TakeInventory("Lith_ShockRifleShotsFired", 999)
+      CSRG D 1 offset(21, 63) A_PlaySound("weapons/crifle/reloadin", CHAN_7)
+      CSRG A 1 offset(23, 66)
+      CSRG A 1 offset(24, 68)
+      CSRG A 1 offset(25, 63)
+      CSRG A 1 offset(24, 59)
+      CSRG A 1 offset(22, 57)
+      CSRG A 1 offset(20, 54)
+      CSRG A 1 offset(16, 49)
+      CSRG A 1 offset(12, 44)
+      CSRG A 1 offset(10, 42)
+      CSRG A 1 offset(8, 40)
+      CSRG A 1 offset(5, 38)
+      CSRG A 1 offset(2, 35)
+      CSRG AAAAAAA 1 offset(1, 32) A_ReFire
       goto Ready
    }
 }

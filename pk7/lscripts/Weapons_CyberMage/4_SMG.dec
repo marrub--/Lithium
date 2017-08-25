@@ -256,7 +256,7 @@ actor Lith_SMG : Lith_CWeapon
       CSMG A 1 offset(8, 40)
       CSMG A 1 offset(5, 38)
       CSMG A 2 offset(2, 35)
-      CSMG A 4 offset(0, 32) 
+      CSMG A 4 offset(0, 32)
       goto Ready
    
    ReloadFromFiring:
