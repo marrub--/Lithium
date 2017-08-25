@@ -127,20 +127,22 @@ $limit weapons/shotgun/gauss/spark 0
 //
 // Shock Rifle
 //
-weapons/crifle/fire      lsounds/ShockRifle/Fire.flac      // Return to Castle Wolfenstein, Halo 3
-weapons/crifle/zap1      lsounds/ShockRifle/Zap1.wav       // Half-Life 2
-weapons/crifle/zap2      lsounds/ShockRifle/Zap2.wav       // 〃
-weapons/crifle/zap3      lsounds/ShockRifle/Zap3.wav       // 〃
-weapons/crifle/reloadout lsounds/ShockRifle/ReloadOut.flac // Return to Castle Wolfenstein
-weapons/crifle/reloadin  lsounds/ShockRifle/ReloadIn.flac  // 〃
+weapons/erifle/pickup    lsounds/ShockRifle/Pickup.flac    // Halo 3
+weapons/erifle/draw      lsounds/ShockRifle/Draw.flac      // 〃
+weapons/erifle/fire      lsounds/ShockRifle/Fire.flac      // Return to Castle Wolfenstein, Halo 3
+weapons/erifle/zap1      lsounds/ShockRifle/Zap1.wav       // Half-Life 2
+weapons/erifle/zap2      lsounds/ShockRifle/Zap2.wav       // 〃
+weapons/erifle/zap3      lsounds/ShockRifle/Zap3.wav       // 〃
+weapons/erifle/reloadout lsounds/ShockRifle/ReloadOut.flac // Return to Castle Wolfenstein
+weapons/erifle/reloadin  lsounds/ShockRifle/ReloadIn.flac  // 〃
 
-$random weapons/crifle/zap {
-   weapons/crifle/zap1
-   weapons/crifle/zap2
-   weapons/crifle/zap3
+$random weapons/erifle/zap {
+   weapons/erifle/zap1
+   weapons/erifle/zap2
+   weapons/erifle/zap3
 }
 
-$volume weapons/crifle/zap 0.15
+$volume weapons/erifle/zap 0.15
 
 //
 // SPAS
