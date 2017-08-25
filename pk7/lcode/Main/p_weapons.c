@@ -13,49 +13,51 @@
 #define A(a) "Lith_" a "Ammo"
 #define M(a) "Lith_" a "ShotsFired"
 #define P(a) "weapons/" a "/pickup"
+#define N(a) .classname = "Lith_" a, .name = a
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
    // All-class Weapons
-   {1, pcl_outcasts, "ChargeFist",      P("cfist"),    AT_None,                          },
-   {2, pcl_outcasts, "Revolver",        P("revolver"), AT_NMag, M("Revolver")            },
-   {3, pcl_outcasts, "LazShotgun",      P("lshotgun"), AT_None,                          },
-   {4, pcl_outcasts, "SniperRifle",     P("sniper"),   AT_NMag, M("Sniper")              },
-   {5, pcl_outcasts, "MissileLauncher", P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
-   {6, pcl_outcasts, "PlasmaDiffuser",  P("plasdiff"), AT_Ammo, A("Plasma")              },
+   {1, pcl_outcasts, N("ChargeFist"),      P("cfist"),    AT_None,                          },
+   {2, pcl_outcasts, N("Revolver"),        P("revolver"), AT_NMag, M("Revolver")            },
+   {3, pcl_outcasts, N("LazShotgun"),      P("lshotgun"), AT_None,                          },
+   {4, pcl_outcasts, N("SniperRifle"),     P("sniper"),   AT_NMag, M("Sniper")              },
+   {5, pcl_outcasts, N("MissileLauncher"), P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
+   {6, pcl_outcasts, N("PlasmaDiffuser"),  P("plasdiff"), AT_Ammo, A("Plasma")              },
 
    // Marine Weapons
-   {1, pcl_marine, "Fist",            "MMMMHMHMMMHMMM", AT_None,            },
-   {2, pcl_marine, "Pistol",          P("pistol"),      AT_NMag, M("Pistol")},
-   {3, pcl_marine, "Shotgun",         P("shotgun"),     AT_None,            },
-   {3, pcl_marine, "SuperShotgun",    P("ssg"),         AT_Ammo, A("Shell") },
-   {4, pcl_marine, "CombatRifle",     P("rifle"),       AT_NMag, M("Rifle") },
-   {5, pcl_marine, "GrenadeLauncher", P("rocket"),      AT_Ammo, A("Rocket")},
-   {6, pcl_marine, "PlasmaRifle",     P("plasma"),      AT_Ammo, A("Plasma")},
-   {7, pcl_marine, "BFG9000",         P("cannon"),      AT_Ammo, A("Cannon")},
+   {1, pcl_marine, N("Fist"),            "MMMMHMHMMMHMMM", AT_None,            },
+   {2, pcl_marine, N("Pistol"),          P("pistol"),      AT_NMag, M("Pistol")},
+   {3, pcl_marine, N("Shotgun"),         P("shotgun"),     AT_None,            },
+   {3, pcl_marine, N("SuperShotgun"),    P("ssg"),         AT_Ammo, A("Shell") },
+   {4, pcl_marine, N("CombatRifle"),     P("rifle"),       AT_NMag, M("Rifle") },
+   {5, pcl_marine, N("GrenadeLauncher"), P("rocket"),      AT_Ammo, A("Rocket")},
+   {6, pcl_marine, N("PlasmaRifle"),     P("plasma"),      AT_Ammo, A("Plasma")},
+   {7, pcl_marine, N("BFG9000"),         P("cannon"),      AT_Ammo, A("Cannon")},
 
    // Cyber-Mage Weapons
-   {1, pcl_cybermage, "CFist",         "YOUSONOFABITCH", AT_None,                           },
-   {2, pcl_cybermage, "Mateba",        P("mateba"),      AT_NMag, M("Mateba")               },
-   {3, pcl_cybermage, "ShockRifle",    P("erifle"),      AT_NMag, M("ShockRifle")           },
-   {3, pcl_cybermage, "SPAS",          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
-   {4, pcl_cybermage, "SMG",           P("smg"),         AT_NMag, M("SMG")                  },
-   {5, pcl_cybermage, "IonRifle",      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
-   {6, pcl_cybermage, "CPlasmaRifle",  P("plasma"),      AT_Ammo, A("Plasma")               },
-   {7, pcl_cybermage, "StarDestroyer", P("shipgun"),     AT_Ammo, A("Cannon")               },
+   {1, pcl_cybermage, N("CFist"),         "YOUSONOFABITCH", AT_None,                           },
+   {2, pcl_cybermage, N("Mateba"),        P("mateba"),      AT_NMag, M("Mateba")               },
+   {3, pcl_cybermage, N("ShockRifle"),    P("erifle"),      AT_NMag, M("ShockRifle")           },
+   {3, pcl_cybermage, N("SPAS"),          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
+   {4, pcl_cybermage, N("SMG"),           P("smg"),         AT_NMag, M("SMG")                  },
+   {5, pcl_cybermage, N("IonRifle"),      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
+   {6, pcl_cybermage, N("CPlasmaRifle"),  P("plasma"),      AT_Ammo, A("Plasma")               },
+   {7, pcl_cybermage, N("StarDestroyer"), P("shipgun"),     AT_Ammo, A("Cannon")               },
 
-   {1, pcl_cybermage, "Blade",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {2, pcl_cybermage, "Delear",   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
-   {3, pcl_cybermage, "Feuer",    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {4, pcl_cybermage, "Rend",     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {5, pcl_cybermage, "Hulgyon",  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {6, pcl_cybermage, "StarShot", "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
-   {7, pcl_cybermage, "Cercle",   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {0, pcl_cybermage, N("Blade"),    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {0, pcl_cybermage, N("Delear"),   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
+   {0, pcl_cybermage, N("Feuer"),    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {0, pcl_cybermage, N("Rend"),     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {0, pcl_cybermage, N("Hulgyon"),  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+   {0, pcl_cybermage, N("StarShot"), "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
+   {0, pcl_cybermage, N("Cercle"),   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
 };
 #undef A
 #undef M
 #undef P
+#undef N
 #undef F
 
 // Static Functions ----------------------------------------------------------|
@@ -178,7 +180,7 @@ bool Lith_WeaponPickup(int name)
       GiveWeaponItem(parm);
       Lith_PickupMessage(p, info);
 
-      ACS_GiveInventory(StrParam("Lith_%S", info->name), 1);
+      ACS_GiveInventory(info->classname, 1);
 
       return !weaponstay;
    }
@@ -227,8 +229,7 @@ void Lith_GSInit_Weapon(void)
    for(int i = 0; i < weapon_max; i++)
    {
       weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
-      info->type  = i;
-      info->classname = StrParam("Lith_%S", info->name);
+      info->type = i;
    }
 }
 
