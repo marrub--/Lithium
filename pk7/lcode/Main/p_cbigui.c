@@ -41,9 +41,11 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 
    int y = 70;
    #define Info(...) \
-      HudMessageF("CBIFONT", __VA_ARGS__); \
-      HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
-      y += 10
+      do { \
+         HudMessageF("CBIFONT", __VA_ARGS__); \
+         HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
+         y += 10; \
+      } while(0)
 
    Info("Performance: %i\CbPr", world.cbiperf);
    Info("In use: %i\CbPr", p->cbi.pruse);
@@ -72,9 +74,11 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 
    int y = 70;
    #define Info(...) \
-      HudMessageF("CBIFONT", __VA_ARGS__); \
-      HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
-      y += 10
+      do { \
+         HudMessageF("CBIFONT", __VA_ARGS__); \
+         HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
+         y += 10; \
+      } while(0)
 
    Info("Performance: %i\CbPr", world.cbiperf);
    Info("In use: %i\CbPr", p->cbi.pruse);
@@ -82,21 +86,25 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 
    y += 20;
 
-   HasUpgr(cupg_c_slot3spell) Info("Has Feuer Spell Driver");
-   HasUpgr(cupg_c_slot4spell) Info("Has Romyetya Spell Driver");
-   HasUpgr(cupg_c_slot5spell) Info("Has Hulgyon Spell Driver");
-   HasUpgr(cupg_c_slot6spell) Info("Has Hosh'danma Spell Driver");
-   HasUpgr(cupg_c_slot7spell) Info("Has Cercle de la Mort Spell Driver");
-   HasUpgr(cupg_c_rdistinter) Info("Has Reality Distortion Interface");
+                              Info("\CiBlade Spell Driver \Cbinstalled.");
+                              Info("\CiDelear Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_slot3spell) Info("\CiFeuer Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_slot4spell) Info("\CiRomyetya Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_slot5spell) Info("\CiHulgyon Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_slot6spell) Info("\CiHosh'danma Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_slot7spell) Info("\CgCercle de la Mort Spell Driver \Cbinstalled.");
+   HasUpgr(cupg_c_rdistinter) Info("Reality Distortion Interface \Cbinstalled.");
 
    #undef Info
 
-   HasUpgr(cupg_c_slot3spell) DrawSpritePlain("lgfx/UI/Slot3Spell.png", g->hid--, 300.2, 48*1+.1-20, TICSECOND);
-   HasUpgr(cupg_c_slot4spell) DrawSpritePlain("lgfx/UI/Slot4Spell.png", g->hid--, 300.2, 48*2+.1-20, TICSECOND);
-   HasUpgr(cupg_c_slot5spell) DrawSpritePlain("lgfx/UI/Slot5Spell.png", g->hid--, 300.2, 48*3+.1-20, TICSECOND);
-   HasUpgr(cupg_c_slot6spell) DrawSpritePlain("lgfx/UI/Slot6Spell.png", g->hid--, 300.2, 48*4+.1-20, TICSECOND);
-   HasUpgr(cupg_c_slot7spell) DrawSpritePlain("lgfx/UI/Slot7Spell.png", g->hid--, 252.2, 48*1+.1-20, TICSECOND);
-   HasUpgr(cupg_c_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 252.2, 48*2+.1-20, TICSECOND);
+                              DrawSpritePlain("lgfx/UI/Slot1Spell.png", g->hid--, 300.2, 48*1+.1-20, TICSECOND);
+                              DrawSpritePlain("lgfx/UI/Slot2Spell.png", g->hid--, 300.2, 48*2+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot3spell) DrawSpritePlain("lgfx/UI/Slot3Spell.png", g->hid--, 300.2, 48*3+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot4spell) DrawSpritePlain("lgfx/UI/Slot4Spell.png", g->hid--, 300.2, 48*4+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot5spell) DrawSpritePlain("lgfx/UI/Slot5Spell.png", g->hid--, 252.2, 48*1+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot6spell) DrawSpritePlain("lgfx/UI/Slot6Spell.png", g->hid--, 252.2, 48*2+.1-20, TICSECOND);
+   HasUpgr(cupg_c_slot7spell) DrawSpritePlain("lgfx/UI/Slot7Spell.png", g->hid--, 252.2, 48*3+.1-20, TICSECOND);
+   HasUpgr(cupg_c_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 252.2, 48*4+.1-20, TICSECOND);
 }
 
 static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
