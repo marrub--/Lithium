@@ -3,7 +3,7 @@ actor Lith_SniperShotsFired : Inventory
    Inventory.MaxAmount 8
 }
 
-actor Lith_SniperRifle : Lith_Weapon
+actor Lith_SniperRifle : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_SniperRifle"
    Weapon.UpSound "weapons/sniper/draw"

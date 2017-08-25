@@ -70,16 +70,16 @@
 
 #include "lscripts/Weapons_Outcasts/1_ChargeFist.dec"
 #include "lscripts/Weapons_Outcasts/2_Revolver.dec"
-#include "lscripts/Weapons_Outcasts/3_LazShotgun.dec"
-#include "lscripts/Weapons_Outcasts/4_SniperRifle.dec"
 #include "lscripts/Weapons_Outcasts/5_MissileLauncher.dec"
 #include "lscripts/Weapons_Outcasts/6_PlasmaDiffuser.dec"
 
 #include "lscripts/Weapons_Marine/1_Fist.dec"
 #include "lscripts/Weapons_Marine/2_Pistol.dec"
 #include "lscripts/Weapons_Marine/3_Shotgun.dec"
+#include "lscripts/Weapons_Marine/3_LazShotgun.dec"
 #include "lscripts/Weapons_Marine/3_2_SuperShotgun.dec"
 #include "lscripts/Weapons_Marine/4_CombatRifle.dec"
+#include "lscripts/Weapons_Marine/4_SniperRifle.dec"
 #include "lscripts/Weapons_Marine/5_RocketLauncher.dec"
 #include "lscripts/Weapons_Marine/6_PlasmaRifle.dec"
 #include "lscripts/Weapons_Marine/7_OmegaCannon.dec"
