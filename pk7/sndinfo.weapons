@@ -506,6 +506,12 @@ $limit weapons/sshot/hit 0
 $limit weapons/sshot/fire 0
 
 //
+// Cercle
+//
+weapons/cercle/begin  lsounds/Cercle/Begin.flac  // Phantasy Star Online
+weapons/cercle/attack lsounds/Cercle/Attack.flac // 〃
+
+//
 // sord
 //
 weapons/sword/chargeup lsounds/Sword/Charge.flac  // Touhou 9: Phantasmagoria of Flower View

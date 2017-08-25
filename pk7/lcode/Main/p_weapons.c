@@ -3,6 +3,7 @@
 #include "lith_player.h"
 #include "lith_monster.h"
 #include "lith_hudid.h"
+#include "lith_world.h"
 
 #include <math.h>
 
@@ -466,6 +467,92 @@ void Lith_SurgeOfDestiny(void)
    for(int i = 0; i < (35 * 7) / 2; i++) {
       ACS_GiveInventory("Lith_SurgeOfDestiny", 1);
       ACS_Delay(2);
+   }
+}
+
+//
+// Lith_Cercle
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_Cercle(void)
+{
+   withplayer(LocalPlayer)
+   {
+      fixed ax, ay, az;
+
+      __with(int pufftid;)
+      {
+         ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024,
+            FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+
+         ax = ACS_GetActorX(pufftid);
+         ay = ACS_GetActorY(pufftid);
+         az = ACS_GetActorFloorZ(pufftid);
+      }
+
+      world.freeze(true);
+      ACS_Delay(2); // necessary so sounds may play
+
+      ACS_AmbientSound("weapons/cercle/begin", 127);
+
+      int fxtid = ACS_UniqueTID();
+      for(int i = 0; i < 100; i++)
+      {
+         fixed px = ACS_Cos(i / 100.0) * 77;
+         fixed py = ACS_Sin(i / 100.0) * 77;
+         int tid;
+
+         ACS_SpawnForced("Lith_CircleParticle", ax + px, ay + py, az + 7, tid = ACS_UniqueTID());
+
+         ACS_SetActorAngle(tid, i / 100.0);
+         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         ACS_Thing_ChangeTID(tid, fxtid);
+
+         ACS_Delay(i % 2 * (i / 30.0));
+      }
+
+      ACS_Delay(35);
+
+      int fxtid2 = ACS_UniqueTID();
+      ACS_SetUserVariable(fxtid, "user_trigger", true);
+      ACS_SetUserVariable(fxtid, "user_fxtid", fxtid2);
+
+      ACS_AmbientSound("weapons/cercle/attack", 127);
+
+      ACS_Delay(35);
+      ACS_SetUserVariable(fxtid2, "user_trigger", true);
+
+      ACS_Delay(7);
+      ACS_SetUserVariable(fxtid2, "user_trigger", true);
+
+      ACS_Delay(35);
+
+      int fxtid3 = ACS_UniqueTID();
+      for(int i = 0; i < 3; i++)
+      {
+         fixed px = ACS_Cos(i / 3.0) * 60;
+         fixed py = ACS_Sin(i / 3.0) * 60;
+         int tid;
+
+         ACS_SpawnForced("Lith_CircleSpearThrower", ax + px, ay + py, az + 24, tid = ACS_UniqueTID());
+
+         ACS_SetActorAngle(tid, i / 3.0);
+         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         ACS_Thing_ChangeTID(tid, fxtid3);
+
+         ACS_Delay(7);
+      }
+
+      ACS_Delay(10);
+
+      // NB: The projectiles take the TIDs of the throwers, so this is actually triggering them.
+      ACS_SetUserVariable(fxtid3, "user_trigger", true);
+
+      // Just in case.
+      ACS_Thing_Remove(fxtid);
+      ACS_Thing_Remove(fxtid2);
+
+      world.freeze(false);
    }
 }
 

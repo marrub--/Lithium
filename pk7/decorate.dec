@@ -99,6 +99,7 @@
 #include "lscripts/Weapons_CyberMage/Magic/4_Rend.dec"
 #include "lscripts/Weapons_CyberMage/Magic/5_Hulgyon.dec"
 #include "lscripts/Weapons_CyberMage/Magic/6_StarShot.dec"
+#include "lscripts/Weapons_CyberMage/Magic/7_Cercle.dec"
 
 #include "lscripts/Heretic/Ammo.dec"
 #include "lscripts/Heretic/Enemies.dec"
