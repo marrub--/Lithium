@@ -69,12 +69,12 @@
 #include "lscripts/Weapons/Gameboy.dec"
 
 #include "lscripts/Weapons_Outcasts/1_ChargeFist.dec"
-#include "lscripts/Weapons_Outcasts/2_Revolver.dec"
 #include "lscripts/Weapons_Outcasts/5_MissileLauncher.dec"
 #include "lscripts/Weapons_Outcasts/6_PlasmaDiffuser.dec"
 
 #include "lscripts/Weapons_Marine/1_Fist.dec"
 #include "lscripts/Weapons_Marine/2_Pistol.dec"
+#include "lscripts/Weapons_Marine/2_Revolver.dec"
 #include "lscripts/Weapons_Marine/3_Shotgun.dec"
 #include "lscripts/Weapons_Marine/3_LazShotgun.dec"
 #include "lscripts/Weapons_Marine/3_2_SuperShotgun.dec"

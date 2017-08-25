@@ -25,7 +25,7 @@ struct page_initializer const bip_pages[] = {
 
    {pcl_cybermage, "Mateba",        {"AOF"}},
    {pcl_cybermage, "MatebaUpgr",    {"Mateba", "AOF", "Algidistari"}},
-   {pcl_cybermage, "ShockRifle"},
+   {pcl_cybermage, "ShockRifle",    {"ChAri"}},
    {pcl_cybermage, "SPAS",          {"AOF", "Newvec"}},
    {pcl_cybermage, "SPASUpgr",      {"SPAS"}},
    {pcl_cybermage, "SPASUpg2",      {"SPAS", "Newvec"}},
@@ -108,7 +108,7 @@ struct page_initializer const bip_pages[] = {
    {.category = BIPC_PLACES},
    {pcl_outcasts,  "AetosVi"},
    {pcl_cybermage, "Algidistari"},
-   {pcl_marine,    "ChAri",          {"AetosVi"}},
+   {pcl_outcasts,  "ChAri",          {"AetosVi"}},
    {pcl_marine,    "DurlaPrime",     {"Earth", "AetosVi"}},
    {pcl_outcasts,  "Earth"},
    {pcl_cybermage, "Hell",           {"Earth"}},

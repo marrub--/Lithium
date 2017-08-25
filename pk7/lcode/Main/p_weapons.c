@@ -21,21 +21,21 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
    // Outcast Weapons
    {1, pcl_outcasts, N("ChargeFist"),      P("cfist"),    AT_None,                          },
-   {2, pcl_outcasts, N("Revolver"),        P("revolver"), AT_NMag, M("Revolver")            },
    {5, pcl_outcasts, N("MissileLauncher"), P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
    {6, pcl_outcasts, N("PlasmaDiffuser"),  P("plasdiff"), AT_Ammo, A("Plasma")              },
 
    // Marine Weapons
-   {1, pcl_marine, N("Fist"),            "MMMMHMHMMMHMMM", AT_None,            },
-   {2, pcl_marine, N("Pistol"),          P("pistol"),      AT_NMag, M("Pistol")},
-   {3, pcl_marine, N("Shotgun"),         P("shotgun"),     AT_None,            },
-   {3, pcl_marine, N("LazShotgun"),      P("lshotgun"),    AT_None,            },
-   {3, pcl_marine, N("SuperShotgun"),    P("ssg"),         AT_Ammo, A("Shell") },
-   {4, pcl_marine, N("CombatRifle"),     P("rifle"),       AT_NMag, M("Rifle") },
-   {4, pcl_marine, N("SniperRifle"),     P("sniper"),      AT_NMag, M("Sniper")},
-   {5, pcl_marine, N("GrenadeLauncher"), P("rocket"),      AT_Ammo, A("Rocket")},
-   {6, pcl_marine, N("PlasmaRifle"),     P("plasma"),      AT_Ammo, A("Plasma")},
-   {7, pcl_marine, N("BFG9000"),         P("cannon"),      AT_Ammo, A("Cannon")},
+   {1, pcl_marine, N("Fist"),            "MMMMHMHMMMHMMM", AT_None,              },
+   {2, pcl_marine, N("Pistol"),          P("pistol"),      AT_NMag, M("Pistol")  },
+   {2, pcl_marine, N("Revolver"),        P("revolver"),    AT_NMag, M("Revolver")},
+   {3, pcl_marine, N("Shotgun"),         P("shotgun"),     AT_None,              },
+   {3, pcl_marine, N("LazShotgun"),      P("lshotgun"),    AT_None,              },
+   {3, pcl_marine, N("SuperShotgun"),    P("ssg"),         AT_Ammo, A("Shell")   },
+   {4, pcl_marine, N("CombatRifle"),     P("rifle"),       AT_NMag, M("Rifle")   },
+   {4, pcl_marine, N("SniperRifle"),     P("sniper"),      AT_NMag, M("Sniper")  },
+   {5, pcl_marine, N("GrenadeLauncher"), P("rocket"),      AT_Ammo, A("Rocket")  },
+   {6, pcl_marine, N("PlasmaRifle"),     P("plasma"),      AT_Ammo, A("Plasma")  },
+   {7, pcl_marine, N("BFG9000"),         P("cannon"),      AT_Ammo, A("Cannon")  },
 
    // Cyber-Mage Weapons
    {1, pcl_cybermage, N("CFist"),         "YOUSONOFABITCH", AT_None,                           },

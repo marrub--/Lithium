@@ -24,7 +24,7 @@ static shopitem_t shopitems[] = {
    {{"RocketAmmo",      null,              9000   }, pcl_any,      5,    "Lith_RocketAmmo"                 },
    {{"PlasmaAmmo",      null,              75750  }, pcl_any,      1000, "Lith_PlasmaAmmo"                 },
    {{"ChargeFist",      "ChargeFist",      100000 }, pcl_marine,   1,    "Lith_ChargeFist",      sif_weapon},
-   {{"Revolver",        "Revolver",        500000 }, pcl_outcasts, 1,    "Lith_Revolver",        sif_weapon},
+   {{"Revolver",        "Revolver",        500000 }, pcl_marine,   1,    "Lith_Revolver",        sif_weapon},
    {{"LazShotgun",      "LazShotgun",      1800000}, pcl_marine,   1,    "Lith_LazShotgun",      sif_weapon},
    {{"SniperRifle",     "SniperRifle",     1800000}, pcl_marine,   1,    "Lith_SniperRifle",     sif_weapon},
    {{"MissileLauncher", "MissileLauncher", 2500000}, pcl_outcasts, 1,    "Lith_MissileLauncher", sif_weapon},

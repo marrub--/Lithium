@@ -3,7 +3,7 @@ actor Lith_RevolverShotsFired : Inventory
    Inventory.MaxAmount 6
 }
 
-actor Lith_Revolver : Lith_Weapon
+actor Lith_Revolver : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_Revolver"
    Weapon.SlotNumber 2
