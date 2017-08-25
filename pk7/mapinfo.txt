@@ -143,6 +143,7 @@ map TESTMAP "Test Map"
    Sky1 = "LITHBGS4", 0.1
    Sky2 = "LITHSKD2"
    Next = 1
+   Music = "lmusic/dandalins story.it"
    
    DoubleSky
 }

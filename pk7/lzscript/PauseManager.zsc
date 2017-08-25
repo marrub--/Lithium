@@ -11,16 +11,12 @@ class Lith_PauseManager play
       {
          if(!playeringame[i] || players[i].mo == null) continue;
          
-         if(on)
-         {
-            players[i].cheats |= CF_TOTALLYFROZEN;
-            players[i].mo.viewbob = 0;
-         }
-         else
-         {
-            players[i].cheats &= ~CF_TOTALLYFROZEN;
-            players[i].mo.viewbob = 1;
-            players[i].psprites.tics = players[i].psprites.curState.tics;
+         PlayerInfo pl = players[i];
+         if(on) {
+            pl.mo.viewbob = 0;
+         } else {
+            pl.mo.viewbob = 1;
+            pl.psprites.tics = pl.psprites.curState.tics;
          }
       }
    }

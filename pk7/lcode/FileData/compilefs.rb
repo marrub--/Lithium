@@ -23,13 +23,10 @@ def buf_lines outf, type, buf
          else                   sum + "   \"#{escape s.chomp}\";\n" end
       end)
    when :conc
-      buf = [*buf, nil].each_cons(2).map do |s, n|
-         if s == "\n" then
-            "\n\n"
-         else
-            if n == "\n" or n == nil then s.chomp
-            else                          s.chomp + " " end
-         end
+      buf = [*buf, "\n"].each_cons(2).map do |s, n|
+            if s == "\n" then "\n\n"
+         elsif n == "\n" then s.chomp
+         else                 s.chomp + " " end
       end
       outf.write(buf.each.with_index.inject("") do |sum, (s, i)|
          if i < buf.size-1 then sum + "   \"#{escape s}\"\n"

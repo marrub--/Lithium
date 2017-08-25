@@ -44,10 +44,13 @@ bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, boo
 //
 void Lith_ValidatePlayerTID(player_t *p)
 {
-   if(ACS_ActivatorTID() == 0)
+   if(ACS_ActivatorTID() == 0) {
       ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-   else if(p->tid != ACS_ActivatorTID())
+      LogDebug(log_dev, "set ptid from 0 to %i", p->tid);
+   } else if(p->tid != ACS_ActivatorTID()) {
+      LogDebug(log_dev, "set ptid from %i to %i", p->tid, ACS_ActivatorTID());
       p->tid = ACS_ActivatorTID();
+   }
 }
 
 //

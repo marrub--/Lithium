@@ -159,6 +159,7 @@ __str StrParam(__str fmt, ...);
 [[__call("ScriptS"), __optional_args(2)]] bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
+void Lith_TakeActorInventory(int tid, __str item, int amount);
 
 // Math ----------------------------------------------------------------------|
 [[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);

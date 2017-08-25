@@ -35,6 +35,36 @@ static fixed lmvar rain_dist;
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_FreezeTime
+//
+void Lith_FreezeTime(bool on)
+{
+   static int lmvar frozen;
+   if(on) {
+      if(!frozen++) {
+         Lith_ForPlayer() {
+            p->frozen++;
+            p->setVel(0, 0, 0, false, true);
+         }
+         Lith_ForPlayer() {
+            Lith_GiveActorInventory(p->tid, "Lith_TimeHax", 1);
+            Lith_GiveActorInventory(p->tid, "Lith_TimeHax2", 1);
+            break;
+         }
+      }
+   } else {
+      if(!--frozen) {
+         Lith_ForPlayer() p->frozen--;
+         Lith_ForPlayer() {
+            Lith_TakeActorInventory(p->tid, "PowerTimeFreezer", 1);
+            Lith_TakeActorInventory(p->tid, "Lith_TimeHax2", 1);
+            break;
+         }
+      }
+   }
+}
+
+//
 // Lith_BeginAngles
 //
 [[__call("ScriptS"), __extern("ACS")]]

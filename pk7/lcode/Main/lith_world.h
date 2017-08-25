@@ -47,6 +47,7 @@ __str Lith_CanonTime(int type);
 [[__optional_args(1)]] int Lith_UniqueID(int tid);
 [[__call("ScriptS"), __extern("ACS")]] void Lith_BeginAngles(int x, int y);
 [[__call("ScriptS"), __extern("ACS")]] fixed Lith_AddAngle(int x, int y);
+void Lith_FreezeTime(bool on);
 
 typedef struct worldinfo_s
 {
@@ -63,6 +64,7 @@ typedef struct worldinfo_s
    attr difficulty     {get: ACS_GetCVar("lith_sv_difficulty")}
    attr begAngles      {call: Lith_BeginAngles()}
    attr addAngles      {call: Lith_AddAngle()}
+   attr freeze         {call: Lith_FreezeTime()}
 
    bool   gsinit;
    bool   singleplayer;

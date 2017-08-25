@@ -65,5 +65,14 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
+//
+// Lith_TakeActorInventory
+//
+void Lith_TakeActorInventory(int tid, __str item, int amount)
+{
+   if(tid == 0) ACS_TakeInventory(item, amount);
+   else         ACS_TakeActorInventory(tid, item, amount);
+}
+
 // EOF
 

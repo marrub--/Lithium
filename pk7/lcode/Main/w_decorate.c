@@ -324,11 +324,7 @@ void Lith_GetSigil()
    if(world.dbgLevel)
       return;
 
-   p->frozen++;
-   p->setVel(0.0, 0.0, 0.0, false, true);
-
-   ACS_GiveInventory("Lith_TimeHax", 1);
-   ACS_GiveInventory("Lith_TimeHax2", 1);
+   world.freeze(true);
 
    ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
    ACS_SetHudSize(320, 200);
@@ -348,9 +344,7 @@ void Lith_GetSigil()
 
    ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 5);
 
-   ACS_TakeInventory("PowerTimeFreezer", 1);
-   ACS_TakeInventory("Lith_TimeHax2", 1);
-   p->frozen--;
+   world.freeze(false);
 }
 
 // EOF
