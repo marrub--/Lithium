@@ -52,6 +52,7 @@ parse file: Pickups.txt
 
 in language.misc.en.txt
 parse file: Misc.txt
+parse file: Changes.txt
 
 
 -- CBI Mail -------------------------------------------------------------------
