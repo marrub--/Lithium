@@ -94,8 +94,8 @@ static void Lith_PlayerDeath(void)
 
    if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
-      Lith_PlayerLoseUpgrades(p);
-      p->bip.losePages();
+      Lith_PlayerDeallocUpgrades(p);
+      p->bip.deallocate();
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
 

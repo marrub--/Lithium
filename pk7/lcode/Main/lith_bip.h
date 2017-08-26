@@ -20,7 +20,6 @@
 struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
 [[__optional_args(1)]] struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name, int pclass);
 [[__call("ScriptS")]] void Lith_DeallocateBIP(struct bip_s *bip);
-void Lith_PlayerLoseBIPPages(struct bip_s *bip);
 [[__optional_args(1)]] void Lith_DeliverMail(struct player *p, __str title, int flags);
 
 // Types ---------------------------------------------------------------------|
@@ -51,6 +50,7 @@ struct page_initializer
    __str name;
    bip_unlocks_t unlocks;
    int category;
+   bool isfree;
 };
 
 typedef struct bippage_s
@@ -71,7 +71,6 @@ typedef struct bip_s
    attr find       {call: Lith_FindBIPPage(this)}
    attr unlock     {call: Lith_UnlockBIPPage(this)}
    attr deallocate {call: Lith_DeallocateBIP(this)}
-   attr losePages  {call: Lith_PlayerLoseBIPPages(this)}
 
    // Stats
    int categoryavail[BIPC_MAX];
@@ -81,6 +80,7 @@ typedef struct bip_s
    int mailreceived, mailtrulyreceived;
 
    // State
+   bool init;
    bippage_t *curpage;
    int curpagenum;
    int curcategory;

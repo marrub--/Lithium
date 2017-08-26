@@ -120,6 +120,7 @@ typedef struct player_extdata_s
    upgrade_t        upgrades[UPGR_STATIC_MAX];
    upgrademap_t     upgrademap;
    int              upgrmax;
+   bool             upgrinit;
 
    loginfo_t loginfo;
    bool      hudenabled;

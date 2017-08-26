@@ -211,6 +211,9 @@ void Lith_ResetPlayer(player_t *p)
    ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
    ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
+   if(world.dbgScore)
+      p->score = 0xFFFFFFFFFFFFFFFFll;
+
    //
    // Reset data
 
@@ -253,14 +256,16 @@ void Lith_ResetPlayer(player_t *p)
    //
    // Static data
 
+   if(!p->bip.init)
+      Lith_PlayerInitBIP(p);
+
+   if(!p->upgrinit)
+      Lith_PlayerInitUpgrades(p);
+   else
+      Lith_PlayerReinitUpgrades(p);
+
    if(!p->staticinit)
    {
-      if(world.dbgScore)
-         p->score = 0xFFFFFFFFFFFFFFFFll;
-
-      Lith_PlayerInitBIP(p);
-      Lith_PlayerInitUpgrades(p);
-
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
@@ -274,8 +279,6 @@ void Lith_ResetPlayer(player_t *p)
 
       p->staticinit = true;
    }
-   else
-      Lith_PlayerReinitUpgrades(p);
 
    if(world.dbgItems)
    {
@@ -285,11 +288,6 @@ void Lith_ResetPlayer(player_t *p)
             ACS_GiveInventory(info->classname, 1);
       }
    }
-
-   p->bipUnlock("Pistol");
-   p->bipUnlock("Mateba");
-   p->bipUnlock("Blade");
-   p->bipUnlock("Delear");
 }
 
 // Static Functions ----------------------------------------------------------|

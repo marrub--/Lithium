@@ -85,20 +85,25 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 // AddToBIP
 //
 [[__optional_args(1)]]
-static void AddToBIP(bip_t *bip, int categ, int pclass, __str name, bip_unlocks_t const *unlocks)
+static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer const *pinit)
 {
-   __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", name);
+   __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
+   int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
 
-   bippage_t  *page = calloc(1, sizeof(bippage_t));
-               page->name     = name;
-               page->category = categ;
-               page->unlocked = false;
-   if(image)   page->image    = image;
-   if(unlocks) memmove(page->unlocks, unlocks, sizeof(*unlocks));
+   bippage_t *page = calloc(1, sizeof(bippage_t));
+
+   page->name     = pinit->name;
+   page->category = categ;
+   page->unlocked = false;
+   page->image    = image;
+   page->height   = height;
+   memmove(page->unlocks, pinit->unlocks, sizeof(page->unlocks));
+
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
 
-   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA) UnlockPage(bip, page, pclass);
+   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA || pinit->isfree)
+      UnlockPage(bip, page, pclass);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -120,7 +125,7 @@ void Lith_PlayerInitBIP(player_t *p)
       if(page->category)
          categ = page->category;
       else if(page->pclass & p->pclass)
-         AddToBIP(bip, categ, p->pclass, page->name, &page->unlocks);
+         AddToBIP(bip, categ, p->pclass, page);
    }
 
    ForCategory()
@@ -133,6 +138,8 @@ void Lith_PlayerInitBIP(player_t *p)
       ForCategory()        bip->categoryavail[categ] = bip->categorymax[categ];
       ForCategoryAndPage() page->unlocked = true;
    }
+
+   bip->init = true;
 }
 
 //
@@ -227,23 +234,7 @@ void Lith_DeallocateBIP(bip_t *bip)
 {
    ForCategory()
       bip->infogr[categ].free(free);
-}
-
-//
-// Lith_PlayerLoseBIPPages
-//
-void Lith_PlayerLoseBIPPages(bip_t *bip)
-{
-   ForCategory()
-   {
-      if(categ == BIPC_MAIL || categ == BIPC_EXTRA) continue;
-
-      ForPage()
-         page->unlocked = false;
-      bip->categoryavail[categ] = 0;
-   }
-
-   bip->pageavail = 0;
+   bip->init = false;
 }
 
 //

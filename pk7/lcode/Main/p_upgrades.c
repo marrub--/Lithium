@@ -293,7 +293,21 @@ void Lith_PlayerInitUpgrades(player_t *p)
       }
    }
 
+   p->upgrinit = true;
    #undef CheckPClass
+}
+
+//
+// Lith_PlayerDeallocUpgrades
+//
+void Lith_PlayerDeallocUpgrades(player_t *p)
+{
+   upgrademap_t_dtor(&p->upgrademap);
+
+   for(int i = 0; i < countof(p->upgrades); i++)
+      p->upgrades[i] = (upgrade_t){};
+
+   p->upgrinit = false;
 }
 
 //
@@ -314,19 +328,6 @@ void Lith_PlayerReinitUpgrades(player_t *p)
    ForUpgrade(upgr)
       if(upgr->wasactive)
          upgr->wasactive = false, upgr->toggle(p);
-}
-
-//
-// Lith_PlayerLoseUpgrades
-//
-void Lith_PlayerLoseUpgrades(player_t *p)
-{
-   ForUpgrade(upgr)
-      if(upgr->info->cost != 0 && upgr->owned)
-   {
-      upgr->owned = false;
-      p->upgradesowned--;
-   }
 }
 
 //

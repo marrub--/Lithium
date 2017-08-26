@@ -27,9 +27,9 @@ extern int UPGR_MAX;
 
 
 void Lith_PlayerInitUpgrades(struct player *p);
+void Lith_PlayerDeallocUpgrades(struct player *p);
 void Lith_PlayerDeinitUpgrades(struct player *p);
 void Lith_PlayerReinitUpgrades(struct player *p);
-void Lith_PlayerLoseUpgrades(struct player *p);
 
 void Lith_PlayerUpdateUpgrades(struct player *p);
 void Lith_PlayerRenderUpgrades(struct player *p);
