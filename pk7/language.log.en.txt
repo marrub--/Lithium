@@ -58,4 +58,10 @@
 "LITH_TXT_LOG_CBI_CSlot7Spell" = "> Installed Cercle de la Mort Spell Driver";
 "LITH_TXT_LOG_CBI_CRDistInter" = "> Installed Reality Distortion Interface";
 
+// Boss Warnings -------------------------------------------------------------|
+"LITH_TXT_LOG_BossWarnStan" =
+   "> \cgWarning: High demonic energy levels detected in area.";
+"LITH_TXT_LOG_BossWarnJem" =
+   "> \cr[WARNING] Demonic energy levels in area rising eratically.";
+
 // EOF

@@ -224,12 +224,12 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SPAS_A" = "Void Breath";
 "LITH_TXT_UPGRADE_EFFEC_SPAS_A" =
-   "Not implemented";
+   "Makes the Shotgun fire out wisps of energy that deal massive damage.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SPAS_B" = "Shell Autoloader";
 "LITH_TXT_UPGRADE_EFFEC_SPAS_B" =
-   "Not implemented";
+   "Automatically loads shells, removing the need to reload.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SMG_A" = "SMG Trimag";
@@ -249,17 +249,17 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_IonRifle_A" = "Rad. Ionizer";
 "LITH_TXT_UPGRADE_EFFEC_IonRifle_A" =
-   "Not implemented";
+   "Ionizes enemies, making them take more damage when hit for a few seconds.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_IonRifle_B" = "Overloader";
 "LITH_TXT_UPGRADE_EFFEC_IonRifle_B" =
-   "Not implemented";
+   "Lets you hold down fire to charge the Ion Rifle, at the cost of cooldown time.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_CPlasma_A" = "Pulse Charger";
 "LITH_TXT_UPGRADE_EFFEC_CPlasma_A" =
-   "Not implemented";
+   "Makes the Plasma Rifle fire out long streams of deadly plasma.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_ShipGun_A" = "Longinus Solspear";
@@ -270,7 +270,8 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_ShipGun_B" = "Surge of Destiny";
 "LITH_TXT_UPGRADE_EFFEC_ShipGun_B" =
-   "Not implemented";
+   "The Star Destroyer will emit an aura of protection while firing out projectiles "
+   "from all directions.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_DarkCannon" = "????????";

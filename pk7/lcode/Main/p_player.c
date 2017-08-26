@@ -359,7 +359,7 @@ static void Lith_BossWarning(player_t *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->log("> \CgWarning: High demonic energy levels detected in area.");
+      p->log("%S", Language("LITH_TXT_LOG_BossWarn%S", p->discrim));
 }
 
 //
