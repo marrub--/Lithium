@@ -1,21 +1,22 @@
 #ifdef FromUI
 if(p->num == 0) {
    Category("Gameplay");
-   ServerInt("Difficulty Base",    "lith_sv_difficulty", 1, 100);
-   ServerFloat("Score multiplier", "lith_sv_scoremul", 0, 10);
+   ServerInt("Difficulty Base",    "%", "lith_sv_difficulty", 1, 100);
+   ServerFloat("Score multiplier", "x", "lith_sv_scoremul", 0, 10);
    ServerBool("Explode on death",  "lith_sv_revenge");
+   ServerInt("Autosave Interval",  "min", "lith_sv_autosave", 0, 30);
 }
 
 Category("GUI");
-Float("Horizontal cursor speed", "lith_gui_xmul", 0.1f, 2.0f);
-Float("Vertical cursor speed",   "lith_gui_ymul", 0.1f, 2.0f);
-Enum("Color Theme",              "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
+Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1f, 2.0f);
+Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1f, 2.0f);
+Enum("Color Theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
 if(world.grafZoneEntered)
    ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
 Category("Player");
-Float("Damage bob multiplier", "lith_player_damagebobmul", 0.0f, 1.0f);
-Bool("Bob view when damaged",  "lith_player_damagebob");
+Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0f, 1.0f);
+Bool("Bob view when damaged",       "lith_player_damagebob");
 Bool("Log score gained",                  "lith_player_scorelog");
 Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");
@@ -29,9 +30,9 @@ Bool("Stupid pickup messages",            "lith_player_stupidpickups");
 Bool("Log ammo pickups",                  "lith_player_ammolog");
 
 Category("Weapons");
-Float("Scope zoom factor", "lith_weapons_zoomfactor", 1.0f, 10.0f);
-Float("Scope opacity",     "lith_weapons_scopealpha", 0.0f, 1.0f);
-Float("Weapon opacity",    "lith_weapons_alpha",      0.0f, 1.0f);
+Float("Scope zoom factor", "x", "lith_weapons_zoomfactor", 1.0f, 10.0f);
+Float("Scope opacity",     "x", "lith_weapons_scopealpha", 0.0f, 1.0f);
+Float("Weapon opacity",    "x", "lith_weapons_alpha",      0.0f, 1.0f);
 Bool("Modal Rifle scope",  "lith_weapons_riflescope");
 Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
 
@@ -43,9 +44,9 @@ Bool("Draw log from top of screen", "lith_hud_logfromtop");
 Bool("Draw reactive armor indicator", "lith_hud_showarmorind");
 
 Category("Vital Scanner");
-Int("X offset",         "lith_scanner_xoffs", -160, 160);
-Int("Y offset",         "lith_scanner_yoffs", -180, 20);
-Enum("Color",           "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set));
+Int("X offset",         "px", "lith_scanner_xoffs", -160, 160);
+Int("Y offset",         "px", "lith_scanner_yoffs", -180, 20);
+Enum("Color", "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set));
 Bool("Slide to target", "lith_scanner_slide");
 Bool("Health bar",      "lith_scanner_bar");
 Bool("Alternate font",  "lith_scanner_altfont");
@@ -168,25 +169,25 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
       y += 10; \
    } while(0)
 
-#define Float(label, cvar, minima, maxima) \
+#define Float(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
          __with(double set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
+         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, .suf = s))) \
             p->setCVarK(cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define Int(label, cvar, minima, maxima) \
+#define Int(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
          __with(int set = p->getCVarI(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
+         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true, .suf = s))) \
             p->setCVarI(cvar, set + diff); \
       } \
       y += 10; \
@@ -204,25 +205,25 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
       y += 10; \
    } while(0)
 
-#define ServerFloat(label, cvar, minima, maxima) \
+#define ServerFloat(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
          __with(double set = ACS_GetCVarFixed(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set))) \
+         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, .suf = s))) \
             ACS_SetCVarFixed(cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define ServerInt(label, cvar, minima, maxima) \
+#define ServerInt(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
          __with(int set = ACS_GetCVar(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true))) \
+         if((diff = Lith_GUI_Slider(g, 280 - slddefault.w, y, minima, maxima, set, true, .suf = s))) \
             ACS_SetCVar(cvar, set + diff); \
       } \
       y += 10; \

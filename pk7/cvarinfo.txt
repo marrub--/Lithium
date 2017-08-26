@@ -74,6 +74,7 @@ server bool  lith_sv_revenge       = true;
 server float lith_sv_scoremul      = 1.25;
 server bool  lith_sv_seriousmode   = false;
 server bool  lith_sv_pauseinmenus  = true;
+server int   lith_sv_autosave      = 0;
 
 // Bosses
 server bool lith_sv_nobosses    = false;

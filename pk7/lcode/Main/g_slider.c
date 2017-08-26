@@ -67,10 +67,10 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
 
    // draw value
    if(pre->font) {
-      if(a->integ)
-         HudMessageF(pre->font, "\Cj%i",     (int)(round(norm * 100.) / 100.));
-      else
-         HudMessageF(pre->font, "\Cj%.1k", (fixed)(round(norm * 100.) / 100.));
+      __str suf = a->suf ? a->suf : "";
+      float amt = roundf(norm * 100.f) / 100.f;
+      if(a->integ) HudMessageF(pre->font, "\Cj%i%S",     (int)amt, suf);
+      else         HudMessageF(pre->font, "\Cj%.1k%S", (fixed)amt, suf);
    }
 
    HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);

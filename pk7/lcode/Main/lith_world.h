@@ -65,6 +65,7 @@ typedef struct worldinfo_s
    attr begAngles      {call: Lith_BeginAngles()}
    attr addAngles      {call: Lith_AddAngle()}
    attr freeze         {call: Lith_FreezeTime()}
+   attr autosave       {get: ACS_GetCVar("lith_sv_autosave")}
 
    bool   gsinit;
    bool   singleplayer;
@@ -78,7 +79,6 @@ typedef struct worldinfo_s
    int    secretsfound;
    double scoremul;
    long   ticks;
-   bool   scoregolf;
    int    game;
 
    // Bosses
