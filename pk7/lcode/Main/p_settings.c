@@ -56,7 +56,6 @@ if(p->num == 0) {
    ServerBool("Replace skies",         "lith_sv_sky");
 
    Category("Game Modes");
-   ServerBool("Score Golf mode",  "lith_sv_scoregolf");
    ServerBool("Are you serious?", "lith_sv_seriousmode");
 }
 

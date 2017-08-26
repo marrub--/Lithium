@@ -17,6 +17,7 @@
 #define N(a) .classname = "Lith_" a, .name = a
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
+   // !!ACHTUNG!! DON'T FUCKING CHANGE THIS WITHOUT CHANGING THE HEADER FIRST !!ACHTUNG!!
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
    // Outcast Weapons

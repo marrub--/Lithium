@@ -421,17 +421,6 @@ static void Lith_PlayerScore(player_t *p)
       p->scoreaccumtime--;
    else if(p->scoreaccumtime < 0)
       p->scoreaccumtime++;
-
-   if(world.scoregolf)
-   {
-      p->score += 200000;
-
-      if(p->score > 0x7FFFFFFF)
-      {
-         Log("Game over!");
-         ACS_GiveInventory("Lith_Die", 1);
-      }
-   }
 }
 
 //

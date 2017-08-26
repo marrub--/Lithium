@@ -73,7 +73,6 @@ server bool  lith_sv_sky           = false;
 server bool  lith_sv_revenge       = true;
 server float lith_sv_scoremul      = 1.25;
 server bool  lith_sv_seriousmode   = false;
-server bool  lith_sv_scoregolf     = false;
 server bool  lith_sv_pauseinmenus  = true;
 
 // Bosses

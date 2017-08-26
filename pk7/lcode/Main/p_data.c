@@ -197,9 +197,6 @@ void Lith_ResetPlayer(player_t *p)
    //
    // Map-static data
 
-   if(world.scoregolf)
-      p->score = 0;
-
    p->old = (player_delta_t){};
 
    // If the map sets the TID on the first tic, it could already be set here.

@@ -421,7 +421,6 @@ static void GSInit(void)
       CheckEnemyCompat();
 
       world.game         = ACS_GetCVar("__lith_game");
-      world.scoregolf    = ACS_GetCVar("lith_sv_scoregolf");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
       world.cbiperf = 10;
@@ -480,9 +479,8 @@ static void MInit(void)
          {0xF5,0xB2,0x22},
       };
       ACS_CreateTranslationStart(42470 + i);
-      ACS_CreateTranslationRGB(80, 111,
-         trs[i].r,   trs[i].g,   trs[i].b,
-         trs[i].r/4, trs[i].g/4, trs[i].b/4);
+      ACS_CreateTranslationRGB(80, 111, trs[i].r,   trs[i].g,   trs[i].b,
+                                        trs[i].r/4, trs[i].g/4, trs[i].b/4);
       ACS_CreateTranslationEnd();
    }
 }
