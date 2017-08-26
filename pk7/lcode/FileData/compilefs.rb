@@ -65,7 +65,7 @@ end
 def procdir outf, type, arg
    case type
    when "comment"
-      comment outf, arg
+      comment outf, " " + arg
    when "put data"
       set, out = split_arg arg, "->"
       single_line outf, out, set

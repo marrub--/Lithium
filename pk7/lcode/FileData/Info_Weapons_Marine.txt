@@ -1,13 +1,4 @@
 ## Marine --------------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_Fist | Knife
-
-== LITH_TXT_INFO_SHORT_ChargeFist | Charge Fist
-== LITH_TXT_INFO_TITLE_ChargeFist | Utsu Denkasou Assault Bracelet
-@@ LITH_TXT_INFO_DESCR_ChargeFist
-A powerful melee weapon which attaches to the left wrist. Uses energy from a
-cybernetic power source to condense weight and force into super-destructive
-punches.
-
 == LITH_TXT_INFO_SHORT_Pistol | Pistol
 == LITH_TXT_INFO_TITLE_Pistol | Custom Ka Haa'umi Pistol
 @@ LITH_TXT_INFO_DESCR_Pistol
@@ -21,6 +12,15 @@ Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can be
 reloaded easily, since you duct-taped a magazine holder on the side. Features
 a small CB-Scope similar to that of most other Omakeda weapons.
 
+##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_Revolver | Revolver
+== LITH_TXT_INFO_TITLE_Revolver | $LITH_TXT_INFO_SHORT_Revolver
+@@ LITH_TXT_INFO_DESCR_Revolver
+Other than this weapon being made on Earth, all you need to know about it is
+that it fires six Teflon-plated .50 Action Express rounds and loads with a
+break on the top. Crack some skulls with it.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_Shotgun | Shotgun
 == LITH_TXT_INFO_TITLE_Shotgun | Hiku Mk.2 Shotgun
 @@ LITH_TXT_INFO_DESCR_Shotgun
@@ -33,6 +33,7 @@ the firing mechanism.
 
 Most military models come with a CB-Scope.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_ShotgunUpgr | $LITH_TXT_UPGRADE_TITLE_GaussShotty
 == LITH_TXT_INFO_TITLE_ShotgunUpgr | Hiku Mk.2 Shotgun Gauss Mod
 @@ LITH_TXT_INFO_DESCR_ShotgunUpgr
@@ -43,6 +44,7 @@ shell firing mechanism and replaced it with a high-power photon condenser.
 This both removes the need to chamber rounds and gives a nice boost in fire
 rate. The gun is, essentially, completely different in use.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_ShotgunUpg2 | $LITH_TXT_UPGRADE_TITLE_PoisonShot
 == LITH_TXT_INFO_TITLE_ShotgunUpg2 | Hiku Mk.2 Shotgun Poison Mod
 @@ LITH_TXT_INFO_DESCR_ShotgunUpg2
@@ -55,6 +57,19 @@ This rather terrifying upgrade was never updated to the Mk.2 model. The
 internal structure is similar enough that one may still use it with the Mk.2,
 but the plasma firing mechanism must be disabled.
 
+##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_LazShotgun | Laser Shotgun
+== LITH_TXT_INFO_TITLE_LazShotgun | Kaether Photon Rifle
+@@ LITH_TXT_INFO_DESCR_LazShotgun
+Made during a war on Earth by a long nameless company, this weapon excels in
+penetrating enemies with pure energy.
+
+A superconducting coil in the middle is used to channel tons of energy into a
+photon accelerator at extremely quick speeds, recharged by cocking the gun.
+
+Great for cooking chicken.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_SuperShotgun | Super Shotgun
 == LITH_TXT_INFO_TITLE_SuperShotgun | $LITH_TXT_INFO_SHORT_SuperShotgun
 @@ LITH_TXT_INFO_DESCR_SuperShotgun
@@ -71,6 +86,7 @@ It is currently unknown how this actually works, and it possibly uses
 This weapon bears manufacturer marks in a non-human language and is known only
 as the Super Shotgun.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_CombatRifle | Combat Rifle
 == LITH_TXT_INFO_TITLE_CombatRifle | AllPoint 75-b Assault Rifle
 @@ LITH_TXT_INFO_DESCR_CombatRifle
@@ -84,6 +100,7 @@ super-tough exterior made out of titanium.
 Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade
 at a time, but packs a great punch.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_RifleUpgr | $LITH_TXT_UPGRADE_TITLE_RifleModes
 == LITH_TXT_INFO_TITLE_RifleUpgr | AllPoint 75-c Modal Trigger
 @@ LITH_TXT_INFO_DESCR_RifleUpgr
@@ -95,6 +112,7 @@ The 75-c Modal Trigger enables a third firing mode in which four two-round
 bursts are fired sequentially. Using this mode also enables a partial
 CB-Scope, which unfortunately does little more than obstruct your view.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_RifleUpg2 | $LITH_TXT_UPGRADE_TITLE_LaserRCW
 == LITH_TXT_INFO_TITLE_RifleUpg2 | SF-209 Laser Rifle
 @@ LITH_TXT_INFO_DESCR_RifleUpg2
@@ -103,6 +121,18 @@ much more similar to a photon rifle. The combat effectiveness of the rifle is
 increased quite a lot, as it now fires 4tW penetrating beams capable of
 ripping into most unarmored vehicles.
 
+##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_SniperRifle | Sniper Rifle
+== LITH_TXT_INFO_TITLE_SniperRifle | Facer AM-49d Sniper Rifle
+@@ LITH_TXT_INFO_DESCR_SniperRifle
+An extremely strong rifle which fires .50 BMG rounds, able to destroy most
+living targets completely and penetrate weakly armored vehicles.
+
+The main production of these weapons spanned about 20 years, and they were
+sold to mercenaries in bulk. For a long time, this rifle had been the sniper's
+main weapon of choice.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_GrenadeLauncher | Grenade Launcher
 == LITH_TXT_INFO_TITLE_GrenadeLauncher | SYM4.3 D.671 EXPLOSIVE LAUNCHER
 @@ LITH_TXT_INFO_DESCR_GrenadeLauncher
@@ -117,6 +147,7 @@ This seems to use nanomachines or some similar technology to propel rockets
 after they've been ignited and left the barrel; thus causing a small lag
 before the rocket takes off fully.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_LauncherUpgr | $LITH_TXT_UPGRADE_TITLE_ChargeRPG
 == LITH_TXT_INFO_TITLE_LauncherUpgr | UE-1 "Eight-Ball" Revolving Launcher
 @@ LITH_TXT_INFO_DESCR_LauncherUpgr
@@ -129,6 +160,7 @@ mode shoots all eight in a horizontal line forward. The second mode shoots the
 rockets in a spiral pattern for maximum damage on one area, and the third and
 final mode hurls all of the grenades out of their rocket casings.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_LauncherUpg2 | $LITH_TXT_UPGRADE_TITLE_HomingRPG
 == LITH_TXT_INFO_TITLE_LauncherUpg2 | SYM4.3 D.788 HOMING ROCKET SYSTEM
 @@ LITH_TXT_INFO_DESCR_LauncherUpg2
@@ -140,6 +172,7 @@ Similar in concept to traditional rocket-based homing systems, this design is
 both more space-efficient and much more accurate, allowing it to be used even
 in a launcher as small as the D.671.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_PlasmaRifle | Plasma Rifle
 == LITH_TXT_INFO_TITLE_PlasmaRifle | AllPoint 68-n Plasma Rifle
 @@ LITH_TXT_INFO_DESCR_PlasmaRifle
@@ -154,6 +187,7 @@ The primary fire mode emits 7.52tW per bolt at approximately 2,800 bolts per
 minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute.
 This thing will make Swiss cheese out of anything in its path.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_PlasmaUpgr | $LITH_TXT_UPGRADE_TITLE_PlasLaser
 == LITH_TXT_INFO_TITLE_PlasmaUpgr | AllPoint 68-o Plasmatic Laser
 @@ LITH_TXT_INFO_DESCR_PlasmaUpgr
@@ -169,6 +203,7 @@ The upgrade was, unfortunately, woefully expensive. It has been sold only to
 private investors for quite some time now, but thankfully, your employer is
 one of them.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_PlasmaUpg2 | $LITH_TXT_UPGRADE_TITLE_PartBeam
 == LITH_TXT_INFO_TITLE_PlasmaUpg2 | SF-2012 Ion Acceleration Cannon
 @@ LITH_TXT_INFO_DESCR_PlasmaUpg2
@@ -181,6 +216,7 @@ accurate line.
 This weapon has a reputation for being rather useless in defending a space
 ship from the inside, as it ends up melting holes in the hull.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_BFG9000 | Omega Cannon
 == LITH_TXT_INFO_TITLE_BFG9000 | $LITH_TXT_INFO_SHORT_BFG9000
 @@ LITH_TXT_INFO_DESCR_BFG9000
@@ -195,6 +231,7 @@ for some reason.
 This weapon was acquired by your employers via the black market group "Cid"
 for a hefty price. Take care of it.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_CannonUpgr | $LITH_TXT_UPGRADE_TITLE_PunctCannon
 == LITH_TXT_INFO_TITLE_CannonUpgr | Omega Cannon: Punctuator Buffer
 @@ LITH_TXT_INFO_DESCR_CannonUpgr
@@ -210,6 +247,7 @@ and wanted whoever attained it to be all-powerful.
 
 Also, the CB-Scope works again, somehow.
 
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_CannonUpg2 | $LITH_TXT_UPGRADE_TITLE_OmegaRail
 == LITH_TXT_INFO_TITLE_CannonUpg2 | Omega Cannon: Railgun
 @@ LITH_TXT_INFO_DESCR_CannonUpg2

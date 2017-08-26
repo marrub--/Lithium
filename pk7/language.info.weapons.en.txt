@@ -4,33 +4,18 @@
 
 "LITH_TXT_INFO_SHORT_Sword" = "sord";
 "LITH_TXT_INFO_SHORT_Gameboy" = "Game Nanhai";
+"LITH_TXT_INFO_SHORT_CFist" = "Spell Selector";
+"LITH_TXT_INFO_SHORT_Fist" = "Knife";
 
-// Shop Weapons --------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Revolver" = "Revolver";
-"LITH_TXT_INFO_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
-"LITH_TXT_INFO_DESCR_Revolver" =
-   "Other than this weapon being made on Earth, all you need to know about it is "
-   "that it fires six Teflon-plated .50 Action Express rounds and loads with a "
-   "break on the top. Crack some skulls with it.";
-"LITH_TXT_INFO_SHORT_LazShotgun" = "Laser Shotgun";
-"LITH_TXT_INFO_TITLE_LazShotgun" = "Kaether Photon Rifle";
-"LITH_TXT_INFO_DESCR_LazShotgun" =
-   "Made during a war on Earth by a long nameless company, this weapon excels in "
-   "penetrating enemies with pure energy."
-   "\n\n"
-   "A superconducting coil in the middle is used to channel tons of energy into a "
-   "photon accelerator at extremely quick speeds, recharged by cocking the gun."
-   "\n\n"
-   "Great for cooking chicken.";
-"LITH_TXT_INFO_SHORT_SniperRifle" = "Sniper Rifle";
-"LITH_TXT_INFO_TITLE_SniperRifle" = "Facer AM-49d Sniper Rifle";
-"LITH_TXT_INFO_DESCR_SniperRifle" =
-   "An extremely strong rifle which fires .50 BMG rounds, able to destroy most "
-   "living targets completely and penetrate weakly armored vehicles."
-   "\n\n"
-   "The main production of these weapons spanned about 20 years, and they were "
-   "sold to mercenaries in bulk. For a long time, this rifle had been the sniper's "
-   "main weapon of choice.";
+// Outcast Weapons -----------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_ChargeFist" = "Charge Fist";
+"LITH_TXT_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";
+"LITH_TXT_INFO_DESCR_ChargeFist" =
+   "A powerful melee weapon which attaches to the left wrist. Uses energy from a "
+   "cybernetic power source to condense weight and force into super-destructive "
+   "punches.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_MissileLauncher" = "Missile Launcher";
 "LITH_TXT_INFO_TITLE_MissileLauncher" = "X-400 Lance-missiles";
 "LITH_TXT_INFO_DESCR_MissileLauncher" =
@@ -45,6 +30,8 @@
    "cylinder revolves. New ammunition can be loaded by shoving it carefully into "
    "the underside of the gun, similar to a shotgun, thanks to a convenient "
    "automatic rotation as it detects newly loaded missiles.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_PlasmaDiffuser" = "Plasma Diffuser";
 "LITH_TXT_INFO_TITLE_PlasmaDiffuser" = "SYM4.3 D.640 PLASMA DIFFUSER";
 "LITH_TXT_INFO_DESCR_PlasmaDiffuser" =
@@ -53,7 +40,6 @@
    "designed by MDDO, as well as newer components patented by Semaphore Inc.";
 
 // Cyber-Mage ----------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_CFist" = "Spell Selector";
 "LITH_TXT_INFO_SHORT_Mateba" = "Mateba";
 "LITH_TXT_INFO_TITLE_Mateba" = "Mateba R119";
 "LITH_TXT_INFO_DESCR_Mateba" =
@@ -68,6 +54,8 @@
    "Due to the original design being lost in time, this revolver sports several "
    "accuracy deficiencies, but nonetheless has the classic look and feel of the "
    "original gun. Produced by A.O.F Inc. for knight-class units.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_MatebaUpgr" = "$LITH_TXT_UPGRADE_TITLE_Mateba_A";
 "LITH_TXT_INFO_TITLE_MatebaUpgr" = "\cdFinirentur\c-, \cgRussorum\c- 19";
 "LITH_TXT_INFO_DESCR_MatebaUpgr" =
@@ -81,7 +69,24 @@
    "potentially overload the user. While this modification was created by A.O.F "
    "Inc, the Finirentur method was created recently by mages of Neptune 11 in "
    "Algidistari.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ShockRifle" = "Shock Rifle";
+"LITH_TXT_INFO_TITLE_ShockRifle" = "Home-made Shock Rifle";
+"LITH_TXT_INFO_DESCR_ShockRifle" =
+   "This weapon is a modification of a rifle made on Ch'ari, a memento your friend "
+   "gave to you to ravage for parts. The magazine has been moved from the bottom "
+   "(which is now an ejection port) to the back, where it's convenient to reload."
+   "\n\n"
+   "This placement also allows for the bullets to be electrified with several "
+   "hundred volts before leaving the barrel, causing anything that gets hit by it "
+   "to be electrocuted harshly, hence your name for it: the \"Shock Rifle.\""
+   "\n\n"
+   "While the weapon only has a 7-round magazine, it fires extremely deadly "
+   "7.62x54mmR cartridges with almost pinpoint accuracy, thanks to being extremely "
+   "well-manufactured, likely under the care of a very skilled Kiri craftsman.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SPAS" = "Shotgun";
 "LITH_TXT_INFO_TITLE_SPAS" = "NV48 12-Gauge Shotgun";
 "LITH_TXT_INFO_DESCR_SPAS" =
@@ -92,7 +97,19 @@
    "It fires any standard high-potency 12-gauge shell, and loads 5 shots. The "
    "design is extremely simple, but it does not overheat or jam often, is cheap to "
    "produce, and is very, very powerful.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SPASUpgr" = "$LITH_TXT_UPGRADE_TITLE_SPAS_A";
+"LITH_TXT_INFO_TITLE_SPASUpgr" = "\cdInvalidassero\c-, \cgRussorum\c- 14";
+"LITH_TXT_INFO_DESCR_SPASUpgr" =
+   "The 14th method of the \cgRussum\c- mode, Invalidassero is a fairly potent, "
+   "purple-ish colored magic substance that sticks to projectiles such as buckshot."
+   "\n\n"
+   "This substance will, upon sudden velocity increase, vibrate rapidly and cause "
+   "projectiles to both go off-target and do loads of damage, as well as explode "
+   "on impact. The origin of this method is unknown.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SPASUpg2" = "$LITH_TXT_UPGRADE_TITLE_SPAS_B";
 "LITH_TXT_INFO_TITLE_SPASUpg2" = "NV48-1 Shell Auto-loader";
 "LITH_TXT_INFO_DESCR_SPASUpg2" =
@@ -105,6 +122,8 @@
    "\n\n"
    "The weapon must be fired a bit slower (and is forced to) due to the violent "
    "nature of the magic being used, and the added recoil.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SMG" = "Sub-Machine Gun";
 "LITH_TXT_INFO_TITLE_SMG" = "SYM4.3 D.22 MODEL M SUBMACHINE GUN";
 "LITH_TXT_INFO_DESCR_SMG" =
@@ -118,6 +137,8 @@
    "5.7x28mm bullets, manufactured by various nameless companies, and loads "
    "bullpup. It has since been re-branded by SYM4.3, who now produce it for "
    "Omakeda with royalties.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SMGUpgr" = "$LITH_TXT_UPGRADE_TITLE_SMG_A";
 "LITH_TXT_INFO_TITLE_SMGUpgr" = "Arms Annex F474";
 "LITH_TXT_INFO_DESCR_SMGUpgr" =
@@ -129,16 +150,34 @@
    "load, and so care must be taken while reloading the gun to not move too "
    "suddenly and cause the buffer to rip. If this did occur, the weapon would "
    "displode, and bullets would fly out constantly.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SMGUpg2" = "$LITH_TXT_UPGRADE_TITLE_SMG_B";
+"LITH_TXT_INFO_TITLE_SMGUpg2" = "Arms Annex 138D5";
+"LITH_TXT_INFO_DESCR_SMGUpg2" =
+   "The AA/138D5 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which "
+   "places a Blue-type FFC Magic Extruder into the barrel."
+   "\n\n"
+   "This magic extruder gives all bullets leaving the barrel automatic target "
+   "homing capabilities. The bullets may not only lean toward enemies you aim at, "
+   "but also enemies nearby given a good enough range.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SMGUpg3" = "$LITH_TXT_UPGRADE_TITLE_SMG_C";
 "LITH_TXT_INFO_TITLE_SMGUpg3" = "SYM4.3 D.24 MODEL M SAFE TRIGGER";
 "LITH_TXT_INFO_DESCR_SMGUpg3" =
-   "Complaints from users of the Model M SMG were not many for SYM4.3, however they "
-   "were actually the most abundant of complaints the company had ever received."
+   "Complaints from users of the Model M SMG were not many for SYM4.3, but despite "
+   "this, they were actually the most abundant of complaints the company had ever "
+   "received on any weapon."
    "\n\n"
-   "In the interest of their public face, they convinced the company producing the "
-   "gun to make a replacement for the hammer that could detect the heat of the "
-   "barrel and stop firing until it has sufficiently cooled down.";
+   "In the interest of their image of absolute quality, they convinced the company "
+   "producing the gun to make a replacement for the hammer that could detect the "
+   "heat of the barrel and stop firing until it has sufficiently cooled down."
+   "\n\n"
+   "For all intents and purposes, this plan worked great for everyone buying new or "
+   "intending to buy the upgrade kit.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_IonRifle" = "Ion Rifle";
 "LITH_TXT_INFO_TITLE_IonRifle" = "KDA-[Thrown] Model 11 Ion Rifle";
 "LITH_TXT_INFO_DESCR_IonRifle" =
@@ -154,12 +193,50 @@
    "This is in part required due to the immense heat that would be caused by "
    "opening the weapon prematurely after firing, and the complexity that would be "
    "needed to have a fully automatic round cycling system.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_IonRifleUpgr" = "$LITH_TXT_UPGRADE_TITLE_IonRifle_A";
+"LITH_TXT_INFO_TITLE_IonRifleUpgr" = "KDA-[Radiator] M11 Radioactive Ionizer";
+"LITH_TXT_INFO_DESCR_IonRifleUpgr" =
+   "An odd upgrade for the Model 11 Ion Rifle by Kazami Defense Arms that modifies "
+   "the internal barrel to not only superheat projectiles, but irradiate them with "
+   "a small amount of radioactive isotope."
+   "\n\n"
+   "The result of this is extremely hot, explosive, radioactive projectiles that "
+   "explode upon impact and dangerously irradiate enemies so much that they get "
+   "torn apart from the inside."
+   "\n\n"
+   "Don't you just want to buy 5 of 'em?";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_IonRifleUpg2" = "$LITH_TXT_UPGRADE_TITLE_IonRifle_B";
+"LITH_TXT_INFO_TITLE_IonRifleUpg2" = "KDA-[Overloader] M11 Overload Charger";
+"LITH_TXT_INFO_DESCR_IonRifleUpg2" =
+   "The Overloader is a modification for the Model 11 Ion Rifle by Kazami Defense "
+   "Arms. It removes the heat charging cap, allowing the weapon to over-charge to "
+   "just over twice the normal amount of heat, allowing the projectile to be "
+   "launched with an extraordinary amount of speed and pressure, almost quadrupling "
+   "the damage output."
+   "\n\n"
+   "Due to the immense amount of heat in the chamber, the weapon must be cooled off "
+   "by air exposure for a few moments after firing.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CPlasmaRifle" = "Plasma Rifle";
 "LITH_TXT_INFO_TITLE_CPlasmaRifle" = "$LITH_TXT_INFO_SHORT_PlasmaRifle";
 "LITH_TXT_INFO_DESCR_CPlasmaRifle" = "$LITH_TXT_INFO_DESCR_PlasmaRifle";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CPlasmaUpgr" = "$LITH_TXT_UPGRADE_TITLE_CPlasma_A";
+"LITH_TXT_INFO_TITLE_CPlasmaUpgr" = "MD 47.65.69.73.74 Pulse Charger";
+"LITH_TXT_INFO_DESCR_CPlasmaUpgr" =
+   "When MDDO was designing the Plasma Rifle, they were mostly experimenting with "
+   "weapons manufacturing and attempting to make sense of mass production. One of "
+   "the results of this internal testing was the Pulse Charger: An oscillating "
+   "plasma emitter similar to the original mechanism, but made for accuracy over "
+   "speed.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_StarDestroyer" = "Star Destroyer";
 "LITH_TXT_INFO_TITLE_StarDestroyer" = "The Star Destroyer";
 "LITH_TXT_INFO_DESCR_StarDestroyer" =
@@ -175,10 +252,40 @@
    "The resulting projectile grows in size as it disperses energy in front of it, "
    "causing hundreds of smaller projectiles to come out as it rips through "
    "anything in its path.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ShipGunUpgr" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_A";
+"LITH_TXT_INFO_TITLE_ShipGunUpgr" = "The Forsaken Longinus Solspear";
+"LITH_TXT_INFO_DESCR_ShipGunUpgr" =
+   "The first of the three ancient bolts of the Star Destroyer, the Longinus "
+   "Solspear. The bolt modifies the projectile to focus all of its power on moving "
+   "forward; like a spear piercing through all in its path. Crushingly powerful, "
+   "the projectile not only pierces through almost any substance, but bounces off "
+   "of things that it can't kill, such as walls."
+   "\n\n"
+   "This bolt appears to think on its own, though this is possibly just local "
+   "distortion caused by the high amount of condensed demonic energy.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ShipGunUpg2" = "$LITH_TXT_UPGRADE_TITLE_ShipGun_B";
+"LITH_TXT_INFO_TITLE_ShipGunUpg2" = "The Galliant Surge of Destiny";
+"LITH_TXT_INFO_DESCR_ShipGunUpg2" =
+   "The second of the three ancient bolts of the Star Destroyer, the Surge of "
+   "Destiny does not fire a projectile at all -- instead, it surrounds the user in "
+   "a bright, vibrant aura of protection while unloading tons of smaller "
+   "projectiles all around them."
+   "\n\n"
+   "The bolt seeks to protect and defend rather than attack, though this is "
+   "possibly just speculation.";
 
 // Cyber-Mage Magic ----------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_Blade" = "Blade";
+"LITH_TXT_INFO_TITLE_Blade" = "\cdSfregiassero\c-, \ciAurantiorum\c- 2";
+"LITH_TXT_INFO_DESCR_Blade" =
+   "The 2nd method of the \ciAurantia\c- mode, the most dead-simple of attacks that "
+   "could be made with \ciAurantia\c- sigils. A potent slash with no physical form.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Delear" = "Delear";
 "LITH_TXT_INFO_TITLE_Delear" = "\cdDelerentur Ex\c-, \ciAurantiorum\c- 24";
 "LITH_TXT_INFO_DESCR_Delear" =
@@ -189,12 +296,38 @@
    "The design was created by first century mage Johnathon Booker and was later "
    "further simplified by various spellcasters. Your version of it prefers a flat "
    "shape rather than a curved one that most use.";
+
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_Feuer" = "Feuer";
+"LITH_TXT_INFO_TITLE_Feuer" = "\cdIncenderentur Ex\c-, \ciAurantiorum\c- 32";
+"LITH_TXT_INFO_DESCR_Feuer" =
+   "The 32nd method of the \ciAurantia\c- mode, a fire attack that throws two balls "
+   "of fire toward a target, destroying anything in their path."
+   "\n\n"
+   "The method is renowned for being powerful yet simple, and very easy to use. "
+   "It was originally dubbed the \"magic missile\" before some esoteric historians "
+   "began to protest for unknown reason.";
+
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_Rend" = "Romyetya";
+"LITH_TXT_INFO_TITLE_Rend" = "\cdFinderentur Ex\c-, \ciAurantiorum\c- 4";
+"LITH_TXT_INFO_DESCR_Rend" =
+   "The 4th method of the \ciAurantia\c- mode, similar in form and creation to "
+   "Blade, however quite different due to the modified Front sigil, which is "
+   "replaced with an Extend sigil."
+   "\n\n"
+   "Far faster, more damaging, and longer range than Blade, Finderentur is useful "
+   "in many situations.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Hulgyon" = "Hulgyon";
 "LITH_TXT_INFO_TITLE_Hulgyon" = "\cdHumarentur Ex\c-, \ciAurantiorum\c- 16";
 "LITH_TXT_INFO_DESCR_Hulgyon" =
    "The 16th method of the \ciAurantia\c- mode. Intermediate attack that creates "
    "several piercing pillars of light forward of the user. One of the few "
    "classical methods still in use, created by Apollo in 3021 CE.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_StarShot" = "Hosh'danma";
 "LITH_TXT_INFO_TITLE_StarShot" = "\cdDisploderentur Ex\c-, \ciAurantiorum\c- 8";
 "LITH_TXT_INFO_DESCR_StarShot" =
@@ -205,14 +338,28 @@
    "missions, including the West Steel Corp. incident, where it was used to "
    "destroy several micro-fighters and around 195 personnel aboard the enemy ship.";
 
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_Cercle" = "Cercle de la Mort";
+"LITH_TXT_INFO_TITLE_Cercle" = "\cdPeccarentur Ex\c-, \cgRussorum\c- 7";
+"LITH_TXT_INFO_CSIZE_Cercle" = "218";
+"LITH_TXT_INFO_DESCR_Cercle" =
+   "The 7th method of the \cgRussum\c- mode, the \"Circle of the Dead.\" An awesome "
+   "attack which takes all of one's metaphysical strength to use, one of the "
+   "strongest attacks that can be used by spellcasters without external help. "
+   "It has been used quite frequently in the final, deciding battles of wars to "
+   "completely obliterate entire squadrons of men."
+   "\n\n"
+   "Peccarentur is completed instantaneously with time flow manipulation. However, "
+   "to the person casting it, all of the details of the attack are clearly visible. "
+   "It is prophecized that such manipulation may eventually cause some kind of "
+   "catastrophe, but no proof of this has ever actually been provided."
+   "\n\n"
+   "This method was created on accident as a first-century researcher was "
+   "experimenting with \cgRussum\c- sigils. The attack was powerful enough to "
+   "accidentally murder all of the housemaids in their mansion and several wild "
+   "animals in their garden, however it did no damage to their property.";
+
 // Marine --------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Fist" = "Knife";
-"LITH_TXT_INFO_SHORT_ChargeFist" = "Charge Fist";
-"LITH_TXT_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";
-"LITH_TXT_INFO_DESCR_ChargeFist" =
-   "A powerful melee weapon which attaches to the left wrist. Uses energy from a "
-   "cybernetic power source to condense weight and force into super-destructive "
-   "punches.";
 "LITH_TXT_INFO_SHORT_Pistol" = "Pistol";
 "LITH_TXT_INFO_TITLE_Pistol" = "Custom Ka Haa'umi Pistol";
 "LITH_TXT_INFO_DESCR_Pistol" =
@@ -225,6 +372,16 @@
    "Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can be "
    "reloaded easily, since you duct-taped a magazine holder on the side. Features "
    "a small CB-Scope similar to that of most other Omakeda weapons.";
+
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_Revolver" = "Revolver";
+"LITH_TXT_INFO_TITLE_Revolver" = "$LITH_TXT_INFO_SHORT_Revolver";
+"LITH_TXT_INFO_DESCR_Revolver" =
+   "Other than this weapon being made on Earth, all you need to know about it is "
+   "that it fires six Teflon-plated .50 Action Express rounds and loads with a "
+   "break on the top. Crack some skulls with it.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Shotgun" = "Shotgun";
 "LITH_TXT_INFO_TITLE_Shotgun" = "Hiku Mk.2 Shotgun";
 "LITH_TXT_INFO_DESCR_Shotgun" =
@@ -236,6 +393,8 @@
    "the firing mechanism."
    "\n\n"
    "Most military models come with a CB-Scope.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ShotgunUpgr" = "$LITH_TXT_UPGRADE_TITLE_GaussShotty";
 "LITH_TXT_INFO_TITLE_ShotgunUpgr" = "Hiku Mk.2 Shotgun Gauss Mod";
 "LITH_TXT_INFO_DESCR_ShotgunUpgr" =
@@ -245,6 +404,8 @@
    "\n\n"
    "This both removes the need to chamber rounds and gives a nice boost in fire "
    "rate. The gun is, essentially, completely different in use.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ShotgunUpg2" = "$LITH_TXT_UPGRADE_TITLE_PoisonShot";
 "LITH_TXT_INFO_TITLE_ShotgunUpg2" = "Hiku Mk.2 Shotgun Poison Mod";
 "LITH_TXT_INFO_DESCR_ShotgunUpg2" =
@@ -256,6 +417,20 @@
    "This rather terrifying upgrade was never updated to the Mk.2 model. The "
    "internal structure is similar enough that one may still use it with the Mk.2, "
    "but the plasma firing mechanism must be disabled.";
+
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_LazShotgun" = "Laser Shotgun";
+"LITH_TXT_INFO_TITLE_LazShotgun" = "Kaether Photon Rifle";
+"LITH_TXT_INFO_DESCR_LazShotgun" =
+   "Made during a war on Earth by a long nameless company, this weapon excels in "
+   "penetrating enemies with pure energy."
+   "\n\n"
+   "A superconducting coil in the middle is used to channel tons of energy into a "
+   "photon accelerator at extremely quick speeds, recharged by cocking the gun."
+   "\n\n"
+   "Great for cooking chicken.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SuperShotgun" = "Super Shotgun";
 "LITH_TXT_INFO_TITLE_SuperShotgun" = "$LITH_TXT_INFO_SHORT_SuperShotgun";
 "LITH_TXT_INFO_DESCR_SuperShotgun" =
@@ -271,6 +446,8 @@
    "\n\n"
    "This weapon bears manufacturer marks in a non-human language and is known only "
    "as the Super Shotgun.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CombatRifle" = "Combat Rifle";
 "LITH_TXT_INFO_TITLE_CombatRifle" = "AllPoint 75-b Assault Rifle";
 "LITH_TXT_INFO_DESCR_CombatRifle" =
@@ -283,6 +460,8 @@
    "\n\n"
    "Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade "
    "at a time, but packs a great punch.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_RifleUpgr" = "$LITH_TXT_UPGRADE_TITLE_RifleModes";
 "LITH_TXT_INFO_TITLE_RifleUpgr" = "AllPoint 75-c Modal Trigger";
 "LITH_TXT_INFO_DESCR_RifleUpgr" =
@@ -293,6 +472,8 @@
    "The 75-c Modal Trigger enables a third firing mode in which four two-round "
    "bursts are fired sequentially. Using this mode also enables a partial "
    "CB-Scope, which unfortunately does little more than obstruct your view.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_RifleUpg2" = "$LITH_TXT_UPGRADE_TITLE_LaserRCW";
 "LITH_TXT_INFO_TITLE_RifleUpg2" = "SF-209 Laser Rifle";
 "LITH_TXT_INFO_DESCR_RifleUpg2" =
@@ -300,6 +481,19 @@
    "much more similar to a photon rifle. The combat effectiveness of the rifle is "
    "increased quite a lot, as it now fires 4tW penetrating beams capable of "
    "ripping into most unarmored vehicles.";
+
+//----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_SniperRifle" = "Sniper Rifle";
+"LITH_TXT_INFO_TITLE_SniperRifle" = "Facer AM-49d Sniper Rifle";
+"LITH_TXT_INFO_DESCR_SniperRifle" =
+   "An extremely strong rifle which fires .50 BMG rounds, able to destroy most "
+   "living targets completely and penetrate weakly armored vehicles."
+   "\n\n"
+   "The main production of these weapons spanned about 20 years, and they were "
+   "sold to mercenaries in bulk. For a long time, this rifle had been the sniper's "
+   "main weapon of choice.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_GrenadeLauncher" = "Grenade Launcher";
 "LITH_TXT_INFO_TITLE_GrenadeLauncher" = "SYM4.3 D.671 EXPLOSIVE LAUNCHER";
 "LITH_TXT_INFO_DESCR_GrenadeLauncher" =
@@ -313,6 +507,8 @@
    "This seems to use nanomachines or some similar technology to propel rockets "
    "after they've been ignited and left the barrel; thus causing a small lag "
    "before the rocket takes off fully.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_LauncherUpgr" = "$LITH_TXT_UPGRADE_TITLE_ChargeRPG";
 "LITH_TXT_INFO_TITLE_LauncherUpgr" = "UE-1 \"Eight-Ball\" Revolving Launcher";
 "LITH_TXT_INFO_DESCR_LauncherUpgr" =
@@ -324,6 +520,8 @@
    "mode shoots all eight in a horizontal line forward. The second mode shoots the "
    "rockets in a spiral pattern for maximum damage on one area, and the third and "
    "final mode hurls all of the grenades out of their rocket casings.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_LauncherUpg2" = "$LITH_TXT_UPGRADE_TITLE_HomingRPG";
 "LITH_TXT_INFO_TITLE_LauncherUpg2" = "SYM4.3 D.788 HOMING ROCKET SYSTEM";
 "LITH_TXT_INFO_DESCR_LauncherUpg2" =
@@ -334,6 +532,8 @@
    "Similar in concept to traditional rocket-based homing systems, this design is "
    "both more space-efficient and much more accurate, allowing it to be used even "
    "in a launcher as small as the D.671.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_PlasmaRifle" = "Plasma Rifle";
 "LITH_TXT_INFO_TITLE_PlasmaRifle" = "AllPoint 68-n Plasma Rifle";
 "LITH_TXT_INFO_DESCR_PlasmaRifle" =
@@ -347,6 +547,8 @@
    "The primary fire mode emits 7.52tW per bolt at approximately 2,800 bolts per "
    "minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute. "
    "This thing will make Swiss cheese out of anything in its path.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_PlasmaUpgr" = "$LITH_TXT_UPGRADE_TITLE_PlasLaser";
 "LITH_TXT_INFO_TITLE_PlasmaUpgr" = "AllPoint 68-o Plasmatic Laser";
 "LITH_TXT_INFO_DESCR_PlasmaUpgr" =
@@ -361,6 +563,8 @@
    "The upgrade was, unfortunately, woefully expensive. It has been sold only to "
    "private investors for quite some time now, but thankfully, your employer is "
    "one of them.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_PlasmaUpg2" = "$LITH_TXT_UPGRADE_TITLE_PartBeam";
 "LITH_TXT_INFO_TITLE_PlasmaUpg2" = "SF-2012 Ion Acceleration Cannon";
 "LITH_TXT_INFO_DESCR_PlasmaUpg2" =
@@ -372,6 +576,8 @@
    "\n\n"
    "This weapon has a reputation for being rather useless in defending a space "
    "ship from the inside, as it ends up melting holes in the hull.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_BFG9000" = "Omega Cannon";
 "LITH_TXT_INFO_TITLE_BFG9000" = "$LITH_TXT_INFO_SHORT_BFG9000";
 "LITH_TXT_INFO_DESCR_BFG9000" =
@@ -385,6 +591,8 @@
    "\n\n"
    "This weapon was acquired by your employers via the black market group \"Cid\" "
    "for a hefty price. Take care of it.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CannonUpgr" = "$LITH_TXT_UPGRADE_TITLE_PunctCannon";
 "LITH_TXT_INFO_TITLE_CannonUpgr" = "Omega Cannon: Punctuator Buffer";
 "LITH_TXT_INFO_DESCR_CannonUpgr" =
@@ -399,6 +607,8 @@
    "and wanted whoever attained it to be all-powerful."
    "\n\n"
    "Also, the CB-Scope works again, somehow.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_CannonUpg2" = "$LITH_TXT_UPGRADE_TITLE_OmegaRail";
 "LITH_TXT_INFO_TITLE_CannonUpg2" = "Omega Cannon: Railgun";
 "LITH_TXT_INFO_DESCR_CannonUpg2" =
@@ -409,3 +619,5 @@
    "With this, a gigantic red beam of destruction with an ungodly amount of heat "
    "and energy is fired out of the cannon, causing most anything in its path to be "
    "absolutely destroyed.";
+
+// EOF

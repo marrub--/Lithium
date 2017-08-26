@@ -140,6 +140,15 @@
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Magic" = "$LITH_TXT_UPGRADE_TITLE_Magic";
+"LITH_TXT_INFO_TITLE_Magic" = "Mana Absorber";
+"LITH_TXT_INFO_DESCR_Magic" =
+   "A small device reminiscent of a landmine which attaches to a chestplate, "
+   "pauldron or shoulder pad, which uses an unknown \ckFlavum\c- mode spell that "
+   "captures energy from the dead and dying."
+   "\n\n"
+   "Using this method, it uses hostility detection to find potential sources of "
+   "mana, and upon that source losing metaphysical structure, siphons all mana "
+   "from it with approximately 73.416% efficiency.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_ReflexWetwJem" = "$LITH_TXT_UPGRADE_TITLE_ReflexWetw";

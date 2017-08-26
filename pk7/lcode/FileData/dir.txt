@@ -14,12 +14,16 @@ in language.info.upgrades.en.txt
 parse file: Info_Upgrades.txt
 
 in language.info.weapons.en.txt
-put data: sord        -> LITH_TXT_INFO_SHORT_Sword
-put data: Game Nanhai -> LITH_TXT_INFO_SHORT_Gameboy
+put data: sord           -> LITH_TXT_INFO_SHORT_Sword
+put data: Game Nanhai    -> LITH_TXT_INFO_SHORT_Gameboy
+put data: Spell Selector -> LITH_TXT_INFO_SHORT_CFist
+put data: Knife          -> LITH_TXT_INFO_SHORT_Fist
 
-parse file: Info_Weapons_Shop.txt
+parse file: Info_Weapons_Outcasts.txt
 parse file: Info_Weapons_CyberMage.txt
 parse file: Info_Weapons_Marine.txt
+
+comment: EOF
 
 in language.info.omake.en.txt
 parse file: Info_Extra.txt

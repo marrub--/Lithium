@@ -178,9 +178,10 @@
 "LITH_TXT_INFO_TITLE_Sym43" = "SYM4.3 WEAPONS INCORPORATED";
 "LITH_TXT_INFO_IMAGE_Sym43" = "lgfx/BIP/Sym43.png";
 "LITH_TXT_INFO_DESCR_Sym43" =
-   "Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3 create "
-   "and distribute explosive weapons. For distribution, they assign a standardized "
-   "anonymous designation, and sell the weapons via proxy in their name."
+   "Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3 "
+   "produce explosive weapons and distribute many other kinds of weaponry via "
+   "proxy. All weapons and ammunition sold by them are assigned a standard "
+   "anonymous designation."
    "\n\n"
    "They have (according to their published sales reports) sold weaponry to over "
    "three quarters of all recorded mercenary, military and government bodies."
