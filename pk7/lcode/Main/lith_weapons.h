@@ -3,20 +3,20 @@ enum
    weapon_unknown,
    weapon_min,
 
-   // All-class Weapons
+   // Outcast Weapons
    weapon_cfist = weapon_min,
-   weapon_revolver,
-   weapon_lazshotgun,
-   weapon_sniper,
    weapon_missile,
    weapon_plasmadiff,
 
    // Marine Weapons
    weapon_fist,
    weapon_pistol,
+   weapon_revolver,
    weapon_shotgun,
+   weapon_lazshotgun,
    weapon_ssg,
    weapon_rifle,
+   weapon_sniper,
    weapon_launcher,
    weapon_plasma,
    weapon_bfg,
