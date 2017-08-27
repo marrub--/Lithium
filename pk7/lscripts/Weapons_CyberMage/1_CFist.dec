@@ -3,7 +3,7 @@ actor Lith_CFist : Lith_CWeapon
    Tag "$LITH_TXT_INFO_SHORT_CFist"
    Weapon.Kickback 100
    Weapon.SlotNumber 1
-   Weapon.SlotPriority 1.1
+   Weapon.SlotPriority 0.9
    DamageType "Lith_Melee"
    
    +WEAPON.WIMPY_WEAPON
