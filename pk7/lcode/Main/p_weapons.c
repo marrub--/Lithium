@@ -292,8 +292,10 @@ void Lith_PlayerUpdateWeapon(player_t *p)
          w->cur = wep;
 
       // Remove inactive magic weapons.
-      else if(info->flags & wf_magic)
+      else if(info->flags & wf_magic && wep->owned && ++wep->magictake > 20) {
          ACS_TakeInventory(info->classname, 1);
+         wep->magictake = 0;
+      }
 
       // Auto-reload anything else.
       if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))

@@ -3,7 +3,39 @@
 
 #define UData UData_Magic(upgr)
 
+// Types ---------------------------------------------------------------------|
+
+struct magic_info {
+   int st;
+   int x, y;
+   __str name;
+   __str classname;
+};
+
+// Static Objects ------------------------------------------------------------|
+
+#define N(name) name, "Lith_" name
+static struct magic_info const minf[] = {
+   {-1,                130, 180, N("Blade")   },
+   {-1,                 60, 140, N("Delear")  },
+   {cupg_c_slot3spell,  60,  60, N("Feuer")   },
+   {cupg_c_slot4spell, 130,  10, N("Rend")    },
+   {cupg_c_slot5spell, 205,  60, N("Hulgyon") },
+   {cupg_c_slot6spell, 205, 140, N("StarShot")},
+   {cupg_c_slot7spell, 130, 100, N("Cercle")  },
+};
+
 // Static Functions ----------------------------------------------------------|
+
+//
+// GiveMagic
+//
+[[__call("ScriptS")]]
+static void GiveMagic(struct magic_info const *m)
+{
+   ACS_GiveInventory(m->classname, 1);
+   ACS_SetWeapon(m->classname);
+}
 
 //
 // UpdateMagicUI
@@ -11,22 +43,6 @@
 [[__call("ScriptS")]]
 static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
 {
-   struct magic_info {
-      int st;
-      int x, y;
-      __str name;
-   };
-
-   static struct magic_info const minf[] = {
-      {-1,                170, 220, "Blade"   },
-      {-1,                100, 180, "Delear"  },
-      {cupg_c_slot3spell, 100, 100, "Feuer"   },
-      {cupg_c_slot4spell, 170,  50, "Rend"    },
-      {cupg_c_slot5spell, 245, 100, "Hulgyon" },
-      {cupg_c_slot6spell, 245, 180, "StarShot"},
-      {cupg_c_slot7spell, 170, 140, "Cercle"  },
-   };
-
    gui_state_t *g = &UData.gst;
 
    Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
@@ -57,28 +73,18 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       };
 
       __str name = Language("LITH_TXT_INFO_SHORT_%S", m->name);
-      if(Lith_GUI_Button_Id(g, i, name, m->x - 40, m->y - 40, .preset = &pre)) {
-         __str cn = StrParam("Lith_%S", m->name);
-         ACS_GiveInventory(cn, 1);
-         ACS_SetWeapon(cn);
-      }
-
-      any = true;
-   }
-
-   if(!any) {
-      HudMessageF("CBIFONT", "No Spells Available");
-      HudMessagePlain(g->hid--, g->w/2, g->h/2, TICSECOND);
+      if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
+         GiveMagic(m);
    }
 
    Lith_GUI_End(g);
 }
 
 //
-// Lith_GivePlayerZ
+// GivePlayerZ
 //
 [[__call("ScriptS")]]
-static void Lith_GivePlayerZ(int tid, player_t *p, __str name)
+static void GivePlayerZ(int tid, player_t *p, __str name)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
       ACS_SetUserVariable(tid, name, p->z);
@@ -103,7 +109,6 @@ void Lith_SetMagicUI(bool on)
    {
       p->indialogue = UData.ui = true;
       p->semifrozen++;
-      ACS_SetPlayerProperty(0, true, PROP_INSTANTWEAPONSWITCH);
       UData.gst.gfxprefix = "lgfx/UI/";
       UData.gst.cx = 320/2;
       UData.gst.cy = 240/2;
@@ -111,9 +116,10 @@ void Lith_SetMagicUI(bool on)
    }
    else if(!on && UData.ui)
    {
+      if(UData.gst.hot)
+         GiveMagic(&minf[UData.gst.hot - 1]);
       p->indialogue = UData.ui = false;
       p->semifrozen--;
-      ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
       UData.gst = (gui_state_t){};
    }
 }
@@ -158,7 +164,7 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
       ACS_SetUserVariable(tid, "user_y", y);
       ACS_SetActorPropertyFixed(tid, APROP_Alpha, manaperc / 2);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
-      Lith_GivePlayerZ(tid, p, "user_z");
+      GivePlayerZ(tid, p, "user_z");
    }
 }
 

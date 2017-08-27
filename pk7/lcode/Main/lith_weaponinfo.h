@@ -42,6 +42,7 @@ typedef struct invweapon_s
    int ammotype;
    __str ammoclass;
    __str magclass;
+   int magictake; // bullshit hack
 } invweapon_t;
 
 typedef struct weapondata_s
