@@ -3,7 +3,7 @@ actor Lith_XH_PainElemental : Lith_PainElemental
    states
    {
    Death:
-      "####" "#" 0 A_Explode
+      TNT1 A 0 A_Explode
       goto Super::Death
    }
 }
