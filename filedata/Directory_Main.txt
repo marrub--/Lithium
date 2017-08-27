@@ -1,19 +1,17 @@
-This is a list of files to be processed into LANGUAGE by compilefs.
-
 -- Info Pages -----------------------------------------------------------------
-in language.info.corporations.en.txt
+in file language.info.corporations.en.txt
 parse file: Info_Corporations.txt
 
-in language.info.enemies.en.txt
+in file language.info.enemies.en.txt
 parse file: Info_Enemies.txt
 
-in language.info.places.en.txt
+in file language.info.places.en.txt
 parse file: Info_Places.txt
 
-in language.info.upgrades.en.txt
+in file language.info.upgrades.en.txt
 parse file: Info_Upgrades.txt
 
-in language.info.weapons.en.txt
+in file language.info.weapons.en.txt
 put data: sord           -> LITH_TXT_INFO_SHORT_Sword
 put data: Game Nanhai    -> LITH_TXT_INFO_SHORT_Gameboy
 put data: Spell Selector -> LITH_TXT_INFO_SHORT_CFist
@@ -25,41 +23,41 @@ parse file: Info_Weapons_Marine.txt
 
 comment: EOF
 
-in language.info.omake.en.txt
+in file language.info.omake.en.txt
 parse file: Info_Extra.txt
 
 
 -- CBI Pages ------------------------------------------------------------------
-in language.shop.en.txt
+in file language.shop.en.txt
 parse file: Shop.txt
 
-in language.upgrades.en.txt
+in file language.upgrades.en.txt
 parse file: Upgrades.txt
 
 
 -- Dialogue -------------------------------------------------------------------
-in language.info.dialogue.txt
+in file language.info.dialogue.txt
 put file: Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
 put file: Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
 
 
 -- Misc -----------------------------------------------------------------------
-in language.log.en.txt
+in file language.log.en.txt
 parse file: Log.txt
 
-in language.pickups.en.txt
+in file language.pickups.en.txt
 parse file: Pickups.txt
 
-in language.misc.en.txt
+in file language.misc.en.txt
 parse file: Misc.txt
 parse file: Changes.txt
 
 
 -- CBI Mail -------------------------------------------------------------------
-in language.info.mail.txt
+in file language.info.mail.txt
 
 put file: Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
-include dir_mail.txt
+include Mail.txt
 
 EOF

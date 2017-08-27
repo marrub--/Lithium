@@ -1,65 +1,68 @@
 ## Compiler
-
 CC=gdcc-cc
 LD=gdcc-ld
 MAKELIB=gdcc-makelib
 
-## Directories
-
-BIN=pk7/acs
-SRCDIR=pk7/lcode
-SRC=$(SRCDIR)/Main
-INC=$(SRC)
-IR=ir
-
-LITHOS_SRC=$(SRCDIR)/LithOS3/lithos_c/src
-LITHOS_INC=$(SRCDIR)/LithOS3/lithos_c/inc
-
 ## Compiler flags
-
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET) -i$(LITHOS_INC) --sys-include $(LITHOS_INC)
-ALLOCMIN=--alloc-min Sta ""
+CFLAGS=$(TARGET)
 
 ## Sources
+IR=ir
 
-MAIN_SOURCES=$(wildcard $(SRC)/*.c)
-MAIN_HEADERS=$(wildcard $(INC)/*.h)
-MAIN_OUTPUTS=$(MAIN_SOURCES:$(SRC)/%.c=$(IR)/%.ir)
+PK7_BIN=pk7/acs
+PK7_SRCDIR=pk7/lcode
 
+LIB_OUTPUTS=$(IR)/libc.ir $(IR)/libGDCC.ir
+LIB_BINARY=$(PK7_BIN)/lithlib.bin
+
+MAIN_IR=$(IR)/main
+MAIN_SRC=$(PK7_SRCDIR)/Main
+MAIN_INC=$(MAIN_SRC)
+MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
+MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
+MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
+MAIN_BINARY=$(PK7_BIN)/lithmain.bin
+MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL --sys-include $(LITHOS_INC)
+
+LITHOS_IR=$(IR)/lithos
+LITHOS_SRC=$(PK7_SRCDIR)/LithOS3/lithos_c/src
+LITHOS_INC=$(PK7_SRCDIR)/LithOS3/lithos_c/inc
 LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
 LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
-LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(IR)/lithos_%.ir)
+LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(LITHOS_IR)/%.ir)
+LITHOS_CFLAGS=-i$(LITHOS_INC)
 
-## all
-
-.PHONY: bin text
+## Targets
+.PHONY: bin text clean
 
 all: text bin
-bin: $(BIN)/lithlib.bin $(BIN)/lithmain.bin
-text: $(SRCDIR)/FileData/compilefs.rb
-	@cd $(SRCDIR)/FileData; ruby compilefs.rb
+bin: $(PK7_BIN)/lithlib.bin $(PK7_BIN)/lithmain.bin
 
-## acs/*.bin
+text: compilefs.rb
+	@cd filedata; ../compilefs.rb Directory.txt
 
-$(BIN)/lithlib.bin: $(IR)/libc.ir $(IR)/libGDCC.ir
+clean:
+	@rm -f $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS) $(LIB_OUTPUTS)
+
+## .ir -> .bin
+$(LIB_BINARY): $(LIB_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) $(ALLOCMIN) 300000000  $^ -o $@
+	@$(LD) $(LFLAGS) --alloc-min Sta "" 300000000 $^ -o $@
 
-$(BIN)/lithmain.bin: $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
+$(MAIN_BINARY): $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) $(ALLOCMIN) 3000000000 $^ -o $@ -llithlib
+	@$(LD) $(LFLAGS) --alloc-min Sta "" 3000000000 $^ -o $@ -llithlib
 
-## ir/*.ir
-
-$(IR)/%.ir: $(SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
+## .c -> .ir
+$(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
 	@echo CC $<
-	@$(CC) $(CFLAGS) -i$(INC) -Dnull=NULL -c $< -o $@
+	@$(CC) $(CFLAGS) $(MAIN_CFLAGS) -c $< -o $@
 
-$(IR)/lithos_%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
+$(LITHOS_IR)/%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
 	@echo CC $<
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(LITHOS_CFLAGS) -c $< -o $@
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@

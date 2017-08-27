@@ -1,0 +1,6 @@
+This is a list of unprocessed text to be processed into LANGUAGE by compilefs.
+
+in directory ../pk7
+include Directory_Main.txt
+
+EOF

@@ -1,5 +1,5 @@
 working/*
-ir/*.ir
+ir/**/*.ir
 compile.bat
 *.kdev4
 *.dbs
