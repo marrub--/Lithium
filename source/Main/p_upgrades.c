@@ -14,34 +14,10 @@
 #define CheckRequires_RDI     CheckRequires(UR_RDI, world.cbiupgr[cupg_rdistinter])
 #define CheckRequires_RA      CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
-// Types ---------------------------------------------------------------------|
-
-enum
-{
-   UG_None,
-   UG_Pistol,
-   UG_Shotgun,
-   UG_Rifle,
-   UG_Launcher,
-   UG_Plasma,
-   UG_BFG,
-   UG_HUD,
-   UG_BASE_MAX
-};
-
-enum
-{
-   UR_AI  = 1 << 0,
-   UR_WMD = 1 << 1,
-   UR_WRD = 1 << 2,
-   UR_RDI = 1 << 3,
-   UR_RA  = 1 << 4,
-};
-
 // Static Objects ------------------------------------------------------------|
 
 #define Req(arg) .requires = arg
-static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
+static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
 // {{"Name-------", "BIP---------", Cost---}, pcl_name,      UC_Cat-, Pr, Score, [Group], [Requirements]},
    {{"HeadsUpDisp", "HeadsUpDisp",  0      }, pcl_marine,    UC_Body,  1, -0.05, UG_HUD},
    {{"HeadsUpDis2", "HeadsUpDisp",  0      }, pcl_cybermage, UC_Body,  1, -0.05, UG_HUD},
@@ -96,17 +72,20 @@ static upgradeinfo_t staticupgradeinfo[UPGR_BASE_MAX] = {
 };
 #undef Req
 
-static upgradeinfo_t extraupgradeinfo[UPGR_EXTRA_NUM];
+static upgradeinfo_t UpgrInfoEx[UPGR_EXTRA_NUM];
 
-static __str const upgrcateg[UC_MAX] = {
+static __str const UpgrCateg[UC_MAX] = {
    [UC_Body] = "\CnBody",
    [UC_Weap] = "\CaWeapon",
    [UC_Extr] = "\CfExtra",
    [UC_Down] = "\CtDowngrade"
 };
 
-static upgradeinfo_t *upgradeinfo;
-static int UPGR_MAX = countof(staticupgradeinfo);
+static upgradeinfo_t *UpgrInfo;
+static int UpgrMax = countof(UpgrInfoBase);
+
+static upgr_reinit_cb_t UpgrReinitCb[10];
+static int UpgrReinitCbNum;
 
 // Static Functions ----------------------------------------------------------|
 
@@ -167,18 +146,29 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
    else        return u1->key - u2->key;
 }
 
+// Extern Functions ----------------------------------------------------------|
+
 //
-// RegisterBasicUpgrade
+// Lith_UpgradeRegister
 //
-static void RegisterBasicUpgrade(int key, upgradeinfo_t const *upgr)
+upgradeinfo_t *Lith_UpgradeRegister(int key, upgradeinfo_t const *upgr)
 {
-   if(upgr) {
-      extraupgradeinfo[UPGR_MAX   - UPGR_BASE_MAX] = *upgr;
-      extraupgradeinfo[UPGR_MAX++ - UPGR_BASE_MAX].key = key;
+   if(upgr)
+   {
+      upgradeinfo_t *ui = &UpgrInfoEx[UpgrMax++ - UPGR_BASE_MAX];
+      (*ui = *upgr, ui)->key = key;
+      return ui;
    }
+   else return null;
 }
 
-// Extern Functions ----------------------------------------------------------|
+//
+// Lith_UpgradeRegisterReinit
+//
+void Lith_UpgradeRegisterReinit(upgr_reinit_cb_t cb)
+{
+   UpgrReinitCb[UpgrReinitCbNum++] = cb;
+}
 
 //
 // Lith_GSReinit_Upgrade
@@ -186,31 +176,33 @@ static void RegisterBasicUpgrade(int key, upgradeinfo_t const *upgr)
 void Lith_GSReinit_Upgrade(void)
 {
    // Set up function pointers for upgrade info.
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < UpgrMax; i++)
    {
-      switch(upgradeinfo[i].key)
+      switch(UpgrInfo[i].key)
       {
       #define Case(n) continue; case UPGR_##n:
-      #define A(n) upgradeinfo[i].Activate   = Upgr_##n##_Activate;
-      #define D(n) upgradeinfo[i].Deactivate = Upgr_##n##_Deactivate;
-      #define U(n) upgradeinfo[i].Update     = Upgr_##n##_Update;
-      #define E(n) upgradeinfo[i].Enter      = Upgr_##n##_Enter;
-      #define R(n) upgradeinfo[i].Render     = Upgr_##n##_Render;
+      #define A(n) UpgrInfo[i].Activate   = Upgr_##n##_Activate;
+      #define D(n) UpgrInfo[i].Deactivate = Upgr_##n##_Deactivate;
+      #define U(n) UpgrInfo[i].Update     = Upgr_##n##_Update;
+      #define E(n) UpgrInfo[i].Enter      = Upgr_##n##_Enter;
+      #define R(n) UpgrInfo[i].Render     = Upgr_##n##_Render;
       #include "lith_upgradefuncs.h"
          continue;
       }
 
-      // TODO
-      //for(int i = 0; i < numextraupgradecallbacks; i++)
-         //extraupgradecallbacks[i](&upgradeinfo[i]);
+      for(int i = 0; i < UpgrReinitCbNum; i++)
+         if(UpgrReinitCb[i](&UpgrInfo[i]))
+            goto next;
+
+   next:;
    }
 
    // Load shop function pointers and IDs.
-   for(int i = 0; i < UPGR_MAX; i++)
+   for(int i = 0; i < UpgrMax; i++)
    {
-      upgradeinfo[i].shopBuy    = Lith_UpgrShopBuy;
-      upgradeinfo[i].shopCanBuy = Lith_UpgrCanBuy;
-      upgradeinfo[i].shopGive   = Lith_UpgrGive;
+      UpgrInfo[i].shopBuy    = Lith_UpgrShopBuy;
+      UpgrInfo[i].shopCanBuy = Lith_UpgrCanBuy;
+      UpgrInfo[i].shopGive   = Lith_UpgrGive;
    }
 }
 
@@ -219,24 +211,25 @@ void Lith_GSReinit_Upgrade(void)
 //
 void Lith_GSInit_Upgrade(void)
 {
-   if(world.grafZoneEntered)
-      RegisterBasicUpgrade(UPGR_DarkCannon, &(upgradeinfo_t const)
+   if(world.grafZoneEntered) {
+      Lith_UpgradeRegister(UPGR_DarkCannon, &(upgradeinfo_t const)
          {{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
+   }
 
-   for(int i = 0; i < countof(staticupgradeinfo); i++)
-      staticupgradeinfo[i].key = i;
+   for(int i = 0; i < countof(UpgrInfoBase); i++)
+      UpgrInfoBase[i].key = i;
 
-   upgradeinfo = calloc(UPGR_MAX, sizeof(upgradeinfo_t));
-   memmove(upgradeinfo, staticupgradeinfo, sizeof(staticupgradeinfo));
+   UpgrInfo = calloc(UpgrMax, sizeof(upgradeinfo_t));
+   memmove(UpgrInfo, UpgrInfoBase, sizeof(UpgrInfoBase));
 
-   for(int i = 0; i < countof(extraupgradeinfo); i++)
-      if(extraupgradeinfo[i].name != null)
-         upgradeinfo[UPGR_BASE_MAX + i] = extraupgradeinfo[i];
+   for(int i = 0; i < countof(UpgrInfoEx); i++)
+      if(UpgrInfoEx[i].name != null)
+         UpgrInfo[UPGR_BASE_MAX + i] = UpgrInfoEx[i];
 
-   qsort(upgradeinfo, UPGR_MAX, sizeof(upgradeinfo_t), CompUpgrInfo);
+   qsort(UpgrInfo, UpgrMax, sizeof(upgradeinfo_t), CompUpgrInfo);
 
-   for(int i = 0; i < UPGR_MAX; i++)
-      upgradeinfo[i].id = i;
+   for(int i = 0; i < UpgrMax; i++)
+      UpgrInfo[i].id = i;
 
    Lith_GSReinit_Upgrade();
 }
@@ -260,9 +253,8 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 //
 void Lith_PlayerInitUpgrades(player_t *p)
 {
-   #define CheckPClass() (upgradeinfo[i].pclass & p->pclass)
-
-   for(int i = 0; i < UPGR_MAX; i++)
+   #define CheckPClass() (UpgrInfo[i].pclass & p->pclass)
+   for(int i = 0; i < UpgrMax; i++)
       if(CheckPClass())
          p->upgrmax++;
 
@@ -271,22 +263,20 @@ void Lith_PlayerInitUpgrades(player_t *p)
    for(int i = 0; i < countof(p->upgrades); i++)
       p->upgrades[i] = (upgrade_t){};
 
-   for(int i = 0, j = 0; i < UPGR_MAX; i++)
-   {
+   for(int i = 0, j = 0; i < UpgrMax; i++)
       if(CheckPClass())
-      {
-         upgrade_t *upgr = &p->upgrades[j];
+   {
+      upgrade_t *upgr = &p->upgrades[j];
 
-         upgr->dataptr = &p->upgrdata;
-         upgr->info = &upgradeinfo[i];
+      upgr->dataptr = &p->upgrdata;
+      upgr->info    = &UpgrInfo[i];
 
-         p->upgrademap.insert(upgr);
+      p->upgrademap.insert(upgr);
 
-         if(upgr->info->cost == 0 || world.dbgUpgr)
-            Lith_UpgrBuy(p, upgr, true, true);
+      if(upgr->info->cost == 0 || world.dbgUpgr)
+         Lith_UpgrBuy(p, upgr, true, true);
 
-         j++;
-      }
+      j++;
    }
 
    p->upgrinit = true;
@@ -371,7 +361,6 @@ bool Lith_UpgrCanActivate(player_t *p, upgrade_t *upgr)
          CheckRequires_WRD ||
          CheckRequires_RDI ||
          CheckRequires_RA  ||
-
          p->cbi.pruse + upgr->info->perf > world.cbiperf)
       {
          return false;
@@ -441,7 +430,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
 
-      HudMessageF("CBIFONT", "Filter: %S", upgrcateg[filter]);
+      HudMessageF("CBIFONT", "Filter: %S", UpgrCateg[filter]);
    }
    else
       HudMessageF("CBIFONT", "Filter: \CjAll");
@@ -479,7 +468,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 
       if(changed && filter == -1)
       {
-         HudMessageF("CBIFONT", "%S", upgrcateg[curcategory]);
+         HudMessageF("CBIFONT", "%S", UpgrCateg[curcategory]);
          HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - guipre.btnlist.h) + 1.1, TICSECOND);
       }
 
@@ -588,7 +577,7 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
 
    // Category
-   HudMessageF("CBIFONT", "%S", upgrcateg[upgr->info->category]);
+   HudMessageF("CBIFONT", "%S", UpgrCateg[upgr->info->category]);
    HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
 
    // Effect

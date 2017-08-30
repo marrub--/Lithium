@@ -28,6 +28,29 @@ enum
    UC_MAX
 };
 
+enum
+{
+   UG_None,
+   UG_Pistol,
+   UG_Shotgun,
+   UG_Rifle,
+   UG_Launcher,
+   UG_Plasma,
+   UG_BFG,
+   UG_HUD,
+};
+
+enum
+{
+   UR_AI  = 1 << 0,
+   UR_WMD = 1 << 1,
+   UR_WRD = 1 << 2,
+   UR_RDI = 1 << 3,
+   UR_RA  = 1 << 4,
+};
+
+typedef bool (*upgr_reinit_cb_t)(struct upgradeinfo *ui);
+
                       typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
 [[__call("ScriptS")]] typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
 
