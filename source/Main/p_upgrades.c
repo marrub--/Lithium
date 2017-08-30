@@ -149,17 +149,13 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
 // Extern Functions ----------------------------------------------------------|
 
 //
-// Lith_UpgradeRegister
+// Lith_UpgradeRegister_
 //
-upgradeinfo_t *Lith_UpgradeRegister(int key, upgradeinfo_t const *upgr)
+upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
 {
-   if(upgr)
-   {
-      upgradeinfo_t *ui = &UpgrInfoEx[UpgrMax++ - UPGR_BASE_MAX];
-      (*ui = *upgr, ui)->key = key;
-      return ui;
-   }
-   else return null;
+   upgradeinfo_t *ui = &UpgrInfoEx[UpgrMax++ - UPGR_BASE_MAX];
+   *ui = *upgr;
+   return ui;
 }
 
 //
@@ -211,10 +207,8 @@ void Lith_GSReinit_Upgrade(void)
 //
 void Lith_GSInit_Upgrade(void)
 {
-   if(world.grafZoneEntered) {
-      Lith_UpgradeRegister(UPGR_DarkCannon, &(upgradeinfo_t const)
-         {{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI});
-   }
+   if(world.grafZoneEntered)
+      Lith_UpgradeRegister(&(upgradeinfo_t const){{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
 
    for(int i = 0; i < countof(UpgrInfoBase); i++)
       UpgrInfoBase[i].key = i;

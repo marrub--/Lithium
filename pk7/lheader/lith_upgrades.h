@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// vim: columns=110
 #ifndef LITH_UPGRADES_H
 #define LITH_UPGRADES_H
 
@@ -31,7 +32,7 @@ void Lith_PlayerUpdateUpgrades(struct player *p);
 void Lith_PlayerRenderUpgrades(struct player *p);
 void Lith_PlayerEnterUpgrades(struct player *p);
 
-upgradeinfo_t *Lith_UpgradeRegister(int key, upgradeinfo_t const *upgr);
+upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr);
 void Lith_UpgradeRegisterReinit(upgr_reinit_cb_t cb);
 
 #endif

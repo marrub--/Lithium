@@ -61,7 +61,7 @@ enum
    UPGR_BASE_MAX,
 
    // 「GRAF ZONE」
-   UPGR_DarkCannon = 666,
+   UPGR_DarkCannon = 0x7FFFF666,
 };
 
 // EOF
