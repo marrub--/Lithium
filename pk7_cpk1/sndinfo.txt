@@ -1,0 +1,14 @@
+//
+// Informant
+//
+$playeralias    informant male *land silence
+$playeralias    informant male *grunt silence
+$playersound    informant male *jump    lsounds/Player/Informant/Jump.flac       // Self-made
+$playersound    informant male *death   lsounds/Player/Informant/Death.flac      // 〃
+$playersound    informant male *xdeath  lsounds/Player/Informant/XDeath.flac     // 〃
+$playersound    informant male *pain100 lsounds/Player/Informant/PainSmall.flac  // Doom
+$playersounddup informant male *pain75  *pain100                                 // 〃
+$playersound    informant male *pain50  lsounds/Player/Informant/Pain.flac       // 〃
+$playersounddup informant male *pain25  *pain50                                  // 〃
+
+// EOF
