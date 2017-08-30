@@ -10,16 +10,17 @@ CFLAGS=$(TARGET)
 
 ## Sources
 IR=ir
+SRCDIR=source
 
 PK7_BIN=pk7/acs
-PK7_SRCDIR=pk7/lcode
+PK7_SRCDIR=pk7/lheader
 
 LIB_OUTPUTS=$(IR)/libc.ir $(IR)/libGDCC.ir
 LIB_BINARY=$(PK7_BIN)/lithlib.bin
 
 MAIN_IR=$(IR)/main
-MAIN_SRC=$(PK7_SRCDIR)/Main
-MAIN_INC=$(MAIN_SRC)
+MAIN_SRC=$(SRCDIR)/Main
+MAIN_INC=$(PK7_SRCDIR)
 MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
@@ -27,8 +28,8 @@ MAIN_BINARY=$(PK7_BIN)/lithmain.bin
 MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL --sys-include $(LITHOS_INC)
 
 LITHOS_IR=$(IR)/lithos
-LITHOS_SRC=$(PK7_SRCDIR)/LithOS3/lithos_c/src
-LITHOS_INC=$(PK7_SRCDIR)/LithOS3/lithos_c/inc
+LITHOS_SRC=$(SRCDIR)/LithOS3/lithos_c/src
+LITHOS_INC=$(SRCDIR)/LithOS3/lithos_c/inc
 LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
 LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
 LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(LITHOS_IR)/%.ir)

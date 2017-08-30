@@ -4,7 +4,7 @@
 #include "lith_file.h"
 #include "lith_world.h"
 
-#include "base64.h"
+#include "lith_base64.h"
 
 #include <ctype.h>
 
