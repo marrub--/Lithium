@@ -190,8 +190,8 @@ void Lith_GSReinit_Upgrade(void)
          continue;
       }
 
-      for(int i = 0; i < UpgrReinitCbNum; i++)
-         if(UpgrReinitCb[i](&UpgrInfo[i]))
+      for(int j = 0; j < UpgrReinitCbNum; j++)
+         if(UpgrReinitCb[j](&UpgrInfo[i]))
             goto next;
 
    next:;
