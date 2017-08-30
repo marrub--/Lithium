@@ -5,7 +5,7 @@ MAKELIB=gdcc-makelib
 
 ## Compiler flags
 TARGET=--bc-target=ZDoom
-LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE -llithlib
+LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
 CFLAGS=$(TARGET)
 
 ## Sources
@@ -25,7 +25,7 @@ MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
 MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL --sys-include $(LITHOS_INC)
-MAIN_LFLAGS=
+MAIN_LFLAGS=-llithlib
 
 LITHOS_IR=$(IR)/lithos
 LITHOS_SRC=$(SRCDIR)/LithOS3/lithos_c/src
@@ -44,7 +44,7 @@ CPK1_OUTPUTS=$(CPK1_SOURCES:$(CPK1_SRC)/%.c=$(CPK1_IR)/%.ir)
 CPK1_BINARY=pk7_cpk1/acs/lithcpk1.bin
 CPK1_CFLAGS=-i$(CPK1_INC) --sys-include $(MAIN_INC) \
             --sys-include $(LITHOS_INC) -Dnull=NULL -DEXTERNAL_CODE
-CPK1_LFLAGS=-llithmain
+CPK1_LFLAGS=-llithlib -llithmain
 
 LIB_STA =3000000000
 MAIN_STA=3500000000
