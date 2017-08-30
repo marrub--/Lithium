@@ -530,7 +530,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
    #undef Req
 
    // Performance rating
-   if(upgr->info->perf)
+   if(upgr->info->perf && p->pclass != pcl_cybermage)
    {
       char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
 

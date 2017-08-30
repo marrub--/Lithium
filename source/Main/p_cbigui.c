@@ -81,7 +81,7 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
          y += 10; \
       } while(0)
 
-   Info("Performance: %i\CbPr", world.cbiperf);
+   Info("Performance: 34\CbPr");
    Info("In use: %i\CbPr", p->cbi.pruse);
    Info("RAM: 19TiB");
 
