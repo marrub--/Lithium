@@ -51,7 +51,8 @@
    "\n\n"
    "Customizable via settings menu."
    "\n\n"
-   "A set of nanobots are deployed to get vitality information on targets you aim at.";
+   "A set of nanobots are deployed to get vitality information on targets you aim "
+   "at.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_Magic" = "Mana Absorber";
@@ -88,7 +89,8 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_DefenseNuke" = "Def. Mini Nuke";
 "LITH_TXT_UPGRADE_EFFEC_DefenseNuke" =
-   "When you enter a level, sets off a huge explosion, defending you from initial threats."
+   "When you enter a level, sets off a huge explosion, defending you from initial "
+   "threats."
    "\n\n"
    "\cgThis alerts monsters when you enter a map."
    "\n\n"
@@ -98,16 +100,19 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_Adrenaline" = "Adrenaline Inj.";
 "LITH_TXT_UPGRADE_EFFEC_Adrenaline" =
-   "When being targeted by enemies or nearing a projectile, time will stop for one second."
+   "When being targeted by enemies or nearing a projectile, time will stop for one "
+   "second."
    "\n\n"
    "Needs to be charged for 30 seconds to activate."
    "\n\n"
-   "Implants an adrenaline injector into your skin, which reacts to sudden impulses and sound cues.";
+   "Implants an adrenaline injector into your skin, which reacts to sudden impulses "
+   "and sound cues.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SoulCleaver" = "Soul Cleaver";
 "LITH_TXT_UPGRADE_EFFEC_SoulCleaver" =
-   "When living things die, they emit a projectile that will seek other enemies for a short time."
+   "When living things die, they emit a projectile that will seek other enemies for "
+   "a short time."
    "\n\n"
    "Creates an artificial soul on your targets and makes it destroy their neighbors.";
 
@@ -123,7 +128,8 @@
 "LITH_TXT_UPGRADE_EFFEC_AutoPistol" =
    "Makes your pistol fire in full auto."
    "\n\n"
-   "Simply changes the trigger mechanism a bit to make the pistol fire automatically.";
+   "Simply changes the trigger mechanism a bit to make the pistol fire "
+   "automatically.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_PlasPistol" = "Plasma Pistol";
@@ -154,7 +160,9 @@
    "Gives your rifle a sniper firing mode."
    "\n\n"
    "A complete replacement for the trigger mechanism which adds a third mode, "
-   "allowing you to burst-fire accurate, painful shots.";
+   "allowing you to burst-fire accurate, painful shots."
+   "\n\n"
+   "\cdWorks with Laser Rifle.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_LaserRCW" = "Laser Rifle";
@@ -163,7 +171,9 @@
    "\n\n"
    "Modal Rifle may be used with this upgrade."
    "\n\n"
-   "Uses a standard photon accelerator to fire lasers out of your rifle.";
+   "Uses a standard photon accelerator to fire lasers out of your rifle."
+   "\n\n"
+   "\cdWorks with Modal Rifle.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_HomingRPG" = "Homing Rocket";
@@ -183,7 +193,8 @@
    "\n\n"
    "Allows your grenade launcher to hold multiple rockets and fire them all at once."
    "\n\n"
-   "Hold fire to load more grenades, and then hold alt-fire to change the firing mode.";
+   "Hold fire to load more grenades, and then hold alt-fire to change the firing "
+   "mode.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_PlasLaser" = "Plasmatic Las.";
@@ -214,12 +225,14 @@
 "LITH_TXT_UPGRADE_EFFEC_OmegaRail" =
    "Your cannon fires highly deadly, pinpoint accurate plasmatic death."
    "\n\n"
-   "Implements a plasma charger in your cannon, made with reverse-engineered magical compounds.";
+   "Implements a plasma charger in your cannon, made with reverse-engineered "
+   "magical compounds.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_Mateba_A" = "Finalizer";
 "LITH_TXT_UPGRADE_EFFEC_Mateba_A" =
-   "Makes the Mateba fire a projectile that instantly kills monsters below 40% health on its last shot.";
+   "Makes the Mateba fire a projectile that instantly kills monsters below 50% "
+   "health on its last shot.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SPAS_A" = "Void Breath";
@@ -234,27 +247,43 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SMG_A" = "SMG Trimag";
 "LITH_TXT_UPGRADE_EFFEC_SMG_A" =
-   "Triples the SMG's magazine size, but makes it slower to reload.";
+   "Triples the SMG's magazine size, but makes it slower to reload."
+   "\n\n"
+   "\cdWorks with Seeker Rounds."
+   "\n\n"
+   "\cdWorks with Safety System.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SMG_B" = "Seeker Rounds";
 "LITH_TXT_UPGRADE_EFFEC_SMG_B" =
-   "Makes the SMG's rounds home in on targets in a small cone.";
+   "Makes the SMG's rounds home in on targets in a small cone."
+   "\n\n"
+   "\cdWorks with SMG Trimag."
+   "\n\n"
+   "\cdWorks with Safety System.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SMG_C" = "Safety System";
 "LITH_TXT_UPGRADE_EFFEC_SMG_C" =
-   "When the SMG is about to overheat, makes it stop firing for a short time.";
+   "When the SMG is about to overheat, makes it stop firing for a short time."
+   "\n\n"
+   "\cdWorks with Seeker Rounds."
+   "\n\n"
+   "\cdWorks with SMG Trimag.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_IonRifle_A" = "Rad. Ionizer";
 "LITH_TXT_UPGRADE_EFFEC_IonRifle_A" =
-   "Ionizes enemies, making them take more damage when hit for a few seconds.";
+   "Ionizes enemies, making them take more damage when hit for a few seconds."
+   "\n\n"
+   "\cdWorks with Overloader.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_IonRifle_B" = "Overloader";
 "LITH_TXT_UPGRADE_EFFEC_IonRifle_B" =
-   "Lets you hold down fire to charge the Ion Rifle, at the cost of cooldown time.";
+   "Lets you hold down fire to charge the Ion Rifle, at the cost of cooldown time."
+   "\n\n"
+   "\cdWorks with Rad. Ionizer.";
 
 //----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_CPlasma_A" = "Pulse Charger";
