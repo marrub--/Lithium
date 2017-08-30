@@ -3,7 +3,7 @@
 #define Case(...)
 #endif
 
-// Body Upgrades -------------------------------------------------------------
+// Body Upgrades -------------------------------------------------------------|
 Case(HeadsUpDisp)
    A(HeadsUpDisp)
    D(HeadsUpDisp)
@@ -13,11 +13,6 @@ Case(HeadsUpDis2)
    A(HeadsUpDis2)
    D(HeadsUpDis2)
    R(HeadsUpDis2)
-
-Case(HeadsUpDis3)
-   A(HeadsUpDis3)
-   D(HeadsUpDis3)
-   R(HeadsUpDis3)
 
 Case(JetBooster)
    A(JetBooster)
@@ -59,7 +54,7 @@ Case(Adrenaline)
    U(Adrenaline)
    R(Adrenaline)
 
-// Weapon Upgrades -----------------------------------------------------------
+// Weapon Upgrades -----------------------------------------------------------|
 Case(RifleModes)
    D(RifleModes)
    R(RifleModes)
@@ -70,7 +65,7 @@ Case(HomingRPG)
 Case(PunctCannon)
    D(PunctCannon)
 
-// Extra Upgrades ------------------------------------------------------------
+// Extra Upgrades ------------------------------------------------------------|
 Case(7777777)
    A(7777777)
    D(7777777)
@@ -84,7 +79,7 @@ Case(lolsords)
 Case(Goldeneye)
    U(Goldeneye)
 
-// Downgrades ----------------------------------------------------------------
+// Downgrades ----------------------------------------------------------------|
 Case(Implying)
    U(Implying)
 
@@ -96,7 +91,7 @@ Case(UNCEUNCE)
 Case(InstaDeath)
    U(InstaDeath)
 
-//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------|
 
 #undef A
 #undef D
