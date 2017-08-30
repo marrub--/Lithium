@@ -12,6 +12,13 @@ ______________________________________________________________________________
 
 - Sound credits are all in the "sndinfo" files in comments.
 
+See licenses/copylib.txt for license information on libc, as included in
+linked binary form in <acs/lithlib.bin>.
+
+Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.
+
+Source code for Lithium can be found at <https://github.com/marrub--/Lithium>.
+
 --- Credits
 
 Anthony Cole

@@ -20,15 +20,13 @@ I tend to use a lot of GDCC's C extensions, so some of the code may be a bit con
 
 # Licensing
 
-All of the C code in this project is copyrighted unless otherwise stated. Do not use it elsewhere without permission.
+All of the content and source code in this project is copyrighted unless otherwise stated. Do not use it elsewhere without permission. See pk7/credits.txt for more information.
 
-All DECORATE code or other such code in the `pk7` folder is public domain as defined by [the CC0 license](http://creativecommons.org/publicdomain/zero/1.0/).
+All DECORATE code in the `pk7/lscripts` folder is public domain as defined by [the CC0 license](http://creativecommons.org/publicdomain/zero/1.0/).
 
-The LithOS3 library is distributed under the MIT license as detailed in `pk7/LICENSE.lithos3.txt`.
+The LithOS3 library is distributed under the MIT license as detailed in `pk7/licenses/LICENSE.lithos3.txt`.
 
-GDCC's libc implementation is distributed under the LGPL license as detailed in `pk7/copylib.txt`.
-
-All other resources (sprites, sounds, etc.) are owned by their respective creators.
+GDCC's libc is distributed under the LGPL license as detailed in `pk7/licenses/copylib.txt`.
 
 Respect content creators, ask permission before using something from this mod.
 
