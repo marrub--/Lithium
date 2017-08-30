@@ -36,6 +36,14 @@ static fixed lmvar rain_dist;
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_GetWorldExtern
+//
+worldinfo_t *Lith_GetWorldExtern(void)
+{
+   return &world;
+}
+
+//
 // Lith_FreezeTime
 //
 void Lith_FreezeTime(bool on)
@@ -399,7 +407,6 @@ static void UpdateGame(void)
 //
 static void GSInit(void)
 {
-   extern void SetupSpriteBlitter(void);
    extern void Lith_GInit_Shop(void);
    extern void Lith_GSReinit_Upgrade(void);
    extern void Lith_GSInit_Upgrade(void);
@@ -408,7 +415,6 @@ static void GSInit(void)
    extern void Lith_InstallCBIItem(int num);
 
    CheckModCompat();
-   SetupSpriteBlitter();
    UpdateGame();
    GetDebugInfo();
    Lith_GInit_Shop();

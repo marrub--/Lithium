@@ -194,7 +194,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       int y = 220 - (14 * vmstate->numoptions);
       for(int i = 0; i < vmstate->numoptions; i++, y += 14)
       {
-         if(Lith_GUI_Button_Id(g, i, vmstate->options[i].name, 45, y, .preset = &btndlgsel))
+         if(Lith_GUI_Button_Id(g, i, vmstate->options[i].name, 45, y, .preset = &guipre.btndlgsel))
          {
             vmstate->guiaction = GACT_SELOPTION;
             vmstate->seloption = i;

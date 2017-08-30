@@ -11,6 +11,10 @@
 #define ForPage() Lith_ForList(bippage_t *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
 
+// Extern Objects ------------------------------------------------------------|
+
+extern struct page_initializer const bip_pages[];
+
 // Types ---------------------------------------------------------------------|
 
 struct page_info
@@ -268,19 +272,19 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       if(world.grafZoneEntered)
       {
-         if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &btnbipmain))
+         if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &guipre.btnbipmain))
             bip->curcategory = BIPC_SEARCH;
          n += 10;
       }
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 70, 80 + n, .preset = &btnbipmain)) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 70, 80 + n, .preset = &guipre.btnbipmain)) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \
       } \
       n += 10;
 #include "lith_bip.h"
-      if(Lith_GUI_Button(g, "Statistics", 70, 80 + n, .preset = &btnbipmain))
+      if(Lith_GUI_Button(g, "Statistics", 70, 80 + n, .preset = &guipre.btnbipmain))
          bip->curcategory = BIPC_STATS;
 
       avail = bip->pageavail;
@@ -377,7 +381,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          {
             bippage_t *page = bip->result[i];
             struct page_info pinf = GetPageInfo(page);
-            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 80 + (i * 10), .preset = &btnbipmain))
+            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 80 + (i * 10), .preset = &guipre.btnbipmain))
             {
                bip->lastcategory = bip->curcategory;
                bip->curcategory = page->category;
@@ -406,20 +410,20 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       size_t n = list->size;
       size_t i = 0;
 
-      Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, btnlist.w, 170, btnlist.h * n);
+      Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);
 
       if(bip->curcategory != BIPC_EXTRA)
          Lith_ForListIter(bippage_t *page, *list, i++)
       {
-         int y = btnlist.h * i;
+         int y = guipre.btnlist.h * i;
 
-         if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, btnlist.h))
+         if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, guipre.btnlist.h))
             continue;
 
          struct page_info pinf = GetPageInfo(page);
          __str name = StrParam("%S%S", bip->curpage == page ? "\Ci" : "", pinf.shname);
 
-         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, .preset = &btnlist))
+         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, .preset = &guipre.btnlist))
             SetCurPage(g, bip, page, pinf.body);
       }
 
@@ -481,7 +485,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    }
 
    if(bip->curcategory != BIPC_MAIN)
-      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &btnbipback))
+      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &guipre.btnbipback))
          bip->curcategory = bip->lastcategory;
 
    DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 30.1, TICSECOND, 0.6);

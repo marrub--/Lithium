@@ -102,6 +102,7 @@
 #define tau (pi * 2.0f)
 
 // Types ---------------------------------------------------------------------|
+
 typedef long long int score_t;
 typedef long fixed fixed64_t;
 typedef uint64_t crc64_t;
@@ -130,19 +131,21 @@ enum
 };
 
 // Printing ------------------------------------------------------------------|
-extern void (*DrawSprite)(__str name, int flags, int id, fixed x, fixed y, fixed hold);
-extern void (*DrawSpriteX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
-extern void (*DrawSpriteXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
-extern void (*DrawSpriteXXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
-extern void (*DrawSpritePlain)(__str name, int id, fixed x, fixed y, fixed hold);
-extern void (*DrawSpriteAlpha)(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
-extern void (*DrawSpriteFade)(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
+
+void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
+void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
+void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
+void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
+void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold);
+void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
+void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
 void PrintBold(__str fmt, ...);
 
 // Strings -------------------------------------------------------------------|
+
 __str StrUpper(__str in);
 unsigned StrHash(char __str_ars const *s);
 unsigned CStrHash(char const *s);
@@ -154,6 +157,7 @@ __str LanguageNull(__str fmt, ...);
 __str StrParam(__str fmt, ...);
 
 // Utilities -----------------------------------------------------------------|
+
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
@@ -163,6 +167,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount);
 void Lith_TakeActorInventory(int tid, __str item, int amount);
 
 // Math ----------------------------------------------------------------------|
+
 [[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
 [[__optional_args(1)]] float RandomFloat(float max, float min);
 float mag2f(float x, float y);
@@ -179,8 +184,11 @@ struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3
 struct polar ctopol(fixed x, fixed y);
 
 // Address Space Definitions -------------------------------------------------|
+
+#ifndef EXTERNAL_CODE
 __addrdef extern __mod_arr lmvar;
 __addrdef extern __hub_arr lwvar;
+#endif
 
 #endif
 

@@ -11,11 +11,6 @@
 #define Lith_UpgrBuy(p, upgr, ...) \
    p->buy(&(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", __VA_ARGS__)
 
-// Extern Objects ------------------------------------------------------------|
-
-extern upgradeinfo_t *upgradeinfo;
-extern int UPGR_MAX;
-
 // Extern Functions ----------------------------------------------------------|
 
 // These are included here so the compiler may check the function signatures.

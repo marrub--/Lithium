@@ -9,6 +9,10 @@
 #define LogTok(s, tok) \
    Log(s " (type %i string %s)", tok->type, tok->str ? tok->str : c"no string")
 
+// Extern Objects ------------------------------------------------------------|
+
+extern dlgdef_t *lmvar dlgdefs;
+
 // Static Functions ----------------------------------------------------------|
 
 static int *NextCode(struct dlgparsestate_s *d);

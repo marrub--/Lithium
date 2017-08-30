@@ -59,9 +59,9 @@ __addrdef extern __mod_arr dmonarr;
 
 typedef struct dmon dmonarr dmon_t;
 
-extern __str const dmgtype_names[dmgtype_max];
-
+#ifndef EXTERNAL_CODE
 extern int dmonarr dmonid;
+#endif
 
 [[__call("ScriptS"), __optional_args(2)]] dmon_t *DmonPtr(int tid, int ptr);
 dmon_t *Dmon(int id);

@@ -14,7 +14,6 @@
 static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
    {},
    {"player/cbi/open", "player/cbi/close"},
-   {"player/gb/open",  "player/gb/close" },
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -174,6 +173,14 @@ GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
 upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
 {
    return p->upgrademap.find(name);
+}
+
+//
+// Lith_GetPlayersExtern
+//
+player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
+{
+   return &players;
 }
 
 //
@@ -384,7 +391,6 @@ static void Lith_PlayerRunScripts(player_t *p)
       switch(p->activegui)
       {
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;
-      case GUI_GB:  Lith_PlayerUpdateGB(p);     break;
       }
 
       Lith_PlayerUpdateUpgrades(p); // Update upgrades

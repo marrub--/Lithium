@@ -125,10 +125,16 @@ typedef struct worldinfo_s
    bool dbgNoMon : 1;
 } worldinfo_t;
 
+#ifndef EXTERNAL_CODE
 extern bool lmvar mapinit;
+#endif
 
+#ifndef EXTERNAL_CODE
 extern worldinfo_t world;
-extern payoutinfo_t payout;
+#else
+worldinfo_t *Lith_GetWorldExtern(void);
+#define world (*Lith_GetWorldExtern())
+#endif
 
 #endif
 

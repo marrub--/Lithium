@@ -7,7 +7,6 @@ enum
    // hid_base         to hid_base + 99    reserved for magic
    // hid_base +   100 to hid_base + 999   reserved for dialogue
    // hid_base +  1000 to hid_base + 29999 reserved for CBI
-   // hid_base + 30000 to hid_base + 39999 reserved for the Gameboy
    // hid_base + 40000 to hid_base + 40999 reserved for payout
    // hid_base + 41000 to hid_base + 41999 reserved for misc.
    // hid_base + 42000 to hid_base + 42999 reserved for HUD
@@ -25,10 +24,6 @@ enum
    // CBI
    hid_base_cbi = hid_base + 1000,
    hid_end_cbi  = hid_base + 29999,
-
-   // Gameboy
-   hid_base_gb = hid_base + 30000,
-   hid_end_gb  = hid_base + 39999,
 
    // Payout
    hid_base_payout = hid_base + 40000,

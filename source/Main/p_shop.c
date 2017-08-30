@@ -101,19 +101,19 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
          nitems++;
    }
 
-   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, btnlist.w, 192, btnlist.h * nitems);
+   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, guipre.btnlist.w, 192, guipre.btnlist.h * nitems);
 
    for(int i = 0, y = 0; i < countof(shopitems); i++)
    {
-      if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
+      if(Lith_GUI_ScrollOcclude(g, st_shopscr, y, guipre.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
       __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopitems[i].name);
 
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_shopsel].i, .preset = &btnlistsel))
+      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_shopsel].i, .preset = &guipre.btnlistsel))
          g->st[st_shopsel].i = i;
 
-      y += btnlistsel.h;
+      y += guipre.btnlistsel.h;
    }
 
    Lith_GUI_ScrollEnd(g, st_shopscr);

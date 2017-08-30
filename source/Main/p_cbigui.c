@@ -152,12 +152,12 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 
    DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TICSECOND, 0.7);
 
-   if(Lith_GUI_Button(g, .x = 296, 13, .preset = &btnexit))
+   if(Lith_GUI_Button(g, .x = 296, 13, .preset = &guipre.btnexit))
       p->useGUI(GUI_CBI);
 
    static __str tabnames[cbi_tab_max] = {"Upgrades", "CBI", "Shop", "Info", "Settings", "Log"};
    for(int i = 0; i < cbi_tab_max; i++)
-      if(Lith_GUI_Button_Id(g, i, tabnames[i], btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &btntab))
+      if(Lith_GUI_Button_Id(g, i, tabnames[i], guipre.btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &guipre.btntab))
          g->st[st_maintab].i = i;
 
    extern void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p);

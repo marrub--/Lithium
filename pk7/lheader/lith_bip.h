@@ -95,7 +95,5 @@ typedef struct bip_s
    list_t infogr[BIPC_MAX];
 } bip_t;
 
-extern struct page_initializer const bip_pages[];
-
 #endif
 

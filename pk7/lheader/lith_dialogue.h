@@ -84,9 +84,5 @@ typedef struct dlgdef_s
    struct dlgdef_s *next;
 } dlgdef_t;
 
-// Extern Objects ------------------------------------------------------------|
-
-extern dlgdef_t *lmvar dlgdefs;
-
 #endif
 

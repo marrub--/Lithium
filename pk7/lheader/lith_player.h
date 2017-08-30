@@ -10,7 +10,6 @@
 #include "lith_log.h"
 #include "lith_list.h"
 #include "lith_weaponinfo.h"
-#include "lith_games.h"
 #include "lith_shopdef.h"
 
 #include <GDCC/HashMap.h>
@@ -55,7 +54,6 @@ typedef enum guiname_s
 {
    GUI_NONE,
    GUI_CBI,
-   GUI_GB,
    GUI_MAX
 } guiname_t;
 
@@ -181,7 +179,6 @@ typedef struct player_guidata_s
 {
    guiname_t activegui;
    cbi_t     cbi;
-   gb_t      gb;
 } player_guidata_t;
 
 //
@@ -344,6 +341,11 @@ typedef struct player
 
 // Extern Objects ------------------------------------------------------------|
 
+#ifndef EXTERNAL_CODE
 extern player_t players[MAX_PLAYERS];
+#else
+player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
+#define players (*Lith_GetPlayersExtern())
+#endif
 
 #endif

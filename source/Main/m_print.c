@@ -11,18 +11,10 @@
       ACS_MoreHudMessage(); \
    } while(0)
 
-void (*DrawSprite)(__str name, int flags, int id, fixed x, fixed y, fixed hold);
-void (*DrawSpriteX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
-void (*DrawSpriteXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
-void (*DrawSpriteXXX)(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
-void (*DrawSpritePlain)(__str name, int id, fixed x, fixed y, fixed hold);
-void (*DrawSpriteAlpha)(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
-void (*DrawSpriteFade)(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
-
 //
-// A_DrawSprite
+// DrawSprite
 //
-static void A_DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
+void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -30,9 +22,9 @@ static void A_DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed 
 }
 
 //
-// A_DrawSpriteX
+// DrawSpriteX
 //
-static void A_DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
+void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -40,9 +32,9 @@ static void A_DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed
 }
 
 //
-// A_DrawSpriteXX
+// DrawSpriteXX
 //
-static void A_DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
+void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -50,9 +42,9 @@ static void A_DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixe
 }
 
 //
-// A_DrawSpriteXXX
+// DrawSpriteXXX
 //
-static void A_DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
+void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -60,9 +52,9 @@ static void A_DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fix
 }
 
 //
-// A_DrawSpritePlain
+// DrawSpritePlain
 //
-static void A_DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
+void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -70,9 +62,9 @@ static void A_DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 }
 
 //
-// A_DrawSpriteAlpha
+// DrawSpriteAlpha
 //
-static void A_DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
+void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_ALPHA|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -80,94 +72,13 @@ static void A_DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, 
 }
 
 //
-// A_DrawSpriteFade
+// DrawSpriteFade
 //
-static void A_DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
+void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage(fadetime);
-}
-
-#if 0
-//
-// Z_DrawSprite
-//
-static void Z_DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
-{
-}
-
-//
-// Z_DrawSpriteX
-//
-static void Z_DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
-{
-}
-
-//
-// Z_DrawSpriteXX
-//
-static void Z_DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
-{
-}
-
-//
-// Z_DrawSpriteXXX
-//
-static void Z_DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
-{
-}
-
-//
-// Z_DrawSpritePlain
-//
-static void Z_DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
-{
-}
-
-//
-// Z_DrawSpriteAlpha
-//
-static void Z_DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
-{
-}
-
-//
-// Z_DrawSpriteFade
-//
-static void Z_DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
-{
-}
-#endif
-
-//
-// SetupSpriteBlitter
-//
-void SetupSpriteBlitter(void)
-{
-   // TODO: implement ZScript hudmessages
-#if 0
-   if(world.grafZoneEntered)
-   {
-      DrawSprite      = Z_DrawSprite;
-      DrawSpriteX     = Z_DrawSpriteX;
-      DrawSpriteXX    = Z_DrawSpriteXX;
-      DrawSpriteXXX   = Z_DrawSpriteXXX;
-      DrawSpriteAlpha = Z_DrawSpriteAlpha;
-      DrawSpritePlain = Z_DrawSpritePlain;
-      DrawSpriteFade  = Z_DrawSpriteFade;
-   }
-   else
-#endif
-   {
-      DrawSprite      = A_DrawSprite;
-      DrawSpriteX     = A_DrawSpriteX;
-      DrawSpriteXX    = A_DrawSpriteXX;
-      DrawSpriteXXX   = A_DrawSpriteXXX;
-      DrawSpriteAlpha = A_DrawSpriteAlpha;
-      DrawSpritePlain = A_DrawSpritePlain;
-      DrawSpriteFade  = A_DrawSpriteFade;
-   }
 }
 
 //

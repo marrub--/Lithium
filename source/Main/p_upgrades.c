@@ -105,13 +105,8 @@ static __str const upgrcateg[UC_MAX] = {
    [UC_Down] = "\CtDowngrade"
 };
 
-//static int numextraupgradecallbacks;
-//static upgrade_cb_register_t extraupgradecallbacks;
-
-// Extern Objects ------------------------------------------------------------|
-
-upgradeinfo_t *upgradeinfo;
-int UPGR_MAX = countof(staticupgradeinfo);
+static upgradeinfo_t *upgradeinfo;
+static int UPGR_MAX = countof(staticupgradeinfo);
 
 // Static Functions ----------------------------------------------------------|
 
@@ -428,11 +423,11 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 //
 static void GUIUpgradesList(gui_state_t *g, player_t *p)
 {
-   if(Lith_GUI_Button(g, .x = 88, 27, .preset = &btnprev))
+   if(Lith_GUI_Button(g, .x = 88, 27, .preset = &guipre.btnprev))
       if(g->st[st_upgrfilter].i-- <= 0)
          g->st[st_upgrfilter].i = UC_MAX;
 
-   if(Lith_GUI_Button(g, .x = 88 + btnprev.w, 27, .preset = &btnnext))
+   if(Lith_GUI_Button(g, .x = 88 + guipre.btnprev.w, 27, .preset = &guipre.btnnext))
       if(g->st[st_upgrfilter].i++ >= UC_MAX)
          g->st[st_upgrfilter].i = 0;
 
@@ -453,12 +448,12 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 
    HudMessagePlain(g->hid--, 15.1, 28.1, TICSECOND);
 
-   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 38, btnlist.w, 184, btnlist.h * numbtns);
+   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 38, guipre.btnlist.w, 184, guipre.btnlist.h * numbtns);
 
    int curcategory = UC_MAX;
    int y = 0;
 
-   for(int i = 0; i < p->upgrmax; i++, y += btnlist.h)
+   for(int i = 0; i < p->upgrmax; i++, y += guipre.btnlist.h)
    {
       bool changed = false;
 
@@ -470,22 +465,22 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
          changed = true;
 
          if(filter == -1)
-            y += btnlist.h;
+            y += guipre.btnlist.h;
       }
 
       if(filter != -1 && curcategory != filter)
       {
-         y -= btnlist.h;
+         y -= guipre.btnlist.h;
          continue;
       }
 
-      if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, btnlist.h))
+      if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, guipre.btnlist.h))
          continue;
 
       if(changed && filter == -1)
       {
          HudMessageF("CBIFONT", "%S", upgrcateg[curcategory]);
-         HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - btnlist.h) + 1.1, TICSECOND);
+         HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - guipre.btnlist.h) + 1.1, TICSECOND);
       }
 
       __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
@@ -501,9 +496,9 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
                  case UPGR_DarkCannon: color = "m"; break;
                  default:              color = null;}
 
-           if(upgr->active) preset = &btnlistactivated;
-      else if(upgr->owned)  preset = &btnlistactive;
-      else                  preset = &btnlistsel;
+           if(upgr->active) preset = &guipre.btnlistactivated;
+      else if(upgr->owned)  preset = &guipre.btnlistactive;
+      else                  preset = &guipre.btnlistsel;
 
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_upgrsel].i, .color = color, .preset = preset))
          g->st[st_upgrsel].i = i;
@@ -613,7 +608,7 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
    if(Lith_GUI_Button(g, "Buy", 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
 
-   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + btndefault.w + 2, 205, !upgr->canUse(p)))
+   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
 }
 

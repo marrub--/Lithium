@@ -210,26 +210,35 @@ typedef struct gui_txtbox_args_s
    char  *inbuf;
 } gui_txtbox_args_t;
 
+struct gui_presets {
+   gui_button_preset_t btndef;
+   gui_button_preset_t btntab;
+   gui_button_preset_t btnexit;
+   gui_button_preset_t btnnext;
+   gui_button_preset_t btnprev;
+   gui_button_preset_t btnnexts;
+   gui_button_preset_t btnprevs;
+   gui_button_preset_t btnlist;
+   gui_button_preset_t btnlistsel;
+   gui_button_preset_t btnlistactive;
+   gui_button_preset_t btnlistactivated;
+   gui_button_preset_t btnbipmain;
+   gui_button_preset_t btnbipback;
+   gui_button_preset_t btndlgsel;
+   gui_checkb_preset_t cbxdef;
+   gui_checkb_preset_t cbxsmall;
+   gui_scroll_preset_t scrdef;
+   gui_slider_preset_t slddef;
+};
+
 // Extern Objects ------------------------------------------------------------|
 
-extern gui_button_preset_t const btndefault;
-extern gui_button_preset_t const btntab;
-extern gui_button_preset_t const btnexit;
-extern gui_button_preset_t const btnnext;
-extern gui_button_preset_t const btnprev;
-extern gui_button_preset_t const btnnexts;
-extern gui_button_preset_t const btnprevs;
-extern gui_button_preset_t const btnlist;
-extern gui_button_preset_t const btnlistsel;
-extern gui_button_preset_t const btnlistactive;
-extern gui_button_preset_t const btnlistactivated;
-extern gui_button_preset_t const btnbipmain;
-extern gui_button_preset_t const btnbipback;
-extern gui_button_preset_t const btndlgsel;
-extern gui_checkb_preset_t const cbxdefault;
-extern gui_checkb_preset_t const cbxsmall;
-extern gui_scroll_preset_t const scrdefault;
-extern gui_slider_preset_t const slddefault;
+#ifndef EXTERNAL_CODE
+extern struct gui_presets const guipre;
+#else
+struct gui_presets const *Lith_GUIPreExtern(void);
+#define guipre (*Lith_GUIPreExtern())
+#endif
 
 // Extern Functions ----------------------------------------------------------|
 

@@ -106,7 +106,7 @@ static struct monster_info const monsterinfo[] = {
    {Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
 };
 
-__str const dmgtype_names[dmgtype_max] = {
+static __str const dmgtype_names[dmgtype_max] = {
    "Bullets",
    "Energy",
    "Fire",

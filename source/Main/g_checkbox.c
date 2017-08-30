@@ -7,7 +7,7 @@
 //
 bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
 {
-   gui_checkb_preset_t const *pre = a->preset ? a->preset : &cbxdefault;
+   gui_checkb_preset_t const *pre = a->preset ? a->preset : &guipre.cbxdef;
 
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x-(pre->w/2), a->y-(pre->h/2), pre->w, pre->h);
