@@ -33,6 +33,9 @@ static fixed lmvar rain_px;
 static fixed lmvar rain_py;
 static fixed lmvar rain_dist;
 
+static gsinit_cb_t GSInitCb[20];
+static int GSInitCbNum;
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -41,6 +44,14 @@ static fixed lmvar rain_dist;
 worldinfo_t *Lith_GetWorldExtern(void)
 {
    return &world;
+}
+
+//
+// Lith_GSInitRegister
+//
+void Lith_GSInitRegister(gsinit_cb_t cb)
+{
+   GSInitCb[GSInitCbNum++] = cb;
 }
 
 //
@@ -421,6 +432,9 @@ static void GSInit(void)
 
    if(!world.gsinit)
    {
+      for(int i = 0; i < GSInitCbNum; i++)
+         GSInitCb[i]();
+
       Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
       Lith_GSInit_Dialogue();
