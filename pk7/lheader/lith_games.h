@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #ifndef LITH_GAMES_H
 #define LITH_GAMES_H
 

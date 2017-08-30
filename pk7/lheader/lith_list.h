@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #ifndef LITH_LIST_H
 #define LITH_LIST_H
 

@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #define _GNU_SOURCE // Needed for fopencookie. See: man 7 feature_test_macros
 
 #include "lith_common.h"

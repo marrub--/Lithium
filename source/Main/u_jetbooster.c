@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
 
 #define UData UData_JetBooster(upgr)

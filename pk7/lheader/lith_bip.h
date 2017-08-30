@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #if defined(LITH_X)
   LITH_X(WEAPONS,      "Weapons")
   LITH_X(ENEMIES,      "Adversaries")

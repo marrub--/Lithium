@@ -1,3 +1,4 @@
+// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 // Required for sincos(3).
 #define _GNU_SOURCE
 #include "lith_upgrades_common.h"
