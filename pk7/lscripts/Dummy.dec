@@ -20,6 +20,11 @@ actor Lith_Dummy
    }
 }
 
+actor Lith_PlayerDummyPuff : Lith_Dummy
+{
+   DamageType "Lith_PlayerMissile"
+}
+
 actor Lith_DummyArmor : BasicArmorBonus {}
 
 // Don't remove this, it is actually used for checking if this mod is loaded.

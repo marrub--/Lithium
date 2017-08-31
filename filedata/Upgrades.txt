@@ -231,6 +231,11 @@ Makes the Mateba fire a projectile that instantly kills monsters below 50%
 health on its last shot.
 
 ##----------------------------------------------------------------------------|
+== LITH_TXT_UPGRADE_TITLE_ShockRif_A | Shock Charge
+@@ LITH_TXT_UPGRADE_EFFEC_ShockRif_A
+Creates bolts of lightning around the Shock Rifle's impacts.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_ShockRif_B | Elec. Binding
 @@ LITH_TXT_UPGRADE_EFFEC_ShockRif_B
 Makes the Shock Rifle do more shock damage, and when hit with 6 consecutive

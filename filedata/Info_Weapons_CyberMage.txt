@@ -46,6 +46,14 @@ While the weapon only has a 7-round magazine, it fires extremely deadly
 well-manufactured, likely under the care of a very skilled Kiri craftsman.
 
 ##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_ShockRifUpgr | $LITH_TXT_UPGRADE_TITLE_ShockRif_A
+== LITH_TXT_INFO_TITLE_ShockRifUpgr | Shock Charge
+@@ LITH_TXT_INFO_DESCR_ShockRifUpgr
+A simple modification to the barrel that wraps an explosive sigil around the
+bullet as it leaves the gun, causing it to explode into electricity upon
+impact.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_ShockRifUpg2 | $LITH_TXT_UPGRADE_TITLE_ShockRif_B
 == LITH_TXT_INFO_TITLE_ShockRifUpg2 | Electric Binding
 @@ LITH_TXT_INFO_DESCR_ShockRifUpg2
