@@ -236,35 +236,41 @@ typedef struct player_invdata_s
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_PlayerCloseGUI(struct player *p);
-void Lith_PlayerUseGUI(struct player *p, guiname_t type);
-[[__optional_args(1)]]
-score_t Lith_GetModScore(struct player *p, score_t score, bool nomul);
-[[__optional_args(1)]]
-void Lith_GiveScore(struct player *p, score_t score, bool nomul);
-void Lith_TakeScore(struct player *p, score_t score);
-void Lith_ValidatePlayerTID(struct player *p);
+// state
+[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
 [[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
+                      int  Lith_PlayerCurWeaponType(struct player *p);
+                      bool Lith_ButtonPressed(struct player *p, int bt);
+                      bool Lith_SetPlayerVelocity(struct player *p,
+                         fixed velx, fixed vely, fixed velz,
+                         bool add, bool setbob);
+                      void Lith_ValidatePlayerTID(struct player *p);
 
-[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
-[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
+// gui
+void Lith_PlayerCloseGUI(struct player *p);
+void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 
-                      void Lith_PlayerItemFx(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerDamageBob(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerView(struct player *p);
-                      void Lith_PlayerStyle(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerHUD(struct player *p);
-[[__optional_args(2)]]
-bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob);
-bool Lith_ButtonPressed(struct player *p, int bt);
-int Lith_PlayerCurWeaponType(struct player *p);
-void Lith_PlayerDeltaStats(struct player *p);
+// score
+[[__optional_args(1)]] void Lith_GiveScore(struct player *p, score_t score,
+                          bool nomul);
+                       void Lith_TakeScore(struct player *p, score_t score);
+[[__optional_args(1)]] score_t Lith_GetModScore(struct player *p,
+                          score_t score, bool nomul);
+
+// misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 void Lith_ClearTextBuf(struct player *p);
-struct player *Lith_GetPlayer(int tid, int ptr);
-void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols, char scol, int bx, int by);
 __str Lith_PlayerDiscriminator(int pclass);
+
+[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
+
+void Lith_PlayerDeltaStats(struct player *p);
+
+void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols,
+   char scol, int bx, int by);
+
+struct player *Lith_GetPlayer(int tid, int ptr);
 
 // Types ---------------------------------------------------------------------|
 
@@ -293,6 +299,7 @@ typedef struct player
    attr setVel  {call: Lith_SetPlayerVelocity(this)}
    attr mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
    attr manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
+   attr validateTID {call: Lith_ValidatePlayerTID(this)}
 
    // score
    attr giveScore   {call: Lith_GiveScore(this)}

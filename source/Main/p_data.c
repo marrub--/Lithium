@@ -202,7 +202,7 @@ void Lith_ResetPlayer(player_t *p)
 
    // If the map sets the TID on the first tic, it could already be set here.
    p->tid = 0;
-   Lith_ValidatePlayerTID(p);
+   p->validateTID();
 
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.

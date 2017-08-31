@@ -74,7 +74,7 @@ reinit:
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
 
       // If the map changes this we need to make sure it's still correct.
-      Lith_ValidatePlayerTID(p);
+      p->validateTID();
 
       p->ticks++;
    }
@@ -378,6 +378,11 @@ static void Lith_BossWarning(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
+                         extern void Lith_PlayerItemFx(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerDamageBob(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerView(player_t *p);
+                         extern void Lith_PlayerStyle(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
    // Pre-logic: Update data from the engine.
    Lith_PlayerUpdateWeapon(p); // Update weapon info
    Lith_PlayerScore(p);        // Update score
