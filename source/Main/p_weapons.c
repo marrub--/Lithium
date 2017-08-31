@@ -419,11 +419,6 @@ void Lith_Feuer(bool left, bool fire)
 {
    withplayer(LocalPlayer)
    {
-      if(fire) {
-         ACS_FadeTo(255, 255, 225, 0.3, 0);
-         ACS_FadeTo(255, 255, 225, 0, 0.5);
-      }
-
       __str actor = fire ? "Lith_FeuerExplosion" : "Lith_FeuerTest";
       int pufftid;
       ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024, FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
