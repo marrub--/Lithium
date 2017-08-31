@@ -117,6 +117,11 @@ void Lith_PlayerView(player_t *p)
 
    p->addpitch = addp + p->extrpitch;
    p->addyaw   = addy + p->extryaw;
+
+   ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2) {
+      if(p->sidev) p->addroll = lerpf(p->addroll, -p->sidev * mul, 0.05);
+      else         p->addroll = lerpf(p->addroll, 0,               0.10);
+   }
 }
 
 //

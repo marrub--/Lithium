@@ -73,7 +73,7 @@ typedef struct player_delta_s
    // Position
    fixed x, y, z;
    fixed floorz;
-   fixed pitch, yaw;
+   fixed pitch, yaw, roll;
 
    // Movement
    fixed velx, vely, velz;
@@ -161,6 +161,7 @@ typedef struct player_viewdata_s
 
    float addpitch;
    float addyaw;
+   float addroll;
 
    float bobpitch;
    float bobyaw;

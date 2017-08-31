@@ -81,6 +81,7 @@ void Lith_PlayerUpdateData(player_t *p)
 
    p->pitch = ACS_GetActorPitch(0) - p->addpitch;
    p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
+   p->roll  = ACS_GetActorRoll (0) - p->addroll;
 
    p->pitchf = ((-p->pitch + 0.25) * 2) * pi;
    p->yawf   = p->yaw * tau - pi;
@@ -240,6 +241,7 @@ void Lith_ResetPlayer(player_t *p)
 
    p->addpitch = 0.0f;
    p->addyaw   = 0.0f;
+   p->addroll  = 0.0f;
 
    p->bobpitch = 0.0f;
    p->bobyaw   = 0.0f;

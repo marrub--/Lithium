@@ -16,6 +16,7 @@ user bool   lith_player_brightweps    = false;
 user bool   lith_player_noitemfx      = false;
 user bool   lith_player_teleshop      = false;
 user float  lith_player_footstepvol   = 1.0;
+user float  lith_player_viewtilt      = 0.0;
 
 // Save data
 // These are 200 bytes of storage per, so overall we have around 4kb available.
