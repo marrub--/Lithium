@@ -33,6 +33,7 @@ enum
    UG_None,
    UG_Pistol,
    UG_Shotgun,
+   UG_SSG,
    UG_Rifle,
    UG_Launcher,
    UG_Plasma,
