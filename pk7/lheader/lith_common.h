@@ -49,6 +49,13 @@
 #define Lith_ScriptCallString(...) \
    (world.grafZoneEntered ? ACS_ScriptCallString(__VA_ARGS__) : "")
 
+#define HudMessageLog(...) \
+   ( \
+      HudMessage(__VA_ARGS__), \
+      ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP|HUDMSG_NOTWITH3DVIEW|HUDMSG_NOTWITHOVERLAYMAP|HUDMSG_LOG, hid_log_throwaway, CR_UNTRANSLATED, 0, 0, TICSECOND), \
+      ACS_EndHudMessage() \
+   )
+
 #define HudMessageF(font, ...) \
    ( \
       ACS_SetFont(font), \

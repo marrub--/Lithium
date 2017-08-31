@@ -328,6 +328,7 @@ void Lith_RunDialogue(int num)
 
          p->frozen++;
          p->setVel(0, 0, 0, false, true);
+         HudMessageLog("%S", vmstate.text);
          do
          {
             Lith_DialogueGUI(&gst, p, &vmstate);
@@ -358,6 +359,7 @@ void Lith_RunDialogue(int num)
             bool usetimer = vmstate.trmtimer != 0;
             p->frozen++;
             p->setVel(0, 0, 0, false, true);
+            HudMessageLog("%S", vmstate.text);
             do
             {
                Lith_TerminalGUI(&gst, p, &vmstate);

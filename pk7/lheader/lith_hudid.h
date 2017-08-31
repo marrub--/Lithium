@@ -46,6 +46,8 @@ enum
    hid_zoomcomp,
    hid_zoomcam = hid_zoomcomp + 8,
 
+   hid_log_throwaway,
+
    // HUD
    hid_base_hud = hid_base + 42000,
    hid_end_hud  = hid_base + 42999,
