@@ -89,152 +89,6 @@ typedef struct player_delta_s
    int  semifrozen;
 } player_delta_t;
 
-//
-// player_statedata_t
-//
-typedef struct player_statedata_s
-{
-   bool active;
-   bool dead;
-   bool reinit;
-
-   int   tid;
-   int   num;
-   long  ticks;
-   __str name;
-   int   pclass;
-
-   [[__anonymous]] player_delta_t cur;
-   player_delta_t old;
-} player_statedata_t;
-
-//
-// player_extdata_t
-//
-typedef struct player_extdata_s
-{
-   bip_t bip, *bipPtr;
-
-   struct upgr_data upgrdata;
-   upgrade_t        upgrades[UPGR_STATIC_MAX];
-   upgrademap_t     upgrademap;
-   int              upgrmax;
-   bool             upgrinit;
-
-   loginfo_t loginfo;
-   bool      hudenabled;
-
-   int decvars[8];
-   char txtbuf[8];
-   int tbptr;
-
-   score_t scoreaccum;
-   int     scoreaccumtime;
-   double  scoremul;
-   float   discount;
-
-   int spuriousexplosions;
-   int brouzouf;
-   bool hadinfrared;
-} player_extdata_t;
-
-//
-// player_staticdata_t
-//
-typedef struct player_staticdata_s
-{
-   bool  staticinit;
-   int   maxhealth;
-   int   maxarmor;
-   fixed jumpheight;
-   fixed viewheight;
-} player_staticdata_t;
-
-//
-// player_viewdata_t
-//
-typedef struct player_viewdata_s
-{
-   // pitch/yaw in precalculated sane radian format
-   float pitchf;
-   float yawf;
-
-   float addpitch;
-   float addyaw;
-   float addroll;
-
-   float bobpitch;
-   float bobyaw;
-
-   float extrpitch;
-   float extryaw;
-
-   int cameratid;
-   int weathertid;
-} player_viewdata_t;
-
-//
-// player_guidata_t
-//
-typedef struct player_guidata_s
-{
-   guiname_t activegui;
-   cbi_t     cbi;
-} player_guidata_t;
-
-//
-// player_statdata_t
-//
-typedef struct player_statdata_s
-{
-   int weaponsheld;
-   int itemsbought;
-   int upgradesowned;
-
-   long healthsum;
-   long healthused;
-
-   long armorsum;
-   long armorused;
-
-   score_t scoresum;
-   score_t scoreused;
-
-   int unitstravelled;
-} player_statdata_t;
-
-//
-// player_invdata_t
-//
-typedef struct player_invdata_s
-{
-   weapondata_t weapon;
-
-   int    riflefiremode;
-   list_t hudstrlist;
-
-   __str weaponclass;
-   __str armorclass;
-
-   int armortype;
-
-   struct keycards_s
-   {
-      bool redcard     : 1;
-      bool yellowcard  : 1;
-      bool bluecard    : 1;
-      bool redskull    : 1;
-      bool yellowskull : 1;
-      bool blueskull   : 1;
-   } keys;
-
-   // 🌌 「÷」 0
-   struct sigil_s
-   {
-      bool acquired;
-   } sigil;
-} player_invdata_t;
-
 // Extern Functions ----------------------------------------------------------|
 
 // state
@@ -278,19 +132,22 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 //
 // player_t
 //
-// 7/4/2016: That's a lot of data!
-// edit 9/4/2016: Holy shit, that's really a lot of data!
-// edit 7/5/2016: JESUS TAKE THE WHEEL
-// edit 3/1/2017: help
-// edit 6/1/2017: there's so much data that I had to split it
+//       7/4/2016: That's a lot of data!
+// edit  9/4/2016: Holy shit, that's really a lot of data!
+// edit  7/5/2016: JESUS TAKE THE WHEEL
+// edit  3/1/2017: help
+// edit  6/1/2017: there's so much data that I had to split it
 // edit 23/1/2017: D E S T R O Y
 // edit 26/2/2017: There is yet again so much data that I had to split it.
 // edit 11/3/2017: NOW WITH PROPERTY HELL
 // edit 11/7/2017: and now it's over 5000 bytes.
 // edit 14/7/2017: lol nevermind it's only 2kb now
+// edit 31/8/2017: m e r g e
 //
 typedef struct player
 {
+   // Properties -------------------------------------------------------------|
+
    // state
    attr reset    {call: Lith_ResetPlayer(this)}
    attr loadData {call: Lith_PlayerLoadData(this)}
@@ -336,15 +193,131 @@ typedef struct player
    attr canBuy  {call: Lith_ShopCanBuy(this)}
    attr buy     {call: Lith_ShopBuy(this)}
 
-   [[__anonymous]] player_statedata_t  statedata;
-   [[__anonymous]] player_extdata_t    extdata;
-   [[__anonymous]] player_staticdata_t staticdata;
-   [[__anonymous]] player_viewdata_t   viewdata;
-   [[__anonymous]] player_guidata_t    guidata;
-   [[__anonymous]] player_statdata_t   statdata;
-   [[__anonymous]] player_invdata_t    invdata;
+   // Members ----------------------------------------------------------------|
 
+   // Initialization
    bool wasinit;
+   bool active;
+   bool dead;
+   bool reinit;
+
+   // Info
+   int   tid;
+   int   num;
+   long  ticks;
+   __str name;
+   int   pclass;
+
+   // Deltas
+   [[__anonymous]] player_delta_t cur;
+   player_delta_t old;
+
+   // BIP
+   bip_t bip, *bipPtr;
+
+   // Upgrades
+   struct upgr_data upgrdata;
+   upgrade_t        upgrades[UPGR_STATIC_MAX];
+   upgrademap_t     upgrademap;
+   int              upgrmax;
+   bool             upgrinit;
+
+   // HUD
+   loginfo_t loginfo;
+   bool      hudenabled;
+
+   // DECORATE/ZScript
+   int decvars[8];
+   char txtbuf[8];
+   int tbptr;
+
+   // Score
+   score_t scoreaccum;
+   int     scoreaccumtime;
+   double  scoremul;
+   float   discount;
+
+   // Misc
+   int spuriousexplosions;
+   int brouzouf;
+   bool hadinfrared;
+
+   // Static data
+   bool  staticinit;
+   int   maxhealth;
+   int   maxarmor;
+   fixed jumpheight;
+   fixed viewheight;
+
+   // pitch/yaw in precalculated sane radian format
+   float pitchf;
+   float yawf;
+
+   // Additive angles
+   float addpitch;
+   float addyaw;
+   float addroll;
+
+   // Damage bob angles
+   float bobpitch;
+   float bobyaw;
+
+   // Extra angles
+   float extrpitch;
+   float extryaw;
+
+   // View TIDs
+   int cameratid;
+   int weathertid;
+
+   // GUI
+   guiname_t activegui;
+   cbi_t     cbi;
+
+   // Statistics
+   int weaponsheld;
+   int itemsbought;
+   int upgradesowned;
+
+   long healthsum;
+   long healthused;
+
+   long armorsum;
+   long armorused;
+
+   score_t scoresum;
+   score_t scoreused;
+
+   int unitstravelled;
+
+   // Weapons
+   weapondata_t weapon;
+
+   int    riflefiremode;
+   list_t hudstrlist;
+
+   __str weaponclass;
+
+   // Armor
+   __str armorclass;
+   int armortype;
+
+   // Keys
+   struct keycards_s
+   {
+      bool redcard     : 1;
+      bool yellowcard  : 1;
+      bool bluecard    : 1;
+      bool redskull    : 1;
+      bool yellowskull : 1;
+      bool blueskull   : 1;
+   } keys;
+
+   // 🌌 「÷」 0
+   struct divsigil
+   {
+      bool acquired;
+   } sigil;
 } player_t;
 
 // Extern Objects ------------------------------------------------------------|

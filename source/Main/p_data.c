@@ -169,6 +169,7 @@ void Lith_ResetPlayer(player_t *p)
 {
    //
    // Init
+
    if(!p->wasinit) {
       *p = (player_t){};
       p->wasinit = true;
