@@ -30,6 +30,8 @@ struct page_initializer const bip_pages[] = {
    {pcl_cybermage, "Mateba",        {"AOF"}, .isfree = true},
    {pcl_cybermage, "MatebaUpgr",    {"Mateba", "AOF", "Algidistari"}},
    {pcl_cybermage, "ShockRifle",    {"ChAri"}},
+   {pcl_cybermage, "ShockRifUpgr",  {"ShockRifle"}},
+   {pcl_cybermage, "ShockRifUpg2",  {"ShockRifle"}},
    {pcl_cybermage, "SPAS",          {"AOF", "Newvec"}},
    {pcl_cybermage, "SPASUpgr",      {"SPAS"}},
    {pcl_cybermage, "SPASUpg2",      {"SPAS", "Newvec"}},

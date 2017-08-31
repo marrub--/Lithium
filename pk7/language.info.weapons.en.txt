@@ -87,6 +87,18 @@
    "well-manufactured, likely under the care of a very skilled Kiri craftsman.";
 
 //----------------------------------------------------------------------------|
+"LITH_TXT_INFO_SHORT_ShockRifUpg2" = "$LITH_TXT_UPGRADE_TITLE_ShockRif_B";
+"LITH_TXT_INFO_TITLE_ShockRifUpg2" = "Electric Binding";
+"LITH_TXT_INFO_DESCR_ShockRifUpg2" =
+   "A modification for your Shock Rifle, crafted as an experiment: a bit of "
+   "extremely heated liquid crystal is extruded onto the bullet upon receiving, and "
+   "then super-charged."
+   "\n\n"
+   "The liquid crystal is heated with a Heat sigil, however due to unknown reasons "
+   "when the projectiles get stuck in groups with this compound, the combined "
+   "energy still remaining in them explodes violently.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_SPAS" = "Shotgun";
 "LITH_TXT_INFO_TITLE_SPAS" = "NV48 12-Gauge Shotgun";
 "LITH_TXT_INFO_DESCR_SPAS" =

@@ -120,6 +120,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
 void Lith_PlayerInitBIP(player_t *p)
 {
    bip_t *bip = &p->bip;
+   int total = 0;
 
    ForCategory()
       bip->infogr[categ].free(free);
@@ -127,11 +128,16 @@ void Lith_PlayerInitBIP(player_t *p)
    int categ;
    for(struct page_initializer const *page = bip_pages; page->category || page->pclass; page++)
    {
-      if(page->category)
+      if(page->category) {
          categ = page->category;
-      else if(page->pclass & p->pclass)
-         AddToBIP(bip, categ, p->pclass, page);
+      } else {
+         if(page->pclass & p->pclass)
+            AddToBIP(bip, categ, p->pclass, page);
+         total++;
+      }
    }
+
+   if(world.dbgLevel) p->logH("> There are %i info pages!", total);
 
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;

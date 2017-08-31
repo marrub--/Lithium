@@ -135,6 +135,13 @@ weapons/erifle/zap2      lsounds/ShockRifle/Zap2.wav       // 〃
 weapons/erifle/zap3      lsounds/ShockRifle/Zap3.wav       // 〃
 weapons/erifle/reloadout lsounds/ShockRifle/ReloadOut.flac // Return to Castle Wolfenstein
 weapons/erifle/reloadin  lsounds/ShockRifle/ReloadIn.flac  // 〃
+weapons/erifle/shock1    lsounds/ShockRifle/Shock1.wav     // Half-Life 2
+weapons/erifle/shock2    lsounds/ShockRifle/Shock2.wav     // 〃
+
+$random weapons/erifle/shock {
+   weapons/erifle/shock1
+   weapons/erifle/shock2
+}
 
 $random weapons/erifle/zap {
    weapons/erifle/zap1

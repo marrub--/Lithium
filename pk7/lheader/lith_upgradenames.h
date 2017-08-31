@@ -35,6 +35,8 @@ enum
 
    // Weapon (Cyber-Mage)
    UPGR_Mateba_A,
+   UPGR_ShockRif_A,
+   UPGR_ShockRif_B,
    UPGR_SPAS_A,
    UPGR_SPAS_B,
    UPGR_SMG_A,

@@ -235,6 +235,12 @@
    "health on its last shot.";
 
 //----------------------------------------------------------------------------|
+"LITH_TXT_UPGRADE_TITLE_ShockRif_B" = "Elec. Binding";
+"LITH_TXT_UPGRADE_EFFEC_ShockRif_B" =
+   "Makes the Shock Rifle do more shock damage, and when hit with 6 consecutive "
+   "shots, will explode with a sphere of electricity.";
+
+//----------------------------------------------------------------------------|
 "LITH_TXT_UPGRADE_TITLE_SPAS_A" = "Void Breath";
 "LITH_TXT_UPGRADE_EFFEC_SPAS_A" =
    "Makes the Shotgun fire out wisps of energy that deal massive damage.";

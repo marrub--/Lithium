@@ -49,6 +49,8 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
    {{"OmegaRail",   "CannonUpg2",   5800100}, pcl_marine,    UC_Weap,  5,  0.00, UG_BFG,      Req(UR_WMD|UR_WRD)},
 
    {{"Mateba_A",    "MatebaUpgr",   614100 }, pcl_cybermage, UC_Weap,  0,  0.00, UG_Pistol},
+   {{"ShockRif_A",  "ShockRifUpgr", 1519590}, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
+   {{"ShockRif_B",  "ShockRifUpg2", 1911590}, pcl_cybermage, UC_Weap,  0,  0.00, UG_Shotgun},
    {{"SPAS_A",      "SPASUpgr",     2140400}, pcl_cybermage, UC_Weap,  0,  0.00, UG_SSG},
    {{"SPAS_B",      "SPASUpg2",     1511100}, pcl_cybermage, UC_Weap,  0,  0.00, UG_SSG},
    {{"SMG_A",       "SMGUpgr",      2055000}, pcl_cybermage, UC_Weap,  0,  0.00},
