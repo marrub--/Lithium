@@ -383,6 +383,8 @@ static void Lith_PlayerRunScripts(player_t *p)
    [[__call("ScriptS")]] extern void Lith_PlayerView(player_t *p);
                          extern void Lith_PlayerStyle(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
+                         extern void Lith_PlayerFootstep(player_t *p);
+
    // Pre-logic: Update data from the engine.
    Lith_PlayerUpdateWeapon(p); // Update weapon info
    Lith_PlayerScore(p);        // Update score
@@ -410,6 +412,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    }
 
    // Rendering
+   Lith_PlayerFootstep(p);       // Footstep effects
    Lith_PlayerItemFx(p);         // Update item effects
    Lith_PlayerDamageBob(p);      // Update damage bobbing
    Lith_PlayerView(p);           // Update additive view

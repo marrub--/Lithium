@@ -18,6 +18,7 @@ if(world.grafZoneEntered)
 Category("Player");
 Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0f, 1.0f);
 Bool("Bob view when damaged",       "lith_player_damagebob");
+Float("Footstep volume",       "x", "lith_player_footstepvol", 0.0, 1.0);
 Bool("Log score gained",                  "lith_player_scorelog");
 Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");

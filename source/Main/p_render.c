@@ -15,6 +15,20 @@ static void HUD_Waves(player_t *p);
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_PlayerFootstep
+//
+void Lith_PlayerFootstep(player_t *p)
+{
+   fixed vol = p->getCVarK("lith_player_footstepvol");
+   if(!vol || ACS_Timer() % 10 != 0 || p->z - p->floorz > 16) return;
+
+   fixed dstmul = absk(mag2k(p->velx, p->vely)) / 64.0;
+   if(!(vol *= min(dstmul, 1))) return;
+
+   ACS_LocalAmbientSound("player/step", vol * 127);
+}
+
+//
 // Lith_HUD_DrawWeaponSlots
 //
 void Lith_HUD_DrawWeaponSlots(player_t *p, int const *ncol, int ncols, char scol, int bx, int by)
