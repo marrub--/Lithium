@@ -7,8 +7,8 @@
 
 // Extern Objects ------------------------------------------------------------|
 
-__str dbglog[64];
-int dbglognum;
+__str dbgstat[64], dbgnote[64];
+int   dbgstatnum,  dbgnotenum;
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -99,7 +99,25 @@ void Lith_DebugStat(__str fmt, ...)
    __vnprintf_str(fmt, vl);
    va_end(vl);
 
-   dbglog[dbglognum++] = ACS_EndStrParam();
+   dbgstat[dbgstatnum++] = ACS_EndStrParam();
+}
+
+//
+// Lith_DebugNote
+//
+void Lith_DebugNote(__str fmt, ...)
+{
+   if(!(world.dbgLevel & log_devh)) return;
+
+   va_list vl;
+
+   ACS_BeginPrint();
+
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+
+   dbgnote[dbgnotenum++] = ACS_EndStrParam();
 }
 
 // EOF

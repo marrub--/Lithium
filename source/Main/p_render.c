@@ -27,8 +27,10 @@ void Lith_PlayerDebugStats(player_t *p)
 
    ACS_SetFont("LTRMFONT");
    ACS_BeginPrint();
-   for(int i = 0; i < dbglognum; i++)
-      ACS_PrintString(dbglog[i]);
+   for(int i = 0; i < dbgstatnum; i++)
+      ACS_PrintString(dbgstat[i]);
+   for(int i = 0; i < dbgnotenum; i++)
+      ACS_PrintString(dbgnote[i]);
    ACS_MoreHudMessage();
    HudMessagePlain(hid_debug, 10.1, 20.1, TICSECOND);
 }

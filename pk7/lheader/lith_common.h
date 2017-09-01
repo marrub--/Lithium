@@ -99,6 +99,9 @@
 #define DebugStat(...) \
    (world.dbgLevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)
 
+#define DebugNote(...) \
+   (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -176,6 +179,7 @@ int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
 void Lith_TakeActorInventory(int tid, __str item, int amount);
 void Lith_DebugStat(__str fmt, ...);
+void Lith_DebugNote(__str fmt, ...);
 
 // Math ----------------------------------------------------------------------|
 
@@ -208,8 +212,8 @@ __addrdef extern __hub_arr lwvar;
 // Extern Objects ------------------------------------------------------------|
 
 #ifndef EXTERNAL_CODE
-extern __str dbglog[];
-extern int dbglognum;
+extern __str dbgstat[],  dbgnote[];
+extern int   dbgstatnum, dbgnotenum;
 #endif
 
 #endif
