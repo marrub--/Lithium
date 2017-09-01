@@ -129,15 +129,12 @@ void Lith_PlayerView(player_t *p)
 //
 void Lith_PlayerStyle(player_t *p)
 {
-   if(p->scopetoken)
-   {
+   if(p->scopetoken) {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_scopealpha"));
-   }
-   else
-   {
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_scopealpha") * p->alpha);
+   } else {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_alpha"));
+      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_alpha") * p->alpha);
    }
 }
 

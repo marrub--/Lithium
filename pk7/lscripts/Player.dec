@@ -239,5 +239,11 @@ actor Lith_ManaLeak
    }
 }
 
+actor Lith_StealthSystem : PowerInvisibility
+{
+   Powerup.Duration 0x7FFFFFFF
+   Powerup.Mode "Opaque"
+}
+
 // EOF
 

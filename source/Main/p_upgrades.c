@@ -31,10 +31,10 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
    {{"DefenseNuke", "DefenseNuke",  580030 }, pcl_marine,    UC_Body,  0,  0.00, Req(UR_AI)},
    {{"Adrenaline",  "Adrenaline",   1801000}, pcl_marine,    UC_Body, 10,  0.00},
    {{"Magic",       "Magic",        0      }, pcl_cybermage, UC_Body,  0,  0.00},
-   {{"SoulCleaver", "SoulCleaver",  1100000}, pcl_cybermage, UC_Body, 10,  0.00},
+   {{"SoulCleaver", "SoulCleaver",  1100000}, pcl_cybermage, UC_Body,  0,  0.00},
+   {{"StealthSys",  "StealthSys",   1800450}, pcl_cybermage, UC_Body,  0,  0.00},
 
    {{"AutoReload",  "AutoReload",   950050 }, pcl_outcasts,  UC_Weap,  2,  0.00},
-
    {{"AutoPistol",  null,           140940 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol},
    {{"PlasPistol",  null,           340000 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
    {{"GaussShotty", "ShotgunUpgr",  1079430}, pcl_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},

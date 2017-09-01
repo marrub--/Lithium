@@ -17,6 +17,7 @@ enum
    // Body (Cyber-Mage)
    UPGR_Magic,
    UPGR_SoulCleaver,
+   UPGR_StealthSys,
 
    // Weapon
    UPGR_AutoReload,

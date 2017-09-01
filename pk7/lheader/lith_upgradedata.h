@@ -18,6 +18,7 @@
 #define UData_Zoom(u)       (CastUData(u)->u08)
 #define UData_HomingRPG(u)  (CastUData(u)->u09)
 #define UData_Magic(u)      (CastUData(u)->u10)
+#define UData_StealthSys(u) (CastUData(u)->u11)
 
 enum
 {
@@ -78,8 +79,8 @@ struct upgr_data_ReactArmor {
 };
 
 struct upgr_data_ReflexWetw {
-   int  charge;
-   bool leaped;
+   unsigned charge : 6;
+   bool     leaped : 1;
 };
 
 struct upgr_data_VitalScan {
@@ -112,6 +113,10 @@ struct upgr_data_Magic {
    bool ui : 1;
 };
 
+struct upgr_data_StealthSys {
+   fixed mulvel;
+};
+
 struct upgr_data {
    struct upgr_data_Adrenaline u01;
    struct upgr_data_Implying   u02;
@@ -123,6 +128,7 @@ struct upgr_data {
    struct upgr_data_Zoom       u08;
    struct upgr_data_HomingRPG  u09;
    struct upgr_data_Magic      u10;
+   struct upgr_data_StealthSys u11;
 };
 
 typedef struct upgradeinfo {

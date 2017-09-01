@@ -254,6 +254,8 @@ void Lith_ResetPlayer(player_t *p)
    p->scoreaccumtime = 0;
    p->scoremul       = 1.3;
 
+   p->alpha = 1;
+
    //
    // Static data
 

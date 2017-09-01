@@ -67,6 +67,7 @@ typedef struct player_delta_s
    // Status
    int     health;
    int     armor;
+   fixed   alpha;
    score_t score;
    bool    indialogue;
 
