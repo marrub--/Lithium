@@ -45,6 +45,7 @@ actor Lith_LostSoul : LostSoul replaces LostSoul
    
    +QUICKTORETALIATE
    +THRUSPECIES
+   -COUNTKILL
    
    var int user_invisible;
    

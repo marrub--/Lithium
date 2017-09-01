@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// vim: columns=120
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -52,6 +53,7 @@ void Lith_PhantomMain()
 
       // TODO: fix this when david fixes properties
       // 2017-07-16: david still has not fixed properties
+      // 2017-09-01: david still has not fixed properties
       if(self.meleetime)
          self.meleetime = self.meleetime - 1;
 
@@ -151,6 +153,8 @@ void Lith_PhantomTeleport()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PhantomDeath(int num, int phase)
 {
+   world.bossspawned = false;
+
    ACS_StopSound(0, 7);
 
    ACS_AmbientSound("player/death1", 127);
@@ -255,6 +259,7 @@ void Lith_SpawnBoss(int num, int phase)
    ACS_SetUserVariable(bosstid, "user_phase", phase);
 
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
+   DebugNote("boss: %i phase %i spawned\n", num, phase);
 
    switch(phase)
    {
@@ -300,19 +305,19 @@ void Lith_TriggerBoss(int num, int phase)
 //
 // Lith_SpawnBosses
 //
-void Lith_SpawnBosses(score_t sum)
+void Lith_SpawnBosses(score_t sum, bool force)
 {
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 7 TRIES TO GET THIS RIGHT
    // NOTE: INCREMENT THIS COUNTER EVERY TIME I GET IT WRONG
 
-        if(!world.boss[0][0] &&                     sum > world.boss1p1scr) Lith_TriggerBoss(1, 1);
-   else if(!world.boss[0][1] && world.boss[0][0] && sum > world.boss1p2scr) Lith_TriggerBoss(1, 2);
-   else if(!world.boss[1][0] && world.boss[0][1] && sum > world.boss2p1scr) Lith_TriggerBoss(2, 1);
-   else if(!world.boss[1][1] && world.boss[1][0] && sum > world.boss2p2scr) Lith_TriggerBoss(2, 2);
-   else if(!world.boss[1][2] && world.boss[1][1] && sum > world.boss2p3scr) Lith_TriggerBoss(2, 3);
-   else if(!world.boss[2][0] && world.boss[1][2] && sum > world.boss3p1scr) Lith_TriggerBoss(3, 1);
-   else if(!world.boss[2][1] && world.boss[2][0] && sum > world.boss3p2scr) Lith_TriggerBoss(3, 2);
-   else if(!world.boss[2][2] && world.boss[2][1] && sum > world.boss3p3scr) Lith_TriggerBoss(3, 3);
+        if(!world.boss[0][0] &&                     (force || sum > world.boss1p1scr)) Lith_TriggerBoss(1, 1);
+   else if(!world.boss[0][1] && world.boss[0][0] && (force || sum > world.boss1p2scr)) Lith_TriggerBoss(1, 2);
+   else if(!world.boss[1][0] && world.boss[0][1] && (force || sum > world.boss2p1scr)) Lith_TriggerBoss(2, 1);
+   else if(!world.boss[1][1] && world.boss[1][0] && (force || sum > world.boss2p2scr)) Lith_TriggerBoss(2, 2);
+   else if(!world.boss[1][2] && world.boss[1][1] && (force || sum > world.boss2p3scr)) Lith_TriggerBoss(2, 3);
+   else if(!world.boss[2][0] && world.boss[1][2] && (force || sum > world.boss3p1scr)) Lith_TriggerBoss(3, 1);
+   else if(!world.boss[2][1] && world.boss[2][0] && (force || sum > world.boss3p2scr)) Lith_TriggerBoss(3, 2);
+   else if(!world.boss[2][2] && world.boss[2][1] && (force || sum > world.boss3p3scr)) Lith_TriggerBoss(3, 3);
 }
 
 // EOF

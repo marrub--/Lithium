@@ -38,6 +38,8 @@ static int GSInitCbNum;
 
 // Extern Functions ----------------------------------------------------------|
 
+extern void Lith_SpawnBosses(score_t sum, bool force);
+
 //
 // Lith_GetWorldExtern
 //
@@ -360,8 +362,7 @@ static void SpawnBoss()
    ACS_Delay(1); // Delay another tic for monster spawners.
 
    Lith_ForPlayer() {
-      extern void Lith_SpawnBosses(score_t sum);
-      Lith_SpawnBosses(p->scoresum);
+      Lith_SpawnBosses(p->scoresum, false);
       break;
    }
 }
@@ -577,6 +578,8 @@ static void Lith_World(void)
       return;
    }
 
+   dbgnotenum = 0;
+
    GSInit(); // Init global state.
    MInit();  // Map init.
 
@@ -612,6 +615,9 @@ static void Lith_World(void)
    int prevkills   = 0;
    int previtems   = 0;
 
+   int missionkill = 0;
+   int missionprc  = 0;
+
    for(;;)
    {
       if(world.ticks > 17 * 35 * 60 * 60 && !world.islithmap)
@@ -641,9 +647,20 @@ static void Lith_World(void)
          DmonDebugInfo();
       }
 
+      if(ACS_Timer() % 5 == 0 && missionkill < kills)
+      {
+         if(++missionprc >= 150) {
+            Lith_SpawnBosses(0, true);
+            missionprc = 0;
+         }
+         missionkill = kills;
+      }
+
+      DebugStat("mission%%: %i\n", missionprc);
+
       ACS_Delay(1);
 
-      dbglognum = 0;
+      dbgstatnum = 0;
       world.ticks++;
 
       if(world.autosave && world.ticks % (35 * 60 * world.autosave) == 0)
