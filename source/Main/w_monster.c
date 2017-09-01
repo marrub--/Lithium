@@ -323,13 +323,13 @@ static void OnDeath(dmon_t *m)
             ACS_SpawnForced("Lith_ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
       }
 
-      if(p->getUpgr(UPGR_Magic)->active && p->mana != p->manamax &&
+      if(p->getUpgrActive(UPGR_Magic) && p->mana != p->manamax &&
          (m->type != mtype_zombie || ACS_Random(0, 50) < 10))
       {
          SpawnManaPickup(m, p);
       }
 
-      if(p->getUpgr(UPGR_SoulCleaver)->active)
+      if(p->getUpgrActive(UPGR_SoulCleaver))
          SoulCleave(m, p);
    }
 

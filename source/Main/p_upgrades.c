@@ -351,11 +351,12 @@ bool Lith_UpgrCanActivate(player_t *p, upgrade_t *upgr)
 {
    if(!upgr->active)
    {
-      if(CheckRequires_AI  ||
+      if((p->pclass == pcl_marine &&
+         CheckRequires_AI  ||
          CheckRequires_WMD ||
          CheckRequires_WRD ||
          CheckRequires_RDI ||
-         CheckRequires_RA  ||
+         CheckRequires_RA) ||
          p->cbi.pruse + upgr->info->perf > world.cbiperf)
       {
          return false;

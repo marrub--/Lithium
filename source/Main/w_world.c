@@ -190,9 +190,7 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
 
    switch(info)
    {
-   case pdata_upgrade:
-      __with(upgrade_t *upgr = p->getUpgr(permutation);)
-         return upgr ? upgr->active : false;
+   case pdata_upgrade:        return p->getUpgrActive(permutation);
    case pdata_rifle_firemode: return p->riflefiremode;
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;

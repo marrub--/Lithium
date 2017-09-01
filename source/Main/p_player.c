@@ -178,6 +178,15 @@ upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
 }
 
 //
+// Lith_PlayerGetUpgradeActive
+//
+bool Lith_PlayerGetUpgradeActive(player_t *p, int name)
+{
+   ifauto(upgrade_t *, upgr, p->upgrademap.find(name)) return upgr->active;
+   else                                                return false;
+}
+
+//
 // Lith_GetPlayersExtern
 //
 player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
@@ -291,6 +300,7 @@ score_t Lith_GetModScore(player_t *p, score_t score, bool nomul)
 //
 void Lith_GiveScore(player_t *p, score_t score, bool nomul)
 {
+   #pragma GDCC FIXED_LITERAL OFF
    // Could cause division by zero
    if(score == 0)
       return;
@@ -298,7 +308,8 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    score = p->getModScore(score, nomul);
 
    // Get a multiplier for the score accumulator and sound volume
-   double mul = minmax(minmax(score, 0, 20000) / 20000.0f, 0.1f, 1.0f);
+   double mul = minmax(score, 0, 15000) / 15000.0;
+          mul = minmax(mul, 0.1, 1.0);
    double vol = 0.7 * mul;
 
    // Play a sound when we pick up score
@@ -306,13 +317,13 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
 
    //
-   if(p->getUpgr(UPGR_CyberLegs)->active && ACS_Random(0, 10000) == 0)
+   if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0)
    {
       p->brouzouf += score;
       p->log("> You gained brouzouf.");
    }
 
-   if(p->getUpgr(UPGR_TorgueMode)->active && ACS_Random(0, 10) == 0)
+   if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0)
    {
       p->spuriousexplosions++;
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);

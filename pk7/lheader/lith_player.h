@@ -116,6 +116,7 @@ void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 
 // misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
+bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
 void Lith_ClearTextBuf(struct player *p);
 __str Lith_PlayerDiscriminator(int pclass);
 
@@ -175,9 +176,10 @@ typedef struct player
    attr closeGUI {call: Lith_PlayerCloseGUI(this)}
 
    // misc
-   attr getUpgr      {call: Lith_PlayerGetNamedUpgrade(this)}
-   attr deliverMail  {call: Lith_DeliverMail(this)}
-   attr clearTextBuf {call: Lith_ClearTextBuf(this)}
+   attr getUpgr       {call: Lith_PlayerGetNamedUpgrade(this)}
+   attr getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
+   attr deliverMail   {call: Lith_DeliverMail(this)}
+   attr clearTextBuf  {call: Lith_ClearTextBuf(this)}
    attr bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
    attr discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
 

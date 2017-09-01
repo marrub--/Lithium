@@ -64,7 +64,8 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          UData.leaped = 0;
 
       upgrade_t *jet = p->getUpgr(UPGR_JetBooster);
-      if(p->buttons & BT_SPEED && (grounddist <= 16.0 || !jet->active ||
+      if(p->buttons & BT_SPEED &&
+         (grounddist <= 16.0 || !jet || !jet->active ||
          UData_JetBooster(jet).discharged))
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
