@@ -31,9 +31,10 @@ ListMenu "PlayerclassMenu"
 {
    NetgameMessage "$NEWGAME"
    StaticTextCentered 160, 30, "$MENU_CHOOSECLASS"
-   Position 140, 63
-   PlayerDisplay 60, 63, "20 00 00", "80 00 40"
-   MouseWindow 190, 220
+   Position 14, 55
+   Font "LTRMFONT"
+   PlayerDisplay 100, 50, "00 00 00", "00 FF 00"
+   MouseWindow 14, 55
 }
 
 ListMenu "EpisodeMenu"
