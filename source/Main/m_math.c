@@ -83,7 +83,7 @@ fixed mag2k(fixed x, fixed y)
 //
 fixed lerpk(fixed a, fixed b, fixed t)
 {
-   fixed ret = ((1.0 - t) * a) + (t * b);
+   fixed ret = ((1.0k - t) * a) + (t * b);
 
    if(roundk(ret, 10) == b)
       return b;
@@ -109,7 +109,21 @@ fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t)
 //
 float lerpf(float a, float b, float t)
 {
-   float ret = ((1.0 - t) * a) + (t * b);
+   float ret = ((1.0f - t) * a) + (t * b);
+
+   if((roundf(ret << 10) >> 10) == b)
+      return b;
+
+   return ret;
+}
+
+//
+// lerp
+//
+double lerp(double a, double b, double t)
+{
+   #pragma GDCC FIXED_LITERAL OFF
+   double ret = ((1.0 - t) * a) + (t * b);
 
    if((round(ret << 10) >> 10) == b)
       return b;

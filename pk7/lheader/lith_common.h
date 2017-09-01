@@ -127,8 +127,7 @@ struct vec2i {
    int x, y;
 };
 
-enum
-{
+enum {
    log_none,
    log_dev   = 1 << 0,
    log_boss  = 1 << 1,
@@ -182,6 +181,7 @@ fixed mag2k(fixed x, fixed y);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
+double lerp(double a, double b, double t);
 bool aabb(int bx1, int by1, int bx2, int by2, int x2, int y2);
 int ceilk(fixed n);
 int bzpolyi(int a, int b, float t);

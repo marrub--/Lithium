@@ -18,6 +18,8 @@
 
 struct upgr_data_HeadsUpDis3 {
    double scorei;
+   fixed healthi;
+   fixed armori;
 };
 
 struct cpk1_upgr_data {

@@ -1,5 +1,8 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
+#include "cpk1_upgrades.h"
+
+#define UData UData_HeadsUpDis3(upgr)
 
 // Static Functions ----------------------------------------------------------|
 
@@ -53,7 +56,7 @@ static void HUD_Ammo(player_t *p)
 //
 // HUD_HealthArmor
 //
-static void HUD_HealthArmor(player_t *p)
+static void HUD_HealthArmor(player_t *p, upgrade_t *upgr)
 {
    static __str const armorgfx[armor_max] = {
       [armor_unknown] = "lgfx/HUD/H_D27.png",
@@ -65,11 +68,13 @@ static void HUD_HealthArmor(player_t *p)
 
    DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 200.2, TICSECOND);
 
+   int health = UData.healthi = lerpk(UData.healthi, p->health, 0.1);
    if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
-   else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", p->health);
+   else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
    HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 172.0, TICSECOND);
 
-   HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", p->armor);
+   int armor = UData.armori = lerpk(UData.armori, p->armor, 0.1);
+   HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", armor);
    HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 190.0, TICSECOND);
 
    DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 42), 20.1 + p->ticks % 42, 181.1, 0.2, 0.7);
@@ -78,9 +83,17 @@ static void HUD_HealthArmor(player_t *p)
 //
 // HUD_Score
 //
-static void HUD_Score(player_t *p)
+static void HUD_Score(player_t *p, upgrade_t *upgr)
 {
-   HudMessageF("CHFONT", "\C[Lith_Purple]%S \CnScore", Lith_ScoreSep(p->score));
+   #pragma GDCC FIXED_LITERAL OFF
+   score_t score;
+
+   if(p->score > 0x20000000000000LL)
+      score = p->score;
+   else
+      score = UData.scorei = lerp(UData.scorei, p->score, 0.3);
+
+   HudMessageF("CHFONT", "\C[Lith_Purple]%S \CnScore", Lith_ScoreSep(score));
    HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 2.1, 3.1, 0.1);
 }
 
@@ -127,11 +140,11 @@ void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
    HUD_KeyInd(p);
 
    if(p->getCVarI("lith_hud_showscore"))
-      HUD_Score(p);
+      HUD_Score(p, upgr);
 
    // Status
    HUD_Ammo(p);
-   HUD_HealthArmor(p);
+   HUD_HealthArmor(p, upgr);
 }
 
 // EOF
