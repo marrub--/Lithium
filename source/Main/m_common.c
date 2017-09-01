@@ -3,6 +3,15 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+#include <stdio.h>
+
+// Extern Objects ------------------------------------------------------------|
+
+__str dbglog[64];
+int dbglognum;
+
+// Extern Functions ----------------------------------------------------------|
+
 //
 // Lith_GetTID
 //
@@ -73,6 +82,24 @@ void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) ACS_TakeInventory(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
+}
+
+//
+// Lith_DebugStat
+//
+void Lith_DebugStat(__str fmt, ...)
+{
+   if(!(world.dbgLevel & log_devh)) return;
+
+   va_list vl;
+
+   ACS_BeginPrint();
+
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+
+   dbglog[dbglognum++] = ACS_EndStrParam();
 }
 
 // EOF

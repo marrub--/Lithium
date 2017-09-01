@@ -397,6 +397,7 @@ static void Lith_PlayerRunScripts(player_t *p)
                          extern void Lith_PlayerStyle(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
                          extern void Lith_PlayerFootstep(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerDebugStats(player_t *p);
 
    // Pre-logic: Update data from the engine.
    Lith_PlayerUpdateWeapon(p); // Update weapon info
@@ -432,6 +433,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    Lith_PlayerRenderUpgrades(p); // Render Upgrades
    Lith_PlayerHUD(p);            // Draw HUD
    Lith_PlayerStyle(p);          // Change player render style
+   Lith_PlayerDebugStats(p);     // Debug stats
 }
 
 //

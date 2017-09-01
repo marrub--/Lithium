@@ -11,6 +11,7 @@ enum
    // hid_base + 41000 to hid_base + 41999 reserved for misc.
    // hid_base + 42000 to hid_base + 42999 reserved for HUD
    // hid_base + 43000 to hid_base + 44999 reserved for scopes
+   // hid_base + 45000                     reserved for debug
    hid_base = 0x100000,
 
    // Magic
@@ -156,6 +157,9 @@ enum
 
    hid_scope_clearS = hid_scope_sineE,
    hid_scope_clearE = hid_scope_stringstackS,
+
+   // Debug
+   hid_debug = hid_base + 45000,
 };
 
 #endif

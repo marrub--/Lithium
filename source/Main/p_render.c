@@ -4,6 +4,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
+#include "lith_world.h"
 
 #include <math.h>
 
@@ -13,6 +14,24 @@ static void HUD_StringStack(player_t *p);
 static void HUD_Waves(player_t *p);
 
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_PlayerDebugStats
+//
+[[__call("ScriptS")]]
+void Lith_PlayerDebugStats(player_t *p)
+{
+   if(!(world.dbgLevel & log_devh)) return;
+
+   ACS_SetHudSize(450, 350);
+
+   ACS_SetFont("LTRMFONT");
+   ACS_BeginPrint();
+   for(int i = 0; i < dbglognum; i++)
+      ACS_PrintString(dbglog[i]);
+   ACS_MoreHudMessage();
+   HudMessagePlain(hid_debug, 10.1, 20.1, TICSECOND);
+}
 
 //
 // Lith_PlayerFootstep

@@ -68,7 +68,7 @@ LHUDFONT
 
 LTRMFONT
 {
-   SpaceWidth 10
+   SpaceWidth 8
    Count 94
    Base 0
    Template LITHC%d

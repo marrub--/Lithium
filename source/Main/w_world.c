@@ -642,6 +642,8 @@ static void Lith_World(void)
       }
 
       ACS_Delay(1);
+
+      dbglognum = 0;
       world.ticks++;
 
       if(world.autosave && world.ticks % (35 * 60 * world.autosave) == 0)

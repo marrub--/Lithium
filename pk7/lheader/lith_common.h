@@ -96,6 +96,9 @@
       HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
+#define DebugStat(...) \
+   (world.dbgLevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -130,10 +133,11 @@ struct vec2i {
 enum {
    log_none,
    log_dev   = 1 << 0,
-   log_boss  = 1 << 1,
-   log_dmon  = 1 << 2,
-   log_dmonV = 1 << 3,
-   log_dlg   = 1 << 4,
+   log_devh  = 1 << 1,
+   log_boss  = 1 << 2,
+   log_dmon  = 1 << 3,
+   log_dmonV = 1 << 4,
+   log_dlg   = 1 << 5,
 };
 
 // Printing ------------------------------------------------------------------|
@@ -171,6 +175,7 @@ __str StrParam(__str fmt, ...);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
 void Lith_TakeActorInventory(int tid, __str item, int amount);
+void Lith_DebugStat(__str fmt, ...);
 
 // Math ----------------------------------------------------------------------|
 
@@ -198,6 +203,13 @@ struct polar ctopol(fixed x, fixed y);
 #ifndef EXTERNAL_CODE
 __addrdef extern __mod_arr lmvar;
 __addrdef extern __hub_arr lwvar;
+#endif
+
+// Extern Objects ------------------------------------------------------------|
+
+#ifndef EXTERNAL_CODE
+extern __str dbglog[];
+extern int dbglognum;
 #endif
 
 #endif
