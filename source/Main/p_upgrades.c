@@ -147,6 +147,14 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
    else        return u1->key - u2->key;
 }
 
+//
+// SetDataPtr
+//
+static void SetDataPtr(player_t *p, upgrade_t *upgr)
+{
+   upgr->dataptr = &p->upgrdata;
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -211,8 +219,10 @@ void Lith_GSInit_Upgrade(void)
    if(world.grafZoneEntered)
       Lith_UpgradeRegister(&(upgradeinfo_t const){{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
 
-   for(int i = 0; i < countof(UpgrInfoBase); i++)
-      UpgrInfoBase[i].key = i;
+   for(int i = 0; i < countof(UpgrInfoBase); i++) {
+      UpgrInfoBase[i].key  = i;
+      UpgrInfoBase[i].Init = SetDataPtr;
+   }
 
    UpgrInfo = calloc(UpgrMax, sizeof(upgradeinfo_t));
    memmove(UpgrInfo, UpgrInfoBase, sizeof(UpgrInfoBase));
@@ -263,8 +273,8 @@ void Lith_PlayerInitUpgrades(player_t *p)
    {
       upgrade_t *upgr = &p->upgrades[j];
 
-      upgr->dataptr = &p->upgrdata;
-      upgr->info    = &UpgrInfo[i];
+      UpgrInfo[i].Init(p, upgr);
+      upgr->info = &UpgrInfo[i];
 
       p->upgrademap.insert(upgr);
 

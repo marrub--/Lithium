@@ -7,12 +7,18 @@
 // Static Objects ------------------------------------------------------------|
 
 #define K(n) .key = n
-static upgradeinfo_t const UpgrInfo[] = {
+static upgradeinfo_t UpgrInfo[] = {
    {{"HeadsUpDis3", "HeadsUpDisp", 0}, pcl_informant, UC_Body, 1, -0.05, UG_HUD, K(UPGR_HeadsUpDis3)},
 };
 #undef K
 
 // Static Functions ----------------------------------------------------------|
+
+static void SetDataPtr(player_t *p, upgrade_t *upgr)
+{
+   static struct cpk1_upgr_data upgrdata[MAX_PLAYERS];
+   upgr->dataptr = &upgrdata[p->num];
+}
 
 static bool ReinitUpgrades(upgradeinfo_t *ui)
 {
@@ -35,8 +41,10 @@ static void GSInit()
 {
    Lith_UpgradeRegisterReinit(ReinitUpgrades);
 
-   for(int i = 0; i < countof(UpgrInfo); i++)
+   for(int i = 0; i < countof(UpgrInfo); i++) {
+      UpgrInfo[i].Init = SetDataPtr;
       Lith_UpgradeRegister(&UpgrInfo[i]);
+   }
 }
 
 // Scripts -------------------------------------------------------------------|

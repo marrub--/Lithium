@@ -7,18 +7,18 @@
 #define UPGR_STATIC_MAX 80
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
 
-#define CastUData(u) ((struct upgr_data *)(u)->dataptr)
-#define UData_Adrenaline(u) (CastUData(u)->u01)
-#define UData_Implying(u)   (CastUData(u)->u02)
-#define UData_JetBooster(u) (CastUData(u)->u03)
-#define UData_lolsords(u)   (CastUData(u)->u04)
-#define UData_ReactArmor(u) (CastUData(u)->u05)
-#define UData_ReflexWetw(u) (CastUData(u)->u06)
-#define UData_VitalScan(u)  (CastUData(u)->u07)
-#define UData_Zoom(u)       (CastUData(u)->u08)
-#define UData_HomingRPG(u)  (CastUData(u)->u09)
-#define UData_Magic(u)      (CastUData(u)->u10)
-#define UData_StealthSys(u) (CastUData(u)->u11)
+#define Lith_CastUData(u) ((struct upgr_data *)(u)->dataptr)
+#define UData_Adrenaline(u) (Lith_CastUData(u)->u01)
+#define UData_Implying(u)   (Lith_CastUData(u)->u02)
+#define UData_JetBooster(u) (Lith_CastUData(u)->u03)
+#define UData_lolsords(u)   (Lith_CastUData(u)->u04)
+#define UData_ReactArmor(u) (Lith_CastUData(u)->u05)
+#define UData_ReflexWetw(u) (Lith_CastUData(u)->u06)
+#define UData_VitalScan(u)  (Lith_CastUData(u)->u07)
+#define UData_Zoom(u)       (Lith_CastUData(u)->u08)
+#define UData_HomingRPG(u)  (Lith_CastUData(u)->u09)
+#define UData_Magic(u)      (Lith_CastUData(u)->u10)
+#define UData_StealthSys(u) (Lith_CastUData(u)->u11)
 
 enum
 {
@@ -147,6 +147,8 @@ typedef struct upgradeinfo {
    upgr_sc_cb_t Update;
    upgr_fn_cb_t Render;
    upgr_fn_cb_t Enter;
+
+   upgr_fn_cb_t Init;
 } upgradeinfo_t;
 
 bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr);

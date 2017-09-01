@@ -192,6 +192,9 @@ struct polar ctopol(fixed x, fixed y);
 
 // Address Space Definitions -------------------------------------------------|
 
+// This doesn't actually cause anything bad to happen. ZDoom expects that all
+// modules know the exact size of every array, even if they don't use them
+// at all and even account for that. So, we hide this to hide warnings.
 #ifndef EXTERNAL_CODE
 __addrdef extern __mod_arr lmvar;
 __addrdef extern __hub_arr lwvar;
