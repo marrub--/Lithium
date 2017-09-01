@@ -47,6 +47,7 @@ ListMenu "EpisodeMenu"
 ListMenu "SkillMenu"
 {
    StaticTextCentered 160, 30, "$MENU_CHOOSESKILL"
+   StaticPatch 42, 48, "lgfx/Menu/SkillBack.png"
    Position 48, 63
 }
 

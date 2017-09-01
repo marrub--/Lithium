@@ -80,6 +80,9 @@
 "DIFF_HARD" = "> Ultra-Violence!";
 "DIFF_XHARD" = "> Watch me die!";
 "DIFF_NMARE" = "> Crazed Nightmare!";
+"LITH_SKILL_TOURIST" =
+   "Are you certain?\n"
+   "This one is just amusing.";
 "LITH_SKILL_EXTRAHARD" =
    "Are you sure?\n"
    "This one is extra hard.";

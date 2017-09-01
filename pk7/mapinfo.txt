@@ -48,6 +48,7 @@ skill tourist
    TotalInfighting
    HealthFactor = 2
    ACSReturn = 0
+   MustConfirm = "$LITH_SKILL_TOURIST"
 }
 
 skill easy
