@@ -6,11 +6,9 @@
 
 // Static Objects ------------------------------------------------------------|
 
-#define K(n) .key = n
 static upgradeinfo_t UpgrInfo[] = {
-   {{"HeadsUpDis3", "HeadsUpDisp", 0}, pcl_informant, UC_Body, 1, -0.05, UG_HUD, K(UPGR_HeadsUpDis3)},
+   {{"HeadsUpDis3", "HeadsUpDisp", 0}, pcl_informant, UC_Body, 1, -0.05, UG_HUD},
 };
-#undef K
 
 // Static Functions ----------------------------------------------------------|
 
@@ -43,6 +41,7 @@ static void GSInit()
 
    for(int i = 0; i < countof(UpgrInfo); i++) {
       UpgrInfo[i].Init = SetDataPtr;
+      UpgrInfo[i].key = i + UPGR_CPK1_BASE;
       Lith_UpgradeRegister(&UpgrInfo[i]);
    }
 }

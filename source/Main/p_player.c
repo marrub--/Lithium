@@ -174,7 +174,10 @@ GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
 //
 upgrade_t *Lith_PlayerGetNamedUpgrade(player_t *p, int name)
 {
-   return p->upgrademap.find(name);
+   upgrade_t *upgr = p->upgrademap.find(name);
+   if(world.dbgLevel && !upgr)
+      Log("invalid upgrade trying to find %S", Lith_GetUpgradeInfo(name)->name);
+   return upgr;
 }
 
 //

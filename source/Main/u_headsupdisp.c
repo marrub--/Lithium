@@ -231,7 +231,7 @@ static void HUD_Mode(player_t *p)
 {
    if(p->weapontype == weapon_rifle)
    {
-      int addy = p->getUpgr(UPGR_RifleModes)->active ? 0 : 16;
+      int addy = p->getUpgrActive(UPGR_RifleModes) ? 0 : 16;
       DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 200.2 + addy, TICSECOND);
       DrawSpritePlain(StrParam("lgfx/HUD/H_W%i.png",
          (rifle_firemode_max - p->riflefiremode) + 3),

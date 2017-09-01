@@ -63,7 +63,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->getUpgr(UPGR_HeadsUpDisp)->active) return;
+   if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;
 
    int timemod = p->ticks % 45;
    float amt = UData.charge / (float)CHARGE_MAX;

@@ -49,31 +49,29 @@ static void RA_Give(__str name, int n)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_RA_Give(int num)
 {
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return;
-
-   upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
-
-   if(!upgr->active)
-      return;
-
-   if(UData.activearmor != num + 1)
+   withplayer(LocalPlayer)
    {
-      __str name = ArmorNames[num].full;
+      if(!p->getUpgrActive(UPGR_ReactArmor))
+         return;
 
-      UData.activearmor = num + 1;
+      upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
 
-      RA_Take(1);
-      RA_Take(2);
+      if(UData.activearmor != num + 1)
+      {
+         __str name = ArmorNames[num].full;
 
-      ACS_LocalAmbientSound("player/rarmor/mode", 127);
+         UData.activearmor = num + 1;
 
-      p->logH(">>>>> Activating Armor->%S()", name);
+         RA_Take(1);
+         RA_Take(2);
 
-      if(p->getUpgr(UPGR_ReactArmor2)->active)
-         RA_Give(name, 2);
-      else
-         RA_Give(name, 1);
+         ACS_LocalAmbientSound("player/rarmor/mode", 127);
+
+         p->logH(">>>>> Activating Armor->%S()", name);
+
+         if(p->getUpgrActive(UPGR_ReactArmor2)) RA_Give(name, 2);
+         else                                   RA_Give(name, 1);
+      }
    }
 }
 

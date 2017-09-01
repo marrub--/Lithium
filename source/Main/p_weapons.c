@@ -90,8 +90,8 @@ static void GiveWeaponItem(int parm)
 //
 static void PlayWeaponPickupSound(player_t *p, weaponinfo_t const *info)
 {
-   if(!p->getUpgr(UPGR_7777777)->active) ACS_LocalAmbientSound(info->pickupsound, 127);
-   else                                  ACS_LocalAmbientSound("marathon/pickup", 127);
+   if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound, 127);
+   else                                ACS_LocalAmbientSound("marathon/pickup", 127);
 }
 
 //
@@ -269,17 +269,17 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       switch(i)
       {
       case weapon_shotgun:
-         if(p->getUpgr(UPGR_GaussShotty)->active) {
+         if(p->getUpgrActive(UPGR_GaussShotty)) {
             wep->ammotype  = AT_NMag;
             wep->ammoclass = "Lith_GaussShotsFired";
          }
          break;
       case weapon_c_spas:
-         if(p->getUpgr(UPGR_SPAS_B)->active)
+         if(p->getUpgrActive(UPGR_SPAS_B))
             wep->ammotype = AT_Ammo;
          break;
       case weapon_c_smg:
-         if(p->getUpgr(UPGR_SMG_A)->active)
+         if(p->getUpgrActive(UPGR_SMG_A))
             wep->ammoclass = "Lith_SMGShotsFired2";
          break;
       }
@@ -299,7 +299,8 @@ void Lith_PlayerUpdateWeapon(player_t *p)
       }
 
       // Auto-reload anything else.
-      if(p->getUpgr(UPGR_AutoReload)->active && wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
+      if(p->getUpgrActive(UPGR_AutoReload) &&
+         wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5)
             ACS_TakeInventory(wep->magclass, 999);
@@ -368,7 +369,7 @@ void Lith_SwitchRifleFiremode(void)
 
    withplayer(LocalPlayer)
    {
-      if(!p->getUpgr(UPGR_RifleModes)->active)
+      if(!p->getUpgrActive(UPGR_RifleModes))
          max--;
 
       p->riflefiremode = (++p->riflefiremode) % max;

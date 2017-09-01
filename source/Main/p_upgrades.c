@@ -34,7 +34,7 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
    {{"SoulCleaver", "SoulCleaver",  1100000}, pcl_cybermage, UC_Body,  0,  0.00},
    {{"StealthSys",  "StealthSys",   1800450}, pcl_cybermage, UC_Body,  0,  0.00},
 
-   {{"AutoReload",  "AutoReload",   950050 }, pcl_outcasts,  UC_Weap,  2,  0.00},
+   {{"AutoReload",  "AutoReload",   950050 }, pcl_any,       UC_Weap,  2,  0.00},
    {{"AutoPistol",  null,           140940 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol},
    {{"PlasPistol",  null,           340000 }, pcl_marine,    UC_Weap,  0,  0.00, UG_Pistol,   Req(UR_WMD)},
    {{"GaussShotty", "ShotgunUpgr",  1079430}, pcl_marine,    UC_Weap,  1,  0.00, UG_Shotgun,  Req(UR_WMD)},
@@ -156,6 +156,17 @@ static void SetDataPtr(player_t *p, upgrade_t *upgr)
 }
 
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_GetUpgradeInfo
+//
+upgradeinfo_t const *Lith_GetUpgradeInfo(int key)
+{
+   for(int i = 0; i < UpgrMax; i++)
+      if(UpgrInfo[i].key == key)
+         return &UpgrInfo[i];
+   return null;
+}
 
 //
 // Lith_UpgradeRegister_

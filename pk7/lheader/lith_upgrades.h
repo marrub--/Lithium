@@ -32,6 +32,7 @@ void Lith_PlayerUpdateUpgrades(struct player *p);
 void Lith_PlayerRenderUpgrades(struct player *p);
 void Lith_PlayerEnterUpgrades(struct player *p);
 
+upgradeinfo_t const *Lith_GetUpgradeInfo(int key);
 upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr);
 void Lith_UpgradeRegisterReinit(upgr_reinit_cb_t cb);
 
