@@ -11,8 +11,8 @@ actor Lith_RendHitSound : Lith_CustomFunction
 
 actor Lith_RendHit : FastProjectile
 {
-   Damage (50*random(1,2))
-   Radius 24
+   Damage (50 * random(1, 2))
+   Radius 16
    Height 32
    Speed  196
 
@@ -27,6 +27,11 @@ actor Lith_RendHit : FastProjectile
       TNT1 A 0 A_GiveInventory("Lith_RendHitSound", 1, AAPTR_TARGET)
       stop
    }
+}
+
+actor Lith_RendHit2 : Lith_RendHit
+{
+   Damage (50 * random(2, 3))
 }
 
 actor Lith_Rend : Lith_CWeapon
@@ -60,7 +65,11 @@ actor Lith_Rend : Lith_CWeapon
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_Rend", false, random(1, 4))
       TNT1 A 0 A_PlaySound("weapons/rend/slash", CHAN_7)
       TNT1 A 0 A_AlertMonsters
+      TNT1 A 0 A_JumpIfInventory("PowerStrength", 0, 2)
       TNT1 A 0 A_FireCustomMissile("Lith_RendHit")
+      goto FireDone
+      TNT1 A 0 A_FireCustomMissile("Lith_RendHit2")
+   FireDone:
       TNT1 A 5
       TNT1 A 0 A_ReFire
       TNT1 A 5 A_PlaySound("weapons/rend/end", CHAN_6)
