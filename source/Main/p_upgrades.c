@@ -305,6 +305,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
 void Lith_PlayerDeallocUpgrades(player_t *p)
 {
    upgrademap_t_dtor(&p->upgrademap);
+   p->upgrmax = 0;
 
    for(int i = 0; i < countof(p->upgrades); i++)
       p->upgrades[i] = (upgrade_t){};
