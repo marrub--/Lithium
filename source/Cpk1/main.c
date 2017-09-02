@@ -2,6 +2,7 @@
 // vim: columns=120
 #include "lith_player.h"
 #include "lith_world.h"
+#include "lith_version.h"
 #include "cpk1_upgrades.h"
 
 // Static Objects ------------------------------------------------------------|
@@ -51,6 +52,8 @@ static void GSInit()
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_Cpk1_World()
 {
+   Lith_CheckAPIVersion();
+
    if(!world.gsinit)
       Lith_GSInitRegister(GSInit);
 }

@@ -1,4 +1,24 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-#define Lith_Version "1.5 (Pegmatite)"
+#define Lith_Version "1.5.1 (Rubellite Pegmatite)"
+#define Lith_APIVersion 154
+#define Lith_CheckAPIVersion() \
+   do \
+      if(world.apiversion != Lith_APIVersion) { \
+         printf(c"%s: Invalid API version!\n", __func__); \
+         abort(); \
+      } \
+   while(0)
+#include <stdio.h>
+// 154 - 1.5.1 (Rubellite Pegmatite)
+// 153 - 1.5 (Pegmatite)
+// 152 - 1.5 Beta (Pegmatite)
+// 151 - 1.5 Alpha 2 (Pegmatite)
+// 150 - 1.5 Alpha (Pegmatite)
+// 140 - 1.4 (Lumate)
+// 131 - 1.3.1 (LITHIUM - Hell Knights Insist On Dying)
+// 130 - 1.3 (Zabuyelite) aka. (LITHIUM - Hell Knights Insist On Dying)
+// 120 - 1.2 (Lithium Carbonate)
+// 110 - 1.1 (Lithium Chloride)
+// 100 - 1.0 (Lithium)
 
 // EOF

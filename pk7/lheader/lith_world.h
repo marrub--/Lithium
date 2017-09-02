@@ -84,6 +84,7 @@ typedef struct worldinfo_s
    double scoremul;
    long   ticks;
    int    game;
+   int    apiversion;
 
    // Bosses
    bool boss[3][3];

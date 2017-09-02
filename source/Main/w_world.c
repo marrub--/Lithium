@@ -3,6 +3,7 @@
 #include "lith_player.h"
 #include "lith_world.h"
 #include "lith_monster.h"
+#include "lith_version.h"
 
 #include <math.h>
 
@@ -23,7 +24,7 @@ __addrdef __hub_arr lwvar;
 bool lmvar mapinit;
 int  lmvar mapid;
 
-worldinfo_t world;
+worldinfo_t world = {.apiversion = Lith_APIVersion};
 payoutinfo_t payout;
 
 // Static Objects ------------------------------------------------------------|
