@@ -53,6 +53,10 @@ reinit:
 
       Lith_PlayerUpdateData(p);
 
+      // Check for resurrect.
+      if(p->health > 0 && p->dead)
+         p->reinit = true;
+
       // This can be changed any time, so save it here.
       player_delta_t olddelta = p->cur;
 
