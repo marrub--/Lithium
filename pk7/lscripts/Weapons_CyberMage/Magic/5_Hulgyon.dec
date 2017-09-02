@@ -123,6 +123,8 @@ actor Lith_Hulgyon : Lith_CWeapon
       TNT1 A 0 A_Lower
       loop
    Select:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MagicSelect", 5)
+   SelectLoop:
       TNT1 A 0 A_Raise
       loop
    

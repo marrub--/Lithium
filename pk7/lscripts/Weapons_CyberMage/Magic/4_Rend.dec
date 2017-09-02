@@ -48,6 +48,8 @@ actor Lith_Rend : Lith_CWeapon
       TNT1 A 0 A_Lower
       loop
    Select:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MagicSelect", 4)
+   SelectLoop:
       TNT1 A 0 A_Raise
       loop
    

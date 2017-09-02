@@ -16,7 +16,9 @@ enum
 
    // Magic
    hid_begin_magic = hid_base,
-   hid_end_magic   = hid_base + 99,
+   hid_end_magic   = hid_base + 98,
+
+   hid_magicsel,
 
    // Dialogue
    hid_base_dialogue = hid_base + 100,

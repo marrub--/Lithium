@@ -66,10 +66,13 @@ Marrub
 MarlboroMike
    Score item sprites
 
+Marty Kirra
+   Many advice
+
 Minigunner
    Smooth explosion sprites
 
-Monkeybtm6
+monkeybtm6
    BLLTR0 sprite
 
 RWTerma
