@@ -14,6 +14,7 @@
 #include "lscripts/BossSpawners.dec"
 #include "lscripts/RifleGrenade.dec"
 #include "lscripts/BoughtItem.dec"
+#include "lscripts/Magazine.dec"
 
 #include "lscripts/Monsters/System.dec"
 

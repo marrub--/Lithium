@@ -216,7 +216,9 @@ int Lith_GetWorldData(int info)
    case wdata_bossspawned: return world.bossspawned;
    case wdata_grafzone:    return world.grafZoneEntered;
    case wdata_enemycheck:  return world.enemycheck;
-   case wdata_pclass: Lith_ForPlayer() return p->pclass;
+   case wdata_pclass:   Lith_ForPlayer() return p->pclass;
+   case wdata_magdrops: Lith_ForPlayer()
+      return p->getCVarI("lith_weapons_magdrops");
    }
 
    return 0;

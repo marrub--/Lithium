@@ -1,13 +1,8 @@
-actor Lith_GaussShotsFired : Inventory
-{
-   Inventory.MaxAmount 15
-}
-
 actor Lith_GaussExplosionParticle
 {
    Scale 0.4
    Mass 3000
-   BounceType Doom
+   BounceType "Doom"
    
    +BRIGHT
    +NOBLOCKMAP

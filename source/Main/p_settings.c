@@ -26,11 +26,13 @@ Bool("Play sounds on the results screen", "lith_player_resultssound");
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse");
 
 Category("Items");
-Bool("Bright weapon pickups",             "lith_player_brightweps");
-Bool("No item effects",                   "lith_player_noitemfx");
+if(p->num == 0) {
+   Bool("Bright weapon pickups", "lith_player_brightweps");
+   Bool("No item effects",       "lith_player_noitemfx");
+}
 Bool("Teleport in bought items and upgrades", "lith_player_teleshop");
-Bool("Stupid pickup messages",            "lith_player_stupidpickups");
-Bool("Log ammo pickups",                  "lith_player_ammolog");
+Bool("Stupid pickup messages", "lith_player_stupidpickups");
+Bool("Log ammo pickups",       "lith_player_ammolog");
 
 Category("Weapons");
 Float("Scope zoom factor", "x", "lith_weapons_zoomfactor", 1.0f, 10.0f);
@@ -38,6 +40,8 @@ Float("Scope opacity",     "x", "lith_weapons_scopealpha", 0.0f, 1.0f);
 Float("Weapon opacity",    "x", "lith_weapons_alpha",      0.0f, 1.0f);
 Bool("Modal Rifle scope",  "lith_weapons_riflescope");
 Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
+if(p->num == 0)
+   Bool("Drop magazines from weapons", "lith_weapons_magdrops");
 
 Category("Heads Up Display");
 Bool("Show score",   "lith_hud_showscore");

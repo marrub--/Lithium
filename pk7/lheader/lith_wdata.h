@@ -7,6 +7,7 @@ enum
    wdata_grafzone,
    wdata_enemycheck,
    wdata_pclass,
+   wdata_magdrops,
 };
 
 enum

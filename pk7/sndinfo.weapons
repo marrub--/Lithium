@@ -1,4 +1,27 @@
 //
+// Magazine
+//
+weapons/magbounce1 lsounds/Magazine/Drop1.flac // Halo 3
+weapons/magbounce2 lsounds/Magazine/Drop2.flac // 〃
+weapons/magbounce3 lsounds/Magazine/Drop3.flac // 〃
+
+weapons/magbouncef1 lsounds/Magazine/DropFull1.flac // Halo 3
+weapons/magbouncef2 lsounds/Magazine/DropFull2.flac // 〃
+weapons/magbouncef3 lsounds/Magazine/DropFull3.flac // 〃
+
+$random weapons/magbounce {
+   weapons/magbounce1
+   weapons/magbounce2
+   weapons/magbounce3
+}
+
+$random weapons/magbouncef {
+   weapons/magbouncef1
+   weapons/magbouncef2
+   weapons/magbouncef3
+}
+
+//
 // Knife
 //
 weapons/knife/swing1   lsounds/Knife/Fire1.flac   // Serious Sam: The First Encounter HD
