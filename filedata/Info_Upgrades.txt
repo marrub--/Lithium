@@ -126,6 +126,16 @@ its strange circumstances and the general requirement of strong, plentiful
 opponents to be useful in combat.
 
 ##----------------------------------------------------------------------------|
+== LITH_TXT_INFO_SHORT_StealthSys | $LITH_TXT_UPGRADE_TITLE_StealthSys
+== LITH_TXT_INFO_TITLE_StealthSys | Unnamed Stealth System
+@@ LITH_TXT_INFO_DESCR_StealthSys
+An active light reflection system, using advanced camouflage developed years
+ago in \cm[redacted]\c- by the inhabitants of the planet. While the original
+version required a link with \cm[redacted]\c- in order to function (as the
+natives could easily do so,) this version, which was developed by Deceiver
+Solomon, requires only an energy source.
+
+##----------------------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_HeadsUpDispJem | $LITH_TXT_UPGRADE_TITLE_HeadsUpDisp
 == LITH_TXT_INFO_TITLE_HeadsUpDispJem | Heads Up Display
 @@ LITH_TXT_INFO_DESCR_HeadsUpDispJem

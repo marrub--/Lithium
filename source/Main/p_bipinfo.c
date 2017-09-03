@@ -98,6 +98,7 @@ struct page_initializer const bip_pages[] = {
    {pcl_cybermage, "ReflexWetwJem",  {"AOF"}},
    {pcl_cybermage, "Magic"},
    {pcl_cybermage, "SoulCleaver"},
+   {pcl_cybermage, "StealthSys"},
 
    {pcl_outcasts, "VitalScanner", {"KSKK"}},
    {pcl_outcasts, "AutoReload",   {"KSKK"}},
