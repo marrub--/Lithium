@@ -140,8 +140,7 @@ static bool Lith_UpgrGive(player_t *, shopdef_t const *, void *upgr_, int tid)
 //
 static int CompUpgrInfo(void const *lhs, void const *rhs)
 {
-   upgradeinfo_t const *u1 = lhs;
-   upgradeinfo_t const *u2 = rhs;
+   upgradeinfo_t const *u1 = lhs, *u2 = rhs;
    int c1 = u1->category - u2->category;
    if(c1 != 0) return c1;
    else        return u1->key - u2->key;
@@ -156,17 +155,6 @@ static void SetDataPtr(player_t *p, upgrade_t *upgr)
 }
 
 // Extern Functions ----------------------------------------------------------|
-
-//
-// Lith_GetUpgradeInfo
-//
-upgradeinfo_t const *Lith_GetUpgradeInfo(int key)
-{
-   for(int i = 0; i < UpgrMax; i++)
-      if(UpgrInfo[i].key == key)
-         return &UpgrInfo[i];
-   return null;
-}
 
 //
 // Lith_UpgradeRegister_
