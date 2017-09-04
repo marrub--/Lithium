@@ -181,7 +181,7 @@ void Lith_ResetPlayer(player_t *p)
    p->active = true;
    p->reinit = p->dead = false;
    p->num    = ACS_PlayerNumber();
-   p->bipPtr = &p->bip;
+   p->bipptr = &p->bip;
 
    __with(__str cl = ACS_GetActorClass(0);) {
            if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;

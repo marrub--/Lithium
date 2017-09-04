@@ -180,7 +180,7 @@ typedef struct player
    __prop getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
    __prop deliverMail   {call: Lith_DeliverMail(this)}
    __prop clearTextBuf  {call: Lith_ClearTextBuf(this)}
-   __prop bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
+   __prop bipUnlock {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
    __prop discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
 
    // cvars
@@ -215,8 +215,19 @@ typedef struct player
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
 
+   // Attributes
+   struct player_attributes
+   {
+      unsigned acc : 8, def : 8, str : 8, vit : 8,
+               arm : 8, stm : 8, luk : 8, rge : 8;
+   } attr;
+
+   int level;
+   long exp;
+   long expnext;
+
    // BIP
-   bip_t bip, *bipPtr;
+   bip_t bip, *bipptr;
 
    // Upgrades
    struct upgr_data upgrdata;
