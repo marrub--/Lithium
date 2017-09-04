@@ -87,8 +87,8 @@ actor Lith_BossReward2 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_hasupgr1)
-      CELP A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      CUPG A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL B 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_hasupgr1)
@@ -106,7 +106,7 @@ actor Lith_BossReward3 : Lith_CBIItem
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_armorinter)
       ARM1 Z 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL C 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_armorinter)
@@ -123,8 +123,8 @@ actor Lith_BossReward4 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_hasupgr2)
-      CELL A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      CUPG B 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL D 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_hasupgr2)
@@ -142,7 +142,7 @@ actor Lith_BossReward5 : Lith_CBIItem
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_weapninte2)
       WRDP A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      SPEL E 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_weapninte2)
