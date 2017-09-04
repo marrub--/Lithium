@@ -51,6 +51,7 @@ user float  lith_weapons_alpha          = 1.0;
 user bool   lith_weapons_riflescope     = false;
 user bool   lith_weapons_riflemodeclear = false;
 user bool   lith_weapons_magdrops       = true;
+user bool   lith_weapons_magicselanims  = true;
 
 // HUD
 user bool   lith_hud_showscore    = true;

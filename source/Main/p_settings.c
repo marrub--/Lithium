@@ -42,6 +42,7 @@ Bool("Modal Rifle scope",  "lith_weapons_riflescope");
 Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
 if(p->num == 0)
    Bool("Drop magazines from weapons", "lith_weapons_magdrops");
+Bool("Magic selection animations", "lith_weapons_magicselanims");
 
 Category("Heads Up Display");
 Bool("Show score",   "lith_hud_showscore");

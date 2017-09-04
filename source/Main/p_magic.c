@@ -168,23 +168,28 @@ void Lith_Cercle(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_MagicSelect(int num)
 {
-   switch(num)
+   withplayer(LocalPlayer)
    {
-   case 1:
-   case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;
-   case 2:
-   case 3: ACS_FadeTo(255, 155, 0, 0.3, 0.0); break;
-   case 6:
-   case 7: ACS_FadeTo(255, 0,   0, 0.3, 0.0); break;
-   }
+      if(!p->getCVarI("lith_weapons_magicselanims")) return;
 
-   ACS_FadeTo(0, 0, 0, 0.0, 0.3);
+      switch(num)
+      {
+      case 1:
+      case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;
+      case 2:
+      case 3: ACS_FadeTo(255, 155, 0, 0.3, 0.0); break;
+      case 6:
+      case 7: ACS_FadeTo(255, 0,   0, 0.3, 0.0); break;
+      }
 
-   ACS_SetHudSize(64, 64);
-   for(int i = 0; i < 4; i++) {
-      DrawSpriteAlpha(StrParam("lgfx/MagicSel/Slot%i_%i.png", num, i + 1),
-         hid_magicsel, 0.1, 0.1, TICSECOND*3, 0.5);
-      ACS_Delay(3);
+      ACS_FadeTo(0, 0, 0, 0.0, 0.3);
+
+      ACS_SetHudSize(64, 64);
+      for(int i = 0; i < 4; i++) {
+         DrawSpriteAlpha(StrParam("lgfx/MagicSel/Slot%i_%i.png", num, i + 1),
+            hid_magicsel, 0.1, 0.1, TICSECOND*3, 0.5);
+         ACS_Delay(3);
+      }
    }
 }
 
