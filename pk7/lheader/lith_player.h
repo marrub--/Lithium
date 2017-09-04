@@ -151,50 +151,50 @@ typedef struct player
    // Properties -------------------------------------------------------------|
 
    // state
-   attr reset    {call: Lith_ResetPlayer(this)}
-   attr loadData {call: Lith_PlayerLoadData(this)}
-   attr saveData {call: Lith_PlayerSaveData(this)}
-   attr weapontype    {get:  Lith_PlayerCurWeaponType(this)}
-   attr buttonPressed {call: Lith_ButtonPressed(this)}
-   attr setVel  {call: Lith_SetPlayerVelocity(this)}
-   attr mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
-   attr manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
-   attr validateTID {call: Lith_ValidatePlayerTID(this)}
+   __prop reset    {call: Lith_ResetPlayer(this)}
+   __prop loadData {call: Lith_PlayerLoadData(this)}
+   __prop saveData {call: Lith_PlayerSaveData(this)}
+   __prop weapontype    {get:  Lith_PlayerCurWeaponType(this)}
+   __prop buttonPressed {call: Lith_ButtonPressed(this)}
+   __prop setVel  {call: Lith_SetPlayerVelocity(this)}
+   __prop mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
+   __prop manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
+   __prop validateTID {call: Lith_ValidatePlayerTID(this)}
 
    // score
-   attr giveScore   {call: Lith_GiveScore(this)}
-   attr takeScore   {call: Lith_TakeScore(this)}
-   attr getModScore {call: Lith_GetModScore(this)}
+   __prop giveScore   {call: Lith_GiveScore(this)}
+   __prop takeScore   {call: Lith_TakeScore(this)}
+   __prop getModScore {call: Lith_GetModScore(this)}
 
    // log
-   attr log  {call: Lith_Log (this)}
-   attr logF {call: Lith_LogF(this)}
-   attr logH {call: Lith_LogH(this)}
+   __prop log  {call: Lith_Log (this)}
+   __prop logF {call: Lith_LogF(this)}
+   __prop logH {call: Lith_LogH(this)}
 
    // gui
-   attr useGUI   {call: Lith_PlayerUseGUI(this)}
-   attr closeGUI {call: Lith_PlayerCloseGUI(this)}
+   __prop useGUI   {call: Lith_PlayerUseGUI(this)}
+   __prop closeGUI {call: Lith_PlayerCloseGUI(this)}
 
    // misc
-   attr getUpgr       {call: Lith_PlayerGetNamedUpgrade(this)}
-   attr getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
-   attr deliverMail   {call: Lith_DeliverMail(this)}
-   attr clearTextBuf  {call: Lith_ClearTextBuf(this)}
-   attr bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
-   attr discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
+   __prop getUpgr       {call: Lith_PlayerGetNamedUpgrade(this)}
+   __prop getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
+   __prop deliverMail   {call: Lith_DeliverMail(this)}
+   __prop clearTextBuf  {call: Lith_ClearTextBuf(this)}
+   __prop bipUnlock {call: Lith_UnlockBIPPage(->bipPtr, __arg, ->pclass)}
+   __prop discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
 
    // cvars
-   attr getCVarI {call: ACS_GetUserCVar      (->num)}
-   attr getCVarK {call: ACS_GetUserCVarFixed (->num)}
-   attr getCVarS {call: ACS_GetUserCVarString(->num)}
-   attr setCVarI {call: ACS_SetUserCVar      (->num)}
-   attr setCVarK {call: ACS_SetUserCVarFixed (->num)}
-   attr setCVarS {call: ACS_SetUserCVarString(->num)}
+   __prop getCVarI {call: ACS_GetUserCVar      (->num)}
+   __prop getCVarK {call: ACS_GetUserCVarFixed (->num)}
+   __prop getCVarS {call: ACS_GetUserCVarString(->num)}
+   __prop setCVarI {call: ACS_SetUserCVar      (->num)}
+   __prop setCVarK {call: ACS_SetUserCVarFixed (->num)}
+   __prop setCVarS {call: ACS_SetUserCVarString(->num)}
 
    // shop
-   attr getCost {call: Lith_ShopGetCost(this)}
-   attr canBuy  {call: Lith_ShopCanBuy(this)}
-   attr buy     {call: Lith_ShopBuy(this)}
+   __prop getCost {call: Lith_ShopGetCost(this)}
+   __prop canBuy  {call: Lith_ShopCanBuy(this)}
+   __prop buy     {call: Lith_ShopBuy(this)}
 
    // Members ----------------------------------------------------------------|
 

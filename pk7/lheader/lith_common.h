@@ -14,7 +14,6 @@
 #include <string.h>
 #include <stdint.h>
 
-#define attr __prop
 #define ifauto(type, name, ...) \
    __with(type name = (__VA_ARGS__);) \
       if(name)
