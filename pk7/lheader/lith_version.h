@@ -4,7 +4,8 @@
 #define Lith_CheckAPIVersion() \
    do \
       if(world.apiversion != Lith_APIVersion) { \
-         printf(c"%s: Invalid API version!\n", __func__); \
+         printf(c"%s: Invalid API version! Expected %i, but got %i\n", \
+            __func__, Lith_APIVersion, world.apiversion); \
          abort(); \
       } \
    while(0)
