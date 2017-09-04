@@ -155,7 +155,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    if(Lith_GUI_Button(g, .x = 296, 13, .preset = &guipre.btnexit))
       p->useGUI(GUI_CBI);
 
-   static __str tabnames[cbi_tab_max] = {"Upgrades", "CBI", "Shop", "Info", "Settings", "Log"};
+   static __str tabnames[cbi_tab_max] = {"Upgrades", "CBI", "Status", "Shop", "Info", "Settings"};
    for(int i = 0; i < cbi_tab_max; i++)
       if(Lith_GUI_Button_Id(g, i, tabnames[i], guipre.btntab.w * i + 13, 13, i == g->st[st_maintab].i, .preset = &guipre.btntab))
          g->st[st_maintab].i = i;
@@ -164,7 +164,6 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    extern void Lith_CBITab_Shop    (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_BIP     (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Log     (gui_state_t *g, player_t *p);
 
    switch(g->st[st_maintab].i)
    {
@@ -173,7 +172,6 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    case cbi_tab_shop:       Lith_CBITab_Shop    (g, p); break;
    case cbi_tab_bip:        Lith_CBITab_BIP     (g, p); break;
    case cbi_tab_settings:   Lith_CBITab_Settings(g, p); break;
-   case cbi_tab_log:        Lith_CBITab_Log     (g, p); break;
    }
 
    Lith_GUI_End(g);

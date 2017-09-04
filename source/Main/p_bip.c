@@ -290,11 +290,22 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       } \
       n += 10;
 #include "lith_bip.h"
+
+      if(Lith_GUI_Button(g, "Log", 70, 80 + n, .preset = &guipre.btnbipmain))
+         bip->curcategory = BIPC_LOG;
+
+      n += 10;
+
       if(Lith_GUI_Button(g, "Statistics", 70, 80 + n, .preset = &guipre.btnbipmain))
          bip->curcategory = BIPC_STATS;
 
       avail = bip->pageavail;
       max   = bip->pagemax;
+   }
+   else if(bip->curcategory == BIPC_LOG)
+   {
+      extern void Lith_CBI_Log(gui_state_t *g, player_t *p);
+      Lith_CBI_Log(g, p);
    }
    else if(bip->curcategory == BIPC_STATS)
    {
@@ -307,6 +318,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       HudMessageF("SMALLFNT", "\Cj%S", p->name);
       HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+      Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
       Stat("Weapons Found",       "%i",   p->weaponsheld);
       Stat("Health Used",         "%li",  p->healthused);
       Stat("Health Sum",          "%li",  p->healthsum);
@@ -315,7 +327,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Stat("Armor Used",          "%li",  p->armorused);
       Stat("Armor Sum",           "%li",  p->armorsum);
       Stat("Secrets Found",       "%i",   world.secretsfound);
-      Stat("Units Travelled",     "%i",   p->unitstravelled);
+      Stat("Units Travelled",     "%imu", p->unitstravelled);
       Stat("Upgrades Owned",      "%i",   p->upgradesowned);
       Stat("Items Bought",        "%i",   p->itemsbought);
       Stat("Mail Received",       "%i",   bip->mailreceived);
@@ -323,8 +335,6 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
       Stat("Brouzouf Gained",     "%i",   p->brouzouf);
       Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
-      Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
-//    Stat("Rituals Performed",   "%i",   0);
 
       #undef Stat
    }

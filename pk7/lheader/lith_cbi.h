@@ -10,10 +10,10 @@ enum
 {
    cbi_tab_upgrades,
    cbi_tab_cbi,
+   cbi_tab_status,
    cbi_tab_shop,
    cbi_tab_bip,
    cbi_tab_settings,
-   cbi_tab_log,
    cbi_tab_max
 };
 

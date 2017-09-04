@@ -33,6 +33,7 @@ enum
    BIPC_EXTRA,
    BIPC_MAX,
    BIPC_MAIN,
+   BIPC_LOG,
    BIPC_STATS,
    BIPC_SEARCH
 };
