@@ -23,7 +23,7 @@ ListMenu "MainMenu"
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
    }
-   TextItem "$MENU_UPDAT", "u", "Update1_5"
+   TextItem "$MENU_UPDAT", "u", "Update1_5_1"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
 }
 
@@ -64,6 +64,23 @@ ListMenu "SaveGameMenu"
    StaticTextCentered 160, -20, "$MENU_SAVEG"
    Position 80, 54
    Class "SaveMenu"
+}
+
+ListMenu "Update1_5_1"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5_1"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_5"
+   TextItem "$LITH_TXT_UPDATE_DOWN", "d", "Update1_5_1_Page2"
+}
+
+ListMenu "Update1_5_1_Page2"
+{
+   Font "CBIFONT", "Green"
+   Selector "-", -10, 0 LineSpacing 10 Position 20, 0
+   StaticText 8, 20, "$LITH_TXT_UPDATE_1_5_1_Page2"
+   TextItem "$LITH_TXT_UPDATE_PREV", "p", "Update1_5"
 }
 
 ListMenu "Update1_5"

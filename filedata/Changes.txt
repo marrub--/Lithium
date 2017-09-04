@@ -11,6 +11,52 @@
 ## Removed  = \cg-
 ## Subspace = \cb]
 
+%% LITH_TXT_UPDATE_1_5_1
+\cf(\ciAug. 36, 2017\cf) \cjFrom \cn1.5\cj to \cf1.5.1\cj:
+\cd+ Added an auto-save setting.
+\cd+ Added an API, so external C code can access all of Lithium by
+\cd  LOADing lithmain.
+\cd+ Added indicators for upgrades that work with eachother.
+\cd+ Added a footstep sound setting.
+\cd+ Added a view tilt setting.
+\cd+ Added the Elec. Binding upgrade.
+\cd+ Added the Shock Charge upgrade.
+\cd+ Added the Stealth System upgrade.
+\cd+ Added an active (HUD) debug level (0x02/log_devh).
+\cd+ Added a new class selection screen.
+\cd+ Added a new skill selection screen.
+\cd+ Added a system for allowing Phantoms to spawn mid-level.
+\cd+ Added magic selection animations.
+\cd+ Added a world sprite for Hulgyon.
+\cd+ Added a magazine drop setting.
+\cd+ Added sprites for the CBI upgrades that had placeholder sprites.
+\cj| Improved the SPAS' reload animation (thanks, Shivers!)
+\cj| Improved the SMG's reload animation slightly
+\cj| Improved the Combat Rifle's reload animation slightly
+\cj| Fixed junk frames in Extra Hard enemies.
+
+%% LITH_TXT_UPDATE_1_5_1_Page2
+\cj| Fixed death exits adding a bunch of junk to the upgrades menu.
+\cj| Fixed the "resurrect" cheat not working.
+\cj| Fixed the SPAS description listing the wrong capacity.
+\cj| Made Romyetya and Blade do more damage with Berserk.
+\cj| Changed the way magic selection works, so closing the menu will select.
+\cj| Moved source code out of the packaged file.
+\cj| Changed the compression from 7-zip to Zip, due to performance issues.
+\cj| Made the Ion Rifle allow switching while reloading.
+\cj| Buffed the SPAS.
+\cj| Reduced the ammo taken by the Pulse Charger.
+\cj| Made the Overloader upgrade un-scope when firing.
+\cj| Changed the settings menu slightly.
+\cj| Made Performance Rating more transparent for Cyber-Mage.
+\cj| Made dialogue/terminal text log to the console.
+\cj| Made Feuer not flash the screen when firing.
+\cj| Re-balanced Cyber-Mage's weapon upgrade prices.
+\cj| Fixed malignant null pointer dereferences.
+\cj| Rewrote James' defeat message.
+\cg- Removed the trail from Delear's world sprite.
+\cg- Removed Score Golf mode
+
 %% LITH_TXT_UPDATE_1_5
 \cf(\ciAug. 25, 2017\cf) \cjFrom \cn1.5 beta\cj to \cf1.5\cj:
 \cd+ Added the remaining Methods:
