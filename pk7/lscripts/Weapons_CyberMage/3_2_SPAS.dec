@@ -187,25 +187,13 @@ actor Lith_SPAS : Lith_CWeapon
       TNT1 A 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_upgrade, UPGR_SPAS_B), "Ready")
       TNT1 A 0 A_JumpIfInventory("Lith_SPASShotsFired", 1, 1)
       goto Ready
-      CSHG A 1
-      CSHG A 1 offset(-2, 34)
-      CSHG A 1 offset(-4, 37)
-      CSHG A 1 offset(-9, 43) A_PlaySound("weapons/cshotgun/load", CHAN_6)
-      CSHG A 1 offset(-12, 47)
-      CSHG A 1 offset(-14, 52)
-      CSHG A 2 offset(-12, 55)
-      CSHG A 3 offset(-11, 57)
-      CSHG A 8 offset(-10, 60)
-      CSHG A 8 offset(-11, 60)
-      CSHG A 0 A_TakeInventory("Lith_SPASShotsFired", 999)
-      CSHG A 2 offset(-13, 59) A_PlaySound("weapons/cshotgun/pump", CHAN_7)
-      CSHG E 1 offset(-10, 57)
-      CSHG F 1 offset(-8, 55)
-      CSHG G 2 offset(-6, 53)
-      CSHG H 6 offset(-4, 50)
-      CSHG G 2 offset(-2, 48)
-      CSHG F 3 offset(1, 42)
-      CSHG E 3 offset(0, 38)
+      CSHR ABCDE 1
+      CSHR FG 2
+      CSHR H 2 A_PlaySound("weapons/cshotgun/load", CHAN_6)
+      CSHR IJKLMNOPQR 2
+      CSHR A 0 A_TakeInventory("Lith_SPASShotsFired", 999)
+      CSHR S 2 A_PlaySound("weapons/cshotgun/pump", CHAN_7)
+      CSHR TUVWXYZB 2
       goto Ready
    
    FireEmpty:
