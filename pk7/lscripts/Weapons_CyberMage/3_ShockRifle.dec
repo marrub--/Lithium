@@ -253,7 +253,6 @@ actor Lith_ShockRifle : Lith_CWeapon
       CSRG A 1 offset(8, 40)
       CSRG A 1 offset(5, 38)
       CSRG A 1 offset(2, 35)
-      CSRG AAAAAAA 1 offset(1, 32) A_ReFire
       goto Ready
    }
 }
