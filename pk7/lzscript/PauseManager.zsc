@@ -16,7 +16,8 @@ class Lith_PauseManager play
             pl.mo.viewbob = 0;
          } else {
             pl.mo.viewbob = 1;
-            pl.psprites.tics = pl.psprites.curState.tics;
+            if(pl.psprites)
+               pl.psprites.tics = pl.psprites.curState.tics;
          }
       }
    }
@@ -31,7 +32,7 @@ class Lith_PauseManager play
    static void PauseTick(int player)
    {
       let sv = Lith_Server.Instance();
-      if(sv && sv.Paused)
+      if(sv && sv.Paused && playeringame[player] && players[player].psprites)
          players[player].psprites.tics = -1;
    }
 }
