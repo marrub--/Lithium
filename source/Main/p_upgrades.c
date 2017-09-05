@@ -179,34 +179,35 @@ void Lith_UpgradeRegisterReinit(upgr_reinit_cb_t cb)
 //
 void Lith_GSReinit_Upgrade(void)
 {
-   // Set up function pointers for upgrade info.
    for(int i = 0; i < UpgrMax; i++)
    {
-      switch(UpgrInfo[i].key)
+      upgradeinfo_t *ui = &UpgrInfo[i];
+
+      // Set up static function pointers
+      ui->Init = SetDataPtr; // this is set again by UpgrReinitCb
+
+      ui->shopBuy    = Lith_UpgrShopBuy;
+      ui->shopCanBuy = Lith_UpgrCanBuy;
+      ui->shopGive   = Lith_UpgrGive;
+
+      // Set up individual upgrades' function pointers
+      switch(ui->key)
       {
       #define Case(n) continue; case UPGR_##n:
-      #define A(n) UpgrInfo[i].Activate   = Upgr_##n##_Activate;
-      #define D(n) UpgrInfo[i].Deactivate = Upgr_##n##_Deactivate;
-      #define U(n) UpgrInfo[i].Update     = Upgr_##n##_Update;
-      #define E(n) UpgrInfo[i].Enter      = Upgr_##n##_Enter;
-      #define R(n) UpgrInfo[i].Render     = Upgr_##n##_Render;
+      #define A(n) ui->Activate   = Upgr_##n##_Activate;
+      #define D(n) ui->Deactivate = Upgr_##n##_Deactivate;
+      #define U(n) ui->Update     = Upgr_##n##_Update;
+      #define E(n) ui->Enter      = Upgr_##n##_Enter;
+      #define R(n) ui->Render     = Upgr_##n##_Render;
       #include "lith_upgradefuncs.h"
          continue;
       }
 
       for(int j = 0; j < UpgrReinitCbNum; j++)
-         if(UpgrReinitCb[j](&UpgrInfo[i]))
+         if(UpgrReinitCb[j](ui))
             goto next;
 
    next:;
-   }
-
-   // Load shop function pointers and IDs.
-   for(int i = 0; i < UpgrMax; i++)
-   {
-      UpgrInfo[i].shopBuy    = Lith_UpgrShopBuy;
-      UpgrInfo[i].shopCanBuy = Lith_UpgrCanBuy;
-      UpgrInfo[i].shopGive   = Lith_UpgrGive;
    }
 }
 
@@ -218,10 +219,8 @@ void Lith_GSInit_Upgrade(void)
    if(world.grafZoneEntered)
       Lith_UpgradeRegister(&(upgradeinfo_t const){{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
 
-   for(int i = 0; i < countof(UpgrInfoBase); i++) {
+   for(int i = 0; i < countof(UpgrInfoBase); i++)
       UpgrInfoBase[i].key  = i;
-      UpgrInfoBase[i].Init = SetDataPtr;
-   }
 
    UpgrInfo = calloc(UpgrMax, sizeof(upgradeinfo_t));
    memmove(UpgrInfo, UpgrInfoBase, sizeof(UpgrInfoBase));
@@ -255,6 +254,7 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 //
 // Lith_PlayerInitUpgrades
 //
+[[__call("ScriptS")]]
 void Lith_PlayerInitUpgrades(player_t *p)
 {
    #define CheckPClass() (UpgrInfo[i].pclass & p->pclass)

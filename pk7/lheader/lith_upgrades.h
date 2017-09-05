@@ -23,7 +23,7 @@
 #include "lith_upgradefuncs.h"
 
 
-void Lith_PlayerInitUpgrades(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerInitUpgrades(struct player *p);
 void Lith_PlayerDeallocUpgrades(struct player *p);
 void Lith_PlayerDeinitUpgrades(struct player *p);
 void Lith_PlayerReinitUpgrades(struct player *p);

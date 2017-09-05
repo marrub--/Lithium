@@ -21,6 +21,8 @@ static void SetDataPtr(player_t *p, upgrade_t *upgr)
 
 static bool ReinitUpgrades(upgradeinfo_t *ui)
 {
+   ui->Init = SetDataPtr;
+
    switch(ui->key)
    {
    #define Case(n) return true; case UPGR_##n:
@@ -41,7 +43,6 @@ static void GSInit()
    Lith_UpgradeRegisterReinit(ReinitUpgrades);
 
    for(int i = 0; i < countof(UpgrInfo); i++) {
-      UpgrInfo[i].Init = SetDataPtr;
       UpgrInfo[i].key = i + UPGR_CPK1_BASE;
       Lith_UpgradeRegister(&UpgrInfo[i]);
    }
