@@ -5,6 +5,8 @@
 #include "lith_world.h"
 #include "lith_monster.h"
 
+#include <math.h>
+
 // Static Functions ----------------------------------------------------------|
 
 static void Lith_GetArmorType(player_t *p);
@@ -113,6 +115,9 @@ void Lith_PlayerUpdateData(player_t *p)
    p->keys.redskull    = ACS_CheckInventory("RedSkull");
    p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
    p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
+
+   DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
+      p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);
 }
 
 //
@@ -160,6 +165,23 @@ void Lith_KeyDown(int pnum, int ch)
 }
 
 //
+// Lith_GiveEXP
+//
+void Lith_GiveEXP(player_t *p, unsigned long amt)
+{
+   #pragma GDCC FIXED_LITERAL OFF
+   struct player_attributes *a = &p->attr;
+
+   while(a->exp + amt >= a->expnext) {
+      a->level++;
+      a->points += 9;
+      a->expnext = 500 + (a->level * pow(1.4, a->level * 0.4) * 200);
+   }
+
+   a->exp += amt;
+}
+
+//
 // Lith_ResetPlayer
 //
 // Reset some things on the player when they spawn.
@@ -168,11 +190,20 @@ void Lith_KeyDown(int pnum, int ch)
 void Lith_ResetPlayer(player_t *p)
 {
    //
-   // Init
+   // Zero-init
 
    if(!p->wasinit) {
       *p = (player_t){};
       p->wasinit = true;
+   }
+
+   //
+   // Static data (pre-init)
+
+   if(!p->staticinit) {
+      p->attr.autolevel = p->getCVarI("lith_player_autolevel");
+      p->attr.expnext = 500;
+      p->attr.level = 1;
    }
 
    //
@@ -257,7 +288,7 @@ void Lith_ResetPlayer(player_t *p)
    p->alpha = 1;
 
    //
-   // Static data
+   // Re-init data
 
    if(!p->bip.init)
       Lith_PlayerInitBIP(p);
@@ -266,6 +297,9 @@ void Lith_ResetPlayer(player_t *p)
       Lith_PlayerInitUpgrades(p);
    else
       Lith_PlayerReinitUpgrades(p);
+
+   //
+   // Static data
 
    if(!p->staticinit)
    {

@@ -10,6 +10,9 @@
 
 // Static Functions ----------------------------------------------------------|
 
+//
+// CBITab_Marine
+//
 static void CBITab_Marine(gui_state_t *g, player_t *p)
 {
    __str name;
@@ -67,6 +70,9 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
    HasUpgr(cupg_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 300.2, 48*4 + .1 - 20, TICSECOND);
 }
 
+//
+// CBITab_CyberMage
+//
 static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 {
    DrawSpritePlain("lgfx/UI/CPU2.png", g->hid--, .1, .1, TICSECOND);
@@ -108,6 +114,9 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
    HasUpgr(cupg_c_rdistinter) DrawSpritePlain("lgfx/UI/RDistInter.png", g->hid--, 252.2, 48*4+.1-20, TICSECOND);
 }
 
+//
+// Lith_CBITab_CBI
+//
 static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 {
    switch(p->pclass)
@@ -115,6 +124,30 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
    case pcl_marine:    CBITab_Marine   (g, p); break;
    case pcl_cybermage: CBITab_CyberMage(g, p); break;
    }
+}
+
+//
+// Lith_CBITab_Status
+//
+static void Lith_CBITab_Status(gui_state_t *g, player_t *p)
+{
+   int x = 30, y = 40;
+   ACS_SetFont("CHFONT");
+   #define Info(x, y, ...) \
+      HudMessage("\Cj" __VA_ARGS__); \
+      HudMessagePlain(g->hid--, x, y, TICSECOND)
+   #define InfoL(...) Info(x+  .1, y+.1,  __VA_ARGS__)
+   #define InfoR(...) Info(x+80.2, y+.1, __VA_ARGS__); y += 10
+   InfoL("%S", p->name);
+   y += 10;
+   InfoL("Lv.");  InfoR("%u", p->attr.level);
+   InfoL("HP");   InfoR("%i/%i", p->health, p->maxhealth);
+   InfoL("MP");   InfoR("%i/%i", p->mana, p->manamax);
+   InfoL("EXP");  InfoR("%lu", p->attr.exp);
+   InfoL("Next"); InfoR("%lu", p->attr.expnext);
+   #undef Info
+   #undef InfoL
+   #undef InfoR
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -167,11 +200,12 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 
    switch(g->st[st_maintab].i)
    {
-   case cbi_tab_upgrades:   Lith_CBITab_Upgrades(g, p); break;
-   case cbi_tab_cbi:        Lith_CBITab_CBI     (g, p); break;
-   case cbi_tab_shop:       Lith_CBITab_Shop    (g, p); break;
-   case cbi_tab_bip:        Lith_CBITab_BIP     (g, p); break;
-   case cbi_tab_settings:   Lith_CBITab_Settings(g, p); break;
+   case cbi_tab_upgrades: Lith_CBITab_Upgrades(g, p); break;
+   case cbi_tab_cbi:      Lith_CBITab_CBI     (g, p); break;
+   case cbi_tab_status:   Lith_CBITab_Status  (g, p); break;
+   case cbi_tab_shop:     Lith_CBITab_Shop    (g, p); break;
+   case cbi_tab_bip:      Lith_CBITab_BIP     (g, p); break;
+   case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }
 
    Lith_GUI_End(g);

@@ -11,6 +11,7 @@
 #include "lith_list.h"
 #include "lith_weaponinfo.h"
 #include "lith_shopdef.h"
+#include "lith_attrib.h"
 
 #include <GDCC/HashMap.h>
 
@@ -24,6 +25,10 @@
 #define Lith_GiveAllScore(score, nomul) \
    Lith_ForPlayer() \
       p->giveScore(score, nomul)
+
+#define Lith_GiveAllEXP(amt) \
+   Lith_ForPlayer() \
+      p->giveEXP(amt)
 
 #define LocalPlayer \
    (ACS_PlayerNumber() < 0 ? null : &players[ACS_PlayerNumber()])
@@ -114,6 +119,9 @@ void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 [[__optional_args(1)]] score_t Lith_GetModScore(struct player *p,
                           score_t score, bool nomul);
 
+// attributes
+void Lith_GiveEXP(struct player *p, unsigned long amt);
+
 // misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
@@ -166,6 +174,9 @@ typedef struct player
    __prop takeScore   {call: Lith_TakeScore(this)}
    __prop getModScore {call: Lith_GetModScore(this)}
 
+   // attributes
+   __prop giveEXP {call: Lith_GiveEXP(this)}
+
    // log
    __prop log  {call: Lith_Log (this)}
    __prop logF {call: Lith_LogF(this)}
@@ -216,15 +227,7 @@ typedef struct player
    player_delta_t old;
 
    // Attributes
-   struct player_attributes
-   {
-      unsigned acc : 8, def : 8, str : 8, vit : 8,
-               arm : 8, stm : 8, luk : 8, rge : 8;
-   } attr;
-
-   int level;
-   long exp;
-   long expnext;
+   struct player_attributes attr;
 
    // BIP
    bip_t bip, *bipptr;

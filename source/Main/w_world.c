@@ -168,6 +168,15 @@ void Lith_EmitScore(int amount)
 }
 
 //
+// Lith_EmitEXP
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_EmitEXP(int amount)
+{
+   Lith_GiveAllEXP(amount);
+}
+
+//
 // Lith_MakeSerious
 //
 [[__call("ScriptS"), __extern("ACS")]]
