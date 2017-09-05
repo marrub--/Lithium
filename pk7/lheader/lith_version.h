@@ -1,5 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-#define Lith_Version "1.5.1 (Rubellite Pegmatite)"
+#define Lith_Version "1.5.2 (Rubellite Pegmatite)"
 #define Lith_APIVersion 154
 #define Lith_CheckAPIVersion() \
    do \
@@ -10,7 +10,7 @@
       } \
    while(0)
 #include <stdio.h>
-// 154 - 1.5.1 (Rubellite Pegmatite)
+// 154 - 1.5.1 & 1.5.2 (Rubellite Pegmatite)
 // 153 - 1.5 (Pegmatite)
 // 152 - 1.5 Beta (Pegmatite)
 // 151 - 1.5 Alpha 2 (Pegmatite)
