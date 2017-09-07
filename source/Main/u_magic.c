@@ -138,9 +138,6 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
 
    UData.manaperc = manaperc;
 
-   if(manaperc < 0.5 && ACS_Timer() % 5 == 0)
-      ACS_GiveInventory("Lith_MagicAmmo", 1);
-
    if(p->weapontype != weapon_c_fist) {
       if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
          Lith_SetMagicUI(true);
