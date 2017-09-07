@@ -193,6 +193,7 @@ typedef struct player
    __prop clearTextBuf  {call: Lith_ClearTextBuf(this)}
    __prop bipUnlock {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
    __prop discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
+   __prop classname {get:  ACS_GetActorPropertyString(->tid, APROP_NameTag)}
 
    // cvars
    __prop getCVarI {call: ACS_GetUserCVar      (->num)}

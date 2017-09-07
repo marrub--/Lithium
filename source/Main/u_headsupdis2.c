@@ -121,7 +121,7 @@ static void HUD_KeyInd(player_t *p)
    if(p->keys.blueskull)   DrawSpriteAlpha("H_KS3", hid_key_blueskull,   160.2, 10.1, 0.1, 0.8);
    if(p->keys.redcard)     DrawSpriteAlpha("H_KC1", hid_key_red,         150.2, 10.1, 0.1, 0.8);
    if(p->keys.yellowcard)  DrawSpriteAlpha("H_KC2", hid_key_yellow,      140.2, 11.1, 0.1, 0.8);
-   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        130.2, 11.1, 0.1, 0.8);
+   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        130.2, 12.1, 0.1, 0.8);
 }
 
 // Extern Functions ----------------------------------------------------------|

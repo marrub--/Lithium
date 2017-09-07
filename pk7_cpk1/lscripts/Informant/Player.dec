@@ -8,6 +8,7 @@ actor Lith_InformantPlayer : Lith_Player
    Player.ViewHeight 45
    Player.AttackZOffset 12
    Player.JumpZ 14
+   Tag "Informant"
 }
 
 actor Lith_ItemSpriteI : Lith_ItemSprite

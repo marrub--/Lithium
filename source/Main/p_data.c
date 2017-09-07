@@ -11,6 +11,33 @@
 
 static void Lith_GetArmorType(player_t *p);
 
+//
+// SetupAttributes
+//
+static void SetupAttributes(player_t *p)
+{
+   p->attr.names[at_acc] = "ACC";
+   p->attr.names[at_def] = "DEF";
+   p->attr.names[at_str] = "STR";
+   p->attr.names[at_vit] = "VIT";
+   p->attr.names[at_arm] = "ARM";
+   p->attr.names[at_stm] = "STM";
+   p->attr.names[at_luk] = "LUK";
+   p->attr.names[at_rge] = "RGE";
+
+   if(p->pclass & pcl_robot) {
+      p->attr.names[at_vit] = "POT";
+      p->attr.names[at_stm] = "REP";
+   } else if(p->pclass & pcl_nonhuman) {
+      p->attr.names[at_vit] = "POT";
+      p->attr.names[at_stm] = "REG";
+   }
+
+   p->attr.autolevel = p->getCVarI("lith_player_autolevel");
+   p->attr.expnext = 500;
+   p->attr.level = 1;
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -176,6 +203,7 @@ void Lith_GiveEXP(player_t *p, unsigned long amt)
       a->level++;
       a->points += 9;
       a->expnext = 500 + (a->level * pow(1.4, a->level * 0.4) * 200);
+      p->attr.sup = p->attr.cur;
    }
 
    a->exp += amt;
@@ -198,15 +226,6 @@ void Lith_ResetPlayer(player_t *p)
    }
 
    //
-   // Static data (pre-init)
-
-   if(!p->staticinit) {
-      p->attr.autolevel = p->getCVarI("lith_player_autolevel");
-      p->attr.expnext = 500;
-      p->attr.level = 1;
-   }
-
-   //
    // Constant data
 
    p->active = true;
@@ -226,6 +245,13 @@ void Lith_ResetPlayer(player_t *p)
          Log("Invalid player class detected!");
          abort();
       }
+   }
+
+   //
+   // Static data (pre-init)
+
+   if(!p->staticinit) {
+      SetupAttributes(p);
    }
 
    //

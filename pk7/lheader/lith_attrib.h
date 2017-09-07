@@ -2,14 +2,37 @@
 #ifndef LITH_ATTRIB_H
 #define LITH_ATTRIB_H
 
+#define ATTR_MAX 300
+#define ATTR_VIS_MAX 200
+#define ATTR_VIS_DIFF (ATTR_MAX - ATTR_VIS_MAX)
+
+enum
+{
+   at_acc,
+   at_def,
+   at_str,
+   at_vit,
+   at_arm,
+   at_stm,
+   at_luk,
+   at_rge,
+   at_max
+};
+
+struct player_attr_theta
+{
+   unsigned points;
+   unsigned attrs[at_max];
+};
+
 struct player_attributes
 {
    bool autolevel;
    unsigned long exp, expnext;
    unsigned level;
-   unsigned points;
-   unsigned acc : 8, def : 8, str : 8, vit : 8,
-            arm : 8, stm : 8, luk : 8, rge : 8;
+   __str    names[at_max];
+   [[__anonymous]] struct player_attr_theta cur;
+                   struct player_attr_theta sup;
 };
 
 #endif

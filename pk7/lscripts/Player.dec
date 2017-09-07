@@ -35,6 +35,7 @@ actor Lith_MarinePlayer : Lith_Player
    Player.Portrait "lgfx/Portraits/Marine.png"
    Player.ViewHeight 48
    Player.AttackZOffset 15
+   Tag "Marine"
 }
 
 actor Lith_CyberMagePlayer : Lith_Player
@@ -47,6 +48,7 @@ actor Lith_CyberMagePlayer : Lith_Player
    Player.ViewHeight 45
    Player.AttackZOffset 12
    Player.JumpZ 9
+   Tag "Cyber-Mage"
 }
 
 actor Lith_RA_Hax : PowerProtection

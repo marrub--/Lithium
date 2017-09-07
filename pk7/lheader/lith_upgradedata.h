@@ -145,9 +145,8 @@ typedef struct upgradeinfo {
    upgr_fn_cb_t Activate;
    upgr_fn_cb_t Deactivate;
    upgr_sc_cb_t Update;
-   upgr_fn_cb_t Render;
    upgr_fn_cb_t Enter;
-
+   upgr_fn_cb_t Render;
    upgr_fn_cb_t Init;
 } upgradeinfo_t;
 
