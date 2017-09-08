@@ -417,8 +417,10 @@ static void UpdateGame(void)
       if(ACS_GetCVarFixed("__lith_version") < n) \
          __with(ACS_SetCVarFixed("__lith_version", n);)
 
-   Update(15.1) ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0 -> 1.25
-   Update(15.2) ACS_SetCVar("lith_sv_difficulty", 10); // 1 -> 10
+   Update(15.1) ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0=>1.25
+   Update(15.2) ACS_SetCVar("lith_sv_difficulty", 10); // 1=>10
+   Update(16.0)
+      Lith_ForPlayer() p->setCVarK("lith_player_footstepvol", 0.2); // 1.0=>0.2
 
    #undef Update
 }

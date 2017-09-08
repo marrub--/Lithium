@@ -15,7 +15,7 @@ user bool   lith_player_stupidpickups = false;
 user bool   lith_player_brightweps    = false;
 user bool   lith_player_noitemfx      = false;
 user bool   lith_player_teleshop      = false;
-user float  lith_player_footstepvol   = 1.0;
+user float  lith_player_footstepvol   = 0.2;
 user float  lith_player_viewtilt      = 0.0;
 user bool   lith_player_autolevel     = false;
 
