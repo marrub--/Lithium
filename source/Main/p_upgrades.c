@@ -85,8 +85,9 @@ static __str const UpgrCateg[UC_MAX] = {
 static upgradeinfo_t *UpgrInfo;
 static int UpgrMax = countof(UpgrInfoBase);
 
-static upgr_reinit_cb_t UpgrReinitCb[10];
-static int UpgrReinitCbNum;
+// Callbacks -----------------------------------------------------------------|
+
+CallbackDefine(upgr_reinit_cb_t, UpgrReinit)
 
 // Static Functions ----------------------------------------------------------|
 
@@ -167,14 +168,6 @@ upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
 }
 
 //
-// Lith_UpgradeRegisterReinit
-//
-void Lith_UpgradeRegisterReinit(upgr_reinit_cb_t cb)
-{
-   UpgrReinitCb[UpgrReinitCbNum++] = cb;
-}
-
-//
 // Lith_GSReinit_Upgrade
 //
 void Lith_GSReinit_Upgrade(void)
@@ -184,7 +177,7 @@ void Lith_GSReinit_Upgrade(void)
       upgradeinfo_t *ui = &UpgrInfo[i];
 
       // Set up static function pointers
-      ui->Init = SetDataPtr; // this is set again by UpgrReinitCb
+      ui->Init = SetDataPtr; // this is set again by UpgrReinit
 
       ui->shopBuy    = Lith_UpgrShopBuy;
       ui->shopCanBuy = Lith_UpgrCanBuy;
@@ -203,12 +196,13 @@ void Lith_GSReinit_Upgrade(void)
          continue;
       }
 
-      for(int j = 0; j < UpgrReinitCbNum; j++)
-         if(UpgrReinitCb[j](ui))
-            goto next;
+      CallbackEach(upgr_reinit_cb_t, UpgrReinit)
+         if(cb(ui)) goto next;
 
    next:;
    }
+
+   CallbackClear(upgr_reinit_cb_t, UpgrReinit);
 }
 
 //

@@ -101,6 +101,40 @@
 #define DebugNote(...) \
    (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
 
+#define CallbackDeclareFn(t, name) \
+   extern void Lith_CbReg_##name(t cb);
+
+#define CallbackDeclare(t, name) \
+   extern t name##Cb[]; \
+   extern int name##CbNum; \
+   CallbackDeclareFn(t, name)
+
+#ifndef EXTERNAL_CODE
+#define CallbackDeclareInternal(t, name) CallbackDeclare(t, name)
+#else
+#define CallbackDeclareInternal(t, name) CallbackDeclareFn(t, name)
+#endif
+
+#define CallbackDefine(t, name) \
+   t name##Cb[16]; \
+   int name##CbNum; \
+   void Lith_CbReg_##name(t cb) {name##Cb[name##CbNum++] = cb;}
+
+#define CallbackRun(t, name, ...) \
+   do for(int _cb_i = 0; _cb_i < name##CbNum; _cb_i++) \
+      name##Cb[_cb_i](__VA_ARGS__); \
+   while(0)
+
+#define CallbackEach(t, name) \
+   for(int _cb_i = 0; _cb_i < name##CbNum; _cb_i++) \
+      __with(t cb = name##Cb[_cb_i];)
+
+#define CallbackClear(t, name) name##CbNum = 0
+
+#define CallbackRunAndClear(t, name, ...) \
+   CallbackRun(t, name, __VA_ARGS__); \
+   CallbackClear(t, name)
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 
@@ -141,6 +175,8 @@ enum {
    log_dmonV = 1 << 4,
    log_dlg   = 1 << 5,
 };
+
+typedef void (*basic_cb_t)(void);
 
 // Printing ------------------------------------------------------------------|
 

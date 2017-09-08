@@ -44,14 +44,14 @@ enum game_s
    Game_Episodic,
 };
 
-typedef void (*gsinit_cb_t)(void);
-
 __str Lith_CanonTime(int type);
 [[__optional_args(1)]] int Lith_UniqueID(int tid);
 [[__call("ScriptS"), __extern("ACS")]] void Lith_BeginAngles(int x, int y);
 [[__call("ScriptS"), __extern("ACS")]] fixed Lith_AddAngle(int x, int y);
 void Lith_FreezeTime(bool on);
-void Lith_GSInitRegister(gsinit_cb_t cb);
+
+CallbackDeclareInternal(basic_cb_t, GInit)
+CallbackDeclareInternal(basic_cb_t, GSInit)
 
 typedef struct worldinfo_s
 {

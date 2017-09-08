@@ -338,6 +338,8 @@ typedef struct player
    } sigil;
 } player_t;
 
+typedef void (*player_cb_t)(player_t *p);
+
 // Extern Objects ------------------------------------------------------------|
 
 #ifndef EXTERNAL_CODE
@@ -346,5 +348,9 @@ extern player_t players[MAX_PLAYERS];
 player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
 #define players (*Lith_GetPlayersExtern())
 #endif
+
+// Callbacks -----------------------------------------------------------------|
+
+CallbackDeclareInternal(player_cb_t, PlayerUpdate)
 
 #endif

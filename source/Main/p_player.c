@@ -16,6 +16,10 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
    {"player/cbi/open", "player/cbi/close"},
 };
 
+// Callbacks -----------------------------------------------------------------|
+
+CallbackDefine(player_cb_t, PlayerUpdate)
+
 // Static Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
@@ -419,6 +423,8 @@ static void Lith_PlayerRunScripts(player_t *p)
       {
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;
       }
+
+      CallbackRun(player_cb_t, PlayerUpdate, p);
 
       Lith_PlayerUpdateUpgrades(p); // Update upgrades
       Lith_PlayerUpdateWeapons(p);  // Update weapons

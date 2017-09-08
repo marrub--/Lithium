@@ -34,8 +34,10 @@ static fixed lmvar rain_px;
 static fixed lmvar rain_py;
 static fixed lmvar rain_dist;
 
-static gsinit_cb_t GSInitCb[20];
-static int GSInitCbNum;
+// Callbacks -----------------------------------------------------------------|
+
+CallbackDefine(basic_cb_t, GInit)
+CallbackDefine(basic_cb_t, GSInit)
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -47,14 +49,6 @@ extern void Lith_SpawnBosses(score_t sum, bool force);
 worldinfo_t *Lith_GetWorldExtern(void)
 {
    return &world;
-}
-
-//
-// Lith_GSInitRegister
-//
-void Lith_GSInitRegister(gsinit_cb_t cb)
-{
-   GSInitCb[GSInitCbNum++] = cb;
 }
 
 //
@@ -437,6 +431,8 @@ static void GSInit(void)
    extern void Lith_GSInit_Dialogue(void);
    extern void Lith_InstallCBIItem(int num);
 
+   CallbackRunAndClear(basic_cb_t, GInit);
+
    CheckModCompat();
    UpdateGame();
    GetDebugInfo();
@@ -444,8 +440,7 @@ static void GSInit(void)
 
    if(!world.gsinit)
    {
-      for(int i = 0; i < GSInitCbNum; i++)
-         GSInitCb[i]();
+      CallbackRunAndClear(basic_cb_t, GSInit);
 
       Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
@@ -699,6 +694,8 @@ static void Lith_WorldUnload(void)
       p->closeGUI();
       Lith_PlayerDeltaStats(p);
    }
+
+   CallbackClear(player_cb_t, PlayerUpdate);
 }
 
 // EOF

@@ -38,10 +38,13 @@ static bool ReinitUpgrades(upgradeinfo_t *ui)
    return false;
 }
 
+static void GInit()
+{
+   Lith_CbReg_UpgrReinit(ReinitUpgrades);
+}
+
 static void GSInit()
 {
-   Lith_UpgradeRegisterReinit(ReinitUpgrades);
-
    for(int i = 0; i < countof(UpgrInfo); i++) {
       UpgrInfo[i].key = i + UPGR_CPK1_BASE;
       Lith_UpgradeRegister(&UpgrInfo[i]);
@@ -56,7 +59,9 @@ static void Lith_Cpk1_World()
    Lith_CheckAPIVersion();
 
    if(!world.gsinit)
-      Lith_GSInitRegister(GSInit);
+      Lith_CbReg_GSInit(GSInit);
+
+   Lith_CbReg_GInit(GInit);
 }
 
 // EOF
