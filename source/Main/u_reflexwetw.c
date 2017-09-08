@@ -69,7 +69,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
       {
          fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
-         ACS_PlaySound(0, "player/slide");
+         ACS_LocalAmbientSound("player/slide", 127);
          p->setVel(p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0, false, true);
 
          DOOOOODGE(p);
@@ -84,7 +84,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
-      ACS_PlaySound(0, "player/doublejump");
+      ACS_LocalAmbientSound("player/doublejump", 127);
       p->setVel(p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0, false, true);
 
       UData.leaped = 1;
