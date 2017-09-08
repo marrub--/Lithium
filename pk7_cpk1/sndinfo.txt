@@ -1,14 +1,37 @@
 //
 // Informant
 //
-$playeralias    informant male *land silence
-$playeralias    informant male *grunt silence
-$playersound    informant male *jump    lsounds/Player/Informant/Jump.flac       // Self-made
-$playersound    informant male *death   lsounds/Player/Informant/Death.flac      // 〃
-$playersound    informant male *xdeath  lsounds/Player/Informant/XDeath.flac     // 〃
-$playersound    informant male *pain100 lsounds/Player/Informant/PainSmall.flac  // Doom
-$playersounddup informant male *pain75  *pain100                                 // 〃
-$playersound    informant male *pain50  lsounds/Player/Informant/Pain.flac       // 〃
-$playersounddup informant male *pain25  *pain50                                  // 〃
+player/informant/land1 lsounds/Informant/Land1.flac // Phantasy Star: Nova
+player/informant/land2 lsounds/Informant/Land2.flac // 〃
+player/informant/land3 lsounds/Informant/Land3.flac // 〃
+
+player/informant/step1 lsounds/Footsteps/InformantStep1.flac // Fallout 4
+player/informant/step2 lsounds/Footsteps/InformantStep2.flac // 〃
+player/informant/step3 lsounds/Footsteps/InformantStep3.flac // 〃
+player/informant/step4 lsounds/Footsteps/InformantStep4.flac // 〃
+
+$random player/informant/land {
+   player/informant/land1
+   player/informant/land2
+   player/informant/land3
+}
+
+$random player/informant/step {
+   player/informant/step1
+   player/informant/step2
+   player/informant/step3
+   player/informant/step4
+}
+
+$playeralias    informant male *land    player/informant/land
+$playeralias    informant male *grunt   silence
+$playersound    informant male *jump    lsounds/Informant/Jump.flac       // Self-made
+$playersound    informant male *death   lsounds/Informant/Death.flac      // 〃
+$playersound    informant male *xdeath  lsounds/Informant/XDeath.flac     // 〃
+$playersound    informant male *pain100 lsounds/Informant/PainSmall.flac  // Doom
+$playersounddup informant male *pain75  *pain100                          // 〃
+$playersound    informant male *pain50  lsounds/Informant/Pain.flac       // 〃
+$playersounddup informant male *pain25  *pain50                           // 〃
+$playeralias    informant male *step    player/informant/step
 
 // EOF

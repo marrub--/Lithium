@@ -5,8 +5,8 @@ actor Lith_InformantPlayer : Lith_Player
    Player.DisplayName "Informant"
    Player.SoundClass "informant"
    Player.Portrait "lgfx/Portraits/Informant.png"
-   Player.ViewHeight 45
-   Player.AttackZOffset 12
+   Player.ViewHeight 44
+   Player.AttackZOffset 11
    Player.JumpZ 14
    Tag "Informant"
 }
