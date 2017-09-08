@@ -50,6 +50,7 @@ $random player/score {
 $playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
 $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 $playersound player male *land    lsounds/Player/Land.wav     // Hexen
+$playeralias player male *step    player/step
 
 //
 // Cyber-Mage
