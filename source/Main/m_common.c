@@ -13,6 +13,15 @@ int   dbgstatnum,  dbgnotenum;
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_FadeFlash
+//
+void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
+{
+   ACS_FadeTo(r, g, b, amount, 0.0);
+   ACS_FadeTo(r, g, b, 0.0, seconds);
+}
+
+//
 // Lith_GetTID
 //
 [[__call("ScriptS")]]

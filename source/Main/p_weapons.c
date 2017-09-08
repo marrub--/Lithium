@@ -83,12 +83,22 @@ static void GiveWeaponItem(int parm)
 }
 
 //
-// PlayWeaponPickupSound
+// WeaponGrab
 //
-static void PlayWeaponPickupSound(player_t *p, weaponinfo_t const *info)
+static void WeaponGrab(player_t *p, weaponinfo_t const *info)
 {
    if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound, 127);
    else                                ACS_LocalAmbientSound("marathon/pickup", 127);
+
+   switch(info->slot)
+   {
+   default: Lith_FadeFlash(255, 255, 255, 0.5, 0.4); break;
+   case 3:  Lith_FadeFlash(0,   255, 0,   0.5, 0.5); break;
+   case 4:  Lith_FadeFlash(255, 255, 0,   0.5, 0.5); break;
+   case 5:  Lith_FadeFlash(255, 64,  0,   0.5, 0.6); break;
+   case 6:  Lith_FadeFlash(0,   0,   255, 0.5, 0.6); break;
+   case 7:  Lith_FadeFlash(255, 0,   0,   0.5, 0.7); break;
+   }
 }
 
 //
@@ -164,7 +174,7 @@ bool Lith_WeaponPickup(int name)
    if(HasWeapon(p, parm))
    {
       if(!weaponstay) {
-         PlayWeaponPickupSound(p, info);
+         WeaponGrab(p, info);
          Lith_PickupScore(p, parm);
       }
 
@@ -172,7 +182,7 @@ bool Lith_WeaponPickup(int name)
    }
    else
    {
-      PlayWeaponPickupSound(p, info);
+      WeaponGrab(p, info);
 
       p->weaponsheld++;
       p->bipUnlock(info->name);

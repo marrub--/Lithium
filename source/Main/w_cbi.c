@@ -87,6 +87,9 @@ void Lith_CBIItemWasSpawned(int num)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PickupCBIItem(int num)
 {
+   withplayer(LocalPlayer)
+      Lith_FadeFlash(0, 255, 0, 0.7, 0.5);
+
    Lith_ForPlayer() {
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
          if(c->msg) p->log("%S", Language("LITH_TXT_LOG_CBI_%S", c->msg));

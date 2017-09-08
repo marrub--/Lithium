@@ -23,6 +23,7 @@ gameinfo
    QuitSound = "misc/quitsound"
    PrecacheSounds = "amb/rain", "amb/wind"
    AddEventHandlers = "Lith_Events"
+   PickupColor = "#A0F3A0"
 }
 
 // Skill Info ----------------------------------------------------------------|

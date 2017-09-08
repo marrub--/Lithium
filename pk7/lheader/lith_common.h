@@ -170,6 +170,7 @@ __str StrParam(__str fmt, ...);
 
 // Utilities -----------------------------------------------------------------|
 
+void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
