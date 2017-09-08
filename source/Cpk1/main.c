@@ -38,13 +38,23 @@ static bool ReinitUpgrades(upgradeinfo_t *ui)
    return false;
 }
 
+static void PlayerUpdate(player_t *p)
+{
+   DebugStat("updating player %i", p->num);
+}
+
 static void GInit()
 {
+   LogDebug(log_dev, "CPK1 GINIT RUNNING");
+
    Lith_CbReg_UpgrReinit(ReinitUpgrades);
+   Lith_CbReg_PlayerUpdate(PlayerUpdate);
 }
 
 static void GSInit()
 {
+   LogDebug(log_dev, "CPK1 GSINIT RUNNING");
+
    for(int i = 0; i < countof(UpgrInfo); i++) {
       UpgrInfo[i].key = i + UPGR_CPK1_BASE;
       Lith_UpgradeRegister(&UpgrInfo[i]);
@@ -57,6 +67,8 @@ static void GSInit()
 static void Lith_Cpk1_World()
 {
    Lith_CheckAPIVersion();
+
+   LogDebug(log_dev, "CPK1 OPEN");
 
    if(!world.gsinit)
       Lith_CbReg_GSInit(GSInit);

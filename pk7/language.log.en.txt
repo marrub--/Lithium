@@ -63,5 +63,7 @@
    "> \cgWarning: High demonic energy levels detected in area.";
 "LITH_TXT_LOG_BossWarnJem" =
    "> \cr[WARNING] Demonic energy levels in area rising eratically.";
+"LITH_TXT_LOG_BossWarnFulk" =
+   "> \cj<\cgWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
 
 // EOF

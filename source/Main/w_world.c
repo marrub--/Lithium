@@ -38,6 +38,10 @@ static fixed lmvar rain_dist;
 
 CallbackDefine(basic_cb_t, GInit)
 CallbackDefine(basic_cb_t, GSInit)
+CallbackDefine(basic_cb_t, WSInit)
+CallbackDefine(basic_cb_t, WInit)
+CallbackDefine(basic_cb_t, MInit)
+CallbackDefine(basic_cb_t, MSInit)
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -431,6 +435,9 @@ static void GSInit(void)
    extern void Lith_GSInit_Dialogue(void);
    extern void Lith_InstallCBIItem(int num);
 
+   CallbackClear(player_cb_t, PlayerUpdate);
+
+   LogDebug(log_dev, "GINIT RUNNING");
    CallbackRunAndClear(basic_cb_t, GInit);
 
    CheckModCompat();
@@ -440,6 +447,7 @@ static void GSInit(void)
 
    if(!world.gsinit)
    {
+      LogDebug(log_dev, "GSINIT RUNNING");
       CallbackRunAndClear(basic_cb_t, GSInit);
 
       Lith_GSInit_Upgrade();
@@ -467,6 +475,9 @@ static void GSInit(void)
 //
 static void MInit(void)
 {
+   LogDebug(log_dev, "MINIT RUNNING");
+   CallbackRunAndClear(basic_cb_t, MInit);
+
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
 
@@ -514,10 +525,31 @@ static void MInit(void)
 }
 
 //
+// MSInit
+//
+static void MSInit(void)
+{
+   Log("MSINIT RUNNING");
+   CallbackRunAndClear(basic_cb_t, MSInit);
+
+   payout.killmax += world.mapkillmax;
+   payout.itemmax += world.mapitemmax;
+
+   // Line 1888300 is used as a control line for mod features.
+   // Check for if rain should be used.
+   if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
+      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")))
+      DoRain();
+}
+
+//
 // WSInit
 //
 static void WSInit(void)
 {
+   LogDebug(log_dev, "WSINIT RUNNING");
+   CallbackRunAndClear(basic_cb_t, WSInit);
+
    dmonid = 0;
    world.bossspawned = false;
 
@@ -543,6 +575,9 @@ static void WSInit(void)
 //
 static void WInit(void)
 {
+   LogDebug(log_dev, "WINIT RUNNING");
+   CallbackRunAndClear(basic_cb_t, WInit);
+
    if(!ACS_GetCVar("lith_sv_nobosses"))
       SpawnBoss();
 
@@ -581,6 +616,8 @@ static void Lith_World(void)
    if(ACS_GameType() == GAME_TITLE_MAP)
       return;
 
+   LogDebug(log_dev, "LITH OPEN");
+
    if(world.mapnum == 1911777)
    {
       ACS_Exit_Normal(0);
@@ -588,6 +625,8 @@ static void Lith_World(void)
    }
 
    dbgnotenum = 0;
+
+   ACS_Delay(1);
 
    GSInit(); // Init global state.
    MInit();  // Map init.
@@ -610,14 +649,8 @@ static void Lith_World(void)
    if(doworldinit)
       WInit();
 
-   payout.killmax += world.mapkillmax;
-   payout.itemmax += world.mapitemmax;
-
-   // Line 1888300 is used as a control line for mod features.
-   // Check for if rain should be used.
-   if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
-      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")))
-      DoRain();
+   // Map-static post-world init.
+   MSInit();
 
    // Main loop.
    int prevsecrets = 0;
@@ -685,6 +718,7 @@ static void Lith_WorldUnload(void)
 {
    extern void Lith_InstallSpawnedCBIItems(void);
    world.unloaded = true;
+   LogDebug(log_dev, "WORLD UNLOADED");
 
    Lith_InstallSpawnedCBIItems();
 
@@ -694,8 +728,6 @@ static void Lith_WorldUnload(void)
       p->closeGUI();
       Lith_PlayerDeltaStats(p);
    }
-
-   CallbackClear(player_cb_t, PlayerUpdate);
 }
 
 // EOF
