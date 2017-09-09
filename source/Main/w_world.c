@@ -482,7 +482,8 @@ static void MInit(void)
    Lith_LoadMapDialogue();
 
    world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
-   world.pauseinmenus = ACS_GetCVar("lith_sv_pauseinmenus");
+   world.pauseinmenus = world.grafZoneEntered &&
+      ACS_GetCVar("lith_sv_pauseinmenus");
 
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
@@ -529,7 +530,7 @@ static void MInit(void)
 //
 static void MSInit(void)
 {
-   Log("MSINIT RUNNING");
+   LogDebug(log_dev, "MSINIT RUNNING");
    CallbackRunAndClear(basic_cb_t, MSInit);
 
    payout.killmax += world.mapkillmax;
