@@ -5,6 +5,8 @@ actor Lith_Player : DoomPlayer
    Player.AirCapacity 0
    DamageFactor "Lith_PlayerMissile", 0
    Species "Lith_Player"
+
+   +THRUSPECIES
    
    states
    {
