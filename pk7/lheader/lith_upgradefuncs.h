@@ -1,7 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-#ifndef Case
-#define Case(...)
-#endif
+#include "lith_upgradefunc_start.h"
 
 // Body Upgrades -------------------------------------------------------------|
 Case(HeadsUpDisp)
@@ -97,12 +95,7 @@ Case(InstaDeath)
 
 //----------------------------------------------------------------------------|
 
-#undef A
-#undef D
-#undef U
-#undef E
-#undef R
-#undef Case
+#include "lith_upgradefunc_end.h"
 
 // EOF
 

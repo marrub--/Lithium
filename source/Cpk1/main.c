@@ -25,12 +25,9 @@ static bool ReinitUpgrades(upgradeinfo_t *ui)
 
    switch(ui->key)
    {
-   #define Case(n) return true; case UPGR_##n:
-   #define A(n) ui->Activate   = Upgr_##n##_Activate;
-   #define D(n) ui->Deactivate = Upgr_##n##_Deactivate;
-   #define U(n) ui->Update     = Upgr_##n##_Update;
-   #define E(n) ui->Enter      = Upgr_##n##_Enter;
-   #define R(n) ui->Render     = Upgr_##n##_Render;
+   #define Ret(n) return true;
+   #define Fn_F(n, cb) ui->cb = Upgr_##n##_##cb;
+   #define Fn_S(n, cb) Fn_F(n, cb)
    #include "cpk1_upgradefuncs.h"
       return true;
    }

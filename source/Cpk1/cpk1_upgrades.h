@@ -9,11 +9,8 @@
 #define Cpk1_CastUData(u) ((struct cpk1_upgr_data *)(u)->dataptr)
 #define UData_HeadsUpDis3(u) (Cpk1_CastUData(u)->u01)
 
-#define A(n)                       void Upgr_##n##_Activate  (struct player *p, upgrade_t *upgr);
-#define D(n)                       void Upgr_##n##_Deactivate(struct player *p, upgrade_t *upgr);
-#define U(n) [[__call("ScriptS")]] void Upgr_##n##_Update    (struct player *p, upgrade_t *upgr);
-#define E(n)                       void Upgr_##n##_Enter     (struct player *p, upgrade_t *upgr);
-#define R(n)                       void Upgr_##n##_Render    (struct player *p, upgrade_t *upgr);
+#define Fn_F(n, cb) void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
+#define Fn_S(n, cb) [[__call("ScriptS")]] Fn_F(n, cb)
 #include "cpk1_upgradefuncs.h"
 
 struct upgr_data_HeadsUpDis3 {

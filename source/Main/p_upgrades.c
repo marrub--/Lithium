@@ -186,12 +186,9 @@ void Lith_GSReinit_Upgrade(void)
       // Set up individual upgrades' function pointers
       switch(ui->key)
       {
-      #define Case(n) continue; case UPGR_##n:
-      #define A(n) ui->Activate   = Upgr_##n##_Activate;
-      #define D(n) ui->Deactivate = Upgr_##n##_Deactivate;
-      #define U(n) ui->Update     = Upgr_##n##_Update;
-      #define E(n) ui->Enter      = Upgr_##n##_Enter;
-      #define R(n) ui->Render     = Upgr_##n##_Render;
+      #define Ret(n) continue;
+      #define Fn_F(n, cb) ui->cb = Upgr_##n##_##cb;
+      #define Fn_S(n, cb) Fn_F(n, cb)
       #include "lith_upgradefuncs.h"
          continue;
       }
