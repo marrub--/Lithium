@@ -19,6 +19,7 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
 // Callbacks -----------------------------------------------------------------|
 
 CallbackDefine(player_cb_t, PlayerUpdate)
+CallbackDefine(player_cb_t, PlayerRender)
 
 // Static Functions ----------------------------------------------------------|
 
@@ -438,6 +439,8 @@ static void Lith_PlayerRunScripts(player_t *p)
    }
 
    // Rendering
+   CallbackRun(player_cb_t, PlayerRender, p);
+
    Lith_PlayerFootstep(p);       // Footstep effects
    Lith_PlayerItemFx(p);         // Update item effects
    Lith_PlayerDamageBob(p);      // Update damage bobbing

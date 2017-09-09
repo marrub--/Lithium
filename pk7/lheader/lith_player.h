@@ -351,6 +351,9 @@ player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
 
 // Callbacks -----------------------------------------------------------------|
 
+// Called when an alive player updates. Cleared before GInit is called.
 CallbackDeclareInternal(player_cb_t, PlayerUpdate)
+// Called when a player finishes updating. Cleared before GInit is called.
+CallbackDeclareInternal(player_cb_t, PlayerRender)
 
 #endif

@@ -145,6 +145,7 @@ void Lith_PlayerUpdateData(player_t *p)
 
    DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
       p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);
+   DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
 }
 
 //

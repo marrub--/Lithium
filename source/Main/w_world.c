@@ -436,6 +436,7 @@ static void GSInit(void)
    extern void Lith_InstallCBIItem(int num);
 
    CallbackClear(player_cb_t, PlayerUpdate);
+   CallbackClear(player_cb_t, PlayerRender);
 
    LogDebug(log_dev, "GINIT RUNNING");
    CallbackRunAndClear(basic_cb_t, GInit);
