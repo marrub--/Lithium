@@ -134,6 +134,7 @@ actor Lith_Phantom
    +MISSILEMORE
    +NOTARGET
    +NEVERTARGET
+   +DONTMORPH
    
    var int user_phase;
    var int user_donespawn;
