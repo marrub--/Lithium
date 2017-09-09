@@ -19,7 +19,7 @@ static void SetDataPtr(player_t *p, upgrade_t *upgr)
    upgr->dataptr = &upgrdata[p->num];
 }
 
-static bool ReinitUpgrades(upgradeinfo_t *ui)
+static bool UpgrReinit(upgradeinfo_t *ui)
 {
    ui->Init = SetDataPtr;
 
@@ -35,17 +35,14 @@ static bool ReinitUpgrades(upgradeinfo_t *ui)
    return false;
 }
 
-static void PlayerUpdate(player_t *p)
-{
-   DebugStat("updating player %i", p->num);
-}
-
 static void GInit()
 {
+   extern void Cpk1_PlayerUpdate(player_t *p);
+
    LogDebug(log_dev, "CPK1 GINIT RUNNING");
 
-   Lith_CbReg_UpgrReinit(ReinitUpgrades);
-   Lith_CbReg_PlayerUpdate(PlayerUpdate);
+   Lith_CbReg_UpgrReinit(UpgrReinit);
+   Lith_CbReg_PlayerUpdate(Cpk1_PlayerUpdate);
 }
 
 static void GSInit()
@@ -61,7 +58,7 @@ static void GSInit()
 // Scripts -------------------------------------------------------------------|
 
 [[__call("ScriptS"), __script("Open")]]
-static void Lith_Cpk1_World()
+static void Cpk1_World()
 {
    Lith_CheckAPIVersion();
 
