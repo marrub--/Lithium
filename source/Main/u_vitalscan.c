@@ -59,10 +59,8 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          UData.oldhealth = UData.health;
          UData.health    = chp;
 
-         if(m)
-            UData.maxhealth = m->maxhealth;
-         else
-            UData.maxhealth = shp;
+         if(m) UData.maxhealth = m->maxhealth;
+         else  UData.maxhealth = shp;
       }
 
       if(m) {
@@ -75,6 +73,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          UData.splitfrac = (chp - (splith * (split - 1))) / (fixed)splith;
          UData.split     = minmax(split, 1, 7);
       } else {
+         UData.rank = 0;
          UData.splitfrac = chp / (fixed)shp;
          UData.split = 1;
       }
@@ -134,7 +133,9 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    HudMessageF(font, "%S", UData.tagstr);
    HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
 
-   HudMessageF(UData.freak ? "ALIENFONT" : font, "%i/%i", UData.health, UData.maxhealth);
+   ACS_SetFont(UData.freak ? "ALIENFONT" : font);
+   if(UData.maxhealth) HudMessage("%i/%i", UData.health, UData.maxhealth);
+   else                HudMessage("%ihp", UData.health);
    HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 188.2 + oy, 0.1, 0.4);
 
    // Health bar

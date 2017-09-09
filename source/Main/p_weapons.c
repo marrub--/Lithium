@@ -428,13 +428,13 @@ int Lith_GetWRF(void)
       WRF_ALLOWUSER4 = 1024
    };
 
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return 0;
-
-   int flags = 0;
-   if(p->semifrozen)           flags |= WRF_NOFIRE;
-   if(p->pclass == pcl_marine) flags |= WRF_ALLOWUSER4;
-   return flags;
+   withplayer(LocalPlayer) {
+      int flags = 0;
+      if(p->semifrozen)           flags |= WRF_NOFIRE;
+      if(p->pclass == pcl_marine) flags |= WRF_ALLOWUSER4;
+      return flags;
+   }
+   return 0;
 }
 
 // EOF
