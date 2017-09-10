@@ -108,7 +108,6 @@ void Lith_SetMagicUI(bool on)
 
       if(on && !p->indialogue)
       {
-         Log("fuck");
          p->indialogue = UData.ui = true;
          p->semifrozen++;
          UData.gst.gfxprefix = "lgfx/UI/";
@@ -118,7 +117,6 @@ void Lith_SetMagicUI(bool on)
       }
       else if(!on && UData.ui)
       {
-         Log("ASS");
          if(UData.gst.hot)
             GiveMagic(&minf[UData.gst.hot - 1]);
          p->indialogue = UData.ui = false;
