@@ -38,6 +38,26 @@ static void SetupAttributes(player_t *p)
    p->attr.level = 1;
 }
 
+//
+// SetPClass
+//
+static void SetPClass(player_t *p)
+{
+   __with(__str cl = ACS_GetActorClass(0);) {
+           if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
+      else if(cl == "Lith_CyberMagePlayer") p->pclass = pcl_cybermage;
+      else if(cl == "Lith_InformantPlayer") p->pclass = pcl_informant;
+      else if(cl == "Lith_WandererPlayer" ) p->pclass = pcl_wanderer;
+      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
+      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
+      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
+      else {
+         Log("Invalid player class detected!");
+         abort();
+      }
+   }
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -234,25 +254,20 @@ void Lith_ResetPlayer(player_t *p)
    p->num    = ACS_PlayerNumber();
    p->bipptr = &p->bip;
 
-   __with(__str cl = ACS_GetActorClass(0);) {
-           if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
-      else if(cl == "Lith_CyberMagePlayer") p->pclass = pcl_cybermage;
-      else if(cl == "Lith_InformantPlayer") p->pclass = pcl_informant;
-      else if(cl == "Lith_WandererPlayer" ) p->pclass = pcl_wanderer;
-      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
-      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
-      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
-      else {
-         Log("Invalid player class detected!");
-         abort();
-      }
-   }
-
    //
    // Static data (pre-init)
 
-   if(!p->staticinit) {
+   if(!p->staticinit)
+   {
+      SetPClass(p);
       SetupAttributes(p);
+
+      // i cri tears of pain for APROP_SpawnHealth
+      p->viewheight = ACS_GetActorViewHeight(0);
+      p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
+      p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
+      p->discount   = 1.0;
+      p->stepnoise  = StrParam("player/%S/step", p->classname);
    }
 
    //
@@ -274,12 +289,6 @@ void Lith_ResetPlayer(player_t *p)
 
    //
    // Reset data
-
-   // i cri tears of pain for APROP_SpawnHealth
-   if(!p->viewheight) p->viewheight = ACS_GetActorViewHeight(0);
-   if(!p->jumpheight) p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-   if(!p->maxhealth)  p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
-   if(!p->discount)   p->discount   = 1.0;
 
    // Any linked lists on the player need to be initialized here.
    p->loginfo.hud.free();

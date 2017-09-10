@@ -266,6 +266,7 @@ typedef struct player
    int   maxarmor;
    fixed jumpheight;
    fixed viewheight;
+   __str stepnoise;
 
    // pitch/yaw in precalculated sane radian format
    float pitchf;

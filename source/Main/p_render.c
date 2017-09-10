@@ -46,7 +46,7 @@ void Lith_PlayerFootstep(player_t *p)
    fixed dstmul = absk(mag2k(p->velx, p->vely)) / 24.0;
    if(!(vol *= min(dstmul, 1))) return;
 
-   ACS_PlaySound(0, "*step", CHAN_BODY, vol, false, ATTN_NONE, true);
+   ACS_PlaySound(p->cameratid, p->stepnoise, CHAN_BODY, vol);
 }
 
 //
