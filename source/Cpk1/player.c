@@ -11,8 +11,9 @@ static void Dodge(player_t *p)
 {
    fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
    fixed xn = ACS_Cos(angle), yn = ACS_Sin(angle);
+   bool dodged = false;
 
-   for(int i = 0; i < 32; i++)
+   for(int i = 1; i < 32; i++)
    {
       fixed xv = p->x + xn * i * 8;
       fixed yv = p->y + yn * i * 8;
@@ -22,7 +23,11 @@ static void Dodge(player_t *p)
 
       if(!ACS_Warp(0, xv, yv, p->z + zdiff, 0, WARPF_ABSOLUTEPOSITION))
          break;
+      else
+         dodged = true;
    }
+
+   if(dodged) ACS_LocalAmbientSound("player/informant/dodge", 127);
 }
 
 // Extern Functions ----------------------------------------------------------|

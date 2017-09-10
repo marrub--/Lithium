@@ -10,6 +10,8 @@ player/informant/step2 lsounds/Footsteps/InformantStep2.flac // 〃
 player/informant/step3 lsounds/Footsteps/InformantStep3.flac // 〃
 player/informant/step4 lsounds/Footsteps/InformantStep4.flac // 〃
 
+player/informant/dodge lsounds/Informant/Dodge.flac // Monster Girl Quest
+
 $random player/informant/land {
    player/informant/land1
    player/informant/land2
