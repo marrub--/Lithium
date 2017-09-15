@@ -12,8 +12,8 @@ actor Lith_RendHitSound : Lith_CustomFunction
 actor Lith_RendHit : FastProjectile
 {
    Damage (50 * random(1, 2))
-   Radius 16
-   Height 32
+   Radius 8
+   Height 8
    Speed  196
 
    +FORCEPAIN
