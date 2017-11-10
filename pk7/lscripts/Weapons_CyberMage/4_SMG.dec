@@ -60,6 +60,16 @@ actor Lith_SMGTrail3
    }
 }
 
+actor Lith_SMGTrailPuff3 : Lith_SMGTrail3
+{
+   states
+   {
+   Spawn:
+      PUFF BCD 2
+      stop
+   }
+}
+
 actor Lith_SMGTracer2 : Lith_SMGTracer
 {
    MissileType "Lith_SMGTrail2"
@@ -84,6 +94,9 @@ actor Lith_SMGTracer3
       TNT1 A 0 A_SeekerMissile(0, 5, SMF_LOOK)
       TNT1 A 1 A_SpawnItemEx("Lith_SMGTrail3")
       loop
+   Death:
+      TNT1 A 0 A_SpawnItemEx("Lith_SMGTrailPuff3")
+      stop
    }
 }
 
