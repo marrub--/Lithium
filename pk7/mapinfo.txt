@@ -2,28 +2,43 @@
 
 gameinfo
 {
-   PlayerClasses = "Lith_MarinePlayer", "Lith_CyberMagePlayer"
-   DimColor = "Black"
-   DimAmount = 0.25
-   MenuFontColor_Title = "Green"
-   MenuFontColor_Label = "White"
-   MenuFontColor_Value = "Purple"
-   MenuFontColor_Action = "White"
-   MenuFontColor_Header = "Green"
+   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer"
+   DimColor                = "Black"
+   DimAmount               = 0.25
+   MenuFontColor_Title     = "Green"
+   MenuFontColor_Label     = "White"
+   MenuFontColor_Value     = "Purple"
+   MenuFontColor_Action    = "White"
+   MenuFontColor_Header    = "Green"
    MenuFontColor_Highlight = "Green"
    MenuFontColor_Selection = "Green"
-   NoRandomPlayerClass = true
-   BorderFlat = "ZZLITHBG"
-   AdvisoryTime = 0
-   DrawReadThis = false
-   PauseSign = "lgfx/Pause.png"
-   InfoPage = "HELP"
-   IntermissionCounter = true
-   IntermissionMusic = "lmusic/alchemis.it"
-   QuitSound = "misc/quitsound"
-   PrecacheSounds = "amb/rain", "amb/wind"
-   AddEventHandlers = "Lith_Events"
-   PickupColor = "#A0F3A0"
+   NoRandomPlayerClass     = true
+   BorderFlat              = "ZZLITHBG"
+   AdvisoryTime            = 0
+   DrawReadThis            = false
+   PauseSign               = "lgfx/Pause.png"
+   InfoPage                = "HELP"
+   IntermissionCounter     = true
+   IntermissionMusic       = "lmusic/alchemis.it"
+   QuitSound               = "misc/quitsound"
+   PrecacheSounds          = "amb/rain", "amb/wind"
+   AddEventHandlers        = "Lith_Events"
+   PickupColor             = "#A0F3A0"
+}
+
+// Automap Info --------------------------------------------------------------|
+
+automap
+{
+   Base                 = "Doom"
+   ShowLocks            = true
+   Background           = "#000000"
+   YourColor            = "#00FF00"
+   WallColor            = "#00FF00"
+   FloorDiffWallColor   = "#008800"
+   CeilingDiffWallColor = "#008800"
+   SpecialWallColor     = "#FF00FF"
+   GridColor            = "#FF0000"
 }
 
 // Skill Info ----------------------------------------------------------------|
@@ -32,57 +47,57 @@ clearskills
 
 skill tourist
 {
-   DamageFactor = 0.1
-   SpawnFilter = 5
-   Name = "$DIFF_TOURIST"
-   Key = "t"
-   RespawnTime = 0.5
+   DamageFactor  = 0.1
+   SpawnFilter   = 5
+   Name          = "$DIFF_TOURIST"
+   Key           = "t"
+   RespawnTime   = 0.5
    EasyBossBrain
    EasyKey
    MonsterHealth = 0.1
-   ArmorFactor = 2
+   ArmorFactor   = 2
    TotalInfighting
-   HealthFactor = 2
-   ACSReturn = 0
-   MustConfirm = "$LITH_SKILL_TOURIST"
+   HealthFactor  = 2
+   ACSReturn     = 0
+   MustConfirm   = "$LITH_SKILL_TOURIST"
 }
 
 skill easy
 {
-   DamageFactor = 0.9
-   SpawnFilter = 2
-   Name = "$DIFF_EASY"
-   Key = "b"
+   DamageFactor   = 0.9
+   SpawnFilter    = 2
+   Name           = "$DIFF_EASY"
+   Key            = "b"
    Aggressiveness = -0.3
-   MonsterHealth = 0.9
-   ACSReturn = 1
+   MonsterHealth  = 0.9
+   ACSReturn      = 1
 }
 
 skill normal
 {
    SpawnFilter = 3
-   Name = "$DIFF_NORMAL"
-   Key = "h"
+   Name        = "$DIFF_NORMAL"
+   Key         = "h"
    DefaultSkill
-   ACSReturn = 2
+   ACSReturn   = 2
 }
 
 skill hard
 {
    SpawnFilter = 4
-   Name = "$DIFF_HARD"
-   Key = "u"
-   ACSReturn = 3
+   Name        = "$DIFF_HARD"
+   Key         = "u"
+   ACSReturn   = 3
 }
 
 skill extrahard
 {
-   SpawnFilter = 5
-   Name = "$DIFF_XHARD"
-   Key = "p"
-   DamageFactor = 1.05
+   SpawnFilter    = 5
+   Name           = "$DIFF_XHARD"
+   Key            = "p"
+   DamageFactor   = 1.05
    Aggressiveness = 0.1
-   MustConfirm = "$LITH_SKILL_EXTRAHARD"
+   MustConfirm    = "$LITH_SKILL_EXTRAHARD"
    
    ReplaceActor = "ZombieMan",        "Lith_XH_ZombieMan"
    ReplaceActor = "ShotgunGuy",       "Lith_XH_ShotgunGuy"
@@ -107,25 +122,25 @@ skill extrahard
 
 skill nightmare
 {
-   DamageFactor = 2
-   SpawnFilter = 5
-   Name = "$DIFF_NMARE"
-   Key = "t"
-   RespawnTime = 0.5
+   DamageFactor  = 2
+   SpawnFilter   = 5
+   Name          = "$DIFF_NMARE"
+   Key           = "t"
+   RespawnTime   = 0.5
    MonsterHealth = 0.5
-   ArmorFactor = 2
+   ArmorFactor   = 2
    NoInfighting
-   HealthFactor = 2
-   MustConfirm = "$LITH_SKILL_NIGHTMARE"
-   ACSReturn = 5
+   HealthFactor  = 2
+   MustConfirm   = "$LITH_SKILL_NIGHTMARE"
+   ACSReturn     = 5
 }
 
 // Map Info ------------------------------------------------------------------|
 
 map TITLEMAP "Lithium Title"
 {
-   Sky1 = "LITHSKRD", 0.05
-   Sky2 = "LITHSKS1"
+   Sky1  = "LITHSKRD", 0.05
+   Sky2  = "LITHSKS1"
    Music = "lmusic/Shredder.ogg"
 
    DoubleSky
@@ -134,10 +149,10 @@ map TITLEMAP "Lithium Title"
 map TESTMAP "Test Map"
 {
    LevelNum = 18883000
-   Sky1 = "LITHBGS4", 0.1
-   Sky2 = "LITHSKD2"
-   Next = 1
-   Music = "lmusic/dandalins story.it"
+   Sky1     = "LITHBGS4", 0.1
+   Sky2     = "LITHSKD2"
+   Next     = 1
+   Music    = "lmusic/dandalins story.it"
    
    DoubleSky
 }
@@ -145,7 +160,8 @@ map TESTMAP "Test Map"
 map LITHTEND ""
 {
    LevelNum = 1911777
-   Next = EndSequence, "Lith_EndGameTimeOver"
+   Next     = EndSequence, "Lith_EndGameTimeOver"
+
    NoIntermission
 }
 
