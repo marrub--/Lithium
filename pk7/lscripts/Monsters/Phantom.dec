@@ -3,6 +3,18 @@ actor Lith_IsPhantom : Inventory
    Inventory.MaxAmount 1
 }
 
+actor Lith_PhantomOut : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0
+      TNT1 A 0 A_Quake(9, 35*2, 0, 2048)
+      TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-16,16), frandom(-16,16), 0, 0, 0, frandom(2, 6), 0, SXF_NOCHECKPOSITION)
+      stop
+   }
+}
+
 actor Lith_PhantomAuraFX
 {
    RenderStyle "Subtract"
@@ -171,6 +183,9 @@ actor Lith_Phantom
       PLAY "#" 0 A_Look
       PLAY "#" 1 A_Wander
       goto Spawn1
+   GetOutOfDodge:
+      "####" "#" 1 A_FadeOut(0.05)
+      loop
    }
 }
 

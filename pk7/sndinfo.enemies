@@ -58,6 +58,8 @@ enemies/phantom/lunge3 lsounds/Phantoms/Lunge3.flac // 〃
 
 enemies/phantom/aura lsounds/Phantoms/Aura.flac // Phantasy Star Nova
 
+enemies/phantom/escape lsounds/Phantoms/Escape.flac // Touhou 13
+
 $random enemies/phantom/lunge {
    enemies/phantom/lunge1
    enemies/phantom/lunge2

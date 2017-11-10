@@ -4,27 +4,45 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
-// Types ---------------------------------------------------------------------|
-
-struct phantom_s
-{
-   __prop x   {get: ACS_GetActorX(->tid)}
-   __prop y   {get: ACS_GetActorY(->tid)}
-   __prop z   {get: ACS_GetActorZ(->tid)}
-   __prop ang {get: ACS_GetActorAngle(->tid)}
-   __prop health {get: ACS_GetActorProperty(->tid, APROP_Health)}
-   __prop meleetime {
-      get: ACS_GetUserVariable(->tid, "user_meleetime"),
-      set: ACS_SetUserVariable(->tid, "user_meleetime")
-   }
-
-   int tid;
-};
-
 // Static Objects ------------------------------------------------------------|
 
 static int lmvar bossargs[6];
 static int lmvar bosstid;
+
+//
+// Lith_SpawnBossReward
+//
+static void Lith_SpawnBossReward(int num, int phase)
+{
+   world.boss[num - 1][phase - 1] = true;
+   LogDebug(log_boss, "Lith_PhantomDeath: Boss %i phase %i died", num, phase);
+
+   int x = ACS_GetActorX(0);
+   int y = ACS_GetActorY(0);
+   int z = ACS_GetActorZ(0);
+
+   switch(num)
+   {
+   case 1: switch(phase) {
+           case 1: ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
+           case 2: ACS_SpawnForced("Lith_BossReward2", x, y, z);
+                   Lith_ForPlayer() p->deliverMail("JamesDefeated"); break;
+           }
+      break;
+   case 2: switch(phase) {
+           case 1: ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
+           case 2: ACS_SpawnForced("Lith_BossReward4", x, y, z); break;
+           case 3: ACS_SpawnForced("Lith_BossReward5", x, y, z);
+                   Lith_ForPlayer() p->deliverMail("MakarovDefeated"); break;
+           }
+      break;
+   case 3: switch(phase) {
+           case 3: ACS_SpawnForced("Lith_BossReward6", x, y, z);
+                   Lith_ForPlayer() p->deliverMail("IsaacDefeated"); break;
+           }
+      break;
+   }
+}
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -34,10 +52,6 @@ static int lmvar bosstid;
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PhantomMain()
 {
-   struct phantom_s self;
-
-   self.tid = bosstid;
-
    ACS_AmbientSound("enemies/phantom/spawned", 127);
 
    for(;;)
@@ -51,11 +65,11 @@ void Lith_PhantomMain()
       if((ACS_Timer() % 10) == 0)
          ACS_GiveInventory("Lith_PhantomAura", 1);
 
-      // TODO: fix this when david fixes properties
-      // 2017-07-16: david still has not fixed properties
-      // 2017-09-01: david still has not fixed properties
-      if(self.meleetime)
-         self.meleetime = self.meleetime - 1;
+      ifauto(int, time, ACS_GetUserVariable(0, "user_meleetime"))
+         ACS_SetUserVariable(0, "user_meleetime", time - 1);
+
+      if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+         return;
 
       ACS_Delay(1);
    }
@@ -67,20 +81,15 @@ void Lith_PhantomMain()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PhantomMain2()
 {
-   struct phantom_s self;
-
-   self.tid = ACS_UniqueTID();
-
    for(;;)
    {
       if((ACS_Timer() % 10) == 0)
          ACS_GiveInventory("Lith_PhantomAura", 1);
 
-      // TODO: fix this when david fixes properties
-      if(self.meleetime)
-         self.meleetime = self.meleetime - 1;
+      ifauto(int, time, ACS_GetUserVariable(0, "user_meleetime"))
+         ACS_SetUserVariable(0, "user_meleetime", time - 1);
 
-      if(self.health <= 0)
+      if(ACS_GetActorProperty(0, APROP_Health) <= 0)
          return;
 
       ACS_Delay(1);
@@ -102,8 +111,10 @@ bool Lith_PhantomTargetCheck()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PhantomUnsetDupe()
 {
-   if(ACS_SetActivator(0, AAPTR_MASTER))
-      ACS_SetUserVariable(0, "user_spawnedduplicates", ACS_GetUserVariable(0, "user_spawnedduplicates") - 1);
+   if(ACS_SetActivator(0, AAPTR_MASTER)) {
+      ACS_SetUserVariable(0, "user_spawnedduplicates",
+         ACS_GetUserVariable(0, "user_spawnedduplicates") - 1);
+   }
 }
 
 //
@@ -154,63 +165,29 @@ void Lith_PhantomTeleport()
 void Lith_PhantomDeath(int num, int phase)
 {
    world.bossspawned = false;
-
    ACS_StopSound(0, 7);
 
-   ACS_AmbientSound("player/death1", 127);
-
-   ACS_Delay(35);
-
-   ACS_NamedTerminate("Lith_PhantomMain", 0);
-   ACS_GiveInventory("Lith_PlayerDeath", 1);
-
-   ACS_Delay(25);
-
-   ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
-
-   ACS_Delay(25);
-
-   #define Phase(num, phasenum) \
-      case phasenum: \
-         world.boss[num - 1][phasenum - 1] = true; \
-         LogDebug(log_boss, "Lith_PhantomDeath: Boss " #num " phase " #phasenum " died"); \
-
-   int x = ACS_GetActorX(0);
-   int y = ACS_GetActorY(0);
-   int z = ACS_GetActorZ(0);
-   switch(num)
+   // Full death
+   if((num == 1 && phase == 2) || phase == 3)
    {
-   case 1:
-      switch(phase)
-      {
-      Phase(1, 1) ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
-      Phase(1, 2) ACS_SpawnForced("Lith_BossReward2", x, y, z);
-                  Lith_ForPlayer() p->deliverMail("JamesDefeated"); break;
-      }
-      break;
-
-   case 2:
-      switch(phase)
-      {
-      Phase(2, 1) ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
-      Phase(2, 2) ACS_SpawnForced("Lith_BossReward4", x, y, z); break;
-      Phase(2, 3) ACS_SpawnForced("Lith_BossReward5", x, y, z);
-                  Lith_ForPlayer() p->deliverMail("MakarovDefeated"); break;
-      }
-      break;
-
-   case 3:
-      switch(phase)
-      {
-      Phase(3, 1) break;
-      Phase(3, 2) break;
-      Phase(3, 3) ACS_SpawnForced("Lith_BossReward6", x, y, z);
-                  Lith_ForPlayer() p->deliverMail("IsaacDefeated"); break;
-      }
-      break;
+      ACS_AmbientSound("player/death1", 127);
+      ACS_Delay(35);
+      ACS_GiveInventory("Lith_PlayerDeath", 1);
+      ACS_Delay(25);
+      ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
+      ACS_Delay(25);
+      Lith_SpawnBossReward(num, phase);
    }
 
-   #undef Phase
+   // Escape
+   else
+   {
+      ACS_AmbientSound("enemies/phantom/escape", 127);
+      ACS_SetActorState(0, "GetOutOfDodge");
+      ACS_Delay(5);
+      ACS_GiveInventory("Lith_PhantomOut", 1);
+      Lith_SpawnBossReward(num, phase);
+   }
 }
 
 //
@@ -255,7 +232,9 @@ void Lith_SpawnBoss(int num, int phase)
    ACS_Thing_Remove(0);
 
    ACS_SpawnForced(names[num - 1], x, y, z, bosstid, angle);
-   ACS_SetThingSpecial(bosstid, bossargs[0], bossargs[1], bossargs[2], bossargs[3], bossargs[4], bossargs[5]);
+   ACS_SetThingSpecial(bosstid, bossargs[0], bossargs[1],
+                                bossargs[2], bossargs[3],
+                                bossargs[4], bossargs[5]);
    ACS_SetUserVariable(bosstid, "user_phase", phase);
 
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %i phase %i spawned", num, phase);
@@ -266,13 +245,15 @@ void Lith_SpawnBoss(int num, int phase)
    case 2:
       ACS_SetActorPropertyFixed(bosstid, APROP_DamageMultiplier, 1.5);
       ACS_SetActorProperty(bosstid, APROP_ReactionTime, 4);
-      ACS_SetActorProperty(bosstid, APROP_Health, ACS_GetActorProperty(bosstid, APROP_Health) * 1.5);
+      ACS_SetActorProperty(bosstid, APROP_Health,
+         ACS_GetActorProperty(bosstid, APROP_Health) * 1.5);
       Lith_GiveActorInventory(bosstid, "Lith_PhantomPhase2Flags", 1);
       break;
    case 3:
       ACS_SetActorPropertyFixed(bosstid, APROP_DamageMultiplier, 2.0);
       ACS_SetActorProperty(bosstid, APROP_ReactionTime, 2);
-      ACS_SetActorProperty(bosstid, APROP_Health, ACS_GetActorProperty(bosstid, APROP_Health) * 2);
+      ACS_SetActorProperty(bosstid, APROP_Health,
+         ACS_GetActorProperty(bosstid, APROP_Health) * 2);
       Lith_GiveActorInventory(bosstid, "Lith_PhantomPhase3Flags", 1);
       break;
    }
