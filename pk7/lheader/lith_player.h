@@ -159,15 +159,15 @@ typedef struct player
    // Properties -------------------------------------------------------------|
 
    // state
-   __prop reset    {call: Lith_ResetPlayer(this)}
-   __prop loadData {call: Lith_PlayerLoadData(this)}
-   __prop saveData {call: Lith_PlayerSaveData(this)}
+   __prop reset         {call: Lith_ResetPlayer(this)}
+   __prop loadData      {call: Lith_PlayerLoadData(this)}
+   __prop saveData      {call: Lith_PlayerSaveData(this)}
    __prop weapontype    {get:  Lith_PlayerCurWeaponType(this)}
    __prop buttonPressed {call: Lith_ButtonPressed(this)}
-   __prop setVel  {call: Lith_SetPlayerVelocity(this)}
-   __prop mana    {get: Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
-   __prop manamax {get: ACS_GetMaxInventory     (->tid, "Lith_MagicAmmo")}
-   __prop validateTID {call: Lith_ValidatePlayerTID(this)}
+   __prop setVel        {call: Lith_SetPlayerVelocity(this)}
+   __prop mana          {get:  Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
+   __prop manamax       {get:  ACS_GetMaxInventory(->tid, "Lith_MagicAmmo")}
+   __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
 
    // score
    __prop giveScore   {call: Lith_GiveScore(this)}
@@ -191,9 +191,9 @@ typedef struct player
    __prop getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
    __prop deliverMail   {call: Lith_DeliverMail(this)}
    __prop clearTextBuf  {call: Lith_ClearTextBuf(this)}
-   __prop bipUnlock {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
-   __prop discrim   {get:  Lith_PlayerDiscriminator(->pclass)}
-   __prop classname {get:  ACS_GetActorPropertyString(->tid, APROP_NameTag)}
+   __prop bipUnlock     {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
+   __prop discrim       {get:  Lith_PlayerDiscriminator(->pclass)}
+   __prop classname     {get:  ACS_GetActorPropertyString(->tid, APROP_NameTag)}
 
    // cvars
    __prop getCVarI {call: ACS_GetUserCVar      (->num)}
@@ -245,9 +245,9 @@ typedef struct player
    bool      hudenabled;
 
    // DECORATE/ZScript
-   int decvars[8];
+   int  decvars[8];
    char txtbuf[8];
-   int tbptr;
+   int  tbptr;
 
    // Score
    score_t scoreaccum;
@@ -256,8 +256,8 @@ typedef struct player
    float   discount;
 
    // Misc
-   int spuriousexplosions;
-   int brouzouf;
+   int  spuriousexplosions;
+   int  brouzouf;
    bool hadinfrared;
 
    // Static data
@@ -319,7 +319,7 @@ typedef struct player
 
    // Armor
    __str armorclass;
-   int armortype;
+   int   armortype;
 
    // Keys
    struct keycards_s

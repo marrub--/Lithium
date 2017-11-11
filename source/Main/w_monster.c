@@ -11,99 +11,100 @@
 struct dmon_stat {
    fixed x, y, z;
    fixed r, h;
-   int health;
-   int painwait;
+   int   health;
+   int   painwait;
 };
 
 struct monster_info {
-   score_t score;
-   enum mtype type;
-   __str name;
-   int flags;
+   unsigned long exp;
+   score_t       score;
+   enum mtype    type;
+   __str         name;
+   int           flags;
 };
 
 enum {
-   mif_fullmatch = 1 << 0
+   mif_full = 1 << 0
 };
 
 static struct monster_info const monsterinfo[] = {
 #if 0
    // Hexen
-   {Score_ShotgunGuy,  mtype_imp,         "Ettin",         mif_fullmatch},
-   {Score_Imp,         mtype_lostsoul,    "FireDemon",     mif_fullmatch},
-   {Score_Arachnotron, mtype_arachnotron, "CentaurLeader", mif_fullmatch},
-   {Score_Demon,       mtype_demon,       "Centaur",       mif_fullmatch},
-   {Score_Mancubus,    mtype_hellknight,  "IceGuy",        mif_fullmatch},
-   {Score_Mancubus,    mtype_hellknight,  "SerpentLeader", mif_fullmatch},
-   {Score_Arachnotron, mtype_hellknight,  "Serpent",       mif_fullmatch},
-   {Score_HellKnight,  mtype_hellknight,  "Demon1",        mif_fullmatch},
-   {Score_BaronOfHell, mtype_baron,       "Demon2",        mif_fullmatch},
-   {Score_Cacodemon,   mtype_mancubus,    "Bishop",        mif_fullmatch},
-   {Score_HellKnight,  mtype_lostsoul,    "Wraith",        mif_fullmatch},
-   {Score_CyberDemon,  mtype_cyberdemon,  "Dragon",        mif_fullmatch},
-   {Score_CyberDemon,  mtype_phantom,     "ClericBoss",    mif_fullmatch},
-   {Score_CyberDemon,  mtype_phantom,     "FighterBoss",   mif_fullmatch},
-   {Score_CyberDemon,  mtype_phantom,     "MageBoss",      mif_fullmatch},
-   {Score_CyberDemon,  mtype_cyberdemon,  "Heresiarch",    mif_fullmatch},
-   {Score_DSparil * 2, mtype_cyberdemon,  "Korax",         mif_fullmatch},
+   {9999, Score_ShotgunGuy,  mtype_imp,         "Ettin",         mif_full},
+   {9999, Score_Imp,         mtype_lostsoul,    "FireDemon",     mif_full},
+   {9999, Score_Arachnotron, mtype_arachnotron, "CentaurLeader", mif_full},
+   {9999, Score_Demon,       mtype_demon,       "Centaur",       mif_full},
+   {9999, Score_Mancubus,    mtype_hellknight,  "IceGuy",        mif_full},
+   {9999, Score_Mancubus,    mtype_hellknight,  "SerpentLeader", mif_full},
+   {9999, Score_Arachnotron, mtype_hellknight,  "Serpent",       mif_full},
+   {9999, Score_HellKnight,  mtype_hellknight,  "Demon1",        mif_full},
+   {9999, Score_BaronOfHell, mtype_baron,       "Demon2",        mif_full},
+   {9999, Score_Cacodemon,   mtype_mancubus,    "Bishop",        mif_full},
+   {9999, Score_HellKnight,  mtype_lostsoul,    "Wraith",        mif_full},
+   {9999, Score_CyberDemon,  mtype_cyberdemon,  "Dragon",        mif_full},
+   {9999, Score_CyberDemon,  mtype_phantom,     "ClericBoss",    mif_full},
+   {9999, Score_CyberDemon,  mtype_phantom,     "FighterBoss",   mif_full},
+   {9999, Score_CyberDemon,  mtype_phantom,     "MageBoss",      mif_full},
+   {9999, Score_CyberDemon,  mtype_cyberdemon,  "Heresiarch",    mif_full},
+   {9999, Score_DSparil * 2, mtype_cyberdemon,  "Korax",         mif_full},
 #endif
 
    // Doom 2
-   {Score_ZombieMan,     mtype_zombie,        "ZombieMan"       },
-   {Score_ShotgunGuy,    mtype_zombie,        "ShotgunGuy"      },
-   {Score_ChaingunGuy,   mtype_zombie,        "ChaingunGuy"     },
-   {Score_Imp,           mtype_imp,           "Imp"             },
-   {Score_Demon,         mtype_demon,         "Demon"           },
-   {Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
-   {Score_LostSoul,      mtype_lostsoul,      "LostSoul"        },
-   {Score_Mancubus,      mtype_mancubus,      "Fatso"           },
-   {Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
-   {Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
-   {Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
-   {Score_HellKnight,    mtype_hellknight,    "Knight"          },
-   {Score_BaronOfHell,   mtype_baron,         "Baron"           },
-   {Score_Revenant,      mtype_revenant,      "Revenant"        },
-   {Score_PainElemental, mtype_painelemental, "PainElemental"   },
-   {Score_Archvile,      mtype_archvile,      "Archvile"        },
-   {Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
-   {Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
+   {5,    Score_ZombieMan,     mtype_zombie,        "ZombieMan"       },
+   {10,   Score_ShotgunGuy,    mtype_zombie,        "ShotgunGuy"      },
+   {20,   Score_ChaingunGuy,   mtype_zombie,        "ChaingunGuy"     },
+   {10,   Score_Imp,           mtype_imp,           "Imp"             },
+   {15,   Score_Demon,         mtype_demon,         "Demon"           },
+   {15,   Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
+   {5,    Score_LostSoul,      mtype_lostsoul,      "LostSoul"        },
+   {50,   Score_Mancubus,      mtype_mancubus,      "Fatso"           },
+   {50,   Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
+   {50,   Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
+   {40,   Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
+   {50,   Score_HellKnight,    mtype_hellknight,    "Knight"          },
+   {100,  Score_BaronOfHell,   mtype_baron,         "Baron"           },
+   {50,   Score_Revenant,      mtype_revenant,      "Revenant"        },
+   {200,  Score_PainElemental, mtype_painelemental, "PainElemental"   },
+   {300,  Score_Archvile,      mtype_archvile,      "Archvile"        },
+   {1500, Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
+   {2000, Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
 
    // Heretic
-   {Score_Imp,         mtype_imp,         "Gargoyle"  },
-   {Score_Demon,       mtype_demon,       "Golem"     },
-   {Score_Nitrogolem,  mtype_demon,       "Nitrogolem"},
-   {Score_Demon * 1.5, mtype_demon,       "Sabreclaw" },
-   {Score_Cacodemon,   mtype_mancubus,    "Disciple"  },
-   {Score_Arachnotron, mtype_arachnotron, "Ophidian"  },
-   {Score_HellKnight,  mtype_hellknight,  "Warrior"   },
-   {Score_BaronOfHell, mtype_cacodemon,   "IronLich"  },
-   {Score_SpiderDemon, mtype_mastermind,  "Maulotaur" },
-   {Score_DSparil,     mtype_cyberdemon,  "DSparil"   },
+   {10,   Score_Imp,         mtype_imp,         "Gargoyle"  },
+   {15,   Score_Demon,       mtype_demon,       "Golem"     },
+   {20,   Score_Nitrogolem,  mtype_demon,       "Nitrogolem"},
+   {10,   Score_Demon * 1.5, mtype_demon,       "Sabreclaw" },
+   {50,   Score_Cacodemon,   mtype_mancubus,    "Disciple"  },
+   {50,   Score_Arachnotron, mtype_arachnotron, "Ophidian"  },
+   {50,   Score_HellKnight,  mtype_hellknight,  "Warrior"   },
+   {100,  Score_BaronOfHell, mtype_cacodemon,   "IronLich"  },
+   {1000, Score_SpiderDemon, mtype_mastermind,  "Maulotaur" },
+   {5000, Score_DSparil,     mtype_cyberdemon,  "DSparil"   },
 
    // Lithium
-   {0, mtype_phantom,    "James"   },
-   {0, mtype_phantom,    "Makarov" },
-   {0, mtype_phantom,    "Isaac"   },
-   {0, mtype_cyberdemon, "Steggles"},
+   {500,  0, mtype_phantom,    "James"   },
+   {1000, 0, mtype_phantom,    "Makarov" },
+   {2000, 0, mtype_phantom,    "Isaac"   },
+   {0,    0, mtype_cyberdemon, "Steggles"},
 
    // DoomRL Arsenal Monsters
-   {Score_ZombieMan,   mtype_zombie, "FormerHuman"   },
-   {Score_ShotgunGuy,  mtype_zombie, "FormerSergeant"},
-   {Score_ChaingunGuy, mtype_zombie, "FormerCommando"},
-   {Score_ChaingunGuy, mtype_zombie, "Former"}, // hue
+   {5,  Score_ZombieMan,   mtype_zombie, "FormerHuman"   },
+   {10, Score_ShotgunGuy,  mtype_zombie, "FormerSergeant"},
+   {20, Score_ChaingunGuy, mtype_zombie, "FormerCommando"},
+   {30, Score_ChaingunGuy, mtype_zombie, "Former"}, // hue
 
    // Colorful Hell
-   {Score_ZombieMan,     mtype_zombie,        "Zombie"},
-   {Score_ShotgunGuy,    mtype_zombie,        "SG"    },
-   {Score_ChaingunGuy,   mtype_zombie,        "CGuy"  },
-   {Score_LostSoul,      mtype_lostsoul,      "LSoul" },
-   {Score_HellKnight,    mtype_hellknight,    "HK"    },
-   {Score_Arachnotron,   mtype_arachnotron,   "SP1"   },
-   {Score_Cacodemon,     mtype_cacodemon,     "Caco"  },
-   {Score_Archvile,      mtype_archvile,      "Arch"  },
-   {Score_PainElemental, mtype_painelemental, "PE"    },
-   {Score_SpiderDemon,   mtype_mastermind,    "Mind"  },
-   {Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
+   {10,   Score_ZombieMan,     mtype_zombie,        "Zombie"},
+   {15,   Score_ShotgunGuy,    mtype_zombie,        "SG"    },
+   {20,   Score_ChaingunGuy,   mtype_zombie,        "CGuy"  },
+   {10,   Score_LostSoul,      mtype_lostsoul,      "LSoul" },
+   {50,   Score_HellKnight,    mtype_hellknight,    "HK"    },
+   {60,   Score_Arachnotron,   mtype_arachnotron,   "SP1"   },
+   {50,   Score_Cacodemon,     mtype_cacodemon,     "Caco"  },
+   {300,  Score_Archvile,      mtype_archvile,      "Arch"  },
+   {200,  Score_PainElemental, mtype_painelemental, "PE"    },
+   {1500, Score_SpiderDemon,   mtype_mastermind,    "Mind"  },
+   {2000, Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
 };
 
 static __str const dmgtype_names[dmgtype_max] = {
@@ -335,6 +336,9 @@ static void OnDeath(dmon_t *m)
 
    // If enemies emit score on death we only need to give extra rank score.
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
+
+   // Then emit EXP.
+   Lith_GiveAllEXP(m->exp + m->level * 5 + m->rank * 25);
 }
 
 //
@@ -396,8 +400,8 @@ void Lith_MonsterInfo(int tid)
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
 
-      if(mi->flags & mif_fullmatch) init = cname == mi->name;
-      else                          init = strstr_str(cname, mi->name);
+      if(mi->flags & mif_full) init = cname == mi->name;
+      else                     init = strstr_str(cname, mi->name);
 
       if(init)
       {
@@ -417,4 +421,3 @@ void Lith_MonsterInfo(int tid)
 }
 
 // EOF
-
