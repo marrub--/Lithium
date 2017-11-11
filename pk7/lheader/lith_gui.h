@@ -3,7 +3,7 @@
 #ifndef LITH_GUI_H
 #define LITH_GUI_H
 
-#define LineHash ((id_t)__LINE__ * StrHash(__FILE__))
+#define LineHash ((id_t)__LINE__ * FileHash)
 
 // Fixed ID
 #define Lith_GUI_Button_FId(g, id, ...)      Lith_GUI_Button_Impl     (g, id, &(gui_button_args_t const){__VA_ARGS__})

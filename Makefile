@@ -78,7 +78,7 @@ $(CPK1_BINARY): $(CPK1_OUTPUTS)
 ## .c -> .ir
 $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
 	@echo CC $<
-	@$(CC) $(CFLAGS) $(MAIN_CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(MAIN_CFLAGS) -DFileHash=$(shell ./strh.rb $<) -c $< -o $@
 
 $(LITHOS_IR)/%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
 	@echo CC $<
