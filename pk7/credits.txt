@@ -65,6 +65,8 @@ Marrub
 
 MarlboroMike
    Score item sprites
+   Backpack pickup
+   Rocket Box pickup
 
 Marty Kirra
    Many advice
@@ -130,6 +132,9 @@ Zombie
 
 zrrion the insect
    Full sprites for the Grenade Launcher, Pistol and Plasma Rifle
+   Skull keys
+   Health pickups
+   Cell Pack pickup
 
 --- Individual Credits
 
