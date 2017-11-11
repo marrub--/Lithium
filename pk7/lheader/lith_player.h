@@ -93,6 +93,9 @@ typedef struct player_delta_s
    bool scopetoken;
    int  frozen;
    int  semifrozen;
+
+   // Attributes
+   struct player_attributes attr;
 } player_delta_t;
 
 // Extern Functions ----------------------------------------------------------|
@@ -226,9 +229,6 @@ typedef struct player
    // Deltas
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
-
-   // Attributes
-   struct player_attributes attr;
 
    // BIP
    bip_t bip, *bipptr;

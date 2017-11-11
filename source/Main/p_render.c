@@ -80,8 +80,10 @@ void Lith_HUD_DrawWeaponSlots(player_t *p, int const *ncol, int ncols, char scol
 void Lith_PlayerItemFx(player_t *p)
 {
    bool hasir = ACS_CheckInventory("PowerLightAmp");
+
    if(!hasir && p->hadinfrared)
       ACS_LocalAmbientSound("player/infraredoff", 127);
+
    p->hadinfrared = hasir;
 }
 
@@ -202,6 +204,17 @@ void Lith_PlayerHUD(player_t *p)
          HUD_Waves(p);
          HUD_StringStack(p);
       }
+   }
+}
+
+//
+// Lith_PlayerLevelup
+//
+void Lith_PlayerLevelup(player_t *p)
+{
+   if(p->old.attr.level && p->old.attr.level < p->attr.level) {
+      ACS_LocalAmbientSound("player/levelup", 127);
+      p->logH(Language("LITH_TXT_LOG_LevelUp%S", p->discrim), p->attr.level);
    }
 }
 

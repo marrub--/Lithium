@@ -406,6 +406,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    [[__call("ScriptS")]] extern void Lith_PlayerDamageBob(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerView(player_t *p);
                          extern void Lith_PlayerStyle(player_t *p);
+                         extern void Lith_PlayerLevelup(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
                          extern void Lith_PlayerFootstep(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerDebugStats(player_t *p);
@@ -448,6 +449,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    Lith_PlayerRenderUpgrades(p); // Render Upgrades
    Lith_PlayerHUD(p);            // Draw HUD
    Lith_PlayerStyle(p);          // Change player render style
+   Lith_PlayerLevelup(p);        // Level up effects
    Lith_PlayerDebugStats(p);     // Debug stats
 }
 

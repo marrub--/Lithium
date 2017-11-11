@@ -58,6 +58,14 @@
 "LITH_TXT_LOG_CBI_CSlot7Spell" = "> Installed Cercle de la Mort Spell Driver";
 "LITH_TXT_LOG_CBI_CRDistInter" = "> Installed Reality Distortion Interface";
 
+// Level Up ------------------------------------------------------------------|
+"LITH_TXT_LOG_LevelUpStan" =
+   "> \cdYou have reached level \cj%i\cd. Open the Status menu to distribute points.";
+"LITH_TXT_LOG_LevelUpJem" =
+   "> \cd[INFO] You are now level \cj%i\cd. Distribute points via the Status menu.";
+"LITH_TXT_LOG_LevelUpFulk" =
+   "> \cj<\cdVital\cj>\cd :: Level %i reached. Use Status menu to distribute points.";
+
 // Boss Warnings -------------------------------------------------------------|
 "LITH_TXT_LOG_BossWarnStan" =
    "> \cgWarning: High demonic energy levels detected in area.";

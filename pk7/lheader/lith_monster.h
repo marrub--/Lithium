@@ -40,17 +40,17 @@ enum mtype {
 
 struct dmon {
    bool active;
-   int id;
+   int  id;
    enum mtype type;
 
-   bool wasdead;
-   int exp;
-   int level;
-   int rank;
-   int maxhealth;
-   int resist[dmgtype_max];
-   int painresist;
-   score_t score;
+   bool          wasdead;
+   unsigned long exp;
+   int           level;
+   int           rank;
+   int           maxhealth;
+   int           resist[dmgtype_max];
+   int           painresist;
+   score_t       score;
 
    struct dmon_stat *ms;
 };

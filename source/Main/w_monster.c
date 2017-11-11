@@ -57,17 +57,17 @@ static struct monster_info const monsterinfo[] = {
    {15,   Score_Demon,         mtype_demon,         "Demon"           },
    {15,   Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
    {5,    Score_LostSoul,      mtype_lostsoul,      "LostSoul"        },
-   {50,   Score_Mancubus,      mtype_mancubus,      "Fatso"           },
-   {50,   Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
-   {50,   Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
-   {40,   Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
-   {50,   Score_HellKnight,    mtype_hellknight,    "Knight"          },
-   {100,  Score_BaronOfHell,   mtype_baron,         "Baron"           },
-   {50,   Score_Revenant,      mtype_revenant,      "Revenant"        },
-   {200,  Score_PainElemental, mtype_painelemental, "PainElemental"   },
-   {300,  Score_Archvile,      mtype_archvile,      "Archvile"        },
-   {1500, Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
-   {2000, Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
+   {100,  Score_Mancubus,      mtype_mancubus,      "Fatso"           },
+   {100,  Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
+   {100,  Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
+   {100,  Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
+   {150,  Score_HellKnight,    mtype_hellknight,    "Knight"          },
+   {500,  Score_BaronOfHell,   mtype_baron,         "Baron"           },
+   {200,  Score_Revenant,      mtype_revenant,      "Revenant"        },
+   {500,  Score_PainElemental, mtype_painelemental, "PainElemental"   },
+   {700,  Score_Archvile,      mtype_archvile,      "Archvile"        },
+   {3000, Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
+   {4000, Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
 
    // Heretic
    {10,   Score_Imp,         mtype_imp,         "Gargoyle"  },
@@ -77,14 +77,14 @@ static struct monster_info const monsterinfo[] = {
    {50,   Score_Cacodemon,   mtype_mancubus,    "Disciple"  },
    {50,   Score_Arachnotron, mtype_arachnotron, "Ophidian"  },
    {50,   Score_HellKnight,  mtype_hellknight,  "Warrior"   },
-   {100,  Score_BaronOfHell, mtype_cacodemon,   "IronLich"  },
+   {300,  Score_BaronOfHell, mtype_cacodemon,   "IronLich"  },
    {1000, Score_SpiderDemon, mtype_mastermind,  "Maulotaur" },
-   {5000, Score_DSparil,     mtype_cyberdemon,  "DSparil"   },
+   {9000, Score_DSparil,     mtype_cyberdemon,  "DSparil"   },
 
    // Lithium
-   {500,  0, mtype_phantom,    "James"   },
-   {1000, 0, mtype_phantom,    "Makarov" },
-   {2000, 0, mtype_phantom,    "Isaac"   },
+   {1000, 0, mtype_phantom,    "James"   },
+   {2000, 0, mtype_phantom,    "Makarov" },
+   {3000, 0, mtype_phantom,    "Isaac"   },
    {0,    0, mtype_cyberdemon, "Steggles"},
 
    // DoomRL Arsenal Monsters
@@ -98,13 +98,13 @@ static struct monster_info const monsterinfo[] = {
    {15,   Score_ShotgunGuy,    mtype_zombie,        "SG"    },
    {20,   Score_ChaingunGuy,   mtype_zombie,        "CGuy"  },
    {10,   Score_LostSoul,      mtype_lostsoul,      "LSoul" },
-   {50,   Score_HellKnight,    mtype_hellknight,    "HK"    },
-   {60,   Score_Arachnotron,   mtype_arachnotron,   "SP1"   },
-   {50,   Score_Cacodemon,     mtype_cacodemon,     "Caco"  },
-   {300,  Score_Archvile,      mtype_archvile,      "Arch"  },
-   {200,  Score_PainElemental, mtype_painelemental, "PE"    },
-   {1500, Score_SpiderDemon,   mtype_mastermind,    "Mind"  },
-   {2000, Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
+   {150,  Score_HellKnight,    mtype_hellknight,    "HK"    },
+   {100,  Score_Arachnotron,   mtype_arachnotron,   "SP1"   },
+   {100,  Score_Cacodemon,     mtype_cacodemon,     "Caco"  },
+   {700,  Score_Archvile,      mtype_archvile,      "Arch"  },
+   {500,  Score_PainElemental, mtype_painelemental, "PE"    },
+   {2000, Score_SpiderDemon,   mtype_mastermind,    "Mind"  },
+   {3000, Score_CyberDemon,    mtype_cyberdemon,    "Cybie" },
 };
 
 static __str const dmgtype_names[dmgtype_max] = {
@@ -332,13 +332,16 @@ static void OnDeath(dmon_t *m)
 
       if(p->getUpgrActive(UPGR_SoulCleaver))
          SoulCleave(m, p);
+
+           if(p->health <  5) p->giveEXP(50);
+      else if(p->health < 15) p->giveEXP(25);
+      else if(p->health < 25) p->giveEXP(10);
+
+      Lith_GiveAllEXP(m->exp + m->level * 5 + m->rank * 25);
    }
 
    // If enemies emit score on death we only need to give extra rank score.
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
-
-   // Then emit EXP.
-   Lith_GiveAllEXP(m->exp + m->level * 5 + m->rank * 25);
 }
 
 //
@@ -408,6 +411,7 @@ void Lith_MonsterInfo(int tid)
          ifauto(dmon_t *, m, AllocDmon()) {
             m->type  = mi->type;
             m->score = mi->score;
+            m->exp   = mi->exp;
             Lith_MonsterMain(m);
          }
          return;
