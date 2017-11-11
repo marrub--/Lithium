@@ -40,6 +40,7 @@ struct cupgdef const *GetCUpgr(int pclass, int num)
       if(c->pclass & pclass && c->key == num)
          return c;
    }
+   return NULL;
 }
 
 //

@@ -7,10 +7,13 @@
 
 // Static Objects ------------------------------------------------------------|
 
-__addrdef __mod_arr dmonarr;
-
 // This is lazy-allocated. Don't touch or GDCC will break your computer's face.
 [[__no_init]] static dmon_t dmonalloc[DMON_MAX];
+
+// Extern Objects ------------------------------------------------------------|
+
+__addrdef __mod_arr dmonarr;
+
 int dmonarr dmonid;
 
 // Extern Functions ----------------------------------------------------------|

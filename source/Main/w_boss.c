@@ -1,5 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// vim: columns=120
+// vim: columns=100
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -291,14 +291,16 @@ void Lith_SpawnBosses(score_t sum, bool force)
    // WHY ARE CONDITIONS SO HARD IT TOOK ME 7 TRIES TO GET THIS RIGHT
    // NOTE: INCREMENT THIS COUNTER EVERY TIME I GET IT WRONG
 
-        if(!world.boss[0][0] &&                     (force || sum > world.boss1p1scr)) Lith_TriggerBoss(1, 1);
-   else if(!world.boss[0][1] && world.boss[0][0] && (force || sum > world.boss1p2scr)) Lith_TriggerBoss(1, 2);
-   else if(!world.boss[1][0] && world.boss[0][1] && (force || sum > world.boss2p1scr)) Lith_TriggerBoss(2, 1);
-   else if(!world.boss[1][1] && world.boss[1][0] && (force || sum > world.boss2p2scr)) Lith_TriggerBoss(2, 2);
-   else if(!world.boss[1][2] && world.boss[1][1] && (force || sum > world.boss2p3scr)) Lith_TriggerBoss(2, 3);
-   else if(!world.boss[2][0] && world.boss[1][2] && (force || sum > world.boss3p1scr)) Lith_TriggerBoss(3, 1);
-   else if(!world.boss[2][1] && world.boss[2][0] && (force || sum > world.boss3p2scr)) Lith_TriggerBoss(3, 2);
-   else if(!world.boss[2][2] && world.boss[2][1] && (force || sum > world.boss3p3scr)) Lith_TriggerBoss(3, 3);
+   #define B(n1, n2) (!world.boss[n1-1][n2-1] && (force || sum > world.boss##n1##p##n2##scr))
+        if(                    B(1, 1)) Lith_TriggerBoss(1, 1);
+   else if(world.boss[0][0] && B(1, 2)) Lith_TriggerBoss(1, 2);
+   else if(world.boss[0][1] && B(2, 1)) Lith_TriggerBoss(2, 1);
+   else if(world.boss[1][0] && B(2, 2)) Lith_TriggerBoss(2, 2);
+   else if(world.boss[1][1] && B(2, 3)) Lith_TriggerBoss(2, 3);
+   else if(world.boss[1][2] && B(3, 1)) Lith_TriggerBoss(3, 1);
+   else if(world.boss[2][0] && B(3, 2)) Lith_TriggerBoss(3, 2);
+   else if(world.boss[2][1] && B(3, 3)) Lith_TriggerBoss(3, 3);
+   #undef B
 }
 
 // EOF

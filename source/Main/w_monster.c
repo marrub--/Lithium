@@ -395,8 +395,10 @@ void Lith_MonsterInfo(int tid)
    {
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
+
       if(mi->flags & mif_fullmatch) init = cname == mi->name;
       else                          init = strstr_str(cname, mi->name);
+
       if(init)
       {
          ifauto(dmon_t *, m, AllocDmon()) {
