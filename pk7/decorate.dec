@@ -15,6 +15,7 @@
 #include "lscripts/RifleGrenade.dec"
 #include "lscripts/BoughtItem.dec"
 #include "lscripts/Magazine.dec"
+#include "lscripts/Decorations.dec"
 
 #include "lscripts/Monsters/System.dec"
 

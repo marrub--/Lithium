@@ -138,6 +138,17 @@ $ambient 42426 amb/vent      point 5.0  continuous    0.5
 $ambient 42427 amb/computer  point 2.0  continuous    1.0
 
 //
+// Barrels
+//
+misc/barrel/hit1 lsounds/Barrel/Hit.flac
+misc/barrel/hit2 lsounds/Barrel/Hit2.flac
+
+$random misc/barrel/hit {
+   misc/barrel/hit1
+   misc/barrel/hit2
+}
+
+//
 // :V
 //
 items/healthbonus1  lsounds/bdup/DSHBON1.wav
