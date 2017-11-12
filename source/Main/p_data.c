@@ -51,7 +51,11 @@ static void SetPClass(player_t *p)
       else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
       else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
       else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
-      else {
+      else if(cl == "FDPlutPlayer"  || cl == "FDTNTPlayer"    ||
+              cl == "FDDoom2Player" || cl == "FDAliensPlayer" ||
+              cl == "FDJPCPPlayer"  || cl == "FDBTSXPlayer") {
+         p->pclass = pcl_fdoomer;
+      } else {
          Log("Invalid player class detected!");
          abort();
       }

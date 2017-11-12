@@ -218,7 +218,7 @@ __str Lith_PlayerDiscriminator(int pclass)
    case pcl_assassin:  return "Omi";
    case pcl_darklord:  return "Ari";
    case pcl_thoth:     return "Kiri";
-   default: return null;
+   default:            return "Mod";
    }
 }
 
