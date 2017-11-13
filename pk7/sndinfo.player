@@ -29,6 +29,7 @@ player/step3        lsounds/Footsteps/Step3.flac           // ???
 player/step4        lsounds/Footsteps/Step4.flac           // ???
 player/levelup1     lsounds/Player/LevelUp.ogg             // Fatal/Fake
 player/levelup2     lsounds/Player/LevelUp2.ogg            // 〃
+player/wings        lsounds/Player/Wings.wav               // Hexen
 
 $volume player/death2 0.7
 $volume player/nuke 0.7

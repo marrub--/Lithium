@@ -40,6 +40,9 @@ enum
    weapon_c_starshot,
    weapon_c_cercle,
 
+   // Misc. Weapons
+   weapon_wings,
+
    weapon_max
 };
 

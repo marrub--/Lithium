@@ -6,6 +6,7 @@ enum
    wdata_bossspawned,
    wdata_grafzone,
    wdata_enemycheck,
+   wdata_ptid,
    wdata_pclass,
    wdata_magdrops,
 };

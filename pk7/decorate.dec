@@ -68,6 +68,7 @@
 #include "lscripts/Weapons/Base.dec"
 #include "lscripts/Weapons/Pickups.dec"
 #include "lscripts/Weapons/Sword.dec"
+#include "lscripts/Weapons/Wings.dec"
 
 #include "lscripts/Weapons_Outcasts/1_ChargeFist.dec"
 #include "lscripts/Weapons_Outcasts/5_MissileLauncher.dec"
