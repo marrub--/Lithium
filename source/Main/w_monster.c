@@ -52,20 +52,20 @@ static struct monster_info const monsterinfo[] = {
    // Doom 2
    {5,    Score_ZombieMan,     mtype_zombie,        "ZombieMan"       },
    {10,   Score_ShotgunGuy,    mtype_zombie,        "ShotgunGuy"      },
-   {20,   Score_ChaingunGuy,   mtype_zombie,        "ChaingunGuy"     },
-   {10,   Score_Imp,           mtype_imp,           "Imp"             },
-   {15,   Score_Demon,         mtype_demon,         "Demon"           },
-   {15,   Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
+   {15,   Score_ChaingunGuy,   mtype_zombie,        "ChaingunGuy"     },
+   {5,    Score_Imp,           mtype_imp,           "Imp"             },
+   {10,   Score_Demon,         mtype_demon,         "Demon"           },
+   {10,   Score_Demon * 1.5,   mtype_demon,         "Spectre"         },
    {5,    Score_LostSoul,      mtype_lostsoul,      "LostSoul"        },
-   {100,  Score_Mancubus,      mtype_mancubus,      "Fatso"           },
-   {100,  Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
-   {100,  Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
-   {100,  Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
-   {150,  Score_HellKnight,    mtype_hellknight,    "Knight"          },
-   {500,  Score_BaronOfHell,   mtype_baron,         "Baron"           },
-   {200,  Score_Revenant,      mtype_revenant,      "Revenant"        },
-   {500,  Score_PainElemental, mtype_painelemental, "PainElemental"   },
-   {700,  Score_Archvile,      mtype_archvile,      "Archvile"        },
+   {50,   Score_Mancubus,      mtype_mancubus,      "Fatso"           },
+   {50,   Score_Mancubus,      mtype_mancubus,      "Mancubus"        },
+   {80,   Score_Arachnotron,   mtype_arachnotron,   "Arachnotron"     },
+   {50,   Score_Cacodemon,     mtype_cacodemon,     "Cacodemon"       },
+   {80,   Score_HellKnight,    mtype_hellknight,    "Knight"          },
+   {100,  Score_BaronOfHell,   mtype_baron,         "Baron"           },
+   {80,   Score_Revenant,      mtype_revenant,      "Revenant"        },
+   {200,  Score_PainElemental, mtype_painelemental, "PainElemental"   },
+   {500,  Score_Archvile,      mtype_archvile,      "Archvile"        },
    {3000, Score_SpiderDemon,   mtype_mastermind,    "SpiderMastermind"},
    {4000, Score_CyberDemon,    mtype_cyberdemon,    "Cyberdemon"      },
 
@@ -337,7 +337,7 @@ static void OnDeath(dmon_t *m)
       else if(p->health < 15) p->giveEXP(25);
       else if(p->health < 25) p->giveEXP(10);
 
-      Lith_GiveAllEXP(m->exp + m->level * 5 + m->rank * 25);
+      Lith_GiveAllEXP(m->exp + m->level + (m->rank - 1) * 10);
    }
 
    // If enemies emit score on death we only need to give extra rank score.
