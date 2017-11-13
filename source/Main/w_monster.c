@@ -363,7 +363,7 @@ void Lith_MonsterMain(dmon_t *m)
    LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
-   for(;;)
+   for(int tic = 0;; tic++)
    {
       GetInfo(m->ms);
 
@@ -375,7 +375,7 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / (fixed)MAXLEVEL);
 
-      if(ACS_CheckInventory("Lith_Ionized") && ACS_Timer() % 10 == 0)
+      if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
          ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
 
       // Strange optimization: This causes horrible lag in the ZScript VM,
@@ -383,7 +383,7 @@ void Lith_MonsterMain(dmon_t *m)
       if(!world.grafZoneEntered && m->painresist)
          ApplyPainResist(m);
 
-      ACS_Delay(1);
+      ACS_Delay(2);
    }
 }
 
