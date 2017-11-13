@@ -24,6 +24,13 @@ gameinfo
    PrecacheSounds          = "amb/rain", "amb/wind"
    AddEventHandlers        = "Lith_Events"
    PickupColor             = "#A0F3A0"
+   QuitMessages            = "$QUITMSG1",  "$QUITMSG2",  "$QUITMSG3",
+                             "$QUITMSG4",  "$QUITMSG5",  "$QUITMSG6",
+                             "$QUITMSG7",  "$QUITMSG8",  "$QUITMSG9",
+                             "$QUITMSG10", "$QUITMSG11", "$QUITMSG12",
+                             "$QUITMSG13", "$QUITMSG14", "$QUITMSG15",
+                             "$QUITMSG16", "$QUITMSG17", "$QUITMSG18",
+                             "$QUITMSG19", "$QUITMSG20", "$QUITMSG21"
 }
 
 // Automap Info --------------------------------------------------------------|

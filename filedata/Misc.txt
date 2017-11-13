@@ -9,40 +9,63 @@
 == BGFLAT31 | ZZLITHBG
 
 ## Quit Messages -------------------------------------------------------------|
-== QUITMSG1  | Hold it, your contract isn't complete yet!
-== QUITMSG4  | I got nothing.
-== QUITMSG5  | Leave before I make you leave!
-== QUITMSG6  | Super, now I can get back to emitting bees at your house!
-== QUITMSG9  | Look at this wuss!
-== QUITMSG11 | I'm rooting for you whichever way you go!
-== QUITMSG12 | Exit?
-== QUITMSG13 | Wait, there's a youkai waiting for you at the exit!
-== QUITMSG14 | Get outta here, and get me some money too.
+== QUITMSG1 | Hold it, your contract isn't complete yet!
+== QUITMSG2 | I got nothing.
+== QUITMSG3 | Leave before I make you leave!
+== QUITMSG4 | Super, now I can get back to emitting bees at your house!
+== QUITMSG5 | Look at this wuss!
+== QUITMSG6 | I'm rooting for you whichever way you go!
+== QUITMSG7 | Exit?
+== QUITMSG8 | Wait, there's a youkai waiting for you at the exit!
+== QUITMSG9 | Get outta here, and get me some money too.
 
-%% QUITMSG
+%% QUITMSG10
 Wait, don't go!
 I still have to sell you the expansion pack!
 
-%% QUITMSG2
+%% QUITMSG11
 There are still explosions to be had,
 are you really sure?
 
-%% QUITMSG3
+%% QUITMSG12
 Get out! Get out!
 Go and do your job!
 
-%% QUITMSG8
+%% QUITMSG13
 If you leave, I'll personally
 send pizzas to your doorstep.
 
-%% QUITMSG10
+%% QUITMSG14
 C'mon,
 just 5 more minutes?
 
-%% QUITMSG7
+%% QUITMSG15
 HEY
 HEY
 DIE
+
+== QUITMSG16 | Villain!! What color is your blood!!
+
+%% QUITMSG17
+The Omega Cannon was created in a swamp dimension by
+an insane lizard-man who lusted for murder.
+How it got here is a mystery.
+
+%% QUITMSG18
+Jeremy Stilko, Cyber-Mage, is blind, but can see
+thanks to cybernetics. The profile image he has
+is unusual in that he doesn't have a blindfold on.
+
+%% QUITMSG19
+Cyber-Mage's weapon pickups look retro due to
+limitations in his bootleg space reformation wetware.
+
+== QUITMSG20 | Marine's Sniper Rifle was formerly his service weapon.
+
+%% QUITMSG21
+The English language diversified in the past
+thousand years, splitting into dozens of dialects.
+The most common are Eastern and Northwest English.
 
 ## Death Messages ------------------------------------------------------------|
 == LITH_DEATHMSG_01 | YOU ARE DEAD, DEAD, DEAD
