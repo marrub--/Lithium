@@ -42,12 +42,18 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       int id = Lith_UniqueID();
       dmon_t *m = DmonPtr();
 
+      bool healthset = false;
+
       if((freak || boss) && !phantom) {
          extern __str Lith_RandomName(int id);
 
-         UData.tagstr    = Lith_RandomName(freak ? 0 : id);
-         UData.oldhealth = UData.health = ACS_Random(0, 666666);
-         UData.maxhealth = ACS_Random(0, 666666);
+         UData.tagstr = Lith_RandomName(freak ? 0 : id);
+
+         if(p->getCVarI("lith_scanner_bar")) {
+            UData.oldhealth = UData.health = ACS_Random(0, 666666);
+            UData.maxhealth = ACS_Random(0, 666666);
+            healthset = true;
+         }
       } else {
          char color = p->getCVarI("lith_scanner_color") & 0x7F;
 
@@ -55,7 +61,9 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
          else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
          else if(phantom) UData.tagstr = StrParam("\Cg%tS", 0);
          else             UData.tagstr = StrParam("\C%c%tS", color, 0);
+      }
 
+      if(!healthset) {
          UData.oldhealth = UData.health;
          UData.health    = chp;
 
