@@ -476,6 +476,7 @@ weapons/shipgun/empty     lsounds/StarDestroyer/FireEmpty.flac    // Counter-Str
 weapons/shipgun/draw      lsounds/StarDestroyer/Draw.flac         // Fallout: New Vegas
 weapons/shipgun/pickup    lsounds/StarDestroyer/Pickup.flac       // Halo 3, Doom 3
 weapons/shipgun/firesurge lsounds/StarDestroyer/FireSurge.flac    // Doom 3, Quake 2
+weapons/shipgun/idle      lsounds/StarDestroyer/Idle.flac         // Phantasy Star Nova
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
