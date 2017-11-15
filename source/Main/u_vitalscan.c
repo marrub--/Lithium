@@ -99,7 +99,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
 {
-   if(!p->hudenabled || !UData.target)
+   if((!p->hudenabled && !(p->pclass & pcl_mods)) || !UData.target)
       return;
 
    int ox = p->getCVarI("lith_scanner_xoffs");

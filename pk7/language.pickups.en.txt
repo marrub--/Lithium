@@ -79,7 +79,7 @@
 "LITH_PICKUP_055" = "Wait, the %S is resonating!";
 "LITH_PICKUP_056" = "Oh, I guess it's an %S.";
 "LITH_PICKUP_057" = "THIS IS SOME KIND OF %S";
-"LITH_PICKUP_058" = "A perfectly preportioned, rare breed of %S appears.";
+"LITH_PICKUP_058" = "A perfectly proportioned, rare breed of %S appears.";
 "LITH_PICKUP_059" = "%S version 7.0 installed.";
 "LITH_PICKUP_060" = "Hazardous %S contained.";
 "LITH_PICKUP_061" = "Warning: Dangerous %S levels detected.";

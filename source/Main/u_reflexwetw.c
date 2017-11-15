@@ -78,8 +78,8 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
       }
    }
 
-   if(p->buttonPressed(BT_JUMP) &&
-      !ACS_CheckInventory("PowerFlight") && !UData.leaped &&
+   if(p->buttonPressed(BT_JUMP) && !ACS_CheckInventory("PowerFlight") &&
+      !ACS_CheckInventory("Lith_RocketBooster") && !UData.leaped &&
       ((grounddist <= 16.0 && UData.charge < CHARGE_MAX) || grounddist > 16.0))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
