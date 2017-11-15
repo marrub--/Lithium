@@ -95,7 +95,7 @@ typedef struct gui_state_s
    int w, h;
 
    id_t active, hot, slide;
-   int slidetime;
+   int slidecount, slidetime;
 
    bool useclip;
    int clpxS, clpyS, clpxE, clpyE;

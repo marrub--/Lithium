@@ -25,8 +25,9 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
 
    // check slide state
    if(slide && g->slide != id && g->active == id) {
-      g->slide = id;
-      g->slidetime = 0;
+      g->slide      = id;
+      g->slidetime  = 1;
+      g->slidecount = 0;
    }
 }
 
@@ -68,6 +69,11 @@ void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
    g->clicklft = p->buttons & BT_ATTACK;
    g->clickrgt = p->buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
+
+   if(!g->clickany)
+      g->slide = 0;
+   else if(g->slidecount)
+      g->slidetime++;
 }
 
 //

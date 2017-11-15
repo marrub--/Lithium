@@ -45,15 +45,19 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
    {
       bool click = !g->clicklft;
 
-      if(g->slide == id) {
-              if(g->slidetime < 5)  click = click || ACS_Timer() % 10 == 0;
-         else if(g->slidetime < 20) click = click || ACS_Timer() % 5  == 0;
-         else if(g->slidetime < 80) click = click || ACS_Timer() % 2  == 0;
-         else                       click = true;
+      if(g->slide == id)
+      {
+         click = g->clicklft && !g->old.clicklft;
+
+              if(g->slidecount < 3)  click = click || g->slidetime % 20 == 0;
+         else if(g->slidecount < 5)  click = click || g->slidetime % 10 == 0;
+         else if(g->slidecount < 20) click = click || g->slidetime % 5  == 0;
+         else if(g->slidecount < 80) click = click || g->slidetime % 2  == 0;
+         else                        click = true;
       }
 
       if(g->hot == id && g->active == id && click) {
-         if(g->slide == id) g->slidetime++;
+         if(g->slide == id) g->slidecount++;
          if(pre->snd)
             ACS_LocalAmbientSound(pre->snd, 127);
          return true;
