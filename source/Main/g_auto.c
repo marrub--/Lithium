@@ -8,7 +8,7 @@
 //
 // Lith_GUI_Auto
 //
-void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h)
+void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide)
 {
    x += g->ox;
    y += g->oy;
@@ -21,6 +21,12 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h)
 
       if(g->active == 0 && g->clicklft)
          g->active = id;
+   }
+
+   // check slide state
+   if(slide && g->slide != id && g->active == id) {
+      g->slide = id;
+      g->slidetime = 0;
    }
 }
 

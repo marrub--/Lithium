@@ -146,14 +146,14 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
    fixed    helptrns = 0.5;
 
    if(p->attr.points) {
-      if(Lith_GUI_Button_Id(g, at, .x = x-42, y-2, .preset = &guipre.btnprev))
+      if(Lith_GUI_Button_Id(g, at, .x = x-42, y-2, .preset = &guipre.btnprev, .slide = true))
          if(p->attr.sup.attrs[at] > attr)
       {
          p->attr.sup.points++;
          p->attr.sup.attrs[at]--;
       }
 
-      if(Lith_GUI_Button_Id(g, at, .x = x-42 + guipre.btnprev.w, y-2, .preset = &guipre.btnnext))
+      if(Lith_GUI_Button_Id(g, at, .x = x-42 + guipre.btnprev.w, y-2, .preset = &guipre.btnnext, .slide = true))
          if(p->attr.sup.points && p->attr.sup.attrs[at] < ATTR_MAX)
       {
          p->attr.sup.points--;

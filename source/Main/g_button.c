@@ -10,17 +10,18 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
    gui_button_preset_t const *pre = a->preset ? a->preset : &guipre.btndef;
 
    if(!a->disabled)
-      Lith_GUI_Auto(g, id, a->x, a->y, pre->w, pre->h);
+      Lith_GUI_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
 
    __with(__str graphic;)
    {
-      int const x = a->x + g->ox;
-      int const y = a->y + g->oy;
       if(g->hot == id && pre->hot) graphic = Lith_GUI_Prefix1(g, pre, hot);
       else                         graphic = Lith_GUI_Prefix1(g, pre, gfx);
 
-      if(graphic)
+      if(graphic) {
+         int const x = a->x + g->ox;
+         int const y = a->y + g->oy;
          DrawSpritePlain(graphic, g->hid--, x + 0.1, y + 0.1, TICSECOND);
+      }
    }
 
    if(a->label && pre->font)
@@ -40,14 +41,26 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       HudMessagePlain(g->hid--, x + 0.4, y, TICSECOND);
    }
 
-   if(g->hot == id && g->active == id && !g->clicklft) {
-      if(pre->snd)
-         ACS_LocalAmbientSound(pre->snd, 127);
-      return true;
-   } else {
-      return false;
+   if(!a->disabled)
+   {
+      bool click = !g->clicklft;
+
+      if(g->slide == id) {
+              if(g->slidetime < 5)  click = click || ACS_Timer() % 10 == 0;
+         else if(g->slidetime < 20) click = click || ACS_Timer() % 5  == 0;
+         else if(g->slidetime < 80) click = click || ACS_Timer() % 2  == 0;
+         else                       click = true;
+      }
+
+      if(g->hot == id && g->active == id && click) {
+         if(g->slide == id) g->slidetime++;
+         if(pre->snd)
+            ACS_LocalAmbientSound(pre->snd, 127);
+         return true;
+      }
    }
+
+   return false;
 }
 
 // EOF
-
