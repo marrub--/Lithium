@@ -67,9 +67,68 @@ The English language diversified in the past
 thousand years, splitting into dozens of dialects.
 The most common are Eastern and Northwest English.
 
+== QUITMSG22 | The Ensurer watches over us.
+
+%% QUITMSG23
+The Star Destroyer's hum is a product of the
+energy buffer on its top channeling sound
+through the main hull of the gun, which may
+prove the existence of a fifth dimension.
+
+%% QUITMSG24
+The amount of wetware jammed into Cyber-Mage's
+brain is not healthy for anyone.
+
+%% QUITMSG25
+Marine was previously a gun collector, but stopped
+after regulations passed regarding personal defense
+weaponry in the military.
+
+%% QUITMSG26
+The Shock Rifle was previously used for hunting,
+famed for its great power and ease of use.
+Before it was stripped down and modified, anyway.
+
+%% QUITMSG27
+Rumors have spread of similarities between the
+phantoms haunting Hell and tales of past heroes.
+
+%% QUITMSG28
+Within the week there will be OLD MEN,
+RUNNING THE WORLD, if you quit.
+
+%% QUITMSG29
+On the planet Durla Prime, onesuch being exists whose
+only true name is "King Crimera Haxfucker."
+
+== QUITMSG30 | AAAGH
+== QUITMSG31 | wan
+
+%% QUITMSG32
+hellote i been looking at the sources what dont tell me how do i made a BSP grenades
+like it is regular grenades but when you make explode it deform bsp tree into shrub
+
+== QUITMSG33 | ~text interface terminal malfunction error ~2992dud
+== QUITMSG34 | Internet pornography.
+== QUITMSG35 | if god is everywhere, then that means he's in this quit message and he needs to get the fuck OUT
+== QUITMSG36 | Now if you'll excuse me, I need to go die to the Soviet Union.
+
+%% QUITMSG37
+The Charge Fist uses pneumatics to launch
+your fist forward, via advanced cybernetics.
+
+== QUITMSG38 | Can you at least offer weak opposition to exiting?
+
+%% QUITMSG39
+BORN TO CRASH
+ZDoom is a fuck
+410,757,864,530 SCRIPT ERRORS
+
+== QUITMSG40 | GET OUT
+
 ## Death Messages ------------------------------------------------------------|
 == LITH_DEATHMSG_01 | YOU ARE DEAD, DEAD, DEAD
-== LITH_DEATHMSG_02 | YOU DED
+== LITH_DEATHMSG_02 | GAME OVER YEAAAAAAHHHHHHHHHHH
 == LITH_DEATHMSG_03 | MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.
 == LITH_DEATHMSG_04 | PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.
 == LITH_DEATHMSG_05 | YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.

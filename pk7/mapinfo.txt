@@ -30,7 +30,14 @@ gameinfo
                              "$QUITMSG10", "$QUITMSG11", "$QUITMSG12",
                              "$QUITMSG13", "$QUITMSG14", "$QUITMSG15",
                              "$QUITMSG16", "$QUITMSG17", "$QUITMSG18",
-                             "$QUITMSG19", "$QUITMSG20", "$QUITMSG21"
+                             "$QUITMSG19", "$QUITMSG20", "$QUITMSG21",
+                             "$QUITMSG22", "$QUITMSG23", "$QUITMSG24",
+                             "$QUITMSG25", "$QUITMSG26", "$QUITMSG27",
+                             "$QUITMSG28", "$QUITMSG29", "$QUITMSG30",
+                             "$QUITMSG31", "$QUITMSG32", "$QUITMSG33",
+                             "$QUITMSG34", "$QUITMSG35", "$QUITMSG36",
+                             "$QUITMSG37", "$QUITMSG38", "$QUITMSG39",
+                             "$QUITMSG40"
 }
 
 // Automap Info --------------------------------------------------------------|
