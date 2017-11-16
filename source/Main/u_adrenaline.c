@@ -72,7 +72,7 @@ void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
       HUDMSG_FADEOUT | HUDMSG_ALPHA,
       hid_adrenind_fxS - timemod,
       77.1 - timemod,
-      185.1,
+      224.1,
       (fixed)(0.3f * amt),
       (fixed)(0.6f * amt),
       0.8);

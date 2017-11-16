@@ -21,9 +21,11 @@ void Lith_KeyZoom(int amt)
    withplayer(LocalPlayer)
    {
       upgrade_t *upgr = p->getUpgr(UPGR_Zoom);
-      if(upgr->active)    UData.zoom += amt;
-      if(UData.zoom < 0)  UData.zoom  = 0;
-      if(UData.zoom > 80) UData.zoom  = 80;
+      if(upgr) {
+         if(upgr->active)    UData.zoom += amt;
+         if(UData.zoom < 0)  UData.zoom  = 0;
+         if(UData.zoom > 80) UData.zoom  = 80;
+      }
    }
 }
 
@@ -67,12 +69,12 @@ void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
 {
    if(UData.vzoom)
    {
-      DrawSpriteAlpha("lgfx/Vignette.png", hid_zoomvignette, 160, 100, TICSECOND, 0.3);
+      DrawSpriteAlpha("lgfx/Vignette.png", hid_zoomvignette, 160, 120, TICSECOND, 0.3);
 
       ACS_SetCameraToTexture(p->cameratid, "LITHCAM2", 90 - UData.vzoom);
-      DrawSpritePlain("LITHCAM2", hid_zoomcam, 160, 100, TICSECOND);
+      DrawSpritePlain("LITHCAM2", hid_zoomcam, 160, 120, TICSECOND);
 
-      DrawSpriteAlpha("lgfx/ZoomOverlay.png", hid_zoombase, 160, 100, TICSECOND, 0.5);
+      DrawSpriteAlpha("lgfx/ZoomOverlay.png", hid_zoombase, 160, 120, TICSECOND, 0.5);
 
       __str points[8] = {"E", "SE", "S", "SW", "W", "NW", "N", "NE"};
 
@@ -84,7 +86,7 @@ void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
          int x = atan2f(xs, xc) * 320;
 
          HudMessageF("CBIFONT", points[i]);
-         HudMessagePlain(hid_zoomcomp + i, 160 + x, 100, TICSECOND);
+         HudMessagePlain(hid_zoomcomp + i, 160 + x, 120, TICSECOND);
       }
    }
 }

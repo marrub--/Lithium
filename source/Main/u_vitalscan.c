@@ -117,7 +117,7 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    if(UData.rank) {
       for(int i = 1; i <= UData.rank; i++) {
          DrawSpriteFade(StrParam("lgfx/UI/Rank%i.png", i),
-            hid_vscrankS - (i - 1), 100.1 + ox + (i * 6), 180.1 + oy, 0.1, 0.1);
+            hid_vscrankS - (i - 1), 100.1 + ox + (i * 6), 216.1 + oy, 0.1, 0.1);
       }
    }
 
@@ -126,11 +126,11 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
       int delta = UData.oldhealth - UData.health;
 
       HudMessageF("CBIFONT", "-%i", delta);
-      HudMessageParams(HUDMSG_FADEOUT, hid_vschitS, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
+      HudMessageParams(HUDMSG_FADEOUT, hid_vschitS, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
 
       for(int i = 1; i < 5 && delta >= 100 * i; i++) {
          HudMessageF("CBIFONT", "-%i", delta);
-         HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vschitS - i, CR_RED, 160.4 + ox, 196.2 + oy, 0.1, 0.4);
+         HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vschitS - i, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
       }
    }
 
@@ -139,16 +139,16 @@ void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
    __str font = afnt ? "SMALLFONT" : "CBIFONT";
 
    HudMessageF(font, "%S", UData.tagstr);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 180.2 + oy, 0.1, 0.4);
+   HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 216.2 + oy, 0.1, 0.4);
 
    ACS_SetFont(UData.freak ? "ALIENFONT" : font);
    if(UData.maxhealth) HudMessage("%i/%i", UData.health, UData.maxhealth);
    else                HudMessage("%ihp", UData.health);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 188.2 + oy, 0.1, 0.4);
+   HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 225.2 + oy, 0.1, 0.4);
 
    // Health bar
    if(p->getCVarI("lith_scanner_bar")) {
-      int y = afnt ? 168 : 171;
+      int y = afnt ? 201 : 205;
       ACS_SetHudClipRect(120 + ox, y + oy, 80 * UData.splitfrac, 2);
       DrawSpritePlain(StrParam("lgfx/UI/HealthBar%i.png", UData.split), hid_vscbar, 120.1+ox, y+.1+oy, 0.1);
       ACS_SetHudClipRect(0, 0, 0, 0);

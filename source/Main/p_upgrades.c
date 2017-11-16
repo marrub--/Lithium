@@ -97,7 +97,7 @@ CallbackDefine(upgr_reinit_cb_t, UpgrReinit)
 [[__call("ScriptS")]]
 static void RenderProxy(player_t *p, upgrade_t *upgr)
 {
-   ACS_SetHudSize(320, 200);
+   ACS_SetHudSize(320, 240);
    upgr->info->Render(p, upgr);
 }
 

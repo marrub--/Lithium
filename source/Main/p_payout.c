@@ -53,12 +53,12 @@ void Lith_PlayerPayout(player_t *p)
 
    ACS_SetActivator(p->tid);
    ACS_Delay(25);
-   ACS_SetHudSize(320, 200);
+   ACS_SetHudSize(320, 240);
 
    for(int i = 0; i < 35*3; i++)
    {
       int hid = hid_base_payout;
-      int y = 16;
+      int y = 20;
       bool counting = false;
 
       Head("RESULTS");

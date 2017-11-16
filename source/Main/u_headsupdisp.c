@@ -13,7 +13,7 @@ static void HUD_IndicatorLine(player_t *p, __str image, int hid, int yadd)
    if(pos < 11)
       yadd += 11 - (pos % 12);
 
-   DrawSpriteFade(image, hid, 88.1 - pos, 175.1 + yadd, 0.2, 0.7);
+   DrawSpriteFade(image, hid, 88.1 - pos, 214.1 + yadd, 0.2, 0.7);
 }
 
 //
@@ -21,7 +21,7 @@ static void HUD_IndicatorLine(player_t *p, __str image, int hid, int yadd)
 //
 static void HUD_Weapons(player_t *p)
 {
-   DrawSpritePlain("lgfx/HUD/Bar.png", hid_weaponbg, 279.2, 199.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD/Bar.png", hid_weaponbg, 279.2, 238.2, TICSECOND);
 
    static int const ncolor[] = {
       CR_UNTRANSLATED,
@@ -29,7 +29,7 @@ static void HUD_Weapons(player_t *p)
       CR_BRICK
    };
 
-   Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'k', 282, 198);
+   Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'k', 282, 237);
 }
 
 //
@@ -60,7 +60,7 @@ static void HUD_Ammo(player_t *p)
 
       typegfx = "lgfx/HUD/MAG.png";
       HudMessageF("LHUDFONT", "%i/%i", max - cur, max);
-      HudMessagePlain(hid_ammo1, 224.1, 190.0-y, TICSECOND);
+      HudMessagePlain(hid_ammo1, 224.1, 229.0-y, TICSECOND);
    }
 
    if(wep->ammotype & AT_Ammo)
@@ -68,21 +68,22 @@ static void HUD_Ammo(player_t *p)
       int x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg2, 220.2, 199.2-y, TICSECOND);
+         DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg2, 220.2, 238.2-y, TICSECOND);
          x = -59;
       }
 
       typegfx = "lgfx/HUD/AMMO.png";
       HudMessageF("LHUDFONT", "%i", ACS_CheckInventory(wep->ammoclass));
-      HudMessagePlain(hid_ammo2, x+224.1, 190.0-y, TICSECOND);
+      HudMessagePlain(hid_ammo2, x+224.1, 229.0-y, TICSECOND);
    }
 
-   if(!typegfx) return;
+   if(typegfx)
+   {
+      DrawSpritePlain(typebg, hid_ammotypebg, 320.2, 238.2, TICSECOND);
+      DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg1, 279.2, 238.2-y, TICSECOND);
 
-   DrawSpritePlain(typebg, hid_ammotypebg, 320.2, 199.2, TICSECOND);
-   DrawSpritePlain("lgfx/HUD/BarBig.png", hid_ammobg1, 279.2, 199.2-y, TICSECOND);
-
-   DrawSpritePlain(typegfx, hid_ammotype, 282.1, 197.2, TICSECOND);
+      DrawSpritePlain(typegfx, hid_ammotype, 282.1, 236.2, TICSECOND);
+   }
 }
 
 //
@@ -105,14 +106,14 @@ static void HUD_Health(player_t *p)
       ACS_CheckInventory("PowerStrength") ?
          "lgfx/HUD/SplitBackRed.png" :
          "lgfx/HUD/SplitBack.png",
-      hid_healthbg, 0.1, 200.2, TICSECOND);
+      hid_healthbg, 0.1, 239.2, TICSECOND);
 
    if(p->dead) HudMessageF("LHUDFONT", "---");
    else        HudMessageF("LHUDFONT", "%i", p->health);
 
-   HudMessagePlain(hid_health, 34.1, 192.0, TICSECOND);
+   HudMessagePlain(hid_health, 34.1, 231.0, TICSECOND);
 
-   DrawSpritePlain("lgfx/HUD/VIT.png", hid_healthtxt, 2.1, 198.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD/VIT.png", hid_healthtxt, 2.1, 237.2, TICSECOND);
 
    if(!p->dead)
    {
@@ -134,7 +135,7 @@ static void HUD_Health(player_t *p)
       if(cr)
       {
          HudMessageF("LHUDFONT", "%i", p->health);
-         HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, cr, 34.1, 192.0, 0.1, ft);
+         HudMessageParams(HUDMSG_FADEOUT, hid_healthhit, cr, 34.1, 231.0, 0.1, ft);
       }
    }
 
@@ -154,12 +155,12 @@ static void HUD_Armor(player_t *p)
       [armor_blue]    = "lgfx/HUD/H_D25.png"
    };
 
-   DrawSpritePlain("lgfx/HUD/SplitBack.png", hid_armorbg, 0.1, 184.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD/SplitBack.png", hid_armorbg, 0.1, 223.2, TICSECOND);
 
    HudMessageF("LHUDFONT", "%i", p->armor);
-   HudMessagePlain(hid_armor, 34.1, 176.0, TICSECOND);
+   HudMessagePlain(hid_armor, 34.1, 215.0, TICSECOND);
 
-   DrawSpritePlain("lgfx/HUD/ARM.png", hid_armortxt, 2.1, 182.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD/ARM.png", hid_armortxt, 2.1, 221.2, TICSECOND);
 
    int cr = 0;
    fixed ft;
@@ -178,7 +179,7 @@ static void HUD_Armor(player_t *p)
    if(cr)
    {
       HudMessageF("LHUDFONT", "%i", p->armor);
-      HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, cr, 34.1, 176.0, 0.1, ft);
+      HudMessageParams(HUDMSG_FADEOUT, hid_armorhit, cr, 34.1, 215.0, 0.1, ft);
    }
 
    HUD_IndicatorLine(p, armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 32), -7);
@@ -232,10 +233,10 @@ static void HUD_Mode(player_t *p)
    if(p->weapontype == weapon_rifle)
    {
       int addy = p->getUpgrActive(UPGR_RifleModes) ? 0 : 16;
-      DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 200.2 + addy, TICSECOND);
+      DrawSpritePlain("lgfx/HUD/H_W3.png", hid_riflemodebg, 215.2, 240.2 + addy, TICSECOND);
       DrawSpritePlain(StrParam("lgfx/HUD/H_W%i.png",
          (rifle_firemode_max - p->riflefiremode) + 3),
-         hid_riflemode, 215.2, 168.2 + (p->riflefiremode * 16) + addy, TICSECOND);
+         hid_riflemode, 215.2, 208.2 + (p->riflefiremode * 16) + addy, TICSECOND);
    }
 }
 

@@ -131,7 +131,7 @@ static void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 //
 static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
 {
-   Lith_GUI_Clip(g, x, y, w, 8);
+   Lith_GUI_Clip(g, x, y, w * 2, 8);
    DrawSpritePlain(gfx, g->hid--, x+.1, y+.1, TICSECOND);
    Lith_GUI_ClipRelease(g);
 }

@@ -93,10 +93,10 @@ void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
 {
    if(UData.activearmor && p->getCVarI("lith_hud_showarmorind"))
    {
-      DrawSpritePlain("lgfx/HUD/SplitLeft.png", hid_rarmorbg, 12.1, 170.2, TICSECOND);
+      DrawSpritePlain("lgfx/HUD/SplitLeft.png", hid_rarmorbg, 12.1, 208.2, TICSECOND);
 
       HudMessageF("LHUDFONT", "\Cn%S", ArmorNames[UData.activearmor - 1].abbr);
-      HudMessagePlain(hid_rarmortxt, 32.1, 161.0, TICSECOND);
+      HudMessagePlain(hid_rarmortxt, 32.1, 199.0, TICSECOND);
    }
 }
 

@@ -167,9 +167,9 @@ void Lith_HUD_Log(player_t *p)
    {
       int cr;
       switch(p->pclass) {
+      default:            cr = CR_GREEN;     break;
       case pcl_cybermage: cr = CR_RED;       break;
       case pcl_informant: cr = CR_LIGHTBLUE; break;
-      default:            cr = CR_GREEN;     break;
       }
 
       ACS_SetHudSize(480, 300);
@@ -185,7 +185,7 @@ void Lith_HUD_Log(player_t *p)
             y = 20 + y;
             align = 0.1;
          } else {
-            y = 250 - y;
+            y = 255 - y;
             align = 0.2;
 
             if(p->pclass == pcl_cybermage || p->pclass == pcl_informant)
