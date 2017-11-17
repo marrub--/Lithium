@@ -102,6 +102,28 @@
    "ZDoom is a fuck\n"
    "410,757,864,530 SCRIPT ERRORS";
 "QUITMSG40" = "GET OUT";
+"QUITMSG41" = "do-it.wad";
+"QUITMSG42" = "You'll do whatever it takes to get the JooJ done right, right?";
+"QUITMSG43" = "La la lai la, la la lai la, la la lai la lai lai laa";
+"QUITMSG44" = "You dare defy ME?";
+"QUITMSG45" = "At this journey's end, where does one go but to a DOS prompt?";
+"QUITMSG46" = "I bet you'll come back for more. I know it.";
+"QUITMSG47" =
+   "AFTER 3000 YEARS I AM FREE!\n"
+   "DO YOU DARE QUIT AND LEAVE\n"
+   "THE FATE OF THE WORLD IN MY HANDS?";
+"QUITMSG48" = "Quitting? What are you, a NERD?";
+"QUITMSG49" = "Master, your orders?";
+"QUITMSG50" = "Off to go play [insert game here], I see.";
+"QUITMSG51" = "Did you select the wrong menu option?";
+"QUITMSG52" = "This is all just a dream.";
+"QUITMSG53" =
+   "This mod is just riddled with unsupported bytecode,\n"
+   "you better get out of here before it blows.";
+"QUITMSG54" = "See you, space cowboy.";
+"QUITMSG55" = "FUCKING NINJAS STABBING LESBIAN NUNS";
+"QUITMSG56" = "Will you give your Door of Truth to me?";
+"QUITMSG57" = "You press Y. I'll be waiting.";
 
 // Death Messages ------------------------------------------------------------|
 "LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";
