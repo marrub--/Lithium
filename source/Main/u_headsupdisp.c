@@ -120,13 +120,13 @@ static void HUD_Health(player_t *p)
       int cr = 0;
       fixed ft;
 
-      if(p->health < p->old.health)
+      if(p->health < p->oldhealth)
       {
          cr = CR_YELLOW;
-         ft = (p->old.health - p->health) / 30.0;
+         ft = (p->oldhealth - p->health) / 30.0;
          ft = minmax(ft, 0.1, 3.0);
       }
-      else if(p->health > p->old.health)
+      else if(p->health > p->oldhealth)
       {
          cr = CR_PURPLE;
          ft = 0.2;
@@ -165,12 +165,12 @@ static void HUD_Armor(player_t *p)
    int cr = 0;
    fixed ft;
 
-   if(p->armor < p->old.armor)
+   if(p->armor < p->oldarmor)
    {
       cr = CR_YELLOW;
-      ft = minmax((p->old.armor - p->armor) / 30.0, 0.1, 3.0);
+      ft = minmax((p->oldarmor - p->armor) / 30.0, 0.1, 3.0);
    }
-   else if(p->armor > p->old.armor)
+   else if(p->armor > p->oldarmor)
    {
       cr = CR_PURPLE;
       ft = 0.2;

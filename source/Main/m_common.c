@@ -10,6 +10,28 @@
 __str dbgstat[64], dbgnote[64];
 int   dbgstatnum,  dbgnotenum;
 
+// Static Functions ----------------------------------------------------------|
+
+//
+// SetInventory
+//
+static void SetInventory(__str item, int amount)
+{
+   int s = ACS_CheckInventory(item) - amount;
+        if(s < 0) ACS_TakeInventory(item, -s);
+   else if(s > 0) ACS_GiveInventory(item,  s);
+}
+
+//
+// SetActorInventory
+//
+static void SetActorInventory(int tid, __str item, int amount)
+{
+   int s = ACS_CheckActorInventory(tid, item) - amount;
+        if(s < 0) ACS_TakeActorInventory(tid, item, -s);
+   else if(s > 0) ACS_GiveActorInventory(tid, item,  s);
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -91,6 +113,15 @@ void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) ACS_TakeInventory(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
+}
+
+//
+// Lith_SetActorInventory
+//
+void Lith_SetActorInventory(int tid, __str item, int amount)
+{
+   if(tid == 0) SetInventory(item, amount);
+   else         SetActorInventory(tid, item, amount);
 }
 
 //

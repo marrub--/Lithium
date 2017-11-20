@@ -112,10 +112,9 @@ static void Lith_PickupScore(player_t *p, int parm)
    score_t score = 4000 * weaponinfo[parm].slot;
 
    GiveWeaponItem(parm);
-   p->giveScore(score);
+   score = p->giveScore(score);
    p->log("> Sold the %S for %lli\Cnscr\C-.",
-      Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name),
-      p->getModScore(score));
+      Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name), score);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -247,11 +246,11 @@ void Lith_GSInit_Weapon(void)
 }
 
 //
-// Lith_PlayerUpdateWeapon
+// Lith_PlayerPreWeapons
 //
 // Update information on what weapons we have.
 //
-void Lith_PlayerUpdateWeapon(player_t *p)
+void Lith_PlayerPreWeapons(player_t *p)
 {
    weapondata_t *w = &p->weapon;
 

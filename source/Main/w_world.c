@@ -306,13 +306,13 @@ static void DoRain()
 //
 static void DoPayout(void)
 {
-   fixed64_t taxpct = ACS_RandomFixed(1 / 100.0, 5 / 100.0);
+   fixed64_t taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
    #define GenPay(name) \
       if(payout.name##max) \
       { \
          payout.name##pct = (payout.name##num / (fixed64_t)payout.name##max) * 100; \
-         payout.name##scr = payout.name##pct * 500; \
+         payout.name##scr = payout.name##pct * 600; \
       }
 
    GenPay(kill)
@@ -729,7 +729,7 @@ static void Lith_WorldUnload(void)
       ACS_SetActivator(p->tid);
       Lith_PlayerDeinitUpgrades(p);
       p->closeGUI();
-      Lith_PlayerDeltaStats(p);
+      Lith_PlayerUpdateStats(p);
    }
 }
 

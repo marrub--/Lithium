@@ -24,8 +24,6 @@ CallbackDefine(player_cb_t, PlayerRender)
 // Static Functions ----------------------------------------------------------|
 
 [[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
-static void Lith_PlayerScore(player_t *p);
-static void Lith_PlayerStats(player_t *p);
 [[__call("ScriptS")]] static void Lith_BossWarning(player_t *p);
 
 // Scripts -------------------------------------------------------------------|
@@ -62,8 +60,10 @@ reinit:
       if(p->health > 0 && p->dead)
          p->reinit = true;
 
-      // This can be changed any time, so save it here.
+      // These can be changed any time, so save them here.
       player_delta_t olddelta = p->cur;
+      int oldhealth = p->health;
+      int oldarmor  = p->armor;
 
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
@@ -78,6 +78,8 @@ reinit:
 
       // Update previous-tic values
       p->old = olddelta;
+      p->oldhealth = oldhealth;
+      p->oldarmor  = oldarmor;
 
       // Reset view for next tic
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
@@ -295,28 +297,20 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 }
 
 //
-// Lith_GetModScore
-//
-score_t Lith_GetModScore(player_t *p, score_t score, bool nomul)
-{
-   // Multiply score by the player's multiplier, and the global multiplier
-   if(!nomul)
-      score *= p->scoremul;
-
-   return score * world.scoremul;
-}
-
-//
 // Lith_GiveScore
 //
-void Lith_GiveScore(player_t *p, score_t score, bool nomul)
+score_t Lith_GiveScore(player_t *p, score_t score, bool nomul)
 {
    #pragma GDCC FIXED_LITERAL OFF
    // Could cause division by zero
    if(score == 0)
-      return;
+      return 0;
 
-   score = p->getModScore(score, nomul);
+   if(!nomul) {
+      score *= p->scoremul;
+      score *= 1 + (double)RandomFloat(0, p->attr.attrs[at_luk] / 77.7);
+      score *= world.scoremul;
+   }
 
    // Get a multiplier for the score accumulator and sound volume
    double mul = minmax(score, 0, 15000) / 15000.0;
@@ -328,14 +322,12 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
 
    //
-   if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0)
-   {
+   if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
       p->log("> You gained brouzouf.");
    }
 
-   if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0)
-   {
+   if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
       p->spuriousexplosions++;
       ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
    }
@@ -349,6 +341,25 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
    // Log score
    if(p->getCVarI("lith_player_scorelog"))
       p->logH("> +\Cj%lli\Cnscr", score);
+
+   return score;
+}
+
+//
+// Lith_TakeScore
+//
+void Lith_TakeScore(player_t *p, score_t score)
+{
+   if(p->score - score >= 0) {
+      p->scoreused += score;
+      p->score     -= score;
+   } else {
+      p->scoreused += p->score;
+      p->score      = 0;
+   }
+
+   p->scoreaccum     = 0;
+   p->scoreaccumtime = 0;
 }
 
 //
@@ -358,26 +369,6 @@ void Lith_GiveScore(player_t *p, score_t score, bool nomul)
 void Lith_GiveMeAllOfTheScore(void)
 {
    withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
-}
-
-//
-// Lith_TakeScore
-//
-void Lith_TakeScore(player_t *p, score_t score)
-{
-   if(p->score - score >= 0)
-   {
-      p->scoreused += score;
-      p->score     -= score;
-   }
-   else
-   {
-      p->scoreused += p->score;
-      p->score      = 0;
-   }
-
-   p->scoreaccum     = 0;
-   p->scoreaccumtime = 0;
 }
 
 // Static Functions ----------------------------------------------------------|
@@ -402,21 +393,32 @@ static void Lith_BossWarning(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
+                         extern void Lith_PlayerPreWeapons(player_t *p);
+                         static void Lith_PlayerPreScore(player_t *p);
+                         static void Lith_PlayerPreStats(player_t *p);
+
+   [[__call("ScriptS")]] extern void Lith_PlayerUpdateCBIGUI(player_t *p);
+                         static void Lith_PlayerUpdateAttributes(player_t *p);
+                         extern void Lith_PlayerUpdateUpgrades(player_t *p);
+                         extern void Lith_PlayerUpdateWeapons(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerUpdateLog(player_t *p);
+
+                         extern void Lith_PlayerFootstep(player_t *p);
                          extern void Lith_PlayerItemFx(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerDamageBob(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerView(player_t *p);
+                         extern void Lith_PlayerRenderUpgrades(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
                          extern void Lith_PlayerStyle(player_t *p);
                          extern void Lith_PlayerLevelup(player_t *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
-                         extern void Lith_PlayerFootstep(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerDebugStats(player_t *p);
 
    // Pre-logic: Update data from the engine.
-   Lith_PlayerUpdateWeapon(p); // Update weapon info
-   Lith_PlayerScore(p);        // Update score
+   Lith_PlayerPreWeapons(p); // Update weapon info
+   Lith_PlayerPreScore(p);   // Update score
 
    if(ACS_Timer() > 4)
-      Lith_PlayerStats(p); // Update statistics
+      Lith_PlayerPreStats(p); // Update statistics
 
    if(!p->dead)
    {
@@ -428,12 +430,13 @@ static void Lith_PlayerRunScripts(player_t *p)
 
       CallbackRun(player_cb_t, PlayerUpdate, p);
 
-      Lith_PlayerUpdateUpgrades(p); // Update upgrades
-      Lith_PlayerUpdateWeapons(p);  // Update weapons
-      Lith_PlayerUpdateLog(p);      // Update log data
+      Lith_PlayerUpdateAttributes(p); // Update attributes
+      Lith_PlayerUpdateUpgrades(p);   // Update upgrades
+      Lith_PlayerUpdateWeapons(p);    // Update weapons
+      Lith_PlayerUpdateLog(p);        // Update log data
 
       // Post-logic: Update the engine's data.
-      Lith_PlayerDeltaStats(p); // Update delta'd info
+      Lith_PlayerUpdateStats(p); // Update engine info
 
       if(world.pauseinmenus)
          Lith_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
@@ -454,9 +457,35 @@ static void Lith_PlayerRunScripts(player_t *p)
 }
 
 //
-// Lith_PlayerScore
+// Lith_PlayerUpdateAttributes
 //
-static void Lith_PlayerScore(player_t *p)
+static void Lith_PlayerUpdateAttributes(player_t *p)
+{
+   fixed acc = p->attr.attrs[at_acc] / 210.0;
+   fixed def = p->attr.attrs[at_def] / 290.0;
+   int   str = p->attr.attrs[at_str];
+   int   stm = p->attr.attrs[at_stm];
+   int  stmt = (ATTR_MAX*1.25 - stm) / (fixed)(ATTR_MAX / 4) * 15;
+   int   rge = p->attr.attrs[at_rge];
+
+   if(p->health < p->oldhealth)
+      p->rage += rge * (p->oldhealth - p->health) / 1000.0;
+
+   p->maxhealth = p->spawnhealth + str;
+   ACS_SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
+   ACS_SetActorPropertyFixed(0, APROP_DamageFactor,     1.0 - def);
+   ACS_SetActorProperty     (0, APROP_SpawnHealth, p->maxhealth);
+
+   if(p->health < stm+1 && (!stmt || p->ticks % stmt == 0))
+      p->health = p->health + 1;
+
+   p->rage = lerpk(p->rage, 0, 0.02);
+}
+
+//
+// Lith_PlayerPreScore
+//
+static void Lith_PlayerPreScore(player_t *p)
 {
    if(!p->scoreaccumtime || p->score < p->old.score)
    {
@@ -471,19 +500,19 @@ static void Lith_PlayerScore(player_t *p)
 }
 
 //
-// Lith_PlayerStats
+// Lith_PlayerPreStats
 //
-static void Lith_PlayerStats(player_t *p)
+static void Lith_PlayerPreStats(player_t *p)
 {
-   if(p->health < p->old.health)
-      p->healthused += p->old.health - p->health;
-   else if(p->health > p->old.health && ACS_Timer() != 1)
-      p->healthsum += p->health - p->old.health;
+   if(p->health < p->oldhealth)
+      p->healthused += p->oldhealth - p->health;
+   else if(p->health > p->oldhealth && ACS_Timer() != 1)
+      p->healthsum += p->health - p->oldhealth;
 
-   if(p->armor < p->old.armor)
-      p->armorused += p->old.armor - p->armor;
-   else if(p->armor > p->old.armor && ACS_Timer() != 1)
-      p->armorsum += p->armor - p->old.armor;
+   if(p->armor < p->oldarmor)
+      p->armorused += p->oldarmor - p->armor;
+   else if(p->armor > p->oldarmor && ACS_Timer() != 1)
+      p->armorsum += p->armor - p->oldarmor;
 
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
@@ -491,9 +520,9 @@ static void Lith_PlayerStats(player_t *p)
 }
 
 //
-// Lith_PlayerDeltaStats
+// Lith_PlayerUpdateStats
 //
-void Lith_PlayerDeltaStats(player_t *p)
+void Lith_PlayerUpdateStats(player_t *p)
 {
    if(p->frozen    != p->old.frozen)    ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
    if(p->speedmul  != p->old.speedmul)  ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);

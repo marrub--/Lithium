@@ -60,8 +60,6 @@ typedef struct cbi_s
 
 // Extern Functions ----------------------------------------------------------|
 
-[[__call("ScriptS")]]
-void Lith_PlayerUpdateCBIGUI(struct player *p);
 void Lith_PlayerResetCBIGUI(struct player *p);
 
 #endif

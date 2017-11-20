@@ -95,7 +95,7 @@ void Lith_PlayerItemFx(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerDamageBob(player_t *p)
 {
-   if(!ACS_CheckInventory("PowerStrength") && p->health < p->old.health)
+   if(!ACS_CheckInventory("PowerStrength") && p->health < p->oldhealth)
    {
       float angle = RandomFloat(tau, -tau);
       float distance;
@@ -104,7 +104,7 @@ void Lith_PlayerDamageBob(player_t *p)
          angle = lerpf(angle, atan2f(p->bobpitch, p->bobyaw), 0.25f);
 
       distance  = mag2f(p->bobyaw, p->bobpitch);
-      distance += (p->old.health - p->health) / (float)p->maxhealth;
+      distance += (p->oldhealth - p->health) / (float)p->maxhealth;
       distance *= 0.2f;
       distance *= (200 - p->armor) / 200.0f;
 

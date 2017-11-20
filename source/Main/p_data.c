@@ -148,13 +148,8 @@ void Lith_PlayerUpdateData(player_t *p)
 
    p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   p->health = ACS_GetActorProperty(0, APROP_Health);
-   p->armor  = ACS_CheckInventory("BasicArmor");
-
    p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
-   p->armorclass  = ACS_GetArmorInfoString(ARMORINFO_CLASSNAME);
-   p->maxarmor    = ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT);
 
    Lith_GetArmorType(p);
 
@@ -267,11 +262,12 @@ void Lith_ResetPlayer(player_t *p)
       SetupAttributes(p);
 
       // i cri tears of pain for APROP_SpawnHealth
-      p->viewheight = ACS_GetActorViewHeight(0);
-      p->jumpheight = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-      p->maxhealth  = ACS_GetActorProperty(0, APROP_Health);
-      p->discount   = 1.0;
-      p->stepnoise  = StrParam("player/%S/step", p->classname);
+      p->viewheight  = ACS_GetActorViewHeight(0);
+      p->jumpheight  = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
+      p->spawnhealth = ACS_GetActorProperty(0, APROP_Health);
+      p->maxhealth   = p->spawnhealth;
+      p->discount    = 1.0;
+      p->stepnoise   = StrParam("player/%S/step", p->classname);
    }
 
    //

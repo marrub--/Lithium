@@ -64,7 +64,7 @@ int Lith_Timer(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
-   score_t score = ACS_CheckInventory("Lith_ScoreCount") * (double)RandomFloat(0.5, 1.5);
+   score_t score = ACS_CheckInventory("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
    Lith_GiveAllScore(score, false);
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
 }
@@ -99,15 +99,37 @@ int Lith_VelHax(int fuck)
 }
 
 //
+// Lith_GiveHealthBonus
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveHealthBonus(int amount)
+{
+   withplayer(LocalPlayer) {
+      amount += p->health;
+      if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
+      p->health = amount;
+   }
+}
+
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveHealth(int amount)
+{
+   withplayer(LocalPlayer) {
+      amount += p->health;
+      amount *= 1 + p->attr.attrs[at_vit] / 30.0;
+      if(amount > p->maxhealth) amount = p->maxhealth;
+      p->health = amount;
+   }
+}
+
+//
 // Lith_CheckHealth
 //
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckHealth(int n)
 {
-   withplayer(LocalPlayer) {
-      p->health = ACS_GetActorProperty(0, APROP_Health);
+   withplayer(LocalPlayer)
       return p->health < p->maxhealth;
-   }
    return 0;
 }
 
@@ -117,11 +139,9 @@ bool Lith_CheckHealth(int n)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_CheckArmor(int n)
 {
-   withplayer(LocalPlayer) {
-      p->armor = ACS_CheckInventory("BasicArmor");
-      return p->maxarmor  < n || p->armor == 0 ||
-             p->maxarmor == 0 || p->armor  < n;
-   }
+   withplayer(LocalPlayer)
+      return p->maxarmor == 0 || p->armor == 0 ||
+             p->maxarmor  < n || p->armor  < n;
    return 0;
 }
 

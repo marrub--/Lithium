@@ -70,8 +70,7 @@ typedef enum guiname_s
 typedef struct player_delta_s
 {
    // Status
-   int     health;
-   int     armor;
+   int     maxhealth;
    fixed   alpha;
    score_t score;
    bool    indialogue;
@@ -116,11 +115,8 @@ void Lith_PlayerCloseGUI(struct player *p);
 void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 
 // score
-[[__optional_args(1)]] void Lith_GiveScore(struct player *p, score_t score,
-                          bool nomul);
-                       void Lith_TakeScore(struct player *p, score_t score);
-[[__optional_args(1)]] score_t Lith_GetModScore(struct player *p,
-                          score_t score, bool nomul);
+[[__optional_args(1)]] score_t Lith_GiveScore(struct player *p, score_t score, bool nomul);
+void Lith_TakeScore(struct player *p, score_t score);
 
 // attributes
 void Lith_GiveEXP(struct player *p, unsigned long amt);
@@ -133,7 +129,7 @@ __str Lith_PlayerDiscriminator(int pclass);
 
 [[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
 
-void Lith_PlayerDeltaStats(struct player *p);
+void Lith_PlayerUpdateStats(struct player *p);
 
 void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols,
    char scol, int bx, int by);
@@ -171,11 +167,16 @@ typedef struct player
    __prop mana          {get:  Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
    __prop manamax       {get:  ACS_GetMaxInventory(->tid, "Lith_MagicAmmo")}
    __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
+   __prop health {get: ACS_GetActorProperty(->tid, APROP_Health),
+                  set: ACS_SetActorProperty(->tid, APROP_Health)}
+   __prop armor {get: Lith_CheckActorInventory(->tid, "BasicArmor"),
+                 set: Lith_SetActorInventory  (->tid, "BasicArmor")}
+   __prop maxarmor   {get: ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT)}
+   __prop armorclass {get: ACS_GetArmorInfoString(ARMORINFO_CLASSNAME)}
 
    // score
-   __prop giveScore   {call: Lith_GiveScore(this)}
-   __prop takeScore   {call: Lith_TakeScore(this)}
-   __prop getModScore {call: Lith_GetModScore(this)}
+   __prop giveScore {call: Lith_GiveScore(this)}
+   __prop takeScore {call: Lith_TakeScore(this)}
 
    // attributes
    __prop giveEXP {call: Lith_GiveEXP(this)}
@@ -229,6 +230,8 @@ typedef struct player
    // Deltas
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
+   int oldhealth;
+   int oldarmor;
 
    // BIP
    bip_t bip, *bipptr;
@@ -256,14 +259,14 @@ typedef struct player
    float   discount;
 
    // Misc
-   int  spuriousexplosions;
-   int  brouzouf;
-   bool hadinfrared;
+   int   spuriousexplosions;
+   int   brouzouf;
+   bool  hadinfrared;
+   fixed rage;
 
    // Static data
    bool  staticinit;
-   int   maxhealth;
-   int   maxarmor;
+   int   spawnhealth;
    fixed jumpheight;
    fixed viewheight;
    __str stepnoise;
@@ -318,8 +321,7 @@ typedef struct player
    __str weaponclass;
 
    // Armor
-   __str armorclass;
-   int   armortype;
+   int armortype;
 
    // Keys
    struct keycards_s

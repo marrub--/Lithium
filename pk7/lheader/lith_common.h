@@ -214,6 +214,7 @@ void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
 int Lith_CheckActorInventory(int tid, __str item);
 void Lith_GiveActorInventory(int tid, __str item, int amount);
 void Lith_TakeActorInventory(int tid, __str item, int amount);
+void Lith_SetActorInventory (int tid, __str item, int amount);
 void Lith_DebugStat(__str fmt, ...);
 void Lith_DebugNote(__str fmt, ...);
 
