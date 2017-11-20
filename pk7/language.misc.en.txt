@@ -124,6 +124,44 @@
 "QUITMSG55" = "FUCKING NINJAS STABBING LESBIAN NUNS";
 "QUITMSG56" = "Will you give your Door of Truth to me?";
 "QUITMSG57" = "You press Y. I'll be waiting.";
+"QUITMSG58" = "Engarde, fuckboy.";
+"QUITMSG59" = "If you quit, I will unleash the skeleton inside you.";
+"QUITMSG60" = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+"QUITMSG61" = "GMOTA never";
+"QUITMSG62" = ":thinking:";
+"QUITMSG63" = "nyu~";
+"QUITMSG64" = "Hey, Ron! Can we say 'fuck' in the game?";
+"QUITMSG65" =
+   "I'd leave - this is just more monsters and Score.\n"
+   "What a load.";
+"QUITMSG66" = "Trust us now, it's time to let go.";
+"QUITMSG67" =
+   "Enter the maze through your reflection,\n"
+   "we have to follow through a new connection.";
+"QUITMSG68" = "YOU MEAN THIS GUY JUST QUITS WHEN HE WANTS??????";
+"QUITMSG69" = "[smooth saxophone plays]";
+"QUITMSG70" =
+   "hetlo it is me of the durdandle i hav\n"
+   "come to tell u that if u quit i will\n"
+   "exit the universe and punch you through\n"
+   "deep non-existence thank for cooperate";
+"QUITMSG71" = "Press Y to BECOME THE BEAST YOU WORSHIP.";
+"QUITMSG72" = "Fuck, fucking cock.";
+"QUITMSG73" =
+   "hello hacker fucker\n"
+   "this is marble\n"
+   "heres the deal.\n"
+   "if you hack this mod\n"
+   "i will find you\n"
+   "where ever you are\n"
+   "and break your legs\n"
+   "and thats a promise";
+"QUITMSG74" = "Detonating in 5... 4... 3... 2...";
+"QUITMSG75" = "Look, bub. It's my way, or the highway.";
+"QUITMSG76" =
+   "|  ||\n"
+   "|| |_";
+"QUITMSG77" = "AOHA PZ TVZA LEJLSSLUA";
 
 // Death Messages ------------------------------------------------------------|
 "LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";
@@ -133,7 +171,7 @@
 "LITH_DEATHMSG_05" = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
 "LITH_DEATHMSG_06" = "THE SKELETONS KNOW.";
 "LITH_DEATHMSG_07" = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
-"LITH_DEATHMSG_08" = "IT'S OKAY IT'S NOT LIKE EVERYONE WAS DEPENDING ON YOU OR ANYTHING";
+"LITH_DEATHMSG_08" = "JESUS CHRIST AMAZING";
 "LITH_DEATHMSG_09" = "CONTRACT TERMINATED. REASON: DIED, LOL.";
 "LITH_DEATHMSG_10" = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
 "LITH_DEATHMSG_11" = "HAHAHAHA!";
