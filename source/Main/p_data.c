@@ -221,8 +221,8 @@ void Lith_GiveEXP(player_t *p, unsigned long amt)
 
    while(a->exp + amt >= a->expnext) {
       a->level++;
-      a->points  += 9;
-      a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.17) * 250);
+      a->points  += 5;
+      a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.2) * 340);
       p->attr.sup = p->attr.cur;
    }
 

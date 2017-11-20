@@ -216,6 +216,7 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    // Optimization: Check for players nearby first.
    int const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
    int const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
+
    Lith_ForPlayer() {
       if(aabb(xw1, yw1, xw2, yw2, p->x, p->y)) {
          anyplayer = true;
@@ -256,6 +257,11 @@ static void BaseMonsterLevel(dmon_t *m)
    switch(world.game) {
    case Game_Episodic: bias = world.mapscleared / 10.0; break;
    default:            bias = world.mapscleared / 40.0; break;
+   }
+
+   Lith_ForPlayer() {
+      rn2 += p->attr.level / 2.0;
+      break;
    }
 
    bias *= bias;

@@ -72,8 +72,8 @@ enum
    Exp_Ophidian    = 50,
 
    // Tier 4
-   Exp_PainElemental = 200,
-   Exp_Archvile      = 500,
+   Exp_PainElemental = 100,
+   Exp_Archvile      = 200,
 
    // Tier 5
    Exp_SpiderDemon = 3000,
