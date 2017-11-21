@@ -8,17 +8,18 @@
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
 
 #define Lith_CastUData(u) ((struct upgr_data *)(u)->dataptr)
-#define UData_Adrenaline(u) (Lith_CastUData(u)->u01)
-#define UData_Implying(u)   (Lith_CastUData(u)->u02)
-#define UData_JetBooster(u) (Lith_CastUData(u)->u03)
-#define UData_lolsords(u)   (Lith_CastUData(u)->u04)
-#define UData_ReactArmor(u) (Lith_CastUData(u)->u05)
-#define UData_ReflexWetw(u) (Lith_CastUData(u)->u06)
-#define UData_VitalScan(u)  (Lith_CastUData(u)->u07)
-#define UData_Zoom(u)       (Lith_CastUData(u)->u08)
-#define UData_HomingRPG(u)  (Lith_CastUData(u)->u09)
-#define UData_Magic(u)      (Lith_CastUData(u)->u10)
-#define UData_StealthSys(u) (Lith_CastUData(u)->u11)
+#define UData_Adrenaline(u)  (Lith_CastUData(u)->u01)
+#define UData_Implying(u)    (Lith_CastUData(u)->u02)
+#define UData_JetBooster(u)  (Lith_CastUData(u)->u03)
+#define UData_lolsords(u)    (Lith_CastUData(u)->u04)
+#define UData_ReactArmor(u)  (Lith_CastUData(u)->u05)
+#define UData_ReflexWetw(u)  (Lith_CastUData(u)->u06)
+#define UData_VitalScan(u)   (Lith_CastUData(u)->u07)
+#define UData_Zoom(u)        (Lith_CastUData(u)->u08)
+#define UData_HomingRPG(u)   (Lith_CastUData(u)->u09)
+#define UData_Magic(u)       (Lith_CastUData(u)->u10)
+#define UData_StealthSys(u)  (Lith_CastUData(u)->u11)
+#define UData_HeadsUpDis3(u) (Lith_CastUData(u)->u12)
 
 enum
 {
@@ -117,27 +118,34 @@ struct upgr_data_StealthSys {
    fixed mulvel;
 };
 
+struct upgr_data_HeadsUpDis3 {
+   double scorei;
+   fixed  healthi;
+   fixed  armori;
+};
+
 struct upgr_data {
-   struct upgr_data_Adrenaline u01;
-   struct upgr_data_Implying   u02;
-   struct upgr_data_JetBooster u03;
-   struct upgr_data_lolsords   u04;
-   struct upgr_data_ReactArmor u05;
-   struct upgr_data_ReflexWetw u06;
-   struct upgr_data_VitalScan  u07;
-   struct upgr_data_Zoom       u08;
-   struct upgr_data_HomingRPG  u09;
-   struct upgr_data_Magic      u10;
-   struct upgr_data_StealthSys u11;
+   struct upgr_data_Adrenaline  u01;
+   struct upgr_data_Implying    u02;
+   struct upgr_data_JetBooster  u03;
+   struct upgr_data_lolsords    u04;
+   struct upgr_data_ReactArmor  u05;
+   struct upgr_data_ReflexWetw  u06;
+   struct upgr_data_VitalScan   u07;
+   struct upgr_data_Zoom        u08;
+   struct upgr_data_HomingRPG   u09;
+   struct upgr_data_Magic       u10;
+   struct upgr_data_StealthSys  u11;
+   struct upgr_data_HeadsUpDis3 u12;
 };
 
 typedef struct upgradeinfo {
    [[__anonymous]] shopdef_t shopdef;
-   int   pclass;
-   int   category;
-   int   perf;
-   fixed scoreadd;
-   int   group;
+   int      pclass;
+   int      category;
+   int      perf;
+   fixed    scoreadd;
+   int      group;
    unsigned requires;
 
    int id, key;

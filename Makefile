@@ -35,32 +35,20 @@ LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
 LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(LITHOS_IR)/%.ir)
 LITHOS_CFLAGS=-i$(LITHOS_INC)
 
-CPK1_IR=$(IR)/cpk1
-CPK1_SRC=$(SRCDIR)/Cpk1
-CPK1_INC=$(CPK1_SRC)
-CPK1_SOURCES=$(wildcard $(CPK1_SRC)/*.c)
-CPK1_HEADERS=$(wildcard $(CPK1_INC)/*.h)
-CPK1_OUTPUTS=$(CPK1_SOURCES:$(CPK1_SRC)/%.c=$(CPK1_IR)/%.ir)
-CPK1_BINARY=pk7_cpk1/acs/lithcpk1.bin
-CPK1_CFLAGS=-i$(CPK1_INC) --sys-include $(MAIN_INC) \
-            --sys-include $(LITHOS_INC) -Dnull=NULL -DEXTERNAL_CODE
-CPK1_LFLAGS=-llithlib -llithmain
-
 LIB_STA =3000000000
 MAIN_STA=3500000000
-CPK1_STA=3700000000
 
 ## Targets
 .PHONY: bin text clean
 
 all: text bin
-bin: $(LIB_BINARY) $(MAIN_BINARY) $(CPK1_BINARY)
+bin: $(LIB_BINARY) $(MAIN_BINARY)
 
 text: compilefs.rb
 	@cd filedata; ../compilefs.rb Directory.txt
 
 clean:
-	@rm -f $(MAIN_OUTPUTS) $(CPK1_OUTPUTS) $(LITHOS_OUTPUTS) $(LIB_OUTPUTS)
+	@rm -f $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS) $(LIB_OUTPUTS)
 
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)
@@ -71,10 +59,6 @@ $(MAIN_BINARY): $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
 	@echo LD $@
 	@$(LD) $(LFLAGS) $(MAIN_LFLAGS) --alloc-min Sta "" $(MAIN_STA) $^ -o $@
 
-$(CPK1_BINARY): $(CPK1_OUTPUTS)
-	@echo LD $@
-	@$(LD) $(LFLAGS) $(CPK1_LFLAGS) --alloc-min Sta "" $(CPK1_STA) $^ -o $@
-
 ## .c -> .ir
 $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
 	@echo CC $<
@@ -83,11 +67,6 @@ $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
 $(LITHOS_IR)/%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
 	@echo CC $<
 	@$(CC) $(CFLAGS) $(LITHOS_CFLAGS) -c $< -o $@
-
-$(CPK1_IR)/%.ir: $(CPK1_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS) \
-   $(CPK1_HEADERS)
-	@echo CC $<
-	@$(CC) $(CFLAGS) $(CPK1_CFLAGS) -c $< -o $@
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@

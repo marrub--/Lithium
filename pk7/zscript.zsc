@@ -2,8 +2,11 @@ version "2.5"
 
 #include "lzscript/Server.zsc"
 #include "lzscript/PauseManager.zsc"
-#include "lzscript/DarkMatter.zsc"
 #include "lzscript/Events.zsc"
+
+#include "lzscript/Player.zsc"
+
+#include "lzscript/DarkMatter.zsc"
 
 class Lith_GrafZone : Actor
 {

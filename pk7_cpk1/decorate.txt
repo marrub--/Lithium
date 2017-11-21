@@ -1,3 +1,0 @@
-#include "lscripts_cpk1/Player.dec"
-
-// EOF

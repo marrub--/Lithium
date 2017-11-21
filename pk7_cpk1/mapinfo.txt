@@ -1,6 +1,0 @@
-gameinfo
-{
-   AddPlayerClasses = "Lith_InformantPlayer"
-}
-
-// EOF

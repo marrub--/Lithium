@@ -188,8 +188,10 @@ void Lith_HUD_Log(player_t *p)
             y = 255 - y;
             align = 0.2;
 
-            if(p->pclass == pcl_cybermage || p->pclass == pcl_informant)
-               y -= 10;
+            switch(p->pclass) {
+            case pcl_cybermage: y -= 10; break;
+            case pcl_informant: y -= 15; break;
+            }
          }
 
          HudMessage("%S", logdata->info);

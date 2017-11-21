@@ -1,6 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
-#include "cpk1_upgrades.h"
 
 #define UData UData_HeadsUpDis3(upgr)
 
@@ -23,7 +22,7 @@ static void HUD_Ammo(player_t *p)
 
       typegfx = "lgfx/HUD_I/Mag.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i/%i", max - cur, max);
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo1, CR_PURPLE, 242.1, 188.0, TICSECOND, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, hid_ammo1, CR_PURPLE, 242.1, 218.0, TICSECOND, 0.35);
    }
 
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic))
@@ -31,13 +30,13 @@ static void HUD_Ammo(player_t *p)
       int x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", hid_ammobg2, 242.2, 197.2, TICSECOND, 0.35);
+         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", hid_ammobg2, 242.2, 227.2, TICSECOND, 0.35);
          x = -58;
       }
 
       typegfx = "lgfx/HUD_I/Ammo.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", ACS_CheckInventory(wep->ammoclass));
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo2, CR_PURPLE, x+242.1, 188.0, TICSECOND, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, hid_ammo2, CR_PURPLE, x+242.1, 218.0, TICSECOND, 0.35);
    }
 
    static int const ncolor[] = {
@@ -46,11 +45,11 @@ static void HUD_Ammo(player_t *p)
       CR_WHITE
    };
 
-   Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'g', 323, 178);
-   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", hid_ammobg1, 320.2, 199.2, TICSECOND);
+   Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'g', 323, 208);
+   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", hid_ammobg1, 320.2, 229.2, TICSECOND);
 
    if(typegfx)
-      DrawSpriteFade(typegfx, hid_ammotype, 309, 189, TICSECOND, 0.25);
+      DrawSpriteFade(typegfx, hid_ammotype, 309, 219, TICSECOND, 0.25);
 }
 
 //
@@ -66,18 +65,18 @@ static void HUD_HealthArmor(player_t *p, upgrade_t *upgr)
       [armor_blue]    = "lgfx/HUD/H_D25.png"
    };
 
-   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 200.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 230.2, TICSECOND);
 
-   int health = UData.healthi = lerpk(UData.healthi, p->health, 0.1);
+   int health = (UData.healthi = lerpk(UData.healthi, p->health, 0.2)) + 0.5;
    if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
    else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
-   HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 172.0, TICSECOND);
+   HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 202.0, TICSECOND);
 
-   int armor = UData.armori = lerpk(UData.armori, p->armor, 0.1);
+   int armor = (UData.armori = lerpk(UData.armori, p->armor, 0.2)) + 0.5;
    HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", armor);
-   HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 190.0, TICSECOND);
+   HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 220.0, TICSECOND);
 
-   DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 42), 20.1 + p->ticks % 42, 181.1, 0.2, 0.7);
+   DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 42), 20.1 + p->ticks % 42, 211.1, 0.2, 0.7);
 }
 
 //
@@ -91,7 +90,7 @@ static void HUD_Score(player_t *p, upgrade_t *upgr)
    if(p->score > 0x20000000000000LL)
       score = p->score;
    else
-      score = UData.scorei = lerp(UData.scorei, p->score, 0.3);
+      score = (UData.scorei = lerp(UData.scorei, p->score, 0.3)) + 0.5;
 
    HudMessageF("CHFONT", "\C[Lith_Purple]%S \CnScore", Lith_ScoreSep(score));
    HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 2.1, 3.1, 0.1);
@@ -102,12 +101,12 @@ static void HUD_Score(player_t *p, upgrade_t *upgr)
 //
 static void HUD_KeyInd(player_t *p)
 {
-   if(p->keys.redskull)    DrawSpriteAlpha("H_KS1", hid_key_redskull,    180.2, 11.1, 0.1, 0.8);
-   if(p->keys.yellowskull) DrawSpriteAlpha("H_KS2", hid_key_yellowskull, 170.2, 11.1, 0.1, 0.8);
-   if(p->keys.blueskull)   DrawSpriteAlpha("H_KS3", hid_key_blueskull,   160.2, 10.1, 0.1, 0.8);
-   if(p->keys.redcard)     DrawSpriteAlpha("H_KC1", hid_key_red,         150.2, 10.1, 0.1, 0.8);
-   if(p->keys.yellowcard)  DrawSpriteAlpha("H_KC2", hid_key_yellow,      140.2, 11.1, 0.1, 0.8);
-   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        130.2, 11.1, 0.1, 0.8);
+   if(p->keys.redskull)    DrawSpriteAlpha("H_KS1", hid_key_redskull,    30.0, 10.1, 0.1, 0.8);
+   if(p->keys.yellowskull) DrawSpriteAlpha("H_KS2", hid_key_yellowskull, 30.0, 20.1, 0.1, 0.8);
+   if(p->keys.blueskull)   DrawSpriteAlpha("H_KS3", hid_key_blueskull,   30.0, 30.1, 0.1, 0.8);
+   if(p->keys.redcard)     DrawSpriteAlpha("H_KC1", hid_key_red,         20.0, 10.1, 0.1, 0.8);
+   if(p->keys.yellowcard)  DrawSpriteAlpha("H_KC2", hid_key_yellow,      20.0, 20.1, 0.1, 0.8);
+   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        20.0, 30.1, 0.1, 0.8);
 }
 
 // Extern Functions ----------------------------------------------------------|
