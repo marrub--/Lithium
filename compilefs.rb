@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+## Copyright © 2017 Graham Sanderson, all rights reserved.
+## CompileFS: Formatted text → LANGUAGE processor.
 
 def escape text
    text.gsub(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>").gsub(/\n/, "\\n")

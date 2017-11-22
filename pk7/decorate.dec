@@ -3,6 +3,7 @@
 #include "lscripts/Hacks.dec"
 #include "lscripts/Dummy.dec"
 #include "lscripts/Rain.dec"
+#include "lscripts/PlayerPawn.dec"
 #include "lscripts/Player.dec"
 #include "lscripts/Adrenaline.dec"
 

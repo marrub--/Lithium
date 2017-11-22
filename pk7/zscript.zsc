@@ -4,7 +4,8 @@ version "2.5"
 #include "lzscript/PauseManager.zsc"
 #include "lzscript/Events.zsc"
 
-#include "lzscript/Player.zsc"
+#include "lzscript/PlayerPawn.zsc"
+#include "lzscript/Informant.zsc"
 
 #include "lzscript/DarkMatter.zsc"
 

@@ -1,0 +1,38 @@
+class Lith_InformantPlayer : Lith_Player
+{
+   const Lith_DodgeTime = TICRATE;
+
+   private int m_dodgeDbc;
+
+   default
+   {
+      Player.StartItem "Lith_Claymore";
+      Player.StartItem "Lith_Gladius";
+      Player.DisplayName "Informant";
+      Player.SoundClass "informant";
+      Player.Portrait "lgfx/Portraits/Informant.png";
+      Player.ViewHeight 44;
+      Player.AttackZOffset 11;
+      Player.JumpZ 14;
+      Tag "Informant";
+   }
+
+   override void Tick()
+   {
+      if(m_dodgeDbc)
+         m_dodgeDbc--;
+      else if(player.buttons & BT_SPEED)
+      {
+         let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
+         let c = cos(a) * 32;
+         let s = sin(a) * 32;
+         CallACS("Lith_DodgeView");
+         A_ChangeVelocity(c, s);
+         m_dodgeDbc = Lith_DodgeTime;
+      }
+
+      super.Tick();
+   }
+}
+
+// EOF

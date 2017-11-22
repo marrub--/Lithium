@@ -1,0 +1,51 @@
+dec output: pk7/lscripts/PlayerPawn.dec
+zsc output: pk7/lzscript/PlayerPawn.zsc
+
+<Actor> Lith_Player : DoomPlayer
+{
+   <Default>
+   Player.SideMove 2, 1
+   Player.ForwardMove 2, 1
+   Player.AirCapacity 0
+   DamageFactor "Lith_PlayerMissile", 0
+   Species "Lith_Player"
+
+   +THRUSPECIES
+   <EndDefault>
+
+   <States>
+   Pain:
+   Pain.Bullet:
+   Pain.Lith_Bullets:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 0)
+      goto Super::Pain
+   Pain.Plasma:
+   Pain.Railgun:
+   Pain.Electric:
+   Pain.Lith_Energy:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1)
+      goto Super::Pain
+   Pain.Fire:
+   Pain.Lith_Fire:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2)
+      goto Super::Pain
+   Pain.Lith_FireMagic:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 3)
+      goto Super::Pain
+   Pain.Lith_Magic:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 4)
+      goto Super::Pain
+   Pain.Melee:
+   Pain.Lith_Melee:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 5)
+      goto Super::Pain
+   Pain.Lith_Shrapnel:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6)
+      goto Super::Pain
+   Pain.Ice:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7)
+      goto Super::Pain
+   <EndStates>
+}
+
+// EOF

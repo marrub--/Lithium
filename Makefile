@@ -1,3 +1,4 @@
+## Copyright © 2016-2017 Graham Sanderson
 ## Compiler
 CC=gdcc-cc
 LD=gdcc-ld
@@ -39,10 +40,13 @@ LIB_STA =3000000000
 MAIN_STA=3500000000
 
 ## Targets
-.PHONY: bin text clean
+.PHONY: bin dec clean text
 
-all: text bin
+all: dec text bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
+
+dec: decompat.rb
+	@./decompat.rb $(wildcard $(SRCDIR)/DeCompat/*.dec)
 
 text: compilefs.rb
 	@cd filedata; ../compilefs.rb Directory.txt

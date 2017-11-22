@@ -5,27 +5,28 @@
 
 #define CHARGE_MAX (35 * 0.8)
 
-// Static Functions ----------------------------------------------------------|
-
-//
-// DOOOOODGE
-//
-[[__call("ScriptS")]]
-static void DOOOOODGE(player_t *p)
-{
-   fixed vh = p->viewheight;
-
-   for(int i = 0; i < 20; i++)
-   {
-      fixed mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
-      ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
-      ACS_Delay(1);
-   }
-
-   ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
-}
-
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_DodgeView
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_DodgeView()
+{
+   withplayer(LocalPlayer)
+   {
+      fixed vh = p->viewheight;
+
+      for(int i = 0; i < 20; i++)
+      {
+         fixed mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
+         ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
+         ACS_Delay(1);
+      }
+
+      ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
+   }
+}
 
 //
 // Activate
@@ -72,7 +73,7 @@ void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
          ACS_LocalAmbientSound("player/slide", 127);
          p->setVel(p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0, false, true);
 
-         DOOOOODGE(p);
+         Lith_DodgeView();
 
          UData.charge = 0;
       }
