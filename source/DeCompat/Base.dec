@@ -1,5 +1,9 @@
-actor Lith_Weapon : Weapon
+// dec output: pk7/lscripts/Weapons/Base.dec
+// zsc output: pk7/lzscript/WeaponBase.zsc
+
+<Actor> Lith_Weapon : Weapon
 {
+   <Default>
    Weapon.BobStyle "Alpha"
    Weapon.BobSpeed 1.5
    Inventory.PickupSound ""
@@ -7,19 +11,19 @@ actor Lith_Weapon : Weapon
 
    +INVENTORY.UNTOSSABLE
    +WEAPON.NOALERT
+   <EndDefault>
 
-   const int Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
+   <Const> Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
 
    // These flags are used for spawning pickup actors.
    // UDMF maps have a surprising amount of control over things, so we have
    // to use a load of flags to make this work properly.
-   const int Lith_PF = SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG |
+   <Const> Lith_PF = SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG |
       SXF_TRANSFERPITCH | SXF_TRANSFERPOINTERS | SXF_TRANSFERSCALE |
       SXF_TRANSFERSPECIAL | SXF_TRANSFERSTENCILCOL | SXF_TRANSFERALPHA |
       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
 
-   states
-   {
+   <States>
    DummyFlash:
       TNT1 A 0 A_AlertMonsters
       stop
@@ -66,6 +70,6 @@ actor Lith_Weapon : Weapon
       TNT1 AAAAAAAAA 0 A_Lower
       TNT1 A 1
       TNT1 A 0 A_Jump(256, "Select")
-   }
+   <EndStates>
 }
 

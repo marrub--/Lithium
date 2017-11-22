@@ -1,9 +1,9 @@
-#include "lheader/lith_weapons.h"
-#include "lheader/lith_pdata.h"
-#include "lheader/lith_wdata.h"
-#include "lheader/lith_lognames.h"
-#include "lheader/lith_upgradenames.h"
-#include "lheader/lith_scorenums.h"
+#include "lscripts/Headers/lith_weapons.h"
+#include "lscripts/Headers/lith_pdata.h"
+#include "lscripts/Headers/lith_wdata.h"
+#include "lscripts/Headers/lith_lognames.h"
+#include "lscripts/Headers/lith_upgradenames.h"
+#include "lscripts/Headers/lith_scorenums.h"
 
 const float FIX = 65536.0;
 const int  IFIX = 65536;

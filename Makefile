@@ -20,7 +20,7 @@ LIB_BINARY=$(PK7_BIN)/lithlib.bin
 
 MAIN_IR=$(IR)/main
 MAIN_SRC=$(SRCDIR)/Main
-MAIN_INC=pk7/lheader
+MAIN_INC=$(SRCDIR)/Headers
 MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
@@ -36,6 +36,14 @@ LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
 LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(LITHOS_IR)/%.ir)
 LITHOS_CFLAGS=-i$(LITHOS_INC)
 
+DECOMPAT_INPUTS=$(wildcard $(SRCDIR)/DeCompat/*.dec) \
+                $(MAIN_INC)/lith_weapons.h \
+                $(MAIN_INC)/lith_pdata.h \
+                $(MAIN_INC)/lith_wdata.h \
+                $(MAIN_INC)/lith_lognames.h \
+                $(MAIN_INC)/lith_upgradenames.h \
+                $(MAIN_INC)/lith_scorenums.h
+
 LIB_STA =3000000000
 MAIN_STA=3500000000
 
@@ -45,8 +53,8 @@ MAIN_STA=3500000000
 all: dec text bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
-dec: decompat.rb
-	@./decompat.rb $(wildcard $(SRCDIR)/DeCompat/*.dec)
+dec: decompat.rb $(DECOMPAT_INPUTS)
+	@./decompat.rb $(DECOMPAT_INPUTS)
 
 text: compilefs.rb
 	@cd filedata; ../compilefs.rb Directory.txt

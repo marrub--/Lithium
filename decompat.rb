@@ -7,7 +7,7 @@ def tozsc fp, out
    instates  = false
 
    for ln in fp
-      ln = ln.chomp.sub(/<Actor>/, "class")
+      ln = ln.chomp.sub(/<Actor>/, "class").sub(/<Const>/, "const").sub(/enum \/\/ /, "enum ")
       if ln.include? "<Default>"
          indefault = true
          out.write "   default\n   {\n"
@@ -34,7 +34,7 @@ end
 
 def todec fp, out
    for ln in fp
-      ln = ln.chomp.sub(/<Actor>/, "actor")
+      ln = ln.chomp.sub(/<Actor>/, "actor").sub(/<Const>/, "const int")
       if ln.include? "<Default>" or ln.include? "<EndDefault>" then next
       elsif ln.include? "<States>"
          out.write "   states\n   {\n"
@@ -48,8 +48,8 @@ end
 
 for arg in ARGV
    fp = open(arg, "rt")
-   dec = fp.gets[12..-1].chomp
-   zsc = fp.gets[12..-1].chomp
+   dec = fp.gets[15..-1].chomp
+   zsc = fp.gets[15..-1].chomp
    fp.gets
    tozsc fp, open(zsc, "wt")
    fp.rewind

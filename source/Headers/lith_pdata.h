@@ -1,5 +1,8 @@
+// dec output: pk7/lscripts/Headers/lith_pdata.h
+// zsc output: pk7/lzscript/Headers/lith_pdata.h
+
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum // Lith_PData
 {
    pdata_upgrade,
    pdata_rifle_firemode,
@@ -9,7 +12,7 @@ enum
    pdata_pclass
 };
 
-enum
+enum // Lith_PClass
 {
    pcl_unknown,
    pcl_marine     = 1 << 0,
@@ -31,3 +34,4 @@ enum
    pcl_magicuser  = pcl_cybermage | pcl_darklord   | pcl_thoth,
 };
 
+// EOF

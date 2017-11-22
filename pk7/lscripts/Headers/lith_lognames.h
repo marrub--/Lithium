@@ -1,5 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum // Lith_LogName
 {
    msg_null,
    msg_min,
@@ -38,4 +38,3 @@ enum
 };
 
 // EOF
-

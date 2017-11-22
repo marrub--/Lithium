@@ -1,0 +1,17 @@
+actor Lith_WeaponScopedToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+actor Lith_MWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_MarinePlayer"
+}
+
+actor Lith_CWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_CyberMagePlayer"
+}
+
+// EOF
+

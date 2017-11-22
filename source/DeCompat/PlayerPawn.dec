@@ -1,5 +1,5 @@
-dec output: pk7/lscripts/PlayerPawn.dec
-zsc output: pk7/lzscript/PlayerPawn.zsc
+// dec output: pk7/lscripts/PlayerPawn.dec
+// zsc output: pk7/lzscript/PlayerPawn.zsc
 
 <Actor> Lith_Player : DoomPlayer
 {

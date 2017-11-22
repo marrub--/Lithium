@@ -1,5 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum // Lith_UpgradeName
 {
    // Body
    UPGR_HeadsUpDisp,
@@ -68,4 +68,3 @@ enum
 };
 
 // EOF
-

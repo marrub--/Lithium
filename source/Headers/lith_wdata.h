@@ -1,5 +1,8 @@
+// dec output: pk7/lscripts/Headers/lith_wdata.h
+// zsc output: pk7/lzscript/Headers/lith_wdata.h
+
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum // Lith_WData
 {
    wdata_brightweps,
    wdata_noitemfx,
@@ -11,7 +14,7 @@ enum
    wdata_magdrops,
 };
 
-enum
+enum // Lith_CBIUpgradeM
 {
    cupg_weapninter,
    cupg_hasupgr1,
@@ -22,7 +25,7 @@ enum
    cupg_max
 };
 
-enum
+enum // Lith_CBIUpgradeC
 {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
@@ -31,3 +34,5 @@ enum
    cupg_c_slot7spell,
    cupg_c_rdistinter,
 };
+
+// EOF

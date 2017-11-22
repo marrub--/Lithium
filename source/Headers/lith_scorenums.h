@@ -1,5 +1,8 @@
+// dec output: pk7/lscripts/Headers/lith_scorenums.h
+// zsc output: pk7/lzscript/Headers/lith_scorenums.h
+
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum // Lith_ScoreNum
 {
    // Score values
    Score_Clip      = 1000,
@@ -20,10 +23,10 @@ enum
    Score_DRLACaptain = 2000, // Bullets
 
    // Tier 2
-   Score_Demon      = 5000,              // Melee
-   Score_Spectre    = Score_Demon * 1.5, // Melee
-   Score_LostSoul   = 500,               // Melee
-   Score_Nitrogolem = 4000,              // Melee, FireMagic
+   Score_Demon      = 5000, // Melee
+   Score_Spectre    = 7500, // Melee
+   Score_LostSoul   = 500,  // Melee
+   Score_Nitrogolem = 4000, // Melee, FireMagic
 
    // Tier 3
    Score_HellKnight  = 7000,              // Melee, Magic
@@ -47,7 +50,7 @@ enum
    Score_DSparil = 10000000, // Energy
 };
 
-enum
+enum // Lith_EXPNum
 {
    // Tier 1
    Exp_ZombieMan   = 5,
@@ -85,4 +88,3 @@ enum
 };
 
 // EOF
-

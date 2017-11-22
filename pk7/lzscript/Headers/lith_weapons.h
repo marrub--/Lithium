@@ -1,5 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-enum
+enum Lith_WeaponNum
 {
    weapon_unknown,
    weapon_min,
@@ -46,7 +46,7 @@ enum
    weapon_max
 };
 
-enum
+enum Lith_WeaponName
 {
    wepnam_fist,
    wepnam_chainsaw,
@@ -61,7 +61,7 @@ enum
    wepnam_max,
 };
 
-enum
+enum Lith_RifleMode
 {
    rifle_firemode_auto,
    rifle_firemode_grenade,
@@ -70,4 +70,3 @@ enum
 };
 
 // EOF
-
