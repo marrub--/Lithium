@@ -665,7 +665,7 @@ static void Lith_World(void)
 
    for(;;)
    {
-      if(world.ticks > 17 * 35 * 60 * 60 && !world.islithmap)
+      if(world.ticks > 67 * 35 * 60 * 60 && !world.islithmap)
          ACS_Teleport_NewMap(1911777, 0, 0);
 
       int secrets = world.mapsecrets;
