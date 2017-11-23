@@ -233,6 +233,41 @@
 // Removed  = \cg-
 
 // Subspace = \cb]
+"LITH_TXT_UPDATE_1_5_3" =
+   "\cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:\n"
+   "\cd+ Added a player levelling system with 7 stats.\n"
+   "\cb] Monsters will scale to your level.\n"
+   "\cd+ Added palette flashes for picking up special items.\n"
+   "\cd+ Added a puff to homing SMG tracers.\n"
+   "\cd+ Added a separate animation for when phantoms escape.\n"
+   "\cd+ Added new explosive barrels.\n"
+   "\cd+ Added new pickup sprites for ammo and skull keys.\n"
+   "\cd+ Added a debug weapon.\n"
+   "\cd+ Added more quit messages.\n"
+   "\cd+ Added an idle sound to the Star Destroyer.\n"
+   "\cd+ Added compatibility for Cheogsh and Eternal Doom 4.\n"
+   "\cj| Changed maximum monster level from 100 to 150.\n"
+   "\cj| Increased game-over timer by 50 hours.\n"
+   "\cj| Made Modal Rifle not require a CBI upgrade.\n"
+   "\cj| Changed payout gain and tax.\n"
+   "\cj| Changed ammo pickup score multiplier.\n"
+   "\cj| Fixed selling weapons giving extra score.\n"
+   "\cj| Fixed the aspect ratio of HUD elements.\n"
+   "\cj| Made boss health easier to read while healthbars are disabled.\n"
+   "\cj| Improved performance in high-monster-density maps.\n"
+   "\cj| Improved GUI performance slightly.";
+"LITH_TXT_UPDATE_1_5_3_Page2" =
+   "\cj| Changed the default automap colors.\n"
+   "\cj| Replaced the small font and console fonts.\n"
+   "\cj| Made players not collide with eachother in multiplayer.\n"
+   "\cj| Fixed Cyber-Mage's magic selector breaking weapons in multiplayer.\n"
+   "\cj| Fixed pause-in-menus breaking stuff in multiplayer.\n"
+   "\cj| Fixed visual rank not being set properly on non-compatible enemies.\n"
+   "\cj| Fixed Heretic weapons not being replaced.\n"
+   "\cj| Fixed Phantoms turning into chickens breaking the confines of reality.\n"
+   "\cj| Fixed the size of Rend and the SMG's tracer bullets.\n"
+   "\cj| Fixed PauseManager sometimes crashing the VM.\n"
+   "\cg- Removed mana regeneration.";
 "LITH_TXT_UPDATE_1_5_2" =
    "\cf(\ciSep. 4, 2017\cf) \cjFrom \cn1.5.1\cj to \cf1.5.2\cj:\n"
    "\cj| Fixed function pointer errors on upgrade init.";

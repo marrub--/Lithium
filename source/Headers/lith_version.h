@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-#define Lith_Version "1.6 (Lithium Bromide)"
-#define Lith_APIVersion 160
+#define Lith_Version "1.5.3 (Indicolite Pegmatite)"
+#define Lith_APIVersion 155
 #define Lith_CheckAPIVersion() \
    do \
       if(world.apiversion != Lith_APIVersion) { \
@@ -10,7 +10,7 @@
       } \
    while(0)
 #include <stdio.h>
-// 160 - 1.6 (Lithium Bromide)
+// 155 - 1.5.3 (Indicolite Pegmatite)
 // 154 - 1.5.1 & 1.5.2 (Rubellite Pegmatite)
 // 153 - 1.5 (Pegmatite)
 // 152 - 1.5 Beta (Pegmatite)

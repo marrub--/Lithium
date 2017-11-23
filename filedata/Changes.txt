@@ -11,6 +11,43 @@
 ## Removed  = \cg-
 ## Subspace = \cb]
 
+%% LITH_TXT_UPDATE_1_5_3
+\cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:
+\cd+ Added a player levelling system with 7 stats.
+\cb] Monsters will scale to your level.
+\cd+ Added palette flashes for picking up special items.
+\cd+ Added a puff to homing SMG tracers.
+\cd+ Added a separate animation for when phantoms escape.
+\cd+ Added new explosive barrels.
+\cd+ Added new pickup sprites for ammo and skull keys.
+\cd+ Added a debug weapon.
+\cd+ Added more quit messages.
+\cd+ Added an idle sound to the Star Destroyer.
+\cd+ Added compatibility for Cheogsh and Eternal Doom 4.
+\cj| Changed maximum monster level from 100 to 150.
+\cj| Increased game-over timer by 50 hours.
+\cj| Made Modal Rifle not require a CBI upgrade.
+\cj| Changed payout gain and tax.
+\cj| Changed ammo pickup score multiplier.
+\cj| Fixed selling weapons giving extra score.
+\cj| Fixed the aspect ratio of HUD elements.
+\cj| Made boss health easier to read while healthbars are disabled.
+\cj| Improved performance in high-monster-density maps.
+\cj| Improved GUI performance slightly.
+
+%% LITH_TXT_UPDATE_1_5_3_Page2
+\cj| Changed the default automap colors.
+\cj| Replaced the small font and console fonts.
+\cj| Made players not collide with eachother in multiplayer.
+\cj| Fixed Cyber-Mage's magic selector breaking weapons in multiplayer.
+\cj| Fixed pause-in-menus breaking stuff in multiplayer.
+\cj| Fixed visual rank not being set properly on non-compatible enemies.
+\cj| Fixed Heretic weapons not being replaced.
+\cj| Fixed Phantoms turning into chickens breaking the confines of reality.
+\cj| Fixed the size of Rend and the SMG's tracer bullets.
+\cj| Fixed PauseManager sometimes crashing the VM.
+\cg- Removed mana regeneration.
+
 %% LITH_TXT_UPDATE_1_5_2
 \cf(\ciSep. 4, 2017\cf) \cjFrom \cn1.5.1\cj to \cf1.5.2\cj:
 \cj| Fixed function pointer errors on upgrade init.
