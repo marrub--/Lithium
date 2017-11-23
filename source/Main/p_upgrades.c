@@ -40,7 +40,7 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
    {{"PlasPistol",  null,           340000 }, pcl_marine,   UC_Weap, 0, 0.00, UG_Pistol,   Req(UR_WMD)},
    {{"GaussShotty", "ShotgunUpgr",  1079430}, pcl_marine,   UC_Weap, 1, 0.00, UG_Shotgun,  Req(UR_WMD)},
    {{"PoisonShot",  "ShotgunUpg2",  1010420}, pcl_marine,   UC_Weap, 0, 0.00, UG_Shotgun,  Req(UR_WMD)},
-   {{"RifleModes",  "RifleUpgr",    340100 }, pcl_marine,   UC_Weap, 0, 0.00,              Req(UR_WMD)},
+   {{"RifleModes",  "RifleUpgr",    340100 }, pcl_marine,   UC_Weap, 0, 0.00},
    {{"LaserRCW",    "RifleUpg2",    1008080}, pcl_marine,   UC_Weap, 1, 0.00,              Req(UR_WMD)},
    {{"ChargeRPG",   "LauncherUpgr", 1550000}, pcl_marine,   UC_Weap, 0, 0.00, UG_Launcher, Req(UR_WMD|UR_WRD)},
    {{"HomingRPG",   "LauncherUpg2", 2505010}, pcl_marine,   UC_Weap, 1, 0.00, UG_Launcher, Req(UR_WMD)},
