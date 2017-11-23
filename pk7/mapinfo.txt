@@ -2,8 +2,7 @@
 
 gameinfo
 {
-   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer",
-                             "Lith_InformantPlayer"
+   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer"
    DimColor                = "Black"
    DimAmount               = 0.25
    MenuFontColor_Title     = "Green"

@@ -12,7 +12,6 @@ enum
    at_def,
    at_str,
    at_vit,
-   at_arm,
    at_stm,
    at_luk,
    at_rge,

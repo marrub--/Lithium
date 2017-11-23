@@ -187,7 +187,6 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
       [at_def] = "Armor efficiency",
       [at_str] = "Health capacity",
       [at_vit] = "Health pickup efficiency",
-      [at_arm] = "Armor pickup efficiency",
       [at_stm] = "Health regeneration",
       [at_luk] = "Random chance",
       [at_rge] = "Damage buff when hit"

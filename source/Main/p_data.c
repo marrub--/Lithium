@@ -20,7 +20,6 @@ static void SetupAttributes(player_t *p)
    p->attr.names[at_def] = "DEF";
    p->attr.names[at_str] = "STR";
    p->attr.names[at_vit] = "VIT";
-   p->attr.names[at_arm] = "ARM";
    p->attr.names[at_stm] = "STM";
    p->attr.names[at_luk] = "LUK";
    p->attr.names[at_rge] = "RGE";
