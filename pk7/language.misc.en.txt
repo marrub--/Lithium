@@ -162,6 +162,56 @@
    "|  ||\n"
    "|| |_";
 "QUITMSG77" = "AOHA PZ TVZA LEJLSSLUA";
+"QUITMSG78" = "In modern times, Japanese pornography is hard to come by.";
+"QUITMSG79" = "Hey! Who's in charge here?";
+"QUITMSG80" =
+   "If you leave, The Third Impact will become inevitable.\n"
+   "Are you sure?";
+"QUITMSG81" = "Wait! The Wood Cube is going to drop!";
+"QUITMSG82" =
+   "The Norwegians are leaving! The Norwegians are leaving!\n"
+   "The Norwegians are leaving! The Norwegians are leaving!";
+"QUITMSG83" = "Saotome. Sukida.";
+"QUITMSG84" = "Throw yourself into the pit of Crest Worms?";
+"QUITMSG85" =
+   "the way grows\n"
+   "               dim\n"
+   "\n"
+   "hungry chaos lurks behind the\n"
+   "bright corona\n"
+   "\n"
+   "dream ahead beyond the falling path\n"
+   "a billion S'pht lie yet unborn\n"
+   "\n"
+   "our own death fortold\n"
+   "\n"
+   "your dark mind cutting through\n"
+   "the deeping sky\n"
+   "\n"
+   "another time\n"
+   "another time";
+"QUITMSG86" = "Return to the wheat?";
+"QUITMSG87" = "Gotta keep it together y'all, 'cus it's about time.";
+"QUITMSG88" = "You leave, you give me your Yanagi card.";
+"QUITMSG89" =
+   "Water, 35 liters; carbon, 20 kilograms;\n"
+   "ammonia, 4 liters; lime, 1.5 kilograms;\n"
+   "phosphorus, 800 grams; salt, 250 grams;\n"
+   "saltpeter, 100 grams, and various other stuff.";
+"QUITMSG90" = "I've seen 'em come, I've seen 'em go.";
+"QUITMSG91" = "WINNERS DON'T PRESS Y";
+"QUITMSG92" = "Hand over the Platinum Chip?";
+"QUITMSG93" = "Destroy Liberty Prime?";
+"QUITMSG94" = "Press the Red Button?";
+"QUITMSG95" = "The Zone awaits...";
+"QUITMSG96" =
+   "The suspense is killing me!\n"
+   "Just do it already!";
+"QUITMSG97" = "If you quit, you will never become THE COPPER MAN.";
+"QUITMSG98" = ">stops in mid flow to sip his tea";
+"QUITMSG99" = "bepis";
+"QUITMSG100" = "Crungy Spimmy: Back 2 Tha Source: Wrong Number: Remastered Edition: Featuring Jungo from Chummy Tuungle 3: Lord of the Flies: Special Edition: Featuring Exclusive Grimbo and Hat DLC: Expansion Pack: Electronic Knucle Scrungus Mod: Day 1 Edition [Early Access] Only on PS4: Steam Greenlight Approved: The Long Lost Tale of the Gringledop Boopledonger: Frodus Poster Pack: HTC Vive Support Enabled: (BUY ROCKBAND MICROPHONE AND DRUMSET TO EXPAND YOUR BAND): \"Every Chimmbus Eases the Pain\" Extended Digital Special Edition: What's Under Double D's hat in Ed Edd 'n' Eddy? The Game Theory: Way If We Pees Form Butts?: Featuring Dongle Flopperdinglebop from the Fun Truungledinge Lost Tale of the Gringledop Boopledonger Series 2: Super Mega Edition: Redial: Featuring a Free Comic About Grimbo's Quest for the Humbusdoob: Ultra Edition: Bumbicop Statue With Real Chimmbus Action: Fire Red Version: Dream Drop Distance: Subsistence: See Inside: Crungy Spimmy and the Gringle Spingle Limited Edition Comic Series Cereal Box: The Movie: The Game";
+"QUITMSG101" = "die";
 
 // Death Messages ------------------------------------------------------------|
 "LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";

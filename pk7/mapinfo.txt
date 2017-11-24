@@ -24,32 +24,21 @@ gameinfo
    PrecacheSounds          = "amb/rain", "amb/wind"
    AddEventHandlers        = "Lith_Events"
    PickupColor             = "#A0F3A0"
-   QuitMessages            = "$QUITMSG1",  "$QUITMSG2",  "$QUITMSG3",
-                             "$QUITMSG4",  "$QUITMSG5",  "$QUITMSG6",
-                             "$QUITMSG7",  "$QUITMSG8",  "$QUITMSG9",
-                             "$QUITMSG10", "$QUITMSG11", "$QUITMSG12",
-                             "$QUITMSG13", "$QUITMSG14", "$QUITMSG15",
-                             "$QUITMSG16", "$QUITMSG17", "$QUITMSG18",
-                             "$QUITMSG19", "$QUITMSG20", "$QUITMSG21",
-                             "$QUITMSG22", "$QUITMSG23", "$QUITMSG24",
-                             "$QUITMSG25", "$QUITMSG26", "$QUITMSG27",
-                             "$QUITMSG28", "$QUITMSG29", "$QUITMSG30",
-                             "$QUITMSG31", "$QUITMSG32", "$QUITMSG33",
-                             "$QUITMSG34", "$QUITMSG35", "$QUITMSG36",
-                             "$QUITMSG37", "$QUITMSG38", "$QUITMSG39",
-                             "$QUITMSG40", "$QUITMSG41", "$QUITMSG42",
-                             "$QUITMSG43", "$QUITMSG44", "$QUITMSG45",
-                             "$QUITMSG46", "$QUITMSG47", "$QUITMSG48",
-                             "$QUITMSG49", "$QUITMSG50", "$QUITMSG51",
-                             "$QUITMSG52", "$QUITMSG53", "$QUITMSG54",
-                             "$QUITMSG55", "$QUITMSG56", "$QUITMSG57",
-                             "$QUITMSG58", "$QUITMSG59", "$QUITMSG60",
-                             "$QUITMSG61", "$QUITMSG62", "$QUITMSG63",
-                             "$QUITMSG64", "$QUITMSG65", "$QUITMSG66",
-                             "$QUITMSG67", "$QUITMSG68", "$QUITMSG69",
-                             "$QUITMSG71", "$QUITMSG72", "$QUITMSG73",
-                             "$QUITMSG74", "$QUITMSG75", "$QUITMSG76",
-                             "$QUITMSG77"
+   QuitMessages            = "$QUITMSG1",   "$QUITMSG2",  "$QUITMSG3",  "$QUITMSG4",  "$QUITMSG5",  "$QUITMSG6",  "$QUITMSG7",
+                             "$QUITMSG8",   "$QUITMSG9",  "$QUITMSG10", "$QUITMSG11", "$QUITMSG12", "$QUITMSG13", "$QUITMSG14",
+                             "$QUITMSG15",  "$QUITMSG16", "$QUITMSG17", "$QUITMSG18", "$QUITMSG19", "$QUITMSG20", "$QUITMSG21",
+                             "$QUITMSG22",  "$QUITMSG23", "$QUITMSG24", "$QUITMSG25", "$QUITMSG26", "$QUITMSG27", "$QUITMSG28",
+                             "$QUITMSG29",  "$QUITMSG30", "$QUITMSG31", "$QUITMSG32", "$QUITMSG33", "$QUITMSG34", "$QUITMSG35",
+                             "$QUITMSG36",  "$QUITMSG37", "$QUITMSG38", "$QUITMSG39", "$QUITMSG40", "$QUITMSG41", "$QUITMSG42",
+                             "$QUITMSG43",  "$QUITMSG44", "$QUITMSG45", "$QUITMSG46", "$QUITMSG47", "$QUITMSG48", "$QUITMSG49",
+                             "$QUITMSG50",  "$QUITMSG51", "$QUITMSG52", "$QUITMSG53", "$QUITMSG54", "$QUITMSG55", "$QUITMSG56",
+                             "$QUITMSG57",  "$QUITMSG58", "$QUITMSG59", "$QUITMSG60", "$QUITMSG61", "$QUITMSG62", "$QUITMSG63",
+                             "$QUITMSG64",  "$QUITMSG65", "$QUITMSG66", "$QUITMSG67", "$QUITMSG68", "$QUITMSG69", "$QUITMSG71",
+                             "$QUITMSG72",  "$QUITMSG73", "$QUITMSG74", "$QUITMSG75", "$QUITMSG76", "$QUITMSG77", "$QUITMSG78",
+                             "$QUITMSG79",  "$QUITMSG80", "$QUITMSG81", "$QUITMSG82", "$QUITMSG83", "$QUITMSG84", "$QUITMSG85",
+                             "$QUITMSG86",  "$QUITMSG87", "$QUITMSG88", "$QUITMSG89", "$QUITMSG90", "$QUITMSG91", "$QUITMSG92",
+                             "$QUITMSG93",  "$QUITMSG94", "$QUITMSG95", "$QUITMSG96", "$QUITMSG97", "$QUITMSG98", "$QUITMSG99",
+                             "$QUITMSG100", "$QUITMSG101"
 }
 
 // Automap Info --------------------------------------------------------------|
