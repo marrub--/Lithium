@@ -73,9 +73,9 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 
       if(m) {
          int level  = shadow ? m->level - ACS_Random(-5, 5) : m->level;
-         int nsplit = min(m->maxhealth / (fixed)shp, 7);
-         int split  = ceilk((chp / (fixed)m->maxhealth) * nsplit);
-         int splith = m->maxhealth / (fixed)nsplit;
+         int nsplit = min(m->maxhealth / (float)shp, 7);
+         int split  = ceilf((chp / (float)m->maxhealth) * nsplit);
+         int splith = m->maxhealth / (float)nsplit;
          UData.tagstr    = StrParam("%S lv.%i", UData.tagstr, level);
          UData.rank      = m->rank;
          UData.splitfrac = (chp - (splith * (split - 1))) / (fixed)splith;
