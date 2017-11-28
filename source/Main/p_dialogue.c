@@ -243,7 +243,7 @@ void Lith_TeleportOutEffect(player_t *p)
    DrawSpritePlain("lgfx/Terminal/TeleportOut.png", hid_teleportback, 160.0, 100.0, 1);
    ACS_SetCameraToTexture(p->tid, "LITHCAM3", 90);
    for(int j = 1; j <= 25; j++) {
-      fixed e = j / 25.f * 40;
+      fixed e = j / 25.f * 30;
       ACS_SetHudSize(320 * e, 240);
       DrawSpriteFade("LITHCAM3", hid_teleport, (int)(160 * e), 120, TICSECOND, 0.2);
       ACS_Delay(1);
@@ -345,9 +345,15 @@ void Lith_RunDialogue(int num)
          __with(__str sc = NextCodeStr; int a1 = NextCode, a2 = NextCode, a3 = NextCode, a4 = NextCode;)
             ACS_NamedExecuteWithResult(sc, a1, a2, a3, a4);
          DoNextCode;
-      Op(DCD_TRACE): Log("%S", NextCodeStr); DoNextCode;
-      Op(DCD_TELEPORT_INTRALEVEL): ACS_Teleport(0, NextCode, false); Done;
+      Op(DCD_TRACE):
+         Log("%S", NextCodeStr);
+         DoNextCode;
+      Op(DCD_TELEPORT_INTRALEVEL):
+         ACS_Delay(5);
+         ACS_Teleport(0, NextCode, false);
+         Done;
       Op(DCD_TELEPORT_INTERLEVEL):
+         ACS_Delay(5);
          Lith_TeleportOutEffect(p);
          ACS_Delay(34);
          ACS_Teleport_NewMap(NextCode, 0, 0);
