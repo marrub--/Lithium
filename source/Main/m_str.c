@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <GDCC.h>
 
 #define StrHashImpl() \
    unsigned ret = 0; \
@@ -57,6 +58,18 @@ char *Lith_strcpy_str(char *dest, char __str_ars const *src)
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
 {
    StrCmpImpl();
+}
+
+//
+// Lith_strdup_str
+//
+char *Lith_strdup_str(__str s)
+{
+   size_t len = ACS_StrLen(s);
+   char  *ret = malloc(len + 1);
+   ACS_StrArsCpyToGlobalCharRange((int)ret, __GDCC__Sta, 0, len, s);
+   ret[len] = '\0';
+   return ret;
 }
 
 //

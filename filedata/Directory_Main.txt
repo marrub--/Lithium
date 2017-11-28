@@ -39,6 +39,7 @@ parse file: Upgrades.txt
 in file language.info.dialogue.txt
 put file: Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
 put file: Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
+put file: Dialogue for M1A2.txt    -> LITH_DLG_SCRIPT_M1A2
 
 
 -- Misc -----------------------------------------------------------------------

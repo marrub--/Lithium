@@ -61,6 +61,7 @@ typedef struct dlgvmstate_s
    int guiaction;
    int numoptions;
    int seloption;
+   int concat;
 
    [[__anonymous]] dlgcurstate_t cur;
    dlgcurstate_t next;
@@ -78,18 +79,18 @@ dlgdef_t *lmvar dlgdefs;
 [[__call("ScriptS")]]
 static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 {
-   int const sizetx  = 640;
-   int const sizety  = 400;
-   int const sizex   = 480;
-   int const sizey   = 300;
-   int const right   = sizex;
-   int const bottom  = sizey*.75;
-   int const top     = sizey*.08;
-   int const middlex = right/2;
-   int const middley = bottom/2;
-   int const middleleftx = middlex/2;
-   int const topt    = sizety*.08;
-   int const leftt   = sizetx/2-32;
+   static int const sizetx      = 640;
+   static int const sizety      = 400;
+   static int const sizex       = 480;
+   static int const sizey       = 360;
+   static int const right       = sizex;
+   static int const bottom      = sizey*.75;
+   static int const top         = sizey*.08;
+   static int const middlex     = right/2;
+   static int const middley     = bottom/2;
+   static int const middleleftx = middlex/2;
+   static int const topt        = sizety*.08;
+   static int const leftt       = sizetx/2-32;
 
    __str remote = vmstate->strings[DSTR_REMOTE] ? vmstate->strings[DSTR_REMOTE] : "<unknown>@raddr.4E19";
 
@@ -97,8 +98,10 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    Lith_GUI_UpdateState(g, p);
 
    // Background
+   ACS_SetHudSize(480, 300, false);
    DrawSpritePlain("lgfx/Terminal/Back.png",   g->hid--, middlex, 0.1, TICSECOND);
    DrawSpritePlain("lgfx/Terminal/Border.png", g->hid--, middlex, 0.1, TICSECOND);
+   ACS_SetHudSize(g->w, g->h, false);
 
    // Top-left text
    HudMessageF("LTRMFONT", "SGXLine r4205");
@@ -176,6 +179,9 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 [[__call("ScriptS")]]
 static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 {
+   static int const left = 37;
+   static int const top  = 75;
+
    Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
@@ -185,9 +191,11 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    HudMessageF("LHUDFONT", "%S", vmstate->strings[DSTR_NAME]);
    HudMessagePlain(g->hid--, 30.1, 35.1, TICSECOND);
 
+   ACS_SetHudClipRect(left, top, 263, 157, 263);
    HudMessageF("CBIFONT", "\Cd> Remote: %S\n\Cd> Date: %S\n\n%S",
       vmstate->strings[DSTR_REMOTE], world.canontime, vmstate->text);
-   HudMessageParams(0, g->hid--, CR_WHITE, 37.1, 75.1, TICSECOND);
+   HudMessageParams(0, g->hid--, CR_WHITE, left+.1, top+.1, TICSECOND);
+   ACS_SetHudClipRect(0, 0, 0, 0);
 
    if(vmstate->numoptions)
    {
@@ -205,7 +213,42 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    Lith_GUI_End(g);
 }
 
+//
+// AddText
+//
+static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
+{
+   if(!vmstate->concat) {
+      if(local) return StrParam("%S%LS\n", vmstate->text, s);
+      else      return StrParam("%S%S\n",  vmstate->text, s);
+   } else if(s != "") {
+      if(local) return StrParam("%S%LS ", vmstate->text, s);
+      else      return StrParam("%S%S ",  vmstate->text, s);
+   } else {
+      return StrParam("%S\n\n", vmstate->text);
+   }
+}
+
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_TeleportOutEffect
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_TeleportOutEffect(player_t *p)
+{
+   if(!p) p = LocalPlayer;
+   ACS_AmbientSound("misc/teleout", 127);
+   ACS_SetHudSize(320, 200);
+   DrawSpritePlain("lgfx/Terminal/TeleportOut.png", hid_teleportback, 160.0, 100.0, 1);
+   ACS_SetCameraToTexture(p->tid, "LITHCAM3", 90);
+   for(int j = 1; j <= 25; j++) {
+      fixed e = j / 25.f * 40;
+      ACS_SetHudSize(320 * e, 240);
+      DrawSpriteFade("LITHCAM3", hid_teleport, (int)(160 * e), 120, TICSECOND, 0.2);
+      ACS_Delay(1);
+   }
+}
 
 //
 // Lith_RunDialogue
@@ -253,7 +296,7 @@ void Lith_RunDialogue(int num)
       gst.cy = 200 / 2;
    }
 
-   for(int *codeptr = def->code + def->pages[0];;)
+   for(int *codeptr = def->codeV + def->pages[0];;)
    {
       #ifndef Lith_NoDynamicGoto
       static __label *const cases[] = {
@@ -282,11 +325,11 @@ void Lith_RunDialogue(int num)
       Op(DCD_MOD): GenArith(%); DoNextCode;
       #undef GenArith
 
-      Op(DCD_JPAGE): codeptr = def->code + def->pages[NextCode]; DoCurCode;
-      Op(DCD_JMP):   codeptr = def->code +            NextCode;  DoCurCode;
+      Op(DCD_JPAGE): codeptr = def->codeV + def->pages[NextCode]; DoCurCode;
+      Op(DCD_JMP):   codeptr = def->codeV +            NextCode;  DoCurCode;
 
       #define GenJump(check) \
-         __with(void *jmpto = def->code + NextCode;) \
+         __with(void *jmpto = def->codeV + NextCode;) \
             if(check) {codeptr = jmpto; DoCurCode;} \
          DoNextCode
       Op(DCD_JNZ):     GenJump(vmstate.sptr[-1] != 0);
@@ -303,17 +346,31 @@ void Lith_RunDialogue(int num)
             ACS_NamedExecuteWithResult(sc, a1, a2, a3, a4);
          DoNextCode;
       Op(DCD_TRACE): Log("%S", NextCodeStr); DoNextCode;
-      Op(DCD_TELEPORT_INTRALEVEL): ACS_Teleport(0, NextCode, false);    DoNextCode;
-      Op(DCD_TELEPORT_INTERLEVEL): ACS_Teleport_NewMap(NextCode, 0, 0); DoNextCode;
+      Op(DCD_TELEPORT_INTRALEVEL): ACS_Teleport(0, NextCode, false); Done;
+      Op(DCD_TELEPORT_INTERLEVEL):
+         Lith_TeleportOutEffect(p);
+         ACS_Delay(34);
+         ACS_Teleport_NewMap(NextCode, 0, 0);
+         Done;
 
-      Op(DCD_SETSTRING): __with(int num = NextCode; __str str = NextCodeStr;) vmstate.strings[num] = str; DoNextCode;
-      Op(DCD_SETTEXT):      vmstate.text =                                   NextCodeStr;  DoNextCode;
-      Op(DCD_SETTEXTLOCAL): vmstate.text = StrParam("%LS",                   NextCodeStr); DoNextCode;
-      Op(DCD_ADDTEXT):      vmstate.text = StrParam("%S%S\n",  vmstate.text, NextCodeStr); DoNextCode;
-      Op(DCD_ADDTEXTLOCAL): vmstate.text = StrParam("%S%LS\n", vmstate.text, NextCodeStr); DoNextCode;
+      Op(DCD_SETSTRING):
+         __with(int num = NextCode; __str str = NextCodeStr;)
+            vmstate.strings[num] = str;
+         DoNextCode;
+      Op(DCD_SETTEXT):      vmstate.text =                   NextCodeStr;         DoNextCode;
+      Op(DCD_SETTEXTLOCAL): vmstate.text = StrParam("%LS",   NextCodeStr);        DoNextCode;
+      Op(DCD_ADDTEXT):      vmstate.text = AddText(&vmstate, NextCodeStr, false); DoNextCode;
+      Op(DCD_ADDTEXTLOCAL): vmstate.text = AddText(&vmstate, NextCodeStr, true);  DoNextCode;
+      Op(DCD_CONCAT):
+         vmstate.concat++;
+         DoNextCode;
+      Op(DCD_CONCATEND):
+         vmstate.text = StrParam("%S\n", vmstate.text);
+         vmstate.concat--;
+         DoNextCode;
 
       Op(DCD_PUTOPT):
-         __with(void *jmpto = def->code + NextCode;)
+         __with(void *jmpto = def->codeV + NextCode;)
          {
             dlgoption_t *option = vmstate.options + vmstate.numoptions++;
 
@@ -328,7 +385,7 @@ void Lith_RunDialogue(int num)
 
          p->frozen++;
          p->setVel(0, 0, 0, false, true);
-         HudMessageLog("%S", vmstate.text);
+         if(vmstate.text != "") HudMessageLog("%S", vmstate.text);
          do
          {
             Lith_DialogueGUI(&gst, p, &vmstate);
@@ -359,7 +416,7 @@ void Lith_RunDialogue(int num)
             bool usetimer = vmstate.trmtimer != 0;
             p->frozen++;
             p->setVel(0, 0, 0, false, true);
-            HudMessageLog("%S", vmstate.text);
+            if(vmstate.text != "") HudMessageLog("%S", vmstate.text);
             do
             {
                Lith_TerminalGUI(&gst, p, &vmstate);

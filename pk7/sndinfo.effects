@@ -12,6 +12,8 @@ misc/booom     lsounds/boom.flac          // ??????????????
 explosion      DSBAREXP                   // Whatever you have loaded :y
 misc/chat      lsounds/Chat.flac          // FEAR
 ghost/hit      lsounds/GhostHit.flac      // Touhou 13
+misc/teleout   lsounds/TeleportOut.flac   // 〃
+misc/telein    lsounds/TeleportIn.flac    // 〃
 
 intermission/tick      lsounds/Menu/InterTick.flac // Halo 3
 intermission/nextstage lsounds/Menu/InterNext.flac // Halo 3, Phantasy Star Online

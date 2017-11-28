@@ -36,7 +36,10 @@ enum
    hid_base_misc = hid_base + 41000,
    hid_end_misc  = hid_base + 41999,
 
-   hid_implyingE = hid_base_misc,
+   hid_teleport = hid_base_misc,
+   hid_teleportback,
+
+   hid_implyingE,
    hid_implyingS = hid_implyingE + 200,
 
    hid_blade,

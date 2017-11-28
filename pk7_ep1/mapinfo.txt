@@ -8,6 +8,11 @@ map M1A1 "Begin The Begin"
    ForceNoSkyStretch
 }
 
+map M1A2 "Facing Two Worlds"
+{
+   LevelNum = 18883002
+}
+
 // Episodes ------------------------------------------------------------------|
 
 episode M1A1

@@ -29,7 +29,8 @@
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar("__lith_debug_level") & (level)) Log(__VA_ARGS__); \
+   do if(ACS_GetCVar("__lith_debug_level") & (level)) \
+      Log(#level ": " __VA_ARGS__); \
    while(0)
 
 #define max(x, y) ((x) < (y) ? (y) : (x))
@@ -199,6 +200,7 @@ unsigned StrHash(char __str_ars const *s);
 unsigned CStrHash(char const *s);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
+char *Lith_strdup_str(__str s);
 __str Lith_ScoreSep(score_t num);
 __str Language(__str fmt, ...);
 __str LanguageNull(__str fmt, ...);

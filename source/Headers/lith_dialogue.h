@@ -35,6 +35,8 @@ DCD(SETTEXT)
 DCD(SETTEXTLOCAL)
 DCD(ADDTEXT)
 DCD(ADDTEXTLOCAL)
+DCD(CONCAT)
+DCD(CONCATEND)
 
 // Dialogue
 DCD(PUTOPT)
@@ -51,6 +53,7 @@ DCD(TRMWAIT)
 #define LITH_DIALOGUE_H
 
 #include "lith_world.h"
+#include "lith_darray.h"
 
 // Types ---------------------------------------------------------------------|
 
@@ -78,8 +81,8 @@ enum
 typedef struct dlgdef_s
 {
    int  num;
-   int *code;
    int  pages[48];
+   Vec_Decl(int, code);
 
    struct dlgdef_s *next;
 } dlgdef_t;

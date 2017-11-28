@@ -1,4 +1,5 @@
 cameratexture LITHCAM1 320 200
-cameratexture LITHCAM2 480 300
+cameratexture LITHCAM2 480 240
+cameratexture LITHCAM3 480 240
 
 texture DIVSIGI1 range DIVSIGI23 tics 1
