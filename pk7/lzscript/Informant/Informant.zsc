@@ -35,4 +35,6 @@ class Lith_InformantPlayer : Lith_Player
    }
 }
 
+#include "lzscript/Informant/Weapons/2_Flintlock.zsc"
+
 // EOF

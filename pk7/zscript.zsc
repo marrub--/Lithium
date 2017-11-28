@@ -7,16 +7,20 @@ version "2.5"
 #include "lzscript/Headers/lith_upgradenames.h"
 #include "lzscript/Headers/lith_scorenums.h"
 
+// Base classes
 #include "lzscript/Server.zsc"
 #include "lzscript/PauseManager.zsc"
 #include "lzscript/Events.zsc"
 
+// DeCompat files
 #include "lzscript/WeaponBase.zsc"
-
 #include "lzscript/PlayerPawn.zsc"
-#include "lzscript/Informant.zsc"
 
+// DECORATE Overrides
 #include "lzscript/DarkMatter.zsc"
+
+// Player Classes
+#include "lzscript/Informant/Informant.zsc"
 
 class Lith_GrafZone : Actor
 {
