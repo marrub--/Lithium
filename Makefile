@@ -25,16 +25,8 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL --sys-include $(LITHOS_INC)
+MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL
 MAIN_LFLAGS=-llithlib
-
-LITHOS_IR=$(IR)/lithos
-LITHOS_SRC=$(SRCDIR)/LithOS3/lithos_c/src
-LITHOS_INC=$(SRCDIR)/LithOS3/lithos_c/inc
-LITHOS_SOURCES=$(wildcard $(LITHOS_SRC)/*.c)
-LITHOS_HEADERS=$(wildcard $(LITHOS_INC)/*.h)
-LITHOS_OUTPUTS=$(LITHOS_SOURCES:$(LITHOS_SRC)/%.c=$(LITHOS_IR)/%.ir)
-LITHOS_CFLAGS=-i$(LITHOS_INC)
 
 DECOMPAT_INPUTS=$(wildcard $(SRCDIR)/DeCompat/*.dec) \
                 $(MAIN_INC)/lith_weapons.h \
@@ -60,25 +52,21 @@ text: compilefs.rb
 	@cd filedata; ../compilefs.rb Directory.txt
 
 clean:
-	@rm -f $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS) $(LIB_OUTPUTS)
+	@rm -f $(MAIN_OUTPUTS) $(LIB_OUTPUTS)
 
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)
 	@echo LD $@
 	@$(LD) $(LFLAGS) --alloc-min Sta "" $(LIB_STA) $^ -o $@
 
-$(MAIN_BINARY): $(MAIN_OUTPUTS) $(LITHOS_OUTPUTS)
+$(MAIN_BINARY): $(MAIN_OUTPUTS)
 	@echo LD $@
 	@$(LD) $(LFLAGS) $(MAIN_LFLAGS) --alloc-min Sta "" $(MAIN_STA) $^ -o $@
 
 ## .c -> .ir
-$(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS) $(LITHOS_HEADERS)
+$(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS)
 	@echo CC $<
 	@$(CC) $(CFLAGS) $(MAIN_CFLAGS) -DFileHash=$(shell ./strh.rb $<) -c $< -o $@
-
-$(LITHOS_IR)/%.ir: $(LITHOS_SRC)/%.c $(LITHOS_HEADERS)
-	@echo CC $<
-	@$(CC) $(CFLAGS) $(LITHOS_CFLAGS) -c $< -o $@
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@
