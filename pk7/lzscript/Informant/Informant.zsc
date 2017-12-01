@@ -21,7 +21,7 @@ class Lith_InformantPlayer : Lith_Player
    {
       if(m_dodgeDbc)
          m_dodgeDbc--;
-      else if(player.buttons & BT_SPEED)
+      else if(player && player.buttons & BT_SPEED)
       {
          let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
          let c = cos(a) * 32;
