@@ -8,6 +8,9 @@ parse file: Info_Enemies.txt
 in file language.info.places.en.txt
 parse file: Info_Places.txt
 
+in file: language.info.yourself.en.txt
+parse file: Info_Yourself.txt
+
 in file language.info.upgrades.en.txt
 parse file: Info_Upgrades.txt
 

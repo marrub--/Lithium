@@ -90,7 +90,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 // AddToBIP
 //
 [[__optional_args(1)]]
-static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer const *pinit)
+static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer const *pinit, bool isfree)
 {
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
    int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
@@ -107,8 +107,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
 
-   if(categ == BIPC_ENEMIES || categ == BIPC_EXTRA || pinit->isfree)
-      UnlockPage(bip, page, pclass);
+   if(isfree) UnlockPage(bip, page, pclass);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -125,14 +124,16 @@ void Lith_PlayerInitBIP(player_t *p)
    ForCategory()
       bip->infogr[categ].free(free);
 
-   int categ;
-   for(struct page_initializer const *page = bip_pages; page->category || page->pclass; page++)
+   __with(int categ; bool catfree = false;)
+      for(struct page_initializer const *page = bip_pages;
+         page->category || page->pclass; page++)
    {
       if(page->category) {
-         categ = page->category;
+         categ   = page->category;
+         catfree = page->isfree;
       } else {
          if(page->pclass & p->pclass)
-            AddToBIP(bip, categ, p->pclass, page);
+            AddToBIP(bip, categ, p->pclass, page, page->isfree || catfree);
          total++;
       }
    }

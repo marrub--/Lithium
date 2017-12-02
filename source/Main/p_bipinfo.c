@@ -59,7 +59,7 @@ struct page_initializer const bip_pages[] = {
    {pcl_cybermage, "StarShot", {"AOF"}},
    {pcl_cybermage, "Cercle",   {"Earth"}},
 
-   {.category = BIPC_ENEMIES},
+   {.category = BIPC_ENEMIES, .isfree = true},
    {pcl_any, "ZombieMan"},
    {pcl_any, "ShotgunGuy"},
    {pcl_any, "ChaingunGuy"},
@@ -84,6 +84,27 @@ struct page_initializer const bip_pages[] = {
 
    {pcl_any, "Phantom"},
    {pcl_any, "IconOfSin"},
+
+   {.category = BIPC_YOURSELF, .isfree = true},
+   {pcl_marine,    "P114"},
+   {pcl_cybermage, "OPD2"},
+
+   {pcl_any,       "BIP"},
+   {pcl_marine,    "CBI"},
+   {pcl_cybermage, "CBIJem"},
+
+   {pcl_any,                  "AttrACC"},
+   {pcl_any,                  "AttrDEF"},
+   {pcl_human,                "AttrSTRHuman"},
+   {pcl_robot,                "AttrSTRRobot"},
+   {pcl_nonhuman,             "AttrSTRNonHuman"},
+   {pcl_human,                "AttrVIT"},
+   {pcl_robot | pcl_nonhuman, "AttrPOT"},
+   {pcl_human,                "AttrSTM"},
+   {pcl_robot,                "AttrREP"},
+   {pcl_nonhuman,             "AttrREG"},
+   {pcl_any,                  "AttrLUK"},
+   {pcl_any,                  "AttrRGE"},
 
    {.category = BIPC_UPGRADES},
    {pcl_marine, "HeadsUpDisp", {"OFMD"}},
@@ -138,7 +159,7 @@ struct page_initializer const bip_pages[] = {
    {pcl_outcasts,  "Sym43",      {"AetosVi"}},
    {pcl_marine,    "UnrealArms", {"AetosVi"}},
 
-   {.category = BIPC_EXTRA},
+   {.category = BIPC_EXTRA, .isfree = true},
    {pcl_any, "Extra1"},
    {pcl_any, "Extra2"},
    {pcl_any, "Extra3"},

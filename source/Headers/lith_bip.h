@@ -1,13 +1,14 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #if defined(LITH_X)
-  LITH_X(WEAPONS,      "Weapons")
-  LITH_X(ENEMIES,      "Adversaries")
-// TODO: Add when things like the Division Sigil are in
-//LITH_X(ITEMS,        "Items")
-  LITH_X(UPGRADES,     "Upgrades")
-  LITH_X(PLACES,       "Places")
-  LITH_X(CORPORATIONS, "Companies")
-  LITH_X(MAIL,         "Mail")
+   LITH_X(WEAPONS,      "Weapons")
+   LITH_X(ENEMIES,      "Adversaries")
+   // TODO
+// LITH_X(ITEMS,        "Items")
+   LITH_X(YOURSELF,     "Yourself")
+   LITH_X(UPGRADES,     "Upgrades")
+   LITH_X(PLACES,       "Locations")
+   LITH_X(CORPORATIONS, "Companies")
+   LITH_X(MAIL,         "Mail")
 #undef LITH_X
 
 #elif !defined(LITH_BIP_H)
@@ -70,7 +71,7 @@ typedef struct bippage_s
 
 typedef struct bip_s
 {
-   __prop find       {call: Lith_FindBIPPage(this)}
+   __prop find       {call: Lith_FindBIPPage  (this)}
    __prop unlock     {call: Lith_UnlockBIPPage(this)}
    __prop deallocate {call: Lith_DeallocateBIP(this)}
 
@@ -79,18 +80,19 @@ typedef struct bip_s
    int categorymax[BIPC_MAX];
    int pageavail;
    int pagemax;
-   int mailreceived, mailtrulyreceived;
+   int mailreceived;
+   int mailtrulyreceived;
 
    // State
-   bool init;
+   bool       init;
    bippage_t *curpage;
-   int curpagenum;
-   int curcategory;
-   int lastcategory;
-   int scroll;
+   int        curpagenum;
+   int        curcategory;
+   int        lastcategory;
+   int        scroll;
    bippage_t *result[8];
-   int resnum;
-   int rescur;
+   int        resnum;
+   int        rescur;
 
    // Info
    list_t infogr[BIPC_MAX];
