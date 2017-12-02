@@ -484,7 +484,7 @@ static void MInit(void)
    Lith_LoadMapDialogue();
 
    world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
-   world.pauseinmenus = world.grafZoneEntered &&
+   world.pauseinmenus = world.singleplayer && world.grafZoneEntered &&
       ACS_GetCVar("lith_sv_pauseinmenus");
 
    // Init a random seed from the map.
