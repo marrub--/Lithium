@@ -193,7 +193,7 @@
    "It is distributed freely by the Software Sans Pretium Foundation, and the "
    "software is included in most C/B operating system bases."
    "\n\n"
-   "The latest version of the software is 2.5, and since version 2.0 has had "
+   "The latest version of the software is 2.5, and since version 2.0 it has had "
    "automatic update functionality.";
 "LITH_TXT_INFO_SHORT_CBI" = "C/B I";
 "LITH_TXT_INFO_TITLE_CBI" = "Computer/Brain Interface (C/B I)";

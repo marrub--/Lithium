@@ -121,6 +121,7 @@ static __str ThemeName(int num)
    case cbi_theme_grey:     return "Grey";
    case cbi_theme_bassilla: return "Bassilla";
    case cbi_theme_ghost:    return "Ghost";
+   case cbi_theme_winxp:    return "WinXP";
    default:                 return "Unknown";
    }
 }

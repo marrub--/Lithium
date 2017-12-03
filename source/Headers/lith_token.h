@@ -19,7 +19,6 @@ enum
    tok_string, // String           < " >  <characters> < " >
    tok_charac, // Character String < ' >  <characters> < ' >
    tok_quote,  // Quote            < “ >  <characters> < \n >
-   tok_quote,  // Quote            < “ >  <characters> < \n >
    tok_cmtlin, // Line comment     < // > <characters> < \n >
 
    // Single characters

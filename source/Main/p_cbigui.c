@@ -270,6 +270,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
       case cbi_theme_grey:     p->cbi.guistate.gfxprefix = "lgfx/UI_Grey/";     break;
       case cbi_theme_bassilla: p->cbi.guistate.gfxprefix = "lgfx/UI_Bassilla/"; break;
       case cbi_theme_ghost:    p->cbi.guistate.gfxprefix = "lgfx/UI_Ghost/";    break;
+      case cbi_theme_winxp:    p->cbi.guistate.gfxprefix = "lgfx/UI_WinXP/";    break;
       }
    }
 

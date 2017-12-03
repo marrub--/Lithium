@@ -27,6 +27,7 @@ enum
    cbi_theme_grey,
    cbi_theme_bassilla,
    cbi_theme_ghost,
+   cbi_theme_winxp,
    cbi_theme_max
 };
 
