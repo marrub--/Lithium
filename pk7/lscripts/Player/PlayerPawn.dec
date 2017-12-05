@@ -6,6 +6,7 @@ actor Lith_Player : DoomPlayer
    Player.SideMove 2, 1
    Player.ForwardMove 2, 1
    Player.AirCapacity 0
+   Player.GruntSpeed 16
    DamageFactor "Lith_PlayerMissile", 0
    Species "Lith_Player"
 
