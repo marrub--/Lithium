@@ -24,4 +24,3 @@ actor Lith_P67TeleFog : TeleportFog replaces TeleportFog
 }
 
 // EOF
-

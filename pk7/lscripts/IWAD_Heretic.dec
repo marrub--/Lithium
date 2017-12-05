@@ -1,0 +1,7 @@
+#include "lscripts/Heretic/Ammo.dec"
+#include "lscripts/Heretic/Enemies.dec"
+#include "lscripts/Heretic/Keys.dec"
+#include "lscripts/Heretic/Powerups.dec"
+#include "lscripts/Heretic/Weapons.dec"
+
+// EOF

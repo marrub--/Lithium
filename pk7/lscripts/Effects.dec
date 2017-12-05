@@ -1,0 +1,7 @@
+#include "lscripts/Effects/BulletPuff.dec"
+#include "lscripts/Effects/GunSmoke.dec"
+#include "lscripts/Effects/Magazine.dec"
+#include "lscripts/Effects/Rain.dec"
+#include "lscripts/Effects/TeleFog.dec"
+
+// EOF

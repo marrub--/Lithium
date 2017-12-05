@@ -1,9 +1,3 @@
-damagetype Lith_NoDamage
-{
-   Factor 0
-   ReplaceFactor
-}
-
 actor Lith_Dummy
 {
    +NOTIMEFREEZE
@@ -26,24 +20,6 @@ actor Lith_PlayerDummyPuff : Lith_Dummy
 }
 
 actor Lith_DummyArmor : BasicArmorBonus {}
-
-actor Lith_PlayerBox
-{
-   Radius 16
-   Height 56
-
-   +NOTIMEFREEZE
-   +NOGRAVITY
-   +NOBLOCKMAP
-   +NOCLIP
-
-   states
-   {
-   Spawn:
-      TNT1 A 1
-      stop
-   }
-}
 
 // Don't remove this, it is actually used for checking if this mod is loaded.
 actor Lith_GreyHam : HealthBonus

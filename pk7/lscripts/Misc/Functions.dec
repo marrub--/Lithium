@@ -1,0 +1,51 @@
+actor Lith_CustomFunction : CustomInventory
+{
+   +INVENTORY.ALWAYSPICKUP
+   +NOTIMEFREEZE
+}
+
+actor Lith_Alerter : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_AlertMonsters
+      stop
+   }
+}
+
+actor Lith_GetAngles : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_AddAngle", x, y)
+      stop
+   }
+}
+
+actor Lith_Death : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_JumpIfHealthLower(1000, 2)
+      TNT1 A 0 A_RailWait
+      stop
+      TNT1 A 0 A_Die
+      stop
+   }
+}
+
+actor Lith_Die : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_Die
+      stop
+   }
+}
+
+// EOF
+

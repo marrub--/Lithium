@@ -94,15 +94,5 @@ actor Lith_ItemSprite
    }
 }
 
-actor Lith_ItemSpriteM : Lith_ItemSprite
-{
-   VisibleToPlayerClass "Lith_MarinePlayer"
-}
-
-actor Lith_ItemSpriteC : Lith_ItemSprite
-{
-   VisibleToPlayerClass "Lith_CyberMagePlayer"
-}
-
 // EOF
 

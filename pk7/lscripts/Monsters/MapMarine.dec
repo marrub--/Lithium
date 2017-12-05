@@ -33,27 +33,5 @@ actor Lith_Map_Jacques : Lith_MapMarine
    Tag "Jacques"
 }
 
-
-actor Lith_Chair
-{
-   //$Category "Decoration"
-   
-   Height 32
-   Radius 20
-   Scale 0.7
-
-   States
-   {
-   Spawn:
-      CHAI A -1
-      Stop
-   }
-}
-
-actor Lith_BoomBarrel : ExplosiveBarrel
-{
-   DeathSound "misc/booom"
-}
-
 // EOF
 

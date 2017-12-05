@@ -45,4 +45,3 @@ actor Lith_BoughtItem : CustomInventory
 }
 
 // EOF
-

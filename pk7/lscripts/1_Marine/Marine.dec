@@ -1,0 +1,39 @@
+actor Lith_MarinePlayer : Lith_Player
+{
+   Player.StartItem "Lith_Pistol"
+   Player.StartItem "Lith_Fist"
+   Player.DisplayName "Marine"
+   Player.SoundClass "marine"
+   Player.Portrait "lgfx/Portraits/Marine.png"
+   Player.ViewHeight 48
+   Player.AttackZOffset 15
+   Tag "Marine"
+}
+
+actor Lith_RocketBooster : PowerFlight
+{
+   Powerup.Duration 60
+   -INVENTORY.HUBPOWER
+}
+
+actor Lith_ItemSpriteM : Lith_ItemSprite
+{
+   VisibleToPlayerClass "Lith_MarinePlayer"
+}
+
+#include "lscripts/1_Marine/FallDamage.dec"
+#include "lscripts/1_Marine/RArmor.dec"
+
+#include "lscripts/1_Marine/Weapons/1_Fist.dec"
+#include "lscripts/1_Marine/Weapons/2_Pistol.dec"
+#include "lscripts/1_Marine/Weapons/2_Revolver.dec"
+#include "lscripts/1_Marine/Weapons/3_Shotgun.dec"
+#include "lscripts/1_Marine/Weapons/3_LazShotgun.dec"
+#include "lscripts/1_Marine/Weapons/3_2_SuperShotgun.dec"
+#include "lscripts/1_Marine/Weapons/4_CombatRifle.dec"
+#include "lscripts/1_Marine/Weapons/4_SniperRifle.dec"
+#include "lscripts/1_Marine/Weapons/5_RocketLauncher.dec"
+#include "lscripts/1_Marine/Weapons/6_PlasmaRifle.dec"
+#include "lscripts/1_Marine/Weapons/7_OmegaCannon.dec"
+
+// EOF

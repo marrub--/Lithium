@@ -1,3 +1,14 @@
+actor Lith_UniqueID : Inventory
+{
+   Inventory.MaxAmount 0x7FFFFFFF
+   +INVENTORY.UNDROPPABLE
+}
+
+actor Lith_EnemyChecker : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
 actor Lith_MonsterID : Inventory
 {
    Inventory.MaxAmount 0x7FFFFFFF
@@ -115,58 +126,6 @@ actor Lith_MonsterBarrierLook : Lith_CustomFunction
    {
    Pickup:
       TNT1 A 0 A_RadiusGive("Lith_GetAngles", 384, RGF_PLAYERS|RGF_CUBE)
-      stop
-   }
-}
-
-actor Lith_MonsterSoulEffect
-{
-   RenderStyle "Add"
-   Scale 0.25
-   
-   +NOTIMEFREEZE
-   +NOINTERACTION
-   +BRIGHT
-   
-   states
-   {
-   Spawn:
-      BLLT N 0 A_SetScale(scalex * 0.9)
-      BLLT N 1 A_FadeOut
-      loop
-   }
-}
-
-actor Lith_MonsterSoul
-{
-   RenderStyle "Add"
-   Scale 0.25
-   Damage 7
-   Radius 4
-   Height 4
-   Speed 7
-   
-   Projectile
-   +FLOATBOB
-   +SEEKERMISSILE
-   +MTHRUSPECIES
-   +THRUSPECIES
-   +BRIGHT
-   
-   states
-   {
-   Spawn:
-      BLLT N 0
-      BLLT N 0 A_PlaySound("ghost/spawn", CHAN_5, 1, false, 0.5)
-      BLLT N 0 ThrustThingZ(0, 4, 0, 0)
-   SpawnLoop:
-      BLLT N 0 A_SpawnItemEx("Lith_MonsterSoulEffect")
-      BLLT N 0 A_SeekerMissile(0, 360, SMF_LOOK|SMF_PRECISE, 256, 1)
-      BLLT N 1 A_FadeOut(0.05)
-      loop
-   Death:
-      BLLT N 0 A_PlaySound("ghost/hit", CHAN_5, 1, false, 0.5)
-      TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("Lith_MonsterSoulEffect", 0,0,0, frandom(-2,2),frandom(-2,2),frandom(-2,2))
       stop
    }
 }

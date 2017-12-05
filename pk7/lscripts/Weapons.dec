@@ -1,0 +1,11 @@
+#include "lscripts/Weapons/Base.dec"
+#include "lscripts/Weapons/Misc.dec"
+#include "lscripts/Weapons/Pickups.dec"
+#include "lscripts/Weapons/Sword.dec"
+#include "lscripts/Weapons/Wings.dec"
+
+#include "lscripts/Weapons/Outcasts/1_ChargeFist.dec"
+#include "lscripts/Weapons/Outcasts/5_MissileLauncher.dec"
+#include "lscripts/Weapons/Outcasts/6_PlasmaDiffuser.dec"
+
+// EOF

@@ -109,9 +109,6 @@ actor Lith_BlueArmor : Lith_CustomInventory replaces BlueArmor
    }
 }
 
-#include "lscripts/Items/BlurSphere.dec"
-#include "lscripts/Items/SteggleSphere.dec"
-
 actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
 {
    Tag "Barrier"

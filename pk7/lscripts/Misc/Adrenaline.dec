@@ -31,4 +31,3 @@ actor Lith_AdrenalineProjectileChecker : Lith_CustomFunction
 }
 
 // EOF
-
