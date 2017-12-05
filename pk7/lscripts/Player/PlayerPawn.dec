@@ -12,6 +12,7 @@ actor Lith_Player : DoomPlayer
 
    +THRUSPECIES
 
+
    states
    {
    Pain:

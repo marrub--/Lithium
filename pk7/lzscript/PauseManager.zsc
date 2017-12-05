@@ -15,9 +15,9 @@ class Lith_PauseManager play
          if(on) {
             pl.mo.viewbob = 0;
          } else {
-            pl.mo.viewbob = 1;
-            if(pl.psprites)
-               pl.psprites.tics = pl.psprites.curState.tics;
+            let mo = Lith_Player(pl.mo);
+            pl.mo.viewbob = mo ? mo.lith_vbob : 0;
+            if(pl.psprites) pl.psprites.tics = pl.psprites.curState.tics;
          }
       }
    }

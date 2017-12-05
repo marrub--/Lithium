@@ -30,6 +30,8 @@ def tozsc fp, out
       elsif ln.include? "<EndStates>"
          instates = false
          out.write "   }\n"
+      elsif ln.include? "<ZScript>" or ln.include? "<EndZScript>"
+         next
       else
          if indefault && !ln.empty?
             out.write "   " + ln + ";\n"
@@ -45,6 +47,8 @@ end
 def todec fp, out
    writehead out
 
+   inzsc = false
+
    for ln in fp
       ln = ln.chomp.sub(/<Actor>/, "actor")
                    .sub(/<Const>/, "const int")
@@ -54,7 +58,11 @@ def todec fp, out
          out.write "   states\n   {\n"
       elsif ln.include? "<EndStates>"
          out.write "   }\n"
-      else
+      elsif ln.include? "<ZScript>"
+         inzsc = true
+      elsif ln.include? "<EndZScript>"
+         inzsc = false
+      elsif not inzsc
          out.write ln + "\n"
       end
    end

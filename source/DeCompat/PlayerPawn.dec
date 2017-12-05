@@ -14,6 +14,17 @@
    +THRUSPECIES
    <EndDefault>
 
+   <ZScript>
+   float lith_vbob;
+   property ViewBob: lith_vbob;
+
+   override void BeginPlay()
+   {
+      super.BeginPlay();
+      viewbob = lith_vbob;
+   }
+   <EndZScript>
+
    <States>
    Pain:
    Pain.Bullet:

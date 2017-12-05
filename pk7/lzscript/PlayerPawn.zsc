@@ -15,6 +15,15 @@ class Lith_Player : DoomPlayer
       +THRUSPECIES;
    }
 
+   float lith_vbob;
+   property ViewBob: lith_vbob;
+
+   override void BeginPlay()
+   {
+      super.BeginPlay();
+      viewbob = lith_vbob;
+   }
+
    states
    {
    Pain:

@@ -16,10 +16,12 @@ actor Lith_Weapon : Weapon
    // These flags are used for spawning pickup actors.
    // UDMF maps have a surprising amount of control over things, so we have
    // to use a load of flags to make this work properly.
-   const int Lith_PF = SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG |
-      SXF_TRANSFERPITCH | SXF_TRANSFERPOINTERS | SXF_TRANSFERSCALE |
-      SXF_TRANSFERSPECIAL | SXF_TRANSFERSTENCILCOL | SXF_TRANSFERALPHA |
+   const int Lith_PF =
+      SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
+      SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
+      SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
+
 
    states
    {
