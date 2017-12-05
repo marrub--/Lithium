@@ -15,12 +15,13 @@ version "2.5"
 // DeCompat files
 #include "lzscript/WeaponBase.zsc"
 #include "lzscript/PlayerPawn.zsc"
+#include "lzscript/ItemSprite.zsc"
 
 // DECORATE Overrides
 #include "lzscript/DarkMatter.zsc"
 
 // Player Classes
-#include "lzscript/Informant/Informant.zsc"
+#include "lzscript/3_Informant/Informant.zsc"
 
 class Lith_GrafZone : Actor
 {

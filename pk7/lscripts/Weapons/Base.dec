@@ -72,3 +72,9 @@ actor Lith_Weapon : Weapon
    }
 }
 
+actor Lith_WeaponScopedToken : Inventory
+{
+   Inventory.MaxAmount 1
+}
+
+// EOF

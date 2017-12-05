@@ -22,6 +22,11 @@ actor Lith_ItemSpriteC : Lith_ItemSprite
    VisibleToPlayerClass "Lith_CyberMagePlayer"
 }
 
+actor Lith_CWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_CyberMagePlayer"
+}
+
 #include "lscripts/2_CyberMage/ManaLeak.dec"
 
 #include "lscripts/2_CyberMage/Weapons/1_CFist.dec"

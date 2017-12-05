@@ -21,6 +21,11 @@ actor Lith_ItemSpriteM : Lith_ItemSprite
    VisibleToPlayerClass "Lith_MarinePlayer"
 }
 
+actor Lith_MWeapon : Lith_Weapon
+{
+   Inventory.RestrictedTo "Lith_MarinePlayer"
+}
+
 #include "lscripts/1_Marine/FallDamage.dec"
 #include "lscripts/1_Marine/RArmor.dec"
 

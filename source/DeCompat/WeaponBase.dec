@@ -73,3 +73,11 @@
    <EndStates>
 }
 
+<Actor> Lith_WeaponScopedToken : Inventory
+{
+   <Default>
+   Inventory.MaxAmount 1
+   <EndDefault>
+}
+
+// EOF

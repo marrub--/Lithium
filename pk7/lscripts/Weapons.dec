@@ -1,5 +1,4 @@
 #include "lscripts/Weapons/Base.dec"
-#include "lscripts/Weapons/Misc.dec"
 #include "lscripts/Weapons/Pickups.dec"
 #include "lscripts/Weapons/Sword.dec"
 #include "lscripts/Weapons/Wings.dec"

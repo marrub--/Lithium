@@ -14,7 +14,10 @@ def tozsc fp, out
    instates  = false
 
    for ln in fp
-      ln = ln.chomp.sub(/<Actor>/, "class").sub(/<Const>/, "const").sub(/enum \/\/ /, "enum ")
+      ln = ln.chomp.sub(/<Actor>/, "class")
+                   .sub(/<Const>/, "const")
+                   .sub(/<Var>/,   "")
+                   .sub(/enum \/\/ /, "enum ")
       if ln.include? "<Default>"
          indefault = true
          out.write "   default\n   {\n"
@@ -43,7 +46,9 @@ def todec fp, out
    writehead out
 
    for ln in fp
-      ln = ln.chomp.sub(/<Actor>/, "actor").sub(/<Const>/, "const int")
+      ln = ln.chomp.sub(/<Actor>/, "actor")
+                   .sub(/<Const>/, "const int")
+                   .sub(/<Var>/,   "var")
       if ln.include? "<Default>" or ln.include? "<EndDefault>" then next
       elsif ln.include? "<States>"
          out.write "   states\n   {\n"

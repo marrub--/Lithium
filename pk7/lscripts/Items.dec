@@ -1,4 +1,5 @@
 #include "lscripts/Items/PickupEffects.dec"
+#include "lscripts/Items/ItemSprite.dec"
 #include "lscripts/Items/Ammo.dec"
 #include "lscripts/Items/Score.dec"
 #include "lscripts/Items/AmmoPickups.dec"

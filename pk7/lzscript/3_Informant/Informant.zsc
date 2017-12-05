@@ -15,9 +15,11 @@ class Lith_InformantPlayer : Lith_Player
       Player.AttackZOffset 11;
       Player.JumpZ 14;
       Tag "Informant";
+
+      +NOBLOOD;
    }
 
-   override void Tick()
+   private void Lith_InformantThink()
    {
       if(m_dodgeDbc)
          m_dodgeDbc--;
@@ -27,14 +29,46 @@ class Lith_InformantPlayer : Lith_Player
          let c = cos(a) * 32;
          let s = sin(a) * 32;
          CallACS("Lith_DodgeView");
+         A_GiveInventory("Lith_InvulnStep", 1);
          A_ChangeVelocity(c, s);
          m_dodgeDbc = Lith_DodgeTime;
       }
+   }
+
+   override void Tick()
+   {
+      if(health > 0)
+         Lith_InformantThink();
 
       super.Tick();
    }
 }
 
-#include "lzscript/Informant/Weapons/2_Flintlock.zsc"
+// TODO: make this not break invuln spheres
+class Lith_InvulnStep : PowerInvulnerable
+{
+   default
+   {
+      Powerup.Duration 10;
+   }
+}
+
+class Lith_ItemSpriteI : Lith_ItemSprite
+{
+   default
+   {
+      VisibleToPlayerClass "Lith_InformantPlayer";
+   }
+}
+
+class Lith_IWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_InformantPlayer";
+   }
+}
+
+#include "lzscript/3_Informant/Weapons/2_Flintlock.zsc"
 
 // EOF
