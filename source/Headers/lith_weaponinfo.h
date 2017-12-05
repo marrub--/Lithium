@@ -13,6 +13,10 @@ enum
    AT_None = 0,
    AT_NMag = 1 << 0,
    AT_Ammo = 1 << 1,
+   AT_ZScr = 1 << 2,
+   AT_ZMag = AT_NMag | AT_ZScr,
+   AT_ZAMg = AT_ZMag | AT_Ammo,
+   AT_ZAmm = AT_Ammo | AT_ZScr,
    AT_AMag = AT_NMag | AT_Ammo,
 };
 
@@ -43,6 +47,10 @@ typedef struct invweapon_s
    int ammotype;
    __str ammoclass;
    __str magclass;
+   int magmax;
+   int magcur;
+   int ammomax;
+   int ammocur;
    int magictake; // bullshit hack
 } invweapon_t;
 

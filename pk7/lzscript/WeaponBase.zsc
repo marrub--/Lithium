@@ -19,10 +19,37 @@ class Lith_Weapon : Weapon
    // These flags are used for spawning pickup actors.
    // UDMF maps have a surprising amount of control over things, so we have
    // to use a load of flags to make this work properly.
-   const Lith_PF = SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG |
-      SXF_TRANSFERPITCH | SXF_TRANSFERPOINTERS | SXF_TRANSFERSCALE |
-      SXF_TRANSFERSPECIAL | SXF_TRANSFERSTENCILCOL | SXF_TRANSFERALPHA |
+   const Lith_PF =
+      SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
+      SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
+      SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
+
+   int lith_fired;
+   int lith_max;
+   property MagSize: lith_max;
+
+   action(weapon) state Lith_JumpIfMagEmpty(statelabel sn)
+   {
+      return invoker.lith_fired >= invoker.lith_max ? ResolveState(sn) : null;
+   }
+
+   action(weapon) state Lith_JumpIfMagFull(statelabel sn = "Ready")
+   {
+      return invoker.lith_fired ? null : ResolveState(sn);
+   }
+
+   action(weapon) void Lith_MagIncr(int amt = 1)
+   {
+      invoker.lith_fired += amt;
+      if(invoker.lith_fired > invoker.lith_max)
+         invoker.lith_fired = invoker.lith_max;
+   }
+
+   action(weapon) void Lith_ReloadFinish()
+   {
+      invoker.lith_fired = 0;
+   }
 
    states
    {

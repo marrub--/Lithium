@@ -43,6 +43,9 @@ enum Lith_WeaponNum
    weapon_c_starshot,
    weapon_c_cercle,
 
+   // Dark Lord Weapons
+   weapon_d_700e,
+
    // Misc. Weapons
    weapon_wings,
 

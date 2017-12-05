@@ -40,7 +40,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {1, pcl_cybermage, N("CFist"),         "YOUSONOFABITCH", AT_None,                           },
    {2, pcl_cybermage, N("Mateba"),        P("mateba"),      AT_NMag, M("Mateba")               },
    {3, pcl_cybermage, N("ShockRifle"),    P("erifle"),      AT_NMag, M("ShockRifle")           },
-   {3, pcl_cybermage, N("SPAS"),          P("cshotgun"),    AT_AMag, A("Shell"), M("SPAS")     },
+   {3, pcl_cybermage, N("SPAS"),          P("cshotgun"),    AT_AMag, A("Shell"),  M("SPAS")    },
    {4, pcl_cybermage, N("SMG"),           P("smg"),         AT_NMag, M("SMG")                  },
    {5, pcl_cybermage, N("IonRifle"),      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
    {6, pcl_cybermage, N("CPlasmaRifle"),  P("plasma"),      AT_Ammo, A("Plasma")               },
@@ -53,6 +53,9 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_cybermage, N("Hulgyon"),  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
    {0, pcl_cybermage, N("StarShot"), "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
    {0, pcl_cybermage, N("Cercle"),   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
+
+   // Dark Lord Weapons
+   {2, pcl_darklord, N("700Express"), "YOUSONOFABITCH", AT_ZMag},
 
    // Misc. Weapons
    {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},
@@ -269,11 +272,16 @@ void Lith_PlayerPreWeapons(player_t *p)
 
       w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->classname));
 
+      // Check for currently held weapon.
+      if(!w->cur && p->weaponclass == info->classname)
+         w->cur = wep;
+
       wep->info      = info;
       wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
-      wep->magclass  = info->defmagclass;
+      if(!(wep->ammotype & AT_ZScr))
+         wep->magclass = info->defmagclass;
 
       switch(i)
       {
@@ -297,9 +305,24 @@ void Lith_PlayerPreWeapons(player_t *p)
       if(wep->ammotype & AT_NMag && !(wep->ammotype & AT_Ammo))
          wep->magclass = wep->ammoclass;
 
-      // Check for currently held weapon.
-      if(!w->cur && ACS_StrICmp(p->weaponclass, info->classname) == 0)
-         w->cur = wep;
+      // Set magazine and ammo counts.
+      if(w->cur == wep)
+      {
+         if(wep->ammotype & AT_NMag) {
+            if(wep->ammotype & AT_ZScr) {
+               wep->magmax = ACS_ScriptCall("Lith_Server", "GetMaxAmmo", p->num, wep->info->classname);
+               wep->magcur = ACS_ScriptCall("Lith_Server", "GetCurAmmo", p->num, wep->info->classname);
+            } else {
+               wep->magmax = ACS_GetMaxInventory(0, wep->magclass);
+               wep->magcur = ACS_CheckInventory (   wep->magclass);
+            }
+         }
+
+         if(wep->ammotype & AT_Ammo) {
+            wep->ammomax = ACS_GetMaxInventory(0, wep->ammoclass);
+            wep->ammocur = ACS_CheckInventory (   wep->ammoclass);
+         }
+      }
 
       // Remove inactive magic weapons.
       else if(info->flags & wf_magic && wep->owned && ++wep->magictake > 20) {
@@ -311,7 +334,7 @@ void Lith_PlayerPreWeapons(player_t *p)
       if(p->getUpgrActive(UPGR_AutoReload) &&
          wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
-         if(wep->autoreload >= 35 * 5)
+         if(wep->autoreload >= 35 * 5 && !(wep->ammotype & AT_ZScr))
             ACS_TakeInventory(wep->magclass, 999);
 
          if(w->cur != wep) wep->autoreload++;
@@ -347,8 +370,8 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
    player_t *p = LocalPlayer;
    if(NoPlayer(p)) return 0;
-   __str cl  = p->weapon.cur->magclass;
-   fixed inv = ACS_CheckInventory(cl) / (fixed)ACS_GetMaxInventory(0, cl);
+   invweapon_t const *wep = p->weapon.cur;
+   fixed inv = wep->magcur / (fixed)wep->magmax;
    mul = mul ? mul : 1.2;
    if(ro) inv = inv * mul;
    else   inv = mul - inv * 0.35;

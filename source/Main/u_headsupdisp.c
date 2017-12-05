@@ -37,8 +37,7 @@ static void HUD_Weapons(player_t *p)
 //
 static void HUD_Ammo(player_t *p)
 {
-   invweapon_t  const *wep  = p->weapon.cur;
-   weaponinfo_t const *info = wep->info;
+   invweapon_t const *wep = p->weapon.cur;
 
    __str typegfx = null;
    __str typebg;
@@ -53,13 +52,9 @@ static void HUD_Ammo(player_t *p)
       y = 0;
    }
 
-   if(wep->ammotype & AT_NMag)
-   {
-      int max = ACS_GetMaxInventory(0, wep->magclass);
-      int cur = ACS_CheckInventory(wep->magclass);
-
+   if(wep->ammotype & AT_NMag) {
       typegfx = "lgfx/HUD/MAG.png";
-      HudMessageF("LHUDFONT", "%i/%i", max - cur, max);
+      HudMessageF("LHUDFONT", "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       HudMessagePlain(hid_ammo1, 224.1, 229.0-y, TICSECOND);
    }
 
@@ -73,7 +68,7 @@ static void HUD_Ammo(player_t *p)
       }
 
       typegfx = "lgfx/HUD/AMMO.png";
-      HudMessageF("LHUDFONT", "%i", ACS_CheckInventory(wep->ammoclass));
+      HudMessageF("LHUDFONT", "%i", wep->ammocur);
       HudMessagePlain(hid_ammo2, x+224.1, 229.0-y, TICSECOND);
    }
 
