@@ -12,7 +12,7 @@ ______________________________________________________________________________
 
 - Sound credits are all in the "sndinfo" files in comments.
 
-See licenses/copylib.txt for license information on libc, as included in
+See licenses/copylib.txt for license information on GDCC libc, as included in
 linked binary form in <acs/lithlib.bin>.
 
 Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.
@@ -20,6 +20,12 @@ Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.
 Source code for Lithium can be found at <https://github.com/marrub--/Lithium>.
 
 --- Credits
+
+505
+   Title music (hYmns - Shredder)
+
+a1337spy
+   Sounds for stuff
 
 Anthony Cole
    Test map marine sprites
@@ -30,25 +36,33 @@ abbuw
 DavidPH
    Glorious, glorious GDCC
    Lots of help with a lot of things
+   Cool guy
+
+GAA1992
+    Gauss Shotgun idle sprite
+
+Green Den
+   Test map music (Dandalins Story)
 
 HorrorMovieGuy
    SteggleSphere sprites
 
 JetPlane
    Image used as a base for the SMG sprite
+   Cool guy
 
 Jimmy
-   Fonts! All of them, except the SMALLFNT, alien font and HUD font.
+   Fonts! All of them, except the SMALLFNT, alien font and HUD font
    Added some missing characters to the CBIFONT for me (which he also made)
-   Really, like, this guy is kind of crazy great.
-   Made the MENUDEFs for me (which I edited.)
+   Really, like, this guy is kind of crazy great
+   Made the base MENUDEFs for me
 
 Kate
    Some specific, old code is based off of Error: Doom code
    (This was originally a mod of Error: Doom, which is an awesome mod!)
    Blank sphere used as a base for the the Blursphere
    Prettied up the rain effects
-   Intermission text
+   Intermission text and background
 
 Kyle873
    Said a nice thing
@@ -57,11 +71,8 @@ Kyle873
    Fallout 4 sound rip
    Phantasy Star Nova sound rip
 
-Marrub
-   did things
-   
-   More seriously, most of the content in this mod is self-made.
-   Most things not credited here are probably made by me.
+Marrub (me)
+   Almost everything not mentioned here
 
 MarlboroMike
    Score item sprites
@@ -70,6 +81,7 @@ MarlboroMike
 
 Marty Kirra
    Many advice
+   Cool guy
 
 Minigunner
    Smooth explosion sprites
@@ -95,8 +107,11 @@ Sgt. Shivers
 Shadowlink226
    Halo 3 sound rip
 
+Skaven
+   Intermission music (The Alchemist)
+
 TerminusEst13
-   SHKRA0/B0 and a lot of sound sources
+   SHKRA0/B0 and a shitload of sound sources
    Help with finding some sprites to work with
 
 vikingbro
@@ -107,14 +122,17 @@ VriskaSerket
 
 Wartorn
    Help with HUD design
+   Cool guy
 
 WildWeasel
    Help with making fonts, suggestions for HUD
    Sleeves for Cyber-Mage
+   Cool guy
 
 Xaser Acheron
    Bullet puffs
    Probably some other stuff I took from Psychic
+   Help with code stuff
 
 Yholl
    Effects from LegenDoom
@@ -130,6 +148,7 @@ Yholl
 
 Zombie
    Image used as a base for the SPAS sprite
+   Lots of help with ZScript
 
 zrrion the insect
    Full sprites for the Grenade Launcher, Pistol and Plasma Rifle
@@ -165,16 +184,11 @@ Super Shotgun sprites
    Captain J
    Turbo
 
-Gauss Shotgun ready sprite
-   GAA1992 - Shotgun edit
-
 Ion Rifle sprites
    monkeybtm6 - Weapon rip from Disruptor
    torridGristle - Assault rifle sprite
+   Marrub - Redraw
 
 Bassilla GUI theme
    Kurashiki - Bassilla art
-   Sgt. Shivers - Putting everything together
-
-Title screen music
-   505 - Shredder (hYmns)
+   Sgt. Shivers - Everything else
