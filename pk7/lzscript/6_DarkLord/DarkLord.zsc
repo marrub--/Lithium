@@ -1,0 +1,48 @@
+class Lith_DarkLordPlayer : Lith_Player
+{
+   default
+   {
+      Lith_Player.ViewBob 0.4;
+      Player.StartItem "Lith_700Express";
+      Player.DisplayName "Dark Lord";
+      Player.SoundClass "darklord";
+      Player.Portrait "lgfx/Portraits/DarkLord.png";
+      Player.ViewHeight 50;
+      Player.AttackZOffset 17;
+      Player.MaxHealth 125;
+      Health 125;
+      DamageFactor 0.777;
+      Tag "DarkLord";
+   }
+}
+
+class Lith_ItemSpriteD : Lith_ItemSprite
+{
+   default
+   {
+      VisibleToPlayerClass "Lith_DarkLordPlayer";
+   }
+}
+
+class Lith_DWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_DarkLordPlayer";
+   }
+}
+
+class Lith_FatMac : Lith_DWeapon
+{
+   default
+   {
+      Tag "$LITH_TXT_INFO_SHORT_FatMac";
+      Weapon.SlotNumber 5;
+      Weapon.SlotPriority 1;
+   }
+}
+
+#include "lzscript/6_DarkLord/Weapons/2_700Express.zsc"
+#include "lzscript/6_DarkLord/Weapons/4_Minigun.zsc"
+
+// EOF

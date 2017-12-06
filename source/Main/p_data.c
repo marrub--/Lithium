@@ -261,12 +261,13 @@ void Lith_ResetPlayer(player_t *p)
       SetupAttributes(p);
 
       // i cri tears of pain for APROP_SpawnHealth
-      p->viewheight  = ACS_GetActorViewHeight(0);
-      p->jumpheight  = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-      p->spawnhealth = ACS_GetActorProperty(0, APROP_Health);
-      p->maxhealth   = p->spawnhealth;
-      p->discount    = 1.0;
-      p->stepnoise   = StrParam("player/%S/step", p->classname);
+      p->viewheight   = ACS_GetActorViewHeight(0);
+      p->jumpheight   = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
+      p->spawnhealth  = ACS_GetActorProperty(0, APROP_Health);
+      p->spawndfactor = ACS_GetActorPropertyFixed(0, APROP_DamageFactor);
+      p->maxhealth    = p->spawnhealth;
+      p->discount     = 1.0;
+      p->stepnoise    = StrParam("player/%S/step", p->classname);
    }
 
    //

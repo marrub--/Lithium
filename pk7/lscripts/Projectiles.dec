@@ -4,6 +4,7 @@
 #include "lscripts/Projectiles/PoisonBullet.dec"
 #include "lscripts/Projectiles/RifleBullet.dec"
 #include "lscripts/Projectiles/SniperBullet.dec"
+#include "lscripts/Projectiles/700Bullet.dec"
 #include "lscripts/Projectiles/MiniMissile.dec"
 #include "lscripts/Projectiles/Rocket.dec"
 #include "lscripts/Projectiles/HomingRocket.dec"

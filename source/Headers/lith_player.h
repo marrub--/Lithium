@@ -267,6 +267,7 @@ typedef struct player
    // Static data
    bool  staticinit;
    int   spawnhealth;
+   fixed spawndfactor;
    fixed jumpheight;
    fixed viewheight;
    __str stepnoise;

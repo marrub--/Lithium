@@ -473,7 +473,7 @@ static void Lith_PlayerUpdateAttributes(player_t *p)
 
    p->maxhealth = p->spawnhealth + str;
    ACS_SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
-   ACS_SetActorPropertyFixed(0, APROP_DamageFactor,     1.0 - def);
+   ACS_SetActorPropertyFixed(0, APROP_DamageFactor,     p->spawndfactor - def);
    ACS_SetActorProperty     (0, APROP_SpawnHealth, p->maxhealth);
 
    if(p->health < stm+1 && (!stmt || p->ticks % stmt == 0))

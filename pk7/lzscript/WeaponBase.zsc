@@ -29,7 +29,7 @@ class Lith_Weapon : Weapon
    int lith_max;
    property MagSize: lith_max;
 
-   action(weapon) state Lith_JumpIfMagEmpty(statelabel sn)
+   action(weapon) state Lith_JumpIfMagEmpty(statelabel sn = "Reload")
    {
       return invoker.lith_fired >= invoker.lith_max ? ResolveState(sn) : null;
    }

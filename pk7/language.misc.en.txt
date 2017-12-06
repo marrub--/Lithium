@@ -58,7 +58,7 @@
    "The English language diversified in the past\n"
    "thousand years, splitting into dozens of dialects.\n"
    "The most common are Eastern and Northwest English.";
-"QUITMSG22" = "The Ensurer watches over us.";
+"QUITMSG22" = "The Ensurer watches over all.";
 "QUITMSG23" =
    "The Star Destroyer's hum is a product of the\n"
    "energy buffer on its top channeling sound\n"
