@@ -23,6 +23,10 @@
       super.BeginPlay();
       viewbob = lith_vbob;
    }
+
+   <Default>
+   Lith_Player.ViewBob 1
+   <EndDefault>
    <EndZScript>
 
    <States>

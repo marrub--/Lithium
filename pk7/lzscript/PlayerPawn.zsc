@@ -24,6 +24,11 @@ class Lith_Player : DoomPlayer
       viewbob = lith_vbob;
    }
 
+   default
+   {
+      Lith_Player.ViewBob 1;
+   }
+
    states
    {
    Pain:

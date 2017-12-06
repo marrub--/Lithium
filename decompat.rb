@@ -53,17 +53,21 @@ def todec fp, out
       ln = ln.chomp.sub(/<Actor>/, "actor")
                    .sub(/<Const>/, "const int")
                    .sub(/<Var>/,   "var")
-      if ln.include? "<Default>" or ln.include? "<EndDefault>" then next
-      elsif ln.include? "<States>"
-         out.write "   states\n   {\n"
-      elsif ln.include? "<EndStates>"
-         out.write "   }\n"
-      elsif ln.include? "<ZScript>"
+
+      if ln.include? "<ZScript>"
          inzsc = true
       elsif ln.include? "<EndZScript>"
          inzsc = false
       elsif not inzsc
-         out.write ln + "\n"
+         if ln.include? "<Default>" or ln.include? "<EndDefault>"
+            next
+         elsif ln.include? "<States>"
+            out.write "   states\n   {\n"
+         elsif ln.include? "<EndStates>"
+            out.write "   }\n"
+         else
+            out.write ln + "\n"
+         end
       end
    end
 end
