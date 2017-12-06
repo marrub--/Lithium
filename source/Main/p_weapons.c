@@ -56,6 +56,8 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
    // Dark Lord Weapons
    {2, pcl_darklord, N("700Express"), "YOUSONOFABITCH", AT_ZMag},
+   {4, pcl_darklord, N("Minigun"),    "YOUSONOFABITCH", AT_ZMag},
+   {5, pcl_darklord, N("FatMac"),     "YOUSONOFABITCH", AT_Ammo, A("Rocket")},
 
    // Misc. Weapons
    {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},

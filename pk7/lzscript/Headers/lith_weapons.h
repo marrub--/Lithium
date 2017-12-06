@@ -45,6 +45,8 @@ enum Lith_WeaponNum
 
    // Dark Lord Weapons
    weapon_d_700e,
+   weapon_d_minigun,
+   weapon_d_fatmac,
 
    // Misc. Weapons
    weapon_wings,

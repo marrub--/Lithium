@@ -15,10 +15,10 @@ static void HUD_Ammo(player_t *p)
    __str typegfx = null;
 
    if(wep->ammotype & AT_NMag) {
-      typegfx = "lgfx/HUD_I/Mag.png";
+      typegfx = "lgfx/HUD_I/MAG.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i/%i",
          wep->magmax - wep->magcur, wep->magmax);
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo1, CR_PURPLE, 242.1, 218.0, TICSECOND, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, hid_ammo1, CR_PURPLE, 242.1, 218.0, TS, 0.35);
    }
 
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic))
@@ -26,13 +26,13 @@ static void HUD_Ammo(player_t *p)
       int x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", hid_ammobg2, 242.2, 227.2, TICSECOND, 0.35);
+         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", hid_ammobg2, 242.2, 227.2, TS, 0.35);
          x = -58;
       }
 
-      typegfx = "lgfx/HUD_I/Ammo.png";
+      typegfx = "lgfx/HUD_I/AMMO.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", wep->ammocur);
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo2, CR_PURPLE, x+242.1, 218.0, TICSECOND, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, hid_ammo2, CR_PURPLE, x+242.1, 218.0, TS, 0.35);
    }
 
    static int const ncolor[] = {
@@ -42,10 +42,10 @@ static void HUD_Ammo(player_t *p)
    };
 
    Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'g', 323, 208);
-   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", hid_ammobg1, 320.2, 229.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", hid_ammobg1, 320.2, 229.2, TS);
 
    if(typegfx)
-      DrawSpriteFade(typegfx, hid_ammotype, 309, 219, TICSECOND, 0.25);
+      DrawSpriteFade(typegfx, hid_ammotype, 309, 219, TS, 0.25);
 }
 
 //
@@ -61,16 +61,16 @@ static void HUD_HealthArmor(player_t *p, upgrade_t *upgr)
       [armor_blue]    = "lgfx/HUD/H_D25.png"
    };
 
-   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 230.2, TICSECOND);
+   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 230.2, TS);
 
    int health = (UData.healthi = lerpk(UData.healthi, p->health, 0.2)) + 0.5;
    if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
    else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
-   HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 202.0, TICSECOND);
+   HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 202.0, TS);
 
    int armor = (UData.armori = lerpk(UData.armori, p->armor, 0.2)) + 0.5;
    HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", armor);
-   HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 220.0, TICSECOND);
+   HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 220.0, TS);
 
    DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 42), 20.1 + p->ticks % 42, 211.1, 0.2, 0.7);
 }
