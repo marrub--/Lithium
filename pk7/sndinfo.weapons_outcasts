@@ -1,0 +1,103 @@
+//
+// Charge Fist
+//
+weapons/cfist/pickup    lsounds/ChargeFist/Pickup.flac    // Halo 3
+weapons/cfist/fire1     lsounds/ChargeFist/Fire1.flac     // 〃
+weapons/cfist/fire2     lsounds/ChargeFist/Fire2.flac     // 〃
+weapons/cfist/fire3     lsounds/ChargeFist/Fire3.flac     // 〃
+weapons/cfist/ready     lsounds/ChargeFist/Ready.flac     // 〃
+weapons/cfist/charge    lsounds/ChargeFist/Charge.ogg     // Fallout 4, Halo 3
+weapons/cfist/chargeend lsounds/ChargeFist/ChargeEnd.flac // Fallout 4
+weapons/cfist/hit1      lsounds/ChargeFist/HitFlesh1.ogg  // Shadow Complex
+weapons/cfist/hit2      lsounds/ChargeFist/HitFlesh2.ogg  // 〃
+weapons/cfist/hit3      lsounds/ChargeFist/HitFlesh3.ogg  // 〃
+weapons/cfist/hitwall1  lsounds/ChargeFist/HitWall1.ogg   // 〃
+weapons/cfist/hitwall2  lsounds/ChargeFist/HitWall2.ogg   // 〃
+weapons/cfist/hitwall3  lsounds/ChargeFist/HitWall3.ogg   // 〃
+weapons/cfist/hitwall4  lsounds/ChargeFist/HitWall4.ogg   // 〃
+
+$random weapons/cfist/hit {
+   weapons/cfist/hit1
+   weapons/cfist/hit2
+   weapons/cfist/hit3
+}
+
+$random weapons/cfist/hitwall {
+   weapons/cfist/hitwall1
+   weapons/cfist/hitwall2
+   weapons/cfist/hitwall3
+   weapons/cfist/hitwall4
+}
+
+$random weapons/cfist/fire {
+   weapons/cfist/fire1
+   weapons/cfist/fire2
+   weapons/cfist/fire3
+}
+
+//
+// Missile Launcher
+//
+weapons/missile/fire      lsounds/MissileLauncher/Fire.flac      // FEAR
+weapons/missile/empty     lsounds/MissileLauncher/FireEmpty.flac // 〃
+weapons/missile/reloadout lsounds/MissileLauncher/ReloadOut.flac // 〃
+weapons/missile/reloadin  lsounds/MissileLauncher/ReloadIn.flac  // 〃
+weapons/missile/draw      lsounds/MissileLauncher/Draw.flac      // Halo 3, Doom 3
+weapons/missile/explode   lsounds/MissileLauncher/Explode.flac   // ???
+$limit weapons/missile/explode 0
+
+//
+// Plasma Rifle
+//
+weapons/plasma/fire    lsounds/PlasmaRifle/Fire.flac      // Devil May Cry 3
+weapons/plasma/altfire lsounds/PlasmaRifle/AltFire.flac   // 〃
+weapons/plasma/pickup  lsounds/PlasmaRifle/Pickup.flac    // Alliance of Valiant Arms
+weapons/plasma/empty   lsounds/PlasmaRifle/FireEmpty.flac // Killing Floor
+weapons/plasma/draw    lsounds/PlasmaRifle/Draw.flac      // FEAR
+
+weapons/plasma/explode1 lsounds/PlasmaRifle/Explode1.flac // Devil May Cry 3
+weapons/plasma/explode2 lsounds/PlasmaRifle/Explode2.flac // 〃
+weapons/plasma/explode3 lsounds/PlasmaRifle/Explode3.flac // 〃
+
+$random weapons/plasma/explode {
+   weapons/plasma/explode1
+   weapons/plasma/explode2
+   weapons/plasma/explode3
+}
+
+weapons/plasma/laser/fire_start lsounds/PlasmaRifle/Laser/FireStart.flac // Unreal Tournament '99
+weapons/plasma/laser/fire_hum   lsounds/PlasmaRifle/Laser/FireHum.flac   // 〃
+weapons/plasma/laser/fire_loop  lsounds/PlasmaRifle/Laser/FireLoop.flac  // Touhou 9: Phantasmagoria of Flower View
+weapons/plasma/laser/fire_end   lsounds/PlasmaRifle/Laser/FireEnd.flac   // Quake
+weapons/plasma/laser/spark      lsounds/PlasmaRifle/Laser/Spark.flac     // Fallout 4
+
+$limit weapons/plasma/laser/spark 0
+$limit weapons/plasma/explode 0
+$volume weapons/plasma/explode 0.5
+
+weapons/plasma/part/charge    lsounds/PlasmaRifle/PartBeam/Charge.flac    // Touhou 13
+weapons/plasma/part/fire      lsounds/PlasmaRifle/PartBeam/Fire.ogg       // FEAR, Halo 3
+weapons/plasma/part/reloadout lsounds/PlasmaRifle/PartBeam/ReloadOut.flac // FEAR
+weapons/plasma/part/reloadin  lsounds/PlasmaRifle/PartBeam/ReloadIn.flac  // 〃
+
+$volume weapons/plasma/part/fire 0.7
+
+//
+// Plasma Diffuser
+//
+weapons/plasdiff/fire1 lsounds/PlasmaDiffuser/Fire.flac      // Halo 3
+weapons/plasdiff/fire2 lsounds/PlasmaDiffuser/Fire2.flac     // 〃
+weapons/plasdiff/fire3 lsounds/PlasmaDiffuser/Fire3.flac     // 〃
+weapons/plasdiff/draw  lsounds/PlasmaDiffuser/Draw.flac      // Fallout 3, Halo 3
+weapons/plasdiff/empty lsounds/PlasmaDiffuser/FireEmpty.flac // 〃
+
+$alias weapons/plasdiff/explode weapons/plasmax
+$limit weapons/plasdiff/explode 0
+
+$random weapons/plasdiff/fire {
+   weapons/plasdiff/fire1
+   weapons/plasdiff/fire2
+   weapons/plasdiff/fire3
+}
+
+// EOF

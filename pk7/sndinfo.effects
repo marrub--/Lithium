@@ -1,6 +1,8 @@
 //
 // Misc. Effects
 //
+$rolloff * custom 0 2025
+
 misc/teleport  lsounds/Teleport.flac      // Self-made
 menu/backup    lsounds/Menu/Back.flac     // 〃
 menu/cursor    lsounds/Menu/Move.flac     // 〃
@@ -17,8 +19,6 @@ misc/telein    lsounds/TeleportIn.flac    // 〃
 
 intermission/tick      lsounds/Menu/InterTick.flac // Halo 3
 intermission/nextstage lsounds/Menu/InterNext.flac // Halo 3, Phantasy Star Online
-
-$rolloff * custom 0 2025
 
 $alias misc/chat2    misc/chat
 $alias menu/clear    menu/backup
@@ -64,49 +64,6 @@ $random misc/quitsound {
 }
 
 //
-// Weapons
-//
-effects/rocket/fly lsounds/RocketLauncher/RocketFly.ogg // Unreal Tournament '99
-
-effects/puff/ricochet1 lsounds/BulletPuff/Puff1.flac // Devil May Cry 2
-effects/puff/ricochet2 lsounds/BulletPuff/Puff2.flac // 〃
-effects/puff/ricochet3 lsounds/BulletPuff/Puff3.flac // 〃
-effects/puff/ricochet4 lsounds/BulletPuff/Puff4.flac // 〃
-
-$random effects/puff/ricochet {
-   effects/puff/ricochet1
-   effects/puff/ricochet2
-   effects/puff/ricochet3
-   effects/puff/ricochet4
-}
-
-effects/geexplosion1  lsounds/GEExplosion/expl1.wav  // GoldenEye 007
-effects/geexplosion2  lsounds/GEExplosion/expl2.wav  // 〃
-effects/geexplosion3  lsounds/GEExplosion/expl3.wav  // 〃
-effects/geexplosion4  lsounds/GEExplosion/expl4.wav  // 〃
-effects/geexplosion5  lsounds/GEExplosion/expl5.wav  // 〃
-effects/geexplosion6  lsounds/GEExplosion/expl6.wav  // 〃
-effects/geexplosion7  lsounds/GEExplosion/expl7.wav  // 〃
-effects/geexplosion8  lsounds/GEExplosion/expl8.wav  // 〃
-effects/geexplosion9  lsounds/GEExplosion/expl9.wav  // 〃
-effects/geexplosion10 lsounds/GEExplosion/expl10.wav // 〃
-effects/geexplosion11 lsounds/GEExplosion/expl11.wav // 〃
-
-$random effects/geexplosion {
-   effects/geexplosion1
-   effects/geexplosion2
-   effects/geexplosion3
-   effects/geexplosion4
-   effects/geexplosion5
-   effects/geexplosion6
-   effects/geexplosion7
-   effects/geexplosion8
-   effects/geexplosion9
-   effects/geexplosion10
-   effects/geexplosion11
-}
-
-//
 // Ambience
 //
 amb/rain       lsounds/Ambience/Rain.ogg           // ???
@@ -148,64 +105,6 @@ misc/barrel/hit2 lsounds/Barrel/Hit2.flac
 $random misc/barrel/hit {
    misc/barrel/hit1
    misc/barrel/hit2
-}
-
-//
-// :V
-//
-items/healthbonus1  lsounds/bdup/DSHBON1.wav
-items/healthbonus2  lsounds/bdup/DSHBON2.wav
-items/healthbonus3  lsounds/bdup/DSHBON3.wav
-items/healthbonus4  lsounds/bdup/DSHBON4.wav
-items/healthbonus5  lsounds/bdup/DSHBON5.wav
-items/healthbonus6  lsounds/bdup/DSHBON6.wav
-items/healthbonus7  lsounds/bdup/DSHBON7.wav
-items/healthbonus8  lsounds/bdup/DSHBON8.wav
-items/healthbonus9  lsounds/bdup/DSHBON9.ogg
-items/healthbonus10 lsounds/bdup/DSHBON10.ogg
-items/healthbonus11 lsounds/bdup/DSHBON11.ogg
-items/healthbonus12 lsounds/bdup/DSHBON12.ogg
-items/healthbonus13 lsounds/bdup/DSHBON13.ogg
-items/healthbonus14 lsounds/bdup/DSHBON14.ogg
-
-$random items/healthbonusrandom {
-   items/healthbonus1
-   items/healthbonus2
-   items/healthbonus3
-   items/healthbonus4
-   items/healthbonus5
-   items/healthbonus6
-   items/healthbonus7
-   items/healthbonus8
-   items/healthbonus9
-   items/healthbonus10
-   items/healthbonus11
-   items/healthbonus12
-   items/healthbonus13
-   items/healthbonus14
-}
-
-$random items/healthbonus {
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   items/healthbonusrandom
 }
 
 // EOF

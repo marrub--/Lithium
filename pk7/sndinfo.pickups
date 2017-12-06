@@ -1,0 +1,131 @@
+//
+// Pickup
+//
+player/pickup/upgrbody    lsounds/Player/Pickup/UpgrBody.ogg     // Killing Floor, ???
+player/pickup/upgrextr    lsounds/Player/Pickup/UpgrExtr.flac    // Phantasy Star Nova
+player/pickup/upgrweap    lsounds/Player/Pickup/UpgrWeap.ogg     // Halo 3
+player/pickup/upgrcbi     lsounds/Player/Pickup/CBIUpgrade.flac  // 〃
+player/pickup/item        lsounds/Player/Pickup/Item.ogg         // Firearms: Source
+player/pickup/barrier     lsounds/Player/Pickup/Barrier.flac     // Touhou 13
+player/pickup/infrared    lsounds/Player/Pickup/Goggles.ogg      // ???
+player/pickup/redkey      lsounds/Player/Pickup/RedKey.flac      // ???
+player/pickup/yellowkey   lsounds/Player/Pickup/YellowKey.flac   // 〃
+player/pickup/bluekey     lsounds/Player/Pickup/BlueKey.flac     // 〃
+player/pickup/redskull2   lsounds/SKULL.ogg                      // Deus Ex
+player/pickup/redskull1   lsounds/Player/Pickup/RedSkull.flac    // Halo 3
+player/pickup/yellowskull lsounds/Player/Pickup/YellowSkull.flac // 〃
+player/pickup/blueskull   lsounds/Player/Pickup/BlueSkull.flac   // 〃
+player/pickup/evil        lsounds/Player/Pickup/EvilItem.flac    // Phantasy Star: Nova
+player/pickup/cells       lsounds/Player/Pickup/CellSmall.flac   // ???
+player/pickup/cellb       lsounds/Player/Pickup/CellPack.flac    // 〃
+player/pickup/shells      lsounds/Player/Pickup/ShellSmall.ogg   // 〃
+player/pickup/shellb      lsounds/Player/Pickup/ShellPack.ogg    // 〃
+player/pickup/rockets     lsounds/Player/Pickup/RocketSmall.flac // Halo 3
+player/pickup/rocketb     lsounds/Player/Pickup/RocketBig.flac   // Quake 2
+player/pickup/mana        lsounds/Player/Pickup/Mana.flac        // Devil May Cry 2
+player/pickup/scorebig    lsounds/Player/Pickup/ScoreBig.flac    // Self-made
+player/pickup/scoresmall  lsounds/Player/Pickup/ScoreSmall.flac  // 〃
+
+$random player/pickup/redskull {
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
+   player/pickup/redskull2
+}
+
+//
+// :V
+//
+items/healthbonus1  lsounds/bdup/DSHBON1.wav
+items/healthbonus2  lsounds/bdup/DSHBON2.wav
+items/healthbonus3  lsounds/bdup/DSHBON3.wav
+items/healthbonus4  lsounds/bdup/DSHBON4.wav
+items/healthbonus5  lsounds/bdup/DSHBON5.wav
+items/healthbonus6  lsounds/bdup/DSHBON6.wav
+items/healthbonus7  lsounds/bdup/DSHBON7.wav
+items/healthbonus8  lsounds/bdup/DSHBON8.wav
+items/healthbonus9  lsounds/bdup/DSHBON9.ogg
+items/healthbonus10 lsounds/bdup/DSHBON10.ogg
+items/healthbonus11 lsounds/bdup/DSHBON11.ogg
+items/healthbonus12 lsounds/bdup/DSHBON12.ogg
+items/healthbonus13 lsounds/bdup/DSHBON13.ogg
+items/healthbonus14 lsounds/bdup/DSHBON14.ogg
+
+$random items/healthbonusrandom {
+   items/healthbonus1
+   items/healthbonus2
+   items/healthbonus3
+   items/healthbonus4
+   items/healthbonus5
+   items/healthbonus6
+   items/healthbonus7
+   items/healthbonus8
+   items/healthbonus9
+   items/healthbonus10
+   items/healthbonus11
+   items/healthbonus12
+   items/healthbonus13
+   items/healthbonus14
+}
+
+$random items/healthbonus {
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   items/healthbonusrandom
+}
+
+// EOF
