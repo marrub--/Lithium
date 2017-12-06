@@ -32,7 +32,7 @@ actor Lith_PoisonFXGiver : CustomInventory
    Pickup:
       TNT1 A 0 A_DamageSelf(10, "Poison")
       TNT1 A 0 A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5)
-      TNT1 A 0 A_SpawnItemEx("Lith_PoisonFX", 0,0,8, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME)
+      TNT1 A 0 A_SpawnItemEx("Lith_PoisonFX", 0,0,8, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE)
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PoisonFXTicker")
       TNT1 A 0 A_RailWait
       stop
