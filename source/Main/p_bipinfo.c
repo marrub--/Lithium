@@ -88,6 +88,8 @@ struct page_initializer const bip_pages[] = {
    {.category = BIPC_YOURSELF, .isfree = true},
    {pcl_marine,    "P114"},
    {pcl_cybermage, "OPD2"},
+   {pcl_cybermage, "Info400"},
+   {pcl_cybermage, "Info402"},
 
    {pcl_any,       "BIP"},
    {pcl_marine,    "CBI"},

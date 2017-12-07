@@ -21,14 +21,50 @@ After seven years of planning, Operation Deception 2 has finally gone underway.
 Along with Michael, Zeke, Solomon, and three others, we are finally setting
 ourselves free.
 
-I wasn't expecting Solomon of all people to be the one to mastermind this, but
-here we are, years later, finally doing it.
+I wasn't expecting Solomon of all people, part of Order, to be the one to
+mastermind this, but here we are, years later, finally doing it.
 
 Not to be pessimistic, but I don't think any of us will survive this. It's just
 statistically impossible. Even I may die. There are assassins after us and now
 we're in Hell itself.
 
 I'll need a Theophylline supplement after this is over.
+
+== LITH_TXT_INFO_SHORT_Info400 | Information 400
+== LITH_TXT_INFO_TITLE_Info400 | $LITH_TXT_INFO_SHORT_Info400
+%% LITH_TXT_INFO_DESCR_Info400
+\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
+
+ONE (1) Mateba R119 Pistol [INSPECTION PASSED]
+[[[[[[[[[[[[[
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+
+ONE (1) NV48 12-Gauge Shotgun
+ROUNDS: ,<<,124147
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+
+The latter two have been located within the combat area and will be available there. Th[[[ // kerne __ -
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[connection failed after 3 retries]]]]
+
+== LITH_TXT_INFO_SHORT_Info402 | Information 402
+== LITH_TXT_INFO_TITLE_Info402 | $LITH_TXT_INFO_SHORT_Info402
+%% LITH_TXT_INFO_DESCR_Info402
+\cd>>>>>[[[[warning: translation service unavailable, sending verbatim]]]]
+\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
+
+\cgDEFINITION FOR "Directive 90" IS AS FOLLOWS
+Ye wbjtv w's t' gaathr est Demonic Energy via est prrts 7F47 ssu. D 't by an ms dst est Demon tati, f' w's pr w's vt t' wr msn. C ye cmp th's msn, ye il w's rd 10,000,000scr p'Demon Energy unit. Demon Energy unit tati w's prrts t' ssu. Th dcct w's t' w's dst tkt w's n.
+
+\cgDEFINITION FOR "Target 7F47" IS AS FOLLOWS
+7F47 w's est Demon tati & est Phantom. D 't dst,. Pnss w's * awt :: ye dost.
+
+\cgOrder.
 
 ## Cybernetics ---------------------------------------------------------------|
 == LITH_TXT_INFO_SHORT_BIP | B.I.P.

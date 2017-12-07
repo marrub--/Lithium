@@ -183,7 +183,7 @@
    "- Directive 90 on target 7F47\n"
    "\n"
    "The following permissions have been granted:\n"
-   "- Mateba R119 pistol\n"
+   "- Mateba R119 Pistol\n"
    "- NV48 12-Gauge Shotgun\n"
    "- SYM4.3 D.22 MODEL M SUBMACHINE GUN\n"
    "- Bishop\n"

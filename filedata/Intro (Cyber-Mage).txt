@@ -15,7 +15,7 @@ The following procedures have been activated:
 - Directive 90 on target 7F47
 
 The following permissions have been granted:
-- Mateba R119 pistol
+- Mateba R119 Pistol
 - NV48 12-Gauge Shotgun
 - SYM4.3 D.22 MODEL M SUBMACHINE GUN
 - Bishop
