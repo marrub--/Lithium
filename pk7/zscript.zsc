@@ -15,6 +15,7 @@ version "2.5"
 // Base classes
 #include "lzscript/Server.zsc"
 #include "lzscript/PauseManager.zsc"
+#include "lzscript/Cyberspace.zsc"
 #include "lzscript/Events.zsc"
 
 // DECORATE Overrides

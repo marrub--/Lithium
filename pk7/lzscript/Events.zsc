@@ -2,10 +2,8 @@ class Lith_Events : StaticEventHandler
 {
    override void WorldLoaded(WorldEvent evt)
    {
-      if(evt.IsReopen)
-         return;
-      
-      Actor.Spawn("Lith_Server");
+      if(!evt.IsReopen)
+         Actor.Spawn("Lith_Server");
    }
 
    override void WorldThingSpawned(WorldEvent evt)

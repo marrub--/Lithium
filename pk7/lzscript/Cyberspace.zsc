@@ -1,0 +1,160 @@
+class Lith_Cyberspace
+{
+   // pixel texture
+   TextureID ptex;
+
+   // pixel buffer
+   const rw = 64;
+   const rh = 48;
+
+   uint8 dbuf[rw * rh];
+
+   // map (TODO: make dynamic)
+   static const uint8 map[] = {
+      1, 1, 1, 1, 1, 1, 1, 1,
+      1, 0, 0, 0, 0, 0, 0, 1,
+      1, 0, 1, 0, 0, 1, 0, 1,
+      1, 0, 0, 0, 0, 1, 0, 1,
+      1, 0, 1, 0, 0, 0, 0, 1,
+      1, 0, 1, 0, 0, 1, 0, 1,
+      1, 0, 0, 0, 0, 0, 0, 1,
+      1, 1, 1, 1, 1, 1, 1, 1
+   };
+
+   const mw = 8;
+   const mh = 8;
+
+   // camera normal
+   double nx;
+   double ny;
+
+   // camera plane
+   double px;
+   double py;
+
+   // view pos
+   int vx;
+   int vy;
+
+   static Lith_Cyberspace Create()
+   {
+      let cs = new("Lith_Cyberspace");
+
+      cs.ptex = TexMan.CheckForTexture("lgfx/Pixel.png", 0);
+
+      cs.nx = -1.0;
+      cs.ny =  0.0;
+
+      cs.px = 0.0;
+      cs.py = 0.66;
+
+      cs.vx = 4;
+      cs.vy = 4;
+
+      return cs;
+   }
+
+   void rotateView(double rel)
+   {
+      double oldnx = nx;
+      double oldpx = px;
+
+      // rotate normal and plane with a simple matrix
+      nx =    nx * cos(rel) - ny * sin(rel);
+      ny = oldnx * sin(rel) + ny * cos(rel);
+      px =    px * cos(rel) - py * sin(rel);
+      py = oldpx * sin(rel) + py * cos(rel);
+   }
+
+   void renderFrame()
+   {
+      for(int x = 0; x < rw; x++)
+      {
+         // camera x coordinate
+         double ndc = (x / double(rw)) * 2 - 1;
+         if(ndc == 0) ndc = 0.001; // hack to prevent sigfpe
+
+         // ray normal
+         double rnx = nx + px * ndc;
+         double rny = ny + py * ndc;
+
+         // direction delta
+         double ddx = sqrt(1.0 + (rny * rny) / (rnx * rnx));
+         double ddy = sqrt(1.0 + (rnx * rnx) / (rny * rny));
+
+         // distance to side
+         double sidedx;
+         double sidedy;
+
+         // step sign
+         int stepx;
+         int stepy;
+
+         // get direction for ray normal
+         if(rnx < 0) {stepx = -1; sidedx = 0;}
+         else        {stepx =  1; sidedx = ddx;}
+         if(rny < 0) {stepy = -1; sidedy = 0;}
+         else        {stepy =  1; sidedy = ddy;}
+
+         // dda raycast
+         int mapx = vx;
+         int mapy = vy;
+
+         bool side = false;
+
+         do {
+            if(sidedx < sidedy) {sidedx += ddx; mapx += stepx; side = false;}
+            else                {sidedy += ddy; mapy += stepy; side = true; }
+         } while(!map[mapx + mapy * mw]);
+
+         // get perspective distance
+         double pwdst;
+         if(side) pwdst = (mapy - vy + (1 - stepy) / 2) / rny;
+         else     pwdst = (mapx - vx + (1 - stepx) / 2) / rnx;
+
+         // get line draw properties
+         int lineh = rh / pwdst;
+
+         int ds = -lineh / 2 + rh / 2;
+         int de =  lineh / 2 + rh / 2;
+
+         if(ds < 0) ds = 0;
+         if(de >= rh) de = rh - 1;
+
+         if(ds == de) continue;
+
+         // get light amount for line
+         int light = 0xFF - (pwdst * 32);
+         if(side) light /= 2;
+         if(light <  32) light = 32;
+         if(light > 135) light = 135;
+
+         // clear and draw line
+         for(int y =  0; y <  rh; y++) dbuf[x + y * rw] = 0;
+         for(int y = ds; y <= de; y++) dbuf[x + y * rw] = light;
+      }
+   }
+
+   ui void drawPixel(int x, int y, int c)
+   {
+      // :(
+      Screen.DrawTexture(ptex, false, x, y,
+         DTA_VirtualWidth,  rw,
+         DTA_VirtualHeight, rh,
+         DTA_FillColor,     c);
+   }
+
+   ui void render()
+   {
+      // color shifts
+      static const int shifts[] = {0, 2, 8, 10, 16, 18};
+      int shift = shifts[level.totaltime / 35 % 6];
+
+      // draw scene from pixel buffer
+      for(int y = 0; y < rh; y++)
+         for(int x = 0; x < rw; x++)
+            drawPixel(x, y, dbuf[x + y * rw] << shift);
+   }
+}
+
+// EOF
