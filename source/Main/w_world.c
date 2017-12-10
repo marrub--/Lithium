@@ -616,8 +616,12 @@ static void WInit(void)
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
-   if(ACS_GameType() == GAME_TITLE_MAP)
+   if(ACS_GameType() == GAME_TITLE_MAP) {
+      [[__call("ScriptS")]]
+      extern void Lith_Title(void);
+      Lith_Title();
       return;
+   }
 
    LogDebug(log_dev, "LITH OPEN");
 

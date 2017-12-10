@@ -55,6 +55,7 @@ parse file: Pickups.txt
 in file language.misc.en.txt
 parse file: Misc.txt
 parse file: Changes.txt
+put file: Titlemap Opener.txt -> LITH_TXT_OPENER
 
 
 -- CBI Mail -------------------------------------------------------------------
