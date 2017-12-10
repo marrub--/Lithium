@@ -256,7 +256,7 @@ intermission Inter_Cast
    
    Fader
    {
-      Music = "lmusic/asdfn2.ogg"
+      Music = "lmusic/miniwip2.ogg"
       DrawConditional = "Lith_MarinePlayer",    "lgfx/End/Marine1.png", 0, 0
       DrawConditional = "Lith_CyberMagePlayer", "lgfx/End/CyberMage1.png", 0, 0
       Background = "flats/ZZLITHBG.png"
@@ -297,7 +297,7 @@ intermission Inter_Cast
    Image
    {
       Background = "flats/ZZLITHBG.png"
-      Time = 1
+      Time = 7
    }
    
    GotoTitle{}

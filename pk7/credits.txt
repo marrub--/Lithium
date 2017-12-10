@@ -21,6 +21,9 @@ Source code for Lithium can be found at <https://github.com/marrub--/Lithium>.
 
 --- Credits
 
+_sink
+   End of game music
+
 505
    Title music (hYmns - Shredder)
 
