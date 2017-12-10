@@ -8,6 +8,18 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
+#define GetInfo(m) \
+   do { \
+      (m)->ms->x = ACS_GetActorX(0); \
+      (m)->ms->y = ACS_GetActorY(0); \
+      (m)->ms->z = ACS_GetActorZ(0); \
+      \
+      (m)->ms->r = ACS_GetActorPropertyFixed(0, APROP_Radius); \
+      (m)->ms->h = ACS_GetActorPropertyFixed(0, APROP_Height); \
+      \
+      (m)->ms->health = ACS_GetActorProperty(0, APROP_Health); \
+   } while(0)
+
 struct dmon_stat {
    fixed x, y, z;
    fixed r, h;
@@ -145,25 +157,12 @@ static __str const dmgtype_names[dmgtype_max] = {
 [[__call("SScriptS")]]
 static void WaitForResurrect(dmon_t const *m)
 {
-   while(ACS_GetActorProperty(0, APROP_Health) <= 0)
+   do {
       ACS_Delay(2);
+      GetInfo(m);
+   } while(m->ms->health <= 0);
 
    LogDebug(log_dmon, "monster %i resurrected", m->id);
-}
-
-//
-// GetInfo
-//
-static void GetInfo(struct dmon_stat *ms)
-{
-   ms->x = ACS_GetActorX(0);
-   ms->y = ACS_GetActorY(0);
-   ms->z = ACS_GetActorZ(0);
-
-   ms->r = ACS_GetActorPropertyFixed(0, APROP_Radius);
-   ms->h = ACS_GetActorPropertyFixed(0, APROP_Height);
-
-   ms->health = ACS_GetActorProperty(0, APROP_Health);
 }
 
 //
@@ -171,7 +170,7 @@ static void GetInfo(struct dmon_stat *ms)
 //
 static void ApplyLevels(dmon_t *m, int prev)
 {
-   GetInfo(m->ms);
+   GetInfo(m);
 
    for(int i = prev + 1; i <= m->level; i++)
    {
@@ -184,8 +183,6 @@ static void ApplyLevels(dmon_t *m, int prev)
             do {r = ACS_Random(0, dmgtype_max-1);} while(m->resist[r] == 0);
             m->resist[r] += 2;
          }
-
-         m->painresist++;
       }
    }
 
@@ -281,20 +278,6 @@ static void BaseMonsterLevel(dmon_t *m)
 }
 
 //
-// ApplyPainResist
-//
-static void ApplyPainResist(dmon_t *m)
-{
-   if(!m->ms->painwait) {
-      ACS_GiveInventory("Lith_MonsterUsePain", 1);
-      m->ms->painwait = m->painresist;
-   } else {
-      ACS_GiveInventory("Lith_MonsterNoPain", 1);
-      m->ms->painwait--;
-   }
-}
-
-//
 // SoulCleave
 //
 // Spawn a Monster Soul and temporarily set the species of it until the
@@ -384,7 +367,7 @@ void Lith_MonsterMain(dmon_t *m)
    ACS_GiveInventory("Lith_MonsterID", m->id + 1);
 
    m->ms = &ms;
-   GetInfo(m->ms);
+   GetInfo(m);
    m->maxhealth = m->ms->health;
 
    BaseMonsterLevel(m);
@@ -394,11 +377,12 @@ void Lith_MonsterMain(dmon_t *m)
 
    for(int tic = 0;; tic++)
    {
-      GetInfo(m->ms);
+      GetInfo(m);
 
-      if(ms.health <= 0) {
+      if(m->ms->health <= 0) {
          OnDeath(m);
          WaitForResurrect(m);
+         continue;
       }
 
       if(HasResistances(m) && m->level >= 20)
@@ -406,11 +390,6 @@ void Lith_MonsterMain(dmon_t *m)
 
       if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
          ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
-
-      // Strange optimization: This causes horrible lag in the ZScript VM,
-      // but in ZDoom 2.8.1 it's completely fine. What the fuck.
-      if(!world.grafZoneEntered && m->painresist)
-         ApplyPainResist(m);
 
       ACS_Delay(2);
    }
