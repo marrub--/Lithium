@@ -63,7 +63,7 @@ class Lith_Minigun : Lith_DWeapon
    {
       invoker.lith_laststate = lb;
       A_SetTics(invoker.Lith_WindupTime());
-      A_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE|CallACS("Lith_GetWRF"));
+      A_WeaponReady(WRF_NOFIRE|CallACS("Lith_GetWRF"));
       if(invoker.owner.player.buttons & BT_ATTACK && level.totaltime % 2 == 0)
          return ResolveState(l);
       else

@@ -1,4 +1,4 @@
-version "2.5"
+version "3.2"
 
 #include "lzscript/Headers/lith_weapons.h"
 #include "lzscript/Headers/lith_pdata.h"

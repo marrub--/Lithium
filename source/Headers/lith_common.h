@@ -14,9 +14,8 @@
 #include <string.h>
 #include <stdint.h>
 
-#define ifauto(type, name, ...) \
-   __with(type name = (__VA_ARGS__);) \
-      if(name)
+#define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
+#define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
 #define countof(a) (sizeof((a)) / sizeof(*(a)))
 #define swap(t, a, b) \

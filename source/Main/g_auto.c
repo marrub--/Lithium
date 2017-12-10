@@ -140,8 +140,11 @@ void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text)
 //
 __str Lith_RemoveTextColors(__str str, int size)
 {
-   char *buf = calloc(1, size);
+   [[__no_init]]
+   static char buf[8192];
    int j = 0;
+
+   if(size > countof(buf)) return "[programmer error, please report]";
 
    for(int i = 0; i < size; i++)
    {
@@ -160,9 +163,7 @@ __str Lith_RemoveTextColors(__str str, int size)
       buf[j++] = str[i];
    }
 
-   __str ret = StrParam("%.*s", j, buf);
-   free(buf);
-   return ret;
+   return StrParam("%.*s", j, buf);
 }
 
 //
