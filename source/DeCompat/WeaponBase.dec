@@ -53,6 +53,10 @@
    <EndZScript>
 
    <States>
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_CheckFlag("DROPPED", "Null")
+      TNT1 A 0 A_Jump(256, "SpawnPickup")
    DummyFlash:
       TNT1 A 0 A_AlertMonsters
       stop

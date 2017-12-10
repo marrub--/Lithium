@@ -11,6 +11,10 @@ actor Lith_WeaponPickup : CustomInventory
    
    states
    {
+   Spawn:
+      TNT1 A 0
+      TNT1 A 0 A_CheckFlag("DROPPED", "Null")
+      TNT1 A 0 A_Jump(256, "SpawnPickup")
    SpawnLoop:
       TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
       TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
@@ -66,8 +70,7 @@ actor Lith_FistPickup : Lith_WeaponPickup replaces Fist
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       FIST A 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
@@ -82,8 +85,7 @@ actor Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       CFIS Z 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CFIS Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -99,8 +101,7 @@ actor Lith_PistolPickup : Lith_WeaponPickup replaces Pistol
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       PIST A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       REVL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -116,8 +117,7 @@ actor Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       SHOT A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSRG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -133,8 +133,7 @@ actor Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       SGN2 A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSHG Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -150,8 +149,7 @@ actor Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       RIFL A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSMG Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -167,8 +165,7 @@ actor Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       LAUN A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       IONG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -184,8 +181,7 @@ actor Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       PLAS A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CPLG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
@@ -201,8 +197,7 @@ actor Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       BFUG A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       SDSG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop

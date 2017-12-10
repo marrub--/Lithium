@@ -34,8 +34,7 @@ actor Lith_PlasmaRifle : Lith_MWeapon
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       TNT1 A 0 A_SpawnItemEx("Lith_PlasmaRiflePickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    

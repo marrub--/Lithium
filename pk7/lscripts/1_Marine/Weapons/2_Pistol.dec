@@ -94,8 +94,7 @@ actor Lith_Pistol : Lith_MWeapon
    
    states
    {
-   Spawn:
-      TNT1 A 0
+   SpawnPickup:
       TNT1 A 0 A_SpawnItemEx("Lith_PistolPickup", 0,0,0, 0,0,0, 0, Lith_PF)
       stop
    
