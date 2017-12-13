@@ -116,7 +116,7 @@ void Lith_GiveHealth(int amount)
 {
    withplayer(LocalPlayer) {
       amount += p->health;
-      amount *= 1 + p->attr.attrs[at_vit] / 30.0;
+      amount *= 1 + p->attr.attrs[at_vit] / 80.0;
       if(amount > p->maxhealth) amount = p->maxhealth;
       p->health = amount;
    }
