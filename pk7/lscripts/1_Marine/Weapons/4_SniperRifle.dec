@@ -83,27 +83,42 @@ actor Lith_SniperRifle : Lith_MWeapon
       TNT1 A 0 A_GunFlash("DummyFlash")
       TNT1 A 0 A_FireBullets(0, 0, 1, 161, "Lith_SniperBullet", FBF_NORANDOM)
       TNT1 A 0 A_Recoil(1)
+      TNT1 A 0 A_SetPitch(pitch - 2)
       TNT1 A 0 A_PlaySound("weapons/sniper/fire", CHAN_WEAPON)
       TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireAnim_Scoped")
       
    FireAnim_Unscoped:
       SNPG B 1 bright
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
       SNPG C 1 bright
-      SNPG DEFG 1
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
+      SNPG D 1
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
+      SNPG E 1
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
+      SNPG FG 1
       SNPG A 1
       goto BoltAnim
    
    FireAnim_Scoped:
       SCOP A 1 bright A_ZoomFactor(1 + (CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX) * 0.80)
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
       SCOP A 1 bright A_ZoomFactor(1 + (CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX) * 0.85)
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
       SCOP A 1 A_ZoomFactor(1 + (CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX) * 0.90)
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
       SCOP A 1 A_ZoomFactor(1 + (CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX) * 0.95)
+      TNT1 A 0 A_SetPitch(pitch + 0.25)
       SCOP A 3 A_ZoomFactor(1 +  CallACS("Lith_GetPlayerData", pdata_weapon_zoom) / FIX)
       
    BoltAnim:
+      "####" "#" 0 A_SetPitch(pitch + 0.25)
       "####" "#" 1 offset(1, 32)
+      "####" "#" 0 A_SetPitch(pitch + 0.25)
       "####" "#" 1 offset(3, 32)
+      "####" "#" 0 A_SetPitch(pitch + 0.25)
       "####" "#" 1 offset(4, 32)
+      "####" "#" 0 A_SetPitch(pitch + 0.25)
       "####" "#" 1 offset(8, 38)
       "####" "#" 1 offset(12, 45)
       "####" "#" 1 offset(16, 53)
