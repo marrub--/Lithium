@@ -141,6 +141,9 @@ actor Lith_StarProjectile
       BLLT L 0 bright A_Quake(1, 2, 0, 512)
       BLLT L 0 bright A_Quake(3, 2, 0, 256)
       BLLT L 0 bright A_Quake(5, 2, 0, 64)
+      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight1", 256, RGF_PLAYERS)
+      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight2", 128, RGF_PLAYERS)
+      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight3", 64,  RGF_PLAYERS)
       BLLT L 1 bright
       goto Spawn1
    Death:
@@ -148,6 +151,7 @@ actor Lith_StarProjectile
       SDXP A 0 A_StopSound(CHAN_7)
       SDXP A 0 A_PlaySound("weapons/shipgun/explode", CHAN_6)
       SDXP A 0 A_SetScale(1)
+      SDXP A 0 bright A_RadiusGive("Lith_BlindingLight3", 512, RGF_PLAYERS)
       SDXP ABCDEFGHIJKLMNOPQRS 1 bright
       SDXP T 1 bright A_FadeOut
       wait
