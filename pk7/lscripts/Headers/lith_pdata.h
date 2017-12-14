@@ -9,6 +9,7 @@ enum // Lith_PData
    pdata_buttons,
    pdata_has_sigil,
    pdata_weapon_zoom,
+   pdata_recoil,
    pdata_pclass
 };
 

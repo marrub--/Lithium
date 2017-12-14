@@ -20,7 +20,7 @@ actor Lith_IReallyHateTheseNoisyWings : Lith_CustomFunction
    states
    {
    Pickup:
-      TNT1 A 0 Thing_Hate(0, CallACS("Lith_GetWorldData", wdata_ptid), 0)
+      TNT1 A 0 Thing_Hate(0, CallACS("LWData", wdata_ptid), 0)
       TNT1 A 0 A_Die
       stop
    }

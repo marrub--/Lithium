@@ -33,7 +33,7 @@ actor Lith_Weapon : Weapon
       TNT1 A 0 A_AlertMonsters
       stop
    User4:
-      "####" "#" 0 A_JumpIf(CallACS("Lith_GetPlayerData", pdata_pclass) == pcl_marine, "_UseKnife")
+      "####" "#" 0 A_JumpIf(CallACS("LPData", pdata_pclass) == pcl_marine, "_UseKnife")
       "####" "#" 0 A_Jump(256, "Ready")
    _UseKnife:
       "####" "#" 3 offset(2, 34)

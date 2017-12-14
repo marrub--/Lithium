@@ -187,13 +187,12 @@ void Lith_MakeSerious()
 }
 
 //
-// Lith_GetPlayerData
+// LPData
 //
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetPlayerData(int info, int permutation, bool target)
+int LPData(int info, int permutation, bool target)
 {
-   if(target)
-      ACS_SetActivatorToTarget(0);
+   if(target) ACS_SetActivatorToTarget(0);
 
    player_t *p = LocalPlayer;
    if(NoPlayer(p)) return 0;
@@ -205,16 +204,17 @@ int Lith_GetPlayerData(int info, int permutation, bool target)
    case pdata_buttons:        return p->buttons;
    case pdata_has_sigil:      return p->sigil.acquired;
    case pdata_weapon_zoom:    return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
+   case pdata_recoil:         return bitsk(p->getCVarK("lith_weapons_recoil"));
    case pdata_pclass:         return p->pclass;
    default:                   return 0;
    }
 }
 
 //
-// Lith_GetWorldData
+// LWData
 //
 [[__call("ScriptS"), __extern("ACS")]]
-int Lith_GetWorldData(int info)
+int LWData(int info)
 {
    switch(info)
    {

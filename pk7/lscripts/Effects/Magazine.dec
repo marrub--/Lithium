@@ -17,7 +17,7 @@ actor Lith_DroppedMagazine
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_JumpIf(!CallACS("Lith_GetWorldData", wdata_magdrops), "Null")
+      TNT1 A 0 A_JumpIf(!CallACS("LWData", wdata_magdrops), "Null")
       TNT1 A 0 A_Jump(256, "Spawn1")
       stop
    Done:

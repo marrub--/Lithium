@@ -39,8 +39,11 @@ Category("Weapons");
 Float("Scope zoom factor", "x", "lith_weapons_zoomfactor", 1.0f, 10.0f);
 Float("Scope opacity",     "x", "lith_weapons_scopealpha", 0.0f, 1.0f);
 Float("Weapon opacity",    "x", "lith_weapons_alpha",      0.0f, 1.0f);
-Bool("Modal Rifle scope",  "lith_weapons_riflescope");
-Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
+Float("Recoil amount",     "x", "lith_weapons_recoil",     0.0f, 1.0f);
+if(p->pclass == pcl_marine) {
+   Bool("Modal Rifle scope",          "lith_weapons_riflescope");
+   Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
+}
 if(p->num == 0)
    Bool("Drop magazines from weapons", "lith_weapons_magdrops");
 Bool("Magic selection animations", "lith_weapons_magicselanims");
