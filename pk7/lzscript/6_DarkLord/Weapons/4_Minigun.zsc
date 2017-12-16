@@ -22,7 +22,7 @@ class Lith_Minigun : Lith_DWeapon
             return;
          }
 
-         if(owner.player.buttons & BT_ATTACK && !lith_reloading)
+         if(owner.player.buttons & (BT_ATTACK|BT_ALTATTACK) && !lith_reloading)
          {
             lith_windup += 0.3/TICRATE;
             if(lith_windup > 1) lith_windup = 1;
@@ -61,11 +61,22 @@ class Lith_Minigun : Lith_DWeapon
 
    action(weapon) state Lith_MinigunReady(statelabel lb, statelabel l)
    {
+      let flags = WRF_NOFIRE | CallACS("Lith_GetWRF");
+      if(invoker.lith_windup == 0)
+         flags |= WRF_ALLOWRELOAD;
       invoker.lith_laststate = lb;
       A_SetTics(invoker.Lith_WindupTime());
-      A_WeaponReady(WRF_NOFIRE|CallACS("Lith_GetWRF"));
+      A_WeaponReady(flags);
       if(invoker.owner.player.buttons & BT_ATTACK && level.totaltime % 2 == 0)
-         return ResolveState(l);
+      {
+         if(!invoker.Lith_MagEmpty())
+            return ResolveState(l);
+         else
+         {
+            A_PlaySound("weapons/minigun/empty", CHAN_WEAPON);
+            return null;
+         }
+      }
       else
          return null;
    }
@@ -119,17 +130,14 @@ class Lith_Minigun : Lith_DWeapon
       loop;
 
    Fire:
-      MNGG A 0 bright Lith_JumpIfMagEmpty;
       MNGG D 1 bright Lith_MinigunFire;
       MNGG A 1 A_SetTics(invoker.Lith_WindupTime()-1);
       goto Ready2;
    Fire2:
-      MNGG B 0 bright Lith_JumpIfMagEmpty;
       MNGG E 1 bright Lith_MinigunFire;
       MNGG B 1 A_SetTics(invoker.Lith_WindupTime()-1);
       goto Ready3;
    Fire3:
-      MNGG C 0 bright Lith_JumpIfMagEmpty;
       MNGG F 1 bright Lith_MinigunFire;
       MNGG C 1 A_SetTics(invoker.Lith_WindupTime()-1);
       goto Ready;

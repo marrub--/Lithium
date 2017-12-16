@@ -12,5 +12,6 @@ weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // 〃
 weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // 〃
 weapons/minigun/click  lsounds/Minigun/Click.flac       // 〃
 weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
+weapons/minigun/empty  lsounds/Minigun/Empty.flac       // Halo 3
 
 // EOF
