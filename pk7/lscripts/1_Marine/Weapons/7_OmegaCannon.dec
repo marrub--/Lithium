@@ -233,16 +233,16 @@ actor Lith_BFG9000 : Lith_MWeapon
       goto LoadAnim
    FirePunct_Scoped:
       SCOP A 3
-      SCOP A 1 A_ZoomFactor((CallACS("LPData", pdata_weapon_zoom) / FIX) * 0.80)
-      SCOP A 1 A_ZoomFactor((CallACS("LPData", pdata_weapon_zoom) / FIX) * 0.85)
-      SCOP A 1 bright A_ZoomFactor((CallACS("LPData", pdata_weapon_zoom) / FIX) * 0.90)
-      SCOP A 0 bright A_ZoomFactor((CallACS("LPData", pdata_weapon_zoom) / FIX) * 0.95)
+      SCOP A 1 A_ZoomFactor((CallACS("LPData", pdata_weaponzoom) / FIX) * 0.80)
+      SCOP A 1 A_ZoomFactor((CallACS("LPData", pdata_weaponzoom) / FIX) * 0.85)
+      SCOP A 1 bright A_ZoomFactor((CallACS("LPData", pdata_weaponzoom) / FIX) * 0.90)
+      SCOP A 0 bright A_ZoomFactor((CallACS("LPData", pdata_weaponzoom) / FIX) * 0.95)
       SCOP A 1 bright A_GunFlash("OverlayFirePunct")
       SCOP A 1 bright
       SCOP A 1 bright
       SCOP A 1 bright
       SCOP A 1 bright
-      SCOP A 0 A_ZoomFactor(CallACS("LPData", pdata_weapon_zoom) / FIX)
+      SCOP A 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX)
       SCOP AAAAAAAAAA 1 A_ReFire
       goto LoadAnim
    
@@ -291,7 +291,7 @@ actor Lith_BFG9000 : Lith_MWeapon
       goto Ready
    ScopeIn:
       "####" A 0 A_GiveInventory("Lith_WeaponScopedToken", 1)
-      "####" A 0 A_ZoomFactor(CallACS("LPData", pdata_weapon_zoom) / FIX)
+      "####" A 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX)
       "####" A 0 A_PlaySound("weapons/shotgun/zoomin", 6)
       goto AltReady
    }

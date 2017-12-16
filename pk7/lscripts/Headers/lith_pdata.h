@@ -5,10 +5,10 @@
 enum // Lith_PData
 {
    pdata_upgrade,
-   pdata_rifle_firemode,
+   pdata_riflemode,
    pdata_buttons,
-   pdata_has_sigil,
-   pdata_weapon_zoom,
+   pdata_hassigil,
+   pdata_weaponzoom,
    pdata_recoil,
    pdata_pclass
 };

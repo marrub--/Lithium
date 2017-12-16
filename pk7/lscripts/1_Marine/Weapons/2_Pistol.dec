@@ -181,7 +181,7 @@ actor Lith_Pistol : Lith_MWeapon
       "####" B 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut")
    ScopeIn:
       "####" B 0 A_GiveInventory("Lith_WeaponScopedToken", 1)
-      "####" B 0 A_ZoomFactor((CallACS("LPData", pdata_weapon_zoom) / FIX) * 0.5)
+      "####" B 0 A_ZoomFactor((CallACS("LPData", pdata_weaponzoom) / FIX) * 0.5)
       "####" B 0 A_PlaySound("weapons/pistol/zoomin", 6)
       goto AltReady
    ScopeOut:

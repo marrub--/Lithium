@@ -194,20 +194,19 @@ int LPData(int info, int permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return 0;
-
-   switch(info)
+   withplayer(LocalPlayer)
+      switch(info)
    {
-   case pdata_upgrade:        return p->getUpgrActive(permutation);
-   case pdata_rifle_firemode: return p->riflefiremode;
-   case pdata_buttons:        return p->buttons;
-   case pdata_has_sigil:      return p->sigil.acquired;
-   case pdata_weapon_zoom:    return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
-   case pdata_recoil:         return bitsk(p->getCVarK("lith_weapons_recoil"));
-   case pdata_pclass:         return p->pclass;
-   default:                   return 0;
+   case pdata_upgrade:    return p->getUpgrActive(permutation);
+   case pdata_riflemode:  return p->riflefiremode;
+   case pdata_buttons:    return p->buttons;
+   case pdata_hassigil:   return p->sigil.acquired;
+   case pdata_weaponzoom: return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
+   case pdata_recoil:     return bitsk(p->getCVarK("lith_weapons_recoil"));
+   case pdata_pclass:     return p->pclass;
    }
+
+   return 0;
 }
 
 //
