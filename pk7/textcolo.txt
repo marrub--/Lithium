@@ -8,5 +8,9 @@ Lith_Purple
    #301875 #8C3BF8
 }
 
-// EOF
+Lith_Green
+{
+   #005000 #00FF00
+}
 
+// EOF

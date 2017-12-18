@@ -54,7 +54,7 @@ static void HUD_Ammo(player_t *p)
 
    if(wep->ammotype & AT_NMag) {
       typegfx = "lgfx/HUD/MAG.png";
-      HudMessageF("LHUDFONT", "%i/%i", wep->magmax - wep->magcur, wep->magmax);
+      HudMessageF("LHUDFONT", "\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
       HudMessagePlain(hid_ammo1, 224.1, 229.0-y, TS);
    }
 
@@ -68,7 +68,7 @@ static void HUD_Ammo(player_t *p)
       }
 
       typegfx = "lgfx/HUD/AMMO.png";
-      HudMessageF("LHUDFONT", "%i", wep->ammocur);
+      HudMessageF("LHUDFONT", "\C[Lith_Green]%i", wep->ammocur);
       HudMessagePlain(hid_ammo2, x+224.1, 229.0-y, TS);
    }
 
@@ -103,8 +103,7 @@ static void HUD_Health(player_t *p)
          "lgfx/HUD/SplitBack.png",
       hid_healthbg, 0.1, 239.2, TS);
 
-   if(p->dead) HudMessageF("LHUDFONT", "---");
-   else        HudMessageF("LHUDFONT", "%i", p->health);
+   HudMessageF("LHUDFONT", "\C[Lith_Green]%i", p->health);
 
    HudMessagePlain(hid_health, 34.1, 231.0, TS);
 
@@ -152,7 +151,7 @@ static void HUD_Armor(player_t *p)
 
    DrawSpritePlain("lgfx/HUD/SplitBack.png", hid_armorbg, 0.1, 223.2, TS);
 
-   HudMessageF("LHUDFONT", "%i", p->armor);
+   HudMessageF("LHUDFONT", "\C[Lith_Green]%i", p->armor);
    HudMessagePlain(hid_armor, 34.1, 215.0, TS);
 
    DrawSpritePlain("lgfx/HUD/ARM.png", hid_armortxt, 2.1, 221.2, TS);
