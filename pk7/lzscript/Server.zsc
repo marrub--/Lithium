@@ -1,12 +1,12 @@
 class Lith_Server : Actor
 {
-   bool GrabInput[MAXPLAYERS];
-   bool Paused;
+   bool lith_grabInput[MAXPLAYERS];
+   bool lith_paused;
    
    static void SetInput(int pnum, bool on)
    {
       let sv = Instance();
-      if(sv) sv.GrabInput[pnum % MAXPLAYERS] = on;
+      if(sv) sv.lith_grabInput[pnum % MAXPLAYERS] = on;
    }
 
    static int GetMaxAmmo(int pnum, string cname)
@@ -34,4 +34,3 @@ class Lith_Server : Actor
 }
 
 // EOF
-

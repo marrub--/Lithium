@@ -185,7 +185,7 @@ static __str names_c_shipgun[] = {
    "Srassa Drass"
 };
 
-static struct pickupname_s const pickupnames[weapon_max] = {
+static struct pickupname_s const pickupnames[weapon_max_lith] = {
    [weapon_unknown]    = name(names_unknown),
    [weapon_fist]       = name(names_unknown),
    [weapon_cfist]      = name(names_cfist),
@@ -253,12 +253,18 @@ static void Lith_StupidPickup(player_t *p, int weapon)
 
 void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
 {
-   if(p->getCVarI("lith_player_stupidpickups"))
-      Lith_StupidPickup(p, info->type);
-   else if(info->name)
-      p->log("> You got the %S!", Language("LITH_TXT_INFO_SHORT_%S", info->name));
+   if(info->type < weapon_max_lith)
+   {
+      if(p->getCVarI("lith_player_stupidpickups"))
+         Lith_StupidPickup(p, info->type);
+      else if(info->name)
+         p->log("> You got the %S!",
+            Language("LITH_TXT_INFO_SHORT_%S", info->name));
+      else
+         p->log("> Acquired impossible object");
+   }
    else
-      p->log("> Acquired impossible object");
+      p->log("> Slot %i weapon acquired.", info->slot);
 }
 
 // EOF

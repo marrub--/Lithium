@@ -357,6 +357,26 @@ static void OnDeath(dmon_t *m)
 }
 
 //
+// Lith_MonsterTick
+//
+void Lith_MonsterTick(dmon_t *m, int tic)
+{
+   GetInfo(m);
+
+   if(m->ms->health <= 0) {
+      OnDeath(m);
+      WaitForResurrect(m);
+      return;
+   }
+
+   if(HasResistances(m) && m->level >= 20)
+      ShowBarrier(m, m->level / (fixed)MAXLEVEL);
+
+   if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
+      ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
+}
+
+//
 // Lith_MonsterMain
 //
 [[__call("ScriptS")]]
@@ -375,22 +395,8 @@ void Lith_MonsterMain(dmon_t *m)
    LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
-   for(int tic = 0;; tic++)
-   {
-      GetInfo(m);
-
-      if(m->ms->health <= 0) {
-         OnDeath(m);
-         WaitForResurrect(m);
-         continue;
-      }
-
-      if(HasResistances(m) && m->level >= 20)
-         ShowBarrier(m, m->level / (fixed)MAXLEVEL);
-
-      if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
-         ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
-
+   for(int tic = 0;; tic++) {
+      Lith_MonsterTick(m, tic);
       ACS_Delay(2);
    }
 }
@@ -399,9 +405,8 @@ void Lith_MonsterMain(dmon_t *m)
 // Lith_MonsterInfo
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_MonsterInfo(int tid)
+void Lith_MonsterInfo()
 {
-   if(tid) ACS_SetActivator(tid);
    while(!world.gsinit) ACS_Delay(1);
 
    __str cname = ACS_GetActorClass(0);

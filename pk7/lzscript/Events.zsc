@@ -10,18 +10,13 @@ class Lith_Events : StaticEventHandler
    {
       let th = evt.thing;
       if(th.bISMONSTER)
-      {
-         int tid = th.tid;
-         th.changeTID(CallACS("Lith_UniqueTID"));
-         CallACS("Lith_MonsterInfo", th.tid);
-         th.changeTID(tid);
-      }
+         th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
    }
    
    override bool InputProcess(InputEvent evt)
    {
       let sv = Lith_Server.Instance();
-      if(sv && sv.GrabInput[consoleplayer] &&
+      if(sv && sv.lith_grabInput[consoleplayer] &&
          evt.Type == InputEvent.Type_KeyDown && evt.keyString)
       {
          EventHandler.SendNetworkEvent("Lith_Key", evt.keyChar);

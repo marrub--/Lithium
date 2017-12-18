@@ -5,7 +5,7 @@ class Lith_PauseManager play
       level.frozen = on;
 
       let sv = Lith_Server.Instance();
-      if(sv) sv.Paused = on;
+      if(sv) sv.lith_paused = on;
       
       for(int i = 0; i < MAXPLAYERS; i++)
       {
@@ -16,7 +16,7 @@ class Lith_PauseManager play
             pl.mo.viewbob = 0;
          } else {
             let mo = Lith_Player(pl.mo);
-            pl.mo.viewbob = mo ? mo.lith_vbob : 0;
+            pl.mo.viewbob = mo ? mo.lith_vbob : 1;
             if(pl.psprites) pl.psprites.tics = pl.psprites.curState.tics;
          }
       }
@@ -25,14 +25,14 @@ class Lith_PauseManager play
    static bool GetPaused()
    {
       let sv = Lith_Server.Instance();
-      if(sv) return sv.Paused;
+      if(sv) return sv.lith_paused;
       return false;
    }
    
    static void PauseTick(int player)
    {
       let sv = Lith_Server.Instance();
-      if(sv && sv.Paused && playeringame[player] && players[player].psprites)
+      if(sv && sv.lith_paused && playeringame[player] && players[player].psprites)
          players[player].psprites.tics = -1;
    }
 }

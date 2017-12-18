@@ -42,7 +42,7 @@ static void SetupAttributes(player_t *p)
 //
 static void SetPClass(player_t *p)
 {
-   __with(__str cl = ACS_GetActorClass(0);) {
+   __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
            if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
       else if(cl == "Lith_CyberMagePlayer") p->pclass = pcl_cybermage;
       else if(cl == "Lith_InformantPlayer") p->pclass = pcl_informant;
@@ -52,12 +52,51 @@ static void SetPClass(player_t *p)
       else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
       else if(cl == "FDPlutPlayer"  || cl == "FDTNTPlayer"    ||
               cl == "FDDoom2Player" || cl == "FDAliensPlayer" ||
-              cl == "FDJPCPPlayer"  || cl == "FDBTSXPlayer") {
+              cl == "FDJPCPPlayer"  || cl == "FDBTSXPlayer")
          p->pclass = pcl_fdoomer;
-      } else {
-         Log("Invalid player class detected!");
-         abort();
-      }
+      else if(cl == "DoomRLMarine"        || cl == "DoomRLScout"    ||
+              cl == "DoomRLTechnician"    || cl == "DoomRLRenegade" ||
+              cl == "DoomRLDemolitionist" || cl == "DoomRLCommando")
+         p->pclass = pcl_drla;
+      else
+         Log("Invalid player class detected, everything will likely explode!");
+   }
+}
+
+//
+// ConvertAmmo
+//
+static void ConvertAmmo(player_t *p)
+{
+   int clip = ACS_CheckInventory("Lith_BulletAmmo");
+   int shel = ACS_CheckInventory("Lith_ShellAmmo");
+   int rckt = ACS_CheckInventory("Lith_RocketAmmo");
+   int cell = ACS_CheckInventory("Lith_PlasmaAmmo");
+   int bfgc = ACS_CheckInventory("Lith_CannonAmmo");
+
+   ACS_TakeInventory("Lith_BulletAmmo", clip);
+   ACS_TakeInventory("Lith_ShellAmmo",  shel);
+   ACS_TakeInventory("Lith_RocketAmmo", rckt);
+   ACS_TakeInventory("Lith_PlasmaAmmo", cell);
+   ACS_TakeInventory("Lith_CannonAmmo", bfgc);
+
+   if(p->pclass == pcl_fdoomer)
+   {
+      #define FDClass(cname) \
+         if(p->pcstr == "FD" cname "Player") { \
+            ACS_GiveInventory("FD" cname "Bullets",   clip); \
+            ACS_GiveInventory("FD" cname "Shells",    shel); \
+            ACS_GiveInventory("FD" cname "Rocket",    rckt); \
+            ACS_GiveInventory("FD" cname "Cell",      cell); \
+            ACS_GiveInventory("FD" cname "BFGCharge", bfgc); \
+         }
+      FDClass("Plut")
+      FDClass("TNT")
+      FDClass("Doom2")
+      FDClass("Aliens")
+      FDClass("JPCP")
+      FDClass("BTSX")
+      #undef FDClass
    }
 }
 
@@ -160,6 +199,9 @@ void Lith_PlayerUpdateData(player_t *p)
    p->keys.redskull    = ACS_CheckInventory("RedSkull");
    p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
    p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
+
+   if(p->pclass & pcl_mods)
+      ConvertAmmo(p);
 
    DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
       p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);

@@ -226,6 +226,7 @@ typedef struct player
    long  ticks;
    __str name;
    int   pclass;
+   __str pcstr;
 
    // Deltas
    [[__anonymous]] player_delta_t cur;

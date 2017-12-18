@@ -159,6 +159,8 @@ void Lith_PlayerInitBIP(player_t *p)
 //
 void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
+   if(p->pclass & pcl_mods) return;
+
    flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
 
    ifauto(__str, discrim, p->discrim) {

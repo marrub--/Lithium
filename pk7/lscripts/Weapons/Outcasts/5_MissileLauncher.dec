@@ -14,6 +14,8 @@ actor Lith_MissileLauncher : Lith_Weapon
    Weapon.BobRangeY 1.1
    Weapon.BobRangeX 0.9
 
+   +WEAPON.CHEATNOTWEAPON
+
    const int lvar_reset = 1;
    
    states

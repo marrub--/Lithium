@@ -63,6 +63,8 @@
 %% LITH_TXT_LOG_LevelUpFulk
 > \cj<\cdVital\cj>\cd :: Level %i reached. Use Status menu to distribute points.
 
+== LITH_TXT_LOG_LevelUpMod | $LITH_TXT_LOG_LevelUpStan
+
 ## Boss Warnings -------------------------------------------------------------|
 %% LITH_TXT_LOG_BossWarnStan
 > \cgWarning: High demonic energy levels detected in area.
@@ -72,5 +74,7 @@
 
 %% LITH_TXT_LOG_BossWarnFulk
 > \cj<\cgWarning\cj>\c- :: High demonic energy levels. Seek and remove source.
+
+== LITH_TXT_LOG_BossWarnMod | $LITH_TXT_LOG_BossWarnStan
 
 ## EOF

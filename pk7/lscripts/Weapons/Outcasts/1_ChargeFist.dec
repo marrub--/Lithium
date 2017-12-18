@@ -65,6 +65,7 @@ actor Lith_ChargeFist : Lith_Weapon
    
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
+   +WEAPON.CHEATNOTWEAPON
    
    states
    {

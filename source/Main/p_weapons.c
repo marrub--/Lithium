@@ -15,7 +15,6 @@
 #define N(a) .classname = "Lith_" a, .name = a
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
-   // !!ACHTUNG!! DON'T FUCKING CHANGE THIS WITHOUT CHANGING THE HEADER FIRST !!ACHTUNG!!
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
    // Outcast Weapons
@@ -61,6 +60,27 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 
    // Misc. Weapons
    {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},
+
+   // Final Doomer Weapons
+   #define FN(a) .classname = "FD" a, .name = a
+   #define FDClass(cname) \
+      {1, pcl_fdoomer, FN(cname "Fist"),           "YOUSONOFABITCH", AT_None}, \
+      {1, pcl_fdoomer, FN(cname "Chainsaw"),       P("cfist"),       AT_None}, \
+      {2, pcl_fdoomer, FN(cname "Pistol"),         P("pistol"),      AT_Ammo, "FD" cname "PistolAmmo"}, \
+      {3, pcl_fdoomer, FN(cname "Shotgun"),        P("shotgun"),     AT_Ammo, "FD" cname "Shells"}, \
+      {3, pcl_fdoomer, FN(cname "SuperShotgun"),   P("ssg"),         AT_Ammo, "FD" cname "Shells"}, \
+      {4, pcl_fdoomer, FN(cname "Chaingun"),       P("rifle"),       AT_Ammo, "FD" cname "Bullets"}, \
+      {5, pcl_fdoomer, FN(cname "RocketLauncher"), P("rocket"),      AT_Ammo, "FD" cname "Rocket"}, \
+      {6, pcl_fdoomer, FN(cname "PlasmaRifle"),    P("plasma"),      AT_Ammo, "FD" cname "Cell"}, \
+      {7, pcl_fdoomer, FN(cname "BFG9000"),        P("cannon"),      AT_Ammo, "FD" cname "BFGCharge"},
+   FDClass("Plut")
+   FDClass("TNT")
+   FDClass("Doom2")
+   FDClass("Aliens")
+   FDClass("JPCP")
+   FDClass("BTSX")
+   #undef FDClass
+   #undef FN
 };
 #undef A
 #undef M
@@ -73,7 +93,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
 //
 // GiveWeaponItem
 //
-static void GiveWeaponItem(int parm)
+static void GiveWeaponItem(int parm, int slot)
 {
    switch(parm)
    {
@@ -87,6 +107,21 @@ static void GiveWeaponItem(int parm)
    case weapon_plasma:    ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
    case weapon_c_shipgun: ACS_GiveInventory("Lith_CannonAmmo", 5);    break;
    case weapon_bfg:       ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
+
+   case weapon_fd_jpcp_chainsaw:
+      ACS_GiveInventory("FDGotChainsaw", 1);
+      break;
+   }
+
+   if(parm > weapon_max_lith)
+      switch(slot)
+   {
+   case 2: ACS_GiveInventory("Lith_BulletAmmo", 20); break;
+   case 3: ACS_GiveInventory("Lith_ShellAmmo",  10); break;
+   case 4: ACS_GiveInventory("Lith_BulletAmmo", 40); break;
+   case 5: ACS_GiveInventory("Lith_RocketAmmo", 5);  break;
+   case 6: ACS_GiveInventory("Lith_PlasmaAmmo", 50); break;
+   case 7: ACS_GiveInventory("Lith_CannonAmmo", 2);  break;
    }
 }
 
@@ -114,9 +149,10 @@ static void WeaponGrab(player_t *p, weaponinfo_t const *info)
 //
 static void Lith_PickupScore(player_t *p, int parm)
 {
-   score_t score = 4000 * weaponinfo[parm].slot;
+   int slot = weaponinfo[parm].slot;
+   score_t score = 4000 * slot;
 
-   GiveWeaponItem(parm);
+   GiveWeaponItem(parm, slot);
    score = p->giveScore(score);
    p->log("> Sold the %S for %lli\Cnscr\C-.",
       Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name), score);
@@ -141,36 +177,62 @@ bool Lith_WeaponPickup(int name)
    switch(p->pclass)
    {
    #define Case(name, set) case name: parm = set; break
+   #define Weaps(sfist, schainsaw, spistol, sshotgun, ssupershotgun, schaingun, srocketlauncher, splasmarifle, sbfg9000) \
+      switch(name) { \
+      Case(wepnam_fist,           sfist); \
+      Case(wepnam_chainsaw,       schainsaw); \
+      Case(wepnam_pistol,         spistol); \
+      Case(wepnam_shotgun,        sshotgun); \
+      Case(wepnam_supershotgun,   ssupershotgun); \
+      Case(wepnam_chaingun,       schaingun); \
+      Case(wepnam_rocketlauncher, srocketlauncher); \
+      Case(wepnam_plasmarifle,    splasmarifle); \
+      Case(wepnam_bfg9000,        sbfg9000); \
+      } \
+      break
    case pcl_marine:
-      switch(name)
-      {
-      Case(wepnam_fist,           weapon_fist);
-      Case(wepnam_chainsaw,       weapon_cfist);
-      Case(wepnam_pistol,         weapon_pistol);
-      Case(wepnam_shotgun,        weapon_shotgun);
-      Case(wepnam_supershotgun,   weapon_ssg);
-      Case(wepnam_chaingun,       weapon_rifle);
-      Case(wepnam_rocketlauncher, weapon_launcher);
-      Case(wepnam_plasmarifle,    weapon_plasma);
-      Case(wepnam_bfg9000,        weapon_bfg);
-      }
-      break;
-
+      Weaps(weapon_fist,
+            weapon_cfist,
+            weapon_pistol,
+            weapon_shotgun,
+            weapon_ssg,
+            weapon_rifle,
+            weapon_launcher,
+            weapon_plasma,
+            weapon_bfg);
    case pcl_cybermage:
-      switch(name)
-      {
-      Case(wepnam_fist,           weapon_c_fist);
-      Case(wepnam_chainsaw,       weapon_cfist);
-      Case(wepnam_pistol,         weapon_c_mateba);
-      Case(wepnam_shotgun,        weapon_c_rifle);
-      Case(wepnam_supershotgun,   weapon_c_spas);
-      Case(wepnam_chaingun,       weapon_c_smg);
-      Case(wepnam_rocketlauncher, weapon_c_sniper);
-      Case(wepnam_plasmarifle,    weapon_c_plasma);
-      Case(wepnam_bfg9000,        weapon_c_shipgun);
-      }
-      break;
+      Weaps(weapon_c_fist,
+            weapon_cfist,
+            weapon_c_mateba,
+            weapon_c_rifle,
+            weapon_c_spas,
+            weapon_c_smg,
+            weapon_c_sniper,
+            weapon_c_plasma,
+            weapon_c_shipgun);
+   case pcl_fdoomer:
+      #define FDClass(cname, ctype) \
+         if(p->pcstr == "FD" cname "Player") { \
+            Weaps(weapon_fd_##ctype##_fist, \
+                  weapon_fd_##ctype##_chainsaw, \
+                  weapon_fd_##ctype##_pistol, \
+                  weapon_fd_##ctype##_shotgun, \
+                  weapon_fd_##ctype##_ssg, \
+                  weapon_fd_##ctype##_chaingun, \
+                  weapon_fd_##ctype##_launcher, \
+                  weapon_fd_##ctype##_plasma, \
+                  weapon_fd_##ctype##_bfg); \
+            break; \
+         }
+      FDClass("Plut",   plut)
+      FDClass("TNT",    tnt)
+      FDClass("Doom2",  doom2)
+      FDClass("Aliens", aliens)
+      FDClass("JPCP",   jpcp)
+      FDClass("BTSX",   btsx)
+      #undef FDClass
    #undef Case
+   #undef Weaps
    }
 
    if(!ValidateWeapon(parm))
@@ -194,10 +256,11 @@ bool Lith_WeaponPickup(int name)
       p->weaponsheld++;
       p->bipUnlock(info->name);
 
-      GiveWeaponItem(parm);
+      GiveWeaponItem(parm, info->slot);
       Lith_PickupMessage(p, info);
 
-      ACS_GiveInventory(info->classname, 1);
+      if(info->type != weapon_fd_jpcp_chainsaw) // fuck a bitch
+         ACS_GiveInventory(info->classname, 1);
 
       return !weaponstay;
    }

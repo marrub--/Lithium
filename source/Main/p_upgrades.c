@@ -19,7 +19,7 @@
 #define Req(arg) .requires = arg
 static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
 // {{"Name-------", "BIP---------", Cost---}, pcl_name, UC_Cat-, Pr, Score, [Group], [Requirements]},
-   {{"HeadsUpDisp", "HeadsUpDisp",  0      }, pcl_marine,                     UC_Body, 1, -0.05, UG_HUD},
+   {{"HeadsUpDisp", "HeadsUpDisp",  0      }, pcl_marine | pcl_mods,          UC_Body, 1, -0.05, UG_HUD},
    {{"HeadsUpDis2", "HeadsUpDisp",  0      }, pcl_cybermage,                  UC_Body, 1, -0.05, UG_HUD},
    {{"HeadsUpDis3", "HeadsUpDisp",  0      }, pcl_missioners | pcl_intruders, UC_Body, 1, -0.05, UG_HUD},
    {{"JetBooster",  "JetBooster",   0      }, pcl_marine,                     UC_Body, 0, -0.05},

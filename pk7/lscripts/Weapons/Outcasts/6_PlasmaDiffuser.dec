@@ -39,6 +39,8 @@ actor Lith_PlasmaDiffuser : Lith_Weapon
    Weapon.UpSound "weapons/plasdiff/draw"
    Weapon.SlotNumber 6
    Weapon.SlotPriority 0.9
+
+   +WEAPON.CHEATNOTWEAPON
    
    states
    {

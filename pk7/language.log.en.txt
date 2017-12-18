@@ -65,6 +65,7 @@
    "> \cd[INFO] You are now level \cj%i\cd. Distribute points via the Status menu.";
 "LITH_TXT_LOG_LevelUpFulk" =
    "> \cj<\cdVital\cj>\cd :: Level %i reached. Use Status menu to distribute points.";
+"LITH_TXT_LOG_LevelUpMod" = "$LITH_TXT_LOG_LevelUpStan";
 
 // Boss Warnings -------------------------------------------------------------|
 "LITH_TXT_LOG_BossWarnStan" =
@@ -73,5 +74,6 @@
    "> \cr[WARNING] Demonic energy levels in area rising eratically.";
 "LITH_TXT_LOG_BossWarnFulk" =
    "> \cj<\cgWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
+"LITH_TXT_LOG_BossWarnMod" = "$LITH_TXT_LOG_BossWarnStan";
 
 // EOF

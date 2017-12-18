@@ -6,6 +6,11 @@ gameinfo
                              "Lith_InformantPlayer", "Lith_WandererPlayer",
                              "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
                              "Lith_ThothPlayer"
+   AddPlayerClasses        = "FDPlutPlayer", "FDTNTPlayer", "FDDoom2Player",
+                             "FDAliensPlayer", "FDJPCPPlayer", "FDBTSXPlayer",
+                             "DoomRLMarine", "DoomRLScout", "DoomRLTechnician",
+                             "DoomRLRenegade", "DoomRLDemolitionist",
+                             "DoomRLCommando"
    DimColor                = "Black"
    DimAmount               = 0.25
    MenuFontColor_Title     = "Green"

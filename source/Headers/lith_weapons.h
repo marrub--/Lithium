@@ -51,6 +51,69 @@ enum // Lith_WeaponNum
    // Misc. Weapons
    weapon_wings,
 
+   weapon_max_lith,
+
+   // Final Doomer Weapons
+   weapon_fd_plut_fist = weapon_max_lith,
+   weapon_fd_plut_chainsaw,
+   weapon_fd_plut_pistol,
+   weapon_fd_plut_shotgun,
+   weapon_fd_plut_ssg,
+   weapon_fd_plut_chaingun,
+   weapon_fd_plut_launcher,
+   weapon_fd_plut_plasma,
+   weapon_fd_plut_bfg,
+
+   weapon_fd_tnt_fist,
+   weapon_fd_tnt_chainsaw,
+   weapon_fd_tnt_pistol,
+   weapon_fd_tnt_shotgun,
+   weapon_fd_tnt_ssg,
+   weapon_fd_tnt_chaingun,
+   weapon_fd_tnt_launcher,
+   weapon_fd_tnt_plasma,
+   weapon_fd_tnt_bfg,
+
+   weapon_fd_doom2_fist,
+   weapon_fd_doom2_chainsaw,
+   weapon_fd_doom2_pistol,
+   weapon_fd_doom2_shotgun,
+   weapon_fd_doom2_ssg,
+   weapon_fd_doom2_chaingun,
+   weapon_fd_doom2_launcher,
+   weapon_fd_doom2_plasma,
+   weapon_fd_doom2_bfg,
+
+   weapon_fd_aliens_fist,
+   weapon_fd_aliens_chainsaw,
+   weapon_fd_aliens_pistol,
+   weapon_fd_aliens_shotgun,
+   weapon_fd_aliens_ssg,
+   weapon_fd_aliens_chaingun,
+   weapon_fd_aliens_launcher,
+   weapon_fd_aliens_plasma,
+   weapon_fd_aliens_bfg,
+
+   weapon_fd_jpcp_fist,
+   weapon_fd_jpcp_chainsaw,
+   weapon_fd_jpcp_pistol,
+   weapon_fd_jpcp_shotgun,
+   weapon_fd_jpcp_ssg,
+   weapon_fd_jpcp_chaingun,
+   weapon_fd_jpcp_launcher,
+   weapon_fd_jpcp_plasma,
+   weapon_fd_jpcp_bfg,
+
+   weapon_fd_btsx_fist,
+   weapon_fd_btsx_chainsaw,
+   weapon_fd_btsx_pistol,
+   weapon_fd_btsx_shotgun,
+   weapon_fd_btsx_ssg,
+   weapon_fd_btsx_chaingun,
+   weapon_fd_btsx_launcher,
+   weapon_fd_btsx_plasma,
+   weapon_fd_btsx_bfg,
+
    weapon_max
 };
 

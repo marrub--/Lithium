@@ -20,6 +20,7 @@ actor Lith_ItemGlow
       PBAL F 0 A_JumpIf(CallACS("LWData", wdata_pclass) == pcl_assassin,  "SpawnDone")
       PBAL G 0 A_JumpIf(CallACS("LWData", wdata_pclass) == pcl_darklord,  "SpawnDone")
       PBAL H 0 A_JumpIf(CallACS("LWData", wdata_pclass) == pcl_thoth,     "SpawnDone")
+      FDLI T 0 A_JumpIf(CallACS("LWData", wdata_pclass) == pcl_fdoomer,   "SpawnDone")
       UNKN A 0
    SpawnDone:
       "####" "#" 5 bright

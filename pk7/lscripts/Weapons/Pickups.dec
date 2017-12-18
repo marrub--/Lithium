@@ -88,6 +88,7 @@ actor Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw
    SpawnPickup:
       CFIS Z 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CFIS Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP A 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chainsaw)
@@ -104,6 +105,7 @@ actor Lith_PistolPickup : Lith_WeaponPickup replaces Pistol
    SpawnPickup:
       PIST A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       REVL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP B 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_pistol)
@@ -120,6 +122,7 @@ actor Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun
    SpawnPickup:
       SHOT A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSRG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP C 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_shotgun)
@@ -136,6 +139,7 @@ actor Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun
    SpawnPickup:
       SGN2 A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSHG Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP C 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_supershotgun)
@@ -152,6 +156,7 @@ actor Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun
    SpawnPickup:
       RIFL A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CSMG Y 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP D 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chaingun)
@@ -168,6 +173,7 @@ actor Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher
    SpawnPickup:
       LAUN A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       IONG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP E 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_rocketlauncher)
@@ -184,6 +190,7 @@ actor Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle
    SpawnPickup:
       PLAS A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       CPLG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP F 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_plasmarifle)
@@ -200,6 +207,7 @@ actor Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000
    SpawnPickup:
       BFUG A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
       SDSG Z 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
+      LWEP G 0 A_SpawnItemEx("FDLithItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_bfg9000)
