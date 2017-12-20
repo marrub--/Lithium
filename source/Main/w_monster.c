@@ -121,6 +121,9 @@ static struct monster_info const monsterinfo[] = {
    {M(Imp),           mtype_imp,           "DarkImp",          mif_full},
    {M(Imp),           mtype_imp,           "ImpWarlord",       mif_full},
 
+   // dop.pk3
+   {M(LostSoul), mtype_lostsoul, "LostGhoul", mif_full},
+
    // DoomRL Arsenal Monsters
    {M(ZombieMan),   mtype_zombie, "FormerHuman"   },
    {M(ShotgunGuy),  mtype_zombie, "FormerSergeant"},

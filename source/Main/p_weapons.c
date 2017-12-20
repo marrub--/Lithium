@@ -149,13 +149,17 @@ static void WeaponGrab(player_t *p, weaponinfo_t const *info)
 //
 static void Lith_PickupScore(player_t *p, int parm)
 {
-   int slot = weaponinfo[parm].slot;
-   score_t score = 4000 * slot;
+   weaponinfo_t const *info = &weaponinfo[parm];
 
-   GiveWeaponItem(parm, slot);
+   score_t score = 4000 * info->slot;
+
+   GiveWeaponItem(parm, info->slot);
    score = p->giveScore(score);
-   p->log("> Sold the %S for %lli\Cnscr\C-.",
-      Language("LITH_TXT_INFO_SHORT_%S", weaponinfo[parm].name), score);
+
+   if(info->type < weapon_max_lith)
+      p->log("> Sold the %S for %lli\Cnscr\C-.", Language("LITH_TXT_INFO_SHORT_%S", info->name), score);
+   else
+      p->log("> Sold the slot %i weapon for %lli\Cnscr\C-.", info->slot, score);
 }
 
 // Extern Functions ----------------------------------------------------------|
