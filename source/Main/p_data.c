@@ -121,14 +121,14 @@ bool Lith_ButtonPressed(player_t *p, int bt)
 //
 // Lith_SetPlayerVelocity
 //
-bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add, bool setbob)
+bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add)
 {
    if(add)
       p->velx += velx, p->vely += vely, p->velz += velz;
    else
       p->velx = velx, p->vely = vely, p->velz = velz;
 
-   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, setbob);
+   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, true);
 }
 
 //

@@ -65,7 +65,7 @@ void Lith_FreezeTime(bool on)
       if(!frozen++) {
          Lith_ForPlayer() {
             p->frozen++;
-            p->setVel(0, 0, 0, false, true);
+            p->setVel(0, 0, 0);
          }
          Lith_ForPlayer() {
             Lith_GiveActorInventory(p->tid, "Lith_TimeHax", 1);

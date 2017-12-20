@@ -14,6 +14,10 @@ void Lith_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
    DrawSpriteX(hit ? "lgfx/Weapon/BladeHit.png" : "lgfx/Weapon/Blade.png", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
+
+   withplayer(LocalPlayer)
+      if(p->z > p->floorz)
+         p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
 //
@@ -23,11 +27,18 @@ void Lith_Blade(bool hit)
 void Lith_Rend(bool hit, int set)
 {
    static int num;
+
    if(!hit) num = set;
+
    __str graphic = hit ? StrParam("lgfx/Weapon/RendHit%i.png", num)
                        : StrParam("lgfx/Weapon/Rend%i.png", num);
+
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 2, 0.1);
+
+   withplayer(LocalPlayer)
+      if(p->z > p->floorz)
+         p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
 //

@@ -390,7 +390,7 @@ void Lith_RunDialogue(int num)
          ACS_LocalAmbientSound("misc/chat", 127);
 
          p->frozen++;
-         p->setVel(0, 0, 0, false, true);
+         p->setVel(0, 0, 0);
          if(vmstate.text != "") HudMessageLog("%S", vmstate.text);
          do
          {
@@ -421,7 +421,7 @@ void Lith_RunDialogue(int num)
 
             bool usetimer = vmstate.trmtimer != 0;
             p->frozen++;
-            p->setVel(0, 0, 0, false, true);
+            p->setVel(0, 0, 0);
             if(vmstate.text != "") HudMessageLog("%S", vmstate.text);
             do
             {

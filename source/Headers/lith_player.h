@@ -100,15 +100,14 @@ typedef struct player_delta_s
 // Extern Functions ----------------------------------------------------------|
 
 // state
-[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
-                      int  Lith_PlayerCurWeaponType(struct player *p);
-                      bool Lith_ButtonPressed(struct player *p, int bt);
-                      bool Lith_SetPlayerVelocity(struct player *p,
-                         fixed velx, fixed vely, fixed velz,
-                         bool add, bool setbob);
-                      void Lith_ValidatePlayerTID(struct player *p);
+[[__call("ScriptS")]]  void Lith_ResetPlayer(struct player *p);
+[[__call("ScriptS")]]  void Lith_PlayerLoadData(struct player *p);
+[[__call("ScriptS")]]  void Lith_PlayerSaveData(struct player *p);
+                       int  Lith_PlayerCurWeaponType(struct player *p);
+                       bool Lith_ButtonPressed(struct player *p, int bt);
+[[__optional_args(1)]] bool Lith_SetPlayerVelocity(struct player *p,
+                          fixed velx, fixed vely, fixed velz, bool add);
+                       void Lith_ValidatePlayerTID(struct player *p);
 
 // gui
 void Lith_PlayerCloseGUI(struct player *p);

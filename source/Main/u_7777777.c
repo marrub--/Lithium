@@ -26,8 +26,8 @@ void Upgr_7777777_Deactivate(player_t *p, upgrade_t *upgr)
 void Upgr_7777777_Update(player_t *p, upgrade_t *upgr)
 {
    fixed vel = -2;
-   if(p->velz > 0) vel += p->velz;
-   p->setVel(p->velx, p->vely, vel, false, true);
+   if(p->velz > 0) vel = p->velz;
+   p->setVel(p->velx, p->vely, vel);
 }
 
 // EOF
