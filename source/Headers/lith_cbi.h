@@ -8,13 +8,25 @@
 
 enum
 {
-   cbi_tab_upgrades,
-   cbi_tab_cbi,
+   cbi_tab_arsenal,
    cbi_tab_status,
-   cbi_tab_shop,
    cbi_tab_bip,
    cbi_tab_settings,
    cbi_tab_max
+};
+
+enum
+{
+   cbi_tab_arsenal_upgrades,
+   cbi_tab_arsenal_shop,
+   cbi_tab_arsenal_max
+};
+
+enum
+{
+   cbi_tab_stat_attr,
+   cbi_tab_stat_cbi,
+   cbi_tab_stat_max
 };
 
 enum
@@ -34,6 +46,8 @@ enum
 enum
 {
    st_maintab,
+   st_stattab,
+   st_arsetab,
    st_upgrsel,
    st_upgrselold,
    st_upgrscr,

@@ -395,7 +395,7 @@ void Lith_MonsterMain(dmon_t *m)
 
    BaseMonsterLevel(m);
 
-   LogDebug(log_dmonV, "monster %i\t\Cdr%i \Cgl%i\C-\trunning on %S",
+   LogDebug(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
    for(int tic = 0;; tic++) {

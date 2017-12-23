@@ -410,11 +410,11 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 //
 static void GUIUpgradesList(gui_state_t *g, player_t *p)
 {
-   if(Lith_GUI_Button(g, .x = 88, 27, .preset = &guipre.btnprev))
+   if(Lith_GUI_Button(g, .x = 90, 213, .preset = &guipre.btnprev))
       if(g->st[st_upgrfilter].i-- <= 0)
          g->st[st_upgrfilter].i = UC_MAX;
 
-   if(Lith_GUI_Button(g, .x = 88 + guipre.btnprev.w, 27, .preset = &guipre.btnnext))
+   if(Lith_GUI_Button(g, .x = 90 + guipre.btnprev.w, 213, .preset = &guipre.btnnext))
       if(g->st[st_upgrfilter].i++ >= UC_MAX)
          g->st[st_upgrfilter].i = 0;
 
@@ -433,9 +433,9 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
    else
       HudMessageF("CBIFONT", "Filter: \CjAll");
 
-   HudMessagePlain(g->hid--, 15.1, 28.1, TICSECOND);
+   HudMessagePlain(g->hid--, 15.1, 215.1, TICSECOND);
 
-   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 38, guipre.btnlist.w, 184, guipre.btnlist.h * numbtns);
+   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
    int curcategory = UC_MAX;
    int y = 0;

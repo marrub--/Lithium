@@ -1,4 +1,9 @@
 ## Misc ----------------------------------------------------------------------|
+== LITH_TXT_ArsenalStan | Arsenal
+== LITH_TXT_ArsenalJem  | Directives
+== LITH_TXT_ArsenalAri  | Gear
+== LITH_TXT_ArsenalMod  | $LITH_TXT_ArsenalStan
+
 == SECRETMESSAGE | \cnA secret is revealed!
 
 == BGFLAT06 | ZZLITHBG

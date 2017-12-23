@@ -40,6 +40,18 @@
 #define Lith_GUI_ScrollReset(g, stn) \
    ((g)->st[(stn)].scrl = (gui_scroll_state_t){})
 
+#define Lith_GUI_Tabs(g, stname, names, x, y, yy) \
+   do { \
+      for(int _i = 0; _i < countof(names); _i++) \
+      { \
+         if(Lith_GUI_Button_Id(g, _i, names[_i], guipre.btntab.w * _i + (x), \
+            guipre.btntab.h * (yy) + (y), _i == g->st[stname].i, .preset = &guipre.btntab)) \
+         { \
+            g->st[stname].i = _i; \
+         } \
+      } \
+   } while(0)
+
 // Types ---------------------------------------------------------------------|
 
 typedef unsigned id_t;

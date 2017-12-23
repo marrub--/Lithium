@@ -101,7 +101,7 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
          nitems++;
    }
 
-   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 30, guipre.btnlist.w, 192, guipre.btnlist.h * nitems);
+   Lith_GUI_ScrollBegin(g, st_shopscr, 15, 36, guipre.btnlist.w, 186, guipre.btnlist.h * nitems);
 
    for(int i = 0, y = 0; i < countof(shopitems); i++)
    {
