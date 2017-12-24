@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 #define ForCategory() for(int categ = BIPC_NONE + 1; categ < BIPC_MAX; categ++)
-#define ForPage() Lith_ForList(bippage_t *page, bip->infogr[categ])
+#define ForPage() forlist(bippage_t *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
 
 // Extern Objects ------------------------------------------------------------|
@@ -95,7 +95,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
    int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
 
-   bippage_t *page = calloc(1, sizeof(bippage_t));
+   bippage_t *page = salloc(bippage_t);
 
    page->name     = pinit->name;
    page->category = categ;
@@ -171,7 +171,7 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 
    bip_t *bip = &p->bip;
 
-   bippage_t *page = calloc(1, sizeof(bippage_t));
+   bippage_t *page = salloc(bippage_t);
 
    __str date = LanguageNull("LITH_TXT_MAIL_TIME_%S", title);
    __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
@@ -279,12 +279,9 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       bip->lastcategory = BIPC_MAIN;
 
-      if(world.grafZoneEntered)
-      {
-         if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &guipre.btnbipmain))
-            bip->curcategory = BIPC_SEARCH;
-         n += 10;
-      }
+      if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &guipre.btnbipmain))
+         bip->curcategory = BIPC_SEARCH;
+      n += 10;
 #define LITH_X(name, capt) \
       if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 70, 80 + n, .preset = &guipre.btnbipmain)) \
       { \
@@ -432,7 +429,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);
 
       if(bip->curcategory != BIPC_EXTRA)
-         Lith_ForListIter(bippage_t *page, *list, i++)
+         forlistIt(bippage_t *page, *list, i++)
       {
          int y = guipre.btnlist.h * i;
 

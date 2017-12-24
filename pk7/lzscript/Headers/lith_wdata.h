@@ -7,7 +7,6 @@ enum Lith_WData
    wdata_brightweps,
    wdata_noitemfx,
    wdata_bossspawned,
-   wdata_grafzone,
    wdata_enemycheck,
    wdata_ptid,
    wdata_pclass,

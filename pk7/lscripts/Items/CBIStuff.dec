@@ -1,67 +1,29 @@
-actor Lith_CBIItem : CustomInventory
+actor Lith_CBIItem : Lith_Pickup
 {
    //$Category "CBI Items"
-   
-   Inventory.PickupMessage ""
+
    Inventory.PickupSound "player/pickup/upgrcbi"
-   
+
    +INVENTORY.ALWAYSPICKUP
-   
-   var int user_glowangle;
-   var int user_glowzangle;
-   
-   const int Lith_ISF = SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER;
-   
+
    states
    {
    SpawnLoop:
-      TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
-      TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
-      TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
-      
-      // xyz
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowzangle) * 9.0),
-                                              0, 0, 0, 0)
-      
-      // yz
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", 0,
-                                              sin(user_glowangle) * 32.0,
-                                              24.0 + (cos(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", cos(user_glowangle) * 32.0,
-                                              sin(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", cos(user_glowangle) * 32.0,
-                                              ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      
-      // xz
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
-                                              0,
-                                              24.0 + (cos(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", sin(user_glowangle) * 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_UpgrGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
+      TNT1 A 1 A_CheckSight("NoGlow")
+      TNT1 A 0 Lith_A_ItemGlow("Lith_UpgrGlow")
       loop
-   LoopButDontShowThatShitOffDawg:
+   NoGlow:
       TNT1 A 1
-      TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      TNT1 A 0 A_CheckSight("NoGlow")
       goto SpawnLoop
    }
 }
 
 actor Lith_BossReward1 : Lith_CBIItem
 {
+   Lith_Pickup.SpriteM "WUPGA"
+   Lith_Pickup.SpriteC "SPELA"
+
    Tag "Weapon Modification Device"
    
    states
@@ -69,8 +31,6 @@ actor Lith_BossReward1 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_weapninter)
-      WUPG A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL A 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_weapninter)
@@ -80,6 +40,9 @@ actor Lith_BossReward1 : Lith_CBIItem
 
 actor Lith_BossReward2 : Lith_CBIItem
 {
+   Lith_Pickup.SpriteM "CUPGA"
+   Lith_Pickup.SpriteC "SPELB"
+
    Tag "KSKK Spec. High-Grade CPU"
    
    states
@@ -87,8 +50,6 @@ actor Lith_BossReward2 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_hasupgr1)
-      CUPG A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL B 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_hasupgr1)
@@ -98,6 +59,9 @@ actor Lith_BossReward2 : Lith_CBIItem
 
 actor Lith_BossReward3 : Lith_CBIItem
 {
+   Lith_Pickup.SpriteM "ARM1Z"
+   Lith_Pickup.SpriteC "SPELC"
+
    Tag "Armor Interface"
    
    states
@@ -105,8 +69,6 @@ actor Lith_BossReward3 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_armorinter)
-      ARM1 Z 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL C 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_armorinter)
@@ -116,6 +78,9 @@ actor Lith_BossReward3 : Lith_CBIItem
 
 actor Lith_BossReward4 : Lith_CBIItem
 {
+   Lith_Pickup.SpriteM "CUPGB"
+   Lith_Pickup.SpriteC "SPELD"
+
    Tag "KSKK Spec. Super High-Grade CPU"
    
    states
@@ -123,8 +88,6 @@ actor Lith_BossReward4 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_hasupgr2)
-      CUPG B 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL D 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_hasupgr2)
@@ -134,6 +97,9 @@ actor Lith_BossReward4 : Lith_CBIItem
 
 actor Lith_BossReward5 : Lith_CBIItem
 {
+   Lith_Pickup.SpriteM "WRDPA"
+   Lith_Pickup.SpriteC "SPELE"
+
    Tag "Weapon Refactoring Device"
    
    states
@@ -141,8 +107,6 @@ actor Lith_BossReward5 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_weapninte2)
-      WRDP A 0 A_SpawnItemEx("Lith_ItemSpriteM", 0,0,0, 0,0,0, 0, Lith_ISF)
-      SPEL E 0 A_SpawnItemEx("Lith_ItemSpriteC", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_weapninte2)
@@ -152,6 +116,9 @@ actor Lith_BossReward5 : Lith_CBIItem
 
 actor Lith_BossReward6 : Lith_CBIItem
 {
+   Lith_Pickup.Sprite "IOBJC"
+   Lith_Pickup.Generic 1
+
    Tag "Reality Distortion Interface"
    
    states
@@ -159,7 +126,6 @@ actor Lith_BossReward6 : Lith_CBIItem
    Spawn:
       TNT1 A 0
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", cupg_rdistinter)
-      IOBJ C 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF)
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_PickupCBIItem", cupg_rdistinter)

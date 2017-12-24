@@ -220,7 +220,6 @@ int LWData(int info)
    case wdata_brightweps:  return ACS_GetUserCVar(0, "lith_player_brightweps");
    case wdata_noitemfx:    return ACS_GetUserCVar(0, "lith_player_noitemfx");
    case wdata_bossspawned: return world.bossspawned;
-   case wdata_grafzone:    return world.grafZoneEntered;
    case wdata_enemycheck:  return world.enemycheck;
    case wdata_ptid:     Lith_ForPlayer() return p->tid;
    case wdata_pclass:   Lith_ForPlayer() return p->pclass;
@@ -401,7 +400,6 @@ static void CheckModCompat(void)
    int tid;
 
    if((world.legendoom       = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
-   if((world.grafZoneEntered = ACS_SpawnForced("Lith_GrafZone",            0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
 }
@@ -483,8 +481,7 @@ static void MInit(void)
    Lith_LoadMapDialogue();
 
    world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
-   world.pauseinmenus = world.singleplayer && world.grafZoneEntered &&
-      ACS_GetCVar("lith_sv_pauseinmenus");
+   world.pauseinmenus = world.singleplayer && ACS_GetCVar("lith_sv_pauseinmenus");
 
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
@@ -690,8 +687,6 @@ static void Lith_World(void)
 
       if(world.enemycheck && !world.dbgNoMon) {
          extern void DmonDebugInfo(void);
-         if(!world.grafZoneEntered)
-            ACS_SpawnForced("Lith_MonsterInfoEmitter", 0, 0, 0);
          DmonDebugInfo();
       }
 

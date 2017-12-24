@@ -150,6 +150,8 @@ class Lith_Cyberspace
       static const int shifts[] = {0, 2, 8, 10, 16, 18};
       int shift = shifts[level.totaltime / 35 % 6];
 
+      Screen.Dim("Black", 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
+
       // draw scene from pixel buffer
       for(int y = 0; y < rh; y++)
          for(int x = 0; x < rw; x++)

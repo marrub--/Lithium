@@ -43,14 +43,9 @@
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
 
-#define Lith_ScriptCall(...) \
-   (world.grafZoneEntered ? ACS_ScriptCall(__VA_ARGS__) : 0)
-
-#define Lith_ScriptCallFixed(...) \
-   (world.grafZoneEntered ? ACS_ScriptCallFixed(__VA_ARGS__) : 0)
-
-#define Lith_ScriptCallString(...) \
-   (world.grafZoneEntered ? ACS_ScriptCallString(__VA_ARGS__) : "")
+#define Lith_ScriptCall ACS_ScriptCall
+#define Lith_ScriptCallFixed ACS_ScriptCallFixed
+#define Lith_ScriptCallString ACS_ScriptCallString
 
 #define HudMessageLog(...) \
    ( \

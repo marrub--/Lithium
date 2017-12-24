@@ -208,8 +208,8 @@ void Lith_GSReinit_Upgrade(void)
 //
 void Lith_GSInit_Upgrade(void)
 {
-   if(world.grafZoneEntered)
-      Lith_UpgradeRegister(&(upgradeinfo_t const){{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
+   // TODO: move this
+   Lith_UpgradeRegister(&(upgradeinfo_t const){{"DarkCannon", null, 0x7FFFFFFF}, pcl_marine, UC_Extr, 0, 0.00, UG_BFG, .requires=UR_WMD|UR_WRD|UR_RDI, .key=UPGR_DarkCannon});
 
    for(int i = 0; i < countof(UpgrInfoBase); i++)
       UpgrInfoBase[i].key  = i;
@@ -519,12 +519,14 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
    // Performance rating
    if(upgr->info->perf && p->pclass != pcl_cybermage)
    {
-      char cr = upgr->info->perf + p->cbi.pruse > world.cbiperf ? 'a' : 'j';
+      bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
 
       if(upgr->active)
          HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPr\C-.", upgr->info->perf);
+      else if(over)
+         HudMessageF("CBIFONT", "Activating requires \Ca%i\CbPr\C-.", upgr->info->perf);
       else
-         HudMessageF("CBIFONT", "Activating requires \C%c%i\CbPr\C-.", cr, upgr->info->perf);
+         HudMessageF("CBIFONT", "Activating will take \Cj%i\CbPr\C-.", upgr->info->perf);
 
       HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
       y -= 10;

@@ -120,7 +120,6 @@ typedef struct worldinfo_s
    bool drlamonsters;
 
    // Extras
-   bool grafZoneEntered;
    bool pauseinmenus;
 
    // DECORATE data

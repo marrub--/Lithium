@@ -1,4 +1,3 @@
-#include "lscripts/Player/PlayerPawn.dec"
 #include "lscripts/Player/Misc.dec"
 #include "lscripts/Player/Death.dec"
 

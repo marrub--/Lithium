@@ -12,8 +12,7 @@ Category("GUI");
 Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1f, 2.0f);
 Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1f, 2.0f);
 Enum("Color Theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
-if(world.grafZoneEntered)
-   ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
+ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
 Category("Player");
 //Bool("Auto-level attributes", "lith_player_autolevel");

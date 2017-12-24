@@ -1,0 +1,149 @@
+struct Lith_Sprite
+{
+   spriteid spr;
+   int      frm;
+}
+
+class Lith_ItemGlow : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.7;
+      Scale 0.1;
+      Translation "112:127=168:183", "5:15=185:185", "224:231=168:171";
+
+      +NOINTERACTION
+      +NOTIMEFREEZE
+   }
+
+   override void PostBeginPlay()
+   {
+      sprite = Actor.GetSpriteIndex("PBAL");
+
+      switch(CallACS("LWData", wdata_pclass))
+      {
+      case pcl_marine:    frame = Ch_A - Ch_A; break;
+      case pcl_cybermage: frame = Ch_C - Ch_A; break;
+      case pcl_informant: frame = Ch_D - Ch_A; break;
+      case pcl_wanderer:  frame = Ch_E - Ch_A; break;
+      case pcl_assassin:  frame = Ch_F - Ch_A; break;
+      case pcl_darklord:  frame = Ch_G - Ch_A; break;
+      case pcl_thoth:     frame = Ch_H - Ch_A; break;
+      case pcl_fdoomer:
+         sprite = Actor.GetSpriteIndex("FDLI");
+         frame = Ch_T - Ch_A;
+         break;
+      default:
+         sprite = Actor.GetSpriteIndex("UNKN");
+         break;
+      }
+   }
+
+   states
+   {
+   Spawn:
+      "####" "#" 5 bright;
+      "####" "#" 1 bright A_FadeOut(1.0 / 35.0);
+      wait;
+   }
+}
+
+class Lith_Pickup : CustomInventory
+{
+   default
+   {
+      Inventory.PickupMessage "";
+      Lith_Pickup.Sprite "UNKNA";
+   }
+
+   bool lith_usegeneric;
+
+   int lith_gla;
+   int lith_glz;
+
+   Actor lith_spr;
+
+   string lith_spriteG_full;
+   string lith_spriteM_full;
+   string lith_spriteC_full;
+
+   Lith_Sprite lith_spriteG;
+   Lith_Sprite lith_spriteM;
+   Lith_Sprite lith_spriteC;
+
+   property Sprite:  lith_spriteG_full;
+   property SpriteM: lith_spriteM_full;
+   property SpriteC: lith_spriteC_full;
+   property Generic: lith_usegeneric;
+
+   const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
+
+   override void PostBeginPlay()
+   {
+      if(lith_spriteG_full) Lith_GetSprite(lith_spriteG, lith_spriteG_full);
+      if(lith_spriteM_full) Lith_GetSprite(lith_spriteM, lith_spriteM_full);
+      if(lith_spriteC_full) Lith_GetSprite(lith_spriteC, lith_spriteC_full);
+
+      lith_spr = Spawn("Lith_ItemSprite", pos);
+      lith_spr.master = self;
+   }
+
+   override void Tick()
+   {
+      Super.Tick();
+
+      if(lith_usegeneric) {
+         Lith_SetSprite(lith_spriteG);
+         return;
+      }
+
+      if(!players[consoleplayer].camera)
+         return;
+
+      let p = players[consoleplayer].camera;
+           if(p is "Lith_MarinePlayer")    Lith_SetSprite(lith_spriteM);
+      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(lith_spriteC);
+      else                                 Lith_SetSprite(lith_spriteG);
+   }
+
+   void Lith_SetSprite(Lith_Sprite s)
+   {
+      lith_spr.sprite = s.spr;
+      lith_spr.frame  = s.frm;
+   }
+
+   void Lith_GetSprite(out Lith_Sprite s, string full)
+   {
+      s.spr = Actor.GetSpriteIndex(full.left(4));
+      s.frm = full.charCodeAt(4) - Ch_A;
+   }
+
+   void Lith_ItemGlow(class<Actor> type)
+   {
+      lith_gla = (lith_gla + 5) % 360;
+      lith_glz = (lith_glz + 2) % 360;
+
+      double sa = sin(lith_gla);
+      double sz = sin(lith_glz);
+      double ca = cos(lith_gla);
+
+      if(!CallACS("LWData", wdata_noitemfx))
+      {
+         A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sz * 9);
+         A_SpawnItemEx(type, 0, sa * 32, 24 + ca * 32);
+         A_SpawnItemEx(type, ca * 32, sa * 32, 24 + sa * 32);
+         A_SpawnItemEx(type, ca * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
+         A_SpawnItemEx(type, sa * 32, 0, 24 + ca * 32);
+         A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sa * 32);
+         A_SpawnItemEx(type, (1 - sa) * 32 - 32, ca * 32, 24 + sa * 32);
+      }
+   }
+
+   action void Lith_A_ItemGlow(class<Actor> type)
+   {
+      invoker.Lith_ItemGlow(type);
+   }
+}
+
+// EOF

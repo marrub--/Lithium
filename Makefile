@@ -28,8 +28,7 @@ MAIN_BINARY=$(PK7_BIN)/lithmain.bin
 MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL
 MAIN_LFLAGS=-llithlib
 
-DECOMPAT_INPUTS=$(wildcard $(SRCDIR)/DeCompat/*.dec) \
-                $(MAIN_INC)/lith_weapons.h \
+DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_pdata.h \
                 $(MAIN_INC)/lith_wdata.h \
                 $(MAIN_INC)/lith_lognames.h \

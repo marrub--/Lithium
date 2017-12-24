@@ -1,4 +1,3 @@
-// dec output: pk7/lscripts/Headers/lith_scorenums.h
 // zsc output: pk7/lzscript/Headers/lith_scorenums.h
 
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.

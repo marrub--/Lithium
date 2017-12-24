@@ -1,4 +1,3 @@
-// dec output: pk7/lscripts/Headers/lith_wdata.h
 // zsc output: pk7/lzscript/Headers/lith_wdata.h
 
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
@@ -7,7 +6,6 @@ enum // Lith_WData
    wdata_brightweps,
    wdata_noitemfx,
    wdata_bossspawned,
-   wdata_grafzone,
    wdata_enemycheck,
    wdata_ptid,
    wdata_pclass,

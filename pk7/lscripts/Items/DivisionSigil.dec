@@ -1,57 +1,16 @@
-actor Lith_ItemPickup : CustomInventory
+actor Lith_ItemPickup : Lith_Pickup
 {
-   Inventory.PickupMessage ""
    Inventory.PickupSound "player/pickup/evil"
-   
-   const int Lith_ISF = SXF_TRANSFERSPRITEFRAME|SXF_SETMASTER;
-   
-   var int user_glowangle;
-   var int user_glowzangle;
-   
+
    states
    {
    SpawnLoop:
-      TNT1 A 1 A_CheckSight("LoopButDontShowThatShitOffDawg")
-      TNT1 A 0 A_SetUserVar(user_glowangle,  (user_glowangle  + 5) % 360)
-      TNT1 A 0 A_SetUserVar(user_glowzangle, (user_glowzangle + 2) % 360)
-      
-      // xyz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowzangle) * 9.0),
-                                              0, 0, 0, 0)
-      
-      // yz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", 0,
-                                              sin(user_glowangle) * 32.0,
-                                              24.0 + (cos(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", cos(user_glowangle) * 32.0,
-                                              sin(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", cos(user_glowangle) * 32.0,
-                                              ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      
-      // xz
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
-                                              0,
-                                              24.0 + (cos(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", sin(user_glowangle) * 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
-      TNT1 A 0 A_SpawnItemEx("Lith_ItemGlow", ((1.0 - sin(user_glowangle)) * 32.0) - 32.0,
-                                              cos(user_glowangle) * 32.0,
-                                              24.0 + (sin(user_glowangle) * 32.0),
-                                              0, 0, 0, 0)
+      TNT1 A 1 A_CheckSight("NoGlow")
+      TNT1 A 0 Lith_A_ItemGlow("Lith_ItemGlow")
       loop
-   LoopButDontShowThatShitOffDawg:
+   NoGlow:
       TNT1 A 1
-      TNT1 A 0 A_CheckSight("LoopButDontShowThatShitOffDawg")
+      TNT1 A 0 A_CheckSight("NoGlow")
       goto SpawnLoop
    }
 }
