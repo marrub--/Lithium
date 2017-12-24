@@ -355,7 +355,7 @@ static void SetupDialogue(dlgparsestate_t *d, int num)
 {
    dlgdef_t *last = d->def;
 
-   d->def = calloc(1, sizeof(dlgdef_t));
+   d->def = salloc(dlgdef_t);
    d->def->num = num;
 
    if(!last) dlgdefs    = d->def;

@@ -14,6 +14,10 @@
 #include <string.h>
 #include <stdint.h>
 
+#define strnull (__str)0
+
+#define salloc(t) calloc(1, sizeof(t))
+
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
@@ -230,7 +234,7 @@ fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 double lerp(double a, double b, double t);
-bool aabb(int bx1, int by1, int bx2, int by2, int x2, int y2);
+bool aabb(int x, int y, int z, int w, int x2, int y2);
 int ceilk(fixed n);
 int bzpolyi(int a, int b, float t);
 float bzpolyf(float a, float b, float t);

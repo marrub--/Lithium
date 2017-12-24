@@ -12,6 +12,7 @@
 #include "lith_weaponinfo.h"
 #include "lith_shopdef.h"
 #include "lith_attrib.h"
+#include "lith_items.h"
 
 #include <GDCC/HashMap.h>
 
@@ -242,6 +243,9 @@ typedef struct player
    upgrademap_t     upgrademap;
    int              upgrmax;
    bool             upgrinit;
+
+   // Inventory
+   container_t inv[7];
 
    // HUD
    loginfo_t loginfo;

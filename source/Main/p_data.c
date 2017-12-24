@@ -38,6 +38,37 @@ static void SetupAttributes(player_t *p)
 }
 
 //
+// SetupInventory
+//
+static void SetupInventory(player_t *p)
+{
+   static container_t const baseinv[] = {
+      {1, 3, "lgfx/UI/InvBack.png"},
+      {1, 3, "lgfx/UI/InvBack.png"},
+      {1, 3, "lgfx/UI/InvBack.png"},
+      {1, 3, "lgfx/UI/InvBack.png"},
+      {4, 8, "lgfx/UI/InvBack.png"},
+      {2, 4, "lgfx/UI/InvBack.png"},
+      {2, 4, "lgfx/UI/InvBack.png"},
+   };
+
+   memmove(p->inv, baseinv, sizeof(baseinv));
+
+   for(int i = 0; i < countof(p->inv); i++) {
+      p->inv[i].items.construct();
+      p->inv[i].user = p;
+   }
+
+   static itemdata_t const testitem = {1, 1, "lgfx/Items/Test.png"};
+
+   for(int i = 0; i < 5; i++) {
+      item_t *item = Lith_Item_New(&testitem);
+      if(!Lith_ItemPlace(&p->inv[4], item, i, i))
+         item->Destroy(item);
+   }
+}
+
+//
 // SetPClass
 //
 static void SetPClass(player_t *p)
@@ -301,6 +332,7 @@ void Lith_ResetPlayer(player_t *p)
    {
       SetPClass(p);
       SetupAttributes(p);
+      SetupInventory(p);
 
       // i cri tears of pain for APROP_SpawnHealth
       p->viewheight   = ACS_GetActorViewHeight(0);
@@ -342,7 +374,7 @@ void Lith_ResetPlayer(player_t *p)
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
-   ACS_TakeInventory("Lith_WeaponScopedToken",  999);
+   ACS_TakeInventory("Lith_WeaponScopedToken", 999);
 
    Lith_PlayerResetCBIGUI(p);
 
@@ -385,6 +417,7 @@ void Lith_ResetPlayer(player_t *p)
 
       if(world.dbgLevel) {
          p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
+         p->logH("> strnull is \"%S\"", strnull);
          PrintDmonAllocSize(p);
       } else {
          p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");

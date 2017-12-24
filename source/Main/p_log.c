@@ -120,7 +120,7 @@ void Lith_LogH(player_t *p, __str fmt, ...)
 //
 logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
 {
-   logdata_t *logdata = calloc(1, sizeof(logdata_t));
+   logdata_t *logdata = salloc(logdata_t);
    logdata->link    .construct(logdata);
    logdata->linkfull.construct(logdata);
 
@@ -176,7 +176,7 @@ void Lith_HUD_Log(player_t *p)
       ACS_SetFont("LOGFONT");
 
       int i = 0;
-      Lith_ForListIter(logdata_t *logdata, p->loginfo.hud, i++)
+      forlistIt(logdata_t *logdata, p->loginfo.hud, i++)
       {
          int y = 10 * i;
          fixed align;
@@ -211,7 +211,7 @@ void Lith_HUD_Log(player_t *p)
 //
 void Lith_PlayerLogEntry(player_t *p)
 {
-   logmap_t *logmap = calloc(1, sizeof(logmap_t));
+   logmap_t *logmap = salloc(logmap_t);
    logmap->link.construct(logmap);
 
    logmap->levelnum = world.mapnum;
@@ -250,12 +250,12 @@ void Lith_CBI_Log(gui_state_t *g, player_t *p)
    HudMessageF("CBIFONT", "%S", selmap->name);
    HudMessagePlain(g->hid--, 28.1 + guipre.btnprev.w + guipre.btnnext.w, 50.1, TICSECOND);
 
-   Lith_ForList(logdata_t *logdata, p->loginfo.full)
+   forlist(logdata_t *logdata, p->loginfo.full)
       num += (logdata->from == selmap->levelnum);
 
    Lith_GUI_ScrollBegin(g, st_logscr, 15, 60, 280, 165, num * 8);
 
-   Lith_ForList(logdata_t *logdata, p->loginfo.full)
+   forlist(logdata_t *logdata, p->loginfo.full)
    {
       if(logdata->from != selmap->levelnum)
          continue;

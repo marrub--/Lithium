@@ -338,7 +338,7 @@
 "LITH_TXT_UPGRADE_TITLE_7777777" = "7777777 Mode";
 "LITH_TXT_UPGRADE_EFFEC_7777777" =
    "Instates cosmic horror and spurious time travel into your very being, causing "
-   "you to instantly implode upon activation."
+   "you to instantly implode upon activation. (not really)"
    "\n\n"
    "\cd~text interface terminal malfunction error ~2992dud"
    "\n\n"

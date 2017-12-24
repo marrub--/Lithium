@@ -10,6 +10,7 @@ enum
 {
    cbi_tab_arsenal,
    cbi_tab_status,
+   cbi_tab_items,
    cbi_tab_bip,
    cbi_tab_settings,
    cbi_tab_max

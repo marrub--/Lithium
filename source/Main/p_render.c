@@ -233,7 +233,7 @@ static void HUD_StringStack(player_t *p)
 
    if((ACS_Timer() % 3) == 0)
    {
-      hudstr_t *hudstr = calloc(1, sizeof(hudstr_t));
+      hudstr_t *hudstr = salloc(hudstr_t);
       hudstr->link.construct(hudstr);
       hudstr->str = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
 

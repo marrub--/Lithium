@@ -76,22 +76,23 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    if(!p->indialogue)
       Lith_GUI_UpdateState(g, p);
 
-   DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TICSECOND, 0.7);
+   DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TS, 0.7);
 
    if(Lith_GUI_Button(g, .x = 296, 13, .preset = &guipre.btnexit))
       p->useGUI(GUI_CBI);
 
-   static __str tabnames[] = {"", "Status", "Info", "Settings"};
+   static __str tabnames[] = {"", "Status", "Inventory", "Info", "Settings"};
    tabnames[0] = Language("LITH_TXT_Arsenal%S", p->discrim);
    Lith_GUI_Tabs(g, st_maintab, tabnames, 13, 13, 0);
 
+   extern void Lith_CBITab_Items   (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_BIP     (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, player_t *p);
 
-   switch(g->st[st_maintab].i)
-   {
+   switch(g->st[st_maintab].i) {
    case cbi_tab_arsenal:  Lith_CBITab_Arsenal (g, p); break;
    case cbi_tab_status:   Lith_CBITab_Stat    (g, p); break;
+   case cbi_tab_items:    Lith_CBITab_Items   (g, p); break;
    case cbi_tab_bip:      Lith_CBITab_BIP     (g, p); break;
    case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }

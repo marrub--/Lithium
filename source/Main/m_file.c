@@ -203,7 +203,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
    if(rw == 'w')
    {
-      netfile_t *nf = calloc(1, sizeof(netfile_t));
+      netfile_t *nf = salloc(netfile_t);
 
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
@@ -253,7 +253,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
          if(data)
          {
-            memfile_t *mem = calloc(1, sizeof(memfile_t));
+            memfile_t *mem = salloc(memfile_t);
 
             mem->mem = data;
             mem->len = size;
