@@ -54,6 +54,7 @@ class Lith_Pickup : CustomInventory
    default
    {
       Inventory.PickupMessage "";
+      Inventory.PickupSound "";
       Lith_Pickup.Sprite "UNKNA";
    }
 
@@ -92,6 +93,8 @@ class Lith_Pickup : CustomInventory
    override void Tick()
    {
       Super.Tick();
+
+      if(!lith_spr) return;
 
       if(lith_usegeneric) {
          Lith_SetSprite(lith_spriteG);

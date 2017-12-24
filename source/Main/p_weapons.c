@@ -5,89 +5,6 @@
 
 #include <math.h>
 
-#define ValidateWeapon(parm) (parm < weapon_max && parm >= weapon_min)
-
-// Extern Objects ------------------------------------------------------------|
-
-#define A(a) "Lith_" a "Ammo"
-#define M(a) "Lith_" a "ShotsFired"
-#define P(a) "weapons/" a "/pickup"
-#define N(a) .classname = "Lith_" a, .name = a
-#define F(...) .flags = __VA_ARGS__
-weaponinfo_t const weaponinfo[weapon_max] = {
-   {0, pcl_any, null, "MMMMHMHMMMHMMM"},
-
-   // Outcast Weapons
-   {1, pcl_outcasts, N("ChargeFist"),      P("cfist"),    AT_None,                          },
-   {5, pcl_outcasts, N("MissileLauncher"), P("missile"),  AT_AMag, A("Rocket"), M("Missile")},
-   {6, pcl_outcasts, N("PlasmaDiffuser"),  P("plasdiff"), AT_Ammo, A("Plasma")              },
-
-   // Marine Weapons
-   {1, pcl_marine, N("Fist"),            "MMMMHMHMMMHMMM", AT_None,              },
-   {2, pcl_marine, N("Pistol"),          P("pistol"),      AT_NMag, M("Pistol")  },
-   {2, pcl_marine, N("Revolver"),        P("revolver"),    AT_NMag, M("Revolver")},
-   {3, pcl_marine, N("Shotgun"),         P("shotgun"),     AT_None,              },
-   {3, pcl_marine, N("LazShotgun"),      P("lshotgun"),    AT_None,              },
-   {3, pcl_marine, N("SuperShotgun"),    P("ssg"),         AT_Ammo, A("Shell")   },
-   {4, pcl_marine, N("CombatRifle"),     P("rifle"),       AT_NMag, M("Rifle")   },
-   {4, pcl_marine, N("SniperRifle"),     P("sniper"),      AT_NMag, M("Sniper")  },
-   {5, pcl_marine, N("GrenadeLauncher"), P("rocket"),      AT_Ammo, A("Rocket")  },
-   {6, pcl_marine, N("PlasmaRifle"),     P("plasma"),      AT_Ammo, A("Plasma")  },
-   {7, pcl_marine, N("BFG9000"),         P("cannon"),      AT_Ammo, A("Cannon")  },
-
-   // Cyber-Mage Weapons
-   {1, pcl_cybermage, N("CFist"),         "YOUSONOFABITCH", AT_None,                           },
-   {2, pcl_cybermage, N("Mateba"),        P("mateba"),      AT_NMag, M("Mateba")               },
-   {3, pcl_cybermage, N("ShockRifle"),    P("erifle"),      AT_NMag, M("ShockRifle")           },
-   {3, pcl_cybermage, N("SPAS"),          P("cshotgun"),    AT_AMag, A("Shell"),  M("SPAS")    },
-   {4, pcl_cybermage, N("SMG"),           P("smg"),         AT_NMag, M("SMG")                  },
-   {5, pcl_cybermage, N("IonRifle"),      P("ionrifle"),    AT_AMag, A("Rocket"), M("IonRifle")},
-   {6, pcl_cybermage, N("CPlasmaRifle"),  P("plasma"),      AT_Ammo, A("Plasma")               },
-   {7, pcl_cybermage, N("StarDestroyer"), P("shipgun"),     AT_Ammo, A("Cannon")               },
-
-   {0, pcl_cybermage, N("Blade"),    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {0, pcl_cybermage, N("Delear"),   "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"),   F(wf_magic)},
-   {0, pcl_cybermage, N("Feuer"),    "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {0, pcl_cybermage, N("Rend"),     "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {0, pcl_cybermage, N("Hulgyon"),  "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-   {0, pcl_cybermage, N("StarShot"), "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
-   {0, pcl_cybermage, N("Cercle"),   "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana",                F(wf_magic)},
-
-   // Dark Lord Weapons
-   {2, pcl_darklord, N("700Express"), "YOUSONOFABITCH", AT_ZMag},
-   {4, pcl_darklord, N("Minigun"),    "YOUSONOFABITCH", AT_ZMag},
-   {5, pcl_darklord, N("FatMac"),     "YOUSONOFABITCH", AT_Ammo, A("Rocket")},
-
-   // Misc. Weapons
-   {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},
-
-   // Final Doomer Weapons
-   #define FN(a) .classname = "FD" a, .name = a
-   #define FDClass(cname) \
-      {1, pcl_fdoomer, FN(cname "Fist"),           "YOUSONOFABITCH", AT_None}, \
-      {1, pcl_fdoomer, FN(cname "Chainsaw"),       P("cfist"),       AT_None}, \
-      {2, pcl_fdoomer, FN(cname "Pistol"),         P("pistol"),      AT_Ammo, "FD" cname "PistolAmmo"}, \
-      {3, pcl_fdoomer, FN(cname "Shotgun"),        P("shotgun"),     AT_Ammo, "FD" cname "Shells"}, \
-      {3, pcl_fdoomer, FN(cname "SuperShotgun"),   P("ssg"),         AT_Ammo, "FD" cname "Shells"}, \
-      {4, pcl_fdoomer, FN(cname "Chaingun"),       P("rifle"),       AT_Ammo, "FD" cname "Bullets"}, \
-      {5, pcl_fdoomer, FN(cname "RocketLauncher"), P("rocket"),      AT_Ammo, "FD" cname "Rocket"}, \
-      {6, pcl_fdoomer, FN(cname "PlasmaRifle"),    P("plasma"),      AT_Ammo, "FD" cname "Cell"}, \
-      {7, pcl_fdoomer, FN(cname "BFG9000"),        P("cannon"),      AT_Ammo, "FD" cname "BFGCharge"},
-   FDClass("Plut")
-   FDClass("TNT")
-   FDClass("Doom2")
-   FDClass("Aliens")
-   FDClass("JPCP")
-   FDClass("BTSX")
-   #undef FDClass
-   #undef FN
-};
-#undef A
-#undef M
-#undef P
-#undef N
-#undef F
-
 // Static Functions ----------------------------------------------------------|
 
 //
@@ -171,6 +88,7 @@ static void Lith_PickupScore(player_t *p, int parm)
 bool Lith_WeaponPickup(int name)
 {
    extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
+   extern int Lith_WeaponFromName(player_t *p, int name);
 
    player_t *p = LocalPlayer;
    if(NoPlayer(p)) return false;
@@ -178,68 +96,9 @@ bool Lith_WeaponPickup(int name)
    bool weaponstay = ACS_GetCVar("sv_weaponstay");
    int parm = weapon_unknown;
 
-   switch(p->pclass)
-   {
-   #define Case(name, set) case name: parm = set; break
-   #define Weaps(sfist, schainsaw, spistol, sshotgun, ssupershotgun, schaingun, srocketlauncher, splasmarifle, sbfg9000) \
-      switch(name) { \
-      Case(wepnam_fist,           sfist); \
-      Case(wepnam_chainsaw,       schainsaw); \
-      Case(wepnam_pistol,         spistol); \
-      Case(wepnam_shotgun,        sshotgun); \
-      Case(wepnam_supershotgun,   ssupershotgun); \
-      Case(wepnam_chaingun,       schaingun); \
-      Case(wepnam_rocketlauncher, srocketlauncher); \
-      Case(wepnam_plasmarifle,    splasmarifle); \
-      Case(wepnam_bfg9000,        sbfg9000); \
-      } \
-      break
-   case pcl_marine:
-      Weaps(weapon_fist,
-            weapon_cfist,
-            weapon_pistol,
-            weapon_shotgun,
-            weapon_ssg,
-            weapon_rifle,
-            weapon_launcher,
-            weapon_plasma,
-            weapon_bfg);
-   case pcl_cybermage:
-      Weaps(weapon_c_fist,
-            weapon_cfist,
-            weapon_c_mateba,
-            weapon_c_rifle,
-            weapon_c_spas,
-            weapon_c_smg,
-            weapon_c_sniper,
-            weapon_c_plasma,
-            weapon_c_shipgun);
-   case pcl_fdoomer:
-      #define FDClass(cname, ctype) \
-         if(p->pcstr == "FD" cname "Player") { \
-            Weaps(weapon_fd_##ctype##_fist, \
-                  weapon_fd_##ctype##_chainsaw, \
-                  weapon_fd_##ctype##_pistol, \
-                  weapon_fd_##ctype##_shotgun, \
-                  weapon_fd_##ctype##_ssg, \
-                  weapon_fd_##ctype##_chaingun, \
-                  weapon_fd_##ctype##_launcher, \
-                  weapon_fd_##ctype##_plasma, \
-                  weapon_fd_##ctype##_bfg); \
-            break; \
-         }
-      FDClass("Plut",   plut)
-      FDClass("TNT",    tnt)
-      FDClass("Doom2",  doom2)
-      FDClass("Aliens", aliens)
-      FDClass("JPCP",   jpcp)
-      FDClass("BTSX",   btsx)
-      #undef FDClass
-   #undef Case
-   #undef Weaps
-   }
+   parm = Lith_WeaponFromName(p, name);
 
-   if(!ValidateWeapon(parm))
+   if(parm >= weapon_max || parm < weapon_min)
       return true;
 
    weaponinfo_t const *info = &weaponinfo[parm];

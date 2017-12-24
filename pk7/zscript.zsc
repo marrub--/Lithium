@@ -26,8 +26,4 @@ version "3.2"
 #include "lzscript/3_Informant/Informant.zsc"
 #include "lzscript/6_DarkLord/DarkLord.zsc"
 
-class Lith_GrafZone : Actor
-{
-}
-
 // EOF

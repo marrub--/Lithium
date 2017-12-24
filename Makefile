@@ -44,6 +44,9 @@ MAIN_STA=3500000000
 all: dec text bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
+source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: wepc.rb source/Weapons.txt
+	@./wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
+
 dec: decompat.rb $(DECOMPAT_INPUTS)
 	@./decompat.rb $(DECOMPAT_INPUTS)
 
