@@ -238,8 +238,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       {
          if(wep->ammotype & AT_NMag) {
             if(wep->ammotype & AT_ZScr) {
-               wep->magmax = ACS_ScriptCall("Lith_Server", "GetMaxAmmo", p->num, wep->info->classname);
-               wep->magcur = ACS_ScriptCall("Lith_Server", "GetCurAmmo", p->num, wep->info->classname);
+               wep->magmax = HERMES("GetMaxAmmo", p->num, wep->info->classname);
+               wep->magcur = HERMES("GetCurAmmo", p->num, wep->info->classname);
             } else {
                wep->magmax = ACS_GetMaxInventory(0, wep->magclass);
                wep->magcur = ACS_CheckInventory (   wep->magclass);

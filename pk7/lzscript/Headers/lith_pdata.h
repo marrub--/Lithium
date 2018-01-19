@@ -10,7 +10,8 @@ enum Lith_PData
    pdata_hassigil,
    pdata_weaponzoom,
    pdata_recoil,
-   pdata_pclass
+   pdata_pclass,
+   pdata_semifrozen,
 };
 
 enum Lith_PClass

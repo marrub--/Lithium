@@ -17,11 +17,6 @@ actor Lith_StealthSystem : PowerInvisibility
    Powerup.Mode "Opaque"
 }
 
-actor Lith_ItemSpriteC : Lith_ItemSprite
-{
-   VisibleToPlayerClass "Lith_CyberMagePlayer"
-}
-
 actor Lith_CWeapon : Lith_Weapon
 {
    Inventory.RestrictedTo "Lith_CyberMagePlayer"

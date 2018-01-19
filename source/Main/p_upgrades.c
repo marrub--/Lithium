@@ -18,7 +18,7 @@
 
 #define Req(arg) .requires = arg
 static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
-// {{"Name-------", "BIP---------", Cost---}, pcl_name, UC_Cat-, Pr, Score, [Group], [Requirements]},
+// {{"Name-------", "BIP---------", Cost---}, pcl_name, UC_Cat-, Perf, Score, [Group], [Requirements]},
    {{"HeadsUpDisp", "HeadsUpDisp",  0      }, pcl_marine | pcl_mods,          UC_Body, 1, -0.05, UG_HUD},
    {{"HeadsUpDis2", "HeadsUpDisp",  0      }, pcl_cybermage,                  UC_Body, 1, -0.05, UG_HUD},
    {{"HeadsUpDis3", "HeadsUpDisp",  0      }, pcl_missioners | pcl_intruders, UC_Body, 1, -0.05, UG_HUD},
@@ -318,7 +318,7 @@ void Lith_PlayerReinitUpgrades(player_t *p)
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
-   if(Lith_ScriptCall("Lith_PauseManager", "GetPaused"))
+   if(ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
       return;
 
    ForUpgrade(upgr)
@@ -522,11 +522,11 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
       bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
 
       if(upgr->active)
-         HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPr\C-.", upgr->info->perf);
+         HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf);
       else if(over)
-         HudMessageF("CBIFONT", "Activating requires \Ca%i\CbPr\C-.", upgr->info->perf);
+         HudMessageF("CBIFONT", "Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf);
       else
-         HudMessageF("CBIFONT", "Activating will take \Cj%i\CbPr\C-.", upgr->info->perf);
+         HudMessageF("CBIFONT", "Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf);
 
       HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
       y -= 10;

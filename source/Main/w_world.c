@@ -204,6 +204,7 @@ int LPData(int info, int permutation, bool target)
    case pdata_weaponzoom: return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
    case pdata_recoil:     return bitsk(p->getCVarK("lith_weapons_recoil"));
    case pdata_pclass:     return p->pclass;
+   case pdata_semifrozen: return p->semifrozen > 0;
    }
 
    return 0;

@@ -11,16 +11,7 @@ class Lith_DarkLordPlayer : Lith_Player
       Player.AttackZOffset 17;
       Player.MaxHealth 125;
       Health 125;
-      DamageFactor 0.777;
       Tag "DarkLord";
-   }
-}
-
-class Lith_ItemSpriteD : Lith_ItemSprite
-{
-   default
-   {
-      VisibleToPlayerClass "Lith_DarkLordPlayer";
    }
 }
 
@@ -32,17 +23,11 @@ class Lith_DWeapon : Lith_Weapon
    }
 }
 
-class Lith_FatMac : Lith_DWeapon
-{
-   default
-   {
-      Tag "$LITH_TXT_INFO_SHORT_FatMac";
-      Weapon.SlotNumber 5;
-      Weapon.SlotPriority 1;
-   }
-}
-
 #include "lzscript/6_DarkLord/Weapons/2_700Express.zsc"
+#include "lzscript/6_DarkLord/Weapons/3_4Bore.zsc"
+#include "lzscript/6_DarkLord/Weapons/3_ShrapnelGun.zsc"
 #include "lzscript/6_DarkLord/Weapons/4_Minigun.zsc"
+#include "lzscript/6_DarkLord/Weapons/6_FatMac.zsc"
+#include "lzscript/6_DarkLord/Weapons/7_FortuneGun.zsc"
 
 // EOF

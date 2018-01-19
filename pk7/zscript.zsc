@@ -1,29 +1,11 @@
 version "3.2"
 
-// Headers
-#include "lzscript/Headers/lith_weapons.h"
-#include "lzscript/Headers/lith_pdata.h"
-#include "lzscript/Headers/lith_wdata.h"
-#include "lzscript/Headers/lith_lognames.h"
-#include "lzscript/Headers/lith_upgradenames.h"
-#include "lzscript/Headers/lith_scorenums.h"
-
-// Constants
-#include "lzscript/ASCII.zsc"
-
-// Classes
-#include "lzscript/Pickup.zsc"
-#include "lzscript/WeaponBase.zsc"
-#include "lzscript/PlayerPawn.zsc"
-#include "lzscript/ItemSprite.zsc"
-#include "lzscript/Server.zsc"
-#include "lzscript/PauseManager.zsc"
-#include "lzscript/Cyberspace.zsc"
-#include "lzscript/Events.zsc"
-#include "lzscript/DarkMatter.zsc"
-
-// Player Classes
-#include "lzscript/3_Informant/Informant.zsc"
-#include "lzscript/6_DarkLord/DarkLord.zsc"
+#include "lzscript/Constants.zsc"
+#include "lzscript/Playsim.zsc"
+#include "lzscript/Effects.zsc"
+#include "lzscript/Projectiles.zsc"
+#include "lzscript/Items.zsc"
+#include "lzscript/Weapons.zsc"
+#include "lzscript/Player.zsc"
 
 // EOF

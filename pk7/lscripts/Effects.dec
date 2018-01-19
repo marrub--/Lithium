@@ -1,4 +1,3 @@
-#include "lscripts/Effects/BulletPuff.dec"
 #include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/Magazine.dec"
 #include "lscripts/Effects/Rain.dec"

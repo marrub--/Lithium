@@ -16,7 +16,7 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
 
    bool hot = g->hot == id;
    if(hot)
-      Lith_ScriptCall("Lith_Server", "SetInput", a->pnum, true);
+      HERMES("SetInput", a->pnum, true);
 
    if(*a->inbuf)
       ACS_LocalAmbientSound("player/cbi/keypress", 30);

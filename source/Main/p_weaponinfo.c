@@ -4,6 +4,8 @@
 
 // Extern Objects ------------------------------------------------------------|
 
+#define Placeholder1 "MMMMHMHMMMHMMM"
+#define Placeholder2 "YOUSONOFABITCH"
 #define A(a) "Lith_" a "Ammo"
 #define M(a) "Lith_" a "ShotsFired"
 #define P(a) "weapons/" a "/pickup"
@@ -26,7 +28,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {1, pcl_outcasts, N("ChargeFist"), P("cfist"), AT_None},
    {5, pcl_outcasts, N("MissileLauncher"), P("missile"), AT_AMag, A("Rocket"), M("Missile")},
    {6, pcl_outcasts, N("PlasmaDiffuser"), P("plasdiff"), AT_Ammo, A("Plasma")},
-   {1, pcl_marine, N("Fist"), "MMMMHMHMMMHMMM", AT_None},
+   {1, pcl_marine, N("Fist"), Placeholder1, AT_None},
    {2, pcl_marine, N("Pistol"), P("pistol"), AT_NMag, M("Pistol")},
    {2, pcl_marine, N("Revolver"), P("revolver"), AT_NMag, M("Revolver")},
    {3, pcl_marine, N("Shotgun"), P("shotgun"), AT_None},
@@ -37,7 +39,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {5, pcl_marine, N("GrenadeLauncher"), P("rocket"), AT_Ammo, A("Rocket")},
    {6, pcl_marine, N("PlasmaRifle"), P("plasma"), AT_Ammo, A("Plasma")},
    {7, pcl_marine, N("BFG9000"), P("cannon"), AT_Ammo, A("Cannon")},
-   {1, pcl_cybermage, N("CFist"), "YOUSONOFABITCH", AT_None},
+   {1, pcl_cybermage, N("CFist"), Placeholder2, AT_None},
    {2, pcl_cybermage, N("Mateba"), P("mateba"), AT_NMag, M("Mateba")},
    {3, pcl_cybermage, N("ShockRifle"), P("erifle"), AT_NMag, M("ShockRifle")},
    {3, pcl_cybermage, N("SPAS"), P("cshotgun"), AT_AMag, A("Shell"), M("SPAS")},
@@ -45,16 +47,20 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {5, pcl_cybermage, N("IonRifle"), P("ionrifle"), AT_AMag, A("Rocket"), M("IonRifle")},
    {6, pcl_cybermage, N("CPlasmaRifle"), P("plasma"), AT_Ammo, A("Plasma")},
    {7, pcl_cybermage, N("StarDestroyer"), P("shipgun"), AT_Ammo, A("Cannon")},
-   {0, pcl_cybermage, N("Blade"), "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Delear"), "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("Delear"), F(wf_magic)},
-   {0, pcl_cybermage, N("Feuer"), "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Rend"), "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Hulgyon"), "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("StarShot"), "MMMMHMHMMMHMMM", AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
-   {0, pcl_cybermage, N("Cercle"), "MMMMHMHMMMHMMM", AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {2, pcl_darklord, N("700Express"), "YOUSONOFABITCH", AT_ZMag},
-   {4, pcl_darklord, N("Minigun"), "YOUSONOFABITCH", AT_ZMag},
-   {5, pcl_darklord, N("FatMac"), "YOUSONOFABITCH", AT_Ammo, A("Rocket")},
+   {0, pcl_cybermage, N("Blade"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {0, pcl_cybermage, N("Delear"), Placeholder1, AT_AMag, "Lith_Mana", M("Delear"), F(wf_magic)},
+   {0, pcl_cybermage, N("Feuer"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {0, pcl_cybermage, N("Rend"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {0, pcl_cybermage, N("Hulgyon"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {0, pcl_cybermage, N("StarShot"), Placeholder1, AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
+   {0, pcl_cybermage, N("Cercle"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {2, pcl_darklord, N("700Express"), Placeholder2, AT_ZMag},
+   {3, pcl_darklord, N("4Bore"), Placeholder2, AT_None},
+   {3, pcl_darklord, N("ShrapnelGun"), Placeholder2, AT_None},
+   {4, pcl_darklord, N("Minigun"), Placeholder2, AT_ZMag},
+   {5, pcl_darklord, N("DualRocket"), Placeholder2, AT_Ammo, A("Rocket")},
+   {6, pcl_darklord, N("FatMac"), Placeholder2, AT_Ammo, A("Plasma")},
+   {7, pcl_darklord, N("FortuneGun"), Placeholder2, AT_None},
    {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},
 
    FDClass("Plut")
@@ -101,12 +107,12 @@ int Lith_WeaponFromName(player_t *p, int name)
       case wepnam_fist: return weapon_fist;
       case wepnam_chainsaw: return weapon_fist;
       case wepnam_pistol: return weapon_d_700e;
-      case wepnam_shotgun: return weapon_fist;
-      case wepnam_supershotgun: return weapon_fist;
+      case wepnam_shotgun: return weapon_d_4bore;
+      case wepnam_supershotgun: return weapon_d_launcher;
       case wepnam_chaingun: return weapon_d_minigun;
-      case wepnam_rocketlauncher: return weapon_d_fatmac;
-      case wepnam_plasmarifle: return weapon_fist;
-      case wepnam_bfg9000: return weapon_fist;
+      case wepnam_rocketlauncher: return weapon_d_rocket;
+      case wepnam_plasmarifle: return weapon_d_fatmac;
+      case wepnam_bfg9000: return weapon_d_railgun;
       }
 
    case pcl_fdoomer:

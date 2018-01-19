@@ -256,12 +256,13 @@ void Lith_PlayerCloseGUI(player_t *p)
 {
    if(p->activegui != GUI_NONE)
    {
-      if(world.pauseinmenus) {
-         Lith_ScriptCall("Lith_PauseManager", "SetPaused", false);
+      if(world.pauseinmenus)
+      {
+         ACS_ScriptCall("Lith_PauseManager", "SetPaused", false);
          Lith_ForPlayer() p->frozen--;
-      } else {
-         p->frozen--;
       }
+      else
+         p->frozen--;
 
       ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
       p->activegui = GUI_NONE;
@@ -276,12 +277,13 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
    if(p->dead) return;
    if(p->activegui == GUI_NONE)
    {
-      if(world.pauseinmenus) {
-         Lith_ScriptCall("Lith_PauseManager", "SetPaused", true);
+      if(world.pauseinmenus)
+      {
+         ACS_ScriptCall("Lith_PauseManager", "SetPaused", true);
          Lith_ForPlayer() p->frozen++;
-      } else {
-         p->frozen++;
       }
+      else
+         p->frozen++;
 
       ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
       p->activegui = type;
@@ -439,7 +441,7 @@ static void Lith_PlayerRunScripts(player_t *p)
       Lith_PlayerUpdateStats(p); // Update engine info
 
       if(world.pauseinmenus)
-         Lith_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
+         ACS_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
    }
 
    // Rendering
@@ -517,16 +519,6 @@ static void Lith_PlayerPreStats(player_t *p)
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
    if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
-}
-
-//
-// Lith_PlayerUpdateStats
-//
-void Lith_PlayerUpdateStats(player_t *p)
-{
-   if(p->frozen    != p->old.frozen)    ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
-   if(p->speedmul  != p->old.speedmul)  ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
-   if(p->jumpboost != p->old.jumpboost) ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * (1 + p->jumpboost));
 }
 
 // EOF

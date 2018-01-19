@@ -72,6 +72,8 @@ def outSource fp, weps, wepn
 
 // Extern Objects ------------------------------------------------------------|
 
+#define Placeholder1 "MMMMHMHMMMHMMM"
+#define Placeholder2 "YOUSONOFABITCH"
 #define A(a) "Lith_" a "Ammo"
 #define M(a) "Lith_" a "ShotsFired"
 #define P(a) "weapons/" a "/pickup"
@@ -176,8 +178,8 @@ class LithWep
 end
 
 def procFile ifp, ofh, ofc
-   pcl = "pcl_any"
-   wf = ""
+   pcl  = "pcl_any"
+   wf   = ""
    weps = []
    wepn = {}
 

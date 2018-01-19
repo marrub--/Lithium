@@ -1,0 +1,28 @@
+class Lith_ThothPlayer : Lith_Player
+{
+   default
+   {
+      Player.DisplayName "Thoth";
+      Player.SoundClass "thoth";
+      Player.Portrait "lgfx/Portraits/Thoth.png";
+      Tag "Thoth";
+   }
+}
+
+class Lith_ItemSpriteT : Lith_ItemSprite
+{
+   default
+   {
+      VisibleToPlayerClass "Lith_ThothPlayer";
+   }
+}
+
+class Lith_TWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_ThothPlayer";
+   }
+}
+
+// EOF

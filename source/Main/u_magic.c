@@ -52,6 +52,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    DrawSpritePlain("lgfx/UI/MagicSelectBack.png", g->hid--, 0.1, 0.1, TICSECOND);
 
    bool any = false;
+
    for(int i = 0; i < countof(minf); i++)
    {
       struct magic_info const *m = &minf[i];
@@ -74,6 +75,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
       };
 
       __str name = Language("LITH_TXT_INFO_SHORT_%S", m->name);
+
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
    }
@@ -103,24 +105,28 @@ void Lith_SetMagicUI(bool on)
 {
    withplayer(LocalPlayer)
    {
-      while(p->dead) ACS_Delay(1);
+      if(p->dead) return;
+
       upgrade_t *upgr = p->getUpgr(UPGR_Magic);
 
       if(on && !p->indialogue)
       {
          p->indialogue = UData.ui = true;
          p->semifrozen++;
+
          UData.gst.gfxprefix = "lgfx/UI/";
          UData.gst.cx = 320/2;
          UData.gst.cy = 240/2;
+
          Lith_GUI_Init(&UData.gst, 0);
       }
       else if(!on && UData.ui)
       {
-         if(UData.gst.hot)
-            GiveMagic(&minf[UData.gst.hot - 1]);
+         if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
+
          p->indialogue = UData.ui = false;
          p->semifrozen--;
+
          UData.gst = (gui_state_t){};
       }
    }

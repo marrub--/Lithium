@@ -1,9 +1,22 @@
 class Lith_Events : StaticEventHandler
 {
+   /*
+   Lith_Cyberspace lith_cs;
+
+   override void WorldTick()
+   {
+      lith_cs.rotateView(2);
+      lith_cs.renderFrame();
+   }
+   */
+
    override void WorldLoaded(WorldEvent evt)
    {
       if(!evt.IsReopen)
-         Actor.Spawn("Lith_Server");
+      {
+         Actor.Spawn("Lith_HERMES");
+//       lith_cs = Lith_Cyberspace.Create();
+      }
    }
 
    override void WorldThingSpawned(WorldEvent evt)
@@ -15,7 +28,7 @@ class Lith_Events : StaticEventHandler
    
    override bool InputProcess(InputEvent evt)
    {
-      let sv = Lith_Server.Instance();
+      let sv = Lith_HERMES.Instance();
       if(sv && sv.lith_grabInput[consoleplayer] &&
          evt.Type == InputEvent.Type_KeyDown && evt.keyString)
       {
@@ -31,7 +44,13 @@ class Lith_Events : StaticEventHandler
       if(evt.name == "Lith_Key")
          CallACS("Lith_KeyDown", evt.player, evt.args[0]);
    }
+
+   /*
+   override void RenderOverlay(RenderEvent evt)
+   {
+      if(lith_cs) lith_cs.render();
+   }
+   */
 }
 
 // EOF
-

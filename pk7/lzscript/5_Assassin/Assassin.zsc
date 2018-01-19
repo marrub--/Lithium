@@ -1,0 +1,28 @@
+class Lith_AssassinPlayer : Lith_Player
+{
+   default
+   {
+      Player.DisplayName "Assassin";
+      Player.SoundClass "assassin";
+      Player.Portrait "lgfx/Portraits/Assassin.png";
+      Tag "Assassin";
+   }
+}
+
+class Lith_ItemSpriteA : Lith_ItemSprite
+{
+   default
+   {
+      VisibleToPlayerClass "Lith_AssassinPlayer";
+   }
+}
+
+class Lith_AWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_AssassinPlayer";
+   }
+}
+
+// EOF

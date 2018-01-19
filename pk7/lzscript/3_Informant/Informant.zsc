@@ -53,14 +53,6 @@ class Lith_InvulnStep : PowerInvulnerable
    }
 }
 
-class Lith_ItemSpriteI : Lith_ItemSprite
-{
-   default
-   {
-      VisibleToPlayerClass "Lith_InformantPlayer";
-   }
-}
-
 class Lith_IWeapon : Lith_Weapon
 {
    default

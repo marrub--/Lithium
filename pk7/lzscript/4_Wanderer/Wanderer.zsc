@@ -1,0 +1,28 @@
+class Lith_WandererPlayer : Lith_Player
+{
+   default
+   {
+      Player.DisplayName "Wanderer";
+      Player.SoundClass "wanderer";
+      Player.Portrait "lgfx/Portraits/Wanderer.png";
+      Tag "Wanderer";
+   }
+}
+
+class Lith_ItemSpriteW : Lith_ItemSprite
+{
+   default
+   {
+      VisibleToPlayerClass "Lith_WandererPlayer";
+   }
+}
+
+class Lith_WWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_WandererPlayer";
+   }
+}
+
+// EOF

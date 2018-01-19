@@ -38,8 +38,12 @@ enum // Lith_WeaponNum
    weapon_c_starshot,
    weapon_c_cercle,
    weapon_d_700e,
+   weapon_d_4bore,
+   weapon_d_launcher,
    weapon_d_minigun,
+   weapon_d_rocket,
    weapon_d_fatmac,
+   weapon_d_railgun,
    weapon_wings,
 
    weapon_max_lith,

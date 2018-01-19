@@ -1,0 +1,14 @@
+// HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
+class Lith_HERMES : Actor
+{
+   bool lith_paused;
+
+   static clearscope Lith_HERMES Instance()
+      {return Lith_HERMES(ThinkerIterator.Create("Lith_HERMES").Next());}
+}
+
+#include "lzscript/Playsim/Server/Player.zsc"
+#include "lzscript/Playsim/Server/Input.zsc"
+#include "lzscript/Playsim/Server/Sprites.zsc"
+
+// EOF

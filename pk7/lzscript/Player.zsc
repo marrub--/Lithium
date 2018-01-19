@@ -21,6 +21,30 @@ class Lith_Player : DoomPlayer
       viewbob = lith_vbob;
    }
 
+   override void PlayerThink()
+   {
+      if(CallACS("LPData", pdata_semifrozen))
+      {
+         UserCmd cmd = player.cmd;
+         cmd.pitch = cmd.yaw = cmd.roll = 0;
+         player.turnticks = 0;
+      }
+
+      Super.PlayerThink();
+   }
+
+   // TODO: fix this
+   override void Tick()
+   {
+      if(CallACS("LPData", pdata_semifrozen))
+      {
+         A_SetAngle(angle, SPF_INTERPOLATE);
+         A_SetPitch(pitch, SPF_INTERPOLATE);
+      }
+
+      Super.Tick();
+   }
+
    default
    {
       Lith_Player.ViewBob 1;
@@ -61,5 +85,11 @@ class Lith_Player : DoomPlayer
       goto Super::Pain;
    }
 }
+
+#include "lzscript/3_Informant/Informant.zsc"
+#include "lzscript/4_Wanderer/Wanderer.zsc"
+#include "lzscript/5_Assassin/Assassin.zsc"
+#include "lzscript/6_DarkLord/DarkLord.zsc"
+#include "lzscript/7_Thoth/Thoth.zsc"
 
 // EOF

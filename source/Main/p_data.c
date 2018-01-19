@@ -187,7 +187,7 @@ void Lith_PlayerUpdateData(player_t *p)
    int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
 
-   Lith_ScriptCall("Lith_Server", "SetInput", p->num, false);
+   HERMES("SetInput", p->num, false);
 
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
@@ -436,6 +436,23 @@ void Lith_ResetPlayer(player_t *p)
             ACS_GiveInventory(info->classname, 1);
       }
    }
+}
+
+//
+// Lith_PlayerUpdateStats
+//
+void Lith_PlayerUpdateStats(player_t *p)
+{
+   fixed boost = 1 + p->jumpboost;
+
+   if(p->frozen     != p->old.frozen)
+      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+
+   if(p->speedmul   != p->old.speedmul)
+      ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+
+   if(p->jumpboost  != p->old.jumpboost)
+      ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * boost);
 }
 
 // Static Functions ----------------------------------------------------------|

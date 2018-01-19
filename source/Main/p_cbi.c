@@ -45,8 +45,8 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 
    InfoStart;
 
-   Info("Performance: %i\CbPr", world.cbiperf);
-   Info("In use: %i\CbPr", p->cbi.pruse);
+   Info("Performance: %i\CbPerf", world.cbiperf);
+   Info("In use: %i\CbPerf", p->cbi.pruse);
    Info("RAM: %iTiB", ram);
 
    InfoSep;
@@ -73,8 +73,8 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 
    InfoStart;
 
-   Info("Performance: 34\CbPr");
-   Info("In use: %i\CbPr", p->cbi.pruse);
+   Info("Performance: 34\CbPerf");
+   Info("In use: %i\CbPerf", p->cbi.pruse);
    Info("RAM: 19TiB");
 
    InfoSep;
