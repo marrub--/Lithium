@@ -274,16 +274,33 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    {
       int n = 0;
 
-      HudMessageF("CBIFONT", "\CTINFO");
-      HudMessagePlain(g->hid--, 160.4, 70.1, TICSECOND);
+      HudMessageF("CBIFONT", "\CTINFO CATEGORIES");
+      HudMessagePlain(g->hid--, 40.1, 70.1, TICSECOND);
 
       bip->lastcategory = BIPC_MAIN;
 
-      if(Lith_GUI_Button(g, "Search", 70, 80 + n, .preset = &guipre.btnbipmain))
+      static __str const lines[] = {
+         "Text search all categories.",
+         "Weapons and weapon upgrades.",
+         "Enemies and bosses.",
+         "Your attributes, abilities and history.",
+         "Body upgrades.",
+         "Places of interest around the galaxy.",
+         "Important companies, historic and current.",
+         "Received mail."
+      };
+
+      for(int i = 0; i < countof(lines); i++)
+      {
+         HudMessage(lines[i]);
+         HudMessageAlpha(g->hid--, 105.1, 85.1 + n + i * 10, TICSECOND, 0.7);
+      }
+
+      if(Lith_GUI_Button(g, "Search", 45, 85 + n, .preset = &guipre.btnbipmain))
          bip->curcategory = BIPC_SEARCH;
       n += 10;
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 70, 80 + n, .preset = &guipre.btnbipmain)) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 45, 85 + n, .preset = &guipre.btnbipmain)) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \
@@ -291,52 +308,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       n += 10;
 #include "lith_bip.h"
 
-      if(Lith_GUI_Button(g, "Log", 70, 80 + n, .preset = &guipre.btnbipmain))
-         bip->curcategory = BIPC_LOG;
-
-      n += 10;
-
-      if(Lith_GUI_Button(g, "Statistics", 70, 80 + n, .preset = &guipre.btnbipmain))
-         bip->curcategory = BIPC_STATS;
-
       avail = bip->pageavail;
       max   = bip->pagemax;
-   }
-   else if(bip->curcategory == BIPC_LOG)
-   {
-      extern void Lith_CBI_Log(gui_state_t *g, player_t *p);
-      Lith_CBI_Log(g, p);
-   }
-   else if(bip->curcategory == BIPC_STATS)
-   {
-      int n = 0;
-
-      #define Stat(name, f, x) \
-         HudMessageF("CBIFONT", name); HudMessagePlain(g->hid--, 23.1,  0.1 + 70 + (8 * n), TICSECOND); \
-         HudMessageF("CBIFONT", f, x); HudMessagePlain(g->hid--, 300.2, 0.1 + 70 + (8 * n), TICSECOND); \
-         n++
-
-      HudMessageF("SMALLFNT", "\Cj%S", p->name);
-      HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
-      Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
-      Stat("Weapons Found",       "%i",   p->weaponsheld);
-      Stat("Health Used",         "%li",  p->healthused);
-      Stat("Health Sum",          "%li",  p->healthsum);
-      Stat("Score Used",          "%lli", p->scoreused);
-      Stat("Score Sum",           "%lli", p->scoresum);
-      Stat("Armor Used",          "%li",  p->armorused);
-      Stat("Armor Sum",           "%li",  p->armorsum);
-      Stat("Secrets Found",       "%i",   world.secretsfound);
-      Stat("Units Travelled",     "%imu", p->unitstravelled);
-      Stat("Upgrades Owned",      "%i",   p->upgradesowned);
-      Stat("Items Bought",        "%i",   p->itemsbought);
-      Stat("Mail Received",       "%i",   bip->mailreceived);
-      Stat("Seconds Played",      "%li",  p->ticks / 35l);
-      Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
-      Stat("Brouzouf Gained",     "%i",   p->brouzouf);
-      Stat("Mail Truly Received", "%i",   bip->mailtrulyreceived);
-
-      #undef Stat
    }
    else if(bip->curcategory == BIPC_SEARCH)
    {
@@ -504,12 +477,16 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    }
 
    if(bip->curcategory != BIPC_MAIN)
+   {
       if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &guipre.btnbipback))
          bip->curcategory = bip->lastcategory;
-
-   DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 30.1, TICSECOND, 0.6);
-   HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
-   HudMessagePlain(g->hid--, 35.1, 30.1, TICSECOND);
+   }
+   else
+   {
+      DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 40.1, TICSECOND, 0.6);
+      HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
+      HudMessagePlain(g->hid--, 35.1, 40.1, TICSECOND);
+   }
 
    if(max)
    {

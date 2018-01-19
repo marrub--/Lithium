@@ -129,6 +129,8 @@ typedef struct gui_button_preset_s
    __str chot;
    __str cdis;
    __str font;
+   fixed ax;
+   fixed ay;
    int   w;
    int   h;
    bool  external;

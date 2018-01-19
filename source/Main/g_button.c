@@ -26,9 +26,14 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
 
    if(a->label && pre->font)
    {
-      int const x = (pre->w / 2) + a->x + g->ox;
-      int const y = (pre->h / 2) + a->y + g->oy;
+      int x, y;
       __str color;
+
+      if(pre->ax == 0.4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
+      else                           x = a->x + g->ox;
+
+      if(pre->ay == 0.4 || !pre->ay) y = (pre->h / 2) + a->y + g->oy;
+      else                           y = a->y + g->oy;
 
            if(a->disabled)     color = pre->cdis;
       else if(g->active == id) color = pre->cact;
@@ -38,7 +43,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       color = color ? color : "j";
 
       HudMessageF(pre->font, "\C%S%S", color, a->label);
-      HudMessagePlain(g->hid--, x + 0.4, y, TICSECOND);
+      HudMessagePlain(g->hid--, x + pre->ax, y + pre->ay, TICSECOND);
    }
 
    if(!a->disabled)
@@ -49,17 +54,18 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       {
          click = g->clicklft && !g->old.clicklft;
 
-              if(g->slidecount < 3)  click = click || g->slidetime % 20 == 0;
-         else if(g->slidecount < 5)  click = click || g->slidetime % 10 == 0;
-         else if(g->slidecount < 20) click = click || g->slidetime % 5  == 0;
+              if(g->slidecount < 4)  click = click || g->slidetime % 15 == 0;
+         else if(g->slidecount < 8)  click = click || g->slidetime % 12 == 0;
+         else if(g->slidecount < 10) click = click || g->slidetime % 10 == 0;
+         else if(g->slidecount < 20) click = click || g->slidetime % 7  == 0;
+         else if(g->slidecount < 40) click = click || g->slidetime % 5  == 0;
          else if(g->slidecount < 80) click = click || g->slidetime % 2  == 0;
          else                        click = true;
       }
 
       if(g->hot == id && g->active == id && click) {
          if(g->slide == id) g->slidecount++;
-         if(pre->snd)
-            ACS_LocalAmbientSound(pre->snd, 127);
+         if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
          return true;
       }
    }

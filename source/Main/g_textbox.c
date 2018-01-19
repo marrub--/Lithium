@@ -34,7 +34,7 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 2 < Lith_CPS_Count(st->txtbuf) && (isprint(*c) || isspace(*c)))
+         if(st->tbptr + 1 < Lith_CPS_Count(st->txtbuf) && (isprint(*c) || isspace(*c)))
          {
             Lith_CPS_SetC(st->txtbuf, st->tbptr, *c);
             st->tbptr++;

@@ -11,7 +11,7 @@ enum
    cbi_tab_arsenal,
    cbi_tab_status,
    cbi_tab_items,
-   cbi_tab_bip,
+   cbi_tab_info,
    cbi_tab_settings,
    cbi_tab_max
 };
@@ -28,6 +28,14 @@ enum
    cbi_tab_stat_attr,
    cbi_tab_stat_cbi,
    cbi_tab_stat_max
+};
+
+enum
+{
+   cbi_tab_info_bip,
+   cbi_tab_info_log,
+   cbi_tab_info_statistics,
+   cbi_tab_info_max
 };
 
 enum
@@ -49,6 +57,7 @@ enum
    st_maintab,
    st_stattab,
    st_arsetab,
+   st_infotab,
    st_upgrsel,
    st_upgrselold,
    st_upgrscr,
