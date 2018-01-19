@@ -34,6 +34,8 @@ static fixed lmvar rain_px;
 static fixed lmvar rain_py;
 static fixed lmvar rain_dist;
 
+static bool reopen;
+
 // Callbacks -----------------------------------------------------------------|
 
 CallbackDefine(basic_cb_t, GInit)
@@ -613,6 +615,7 @@ static void WInit(void)
 [[__call("ScriptS"), __script("Open")]]
 static void Lith_World(void)
 {
+begin:
    if(ACS_GameType() == GAME_TITLE_MAP) {
       [[__call("ScriptS")]]
       extern void Lith_Title(void);
@@ -666,6 +669,11 @@ static void Lith_World(void)
 
    for(;;)
    {
+      if(reopen) {
+         mapinit = reopen = false;
+         goto begin;
+      }
+
       if(world.ticks > 67 * 35 * 60 * 60 && !world.islithmap)
          ACS_Teleport_NewMap(1911777, 0, 0);
 
@@ -710,6 +718,15 @@ static void Lith_World(void)
       if(world.autosave && world.ticks % (35 * 60 * world.autosave) == 0)
          ACS_Autosave();
    }
+}
+
+//
+// Lith_WorldReopen
+//
+[[__call("ScriptS"), __script("Reopen")]]
+static void Lith_WorldReopen(void)
+{
+   reopen = true;
 }
 
 //

@@ -296,14 +296,20 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return 0;
-   invweapon_t const *wep = p->weapon.cur;
-   fixed inv = wep->magcur / (fixed)wep->magmax;
-   mul = mul ? mul : 1.2;
-   if(ro) inv = inv * mul;
-   else   inv = mul - inv * 0.35;
-   return minmax(inv, 0.0, 1.0);
+   withplayer(LocalPlayer)
+   {
+      invweapon_t const *wep = p->weapon.cur;
+      fixed inv = wep->magcur / (fixed)wep->magmax;
+
+      mul = mul ? mul : 1.2;
+
+      if(ro) inv = inv * mul;
+      else   inv = mul - inv * 0.35;
+
+      return minmax(inv, 0.0, 1.0);
+   }
+
+   return 0;
 }
 
 //
@@ -313,6 +319,7 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
 int Lith_GetFinalizerMaxHealth(void)
 {
    int sh = ACS_GetActorProperty(0, APROP_SpawnHealth);
+
    ifauto(dmon_t *, m, DmonPtr())
       return sh + (m->maxhealth - sh) * 0.5;
    else
@@ -367,18 +374,18 @@ void Lith_SurgeOfDestiny(void)
 int Lith_GetWRF(void)
 {
    enum {
-      WRF_NOBOB = 1,
-      WRF_NOSWITCH = 2,
-      WRF_NOPRIMARY = 4,
-      WRF_NOSECONDARY = 8,
-      WRF_NOFIRE = WRF_NOPRIMARY | WRF_NOSECONDARY,
-      WRF_ALLOWRELOAD = 16,
-      WRF_ALLOWZOOM = 32,
+      WRF_NOBOB         = 1,
+      WRF_NOSWITCH      = 2,
+      WRF_NOPRIMARY     = 4,
+      WRF_NOSECONDARY   = 8,
+      WRF_NOFIRE        = WRF_NOPRIMARY | WRF_NOSECONDARY,
+      WRF_ALLOWRELOAD   = 16,
+      WRF_ALLOWZOOM     = 32,
       WRF_DISABLESWITCH = 64,
-      WRF_ALLOWUSER1 = 128,
-      WRF_ALLOWUSER2 = 256,
-      WRF_ALLOWUSER3 = 512,
-      WRF_ALLOWUSER4 = 1024
+      WRF_ALLOWUSER1    = 128,
+      WRF_ALLOWUSER2    = 256,
+      WRF_ALLOWUSER3    = 512,
+      WRF_ALLOWUSER4    = 1024
    };
 
    withplayer(LocalPlayer) {
