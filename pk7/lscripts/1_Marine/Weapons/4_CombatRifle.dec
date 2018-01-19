@@ -130,7 +130,7 @@ actor Lith_CombatRifle : Lith_MWeapon
       CRFG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.125)
       CRFG A 1 A_WeaponReady(LITH_BOBONLY)
       CRFG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.125)
-      CRFG A 1 A_WeaponReady(LITH_BOBONLY)
+      CRFG A 0 A_WeaponReady(LITH_BOBONLY)
       CRFG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.125)
       CRFG AAAAAA 1 A_ReFire
       goto Ready
@@ -154,10 +154,10 @@ actor Lith_CombatRifle : Lith_MWeapon
    Fire3:
       CRFG B 1 bright A_WeaponReady(LITH_BOBONLY)
       CRFG C 1 bright A_WeaponReady(LITH_BOBONLY)
-      CRFG A 2 A_WeaponReady(LITH_BOBONLY)
+      CRFG C 1 A_WeaponReady(LITH_BOBONLY)
       CRFG A 0 A_JumpIf(CallACS("LPVarAdd", lvar_burst, 1) >= 5, 1)
       goto FireBurst
-      CRFG A 6 A_WeaponReady(LITH_BOBONLY)
+      CRFG A 4 A_WeaponReady(LITH_BOBONLY)
       
       CRFG A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_LaserRCW), 2)
       CRFG A 2 A_WeaponReady(LITH_BOBONLY)
