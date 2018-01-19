@@ -2,6 +2,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
+#include "lith_cps.h"
 
 #include <ctype.h>
 
@@ -12,9 +13,10 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
 {
    gui_txtbox_state_t *st = &g->st[a->st].tb;
 
-   Lith_GUI_Auto(g, id, a->x, a->y, 8 * countof(st->txtbuf), 10);
+   Lith_GUI_Auto(g, id, a->x, a->y, 260, 10);
 
    bool hot = g->hot == id;
+
    if(hot)
       HERMES("SetInput", a->pnum, true);
 
@@ -32,22 +34,26 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 1 < countof(st->txtbuf) && (isprint(*c) || isspace(*c)))
-            st->txtbuf[st->tbptr++] = *c;
+         if(st->tbptr + 2 < Lith_CPS_Count(st->txtbuf) && (isprint(*c) || isspace(*c)))
+         {
+            Lith_CPS_SetC(st->txtbuf, st->tbptr, *c);
+            st->tbptr++;
+         }
          break;
       }
    }
 
-   st->txtbuf[st->tbptr] = '\0';
+   Lith_CPS_SetC(st->txtbuf, st->tbptr, '\0');
 
    DrawSpritePlain("lgfx/UI/TextBoxBack.png", g->hid--, (a->x - 3) + g->ox + .1, (a->y - 3) + g->oy + .1, TICSECOND);
 
+   ACS_SetHudClipRect(a->x + g->ox, a->y + g->oy, 260, 200, 260);
    if(st->tbptr)
-      HudMessageF("CBIFONT", "%.*s%S", st->tbptr, st->txtbuf, hot ? Ticker("|", "") : "");
+      HudMessageF("CBIFONT", "%.*S%S", st->tbptr, Lith_CPS_Print(st->txtbuf), hot ? Ticker("|", "") : "");
    else
-      HudMessageF("CBIFONT", "\C%cType here...", hot ? 'c' : 'm');
-
+      HudMessageF("CBIFONT", "\C%cPut your cursor here to input text.", hot ? 'c' : 'm');
    HudMessagePlain(g->hid--, a->x + g->ox + .1, a->y + g->oy + .1, TICSECOND);
+   ACS_SetHudClipRect(0, 0, 0, 0);
 
    return st;
 }

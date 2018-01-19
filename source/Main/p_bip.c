@@ -345,7 +345,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       bip->lastcategory = BIPC_MAIN;
 
-      ifauto(char *, c, strchr(st->txtbuf, '\n'))
+      __str txtbuf = Lith_CPS_Print(st->txtbuf);
+      ifauto(char __str_ars const *, c, strchr_str(txtbuf, '\n'))
       {
          // That's a lot of numbers...
          crc64_t const extranames[] = {
@@ -356,9 +357,10 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             0x9FD558A2C8C8D163L,
          };
 
-         int size = c - st->txtbuf;
-         __str query = StrParam("%.*s", size, st->txtbuf);
-         crc64_t crc = Lith_CRC64(st->txtbuf, c - st->txtbuf);
+         char __str_ars const *tmp = txtbuf;
+         int size = c - tmp;
+         __str query = StrParam("%.*S", size, txtbuf);
+         crc64_t crc = Lith_CRC64_str(txtbuf, size);
 
          bip->resnum = bip->rescur = st->tbptr = 0;
 
@@ -397,7 +399,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          {
             bippage_t *page = bip->result[i];
             struct page_info pinf = GetPageInfo(page);
-            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 80 + (i * 10), .preset = &guipre.btnbipmain))
+
+            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 95 + (i * 10), .preset = &guipre.btnbipmain))
             {
                bip->lastcategory = bip->curcategory;
                bip->curcategory = page->category;
@@ -417,7 +420,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       else
       {
          HudMessageF("CBIFONT", "\CmNo results");
-         HudMessagePlain(g->hid--, 70, 80, TICSECOND);
+         HudMessagePlain(g->hid--, 70, 95, TICSECOND);
       }
    }
    else

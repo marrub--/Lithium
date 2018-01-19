@@ -1,0 +1,15 @@
+struct Lith_URANUS_PlayerData
+{
+   bool shiftDown;
+}
+
+// URANUS: Users Really Are Not UI Systems
+class Lith_URANUS : EventHandler
+{
+   ui Lith_URANUS_PlayerData lith_pdata[MAXPLAYERS];
+
+   static clearscope Lith_URANUS Instance()
+      {return Lith_URANUS(Find("Lith_URANUS"));}
+}
+
+// EOF

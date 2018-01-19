@@ -224,6 +224,7 @@ void Lith_DebugNote(__str fmt, ...);
 // Math ----------------------------------------------------------------------|
 
 [[__optional_args(1)]] crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result);
+[[__optional_args(1)]] crc64_t Lith_CRC64_str(void __str_ars const *data, size_t len, crc64_t result);
 [[__optional_args(1)]] float RandomFloat(float max, float min);
 float mag2f(float x, float y);
 fixed mag2k(fixed x, fixed y);

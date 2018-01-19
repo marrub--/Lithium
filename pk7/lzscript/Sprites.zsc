@@ -1,8 +1,7 @@
-extend class Lith_HERMES
+class Lith_SpriteLoader : Actor
 {
    states
    {
-   SetSpriteIndices:
       WUPG A 0;
       CUPG A 0;
       SPEL A 0;

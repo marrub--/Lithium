@@ -52,6 +52,23 @@ crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
 }
 
 //
+// Lith_CRC64_str
+//
+crc64_t Lith_CRC64_str(void  __str_ars const *data, size_t len, crc64_t result)
+{
+   unsigned char __str_ars const *ptr = data;
+
+   if(!crcinit) InitCRC64();
+
+   result = ~result;
+
+   for(size_t i = 0; i < len; i++)
+      result = crctable[(result ^ ptr[i]) & 0xFF] ^ (result >> 8);
+
+   return ~result;
+}
+
+//
 // RandomFloat
 //
 float RandomFloat(float max, float min)

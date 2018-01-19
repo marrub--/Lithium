@@ -104,33 +104,33 @@ enum Lith_ASCII
     Ch_BrackC,      // ]
     Ch_Exponent,    // ^
     Ch_Underscore,  // _
-    Ch_Backquote,   // `
-    Ch_Lower_A,     // a
-    Ch_Lower_B,     // b
-    Ch_Lower_C,     // c
-    Ch_Lower_D,     // d
-    Ch_Lower_E,     // e
-    Ch_Lower_F,     // f
-    Ch_Lower_G,     // g
-    Ch_Lower_H,     // h
-    Ch_Lower_I,     // i
-    Ch_Lower_J,     // j
-    Ch_Lower_K,     // k
-    Ch_Lower_L,     // l
-    Ch_Lower_M,     // m
-    Ch_Lower_N,     // n
-    Ch_Lower_O,     // o
-    Ch_Lower_P,     // p
-    Ch_Lower_Q,     // q
-    Ch_Lower_R,     // r
-    Ch_Lower_S,     // s
-    Ch_Lower_T,     // t
-    Ch_Lower_U,     // u
-    Ch_Lower_V,     // v
-    Ch_Lower_W,     // w
-    Ch_Lower_X,     // x
-    Ch_Lower_Y,     // y
-    Ch_Lower_Z,     // z
+    Ch_Grave,       // `
+    Ch_L_A,         // a
+    Ch_L_B,         // b
+    Ch_L_C,         // c
+    Ch_L_D,         // d
+    Ch_L_E,         // e
+    Ch_L_F,         // f
+    Ch_L_G,         // g
+    Ch_L_H,         // h
+    Ch_L_I,         // i
+    Ch_L_J,         // j
+    Ch_L_K,         // k
+    Ch_L_L,         // l
+    Ch_L_M,         // m
+    Ch_L_N,         // n
+    Ch_L_O,         // o
+    Ch_L_P,         // p
+    Ch_L_Q,         // q
+    Ch_L_R,         // r
+    Ch_L_S,         // s
+    Ch_L_T,         // t
+    Ch_L_U,         // u
+    Ch_L_V,         // v
+    Ch_L_W,         // w
+    Ch_L_X,         // x
+    Ch_L_Y,         // y
+    Ch_L_Z,         // z
     Ch_BraceO,      // {
     Ch_VerticalBar, // |
     Ch_BraceC,      // }

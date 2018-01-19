@@ -17,6 +17,12 @@ extend class Lith_HERMES
       if(wep) return wep.lith_fired;
       return 0;
    }
+
+   static void SetInput(int pnum, bool on)
+   {
+      let sv = Instance();
+      if(sv) sv.lith_pdata[pnum].grabInput = on;
+   }
 }
 
 // EOF

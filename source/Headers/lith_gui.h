@@ -3,6 +3,8 @@
 #ifndef LITH_GUI_H
 #define LITH_GUI_H
 
+#include "lith_cps.h"
+
 #define LineHash ((id_t)__LINE__ * FileHash)
 
 // Fixed ID
@@ -76,7 +78,7 @@ typedef struct gui_typeon_state_s
 
 typedef struct gui_txtbox_state_s
 {
-   char txtbuf[32];
+   Lith_CPS_Decl(txtbuf, 128);
    int  tbptr;
 } gui_txtbox_state_t;
 

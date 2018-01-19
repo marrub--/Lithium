@@ -1,4 +1,4 @@
-class Lith_Events : StaticEventHandler
+class Lith_Events : EventHandler
 {
    /*
    Lith_Cyberspace lith_cs;
@@ -10,15 +10,6 @@ class Lith_Events : StaticEventHandler
    }
    */
 
-   override void WorldLoaded(WorldEvent evt)
-   {
-      if(!evt.IsReopen)
-      {
-         Actor.Spawn("Lith_HERMES");
-//       lith_cs = Lith_Cyberspace.Create();
-      }
-   }
-
    override void WorldThingSpawned(WorldEvent evt)
    {
       let th = evt.thing;
@@ -29,10 +20,32 @@ class Lith_Events : StaticEventHandler
    override bool InputProcess(InputEvent evt)
    {
       let sv = Lith_HERMES.Instance();
-      if(sv && sv.lith_grabInput[consoleplayer] &&
-         evt.Type == InputEvent.Type_KeyDown && evt.keyString)
+      let cl = Lith_URANUS.Instance();
+
+      if(!cl || !sv) return false;
+
+      if((evt.type == InputEvent.Type_KeyDown ||
+          evt.type == InputEvent.Type_KeyUp) &&
+         (evt.keyScan == InputEvent.Key_LShift ||
+          evt.keyScan == InputEvent.Key_RShift))
       {
-         EventHandler.SendNetworkEvent("Lith_Key", evt.keyChar);
+         cl.lith_pdata[consoleplayer].shiftDown =
+            (evt.type == InputEvent.Type_KeyDown);
+
+         return false;
+      }
+      else if(sv.lith_pdata[consoleplayer].grabInput &&
+         evt.type == InputEvent.Type_KeyDown && evt.keyString)
+      {
+         int ch = evt.keyChar;
+
+         if(cl.lith_pdata[consoleplayer].shiftDown &&
+            (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
+         {
+            ch -= 32;
+         }
+
+         EventHandler.SendNetworkEvent("Lith_Key", ch);
          return true;
       }
       

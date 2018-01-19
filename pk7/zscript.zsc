@@ -1,6 +1,8 @@
 version "3.2"
 
 #include "lzscript/Constants.zsc"
+#include "lzscript/Sprites.zsc"
+#include "lzscript/Client.zsc"
 #include "lzscript/Playsim.zsc"
 #include "lzscript/Effects.zsc"
 #include "lzscript/Projectiles.zsc"
