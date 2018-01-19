@@ -33,13 +33,14 @@ class Lith_Player : DoomPlayer
       Super.PlayerThink();
    }
 
-   // TODO: fix this
    override void Tick()
    {
       if(CallACS("LPData", pdata_semifrozen))
       {
-         A_SetAngle(angle, SPF_INTERPOLATE);
-         A_SetPitch(pitch, SPF_INTERPOLATE);
+         angle -= 1;
+         pitch -= 1;
+         A_SetAngle(angle + 1, SPF_INTERPOLATE);
+         A_SetPitch(pitch + 1, SPF_INTERPOLATE);
       }
 
       Super.Tick();
