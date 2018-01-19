@@ -37,7 +37,7 @@ void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
          ACS_SpawnForced("Lith_ExplodoBoots", p->x, p->y, p->z, tid = ACS_UniqueTID());
          ACS_SetActivator(tid);
          ACS_SetPointer(AAPTR_TARGET, p->tid);
-         ACS_SetActivator(p->tid);
+         p->setActivator();
       }
    }
 }

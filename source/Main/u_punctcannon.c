@@ -46,7 +46,7 @@ void Lith_PunctuatorFire(void)
 
          ACS_SetActivator(etid);
          ACS_SetPointer(AAPTR_TARGET, p->tid);
-         ACS_SetActivator(p->tid);
+         p->setActivator();
       }
    }
 }

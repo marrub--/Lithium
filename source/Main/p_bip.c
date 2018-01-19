@@ -157,9 +157,12 @@ void Lith_PlayerInitBIP(player_t *p)
 //
 // Lith_DeliverMail
 //
+[[__call("ScriptS")]]
 void Lith_DeliverMail(player_t *p, __str title, int flags)
 {
    if(p->pclass & pcl_mods) return;
+
+   p->setActivator();
 
    flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
 
@@ -196,6 +199,8 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 
    if(!(flags & MAILF_NoPrint))
    {
+      ACS_Delay(20);
+
       p->log("> Mail received from <\Cj%S\C->.", send);
 
       if(ACS_Random(1, 10000) == 1)
@@ -203,6 +208,8 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
          bip->mailtrulyreceived++;
          ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
       }
+      else
+         ACS_LocalAmbientSound("player/cbi/mail", 127);
    }
 }
 

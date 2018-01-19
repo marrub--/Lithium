@@ -54,12 +54,8 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       {
          click = g->clicklft && !g->old.clicklft;
 
-              if(g->slidecount < 4)  click = click || g->slidetime % 15 == 0;
-         else if(g->slidecount < 8)  click = click || g->slidetime % 12 == 0;
-         else if(g->slidecount < 10) click = click || g->slidetime % 10 == 0;
-         else if(g->slidecount < 20) click = click || g->slidetime % 7  == 0;
-         else if(g->slidecount < 40) click = click || g->slidetime % 5  == 0;
-         else if(g->slidecount < 80) click = click || g->slidetime % 2  == 0;
+              if(g->slidecount < 10) click = click || g->slidetime % 5 == 0;
+         else if(g->slidecount < 20) click = click || g->slidetime % 2 == 0;
          else                        click = true;
       }
 

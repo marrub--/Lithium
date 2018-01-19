@@ -318,7 +318,7 @@ void Lith_PlayerReinitUpgrades(player_t *p)
 //
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
-   if(ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
+   if(Lith_IsPaused)
       return;
 
    ForUpgrade(upgr)

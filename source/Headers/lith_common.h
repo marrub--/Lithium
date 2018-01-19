@@ -45,9 +45,11 @@
 
 #define HERMES(...) ACS_ScriptCall("Lith_HERMES", __VA_ARGS__)
 
+#define Lith_IsPaused (ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
+
 #define Lith_PausableTick() \
    do ACS_Delay(1); \
-   while(ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
+   while(Lith_IsPaused)
 
 #define HudMessageLog(...) \
    ( \

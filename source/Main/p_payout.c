@@ -51,7 +51,7 @@ void Lith_PlayerPayout(player_t *p)
 
    payoutinfo_t pay = payout;
 
-   ACS_SetActivator(p->tid);
+   p->setActivator();
    ACS_Delay(25);
    ACS_SetHudSize(320, 240);
 

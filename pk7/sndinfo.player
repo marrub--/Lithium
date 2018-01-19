@@ -64,6 +64,7 @@ $playersound player male *land    lsounds/Player/Land.wav     // Hexen
 //
 player/cbi/open         lsounds/Player/CBI/Open.flac             // Halo 3
 player/cbi/close        lsounds/Player/CBI/Close.flac            // 〃
+player/cbi/buttoncurs   lsounds/Player/CBI/ButtonCursor.flac     // Rosenkreuzstilette
 player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac      // Doom 3
 player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // Phantasy Star Nova
 player/cbi/find         lsounds/Player/CBI/Find.flac             // 〃
@@ -78,6 +79,8 @@ player/cbi/clickoff     lsounds/Player/CBI/ClickOff.flac         // 〃
 player/cbi/auto/toggle  lsounds/Player/CBI/AutoGroupToggle.flac  // Deus Ex
 player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Keeper - Dark Sci-Fi UI Sounds
 player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
+player/cbi/mail         lsounds/Player/CBI/MailReceive.flac      // Fallout 4
+player/cbi/tabswitch    lsounds/Player/CBI/TabSwitch.flac        // 〃
 
 $random player/cbi/keypress {
    player/cbi/key1

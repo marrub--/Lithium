@@ -173,6 +173,7 @@ typedef struct player
                  set: Lith_SetActorInventory  (->tid, "BasicArmor")}
    __prop maxarmor   {get: ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT)}
    __prop armorclass {get: ACS_GetArmorInfoString(ARMORINFO_CLASSNAME)}
+   __prop setActivator {call: ACS_SetActivator(->tid)}
 
    // score
    __prop giveScore {call: Lith_GiveScore(this)}

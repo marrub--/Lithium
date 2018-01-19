@@ -40,6 +40,8 @@ void Lith_PlayerDebugStats(player_t *p)
 //
 void Lith_PlayerFootstep(player_t *p)
 {
+   if(Lith_IsPaused) return;
+
    fixed vol = p->getCVarK("lith_player_footstepvol");
    if(!vol || ACS_Timer() % 10 != 0 || p->z - p->floorz > 16) return;
 
@@ -95,6 +97,8 @@ void Lith_PlayerItemFx(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerDamageBob(player_t *p)
 {
+   if(Lith_IsPaused) return;
+
    if(!ACS_CheckInventory("PowerStrength") && p->health < p->oldhealth)
    {
       float angle = RandomFloat(tau, -tau);
@@ -126,6 +130,8 @@ void Lith_PlayerDamageBob(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerView(player_t *p)
 {
+   if(Lith_IsPaused) return;
+
    float addp = 0, addy = 0;
 
    if(p->getCVarI("lith_player_damagebob"))

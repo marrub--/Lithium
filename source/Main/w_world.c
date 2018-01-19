@@ -266,7 +266,7 @@ static void DoRain()
       return;
 
    player_t *p = &players[0];
-   ACS_SetActivator(p->tid);
+   p->setActivator();
 
    ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
    ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.001, true, ATTN_NONE);
@@ -742,7 +742,7 @@ static void Lith_WorldUnload(void)
    Lith_InstallSpawnedCBIItems();
 
    Lith_ForPlayer() {
-      ACS_SetActivator(p->tid);
+      p->setActivator();
       Lith_PlayerDeinitUpgrades(p);
       p->closeGUI();
       Lith_PlayerUpdateStats(p);
