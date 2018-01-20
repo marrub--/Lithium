@@ -1,0 +1,4 @@
+#include "lzscript/Monsters/Phantom.zsc"
+#include "lzscript/Monsters/Isaac.zsc"
+
+// EOF

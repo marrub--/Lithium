@@ -6,6 +6,7 @@ if(p->num == 0) {
    ServerFloat("Score multiplier", "x", "lith_sv_scoremul", 0, 10);
    ServerBool("Explode on death",  "lith_sv_revenge");
    ServerInt("Autosave Interval",  "min", "lith_sv_autosave", 0, 30);
+   ServerBool("Disable phantoms",  "lith_sv_nobosses");
 }
 
 Category("GUI");
@@ -66,9 +67,6 @@ if(p->num == 0) {
    Category("World");
    ServerBool("Rain in outside areas", "lith_sv_rain");
    ServerBool("Replace skies",         "lith_sv_sky");
-
-   Category("Game Modes");
-   ServerBool("Are you serious?", "lith_sv_seriousmode");
 }
 
 #undef Category

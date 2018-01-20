@@ -47,7 +47,8 @@ CallbackDefine(basic_cb_t, MSInit)
 
 // Extern Functions ----------------------------------------------------------|
 
-extern void Lith_SpawnBosses(score_t sum, bool force);
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SpawnBosses(score_t sum, bool force);
 
 //
 // Lith_GetWorldExtern
@@ -402,7 +403,7 @@ static void CheckModCompat(void)
 {
    int tid;
 
-   if((world.legendoom       = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((world.legendoom = ACS_SpawnForced("LDLegendaryMonsterMarker", 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
 }
@@ -491,13 +492,6 @@ static void MInit(void)
 
    // Init global score multiplier per-map.
    world.scoremul = round(ACS_GetCVarFixed("lith_sv_scoremul") * 10) / 10;
-
-   // Seriously?
-   if(ACS_GetCVar("lith_sv_seriousmode"))
-   {
-      world.scoremul += 15;
-      ACS_SpawnForced("Lith_SeriousEmitter", 0, 0, 0);
-   }
 
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)

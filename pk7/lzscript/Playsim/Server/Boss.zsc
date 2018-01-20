@@ -1,0 +1,64 @@
+extend class Lith_HERMES
+{
+   static void SpawnBoss(Actor a, string name, int phase)
+   {
+      let pos = a.pos;
+      let ang = a.angle;
+      let tid = a.tid;
+
+      int spec = a.special;
+      int arg0 = a.args[0];
+      int arg1 = a.args[1];
+      int arg2 = a.args[2];
+      int arg3 = a.args[3];
+      int arg4 = a.args[4];
+
+      a.destroy();
+
+      let b = Lith_Phantom(Actor.Spawn(name, pos));
+
+      b.user_phase = phase;
+
+      b.angle = ang;
+      b.changeTID(tid);
+
+      b.special = spec;
+      b.args[0] = arg0;
+      b.args[1] = arg1;
+      b.args[2] = arg2;
+      b.args[3] = arg3;
+      b.args[4] = arg4;
+
+      if(phase == 2)
+      {
+         b.damageMultiply = 1.5;
+         b.reactionTime   = 4;
+         b.health        *= 1.5;
+         b.bMISSILEMORE   = true;
+      }
+      else if(phase == 3)
+      {
+         b.damageMultiply   = 2;
+         b.reactionTime     = 2;
+         b.health          *= 2;
+         b.bMISSILEMORE     = true;
+         b.bMISSILEEVENMORE = true;
+      }
+   }
+
+   static void TriggerBoss()
+   {
+      if(CallACS("LWData", wdata_bossspawned)) return;
+
+      Actor mo;
+      for(let it = ThinkerIterator.Create(); (mo = Actor(it.next()));)
+      {
+         if(mo.bISMONSTER && mo.health >= 500) {
+            mo.ACS_NamedExecuteAlways("Lith_SpawnBoss", 0);
+            break;
+         }
+      }
+   }
+}
+
+// EOF

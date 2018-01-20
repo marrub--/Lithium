@@ -12,7 +12,6 @@
 #include "lscripts/Monsters/XHTier4.dec"
 #include "lscripts/Monsters/XHTier5.dec"
 
-#include "lscripts/Monsters/BossSpawners.dec"
 #include "lscripts/Monsters/Phantom.dec"
 #include "lscripts/Monsters/James.dec"
 #include "lscripts/Monsters/Makarov.dec"

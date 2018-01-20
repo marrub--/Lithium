@@ -97,19 +97,7 @@ typedef struct worldinfo_s
    int    apiversion;
 
    // Bosses
-   bool boss[3][3];
    bool bossspawned;
-
-   __prop boss1p1scr {get: ACS_GetCVar("lith_sv_boss1p1_scr")}
-   __prop boss1p2scr {get: ACS_GetCVar("lith_sv_boss1p2_scr")}
-
-   __prop boss2p1scr {get: ACS_GetCVar("lith_sv_boss2p1_scr")}
-   __prop boss2p2scr {get: ACS_GetCVar("lith_sv_boss2p2_scr")}
-   __prop boss2p3scr {get: ACS_GetCVar("lith_sv_boss2p3_scr")}
-
-   __prop boss3p1scr {get: ACS_GetCVar("lith_sv_boss3p1_scr")}
-   __prop boss3p2scr {get: ACS_GetCVar("lith_sv_boss3p2_scr")}
-   __prop boss3p3scr {get: ACS_GetCVar("lith_sv_boss3p3_scr")}
 
    // CBI global information
    int  cbiperf;
