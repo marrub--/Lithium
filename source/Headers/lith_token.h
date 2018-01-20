@@ -18,8 +18,14 @@ enum
    tok_number, // Number
    tok_string, // String           < " >  <characters> < " >
    tok_charac, // Character String < ' >  <characters> < ' >
-   tok_quote,  // Quote            < “ >  <characters> < \n >
+   tok_quote,  // Quote            < ` >  <characters> < \n >
    tok_cmtlin, // Line comment     < // > <characters> < \n >
+   tok_cmtblk, // Block comment    < /* > <characters> < */ >
+
+   // Special (post-process)
+   tok_keywrd, // Keyword
+   tok_numint, // Integer Literal
+   tok_numflt, // Float Literal
 
    // Single characters
    tok_lnend,  // \n
@@ -88,14 +94,20 @@ enum
    tok_max
 };
 
+typedef struct origin_s
+{
+   int colu, line;
+} origin_t;
+
 typedef struct token_s
 {
-   int type, line;
+   int      type;
+   origin_t orig;
    Vec_Decl(char, text);
 } token_t;
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_ParseToken(FILE *fp, token_t *tok);
+void Lith_ParseToken(FILE *fp, token_t *tok, origin_t *orig);
 
 #endif

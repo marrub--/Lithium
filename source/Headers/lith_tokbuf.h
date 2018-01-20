@@ -12,6 +12,7 @@ struct tokbuf_s;
 void     Lith_TBufCtor (struct tokbuf_s *tb);
 void     Lith_TBufDtor (struct tokbuf_s *tb);
 token_t *Lith_TBufGet  (struct tokbuf_s *tb);
+token_t *Lith_TBufPeek (struct tokbuf_s *tb);
 token_t *Lith_TBufUnGet(struct tokbuf_s *tb);
 token_t *Lith_TBufReGet(struct tokbuf_s *tb);
 bool     Lith_TBufDrop (struct tokbuf_s *tb, int t);
@@ -30,10 +31,12 @@ typedef struct tokbuf_s
    __prop ctor  {call: Lith_TBufCtor (this)}
    __prop dtor  {call: Lith_TBufDtor (this)}
    __prop get   {call: Lith_TBufGet  (this)}
+   __prop peek  {call: Lith_TBufPeek (this)}
    __prop unget {call: Lith_TBufUnGet(this)}
    __prop reget {call: Lith_TBufReGet(this)}
    __prop drop  {call: Lith_TBufDrop (this)}
 
+   origin_t orig;
    FILE    *fp;
    token_t *toks;
    int      tpos, tend;

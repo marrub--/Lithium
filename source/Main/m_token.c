@@ -4,136 +4,161 @@
 
 #include <ctype.h>
 
-#define GetPredStr(fn) \
+#define tokText(fn) \
    do { \
-      for(; fn(ch); ch = fgetc(fp)) { \
+      for(int pc = 0; fn(ch); pc = ch, getch()) { \
+         advLine(); \
          Vec_Grow(tok->text, 1); \
          Vec_Next(tok->text) = ch; \
       } \
       Vec_Grow(tok->text, 1); \
       Vec_Next(tok->text) = '\0'; \
-      ungetc(ch, fp); \
+      unget(); \
    } while(0)
 
 #define IsIdenti(ch) (isalnum(ch) || (ch) == '_')
 #define IsNum(ch)    (isalnum(ch) || (ch) == '_' || (ch) == '.')
+
+#define InComment(ch) ((ch) != '\n' && !feof(fp))
+
+#define unget() ((orig->colu -= 1), ungetc(ch, fp))
+#define getch() ((orig->colu += 1), ch = fgetc(fp))
+
+#define advLine() \
+   switch(ch) { \
+   case '\r': if(getch() != '\n') unget(); \
+   case '\n': orig->colu = 0; ++orig->line; \
+   }
+
+//#define tok1(tt1) (printf(#tt1 "\n"), tok->type = tt1)
+#define tok1(tt1) (tok->orig = *orig, tok->type = tt1)
+#define tok2(c2, tt1, tt2) \
+   if(getch() == c2) tok1(tt2); \
+   else    (unget(), tok1(tt1))
+#define tok3(c2, c3, tt1, tt2, tt3) \
+        if(getch() == c3) tok1(tt3); \
+   else if(   ch   == c2) tok1(tt2); \
+   else         (unget(), tok1(tt1))
 
 // Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_ParseToken
 //
-void Lith_ParseToken(FILE *fp, token_t *tok)
+void Lith_ParseToken(FILE *fp, token_t *tok, origin_t *orig)
 {
-   if(!tok) return;
-
-   Vec_Clear(tok->text);
-
-   if(!fp || feof(fp)) {
-      tok->type = tok_eof;
-      return;
-   }
+   if(!tok || !fp || !orig) return;
 
 begin:;
    int ch;
-   switch((ch = fgetc(fp)))
-   {
-   case EOF:
-   case '\0': tok->type = tok_eof;    return;
-   case '\r': if((ch = fgetc(fp)) != '\n') ungetc(ch, fp);
-   case '\n': tok->type = tok_lnend;  return;
-   case ';':  tok->type = tok_semico; return;
-   case ',':  tok->type = tok_comma;  return;
-   case '$':  tok->type = tok_dollar; return;
-   case '[':  tok->type = tok_bracko; return;
-   case ']':  tok->type = tok_brackc; return;
-   case '{':  tok->type = tok_braceo; return;
-   case '}':  tok->type = tok_bracec; return;
-   case '(':  tok->type = tok_pareno; return;
-   case ')':  tok->type = tok_parenc; return;
-   #define TokOp2(c, c2, t, t2) \
-   case c: \
-      if((ch = fgetc(fp)) == c2) tok->type = t2; \
-      else {ungetc(ch, fp); tok->type = t;} \
-      return
-   TokOp2('=', '=', tok_eq,   tok_eq2);
-   TokOp2('?', '=', tok_tern, tok_terneq);
-   TokOp2('!', '=', tok_not,  tok_neq);
-   TokOp2('~', '=', tok_bnot, tok_bneq);
-   TokOp2('*', '=', tok_mul,  tok_muleq);
-   TokOp2('@', '@', tok_at,   tok_at2);
-   #undef TokOp2
-   #define TokOp3(c, t, t2, teq) \
-   case c: \
-           if((ch = fgetc(fp)) == c) tok->type = t2; \
-      else if(ch == '=')             tok->type = teq; \
-      else {ungetc(ch, fp); tok->type = t;} \
-      return
-   TokOp3('<', tok_lt,  tok_lt2,  tok_le);
-   TokOp3('>', tok_gt,  tok_gt2,  tok_ge);
-   TokOp3('|', tok_or,  tok_or2,  tok_oreq);
-   TokOp3('&', tok_and, tok_and2, tok_andeq);
-   TokOp3('+', tok_add, tok_add2, tok_addeq);
-   TokOp3('%', tok_mod, tok_mod2, tok_modeq);
-   TokOp3('^', tok_xor, tok_xor2, tok_xoreq);
-   TokOp3(':', tok_col, tok_col2, tok_coleq);
-   #undef TokOp3
-   case '-':
-           if((ch = fgetc(fp)) == '-') tok->type = tok_sub2;
-      else if(ch == '=')               tok->type = tok_subeq;
-      else if(ch == '>')               tok->type = tok_rarrow;
-      else if(isdigit(ch)) {ungetc(ch, fp); ch = '-'; break;}
-      else {ungetc(ch, fp); tok->type = tok_sub;}
+
+   Vec_Clear(tok->text);
+
+   getch();
+   if(feof(fp) || ch == EOF) {
+      unget();
+      tok1(tok_eof);
       return;
+   }
+
+   switch(ch)
+   {
+   // Whitespace
+   case '\r': case '\n': tok1(tok_lnend); advLine(); return;
+
+   // 1-op tokens
+   case ';': tok1(tok_semico); return;
+   case ',': tok1(tok_comma ); return;
+   case '$': tok1(tok_dollar); return;
+   case '[': tok1(tok_bracko); return;
+   case ']': tok1(tok_brackc); return;
+   case '{': tok1(tok_braceo); return;
+   case '}': tok1(tok_bracec); return;
+   case '(': tok1(tok_pareno); return;
+   case ')': tok1(tok_parenc); return;
+
+   // 2-op tokens
+   case '=': tok2('=', tok_eq,   tok_eq2   ); return;
+   case '?': tok2('=', tok_tern, tok_terneq); return;
+   case '!': tok2('=', tok_not,  tok_neq   ); return;
+   case '~': tok2('=', tok_bnot, tok_bneq  ); return;
+   case '*': tok2('=', tok_mul,  tok_muleq ); return;
+   case '@': tok2('@', tok_at,   tok_at2   ); return;
+
+   // 3-op tokens
+   case '<': tok3('<', '=', tok_lt,  tok_lt2,  tok_le   ); return;
+   case '>': tok3('>', '=', tok_gt,  tok_gt2,  tok_ge   ); return;
+   case '|': tok3('|', '=', tok_or,  tok_or2,  tok_oreq ); return;
+   case '&': tok3('&', '=', tok_and, tok_and2, tok_andeq); return;
+   case '+': tok3('+', '=', tok_add, tok_add2, tok_addeq); return;
+   case '%': tok3('%', '=', tok_mod, tok_mod2, tok_modeq); return;
+   case '^': tok3('^', '=', tok_xor, tok_xor2, tok_xoreq); return;
+   case ':': tok3(':', '=', tok_col, tok_col2, tok_coleq); return;
+
+   case '-':
+           if(getch() == '-')        tok1(tok_sub2);
+      else if(ch == '=')             tok1(tok_subeq);
+      else if(ch == '>')             tok1(tok_rarrow);
+      else if(isdigit(ch)) {unget(); ch = '-'; break;}
+      else                 {unget(); tok1(tok_sub);}
+      return;
+
    case '/':
-      if((ch = fgetc(fp)) == '=')
-         tok->type = tok_diveq;
+      if(getch() == '=')
+         tok1(tok_diveq);
       else if(ch == '/')
       {
-         #define InComment(ch) ((ch) != '\n' && !feof(fp))
-         ch = fgetc(fp);
-         GetPredStr(InComment);
-         tok->type = tok_cmtlin;
-         #undef InComment
+         tok1(tok_cmtlin);
+         getch();
+         tokText(InComment);
       }
-      else
-         {ungetc(ch, fp); tok->type = tok_div;}
-      return;
-   case '.':
-      if((ch = fgetc(fp)) == '.')
+      else if(ch == '*')
       {
-         if((ch = fgetc(fp)) == '.')
-            tok->type = tok_dot3;
-         else
-            {ungetc(ch, fp); tok->type = tok_dot2;}
-      }
-      else if(isdigit(ch))
-         {ungetc(ch, fp); break;}
-      else
-         {ungetc(ch, fp); tok->type = tok_dot;}
-      return;
-   case 0xFFFFFFE2:
-      if((ch = fgetc(fp)) == 0xFFFFFF80)
-      {
-         if((ch = fgetc(fp)) == 0xFFFFFF9C)
+         tok1(tok_cmtblk);
+         getch();
+
+         for(int lvl = 1; lvl && !feof(fp); getch())
          {
-            #define InQuote(ch) ((ch) != '\n' && !feof(fp))
-            ch = fgetc(fp);
-            GetPredStr(InQuote);
-            tok->type = tok_quote;
-            #undef InQuote
-            return;
+            if(ch == '/') {
+               if(getch() == '*') {lvl++; continue;}
+               else               {unget(); ch = '/';}
+            } else if(ch == '*') {
+               if(getch() == '/') {lvl--; continue;}
+               else               {unget(); ch = '*';}
+            }
+
+            advLine();
+
+            Vec_Grow(tok->text, 1);
+            Vec_Next(tok->text) = ch;
          }
-         else
-            ungetc('\x9c', fp);
+
+         unget();
       }
-      ungetc('\x80', fp);
-      break;
-   case '\'': tok->type = tok_charac; goto string;
-   case '"':  tok->type = tok_string; goto string;
+      else
+         {unget(); tok1(tok_div);}
+      return;
+
+   case '.':
+      if(getch() == '.')
+         tok2('.', tok_dot2, tok_dot3);
+      else if(isdigit(ch))
+         {unget(); break;}
+      else
+         {unget(); tok1(tok_dot);}
+      return;
+
+   case '`':
+      getch();
+      tokText(InComment);
+      tok1(tok_quote);
+      return;
+
+   case '\'': tok1(tok_charac); goto string;
+   case '"':  tok1(tok_string); goto string;
    string: {
       int i, beg;
-      for(i = 0, beg = ch; (ch = fgetc(fp)) != beg && !feof(fp);) {
+      for(i = 0, beg = ch; getch() != beg && !feof(fp);) {
          Vec_Grow(tok->text, 1);
          Vec_Next(tok->text) = ch;
       }
@@ -145,29 +170,29 @@ begin:;
 
    if(isblank(ch))
    {
-      while(isblank(ch = fgetc(fp)));
-      ungetc(ch, fp);
+      while(isblank(getch()));
+      unget();
       goto begin;
    }
    else if(isdigit(ch) || ch == '.' || ch == '-')
    {
+      tok1(tok_number);
       Vec_Grow(tok->text, 1);
       Vec_Next(tok->text) = ch;
-      ch = fgetc(fp);
-      GetPredStr(IsNum);
-      tok->type = tok_number;
+      getch();
+      tokText(IsNum);
    }
    else if(IsIdenti(ch))
    {
-      GetPredStr(IsIdenti);
-      tok->type = tok_identi;
+      tok1(tok_identi);
+      tokText(IsIdenti);
    }
    else
    {
+      tok1(tok_chrseq);
       Vec_Grow(tok->text, 2);
       Vec_Next(tok->text) = ch;
       Vec_Next(tok->text) = '\0';
-      tok->type = tok_chrseq;
    }
 }
 

@@ -5,8 +5,12 @@
 #include "lith_dialogue.h"
 #include "lith_tokbuf.h"
 
-#define LogTok(s, tok) \
-   Log(s " (%i:\"%s\")", tok->type, tok->textV ? tok->textV : c"<no string>")
+#define LogTok(tok, s) \
+   Log("(%i:%i) " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, tok->type, \
+      tok->textV ? tok->textV : c"<no string>")
+
+#define LogOri(tok, s) \
+   Log("(%i:%i) " s, tok->orig.line, tok->orig.colu)
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -36,10 +40,15 @@ struct strent {
 
 struct dlgfunc {
    char const *name, *args;
-   int   code;
-   int   lit[4];
+   int lit[4];
+   void (*genCode)(struct dlgparsestate_s *d, union arg *argv, int argc);
    size_t keyhash;
    struct dlgfunc *next, **prev;
+};
+
+union arg {
+   __str s;
+   int   i;
 };
 
 typedef struct dlgparsestate_s
@@ -96,6 +105,81 @@ static int *NextCode(dlgparsestate_t *d)
    return &Vec_Next(d->def->code);
 }
 
+#define GenCode_Reg(code) \
+        if(argv[0].s == "a") *d->nextCode() = DCD_##code##_A; \
+   else if(argv[0].s == "b") *d->nextCode() = DCD_##code##_B; \
+   else if(argv[0].s == "c") *d->nextCode() = DCD_##code##_C; \
+   else if(argv[0].s == "d") *d->nextCode() = DCD_##code##_D; \
+   else
+
+//
+// GenCode_Trace
+//
+static void GenCode_Trace(dlgparsestate_t *d, union arg *argv, int argc)
+{
+   GenCode_Reg(TRACE)
+   {
+      *d->nextCode() = DCD_TRACE_S;
+      *d->nextCode() = argv[0].i;
+   }
+}
+
+//
+// GenCode_Push
+//
+static void GenCode_Push(dlgparsestate_t *d, union arg *argv, int argc)
+{
+   GenCode_Reg(PUSH)
+   {
+      *d->nextCode() = DCD_PUSH_I;
+      *d->nextCode() = strtoi_str(argv[0].s, null, 0);
+   }
+}
+
+//
+// GenCode_Pop
+//
+static void GenCode_Pop(dlgparsestate_t *d, union arg *argv, int argc)
+{
+   GenCode_Reg(POP)
+   {
+      token_t *tok = d->tb.reget();
+      LogOri(tok, "GenCode_Pop: invalid argument");
+   }
+}
+
+#define GenCode_Arith(code) \
+   static void GenCode_Arith_##code(dlgparsestate_t *d, union arg *argv, int argc) \
+   { \
+      GenCode_Reg(code) \
+      { \
+         *d->nextCode() = DCD_##code##_I; \
+         *d->nextCode() = strtoi_str(argv[0].s, null, 0); \
+      } \
+   }
+
+GenCode_Arith(ADD)
+GenCode_Arith(SUB)
+GenCode_Arith(MUL)
+GenCode_Arith(DIV)
+GenCode_Arith(MOD)
+GenCode_Arith(IOR)
+GenCode_Arith(AND)
+GenCode_Arith(XOR)
+GenCode_Arith(LSH)
+GenCode_Arith(RSH)
+
+#undef GenCode_Arith
+
+//
+// GenCode_Generic
+//
+static void GenCode_Generic(dlgparsestate_t *d, union arg *argv, int argc)
+{
+   for(int i = 0; i < argc; i++)
+      *d->nextCode() = argv[i].i;
+}
+
 //
 // GetCode_Cond
 //
@@ -104,19 +188,19 @@ static int *NextCode(dlgparsestate_t *d)
 static void GetCode_Cond(dlgparsestate_t *d)
 {
    int code = DCD_NOP;
-   token_t *tok;
+   token_t *tok = d->tb.get();
 
    // Get the code to generate.
-   if((tok = d->tb.get())->type == tok_identi)
+   if(tok->type == tok_identi)
    {
       switch(StrName(tok->textV)) {
       case STR_item:  code = DCD_JNITEM;  break;
       case STR_class: code = DCD_JNCLASS; break;
-      default: Log("GetCode_Cond: invalid conditional"); return;
+      default: LogOri(tok, "GetCode_Cond: invalid conditional"); return;
       }
    }
    else
-      LogTok("GetCode_Cond: expected identifier", tok);
+      LogTok(tok, "GetCode_Cond: expected identifier");
 
    // Generate code.
    int ptr = 0;
@@ -131,17 +215,17 @@ static void GetCode_Cond(dlgparsestate_t *d)
       if(code == DCD_JNCLASS)
       {
          switch(StrName(tok->textV)) {
-         case STR_Marine:    *d->nextCode() = pcl_marine;        break;
-         case STR_CyberMage: *d->nextCode() = pcl_cybermage;     break;
-         case STR_Informant: *d->nextCode() = pcl_informant;     break;
-         default: Log("GetCode_Cond: invalid playerclass type"); return;
+         case STR_Marine:    *d->nextCode() = pcl_marine;    break;
+         case STR_CyberMage: *d->nextCode() = pcl_cybermage; break;
+         case STR_Informant: *d->nextCode() = pcl_informant; break;
+         default: LogOri(tok, "GetCode_Cond: invalid playerclass type"); return;
          }
       }
       else
          *d->nextCode() = (int)StrParam("%.*s", tok->textC, tok->textV);
    }
    else
-      Log("GetCode_Cond: invalid token in conditional statement");
+      LogOri(tok, "GetCode_Cond: invalid token in conditional statement");
 
    // Generate statement.
    GetStatement(d);
@@ -188,7 +272,7 @@ static void GetCode_Option(dlgparsestate_t *d)
       *d->nextCode() = (int)StrParam("%.*s", tok->textC, tok->textV);
    }
    else
-      Log("GetCode_Option: invalid option parameter");
+      LogOri(tok, "GetCode_Option: invalid option parameter");
 
    // Generate statement.
    GetStatement(d);
@@ -221,56 +305,55 @@ static void GetCode_Generic(dlgparsestate_t *d)
    // Get the function to generate.
    struct dlgfunc const *func = ftbl.find(tok->textV);
    if(!func) {
-      Log("GetCode_Generic: invalid function in dialogue code");
+      LogOri(tok, "GetCode_Generic: invalid function in dialogue code");
       return;
    }
 
-   // Generate code.
-   *d->nextCode() = func->code;
-
    // Get arguments.
-   int args[8] = {};
-   int i = 0, l = 0;
+   union arg argv[8] = {};
+   int argc = 0;
+   int lit  = 0;
 
-   while(func->args[i])
+   while(func->args[argc])
    {
-      if(func->args[i] == 'L') {
-         args[i++] = func->lit[l++];
+      if(func->args[argc] == 'L')
+      {
+         argv[argc++].i = func->lit[lit++];
          continue;
       }
 
-      if(!(tok = d->tb.get())->textV) {
-         LogTok("GetCode_Generic: invalid token in argument list", tok);
+      if(!(tok = d->tb.get())->textV)
+      {
+         LogTok(tok, "GetCode_Generic: invalid token in argument list");
          return;
       }
 
-      switch(func->args[i]) {
-      case 'I': args[i++] = strtoi(tok->textV, null, 0); break;
-      case 'S': args[i++] = (int)StrParam("%.*s", tok->textC, tok->textV);
-         break;
+      switch(func->args[argc])
+      {
+      case 'I': argv[argc++].i = strtoi(tok->textV, null, 0); break;
+      case 'S': argv[argc++].s = StrParam("%s", tok->textV);  break;
       }
 
-      LogDebug(log_dlg, "arg %i: %s", i, tok->textV);
+      LogDebug(log_dlg, "arg %i: %s", argc, tok->textV);
 
       if(!d->tb.drop(tok_comma) || d->tb.drop(tok_semico))
          break;
    }
 
    // Fill in unfinished arguments.
-   while(func->args[i])
+   while(func->args[argc])
    {
-      switch(func->args[i]) {
-      case 'I': args[i++] = 0;              break;
-      case 'S': args[i++] = (int)"";        break;
-      case 'L': args[i++] = func->lit[l++]; break;
+      switch(func->args[argc])
+      {
+      case 'I': argv[argc++].i = 0;                break;
+      case 'S': argv[argc++].s = "";               break;
+      case 'L': argv[argc++].i = func->lit[lit++]; break;
       }
 
-      LogDebug(log_dlg, "arg %i emptied", i);
+      LogDebug(log_dlg, "arg %i emptied", argc);
    }
 
-   // Generate arguments.
-   for(int a = 0; a < i; a++)
-      *d->nextCode() = args[a];
+   func->genCode(d, argv, argc);
 }
 
 //
@@ -289,9 +372,9 @@ static void GetCode_Text(dlgparsestate_t *d, token_t *tok, int code)
 //
 static void GetCode_Line(dlgparsestate_t *d)
 {
-   token_t *tok;
+   token_t *tok = d->tb.get();
 
-   switch((tok = d->tb.get())->type)
+   switch(tok->type)
    {
    case tok_identi:
       LogDebug(log_dlg, "GetCode_Line: %s", tok->textV);
@@ -308,7 +391,7 @@ static void GetCode_Line(dlgparsestate_t *d)
    case tok_eof:
       break;
    default:
-      LogTok("GetCode_Line: invalid token in line", tok);
+      LogTok(tok, "GetCode_Line: invalid token in line");
    }
 }
 
@@ -376,7 +459,7 @@ static void GetDecl_Dialogue(dlgparsestate_t *d)
       LogDebug(log_dlg, "\n---\ndialogue %i (%i)\n---",
          d->def->num, d->def->codeC);
    } else {
-      Log("GetDecl_Dialogue: invalid dialogue number token");
+      LogOri(tok, "GetDecl_Dialogue: invalid dialogue number token");
    }
 }
 
@@ -392,7 +475,7 @@ static void GetDecl_Terminal(dlgparsestate_t *d)
       LogDebug(log_dlg, "\n---\nterminal %i (%i)\n---",
          -d->def->num, d->def->codeC);
    } else {
-      Log("GetDecl_Terminal: invalid terminal number token");
+      LogOri(tok, "GetDecl_Terminal: invalid terminal number token");
    }
 }
 
@@ -416,7 +499,7 @@ static void GetDecl_Page(dlgparsestate_t *d)
    if(tok->type == tok_number)
       SetupPage(d, strtoi(tok->textV, null, 0));
    else
-      Log("GetDecl_Page: invalid page number token");
+      LogOri(tok, "GetDecl_Page: invalid page number token");
 
    GetStatement(d);
 
@@ -448,36 +531,53 @@ void Lith_GSInit_Dialogue(void)
    #pragma GDCC STRENT_LITERAL OFF
 
    static struct dlgfunc funcs[] = {
-      {"die",  "", DCD_DIE},
-      {"exit", "", DCD_DIE},
+      {"nop", "L", DCD_NOP},
 
-      {"page", "I", DCD_JPAGE},
+      {"push", "S", .genCode = GenCode_Push},
+      {"pop",  "S", .genCode = GenCode_Pop},
 
-      {"script",      "IIIII", DCD_SCRIPTI},
-      {"scriptnamed", "SIIII", DCD_SCRIPTS},
-      {"trace",       "S",     DCD_TRACE},
+      {"add", "S", .genCode = GenCode_Arith_ADD},
+      {"sub", "S", .genCode = GenCode_Arith_SUB},
+      {"mul", "S", .genCode = GenCode_Arith_MUL},
+      {"div", "S", .genCode = GenCode_Arith_DIV},
+      {"mod", "S", .genCode = GenCode_Arith_MOD},
+      {"ior", "S", .genCode = GenCode_Arith_IOR},
+      {"and", "S", .genCode = GenCode_Arith_AND},
+      {"xor", "S", .genCode = GenCode_Arith_XOR},
+      {"lsh", "S", .genCode = GenCode_Arith_LSH},
+      {"rsh", "S", .genCode = GenCode_Arith_RSH},
 
-      {"intralevelteleport", "I", DCD_TELEPORT_INTRALEVEL},
-      {"interlevelteleport", "I", DCD_TELEPORT_INTERLEVEL},
+      {"die",  "L", DCD_DIE},
+      {"exit", "L", DCD_DIE},
 
-      {"text",      "S",  DCD_SETTEXT},
-      {"local",     "S",  DCD_SETTEXTLOCAL},
-      {"addtext",   "S",  DCD_ADDTEXT},
-      {"addlocal",  "S",  DCD_ADDTEXTLOCAL},
-      {"setstr",    "IS", DCD_SETSTRING},
-      {"name",      "LS", DCD_SETSTRING, DSTR_NAME},
-      {"icon",      "LS", DCD_SETSTRING, DSTR_ICON},
-      {"remote",    "LS", DCD_SETSTRING, DSTR_REMOTE},
-      {"concat",    "",   DCD_CONCAT},
-      {"endconcat", "",   DCD_CONCATEND},
+      {"page", "LI", DCD_JPAGE},
 
-      {"dlgwait", "", DCD_DLGWAIT},
+      {"script",      "LIIIII", DCD_SCRIPTI},
+      {"scriptnamed", "LSIIII", DCD_SCRIPTS},
 
-      {"logon",  "S", DCD_LOGON},
-      {"logoff", "S", DCD_LOGOFF},
-      {"info",   "",  DCD_INFO},
-      {"pict",   "S", DCD_PICT},
-      {"trmwait", "", DCD_TRMWAIT},
+      {"trace", "S", .genCode = GenCode_Trace},
+
+      {"intralevelteleport", "LI", DCD_TELEPORT_INTRALEVEL},
+      {"interlevelteleport", "LI", DCD_TELEPORT_INTERLEVEL},
+
+      {"text",      "LS",  DCD_SETTEXT},
+      {"local",     "LS",  DCD_SETTEXTLOCAL},
+      {"addtext",   "LS",  DCD_ADDTEXT},
+      {"addlocal",  "LS",  DCD_ADDTEXTLOCAL},
+      {"setstr",    "LIS", DCD_SETSTRING},
+      {"name",      "LLS", DCD_SETSTRING, DSTR_NAME},
+      {"icon",      "LLS", DCD_SETSTRING, DSTR_ICON},
+      {"remote",    "LLS", DCD_SETSTRING, DSTR_REMOTE},
+      {"concat",    "L",   DCD_CONCAT},
+      {"endconcat", "L",   DCD_CONCATEND},
+
+      {"dlgwait", "L", DCD_DLGWAIT},
+
+      {"logon",   "LS", DCD_LOGON},
+      {"logoff",  "LS", DCD_LOGOFF},
+      {"info",    "L",  DCD_INFO},
+      {"pict",    "LS", DCD_PICT},
+      {"trmwait", "L",  DCD_TRMWAIT},
    };
 
    static struct strent strs[] = {
@@ -495,6 +595,7 @@ void Lith_GSInit_Dialogue(void)
    functable_t_ctor(&ftbl, countof(funcs), 1);
    for(int i = 0; i < countof(funcs); i++) {
       funcs[i].keyhash = CStrHash(funcs[i].name);
+      if(!funcs[i].genCode) funcs[i].genCode = GenCode_Generic;
       ftbl.insert(&funcs[i]);
    }
 }
@@ -529,7 +630,7 @@ void Lith_LoadMapDialogue(void)
    for(token_t *tok; (tok = d.tb.get())->type != tok_eof;)
    {
       if(tok->type != tok_identi) {
-         LogTok("Lith_LoadMapDialogue: invalid toplevel token", tok);
+         LogTok(tok, "Lith_LoadMapDialogue: invalid toplevel token");
          break;
       }
 

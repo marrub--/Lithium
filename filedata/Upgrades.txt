@@ -164,7 +164,7 @@ Gives your rifle a sniper firing mode.
 A complete replacement for the trigger mechanism which adds a third mode,
 allowing you to burst-fire accurate, painful shots.
 
-\cdWorks with Laser Rifle.
+\cdCompatible with Laser Rifle.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_LaserRCW | Laser Rifle
@@ -175,7 +175,7 @@ Modal Rifle may be used with this upgrade.
 
 Uses a standard photon accelerator to fire lasers out of your rifle.
 
-\cdWorks with Modal Rifle.
+\cdCompatible with Modal Rifle.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_HomingRPG | Homing Rocket
@@ -262,41 +262,41 @@ Automatically loads shells, removing the need to reload.
 @@ LITH_TXT_UPGRADE_EFFEC_SMG_A
 Triples the SMG's magazine size, but makes it slower to reload.
 
-\cdWorks with Seeker Rounds.
+\cdCompatible with Seeker Rounds.
 
-\cdWorks with Safety System.
+\cdCompatible with Safety System.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_SMG_B | Seeker Rounds
 @@ LITH_TXT_UPGRADE_EFFEC_SMG_B
 Makes the SMG's rounds home in on targets in a small cone.
 
-\cdWorks with SMG Trimag.
+\cdCompatible with SMG Trimag.
 
-\cdWorks with Safety System.
+\cdCompatible with Safety System.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_SMG_C | Safety System
 @@ LITH_TXT_UPGRADE_EFFEC_SMG_C
 When the SMG is about to overheat, makes it stop firing for a short time.
 
-\cdWorks with Seeker Rounds.
+\cdCompatible with Seeker Rounds.
 
-\cdWorks with SMG Trimag.
+\cdCompatible with SMG Trimag.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_IonRifle_A | Rad. Ionizer
 @@ LITH_TXT_UPGRADE_EFFEC_IonRifle_A
 Ionizes enemies, making them take more damage when hit for a few seconds.
 
-\cdWorks with Overloader.
+\cdCompatible with Overloader.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_IonRifle_B | Overloader
 @@ LITH_TXT_UPGRADE_EFFEC_IonRifle_B
 Lets you hold down fire to charge the Ion Rifle, at the cost of cooldown time.
 
-\cdWorks with Rad. Ionizer.
+\cdCompatible with Rad. Ionizer.
 
 ##----------------------------------------------------------------------------|
 == LITH_TXT_UPGRADE_TITLE_CPlasma_A | Pulse Charger

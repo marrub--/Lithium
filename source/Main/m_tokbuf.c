@@ -14,6 +14,7 @@ static int TBufProc(token_t *tok, void *udata)
    default:         return tokproc_next;
    case tok_eof:    return tokproc_done;
    case tok_lnend:
+   case tok_cmtblk:
    case tok_cmtlin: return tokproc_skip;
    }
 }
@@ -37,6 +38,7 @@ static void TBufPrint(tokbuf_t *tb)
 //
 void Lith_TBufCtor(tokbuf_t *tb)
 {
+   tb->orig.line = 1;
    tb->toks = calloc(tb->bend, sizeof(token_t));
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
 }
@@ -68,8 +70,7 @@ token_t *Lith_TBufGet(tokbuf_t *tb)
    }
 
    // Move end of buffer to beginning.
-   if(tb->tend)
-      for(int i = tb->tend - tb->bbeg, j = 0; i < tb->tend; i++, j++)
+   if(tb->tend) for(int i = tb->tend - tb->bbeg, j = 0; i < tb->tend; i++, j++)
    {
       tb->toks[j] = tb->toks[i];
       tb->toks[i] = (token_t){0};
@@ -79,7 +80,7 @@ token_t *Lith_TBufGet(tokbuf_t *tb)
    for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++)
    {
    skip:
-      Lith_ParseToken(tb->fp, &tb->toks[tb->tend]);
+      Lith_ParseToken(tb->fp, &tb->toks[tb->tend], &tb->orig);
 
       switch(tb->tokProcess(&tb->toks[tb->tend], tb->udata)) {
       case tokproc_next: break;
@@ -90,6 +91,15 @@ token_t *Lith_TBufGet(tokbuf_t *tb)
 
 done:
    return &tb->toks[tb->tpos];
+}
+
+//
+// Lith_TBufPeek
+//
+token_t *Lith_TBufPeek(tokbuf_t *tb)
+{
+   Lith_TBufGet(tb);
+   return Lith_TBufUnGet(tb);
 }
 
 //

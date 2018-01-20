@@ -11,7 +11,7 @@ page 0
    if item Lith_DivisionSigil
       page 7
    
-   “...
+   `...
    
    option "Say hello" page 2
    option "Exit"      exit
@@ -19,15 +19,26 @@ page 0
 
 page 2
 {
-   if class Marine    “Who are you?
-   if class CyberMage “Right. The Cybernati.
+   if class Marine    `Who are you?
+   if class CyberMage `Right. The Cybernati.
+
+   add 5
+   push a
+   pop b
+   xor a
+   add 10
+   mul b
+
+   trace a
+   trace b
+   trace "butts"
 
    @@
-   “Test of concatenated
-   “text which should concat
-   “lines with spaces...
-   “
-   “and break on multiple lines.
+   `Test of concatenated
+   `text which should concat
+   `lines with spaces...
+   `
+   `and break on multiple lines.
    @@
 
    $QUITMSG39
@@ -43,18 +54,18 @@ page 2
 
 page 7
 {
-   “thousands are sailing
-   “the same self    the only self
-   “
-   “self willed the peril of a thousand fates
-   “
-   “a line of infinite ends    finite finishing
-   “the one remains oblique and pure
-   “
-   “arching to the single point of consciousness
-   “
-   “find yourself
-   “starting back
+   `thousands are sailing
+   `the same self    the only self
+   `
+   `self willed the peril of a thousand fates
+   `
+   `a line of infinite ends    finite finishing
+   `the one remains oblique and pure
+   `
+   `arching to the single point of consciousness
+   `
+   `find yourself
+   `starting back
    
    option "Thanks, bye!" exit
 }
@@ -69,14 +80,14 @@ unfinished
    remote "test@org.example"
    
    logon 01602
-   “\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+   `\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
    
    info
-   “test text, information block
+   `test text, information block
    
    pict "AOF"
-   “test with picture
-   “and multiple lines of text
+   `test with picture
+   `and multiple lines of text
    
    logoff 01602
 }

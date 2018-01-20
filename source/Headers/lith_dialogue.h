@@ -5,15 +5,36 @@ DCD(NOP)
 DCD(DIE)
 
 // Stack
-DCD(PUSH)
+DCD(PUSH_I)
+DCD(PUSH_A)
+DCD(PUSH_B)
+DCD(PUSH_C)
+DCD(PUSH_D)
+
 DCD(POP)
+DCD(POP_A)
+DCD(POP_B)
+DCD(POP_C)
+DCD(POP_D)
 
 // Arithmetic
-DCD(ADD)
-DCD(SUB)
-DCD(MUL)
-DCD(DIV)
-DCD(MOD)
+#define ArithSet(sfx) \
+   DCD(ADD_##sfx) \
+   DCD(SUB_##sfx) \
+   DCD(MUL_##sfx) \
+   DCD(DIV_##sfx) \
+   DCD(MOD_##sfx) \
+   DCD(IOR_##sfx) \
+   DCD(AND_##sfx) \
+   DCD(XOR_##sfx) \
+   DCD(LSH_##sfx) \
+   DCD(RSH_##sfx)
+ArithSet(I)
+ArithSet(A)
+ArithSet(B)
+ArithSet(C)
+ArithSet(D)
+#undef ArithSet
 
 // Jumps
 DCD(JPAGE)
@@ -25,9 +46,15 @@ DCD(JNCLASS)
 // Interaction
 DCD(SCRIPTI)
 DCD(SCRIPTS)
-DCD(TRACE)
 DCD(TELEPORT_INTRALEVEL)
 DCD(TELEPORT_INTERLEVEL)
+
+// Debugging
+DCD(TRACE_S)
+DCD(TRACE_A)
+DCD(TRACE_B)
+DCD(TRACE_C)
+DCD(TRACE_D)
 
 // Shared
 DCD(SETSTRING)
@@ -73,15 +100,15 @@ enum
 
 enum
 {
-   DTRMPAGE_UNFINISHED,
+   DTRMPAGE_UNFINISHED = 0x7FFFFF0F,
    DTRMPAGE_FINISHED,
    DTRMPAGE_FAILURE,
 };
 
 typedef struct dlgdef_s
 {
-   int  num;
-   int  pages[48];
+   int num;
+   int pages[48];
    Vec_Decl(int, code);
 
    struct dlgdef_s *next;
