@@ -477,11 +477,14 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 
       bool canbuy = p->canBuy(&upgr->info->shopdef, upgr);
 
-           if(!upgr->owned && !canbuy) color = "u";
+      if(!upgr->owned && !canbuy)
+         color = "u";
       else switch(upgr->info->key)
-               { case UPGR_TorgueMode: color = "g"; break;
-                 case UPGR_DarkCannon: color = "m"; break;
-                 default:              color = null;}
+      {
+      case UPGR_TorgueMode: color = "g"; break;
+      case UPGR_DarkCannon: color = "m"; break;
+      default:              color = null;
+      }
 
            if(upgr->active) preset = &guipre.btnlistactivated;
       else if(upgr->owned)  preset = &guipre.btnlistactive;

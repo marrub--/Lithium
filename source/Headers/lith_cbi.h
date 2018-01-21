@@ -15,21 +15,18 @@ enum
    cbi_tab_items,
    cbi_tab_info,
    cbi_tab_settings,
-   cbi_tab_max
 };
 
 enum
 {
    cbi_tab_arsenal_upgrades,
    cbi_tab_arsenal_shop,
-   cbi_tab_arsenal_max
 };
 
 enum
 {
    cbi_tab_stat_attr,
    cbi_tab_stat_cbi,
-   cbi_tab_stat_max
 };
 
 enum
@@ -37,7 +34,7 @@ enum
    cbi_tab_info_bip,
    cbi_tab_info_log,
    cbi_tab_info_statistics,
-   cbi_tab_info_max
+   cbi_tab_info_notes,
 };
 
 enum
@@ -84,6 +81,10 @@ typedef struct cbi_s
       int                upgrfilter;
       gui_typeon_state_t upgrtypeon;
       gui_scroll_state_t upgrscr;
+
+      bool               noteedit;
+      gui_scroll_state_t notescr;
+      gui_txtbox_state_t notebox;
    } st;
 
    int pruse;

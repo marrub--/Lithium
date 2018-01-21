@@ -50,6 +50,7 @@ static void Lith_CBITab_Info(gui_state_t *g, player_t *p)
    extern void Lith_CBITab_BIP       (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Log       (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Statistics(gui_state_t *g, player_t *p);
+   extern void Lith_CBITab_Notes     (gui_state_t *g, player_t *p);
 
    static __str const tabnames[] = {"BIP", "Log", "Statistics", "Notes"};
    Lith_GUI_Tabs(g, &CBIState(g)->infotab, tabnames, 13, 13, 1);
@@ -58,6 +59,7 @@ static void Lith_CBITab_Info(gui_state_t *g, player_t *p)
    case cbi_tab_info_bip:        Lith_CBITab_BIP       (g, p); break;
    case cbi_tab_info_log:        Lith_CBITab_Log       (g, p); break;
    case cbi_tab_info_statistics: Lith_CBITab_Statistics(g, p); break;
+   case cbi_tab_info_notes:      Lith_CBITab_Notes     (g, p); break;
    }
 }
 

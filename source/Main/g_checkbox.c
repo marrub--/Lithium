@@ -27,21 +27,20 @@ bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
       }
 
       if(gfx)
-         DrawSpritePlain(gfx, g->hid--, a->x + g->ox, a->y + g->oy, TICSECOND);
+         DrawSpritePlain(gfx, g->hid--, a->x + g->ox, a->y + g->oy, TS);
 
-      if(chkgfx && a->on) {
-         DrawSpritePlain(chkgfx, g->hid--, a->x + g->ox, a->y + g->oy,
-            TICSECOND);
-      }
+      if(chkgfx && a->on)
+         DrawSpritePlain(chkgfx, g->hid--, a->x + g->ox, a->y + g->oy, TS);
    }
 
-   if(g->hot == id && g->active == id && !g->clicklft) {
+   if(g->hot == id && g->active == id && !g->clicklft)
+   {
       if(a->on) {if(pre->snddn) ACS_LocalAmbientSound(pre->snddn, 127);}
       else      {if(pre->sndup) ACS_LocalAmbientSound(pre->sndup, 127);}
       return true;
-   } else {
-      return false;
    }
+   else
+      return false;
 }
 
 // EOF

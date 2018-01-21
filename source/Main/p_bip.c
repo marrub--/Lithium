@@ -325,8 +325,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       bip->lastcategory = BIPC_MAIN;
 
-      __str txtbuf = Lith_CPS_Print(st->txtbuf);
-      ifauto(char __str_ars const *, c, strchr_str(txtbuf, '\n'))
+      Lith_GUI_TextBox_OnTextEntered(st)
       {
          // That's a lot of numbers...
          crc64_t const extranames[] = {
@@ -337,12 +336,10 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             0x9FD558A2C8C8D163L,
          };
 
-         char __str_ars const *tmp = txtbuf;
-         int size = c - tmp;
-         __str query = StrParam("%.*S", size, txtbuf);
-         crc64_t crc = Lith_CRC64_str(txtbuf, size);
+         __str query = StrParam("%.*S", txt_len, txt_buf);
+         crc64_t crc = Lith_CRC64_str(txt_buf, txt_len);
 
-         bip->resnum = bip->rescur = st->tbptr = 0;
+         bip->resnum = bip->rescur = 0;
 
          for(int i = 0; i < countof(extranames); i++)
          {

@@ -169,7 +169,7 @@ struct gui_presets const guipre = {
       .cdef     = "j",
       .cact     = "g",
       .chot     = "k",
-      .cdis     = "n",
+      .cdis     = "-",
       .font     = "cbifont",
       .external = false,
       .w        = 180,
@@ -205,6 +205,36 @@ struct gui_presets const guipre = {
       .w        = 240,
       .h        = 14,
       .ax = .4, .ay = .0
+   },
+
+   .btnclear = {
+      .gfx      = null,
+      .hot      = null,
+      .snd      = "player/cbi/buttonpress",
+      .cdef     = "j",
+      .cact     = "g",
+      .chot     = "k",
+      .cdis     = "n",
+      .font     = "cbifont",
+      .external = false,
+      .w        = 20,
+      .h        = 8,
+      .ax = .1, .ay = .1
+   },
+
+   .btnnote = {
+      .gfx      = null,
+      .hot      = null,
+      .snd      = "player/cbi/buttoncurs",
+      .cdef     = "j",
+      .cact     = "g",
+      .chot     = "k",
+      .cdis     = "-",
+      .font     = "cbifont",
+      .external = false,
+      .w        = 200,
+      .h        = 30,
+      .ax = .1, .ay = .1
    },
 
    .cbxdef = {

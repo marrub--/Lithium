@@ -54,6 +54,19 @@
       } \
    } while(0)
 
+#define Lith_GUI_BasicCheckbox(g, st, ...) \
+   if(Lith_GUI_Checkbox((g), *(st), __VA_ARGS__)) \
+      *(st) = !*(st); \
+   else \
+      (void)0
+
+#define Lith_GUI_TextBox_Reset(st) ((st)->tbptr = 0)
+
+#define Lith_GUI_TextBox_OnTextEntered(st) \
+   __with(__str txt_buf = Lith_CPS_Print(st->txtbuf); char __str_ars const *_tmp = txt_buf;) \
+      ifauto(char __str_ars const *, _c, strchr_str(txt_buf, '\n')) \
+         __with(size_t txt_len = _c - _tmp; Lith_GUI_TextBox_Reset(st);)
+
 // Types ---------------------------------------------------------------------|
 
 typedef unsigned id_t;
@@ -129,11 +142,11 @@ typedef struct gui_button_preset_s
 
 typedef struct gui_button_args_s
 {
-   __str  label;
-   int    x, y;
-   bool   disabled;
-   __str  color;
-   bool   slide;
+   __str label;
+   int   x, y;
+   bool  disabled;
+   __str color;
+   bool  slide;
    gui_button_preset_t const *preset;
 } gui_button_args_t;
 
@@ -234,6 +247,8 @@ struct gui_presets {
    gui_button_preset_t btnbipmain;
    gui_button_preset_t btnbipback;
    gui_button_preset_t btndlgsel;
+   gui_button_preset_t btnclear;
+   gui_button_preset_t btnnote;
    gui_checkb_preset_t cbxdef;
    gui_checkb_preset_t cbxsmall;
    gui_scroll_preset_t scrdef;
