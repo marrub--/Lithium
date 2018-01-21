@@ -147,7 +147,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #define FromUI
 #include "p_settings.c"
 
-   Lith_GUI_ScrollBegin(g, st_settingscr, 15, 30, 280, 192, y);
+   Lith_GUI_ScrollBegin(g, &CBIState(g)->settingscr, 15, 30, 280, 192, y);
 
    y = 0;
 
@@ -159,7 +159,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Category(name) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 20)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
       { \
          HudMessageF("CHFONT", "\Cn" name); \
          HudMessagePlain(g->hid--, g->ox + 140.0, g->oy + y + 5.1, TICSECOND); \
@@ -169,7 +169,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Bool(label, cvar) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
@@ -181,7 +181,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Float(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(double set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
@@ -193,7 +193,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Int(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(int set = p->getCVarI(cvar), diff;) \
       { \
          Label(label); \
@@ -205,7 +205,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define ServerBool(label, cvar) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(bool on = ACS_GetCVar(cvar);) \
       { \
          Label(label); \
@@ -217,7 +217,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define ServerFloat(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(double set = ACS_GetCVarFixed(cvar), diff;) \
       { \
          Label(label); \
@@ -229,7 +229,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define ServerInt(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(int set = ACS_GetCVar(cvar), diff;) \
       { \
          Label(label); \
@@ -241,7 +241,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Enum(label, cvar, minima, maxima, fmt, ...) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(int set = p->getCVarI(cvar);) \
       { \
          Label(label); \
@@ -257,7 +257,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define CBox(label, on, ...) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, st_settingscr, y, 10)) \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
       { \
          Label(label); \
          if(Lith_GUI_Checkbox(g, on, 240, y + 5, .preset = &guipre.cbxsmall)) \
@@ -270,7 +270,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 #include "p_settings.c"
 #undef Label
 
-   Lith_GUI_ScrollEnd(g, st_settingscr);
+   Lith_GUI_ScrollEnd(g, &CBIState(g)->settingscr);
 }
 
 #endif

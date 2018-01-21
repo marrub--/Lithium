@@ -411,15 +411,15 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 static void GUIUpgradesList(gui_state_t *g, player_t *p)
 {
    if(Lith_GUI_Button(g, .x = 90, 213, .preset = &guipre.btnprev))
-      if(g->st[st_upgrfilter].i-- <= 0)
-         g->st[st_upgrfilter].i = UC_MAX;
+      if(CBIState(g)->upgrfilter-- <= 0)
+         CBIState(g)->upgrfilter = UC_MAX;
 
    if(Lith_GUI_Button(g, .x = 90 + guipre.btnprev.w, 213, .preset = &guipre.btnnext))
-      if(g->st[st_upgrfilter].i++ >= UC_MAX)
-         g->st[st_upgrfilter].i = 0;
+      if(CBIState(g)->upgrfilter++ >= UC_MAX)
+         CBIState(g)->upgrfilter = 0;
 
    int numbtns = p->upgrmax + UC_MAX;
-   int filter  = g->st[st_upgrfilter].i - 1;
+   int filter  = CBIState(g)->upgrfilter - 1;
 
    if(filter != -1)
    {
@@ -435,7 +435,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 
    HudMessagePlain(g->hid--, 15.1, 215.1, TICSECOND);
 
-   Lith_GUI_ScrollBegin(g, st_upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
+   Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
    int curcategory = UC_MAX;
    int y = 0;
@@ -461,7 +461,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
          continue;
       }
 
-      if(Lith_GUI_ScrollOcclude(g, st_upgrscr, y, guipre.btnlist.h))
+      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->upgrscr, y, guipre.btnlist.h))
          continue;
 
       if(changed && filter == -1)
@@ -487,11 +487,12 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
 
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == g->st[st_upgrsel].i, .color = color, .preset = preset))
-         g->st[st_upgrsel].i = i;
+      int *upgrsel = &CBIState(g)->upgrsel;
+      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
+         *upgrsel = i;
    }
 
-   Lith_GUI_ScrollEnd(g, st_upgrscr);
+   Lith_GUI_ScrollEnd(g, &CBIState(g)->upgrscr);
 }
 
 //
@@ -610,7 +611,7 @@ void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 
    GUIUpgradesList(g, p);
 
-   upgrade_t *upgr = &p->upgrades[g->st[st_upgrsel].i];
+   upgrade_t *upgr = &p->upgrades[CBIState(g)->upgrsel];
 
    GUIUpgradeDescription (g, p, upgr);
    GUIUpgradeButtons     (g, p, upgr);

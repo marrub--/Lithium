@@ -231,10 +231,9 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
    int i = 0;
 
    logmap_t *selmap;
-   list_t *sel = g->st[st_logsel].vp;
+   list_t *sel = CBIState(g)->logsel;
 
-   if((sel = g->st[st_logsel].vp) == null)
-      sel = p->loginfo.maps.next;
+   if(!sel) sel = p->loginfo.maps.next;
 
    if(Lith_GUI_Button(g, .x = 25, 38, .preset = &guipre.btnprev))
       if((sel = sel->prev) == &p->loginfo.maps)
@@ -244,7 +243,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
       if((sel = sel->next) == &p->loginfo.maps)
          sel = sel->next;
 
-   g->st[st_logsel].vp = sel;
+   CBIState(g)->logsel = sel;
    selmap = sel->object;
 
    HudMessageF("CBIFONT", "%S", selmap->name);
@@ -253,7 +252,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
    forlist(logdata_t *logdata, p->loginfo.full)
       num += (logdata->from == selmap->levelnum);
 
-   Lith_GUI_ScrollBegin(g, st_logscr, 15, 50, 280, 175, num * 8);
+   Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, num * 8);
 
    forlist(logdata_t *logdata, p->loginfo.full)
    {
@@ -262,7 +261,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
 
       int y = 8 * i++;
 
-      if(Lith_GUI_ScrollOcclude(g, st_logscr, y, 8))
+      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, 8))
          continue;
 
       DrawSpritePlain("lgfx/UI/LogList.png", g->hid--, g->ox + 0.1, y + g->oy + 0.1, TICSECOND);
@@ -272,7 +271,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
    }
 
 
-   Lith_GUI_ScrollEnd(g, st_logscr);
+   Lith_GUI_ScrollEnd(g, &CBIState(g)->logscr);
 }
 
 // EOF

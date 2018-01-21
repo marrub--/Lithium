@@ -300,7 +300,7 @@ void Lith_RunDialogue(int num)
    // GUI state
    gui_state_t gst = {};
    gst.gfxprefix = "lgfx/UI_Green/";
-   Lith_GUI_Init(&gst, 0);
+   Lith_GUI_Init(&gst);
 
    // VM state
    dlgvmstate_t vmstate = {};

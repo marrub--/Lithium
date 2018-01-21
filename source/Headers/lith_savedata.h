@@ -10,12 +10,17 @@
 // Lith: First valid chunk in save file.
 // Ver. 7:  Initial version.
 // Ver. 14: Rewrite of save system.
+// Ver. 15: Chunk format change.
 #define Ident_Lith FourCC('L', 'i', 't', 'h')
-#define SaveV_Lith 14
+#define SaveV_Lith 15
 
 // Lend: Optional. Last valid chunk in save file.
 #define Ident_Lend FourCC('L', 'e', 'n', 'd')
 #define SaveV_Lend 0
+
+// note: Player's notes.
+#define Ident_note FourCC('n', 'o', 't', 'e')
+#define SaveV_note 0
 
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00
@@ -26,21 +31,13 @@
 typedef uint32_t ident_t;
 
 //
-// saveflag_e
-//
-/*enum saveflag_e
-{
-   SF_SkipHash = 1 << (Save_FlagShft + 0),
-};*/
-
-//
 // savechunk_t
 //
 typedef struct savechunk_s
 {
    ident_t  iden; // four char identifier
    uint32_t vrfl; // version (lower 8 bits) + flags (upper 24 bits)
-   uint32_t size; // size of chunk data in words
+   uint32_t size; // size of chunk data in bytes
 } savechunk_t;
 
 //

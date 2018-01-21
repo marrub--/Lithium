@@ -118,7 +118,7 @@ void Lith_SetMagicUI(bool on)
          UData.gst.cx = 320/2;
          UData.gst.cy = 240/2;
 
-         Lith_GUI_Init(&UData.gst, 0);
+         Lith_GUI_Init(&UData.gst);
       }
       else if(!on && UData.ui)
       {

@@ -268,6 +268,7 @@ typedef struct player
    int   brouzouf;
    bool  hadinfrared;
    fixed rage;
+   __str notes[10];
 
    // Static data
    bool  staticinit;

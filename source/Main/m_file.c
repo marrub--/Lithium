@@ -275,7 +275,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 //
 // Unpacks integers into a file stream.
 //
-size_t Lith_FWrite32(void const *ptr, size_t count, size_t bytes, FILE *fp)
+size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;
 
@@ -283,8 +283,23 @@ size_t Lith_FWrite32(void const *ptr, size_t count, size_t bytes, FILE *fp)
    {
       unsigned c = *itr++;
       for(int i = 0; i < bytes; i++)
-         fputc((c & (0xFF << (i * 8))) >> (i * 8), fp);
+         if(fputc((c & (0xFF << (i * 8))) >> (i * 8), fp) == EOF)
+            return res;
    }
+
+   return res;
+}
+
+//
+// Lith_FWrite_str
+//
+size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
+{
+   size_t res = 0;
+
+   for(char const __str_ars *itr = ptr; count--; res++)
+      if(fputc(*itr++, fp) == EOF)
+         return res;
 
    return res;
 }
@@ -294,7 +309,7 @@ size_t Lith_FWrite32(void const *ptr, size_t count, size_t bytes, FILE *fp)
 //
 // Reads packed integers from a file stream.
 //
-size_t Lith_FRead32(void *buf, size_t count, size_t bytes, FILE *fp)
+size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;
 

@@ -4,6 +4,8 @@
 
 #include "lith_gui.h"
 
+#define CBIState(g) ((struct cbistate *)((g)->state))
+
 // Type Definitions ----------------------------------------------------------|
 
 enum
@@ -52,33 +54,37 @@ enum
    cbi_theme_max
 };
 
-enum
-{
-   st_maintab,
-   st_stattab,
-   st_arsetab,
-   st_infotab,
-   st_upgrsel,
-   st_upgrselold,
-   st_upgrscr,
-   st_upgrtypeon,
-   st_upgrfilter,
-   st_shopsel,
-   st_shopscr,
-   st_bipscr,
-   st_biptypeon,
-   st_bipinfoscr,
-   st_bipsearch,
-   st_settingscr,
-   st_logscr,
-   st_logsel,
-   st_max
-};
-
 typedef struct cbi_s
 {
    gui_state_t guistate;
    int theme, oldtheme;
+
+   struct cbistate
+   {
+      int maintab;
+      int stattab;
+      int arsetab;
+      int infotab;
+
+      gui_typeon_state_t biptypeon;
+      gui_scroll_state_t bipscr;
+      gui_scroll_state_t bipinfoscr;
+      gui_txtbox_state_t bipsearch;
+
+      void              *logsel;
+      gui_scroll_state_t logscr;
+
+      gui_scroll_state_t settingscr;
+
+      int                shopsel;
+      gui_scroll_state_t shopscr;
+
+      int                upgrsel;
+      int                upgrselold;
+      int                upgrfilter;
+      gui_typeon_state_t upgrtypeon;
+      gui_scroll_state_t upgrscr;
+   } st;
 
    int pruse;
 } cbi_t;

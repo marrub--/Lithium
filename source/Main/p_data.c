@@ -342,6 +342,9 @@ void Lith_ResetPlayer(player_t *p)
       p->maxhealth    = p->spawnhealth;
       p->discount     = 1.0;
       p->stepnoise    = StrParam("player/%S/step", p->classname);
+
+      for(int i = 0; i < countof(p->notes); i++)
+         p->notes[i] = "";
    }
 
    //

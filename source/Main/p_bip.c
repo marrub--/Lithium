@@ -69,8 +69,8 @@ static void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
 {
    bip->curpage = page;
 
-   Lith_GUI_TypeOn(g, st_biptypeon, body);
-   Lith_GUI_ScrollReset(g, st_bipinfoscr);
+   Lith_GUI_TypeOn(g, &CBIState(g)->biptypeon, body);
+   Lith_GUI_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
 //
@@ -320,7 +320,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    }
    else if(bip->curcategory == BIPC_SEARCH)
    {
-      gui_txtbox_state_t *st = Lith_GUI_TextBox(g, st_bipsearch, 23, 65, p->num, p->txtbuf);
+      gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p->num, p->txtbuf);
       p->clearTextBuf();
 
       bip->lastcategory = BIPC_MAIN;
@@ -409,14 +409,14 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       size_t n = list->size;
       size_t i = 0;
 
-      Lith_GUI_ScrollBegin(g, st_bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);
+      Lith_GUI_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);
 
       if(bip->curcategory != BIPC_EXTRA)
          forlistIt(bippage_t *page, *list, i++)
       {
          int y = guipre.btnlist.h * i;
 
-         if(Lith_GUI_ScrollOcclude(g, st_bipscr, y, guipre.btnlist.h))
+         if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->bipscr, y, guipre.btnlist.h))
             continue;
 
          struct page_info pinf = GetPageInfo(page);
@@ -426,20 +426,20 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             SetCurPage(g, bip, page, pinf.body);
       }
 
-      Lith_GUI_ScrollEnd(g, st_bipscr);
+      Lith_GUI_ScrollEnd(g, &CBIState(g)->bipscr);
 
       if(bip->curpage)
       {
          bippage_t *page = bip->curpage;
          struct page_info pinf = GetPageInfo(page);
 
-         gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, st_biptypeon);
+         gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, &CBIState(g)->biptypeon);
 
          int oy = 0;
 
          if(page->height)
          {
-            Lith_GUI_ScrollBegin(g, st_bipinfoscr, 100, 40, 200, 180, page->height, 184);
+            Lith_GUI_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180, page->height, 184);
             oy = g->oy - 40;
          }
          else
@@ -475,7 +475,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
          DrawText(typeon->txt, typeon->pos, CR_WHITE, 111.1, 60.1);
 
-         if(page->height) Lith_GUI_ScrollEnd(g, st_bipinfoscr);
+         if(page->height) Lith_GUI_ScrollEnd(g, &CBIState(g)->bipinfoscr);
          else             ACS_SetHudClipRect(0, 0, 0, 0);
       }
 

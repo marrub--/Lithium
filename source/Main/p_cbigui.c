@@ -17,9 +17,9 @@ static void Lith_CBITab_Arsenal(gui_state_t *g, player_t *p)
    extern void Lith_CBITab_Shop    (gui_state_t *g, player_t *p);
 
    static __str const tabnames[] = {"Upgrades", "Shop"};
-   Lith_GUI_Tabs(g, st_arsetab, tabnames, 13, 13, 1);
+   Lith_GUI_Tabs(g, &CBIState(g)->arsetab, tabnames, 13, 13, 1);
 
-   switch(g->st[st_arsetab].i) {
+   switch(CBIState(g)->arsetab) {
    case cbi_tab_arsenal_upgrades: Lith_CBITab_Upgrades(g, p); break;
    case cbi_tab_arsenal_shop:     Lith_CBITab_Shop    (g, p); break;
    }
@@ -34,9 +34,9 @@ static void Lith_CBITab_Stat(gui_state_t *g, player_t *p)
    extern void Lith_CBITab_Status(gui_state_t *g, player_t *p);
 
    static __str const tabnames[] = {"Attributes", "CBI"};
-   Lith_GUI_Tabs(g, st_stattab, tabnames, 13, 13, 1);
+   Lith_GUI_Tabs(g, &CBIState(g)->stattab, tabnames, 13, 13, 1);
 
-   switch(g->st[st_stattab].i) {
+   switch(CBIState(g)->stattab) {
    case cbi_tab_stat_attr: Lith_CBITab_Status(g, p); break;
    case cbi_tab_stat_cbi:  Lith_CBITab_CBI   (g, p); break;
    }
@@ -52,9 +52,9 @@ static void Lith_CBITab_Info(gui_state_t *g, player_t *p)
    extern void Lith_CBITab_Statistics(gui_state_t *g, player_t *p);
 
    static __str const tabnames[] = {"BIP", "Log", "Statistics", "Notes"};
-   Lith_GUI_Tabs(g, st_infotab, tabnames, 13, 13, 1);
+   Lith_GUI_Tabs(g, &CBIState(g)->infotab, tabnames, 13, 13, 1);
 
-   switch(g->st[st_infotab].i) {
+   switch(CBIState(g)->infotab) {
    case cbi_tab_info_bip:        Lith_CBITab_BIP       (g, p); break;
    case cbi_tab_info_log:        Lith_CBITab_Log       (g, p); break;
    case cbi_tab_info_statistics: Lith_CBITab_Statistics(g, p); break;
@@ -102,12 +102,12 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 
    static __str tabnames[] = {"", "Status", "Inventory", "Info", "Settings"};
    tabnames[0] = Language("LITH_TXT_Arsenal%S", p->discrim);
-   Lith_GUI_Tabs(g, st_maintab, tabnames, 13, 13, 0);
+   Lith_GUI_Tabs(g, &CBIState(g)->maintab, tabnames, 13, 13, 0);
 
    extern void Lith_CBITab_Items   (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, player_t *p);
 
-   switch(g->st[st_maintab].i) {
+   switch(CBIState(g)->maintab) {
    case cbi_tab_arsenal:  Lith_CBITab_Arsenal (g, p); break;
    case cbi_tab_status:   Lith_CBITab_Stat    (g, p); break;
    case cbi_tab_items:    Lith_CBITab_Items   (g, p); break;
@@ -126,9 +126,9 @@ void Lith_PlayerResetCBIGUI(player_t *p)
    p->cbi.guistate.cx = 320 / 2;
    p->cbi.guistate.cy = 240 / 2;
 
-   Lith_GUI_Init(&p->cbi.guistate, st_max);
+   Lith_GUI_Init(&p->cbi.guistate, &p->cbi.st);
 
-   p->cbi.guistate.st[st_upgrselold].i = -1;
+   p->cbi.st.upgrselold = -1;
 
    p->cbi.oldtheme = -1;
 }

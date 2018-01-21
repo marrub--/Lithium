@@ -11,7 +11,7 @@
 //
 gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_args_t const *a)
 {
-   gui_txtbox_state_t *st = &g->st[a->st].tb;
+   gui_txtbox_state_t *st = a->st;
 
    Lith_GUI_Auto(g, id, a->x, a->y, 260, 10);
 

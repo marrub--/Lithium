@@ -34,11 +34,9 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
 //
 // Lith_GUI_Init
 //
-void Lith_GUI_Init(gui_state_t *g, size_t maxst)
+void Lith_GUI_Init(gui_state_t *g, void *state)
 {
-   if(g->st) free(g->st);
-   if(maxst) g->st = calloc(maxst, sizeof(gui_stateitem_t));
-   else      g->st = null;
+   g->state = state;
    g->gfxprefix = "lgfx/UI/";
 }
 
@@ -126,10 +124,8 @@ void Lith_GUI_ClipRelease(gui_state_t *g)
 //
 // Lith_GUI_TypeOn
 //
-void Lith_GUI_TypeOn(gui_state_t *g, size_t st, __str text)
+void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
 {
-   gui_typeon_state_t *typeon = &g->st[st].type;
-
    typeon->txt = text;
    typeon->len = ACS_StrLen(text);
    typeon->pos = 0;
@@ -169,9 +165,8 @@ __str Lith_RemoveTextColors(__str str, int size)
 //
 // Lith_GUI_TypeOnUpdate
 //
-gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, size_t st)
+gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon)
 {
-   gui_typeon_state_t *typeon = &g->st[st].type;
    int num = ACS_Random(2, 15);
 
    if((typeon->pos += num) > typeon->len)

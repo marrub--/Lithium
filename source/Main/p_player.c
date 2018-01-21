@@ -77,7 +77,7 @@ reinit:
       ACS_Delay(1);
 
       // Update previous-tic values
-      p->old = olddelta;
+      p->old       = olddelta;
       p->oldhealth = oldhealth;
       p->oldarmor  = oldarmor;
 

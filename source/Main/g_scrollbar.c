@@ -13,7 +13,7 @@
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const *a)
 {
    gui_scroll_preset_t const *pre = a->preset ? a->preset : &guipre.scrdef;
-   gui_scroll_state_t *scr = &g->st[a->st].scrl;
+   gui_scroll_state_t *scr = a->st;
 
    // sizes
    int const blockh  = pre->scrlh;          // height of graphical block
@@ -133,10 +133,8 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
 //
 // Lith_GUI_ScrollEnd
 //
-void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st)
+void Lith_GUI_ScrollEnd(gui_state_t *g, gui_scroll_state_t *scr)
 {
-   gui_scroll_state_t *scr = &g->st[st].scrl;
-
    // reset offsets
    g->ox -= scr->ox;
    g->oy -= scr->oy;
@@ -148,9 +146,8 @@ void Lith_GUI_ScrollEnd(gui_state_t *g, size_t st)
 //
 // Lith_GUI_ScrollOcclude
 //
-bool Lith_GUI_ScrollOcclude(gui_state_t *g, size_t st, int y, int h)
+bool Lith_GUI_ScrollOcclude(gui_state_t *g, gui_scroll_state_t const *scr, int y, int h)
 {
-   gui_scroll_state_t const *scr = &g->st[st].scrl;
    return y > scr->occludeE || (h && (y + h) - scr->occludeS < 0);
 }
 
