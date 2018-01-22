@@ -1,0 +1,35 @@
+class Lith_MarinePlayer : Lith_Player
+{
+   default
+   {
+      Player.StartItem "Lith_Pistol";
+      Player.StartItem "Lith_Fist";
+      Player.DisplayName "Marine";
+      Player.SoundClass "marine";
+      Player.Portrait "lgfx/Portraits/Marine.png";
+      Player.ViewHeight 48;
+      Player.AttackZOffset 15;
+      Tag "Marine";
+   }
+}
+
+class Lith_RocketBooster : PowerFlight
+{
+   default
+   {
+      Powerup.Duration 60;
+      -INVENTORY.HUBPOWER
+   }
+}
+
+class Lith_MWeapon : Lith_Weapon
+{
+   default
+   {
+      Inventory.RestrictedTo "Lith_MarinePlayer";
+   }
+}
+
+#include "lzscript/1_Marine/Weapons/4_CombatRifle.zsc"
+
+// EOF

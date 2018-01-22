@@ -32,8 +32,8 @@ class Lith_700Express : Lith_DWeapon
       loop;
 
    Fire:
-      TNT1 A 0 Lith_JumpIfMagEmpty;
-      TNT1 A 0 Lith_MagIncr;
+      TNT1 A 0 Lith_A_JumpIfMagEmpty;
+      TNT1 A 0 Lith_A_MagIncr;
       TNT1 A 0 A_GunFlash("DummyFlash");
       TNT1 A 0 A_Recoil(1.5);
       TNT1 A 0 A_Quake(2, 3, 0, 128);
@@ -57,7 +57,7 @@ class Lith_700Express : Lith_DWeapon
       goto Ready;
 
    Reload:
-      MTBG E 2 Lith_JumpIfMagFull;
+      MTBG E 2 Lith_A_JumpIfMagFull;
       MTBG F 2;
       MTBG G 2;
       MTBG H 2;
@@ -65,7 +65,7 @@ class Lith_700Express : Lith_DWeapon
       MTBG J 3;
       MTBG K 2;
       MTBG L 3 A_PlaySound("weapons/mateba/eject", 6);
-      MTBG M 3 Lith_ReloadFinish;
+      MTBG M 3 Lith_A_ReloadFinish;
       MTBG N 3;
       MTBG O 2 A_PlaySound("weapons/mateba/load", 5);
       MTBG P 3;

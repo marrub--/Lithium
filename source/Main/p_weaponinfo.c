@@ -34,7 +34,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {3, pcl_marine, N("Shotgun"), P("shotgun"), AT_None},
    {3, pcl_marine, N("LazShotgun"), P("lshotgun"), AT_None},
    {3, pcl_marine, N("SuperShotgun"), P("ssg"), AT_Ammo, A("Shell")},
-   {4, pcl_marine, N("CombatRifle"), P("rifle"), AT_NMag, M("Rifle")},
+   {4, pcl_marine, N("CombatRifle"), P("rifle"), AT_ZMag, M("Rifle")},
    {4, pcl_marine, N("SniperRifle"), P("sniper"), AT_NMag, M("Sniper")},
    {5, pcl_marine, N("GrenadeLauncher"), P("rocket"), AT_Ammo, A("Rocket")},
    {6, pcl_marine, N("PlasmaRifle"), P("plasma"), AT_Ammo, A("Plasma")},

@@ -138,4 +138,6 @@ enum Lith_ASCII
     Ch_DEL,         // DEL
 }
 
+const FIX = 32767.0;
+
 // EOF

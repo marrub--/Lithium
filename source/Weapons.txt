@@ -14,7 +14,7 @@ Percent denotes flags. Any other text is ignored by the parser.
 {shotgun    3 Shotgun         P("shotgun")  None
 {lazshotgun 3 LazShotgun      P("lshotgun") None
 {ssg        3 SuperShotgun    P("ssg")      Ammo A("Shell")
-{rifle      4 CombatRifle     P("rifle")    NMag M("Rifle")
+{rifle      4 CombatRifle     P("rifle")    ZMag M("Rifle")
 {sniper     4 SniperRifle     P("sniper")   NMag M("Sniper")
 {launcher   5 GrenadeLauncher P("rocket")   Ammo A("Rocket")
 {plasma     6 PlasmaRifle     P("plasma")   Ammo A("Plasma")

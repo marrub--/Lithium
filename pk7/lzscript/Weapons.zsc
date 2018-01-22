@@ -31,24 +31,24 @@ class Lith_Weapon : Weapon
       return lith_fired >= lith_max;
    }
 
-   action(weapon) state Lith_JumpIfMagEmpty(statelabel sn = "Reload")
+   action(weapon) state Lith_A_JumpIfMagEmpty(statelabel sn = "Reload")
    {
       return invoker.Lith_MagEmpty() ? ResolveState(sn) : null;
    }
 
-   action(weapon) state Lith_JumpIfMagFull(statelabel sn = "Ready")
+   action(weapon) state Lith_A_JumpIfMagFull(statelabel sn = "Ready")
    {
       return invoker.lith_fired ? null : ResolveState(sn);
    }
 
-   action(weapon) void Lith_MagIncr(int amt = 1)
+   action(weapon) void Lith_A_MagIncr(int amt = 1)
    {
       invoker.lith_fired += amt;
       if(invoker.lith_fired > invoker.lith_max)
          invoker.lith_fired = invoker.lith_max;
    }
 
-   action(weapon) void Lith_ReloadFinish()
+   action(weapon) void Lith_A_ReloadFinish()
    {
       invoker.lith_fired = 0;
    }

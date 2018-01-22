@@ -1,0 +1,33 @@
+class Lith_DroppedMagazine : Actor
+{
+   default
+   {
+      BounceType "Doom";
+      BounceCount 3;
+      BounceSound "weapons/magbounce";
+      BounceFactor 0.7;
+      Friction 0.7;
+      Mass 140;
+      Speed 0;
+
+      +MISSILE // damn it, zdoom
+      +THRUACTORS
+   }
+
+   int user_side;
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_JumpIf(!CallACS("LWData", wdata_magdrops), "Null");
+      TNT1 A 0 A_Jump(256, "Spawn1");
+      stop;
+   Done:
+      "####" "#" 300;
+      "####" "#" 1 A_FadeOut;
+      wait;
+   }
+}
+
+// EOF
