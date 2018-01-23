@@ -255,6 +255,21 @@ struct gui_presets {
    gui_slider_preset_t slddef;
 };
 
+enum cursor
+{
+   gui_curs_green,
+   gui_curs_pink,
+   gui_curs_blue,
+   gui_curs_orange,
+   gui_curs_red,
+   gui_curs_white,
+   gui_curs_outline,
+   gui_curs_outline2,
+   gui_curs_outlineinv,
+   gui_curs_outline2inv,
+   gui_curs_max,
+};
+
 // Extern Objects ------------------------------------------------------------|
 
 #ifndef EXTERNAL_CODE
@@ -276,7 +291,7 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 
 [[__optional_args(2)]]
 void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h);
-void Lith_GUI_End(gui_state_t *g);
+void Lith_GUI_End(gui_state_t *g, enum cursor curs);
 
 [[__optional_args(1)]]
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww);

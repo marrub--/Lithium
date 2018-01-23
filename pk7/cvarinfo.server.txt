@@ -1,0 +1,12 @@
+server float __lith_version;
+
+server int   lith_sv_difficulty   = 10;
+server bool  lith_sv_rain         = false;
+server bool  lith_sv_sky          = false;
+server bool  lith_sv_revenge      = true;
+server float lith_sv_scoremul     = 1.25;
+server bool  lith_sv_pauseinmenus = true;
+server int   lith_sv_autosave     = 0;
+server bool  lith_sv_nobosses     = false;
+
+// EOF

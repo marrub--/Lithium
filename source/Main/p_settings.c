@@ -12,7 +12,8 @@ if(p->num == 0) {
 Category("GUI");
 Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1f, 2.0f);
 Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1f, 2.0f);
-Enum("Color Theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
+Enum("Color theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
+Enum("Cursor",      "lith_gui_cursor", 0, gui_curs_max-1, "%S", CursName(set));
 ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
 Category("Player");
@@ -95,7 +96,7 @@ if(p->num == 0) {
 //
 static __str ColorName(char ch)
 {
-   __str colors[] = {
+   static __str const colors[] = {
       "Brick", "Tan", "Grey", "Green", "Brown", "Gold", "Red", "Blue",
       "Orange", "White", "Yellow", "Default", "Black", "Light Blue", "Cream",
       "Olive", "Dark Green", "Dark Red", "Dark Brown", "Purple", "Dark Grey",
@@ -111,19 +112,27 @@ static __str ColorName(char ch)
 //
 static __str ThemeName(int num)
 {
-   switch(num)
-   {
-   case cbi_theme_green:    return "Green";
-   case cbi_theme_rose:     return "Rose";
-   case cbi_theme_umi:      return "Umi";
-   case cbi_theme_ender:    return "Ender";
-   case cbi_theme_orange:   return "Orange";
-   case cbi_theme_grey:     return "Grey";
-   case cbi_theme_bassilla: return "Bassilla";
-   case cbi_theme_ghost:    return "Ghost";
-   case cbi_theme_winxp:    return "WinXP";
-   default:                 return "Unknown";
-   }
+   static __str const themes[] = {
+      "Green", "Rose", "Umi", "Ender", "Orange", "Grey", "Bassilla", "Ghost",
+      "WinXP",
+   };
+
+   if(num < 0 || num >= cbi_theme_max) return "Unknown";
+   else                                return themes[num];
+}
+
+//
+// CursName
+//
+static __str CursName(int num)
+{
+   static __str const cursors[] =  {
+      "Green", "Pink", "Blue", "Orange", "Red", "White", "Outline",
+      "Outline (Tail)", "Inv. Outline", "Inv. Outline (Tail)"
+   };
+
+   if(num < 0 || num >= gui_curs_max) return "Unknown";
+   else                               return cursors[num];
 }
 
 // Extern Functions ----------------------------------------------------------|

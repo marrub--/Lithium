@@ -180,7 +180,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       break;
    }
 
-   Lith_GUI_End(g);
+   Lith_GUI_End(g, gui_curs_outlineinv);
 
    if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.indialogue)
    {
@@ -230,7 +230,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       }
    }
 
-   Lith_GUI_End(g);
+   Lith_GUI_End(g, gui_curs_outlineinv);
 }
 
 //

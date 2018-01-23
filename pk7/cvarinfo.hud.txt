@@ -1,0 +1,14 @@
+user bool lith_hud_showscore    = true;
+user bool lith_hud_showweapons  = true;
+user bool lith_hud_showlog      = true;
+user bool lith_hud_showarmorind = true;
+user bool lith_hud_logfromtop   = false;
+
+user bool lith_scanner_slide   = true;
+user bool lith_scanner_bar     = true;
+user int  lith_scanner_xoffs   = 0;
+user int  lith_scanner_yoffs   = 0;
+user int  lith_scanner_color   = 106; // 'j'
+user bool lith_scanner_altfont = false;
+
+// EOF

@@ -117,7 +117,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }
 
-   Lith_GUI_End(g);
+   Lith_GUI_End(g, p->getCVarI("lith_gui_cursor"));
 }
 
 //

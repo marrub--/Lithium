@@ -91,9 +91,26 @@ void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h)
 //
 // Lith_GUI_End
 //
-void Lith_GUI_End(gui_state_t *g)
+void Lith_GUI_End(gui_state_t *g, enum cursor curs)
 {
-   DrawSpritePlain("lgfx/UI/Cursor.png", g->hid--, (int)g->cx + 0.1, (int)g->cy + 0.1, TICSECOND);
+   __str cgfx;
+
+   switch(curs)
+   {
+   default:
+   case gui_curs_green:       cgfx = "lgfx/UI/Cursor.png";            break;
+   case gui_curs_pink:        cgfx = "lgfx/UI/CursorPink.png";        break;
+   case gui_curs_blue:        cgfx = "lgfx/UI/CursorBlue.png";        break;
+   case gui_curs_orange:      cgfx = "lgfx/UI/CursorOrange.png";      break;
+   case gui_curs_red:         cgfx = "lgfx/UI/CursorRed.png";         break;
+   case gui_curs_white:       cgfx = "lgfx/UI/CursorWhite.png";       break;
+   case gui_curs_outline:     cgfx = "lgfx/UI/CursorOutline.png";     break;
+   case gui_curs_outline2:    cgfx = "lgfx/UI/CursorOutline2.png";    break;
+   case gui_curs_outlineinv:  cgfx = "lgfx/UI/CursorOutlineInv.png";  break;
+   case gui_curs_outline2inv: cgfx = "lgfx/UI/CursorOutline2Inv.png"; break;
+   }
+
+   DrawSpritePlain(cgfx, g->hid--, (int)g->cx + 0.1, (int)g->cy + 0.1, TICSECOND);
 
    if(!g->clickany)
       g->active = 0;

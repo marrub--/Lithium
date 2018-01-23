@@ -80,7 +80,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
          GiveMagic(m);
    }
 
-   Lith_GUI_End(g);
+   Lith_GUI_End(g, gui_curs_outline);
 }
 
 //
