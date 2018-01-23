@@ -297,7 +297,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
    case weapon_cfist:
       ACS_SetHudSize(320, 240);
       fixed64_t charge = 5.lk + ACS_CheckInventory("Lith_FistCharge") / 10.lk;
-      HudMessageF("CBIFONT", "\Cn%.1lkV \Cjcharge", charge);
+      HudMessageF("CBIFONT", "\Cn%.1lkkV \Cjcharge", charge);
       HudMessagePlain(hid_fistcharge, 270.2, 200.2, TS);
       break;
    }
