@@ -20,11 +20,14 @@
       (m)->ms->health = ACS_GetActorProperty(0, APROP_Health); \
    } while(0)
 
+// Types ---------------------------------------------------------------------|
+
 struct dmon_stat {
    fixed x, y, z;
    fixed r, h;
    int   health;
    int   painwait;
+   bool  finalized;
 };
 
 struct monster_info {
@@ -38,6 +41,8 @@ struct monster_info {
 enum {
    mif_full = 1 << 0
 };
+
+// Static Objects ------------------------------------------------------------|
 
 #define M(name) Exp_##name, Score_##name
 static struct monster_info const monsterinfo[] = {
@@ -191,6 +196,8 @@ static __str const dmgtype_names[dmgtype_max] = {
    "Melee",
    "Shrapnel"
 };
+
+// Static Functions ----------------------------------------------------------|
 
 //
 // WaitForResurrect
@@ -359,13 +366,10 @@ static void SpawnManaPickup(dmon_t *m, player_t *p)
 }
 
 //
-// OnDeath
+// OnFinalize
 //
-static void OnDeath(dmon_t *m)
+static void OnFinalize(dmon_t *m)
 {
-   LogDebug(log_dmon, "monster %i is ded", m->id);
-   m->wasdead = true;
-
    ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET))
    {
       if(p->sigil.acquired)
@@ -377,14 +381,17 @@ static void OnDeath(dmon_t *m)
             ACS_SpawnForced("Lith_ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
       }
 
-      if(p->getUpgrActive(UPGR_Magic) && p->mana != p->manamax &&
-         (m->type != mtype_zombie || ACS_Random(0, 50) < 10))
+      if(!m->ms->finalized)
       {
-         SpawnManaPickup(m, p);
-      }
+         if(p->getUpgrActive(UPGR_Magic) && p->mana != p->manamax &&
+            (m->type != mtype_zombie || ACS_Random(0, 50) < 10))
+         {
+            SpawnManaPickup(m, p);
+         }
 
-      if(p->getUpgrActive(UPGR_SoulCleaver))
-         SoulCleave(m, p);
+         if(p->getUpgrActive(UPGR_SoulCleaver))
+            SoulCleave(m, p);
+      }
 
            if(p->health <  5) p->giveEXP(50);
       else if(p->health < 15) p->giveEXP(25);
@@ -393,9 +400,24 @@ static void OnDeath(dmon_t *m)
       Lith_GiveAllEXP(m->exp + m->level + (m->rank - 1) * 10);
    }
 
+   m->ms->finalized = true;
+}
+
+//
+// OnDeath
+//
+static void OnDeath(dmon_t *m)
+{
+   LogDebug(log_dmon, "monster %i is ded", m->id);
+   m->wasdead = true;
+
+   OnFinalize(m);
+
    // If enemies emit score on death we only need to give extra rank score.
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_MonsterTick
@@ -476,6 +498,16 @@ void Lith_MonsterInfo()
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
    ACS_GiveInventory("Lith_MonsterInvalid", 1);
+}
+
+//
+// Lith_MonsterFinalized
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_MonsterFinalized()
+{
+   ifauto(dmon_t *, m, DmonPtr())
+      OnFinalize(m);
 }
 
 // EOF
