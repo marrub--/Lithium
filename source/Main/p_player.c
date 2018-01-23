@@ -402,7 +402,7 @@ static void Lith_PlayerRunScripts(player_t *p)
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateCBIGUI(player_t *p);
                          static void Lith_PlayerUpdateAttributes(player_t *p);
                          extern void Lith_PlayerUpdateUpgrades(player_t *p);
-                         extern void Lith_PlayerUpdateWeapons(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerUpdateWeapons(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateLog(player_t *p);
 
                          extern void Lith_PlayerFootstep(player_t *p);

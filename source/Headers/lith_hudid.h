@@ -139,6 +139,8 @@ enum
    hid_key_yellowskull,
    hid_key_redskull,
 
+   hid_fistcharge,
+
    // Scope
    hid_base_scope = hid_base + 43000,
    hid_end_scope  = hid_base + 44999,

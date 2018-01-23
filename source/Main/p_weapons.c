@@ -2,6 +2,7 @@
 // vim: columns=110
 #include "lith_player.h"
 #include "lith_monster.h"
+#include "lith_hudid.h"
 
 #include <math.h>
 
@@ -236,7 +237,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       // Set magazine and ammo counts.
       if(w->cur == wep)
       {
-         if(wep->ammotype & AT_NMag) {
+         if(wep->ammotype & AT_NMag)
+         {
             if(wep->ammotype & AT_ZScr) {
                wep->magmax = HERMES("GetMaxAmmo", p->num, wep->info->classname);
                wep->magcur = HERMES("GetCurAmmo", p->num, wep->info->classname);
@@ -253,7 +255,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       }
 
       // Remove inactive magic weapons.
-      else if(info->flags & wf_magic && wep->owned && ++wep->magictake > 20) {
+      else if(info->flags & wf_magic && wep->owned && ++wep->magictake > 20)
+      {
          ACS_TakeInventory(info->classname, 1);
          wep->magictake = 0;
       }
@@ -276,9 +279,11 @@ void Lith_PlayerPreWeapons(player_t *p)
 //
 // Lith_PlayerUpdateWeapons
 //
+[[__call("ScriptS")]]
 void Lith_PlayerUpdateWeapons(player_t *p)
 {
-   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");) {
+   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");)
+   {
            if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
       else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
       else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
@@ -286,8 +291,16 @@ void Lith_PlayerUpdateWeapons(player_t *p)
       else                ACS_TakeInventory("Lith_SMGHeat", 1);
    }
 
-   if(p->weapontype == weapon_c_delear)
-      ACS_GiveInventory("Lith_DelearSpriteDisplay", 1);
+   switch(p->weapontype)
+   {
+   case weapon_c_delear: ACS_GiveInventory("Lith_DelearSpriteDisplay", 1); break;
+   case weapon_cfist:
+      ACS_SetHudSize(320, 240);
+      fixed64_t charge = 5.lk + ACS_CheckInventory("Lith_FistCharge") / 10.lk;
+      HudMessageF("CBIFONT", "\Cn%.1lkV \Cjcharge", charge);
+      HudMessagePlain(hid_fistcharge, 270.2, 200.2, TS);
+      break;
+   }
 }
 
 //
@@ -332,14 +345,14 @@ int Lith_GetFinalizerMaxHealth(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SwitchRifleFiremode(void)
 {
-   int max = rifle_firemode_max;
-
    withplayer(LocalPlayer)
    {
+      int max = rifle_firemode_max;
+
       if(!p->getUpgrActive(UPGR_RifleModes))
          max--;
 
-      p->riflefiremode = (++p->riflefiremode) % max;
+      p->riflefiremode = ++p->riflefiremode % max;
       ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
    }
 }
