@@ -50,8 +50,6 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
       ACS_BeginPrint();
       for(unsigned j = 0; j < len; j++) ACS_PrintChar(fgetc(save->fp) & 0xFF);
       save->p->notes[i] = ACS_EndStrParam();
-
-      Log("note %i: %S", i, save->p->notes[i]);
    }
 }
 

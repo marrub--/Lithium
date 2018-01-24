@@ -5,11 +5,11 @@ enum // Lith_WData
 {
    wdata_brightweps,
    wdata_noitemfx,
+   wdata_magdrops,
    wdata_bossspawned,
    wdata_enemycheck,
    wdata_ptid,
    wdata_pclass,
-   wdata_magdrops,
 };
 
 enum // Lith_CBIUpgradeM

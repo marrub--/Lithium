@@ -260,8 +260,6 @@ void Lith_SpawnBosses(score_t sum, bool force)
    else
       boss = lastboss;
 
-   Log("%p", boss);
-
    Lith_TriggerBoss();
 }
 

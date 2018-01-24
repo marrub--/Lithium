@@ -24,11 +24,22 @@ class Lith_Weapon : Weapon
 
    int lith_fired;
    int lith_max;
+
    property MagSize: lith_max;
 
    bool Lith_MagEmpty()
    {
       return lith_fired >= lith_max;
+   }
+
+   virtual void Lith_ReloadFinish(bool isauto)
+   {
+      lith_fired = 0;
+   }
+
+   action(actor) void Lith_A_SpawnPickup(class<Actor> a)
+   {
+      A_SpawnItemEx(a, 0,0,0, 0,0,0, 0, Lith_PF);
    }
 
    action(weapon) state Lith_A_JumpIfMagEmpty(statelabel sn = "Reload")
@@ -50,7 +61,21 @@ class Lith_Weapon : Weapon
 
    action(weapon) void Lith_A_ReloadFinish()
    {
-      invoker.lith_fired = 0;
+      invoker.Lith_ReloadFinish(false);
+   }
+
+   action(weapon) void Lith_A_TakeSlot3OptAmmo(int amt = 1)
+   {
+      if(CallACS("LPData", pdata_slot3ammo))
+         self.A_TakeInventory("Lith_ShellAmmo", amt, TIF_NOTAKEINFINITE);
+   }
+
+   action(weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", int req = 1)
+   {
+      if(!CallACS("LPData", pdata_slot3ammo) || self.countInv("Lith_ShellAmmo") >= req)
+         return null;
+      else
+         return ResolveState(sn);
    }
 
    states

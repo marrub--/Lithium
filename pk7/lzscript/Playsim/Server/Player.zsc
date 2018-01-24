@@ -1,21 +1,24 @@
 extend class Lith_HERMES
 {
-   static int GetMaxAmmo(int pnum, string cname)
+   static int GetMaxMag(int pnum, string cname)
    {
-      if(!playeringame[pnum] || players[pnum].mo == null) return 0;
-      let p = players[pnum].mo;
-      let wep = Lith_Weapon(p.inv.findInventory(cname));
-      if(wep) return wep.lith_max;
-      return 0;
+      PlayerInfo p = players[pnum];
+      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+      return wep ? wep.lith_max : -1;
    }
 
-   static int GetCurAmmo(int pnum, string cname)
+   static int GetCurMag(int pnum, string cname)
    {
-      if(!playeringame[pnum] || players[pnum].mo == null) return 0;
-      let p = players[pnum].mo;
-      let wep = Lith_Weapon(p.inv.findInventory(cname));
-      if(wep) return wep.lith_fired;
-      return 0;
+      PlayerInfo p = players[pnum];
+      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+      return wep ? wep.lith_fired : -1;
+   }
+
+   static void AutoReload(int pnum, string cname)
+   {
+      PlayerInfo p = players[pnum];
+      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+      if(wep) wep.Lith_ReloadFinish(true);
    }
 
    static void SetInput(int pnum, bool on)

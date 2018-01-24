@@ -1,27 +1,3 @@
-actor Lith_CyberMagePlayer : Lith_Player
-{
-   Player.StartItem "Lith_Mateba"
-   Player.StartItem "Lith_CFist"
-   Player.DisplayName "Cyber-Mage"
-   Player.SoundClass "cybermage"
-   Player.Portrait "lgfx/Portraits/CyberMage.png"
-   Player.ViewHeight 45
-   Player.AttackZOffset 12
-   Player.JumpZ 9
-   Tag "Cyber-Mage"
-}
-
-actor Lith_StealthSystem : PowerInvisibility
-{
-   Powerup.Duration 0x7FFFFFFF
-   Powerup.Mode "Opaque"
-}
-
-actor Lith_CWeapon : Lith_Weapon
-{
-   Inventory.RestrictedTo "Lith_CyberMagePlayer"
-}
-
 #include "lscripts/2_CyberMage/ManaLeak.dec"
 
 #include "lscripts/2_CyberMage/Weapons/1_CFist.dec"

@@ -88,6 +88,7 @@ class Lith_Player : DoomPlayer
 }
 
 #include "lzscript/1_Marine/Marine.zsc"
+#include "lzscript/2_CyberMage/CyberMage.zsc"
 #include "lzscript/3_Informant/Informant.zsc"
 #include "lzscript/4_Wanderer/Wanderer.zsc"
 #include "lzscript/5_Assassin/Assassin.zsc"

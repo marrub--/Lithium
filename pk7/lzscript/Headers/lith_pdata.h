@@ -12,6 +12,7 @@ enum Lith_PData
    pdata_recoil,
    pdata_pclass,
    pdata_semifrozen,
+   pdata_slot3ammo,
 };
 
 enum Lith_PClass

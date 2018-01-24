@@ -206,6 +206,7 @@ int LPData(int info, int permutation, bool target)
    case pdata_hassigil:   return p->sigil.acquired;
    case pdata_weaponzoom: return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
    case pdata_recoil:     return bitsk(p->getCVarK("lith_weapons_recoil"));
+   case pdata_slot3ammo:  return p->getCVarI("lith_weapons_slot3ammo");
    case pdata_pclass:     return p->pclass;
    case pdata_semifrozen: return p->semifrozen > 0;
    }
@@ -223,12 +224,11 @@ int LWData(int info)
    {
    case wdata_brightweps:  return ACS_GetUserCVar(0, "lith_player_brightweps");
    case wdata_noitemfx:    return ACS_GetUserCVar(0, "lith_player_noitemfx");
+   case wdata_magdrops:    return ACS_GetUserCVar(0, "lith_weapons_magdrops");
    case wdata_bossspawned: return world.bossspawned;
    case wdata_enemycheck:  return world.enemycheck;
-   case wdata_ptid:     Lith_ForPlayer() return p->tid;
-   case wdata_pclass:   Lith_ForPlayer() return p->pclass;
-   case wdata_magdrops: Lith_ForPlayer()
-      return p->getCVarI("lith_weapons_magdrops");
+   case wdata_ptid:   Lith_ForPlayer() return p->tid;
+   case wdata_pclass: Lith_ForPlayer() return p->pclass;
    }
 
    return 0;

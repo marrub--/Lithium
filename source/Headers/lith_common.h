@@ -44,6 +44,8 @@
 #define Ticker(on, off) (TickerT(17, on, off))
 
 #define HERMES(...) ACS_ScriptCall("Lith_HERMES", __VA_ARGS__)
+#define HERMES_F(...) ACS_ScriptCallFixed("Lith_HERMES", __VA_ARGS__)
+#define HERMES_S(...) ACS_ScriptCallString("Lith_HERMES", __VA_ARGS__)
 
 #define Lith_IsPaused (ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
 

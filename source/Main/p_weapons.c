@@ -31,8 +31,7 @@ static void GiveWeaponItem(int parm, int slot)
       break;
    }
 
-   if(parm > weapon_max_lith)
-      switch(slot)
+   if(parm > weapon_max_lith) switch(slot)
    {
    case 2: ACS_GiveInventory("Lith_BulletAmmo", 20); break;
    case 3: ACS_GiveInventory("Lith_ShellAmmo",  10); break;
@@ -209,24 +208,18 @@ void Lith_PlayerPreWeapons(player_t *p)
       wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
-      if(!(wep->ammotype & AT_ZScr))
-         wep->magclass = info->defmagclass;
 
+      if(!(wep->ammotype & AT_ZScr))
+         wep->magclass  = info->defmagclass;
+
+      // Special exceptions.
       switch(i)
       {
-      case weapon_shotgun:
-         if(p->getUpgrActive(UPGR_GaussShotty)) {
-            wep->ammotype  = AT_NMag;
-            wep->ammoclass = "Lith_GaussShotsFired";
-         }
+      case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_ZMag;
          break;
-      case weapon_c_spas:
-         if(p->getUpgrActive(UPGR_SPAS_B))
-            wep->ammotype = AT_Ammo;
+      case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo;
          break;
-      case weapon_c_smg:
-         if(p->getUpgrActive(UPGR_SMG_A))
-            wep->ammoclass = "Lith_SMGShotsFired2";
+      case weapon_c_smg:   if(p->getUpgrActive(UPGR_SMG_A))       wep->ammoclass = "Lith_SMGShotsFired2";
          break;
       }
 
@@ -234,21 +227,35 @@ void Lith_PlayerPreWeapons(player_t *p)
       if(wep->ammotype & AT_NMag && !(wep->ammotype & AT_Ammo))
          wep->magclass = wep->ammoclass;
 
+      // For slot 3 weapons that don't take ammo, check if they should.
+      switch(i)
+      case weapon_shotgun:
+      case weapon_c_rifle:
+      case weapon_d_4bore:
+         if(p->getCVarI("lith_weapons_slot3ammo")) {
+            wep->ammotype |= AT_Ammo;
+            wep->ammoclass = "Lith_ShellAmmo";
+         }
+
       // Set magazine and ammo counts.
       if(w->cur == wep)
       {
          if(wep->ammotype & AT_NMag)
          {
-            if(wep->ammotype & AT_ZScr) {
-               wep->magmax = HERMES("GetMaxAmmo", p->num, wep->info->classname);
-               wep->magcur = HERMES("GetCurAmmo", p->num, wep->info->classname);
-            } else {
+            if(wep->ammotype & AT_ZScr)
+            {
+               wep->magmax = HERMES("GetMaxMag", p->num, wep->info->classname);
+               wep->magcur = HERMES("GetCurMag", p->num, wep->info->classname);
+            }
+            else
+            {
                wep->magmax = ACS_GetMaxInventory(0, wep->magclass);
                wep->magcur = ACS_CheckInventory (   wep->magclass);
             }
          }
 
-         if(wep->ammotype & AT_Ammo) {
+         if(wep->ammotype & AT_Ammo)
+         {
             wep->ammomax = ACS_GetMaxInventory(0, wep->ammoclass);
             wep->ammocur = ACS_CheckInventory (   wep->ammoclass);
          }
@@ -262,11 +269,13 @@ void Lith_PlayerPreWeapons(player_t *p)
       }
 
       // Auto-reload anything else.
-      if(p->getUpgrActive(UPGR_AutoReload) &&
-         wep->owned && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
+      if(p->getUpgrActive(UPGR_AutoReload) && wep->owned && wep->ammotype & AT_NMag &&
+         !(info->flags & wf_magic))
       {
-         if(wep->autoreload >= 35 * 5 && !(wep->ammotype & AT_ZScr))
-            ACS_TakeInventory(wep->magclass, 999);
+         if(wep->autoreload >= 35 * 5) {
+            if(wep->ammotype & AT_ZScr) HERMES("AutoReload", p->num, info->classname);
+            else                        ACS_TakeInventory(wep->magclass, 999);
+         }
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;

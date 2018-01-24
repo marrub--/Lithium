@@ -12,7 +12,7 @@ class Lith_700Express : Lith_DWeapon
    states(actor)
    {
    SpawnPickup:
-      TNT1 A 0 A_SpawnItemEx("Lith_PistolPickup", 0,0,0, 0,0,0, 0, Lith_PF);
+      TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
       stop;
    }
 
