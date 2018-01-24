@@ -6,7 +6,6 @@ enum Lith_PData
 {
    pdata_upgrade,
    pdata_riflemode,
-   pdata_buttons,
    pdata_hassigil,
    pdata_weaponzoom,
    pdata_recoil,

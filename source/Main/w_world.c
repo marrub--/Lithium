@@ -202,7 +202,6 @@ int LPData(int info, int permutation, bool target)
    {
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
-   case pdata_buttons:    return p->buttons;
    case pdata_hassigil:   return p->sigil.acquired;
    case pdata_weaponzoom: return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
    case pdata_recoil:     return bitsk(p->getCVarK("lith_weapons_recoil"));

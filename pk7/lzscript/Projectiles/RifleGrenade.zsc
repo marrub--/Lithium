@@ -1,0 +1,62 @@
+class Lith_RifleGrenadeSmoke : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.15;
+      Alpha 0.8;
+      
+      +NOINTERACTION
+   }
+   
+   states
+   {
+   Spawn:
+      SMOK ACDGHJKMPQ 1 bright;
+      stop;
+   }
+}
+
+class Lith_RifleGrenade : Actor
+{
+   default
+   {
+      Radius 8;
+      Height 8;
+      Speed 25;
+      Damage 20;
+      BounceType "Doom";
+      BounceCount 2;
+      Gravity 0.5;
+      BounceSound "weapons/rifle/grenadebounce";
+      Species "Lith_Player";
+      DamageType "Lith_Shrapnel";
+      
+      Projectile;
+      +MTHRUSPECIES
+      +EXPLODEONWATER
+      -NOGRAVITY
+   }
+   
+   states
+   {
+   Spawn:
+      SGRN A 2 bright A_SpawnItemEx("Lith_RifleGrenadeSmoke", -8);
+      loop;
+   Death:
+      MEXP A 0 {
+         A_ChangeFlag("NOGRAVITY", true);
+         A_Explode();
+         if(CallACS("LPData", pdata_upgrade, UPGR_7777777, true))
+            A_PlaySound("marathon/explode", 6);
+         else
+            A_PlaySound("explosion", 6);
+      }
+      MEXP AB 2 bright;
+      MEXP CD 3 bright;
+      MEXP EF 4 bright;
+      stop;
+   }
+}
+
+// EOF

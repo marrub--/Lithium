@@ -1,48 +1,21 @@
 const float FIX = 65536.0;
 const int  IFIX = 65536;
 
-// ACS interfacing
-const int X_BT_ATTACK     = 0x00000001;
-const int X_BT_USE        = 0x00000002;
-const int X_BT_JUMP       = 0x00000004;
-const int X_BT_CROUCH     = 0x00000008;
-const int X_BT_TURN180    = 0x00000010;
-const int X_BT_ALTATTACK  = 0x00000020;
-const int X_BT_RELOAD     = 0x00000040;
-const int X_BT_ZOOM       = 0x00000080;
-const int X_BT_SPEED      = 0x00000100;
-const int X_BT_STRAFE     = 0x00000200;
-const int X_BT_MOVERIGHT  = 0x00000400;
-const int X_BT_MOVELEFT   = 0x00000800;
-const int X_BT_BACK       = 0x00001000;
-const int X_BT_FORWARD    = 0x00002000;
-const int X_BT_RIGHT      = 0x00004000;
-const int X_BT_LEFT       = 0x00008000;
-const int X_BT_LOOKUP     = 0x00010000;
-const int X_BT_LOOKDOWN   = 0x00020000;
-const int X_BT_MOVEUP     = 0x00040000;
-const int X_BT_MOVEDOWN   = 0x00080000;
-const int X_BT_SHOWSCORES = 0x00100000;
-const int X_BT_USER1      = 0x00200000;
-const int X_BT_USER2      = 0x00400000;
-const int X_BT_USER3      = 0x00800000;
-const int X_BT_USER4      = 0x01000000;
-
 // Ammo values
-const int AmmoAmt_Bullet        = 10;
-const int AmmoAmt_BulletBox     = 50;
-const int AmmoAmt_Shell         = 4;
-const int AmmoAmt_ShellBox      = 20;
-const int AmmoAmt_Rocket        = 1;
-const int AmmoAmt_RocketBox     = 5;
-const int AmmoAmt_Cell          = 500;
-const int AmmoAmt_CellPack      = 1500;
-const int AmmoAmt_CannonPack    = 4;
+const int AmmoAmt_Bullet       = 10;
+const int AmmoAmt_BulletBox    = 50;
+const int AmmoAmt_Shell        = 4;
+const int AmmoAmt_ShellBox     = 20;
+const int AmmoAmt_Rocket       = 1;
+const int AmmoAmt_RocketBox    = 5;
+const int AmmoAmt_Cell         = 500;
+const int AmmoAmt_CellPack     = 1500;
+const int AmmoAmt_CannonPack   = 4;
 
-const int AmmoAmt_BulletBackpk  = 10;
-const int AmmoAmt_ShellBackpk   = 4;
-const int AmmoAmt_RocketBackpk  = 1;
-const int AmmoAmt_CellBackpk    = 1500;
-const int AmmoAmt_CannonBackpk  = 4;
+const int AmmoAmt_BulletBackpk = 10;
+const int AmmoAmt_ShellBackpk  = 4;
+const int AmmoAmt_RocketBackpk = 1;
+const int AmmoAmt_CellBackpk   = 1500;
+const int AmmoAmt_CannonBackpk = 4;
 
 // EOF

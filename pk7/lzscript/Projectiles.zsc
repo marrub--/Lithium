@@ -1,3 +1,5 @@
+#include "lzscript/Projectiles/RifleGrenade.zsc"
+#include "lzscript/Projectiles/Rocket.zsc"
 #include "lzscript/Projectiles/700Bullet.zsc"
 #include "lzscript/Projectiles/RifleBullet.zsc"
 #include "lzscript/Projectiles/SniperBullet.zsc"
