@@ -50,6 +50,11 @@ class Lith_Phantom : Actor
       A_PlaySound("enemies/phantom/aura", CHAN_7, 0.7, true, 0.7);
    }
 
+   virtual void Lith_OnDeath()
+   {
+      CallACS("Lith_PhantomDeath");
+   }
+
    void Lith_EmitAura()
    {
       for(int i = 0; i < 8; i++)
@@ -58,26 +63,28 @@ class Lith_Phantom : Actor
 
    override void Tick()
    {
-      if(target && target.player && !CheckIfTargetInLOS())
-         target = null;
-
-      if(!target)
-         for(let it = BlockThingsIterator.Create(self, 1024); it.next();)
+      if(health > 0)
       {
-         if(it.thing && it.thing.bISMONSTER && it.thing.bCOUNTKILL &&
-            !it.thing.countInv("Lith_IsPhantom"))
+         if(target && target.player && !CheckIfTargetInLOS())
+            target = null;
+
+         if(!target) for(let it = BlockThingsIterator.Create(self, 1024); it.next();)
          {
-            target = it.thing;
-            SetState(ResolveState("See"));
-            break;
+            if(it.thing && it.thing.bISMONSTER && it.thing.bCOUNTKILL &&
+               !it.thing.countInv("Lith_IsPhantom"))
+            {
+               target = it.thing;
+               SetState(ResolveState("See"));
+               break;
+            }
          }
+
+         if(level.totaltime % 10 == 0)
+            Lith_EmitAura();
+
+         if(user_meleetime)
+            user_meleetime--;
       }
-
-      if(level.totaltime % 10 == 0)
-         Lith_EmitAura();
-
-      if(user_meleetime)
-         user_meleetime--;
 
       Super.Tick();
    }
@@ -90,6 +97,13 @@ class Lith_Phantom : Actor
       Lith_PostInit();
    }
 
+   override void Die(Actor source, Actor inflictor, int dmgflags)
+   {
+      A_NoBlocking();
+      Lith_OnDeath();
+      Super.Die(source, inflictor, dmgflags);
+   }
+
    states
    {
    Spawn:
@@ -99,20 +113,24 @@ class Lith_Phantom : Actor
       PLAY C 0 A_JumpIf(lith_step == 3, "Spawn2");
       PLAY D 0 {lith_step = 0;}
    Spawn2:
-      PLAY "#" 0 {lith_step++;}
-      PLAY "####" 1 {A_Look(); A_Wander();}
+      PLAY # 0 {lith_step++;}
+      PLAY #### 1 {A_Look(); A_Wander();}
       goto Spawn;
    GetOutOfDodge:
-      "####" "#" 1 A_FadeOut(0.05);
+      #### # 1 A_FadeOut(0.05);
       loop;
+   Death:
+      PLAY H 10;
+      PLAY I 60;
+      TNT1 A 70;
+      stop;
    }
 }
 
 class Lith_BasicPhantom : Lith_Phantom
 {
-   override void Lith_PostInit()
-   {
-   }
+   override void Lith_PostInit() {}
+   override void Lith_OnDeath () {}
 
    override void Tick()
    {

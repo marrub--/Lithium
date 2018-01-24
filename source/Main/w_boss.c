@@ -132,7 +132,7 @@ void Lith_PhantomSound(void)
 // Lith_PhantomTeleport
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_PhantomTeleport()
+void Lith_PhantomTeleport(void)
 {
    fixed ang = ACS_GetActorAngle(0);
 
@@ -148,7 +148,7 @@ void Lith_PhantomTeleport()
 // Lith_PhantomDeath
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_PhantomDeath(int num, int phase)
+void Lith_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
 
@@ -194,7 +194,7 @@ void Lith_PhantomDeath(int num, int phase)
 // Lith_SpawnBoss
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_SpawnBoss()
+void Lith_SpawnBoss(void)
 {
    if(!boss) return;
 
