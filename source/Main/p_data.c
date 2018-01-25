@@ -224,12 +224,15 @@ void Lith_PlayerUpdateData(player_t *p)
 
    p->scopetoken = ACS_CheckInventory("Lith_WeaponScopedToken");
 
-   p->keys.redcard     = ACS_CheckInventory("RedCard")    || ACS_CheckInventory("KeyGreen");
-   p->keys.yellowcard  = ACS_CheckInventory("YellowCard") || ACS_CheckInventory("KeyYellow");
-   p->keys.bluecard    = ACS_CheckInventory("BlueCard")   || ACS_CheckInventory("KeyBlue");
-   p->keys.redskull    = ACS_CheckInventory("RedSkull");
-   p->keys.yellowskull = ACS_CheckInventory("YellowSkull");
-   p->keys.blueskull   = ACS_CheckInventory("BlueSkull");
+   p->keys.rc = ACS_CheckInventory("RedCard")    ||
+                ACS_CheckInventory("KeyGreen");
+   p->keys.yc = ACS_CheckInventory("YellowCard") ||
+                ACS_CheckInventory("KeyYellow");
+   p->keys.bc = ACS_CheckInventory("BlueCard")   ||
+                ACS_CheckInventory("KeyBlue");
+   p->keys.rs = ACS_CheckInventory("RedSkull");
+   p->keys.ys = ACS_CheckInventory("YellowSkull");
+   p->keys.bs = ACS_CheckInventory("BlueSkull");
 
    if(p->pclass & pcl_mods)
       ConvertAmmo(p);

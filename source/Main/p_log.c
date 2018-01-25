@@ -8,9 +8,6 @@
 
 #include <stdio.h>
 
-#define LOG_TIME 140
-#define LOG_MAX 7
-
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -153,55 +150,6 @@ void Lith_PlayerUpdateLog(player_t *p)
       {
          logdata->time--;
          rover = rover->next;
-      }
-   }
-}
-
-//
-// Lith_HUD_Log
-//
-[[__call("ScriptS")]]
-void Lith_HUD_Log(player_t *p)
-{
-   if(p->getCVarI("lith_hud_showlog"))
-   {
-      int cr;
-      switch(p->pclass) {
-      default:            cr = CR_GREEN;     break;
-      case pcl_cybermage: cr = CR_RED;       break;
-      case pcl_informant: cr = CR_LIGHTBLUE; break;
-      }
-
-      ACS_SetHudSize(480, 300);
-      ACS_SetFont("LOGFONT");
-
-      int i = 0;
-      forlistIt(logdata_t *logdata, p->loginfo.hud, i++)
-      {
-         int y = 10 * i;
-         fixed align;
-
-         if(p->getCVarI("lith_hud_logfromtop")) {
-            y = 20 + y;
-            align = 0.1;
-         } else {
-            y = 255 - y;
-            align = 0.2;
-
-            switch(p->pclass) {
-            case pcl_cybermage: y -= 10; break;
-            case pcl_informant: y -= 15; break;
-            }
-         }
-
-         HudMessage("%S", logdata->info);
-         HudMessageParams(HUDMSG_NOWRAP, hid_logE + i, cr, 0.1, y+align, TICSECOND);
-
-         if(logdata->time > LOG_TIME - 10)
-         {
-            HudMessage("%S", logdata->info);
-            HudMessageParams(HUDMSG_NOWRAP | HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid_logAddE + i, cr, 0.1, y+align, TICSECOND, 0.15);
-         }
       }
    }
 }

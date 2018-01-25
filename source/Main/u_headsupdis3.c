@@ -8,8 +8,15 @@
 //
 // HUD_Ammo
 //
-static void HUD_Ammo(player_t *p)
+static void HUD_Ammo(player_t *p, struct hud *h)
 {
+   HID(ammo1,      1);
+   HID(ammo2,      1);
+   HID(ammotype,   1);
+   HID(ammotypebg, 1);
+   HID(ammobg1,    1);
+   HID(ammobg2,    1);
+
    invweapon_t const *wep = p->weapon.cur;
 
    __str typegfx = null;
@@ -18,7 +25,7 @@ static void HUD_Ammo(player_t *p)
       typegfx = "lgfx/HUD_I/MAG.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i/%i",
          wep->magmax - wep->magcur, wep->magmax);
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo1, CR_PURPLE, 242.1, 218.0, TS, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, ammo1, CR_PURPLE, 242.1, 218.0, TS, 0.35);
    }
 
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic))
@@ -26,33 +33,33 @@ static void HUD_Ammo(player_t *p)
       int x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", hid_ammobg2, 242.2, 227.2, TS, 0.35);
+         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", ammobg2, 242.2, 227.2, TS, 0.35);
          x = -58;
       }
 
       typegfx = "lgfx/HUD_I/AMMO.png";
       HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", wep->ammocur);
-      HudMessageParams(HUDMSG_FADEOUT, hid_ammo2, CR_PURPLE, x+242.1, 218.0, TS, 0.35);
+      HudMessageParams(HUDMSG_FADEOUT, ammo2, CR_PURPLE, x+242.1, 218.0, TS, 0.35);
    }
 
-   static int const ncolor[] = {
-      CR_DARKGRAY,
-      CR_GRAY,
-      CR_WHITE
-   };
-
-   Lith_HUD_DrawWeaponSlots(p, ncolor, countof(ncolor), 'g', 323, 208);
-   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", hid_ammobg1, 320.2, 229.2, TS);
+   Lith_HUD_WeaponSlots(h, CR_DARKGRAY, CR_GRAY, CR_WHITE, "g", 323, 208);
+   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", ammobg1, 320.2, 229.2, TS);
 
    if(typegfx)
-      DrawSpriteFade(typegfx, hid_ammotype, 309, 219, TS, 0.25);
+      DrawSpriteFade(typegfx, ammotype, 309, 219, TS, 0.25);
 }
 
 //
 // HUD_HealthArmor
 //
-static void HUD_HealthArmor(player_t *p, upgrade_t *upgr)
+static void HUD_HealthArmor(player_t *p, struct hud *h, upgrade_t *upgr)
 {
+   HID(hp, 1);
+
+   HID(arm,    1);
+   HID(armbg,  1);
+   HID(armfxE, 42);
+
    static __str const armorgfx[armor_max] = {
       [armor_unknown] = "lgfx/HUD/H_D27.png",
       [armor_none]    = "lgfx/HUD/H_D28.png",
@@ -61,48 +68,18 @@ static void HUD_HealthArmor(player_t *p, upgrade_t *upgr)
       [armor_blue]    = "lgfx/HUD/H_D25.png"
    };
 
-   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", hid_armorbg, 0.1, 230.2, TS);
+   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", armbg, 0.1, 230.2, TS);
 
    int health = (UData.healthi = lerpk(UData.healthi, p->health, 0.2)) + 0.5;
    if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
    else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
-   HudMessageParams(0, hid_health, CR_PURPLE, 21.1, 202.0, TS);
+   HudMessageParams(0, hp, CR_PURPLE, 21.1, 202.0, TS);
 
    int armor = (UData.armori = lerpk(UData.armori, p->armor, 0.2)) + 0.5;
    HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", armor);
-   HudMessageParams(0, hid_armor, CR_PURPLE, 21.1, 220.0, TS);
+   HudMessageParams(0, arm, CR_PURPLE, 21.1, 220.0, TS);
 
-   DrawSpriteFade(armorgfx[p->armortype], hid_armorbg_fxS - (p->ticks % 42), 20.1 + p->ticks % 42, 211.1, 0.2, 0.7);
-}
-
-//
-// HUD_Score
-//
-static void HUD_Score(player_t *p, upgrade_t *upgr)
-{
-   #pragma GDCC FIXED_LITERAL OFF
-   score_t score;
-
-   if(p->score > 0x20000000000000LL)
-      score = p->score;
-   else
-      score = (UData.scorei = lerp(UData.scorei, p->score, 0.3)) + 0.5;
-
-   HudMessageF("CHFONT", "\C[Lith_Purple]%S \CnScore", Lith_ScoreSep(score));
-   HudMessageParams(HUDMSG_PLAIN, hid_score, CR_WHITE, 2.1, 3.1, 0.1);
-}
-
-//
-// HUD_KeyInd
-//
-static void HUD_KeyInd(player_t *p)
-{
-   if(p->keys.redskull)    DrawSpriteAlpha("H_KS1", hid_key_redskull,    30.0, 10.1, 0.1, 0.8);
-   if(p->keys.yellowskull) DrawSpriteAlpha("H_KS2", hid_key_yellowskull, 30.0, 20.1, 0.1, 0.8);
-   if(p->keys.blueskull)   DrawSpriteAlpha("H_KS3", hid_key_blueskull,   30.0, 30.1, 0.1, 0.8);
-   if(p->keys.redcard)     DrawSpriteAlpha("H_KC1", hid_key_red,         20.0, 10.1, 0.1, 0.8);
-   if(p->keys.yellowcard)  DrawSpriteAlpha("H_KC2", hid_key_yellow,      20.0, 20.1, 0.1, 0.8);
-   if(p->keys.bluecard)    DrawSpriteAlpha("H_KC3", hid_key_blue,        20.0, 30.1, 0.1, 0.8);
+   DrawSpriteFade(armorgfx[p->armortype], armfxE + (p->ticks % 42), 20.1 + p->ticks % 42, 211.1, 0.2, 0.7);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -113,6 +90,10 @@ static void HUD_KeyInd(player_t *p)
 void Upgr_HeadsUpDis3_Activate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
+
+   p->hud.p   = p;
+   p->hud.beg = hid_base_hud;
+   p->hud.end = hid_end_hud;
 }
 
 //
@@ -121,6 +102,8 @@ void Upgr_HeadsUpDis3_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_HeadsUpDis3_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
+
+   Lith_HUD_Clear(&p->hud);
 }
 
 //
@@ -128,18 +111,30 @@ void Upgr_HeadsUpDis3_Deactivate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
 {
-   // Log
-   Lith_HUD_Log(p);
+   struct hud *h = &p->hud;
 
-   // Inventory
-   HUD_KeyInd(p);
+   Lith_HUD_Begin(h);
 
-   if(p->getCVarI("lith_hud_showscore"))
-      HUD_Score(p, upgr);
+   Lith_HUD_Log(h, CR_LIGHTBLUE, 0, -15);
+   Lith_HUD_KeyInd(h, 20, 20, false, 0.8);
+
+   score_t score;
+
+   if(p->score < 0x20000000000000LL)
+   {
+      #pragma GDCC FIXED_LITERAL OFF
+      score = (UData.scorei = lerp(UData.scorei, p->score, 0.3)) + 0.5;
+   }
+   else
+      score = p->score;
+
+   Lith_HUD_Score(h, "%S \CnScore", score, "CHFONT", "[Lith_Purple]", 2.1, 3.1);
 
    // Status
-   HUD_Ammo(p);
-   HUD_HealthArmor(p, upgr);
+   HUD_Ammo(p, h);
+   HUD_HealthArmor(p, h, upgr);
+
+   Lith_HUD_End(h);
 }
 
 // EOF

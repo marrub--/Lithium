@@ -13,6 +13,7 @@
 #include "lith_shopdef.h"
 #include "lith_attrib.h"
 #include "lith_items.h"
+#include "lith_hud.h"
 
 #include <GDCC/HashMap.h>
 
@@ -140,9 +141,6 @@ __str Lith_PlayerDiscriminator(int pclass);
 
 void Lith_PlayerUpdateStats(struct player *p);
 
-void Lith_HUD_DrawWeaponSlots(struct player *p, int const *ncol, int ncols,
-   char scol, int bx, int by);
-
 struct player *Lith_GetPlayer(int tid, int ptr);
 
 // Types ---------------------------------------------------------------------|
@@ -259,8 +257,9 @@ typedef struct player
    container_t inv[7];
 
    // HUD
-   loginfo_t loginfo;
-   bool      hudenabled;
+   loginfo_t  loginfo;
+   bool       hudenabled;
+   struct hud hud;
 
    // DECORATE/ZScript
    int  decvars[8];
@@ -343,12 +342,12 @@ typedef struct player
    // Keys
    struct keycards_s
    {
-      bool redcard     : 1;
-      bool yellowcard  : 1;
-      bool bluecard    : 1;
-      bool redskull    : 1;
-      bool yellowskull : 1;
-      bool blueskull   : 1;
+      bool rc : 1;
+      bool yc : 1;
+      bool bc : 1;
+      bool rs : 1;
+      bool ys : 1;
+      bool bs : 1;
    } keys;
 
    // 🌌 「÷」 0

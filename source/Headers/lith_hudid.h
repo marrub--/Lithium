@@ -52,18 +52,6 @@ enum
    hid_zoomcomp,
    hid_zoomcam = hid_zoomcomp + 8,
 
-   hid_log_throwaway,
-
-   // HUD
-   hid_base_hud = hid_base + 42000,
-   hid_end_hud  = hid_base + 42999,
-
-   hid_logAddE = hid_base_hud,
-   hid_logAddS = hid_logAddE + 20,
-
-   hid_logE,
-   hid_logS = hid_logE + 20,
-
    hid_vscbar,
    hid_vscbarn,
    hid_vschp,
@@ -78,68 +66,24 @@ enum
    hid_jettext,
    hid_jetbg,
 
-   hid_weaponcurE,
-   hid_weaponcurS = hid_weaponcurE + 9,
-
-   hid_weapontextE,
-   hid_weapontextS = hid_weapontextE + 9,
-
-   hid_weaponE,
-   hid_weaponS = hid_weaponE + 9,
-   hid_weaponbg,
-
    hid_magicammo2,
    hid_magicammo1,
    hid_magicammobg,
    hid_magicsymbol,
 
-   hid_ammo1,
-   hid_ammo2,
-   hid_ammotype,
-   hid_ammotypebg,
-   hid_ammobg1,
-   hid_ammobg2,
-   hid_riflemode,
-   hid_riflemodebg,
-   hid_rifleheat = hid_riflemode,
-   hid_rifleheatbg = hid_riflemodebg,
-
    hid_adrenind_fxE,
    hid_adrenind_fxS = hid_adrenind_fxE + 45,
 
-   hid_slideind_fxE,
-   hid_slideind_fxS = hid_slideind_fxE + 11,
-
-   hid_healthhit,
-   hid_health,
-   hid_healthtxt,
-   hid_healthbg,
-   hid_healthbg_fxE,
-   hid_healthbg_fxS = hid_healthbg_fxE + 32,
+   hid_fistcharge,
 
    hid_rarmortxt,
    hid_rarmorbg,
 
-   hid_armorhit,
-   hid_armor,
-   hid_armortxt,
-   hid_armorbg,
-   hid_armorbg_fxE,
-   hid_armorbg_fxS = hid_armorbg_fxE + 42,
+   hid_log_throwaway,
 
-   hid_scorehit,
-   hid_score,
-   hid_scoreaccum,
-
-   hid_key_blue,
-   hid_key_yellow,
-   hid_key_red,
-
-   hid_key_blueskull,
-   hid_key_yellowskull,
-   hid_key_redskull,
-
-   hid_fistcharge,
+   // HUD
+   hid_base_hud = hid_base + 42000,
+   hid_end_hud  = hid_base + 42999,
 
    // Scope
    hid_base_scope = hid_base + 43000,
@@ -170,4 +114,3 @@ enum
 };
 
 #endif
-

@@ -7,6 +7,9 @@
 
 #include <stdarg.h>
 
+#define LOG_TIME 140
+#define LOG_MAX 7
+
 typedef struct logmap_s
 {
    int levelnum;

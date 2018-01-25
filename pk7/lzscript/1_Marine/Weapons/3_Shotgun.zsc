@@ -115,7 +115,7 @@ class Lith_Shotgun : Lith_MWeapon
       #### # 1 offset(0, 34);
       #### # 1 offset(0, 33);
       #### # 5 offset(0, 32);
-      goto Ready;
+      goto SelReady;
 
    Fire:
       #### # 0 Lith_A_JumpIfNoSlot3OptAmmo;
