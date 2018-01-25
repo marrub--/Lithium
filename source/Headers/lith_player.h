@@ -45,6 +45,15 @@ GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
 enum
 {
+   pro_none,
+   pro_male,
+   pro_female,
+   pro_object,
+   pro_max,
+};
+
+enum
+{
    armor_none,
    armor_bonus,
    armor_green,
@@ -228,6 +237,7 @@ typedef struct player
    __str name;
    int   pclass;
    __str pcstr;
+   int   pronoun;
 
    // Deltas
    [[__anonymous]] player_delta_t cur;

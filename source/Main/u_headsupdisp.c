@@ -236,6 +236,33 @@ static void HUD_Mode(player_t *p)
 
 // Extern Functions ----------------------------------------------------------|
 
+struct hudcfg
+{
+   int base;
+   int end;
+};
+
+struct huddat
+{
+   int id;
+};
+
+static struct hudcfg const hudcfg = {hid_base_hud, hid_end_hud};
+
+//
+// Lith_HUD_Clear
+//
+void Lith_HUD_Clear(player_t *p, struct hudcfg const *cfg)
+{
+   for(int i = cfg->base; i <= cfg->end; i++)
+   {
+      ACS_BeginPrint();
+      ACS_MoreHudMessage();
+      ACS_OptHudMessage(0, i, 0, 0, 0, TS);
+      ACS_EndHudMessage();
+   }
+}
+
 //
 // Activate
 //
@@ -250,6 +277,8 @@ void Upgr_HeadsUpDisp_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_HeadsUpDisp_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
+
+   Lith_HUD_Clear(p, &hudcfg);
 }
 
 //
@@ -257,6 +286,8 @@ void Upgr_HeadsUpDisp_Deactivate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
 {
+   struct huddat h = {};
+
    // Log
    Lith_HUD_Log(p);
 

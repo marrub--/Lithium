@@ -46,6 +46,44 @@ class Lith_Player : DoomPlayer
       Super.Tick();
    }
 
+   name lith_mod;
+
+   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
+   {
+      lith_mod = mod;
+      if((inflictor || source) && source != self)
+         return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+      else
+         return Super.DamageMobj(inflictor, source, damage, 'None', flags, angle);
+   }
+
+   override void Die(Actor source, Actor inflictor, int dmgflags = 0)
+   {
+      target = source;
+      Super.Die(null, inflictor, dmgflags);
+
+      string ob;
+
+      if(source == self)
+         ob = "(suicide)";
+      else if(source)
+         ob = StringTable.Localize(source.obituary);
+      else switch(lith_mod)
+      {
+      case 'Falling':  ob = "(falling)";  break;
+      case 'Crush':    ob = "(crush)";    break;
+      case 'Exit':     ob = "(exit)";     break;
+      case 'Drowning': ob = "(drowning)"; break;
+      case 'Slime':    ob = "(slime)";    break;
+      case 'Fire':     ob = "(fire)";     break;
+      default:         ob = "(default)";  break;
+      }
+
+      Lith_HERMES.Instance().lith_obituary = ob;
+
+      CallACS("Lith_Obituary");
+   }
+
    default
    {
       Lith_Player.ViewBob 1;

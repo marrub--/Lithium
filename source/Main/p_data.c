@@ -343,6 +343,13 @@ void Lith_ResetPlayer(player_t *p)
       p->discount     = 1.0;
       p->stepnoise    = StrParam("player/%S/step", p->classname);
 
+      switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER))
+      {
+      case 0: p->pronoun = pro_male;   break;
+      case 1: p->pronoun = pro_female; break;
+      case 2: p->pronoun = pro_object; break;
+      }
+
       for(int i = 0; i < countof(p->notes); i++)
          p->notes[i] = "";
    }

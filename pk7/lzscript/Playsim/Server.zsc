@@ -6,6 +6,7 @@ struct Lith_HERMES_PlayerData
 // HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
 class Lith_HERMES : EventHandler
 {
+   play string lith_obituary;
    play bool lith_paused;
    play Lith_HERMES_PlayerData lith_pdata[MAXPLAYERS];
 
