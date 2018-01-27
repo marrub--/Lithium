@@ -10,9 +10,22 @@ class Lith_Events : EventHandler
    }
    */
 
+   override void PlayerEntered(PlayerEvent evt)
+   {
+      PlayerInfo p = players[evt.playerNumber];
+
+      // in case the player isn't derived from Lith_Player
+      if(p && !p.mo.findInventory("Lith_AAGH"))
+      {
+         p.mo.giveInventoryType("Lith_AAGH");
+         p.mo.giveInventoryType("Lith_IDOL");
+      }
+   }
+
    override void WorldThingSpawned(WorldEvent evt)
    {
       let th = evt.thing;
+
       if(th.bISMONSTER)
          th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
    }

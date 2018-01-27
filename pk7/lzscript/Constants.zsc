@@ -5,6 +5,19 @@
 #include "lzscript/Headers/lith_upgradenames.h"
 #include "lzscript/Headers/lith_scorenums.h"
 
+enum Lith_DamageType
+{
+   ldt_bullets,
+   ldt_energy,
+   ldt_fire,
+   ldt_firemagic,
+   ldt_magic,
+   ldt_melee,
+   ldt_shrapnel,
+   ldt_ice,
+   ldt_none
+}
+
 enum Lith_ASCII
 {
     Ch_NUL, // null

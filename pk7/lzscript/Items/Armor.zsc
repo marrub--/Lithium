@@ -1,0 +1,181 @@
+enum Lith_ArmorSlot
+{
+   slot_lower,
+   slot_upper,
+   slot_ring,
+   slot_pauld,
+   slot_max
+}
+
+// AAGH: Armors Are Goddamn Heavy
+class Lith_AAGH : Inventory
+{
+   default
+   {
+      +INVENTORY.KEEPDEPLETED
+      +INVENTORY.UNTOSSABLE
+   }
+
+   Lith_Armor lith_slotted[slot_max];
+
+   static Lith_DamageType Lith_NameToDT(name type)
+   {
+      switch(type)
+      {
+      default:
+      case 'Bullet':
+      case 'Lith_Bullets':   return ldt_bullets;
+      case 'Plasma':
+      case 'Railgun':
+      case 'Electric':
+      case 'Lith_Energy':    return ldt_energy;
+      case 'Fire':
+      case 'Lith_Fire':      return ldt_fire;
+      case 'FireMagic':
+      case 'Lith_FireMagic': return ldt_firemagic;
+      case 'Magic':
+      case 'Lith_Magic':     return ldt_magic;
+      case 'Shrapnel':
+      case 'Explosion':
+      case 'Lith_Shrapnel':  return ldt_shrapnel;
+      case 'Ice':
+      case 'Lith_Ice':       return ldt_ice;
+      }
+   }
+
+   override bool HandlePickup(Inventory o)
+   {
+      if(o is "Lith_Armor" && Lith_AddToSlot(Lith_Armor(o)))
+         o.bPICKUPGOOD = true;
+      return false;
+   }
+
+   protected bool Lith_AddToSlot(Lith_Armor o)
+   {
+      let slot = o.lith_slot;
+
+      if(slot < 0 || slot >= slot_max || lith_slotted[slot] != null)
+         return false;
+
+      lith_slotted[slot] = o;
+
+      return false;
+   }
+
+   override void AbsorbDamage(int damage, name type, out int newdamage)
+   {
+      if(DamageTypeDefinition.IgnoreArmor(type)) return;
+
+      int save = 0;
+
+      for(int i = 0; i < slot_max; i++)
+         if(lith_slotted[i])
+            save += lith_slotted[i].Lith_SaveAmt(type);
+
+      if(damage - save < 1) newdamage = 1;
+      else                  newdamage = damage - save;
+
+      Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage);
+   }
+}
+
+class Lith_Armor : Armor
+{
+   readonly int lith_slot;
+
+   readonly private int lith_save0;
+   readonly private int lith_save1;
+
+   protected int lith_cursave;
+
+   property SlotSave: lith_slot, lith_save0, lith_save1;
+
+   virtual int Lith_SaveAmt(name type)
+      {return lith_cursave;}
+
+   override bool HandlePickup(Inventory o)
+      {return o.getClass() == getClass();}
+
+   override void BeginPlay()
+   {
+      Super.BeginPlay();
+      lith_cursave = lith_save0;
+   }
+}
+
+class Lith_Armor_Resistant : Lith_Armor
+{
+   protected int lith_resist;
+
+   property Resist: lith_resist;
+
+   override int Lith_SaveAmt(name type)
+   {
+      let dt = Lith_AAGH.Lith_NameToDT(type);
+      return lith_resist == dt ? lith_cursave * 2 : lith_cursave;
+   }
+}
+
+class Lith_Armor_Standard_Upper : Lith_Armor
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_upper, 2, 3;
+   }
+
+   states {Spawn: ARM1 A -1; stop;}
+}
+
+class Lith_Armor_Standard_Lower : Lith_Armor
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_lower, 1, 2;
+   }
+
+   states {Spawn: ARM1 B -1; stop;}
+}
+
+class Lith_Armor_Improved_Upper : Lith_Armor
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_upper, 3, 4;
+   }
+
+   states {Spawn: ARM2 A -1; stop;}
+}
+
+class Lith_Armor_Improved_Lower : Lith_Armor
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_lower, 2, 3;
+   }
+
+   states {Spawn: ARM2 B -1; stop;}
+}
+
+class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_upper, 3, 4;
+      Lith_Armor_Resistant.Resist ldt_energy;
+   }
+
+   states {Spawn: ARM2 A -1; stop;}
+}
+
+class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Lith_Armor_Resistant.Resist ldt_energy;
+   }
+
+   states {Spawn: ARM2 B -1; stop;}
+}
+
+// EOF

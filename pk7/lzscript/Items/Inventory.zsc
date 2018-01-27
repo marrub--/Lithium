@@ -1,0 +1,11 @@
+// IDOL: Inventory Dummies are Overly Luxurious
+class Lith_IDOL : Inventory
+{
+   default
+   {
+      +INVENTORY.KEEPDEPLETED
+      +INVENTORY.UNTOSSABLE
+   }
+}
+
+// EOF

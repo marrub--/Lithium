@@ -1,5 +1,10 @@
 class Lith_Player : DoomPlayer
 {
+   double lith_vbob;
+   name   lith_mod;
+
+   property ViewBob: lith_vbob;
+
    default
    {
       Player.SideMove 2, 1;
@@ -8,17 +13,18 @@ class Lith_Player : DoomPlayer
       Player.GruntSpeed 16;
       DamageFactor "Lith_PlayerMissile", 0;
       Species "Lith_Player";
+      Lith_Player.ViewBob 1;
 
       +THRUSPECIES;
    }
-
-   float lith_vbob;
-   property ViewBob: lith_vbob;
 
    override void BeginPlay()
    {
       super.BeginPlay();
       viewbob = lith_vbob;
+
+      GiveInventoryType("Lith_AAGH");
+      GiveInventoryType("Lith_IDOL");
    }
 
    override void PlayerThink()
@@ -46,10 +52,10 @@ class Lith_Player : DoomPlayer
       Super.Tick();
    }
 
-   name lith_mod;
-
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
+      ACS_NamedExecuteWithResult("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
+
       lith_mod = mod;
       if((inflictor || source) && source != self)
          return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
@@ -82,46 +88,6 @@ class Lith_Player : DoomPlayer
       Lith_HERMES.Instance().lith_obituary = ob;
 
       CallACS("Lith_Obituary");
-   }
-
-   default
-   {
-      Lith_Player.ViewBob 1;
-   }
-
-   states
-   {
-   Pain:
-   Pain.Bullet:
-   Pain.Lith_Bullets:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 0);
-      goto Super::Pain;
-   Pain.Plasma:
-   Pain.Railgun:
-   Pain.Electric:
-   Pain.Lith_Energy:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 1);
-      goto Super::Pain;
-   Pain.Fire:
-   Pain.Lith_Fire:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 2);
-      goto Super::Pain;
-   Pain.Lith_FireMagic:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 3);
-      goto Super::Pain;
-   Pain.Lith_Magic:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 4);
-      goto Super::Pain;
-   Pain.Melee:
-   Pain.Lith_Melee:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 5);
-      goto Super::Pain;
-   Pain.Lith_Shrapnel:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 6);
-      goto Super::Pain;
-   Pain.Ice:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RA_Give", 7);
-      goto Super::Pain;
    }
 }
 
