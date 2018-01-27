@@ -4,8 +4,6 @@
 #include "lscripts/2_CyberMage/Weapons/2_Mateba.dec"
 #include "lscripts/2_CyberMage/Weapons/3_ShockRifle.dec"
 #include "lscripts/2_CyberMage/Weapons/3_2_SPAS.dec"
-#include "lscripts/2_CyberMage/Weapons/4_SMG.dec"
-#include "lscripts/2_CyberMage/Weapons/5_IonRifle.dec"
 #include "lscripts/2_CyberMage/Weapons/6_CPlasmaRifle.dec"
 #include "lscripts/2_CyberMage/Weapons/7_StarDestroyer.dec"
 

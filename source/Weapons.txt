@@ -26,8 +26,8 @@ Percent denotes flags. Any other text is ignored by the parser.
 {c_mateba  2 Mateba        P("mateba")   NMag             M("Mateba")
 {c_rifle   3 ShockRifle    P("erifle")   NMag             M("ShockRifle")
 {c_spas    3 SPAS          P("cshotgun") AMag A("Shell")  M("SPAS")
-{c_smg     4 SMG           P("smg")      NMag             M("SMG")
-{c_sniper  5 IonRifle      P("ionrifle") AMag A("Rocket") M("IonRifle")
+{c_smg     4 SMG           P("smg")      ZMag
+{c_sniper  5 IonRifle      P("ionrifle") ZAMg A("Rocket")
 {c_plasma  6 CPlasmaRifle  P("plasma")   Ammo A("Plasma")
 {c_shipgun 7 StarDestroyer P("shipgun")  Ammo A("Cannon")
 ;c_fist cfist c_mateba c_rifle c_spas c_smg c_sniper c_plasma c_shipgun

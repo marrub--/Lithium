@@ -31,4 +31,7 @@ class Lith_CWeapon : Lith_Weapon
    }
 }
 
+#include "lzscript/2_CyberMage/Weapons/4_SMG.zsc"
+#include "lzscript/2_CyberMage/Weapons/5_IonRifle.zsc"
+
 // EOF

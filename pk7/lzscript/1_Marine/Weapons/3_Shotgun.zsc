@@ -202,18 +202,18 @@ class Lith_Shotgun : Lith_MWeapon
       goto SelReady;
 
    AltFire:
-      "####" "#" 1;
-      "####" "#" 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut");
+      #### # 1;
+      #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut");
       goto ScopeIn;
    ScopeOut:
-      "####" "#" 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-      "####" "#" 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-      "####" "#" 0 A_PlaySound("weapons/shotgun/zoomout", 6);
+      #### # 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
+      #### # 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
+      #### # 0 A_PlaySound("weapons/shotgun/zoomout", 6);
       goto Ready;
    ScopeIn:
-      "####" "#" 0 A_GiveInventory("Lith_WeaponScopedToken", 1);
-      "####" "#" 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX);
-      "####" "#" 0 A_PlaySound("weapons/shotgun/zoomin", 6);
+      #### # 0 A_GiveInventory("Lith_WeaponScopedToken", 1);
+      #### # 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX);
+      #### # 0 A_PlaySound("weapons/shotgun/zoomin", 6);
       goto AltReady;
 
    Reload:

@@ -436,7 +436,7 @@ void Lith_MonsterTick(dmon_t *m, int tic)
       ShowBarrier(m, m->level / (fixed)MAXLEVEL);
 
    if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
-      ACS_GiveInventory("Lith_IonizedFXSpawner", 1);
+      HERMES("Lith_IonizeFX");
 }
 
 //

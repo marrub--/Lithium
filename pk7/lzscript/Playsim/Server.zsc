@@ -16,5 +16,6 @@ class Lith_HERMES : EventHandler
 
 #include "lzscript/Playsim/Server/Player.zsc"
 #include "lzscript/Playsim/Server/Boss.zsc"
+#include "lzscript/Playsim/Server/Weapons.zsc"
 
 // EOF

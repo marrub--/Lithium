@@ -16,7 +16,7 @@ void Lith_HUD_Begin(struct hud *h)
 //
 void Lith_HUD_Clear(struct hud *h)
 {
-   for(int i = h->beg; i <= h->end; i++)
+   for(int i = h->beg; i <= h->id; i++)
    {
       ACS_BeginPrint();
       ACS_MoreHudMessage();

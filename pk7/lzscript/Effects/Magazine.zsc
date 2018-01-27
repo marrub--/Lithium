@@ -24,8 +24,8 @@ class Lith_DroppedMagazine : Actor
       TNT1 A 0 A_Jump(256, "Spawn1");
       stop;
    Done:
-      "####" "#" 300;
-      "####" "#" 1 A_FadeOut;
+      #### # 300;
+      #### # 1 A_FadeOut;
       wait;
    }
 }

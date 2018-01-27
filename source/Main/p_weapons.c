@@ -215,12 +215,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       // Special exceptions.
       switch(i)
       {
-      case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_ZMag;
-         break;
-      case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo;
-         break;
-      case weapon_c_smg:   if(p->getUpgrActive(UPGR_SMG_A))       wep->ammoclass = "Lith_SMGShotsFired2";
-         break;
+      case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_ZMag; break;
+      case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo; break;
       }
 
       // Set magazine class if this weapon doesn't take ammo.

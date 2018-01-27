@@ -8,7 +8,7 @@ class Lith_Minigun : Lith_DWeapon
       Lith_Weapon.MagSize 200;
    }
 
-   float      lith_windup;
+   double     lith_windup;
    int        lith_sndstate;
    bool       lith_reloading;
    statelabel lith_laststate;
@@ -145,39 +145,39 @@ class Lith_Minigun : Lith_DWeapon
       goto Ready;
 
    Reload:
-      MNGG "#" 1 Lith_A_JumpIfMagFull(invoker.lith_laststate);
-      MNGG "#" 1 offset(-2, 34) {
+      MNGG # 1 Lith_A_JumpIfMagFull(invoker.lith_laststate);
+      MNGG # 1 offset(-2, 34) {
          invoker.lith_reloading = true;
          invoker.lith_windup = 0;
       }
-      MNGG "#" 1 offset(-4, 37);
-      MNGG "#" 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_5);
-      MNGG "#" 1 offset(-12, 47);
-      MNGG "#" 1 offset(-14, 52);
-      MNGG "#" 2 offset(-12, 55);
-      MNGG "#" 3 offset(-11, 57);
-      MNGG "#" 8 offset(-10, 60);
-      MNGG "#" 8 offset(-11, 60);
-      MNGG "#" 0 Lith_A_ReloadFinish;
-      MNGG "#" 2 offset(-13, 59) A_PlaySound("weapons/smg/magin", CHAN_5);
-      MNGG "#" 2 offset(-11, 49);
-      MNGG "#" 2 offset(-11, 47);
-      MNGG "#" 7 offset(-11, 45);
-      MNGG "#" 1 offset(-12, 49);
-      MNGG "#" 1 offset(-8, 53);
-      MNGG "#" 1 offset(-1, 57);
-      MNGG "#" 1 offset(3, 56);
-      MNGG "#" 1 offset(8, 52);
-      MNGG "#" 1 offset(10, 49);
-      MNGG "#" 1 offset(8, 47);
-      MNGG "#" 1 offset(7, 45);
-      MNGG "#" 2 offset(5, 43);
-      MNGG "#" 2 offset(3, 40);
-      MNGG "#" 3 offset(2, 39);
-      MNGG "#" 3 offset(1, 37);
-      MNGG "#" 4 offset(1, 34);
-      MNGG "#" 4;
-      MNGG "#" 0 {
+      MNGG # 1 offset(-4, 37);
+      MNGG # 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_5);
+      MNGG # 1 offset(-12, 47);
+      MNGG # 1 offset(-14, 52);
+      MNGG # 2 offset(-12, 55);
+      MNGG # 3 offset(-11, 57);
+      MNGG # 8 offset(-10, 60);
+      MNGG # 8 offset(-11, 60);
+      MNGG # 0 Lith_A_ReloadFinish;
+      MNGG # 2 offset(-13, 59) A_PlaySound("weapons/smg/magin", CHAN_5);
+      MNGG # 2 offset(-11, 49);
+      MNGG # 2 offset(-11, 47);
+      MNGG # 7 offset(-11, 45);
+      MNGG # 1 offset(-12, 49);
+      MNGG # 1 offset(-8, 53);
+      MNGG # 1 offset(-1, 57);
+      MNGG # 1 offset(3, 56);
+      MNGG # 1 offset(8, 52);
+      MNGG # 1 offset(10, 49);
+      MNGG # 1 offset(8, 47);
+      MNGG # 1 offset(7, 45);
+      MNGG # 2 offset(5, 43);
+      MNGG # 2 offset(3, 40);
+      MNGG # 3 offset(2, 39);
+      MNGG # 3 offset(1, 37);
+      MNGG # 4 offset(1, 34);
+      MNGG # 4;
+      MNGG # 0 {
          invoker.lith_reloading = false;
          return ResolveState(invoker.lith_laststate);
       }
