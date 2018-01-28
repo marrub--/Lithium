@@ -126,7 +126,7 @@ static void Lith_PlayerDeath(void)
          ACS_Delay(25);
       }
 
-      for(;;)
+      while(p->dead)
       {
          ACS_Delay(35 * 5);
          Log("%S", Language("LITH_DEATHMSG_%.2i", ACS_Random(1, 20)));

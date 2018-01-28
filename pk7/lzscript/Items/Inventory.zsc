@@ -5,6 +5,7 @@ class Lith_IDOL : Inventory
    {
       +INVENTORY.KEEPDEPLETED
       +INVENTORY.UNTOSSABLE
+      +INVENTORY.UNDROPPABLE
    }
 }
 

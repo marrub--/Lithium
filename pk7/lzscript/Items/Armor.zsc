@@ -14,6 +14,7 @@ class Lith_AAGH : Inventory
    {
       +INVENTORY.KEEPDEPLETED
       +INVENTORY.UNTOSSABLE
+      +INVENTORY.UNDROPPABLE
    }
 
    Lith_Armor lith_slotted[slot_max];
@@ -43,23 +44,35 @@ class Lith_AAGH : Inventory
       }
    }
 
-   override bool HandlePickup(Inventory o)
+   bool Lith_CheckSlot(Lith_Armor o)
    {
-      if(o is "Lith_Armor" && Lith_AddToSlot(Lith_Armor(o)))
-         o.bPICKUPGOOD = true;
-      return false;
+      let slot = o.Lith_Slot();
+      return slot >= 0 && slot < slot_max && !lith_slotted[slot];
    }
 
-   protected bool Lith_AddToSlot(Lith_Armor o)
+   bool Lith_AddSlot(Lith_Armor o)
    {
-      let slot = o.lith_slot;
-
-      if(slot < 0 || slot >= slot_max || lith_slotted[slot] != null)
+      if(!Lith_CheckSlot(o))
          return false;
+
+      let slot = o.Lith_Slot();
 
       lith_slotted[slot] = o;
 
-      return false;
+      Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
+
+      return true;
+   }
+
+   bool Lith_RemoveSlot(int slot)
+   {
+      if(slot < 0 || slot >= slot_max || !lith_slotted[slot])
+         return false;
+
+      RemoveInventory(lith_slotted[slot]);
+      lith_slotted[slot] = null;
+
+      return true;
    }
 
    override void AbsorbDamage(int damage, name type, out int newdamage)
@@ -81,20 +94,63 @@ class Lith_AAGH : Inventory
 
 class Lith_Armor : Armor
 {
-   readonly int lith_slot;
+   protected int lith_slotnum;
 
-   readonly private int lith_save0;
-   readonly private int lith_save1;
+   private int lith_save0;
+   private int lith_save1;
 
    protected int lith_cursave;
 
-   property SlotSave: lith_slot, lith_save0, lith_save1;
+   property SlotSave: lith_slotnum, lith_save0, lith_save1;
+
+   virtual int Lith_Slot()
+      {return lith_slotnum;}
 
    virtual int Lith_SaveAmt(name type)
       {return lith_cursave;}
 
-   override bool HandlePickup(Inventory o)
-      {return o.getClass() == getClass();}
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_Armor(Super.CreateCopy(mo));
+
+      copy.lith_slotnum = lith_slotnum;
+      copy.lith_save0   = lith_save0;
+      copy.lith_save1   = lith_save1;
+      copy.lith_cursave = lith_cursave;
+
+      return copy;
+   }
+
+   override bool CanPickup(Actor mo)
+   {
+      if(Super.CanPickup(mo))
+      {
+         let a = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+         return a && a.Lith_CheckSlot(self);
+      }
+      else
+         return false;
+   }
+
+   override bool TryPickup(in out Actor mo)
+   {
+      let a = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+
+      if(a)
+      {
+         let copy = Lith_Armor(CreateCopy(a));
+
+         if(copy && a.Lith_AddSlot(copy))
+         {
+            copy.attachToOwner(a);
+            return true;
+         }
+         else if(copy != self)
+            copy.destroy();
+      }
+
+      return false;
+   }
 
    override void BeginPlay()
    {
@@ -108,6 +164,15 @@ class Lith_Armor_Resistant : Lith_Armor
    protected int lith_resist;
 
    property Resist: lith_resist;
+
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_Armor_Resistant(Super.CreateCopy(mo));
+
+      copy.lith_resist = lith_resist;
+
+      return copy;
+   }
 
    override int Lith_SaveAmt(name type)
    {
@@ -176,6 +241,44 @@ class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
    }
 
    states {Spawn: ARM2 B -1; stop;}
+}
+
+class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_upper, 3, 4;
+      Lith_Armor_Resistant.Resist ldt_fire;
+   }
+
+   states {Spawn: ARM2 A -1; stop;}
+}
+
+class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Lith_Armor_Resistant.Resist ldt_fire;
+   }
+
+   states {Spawn: ARM2 B -1; stop;}
+}
+
+class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_greenarmor;
+   }
+}
+
+class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_bluearmor;
+   }
 }
 
 // EOF

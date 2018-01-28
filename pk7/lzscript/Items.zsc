@@ -1,3 +1,4 @@
+#include "lzscript/Items/RandomSpawn.zsc"
 #include "lzscript/Items/Inventory.zsc"
 #include "lzscript/Items/Pickup.zsc"
 #include "lzscript/Items/Armor.zsc"

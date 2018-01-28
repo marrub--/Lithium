@@ -33,4 +33,10 @@ enum // Lith_CBIUpgradeC
    cupg_c_rdistinter,
 };
 
+enum // Lith_RandomSpawnNum
+{
+   lrsn_greenarmor,
+   lrsn_bluearmor,
+};
+
 // EOF

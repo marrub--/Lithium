@@ -168,7 +168,7 @@ static struct monster_info const monsterinfo[] = {
    {M(Archvile),      mtype_archvile,    "Pestilence",   mif_full},
    {M(SpiderDemon),   mtype_mastermind,  "Granfalloon",  mif_full},
    {M(CyberDemon),    mtype_cyberdemon,  "SoF",          mif_full},
-   {M(LostSoul),      mtype_lostsoul,    "Karkass",      },
+   {M(LostSoul),      mtype_lostsoul,    "Karkass"},
    {M(HellKnight),    mtype_imp,         "Doorman",      mif_full},
    {M(LostSoul),      mtype_lostsoul,    "UnbodiedFury", mif_full},
    {M(ShotgunGuy),    mtype_imp,         "Bloodfiend",   mif_full},

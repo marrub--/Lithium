@@ -15,8 +15,16 @@ SRCDIR=source
 
 PK7_BIN=pk7/acs
 
+LIB_INIT =--bc-zdacs-init-script-name '__lithlib.bin_init'
+MAIN_INIT=--bc-zdacs-init-script-name '__lithmain.bin_init'
+
+LIB_STA =3000000000
+MAIN_STA=3500000000
+
 LIB_OUTPUTS=$(IR)/libc.ir $(IR)/libGDCC.ir
 LIB_BINARY=$(PK7_BIN)/lithlib.bin
+LIB_CFLAGS=$(LIB_INIT)
+LIB_LFLAGS=$(LIB_INIT) --alloc-min Sta "" $(LIB_STA)
 
 MAIN_IR=$(IR)/main
 MAIN_SRC=$(SRCDIR)/Main
@@ -25,8 +33,8 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=-i$(MAIN_INC) -Dnull=NULL
-MAIN_LFLAGS=-llithlib
+MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) -Dnull=NULL 
+MAIN_LFLAGS=-llithlib $(MAIN_INIT) --alloc-min Sta "" $(MAIN_STA)
 
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_pdata.h \
@@ -34,9 +42,6 @@ DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_lognames.h \
                 $(MAIN_INC)/lith_upgradenames.h \
                 $(MAIN_INC)/lith_scorenums.h
-
-LIB_STA =3000000000
-MAIN_STA=3500000000
 
 ## Targets
 .PHONY: bin dec clean text
@@ -59,11 +64,11 @@ clean:
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) --alloc-min Sta "" $(LIB_STA) $^ -o $@
+	@$(LD) $(LFLAGS) $(LIB_LFLAGS) $^ -o $@
 
 $(MAIN_BINARY): $(MAIN_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) $(MAIN_LFLAGS) --alloc-min Sta "" $(MAIN_STA) $^ -o $@
+	@$(LD) $(LFLAGS) $(MAIN_LFLAGS) $^ -o $@
 
 ## .c -> .ir
 $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS)
@@ -72,10 +77,10 @@ $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS)
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@
-	@$(MAKELIB) $(TARGET) -c libc -o $@
+	@$(MAKELIB) $(TARGET) $(LIB_CFLAGS) -c libc -o $@
 
 $(IR)/libGDCC.ir:
 	@echo MAKELIB $@
-	@$(MAKELIB) $(TARGET) -c libGDCC -o $@
+	@$(MAKELIB) $(TARGET) $(LIB_CFLAGS) -c libGDCC -o $@
 
 ## EOF

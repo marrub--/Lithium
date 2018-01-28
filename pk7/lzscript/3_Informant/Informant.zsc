@@ -40,7 +40,7 @@ class Lith_InformantPlayer : Lith_Player
       if(health > 0)
          Lith_InformantThink();
 
-      super.Tick();
+      Super.Tick();
    }
 }
 

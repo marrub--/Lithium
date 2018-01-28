@@ -1,0 +1,43 @@
+class Lith_RandomSpawn : Actor
+{
+   private readonly int lith_rsn;
+   private string lith_tospawn;
+
+   property SpawnNum: lith_rsn;
+
+   static void Set(Actor mo, string tospawn)
+      {Lith_RandomSpawn(mo).lith_tospawn = tospawn;}
+
+   override void PostBeginPlay()
+   {
+      CallACS("Lith_RandomSpawn", lith_rsn);
+
+      let mo = Spawn(lith_tospawn, pos, NO_REPLACE);
+
+      if(mo)
+      {
+         mo.spawnAngle = spawnAngle;
+         mo.spawnPoint = spawnPoint;
+         mo.angle      = angle;
+         mo.vel        = vel;
+         mo.special    = special;
+         mo.special1   = special1;
+         mo.special2   = special2;
+         mo.health     = health;
+         mo.bDROPPED   = bDROPPED;
+
+         for(int i = 0; i < 5; i++)
+            mo.args[i] = args[i];
+
+         mo.changeTID(tid);
+
+         mo.spawnflags = spawnflags & ~MTF_SECRET;
+         mo.handleSpawnFlags();
+         mo.spawnflags = spawnflags;
+      }
+
+      Destroy();
+   }
+}
+
+// EOF

@@ -10,6 +10,12 @@ class Lith_Events : EventHandler
    }
    */
 
+   override void WorldLoaded(WorldEvent evt)
+   {
+      CallACS("__lithlib.bin_init");
+      CallACS("__lithmain.bin_init");
+   }
+
    override void PlayerEntered(PlayerEvent evt)
    {
       PlayerInfo p = players[evt.playerNumber];

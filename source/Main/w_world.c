@@ -64,22 +64,34 @@ worldinfo_t *Lith_GetWorldExtern(void)
 void Lith_FreezeTime(bool on)
 {
    static int lmvar frozen;
-   if(on) {
-      if(!frozen++) {
-         Lith_ForPlayer() {
+
+   if(on)
+   {
+      if(!frozen++)
+      {
+         Lith_ForPlayer()
+         {
             p->frozen++;
             p->setVel(0, 0, 0);
          }
-         Lith_ForPlayer() {
+
+         Lith_ForPlayer()
+         {
             Lith_GiveActorInventory(p->tid, "Lith_TimeHax", 1);
             Lith_GiveActorInventory(p->tid, "Lith_TimeHax2", 1);
             break;
          }
       }
-   } else {
-      if(!--frozen) {
-         Lith_ForPlayer() p->frozen--;
-         Lith_ForPlayer() {
+   }
+   else
+   {
+      if(!--frozen)
+      {
+         Lith_ForPlayer()
+         p->frozen--;
+
+         Lith_ForPlayer()
+         {
             Lith_TakeActorInventory(p->tid, "PowerTimeFreezer", 1);
             Lith_TakeActorInventory(p->tid, "Lith_TimeHax2", 1);
             break;
