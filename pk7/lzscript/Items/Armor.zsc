@@ -265,6 +265,32 @@ class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
    states {Spawn: ARM2 B -1; stop;}
 }
 
+class Lith_Armor_HazMat : Lith_Armor
+{
+   override int Lith_SaveAmt(name type)
+      {return Lith_HERMES.Instance().lith_dmg_world ? 10 : lith_cursave;}
+}
+
+class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_upper, 2, 3;
+   }
+
+   states {Spawn: ARM2 A -1; stop;}
+}
+
+class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
+{
+   default
+   {
+      Lith_Armor.SlotSave slot_lower, 1, 2;
+   }
+
+   states {Spawn: ARM2 B -1; stop;}
+}
+
 class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor
 {
    default

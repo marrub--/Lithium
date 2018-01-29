@@ -42,7 +42,6 @@ static void HUD_Ammo(player_t *p, struct hud *h)
       HudMessageParams(HUDMSG_FADEOUT, ammo2, CR_PURPLE, x+242.1, 218.0, TS, 0.35);
    }
 
-   Lith_HUD_WeaponSlots(h, CR_DARKGRAY, CR_GRAY, CR_WHITE, "g", 323, 208);
    DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", ammobg1, 320.2, 229.2, TS);
 
    if(typegfx)
@@ -117,6 +116,8 @@ void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
 
    Lith_HUD_Log(h, CR_LIGHTBLUE, 0, -15);
    Lith_HUD_KeyInd(h, 20, 20, false, 0.8);
+
+   Lith_HUD_WeaponSlots(h, CR_DARKGRAY, CR_GRAY, CR_WHITE, "g", 323, 208);
 
    score_t score;
 

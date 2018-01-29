@@ -78,6 +78,16 @@ class Lith_Weapon : Weapon
          return ResolveState(sn);
    }
 
+   action(weapon) void Lith_A_RecoilUp(double amt)
+   {
+      A_SetPitch(pitch - CallACS("LPData", pdata_recoil)/FIX*amt);
+   }
+
+   action(weapon) void Lith_A_RecoilDn(double amt)
+   {
+      A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*amt);
+   }
+
    states
    {
    Spawn:

@@ -6,6 +6,7 @@ class Lith_WandererPlayer : Lith_Player
       Player.SoundClass "wanderer";
       Player.Portrait "lgfx/Portraits/Wanderer.png";
       Tag "Wanderer";
+      Health 50;
    }
 }
 

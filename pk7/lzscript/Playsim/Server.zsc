@@ -8,6 +8,8 @@ class Lith_HERMES : EventHandler
 {
    play string lith_obituary;
    play bool lith_paused;
+   play name lith_dmg_type;
+   play bool lith_dmg_world;
    play Lith_HERMES_PlayerData lith_pdata[MAXPLAYERS];
 
    static clearscope Lith_HERMES Instance()

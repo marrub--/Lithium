@@ -140,15 +140,15 @@ class Lith_Shotgun : Lith_MWeapon
          }
       }
       TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Rail_Scoped");
-      SHTG A 0 A_SetPitch(pitch - CallACS("LPData", pdata_recoil)/FIX*1);
+      SHTG A 0 Lith_A_RecoilUp(1);
       SHTG B 2 bright A_Light(1);
-      SHTG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.25);
+      SHTG A 0 Lith_A_RecoilDn(0.25);
       SHTG C 2 bright A_Light(2);
-      SHTG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.25);
+      SHTG A 0 Lith_A_RecoilDn(0.25);
       SHTG D 2 A_Light(0);
-      SHTG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.25);
+      SHTG A 0 Lith_A_RecoilDn(0.25);
       SHTG A 4;
-      SHTG A 0 A_SetPitch(pitch + CallACS("LPData", pdata_recoil)/FIX*0.25);
+      SHTG A 0 Lith_A_RecoilDn(0.25);
       SHTG FG 3;
       SHTG H 2;
       SHTG I 1;
