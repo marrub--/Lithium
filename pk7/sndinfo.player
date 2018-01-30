@@ -70,6 +70,8 @@ player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // Phantasy Sta
 player/cbi/find         lsounds/Player/CBI/Find.flac             // 〃
 player/cbi/finddone     lsounds/Player/CBI/FindDone.flac         // 〃
 player/cbi/findfail     lsounds/Player/CBI/FindFail.flac         // 〃
+player/cbi/invcur       lsounds/Player/CBI/InvCur.flac           // 〃
+player/cbi/invmov       lsounds/Player/CBI/InvMov.flac           // 〃
 player/cbi/key1         lsounds/Player/CBI/Key1.flac             // ???
 player/cbi/key2         lsounds/Player/CBI/Key2.flac             // 〃
 player/cbi/key3         lsounds/Player/CBI/Key3.flac             // 〃
@@ -81,6 +83,8 @@ player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Ke
 player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
 player/cbi/mail         lsounds/Player/CBI/MailReceive.flac      // Fallout 4
 player/cbi/tabswitch    lsounds/Player/CBI/TabSwitch.flac        // 〃
+
+$alias player/cbi/invrem player/cbi/findfail
 
 $random player/cbi/keypress {
    player/cbi/key1

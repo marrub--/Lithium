@@ -459,6 +459,7 @@ static void Lith_PlayerRunScripts(player_t *p)
                          static void Lith_PlayerPreStats(player_t *p);
 
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateCBIGUI(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerUpdateInventory(player_t *p);
                          static void Lith_PlayerUpdateAttributes(player_t *p);
                          extern void Lith_PlayerUpdateUpgrades(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateWeapons(player_t *p);
@@ -484,6 +485,8 @@ static void Lith_PlayerRunScripts(player_t *p)
    if(!p->dead)
    {
       // Logic: Update our data.
+      Lith_PlayerUpdateInventory(p);
+
       switch(p->activegui)
       {
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;

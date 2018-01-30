@@ -16,7 +16,7 @@ void Lith_CBITab_Notes(gui_state_t *g, player_t *p)
    HudMessagePlain(g->hid--, 32.2, 40.0, TS);
    Lith_GUI_BasicCheckbox(g, &CBIState(g)->noteedit, 39, 40);
 
-   if(Lith_GUI_Button(g, "Clear", 16, 48, .preset = &guipre.btnclear))
+   if(Lith_GUI_Button(g, "Clear", 16, 48, Pre(btnclear)))
       Lith_GUI_TextBox_Reset(st);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->notescr, 15, 63, 280, 160, 30 * countof(p->notes), 240);
@@ -30,8 +30,7 @@ void Lith_CBITab_Notes(gui_state_t *g, player_t *p)
       HudMessagePlain(g->hid--, 32.2 + g->ox, 0.1 + i * 30 + g->oy, TS);
 
       if(Lith_GUI_Button_Id(g, i, p->notes[i] == "" ? "<empty>" : p->notes[i],
-         37, i * 30, .disabled = !CBIState(g)->noteedit,
-         .preset = &guipre.btnnote))
+         37, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
       {
          p->notes[i] = Lith_CPS_Print(CBIState(g)->notebox.txtbuf);
          p->saveData();

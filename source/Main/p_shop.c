@@ -111,7 +111,7 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
       __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopitems[i].name);
 
       int *shopsel = &CBIState(g)->shopsel;
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, .preset = &guipre.btnlistsel))
+      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
          *shopsel = i;
 
       y += guipre.btnlistsel.h;

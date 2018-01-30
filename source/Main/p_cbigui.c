@@ -99,7 +99,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 
    DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TS, 0.7);
 
-   if(Lith_GUI_Button(g, .x = 296, 13, .preset = &guipre.btnexit))
+   if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);
 
    static __str tabnames[] = {"", "Status", "Inventory", "Info", "Settings"};
@@ -133,6 +133,9 @@ void Lith_PlayerResetCBIGUI(player_t *p)
    p->cbi.st.upgrselold = -1;
 
    p->cbi.oldtheme = -1;
+
+   p->bip.curcategory = BIPC_MAIN;
+   p->bip.curpage = null;
 }
 
 // Scripts -------------------------------------------------------------------|
@@ -145,11 +148,8 @@ void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;
 
-   withplayer(LocalPlayer) {
-      p->bip.curcategory = BIPC_MAIN;
-      p->bip.curpage = null;
+   withplayer(LocalPlayer)
       p->useGUI(GUI_CBI);
-   }
 }
 
 // EOF

@@ -183,11 +183,11 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
 
    if(!sel) sel = p->loginfo.maps.next;
 
-   if(Lith_GUI_Button(g, .x = 25, 38, .preset = &guipre.btnprev))
+   if(Lith_GUI_Button(g, .x = 25, 38, Pre(btnprev)))
       if((sel = sel->prev) == &p->loginfo.maps)
          sel = sel->prev;
 
-   if(Lith_GUI_Button(g, .x = 25 + guipre.btnprev.w, 38, .preset = &guipre.btnnext))
+   if(Lith_GUI_Button(g, .x = 25 + guipre.btnprev.w, 38, Pre(btnnext)))
       if((sel = sel->next) == &p->loginfo.maps)
          sel = sel->next;
 

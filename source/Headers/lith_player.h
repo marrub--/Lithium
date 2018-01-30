@@ -182,6 +182,9 @@ typedef struct player
    __prop armorclass {get: ACS_GetArmorInfoString(ARMORINFO_CLASSNAME)}
    __prop setActivator {call: ACS_SetActivator(->tid)}
 
+   // inventory
+   __prop addItem {call: Lith_PlayerAddItem(this)}
+
    // score
    __prop giveScore {call: Lith_GiveScore(this)}
    __prop takeScore {call: Lith_TakeScore(this)}
@@ -254,7 +257,11 @@ typedef struct player
    bool             upgrinit;
 
    // Inventory
-   container_t inv[7];
+   container_t inv[8];
+   item_t     *invbar[6];
+   item_t     *useitem;
+   item_t     *selitem;
+   bool        movitem;
 
    // HUD
    loginfo_t  loginfo;

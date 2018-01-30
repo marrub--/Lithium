@@ -7,6 +7,8 @@
 
 #define LineHash ((id_t)__LINE__ * FileHash)
 
+#define Pre(name) .preset = &guipre.name
+
 // Fixed ID
 #define Lith_GUI_Button_FId(g, id, ...)      Lith_GUI_Button_Impl     (g, id, &(gui_button_args_t const){__VA_ARGS__})
 #define Lith_GUI_Checkbox_FId(g, id, ...)    Lith_GUI_Checkbox_Impl   (g, id, &(gui_checkb_args_t const){__VA_ARGS__})

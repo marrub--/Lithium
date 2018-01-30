@@ -303,11 +303,11 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          HudMessageAlpha(g->hid--, 105.1, 85.1 + n + i * 10, TICSECOND, 0.7);
       }
 
-      if(Lith_GUI_Button(g, "Search", 45, 85 + n, .preset = &guipre.btnbipmain))
+      if(Lith_GUI_Button(g, "Search", 45, 85 + n, Pre(btnbipmain)))
          bip->curcategory = BIPC_SEARCH;
       n += 10;
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 45, 85 + n, .preset = &guipre.btnbipmain)) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 45, 85 + n, Pre(btnbipmain))) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \
@@ -377,7 +377,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             bippage_t *page = bip->result[i];
             struct page_info pinf = GetPageInfo(page);
 
-            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 95 + (i * 10), .preset = &guipre.btnbipmain))
+            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 95 + (i * 10), Pre(btnbipmain)))
             {
                bip->lastcategory = bip->curcategory;
                bip->curcategory = page->category;
@@ -419,7 +419,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          struct page_info pinf = GetPageInfo(page);
          __str name = StrParam("%S%S", bip->curpage == page ? "\Ci" : "", pinf.shname);
 
-         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, .preset = &guipre.btnlist))
+         if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, Pre(btnlist)))
             SetCurPage(g, bip, page, pinf.body);
       }
 
@@ -482,7 +482,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
    if(bip->curcategory != BIPC_MAIN)
    {
-      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, .preset = &guipre.btnbipback))
+      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
          bip->curcategory = bip->lastcategory;
    }
    else

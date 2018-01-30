@@ -410,11 +410,11 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 //
 static void GUIUpgradesList(gui_state_t *g, player_t *p)
 {
-   if(Lith_GUI_Button(g, .x = 90, 213, .preset = &guipre.btnprev))
+   if(Lith_GUI_Button(g, .x = 90, 213, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
 
-   if(Lith_GUI_Button(g, .x = 90 + guipre.btnprev.w, 213, .preset = &guipre.btnnext))
+   if(Lith_GUI_Button(g, .x = 90 + guipre.btnprev.w, 213, Pre(btnnext)))
       if(CBIState(g)->upgrfilter++ >= UC_MAX)
          CBIState(g)->upgrfilter = 0;
 

@@ -182,7 +182,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
          __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, .preset = &guipre.btnlist)) \
+         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(cvar, !on); \
       } \
       y += 10; \
@@ -218,7 +218,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
          __with(bool on = ACS_GetCVar(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, .preset = &guipre.btnlist)) \
+         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
             ACS_SetCVar(cvar, !on); \
       } \
       y += 10; \
@@ -254,9 +254,9 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
          __with(int set = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button_Id(g, 0, .x = 280 - (guipre.btnnexts.w*2), y, set == minima, .preset = &guipre.btnprevs)) \
+         if(Lith_GUI_Button_Id(g, 0, .x = 280 - (guipre.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
             p->setCVarI(cvar, set - 1); \
-         if(Lith_GUI_Button_Id(g, 1, .x = 280 -  guipre.btnnexts.w   , y, set == maxima, .preset = &guipre.btnnexts)) \
+         if(Lith_GUI_Button_Id(g, 1, .x = 280 -  guipre.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(cvar, set + 1); \
          HudMessageF("CBIFONT", fmt, __VA_ARGS__); \
          HudMessagePlain(g->hid--, g->ox + 200.1, g->oy + y + 0.1, TICSECOND); \
@@ -269,7 +269,7 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
       { \
          Label(label); \
-         if(Lith_GUI_Checkbox(g, on, 240, y + 5, .preset = &guipre.cbxsmall)) \
+         if(Lith_GUI_Checkbox(g, on, 240, y + 5, Pre(cbxsmall))) \
             (__VA_ARGS__); \
       } \
       y += 10; \

@@ -43,13 +43,10 @@ static void SetupAttributes(player_t *p)
 static void SetupInventory(player_t *p)
 {
    static container_t const baseinv[] = {
-      {1, 3, "lgfx/UI/InvBack.png"},
-      {1, 3, "lgfx/UI/InvBack.png"},
-      {1, 3, "lgfx/UI/InvBack.png"},
-      {1, 3, "lgfx/UI/InvBack.png"},
-      {4, 8, "lgfx/UI/InvBack.png"},
-      {2, 4, "lgfx/UI/InvBack.png"},
-      {2, 4, "lgfx/UI/InvBack.png"},
+      {10, 14},
+      {1, 3}, {1, 3}, {1, 3}, {1, 3},
+      {4, 1},
+      {2, 4}, {2, 4},
    };
 
    memmove(p->inv, baseinv, sizeof(baseinv));
@@ -59,12 +56,33 @@ static void SetupInventory(player_t *p)
       p->inv[i].user = p;
    }
 
-   static itemdata_t const testitem = {1, 1, "lgfx/Items/Test.png"};
+   static itemdata_t const test1 = {"Test Item 1", 3, 2, "lgfx/Items/T1.png"};
+   static itemdata_t const test2 = {"Test Item 2", 2, 2, "lgfx/Items/T2.png"};
+   static itemdata_t const test3 = {"Test Item 3", 1, 3, "lgfx/Items/T3.png"};
+   static itemdata_t const test4 = {"Test Item 4", 1, 1, "lgfx/Items/T4.png"};
 
-   for(int i = 0; i < 5; i++) {
-      item_t *item = Lith_Item_New(&testitem);
-      if(!Lith_ItemPlace(&p->inv[4], item, i, i))
-         item->Destroy(item);
+   for(int i = 0; i < 5; i++)
+   {
+      item_t *item = Lith_Item_New(&test1);
+      p->addItem(item);
+   }
+
+   for(int i = 0; i < 5; i++)
+   {
+      item_t *item = Lith_Item_New(&test2);
+      p->addItem(item);
+   }
+
+   for(int i = 0; i < 5; i++)
+   {
+      item_t *item = Lith_Item_New(&test3);
+      p->addItem(item);
+   }
+
+   for(int i = 0; i < 5; i++)
+   {
+      item_t *item = Lith_Item_New(&test4);
+      p->addItem(item);
    }
 }
 
@@ -89,8 +107,11 @@ static void SetPClass(player_t *p)
               cl == "DoomRLTechnician"    || cl == "DoomRLRenegade" ||
               cl == "DoomRLDemolitionist" || cl == "DoomRLCommando")
          p->pclass = pcl_drla;
-      else
-         Log("Invalid player class detected, everything will likely explode!");
+      else for(;;)
+      {
+         Log("Invalid player class detected, everything is going to explode!");
+         ACS_Delay(1);
+      }
    }
 }
 
