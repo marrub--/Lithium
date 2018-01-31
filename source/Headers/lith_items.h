@@ -49,8 +49,10 @@ typedef struct bagitem
 
 [[__optional_args(1)]] void Lith_Item_Init(item_t *item, itemdata_t const *data);
 [[__optional_args(1)]] item_t *Lith_Item_New(itemdata_t const *data);
+void Lith_Item_Unlink(item_t *item);
 
 [[__call("ScriptS")]] void Lith_Item_Destroy(item_t *item);
+[[__call("ScriptS")]] bool Lith_Item_Use(item_t *item);
 [[__call("ScriptS")]] void Lith_Item_Place(item_t *item, container_t *cont);
 
 [[__optional_args(1)]] bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data);

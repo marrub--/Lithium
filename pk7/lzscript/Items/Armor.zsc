@@ -1,12 +1,3 @@
-enum Lith_ArmorSlot
-{
-   slot_lower,
-   slot_upper,
-   slot_ring,
-   slot_pauld,
-   slot_max
-}
-
 // AAGH: Armors Are Goddamn Heavy
 class Lith_AAGH : Inventory
 {
@@ -17,7 +8,7 @@ class Lith_AAGH : Inventory
       +INVENTORY.UNDROPPABLE
    }
 
-   Lith_Armor lith_slotted[slot_max];
+   Lith_Armor lith_slotted[aslot_max];
 
    static Lith_DamageType Lith_NameToDT(name type)
    {
@@ -44,69 +35,112 @@ class Lith_AAGH : Inventory
       }
    }
 
-   bool Lith_CheckSlot(Lith_Armor o)
-   {
-      let slot = o.Lith_Slot();
-      return slot >= 0 && slot < slot_max && !lith_slotted[slot];
-   }
-
    bool Lith_AddSlot(Lith_Armor o)
    {
-      if(!Lith_CheckSlot(o))
-         return false;
-
       let slot = o.Lith_Slot();
 
-      lith_slotted[slot] = o;
+      if(!lith_slotted[slot])
+      {
+         o.Lith_Unlink();
+         lith_slotted[slot] = o;
 
-      Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
+//       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
 
-      return true;
+         return true;
+      }
+      else
+         return false;
+   }
+
+   void Lith_OmitSlot(int slot)
+   {
+      lith_slotted[slot] = null;
    }
 
    bool Lith_RemoveSlot(int slot)
    {
-      if(slot < 0 || slot >= slot_max || !lith_slotted[slot])
-         return false;
+      if(lith_slotted[slot])
+      {
+         if(lith_slotted[slot].Lith_Attach())
+         {
+            lith_slotted[slot] = null;
 
-      RemoveInventory(lith_slotted[slot]);
-      lith_slotted[slot] = null;
+//          Console.printf("%p: removed: %i", self, slot);
+         }
+         else
+            return false;
+      }
 
       return true;
+   }
+
+   int Lith_SaveAmt(name type = 'None')
+   {
+      int save = 0;
+      for(int i = 0; i < aslot_max; i++)
+         if(lith_slotted[i])
+            save += lith_slotted[i].Lith_SaveAmt(type);
+      return save;
    }
 
    override void AbsorbDamage(int damage, name type, out int newdamage)
    {
       if(DamageTypeDefinition.IgnoreArmor(type)) return;
 
-      int save = 0;
-
-      for(int i = 0; i < slot_max; i++)
-         if(lith_slotted[i])
-            save += lith_slotted[i].Lith_SaveAmt(type);
+      int save = Lith_SaveAmt(type);
 
       if(damage - save < 1) newdamage = 1;
       else                  newdamage = damage - save;
 
-      Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage);
+//    Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage);
    }
 }
 
-class Lith_Armor : Armor
+class Lith_Armor : Lith_InventoryItem
 {
+   default
+   {
+      Lith_InventoryItem.InvType "Armor";
+
+      +INVENTORY.ISARMOR
+   }
+
    protected int lith_slotnum;
 
    private int lith_save0;
    private int lith_save1;
 
+   private Lith_AAGH lith_armorowner;
+
    protected int lith_cursave;
 
    property SlotSave: lith_slotnum, lith_save0, lith_save1;
 
+   override bool Lith_UseItem(Actor mo)
+   {
+      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+
+      if(ar && ar.Lith_RemoveSlot(Lith_Slot()) && ar.Lith_AddSlot(self))
+      {
+         lith_armorowner = ar;
+         return true;
+      }
+      else
+         return false;
+   }
+
+   override void Lith_Destroy()
+   {
+      if(lith_armorowner)
+         lith_armorowner.Lith_OmitSlot(Lith_Slot());
+
+      Super.Lith_Destroy();
+   }
+
    virtual int Lith_Slot()
       {return lith_slotnum;}
 
-   virtual int Lith_SaveAmt(name type)
+   virtual int Lith_SaveAmt(name type = 'None')
       {return lith_cursave;}
 
    override Inventory CreateCopy(Actor mo)
@@ -119,37 +153,6 @@ class Lith_Armor : Armor
       copy.lith_cursave = lith_cursave;
 
       return copy;
-   }
-
-   override bool CanPickup(Actor mo)
-   {
-      if(Super.CanPickup(mo))
-      {
-         let a = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-         return a && a.Lith_CheckSlot(self);
-      }
-      else
-         return false;
-   }
-
-   override bool TryPickup(in out Actor mo)
-   {
-      let a = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-
-      if(a)
-      {
-         let copy = Lith_Armor(CreateCopy(a));
-
-         if(copy && a.Lith_AddSlot(copy))
-         {
-            copy.attachToOwner(a);
-            return true;
-         }
-         else if(copy != self)
-            copy.destroy();
-      }
-
-      return false;
    }
 
    override void BeginPlay()
@@ -174,7 +177,7 @@ class Lith_Armor_Resistant : Lith_Armor
       return copy;
    }
 
-   override int Lith_SaveAmt(name type)
+   override int Lith_SaveAmt(name type = 'None')
    {
       let dt = Lith_AAGH.Lith_NameToDT(type);
       return lith_resist == dt ? lith_cursave * 2 : lith_cursave;
@@ -185,7 +188,8 @@ class Lith_Armor_Standard_Upper : Lith_Armor
 {
    default
    {
-      Lith_Armor.SlotSave slot_upper, 2, 3;
+      Tag "Standard Armor (Upper)";
+      Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
    states {Spawn: ARM1 A -1; stop;}
@@ -195,7 +199,8 @@ class Lith_Armor_Standard_Lower : Lith_Armor
 {
    default
    {
-      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Tag "Standard Armor (Lower)";
+      Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
    states {Spawn: ARM1 B -1; stop;}
@@ -205,7 +210,8 @@ class Lith_Armor_Improved_Upper : Lith_Armor
 {
    default
    {
-      Lith_Armor.SlotSave slot_upper, 3, 4;
+      Tag "Improved Armor (Upper)";
+      Lith_Armor.SlotSave aslot_upper, 3, 4;
    }
 
    states {Spawn: ARM2 A -1; stop;}
@@ -215,7 +221,8 @@ class Lith_Armor_Improved_Lower : Lith_Armor
 {
    default
    {
-      Lith_Armor.SlotSave slot_lower, 2, 3;
+      Tag "Improved Armor (Lower)";
+      Lith_Armor.SlotSave aslot_lower, 2, 3;
    }
 
    states {Spawn: ARM2 B -1; stop;}
@@ -225,7 +232,8 @@ class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Lith_Armor.SlotSave slot_upper, 3, 4;
+      Tag "Teflon-weave Armor (Upper)";
+      Lith_Armor.SlotSave aslot_upper, 3, 4;
       Lith_Armor_Resistant.Resist ldt_energy;
    }
 
@@ -236,7 +244,8 @@ class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Tag "Teflon-weave Armor (Lower)";
+      Lith_Armor.SlotSave aslot_lower, 1, 2;
       Lith_Armor_Resistant.Resist ldt_energy;
    }
 
@@ -247,7 +256,8 @@ class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Lith_Armor.SlotSave slot_upper, 3, 4;
+      Tag "Dendrite Armor (Upper)";
+      Lith_Armor.SlotSave aslot_upper, 3, 4;
       Lith_Armor_Resistant.Resist ldt_fire;
    }
 
@@ -258,7 +268,8 @@ class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Tag "Dendrite Armor (Lower)";
+      Lith_Armor.SlotSave aslot_lower, 1, 2;
       Lith_Armor_Resistant.Resist ldt_fire;
    }
 
@@ -267,7 +278,7 @@ class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
 
 class Lith_Armor_HazMat : Lith_Armor
 {
-   override int Lith_SaveAmt(name type)
+   override int Lith_SaveAmt(name type = 'None')
       {return Lith_HERMES.Instance().lith_dmg_world ? 10 : lith_cursave;}
 }
 
@@ -275,7 +286,8 @@ class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
 {
    default
    {
-      Lith_Armor.SlotSave slot_upper, 2, 3;
+      Tag "Haz-Mat Armor (Upper)";
+      Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
    states {Spawn: ARM2 A -1; stop;}
@@ -285,7 +297,8 @@ class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
 {
    default
    {
-      Lith_Armor.SlotSave slot_lower, 1, 2;
+      Tag "Haz-Mat Armor (Lower)";
+      Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
    states {Spawn: ARM2 B -1; stop;}

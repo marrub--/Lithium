@@ -47,6 +47,53 @@ static void BagItem_Destroy(item_t *_item)
    Lith_Item_Destroy(&item->item);
 }
 
+//
+// ItemCanPlace
+//
+static bool ItemCanPlace(container_t *cont, item_t *item, int x, int y)
+{
+   if(x < 0 || y < 0)
+      return false;
+
+   int x2 = x + item->w;
+   int y2 = y + item->h;
+
+   if(x2 > cont->w || y2 > cont->h)
+      return false;
+
+   int z = x + item->w;
+   int w = y + item->h;
+
+   foritem(*cont) if(it != item)
+   {
+      int const u = it->x;
+      int const v = it->y;
+      int const s = u + it->w;
+      int const t = v + it->h;
+
+      if(aabb(u, v, s, t, x, y) || aabb(u, v, s, t, z - 1, w - 1) ||
+         aabb(x, y, z, w, u, v) || aabb(x, y, z, w, s - 1, t - 1))
+         return false;
+   }
+
+   return true;
+}
+
+//
+// ItemCanPlaceAny
+//
+static bool ItemCanPlaceAny(container_t *cont, item_t *item)
+{
+   int xn = cont->w / item->w;
+   int yn = cont->h / item->h;
+
+   for(int y = 0; y < yn; y++) for(int x = 0; x < xn; x++)
+      if(ItemCanPlace(cont, item, x * item->w, y * item->h))
+         return true;
+
+   return false;
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -58,6 +105,8 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
 
    if(data)
       item->data = *data;
+   else
+      item->data = (itemdata_t){"Blank Item", 1, 1, "lgfx/Items/T4.png"};
 
    if(!item->Destroy)
       item->Destroy = Lith_Item_Destroy;
@@ -84,6 +133,10 @@ item_t *Lith_Item_New(itemdata_t const *data)
 [[__call("ScriptS")]]
 void Lith_Item_Destroy(item_t *item)
 {
+   LogDebug(log_dev, "Lith_Item_Destroy: destroying item %p", item);
+
+   HERMES("DeleteItem", item);
+
    withplayer(item->user)
    {
       if(p->useitem == item) p->useitem = null;
@@ -91,8 +144,17 @@ void Lith_Item_Destroy(item_t *item)
       p->movitem = false;
    }
 
-   item->link.unlink();
+   Lith_Item_Unlink(item);
    free(item);
+}
+
+//
+// Lith_Item_Use
+//
+[[__call("ScriptS")]]
+bool Lith_Item_Use(item_t *item)
+{
+   return HERMES("UseItem", item);
 }
 
 //
@@ -101,12 +163,22 @@ void Lith_Item_Destroy(item_t *item)
 [[__call("ScriptS")]]
 void Lith_Item_Place(item_t *item, container_t *cont)
 {
-   if(item->container)
-      item->link.unlink();
-
+   Lith_Item_Unlink(item);
    item->link.link(&cont->items);
    item->container = cont;
    item->user = cont->user;
+}
+
+//
+// Lith_Item_Unlink
+//
+void Lith_Item_Unlink(item_t *item)
+{
+   if(item->container)
+   {
+      item->link.unlink();
+      item->container = null;
+   }
 }
 
 //
@@ -136,29 +208,7 @@ bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
 //
 bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
 {
-   if(x < 0 || y < 0)
-      return false;
-
-   int x2 = x + item->w;
-   int y2 = y + item->h;
-
-   if(x2 > cont->w || y2 > cont->h)
-      return false;
-
-   int z = x + item->w;
-   int w = y + item->h;
-
-   foritem(*cont) if(it != item)
-   {
-      int const u = it->x;
-      int const v = it->y;
-      int const s = u + it->w;
-      int const t = v + it->h;
-
-      if(aabb(u, v, s, t, x, y) || aabb(u, v, s, t, z - 1, w - 1) ||
-         aabb(x, y, z, w, u, v) || aabb(x, y, z, w, s - 1, t - 1))
-         return false;
-   }
+   if(!ItemCanPlace(cont, item, x, y)) return false;
 
    item->Place(item, cont);
 
@@ -174,11 +224,8 @@ bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
 [[__call("ScriptS")]]
 bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 {
-   int xn = cont->w / item->w;
-   int yn = cont->h / item->h;
-
-   for(int y = 0; y < yn; y++) for(int x = 0; x < xn; x++)
-      if(Lith_ItemPlace(cont, item, x * item->w, y * item->h))
+   for(int y = 0; y < cont->h; y++) for(int x = 0; x < cont->w; x++)
+      if(Lith_ItemPlace(cont, item, x, y))
          return true;
 
    return false;
@@ -253,14 +300,21 @@ void Lith_PlayerUpdateInventory(player_t *p)
 {
    if(p->useitem)
    {
-      Log("using %S", p->useitem->name);
-      if(p->useitem->Use) p->useitem->Use(p->useitem);
+      item_t *item = p->useitem;
+
+      LogDebug(log_dev, "using %S (%p)", item->name, item);
+      if(item->Use && !item->Use(item))
+         ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);
+
       p->useitem = null;
    }
 
    for(int i = 0; i < countof(p->inv); i++)
       foritem(p->inv[i])
          if(it->Tick) it->Tick(it);
+
+   foritem(p->misc)
+      if(it->Tick) it->Tick(it);
 }
 
 //
@@ -298,6 +352,9 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
       HudMessageF("CBIFONT", "%S", p->selitem->name);
       HudMessagePlain(g->hid--, x[0]+.1, y[0]+.2 - 10, TS);
 
+      if(g->clickrgt && !g->old.clickrgt)
+         p->movitem = !p->movitem;
+
       if(Lith_GUI_Button(g, "Move", x[0], y[0]-9, Pre(btnclear)))
          p->movitem = !p->movitem;
 
@@ -311,6 +368,109 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
          ACS_LocalAmbientSound("player/cbi/invrem", 127);
       }
    }
+
+   for(int i = 0; i < aslot_max; i++)
+   {
+      static int const x[] = {
+         190,
+         190,
+         0, 0
+      };
+
+      static int const y[] = {
+         115,
+         84,
+         0, 0
+      };
+
+      __str name = HERMES_S("GetArmorSlot", i);
+
+      if(name != "")
+      {
+         HudMessageF("CBIFONT", "%S", name);
+         HudMessagePlain(g->hid--, x[i], y[i], TS);
+      }
+   }
+
+   HudMessageF("CBIFONT", "\Cj%S", HERMES_S("GetArmorDT"));
+   HudMessagePlain(g->hid--, 20.1, 40.1, TS);
+}
+
+//
+// Lith_ItemCreate
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void *Lith_ItemCreate()
+{
+   __str type = HERMES_S("GetInvType");
+
+   LogDebug(log_dev, "Lith_ItemCreate: creating %S", type);
+
+   if(type == "Armor")
+      return Lith_Item_New(&(itemdata_t){ACS_GetActorPropertyString(0, APROP_NameTag), 3, 2, "lgfx/Items/T1.png", .Use = Lith_Item_Use});
+   else
+      return null;
+}
+
+//
+// Lith_ItemAttach
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_ItemAttach(int pnum, void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
+
+   withplayer(&players[pnum])
+      return p->addItem(item);
+   return false;
+}
+
+//
+// Lith_ItemDetach
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_ItemDetach(void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
+
+   item->Destroy(item);
+}
+
+//
+// Lith_ItemUnlink
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_ItemUnlink(int pnum, void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
+
+   withplayer(&players[pnum])
+   {
+      item->Place(item, &p->misc);
+      item->x = item->y = 0;
+   }
+}
+
+//
+// Lith_ItemCanPlace
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_ItemCanPlace(int pnum, void *_item)
+{
+   item_t *item = _item;
+
+   withplayer(&players[pnum])
+      for(int i = 0; i < countof(p->inv); i++)
+         if(ItemCanPlaceAny(&p->inv[i], item))
+            return true;
+
+   return false;
 }
 
 // EOF

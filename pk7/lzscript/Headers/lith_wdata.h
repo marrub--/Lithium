@@ -40,4 +40,13 @@ enum Lith_RandomSpawnNum
    lrsn_bluearmor,
 };
 
+enum Lith_ArmorSlot
+{
+   aslot_lower,
+   aslot_upper,
+   aslot_ring,
+   aslot_pauld,
+   aslot_max
+};
+
 // EOF

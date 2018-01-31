@@ -12,8 +12,28 @@ class Lith_Events : EventHandler
 
    override void WorldLoaded(WorldEvent evt)
    {
-      CallACS("__lithlib.bin_init");
-      CallACS("__lithmain.bin_init");
+      if(evt.isSaveGame)
+         return;
+      else if(evt.isReopen)
+         CallACS("Lith_WorldReopen");
+      else
+      {
+         CallACS("__lithlib.bin_init");
+         CallACS("__lithmain.bin_init");
+      }
+   }
+
+   override void WorldThingDestroyed(WorldEvent evt)
+   {
+      if(evt.thing is "Lith_InventoryItem")
+         Lith_InventoryItem(evt.thing).Lith_Destroy();
+   }
+
+   override void WorldUnloaded(WorldEvent evt)
+   {
+      let it = ThinkerIterator.Create("Lith_InventoryItem");
+      for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
+         if(!mo.owner) mo.Lith_Destroy();
    }
 
    override void PlayerEntered(PlayerEvent evt)

@@ -728,8 +728,8 @@ begin:
 //
 // Lith_WorldReopen
 //
-[[__call("ScriptS"), __script("Reopen")]]
-static void Lith_WorldReopen(void)
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_WorldReopen(void)
 {
    reopen = true;
 }

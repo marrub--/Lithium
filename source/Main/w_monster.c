@@ -417,12 +417,11 @@ static void OnDeath(dmon_t *m)
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
 }
 
-// Extern Functions ----------------------------------------------------------|
-
 //
-// Lith_MonsterTick
+// MonsterTick
 //
-void Lith_MonsterTick(dmon_t *m, int tic)
+[[__call("SScriptS")]]
+static void MonsterTick(dmon_t *m, int tic)
 {
    GetInfo(m);
 
@@ -438,6 +437,8 @@ void Lith_MonsterTick(dmon_t *m, int tic)
    if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
       HERMES("Lith_IonizeFX");
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 //
 // Lith_MonsterMain
@@ -459,7 +460,7 @@ void Lith_MonsterMain(dmon_t *m)
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
    for(int tic = 0;; tic++) {
-      Lith_MonsterTick(m, tic);
+      MonsterTick(m, tic);
       ACS_Delay(2);
    }
 }

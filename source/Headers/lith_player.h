@@ -258,7 +258,7 @@ typedef struct player
 
    // Inventory
    container_t inv[8];
-   item_t     *invbar[6];
+   container_t misc;
    item_t     *useitem;
    item_t     *selitem;
    bool        movitem;

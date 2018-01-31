@@ -7,6 +7,116 @@ class Lith_IDOL : Inventory
       +INVENTORY.UNTOSSABLE
       +INVENTORY.UNDROPPABLE
    }
+
+   Lith_InventoryItem Lith_Find(uint ip)
+   {
+      for(Inventory it = inv; it; it = it.inv)
+         if(it.owner == self && it is "Lith_InventoryItem")
+      {
+         let item = Lith_InventoryItem(it);
+         if(item.lith_invitem == ip)
+            return item;
+      }
+
+      return null;
+   }
+
+   bool Lith_Attach(uint ip)
+      {return owner && CallACS("Lith_ItemAttach", owner.playerNumber(), ip);}
+
+   bool Lith_SpaceFree(uint ip)
+      {return owner && CallACS("Lith_ItemCanPlace", owner.playerNumber(), ip);}
+
+   void Lith_Unlink(uint ip)
+      {if(owner) CallACS("Lith_ItemUnlink", owner.playerNumber(), ip);}
+
+   void Lith_Remove(uint ip)
+   {
+      let it = Lith_Find(ip);
+      it.Lith_Detach();
+   }
+
+   bool Lith_Use(uint ip)
+   {
+      let it = Lith_Find(ip);
+      return it.Lith_UseItem(owner);
+   }
+}
+
+class Lith_InventoryItem : Inventory
+{
+   default
+   {
+      +INVENTORY.UNTOSSABLE
+      +INVENTORY.UNDROPPABLE
+   }
+
+   string lith_invtype;
+   uint   lith_invitem;
+
+   property InvType: lith_invtype;
+
+   bool Lith_Attach()
+      {return Lith_IDOL(owner).Lith_Attach(lith_invitem);}
+
+   void Lith_Unlink()
+      {Lith_IDOL(owner).Lith_Unlink(lith_invitem);}
+
+   void Lith_Detach()
+      {lith_invitem = 0; destroy();}
+
+   virtual bool Lith_UseItem(Actor mo) {return false;}
+
+   virtual void Lith_Destroy()
+   {
+      if(lith_invitem)
+      {
+         uint ip = lith_invitem;
+         lith_invitem = 0;
+         CallACS("Lith_ItemDetach", ip);
+      }
+   }
+
+   private void Lith_CreateItem()
+      {lith_invitem = CallACS("Lith_ItemCreate");}
+
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_InventoryItem(Super.CreateCopy(mo));
+
+      copy.lith_invtype = lith_invtype;
+
+      if(copy != self) copy.Lith_CreateItem();
+
+      return copy;
+   }
+
+   override bool HandlePickup(Inventory item)
+      {return false;}
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      Lith_CreateItem();
+   }
+
+   override void AttachToOwner(Actor mo)
+   {
+      let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+      id.Lith_Attach(lith_invitem);
+      Super.AttachToOwner(id);
+   }
+
+   override bool CanPickup(Actor mo)
+   {
+      if(Super.CanPickup(mo))
+      {
+         let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+         return lith_invitem && id && id.Lith_SpaceFree(lith_invitem);
+      }
+      else
+         return false;
+   }
 }
 
 // EOF

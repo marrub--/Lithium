@@ -56,6 +56,10 @@ static void SetupInventory(player_t *p)
       p->inv[i].user = p;
    }
 
+   p->misc.items.construct();
+   p->misc.user = p;
+
+#if 0
    static itemdata_t const test1 = {"Test Item 1", 3, 2, "lgfx/Items/T1.png"};
    static itemdata_t const test2 = {"Test Item 2", 2, 2, "lgfx/Items/T2.png"};
    static itemdata_t const test3 = {"Test Item 3", 1, 3, "lgfx/Items/T3.png"};
@@ -84,6 +88,7 @@ static void SetupInventory(player_t *p)
       item_t *item = Lith_Item_New(&test4);
       p->addItem(item);
    }
+#endif
 }
 
 //
