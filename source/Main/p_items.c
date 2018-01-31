@@ -454,6 +454,9 @@ void Lith_ItemUnlink(int pnum, void *_item)
    {
       item->Place(item, &p->misc);
       item->x = item->y = 0;
+
+      p->selitem = null;
+      p->movitem = false;
    }
 }
 
