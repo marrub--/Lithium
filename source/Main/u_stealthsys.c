@@ -20,7 +20,7 @@ void Upgr_StealthSys_Deactivate(player_t *p, upgrade_t *upgr)
 [[__call("ScriptS")]]
 void Upgr_StealthSys_Update(player_t *p, upgrade_t *upgr)
 {
-   fixed vel = absk(mag2k(p->velx, p->vely)) / 10.0;
+   fixed vel = absk(p->getVel()) / 10.0;
    p->alpha = UData.mulvel = lerpk(UData.mulvel, vel, 0.02);
 
    int time = UData.mulvel * 20;

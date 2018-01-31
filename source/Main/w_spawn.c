@@ -15,13 +15,25 @@ struct witem
 static struct witem const garmor[] = {
    {1000, "Lith_Armor_Standard_Upper"},
    {2000, "Lith_Armor_Standard_Lower"},
+   {2500, "Lith_Armor_Teflon_Upper"},
+   {3000, "Lith_Armor_Teflon_Lower"},
+   {3200, "Lith_Armor_Aerodynamic_Upper"},
+   {3400, "Lith_Armor_Aerodynamic_Lower"},
 };
 
 static struct witem const barmor[] = {
-   {2000, "Lith_Armor_Improved_Upper"},
-   {4000, "Lith_Armor_Improved_Lower"},
-   {5000, "Lith_Armor_Teflon_Upper"},
-   {6000, "Lith_Armor_Teflon_Lower"},
+   {3000,  "Lith_Armor_Improved_Upper"},
+   {6000,  "Lith_Armor_Improved_Lower"},
+   {7000,  "Lith_Armor_Teflon_Upper"},
+   {8000,  "Lith_Armor_Teflon_Lower"},
+   {9000,  "Lith_Armor_Dendrite_Upper"},
+   {10000, "Lith_Armor_Dendrite_Lower"},
+   {11000, "Lith_Armor_HazMat_Upper"},
+   {12000, "Lith_Armor_HazMat_Lower"},
+   {12200, "Lith_Armor_PinkSilver_Upper"},
+   {12400, "Lith_Armor_PinkSilver_Lower"},
+   {12600, "Lith_Armor_Midori_Upper"},
+   {12800, "Lith_Armor_Midori_Lower"},
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -49,8 +61,10 @@ void Lith_RandomSpawn(int rsn)
 
    switch(rsn)
    {
-   case lrsn_greenarmor: item = RandomWeighted(garmor, countof(garmor)); break;
-   case lrsn_bluearmor:  item = RandomWeighted(barmor, countof(barmor)); break;
+   case lrsn_garmor: item = RandomWeighted(garmor, countof(garmor)); break;
+   case lrsn_barmor: item = RandomWeighted(barmor, countof(barmor)); break;
+// case lrsn_hbonus: item = RandomWeighted(hbonus, countof(hbonus)); break;
+// case lrsn_abonus: item = RandomWeighted(abonus, countof(abonus)); break;
    }
 
    ACS_ScriptCall("Lith_RandomSpawn", "Set", item);

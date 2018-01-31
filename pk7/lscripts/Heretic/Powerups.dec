@@ -42,42 +42,6 @@ actor Lith_Heretic_CrystalVial : Lith_CustomInventory replaces CrystalVial
    }
 }
 
-actor Lith_Heretic_EnchantedShield : Lith_CustomInventory replaces EnchantedShield
-{
-   +FLOATBOB
-   
-   states
-   {
-   Spawn:
-      SHD2 AB 5 bright
-      SHD2 CDEC 5
-      SHD2 B 5 bright
-      loop
-   Pickup:
-      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 200), "Nope")
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_bluearmor)
-      TNT1 A 0 A_GiveInventory("EnchantedShield")
-      stop
-   }
-}
-
-actor Lith_Heretic_SilverShield : Lith_CustomInventory replaces SilverShield
-{
-   +FLOATBOB
-   
-   states
-   {
-   Spawn:
-      SHLD A -1
-      stop
-   Pickup:
-      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckArmor", 100), "Nope")
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_greenarmor)
-      TNT1 A 0 A_GiveInventory("SilverShield")
-      stop
-   }
-}
-
 actor Lith_Heretic_SuperMap : Lith_CustomInventory replaces SuperMap
 {
    Inventory.PickupSound "misc/p_pkup"

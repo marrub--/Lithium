@@ -53,19 +53,6 @@ enum
    pro_max,
 };
 
-enum
-{
-   armor_none,
-   armor_bonus,
-   armor_green,
-   armor_blue,
-   armor_unknown,
-   armor_max
-};
-
-//
-// guiname_t
-//
 typedef enum guiname_s
 {
    GUI_NONE,
@@ -176,11 +163,8 @@ typedef struct player
    __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
    __prop health {get: ACS_GetActorProperty(->tid, APROP_Health),
                   set: ACS_SetActorProperty(->tid, APROP_Health)}
-   __prop armor {get: Lith_CheckActorInventory(->tid, "BasicArmor"),
-                 set: Lith_SetActorInventory  (->tid, "BasicArmor")}
-   __prop maxarmor   {get: ACS_GetArmorInfo(ARMORINFO_SAVEAMOUNT)}
-   __prop armorclass {get: ACS_GetArmorInfoString(ARMORINFO_CLASSNAME)}
    __prop setActivator {call: ACS_SetActivator(->tid)}
+   __prop getVel {call: mag2k(->velx, ->vely)}
 
    // inventory
    __prop addItem {call: Lith_PlayerAddItem(this)}
@@ -244,7 +228,6 @@ typedef struct player
    [[__anonymous]] player_delta_t cur;
    player_delta_t old;
    int oldhealth;
-   int oldarmor;
 
    // BIP
    bip_t bip, *bipptr;
@@ -327,9 +310,6 @@ typedef struct player
    long healthsum;
    long healthused;
 
-   long armorsum;
-   long armorused;
-
    score_t scoresum;
    score_t scoreused;
 
@@ -342,9 +322,6 @@ typedef struct player
    list_t hudstrlist;
 
    __str weaponclass;
-
-   // Armor
-   int armortype;
 
    // Keys
    struct keycards_s

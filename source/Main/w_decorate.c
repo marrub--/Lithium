@@ -134,18 +134,6 @@ bool Lith_CheckHealth(int n)
 }
 
 //
-// Lith_CheckArmor
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_CheckArmor(int n)
-{
-   withplayer(LocalPlayer)
-      return p->maxarmor == 0 || p->armor == 0 ||
-             p->maxarmor  < n || p->armor  < n;
-   return 0;
-}
-
-//
 // Lith_Discount
 //
 [[__call("ScriptS"), __extern("ACS")]]

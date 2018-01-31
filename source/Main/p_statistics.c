@@ -25,8 +25,6 @@ void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    Stat("Health Sum",          "%li",  p->healthsum);
    Stat("Score Used",          "%lli", p->scoreused);
    Stat("Score Sum",           "%lli", p->scoresum);
-   Stat("Armor Used",          "%li",  p->armorused);
-   Stat("Armor Sum",           "%li",  p->armorsum);
    Stat("Secrets Found",       "%i",   world.secretsfound);
    Stat("Units Travelled",     "%imu", p->unitstravelled);
    Stat("Upgrades Owned",      "%i",   p->upgradesowned);

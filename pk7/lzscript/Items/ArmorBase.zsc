@@ -1,0 +1,209 @@
+// AAGH: Armors Are Goddamn Heavy
+class Lith_AAGH : Inventory
+{
+   default
+   {
+      +INVENTORY.KEEPDEPLETED
+      +INVENTORY.UNTOSSABLE
+      +INVENTORY.UNDROPPABLE
+   }
+
+   Lith_Armor lith_slotted[aslot_max];
+
+   static Lith_DamageType Lith_NameToDT(name type)
+   {
+      switch(type)
+      {
+      default:
+      case 'Bullet':
+      case 'Lith_Bullets':   return ldt_bullets;
+      case 'Plasma':
+      case 'Railgun':
+      case 'Electric':
+      case 'Lith_Energy':    return ldt_energy;
+      case 'Fire':
+      case 'Lith_Fire':      return ldt_fire;
+      case 'FireMagic':
+      case 'Lith_FireMagic': return ldt_firemagic;
+      case 'Magic':
+      case 'Lith_Magic':     return ldt_magic;
+      case 'Shrapnel':
+      case 'Explosion':
+      case 'Lith_Shrapnel':  return ldt_shrapnel;
+      case 'Ice':
+      case 'Lith_Ice':       return ldt_ice;
+      }
+   }
+
+   bool Lith_AddSlot(Lith_Armor o)
+   {
+      let slot = o.Lith_Slot();
+
+      if(!lith_slotted[slot])
+      {
+         o.Lith_Unlink();
+         lith_slotted[slot] = o;
+
+//       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
+
+         return true;
+      }
+      else
+         return false;
+   }
+
+   void Lith_OmitSlot(int slot)
+   {
+      lith_slotted[slot] = null;
+   }
+
+   bool Lith_RemoveSlot(int slot)
+   {
+      if(lith_slotted[slot])
+      {
+         if(lith_slotted[slot].Lith_Attach())
+         {
+            lith_slotted[slot] = null;
+
+//          Console.printf("%p: removed: %i", self, slot);
+         }
+         else
+            return false;
+      }
+
+      return true;
+   }
+
+   int Lith_SaveAmt(name type = 'None')
+   {
+      int save = 0;
+      for(int i = 0; i < aslot_max; i++)
+         if(lith_slotted[i])
+            save += lith_slotted[i].Lith_SaveAmt(type);
+      return save;
+   }
+
+   override void AbsorbDamage(int damage, name type, out int newdamage)
+   {
+      if(DamageTypeDefinition.IgnoreArmor(type)) return;
+
+      int save = Lith_SaveAmt(type);
+
+      if(damage - save < 1) newdamage = 1;
+      else                  newdamage = damage - save;
+
+//    Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage);
+   }
+}
+
+class Lith_Armor : Lith_InventoryItem
+{
+   default
+   {
+      Lith_InventoryItem.InvType "Armor";
+
+      +INVENTORY.ISARMOR
+   }
+
+   protected int lith_slotnum;
+
+   private int lith_save0;
+   private int lith_save1;
+
+   protected Lith_AAGH lith_armorowner;
+
+   protected int lith_cursave;
+
+   property SlotSave: lith_slotnum, lith_save0, lith_save1;
+
+   override void Lith_OnAttach()
+      {lith_armorowner = null;}
+
+   override bool Lith_UseItem(Actor mo)
+   {
+      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+
+      if(ar && ar.Lith_RemoveSlot(Lith_Slot()) && ar.Lith_AddSlot(self))
+      {
+         lith_armorowner = ar;
+         return true;
+      }
+      else
+         return false;
+   }
+
+   override void Lith_Destroy()
+   {
+      if(lith_armorowner)
+      {
+         lith_armorowner.Lith_OmitSlot(Lith_Slot());
+         lith_armorowner = null;
+      }
+
+      Super.Lith_Destroy();
+   }
+
+   virtual int Lith_Slot()
+      {return lith_slotnum;}
+
+   virtual int Lith_SaveAmt(name type = 'None')
+      {return lith_cursave;}
+
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_Armor(Super.CreateCopy(mo));
+
+      copy.lith_slotnum = lith_slotnum;
+      copy.lith_save0   = lith_save0;
+      copy.lith_save1   = lith_save1;
+      copy.lith_cursave = lith_cursave;
+
+      return copy;
+   }
+
+   override void BeginPlay()
+   {
+      Super.BeginPlay();
+      lith_cursave = lith_save0;
+   }
+}
+
+class Lith_Armor_Resistant : Lith_Armor
+{
+   protected int lith_resist;
+
+   property Resist: lith_resist;
+
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_Armor_Resistant(Super.CreateCopy(mo));
+
+      copy.lith_resist = lith_resist;
+
+      return copy;
+   }
+
+   override int Lith_SaveAmt(name type = 'None')
+   {
+      let dt = Lith_AAGH.Lith_NameToDT(type);
+      return lith_resist == dt ? lith_cursave * 2 : lith_cursave;
+   }
+}
+
+class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_garmor;
+   }
+}
+
+class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_barmor;
+   }
+}
+
+// EOF

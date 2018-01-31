@@ -36,8 +36,9 @@ enum Lith_CBIUpgradeC
 
 enum Lith_RandomSpawnNum
 {
-   lrsn_greenarmor,
-   lrsn_bluearmor,
+   lrsn_garmor,
+   lrsn_barmor,
+   lrsn_hbonus,
 };
 
 enum Lith_ArmorSlot

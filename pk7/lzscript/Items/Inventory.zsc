@@ -57,7 +57,15 @@ class Lith_InventoryItem : Inventory
    property InvType: lith_invtype;
 
    bool Lith_Attach()
-      {return Lith_IDOL(owner).Lith_Attach(lith_invitem);}
+   {
+      if(Lith_IDOL(owner).Lith_Attach(lith_invitem))
+      {
+         Lith_OnAttach();
+         return true;
+      }
+      else
+         return false;
+   }
 
    void Lith_Unlink()
       {Lith_IDOL(owner).Lith_Unlink(lith_invitem);}
@@ -66,6 +74,7 @@ class Lith_InventoryItem : Inventory
       {lith_invitem = 0; destroy();}
 
    virtual bool Lith_UseItem(Actor mo) {return false;}
+   virtual void Lith_OnAttach() {}
 
    virtual void Lith_Destroy()
    {

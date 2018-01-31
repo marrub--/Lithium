@@ -65,7 +65,6 @@ reinit:
       // These can be changed any time, so save them here.
       player_delta_t olddelta = p->cur;
       int oldhealth = p->health;
-      int oldarmor  = p->armor;
 
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
@@ -81,7 +80,6 @@ reinit:
       // Update previous-tic values
       p->old       = olddelta;
       p->oldhealth = oldhealth;
-      p->oldarmor  = oldarmor;
 
       // Reset view for next tic
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
@@ -572,11 +570,6 @@ static void Lith_PlayerPreStats(player_t *p)
       p->healthused += p->oldhealth - p->health;
    else if(p->health > p->oldhealth && ACS_Timer() != 1)
       p->healthsum += p->health - p->oldhealth;
-
-   if(p->armor < p->oldarmor)
-      p->armorused += p->oldarmor - p->armor;
-   else if(p->armor > p->oldarmor && ACS_Timer() != 1)
-      p->armorsum += p->armor - p->oldarmor;
 
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);

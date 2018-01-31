@@ -53,19 +53,15 @@ extend class Lith_HERMES
    static string GetArmorSlot(Actor mo, int slot)
    {
       let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-      if(ar)
-         return ar.lith_slotted[slot] ? ar.lith_slotted[slot].getTag() : "";
-      else
-         return "";
+      if(ar) return ar.lith_slotted[slot] ? ar.lith_slotted[slot].getTag() : "";
+      else   return "";
    }
 
    static string GetArmorDT(Actor mo)
    {
       let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-      if(ar)
-         return ar.Lith_SaveAmt() .. " DT";
-      else
-         return "";
+      if(ar) return ar.Lith_SaveAmt() .. " DT";
+      else   return "";
    }
 }
 

@@ -23,7 +23,10 @@ static void HUD_Ammo(player_t *p, struct hud *h)
 
    if(wep->ammotype & AT_NMag) {
       typegfx = "lgfx/HUD_C/MAG.png";
-      HudMessageF("LHUDFONT", "%i/%i", wep->magmax - wep->magcur, wep->magmax);
+      if(wep->ammotype & AT_Ammo && !wep->ammocur)
+         HudMessageF("LHUDFONT", "OUT");
+      else
+         HudMessageF("LHUDFONT", "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       HudMessageParams(0, ammo1, CR_DARKRED, 242.1, 229.0, TS);
    }
 
@@ -73,31 +76,6 @@ static void HUD_Health(player_t *p, struct hud *h)
    DrawSpritePlain("lgfx/HUD_C/VIT.png", hptxt, 2.1, 237.2, TS);
 }
 
-//
-// HUD_Armor
-//
-static void HUD_Armor(player_t *p, struct hud *h)
-{
-   HID(arm,    1);
-   HID(armtxt, 1);
-   HID(armbg,  1);
-
-   static __str const armorgfx[armor_max] = {
-      [armor_unknown] = "lgfx/HUD_C/ARM.png",
-      [armor_none]    = "lgfx/HUD_C/ARM.png",
-      [armor_bonus]   = "lgfx/HUD_C/ARM_Y.png",
-      [armor_green]   = "lgfx/HUD_C/ARM_G.png",
-      [armor_blue]    = "lgfx/HUD_C/ARM_B.png",
-   };
-
-   DrawSpritePlain("lgfx/HUD_C/SplitBack.png", armbg, 0.1, 220.2, TS);
-
-   HudMessageF("LHUDFONT", "%i", p->armor);
-   HudMessageParams(0, arm, CR_DARKRED, 21.1, 210.0, TS);
-
-   DrawSpritePlain(armorgfx[p->armortype], armtxt, 3.1, 216.2, TS);
-}
-
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -145,7 +123,6 @@ void Upgr_HeadsUpDis2_Render(player_t *p, upgrade_t *upgr)
    // Status
    HUD_Ammo(p, h);
    HUD_Health(p, h);
-   HUD_Armor(p, h);
 
    Lith_HUD_End(h);
 }

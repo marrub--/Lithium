@@ -24,12 +24,9 @@ void Lith_LogName(int name)
 #define HUDS(name) case msg_##name: p->logH("%LS", "LITH_TXT_LOG_" #name); break;
 #define AMMO(name) case msg_##name: if(p->getCVarI("lith_player_ammolog")) p->logH("%LS", "LITH_TXT_LOG_" #name); break;
    BOTH(allmap)
-   HUDS(armorbonus)
    BOTH(backpack)
    BOTH(berserk)
-   BOTH(bluearmor)
    BOTH(blursphere)
-   BOTH(greenarmor)
    HUDS(healthbonus)
    BOTH(infrared)
    BOTH(invuln)

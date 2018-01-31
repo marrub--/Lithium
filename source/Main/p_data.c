@@ -9,8 +9,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-static void Lith_GetArmorType(player_t *p);
-
 //
 // SetupAttributes
 //
@@ -246,8 +244,6 @@ void Lith_PlayerUpdateData(player_t *p)
    p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
 
-   Lith_GetArmorType(p);
-
    p->scopetoken = ACS_CheckInventory("Lith_WeaponScopedToken");
 
    p->keys.rc = ACS_CheckInventory("RedCard")    ||
@@ -266,6 +262,7 @@ void Lith_PlayerUpdateData(player_t *p)
    DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
       p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);
    DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
+   DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
 }
 
 //
@@ -492,26 +489,6 @@ void Lith_PlayerUpdateStats(player_t *p)
 
    if(p->jumpboost  != p->old.jumpboost)
       ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * boost);
-}
-
-// Static Functions ----------------------------------------------------------|
-
-//
-// Lith_GetArmorType
-//
-// Update information on what kind of armour we have.
-//
-static void Lith_GetArmorType(player_t *p)
-{
-   __str cl = p->armorclass;
-        if(cl == "ArmorBonus")      p->armortype = armor_bonus;
-   else if(cl == "GreenArmor" ||
-           cl == "SilverShield")    p->armortype = armor_green;
-   else if(cl == "BlueArmor" ||
-           cl == "BlueArmorForMegasphere" ||
-           cl == "EnchantedShield") p->armortype = armor_blue;
-   else if(cl == "None")            p->armortype = armor_none;
-   else                             p->armortype = armor_unknown;
 }
 
 // EOF

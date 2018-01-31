@@ -45,7 +45,10 @@ static void HUD_Ammo(player_t *p, struct hud *h)
 
    if(wep->ammotype & AT_NMag) {
       typegfx = "lgfx/HUD/MAG.png";
-      HudMessageF("LHUDFONT", "\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+      if(wep->ammotype & AT_Ammo && !wep->ammocur)
+         HudMessageF("LHUDFONT", "\C[Lith_Green]OUT");
+      else
+         HudMessageF("LHUDFONT", "\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
       HudMessagePlain(ammo1, 224.1, 229.0-y, TS);
    }
 
@@ -133,55 +136,6 @@ static void HUD_Health(player_t *p, struct hud *h)
 }
 
 //
-// HUD_Armor
-//
-static void HUD_Armor(player_t *p, struct hud *h)
-{
-   HID(armhit, 1);
-   HID(arm,    1);
-   HID(armtxt, 1);
-   HID(armbg,  1);
-   HID(armfxE, 32);
-
-   static __str const armorgfx[armor_max] = {
-      [armor_unknown] = "lgfx/HUD/H_D27.png",
-      [armor_none]    = "lgfx/HUD/H_D28.png",
-      [armor_bonus]   = "lgfx/HUD/H_D23.png",
-      [armor_green]   = "lgfx/HUD/H_D24.png",
-      [armor_blue]    = "lgfx/HUD/H_D25.png"
-   };
-
-   DrawSpritePlain("lgfx/HUD/SplitBack.png", armbg, 0.1, 223.2, TS);
-
-   HudMessageF("LHUDFONT", "\C[Lith_Green]%i", p->armor);
-   HudMessagePlain(arm, 34.1, 215.0, TS);
-
-   DrawSpritePlain("lgfx/HUD/ARM.png", armtxt, 2.1, 221.2, TS);
-
-   int cr = 0;
-   fixed ft;
-
-   if(p->armor < p->oldarmor)
-   {
-      cr = CR_YELLOW;
-      ft = minmax((p->oldarmor - p->armor) / 30.0, 0.1, 3.0);
-   }
-   else if(p->armor > p->oldarmor)
-   {
-      cr = CR_PURPLE;
-      ft = 0.2;
-   }
-
-   if(cr)
-   {
-      HudMessageF("LHUDFONT", "%i", p->armor);
-      HudMessageParams(HUDMSG_FADEOUT, armhit, cr, 34.1, 215.0, 0.1, ft);
-   }
-
-   HUD_IndicatorLine(p, armorgfx[p->armortype], armfxE + (p->ticks % 32), -7);
-}
-
-//
 // HUD_Mode
 //
 static void HUD_Mode(player_t *p, struct hud *h)
@@ -248,7 +202,6 @@ void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
    // Status
    HUD_Ammo(p, h);
    HUD_Health(p, h);
-   HUD_Armor(p, h);
 
    Lith_HUD_End(h);
 }

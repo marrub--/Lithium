@@ -45,7 +45,7 @@ void Lith_PlayerFootstep(player_t *p)
    fixed vol = p->getCVarK("lith_player_footstepvol");
    if(!vol || ACS_Timer() % 10 != 0 || p->z - p->floorz > 16) return;
 
-   fixed dstmul = absk(mag2k(p->velx, p->vely)) / 24.0;
+   fixed dstmul = absk(p->getVel()) / 24.0;
    if(!(vol *= min(dstmul, 1))) return;
 
    ACS_PlaySound(p->cameratid, p->stepnoise, CHAN_BODY, vol);
@@ -85,7 +85,6 @@ void Lith_PlayerDamageBob(player_t *p)
       distance  = mag2f(p->bobyaw, p->bobpitch);
       distance += (p->oldhealth - p->health) / (float)p->maxhealth;
       distance *= 0.2f;
-      distance *= (200 - p->armor) / 200.0f;
 
       float ys, yc;
       sincosf(angle, &ys, &yc);

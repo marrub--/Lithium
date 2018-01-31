@@ -49,9 +49,9 @@ static void HUD_Ammo(player_t *p, struct hud *h)
 }
 
 //
-// HUD_HealthArmor
+// HUD_Health
 //
-static void HUD_HealthArmor(player_t *p, struct hud *h, upgrade_t *upgr)
+static void HUD_Health(player_t *p, struct hud *h, upgrade_t *upgr)
 {
    HID(hp, 1);
 
@@ -59,26 +59,12 @@ static void HUD_HealthArmor(player_t *p, struct hud *h, upgrade_t *upgr)
    HID(armbg,  1);
    HID(armfxE, 42);
 
-   static __str const armorgfx[armor_max] = {
-      [armor_unknown] = "lgfx/HUD/H_D27.png",
-      [armor_none]    = "lgfx/HUD/H_D28.png",
-      [armor_bonus]   = "lgfx/HUD/H_D23.png",
-      [armor_green]   = "lgfx/HUD/H_D24.png",
-      [armor_blue]    = "lgfx/HUD/H_D25.png"
-   };
-
    DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", armbg, 0.1, 230.2, TS);
 
    int health = (UData.healthi = lerpk(UData.healthi, p->health, 0.2)) + 0.5;
    if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
    else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
    HudMessageParams(0, hp, CR_PURPLE, 21.1, 202.0, TS);
-
-   int armor = (UData.armori = lerpk(UData.armori, p->armor, 0.2)) + 0.5;
-   HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", armor);
-   HudMessageParams(0, arm, CR_PURPLE, 21.1, 220.0, TS);
-
-   DrawSpriteFade(armorgfx[p->armortype], armfxE + (p->ticks % 42), 20.1 + p->ticks % 42, 211.1, 0.2, 0.7);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -133,7 +119,7 @@ void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
 
    // Status
    HUD_Ammo(p, h);
-   HUD_HealthArmor(p, h, upgr);
+   HUD_Health(p, h, upgr);
 
    Lith_HUD_End(h);
 }
