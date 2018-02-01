@@ -14,8 +14,8 @@ class Lith_RifleLaserTrail : Actor
    Spawn:
       BLLT E 5 bright;
    SpawnLoop:
-      BLLT E 1 bright A_SetScale(scalex - 0.035);
-      BLLT E 0 bright A_JumpIf(scalex < 0.05, "Null");
+      BLLT E 1 bright A_SetScale(scale.x - 0.035);
+      BLLT E 0 bright A_JumpIf(scale.x < 0.05, "Null");
       loop;
    }
 }
@@ -133,8 +133,7 @@ class Lith_CombatRifle : Lith_MWeapon
             A_PlaySound("weapons/rcw/fire", CHAN_WEAPON);
 
             for(int i = 0; i < 2; i++) {
-               A_RailAttack(8, 0, true, "None", "Red", RGF_SILENT|RGF_FULLBRIGHT,
-                  0, "BulletPuff", 5.77, 3, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
+               A_RailAttack(8, 0, true, "", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "BulletPuff", 5.77, 3, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
             }
          }
       }
@@ -164,7 +163,7 @@ class Lith_CombatRifle : Lith_MWeapon
          else
          {
             A_PlaySound("weapons/rcw/firesnipe", CHAN_WEAPON);
-            A_RailAttack(8, 0, true, "None", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "BulletPuff", 2, 2, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
+            A_RailAttack(8, 0, true, "", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "BulletPuff", 2, 2, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
          }
       }
       CRFG B 1 bright A_WeaponReady(LITH_BOBONLY);
@@ -194,7 +193,7 @@ class Lith_CombatRifle : Lith_MWeapon
       }
       
       CRFG A 0 A_AlertMonsters;
-      CRFG G 2 bright A_FireCustomMissile("Lith_RifleGrenade");
+      CRFG G 2 bright A_FireProjectile("Lith_RifleGrenade");
       CRFG H 2 bright;
       CRFG I 2 bright;
       CRFG A 5;

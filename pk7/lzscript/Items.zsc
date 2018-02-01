@@ -7,5 +7,6 @@
 #include "lzscript/Items/Mana.zsc"
 #include "lzscript/Items/AmmoPickup.zsc"
 #include "lzscript/Items/Keys.zsc"
+#include "lzscript/Items/Powerups.zsc"
 
 // EOF

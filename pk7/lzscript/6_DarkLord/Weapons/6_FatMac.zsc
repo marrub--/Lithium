@@ -75,7 +75,7 @@ class Lith_FatMac : Lith_DWeapon
       TNT1 A 0 A_GunFlash("DummyFlash");
       TNT1 A 0 A_SetBlend("White", 0.3, 10);
       TNT1 A 0 A_FireBullets(0, 0, -1, 100, "Lith_700Bullet", FBF_NORANDOM);
-      TNT1 A 0 A_RailAttack(400, 0, false, "None", "White", RGF_SILENT, 4, sparsity: 20, spawnclass: "Lith_JDJTrail");
+      TNT1 A 0 A_RailAttack(400, 0, false, "", "White", RGF_SILENT, 4, sparsity: 20, spawnclass: "Lith_JDJTrail");
       TNT1 A 0 A_PlaySound("weapons/700e/fire", CHAN_WEAPON);
       TNT1 A 0 Lith_A_RecoilUp(1);
       IONG B 1 bright offset(0, 50);

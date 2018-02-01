@@ -1,0 +1,37 @@
+class Lith_Backpack : Lith_ScoreItem replaces Backpack
+{
+   default
+   {
+      Tag "Backpack";
+      Inventory.PickupSound "player/pickup/item";
+      Lith_BasicPickup.LogName msg_backpack;
+      
+      +COUNTITEM
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_Backpack);
+      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk);
+      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk);
+      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk);
+      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk);
+      A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk);
+      Super.PostBeginPlay();
+   }
+
+   override bool TryPickup(in out Actor toucher)
+   {
+      CallACS("Lith_Discount", toucher.playerNumber());
+      return Super.TryPickup(toucher);
+   }
+   
+   states
+   {
+   Spawn:
+      BPAK A -1;
+      stop;
+   }
+}
+
+// EOF

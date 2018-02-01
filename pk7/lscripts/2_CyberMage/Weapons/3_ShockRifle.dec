@@ -65,7 +65,7 @@ actor Lith_ShockEnemyGiver : CustomInventory
    states
    {
    Pickup:
-      TNT1 A 0 A_DamageSelf(5, "Lith_Energy", "None", "None", AAPTR_TARGET)
+      TNT1 A 0 A_DamageSelf(5, "Lith_Energy", 0, "None", AAPTR_TARGET)
       TNT1 A 0 A_SpawnItemEx("Lith_ShockFX", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE)
       stop
    }

@@ -75,7 +75,7 @@ actor Lith_VoidShot
       BLLT N 0 A_SpawnItemEx("Lith_VoidShotTrail3")
       BLLT N 0 A_Jump(256, 1, 2, 3, 3)
       BLLT N 0 A_ChangeVelocity(0,frandom(-1,1),frandom(-1,1), CVF_RELATIVE)
-      BLLT N 0 A_SeekerMissile(5, 0.7, SMF_LOOK|SMF_PRECISE|SMF_CURSPEED)
+      BLLT N 0 A_SeekerMissile(5, 1, SMF_LOOK|SMF_PRECISE|SMF_CURSPEED)
       BLLT N 1
       loop
    Death:

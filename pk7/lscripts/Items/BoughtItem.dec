@@ -12,7 +12,7 @@ actor Lith_BoughtItem : CustomInventory
    var int user_upgradebody;
    var int user_upgradeextr;
    
-   states
+   states(actor)
    {
    Spawn:
       TNT1 A 0
@@ -38,6 +38,10 @@ actor Lith_BoughtItem : CustomInventory
       IOBJ B 3 bright
       IOBJ A 2
       loop
+   }
+
+   states(item)
+   {
    Pickup:
       TNT1 A 0
       stop

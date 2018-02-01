@@ -30,31 +30,6 @@ actor Lith_AllMap : Lith_CustomInventory replaces Allmap
    }
 }
 
-actor Lith_Backpack : Lith_ScoreItem replaces Backpack
-{
-   Tag "Backpack"
-   Inventory.PickupSound "player/pickup/item"
-   
-   +COUNTITEM
-   
-   states
-   {
-   Spawn:
-      BPAK A 0 nodelay A_GiveInventory("Lith_ScoreCount", Score_Backpack)
-      BPAK A 0 A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk)
-      BPAK A 0 A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk)
-      BPAK A 0 A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk)
-      BPAK A 0 A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk)
-      BPAK A 0 A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk)
-      BPAK A -1
-      stop
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_Discount", 0)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_backpack, PlayerNumber())
-      goto Super::Pickup
-   }
-}
-
 actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 {
    Tag "Berserk"

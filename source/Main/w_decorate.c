@@ -137,9 +137,9 @@ bool Lith_CheckHealth(int n)
 // Lith_Discount
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_Discount()
+void Lith_Discount(int pnum)
 {
-   withplayer(LocalPlayer)
+   withplayer(&players[pnum])
       p->discount = 0.9;
 }
 
