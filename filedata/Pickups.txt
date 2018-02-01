@@ -61,7 +61,7 @@
 == LITH_PICKUP_045_FLAGS | 2
 == LITH_PICKUP_045 | DRUGS
 == LITH_PICKUP_046 | >%S >2012
-== LITH_PICKUP_047 | TNT1 A 0 A_TakeInventory(\"%S\ 1)
+== LITH_PICKUP_047 | TNT1 A 0 A_TakeInventory("%S" 1)
 == LITH_PICKUP_048 | Super rare %S acquired!
 == LITH_PICKUP_049 | Sacked the %S!
 == LITH_PICKUP_050 | The %S is your new waifu.

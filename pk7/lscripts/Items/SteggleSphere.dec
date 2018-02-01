@@ -47,7 +47,7 @@ actor Lith_Dogs : CustomInventory
    {
    Pickup:
       TNT1 A 0 A_GiveInventory("HealthBonus", 1)
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_dogs)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_dogs, PlayerNumber())
       stop
    Use:
       TNT1 A 0
@@ -98,7 +98,7 @@ actor Lith_SteggleSphere : Lith_CustomInventory
       DOGO ABCB 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_doggosphere)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_doggosphere, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_DOGS", 0)
       stop
    }

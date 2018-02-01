@@ -1,7 +1,11 @@
-#include "lzscript/Items/RandomSpawn.zsc"
 #include "lzscript/Items/Inventory.zsc"
+#include "lzscript/Items/ScoreItem.zsc"
+#include "lzscript/Items/RandomSpawn.zsc"
 #include "lzscript/Items/Pickup.zsc"
 #include "lzscript/Items/ArmorBase.zsc"
 #include "lzscript/Items/Armor.zsc"
+#include "lzscript/Items/Mana.zsc"
+#include "lzscript/Items/AmmoPickup.zsc"
+#include "lzscript/Items/Keys.zsc"
 
 // EOF

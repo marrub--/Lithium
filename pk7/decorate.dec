@@ -9,8 +9,5 @@
 #include "lscripts/Monsters.dec"
 #include "lscripts/Decorations.dec"
 
-#include "lscripts/IWAD_Heretic.dec"
-#include "lscripts/IWAD_Strife.dec"
-
 // EOF
 

@@ -14,10 +14,9 @@
 // Lith_LogName
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_LogName(int name)
+void Lith_LogName(int name, int pnum)
 {
-   withplayer(LocalPlayer)
-      switch(name)
+   withplayer(&players[pnum]) switch(name)
    {
 #define BOTH(name) case msg_##name: p->log ("%LS", "LITH_TXT_LOG_" #name); break;
 #define FULL(name) case msg_##name: p->logF("%LS", "LITH_TXT_LOG_" #name); break;

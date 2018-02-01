@@ -1,0 +1,140 @@
+class Lith_RedCard : Lith_BasicPickup replaces RedCard
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/redkey";
+      Lith_BasicPickup.LogName msg_redcard;
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("RedCard");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      RKEY A 10;
+      RKEY B 10 bright;
+      loop;
+   }
+}
+
+class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/bluekey";
+      Lith_BasicPickup.LogName msg_bluecard;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("BlueCard");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      BKEY A 10;
+      BKEY B 10 bright;
+      loop;
+   }
+}
+
+class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/yellowkey";
+      Lith_BasicPickup.LogName msg_yellowcard;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("YellowCard");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      YKEY A 10;
+      YKEY B 10 bright;
+      loop;
+   }
+}
+
+class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/redskull";
+      Lith_BasicPickup.LogName msg_redskull;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("RedSkull");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      RSKU A 10;
+      RSKU B 10 bright;
+      loop;
+   }
+}
+
+class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/blueskull";
+      Lith_BasicPickup.LogName msg_blueskull;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("BlueSkull");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      BSKU A 10;
+      BSKU B 10 bright;
+      loop;
+   }
+}
+
+class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/yellowskull";
+      Lith_BasicPickup.LogName msg_yellowskull;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("YellowSkull");
+      Super.PostBeginPlay();
+   }
+   
+   states
+   {
+   Spawn:
+      YSKU A 10;
+      YSKU B 10 bright;
+      loop;
+   }
+}
+
+// EOF
+

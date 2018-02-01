@@ -1,0 +1,19 @@
+class Lith_ScoreCount : Inventory
+{
+   default
+   {
+      Inventory.MaxAmount 0x7FFFFFFF;
+   }
+}
+
+class Lith_ScoreItem : Lith_BasicPickup
+{
+   override bool TryPickup(in out Actor toucher)
+   {
+      CallACS("Lith_UpdateScore");
+      return Super.TryPickup(toucher);
+   }
+}
+
+// EOF
+

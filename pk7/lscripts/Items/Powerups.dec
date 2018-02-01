@@ -24,7 +24,7 @@ actor Lith_AllMap : Lith_CustomInventory replaces Allmap
       PMAP ABCDCB 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_allmap)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_allmap, PlayerNumber())
       TNT1 A 0 A_GiveInventory("Allmap")
       stop
    }
@@ -50,7 +50,7 @@ actor Lith_Backpack : Lith_ScoreItem replaces Backpack
       stop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_Discount", 0)
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_backpack)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_backpack, PlayerNumber())
       goto Super::Pickup
    }
 }
@@ -69,7 +69,7 @@ actor Lith_Berserk : Lith_CustomInventory replaces Berserk
       PSTR A -1
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_berserk)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_berserk, PlayerNumber())
       TNT1 A 0 A_GiveInventory("Berserk")
       stop
    }
@@ -95,7 +95,7 @@ actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
       BON1 ABCDCB 6
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_healthbonus)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_healthbonus, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 1)
       stop
    }
@@ -116,7 +116,7 @@ actor Lith_Infrared : Lith_CustomInventory replaces Infrared
       PVIS B 6
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_infrared)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_infrared, PlayerNumber())
       TNT1 A 0 A_GiveInventory("Infrared")
       stop
    }
@@ -138,7 +138,7 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
       PINV ABCD 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_invuln)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_invuln, PlayerNumber())
       TNT1 A 0 A_GiveInventory("InvulnerabilitySphere")
       stop
    }
@@ -155,7 +155,7 @@ actor Lith_Medikit : Lith_CustomInventory replaces Medikit
       stop
    Pickup:
       TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 25), "Nope")
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_medikit)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_medikit, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealth", 25)
       stop
    }
@@ -176,7 +176,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
       MEGA ABCDB 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_megasphere)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_megasphere, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 200)
       stop
    }
@@ -195,7 +195,7 @@ actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
       SUIT A -1 bright
       stop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_radsuit)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_radsuit, PlayerNumber())
       TNT1 A 0 A_GiveInventory("RadSuit")
       stop
    }
@@ -216,7 +216,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
       SOUL ABCDB 6 bright
       loop
    Pickup:
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_soulsphere)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_soulsphere, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 100)
       stop
    }
@@ -233,7 +233,7 @@ actor Lith_Stimpack : Lith_CustomInventory replaces Stimpack
       stop
    Pickup:
       TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 10), "Nope")
-      TNT1 A 0 ACS_NamedExecuteAlways("Lith_LogName", 0, msg_stimpack)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_LogName", msg_stimpack, PlayerNumber())
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealth", 10)
       stop
    }

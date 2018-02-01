@@ -1,0 +1,187 @@
+class Lith_Clip : Lith_ScoreItem replaces Clip
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/scoresmall";
+      Lith_BasicPickup.LogName msg_clip;
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_Clip);
+      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SCOR A -1;
+      stop;
+   }
+}
+
+class Lith_ClipBox : Lith_ScoreItem replaces ClipBox
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/scorebig";
+      Lith_BasicPickup.LogName msg_clipbox;
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_ClipBox);
+      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SCOR B -1;
+      stop;
+   }
+}
+
+class Lith_Shell : Lith_ScoreItem replaces Shell
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/shells";
+      Lith_BasicPickup.LogName msg_shell;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_Shell);
+      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_Shell);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SHEL A -1;
+      stop;
+   }
+}
+
+class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/shellb";
+      Lith_BasicPickup.LogName msg_shellbox;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_ShellBox);
+      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBox);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SBOX A -1;
+      stop;
+   }
+}
+
+class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/rockets";
+      Lith_BasicPickup.LogName msg_rocket;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_Rocket);
+      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_Rocket);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      ROCK A -1;
+      stop;
+   }
+}
+
+class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/rocketb";
+      Lith_BasicPickup.LogName msg_rocketbox;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_RocketBox);
+      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBox);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      BROK A -1;
+      stop;
+   }
+}
+
+class Lith_Cell : Lith_ScoreItem replaces Cell
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/cells";
+      Lith_BasicPickup.LogName msg_cell;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_Cell);
+      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_Cell);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      CELL A -1;
+      stop;
+   }
+}
+
+class Lith_CellPack : Lith_ScoreItem replaces CellPack
+{
+   default
+   {
+      Inventory.PickupSound "player/pickup/cellb";
+      Lith_BasicPickup.LogName msg_cellbox;
+   }
+   
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_ScoreCount", Score_CellPack);
+      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellPack);
+      A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonPack);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      CELP A -1;
+      stop;
+   }
+}
+
+// EOF
+

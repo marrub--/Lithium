@@ -128,4 +128,27 @@ class Lith_InventoryItem : Inventory
    }
 }
 
+class Lith_BasicPickup : Inventory
+{
+   default
+   {
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "";
+      +INVENTORY.TRANSFER
+   }
+
+   private readonly int lith_logname;
+
+   property LogName: lith_logname;
+
+   override bool TryPickup(in out Actor toucher)
+   {
+      if(lith_logname)
+         CallACS("Lith_LogName", lith_logname, toucher.playerNumber());
+
+      GoAwayAndDie();
+      return true;
+   }
+}
+
 // EOF
