@@ -47,11 +47,41 @@
 #define HERMES_F(...) ACS_ScriptCallFixed("Lith_HERMES", __VA_ARGS__)
 #define HERMES_S(...) ACS_ScriptCallString("Lith_HERMES", __VA_ARGS__)
 
+#define URANUS(...) ACS_ScriptCall("Lith_URANUS", __VA_ARGS__)
+#define URANUS_F(...) ACS_ScriptCallFixed("Lith_URANUS", __VA_ARGS__)
+#define URANUS_S(...) ACS_ScriptCallString("Lith_URANUS", __VA_ARGS__)
+
 #define Lith_IsPaused (ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
 
 #define Lith_PausableTick() \
    do ACS_Delay(1); \
    while(Lith_IsPaused)
+
+#define PrintSprite(name, x, xa, y, ya) \
+   URANUS("_LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)-1.0)
+
+#define PrintSpriteA(name, x, xa, y, ya, a) \
+   URANUS("_LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+
+#define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
+
+#define PrintText(font, cr, x, xa, y, ya) \
+   URANUS("_LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)-1.0)
+
+#define PrintTextA(font, cr, x, xa, y, ya, a) \
+   URANUS("_LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+
+#define SetClip(x, y, w, h) \
+   URANUS("_LSC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
+
+#define SetClipW(x, y, w, h, ww) \
+   URANUS("_LSC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
+
+#define ClearClip() \
+   URANUS("_LSC", 0, 0, 0, 0, 0)
+
+#define SetSize(w, h) \
+   URANUS("_LHS", (int)(w), (int)(h))
 
 #define HudMessageLog(...) \
    ( \
@@ -210,6 +240,7 @@ __str Lith_ScoreSep(score_t num);
 __str Language(__str fmt, ...);
 __str LanguageNull(__str fmt, ...);
 __str StrParam(__str fmt, ...);
+void StrParamBegin(__str fmt, ...);
 
 // Utilities -----------------------------------------------------------------|
 

@@ -300,10 +300,10 @@ void Lith_PlayerUpdateWeapons(player_t *p)
    {
    case weapon_c_delear: ACS_GiveInventory("Lith_DelearSpriteDisplay", 1); break;
    case weapon_cfist:
-      ACS_SetHudSize(320, 240);
+      SetSize(320, 240);
       fixed64_t charge = 5.lk + ACS_CheckInventory("Lith_FistCharge") / 10.lk;
-      HudMessageF("CBIFONT", "\Cn%.1lkkV \Cjcharge", charge);
-      HudMessagePlain(hid_fistcharge, 270.2, 200.2, TS);
+      PrintTextFmt("%.1lkkV \Cjcharge", charge);
+      PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
       break;
    }
 }

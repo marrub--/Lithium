@@ -99,6 +99,7 @@ CallbackDefine(upgr_reinit_cb_t, UpgrReinit)
 static void RenderProxy(player_t *p, upgrade_t *upgr)
 {
    ACS_SetHudSize(320, 240);
+   SetSize(320, 240);
    upgr->info->Render(p, upgr);
 }
 
@@ -428,12 +429,11 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
 
-      HudMessageF("CBIFONT", "Filter: %S", UpgrCateg[filter]);
+      PrintTextFmt("Filter: %S", UpgrCateg[filter]);
    }
    else
-      HudMessageF("CBIFONT", "Filter: \CjAll");
-
-   HudMessagePlain(g->hid--, 15.1, 215.1, TICSECOND);
+      PrintTextFmt("Filter: \CjAll");
+   PrintText("CBIFONT", CR_WHITE, 15,1, 215,1);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
@@ -466,8 +466,8 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 
       if(changed && filter == -1)
       {
-         HudMessageF("CBIFONT", "%S", UpgrCateg[curcategory]);
-         HudMessagePlain(g->hid--, g->ox + 4.1, g->oy + (y - guipre.btnlist.h) + 1.1, TICSECOND);
+         PrintTextFmt("%S", UpgrCateg[curcategory]);
+         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y - guipre.btnlist.h + g->oy + 1,1);
       }
 
       __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
@@ -507,8 +507,8 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 
    #define Req(name) \
    { \
-      HudMessageF("CBIFONT", "\CgRequires " name "."); \
-      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND); \
+      PrintTextFmt("Requires " name "."); \
+      PrintText("CBIFONT", CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
 
@@ -526,13 +526,13 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
       bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
 
       if(upgr->active)
-         HudMessageF("CBIFONT", "Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf);
       else if(over)
-         HudMessageF("CBIFONT", "Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt("Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf);
       else
-         HudMessageF("CBIFONT", "Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf);
 
-      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
+      PrintText("CBIFONT", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 
@@ -550,8 +550,8 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
-      HudMessageF("CBIFONT", "%S will multiply score by \C%c%i\C-%%", op, cr, perc);
-      HudMessagePlain(g->hid--, 111.1, 200 + y + 0.2, TICSECOND);
+      PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc);
+      PrintText("CBIFONT", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 }
@@ -561,7 +561,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
 {
-   ACS_SetHudClipRect(111, 30, 190, 170, 184);
+   SetClipW(111, 30, 190, 170, 184);
 
    // Cost
    __str mark;
@@ -577,20 +577,22 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = "Free";
 
-   HudMessageF("CBIFONT", "%S", cost);
-   HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
+   PrintTextFmt("%S", cost);
+   PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
    // Category
-   HudMessageF("CBIFONT", "%S", UpgrCateg[upgr->info->category]);
-   HudMessagePlain(g->hid--, 111.1, 40.1, TICSECOND);
+   PrintTextFmt("%S", UpgrCateg[upgr->info->category]);
+   PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    // Effect
    ifauto(__str, effect, LanguageNull("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name))
-      if(upgr->info->key == UPGR_UNCEUNCE) HudMessageRainbowsF("CBIFONT", "Effect: %S", effect);
-      else                                 HudMessageF        ("CBIFONT", "Effect: %S", effect);
-   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 50.1, TICSECOND);
+      PrintTextFmt("Effect: %S", effect);
 
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
+   PrintText("CBIFONT",
+      upgr->info->key == UPGR_UNCEUNCE ? crs[ACS_Timer() / 4 % countof(crs)] : CR_WHITE, 111,1, 50,1);
+
+   ClearClip();
 }
 
 //
@@ -610,8 +612,6 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
 {
-   //DrawSpriteAlpha("lgfx/UI/ItemBG.png", g->hid--, 113.1, 95.1, TICSECOND, 0.5);
-
    GUIUpgradesList(g, p);
 
    upgrade_t *upgr = &p->upgrades[CBIState(g)->upgrsel];

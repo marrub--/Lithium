@@ -15,7 +15,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 48,
       .h        = 16,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btntab = {
@@ -30,7 +30,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 46,
       .h        = 11,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnexit = {
@@ -39,7 +39,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 11,
       .h        = 11,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnnext = {
@@ -54,7 +54,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 8,
       .h        = 11,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnprev = {
@@ -69,7 +69,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 8,
       .h        = 11,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnnexts = {
@@ -84,7 +84,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 6,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnprevs = {
@@ -99,7 +99,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 6,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnlist = {
@@ -114,7 +114,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 80,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnlistsel = {
@@ -129,7 +129,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 80,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnlistactive = {
@@ -144,7 +144,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 80,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnlistactivated = {
@@ -159,7 +159,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 80,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnbipmain = {
@@ -174,7 +174,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 180,
       .h        = 9,
-      .ax = .1, .ay = .0
+      .ax = 1, .ay = 0
    },
 
    .btnbipback = {
@@ -189,7 +189,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 48,
       .h        = 9,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btndlgsel = {
@@ -204,7 +204,7 @@ struct gui_presets const guipre = {
       .external = true,
       .w        = 240,
       .h        = 14,
-      .ax = .4, .ay = .0
+      .ax = 4, .ay = 0
    },
 
    .btnclear = {
@@ -219,7 +219,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 20,
       .h        = 8,
-      .ax = .1, .ay = .1
+      .ax = 1, .ay = 1
    },
 
    .btnnote = {
@@ -234,7 +234,7 @@ struct gui_presets const guipre = {
       .external = false,
       .w        = 200,
       .h        = 30,
-      .ax = .1, .ay = .1
+      .ax = 1, .ay = 1
    },
 
    .cbxdef = {

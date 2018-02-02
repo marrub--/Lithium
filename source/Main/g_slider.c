@@ -49,8 +49,8 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
    if(a->integ) norm = round(norm);
 
    // draw graphic
-   __with(__str gfx = Lith_GUI_Prefix1(g, pre, gfx);)
-      if(gfx) DrawSpritePlain(gfx, g->hid--, (x - pre->pad) + 0.1, y + (pre->h / 2), TICSECOND);
+   ifauto(__str, gfx, Lith_GUI_Prefix1(g, pre, gfx))
+      PrintSprite(gfx, x - pre->pad,1, y + pre->h / 2,0);
 
    // draw notch
    __with(__str graphic;)
@@ -60,27 +60,24 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
       else
          graphic = Lith_GUI_Prefix1(g, pre, notch);
 
-      if(graphic) {
-         DrawSpritePlain(graphic, g->hid--, x + (int)(val * w) - 1 + 0.1,
-            y + 0.1, TICSECOND);
-      }
+      if(graphic)
+         PrintSprite(graphic, x + val * w - 1,1, y,1);
    }
 
    // draw value
-   if(pre->font) {
+   if(pre->font)
+   {
       __str suf = a->suf ? a->suf : "";
       float amt = roundf(norm * 100.f) / 100.f;
-      if(a->integ) HudMessageF(pre->font, "\Cj%i%S",     (int)amt, suf);
-      else         HudMessageF(pre->font, "\Cj%.1k%S", (fixed)amt, suf);
-   }
+      if(a->integ) PrintTextFmt("%i%S",     (int)amt, suf);
+      else         PrintTextFmt("%.1k%S", (fixed)amt, suf);
 
-   HudMessagePlain(g->hid--, x + (pre->w / 2) + 0.4, y + (pre->h / 2), TICSECOND);
+      PrintText(pre->font, CR_WHITE, x + pre->w/2,4, y + pre->h/2,0);
+   }
 
    // if we've moved it, we return a difference
    if(g->active == id && !g->clicklft && !CloseEnough(aval, val))
       return norm - a->val;
-
-   // otherwise we return 0
    else
       return 0;
 }

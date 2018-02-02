@@ -17,11 +17,8 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       if(g->hot == id && pre->hot) graphic = Lith_GUI_Prefix1(g, pre, hot);
       else                         graphic = Lith_GUI_Prefix1(g, pre, gfx);
 
-      if(graphic) {
-         int const x = a->x + g->ox;
-         int const y = a->y + g->oy;
-         DrawSpritePlain(graphic, g->hid--, x + 0.1, y + 0.1, TICSECOND);
-      }
+      if(graphic)
+         PrintSprite(graphic, a->x + g->ox,1, a->y + g->oy,1);
    }
 
    if(a->label && pre->font)
@@ -29,11 +26,11 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       int x, y;
       __str color;
 
-      if(pre->ax == 0.4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
-      else                           x = a->x + g->ox;
+      if(pre->ax == 4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
+      else                         x = a->x + g->ox;
 
-      if(pre->ay == 0.4 || !pre->ay) y = (pre->h / 2) + a->y + g->oy;
-      else                           y = a->y + g->oy;
+      if(pre->ay == 4 || !pre->ay) y = (pre->h / 2) + a->y + g->oy;
+      else                         y = a->y + g->oy;
 
            if(a->disabled)     color = pre->cdis;
       else if(g->active == id) color = pre->cact;
@@ -42,8 +39,8 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       else                     color = pre->cdef;
       color = color ? color : "j";
 
-      HudMessageF(pre->font, "\C%S%S", color, a->label);
-      HudMessagePlain(g->hid--, x + pre->ax, y + pre->ay, TICSECOND);
+      PrintTextFmt("\C%S%S", color, a->label);
+      PrintText(pre->font, CR_WHITE, x,pre->ax, y,pre->ay);
    }
 
    if(!a->disabled)

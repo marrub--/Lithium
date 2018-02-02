@@ -20,14 +20,14 @@ void Upgr_RifleModes_Render(player_t *p, upgrade_t *upgr)
       p->weapontype == weapon_rifle &&
       p->riflefiremode == rifle_firemode_burst)
    {
-      ACS_SetHudClipRect(40, 108, 240, 40);
+      SetClip(40, 108, 240, 40);
 
       ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
-      DrawSpritePlain("LITHCAM1", hid_rifle_scope_cam, 0.1, 128.0, TICSECOND);
+      PrintSprite("LITHCAM1", 0,1, 128,0);
 
-      DrawSpritePlain("lgfx/RifleScope.png", hid_rifle_scope_img, 40.1, 108.1, TICSECOND);
+      PrintSprite("lgfx/RifleScope.png", 40,1, 108,1);
 
-      ACS_SetHudClipRect(0, 0, 0, 0);
+      ClearClip();
    }
 }
 

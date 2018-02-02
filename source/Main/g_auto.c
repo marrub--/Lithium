@@ -86,6 +86,7 @@ void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h)
    g->hot = 0;
 
    ACS_SetHudSize(g->w = w, g->h = h);
+   SetSize(g->w, g->h);
 }
 
 //
@@ -110,7 +111,7 @@ void Lith_GUI_End(gui_state_t *g, enum cursor curs)
    case gui_curs_outline2inv: cgfx = "lgfx/UI/CursorOutline2Inv.png"; break;
    }
 
-   DrawSpritePlain(cgfx, g->hid--, (int)g->cx + 0.1, (int)g->cy + 0.1, TICSECOND);
+   PrintSprite(cgfx, g->cx,1, g->cy,1);
 
    if(!g->clickany)
       g->active = 0;
@@ -126,7 +127,7 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
    g->clpyE = y + h;
 
    if(ww == 0) ww = w;
-   ACS_SetHudClipRect(g->clpxS = x, g->clpyS = y, w, h, ww);
+   SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);
 }
 
 //
@@ -135,7 +136,7 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 void Lith_GUI_ClipRelease(gui_state_t *g)
 {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   ClearClip();
 }
 
 //

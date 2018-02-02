@@ -69,12 +69,12 @@ void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
 {
    if(UData.vzoom)
    {
-      DrawSpriteAlpha("lgfx/Vignette.png", hid_zoomvignette, 160, 120, TICSECOND, 0.3);
+      PrintSpriteA("lgfx/Vignette.png", 160,0, 120,0, 0.3);
 
       ACS_SetCameraToTexture(p->cameratid, "LITHCAM2", 90 - UData.vzoom);
-      DrawSpritePlain("LITHCAM2", hid_zoomcam, 160, 120, TICSECOND);
+      PrintSprite("LITHCAM2", 160,0, 120,0);
 
-      DrawSpriteAlpha("lgfx/ZoomOverlay.png", hid_zoombase, 160, 120, TICSECOND, 0.5);
+      PrintSpriteA("lgfx/ZoomOverlay.png", 160,0, 120,0, 0.5);
 
       __str points[8] = {"E", "SE", "S", "SW", "W", "NW", "N", "NE"};
 
@@ -85,8 +85,8 @@ void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
          sincosf(xang, &xs, &xc);
          int x = atan2f(xs, xc) * 320;
 
-         HudMessageF("CBIFONT", points[i]);
-         HudMessagePlain(hid_zoomcomp + i, 160 + x, 120, TICSECOND);
+         PrintTextFmt(points[i]);
+         PrintText("CBIFONT", CR_WHITE, 160 + x,0, 120,0);
       }
    }
 }

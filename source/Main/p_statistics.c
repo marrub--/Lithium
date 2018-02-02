@@ -12,12 +12,12 @@ void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    int n = 0;
 
    #define Stat(name, f, x) \
-      HudMessageF("CBIFONT", name); HudMessagePlain(g->hid--, 23.1,  0.1 + 50 + (8 * n), TICSECOND); \
-      HudMessageF("CBIFONT", f, x); HudMessagePlain(g->hid--, 300.2, 0.1 + 50 + (8 * n), TICSECOND); \
+      PrintTextFmt(name); PrintText("CBIFONT", CR_WHITE, 23,1,  50 + 8*n,1); \
+      PrintTextFmt(f, x); PrintText("CBIFONT", CR_WHITE, 300,2, 50 + 8*n,1); \
       n++
 
-   HudMessageF("SMALLFNT", "\Cj%S", p->name);
-   HudMessagePlain(g->hid--, 20.1, 40.1, TICSECOND);
+   PrintTextFmt("\Cj%S", p->name);
+   PrintText("SMALLFNT", CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
    Stat("Weapons Found",       "%i",   p->weaponsheld);

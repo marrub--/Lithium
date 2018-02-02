@@ -104,24 +104,17 @@ void Lith_HUD_KeyInd_Impl(struct hud *h, struct hud_key const *a)
 {
    player_t *p = h->p;
 
-   HID(key_rs, 1);
-   HID(key_ys, 1);
-   HID(key_bs, 1);
-   HID(key_rc, 1);
-   HID(key_yc, 1);
-   HID(key_bc, 1);
-
    int   x = a->x;
    int   y = a->y;
    fixed t = a->a;
 
    #define Inc ((a->horz) ? (x -= 10) : (y += 10))
-   if(p->keys.rs) {DrawSpriteAlpha("H_KS1", key_rs, x+.2, y+.1, TS, t); Inc;}
-   if(p->keys.ys) {DrawSpriteAlpha("H_KS2", key_ys, x+.2, y+.1, TS, t); Inc;}
-   if(p->keys.bs) {DrawSpriteAlpha("H_KS3", key_bs, x+.2, y+.1, TS, t); Inc;}
-   if(p->keys.rc) {DrawSpriteAlpha("H_KC1", key_rc, x+.2, y+.1, TS, t); Inc;}
-   if(p->keys.yc) {DrawSpriteAlpha("H_KC2", key_yc, x+.2, y+.1, TS, t); Inc;}
-   if(p->keys.bc) {DrawSpriteAlpha("H_KC3", key_bc, x+.2, y+.1, TS, t); Inc;}
+   if(p->keys.rs) PrintSpriteA("H_KS1", x,2, y,1, t), Inc;
+   if(p->keys.ys) PrintSpriteA("H_KS2", x,2, y,1, t), Inc;
+   if(p->keys.bs) PrintSpriteA("H_KS3", x,2, y,1, t), Inc;
+   if(p->keys.rc) PrintSpriteA("H_KC1", x,2, y,1, t), Inc;
+   if(p->keys.yc) PrintSpriteA("H_KC2", x,2, y,1, t), Inc;
+   if(p->keys.bc) PrintSpriteA("H_KC3", x,2, y,1, t), Inc;
    #undef Inc
 }
 

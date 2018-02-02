@@ -190,8 +190,8 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
    CBIState(g)->logsel = sel;
    selmap = sel->object;
 
-   HudMessageF("CBIFONT", "%S", selmap->name);
-   HudMessagePlain(g->hid--, 28.1 + guipre.btnprev.w + guipre.btnnext.w, 40.1, TICSECOND);
+   PrintTextFmt("%S", selmap->name);
+   PrintText("CBIFONT", CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
 
    forlist(logdata_t *logdata, p->loginfo.full)
       num += (logdata->from == selmap->levelnum);
@@ -208,10 +208,10 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, 8))
          continue;
 
-      DrawSpritePlain("lgfx/UI/LogList.png", g->hid--, g->ox + 0.1, y + g->oy + 0.1, TICSECOND);
+      PrintSprite("lgfx/UI/LogList.png", g->ox,1, y + g->oy,1);
 
-      HudMessageF("CBIFONT", "%S", logdata->info);
-      HudMessageParams(0, g->hid--, CR_GREEN, g->ox + 2.1, y + g->oy + 1.1, TICSECOND);
+      PrintTextFmt("%S", logdata->info);
+      PrintText("CBIFONT", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
 

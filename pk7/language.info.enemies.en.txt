@@ -11,7 +11,7 @@
    "   \cjResident\n"
    "   \cfNoble\n"
    "   \cgTyrant\n"
-   "   \crOverlord\n"
+   "   \crOverlord\c-\n"
    "\n"
    "Threat:\n"
    "   \csD\n"
@@ -24,8 +24,8 @@
 "LITH_TXT_INFO_SHORT_ZombieMan" = "Former Human";
 "LITH_TXT_INFO_TITLE_ZombieMan" = "Possessed Human Rifleman";
 "LITH_TXT_INFO_DESCR_ZombieMan" =
-   "Class: \cuNon-resident\n"
-   "Threat: \csD\n"
+   "Class: \cuNon-resident\c-\n"
+   "Threat: \csD\c-\n"
    "\n"
    "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
    "\n"
@@ -33,8 +33,8 @@
 "LITH_TXT_INFO_SHORT_ShotgunGuy" = "Former Sergeant";
 "LITH_TXT_INFO_TITLE_ShotgunGuy" = "Possessed Human Sergeant";
 "LITH_TXT_INFO_DESCR_ShotgunGuy" =
-   "Class: \cuNon-resident\n"
-   "Threat: \csD\n"
+   "Class: \cuNon-resident\c-\n"
+   "Threat: \csD\c-\n"
    "\n"
    "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
    "\n"
@@ -42,8 +42,8 @@
 "LITH_TXT_INFO_SHORT_ChaingunGuy" = "Former Corporal";
 "LITH_TXT_INFO_TITLE_ChaingunGuy" = "Possessed Human Corporal";
 "LITH_TXT_INFO_DESCR_ChaingunGuy" =
-   "Class: \cuNon-resident\n"
-   "Threat: \ciC-\n"
+   "Class: \cuNon-resident\c-\n"
+   "Threat: \ciC-\c-\n"
    "\n"
    "Humans which have been abducted and possessed by Hell's forces. Some seem to he artificially created by Hell, while others appear to actually be humans that were defeated by its forces.\n"
    "\n"
@@ -53,8 +53,8 @@
 "LITH_TXT_INFO_SHORT_Imp" = "Hell Trooper";
 "LITH_TXT_INFO_TITLE_Imp" = "Hell Trooper \"Imp\"";
 "LITH_TXT_INFO_DESCR_Imp" =
-   "Class: \csSubordinate\n"
-   "Threat: \csD+\n"
+   "Class: \csSubordinate\c-\n"
+   "Threat: \csD+\c-\n"
    "\n"
    "Small-time grunts of Hell, they do little more than stall while the bigger threats come to play. They throw fire-balls out of their hands, which while not very strong, can be deadly in large amounts.\n"
    "\n"
@@ -62,8 +62,8 @@
 "LITH_TXT_INFO_SHORT_Demon" = "Hell Sergeant";
 "LITH_TXT_INFO_TITLE_Demon" = "Hell Sergeant \"Demon\"";
 "LITH_TXT_INFO_DESCR_Demon" =
-   "Class: \csSubordinate\n"
-   "Threat: \ciC\n"
+   "Class: \csSubordinate\c-\n"
+   "Threat: \ciC\c-\n"
    "\n"
    "These demons are known for their distinctive pink-colored skin and tendency to rush-attack their prey. Deadly at close range, not so much past that as they have no projectile attacks.\n"
    "\n"
@@ -71,8 +71,8 @@
 "LITH_TXT_INFO_SHORT_Spectre" = "Spectre";
 "LITH_TXT_INFO_TITLE_Spectre" = "Hell Sergeant \"Spectre\"";
 "LITH_TXT_INFO_DESCR_Spectre" =
-   "Class: \csSubordinate\n"
-   "Threat: \ciC+\n"
+   "Class: \csSubordinate\c-\n"
+   "Threat: \ciC+\c-\n"
    "\n"
    "Demons which also happen to have cloaking magic active over their bodies.\n"
    "\n"
@@ -82,8 +82,8 @@
 "LITH_TXT_INFO_SHORT_LostSoul" = "Lost Soul";
 "LITH_TXT_INFO_TITLE_LostSoul" = "$LITH_TXT_INFO_SHORT_LostSoul";
 "LITH_TXT_INFO_DESCR_LostSoul" =
-   "Class: \cjResident\n"
-   "Threat: \csD++\n"
+   "Class: \cjResident\c-\n"
+   "Threat: \csD++\c-\n"
    "\n"
    "Souls which have been trapped by Hell's forces, they are corrupted and forced to possess any enemy of Hell.\n"
    "\n"
@@ -93,8 +93,8 @@
 "LITH_TXT_INFO_SHORT_Mancubus" = "Mancubus";
 "LITH_TXT_INFO_TITLE_Mancubus" = "$LITH_TXT_INFO_SHORT_Mancubus";
 "LITH_TXT_INFO_DESCR_Mancubus" =
-   "Class: \cjResident\n"
-   "Threat: \ckB\n"
+   "Class: \cjResident\c-\n"
+   "Threat: \ckB\c-\n"
    "\n"
    "A gluttonous resident of Hell whose arms are flamethrowers made to kill and cook its targets in one fell swoop. Their general strategy is to overwhelm you with fire by shooting in many directions.\n"
    "\n"
@@ -102,8 +102,8 @@
 "LITH_TXT_INFO_SHORT_Arachnotron" = "Arachnotron";
 "LITH_TXT_INFO_TITLE_Arachnotron" = "$LITH_TXT_INFO_SHORT_Arachnotron";
 "LITH_TXT_INFO_DESCR_Arachnotron" =
-   "Class: \cjResident\n"
-   "Threat: \ckB\n"
+   "Class: \cjResident\c-\n"
+   "Threat: \ckB\c-\n"
    "\n"
    "Children of a great Spider Demon, they're equipped with plasma guns and cybernetic legs.\n"
    "\n"
@@ -111,8 +111,8 @@
 "LITH_TXT_INFO_SHORT_Cacodemon" = "Cacodemon";
 "LITH_TXT_INFO_TITLE_Cacodemon" = "$LITH_TXT_INFO_SHORT_Cacodemon";
 "LITH_TXT_INFO_DESCR_Cacodemon" =
-   "Class: \cjResident\n"
-   "Threat: \ckB-\n"
+   "Class: \cjResident\c-\n"
+   "Threat: \ckB-\c-\n"
    "\n"
    "A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an unknown reason. They're quite hearty, and their attacks are fairly deadly, but generally the Cacodemon is not a monster to fear.";
 
@@ -120,8 +120,8 @@
 "LITH_TXT_INFO_SHORT_HellKnight" = "Hell Knight";
 "LITH_TXT_INFO_TITLE_HellKnight" = "$LITH_TXT_INFO_SHORT_HellKnight";
 "LITH_TXT_INFO_DESCR_HellKnight" =
-   "Class: \cfNoble\n"
-   "Threat: \ckB\n"
+   "Class: \cfNoble\c-\n"
+   "Threat: \ckB\c-\n"
    "\n"
    "The weakest of Hell's nobles, they serve the military as grunts to head assaults on weak targets and seek-and-destroy missions.\n"
    "\n"
@@ -129,8 +129,8 @@
 "LITH_TXT_INFO_SHORT_BaronOfHell" = "Hell Baron";
 "LITH_TXT_INFO_TITLE_BaronOfHell" = "$LITH_TXT_INFO_SHORT_BaronOfHell";
 "LITH_TXT_INFO_DESCR_BaronOfHell" =
-   "Class: \cfNoble\n"
-   "Threat: \ckB++\n"
+   "Class: \cfNoble\c-\n"
+   "Threat: \ckB++\c-\n"
    "\n"
    "Stronger Hell nobles with red skin, horns and hooves. Similar in appearance to Knights, but despite this, they differ in attack and strategy.\n"
    "\n"
@@ -138,8 +138,8 @@
 "LITH_TXT_INFO_SHORT_Revenant" = "Revenant";
 "LITH_TXT_INFO_TITLE_Revenant" = "$LITH_TXT_INFO_SHORT_Revenant";
 "LITH_TXT_INFO_DESCR_Revenant" =
-   "Class: \cfNoble\n"
-   "Threat: \ckB+\n"
+   "Class: \cfNoble\c-\n"
+   "Threat: \ckB+\c-\n"
    "\n"
    "Dead souls whom have been revived into a skeletal frame, with combat armor and missile launchers. Their missiles have homing capabilities, and are *very* painful to boot.\n"
    "\n"
@@ -149,8 +149,8 @@
 "LITH_TXT_INFO_SHORT_PainElemental" = "Pain Elemental";
 "LITH_TXT_INFO_TITLE_PainElemental" = "Sin of Bellona, \"Pain Elemental\"";
 "LITH_TXT_INFO_DESCR_PainElemental" =
-   "Class: \cgTyrant\n"
-   "Threat: \cgA\n"
+   "Class: \cgTyrant\c-\n"
+   "Threat: \cgA\c-\n"
    "\n"
    "An evil, mean-spirited demon that thrives purely off of the pain and suffering of its enemies; it summons lost souls to battle for it, as it itself is too weak to fight.\n"
    "\n"
@@ -158,8 +158,8 @@
 "LITH_TXT_INFO_SHORT_Archvile" = "Archvile";
 "LITH_TXT_INFO_TITLE_Archvile" = "Sin of Janus, \"Arch-vile\"";
 "LITH_TXT_INFO_DESCR_Archvile" =
-   "Class: \cgTyrant\n"
-   "Threat: \cgA\n"
+   "Class: \cgTyrant\c-\n"
+   "Threat: \cgA\c-\n"
    "\n"
    "Brutal and vicious, caster of evil magic and healer of the sinful.\n"
    "\n"
@@ -167,8 +167,8 @@
 "LITH_TXT_INFO_SHORT_SpiderMastermind" = "Spider Demon";
 "LITH_TXT_INFO_TITLE_SpiderMastermind" = "Sin of Venus, \"Spider Mastermind\"";
 "LITH_TXT_INFO_DESCR_SpiderMastermind" =
-   "Class: \cgTyrant\n"
-   "Threat: \cgA++\n"
+   "Class: \cgTyrant\c-\n"
+   "Threat: \cgA++\c-\n"
    "\n"
    "The Spider Mastermind is a gigantic cybernetic arachnid with a chaingun. That alone should tell you how dangerous this species is, but to make matters worse, they also have loads of offspring. Cybernetic arachnid offspring.\n"
    "\n"
@@ -176,8 +176,8 @@
 "LITH_TXT_INFO_SHORT_Cyberdemon" = "Cyber-Demon";
 "LITH_TXT_INFO_TITLE_Cyberdemon" = "Sin of Mars, \"Cyber-Demon\"";
 "LITH_TXT_INFO_DESCR_Cyberdemon" =
-   "Class: \cgTyrant\n"
-   "Threat: \cgA++\n"
+   "Class: \cgTyrant\c-\n"
+   "Threat: \cgA++\c-\n"
    "\n"
    "An extremely deadly species forged of metal and flesh intertwined, the Cyber-Demon is purpose-built to destroy absolutely anything in its path.\n"
    "\n"
@@ -187,8 +187,8 @@
 "LITH_TXT_INFO_SHORT_Phantom" = "Phantom";
 "LITH_TXT_INFO_TITLE_Phantom" = "$LITH_TXT_INFO_SHORT_Phantom";
 "LITH_TXT_INFO_DESCR_Phantom" =
-   "Class: \cm???\n"
-   "Threat: \crE\n"
+   "Class: \cm???\c-\n"
+   "Threat: \crE\c-\n"
    "\n"
    "A threat yet unexplained, the phantom seeks to destroy all and will leave no one alive -- not even demons. They are a dark, silhouette-like being that takes on various forms and does nothing but destroy.\n"
    "\n"
@@ -198,8 +198,8 @@
 "LITH_TXT_INFO_SHORT_IconOfSin" = "Icon of Sin";
 "LITH_TXT_INFO_TITLE_IconOfSin" = "Overlord of Hell, Icon of Sin";
 "LITH_TXT_INFO_DESCR_IconOfSin" =
-   "Class: \crOverlord\n"
-   "Threat: \crE\n"
+   "Class: \crOverlord\c-\n"
+   "Threat: \crE\c-\n"
    "\n"
    "The catalyst of destruction, whom spawned all of Hell's monstrosities and dictates over all; the Icon of Sin, said by some to be Satan himself, feeds purely off of hatred and chaos and will stop at nothing to attain everything in the world.\n"
    "\n"

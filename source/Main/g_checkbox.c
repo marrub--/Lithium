@@ -27,10 +27,10 @@ bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
       }
 
       if(gfx)
-         DrawSpritePlain(gfx, g->hid--, a->x + g->ox, a->y + g->oy, TS);
+         PrintSprite(gfx, a->x + g->ox,0, a->y + g->oy,0);
 
       if(chkgfx && a->on)
-         DrawSpritePlain(chkgfx, g->hid--, a->x + g->ox, a->y + g->oy, TS);
+         PrintSprite(chkgfx, a->x + g->ox,0, a->y + g->oy,0);
    }
 
    if(g->hot == id && g->active == id && !g->clicklft)

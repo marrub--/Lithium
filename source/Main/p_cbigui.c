@@ -97,7 +97,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    if(!p->indialogue)
       Lith_GUI_UpdateState(g, p);
 
-   DrawSpriteAlpha(StrParam("%SBackground.png", g->gfxprefix), g->hid--, 0.1, 0.1, TS, 0.7);
+   PrintSpriteA(StrParam("%SBackground.png", g->gfxprefix), 0,1, 0,1, 0.7);
 
    if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);

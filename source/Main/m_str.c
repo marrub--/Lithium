@@ -172,4 +172,18 @@ __str StrParam(__str fmt, ...)
    return ACS_EndStrParam();
 }
 
+//
+// StrParamBegin
+//
+void StrParamBegin(__str fmt, ...)
+{
+   va_list vl;
+
+   ACS_BeginPrint();
+
+   va_start(vl, fmt);
+   __vnprintf_str(fmt, vl);
+   va_end(vl);
+}
+
 // EOF

@@ -87,20 +87,21 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    }
 
    // draw top cap
-   __with(__str cap = Lith_GUI_Prefix1(g, pre, capS);)
-      if(cap) DrawSpritePlain(cap, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+   ifauto(__str, cap, Lith_GUI_Prefix1(g, pre, capS))
+      PrintSprite(cap, x,2, y,1);
    y += caph;
 
    // draw middle of bar
    __with(__str scrl = Lith_GUI_Prefix1(g, pre, scrl);)
-   for(int i = 0; i < blocks; i++) {
-      if(scrl) DrawSpritePlain(scrl, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+      for(int i = 0; i < blocks; i++)
+   {
+      if(scrl) PrintSprite(scrl, x,2, y,1);
       y += blockh;
    }
 
    // draw bottom cap
-   __with(__str cap = Lith_GUI_Prefix1(g, pre, capE);)
-      if(cap) DrawSpritePlain(cap, g->hid--, x + 0.2, y + 0.1, TICSECOND);
+   ifauto(__str, cap, Lith_GUI_Prefix1(g, pre, capE))
+      PrintSprite(cap, x,2, y,1);
 
    // get base Y
    int const ory = a->y + g->oy;
@@ -113,12 +114,10 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
       else
          graphic = Lith_GUI_Prefix1(g, pre, notchgfx);
 
-      if(graphic)
-         for(int i = 0; i < notches; i++)
+      if(graphic) for(int i = 0; i < notches; i++)
       {
          int const npos = round(caph + (h * scr->y) + (caph * i));
-         DrawSpritePlain(graphic, g->hid--, x + 0.2, ory + npos + 0.1,
-            TICSECOND);
+         PrintSprite(graphic, x,2, ory + npos,1);
       }
    }
 

@@ -162,16 +162,16 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
 
 #define Label(label) \
    do { \
-      HudMessageF("CBIFONT", label); \
-      HudMessagePlain(g->hid--, g->ox + 2.1, g->oy + y + 0.1, TICSECOND); \
+      PrintTextFmt(label); \
+      PrintText("CBIFONT", CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
    } while(0)
 
 #define Category(name) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
       { \
-         HudMessageF("CHFONT", "\Cn" name); \
-         HudMessagePlain(g->hid--, g->ox + 140.0, g->oy + y + 5.1, TICSECOND); \
+         PrintTextFmt("\Cn" name); \
+         PrintText("CHFONT", CR_WHITE, g->ox + 140,0, g->oy + y + 5,1); \
       } \
       y += 20; \
    } while(0)
@@ -258,8 +258,8 @@ void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
             p->setCVarI(cvar, set - 1); \
          if(Lith_GUI_Button_Id(g, 1, .x = 280 -  guipre.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(cvar, set + 1); \
-         HudMessageF("CBIFONT", fmt, __VA_ARGS__); \
-         HudMessagePlain(g->hid--, g->ox + 200.1, g->oy + y + 0.1, TICSECOND); \
+         PrintTextFmt(fmt, __VA_ARGS__); \
+         PrintText("CBIFONT", CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
       } \
       y += 10; \
    } while(0)

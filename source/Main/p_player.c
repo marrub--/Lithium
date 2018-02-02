@@ -77,6 +77,9 @@ reinit:
       // Tic passes
       ACS_Delay(1);
 
+      // Reset HUD state
+      if(!p->indialogue) URANUS("_LEH");
+
       // Update previous-tic values
       p->old       = olddelta;
       p->oldhealth = oldhealth;
@@ -481,21 +484,23 @@ static void Lith_PlayerRunScripts(player_t *p)
       Lith_PlayerPreStats(p); // Update statistics
 
    if(!p->dead)
+      Lith_PlayerUpdateUpgrades(p);
+
+   Lith_PlayerRenderUpgrades(p);
+
+   if(!p->dead)
    {
       // Logic: Update our data.
       Lith_PlayerUpdateInventory(p);
 
       switch(p->activegui)
-      {
-      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p); break;
-      }
+      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p);
 
       CallbackRun(player_cb_t, PlayerUpdate, p);
 
-      Lith_PlayerUpdateAttributes(p); // Update attributes
-      Lith_PlayerUpdateUpgrades(p);   // Update upgrades
-      Lith_PlayerUpdateWeapons(p);    // Update weapons
-      Lith_PlayerUpdateLog(p);        // Update log data
+      Lith_PlayerUpdateAttributes(p);
+      Lith_PlayerUpdateWeapons(p);
+      Lith_PlayerUpdateLog(p);
 
       // Post-logic: Update the engine's data.
       Lith_PlayerUpdateStats(p); // Update engine info
@@ -507,15 +512,14 @@ static void Lith_PlayerRunScripts(player_t *p)
    // Rendering
    CallbackRun(player_cb_t, PlayerRender, p);
 
-   Lith_PlayerFootstep(p);       // Footstep effects
-   Lith_PlayerItemFx(p);         // Update item effects
-   Lith_PlayerDamageBob(p);      // Update damage bobbing
-   Lith_PlayerView(p);           // Update additive view
-   Lith_PlayerRenderUpgrades(p); // Render Upgrades
-   Lith_PlayerHUD(p);            // Draw HUD
-   Lith_PlayerStyle(p);          // Change player render style
-   Lith_PlayerLevelup(p);        // Level up effects
-   Lith_PlayerDebugStats(p);     // Debug stats
+   Lith_PlayerFootstep(p);
+   Lith_PlayerItemFx(p);
+   Lith_PlayerDamageBob(p);
+   Lith_PlayerView(p);
+   Lith_PlayerHUD(p);
+   Lith_PlayerStyle(p);
+   Lith_PlayerLevelup(p);
+   Lith_PlayerDebugStats(p);
 }
 
 //

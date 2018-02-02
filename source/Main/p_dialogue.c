@@ -104,41 +104,39 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    Lith_GUI_UpdateState(g, p);
 
    // Background
-   ACS_SetHudSize(480, 300, false);
-   DrawSpritePlain("lgfx/Terminal/Back.png",   g->hid--, midx, 0.1, TS);
-   DrawSpritePlain("lgfx/Terminal/Border.png", g->hid--, midx, 0.1, TS);
-   ACS_SetHudSize(g->w, g->h, false);
+   SetSize(480, 300);
+   PrintSprite("lgfx/Terminal/Back.png",   midx,0, 0,1);
+   PrintSprite("lgfx/Terminal/Border.png", midx,0, 0,1);
+   SetSize(g->w, g->h);
 
    // Top-left text
-   HudMessageF("LTRMFONT", "SGXLine r4205");
-   HudMessageParams(0, g->hid--, CR_RED, 0.1, 0.1, TS);
+   PrintTextFmt("SGXLine r4205");
+   PrintText("LTRMFONT", CR_RED, 0,1, 0,1);
 
    // Top-right text
    switch(vmstate->trmActi)
    {
    case TACT_LOGON:
-      HudMessageF("LTRMFONT", "Opening Connection to %S", remote); break;
+      PrintTextFmt("Opening Connection to %S", remote); break;
    case TACT_LOGOFF:
-      HudMessageF("LTRMFONT", "Disconnecting...");                 break;
+      PrintTextFmt("Disconnecting...");                 break;
    default:
-      HudMessageF("LTRMFONT", "Remote: %S",               remote); break;
+      PrintTextFmt("Remote: %S",               remote); break;
    }
-
-   HudMessageParams(0, g->hid--, CR_RED, right+.2, 0.1, TS);
+   PrintText("LTRMFONT", CR_RED, right,2, 0,1);
 
    // Bottom-left text
-   HudMessageF("LTRMFONT", "<55.883.115.7>");
-   HudMessageParams(0, g->hid--, CR_RED, 0.1, bottom+.2, TS);
+   PrintTextFmt("<55.883.115.7>");
+   PrintText("LTRMFONT", CR_RED, 0,1, bottom,2);
 
    // Bottom-right text
    switch(vmstate->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: HudMessageF("LTRMFONT", "%S", world.canondate); break;
-   default:          HudMessageF("LTRMFONT", "Use To Acknowledge");  break;
+   case TACT_LOGOFF: PrintTextFmt("%S", world.canondate); break;
+   default:          PrintTextFmt("Use To Acknowledge");  break;
    }
-
-   HudMessageParams(0, g->hid--, CR_RED, right+.2, bottom+.2, TS);
+   PrintText("LTRMFONT", CR_RED, right,2, bottom,2);
 
    // Contents
    __str pict;
@@ -154,29 +152,29 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       {
          if(vmstate->text != "")
          {
-            HudMessageF("LTRMFONT", "%S", vmstate->text);
-            HudMessagePlain(g->hid--, midx, midy + 35, TS);
+            PrintTextFmt("%S", vmstate->text);
+            PrintText("LTRMFONT", CR_WHITE, midx,0, midy + 35,0);
             y -= 10;
          }
 
-         DrawSpritePlain(pict, g->hid--, midx, y, TS);
+         PrintSprite(pict, midx,0, y,0);
       }
       break;
 
    case TACT_PICT:
-      DrawSpritePlain(pict, g->hid--, midx/2, midy, TS);
+      PrintSprite(pict, midx/2,0, midy,0);
 
-      ACS_SetHudSize(tsizex, tsizey, false);
-      ACS_SetHudClipRect(tleft, ttop, 300, 300, 300);
-      HudMessageF("LTRMFONT", "%S", vmstate->text);
-      HudMessagePlain(g->hid--, tleft+.1, ttop+.1, TS);
-      ACS_SetHudSize(g->w, g->h, false);
-      ACS_SetHudClipRect(0, 0, 0, 0);
+      SetSize(tsizex, tsizey);
+      SetClipW(tleft, ttop, 300, 300, 300);
+      PrintTextFmt("%S", vmstate->text);
+      PrintText("LTRMFONT", CR_WHITE, tleft,1, ttop,1);
+      SetSize(g->w, g->h);
+      ClearClip();
       break;
 
    case TACT_INFO:
-      HudMessageF("LTRMFONT", "%S", vmstate->text);
-      HudMessagePlain(g->hid--, midx, midy, TS);
+      PrintTextFmt("%S", vmstate->text);
+      PrintText("LTRMFONT", CR_WHITE, midx,0, midy,0);
       break;
    }
 
@@ -204,17 +202,17 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   DrawSpriteAlpha("lgfx/Dialogue/Back.png", g->hid--, 0.1, 0.1, TS, 0.7);
-   DrawSpriteAlpha(icon, g->hid--, 0.1, 0.1, TS, 0.7);
+   PrintSpriteA("lgfx/Dialogue/Back.png", 0,1, 0,1, 0.7);
+   PrintSpriteA(icon,                     0,1, 0,1, 0.7);
 
-   HudMessageF("LHUDFONT", "%S", name);
-   HudMessagePlain(g->hid--, 30.1, 35.1, TS);
+   PrintTextFmt("%S", name);
+   PrintText("LHUDFONT", CR_WHITE, 30,1, 35,1);
 
-   ACS_SetHudClipRect(left, top, 263, 157, 263);
-   HudMessageF("CBIFONT", "\Cd> Remote: %S\n\Cd> Date: %S\n\n%S", remo,
-      world.canontime, vmstate->text);
-   HudMessageParams(0, g->hid--, CR_WHITE, left+.1, top+.1, TS);
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   SetClipW(left, top, 263, 157, 263);
+   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %S\n\n\C-%S", remo, world.canontime,
+      vmstate->text);
+   PrintText("CBIFONT", CR_WHITE, left,1, top,1);
+   ClearClip();
 
    if(vmstate->optNum)
    {
@@ -387,13 +385,16 @@ void Lith_RunDialogue(int num)
       DoNextCode;
 
    Op(DCD_TELEPORT_INTRALEVEL):
-      ACS_Delay(5);
+      for(int i = 0; i < 5; i++)
+         {URANUS("_LEH"); ACS_Delay(1);}
       ACS_Teleport(0, Next_I, false);
       Done;
    Op(DCD_TELEPORT_INTERLEVEL):
-      ACS_Delay(5);
+      for(int i = 0; i < 5; i++)
+         {URANUS("_LEH"); ACS_Delay(1);}
       Lith_TeleportOutEffect(p);
-      ACS_Delay(34);
+      for(int i = 0; i < 34; i++)
+         {URANUS("_LEH"); ACS_Delay(1);}
       ACS_Teleport_NewMap(Next_I, 0, 0);
       Done;
 
@@ -447,9 +448,11 @@ void Lith_RunDialogue(int num)
       if(vmstate.text != "")
          HudMessageLog("%S", vmstate.text);
 
+      URANUS("_LEH");
       do {
          Lith_DialogueGUI(&gst, p, &vmstate);
          ACS_Delay(1);
+         URANUS("_LEH");
       }
       while(vmstate.action == ACT_NONE);
 
@@ -479,9 +482,11 @@ void Lith_RunDialogue(int num)
          if(vmstate.text != "")
             HudMessageLog("%S", vmstate.text);
 
+         URANUS("_LEH");
          do {
             Lith_TerminalGUI(&gst, p, &vmstate);
             ACS_Delay(1);
+            URANUS("_LEH");
          }
          while(vmstate.action == ACT_NONE &&
             (!timer || --vmstate.trmTime >= 0));

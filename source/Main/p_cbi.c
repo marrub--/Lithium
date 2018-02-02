@@ -11,17 +11,16 @@
 
 #define Info(...) \
    do { \
-      HudMessageF("CBIFONT", __VA_ARGS__); \
-      HudMessagePlain(g->hid--, 23.1, y + .1, TICSECOND); \
+      PrintTextFmt(__VA_ARGS__); \
+      PrintText("CBIFONT", 0, 23,1, y,1); \
       y += 10; \
    } while(0)
 
 #define Slot(name, x, y) \
-   DrawSpritePlain("lgfx/UI/" name ".png", g->hid--, 300-(x*48)+.2, \
-      48*y+.1-20, TICSECOND)
+   PrintSprite("lgfx/UI/" name ".png", 300-x*48,2, 48*y-20,1)
 
 #define CPU(num) \
-   DrawSpritePlain("lgfx/UI/CPU" #num ".png", g->hid--, .1, .1, TICSECOND)
+   PrintSprite("lgfx/UI/CPU" #num ".png", 0,1, 0,1)
 
 // Static Functions ----------------------------------------------------------|
 
@@ -40,8 +39,8 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
    else
       {CPU(3); ram =  50; name = "OFMD Spec. Nodea 541 Basic CPU";}
 
-   HudMessageF("CBIFONT", "%S", name);
-   HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+   PrintTextFmt("%S", name);
+   PrintText("CBIFONT", 0, 20,1, 60,1);
 
    InfoStart;
 
@@ -68,8 +67,8 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 {
    CPU(2);
-   HudMessageF("CBIFONT", "AOF 5900001 Rev7 CPU");
-   HudMessagePlain(g->hid--, 20.1, 60.1, TICSECOND);
+   PrintTextFmt("AOF 5900001 Rev7 CPU");
+   PrintText("CBIFONT", 0, 20,1, 60,1);
 
    InfoStart;
 
@@ -105,7 +104,8 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 //
 void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
 {
-   switch(p->pclass) {
+   switch(p->pclass)
+   {
    case pcl_marine:    CBITab_Marine   (g, p); break;
    case pcl_cybermage: CBITab_CyberMage(g, p); break;
    }

@@ -11,7 +11,7 @@
 static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
 {
    Lith_GUI_Clip(g, x, y, w * 2, 8);
-   DrawSpritePlain(gfx, g->hid--, x+.1, y+.1, TICSECOND);
+   PrintSprite(gfx, x,1, y,1);
    Lith_GUI_ClipRelease(g);
 }
 
@@ -38,10 +38,10 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
       }
    }
 
-   HudMessageF("CHFONT", "%.3S", name);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+.1-24, y+.1, TICSECOND);
+   PrintTextFmt("%.3S", name);
+   PrintText("CHFONT", CR_WHITE, x-24,1, y,1);
 
-   DrawSpritePlain("lgfx/UI/AttrBar1.png", g->hid--, x+.1, y+.1, TICSECOND);
+   PrintSprite("lgfx/UI/AttrBar1.png", x,1, y,1);
 
    unsigned satr = p->attr.sup.attrs[at];
 
@@ -56,8 +56,8 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
       helptrns += 0.3;
    }
 
-   HudMessageF("CHFONT", "%u/%i", satr, ATTR_VIS_MAX);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+202.1, y+.1, TICSECOND);
+   PrintTextFmt("%u/%i", satr, ATTR_VIS_MAX);
+   PrintText("CHFONT", CR_WHITE, x+202,1, y,1);
 
    static __str const helpstrs[at_max] = {
       [at_acc] = "Weapon damage",
@@ -69,11 +69,11 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
       [at_rge] = "Damage buff when hit"
    };
 
-   HudMessageF("CHFONT", "%S", helpstrs[at]);
-   HudMessageParams(HUDMSG_ALPHA, g->hid--, CR_WHITE, x+1.1, y+1.1, TICSECOND, helptrns);
+   PrintTextFmt("%S", helpstrs[at]);
+   PrintTextA("CHFONT", CR_WHITE, x+1,1, y+1,1, helptrns);
 
-   HudMessageF("CHFONT", "%u/%i", satr, ATTR_VIS_MAX);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+202.1, y+.1, TICSECOND);
+   PrintTextFmt("%u/%i", satr, ATTR_VIS_MAX);
+   PrintText("CHFONT", CR_WHITE, x+202,1, y,1);
 }
 
 //
@@ -81,11 +81,10 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
 //
 static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 {
-   ACS_SetFont("CHFONT");
-   HudMessage("%S", left);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+  .1, y+.1, TICSECOND);
-   HudMessage("%S", right);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+80.2, y+.1, TICSECOND);
+   PrintTextFmt("%S", left);
+   PrintText("CHFONT", CR_WHITE, x,1, y,1);
+   PrintTextFmt("%S", right);
+   PrintText("CHFONT", CR_WHITE, x+80,2, y,1);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -96,12 +95,11 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 void Lith_CBITab_Status(gui_state_t *g, player_t *p)
 {
    int x = 30, y = 40;
-   ACS_SetFont("CHFONT");
-   HudMessage("%S", p->name);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+.1, y+.1, TICSECOND);
+   PrintTextFmt("%S", p->name);
+   PrintText("CHFONT", CR_WHITE, x,1, y,1);
    y += 10;
-   HudMessage("%S", p->classname);
-   HudMessageParams(0, g->hid--, CR_WHITE, x+.1, y+.1, TICSECOND);
+   PrintTextFmt("%S", p->classname);
+   PrintText("CHFONT", CR_WHITE, x,1, y,1);
    StatusInfo(g, x, y += 10, "Lv.",  StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));
    if(p->pclass & pcl_magicuser)
@@ -112,8 +110,8 @@ void Lith_CBITab_Status(gui_state_t *g, player_t *p)
    if(p->pclass & pcl_magicuser) y += 20;
    else                          y += 30;
    if(p->attr.points) {
-      HudMessage("Divide %u points among your attributes.", p->attr.sup.points);
-      HudMessageParams(0, g->hid--, CR_WHITE, x+.1, y+.1, TICSECOND);
+      PrintTextFmt("Divide %u points among your attributes.", p->attr.sup.points);
+      PrintText("CHFONT", CR_WHITE, x,1, y,1);
    }
    x  = 60;
    y += 10;

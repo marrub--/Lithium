@@ -255,7 +255,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
    int w = cont->w * 8;
 
    for(int y = 0; y < h; y += 8) for(int x = 0; x < w; x += 8)
-      DrawSpritePlain(bg, g->hid--, sx+x+.1, sy+y+.1, TS);
+      PrintSprite(bg, sx+x,1, sy+y,1);
 
    if(p && p->movitem && g->clicklft && aabb(sx, sy, sx+w, sy+h, g->cx, g->cy))
       if(Lith_ItemPlace(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8))
@@ -271,7 +271,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
       int ex = x + it->w * 8;
       int ey = y + it->h * 8;
 
-      DrawSpritePlain(it->spr, g->hid--, x+.1, y+.1, TS);
+      PrintSprite(it->spr, x,1, y,1);
 
       if(!p || p->movitem) continue;
 
@@ -286,8 +286,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
          fixed a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
 
          for(int xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
-            DrawSpriteX("lgfx/UI/InvSel.png", HUDMSG_ALPHA|HUDMSG_ADDBLEND,
-               g->hid--, x+.1, y+.1, TS, a);
+            PrintSpriteA("lgfx/UI/InvSel.png", x,1, y,1, a);
       }
    }
 }
@@ -349,8 +348,8 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
 
    if(p->selitem)
    {
-      HudMessageF("CBIFONT", "%S", p->selitem->name);
-      HudMessagePlain(g->hid--, x[0]+.1, y[0]+.2 - 10, TS);
+      PrintTextFmt("%S", p->selitem->name);
+      PrintText("CBIFONT", CR_WHITE, x[0],1, y[0] - 10,2);
 
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
@@ -387,13 +386,13 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
 
       if(name != "")
       {
-         HudMessageF("CBIFONT", "%S", name);
-         HudMessagePlain(g->hid--, x[i], y[i], TS);
+         PrintTextFmt("%S", name);
+         PrintText("CBIFONT", CR_WHITE, x[i],0, y[i],0);
       }
    }
 
-   HudMessageF("CBIFONT", "\Cj%S", HERMES_S("GetArmorDT"));
-   HudMessagePlain(g->hid--, 20.1, 40.1, TS);
+   PrintTextFmt("%S", HERMES_S("GetArmorDT"));
+   PrintText("CBIFONT", CR_WHITE, 20,1, 40,1);
 }
 
 //

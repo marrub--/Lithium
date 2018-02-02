@@ -281,8 +281,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    {
       int n = 0;
 
-      HudMessageF("CBIFONT", "\CTINFO CATEGORIES");
-      HudMessagePlain(g->hid--, 40.1, 70.1, TICSECOND);
+      PrintTextFmt("INFO CATEGORIES");
+      PrintText("CBIFONT", CR_PURPLE, 40,1, 70,1);
 
       bip->lastcategory = BIPC_MAIN;
 
@@ -299,8 +299,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       for(int i = 0; i < countof(lines); i++)
       {
-         HudMessage(lines[i]);
-         HudMessageAlpha(g->hid--, 105.1, 85.1 + n + i * 10, TICSECOND, 0.7);
+         PrintTextFmt(lines[i]);
+         PrintTextA("CBIFONT", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
       if(Lith_GUI_Button(g, "Search", 45, 85 + n, Pre(btnbipmain)))
@@ -396,8 +396,8 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       }
       else
       {
-         HudMessageF("CBIFONT", "\CmNo results");
-         HudMessagePlain(g->hid--, 70, 95, TICSECOND);
+         PrintTextFmt("No results");
+         PrintText("CBIFONT", CR_DARKGREY, 70,0, 95,0);
       }
    }
    else
@@ -440,19 +440,19 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             oy = g->oy - 40;
          }
          else
-            ACS_SetHudClipRect(111, 40, 200, 180, 184);
+            SetClipW(111, 40, 200, 180, 184);
 
          if(page->image)
-            DrawSpriteAlpha(page->image, g->hid--, 296.2, 180.2, TICSECOND, 0.4);
+            PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-         DrawSpriteAlpha("lgfx/UI/Background.png", g->hid--, 0.1, 0.1, TICSECOND, 0.5);
+         PrintSpriteA("lgfx/UI/Background.png", 0,1, 0,1, 0.5);
 
-         HudMessageF("CBIFONT", "\Ci%S", pinf.flname);
-         HudMessagePlain(g->hid--, 200.4, 45.1 + oy, TICSECOND);
+         PrintTextFmt("%S", pinf.flname);
+         PrintText("CBIFONT", CR_ORANGE, 200,4, 45 + oy,1);
 
-         #define DrawText(txt, pos, ...) \
-            HudMessageF("CBIFONT", "%.*S%S", pos, txt, pos == typeon->len ? Ticker("\n|", "") : "|"), \
-            HudMessageParams(0, g->hid--, __VA_ARGS__ + oy, TICSECOND)
+         #define DrawText(txt, pos, cr, x, y) \
+            PrintTextFmt("%.*S%S", pos, txt, pos == typeon->len ? Ticker("\n|", "") : "|"), \
+            PrintText("CBIFONT", cr, x,1, y+oy,1)
 
          // render an outline if the page has an image
          if(page->image)
@@ -460,20 +460,20 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
             __str s = Lith_RemoveTextColors(typeon->txt, typeon->pos);
             int len = ACS_StrLen(s);
 
-            DrawText(s, len, CR_BLACK, 112.1, 61.1); DrawText(s, len, CR_BLACK, 110.1, 61.1);
-            DrawText(s, len, CR_BLACK, 112.1, 59.1); DrawText(s, len, CR_BLACK, 110.1, 59.1);
+            DrawText(s, len, CR_BLACK, 112, 61); DrawText(s, len, CR_BLACK, 110, 61);
+            DrawText(s, len, CR_BLACK, 112, 59); DrawText(s, len, CR_BLACK, 110, 59);
 
-            DrawText(s, len, CR_BLACK, 111.1, 59.1);
-            DrawText(s, len, CR_BLACK, 111.1, 61.1);
+            DrawText(s, len, CR_BLACK, 111, 59);
+            DrawText(s, len, CR_BLACK, 111, 61);
 
-            DrawText(s, len, CR_BLACK, 112.1, 60.1);
-            DrawText(s, len, CR_BLACK, 110.1, 60.1);
+            DrawText(s, len, CR_BLACK, 112, 60);
+            DrawText(s, len, CR_BLACK, 110, 60);
          }
 
          DrawText(typeon->txt, typeon->pos, CR_WHITE, 111.1, 60.1);
 
          if(page->height) Lith_GUI_ScrollEnd(g, &CBIState(g)->bipinfoscr);
-         else             ACS_SetHudClipRect(0, 0, 0, 0);
+         else             ClearClip();
       }
 
       avail = bip->categoryavail[bip->curcategory];
@@ -487,15 +487,15 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    }
    else
    {
-      DrawSpriteAlpha("lgfx/UI/bip.png", g->hid--, 20.1, 40.1, TICSECOND, 0.6);
-      HudMessageF("CBIFONT", "BIOTIC INFORMATION PANEL ver2.5");
-      HudMessagePlain(g->hid--, 35.1, 40.1, TICSECOND);
+      PrintSpriteA("lgfx/UI/bip.png", 20,1, 40,1, 0.6);
+      PrintTextFmt("BIOTIC INFORMATION PANEL ver2.5");
+      PrintText("CBIFONT", CR_WHITE, 35,1, 40,1);
    }
 
    if(max)
    {
-      HudMessageF("CBIFONT", "%i/%i AVAILABLE", avail, max);
-      HudMessagePlain(g->hid--, 300.2, 30.1, TICSECOND);
+      PrintTextFmt("%i/%i AVAILABLE", avail, max);
+      PrintText("CBIFONT", CR_WHITE, 300,2, 30,1);
    }
 }
 

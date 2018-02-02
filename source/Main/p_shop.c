@@ -121,15 +121,15 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
 
    shopitem_t *item = &shopitems[CBIState(g)->shopsel];
 
-   ACS_SetHudClipRect(111, 30, 184, 150, 184);
+   SetClipW(111, 30, 184, 150, 184);
 
-   HudMessageF("CBIFONT", "%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
-   HudMessagePlain(g->hid--, 111.1, 30.1, TICSECOND);
+   PrintTextFmt("%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
+   PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
-   HudMessageF("CBIFONT", "%S", Language("LITH_TXT_SHOP_DESCR_%S", item->name));
-   HudMessageParams(HUDMSG_PLAIN, g->hid--, CR_WHITE, 111.1, 40.1, TICSECOND);
+   PrintTextFmt("%S", Language("LITH_TXT_SHOP_DESCR_%S", item->name));
+   PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   ClearClip();
 
    if(Lith_GUI_Button(g, "Buy", 259, 170, !p->canBuy(&item->shopdef, item)))
       p->buy(&item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S", false);

@@ -49,7 +49,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
    Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   DrawSpritePlain("lgfx/UI/MagicSelectBack.png", g->hid--, 0.1, 0.1, TS);
+   PrintSprite("lgfx/UI/MagicSelectBack.png", 0,1, 0,1);
 
    bool any = false;
 
@@ -109,9 +109,9 @@ void Lith_SetMagicUI(bool on)
 
       upgrade_t *upgr = p->getUpgr(UPGR_Magic);
 
-      if(on && !p->indialogue)
+      if(on)
       {
-         p->indialogue = UData.ui = true;
+         UData.ui = true;
          p->semifrozen++;
 
          UData.gst.gfxprefix = "lgfx/UI/";
@@ -124,7 +124,7 @@ void Lith_SetMagicUI(bool on)
       {
          if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
 
-         p->indialogue = UData.ui = false;
+         UData.ui = false;
          p->semifrozen--;
 
          UData.gst = (gui_state_t){};
@@ -181,16 +181,16 @@ void Upgr_Magic_Render(player_t *p, upgrade_t *upgr)
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
    int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
 
-   DrawSpritePlain("lgfx/HUD_C/MagicIcon.png", hid_magicsymbol, 1.1, 213.2, TS);
-   DrawSpritePlain("lgfx/HUD_C/BarSmall2.png", hid_magicammobg, 1.1, 220.2, TS);
+   PrintSprite("lgfx/HUD_C/MagicIcon.png", 1,1, 213,2);
+   PrintSprite("lgfx/HUD_C/BarSmall2.png", 1,1, 220,2);
 
-   ACS_SetHudClipRect(2, 219-5, hprc, 5);
-   DrawSpritePlain("lgfx/HUD_C/ManaBar1.png",  hid_magicammo1,  2.1, 219.2, TS);
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   SetClip(2, 219-5, hprc, 5);
+   PrintSprite("lgfx/HUD_C/ManaBar1.png", 2,1, 219,2);
+   ClearClip();
 
-   ACS_SetHudClipRect(2, 219-5, fprc, 5);
-   DrawSpritePlain("lgfx/HUD_C/ManaBar2.png",  hid_magicammo2,  2.1, 219.2, TS);
-   ACS_SetHudClipRect(0, 0, 0, 0);
+   SetClip(2, 219-5, fprc, 5);
+   PrintSprite("lgfx/HUD_C/ManaBar2.png", 2,1, 219,2);
+   ClearClip();
 }
 
 // EOF
