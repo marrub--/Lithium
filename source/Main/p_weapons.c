@@ -181,6 +181,7 @@ void Lith_GSInit_Weapon(void)
 //
 // Update information on what weapons we have.
 //
+[[__call("ScriptS")]]
 void Lith_PlayerPreWeapons(player_t *p)
 {
    weapondata_t *w = &p->weapon;

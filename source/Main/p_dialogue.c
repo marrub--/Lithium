@@ -110,7 +110,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    SetSize(g->w, g->h);
 
    // Top-left text
-   PrintTextFmt("SGXLine r4205");
+   PrintTextStr("SGXLine r4205");
    PrintText("LTRMFONT", CR_RED, 0,1, 0,1);
 
    // Top-right text
@@ -119,7 +119,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    case TACT_LOGON:
       PrintTextFmt("Opening Connection to %S", remote); break;
    case TACT_LOGOFF:
-      PrintTextFmt("Disconnecting...");                 break;
+      PrintTextStr("Disconnecting...");                 break;
    default:
       PrintTextFmt("Remote: %S",               remote); break;
    }
@@ -133,8 +133,8 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    switch(vmstate->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: PrintTextFmt("%S", world.canondate); break;
-   default:          PrintTextFmt("Use To Acknowledge");  break;
+   case TACT_LOGOFF: PrintTextStr(world.canondate);      break;
+   default:          PrintTextStr("Use To Acknowledge"); break;
    }
    PrintText("LTRMFONT", CR_RED, right,2, bottom,2);
 
@@ -152,7 +152,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
       {
          if(vmstate->text != "")
          {
-            PrintTextFmt("%S", vmstate->text);
+            PrintTextStr(vmstate->text);
             PrintText("LTRMFONT", CR_WHITE, midx,0, midy + 35,0);
             y -= 10;
          }
@@ -166,14 +166,14 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 
       SetSize(tsizex, tsizey);
       SetClipW(tleft, ttop, 300, 300, 300);
-      PrintTextFmt("%S", vmstate->text);
+      PrintTextStr(vmstate->text);
       PrintText("LTRMFONT", CR_WHITE, tleft,1, ttop,1);
       SetSize(g->w, g->h);
       ClearClip();
       break;
 
    case TACT_INFO:
-      PrintTextFmt("%S", vmstate->text);
+      PrintTextStr(vmstate->text);
       PrintText("LTRMFONT", CR_WHITE, midx,0, midy,0);
       break;
    }
@@ -205,7 +205,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    PrintSpriteA("lgfx/Dialogue/Back.png", 0,1, 0,1, 0.7);
    PrintSpriteA(icon,                     0,1, 0,1, 0.7);
 
-   PrintTextFmt("%S", name);
+   PrintTextStr(name);
    PrintText("LHUDFONT", CR_WHITE, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);

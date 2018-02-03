@@ -35,10 +35,16 @@
    if(a->preset) pre = *a->preset; \
    else          pre = def
 
-#define Lith_GUI_Prefix(set) if(set) set = StrParam("%S%S", g->gfxprefix, set)
+#define Lith_GUI_Prefix(set) \
+   if(set) { \
+      ACS_BeginPrint(); \
+      ACS_PrintString(g->gfxprefix); \
+      ACS_PrintString(set); \
+      set = ACS_EndStrParam(); \
+   } else (void)0
 #define Lith_GUI_Prefix1(g, pre, mem) \
    (!(pre)->external \
-      ? ((pre)->mem ? StrParam("%S%S", (g)->gfxprefix, (pre)->mem) : null) \
+      ? ((pre)->mem ? (ACS_BeginPrint(), ACS_PrintString((g)->gfxprefix), ACS_PrintString((pre)->mem), ACS_EndStrParam()) : null) \
       : (pre)->mem)
 
 #define Lith_GUI_ScrollReset(g, st) \

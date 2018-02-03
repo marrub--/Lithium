@@ -348,7 +348,7 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
 
    if(p->selitem)
    {
-      PrintTextFmt("%S", p->selitem->name);
+      PrintTextStr(p->selitem->name);
       PrintText("CBIFONT", CR_WHITE, x[0],1, y[0] - 10,2);
 
       if(g->clickrgt && !g->old.clickrgt)
@@ -386,12 +386,12 @@ void Lith_CBITab_Items(gui_state_t *g, player_t *p)
 
       if(name != "")
       {
-         PrintTextFmt("%S", name);
+         PrintTextStr(name);
          PrintText("CBIFONT", CR_WHITE, x[i],0, y[i],0);
       }
    }
 
-   PrintTextFmt("%S", HERMES_S("GetArmorDT"));
+   PrintTextStr(HERMES_S("GetArmorDT"));
    PrintText("CBIFONT", CR_WHITE, 20,1, 40,1);
 }
 

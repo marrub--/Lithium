@@ -25,7 +25,7 @@ static void HUD_Ammo(player_t *p, struct hud *h)
       typegfx = "lgfx/HUD_C/MAG.png";
 
       if(type & 2 && !wep->ammocur)
-         PrintTextFmt("OUT");
+         PrintTextStr("OUT");
       else
          PrintTextFmt("%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintText("LHUDFONT", CR_DARKRED, 242,1, 229,0);
@@ -68,7 +68,7 @@ static void HUD_Health(player_t *p, struct hud *h)
    PrintSprite("lgfx/HUD_C/SplitBack.png", 0,1, 239,2);
    PrintSprite("lgfx/HUD_C/VIT.png",       2,1, 237,2);
 
-   if(p->dead) PrintTextFmt("---");
+   if(p->dead) PrintTextStr("---");
    else        PrintTextFmt("%i", p->health);
    PrintText("LHUDFONT", CR_DARKRED, 21,1, 229,0);
 }

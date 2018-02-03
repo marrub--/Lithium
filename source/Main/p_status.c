@@ -69,7 +69,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
       [at_rge] = "Damage buff when hit"
    };
 
-   PrintTextFmt("%S", helpstrs[at]);
+   PrintTextStr(helpstrs[at]);
    PrintTextA("CHFONT", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", satr, ATTR_VIS_MAX);
@@ -81,9 +81,9 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
 //
 static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 {
-   PrintTextFmt("%S", left);
+   PrintTextStr(left);
    PrintText("CHFONT", CR_WHITE, x,1, y,1);
-   PrintTextFmt("%S", right);
+   PrintTextStr(right);
    PrintText("CHFONT", CR_WHITE, x+80,2, y,1);
 }
 
@@ -95,10 +95,10 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 void Lith_CBITab_Status(gui_state_t *g, player_t *p)
 {
    int x = 30, y = 40;
-   PrintTextFmt("%S", p->name);
+   PrintTextStr(p->name);
    PrintText("CHFONT", CR_WHITE, x,1, y,1);
    y += 10;
-   PrintTextFmt("%S", p->classname);
+   PrintTextStr(p->classname);
    PrintText("CHFONT", CR_WHITE, x,1, y,1);
    StatusInfo(g, x, y += 10, "Lv.",  StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));

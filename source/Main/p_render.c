@@ -38,6 +38,7 @@ void Lith_PlayerDebugStats(player_t *p)
 //
 // Lith_PlayerFootstep
 //
+[[__call("ScriptS")]]
 void Lith_PlayerFootstep(player_t *p)
 {
    if(Lith_IsPaused) return;
@@ -54,6 +55,7 @@ void Lith_PlayerFootstep(player_t *p)
 //
 // Lith_PlayerItemFx
 //
+[[__call("ScriptS")]]
 void Lith_PlayerItemFx(player_t *p)
 {
    bool hasir = ACS_CheckInventory("PowerLightAmp");
@@ -130,6 +132,7 @@ void Lith_PlayerView(player_t *p)
 //
 // Lith_PlayerStyle
 //
+[[__call("ScriptS")]]
 void Lith_PlayerStyle(player_t *p)
 {
    if(p->scopetoken) {
@@ -190,6 +193,7 @@ void Lith_PlayerHUD(player_t *p)
 //
 // Lith_PlayerLevelup
 //
+[[__call("ScriptS")]]
 void Lith_PlayerLevelup(player_t *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level) {

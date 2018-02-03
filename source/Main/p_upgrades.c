@@ -93,17 +93,6 @@ CallbackDefine(upgr_reinit_cb_t, UpgrReinit)
 // Static Functions ----------------------------------------------------------|
 
 //
-// RenderProxy
-//
-[[__call("ScriptS")]]
-static void RenderProxy(player_t *p, upgrade_t *upgr)
-{
-   ACS_SetHudSize(320, 240);
-   SetSize(320, 240);
-   upgr->info->Render(p, upgr);
-}
-
-//
 // Lith_UpgrCanBuy
 //
 static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *, void *upgr)
@@ -317,6 +306,7 @@ void Lith_PlayerReinitUpgrades(player_t *p)
 //
 // Lith_PlayerUpdateUpgrades
 //
+[[__call("ScriptS")]]
 void Lith_PlayerUpdateUpgrades(player_t *p)
 {
    if(Lith_IsPaused)
@@ -330,11 +320,17 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 //
 // Lith_PlayerRenderUpgrades
 //
+[[__call("ScriptS")]]
 void Lith_PlayerRenderUpgrades(player_t *p)
 {
-   ForUpgrade(upgr)
-      if(upgr->active && upgr->info->Render)
-         RenderProxy(p, upgr);
+   ForUpgrade(upgr) if(upgr->active && upgr->info->Render)
+   {
+      ACS_SetHudSize(320, 240);
+      ACS_SetHudClipRect(0, 0, 0, 0);
+      SetSize(320, 240);
+      ClearClip();
+      upgr->info->Render(p, upgr);
+   }
 }
 
 //
@@ -432,52 +428,33 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
       PrintTextFmt("Filter: %S", UpgrCateg[filter]);
    }
    else
-      PrintTextFmt("Filter: \CjAll");
+      PrintTextStr("Filter: \CjAll");
    PrintText("CBIFONT", CR_WHITE, 15,1, 215,1);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
-   int curcategory = UC_MAX;
+   int curcategory = -1;
    int y = 0;
 
    for(int i = 0; i < p->upgrmax; i++, y += guipre.btnlist.h)
    {
-      bool changed = false;
-
       upgrade_t *upgr = &p->upgrades[i];
 
-      if(upgr->info->category != curcategory)
+      if(filter != -1)
+         {if(upgr->info->category != filter) continue;}
+      else if(upgr->info->category != curcategory)
       {
          curcategory = upgr->info->category;
-         changed = true;
-
-         if(filter == -1)
-            y += guipre.btnlist.h;
-      }
-
-      if(filter != -1 && curcategory != filter)
-      {
-         y -= guipre.btnlist.h;
-         continue;
+         y += guipre.btnlist.h;
+         PrintTextStr(UpgrCateg[curcategory]);
+         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y - guipre.btnlist.h + g->oy + 1,1);
       }
 
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->upgrscr, y, guipre.btnlist.h))
          continue;
 
-      if(changed && filter == -1)
-      {
-         PrintTextFmt("%S", UpgrCateg[curcategory]);
-         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y - guipre.btnlist.h + g->oy + 1,1);
-      }
-
-      __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
       __str color;
-
-      gui_button_preset_t const *preset;
-
-      bool canbuy = p->canBuy(&upgr->info->shopdef, upgr);
-
-      if(!upgr->owned && !canbuy)
+      if(!upgr->owned && !p->canBuy(&upgr->info->shopdef, upgr))
          color = "u";
       else switch(upgr->info->key)
       {
@@ -486,9 +463,12 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
       default:              color = null;
       }
 
+      gui_button_preset_t const *preset;
            if(upgr->active) preset = &guipre.btnlistactivated;
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
+
+      __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
 
       int *upgrsel = &CBIState(g)->upgrsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
@@ -507,7 +487,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 
    #define Req(name) \
    { \
-      PrintTextFmt("Requires " name "."); \
+      PrintTextStr("Requires " name "."); \
       PrintText("CBIFONT", CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
@@ -577,11 +557,11 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
    if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = "Free";
 
-   PrintTextFmt("%S", cost);
+   PrintTextStr(cost);
    PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
    // Category
-   PrintTextFmt("%S", UpgrCateg[upgr->info->category]);
+   PrintTextStr(UpgrCateg[upgr->info->category]);
    PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    // Effect

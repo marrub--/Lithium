@@ -77,30 +77,30 @@ char *Lith_strdup_str(__str s)
 //
 __str Lith_ScoreSep(score_t num)
 {
-   char out[48] = {};
+   static char out[48];
 
-   if(num)
+   if(!num) return "0";
+
+   char *outp = out + countof(out) - 1;
+   int cnum = 0;
+
+   while(num)
    {
-      char *outp = out + 47;
-      int cnum = 0;
+      lldiv_t div = lldiv(num, 10);
+      *--outp = div.rem + '0';
+      num = div.quot;
 
-      while(num)
-      {
-         *--outp = (num % 10) + '0';
-         num = num / 10;
-
-         if(++cnum == 3) {
-            *--outp = ',';
-            cnum = 0;
-         }
+      if(++cnum == 3) {
+         *--outp = ',';
+         cnum = 0;
       }
-
-      if(!cnum) outp++;
-
-      return StrParam("%s", outp);
    }
-   else
-      return "0";
+
+   if(!cnum) outp++;
+
+   ACS_BeginPrint();
+   ACS_PrintGlobalCharArray((int)outp, __GDCC__Sta);
+   return ACS_EndStrParam();
 }
 
 //

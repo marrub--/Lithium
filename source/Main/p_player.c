@@ -455,25 +455,25 @@ static void Lith_BossWarning(player_t *p)
 [[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
-                         extern void Lith_PlayerPreWeapons(player_t *p);
-                         static void Lith_PlayerPreScore(player_t *p);
-                         static void Lith_PlayerPreStats(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerPreWeapons(player_t *p);
+   [[__call("ScriptS")]] static void Lith_PlayerPreScore(player_t *p);
+   [[__call("ScriptS")]] static void Lith_PlayerPreStats(player_t *p);
 
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateCBIGUI(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateInventory(player_t *p);
-                         static void Lith_PlayerUpdateAttributes(player_t *p);
-                         extern void Lith_PlayerUpdateUpgrades(player_t *p);
+   [[__call("ScriptS")]] static void Lith_PlayerUpdateAttributes(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerUpdateUpgrades(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateWeapons(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerUpdateLog(player_t *p);
 
-                         extern void Lith_PlayerFootstep(player_t *p);
-                         extern void Lith_PlayerItemFx(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerFootstep(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerItemFx(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerDamageBob(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerView(player_t *p);
-                         extern void Lith_PlayerRenderUpgrades(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerRenderUpgrades(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerHUD(player_t *p);
-                         extern void Lith_PlayerStyle(player_t *p);
-                         extern void Lith_PlayerLevelup(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerStyle(player_t *p);
+   [[__call("ScriptS")]] extern void Lith_PlayerLevelup(player_t *p);
    [[__call("ScriptS")]] extern void Lith_PlayerDebugStats(player_t *p);
 
    // Pre-logic: Update data from the engine.
@@ -525,6 +525,7 @@ static void Lith_PlayerRunScripts(player_t *p)
 //
 // Lith_PlayerUpdateAttributes
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerUpdateAttributes(player_t *p)
 {
    fixed acc = p->attr.attrs[at_acc] / 210.0;
@@ -551,6 +552,7 @@ static void Lith_PlayerUpdateAttributes(player_t *p)
 //
 // Lith_PlayerPreScore
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerPreScore(player_t *p)
 {
    if(!p->scoreaccumtime || p->score < p->old.score)
@@ -568,6 +570,7 @@ static void Lith_PlayerPreScore(player_t *p)
 //
 // Lith_PlayerPreStats
 //
+[[__call("ScriptS")]]
 static void Lith_PlayerPreStats(player_t *p)
 {
    if(p->health < p->oldhealth)

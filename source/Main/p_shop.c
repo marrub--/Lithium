@@ -126,7 +126,7 @@ void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
    PrintTextFmt("%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
    PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
-   PrintTextFmt("%S", Language("LITH_TXT_SHOP_DESCR_%S", item->name));
+   PrintTextStr(Language("LITH_TXT_SHOP_DESCR_%S", item->name));
    PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    ClearClip();

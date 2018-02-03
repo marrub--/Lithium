@@ -200,20 +200,6 @@ static __str const dmgtype_names[dmgtype_max] = {
 // Static Functions ----------------------------------------------------------|
 
 //
-// WaitForResurrect
-//
-[[__call("SScriptS")]]
-static void WaitForResurrect(dmon_t const *m)
-{
-   do {
-      ACS_Delay(2);
-      GetInfo(m);
-   } while(m->ms->health <= 0);
-
-   LogDebug(log_dmon, "monster %i resurrected", m->id);
-}
-
-//
 // ApplyLevels
 //
 static void ApplyLevels(dmon_t *m, int prev)
@@ -417,27 +403,6 @@ static void OnDeath(dmon_t *m)
    Lith_GiveAllScore((world.enemycompat ? 0 : m->score) + m->rank * 500, false);
 }
 
-//
-// MonsterTick
-//
-[[__call("SScriptS")]]
-static void MonsterTick(dmon_t *m, int tic)
-{
-   GetInfo(m);
-
-   if(m->ms->health <= 0) {
-      OnDeath(m);
-      WaitForResurrect(m);
-      return;
-   }
-
-   if(HasResistances(m) && m->level >= 20)
-      ShowBarrier(m, m->level / (fixed)MAXLEVEL);
-
-   if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
-      HERMES("Lith_IonizeFX");
-}
-
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -460,7 +425,23 @@ void Lith_MonsterMain(dmon_t *m)
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
    for(int tic = 0;; tic++) {
-      MonsterTick(m, tic);
+      GetInfo(m);
+
+      if(m->ms->health <= 0)
+      {
+         OnDeath(m);
+
+         do {ACS_Delay(3); GetInfo(m);} while(m->ms->health <= 0);
+
+         LogDebug(log_dmon, "monster %i resurrected", m->id);
+      }
+
+      if(HasResistances(m) && m->level >= 20)
+         ShowBarrier(m, m->level / (fixed)MAXLEVEL);
+
+      if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
+         HERMES("Lith_IonizeFX");
+
       ACS_Delay(2);
    }
 }

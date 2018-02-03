@@ -95,7 +95,7 @@ void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
    {
       PrintSprite("lgfx/HUD/SplitLeft.png", 12,1, 208,2);
 
-      PrintTextFmt("LHUDFONT", "%S", ArmorNames[UData.activearmor - 1].abbr);
+      PrintTextStr(ArmorNames[UData.activearmor - 1].abbr);
       PrintText("LHUDFONT", CR_LIGHTBLUE, 32,1, 199,0);
    }
 }

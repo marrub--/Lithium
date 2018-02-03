@@ -12,11 +12,11 @@ void Lith_CBITab_Statistics(gui_state_t *g, player_t *p)
    int n = 0;
 
    #define Stat(name, f, x) \
-      PrintTextFmt(name); PrintText("CBIFONT", CR_WHITE, 23,1,  50 + 8*n,1); \
+      PrintTextStr(name); PrintText("CBIFONT", CR_WHITE, 23,1,  50 + 8*n,1); \
       PrintTextFmt(f, x); PrintText("CBIFONT", CR_WHITE, 300,2, 50 + 8*n,1); \
       n++
 
-   PrintTextFmt("\Cj%S", p->name);
+   PrintTextStr(p->name);
    PrintText("SMALLFNT", CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));

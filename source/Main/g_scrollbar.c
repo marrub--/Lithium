@@ -16,12 +16,12 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    gui_scroll_state_t *scr = a->st;
 
    // sizes
-   int const blockh  = pre->scrlh;          // height of graphical block
-   int const blocks  = (a->h / blockh) - 1; // height in graphical blocks -caps
-   int const caph    = blockh / 2;          // size of cap
-   int const caps    = blocks * 2;          // height in caps, -caps
-   int const h       = blocks * blockh;     // height in pixels -caps
-   int const realh   = h + (caph * 2);      // height in pixels +caps
+   int const blockh  = pre->scrlh;        // height of graphical block
+   int const blocks  = a->h / blockh - 1; // height in graphical blocks -caps
+   int const caph    = blockh / 2;        // size of cap
+   int const caps    = blocks * 2;        // height in caps, -caps
+   int const h       = blocks * blockh;   // height in pixels -caps
+   int const realh   = h + caph * 2;      // height in pixels +caps
 
    // positions
    int x = a->x + pre->scrlw; // base x to draw from
@@ -37,18 +37,18 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    // get height of scroller
    int notches; // height of scroller in caps
 
-   if(a->contenth > realh) notches = (a->h / (double)a->contenth) * caps;
+   if(a->contenth > realh) notches = a->h / (float)a->contenth * caps;
    else                    notches = caps;
 
-   int    const scrlh = notches * caph;          // height in pixels of scroller
-   double const maxy  = (h - scrlh) / (double)h; // normalized maximum y value
+   int   const scrlh = notches * caph;          // height in pixels of scroller
+   float const maxy  = (h - scrlh) / (float)h; // normalized maximum y value
 
    // move scroller
-   __with(double supposedy = scr->y * h;)
+   __with(float supposedy = scr->y * h;)
    {
       if(g->active == id)
       {
-         double const cy = (g->cy - y) - caph;
+         float const cy = g->cy - y - caph;
 
          // if it isn't grabbed and the cursor is over the scroller,
          // set the grab position to where the cursor is relative to it
@@ -61,13 +61,13 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
          // if the scroller is grabbed we set the position relative to where
          // we grabbed it from, otherwise we just use the middle of it
          if(scr->grabbed) supposedy = cy - scr->grabpos;
-         else             supposedy = cy - (scrlh / 2);
+         else             supposedy = cy - scrlh / 2;
       }
       else
          scr->grabbed = false;
 
       // finally, normalize and clamp
-      scr->y = supposedy / (double)h;
+      scr->y = supposedy / (float)h;
       scr->y = minmax(scr->y, 0, maxy);
    }
 
@@ -116,7 +116,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
 
       if(graphic) for(int i = 0; i < notches; i++)
       {
-         int const npos = round(caph + (h * scr->y) + (caph * i));
+         int const npos = round(caph + h * scr->y + caph * i);
          PrintSprite(graphic, x,2, ory + npos,1);
       }
    }

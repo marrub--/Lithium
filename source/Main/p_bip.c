@@ -281,7 +281,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    {
       int n = 0;
 
-      PrintTextFmt("INFO CATEGORIES");
+      PrintTextStr("INFO CATEGORIES");
       PrintText("CBIFONT", CR_PURPLE, 40,1, 70,1);
 
       bip->lastcategory = BIPC_MAIN;
@@ -299,7 +299,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
       for(int i = 0; i < countof(lines); i++)
       {
-         PrintTextFmt(lines[i]);
+         PrintTextStr(lines[i]);
          PrintTextA("CBIFONT", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
@@ -396,7 +396,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       }
       else
       {
-         PrintTextFmt("No results");
+         PrintTextStr("No results");
          PrintText("CBIFONT", CR_DARKGREY, 70,0, 95,0);
       }
    }
@@ -447,7 +447,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
 
          PrintSpriteA("lgfx/UI/Background.png", 0,1, 0,1, 0.5);
 
-         PrintTextFmt("%S", pinf.flname);
+         PrintTextStr(pinf.flname);
          PrintText("CBIFONT", CR_ORANGE, 200,4, 45 + oy,1);
 
          #define DrawText(txt, pos, cr, x, y) \
@@ -488,7 +488,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
    else
    {
       PrintSpriteA("lgfx/UI/bip.png", 20,1, 40,1, 0.6);
-      PrintTextFmt("BIOTIC INFORMATION PANEL ver2.5");
+      PrintTextStr("BIOTIC INFORMATION PANEL ver2.5");
       PrintText("CBIFONT", CR_WHITE, 35,1, 40,1);
    }
 

@@ -190,7 +190,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
    CBIState(g)->logsel = sel;
    selmap = sel->object;
 
-   PrintTextFmt("%S", selmap->name);
+   PrintTextStr(selmap->name);
    PrintText("CBIFONT", CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
 
    forlist(logdata_t *logdata, p->loginfo.full)
@@ -210,7 +210,7 @@ void Lith_CBITab_Log(gui_state_t *g, player_t *p)
 
       PrintSprite("lgfx/UI/LogList.png", g->ox,1, y + g->oy,1);
 
-      PrintTextFmt("%S", logdata->info);
+      PrintTextStr(logdata->info);
       PrintText("CBIFONT", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 

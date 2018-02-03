@@ -64,6 +64,7 @@
    URANUS("_LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
+#define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
 
 #define PrintText(font, cr, x, xa, y, ya) \
    URANUS("_LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)-1.0)

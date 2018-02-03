@@ -39,7 +39,7 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
    else
       {CPU(3); ram =  50; name = "OFMD Spec. Nodea 541 Basic CPU";}
 
-   PrintTextFmt("%S", name);
+   PrintTextStr(name);
    PrintText("CBIFONT", 0, 20,1, 60,1);
 
    InfoStart;
@@ -67,7 +67,7 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 {
    CPU(2);
-   PrintTextFmt("AOF 5900001 Rev7 CPU");
+   PrintTextStr("AOF 5900001 Rev7 CPU");
    PrintText("CBIFONT", 0, 20,1, 60,1);
 
    InfoStart;

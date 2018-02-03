@@ -85,7 +85,7 @@ void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
          sincosf(xang, &xs, &xc);
          int x = atan2f(xs, xc) * 320;
 
-         PrintTextFmt(points[i]);
+         PrintTextStr(points[i]);
          PrintText("CBIFONT", CR_WHITE, 160 + x,0, 120,0);
       }
    }
