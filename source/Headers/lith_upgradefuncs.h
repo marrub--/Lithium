@@ -62,6 +62,10 @@ Case(StealthSys)
    U(StealthSys)
 
 // Weapon Upgrades -----------------------------------------------------------|
+Case(AutoReload)
+   A(AutoReload)
+   D(AutoReload)
+
 Case(RifleModes)
    D(RifleModes)
    R(RifleModes)

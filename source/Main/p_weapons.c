@@ -266,7 +266,7 @@ void Lith_PlayerPreWeapons(player_t *p)
       }
 
       // Auto-reload anything else.
-      if(p->getUpgrActive(UPGR_AutoReload) && wep->owned && wep->ammotype & AT_NMag &&
+      if(p->autoreload && wep->owned && wep->ammotype & AT_NMag &&
          !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5) {

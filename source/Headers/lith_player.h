@@ -268,6 +268,7 @@ typedef struct player
    bool  hadinfrared;
    fixed rage;
    __str notes[16];
+   bool  autoreload;
 
    // Static data
    bool  staticinit;
