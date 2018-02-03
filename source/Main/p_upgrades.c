@@ -434,9 +434,8 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
    Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
    int curcategory = -1;
-   int y = 0;
 
-   for(int i = 0; i < p->upgrmax; i++, y += guipre.btnlist.h)
+   for(int i = 0, y = -guipre.btnlist.h; i < p->upgrmax; i++)
    {
       upgrade_t *upgr = &p->upgrades[i];
 
@@ -447,8 +446,10 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
          curcategory = upgr->info->category;
          y += guipre.btnlist.h;
          PrintTextStr(UpgrCateg[curcategory]);
-         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y - guipre.btnlist.h + g->oy + 1,1);
+         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
       }
+
+      y += guipre.btnlist.h;
 
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->upgrscr, y, guipre.btnlist.h))
          continue;
