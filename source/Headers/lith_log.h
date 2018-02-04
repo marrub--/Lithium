@@ -2,7 +2,6 @@
 #ifndef LITH_LOG_H
 #define LITH_LOG_H
 
-#include "lith_lognames.h"
 #include "lith_list.h"
 
 #include <stdarg.h>

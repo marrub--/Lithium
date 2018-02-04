@@ -39,7 +39,6 @@ MAIN_LFLAGS=-llithlib $(MAIN_INIT) --alloc-min Sta "" $(MAIN_STA)
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_pdata.h \
                 $(MAIN_INC)/lith_wdata.h \
-                $(MAIN_INC)/lith_lognames.h \
                 $(MAIN_INC)/lith_upgradenames.h \
                 $(MAIN_INC)/lith_scorenums.h
 

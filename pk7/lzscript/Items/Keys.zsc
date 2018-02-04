@@ -3,7 +3,7 @@ class Lith_RedCard : Lith_BasicPickup replaces RedCard
    default
    {
       Inventory.PickupSound "player/pickup/redkey";
-      Lith_BasicPickup.LogName msg_redcard;
+      Lith_BasicPickup.LogName "RedCard";
    }
 
    override void PostBeginPlay()
@@ -26,7 +26,7 @@ class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
    default
    {
       Inventory.PickupSound "player/pickup/bluekey";
-      Lith_BasicPickup.LogName msg_bluecard;
+      Lith_BasicPickup.LogName "BlueCard";
    }
    
    override void PostBeginPlay()
@@ -49,7 +49,7 @@ class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
    default
    {
       Inventory.PickupSound "player/pickup/yellowkey";
-      Lith_BasicPickup.LogName msg_yellowcard;
+      Lith_BasicPickup.LogName "YellowCard";
    }
    
    override void PostBeginPlay()
@@ -72,7 +72,7 @@ class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
    default
    {
       Inventory.PickupSound "player/pickup/redskull";
-      Lith_BasicPickup.LogName msg_redskull;
+      Lith_BasicPickup.LogName "RedSkull";
    }
    
    override void PostBeginPlay()
@@ -95,7 +95,7 @@ class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
    default
    {
       Inventory.PickupSound "player/pickup/blueskull";
-      Lith_BasicPickup.LogName msg_blueskull;
+      Lith_BasicPickup.LogName "BlueSkull";
    }
    
    override void PostBeginPlay()
@@ -118,7 +118,7 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
    default
    {
       Inventory.PickupSound "player/pickup/yellowskull";
-      Lith_BasicPickup.LogName msg_yellowskull;
+      Lith_BasicPickup.LogName "YellowSkull";
    }
    
    override void PostBeginPlay()

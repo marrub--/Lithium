@@ -1,7 +1,6 @@
 #include "lzscript/Headers/lith_weapons.h"
 #include "lzscript/Headers/lith_pdata.h"
 #include "lzscript/Headers/lith_wdata.h"
-#include "lzscript/Headers/lith_lognames.h"
 #include "lzscript/Headers/lith_upgradenames.h"
 #include "lzscript/Headers/lith_scorenums.h"
 

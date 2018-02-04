@@ -130,24 +130,53 @@ class Lith_InventoryItem : Inventory
 
 class Lith_BasicPickup : Inventory
 {
+   private readonly string lith_logname;
+   private readonly int    lith_logtype;
+
+   property LogName: lith_logname;
+   property LogType: lith_logtype;
+
    default
    {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
+      Lith_BasicPickup.LogType msg_both;
       +INVENTORY.TRANSFER
    }
 
-   private readonly int lith_logname;
-
-   property LogName: lith_logname;
-
    override bool TryPickup(in out Actor toucher)
    {
-      if(lith_logname)
-         CallACS("Lith_LogName", lith_logname, toucher.playerNumber());
-
+      if(lith_logname) Lith_HERMES.Log(toucher, lith_logname, lith_logtype);
       GoAwayAndDie();
       return true;
+   }
+}
+
+class Lith_CustomFunction : CustomInventory
+{
+   default
+   {
+      Inventory.PickupMessage "";
+      +INVENTORY.ALWAYSPICKUP
+      +NOTIMEFREEZE
+   }
+}
+
+class Lith_CustomInventory : CustomInventory
+{
+   default
+   {
+      Inventory.PickupMessage "";
+   }
+
+   void Lith_A_Log(string name, int type)
+      {Lith_HERMES.Log(self, name, type);}
+
+   states
+   {
+   Nope:
+      TNT1 A 0;
+      fail;
    }
 }
 

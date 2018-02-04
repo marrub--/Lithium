@@ -34,6 +34,12 @@ extend class Lith_HERMES
       if(sv) sv.lith_pdata[pnum].grabInput = on;
    }
 
+   static string GetLogName()
+   {
+      let sv = Instance();
+      return sv ? sv.lith_logname : "";
+   }
+
    static string GetInvType(Actor mo)
       {return Lith_InventoryItem(mo).lith_invtype;}
 
@@ -62,6 +68,16 @@ extend class Lith_HERMES
       let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
       if(ar) return ar.Lith_SaveAmt() .. " DT";
       else   return "";
+   }
+
+   static void Log(Actor mo, string name, int type)
+   {
+      let sv = Instance();
+      if(sv && mo.playerNumber() >= 0)
+      {
+         sv.lith_logname = name;
+         CallACS("Lith_LogS", mo.playerNumber(), type);
+      }
    }
 }
 

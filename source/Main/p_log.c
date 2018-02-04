@@ -11,49 +11,18 @@
 // Extern Functions ----------------------------------------------------------|
 
 //
-// Lith_LogName
+// Lith_LogS
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_LogName(int name, int pnum)
+void Lith_LogS(int pnum, int type)
 {
-   withplayer(&players[pnum]) switch(name)
+   __str name = HERMES_S("GetLogName");
+   withplayer(&players[pnum]) switch(type)
    {
-#define BOTH(name) case msg_##name: p->log ("%LS", "LITH_TXT_LOG_" #name); break;
-#define FULL(name) case msg_##name: p->logF("%LS", "LITH_TXT_LOG_" #name); break;
-#define HUDS(name) case msg_##name: p->logH("%LS", "LITH_TXT_LOG_" #name); break;
-#define AMMO(name) case msg_##name: if(p->getCVarI("lith_player_ammolog")) p->logH("%LS", "LITH_TXT_LOG_" #name); break;
-   BOTH(allmap)
-   BOTH(backpack)
-   BOTH(berserk)
-   BOTH(blursphere)
-   HUDS(healthbonus)
-   BOTH(infrared)
-   BOTH(invuln)
-   BOTH(medikit)
-   BOTH(megasphere)
-   BOTH(radsuit)
-   BOTH(soulsphere)
-   BOTH(stimpack)
-   BOTH(redcard)
-   BOTH(bluecard)
-   BOTH(yellowcard)
-   BOTH(redskull)
-   BOTH(blueskull)
-   BOTH(yellowskull)
-   BOTH(doggosphere)
-   BOTH(dogs)
-   AMMO(clip)
-   AMMO(clipbox)
-   AMMO(shell)
-   AMMO(shellbox)
-   AMMO(rocket)
-   AMMO(rocketbox)
-   AMMO(cell)
-   AMMO(cellbox)
-#undef BOTH
-#undef FULL
-#undef HUDS
-#undef AMMO
+   case msg_ammo: if(!p->getCVarI("lith_player_ammolog")) break;
+   case msg_huds: p->logH("%S", Language("LITH_TXT_LOG_%S", name)); break;
+   case msg_full: p->logF("%S", Language("LITH_TXT_LOG_%S", name)); break;
+   case msg_both: p->log ("%S", Language("LITH_TXT_LOG_%S", name)); break;
    }
 }
 

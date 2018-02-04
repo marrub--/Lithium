@@ -3,7 +3,8 @@ class Lith_Clip : Lith_ScoreItem replaces Clip
    default
    {
       Inventory.PickupSound "player/pickup/scoresmall";
-      Lith_BasicPickup.LogName msg_clip;
+      Lith_BasicPickup.LogName "Clip";
+      Lith_BasicPickup.LogType msg_ammo;
    }
 
    override void PostBeginPlay()
@@ -26,7 +27,8 @@ class Lith_ClipBox : Lith_ScoreItem replaces ClipBox
    default
    {
       Inventory.PickupSound "player/pickup/scorebig";
-      Lith_BasicPickup.LogName msg_clipbox;
+      Lith_BasicPickup.LogName "ClipBox";
+      Lith_BasicPickup.LogType msg_ammo;
    }
 
    override void PostBeginPlay()
@@ -49,7 +51,8 @@ class Lith_Shell : Lith_ScoreItem replaces Shell
    default
    {
       Inventory.PickupSound "player/pickup/shells";
-      Lith_BasicPickup.LogName msg_shell;
+      Lith_BasicPickup.LogName "Shell";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()
@@ -72,7 +75,8 @@ class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
    default
    {
       Inventory.PickupSound "player/pickup/shellb";
-      Lith_BasicPickup.LogName msg_shellbox;
+      Lith_BasicPickup.LogName "ShellBox";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()
@@ -95,7 +99,8 @@ class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
    default
    {
       Inventory.PickupSound "player/pickup/rockets";
-      Lith_BasicPickup.LogName msg_rocket;
+      Lith_BasicPickup.LogName "Rocket";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()
@@ -118,7 +123,8 @@ class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
    default
    {
       Inventory.PickupSound "player/pickup/rocketb";
-      Lith_BasicPickup.LogName msg_rocketbox;
+      Lith_BasicPickup.LogName "RocketBox";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()
@@ -141,7 +147,8 @@ class Lith_Cell : Lith_ScoreItem replaces Cell
    default
    {
       Inventory.PickupSound "player/pickup/cells";
-      Lith_BasicPickup.LogName msg_cell;
+      Lith_BasicPickup.LogName "Cell";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()
@@ -164,7 +171,8 @@ class Lith_CellPack : Lith_ScoreItem replaces CellPack
    default
    {
       Inventory.PickupSound "player/pickup/cellb";
-      Lith_BasicPickup.LogName msg_cellbox;
+      Lith_BasicPickup.LogName "CellBox";
+      Lith_BasicPickup.LogType msg_ammo;
    }
    
    override void PostBeginPlay()

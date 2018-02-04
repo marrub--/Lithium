@@ -49,4 +49,12 @@ enum // Lith_ArmorSlot
    aslot_max
 };
 
+enum // Lith_MsgType
+{
+   msg_ammo,
+   msg_huds,
+   msg_full,
+   msg_both
+};
+
 // EOF

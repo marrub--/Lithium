@@ -1,9 +1,3 @@
-actor Lith_CustomFunction : CustomInventory
-{
-   +INVENTORY.ALWAYSPICKUP
-   +NOTIMEFREEZE
-}
-
 actor Lith_Alerter : Lith_CustomFunction
 {
    states
