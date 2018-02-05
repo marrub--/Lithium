@@ -28,6 +28,32 @@ player/pickup/scoresmall  lsounds/Player/Pickup/ScoreSmall.flac  // 〃
 player/pickup/stimpack    lsounds/Player/Pickup/StimPack.flac    // Doom 3
 player/pickup/medikit     lsounds/Player/Pickup/Medikit.flac     // Fallout 4
 
+player/pickup/scorechip lsounds/Player/Pickup/ScoreChip.flac // Half-Life 2
+
+player/pickup/coin1 lsounds/Player/Pickup/Coin1.flac // Sony Media 1001 Sound Effects
+player/pickup/coin2 lsounds/Player/Pickup/Coin2.flac // 〃
+player/pickup/coin3 lsounds/Player/Pickup/Coin3.flac // 〃
+
+player/pickup/gem lsounds/Player/Pickup/Gem.flac // Fallout 4
+
+player/pickup/material1 lsounds/Player/Pickup/Material1.ogg // Chronicles of Riddick
+player/pickup/material2 lsounds/Player/Pickup/Material2.ogg // 〃
+player/pickup/material3 lsounds/Player/Pickup/Material3.ogg // 〃
+player/pickup/material4 lsounds/Player/Pickup/Material4.ogg // 〃
+
+$random player/pickup/coin {
+   player/pickup/coin1
+   player/pickup/coin2
+   player/pickup/coin3
+}
+
+$random player/pickup/material {
+   player/pickup/material1
+   player/pickup/material2
+   player/pickup/material3
+   player/pickup/material4
+}
+
 $random player/pickup/redskull {
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1

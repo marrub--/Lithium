@@ -49,6 +49,23 @@ class Lith_Player : DoomPlayer
       }
 
       Super.Tick();
+
+      for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+      {
+         let inv = Lith_BasicPickup(it.thing);
+
+         if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
+         {
+            let dst = distance2D(inv);
+            let t = max(min((140 - dst) / 3000.0, 1), 0);
+
+            if(t)
+            {
+               let newp = inv.pos * (1 - t) + pos * t;
+               inv.tryMove((newp.x, newp.y), 20);
+            }
+         }
+      }
    }
 
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)

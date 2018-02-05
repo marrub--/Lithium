@@ -6,6 +6,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       Inventory.PickupSound "items/healthbonus";
       Lith_BasicPickup.LogName "HealthBonus";
       Lith_BasicPickup.LogType msg_huds;
+      Lith_BasicPickup.Vacuum 1;
       Scale 0.7;
    }
 

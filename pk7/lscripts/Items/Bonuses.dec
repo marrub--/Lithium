@@ -2,18 +2,57 @@ actor Lith_Coin : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 50
    Lith_BasicPickup.LogName "Coin"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/coin"
+   Scale 0.3
+   Radius 10
+
+   states
+   {
+   Spawn:
+      SCOR H -1 bright
+      stop
+   }
 }
 
 actor Lith_ScoreChip : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
    Lith_BasicPickup.LogName "ScoreChip"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/scorechip"
+   Scale 0.4
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR I -1 bright
+      stop
+   }
+}
+
+actor Lith_Radio : Lith_ScoreItem
+{
+   Lith_ScoreItem.Score 300
+   Lith_BasicPickup.LogName "Radio"
+   Lith_BasicPickup.Vacuum 1
+   Radius 10
+
+   states
+   {
+   Spawn:
+      SCOR A -1 bright
+      stop
+   }
 }
 
 actor Lith_Ruby : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
    Lith_BasicPickup.LogName "Ruby"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
    Radius 10
 
@@ -29,6 +68,8 @@ actor Lith_Sapphire : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
    Lith_BasicPickup.LogName "Sapphire"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
 
@@ -44,6 +85,8 @@ actor Lith_Amethyst : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
    Lith_BasicPickup.LogName "Amethyst"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
    Radius 10
 
@@ -59,6 +102,8 @@ actor Lith_Diamond : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 1000
    Lith_BasicPickup.LogName "Diamond"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
 
@@ -74,6 +119,8 @@ actor Lith_Emerald : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 400
    Lith_BasicPickup.LogName "Emerald"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
 
@@ -89,30 +136,85 @@ actor Lith_Scheelite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
    Lith_BasicPickup.LogName "Scheelite"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/material"
+   Scale 0.5
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR J -1 bright
+      stop
+   }
 }
 
 actor Lith_Nambulite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
    Lith_BasicPickup.LogName "Nambulite"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/material"
+   Scale 0.5
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR K -1 bright
+      stop
+   }
 }
 
 actor Lith_Lepidolite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Lepidolite"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/material"
+   Scale 0.5
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR L -1 bright
+      stop
+   }
 }
 
 actor Lith_Petalite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Petalite"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/material"
+   Scale 0.5
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR N -1 bright
+      stop
+   }
 }
 
 actor Lith_Tourmaline : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Tourmaline"
+   Lith_BasicPickup.Vacuum 1
+   Inventory.PickupSound "player/pickup/material"
+   Scale 0.5
+   Radius 12
+
+   states
+   {
+   Spawn:
+      SCOR M -1 bright
+      stop
+   }
 }
 
 actor Lith_HealthBonus1 : Lith_MultiSpawner
@@ -142,6 +244,16 @@ actor Lith_ScoreChip1 : Lith_MultiSpawner
 }
 
 actor Lith_ScoreChip2 : Lith_ScoreChip1
+{
+   Lith_MultiSpawner.Amount 2
+}
+
+actor Lith_Radio1 : Lith_MultiSpawner
+{
+   Lith_MultiSpawner.Type "Lith_Radio"
+}
+
+actor Lith_Radio2 : Lith_Radio1
 {
    Lith_MultiSpawner.Amount 2
 }

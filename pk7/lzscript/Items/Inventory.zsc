@@ -141,8 +141,11 @@ class Lith_BasicPickup : Inventory
    private readonly string m_logname;
    private readonly int    m_logtype;
 
+   readonly bool m_vacuum;
+
    property LogName: m_logname;
    property LogType: m_logtype;
+   property Vacuum:  m_vacuum;
 
    override bool TryPickup(in out Actor mo)
    {
