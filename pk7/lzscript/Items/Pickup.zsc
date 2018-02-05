@@ -52,46 +52,47 @@ class Lith_Pickup : CustomInventory
       Lith_Pickup.Sprite "UNKNA";
    }
 
-   bool lith_usegeneric;
+   private readonly bool m_generic;
 
-   int lith_gla;
-   int lith_glz;
+   private readonly string m_sprGf;
+   private readonly string m_sprMf;
+   private readonly string m_sprCf;
 
-   Actor lith_spr;
+   private int m_gla;
+   private int m_glz;
 
-   string lith_spriteG_full;
-   string lith_spriteM_full;
-   string lith_spriteC_full;
+   private Actor m_spr;
 
-   Lith_Sprite lith_spriteG;
-   Lith_Sprite lith_spriteM;
-   Lith_Sprite lith_spriteC;
+   private Lith_Sprite m_sprG;
+   private Lith_Sprite m_sprM;
+   private Lith_Sprite m_sprC;
 
-   property Sprite:  lith_spriteG_full;
-   property SpriteM: lith_spriteM_full;
-   property SpriteC: lith_spriteC_full;
-   property Generic: lith_usegeneric;
+   property Sprite:  m_sprGf;
+   property SpriteM: m_sprMf;
+   property SpriteC: m_sprCf;
+   property Generic: m_generic;
 
    const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
 
    override void PostBeginPlay()
    {
-      if(lith_spriteG_full) Lith_GetSprite(lith_spriteG, lith_spriteG_full);
-      if(lith_spriteM_full) Lith_GetSprite(lith_spriteM, lith_spriteM_full);
-      if(lith_spriteC_full) Lith_GetSprite(lith_spriteC, lith_spriteC_full);
+      if(m_sprGf) m_sprG.get(m_sprGf);
+      if(m_sprMf) m_sprM.get(m_sprMf);
+      if(m_sprCf) m_sprC.get(m_sprCf);
 
-      lith_spr = Spawn("Lith_ItemSprite", pos);
-      lith_spr.master = self;
+      m_spr = Spawn("Lith_ItemSprite", pos);
+      m_spr.master = self;
    }
 
    override void Tick()
    {
       Super.Tick();
 
-      if(!lith_spr) return;
+      if(!m_spr) return;
 
-      if(lith_usegeneric) {
-         Lith_SetSprite(lith_spriteG);
+      if(m_generic)
+      {
+         Lith_SetSprite(m_sprG);
          return;
       }
 
@@ -99,31 +100,25 @@ class Lith_Pickup : CustomInventory
          return;
 
       let p = players[consoleplayer].camera;
-           if(p is "Lith_MarinePlayer")    Lith_SetSprite(lith_spriteM);
-      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(lith_spriteC);
-      else                                 Lith_SetSprite(lith_spriteG);
+           if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_sprM);
+      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_sprC);
+      else                                 Lith_SetSprite(m_sprG);
    }
 
    void Lith_SetSprite(Lith_Sprite s)
    {
-      lith_spr.sprite = s.spr;
-      lith_spr.frame  = s.frm;
-   }
-
-   void Lith_GetSprite(out Lith_Sprite s, string full)
-   {
-      s.spr = Actor.GetSpriteIndex(full.left(4));
-      s.frm = full.charCodeAt(4) - Ch_A;
+      m_spr.sprite = s.spr;
+      m_spr.frame  = s.frm;
    }
 
    void Lith_ItemGlow(class<Actor> type)
    {
-      lith_gla = (lith_gla + 5) % 360;
-      lith_glz = (lith_glz + 2) % 360;
+      m_gla = (m_gla + 5) % 360;
+      m_glz = (m_glz + 2) % 360;
 
-      double sa = sin(lith_gla);
-      double sz = sin(lith_glz);
-      double ca = cos(lith_gla);
+      double sa = sin(m_gla);
+      double sz = sin(m_glz);
+      double ca = cos(m_gla);
 
       if(!CallACS("LWData", wdata_noitemfx))
       {

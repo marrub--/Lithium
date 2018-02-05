@@ -25,14 +25,10 @@ player/pickup/rocketb     lsounds/Player/Pickup/RocketBig.flac   // Quake 2
 player/pickup/mana        lsounds/Player/Pickup/Mana.flac        // Devil May Cry 2
 player/pickup/scorebig    lsounds/Player/Pickup/ScoreBig.flac    // Self-made
 player/pickup/scoresmall  lsounds/Player/Pickup/ScoreSmall.flac  // 〃
+player/pickup/stimpack    lsounds/Player/Pickup/StimPack.flac    // Doom 3
+player/pickup/medikit     lsounds/Player/Pickup/Medikit.flac     // Fallout 4
 
 $random player/pickup/redskull {
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
-   player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
    player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1
@@ -105,26 +101,28 @@ $random items/healthbonusrandom {
    items/healthbonus14
 }
 
+items/vial lsounds/Player/Pickup/HealthBonus.wav
+
 $random items/healthbonus {
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
-   misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup misc/i_pkup
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
+   items/vial items/vial items/vial items/vial items/vial items/vial
    items/healthbonusrandom
 }
 

@@ -4,14 +4,14 @@ extend class Lith_HERMES
    {
       PlayerInfo p = players[pnum];
       let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
-      return wep ? wep.lith_max : -1;
+      return wep ? wep.m_max : -1;
    }
 
    static int GetCurMag(int pnum, string cname)
    {
       PlayerInfo p = players[pnum];
       let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
-      return wep ? wep.lith_fired : -1;
+      return wep ? wep.m_fired : -1;
    }
 
    static void AutoReload(int pnum, string cname)
@@ -24,24 +24,24 @@ extend class Lith_HERMES
    static string GetObituary()
    {
       let sv = Instance();
-      if(sv) return sv.lith_obituary;
+      if(sv) return sv.m_obituary;
       else   return "";
    }
 
    static void SetInput(int pnum, bool on)
    {
       let sv = Instance();
-      if(sv) sv.lith_pdata[pnum].grabInput = on;
+      if(sv) sv.m_pdata[pnum].grabInput = on;
    }
 
    static string GetLogName()
    {
       let sv = Instance();
-      return sv ? sv.lith_logname : "";
+      return sv ? sv.m_logname : "";
    }
 
    static string GetInvType(Actor mo)
-      {return Lith_InventoryItem(mo).lith_invtype;}
+      {return Lith_InventoryItem(mo).m_invtype;}
 
    static void DeleteItem(Actor mo, int item)
    {
@@ -59,7 +59,7 @@ extend class Lith_HERMES
    static string GetArmorSlot(Actor mo, int slot)
    {
       let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-      if(ar) return ar.lith_slotted[slot] ? ar.lith_slotted[slot].getTag() : "";
+      if(ar) return ar.m_slotted[slot] ? ar.m_slotted[slot].getTag() : "";
       else   return "";
    }
 
@@ -75,7 +75,7 @@ extend class Lith_HERMES
       let sv = Instance();
       if(sv && mo.playerNumber() >= 0)
       {
-         sv.lith_logname = name;
+         sv.m_logname = name;
          CallACS("Lith_LogS", mo.playerNumber(), type);
       }
    }

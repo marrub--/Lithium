@@ -8,6 +8,7 @@
 #include <math.h>
 
 // How to make DECORATE into a decent VM: Registers!
+// TODO: We have a new VM, get rid of this shit!
 
 #define PVarFunc(fn, expr) \
    [[__call("ScriptS"), __extern("ACS")]] \
@@ -41,15 +42,6 @@ RegisterMachine(PVarFunc, PVar)
 RegisterMachine(WVarFunc, WVar)
 
 //
-// Lith_UniqueTID
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_UniqueTID(void)
-{
-   return ACS_UniqueTID();
-}
-
-//
 // Lith_Timer
 //
 [[__call("ScriptS"), __extern("ACS")]]
@@ -67,80 +59,6 @@ void Lith_UpdateScore(void)
    score_t score = ACS_CheckInventory("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
    Lith_GiveAllScore(score, false);
    ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
-}
-
-//
-// Lith_Velocity
-//
-[[__call("ScriptS"), __extern("ACS")]]
-fixed Lith_Velocity(fixed velx, fixed vely)
-{
-   fixed x = ACS_GetActorX(0);
-   fixed y = ACS_GetActorY(0);
-   return ACS_FixedSqrt((x * x) + (y * y));
-}
-
-//
-// Lith_VelHax
-//
-[[__call("ScriptS"), __extern("ACS")]]
-int Lith_VelHax(int fuck)
-{
-   ACS_SetActivator(0, AAPTR_MASTER);
-
-   switch(fuck)
-   {
-   case 1: return ACS_GetActorVelX(0);
-   case 2: return ACS_GetActorVelY(0);
-   case 3: return ACS_GetActorVelZ(0);
-   }
-
-   return -1;
-}
-
-//
-// Lith_GiveHealthBonus
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_GiveHealthBonus(int amount)
-{
-   withplayer(LocalPlayer) {
-      amount += p->health;
-      if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
-      p->health = amount;
-   }
-}
-
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_GiveHealth(int amount)
-{
-   withplayer(LocalPlayer) {
-      amount += p->health;
-      amount *= 1 + p->attr.attrs[at_vit] / 80.0;
-      if(amount > p->maxhealth) amount = p->maxhealth;
-      p->health = amount;
-   }
-}
-
-//
-// Lith_CheckHealth
-//
-[[__call("ScriptS"), __extern("ACS")]]
-bool Lith_CheckHealth(int n)
-{
-   withplayer(LocalPlayer)
-      return p->health < p->maxhealth;
-   return 0;
-}
-
-//
-// Lith_Discount
-//
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_Discount(int pnum)
-{
-   withplayer(&players[pnum])
-      p->discount = 0.9;
 }
 
 //
@@ -206,8 +124,7 @@ void Lith_SteggleEnergy()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_Barrier()
 {
-   withplayer(LocalPlayer)
-      for(int i = 0; p->active && i < 35 * 30; i++)
+   withplayer(LocalPlayer) for(int i = 0; p->active && i < 35 * 30; i++)
    {
       ACS_GiveInventory("Lith_BarrierSpell", 1);
       ACS_Delay(1);
@@ -267,10 +184,8 @@ void Lith_PoisonFXTicker()
       ACS_TakeInventory("Lith_PoisonFXReset", 999);
       ACS_TakeInventory("Lith_PoisonFXTimer", 999);
       ACS_TakeInventory("Lith_PoisonFXGiverGiver", 999);
-      return;
    }
-
-   if(ACS_CheckInventory("Lith_PoisonFXTimer"))
+   else if(ACS_CheckInventory("Lith_PoisonFXTimer"))
    {
       ACS_GiveInventory("Lith_PoisonFXGiver", 1);
       ACS_TakeInventory("Lith_PoisonFXTimer", 1);
@@ -284,10 +199,7 @@ void Lith_PoisonFXTicker()
 void Lith_BoughtItemPickup(int id)
 {
    int const chan = CHAN_ITEM|CHAN_NOPAUSE;
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return;
-
-   if(id)
+   withplayer(LocalPlayer) if(id)
    {
       upgrade_t *upgr = p->getUpgr(id);
 

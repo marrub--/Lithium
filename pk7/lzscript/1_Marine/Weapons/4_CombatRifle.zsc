@@ -74,8 +74,8 @@ class Lith_CombatRifle : Lith_MWeapon
       +WEAPON.NOAUTOAIM
    }
 
-   int  lith_burst;
-   bool lith_grenfire;
+   int  m_burst;
+   bool m_grenfire;
 
    states(actor)
    {
@@ -103,7 +103,7 @@ class Lith_CombatRifle : Lith_MWeapon
       loop;
    
    Fire:
-      CRFG A 0 {invoker.lith_burst = 0;}
+      CRFG A 0 {invoker.m_burst = 0;}
       CRFG A 0 A_JumpIf(CallACS("LPData", pdata_riflemode) == rifle_firemode_burst,   "FireBurst");
       CRFG A 0 A_JumpIf(CallACS("LPData", pdata_riflemode) == rifle_firemode_grenade, "FireGrenade");
       
@@ -169,7 +169,7 @@ class Lith_CombatRifle : Lith_MWeapon
       CRFG B 1 bright A_WeaponReady(LITH_BOBONLY);
       CRFG C 1 bright A_WeaponReady(LITH_BOBONLY);
       CRFG C 1 A_WeaponReady(LITH_BOBONLY);
-      CRFG A 0 A_JumpIf(++invoker.lith_burst >= 5, "FireBurstDone");
+      CRFG A 0 A_JumpIf(++invoker.m_burst >= 5, "FireBurstDone");
       loop;
    FireBurstDone:
       CRFG A 4 A_WeaponReady(LITH_BOBONLY);
@@ -181,8 +181,8 @@ class Lith_CombatRifle : Lith_MWeapon
       goto Ready;
    
    FireGrenade:
-      TNT1 A 0 A_JumpIf(invoker.lith_grenfire, "GrenadeReload");
-      TNT1 A 0 {invoker.lith_grenfire = true;}
+      TNT1 A 0 A_JumpIf(invoker.m_grenfire, "GrenadeReload");
+      TNT1 A 0 {invoker.m_grenfire = true;}
       CRFG A 3 A_WeaponReady(LITH_BOBONLY);
       
       CRFG A 0 {
@@ -225,7 +225,7 @@ class Lith_CombatRifle : Lith_MWeapon
       CRFG A 1 offset(19, 67);
       CRFG A 1 offset(20, 66);
       CRFG A 1 offset(21, 62);
-      CRFG A 1 offset(20, 60) {invoker.lith_grenfire = false;}
+      CRFG A 1 offset(20, 60) {invoker.m_grenfire = false;}
       CRFG A 1 offset(21, 63);
       CRFG A 1 offset(23, 66);
       CRFG A 1 offset(24, 68);

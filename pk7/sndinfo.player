@@ -83,6 +83,9 @@ player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Ke
 player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
 player/cbi/mail         lsounds/Player/CBI/MailReceive.flac      // Fallout 4
 player/cbi/tabswitch    lsounds/Player/CBI/TabSwitch.flac        // 〃
+player/cbi/dlgopen      lsounds/Player/CBI/DialogueOpen.wav      // Resident Evil 4
+player/cbi/dlgclick     lsounds/Player/CBI/DialogueClick.wav     // 〃
+player/cbi/clicklst     lsounds/Player/CBI/ClickList.wav         // 〃
 
 $alias player/cbi/invrem player/cbi/findfail
 
@@ -91,11 +94,5 @@ $random player/cbi/keypress {
    player/cbi/key2
    player/cbi/key3
 }
-
-//
-// Gameboy
-//
-$alias player/gb/open player/cbi/open
-$alias player/gb/close player/cbi/close
 
 // EOF

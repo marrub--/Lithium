@@ -1,200 +1,248 @@
-______________________________________________________________________________
-|
-| Lithium
-|
+%%%                                                                         %%%
+%%          /7       //777777777777777777777777777  ///                      %%
+%          /:/7     //........................../  /::/ 77    777    777//    %
+%         /://               //77/     ///    /// /:7/==:7  :/::/7 //77//     %
+%        /://    /777       //77=======::////::///:7/ /:7   //:::77::::/      %
+%       /://    /::/       //77/====7-::::::::// /7/ /:/   7/::/777777//      %
+%      /://    /::/       //77/    /:://   /:// /7/ /:=/  :777/    777/       %
+%     /:======/::/=======//77/    /:://   /:// /77/ 7::::=77/:    /:://       %
+%    /:::::://::/==========//    ===//   /:// /77/   7==/:7//     7://        %
+%           /::/                        /://  ^^^                /7//:        %
+%            ^^                         ^^^                        ^^         %
+%                                                                             %
+%                            Project Golan, Xevv 2                            %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+% I have probably miscredited or forgotten to credit some people. ------------%
+% Please tell me if I did and I will correct it. -----------------------------%
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+|                                                                             |
+| If you want to use something from this mod, *please* ask me (Marrub) first. |
+| I don't want myself or anyone else who's given me stuff (directly or not) --|
+| to get pissed off because proper attribution or permission wasn't given. ---|
+|                                                                             |
+| Sound credits are all in the "sndinfo" files as comments. ------------------|
+|                                                                             |
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*                                                                             *
+* See licenses/copylib.txt for license information on GDCC libc, as included  *
+* in linked binary form in <acs/lithlib.bin>.                                 *
+*                                                                             *
+* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.    *
+*                                                                             *
+* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>.  *
+*                                                                             *
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-- I have possibly miscredited or forgotten to credit some people.
-- Please do tell me if I did.
+--- Credits ------------------------------------------------------------------|
 
-- If you want to use something from this mod, *please* ask me (Marrub) first.
-- I don't want myself or anyone else who's given me stuff (directly or not)
-- to get pissed off because proper attribution or permission wasn't given.
+*                                  * _sink *
 
-- Sound credits are all in the "sndinfo" files in comments.
+*  End of game music
 
-See licenses/copylib.txt for license information on GDCC libc, as included in
-linked binary form in <acs/lithlib.bin>.
+*                                   * 505 *
 
-Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.
+*  Title music (hYmns - Shredder)
 
-Source code for Lithium can be found at <https://github.com/marrub--/Lithium>.
+*                                 * a1337spy *
 
---- Credits
+*  Sounds for stuff
 
-_sink
-   End of game music
+*                               * Anthony Cole *
 
-505
-   Title music (hYmns - Shredder)
+*  Test map marine sprites
 
-a1337spy
-   Sounds for stuff
+*                                  * abbuw *
 
-Anthony Cole
-   Test map marine sprites
+*  Vent texture
 
-abbuw
-   Vent texture
+*                                 * DavidPH *
 
-DavidPH
-   Glorious, glorious GDCC
-   Lots of help with a lot of things
-   Cool guy
+*  Glorious, glorious GDCC
+*  Lots of help with a lot of things
+*  Cool guy
 
-GAA1992
-    Gauss Shotgun idle sprite
+*                                 * GAA1992 *
 
-Green Den
-   Test map music (Dandalins Story)
+*  Gauss Shotgun idle sprite
 
-Gutawer
-   Lots of help with ZScript
+*                                * Green Den *
 
-HorrorMovieGuy
-   SteggleSphere sprites
+*  Test map music (Dandalins Story)
 
-JetPlane
-   Image used as a base for the SMG sprite
-   Cool guy
+*                                 * Gutawer *
 
-Jimmy
-   Fonts! All of them, except the SMALLFNT, alien font and HUD font
-   Added some missing characters to the CBIFONT for me (which he also made)
-   Really, like, this guy is kind of crazy great
-   Made the base MENUDEFs for me
+*  Lots of help with ZScript
 
-Kate
-   Some specific, old code is based off of Error: Doom code
-   (This was originally a mod of Error: Doom, which is an awesome mod!)
-   Blank sphere used as a base for the the Blursphere
-   Prettied up the rain effects
-   Intermission text and background
+*                              * HorrorMovieGuy *
 
-Kyle873
-   Said a nice thing
-   I think
-   maybe
-   Fallout 4 sound rip
-   Phantasy Star Nova sound rip
+*  SteggleSphere sprites
 
-Marrub (me)
-   Almost everything not mentioned here
+*                                 * JetPlane *
 
-MarlboroMike
-   Score item sprites
-   Backpack pickup
-   Rocket Box pickup
+*  Image used as a base for the SMG sprite
+*  Cool guy
 
-Marty Kirra
-   Many advice
-   Cool guy
+*                                  * Jimmy *
 
-Minigunner
-   Smooth explosion sprites
+*  Fonts! Pretty much all of 'em
+*  Added some missing characters to the CBIFONT for me (which he also made)
+*  Really, like, this guy is kind of crazy great
+*  Made the base MENUDEFs for me
 
-monkeybtm6
-   BLLTR0 sprite
+*                                 * Kate Fox *
 
-RWTerma
-   ÷
+*  Some specific, old code is based off of Error: Doom code
+*  This was originally a mod of Error: Doom, which is an awesome mod!
+*  Blank sphere used as a base for the the Blursphere
+*  Prettied up the rain effects
+*  Intermission text and background
 
-Seryder
-   Briefcase sprite (WUPGA0)
+*                                 * Kyle873 *
 
-Sgt. Shivers
-   Shooting my shootyguns
-   Shotgun sprites
-   Revolver sprites (from Powerslave originally)
-   knif
-   Mateba reload animation
-   SPAS reload animation
-   Windows XP theme
+*  Said a nice thing
+*  I think
+*  maybe
+*  Fallout 4 sound rip
+*  Phantasy Star Nova sound rip
 
-Shadowlink226
-   Halo 3 sound rip
+*                               * Marrub (me) *
 
-Skaven
-   Intermission music (The Alchemist)
+*  Almost everything not mentioned here
 
-TerminusEst13
-   SHKRA0/B0 and a shitload of sound sources
-   Help with finding some sprites to work with
+*                               * MarlboroMike *
 
-vikingbro
-   Image used as a base for the Shock Rifle sprite
+*  Score item sprites
+*  Backpack pickup
+*  Rocket Box pickup
 
-VriskaSerket
-   Image used as a base for the Star Destroyer sprite
+*                               * Marty Kirra *
 
-Wartorn
-   Help with HUD design
-   Cool guy
+*  Many advice
+*  Cool guy
 
-WildWeasel
-   Help with making fonts, suggestions for HUD
-   Sleeves for Cyber-Mage
-   Cool guy
+*                                * Minigunner *
 
-Xaser Acheron
-   Bullet puffs
-   Probably some other stuff I took from Psychic
-   Help with code stuff
+*  Smooth explosion sprites
+*  Missile Launcher sprite
 
-Yholl
-   Effects from LegenDoom
-   Help with a buncha stuff
-   Descriptions for some of the extra upgrades
-   Ideas for a lot of stuff
-   Marathon resources
-   knif
-   Re-texturing the TITLEMAP for me
-   Missile Launcher code
-   Made the Charge Fist not suck
-   eviel gost
+*                                * monkeybtm6 *
 
-Zombie
-   Image used as a base for the SPAS sprite
-   Lots of help with ZScript
+*  BLLTR0 sprite
 
-zrrion the insect
-   Full sprites for the Grenade Launcher, Pistol and Plasma Rifle
-   Skull keys
-   Health pickups
-   Cell Pack pickup
+*                                 * Seryder *
 
---- Individual Credits
+*  Briefcase sprite (WUPGA0)
+
+*                               * Sgt. Shivers *
+
+*  Shooting my shootyguns
+*  Shotgun sprites
+*  Revolver sprites (from Powerslave originally)
+*  knif
+*  Mateba reload animation
+*  SPAS reload animation
+*  Windows XP theme
+
+*                              * Shadowlink226 *
+
+*  Halo 3 sound rip
+
+*                                  * Skaven *
+
+*  Intermission music (The Alchemist)
+
+*                              * TerminusEst13 *
+
+*  SHKRA0/B0 and a shitload of sound sources
+*  Help with finding some sprites to work with
+
+*                                * vikingbro *
+
+*  Image used as a base for the Shock Rifle sprite
+
+*                               * VriskaSerket *
+
+*  Image used as a base for the Star Destroyer sprite
+
+*                                 * Wartorn *
+
+*  Help with HUD design
+*  Cool guy
+
+*                                * WildWeasel *
+
+*  Help with making fonts, suggestions for HUD
+*  Sleeves for Cyber-Mage
+*  Cool guy
+
+*                              * Xaser Acheron *
+
+*  Bullet puffs
+*  Probably some other stuff I took from Psychic
+*  Help with code stuff
+
+*                                  * Yholl *
+
+*  Effects from LegenDoom
+*  Help with a buncha stuff
+*  Descriptions for some of the extra upgrades
+*  Ideas for a lot of stuff
+*  Marathon resources
+*  knif
+*  Re-texturing the TITLEMAP for me
+*  Missile Launcher code
+*  Made the Charge Fist not suck
+*  eviel gost
+*  Cardinal gem sprites
+
+*                                  * Zombie *
+
+*  Image used as a base for the SPAS sprite
+*  Lots of help with ZScript
+
+*                            * zrrion the insect *
+
+*  Full sprites for the Grenade Launcher, Pistol and Plasma Rifle
+*  Skull keys
+*  Health pickups
+*  Cell Pack pickup
+*  Health bonus pickup
 
 Cannon sprites
-   Minigunner - Centered DNF enforcer gun
-   Solo Spaghetti - Skull SSG
-   Bloax - Edit of skull SSG with barrel
-   Slax - Edit of skull SSG with scope
-   Marrub - Redraw
+   Minigunner:     (Centered DNF enforcer gun    )
+   Solo Spaghetti: (Skull SSG                    )
+   Bloax:          (Edit of skull SSG with barrel)
+   Slax:           (Edit of skull SSG with scope )
+   Marrub:         (Redraw                       )
 
 Combat Rifle sprites
-   Sgt. Shivers - Model rip
-   TheRailgunner - Edit of model rip
-   Marrub - Small edits
+   Sgt. Shivers:  (Model rip        )
+   TheRailgunner: (Edit of model rip)
+   Marrub:        (Small edits      )
 
 Laser Shotgun sprites
-   Mike12 - Vented shotgun
-   GAA1992, Cage & Scuba Steve - Auto shotgun
-   Marrub - Redraw of sights and design
+   Mike12:                      (Vented shotgun             )
+   GAA1992, Cage & Scuba Steve: (Auto shotgun               )
+   Marrub:                      (Redraw of sights and design)
 
 Sniper Rifle sprites
-   MrEnchanter - Sniper rifle sprite
-   Marrub - Redrawing and detailing, re-handing
-   Sgt. Shivers - Firing animation
+   MrEnchanter:  (Sniper rifle sprite                )
+   Marrub:       (Redrawing and detailing, re-handing)
+   Sgt. Shivers: (Firing animation                   )
 
 Super Shotgun sprites
-   Captain J
-   Turbo
+   Captain J & Turbo: (Whole sprite)
 
 Ion Rifle sprites
-   monkeybtm6 - Weapon rip from Disruptor
-   torridGristle - Assault rifle sprite
-   Marrub - Redraw
+   monkeybtm6:    (Weapon rip from Disruptor)
+   torridGristle: (Assault rifle sprite     )
+   Marrub:        (Redraw                   )
 
 Bassilla GUI theme
-   Kurashiki - Bassilla art
-   Sgt. Shivers - Everything else
+   Kurashiki:    (Bassilla art   )
+   Sgt. Shivers: (Everything else)
+
+EOF

@@ -1,3 +1,11 @@
+## Message type reference:
+## >      | System
+## >>     | Low-priority (ammo, misc)
+## >>>    | Medium-priority (vital)
+## >>>>   | High-priority (high vital)
+## >>>>>  | Mission-vital (powerups, keys)
+## >>>>>> | ???
+
 ## Health --------------------------------------------------------------------|
 == LITH_TXT_LOG_ArmorBonus  | >>> Armor Bonus
 == LITH_TXT_LOG_BlueArmor   | >>> Blue Armor
@@ -36,6 +44,20 @@
 == LITH_TXT_LOG_RocketBox | >> Box of Rockets
 == LITH_TXT_LOG_Cell      | >> Energy Charge
 == LITH_TXT_LOG_CellBox   | >> Demonic Energy Pack
+
+## Bonuses -------------------------------------------------------------------|
+== LITH_TXT_LOG_Coin       | >> Coin
+== LITH_TXT_LOG_ScoreChip  | >> Score Chip
+== LITH_TXT_LOG_Ruby       | >> Flawed Ruby
+== LITH_TXT_LOG_Sapphire   | >> Flawed Sapphire
+== LITH_TXT_LOG_Amethyst   | >> Flawed Amethyst
+== LITH_TXT_LOG_Diamond    | >> Flawed Diamond
+== LITH_TXT_LOG_Emerald    | >> Flawed Emerald
+== LITH_TXT_LOG_Scheelite  | >> Scheelite
+== LITH_TXT_LOG_Nambulite  | >> Nambulite
+== LITH_TXT_LOG_Lepidolite | >> Lepidolite
+== LITH_TXT_LOG_Petalite   | >> Petalite
+== LITH_TXT_LOG_Tourmaline | >> Tourmaline
 
 ## CBI Upgrades (Marine) -----------------------------------------------------|
 == LITH_TXT_LOG_CBI_MUpgr1      | > Installed KSKK Spec. High-Grade CPU

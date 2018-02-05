@@ -47,7 +47,7 @@ class Lith_Boss_Johnson : Lith_BasicPhantom
    override void Lith_OnDeath()
    {
       let m = Lith_Boss_Isaac(master);
-      if(m) m.lith_dupes--;
+      if(m) m.m_dupes--;
    }
 
    states
@@ -94,9 +94,9 @@ class Lith_Boss_Isaac : Lith_Phantom
 
    void Lith_SpawnDupe()
    {
-      if(random(0, 32) == 0 && user_phase == 3 && lith_dupes < 3)
+      if(random(0, 32) == 0 && user_phase == 3 && m_dupes < 3)
       {
-         lith_dupes++;
+         m_dupes++;
          A_SpawnItemEx("Lith_Boss_Johnson", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_NOCHECKPOSITION);
       }
    }
@@ -106,7 +106,7 @@ class Lith_Boss_Isaac : Lith_Phantom
       invoker.Lith_SpawnDupe();
    }
 
-   int lith_dupes;
+   int m_dupes;
 
    states
    {

@@ -40,7 +40,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    if(a->contenth > realh) notches = a->h / (float)a->contenth * caps;
    else                    notches = caps;
 
-   int   const scrlh = notches * caph;          // height in pixels of scroller
+   int   const scrlh = notches * caph;         // height in pixels of scroller
    float const maxy  = (h - scrlh) / (float)h; // normalized maximum y value
 
    // move scroller

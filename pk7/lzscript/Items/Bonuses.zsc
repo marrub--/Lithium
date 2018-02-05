@@ -1,0 +1,36 @@
+class Lith_HealthBonusVial : Lith_BasicPickup
+{
+   default
+   {
+      Tag "Health Bonus";
+      Inventory.PickupSound "items/healthbonus";
+      Lith_BasicPickup.LogName "HealthBonus";
+      Lith_BasicPickup.LogType msg_huds;
+      Scale 0.7;
+   }
+
+   override bool TryPickup(in out Actor mo)
+   {
+      CallACS("Lith_GiveHealthBonus", mo.playerNumber(), 1);
+      return Super.TryPickup(mo);
+   }
+
+   states
+   {
+   Spawn:
+      BON1 ABCDCB 6;
+      loop;
+   }
+}
+
+class Lith_HealthBonus : Lith_RandomSpawn replaces HealthBonus
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_hbonus;
+
+      +COUNTITEM
+   }
+}
+
+// EOF

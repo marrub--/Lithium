@@ -1,0 +1,53 @@
+class Lith_HealthItem : Lith_BasicPickup
+{
+   private readonly int m_amount;
+
+   property Amount: m_amount;
+
+   override bool CanPickup(Actor mo)
+      {return CallACS("Lith_CheckHealth", mo.playerNumber());}
+
+   override bool TryPickup(in out Actor mo)
+   {
+      CallACS("Lith_GiveHealth", mo.playerNumber(), m_amount);
+      return Super.TryPickup(mo);
+   }
+}
+
+class Lith_Stimpack : Lith_HealthItem replaces Stimpack
+{
+   default
+   {
+      Tag "Stimpack";
+      Lith_HealthItem.Amount 10;
+      Lith_BasicPickup.LogName "Stimpack";
+      Inventory.PickupSound "player/pickup/stimpack";
+   }
+
+   states
+   {
+   Spawn:
+      STIM A -1;
+      stop;
+   }
+}
+
+class Lith_Medikit : Lith_HealthItem replaces Medikit
+{
+   default
+   {
+      Tag "Medikit";
+      Lith_HealthItem.Amount 25;
+      Lith_BasicPickup.LogName "Medikit";
+      Inventory.PickupSound "player/pickup/medikit";
+   }
+
+   states
+   {
+   Spawn:
+      MEDI A -1;
+      stop;
+   }
+}
+
+// EOF

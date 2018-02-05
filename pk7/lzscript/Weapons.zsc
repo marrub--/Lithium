@@ -11,6 +11,11 @@ class Lith_Weapon : Weapon
       +WEAPON.NOALERT;
    }
 
+   int m_fired;
+   int m_max;
+
+   property MagSize: m_max;
+
    const Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
 
    // These flags are used for spawning pickup actors.
@@ -22,19 +27,14 @@ class Lith_Weapon : Weapon
       SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
 
-   int lith_fired;
-   int lith_max;
-
-   property MagSize: lith_max;
-
    bool Lith_MagEmpty()
    {
-      return lith_fired >= lith_max;
+      return m_fired >= m_max;
    }
 
    virtual void Lith_ReloadFinish(bool isauto)
    {
-      lith_fired = 0;
+      m_fired = 0;
    }
 
    action(actor) void Lith_A_SpawnPickup(class<Actor> a)
@@ -49,14 +49,14 @@ class Lith_Weapon : Weapon
 
    action(weapon) state Lith_A_JumpIfMagFull(statelabel sn = "Ready")
    {
-      return invoker.lith_fired ? null : ResolveState(sn);
+      return invoker.m_fired ? null : ResolveState(sn);
    }
 
    action(weapon) void Lith_A_MagIncr(int amt = 1)
    {
-      invoker.lith_fired += amt;
-      if(invoker.lith_fired > invoker.lith_max)
-         invoker.lith_fired = invoker.lith_max;
+      invoker.m_fired += amt;
+      if(invoker.m_fired > invoker.m_max)
+         invoker.m_fired = invoker.m_max;
    }
 
    action(weapon) void Lith_A_ReloadFinish()

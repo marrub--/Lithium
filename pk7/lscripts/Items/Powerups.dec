@@ -45,25 +45,6 @@ actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
    DropItem "Lith_SteggleSphere", 255, 1
 }
 
-actor Lith_HealthBonus : Lith_CustomInventory replaces HealthBonus
-{
-   Tag "Health Bonus"
-   Inventory.PickupSound "items/healthbonus"
-   
-   +COUNTITEM
-   
-   states
-   {
-   Spawn:
-      BON1 ABCDCB 6
-      loop
-   Pickup:
-      TNT1 A 0 Lith_A_Log("HealthBonus", msg_huds)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 1)
-      stop
-   }
-}
-
 actor Lith_Infrared : Lith_CustomInventory replaces Infrared
 {
    Tag "CB-Goggles"
@@ -107,23 +88,6 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
    }
 }
 
-actor Lith_Medikit : Lith_CustomInventory replaces Medikit
-{
-   Tag "Medikit"
-   
-   states
-   {
-   Spawn:
-      MEDI A -1
-      stop
-   Pickup:
-      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 25), "Nope")
-      TNT1 A 0 Lith_A_Log("Medikit", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealth", 25)
-      stop
-   }
-}
-
 actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
    Tag "Tao'chyan"
@@ -140,7 +104,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
       loop
    Pickup:
       TNT1 A 0 Lith_A_Log("Megasphere", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 200)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", PlayerNumber(), 200)
       stop
    }
 }
@@ -180,24 +144,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
       loop
    Pickup:
       TNT1 A 0 Lith_A_Log("Soulsphere", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 100)
-      stop
-   }
-}
-
-actor Lith_Stimpack : Lith_CustomInventory replaces Stimpack
-{
-   Tag "Stimpack"
-   
-   states
-   {
-   Spawn:
-      STIM A -1
-      stop
-   Pickup:
-      TNT1 A 0 A_JumpIf(!CallACS("Lith_CheckHealth", 10), "Nope")
-      TNT1 A 0 Lith_A_Log("Stimpack", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealth", 10)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", PlayerNumber(), 100)
       stop
    }
 }

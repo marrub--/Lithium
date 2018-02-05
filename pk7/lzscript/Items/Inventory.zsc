@@ -14,7 +14,7 @@ class Lith_IDOL : Inventory
          if(it.owner == self && it is "Lith_InventoryItem")
       {
          let item = Lith_InventoryItem(it);
-         if(item.lith_invitem == ip)
+         if(item.m_invitem == ip)
             return item;
       }
 
@@ -51,14 +51,14 @@ class Lith_InventoryItem : Inventory
       +INVENTORY.UNDROPPABLE
    }
 
-   string lith_invtype;
-   uint   lith_invitem;
+   string m_invtype;
+   uint   m_invitem;
 
-   property InvType: lith_invtype;
+   property InvType: m_invtype;
 
    bool Lith_Attach()
    {
-      if(Lith_IDOL(owner).Lith_Attach(lith_invitem))
+      if(Lith_IDOL(owner).Lith_Attach(m_invitem))
       {
          Lith_OnAttach();
          return true;
@@ -68,32 +68,32 @@ class Lith_InventoryItem : Inventory
    }
 
    void Lith_Unlink()
-      {Lith_IDOL(owner).Lith_Unlink(lith_invitem);}
+      {Lith_IDOL(owner).Lith_Unlink(m_invitem);}
 
    void Lith_Detach()
-      {lith_invitem = 0; destroy();}
+      {m_invitem = 0; destroy();}
 
    virtual bool Lith_UseItem(Actor mo) {return false;}
    virtual void Lith_OnAttach() {}
 
    virtual void Lith_Destroy()
    {
-      if(lith_invitem)
+      if(m_invitem)
       {
-         uint ip = lith_invitem;
-         lith_invitem = 0;
+         uint ip = m_invitem;
+         m_invitem = 0;
          CallACS("Lith_ItemDetach", ip);
       }
    }
 
    private void Lith_CreateItem()
-      {lith_invitem = CallACS("Lith_ItemCreate");}
+      {m_invitem = CallACS("Lith_ItemCreate");}
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_InventoryItem(Super.CreateCopy(mo));
 
-      copy.lith_invtype = lith_invtype;
+      copy.m_invtype = m_invtype;
 
       if(copy != self) copy.Lith_CreateItem();
 
@@ -112,7 +112,7 @@ class Lith_InventoryItem : Inventory
    override void AttachToOwner(Actor mo)
    {
       let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
-      id.Lith_Attach(lith_invitem);
+      id.Lith_Attach(m_invitem);
       Super.AttachToOwner(id);
    }
 
@@ -121,7 +121,7 @@ class Lith_InventoryItem : Inventory
       if(Super.CanPickup(mo))
       {
          let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
-         return lith_invitem && id && id.Lith_SpaceFree(lith_invitem);
+         return m_invitem && id && id.Lith_SpaceFree(m_invitem);
       }
       else
          return false;
@@ -130,12 +130,6 @@ class Lith_InventoryItem : Inventory
 
 class Lith_BasicPickup : Inventory
 {
-   private readonly string lith_logname;
-   private readonly int    lith_logtype;
-
-   property LogName: lith_logname;
-   property LogType: lith_logtype;
-
    default
    {
       Inventory.PickupMessage "";
@@ -144,9 +138,15 @@ class Lith_BasicPickup : Inventory
       +INVENTORY.TRANSFER
    }
 
-   override bool TryPickup(in out Actor toucher)
+   private readonly string m_logname;
+   private readonly int    m_logtype;
+
+   property LogName: m_logname;
+   property LogType: m_logtype;
+
+   override bool TryPickup(in out Actor mo)
    {
-      if(lith_logname) Lith_HERMES.Log(toucher, lith_logname, lith_logtype);
+      if(m_logname) Lith_HERMES.Log(mo, m_logname, m_logtype);
       GoAwayAndDie();
       return true;
    }

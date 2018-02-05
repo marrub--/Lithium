@@ -1,5 +1,4 @@
 #include "lzscript/Playsim/Server.zsc"
-#include "lzscript/Playsim/PauseManager.zsc"
 #include "lzscript/Playsim/Cyberspace.zsc"
 #include "lzscript/Playsim/Events.zsc"
 

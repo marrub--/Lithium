@@ -6,12 +6,12 @@ struct Lith_HERMES_PlayerData
 // HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
 class Lith_HERMES : EventHandler
 {
-   play string lith_logname;
-   play string lith_obituary;
-   play bool lith_paused;
-   play name lith_dmg_type;
-   play bool lith_dmg_world;
-   play Lith_HERMES_PlayerData lith_pdata[MAXPLAYERS];
+   play string m_logname;
+   play string m_obituary;
+   play bool m_paused;
+   play name m_dmgtype;
+   play bool m_dmgworld;
+   play Lith_HERMES_PlayerData m_pdata[MAXPLAYERS];
 
    static clearscope Lith_HERMES Instance()
       {return Lith_HERMES(Find("Lith_HERMES"));}
@@ -20,5 +20,6 @@ class Lith_HERMES : EventHandler
 #include "lzscript/Playsim/Server/Player.zsc"
 #include "lzscript/Playsim/Server/Boss.zsc"
 #include "lzscript/Playsim/Server/Weapons.zsc"
+#include "lzscript/Playsim/Server/Pause.zsc"
 
 // EOF

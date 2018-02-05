@@ -5,11 +5,11 @@ class Lith_Clip : Lith_ScoreItem replaces Clip
       Inventory.PickupSound "player/pickup/scoresmall";
       Lith_BasicPickup.LogName "Clip";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_Clip;
    }
 
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_Clip);
       A_GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
       Super.PostBeginPlay();
    }
@@ -29,11 +29,11 @@ class Lith_ClipBox : Lith_ScoreItem replaces ClipBox
       Inventory.PickupSound "player/pickup/scorebig";
       Lith_BasicPickup.LogName "ClipBox";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_ClipBox;
    }
 
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_ClipBox);
       A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
       Super.PostBeginPlay();
    }
@@ -53,11 +53,11 @@ class Lith_Shell : Lith_ScoreItem replaces Shell
       Inventory.PickupSound "player/pickup/shells";
       Lith_BasicPickup.LogName "Shell";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_Shell;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_Shell);
       A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_Shell);
       Super.PostBeginPlay();
    }
@@ -77,11 +77,11 @@ class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
       Inventory.PickupSound "player/pickup/shellb";
       Lith_BasicPickup.LogName "ShellBox";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_ShellBox;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_ShellBox);
       A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBox);
       Super.PostBeginPlay();
    }
@@ -101,11 +101,11 @@ class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
       Inventory.PickupSound "player/pickup/rockets";
       Lith_BasicPickup.LogName "Rocket";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_Rocket;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_Rocket);
       A_GiveInventory("Lith_RocketAmmo", AmmoAmt_Rocket);
       Super.PostBeginPlay();
    }
@@ -125,11 +125,11 @@ class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
       Inventory.PickupSound "player/pickup/rocketb";
       Lith_BasicPickup.LogName "RocketBox";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_RocketBox;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_RocketBox);
       A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBox);
       Super.PostBeginPlay();
    }
@@ -149,11 +149,11 @@ class Lith_Cell : Lith_ScoreItem replaces Cell
       Inventory.PickupSound "player/pickup/cells";
       Lith_BasicPickup.LogName "Cell";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_Cell;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_Cell);
       A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_Cell);
       Super.PostBeginPlay();
    }
@@ -173,11 +173,11 @@ class Lith_CellPack : Lith_ScoreItem replaces CellPack
       Inventory.PickupSound "player/pickup/cellb";
       Lith_BasicPickup.LogName "CellBox";
       Lith_BasicPickup.LogType msg_ammo;
+      Lith_ScoreItem.Score Score_CellPack;
    }
    
    override void PostBeginPlay()
    {
-      A_GiveInventory("Lith_ScoreCount", Score_CellPack);
       A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellPack);
       A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonPack);
       Super.PostBeginPlay();

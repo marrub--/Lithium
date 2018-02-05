@@ -1,12 +1,20 @@
+class Lith_PostACS : Thinker
+{
+   override void Tick()
+   {
+      Lith_URANUS._LEH();
+   }
+}
+
 class Lith_Events : EventHandler
 {
    /*
-   Lith_Cyberspace lith_cs;
+   Lith_Cyberspace m_cs;
 
    override void WorldTick()
    {
-      lith_cs.rotateView(2);
-      lith_cs.renderFrame();
+      m_cs.rotateView(2);
+      m_cs.renderFrame();
    }
    */
 
@@ -20,6 +28,9 @@ class Lith_Events : EventHandler
       {
          CallACS("__lithlib.bin_init");
          CallACS("__lithmain.bin_init");
+
+         let th = new("Lith_PostACS");
+         th.changeStatNum(Thinker.STAT_USER + 7);
       }
    }
 
@@ -68,17 +79,17 @@ class Lith_Events : EventHandler
          (evt.keyScan == InputEvent.Key_LShift ||
           evt.keyScan == InputEvent.Key_RShift))
       {
-         cl.lith_pdata[consoleplayer].shiftDown =
+         cl.m_pdata[consoleplayer].shiftDown =
             (evt.type == InputEvent.Type_KeyDown);
 
          return false;
       }
-      else if(sv.lith_pdata[consoleplayer].grabInput &&
+      else if(sv.m_pdata[consoleplayer].grabInput &&
          evt.type == InputEvent.Type_KeyDown && evt.keyString)
       {
          int ch = evt.keyChar;
 
-         if(cl.lith_pdata[consoleplayer].shiftDown &&
+         if(cl.m_pdata[consoleplayer].shiftDown &&
             (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
          {
             ch -= 32;
@@ -100,7 +111,7 @@ class Lith_Events : EventHandler
    /*
    override void RenderOverlay(RenderEvent evt)
    {
-      if(lith_cs) lith_cs.render();
+      if(m_cs) m_cs.render();
    }
    */
 }

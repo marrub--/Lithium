@@ -8,7 +8,7 @@ class Lith_AAGH : Inventory
       +INVENTORY.UNDROPPABLE
    }
 
-   Lith_Armor lith_slotted[aslot_max];
+   Lith_Armor m_slotted[aslot_max];
 
    static Lith_DamageType Lith_NameToDT(name type)
    {
@@ -39,10 +39,10 @@ class Lith_AAGH : Inventory
    {
       let slot = o.Lith_Slot();
 
-      if(!lith_slotted[slot])
+      if(!m_slotted[slot])
       {
          o.Lith_Unlink();
-         lith_slotted[slot] = o;
+         m_slotted[slot] = o;
 
 //       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
 
@@ -54,16 +54,16 @@ class Lith_AAGH : Inventory
 
    void Lith_OmitSlot(int slot)
    {
-      lith_slotted[slot] = null;
+      m_slotted[slot] = null;
    }
 
    bool Lith_RemoveSlot(int slot)
    {
-      if(lith_slotted[slot])
+      if(m_slotted[slot])
       {
-         if(lith_slotted[slot].Lith_Attach())
+         if(m_slotted[slot].Lith_Attach())
          {
-            lith_slotted[slot] = null;
+            m_slotted[slot] = null;
 
 //          Console.printf("%p: removed: %i", self, slot);
          }
@@ -78,8 +78,8 @@ class Lith_AAGH : Inventory
    {
       int save = 0;
       for(int i = 0; i < aslot_max; i++)
-         if(lith_slotted[i])
-            save += lith_slotted[i].Lith_SaveAmt(type);
+         if(m_slotted[i])
+            save += m_slotted[i].Lith_SaveAmt(type);
       return save;
    }
 
@@ -105,19 +105,19 @@ class Lith_Armor : Lith_InventoryItem
       +INVENTORY.ISARMOR
    }
 
-   protected int lith_slotnum;
+   protected int m_slotnum;
 
-   private int lith_save0;
-   private int lith_save1;
+   private int m_save0;
+   private int m_save1;
 
-   protected Lith_AAGH lith_armorowner;
+   protected Lith_AAGH m_owner;
 
-   protected int lith_cursave;
+   protected int m_cursave;
 
-   property SlotSave: lith_slotnum, lith_save0, lith_save1;
+   property SlotSave: m_slotnum, m_save0, m_save1;
 
    override void Lith_OnAttach()
-      {lith_armorowner = null;}
+      {m_owner = null;}
 
    override bool Lith_UseItem(Actor mo)
    {
@@ -125,7 +125,7 @@ class Lith_Armor : Lith_InventoryItem
 
       if(ar && ar.Lith_RemoveSlot(Lith_Slot()) && ar.Lith_AddSlot(self))
       {
-         lith_armorowner = ar;
+         m_owner = ar;
          return true;
       }
       else
@@ -134,29 +134,29 @@ class Lith_Armor : Lith_InventoryItem
 
    override void Lith_Destroy()
    {
-      if(lith_armorowner)
+      if(m_owner)
       {
-         lith_armorowner.Lith_OmitSlot(Lith_Slot());
-         lith_armorowner = null;
+         m_owner.Lith_OmitSlot(Lith_Slot());
+         m_owner = null;
       }
 
       Super.Lith_Destroy();
    }
 
    virtual int Lith_Slot()
-      {return lith_slotnum;}
+      {return m_slotnum;}
 
    virtual int Lith_SaveAmt(name type = 'None')
-      {return lith_cursave;}
+      {return m_cursave;}
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_Armor(Super.CreateCopy(mo));
 
-      copy.lith_slotnum = lith_slotnum;
-      copy.lith_save0   = lith_save0;
-      copy.lith_save1   = lith_save1;
-      copy.lith_cursave = lith_cursave;
+      copy.m_slotnum = m_slotnum;
+      copy.m_save0   = m_save0;
+      copy.m_save1   = m_save1;
+      copy.m_cursave = m_cursave;
 
       return copy;
    }
@@ -164,21 +164,21 @@ class Lith_Armor : Lith_InventoryItem
    override void BeginPlay()
    {
       Super.BeginPlay();
-      lith_cursave = lith_save0;
+      m_cursave = m_save0;
    }
 }
 
 class Lith_Armor_Resistant : Lith_Armor
 {
-   protected int lith_resist;
+   protected int m_resist;
 
-   property Resist: lith_resist;
+   property Resist: m_resist;
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_Armor_Resistant(Super.CreateCopy(mo));
 
-      copy.lith_resist = lith_resist;
+      copy.m_resist = m_resist;
 
       return copy;
    }
@@ -186,7 +186,7 @@ class Lith_Armor_Resistant : Lith_Armor
    override int Lith_SaveAmt(name type = 'None')
    {
       let dt = Lith_AAGH.Lith_NameToDT(type);
-      return lith_resist == dt ? lith_cursave * 2 : lith_cursave;
+      return m_resist == dt ? m_cursave * 2 : m_cursave;
    }
 }
 

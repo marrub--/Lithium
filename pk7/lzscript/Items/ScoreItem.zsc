@@ -8,10 +8,27 @@ class Lith_ScoreCount : Inventory
 
 class Lith_ScoreItem : Lith_BasicPickup
 {
+   private readonly int m_score;
+
+   property Score: m_score;
+
+   default
+   {
+      Lith_BasicPickup.LogType msg_huds;
+   }
+
    override bool TryPickup(in out Actor toucher)
    {
-      CallACS("Lith_UpdateScore");
+      toucher.A_GiveInventory("Lith_ScoreCount", m_score);
+      toucher.ACS_NamedExecuteAlways("Lith_UpdateScore");
       return Super.TryPickup(toucher);
+   }
+
+   states
+   {
+   Spawn:
+      ABIP A -1;
+      stop;
    }
 }
 

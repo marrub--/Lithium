@@ -34,27 +34,27 @@ class Lith_SpiralRocket : Lith_Rocket
       RenderStyle "None";
    }
 
-   vector3 lith_apos;
-   int lith_phasexyz;
+   vector3 m_apos;
+   int m_phasexyz;
 
    override void PostBeginPlay()
-      {lith_phasexyz = random(0, 360);}
+      {m_phasexyz = random(0, 360);}
 
    override void Tick()
    {
-      SetOrigin(pos + lith_apos, false);
+      SetOrigin(pos + m_apos, false);
       Super.Tick();
       A_SpawnItemEx("Lith_SpiralRocketHackActor9000", flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
-      SetOrigin(pos - lith_apos, false);
+      SetOrigin(pos - m_apos, false);
 
       if(vel.x || vel.y || vel.z)
       {
-         lith_apos.x = cos(angle + 90) * sin(lith_phasexyz) * 12;
-         lith_apos.y = sin(angle + 90) * sin(lith_phasexyz) * 12;
-         lith_apos.z =                   cos(lith_phasexyz) * 12;
+         m_apos.x = cos(angle + 90) * sin(m_phasexyz) * 12;
+         m_apos.y = sin(angle + 90) * sin(m_phasexyz) * 12;
+         m_apos.z =                   cos(m_phasexyz) * 12;
       }
 
-      lith_phasexyz = (lith_phasexyz + 7) % 360;
+      m_phasexyz = (m_phasexyz + 7) % 360;
    }
 }
 
@@ -74,12 +74,10 @@ class Lith_GrenadeLauncher : Lith_MWeapon
       +WEAPON.NOAUTOFIRE
    }
 
-   const lith_load_max = 8;
+   int m_loaded;
+   int m_iter;
+   int m_mode;
 
-   int lith_loaded;
-   int lith_iter;
-   int lith_mode;
-   
    states(actor)
    {
    SpawnPickup:
@@ -106,7 +104,7 @@ class Lith_GrenadeLauncher : Lith_MWeapon
       GRLG A 1;
       GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
       GRLG A 0 {
-         invoker.lith_loaded = invoker.lith_iter = invoker.lith_mode = 0;
+         invoker.m_loaded = invoker.m_iter = invoker.m_mode = 0;
       }
       GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ChargeRPG), "FireUnreal");
       GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_HomingRPG), "FireHoming");
@@ -172,19 +170,19 @@ class Lith_GrenadeLauncher : Lith_MWeapon
       goto FireAnim;
    
    FireUnreal:
-      GRLG A 0 {++invoker.lith_loaded;}
+      GRLG A 0 {++invoker.m_loaded;}
       GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    FireUnrealRefire:
       GRLG A 2;
-      GRLG A 0 A_JumpIf(invoker.lith_loaded == lith_load_max, "FireUnrealReal");
-      GRLG A 0 A_JumpIf(invoker.lith_iter++, "FireUnrealLoad");
+      GRLG A 0 A_JumpIf(invoker.m_loaded == 8, "FireUnrealReal");
+      GRLG A 0 A_JumpIf(invoker.m_iter++, "FireUnrealLoad");
       goto FireUnrealCheckRefire;
    FireUnrealLoad:
       GRLG A 0 A_PlaySound("weapons/rocket/lock", CHAN_5);
       GRLG A 0 A_JumpIfInventory("Lith_RocketAmmo", 1, 1);
       goto FireUnrealReal;
       GRLG A 0 A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
-      GRLG A 0 {++invoker.lith_loaded;}
+      GRLG A 0 {++invoker.m_loaded;}
       GRLR A 1;
       GRLR BC 2;
       GRLR D 4 A_GunFlash("AltModeChanger", GFF_NOEXTCHANGE);
@@ -197,12 +195,12 @@ class Lith_GrenadeLauncher : Lith_MWeapon
       GRLG A 0 A_AlertMonsters;
       GRLG A 0 A_PlaySound("weapons/rocket/launch", CHAN_6);
       GRLG A 0 A_PlaySound("weapons/rocket/fire", CHAN_WEAPON);
-      GRLG A 0 A_JumpIf(invoker.lith_loaded > 1, "FireThatShit");
+      GRLG A 0 A_JumpIf(invoker.m_loaded > 1, "FireThatShit");
       GRLG A 0 A_FireProjectile("Lith_Rocket");
       goto FireAnim;
    FireThatShit:
       GRLG A 0 {
-         while(invoker.lith_loaded--) switch(invoker.lith_mode)
+         while(invoker.m_loaded--) switch(invoker.m_mode)
          {
          case 0: A_FireProjectile("Lith_Rocket", 0, false, random(-24,24)); break;
          case 1: A_FireProjectile("Lith_SpiralRocket", 0, false); break;
@@ -214,10 +212,10 @@ class Lith_GrenadeLauncher : Lith_MWeapon
    AltModeChanger:
       TNT1 A 0 {
          if(GetPlayerInput(MODINPUT_BUTTONS) & BT_ALTATTACK)
-            switch(invoker.lith_mode)
+            switch(invoker.m_mode)
          {
-         case 0: ++invoker.lith_mode; A_PlaySound("weapons/rocket/setalt");  break;
-         case 1: ++invoker.lith_mode; A_PlaySound("weapons/rocket/setalt1"); break;
+         case 0: ++invoker.m_mode; A_PlaySound("weapons/rocket/setalt");  break;
+         case 1: ++invoker.m_mode; A_PlaySound("weapons/rocket/setalt1"); break;
          }
       }
       stop;

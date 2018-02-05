@@ -71,7 +71,7 @@ typedef struct player_delta_s
    int     maxhealth;
    fixed   alpha;
    score_t score;
-   bool    indialogue;
+   int     indialogue;
 
    // Position
    fixed x, y, z;
@@ -223,6 +223,7 @@ typedef struct player
    int   pclass;
    __str pcstr;
    int   pronoun;
+   int   dlgnum;
 
    // Deltas
    [[__anonymous]] player_delta_t cur;

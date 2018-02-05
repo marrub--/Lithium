@@ -177,10 +177,10 @@ class Lith_SMG : Lith_CWeapon
       Lith_Weapon.MagSize 50;
    }
 
-   bool   lith_bigmag;
-   double lith_spreadx;
-   double lith_spready;
-   double lith_recoil;
+   bool   m_bigmag;
+   double m_spreadx;
+   double m_spready;
+   double m_recoil;
    
    states(actor)
    {
@@ -193,10 +193,10 @@ class Lith_SMG : Lith_CWeapon
    {
    Ready:
       CSMG A 0 {
-         if(invoker.lith_bigmag = CallACS("LPData", pdata_upgrade, UPGR_SMG_A))
-            invoker.lith_max = 150;
+         if(invoker.m_bigmag = CallACS("LPData", pdata_upgrade, UPGR_SMG_A))
+            invoker.m_max = 150;
          else
-            invoker.lith_max = 50;
+            invoker.m_max = 50;
       }
       CSMG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|CallACS("Lith_GetWRF"));
       loop;
@@ -215,7 +215,7 @@ class Lith_SMG : Lith_CWeapon
       
    Fire:
       TNT1 A 0 A_JumpIfInventory("Lith_SMGHeat", 0, "ReloadHeat");
-      TNT1 A 0 {invoker.lith_recoil = 0.1;}
+      TNT1 A 0 {invoker.m_recoil = 0.1;}
       TNT1 A 0 Lith_A_JumpIfMagEmpty;
       TNT1 A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_SMG_C), 2);
       TNT1 A 0 A_JumpIfInventory("Lith_SMGHeat", 450, "Ready");
@@ -231,28 +231,28 @@ class Lith_SMG : Lith_CWeapon
       TNT1 A 0 {
          for(int i = 0; i < 2; i++)
          {
-            invoker.lith_spreadx = invoker.lith_recoil * frandom(-5, 5);
-            invoker.lith_spready = invoker.lith_recoil * frandom(-1, 1);
+            invoker.m_spreadx = invoker.m_recoil * frandom(-5, 5);
+            invoker.m_spready = invoker.m_recoil * frandom(-1, 1);
 
             if(CallACS("LPData", pdata_upgrade, UPGR_SMG_B))
-               A_FireProjectile("Lith_SMGTracer3", invoker.lith_spreadx,
-                  false, 0, 0, 0, invoker.lith_spready);
+               A_FireProjectile("Lith_SMGTracer3", invoker.m_spreadx,
+                  false, 0, 0, 0, invoker.m_spready);
             else
             {
-               A_FireBullets(invoker.lith_spreadx, invoker.lith_spready, -1,
+               A_FireBullets(invoker.m_spreadx, invoker.m_spready, -1,
                   8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE);
 
                if(CallACS("LPData", pdata_upgrade, UPGR_SMG_A))
-                  A_FireProjectile("Lith_SMGTracer2", invoker.lith_spreadx,
-                     false, 0, 0, 0, invoker.lith_spready);
+                  A_FireProjectile("Lith_SMGTracer2", invoker.m_spreadx,
+                     false, 0, 0, 0, invoker.m_spready);
                else
-                  A_FireProjectile("Lith_SMGTracer", invoker.lith_spreadx,
-                     false, 0, 0, 0, invoker.lith_spready);
+                  A_FireProjectile("Lith_SMGTracer", invoker.m_spreadx,
+                     false, 0, 0, 0, invoker.m_spready);
             }
          }
 
-         invoker.lith_recoil += 0.05;
-         if(invoker.lith_recoil > 1) invoker.lith_recoil = 1;
+         invoker.m_recoil += 0.05;
+         if(invoker.m_recoil > 1) invoker.m_recoil = 1;
       }
       TNT1 A 0 offset(0, 32);
       TNT1 A 0 Lith_A_RecoilUp(0.15);
@@ -322,7 +322,7 @@ class Lith_SMG : Lith_CWeapon
       CSMG A 0 A_StopSound(CHAN_WEAPON);
       CSMG A 0 A_PlaySound("weapons/smg/firedone", CHAN_5);
    Reload:
-      TNT1 A 0 A_JumpIf(invoker.lith_bigmag, "ReloadLong");
+      TNT1 A 0 A_JumpIf(invoker.m_bigmag, "ReloadLong");
       TNT1 A 0 Lith_A_JumpIfMagFull;
       CSMG A 1;
       CSMG D 1 offset(-2, 34);

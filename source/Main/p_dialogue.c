@@ -206,7 +206,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    PrintSpriteA(icon,                     0,1, 0,1, 0.7);
 
    PrintTextStr(name);
-   PrintText("LHUDFONT", CR_WHITE, 30,1, 35,1);
+   PrintText("LHUDFONT", CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %S\n\n\C-%S", remo, world.canontime,
@@ -274,16 +274,14 @@ void Lith_TeleportOutEffect(player_t *p)
 }
 
 //
-// Lith_RunDialogue
+// Lith_DialogueVM
 //
 // Main dialogue VM.
 //
-[[__call("ScriptS"), __extern("ACS")]]
-void Lith_RunDialogue(int num)
+[[__call("ScriptS")]]
+void Lith_DialogueVM(player_t *p, int num)
 {
-   // external state
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p) || p->dead || p->indialogue)
+   if(p->dead || p->indialogue > 1)
       return;
 
    // Get the dialogue by number.
@@ -292,7 +290,7 @@ void Lith_RunDialogue(int num)
    for(def = dlgdefs; def && def->num != num; def = def->next);
    if(!def) return;
 
-   p->indialogue = true;
+   p->indialogue++;
 
    // GUI state
    gui_state_t gst = {};
@@ -385,16 +383,13 @@ void Lith_RunDialogue(int num)
       DoNextCode;
 
    Op(DCD_TELEPORT_INTRALEVEL):
-      for(int i = 0; i < 5; i++)
-         {URANUS("_LEH"); ACS_Delay(1);}
+      ACS_Delay(5);
       ACS_Teleport(0, Next_I, false);
       Done;
    Op(DCD_TELEPORT_INTERLEVEL):
-      for(int i = 0; i < 5; i++)
-         {URANUS("_LEH"); ACS_Delay(1);}
+      ACS_Delay(5);
       Lith_TeleportOutEffect(p);
-      for(int i = 0; i < 34; i++)
-         {URANUS("_LEH"); ACS_Delay(1);}
+      ACS_Delay(34);
       ACS_Teleport_NewMap(Next_I, 0, 0);
       Done;
 
@@ -440,7 +435,7 @@ void Lith_RunDialogue(int num)
       DoCurCode;
 
    Op(DCD_DLGWAIT):
-      ACS_LocalAmbientSound("misc/chat", 127);
+      ACS_LocalAmbientSound("player/cbi/dlgopen", 127);
 
       p->frozen++;
       p->setVel(0, 0, 0);
@@ -448,11 +443,9 @@ void Lith_RunDialogue(int num)
       if(vmstate.text != "")
          HudMessageLog("%S", vmstate.text);
 
-      URANUS("_LEH");
       do {
          Lith_DialogueGUI(&gst, p, &vmstate);
          ACS_Delay(1);
-         URANUS("_LEH");
       }
       while(vmstate.action == ACT_NONE);
 
@@ -482,11 +475,9 @@ void Lith_RunDialogue(int num)
          if(vmstate.text != "")
             HudMessageLog("%S", vmstate.text);
 
-         URANUS("_LEH");
          do {
             Lith_TerminalGUI(&gst, p, &vmstate);
             ACS_Delay(1);
-            URANUS("_LEH");
          }
          while(vmstate.action == ACT_NONE &&
             (!timer || --vmstate.trmTime >= 0));
@@ -518,7 +509,20 @@ void Lith_RunDialogue(int num)
    }
 
 done:
-   p->indialogue = false;
+   p->indialogue -= 2;
+}
+
+//
+// Lith_RunDialogue
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_RunDialogue(int num)
+{
+   withplayer(LocalPlayer) if(!p->indialogue)
+   {
+      p->dlgnum = num;
+      p->indialogue++;
+   }
 }
 
 //

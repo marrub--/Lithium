@@ -6,5 +6,6 @@
 #include "lscripts/Items/DivisionSigil.dec"
 #include "lscripts/Items/CBIStuff.dec"
 #include "lscripts/Items/BoughtItem.dec"
+#include "lscripts/Items/Bonuses.dec"
 
 // EOF

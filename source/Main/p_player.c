@@ -77,8 +77,13 @@ reinit:
       // Tic passes
       ACS_Delay(1);
 
-      // Reset HUD state
-      if(!p->indialogue) URANUS("_LEH");
+      if(p->dlgnum)
+      {
+         [[__call("ScriptS")]] extern void Lith_DialogueVM(player_t *p, int dlgnum);
+
+         Lith_DialogueVM(p, p->dlgnum);
+         p->dlgnum = 0;
+      }
 
       // Update previous-tic values
       p->old       = olddelta;
@@ -318,7 +323,7 @@ void Lith_PlayerCloseGUI(player_t *p)
    {
       if(world.pauseinmenus)
       {
-         ACS_ScriptCall("Lith_PauseManager", "SetPaused", false);
+         HERMES("SetPaused", false);
          Lith_ForPlayer() p->frozen--;
       }
       else
@@ -339,7 +344,7 @@ void Lith_PlayerUseGUI(player_t *p, guiname_t type)
    {
       if(world.pauseinmenus)
       {
-         ACS_ScriptCall("Lith_PauseManager", "SetPaused", true);
+         HERMES("SetPaused", true);
          Lith_ForPlayer() p->frozen++;
       }
       else
@@ -433,6 +438,55 @@ void Lith_GiveMeAllOfTheScore(void)
    withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
 }
 
+//
+// Lith_GiveHealthBonus
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveHealthBonus(int pnum, int amount)
+{
+   withplayer(&players[pnum])
+   {
+      amount += p->health;
+      if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
+      p->health = amount;
+   }
+}
+
+//
+// Lith_GiveHealth
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_GiveHealth(int pnum, int amount)
+{
+   withplayer(&players[pnum])
+   {
+      amount += p->health;
+      amount *= 1 + p->attr.attrs[at_vit] / 80.0;
+      if(amount > p->maxhealth) amount = p->maxhealth;
+      p->health = amount;
+   }
+}
+
+//
+// Lith_CheckHealth
+//
+[[__call("ScriptS"), __extern("ACS")]]
+bool Lith_CheckHealth(int pnum)
+{
+   withplayer(&players[pnum]) return p->health < p->maxhealth;
+   return 0;
+}
+
+//
+// Lith_Discount
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_Discount(int pnum)
+{
+   withplayer(&players[pnum])
+      p->discount = 0.9;
+}
+
 // Static Functions ----------------------------------------------------------|
 
 //
@@ -505,8 +559,7 @@ static void Lith_PlayerRunScripts(player_t *p)
       // Post-logic: Update the engine's data.
       Lith_PlayerUpdateStats(p); // Update engine info
 
-      if(world.pauseinmenus)
-         ACS_ScriptCall("Lith_PauseManager", "PauseTick", ACS_PlayerNumber());
+      if(world.pauseinmenus) HERMES("PauseTick", p->num);
    }
 
    // Rendering

@@ -1,18 +1,38 @@
 class Lith_RandomSpawn : Actor
 {
-   private readonly int lith_rsn;
-   private string lith_tospawn;
+   private readonly int m_rsn;
+   private string m_name;
 
-   property SpawnNum: lith_rsn;
+   property SpawnNum: m_rsn;
 
    static void Set(Actor mo, string tospawn)
-      {Lith_RandomSpawn(mo).lith_tospawn = tospawn;}
+      {Lith_RandomSpawn(mo).m_name = tospawn;}
+
+   static void CopyImportantStuff(Actor lhs, Actor rhs)
+   {
+      lhs.special  = rhs.special;
+      lhs.special1 = rhs.special1;
+      lhs.special2 = rhs.special2;
+
+      for(int i = 0; i < 5; i++)
+         lhs.args[i] = rhs.args[i];
+
+      lhs.changeTID(rhs.tid);
+
+      lhs.spawnflags = rhs.spawnflags & ~MTF_SECRET;
+      lhs.handleSpawnFlags();
+      lhs.spawnflags = rhs.spawnflags;
+
+      lhs.bCOUNTITEM = rhs.bCOUNTITEM;
+
+      rhs.bCOUNTITEM = false;
+   }
 
    override void PostBeginPlay()
    {
-      CallACS("Lith_RandomSpawn", lith_rsn);
+      CallACS("Lith_RandomSpawn", m_rsn);
 
-      let mo = Spawn(lith_tospawn, pos, NO_REPLACE);
+      let mo = Spawn(m_name, pos, NO_REPLACE);
 
       if(mo)
       {
@@ -20,20 +40,9 @@ class Lith_RandomSpawn : Actor
          mo.spawnPoint = spawnPoint;
          mo.angle      = angle;
          mo.vel        = vel;
-         mo.special    = special;
-         mo.special1   = special1;
-         mo.special2   = special2;
-         mo.health     = health;
          mo.bDROPPED   = bDROPPED;
 
-         for(int i = 0; i < 5; i++)
-            mo.args[i] = args[i];
-
-         mo.changeTID(tid);
-
-         mo.spawnflags = spawnflags & ~MTF_SECRET;
-         mo.handleSpawnFlags();
-         mo.spawnflags = spawnflags;
+         CopyImportantStuff(mo, self);
       }
 
       Destroy();

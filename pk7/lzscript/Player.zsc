@@ -1,9 +1,5 @@
 class Lith_Player : DoomPlayer
 {
-   double lith_vbob;
-
-   property ViewBob: lith_vbob;
-
    default
    {
       Player.SideMove 2, 1;
@@ -17,10 +13,14 @@ class Lith_Player : DoomPlayer
       +THRUSPECIES;
    }
 
+   readonly double m_vbob;
+
+   property ViewBob: m_vbob;
+
    override void BeginPlay()
    {
       Super.BeginPlay();
-      viewbob = lith_vbob;
+      viewbob = m_vbob;
 
       GiveInventoryType("Lith_AAGH");
       GiveInventoryType("Lith_IDOL");
@@ -56,8 +56,8 @@ class Lith_Player : DoomPlayer
       CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
 
       let sv = Lith_HERMES.Instance();
-      sv.lith_dmg_type = mod;
-      if(sv.lith_dmg_world = !(inflictor || source) || source == self)
+      sv.m_dmgtype = mod;
+      if(sv.m_dmgworld = !(inflictor || source) || source == self)
          return Super.DamageMobj(inflictor, source, damage, 'None', flags, angle);
       else
          return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
@@ -75,7 +75,7 @@ class Lith_Player : DoomPlayer
          ob = "(suicide)";
       else if(source)
          ob = StringTable.Localize(source.obituary);
-      else switch(sv.lith_dmg_type)
+      else switch(sv.m_dmgtype)
       {
       case 'Falling':  ob = "(falling)";  break;
       case 'Crush':    ob = "(crush)";    break;
@@ -86,7 +86,7 @@ class Lith_Player : DoomPlayer
       default:         ob = "(default)";  break;
       }
 
-      sv.lith_obituary = ob;
+      sv.m_obituary = ob;
 
       CallACS("Lith_Obituary");
    }

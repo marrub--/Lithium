@@ -1,0 +1,36 @@
+class Lith_MultiSpawner : Actor
+{
+   private readonly int          m_num;
+   private readonly class<Actor> m_name;
+
+   property Amount: m_num;
+   property Type:   m_name;
+
+   default
+   {
+      Lith_MultiSpawner.Amount 1;
+   }
+
+   override void PostBeginPlay()
+   {
+      for(int i = 0; i < m_num; i++)
+      {
+         let mo = Spawn(m_name, pos, NO_REPLACE);
+
+         if(mo)
+         {
+            mo.spawnAngle = spawnAngle;
+            mo.spawnPoint = spawnPoint;
+            mo.angle      = angle;
+            mo.vel        = (frandom[L_MS](-2, 2), frandom[L_MS](-2, 2), 0);
+            mo.bDROPPED   = bDROPPED;
+
+            if(i == 0) Lith_RandomSpawn.CopyImportantStuff(mo, self);
+         }
+      }
+
+      Destroy();
+   }
+}
+
+// EOF

@@ -51,7 +51,7 @@
 #define URANUS_F(...) ACS_ScriptCallFixed("Lith_URANUS", __VA_ARGS__)
 #define URANUS_S(...) ACS_ScriptCallString("Lith_URANUS", __VA_ARGS__)
 
-#define Lith_IsPaused (ACS_ScriptCall("Lith_PauseManager", "GetPaused"))
+#define Lith_IsPaused HERMES("GetPaused")
 
 #define Lith_PausableTick() \
    do ACS_Delay(1); \

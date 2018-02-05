@@ -3,7 +3,7 @@ struct Lith_URANUS_PlayerData
    bool shiftDown;
 }
 
-class Lith_URANUS_DrawData ui
+class Lith_URANUS_DrawData
 {
    uint8 dt;
    int16 x, y, z, w;
@@ -47,15 +47,16 @@ enum Lith_URANUS_DrawType
 // URANUS: Users Really Are Not UI Systems
 class Lith_URANUS : EventHandler
 {
-   transient ui Lith_URANUS_PlayerData lith_pdata[MAXPLAYERS];
-   transient ui Array<Lith_URANUS_DrawData> lith_dda;
-   transient ui vector2 lith_vsc;
-   transient ui int lith_dww;
+   transient ui Lith_URANUS_PlayerData m_pdata[MAXPLAYERS];
+
+   private transient play Array<Lith_URANUS_DrawData> m_dda;
+   private transient play vector2 m_vsc;
+   private transient play int m_dww;
 
    static clearscope Lith_URANUS Instance()
       {return Lith_URANUS(Find("Lith_URANUS"));}
 
-   static ui void _LHS(Actor mo, int w, int h)
+   static void _LHS(Actor mo, int w, int h)
    {
       if(mo.playerNumber() != consoleplayer) return;
 
@@ -67,11 +68,11 @@ class Lith_URANUS : EventHandler
       dd.x = w;
       dd.y = h;
 
-      cl.lith_vsc = (w, h);
-      cl.lith_dda.push(dd);
+      cl.m_vsc = (w, h);
+      cl.m_dda.push(dd);
    }
 
-   static ui void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
+   static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
    {
       if(mo.playerNumber() != consoleplayer) return;
 
@@ -111,10 +112,10 @@ class Lith_URANUS : EventHandler
       case 2: dd.y = y - sy;     break;
       }
 
-      Instance().lith_dda.push(dd);
+      Instance().m_dda.push(dd);
    }
 
-   static ui void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
+   static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
    {
       if(mo.playerNumber() != consoleplayer) return;
 
@@ -139,7 +140,7 @@ class Lith_URANUS : EventHandler
       dd.cr = cr;
 
       dd.fnt = Font.GetFont(fnt);
-      dd.txt = dd.fnt.breakLines(txt, cl.lith_dww ? cl.lith_dww : 0x7FFF);
+      dd.txt = dd.fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7FFF);
       dd.lny = dd.fnt.getHeight();
 
       int lns = dd.txt.count();
@@ -171,18 +172,15 @@ class Lith_URANUS : EventHandler
       dd.lnx.resize(lns);
       for(int i = 0; i < lns; i++)
       {
-         if(xa == 3)
-            dd.lnx[i] = dd.txt.stringWidth(i);
-         else if(xa < 4)
-            dd.lnx[i] = 0;
-         else
-            dd.lnx[i] = dd.txt.stringWidth(i) / 2;
+              if(xa == 3) dd.lnx[i] = dd.txt.stringWidth(i);
+         else if(xa <  4) dd.lnx[i] = 0;
+         else             dd.lnx[i] = dd.txt.stringWidth(i) / 2;
       }
 
-      cl.lith_dda.push(dd);
+      cl.m_dda.push(dd);
    }
 
-   static ui void _LSC(Actor mo, int x, int y, int w, int h, int ww)
+   static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
    {
       if(mo.playerNumber() != consoleplayer) return;
 
@@ -191,13 +189,13 @@ class Lith_URANUS : EventHandler
 
       if(x || y || w || h)
       {
-         x -= cl.lith_vsc.x/6; // don't ask. just don't.
+         x -= cl.m_vsc.x/6; // don't ask. just don't.
 
          dd.dt = dt_cls;
 
          vector2 xy, wh, swh = (Screen.GetWidth(), Screen.GetHeight());
-         xy = Screen.VirtualToRealCoords((x, y), swh, cl.lith_vsc);
-         wh = Screen.VirtualToRealCoords((w, h), swh, cl.lith_vsc);
+         xy = Screen.VirtualToRealCoords((x, y), swh, cl.m_vsc);
+         wh = Screen.VirtualToRealCoords((w, h), swh, cl.m_vsc);
 
          dd.x = xy.x; dd.y = xy.y;
          dd.z = wh.x; dd.w = wh.y;
@@ -205,24 +203,22 @@ class Lith_URANUS : EventHandler
       else
          dd.dt = dt_clc;
 
-      cl.lith_dww = ww;
-      cl.lith_dda.push(dd);
+      cl.m_dww = ww;
+      cl.m_dda.push(dd);
    }
    
-   static ui void _LEH(Actor mo)
+   static void _LEH()
    {
-      if(mo.playerNumber() != consoleplayer) return;
-
-      Instance().lith_dda.clear();
+      Instance().m_dda.clear();
    }
 
    override void RenderOverlay(RenderEvent evt)
    {
       int scw = 320;
       int sch = 240;
-      if(!automapactive) for(int i = 0, j = lith_dda.size(); i < j; i++)
+      if(!automapactive) for(int i = 0, j = m_dda.size(); i < j; i++)
       {
-         let dd = lith_dda[i];
+         let dd = m_dda[i];
          switch(dd.dt)
          {
          case dt_tex: {
