@@ -177,6 +177,7 @@
 *  Help with making fonts, suggestions for HUD
 *  Sleeves for Cyber-Mage
 *  Cool guy
+*  Sound rip from Mac OS 9
 
 *                              * Xaser Acheron *
 
@@ -210,6 +211,20 @@
 *  Health pickups
 *  Cell Pack pickup
 *  Health bonus pickup
+
+--- Testers ------------------------------------------------------------------|
+
+ * AgentSpooks/Lotte
+ * Ikazu-san
+ * MENTHA
+ * nax
+ * silentw
+ * Sledge
+ * wildweasel
+ * Yholl
+ * Zombie
+
+--- Other Credits ------------------------------------------------------------|
 
 Cannon sprites
    Minigunner:     (Centered DNF enforcer gun    )

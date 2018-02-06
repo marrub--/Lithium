@@ -1,6 +1,3 @@
-//
-// Misc. Effects
-//
 $rolloff * custom 0 2025
 
 misc/teleport  lsounds/Teleport.flac      // Self-made
@@ -61,50 +58,6 @@ $random misc/quitsound {
    weapons/shotgun/pickup
    weapons/sniper/draw
    weapons/sword/hit
-}
-
-//
-// Ambience
-//
-amb/rain       lsounds/Ambience/Rain.ogg           // ???
-amb/wind       lsounds/Ambience/Wind.ogg           // 〃
-amb/rainout    lsounds/Ambience/RainOut.ogg        // 〃
-amb/windout    lsounds/Ambience/WindOut.ogg        // 〃
-amb/bigcomp    lsounds/Ambience/BigComputer.ogg    // EYE: Divine Cybermancy
-amb/alarmdist1 lsounds/Ambience/AlarmDistant.flac  // Half-Life 2
-amb/alarmdist2 lsounds/Ambience/AlarmDistant2.flac // 〃
-amb/alarmdist3 lsounds/Ambience/AlarmDistant3.flac // 〃
-amb/alarmdist4 lsounds/Ambience/AlarmDistant4.flac // 〃
-amb/ship       lsounds/Ambience/Ship.flac          // 〃
-amb/field      lsounds/Ambience/NoEntry.flac       // 〃
-amb/vent       lsounds/Ambience/VentPump.wav       // 〃
-amb/lightson   lsounds/Ambience/LightsOn.flac      // 〃
-amb/computer   lsounds/Ambience/Computer.wav       // Quake
-
-$random amb/alarmdist {
-   amb/alarmdist1
-   amb/alarmdist2
-   amb/alarmdist3
-   amb/alarmdist4
-}
-
-$ambient 42421 amb/alarmdist point 0.25 random 40 240 1.0
-$ambient 42422 amb/bigcomp   point 1.5  continuous    0.7
-$ambient 42423 amb/ship      world      continuous    0.1
-$ambient 42424 amb/field     point 2.0  continuous    1.0
-$ambient 42425 amb/field     point 4.0  continuous    1.0
-$ambient 42426 amb/vent      point 5.0  continuous    0.5
-$ambient 42427 amb/computer  point 2.0  continuous    1.0
-
-//
-// Barrels
-//
-misc/barrel/hit1 lsounds/Barrel/Hit.flac
-misc/barrel/hit2 lsounds/Barrel/Hit2.flac
-
-$random misc/barrel/hit {
-   misc/barrel/hit1
-   misc/barrel/hit2
 }
 
 // EOF

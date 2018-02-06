@@ -154,7 +154,7 @@ class Lith_CombatRifle : Lith_MWeapon
       
       CRFG A 0 A_GunFlash("DummyFlash");
       
-      CRFG A 0 {
+      CRFG AA 0 {
          if(!CallACS("LPData", pdata_upgrade, UPGR_LaserRCW))
          {
             A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON);

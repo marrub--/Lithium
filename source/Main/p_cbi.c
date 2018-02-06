@@ -12,7 +12,7 @@
 #define Info(...) \
    do { \
       PrintTextFmt(__VA_ARGS__); \
-      PrintText("CBIFONT", 0, 23,1, y,1); \
+      PrintText("CBIFONT", CR_WHITE, 23,1, y,1); \
       y += 10; \
    } while(0)
 
@@ -40,7 +40,7 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
       {CPU(3); ram =  50; name = "OFMD Spec. Nodea 541 Basic CPU";}
 
    PrintTextStr(name);
-   PrintText("CBIFONT", 0, 20,1, 60,1);
+   PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
@@ -68,7 +68,7 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 {
    CPU(2);
    PrintTextStr("AOF 5900001 Rev7 CPU");
-   PrintText("CBIFONT", 0, 20,1, 60,1);
+   PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 

@@ -1,6 +1,3 @@
-//
-// Generic Player
-//
 player/score1       lsounds/Player/Score1.flac             // Self-made
 player/score2       lsounds/Player/Score2.flac             // 〃
 player/score3       lsounds/Player/Score3.flac             // 〃
@@ -58,41 +55,5 @@ $random player/score {
 $playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
 $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 $playersound player male *land    lsounds/Player/Land.wav     // Hexen
-
-//
-// CBI
-//
-player/cbi/open         lsounds/Player/CBI/Open.flac             // Halo 3
-player/cbi/close        lsounds/Player/CBI/Close.flac            // 〃
-player/cbi/buttoncurs   lsounds/Player/CBI/ButtonCursor.flac     // Rosenkreuzstilette
-player/cbi/buttonpress  lsounds/Player/CBI/ButtonPress.flac      // Doom 3
-player/cbi/slidertick   lsounds/Player/CBI/SliderTick.flac       // Phantasy Star Nova
-player/cbi/find         lsounds/Player/CBI/Find.flac             // 〃
-player/cbi/finddone     lsounds/Player/CBI/FindDone.flac         // 〃
-player/cbi/findfail     lsounds/Player/CBI/FindFail.flac         // 〃
-player/cbi/invcur       lsounds/Player/CBI/InvCur.flac           // 〃
-player/cbi/invmov       lsounds/Player/CBI/InvMov.flac           // 〃
-player/cbi/key1         lsounds/Player/CBI/Key1.flac             // ???
-player/cbi/key2         lsounds/Player/CBI/Key2.flac             // 〃
-player/cbi/key3         lsounds/Player/CBI/Key3.flac             // 〃
-player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac     // Steam
-player/cbi/clickon      lsounds/Player/CBI/ClickOn.flac          // 3maze - Buttons and Switches
-player/cbi/clickoff     lsounds/Player/CBI/ClickOff.flac         // 〃
-player/cbi/auto/toggle  lsounds/Player/CBI/AutoGroupToggle.flac  // Deus Ex
-player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Keeper - Dark Sci-Fi UI Sounds
-player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
-player/cbi/mail         lsounds/Player/CBI/MailReceive.flac      // Fallout 4
-player/cbi/tabswitch    lsounds/Player/CBI/TabSwitch.flac        // 〃
-player/cbi/dlgopen      lsounds/Player/CBI/DialogueOpen.wav      // Resident Evil 4
-player/cbi/dlgclick     lsounds/Player/CBI/DialogueClick.wav     // 〃
-player/cbi/clicklst     lsounds/Player/CBI/ClickList.wav         // 〃
-
-$alias player/cbi/invrem player/cbi/findfail
-
-$random player/cbi/keypress {
-   player/cbi/key1
-   player/cbi/key2
-   player/cbi/key3
-}
 
 // EOF

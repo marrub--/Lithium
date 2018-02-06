@@ -43,6 +43,9 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    int   const scrlh = notches * caph;         // height in pixels of scroller
    float const maxy  = (h - scrlh) / (float)h; // normalized maximum y value
 
+   // decrement the sound timer
+   if(scr->nextsnd) scr->nextsnd--;
+
    // move scroller
    __with(float supposedy = scr->y * h;)
    {
@@ -62,9 +65,19 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
          // we grabbed it from, otherwise we just use the middle of it
          if(scr->grabbed) supposedy = cy - scr->grabpos;
          else             supposedy = cy - scrlh / 2;
+
+         if(g->cy != g->old.cy && scr->nextsnd == 0)
+         {
+            ACS_LocalAmbientSound("player/cbi/scroll", 127);
+            scr->nextsnd = 7;
+         }
       }
-      else
+      else if(scr->grabbed)
+      {
+         ACS_LocalAmbientSound("player/cbi/scrollend", 127);
          scr->grabbed = false;
+         scr->nextsnd = 0;
+      }
 
       // finally, normalize and clamp
       scr->y = supposedy / (float)h;

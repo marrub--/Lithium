@@ -88,6 +88,7 @@ typedef struct gui_scroll_state_s
    double y;
    double grabpos;
    bool   grabbed;
+   int    nextsnd;
 } gui_scroll_state_t;
 
 typedef struct gui_typeon_state_s
