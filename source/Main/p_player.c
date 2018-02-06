@@ -25,7 +25,7 @@ CallbackDefine(player_cb_t, PlayerRender)
 
 // Static Functions ----------------------------------------------------------|
 
-[[__call("ScriptS")]] static void Lith_PlayerRunScripts(player_t *p);
+static void Lith_PlayerRunScripts(player_t *p);
 [[__call("ScriptS")]] static void Lith_BossWarning(player_t *p);
 
 // Scripts -------------------------------------------------------------------|
@@ -512,7 +512,6 @@ static void Lith_BossWarning(player_t *p)
 //
 // Run main loop scripts.
 //
-[[__call("ScriptS")]]
 static void Lith_PlayerRunScripts(player_t *p)
 {
    [[__call("ScriptS")]] extern void Lith_PlayerPreWeapons(player_t *p);

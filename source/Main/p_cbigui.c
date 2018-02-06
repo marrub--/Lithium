@@ -106,7 +106,8 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    extern void Lith_CBITab_Items   (gui_state_t *g, player_t *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, player_t *p);
 
-   switch(CBIState(g)->maintab) {
+   switch(CBIState(g)->maintab)
+   {
    case cbi_tab_arsenal:  Lith_CBITab_Arsenal (g, p); break;
    case cbi_tab_status:   Lith_CBITab_Stat    (g, p); break;
    case cbi_tab_items:    Lith_CBITab_Items   (g, p); break;

@@ -4,6 +4,7 @@
 #include "lith_world.h"
 
 #include <stdio.h>
+#include <GDCC.h>
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -33,6 +34,15 @@ static void SetActorInventory(int tid, __str item, int amount)
 }
 
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_DumpAlloc
+//
+[[__call("ScriptS")]]
+void Lith_DumpAlloc(void)
+{
+   __GDCC__alloc_dump();
+}
 
 //
 // Lith_FadeFlash

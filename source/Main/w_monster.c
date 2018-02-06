@@ -416,7 +416,7 @@ static void OnDeath(dmon_t *m)
 //
 // Lith_MonsterMain
 //
-[[__call("ScriptS")]]
+[[__call("ScriptS"), __alloc_Aut(0x7F)]]
 void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
