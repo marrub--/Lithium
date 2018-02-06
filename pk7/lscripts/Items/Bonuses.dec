@@ -32,21 +32,6 @@ actor Lith_ScoreChip : Lith_ScoreItem
    }
 }
 
-actor Lith_Radio : Lith_ScoreItem
-{
-   Lith_ScoreItem.Score 300
-   Lith_BasicPickup.LogName "Radio"
-   Lith_BasicPickup.Vacuum 1
-   Radius 10
-
-   states
-   {
-   Spawn:
-      SCOR A -1 bright
-      stop
-   }
-}
-
 actor Lith_Ruby : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
@@ -256,6 +241,11 @@ actor Lith_Radio1 : Lith_MultiSpawner
 actor Lith_Radio2 : Lith_Radio1
 {
    Lith_MultiSpawner.Amount 2
+}
+
+actor Lith_BoxOfAmmo1 : Lith_MultiSpawner
+{
+   Lith_MultiSpawner.Type "Lith_BoxOfAmmo"
 }
 
 actor Lith_Ruby4 : Lith_MultiSpawner

@@ -24,6 +24,53 @@ class Lith_HealthBonusVial : Lith_BasicPickup
    }
 }
 
+class Lith_Radio : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score Score_Clip;
+      Lith_BasicPickup.LogName "Clip";
+      Lith_BasicPickup.Vacuum 1;
+      Inventory.PickupSound "player/pickup/scoresmall";
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SCOR A -1 bright;
+      stop;
+   }
+}
+
+class Lith_BoxOfAmmo : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score Score_ClipBox;
+      Lith_BasicPickup.LogName "ClipBox";
+      Inventory.PickupSound "player/pickup/scorebig";
+   }
+
+   override void PostBeginPlay()
+   {
+      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
+      Super.PostBeginPlay();
+   }
+
+   states
+   {
+   Spawn:
+      SCOR B -1 bright;
+      stop;
+   }
+}
+
 class Lith_HealthBonus : Lith_RandomSpawn replaces HealthBonus
 {
    default
@@ -31,6 +78,32 @@ class Lith_HealthBonus : Lith_RandomSpawn replaces HealthBonus
       Lith_RandomSpawn.SpawnNum lrsn_hbonus;
 
       +COUNTITEM
+   }
+}
+
+class Lith_ArmorBonus : Lith_RandomSpawn replaces ArmorBonus
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_abonus;
+
+      +COUNTITEM
+   }
+}
+
+class Lith_Clip : Lith_RandomSpawn replaces Clip
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_clip;
+   }
+}
+
+class Lith_ClipBox : Lith_RandomSpawn replaces ClipBox
+{
+   default
+   {
+      Lith_RandomSpawn.SpawnNum lrsn_clipbx;
    }
 }
 

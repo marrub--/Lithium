@@ -44,6 +44,9 @@ enum // Lith_RandomSpawnNum
    lrsn_garmor,
    lrsn_barmor,
    lrsn_hbonus,
+   lrsn_abonus,
+   lrsn_clip,
+   lrsn_clipbx,
 };
 
 enum // Lith_ArmorSlot

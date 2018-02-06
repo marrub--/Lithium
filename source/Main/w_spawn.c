@@ -36,23 +36,44 @@ static struct witem const barmor[] = {
    {12400, "Lith_Armor_Midori_Lower"},
 };
 
+#define BonusItemsBig(base) \
+   {base+200, "Lith_Scheelite1"}, \
+   {base+400, "Lith_Nambulite1"}, \
+   {base+500, "Lith_Lepidolite1"}, \
+   {base+600, "Lith_Petalite1"}, \
+   {base+700, "Lith_Tourmaline1"}
+
+#define BonusItems(base) \
+   {base+   0, "Lith_Coin2"}, \
+   {base+1000, "Lith_Coin5"}, \
+   {base+2500, "Lith_ScoreChip1"}, \
+   {base+3000, "Lith_ScoreChip2"}, \
+   {base+3400, "Lith_Ruby4"}, \
+   {base+3800, "Lith_Sapphire4"}, \
+   {base+4200, "Lith_Amethyst6"}, \
+   {base+4600, "Lith_Diamond1"}, \
+   {base+5000, "Lith_Emerald2"}, \
+   BonusItemsBig(5000)
+
 static struct witem const hbonus[] = {
-   { 2000, "Lith_HealthBonus1"},
-   { 4000, "Lith_HealthBonus2"},
-   { 6000, "Lith_Coin2"},
-   { 7000, "Lith_Coin5"},
-   { 8500, "Lith_ScoreChip1"},
-   { 9000, "Lith_ScoreChip2"},
-   { 9400, "Lith_Ruby4"},
-   { 9800, "Lith_Sapphire4"},
-   {10200, "Lith_Amethyst6"},
-   {10600, "Lith_Diamond1"},
-   {11000, "Lith_Emerald2"},
-   {11200, "Lith_Scheelite1"},
-   {11400, "Lith_Nambulite1"},
-   {11500, "Lith_Lepidolite1"},
-   {11600, "Lith_Petalite1"},
-   {11700, "Lith_Tourmaline1"},
+   {2000, "Lith_HealthBonus1"},
+   {4000, "Lith_HealthBonus2"},
+   BonusItems(6000),
+};
+
+static struct witem const abonus[] = {
+   BonusItems(1000),
+};
+
+static struct witem const clip[] = {
+   {2000, "Lith_Radio1"},
+   {4000, "Lith_Radio2"},
+   BonusItems(6000),
+};
+
+static struct witem const clipbx[] = {
+   {4000, "Lith_BoxOfAmmo1"},
+   BonusItemsBig(4000),
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -83,7 +104,9 @@ void Lith_RandomSpawn(int rsn)
    case lrsn_garmor: item = RandomWeighted(garmor, countof(garmor)); break;
    case lrsn_barmor: item = RandomWeighted(barmor, countof(barmor)); break;
    case lrsn_hbonus: item = RandomWeighted(hbonus, countof(hbonus)); break;
-// case lrsn_abonus: item = RandomWeighted(abonus, countof(abonus)); break;
+   case lrsn_abonus: item = RandomWeighted(abonus, countof(abonus)); break;
+   case lrsn_clip:   item = RandomWeighted(clip,   countof(clip  )); break;
+   case lrsn_clipbx: item = RandomWeighted(clipbx, countof(clipbx)); break;
    }
 
    ACS_ScriptCall("Lith_RandomSpawn", "Set", item);
