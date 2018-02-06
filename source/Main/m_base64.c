@@ -36,6 +36,7 @@
  */
 
 #include "lith_base64.h"
+#include "lith_memory.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -66,7 +67,7 @@ unsigned char * base64_encode(const unsigned char *src, size_t len,
 	olen++; /* nul termination */
 	if (olen < len)
 		return NULL; /* integer overflow */
-	out = malloc(olen);
+	out = Malloc(olen);
 	if (out == NULL)
 		return NULL;
 
@@ -133,7 +134,7 @@ unsigned char * base64_decode(const unsigned char *src, size_t len,
 		return NULL;
 
 	olen = count / 4 * 3;
-	pos = out = malloc(olen);
+	pos = out = Malloc(olen);
 	if (out == NULL)
 		return NULL;
 
@@ -159,7 +160,7 @@ unsigned char * base64_decode(const unsigned char *src, size_t len,
 					pos -= 2;
 				else {
 					/* Invalid padding */
-					free(out);
+					Dalloc(out);
 					return NULL;
 				}
 				break;

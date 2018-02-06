@@ -103,11 +103,11 @@ static int NetClose(void *nfdata)
 
       ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), "");
 
-      free(coded);
+      Dalloc(coded);
    }
 
-   free(nf->mem);
-   free(nf);
+   Dalloc(nf->mem);
+   Dalloc(nf);
 
    return 0;
 }
@@ -140,7 +140,7 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
    if(size >= avail)
    {
       size_t len = mem->len + mem->len / 2 + size + 1;
-      void  *newmem = realloc(mem->mem, len);
+      void  *newmem = Ralloc(mem->mem, len);
 
       if(!mem)
          return 0;
@@ -184,8 +184,8 @@ static int MemSeek(void *memdata, off_t *offset, int whence)
 static int MemClose(void *memdata)
 {
    memfile_t *mem = memdata;
-   free(mem->mem);
-   free(mem);
+   Dalloc(mem->mem);
+   Dalloc(mem);
 
    return 0;
 }
@@ -203,7 +203,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
    if(rw == 'w')
    {
-      netfile_t *nf = salloc(netfile_t);
+      netfile_t *nf = Salloc(netfile_t);
 
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
@@ -226,7 +226,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
          if(inlen)
          {
-            input = realloc(input, inputsz + inlen + 1);
+            input = Ralloc(input, inputsz + inlen + 1);
             Lith_strcpy_str(input + inputsz, cvar);
 
             inputsz += inlen;
@@ -241,7 +241,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          size_t size;
          unsigned char *data = base64_decode((void *)input, inputsz, &size);
 
-         free(input);
+         Dalloc(input);
 
          // If debugging, print out information about the buffer being read.
          if(world.dbgSave)
@@ -253,7 +253,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
          if(data)
          {
-            memfile_t *mem = salloc(memfile_t);
+            memfile_t *mem = Salloc(memfile_t);
 
             mem->mem = data;
             mem->len = size;

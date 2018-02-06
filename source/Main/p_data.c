@@ -402,7 +402,7 @@ void Lith_ResetPlayer(player_t *p)
 
    // Any linked lists on the player need to be initialized here.
    p->loginfo.hud.free();
-   p->hudstrlist.free(free);
+   p->hudstrlist.free(true);
    if(!p->loginfo.full.next) p->loginfo.full.construct();
    if(!p->loginfo.maps.next) p->loginfo.maps.construct();
 

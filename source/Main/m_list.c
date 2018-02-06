@@ -50,7 +50,7 @@ size_t Lith_ListSize(list_t *head)
 //
 // Lith_ListFree
 //
-void Lith_ListFree(list_t *head, void (*deleter)(void *))
+void Lith_ListFree(list_t *head, bool dofree)
 {
    if(head->next)
    {
@@ -58,7 +58,8 @@ void Lith_ListFree(list_t *head, void (*deleter)(void *))
       {
          list_t *rover = head->next;
          rover->unlink();
-         if(deleter) deleter(rover->object);
+         if(dofree)
+            Dalloc(rover->object);
       }
    }
    else

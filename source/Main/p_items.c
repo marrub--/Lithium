@@ -120,7 +120,7 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
 //
 item_t *Lith_Item_New(itemdata_t const *data)
 {
-   item_t *item = salloc(item_t);
+   item_t *item = Salloc(item_t);
 
    Lith_Item_Init(item, data);
 
@@ -145,7 +145,7 @@ void Lith_Item_Destroy(item_t *item)
    }
 
    Lith_Item_Unlink(item);
-   free(item);
+   Dalloc(item);
 }
 
 //
@@ -186,7 +186,7 @@ void Lith_Item_Unlink(item_t *item)
 //
 bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
 {
-   bagitem_t *item = salloc(bagitem_t);
+   bagitem_t *item = Salloc(bagitem_t);
 
    Lith_Item_Init(&item->item, data);
 

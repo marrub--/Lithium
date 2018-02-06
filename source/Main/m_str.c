@@ -61,18 +61,6 @@ int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
 }
 
 //
-// Lith_strdup_str
-//
-char *Lith_strdup_str(__str s)
-{
-   size_t len = ACS_StrLen(s);
-   char  *ret = malloc(len + 1);
-   ACS_StrArsCpyToGlobalCharRange((int)ret, __GDCC__Sta, 0, len, s);
-   ret[len] = '\0';
-   return ret;
-}
-
-//
 // Lith_ScoreSep
 //
 __str Lith_ScoreSep(score_t num)

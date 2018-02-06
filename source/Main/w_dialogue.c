@@ -438,7 +438,7 @@ static void SetupDialogue(dlgparsestate_t *d, int num)
 {
    dlgdef_t *last = d->def;
 
-   d->def = salloc(dlgdef_t);
+   d->def = Salloc(dlgdef_t);
    d->def->num = num;
 
    if(!last) dlgdefs    = d->def;
@@ -611,11 +611,11 @@ void Lith_LoadMapDialogue(void)
       for(dlgdef_t *def = dlgdefs; def;) {
          dlgdef_t *next = def->next;
          Vec_Clear(def->code);
-         free(def);
+         Dalloc(def);
          def = next;
       }
 
-      free(dlgdefs);
+      Dalloc(dlgdefs);
       dlgdefs = null;
    }
 

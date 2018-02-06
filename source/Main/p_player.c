@@ -175,9 +175,9 @@ static void Lith_PlayerDisconnect(void)
    p->bip.deallocate();
 
    p->loginfo.hud.free();
-   p->hudstrlist.free(free);
-   p->loginfo.full.free(free);
-   p->loginfo.maps.free(free);
+   p->hudstrlist.free(true);
+   p->loginfo.full.free(true);
+   p->loginfo.maps.free(true);
 
    upgrademap_t_dtor(&p->upgrademap);
 

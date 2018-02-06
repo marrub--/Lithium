@@ -204,7 +204,7 @@ void Lith_GSInit_Upgrade(void)
    for(int i = 0; i < countof(UpgrInfoBase); i++)
       UpgrInfoBase[i].key  = i;
 
-   UpgrInfo = calloc(UpgrMax, sizeof(upgradeinfo_t));
+   UpgrInfo = Calloc(UpgrMax, sizeof(upgradeinfo_t));
    memmove(UpgrInfo, UpgrInfoBase, sizeof(UpgrInfoBase));
 
    for(int i = 0; i < countof(UpgrInfoEx); i++)

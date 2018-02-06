@@ -2,6 +2,8 @@
 #ifndef lith_darray_h
 #define lith_darray_h
 
+#include "lith_memory.h"
+
 #include <stdlib.h>
 
 #define Vec_Defn(type, name, ...) \
@@ -16,7 +18,7 @@
    do { \
       if((vec##C) + (n) > (vec##S)) { \
          (vec##S) += (n) + (g); \
-         (vec##V) = realloc((vec##V), sizeof(*(vec##V)) * (vec##S)); \
+         (vec##V) = Ralloc((vec##V), sizeof(*(vec##V)) * (vec##S)); \
       } \
    } while(0)
 
@@ -25,6 +27,6 @@
 #define Vec_Next(vec) ((vec##V)[(vec##C)++])
 
 #define Vec_Clear(vec) \
-   (free((vec##V)), (vec##V) = NULL, (vec##C) = (vec##S) = 0)
+   (Dalloc((vec##V)), (vec##V) = NULL, (vec##C) = (vec##S) = 0)
 
 #endif

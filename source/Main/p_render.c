@@ -154,7 +154,7 @@ void Lith_PlayerHUD(player_t *p)
 
    if(p->old.scopetoken && !p->scopetoken)
    {
-      p->hudstrlist.free(free);
+      p->hudstrlist.free(true);
 
       for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
       {
@@ -217,14 +217,14 @@ static void HUD_StringStack(player_t *p)
 
    if((ACS_Timer() % 3) == 0)
    {
-      hudstr_t *hudstr = salloc(hudstr_t);
+      hudstr_t *hudstr = Salloc(hudstr_t);
       hudstr->link.construct(hudstr);
       hudstr->str = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
 
       hudstr->link.link(&p->hudstrlist);
 
       if(p->hudstrlist.size == 20)
-         free(p->hudstrlist.next->unlink());
+         Dalloc(p->hudstrlist.next->unlink());
    }
 
    ACS_SetHudSize(320, 200);

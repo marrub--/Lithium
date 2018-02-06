@@ -95,7 +95,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
    int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
 
-   bippage_t *page = salloc(bippage_t);
+   bippage_t *page = Salloc(bippage_t);
 
    page->name     = pinit->name;
    page->category = categ;
@@ -122,7 +122,7 @@ void Lith_PlayerInitBIP(player_t *p)
    int total = 0;
 
    ForCategory()
-      bip->infogr[categ].free(free);
+      bip->infogr[categ].free(true);
 
    __with(int categ; bool catfree = false;)
       for(struct page_initializer const *page = bip_pages;
@@ -174,7 +174,7 @@ void Lith_DeliverMail(player_t *p, __str title, int flags)
 
    bip_t *bip = &p->bip;
 
-   bippage_t *page = salloc(bippage_t);
+   bippage_t *page = Salloc(bippage_t);
 
    __str date = LanguageNull("LITH_TXT_MAIL_TIME_%S", title);
    __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
@@ -254,7 +254,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
 void Lith_DeallocateBIP(bip_t *bip)
 {
    ForCategory()
-      bip->infogr[categ].free(free);
+      bip->infogr[categ].free(true);
    bip->init = false;
 }
 

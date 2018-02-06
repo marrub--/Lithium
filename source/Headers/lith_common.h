@@ -14,9 +14,9 @@
 #include <string.h>
 #include <stdint.h>
 
-#define strnull (__str)0
+#include "lith_memory.h"
 
-#define salloc(t) calloc(1, sizeof(t))
+#define strnull (__str)0
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
@@ -236,7 +236,6 @@ unsigned StrHash(char __str_ars const *s);
 unsigned CStrHash(char const *s);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
-char *Lith_strdup_str(__str s);
 __str Lith_ScoreSep(score_t num);
 __str Language(__str fmt, ...);
 __str LanguageNull(__str fmt, ...);

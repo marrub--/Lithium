@@ -21,6 +21,7 @@ typedef struct logdata_s
    __str info;
    int time;
    int from;
+   bool keep;
    list_t link;
    list_t linkfull;
 } logdata_t;

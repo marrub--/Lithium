@@ -19,18 +19,6 @@ static int TBufProc(token_t *tok, void *udata)
    }
 }
 
-//
-// TBufPrint
-//
-static void TBufPrint(tokbuf_t *tb)
-{
-   for(int i = 0; i < tb->tend; i++)
-      printf("[%i]%i: %p %s%s\n", i, tb->toks[i].type, tb->toks[i].textV,
-         tb->toks[i].textV, i == tb->tpos ? " <-- cursor is here" : "");
-
-   printf("---\n");
-}
-
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -39,7 +27,7 @@ static void TBufPrint(tokbuf_t *tb)
 void Lith_TBufCtor(tokbuf_t *tb)
 {
    tb->orig.line = 1;
-   tb->toks = calloc(tb->bend, sizeof(token_t));
+   tb->toks = Calloc(tb->bend, sizeof(token_t));
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
 }
 
@@ -52,7 +40,7 @@ void Lith_TBufDtor(tokbuf_t *tb)
       for(int i = 0; i < tb->bend; i++)
          Vec_Clear(tb->toks[i].text);
 
-   free(tb->toks);
+   Dalloc(tb->toks);
 }
 
 //

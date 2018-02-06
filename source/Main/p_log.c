@@ -40,9 +40,10 @@ void Lith_Log(player_t *p, __str fmt, ...)
    logdata->time = LOG_TIME;
    logdata->link    .link(&p->loginfo.hud);
    logdata->linkfull.link(&p->loginfo.full);
+   logdata->keep = true;
 
    if(p->loginfo.hud.size > LOG_MAX)
-      free(p->loginfo.hud.next->unlink());
+      Dalloc(p->loginfo.hud.next->unlink());
 }
 
 //
@@ -57,6 +58,7 @@ void Lith_LogF(player_t *p, __str fmt, ...)
    va_end(vl);
 
    logdata->linkfull.link(&p->loginfo.full);
+   logdata->keep = true;
 }
 
 //
@@ -74,7 +76,7 @@ void Lith_LogH(player_t *p, __str fmt, ...)
    logdata->link.link(&p->loginfo.hud);
 
    if(p->loginfo.hud.size > LOG_MAX)
-      free(p->loginfo.hud.next->unlink());
+      Dalloc(p->loginfo.hud.next->unlink());
 }
 
 //
@@ -82,7 +84,7 @@ void Lith_LogH(player_t *p, __str fmt, ...)
 //
 logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
 {
-   logdata_t *logdata = salloc(logdata_t);
+   logdata_t *logdata = Salloc(logdata_t);
    logdata->link    .construct(logdata);
    logdata->linkfull.construct(logdata);
 
@@ -101,21 +103,17 @@ logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateLog(player_t *p)
 {
-   for(list_t *rover = p->loginfo.hud.next; rover != &p->loginfo.hud;)
+   forlist(logdata_t *logdata, p->loginfo.hud)
    {
-      logdata_t *logdata = rover->object;
-
       if(logdata->time == 0)
       {
          list_t *next = rover->next;
          rover->unlink();
-         rover = next;
+
+         if(!logdata->keep) Dalloc(logdata);
       }
       else
-      {
          logdata->time--;
-         rover = rover->next;
-      }
    }
 }
 
@@ -124,7 +122,7 @@ void Lith_PlayerUpdateLog(player_t *p)
 //
 void Lith_PlayerLogEntry(player_t *p)
 {
-   logmap_t *logmap = salloc(logmap_t);
+   logmap_t *logmap = Salloc(logmap_t);
    logmap->link.construct(logmap);
 
    logmap->levelnum = world.mapnum;
