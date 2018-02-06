@@ -18,8 +18,8 @@ PK7_BIN=pk7/acs
 LIB_INIT =--bc-zdacs-init-script-name '__lithlib.bin_init'
 MAIN_INIT=--bc-zdacs-init-script-name '__lithmain.bin_init'
 
-LIB_STA =3000000000
-MAIN_STA=3500000000
+LIB_STA =70000
+MAIN_STA=1400000
 
 LIB_OUTPUTS=$(IR)/libc.ir $(IR)/libGDCC.ir
 LIB_BINARY=$(PK7_BIN)/lithlib.bin
@@ -33,7 +33,7 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) -Dnull=NULL 
+MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) -Dnull=NULL
 MAIN_LFLAGS=-llithlib $(MAIN_INIT) --alloc-min Sta "" $(MAIN_STA)
 
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \

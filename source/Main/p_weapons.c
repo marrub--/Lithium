@@ -199,19 +199,21 @@ void Lith_PlayerPreWeapons(player_t *p)
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
 
-      w->slot[info->slot] += (wep->owned = ACS_CheckInventory(info->classname));
+      if(!(p->pclass & info->pclass) || !(wep->owned = ACS_CheckInventory(info->classname)))
+         continue;
+
+      w->slot[info->slot] += wep->owned;
 
       // Check for currently held weapon.
       if(!w->cur && p->weaponclass == info->classname)
          w->cur = wep;
 
       wep->info      = info;
-      wep->owned     = ACS_CheckInventory(info->classname);
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
 
       if(!(wep->ammotype & AT_ZScr))
-         wep->magclass  = info->defmagclass;
+         wep->magclass = info->defmagclass;
 
       // Special exceptions.
       switch(i)
@@ -259,15 +261,15 @@ void Lith_PlayerPreWeapons(player_t *p)
       }
 
       // Remove inactive magic weapons.
-      else if(info->flags & wf_magic && wep->owned && ++wep->magictake > 20)
+      else if(info->flags & wf_magic && ++wep->magictake > 20)
       {
          ACS_TakeInventory(info->classname, 1);
          wep->magictake = 0;
+         continue;
       }
 
       // Auto-reload anything else.
-      if(p->autoreload && wep->owned && wep->ammotype & AT_NMag &&
-         !(info->flags & wf_magic))
+      if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5) {
             if(wep->ammotype & AT_ZScr) HERMES("AutoReload", p->num, info->classname);

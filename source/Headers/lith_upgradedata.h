@@ -91,8 +91,8 @@ struct upgr_data_VitalScan {
    int   health;
    int   oldhealth;
    int   maxhealth;
-   float cangle;
-   float oangle;
+   fixed cangle;
+   fixed oangle;
    fixed splitfrac;
    unsigned split : 3;
    unsigned rank  : 4;
