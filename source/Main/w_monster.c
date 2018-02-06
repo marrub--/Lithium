@@ -285,23 +285,31 @@ static void BaseMonsterLevel(dmon_t *m)
    fixed rn2 = ACS_RandomFixed(1, MAXLEVEL);
    fixed bias;
 
-   switch(world.game) {
-   case Game_Episodic: bias = world.mapscleared / 10.0; break;
-   default:            bias = world.mapscleared / 40.0; break;
+   if(world.fun & lfun_ragnarok)
+   {
+      m->rank  = MAXRANK;
+      m->level = MAXLEVEL;
    }
+   else
+   {
+      switch(world.game) {
+      case Game_Episodic: bias = world.mapscleared / 10.0; break;
+      default:            bias = world.mapscleared / 40.0; break;
+      }
 
-   Lith_ForPlayer() {
-      rn2 += p->attr.level / 2.0;
-      break;
+      Lith_ForPlayer() {
+         rn2 += p->attr.level / 2.0;
+         break;
+      }
+
+      bias *= bias;
+      bias += (ACS_GameSkill() / (fixed)skill_nightmare) * 0.1;
+      bias += world.difficulty / 100.0;
+      bias *= ACS_RandomFixed(1, 1.5);
+
+      m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
+      m->level = minmax(rn2 * bias * 1, 1, MAXLEVEL);
    }
-
-   bias *= bias;
-   bias += (ACS_GameSkill() / (fixed)skill_nightmare) * 0.1;
-   bias += world.difficulty / 100.0;
-   bias *= ACS_RandomFixed(1, 1.5);
-
-   m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
-   m->level = minmax(rn2 * bias * 1, 1, MAXLEVEL);
 
    if(HasResistances(m)) {
       for(int i = 0; i < m->rank; i++)

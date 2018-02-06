@@ -96,6 +96,8 @@ typedef struct worldinfo_s
    int    game;
    int    apiversion;
 
+   int fun;
+
    // Bosses
    bool bossspawned;
 

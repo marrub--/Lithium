@@ -49,6 +49,12 @@ reinit:
    Lith_PlayerEnterUpgrades(p);
    p->loadData();
 
+   if(p->num == 0)
+   {
+      world.fun = p->fun;
+      HERMES("Fun", world.fun);
+   }
+
    Lith_BossWarning(p);
 
    while(p->active)

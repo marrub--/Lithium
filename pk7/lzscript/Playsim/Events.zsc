@@ -64,7 +64,11 @@ class Lith_Events : EventHandler
       let th = evt.thing;
 
       if(th.bISMONSTER)
+      {
          th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
+         if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
+            Lith_HERMES.PrepareForRagnarok(th);
+      }
    }
    
    override bool InputProcess(InputEvent evt)

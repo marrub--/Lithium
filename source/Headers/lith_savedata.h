@@ -22,6 +22,10 @@
 #define Ident_note FourCC('n', 'o', 't', 'e')
 #define SaveV_note 0
 
+// fun0
+#define Ident_fun0 FourCC('f', 'u', 'n', '\0')
+#define SaveV_fun0 0
+
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00
 #define Save_FlagShft 8

@@ -4,7 +4,7 @@
 #include "lith_savedata.h"
 #include "lith_file.h"
 
-// Static Functions ----------------------------------------------------------|
+// Chunk "note" --------------------------------------------------------------|
 
 //
 // note_Len
@@ -53,7 +53,42 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
    }
 }
 
+// Chunk "fun0" --------------------------------------------------------------|
+
+//
+// Lith_Save_fun0
+//
+[[__call("ScriptS")]]
+static void Lith_Save_fun0(savefile_t *save)
+{
+   Lith_SaveWriteChunk(save, Ident_fun0, SaveV_fun0, 1);
+
+   fputc(save->p->fun, save->fp);
+}
+
+//
+// Lith_Load_fun0
+//
+[[__call("ScriptS")]]
+static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
+{
+   save->p->fun = fgetc(save->fp);
+}
+
 // Extern Functions ----------------------------------------------------------|
+
+//
+// Lith_SetFun
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_SetFun(int fun)
+{
+   withplayer(LocalPlayer)
+   {
+      p->fun = fun;
+      p->saveData();
+   }
+}
 
 //
 // Lith_PlayerSaveData
@@ -66,6 +101,7 @@ void Lith_PlayerSaveData(player_t *p)
    if((save = Lith_SaveBegin(p)))
    {
       Lith_Save_note(save);
+      Lith_Save_fun0(save);
       Lith_SaveEnd(save);
    }
 }
@@ -81,6 +117,7 @@ void Lith_PlayerLoadData(player_t *p)
    if((save = Lith_LoadBegin(p)))
    {
       Lith_LoadChunk(save, Ident_note, SaveV_note, Lith_Load_note);
+      Lith_LoadChunk(save, Ident_fun0, SaveV_fun0, Lith_Load_fun0);
       Lith_LoadEnd(save);
    }
 }

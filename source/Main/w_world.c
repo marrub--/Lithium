@@ -238,6 +238,7 @@ int LWData(int info)
    case wdata_magdrops:    return ACS_GetUserCVar(0, "lith_weapons_magdrops");
    case wdata_bossspawned: return world.bossspawned;
    case wdata_enemycheck:  return world.enemycheck;
+   case wdata_fun:         return world.fun;
    case wdata_ptid:   Lith_ForPlayer() return p->tid;
    case wdata_pclass: Lith_ForPlayer() return p->pclass;
    }

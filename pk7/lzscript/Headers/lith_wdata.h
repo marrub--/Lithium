@@ -9,8 +9,14 @@ enum Lith_WData
    wdata_magdrops,
    wdata_bossspawned,
    wdata_enemycheck,
+   wdata_fun,
    wdata_ptid,
    wdata_pclass,
+};
+
+enum Lith_Fun
+{
+   lfun_ragnarok = 1 << 0,
 };
 
 enum Lith_CBIUpgradeM

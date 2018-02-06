@@ -224,6 +224,7 @@ typedef struct player
    __str pcstr;
    int   pronoun;
    int   dlgnum;
+   int   fun;
 
    // Deltas
    [[__anonymous]] player_delta_t cur;
