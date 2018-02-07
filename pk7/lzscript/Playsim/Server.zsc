@@ -15,81 +15,12 @@ class Lith_HERMES : EventHandler
 
    static clearscope Lith_HERMES Instance()
       {return Lith_HERMES(Find("Lith_HERMES"));}
-
-   static void PrepareForRagnarok(Actor mo)
-   {
-      mo.damageMultiply = 1.6;
-      mo.A_SetRenderStyle(1, STYLE_Stencil);
-      mo.attackSound = 0;
-      mo.deathSound = 0;
-      mo.seeSound = 0;
-      mo.painSound = 0;
-      mo.activeSound = 0;
-      mo.useSound = 0;
-      mo.bounceSound = 0;
-      mo.wallBounceSound = 0;
-      mo.crushPainSound = 0;
-      mo.bLOOKALLAROUND = true;
-      mo.scale.x *= frandom(0.9, 1.1);
-      mo.scale.y *= frandom(0.9, 1.1);
-   }
-
-   static void Fun(int fun)
-   {
-      if(fun & lfun_ragnarok)
-      {
-         S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
-
-         let sky = TexMan.CheckForTexture("HELP", TexMan.Type_Any);
-
-         level.changeSky(sky, sky);
-         level.skyspeed1 = 0.001;
-         level.skyspeed2 = 0.001;
-
-         for(int i = 0, j = level.sectors.size(); i < j; i++)
-         {
-            Sector sec = level.sectors[i];
-            sec.lightlevel = 107;
-            sec.flags |= Sector.SECF_ENDGODMODE;
-            sec.setAngle(Sector.floor,   frandom(0, 360));
-            sec.setAngle(Sector.ceiling, frandom(0, 360));
-
-            for(int k = 0, l = sec.lines.size(); k < l; k++)
-            {
-               Line lin = sec.lines[k];
-               lin.flags |= Line.ML_DONTDRAW;
-               lin.alpha = frandom(0.5, 1);
-
-               for(int m = 0; m < 2; m++)
-               {
-                  Side sid = lin.sidedef[m];
-                  if(sid)
-                  {
-                     sid.addTextureXOffset(Side.top,    frandom(-7,7));
-                     sid.addTextureXOffset(Side.mid,    frandom(-7,7));
-                     sid.addTextureXOffset(Side.bottom, frandom(-7,7));
-                     sid.addTextureYOffset(Side.top,    frandom(-7,7));
-                     sid.addTextureYOffset(Side.mid,    frandom(-7,7));
-                     sid.addTextureYOffset(Side.bottom, frandom(-7,7));
-                     sid.light = random(-40, 40);
-                  }
-               }
-            }
-         }
-
-         Thinker th;
-         for(let it = ThinkerIterator.Create("Actor"); (th = it.next());)
-         {
-            let mo = Actor(th);
-            if(mo && mo.bISMONSTER) PrepareForRagnarok(mo);
-         }
-      }
-   }
 }
 
 #include "lzscript/Playsim/Server/Player.zsc"
 #include "lzscript/Playsim/Server/Monsters.zsc"
 #include "lzscript/Playsim/Server/Weapons.zsc"
+#include "lzscript/Playsim/Server/World.zsc"
 #include "lzscript/Playsim/Server/Pause.zsc"
 
 // EOF

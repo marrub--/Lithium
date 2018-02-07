@@ -97,6 +97,15 @@ fixed mag2k(fixed x, fixed y)
 }
 
 //
+// mag2i
+//
+[[__call("StkCall")]]
+int mag2i(int x, int y)
+{
+   return ACS_Sqrt(x * x + y * y);
+}
+
+//
 // lerpk
 //
 fixed lerpk(fixed a, fixed b, fixed t)

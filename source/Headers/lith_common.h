@@ -229,6 +229,7 @@ void Lith_DebugNote(__str fmt, ...);
 [[__optional_args(1)]] float RandomFloat(float max, float min);
 float mag2f(float x, float y);
 [[__call("StkCall")]] fixed mag2k(fixed x, fixed y);
+[[__call("StkCall")]] int mag2i(int x, int y);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);

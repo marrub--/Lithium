@@ -32,7 +32,7 @@ payoutinfo_t payout;
 static bool  lmvar rain_chk;
 static fixed lmvar rain_px;
 static fixed lmvar rain_py;
-static fixed lmvar rain_dist;
+static int   lmvar rain_dist;
 
 static bool reopen;
 
@@ -254,20 +254,15 @@ int LWData(int info)
 // Lith_RainDropSpawn
 //
 [[__call("ScriptS"), __extern("ACS")]]
-bool Lith_RainDropSpawn()
+void Lith_RainDropSpawn()
 {
-   if(ACS_CheckActorCeilingTexture(0, "F_SKY1"))
+   if(rain_chk)
    {
-      if(rain_chk) {
-         fixed dist = absk(mag2f(ACS_GetActorX(0) - rain_px,
-                                 ACS_GetActorY(0) - rain_py));
-         if(dist < rain_dist)
-            rain_dist = dist;
-      }
-      return true;
+      int dist =
+         mag2i(ACS_GetActorX(0) - rain_px, ACS_GetActorY(0) - rain_py);
+      if(dist < rain_dist)
+         rain_dist = dist;
    }
-   else
-      return false;
 }
 
 // Static Functions ----------------------------------------------------------|
@@ -278,7 +273,6 @@ bool Lith_RainDropSpawn()
 [[__call("ScriptS")]]
 static void DoRain()
 {
-   // Doesn't work in multiplayer, sorry!
    if(ACS_PlayerCount() > 1)
       return;
 
@@ -288,30 +282,32 @@ static void DoRain()
    ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
    ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.001, true, ATTN_NONE);
 
-   fixed skydist = 0, curskydist = 0;
+   fixed skydist, curskydist = 1;
    for(;;)
    {
-      if((skydist = !ACS_CheckActorCeilingTexture(0, "F_SKY1"))) {
-         rain_chk = true;
+      if((rain_chk = !ACS_CheckActorCeilingTexture(0, "F_SKY1")))
+      {
          rain_dist = 1024;
          rain_px = p->x;
          rain_py = p->y;
-      } else {
-         rain_chk = false;
-         ACS_TakeInventory("Lith_SMGHeat", 1);
       }
+      else
+         ACS_TakeInventory("Lith_SMGHeat", 1);
 
       if((InHell || InSecret) && !world.islithmap)
-         ACS_GiveActorInventory(p->tid, "Lith_SpawnBloodRain", 1);
+         HERMES("SpawnRain", "Lith_BloodRainDrop");
       else
-         ACS_GiveActorInventory(p->tid, "Lith_SpawnRain", 1);
+         HERMES("SpawnRain", "Lith_RainDrop");
 
       ACS_Delay(1);
 
-      if(rain_chk) {
+      if(rain_chk)
+      {
          skydist = rain_dist / 1024.0;
          skydist = minmax(skydist, 0, 1);
       }
+      else
+         skydist = 0;
 
       curskydist = lerpk(curskydist, skydist, 0.035);
       ACS_SoundVolume(p->weathertid, CHAN_BODY,  1 - curskydist);

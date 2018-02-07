@@ -1,0 +1,71 @@
+extend class Lith_HERMES
+{
+   static void SpawnRain(Actor mo, string type)
+   {
+      for(int i = 0; i < 27; i++)
+      {
+         Actor a[2];
+         bool _;
+
+         [_, a[0]] = mo.A_SpawnItemEx(type, frandom(16, 1024), 0, frandom(256,512), 0, 0, 0, frandom(0, 360), 128);
+         [_, a[1]] = mo.A_SpawnItemEx(type, frandom(512, 1536), 0, frandom(256,512), 0, 0, 0, frandom(-90, 90), 128);
+
+         for(int j = 0; j < 2; j++)
+            if(a[j] && a[j].ceilingpic != skyflatnum) a[j].destroy();
+      }
+   }
+
+   static void Fun(int fun)
+   {
+      if(fun & lfun_ragnarok)
+      {
+         S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
+
+         let sky = TexMan.CheckForTexture("HELP", TexMan.Type_Any);
+
+         level.changeSky(sky, sky);
+         level.skyspeed1 = 0.001;
+         level.skyspeed2 = 0.001;
+
+         for(int i = 0, j = level.sectors.size(); i < j; i++)
+         {
+            Sector sec = level.sectors[i];
+            sec.lightlevel = 107;
+            sec.flags |= Sector.SECF_ENDGODMODE;
+            sec.setAngle(Sector.floor,   frandom(0, 360));
+            sec.setAngle(Sector.ceiling, frandom(0, 360));
+
+            for(int k = 0, l = sec.lines.size(); k < l; k++)
+            {
+               Line lin = sec.lines[k];
+               lin.flags |= Line.ML_DONTDRAW;
+               lin.alpha = frandom(0.5, 1);
+
+               for(int m = 0; m < 2; m++)
+               {
+                  Side sid = lin.sidedef[m];
+                  if(sid)
+                  {
+                     sid.addTextureXOffset(Side.top,    frandom(-7,7));
+                     sid.addTextureXOffset(Side.mid,    frandom(-7,7));
+                     sid.addTextureXOffset(Side.bottom, frandom(-7,7));
+                     sid.addTextureYOffset(Side.top,    frandom(-7,7));
+                     sid.addTextureYOffset(Side.mid,    frandom(-7,7));
+                     sid.addTextureYOffset(Side.bottom, frandom(-7,7));
+                     sid.light = random(-40, 40);
+                  }
+               }
+            }
+         }
+
+         Thinker th;
+         for(let it = ThinkerIterator.Create("Actor"); (th = it.next());)
+         {
+            let mo = Actor(th);
+            if(mo && mo.bISMONSTER) PrepareForRagnarok(mo);
+         }
+      }
+   }
+}
+
+// EOF
