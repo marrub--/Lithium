@@ -179,6 +179,7 @@ void Lith_PhantomDeath(void)
    LogDebug(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
 
    Lith_SpawnBossReward();
+   world.soulsfreed++;
 
    #pragma GDCC FIXED_LITERAL OFF
    scorethreshold *= 1.7;

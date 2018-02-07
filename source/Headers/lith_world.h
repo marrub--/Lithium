@@ -82,6 +82,7 @@ typedef struct worldinfo_s
    long   ticks;
    int    game;
    int    apiversion;
+   int    soulsfreed;
 
    int fun;
 

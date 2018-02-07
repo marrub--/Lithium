@@ -242,6 +242,7 @@ int LWData(int info)
    case wdata_bossspawned: return world.bossspawned;
    case wdata_enemycheck:  return world.enemycheck;
    case wdata_fun:         return world.fun;
+   case wdata_soulsfreed:  return world.soulsfreed;
    case wdata_ptid:   Lith_ForPlayer() return p->tid;
    case wdata_pclass: Lith_ForPlayer() return p->pclass;
    }
@@ -495,6 +496,8 @@ static void MInit(void)
 
    world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
    world.pauseinmenus = world.singleplayer && ACS_GetCVar("lith_sv_pauseinmenus");
+
+   world.soulsfreed = 0;
 
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);

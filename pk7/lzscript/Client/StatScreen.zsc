@@ -1,0 +1,71 @@
+// STATUS: Super Totally Awesome Totally Useful Statistics
+class Lith_STATUS : DoomStatusScreen
+{
+   int m_souls;
+
+   private void Lith_DrawSetq(int x, int y, string text)
+   {
+      int lh = BigFont.GetHeight() * 3 / 2;
+      Screen.DrawText(BigFont, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
+   }
+
+   private void Lith_DrawPrct(int y, string text, int n, int m)
+   {
+      Lith_DrawSetq(50+y*2, y, text);
+
+           if(n < 0) text = "'...)";
+      else if(m)     text = "\"" .. int(float(n) / m * 100) .. "%\")";
+      else           text = "())";
+
+      Lith_DrawSetq(210, y, text);
+   }
+
+   private void Lith_DrawCent(int x, int y, string text)
+   {
+      Screen.DrawText(BigFont, Font.CR_GREEN, x - BigFont.StringWidth(text) / 2, y, text, DTA_Clean, true);
+   }
+
+   override void Start(wbstartstruct wbss)
+   {
+      m_souls = random(400, 700);
+      Super.Start(wbss);
+   }
+
+   override void DrawStats()
+   {
+      Lith_DrawPrct(0, "* (SETQ KILLS", cnt_kills [0], wbs.maxkills );
+      Lith_DrawPrct(1, "* (SETQ ITEMS", cnt_items [0], wbs.maxitems );
+      Lith_DrawPrct(2, "* (SETQ SCRTS", cnt_secret[0], wbs.maxsecret);
+
+      int souls = CallACS("LWData", wdata_soulsfreed);
+      if(souls) Lith_DrawCent(160, 120, (souls * m_souls) .. " SOULS FREED");
+
+      DrawName(140, wbs.lname0, lnametexts[0]);
+      Lith_DrawCent(160, 0, "(LEAVE-AREA)");
+
+      if(cnt_time >= 0)
+      {
+         Screen.DrawTexture(Timepic, true, SP_TIMEX, SP_TIMEY, DTA_Clean, true);
+         DrawTime(160 - SP_TIMEX, SP_TIMEY, cnt_time);
+         DrawTime(160 - SP_TIMEX, SP_TIMEY + 12, cnt_total_time, true);
+      }
+
+      if(wbs.partime && cnt_par >= 0)
+      {
+         Screen.DrawTexture(Par, true, 160 + SP_TIMEX, SP_TIMEY, DTA_Clean, true);
+         DrawTime(320 - SP_TIMEX, SP_TIMEY, cnt_par);
+      }
+   }
+
+   override void DrawShowNextLoc()
+   {
+      bg.drawBackground(CurState, true, snl_pointeron);
+
+      DrawName(240, wbs.lname1, lnametexts[1]);
+
+      if(bcnt % 20 < 10)
+         Lith_DrawCent(160, 70, "(ENTER-AREA)");
+   }
+}
+
+// EOF
