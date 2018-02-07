@@ -36,15 +36,6 @@ static fixed lmvar rain_dist;
 
 static bool reopen;
 
-// Callbacks -----------------------------------------------------------------|
-
-CallbackDefine(basic_cb_t, GInit)
-CallbackDefine(basic_cb_t, GSInit)
-CallbackDefine(basic_cb_t, WSInit)
-CallbackDefine(basic_cb_t, WInit)
-CallbackDefine(basic_cb_t, MInit)
-CallbackDefine(basic_cb_t, MSInit)
-
 // Extern Functions ----------------------------------------------------------|
 
 [[__call("ScriptS"), __extern("ACS")]]
@@ -61,6 +52,7 @@ worldinfo_t *Lith_GetWorldExtern(void)
 //
 // Lith_FreezeTime
 //
+[[__call("StkCall")]]
 void Lith_FreezeTime(bool on)
 {
    static int lmvar frozen;
@@ -87,8 +79,7 @@ void Lith_FreezeTime(bool on)
    {
       if(!--frozen)
       {
-         Lith_ForPlayer()
-         p->frozen--;
+         Lith_ForPlayer() p->frozen--;
 
          Lith_ForPlayer()
          {
@@ -103,12 +94,15 @@ void Lith_FreezeTime(bool on)
 //
 // Lith_BeginAngles
 //
-[[__call("ScriptS"), __extern("ACS")]]
+[[__call("StkCall")]]
 void Lith_BeginAngles(int x, int y)
 {
    world.a_cur = 0;
    for(int i = 0; i < countof(world.a_angles); i++)
-      world.a_angles[i] = (struct polar){};
+   {
+      world.a_angles[i].ang = 0;
+      world.a_angles[i].dst = 0;
+   }
    world.a_x = x;
    world.a_y = y;
 }
@@ -116,15 +110,24 @@ void Lith_BeginAngles(int x, int y)
 //
 // Lith_AddAngle
 //
-[[__call("ScriptS"), __extern("ACS")]]
+[[__call("StkCall")]]
 fixed Lith_AddAngle(int x, int y)
 {
-   if(world.a_cur > countof(world.a_angles))
+   if(world.a_cur >= countof(world.a_angles))
       return 0;
 
    struct polar *p = &world.a_angles[world.a_cur++];
    *p = ctopol(x - world.a_x, y - world.a_y);
    return p->ang;
+}
+
+//
+// Lith_AddAngleScript
+//
+[[__call("ScriptS"), __extern("ACS"), __address("Lith_AddAngle")]]
+void Lith_AddAngleScript(int x, int y)
+{
+   Lith_AddAngle(x, y);
 }
 
 //
@@ -449,11 +452,7 @@ static void GSInit(void)
    extern void Lith_GSInit_Dialogue(void);
    extern void Lith_InstallCBIItem(int num);
 
-   CallbackClear(player_cb_t, PlayerUpdate);
-   CallbackClear(player_cb_t, PlayerRender);
-
    LogDebug(log_dev, "GINIT RUNNING");
-   CallbackRunAndClear(basic_cb_t, GInit);
 
    CheckModCompat();
    UpdateGame();
@@ -463,7 +462,6 @@ static void GSInit(void)
    if(!world.gsinit)
    {
       LogDebug(log_dev, "GSINIT RUNNING");
-      CallbackRunAndClear(basic_cb_t, GSInit);
 
       Lith_GSInit_Upgrade();
       Lith_GSInit_Weapon();
@@ -491,7 +489,6 @@ static void GSInit(void)
 static void MInit(void)
 {
    LogDebug(log_dev, "MINIT RUNNING");
-   CallbackRunAndClear(basic_cb_t, MInit);
 
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
@@ -538,7 +535,6 @@ static void MInit(void)
 static void MSInit(void)
 {
    LogDebug(log_dev, "MSINIT RUNNING");
-   CallbackRunAndClear(basic_cb_t, MSInit);
 
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
@@ -556,7 +552,6 @@ static void MSInit(void)
 static void WSInit(void)
 {
    LogDebug(log_dev, "WSINIT RUNNING");
-   CallbackRunAndClear(basic_cb_t, WSInit);
 
    dmonid = 0;
    world.bossspawned = false;
@@ -584,7 +579,6 @@ static void WSInit(void)
 static void WInit(void)
 {
    LogDebug(log_dev, "WINIT RUNNING");
-   CallbackRunAndClear(basic_cb_t, WInit);
 
    if(!ACS_GetCVar("lith_sv_nobosses"))
       SpawnBoss();

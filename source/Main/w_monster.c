@@ -240,6 +240,7 @@ static void ApplyLevels(dmon_t *m, int prev)
 //
 // ShowBarrier
 //
+[[__call("StkCall")]]
 static void ShowBarrier(dmon_t const *m, fixed alpha)
 {
    bool anyplayer = false;
@@ -248,20 +249,17 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    int const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
    int const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
 
-   Lith_ForPlayer() {
-      if(aabb(xw1, yw1, xw2, yw2, p->x, p->y)) {
-         anyplayer = true;
-         break;
-      }
-   }
+   Lith_ForPlayer() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
+      {anyplayer = true; break;}
 
    if(!anyplayer)
       return;
 
    world.begAngles(m->ms->x, m->ms->y);
-   ACS_GiveInventory("Lith_MonsterBarrierLook", 1);
+   HERMES("MonsterBarrierLook");
 
-   for(int i = 0; i < world.a_cur; i++) {
+   for(int i = 0; i < world.a_cur; i++)
+   {
       struct polar *a = &world.a_angles[i];
 
       fixed dst = m->ms->r / 2 + a->dst / 4;
@@ -432,7 +430,8 @@ void Lith_MonsterMain(dmon_t *m)
    LogDebug(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
-   for(int tic = 0;; tic++) {
+   for(int tic = 0;; tic++)
+   {
       GetInfo(m);
 
       if(m->ms->health <= 0)
@@ -445,7 +444,7 @@ void Lith_MonsterMain(dmon_t *m)
       }
 
       if(HasResistances(m) && m->level >= 20)
-         ShowBarrier(m, m->level / (fixed)MAXLEVEL);
+         ShowBarrier(m, m->level / 100.);
 
       if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
          HERMES("Lith_IonizeFX");

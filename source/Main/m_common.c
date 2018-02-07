@@ -16,6 +16,7 @@ int   dbgstatnum,  dbgnotenum;
 //
 // SetInventory
 //
+[[__call("StkCall")]]
 static void SetInventory(__str item, int amount)
 {
    int s = ACS_CheckInventory(item) - amount;
@@ -26,6 +27,7 @@ static void SetInventory(__str item, int amount)
 //
 // SetActorInventory
 //
+[[__call("StkCall")]]
 static void SetActorInventory(int tid, __str item, int amount)
 {
    int s = ACS_CheckActorInventory(tid, item) - amount;
@@ -47,6 +49,7 @@ void Lith_DumpAlloc(void)
 //
 // Lith_FadeFlash
 //
+[[__call("StkCall")]]
 void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
 {
    ACS_FadeTo(r, g, b, amount, 0.0);
@@ -101,6 +104,7 @@ bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags
 //
 // Lith_CheckActorInventory
 //
+[[__call("StkCall")]]
 int Lith_CheckActorInventory(int tid, __str item)
 {
    if(tid == 0) return ACS_CheckInventory(item);
@@ -110,6 +114,7 @@ int Lith_CheckActorInventory(int tid, __str item)
 //
 // Lith_GiveActorInventory
 //
+[[__call("StkCall")]]
 void Lith_GiveActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) ACS_GiveInventory(item, amount);
@@ -119,6 +124,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
 //
 // Lith_TakeActorInventory
 //
+[[__call("StkCall")]]
 void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) ACS_TakeInventory(item, amount);
@@ -128,6 +134,7 @@ void Lith_TakeActorInventory(int tid, __str item, int amount)
 //
 // Lith_SetActorInventory
 //
+[[__call("StkCall")]]
 void Lith_SetActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) SetInventory(item, amount);

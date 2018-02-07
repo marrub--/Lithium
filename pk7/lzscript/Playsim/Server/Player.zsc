@@ -73,7 +73,7 @@ extend class Lith_HERMES
    static void Log(Actor mo, string name, int type)
    {
       let sv = Instance();
-      if(sv && mo.playerNumber() >= 0)
+      if(sv && mo.player)
       {
          sv.m_logname = name;
          CallACS("Lith_LogS", mo.playerNumber(), type);

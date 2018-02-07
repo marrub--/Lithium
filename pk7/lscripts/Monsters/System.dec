@@ -120,16 +120,6 @@ actor Lith_MonsterHeptaura
    }
 }
 
-actor Lith_MonsterBarrierLook : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 A_RadiusGive("Lith_GetAngles", 384, RGF_PLAYERS|RGF_CUBE)
-      stop
-   }
-}
-
 actor Lith_RunMonsterInfo : Lith_CustomFunction
 {
    states

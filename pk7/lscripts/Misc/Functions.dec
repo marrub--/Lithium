@@ -8,16 +8,6 @@ actor Lith_Alerter : Lith_CustomFunction
    }
 }
 
-actor Lith_GetAngles : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_AddAngle", x, y)
-      stop
-   }
-}
-
 actor Lith_Death : Lith_CustomFunction
 {
    states

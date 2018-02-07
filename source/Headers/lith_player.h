@@ -98,35 +98,34 @@ typedef struct player_delta_s
 // Extern Functions ----------------------------------------------------------|
 
 // state
-[[__call("ScriptS")]]  void Lith_ResetPlayer(struct player *p);
-[[__call("ScriptS")]]  void Lith_PlayerLoadData(struct player *p);
-[[__call("ScriptS")]]  void Lith_PlayerSaveData(struct player *p);
-                       int  Lith_PlayerCurWeaponType(struct player *p);
-                       bool Lith_ButtonPressed(struct player *p, int bt);
-[[__optional_args(1)]] bool Lith_SetPlayerVelocity(struct player *p,
-                          fixed velx, fixed vely, fixed velz, bool add);
-                       void Lith_ValidatePlayerTID(struct player *p);
+[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
+[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
+[[__call("StkCall")]] int  Lith_PlayerCurWeaponType(struct player *p);
+[[__call("StkCall")]] bool Lith_ButtonPressed(struct player *p, int bt);
+[[__call("StkCall"), __optional_args(1)]] bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add);
+void Lith_ValidatePlayerTID(struct player *p);
 
 // gui
-void Lith_PlayerCloseGUI(struct player *p);
-void Lith_PlayerUseGUI(struct player *p, guiname_t type);
+[[__call("StkCall")]] void Lith_PlayerCloseGUI(struct player *p);
+[[__call("StkCall")]] void Lith_PlayerUseGUI(struct player *p, guiname_t type);
 
 // score
 [[__optional_args(1)]] score_t Lith_GiveScore(struct player *p, score_t score, bool nomul);
-void Lith_TakeScore(struct player *p, score_t score);
+[[__call("StkCall")]] void Lith_TakeScore(struct player *p, score_t score);
 
 // attributes
-void Lith_GiveEXP(struct player *p, unsigned long amt);
+[[__call("StkCall")]] void Lith_GiveEXP(struct player *p, unsigned long amt);
 
 // misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
-void Lith_ClearTextBuf(struct player *p);
-__str Lith_PlayerDiscriminator(int pclass);
+[[__call("StkCall")]] void Lith_ClearTextBuf(struct player *p);
+[[__call("StkCall")]] __str Lith_PlayerDiscriminator(int pclass);
 
 [[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
 
-void Lith_PlayerUpdateStats(struct player *p);
+[[__call("StkCall")]] void Lith_PlayerUpdateStats(struct player *p);
 
 struct player *Lith_GetPlayer(int tid, int ptr);
 
@@ -354,12 +353,5 @@ extern player_t players[MAX_PLAYERS];
 player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
 #define players (*Lith_GetPlayersExtern())
 #endif
-
-// Callbacks -----------------------------------------------------------------|
-
-// Called when an alive player updates. Cleared before GInit is called.
-CallbackDeclareInternal(player_cb_t, PlayerUpdate)
-// Called when a player finishes updating. Cleared before GInit is called.
-CallbackDeclareInternal(player_cb_t, PlayerRender)
 
 #endif

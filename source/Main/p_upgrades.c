@@ -86,10 +86,6 @@ static __str const UpgrCateg[UC_MAX] = {
 static upgradeinfo_t *UpgrInfo;
 static int UpgrMax = countof(UpgrInfoBase);
 
-// Callbacks -----------------------------------------------------------------|
-
-CallbackDefine(upgr_reinit_cb_t, UpgrReinit)
-
 // Static Functions ----------------------------------------------------------|
 
 //
@@ -183,14 +179,7 @@ void Lith_GSReinit_Upgrade(void)
       #include "lith_upgradefuncs.h"
          continue;
       }
-
-      CallbackEach(upgr_reinit_cb_t, UpgrReinit)
-         if(cb(ui)) goto next;
-
-   next:;
    }
-
-   CallbackClear(upgr_reinit_cb_t, UpgrReinit);
 }
 
 //

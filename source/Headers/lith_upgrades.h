@@ -29,9 +29,5 @@ void Lith_PlayerEnterUpgrades(struct player *p);
 
 upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr);
 
-// Callbacks -----------------------------------------------------------------|
-
-CallbackDeclareInternal(upgr_reinit_cb_t, UpgrReinit)
-
 #endif
 

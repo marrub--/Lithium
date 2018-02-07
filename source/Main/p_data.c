@@ -121,6 +121,7 @@ static void SetPClass(player_t *p)
 //
 // ConvertAmmo
 //
+[[__call("StkCall")]]
 static void ConvertAmmo(player_t *p)
 {
    int clip = ACS_CheckInventory("Lith_BulletAmmo");
@@ -160,6 +161,7 @@ static void ConvertAmmo(player_t *p)
 //
 // Lith_PlayerCurWeaponType
 //
+[[__call("StkCall")]]
 int Lith_PlayerCurWeaponType(player_t *p)
 {
    return p->weapon.cur->info->type;
@@ -168,6 +170,7 @@ int Lith_PlayerCurWeaponType(player_t *p)
 //
 // Lith_ButtonPressed
 //
+[[__call("StkCall")]]
 bool Lith_ButtonPressed(player_t *p, int bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
@@ -176,6 +179,7 @@ bool Lith_ButtonPressed(player_t *p, int bt)
 //
 // Lith_SetPlayerVelocity
 //
+[[__call("StkCall")]]
 bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add)
 {
    if(add)
@@ -208,7 +212,7 @@ void Lith_ValidatePlayerTID(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateData(player_t *p)
 {
-   int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+   static int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
 
    HERMES("SetInput", p->num, false);
@@ -271,7 +275,7 @@ void Lith_PlayerUpdateData(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GiveMail(int num)
 {
-   __str names[] = {
+   static __str const names[] = {
       "Intro",
       "Cluster1",
       "Cluster2",
@@ -291,6 +295,7 @@ void Lith_GiveMail(int num)
 //
 // Lith_ClearTextBuf
 //
+[[__call("StkCall")]]
 void Lith_ClearTextBuf(player_t *p)
 {
    memset(p->txtbuf, 0, sizeof(p->txtbuf));
@@ -312,6 +317,7 @@ void Lith_KeyDown(int pnum, int ch)
 //
 // Lith_GiveEXP
 //
+[[__call("StkCall")]]
 void Lith_GiveEXP(player_t *p, unsigned long amt)
 {
    #pragma GDCC FIXED_LITERAL OFF
@@ -477,6 +483,7 @@ void Lith_ResetPlayer(player_t *p)
 //
 // Lith_PlayerUpdateStats
 //
+[[__call("StkCall")]]
 void Lith_PlayerUpdateStats(player_t *p)
 {
    fixed boost = 1 + p->jumpboost;

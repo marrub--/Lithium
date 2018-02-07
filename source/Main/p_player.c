@@ -18,11 +18,6 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
    {"player/cbi/open", "player/cbi/close"},
 };
 
-// Callbacks -----------------------------------------------------------------|
-
-CallbackDefine(player_cb_t, PlayerUpdate)
-CallbackDefine(player_cb_t, PlayerRender)
-
 // Static Functions ----------------------------------------------------------|
 
 static void Lith_PlayerRunScripts(player_t *p);
@@ -281,6 +276,7 @@ player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
 //
 // Lith_PlayerDiscriminator
 //
+[[__call("StkCall")]]
 __str Lith_PlayerDiscriminator(int pclass)
 {
    switch(pclass) {
@@ -323,6 +319,7 @@ player_t *Lith_GetPlayer(int tid, int ptr)
 //
 // Lith_PlayerCloseGUI
 //
+[[__call("StkCall")]]
 void Lith_PlayerCloseGUI(player_t *p)
 {
    if(p->activegui != GUI_NONE)
@@ -343,6 +340,7 @@ void Lith_PlayerCloseGUI(player_t *p)
 //
 // Lith_PlayerUseGUI
 //
+[[__call("StkCall")]]
 void Lith_PlayerUseGUI(player_t *p, guiname_t type)
 {
    if(p->dead) return;
@@ -421,6 +419,7 @@ score_t Lith_GiveScore(player_t *p, score_t score, bool nomul)
 //
 // Lith_TakeScore
 //
+[[__call("StkCall")]]
 void Lith_TakeScore(player_t *p, score_t score)
 {
    if(p->score - score >= 0) {
@@ -555,8 +554,6 @@ static void Lith_PlayerRunScripts(player_t *p)
       switch(p->activegui)
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p);
 
-      CallbackRun(player_cb_t, PlayerUpdate, p);
-
       Lith_PlayerUpdateAttributes(p);
       Lith_PlayerUpdateWeapons(p);
       Lith_PlayerUpdateLog(p);
@@ -568,8 +565,6 @@ static void Lith_PlayerRunScripts(player_t *p)
    }
 
    // Rendering
-   CallbackRun(player_cb_t, PlayerRender, p);
-
    Lith_PlayerFootstep(p);
    Lith_PlayerItemFx(p);
    Lith_PlayerDamageBob(p);

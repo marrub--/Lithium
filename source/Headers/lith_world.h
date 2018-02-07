@@ -46,22 +46,9 @@ enum game_s
 
 __str Lith_CanonTime(int type);
 [[__optional_args(1)]] int Lith_UniqueID(int tid);
-[[__call("ScriptS"), __extern("ACS")]] void Lith_BeginAngles(int x, int y);
-[[__call("ScriptS"), __extern("ACS")]] fixed Lith_AddAngle(int x, int y);
-void Lith_FreezeTime(bool on);
-
-// Called every OPEN before any other initialization takes place.
-CallbackDeclareInternal(basic_cb_t, GInit)
-// Called once per game. Do not register if world.gsinit is true.
-CallbackDeclareInternal(basic_cb_t, GSInit)
-// Called once per hub, before player init.
-CallbackDeclareInternal(basic_cb_t, WSInit)
-// Called once per hub, after player init.
-CallbackDeclareInternal(basic_cb_t, WInit)
-// Called once per map, before world init.
-CallbackDeclareInternal(basic_cb_t, MInit)
-// Called once per map, after world init.
-CallbackDeclareInternal(basic_cb_t, MSInit)
+[[__call("StkCall")]] void Lith_BeginAngles(int x, int y);
+[[__call("StkCall")]] fixed Lith_AddAngle(int x, int y);
+[[__call("StkCall")]] void Lith_FreezeTime(bool on);
 
 typedef struct worldinfo_s
 {

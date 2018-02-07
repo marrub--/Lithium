@@ -1,5 +1,12 @@
 extend class Lith_HERMES
 {
+   static void MonsterBarrierLook(Actor mo)
+   {
+      for(let it = BlockThingsIterator.Create(mo, 192*2); it.next();)
+         if(it.thing.player)
+            CallACS("Lith_AddAngle", it.thing.pos.x, it.thing.pos.y);
+   }
+
    static void SpawnBoss(Actor a, string name, int phase)
    {
       let pos = a.pos;

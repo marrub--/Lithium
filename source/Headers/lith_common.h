@@ -137,40 +137,6 @@
 #define DebugNote(...) \
    (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
 
-#define CallbackDeclareFn(t, name) \
-   extern void Lith_CbReg_##name(t cb);
-
-#define CallbackDeclare(t, name) \
-   extern t name##Cb[]; \
-   extern int name##CbNum; \
-   CallbackDeclareFn(t, name)
-
-#ifndef EXTERNAL_CODE
-#define CallbackDeclareInternal(t, name) CallbackDeclare(t, name)
-#else
-#define CallbackDeclareInternal(t, name) CallbackDeclareFn(t, name)
-#endif
-
-#define CallbackDefine(t, name) \
-   t name##Cb[16]; \
-   int name##CbNum; \
-   void Lith_CbReg_##name(t cb) {name##Cb[name##CbNum++] = cb;}
-
-#define CallbackRun(t, name, ...) \
-   do for(int _cb_i = 0; _cb_i < name##CbNum; _cb_i++) \
-      name##Cb[_cb_i](__VA_ARGS__); \
-   while(0)
-
-#define CallbackEach(t, name) \
-   for(int _cb_i = 0; _cb_i < name##CbNum; _cb_i++) \
-      __with(t cb = name##Cb[_cb_i];)
-
-#define CallbackClear(t, name) name##CbNum = 0
-
-#define CallbackRunAndClear(t, name, ...) \
-   CallbackRun(t, name, __VA_ARGS__); \
-   CallbackClear(t, name)
-
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 #define TS TICSECOND
@@ -217,13 +183,13 @@ typedef void (*basic_cb_t)(void);
 
 // Printing ------------------------------------------------------------------|
 
-void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
-void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
-void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
-void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
-void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold);
-void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
-void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
+[[__call("StkCall")]] void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
+[[__call("StkCall")]] void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
+[[__call("StkCall")]] void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
+[[__call("StkCall")]] void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
+[[__call("StkCall")]] void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold);
+[[__call("StkCall")]] void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
+[[__call("StkCall")]] void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
 void HudMessage(__str fmt, ...);
 void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
@@ -232,11 +198,11 @@ void PrintBold(__str fmt, ...);
 // Strings -------------------------------------------------------------------|
 
 __str StrUpper(__str in);
-unsigned StrHash(char __str_ars const *s);
-unsigned CStrHash(char const *s);
+[[__call("StkCall")]] unsigned StrHash(char __str_ars const *s);
+[[__call("StkCall")]] unsigned CStrHash(char const *s);
 char *Lith_strcpy_str(char *dest, char __str_ars const *src);
 int Lith_strcmp_str(char const *s1, char __str_ars const *s2);
-__str Lith_ScoreSep(score_t num);
+[[__call("StkCall")]] __str Lith_ScoreSep(score_t num);
 __str Language(__str fmt, ...);
 __str LanguageNull(__str fmt, ...);
 __str StrParam(__str fmt, ...);
@@ -244,15 +210,15 @@ void StrParamBegin(__str fmt, ...);
 
 // Utilities -----------------------------------------------------------------|
 
-void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
+[[__call("StkCall")]] void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
 [[__call("ScriptS"), __optional_args(2)]] bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
-int Lith_CheckActorInventory(int tid, __str item);
-void Lith_GiveActorInventory(int tid, __str item, int amount);
-void Lith_TakeActorInventory(int tid, __str item, int amount);
-void Lith_SetActorInventory (int tid, __str item, int amount);
+[[__call("StkCall")]] int Lith_CheckActorInventory(int tid, __str item);
+[[__call("StkCall")]] void Lith_GiveActorInventory(int tid, __str item, int amount);
+[[__call("StkCall")]] void Lith_TakeActorInventory(int tid, __str item, int amount);
+[[__call("StkCall")]] void Lith_SetActorInventory (int tid, __str item, int amount);
 void Lith_DebugStat(__str fmt, ...);
 void Lith_DebugNote(__str fmt, ...);
 
@@ -262,15 +228,15 @@ void Lith_DebugNote(__str fmt, ...);
 [[__optional_args(1)]] crc64_t Lith_CRC64_str(void __str_ars const *data, size_t len, crc64_t result);
 [[__optional_args(1)]] float RandomFloat(float max, float min);
 float mag2f(float x, float y);
-fixed mag2k(fixed x, fixed y);
+[[__call("StkCall")]] fixed mag2k(fixed x, fixed y);
 fixed lerpk(fixed a, fixed b, fixed t);
 fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t);
 float lerpf(float a, float b, float t);
 double lerp(double a, double b, double t);
-bool aabb(int x, int y, int z, int w, int x2, int y2);
-int ceilk(fixed n);
-int bzpolyi(int a, int b, float t);
-float bzpolyf(float a, float b, float t);
+[[__call("StkCall")]] bool aabb(int x, int y, int z, int w, int x2, int y2);
+[[__call("StkCall")]] int ceilk(fixed n);
+[[__call("StkCall")]] float bzpolyf(float a, float b, float t);
+[[__call("StkCall")]] int bzpolyi(int a, int b, float t);
 struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t);
 struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3, float t);
 struct polar ctopol(fixed x, fixed y);
