@@ -1,0 +1,146 @@
+class Lith_CyberRocket : Rocket replaces Rocket
+{
+   default
+   {
+      DamageType "Lith_Shrapnel";
+      Scale 0.75;
+      Radius 8;
+      Height 4;
+      Speed 25;
+      DamageFunction (15 * random(1, 8));
+      DeathSound "explosion";
+   }
+   
+   states
+   {
+   Spawn:
+      MISL A 1 bright;
+      loop;
+   Death:
+      MEXP A 0 A_Explode(96);
+      MEXP AB 2 bright;
+      MEXP CD 3 bright;
+      MEXP EF 4 bright;
+      stop;
+   }
+}
+
+class Lith_XH_Cyberdemon : Lith_Cyberdemon
+{
+   void Lith_A_XH_CyberdemonShoot()
+   {
+      A_PlaySound("enemies/cyberdemon/fire", CHAN_6);
+      A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-15, 15), CMF_OFFSETPITCH, frandom(-5, 5));
+   }
+
+   states
+   {
+   Missile:
+      CYBR E 2 A_FaceTarget;
+      CYBR E 0 A_PlaySound("enemies/cyberdemon/ready", CHAN_5);
+      CYBR E 12 A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      CYBR F 3 bright Lith_A_XH_CyberdemonShoot;
+      CYBR E 1 bright A_FaceTarget;
+      goto See;
+   }
+}
+
+class Lith_Cyberdemon : Lith_Monster replaces Cyberdemon;
+
+default
+{
+   Lith_Monster.Score Score_Cyberdemon;
+   Health 5000;
+   Radius 40;
+   Height 110;
+   Mass 5000;
+   Speed 16;
+   MinMissileChance 160;
+   SeeSound "cyber/sight";
+   PainSound "cyber/pain";
+   DeathSound "cyber/death";
+   ActiveSound "cyber/active";
+   Obituary "$OB_CYBORG";
+   DamageFactor "Lith_Energy", 0.5; // :^)
+   Tag "$LITH_TXT_INFO_SHORT_Cyberdemon";
+   
+   +BOSS
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   +FLOORCLIP
+   +NORADIUSDMG
+   +DONTMORPH
+   +BOSSDEATH
+}
+
+void Lith_A_CyberdemonShoot()
+{
+   A_PlaySound("enemies/cyberdemon/fire", CHAN_6);
+   A_CustomMissile("Lith_CyberRocket", 40, -13);
+}
+
+states
+{
+Spawn:
+   CYBR AB 10 A_Look;
+   loop;
+See:
+   CYBR A 3 A_Hoof;
+   CYBR ABBCC 3 A_Chase;
+   CYBR D 3 A_Metal;
+   CYBR D 3 A_Chase;
+   loop;
+Missile:
+   CYBR E 2 A_FaceTarget;
+   CYBR E 0 A_PlaySound("enemies/cyberdemon/ready", CHAN_5);
+   CYBR E 12 A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   CYBR F 3 bright Lith_A_CyberdemonShoot;
+   CYBR E 1 bright A_FaceTarget;
+   goto See;
+Death:
+   CYBR H -1;
+   wait;
+Crash:
+   CYBR H 10;
+   CYBR I 10 Lith_A_Die;
+   CYBR JKL 10;
+   CYBR M 10;
+   CYBR NO 10;
+   CYBR P 30;
+   CYBR P -1 A_BossDeath;
+   stop;
+}
+
+// EOF

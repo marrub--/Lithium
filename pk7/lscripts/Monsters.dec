@@ -4,13 +4,11 @@
 #include "lscripts/Monsters/Tier2.dec"
 #include "lscripts/Monsters/Tier3.dec"
 #include "lscripts/Monsters/Tier4.dec"
-#include "lscripts/Monsters/Tier5.dec"
 
 #include "lscripts/Monsters/XHTier1.dec"
 #include "lscripts/Monsters/XHTier2.dec"
 #include "lscripts/Monsters/XHTier3.dec"
 #include "lscripts/Monsters/XHTier4.dec"
-#include "lscripts/Monsters/XHTier5.dec"
 
 #include "lscripts/Monsters/Phantom.dec"
 #include "lscripts/Monsters/James.dec"

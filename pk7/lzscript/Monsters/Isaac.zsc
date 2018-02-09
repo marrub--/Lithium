@@ -79,9 +79,9 @@ class Lith_Boss_Isaac : Lith_Phantom
 
    override void Lith_PostInit()
    {
-      if(user_phase == 3)
+      if(m_phase == 3)
          A_SpawnItemEx("Lith_Boss_Michael", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_NOCHECKPOSITION);
-      Console.printf("phase %i", user_phase);
+      Console.printf("phase %i", m_phase);
 
       Super.Lith_PostInit();
    }
@@ -94,7 +94,7 @@ class Lith_Boss_Isaac : Lith_Phantom
 
    void Lith_SpawnDupe()
    {
-      if(random(0, 32) == 0 && user_phase == 3 && m_dupes < 3)
+      if(random(0, 32) == 0 && m_phase == 3 && m_dupes < 3)
       {
          m_dupes++;
          A_SpawnItemEx("Lith_Boss_Johnson", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_NOCHECKPOSITION);

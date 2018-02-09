@@ -42,7 +42,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 
    let b = Lith_Phantom(Actor.Spawn(name, pos));
 
-   b.user_phase = phase;
+   b.m_phase = phase;
 
    b.angle = ang;
    b.changeTID(tid);

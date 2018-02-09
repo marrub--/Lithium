@@ -6,4 +6,8 @@
 // Tier 1
 #include "lzscript/Monsters/ZombieMan.zsc"
 
+// Tier 5
+#include "lzscript/Monsters/Cyberdemon.zsc"
+#include "lzscript/Monsters/SpiderMastermind.zsc"
+
 // EOF
