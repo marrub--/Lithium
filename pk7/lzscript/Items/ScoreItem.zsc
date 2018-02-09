@@ -8,7 +8,7 @@ class Lith_ScoreCount : Inventory
 
 class Lith_ScoreItem : Lith_BasicPickup
 {
-   private readonly int m_score;
+   private meta int m_score;
 
    property Score: m_score;
 

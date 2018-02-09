@@ -138,10 +138,10 @@ class Lith_BasicPickup : Inventory
       +INVENTORY.TRANSFER
    }
 
-   private readonly string m_logname;
-   private readonly int    m_logtype;
+   private meta string m_logname;
+   private meta int    m_logtype;
 
-   readonly bool m_vacuum;
+   meta bool m_vacuum;
 
    property LogName: m_logname;
    property LogType: m_logtype;

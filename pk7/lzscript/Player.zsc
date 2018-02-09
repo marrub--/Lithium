@@ -13,7 +13,7 @@ class Lith_Player : DoomPlayer
       +THRUSPECIES;
    }
 
-   readonly double m_vbob;
+   meta double m_vbob;
 
    property ViewBob: m_vbob;
 
@@ -57,12 +57,12 @@ class Lith_Player : DoomPlayer
          if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
          {
             let dst = distance2D(inv);
-            let t = max(min((140 - dst) / 3000.0, 1), 0);
+            let t = clamp((140 - dst) / 3000., 0., 1.);
 
             if(t)
             {
                let newp = inv.pos * (1 - t) + pos * t;
-               inv.tryMove((newp.x, newp.y), 20);
+               inv.tryMove(newp.xy, 20);
             }
          }
       }

@@ -52,11 +52,11 @@ class Lith_Pickup : CustomInventory
       Lith_Pickup.Sprite "UNKNA";
    }
 
-   private readonly bool m_generic;
+   private meta bool m_generic;
 
-   private readonly string m_sprGf;
-   private readonly string m_sprMf;
-   private readonly string m_sprCf;
+   private meta string m_sprGf;
+   private meta string m_sprMf;
+   private meta string m_sprCf;
 
    private int m_gla;
    private int m_glz;

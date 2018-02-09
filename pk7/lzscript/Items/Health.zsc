@@ -1,6 +1,6 @@
 class Lith_HealthItem : Lith_BasicPickup
 {
-   private readonly int m_amount;
+   private meta int m_amount;
 
    property Amount: m_amount;
 

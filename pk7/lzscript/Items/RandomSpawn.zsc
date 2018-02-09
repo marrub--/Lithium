@@ -1,6 +1,6 @@
 class Lith_RandomSpawn : Actor
 {
-   private readonly int m_rsn;
+   private meta int m_rsn;
    private string m_name;
 
    property SpawnNum: m_rsn;

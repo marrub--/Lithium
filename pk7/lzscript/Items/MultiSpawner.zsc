@@ -1,7 +1,7 @@
 class Lith_MultiSpawner : Actor
 {
-   private readonly int          m_num;
-   private readonly class<Actor> m_name;
+   private meta int          m_num;
+   private meta class<Actor> m_name;
 
    property Amount: m_num;
    property Type:   m_name;

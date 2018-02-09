@@ -8,7 +8,7 @@ class Lith_AAGH : Inventory
       +INVENTORY.UNDROPPABLE
    }
 
-   Lith_Armor m_slotted[aslot_max];
+   Lith_SlottedItem m_slotted[aslot_max];
 
    static Lith_DamageType Lith_NameToDT(name type)
    {
@@ -35,9 +35,9 @@ class Lith_AAGH : Inventory
       }
    }
 
-   bool Lith_AddSlot(Lith_Armor o)
+   bool Lith_AddSlot(Lith_SlottedItem o)
    {
-      let slot = o.Lith_Slot();
+      let slot = o.m_slot;
 
       if(!m_slotted[slot])
       {
@@ -96,25 +96,18 @@ class Lith_AAGH : Inventory
    }
 }
 
-class Lith_Armor : Lith_InventoryItem
+class Lith_SlottedItem : Lith_InventoryItem abstract
 {
    default
    {
-      Lith_InventoryItem.InvType "Armor";
-
-      +INVENTORY.ISARMOR
+      Lith_InventoryItem.InvType "SlottedItem";
    }
 
-   protected int m_slotnum;
-
-   private int m_save0;
-   private int m_save1;
+   int m_slot;
 
    protected Lith_AAGH m_owner;
 
-   protected int m_cursave;
-
-   property SlotSave: m_slotnum, m_save0, m_save1;
+   property Slot: m_slot;
 
    override void Lith_OnAttach()
       {m_owner = null;}
@@ -123,7 +116,7 @@ class Lith_Armor : Lith_InventoryItem
    {
       let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
 
-      if(ar && ar.Lith_RemoveSlot(Lith_Slot()) && ar.Lith_AddSlot(self))
+      if(ar && ar.Lith_RemoveSlot(m_slot) && ar.Lith_AddSlot(self))
       {
          m_owner = ar;
          return true;
@@ -136,24 +129,47 @@ class Lith_Armor : Lith_InventoryItem
    {
       if(m_owner)
       {
-         m_owner.Lith_OmitSlot(Lith_Slot());
+         m_owner.Lith_OmitSlot(m_slot);
          m_owner = null;
       }
 
       Super.Lith_Destroy();
    }
 
-   virtual int Lith_Slot()
-      {return m_slotnum;}
+   virtual int Lith_SaveAmt(name type = 'None') {return 0;}
 
-   virtual int Lith_SaveAmt(name type = 'None')
-      {return m_cursave;}
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_SlottedItem(Super.CreateCopy(mo));
+
+      copy.m_slot = m_slot;
+
+      return copy;
+   }
+}
+
+class Lith_Armor : Lith_SlottedItem abstract
+{
+   default
+   {
+      Lith_InventoryItem.InvType "Armor";
+
+      +INVENTORY.ISARMOR
+   }
+
+   private int m_save0;
+   private int m_save1;
+
+   protected int m_cursave;
+
+   property SlotSave: m_slot, m_save0, m_save1;
+
+   override int Lith_SaveAmt(name type = 'None') {return m_cursave;}
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_Armor(Super.CreateCopy(mo));
 
-      copy.m_slotnum = m_slotnum;
       copy.m_save0   = m_save0;
       copy.m_save1   = m_save1;
       copy.m_cursave = m_cursave;

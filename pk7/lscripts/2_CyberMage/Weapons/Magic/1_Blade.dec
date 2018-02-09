@@ -12,8 +12,8 @@ actor Lith_BladeHitSound : Lith_CustomFunction
 actor Lith_BladeHit : FastProjectile
 {
    Damage (40 * random(1, 2))
-   Radius 24
-   Height 32
+   Radius 16
+   Height 8
    Speed  128
 
    +FORCEPAIN

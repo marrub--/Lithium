@@ -405,10 +405,14 @@ void *Lith_ItemCreate()
 
    LogDebug(log_dev, "Lith_ItemCreate: creating %S", type);
 
-   if(type == "Armor")
-      return Lith_Item_New(&(itemdata_t){ACS_GetActorPropertyString(0, APROP_NameTag), 3, 2, "lgfx/Items/T1.png", .Use = Lith_Item_Use});
-   else
-      return null;
+   #define Type(name, ...) \
+      if(type == name) \
+         return Lith_Item_New(&(itemdata_t const){ACS_GetActorPropertyString(0, APROP_NameTag), __VA_ARGS__})
+
+   Type("SlottedItem", 1, 1, "lgfx/Items/T4.png", .Use = Lith_Item_Use);
+   Type("Armor",       3, 2, "lgfx/Items/T1.png", .Use = Lith_Item_Use);
+
+   return null;
 }
 
 //
