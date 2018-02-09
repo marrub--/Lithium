@@ -6,118 +6,117 @@ class Lith_PostACS : Thinker
    }
 }
 
-class Lith_Events : EventHandler
+class Lith_Events : EventHandler;
+
+/*
+Lith_Cyberspace m_cs;
+
+override void WorldTick()
 {
-   /*
-   Lith_Cyberspace m_cs;
+   m_cs.rotateView(2);
+   m_cs.renderFrame();
+}
+*/
 
-   override void WorldTick()
+override void WorldLoaded(WorldEvent evt)
+{
+   if(evt.isSaveGame)
+      return;
+   else if(evt.isReopen)
+      CallACS("Lith_WorldReopen");
+   else
    {
-      m_cs.rotateView(2);
-      m_cs.renderFrame();
+      CallACS("__lithlib.bin_init");
+      CallACS("__lithmain.bin_init");
+
+      let th = new("Lith_PostACS");
+      th.changeStatNum(Thinker.STAT_USER + 7);
    }
-   */
+}
 
-   override void WorldLoaded(WorldEvent evt)
+override void WorldThingDestroyed(WorldEvent evt)
+{
+   if(evt.thing is "Lith_InventoryItem")
+      Lith_InventoryItem(evt.thing).Lith_Destroy();
+}
+
+override void WorldUnloaded(WorldEvent evt)
+{
+   let it = ThinkerIterator.Create("Lith_InventoryItem");
+   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
+      if(!mo.owner) mo.Lith_Destroy();
+}
+
+override void PlayerEntered(PlayerEvent evt)
+{
+   PlayerInfo p = players[evt.playerNumber];
+
+   // in case the player isn't derived from Lith_Player
+   if(p && !p.mo.findInventory("Lith_AAGH"))
    {
-      if(evt.isSaveGame)
-         return;
-      else if(evt.isReopen)
-         CallACS("Lith_WorldReopen");
-      else
-      {
-         CallACS("__lithlib.bin_init");
-         CallACS("__lithmain.bin_init");
-
-         let th = new("Lith_PostACS");
-         th.changeStatNum(Thinker.STAT_USER + 7);
-      }
+      p.mo.giveInventoryType("Lith_AAGH");
+      p.mo.giveInventoryType("Lith_IDOL");
    }
+}
 
-   override void WorldThingDestroyed(WorldEvent evt)
+override void WorldThingSpawned(WorldEvent evt)
+{
+   let th = evt.thing;
+
+   if(th.bISMONSTER)
    {
-      if(evt.thing is "Lith_InventoryItem")
-         Lith_InventoryItem(evt.thing).Lith_Destroy();
+      th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
+      if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
+         Lith_HERMES.PrepareForRagnarok(th);
    }
+}
 
-   override void WorldUnloaded(WorldEvent evt)
+override bool InputProcess(InputEvent evt)
+{
+   let sv = Lith_HERMES.Instance();
+   let cl = Lith_URANUS.Instance();
+
+   if(!cl || !sv) return false;
+
+   if((evt.type == InputEvent.Type_KeyDown ||
+       evt.type == InputEvent.Type_KeyUp) &&
+      (evt.keyScan == InputEvent.Key_LShift ||
+       evt.keyScan == InputEvent.Key_RShift))
    {
-      let it = ThinkerIterator.Create("Lith_InventoryItem");
-      for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
-         if(!mo.owner) mo.Lith_Destroy();
-   }
+      cl.m_pdata[consoleplayer].shiftDown =
+         (evt.type == InputEvent.Type_KeyDown);
 
-   override void PlayerEntered(PlayerEvent evt)
-   {
-      PlayerInfo p = players[evt.playerNumber];
-
-      // in case the player isn't derived from Lith_Player
-      if(p && !p.mo.findInventory("Lith_AAGH"))
-      {
-         p.mo.giveInventoryType("Lith_AAGH");
-         p.mo.giveInventoryType("Lith_IDOL");
-      }
-   }
-
-   override void WorldThingSpawned(WorldEvent evt)
-   {
-      let th = evt.thing;
-
-      if(th.bISMONSTER)
-      {
-         th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
-         if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
-            Lith_HERMES.PrepareForRagnarok(th);
-      }
-   }
-   
-   override bool InputProcess(InputEvent evt)
-   {
-      let sv = Lith_HERMES.Instance();
-      let cl = Lith_URANUS.Instance();
-
-      if(!cl || !sv) return false;
-
-      if((evt.type == InputEvent.Type_KeyDown ||
-          evt.type == InputEvent.Type_KeyUp) &&
-         (evt.keyScan == InputEvent.Key_LShift ||
-          evt.keyScan == InputEvent.Key_RShift))
-      {
-         cl.m_pdata[consoleplayer].shiftDown =
-            (evt.type == InputEvent.Type_KeyDown);
-
-         return false;
-      }
-      else if(sv.m_pdata[consoleplayer].grabInput &&
-         evt.type == InputEvent.Type_KeyDown && evt.keyString)
-      {
-         int ch = evt.keyChar;
-
-         if(cl.m_pdata[consoleplayer].shiftDown &&
-            (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
-         {
-            ch -= 32;
-         }
-
-         EventHandler.SendNetworkEvent("Lith_Key", ch);
-         return true;
-      }
-      
       return false;
    }
-   
-   override void NetworkProcess(ConsoleEvent evt)
+   else if(sv.m_pdata[consoleplayer].grabInput &&
+      evt.type == InputEvent.Type_KeyDown && evt.keyString)
    {
-      if(evt.name == "Lith_Key")
-         CallACS("Lith_KeyDown", evt.player, evt.args[0]);
-   }
+      int ch = evt.keyChar;
 
-   /*
-   override void RenderOverlay(RenderEvent evt)
-   {
-      if(m_cs) m_cs.render();
+      if(cl.m_pdata[consoleplayer].shiftDown &&
+         (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
+      {
+         ch -= 32;
+      }
+
+      EventHandler.SendNetworkEvent("Lith_Key", ch);
+      return true;
    }
-   */
+   
+   return false;
 }
+
+override void NetworkProcess(ConsoleEvent evt)
+{
+   if(evt.name == "Lith_Key")
+      CallACS("Lith_KeyDown", evt.player, evt.args[0]);
+}
+
+/*
+override void RenderOverlay(RenderEvent evt)
+{
+   if(m_cs) m_cs.render();
+}
+*/
 
 // EOF

@@ -40,218 +40,217 @@ class Lith_GaussMagazine2 : Lith_GaussMagazine
    }
 }
 
-class Lith_Shotgun : Lith_MWeapon
+class Lith_Shotgun : Lith_MWeapon;
+
+default
 {
-   default
+   Tag "$LITH_TXT_INFO_SHORT_Shotgun";
+   Weapon.UpSound "weapons/shotgun/draw";
+   Weapon.SlotNumber 3;
+   Weapon.SlotPriority 1;
+   Lith_Weapon.MagSize 15;
+   
+   +WEAPON.NOAUTOFIRE
+}
+
+int m_just;
+
+action(weapon) void Lith_A_JustAttack()
+{
+   if(invoker.m_just)
    {
-      Tag "$LITH_TXT_INFO_SHORT_Shotgun";
-      Weapon.UpSound "weapons/shotgun/draw";
-      Weapon.SlotNumber 3;
-      Weapon.SlotPriority 1;
-      Lith_Weapon.MagSize 15;
-      
-      +WEAPON.NOAUTOFIRE
+      invoker.m_just = 0;
+      A_AlertMonsters();
+      A_PlaySound("weapons/shotgun/just", 7);
+      A_RailAttack(20, 0, false, "", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "BulletPuff", 0, 0, 0, 48, 3, 3);
    }
+}
 
-   int m_just;
+states(actor)
+{
+SpawnPickup:
+   TNT1 A 0 Lith_A_SpawnPickup("Lith_ShotgunPickup");
+   stop;
+}
 
-   action(weapon) void Lith_A_JustAttack()
-   {
-      if(invoker.m_just)
+states(weapon)
+{
+SelReady:
+   TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "AltReady");
+   goto Ready;
+
+AltReady:
+   SCOP A 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD);
+   loop;
+Ready:
+   SHTG A 0 {if(invoker.m_just) invoker.m_just--;}
+   SHTG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "ReadyGauss");
+   SHTG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
+   loop;
+ReadyGauss:
+   SHTG N 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
+   goto Ready;
+
+Deselect:
+   SHTG A 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
+   SHTG A 0 A_ZoomFactor(1.0);
+DeselectLoop:
+   SHTG AAA 0 A_Lower;
+   SHTG A 1;
+   loop;
+
+Select:
+   SHTG A 0 A_ZoomFactor(1.0);
+   SHTG A 0 {invoker.m_just = 3;}
+SelectLoop:
+   SHTG AAA 0 A_Raise;
+   SHTG A 1;
+   loop;
+
+FireEmpty:
+   #### # 1;
+   #### # 2 offset(0, 38);
+   #### # 1 offset(0, 40);
+   #### # 1 offset(0, 37) A_PlaySound("weapons/cshotgun/empty", CHAN_5);
+   #### # 1 offset(0, 34);
+   #### # 1 offset(0, 33);
+   #### # 5 offset(0, 32);
+   goto SelReady;
+
+Fire:
+   #### # 0 Lith_A_JumpIfNoSlot3OptAmmo;
+   TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "FireGauss");
+   TNT1 A 0 Lith_A_TakeSlot3OptAmmo;
+   TNT1 A 0 Lith_A_JustAttack;
+   TNT1 A 0 {
+      A_AlertMonsters();
+      A_Recoil(0.4);
+      A_FireProjectile("Lith_GunSmokeSpawner", 0, 0, 0, 6);
+
+      if(CallACS("LPData", pdata_upgrade, UPGR_PoisonShot))
       {
-         invoker.m_just = 0;
-         A_AlertMonsters();
-         A_PlaySound("weapons/shotgun/just", 7);
-         A_RailAttack(20, 0, false, "", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "BulletPuff", 0, 0, 0, 48, 3, 3);
+         A_FireBullets(5.3, 2.3, 7, 5, "Lith_PoisonBullet");
+         A_PlaySound("weapons/shotgun/poison/fire", CHAN_WEAPON);
+      }
+      else
+      {
+         A_FireBullets(5.3, 2.3, 8, 5);
+         A_RailAttack(20, 0, true, "", "Green", RGF_SILENT | RGF_FULLBRIGHT, 2, "BulletPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
+         A_PlaySound("weapons/shotgun/fire", CHAN_WEAPON);
       }
    }
-   
-   states(actor)
-   {
-   SpawnPickup:
-      TNT1 A 0 Lith_A_SpawnPickup("Lith_ShotgunPickup");
-      stop;
-   }
-   
-   states(weapon)
-   {
-   SelReady:
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "AltReady");
-      goto Ready;
+   TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Rail_Scoped");
+   SHTG A 0 Lith_A_RecoilUp(1);
+   SHTG B 2 bright A_Light(1);
+   SHTG A 0 Lith_A_RecoilDn(0.25);
+   SHTG C 2 bright A_Light(2);
+   SHTG A 0 Lith_A_RecoilDn(0.25);
+   SHTG D 2 A_Light(0);
+   SHTG A 0 Lith_A_RecoilDn(0.25);
+   SHTG A 4;
+   SHTG A 0 Lith_A_RecoilDn(0.25);
+   SHTG FG 3;
+   SHTG H 2;
+   SHTG I 1;
+   SHTG J 3;
+   SHTG KI 1;
+   SHTG H 3;
+   SHTG G 1 offset(-13, 32);
+   SHTG G 1 offset(0, 32);
+   SHTG F 1 offset(-9, 32);
+   SHTG F 1 offset(0, 32);
+   SHTG A 2 A_WeaponReady(LITH_BOBONLY);
+   SHTG AAAAAAA 1 {A_WeaponReady(LITH_BOBONLY); A_ReFire();}
+   goto SelReady;
+FireFinish_Rail_Scoped:
+   SCOP A 1 bright A_Light1;
+   SCOP A 1 bright A_Light2;
+   SCOP A 2 A_Light0;
+   SCOP A 24;
+   SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
+   SCOP A 0 A_ReFire;
+   SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
+   goto SelReady;
+FireGauss:
+   TNT1 A 0 Lith_A_JumpIfMagEmpty;
+   TNT1 A 0 Lith_A_MagIncr;
+   TNT1 A 0 Lith_A_TakeSlot3OptAmmo;
+   TNT1 A 0 Lith_A_JustAttack;
+   TNT1 A 0 A_AlertMonsters;
+   TNT1 A 0 A_FireBullets(0, 0, 1, 14, "Lith_GaussPuff");
+   TNT1 A 0 A_Quake(1, 5, 0, 64);
+   TNT1 A 0 A_RailAttack(9, 0, false, "LightBlue", "Blue", RGF_NOPIERCING|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0.05, 0.05, 0, 5, frandom(0.35, 1), 0.5);
+   TNT1 A 0 A_PlaySound("weapons/shotgun/gauss/fire", CHAN_WEAPON);
+   TNT1 A 0 A_Recoil(0.777);
+   TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Gauss_Scoped");
+   SHTG N 1;
+   SHTG L 1 A_Light(3);
+   SHTG M 1 A_Light(2);
+   SHTG O 1 A_Light(1);
+   SHTG N 1 A_Light(0);
+   SHTG N 2;
+   SHTG NNNNNNN 1 A_ReFire;
+   goto SelReady;
+FireFinish_Gauss_Scoped:
+   SCOP A 1 bright A_Light(3);
+   SCOP A 1 bright A_Light(2);
+   SCOP A 0 A_Light(1);
+   SCOP A 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOBOB);
+   SCOP A 0 A_Light0;
+   SCOP A 4 A_WeaponReady(WRF_NOPRIMARY|WRF_NOBOB);
+   SCOP AAAAAAA 1 A_ReFire;
+   goto SelReady;
 
-   AltReady:
-      SCOP A 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD);
-      loop;
-   Ready:
-      SHTG A 0 {if(invoker.m_just) invoker.m_just--;}
-      SHTG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "ReadyGauss");
-      SHTG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
-      loop;
-   ReadyGauss:
-      SHTG N 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
-      goto Ready;
-   
-   Deselect:
-      SHTG A 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-      SHTG A 0 A_ZoomFactor(1.0);
-   DeselectLoop:
-      SHTG AAA 0 A_Lower;
-      SHTG A 1;
-      loop;
-   
-   Select:
-      SHTG A 0 A_ZoomFactor(1.0);
-      SHTG A 0 {invoker.m_just = 3;}
-   SelectLoop:
-      SHTG AAA 0 A_Raise;
-      SHTG A 1;
-      loop;
+AltFire:
+   #### # 1;
+   #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut");
+   goto ScopeIn;
+ScopeOut:
+   #### # 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
+   #### # 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
+   #### # 0 A_PlaySound("weapons/shotgun/zoomout", 6);
+   goto Ready;
+ScopeIn:
+   #### # 0 A_GiveInventory("Lith_WeaponScopedToken", 1);
+   #### # 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX);
+   #### # 0 A_PlaySound("weapons/shotgun/zoomin", 6);
+   goto AltReady;
 
-   FireEmpty:
-      #### # 1;
-      #### # 2 offset(0, 38);
-      #### # 1 offset(0, 40);
-      #### # 1 offset(0, 37) A_PlaySound("weapons/cshotgun/empty", CHAN_5);
-      #### # 1 offset(0, 34);
-      #### # 1 offset(0, 33);
-      #### # 5 offset(0, 32);
-      goto SelReady;
-
-   Fire:
-      #### # 0 Lith_A_JumpIfNoSlot3OptAmmo;
-      TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "FireGauss");
-      TNT1 A 0 Lith_A_TakeSlot3OptAmmo;
-      TNT1 A 0 Lith_A_JustAttack;
-      TNT1 A 0 {
-         A_AlertMonsters();
-         A_Recoil(0.4);
-         A_FireProjectile("Lith_GunSmokeSpawner", 0, 0, 0, 6);
-
-         if(CallACS("LPData", pdata_upgrade, UPGR_PoisonShot))
-         {
-            A_FireBullets(5.3, 2.3, 7, 5, "Lith_PoisonBullet");
-            A_PlaySound("weapons/shotgun/poison/fire", CHAN_WEAPON);
-         }
-         else
-         {
-            A_FireBullets(5.3, 2.3, 8, 5);
-            A_RailAttack(20, 0, true, "", "Green", RGF_SILENT | RGF_FULLBRIGHT, 2, "BulletPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
-            A_PlaySound("weapons/shotgun/fire", CHAN_WEAPON);
-         }
-      }
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Rail_Scoped");
-      SHTG A 0 Lith_A_RecoilUp(1);
-      SHTG B 2 bright A_Light(1);
-      SHTG A 0 Lith_A_RecoilDn(0.25);
-      SHTG C 2 bright A_Light(2);
-      SHTG A 0 Lith_A_RecoilDn(0.25);
-      SHTG D 2 A_Light(0);
-      SHTG A 0 Lith_A_RecoilDn(0.25);
-      SHTG A 4;
-      SHTG A 0 Lith_A_RecoilDn(0.25);
-      SHTG FG 3;
-      SHTG H 2;
-      SHTG I 1;
-      SHTG J 3;
-      SHTG KI 1;
-      SHTG H 3;
-      SHTG G 1 offset(-13, 32);
-      SHTG G 1 offset(0, 32);
-      SHTG F 1 offset(-9, 32);
-      SHTG F 1 offset(0, 32);
-      SHTG A 2 A_WeaponReady(LITH_BOBONLY);
-      SHTG AAAAAAA 1 {A_WeaponReady(LITH_BOBONLY); A_ReFire();}
-      goto SelReady;
-   FireFinish_Rail_Scoped:
-      SCOP A 1 bright A_Light1;
-      SCOP A 1 bright A_Light2;
-      SCOP A 2 A_Light0;
-      SCOP A 24;
-      SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
-      SCOP A 0 A_ReFire;
-      SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
-      goto SelReady;
-   FireGauss:
-      TNT1 A 0 Lith_A_JumpIfMagEmpty;
-      TNT1 A 0 Lith_A_MagIncr;
-      TNT1 A 0 Lith_A_TakeSlot3OptAmmo;
-      TNT1 A 0 Lith_A_JustAttack;
-      TNT1 A 0 A_AlertMonsters;
-      TNT1 A 0 A_FireBullets(0, 0, 1, 14, "Lith_GaussPuff");
-      TNT1 A 0 A_Quake(1, 5, 0, 64);
-      TNT1 A 0 A_RailAttack(9, 0, false, "LightBlue", "Blue", RGF_NOPIERCING|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0.05, 0.05, 0, 5, frandom(0.35, 1), 0.5);
-      TNT1 A 0 A_PlaySound("weapons/shotgun/gauss/fire", CHAN_WEAPON);
-      TNT1 A 0 A_Recoil(0.777);
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireFinish_Gauss_Scoped");
-      SHTG N 1;
-      SHTG L 1 A_Light(3);
-      SHTG M 1 A_Light(2);
-      SHTG O 1 A_Light(1);
-      SHTG N 1 A_Light(0);
-      SHTG N 2;
-      SHTG NNNNNNN 1 A_ReFire;
-      goto SelReady;
-   FireFinish_Gauss_Scoped:
-      SCOP A 1 bright A_Light(3);
-      SCOP A 1 bright A_Light(2);
-      SCOP A 0 A_Light(1);
-      SCOP A 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOBOB);
-      SCOP A 0 A_Light0;
-      SCOP A 4 A_WeaponReady(WRF_NOPRIMARY|WRF_NOBOB);
-      SCOP AAAAAAA 1 A_ReFire;
-      goto SelReady;
-
-   AltFire:
-      #### # 1;
-      #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut");
-      goto ScopeIn;
-   ScopeOut:
-      #### # 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-      #### # 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-      #### # 0 A_PlaySound("weapons/shotgun/zoomout", 6);
-      goto Ready;
-   ScopeIn:
-      #### # 0 A_GiveInventory("Lith_WeaponScopedToken", 1);
-      #### # 0 A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX);
-      #### # 0 A_PlaySound("weapons/shotgun/zoomin", 6);
-      goto AltReady;
-
-   Reload:
-      TNT1 A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "SelReady");
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, 1);
-      goto Reload1;
-      TNT1 A 0 A_PlaySound("weapons/shotgun/zoomout", 6);
-      TNT1 A 0 A_TakeInventory("Lith_WeaponScopedToken", 999);
-      TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-   Reload1:
-      SHTG N 2 Lith_A_JumpIfMagFull("SelReady");
-      SHTG F 2 A_PlaySound("weapons/shotgun/gauss/reloadout", CHAN_6);
-      SHTG G 2;
-      SHTG G 0 A_SpawnItemEx(invoker.Lith_MagEmpty() ? "Lith_GaussMagazine" : "Lith_GaussMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
-      SHTG H 2;
-      SHTG I 2 offset(-11, 57);
-      SHTG I 5 offset(-10, 60);
-      SHTG I 5 offset(-11, 60);
-      SHTG I 0 Lith_A_ReloadFinish();
-      SHTG I 2 offset(-13, 59) A_PlaySound("weapons/shotgun/gauss/reloadin", CHAN_7);
-      SHTG I 2 offset(-11, 49);
-      SHTG I 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 5 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(3, 56) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(10, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(8, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(7, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG I 1 offset(5, 43) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-      SHTG G 1 offset(-13, 32);
-      SHTG G 1 offset(1, 32);
-      SHTG F 1 offset(-9, 32);
-      SHTG F 1 offset(1, 32);
-      SHTG NNNNNNN 1 A_ReFire;
-      goto SelReady;
-   }
+Reload:
+   TNT1 A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "SelReady");
+   TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, 1);
+   goto Reload1;
+   TNT1 A 0 A_PlaySound("weapons/shotgun/zoomout", 6);
+   TNT1 A 0 A_TakeInventory("Lith_WeaponScopedToken", 999);
+   TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
+Reload1:
+   SHTG N 2 Lith_A_JumpIfMagFull("SelReady");
+   SHTG F 2 A_PlaySound("weapons/shotgun/gauss/reloadout", CHAN_6);
+   SHTG G 2;
+   SHTG G 0 A_SpawnItemEx(invoker.Lith_MagEmpty() ? "Lith_GaussMagazine" : "Lith_GaussMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
+   SHTG H 2;
+   SHTG I 2 offset(-11, 57);
+   SHTG I 5 offset(-10, 60);
+   SHTG I 5 offset(-11, 60);
+   SHTG I 0 Lith_A_ReloadFinish();
+   SHTG I 2 offset(-13, 59) A_PlaySound("weapons/shotgun/gauss/reloadin", CHAN_7);
+   SHTG I 2 offset(-11, 49);
+   SHTG I 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 5 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(3, 56) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(10, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(8, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(7, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG I 1 offset(5, 43) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   SHTG G 1 offset(-13, 32);
+   SHTG G 1 offset(1, 32);
+   SHTG F 1 offset(-9, 32);
+   SHTG F 1 offset(1, 32);
+   SHTG NNNNNNN 1 A_ReFire;
+   goto SelReady;
 }
 
 // EOF

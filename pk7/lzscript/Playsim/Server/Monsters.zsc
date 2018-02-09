@@ -1,87 +1,86 @@
-extend class Lith_HERMES
+extend class Lith_HERMES;
+
+static void PrepareForRagnarok(Actor mo)
 {
-   static void PrepareForRagnarok(Actor mo)
+   mo.damageMultiply = 1.6;
+   mo.A_SetRenderStyle(1, STYLE_Stencil);
+   mo.attackSound = 0;
+   mo.deathSound = 0;
+   mo.seeSound = 0;
+   mo.painSound = 0;
+   mo.activeSound = 0;
+   mo.useSound = 0;
+   mo.bounceSound = 0;
+   mo.wallBounceSound = 0;
+   mo.crushPainSound = 0;
+   mo.bLOOKALLAROUND = true;
+   mo.scale.x *= frandom(0.9, 1.1);
+   mo.scale.y *= frandom(0.9, 1.1);
+}
+
+static void MonsterBarrierLook(Actor mo)
+{
+   for(let it = BlockThingsIterator.Create(mo, 192*2); it.next();)
+      if(it.thing.player)
+         CallACS("Lith_AddAngle", it.thing.pos.x, it.thing.pos.y);
+}
+
+static void SpawnBoss(Actor a, string name, int phase)
+{
+   let pos = a.pos;
+   let ang = a.angle;
+   let tid = a.tid;
+
+   int spec = a.special;
+   int arg0 = a.args[0];
+   int arg1 = a.args[1];
+   int arg2 = a.args[2];
+   int arg3 = a.args[3];
+   int arg4 = a.args[4];
+
+   a.destroy();
+
+   let b = Lith_Phantom(Actor.Spawn(name, pos));
+
+   b.user_phase = phase;
+
+   b.angle = ang;
+   b.changeTID(tid);
+
+   b.special = spec;
+   b.args[0] = arg0;
+   b.args[1] = arg1;
+   b.args[2] = arg2;
+   b.args[3] = arg3;
+   b.args[4] = arg4;
+
+   if(phase == 2)
    {
-      mo.damageMultiply = 1.6;
-      mo.A_SetRenderStyle(1, STYLE_Stencil);
-      mo.attackSound = 0;
-      mo.deathSound = 0;
-      mo.seeSound = 0;
-      mo.painSound = 0;
-      mo.activeSound = 0;
-      mo.useSound = 0;
-      mo.bounceSound = 0;
-      mo.wallBounceSound = 0;
-      mo.crushPainSound = 0;
-      mo.bLOOKALLAROUND = true;
-      mo.scale.x *= frandom(0.9, 1.1);
-      mo.scale.y *= frandom(0.9, 1.1);
+      b.damageMultiply = 1.5;
+      b.reactionTime   = 4;
+      b.health        *= 1.5;
+      b.bMISSILEMORE   = true;
    }
-
-   static void MonsterBarrierLook(Actor mo)
+   else if(phase == 3)
    {
-      for(let it = BlockThingsIterator.Create(mo, 192*2); it.next();)
-         if(it.thing.player)
-            CallACS("Lith_AddAngle", it.thing.pos.x, it.thing.pos.y);
+      b.damageMultiply   = 2;
+      b.reactionTime     = 2;
+      b.health          *= 2;
+      b.bMISSILEMORE     = true;
+      b.bMISSILEEVENMORE = true;
    }
+}
 
-   static void SpawnBoss(Actor a, string name, int phase)
+static void TriggerBoss()
+{
+   if(CallACS("LWData", wdata_bossspawned)) return;
+
+   Actor mo;
+   for(let it = ThinkerIterator.Create(); (mo = Actor(it.next()));)
    {
-      let pos = a.pos;
-      let ang = a.angle;
-      let tid = a.tid;
-
-      int spec = a.special;
-      int arg0 = a.args[0];
-      int arg1 = a.args[1];
-      int arg2 = a.args[2];
-      int arg3 = a.args[3];
-      int arg4 = a.args[4];
-
-      a.destroy();
-
-      let b = Lith_Phantom(Actor.Spawn(name, pos));
-
-      b.user_phase = phase;
-
-      b.angle = ang;
-      b.changeTID(tid);
-
-      b.special = spec;
-      b.args[0] = arg0;
-      b.args[1] = arg1;
-      b.args[2] = arg2;
-      b.args[3] = arg3;
-      b.args[4] = arg4;
-
-      if(phase == 2)
-      {
-         b.damageMultiply = 1.5;
-         b.reactionTime   = 4;
-         b.health        *= 1.5;
-         b.bMISSILEMORE   = true;
-      }
-      else if(phase == 3)
-      {
-         b.damageMultiply   = 2;
-         b.reactionTime     = 2;
-         b.health          *= 2;
-         b.bMISSILEMORE     = true;
-         b.bMISSILEEVENMORE = true;
-      }
-   }
-
-   static void TriggerBoss()
-   {
-      if(CallACS("LWData", wdata_bossspawned)) return;
-
-      Actor mo;
-      for(let it = ThinkerIterator.Create(); (mo = Actor(it.next()));)
-      {
-         if(mo.bISMONSTER && mo.health >= 500) {
-            mo.ACS_NamedExecuteAlways("Lith_SpawnBoss", 0);
-            break;
-         }
+      if(mo.bISMONSTER && mo.health >= 500) {
+         mo.ACS_NamedExecuteAlways("Lith_SpawnBoss", 0);
+         break;
       }
    }
 }

@@ -1,41 +1,39 @@
-extend class Lith_HERMES
+extend class Lith_HERMES;
+
+static void SetPaused(bool on)
 {
-   static void SetPaused(bool on)
-   {
-      level.frozen = on;
+   level.frozen = on;
 
-      let sv = Lith_HERMES.Instance();
-      if(sv) sv.m_paused = on;
-      
-      for(int i = 0; i < MAXPLAYERS; i++)
-      {
-         if(!playeringame[i] || players[i].mo == null) continue;
-         
-         PlayerInfo pl = players[i];
-         if(on) {
-            pl.mo.viewbob = 0;
-         } else {
-            let mo = Lith_Player(pl.mo);
-            pl.mo.viewbob = mo ? mo.m_vbob : 1;
-            if(pl.psprites) pl.psprites.tics = pl.psprites.curState.tics;
-         }
-      }
-   }
-
-   static bool GetPaused()
-   {
-      let sv = Lith_HERMES.Instance();
-      if(sv) return sv.m_paused;
-      return false;
-   }
+   let sv = Lith_HERMES.Instance();
+   if(sv) sv.m_paused = on;
    
-   static void PauseTick(int pnum)
+   for(int i = 0; i < MAXPLAYERS; i++)
    {
-      let sv = Lith_HERMES.Instance();
-      if(sv && sv.m_paused && playeringame[pnum] && players[pnum].psprites)
-         players[pnum].psprites.tics = -1;
+      if(!playeringame[i] || players[i].mo == null) continue;
+      
+      PlayerInfo pl = players[i];
+      if(on) {
+         pl.mo.viewbob = 0;
+      } else {
+         let mo = Lith_Player(pl.mo);
+         pl.mo.viewbob = mo ? mo.m_vbob : 1;
+         if(pl.psprites) pl.psprites.tics = pl.psprites.curState.tics;
+      }
    }
 }
 
-// EOF
+static bool GetPaused()
+{
+   let sv = Lith_HERMES.Instance();
+   if(sv) return sv.m_paused;
+   return false;
+}
 
+static void PauseTick(int pnum)
+{
+   let sv = Lith_HERMES.Instance();
+   if(sv && sv.m_paused && playeringame[pnum] && players[pnum].psprites)
+      players[pnum].psprites.tics = -1;
+}
+
+// EOF

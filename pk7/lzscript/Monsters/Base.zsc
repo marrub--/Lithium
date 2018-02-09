@@ -1,0 +1,26 @@
+class Lith_Monster : Actor;
+
+default
+{
+   Monster;
+}
+
+private meta int m_scoregive;
+
+property Score: m_scoregive;
+
+void Lith_A_Die()
+{
+   CallACS("Lith_EmitScore", m_scoregive);
+   A_Scream();
+   A_NoBlocking();
+}
+
+void Lith_A_XDie()
+{
+   CallACS("Lith_EmitScore", m_scoregive * 1.5);
+   A_XScream();
+   A_NoBlocking();
+}
+
+// EOF

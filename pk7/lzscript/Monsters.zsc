@@ -1,4 +1,9 @@
 #include "lzscript/Monsters/Phantom.zsc"
 #include "lzscript/Monsters/Isaac.zsc"
 
+#include "lzscript/Monsters/Base.zsc"
+
+// Tier 1
+#include "lzscript/Monsters/ZombieMan.zsc"
+
 // EOF

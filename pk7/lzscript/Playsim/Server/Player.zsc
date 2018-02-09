@@ -1,83 +1,82 @@
-extend class Lith_HERMES
+extend class Lith_HERMES;
+
+static int GetMaxMag(int pnum, string cname)
 {
-   static int GetMaxMag(int pnum, string cname)
-   {
-      PlayerInfo p = players[pnum];
-      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
-      return wep ? wep.m_max : -1;
-   }
+   PlayerInfo p = players[pnum];
+   let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+   return wep ? wep.m_max : -1;
+}
 
-   static int GetCurMag(int pnum, string cname)
-   {
-      PlayerInfo p = players[pnum];
-      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
-      return wep ? wep.m_fired : -1;
-   }
+static int GetCurMag(int pnum, string cname)
+{
+   PlayerInfo p = players[pnum];
+   let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+   return wep ? wep.m_fired : -1;
+}
 
-   static void AutoReload(int pnum, string cname)
-   {
-      PlayerInfo p = players[pnum];
-      let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
-      if(wep) wep.Lith_ReloadFinish(true);
-   }
+static void AutoReload(int pnum, string cname)
+{
+   PlayerInfo p = players[pnum];
+   let wep = p && p.mo ? Lith_Weapon(p.mo.findInventory(cname)) : null;
+   if(wep) wep.Lith_ReloadFinish(true);
+}
 
-   static string GetObituary()
-   {
-      let sv = Instance();
-      if(sv) return sv.m_obituary;
-      else   return "";
-   }
+static string GetObituary()
+{
+   let sv = Instance();
+   if(sv) return sv.m_obituary;
+   else   return "";
+}
 
-   static void SetInput(int pnum, bool on)
-   {
-      let sv = Instance();
-      if(sv) sv.m_pdata[pnum].grabInput = on;
-   }
+static void SetInput(int pnum, bool on)
+{
+   let sv = Instance();
+   if(sv) sv.m_pdata[pnum].grabInput = on;
+}
 
-   static string GetLogName()
-   {
-      let sv = Instance();
-      return sv ? sv.m_logname : "";
-   }
+static string GetLogName()
+{
+   let sv = Instance();
+   return sv ? sv.m_logname : "";
+}
 
-   static string GetInvType(Actor mo)
-      {return Lith_InventoryItem(mo).m_invtype;}
+static string GetInvType(Actor mo)
+   {return Lith_InventoryItem(mo).m_invtype;}
 
-   static void DeleteItem(Actor mo, int item)
-   {
-      let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
-      if(id) id.Lith_Remove(item);
-   }
+static void DeleteItem(Actor mo, int item)
+{
+   let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+   if(id) id.Lith_Remove(item);
+}
 
-   static bool UseItem(Actor mo, int item)
-   {
-      let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
-      if(id) return id.Lith_Use(item);
-      else   return false;
-   }
+static bool UseItem(Actor mo, int item)
+{
+   let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+   if(id) return id.Lith_Use(item);
+   else   return false;
+}
 
-   static string GetArmorSlot(Actor mo, int slot)
-   {
-      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-      if(ar) return ar.m_slotted[slot] ? ar.m_slotted[slot].getTag() : "";
-      else   return "";
-   }
+static string GetArmorSlot(Actor mo, int slot)
+{
+   let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+   if(ar) return ar.m_slotted[slot] ? ar.m_slotted[slot].getTag() : "";
+   else   return "";
+}
 
-   static string GetArmorDT(Actor mo)
-   {
-      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-      if(ar) return ar.Lith_SaveAmt() .. " DT";
-      else   return "";
-   }
+static string GetArmorDT(Actor mo)
+{
+   let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+   if(ar) return ar.Lith_SaveAmt() .. " DT";
+   else   return "";
+}
 
-   static void Log(Actor mo, string name, int type)
+static void Log(Actor mo, string name, int type)
+{
+   let sv = Instance();
+   if(sv && mo.player)
    {
-      let sv = Instance();
-      if(sv && mo.player)
-      {
-         sv.m_logname = name;
-         CallACS("Lith_LogS", mo.playerNumber(), type);
-      }
+      sv.m_logname = name;
+      CallACS("Lith_LogS", mo.playerNumber(), type);
    }
 }
 
