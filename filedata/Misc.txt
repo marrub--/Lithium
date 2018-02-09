@@ -48,14 +48,14 @@
 == LITH_OB_Fire_1 | %o fried to death.
 == LITH_OB_Fire_2 | %o is burning with passion. Er, fire. %r dead.
 == LITH_OB_Fire_3 | It'll be hard to tell if %o's corpse is %s.
-== LITH_OB_Fire_4 | %o's screams stopped after a few seconds.
+== LITH_OB_Fire_4 | %o went up in flames.
 == LITH_OB_Fire_5 | Smells like... %o.
 
 == LITH_OB_Suicide_1 | %o took the hard way out.
-== LITH_OB_Suicide_2 | %o liked the taste of gunmetal in %p mouth.
+== LITH_OB_Suicide_2 | %o won a Darwin award.
 == LITH_OB_Suicide_3 | %o took a permanent solution to a temporary problem.
-== LITH_OB_Suicide_4 | %o enjoyed the feeling of a knife in %p throat.
-== LITH_OB_Suicide_5 | %o took cyanide.
+== LITH_OB_Suicide_4 | %o imploded.
+== LITH_OB_Suicide_5 | %o couldn't take it anymore.
 
 == LITH_OB_Default_1 | %o is ded
 == LITH_OB_Default_2 | %o was perforated by a chaingunner hiding in the sky.
