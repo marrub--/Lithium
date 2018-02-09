@@ -2,6 +2,7 @@
 class Lith_STATUS : DoomStatusScreen;
 
 int m_souls;
+bool m_ready;
 
 private void Lith_DrawSetq(int x, int y, string text)
 {
@@ -28,7 +29,70 @@ private void Lith_DrawCent(int x, int y, string text)
 override void Start(wbstartstruct wbss)
 {
    m_souls = random(400, 700);
+   // TODO: change 256 to CHAN_LOOP when fixed
+   S_Sound("intermission/mid", CHAN_5 | CHAN_UI | 256, 0.43, ATTN_NONE);
    Super.Start(wbss);
+}
+
+override void UpdateNoState()
+{
+   if(!--cnt)
+   {
+      End();
+      level.worldDone();
+   }
+}
+
+override void UpdateStats()
+{
+   switch(sp_state)
+   {
+   default:
+      Super.UpdateStats();
+      break;
+   case 9:
+      if(m_ready) sp_state++;
+      break;
+   case 10:
+      PlaySound("intermission/paststats");
+      initShowNextLoc();
+      break;
+   }
+}
+
+override void Ticker()
+{
+   if(++bcnt == 1) StartMusic();
+
+   m_ready = false;
+
+   for(int i = 0; i < MAXPLAYERS; i++) if(playeringame[i])
+   {
+      PlayerInfo p = players[i];
+
+      if(p.cmd.buttons & BT_USE)
+      {
+         if(cnt_pause > 1) cnt_pause--;
+         if(cnt       > 1) cnt--;
+      }
+
+      if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
+      {
+         m_ready = true;
+         playerready[i] = true;
+      }
+
+      p.oldbuttons = p.buttons;
+   }
+
+   bg.updateAnimatedBack();
+
+   switch(curState)
+   {
+   case StatCount:   updateStats();       break;
+   case ShowNextLoc: updateShowNextLoc(); break;
+   case NoState:     updateNoState();     break;
+   }
 }
 
 override void DrawStats()

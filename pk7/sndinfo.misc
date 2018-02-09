@@ -1,48 +1,51 @@
 $rolloff * custom 0 2025
 
-misc/teleport  lsounds/Teleport.flac      // Self-made
-menu/backup    lsounds/Menu/Back.flac     // 〃
-menu/cursor    lsounds/Menu/Move.flac     // 〃
-silence        lsounds/Silence.flac       // 〃
+//
+// World
+//
+explosion DSBAREXP // Whatever you have loaded :y
+$limit explosion 0
+$attenuation explosion 0.7
+
+misc/teleport lsounds/Teleport.flac // Self-made
+silence       lsounds/Silence.flac  // 〃
+
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg // ?????
 YOUSONOFABITCH lsounds/YOUSONOFABITCH.ogg // ???????????
 AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA.ogg // ?????????????
 misc/booom     lsounds/boom.flac          // ??????????????
-explosion      DSBAREXP                   // Whatever you have loaded :y
-misc/chat      lsounds/Chat.flac          // FEAR
-ghost/hit      lsounds/GhostHit.flac      // Touhou 13
-misc/teleout   lsounds/TeleportOut.flac   // 〃
-misc/telein    lsounds/TeleportIn.flac    // 〃
 
+misc/teleout lsounds/TeleportOut.flac // Touhou 13
+misc/telein  lsounds/TeleportIn.flac  // 〃
+
+ghost/hit lsounds/GhostHit.flac // Touhou 13
+$alias ghost/spawn player/pickup/barrier
+
+//
+// Intermission
+//
 intermission/tick      lsounds/Menu/InterTick.flac // Halo 3
 intermission/nextstage lsounds/Menu/InterNext.flac // Halo 3, Phantasy Star Online
+intermission/paststats lsounds/Menu/InterPass.wav // Phantasy Star Online
+intermission/mid       lsounds/Menu/InterMid.wav  // 〃
 
-$alias misc/chat2    misc/chat
-$alias menu/clear    menu/backup
-$alias menu/activate player/cbi/open
-$alias menu/prompt   player/cbi/open
-$alias menu/dismiss  player/cbi/close
-$alias menu/choose   player/cbi/buttonpress
-$alias menu/invalid  player/cbi/clickinvalid
-$alias menu/change   player/cbi/slidertick
-$alias ghost/spawn   player/pickup/barrier
-$limit explosion 0
-$attenuation explosion 0.7
+//
+// Menu
+//
+misc/chat lsounds/Chat.flac // FEAR
+$alias misc/chat2 misc/chat
 
-$random intermission/paststats {
-   weapons/pistol/pickup
-   weapons/revolver/pickup
-   weapons/shotgun/pickup
-   weapons/cshotgun/pickup
-   weapons/ssg/pickup
-   weapons/rifle/pickup
-   weapons/smg/pickup
-   weapons/ionrifle/pickup
-   weapons/rocket/pickup
-   weapons/plasma/pickup
-   weapons/cannon/pickup
-   weapons/shipgun/pickup
-}
+menu/backup   lsounds/Menu/Back.wav     // Phantasy Star Online
+menu/cursor   lsounds/Menu/Move.wav     // 〃
+menu/activate lsounds/Menu/Activate.wav // 〃
+menu/choose   lsounds/Menu/Choose.wav   // 〃
+
+$alias menu/invalid player/cbi/clickinvalid
+$alias menu/change  player/cbi/slidertick
+
+$alias menu/dismiss menu/backup
+$alias menu/prompt  menu/activate
+$alias menu/clear   menu/backup
 
 $random misc/quitsound {
    enemies/zombie/ready
