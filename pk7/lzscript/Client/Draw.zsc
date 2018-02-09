@@ -41,12 +41,17 @@ enum Lith_URANUS_DrawType
 
 extend class Lith_URANUS;
 
+private transient play array<Lith_URANUS_DrawData> m_dda;
+private transient play vector2 m_vsc;
+private transient play int m_dww;
+private transient play bool m_nodraw;
+
 static void _LHS(Actor mo, int w, int h)
 {
    if(mo.playerNumber() != consoleplayer) return;
 
-   let dd = new("Lith_URANUS_DrawData");
    let cl = Instance();
+   let dd = new("Lith_URANUS_DrawData");
 
    dd.dt = dt_siz;
 
@@ -60,6 +65,9 @@ static void _LHS(Actor mo, int w, int h)
 static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
 {
    if(mo.playerNumber() != consoleplayer) return;
+
+   let cl = Instance();
+   if(cl.m_nodraw) return;
 
    Lith_URANUS_DrawData_Tex dd;
 
@@ -97,7 +105,7 @@ static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
    case 2: dd.y = y - sy;     break;
    }
 
-   Instance().m_dda.push(dd);
+   cl.m_dda.push(dd);
 }
 
 static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
@@ -105,6 +113,7 @@ static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa,
    if(mo.playerNumber() != consoleplayer) return;
 
    let cl = Instance();
+   if(cl.m_nodraw) return;
 
    Lith_URANUS_DrawData_Txt dd;
    
@@ -169,24 +178,36 @@ static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
 {
    if(mo.playerNumber() != consoleplayer) return;
 
-   let dd = new("Lith_URANUS_DrawData");
    let cl = Instance();
+   let dd = new("Lith_URANUS_DrawData");
 
    if(x || y || w || h)
    {
-      x -= cl.m_vsc.x/6; // don't ask. just don't.
+      // simple optimization (which also prevents division by zero)
+      if((cl.m_nodraw = w <= 0 || h <= 0)) return;
 
       dd.dt = dt_cls;
 
-      vector2 xy, wh, swh = (Screen.GetWidth(), Screen.GetHeight());
-      xy = Screen.VirtualToRealCoords((x, y), swh, cl.m_vsc);
-      wh = Screen.VirtualToRealCoords((w, h), swh, cl.m_vsc);
+      float sw = Screen.GetWidth();
+      float sh = Screen.GetHeight();
 
-      dd.x = xy.x; dd.y = xy.y;
-      dd.z = wh.x; dd.w = wh.y;
+      float hmul = sh <= sw ? sh / cl.m_vsc.y : sw / cl.m_vsc.x;
+      float wadd = (sw - cl.m_vsc.x * hmul) / 2;
+
+      float rx = wadd + x * hmul;
+      float ry = y * hmul;
+
+      float rw = w * hmul;
+      float rh = h * hmul;
+
+      dd.x = rx; dd.y = ry;
+      dd.z = rw; dd.w = rh;
    }
    else
+   {
+      cl.m_nodraw = false;
       dd.dt = dt_clc;
+   }
 
    cl.m_dww = ww;
    cl.m_dda.push(dd);
@@ -236,9 +257,12 @@ override void RenderOverlay(RenderEvent evt)
                DTA_Alpha, dt.a);
          break;
       }
-      case dt_cls: Screen.SetClipRect(dd.x, dd.y, dd.z, dd.w); break;
-      case dt_clc: Screen.ClearClipRect();                     break;
-      case dt_siz: scw = dd.x; sch = dd.y;                     break;
+      case dt_cls:
+//       Screen.DrawFrame(dd.x, dd.y, dd.z, dd.w);
+         Screen.SetClipRect(dd.x, dd.y, dd.z, dd.w);
+         break;
+      case dt_clc: Screen.ClearClipRect(); break;
+      case dt_siz: scw = dd.x; sch = dd.y; break;
       }
    }
 }

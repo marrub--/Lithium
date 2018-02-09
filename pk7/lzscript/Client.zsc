@@ -8,10 +8,6 @@ class Lith_URANUS : EventHandler
 {
    transient ui Lith_URANUS_PlayerData m_pdata[MAXPLAYERS];
 
-   private transient play Array<Lith_URANUS_DrawData> m_dda;
-   private transient play vector2 m_vsc;
-   private transient play int m_dww;
-
    static clearscope Lith_URANUS Instance()
       {return Lith_URANUS(Find("Lith_URANUS"));}
 }
