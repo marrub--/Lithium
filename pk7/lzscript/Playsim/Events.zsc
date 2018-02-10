@@ -8,16 +8,6 @@ class Lith_PostACS : Thinker
 
 class Lith_Events : EventHandler;
 
-/*
-Lith_Cyberspace m_cs;
-
-override void WorldTick()
-{
-   m_cs.rotateView(2);
-   m_cs.renderFrame();
-}
-*/
-
 override void WorldLoaded(WorldEvent evt)
 {
    if(evt.isSaveGame)
@@ -52,7 +42,7 @@ override void PlayerEntered(PlayerEvent evt)
    PlayerInfo p = players[evt.playerNumber];
 
    // in case the player isn't derived from Lith_Player
-   if(p && !p.mo.findInventory("Lith_AAGH"))
+   if(p && p.mo && !p.mo.findInventory("Lith_AAGH"))
    {
       p.mo.giveInventoryType("Lith_AAGH");
       p.mo.giveInventoryType("Lith_IDOL");
@@ -111,12 +101,5 @@ override void NetworkProcess(ConsoleEvent evt)
    if(evt.name == "Lith_Key")
       CallACS("Lith_KeyDown", evt.player, evt.args[0]);
 }
-
-/*
-override void RenderOverlay(RenderEvent evt)
-{
-   if(m_cs) m_cs.render();
-}
-*/
 
 // EOF

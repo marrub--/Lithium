@@ -7,11 +7,7 @@ class Lith_URANUS_DrawData
 class Lith_URANUS_DrawData_Tex : Lith_URANUS_DrawData
 {
    textureid tex;
-}
-
-class Lith_URANUS_DrawData_ATe : Lith_URANUS_DrawData_Tex
-{
-   double a;
+   float     a;
 }
 
 class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
@@ -21,11 +17,7 @@ class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
    BrokenLines txt;
    Array<int>  lnx;
    int         lny;
-}
-
-class Lith_URANUS_DrawData_ATx : Lith_URANUS_DrawData_Txt
-{
-   double a;
+   float       a;
 }
 
 enum Lith_URANUS_DrawType
@@ -48,7 +40,7 @@ private transient play bool m_nodraw;
 
 static void _LHS(Actor mo, int w, int h)
 {
-   if(mo.playerNumber() != consoleplayer) return;
+   if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
    let dd = new("Lith_URANUS_DrawData");
@@ -64,25 +56,19 @@ static void _LHS(Actor mo, int w, int h)
 
 static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
 {
-   if(mo.playerNumber() != consoleplayer) return;
+   if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
    if(cl.m_nodraw) return;
 
-   Lith_URANUS_DrawData_Tex dd;
+   let dd = new("Lith_URANUS_DrawData_Tex");
 
    if(a == -1)
-   {
-      dd = new("Lith_URANUS_DrawData_Tex");
       dd.dt = dt_tex;
-   }
    else
    {
-      let dt = new("Lith_URANUS_DrawData_ATe");
-      dt.a = a;
-
-      dd = dt;
       dd.dt = dt_ate;
+      dd.a = a;
    }
 
    dd.tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
@@ -110,25 +96,19 @@ static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
 
 static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
 {
-   if(mo.playerNumber() != consoleplayer) return;
+   if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
    if(cl.m_nodraw) return;
 
-   Lith_URANUS_DrawData_Txt dd;
+   let dd = new("Lith_URANUS_DrawData_Txt");
    
    if(a == -1)
-   {
-      dd = new("Lith_URANUS_DrawData_Txt");
       dd.dt = dt_txt;
-   }
    else
    {
-      let dt = new("Lith_URANUS_DrawData_ATx");
-      dt.a = a;
-
-      dd = dt;
       dd.dt = dt_atx;
+      dd.a = a;
    }
 
    dd.cr = cr;
@@ -176,7 +156,7 @@ static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa,
 
 static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
 {
-   if(mo.playerNumber() != consoleplayer) return;
+   if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
    let dd = new("Lith_URANUS_DrawData");
@@ -192,16 +172,10 @@ static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
       float sh = Screen.GetHeight();
 
       float hmul = sh <= sw ? sh / cl.m_vsc.y : sw / cl.m_vsc.x;
-      float wadd = (sw - cl.m_vsc.x * hmul) / 2;
+      float wadd = (sw - cl.m_vsc.x * hmul) / 2.;
 
-      float rx = wadd + x * hmul;
-      float ry = y * hmul;
-
-      float rw = w * hmul;
-      float rh = h * hmul;
-
-      dd.x = rx; dd.y = ry;
-      dd.z = rw; dd.w = rh;
+      dd.x = x * hmul + wadd; dd.y = y * hmul;
+      dd.z = w * hmul;        dd.w = h * hmul;
    }
    else
    {
@@ -234,7 +208,7 @@ override void RenderOverlay(RenderEvent evt)
          break;
       }
       case dt_ate: {
-         let dt = Lith_URANUS_DrawData_ATe(dd);
+         let dt = Lith_URANUS_DrawData_Tex(dd);
          Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
             DTA_Alpha, dt.a);
@@ -249,7 +223,7 @@ override void RenderOverlay(RenderEvent evt)
          break;
       }
       case dt_atx: {
-         let dt = Lith_URANUS_DrawData_ATx(dd);
+         let dt = Lith_URANUS_DrawData_Txt(dd);
          for(int ln = 0, lns = dt.lnx.size(); ln < lns; ln++)
             Screen.DrawText(dt.fnt, dt.cr,
                dt.x-dt.lnx[ln], dt.y+dt.lny*ln, dt.txt.stringAt(ln),
