@@ -5,26 +5,38 @@ DefaultListMenu
    LineSpacing 16
 }
 
+DefaultOptionMenu
+{
+   Position -15
+}
+
 ListMenu "MainMenu"
 {
    StaticPatch 190, -10, "lgfx/Title.png"
    Position 30, 90
 
    TextItem "$MENU_NGAME", "n", "PlayerclassMenu"
-   IfOption(SwapMenu)
+   ifoption(SwapMenu)
    {
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
-      TextItem "$MENU_OPTION","o", "OptionsMenu"
+      TextItem "$MENU_OPTION","o", "LOptionsMenu"
    }
-   Else
+   else
    {
-      TextItem "$MENU_OPTION","o", "OptionsMenu"
+      TextItem "$MENU_OPTION","o", "LOptionsMenu"
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
    }
    TextItem "$MENU_UPDAT", "u", "UpdateMenu"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
+}
+
+OptionMenu "LOptionsMenu"
+{
+   Class "Lith_OptionsMenu"
+
+   Title "$OPTMNU_TITLE"
 }
 
 ListMenu "PlayerclassMenu"

@@ -1,0 +1,30 @@
+class Lith_OptionsMenu : OptionMenu;
+
+override void Init(Menu parent, OptionMenuDescriptor desc)
+{
+   let od = OptionMenuDescriptor(MenuDescriptor.GetDescriptor('OptionsMenu'));
+
+   desc.mItems.copy(od.mItems);
+
+   for(int i = 0, j = desc.mItems.size(); i < j; i++)
+   {
+      let it = desc.mItems[i];
+      it.mCentered = true;
+      if(it.mLabel.charAt(0) != " " && it.mLabel.charAt(0) != "[")
+         it.mLabel = "[ " .. StringTable.Localize(it.mLabel) .. " ]";
+   }
+
+   Super.Init(parent, desc);
+
+   desc.mIndent = 160;
+   desc.mPosition = 60;
+}
+
+override void Drawer()
+{
+   let tt = StringTable.Localize(mDesc.mTitle);
+   Screen.DrawText(bigfont, Font.CR_DARKGREEN, 215, 5, tt, DTA_Clean, true);
+   Super.Drawer();
+}
+
+// EOF
