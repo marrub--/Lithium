@@ -23,8 +23,8 @@ class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
 struct Lith_URANUS_FadeMessage
 {
    uint16 time;
-   double fsub;
-   double fade;
+   float  fsub;
+   float  fade;
 }
 
 enum Lith_URANUS_DrawType
