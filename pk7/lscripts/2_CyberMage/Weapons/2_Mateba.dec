@@ -94,6 +94,8 @@ actor Lith_FinalizerShot : FastProjectile
 {
    RenderStyle "Add"
    Speed 90
+   Height 6
+   Radius 6
    MissileType "Lith_FinalizerShotEffect"
    
    Projectile
