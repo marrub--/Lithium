@@ -313,8 +313,6 @@
 "TXT_NO" = "[No]";
 
 // Updates -------------------------------------------------------------------|
-"LITH_TXT_UPDATE_DOWN" = "vv More";
-"LITH_TXT_UPDATE_PREV" = "<< Previous Update";
 
 // Header format:
 

@@ -1,6 +1,4 @@
 ## Updates -------------------------------------------------------------------|
-== LITH_TXT_UPDATE_DOWN | vv More
-== LITH_TXT_UPDATE_PREV | << Previous Update
 
 ## Header format:
 ## \cf(\ciDate\cf) \cjFrom \cnOld\cj to \cfNew\cj:

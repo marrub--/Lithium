@@ -1,0 +1,113 @@
+class ListMenuItemLith_UpdateScroll : ListMenuItemTextItem
+{
+   bool m_up;
+
+   void Init(ListMenuDescriptor desc, string text, string hotkey, bool up)
+   {
+      Super.Init(desc, text, hotkey, 'None');
+      m_up = up;
+   }
+
+   override bool Activate()
+   {
+      let m = Lith_UpdateMenu(Menu.GetCurrentMenu());
+
+      if(m && m_up ? m.Lith_NextLog() : m.Lith_PrevLog())
+         return true;
+
+      return false;
+   }
+}
+
+struct Lith_Changelog
+{
+   string name;
+   int    page;
+}
+
+class Lith_UpdateMenu : ListMenu;
+
+string m_text;
+int m_logn, m_page;
+
+Lith_Changelog[12] m_clg;
+
+override void Init(Menu parent = null, ListMenuDescriptor desc = null)
+{
+   Super.Init(parent, desc);
+
+   m_clg[0 ].name = "Update_1_5_3"; m_clg[0 ].page = 2;
+   m_clg[1 ].name = "Update_1_5_2"; m_clg[1 ].page = 1;
+   m_clg[2 ].name = "Update_1_5_1"; m_clg[2 ].page = 2;
+   m_clg[3 ].name = "Update_1_5";   m_clg[3 ].page = 3;
+   m_clg[4 ].name = "Update_1_5b";  m_clg[4 ].page = 2;
+   m_clg[5 ].name = "Update_1_5a2"; m_clg[5 ].page = 1;
+   m_clg[6 ].name = "Update_1_5a";  m_clg[6 ].page = 2;
+   m_clg[7 ].name = "Update_1_4";   m_clg[7 ].page = 2;
+   m_clg[8 ].name = "Update_1_3_1"; m_clg[8 ].page = 1;
+   m_clg[9 ].name = "Update_1_3";   m_clg[9 ].page = 3;
+   m_clg[10].name = "Update_1_2";   m_clg[10].page = 2;
+   m_clg[11].name = "Update_1_1";   m_clg[11].page = 3;
+
+   Lith_SetText();
+}
+
+override void Drawer()
+{
+   Screen.DrawText(smallfont, 0, 8, 20, m_text, DTA_Clean, true);
+   Super.Drawer();
+}
+
+void Lith_SetText()
+{
+   string s;
+
+   if(m_page > 0)
+      s = String.Format("$LITH_TXT_%s_Page%i", m_clg[m_logn].name, m_page + 1);
+   else
+      s = String.Format("$LITH_TXT_%s", m_clg[m_logn].name);
+
+   m_text = StringTable.Localize(s);
+}
+
+bool Lith_PrevLog()
+{
+   if(m_page != m_clg[m_logn].page - 1)
+   {
+      m_page++;
+      Lith_SetText();
+      return true;
+   }
+
+   if(m_logn == m_clg.size() - 1)
+      return false;
+
+   m_logn++;
+   m_page = 0;
+
+   Lith_SetText();
+
+   return true;
+}
+
+bool Lith_NextLog()
+{
+   if(m_page != 0)
+   {
+      m_page--;
+      Lith_SetText();
+      return true;
+   }
+
+   if(m_logn == 0)
+      return false;
+
+   m_logn--;
+   m_page = m_clg[m_logn].page - 1;
+
+   Lith_SetText();
+
+   return true;
+}
+
+// EOF
