@@ -89,7 +89,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    case cbi_theme_winxp:    p->cbi.guistate.gfxprefix = "lgfx/UI_WinXP/";    break;
    }
 
-   Lith_GUI_Begin(g, hid_end_cbi, 320, 240);
+   Lith_GUI_Begin(g, 320, 240);
 
    if(!p->indialogue)
       Lith_GUI_UpdateState(g, p);

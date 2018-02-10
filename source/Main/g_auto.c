@@ -77,12 +77,11 @@ void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
 //
 // Lith_GUI_Begin
 //
-void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h)
+void Lith_GUI_Begin(gui_state_t *g, int w, int h)
 {
    if(!w) w = 320;
    if(!h) h = 200;
 
-   g->hid = basehid;
    g->hot = 0;
 
    ACS_SetHudSize(g->w = w, g->h = h);

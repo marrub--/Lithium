@@ -117,7 +117,6 @@ typedef struct gui_state_s
    [[__anonymous]] gui_delta_t cur;
    gui_delta_t old;
 
-   int hid;
    int ox, oy;
    int w, h;
 
@@ -299,7 +298,7 @@ void Lith_GUI_Init(gui_state_t *g, void *state);
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 
 [[__optional_args(2)]]
-void Lith_GUI_Begin(gui_state_t *g, int basehid, int w, int h);
+void Lith_GUI_Begin(gui_state_t *g, int w, int h);
 void Lith_GUI_End(gui_state_t *g, enum cursor curs);
 
 [[__optional_args(1)]]

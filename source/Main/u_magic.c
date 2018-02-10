@@ -46,7 +46,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
 {
    gui_state_t *g = &UData.gst;
 
-   Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
+   Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
    PrintSprite("lgfx/UI/MagicSelectBack.png", 0,1, 0,1);

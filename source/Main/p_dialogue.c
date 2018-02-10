@@ -100,7 +100,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    __str remote = vmstate->sreg[DSTR_REMOTE] ?
       vmstate->sreg[DSTR_REMOTE] : "<unknown>@raddr.4E19";
 
-   Lith_GUI_Begin(g, hid_end_dialogue, sizex, sizey);
+   Lith_GUI_Begin(g, sizex, sizey);
    Lith_GUI_UpdateState(g, p);
 
    // Background
@@ -199,7 +199,7 @@ static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
    __str name = vmstate->sreg[DSTR_NAME];
    __str remo = vmstate->sreg[DSTR_REMOTE];
 
-   Lith_GUI_Begin(g, hid_end_dialogue, 320, 240);
+   Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
    PrintSpriteA("lgfx/Dialogue/Back.png", 0,1, 0,1, 0.7);
