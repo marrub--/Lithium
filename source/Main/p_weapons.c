@@ -290,8 +290,9 @@ void Lith_PlayerPreWeapons(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerUpdateWeapons(player_t *p)
 {
-   __with(int heat = ACS_CheckInventory("Lith_SMGHeat");)
+   if(!Lith_IsPaused)
    {
+      int heat = ACS_CheckInventory("Lith_SMGHeat");
            if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
       else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
       else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
@@ -301,7 +302,9 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 
    switch(p->weapontype)
    {
-   case weapon_c_delear: ACS_GiveInventory("Lith_DelearSpriteDisplay", 1); break;
+   case weapon_c_delear:
+      HERMES("Lith_DelearSprite");
+      break;
    case weapon_cfist:
       SetSize(320, 240);
       fixed64_t charge = 5.lk + ACS_CheckInventory("Lith_FistCharge") / 10.lk;

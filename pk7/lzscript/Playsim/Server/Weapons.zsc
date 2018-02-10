@@ -5,4 +5,32 @@ static void Lith_IonizeFX(Actor mo)
    mo.A_SpawnItemEx("Lith_IonizedFX", 0,0,0, 0,0,-1, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
 }
 
+static void Lith_DelearSprite(Actor mo)
+{
+   int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY;
+   int sf = mo.countInv("Lith_DelearShotsFired");
+   float cp = cos(mo.pitch) * 32;
+   float sp = sin(mo.pitch) * 32;
+   float h = mo.height - 19;
+   float vx = mo.velx;
+   float vy = mo.vely;
+   float vz = mo.velz;
+   if(sf < 16) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+2 -sp,vx,vy,vz,0,flags);
+   if(sf < 15) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+4 -sp,vx,vy,vz,0,flags);
+   if(sf < 14) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+6 -sp,vx,vy,vz,0,flags);
+   if(sf < 13) mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+8 -sp,vx,vy,vz,0,flags);
+   if(sf < 12) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+12-sp,vx,vy,vz,0,flags);
+   if(sf < 11) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+14-sp,vx,vy,vz,0,flags);
+   if(sf < 10) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+16-sp,vx,vy,vz,0,flags);
+   if(sf <  9) mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+18-sp,vx,vy,vz,0,flags);
+   if(sf <  8) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+2 -sp,vx,vy,vz,0,flags);
+   if(sf <  7) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+4 -sp,vx,vy,vz,0,flags);
+   if(sf <  6) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+6 -sp,vx,vy,vz,0,flags);
+   if(sf <  5) mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+8 -sp,vx,vy,vz,0,flags);
+   if(sf <  4) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+12-sp,vx,vy,vz,0,flags);
+   if(sf <  3) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+14-sp,vx,vy,vz,0,flags);
+   if(sf <  2) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+16-sp,vx,vy,vz,0,flags);
+   if(sf <  1) mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,0,flags);
+}
+
 // EOF
