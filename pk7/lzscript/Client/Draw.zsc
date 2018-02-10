@@ -20,6 +20,13 @@ class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
    float       a;
 }
 
+struct Lith_URANUS_FadeMessage
+{
+   uint16 time;
+   double fsub;
+   double fade;
+}
+
 enum Lith_URANUS_DrawType
 {
    dt_tex,
@@ -34,6 +41,7 @@ enum Lith_URANUS_DrawType
 extend class Lith_URANUS;
 
 private transient play array<Lith_URANUS_DrawData> m_dda;
+private transient play Lith_URANUS_FadeMessage[32] m_fmsg;
 private transient play vector2 m_vsc;
 private transient play int m_dww;
 private transient play bool m_nodraw;
@@ -54,12 +62,30 @@ static void _LHS(Actor mo, int w, int h)
    cl.m_dda.push(dd);
 }
 
-static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
+static void _LSF(Actor mo, int num, int time, double fade)
 {
    if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
+   cl.m_fmsg[num].time = time;
+   cl.m_fmsg[num].fsub = fade;
+   cl.m_fmsg[num].fade = 1;
+}
+
+static bool _LCF(Actor mo, int num)
+{
+   if(mo != players[consoleplayer].camera) return false;
+   return Instance().m_fmsg[num].fade != 0;
+}
+
+static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
+{
+   if(mo != players[consoleplayer].camera || a ~== 0) return;
+
+   let cl = Instance();
    if(cl.m_nodraw) return;
+
+   if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
    let dd = new("Lith_URANUS_DrawData_Tex");
 
@@ -96,10 +122,12 @@ static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
 
 static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
 {
-   if(mo != players[consoleplayer].camera) return;
+   if(mo != players[consoleplayer].camera || a ~== 0) return;
 
    let cl = Instance();
    if(cl.m_nodraw) return;
+
+   if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
    let dd = new("Lith_URANUS_DrawData_Txt");
    
@@ -189,13 +217,26 @@ static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
 
 static void _LEH()
 {
-   Instance().m_dda.clear();
+   let cl = Instance();
+
+   cl.m_dda.clear();
+
+   for(int i = 0; i < cl.m_fmsg.size(); i++)
+   {
+      if(!cl.m_fmsg[i].fade)
+         continue;
+      else if(!cl.m_fmsg[i].time)
+         cl.m_fmsg[i].fade = max(cl.m_fmsg[i].fade - cl.m_fmsg[i].fsub, 0);
+      else
+         cl.m_fmsg[i].time--;
+   }
 }
 
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320;
    int sch = 240;
+
    if(!automapactive) for(int i = 0, j = m_dda.size(); i < j; i++)
    {
       let dd = m_dda[i];

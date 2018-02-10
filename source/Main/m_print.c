@@ -105,26 +105,6 @@ void HudMessage(__str fmt, ...)
 }
 
 //
-// HudMessageRainbows
-//
-void HudMessageRainbows(__str fmt, ...)
-{
-   static char const chars[] = {'g', 'i', 'k', 'd', 'h', 't', 'r'};
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   ACS_PrintChar('\C');
-   ACS_PrintChar(chars[(ACS_Timer() / 4) % countof(chars)]);
-
-   va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
-   va_end(vl);
-
-   ACS_MoreHudMessage();
-}
-
-//
 // Log
 //
 void Log(__str fmt, ...)
@@ -138,22 +118,6 @@ void Log(__str fmt, ...)
    va_end(vl);
 
    ACS_EndLog();
-}
-
-//
-// PrintBold
-//
-void PrintBold(__str fmt, ...)
-{
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
-   va_end(vl);
-
-   ACS_EndPrintBold();
 }
 
 // EOF

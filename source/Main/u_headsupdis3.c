@@ -1,70 +1,21 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
+#include "lith_hud.h"
 
 #define UData UData_HeadsUpDis3(upgr)
 
 // Static Functions ----------------------------------------------------------|
 
 //
-// HUD_Ammo
-//
-static void HUD_Ammo(player_t *p, struct hud *h)
-{
-   HID(ammo1,      1);
-   HID(ammo2,      1);
-   HID(ammotype,   1);
-   HID(ammotypebg, 1);
-   HID(ammobg1,    1);
-   HID(ammobg2,    1);
-
-   invweapon_t const *wep = p->weapon.cur;
-
-   __str typegfx = null;
-
-   if(wep->ammotype & AT_NMag) {
-      typegfx = "lgfx/HUD_I/MAG.png";
-      HudMessageF("LHUDFONT", "\C[Lith_Purple]%i/%i",
-         wep->magmax - wep->magcur, wep->magmax);
-      HudMessageParams(HUDMSG_FADEOUT, ammo1, CR_PURPLE, 242.1, 218.0, TS, 0.35);
-   }
-
-   if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic))
-   {
-      int x = 0;
-
-      if(wep->ammotype & AT_NMag) {
-         DrawSpriteFade("lgfx/HUD_I/AmmoExtend.png", ammobg2, 242.2, 227.2, TS, 0.35);
-         x = -58;
-      }
-
-      typegfx = "lgfx/HUD_I/AMMO.png";
-      HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", wep->ammocur);
-      HudMessageParams(HUDMSG_FADEOUT, ammo2, CR_PURPLE, x+242.1, 218.0, TS, 0.35);
-   }
-
-   DrawSpritePlain("lgfx/HUD_I/AmmoWepsBack.png", ammobg1, 320.2, 229.2, TS);
-
-   if(typegfx)
-      DrawSpriteFade(typegfx, ammotype, 309, 219, TS, 0.25);
-}
-
-//
 // HUD_Health
 //
-static void HUD_Health(player_t *p, struct hud *h, upgrade_t *upgr)
+static void HUD_Health(player_t *p, upgrade_t *upgr)
 {
-   HID(hp, 1);
-
-   HID(arm,    1);
-   HID(armbg,  1);
-   HID(armfxE, 42);
-
-   DrawSpritePlain("lgfx/HUD_I/HPAPBack.png", armbg, 0.1, 230.2, TS);
+   PrintSprite("lgfx/HUD_I/HPAPBack.png", 0,1, 230,2);
 
    int health = (UData.healthi = lerpk(UData.healthi, p->health, 0.2)) + 0.5;
-   if(p->dead) HudMessageF("LHUDFONT", "[Disabled]");
-   else        HudMessageF("LHUDFONT", "\C[Lith_Purple]%i", health);
-   HudMessageParams(0, hp, CR_PURPLE, 21.1, 202.0, TS);
+   PrintTextFmt("\C[Lith_Purple]%i", health);
+   PrintText("LHUDFONT", CR_PURPLE, 21,1, 202,0);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -75,10 +26,6 @@ static void HUD_Health(player_t *p, struct hud *h, upgrade_t *upgr)
 void Upgr_HeadsUpDis3_Activate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
-
-   p->hud.p   = p;
-   p->hud.beg = hid_base_hud;
-   p->hud.end = hid_end_hud;
 }
 
 //
@@ -87,8 +34,6 @@ void Upgr_HeadsUpDis3_Activate(player_t *p, upgrade_t *upgr)
 void Upgr_HeadsUpDis3_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
-
-   Lith_HUD_Clear(&p->hud);
 }
 
 //
@@ -96,14 +41,10 @@ void Upgr_HeadsUpDis3_Deactivate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
 {
-   struct hud *h = &p->hud;
+   Lith_HUD_Log(p, CR_LIGHTBLUE, 0, -15);
+   Lith_HUD_KeyInd(p, 20, 20, false, 0.8);
 
-   Lith_HUD_Begin(h);
-
-   Lith_HUD_Log(h, CR_LIGHTBLUE, 0, -15);
-   Lith_HUD_KeyInd(h, 20, 20, false, 0.8);
-
-   Lith_HUD_WeaponSlots(h, CR_DARKGRAY, CR_GRAY, CR_WHITE, "g", 323, 208);
+   Lith_HUD_WeaponSlots(p, CR_DARKGRAY, CR_GRAY, CR_WHITE, "g", 323, 208);
 
    score_t score;
 
@@ -115,13 +56,10 @@ void Upgr_HeadsUpDis3_Render(player_t *p, upgrade_t *upgr)
    else
       score = p->score;
 
-   Lith_HUD_Score(h, "%S \CnScore", score, "CHFONT", "[Lith_Purple]", 2.1, 3.1);
+   Lith_HUD_Score(p, "%S \CnScore", score, "CHFONT", "[Lith_Purple]", 2,1, 3,1);
 
    // Status
-   HUD_Ammo(p, h);
-   HUD_Health(p, h, upgr);
-
-   Lith_HUD_End(h);
+   HUD_Health(p, upgr);
 }
 
 // EOF

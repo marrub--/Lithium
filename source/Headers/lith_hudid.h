@@ -4,6 +4,18 @@
 
 enum
 {
+   fid_schit1,
+   fid_schit2,
+   fid_scacum,
+   fid_slotnS,
+   fid_slotnE = fid_slotnS + 6,
+   fid_logadS,
+   fid_logadE = fid_logadS + 6,
+   fid_health,
+};
+
+enum
+{
    // hid_base         to hid_base + 99    reserved for magic
    // hid_base +   100 to hid_base + 999   reserved for dialogue
    // hid_base +  1000 to hid_base + 29999 reserved for CBI

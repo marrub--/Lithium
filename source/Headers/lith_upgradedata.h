@@ -9,7 +9,6 @@
 
 #define Lith_CastUData(u) ((struct upgr_data *)(u)->dataptr)
 #define UData_Adrenaline(u)  (Lith_CastUData(u)->u01)
-#define UData_Implying(u)    (Lith_CastUData(u)->u02)
 #define UData_JetBooster(u)  (Lith_CastUData(u)->u03)
 #define UData_lolsords(u)    (Lith_CastUData(u)->u04)
 #define UData_ReactArmor(u)  (Lith_CastUData(u)->u05)
@@ -20,6 +19,7 @@
 #define UData_Magic(u)       (Lith_CastUData(u)->u10)
 #define UData_StealthSys(u)  (Lith_CastUData(u)->u11)
 #define UData_HeadsUpDis3(u) (Lith_CastUData(u)->u12)
+#define UData_HeadsUpDisp(u) (Lith_CastUData(u)->u13)
 
 enum
 {
@@ -60,10 +60,6 @@ typedef bool (*upgr_reinit_cb_t)(struct upgradeinfo *ui);
 struct upgr_data_Adrenaline {
    int  charge;
    bool readied;
-};
-
-struct upgr_data_Implying {
-   int hudid;
 };
 
 struct upgr_data_JetBooster {
@@ -124,9 +120,12 @@ struct upgr_data_HeadsUpDis3 {
    fixed  armori;
 };
 
+struct upgr_data_HeadsUpDisp {
+   int cr;
+};
+
 struct upgr_data {
    struct upgr_data_Adrenaline  u01;
-   struct upgr_data_Implying    u02;
    struct upgr_data_JetBooster  u03;
    struct upgr_data_lolsords    u04;
    struct upgr_data_ReactArmor  u05;
@@ -137,6 +136,7 @@ struct upgr_data {
    struct upgr_data_Magic       u10;
    struct upgr_data_StealthSys  u11;
    struct upgr_data_HeadsUpDis3 u12;
+   struct upgr_data_HeadsUpDisp u13;
 };
 
 typedef struct upgradeinfo {

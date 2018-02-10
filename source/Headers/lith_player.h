@@ -13,7 +13,6 @@
 #include "lith_shopdef.h"
 #include "lith_attrib.h"
 #include "lith_items.h"
-#include "lith_hud.h"
 
 #include <GDCC/HashMap.h>
 
@@ -250,7 +249,6 @@ typedef struct player
    // HUD
    loginfo_t  loginfo;
    bool       hudenabled;
-   struct hud hud;
 
    // DECORATE/ZScript
    int  decvars[8];
@@ -259,6 +257,7 @@ typedef struct player
 
    // Score
    score_t scoreaccum;
+   __str   scoreaccumstr;
    int     scoreaccumtime;
    double  scoremul;
    float   discount;

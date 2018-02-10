@@ -1,42 +1,15 @@
 // Copyright © 2018 Graham Sanderson, all rights reserved.
 #include "lith_player.h"
+#include "lith_hud.h"
+#include "lith_hudid.h"
 
 // Extern Functions ----------------------------------------------------------|
 
 //
-// Lith_HUD_Begin
-//
-void Lith_HUD_Begin(struct hud *h)
-{
-   h->id = h->beg;
-}
-
-//
-// Lith_HUD_Clear
-//
-void Lith_HUD_Clear(struct hud *h)
-{
-   for(int i = h->beg; i <= h->id; i++)
-   {
-      ACS_BeginPrint();
-      ACS_MoreHudMessage();
-      ACS_OptHudMessage(0, i, 0, 0, 0, TS);
-      ACS_EndHudMessage();
-   }
-}
-
-//
 // Lith_HUD_WeaponSlots_Impl
 //
-void Lith_HUD_WeaponSlots_Impl(struct hud *h, struct hud_wsl const *a)
+void Lith_HUD_WeaponSlots_Impl(player_t *p, struct hud_wsl const *a)
 {
-   player_t *p = h->p;
-
-   HID(wcurE, 9);
-   HID(wtxtE, 9);
-
-   ACS_SetFont("LHUDFONTSMALL");
-
    if(p->getCVarI("lith_hud_showweapons"))
       for(int i = 1; i < SLOT_MAX; i++)
          ifauto(int, slot, p->weapon.slot[i])
@@ -44,119 +17,112 @@ void Lith_HUD_WeaponSlots_Impl(struct hud *h, struct hud_wsl const *a)
       fixed x = a->x+.2 - 8 * (SLOT_MAX - i);
       fixed y = a->y+.2;
 
-      HudMessage("%i", i);
-      HudMessageParams(0, wtxtE + i, a->ncol[min(slot - 1, 2)], x, y, TS);
+      PrintTextFmt("%i", i);
+      PrintText("LHUDFONTSMALL", a->ncol[min(slot - 1, 2)], x,2, y,2);
 
       if(p->weapon.cur->info->slot == i)
+         SetFade(fid_slotnS + i, 1, 0.05);
+
+      if(CheckFade(fid_slotnS + i))
       {
-         HudMessage("\C%S%i", a->scol, i);
-         HudMessageFade(wcurE + i, x, y, TS, 0.2);
+         PrintTextFmt("\C%S%i", a->scol, i);
+         PrintTextF("LHUDFONTSMALL", 0, x,2, y,2, fid_slotnS + i);
       }
    }
 }
 
 //
-// Lith_HUD_Score_Impl
+// Lith_HUD_Score
 //
-void Lith_HUD_Score_Impl(struct hud *h, __str scr, struct hud_scr const *a)
+void Lith_HUD_Score(player_t *p, __str fmt, score_t scrn, __str font, __str cr, int x, int xa, int y, int ya)
 {
-   player_t *p = h->p;
-
-   ACS_SetFont(a->font);
-
-   HID(scacu, 1);
-   HID(schit, 1);
-   HID(score, 1);
-
    if(p->getCVarI("lith_hud_showscore"))
    {
-      fixed x = a->x;
-      fixed y = a->y;
+      __str scr = StrParam(fmt, Lith_ScoreSep(scrn));
 
-      HudMessage("\C%S%S", a->cr, scr);
-      HudMessageParams(0, score, CR_WHITE, x, y, TS);
+      PrintTextFmt("\C%S%S", cr, scr);
+      PrintText(font, 0, x,xa, y,ya);
 
       if(p->score > p->old.score)
-      {
-         HudMessage("%S", scr);
-         HudMessageParams(HUDMSG_FADEOUT, schit, CR_ORANGE, x, y, 0.1, 0.2);
-      }
+         SetFade(fid_schit1, 4, 0.1);
       else if(p->score < p->old.score)
-      {
-         fixed ft = minmax((p->old.score - p->score) / 3000.0, 0.1, 3.0);
-         HudMessage("%S", scr);
-         HudMessageParams(HUDMSG_FADEOUT, schit, CR_PURPLE, x, y, 0.1, ft);
-      }
+         SetFade(fid_schit2, 4, 1 - minmax((p->old.score - p->score) / 30000.0, 0.1, 1.0));
 
       if(p->scoreaccumtime > 0)
       {
-         HudMessage("%c%S", p->scoreaccum >= 0 ? '+' : ' ',
-            Lith_ScoreSep(p->scoreaccum));
-         HudMessageParams(HUDMSG_FADEOUT, scacu, CR_WHITE, x, y + 10, 0.1, 0.4);
+         SetFade(fid_scacum, 5, 0.1);
+         p->scoreaccumstr = StrParam("%c%S", p->scoreaccum >= 0 ? '+' : ' ', Lith_ScoreSep(p->scoreaccum));
+      }
+
+      if(CheckFade(fid_schit1))
+      {
+         PrintTextFmt("%S", scr);
+         PrintTextF(font, CR_ORANGE, x,xa, y,ya, fid_schit1);
+      }
+      else if(CheckFade(fid_schit2))
+      {
+         PrintTextFmt("%S", scr);
+         PrintTextF(font, CR_PURPLE, x,xa, y,ya, fid_schit2);
+      }
+
+      if(CheckFade(fid_scacum))
+      {
+         PrintTextStr(p->scoreaccumstr);
+         PrintTextF(font, CR_WHITE, x,xa, y+10,ya, fid_scacum);
       }
    }
 }
 
 //
-// Lith_HUD_KeyInd_Impl
+// Lith_HUD_KeyInd
 //
-void Lith_HUD_KeyInd_Impl(struct hud *h, struct hud_key const *a)
+void Lith_HUD_KeyInd(player_t *p, int x, int y, bool horz, fixed a)
 {
-   player_t *p = h->p;
-
-   int   x = a->x;
-   int   y = a->y;
-   fixed t = a->a;
-
-   #define Inc ((a->horz) ? (x -= 10) : (y += 10))
-   if(p->keys.rs) PrintSpriteA("H_KS1", x,2, y,1, t), Inc;
-   if(p->keys.ys) PrintSpriteA("H_KS2", x,2, y,1, t), Inc;
-   if(p->keys.bs) PrintSpriteA("H_KS3", x,2, y,1, t), Inc;
-   if(p->keys.rc) PrintSpriteA("H_KC1", x,2, y,1, t), Inc;
-   if(p->keys.yc) PrintSpriteA("H_KC2", x,2, y,1, t), Inc;
-   if(p->keys.bc) PrintSpriteA("H_KC3", x,2, y,1, t), Inc;
+   #define Inc (horz ? (x -= 10) : (y += 10))
+   if(p->keys.rs) PrintSpriteA("H_KS1", x,2, y,1, a), Inc;
+   if(p->keys.ys) PrintSpriteA("H_KS2", x,2, y,1, a), Inc;
+   if(p->keys.bs) PrintSpriteA("H_KS3", x,2, y,1, a), Inc;
+   if(p->keys.rc) PrintSpriteA("H_KC1", x,2, y,1, a), Inc;
+   if(p->keys.yc) PrintSpriteA("H_KC2", x,2, y,1, a), Inc;
+   if(p->keys.bc) PrintSpriteA("H_KC3", x,2, y,1, a), Inc;
    #undef Inc
 }
 
 //
-// Lith_HUD_Log_Impl
+// Lith_HUD_Log
 //
 [[__call("ScriptS")]]
-void Lith_HUD_Log_Impl(struct hud *h, struct hud_log const *a)
+void Lith_HUD_Log(player_t *p, int cr, int x, int yy)
 {
-   player_t *p = h->p;
-
-   HID(logAddE, 20);
-   HID(logE,    20);
-
    if(p->getCVarI("lith_hud_showlog"))
    {
-      ACS_SetHudSize(480, 300);
-      ACS_SetFont("LOGFONT");
+      SetSize(480, 300);
 
       int i = 0;
       forlistIt(logdata_t *ld, p->loginfo.hud, i++)
       {
          int y = 10 * i;
-         fixed align;
+         int ya;
 
-         if(p->getCVarI("lith_hud_logfromtop")) {
-            y = 20 + y;
-            align = 0.1;
-         } else {
-            y = (255 - y) + a->y;
-            align = 0.2;
-         }
+         if(p->getCVarI("lith_hud_logfromtop"))
+            {ya = 1; y = 20 + y;}
+         else
+            {ya = 2; y = (255 - y) + yy;}
 
-         HudMessage("%S", ld->info);
-         HudMessageParams(HUDMSG_NOWRAP, logE + i, a->cr, a->x+.1, y+align, TS);
+         PrintTextStr(ld->info);
+         PrintText("LOGFONT", cr, x,1, y,ya);
 
          if(ld->time > LOG_TIME - 10)
+            SetFade(fid_logadS + i, 1, 0.07);
+
+         if(CheckFade(fid_logadS + i))
          {
-            HudMessage("%S", ld->info);
-            HudMessageParams(HUDMSG_NOWRAP|HUDMSG_FADEOUT|HUDMSG_ADDBLEND, logAddE + i, a->cr, a->x+.1, y+align, TS, 0.15);
+            PrintTextStr(ld->info);
+            PrintTextF("LOGFONT", CR_WHITE, x,1, y,ya, fid_logadS + i);
          }
       }
+
+      SetSize(320, 240);
    }
 }
 

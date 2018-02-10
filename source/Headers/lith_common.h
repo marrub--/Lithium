@@ -15,13 +15,14 @@
 #include <stdint.h>
 
 #include "lith_memory.h"
+#include "lith_drawing.h"
 
 #define strnull (__str)0
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
-#define countof(a) (sizeof((a)) / sizeof(*(a)))
+#define countof(a) (sizeof(a) / sizeof(*(a)))
 #define swap(t, a, b) \
    do { \
       t _tmp = a; \
@@ -57,33 +58,6 @@
    do ACS_Delay(1); \
    while(Lith_IsPaused)
 
-#define PrintSprite(name, x, xa, y, ya) \
-   URANUS("_LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)-1.0)
-
-#define PrintSpriteA(name, x, xa, y, ya, a) \
-   URANUS("_LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
-
-#define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
-#define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
-
-#define PrintText(font, cr, x, xa, y, ya) \
-   URANUS("_LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)-1.0)
-
-#define PrintTextA(font, cr, x, xa, y, ya, a) \
-   URANUS("_LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
-
-#define SetClip(x, y, w, h) \
-   URANUS("_LSC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
-
-#define SetClipW(x, y, w, h, ww) \
-   URANUS("_LSC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
-
-#define ClearClip() \
-   URANUS("_LSC", 0, 0, 0, 0, 0)
-
-#define SetSize(w, h) \
-   URANUS("_LHS", (int)(w), (int)(h))
-
 #define HudMessageLog(...) \
    ( \
       HudMessage(__VA_ARGS__), \
@@ -95,12 +69,6 @@
    ( \
       ACS_SetFont(font), \
       HudMessage(__VA_ARGS__) \
-   )
-
-#define HudMessageRainbowsF(font, ...) \
-   ( \
-      ACS_SetFont(font), \
-      HudMessageRainbows(__VA_ARGS__) \
    )
 
 #define HudMessageParams(flags, id, tr, x, y, hold, ...) \
@@ -124,11 +92,6 @@
 #define HudMessageAlpha(id, x, y, hold, alpha) \
    ( \
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
-   )
-
-#define HudMessageAdd(id, x, y, hold, alpha) \
-   ( \
-      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
 #define DebugStat(...) \
@@ -191,9 +154,7 @@ typedef void (*basic_cb_t)(void);
 [[__call("StkCall")]] void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
 [[__call("StkCall")]] void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
 void HudMessage(__str fmt, ...);
-void HudMessageRainbows(__str fmt, ...);
 void Log(__str fmt, ...);
-void PrintBold(__str fmt, ...);
 
 // Strings -------------------------------------------------------------------|
 

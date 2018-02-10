@@ -37,7 +37,6 @@ void Lith_Log(struct player *p, __str fmt, ...);  // log to hud and full log
 void Lith_LogF(struct player *p, __str fmt, ...); // log to full log only
 void Lith_LogH(struct player *p, __str fmt, ...); // log to hud only
 logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl); // vararg
-[[__call("ScriptS")]] void Lith_HUD_Log(struct player *p);
 void Lith_PlayerLogEntry(struct player *p);
 
 #endif
