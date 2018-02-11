@@ -80,15 +80,15 @@ SelReady:
    goto Ready;
 
 AltReady:
-   SCOP A 1 A_WeaponReady(WRF_NOBOB|WRF_ALLOWRELOAD);
+   SCOP A 1 Lith_A_Ready(WRF_NOBOB|WRF_ALLOWRELOAD);
    loop;
 Ready:
    SHTG A 0 {if(invoker.m_just) invoker.m_just--;}
    SHTG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_GaussShotty), "ReadyGauss");
-   SHTG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
+   SHTG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 ReadyGauss:
-   SHTG N 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
+   SHTG N 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    goto Ready;
 
 Deselect:

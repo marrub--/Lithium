@@ -32,11 +32,25 @@ ListMenu "MainMenu"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
 }
 
+ListMenu "SaveGameMenu"
+{
+   StaticText 205, -15, "SAVE GAME"
+   Position 80, 54
+   Class "Lith_SaveMenu"
+}
+
+ListMenu "LoadGameMenu"
+{
+   StaticText 205, -15, "LOAD GAME"
+   Position 80, 54
+   Class "Lith_LoadMenu"
+}
+
 OptionMenu "LOptionsMenu"
 {
    Class "Lith_OptionsMenu"
 
-   Title "$OPTMNU_TITLE"
+   Title "OPTIONS"
 }
 
 ListMenu "PlayerclassMenu"

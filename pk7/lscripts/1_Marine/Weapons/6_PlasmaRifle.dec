@@ -39,7 +39,7 @@ actor Lith_PlasmaRifle : Lith_MWeapon
       stop
    
    Ready:
-      PLSG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
+      PLSG A 1 Lith_A_Ready(WRF_ALLOWRELOAD)
       loop
    
    Deselect:

@@ -19,7 +19,7 @@ SpawnPickup:
 states(weapon)
 {
 Ready:
-   MTBG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"));
+   MTBG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 
 Deselect:

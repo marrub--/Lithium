@@ -147,7 +147,7 @@ actor Lith_Hulgyon : Lith_CWeapon
    states
    {
    Ready:
-      TNT1 A 1 bright A_WeaponReady(CallACS("Lith_GetWRF"))
+      TNT1 A 1 bright Lith_A_Ready
       TNT1 A 0 A_SpawnItemEx("Lith_HulgyonSprite", cos(pitch)*32, 0, (height-19)-(sin(pitch)*32),velx,vely,velz,0,SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY)
       loop
    

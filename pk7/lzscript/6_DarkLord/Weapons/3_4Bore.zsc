@@ -25,7 +25,7 @@ action(weapon) void Lith_A_Fire4Bore()
 states(weapon)
 {
 Ready:
-   SHTG A 1 A_WeaponReady(CallACS("Lith_GetWRF"));
+   SHTG A 1 Lith_A_Ready;
    loop;
 
 Deselect:

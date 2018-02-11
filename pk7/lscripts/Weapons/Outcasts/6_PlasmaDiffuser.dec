@@ -45,7 +45,7 @@ actor Lith_PlasmaDiffuser : Lith_Weapon
    states
    {
    Ready:
-      PDFG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
+      PDFG A 1 Lith_A_Ready
       loop
    
    Deselect:

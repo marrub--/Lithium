@@ -21,7 +21,7 @@ actor Lith_MissileLauncher : Lith_Weapon
    states
    {
    Ready:
-      MISG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
+      MISG A 1 Lith_A_Ready(WRF_ALLOWRELOAD)
       loop
    
    Deselect:

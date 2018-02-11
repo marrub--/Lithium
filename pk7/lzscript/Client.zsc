@@ -16,5 +16,7 @@ class Lith_URANUS : EventHandler
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/UpdateMenu.zsc"
 #include "lzscript/Client/OptionsMenu.zsc"
+#include "lzscript/Client/SaveMenu.zsc"
+#include "lzscript/Client/LoadMenu.zsc"
 
 // EOF

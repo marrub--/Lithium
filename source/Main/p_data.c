@@ -30,7 +30,6 @@ static void SetupAttributes(player_t *p)
       p->attr.names[at_stm] = "REG";
    }
 
-   p->attr.autolevel = p->getCVarI("lith_player_autolevel");
    p->attr.expnext = 500;
    p->attr.level = 1;
 }
@@ -56,37 +55,6 @@ static void SetupInventory(player_t *p)
 
    p->misc.items.construct();
    p->misc.user = p;
-
-#if 0
-   static itemdata_t const test1 = {"Test Item 1", 3, 2, "lgfx/Items/T1.png"};
-   static itemdata_t const test2 = {"Test Item 2", 2, 2, "lgfx/Items/T2.png"};
-   static itemdata_t const test3 = {"Test Item 3", 1, 3, "lgfx/Items/T3.png"};
-   static itemdata_t const test4 = {"Test Item 4", 1, 1, "lgfx/Items/T4.png"};
-
-   for(int i = 0; i < 5; i++)
-   {
-      item_t *item = Lith_Item_New(&test1);
-      p->addItem(item);
-   }
-
-   for(int i = 0; i < 5; i++)
-   {
-      item_t *item = Lith_Item_New(&test2);
-      p->addItem(item);
-   }
-
-   for(int i = 0; i < 5; i++)
-   {
-      item_t *item = Lith_Item_New(&test3);
-      p->addItem(item);
-   }
-
-   for(int i = 0; i < 5; i++)
-   {
-      item_t *item = Lith_Item_New(&test4);
-      p->addItem(item);
-   }
-#endif
 }
 
 //

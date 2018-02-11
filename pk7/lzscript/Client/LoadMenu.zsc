@@ -1,0 +1,27 @@
+class Lith_LoadMenu : LoadMenu;
+
+override void Init(Menu parent, ListMenuDescriptor desc)
+{
+   Super.Init(parent, desc);
+
+   let sw = Screen.GetWidth();
+   let sh = Screen.GetHeight();
+
+   savepicLeft   = 80  * sw / 640;
+   savepicWidth  = 150 * sw / 640;
+   savepicHeight = 150 * sh / 400;
+   Manager.WindowSize = savepicWidth / CleanXfac;
+
+   commentLeft   = savepicLeft;
+   commentTop    = savepicTop + savepicHeight + 16;
+   commentWidth  = savepicWidth;
+   commentHeight = 70 * sh / 400;
+   commentRight  = commentLeft + commentWidth;
+   commentBottom = commentTop  + commentHeight;
+
+   listboxLeft  = savepicLeft + savepicWidth + 14;
+   listboxWidth = listboxLeft + 60 * sw / 640;
+   listboxRight = listboxLeft + listboxWidth;
+}
+
+// EOF

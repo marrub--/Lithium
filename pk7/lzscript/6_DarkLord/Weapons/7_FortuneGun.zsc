@@ -1,1 +1,37 @@
- 
+class Lith_FortuneGun : Lith_DWeapon;
+
+default
+{
+   Tag "$LITH_TXT_INFO_SHORT_FortuneGun";
+   Weapon.SlotNumber 7;
+   Weapon.SlotPriority 1;
+   +WEAPON.NOAUTOFIRE;
+}
+
+states(actor)
+{
+SpawnPickup:
+   TNT1 A 0 Lith_A_SpawnPickup("Lith_BFG9000Pickup");
+   stop;
+}
+
+states(weapon)
+{
+Ready:
+   PISG A 1 A_WeaponReady(CallACS("Lith_GetWRF"));
+   loop;
+
+Deselect:
+   PISG AA 0 A_Lower;
+   PISG A 1;
+   loop;
+Select:
+   PISG AA 0 A_Raise;
+   PISG A 1;
+   loop;
+
+Fire:
+   goto Ready;
+}
+
+// EOF

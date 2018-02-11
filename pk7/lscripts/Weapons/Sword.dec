@@ -32,7 +32,7 @@ actor Lith_Sword : Lith_Weapon
    {
    Ready:
       SORD A 0 A_TakeInventory("Lith_SwordCharge", 0x7FFFFFFF)
-      SORD A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
+      SORD A 1 Lith_A_Ready
       loop
    
    Deselect:

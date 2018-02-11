@@ -63,12 +63,12 @@ int Lith_WindupTime()
 
 action(weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 {
-   let flags = WRF_NOFIRE | CallACS("Lith_GetWRF");
+   int flags = WRF_NOFIRE;
    if(invoker.m_windup == 0)
       flags |= WRF_ALLOWRELOAD;
    invoker.m_laststate = lb;
    A_SetTics(invoker.Lith_WindupTime());
-   A_WeaponReady(flags);
+   Lith_A_Ready(flags);
    if(invoker.owner.player.buttons & BT_ATTACK && level.totaltime % 2 == 0)
    {
       if(!invoker.Lith_MagEmpty())

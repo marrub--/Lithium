@@ -23,7 +23,7 @@ override void Init(Menu parent, OptionMenuDescriptor desc)
 override void Drawer()
 {
    let tt = StringTable.Localize(mDesc.mTitle);
-   Screen.DrawText(bigfont, Font.CR_DARKGREEN, 215, 5, tt, DTA_Clean, true);
+   Screen.DrawText(bigfont, Font.CR_DARKGREEN, 215, -10, tt, DTA_Clean, true);
    Super.Drawer();
 }
 

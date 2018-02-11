@@ -50,7 +50,7 @@ actor Lith_StarShot : Lith_CWeapon
    states
    {
    Ready:
-      TNT1 A 1 bright A_WeaponReady(CallACS("Lith_GetWRF"))
+      TNT1 A 1 bright Lith_A_Ready
       loop
    
    Deselect:

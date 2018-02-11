@@ -58,7 +58,7 @@ actor Lith_Fist : Lith_MWeapon replaces Fist // why would you pick up a fist
       stop
    
    Ready:
-      TNT1 A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
+      TNT1 A 1 Lith_A_Ready
       loop
    
    Deselect:

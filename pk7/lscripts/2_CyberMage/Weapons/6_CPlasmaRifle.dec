@@ -63,7 +63,7 @@ actor Lith_CPlasmaRifle : Lith_CWeapon
       stop
    
    Ready:
-      CPLG A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
+      CPLG A 1 Lith_A_Ready
       loop
    
    Deselect:

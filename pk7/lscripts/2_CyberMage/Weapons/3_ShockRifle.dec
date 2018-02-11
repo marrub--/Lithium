@@ -189,7 +189,7 @@ actor Lith_ShockRifle : Lith_CWeapon
    states(weapon)
    {
    Ready:
-      CSRG A 1 A_WeaponReady(WRF_ALLOWRELOAD|CallACS("Lith_GetWRF"))
+      CSRG A 1 Lith_A_Ready(WRF_ALLOWRELOAD)
       loop
    
    Deselect:

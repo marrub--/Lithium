@@ -24,7 +24,7 @@ actor Lith_SuperShotgun : Lith_MWeapon
    Ready:
       SHT2 A 0 A_TakeInventory("Lith_SSGIter", 999)
       SHT2 A 0 A_TakeInventory("Lith_SSGIter2", 999)
-      SHT2 A 1 A_WeaponReady(CallACS("Lith_GetWRF"))
+      SHT2 A 1 Lith_A_Ready
       loop
    Deselect:
       SHTG A 0 A_Lower

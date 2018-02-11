@@ -198,7 +198,7 @@ Ready:
       else
          invoker.m_max = 50;
    }
-   CSMG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|CallACS("Lith_GetWRF"));
+   CSMG A 1 Lith_A_Ready(WRF_ALLOWRELOAD|WRF_ALLOWUSER1);
    loop;
 
 Deselect:

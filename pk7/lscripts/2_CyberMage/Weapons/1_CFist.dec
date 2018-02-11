@@ -17,7 +17,7 @@ actor Lith_CFist : Lith_CWeapon
       stop
    
    Ready:
-      TNT1 A 1 A_WeaponReady(WRF_NOFIRE|CallACS("Lith_GetWRF"))
+      TNT1 A 1 Lith_A_Ready(WRF_NOFIRE)
       loop
    
    Deselect:

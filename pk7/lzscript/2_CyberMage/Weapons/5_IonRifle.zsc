@@ -183,10 +183,10 @@ SpawnPickup:
 states(weapon)
 {
 AltReady:
-   SCOP C 1 A_WeaponReady(WRF_NOBOB|CallACS("Lith_GetWRF"));
+   SCOP C 1 Lith_A_Ready(WRF_NOBOB);
    loop;
 Ready:
-   IONG A 1 A_WeaponReady(CallACS("Lith_GetWRF"));
+   IONG A 1 Lith_A_Ready;
    loop;
 
 ReadySelector:
