@@ -19,7 +19,7 @@ action(weapon) void Lith_A_Fire4Bore()
    A_SetBlend("White", 0.2, 6);
    A_GunFlash("DummyFlash");
    A_FireBullets(4, 2, 4, 30, "Lith_700Bullet", FBF_NORANDOM);
-   A_PlaySound("weapons/700e/fire", CHAN_WEAPON);
+   A_PlaySound("weapons/4bore/fire", CHAN_WEAPON);
 }
 
 states(weapon)

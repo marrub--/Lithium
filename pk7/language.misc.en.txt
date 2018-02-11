@@ -18,6 +18,8 @@
 
 // Obituaries ----------------------------------------------------------------|
 "OB_DEFAULT" = "";
+"LITH_OB_S_FatMac" = "%o's shoulders fell off their mounts.";
+"LITH_OB_S_Explosion" = "%o made %hself go boom.";
 "LITH_OB_Falling_1" = "%o took a long walk off a short floor.";
 "LITH_OB_Falling_2" = "The floor fell love with %o.";
 "LITH_OB_Falling_3" = "%o became paste with the power of gravity.";
@@ -57,6 +59,59 @@
 "LITH_OB_Default_3" = "%o was removed from the board.";
 "LITH_OB_Default_4" = "%o dehumanized %hself.";
 "LITH_OB_Default_5" = "%o went poof.";
+
+// Death Messages ------------------------------------------------------------|
+"LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";
+"LITH_DEATHMSG_02" = "GAME OVER YEAAAAAAHHHHHHHHHHH";
+"LITH_DEATHMSG_03" = "MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.";
+"LITH_DEATHMSG_04" = "PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.";
+"LITH_DEATHMSG_05" = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
+"LITH_DEATHMSG_06" = "THE SKELETONS KNOW.";
+"LITH_DEATHMSG_07" = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
+"LITH_DEATHMSG_08" = "JESUS CHRIST AMAZING";
+"LITH_DEATHMSG_09" = "CONTRACT TERMINATED. REASON: DIED, LOL.";
+"LITH_DEATHMSG_10" = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
+"LITH_DEATHMSG_11" = "HAHAHAHA!";
+"LITH_DEATHMSG_12" = "YOU SHOULDN'T HAVE DONE THAT.";
+"LITH_DEATHMSG_13" = "WOW! LOOK AT THOSE DEMON FEET.";
+"LITH_DEATHMSG_14" = "OUCH! THAT HAD TO HURT.";
+"LITH_DEATHMSG_15" = "LOOK AT ME! I'M FLAT!";
+"LITH_DEATHMSG_16" = "THANKS FOR PLAYING!";
+"LITH_DEATHMSG_17" = "YOU LAZY @&$#!";
+"LITH_DEATHMSG_18" = "HAVE YOU HAD ENOUGH?";
+"LITH_DEATHMSG_19" = "THE DEMONS GAVE YOU THE BOOT!";
+"LITH_DEATHMSG_20" = "AT LEAST YOU PLAY BETTER THAN KAISER!";
+
+// Menus ---------------------------------------------------------------------|
+"MENU_NGAME" = "* (New-Game)";
+"MENU_OPTION" = "* (Options)";
+"MENU_LOADG" = "* (Load-Game)";
+"MENU_SAVEG" = "* (Save-Game)";
+"MENU_UPDAT" = "* (Update-Notes)";
+"MENU_QUITG" = "* (Quit-Game)";
+"MENU_CHOOSECLASS" = "Your Class Is:";
+"MENU_WHICHEPISODE" = "Your Story Is:";
+"MENU_CHOOSESKILL" = "Your Skill Is:";
+"DIFF_TOURIST" = "> I'm just a tourist.";
+"DIFF_EASY" = "> Throw me a bone.";
+"DIFF_NORMAL" = "> Hurt me plenty.";
+"DIFF_HARD" = "> Ultra-Violence!";
+"DIFF_XHARD" = "> Watch me die!";
+"DIFF_NMARE" = "> Crazed Nightmare!";
+"LITH_SKILL_TOURIST" =
+   "Are you certain?\n"
+   "This one is just amusing.";
+"LITH_SKILL_EXTRAHARD" =
+   "Are you sure?\n"
+   "This one is extra hard.";
+"LITH_SKILL_NIGHTMARE" =
+   "Are you sure?\n"
+   "This one isn't even remotely fair.";
+"DOSY" = "(Press Y to quit.)";
+"PRESSYN" = "Press Y or N.";
+"PRESSKEY" = "Press a key.";
+"TXT_YES" = "[Yes]";
+"TXT_NO" = "[No]";
 
 // Quit Messages -------------------------------------------------------------|
 "QUITMSG1" = "Hold it, your contract isn't complete yet!";
@@ -259,59 +314,6 @@
 "QUITMSG100" = "Crungy Spimmy: Back 2 Tha Source: Wrong Number: Remastered Edition: Featuring Jungo from Chummy Tuungle 3: Lord of the Flies: Special Edition: Featuring Exclusive Grimbo and Hat DLC: Expansion Pack: Electronic Knucle Scrungus Mod: Day 1 Edition [Early Access] Only on PS4: Steam Greenlight Approved: The Long Lost Tale of the Gringledop Boopledonger: Frodus Poster Pack: HTC Vive Support Enabled: (BUY ROCKBAND MICROPHONE AND DRUMSET TO EXPAND YOUR BAND): \"Every Chimmbus Eases the Pain\" Extended Digital Special Edition: What's Under Double D's hat in Ed Edd 'n' Eddy? The Game Theory: Way If We Pees Form Butts?: Featuring Dongle Flopperdinglebop from the Fun Truungledinge Lost Tale of the Gringledop Boopledonger Series 2: Super Mega Edition: Redial: Featuring a Free Comic About Grimbo's Quest for the Humbusdoob: Ultra Edition: Bumbicop Statue With Real Chimmbus Action: Fire Red Version: Dream Drop Distance: Subsistence: See Inside: Crungy Spimmy and the Gringle Spingle Limited Edition Comic Series Cereal Box: The Movie: The Game";
 "QUITMSG101" = "die";
 "QUITMSG102" = "Aw, dude. There's still so many demons to kill. Don't leave me here with them.";
-
-// Death Messages ------------------------------------------------------------|
-"LITH_DEATHMSG_01" = "YOU ARE DEAD, DEAD, DEAD";
-"LITH_DEATHMSG_02" = "GAME OVER YEAAAAAAHHHHHHHHHHH";
-"LITH_DEATHMSG_03" = "MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.";
-"LITH_DEATHMSG_04" = "PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.";
-"LITH_DEATHMSG_05" = "YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.";
-"LITH_DEATHMSG_06" = "THE SKELETONS KNOW.";
-"LITH_DEATHMSG_07" = "SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.";
-"LITH_DEATHMSG_08" = "JESUS CHRIST AMAZING";
-"LITH_DEATHMSG_09" = "CONTRACT TERMINATED. REASON: DIED, LOL.";
-"LITH_DEATHMSG_10" = "PLS, EVEN I COULD HAVE SURVIVED THAT.";
-"LITH_DEATHMSG_11" = "HAHAHAHA!";
-"LITH_DEATHMSG_12" = "YOU SHOULDN'T HAVE DONE THAT.";
-"LITH_DEATHMSG_13" = "WOW! LOOK AT THOSE DEMON FEET.";
-"LITH_DEATHMSG_14" = "OUCH! THAT HAD TO HURT.";
-"LITH_DEATHMSG_15" = "LOOK AT ME! I'M FLAT!";
-"LITH_DEATHMSG_16" = "THANKS FOR PLAYING!";
-"LITH_DEATHMSG_17" = "YOU LAZY @&$#!";
-"LITH_DEATHMSG_18" = "HAVE YOU HAD ENOUGH?";
-"LITH_DEATHMSG_19" = "THE DEMONS GAVE YOU THE BOOT!";
-"LITH_DEATHMSG_20" = "AT LEAST YOU PLAY BETTER THAN KAISER!";
-
-// Menus ---------------------------------------------------------------------|
-"MENU_NGAME" = "* (New-Game)";
-"MENU_OPTION" = "* (Options)";
-"MENU_LOADG" = "* (Load-Game)";
-"MENU_SAVEG" = "* (Save-Game)";
-"MENU_UPDAT" = "* (Update-Notes)";
-"MENU_QUITG" = "* (Quit-Game)";
-"MENU_CHOOSECLASS" = "Your Class Is:";
-"MENU_WHICHEPISODE" = "Your Story Is:";
-"MENU_CHOOSESKILL" = "Your Skill Is:";
-"DIFF_TOURIST" = "> I'm just a tourist.";
-"DIFF_EASY" = "> Throw me a bone.";
-"DIFF_NORMAL" = "> Hurt me plenty.";
-"DIFF_HARD" = "> Ultra-Violence!";
-"DIFF_XHARD" = "> Watch me die!";
-"DIFF_NMARE" = "> Crazed Nightmare!";
-"LITH_SKILL_TOURIST" =
-   "Are you certain?\n"
-   "This one is just amusing.";
-"LITH_SKILL_EXTRAHARD" =
-   "Are you sure?\n"
-   "This one is extra hard.";
-"LITH_SKILL_NIGHTMARE" =
-   "Are you sure?\n"
-   "This one isn't even remotely fair.";
-"DOSY" = "(Press Y to quit.)";
-"PRESSYN" = "Press Y or N.";
-"PRESSKEY" = "Press a key.";
-"TXT_YES" = "[Yes]";
-"TXT_NO" = "[No]";
 
 // Updates -------------------------------------------------------------------|
 

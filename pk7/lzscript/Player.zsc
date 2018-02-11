@@ -88,10 +88,14 @@ class Lith_Player : DoomPlayer
       let sv = Lith_HERMES.Instance();
       string ob;
 
-      if(source == self)
-         ob = "(suicide)";
+      if(source == self) switch(sv.m_dmgtype)
+      {
+      case 'FatMacRecoil':  ob = "$LITH_OB_S_FatMac";    break;
+      case 'Lith_Shrapnel': ob = "$LITH_OB_S_Explosion"; break;
+      default:              ob = "(suicide)";            break;
+      }
       else if(source)
-         ob = StringTable.Localize(source.obituary);
+         ob = sv.m_dmgtype == 'Melee' ? source.hitobituary : source.obituary;
       else switch(sv.m_dmgtype)
       {
       case 'Falling':  ob = "(falling)";  break;
@@ -103,7 +107,7 @@ class Lith_Player : DoomPlayer
       default:         ob = "(default)";  break;
       }
 
-      sv.m_obituary = ob;
+      sv.m_obituary = StringTable.Localize(ob);
 
       CallACS("Lith_Obituary");
    }

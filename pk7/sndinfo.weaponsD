@@ -4,6 +4,11 @@
 weapons/700e/fire lsounds/700Express/Fire.flac // a1337spy
 
 //
+// 4-Bore
+//
+weapons/4bore/fire lsounds/4Bore/Fire.flac // a1337spy
+
+//
 // Minigun
 //
 weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Serious Sam: The First Encounter HD
@@ -15,5 +20,14 @@ weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
 weapons/minigun/empty  lsounds/Minigun/Empty.flac       // Halo 3
 weapons/minigun/magout lsounds/Minigun/MagOut.flac      // E.Y.E: Divine Cybermancy
 weapons/minigun/magin  lsounds/Minigun/MagIn.flac       // 〃
+
+//
+// Fat Mac
+//
+weapons/fatmac/fire lsounds/FatMac/Fire.flac // Halo 3, Half-Life 2
+
+$alias weapons/fatmac/empty weapons/cshotgun/empty
+$alias weapons/fatmac/boltback weapons/sniper/boltback
+$alias weapons/fatmac/boltforward weapons/sniper/boltforward
 
 // EOF
