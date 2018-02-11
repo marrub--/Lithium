@@ -6,12 +6,14 @@ weapons/700e/fire lsounds/700Express/Fire.flac // a1337spy
 //
 // Minigun
 //
-weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Killing Floor
-weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // Serious Sam: The First Encounter HD
+weapons/minigun/fire   lsounds/Minigun/Fire.flac        // Serious Sam: The First Encounter HD
+weapons/minigun/rotate lsounds/Minigun/Rotate.flac      // 〃
 weapons/minigun/up     lsounds/Minigun/RotateUp.flac    // 〃
-weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // 〃
 weapons/minigun/click  lsounds/Minigun/Click.flac       // 〃
+weapons/minigun/down   lsounds/Minigun/RotateDown.flac  // E.Y.E: Divine Cybermancy
 weapons/minigun/place  lsounds/Minigun/RotatePlace.flac // Quake 2
 weapons/minigun/empty  lsounds/Minigun/Empty.flac       // Halo 3
+weapons/minigun/magout lsounds/Minigun/MagOut.flac      // E.Y.E: Divine Cybermancy
+weapons/minigun/magin  lsounds/Minigun/MagIn.flac       // 〃
 
 // EOF

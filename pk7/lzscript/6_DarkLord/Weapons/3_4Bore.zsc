@@ -69,10 +69,8 @@ Fire:
    SHT2 D 2 offset(-5, 32);
    SHT2 D 3 offset(1, 32);
    SHT2 Z 10;
-   SHT2 E 2;
-   SHT2 F 3 A_PlaySound("weapons/ssg/load", CHAN_6);
-   SHT2 E 2;
-   SHT2 F 3 A_PlaySound("weapons/ssg/load", CHAN_6);
+   SHT2 E 4;
+   SHT2 F 5 A_PlaySound("weapons/ssg/load", CHAN_6);
    SHT2 G 5;
    SHT2 H 6 A_PlaySound("weapons/ssg/close", CHAN_7);
    SHT2 AAAAA 1 A_ReFire;

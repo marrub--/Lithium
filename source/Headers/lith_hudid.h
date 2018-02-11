@@ -8,9 +8,9 @@ enum
    fid_schit2,
    fid_scacum,
    fid_slotnS,
-   fid_slotnE = fid_slotnS + 6,
+   fid_slotnE = fid_slotnS + 8,
    fid_logadS,
-   fid_logadE = fid_logadS + 6,
+   fid_logadE = fid_logadS + 8,
    fid_health,
 };
 

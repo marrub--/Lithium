@@ -18,7 +18,6 @@
 #define UData_HomingRPG(u)   (Lith_CastUData(u)->u09)
 #define UData_Magic(u)       (Lith_CastUData(u)->u10)
 #define UData_StealthSys(u)  (Lith_CastUData(u)->u11)
-#define UData_HeadsUpDis3(u) (Lith_CastUData(u)->u12)
 #define UData_HeadsUpDisp(u) (Lith_CastUData(u)->u13)
 
 enum
@@ -114,12 +113,6 @@ struct upgr_data_StealthSys {
    fixed mulvel;
 };
 
-struct upgr_data_HeadsUpDis3 {
-   double scorei;
-   fixed  healthi;
-   fixed  armori;
-};
-
 struct upgr_data_HeadsUpDisp {
    int cr;
 };
@@ -135,7 +128,6 @@ struct upgr_data {
    struct upgr_data_HomingRPG   u09;
    struct upgr_data_Magic       u10;
    struct upgr_data_StealthSys  u11;
-   struct upgr_data_HeadsUpDis3 u12;
    struct upgr_data_HeadsUpDisp u13;
 };
 

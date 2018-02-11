@@ -44,12 +44,12 @@ Percent denotes flags. Any other text is ignored by the parser.
 
 :darklord
 {d_700e     2 700Express  Placeholder2 ZMag
-{d_4bore    3 4Bore       Placeholder2 None
-{d_launcher 3 ShrapnelGun Placeholder2 None
+{d_4bore    3 4Bore       Placeholder2 Ammo A("Shell")
+{d_launcher 3 ShrapnelGun Placeholder2 Ammo A("Shell")
 {d_minigun  4 Minigun     Placeholder2 ZMag
 {d_rocket   5 DualRocket  Placeholder2 Ammo A("Rocket")
 {d_fatmac   6 FatMac      Placeholder2 Ammo A("Plasma")
-{d_railgun  7 FortuneGun  Placeholder2 None
+{d_railgun  7 FortuneGun  Placeholder2 Ammo A("Cannon")
 ;fist fist d_700e d_4bore d_launcher d_minigun d_rocket d_fatmac d_railgun
 
 :any

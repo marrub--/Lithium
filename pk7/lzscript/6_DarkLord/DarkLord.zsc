@@ -27,6 +27,7 @@ class Lith_DWeapon : Lith_Weapon
 #include "lzscript/6_DarkLord/Weapons/3_4Bore.zsc"
 #include "lzscript/6_DarkLord/Weapons/3_ShrapnelGun.zsc"
 #include "lzscript/6_DarkLord/Weapons/4_Minigun.zsc"
+#include "lzscript/6_DarkLord/Weapons/5_DualRocket.zsc"
 #include "lzscript/6_DarkLord/Weapons/6_FatMac.zsc"
 #include "lzscript/6_DarkLord/Weapons/7_FortuneGun.zsc"
 

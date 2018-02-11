@@ -55,12 +55,12 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_cybermage, N("StarShot"), Placeholder1, AT_AMag, "Lith_Mana", M("StarShot"), F(wf_magic)},
    {0, pcl_cybermage, N("Cercle"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
    {2, pcl_darklord, N("700Express"), Placeholder2, AT_ZMag},
-   {3, pcl_darklord, N("4Bore"), Placeholder2, AT_None},
-   {3, pcl_darklord, N("ShrapnelGun"), Placeholder2, AT_None},
+   {3, pcl_darklord, N("4Bore"), Placeholder2, AT_Ammo, A("Shell")},
+   {3, pcl_darklord, N("ShrapnelGun"), Placeholder2, AT_Ammo, A("Shell")},
    {4, pcl_darklord, N("Minigun"), Placeholder2, AT_ZMag},
    {5, pcl_darklord, N("DualRocket"), Placeholder2, AT_Ammo, A("Rocket")},
    {6, pcl_darklord, N("FatMac"), Placeholder2, AT_Ammo, A("Plasma")},
-   {7, pcl_darklord, N("FortuneGun"), Placeholder2, AT_None},
+   {7, pcl_darklord, N("FortuneGun"), Placeholder2, AT_Ammo, A("Cannon")},
    {0, pcl_any, N("WingsOfDeath"), "MMMMHMHMMMHMMM", AT_None},
 
    FDClass("Plut")
