@@ -3,10 +3,11 @@ class Lith_PhantomAuraFX : Actor
    default
    {
       RenderStyle "Subtract";
-      Alpha 0.6;
-      Scale 0.05;
+      Alpha 0.8;
+      Scale 0.1;
       
       +NOINTERACTION
+      +BRIGHT
    }
    
    states
@@ -76,7 +77,7 @@ virtual void Lith_OnDeath()
 void Lith_EmitAura()
 {
    for(int i = 0; i < 8; i++)
-      A_SpawnItemEx("Lith_PhantomAuraFX", frandom(-20,20),frandom(-20,20),frandom(0,16), 0,0,frandom(0,1), 0, 0, 128);
+      A_SpawnItemEx("Lith_PhantomAuraFX", frandom(-20,20),frandom(-20,20),frandom(0,32), 0,0,frandom(0.4,1.8), 0, 0, 128);
 }
 
 override void Tick()
@@ -98,7 +99,7 @@ override void Tick()
          }
       }
 
-      if(level.totaltime % 10 == 0)
+      if(level.totaltime % 5 == 0)
          Lith_EmitAura();
 
       if(m_meleetime)

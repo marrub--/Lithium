@@ -1,9 +1,9 @@
 actor Lith_PlayerDeathParticle
 {
    RenderStyle "Subtract"
-   Alpha 0.9
    
    +NOINTERACTION
+   +BRIGHT
    
    states
    {
@@ -19,10 +19,10 @@ actor Lith_PlayerDeathParticle
 actor Lith_PlayerDeathParticle2
 {
    RenderStyle "Subtract"
-   Alpha 0.9
    Scale 0.2
    
    +NOINTERACTION
+   +BRIGHT
    
    states
    {

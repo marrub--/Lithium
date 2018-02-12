@@ -1,0 +1,7 @@
+hardwareshader sprite LDTHA0
+{
+   shader "lshaders/death.fp.glsl"
+   speed 1.0
+}
+
+// EOF
