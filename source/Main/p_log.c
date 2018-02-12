@@ -17,12 +17,13 @@
 void Lith_LogS(int pnum, int type)
 {
    __str name = HERMES_S("GetLogName");
+   if(name[0] != '>') name = Language("LITH_TXT_LOG_%S", name);
    withplayer(&players[pnum]) switch(type)
    {
    case msg_ammo: if(!p->getCVarI("lith_player_ammolog")) break;
-   case msg_huds: p->logH("%S", Language("LITH_TXT_LOG_%S", name)); break;
-   case msg_full: p->logF("%S", Language("LITH_TXT_LOG_%S", name)); break;
-   case msg_both: p->log ("%S", Language("LITH_TXT_LOG_%S", name)); break;
+   case msg_huds: p->logH("%S", name); break;
+   case msg_full: p->logF("%S", name); break;
+   case msg_both: p->log ("%S", name); break;
    }
 }
 
