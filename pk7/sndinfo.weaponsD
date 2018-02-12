@@ -1,7 +1,15 @@
 //
 // 700 Express
 //
-weapons/700e/fire lsounds/700Express/Fire.flac // a1337spy
+weapons/700e/fire1 lsounds/700Express/Fire1.flac // E.Y.E: Divine Cybermancy
+weapons/700e/fire2 lsounds/700Express/Fire2.flac // 〃
+weapons/700e/fire3 lsounds/700Express/Fire3.flac // 〃
+
+$random weapons/700e/fire {
+   weapons/700e/fire1
+   weapons/700e/fire2
+   weapons/700e/fire3
+}
 
 //
 // 4-Bore
