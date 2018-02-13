@@ -1,3 +1,5 @@
+#include "lzscript/Weapons/5_MissileLauncher.zsc"
+
 class Lith_WeaponScopedToken : Inventory
 {
    default

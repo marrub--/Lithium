@@ -7,40 +7,6 @@
 
 #include <math.h>
 
-// How to make DECORATE into a decent VM: Registers!
-// TODO: We have a new VM, get rid of this shit!
-
-#define PVarFunc(fn, expr) \
-   [[__call("ScriptS"), __extern("ACS")]] \
-   int fn \
-   { \
-      withplayer(LocalPlayer) { \
-         int *val = &p->decvars[var - 1]; \
-         return expr; \
-      } \
-      return 0; \
-   }
-
-#define WVarFunc(fn, expr) \
-   [[__call("ScriptS"), __extern("ACS")]] \
-   int fn {int *val = &world.decvars[var - 1]; return expr;}
-
-#define RegisterMachine(reg, name) \
-   reg(L##name##Get(int var         ), (*val)       ) \
-   reg(L##name##Inc(int var         ), (*val)++     ) \
-   reg(L##name##Dec(int var         ), (*val)--     ) \
-   reg(L##name##Set(int var, int num), (*val)  = num) \
-   reg(L##name##Add(int var, int num), (*val) += num) \
-   reg(L##name##Sub(int var, int num), (*val) -= num) \
-   reg(L##name##Mul(int var, int num), (*val) *= num) \
-   reg(L##name##Div(int var, int num), (*val) /= num) \
-   reg(L##name##Mod(int var, int num), (*val) %= num) \
-   reg(L##name##Min(int var, int num), (*val) = min(*val, num)) \
-   reg(L##name##Max(int var, int num), (*val) = max(*val, num))
-
-RegisterMachine(PVarFunc, PVar)
-RegisterMachine(WVarFunc, WVar)
-
 //
 // Lith_Timer
 //

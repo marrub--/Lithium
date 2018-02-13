@@ -224,7 +224,6 @@ void Lith_PlayerPreWeapons(player_t *p)
       switch(i)
       case weapon_shotgun:
       case weapon_c_rifle:
-      case weapon_d_4bore:
          if(p->getCVarI("lith_weapons_slot3ammo")) {
             wep->ammotype |= AT_Ammo;
             wep->ammoclass = "Lith_ShellAmmo";

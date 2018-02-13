@@ -18,15 +18,14 @@ actor Lith_ItemPickup : Lith_Pickup
 actor Lith_DivisionSigilSprite : Lith_ItemSprite
 {
    var int user_phase;
-
-   const int lvar_phaseiter = 1;
+   var int user_phaseiter;
    
    states
    {
    SpawnLoop:
       DIVI A 0 A_SetUserVar(user_phase, (user_phase + 1) % 23)
-      DIVI A 0 ACS_NamedExecuteWithResult("LWVarSet", lvar_phaseiter, 0)
-      DIVI ABCDEFGHIJKLMNOPQRSTUVW 0 A_JumpIf(user_phase == CallACS("LWVarInc", lvar_phaseiter), "Super::SpawnLoop")
+      DIVI A 0 {user_phaseiter = 0;}
+      DIVI ABCDEFGHIJKLMNOPQRSTUVW 0 A_JumpIf(user_phase == user_phaseiter++, "Super::SpawnLoop")
       goto Super::SpawnLoop
    }
 }
