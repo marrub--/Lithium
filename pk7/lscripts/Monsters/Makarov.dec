@@ -100,7 +100,7 @@ actor Lith_Boss_Makarov : Lith_Phantom
    states
    {
    See:
-      PLAY AAAABBBBCCCCDDDD 1 A_Chase
+      PLAY AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD 1 A_Chase
       loop
    
    Missile:

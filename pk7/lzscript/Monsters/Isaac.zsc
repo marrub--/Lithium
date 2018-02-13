@@ -53,7 +53,7 @@ class Lith_Boss_Johnson : Lith_BasicPhantom
    states
    {
    See:
-      PLAY AAAABBBBCCCCDDDD 1 A_Chase(null, "Missile", CHF_FASTCHASE);
+      PLAY AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD 1 A_Chase(null, "Missile", CHF_FASTCHASE);
       loop;
    Missile:
       PLAY E 0 A_PlaySound("enemies/isaac/fire", CHAN_WEAPON);

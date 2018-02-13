@@ -51,7 +51,7 @@ actor Lith_Boss_James : Lith_Phantom
    states
    {
    See:
-      PLAY AAAABBBBCCCCDDDD 1 A_Chase("Melee", "Missile", m_phase > 1 ? CHF_FASTCHASE : 0)
+      PLAY AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD 1 A_Chase("Melee", "Missile", m_phase > 1 ? CHF_FASTCHASE : 0)
       loop
    
    Missile:
