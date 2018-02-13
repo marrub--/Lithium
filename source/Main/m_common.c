@@ -19,9 +19,9 @@ int   dbgstatnum,  dbgnotenum;
 [[__call("StkCall")]]
 static void SetInventory(__str item, int amount)
 {
-   int s = ACS_CheckInventory(item) - amount;
-        if(s < 0) ACS_TakeInventory(item, -s);
-   else if(s > 0) ACS_GiveInventory(item,  s);
+   int s = InvNum(item) - amount;
+        if(s < 0) InvTake(item, -s);
+   else if(s > 0) InvGive(item,  s);
 }
 
 //
@@ -107,7 +107,7 @@ bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags
 [[__call("StkCall")]]
 int Lith_CheckActorInventory(int tid, __str item)
 {
-   if(tid == 0) return ACS_CheckInventory(item);
+   if(tid == 0) return InvNum(item);
    else         return ACS_CheckActorInventory(tid, item);
 }
 
@@ -117,7 +117,7 @@ int Lith_CheckActorInventory(int tid, __str item)
 [[__call("StkCall")]]
 void Lith_GiveActorInventory(int tid, __str item, int amount)
 {
-   if(tid == 0) ACS_GiveInventory(item, amount);
+   if(tid == 0) InvGive(item, amount);
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
@@ -127,7 +127,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
 [[__call("StkCall")]]
 void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
-   if(tid == 0) ACS_TakeInventory(item, amount);
+   if(tid == 0) InvTake(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
 }
 

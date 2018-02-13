@@ -28,10 +28,10 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
       UData.target = UData.oldtarget = 0;
    else if(validtarget)
    {
-      bool legendary = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterToken");
-      bool henshin   = world.legendoom && ACS_CheckInventory("LDLegendaryMonsterTransformed");
+      bool legendary = world.legendoom && InvNum("LDLegendaryMonsterToken");
+      bool henshin   = world.legendoom && InvNum("LDLegendaryMonsterTransformed");
 
-      bool phantom = ACS_CheckInventory("Lith_IsPhantom");
+      bool phantom = InvNum("Lith_IsPhantom");
 
       bool freak  = ACS_CheckFlag(0, "INVULNERABLE") || ACS_CheckFlag(0, "NODAMAGE");
       bool boss   = ACS_CheckFlag(0, "BOSS");

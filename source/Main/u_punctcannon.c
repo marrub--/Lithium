@@ -56,7 +56,7 @@ void Lith_PunctuatorFire(void)
 //
 void Upgr_PunctCannon_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   ACS_GiveInventory("Lith_GTFO", 1);
+   InvGive("Lith_GTFO", 1);
 }
 
 // EOF

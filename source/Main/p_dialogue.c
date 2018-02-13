@@ -369,7 +369,7 @@ void Lith_DialogueVM(player_t *p, int num)
          if(check) {codeptr = jmpto; DoCurCode;} \
       DoNextCode
    Op(DCD_JNZ):     GenJump(vmstate.sptr[-1] != 0);
-   Op(DCD_JNITEM):  GenJump(!ACS_CheckInventory(Next_S));
+   Op(DCD_JNITEM):  GenJump(!InvNum(Next_S));
    Op(DCD_JNCLASS): GenJump(p->pclass != Next_I);
    #undef GenJump
 

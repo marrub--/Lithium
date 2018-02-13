@@ -231,7 +231,7 @@ static void ApplyLevels(dmon_t *m, int prev)
 
    for(int i = 0; i < dmgtype_max; i++) {
       ifauto(int, resist, m->resist[i] / 15.0) {
-         ACS_GiveInventory(StrParam("Lith_M_%S%i", dmgtype_names[i],
+         InvGive(StrParam("Lith_M_%S%i", dmgtype_names[i],
             min(resist, MAXRANK)), 1);
       }
    }
@@ -419,7 +419,7 @@ void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
 
-   ACS_GiveInventory("Lith_MonsterID", m->id + 1);
+   InvGive("Lith_MonsterID", m->id + 1);
 
    m->ms = &ms;
    GetInfo(m);
@@ -446,7 +446,7 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / 100.);
 
-      if(ACS_CheckInventory("Lith_Ionized") && tic % 5 == 0)
+      if(InvNum("Lith_Ionized") && tic % 5 == 0)
          HERMES("Lith_IonizeFX");
 
       ACS_Delay(2);
@@ -486,7 +486,7 @@ void Lith_MonsterInfo()
    LogDebug(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
-   ACS_GiveInventory("Lith_MonsterInvalid", 1);
+   InvGive("Lith_MonsterInvalid", 1);
 }
 
 //

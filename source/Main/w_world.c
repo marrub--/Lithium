@@ -296,7 +296,7 @@ static void DoRain()
          rain_py = p->y;
       }
       else
-         ACS_TakeInventory("Lith_SMGHeat", 1);
+         InvTake("Lith_SMGHeat", 1);
 
       if((InHell || InSecret) && !world.islithmap)
          HERMES("SpawnRain", "Lith_BloodRainDrop");
@@ -365,7 +365,7 @@ static void CheckEnemyCompat(void)
    if(ACS_SpawnForced("ZombieMan", 0, 0, 0, tid = ACS_UniqueTID(), 0))
    {
       ACS_SetActivator(tid);
-      ACS_GiveInventory("Lith_EnemyChecker", 1);
+      InvGive("Lith_EnemyChecker", 1);
 
       __str cl = ACS_GetActorClass(0);
 

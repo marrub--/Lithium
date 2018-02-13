@@ -53,7 +53,7 @@ static void HUD_Ammo(player_t *p)
 
    if(p->weapontype == weapon_c_smg)
    {
-      fixed heat = ACS_CheckInventory("Lith_SMGHeat")/500.0;
+      fixed heat = InvNum("Lith_SMGHeat")/500.0;
       PrintSprite("lgfx/HUD_C/BarSmall.png", 320,2, 205,2);
       SetClip(320-63, 205-9, heat * 63, 9);
       PrintSprite("lgfx/HUD_C/HeatBar.png", 320,2, 205,2);

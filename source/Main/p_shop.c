@@ -45,8 +45,8 @@ static shopitem_t shopitems[] = {
 static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
-   int cur =  ACS_CheckInventory(item->classname);
-   int max = ACS_GetMaxInventory(0, item->classname);
+   int cur = InvNum(item->classname);
+   int max = InvMax(0, item->classname);
    return max == 0 || cur < max;
 }
 
@@ -57,7 +57,7 @@ static void Shop_Buy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    p->itemsbought++;
-   ACS_GiveInventory(item->classname, item->count);
+   InvGive(item->classname, item->count);
 }
 
 //

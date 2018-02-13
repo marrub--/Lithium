@@ -23,14 +23,14 @@ static struct {__str abbr, full;} const ArmorNames[] = {
 //
 static void RA_Take(int n)
 {
-   ACS_TakeInventory(StrParam("Lith_RA_Bullets%i", n),   999);
-   ACS_TakeInventory(StrParam("Lith_RA_Energy%i", n),    999);
-   ACS_TakeInventory(StrParam("Lith_RA_Fire%i", n),      999);
-   ACS_TakeInventory(StrParam("Lith_RA_FireMagic%i", n), 999);
-   ACS_TakeInventory(StrParam("Lith_RA_Magic%i", n),     999);
-   ACS_TakeInventory(StrParam("Lith_RA_Melee%i", n),     999);
-   ACS_TakeInventory(StrParam("Lith_RA_Shrapnel%i", n),  999);
-   ACS_TakeInventory(StrParam("Lith_RA_Ice%i", n),       999);
+   InvTake(StrParam("Lith_RA_Bullets%i", n),   999);
+   InvTake(StrParam("Lith_RA_Energy%i", n),    999);
+   InvTake(StrParam("Lith_RA_Fire%i", n),      999);
+   InvTake(StrParam("Lith_RA_FireMagic%i", n), 999);
+   InvTake(StrParam("Lith_RA_Magic%i", n),     999);
+   InvTake(StrParam("Lith_RA_Melee%i", n),     999);
+   InvTake(StrParam("Lith_RA_Shrapnel%i", n),  999);
+   InvTake(StrParam("Lith_RA_Ice%i", n),       999);
 }
 
 //
@@ -38,7 +38,7 @@ static void RA_Take(int n)
 //
 static void RA_Give(__str name, int n)
 {
-   ACS_GiveInventory(StrParam("Lith_RA_%S%i", name, n), 1);
+   InvGive(StrParam("Lith_RA_%S%i", name, n), 1);
 }
 
 // Extern Functions ----------------------------------------------------------|

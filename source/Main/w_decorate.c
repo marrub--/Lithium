@@ -22,9 +22,9 @@ int Lith_Timer(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
-   score_t score = ACS_CheckInventory("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
+   score_t score = InvNum("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
    Lith_GiveAllScore(score, false);
-   ACS_TakeInventory("Lith_ScoreCount", 0x7FFFFFFF);
+   InvTake("Lith_ScoreCount", 0x7FFFFFFF);
 }
 
 //
@@ -45,7 +45,7 @@ void Lith_DOGS()
       fixed ang = ACS_RandomFixed(0, 1);
       fixed dst = ACS_RandomFixed(0, 64);
       ACS_SpawnForced("Lith_Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
-      ACS_GiveInventory("Lith_Alerter", 1);
+      InvGive("Lith_Alerter", 1);
       ACS_Delay(10);
    }
 
@@ -92,7 +92,7 @@ void Lith_Barrier()
 {
    withplayer(LocalPlayer) for(int i = 0; p->active && i < 35 * 30; i++)
    {
-      ACS_GiveInventory("Lith_BarrierSpell", 1);
+      InvGive("Lith_BarrierSpell", 1);
       ACS_Delay(1);
    }
 }
@@ -136,25 +136,25 @@ void Lith_PoisonFXTicker()
    {
       Lith_PausableTick();
 
-      if(ACS_CheckInventory("Lith_PoisonFXReset"))
+      if(InvNum("Lith_PoisonFXReset"))
       {
-         ACS_TakeInventory("Lith_PoisonFXReset", 999);
-         ACS_TakeInventory("Lith_PoisonFXTimer", 999);
-         ACS_GiveInventory("Lith_PoisonFXGiverGiver", 1);
+         InvTake("Lith_PoisonFXReset", 999);
+         InvTake("Lith_PoisonFXTimer", 999);
+         InvGive("Lith_PoisonFXGiverGiver", 1);
          return;
       }
    }
 
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
    {
-      ACS_TakeInventory("Lith_PoisonFXReset", 999);
-      ACS_TakeInventory("Lith_PoisonFXTimer", 999);
-      ACS_TakeInventory("Lith_PoisonFXGiverGiver", 999);
+      InvTake("Lith_PoisonFXReset", 999);
+      InvTake("Lith_PoisonFXTimer", 999);
+      InvTake("Lith_PoisonFXGiverGiver", 999);
    }
-   else if(ACS_CheckInventory("Lith_PoisonFXTimer"))
+   else if(InvNum("Lith_PoisonFXTimer"))
    {
-      ACS_GiveInventory("Lith_PoisonFXGiver", 1);
-      ACS_TakeInventory("Lith_PoisonFXTimer", 1);
+      InvGive("Lith_PoisonFXGiver", 1);
+      InvTake("Lith_PoisonFXTimer", 1);
    }
 }
 
@@ -203,8 +203,8 @@ void Lith_GetSigil()
 
    p->sigil.acquired = true;
 
-   ACS_Thing_Remove(ACS_CheckInventory("Lith_DivisionSigilSpriteTID"));
-   ACS_TakeInventory("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
+   ACS_Thing_Remove(InvNum("Lith_DivisionSigilSpriteTID"));
+   InvTake("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
 
    if(world.dbgLevel)
       return;

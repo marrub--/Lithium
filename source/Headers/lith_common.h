@@ -100,6 +100,12 @@
 #define DebugNote(...) \
    (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
 
+// Convenience names
+#define InvNum  ACS_CheckInventory
+#define InvMax  ACS_GetMaxInventory
+#define InvTake ACS_TakeInventory
+#define InvGive ACS_GiveInventory
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 #define TS TICSECOND

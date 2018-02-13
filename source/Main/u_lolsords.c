@@ -11,7 +11,7 @@
 void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 {
    UData.origweapon = p->weaponclass;
-   ACS_GiveInventory("Lith_Sword", 1);
+   InvGive("Lith_Sword", 1);
 }
 
 //
@@ -19,7 +19,7 @@ void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 //
 void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 {
-   ACS_TakeInventory("Lith_Sword", 1);
+   InvTake("Lith_Sword", 1);
    ACS_SetWeapon(UData.origweapon);
 }
 

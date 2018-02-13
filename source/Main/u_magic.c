@@ -34,7 +34,7 @@ static struct magic_info const minf[] = {
 [[__call("ScriptS")]]
 static void GiveMagic(struct magic_info const *m)
 {
-   ACS_GiveInventory(m->classname, 1);
+   InvGive(m->classname, 1);
    ACS_SetWeapon(m->classname);
 }
 

@@ -127,9 +127,9 @@ static void Lith_PlayerDeath(void)
       {
          ACS_LocalAmbientSound("player/death1", 127);
          ACS_Delay(35);
-         ACS_GiveInventory("Lith_PlayerDeath", 1);
+         InvGive("Lith_PlayerDeath", 1);
          ACS_Delay(25);
-         ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
+         InvGive("Lith_PlayerDeathNuke", 1);
          ACS_Delay(25);
       }
 

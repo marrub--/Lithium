@@ -92,27 +92,27 @@ static void SetPClass(player_t *p)
 [[__call("StkCall")]]
 static void ConvertAmmo(player_t *p)
 {
-   int clip = ACS_CheckInventory("Lith_BulletAmmo");
-   int shel = ACS_CheckInventory("Lith_ShellAmmo");
-   int rckt = ACS_CheckInventory("Lith_RocketAmmo");
-   int cell = ACS_CheckInventory("Lith_PlasmaAmmo");
-   int bfgc = ACS_CheckInventory("Lith_CannonAmmo");
+   int clip = InvNum("Lith_BulletAmmo");
+   int shel = InvNum("Lith_ShellAmmo");
+   int rckt = InvNum("Lith_RocketAmmo");
+   int cell = InvNum("Lith_PlasmaAmmo");
+   int bfgc = InvNum("Lith_CannonAmmo");
 
-   ACS_TakeInventory("Lith_BulletAmmo", clip);
-   ACS_TakeInventory("Lith_ShellAmmo",  shel);
-   ACS_TakeInventory("Lith_RocketAmmo", rckt);
-   ACS_TakeInventory("Lith_PlasmaAmmo", cell);
-   ACS_TakeInventory("Lith_CannonAmmo", bfgc);
+   InvTake("Lith_BulletAmmo", clip);
+   InvTake("Lith_ShellAmmo",  shel);
+   InvTake("Lith_RocketAmmo", rckt);
+   InvTake("Lith_PlasmaAmmo", cell);
+   InvTake("Lith_CannonAmmo", bfgc);
 
    if(p->pclass == pcl_fdoomer)
    {
       #define FDClass(cname) \
          if(p->pcstr == "FD" cname "Player") { \
-            ACS_GiveInventory("FD" cname "Bullets",   clip); \
-            ACS_GiveInventory("FD" cname "Shells",    shel); \
-            ACS_GiveInventory("FD" cname "Rocket",    rckt); \
-            ACS_GiveInventory("FD" cname "Cell",      cell); \
-            ACS_GiveInventory("FD" cname "BFGCharge", bfgc); \
+            InvGive("FD" cname "Bullets",   clip); \
+            InvGive("FD" cname "Shells",    shel); \
+            InvGive("FD" cname "Rocket",    rckt); \
+            InvGive("FD" cname "Cell",      cell); \
+            InvGive("FD" cname "BFGCharge", bfgc); \
          }
       FDClass("Plut")
       FDClass("TNT")
@@ -216,17 +216,17 @@ void Lith_PlayerUpdateData(player_t *p)
    p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
 
-   p->scopetoken = ACS_CheckInventory("Lith_WeaponScopedToken");
+   p->scopetoken = InvNum("Lith_WeaponScopedToken");
 
-   p->keys.rc = ACS_CheckInventory("RedCard")    ||
-                ACS_CheckInventory("KeyGreen");
-   p->keys.yc = ACS_CheckInventory("YellowCard") ||
-                ACS_CheckInventory("KeyYellow");
-   p->keys.bc = ACS_CheckInventory("BlueCard")   ||
-                ACS_CheckInventory("KeyBlue");
-   p->keys.rs = ACS_CheckInventory("RedSkull");
-   p->keys.ys = ACS_CheckInventory("YellowSkull");
-   p->keys.bs = ACS_CheckInventory("BlueSkull");
+   p->keys.rc = InvNum("RedCard")    ||
+                InvNum("KeyGreen");
+   p->keys.yc = InvNum("YellowCard") ||
+                InvNum("KeyYellow");
+   p->keys.bc = InvNum("BlueCard")   ||
+                InvNum("KeyBlue");
+   p->keys.rs = InvNum("RedSkull");
+   p->keys.ys = InvNum("YellowSkull");
+   p->keys.bs = InvNum("BlueSkull");
 
    if(p->pclass & pcl_mods)
       ConvertAmmo(p);
@@ -384,7 +384,7 @@ void Lith_ResetPlayer(player_t *p)
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
-   ACS_TakeInventory("Lith_WeaponScopedToken", 999);
+   InvTake("Lith_WeaponScopedToken", 999);
 
    Lith_PlayerResetCBIGUI(p);
 
@@ -443,7 +443,7 @@ void Lith_ResetPlayer(player_t *p)
       for(int i = weapon_min; i < weapon_max; i++) {
          weaponinfo_t const *info = &weaponinfo[i];
          if(info->classname != null && info->pclass & p->pclass && !(info->flags & wf_magic))
-            ACS_GiveInventory(info->classname, 1);
+            InvGive(info->classname, 1);
       }
    }
 }

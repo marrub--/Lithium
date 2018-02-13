@@ -10,7 +10,7 @@
 void Upgr_InstaDeath_Update(player_t *p, upgrade_t *upgr)
 {
    if(p->health < p->oldhealth)
-      ACS_GiveInventory("Lith_Die", 1);
+      InvGive("Lith_Die", 1);
 }
 
 // EOF

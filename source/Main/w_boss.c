@@ -139,7 +139,7 @@ void Lith_PhantomTeleport(void)
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
    for(int i = 0; i < 15; i++) {
-      ACS_GiveInventory("Lith_PhantomTeleport", 1);
+      InvGive("Lith_PhantomTeleport", 1);
       ACS_Delay(1);
    }
 }
@@ -157,9 +157,9 @@ void Lith_PhantomDeath(void)
       // Death
       ACS_AmbientSound("player/death1", 127);
       ACS_Delay(35);
-      ACS_GiveInventory("Lith_PlayerDeath", 1);
+      InvGive("Lith_PlayerDeath", 1);
       ACS_Delay(25);
-      ACS_GiveInventory("Lith_PlayerDeathNuke", 1);
+      InvGive("Lith_PlayerDeathNuke", 1);
       ACS_Delay(25);
       Lith_ForPlayer() p->deliverMail(StrParam("%SDefeated", boss->name));
       boss->dead = true;
@@ -172,7 +172,7 @@ void Lith_PhantomDeath(void)
       ACS_AmbientSound("enemies/phantom/escape", 127);
       ACS_SetActorState(0, "GetOutOfDodge");
       ACS_Delay(5);
-      ACS_GiveInventory("Lith_PhantomOut", 1);
+      InvGive("Lith_PhantomOut", 1);
       ACS_Delay(2);
    }
 

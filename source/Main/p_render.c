@@ -58,7 +58,7 @@ void Lith_PlayerFootstep(player_t *p)
 [[__call("ScriptS")]]
 void Lith_PlayerItemFx(player_t *p)
 {
-   bool hasir = ACS_CheckInventory("PowerLightAmp");
+   bool hasir = InvNum("PowerLightAmp");
 
    if(!hasir && p->hadinfrared)
       ACS_LocalAmbientSound("player/infraredoff", 127);
@@ -76,7 +76,7 @@ void Lith_PlayerDamageBob(player_t *p)
 {
    if(Lith_IsPaused) return;
 
-   if(!ACS_CheckInventory("PowerStrength") && p->health < p->oldhealth)
+   if(!InvNum("PowerStrength") && p->health < p->oldhealth)
    {
       float angle = RandomFloat(tau, -tau);
       float distance;

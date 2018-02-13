@@ -16,29 +16,29 @@ static void GiveWeaponItem(int parm, int slot)
    switch(parm)
    {
    case weapon_c_fist:
-   case weapon_fist:      ACS_GiveInventory("Lith_Death",      1);    break;
-   case weapon_c_spas:    ACS_GiveInventory("Lith_ShellAmmo",  8);    break;
-   case weapon_ssg:       ACS_GiveInventory("Lith_ShellAmmo",  4);    break;
-   case weapon_c_sniper:  ACS_GiveInventory("Lith_RocketAmmo", 6);    break;
-   case weapon_launcher:  ACS_GiveInventory("Lith_RocketAmmo", 2);    break;
+   case weapon_fist:      InvGive("Lith_Death",      1);    break;
+   case weapon_c_spas:    InvGive("Lith_ShellAmmo",  8);    break;
+   case weapon_ssg:       InvGive("Lith_ShellAmmo",  4);    break;
+   case weapon_c_sniper:  InvGive("Lith_RocketAmmo", 6);    break;
+   case weapon_launcher:  InvGive("Lith_RocketAmmo", 2);    break;
    case weapon_c_plasma:
-   case weapon_plasma:    ACS_GiveInventory("Lith_PlasmaAmmo", 1500); break;
-   case weapon_c_shipgun: ACS_GiveInventory("Lith_CannonAmmo", 5);    break;
-   case weapon_bfg:       ACS_GiveInventory("Lith_CannonAmmo", 4);    break;
+   case weapon_plasma:    InvGive("Lith_PlasmaAmmo", 1500); break;
+   case weapon_c_shipgun: InvGive("Lith_CannonAmmo", 5);    break;
+   case weapon_bfg:       InvGive("Lith_CannonAmmo", 4);    break;
 
    case weapon_fd_jpcp_chainsaw:
-      ACS_GiveInventory("FDGotChainsaw", 1);
+      InvGive("FDGotChainsaw", 1);
       break;
    }
 
    if(parm > weapon_max_lith) switch(slot)
    {
-   case 2: ACS_GiveInventory("Lith_BulletAmmo", 20); break;
-   case 3: ACS_GiveInventory("Lith_ShellAmmo",  10); break;
-   case 4: ACS_GiveInventory("Lith_BulletAmmo", 40); break;
-   case 5: ACS_GiveInventory("Lith_RocketAmmo", 5);  break;
-   case 6: ACS_GiveInventory("Lith_PlasmaAmmo", 50); break;
-   case 7: ACS_GiveInventory("Lith_CannonAmmo", 2);  break;
+   case 2: InvGive("Lith_BulletAmmo", 20); break;
+   case 3: InvGive("Lith_ShellAmmo",  10); break;
+   case 4: InvGive("Lith_BulletAmmo", 40); break;
+   case 5: InvGive("Lith_RocketAmmo", 5);  break;
+   case 6: InvGive("Lith_PlasmaAmmo", 50); break;
+   case 7: InvGive("Lith_CannonAmmo", 2);  break;
    }
 }
 
@@ -123,7 +123,7 @@ bool Lith_WeaponPickup(int name)
       Lith_PickupMessage(p, info);
 
       if(info->type != weapon_fd_jpcp_chainsaw) // fuck a bitch
-         ACS_GiveInventory(info->classname, 1);
+         InvGive(info->classname, 1);
 
       return !weaponstay;
    }
@@ -159,8 +159,8 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_ChargeFistDamage()
 {
-   int amount = ACS_CheckInventory("Lith_FistCharge");
-   ACS_TakeInventory("Lith_FistCharge", 0x7FFFFFFF);
+   int amount = InvNum("Lith_FistCharge");
+   InvTake("Lith_FistCharge", 0x7FFFFFFF);
    return amount * ACS_Random(1, 3);
 }
 
@@ -199,7 +199,7 @@ void Lith_PlayerPreWeapons(player_t *p)
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
 
-      if(!(p->pclass & info->pclass) || !(wep->owned = ACS_CheckInventory(info->classname)))
+      if(!(p->pclass & info->pclass) || !(wep->owned = InvNum(info->classname)))
          continue;
 
       w->slot[info->slot] += wep->owned;
@@ -240,15 +240,15 @@ void Lith_PlayerPreWeapons(player_t *p)
 
          if(wep->ammotype & AT_Ammo)
          {
-            wep->ammomax = ACS_GetMaxInventory(0, wep->ammoclass);
-            wep->ammocur = ACS_CheckInventory (   wep->ammoclass);
+            wep->ammomax = InvMax(0, wep->ammoclass);
+            wep->ammocur = InvNum(   wep->ammoclass);
          }
       }
 
       // Remove inactive magic weapons.
       else if(info->flags & wf_magic && ++wep->magictake > 20)
       {
-         ACS_TakeInventory(info->classname, 1);
+         InvTake(info->classname, 1);
          wep->magictake = 0;
          continue;
       }
@@ -275,12 +275,12 @@ void Lith_PlayerUpdateWeapons(player_t *p)
 {
    if(!Lith_IsPaused)
    {
-      int heat = ACS_CheckInventory("Lith_SMGHeat");
-           if(heat < 100) ACS_TakeInventory("Lith_SMGHeat", 5);
-      else if(heat < 200) ACS_TakeInventory("Lith_SMGHeat", 4);
-      else if(heat < 300) ACS_TakeInventory("Lith_SMGHeat", 3);
-      else if(heat < 400) ACS_TakeInventory("Lith_SMGHeat", 2);
-      else                ACS_TakeInventory("Lith_SMGHeat", 1);
+      int heat = InvNum("Lith_SMGHeat");
+           if(heat < 100) InvTake("Lith_SMGHeat", 5);
+      else if(heat < 200) InvTake("Lith_SMGHeat", 4);
+      else if(heat < 300) InvTake("Lith_SMGHeat", 3);
+      else if(heat < 400) InvTake("Lith_SMGHeat", 2);
+      else                InvTake("Lith_SMGHeat", 1);
    }
 
    switch(p->weapontype)
@@ -290,7 +290,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
       break;
    case weapon_cfist:
       SetSize(320, 240);
-      fixed64_t charge = 5.lk + ACS_CheckInventory("Lith_FistCharge") / 10.lk;
+      fixed64_t charge = 5.lk + InvNum("Lith_FistCharge") / 10.lk;
       PrintTextFmt("%.1lkkV \Cjcharge", charge);
       PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
       break;
@@ -369,7 +369,7 @@ void Lith_ResetRifleMode()
 void Lith_SurgeOfDestiny(void)
 {
    for(int i = 0; i < (35 * 7) / 2; i++) {
-      ACS_GiveInventory("Lith_SurgeOfDestiny", 1);
+      InvGive("Lith_SurgeOfDestiny", 1);
       ACS_Delay(2);
    }
 }

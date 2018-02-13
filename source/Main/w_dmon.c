@@ -66,7 +66,7 @@ dmon_t *DmonPtr(int tid, int ptr)
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
 
-   ifauto(int, id, ACS_CheckInventory("Lith_MonsterID"))
+   ifauto(int, id, InvNum("Lith_MonsterID"))
       return Dmon(id - 1);
    else
       return null;

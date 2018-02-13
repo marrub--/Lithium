@@ -78,7 +78,7 @@ static void HUD_Health(player_t *p, upgrade_t *upgr)
       [7] = "lgfx/HUD/H_D26.png"
    };
 
-   PrintSprite(ACS_CheckInventory("PowerStrength") ?
+   PrintSprite(InvNum("PowerStrength") ?
       "lgfx/HUD/SplitBackRed.png" : "lgfx/HUD/SplitBack.png", 0,1, 239,2);
 
    PrintTextFmt("\C[Lith_Green]%i", p->health);

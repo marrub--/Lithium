@@ -11,7 +11,7 @@
 void Upgr_StealthSys_Deactivate(player_t *p, upgrade_t *upgr)
 {
    p->alpha = 1;
-   ACS_TakeInventory("Lith_StealthSystem", 1);
+   InvTake("Lith_StealthSystem", 1);
 }
 
 //
@@ -25,9 +25,9 @@ void Upgr_StealthSys_Update(player_t *p, upgrade_t *upgr)
 
    int time = UData.mulvel * 20;
    if(!time || ACS_Timer() % time == 0)
-      ACS_GiveInventory("Lith_StealthSystem", 1);
+      InvGive("Lith_StealthSystem", 1);
    else
-      ACS_TakeInventory("Lith_StealthSystem", 1);
+      InvTake("Lith_StealthSystem", 1);
 }
 
 // EOF
