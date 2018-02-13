@@ -4,4 +4,12 @@ hardwareshader sprite LDTHA0
    speed 1.0
 }
 
+hardwareshader postprocess scene
+{
+   shader "lshaders/rain.fp.glsl" 330
+   name "Lith_Rain"
+   uniform float lith_t
+   uniform float lith_m
+}
+
 // EOF

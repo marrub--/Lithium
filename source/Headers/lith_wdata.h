@@ -10,6 +10,7 @@ enum // Lith_WData
    wdata_enemycheck,
    wdata_fun,
    wdata_soulsfreed,
+   wdata_dorain,
    wdata_ptid,
    wdata_pclass,
 };

@@ -35,6 +35,7 @@ static fixed lmvar rain_py;
 static int   lmvar rain_dist;
 
 static bool reopen;
+static bool dorain;
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -243,6 +244,7 @@ int LWData(int info)
    case wdata_enemycheck:  return world.enemycheck;
    case wdata_fun:         return world.fun;
    case wdata_soulsfreed:  return world.soulsfreed;
+   case wdata_dorain:      return dorain;
    case wdata_ptid:   Lith_ForPlayer() return p->tid;
    case wdata_pclass: Lith_ForPlayer() return p->pclass;
    }
@@ -275,6 +277,8 @@ static void DoRain()
 {
    if(ACS_PlayerCount() > 1)
       return;
+
+   dorain = true;
 
    player_t *p = &players[0];
    p->setActivator();
