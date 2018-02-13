@@ -7,8 +7,10 @@ static void Lith_IonizeFX(Actor mo)
 
 static void Lith_DelearSprite(Actor mo)
 {
+   let w = Lith_Delear(mo.findInventory("Lith_Delear"));
+   if(!w) return;
+   int sf = w.m_fired;
    int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY;
-   int sf = mo.countInv("Lith_DelearShotsFired");
    float cp = cos(mo.pitch) * 32;
    float sp = sin(mo.pitch) * 32;
    float h = mo.height - 19;

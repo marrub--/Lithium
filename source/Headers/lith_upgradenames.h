@@ -56,16 +56,14 @@ enum // Lith_UpgradeName
    UPGR_7777777,
    UPGR_lolsords,
    UPGR_Goldeneye,
+   UPGR_DarkCannon,
 
    // Downgrade
    UPGR_Implying,
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
 
-   UPGR_BASE_MAX,
-
-   // 「GRAF ZONE」
-   UPGR_DarkCannon = 0x7FFFF666,
+   UPGR_BASE_MAX
 };
 
 // EOF

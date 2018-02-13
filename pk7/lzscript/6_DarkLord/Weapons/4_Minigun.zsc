@@ -18,9 +18,12 @@ override void Tick()
    if(owner && owner.player && owner.health > 0 && !level.frozen)
    {
       if(owner.player.readyWeapon != self)
+      {
+         m_windup = 0;
          return;
+      }
 
-      if(owner.player.buttons & (BT_ATTACK|BT_ALTATTACK) && !m_reloading)
+      if(owner.player.buttons & (BT_ATTACK|BT_USER1) && !m_reloading)
       {
          if((m_windup += 0.04) > 1) m_windup = 1;
 
@@ -69,7 +72,7 @@ action(weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
    invoker.m_laststate = lb;
    A_SetTics(invoker.Lith_WindupTime());
    Lith_A_Ready(flags);
-   if(invoker.owner.player.buttons & BT_ATTACK && level.totaltime & 1)
+   if(player.buttons & BT_ATTACK && level.totaltime & 1)
    {
       if(!invoker.Lith_MagEmpty())
          return ResolveState(l);
@@ -130,9 +133,9 @@ Ready3:
    loop;
 
 Deselect:
-   MNGG A 0 {A_StopSound(CHAN_7); invoker.m_reloading = false;}
-   MNGG AAAA 0 A_Lower;
-   MNGG A 1;
+   #### # 0 {A_StopSound(CHAN_7); invoker.m_reloading = false;}
+   #### #### 0 A_Lower;
+   #### # 1;
    loop;
 Select:
    MNGG AAAA 0 A_Raise;

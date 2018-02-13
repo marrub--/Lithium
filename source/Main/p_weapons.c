@@ -212,19 +212,13 @@ void Lith_PlayerPreWeapons(player_t *p)
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
 
-      if(!(wep->ammotype & AT_ZScr))
-         wep->magclass = info->defmagclass;
-
       // Special exceptions.
       switch(i)
       {
-      case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_ZMag; break;
+      case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_NMag; break;
       case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo; break;
+      case weapon_plasma:  if(p->getUpgrActive(UPGR_PartBeam))    wep->ammotype = AT_AMag; break;
       }
-
-      // Set magazine class if this weapon doesn't take ammo.
-      if(wep->ammotype & AT_NMag && !(wep->ammotype & AT_Ammo))
-         wep->magclass = wep->ammoclass;
 
       // For slot 3 weapons that don't take ammo, check if they should.
       switch(i)
@@ -241,16 +235,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       {
          if(wep->ammotype & AT_NMag)
          {
-            if(wep->ammotype & AT_ZScr)
-            {
-               wep->magmax = HERMES("GetMaxMag", p->num, wep->info->classname);
-               wep->magcur = HERMES("GetCurMag", p->num, wep->info->classname);
-            }
-            else
-            {
-               wep->magmax = ACS_GetMaxInventory(0, wep->magclass);
-               wep->magcur = ACS_CheckInventory (   wep->magclass);
-            }
+            wep->magmax = HERMES("GetMaxMag", p->num, wep->info->classname);
+            wep->magcur = HERMES("GetCurMag", p->num, wep->info->classname);
          }
 
          if(wep->ammotype & AT_Ammo)
@@ -271,10 +257,8 @@ void Lith_PlayerPreWeapons(player_t *p)
       // Auto-reload anything else.
       if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
-         if(wep->autoreload >= 35 * 5) {
-            if(wep->ammotype & AT_ZScr) HERMES("AutoReload", p->num, info->classname);
-            else                        ACS_TakeInventory(wep->magclass, 999);
-         }
+         if(wep->autoreload >= 35 * 5)
+            HERMES("AutoReload", p->num, info->classname);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
@@ -397,7 +381,8 @@ void Lith_SurgeOfDestiny(void)
 [[__call("ScriptS"), __extern("ACS")]]
 int Lith_GetWRF(void)
 {
-   enum {
+   enum
+   {
       WRF_NOBOB         = 1,
       WRF_NOSWITCH      = 2,
       WRF_NOPRIMARY     = 4,
@@ -412,13 +397,18 @@ int Lith_GetWRF(void)
       WRF_ALLOWUSER4    = 1024
    };
 
-   withplayer(LocalPlayer) {
-      int flags = 0;
-      if(p->semifrozen)           flags |= WRF_NOFIRE;
-      if(p->pclass == pcl_marine) flags |= WRF_ALLOWUSER4;
-      return flags;
+   int flags = 0;
+
+   withplayer(LocalPlayer)
+   {
+      if(p->semifrozen)
+         flags |= WRF_NOFIRE;
+
+      if(p->pclass & (pcl_marine | pcl_darklord))
+         flags |= WRF_ALLOWUSER4;
    }
-   return 0;
+
+   return flags;
 }
 
 // EOF

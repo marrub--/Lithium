@@ -4,18 +4,18 @@ Percent denotes flags. Any other text is ignored by the parser.
 
 :outcasts
 {cfist      1 ChargeFist      P("cfist")    None
-{missile    5 MissileLauncher P("missile")  AMag A("Rocket") M("Missile")
+{missile    5 MissileLauncher P("missile")  AMag A("Rocket")
 {plasmadiff 6 PlasmaDiffuser  P("plasdiff") Ammo A("Plasma")
 
 :marine
 {fist       1 Fist            Placeholder1  None
-{pistol     2 Pistol          P("pistol")   NMag M("Pistol")
-{revolver   2 Revolver        P("revolver") NMag M("Revolver")
+{pistol     2 Pistol          P("pistol")   NMag
+{revolver   2 Revolver        P("revolver") NMag
 {shotgun    3 Shotgun         P("shotgun")  None
 {lazshotgun 3 LazShotgun      P("lshotgun") None
 {ssg        3 SuperShotgun    P("ssg")      Ammo A("Shell")
-{rifle      4 CombatRifle     P("rifle")    ZMag M("Rifle")
-{sniper     4 SniperRifle     P("sniper")   NMag M("Sniper")
+{rifle      4 CombatRifle     P("rifle")    NMag
+{sniper     4 SniperRifle     P("sniper")   NMag
 {launcher   5 GrenadeLauncher P("rocket")   Ammo A("Rocket")
 {plasma     6 PlasmaRifle     P("plasma")   Ammo A("Plasma")
 {bfg        7 BFG9000         P("cannon")   Ammo A("Cannon")
@@ -23,30 +23,30 @@ Percent denotes flags. Any other text is ignored by the parser.
 
 :cybermage
 {c_fist    1 CFist         Placeholder2  None
-{c_mateba  2 Mateba        P("mateba")   NMag             M("Mateba")
-{c_rifle   3 ShockRifle    P("erifle")   NMag             M("ShockRifle")
-{c_spas    3 SPAS          P("cshotgun") AMag A("Shell")  M("SPAS")
-{c_smg     4 SMG           P("smg")      ZMag
-{c_sniper  5 IonRifle      P("ionrifle") ZAMg A("Rocket")
+{c_mateba  2 Mateba        P("mateba")   NMag
+{c_rifle   3 ShockRifle    P("erifle")   NMag
+{c_spas    3 SPAS          P("cshotgun") AMag A("Shell")
+{c_smg     4 SMG           P("smg")      NMag
+{c_sniper  5 IonRifle      P("ionrifle") AMag A("Rocket")
 {c_plasma  6 CPlasmaRifle  P("plasma")   Ammo A("Plasma")
 {c_shipgun 7 StarDestroyer P("shipgun")  Ammo A("Cannon")
 ;c_fist cfist c_mateba c_rifle c_spas c_smg c_sniper c_plasma c_shipgun
 
 %wf_magic
 {c_blade    0 Blade    Placeholder1 Ammo "Lith_Mana"
-{c_delear   0 Delear   Placeholder1 AMag "Lith_Mana" M("Delear")
+{c_delear   0 Delear   Placeholder1 AMag "Lith_Mana"
 {c_fire     0 Feuer    Placeholder1 Ammo "Lith_Mana"
 {c_rend     0 Rend     Placeholder1 Ammo "Lith_Mana"
 {c_hulgyon  0 Hulgyon  Placeholder1 Ammo "Lith_Mana"
-{c_starshot 0 StarShot Placeholder1 AMag "Lith_Mana" M("StarShot")
+{c_starshot 0 StarShot Placeholder1 AMag "Lith_Mana"
 {c_cercle   0 Cercle   Placeholder1 Ammo "Lith_Mana"
 %
 
 :darklord
-{d_700e     2 700Express  Placeholder2 ZMag
+{d_700e     2 700Express  Placeholder2 NMag
 {d_4bore    3 4Bore       Placeholder2 Ammo A("Shell")
 {d_launcher 3 ShrapnelGun Placeholder2 Ammo A("Shell")
-{d_minigun  4 Minigun     Placeholder2 ZMag
+{d_minigun  4 Minigun     Placeholder2 NMag
 {d_rocket   5 DualRocket  Placeholder2 Ammo A("Rocket")
 {d_fatmac   6 FatMac      Placeholder2 Ammo A("Plasma")
 {d_railgun  7 FortuneGun  Placeholder2 Ammo A("Cannon")

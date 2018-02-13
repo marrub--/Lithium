@@ -6,7 +6,6 @@ class Lith_Player : DoomPlayer
       Player.ForwardMove 2, 1;
       Player.AirCapacity 0;
       Player.GruntSpeed 16;
-      DamageFactor "Lith_PlayerMissile", 0;
       Species "Lith_Player";
       Lith_Player.ViewBob 1;
 
@@ -70,6 +69,9 @@ class Lith_Player : DoomPlayer
 
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
    {
+      if(mod == 'Lith_PlayerMissile')
+         return 0;
+
       CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
 
       let sv = Lith_HERMES.Instance();

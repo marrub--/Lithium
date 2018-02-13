@@ -166,6 +166,8 @@ default
    Weapon.UpSound "weapons/ionrifle/draw";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
+   Lith_Weapon.ScopeOutSound "weapons/ionrifle/zoomout";
+   Lith_Weapon.ScopeInSound "weapons/ionrifle/zoomin";
    Lith_Weapon.MagSize 6;
    
    +WEAPON.NOAUTOFIRE
@@ -194,15 +196,14 @@ ReadySelector:
    goto Ready;
 
 Deselect:
-   IONG A 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-   IONG A 0 A_ZoomFactor(1.0);
+   IONG A 0 Lith_A_ScopeOut;
 DeselectLoop:
    IONG AAA 0 A_Lower;
    IONG A 1;
    loop;
 
 Select:
-   IONG A 0 A_ZoomFactor(1.0);
+   IONG A 0 Lith_A_ScopeOut;
 SelectLoop:
    IONG AAA 0 A_Raise;
    IONG A 1;
@@ -286,20 +287,14 @@ FireAnim_Unscoped:
    IONG FGA 1;
    goto ChillCheck;
 FireAnim_Scoped:
-   SCOP C 1 bright A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.80);
-   SCOP C 1 bright A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.85);
-   SCOP C 1 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.90);
-   SCOP C 1 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.95);
-   SCOP C 3 A_ZoomFactor(1 +  CallACS("LPData", pdata_weaponzoom) / FIX);
+   SCOP C 1 bright Lith_A_ZoomFactorScoped(0.80);
+   SCOP C 1 bright Lith_A_ZoomFactorScoped(0.85);
+   SCOP C 1 Lith_A_ZoomFactorScoped(0.90);
+   SCOP C 1 Lith_A_ZoomFactorScoped(0.95);
+   SCOP C 3 Lith_A_ZoomFactorScoped(1.00);
 ChillCheck:
    #### # 0 A_JumpIf(invoker.m_charge < 1.3, "BoltAnim");
-   #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 0, "ChillOut0");
-   goto ChillOut1;
-ChillOut0:
-   #### # 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-   #### # 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-   #### # 0 A_PlaySound("weapons/ionrifle/zoomout", 7);
-ChillOut1:
+   #### # 0 Lith_A_ScopeOut;
    IONG A 1 offset(-1, 33) A_PlaySound("weapons/ionrifle/heat", CHAN_7);
    IONG A 0 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
    IONG A 2 offset(-4, 34);
@@ -360,31 +355,16 @@ BoltAnim:
    goto ReadySelector;
 AltFire:
    #### # 1;
-   #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut");
-   goto ScopeIn;
-ScopeOut:
-   #### # 0 A_TakeInventory("Lith_WeaponScopedToken", 1);
-   #### # 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-   #### # 0 A_PlaySound("weapons/ionrifle/zoomout", 7);
-   goto Ready;
-ScopeIn:
-   #### # 0 A_GiveInventory("Lith_WeaponScopedToken", 1);
-   #### # 0 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX));
-   #### # 0 A_PlaySound("weapons/ionrifle/zoomin", 6);
-   goto AltReady;
+   #### # 0 Lith_A_ScopeToggle;
+   goto ReadySelector;
 
 Reload:
-   TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, 1);
-   goto Reload1;
-   TNT1 A 0 A_PlaySound("weapons/ionrifle/zoomout", 7);
-   TNT1 A 0 A_TakeInventory("Lith_WeaponScopedToken", 999);
-   TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT);
-Reload1:
-   TNT1 A 0 Lith_A_JumpIfMagFull("ReadySelector");
+   TNT1 A 0 Lith_A_JumpIfMagFull;
+   TNT1 A 0 Lith_A_ScopeOut;
    IONG A 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 1 offset(-2, 34) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 1 offset(-4, 37) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   IONG A 1 offset(-9, 43) A_PlaySound("weapons/ionrifle/magout", CHAN_6);
+   IONG A 1 offset(-9, 43) A_PlaySound("weapons/ionrifle/magout", CHAN_7);
    IONG A 1 offset(-12, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 1 offset(-14, 52) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 2 offset(-12, 55) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
@@ -393,7 +373,7 @@ Reload1:
    IONG A 8 offset(-11, 60) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 8 offset(-12, 60) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 0 Lith_A_ReloadFinish;
-   IONG A 2 offset(-13, 59) A_PlaySound("weapons/ionrifle/magin", CHAN_7);
+   IONG A 2 offset(-13, 59) A_PlaySound("weapons/ionrifle/magin", CHAN_6);
    IONG A 2 offset(-11, 49);
    IONG A 2 offset(-11, 47);
    IONG A 7 offset(-11, 45);

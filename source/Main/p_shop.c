@@ -21,18 +21,20 @@ typedef struct shopitem_s
 // Static Objects ------------------------------------------------------------|
 
 static shopitem_t shopitems[] = {
-// {{"Name-----------", "BIP------------", Cost---}, pcl_name,     Cnt-, "Class---------------", [Flags]   },
-   {{"RocketAmmo",      null,              9000   }, pcl_any,      5,    "Lith_RocketAmmo"                 },
-   {{"PlasmaAmmo",      null,              75750  }, pcl_any,      1000, "Lith_PlasmaAmmo"                 },
-   {{"ChargeFist",      "ChargeFist",      100000 }, pcl_marine,   1,    "Lith_ChargeFist",      sif_weapon},
-   {{"Revolver",        "Revolver",        500000 }, pcl_marine,   1,    "Lith_Revolver",        sif_weapon},
-   {{"LazShotgun",      "LazShotgun",      1800000}, pcl_marine,   1,    "Lith_LazShotgun",      sif_weapon},
-   {{"SniperRifle",     "SniperRifle",     1800000}, pcl_marine,   1,    "Lith_SniperRifle",     sif_weapon},
-   {{"MissileLauncher", "MissileLauncher", 2500000}, pcl_outcasts, 1,    "Lith_MissileLauncher", sif_weapon},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, pcl_outcasts, 1,    "Lith_PlasmaDiffuser",  sif_weapon},
-   {{"Allmap",          null,              100000 }, pcl_any,      1,    "Allmap"                          },
-   {{"Infrared",        null,              70000  }, pcl_any,      1,    "Infrared"                        },
-   {{"RadSuit",         null,              100000 }, pcl_any,      1,    "RadSuit"                         },
+// {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]},
+   {{"RocketAmmo", null, 9000},  gA, 5,    "Lith_RocketAmmo"},
+   {{"PlasmaAmmo", null, 75750}, gA, 1000, "Lith_PlasmaAmmo"},
+
+   {{"ChargeFist",      "ChargeFist",      100000},  pM, 1,    "Lith_ChargeFist",      sif_weapon},
+   {{"Revolver",        "Revolver",        500000},  pM, 1,    "Lith_Revolver",        sif_weapon},
+   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1,    "Lith_LazShotgun",      sif_weapon},
+   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1,    "Lith_SniperRifle",     sif_weapon},
+   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1,    "Lith_MissileLauncher", sif_weapon},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1,    "Lith_PlasmaDiffuser",  sif_weapon},
+
+   {{"Allmap",   null, 100000}, gA, 1, "Allmap"},
+   {{"Infrared", null, 70000},  gA, 1, "Infrared"},
+   {{"RadSuit",  null, 100000}, gA, 1, "RadSuit"},
 };
 
 // Static Functions ----------------------------------------------------------|

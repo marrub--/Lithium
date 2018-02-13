@@ -211,8 +211,7 @@ FireThatShit:
 
 AltModeChanger:
    TNT1 A 0 {
-      if(GetPlayerInput(MODINPUT_BUTTONS) & BT_ALTATTACK)
-         switch(invoker.m_mode)
+      if(player.buttons & BT_ALTATTACK) switch(invoker.m_mode)
       {
       case 0: ++invoker.m_mode; A_PlaySound("weapons/rocket/setalt");  break;
       case 1: ++invoker.m_mode; A_PlaySound("weapons/rocket/setalt1"); break;

@@ -5,7 +5,7 @@ default
    Tag "$LITH_TXT_INFO_SHORT_700Express";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
-   Lith_Weapon.MagSize 7;
+   Lith_Weapon.MagSize 4;
    +WEAPON.NOAUTOFIRE;
 }
 
@@ -19,16 +19,16 @@ SpawnPickup:
 states(weapon)
 {
 Ready:
-   MTBG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 
 Deselect:
-   MTBG AAA 0 A_Lower;
-   MTBG A 1;
+   700E AAA 0 A_Lower;
+   700E A 1;
    loop;
 Select:
-   MTBG AAA 0 A_Raise;
-   MTBG A 1;
+   700E AAA 0 A_Raise;
+   700E A 1;
    loop;
 
 Fire:
@@ -53,7 +53,7 @@ Fire:
    MTBG A 2 offset(0, 34);
    MTBG A 2 offset(0, 33);
    MTBG A 1 offset(0, 32);
-   MTBG A 1;
+   MTBG A 5;
    goto Ready;
 
 Reload:

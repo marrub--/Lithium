@@ -13,6 +13,10 @@ class Lith_DarkLordPlayer : Lith_Player
       Health 125;
       Tag "DarkLord";
    }
+
+   void Lith_SwapSubweapon()
+   {
+   }
 }
 
 class Lith_DWeapon : Lith_Weapon

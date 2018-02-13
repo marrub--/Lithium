@@ -34,22 +34,25 @@ actor Lith_SniperRifleMagazine2 : Lith_SniperRifleMagazine
    }
 }
 
-actor Lith_SniperShotsFired : Inventory
-{
-   Inventory.MaxAmount 8
-}
-
 actor Lith_SniperRifle : Lith_MWeapon
 {
    Tag "$LITH_TXT_INFO_SHORT_SniperRifle"
    Weapon.UpSound "weapons/sniper/draw"
    Weapon.SlotNumber 4
    Weapon.SlotPriority 0.9
+   Lith_Weapon.ScopeOutSound "weapons/sniper/zoomout"
+   Lith_Weapon.ScopeOutSound "weapons/sniper/zoomin"
+   Lith_Weapon.ScopeZoom 1.2
+   Lith_Weapon.MagSize 8
    
    +WEAPON.NOAUTOFIRE
    
-   states
+   states(weapon)
    {
+   ReadySelector:
+      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "AltReady")
+      goto Ready
+   
    AltReady:
       SCOP A 1 Lith_A_Ready(WRF_NOBOB|WRF_ALLOWRELOAD)
       loop
@@ -57,36 +60,29 @@ actor Lith_SniperRifle : Lith_MWeapon
       SNPG A 1 Lith_A_Ready(WRF_ALLOWRELOAD)
       loop
    
-   ReadySelector:
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "AltReady")
-      goto Ready
-   
    Deselect:
-      SNPG A 0 A_TakeInventory("Lith_WeaponScopedToken", 1)
-      SNPG A 0 A_ZoomFactor(1.0)
+      SNPG A 0 Lith_A_ScopeOut
    DeselectLoop:
       SNPG AAA 0 A_Lower
       SNPG A 1
       loop
    
    Select:
-      SNPG A 0 A_ZoomFactor(1.0)
+      SNPG A 0 Lith_A_ScopeOut
    SelectLoop:
       SNPG AAA 0 A_Raise
       SNPG A 1
       loop
    
    Fire:
-      TNT1 A 0 A_JumpIfInventory("Lith_SniperShotsFired", 0, "Reload")
-      TNT1 A 0 A_GiveInventory("Lith_SniperShotsFired", 1)
-      
+      TNT1 A 0 Lith_A_JumpIfMagEmpty
+      TNT1 A 0 Lith_A_MagIncr
       TNT1 A 0 A_GunFlash("DummyFlash")
       TNT1 A 0 A_FireBullets(0, 0, 1, 161, "Lith_SniperBullet", FBF_NORANDOM)
       TNT1 A 0 A_Recoil(1)
       TNT1 A 0 Lith_A_RecoilUp(2)
       TNT1 A 0 A_PlaySound("weapons/sniper/fire", CHAN_WEAPON)
       TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireAnim_Scoped")
-      
    FireAnim_Unscoped:
       SNPG B 1 bright
       TNT1 A 0 Lith_A_RecoilDn(0.25)
@@ -101,15 +97,15 @@ actor Lith_SniperRifle : Lith_MWeapon
       goto BoltAnim
    
    FireAnim_Scoped:
-      SCOP A 1 bright A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.80)
+      SCOP A 1 bright Lith_A_ZoomFactorScoped(0.80)
       TNT1 A 0 Lith_A_RecoilDn(0.25)
-      SCOP A 1 bright A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.85)
+      SCOP A 1 bright Lith_A_ZoomFactorScoped(0.85)
       TNT1 A 0 Lith_A_RecoilDn(0.25)
-      SCOP A 1 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.90)
+      SCOP A 1 Lith_A_ZoomFactorScoped(0.90)
       TNT1 A 0 Lith_A_RecoilDn(0.25)
-      SCOP A 1 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX) * 0.95)
+      SCOP A 1 Lith_A_ZoomFactorScoped(0.95)
       TNT1 A 0 Lith_A_RecoilDn(0.25)
-      SCOP A 3 A_ZoomFactor(1 +  CallACS("LPData", pdata_weaponzoom) / FIX)
+      SCOP A 3 Lith_A_ZoomFactorScoped(1.00)
       
    BoltAnim:
       "####" "#" 0 Lith_A_RecoilDn(0.25)
@@ -151,35 +147,19 @@ actor Lith_SniperRifle : Lith_MWeapon
    
    AltFire:
       "####" A 1
-      "####" A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ScopeOut")
-      goto ScopeIn
-   ScopeOut:
-      "####" A 0 A_TakeInventory("Lith_WeaponScopedToken", 1)
-      "####" A 0 A_ZoomFactor(1.0, ZOOM_INSTANT)
-      "####" A 0 A_PlaySound("weapons/sniper/zoomout", 6)
-      goto Ready
-   ScopeIn:
-      "####" A 0 A_GiveInventory("Lith_WeaponScopedToken", 1)
-      "####" A 0 A_ZoomFactor(1 + (CallACS("LPData", pdata_weaponzoom) / FIX))
-      "####" A 0 A_PlaySound("weapons/sniper/zoomin", 6)
-      goto AltReady
+      "####" A 0 Lith_A_ScopeToggle
+      goto ReadySelector
    
    Reload:
-      TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, 1)
-      goto Reload1
-      TNT1 A 0 A_PlaySound("weapons/sniper/zoomout", 6)
-      TNT1 A 0 A_TakeInventory("Lith_WeaponScopedToken", 999)
-      TNT1 A 0 A_ZoomFactor(1.0, ZOOM_INSTANT)
-   Reload1:
-      TNT1 A 0 A_JumpIfInventory("Lith_SniperShotsFired", 1, 1)
-      goto ReadySelector
+      TNT1 A 0 Lith_A_JumpIfMagFull
+      TNT1 A 0 Lith_A_ScopeOut
       SNPG A 1
       SNPG A 1 offset(-2, 34)
       SNPG A 1 offset(-4, 37)
       SNPG A 1 offset(-9, 43) A_PlaySound("weapons/sniper/magout", CHAN_6)
       SNPG A 1 offset(-12, 47)
       SNPG A 1 offset(-14, 52)
-      SNPG A 0 A_JumpIfInventory("Lith_SniperShotsFired", 0, 2)
+      SNPG A 0 Lith_A_JumpIfMagEmpty(2)
       SNPG A 0 A_SpawnItemEx("Lith_SniperRifleMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0)
       goto Reload2
       SNPG A 0 A_SpawnItemEx("Lith_SniperRifleMagazine",  8,-1,20, frandom(0,1),frandom(-1,-2),0)
@@ -188,7 +168,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       SNPG A 3 offset(-11, 57)
       SNPG A 8 offset(-10, 60)
       SNPG A 8 offset(-11, 60)
-      SNPG A 0 A_TakeInventory("Lith_SniperShotsFired", 999)
+      SNPG A 0 Lith_A_ReloadFinish
       SNPG A 2 offset(-13, 59) A_PlaySound("weapons/sniper/magin", CHAN_7)
       SNPG A 2 offset(-11, 49)
       SNPG A 2 offset(-11, 47)

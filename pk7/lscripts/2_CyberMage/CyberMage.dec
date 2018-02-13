@@ -8,7 +8,6 @@
 #include "lscripts/2_CyberMage/Weapons/7_StarDestroyer.dec"
 
 #include "lscripts/2_CyberMage/Weapons/Magic/1_Blade.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/2_Delear.dec"
 #include "lscripts/2_CyberMage/Weapons/Magic/3_Feuer.dec"
 #include "lscripts/2_CyberMage/Weapons/Magic/4_Rend.dec"
 #include "lscripts/2_CyberMage/Weapons/Magic/5_Hulgyon.dec"

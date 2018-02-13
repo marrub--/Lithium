@@ -15,19 +15,19 @@ struct cupgdef
 };
 
 static struct cupgdef const cdefs[] = {
-   {pcl_marine, cupg_weapninter, "MWeapnInter", "WeapnInter"},
-   {pcl_marine, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
-   {pcl_marine, cupg_armorinter, "MArmorInter", "ArmorInter"},
-   {pcl_marine, cupg_hasupgr1,   "MUpgr1",      "CBIUpgr1"  },
-   {pcl_marine, cupg_hasupgr2,   "MUpgr2",      "CBIUpgr2"  },
-   {pcl_marine, cupg_rdistinter, "MRDistInter"              },
+   {pM, cupg_weapninter, "MWeapnInter", "WeapnInter"},
+   {pM, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
+   {pM, cupg_armorinter, "MArmorInter", "ArmorInter"},
+   {pM, cupg_hasupgr1,   "MUpgr1",      "CBIUpgr1"  },
+   {pM, cupg_hasupgr2,   "MUpgr2",      "CBIUpgr2"  },
+   {pM, cupg_rdistinter, "MRDistInter"              },
 
-   {pcl_cybermage, cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
-   {pcl_cybermage, cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
-   {pcl_cybermage, cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
-   {pcl_cybermage, cupg_c_slot6spell, "CSlot6Spell", "StarShot"},
-   {pcl_cybermage, cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
-   {pcl_cybermage, cupg_c_rdistinter, "CRDistInter"            },
+   {pC, cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
+   {pC, cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
+   {pC, cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
+   {pC, cupg_c_slot6spell, "CSlot6Spell", "StarShot"},
+   {pC, cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
+   {pC, cupg_c_rdistinter, "CRDistInter"            },
 };
 
 //

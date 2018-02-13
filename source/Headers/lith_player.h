@@ -45,6 +45,27 @@ GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
 enum
 {
+   // Shorthand
+   pM = pcl_marine,
+   pC = pcl_cybermage,
+   pI = pcl_informant,
+   pW = pcl_wanderer,
+   pA = pcl_assassin,
+   pD = pcl_darklord,
+   pT = pcl_thoth,
+
+   gO = pcl_outcasts,
+   gM = pcl_missioners,
+   gI = pcl_intruders,
+   gA = pcl_any,
+   gH = pcl_human,
+   gN = pcl_nonhuman,
+   gR = pcl_robot,
+   gX = pcl_mods,
+};
+
+enum
+{
    pro_none,
    pro_male,
    pro_female,
