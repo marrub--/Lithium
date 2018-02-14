@@ -619,8 +619,12 @@ void Lith_LoadMapDialogue(void)
       dlgdefs = null;
    }
 
-   __str script = LanguageNull("LITH_DLG_SCRIPT_%tS", PRINTNAME_LEVEL);
-   if(!script) return;
+   __str script;
+   ifw(int lmp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL)),
+      lmp == -1)
+      return;
+   else
+      script = W_Read(lmp);
 
    dlgparsestate_t d = {{.bbeg = 4, .bend = 10,
       .fp = __fmemopen_str(script, ACS_StrLen(script), c"r")}};

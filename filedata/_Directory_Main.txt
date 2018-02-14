@@ -46,15 +46,6 @@ parse file: Arsenal_Upgrades.txt
 comment: EOF
 
 
--- Dialogue -------------------------------------------------------------------
-in file language.info.dialogue.txt
-put file: Dialogue_TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
-put file: Dialogue_M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
-put file: Dialogue_M1A2.txt    -> LITH_DLG_SCRIPT_M1A2
-
-comment: EOF
-
-
 -- Misc -----------------------------------------------------------------------
 in file language.log.en.txt
 parse file: Log.txt

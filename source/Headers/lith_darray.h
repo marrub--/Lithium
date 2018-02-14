@@ -15,12 +15,10 @@
    __VA_ARGS__ size_t name##C, name##S
 
 #define Vec_GrowN(vec, n, g) \
-   do { \
-      if((vec##C) + (n) > (vec##S)) { \
-         (vec##S) += (n) + (g); \
-         (vec##V) = Ralloc((vec##V), sizeof(*(vec##V)) * (vec##S)); \
-      } \
-   } while(0)
+   ((vec##C) + (n) > (vec##S) ? \
+      ((vec##S) += (n) + (g), \
+       (vec##V) = Ralloc((vec##V), sizeof(*(vec##V)) * (vec##S))) : \
+      (void *)0)
 
 #define Vec_Grow(vec, n) Vec_GrowN(vec, n, 8)
 

@@ -4,15 +4,15 @@
 
 #include <ctype.h>
 
+#define textNext() Vec_Grow(tok->text, 1), Vec_Next(tok->text)
+
 #define tokText(fn) \
    do { \
       for(int pc = 0; fn(ch); pc = ch, getch()) { \
          advLine(); \
-         Vec_Grow(tok->text, 1); \
-         Vec_Next(tok->text) = ch; \
+         textNext() = ch; \
       } \
-      Vec_Grow(tok->text, 1); \
-      Vec_Next(tok->text) = '\0'; \
+      textNext() = '\0'; \
       unget(); \
    } while(0)
 
@@ -128,9 +128,7 @@ begin:;
             }
 
             advLine();
-
-            Vec_Grow(tok->text, 1);
-            Vec_Next(tok->text) = ch;
+            textNext() = ch;
          }
 
          unget();
@@ -156,16 +154,11 @@ begin:;
 
    case '\'': tok1(tok_charac); goto string;
    case '"':  tok1(tok_string); goto string;
-   string: {
-      int i, beg;
-      for(i = 0, beg = ch; getch() != beg && !feof(fp);) {
-         Vec_Grow(tok->text, 1);
-         Vec_Next(tok->text) = ch;
-      }
-      Vec_Grow(tok->text, 1);
-      Vec_Next(tok->text) = '\0';
+   string:
+      for(int i = 0, beg = ch; getch() != beg && !feof(fp);)
+         textNext() = ch;
+      textNext() = '\0';
       return;
-   }
    }
 
    if(isblank(ch))
@@ -177,8 +170,7 @@ begin:;
    else if(isdigit(ch) || ch == '.' || ch == '-')
    {
       tok1(tok_number);
-      Vec_Grow(tok->text, 1);
-      Vec_Next(tok->text) = ch;
+      textNext() = ch;
       getch();
       tokText(IsNum);
    }
@@ -190,9 +182,8 @@ begin:;
    else
    {
       tok1(tok_chrseq);
-      Vec_Grow(tok->text, 2);
-      Vec_Next(tok->text) = ch;
-      Vec_Next(tok->text) = '\0';
+      textNext() = ch;
+      textNext() = '\0';
    }
 }
 
