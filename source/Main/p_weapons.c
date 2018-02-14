@@ -240,8 +240,8 @@ void Lith_PlayerPreWeapons(player_t *p)
 
          if(wep->ammotype & AT_Ammo)
          {
-            wep->ammomax = InvMax(0, wep->ammoclass);
-            wep->ammocur = InvNum(   wep->ammoclass);
+            wep->ammomax = InvMax(wep->ammoclass);
+            wep->ammocur = InvNum(wep->ammoclass);
          }
       }
 

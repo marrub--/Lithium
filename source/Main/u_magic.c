@@ -178,6 +178,8 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
 //
 void Upgr_Magic_Render(player_t *p, upgrade_t *upgr)
 {
+   if(!p->hudenabled) return;
+
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
    int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
 

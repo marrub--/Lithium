@@ -46,7 +46,7 @@ static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    int cur = InvNum(item->classname);
-   int max = InvMax(0, item->classname);
+   int max = InvMax(item->classname);
    return max == 0 || cur < max;
 }
 

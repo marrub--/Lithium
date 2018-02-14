@@ -56,6 +56,10 @@ Case(StealthSys)
    D(StealthSys)
    U(StealthSys)
 
+Case(Subweapons)
+   U(Subweapons)
+   R(Subweapons)
+
 // Weapon Upgrades -----------------------------------------------------------|
 Case(AutoReload)
    A(AutoReload)

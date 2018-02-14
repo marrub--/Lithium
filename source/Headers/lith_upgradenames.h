@@ -21,6 +21,9 @@ enum // Lith_UpgradeName
    UPGR_SoulCleaver,
    UPGR_StealthSys,
 
+   // Body (Dark Lord)
+   UPGR_Subweapons,
+
    // Weapon
    UPGR_AutoReload,
    UPGR_AutoPistol,

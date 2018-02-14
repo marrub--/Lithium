@@ -33,6 +33,7 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
    {{"Magic",       "Magic",        0      }, pC,      UC_Body, 0,  0.00},
    {{"SoulCleaver", "SoulCleaver",  1100000}, pC,      UC_Body, 0,  0.00},
    {{"StealthSys",  "StealthSys",   1800450}, pC,      UC_Body, 0,  0.00},
+   {{"Subweapons",  "Subweapons",   0      }, pD,      UC_Body, 0,  0.00},
 
    {{"AutoReload",  "AutoReload",   950050 }, gO, UC_Weap, 2, 0.00},
    {{"AutoPistol",  null,           140940 }, pM, UC_Weap, 0, 0.00, UG_Pistol},

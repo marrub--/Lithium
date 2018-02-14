@@ -66,12 +66,15 @@ int Lith_WindupTime()
 
 action(weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 {
-   int flags = WRF_NOFIRE;
-   if(invoker.m_windup ~== 0)
-      flags |= WRF_ALLOWRELOAD;
+   int flags = WRF_NOPRIMARY;
+   if(invoker.m_windup ~== 0) flags |= WRF_ALLOWRELOAD;
+   else                       flags |= WRF_NOSECONDARY;
+
    invoker.m_laststate = lb;
+
    A_SetTics(invoker.Lith_WindupTime());
    Lith_A_Ready(flags);
+
    if(player.buttons & BT_ATTACK && level.totaltime & 1)
    {
       if(!invoker.Lith_MagEmpty())
@@ -117,6 +120,8 @@ SpawnPickup:
 
 states(weapon)
 {
+ReadySelector:
+   TNT1 A 0 {return ResolveState(invoker.m_laststate);}
 Ready:
    MNGG A 1 Lith_A_MinigunReady("Ready", "Fire");
    MNGG A 0 Lith_A_MinigunPostReady("Ready2");
@@ -156,7 +161,7 @@ Fire3:
    goto Ready;
 
 Reload:
-   MNGG # 1 Lith_A_JumpIfMagFull(invoker.m_laststate);
+   MNGG # 1 Lith_A_JumpIfMagFull;
    MNGG # 1 offset(2, 34) {invoker.m_reloading = true;}
    MNGG # 1 offset(4, 37);
    MNGG # 1 offset(9, 43) A_PlaySound("weapons/minigun/magout", CHAN_5);
@@ -183,12 +188,8 @@ Reload:
    MNGG # 3 offset(-1, 37);
    MNGG # 2 offset(-1, 34);
    MNGG # 1;
-   MNGG # 0 {
-      invoker.m_reloading = false;
-      return ResolveState(invoker.m_laststate);
-   }
-ReloadEnd:
-   goto Ready;
+   MNGG # 0 {invoker.m_reloading = false;}
+   goto ReadySelector;
 }
 
 // EOF

@@ -102,7 +102,7 @@
 
 // Convenience names
 #define InvNum  ACS_CheckInventory
-#define InvMax  ACS_GetMaxInventory
+#define InvMax(arg) ACS_GetMaxInventory(0, arg)
 #define InvTake ACS_TakeInventory
 #define InvGive ACS_GiveInventory
 
