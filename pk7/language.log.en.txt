@@ -109,3 +109,121 @@
 "LITH_TXT_LOG_BossWarnMod" = "$LITH_TXT_LOG_BossWarnStan";
 
 // EOF
+
+// Flags:
+
+// 1: Two copies of name
+
+// 2: Very rare
+
+// 4: Randomized certainty
+"LITH_PICKUP_NUM" = "68";
+"LITH_PICKUP_000" = "You got the %S!";
+"LITH_PICKUP_001" = "Oh yes, the %S.";
+"LITH_PICKUP_002" = "The %S has been acquired.";
+"LITH_PICKUP_003" = "Snatched up a %S!";
+"LITH_PICKUP_004" = "Oh baby, it's time for %S!";
+"LITH_PICKUP_005" = "There was a %S here, but you stole it. It is now in your inventory. You Monster.";
+"LITH_PICKUP_006" = "Acquired a %S.";
+"LITH_PICKUP_007" = "The %S is safe and sound with you.";
+"LITH_PICKUP_008" = "I bet that %S totally wanted you to pick it up.";
+"LITH_PICKUP_009" = "It's not like the %S wanted you to pick it up or anything.";
+"LITH_PICKUP_010" = "It's a %S... I think.";
+"LITH_PICKUP_011_FLAGS" = "4";
+"LITH_PICKUP_011" = "You thought you picked up a %S ... %S";
+"LITH_PICKUP_012" = "1 in 3 %Ss do not approve of being picked up.";
+"LITH_PICKUP_013" = "Studies show that normal people do not steal %Ss.";
+"LITH_PICKUP_014" = "OH NO, NOT %S";
+"LITH_PICKUP_015_FLAGS" = "4";
+"LITH_PICKUP_015" = "What? Is that.. %S? ... %S";
+"LITH_PICKUP_016" = "Magnetically attached a %S to your body, crushing your every bone.";
+"LITH_PICKUP_017" = "DavidPH was here, nyu.";
+"LITH_PICKUP_018" = "%S-senpai still won't notice you.";
+"LITH_PICKUP_019" = "Grabbed a %S!";
+"LITH_PICKUP_020" = "Snatched up a %S!";
+"LITH_PICKUP_021" = "Embraced the %S carefully!";
+"LITH_PICKUP_022" = "There's a thing that looks like a %S here. You picked it up. Past-tense.";
+"LITH_PICKUP_023" = "Another day, another %S.";
+"LITH_PICKUP_024" = "Xaser didn't make this %S, so it sucks. You should drop it.";
+"LITH_PICKUP_025" = "\cg%S. Finally.";
+"LITH_PICKUP_026_FLAGS" = "4";
+"LITH_PICKUP_026" = "The %S. %S";
+"LITH_PICKUP_027" = "I don't know about you, but I quite like the %S. I'll pick it up for you.";
+"LITH_PICKUP_028" = "...Huh? You do something? I wasn't paying attention.";
+"LITH_PICKUP_029_FLAGS" = "1";
+"LITH_PICKUP_029" = "The %S. It is very much a %S.";
+"LITH_PICKUP_030" = "%S, desu.";
+"LITH_PICKUP_031" = "?? ??? ???? ?? ????????? ???? ??";
+"LITH_PICKUP_032_FLAGS" = "1";
+"LITH_PICKUP_032" = "My %S lies over the ocean, my %S lies over the sea.";
+"LITH_PICKUP_033" = "Liberated the %S from gypsies.";
+"LITH_PICKUP_034" = "Granted the %S true independence.";
+"LITH_PICKUP_035_FLAGS" = "1";
+"LITH_PICKUP_035" = "The %S, for maximum %S-ing.";
+"LITH_PICKUP_036_FLAGS" = "4";
+"LITH_PICKUP_036" = "Brutal %S, featuring 5x more explosions! .. %S";
+"LITH_PICKUP_037_FLAGS" = "2";
+"LITH_PICKUP_037" = "aeiou";
+"LITH_PICKUP_038" = "What is a man? A miserable pile of %Ss!";
+"LITH_PICKUP_039" = "The %S was delicious.";
+"LITH_PICKUP_040_FLAGS" = "1";
+"LITH_PICKUP_040" = "There's plenty of %Ss in the sea, but you're the only %S for me.";
+"LITH_PICKUP_041" = "Disassembled the %S and reassembled it into your inventory.";
+"LITH_PICKUP_042" = "The %S is keepin' it real, as usual.";
+"LITH_PICKUP_043" = "The %S finds you agreeable, and lets you pick it up.";
+"LITH_PICKUP_044" = "You have attained true %S.";
+"LITH_PICKUP_045_FLAGS" = "2";
+"LITH_PICKUP_045" = "DRUGS";
+"LITH_PICKUP_046" = ">%S >2012";
+"LITH_PICKUP_047" = "TNT1 A 0 A_TakeInventory(\"%S\" 1)";
+"LITH_PICKUP_048" = "Super rare %S acquired!";
+"LITH_PICKUP_049" = "Sacked the %S!";
+"LITH_PICKUP_050" = "The %S is your new waifu.";
+"LITH_PICKUP_051" = "The %S is grateful for your presence.";
+"LITH_PICKUP_052" = "The %S appears to be emitting hatred.";
+"LITH_PICKUP_053" = "[%S intensifies]";
+"LITH_PICKUP_054" = "Ah, yes, the %S.";
+"LITH_PICKUP_055" = "Wait, the %S is resonating!";
+"LITH_PICKUP_056" = "Oh, I guess it's an %S.";
+"LITH_PICKUP_057" = "THIS IS SOME KIND OF %S";
+"LITH_PICKUP_058" = "A perfectly proportioned, rare breed of %S appears.";
+"LITH_PICKUP_059" = "%S version 7.0 installed.";
+"LITH_PICKUP_060" = "Hazardous %S contained.";
+"LITH_PICKUP_061" = "Warning: Dangerous %S levels detected.";
+"LITH_PICKUP_062" = "Oh, yeah, I'm *sure* the %S will help.";
+"LITH_PICKUP_063" = "YOU WOULDN'T DOWNLOAD A %S";
+"LITH_PICKUP_064" = "Vital %S destroyed.";
+"LITH_PICKUP_065" = "Explosive %S apparatus destroyed.";
+"LITH_PICKUP_066" = "The %S shoots back at you, but you were stronger.";
+"LITH_PICKUP_067" = "why are you reading this? eyes on the road, dumpass.";
+"LITH_PICKUP_068_FLAGS" = "2";
+"LITH_PICKUP_068" =
+   "What the fuck did you just fucking say about %S, you little bitch?\n"
+   "I'll have you know I graduated top of my class in the Navy Seals,\n"
+   "and I've been involved in numerous secret raids on Al-Quaeda, and I\n"
+   "have over 300 confirmed kills.\n"
+   "I am trained in gorilla warfare and I'm the top sniper\n"
+   "in the entire US armed forces.\n"
+   "You are nothing to me but just another target. I will wipe you the\n"
+   "fuck out with precision the likes of which has never been seen before\n"
+   "on this Earth, mark my fucking words.\n"
+   "You think you can get away with saying that shit to me over the Internet?\n"
+   "Think again, fucker. As we speak I am contacting my secret network of\n"
+   "spies across the USA and your IP is being traced right now so you\n"
+   "better prepare for the storm, maggot.\n"
+   "The storm that wipes out the pathetic little thing you call your life.\n"
+   "You're fucking dead, kid.\n"
+   "I can be anywhere, anytime, and I can kill you in over\n"
+   "seven hundred ways, and that's just with my bare hands. Not only am I\n"
+   "extensively trained in unarmed combat, but I have access to the entire\n"
+   "arsenal of the United States Marine Corps and I will use it to its full\n"
+   "extent to wipe your miserable ass off the face of the continent, you little shit.\n"
+   "If only you could have known what unholy retribution your little \"clever\"\n"
+   "comment was about to bring down upon you, maybe you would have held\n"
+   "your fucking tongue. But you couldn't, you didn't, and now you're paying\n"
+   "the price, you goddamn idiot. I will shit fury all over you\n"
+   "and you will drown in it. You're fucking dead, kiddo.";
+
+// EOF
+
+// EOF

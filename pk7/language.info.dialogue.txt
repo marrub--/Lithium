@@ -3,6 +3,8 @@
 [enu default]
 
 "LITH_DLG_SCRIPT_TESTMAP" =
+
+// Dialogue_TESTMAP.txt
    "// Dialogue ------------------------------------------------------------------|\n"
    "\n"
    "dialogue 1\n"
@@ -220,6 +222,8 @@
    "\n"
    "// EOF";
 "LITH_DLG_SCRIPT_M1A1" =
+
+// Dialogue_M1A1.txt
    "// Terminals -----------------------------------------------------------------|\n"
    "\n"
    "//\n"
@@ -364,6 +368,8 @@
    "\n"
    "// EOF";
 "LITH_DLG_SCRIPT_M1A2" =
+
+// Dialogue_M1A2.txt
    "// Terminals -----------------------------------------------------------------|\n"
    "\n"
    "//\n"
@@ -412,3 +418,5 @@
    "}\n"
    "\n"
    "// EOF";
+
+// EOF

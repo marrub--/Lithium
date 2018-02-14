@@ -1,5 +1,0 @@
-[enu default]
-
-LITH_INV_SIGIL = "\cgDi\civi\cksi\cdon \chSi\ctgi\cal.";
-
-// EOF

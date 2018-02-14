@@ -55,7 +55,7 @@ dec: decompat.rb $(DECOMPAT_INPUTS)
 	@./decompat.rb $(DECOMPAT_INPUTS)
 
 text: compilefs.rb
-	@cd filedata; ../compilefs.rb Directory.txt
+	@cd filedata; ../compilefs.rb _Directory.txt
 
 clean:
 	@rm -f $(MAIN_OUTPUTS) $(LIB_OUTPUTS)

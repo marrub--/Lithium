@@ -76,6 +76,7 @@ def procdir inf, type, arg
    when "put file"
       fnam, out = split_arg arg, "->"
       inf[:f].write "\"#{out}\" =\n"
+      comment inf[:f], " " + fnam
       buf_lines inf[:f], :just, open(fnam, "rt").read.chomp.lines
    when "parse file"
       parse_file inf[:f], open(arg, "rt")

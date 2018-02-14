@@ -368,5 +368,3 @@ UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 == LITH_TXT_UPGRADE_TITLE_InstaDeath | Instant Death
 @@ LITH_TXT_UPGRADE_EFFEC_InstaDeath
 Upon losing health, you instantly die.
-
-## EOF

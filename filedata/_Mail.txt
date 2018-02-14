@@ -1,0 +1,73 @@
+The flags for mail messages are as follows:
+bit 1 - Does not print a message when received
+bit 2 - Message is the same for all player classes
+
+put data: 1 -> LITH_TXT_MAIL_FLAG_Intro
+put data: 2 -> LITH_TXT_MAIL_FLAG_JamesDefeated
+put data: 2 -> LITH_TXT_MAIL_FLAG_MakarovDefeated
+put data: 2 -> LITH_TXT_MAIL_FLAG_IsaacDefeated
+
+-- All Classes ----------------------------------------------------------------
+put file: Mail/Phantom_James.txt -> LITH_TXT_MAIL_BODY_JamesDefeated
+put data: jam0s@g0n0j0t00.1025   -> LITH_TXT_MAIL_SEND_JamesDefeated
+
+put file: Mail/Phantom_Makarov.txt -> LITH_TXT_MAIL_BODY_MakarovDefeated
+put data: mak666v@org.r\.\\\-      -> LITH_TXT_MAIL_SEND_MakarovDefeated
+
+put file: Mail/Phantom_Isaac.txt -> LITH_TXT_MAIL_BODY_IsaacDefeated
+put data: isaac@syn.400khz       -> LITH_TXT_MAIL_SEND_IsaacDefeated
+
+-- Marine ---------------------------------------------------------------------
+put file: Mail/Intro_Marine.txt -> LITH_TXT_MAIL_BODY_IntroStan
+put data: ALambert@corp.OFMD    -> LITH_TXT_MAIL_SEND_IntroStan
+put data: 13:00 25-7-49         -> LITH_TXT_MAIL_TIME_IntroStan
+put data: 610                   -> LITH_TXT_MAIL_SIZE_IntroStan
+
+put file: Mail/Cluster1_Marine.txt -> LITH_TXT_MAIL_BODY_Cluster1Stan
+put data: ALambert@corp.OFMD       -> LITH_TXT_MAIL_SEND_Cluster1Stan
+
+put file: Mail/Cluster2_Marine.txt -> LITH_TXT_MAIL_BODY_Cluster2Stan
+put data: ALambert@corp.OFMD       -> LITH_TXT_MAIL_SEND_Cluster2Stan
+
+put file: Mail/Cluster3_Marine.txt -> LITH_TXT_MAIL_BODY_Cluster3Stan
+put data: ALambert@corp.OFMD       -> LITH_TXT_MAIL_SEND_Cluster3Stan
+
+put file: Mail/Intro2_Marine.txt      -> LITH_TXT_MAIL_BODY_PhantomStan
+put data: htic0@gov.<hidden>.mailserv -> LITH_TXT_MAIL_SEND_PhantomStan
+put data: 330                         -> LITH_TXT_MAIL_SIZE_PhantomStan
+
+put file: Mail/Secret1_Marine.txt -> LITH_TXT_MAIL_BODY_Secret1Stan
+put data: Saved Buffer            -> LITH_TXT_MAIL_NAME_Secret1Stan
+
+put file: Mail/Secret2_Marine.txt -> LITH_TXT_MAIL_BODY_Secret2Stan
+put data: Saved Buffer            -> LITH_TXT_MAIL_NAME_Secret1Stan
+
+-- Cyber-Mage -----------------------------------------------------------------
+put file: Mail/Intro_CyberMage.txt -> LITH_TXT_MAIL_BODY_IntroJem
+put data: Saved Message            -> LITH_TXT_MAIL_NAME_IntroJem
+put data: <hidden>@corp.AOF        -> LITH_TXT_MAIL_SEND_IntroJem
+put data: 13:44 25-7-49            -> LITH_TXT_MAIL_TIME_IntroJem
+put data: 288                      -> LITH_TXT_MAIL_SIZE_IntroJem
+
+put file: Mail/Cluster1_CyberMage.txt -> LITH_TXT_MAIL_BODY_Cluster1Jem
+put data: Saved Text 104              -> LITH_TXT_MAIL_NAME_Cluster1Jem
+put data: 240                         -> LITH_TXT_MAIL_SIZE_Cluster1Jem
+
+put file: Mail/Cluster2_CyberMage.txt -> LITH_TXT_MAIL_BODY_Cluster2Jem
+put data: Saved Text 152              -> LITH_TXT_MAIL_NAME_Cluster2Jem
+put data: 288                         -> LITH_TXT_MAIL_SIZE_Cluster2Jem
+
+put file: Mail/Cluster3_CyberMage.txt -> LITH_TXT_MAIL_BODY_Cluster3Jem
+put data: Saved Text 244              -> LITH_TXT_MAIL_NAME_Cluster3Jem
+put data: 218                         -> LITH_TXT_MAIL_SIZE_Cluster3Jem
+
+put file: Mail/Intro2_CyberMage.txt -> LITH_TXT_MAIL_BODY_PhantomJem
+put data: order@corp.AOF            -> LITH_TXT_MAIL_SEND_PhantomJem
+
+put file: Mail/Secret1_CyberMage.txt -> LITH_TXT_MAIL_BODY_Secret1Jem
+put data: Saved Text 250             -> LITH_TXT_MAIL_NAME_Secret1Jem
+
+put file: Mail/Secret2_CyberMage.txt -> LITH_TXT_MAIL_BODY_Secret2Jem
+put data: Saved Text 252             -> LITH_TXT_MAIL_NAME_Secret2Jem
+
+EOF

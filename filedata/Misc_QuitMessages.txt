@@ -1,4 +1,3 @@
-
 ## Quit Messages -------------------------------------------------------------|
 == QUITMSG1 | Hold it, your contract isn't complete yet!
 == QUITMSG2 | I got nothing.

@@ -30,40 +30,44 @@ in file language.info.omake.en.txt
 parse file: Info_Extra.txt
 
 
--- CBI Pages ------------------------------------------------------------------
-in file language.shop.en.txt
-parse file: Shop.txt
+-- CBI Mail -------------------------------------------------------------------
+in file language.info.mail.en.txt
 
-in file language.upgrades.en.txt
-parse file: Upgrades.txt
+put file: Mail/Template.txt -> LITH_TXT_MAIL_TEMPLATE
+
+include _Mail.txt
+
+
+-- CBI Pages ------------------------------------------------------------------
+in file language.arsenal.en.txt
+parse file: Arsenal_Shop.txt
+parse file: Arsenal_Upgrades.txt
+
+comment: EOF
 
 
 -- Dialogue -------------------------------------------------------------------
 in file language.info.dialogue.txt
-put file: Dialogue for TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
-put file: Dialogue for M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
-put file: Dialogue for M1A2.txt    -> LITH_DLG_SCRIPT_M1A2
+put file: Dialogue_TESTMAP.txt -> LITH_DLG_SCRIPT_TESTMAP
+put file: Dialogue_M1A1.txt    -> LITH_DLG_SCRIPT_M1A1
+put file: Dialogue_M1A2.txt    -> LITH_DLG_SCRIPT_M1A2
+
+comment: EOF
 
 
 -- Misc -----------------------------------------------------------------------
 in file language.log.en.txt
 parse file: Log.txt
+parse file: Log_Pickups.txt
 
-in file language.pickups.en.txt
-parse file: Pickups.txt
+comment: EOF
 
 in file language.misc.en.txt
 parse file: Misc.txt
-parse file: Quit Messages.txt
-parse file: Changes.txt
-put file: Titlemap Opener.txt -> LITH_TXT_OPENER
+parse file: Misc_QuitMessages.txt
+parse file: Misc_Changes.txt
+put file: Misc_Opener.txt -> LITH_TXT_OPENER
 
-
--- CBI Mail -------------------------------------------------------------------
-in file language.info.mail.txt
-
-put file: Mail Template.txt -> LITH_TXT_MAIL_TEMPLATE
-
-include Mail.txt
+comment: EOF
 
 EOF

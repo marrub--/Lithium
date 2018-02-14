@@ -789,6 +789,8 @@
    "\cj| Added Thing ID validation to the player, which should possibly fix more\n"
    "\cj  advanced ZDoom maps breaking";
 "LITH_TXT_OPENER" =
+
+// Misc_Opener.txt
    "1626, New Era.\n"
    "\n"
    "A revelation in multiverse theory: Proof of other universes existing within the same dimension of time as our own universe.\n"
@@ -806,3 +808,5 @@
    "A portal to Hell itself.\n"
    "\n"
    "May those who attempt to stop it have godspeed, or Lithium shall forever rain from the skies.";
+
+// EOF
