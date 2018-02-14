@@ -193,6 +193,19 @@ static int MemClose(void *memdata)
 // Extern Functions ----------------------------------------------------------|
 
 //
+// W_Open
+//
+FILE *W_Open(__str fname, char const *rw)
+{
+   __str f;
+   ifw(int lmp = W_Find(fname), lmp == -1)
+      return null;
+   else
+      f = W_Read(lmp);
+   return __fmemopen_str(f, ACS_StrLen(f), rw);
+}
+
+//
 // Lith_NFOpen
 //
 // fopen() equivalent for netfiles.

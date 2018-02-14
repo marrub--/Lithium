@@ -106,10 +106,6 @@
 #define InvTake ACS_TakeInventory
 #define InvGive ACS_GiveInventory
 
-// Wads API
-#define W_Open(name) HERMES("FindLump", name)
-#define W_Read(lmp)  HERMES_S("ReadLump", lmp)
-
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)
 #define TS TICSECOND
