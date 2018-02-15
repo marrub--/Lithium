@@ -61,7 +61,20 @@ class Lith_Player : DoomPlayer
       else
          Shader.SetEnabled(player, "Lith_Rain", false);
 
-      for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+      if(CallACS("LWData", wdata_fun) & 2)
+         for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+      {
+         if(Inventory(it.thing))
+         {
+            let mo = Spawn("Lith_Bip", it.thing.pos);
+            mo.vel.x += frandom(-0.1, 0.1);
+            mo.vel.y += frandom(-0.1, 0.1);
+            mo.vel.z += 4;
+            mo.A_PlaySound("misc/pop", CHAN_BODY);
+            it.thing.destroy();
+         }
+      }
+      else for(let it = BlockThingsIterator.Create(self, 70); it.next();)
       {
          let inv = Lith_BasicPickup(it.thing);
 

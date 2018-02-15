@@ -37,4 +37,17 @@ actor Lith_GreyHam : HealthBonus
    }
 }
 
+actor Lith_Bip
+{
+   +BRIGHT
+   +NOBLOCKMAP
+
+   states
+   {
+   Spawn:
+      ABIP A -1
+      stop
+   }
+}
+
 // EOF
