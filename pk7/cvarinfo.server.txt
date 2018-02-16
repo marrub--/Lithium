@@ -8,5 +8,6 @@ server float lith_sv_scoremul     = 1.25;
 server bool  lith_sv_pauseinmenus = true;
 server int   lith_sv_autosave     = 0;
 server bool  lith_sv_nobosses     = false;
+server bool  lith_sv_nofullammo   = false;
 
 // EOF

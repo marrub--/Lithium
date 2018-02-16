@@ -7,6 +7,7 @@ if(p->num == 0) {
    ServerBool("Explode on death",  "lith_sv_revenge");
    ServerInt("Autosave Interval",  "min", "lith_sv_autosave", 0, 30);
    ServerBool("Disable phantoms",  "lith_sv_nobosses");
+   ServerBool("Don't pick up ammo when full",  "lith_sv_nofullammo");
 }
 
 Category("GUI");

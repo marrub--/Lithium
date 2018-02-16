@@ -1,4 +1,37 @@
-class Lith_Shell : Lith_ScoreItem replaces Shell
+class Lith_AmmoItem : Lith_ScoreItem abstract
+{
+   private meta int              m_amount, m_amount2;
+   private meta class<Inventory> m_type,   m_type2;
+
+   property Give:  m_type,  m_amount;
+   property Give2: m_type2, m_amount2;
+
+   override void PostBeginPlay()
+   {
+                  A_GiveInventory(m_type,  m_amount);
+      if(m_type2) A_GiveInventory(m_type2, m_amount2);
+
+      Super.PostBeginPlay();
+   }
+
+   private bool Lith_AmmoNotFull(Actor mo)
+   {
+      let i1 = mo.findInventory(m_type);
+      let i2 = mo.findInventory(m_type2);
+      return m_type  && (!i1 || i1.amount < i1.maxamount) ||
+             m_type2 && (!i2 || i2.amount < i2.maxamount);
+   }
+
+   override bool CanPickup(Actor mo)
+   {
+      if(Super.CanPickup(mo))
+         return !lith_sv_nofullammo || Lith_AmmoNotFull(mo);
+      else
+         return false;
+   }
+}
+
+class Lith_Shell : Lith_AmmoItem replaces Shell
 {
    default
    {
@@ -6,14 +39,9 @@ class Lith_Shell : Lith_ScoreItem replaces Shell
       Lith_BasicPickup.LogName "Shell";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Shell;
+      Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_Shell);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
@@ -22,7 +50,7 @@ class Lith_Shell : Lith_ScoreItem replaces Shell
    }
 }
 
-class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
+class Lith_ShellBox : Lith_AmmoItem replaces ShellBox
 {
    default
    {
@@ -30,14 +58,9 @@ class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
       Lith_BasicPickup.LogName "ShellBox";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_ShellBox;
+      Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBox);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
@@ -46,7 +69,7 @@ class Lith_ShellBox : Lith_ScoreItem replaces ShellBox
    }
 }
 
-class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
+class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo
 {
    default
    {
@@ -54,14 +77,9 @@ class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
       Lith_BasicPickup.LogName "Rocket";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Rocket;
+      Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_Rocket);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
@@ -70,7 +88,7 @@ class Lith_RocketAmmoPickup : Lith_ScoreItem replaces RocketAmmo
    }
 }
 
-class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
+class Lith_RocketBox : Lith_AmmoItem replaces RocketBox
 {
    default
    {
@@ -78,14 +96,9 @@ class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
       Lith_BasicPickup.LogName "RocketBox";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_RocketBox;
+      Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBox);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
@@ -94,7 +107,7 @@ class Lith_RocketBox : Lith_ScoreItem replaces RocketBox
    }
 }
 
-class Lith_Cell : Lith_ScoreItem replaces Cell
+class Lith_Cell : Lith_AmmoItem replaces Cell
 {
    default
    {
@@ -102,14 +115,9 @@ class Lith_Cell : Lith_ScoreItem replaces Cell
       Lith_BasicPickup.LogName "Cell";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Cell;
+      Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_Cell);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
@@ -118,7 +126,7 @@ class Lith_Cell : Lith_ScoreItem replaces Cell
    }
 }
 
-class Lith_CellPack : Lith_ScoreItem replaces CellPack
+class Lith_CellPack : Lith_AmmoItem replaces CellPack
 {
    default
    {
@@ -126,15 +134,10 @@ class Lith_CellPack : Lith_ScoreItem replaces CellPack
       Lith_BasicPickup.LogName "CellBox";
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_CellPack;
+      Lith_AmmoItem.Give  "Lith_PlasmaAmmo", AmmoAmt_CellPack;
+      Lith_AmmoItem.Give2 "Lith_CannonAmmo", AmmoAmt_CannonPack;
    }
    
-   override void PostBeginPlay()
-   {
-      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellPack);
-      A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonPack);
-      Super.PostBeginPlay();
-   }
-
    states
    {
    Spawn:
