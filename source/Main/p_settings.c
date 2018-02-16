@@ -18,7 +18,6 @@ Enum("Cursor",      "lith_gui_cursor", 0, gui_curs_max-1, "%S", CursName(set));
 ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
 Category("Player");
-//Bool("Auto-level attributes", "lith_player_autolevel");
 Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0f, 1.0f);
 Bool("Bob view when damaged",       "lith_player_damagebob");
 Float("Footstep volume",       "x", "lith_player_footstepvol", 0.0f, 1.0f);
