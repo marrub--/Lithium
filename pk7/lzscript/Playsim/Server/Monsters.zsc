@@ -2,18 +2,7 @@ extend class Lith_HERMES;
 
 static void PrepareForRagnarok(Actor mo)
 {
-   mo.damageMultiply = 1.6;
-   mo.A_SetRenderStyle(1, STYLE_Stencil);
-   mo.attackSound = 0;
-   mo.deathSound = 0;
-   mo.seeSound = 0;
-   mo.painSound = 0;
-   mo.activeSound = 0;
-   mo.useSound = 0;
-   mo.bounceSound = 0;
-   mo.wallBounceSound = 0;
-   mo.crushPainSound = 0;
-   mo.bLOOKALLAROUND = true;
+   mo.damageMultiply = 1.4;
    mo.scale.x *= frandom(0.9, 1.1);
    mo.scale.y *= frandom(0.9, 1.1);
 }

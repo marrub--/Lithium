@@ -2,17 +2,20 @@ actor Lith_PlayerDeathParticle
 {
    RenderStyle "Subtract"
    
-   +NOINTERACTION
+   +THRUACTORS
+   +NOGRAVITY
+   +BOUNCEONWALLS
+   +BOUNCEONCEILINGS
+   +NOTELEPORT
    +BRIGHT
    
    states
    {
    Spawn:
-      TNT1 A random(3, 30)
-      LDTH AAAAAAAAAAAAAAAAAAAAA 1 A_SetScale(frandom(0.1, 0.2))
-      LDTH AAAA 3 A_FadeOut(0.1)
-      LDTH AAAA 4 A_FadeOut(0.1)
-      stop
+      TNT1 A random(3, 10)
+      LDTH AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SetScale(frandom(0.15, 0.2))
+      LDTH A 1 A_FadeOut(0.01)
+      wait
    }
 }
 

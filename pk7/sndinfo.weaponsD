@@ -7,9 +7,12 @@ weapons/subweapon/armgun lsounds/Subweapons/ArmGun.wav // Phantasy Star: Nova
 //
 // 700 Express
 //
-weapons/700e/fire1 lsounds/700Express/Fire1.flac // E.Y.E: Divine Cybermancy
-weapons/700e/fire2 lsounds/700Express/Fire2.flac // 〃
-weapons/700e/fire3 lsounds/700Express/Fire3.flac // 〃
+weapons/700e/fire1 lsounds/700Express/Fire1.flac     // E.Y.E: Divine Cybermancy
+weapons/700e/fire2 lsounds/700Express/Fire2.flac     // 〃
+weapons/700e/fire3 lsounds/700Express/Fire3.flac     // 〃
+weapons/700e/out   lsounds/700Express/ReloadOut.flac // 〃
+weapons/700e/in    lsounds/700Express/ReloadIn.flac  // 〃
+weapons/700e/move  lsounds/700Express/Move.flac      // Halo 3
 
 $random weapons/700e/fire {
    weapons/700e/fire1

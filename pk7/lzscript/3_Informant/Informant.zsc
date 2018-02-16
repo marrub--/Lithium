@@ -1,9 +1,5 @@
 class Lith_InformantPlayer : Lith_Player
 {
-   const Lith_DodgeTime = TICRATE;
-
-   private int m_dodgeDbc;
-
    default
    {
       Player.StartItem "Lith_Claymore";
@@ -19,37 +15,38 @@ class Lith_InformantPlayer : Lith_Player
       +NOBLOOD;
    }
 
-   private void Lith_InformantThink()
-   {
-      if(m_dodgeDbc)
-         m_dodgeDbc--;
-      else if(player && player.buttons & BT_SPEED)
-      {
-         let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
-         let c = cos(a) * 32;
-         let s = sin(a) * 32;
-         CallACS("Lith_DodgeView");
-         A_GiveInventory("Lith_InvulnStep", 1);
-         A_ChangeVelocity(c, s);
-         m_dodgeDbc = Lith_DodgeTime;
-      }
-   }
+   private int m_dodgeDbc;
+   private int m_iframes;
 
    override void Tick()
    {
+      if(m_iframes) m_iframes--;
+
       if(health > 0)
-         Lith_InformantThink();
+      {
+         if(m_dodgeDbc)
+            m_dodgeDbc--;
+         else if(player && player.buttons & BT_SPEED)
+         {
+            let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
+            let c = cos(a) * 32;
+            let s = sin(a) * 32;
+            CallACS("Lith_DodgeView");
+            A_ChangeVelocity(c, s);
+            m_iframes = 20;
+            m_dodgeDbc = TICRATE;
+         }
+      }
 
       Super.Tick();
    }
-}
 
-// TODO: make this not break invuln spheres
-class Lith_InvulnStep : PowerInvulnerable
-{
-   default
+   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
    {
-      Powerup.Duration 10;
+      if(m_iframes)
+         return 0;
+      else
+         return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
    }
 }
 
