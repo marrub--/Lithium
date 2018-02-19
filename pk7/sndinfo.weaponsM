@@ -12,7 +12,7 @@ $limit weapons/knife/hitwall 0
 //
 // Pistol
 //
-weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Killing Floor
+weapons/pistol/fire     lsounds/Pistol/Fire.flac     // Half-Life
 weapons/pistol/fireauto lsounds/Pistol/FireAuto.flac // Killing Floor, ???
 weapons/pistol/reload   lsounds/Pistol/Reload.flac   // Serious Sam: The First Encounter HD
 weapons/pistol/zoomin   lsounds/Pistol/ScopeIn.flac  // Halo 3, EYE: Divine Cybermancy
@@ -78,7 +78,7 @@ $limit weapons/shotgun/gauss/spark 0
 //
 // Super Shotgun
 //
-weapons/ssg/fire   lsounds/SuperShotgun/Fire.ogg    // Per Kristian, General 6000
+weapons/ssg/fire   lsounds/SuperShotgun/Fire.flac   // Per Kristian, General 6000
 weapons/ssg/pickup lsounds/SuperShotgun/Pickup.flac // General 6000, ???
 weapons/ssg/close  lsounds/SuperShotgun/Close.flac  // Killing Floor, ???
 weapons/ssg/open   lsounds/SuperShotgun/Open.flac   // 〃
@@ -98,7 +98,7 @@ $alias weapons/lshotgun/pickup weapons/lshotgun/open
 //
 // Combat Rifle
 //
-weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor
+weapons/rifle/fire1      lsounds/CombatRifle/Fire1.flac       // Fallout 4, Killing Floor, Call of Duty: Modern Warfare 2
 weapons/rifle/fire2      lsounds/CombatRifle/Fire2.flac       // 〃
 weapons/rifle/fire3      lsounds/CombatRifle/Fire3.flac       // 〃
 weapons/rifle/firesnipe1 lsounds/CombatRifle/FireSnipe1.flac  // 〃

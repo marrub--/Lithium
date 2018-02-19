@@ -87,6 +87,15 @@ override void WorldThingSpawned(WorldEvent evt)
    }
 }
 
+override void WorldThingDamaged(WorldEvent evt)
+{
+   if(evt.damageType == 'Lith_Bullets' && evt.damage > 10)
+   {
+      let mo = Actor.Spawn("Lith_Dummy", evt.thing.pos + (0, 0, evt.thing.height / 2));
+      mo.A_PlaySound("body/bullethit", CHAN_BODY, frandom(0.5, 1));
+   }
+}
+
 override bool InputProcess(InputEvent evt)
 {
    let sv = Lith_HERMES.Instance();

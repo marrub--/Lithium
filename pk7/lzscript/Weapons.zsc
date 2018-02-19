@@ -125,6 +125,15 @@ action(weapon) void Lith_A_ScopeToggle()
 action(weapon) void Lith_A_ZoomFactorScoped(float amount)
    {A_ZoomFactor(CallACS("LPData", pdata_weaponzoom) / FIX * amount * invoker.m_scopezoom);}
 
+action(weapon) void Lith_GunSmoke(class<Actor> type, float x, float y)
+   {A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);}
+
+action(weapon) void Lith_A_GunSmoke(float x = 0, float y = 6)
+   {Lith_GunSmoke("Lith_GunSmokeSpawner", x, y);}
+
+action(weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
+   {Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y);}
+
 states(actor)
 {
 Spawn:

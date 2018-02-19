@@ -31,7 +31,7 @@ actor Lith_Revolver : Lith_MWeapon
       TNT1 A 0 Lith_A_MagIncr
       TNT1 A 0 A_GunFlash("DummyFlash")
       TNT1 A 0 A_FireBullets(1, 1, -1, 45)
-      TNT1 A 0 A_FireCustomMissile("Lith_GunSmokeSpawnerSmall", 0, 0, 0, 6)
+      TNT1 A 0 Lith_A_GunSmokeSmall
       TNT1 A 0 Lith_A_RecoilUp(0.75)
       TNT1 A 0 A_PlaySound("weapons/revolver/fire", CHAN_WEAPON)
       REVO B 1 bright A_WeaponReady(LITH_BOBONLY)

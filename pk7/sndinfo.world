@@ -1,4 +1,15 @@
 //
+// Body
+//
+body/bullethit1 lsounds/Body/Bullet1.wav // Half-Life
+body/bullethit2 lsounds/Body/Bullet2.wav // 〃
+
+$random body/bullethit {
+   body/bullethit1
+   body/bullethit2
+}
+
+//
 // Ambience
 //
 amb/rain       lsounds/Ambience/Rain.ogg           // ???

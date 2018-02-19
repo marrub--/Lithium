@@ -69,8 +69,7 @@ static void HUD_Health(struct player *p)
    PrintSprite("lgfx/HUD_C/SplitBack.png", 0,1, 239,2);
    PrintSprite("lgfx/HUD_C/VIT.png",       2,1, 237,2);
 
-   if(p->dead) PrintTextStr("---");
-   else        PrintTextFmt("%i", p->health);
+   PrintTextFmt("%i", p->health);
    PrintText("LHUDFONT", CR_DARKRED, 21,1, 229,0);
 }
 

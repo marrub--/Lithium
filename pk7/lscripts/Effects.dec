@@ -1,4 +1,3 @@
-#include "lscripts/Effects/GunSmoke.dec"
 #include "lscripts/Effects/Rain.dec"
 #include "lscripts/Effects/TeleFog.dec"
 

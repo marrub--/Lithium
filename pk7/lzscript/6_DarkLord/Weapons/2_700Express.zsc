@@ -41,7 +41,7 @@ Fire:
    TNT1 A 0 A_FireBullets(2, 2, -1, 60*frandom(1,1.7), "Lith_700Bullet", FBF_NORANDOM);
    TNT1 A 0 {
       for(int i = 1; i <= 3; i++)
-         A_FireProjectile("Lith_GunSmokeSpawner", 0, 0, 7, 3*i);
+         Lith_A_GunSmoke(7, 3 * i);
    }
    TNT1 A 0 A_PlaySound("weapons/700e/fire", CHAN_WEAPON);
    700E Y 1 bright;
