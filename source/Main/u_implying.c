@@ -7,7 +7,7 @@
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Implying_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Implying_Update(struct player *p, upgrade_t *upgr)
 {
    static __str strings[] = {
       "\Cd>implying",

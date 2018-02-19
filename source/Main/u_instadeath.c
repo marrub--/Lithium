@@ -7,7 +7,7 @@
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_InstaDeath_Update(player_t *p, upgrade_t *upgr)
+void Upgr_InstaDeath_Update(struct player *p, upgrade_t *upgr)
 {
    if(p->health < p->oldhealth)
       InvGive("Lith_Die", 1);

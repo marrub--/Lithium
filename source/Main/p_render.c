@@ -10,8 +10,8 @@
 
 // Static Functions ----------------------------------------------------------|
 
-static void HUD_StringStack(player_t *p);
-static void HUD_Waves(player_t *p);
+static void HUD_StringStack(struct player *p);
+static void HUD_Waves(struct player *p);
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -19,7 +19,7 @@ static void HUD_Waves(player_t *p);
 // Lith_PlayerDebugStats
 //
 [[__call("ScriptS")]]
-void Lith_PlayerDebugStats(player_t *p)
+void Lith_PlayerDebugStats(struct player *p)
 {
    if(!(world.dbgLevel & log_devh)) return;
 
@@ -39,7 +39,7 @@ void Lith_PlayerDebugStats(player_t *p)
 // Lith_PlayerFootstep
 //
 [[__call("ScriptS")]]
-void Lith_PlayerFootstep(player_t *p)
+void Lith_PlayerFootstep(struct player *p)
 {
    if(Lith_IsPaused) return;
 
@@ -56,7 +56,7 @@ void Lith_PlayerFootstep(player_t *p)
 // Lith_PlayerItemFx
 //
 [[__call("ScriptS")]]
-void Lith_PlayerItemFx(player_t *p)
+void Lith_PlayerItemFx(struct player *p)
 {
    bool hasir = InvNum("PowerLightAmp");
 
@@ -72,7 +72,7 @@ void Lith_PlayerItemFx(player_t *p)
 // Update view bobbing when you get damaged.
 //
 [[__call("ScriptS")]]
-void Lith_PlayerDamageBob(player_t *p)
+void Lith_PlayerDamageBob(struct player *p)
 {
    if(Lith_IsPaused) return;
 
@@ -104,7 +104,7 @@ void Lith_PlayerDamageBob(player_t *p)
 // Update additive view.
 //
 [[__call("ScriptS")]]
-void Lith_PlayerView(player_t *p)
+void Lith_PlayerView(struct player *p)
 {
    if(Lith_IsPaused) return;
 
@@ -133,7 +133,7 @@ void Lith_PlayerView(player_t *p)
 // Lith_PlayerStyle
 //
 [[__call("ScriptS")]]
-void Lith_PlayerStyle(player_t *p)
+void Lith_PlayerStyle(struct player *p)
 {
    if(p->scopetoken) {
       ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
@@ -148,7 +148,7 @@ void Lith_PlayerStyle(player_t *p)
 // Lith_PlayerHUD
 //
 [[__call("ScriptS")]]
-void Lith_PlayerHUD(player_t *p)
+void Lith_PlayerHUD(struct player *p)
 {
    ACS_SetHudSize(320, 200);
 
@@ -194,7 +194,7 @@ void Lith_PlayerHUD(player_t *p)
 // Lith_PlayerLevelup
 //
 [[__call("ScriptS")]]
-void Lith_PlayerLevelup(player_t *p)
+void Lith_PlayerLevelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level) {
       ACS_LocalAmbientSound("player/levelup", 127);
@@ -207,7 +207,7 @@ void Lith_PlayerLevelup(player_t *p)
 //
 // HUD_StringStack
 //
-static void HUD_StringStack(player_t *p)
+static void HUD_StringStack(struct player *p)
 {
    typedef struct hudstr_s
    {
@@ -242,7 +242,7 @@ static void HUD_StringStack(player_t *p)
 //
 // HUD_Waves
 //
-static void HUD_Waves(player_t *p)
+static void HUD_Waves(struct player *p)
 {
    fixed health = (fixed)p->health / (fixed)p->maxhealth;
    int frame = minmax(health * 4, 1, 5);

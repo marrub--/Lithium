@@ -13,15 +13,15 @@ typedef struct shopdef
 {
    __str name;
    __str bipunlock;
-   score_t cost;
+   i96   cost;
 
    void (*shopBuy)   (struct player *p, struct shopdef const *def, void *obj);
    bool (*shopCanBuy)(struct player *p, struct shopdef const *def, void *obj);
    bool (*shopGive)  (struct player *p, struct shopdef const *def, void *obj, int tid);
 } shopdef_t;
 
-score_t Lith_ShopGetCost(struct player *p, shopdef_t const *def);
-bool Lith_ShopCanBuy    (struct player *p, shopdef_t const *def, void *obj);
+i96 Lith_ShopGetCost(struct player *p, shopdef_t const *def);
+bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj);
 [[__optional_args(1)]] bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog);
 
 #endif

@@ -6,7 +6,7 @@
 //
 // Activate
 //
-void Upgr_AutoReload_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_AutoReload_Activate(struct player *p, upgrade_t *upgr)
 {
    p->autoreload = true;
 }
@@ -14,7 +14,7 @@ void Upgr_AutoReload_Activate(player_t *p, upgrade_t *upgr)
 //
 // Deactivate
 //
-void Upgr_AutoReload_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_AutoReload_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->autoreload = false;
 }

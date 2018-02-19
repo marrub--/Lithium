@@ -9,7 +9,7 @@
 //
 // HUD_Ammo
 //
-static void HUD_Ammo(player_t *p)
+static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
 
@@ -65,7 +65,7 @@ static void HUD_Ammo(player_t *p)
 //
 // HUD_Health
 //
-static void HUD_Health(player_t *p, upgrade_t *upgr)
+static void HUD_Health(struct player *p, upgrade_t *upgr)
 {
    static __str weapongfx[SLOT_MAX] = {
       [0] = "lgfx/HUD/H_D27.png",
@@ -127,7 +127,7 @@ static void HUD_Health(player_t *p, upgrade_t *upgr)
 //
 // HUD_Mode
 //
-static void HUD_Mode(player_t *p)
+static void HUD_Mode(struct player *p)
 {
    if(p->weapontype == weapon_rifle)
    {
@@ -143,7 +143,7 @@ static void HUD_Mode(player_t *p)
 //
 // Activate
 //
-void Upgr_HeadsUpDisp_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Activate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
 }
@@ -151,7 +151,7 @@ void Upgr_HeadsUpDisp_Activate(player_t *p, upgrade_t *upgr)
 //
 // Disable
 //
-void Upgr_HeadsUpDisp_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
 }
@@ -159,7 +159,7 @@ void Upgr_HeadsUpDisp_Deactivate(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_HeadsUpDisp_Render(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
 {
    Lith_HUD_Log(p, CR_GREEN, 0, 0);
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);

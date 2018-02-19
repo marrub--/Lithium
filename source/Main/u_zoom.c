@@ -34,7 +34,7 @@ void Lith_KeyZoom(int amt)
 //
 // Deactivate
 //
-void Upgr_Zoom_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_Zoom_Deactivate(struct player *p, upgrade_t *upgr)
 {
    UData.zoom = UData.vzoom = 0;
 }
@@ -43,7 +43,7 @@ void Upgr_Zoom_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Zoom_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom < UData.zoom)
       UData.vzoom = lerpf(UData.vzoom, UData.zoom, 0.099);
@@ -65,7 +65,7 @@ void Upgr_Zoom_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_Zoom_Render(player_t *p, upgrade_t *upgr)
+void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom)
    {

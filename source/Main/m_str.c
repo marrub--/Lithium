@@ -6,7 +6,7 @@
 #include <GDCC.h>
 
 #define StrHashImpl() \
-   unsigned ret = 0; \
+   u32 ret = 0; \
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
@@ -27,7 +27,7 @@ __str StrUpper(__str in)
 // StrHash
 //
 [[__call("StkCall")]]
-unsigned StrHash(char __str_ars const *s)
+u32 StrHash(char __str_ars const *s)
 {
    StrHashImpl();
 }
@@ -36,7 +36,7 @@ unsigned StrHash(char __str_ars const *s)
 // CStrHash
 //
 [[__call("StkCall")]]
-unsigned CStrHash(char const *s)
+u32 CStrHash(char const *s)
 {
    StrHashImpl();
 }
@@ -66,7 +66,7 @@ int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
 // Lith_ScoreSep
 //
 [[__call("StkCall")]]
-__str Lith_ScoreSep(score_t num)
+__str Lith_ScoreSep(i96 num)
 {
    static char out[48];
 

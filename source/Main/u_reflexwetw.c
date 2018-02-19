@@ -31,7 +31,7 @@ void Lith_DodgeView()
 //
 // Activate
 //
-void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul += 0.3;
    UData.charge = CHARGE_MAX;
@@ -41,7 +41,7 @@ void Upgr_ReflexWetw_Activate(player_t *p, upgrade_t *upgr)
 //
 // Deactivate
 //
-void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.3;
 }
@@ -50,7 +50,7 @@ void Upgr_ReflexWetw_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_ReflexWetw_Update(player_t *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
 {
    if(UData.charge < CHARGE_MAX)
       UData.charge++;

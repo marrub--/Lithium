@@ -116,7 +116,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
 // Lith_PlayerInitBIP
 //
 [[__call("ScriptS")]]
-void Lith_PlayerInitBIP(player_t *p)
+void Lith_PlayerInitBIP(struct player *p)
 {
    bip_t *bip = &p->bip;
    int total = 0;
@@ -158,7 +158,7 @@ void Lith_PlayerInitBIP(player_t *p)
 // Lith_DeliverMail
 //
 [[__call("ScriptS")]]
-void Lith_DeliverMail(player_t *p, __str title, int flags)
+void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
    if(p->pclass & pcl_mods) return;
 
@@ -272,7 +272,7 @@ static bool CheckMatch(struct page_info *pinf, __str query)
 //
 // Lith_CBITab_BIP
 //
-void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
+void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 {
    bip_t *bip = &p->bip;
    int avail, max;
@@ -328,7 +328,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
       Lith_GUI_TextBox_OnTextEntered(st)
       {
          // That's a lot of numbers...
-         crc64_t const extranames[] = {
+         u64 const extranames[] = {
             0x5F38B6C56F0A6D84L,
             0x90215131A36573D7L,
             0xC54EC0A7C6836A5BL,
@@ -337,7 +337,7 @@ void Lith_CBITab_BIP(gui_state_t *g, player_t *p)
          };
 
          __str query = StrParam("%.*S", txt_len, txt_buf);
-         crc64_t crc = Lith_CRC64_str(txt_buf, txt_len);
+         u64 crc = Lith_CRC64_str(txt_buf, txt_len);
 
          bip->resnum = bip->rescur = 0;
 

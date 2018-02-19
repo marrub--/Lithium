@@ -6,7 +6,7 @@
 //
 // Activate
 //
-void Upgr_UNCEUNCE_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Activate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetMusic("lmusic/Unce.ogg");
 }
@@ -14,7 +14,7 @@ void Upgr_UNCEUNCE_Activate(player_t *p, upgrade_t *upgr)
 //
 // Deactivate
 //
-void Upgr_UNCEUNCE_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetMusic("*");
    ACS_FadeTo(0, 0, 0, 0, 0);
@@ -24,7 +24,7 @@ void Upgr_UNCEUNCE_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_UNCEUNCE_Update(player_t *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Update(struct player *p, upgrade_t *upgr)
 {
    fixed reeeed = ACS_Sin(p->ticks / 35.0) + 1.0 / 2.0;
    fixed greeen = ACS_Cos(p->ticks / 24.0) + 1.0 / 2.0;

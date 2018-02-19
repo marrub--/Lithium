@@ -78,7 +78,7 @@ void Lith_RA_Give(int num)
 //
 // Deactivate
 //
-void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 {
    UData.activearmor = 0;
 
@@ -89,7 +89,7 @@ void Upgr_ReactArmor_Deactivate(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_ReactArmor_Render(player_t *p, upgrade_t *upgr)
+void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 {
    if(UData.activearmor && p->getCVarI("lith_hud_showarmorind"))
    {

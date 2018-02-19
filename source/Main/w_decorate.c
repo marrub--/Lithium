@@ -22,7 +22,7 @@ int Lith_Timer(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_UpdateScore(void)
 {
-   score_t score = InvNum("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
+   i96 score = InvNum("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
    Lith_GiveAllScore(score, false);
    InvTake("Lith_ScoreCount", 0x7FFFFFFF);
 }
@@ -33,28 +33,28 @@ void Lith_UpdateScore(void)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_DOGS()
 {
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return;
-
-   int tid = ACS_UniqueTID();
-
-   ACS_SetMusic("lmusic/DOGS.ogg");
-
-   for(int i = 0; i < (35 * 30) / 10; i++)
+   withplayer(LocalPlayer)
    {
-      fixed ang = ACS_RandomFixed(0, 1);
-      fixed dst = ACS_RandomFixed(0, 64);
-      ACS_SpawnForced("Lith_Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
-      InvGive("Lith_Alerter", 1);
-      ACS_Delay(10);
+      int tid = ACS_UniqueTID();
+
+      ACS_SetMusic("lmusic/DOGS.ogg");
+
+      for(int i = 0; i < (35 * 30) / 10; i++)
+      {
+         fixed ang = ACS_RandomFixed(0, 1);
+         fixed dst = ACS_RandomFixed(0, 64);
+         ACS_SpawnForced("Lith_Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
+         InvGive("Lith_Alerter", 1);
+         ACS_Delay(10);
+      }
+
+      ACS_Delay(35);
+
+      ACS_SetMusic("lsounds/Silence.flac");
+
+      ACS_SetActorProperty(tid, APROP_MasterTID, p->tid);
+      ACS_SetActorState(tid, "PureSteggleEnergy");
    }
-
-   ACS_Delay(35);
-
-   ACS_SetMusic("lsounds/Silence.flac");
-
-   ACS_SetActorProperty(tid, APROP_MasterTID, p->tid);
-   ACS_SetActorState(tid, "PureSteggleEnergy");
 }
 
 //
@@ -63,24 +63,25 @@ void Lith_DOGS()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_SteggleEnergy()
 {
-   player_t *p = Lith_GetPlayer(0, AAPTR_FRIENDPLAYER);
-
-   ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
-
-   for(;;)
+   withplayer(Lith_GetPlayer(0, AAPTR_FRIENDPLAYER))
    {
-      fixed x = ACS_GetActorX(0);
-      fixed y = ACS_GetActorY(0);
-      fixed z = ACS_GetActorZ(0);
+      ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
 
-      fixed nx = lerpk(x, p->x, 0.01);
-      fixed ny = lerpk(y, p->y, 0.01);
-      fixed nz = lerpk(z, p->z, 0.01);
+      for(;;)
+      {
+         fixed x = ACS_GetActorX(0);
+         fixed y = ACS_GetActorY(0);
+         fixed z = ACS_GetActorZ(0);
 
-      ACS_Warp(0, nx, ny, nz, 0, WARPF_ABSOLUTEPOSITION|WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-      ACS_SetActorAngle(0, ACS_VectorAngle(p->x - x, p->y - y));
+         fixed nx = lerpk(x, p->x, 0.01);
+         fixed ny = lerpk(y, p->y, 0.01);
+         fixed nz = lerpk(z, p->z, 0.01);
 
-      ACS_Delay(1);
+         ACS_Warp(0, nx, ny, nz, 0, WARPF_ABSOLUTEPOSITION|WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         ACS_SetActorAngle(0, ACS_VectorAngle(p->x - x, p->y - y));
+
+         ACS_Delay(1);
+      }
    }
 }
 
@@ -103,17 +104,18 @@ void Lith_Barrier()
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_BarrierBullets()
 {
-   player_t *p = Lith_GetPlayer(0, AAPTR_TARGET);
+   withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
+   {
+      fixed ang   = ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
+      fixed xang  = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));
+      fixed zdiff = p->z - ACS_GetActorZ(0);
+      fixed s     = ACS_Sin(ang) * 48.0;
+      fixed c     = ACS_Cos(ang) * 48.0;
+      fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);
 
-   fixed ang   = ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
-   fixed xang  = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));
-   fixed zdiff = p->z - ACS_GetActorZ(0);
-   fixed s     = ACS_Sin(ang) * 48.0;
-   fixed c     = ACS_Cos(ang) * 48.0;
-   fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);
-
-   ACS_SpawnForced("Lith_BarrierFX", p->x + c, p->y + s, z);
-   ACS_LineAttack(p->tid, ang + ACS_RandomFixed(-0.1, 0.1), PITCH_BASE + ACS_RandomFixed(0.45, 0.55), 10);
+      ACS_SpawnForced("Lith_BarrierFX", p->x + c, p->y + s, z);
+      ACS_LineAttack(p->tid, ang + ACS_RandomFixed(-0.1, 0.1), PITCH_BASE + ACS_RandomFixed(0.45, 0.55), 10);
+   }
 }
 
 //
@@ -196,40 +198,40 @@ void Lith_BoughtItemPickup(int id)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_GetSigil()
 {
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return;
+   withplayer(LocalPlayer)
+   {
+      p->closeGUI();
 
-   p->closeGUI();
+      p->sigil.acquired = true;
 
-   p->sigil.acquired = true;
+      ACS_Thing_Remove(InvNum("Lith_DivisionSigilSpriteTID"));
+      InvTake("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
 
-   ACS_Thing_Remove(InvNum("Lith_DivisionSigilSpriteTID"));
-   InvTake("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
+      if(world.dbgLevel)
+         return;
 
-   if(world.dbgLevel)
-      return;
+      world.freeze(true);
 
-   world.freeze(true);
+      ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
+      ACS_SetHudSize(320, 200);
 
-   ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
-   ACS_SetHudSize(320, 200);
+      ACS_Delay(3);
 
-   ACS_Delay(3);
+      HudMessageF("DBIGFONT", "D I V I S I O N  S I G I L");
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TICSECOND * 5, 0.3);
 
-   HudMessageF("DBIGFONT", "D I V I S I O N  S I G I L");
-   HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TICSECOND * 5, 0.3);
+      HudMessageF("SMALLFNT",
+         "=== Warning ===\n"
+         "This item is unfathomably dangerous.\n"
+         "Use at the expense of your world.");
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TICSECOND * 2, 0.3);
 
-   HudMessageF("SMALLFNT",
-      "=== Warning ===\n"
-      "This item is unfathomably dangerous.\n"
-      "Use at the expense of your world.");
-   HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TICSECOND * 2, 0.3);
+      ACS_Delay(35 * 7);
 
-   ACS_Delay(35 * 7);
+      ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 5);
 
-   ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 5);
-
-   world.freeze(false);
+      world.freeze(false);
+   }
 }
 
 // EOF

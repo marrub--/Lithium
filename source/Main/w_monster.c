@@ -31,11 +31,11 @@ struct dmon_stat {
 };
 
 struct monster_info {
-   unsigned long exp;
-   score_t       score;
-   enum mtype    type;
-   __str         name;
-   int           flags;
+   u64        exp;
+   i96        score;
+   enum mtype type;
+   __str      name;
+   int        flags;
 };
 
 enum {
@@ -324,7 +324,7 @@ static void BaseMonsterLevel(dmon_t *m)
 // actor is no longer solid, so it won't explode immediately.
 //
 [[__call("ScriptS")]]
-static void SoulCleave(dmon_t *m, player_t *p)
+static void SoulCleave(dmon_t *m, struct player *p)
 {
    int tid = ACS_UniqueTID();
    ACS_SpawnForced("Lith_MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
@@ -343,7 +343,7 @@ static void SoulCleave(dmon_t *m, player_t *p)
 //
 // SpawnManaPickup
 //
-static void SpawnManaPickup(dmon_t *m, player_t *p)
+static void SpawnManaPickup(dmon_t *m, struct player *p)
 {
    int i = 0;
    do {
@@ -362,7 +362,7 @@ static void SpawnManaPickup(dmon_t *m, player_t *p)
 //
 static void OnFinalize(dmon_t *m)
 {
-   ifauto(player_t *, p, Lith_GetPlayer(0, AAPTR_TARGET))
+   withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
    {
       if(p->sigil.acquired)
       {

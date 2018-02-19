@@ -10,7 +10,7 @@
 //
 // Activate
 //
-void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_JetBooster_Activate(struct player *p, upgrade_t *upgr)
 {
    UData.charge = CHARGE_MAX;
 }
@@ -19,7 +19,7 @@ void Upgr_JetBooster_Activate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
+void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 {
    UData.discharged = UData.charge > 60 && UData.charge < CHARGE_MAX;
 
@@ -46,7 +46,7 @@ void Upgr_JetBooster_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_JetBooster_Render(player_t *p, upgrade_t *upgr)
+void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled || UData.charge == CHARGE_MAX) return;
 

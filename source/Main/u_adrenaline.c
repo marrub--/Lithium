@@ -9,7 +9,7 @@
 //
 // Activate
 //
-void Upgr_Adrenaline_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
 {
    InvTake("Lith_AdrenalineToken", 1);
 }
@@ -18,7 +18,7 @@ void Upgr_Adrenaline_Activate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
 {
    // Charge
    if(UData.charge < CHARGE_MAX)
@@ -61,7 +61,7 @@ void Upgr_Adrenaline_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_Adrenaline_Render(player_t *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;
 

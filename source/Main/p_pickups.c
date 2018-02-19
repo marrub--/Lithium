@@ -209,7 +209,7 @@ static struct pickupname_s const pickupnames[weapon_max_lith] = {
    [weapon_c_delear]   = name(names_c_delear),
 };
 
-static void Lith_StupidPickup(player_t *p, int weapon)
+static void Lith_StupidPickup(struct player *p, int weapon)
 {
    static __str uncertainty[] = {
       "Yes.",
@@ -251,7 +251,7 @@ static void Lith_StupidPickup(player_t *p, int weapon)
       p->log(fmt, names->ptr[iname]);
 }
 
-void Lith_PickupMessage(player_t *p, weaponinfo_t const *info)
+void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
 {
    if(info->type < weapon_max_lith)
    {

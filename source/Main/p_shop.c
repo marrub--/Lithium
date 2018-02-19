@@ -42,7 +42,7 @@ static shopitem_t shopitems[] = {
 //
 // Shop_CanBuy
 //
-static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
+static bool Shop_CanBuy(struct player *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    int cur = InvNum(item->classname);
@@ -53,7 +53,7 @@ static bool Shop_CanBuy(player_t *p, shopdef_t const *, void *item_)
 //
 // Shop_Buy
 //
-static void Shop_Buy(player_t *p, shopdef_t const *, void *item_)
+static void Shop_Buy(struct player *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
    p->itemsbought++;
@@ -63,7 +63,7 @@ static void Shop_Buy(player_t *p, shopdef_t const *, void *item_)
 //
 // Shop_Give
 //
-static bool Shop_Give(player_t *p, shopdef_t const *, void *item_, int tid)
+static bool Shop_Give(struct player *p, shopdef_t const *, void *item_, int tid)
 {
    shopitem_t *item = item_;
    p->itemsbought++;
@@ -95,7 +95,7 @@ void Lith_GInit_Shop(void)
 //
 // Lith_CBITab_Shop
 //
-void Lith_CBITab_Shop(gui_state_t *g, player_t *p)
+void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 {
    int nitems = 0;
    for(int i = 0; i < countof(shopitems); i++) {

@@ -92,7 +92,7 @@ static int UpgrMax = countof(UpgrInfoBase);
 //
 // Lith_UpgrCanBuy
 //
-static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *, void *upgr)
+static bool Lith_UpgrCanBuy(struct player *p, shopdef_t const *, void *upgr)
 {
    return !((upgrade_t *)upgr)->owned;
 }
@@ -100,7 +100,7 @@ static bool Lith_UpgrCanBuy(player_t *p, shopdef_t const *, void *upgr)
 //
 // Lith_UpgrShopBuy
 //
-static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *, void *upgr)
+static void Lith_UpgrShopBuy(struct player *p, shopdef_t const *, void *upgr)
 {
    ((upgrade_t *)upgr)->setOwned(p);
 }
@@ -108,7 +108,7 @@ static void Lith_UpgrShopBuy(player_t *p, shopdef_t const *, void *upgr)
 //
 // Lith_UpgrGive
 //
-static bool Lith_UpgrGive(player_t *, shopdef_t const *, void *upgr_, int tid)
+static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int tid)
 {
    upgrade_t const *upgr = upgr_;
 
@@ -138,7 +138,7 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
 //
 // SetDataPtr
 //
-static void SetDataPtr(player_t *p, upgrade_t *upgr)
+static void SetDataPtr(struct player *p, upgrade_t *upgr)
 {
    upgr->dataptr = &p->upgrdata;
 }
@@ -209,7 +209,7 @@ void Lith_GSInit_Upgrade(void)
 //
 // Lith_UpgrSetOwned
 //
-void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
+void Lith_UpgrSetOwned(struct player *p, upgrade_t *upgr)
 {
    if(upgr->owned) return;
 
@@ -224,7 +224,7 @@ void Lith_UpgrSetOwned(player_t *p, upgrade_t *upgr)
 // Lith_PlayerInitUpgrades
 //
 [[__call("ScriptS")]]
-void Lith_PlayerInitUpgrades(player_t *p)
+void Lith_PlayerInitUpgrades(struct player *p)
 {
    #define CheckPClass() (UpgrInfo[i].pclass & p->pclass)
    for(int i = 0; i < UpgrMax; i++)
@@ -259,7 +259,7 @@ void Lith_PlayerInitUpgrades(player_t *p)
 //
 // Lith_PlayerDeallocUpgrades
 //
-void Lith_PlayerDeallocUpgrades(player_t *p)
+void Lith_PlayerDeallocUpgrades(struct player *p)
 {
    upgrademap_t_dtor(&p->upgrademap);
    p->upgrmax = 0;
@@ -273,7 +273,7 @@ void Lith_PlayerDeallocUpgrades(player_t *p)
 //
 // Lith_PlayerDeinitUpgrades
 //
-void Lith_PlayerDeinitUpgrades(player_t *p)
+void Lith_PlayerDeinitUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
       if(upgr->active)
@@ -283,7 +283,7 @@ void Lith_PlayerDeinitUpgrades(player_t *p)
 //
 // Lith_PlayerReinitUpgrades
 //
-void Lith_PlayerReinitUpgrades(player_t *p)
+void Lith_PlayerReinitUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
       if(upgr->wasactive)
@@ -294,7 +294,7 @@ void Lith_PlayerReinitUpgrades(player_t *p)
 // Lith_PlayerUpdateUpgrades
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateUpgrades(player_t *p)
+void Lith_PlayerUpdateUpgrades(struct player *p)
 {
    if(Lith_IsPaused)
       return;
@@ -308,7 +308,7 @@ void Lith_PlayerUpdateUpgrades(player_t *p)
 // Lith_PlayerRenderUpgrades
 //
 [[__call("ScriptS")]]
-void Lith_PlayerRenderUpgrades(player_t *p)
+void Lith_PlayerRenderUpgrades(struct player *p)
 {
    ForUpgrade(upgr) if(upgr->active && upgr->info->Render)
    {
@@ -323,7 +323,7 @@ void Lith_PlayerRenderUpgrades(player_t *p)
 //
 // Lith_PlayerEnterUpgrades
 //
-void Lith_PlayerEnterUpgrades(player_t *p)
+void Lith_PlayerEnterUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
       if(upgr->active && upgr->info->Enter)
@@ -333,7 +333,7 @@ void Lith_PlayerEnterUpgrades(player_t *p)
 //
 // Lith_UpgrCanActivate
 //
-bool Lith_UpgrCanActivate(player_t *p, upgrade_t *upgr)
+bool Lith_UpgrCanActivate(struct player *p, upgrade_t *upgr)
 {
    if(!upgr->active)
    {
@@ -355,7 +355,7 @@ bool Lith_UpgrCanActivate(player_t *p, upgrade_t *upgr)
 //
 // Lith_UpgrToggle
 //
-bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
+bool Lith_UpgrToggle(struct player *p, upgrade_t *upgr)
 {
    if(!upgr->canUse(p)) return false;
 
@@ -392,7 +392,7 @@ bool Lith_UpgrToggle(player_t *p, upgrade_t *upgr)
 //
 // GUIUpgradesList
 //
-static void GUIUpgradesList(gui_state_t *g, player_t *p)
+static void GUIUpgradesList(gui_state_t *g, struct player *p)
 {
    if(Lith_GUI_Button(g, .x = 90, 213, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
@@ -469,7 +469,7 @@ static void GUIUpgradesList(gui_state_t *g, player_t *p)
 //
 // GUIUpgradeRequirements
 //
-static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
+static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    int y = 0;
 
@@ -527,7 +527,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 // GUIUpgradeDescription
 //
-static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
+static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    SetClipW(111, 30, 190, 170, 184);
 
@@ -566,7 +566,7 @@ static void GUIUpgradeDescription(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 // GUIUpgradeButtons
 //
-static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
+static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    if(Lith_GUI_Button(g, "Buy", 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
@@ -578,7 +578,7 @@ static void GUIUpgradeButtons(gui_state_t *g, player_t *p, upgrade_t *upgr)
 //
 // Lith_CBITab_Upgrades
 //
-void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p)
+void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p)
 {
    GUIUpgradesList(g, p);
 

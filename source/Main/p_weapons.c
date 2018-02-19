@@ -45,7 +45,7 @@ static void GiveWeaponItem(int parm, int slot)
 //
 // WeaponGrab
 //
-static void WeaponGrab(player_t *p, weaponinfo_t const *info)
+static void WeaponGrab(struct player *p, weaponinfo_t const *info)
 {
    if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound, 127);
    else                                ACS_LocalAmbientSound("marathon/pickup", 127);
@@ -64,11 +64,11 @@ static void WeaponGrab(player_t *p, weaponinfo_t const *info)
 //
 // Lith_PickupScore
 //
-static void Lith_PickupScore(player_t *p, int parm)
+static void Lith_PickupScore(struct player *p, int parm)
 {
    weaponinfo_t const *info = &weaponinfo[parm];
 
-   score_t score = 4000 * info->slot;
+   i96 score = 4000 * info->slot;
 
    GiveWeaponItem(parm, info->slot);
    score = p->giveScore(score);
@@ -87,10 +87,10 @@ static void Lith_PickupScore(player_t *p, int parm)
 [[__call("ScriptS"), __extern("ACS")]]
 bool Lith_WeaponPickup(int name)
 {
-   extern void Lith_PickupMessage(player_t *p, weaponinfo_t const *info);
-   extern int Lith_WeaponFromName(player_t *p, int name);
+   extern void Lith_PickupMessage(struct player *p, weaponinfo_t const *info);
+   extern int Lith_WeaponFromName(struct player *p, int name);
 
-   player_t *p = LocalPlayer;
+   struct player *p = LocalPlayer;
    if(NoPlayer(p)) return false;
 
    bool weaponstay = ACS_GetCVar("sv_weaponstay");
@@ -182,7 +182,7 @@ void Lith_GSInit_Weapon(void)
 // Update information on what weapons we have.
 //
 [[__call("ScriptS")]]
-void Lith_PlayerPreWeapons(player_t *p)
+void Lith_PlayerPreWeapons(struct player *p)
 {
    weapondata_t *w = &p->weapon;
 
@@ -271,7 +271,7 @@ void Lith_PlayerPreWeapons(player_t *p)
 // Lith_PlayerUpdateWeapons
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateWeapons(player_t *p)
+void Lith_PlayerUpdateWeapons(struct player *p)
 {
    if(!Lith_IsPaused)
    {
@@ -290,7 +290,7 @@ void Lith_PlayerUpdateWeapons(player_t *p)
       break;
    case weapon_cfist:
       SetSize(320, 240);
-      fixed64_t charge = 5.lk + InvNum("Lith_FistCharge") / 10.lk;
+      fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;
       PrintTextFmt("%.1lkkV \Cjcharge", charge);
       PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
       break;

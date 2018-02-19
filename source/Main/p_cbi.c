@@ -27,7 +27,7 @@
 //
 // CBITab_Marine
 //
-static void CBITab_Marine(gui_state_t *g, player_t *p)
+static void CBITab_Marine(gui_state_t *g, struct player *p)
 {
    int   ram;
    __str name;
@@ -64,7 +64,7 @@ static void CBITab_Marine(gui_state_t *g, player_t *p)
 //
 // CBITab_CyberMage
 //
-static void CBITab_CyberMage(gui_state_t *g, player_t *p)
+static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 {
    CPU(2);
    PrintTextStr("AOF 5900001 Rev7 CPU");
@@ -102,7 +102,7 @@ static void CBITab_CyberMage(gui_state_t *g, player_t *p)
 //
 // Lith_CBITab_CBI
 //
-void Lith_CBITab_CBI(gui_state_t *g, player_t *p)
+void Lith_CBITab_CBI(gui_state_t *g, struct player *p)
 {
    switch(p->pclass)
    {

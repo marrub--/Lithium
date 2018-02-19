@@ -11,42 +11,42 @@
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_PunctuatorFire(void)
 {
-   player_t *p = LocalPlayer;
-   if(NoPlayer(p)) return;
-
-   int ptid = ACS_UniqueTID();
-
-   ACS_LineAttack(0, p->yaw, p->pitch, 128, "Lith_PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);
-
-   if(ACS_ThingCount(T_NONE, ptid))
+   withplayer(LocalPlayer)
    {
-      fixed x = ACS_GetActorX(ptid);
-      fixed y = ACS_GetActorY(ptid);
-      fixed z = ACS_GetActorZ(ptid);
+      int ptid = ACS_UniqueTID();
 
-      float yaw = atan2f(p->y - y, p->x - x);
+      ACS_LineAttack(0, p->yaw, p->pitch, 128, "Lith_PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);
 
-      float ps, cz;
-      float ys, yc;
-      sincosf(p->pitchf, &ps, &cz);
-      sincosf(yaw,       &ys, &yc);
-
-      float cx = ps * yc;
-      float cy = ps * ys;
-
-      for(int i = 0; i < 10; i++)
+      if(ACS_ThingCount(T_NONE, ptid))
       {
-         float sx = x + (cx * -(32 * i));
-         float sy = y + (cy * -(32 * i));
-         float sz = z + (cz * -(32 * i));
+         fixed x = ACS_GetActorX(ptid);
+         fixed y = ACS_GetActorY(ptid);
+         fixed z = ACS_GetActorZ(ptid);
 
-         int etid = ACS_UniqueTID();
+         float yaw = atan2f(p->y - y, p->x - x);
 
-         ACS_SpawnForced("Lith_PunctuatorExplosion", sx, sy, sz, etid);
+         float ps, cz;
+         float ys, yc;
+         sincosf(p->pitchf, &ps, &cz);
+         sincosf(yaw,       &ys, &yc);
 
-         ACS_SetActivator(etid);
-         ACS_SetPointer(AAPTR_TARGET, p->tid);
-         p->setActivator();
+         float cx = ps * yc;
+         float cy = ps * ys;
+
+         for(int i = 0; i < 10; i++)
+         {
+            float sx = x + (cx * -(32 * i));
+            float sy = y + (cy * -(32 * i));
+            float sz = z + (cz * -(32 * i));
+
+            int etid = ACS_UniqueTID();
+
+            ACS_SpawnForced("Lith_PunctuatorExplosion", sx, sy, sz, etid);
+
+            ACS_SetActivator(etid);
+            ACS_SetPointer(AAPTR_TARGET, p->tid);
+            p->setActivator();
+         }
       }
    }
 }
@@ -54,7 +54,7 @@ void Lith_PunctuatorFire(void)
 //
 // Deactivate
 //
-void Upgr_PunctCannon_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_PunctCannon_Deactivate(struct player *p, upgrade_t *upgr)
 {
    InvGive("Lith_GTFO", 1);
 }

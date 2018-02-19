@@ -9,9 +9,9 @@
 //
 // note_Len
 //
-static unsigned note_Len(__str s)
+static u32 note_Len(__str s)
 {
-   unsigned len = ACS_StrLen(s);
+   u32 len = ACS_StrLen(s);
    return len > 255 ? 255 : len;
 }
 
@@ -21,7 +21,7 @@ static unsigned note_Len(__str s)
 [[__call("ScriptS")]]
 static void Lith_Save_note(savefile_t *save)
 {
-   unsigned chunklen = 0;
+   u32 chunklen = 0;
 
    for(int i = 0; i < countof(save->p->notes); i++)
       chunklen += note_Len(save->p->notes[i]) + 1;
@@ -30,7 +30,7 @@ static void Lith_Save_note(savefile_t *save)
 
    for(int i = 0; i < countof(save->p->notes); i++)
    {
-      unsigned len = note_Len(save->p->notes[i]);
+      u32 len = note_Len(save->p->notes[i]);
 
       fputc(len, save->fp);
       Lith_FWrite_str(save->p->notes[i], len, save->fp);
@@ -45,10 +45,10 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 {
    for(int i = 0; i < countof(save->p->notes); i++)
    {
-      unsigned len = fgetc(save->fp);
+      u32 len = fgetc(save->fp);
 
       ACS_BeginPrint();
-      for(unsigned j = 0; j < len; j++) ACS_PrintChar(fgetc(save->fp) & 0xFF);
+      for(u32 j = 0; j < len; j++) ACS_PrintChar(fgetc(save->fp) & 0xFF);
       save->p->notes[i] = ACS_EndStrParam();
    }
 }
@@ -94,7 +94,7 @@ void Lith_SetFun(int fun)
 // Lith_PlayerSaveData
 //
 [[__call("ScriptS")]]
-void Lith_PlayerSaveData(player_t *p)
+void Lith_PlayerSaveData(struct player *p)
 {
    savefile_t *save;
 
@@ -110,7 +110,7 @@ void Lith_PlayerSaveData(player_t *p)
 // Lith_PlayerLoadData
 //
 [[__call("ScriptS")]]
-void Lith_PlayerLoadData(player_t *p)
+void Lith_PlayerLoadData(struct player *p)
 {
    savefile_t *save;
 

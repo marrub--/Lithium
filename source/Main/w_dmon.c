@@ -21,7 +21,7 @@ int dmonarr dmonid;
 //
 // PrintDmonAllocSize
 //
-void PrintDmonAllocSize(player_t *p)
+void PrintDmonAllocSize(struct player *p)
 {
    p->logH("> dmonalloc is %.2k megabytes!", (sizeof(dmonalloc) * 4) / 1024 / 1024.0);
 }

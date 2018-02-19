@@ -20,7 +20,7 @@
 
 #define Lith_ForPlayer() \
    for(int _piter = 0; _piter < MAX_PLAYERS; _piter++) \
-      __with(player_t *p = &players[_piter];) \
+      __with(struct player *p = &players[_piter];) \
          if(p->active)
 
 #define Lith_GiveAllScore(score, nomul) \
@@ -33,10 +33,10 @@
 
 #define LocalPlayer \
    (ACS_PlayerNumber() < 0 ? null : &players[ACS_PlayerNumber()])
-#define PlayerDiscount(n) (score_t)((n) * p->discount)
+#define PlayerDiscount(n) (i96)((n) * p->discount)
 #define NoPlayer(p) (!(p) || !(p)->active)
-#define withplayer(player) \
-   __with(player_t *p = (player);) \
+#define withplayer(ptr) \
+   __with(struct player *p = (ptr);) \
       if(!NoPlayer(p))
 
 // Types ---------------------------------------------------------------------|
@@ -73,25 +73,25 @@ enum
    pro_max,
 };
 
-typedef enum guiname_s
+enum
 {
    GUI_NONE,
    GUI_CBI,
    GUI_MAX
-} guiname_t;
+};
 
 //
-// player_delta_t
+// player_delta
 //
 // Data that needs to be kept track of between frames.
 //
-typedef struct player_delta_s
+struct player_delta
 {
    // Status
-   int     maxhealth;
-   fixed   alpha;
-   score_t score;
-   int     indialogue;
+   int   maxhealth;
+   fixed alpha;
+   i96   score;
+   int   indialogue;
 
    // Position
    fixed x, y, z;
@@ -113,7 +113,7 @@ typedef struct player_delta_s
 
    // Attributes
    struct player_attributes attr;
-} player_delta_t;
+};
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -128,14 +128,14 @@ void Lith_ValidatePlayerTID(struct player *p);
 
 // gui
 [[__call("StkCall")]] void Lith_PlayerCloseGUI(struct player *p);
-[[__call("StkCall")]] void Lith_PlayerUseGUI(struct player *p, guiname_t type);
+[[__call("StkCall")]] void Lith_PlayerUseGUI(struct player *p, int type);
 
 // score
-[[__optional_args(1)]] score_t Lith_GiveScore(struct player *p, score_t score, bool nomul);
-[[__call("StkCall")]] void Lith_TakeScore(struct player *p, score_t score);
+[[__optional_args(1)]] i96 Lith_GiveScore(struct player *p, i96 score, bool nomul);
+[[__call("StkCall")]] void Lith_TakeScore(struct player *p, i96 score);
 
 // attributes
-[[__call("StkCall")]] void Lith_GiveEXP(struct player *p, unsigned long amt);
+[[__call("StkCall")]] void Lith_GiveEXP(struct player *p, u64 amt);
 
 // misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
@@ -152,7 +152,7 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 // Types ---------------------------------------------------------------------|
 
 //
-// player_t
+// struct player
 //
 //       7/4/2016: That's a lot of data!
 // edit  9/4/2016: Holy shit, that's really a lot of data!
@@ -166,7 +166,7 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 // edit 14/7/2017: lol nevermind it's only 2kb now
 // edit 31/8/2017: m e r g e
 //
-typedef struct player
+struct player
 {
    // Properties -------------------------------------------------------------|
 
@@ -237,7 +237,7 @@ typedef struct player
    // Info
    int   tid;
    int   num;
-   long  ticks;
+   u64   ticks;
    __str name;
    int   pclass;
    __str pcstr;
@@ -246,8 +246,9 @@ typedef struct player
    int   fun;
 
    // Deltas
-   [[__anonymous]] player_delta_t cur;
-   player_delta_t old;
+   [[__anonymous]]
+   struct player_delta cur;
+   struct player_delta old;
    int oldhealth;
 
    // BIP
@@ -277,11 +278,11 @@ typedef struct player
    int  tbptr;
 
    // Score
-   score_t scoreaccum;
-   __str   scoreaccumstr;
-   int     scoreaccumtime;
-   double  scoremul;
-   float   discount;
+   i96    scoreaccum;
+   __str  scoreaccumstr;
+   int    scoreaccumtime;
+   double scoremul;
+   float  discount;
 
    // Misc
    int   spuriousexplosions;
@@ -321,19 +322,19 @@ typedef struct player
    int weathertid;
 
    // GUI
-   guiname_t activegui;
-   cbi_t     cbi;
+   int   activegui;
+   cbi_t cbi;
 
    // Statistics
    int weaponsheld;
    int itemsbought;
    int upgradesowned;
 
-   long healthsum;
-   long healthused;
+   i64 healthsum;
+   i64 healthused;
 
-   score_t scoresum;
-   score_t scoreused;
+   i96 scoresum;
+   i96 scoreused;
 
    int unitstravelled;
 
@@ -361,16 +362,16 @@ typedef struct player
    {
       bool acquired;
    } sigil;
-} player_t;
+};
 
-typedef void (*player_cb_t)(player_t *p);
+typedef void (*player_cb_t)(struct player *p);
 
 // Extern Objects ------------------------------------------------------------|
 
 #ifndef EXTERNAL_CODE
-extern player_t players[MAX_PLAYERS];
+extern struct player players[MAX_PLAYERS];
 #else
-player_t (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
+struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS];
 #define players (*Lith_GetPlayersExtern())
 #endif
 

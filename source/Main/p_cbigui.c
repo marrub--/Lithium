@@ -11,10 +11,10 @@
 //
 // Lith_CBITab_Arsenal
 //
-static void Lith_CBITab_Arsenal(gui_state_t *g, player_t *p)
+static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
 {
-   extern void Lith_CBITab_Upgrades(gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Shop    (gui_state_t *g, player_t *p);
+   extern void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Shop    (gui_state_t *g, struct player *p);
 
    static __str const tabnames[] = {"Upgrades", "Shop"};
    Lith_GUI_Tabs(g, &CBIState(g)->arsetab, tabnames, 13, 13, 1);
@@ -28,10 +28,10 @@ static void Lith_CBITab_Arsenal(gui_state_t *g, player_t *p)
 //
 // Lith_CBITab_Stat
 //
-static void Lith_CBITab_Stat(gui_state_t *g, player_t *p)
+static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
 {
-   extern void Lith_CBITab_CBI   (gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Status(gui_state_t *g, player_t *p);
+   extern void Lith_CBITab_CBI   (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Status(gui_state_t *g, struct player *p);
 
    static __str const tabnames[] = {"Attributes", "CBI"};
    Lith_GUI_Tabs(g, &CBIState(g)->stattab, tabnames, 13, 13, 1);
@@ -45,12 +45,12 @@ static void Lith_CBITab_Stat(gui_state_t *g, player_t *p)
 //
 // Lith_CBITab_Info
 //
-static void Lith_CBITab_Info(gui_state_t *g, player_t *p)
+static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 {
-   extern void Lith_CBITab_BIP       (gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Log       (gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Statistics(gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Notes     (gui_state_t *g, player_t *p);
+   extern void Lith_CBITab_BIP       (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Log       (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Statistics(gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Notes     (gui_state_t *g, struct player *p);
 
    static __str const tabnames[] = {"BIP", "Log", "Statistics", "Notes"};
    Lith_GUI_Tabs(g, &CBIState(g)->infotab, tabnames, 13, 13, 1);
@@ -69,7 +69,7 @@ static void Lith_CBITab_Info(gui_state_t *g, player_t *p)
 // Lith_PlayerUpdateCBIGUI
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateCBIGUI(player_t *p)
+void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
    gui_state_t *g = &p->cbi.guistate;
 
@@ -103,8 +103,8 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
    tabnames[0] = Language("LITH_TXT_Arsenal%S", p->discrim);
    Lith_GUI_Tabs(g, &CBIState(g)->maintab, tabnames, 13, 13, 0);
 
-   extern void Lith_CBITab_Items   (gui_state_t *g, player_t *p);
-   extern void Lith_CBITab_Settings(gui_state_t *g, player_t *p);
+   extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
 
    switch(CBIState(g)->maintab)
    {
@@ -121,7 +121,7 @@ void Lith_PlayerUpdateCBIGUI(player_t *p)
 //
 // Lith_PlayerResetCBIGUI
 //
-void Lith_PlayerResetCBIGUI(player_t *p)
+void Lith_PlayerResetCBIGUI(struct player *p)
 {
    p->cbi.guistate.cx = 320 / 2;
    p->cbi.guistate.cy = 240 / 2;

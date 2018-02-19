@@ -43,13 +43,13 @@ struct dmon {
    int  id;
    enum mtype type;
 
-   bool          wasdead;
-   unsigned long exp;
-   int           level;
-   int           rank;
-   int           maxhealth;
-   int           resist[dmgtype_max];
-   score_t       score;
+   bool wasdead;
+   u64  exp;
+   int  level;
+   int  rank;
+   int  maxhealth;
+   int  resist[dmgtype_max];
+   i96  score;
 
    struct dmon_stat *ms;
 };

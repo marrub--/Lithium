@@ -20,18 +20,20 @@ enum
 
 struct player_attr_theta
 {
-   unsigned points;
-   unsigned attrs[at_max];
+   u32 points;
+   u32 attrs[at_max];
 };
 
 struct player_attributes
 {
-   bool          autolevel;
-   unsigned long exp, expnext;
-   unsigned      level;
-   __str         names[at_max];
-   [[__anonymous]] struct player_attr_theta cur;
-                   struct player_attr_theta sup;
+   bool  autolevel;
+   u64   exp, expnext;
+   u32   level;
+   __str names[at_max];
+
+   [[__anonymous]]
+   struct player_attr_theta cur;
+   struct player_attr_theta sup;
 };
 
 #endif

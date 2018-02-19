@@ -18,9 +18,9 @@
 //
 typedef struct memfile_t
 {
-   unsigned char *mem;
-   size_t         len;
-   size_t         pos;
+   byte  *mem;
+   size_t len;
+   size_t pos;
 } memfile_t;
 
 //
@@ -39,7 +39,7 @@ typedef struct netfile_s
 //
 // PrintMem
 //
-void PrintMem(unsigned char const *data, size_t size)
+void PrintMem(byte const *data, size_t size)
 {
    int termpos = 0;
 
@@ -80,13 +80,13 @@ static int NetClose(void *nfdata)
 
    // Base64 encode the buffer.
    size_t outsize;
-   unsigned char *coded = base64_encode((void *)nf->mem, nf->pos, &outsize);
+   byte *coded = base64_encode((void *)nf->mem, nf->pos, &outsize);
 
    if(coded)
    {
       int cvarnum = 0;
 
-      for(unsigned char const *itr = coded; outsize; cvarnum++)
+      for(byte const *itr = coded; outsize; cvarnum++)
       {
          size_t itrsize;
 
@@ -252,7 +252,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
       {
          // Decode the base64 input.
          size_t size;
-         unsigned char *data = base64_decode((void *)input, inputsz, &size);
+         byte *data = base64_decode((void *)input, inputsz, &size);
 
          Dalloc(input);
 
@@ -292,9 +292,9 @@ size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE 
 {
    size_t res = 0;
 
-   for(unsigned char const *itr = ptr; count--; res += bytes)
+   for(byte const *itr = ptr; count--; res += bytes)
    {
-      unsigned c = *itr++;
+      u32 c = *itr++;
       for(int i = 0; i < bytes; i++)
          if(fputc((c & (0xFF << (i * 8))) >> (i * 8), fp) == EOF)
             return res;

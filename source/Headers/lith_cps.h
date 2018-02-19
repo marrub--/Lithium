@@ -7,10 +7,10 @@
 #define Lith_CPS_Len(len) ((len) / 4 + (len) % 4)
 
 #define Lith_CPS_Defn(name, len) \
-   unsigned (name)[Lith_CPS_Len(len)] = {}
+   u32 (name)[Lith_CPS_Len(len)] = {}
 
 #define Lith_CPS_Decl(name, len) \
-   unsigned (name)[Lith_CPS_Len(len)]
+   u32 (name)[Lith_CPS_Len(len)]
 
 #define Lith_CPS_Shif(i, set) ((set) << ((i) % 4 * 8))
 
@@ -21,6 +21,6 @@
 #define Lith_CPS_GetC(name, i) \
    (((name)[(i) / 4] & (0xFF << ((i) % 4 * 8))) >> ((i) % 4 * 8))
 
-__str Lith_CPS_Print(unsigned *cps);
+__str Lith_CPS_Print(u32 *cps);
 
 #endif

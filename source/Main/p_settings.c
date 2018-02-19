@@ -140,7 +140,7 @@ static __str CursName(int num)
 //
 // Lith_CBITab_Settings
 //
-void Lith_CBITab_Settings(gui_state_t *g, player_t *p)
+void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 {
    int y = 0;
 

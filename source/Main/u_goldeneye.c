@@ -7,7 +7,7 @@
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Goldeneye_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Goldeneye_Update(struct player *p, upgrade_t *upgr)
 {
    if(ACS_Random(0, 0x7F) < 0x50)
    {

@@ -77,7 +77,7 @@
 
 // Types ---------------------------------------------------------------------|
 
-typedef unsigned id_t;
+typedef u32 id_t;
 
 typedef struct gui_scroll_state_s
 {

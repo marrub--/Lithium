@@ -80,7 +80,7 @@ dlgdef_t *lmvar dlgdefs;
 // Lith_TerminalGUI
 //
 [[__call("ScriptS")]]
-static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
+static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
    enum {
       // background
@@ -192,7 +192,7 @@ static void Lith_TerminalGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
 // Lith_DialogueGUI
 //
 [[__call("ScriptS")]]
-static void Lith_DialogueGUI(gui_state_t *g, player_t *p, dlgvmstate_t *vmstate)
+static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
    enum {left = 37, top = 75};
    __str icon = StrParam("lgfx/Dialogue/Icon%S.png", vmstate->sreg[DSTR_ICON]);
@@ -252,7 +252,7 @@ static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
 // Lith_TeleportOutEffect
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_TeleportOutEffect(player_t *p)
+void Lith_TeleportOutEffect(struct player *p)
 {
    if(!p) p = LocalPlayer;
 
@@ -279,7 +279,7 @@ void Lith_TeleportOutEffect(player_t *p)
 // Main dialogue VM.
 //
 [[__call("ScriptS")]]
-void Lith_DialogueVM(player_t *p, int num)
+void Lith_DialogueVM(struct player *p, int num)
 {
    if(p->dead || p->indialogue > 1)
       return;

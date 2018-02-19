@@ -39,10 +39,9 @@
 #define BASE64_H
 
 #include <stddef.h>
+#include "lith_types.h"
 
-unsigned char * base64_encode(const unsigned char *src, size_t len,
-			      size_t *out_len);
-unsigned char * base64_decode(const unsigned char *src, size_t len,
-			      size_t *out_len);
+byte *base64_encode(byte const *src, size_t len, size_t *out_len);
+byte *base64_decode(byte const *src, size_t len, size_t *out_len);
 
 #endif /* BASE64_H */

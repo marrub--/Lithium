@@ -12,7 +12,7 @@
 //
 // SetupAttributes
 //
-static void SetupAttributes(player_t *p)
+static void SetupAttributes(struct player *p)
 {
    p->attr.names[at_acc] = "ACC";
    p->attr.names[at_def] = "DEF";
@@ -37,7 +37,7 @@ static void SetupAttributes(player_t *p)
 //
 // SetupInventory
 //
-static void SetupInventory(player_t *p)
+static void SetupInventory(struct player *p)
 {
    static container_t const baseinv[] = {
       {10, 14},
@@ -60,7 +60,7 @@ static void SetupInventory(player_t *p)
 //
 // SetPClass
 //
-static void SetPClass(player_t *p)
+static void SetPClass(struct player *p)
 {
    __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
            if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
@@ -90,7 +90,7 @@ static void SetPClass(player_t *p)
 // ConvertAmmo
 //
 [[__call("StkCall")]]
-static void ConvertAmmo(player_t *p)
+static void ConvertAmmo(struct player *p)
 {
    int clip = InvNum("Lith_BulletAmmo");
    int shel = InvNum("Lith_ShellAmmo");
@@ -130,7 +130,7 @@ static void ConvertAmmo(player_t *p)
 // Lith_PlayerCurWeaponType
 //
 [[__call("StkCall")]]
-int Lith_PlayerCurWeaponType(player_t *p)
+int Lith_PlayerCurWeaponType(struct player *p)
 {
    return p->weapon.cur->info->type;
 }
@@ -139,7 +139,7 @@ int Lith_PlayerCurWeaponType(player_t *p)
 // Lith_ButtonPressed
 //
 [[__call("StkCall")]]
-bool Lith_ButtonPressed(player_t *p, int bt)
+bool Lith_ButtonPressed(struct player *p, int bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
@@ -148,7 +148,7 @@ bool Lith_ButtonPressed(player_t *p, int bt)
 // Lith_SetPlayerVelocity
 //
 [[__call("StkCall")]]
-bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, bool add)
+bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add)
 {
    if(add)
       p->velx += velx, p->vely += vely, p->velz += velz;
@@ -161,7 +161,7 @@ bool Lith_SetPlayerVelocity(player_t *p, fixed velx, fixed vely, fixed velz, boo
 //
 // Lith_ValidatePlayerTID
 //
-void Lith_ValidatePlayerTID(player_t *p)
+void Lith_ValidatePlayerTID(struct player *p)
 {
    if(ACS_ActivatorTID() == 0) {
       ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
@@ -178,7 +178,7 @@ void Lith_ValidatePlayerTID(player_t *p)
 // Update all of the player's data.
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateData(player_t *p)
+void Lith_PlayerUpdateData(struct player *p)
 {
    static int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
@@ -264,7 +264,7 @@ void Lith_GiveMail(int num)
 // Lith_ClearTextBuf
 //
 [[__call("StkCall")]]
-void Lith_ClearTextBuf(player_t *p)
+void Lith_ClearTextBuf(struct player *p)
 {
    memset(p->txtbuf, 0, sizeof(p->txtbuf));
    p->tbptr = 0;
@@ -276,17 +276,16 @@ void Lith_ClearTextBuf(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_KeyDown(int pnum, int ch)
 {
-   player_t *p = &players[pnum];
-
-   if(p->tbptr + 1 < countof(p->txtbuf))
-      p->txtbuf[p->tbptr++] = ch;
+   withplayer(&players[pnum])
+      if(p->tbptr + 1 < countof(p->txtbuf))
+         p->txtbuf[p->tbptr++] = ch;
 }
 
 //
 // Lith_GiveEXP
 //
 [[__call("StkCall")]]
-void Lith_GiveEXP(player_t *p, unsigned long amt)
+void Lith_GiveEXP(struct player *p, u64 amt)
 {
    #pragma GDCC FIXED_LITERAL OFF
    struct player_attributes *a = &p->attr;
@@ -307,13 +306,13 @@ void Lith_GiveEXP(player_t *p, unsigned long amt)
 // Reset some things on the player when they spawn.
 //
 [[__call("ScriptS")]]
-void Lith_ResetPlayer(player_t *p)
+void Lith_ResetPlayer(struct player *p)
 {
    //
    // Zero-init
 
    if(!p->wasinit) {
-      *p = (player_t){};
+      *p = (struct player){};
       p->wasinit = true;
    }
 
@@ -357,7 +356,7 @@ void Lith_ResetPlayer(player_t *p)
    //
    // Map-static data
 
-   p->old = (player_delta_t){};
+   p->old = (struct player_delta){};
 
    // If the map sets the TID on the first tic, it could already be set here.
    p->tid = 0;
@@ -426,7 +425,7 @@ void Lith_ResetPlayer(player_t *p)
       p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
-         p->logH("> player_t is %u bytes long!", sizeof(player_t) * 4);
+         p->logH("> player is %u bytes long!", sizeof(struct player) * 4);
          p->logH("> strnull is \"%S\"", strnull);
          PrintDmonAllocSize(p);
       } else {
@@ -452,7 +451,7 @@ void Lith_ResetPlayer(player_t *p)
 // Lith_PlayerUpdateStats
 //
 [[__call("StkCall")]]
-void Lith_PlayerUpdateStats(player_t *p)
+void Lith_PlayerUpdateStats(struct player *p)
 {
    fixed boost = 1 + p->jumpboost;
 

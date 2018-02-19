@@ -43,7 +43,7 @@ void Lith_GUI_Init(gui_state_t *g, void *state)
 //
 // Lith_GUI_UpdateState
 //
-void Lith_GUI_UpdateState(gui_state_t *g, player_t *p)
+void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 {
    bool inverted = p->getCVarI("lith_player_invertmouse");
 

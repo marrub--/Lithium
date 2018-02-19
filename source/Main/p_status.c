@@ -18,11 +18,11 @@ static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
 //
 // DrawAttr
 //
-static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
+static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 {
-   unsigned attr = p->attr.attrs[at];
-   __str    name = p->attr.names[at];
-   fixed    helptrns = 0.5;
+   u32   attr = p->attr.attrs[at];
+   __str name = p->attr.names[at];
+   fixed helptrns = 0.5;
 
    if(p->attr.points) {
       if(Lith_GUI_Button_Id(g, at, .disabled = p->attr.sup.attrs[at] <= attr, .x = x-42, y-2, Pre(btnprev), .slide = true))
@@ -43,7 +43,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, player_t *p, int at)
 
    PrintSprite("lgfx/UI/AttrBar1.png", x,1, y,1);
 
-   unsigned satr = p->attr.sup.attrs[at];
+   u32 satr = p->attr.sup.attrs[at];
 
    if(satr != attr)
       AttrBar(g, x, y, satr, "lgfx/UI/AttrBar3.png");
@@ -92,7 +92,7 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 //
 // Lith_CBITab_Status
 //
-void Lith_CBITab_Status(gui_state_t *g, player_t *p)
+void Lith_CBITab_Status(gui_state_t *g, struct player *p)
 {
    int x = 30, y = 40;
    PrintTextStr(p->name);

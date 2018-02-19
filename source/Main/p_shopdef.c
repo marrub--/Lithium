@@ -9,7 +9,7 @@
 //
 // Lith_ShopGetCost
 //
-score_t Lith_ShopGetCost(player_t *p, shopdef_t const *def)
+i96 Lith_ShopGetCost(struct player *p, shopdef_t const *def)
 {
    return PlayerDiscount(def->cost);
 }
@@ -17,7 +17,7 @@ score_t Lith_ShopGetCost(player_t *p, shopdef_t const *def)
 //
 // Lith_ShopCanBuy
 //
-bool Lith_ShopCanBuy(player_t *p, shopdef_t const *def, void *obj)
+bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj)
 {
    return
       p->score - p->getCost(def) >= 0 &&
@@ -27,7 +27,7 @@ bool Lith_ShopCanBuy(player_t *p, shopdef_t const *def, void *obj)
 //
 // Lith_ShopBuy
 //
-bool Lith_ShopBuy(player_t *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog)
+bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog)
 {
    if(!p->canBuy(def, obj))
       return false;

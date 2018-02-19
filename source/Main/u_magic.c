@@ -42,7 +42,7 @@ static void GiveMagic(struct magic_info const *m)
 // UpdateMagicUI
 //
 [[__call("ScriptS")]]
-static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
+static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 {
    gui_state_t *g = &UData.gst;
 
@@ -87,7 +87,7 @@ static void UpdateMagicUI(player_t *p, upgrade_t *upgr)
 // GivePlayerZ
 //
 [[__call("ScriptS")]]
-static void GivePlayerZ(int tid, player_t *p, __str name)
+static void GivePlayerZ(int tid, struct player *p, __str name)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
       ACS_SetUserVariable(tid, name, p->z);
@@ -136,7 +136,7 @@ void Lith_SetMagicUI(bool on)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 {
    fixed manaperc = p->mana / (fixed)p->manamax;
 
@@ -176,7 +176,7 @@ void Upgr_Magic_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_Magic_Render(player_t *p, upgrade_t *upgr)
+void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled) return;
 

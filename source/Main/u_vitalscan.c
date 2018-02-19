@@ -13,7 +13,7 @@
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
+void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
@@ -106,7 +106,7 @@ void Upgr_VitalScan_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_VitalScan_Render(player_t *p, upgrade_t *upgr)
+void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled || !UData.target)
       return;

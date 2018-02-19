@@ -7,7 +7,7 @@
 //
 // HUD_Ammo
 //
-static void HUD_Ammo(player_t *p)
+static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
 
@@ -64,7 +64,7 @@ static void HUD_Ammo(player_t *p)
 //
 // HUD_Health
 //
-static void HUD_Health(player_t *p)
+static void HUD_Health(struct player *p)
 {
    PrintSprite("lgfx/HUD_C/SplitBack.png", 0,1, 239,2);
    PrintSprite("lgfx/HUD_C/VIT.png",       2,1, 237,2);
@@ -79,7 +79,7 @@ static void HUD_Health(player_t *p)
 //
 // Activate
 //
-void Upgr_HeadsUpDis2_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis2_Activate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
 }
@@ -87,7 +87,7 @@ void Upgr_HeadsUpDis2_Activate(player_t *p, upgrade_t *upgr)
 //
 // Disable
 //
-void Upgr_HeadsUpDis2_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis2_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
 }
@@ -95,7 +95,7 @@ void Upgr_HeadsUpDis2_Deactivate(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_HeadsUpDis2_Render(player_t *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 {
    Lith_HUD_Log(p, CR_RED, 0, -10);
    Lith_HUD_KeyInd(p, 180, 21, true, 0.8);

@@ -8,7 +8,7 @@
 //
 // Deactivate
 //
-void Upgr_StealthSys_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->alpha = 1;
    InvTake("Lith_StealthSystem", 1);
@@ -18,7 +18,7 @@ void Upgr_StealthSys_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_StealthSys_Update(player_t *p, upgrade_t *upgr)
+void Upgr_StealthSys_Update(struct player *p, upgrade_t *upgr)
 {
    fixed vel = absk(p->getVel()) / 10.0;
    p->alpha = UData.mulvel = lerpk(UData.mulvel, vel, 0.02);

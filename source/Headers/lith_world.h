@@ -28,8 +28,8 @@ typedef struct payoutinfo_s
    int killnum, killmax;
    int itemnum, itemmax;
 
-   fixed64_t killpct;
-   fixed64_t itempct;
+   fixed64 killpct;
+   fixed64 itempct;
 
    int killscr;
    int itemscr;
@@ -79,7 +79,7 @@ typedef struct worldinfo_s
    bool   enemycheck;
    int    secretsfound;
    double scoremul;
-   long   ticks;
+   u64    ticks;
    int    game;
    int    apiversion;
    int    soulsfreed;

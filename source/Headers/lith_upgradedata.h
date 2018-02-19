@@ -75,8 +75,8 @@ struct upgr_data_ReactArmor {
 };
 
 struct upgr_data_ReflexWetw {
-   unsigned charge : 6;
-   bool     leaped : 1;
+   u32  charge : 6;
+   bool leaped : 1;
 };
 
 struct upgr_data_VitalScan {
@@ -89,9 +89,9 @@ struct upgr_data_VitalScan {
    fixed cangle;
    fixed oangle;
    fixed splitfrac;
-   unsigned split : 3;
-   unsigned rank  : 4;
-   bool     freak : 1;
+   u32  split : 3;
+   u32  rank  : 4;
+   bool freak : 1;
 };
 
 struct upgr_data_Zoom {
@@ -133,12 +133,13 @@ struct upgr_data {
 
 typedef struct upgradeinfo {
    [[__anonymous]] shopdef_t shopdef;
-   int      pclass;
-   int      category;
-   int      perf;
-   fixed    scoreadd;
-   int      group;
-   unsigned requires;
+
+   int   pclass;
+   int   category;
+   int   perf;
+   fixed scoreadd;
+   int   group;
+   u32   requires;
 
    int id, key;
 

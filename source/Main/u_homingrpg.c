@@ -10,7 +10,7 @@
 // CheckTarget
 //
 [[__call("ScriptS")]]
-static int CheckTarget(player_t *p)
+static int CheckTarget(struct player *p)
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
       return Lith_UniqueID(0);
@@ -26,7 +26,7 @@ static int CheckTarget(player_t *p)
 [[__call("ScriptS"), __extern("ACS")]]
 void Lith_HomingMissile()
 {
-   player_t *p = Lith_GetPlayer(0, AAPTR_TARGET);
+   struct player *p = Lith_GetPlayer(0, AAPTR_TARGET);
    ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
 }
 
@@ -34,7 +34,7 @@ void Lith_HomingMissile()
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_HomingRPG_Update(player_t *p, upgrade_t *upgr)
+void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
 {
    if(p->weapontype == weapon_launcher)
    {

@@ -40,7 +40,7 @@ static bool dorain;
 // Extern Functions ----------------------------------------------------------|
 
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_SpawnBosses(score_t sum, bool force);
+void Lith_SpawnBosses(i96 sum, bool force);
 
 //
 // Lith_GetWorldExtern
@@ -280,7 +280,7 @@ static void DoRain()
 
    dorain = true;
 
-   player_t *p = &players[0];
+   struct player *p = &players[0];
    p->setActivator();
 
    ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
@@ -324,12 +324,12 @@ static void DoRain()
 //
 static void DoPayout(void)
 {
-   fixed64_t taxpct = ACS_RandomFixed(0, 4 / 100.0);
+   fixed64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
    #define GenPay(name) \
       if(payout.name##max) \
       { \
-         payout.name##pct = (payout.name##num / (fixed64_t)payout.name##max) * 100; \
+         payout.name##pct = (payout.name##num / (fixed64)payout.name##max) * 100; \
          payout.name##scr = payout.name##pct * 600; \
       }
 
@@ -344,7 +344,7 @@ static void DoPayout(void)
    Lith_ForPlayer()
    {
       [[__call("ScriptS")]]
-      extern void Lith_PlayerPayout(player_t *p);
+      extern void Lith_PlayerPayout(struct player *p);
 
       Lith_PlayerPayout(p);
    }

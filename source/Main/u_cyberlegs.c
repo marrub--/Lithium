@@ -6,7 +6,7 @@
 //
 // Activate
 //
-void Upgr_CyberLegs_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul += 0.2;
    p->jumpboost += 0.5;
@@ -15,7 +15,7 @@ void Upgr_CyberLegs_Activate(player_t *p, upgrade_t *upgr)
 //
 // Deactivate
 //
-void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.2;
    p->jumpboost -= 0.5;
@@ -25,7 +25,7 @@ void Upgr_CyberLegs_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_CyberLegs_Update(player_t *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
 {
    fixed absvel = absk(p->old.velz) * 10.0k;
 

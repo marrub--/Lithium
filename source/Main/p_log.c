@@ -30,7 +30,7 @@ void Lith_LogS(int pnum, int type)
 //
 // Lith_Log
 //
-void Lith_Log(player_t *p, __str fmt, ...)
+void Lith_Log(struct player *p, __str fmt, ...)
 {
    va_list vl;
 
@@ -50,7 +50,7 @@ void Lith_Log(player_t *p, __str fmt, ...)
 //
 // Lith_LogF
 //
-void Lith_LogF(player_t *p, __str fmt, ...)
+void Lith_LogF(struct player *p, __str fmt, ...)
 {
    va_list vl;
 
@@ -65,7 +65,7 @@ void Lith_LogF(player_t *p, __str fmt, ...)
 //
 // Lith_LogH
 //
-void Lith_LogH(player_t *p, __str fmt, ...)
+void Lith_LogH(struct player *p, __str fmt, ...)
 {
    va_list vl;
 
@@ -83,7 +83,7 @@ void Lith_LogH(player_t *p, __str fmt, ...)
 //
 // Lith_LogV
 //
-logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
+logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl)
 {
    logdata_t *logdata = Salloc(logdata_t);
    logdata->link    .construct(logdata);
@@ -102,7 +102,7 @@ logdata_t *Lith_LogV(player_t *p, __str fmt, va_list vl)
 // Lith_PlayerUpdateLog
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateLog(player_t *p)
+void Lith_PlayerUpdateLog(struct player *p)
 {
    forlist(logdata_t *logdata, p->loginfo.hud)
    {
@@ -121,7 +121,7 @@ void Lith_PlayerUpdateLog(player_t *p)
 //
 // Lith_PlayerLogEntry
 //
-void Lith_PlayerLogEntry(player_t *p)
+void Lith_PlayerLogEntry(struct player *p)
 {
    logmap_t *logmap = Salloc(logmap_t);
    logmap->link.construct(logmap);
@@ -137,7 +137,7 @@ void Lith_PlayerLogEntry(player_t *p)
 //
 // Lith_CBITab_Log
 //
-void Lith_CBITab_Log(gui_state_t *g, player_t *p)
+void Lith_CBITab_Log(gui_state_t *g, struct player *p)
 {
    size_t num = 0;
    int i = 0;

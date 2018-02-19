@@ -48,7 +48,7 @@ static bool alldead[diff_max];
 static int rewardnum;
 static int difficulty;
 static struct boss *lastboss;
-static score_t scorethreshold = 1000000;
+static i96 scorethreshold = 1000000;
 
 // Static Functions ----------------------------------------------------------|
 
@@ -233,7 +233,7 @@ void Lith_TriggerBoss_Script(int diff, int num, int phase)
 // Lith_SpawnBosses
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_SpawnBosses(score_t sum, bool force)
+void Lith_SpawnBosses(i96 sum, bool force)
 {
    if(!force && sum < scorethreshold) return;
 

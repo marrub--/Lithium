@@ -9,7 +9,7 @@
    type yb = func(y2, y3, t); \
    return (ret){func(xa, xb, t), func(ya, yb, t)}
 
-static crc64_t lmvar crctable[256]; // NB: Don't try to hash >8bit data.
+static u64 lmvar crctable[256]; // NB: Don't try to hash >8bit data.
 static bool lmvar crcinit;
 
 //
@@ -17,11 +17,11 @@ static bool lmvar crcinit;
 //
 static void InitCRC64()
 {
-   crc64_t const polynomial = 0xC96C5795D7870F42; // ECMA 182
+   u64 const polynomial = 0xC96C5795D7870F42; // ECMA 182
 
-   for(crc64_t i = 0; i < 256; i++)
+   for(u64 i = 0; i < 256; i++)
    {
-      crc64_t remainder = i;
+      u64 remainder = i;
 
       for(int j = 0; j < 8; j++) {
          if(remainder & 1) remainder = (remainder >> 1) ^ polynomial;
@@ -37,9 +37,9 @@ static void InitCRC64()
 //
 // Lith_CRC64
 //
-crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
+u64 Lith_CRC64(void const *data, size_t len, u64 result)
 {
-   unsigned char const *ptr = data;
+   byte const *ptr = data;
 
    if(!crcinit) InitCRC64();
 
@@ -54,9 +54,9 @@ crc64_t Lith_CRC64(void const *data, size_t len, crc64_t result)
 //
 // Lith_CRC64_str
 //
-crc64_t Lith_CRC64_str(void  __str_ars const *data, size_t len, crc64_t result)
+u64 Lith_CRC64_str(void  __str_ars const *data, size_t len, u64 result)
 {
-   unsigned char __str_ars const *ptr = data;
+   byte __str_ars const *ptr = data;
 
    if(!crcinit) InitCRC64();
 
@@ -121,9 +121,9 @@ fixed lerpk(fixed a, fixed b, fixed t)
 //
 // lerplk
 //
-fixed64_t lerplk(fixed64_t a, fixed64_t b, fixed64_t t)
+fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
 {
-   fixed64_t ret = ((1.0lk - t) * a) + (t * b);
+   fixed64 ret = ((1.0lk - t) * a) + (t * b);
 
    if(roundlk(ret, 10) == b)
       return b;

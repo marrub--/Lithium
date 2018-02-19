@@ -20,7 +20,7 @@ void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t s
 //
 // Lith_SaveBegin
 //
-savefile_t *Lith_SaveBegin(player_t *p)
+savefile_t *Lith_SaveBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 
@@ -87,7 +87,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
 //
 // Lith_LoadBegin
 //
-savefile_t *Lith_LoadBegin(player_t *p)
+savefile_t *Lith_LoadBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 

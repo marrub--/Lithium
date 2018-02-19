@@ -234,7 +234,7 @@ bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 //
 // Lith_PlayerAddItem
 //
-bool Lith_PlayerAddItem(player_t *p, item_t *item)
+bool Lith_PlayerAddItem(struct player *p, item_t *item)
 {
    for(int i = 0; i < countof(p->inv); i++)
       if(Lith_ItemPlaceFirst(&p->inv[i], item))
@@ -248,7 +248,7 @@ bool Lith_PlayerAddItem(player_t *p, item_t *item)
 //
 void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
 {
-   player_t *p = cont->user;
+   struct player *p = cont->user;
 
    __str bg = cont->bg ? cont->bg : "lgfx/UI/InvBack.png";
    int h = cont->h * 8;
@@ -295,7 +295,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
 // Lith_PlayerUpdateInventory
 //
 [[__call("ScriptS")]]
-void Lith_PlayerUpdateInventory(player_t *p)
+void Lith_PlayerUpdateInventory(struct player *p)
 {
    if(p->useitem)
    {
@@ -319,7 +319,7 @@ void Lith_PlayerUpdateInventory(player_t *p)
 //
 // Lith_CBITab_Items
 //
-void Lith_CBITab_Items(gui_state_t *g, player_t *p)
+void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 {
    static int const x[] = {
       150+8*-14,

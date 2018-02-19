@@ -7,7 +7,7 @@
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_Subweapons_Update(player_t *p, upgrade_t *upgr)
+void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
 {
    if(InvNum("Lith_SubweaponShots") < 2)
    {
@@ -25,7 +25,7 @@ void Upgr_Subweapons_Update(player_t *p, upgrade_t *upgr)
 //
 // Render
 //
-void Upgr_Subweapons_Render(player_t *p, upgrade_t *upgr)
+void Upgr_Subweapons_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled) return;
 

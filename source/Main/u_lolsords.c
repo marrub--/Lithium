@@ -8,7 +8,7 @@
 //
 // Activate
 //
-void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
+void Upgr_lolsords_Activate(struct player *p, upgrade_t *upgr)
 {
    UData.origweapon = p->weaponclass;
    InvGive("Lith_Sword", 1);
@@ -17,7 +17,7 @@ void Upgr_lolsords_Activate(player_t *p, upgrade_t *upgr)
 //
 // Deactivate
 //
-void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
+void Upgr_lolsords_Deactivate(struct player *p, upgrade_t *upgr)
 {
    InvTake("Lith_Sword", 1);
    ACS_SetWeapon(UData.origweapon);
@@ -27,7 +27,7 @@ void Upgr_lolsords_Deactivate(player_t *p, upgrade_t *upgr)
 // Update
 //
 [[__call("ScriptS")]]
-void Upgr_lolsords_Update(player_t *p, upgrade_t *upgr)
+void Upgr_lolsords_Update(struct player *p, upgrade_t *upgr)
 {
    ACS_SetWeapon("Lith_Sword");
 }

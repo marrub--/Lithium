@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const unsigned char base64_table[65] =
+static const byte base64_table[65] =
    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /**
@@ -56,11 +56,10 @@ static const unsigned char base64_table[65] =
  * nul terminated to make it easier to use as a C string. The nul terminator is
  * not included in out_len.
  */
-unsigned char * base64_encode(const unsigned char *src, size_t len,
-               size_t *out_len)
+byte *base64_encode(const byte *src, size_t len, size_t *out_len)
 {
-   unsigned char *out, *pos;
-   const unsigned char *end, *in;
+   byte *out, *pos;
+   const byte *end, *in;
    size_t olen;
 
    olen = len * 4 / 3 + 4; /* 3-byte blocks to 4-byte */
@@ -112,17 +111,16 @@ unsigned char * base64_encode(const unsigned char *src, size_t len,
  *
  * Caller is responsible for freeing the returned buffer.
  */
-unsigned char * base64_decode(const unsigned char *src, size_t len,
-               size_t *out_len)
+byte *base64_decode(const byte *src, size_t len, size_t *out_len)
 {
-   static unsigned char dtable[256];
-   unsigned char *out, *pos, block[4], tmp;
+   static byte dtable[256];
+   byte *out, *pos, block[4], tmp;
    size_t i, count, olen;
    int pad = 0;
 
    memset(dtable, 0x80, 256);
    for (i = 0; i < sizeof(base64_table) - 1; i++)
-      dtable[base64_table[i]] = (unsigned char) i;
+      dtable[base64_table[i]] = (byte)i;
    dtable['='] = 0;
 
    count = 0;

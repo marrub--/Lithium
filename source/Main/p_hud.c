@@ -8,7 +8,7 @@
 //
 // Lith_HUD_WeaponSlots_Impl
 //
-void Lith_HUD_WeaponSlots_Impl(player_t *p, struct hud_wsl const *a)
+void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 {
    if(p->getCVarI("lith_hud_showweapons"))
       for(int i = 1; i < SLOT_MAX; i++)
@@ -34,7 +34,7 @@ void Lith_HUD_WeaponSlots_Impl(player_t *p, struct hud_wsl const *a)
 //
 // Lith_HUD_Score
 //
-void Lith_HUD_Score(player_t *p, __str fmt, score_t scrn, __str font, __str cr, int x, int xa, int y, int ya)
+void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr, int x, int xa, int y, int ya)
 {
    if(p->getCVarI("lith_hud_showscore"))
    {
@@ -76,7 +76,7 @@ void Lith_HUD_Score(player_t *p, __str fmt, score_t scrn, __str font, __str cr, 
 //
 // Lith_HUD_KeyInd
 //
-void Lith_HUD_KeyInd(player_t *p, int x, int y, bool horz, fixed a)
+void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
 {
    #define Inc (horz ? (x -= 10) : (y += 10))
    if(p->keys.rs) PrintSpriteA("H_KS1", x,2, y,1, a), Inc;
@@ -92,7 +92,7 @@ void Lith_HUD_KeyInd(player_t *p, int x, int y, bool horz, fixed a)
 // Lith_HUD_Log
 //
 [[__call("ScriptS")]]
-void Lith_HUD_Log(player_t *p, int cr, int x, int yy)
+void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
 {
    if(p->getCVarI("lith_hud_showlog"))
    {
