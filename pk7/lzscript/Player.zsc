@@ -81,7 +81,7 @@ class Lith_Player : DoomPlayer
          if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
          {
             let dst = distance2D(inv);
-            let t = clamp((140 - dst) / 3000., 0., 1.);
+            let t = clamp((140 - dst) / 1000., 0., 1.);
 
             if(t)
             {
