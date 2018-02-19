@@ -83,7 +83,6 @@ default
    DeathSound "cyber/death";
    ActiveSound "cyber/active";
    Obituary "$OB_CYBORG";
-   DamageFactor "Lith_Energy", 0.5; // :^)
    Tag "$LITH_TXT_INFO_SHORT_Cyberdemon";
    
    +BOSS

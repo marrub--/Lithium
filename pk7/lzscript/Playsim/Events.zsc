@@ -8,8 +8,18 @@ class Lith_PostACS : Thinker
 
 class Lith_Events : EventHandler;
 
+bool m_bosslevel;
+
 override void WorldLoaded(WorldEvent evt)
 {
+   static const string[] bosslevels = {
+      "058fb092ea1b70da1e3cbf501c4a91a1", // E1M8
+      "effe91df41ad41f6973c06f0ad67ddb9", // E2M8
+      "ef128313112110ed6c1549af96af26c9", // E3M8
+      "2dc939e508ab8eb68af79d5b60568711", // E4M8
+      "5eecd88f4491f516d590ce4bbf45f532"  // MAP30
+   };
+
    if(evt.isSaveGame)
       return;
    else if(evt.isReopen)
@@ -21,6 +31,13 @@ override void WorldLoaded(WorldEvent evt)
 
       let th = new("Lith_PostACS");
       th.changeStatNum(Thinker.STAT_USER + 7);
+
+      let sum = level.getChecksum();
+      for(int i = 0; i < bosslevels.size(); i++) if(sum == bosslevels[i])
+      {
+         m_bosslevel = true;
+         break;
+      }
    }
 }
 
@@ -56,8 +73,17 @@ override void WorldThingSpawned(WorldEvent evt)
    if(th.bISMONSTER)
    {
       th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
+
       if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
+
+      if(m_bosslevel && th.bBOSS)
+      {
+         th.health *= frandom(2, 3);
+         th.reactiontime = 0;
+         th.damageMultiply *= frandom(1.1, 1.6);
+         th.damageFactor   *= frandom(0.3, 0.5);
+      }
    }
 }
 
