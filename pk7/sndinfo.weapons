@@ -1,4 +1,87 @@
 //
+// Casings
+//
+casings/bullet/bounce1  lsounds/Casings/CaseBounce1.wav  // ???
+casings/bullet/bounce2  lsounds/Casings/CaseBounce2.wav  // 〃
+casings/bullet/bounce3  lsounds/Casings/CaseBounce3.wav  // 〃
+casings/bullet/bounce4  lsounds/Casings/CaseBounce4.wav  // 〃
+casings/bullet/bounce5  lsounds/Casings/CaseBounce5.wav  // 〃
+casings/bullet/bounce6  lsounds/Casings/CaseBounce6.wav  // 〃
+casings/bullet/bounce7  lsounds/Casings/CaseBounce7.wav  // 〃
+casings/bullet/bounce8  lsounds/Casings/CaseBounce8.wav  // 〃
+casings/bullet/bounce9  lsounds/Casings/CaseBounce9.wav  // 〃
+casings/bullet/bounce10 lsounds/Casings/CaseBounce10.wav // 〃
+
+casings/shell/bounce1 lsounds/Casings/ShellBounce1.wav // ???
+casings/shell/bounce2 lsounds/Casings/ShellBounce2.wav // 〃
+casings/shell/bounce3 lsounds/Casings/ShellBounce3.wav // 〃
+casings/shell/bounce4 lsounds/Casings/ShellBounce4.wav // 〃
+casings/shell/bounce5 lsounds/Casings/ShellBounce5.wav // 〃
+
+casings/bullet/die1  lsounds/Casings/CaseStop1.wav  // ???
+casings/bullet/die2  lsounds/Casings/CaseStop2.wav  // 〃
+casings/bullet/die3  lsounds/Casings/CaseStop3.wav  // 〃
+casings/bullet/die4  lsounds/Casings/CaseStop4.wav  // 〃
+casings/bullet/die5  lsounds/Casings/CaseStop5.wav  // 〃
+casings/bullet/die6  lsounds/Casings/CaseStop6.wav  // 〃
+casings/bullet/die7  lsounds/Casings/CaseStop7.wav  // 〃
+casings/bullet/die8  lsounds/Casings/CaseStop8.wav  // 〃
+casings/bullet/die9  lsounds/Casings/CaseStop9.wav  // 〃
+casings/bullet/die10 lsounds/Casings/CaseStop10.wav // 〃
+
+casings/shell/die1 lsounds/Casings/ShellBounce1.wav // ???
+casings/shell/die2 lsounds/Casings/ShellBounce2.wav // 〃
+casings/shell/die3 lsounds/Casings/ShellBounce3.wav // 〃
+casings/shell/die4 lsounds/Casings/ShellBounce4.wav // 〃
+casings/shell/die5 lsounds/Casings/ShellBounce5.wav // 〃
+
+$random casings/bullet/bounce {
+   casings/bullet/bounce1
+   casings/bullet/bounce2
+   casings/bullet/bounce3
+   casings/bullet/bounce4
+   casings/bullet/bounce5
+   casings/bullet/bounce6
+   casings/bullet/bounce7
+   casings/bullet/bounce8
+   casings/bullet/bounce9
+   casings/bullet/bounce10
+}
+$volume casings/bullet/bounce 0.4
+
+$random casings/bullet/die {
+   casings/bullet/die1
+   casings/bullet/die2
+   casings/bullet/die3
+   casings/bullet/die4
+   casings/bullet/die5
+   casings/bullet/die6
+   casings/bullet/die7
+   casings/bullet/die8
+   casings/bullet/die9
+   casings/bullet/die10
+}
+$volume casings/bullet/die 0.4
+
+$random casings/shell/bounce {
+   casings/shell/bounce1
+   casings/shell/bounce2
+   casings/shell/bounce3
+   casings/shell/bounce4
+   casings/shell/bounce5
+}
+$volume casings/shell/bounce 0.5
+
+$random casings/shell/die {
+   casings/shell/die1
+   casings/shell/die2
+   casings/shell/die3
+   casings/shell/die4
+   casings/shell/die5
+}
+$volume casings/shell/die 0.5
+
+//
 // Magazine
 //
 weapons/magbounce1 lsounds/Magazine/Drop1.flac // Halo 3

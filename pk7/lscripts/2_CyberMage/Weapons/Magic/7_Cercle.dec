@@ -63,7 +63,7 @@ actor Lith_CircleSpearThrower
 
 actor Lith_CircleElectricity
 {
-   Translation "96:111=168:191", "192:207=168:191"
+   Translation "Lith_CircleElectricity"
    RenderStyle "Add"
    Damage 7
 

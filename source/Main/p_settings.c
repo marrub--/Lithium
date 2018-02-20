@@ -29,8 +29,8 @@ Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse");
 
 Category("Items");
 if(p->num == 0) {
-   Bool("Bright weapon pickups", "lith_player_brightweps");
-   Bool("No item effects",       "lith_player_noitemfx");
+   ServerBool("Bright weapon pickups", "lith_player_brightweps");
+   ServerBool("No item effects",       "lith_player_noitemfx");
 }
 Bool("Teleport in bought items and upgrades", "lith_player_teleshop");
 Bool("Stupid pickup messages", "lith_player_stupidpickups");
@@ -45,7 +45,12 @@ if(p->pclass == pcl_marine) {
    Bool("Modal Rifle scope",          "lith_weapons_riflescope");
    Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
 }
-Bool("Drop magazines from weapons", "lith_weapons_magdrops");
+if(p->num == 0) {
+   ServerBool("Emit casings from weapons",   "lith_weapons_casings");
+   ServerBool("Drop magazines from weapons", "lith_weapons_magdrops");
+   ServerBool("Casings fade out",   "lith_weapons_casingfadeout");
+   ServerBool("Magazines fade out", "lith_weapons_magfadeout");
+}
 Bool("Magic selection animations", "lith_weapons_magicselanims");
 Bool("Slot 3 weapons take ammo", "lith_weapons_slot3ammo");
 

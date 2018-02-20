@@ -40,7 +40,7 @@ class Lith_ManaPickup : Lith_BasicPickup
 
    override void PostBeginPlay()
    {
-      Thing_SetTranslation(0, 42470 + random(0, 7));
+      A_SetTranslation("Lith_Mana" .. random(1, 8));
       A_SetScale(0.8 * frandom(0.5, 1));
       A_GiveInventory("Lith_MagicAmmo", random(7, 10));
       ThrustThingZ(0, 16, 0, 1);

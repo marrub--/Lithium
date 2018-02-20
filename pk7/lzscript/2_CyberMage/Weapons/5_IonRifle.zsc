@@ -4,7 +4,7 @@ class Lith_IonRifleFXBase : Actor
    {
       RenderStyle "Add";
       Alpha 0.75;
-      Translation "112:127=193:197", "160:167=193:199", "224:231=192:198";
+      Translation "Lith_IonRifleFXBase";
       Height 1;
       Radius 1;
       

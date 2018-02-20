@@ -2,7 +2,7 @@ actor Lith_OmegaRailFXBase
 {
    RenderStyle "Add"
    Alpha 0.75
-   Translation "112:127=168:191", "160:167=168:191", "224:231=168:168"
+   Translation "Lith_OmegaRail"
    Height 1
    Radius 1
    
@@ -14,7 +14,7 @@ actor Lith_OmegaRailParticle1
 {
    RenderStyle "Add"
    Alpha 0.8
-   Translation "192:207=168:191", "240:247=191:191"
+   Translation "Lith_OmegaRailParticle"
    
    +NOINTERACTION
    
@@ -45,7 +45,7 @@ actor Lith_OmegaRailBeam : Lith_OmegaRailFXBase
 {
    RenderStyle "Add"
    Alpha 0.75
-   Translation "112:127=168:191", "160:167=168:191", "224:231=168:168"
+   Translation "Lith_OmegaRail"
    XScale 0.8
    YScale 0.7
    DamageType "Lith_PlayerMissile"

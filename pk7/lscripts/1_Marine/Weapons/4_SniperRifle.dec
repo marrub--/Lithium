@@ -123,6 +123,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       "####" "#" 1 offset(23, 67)
       "####" "#" 1 offset(22, 74) A_PlaySound("weapons/sniper/boltback", CHAN_5)
       "####" "#" 1 offset(19, 78)
+      "####" "#" 0 Lith_A_Casing("Lith_CasBigHot", 15, 4, 30, frandom(3,4), frandom(7,8), frandom(2,4))
       "####" "#" 5 offset(18, 80)
       "####" "#" 1 offset(17, 74) A_PlaySound("weapons/sniper/boltforward", CHAN_6)
       "####" "#" 1 offset(19, 67)
@@ -159,12 +160,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       SNPG A 1 offset(-9, 43) A_PlaySound("weapons/sniper/magout", CHAN_6)
       SNPG A 1 offset(-12, 47)
       SNPG A 1 offset(-14, 52)
-      SNPG A 0 Lith_A_JumpIfMagEmpty(2)
-      SNPG A 0 A_SpawnItemEx("Lith_SniperRifleMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0)
-      goto Reload2
-      SNPG A 0 A_SpawnItemEx("Lith_SniperRifleMagazine",  8,-1,20, frandom(0,1),frandom(-1,-2),0)
-   Reload2:
-      SNPG A 2 offset(-12, 55)
+      SNPG A 2 offset(-12, 55) Lith_A_DropMag("Lith_SniperRifleMagazine", "Lith_SniperRifleMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0)
       SNPG A 3 offset(-11, 57)
       SNPG A 8 offset(-10, 60)
       SNPG A 8 offset(-11, 60)

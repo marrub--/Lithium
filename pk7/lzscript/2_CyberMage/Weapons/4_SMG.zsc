@@ -47,7 +47,7 @@ class Lith_SMGTrail2 : Lith_SMGTrail
 {
    default
    {
-      Translation "160:167=16:28", "64:79=22:28";
+      Translation "Lith_SMGTrail2";
    }
 }
 
@@ -58,7 +58,7 @@ class Lith_SMGTrail3 : Actor
       Alpha 0.8;
       Scale 0.3;
       RenderStyle "Add";
-      Translation "160:167=192:199", "64:79=197:201";
+      Translation "Lith_SMGTrail3";
       
       +BRIGHT
       +NOINTERACTION
@@ -329,8 +329,7 @@ Reload:
    CSMG E 1 offset(-4, 37);
    CSMG F 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_6);
    CSMG F 1 offset(-12, 47);
-   CSMG F 0 A_SpawnItemEx(invoker.Lith_MagEmpty() ? "Lith_SMGMagazine" : "Lith_SMGMagazine2", 4,-1,20, frandom(0,2),frandom(-1,1),0);
-   CSMG F 1 offset(-14, 52);
+   CSMG F 1 offset(-14, 52) Lith_A_DropMag("Lith_SMGMagazine", "Lith_SMGMagazine2", 4,-1,20, frandom(0,2),frandom(-1,1),0);
    CSMG F 2 offset(-12, 55);
    CSMG F 3 offset(-11, 57);
    CSMG F 8 offset(-10, 60);
@@ -363,8 +362,7 @@ ReloadLong:
    CSMG D 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_6);
    CSMG E 1 offset(-12, 47);
    CSMG E 2 offset(-14, 52);
-   CSMG F 0 A_SpawnItemEx(invoker.Lith_MagEmpty() ? "Lith_SMGMagazine" : "Lith_SMGMagazine2", 4,-1,20, frandom(0,2),frandom(-1,1),0);
-   CSMG F 2 offset(-12, 55);
+   CSMG F 2 offset(-12, 55) Lith_A_DropMag("Lith_SMGMagazine", "Lith_SMGMagazine2", 4,-1,20, frandom(0,2),frandom(-1,1),0);
    CSMG F 3 offset(-11, 57);
    CSMG F 12 offset(-10, 60);
    CSMG F 12 offset(-11, 60);

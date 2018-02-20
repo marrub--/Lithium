@@ -1,11 +1,14 @@
-user float lith_weapons_zoomfactor     = 3.0;
-user float lith_weapons_scopealpha     = 0.2;
-user float lith_weapons_alpha          = 1.0;
-user bool  lith_weapons_riflescope     = false;
-user bool  lith_weapons_riflemodeclear = false;
-user bool  lith_weapons_magdrops       = true;
-user bool  lith_weapons_magicselanims  = true;
-user float lith_weapons_recoil         = 1.0;
-user bool  lith_weapons_slot3ammo      = false;
+user   float lith_weapons_zoomfactor     = 3.0;
+user   float lith_weapons_scopealpha     = 0.2;
+user   float lith_weapons_alpha          = 1.0;
+user   bool  lith_weapons_riflescope     = false;
+user   bool  lith_weapons_riflemodeclear = false;
+server bool  lith_weapons_magdrops       = true;
+server bool  lith_weapons_casings        = true;
+server bool  lith_weapons_magfadeout     = true;
+server bool  lith_weapons_casingfadeout  = true;
+user   bool  lith_weapons_magicselanims  = true;
+user   float lith_weapons_recoil         = 1.0;
+user   bool  lith_weapons_slot3ammo      = false;
 
 // EOF

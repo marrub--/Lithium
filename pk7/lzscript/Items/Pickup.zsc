@@ -5,7 +5,7 @@ class Lith_ItemGlow : Actor
       RenderStyle "Add";
       Alpha 0.7;
       Scale 0.1;
-      Translation "112:127=168:183", "5:15=185:185", "224:231=168:171";
+      Translation "Lith_ItemGlow";
 
       +NOINTERACTION
       +NOTIMEFREEZE
@@ -40,6 +40,28 @@ class Lith_ItemGlow : Actor
       #### # 5 bright;
       #### # 1 bright A_FadeOut(1.0 / 35.0);
       wait;
+   }
+}
+
+class Lith_WeapGlow : Lith_ItemGlow
+{
+   default
+   {
+      Translation "Lith_WeapGlow";
+   }
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      if(lith_player_brightweps) A_SetTranslation("Lith_WeapGlowBright");
+   }
+}
+
+class Lith_UpgrGlow : Lith_ItemGlow
+{
+   default
+   {
+      Translation "None";
    }
 }
 
@@ -120,7 +142,7 @@ class Lith_Pickup : CustomInventory
       double sz = sin(m_glz);
       double ca = cos(m_gla);
 
-      if(!CallACS("LWData", wdata_noitemfx))
+      if(!lith_player_noitemfx)
       {
          A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sz * 9);
          A_SpawnItemEx(type, 0, sa * 32, 24 + ca * 32);

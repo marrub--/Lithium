@@ -28,7 +28,7 @@ actor Lith_StarShrapnelHoming : Lith_StarShrapnel
 {
    Damage (30)
    Scale 1.4
-   Translation "160:167=192:199", "224:231=192:199"
+   Translation "Lith_StarShrapnelHoming"
    
    states
    {
@@ -214,7 +214,7 @@ actor Lith_Solspear
 
 actor Lith_StarBarrier
 {
-   Translation "192:207=160:167", "240:247=167:167"
+   Translation "Lith_StarBarrier"
    RenderStyle "Add"
    XScale 0.3
    YScale 0.4

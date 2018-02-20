@@ -3,7 +3,7 @@ actor Lith_VoidShotTrail
    RenderStyle "Add"
    Alpha 0.9
    Scale 0.05
-   Translation "0:255=%[0,0,0]:[0.8,0.1,0.75]"
+   Translation "Lith_VoidShot"
 
    +NOINTERACTION
    +BRIGHT
@@ -43,7 +43,7 @@ actor Lith_VoidShotTrail3 : Lith_VoidShotTrail
 
 actor Lith_VoidShotEffect : Lith_MonsterSoulEffect
 {
-   Translation "0:255=%[0,0,0]:[0.8,0.1,0.75]"
+   Translation "Lith_VoidShot"
 }
 
 actor Lith_VoidShot
@@ -55,7 +55,7 @@ actor Lith_VoidShot
    Height 4
    Damage 5
    Speed 16
-   Translation "0:255=%[0,0,0]:[0.8,0.1,0.75]"
+   Translation "Lith_VoidShot"
 
    Projectile
    +BRIGHT
@@ -118,6 +118,7 @@ actor Lith_SPAS : Lith_CWeapon
       goto FireEmpty
       TNT1 A 0 Lith_A_JumpIfMagEmpty
       TNT1 A 0 A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE)
+      TNT1 A 0 Lith_A_Casing("Lith_CasShellHot", 30, 0, 30, frandom(3,4), frandom(7,8), frandom(7,9))
       TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_SPAS_B), "Fire1")
       TNT1 A 0 Lith_A_MagIncr
    Fire1:

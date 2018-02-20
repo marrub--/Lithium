@@ -3,7 +3,7 @@ actor Lith_ParticleBeam : Lith_PlasmaLaze
    RenderStyle "Add"
    Scale 0.4
    Mass 0
-   Translation "112:127=192:207", "224:231=192:194", "160:167=192:207", "249:249=196:196"
+   Translation "Lith_ParticleBeam"
    DamageType "Lith_PlayerMissile"
    
    +FORCEXYBILLBOARD

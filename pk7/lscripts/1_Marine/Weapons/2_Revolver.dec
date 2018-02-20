@@ -54,6 +54,7 @@ actor Lith_Revolver : Lith_MWeapon
       REVO A 1 offset(-4, 40)
       REVO G 1 offset(-7, 42)
       REVO G 1 offset(-9, 48)
+      REVO GGGGGG 0 Lith_A_Casing("Lith_CasSmall", 10, frandom(-1,1), 44, frandom(1,2), frandom(1,3), 0)
       REVO H 1 offset(-11, 50)
       REVO H 1 offset(-12, 55)
       REVO I 1 offset(-13, 64)

@@ -38,7 +38,7 @@ actor Lith_PlasmaBoltTrail_Green : Lith_PlasmaBoltTrail
 
 actor Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail
 {
-   Translation "0:255=%[0,0,0]:[1,0,0]"
+   Translation "Lith_PlasmaBoltTrail_Red"
    
    states
    {
@@ -54,7 +54,7 @@ actor Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail
 
 actor Lith_PlasmaBoltTrail_Blue : Lith_PlasmaBoltTrail
 {
-   Translation "112:127=197:207", "224:231=192:199"
+   Translation "Lith_PlasmaBoltTrail_Blue"
    Alpha 0.5
    
    states

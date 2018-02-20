@@ -1,4 +1,3 @@
-#include "lscripts/Items/PickupEffects.dec"
 #include "lscripts/Items/Ammo.dec"
 #include "lscripts/Items/Powerups.dec"
 #include "lscripts/Items/BlurSphere.dec"

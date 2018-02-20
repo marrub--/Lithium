@@ -5,7 +5,6 @@
 #include "lscripts/1_Marine/Weapons/2_Pistol.dec"
 #include "lscripts/1_Marine/Weapons/2_Revolver.dec"
 #include "lscripts/1_Marine/Weapons/3_LazShotgun.dec"
-#include "lscripts/1_Marine/Weapons/3_2_SuperShotgun.dec"
 #include "lscripts/1_Marine/Weapons/4_SniperRifle.dec"
 #include "lscripts/1_Marine/Weapons/6_PlasmaRifle.dec"
 #include "lscripts/1_Marine/Weapons/7_OmegaCannon.dec"

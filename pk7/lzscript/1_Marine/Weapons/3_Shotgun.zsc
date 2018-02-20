@@ -151,7 +151,7 @@ Fire:
    SHTG FG 3;
    SHTG H 2;
    SHTG I 1;
-   SHTG J 3;
+   SHTG J 3 Lith_A_Casing("Lith_CasShellHot", 30, 0, 30, frandom(3,4), frandom(7,8), frandom(7,9));
    SHTG KI 1;
    SHTG H 3;
    SHTG G 1 offset(-13, 32);
@@ -165,7 +165,8 @@ FireFinish_Rail_Scoped:
    SCOP A 1 bright A_Light1;
    SCOP A 1 bright A_Light2;
    SCOP A 2 A_Light0;
-   SCOP A 24;
+   SCOP A 14;
+   SCOP A 10 Lith_A_Casing("Lith_CasShellHot", 30, 0, 30, frandom(3,4), frandom(7,8), frandom(7,9));
    SCOP A 5 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
    SCOP A 0 A_ReFire;
    SCOP A 7 A_WeaponReady(WRF_NOPRIMARY | WRF_NOBOB);
@@ -211,7 +212,7 @@ Reload:
    SHTG N 2 Lith_A_JumpIfMagFull;
    SHTG F 2 A_PlaySound("weapons/shotgun/gauss/reloadout", CHAN_6);
    SHTG G 2;
-   SHTG G 0 A_SpawnItemEx(invoker.Lith_MagEmpty() ? "Lith_GaussMagazine" : "Lith_GaussMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
+   SHTG G 0 Lith_A_DropMag("Lith_GaussMagazine", "Lith_GaussMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
    SHTG H 2;
    SHTG I 2 offset(-11, 57);
    SHTG I 5 offset(-10, 60);

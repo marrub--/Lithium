@@ -4,9 +4,6 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 enum Lith_WData
 {
-   wdata_brightweps,
-   wdata_noitemfx,
-   wdata_magdrops,
    wdata_bossspawned,
    wdata_enemycheck,
    wdata_fun,
