@@ -4,7 +4,7 @@ actor Lith_CasingSmoke
 {
    RenderStyle "Add"
    Alpha 0.6
-   Scale 0.04
+   Scale 0.02
 
    Projectile
    +NOINTERACTION

@@ -30,6 +30,7 @@ class Lith_MWeapon : Lith_Weapon
    }
 }
 
+#include "lzscript/1_Marine/Weapons/2_Revolver.zsc"
 #include "lzscript/1_Marine/Weapons/3_Shotgun.zsc"
 #include "lzscript/1_Marine/Weapons/3_2_SuperShotgun.zsc"
 #include "lzscript/1_Marine/Weapons/4_CombatRifle.zsc"

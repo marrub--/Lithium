@@ -3,7 +3,6 @@
 
 #include "lscripts/1_Marine/Weapons/1_Fist.dec"
 #include "lscripts/1_Marine/Weapons/2_Pistol.dec"
-#include "lscripts/1_Marine/Weapons/2_Revolver.dec"
 #include "lscripts/1_Marine/Weapons/3_LazShotgun.dec"
 #include "lscripts/1_Marine/Weapons/4_SniperRifle.dec"
 #include "lscripts/1_Marine/Weapons/6_PlasmaRifle.dec"
