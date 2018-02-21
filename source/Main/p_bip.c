@@ -143,11 +143,11 @@ static int PClFromStr(__str name)
 //
 // LoadBIPInfo
 //
-static int LoadBIPInfo(bip_t *bip, int pclass)
+static int LoadBIPInfo(__str fname, bip_t *bip, int pclass)
 {
    struct tokbuf tb = {
       .bbeg = 4, .bend = 10,
-      .fp = W_Open("lfiles/BIPInfo.txt", c"r"),
+      .fp = W_Open(fname, c"r"),
       .tokProcess = Lith_TBufProcL
    };
    if(!tb.fp) return 0;
@@ -163,6 +163,11 @@ static int LoadBIPInfo(bip_t *bip, int pclass)
    {
    case tok_lnend:
       continue;
+   case tok_at:
+      // @ Include
+      tok = tb.get();
+      total += LoadBIPInfo(Lith_TokStr(tok), bip, pclass);
+      break;
    case tok_xor:
       // ^ Category [*]
       tok = tb.get();
@@ -213,7 +218,7 @@ void Lith_PlayerInitBIP(struct player *p)
    ForCategory()
       bip->infogr[categ].free(true);
 
-   int total = LoadBIPInfo(bip, p->pclass);
+   int total = LoadBIPInfo("lfiles/BIPInfo.txt", bip, p->pclass);
    if(world.dbgLevel) p->logH("> There are %i info pages!", total);
 
    ForCategory()

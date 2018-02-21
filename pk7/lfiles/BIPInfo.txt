@@ -3,6 +3,8 @@
 // is set with ^ Category [*], and then the syntax is simply:
 // Classes... Name [*] [-> Unlocks...]
 
+@"lfiles/BIPInfo_Mod.txt" // if you want to add extra pages, use this file
+
 ^WEAPONS // ------------------------------------------------------------------|
 
 gO ChargeFist -> KSKK
