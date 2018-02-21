@@ -1,5 +1,24 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-#ifndef LITH_PLAYER_H
+#if defined(LITH_X)
+// Shorthand and classes. For parsing and headers.
+LITH_X(pM, pcl_marine)
+LITH_X(pC, pcl_cybermage)
+LITH_X(pI, pcl_informant)
+LITH_X(pW, pcl_wanderer)
+LITH_X(pA, pcl_assassin)
+LITH_X(pD, pcl_darklord)
+LITH_X(pT, pcl_thoth)
+
+LITH_X(gO, pcl_outcasts)
+LITH_X(gM, pcl_missioners)
+LITH_X(gI, pcl_intruders)
+LITH_X(gA, pcl_any)
+LITH_X(gH, pcl_human)
+LITH_X(gN, pcl_nonhuman)
+LITH_X(gR, pcl_robot)
+LITH_X(gX, pcl_mods)
+#undef LITH_X
+#elif !defined(LITH_PLAYER_H)
 #define LITH_PLAYER_H
 
 #include "lith_common.h"
@@ -45,23 +64,8 @@ GDCC_HashMap_Decl(upgrademap_t, int, upgrade_t)
 
 enum
 {
-   // Shorthand
-   pM = pcl_marine,
-   pC = pcl_cybermage,
-   pI = pcl_informant,
-   pW = pcl_wanderer,
-   pA = pcl_assassin,
-   pD = pcl_darklord,
-   pT = pcl_thoth,
-
-   gO = pcl_outcasts,
-   gM = pcl_missioners,
-   gI = pcl_intruders,
-   gA = pcl_any,
-   gH = pcl_human,
-   gN = pcl_nonhuman,
-   gR = pcl_robot,
-   gX = pcl_mods,
+#define LITH_X(l, r) l = r,
+#include "lith_player.h"
 };
 
 enum

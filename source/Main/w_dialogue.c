@@ -15,13 +15,13 @@
 
 // Extern Objects ------------------------------------------------------------|
 
-extern dlgdef_t *lmvar dlgdefs;
+extern struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
 [[__optional_args(1)]]
-static int *NextCode(struct dlgparsestate_s *d);
-static void GetStatement(struct dlgparsestate_s *d);
+static int *NextCode(struct pstate *d);
+static void GetStatement(struct pstate *d);
 
 // Types ---------------------------------------------------------------------|
 
@@ -42,7 +42,7 @@ struct strent {
 struct dlgfunc {
    char const *name, *args;
    int lit[4];
-   void (*genCode)(struct dlgparsestate_s *d, union arg *argv, int argc);
+   void (*genCode)(struct pstate *d, union arg *argv, int argc);
    size_t keyhash;
    struct dlgfunc *next, **prev;
 };
@@ -52,13 +52,12 @@ union arg {
    int   i;
 };
 
-typedef struct dlgparsestate_s
-{
+struct pstate {
    __prop nextCode {call: NextCode(this)}
 
-   tokbuf_t  tb;
-   dlgdef_t *def;
-} dlgparsestate_t;
+   struct tokbuf tb;
+   struct dlgdef *def;
+};
 
 GDCC_HashMap_Decl(strtable_t,  char const *, struct strent)
 GDCC_HashMap_Decl(functable_t, char const *, struct dlgfunc)
@@ -100,7 +99,7 @@ static int StrName(char const *s)
 //
 // NextCode
 //
-static int *NextCode(dlgparsestate_t *d)
+static int *NextCode(struct pstate *d)
 {
    Vec_GrowN(d->def->code, 1, 32);
    return &Vec_Next(d->def->code);
@@ -116,7 +115,7 @@ static int *NextCode(dlgparsestate_t *d)
 //
 // GenCode_Trace
 //
-static void GenCode_Trace(dlgparsestate_t *d, union arg *argv, int argc)
+static void GenCode_Trace(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(TRACE)
    {
@@ -128,7 +127,7 @@ static void GenCode_Trace(dlgparsestate_t *d, union arg *argv, int argc)
 //
 // GenCode_Push
 //
-static void GenCode_Push(dlgparsestate_t *d, union arg *argv, int argc)
+static void GenCode_Push(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(PUSH)
    {
@@ -140,17 +139,17 @@ static void GenCode_Push(dlgparsestate_t *d, union arg *argv, int argc)
 //
 // GenCode_Pop
 //
-static void GenCode_Pop(dlgparsestate_t *d, union arg *argv, int argc)
+static void GenCode_Pop(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(POP)
    {
-      token_t *tok = d->tb.reget();
+      struct token *tok = d->tb.reget();
       LogOri(tok, "GenCode_Pop: invalid argument");
    }
 }
 
 #define GenCode_Arith(code) \
-   static void GenCode_Arith_##code(dlgparsestate_t *d, union arg *argv, int argc) \
+   static void GenCode_Arith_##code(struct pstate *d, union arg *argv, int argc) \
    { \
       GenCode_Reg(code) \
       { \
@@ -175,7 +174,7 @@ GenCode_Arith(RSH)
 //
 // GenCode_Generic
 //
-static void GenCode_Generic(dlgparsestate_t *d, union arg *argv, int argc)
+static void GenCode_Generic(struct pstate *d, union arg *argv, int argc)
 {
    for(int i = 0; i < argc; i++)
       *d->nextCode() = argv[i].i;
@@ -186,10 +185,10 @@ static void GenCode_Generic(dlgparsestate_t *d, union arg *argv, int argc)
 //
 // Parses and generates code for a conditional statement.
 //
-static void GetCode_Cond(dlgparsestate_t *d)
+static void GetCode_Cond(struct pstate *d)
 {
    int code = DCD_NOP;
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    // Get the code to generate.
    if(tok->type == tok_identi)
@@ -223,7 +222,7 @@ static void GetCode_Cond(dlgparsestate_t *d)
          }
       }
       else
-         *d->nextCode() = (int)StrParam("%.*s", tok->textC, tok->textV);
+         *d->nextCode() = (int)Lith_TokStr(tok);
    }
    else
       LogOri(tok, "GetCode_Cond: invalid token in conditional statement");
@@ -259,9 +258,9 @@ static void GetCode_Cond(dlgparsestate_t *d)
 //
 // Parses and generates code for an option statement.
 //
-static void GetCode_Option(dlgparsestate_t *d)
+static void GetCode_Option(struct pstate *d)
 {
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    // Generate code.
    int ptr = 0;
@@ -270,7 +269,7 @@ static void GetCode_Option(dlgparsestate_t *d)
       *d->nextCode() = DCD_PUTOPT;
       ptr = d->def->codeC;
       d->nextCode();
-      *d->nextCode() = (int)StrParam("%.*s", tok->textC, tok->textV);
+      *d->nextCode() = (int)Lith_TokStr(tok);
    }
    else
       LogOri(tok, "GetCode_Option: invalid option parameter");
@@ -287,7 +286,7 @@ static void GetCode_Option(dlgparsestate_t *d)
 //
 // Parses and generates code for an exec statement.
 //
-static void GetCode_Exec(dlgparsestate_t *d)
+static void GetCode_Exec(struct pstate *d)
 {
    *d->nextCode() = DCD_TRMWAIT;
    GetStatement(d);
@@ -298,9 +297,9 @@ static void GetCode_Exec(dlgparsestate_t *d)
 //
 // Parses and generates code for a generic statement.
 //
-static void GetCode_Generic(dlgparsestate_t *d)
+static void GetCode_Generic(struct pstate *d)
 {
-   token_t *tok = d->tb.reget();
+   struct token *tok = d->tb.reget();
    LogDebug(log_dlg, "call: %s", tok->textV);
 
    // Get the function to generate.
@@ -332,7 +331,7 @@ static void GetCode_Generic(dlgparsestate_t *d)
       switch(func->args[argc])
       {
       case 'I': argv[argc++].i = strtoi(tok->textV, null, 0); break;
-      case 'S': argv[argc++].s = StrParam("%s", tok->textV);  break;
+      case 'S': argv[argc++].s = Lith_TokStr(tok);            break;
       }
 
       LogDebug(log_dlg, "arg %i: %s", argc, tok->textV);
@@ -360,10 +359,10 @@ static void GetCode_Generic(dlgparsestate_t *d)
 //
 // GetCode_Text
 //
-static void GetCode_Text(dlgparsestate_t *d, token_t *tok, int code)
+static void GetCode_Text(struct pstate *d, struct token *tok, int code)
 {
    *d->nextCode() = code;
-   *d->nextCode() = (int)StrParam("%.*s", tok->textC, tok->textV);
+   *d->nextCode() = (int)Lith_TokStr(tok);
 }
 
 //
@@ -371,9 +370,9 @@ static void GetCode_Text(dlgparsestate_t *d, token_t *tok, int code)
 //
 // Parse and generate a line of code.
 //
-static void GetCode_Line(dlgparsestate_t *d)
+static void GetCode_Line(struct pstate *d)
 {
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    switch(tok->type)
    {
@@ -401,7 +400,7 @@ static void GetCode_Line(dlgparsestate_t *d)
 //
 // Parse and generate a block statement.
 //
-static void GetBlock(dlgparsestate_t *d)
+static void GetBlock(struct pstate *d)
 {
    while(!d->tb.drop(tok_bracec) && !d->tb.drop(tok_eof))
       GetStatement(d);
@@ -412,7 +411,7 @@ static void GetBlock(dlgparsestate_t *d)
 //
 // Parse and generate a concat block statement.
 //
-static void GetConcatBlock(dlgparsestate_t *d)
+static void GetConcatBlock(struct pstate *d)
 {
    *d->nextCode() = DCD_CONCAT;
    while(!d->tb.drop(tok_at2) && !d->tb.drop(tok_eof))
@@ -425,7 +424,7 @@ static void GetConcatBlock(dlgparsestate_t *d)
 //
 // Parse and generate a statement.
 //
-static void GetStatement(dlgparsestate_t *d)
+static void GetStatement(struct pstate *d)
 {
         if(d->tb.drop(tok_braceo)) GetBlock(d);
    else if(d->tb.drop(tok_at2))    GetConcatBlock(d);
@@ -435,11 +434,11 @@ static void GetStatement(dlgparsestate_t *d)
 //
 // SetupDialogue
 //
-static void SetupDialogue(dlgparsestate_t *d, int num)
+static void SetupDialogue(struct pstate *d, int num)
 {
-   dlgdef_t *last = d->def;
+   struct dlgdef *last = d->def;
 
-   d->def = Salloc(dlgdef_t);
+   d->def = Salloc(struct dlgdef);
    d->def->num = num;
 
    if(!last) dlgdefs    = d->def;
@@ -451,9 +450,9 @@ static void SetupDialogue(dlgparsestate_t *d, int num)
 //
 // GetDecl_Dialogue
 //
-static void GetDecl_Dialogue(dlgparsestate_t *d)
+static void GetDecl_Dialogue(struct pstate *d)
 {
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    if(tok->type == tok_number) {
       SetupDialogue(d, strtoi(tok->textV, null, 0));
@@ -467,9 +466,9 @@ static void GetDecl_Dialogue(dlgparsestate_t *d)
 //
 // GetDecl_Terminal
 //
-static void GetDecl_Terminal(dlgparsestate_t *d)
+static void GetDecl_Terminal(struct pstate *d)
 {
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    if(tok->type == tok_number) {
       SetupDialogue(d, -strtoi(tok->textV, null, 0));
@@ -483,7 +482,7 @@ static void GetDecl_Terminal(dlgparsestate_t *d)
 //
 // SetupPage
 //
-static void SetupPage(dlgparsestate_t *d, int num)
+static void SetupPage(struct pstate *d, int num)
 {
    d->def->pages[num] = d->def->codeC;
 
@@ -493,9 +492,9 @@ static void SetupPage(dlgparsestate_t *d, int num)
 //
 // GetDecl_Page
 //
-static void GetDecl_Page(dlgparsestate_t *d)
+static void GetDecl_Page(struct pstate *d)
 {
-   token_t *tok = d->tb.get();
+   struct token *tok = d->tb.get();
 
    if(tok->type == tok_number)
       SetupPage(d, strtoi(tok->textV, null, 0));
@@ -511,7 +510,7 @@ static void GetDecl_Page(dlgparsestate_t *d)
 //
 // GetDecl_TrmPage
 //
-static void GetDecl_TrmPage(dlgparsestate_t *d, int num)
+static void GetDecl_TrmPage(struct pstate *d, int num)
 {
    SetupPage(d, num);
    GetStatement(d);
@@ -609,8 +608,8 @@ void Lith_LoadMapDialogue(void)
    // Free any previous dialogue definitions.
    if(dlgdefs)
    {
-      for(dlgdef_t *def = dlgdefs; def;) {
-         dlgdef_t *next = def->next;
+      for(struct dlgdef *def = dlgdefs; def;) {
+         struct dlgdef *next = def->next;
          Vec_Clear(def->code);
          Dalloc(def);
          def = next;
@@ -620,7 +619,7 @@ void Lith_LoadMapDialogue(void)
       dlgdefs = null;
    }
 
-   dlgparsestate_t d = {{
+   struct pstate d = {{
       .bbeg = 4, .bend = 10,
       .fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), c"r")
    }};
@@ -629,7 +628,7 @@ void Lith_LoadMapDialogue(void)
 
    d.tb.ctor();
 
-   for(token_t *tok; (tok = d.tb.get())->type != tok_eof;)
+   for(struct token *tok; (tok = d.tb.get())->type != tok_eof;)
    {
       if(tok->type != tok_identi) {
          LogTok(tok, "Lith_LoadMapDialogue: invalid toplevel token");
@@ -661,7 +660,7 @@ done:
          #include "lith_dialogue.h"
       };
 
-      for(dlgdef_t *def = dlgdefs; def; def = def->next) {
+      for(struct dlgdef *def = dlgdefs; def; def = def->next) {
          Log("Dumping code for script %i...", def->num);
          for(int i = 0; i < def->codeC; i++)
             Log("%i (%S)", def->codeV[i], def->codeV[i] < countof(dcdnames)

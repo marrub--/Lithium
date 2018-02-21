@@ -4,16 +4,14 @@
 #include "lith_bip.h"
 #include "lith_list.h"
 #include "lith_world.h"
+#include "lith_file.h"
+#include "lith_tokbuf.h"
 
 #include <ctype.h>
 
 #define ForCategory() for(int categ = BIPC_NONE + 1; categ < BIPC_MAX; categ++)
 #define ForPage() forlist(bippage_t *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
-
-// Extern Objects ------------------------------------------------------------|
-
-extern struct page_initializer const bip_pages[];
 
 // Types ---------------------------------------------------------------------|
 
@@ -22,6 +20,14 @@ struct page_info
    __str shname;
    __str flname;
    __str body;
+};
+
+struct page_init
+{
+   int pclass;
+   __str name;
+   bip_unlocks_t unlocks;
+   bool isfree;
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -90,7 +96,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 // AddToBIP
 //
 [[__optional_args(1)]]
-static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer const *pinit, bool isfree)
+static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
    int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
@@ -107,7 +113,91 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);
 
+   // we have to pass along the player's class so discriminators don't fuck up
    if(isfree) UnlockPage(bip, page, pclass);
+}
+
+//
+// CatFromStr
+//
+[[__call("StkCall")]]
+static int CatFromStr(__str name)
+{
+   if(name == "EXTRA") return BIPC_EXTRA;
+#define LITH_X(n, _) if(name == #n) return BIPC_##n;
+#include "lith_bip.h"
+   return BIPC_NONE;
+}
+
+//
+// PClFromStr
+//
+[[__call("StkCall")]]
+static int PClFromStr(__str name)
+{
+#define LITH_X(n, pc) if(name == #n || name == #pc) return pc;
+#include "lith_player.h"
+   return 0;
+}
+
+//
+// LoadBIPInfo
+//
+static int LoadBIPInfo(bip_t *bip, int pclass)
+{
+   struct tokbuf tb = {
+      .bbeg = 4, .bend = 10,
+      .fp = W_Open("lfiles/BIPInfo.txt", c"r"),
+      .tokProcess = Lith_TBufProcL
+   };
+   if(!tb.fp) return 0;
+
+   tb.ctor();
+
+   bool catfree = false;
+   int categ = BIPC_NONE;
+   int total = 0;
+   struct page_init page;
+
+   for(struct token *tok; (tok = tb.get())->type != tok_eof;) switch(tok->type)
+   {
+   case tok_lnend:
+      continue;
+   case tok_xor:
+      // ^ Category [*]
+      tok = tb.get();
+      categ = CatFromStr(Lith_TokStr(tok));
+      catfree = tb.drop(tok_mul);
+      break;
+   case tok_identi:
+      // Classes... Name [*] [-> Unlocks...]
+      page = (struct page_init){};
+
+      do
+         page.pclass |= PClFromStr(Lith_TokStr(tok));
+      while(tb.drop(tok_or) && (tok = tb.get()));
+
+      tok = tb.get();
+      page.name = Lith_TokStr(tok);
+      page.isfree = tb.drop(tok_mul);
+
+      if(tb.drop(tok_rarrow))
+         for(int i = 0; i < countof(page.unlocks) && !tb.drop(tok_lnend); i++)
+      {
+         tok = tb.get();
+         page.unlocks[i] = Lith_TokStr(tok);
+      }
+
+      if(categ != BIPC_NONE && pclass & page.pclass)
+         AddToBIP(bip, categ, pclass, &page, page.isfree || catfree);
+      total++;
+      break;
+   }
+
+   tb.dtor();
+   fclose(tb.fp);
+
+   return total;
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -119,25 +209,11 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_initializer 
 void Lith_PlayerInitBIP(struct player *p)
 {
    bip_t *bip = &p->bip;
-   int total = 0;
 
    ForCategory()
       bip->infogr[categ].free(true);
 
-   __with(int categ; bool catfree = false;)
-      for(struct page_initializer const *page = bip_pages;
-         page->category || page->pclass; page++)
-   {
-      if(page->category) {
-         categ   = page->category;
-         catfree = page->isfree;
-      } else {
-         if(page->pclass & p->pclass)
-            AddToBIP(bip, categ, p->pclass, page, page->isfree || catfree);
-         total++;
-      }
-   }
-
+   int total = LoadBIPInfo(bip, p->pclass);
    if(world.dbgLevel) p->logH("> There are %i info pages!", total);
 
    ForCategory()
@@ -290,6 +366,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          "Text search all categories.",
          "Weapons and weapon upgrades.",
          "Enemies and bosses.",
+         "Armors and other loot.",
          "Your attributes, abilities and history.",
          "Body upgrades.",
          "Places of interest around the galaxy.",

@@ -8,14 +8,16 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-struct tokbuf_s;
-void     Lith_TBufCtor (struct tokbuf_s *tb);
-void     Lith_TBufDtor (struct tokbuf_s *tb);
-token_t *Lith_TBufGet  (struct tokbuf_s *tb);
-token_t *Lith_TBufPeek (struct tokbuf_s *tb);
-token_t *Lith_TBufUnGet(struct tokbuf_s *tb);
-token_t *Lith_TBufReGet(struct tokbuf_s *tb);
-bool     Lith_TBufDrop (struct tokbuf_s *tb, int t);
+void          Lith_TBufCtor (struct tokbuf *tb);
+void          Lith_TBufDtor (struct tokbuf *tb);
+struct token *Lith_TBufGet  (struct tokbuf *tb);
+struct token *Lith_TBufPeek (struct tokbuf *tb);
+struct token *Lith_TBufUnGet(struct tokbuf *tb);
+struct token *Lith_TBufReGet(struct tokbuf *tb);
+bool          Lith_TBufDrop (struct tokbuf *tb, int t);
+
+int Lith_TBufProc (struct token *tok, void *udata);
+int Lith_TBufProcL(struct token *tok, void *udata);
 
 // Types ---------------------------------------------------------------------|
 
@@ -26,7 +28,7 @@ enum
    tokproc_skip
 };
 
-typedef struct tokbuf_s
+struct tokbuf
 {
    __prop ctor  {call: Lith_TBufCtor (this)}
    __prop dtor  {call: Lith_TBufDtor (this)}
@@ -36,14 +38,18 @@ typedef struct tokbuf_s
    __prop reget {call: Lith_TBufReGet(this)}
    __prop drop  {call: Lith_TBufDrop (this)}
 
-   origin_t orig;
-   FILE    *fp;
-   token_t *toks;
-   int      tpos, tend;
-   int      bbeg, bend;
-   void    *udata;
+   struct origin orig;
 
-   int (*tokProcess)(token_t *tok, void *udata);
-} tokbuf_t;
+   FILE *fp;
+
+   struct token *toks;
+
+   int tpos, tend;
+   int bbeg, bend;
+
+   void *udata;
+
+   int (*tokProcess)(struct token *tok, void *udata);
+};
 
 #endif

@@ -1,16 +1,14 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #if defined(LITH_X)
-   LITH_X(WEAPONS,      "Weapons")
-   LITH_X(ENEMIES,      "Adversaries")
-   // TODO
-// LITH_X(ITEMS,        "Items")
-   LITH_X(YOURSELF,     "Yourself")
-   LITH_X(UPGRADES,     "Upgrades")
-   LITH_X(PLACES,       "Locations")
-   LITH_X(CORPORATIONS, "Companies")
-   LITH_X(MAIL,         "Mail")
+LITH_X(WEAPONS,      "Weapons")
+LITH_X(ENEMIES,      "Adversaries")
+LITH_X(ITEMS,        "Items")
+LITH_X(YOURSELF,     "Yourself")
+LITH_X(UPGRADES,     "Upgrades")
+LITH_X(PLACES,       "Locations")
+LITH_X(CORPORATIONS, "Companies")
+LITH_X(MAIL,         "Mail")
 #undef LITH_X
-
 #elif !defined(LITH_BIP_H)
 #define LITH_BIP_H
 
@@ -44,15 +42,6 @@ enum
 };
 
 typedef __str bip_unlocks_t[5];
-
-struct page_initializer
-{
-   int pclass;
-   __str name;
-   bip_unlocks_t unlocks;
-   int category;
-   bool isfree;
-};
 
 typedef struct bippage_s
 {

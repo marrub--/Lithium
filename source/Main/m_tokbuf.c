@@ -3,14 +3,15 @@
 
 #include <string.h>
 
-// Static Functions ----------------------------------------------------------|
+// Extern Functions ----------------------------------------------------------|
 
 //
-// TBufProc
+// Lith_TBufProc
 //
-static int TBufProc(token_t *tok, void *udata)
+int Lith_TBufProc(struct token *tok, void *udata)
 {
-   switch(tok->type) {
+   switch(tok->type)
+   {
    default:         return tokproc_next;
    case tok_eof:    return tokproc_done;
    case tok_lnend:
@@ -19,26 +20,37 @@ static int TBufProc(token_t *tok, void *udata)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+//
+// Lith_TBufProcL
+//
+int Lith_TBufProcL(struct token *tok, void *udata)
+{
+   switch(tok->type)
+   {
+   default:         return tokproc_next;
+   case tok_eof:    return tokproc_done;
+   case tok_cmtblk:
+   case tok_cmtlin: return tokproc_skip;
+   }
+}
 
 //
 // Lith_TBufCtor
 //
-void Lith_TBufCtor(tokbuf_t *tb)
+void Lith_TBufCtor(struct tokbuf *tb)
 {
    tb->orig.line = 1;
-   tb->toks = Calloc(tb->bend, sizeof(token_t));
-   if(!tb->tokProcess) tb->tokProcess = TBufProc;
+   tb->toks = Calloc(tb->bend, sizeof(struct token));
+   if(!tb->tokProcess) tb->tokProcess = Lith_TBufProc;
 }
 
 //
 // Lith_TBufDtor
 //
-void Lith_TBufDtor(tokbuf_t *tb)
+void Lith_TBufDtor(struct tokbuf *tb)
 {
-   if(tb->toks)
-      for(int i = 0; i < tb->bend; i++)
-         Vec_Clear(tb->toks[i].text);
+   if(tb->toks) for(int i = 0; i < tb->bend; i++)
+      Vec_Clear(tb->toks[i].text);
 
    Dalloc(tb->toks);
 }
@@ -46,22 +58,23 @@ void Lith_TBufDtor(tokbuf_t *tb)
 //
 // Lith_TBufGet
 //
-token_t *Lith_TBufGet(tokbuf_t *tb)
+struct token *Lith_TBufGet(struct tokbuf *tb)
 {
    if(++tb->tpos < tb->tend)
       return &tb->toks[tb->tpos];
 
    // Free beginning of buffer.
-   for(int i = 0; i < tb->bbeg; i++) {
+   for(int i = 0; i < tb->bbeg; i++)
+   {
       Vec_Clear(tb->toks[i].text);
-      tb->toks[i] = (token_t){0};
+      tb->toks[i] = (struct token){0};
    }
 
    // Move end of buffer to beginning.
    if(tb->tend) for(int i = tb->tend - tb->bbeg, j = 0; i < tb->tend; i++, j++)
    {
       tb->toks[j] = tb->toks[i];
-      tb->toks[i] = (token_t){0};
+      tb->toks[i] = (struct token){0};
    }
 
    // Get new tokens.
@@ -84,7 +97,7 @@ done:
 //
 // Lith_TBufPeek
 //
-token_t *Lith_TBufPeek(tokbuf_t *tb)
+struct token *Lith_TBufPeek(struct tokbuf *tb)
 {
    Lith_TBufGet(tb);
    return Lith_TBufUnGet(tb);
@@ -93,7 +106,7 @@ token_t *Lith_TBufPeek(tokbuf_t *tb)
 //
 // Lith_TBufUnGet
 //
-token_t *Lith_TBufUnGet(tokbuf_t *tb)
+struct token *Lith_TBufUnGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos--];
 }
@@ -101,7 +114,7 @@ token_t *Lith_TBufUnGet(tokbuf_t *tb)
 //
 // Lith_TBufReGet
 //
-token_t *Lith_TBufReGet(tokbuf_t *tb)
+struct token *Lith_TBufReGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos];
 }
@@ -109,7 +122,7 @@ token_t *Lith_TBufReGet(tokbuf_t *tb)
 //
 // Lith_TBufDrop
 //
-bool Lith_TBufDrop(tokbuf_t *tb, int t)
+bool Lith_TBufDrop(struct tokbuf *tb, int t)
 {
    if(Lith_TBufGet(tb)->type != t)
       {Lith_TBufUnGet(tb); return false;}

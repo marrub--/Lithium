@@ -6,6 +6,8 @@
 
 #include <stdio.h>
 
+#define Lith_TokStr(tok) StrParam("%.*s", (tok)->textC, (tok)->textV)
+
 // Types ---------------------------------------------------------------------|
 
 enum
@@ -94,20 +96,20 @@ enum
    tok_max
 };
 
-typedef struct origin_s
+struct origin
 {
    int colu, line;
-} origin_t;
+};
 
-typedef struct token_s
+struct token
 {
-   int      type;
-   origin_t orig;
+   int type;
+   struct origin orig;
    Vec_Decl(char, text);
-} token_t;
+};
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_ParseToken(FILE *fp, token_t *tok, origin_t *orig);
+void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig);
 
 #endif

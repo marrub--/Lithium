@@ -45,7 +45,7 @@
 //
 // Lith_ParseToken
 //
-void Lith_ParseToken(FILE *fp, token_t *tok, origin_t *orig)
+void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig)
 {
    if(!tok || !fp || !orig) return;
 

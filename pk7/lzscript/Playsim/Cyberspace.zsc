@@ -136,7 +136,7 @@ virtual void Lith_DrawFrame()
 
       // clear and draw line
       for(int y =  0; y <  m_rh; y++) m_dbuf[x + y * m_rw] = 0;
-      for(int y = ds; y <= de; y++) m_dbuf[x + y * m_rw] = light;
+      for(int y = ds; y <= de;   y++) m_dbuf[x + y * m_rw] = light;
    }
 }
 
@@ -149,14 +149,11 @@ virtual ui void Lith_Render() const
    Screen.Dim("Black", 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
 
    // draw scene from pixel buffer
-   for(int y = 0; y < m_rh; y++)
-      for(int x = 0; x < m_rw; x++)
-   {
+   for(int y = 0; y < m_rh; y++) for(int x = 0; x < m_rw; x++)
       Screen.DrawTexture(m_ptex, false, x, y,
          DTA_VirtualWidth,  m_rw,
          DTA_VirtualHeight, m_rh,
          DTA_FillColor,     m_dbuf[x + y * m_rw] << shift);
-   }
 }
 
 // EOF

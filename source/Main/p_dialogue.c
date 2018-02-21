@@ -72,7 +72,7 @@ typedef struct dlgvmstate_s
 
 // Extern Objects ------------------------------------------------------------|
 
-dlgdef_t *lmvar dlgdefs;
+struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
@@ -285,7 +285,7 @@ void Lith_DialogueVM(struct player *p, int num)
       return;
 
    // Get the dialogue by number.
-   dlgdef_t *def;
+   struct dlgdef *def;
 
    for(def = dlgdefs; def && def->num != num; def = def->next);
    if(!def) return;

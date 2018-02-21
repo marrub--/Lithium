@@ -105,14 +105,14 @@ enum
    DTRMPAGE_FAILURE,
 };
 
-typedef struct dlgdef_s
+struct dlgdef
 {
    int num;
    int pages[48];
    Vec_Decl(int, code);
 
-   struct dlgdef_s *next;
-} dlgdef_t;
+   struct dlgdef *next;
+};
 
 #endif
 
