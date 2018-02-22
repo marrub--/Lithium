@@ -15,7 +15,7 @@ class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
    int         cr;
    Font        fnt;
    BrokenLines txt;
-   Array<int>  lnx;
+   array<int>  lnx;
    int         lny;
    float       a;
 }
@@ -40,13 +40,21 @@ enum Lith_URANUS_DrawType
 
 extend class Lith_URANUS;
 
+/*
+   The URANUS drawing system is essentially an instruction set with a
+   (very) simple state machine to draw stuff to the screen, either via ACS
+   or via ZScript. This is meant to replace HudMessage and allow a nicer,
+   unified drawing system between ZScript and ACS, usable by the playsim
+   while still providing maximum performance, as well as multiplayer compat.
+*/
+
 private transient play array<Lith_URANUS_DrawData> m_dda;
 private transient play Lith_URANUS_FadeMessage[32] m_fmsg;
 private transient play vector2 m_vsc;
 private transient play int m_dww;
 private transient play bool m_nodraw;
 
-static void _LHS(Actor mo, int w, int h)
+static void LHS(Actor mo, int w, int h)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -62,7 +70,7 @@ static void _LHS(Actor mo, int w, int h)
    cl.m_dda.push(dd);
 }
 
-static void _LSF(Actor mo, int num, int time, double fade)
+static void LSF(Actor mo, int num, int time, double fade)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -72,13 +80,13 @@ static void _LSF(Actor mo, int num, int time, double fade)
    cl.m_fmsg[num].fade = 1;
 }
 
-static bool _LCF(Actor mo, int num)
+static bool LCF(Actor mo, int num)
 {
    if(mo != players[consoleplayer].camera) return false;
    return Instance().m_fmsg[num].fade != 0;
 }
 
-static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
+static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1)
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
@@ -120,7 +128,7 @@ static void _LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a)
    cl.m_dda.push(dd);
 }
 
-static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a)
+static void LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
@@ -182,7 +190,7 @@ static void _LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa,
    cl.m_dda.push(dd);
 }
 
-static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
+static void LSC(Actor mo, int x, int y, int w, int h, int ww)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -215,7 +223,7 @@ static void _LSC(Actor mo, int x, int y, int w, int h, int ww)
    cl.m_dda.push(dd);
 }
 
-static void _LEH()
+static void LEH()
 {
    let cl = Instance();
 

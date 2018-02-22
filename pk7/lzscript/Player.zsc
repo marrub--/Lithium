@@ -1,145 +1,3 @@
-class Lith_Player : DoomPlayer
-{
-   default
-   {
-      Player.SideMove 2, 1;
-      Player.ForwardMove 2, 1;
-      Player.AirCapacity 0;
-      Player.GruntSpeed 16;
-      Species "Lith_Player";
-      Lith_Player.ViewBob 1;
-
-      +THRUSPECIES;
-   }
-
-   meta double m_vbob;
-
-   property ViewBob: m_vbob;
-
-   override void BeginPlay()
-   {
-      Super.BeginPlay();
-      viewbob = m_vbob;
-
-      GiveInventoryType("Lith_AAGH");
-      GiveInventoryType("Lith_IDOL");
-   }
-
-   override void PlayerThink()
-   {
-      if(CallACS("LPData", pdata_semifrozen))
-      {
-         UserCmd cmd = player.cmd;
-         cmd.pitch = cmd.yaw = cmd.roll = 0;
-         player.turnticks = 0;
-      }
-
-      Super.PlayerThink();
-   }
-
-   override void Tick()
-   {
-      if(CallACS("LPData", pdata_semifrozen))
-      {
-         angle -= 1;
-         pitch -= 1;
-         A_SetAngle(angle + 1, SPF_INTERPOLATE);
-         A_SetPitch(pitch + 1, SPF_INTERPOLATE);
-      }
-
-      Super.Tick();
-
-      if(player && CallACS("LWData", wdata_dorain) &&
-         ceilingpic == skyflatnum && pitch < -5)
-      {
-         float t = level.totaltime / 35.;
-         float m = -pitch - 5;
-         Shader.SetUniform1f(player, "Lith_Rain", "lith_t", t);
-         Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m / 85.);
-         Shader.SetEnabled(player, "Lith_Rain", true);
-      }
-      else
-         Shader.SetEnabled(player, "Lith_Rain", false);
-
-      if(CallACS("LWData", wdata_fun) & 2)
-         for(let it = BlockThingsIterator.Create(self, 70); it.next();)
-      {
-         if(Inventory(it.thing))
-         {
-            let mo = Spawn("Lith_Bip", it.thing.pos);
-            mo.vel.x += frandom(-0.1, 0.1);
-            mo.vel.y += frandom(-0.1, 0.1);
-            mo.vel.z += 4;
-            mo.A_PlaySound("misc/pop", CHAN_BODY);
-            it.thing.destroy();
-         }
-      }
-      else for(let it = BlockThingsIterator.Create(self, 70); it.next();)
-      {
-         let inv = Lith_BasicPickup(it.thing);
-
-         if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
-         {
-            let dst = distance2D(inv);
-            let t = clamp((140 - dst) / 1000., 0., 1.);
-
-            if(t)
-            {
-               let newp = inv.pos * (1 - t) + pos * t;
-               inv.tryMove(newp.xy, 20);
-            }
-         }
-      }
-   }
-
-   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
-   {
-      if(mod == 'Lith_PlayerMissile')
-         return 0;
-
-      CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
-
-      let sv = Lith_HERMES.Instance();
-      sv.m_dmgtype = mod;
-      if(sv.m_dmgworld = !(inflictor || source) || source == self)
-         return Super.DamageMobj(inflictor, source, damage, 'None', flags, angle);
-      else
-         return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
-   }
-
-   override void Die(Actor source, Actor inflictor, int dmgflags = 0)
-   {
-      target = source;
-      Super.Die(null, inflictor, dmgflags);
-
-      let sv = Lith_HERMES.Instance();
-      string ob;
-
-      if(source == self) switch(sv.m_dmgtype)
-      {
-      case 'FatMacRecoil':  ob = "$LITH_OB_S_FatMac";    break;
-      case 'Lith_Shrapnel': ob = "$LITH_OB_S_Explosion"; break;
-      default:              ob = "(suicide)";            break;
-      }
-      else if(source)
-         ob = sv.m_dmgtype == 'Melee' ? source.hitobituary : source.obituary;
-      else switch(sv.m_dmgtype)
-      {
-      case 'Falling':  ob = "(falling)";  break;
-      case 'Crush':    ob = "(crush)";    break;
-      case 'Exit':     ob = "(exit)";     break;
-      case 'Drowning': ob = "(drowning)"; break;
-      case 'Slime':    ob = "(slime)";    break;
-      case 'Fire':     ob = "(fire)";     break;
-      default:         ob = "(default)";  break;
-      }
-
-      sv.m_obituary = StringTable.Localize(ob);
-
-      CallACS("Lith_Obituary");
-   }
-}
-
 #include "lzscript/1_Marine/Marine.zsc"
 #include "lzscript/2_CyberMage/CyberMage.zsc"
 #include "lzscript/3_Informant/Informant.zsc"
@@ -147,5 +5,157 @@ class Lith_Player : DoomPlayer
 #include "lzscript/5_Assassin/Assassin.zsc"
 #include "lzscript/6_DarkLord/DarkLord.zsc"
 #include "lzscript/7_Thoth/Thoth.zsc"
+
+class Lith_Player : DoomPlayer;
+
+default
+{
+   Player.SideMove 2, 1;
+   Player.ForwardMove 2, 1;
+   Player.AirCapacity 0;
+   Player.GruntSpeed 16;
+   Species "Lith_Player";
+   Lith_Player.ViewBob 1;
+
+   +THRUSPECIES;
+}
+
+meta double m_vbob;
+
+property ViewBob: m_vbob;
+
+override void BeginPlay()
+{
+   Super.BeginPlay();
+   viewbob = m_vbob;
+
+   GiveInventoryType("Lith_AAGH");
+   GiveInventoryType("Lith_IDOL");
+}
+
+override void PlayerThink()
+{
+   if(CallACS("LPData", pdata_semifrozen))
+   {
+      UserCmd cmd = player.cmd;
+      cmd.pitch = cmd.yaw = cmd.roll = 0;
+      player.turnticks = 0;
+   }
+
+   Super.PlayerThink();
+}
+
+private void Lith_RainEffect()
+{
+   if(player && CallACS("LWData", wdata_dorain) &&
+      ceilingpic == skyflatnum && pitch < -5)
+   {
+      float t = level.totaltime / 35.;
+      float m = -pitch - 5;
+      Shader.SetUniform1f(player, "Lith_Rain", "lith_t", t);
+      Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m / 85.);
+      Shader.SetEnabled(player, "Lith_Rain", true);
+   }
+   else
+      Shader.SetEnabled(player, "Lith_Rain", false);
+}
+
+private void Lith_ItemVacuum()
+{
+   if(CallACS("LWData", wdata_fun) & 2)
+      for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+   {
+      if(Inventory(it.thing))
+      {
+         let mo = Spawn("Lith_Bip", it.thing.pos);
+         mo.vel = (frandom(-0.1, 0.1), frandom(-0.1, 0.1), 4);
+         mo.A_PlaySound("misc/pop", CHAN_BODY);
+         it.thing.destroy();
+      }
+   }
+   else for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+   {
+      let inv = Lith_BasicPickup(it.thing);
+
+      if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
+      {
+         let dst = distance2D(inv);
+         let t = clamp((140 - dst) / 1000., 0., 1.);
+
+         if(t)
+         {
+            let newp = inv.pos * (1 - t) + pos * t;
+            inv.tryMove(newp.xy, 20);
+         }
+      }
+   }
+}
+
+override void Tick()
+{
+   if(CallACS("LPData", pdata_semifrozen))
+   {
+      // stupid hack to keep the view from moving around
+      angle -= 1;
+      pitch -= 1;
+      A_SetAngle(angle + 1, SPF_INTERPOLATE);
+      A_SetPitch(pitch + 1, SPF_INTERPOLATE);
+   }
+
+   if(players[consoleplayer].camera == self)
+      Lith_URANUS.LEH();
+
+   Super.Tick();
+
+   Lith_RainEffect();
+   Lith_ItemVacuum();
+}
+
+override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
+{
+   if(mod == 'Lith_PlayerMissile')
+      return 0;
+
+   CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
+
+   let sv = Lith_HERMES.Instance();
+   sv.m_dmgtype = mod;
+   if(sv.m_dmgworld = !(inflictor || source) || source == self)
+      return Super.DamageMobj(inflictor, source, damage, 'None', flags, angle);
+   else
+      return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+}
+
+override void Die(Actor source, Actor inflictor, int dmgflags = 0)
+{
+   target = source;
+   Super.Die(null, inflictor, dmgflags);
+
+   let sv = Lith_HERMES.Instance();
+   string ob;
+
+   if(source == self) switch(sv.m_dmgtype)
+   {
+   case 'FatMacRecoil':  ob = "$LITH_OB_S_FatMac";    break;
+   case 'Lith_Shrapnel': ob = "$LITH_OB_S_Explosion"; break;
+   default:              ob = "(suicide)";            break;
+   }
+   else if(source)
+      ob = sv.m_dmgtype == 'Melee' ? source.hitobituary : source.obituary;
+   else switch(sv.m_dmgtype)
+   {
+   case 'Falling':  ob = "(falling)";  break;
+   case 'Crush':    ob = "(crush)";    break;
+   case 'Exit':     ob = "(exit)";     break;
+   case 'Drowning': ob = "(drowning)"; break;
+   case 'Slime':    ob = "(slime)";    break;
+   case 'Fire':     ob = "(fire)";     break;
+   default:         ob = "(default)";  break;
+   }
+
+   sv.m_obituary = StringTable.Localize(ob);
+
+   CallACS("Lith_Obituary");
+}
 
 // EOF

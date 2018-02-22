@@ -235,6 +235,7 @@ void Lith_PlayerUpdateData(struct player *p)
       p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);
    DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
    DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
+   DebugStat("a.y: %k\na.p: %k\n", p->yaw * 360, p->pitch * 360);
 }
 
 //

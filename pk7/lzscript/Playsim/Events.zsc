@@ -1,11 +1,3 @@
-class Lith_PostACS : Thinker
-{
-   override void Tick()
-   {
-      Lith_URANUS._LEH();
-   }
-}
-
 class Lith_Events : EventHandler;
 
 bool m_bosslevel;
@@ -28,9 +20,6 @@ override void WorldLoaded(WorldEvent evt)
    {
       CallACS("__lithlib.bin_init");
       CallACS("__lithmain.bin_init");
-
-      let th = new("Lith_PostACS");
-      th.changeStatNum(Thinker.STAT_USER + 7);
 
       let sum = level.getChecksum();
       for(int i = 0; i < bosslevels.size(); i++) if(sum == bosslevels[i])
