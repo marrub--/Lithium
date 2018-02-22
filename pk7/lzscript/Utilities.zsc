@@ -1,0 +1,10 @@
+// UTIL: Utilities and Tools Interpserse Languages
+struct Lith_UTIL
+{
+   static double Lerp(double a, double b, double t)
+   {
+      return ((1 - t) * a) + (t * b);
+   }
+}
+
+// EOF

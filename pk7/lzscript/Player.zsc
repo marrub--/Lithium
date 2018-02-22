@@ -21,6 +21,7 @@ default
 }
 
 meta double m_vbob;
+private double m_rainlerp;
 
 property ViewBob: m_vbob;
 
@@ -47,17 +48,23 @@ override void PlayerThink()
 
 private void Lith_RainEffect()
 {
+   Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 35.);
+   Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_rainlerp);
+
    if(player && CallACS("LWData", wdata_dorain) &&
       ceilingpic == skyflatnum && pitch < -5)
    {
-      float t = level.totaltime / 35.;
       float m = -pitch - 5;
-      Shader.SetUniform1f(player, "Lith_Rain", "lith_t", t);
-      Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m / 85.);
+      m_rainlerp = Lith_UTIL.Lerp(m_rainlerp, m / 85., 0.1);
       Shader.SetEnabled(player, "Lith_Rain", true);
    }
+   else if(m_rainlerp > 0.01)
+      m_rainlerp = Lith_UTIL.Lerp(m_rainlerp, 0, 0.1);
    else
+   {
+      m_rainlerp = 0;
       Shader.SetEnabled(player, "Lith_Rain", false);
+   }
 }
 
 private void Lith_ItemVacuum()
