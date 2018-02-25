@@ -14,11 +14,11 @@
 // Lith_LogS
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_LogS(int pnum, int type)
+void Lith_LogS(int type)
 {
    __str name = HERMES_S("GetLogName");
    if(name[0] != '>') name = Language("LITH_TXT_LOG_%S", name);
-   withplayer(&players[pnum]) switch(type)
+   withplayer(LocalPlayer) switch(type)
    {
    case msg_ammo: if(!p->getCVarI("lith_player_ammolog")) break;
    case msg_huds: p->logH("%S", name); break;

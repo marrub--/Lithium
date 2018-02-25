@@ -76,7 +76,7 @@ static void Log(Actor mo, string name, int type)
    if(sv && mo.player)
    {
       sv.m_logname = name;
-      CallACS("Lith_LogS", mo.playerNumber(), type);
+      mo.ACS_ScriptCall("Lith_LogS", type);
    }
 }
 

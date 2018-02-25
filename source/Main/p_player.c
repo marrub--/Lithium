@@ -447,9 +447,9 @@ void Lith_GiveMeAllOfTheScore(void)
 // Lith_GiveHealthBonus
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_GiveHealthBonus(int pnum, int amount)
+void Lith_GiveHealthBonus(int amount)
 {
-   withplayer(&players[pnum])
+   withplayer(LocalPlayer)
    {
       amount += p->health;
       if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
@@ -461,9 +461,9 @@ void Lith_GiveHealthBonus(int pnum, int amount)
 // Lith_GiveHealth
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_GiveHealth(int pnum, int amount)
+void Lith_GiveHealth(int amount)
 {
-   withplayer(&players[pnum])
+   withplayer(LocalPlayer)
    {
       amount += p->health;
       amount *= 1 + p->attr.attrs[at_vit] / 80.0;
@@ -476,9 +476,9 @@ void Lith_GiveHealth(int pnum, int amount)
 // Lith_CheckHealth
 //
 [[__call("ScriptS"), __extern("ACS")]]
-bool Lith_CheckHealth(int pnum)
+bool Lith_CheckHealth()
 {
-   withplayer(&players[pnum]) return p->health < p->maxhealth;
+   withplayer(LocalPlayer) return p->health < p->maxhealth;
    return 0;
 }
 
@@ -486,10 +486,9 @@ bool Lith_CheckHealth(int pnum)
 // Lith_Discount
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_Discount(int pnum)
+void Lith_Discount()
 {
-   withplayer(&players[pnum])
-      p->discount = 0.9;
+   withplayer(LocalPlayer) p->discount = 0.9;
 }
 
 // Static Functions ----------------------------------------------------------|

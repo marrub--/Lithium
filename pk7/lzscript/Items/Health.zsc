@@ -5,11 +5,11 @@ class Lith_HealthItem : Lith_BasicPickup
    property Amount: m_amount;
 
    override bool CanPickup(Actor mo)
-      {return CallACS("Lith_CheckHealth", mo.playerNumber());}
+      {return mo.ACS_ScriptCall("Lith_CheckHealth");}
 
    override bool TryPickup(in out Actor mo)
    {
-      CallACS("Lith_GiveHealth", mo.playerNumber(), m_amount);
+      mo.ACS_ScriptCall("Lith_GiveHealth", m_amount);
       return Super.TryPickup(mo);
    }
 }

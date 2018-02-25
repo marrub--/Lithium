@@ -419,13 +419,13 @@ void *Lith_ItemCreate()
 // Lith_ItemAttach
 //
 [[__call("ScriptS"), __extern("ACS")]]
-bool Lith_ItemAttach(int pnum, void *_item)
+bool Lith_ItemAttach(void *_item)
 {
    item_t *item = _item;
 
    LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
 
-   withplayer(&players[pnum])
+   withplayer(LocalPlayer)
       return p->addItem(item);
    return false;
 }
@@ -447,13 +447,13 @@ void Lith_ItemDetach(void *_item)
 // Lith_ItemUnlink
 //
 [[__call("ScriptS"), __extern("ACS")]]
-void Lith_ItemUnlink(int pnum, void *_item)
+void Lith_ItemUnlink(void *_item)
 {
    item_t *item = _item;
 
    LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
 
-   withplayer(&players[pnum])
+   withplayer(LocalPlayer)
    {
       item->Place(item, &p->misc);
       item->x = item->y = 0;
@@ -467,11 +467,11 @@ void Lith_ItemUnlink(int pnum, void *_item)
 // Lith_ItemCanPlace
 //
 [[__call("ScriptS"), __extern("ACS")]]
-bool Lith_ItemCanPlace(int pnum, void *_item)
+bool Lith_ItemCanPlace(void *_item)
 {
    item_t *item = _item;
 
-   withplayer(&players[pnum])
+   withplayer(LocalPlayer)
       for(int i = 0; i < countof(p->inv); i++)
          if(ItemCanPlaceAny(&p->inv[i], item))
             return true;

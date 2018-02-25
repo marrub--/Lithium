@@ -12,7 +12,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
 
    override bool TryPickup(in out Actor mo)
    {
-      CallACS("Lith_GiveHealthBonus", mo.playerNumber(), 1);
+      mo.ACS_ScriptCall("Lith_GiveHealthBonus", 1);
       return Super.TryPickup(mo);
    }
 

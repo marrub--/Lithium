@@ -22,13 +22,13 @@ class Lith_IDOL : Inventory
    }
 
    bool Lith_Attach(uint ip)
-      {return owner && CallACS("Lith_ItemAttach", owner.playerNumber(), ip);}
+      {return owner && owner.ACS_ScriptCall("Lith_ItemAttach", ip);}
 
    bool Lith_SpaceFree(uint ip)
-      {return owner && CallACS("Lith_ItemCanPlace", owner.playerNumber(), ip);}
+      {return owner && owner.ACS_ScriptCall("Lith_ItemCanPlace", ip);}
 
    void Lith_Unlink(uint ip)
-      {if(owner) CallACS("Lith_ItemUnlink", owner.playerNumber(), ip);}
+      {if(owner) owner.ACS_ScriptCall("Lith_ItemUnlink", ip);}
 
    void Lith_Remove(uint ip)
    {

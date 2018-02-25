@@ -20,10 +20,10 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       Super.PostBeginPlay();
    }
 
-   override bool TryPickup(in out Actor toucher)
+   override bool TryPickup(in out Actor mo)
    {
-      CallACS("Lith_Discount", toucher.playerNumber());
-      return Super.TryPickup(toucher);
+      mo.ACS_ScriptCall("Lith_Discount");
+      return Super.TryPickup(mo);
    }
    
    states
