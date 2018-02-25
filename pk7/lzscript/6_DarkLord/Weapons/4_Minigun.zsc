@@ -107,7 +107,7 @@ action(weapon) void Lith_A_MinigunFire()
 
 action(weapon) void Lith_A_MinigunPostFire()
 {
-   Lith_A_RecoilDn(0.15);
+   Lith_A_RecoilDn(0.35);
    A_SetTics(invoker.Lith_WindupTime()-1);
 }
 

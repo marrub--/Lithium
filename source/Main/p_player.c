@@ -182,6 +182,15 @@ static void Lith_PlayerDisconnect(void)
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_RecoilUp
+//
+[[__call("ScriptS"), __extern("ACS")]]
+void Lith_RecoilUp(fixed amount)
+{
+   withplayer(LocalPlayer) p->extrpitch += amount / 180;
+}
+
+//
 // Lith_Obituary
 //
 [[__call("ScriptS"), __extern("ACS")]]
