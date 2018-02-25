@@ -37,6 +37,13 @@ override void BeginPlay()
    GiveInventoryType("Lith_IDOL");
 }
 
+override void PostBeginPlay()
+{
+   Super.PostBeginPlay();
+
+// m_cs = Lith_Cyberspace.Create();
+}
+
 override void PlayerThink()
 {
    if(CallACS("LPData", pdata_semifrozen))
@@ -101,6 +108,89 @@ private void Lith_ItemVacuum()
    }
 }
 
+private void Lith_Crosshair()
+{
+   // get the actual view angles
+   float rp = pitch + CallACS("LPData", pdata_addp)/FIX * 180;
+   float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;
+
+   // trace to where the crosshair should be in world space
+   FLineTraceData ltd;
+   LineTrace(ry, 2048, rp, 0, player.viewz-pos.z-attackzoffset/2, 0, 0, ltd);
+
+   // create (view-adjusted) normalized lookat vector basis
+   vector3 la = pos - ltd.hitlocation;
+   la.z = (player.viewz - ltd.hitlocation.z) * level.pixelstretch;
+   la /= la.length();
+
+   // get projection angles
+   float pp = asin(la.z);
+   float py = atan2(la.y, la.x) - 180;
+
+   // first set of rotation to generate the lookat vector
+   let q  = Lith_Quaternion.CreateVector(1, 0, 0);
+   let qp = Lith_Quaternion.Create(pp, 0, 1, 0);
+   let qy = Lith_Quaternion.Create(py, 0, 0, 1);
+
+   q = qp.multiply(q).multiply(qp.makeConjugate());
+   q = qy.multiply(q).multiply(qy.makeConjugate());
+
+   // create (pixel stretch-adjusted) normalized pitch vector
+   vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
+   pvec /= pvec.length();
+
+   // get the real pitch as according to that vector
+   float newpitch = atan2(pvec.y, pvec.x);
+
+   // unproject and normalize
+   qy = Lith_Quaternion.Create(-   angle, 0, 0, 1);
+   qp = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
+
+   q = qy.multiply(q).multiply(qy.makeConjugate());
+   q = qp.multiply(q).multiply(qp.makeConjugate());
+
+   la = q.generateVector();
+   la /= la.length();
+
+   int xhx, xhy;
+   if(la.x > 0)
+   {
+      // adjust for FOV
+      float fovmod = 1 / tan(player.fov / 2);
+
+      // get NDC position
+      float pv = -la.z / la.x * fovmod;
+      float ph = -la.y / la.x * fovmod;
+
+      // get screenspace position
+      xhx = Lith_UTIL.Round(ph            * 160 + 160);
+      xhy = Lith_UTIL.Round(pv * 1.333333 * 120 + 120);
+   }
+   else
+   {
+      // not looking at it, just center
+      xhx = 160;
+      xhy = 120;
+   }
+
+   // draw
+   uint r = min(CVar.GetCVar('lith_xhair_r', player).getInt(), 255);
+   uint g = min(CVar.GetCVar('lith_xhair_g', player).getInt(), 255);
+   uint b = min(CVar.GetCVar('lith_xhair_b', player).getInt(), 255);
+   uint a = min(CVar.GetCVar('lith_xhair_a', player).getInt(), 255);
+
+   let c = String.Format("#%.2X%.2X%.2X", r, g, b);
+
+   int style = CVar.GetCVar('lith_xhair_style', player).getInt();
+
+   let gb = String.Format("lgfx/XHairs/%ib.png", style);
+   let gw = String.Format("lgfx/XHairs/%iw.png", style);
+
+   Lith_URANUS.LHS(self, 320, 240);
+   Lith_URANUS.LPS(self, gb, xhx, xhy, 0, 0, a/255.);
+   Lith_URANUS.LPS(self, gw, xhx, xhy, 0, 0, a/255., c);
+}
+
 override void Tick()
 {
    if(CallACS("LPData", pdata_semifrozen))
@@ -112,13 +202,21 @@ override void Tick()
       A_SetPitch(pitch + 1, SPF_INTERPOLATE);
    }
 
+// m_cs.Lith_RotateView(2);
+
    if(players[consoleplayer].camera == self)
+   {
       Lith_URANUS.LEH();
+//    m_cs.Lith_DrawFrame();
+   }
 
    Super.Tick();
 
    Lith_RainEffect();
    Lith_ItemVacuum();
+
+   if(health > 0 && CVar.GetCVar('lith_xhair_enable', player).getBool())
+      Lith_Crosshair();
 }
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)

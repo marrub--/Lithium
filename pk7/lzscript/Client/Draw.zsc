@@ -8,6 +8,7 @@ class Lith_URANUS_DrawData_Tex : Lith_URANUS_DrawData
 {
    textureid tex;
    float     a;
+   color     c;
 }
 
 class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
@@ -31,6 +32,8 @@ enum Lith_URANUS_DrawType
 {
    dt_tex,
    dt_ate,
+   dt_cte,
+   dt_xte,
    dt_txt,
    dt_atx,
    dt_cls,
@@ -86,7 +89,7 @@ static bool LCF(Actor mo, int num)
    return Instance().m_fmsg[num].fade != 0;
 }
 
-static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1)
+static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
@@ -103,6 +106,15 @@ static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -
    {
       dd.dt = dt_ate;
       dd.a = a;
+   }
+
+   if(c != "")
+   {
+      if(dd.dt == dt_ate)
+         dd.dt = dt_xte;
+      else
+         dd.dt = dt_cte;
+      dd.c = c;
    }
 
    dd.tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
@@ -261,6 +273,21 @@ override void RenderOverlay(RenderEvent evt)
          Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
             DTA_Alpha, dt.a);
+         break;
+      }
+      case dt_cte: {
+         let dt = Lith_URANUS_DrawData_Tex(dd);
+         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+            DTA_FillColor, dt.c);
+         break;
+      }
+      case dt_xte: {
+         let dt = Lith_URANUS_DrawData_Tex(dd);
+         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+            DTA_Alpha, dt.a,
+            DTA_FillColor, dt.c);
          break;
       }
       case dt_txt: {

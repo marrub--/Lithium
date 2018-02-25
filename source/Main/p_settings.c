@@ -61,6 +61,13 @@ Bool("Show log",     "lith_hud_showlog");
 Bool("Draw log from top of screen", "lith_hud_logfromtop");
 Bool("Draw reactive armor indicator", "lith_hud_showarmorind");
 
+Int("Crosshair red",   "/255", "lith_xhair_r", 0, 255);
+Int("Crosshair green", "/255", "lith_xhair_g", 0, 255);
+Int("Crosshair blue",  "/255", "lith_xhair_b", 0, 255);
+Int("Crosshair alpha", "/255", "lith_xhair_a", 0, 255);
+Enum("Crosshair style", "lith_xhair_style", 1, 7, "%S", XHairName(set));
+Bool("Crosshair enabled", "lith_xhair_enabled");
+
 Category("Vital Scanner");
 Int("X offset",         "px", "lith_scanner_xoffs", -160, 160);
 Int("Y offset",         "px", "lith_scanner_yoffs", -180, 20);
@@ -131,13 +138,26 @@ static __str ThemeName(int num)
 //
 static __str CursName(int num)
 {
-   static __str const cursors[] =  {
+   static __str const cursors[] = {
       "Green", "Pink", "Blue", "Orange", "Red", "White", "Outline",
       "Outline (Tail)", "Inv. Outline", "Inv. Outline (Tail)"
    };
 
    if(num < 0 || num >= gui_curs_max) return "Unknown";
    else                               return cursors[num];
+}
+
+//
+// XHairName
+//
+static __str XHairName(int num)
+{
+   static __str const xhairs[] = {
+      "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur"
+   };
+
+   if(num < 1 || num > countof(xhairs)) return "Unknown";
+   else                                 return xhairs[num - 1];
 }
 
 // Extern Functions ----------------------------------------------------------|

@@ -80,6 +80,10 @@
 
 *  SteggleSphere sprites
 
+                              * InsanityBringer *
+
+*  Quaternion and view unprojection code (used in crosshairs)
+
 *                                 * JetPlane *
 
 *  Image used as a base for the SMG sprite
