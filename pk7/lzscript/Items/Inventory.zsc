@@ -43,10 +43,14 @@ class Lith_IDOL : Inventory
    }
 }
 
-class Lith_InventoryItem : Inventory
+class Lith_InventoryItem : Inventory abstract
 {
    default
    {
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "";
+      Tag "Invalid Item";
+
       +INVENTORY.UNTOSSABLE
       +INVENTORY.UNDROPPABLE
    }
@@ -125,6 +129,17 @@ class Lith_InventoryItem : Inventory
       }
       else
          return false;
+   }
+
+   override bool TryPickup(in out Actor mo)
+   {
+      if(Super.TryPickup(mo))
+      {
+         Lith_HERMES.Log(mo, ">>> " .. getTag(), msg_both);
+         return true;
+      }
+      else
+         return true;
    }
 }
 

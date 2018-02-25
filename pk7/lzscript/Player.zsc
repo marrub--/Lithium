@@ -110,6 +110,8 @@ private void Lith_ItemVacuum()
 
 private void Lith_Crosshair()
 {
+   if(gamestate == GS_TITLELEVEL) return;
+
    // get the actual view angles
    float rp = pitch + CallACS("LPData", pdata_addp)/FIX * 180;
    float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;

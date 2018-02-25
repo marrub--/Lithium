@@ -104,7 +104,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
       loop
    Pickup:
       TNT1 A 0 Lith_A_Log("Megasphere", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", PlayerNumber(), 200)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 200)
       stop
    }
 }
@@ -144,7 +144,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
       loop
    Pickup:
       TNT1 A 0 Lith_A_Log("Soulsphere", msg_both)
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", PlayerNumber(), 100)
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 100)
       stop
    }
 }

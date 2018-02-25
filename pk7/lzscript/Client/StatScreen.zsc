@@ -71,6 +71,10 @@ override void Ticker()
 
       if(p.cmd.buttons & BT_USE)
       {
+         if(sp_state == 2) cnt_kills [0] += 3;
+         if(sp_state == 4) cnt_items [0] += 3;
+         if(sp_state == 6) cnt_secret[0] += 3;
+         if(sp_state == 8) {cnt_time += 8; cnt_par += 8; cnt_total_time += 8;}
          if(cnt_pause > 1) cnt_pause--;
          if(cnt       > 1) cnt--;
       }
