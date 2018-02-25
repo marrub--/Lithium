@@ -288,6 +288,9 @@ override void RenderOverlay(RenderEvent evt)
       case dt_siz: scw = dd.x; sch = dd.y; break;
       }
    }
+
+   let p = Lith_Player(evt.camera);
+   if(p && p.m_cs) p.m_cs.Lith_Render();
 }
 
 // EOF

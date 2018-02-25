@@ -21,7 +21,10 @@ default
 }
 
 meta double m_vbob;
+
 private double m_rainlerp;
+
+Lith_Cyberspace m_cs;
 
 property ViewBob: m_vbob;
 
