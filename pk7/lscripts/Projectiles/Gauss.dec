@@ -7,6 +7,7 @@ actor Lith_GaussExplosionParticle
    +BRIGHT
    +NOBLOCKMAP
    +FORCEXYBILLBOARD
+   +NOTELEPORT
    
    states
    {
@@ -30,6 +31,7 @@ actor Lith_GaussPuff
    +FLOORCLIP
    +FORCEXYBILLBOARD
    +MTHRUSPECIES
+   +NOTELEPORT
    -ALLOWPARTICLES
    
    States

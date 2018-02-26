@@ -18,6 +18,7 @@ actor Lith_CircleSpear
 {
    RenderStyle "Add"
    Damage (77)
+   DamageType "Lith_Magic"
 
    Projectile
    +NOTIMEFREEZE
@@ -66,6 +67,7 @@ actor Lith_CircleElectricity
    Translation "Lith_CircleElectricity"
    RenderStyle "Add"
    Damage 7
+   DamageType "Lith_Magic"
 
    Projectile
    +RANDOMIZE
@@ -88,6 +90,7 @@ actor Lith_CircleWallFx
    XScale 0.7
    YScale 5.1
    Alpha 0.7
+   DamageType "Lith_Magic"
 
    +NOTIMEFREEZE
    +NOCLIP
@@ -135,6 +138,7 @@ actor Lith_CircleWall : Lith_CircleWallFx
    YScale 5
    Radius 8
    Height 32
+   DamageType "Lith_Magic"
 
    var int user_trigger;
 
