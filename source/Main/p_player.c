@@ -231,7 +231,7 @@ void Lith_Obituary(void)
    {
       if(s[0] == '%') switch(s[1])
       {
-      case 'o': s += 2; ACS_PrintName(p->num);                   continue;
+      case 'o': s += 2; ACS_PrintName(p->num+1);                 continue;
       case 'g': s += 2; ACS_PrintString(pronoun[p->pronoun][0]); continue;
       case 'h': s += 2; ACS_PrintString(pronoun[p->pronoun][1]); continue;
       case 'p': s += 2; ACS_PrintString(pronoun[p->pronoun][2]); continue;

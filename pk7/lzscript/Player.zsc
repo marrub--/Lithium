@@ -23,6 +23,7 @@ default
 meta double m_vbob;
 
 private double m_rainlerp;
+private Lith_Quaternion m_qp, m_qy;
 
 Lith_Cyberspace m_cs;
 
@@ -108,28 +109,18 @@ private void Lith_ItemVacuum()
    }
 }
 
-private void Lith_Crosshair()
+int, int, bool Lith_Unproject(vector3 loc)
 {
-   if(gamestate == GS_TITLELEVEL) return;
-
-   // get the actual view angles
-   float rp = pitch + CallACS("LPData", pdata_addp)/FIX * 180;
-   float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;
-
-   // trace to where the crosshair should be in world space
-   FLineTraceData ltd;
-   LineTrace(ry, 2048, rp, 0, player.viewz-pos.z-attackzoffset/2, 0, 0, ltd);
-
-   // create (view-adjusted) normalized lookat vector basis
-   vector3 la = pos - ltd.hitlocation;
-   la.z = (player.viewz - ltd.hitlocation.z) * level.pixelstretch;
+   // create (view-adjusted) normalized vector for where we're looking
+   vector3 la = pos - loc;
+   la.z = (player.viewz - loc.z) * level.pixelstretch;
    la /= la.length();
 
    // get projection angles
    float pp = asin(la.z);
    float py = atan2(la.y, la.x) - 180;
 
-   // first set of rotation to generate the lookat vector
+   // rotate to lookat vector
    let q  = Lith_Quaternion.CreateVector(1, 0, 0);
    let qp = Lith_Quaternion.Create(pp, 0, 1, 0);
    let qy = Lith_Quaternion.Create(py, 0, 0, 1);
@@ -137,24 +128,14 @@ private void Lith_Crosshair()
    q = qp.multiply(q).multiply(qp.makeConjugate());
    q = qy.multiply(q).multiply(qy.makeConjugate());
 
-   // create (pixel stretch-adjusted) normalized pitch vector
-   vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
-   pvec /= pvec.length();
-
-   // get the real pitch as according to that vector
-   float newpitch = atan2(pvec.y, pvec.x);
-
-   // unproject and normalize
-   qy = Lith_Quaternion.Create(-   angle, 0, 0, 1);
-   qp = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
-
-   q = qy.multiply(q).multiply(qy.makeConjugate());
-   q = qp.multiply(q).multiply(qp.makeConjugate());
+   // unproject
+   q = m_qy.multiply(q).multiply(m_qy.makeConjugate());
+   q = m_qp.multiply(q).multiply(m_qp.makeConjugate());
 
    la = q.generateVector();
    la /= la.length();
 
-   int xhx, xhy;
+   // get screenspace position
    if(la.x > 0)
    {
       // adjust for FOV
@@ -164,52 +145,92 @@ private void Lith_Crosshair()
       float pv = -la.z / la.x * fovmod;
       float ph = -la.y / la.x * fovmod;
 
-      // get screenspace position
-      xhx = Lith_UTIL.Round(ph            * 160 + 160);
-      xhy = Lith_UTIL.Round(pv * 1.333333 * 120 + 120);
-   }
-   else
-   {
-      // not looking at it, just center
-      xhx = 160;
-      xhy = 120;
+      // convert to screenspace
+      return Lith_UTIL.Round(ph            * 160 + 160),
+             Lith_UTIL.Round(pv * 1.333333 * 120 + 120), true;
    }
 
-   // draw
+   // not looking at it, return invalid position
+   else
+      return -1000, -1000, false;
+}
+
+private void Lith_Crosshair()
+{
+   if(gamestate == GS_TITLELEVEL) return;
+
+   // get the "actual" view angles
+   float rp = pitch + CallACS("LPData", pdata_addp)/FIX * 180;
+   float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;
+
+   // trace to where the crosshair should be in world space
+   FLineTraceData ltd;
+   LineTrace(ry, 2048, rp, 0, player.viewz-pos.z-attackzoffset/2, 0, 0, ltd);
+
+   // unproject
+   int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
+
+   // draw the crosshair
    uint r = min(CVar.GetCVar('lith_xhair_r', player).getInt(), 255);
    uint g = min(CVar.GetCVar('lith_xhair_g', player).getInt(), 255);
    uint b = min(CVar.GetCVar('lith_xhair_b', player).getInt(), 255);
    uint a = min(CVar.GetCVar('lith_xhair_a', player).getInt(), 255);
 
-   let c = String.Format("#%.2X%.2X%.2X", r, g, b);
-
    int style = CVar.GetCVar('lith_xhair_style', player).getInt();
+
+   let c = String.Format("#%.2X%.2X%.2X", r, g, b);
 
    let gb = String.Format("lgfx/XHairs/%ib.png", style);
    let gw = String.Format("lgfx/XHairs/%iw.png", style);
 
-   Lith_URANUS.LHS(self, 320, 240);
    Lith_URANUS.LPS(self, gb, xhx, xhy, 0, 0, a/255.);
    Lith_URANUS.LPS(self, gw, xhx, xhy, 0, 0, a/255., c);
 }
 
+private void Lith_PlayerIndicator(PlayerInfo p)
+{
+   let mo = p.mo;
+
+   int x, y; bool seen; [x, y, seen] = Lith_Unproject(mo.pos + (0, 0, mo.height));
+
+   if(seen)
+   {
+      float a = clamp(abs((x - 160) / 90.), 0.2, 1);
+      string text = String.Format("%s [%i]\n", p.getUserName(), mo.playerNumber());
+      if(mo.health <= 0) text = text .. "Dead";
+      else               text = text .. String.Format("%iHP", mo.health);
+      Lith_URANUS.LPT(self, text, "CBIFONT", Font.CR_WHITE, x-9, y-2, 1, 1, a);
+   }
+}
+
 override void Tick()
 {
+   // create pitch and yaw quaternions for unprojection
+   vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
+   pvec /= pvec.length();
+
+   float newpitch = atan2(pvec.y, pvec.x);
+
+   m_qp = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
+   m_qy = Lith_Quaternion.Create(-   angle, 0, 0, 1);
+
+   // stupid hack to keep the view from moving around
    if(CallACS("LPData", pdata_semifrozen))
    {
-      // stupid hack to keep the view from moving around
       angle -= 1;
       pitch -= 1;
       A_SetAngle(angle + 1, SPF_INTERPOLATE);
       A_SetPitch(pitch + 1, SPF_INTERPOLATE);
    }
 
-// m_cs.Lith_RotateView(2);
+   // update cyberspace
+   if(m_cs) m_cs.Lith_RotateView(2);
 
+   // draw stuff if we're the camera
    if(players[consoleplayer].camera == self)
    {
       Lith_URANUS.LEH();
-//    m_cs.Lith_DrawFrame();
+      if(m_cs) m_cs.Lith_DrawFrame();
    }
 
    Super.Tick();
@@ -217,8 +238,16 @@ override void Tick()
    Lith_RainEffect();
    Lith_ItemVacuum();
 
+   Lith_URANUS.LHS(self, 320, 240);
+
+   if(!player) return;
+
    if(health > 0 && CVar.GetCVar('lith_xhair_enable', player).getBool())
       Lith_Crosshair();
+
+   if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
+      if(playeringame[i] && players[i] != player && players[i].mo)
+         Lith_PlayerIndicator(players[i]);
 }
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
