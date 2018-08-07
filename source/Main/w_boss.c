@@ -181,8 +181,7 @@ void Lith_PhantomDeath(void)
    Lith_SpawnBossReward();
    world.soulsfreed++;
 
-   #pragma GDCC FIXED_LITERAL OFF
-   scorethreshold *= 1.7;
+   scorethreshold = scorethreshold * 17 / 10;
    DebugNote("score threshold raised to %lli", scorethreshold);
 
    boss->phase++;

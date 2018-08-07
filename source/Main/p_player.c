@@ -28,7 +28,7 @@ static void Lith_PlayerRunScripts(struct player *p);
 //
 // Lith_PlayerEntry
 //
-[[__call("ScriptS"), __script("Enter")]]
+[[__call("ScriptS"), __script("enter")]]
 static void Lith_PlayerEntry(void)
 {
    if(ACS_GameType() == GAME_TITLE_MAP)
@@ -105,7 +105,7 @@ reinit:
 //
 // Lith_PlayerDeath
 //
-[[__call("ScriptS"), __script("Death")]]
+[[__call("ScriptS"), __script("death")]]
 static void Lith_PlayerDeath(void)
 {
    struct player *p = LocalPlayer;
@@ -144,7 +144,7 @@ static void Lith_PlayerDeath(void)
 //
 // Lith_PlayerRespawn
 //
-[[__call("ScriptS"), __script("Respawn")]]
+[[__call("ScriptS"), __script("respawn")]]
 static void Lith_PlayerRespawn(void)
 {
    LocalPlayer->reinit = true;
@@ -153,7 +153,7 @@ static void Lith_PlayerRespawn(void)
 //
 // Lith_PlayerReturn
 //
-[[__call("ScriptS"), __script("Return")]]
+[[__call("ScriptS"), __script("return")]]
 static void Lith_PlayerReturn(void)
 {
    LocalPlayer->reinit = true;
@@ -162,7 +162,7 @@ static void Lith_PlayerReturn(void)
 //
 // Lith_PlayerDisconnect
 //
-[[__call("ScriptS"), __script("Disconnect")]]
+[[__call("ScriptS"), __script("disconnect")]]
 static void Lith_PlayerDisconnect(void)
 {
    struct player *p = LocalPlayer;

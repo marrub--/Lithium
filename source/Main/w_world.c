@@ -595,7 +595,7 @@ static void WInit(void)
 //
 // Lith_World
 //
-[[__call("ScriptS"), __script("Open")]]
+[[__call("ScriptS"), __script("open")]]
 static void Lith_World(void)
 {
 begin:
@@ -715,7 +715,7 @@ void Lith_WorldReopen(void)
 //
 // Lith_WorldUnload
 //
-[[__call("ScriptS"), __script("Unloading")]]
+[[__call("ScriptS"), __script("unloading")]]
 static void Lith_WorldUnload(void)
 {
    extern void Lith_InstallSpawnedCBIItems(void);

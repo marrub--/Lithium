@@ -141,7 +141,7 @@ void Lith_PlayerResetCBIGUI(struct player *p)
 //
 // Lith_KeyOpenCBI
 //
-[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
+[[__call("ScriptS"), __extern("ACS"), __script("net")]]
 void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;

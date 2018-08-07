@@ -13,7 +13,7 @@
 //
 // Lith_KeyZoom
 //
-[[__call("ScriptS"), __extern("ACS"), __script("Net")]]
+[[__call("ScriptS"), __extern("ACS"), __script("net")]]
 void Lith_KeyZoom(int amt)
 {
    if(ACS_Timer() < 10) return;
