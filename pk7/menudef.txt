@@ -32,20 +32,6 @@ ListMenu "MainMenu"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
 }
 
-ListMenu "SaveGameMenu"
-{
-   StaticText 205, -15, "SAVE GAME"
-   Position 80, 54
-   Class "Lith_SaveMenu"
-}
-
-ListMenu "LoadGameMenu"
-{
-   StaticText 205, -15, "LOAD GAME"
-   Position 80, 54
-   Class "Lith_LoadMenu"
-}
-
 OptionMenu "LOptionsMenu"
 {
    Class "Lith_OptionsMenu"
@@ -82,14 +68,14 @@ ListMenu "LoadGameMenu"
    NetgameMessage "$LOADNET"
    StaticTextCentered 160, -20, "$MENU_LOADG"
    Position 80, 54
-   Class "LoadMenu"
+   Class "Lith_LoadMenu"
 }
 
 ListMenu "SaveGameMenu"
 {
    StaticTextCentered 160, -20, "$MENU_SAVEG"
    Position 80, 54
-   Class "SaveMenu"
+   Class "Lith_SaveMenu"
 }
 
 ListMenu "UpdateMenu"

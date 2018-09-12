@@ -1,6 +1,6 @@
 class Lith_Armor_HazMat : Lith_Armor
 {
-   override int Lith_SaveAmt(name type = 'None')
+   override int Lith_SaveAmt(name type)
       {return Lith_HERMES.Instance().m_dmgworld ? 10 : m_cursave;}
 }
 

@@ -41,7 +41,7 @@ class Lith_InformantPlayer : Lith_Player
       Super.Tick();
    }
 
-   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags = 0, double angle = 0)
+   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
       if(m_iframes)
          return 0;

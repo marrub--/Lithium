@@ -87,6 +87,8 @@ static __str RandomWeighted(struct witem const *list, int count)
 
    for(int i = 0; i < count; i++)
       if(sel <= list[i].weight) return list[i].item;
+
+   return "shush, this will return before this";
 }
 
 // Extern Functions ----------------------------------------------------------|

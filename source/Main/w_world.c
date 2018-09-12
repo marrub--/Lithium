@@ -152,6 +152,7 @@ __str Lith_CanonTime(int type)
    case CANONTIME_DATE:
       return StrParam("%i-7-1649", days);
    }
+   return "invalid";
 }
 
 //

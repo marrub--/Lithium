@@ -136,6 +136,8 @@ int Lith_WeaponFromName(struct player *p, int name)
       FDClass("BTSX",   btsx)
       #undef FDClass
    }
+
+   return weapon_unknown;
 }
 
 // EOF

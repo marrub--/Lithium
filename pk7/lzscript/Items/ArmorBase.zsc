@@ -164,7 +164,7 @@ class Lith_Armor : Lith_SlottedItem abstract
 
    property SlotSave: m_slot, m_save0, m_save1;
 
-   override int Lith_SaveAmt(name type = 'None') {return m_cursave;}
+   override int Lith_SaveAmt(name type) {return m_cursave;}
 
    override Inventory CreateCopy(Actor mo)
    {
@@ -199,7 +199,7 @@ class Lith_Armor_Resistant : Lith_Armor
       return copy;
    }
 
-   override int Lith_SaveAmt(name type = 'None')
+   override int Lith_SaveAmt(name type)
    {
       let dt = Lith_AAGH.Lith_NameToDT(type);
       return m_resist == dt ? m_cursave * 2 : m_cursave;

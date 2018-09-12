@@ -12,12 +12,12 @@ int Lith_TBufProc(struct token *tok, void *udata)
 {
    switch(tok->type)
    {
-   default:         return tokproc_next;
    case tok_eof:    return tokproc_done;
    case tok_lnend:
    case tok_cmtblk:
    case tok_cmtlin: return tokproc_skip;
    }
+   return tokproc_next;
 }
 
 //
@@ -27,11 +27,11 @@ int Lith_TBufProcL(struct token *tok, void *udata)
 {
    switch(tok->type)
    {
-   default:         return tokproc_next;
    case tok_eof:    return tokproc_done;
    case tok_cmtblk:
    case tok_cmtlin: return tokproc_skip;
    }
+   return tokproc_next;
 }
 
 //

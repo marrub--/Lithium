@@ -7,7 +7,7 @@ MAKELIB=gdcc-makelib
 ## Compiler flags
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET)
+CFLAGS=$(TARGET) --warn-all
 
 ## Sources
 IR=ir
