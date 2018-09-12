@@ -1,24 +1,17 @@
-class Lith_URANUS_DrawData
+struct Lith_URANUS_DrawData
 {
    uint8 dt;
    int16 x, y, z, w;
-}
 
-class Lith_URANUS_DrawData_Tex : Lith_URANUS_DrawData
-{
    textureid tex;
-   float     a;
    color     c;
-}
+   float     a;
 
-class Lith_URANUS_DrawData_Txt : Lith_URANUS_DrawData
-{
    int         cr;
    Font        fnt;
    BrokenLines txt;
    array<int>  lnx;
    int         lny;
-   float       a;
 }
 
 struct Lith_URANUS_FadeMessage
@@ -51,7 +44,8 @@ extend class Lith_URANUS;
    while still providing maximum performance, as well as multiplayer compat.
 */
 
-private transient play array<Lith_URANUS_DrawData> m_dda;
+private transient play Lith_URANUS_DrawData[400] m_d;
+private transient play uint m_p;
 private transient play Lith_URANUS_FadeMessage[32] m_fmsg;
 private transient play vector2 m_vsc;
 private transient play int m_dww;
@@ -62,15 +56,16 @@ static void LHS(Actor mo, int w, int h)
    if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
-   let dd = new("Lith_URANUS_DrawData");
+   let  p = cl.m_p;
 
-   dd.dt = dt_siz;
+   cl.m_d[p].dt = dt_siz;
 
-   dd.x = w;
-   dd.y = h;
+   cl.m_d[p].x = w;
+   cl.m_d[p].y = h;
+
+   cl.m_p++;
 
    cl.m_vsc = (w, h);
-   cl.m_dda.push(dd);
 }
 
 static void LSF(Actor mo, int num, int time, double fade)
@@ -93,113 +88,109 @@ static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
-   let cl = Instance();
-   if(cl.m_nodraw) return;
+   let cl = Instance(); if(cl.m_nodraw) return;
+   let  p = cl.m_p;
 
    if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
-   let dd = new("Lith_URANUS_DrawData_Tex");
-
    if(a == -1)
-      dd.dt = dt_tex;
+      cl.m_d[p].dt = dt_tex;
    else
    {
-      dd.dt = dt_ate;
-      dd.a = a;
+      cl.m_d[p].dt = dt_ate;
+      cl.m_d[p].a = a;
    }
 
    if(c != "")
    {
-      if(dd.dt == dt_ate)
-         dd.dt = dt_xte;
+      if(cl.m_d[p].dt == dt_ate)
+         cl.m_d[p].dt = dt_xte;
       else
-         dd.dt = dt_cte;
-      dd.c = c;
+         cl.m_d[p].dt = dt_cte;
+      cl.m_d[p].c = c;
    }
 
-   dd.tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
+   cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
 
-   int sx, sy; [sx, sy] = TexMan.GetSize(dd.tex);
+   int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_d[p].tex);
 
    switch(xa)
    {
    default:
-   case 1: dd.x = x;          break;
-   case 0: dd.x = x - sx / 2; break;
-   case 2: dd.x = x - sx;     break;
+   case 1: cl.m_d[p].x = x;          break;
+   case 0: cl.m_d[p].x = x - sx / 2; break;
+   case 2: cl.m_d[p].x = x - sx;     break;
    }
 
    switch(ya)
    {
    default:
-   case 1: dd.y = y;          break;
-   case 0: dd.y = y - sy / 2; break;
-   case 2: dd.y = y - sy;     break;
+   case 1: cl.m_d[p].y = y;          break;
+   case 0: cl.m_d[p].y = y - sy / 2; break;
+   case 2: cl.m_d[p].y = y - sy;     break;
    }
 
-   cl.m_dda.push(dd);
+   cl.m_p++;
 }
 
 static void LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
-   let cl = Instance();
-   if(cl.m_nodraw) return;
+   let cl = Instance(); if(cl.m_nodraw) return;
+   let  p = cl.m_p;
 
    if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
-   let dd = new("Lith_URANUS_DrawData_Txt");
-   
    if(a == -1)
-      dd.dt = dt_txt;
+      cl.m_d[p].dt = dt_txt;
    else
    {
-      dd.dt = dt_atx;
-      dd.a = a;
+      cl.m_d[p].dt = dt_atx;
+      cl.m_d[p].a = a;
    }
 
-   dd.cr = cr;
+   cl.m_d[p].cr = cr;
 
-   dd.fnt = Font.GetFont(fnt);
-   dd.txt = dd.fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7FFF);
-   dd.lny = dd.fnt.getHeight();
+   cl.m_d[p].fnt = Font.GetFont(fnt);
+   cl.m_d[p].txt = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7FFF);
+   cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
 
-   int lns = dd.txt.count();
-   int lnx = 0;
+   uint lns = cl.m_d[p].txt.count();
+   int  lnx = 0;
 
    for(int i = 0, w; i < lns; i++)
-      if(lnx < (w = dd.txt.stringWidth(i))) lnx = w;
+      if(lnx < (w = cl.m_d[p].txt.stringWidth(i))) lnx = w;
 
    switch(xa)
    {
    default:
    case 3:
    case 4:
-   case 1: dd.x = x;           break;
-   case 5: dd.x = x + lnx / 2; break;
+   case 1: cl.m_d[p].x = x;           break;
+   case 5: cl.m_d[p].x = x + lnx / 2; break;
    case 6:
-   case 0: dd.x = x - lnx / 2; break;
-   case 2: dd.x = x - lnx;     break;
+   case 0: cl.m_d[p].x = x - lnx / 2; break;
+   case 2: cl.m_d[p].x = x - lnx;     break;
    }
 
    switch(ya)
    {
    default:
-   case 1: dd.y = y;                    break;
-   case 0: dd.y = y - dd.lny * lns / 2; break;
-   case 2: dd.y = y - dd.lny * lns;     break;
+   case 1: cl.m_d[p].y = y;                    break;
+   case 0: cl.m_d[p].y = y - cl.m_d[p].lny * lns / 2; break;
+   case 2: cl.m_d[p].y = y - cl.m_d[p].lny * lns;     break;
    }
 
-   dd.lnx.resize(lns);
-   for(int i = 0; i < lns; i++)
+   cl.m_d[p].lnx.resize(lns);
+   for(uint i = 0; i < lns; i++)
    {
-           if(xa == 3) dd.lnx[i] = dd.txt.stringWidth(i);
-      else if(xa <  4) dd.lnx[i] = 0;
-      else             dd.lnx[i] = dd.txt.stringWidth(i) / 2;
+           if(xa == 3) cl.m_d[p].lnx[i] = cl.m_d[p].txt.stringWidth(i);
+      else if(xa <  4) cl.m_d[p].lnx[i] = 0;
+      else             cl.m_d[p].lnx[i] = cl.m_d[p].txt.stringWidth(i) / 2;
    }
 
-   cl.m_dda.push(dd);
+   cl.m_p++;
 }
 
 static void LSC(Actor mo, int x, int y, int w, int h, int ww)
@@ -207,14 +198,14 @@ static void LSC(Actor mo, int x, int y, int w, int h, int ww)
    if(mo != players[consoleplayer].camera) return;
 
    let cl = Instance();
-   let dd = new("Lith_URANUS_DrawData");
+   let  p = cl.m_p;
 
    if(x || y || w || h)
    {
       // simple optimization (which also prevents division by zero)
       if((cl.m_nodraw = w <= 0 || h <= 0)) return;
 
-      dd.dt = dt_cls;
+      cl.m_d[p].dt = dt_cls;
 
       float sw = Screen.GetWidth();
       float sh = Screen.GetHeight();
@@ -222,26 +213,26 @@ static void LSC(Actor mo, int x, int y, int w, int h, int ww)
       float hmul = sh <= sw ? sh / cl.m_vsc.y : sw / cl.m_vsc.x;
       float wadd = (sw - cl.m_vsc.x * hmul) / 2.;
 
-      dd.x = x * hmul + wadd; dd.y = y * hmul;
-      dd.z = w * hmul;        dd.w = h * hmul;
+      cl.m_d[p].x = x * hmul + wadd; cl.m_d[p].y = y * hmul;
+      cl.m_d[p].z = w * hmul;        cl.m_d[p].w = h * hmul;
    }
    else
    {
       cl.m_nodraw = false;
-      dd.dt = dt_clc;
+      cl.m_d[p].dt = dt_clc;
    }
 
    cl.m_dww = ww;
-   cl.m_dda.push(dd);
+   cl.m_p++;
 }
 
 static void LEH()
 {
    let cl = Instance();
 
-   cl.m_dda.clear();
+   cl.m_p = 0;
 
-   for(int i = 0; i < cl.m_fmsg.size(); i++)
+   for(uint i = 0; i < cl.m_fmsg.size(); i++)
    {
       if(!cl.m_fmsg[i].fade)
          continue;
@@ -257,62 +248,52 @@ override void RenderOverlay(RenderEvent evt)
    int scw = 320;
    int sch = 240;
 
-   if(!automapactive) for(int i = 0, j = m_dda.size(); i < j; i++)
+   if(!automapactive) for(uint i = 0; i < m_p; i++)
    {
-      let dd = m_dda[i];
-      switch(dd.dt)
+      switch(m_d[i].dt)
       {
       case dt_tex: {
-         let dt = Lith_URANUS_DrawData_Tex(dd);
-         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+         Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch);
          break;
       }
       case dt_ate: {
-         let dt = Lith_URANUS_DrawData_Tex(dd);
-         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+         Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-            DTA_Alpha, dt.a);
+            DTA_Alpha, m_d[i].a);
          break;
       }
       case dt_cte: {
-         let dt = Lith_URANUS_DrawData_Tex(dd);
-         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+         Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-            DTA_FillColor, dt.c);
+            DTA_FillColor, m_d[i].c);
          break;
       }
       case dt_xte: {
-         let dt = Lith_URANUS_DrawData_Tex(dd);
-         Screen.DrawTexture(dt.tex, false, dt.x, dt.y,
+         Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-            DTA_Alpha, dt.a,
-            DTA_FillColor, dt.c);
+            DTA_Alpha, m_d[i].a,
+            DTA_FillColor, m_d[i].c);
          break;
       }
       case dt_txt: {
-         let dt = Lith_URANUS_DrawData_Txt(dd);
-         for(int ln = 0, lns = dt.lnx.size(); ln < lns; ln++)
-            Screen.DrawText(dt.fnt, dt.cr,
-               dt.x-dt.lnx[ln], dt.y+dt.lny*ln, dt.txt.stringAt(ln),
+         for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
+            Screen.DrawText(m_d[i].fnt, m_d[i].cr,
+               m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt.stringAt(ln),
                DTA_VirtualWidth, scw, DTA_VirtualHeight, sch);
          break;
       }
       case dt_atx: {
-         let dt = Lith_URANUS_DrawData_Txt(dd);
-         for(int ln = 0, lns = dt.lnx.size(); ln < lns; ln++)
-            Screen.DrawText(dt.fnt, dt.cr,
-               dt.x-dt.lnx[ln], dt.y+dt.lny*ln, dt.txt.stringAt(ln),
+         for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
+            Screen.DrawText(m_d[i].fnt, m_d[i].cr,
+               m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt.stringAt(ln),
                DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-               DTA_Alpha, dt.a);
+               DTA_Alpha, m_d[i].a);
          break;
       }
-      case dt_cls:
-//       Screen.DrawFrame(dd.x, dd.y, dd.z, dd.w);
-         Screen.SetClipRect(dd.x, dd.y, dd.z, dd.w);
-         break;
+      case dt_cls: Screen.SetClipRect(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w); break;
       case dt_clc: Screen.ClearClipRect(); break;
-      case dt_siz: scw = dd.x; sch = dd.y; break;
+      case dt_siz: scw = m_d[i].x; sch = m_d[i].y; break;
       }
    }
 
