@@ -70,57 +70,11 @@ static void SetPClass(struct player *p)
       else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
       else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
       else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
-      else if(cl == "FDPlutPlayer"  || cl == "FDTNTPlayer"    ||
-              cl == "FDDoom2Player" || cl == "FDAliensPlayer" ||
-              cl == "FDJPCPPlayer"  || cl == "FDBTSXPlayer")
-         p->pclass = pcl_fdoomer;
-      else if(cl == "DoomRLMarine"        || cl == "DoomRLScout"    ||
-              cl == "DoomRLTechnician"    || cl == "DoomRLRenegade" ||
-              cl == "DoomRLDemolitionist" || cl == "DoomRLCommando")
-         p->pclass = pcl_drla;
       else for(;;)
       {
          Log("Invalid player class detected, everything is going to explode!");
          ACS_Delay(1);
       }
-   }
-}
-
-//
-// ConvertAmmo
-//
-[[__call("StkCall")]]
-static void ConvertAmmo(struct player *p)
-{
-   int clip = InvNum("Lith_BulletAmmo");
-   int shel = InvNum("Lith_ShellAmmo");
-   int rckt = InvNum("Lith_RocketAmmo");
-   int cell = InvNum("Lith_PlasmaAmmo");
-   int bfgc = InvNum("Lith_CannonAmmo");
-
-   InvTake("Lith_BulletAmmo", clip);
-   InvTake("Lith_ShellAmmo",  shel);
-   InvTake("Lith_RocketAmmo", rckt);
-   InvTake("Lith_PlasmaAmmo", cell);
-   InvTake("Lith_CannonAmmo", bfgc);
-
-   if(p->pclass == pcl_fdoomer)
-   {
-      #define FDClass(cname) \
-         if(p->pcstr == "FD" cname "Player") { \
-            InvGive("FD" cname "Bullets",   clip); \
-            InvGive("FD" cname "Shells",    shel); \
-            InvGive("FD" cname "Rocket",    rckt); \
-            InvGive("FD" cname "Cell",      cell); \
-            InvGive("FD" cname "BFGCharge", bfgc); \
-         }
-      FDClass("Plut")
-      FDClass("TNT")
-      FDClass("Doom2")
-      FDClass("Aliens")
-      FDClass("JPCP")
-      FDClass("BTSX")
-      #undef FDClass
    }
 }
 
@@ -227,9 +181,6 @@ void Lith_PlayerUpdateData(struct player *p)
    p->keys.rs = InvNum("RedSkull");
    p->keys.ys = InvNum("YellowSkull");
    p->keys.bs = InvNum("BlueSkull");
-
-   if(p->pclass & pcl_mods)
-      ConvertAmmo(p);
 
    DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
       p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);

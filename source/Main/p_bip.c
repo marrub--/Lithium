@@ -241,8 +241,6 @@ void Lith_PlayerInitBIP(struct player *p)
 [[__call("ScriptS")]]
 void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
-   if(p->pclass & pcl_mods) return;
-
    p->setActivator();
 
    flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);

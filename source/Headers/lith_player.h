@@ -16,7 +16,6 @@ LITH_X(gA, pcl_any)
 LITH_X(gH, pcl_human)
 LITH_X(gN, pcl_nonhuman)
 LITH_X(gR, pcl_robot)
-LITH_X(gX, pcl_mods)
 #undef LITH_X
 #elif !defined(LITH_PLAYER_H)
 #define LITH_PLAYER_H

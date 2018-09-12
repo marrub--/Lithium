@@ -28,23 +28,18 @@ enum // Lith_PClass
    pcl_darklord  = 1 << 5,
    pcl_thoth     = 1 << 6,
 
-   // Mods
-   pcl_fdoomer = 1 << 7,
-   pcl_drla    = 1 << 8,
-
    // Groups
    pcl_outcasts   = pcl_marine    | pcl_cybermage,
    pcl_missioners = pcl_informant | pcl_wanderer,
    pcl_intruders  = pcl_assassin  | pcl_darklord | pcl_thoth,
-   pcl_mods       = pcl_fdoomer   | pcl_drla,
 
    // Lifeform Type
-   pcl_human    = pcl_marine   | pcl_cybermage | pcl_assassin | pcl_mods,
+   pcl_human    = pcl_marine   | pcl_cybermage | pcl_assassin,
    pcl_nonhuman = pcl_wanderer | pcl_darklord  | pcl_thoth,
    pcl_robot    = pcl_informant,
 
    // Misc. Abilities
-   pcl_any       = pcl_outcasts  | pcl_missioners | pcl_intruders | pcl_mods,
+   pcl_any       = pcl_outcasts  | pcl_missioners | pcl_intruders,
    pcl_magicuser = pcl_cybermage | pcl_wanderer   | pcl_thoth,
 };
 

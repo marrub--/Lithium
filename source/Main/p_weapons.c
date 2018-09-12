@@ -25,10 +25,6 @@ static void GiveWeaponItem(int parm, int slot)
    case weapon_plasma:    InvGive("Lith_PlasmaAmmo", 1500); break;
    case weapon_c_shipgun: InvGive("Lith_CannonAmmo", 5);    break;
    case weapon_bfg:       InvGive("Lith_CannonAmmo", 4);    break;
-
-   case weapon_fd_jpcp_chainsaw:
-      InvGive("FDGotChainsaw", 1);
-      break;
    }
 
    if(parm > weapon_max_lith) switch(slot)
@@ -121,9 +117,6 @@ bool Lith_WeaponPickup(int name)
 
       GiveWeaponItem(parm, info->slot);
       Lith_PickupMessage(p, info);
-
-      if(info->type != weapon_fd_jpcp_chainsaw) // fuck a bitch
-         InvGive(info->classname, 1);
 
       return !weaponstay;
    }

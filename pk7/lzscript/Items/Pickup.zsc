@@ -24,10 +24,6 @@ class Lith_ItemGlow : Actor
       case pcl_assassin:  frame = Ch_F - Ch_A; break;
       case pcl_darklord:  frame = Ch_G - Ch_A; break;
       case pcl_thoth:     frame = Ch_H - Ch_A; break;
-      case pcl_fdoomer:
-         sprite = Actor.GetSpriteIndex("FDLI");
-         frame = Ch_T - Ch_A;
-         break;
       default:
          sprite = Actor.GetSpriteIndex("UNKN");
          break;

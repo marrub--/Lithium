@@ -25,15 +25,6 @@ enum // Lith_WeaponNum
    weapon_max_lith,
    weapon_nonlith_start = weapon_max_lith - 1,
 
-#{
-   ret = ""
-   for cl in ["plut", "tnt", "doom2", "aliens", "jpcp", "btsx"]
-      for wp in ["fist", "chainsaw", "pistol", "shotgun", "ssg", "chaingun", "launcher", "plasma", "bfg"]
-         ret += "   weapon_fd_#{cl}_#{wp},\n"
-      end
-   end
-   ret
-}
    weapon_max
 };
 
@@ -78,17 +69,6 @@ def outSource fp, weps, wepn
 #define P(a) "weapons/" a "/pickup"
 #define N(a) .classname = "Lith_" a, .name = a
 #define F(...) .flags = __VA_ARGS__
-#define FN(a) .classname = "FD" a, .name = a
-#define FDClass(cname) \\
-   {1, pcl_fdoomer, FN(cname "Fist"),           "YOUSONOFABITCH", AT_None}, \\
-   {1, pcl_fdoomer, FN(cname "Chainsaw"),       P("cfist"),       AT_None}, \\
-   {2, pcl_fdoomer, FN(cname "Pistol"),         P("pistol"),      AT_Ammo, "FD" cname "PistolAmmo"}, \\
-   {3, pcl_fdoomer, FN(cname "Shotgun"),        P("shotgun"),     AT_Ammo, "FD" cname "Shells"}, \\
-   {3, pcl_fdoomer, FN(cname "SuperShotgun"),   P("ssg"),         AT_Ammo, "FD" cname "Shells"}, \\
-   {4, pcl_fdoomer, FN(cname "Chaingun"),       P("rifle"),       AT_Ammo, "FD" cname "Bullets"}, \\
-   {5, pcl_fdoomer, FN(cname "RocketLauncher"), P("rocket"),      AT_Ammo, "FD" cname "Rocket"}, \\
-   {6, pcl_fdoomer, FN(cname "PlasmaRifle"),    P("plasma"),      AT_Ammo, "FD" cname "Cell"}, \\
-   {7, pcl_fdoomer, FN(cname "BFG9000"),        P("cannon"),      AT_Ammo, "FD" cname "BFGCharge"},
 weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
 
@@ -99,14 +79,7 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    end
    ret
 }
-   FDClass("Plut")
-   FDClass("TNT")
-   FDClass("Doom2")
-   FDClass("Aliens")
-   FDClass("JPCP")
-   FDClass("BTSX")
 };
-#undef FDClass
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -128,28 +101,9 @@ int Lith_WeaponFromName(struct player *p, int name)
    end
    ret
 }
-   case pcl_fdoomer:
-      #define FDClass(cname, ctype) \\
-         if(p->pcstr == "FD" cname "Player") \\
-            switch(name) { \\
-            case wepnam_fist:           return weapon_fd_##ctype##_fist; \\
-            case wepnam_chainsaw:       return weapon_fd_##ctype##_chainsaw; \\
-            case wepnam_pistol:         return weapon_fd_##ctype##_pistol; \\
-            case wepnam_shotgun:        return weapon_fd_##ctype##_shotgun; \\
-            case wepnam_supershotgun:   return weapon_fd_##ctype##_ssg; \\
-            case wepnam_chaingun:       return weapon_fd_##ctype##_chaingun; \\
-            case wepnam_rocketlauncher: return weapon_fd_##ctype##_launcher; \\
-            case wepnam_plasmarifle:    return weapon_fd_##ctype##_plasma; \\
-            case wepnam_bfg9000:        return weapon_fd_##ctype##_bfg; \\
-            }
-      FDClass("Plut",   plut)
-      FDClass("TNT",    tnt)
-      FDClass("Doom2",  doom2)
-      FDClass("Aliens", aliens)
-      FDClass("JPCP",   jpcp)
-      FDClass("BTSX",   btsx)
-      #undef FDClass
    }
+
+   return weapon_unknown;
 }
 
 // EOF
