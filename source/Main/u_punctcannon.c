@@ -8,7 +8,7 @@
 //
 // Lith_PunctuatorFire
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PunctuatorFire(void)
 {
    withplayer(LocalPlayer)

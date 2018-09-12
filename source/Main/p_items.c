@@ -8,7 +8,7 @@
 //
 // BagItem_Tick
 //
-[[__call("ScriptS")]]
+script
 static void BagItem_Tick(item_t *_item)
 {
    bagitem_t *item = (bagitem_t *)_item;
@@ -20,7 +20,7 @@ static void BagItem_Tick(item_t *_item)
 //
 // BagItem_Place
 //
-[[__call("ScriptS")]]
+script
 static void BagItem_Place(item_t *_item, container_t *cont)
 {
    bagitem_t *item = (bagitem_t *)_item;
@@ -36,7 +36,7 @@ static void BagItem_Place(item_t *_item, container_t *cont)
 //
 // BagItem_Destroy
 //
-[[__call("ScriptS")]]
+script
 static void BagItem_Destroy(item_t *_item)
 {
    bagitem_t *item = (bagitem_t *)_item;
@@ -130,7 +130,7 @@ item_t *Lith_Item_New(itemdata_t const *data)
 //
 // Lith_Item_Destroy
 //
-[[__call("ScriptS")]]
+script
 void Lith_Item_Destroy(item_t *item)
 {
    LogDebug(log_dev, "Lith_Item_Destroy: destroying item %p", item);
@@ -151,7 +151,7 @@ void Lith_Item_Destroy(item_t *item)
 //
 // Lith_Item_Use
 //
-[[__call("ScriptS")]]
+script
 bool Lith_Item_Use(item_t *item)
 {
    return HERMES("UseItem", item);
@@ -160,7 +160,7 @@ bool Lith_Item_Use(item_t *item)
 //
 // Lith_Item_Place
 //
-[[__call("ScriptS")]]
+script
 void Lith_Item_Place(item_t *item, container_t *cont)
 {
    Lith_Item_Unlink(item);
@@ -221,7 +221,7 @@ bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
 //
 // Lith_ItemPlaceFirst
 //
-[[__call("ScriptS")]]
+script
 bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 {
    for(int y = 0; y < cont->h; y++) for(int x = 0; x < cont->w; x++)
@@ -294,7 +294,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
 //
 // Lith_PlayerUpdateInventory
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateInventory(struct player *p)
 {
    if(p->useitem)
@@ -398,7 +398,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 //
 // Lith_ItemCreate
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void *Lith_ItemCreate()
 {
    __str type = HERMES_S("GetInvType");
@@ -418,7 +418,7 @@ void *Lith_ItemCreate()
 //
 // Lith_ItemAttach
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 bool Lith_ItemAttach(void *_item)
 {
    item_t *item = _item;
@@ -433,7 +433,7 @@ bool Lith_ItemAttach(void *_item)
 //
 // Lith_ItemDetach
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_ItemDetach(void *_item)
 {
    item_t *item = _item;
@@ -446,7 +446,7 @@ void Lith_ItemDetach(void *_item)
 //
 // Lith_ItemUnlink
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_ItemUnlink(void *_item)
 {
    item_t *item = _item;
@@ -466,7 +466,7 @@ void Lith_ItemUnlink(void *_item)
 //
 // Lith_ItemCanPlace
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 bool Lith_ItemCanPlace(void *_item)
 {
    item_t *item = _item;

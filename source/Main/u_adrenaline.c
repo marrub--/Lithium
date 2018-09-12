@@ -17,7 +17,7 @@ void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
 {
    // Charge

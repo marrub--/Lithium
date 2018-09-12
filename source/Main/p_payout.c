@@ -13,7 +13,7 @@ extern payoutinfo_t payout;
 //
 // Lith_PlayerPayout
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerPayout(struct player *p)
 {
 #define Left(...) \

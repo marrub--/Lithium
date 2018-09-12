@@ -26,7 +26,7 @@ __str StrUpper(__str in)
 //
 // StrHash
 //
-[[__call("StkCall")]]
+stkcall
 u32 StrHash(char __str_ars const *s)
 {
    StrHashImpl();
@@ -35,7 +35,7 @@ u32 StrHash(char __str_ars const *s)
 //
 // CStrHash
 //
-[[__call("StkCall")]]
+stkcall
 u32 CStrHash(char const *s)
 {
    StrHashImpl();
@@ -65,7 +65,7 @@ int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
 //
 // Lith_ScoreSep
 //
-[[__call("StkCall")]]
+stkcall
 __str Lith_ScoreSep(i96 num)
 {
    static char out[48];

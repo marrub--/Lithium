@@ -13,7 +13,7 @@
 //
 // Lith_KeyZoom
 //
-[[__call("ScriptS"), __extern("ACS"), __script("net")]]
+script ext("ACS") type("net")
 void Lith_KeyZoom(int amt)
 {
    if(ACS_Timer() < 10) return;
@@ -42,7 +42,7 @@ void Upgr_Zoom_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom < UData.zoom)

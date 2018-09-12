@@ -18,7 +18,7 @@ static void HUD_Waves(struct player *p);
 //
 // Lith_PlayerDebugStats
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerDebugStats(struct player *p)
 {
    if(!(world.dbgLevel & log_devh)) return;
@@ -38,7 +38,7 @@ void Lith_PlayerDebugStats(struct player *p)
 //
 // Lith_PlayerFootstep
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerFootstep(struct player *p)
 {
    if(Lith_IsPaused) return;
@@ -55,7 +55,7 @@ void Lith_PlayerFootstep(struct player *p)
 //
 // Lith_PlayerItemFx
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerItemFx(struct player *p)
 {
    bool hasir = InvNum("PowerLightAmp");
@@ -71,7 +71,7 @@ void Lith_PlayerItemFx(struct player *p)
 //
 // Update view bobbing when you get damaged.
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerDamageBob(struct player *p)
 {
    if(Lith_IsPaused) return;
@@ -103,7 +103,7 @@ void Lith_PlayerDamageBob(struct player *p)
 //
 // Update additive view.
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerView(struct player *p)
 {
    if(Lith_IsPaused) return;
@@ -132,7 +132,7 @@ void Lith_PlayerView(struct player *p)
 //
 // Lith_PlayerStyle
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerStyle(struct player *p)
 {
    if(p->scopetoken) {
@@ -147,7 +147,7 @@ void Lith_PlayerStyle(struct player *p)
 //
 // Lith_PlayerHUD
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerHUD(struct player *p)
 {
    ACS_SetHudSize(320, 200);
@@ -193,7 +193,7 @@ void Lith_PlayerHUD(struct player *p)
 //
 // Lith_PlayerLevelup
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerLevelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level) {

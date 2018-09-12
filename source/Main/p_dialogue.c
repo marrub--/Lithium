@@ -65,7 +65,7 @@ typedef struct dlgvmstate_s
    int         optSel;
    int         concat;
 
-   [[__anonymous]]
+   anonymous
    dlgcurstate_t cur;
    dlgcurstate_t next;
 } dlgvmstate_t;
@@ -79,7 +79,7 @@ struct dlgdef *lmvar dlgdefs;
 //
 // Lith_TerminalGUI
 //
-[[__call("ScriptS")]]
+script
 static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
    enum {
@@ -191,7 +191,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
 //
 // Lith_DialogueGUI
 //
-[[__call("ScriptS")]]
+script
 static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
    enum {left = 37, top = 75};
@@ -251,7 +251,7 @@ static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
 //
 // Lith_TeleportOutEffect
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_TeleportOutEffect(struct player *p)
 {
    if(!p) p = LocalPlayer;
@@ -278,7 +278,7 @@ void Lith_TeleportOutEffect(struct player *p)
 //
 // Main dialogue VM.
 //
-[[__call("ScriptS")]]
+script
 void Lith_DialogueVM(struct player *p, int num)
 {
    if(p->dead || p->indialogue > 1)
@@ -515,7 +515,7 @@ done:
 //
 // Lith_RunDialogue
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RunDialogue(int num)
 {
    withplayer(LocalPlayer) if(!p->indialogue)
@@ -530,7 +530,7 @@ void Lith_RunDialogue(int num)
 //
 // Runs a numbered terminal.
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RunTerminal(int num)
 {
    Lith_RunDialogue(-num);
@@ -539,7 +539,7 @@ void Lith_RunTerminal(int num)
 //
 // Lith_RunDialogueInt
 //
-[[__call("ScriptI"), __address(24244), __extern("ACS")]]
+scripti addr(24244) ext("ACS")
 void Lith_RunDialogueInt(int num)
 {
    Lith_RunDialogue(num);

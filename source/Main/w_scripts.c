@@ -10,7 +10,7 @@
 //
 // Lith_Timer
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int Lith_Timer(void)
 {
    return ACS_Timer();
@@ -19,7 +19,7 @@ int Lith_Timer(void)
 //
 // Lith_UpdateScore
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_UpdateScore(void)
 {
    i96 score = InvNum("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
@@ -30,7 +30,7 @@ void Lith_UpdateScore(void)
 //
 // Lith_DOGS
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_DOGS()
 {
    withplayer(LocalPlayer)
@@ -60,7 +60,7 @@ void Lith_DOGS()
 //
 // Lith_SteggleEnergy
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SteggleEnergy()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_FRIENDPLAYER))
@@ -88,7 +88,7 @@ void Lith_SteggleEnergy()
 //
 // Lith_Barrier
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Barrier()
 {
    withplayer(LocalPlayer) for(int i = 0; p->active && i < 35 * 30; i++)
@@ -101,7 +101,7 @@ void Lith_Barrier()
 //
 // Lith_BarrierBullets
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_BarrierBullets()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
@@ -121,7 +121,7 @@ void Lith_BarrierBullets()
 //
 // Lith_BarrierCheck
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 bool Lith_BarrierCheck()
 {
    ACS_SetActivatorToTarget(0);
@@ -131,7 +131,7 @@ bool Lith_BarrierCheck()
 //
 // Lith_PoisonFXTicker
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PoisonFXTicker()
 {
    for(int i = 0; i < 17; i++)
@@ -163,7 +163,7 @@ void Lith_PoisonFXTicker()
 //
 // Lith_BoughtItemPickup
 //
-[[__call("ScriptI"), __address(24243), __extern("ACS")]]
+scripti addr(24243) ext("ACS")
 void Lith_BoughtItemPickup(int id)
 {
    int const chan = CHAN_ITEM|CHAN_NOPAUSE;
@@ -195,7 +195,7 @@ void Lith_BoughtItemPickup(int id)
 //
 // Lith_GetSigil
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_GetSigil()
 {
    withplayer(LocalPlayer)

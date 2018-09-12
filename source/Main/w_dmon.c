@@ -8,7 +8,7 @@
 // Static Objects ------------------------------------------------------------|
 
 // This is lazy-allocated. Don't touch or GDCC will break your computer's face.
-[[__no_init]] static dmon_t dmonalloc[DMON_MAX];
+noinit static dmon_t dmonalloc[DMON_MAX];
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -60,7 +60,7 @@ void DmonDebugInfo(void)
 //
 // DmonPtr
 //
-[[__call("ScriptS")]]
+script
 dmon_t *DmonPtr(int tid, int ptr)
 {
    if(tid || ptr)

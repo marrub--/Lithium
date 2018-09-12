@@ -16,11 +16,11 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-[[__optional_args(1)]] void Lith_LinkDefault(struct list_s *list, void *object);
+optargs(1) void Lith_LinkDefault(struct list_s *list, void *object);
 void Lith_ListLink(struct list_s *head, struct list_s *list);
 void *Lith_ListUnlink(struct list_s *list);
 size_t Lith_ListSize(struct list_s *head);
-[[__optional_args(1)]] void Lith_ListFree(struct list_s *head, bool dofree);
+optargs(1) void Lith_ListFree(struct list_s *head, bool dofree);
 
 // Type Definitions ----------------------------------------------------------|
 

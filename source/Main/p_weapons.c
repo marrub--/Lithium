@@ -26,16 +26,6 @@ static void GiveWeaponItem(int parm, int slot)
    case weapon_c_shipgun: InvGive("Lith_CannonAmmo", 5);    break;
    case weapon_bfg:       InvGive("Lith_CannonAmmo", 4);    break;
    }
-
-   if(parm > weapon_max_lith) switch(slot)
-   {
-   case 2: InvGive("Lith_BulletAmmo", 20); break;
-   case 3: InvGive("Lith_ShellAmmo",  10); break;
-   case 4: InvGive("Lith_BulletAmmo", 40); break;
-   case 5: InvGive("Lith_RocketAmmo", 5);  break;
-   case 6: InvGive("Lith_PlasmaAmmo", 50); break;
-   case 7: InvGive("Lith_CannonAmmo", 2);  break;
-   }
 }
 
 //
@@ -69,10 +59,7 @@ static void Lith_PickupScore(struct player *p, int parm)
    GiveWeaponItem(parm, info->slot);
    score = p->giveScore(score);
 
-   if(info->type < weapon_max_lith)
-      p->log("> Sold the %S for %lli\Cnscr\C-.", Language("LITH_TXT_INFO_SHORT_%S", info->name), score);
-   else
-      p->log("> Sold the slot %i weapon for %lli\Cnscr\C-.", info->slot, score);
+   p->log("> Sold the %S for %lli\Cnscr\C-.", Language("LITH_TXT_INFO_SHORT_%S", info->name), score);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -80,7 +67,7 @@ static void Lith_PickupScore(struct player *p, int parm)
 //
 // Lith_WeaponPickup
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 bool Lith_WeaponPickup(int name)
 {
    extern void Lith_PickupMessage(struct player *p, weaponinfo_t const *info);
@@ -117,6 +104,7 @@ bool Lith_WeaponPickup(int name)
 
       GiveWeaponItem(parm, info->slot);
       Lith_PickupMessage(p, info);
+      InvGive(info->classname, 1);
 
       return !weaponstay;
    }
@@ -125,7 +113,7 @@ bool Lith_WeaponPickup(int name)
 //
 // Lith_CircleSpread
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
    static fixed A;
@@ -149,7 +137,7 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 //
 // Lith_ChargeFistDamage
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int Lith_ChargeFistDamage()
 {
    int amount = InvNum("Lith_FistCharge");
@@ -174,7 +162,7 @@ void Lith_GSInit_Weapon(void)
 //
 // Update information on what weapons we have.
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerPreWeapons(struct player *p)
 {
    weapondata_t *w = &p->weapon;
@@ -263,7 +251,7 @@ void Lith_PlayerPreWeapons(struct player *p)
 //
 // Lith_PlayerUpdateWeapons
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateWeapons(struct player *p)
 {
    if(!Lith_IsPaused)
@@ -293,7 +281,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
 //
 // Lith_AmmoRunOut
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
    withplayer(LocalPlayer)
@@ -315,7 +303,7 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
 //
 // Lith_GetFinalizerMaxHealth
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int Lith_GetFinalizerMaxHealth(void)
 {
    int sh = ACS_GetActorProperty(0, APROP_SpawnHealth);
@@ -329,7 +317,7 @@ int Lith_GetFinalizerMaxHealth(void)
 //
 // Lith_SwitchRifleMode
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SwitchRifleFiremode(void)
 {
    withplayer(LocalPlayer)
@@ -347,7 +335,7 @@ void Lith_SwitchRifleFiremode(void)
 //
 // Lith_ResetRifleMode
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_ResetRifleMode()
 {
    withplayer(LocalPlayer)
@@ -358,7 +346,7 @@ void Lith_ResetRifleMode()
 //
 // Lith_SurgeOfDestiny
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SurgeOfDestiny(void)
 {
    for(int i = 0; i < (35 * 7) / 2; i++) {
@@ -370,7 +358,7 @@ void Lith_SurgeOfDestiny(void)
 //
 // Lith_GetWRF
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int Lith_GetWRF(void)
 {
    enum

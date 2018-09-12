@@ -91,7 +91,7 @@ void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
 //
 // Lith_HUD_Log
 //
-[[__call("ScriptS")]]
+script
 void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
 {
    if(p->getCVarI("lith_hud_showlog"))

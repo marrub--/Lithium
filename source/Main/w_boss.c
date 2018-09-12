@@ -122,7 +122,7 @@ static bool CheckDead(struct boss *b, int num)
 //
 // Lith_PhantomSound
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PhantomSound(void)
 {
    ACS_AmbientSound("enemies/phantom/spawned", 127);
@@ -131,7 +131,7 @@ void Lith_PhantomSound(void)
 //
 // Lith_PhantomTeleport
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PhantomTeleport(void)
 {
    fixed ang = ACS_GetActorAngle(0);
@@ -147,7 +147,7 @@ void Lith_PhantomTeleport(void)
 //
 // Lith_PhantomDeath
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
@@ -193,7 +193,7 @@ void Lith_PhantomDeath(void)
 //
 // Lith_SpawnBoss
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SpawnBoss(void)
 {
    if(!boss) return;
@@ -212,7 +212,7 @@ void Lith_SpawnBoss(void)
 //
 // Lith_TriggerBoss_Script
 //
-[[__call("ScriptS"), __extern("ACS"), __address("Lith_TriggerBoss"), __optional_args(1)]]
+script addr("Lith_TriggerBoss") optargs(1)
 void Lith_TriggerBoss_Script(int diff, int num, int phase)
 {
    switch(diff)
@@ -231,7 +231,7 @@ void Lith_TriggerBoss_Script(int diff, int num, int phase)
 //
 // Lith_SpawnBosses
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force)
 {
    if(!force && sum < scorethreshold) return;

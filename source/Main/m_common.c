@@ -16,7 +16,7 @@ int   dbgstatnum,  dbgnotenum;
 //
 // SetInventory
 //
-[[__call("StkCall")]]
+stkcall
 static void SetInventory(__str item, int amount)
 {
    int s = InvNum(item) - amount;
@@ -27,7 +27,7 @@ static void SetInventory(__str item, int amount)
 //
 // SetActorInventory
 //
-[[__call("StkCall")]]
+stkcall
 static void SetActorInventory(int tid, __str item, int amount)
 {
    int s = ACS_CheckActorInventory(tid, item) - amount;
@@ -40,7 +40,7 @@ static void SetActorInventory(int tid, __str item, int amount)
 //
 // Lith_DumpAlloc
 //
-[[__call("ScriptS")]]
+script
 void Lith_DumpAlloc(void)
 {
    __GDCC__alloc_dump();
@@ -49,7 +49,7 @@ void Lith_DumpAlloc(void)
 //
 // Lith_FadeFlash
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
 {
    ACS_FadeTo(r, g, b, amount, 0.0);
@@ -59,7 +59,7 @@ void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
 //
 // Lith_GetTID
 //
-[[__call("ScriptS")]]
+script
 int Lith_GetTID(int tid, int ptr)
 {
    if(tid || ptr)
@@ -70,7 +70,7 @@ int Lith_GetTID(int tid, int ptr)
 //
 // Lith_GetPlayerNumber
 //
-[[__call("ScriptS")]]
+script
 int Lith_GetPlayerNumber(int tid, int ptr)
 {
    if(tid || ptr)
@@ -81,7 +81,7 @@ int Lith_GetPlayerNumber(int tid, int ptr)
 //
 // Lith_ValidPointer
 //
-[[__call("ScriptS")]]
+script
 bool Lith_ValidPointer(int tid, int ptr)
 {
    if(tid || ptr)
@@ -93,7 +93,7 @@ bool Lith_ValidPointer(int tid, int ptr)
 //
 // Lith_SetPointer
 //
-[[__call("ScriptS")]]
+script
 bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags)
 {
    if(tid || ptr)
@@ -104,7 +104,7 @@ bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags
 //
 // Lith_CheckActorInventory
 //
-[[__call("StkCall")]]
+stkcall
 int Lith_CheckActorInventory(int tid, __str item)
 {
    if(tid == 0) return InvNum(item);
@@ -114,7 +114,7 @@ int Lith_CheckActorInventory(int tid, __str item)
 //
 // Lith_GiveActorInventory
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_GiveActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) InvGive(item, amount);
@@ -124,7 +124,7 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
 //
 // Lith_TakeActorInventory
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) InvTake(item, amount);
@@ -134,7 +134,7 @@ void Lith_TakeActorInventory(int tid, __str item, int amount)
 //
 // Lith_SetActorInventory
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_SetActorInventory(int tid, __str item, int amount)
 {
    if(tid == 0) SetInventory(item, amount);

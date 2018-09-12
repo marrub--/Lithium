@@ -45,10 +45,10 @@ enum game_s
 };
 
 __str Lith_CanonTime(int type);
-[[__optional_args(1)]] int Lith_UniqueID(int tid);
-[[__call("StkCall")]] void Lith_BeginAngles(int x, int y);
-[[__call("StkCall")]] fixed Lith_AddAngle(int x, int y);
-[[__call("StkCall")]] void Lith_FreezeTime(bool on);
+optargs(1) int Lith_UniqueID(int tid);
+stkcall void Lith_BeginAngles(int x, int y);
+stkcall fixed Lith_AddAngle(int x, int y);
+stkcall void Lith_FreezeTime(bool on);
 
 typedef struct worldinfo_s
 {

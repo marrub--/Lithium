@@ -153,7 +153,7 @@ void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
 //
 __str Lith_RemoveTextColors(__str str, int size)
 {
-   [[__no_init]]
+   noinit
    static char buf[8192];
    int j = 0;
 

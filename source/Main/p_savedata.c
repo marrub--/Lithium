@@ -38,7 +38,7 @@ savefile_t *Lith_SaveBegin(struct player *p)
 //
 // Lith_SaveEnd
 //
-[[__call("ScriptS")]]
+script
 void Lith_SaveEnd(savefile_t *save)
 {
    Lith_SaveWriteChunk(save, Ident_Lend, SaveV_Lend, 0);

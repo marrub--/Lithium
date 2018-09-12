@@ -46,7 +46,7 @@ static void RA_Give(__str name, int n)
 //
 // Lith_RA_Give
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RA_Give(int num)
 {
    withplayer(LocalPlayer)

@@ -18,22 +18,13 @@ enum
    at_max
 };
 
-struct player_attr_theta
-{
-   u32 points;
-   u32 attrs[at_max];
-};
-
 struct player_attributes
 {
    bool  autolevel;
    u64   exp, expnext;
    u32   level;
    __str names[at_max];
-
-   [[__anonymous]]
-   struct player_attr_theta cur;
-   struct player_attr_theta sup;
+   u32   attrs[at_max];
 };
 
 #endif

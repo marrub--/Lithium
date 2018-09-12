@@ -26,7 +26,7 @@ void Upgr_lolsords_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_lolsords_Update(struct player *p, upgrade_t *upgr)
 {
    ACS_SetWeapon("Lith_Sword");

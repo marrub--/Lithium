@@ -16,11 +16,11 @@ LITH_X(MAIL,         "Mail")
 
 // Extern Functions ----------------------------------------------------------|
 
-[[__call("ScriptS")]] void Lith_PlayerInitBIP(struct player *p);
+script void Lith_PlayerInitBIP(struct player *p);
 struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
-[[__optional_args(1)]] struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name, int pclass);
-[[__call("ScriptS")]] void Lith_DeallocateBIP(struct bip_s *bip);
-[[__call("ScriptS"), __optional_args(1)]] void Lith_DeliverMail(struct player *p, __str title, int flags);
+optargs(1) struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name, int pclass);
+script void Lith_DeallocateBIP(struct bip_s *bip);
+script optargs(1) void Lith_DeliverMail(struct player *p, __str title, int flags);
 
 // Types ---------------------------------------------------------------------|
 

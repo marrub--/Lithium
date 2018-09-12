@@ -76,7 +76,7 @@ void Lith_InstallSpawnedCBIItems(void)
 //
 // Lith_CBIItemWasSpawned
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_CBIItemWasSpawned(int num)
 {
    cbispawn[cbispawniter++] = num;
@@ -85,7 +85,7 @@ void Lith_CBIItemWasSpawned(int num)
 //
 // Lith_PickupCBIItem
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_PickupCBIItem(int num)
 {
    withplayer(LocalPlayer)

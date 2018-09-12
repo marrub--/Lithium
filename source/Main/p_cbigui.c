@@ -67,7 +67,7 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 //
 // Lith_PlayerUpdateCBIGUI
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
    gui_state_t *g = &p->cbi.guistate;
@@ -140,7 +140,7 @@ void Lith_PlayerResetCBIGUI(struct player *p)
 //
 // Lith_KeyOpenCBI
 //
-[[__call("ScriptS"), __extern("ACS"), __script("net")]]
+script ext("ACS") type("net")
 void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;

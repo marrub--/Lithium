@@ -223,7 +223,7 @@ void Lith_UpgrSetOwned(struct player *p, upgrade_t *upgr)
 //
 // Lith_PlayerInitUpgrades
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerInitUpgrades(struct player *p)
 {
    #define CheckPClass() (UpgrInfo[i].pclass & p->pclass)
@@ -293,7 +293,7 @@ void Lith_PlayerReinitUpgrades(struct player *p)
 //
 // Lith_PlayerUpdateUpgrades
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateUpgrades(struct player *p)
 {
    if(Lith_IsPaused)
@@ -307,7 +307,7 @@ void Lith_PlayerUpdateUpgrades(struct player *p)
 //
 // Lith_PlayerRenderUpgrades
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerRenderUpgrades(struct player *p)
 {
    ForUpgrade(upgr) if(upgr->active && upgr->info->Render)

@@ -114,7 +114,7 @@ typedef struct gui_delta_s
 
 typedef struct gui_state_s
 {
-   [[__anonymous]] gui_delta_t cur;
+   anonymous gui_delta_t cur;
    gui_delta_t old;
 
    int ox, oy;
@@ -289,19 +289,19 @@ struct gui_presets const *Lith_GUIPreExtern(void);
 
 // Extern Functions ----------------------------------------------------------|
 
-[[__optional_args(1)]]
+optargs(1)
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide);
 
-[[__optional_args(1)]]
+optargs(1)
 void Lith_GUI_Init(gui_state_t *g, void *state);
 
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 
-[[__optional_args(2)]]
+optargs(2)
 void Lith_GUI_Begin(gui_state_t *g, int w, int h);
 void Lith_GUI_End(gui_state_t *g, enum cursor curs);
 
-[[__optional_args(1)]]
+optargs(1)
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww);
 void Lith_GUI_ClipRelease(gui_state_t *g);
 
@@ -311,7 +311,7 @@ void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text);
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon);
 
 void Lith_GUI_ScrollEnd(gui_state_t *g, gui_scroll_state_t *scr);
-[[__optional_args(1)]]
+optargs(1)
 bool Lith_GUI_ScrollOcclude(gui_state_t *g, gui_scroll_state_t const *scr, int y, int h);
 
 bool                Lith_GUI_Button_Impl     (gui_state_t *g, id_t id, gui_button_args_t const *a);

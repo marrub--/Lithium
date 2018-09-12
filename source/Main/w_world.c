@@ -39,7 +39,7 @@ static bool dorain;
 
 // Extern Functions ----------------------------------------------------------|
 
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force);
 
 //
@@ -53,7 +53,7 @@ worldinfo_t *Lith_GetWorldExtern(void)
 //
 // Lith_FreezeTime
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_FreezeTime(bool on)
 {
    static int lmvar frozen;
@@ -95,7 +95,7 @@ void Lith_FreezeTime(bool on)
 //
 // Lith_BeginAngles
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_BeginAngles(int x, int y)
 {
    world.a_cur = 0;
@@ -111,7 +111,7 @@ void Lith_BeginAngles(int x, int y)
 //
 // Lith_AddAngle
 //
-[[__call("StkCall")]]
+stkcall
 fixed Lith_AddAngle(int x, int y)
 {
    if(world.a_cur >= countof(world.a_angles))
@@ -125,7 +125,7 @@ fixed Lith_AddAngle(int x, int y)
 //
 // Lith_AddAngleScript
 //
-[[__call("ScriptS"), __extern("ACS"), __address("Lith_AddAngle")]]
+script addr("Lith_AddAngle")
 void Lith_AddAngleScript(int x, int y)
 {
    Lith_AddAngle(x, y);
@@ -179,7 +179,7 @@ int Lith_UniqueID(int tid)
 //
 // Lith_EmitScore
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_EmitScore(int amount)
 {
    Lith_GiveAllScore(amount, false);
@@ -188,7 +188,7 @@ void Lith_EmitScore(int amount)
 //
 // Lith_EmitEXP
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_EmitEXP(int amount)
 {
    Lith_GiveAllEXP(amount);
@@ -197,7 +197,7 @@ void Lith_EmitEXP(int amount)
 //
 // Lith_MakeSerious
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_MakeSerious()
 {
    ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_None);
@@ -209,7 +209,7 @@ void Lith_MakeSerious()
 //
 // LPData
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int LPData(int info, int permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
@@ -235,7 +235,7 @@ int LPData(int info, int permutation, bool target)
 //
 // LWData
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int LWData(int info)
 {
    switch(info)
@@ -255,7 +255,7 @@ int LWData(int info)
 //
 // Lith_RainDropSpawn
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RainDropSpawn()
 {
    if(rain_chk)
@@ -272,7 +272,7 @@ void Lith_RainDropSpawn()
 //
 // DoRain
 //
-[[__call("ScriptS")]]
+script
 static void DoRain()
 {
    if(ACS_PlayerCount() > 1)
@@ -343,7 +343,7 @@ static void DoPayout(void)
 
    Lith_ForPlayer()
    {
-      [[__call("ScriptS")]]
+      script
       extern void Lith_PlayerPayout(struct player *p);
 
       Lith_PlayerPayout(p);
@@ -355,7 +355,7 @@ static void DoPayout(void)
 //
 // CheckEnemyCompat
 //
-[[__call("ScriptS")]]
+script
 static void CheckEnemyCompat(void)
 {
    if(ACS_GetCVar("sv_nomonsters") || world.enemycheck)
@@ -385,7 +385,7 @@ static void CheckEnemyCompat(void)
 //
 // SpawnBoss
 //
-[[__call("ScriptS")]]
+script
 static void SpawnBoss()
 {
    ACS_Delay(1); // Delay another tic for monster spawners.
@@ -596,12 +596,12 @@ static void WInit(void)
 //
 // Lith_World
 //
-[[__call("ScriptS"), __script("open")]]
+script type("open")
 static void Lith_World(void)
 {
 begin:
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      [[__call("ScriptS")]]
+      script
       extern void Lith_Title(void);
       Lith_Title();
       return;
@@ -707,7 +707,7 @@ begin:
 //
 // Lith_WorldReopen
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_WorldReopen(void)
 {
    reopen = true;
@@ -716,7 +716,7 @@ void Lith_WorldReopen(void)
 //
 // Lith_WorldUnload
 //
-[[__call("ScriptS"), __script("unloading")]]
+script type("unloading")
 static void Lith_WorldUnload(void)
 {
    extern void Lith_InstallSpawnedCBIItems(void);

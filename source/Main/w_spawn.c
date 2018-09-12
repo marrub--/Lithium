@@ -96,7 +96,7 @@ static __str RandomWeighted(struct witem const *list, int count)
 //
 // Lith_RandomSpawn
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RandomSpawn(int rsn)
 {
    __str item;

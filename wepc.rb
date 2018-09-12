@@ -22,9 +22,6 @@ enum // Lith_WeaponNum
    end
    ret
 }
-   weapon_max_lith,
-   weapon_nonlith_start = weapon_max_lith - 1,
-
    weapon_max
 };
 

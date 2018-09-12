@@ -28,7 +28,7 @@ typedef struct memfile_t
 //
 typedef struct netfile_s
 {
-   [[__anonymous]]
+   anonymous
    memfile_t memfile;
    __str     pcvar;
    int       pnum;

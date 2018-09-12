@@ -11,7 +11,7 @@ enum {
 
 typedef struct shopitem_s
 {
-   [[__anonymous]] shopdef_t shopdef;
+   anonymous shopdef_t shopdef;
    int pclass;
    int count;
    __str classname;

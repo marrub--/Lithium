@@ -62,7 +62,7 @@ typedef struct dmon dmonarr dmon_t;
 extern int dmonarr dmonid;
 #endif
 
-[[__call("ScriptS"), __optional_args(2)]] dmon_t *DmonPtr(int tid, int ptr);
+script optargs(2) dmon_t *DmonPtr(int tid, int ptr);
 dmon_t *Dmon(int id);
 dmon_t *AllocDmon(void);
 

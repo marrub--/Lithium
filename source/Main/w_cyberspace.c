@@ -7,7 +7,7 @@
 //
 // Lith_CSLoadMap
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_CSLoadMap(void)
 {
    FILE *fp = W_Open("lfiles/Cyberspace.txt", c"r");

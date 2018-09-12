@@ -144,12 +144,16 @@ action(weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
 action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, float px, float py, float pz, float vx, float vy, float vz)
 {
    float vh = player.viewz - player.mo.viewheight - pos.z;
+   px += frandom(-1, 1); py += frandom(-1, 1); pz += frandom(-1, 1);
+   vx += frandom(-1, 1); vy += frandom(-1, 1); vz += frandom(-1, 1);
    A_SpawnItemEx(invoker.Lith_MagEmpty() ? mag1 : mag2, px,py,pz+vh, vx,vy,vz);
 }
 
 action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float pz, float vx, float vy, float vz)
 {
    float vh = player.viewz - player.mo.viewheight - pos.z;
+   px += frandom(-1, 1); py += frandom(-1, 1); pz += frandom(-1, 1);
+   vx += frandom(-1, 1); vy += frandom(-1, 1); vz += frandom(-1, 1);
    A_SpawnItemEx(cas, cos(pitch)*px, py, pz-sin(pitch)*px+vh, vx, vy, vz);
 }
 

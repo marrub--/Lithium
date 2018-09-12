@@ -17,7 +17,7 @@ void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_StealthSys_Update(struct player *p, upgrade_t *upgr)
 {
    fixed vel = absk(p->getVel()) / 10.0;

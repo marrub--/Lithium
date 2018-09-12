@@ -9,7 +9,7 @@
 //
 // Lith_Blade
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
@@ -23,7 +23,7 @@ void Lith_Blade(bool hit)
 //
 // Lith_Rend
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Rend(bool hit, int set)
 {
    static int num;
@@ -44,7 +44,7 @@ void Lith_Rend(bool hit, int set)
 //
 // Lith_Feuer
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Feuer(bool left, bool fire)
 {
    withplayer(LocalPlayer)
@@ -90,7 +90,7 @@ void Lith_Feuer(bool left, bool fire)
 //
 // Lith_Cercle
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Cercle(void)
 {
    withplayer(LocalPlayer)
@@ -176,7 +176,7 @@ void Lith_Cercle(void)
 //
 // Lith_MagicSelect
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_MagicSelect(int num)
 {
    withplayer(LocalPlayer)

@@ -240,7 +240,7 @@ static void ApplyLevels(dmon_t *m, int prev)
 //
 // ShowBarrier
 //
-[[__call("StkCall")]]
+stkcall
 static void ShowBarrier(dmon_t const *m, fixed alpha)
 {
    bool anyplayer = false;
@@ -323,7 +323,7 @@ static void BaseMonsterLevel(dmon_t *m)
 // Spawn a Monster Soul and temporarily set the species of it until the
 // actor is no longer solid, so it won't explode immediately.
 //
-[[__call("ScriptS")]]
+script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
    int tid = ACS_UniqueTID();
@@ -414,7 +414,7 @@ static void OnDeath(dmon_t *m)
 //
 // Lith_MonsterMain
 //
-[[__call("ScriptS"), __alloc_Aut(0x7F)]]
+script stksize(0x7f)
 void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
@@ -456,7 +456,7 @@ void Lith_MonsterMain(dmon_t *m)
 //
 // Lith_MonsterInfo
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_MonsterInfo()
 {
    while(!world.gsinit) ACS_Delay(1);
@@ -492,7 +492,7 @@ void Lith_MonsterInfo()
 //
 // Lith_MonsterFinalized
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_MonsterFinalized()
 {
    ifauto(dmon_t *, m, DmonPtr())

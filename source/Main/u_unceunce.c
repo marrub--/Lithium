@@ -23,7 +23,7 @@ void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_UNCEUNCE_Update(struct player *p, upgrade_t *upgr)
 {
    fixed reeeed = ACS_Sin(p->ticks / 35.0) + 1.0 / 2.0;

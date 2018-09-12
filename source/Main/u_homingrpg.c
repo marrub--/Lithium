@@ -9,7 +9,7 @@
 //
 // CheckTarget
 //
-[[__call("ScriptS")]]
+script
 static int CheckTarget(struct player *p)
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
@@ -23,7 +23,7 @@ static int CheckTarget(struct player *p)
 //
 // Lith_HomingMissile
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_HomingMissile()
 {
    struct player *p = Lith_GetPlayer(0, AAPTR_TARGET);
@@ -33,7 +33,7 @@ void Lith_HomingMissile()
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
 {
    if(p->weapontype == weapon_launcher)

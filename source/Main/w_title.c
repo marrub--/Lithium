@@ -15,7 +15,7 @@ enum
 //
 // Blinker
 //
-[[__call("ScriptS")]]
+script
 void Blinker(void)
 {
    static int const time = 20;
@@ -47,7 +47,7 @@ void Blinker(void)
 //
 // Lith_Title
 //
-[[__call("ScriptS")]]
+script
 void Lith_Title(void)
 {
    ACS_Delay(35*5);

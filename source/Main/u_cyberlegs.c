@@ -24,7 +24,7 @@ void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
 {
    fixed absvel = absk(p->old.velz) * 10.0k;

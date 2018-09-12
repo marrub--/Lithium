@@ -18,7 +18,7 @@ void Upgr_JetBooster_Activate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 {
    UData.discharged = UData.charge > 60 && UData.charge < CHARGE_MAX;

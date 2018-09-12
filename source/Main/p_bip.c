@@ -95,7 +95,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 //
 // AddToBIP
 //
-[[__optional_args(1)]]
+optargs(1)
 static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
    __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
@@ -120,7 +120,7 @@ static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_init const *
 //
 // CatFromStr
 //
-[[__call("StkCall")]]
+stkcall
 static int CatFromStr(__str name)
 {
    if(name == "EXTRA") return BIPC_EXTRA;
@@ -132,7 +132,7 @@ static int CatFromStr(__str name)
 //
 // PClFromStr
 //
-[[__call("StkCall")]]
+stkcall
 static int PClFromStr(__str name)
 {
 #define LITH_X(n, pc) if(name == #n || name == #pc) return pc;
@@ -210,7 +210,7 @@ static int LoadBIPInfo(__str fname, bip_t *bip, int pclass)
 //
 // Lith_PlayerInitBIP
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerInitBIP(struct player *p)
 {
    bip_t *bip = &p->bip;
@@ -238,7 +238,7 @@ void Lith_PlayerInitBIP(struct player *p)
 //
 // Lith_DeliverMail
 //
-[[__call("ScriptS")]]
+script
 void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
    p->setActivator();
@@ -329,7 +329,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
 //
 // Lith_DeallocateBIP
 //
-[[__call("ScriptS")]]
+script
 void Lith_DeallocateBIP(bip_t *bip)
 {
    ForCategory()
@@ -340,7 +340,7 @@ void Lith_DeallocateBIP(bip_t *bip)
 //
 // CheckMatch
 //
-[[__call("ScriptS")]]
+script
 static bool CheckMatch(struct page_info *pinf, __str query)
 {
    return strcasestr_str(pinf->shname, query) ||

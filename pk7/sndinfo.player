@@ -24,8 +24,7 @@ player/step1        lsounds/Footsteps/Step1.flac           // ???
 player/step2        lsounds/Footsteps/Step2.flac           // ???
 player/step3        lsounds/Footsteps/Step3.flac           // ???
 player/step4        lsounds/Footsteps/Step4.flac           // ???
-player/levelup1     lsounds/Player/LevelUp.ogg             // Fatal/Fake
-player/levelup2     lsounds/Player/LevelUp2.ogg            // 〃
+player/levelup      lsounds/Player/LevelUp.flac            // Phantasy Star Online
 player/wings        lsounds/Player/Wings.wav               // Hexen
 
 $volume player/death2 0.7
@@ -33,11 +32,6 @@ $volume player/nuke 0.7
 $volume player/doublejump 0.7
 
 $limit player/barrier 0
-
-$random player/levelup {
-   player/levelup1
-   player/levelup2
-}
 
 $random player/step {
    player/step1

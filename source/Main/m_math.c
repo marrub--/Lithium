@@ -90,7 +90,7 @@ float mag2f(float x, float y)
 //
 // mag2k
 //
-[[__call("StkCall")]]
+stkcall
 fixed mag2k(fixed x, fixed y)
 {
    return ACS_FixedSqrt(x * x + y * y);
@@ -99,7 +99,7 @@ fixed mag2k(fixed x, fixed y)
 //
 // mag2i
 //
-[[__call("StkCall")]]
+stkcall
 int mag2i(int x, int y)
 {
    return ACS_Sqrt(x * x + y * y);
@@ -161,7 +161,7 @@ double lerp(double a, double b, double t)
 //
 // aabb
 //
-[[__call("StkCall")]]
+stkcall
 bool aabb(int x, int y, int z, int w, int x2, int y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
@@ -170,7 +170,7 @@ bool aabb(int x, int y, int z, int w, int x2, int y2)
 //
 // ceilk
 //
-[[__call("StkCall")]]
+stkcall
 int ceilk(fixed n)
 {
    union {int_k_t i; fixed a;} u = {.a = n};
@@ -181,7 +181,7 @@ int ceilk(fixed n)
 //
 // bzpolyf
 //
-[[__call("StkCall")]]
+stkcall
 float bzpolyf(float a, float b, float t)
 {
    return a + ((b - a) * t);
@@ -190,7 +190,7 @@ float bzpolyf(float a, float b, float t)
 //
 // bzpolyi
 //
-[[__call("StkCall")]]
+stkcall
 int bzpolyi(int a, int b, float t)
 {
    return a + ((b - a) * t);

@@ -33,7 +33,7 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) -Dnull=NULL --alloc-Aut 2150
+MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) --alloc-Aut 2150
 MAIN_LFLAGS=-llithlib $(MAIN_INIT) --alloc-min Sta "" $(MAIN_STA)
 
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \

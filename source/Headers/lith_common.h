@@ -7,7 +7,6 @@
 #pragma GDCC STRENT_LITERAL ON
 
 #include <ACS_ZDoom.h>
-#include <stddef.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
@@ -83,15 +82,15 @@ enum {
 
 void Log(__str fmt, ...);
 
-[[__call("StkCall")]] void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
-[[__call("ScriptS"), __optional_args(1)]] int Lith_GetTID(int tid, int ptr);
-[[__call("ScriptS"), __optional_args(1)]] int Lith_GetPlayerNumber(int tid, int ptr);
-[[__call("ScriptS"), __optional_args(1)]] bool Lith_ValidPointer(int tid, int ptr);
-[[__call("ScriptS"), __optional_args(2)]] bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
-[[__call("StkCall")]] int Lith_CheckActorInventory(int tid, __str item);
-[[__call("StkCall")]] void Lith_GiveActorInventory(int tid, __str item, int amount);
-[[__call("StkCall")]] void Lith_TakeActorInventory(int tid, __str item, int amount);
-[[__call("StkCall")]] void Lith_SetActorInventory (int tid, __str item, int amount);
+stkcall void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
+script optargs(1) int Lith_GetTID(int tid, int ptr);
+script optargs(1) int Lith_GetPlayerNumber(int tid, int ptr);
+script optargs(1) bool Lith_ValidPointer(int tid, int ptr);
+script optargs(2) bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags);
+stkcall int Lith_CheckActorInventory(int tid, __str item);
+stkcall void Lith_GiveActorInventory(int tid, __str item, int amount);
+stkcall void Lith_TakeActorInventory(int tid, __str item, int amount);
+stkcall void Lith_SetActorInventory (int tid, __str item, int amount);
 void Lith_DebugStat(__str fmt, ...);
 void Lith_DebugNote(__str fmt, ...);
 

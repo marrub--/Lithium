@@ -22,7 +22,7 @@ void Upgr_7777777_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_7777777_Update(struct player *p, upgrade_t *upgr)
 {
    fixed vel = -2;

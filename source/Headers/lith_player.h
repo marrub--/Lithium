@@ -121,34 +121,34 @@ struct player_delta
 // Extern Functions ----------------------------------------------------------|
 
 // state
-[[__call("ScriptS")]] void Lith_ResetPlayer(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerLoadData(struct player *p);
-[[__call("ScriptS")]] void Lith_PlayerSaveData(struct player *p);
-[[__call("StkCall")]] int  Lith_PlayerCurWeaponType(struct player *p);
-[[__call("StkCall")]] bool Lith_ButtonPressed(struct player *p, int bt);
-[[__call("StkCall"), __optional_args(1)]] bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add);
+script void Lith_ResetPlayer(struct player *p);
+script void Lith_PlayerLoadData(struct player *p);
+script void Lith_PlayerSaveData(struct player *p);
+stkcall int  Lith_PlayerCurWeaponType(struct player *p);
+stkcall bool Lith_ButtonPressed(struct player *p, int bt);
+stkcall optargs(1) bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add);
 void Lith_ValidatePlayerTID(struct player *p);
 
 // gui
-[[__call("StkCall")]] void Lith_PlayerCloseGUI(struct player *p);
-[[__call("StkCall")]] void Lith_PlayerUseGUI(struct player *p, int type);
+stkcall void Lith_PlayerCloseGUI(struct player *p);
+stkcall void Lith_PlayerUseGUI(struct player *p, int type);
 
 // score
-[[__optional_args(1)]] i96 Lith_GiveScore(struct player *p, i96 score, bool nomul);
-[[__call("StkCall")]] void Lith_TakeScore(struct player *p, i96 score);
+optargs(1) i96 Lith_GiveScore(struct player *p, i96 score, bool nomul);
+stkcall void Lith_TakeScore(struct player *p, i96 score);
 
 // attributes
-[[__call("StkCall")]] void Lith_GiveEXP(struct player *p, u64 amt);
+stkcall void Lith_GiveEXP(struct player *p, u64 amt);
 
 // misc
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
-[[__call("StkCall")]] void Lith_ClearTextBuf(struct player *p);
-[[__call("StkCall")]] __str Lith_PlayerDiscriminator(int pclass);
+stkcall void Lith_ClearTextBuf(struct player *p);
+stkcall __str Lith_PlayerDiscriminator(int pclass);
 
-[[__call("ScriptS")]] void Lith_PlayerUpdateData(struct player *p);
+script void Lith_PlayerUpdateData(struct player *p);
 
-[[__call("StkCall")]] void Lith_PlayerUpdateStats(struct player *p);
+stkcall void Lith_PlayerUpdateStats(struct player *p);
 
 struct player *Lith_GetPlayer(int tid, int ptr);
 
@@ -249,7 +249,7 @@ struct player
    int   fun;
 
    // Deltas
-   [[__anonymous]]
+   anonymous
    struct player_delta cur;
    struct player_delta old;
    int oldhealth;

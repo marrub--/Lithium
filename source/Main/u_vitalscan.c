@@ -12,7 +12,7 @@
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);

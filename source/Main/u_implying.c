@@ -6,7 +6,7 @@
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_Implying_Update(struct player *p, upgrade_t *upgr)
 {
    static __str strings[] = {

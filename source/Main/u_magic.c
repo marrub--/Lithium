@@ -31,7 +31,7 @@ static struct magic_info const minf[] = {
 //
 // GiveMagic
 //
-[[__call("ScriptS")]]
+script
 static void GiveMagic(struct magic_info const *m)
 {
    InvGive(m->classname, 1);
@@ -41,7 +41,7 @@ static void GiveMagic(struct magic_info const *m)
 //
 // UpdateMagicUI
 //
-[[__call("ScriptS")]]
+script
 static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 {
    gui_state_t *g = &UData.gst;
@@ -86,7 +86,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 //
 // GivePlayerZ
 //
-[[__call("ScriptS")]]
+script
 static void GivePlayerZ(int tid, struct player *p, __str name)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
@@ -100,7 +100,7 @@ static void GivePlayerZ(int tid, struct player *p, __str name)
 //
 // Lith_SetMagicUI
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SetMagicUI(bool on)
 {
    withplayer(LocalPlayer)
@@ -135,7 +135,7 @@ void Lith_SetMagicUI(bool on)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 {
    fixed manaperc = p->mana / (fixed)p->manamax;

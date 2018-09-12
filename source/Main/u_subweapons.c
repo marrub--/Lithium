@@ -6,7 +6,7 @@
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
 {
    if(InvNum("Lith_SubweaponShots") < 2)

@@ -9,7 +9,7 @@
 
 // Extern Objects ------------------------------------------------------------|
 
-[[__no_init]] struct player players[MAX_PLAYERS];
+noinit struct player players[MAX_PLAYERS];
 
 // Static Objects ------------------------------------------------------------|
 
@@ -21,14 +21,14 @@ static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
 // Static Functions ----------------------------------------------------------|
 
 static void Lith_PlayerRunScripts(struct player *p);
-[[__call("ScriptS")]] static void Lith_BossWarning(struct player *p);
+script static void Lith_BossWarning(struct player *p);
 
 // Scripts -------------------------------------------------------------------|
 
 //
 // Lith_PlayerEntry
 //
-[[__call("ScriptS"), __script("enter")]]
+script type("enter")
 static void Lith_PlayerEntry(void)
 {
    if(ACS_GameType() == GAME_TITLE_MAP)
@@ -80,7 +80,7 @@ reinit:
 
       if(p->dlgnum)
       {
-         [[__call("ScriptS")]] extern void Lith_DialogueVM(struct player *p, int dlgnum);
+         script extern void Lith_DialogueVM(struct player *p, int dlgnum);
 
          Lith_DialogueVM(p, p->dlgnum);
          p->dlgnum = 0;
@@ -105,7 +105,7 @@ reinit:
 //
 // Lith_PlayerDeath
 //
-[[__call("ScriptS"), __script("death")]]
+script type("death")
 static void Lith_PlayerDeath(void)
 {
    struct player *p = LocalPlayer;
@@ -144,7 +144,7 @@ static void Lith_PlayerDeath(void)
 //
 // Lith_PlayerRespawn
 //
-[[__call("ScriptS"), __script("respawn")]]
+script type("respawn")
 static void Lith_PlayerRespawn(void)
 {
    LocalPlayer->reinit = true;
@@ -153,7 +153,7 @@ static void Lith_PlayerRespawn(void)
 //
 // Lith_PlayerReturn
 //
-[[__call("ScriptS"), __script("return")]]
+script type("return")
 static void Lith_PlayerReturn(void)
 {
    LocalPlayer->reinit = true;
@@ -162,7 +162,7 @@ static void Lith_PlayerReturn(void)
 //
 // Lith_PlayerDisconnect
 //
-[[__call("ScriptS"), __script("disconnect")]]
+script type("disconnect")
 static void Lith_PlayerDisconnect(void)
 {
    struct player *p = LocalPlayer;
@@ -184,7 +184,7 @@ static void Lith_PlayerDisconnect(void)
 //
 // Lith_RecoilUp
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_RecoilUp(fixed amount)
 {
    withplayer(LocalPlayer) p->extrpitch += amount / 180;
@@ -193,7 +193,7 @@ void Lith_RecoilUp(fixed amount)
 //
 // Lith_Obituary
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Obituary(void)
 {
    static __str const pronoun[pro_max][5] = {
@@ -285,7 +285,7 @@ struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
 //
 // Lith_PlayerDiscriminator
 //
-[[__call("StkCall")]]
+stkcall
 __str Lith_PlayerDiscriminator(int pclass)
 {
    switch(pclass) {
@@ -303,7 +303,7 @@ __str Lith_PlayerDiscriminator(int pclass)
 //
 // Lith_StepSpeed
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 int Lith_StepSpeed()
 {
    struct player *p = LocalPlayer;
@@ -328,7 +328,7 @@ struct player *Lith_GetPlayer(int tid, int ptr)
 //
 // Lith_PlayerCloseGUI
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_PlayerCloseGUI(struct player *p)
 {
    if(p->activegui != GUI_NONE)
@@ -349,7 +349,7 @@ void Lith_PlayerCloseGUI(struct player *p)
 //
 // Lith_PlayerUseGUI
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_PlayerUseGUI(struct player *p, int type)
 {
    if(p->dead) return;
@@ -428,7 +428,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 //
 // Lith_TakeScore
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_TakeScore(struct player *p, i96 score)
 {
    if(p->score - score >= 0) {
@@ -446,7 +446,7 @@ void Lith_TakeScore(struct player *p, i96 score)
 //
 // Lith_GiveMeAllOfTheScore
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_GiveMeAllOfTheScore(void)
 {
    withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
@@ -455,7 +455,7 @@ void Lith_GiveMeAllOfTheScore(void)
 //
 // Lith_GiveHealthBonus
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_GiveHealthBonus(int amount)
 {
    withplayer(LocalPlayer)
@@ -469,7 +469,7 @@ void Lith_GiveHealthBonus(int amount)
 //
 // Lith_GiveHealth
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_GiveHealth(int amount)
 {
    withplayer(LocalPlayer)
@@ -484,7 +484,7 @@ void Lith_GiveHealth(int amount)
 //
 // Lith_CheckHealth
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 bool Lith_CheckHealth()
 {
    withplayer(LocalPlayer) return p->health < p->maxhealth;
@@ -494,7 +494,7 @@ bool Lith_CheckHealth()
 //
 // Lith_Discount
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_Discount()
 {
    withplayer(LocalPlayer) p->discount = 0.9;
@@ -505,7 +505,7 @@ void Lith_Discount()
 //
 // Lith_BossWarning
 //
-[[__call("ScriptS")]]
+script
 static void Lith_BossWarning(struct player *p)
 {
    ACS_Delay(35 * 5);
@@ -521,26 +521,26 @@ static void Lith_BossWarning(struct player *p)
 //
 static void Lith_PlayerRunScripts(struct player *p)
 {
-   [[__call("ScriptS")]] extern void Lith_PlayerPreWeapons(struct player *p);
-   [[__call("ScriptS")]] static void Lith_PlayerPreScore(struct player *p);
-   [[__call("ScriptS")]] static void Lith_PlayerPreStats(struct player *p);
+   script extern void Lith_PlayerPreWeapons(struct player *p);
+   script static void Lith_PlayerPreScore(struct player *p);
+   script static void Lith_PlayerPreStats(struct player *p);
 
-   [[__call("ScriptS")]] extern void Lith_PlayerUpdateCBIGUI(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerUpdateInventory(struct player *p);
-   [[__call("ScriptS")]] static void Lith_PlayerUpdateAttributes(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerUpdateUpgrades(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerUpdateWeapons(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerUpdateLog(struct player *p);
+   script extern void Lith_PlayerUpdateCBIGUI(struct player *p);
+   script extern void Lith_PlayerUpdateInventory(struct player *p);
+   script static void Lith_PlayerUpdateAttributes(struct player *p);
+   script extern void Lith_PlayerUpdateUpgrades(struct player *p);
+   script extern void Lith_PlayerUpdateWeapons(struct player *p);
+   script extern void Lith_PlayerUpdateLog(struct player *p);
 
-   [[__call("ScriptS")]] extern void Lith_PlayerFootstep(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerItemFx(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerDamageBob(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerView(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerRenderUpgrades(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerHUD(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerStyle(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerLevelup(struct player *p);
-   [[__call("ScriptS")]] extern void Lith_PlayerDebugStats(struct player *p);
+   script extern void Lith_PlayerFootstep(struct player *p);
+   script extern void Lith_PlayerItemFx(struct player *p);
+   script extern void Lith_PlayerDamageBob(struct player *p);
+   script extern void Lith_PlayerView(struct player *p);
+   script extern void Lith_PlayerRenderUpgrades(struct player *p);
+   script extern void Lith_PlayerHUD(struct player *p);
+   script extern void Lith_PlayerStyle(struct player *p);
+   script extern void Lith_PlayerLevelup(struct player *p);
+   script extern void Lith_PlayerDebugStats(struct player *p);
 
    // Pre-logic: Update data from the engine.
    Lith_PlayerPreWeapons(p); // Update weapon info
@@ -586,7 +586,7 @@ static void Lith_PlayerRunScripts(struct player *p)
 //
 // Lith_PlayerUpdateAttributes
 //
-[[__call("ScriptS")]]
+script
 static void Lith_PlayerUpdateAttributes(struct player *p)
 {
    fixed acc = p->attr.attrs[at_acc] / 210.0;
@@ -613,7 +613,7 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
 //
 // Lith_PlayerPreScore
 //
-[[__call("ScriptS")]]
+script
 static void Lith_PlayerPreScore(struct player *p)
 {
    if(!p->scoreaccumtime || p->score < p->old.score)
@@ -631,7 +631,7 @@ static void Lith_PlayerPreScore(struct player *p)
 //
 // Lith_PlayerPreStats
 //
-[[__call("ScriptS")]]
+script
 static void Lith_PlayerPreStats(struct player *p)
 {
    if(p->health < p->oldhealth)

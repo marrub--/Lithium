@@ -53,15 +53,15 @@ typedef struct savefile_s
    struct player *p;
 } savefile_t;
 
-[[__call("ScriptS")]] typedef void (*loadchunker_t)(savefile_t *save, savechunk_t *chunk);
+script typedef void (*loadchunker_t)(savefile_t *save, savechunk_t *chunk);
 
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size);
 savefile_t *Lith_SaveBegin(struct player *p);
-[[__call("ScriptS")]] void Lith_SaveEnd(savefile_t *save);
+script void Lith_SaveEnd(savefile_t *save);
 
-[[__optional_args(1)]]
+optargs(1)
 int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t chunker);
 savefile_t *Lith_LoadBegin(struct player *p);
 void Lith_LoadEnd(savefile_t *save);

@@ -54,7 +54,7 @@ enum
 typedef bool (*upgr_reinit_cb_t)(struct upgradeinfo *ui);
 
                       typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
-[[__call("ScriptS")]] typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
+script typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
 
 struct upgr_data_Adrenaline {
    int  charge;
@@ -132,7 +132,7 @@ struct upgr_data {
 };
 
 typedef struct upgradeinfo {
-   [[__anonymous]] shopdef_t shopdef;
+   anonymous shopdef_t shopdef;
 
    int   pclass;
    int   category;

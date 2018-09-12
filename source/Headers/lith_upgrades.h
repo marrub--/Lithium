@@ -16,11 +16,11 @@
 
 // These are included here so the compiler may check the function signatures.
 #define Fn_F(n, cb) void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
-#define Fn_S(n, cb) [[__call("ScriptS")]] Fn_F(n, cb)
+#define Fn_S(n, cb) script Fn_F(n, cb)
 #include "lith_upgradefuncs.h"
 
 
-[[__call("ScriptS")]] void Lith_PlayerInitUpgrades(struct player *p);
+script void Lith_PlayerInitUpgrades(struct player *p);
 void Lith_PlayerDeallocUpgrades(struct player *p);
 void Lith_PlayerDeinitUpgrades(struct player *p);
 void Lith_PlayerReinitUpgrades(struct player *p);

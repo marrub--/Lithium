@@ -79,13 +79,13 @@
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
-[[__call("StkCall")]] void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
-[[__call("StkCall")]] void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
-[[__call("StkCall")]] void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
-[[__call("StkCall")]] void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
-[[__call("StkCall")]] void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold);
-[[__call("StkCall")]] void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
-[[__call("StkCall")]] void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
+stkcall void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
+stkcall void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
+stkcall void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);
+stkcall void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3);
+stkcall void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold);
+stkcall void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha);
+stkcall void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime);
 void HudMessage(__str fmt, ...);
 
 // EOF

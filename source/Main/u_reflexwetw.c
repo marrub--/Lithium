@@ -10,7 +10,7 @@
 //
 // Lith_DodgeView
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_DodgeView()
 {
    withplayer(LocalPlayer)
@@ -49,7 +49,7 @@ void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
 {
    if(UData.charge < CHARGE_MAX)

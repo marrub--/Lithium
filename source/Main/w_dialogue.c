@@ -19,7 +19,7 @@ extern struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
-[[__optional_args(1)]]
+optargs(1)
 static int *NextCode(struct pstate *d);
 static void GetStatement(struct pstate *d);
 

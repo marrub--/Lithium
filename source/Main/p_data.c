@@ -83,7 +83,7 @@ static void SetPClass(struct player *p)
 //
 // Lith_PlayerCurWeaponType
 //
-[[__call("StkCall")]]
+stkcall
 int Lith_PlayerCurWeaponType(struct player *p)
 {
    return p->weapon.cur->info->type;
@@ -92,7 +92,7 @@ int Lith_PlayerCurWeaponType(struct player *p)
 //
 // Lith_ButtonPressed
 //
-[[__call("StkCall")]]
+stkcall
 bool Lith_ButtonPressed(struct player *p, int bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
@@ -101,7 +101,7 @@ bool Lith_ButtonPressed(struct player *p, int bt)
 //
 // Lith_SetPlayerVelocity
 //
-[[__call("StkCall")]]
+stkcall
 bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add)
 {
    if(add)
@@ -131,7 +131,7 @@ void Lith_ValidatePlayerTID(struct player *p)
 //
 // Update all of the player's data.
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateData(struct player *p)
 {
    static int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
@@ -182,8 +182,7 @@ void Lith_PlayerUpdateData(struct player *p)
    p->keys.ys = InvNum("YellowSkull");
    p->keys.bs = InvNum("BlueSkull");
 
-   DebugStat("attr points: %u\nexp: lv.%u %lu/%lu\n",
-      p->attr.points, p->attr.level, p->attr.exp, p->attr.expnext);
+   DebugStat("exp: lv.%u %lu/%lu\n", p->attr.level, p->attr.exp, p->attr.expnext);
    DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
    DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
    DebugStat("a.y: %k\na.p: %k\n", p->yaw * 360, p->pitch * 360);
@@ -192,7 +191,7 @@ void Lith_PlayerUpdateData(struct player *p)
 //
 // Lith_GiveMail
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_GiveMail(int num)
 {
    static __str const names[] = {
@@ -215,7 +214,7 @@ void Lith_GiveMail(int num)
 //
 // Lith_ClearTextBuf
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_ClearTextBuf(struct player *p)
 {
    memset(p->txtbuf, 0, sizeof(p->txtbuf));
@@ -225,7 +224,7 @@ void Lith_ClearTextBuf(struct player *p)
 //
 // Lith_KeyDown
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_KeyDown(int pnum, int ch)
 {
    withplayer(&players[pnum])
@@ -236,17 +235,21 @@ void Lith_KeyDown(int pnum, int ch)
 //
 // Lith_GiveEXP
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_GiveEXP(struct player *p, u64 amt)
 {
    #pragma GDCC FIXED_LITERAL OFF
    struct player_attributes *a = &p->attr;
 
    while(a->exp + amt >= a->expnext) {
+      u32 attr[ATTR_MAX];
+
       a->level++;
-      a->points  += 5;
       a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.2) * 340);
-      p->attr.sup = p->attr.cur;
+
+      for(int i = 0; i < 5; i++) attr[ACS_Random(0, 5)]++;
+
+      //levelup(attr);
    }
 
    a->exp += amt;
@@ -257,7 +260,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
 //
 // Reset some things on the player when they spawn.
 //
-[[__call("ScriptS")]]
+script
 void Lith_ResetPlayer(struct player *p)
 {
    //
@@ -402,7 +405,7 @@ void Lith_ResetPlayer(struct player *p)
 //
 // Lith_PlayerUpdateStats
 //
-[[__call("StkCall")]]
+stkcall
 void Lith_PlayerUpdateStats(struct player *p)
 {
    fixed boost = 1 + p->jumpboost;

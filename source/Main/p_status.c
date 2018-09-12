@@ -24,29 +24,10 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    __str name = p->attr.names[at];
    fixed helptrns = 0.5;
 
-   if(p->attr.points) {
-      if(Lith_GUI_Button_Id(g, at, .disabled = p->attr.sup.attrs[at] <= attr, .x = x-42, y-2, Pre(btnprev), .slide = true))
-      {
-         p->attr.sup.points++;
-         p->attr.sup.attrs[at]--;
-      }
-
-      if(Lith_GUI_Button_Id(g, at, .disabled = !p->attr.sup.points || p->attr.sup.attrs[at] >= ATTR_MAX,.x = x-42 + guipre.btnprev.w, y-2, Pre(btnnext), .slide = true))
-      {
-         p->attr.sup.points--;
-         p->attr.sup.attrs[at]++;
-      }
-   }
-
    PrintTextFmt("%.3S", name);
    PrintText("CHFONT", CR_WHITE, x-24,1, y,1);
 
    PrintSprite("lgfx/UI/AttrBar1.png", x,1, y,1);
-
-   u32 satr = p->attr.sup.attrs[at];
-
-   if(satr != attr)
-      AttrBar(g, x, y, satr, "lgfx/UI/AttrBar3.png");
 
    AttrBar(g, x, y, attr, "lgfx/UI/AttrBar2.png");
 
@@ -55,9 +36,6 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       AttrBar(g, x, y, (vatr / (float)ATTR_VIS_DIFF) * ATTR_VIS_MAX, "lgfx/UI/AttrBar4.png");
       helptrns += 0.3;
    }
-
-   PrintTextFmt("%u/%i", satr, ATTR_VIS_MAX);
-   PrintText("CHFONT", CR_WHITE, x+202,1, y,1);
 
    static __str const helpstrs[at_max] = {
       [at_acc] = "Weapon damage",
@@ -72,7 +50,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    PrintTextStr(helpstrs[at]);
    PrintTextA("CHFONT", CR_WHITE, x+1,1, y+1,1, helptrns);
 
-   PrintTextFmt("%u/%i", satr, ATTR_VIS_MAX);
+   PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
    PrintText("CHFONT", CR_WHITE, x+202,1, y,1);
 }
 
@@ -109,17 +87,10 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
    x = 20;
    if(p->pclass & pcl_magicuser) y += 20;
    else                          y += 30;
-   if(p->attr.points) {
-      PrintTextFmt("Divide %u points among your attributes.", p->attr.sup.points);
-      PrintText("CHFONT", CR_WHITE, x,1, y,1);
-   }
    x  = 60;
    y += 10;
    for(int i = 0; i < at_max; i++, y += 10)
       DrawAttr(g, x++, y, p, i);
-   if(p->attr.points)
-      if(Lith_GUI_Button(g, "Apply", 255, 208))
-         p->attr.cur = p->attr.sup;
 }
 
 // EOF

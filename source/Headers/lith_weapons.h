@@ -46,9 +46,6 @@ enum // Lith_WeaponNum
    weapon_d_railgun,
    weapon_wings,
 
-   weapon_max_lith,
-   weapon_nonlith_start = weapon_max_lith - 1,
-
    weapon_max
 };
 

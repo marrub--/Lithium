@@ -14,7 +14,7 @@
 //
 // DrawSprite
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 {
    DrawSpriteBegin(name);
@@ -25,7 +25,7 @@ void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 //
 // DrawSpriteX
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
 {
    DrawSpriteBegin(name);
@@ -36,7 +36,7 @@ void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fi
 //
 // DrawSpriteXX
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
 {
    DrawSpriteBegin(name);
@@ -47,7 +47,7 @@ void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, f
 //
 // DrawSpriteXXX
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
 {
    DrawSpriteBegin(name);
@@ -58,7 +58,7 @@ void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, 
 //
 // DrawSpritePlain
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 {
    DrawSpriteBegin(name);
@@ -69,7 +69,7 @@ void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 //
 // DrawSpriteAlpha
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
 {
    DrawSpriteBegin(name);
@@ -80,7 +80,7 @@ void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alp
 //
 // DrawSpriteFade
 //
-[[__call("StkCall")]]
+stkcall
 void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
 {
    DrawSpriteBegin(name);

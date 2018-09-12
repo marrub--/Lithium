@@ -6,7 +6,7 @@
 //
 // Update
 //
-[[__call("ScriptS")]]
+script
 void Upgr_InstaDeath_Update(struct player *p, upgrade_t *upgr)
 {
    if(p->health < p->oldhealth)

@@ -18,7 +18,7 @@ static u32 note_Len(__str s)
 //
 // Lith_Save_note
 //
-[[__call("ScriptS")]]
+script
 static void Lith_Save_note(savefile_t *save)
 {
    u32 chunklen = 0;
@@ -40,7 +40,7 @@ static void Lith_Save_note(savefile_t *save)
 //
 // Lith_Load_note
 //
-[[__call("ScriptS")]]
+script
 static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 {
    for(int i = 0; i < countof(save->p->notes); i++)
@@ -58,7 +58,7 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 //
 // Lith_Save_fun0
 //
-[[__call("ScriptS")]]
+script
 static void Lith_Save_fun0(savefile_t *save)
 {
    Lith_SaveWriteChunk(save, Ident_fun0, SaveV_fun0, 1);
@@ -69,7 +69,7 @@ static void Lith_Save_fun0(savefile_t *save)
 //
 // Lith_Load_fun0
 //
-[[__call("ScriptS")]]
+script
 static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
 {
    save->p->fun = fgetc(save->fp);
@@ -80,7 +80,7 @@ static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
 //
 // Lith_SetFun
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_SetFun(int fun)
 {
    withplayer(LocalPlayer)
@@ -93,7 +93,7 @@ void Lith_SetFun(int fun)
 //
 // Lith_PlayerSaveData
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerSaveData(struct player *p)
 {
    savefile_t *save;
@@ -109,7 +109,7 @@ void Lith_PlayerSaveData(struct player *p)
 //
 // Lith_PlayerLoadData
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerLoadData(struct player *p)
 {
    savefile_t *save;

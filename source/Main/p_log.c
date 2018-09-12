@@ -13,7 +13,7 @@
 //
 // Lith_LogS
 //
-[[__call("ScriptS"), __extern("ACS")]]
+script ext("ACS")
 void Lith_LogS(int type)
 {
    __str name = HERMES_S("GetLogName");
@@ -101,7 +101,7 @@ logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl)
 //
 // Lith_PlayerUpdateLog
 //
-[[__call("ScriptS")]]
+script
 void Lith_PlayerUpdateLog(struct player *p)
 {
    forlist(logdata_t *logdata, p->loginfo.hud)
