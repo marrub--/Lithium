@@ -233,6 +233,43 @@ void Lith_KeyDown(int pnum, int ch)
 }
 
 //
+// LevelUp
+//
+script
+static void LevelUp(struct player *p, u32 attr[at_max])
+{
+   u32 level = p->attr.level;
+
+   for(int i = 0; i < at_max; i++) p->attr.attrs[i] += attr[i];
+
+   for(int i = 0; i < 35 * 5; i++)
+   {
+      if(level != p->attr.level) return; // a new levelup started, so exit
+
+      for(int j = 0; j < at_max; j++)
+         if(i > 35*2 / (fixed)at_max * j)
+      {
+         __str s = StrParam("LEVEL UP");
+
+         for(int k = 0, l = 0; k <= j; k++, l++)
+         {
+            // skip over any +0 attributes
+            while(l < at_max && !attr[l]) l++;
+            if(l >= at_max) break;
+
+            s = StrParam("%S\n%S +%u (%u)", s, p->attr.names[l], attr[l], p->attr.attrs[l]);
+         }
+
+         p->attr.lvupstr = s;
+      }
+
+      ACS_Delay(1);
+   }
+
+   p->attr.lvupstr = strnull;
+}
+
+//
 // Lith_GiveEXP
 //
 stkcall
@@ -241,16 +278,18 @@ void Lith_GiveEXP(struct player *p, u64 amt)
    #pragma GDCC FIXED_LITERAL OFF
    struct player_attributes *a = &p->attr;
 
-   while(a->exp + amt >= a->expnext) {
-      u32 attr[ATTR_MAX];
+   u32 attr[at_max] = {};
+   int levelup = 0;
 
+   while(a->exp + amt >= a->expnext) {
       a->level++;
       a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.2) * 340);
 
-      for(int i = 0; i < 5; i++) attr[ACS_Random(0, 5)]++;
-
-      //levelup(attr);
+      for(int i = 0; i < 10; i++) attr[ACS_Random(0, 100) % at_max]++;
+      levelup++;
    }
+
+   if(levelup) LevelUp(p, attr);
 
    a->exp += amt;
 }

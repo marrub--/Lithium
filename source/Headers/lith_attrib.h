@@ -2,9 +2,9 @@
 #ifndef LITH_ATTRIB_H
 #define LITH_ATTRIB_H
 
-#define ATTR_MAX 60
+#define ATTR_BAS_MAX 60
 #define ATTR_VIS_MAX 50
-#define ATTR_VIS_DIFF (ATTR_MAX - ATTR_VIS_MAX)
+#define ATTR_VIS_DIFF (ATTR_BAS_MAX - ATTR_VIS_MAX)
 
 enum
 {
@@ -20,11 +20,11 @@ enum
 
 struct player_attributes
 {
-   bool  autolevel;
    u64   exp, expnext;
    u32   level;
    __str names[at_max];
    u32   attrs[at_max];
+   __str lvupstr;
 };
 
 #endif

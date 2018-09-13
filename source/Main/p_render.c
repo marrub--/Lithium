@@ -198,7 +198,11 @@ void Lith_PlayerLevelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level) {
       ACS_LocalAmbientSound("player/levelup", 127);
-      p->logH(Language("LITH_TXT_LOG_LevelUp%S", p->discrim), p->attr.level);
+      p->logH(Language("LITH_TXT_LOG_LevelUp%S", p->discrim), ACS_Random(1000, 9000));
+   }
+   if(p->attr.lvupstr) {
+      PrintTextStr(p->attr.lvupstr);
+      PrintText("cnfont", CR_WHITE, 7,1, 17,1);
    }
 }
 

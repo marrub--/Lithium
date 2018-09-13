@@ -88,13 +88,13 @@
 
 // Level Up ------------------------------------------------------------------|
 "LITH_TXT_LOG_LevelUpStan" =
-   "> \cdYou have reached level \cj%i\cd. Open the Status menu to distribute points.";
+   "> You feel stronger, somehow.";
 "LITH_TXT_LOG_LevelUpJem" =
-   "> \cd[INFO] You are now level \cj%i\cd. Distribute points via the Status menu.";
+   "> [INFO] Memory restored: %iKiB";
 "LITH_TXT_LOG_LevelUpFulk" =
-   "> \cj<\cdVital\cj>\cd :: Level %i reached. Use Status menu to distribute points.";
+   "> \cj<\cdVital\cj>\c- :: %i inodes reclaimed.";
 "LITH_TXT_LOG_LevelUpAri" =
-   "> \cdLevel \cj%i\cd reached. Use the Status menu to distribute points.";
+   "> You're having fun with this.";
 "LITH_TXT_LOG_LevelUpMod" = "$LITH_TXT_LOG_LevelUpStan";
 
 // Boss Warnings -------------------------------------------------------------|
