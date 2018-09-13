@@ -176,7 +176,7 @@ static int LoadBIPInfo(__str fname, bip_t *bip, int pclass)
       break;
    case tok_identi:
       // Classes... Name [*] [-> Unlocks...]
-      page = (struct page_init){};
+      memset(&page, 0, sizeof page);
 
       do
          page.pclass |= PClFromStr(Lith_TokStr(tok));

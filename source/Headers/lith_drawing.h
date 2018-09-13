@@ -5,43 +5,43 @@
 #define TS TICSECOND
 
 #define PrintSprite(name, x, xa, y, ya) \
-   URANUS("LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
 
 #define PrintSpriteA(name, x, xa, y, ya, a) \
-   URANUS("LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintSpriteF(name, x, xa, y, ya, n) \
-   URANUS("LPS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
 
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
 
 #define PrintText(font, cr, x, xa, y, ya) \
-   URANUS("LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya))
 
 #define PrintTextA(font, cr, x, xa, y, ya, a) \
-   URANUS("LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintTextF(font, cr, x, xa, y, ya, n) \
-   URANUS("LPT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
 
 #define SetClip(x, y, w, h) \
-   URANUS("LSC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
+   URANUS("LC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
 
 #define SetClipW(x, y, w, h, ww) \
-   URANUS("LSC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
+   URANUS("LC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
 
 #define ClearClip() \
-   URANUS("LSC", 0, 0, 0, 0, 0)
+   URANUS("LC", 0, 0, 0, 0, 0)
 
 #define SetSize(w, h) \
-   URANUS("LHS", (int)(w), (int)(h))
+   URANUS("LZ", (int)(w), (int)(h))
 
 #define SetFade(n, time, fade) \
-   URANUS("LSF", (int)(n), (int)(time), (fixed)(fade))
+   URANUS("LF", (int)(n), (int)(time), (fixed)(fade))
 
 #define CheckFade(n) \
-   URANUS("LCF", n)
+   URANUS("LX", n)
 
 #define HudMessageLog(...) \
    ( \

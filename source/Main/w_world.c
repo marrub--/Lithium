@@ -349,7 +349,7 @@ static void DoPayout(void)
       Lith_PlayerPayout(p);
    }
 
-   payout = (payoutinfo_t){};
+   memset(&payout, 0, sizeof payout);
 }
 
 //

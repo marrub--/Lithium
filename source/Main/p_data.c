@@ -217,7 +217,7 @@ void Lith_GiveMail(int num)
 stkcall
 void Lith_ClearTextBuf(struct player *p)
 {
-   memset(p->txtbuf, 0, sizeof(p->txtbuf));
+   memset(p->txtbuf, 0, sizeof p->txtbuf[0]);
    p->tbptr = 0;
 }
 
@@ -267,7 +267,7 @@ void Lith_ResetPlayer(struct player *p)
    // Zero-init
 
    if(!p->wasinit) {
-      *p = (struct player){};
+      memset(p, 0, sizeof *p);
       p->wasinit = true;
    }
 
@@ -311,7 +311,7 @@ void Lith_ResetPlayer(struct player *p)
    //
    // Map-static data
 
-   p->old = (struct player_delta){};
+   memset(&p->old, 0, sizeof p->old);
 
    // If the map sets the TID on the first tic, it could already be set here.
    p->tid = 0;

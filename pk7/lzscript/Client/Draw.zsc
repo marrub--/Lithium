@@ -51,7 +51,7 @@ private transient play vector2 m_vsc;
 private transient play int m_dww;
 private transient play bool m_nodraw;
 
-static void LHS(Actor mo, int w, int h)
+static void LZ(Actor mo, int w, int h)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -68,7 +68,7 @@ static void LHS(Actor mo, int w, int h)
    cl.m_vsc = (w, h);
 }
 
-static void LSF(Actor mo, int num, int time, double fade)
+static void LF(Actor mo, int num, int time, double fade)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -78,13 +78,13 @@ static void LSF(Actor mo, int num, int time, double fade)
    cl.m_fmsg[num].fade = 1;
 }
 
-static bool LCF(Actor mo, int num)
+static bool LX(Actor mo, int num)
 {
    if(mo != players[consoleplayer].camera) return false;
    return Instance().m_fmsg[num].fade != 0;
 }
 
-static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
+static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
@@ -133,7 +133,7 @@ static void LPS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -
    cl.m_p++;
 }
 
-static void LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
+static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
 {
    if(mo != players[consoleplayer].camera || a ~== 0) return;
 
@@ -193,7 +193,7 @@ static void LPT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, 
    cl.m_p++;
 }
 
-static void LSC(Actor mo, int x, int y, int w, int h, int ww)
+static void LC(Actor mo, int x, int y, int w, int h, int ww)
 {
    if(mo != players[consoleplayer].camera) return;
 
@@ -226,7 +226,7 @@ static void LSC(Actor mo, int x, int y, int w, int h, int ww)
    cl.m_p++;
 }
 
-static void LEH()
+static void LE()
 {
    let cl = Instance();
 

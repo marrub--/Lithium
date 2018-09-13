@@ -123,7 +123,7 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
    if(size > avail)
       size = avail;
 
-   memcpy(buf, mem->mem + mem->pos, size);
+   memmove(buf, mem->mem + mem->pos, size);
    mem->pos += size;
    return size;
 }
@@ -149,7 +149,7 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
       mem->mem = newmem;
    }
 
-   memcpy(mem->mem + mem->pos, buf, size);
+   memmove(mem->mem + mem->pos, buf, size);
    mem->mem[mem->pos += size] = '\0';
    return size;
 }

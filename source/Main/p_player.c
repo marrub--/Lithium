@@ -176,7 +176,7 @@ static void Lith_PlayerDisconnect(void)
 
    upgrademap_t_dtor(&p->upgrademap);
 
-   memset(p, 0, sizeof(*p));
+   memset(p, 0, sizeof *p);
 }
 
 // Extern Functions ----------------------------------------------------------|

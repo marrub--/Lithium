@@ -127,7 +127,7 @@ void Lith_SetMagicUI(bool on)
          UData.ui = false;
          p->semifrozen--;
 
-         UData.gst = (gui_state_t){};
+         memset(&UData.gst, 0, sizeof UData.gst);
       }
    }
 }

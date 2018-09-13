@@ -89,7 +89,8 @@ dmon_t *Dmon(int id)
 dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];
-   *m = (struct dmon){};
+   *m = (dmon_t){}; // NB: this can't be memset because it's in a
+                    // separate address space
 
    m->active = true;
    m->id = dmonid;

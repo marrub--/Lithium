@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const byte base64_table[65] =
+static byte const base64_table[65] =
    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /**
@@ -113,20 +113,27 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
  */
 byte *base64_decode(const byte *src, size_t len, size_t *out_len)
 {
+   noinit
    static byte dtable[256];
+   static bool dtable_init;
+
    byte *out, *pos, block[4], tmp;
    size_t i, count, olen;
    int pad = 0;
 
-   memset(dtable, 0x80, 256);
-   for (i = 0; i < sizeof(base64_table) - 1; i++)
-      dtable[base64_table[i]] = (byte)i;
-   dtable['='] = 0;
+   if(!dtable_init)
+   {
+      dtable_init = true;
+      memset(dtable, 0x80, 256);
+      for (i = 0; i < sizeof(base64_table) - 1; i++)
+         dtable[base64_table[i]] = (byte)i;
+      dtable['='] = 0;
 
-   count = 0;
-   for (i = 0; i < len; i++) {
-      if (dtable[src[i]] != 0x80)
-         count++;
+      count = 0;
+      for (i = 0; i < len; i++) {
+         if (dtable[src[i]] != 0x80)
+            count++;
+      }
    }
 
    if (count == 0 || count % 4)

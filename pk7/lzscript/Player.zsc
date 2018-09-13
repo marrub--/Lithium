@@ -183,8 +183,8 @@ private void Lith_Crosshair()
    let gb = String.Format("lgfx/XHairs/%ib.png", style);
    let gw = String.Format("lgfx/XHairs/%iw.png", style);
 
-   Lith_URANUS.LPS(self, gb, xhx, xhy, 0, 0, a/255.);
-   Lith_URANUS.LPS(self, gw, xhx, xhy, 0, 0, a/255., c);
+   Lith_URANUS.LS(self, gb, xhx, xhy, 0, 0, a/255.);
+   Lith_URANUS.LS(self, gw, xhx, xhy, 0, 0, a/255., c);
 }
 
 private void Lith_PlayerIndicator(PlayerInfo p)
@@ -199,7 +199,7 @@ private void Lith_PlayerIndicator(PlayerInfo p)
       string text = String.Format("%s [%i]\n", p.getUserName(), mo.playerNumber());
       if(mo.health <= 0) text = text .. "Dead";
       else               text = text .. String.Format("%iHP", mo.health);
-      Lith_URANUS.LPT(self, text, "CBIFONT", Font.CR_WHITE, x-9, y-2, 1, 1, a);
+      Lith_URANUS.LT(self, text, "CBIFONT", Font.CR_WHITE, x-9, y-2, 1, 1, a);
    }
 }
 
@@ -229,8 +229,8 @@ override void Tick()
    // draw stuff if we're the camera
    if(players[consoleplayer].camera == self)
    {
-      Lith_URANUS.LEH();
       if(m_cs) m_cs.Lith_DrawFrame();
+      Lith_URANUS.LE();
    }
 
    Super.Tick();
@@ -238,7 +238,7 @@ override void Tick()
    Lith_RainEffect();
    Lith_ItemVacuum();
 
-   Lith_URANUS.LHS(self, 320, 240);
+   Lith_URANUS.LZ(self, 320, 240);
 
    if(!player) return;
 

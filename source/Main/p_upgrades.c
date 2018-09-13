@@ -1,5 +1,4 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// vim: columns=120
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
@@ -234,7 +233,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
    upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
 
    for(int i = 0; i < countof(p->upgrades); i++)
-      p->upgrades[i] = (upgrade_t){};
+      memset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
 
    for(int i = 0, j = 0; i < UpgrMax; i++)
       if(CheckPClass())
@@ -265,7 +264,7 @@ void Lith_PlayerDeallocUpgrades(struct player *p)
    p->upgrmax = 0;
 
    for(int i = 0; i < countof(p->upgrades); i++)
-      p->upgrades[i] = (upgrade_t){};
+      memset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
 
    p->upgrinit = false;
 }

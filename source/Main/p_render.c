@@ -228,7 +228,7 @@ static void HUD_StringStack(struct player *p)
    }
 
    ACS_SetHudSize(320, 200);
-   ACS_SetFont("CONFONT");
+   ACS_SetFont("confont");
 
    size_t i = 0;
    for(list_t *rover = p->hudstrlist.prev; rover != &p->hudstrlist; rover = rover->prev, i++)

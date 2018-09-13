@@ -67,14 +67,14 @@ struct token *Lith_TBufGet(struct tokbuf *tb)
    for(int i = 0; i < tb->bbeg; i++)
    {
       Vec_Clear(tb->toks[i].text);
-      tb->toks[i] = (struct token){0};
+      memset(&tb->toks[i], 0, sizeof tb->toks[i]);
    }
 
    // Move end of buffer to beginning.
    if(tb->tend) for(int i = tb->tend - tb->bbeg, j = 0; i < tb->tend; i++, j++)
    {
       tb->toks[j] = tb->toks[i];
-      tb->toks[i] = (struct token){0};
+      memset(&tb->toks[i], 0, sizeof tb->toks[i]);
    }
 
    // Get new tokens.
