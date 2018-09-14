@@ -1,32 +1,20 @@
 The compilefs language is extremely simple, it was created to allow basic text
 to be outputted into a code file, specifically LANGUAGE.
 
-Commands are of two types, 'bare' and 'separated' commands: Bare commands are
-delimited from their argument by the first space, and separated commands are
-delimited by a ':' colon character.
-
 Any line not detected to be a command of any kind will be completely ignored.
 
-Bare commands never output data, but set internal state.
-They may create files, directories or other such filesystem objects.
+Toplevel commands include:
+<in directory> directoryname
+   Sets the directory to put outputted files into. Defaults to ".".
 
-Bare commands include:
-<in directory>
-   Sets the directory to put outputted files into. Must come before any
-   "in file" or data outputting commands.
+<in file> filename
+   Begins a block (terminated by <done>) which will output the result of each
+   data command into the given file.
 
-<in file>
-   Sets the file to put outputted data into. Must come before any data
-   outputting commands.
-
-<include>
-   Processes the file given and returns to the current file.
-
-Separated commands output unprocessed data.
-They all output to the current file as specified with "in file".
+Data commands output processed data to the current file.
 "put" commands use the syntax "arg -> alias" to denote the alias to output.
 
-Separated commands include:
+Data commands include:
 <comment:>
    Outputs the argument as a comment.
 
@@ -37,14 +25,17 @@ Separated commands include:
    Outputs the contents of a file to the given alias.
 
 <parse file:>
-   Parses the given file using parsefile syntax. See below.
+   Parses the given file using parsefile syntax.
 
 "parsefiles" are another format provided by compilefs, created to make large
-amounts of multi-line data easier to write. It provides four commands, which
+amounts of multi-line data easier to write. It provides five commands, which
 all output data:
 
 <##>
    Outputs a comment.
+
+<++>
+   Outputs an entire file to the given alias using the syntax "alias | file".
 
 <==>
    Outputs to the given alias using the syntax "alias | arg".

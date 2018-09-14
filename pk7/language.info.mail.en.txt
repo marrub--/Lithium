@@ -11,10 +11,20 @@
    "\cd> Date: \cj%S\n"
    "\n"
    "%S";
+
+// Flags ---------------------------------------------------------------------|
+
+// The flags for mail messages are as follows:
+
+// bit 1 - Does not print a message when received
+
+// bit 2 - Message is the same for all player classes
 "LITH_TXT_MAIL_FLAG_Intro" = "1";
 "LITH_TXT_MAIL_FLAG_JamesDefeated" = "2";
 "LITH_TXT_MAIL_FLAG_MakarovDefeated" = "2";
 "LITH_TXT_MAIL_FLAG_IsaacDefeated" = "2";
+
+// All Classes ---------------------------------------------------------------|
 "LITH_TXT_MAIL_BODY_JamesDefeated" =
 
 // Mail/Phantom_James.txt
@@ -56,6 +66,8 @@
    "\n"
    "\ca  I won't tell you to use it wisely.";
 "LITH_TXT_MAIL_SEND_IsaacDefeated" = "isaac@syn.400khz";
+
+// Marine --------------------------------------------------------------------|
 "LITH_TXT_MAIL_BODY_IntroStan" =
 
 // Mail/Intro_Marine.txt
@@ -165,6 +177,8 @@
 // Mail/Secret2_Marine.txt
    "Now I've done it, this place just keeps going deeper and getting weirder... Damn, it's getting hot in here! Better turn up the heat some more.";
 "LITH_TXT_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+
+// Cyber-Mage ----------------------------------------------------------------|
 "LITH_TXT_MAIL_BODY_IntroJem" =
 
 // Mail/Intro_CyberMage.txt
@@ -279,3 +293,5 @@
 // Mail/Secret2_CyberMage.txt
    "Here seems to be the end of this terrifying compartment of Hell. I'd better blaze through this one.";
 "LITH_TXT_MAIL_NAME_Secret2Jem" = "Saved Text 252";
+
+// EOF

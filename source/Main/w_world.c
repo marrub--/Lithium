@@ -609,8 +609,6 @@ void Lith_Finale(void)
 script type("open")
 static void Lith_World(void)
 {
-   static bool time_end;
-
 begin:
    if(ACS_GameType() == GAME_TITLE_MAP) {
       script
