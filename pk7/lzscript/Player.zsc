@@ -59,7 +59,7 @@ override void PlayerThink()
 
 private void Lith_RainEffect()
 {
-   Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 35.);
+   Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 15.);
    Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_rainlerp);
 
    if(player && CallACS("LWData", wdata_dorain) &&
