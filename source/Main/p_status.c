@@ -87,7 +87,7 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
    x = 20;
    if(p->pclass & pcl_magicuser) y += 20;
    else                          y += 30;
-   x  = 60;
+   x  = 53;
    y += 10;
    for(int i = 0; i < at_max; i++, y += 10)
       DrawAttr(g, x++, y, p, i);

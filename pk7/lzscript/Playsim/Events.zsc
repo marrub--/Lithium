@@ -14,7 +14,8 @@ override void WorldLoaded(WorldEvent evt)
 
    if(evt.isSaveGame)
       return;
-   else if(evt.isReopen)
+
+   if(evt.isReopen)
       CallACS("Lith_WorldReopen");
    else
    {

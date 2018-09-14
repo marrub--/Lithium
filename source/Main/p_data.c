@@ -285,7 +285,9 @@ void Lith_GiveEXP(struct player *p, u64 amt)
       a->level++;
       a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.2) * 340);
 
-      for(int i = 0; i < 10; i++) attr[ACS_Random(0, 100) % at_max]++;
+      for(int i = 0; i < 5; i++)
+         attr[ACS_Random(0, 100) % at_max]++;
+
       levelup++;
    }
 

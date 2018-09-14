@@ -7,7 +7,7 @@ MAKELIB=gdcc-makelib
 ## Compiler flags
 TARGET=--bc-target=ZDoom
 LFLAGS=$(TARGET) --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
-CFLAGS=$(TARGET) --warn-all --no-warn-parentheses
+CFLAGS=$(TARGET)
 
 ## Sources
 IR=ir
@@ -15,16 +15,13 @@ SRCDIR=source
 
 PK7_BIN=pk7/acs
 
-LIB_INIT =--bc-zdacs-init-script-name '__lithlib.bin_init'
-MAIN_INIT=--bc-zdacs-init-script-name '__lithmain.bin_init'
-
 LIB_STA =70000
 MAIN_STA=1400000
 
 LIB_OUTPUTS=$(IR)/libc.ir $(IR)/libGDCC.ir
 LIB_BINARY=$(PK7_BIN)/lithlib.bin
-LIB_CFLAGS=$(LIB_INIT)
-LIB_LFLAGS=$(LIB_INIT) --alloc-min Sta "" $(LIB_STA)
+LIB_CFLAGS=$(CFLAGS)
+LIB_LFLAGS=$(LFLAGS) --bc-zdacs-init-script-name '__lithlib.bin_init' --alloc-min Sta "" $(LIB_STA)
 
 MAIN_IR=$(IR)/main
 MAIN_SRC=$(SRCDIR)/Main
@@ -33,8 +30,8 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=-i$(MAIN_INC) $(MAIN_INIT) --alloc-Aut 2150
-MAIN_LFLAGS=-llithlib $(MAIN_INIT) --alloc-min Sta "" $(MAIN_STA)
+MAIN_CFLAGS=$(CFLAGS) --warn-all --no-warn-parentheses -i$(MAIN_INC) --alloc-Aut 2150
+MAIN_LFLAGS=$(LFLAGS) -llithlib --bc-zdacs-init-script-name '__lithmain.bin_init' --alloc-min Sta "" $(MAIN_STA)
 
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_pdata.h \
@@ -63,23 +60,23 @@ clean:
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) $(LIB_LFLAGS) $^ -o $@
+	@$(LD) $(LIB_LFLAGS) $^ -o $@
 
 $(MAIN_BINARY): $(MAIN_OUTPUTS)
 	@echo LD $@
-	@$(LD) $(LFLAGS) $(MAIN_LFLAGS) $^ -o $@
+	@$(LD) $(MAIN_LFLAGS) $^ -o $@
 
 ## .c -> .ir
 $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS)
 	@echo CC $<
-	@$(CC) $(CFLAGS) $(MAIN_CFLAGS) -DFileHash=$(shell ./strh.rb $<) -c $< -o $@
+	@$(CC) $(MAIN_CFLAGS) -DFileHash=$(shell ./strh.rb $<) -c $< -o $@
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@
-	@$(MAKELIB) $(TARGET) $(LIB_CFLAGS) -c libc -o $@
+	@$(MAKELIB) $(LIB_CFLAGS) -c libc -o $@
 
 $(IR)/libGDCC.ir:
 	@echo MAKELIB $@
-	@$(MAKELIB) $(TARGET) $(LIB_CFLAGS) -c libGDCC -o $@
+	@$(MAKELIB) $(LIB_CFLAGS) -c libGDCC -o $@
 
 ## EOF

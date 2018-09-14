@@ -130,8 +130,7 @@ override void DrawShowNextLoc()
 
    DrawName(240, wbs.lname1, lnametexts[1]);
 
-   if(bcnt % 20 < 10)
-      Lith_DrawCent(160, 70, "(ENTER-AREA)");
+   if(bcnt % 20 < 10) Lith_DrawCent(160, 70, "(ENTER-AREA)");
 }
 
 // EOF
