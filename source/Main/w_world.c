@@ -591,6 +591,16 @@ static void WInit(void)
    }
 }
 
+//
+// Lith_Finale
+//
+script ext("ACS")
+void Lith_Finale(void)
+{
+   HERMES("SetEnding", "Normal");
+   ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
+}
+
 // Scripts -------------------------------------------------------------------|
 
 //
@@ -599,6 +609,8 @@ static void WInit(void)
 script type("open")
 static void Lith_World(void)
 {
+   static bool time_end;
+
 begin:
    if(ACS_GameType() == GAME_TITLE_MAP) {
       script
@@ -611,7 +623,7 @@ begin:
 
    if(world.mapnum == 1911777)
    {
-      ACS_Exit_Normal(0);
+      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
 
@@ -659,7 +671,11 @@ begin:
       }
 
       if(world.ticks > 67 * 35 * 60 * 60 && !world.islithmap)
-         ACS_Teleport_NewMap(1911777, 0, 0);
+      {
+         HERMES("SetEnding", "TimeOut");
+         ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
+         return;
+      }
 
       int secrets = world.mapsecrets;
       int kills   = world.mapkills;

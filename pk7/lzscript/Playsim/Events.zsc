@@ -1,3 +1,5 @@
+#include "lzscript/Playsim/EndSeq.zsc"
+
 class Lith_Events : EventHandler;
 
 bool m_bosslevel;
@@ -43,6 +45,24 @@ override void WorldUnloaded(WorldEvent evt)
    for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
       if(!mo.owner) mo.Lith_Destroy();
 }
+
+override void UiTick()
+{
+   // because we override finales in the MAPINFO, this should only trigger
+   // at the very end of the game. hopefully.
+   if(gamestate == GS_FINALE) CallACS("Lith_Finale");
+
+   if(m_eseq == ESEQ_HALT && CVar.FindCVar('__lith_end').getString() != "")
+   {
+      LoadEnding(String.Format("lfiles/End_%s.txt", CVar.FindCVar('__lith_end').getString()));
+      CVar.FindCVar('__lith_end').setString("");
+   }
+   else if(m_eseq >= ESEQ_RUN)
+      RunEndSequence();
+}
+
+override void RenderOverlay(RenderEvent evt)
+   {if(m_eseq >= ESEQ_RUN) DrawEndSequence(evt);}
 
 override void PlayerEntered(PlayerEvent evt)
 {

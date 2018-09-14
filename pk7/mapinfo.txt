@@ -176,11 +176,9 @@ map TESTMAP "Test Map"
    DoubleSky
 }
 
-map LITHTEND ""
+map LITHEND ""
 {
    LevelNum = 1911777
-   Next     = EndSequence, "Lith_EndGameTimeOver"
-
    NoIntermission
 }
 
@@ -204,104 +202,23 @@ DoomEdNums
    22432 = Lith_BoomBarrel
 }
 
-// Intermission Info ---------------------------------------------------------|
+// hack fuck -----------------------------------------------------------------|
 
-intermission Lith_EndGameTimeOver
-{
-   Image
-   {
-      Background = "flats/ZZLITHBG.png"
-      Time = -1
-   }
-   
-   TextScreen
-   {
-      TextLump = "end_timeup1.txt"
-      TextColor = "White"
-   }
-   
-   TextScreen
-   {
-      TextLump = "end_timeup2.txt"
-      TextColor = "White"
-   }
-   
-   TextScreen
-   {
-      Text = "You turn off your communications program."
-   }
-   
-   Wiper
-   {
-      WipeType = CrossFade
-      Time = 10
-      Background = "flats/ZZLITHBG.png"
-   }
-   
-   Image
-   {
-      Background = "flats/ZZLITHBG.png"
-      Time = 1
-   }
-   
-   GotoTitle{}
-}
+intermission Inter_Pic1 {}
+intermission Inter_Pic2 {}
+intermission Inter_Pic3 {}
+intermission Inter_Bunny {}
+intermission Inter_Underwater {}
+intermission Inter_Demonscroll {}
+intermission Inter_BuyStrife {}
+intermission Inter_Cast {}
+intermission Inter_Chess {}
 
-intermission Inter_Cast
-{
-   Image
-   {
-      Background = "flats/ZZLITHBG.png"
-      Time = -1
-   }
-   
-   Fader
-   {
-      Music = "lmusic/miniwip2.ogg"
-      DrawConditional = "Lith_MarinePlayer",    "lgfx/End/Marine1.png", 0, 0
-      DrawConditional = "Lith_CyberMagePlayer", "lgfx/End/CyberMage1.png", 0, 0
-      Background = "flats/ZZLITHBG.png"
-      Time = 10
-      FadeType = FadeIn
-   }
-   
-   Image
-   {
-      DrawConditional = "Lith_MarinePlayer",    "lgfx/End/Marine1.png", 0, 0
-      DrawConditional = "Lith_CyberMagePlayer", "lgfx/End/CyberMage1.png", 0, 0
-      Background = "flats/ZZLITHBG.png"
-   }
-   
-   Wiper
-   {
-      WipeType = Burn
-      Time = 10
-      Background = "graphics/TITLEPIC.png"
-   }
-   
-   TextScreen
-   {
-      Background = "graphics/TITLEPIC.png"
-      TextSpeed = 6
-      TextColor = "White"
-      Text = "The end."
-      Position = 135, 100
-   }
-   
-   Wiper
-   {
-      WipeType = CrossFade
-      Time = 10
-      Background = "flats/ZZLITHBG.png"
-   }
-   
-   Image
-   {
-      Background = "flats/ZZLITHBG.png"
-      Time = 7
-   }
-   
-   GotoTitle{}
-}
+cluster 5 {}
+cluster 6 {}
+cluster 7 {}
+cluster 8 {}
+cluster 9 {}
+cluster 10 {}
 
 // EOF

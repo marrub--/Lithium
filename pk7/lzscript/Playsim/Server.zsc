@@ -3,25 +3,30 @@ struct Lith_HERMES_PlayerData
    bool grabInput;
 }
 
-// HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
-class Lith_HERMES : EventHandler
-{
-   play string m_logname;
-   play string m_obituary;
-   play bool m_paused;
-   play name m_dmgtype;
-   play bool m_dmgworld;
-   play Lith_HERMES_PlayerData m_pdata[MAXPLAYERS];
+#include "lzscript/Playsim/Player.zsc"
+#include "lzscript/Playsim/Monsters.zsc"
+#include "lzscript/Playsim/Weapons.zsc"
+#include "lzscript/Playsim/World.zsc"
+#include "lzscript/Playsim/Pause.zsc"
+#include "lzscript/Playsim/Files.zsc"
 
-   static clearscope Lith_HERMES Instance()
-      {return Lith_HERMES(Find("Lith_HERMES"));}
+// HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
+class Lith_HERMES : EventHandler;
+
+play string m_logname;
+play string m_obituary;
+play bool m_paused;
+play name m_dmgtype;
+play bool m_dmgworld;
+play Lith_HERMES_PlayerData m_pdata[MAXPLAYERS];
+
+static void SetEnding(string ending)
+{
+   let c = CVar.FindCVar('__lith_end');
+   if(c.getString() == "") c.setString(ending);
 }
 
-#include "lzscript/Playsim/Server/Player.zsc"
-#include "lzscript/Playsim/Server/Monsters.zsc"
-#include "lzscript/Playsim/Server/Weapons.zsc"
-#include "lzscript/Playsim/Server/World.zsc"
-#include "lzscript/Playsim/Server/Pause.zsc"
-#include "lzscript/Playsim/Server/Files.zsc"
+static clearscope Lith_HERMES Instance()
+   {return Lith_HERMES(Find("Lith_HERMES"));}
 
 // EOF

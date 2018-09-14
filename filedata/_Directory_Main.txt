@@ -32,7 +32,6 @@ parse file: Info_Extra.txt
 
 -- CBI Mail -------------------------------------------------------------------
 in file language.info.mail.en.txt
-
 put file: Mail/Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
 include _Mail.txt
@@ -42,6 +41,14 @@ include _Mail.txt
 in file language.arsenal.en.txt
 parse file: Arsenal_Shop.txt
 parse file: Arsenal_Upgrades.txt
+
+comment: EOF
+
+
+-- Endings --------------------------------------------------------------------
+in file language.endings.en.txt
+put file: End_TimeOut1.txt -> LITH_TXT_ENDING_TIMEOUT_1
+put file: End_TimeOut2.txt -> LITH_TXT_ENDING_TIMEOUT_2
 
 comment: EOF
 

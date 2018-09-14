@@ -47,6 +47,8 @@ override void PostBeginPlay()
 
 override void PlayerThink()
 {
+   if(level.levelnum == 1911777) return;
+
    if(CallACS("LPData", pdata_semifrozen))
    {
       UserCmd cmd = player.cmd;
@@ -205,6 +207,8 @@ private void Lith_PlayerIndicator(PlayerInfo p)
 
 override void Tick()
 {
+   if(level.levelnum == 1911777) return;
+
    // create pitch and yaw quaternions for unprojection
    vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
    pvec /= pvec.length();

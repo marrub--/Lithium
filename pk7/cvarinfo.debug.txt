@@ -7,4 +7,6 @@ server noarchive bool __lith_debug_upgrades   = false;
 server noarchive bool __lith_debug_save       = false;
 server noarchive bool __lith_debug_nomonsters = false;
 
+server noarchive string __lith_end;
+
 // EOF
