@@ -1,0 +1,31 @@
+   case marine,3
+   mus lmusic/lithambientwip3.ogg
+   img :End:Marine
+3  case cybermage,4
+   mus lmusic/tmary7.ogg
+   img :End:CyberMage
+4  fade -50,black
+   case marine,1
+   600 $LITH_TXT_ENDING_NORMAL_MARINE
+1  case cybermage,2
+   800 $LITH_TXT_ENDING_NORMAL_CYBERMAGE
+2  stop
+   fade 100,black
+   img TITLEPIC
+   0
+   fade -70,black
+   700 $LITH_TXT_ENDING_CREDITS
+   stop
+   fade 70,black
+   bg black
+   0
+   wait 50
+   100 $LITH_TXT_ENDING_DEDICATION
+   wait 100
+   fade 150,black
+   20 The end.
+   wait 70
+   fade 20,black
+   0
+   fmus 300
+   done

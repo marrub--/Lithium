@@ -2,6 +2,43 @@
 // Edit only if you aren't going to recompile.
 [enu default]
 
+"LITH_TXT_ENDING_CREDITS" =
+
+// End_Credits.txt
+   "\cd>>>>>                             [[[[ Lithium ]]]]\n"
+   "\cd>>>>>                         Project Golan, Xevv 2\n"
+   "\n"
+   "\cdOriginal music\cj for ending sequences by \cn_sink\cj\n"
+   "Intermission music - \cdThe Alchemist\cj by \cnSkaven\cj\n"
+   "Title music - \cdShredder\cj by \cn505\cj\n"
+   "Fonts by \cnJimmy\cj\n"
+   "\n"
+   "Sprites by:\n"
+   "* \cnAnthony Cole\cj * \cnBloax\cj * \cnCage\cj * \cnCaptain J\cj * \cnGAA1992\cj *\n"
+   "* \cnHorrorMovieGuy\cj * \cnKate Fox\cj * \cnMarlboro Mike\cj * \cnMarrub\cj *\n"
+   "* \cnMike12\cj * \cnMinigunner\cj * \cnMrEnchanter\cj * \cnScuba Steve\cj *\n"
+   "* \cnSeryder\cj * \cnSgt. Shivers\cj * \cnSlax\cj * \cnSolo Spaghetti\cj *\n"
+   "* \cnTheRailgunner\cj * \cnTurbo\cj * \cnwildweasel\cj * \cntorridGristle\cj *\n"
+   "* \cnzrrion the insect\cj *\n"
+   "\n"
+   "With sound help from:\n"
+   "* \cna1337spy\cj * \cnKyle873\cj * \cnShadowlink226\cj *\n"
+   "* \cnTerminusEst13\cj * \cnwildweasel\cj *\n"
+   "\n"
+   "And code help from:\n"
+   "* \cnDavidPH\cj * \cnInsanityBringer\cj * \cnYholl\cj * \cnZombie\cj *\n"
+   "\n"
+   "All of my thanks to:\n"
+   "\cnDavidPH\cj, for making this project possible.\n"
+   "\cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being an inspiration.\n"
+   "\cnYholl\cj and \cnZombie\cj, for tons of help dealing with ZDoom.";
+"LITH_TXT_ENDING_DEDICATION" =
+
+// End_Dedication.txt
+   "Dedicated to the loving memory of Kaitlyn Anne Fox.\n"
+   "         You were my biggest inspiration.\n"
+   "\n"
+   "                   Goodnight.";
 "LITH_TXT_ENDING_TIMEOUT_1" =
 
 // End_TimeOut1.txt
@@ -42,5 +79,53 @@
    "work. Thank you.\n"
    "\n"
    "Good luck, [REDACTED]";
+"LITH_TXT_ENDING_NORMAL_MARINE" =
+
+// End_Normal_Marine.txt
+   "\cdYou awaken in a hospital bed, cybernetics turned off,\n"
+   "\cdbody aching all over. It's over. The fight against\n"
+   "\cdHell has been won.\n"
+   "\n"
+   "\cnA man is sitting next to you, and he gives you a total\n"
+   "\cnfor your payment. It's too much for you to fathom. You\n"
+   "\cnend up settling down in a nice house in a big city,\n"
+   "\cnliving the high life.\n"
+   "\n"
+   "\cyThe effort you went through almost seems worth it now,\n"
+   "\cybut still in your mind lingers memories of\n"
+   "\cyhorrors no man should know.\n"
+   "\n"
+   "\ckIn the end, the corporation you worked with\n"
+   "\ckmerged with a new company, the UAC, and\n"
+   "\ckyou never heard from them again.\n"
+   "\n"
+   "\cgIf what you saw was real...\n"
+   "\cg...maybe it's best nobody knows you're a hero.";
+"LITH_TXT_ENDING_NORMAL_CYBERMAGE" =
+
+// End_Normal_CyberMage.txt
+   "\n"
+   "\n"
+   "\cdYou are at last free.\n"
+   "\cdFree again to think and observe, and see for yourself\n"
+   "\cdthe abolishment of your former captors.\n"
+   "\n"
+   "\cnNo more distrust of your will.\n"
+   "\n"
+   "\cnFor this sake, this is only the beginning.\n"
+   "\n"
+   "\n"
+   "\ctBut for the ones you replaced, and the ones you mourn,\n"
+   "\ct        for yourself,\n"
+   "\n"
+   "\crthis is merely an end.\n"
+   "\n"
+   "\czPerhaps one day you will forgive yourself for\n"
+   "\czwhat you have sacrificed, but today that is no matter.\n"
+   "\n"
+   "\cvToday is the beginning. The beginning of life once again.\n"
+   "\cvYour parents are waiting back at home.\n"
+   "\n"
+   "\cvIt's time to go back.";
 
 // EOF

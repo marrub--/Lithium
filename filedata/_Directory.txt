@@ -58,8 +58,14 @@ done
 
 -- Endings --------------------------------------------------------------------
 in file language.endings.en.txt
+   put file: End_Credits.txt    -> LITH_TXT_ENDING_CREDITS
+   put file: End_Dedication.txt -> LITH_TXT_ENDING_DEDICATION
+
    put file: End_TimeOut1.txt -> LITH_TXT_ENDING_TIMEOUT_1
    put file: End_TimeOut2.txt -> LITH_TXT_ENDING_TIMEOUT_2
+
+   put file: End_Normal_Marine.txt    -> LITH_TXT_ENDING_NORMAL_MARINE
+   put file: End_Normal_CyberMage.txt -> LITH_TXT_ENDING_NORMAL_CYBERMAGE
 
    comment: EOF
 done

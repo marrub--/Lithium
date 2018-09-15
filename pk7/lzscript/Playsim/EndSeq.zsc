@@ -19,6 +19,7 @@ enum Lith_EndSeqState
    ESEQ_WRITEOUT,
    ESEQ_FADEOUT,
    ESEQ_FADEIN,
+   ESEQ_FADEMUS,
 }
 
 const fxk = 0xFFFF;
@@ -26,45 +27,73 @@ const fxk = 0xFFFF;
 // Program
 private ui uint m_en;
 private ui Lith_EndSeqNode m_node[32];
+private ui uint16 m_jmp[99];
 
 // State
 private ui uint m_eseq;
 private ui color m_bgcolo, m_fdcolo;
 private ui string m_text;
+private ui textureid m_bgimg;
 private ui int m_time, m_tics, m_skip;
 
 ui void LoadEnding(string fname)
 {
    let lmp = Lith_HERMES.ReadLump(Lith_HERMES.FindLump(fname));
 
-   array<string> lns, val;
+   array<string> lns, arg;
 
    lmp.split(lns, "\n");
 
    m_bgcolo = "Black";
+   m_fdcolo = "Black";
+   m_text   = "";
 
    for(uint i = 0, l = lns.size(); i < l; i++)
    {
-      val.clear();
-      lns[i].split(val, ",");
+      if(lns[i] == "") continue;
 
-      if(val[0] == "") break;
+      string ln = lns[i]. mid(3);
+      string jp = lns[i].left(2);
+      uint space = ln.indexof(" ");
 
-      let nam = name(val[0]);
+      string fn = space >= 0 ? ln.left(space  ) : ln;
+      string ar = space >= 0 ? ln. mid(space+1) : "";
+
+      if(jp.toint() > 0)
+         m_jmp[jp.toint()] = i;
+
+      if(fn.toint() > 0 || fn == "0")
+      {
+         m_node[i].type = 'text';
+         m_node[i].tics = fn.toint();
+         m_node[i].text = StringTable.Localize(ar, true);
+         continue;
+      }
+
+      if(ar != "")
+      {
+         arg.clear();
+         ar.split(arg, ",");
+      }
+
+      let nam = name(fn);
       switch(nam) {
       case 'stop':
       case 'done': m_node[i].type = nam; break;
-      case 'wait': m_node[i].type = nam; m_node[i].tics = val[1].toint(); break;
-      case   'bg': m_node[i].type = nam; m_node[i].text = val[1];         break;
+      case  'img':
+      case  'mus':
+      case   'bg': m_node[i].type = nam; m_node[i].text = arg[0];         break;
+      case 'fmus':
+      case 'wait': m_node[i].type = nam; m_node[i].tics = arg[0].toint(); break;
+      case 'case':
+         m_node[i].type = nam;
+         m_node[i].text = arg[0];
+         m_node[i].tics = arg[1].toint();
+         break;
       case 'fade':
          m_node[i].type = nam;
-         m_node[i].tics = val[1].toint();
-         m_node[i].text = val[2];
-         break;
-      default:
-         m_node[i].type = 'text';
-         m_node[i].tics = val[0].toint();
-         m_node[i].text = StringTable.Localize(val[1], true);
+         m_node[i].tics = arg[0].toint();
+         m_node[i].text = arg[1];
          break;
       }
    }
@@ -75,6 +104,10 @@ ui void LoadEnding(string fname)
 ui void DrawEndSequence(RenderEvent evt)
 {
    Screen.Dim(m_bgcolo, 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
+
+   if(m_bgimg)
+      Screen.DrawTexture(m_bgimg, false, 0, 0,
+         DTA_VirtualWidth, 320, DTA_VirtualHeight, 200);
 
    string txt = m_text;
 
@@ -91,11 +124,14 @@ ui void DrawEndSequence(RenderEvent evt)
          DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 
    switch(m_eseq) {
+   case ESEQ_FADEMUS:
+      SetMusicVolume(1 - m_time / float(m_tics));
+      break;
    case ESEQ_FADEIN:
    case ESEQ_FADEOUT: {
       float fd = m_time / float(m_tics);
       if(m_eseq == ESEQ_FADEIN) fd = 1 - fd;
-      Screen.Dim(m_fdcolo, m_time / float(m_tics), 0, 0, Screen.GetWidth(), Screen.GetHeight());
+      Screen.Dim(m_fdcolo, fd, 0, 0, Screen.GetWidth(), Screen.GetHeight());
       break;
    }
    }
@@ -154,17 +190,49 @@ ui void RunEndSequence()
    while(m_eseq == ESEQ_RUN)
    {
       switch(m_node[m_en].type) {
+      case  'mus': S_ChangeMusic(m_node[m_en++].text); break;
       case 'done':
          Menu.SetMenu('EndGameMenu');
          MessageBoxMenu(Menu.GetCurrentMenu()).HandleResult(true);
          m_eseq = ESEQ_HALT;
          break;
       case 'stop': m_eseq = ESEQ_STOP;             break;
-      case   'bg': m_bgcolo = m_node[m_en++].text; break;
+      case  'img': {
+         string tex = m_node[m_en++].text;
+
+         if(tex.charCodeAt(0) == Ch_Colon)
+            tex = StringTable.Localize(String.Format("LITH%s", tex), false);
+
+         m_bgimg = TexMan.CheckForTexture(tex, TexMan.Type_Any);
+         break;
+      }
+      case   'bg':
+         m_bgcolo = m_node[m_en++].text;
+         m_bgimg  = TexMan.CheckForTexture("", TexMan.Type_Null);
+         break;
+      case 'case': {
+         bool cnd;
+
+         switch(name(m_node[m_en].text)) {
+         case 'marine':    cnd = p.cls == "Lith_MarinePlayer";    break;
+         case 'cybermage': cnd = p.cls == "Lith_CyberMagePlayer"; break;
+         default:          cnd = false;                           break;
+         }
+
+         if(cnd) m_en++;
+         else    m_en = m_jmp[m_node[m_en].tics];
+
+         break;
+      }
       case 'wait':
          m_tics = m_node[m_en].tics;
          m_time = 1;
          m_eseq = ESEQ_WAIT;
+         break;
+      case 'fmus':
+         m_tics = m_node[m_en].tics;
+         m_time = 1;
+         m_eseq = ESEQ_FADEMUS;
          break;
       case 'fade':
          m_fdcolo = m_node[m_en].text;
