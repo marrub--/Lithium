@@ -37,7 +37,7 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
 void Lith_GUI_Init(gui_state_t *g, void *state)
 {
    g->state = state;
-   g->gfxprefix = "lgfx/UI/";
+   g->gfxprefix = ":UI:";
 }
 
 //
@@ -98,16 +98,16 @@ void Lith_GUI_End(gui_state_t *g, enum cursor curs)
    switch(curs)
    {
    default:
-   case gui_curs_green:       cgfx = "lgfx/UI/Cursor.png";            break;
-   case gui_curs_pink:        cgfx = "lgfx/UI/CursorPink.png";        break;
-   case gui_curs_blue:        cgfx = "lgfx/UI/CursorBlue.png";        break;
-   case gui_curs_orange:      cgfx = "lgfx/UI/CursorOrange.png";      break;
-   case gui_curs_red:         cgfx = "lgfx/UI/CursorRed.png";         break;
-   case gui_curs_white:       cgfx = "lgfx/UI/CursorWhite.png";       break;
-   case gui_curs_outline:     cgfx = "lgfx/UI/CursorOutline.png";     break;
-   case gui_curs_outline2:    cgfx = "lgfx/UI/CursorOutline2.png";    break;
-   case gui_curs_outlineinv:  cgfx = "lgfx/UI/CursorOutlineInv.png";  break;
-   case gui_curs_outline2inv: cgfx = "lgfx/UI/CursorOutline2Inv.png"; break;
+   case gui_curs_green:       cgfx = ":UI:Cursor";            break;
+   case gui_curs_pink:        cgfx = ":UI:CursorPink";        break;
+   case gui_curs_blue:        cgfx = ":UI:CursorBlue";        break;
+   case gui_curs_orange:      cgfx = ":UI:CursorOrange";      break;
+   case gui_curs_red:         cgfx = ":UI:CursorRed";         break;
+   case gui_curs_white:       cgfx = ":UI:CursorWhite";       break;
+   case gui_curs_outline:     cgfx = ":UI:CursorOutline";     break;
+   case gui_curs_outline2:    cgfx = ":UI:CursorOutline2";    break;
+   case gui_curs_outlineinv:  cgfx = ":UI:CursorOutlineInv";  break;
+   case gui_curs_outline2inv: cgfx = ":UI:CursorOutline2Inv"; break;
    }
 
    PrintSprite(cgfx, g->cx,1, g->cy,1);

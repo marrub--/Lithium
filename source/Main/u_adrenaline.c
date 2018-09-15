@@ -68,7 +68,7 @@ void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
    int timemod = p->ticks % 45;
    float amt = UData.charge / (float)CHARGE_MAX;
 
-   DrawSpriteXX(UData.readied ? "lgfx/HUD/H_D24.png" : "lgfx/HUD/H_D21.png",
+   DrawSpriteXX(UData.readied ? ":HUD:H_D24" : ":HUD:H_D21",
       HUDMSG_FADEOUT | HUDMSG_ALPHA,
       hid_adrenind_fxS - timemod,
       77.1 - timemod,

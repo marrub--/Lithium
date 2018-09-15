@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_AllPoint" = "AllPoint";
 "LITH_TXT_INFO_TITLE_AllPoint" = "AllPoint Precision Firearms";
-"LITH_TXT_INFO_IMAGE_AllPoint" = "lgfx/BIP/AllPoint.png";
+"LITH_TXT_INFO_IMAGE_AllPoint" = ":BIP:AllPoint";
 "LITH_TXT_INFO_DESCR_AllPoint" =
    "Established mid first-century NE, AllPoint present heavy sniper rifles and "
    "plasma weapons for military and private use."
@@ -22,7 +22,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_AOF" = "A.O.F";
 "LITH_TXT_INFO_TITLE_AOF" = "A.O.F Inc.";
-"LITH_TXT_INFO_IMAGE_AOF" = "lgfx/BIP/AOF.png";
+"LITH_TXT_INFO_IMAGE_AOF" = ":BIP:AOF";
 "LITH_TXT_INFO_DESCR_AOF" =
    "Not much is known about this shady corporation on the outside, and reports "
    "from insiders never painted a very pretty picture."
@@ -52,7 +52,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Cid" = "Cid";
 "LITH_TXT_INFO_TITLE_Cid" = "$LITH_TXT_INFO_SHORT_Cid";
-"LITH_TXT_INFO_IMAGE_Cid" = "lgfx/BIP/Cid.png";
+"LITH_TXT_INFO_IMAGE_Cid" = ":BIP:Cid";
 "LITH_TXT_INFO_DESCR_Cid" =
    "Cid is a black market trading group, presumed to be led by four men. They sell "
    "artifacts from the Super Dimension, ultra-high-grade weapons, and anonymously "
@@ -79,7 +79,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_KSKK" = "KSKK";
 "LITH_TXT_INFO_TITLE_KSKK" = "Kazami Sensou Kenkyuu Kaihatsu GK";
-"LITH_TXT_INFO_IMAGE_KSKK" = "lgfx/BIP/KSKK.png";
+"LITH_TXT_INFO_IMAGE_KSKK" = ":BIP:KSKK";
 "LITH_TXT_INFO_DESCR_KSKK" =
    "A limited R&D company acting mainly in partnership with the military of the "
    "Great Empire of Kazami on Earth. Due to the strange and generally complex "
@@ -121,7 +121,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_OFMD" = "OFMD";
 "LITH_TXT_INFO_TITLE_OFMD" = "Optic Fiber Maxim-Danil";
-"LITH_TXT_INFO_IMAGE_OFMD" = "lgfx/BIP/OFMD.png";
+"LITH_TXT_INFO_IMAGE_OFMD" = ":BIP:OFMD";
 "LITH_TXT_INFO_DESCR_OFMD" =
    "Originally, this company only produced optic fiber cables for consumer use, "
    "but later branched out to create all kinds of computation technology."
@@ -148,7 +148,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Omakeda" = "Omakeda";
 "LITH_TXT_INFO_TITLE_Omakeda" = "Omakeda Defense Co.";
-"LITH_TXT_INFO_IMAGE_Omakeda" = "lgfx/BIP/Omakeda.png";
+"LITH_TXT_INFO_IMAGE_Omakeda" = ":BIP:Omakeda";
 "LITH_TXT_INFO_DESCR_Omakeda" =
    "Based in Hawaii, Omakeda Defense Co. produce self-defense and hunting weaponry "
    "for civilians. Due to their high quality and fair pricing, militaries  "
@@ -160,7 +160,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Semaphore" = "Semaphore, Inc.";
 "LITH_TXT_INFO_TITLE_Semaphore" = "Semaphore, Incorporated";
-"LITH_TXT_INFO_IMAGE_Semaphore" = "lgfx/BIP/Semaphore.png";
+"LITH_TXT_INFO_IMAGE_Semaphore" = ":BIP:Semaphore";
 "LITH_TXT_INFO_DESCR_Semaphore" =
    "Hiding out somewhere in the asteroid belt of Omicron Xevv, Semaphore, Inc is a "
    "space ship weapons designer and manufacturer started 6 years ago in 1643 NE by "
@@ -176,7 +176,7 @@
 //----------------------------------------------------------------------------|
 "LITH_TXT_INFO_SHORT_Sym43" = "SYM4.3";
 "LITH_TXT_INFO_TITLE_Sym43" = "SYM4.3 WEAPONS INCORPORATED";
-"LITH_TXT_INFO_IMAGE_Sym43" = "lgfx/BIP/Sym43.png";
+"LITH_TXT_INFO_IMAGE_Sym43" = ":BIP:Sym43";
 "LITH_TXT_INFO_DESCR_Sym43" =
    "Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3 "
    "produce explosive weapons and distribute many other kinds of weaponry via "

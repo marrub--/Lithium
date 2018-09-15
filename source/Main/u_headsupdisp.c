@@ -16,14 +16,12 @@ static void HUD_Ammo(struct player *p)
    __str typebg;
    int y;
 
-   if(p->getCVarI("lith_hud_showweapons"))
-      {y = 14; typebg = "lgfx/HUD/SplitRight.png";}
-   else
-      {y = 0;  typebg = "lgfx/HUD/SplitFront.png";}
+   if(p->getCVarI("lith_hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
+   else                                    {y = 0;  typebg = ":HUD:SplitFront";}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo)
    {
-      PrintSprite("lgfx/HUD/BarBig.png", 279,2, 238-y,2);
+      PrintSprite(":HUD:BarBig", 279,2, 238-y,2);
       PrintSprite(typebg, 320,2, 238,2);
    }
 
@@ -31,7 +29,7 @@ static void HUD_Ammo(struct player *p)
 
    if(wep->ammotype & AT_NMag)
    {
-      typegfx = "lgfx/HUD/MAG.png";
+      typegfx = ":HUD:MAG";
 
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
          PrintTextStr("\C[Lith_Green]OUT");
@@ -42,13 +40,13 @@ static void HUD_Ammo(struct player *p)
 
    if(wep->ammotype & AT_Ammo)
    {
-      typegfx = "lgfx/HUD/AMMO.png";
+      typegfx = ":HUD:AMMO";
 
       int x = 0;
 
       if(wep->ammotype & AT_NMag)
       {
-         PrintSprite("lgfx/HUD/BarBig.png", 220,2, 238-y,2);
+         PrintSprite(":HUD:BarBig", 220,2, 238-y,2);
          x = -59;
       }
 
@@ -68,23 +66,23 @@ static void HUD_Ammo(struct player *p)
 static void HUD_Health(struct player *p, upgrade_t *upgr)
 {
    static __str weapongfx[SLOT_MAX] = {
-      [0] = "lgfx/HUD/H_D27.png",
-      [1] = "lgfx/HUD/H_D28.png",
-      [2] = "lgfx/HUD/H_D24.png",
-      [3] = "lgfx/HUD/H_D23.png",
-      [4] = "lgfx/HUD/H_D22.png",
-      [5] = "lgfx/HUD/H_D21.png",
-      [6] = "lgfx/HUD/H_D25.png",
-      [7] = "lgfx/HUD/H_D26.png"
+      [0] = ":HUD:H_D27",
+      [1] = ":HUD:H_D28",
+      [2] = ":HUD:H_D24",
+      [3] = ":HUD:H_D23",
+      [4] = ":HUD:H_D22",
+      [5] = ":HUD:H_D21",
+      [6] = ":HUD:H_D25",
+      [7] = ":HUD:H_D26"
    };
 
    PrintSprite(InvNum("PowerStrength") ?
-      "lgfx/HUD/SplitBackRed.png" : "lgfx/HUD/SplitBack.png", 0,1, 239,2);
+      ":HUD:SplitBackRed" : ":HUD:SplitBack", 0,1, 239,2);
 
    PrintTextFmt("\C[Lith_Green]%i", p->health);
    PrintText("LHUDFONT", 0, 34,1, 231,0);
 
-   PrintSprite("lgfx/HUD/VIT.png", 2,1, 237,2);
+   PrintSprite(":HUD:VIT", 2,1, 237,2);
 
    fixed ft = 0;
 
@@ -132,8 +130,8 @@ static void HUD_Mode(struct player *p)
    if(p->weapontype == weapon_rifle)
    {
       int addy = p->getUpgrActive(UPGR_RifleModes) ? 0 : 16;
-      PrintSprite("lgfx/HUD/H_W3.png", 215,2, 240 + addy,2);
-      PrintSprite(StrParam("lgfx/HUD/H_W%i.png", (rifle_firemode_max - p->riflefiremode) + 3),
+      PrintSprite(":HUD:H_W3", 215,2, 240 + addy,2);
+      PrintSprite(StrParam(":HUD:H_W%i", (rifle_firemode_max - p->riflefiremode) + 3),
          215,2, 208 + (p->riflefiremode * 16) + addy,2);
    }
 }
@@ -166,7 +164,7 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
    Lith_HUD_Score(p, "%S\Cnscr", p->score, "CNFONT", "j", 320,2, 3,1);
 
    if(p->getCVarI("lith_hud_showweapons"))
-      PrintSprite("lgfx/HUD/Bar.png", 279,2, 238,2);
+      PrintSprite(":HUD:Bar", 279,2, 238,2);
 
    Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, "k", 282, 237);
 

@@ -27,13 +27,13 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    PrintTextFmt("%.3S", name);
    PrintText("CHFONT", CR_WHITE, x-24,1, y,1);
 
-   PrintSprite("lgfx/UI/AttrBar1.png", x,1, y,1);
+   PrintSprite(":UI:AttrBar1", x,1, y,1);
 
-   AttrBar(g, x, y, attr, "lgfx/UI/AttrBar2.png");
+   AttrBar(g, x, y, attr, ":UI:AttrBar2");
 
    if(attr > ATTR_VIS_MAX) {
       int vatr = attr - ATTR_VIS_MAX;
-      AttrBar(g, x, y, (vatr / (float)ATTR_VIS_DIFF) * ATTR_VIS_MAX, "lgfx/UI/AttrBar4.png");
+      AttrBar(g, x, y, (vatr / (float)ATTR_VIS_DIFF) * ATTR_VIS_MAX, ":UI:AttrBar4");
       helptrns += 0.3;
    }
 

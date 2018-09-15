@@ -525,7 +525,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          if(page->image)
             PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-         PrintSpriteA("lgfx/UI/Background.png", 0,1, 0,1, 0.5);
+         PrintSpriteA(":UI:Background", 0,1, 0,1, 0.5);
 
          PrintTextStr(pinf.flname);
          PrintText("CBIFONT", CR_ORANGE, 200,4, 45 + oy,1);
@@ -567,7 +567,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
    }
    else
    {
-      PrintSpriteA("lgfx/UI/bip.png", 20,1, 40,1, 0.6);
+      PrintSpriteA(":UI:bip", 20,1, 40,1, 0.6);
       PrintTextStr("BIOTIC INFORMATION PANEL ver2.5");
       PrintText("CBIFONT", CR_WHITE, 35,1, 40,1);
    }

@@ -106,7 +106,7 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
    if(data)
       item->data = *data;
    else
-      item->data = (itemdata_t){"Blank Item", 1, 1, "lgfx/Items/T4.png"};
+      item->data = (itemdata_t){"Blank Item", 1, 1, ":Items:T4"};
 
    if(!item->Destroy)
       item->Destroy = Lith_Item_Destroy;
@@ -250,7 +250,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
 {
    struct player *p = cont->user;
 
-   __str bg = cont->bg ? cont->bg : "lgfx/UI/InvBack.png";
+   __str bg = cont->bg ? cont->bg : ":UI:InvBack";
    int h = cont->h * 8;
    int w = cont->w * 8;
 
@@ -286,7 +286,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
          fixed a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
 
          for(int xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
-            PrintSpriteA("lgfx/UI/InvSel.png", x,1, y,1, a);
+            PrintSpriteA(":UI:InvSel", x,1, y,1, a);
       }
    }
 }
@@ -409,8 +409,8 @@ void *Lith_ItemCreate()
       if(type == name) \
          return Lith_Item_New(&(itemdata_t const){ACS_GetActorPropertyString(0, APROP_NameTag), __VA_ARGS__})
 
-   Type("SlottedItem", 1, 1, "lgfx/Items/T4.png", .Use = Lith_Item_Use);
-   Type("Armor",       3, 2, "lgfx/Items/T1.png", .Use = Lith_Item_Use);
+   Type("SlottedItem", 1, 1, ":Items:T4", .Use = Lith_Item_Use);
+   Type("Armor",       3, 2, ":Items:T1", .Use = Lith_Item_Use);
 
    return null;
 }

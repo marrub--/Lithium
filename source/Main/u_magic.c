@@ -49,7 +49,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   PrintSprite("lgfx/UI/MagicSelectBack.png", 0,1, 0,1);
+   PrintSprite(":UI:MagicSelectBack", 0,1, 0,1);
 
    bool any = false;
 
@@ -61,8 +61,8 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
          continue;
 
       gui_button_preset_t pre = {
-         .gfx      = StrParam("lgfx/UI/%S.png",    m->name),
-         .hot      = StrParam("lgfx/UI/%SSel.png", m->name),
+         .gfx      = StrParam(":UI:%S",    m->name),
+         .hot      = StrParam(":UI:%SSel", m->name),
          .snd      = "player/cbi/buttonpress",
          .cdef     = "d",
          .cact     = "r",
@@ -114,7 +114,7 @@ void Lith_SetMagicUI(bool on)
          UData.ui = true;
          p->semifrozen++;
 
-         UData.gst.gfxprefix = "lgfx/UI/";
+         UData.gst.gfxprefix = ":UI:";
          UData.gst.cx = 320/2;
          UData.gst.cy = 240/2;
 
@@ -183,15 +183,15 @@ void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
    int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
 
-   PrintSprite("lgfx/HUD_C/MagicIcon.png", 1,1, 213,2);
-   PrintSprite("lgfx/HUD_C/BarSmall2.png", 1,1, 220,2);
+   PrintSprite(":HUD_C:MagicIcon", 1,1, 213,2);
+   PrintSprite(":HUD_C:BarSmall2", 1,1, 220,2);
 
    SetClip(2, 219-5, hprc, 5);
-   PrintSprite("lgfx/HUD_C/ManaBar1.png", 2,1, 219,2);
+   PrintSprite(":HUD_C:ManaBar1", 2,1, 219,2);
    ClearClip();
 
    SetClip(2, 219-5, fprc, 5);
-   PrintSprite("lgfx/HUD_C/ManaBar2.png", 2,1, 219,2);
+   PrintSprite(":HUD_C:ManaBar2", 2,1, 219,2);
    ClearClip();
 }
 

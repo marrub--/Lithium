@@ -69,12 +69,12 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom)
    {
-      PrintSpriteA("lgfx/Vignette.png", 160,0, 120,0, 0.3);
+      PrintSpriteA(":Vignette", 160,0, 120,0, 0.3);
 
       ACS_SetCameraToTexture(p->cameratid, "LITHCAM2", 90 - UData.vzoom);
       PrintSprite("LITHCAM2", 160,0, 120,0);
 
-      PrintSpriteA("lgfx/ZoomOverlay.png", 160,0, 120,0, 0.5);
+      PrintSpriteA(":ZoomOverlay", 160,0, 120,0, 0.5);
 
       __str points[8] = {"E", "SE", "S", "SW", "W", "NW", "N", "NE"};
 

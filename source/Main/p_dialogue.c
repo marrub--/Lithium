@@ -105,8 +105,8 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
 
    // Background
    SetSize(480, 300);
-   PrintSprite("lgfx/Terminal/Back.png",   midx,0, 0,1);
-   PrintSprite("lgfx/Terminal/Border.png", midx,0, 0,1);
+   PrintSprite(":Terminal:Back",   midx,0, 0,1);
+   PrintSprite(":Terminal:Border", midx,0, 0,1);
    SetSize(g->w, g->h);
 
    // Top-left text
@@ -142,7 +142,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    __str pict;
 
    if(vmstate->trmPict)
-      pict = StrParam("lgfx/Terminal/%S.png", vmstate->trmPict);
+      pict = StrParam(":Terminal:%S", vmstate->trmPict);
 
    switch(vmstate->trmActi)
    {
@@ -195,15 +195,15 @@ script
 static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
    enum {left = 37, top = 75};
-   __str icon = StrParam("lgfx/Dialogue/Icon%S.png", vmstate->sreg[DSTR_ICON]);
+   __str icon = StrParam(":Dialogue:Icon%S", vmstate->sreg[DSTR_ICON]);
    __str name = vmstate->sreg[DSTR_NAME];
    __str remo = vmstate->sreg[DSTR_REMOTE];
 
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   PrintSpriteA("lgfx/Dialogue/Back.png", 0,1, 0,1, 0.7);
-   PrintSpriteA(icon,                     0,1, 0,1, 0.7);
+   PrintSpriteA(":Dialogue:Back", 0,1, 0,1, 0.7);
+   PrintSpriteA(icon,             0,1, 0,1, 0.7);
 
    PrintTextStr(name);
    PrintText("LHUDFONT", CR_GREEN, 30,1, 35,1);
@@ -261,7 +261,7 @@ void Lith_TeleportOutEffect(struct player *p)
    ACS_SetHudSize(320, 200);
    ACS_SetCameraToTexture(p->tid, "LITHCAM3", 90);
 
-   DrawSpritePlain("lgfx/Terminal/TeleportOut.png", hid_teleportback,
+   DrawSpritePlain(":Terminal:TeleportOut", hid_teleportback,
       160.0, 100.0, 1);
 
    for(int j = 1; j <= 25; j++)
@@ -294,7 +294,7 @@ void Lith_DialogueVM(struct player *p, int num)
 
    // GUI state
    gui_state_t gst = {};
-   gst.gfxprefix = "lgfx/UI_Green/";
+   gst.gfxprefix = ":UI_Green:";
    Lith_GUI_Init(&gst);
 
    // VM state

@@ -182,8 +182,8 @@ private void Lith_Crosshair()
 
    let c = String.Format("#%.2X%.2X%.2X", r, g, b);
 
-   let gb = String.Format("lgfx/XHairs/%ib.png", style);
-   let gw = String.Format("lgfx/XHairs/%iw.png", style);
+   let gb = String.Format(":XHairs:%ib", style);
+   let gw = String.Format(":XHairs:%iw", style);
 
    Lith_URANUS.LS(self, gb, xhx, xhy, 0, 0, a/255.);
    Lith_URANUS.LS(self, gw, xhx, xhy, 0, 0, a/255., c);

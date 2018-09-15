@@ -4,8 +4,8 @@
 
 struct gui_presets const guipre = {
    .btndef = {
-      .gfx      = "Button.png",
-      .hot      = "ButtonHot.png",
+      .gfx      = "Button",
+      .hot      = "ButtonHot",
       .snd      = "player/cbi/buttonpress",
       .cdef     = "j",
       .cact     = "g",
@@ -19,8 +19,8 @@ struct gui_presets const guipre = {
    },
 
    .btntab = {
-      .gfx      = "Tab.png",
-      .hot      = "TabHot.png",
+      .gfx      = "Tab",
+      .hot      = "TabHot",
       .snd      = "player/cbi/tabswitch",
       .cdef     = "j",
       .cact     = "g",
@@ -34,8 +34,8 @@ struct gui_presets const guipre = {
    },
 
    .btnexit = {
-      .gfx      = "ExitButton.png",
-      .hot      = "ExitButtonHot.png",
+      .gfx      = "ExitButton",
+      .hot      = "ExitButtonHot",
       .external = false,
       .w        = 11,
       .h        = 11,
@@ -43,8 +43,8 @@ struct gui_presets const guipre = {
    },
 
    .btnnext = {
-      .gfx      = "BtnNext.png",
-      .hot      = "BtnNextHot.png",
+      .gfx      = "BtnNext",
+      .hot      = "BtnNextHot",
       .snd      = "player/cbi/right",
       .cdef     = "j",
       .cact     = "g",
@@ -58,8 +58,8 @@ struct gui_presets const guipre = {
    },
 
    .btnprev = {
-      .gfx      = "BtnPrev.png",
-      .hot      = "BtnPrevHot.png",
+      .gfx      = "BtnPrev",
+      .hot      = "BtnPrevHot",
       .snd      = "player/cbi/left",
       .cdef     = "j",
       .cact     = "g",
@@ -73,8 +73,8 @@ struct gui_presets const guipre = {
    },
 
    .btnnexts = {
-      .gfx      = "BtnNextSmall.png",
-      .hot      = "BtnNextSmallHot.png",
+      .gfx      = "BtnNextSmall",
+      .hot      = "BtnNextSmallHot",
       .snd      = "player/cbi/buttoncurs",
       .cdef     = "j",
       .cact     = "g",
@@ -88,8 +88,8 @@ struct gui_presets const guipre = {
    },
 
    .btnprevs = {
-      .gfx      = "BtnPrevSmall.png",
-      .hot      = "BtnPrevSmallHot.png",
+      .gfx      = "BtnPrevSmall",
+      .hot      = "BtnPrevSmallHot",
       .snd      = "player/cbi/buttoncurs",
       .cdef     = "j",
       .cact     = "g",
@@ -103,8 +103,8 @@ struct gui_presets const guipre = {
    },
 
    .btnlist = {
-      .gfx      = "ListButton.png",
-      .hot      = "ListButtonHot.png",
+      .gfx      = "ListButton",
+      .hot      = "ListButtonHot",
       .snd      = "player/cbi/clicklst",
       .cdef     = "j",
       .cact     = "g",
@@ -118,8 +118,8 @@ struct gui_presets const guipre = {
    },
 
    .btnlistsel = {
-      .gfx      = "ListButton.png",
-      .hot      = "ListButtonHot.png",
+      .gfx      = "ListButton",
+      .hot      = "ListButtonHot",
       .snd      = "player/cbi/clicklst",
       .cdef     = "j",
       .cact     = "g",
@@ -133,8 +133,8 @@ struct gui_presets const guipre = {
    },
 
    .btnlistactive = {
-      .gfx      = "ListButtonActive.png",
-      .hot      = "ListButtonActiveHot.png",
+      .gfx      = "ListButtonActive",
+      .hot      = "ListButtonActiveHot",
       .snd      = "player/cbi/clicklst",
       .cdef     = "j",
       .cact     = "g",
@@ -148,8 +148,8 @@ struct gui_presets const guipre = {
    },
 
    .btnlistactivated = {
-      .gfx      = "ListButtonActivated.png",
-      .hot      = "ListButtonActiveHot.png",
+      .gfx      = "ListButtonActivated",
+      .hot      = "ListButtonActiveHot",
       .snd      = "player/cbi/clicklst",
       .cdef     = "j",
       .cact     = "g",
@@ -193,8 +193,8 @@ struct gui_presets const guipre = {
    },
 
    .btndlgsel = {
-      .gfx      = "lgfx/Dialogue/SelectBack.png",
-      .hot      = "lgfx/Dialogue/SelectBackHot.png",
+      .gfx      = ":Dialogue:SelectBack",
+      .hot      = ":Dialogue:SelectBackHot",
       .snd      = "player/cbi/dlgclick",
       .cdef     = "j",
       .cact     = "g",
@@ -238,51 +238,51 @@ struct gui_presets const guipre = {
    },
 
    .cbxdef = {
-      .gfx      = "Checkbox.png",
-      .hot      = "CheckboxHot.png",
-      .dis      = "CheckboxDisabled.png",
+      .gfx      = "Checkbox",
+      .hot      = "CheckboxHot",
+      .dis      = "CheckboxDisabled",
       .sndup    = "player/cbi/clickon",
       .snddn    = "player/cbi/clickoff",
-      .chkgfx   = "CheckboxX.png",
-      .chkhot   = "CheckboxXHot.png",
-      .chkact   = "CheckboxXActive.png",
-      .chkdis   = "CheckboxXDisabled.png",
+      .chkgfx   = "CheckboxX",
+      .chkhot   = "CheckboxXHot",
+      .chkact   = "CheckboxXActive",
+      .chkdis   = "CheckboxXDisabled",
       .external = false,
       .w        = 10,
       .h        = 10
    },
 
    .cbxsmall = {
-      .gfx      = "CheckboxSmall.png",
-      .hot      = "CheckboxSmallHot.png",
-      .dis      = "CheckboxSmallDisabled.png",
+      .gfx      = "CheckboxSmall",
+      .hot      = "CheckboxSmallHot",
+      .dis      = "CheckboxSmallDisabled",
       .sndup    = "player/cbi/clickon",
       .snddn    = "player/cbi/clickoff",
-      .chkgfx   = "CheckboxX.png",
-      .chkhot   = "CheckboxXHot.png",
-      .chkact   = "CheckboxXActive.png",
-      .chkdis   = "CheckboxXDisabled.png",
+      .chkgfx   = "CheckboxX",
+      .chkhot   = "CheckboxXHot",
+      .chkact   = "CheckboxXActive",
+      .chkdis   = "CheckboxXDisabled",
       .external = false,
       .w        = 10,
       .h        = 10
    },
 
    .scrdef = {
-      .capS     = "ListCapTop.png",
-      .capE     = "ListCapBottom.png",
-      .scrl     = "ListScrollbar.png",
-      .notchgfx = "ListScrollNotch.png",
-      .notchhot = "ListScrollNotchHot.png",
+      .capS     = "ListCapTop",
+      .capE     = "ListCapBottom",
+      .scrl     = "ListScrollbar",
+      .notchgfx = "ListScrollNotch",
+      .notchhot = "ListScrollNotchHot",
       .external = false,
       .scrlw    = 8,
       .scrlh    = 8
    },
 
    .slddef = {
-      .gfx      = "Slider.png",
+      .gfx      = "Slider",
       .snd      = "player/cbi/slidertick",
-      .notch    = "SliderNotch.png",
-      .notchhot = "SliderNotchHot.png",
+      .notch    = "SliderNotch",
+      .notchhot = "SliderNotchHot",
       .font     = "cbifont",
       .external = false,
       .pad      = 2,

@@ -17,10 +17,10 @@
    } while(0)
 
 #define Slot(name, x, y) \
-   PrintSprite("lgfx/UI/" name ".png", 300-x*48,2, 48*y-20,1)
+   PrintSprite(":UI:" name "", 300-x*48,2, 48*y-20,1)
 
 #define CPU(num) \
-   PrintSprite("lgfx/UI/CPU" #num ".png", 0,1, 0,1)
+   PrintSprite(":UI:CPU" #num "", 0,1, 0,1)
 
 // Static Functions ----------------------------------------------------------|
 

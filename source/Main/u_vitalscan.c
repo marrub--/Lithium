@@ -125,7 +125,7 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 
    // Rank
    if(UData.rank) for(int i = 1; i <= UData.rank; i++)
-      DrawSpriteFade(StrParam("lgfx/UI/Rank%i.png", i),
+      DrawSpriteFade(StrParam(":UI:Rank%i", i),
          hid_vscrankS - (i - 1), 100.1 + ox + (i * 6), 216.1 + oy, 0.1, 0.1);
 
    // Hit indicator
@@ -160,11 +160,11 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    {
       int y = afnt ? 201 : 205;
       ACS_SetHudClipRect(120 + ox, y + oy, 80 * UData.splitfrac, 2);
-      DrawSpritePlain(StrParam("lgfx/UI/HealthBar%i.png", UData.split), hid_vscbar, 120.1+ox, y+.1+oy, 0.1);
+      DrawSpritePlain(StrParam(":UI:HealthBar%i", UData.split), hid_vscbar, 120.1+ox, y+.1+oy, 0.1);
       ACS_SetHudClipRect(0, 0, 0, 0);
 
       if(UData.split > 1)
-         DrawSpritePlain(StrParam("lgfx/UI/HealthBar%i.png", UData.split - 1), hid_vscbarn, 120.1+ox, y+.1+oy, 0.1);
+         DrawSpritePlain(StrParam(":UI:HealthBar%i", UData.split - 1), hid_vscbarn, 120.1+ox, y+.1+oy, 0.1);
    }
 }
 

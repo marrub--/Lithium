@@ -176,7 +176,7 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, 8))
          continue;
 
-      PrintSprite("lgfx/UI/LogList.png", g->ox,1, y + g->oy,1);
+      PrintSprite(":UI:LogList", g->ox,1, y + g->oy,1);
 
       PrintTextStr(logdata->info);
       PrintText("CBIFONT", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);

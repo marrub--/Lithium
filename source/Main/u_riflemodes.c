@@ -25,7 +25,7 @@ void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
       ACS_SetCameraToTexture(p->cameratid, "LITHCAM1", 34);
       PrintSprite("LITHCAM1", 0,1, 128,0);
 
-      PrintSprite("lgfx/RifleScope.png", 40,1, 108,1);
+      PrintSprite(":RifleScope", 40,1, 108,1);
 
       ClearClip();
    }

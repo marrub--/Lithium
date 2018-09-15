@@ -19,11 +19,11 @@ static void HUD_Ammo(struct player *p)
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic)) type |= 2;
 
    if(type)
-      PrintSprite("lgfx/HUD_C/SplitFront.png", 320,2, 238,2);
+      PrintSprite(":HUD_C:SplitFront", 320,2, 238,2);
 
    if(type & 1)
    {
-      typegfx = "lgfx/HUD_C/MAG.png";
+      typegfx = ":HUD_C:MAG";
 
       if(type & 2 && !wep->ammocur)
          PrintTextStr("OUT");
@@ -34,13 +34,13 @@ static void HUD_Ammo(struct player *p)
 
    if(type & 2)
    {
-      typegfx = "lgfx/HUD_C/AMMO.png";
+      typegfx = ":HUD_C:AMMO";
 
       int x = 0;
 
       if(type & 1)
       {
-         PrintSprite("lgfx/HUD_C/Back.png", 240,2, 238,2);
+         PrintSprite(":HUD_C:Back", 240,2, 238,2);
          x = -58;
       }
 
@@ -54,9 +54,9 @@ static void HUD_Ammo(struct player *p)
    if(p->weapontype == weapon_c_smg)
    {
       fixed heat = InvNum("Lith_SMGHeat")/500.0;
-      PrintSprite("lgfx/HUD_C/BarSmall.png", 320,2, 205,2);
+      PrintSprite(":HUD_C:BarSmall", 320,2, 205,2);
       SetClip(320-63, 205-9, heat * 63, 9);
-      PrintSprite("lgfx/HUD_C/HeatBar.png", 320,2, 205,2);
+      PrintSprite(":HUD_C:HeatBar", 320,2, 205,2);
       SetClip(0, 0, 0, 0);
    }
 }
@@ -66,8 +66,8 @@ static void HUD_Ammo(struct player *p)
 //
 static void HUD_Health(struct player *p)
 {
-   PrintSprite("lgfx/HUD_C/SplitBack.png", 0,1, 239,2);
-   PrintSprite("lgfx/HUD_C/VIT.png",       2,1, 237,2);
+   PrintSprite(":HUD_C:SplitBack", 0,1, 239,2);
+   PrintSprite(":HUD_C:VIT",       2,1, 237,2);
 
    PrintTextFmt("%i", p->health);
    PrintText("LHUDFONT", CR_DARKRED, 21,1, 229,0);
@@ -101,7 +101,7 @@ void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
    Lith_HUD_Score(p, "%S\Cnscr", p->score, "CNFONT", "a", 160,0, 3,1);
 
    if(p->getCVarI("lith_hud_showweapons"))
-      PrintSprite("lgfx/HUD_C/Bar.png", 320,2, 220,2);
+      PrintSprite(":HUD_C:Bar", 320,2, 220,2);
 
    Lith_HUD_WeaponSlots(p, CR_DARKRED, CR_DARKGREEN, CR_BLUE, "g", 323, 219);
 

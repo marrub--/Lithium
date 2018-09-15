@@ -97,6 +97,8 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
       cl.m_d[p].dt = dt_tex;
    else
    {
+      if(a < 0.001) return;
+
       cl.m_d[p].dt = dt_ate;
       cl.m_d[p].a = a;
    }
@@ -109,6 +111,9 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
          cl.m_d[p].dt = dt_cte;
       cl.m_d[p].c = c;
    }
+
+   if(tex.charCodeAt(0) == Ch_Colon)
+      tex = StringTable.Localize(String.Format("LITH%s", tex), false);
 
    cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
 

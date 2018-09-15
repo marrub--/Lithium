@@ -40,19 +40,22 @@ DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_scorenums.h
 
 ## Targets
-.PHONY: bin dec clean text
+.PHONY: bin clean dec fs text
 
-all: dec text bin
+all: dec text fs bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
-source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: wepc.rb source/Weapons.txt
-	@./wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
+source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: tools/wepc.rb source/Weapons.txt
+	@tools/wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
 
-dec: decompat.rb $(DECOMPAT_INPUTS)
-	@./decompat.rb $(DECOMPAT_INPUTS)
+dec: tools/decompat.rb $(DECOMPAT_INPUTS)
+	@tools/decompat.rb $(DECOMPAT_INPUTS)
 
-text: compilefs.rb
-	@cd filedata; ../compilefs.rb _Directory.txt
+text: tools/compilefs.rb
+	@cd filedata; ../tools/compilefs.rb _Directory.txt
+
+fs: tools/hashfs.rb
+	@tools/hashfs.rb
 
 clean:
 	@rm -f $(MAIN_OUTPUTS) $(LIB_OUTPUTS)
@@ -69,7 +72,7 @@ $(MAIN_BINARY): $(MAIN_OUTPUTS)
 ## .c -> .ir
 $(MAIN_IR)/%.ir: $(MAIN_SRC)/%.c $(MAIN_HEADERS)
 	@echo CC $<
-	@$(CC) $(MAIN_CFLAGS) -DFileHash=$(shell ./strh.rb $<) -c $< -o $@
+	@$(CC) $(MAIN_CFLAGS) -DFileHash=$(shell tools/strh.rb $<) -c $< -o $@
 
 $(IR)/libc.ir:
 	@echo MAKELIB $@

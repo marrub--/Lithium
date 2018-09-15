@@ -13,7 +13,7 @@ script ext("ACS")
 void Lith_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
-   DrawSpriteX(hit ? "lgfx/Weapon/BladeHit.png" : "lgfx/Weapon/Blade.png", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
+   DrawSpriteX(hit ? ":Weapon:BladeHit" : ":Weapon:Blade", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
 
    withplayer(LocalPlayer)
       if(p->z > p->floorz)
@@ -30,8 +30,8 @@ void Lith_Rend(bool hit, int set)
 
    if(!hit) num = set;
 
-   __str graphic = hit ? StrParam("lgfx/Weapon/RendHit%i.png", num)
-                       : StrParam("lgfx/Weapon/Rend%i.png", num);
+   __str graphic = hit ? StrParam(":Weapon:RendHit%i", num)
+                       : StrParam(":Weapon:Rend%i",    num);
 
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 2, 0.1);
@@ -197,7 +197,7 @@ void Lith_MagicSelect(int num)
 
       ACS_SetHudSize(64, 64);
       for(int i = 0; i < 4; i++) {
-         DrawSpriteAlpha(StrParam("lgfx/MagicSel/Slot%i_%i.png", num, i + 1),
+         DrawSpriteAlpha(StrParam(":MagicSel:Slot%i_%i", num, i + 1),
             hid_magicsel, 0.1, 0.1, TICSECOND*3, 0.5);
          ACS_Delay(3);
       }

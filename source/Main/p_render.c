@@ -168,17 +168,17 @@ void Lith_PlayerHUD(struct player *p)
       if(p->pclass == pcl_cybermage)
       {
          int time = (ACS_Timer() % 16) / 4;
-         DrawSpriteXX(StrParam("lgfx/HUD_C/ScopeOverlay%i.png", time + 1),
+         DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
             HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
 
          for(int i = 0; i < 200; i++)
-            DrawSpriteXX("lgfx/HUD/H_D41.png", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
+            DrawSpriteXX(":HUD:H_D41", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
                hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
       }
       else if(p->pclass == pcl_informant)
       {
          fixed a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
-         DrawSpriteX("lgfx/HUD_I/ScopeOverlay.png",
+         DrawSpriteX(":HUD_I:ScopeOverlay",
             HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1,
             TICSECOND, a);
       }
@@ -257,7 +257,7 @@ static void HUD_Waves(struct player *p)
 
    // Sine (health)
    pos = (10 + timer) % 160;
-   DrawSpriteFade(StrParam("lgfx/HUD/H_D1%i.png", frame),
+   DrawSpriteFade(StrParam(":HUD:H_D1%i", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
       25.1 + pos,
@@ -268,7 +268,7 @@ static void HUD_Waves(struct player *p)
       fixed a = ACS_Cos(pos / 32.0);
 
       pos = (7 + timer) % 160;
-      DrawSpriteFade(roundk(a, 2) != 0.0 ? "lgfx/HUD/H_D16.png" : "lgfx/HUD/H_D46.png",
+      DrawSpriteFade(roundk(a, 2) != 0.0 ? ":HUD:H_D16" : ":HUD:H_D46",
          hid_scope_squareS - pos,
          300.1 + (a >= 0) * 7.0,
          25.1 + pos,
@@ -277,7 +277,7 @@ static void HUD_Waves(struct player *p)
 
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade("lgfx/HUD/H_D14.png", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+   DrawSpriteFade(":HUD:H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
 
 // EOF
