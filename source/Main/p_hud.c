@@ -79,12 +79,12 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
 {
    #define Inc (horz ? (x -= 10) : (y += 10))
-   if(p->keys.rs) PrintSpriteA("H_KS1", x,2, y,1, a), Inc;
-   if(p->keys.ys) PrintSpriteA("H_KS2", x,2, y,1, a), Inc;
-   if(p->keys.bs) PrintSpriteA("H_KS3", x,2, y,1, a), Inc;
-   if(p->keys.rc) PrintSpriteA("H_KC1", x,2, y,1, a), Inc;
-   if(p->keys.yc) PrintSpriteA("H_KC2", x,2, y,1, a), Inc;
-   if(p->keys.bc) PrintSpriteA("H_KC3", x,2, y,1, a), Inc;
+   if(p->keys.rs) PrintSpriteA(":HUD:H_KS1", x,2, y,1, a), Inc;
+   if(p->keys.ys) PrintSpriteA(":HUD:H_KS2", x,2, y,1, a), Inc;
+   if(p->keys.bs) PrintSpriteA(":HUD:H_KS3", x,2, y,1, a), Inc;
+   if(p->keys.rc) PrintSpriteA(":HUD:H_KC1", x,2, y,1, a), Inc;
+   if(p->keys.yc) PrintSpriteA(":HUD:H_KC2", x,2, y,1, a), Inc;
+   if(p->keys.bc) PrintSpriteA(":HUD:H_KC3", x,2, y,1, a), Inc;
    #undef Inc
 }
 

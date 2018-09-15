@@ -53,13 +53,13 @@ void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
    fixed rocket = UData.charge / (fixed)CHARGE_MAX;
    int max = (hid_jetS - hid_jetE) * rocket;
 
-   DrawSpriteFade("H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);
+   DrawSpriteFade(":HUD:H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);
 
    HudMessageF("SMALLFNT", "Jet");
    HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 320.2, 160.1, 0.1, 0.5);
 
    for(int i = 0; i < max; i++)
-      DrawSpriteXX(UData.discharged ? "H_C1" : "H_C2",
+      DrawSpriteXX(UData.discharged ? ":HUD:H_C1" : ":HUD:H_C2",
          HUDMSG_FADEOUT | HUDMSG_ADDBLEND | HUDMSG_ALPHA,
          hid_jetS - i,
          320.2,
