@@ -440,6 +440,8 @@ override void WorldLoaded(WorldEvent evt)
       arg.clear();
       lns[i].split(arg, ",");
 
+      if(arg.size() < 3) {Console.printf("broke on %s", lns[i]); break;}
+
       CallACS("Lith_SetFontMetric", arg[0].toint(), arg[1].toint(), arg[2].toint());
    }
 }
