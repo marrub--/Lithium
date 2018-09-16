@@ -217,6 +217,7 @@ int LPData(int info, int permutation, bool target)
    withplayer(LocalPlayer)
       switch(info)
    {
+   case pdata_weapon:     return p->weapontype;
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
    case pdata_hassigil:   return p->sigil.acquired;

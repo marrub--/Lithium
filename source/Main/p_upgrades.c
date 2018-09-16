@@ -231,9 +231,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
          p->upgrmax++;
 
    upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
-
-   for(int i = 0; i < countof(p->upgrades); i++)
-      memset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
+   memset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
    for(int i = 0, j = 0; i < UpgrMax; i++)
       if(CheckPClass())

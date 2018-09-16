@@ -172,6 +172,13 @@ private void Lith_Crosshair()
    // unproject
    int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
 
+   // draw a tracer for targeting system
+   if(tracer && tracer.health > 0 && CallACS("LPData", pdata_weapon) == weapon_launcher)
+   {
+      int thx, thy; bool ok; [thx, thy, ok] = Lith_Unproject(tracer.pos + (0, 0, tracer.height / 2));
+      if(ok) Lith_URANUS.LL(self, xhx, xhy, thx, thy, "red");
+   }
+
    // draw the crosshair
    uint r = min(CVar.GetCVar('lith_xhair_r', player).getInt(), 255);
    uint g = min(CVar.GetCVar('lith_xhair_g', player).getInt(), 255);

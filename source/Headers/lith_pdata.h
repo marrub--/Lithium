@@ -3,6 +3,7 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 enum // Lith_PData
 {
+   pdata_weapon,
    pdata_upgrade,
    pdata_riflemode,
    pdata_hassigil,
