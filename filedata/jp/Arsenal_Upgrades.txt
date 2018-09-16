@@ -1,0 +1,3 @@
+== LITH_COST      | かかく
+== LITH_CATEGORY  | しゅり
+== LITH_SCOREMULT | スコア乗数

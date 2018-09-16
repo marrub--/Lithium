@@ -1,0 +1,10 @@
+++ LITH_TXT_ENDING_CREDITS    | Endings/End_Credits.txt
+++ LITH_TXT_ENDING_DEDICATION | Endings/End_Dedication.txt
+
+++ LITH_TXT_ENDING_TIMEOUT_1 | Endings/End_TimeOut1.txt
+++ LITH_TXT_ENDING_TIMEOUT_2 | Endings/End_TimeOut2.txt
+
+++ LITH_TXT_ENDING_NORMAL_MARINE    | Endings/End_Normal_Marine.txt
+++ LITH_TXT_ENDING_NORMAL_CYBERMAGE | Endings/End_Normal_CyberMage.txt
+
+## EOF

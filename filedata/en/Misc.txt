@@ -1,0 +1,131 @@
+## Misc ----------------------------------------------------------------------|
+== LITH_TXT_ArsenalStan | Arsenal
+== LITH_TXT_ArsenalJem  | Directives
+== LITH_TXT_ArsenalAri  | Gear
+== LITH_TXT_ArsenalMod  | $LITH_TXT_ArsenalStan
+
+== LITH_TIME_FMT_LONG | %0.2i:%0.2i:%0.2i %i-7-1649
+
+== SECRETMESSAGE | \cnA secret is revealed!
+
+== BGFLAT06 | ZZLITHBG
+== BGFLAT11 | ZZLITHBG
+== BGFLAT20 | ZZLITHBG
+== BGFLAT30 | ZZLITHBG
+== BGFLAT15 | ZZLITHBG
+== BGFLAT31 | ZZLITHBG
+
+== LITH_CHECK | Eng
+
+## Obituaries ----------------------------------------------------------------|
+== OB_DEFAULT |
+
+== LITH_OB_S_FatMac    | %o's shoulders fell off their mounts.
+== LITH_OB_S_Explosion | %o made %hself go boom.
+
+== LITH_OB_Falling_1 | %o took a long walk off a short floor.
+== LITH_OB_Falling_2 | The floor fell love with %o.
+== LITH_OB_Falling_3 | %o became paste with the power of gravity.
+== LITH_OB_Falling_4 | Goodbye, %o.
+== LITH_OB_Falling_5 | %o doesn't like heights.
+
+== LITH_OB_Crush_1 | %o likes small spaces too much.
+== LITH_OB_Crush_2 | %o had a crush on the ceiling.
+== LITH_OB_Crush_3 | The ceiling fell in love with %o.
+== LITH_OB_Crush_4 | Splat goes the %o.
+== LITH_OB_Crush_5 | %o was crushed.
+
+== LITH_OB_Exit_1 | %o didn't realize the futility of %p actions.
+== LITH_OB_Exit_2 | %o tried to get away.
+== LITH_OB_Exit_3 | There's no leaving for you, %o.
+== LITH_OB_Exit_4 | %o was ripped limb from limb by \cgme\c-.
+
+== LITH_OB_Drowning_1 | %o's lungs burst.
+== LITH_OB_Drowning_2 | %o's brain lacked the oxygen to go on.
+== LITH_OB_Drowning_3 | %o drowned.
+== LITH_OB_Drowning_4 | %o won't be heard from again.
+== LITH_OB_Drowning_5 | Better start looking for %o's body.
+
+== LITH_OB_Slime_1 | %o melted.
+== LITH_OB_Slime_2 | %o's boots don't appreciate %h anymore.
+== LITH_OB_Slime_3 | %o lost %p legs.
+== LITH_OB_Slime_4 | %o stood in something bad.
+== LITH_OB_Slime_5 | %o became goop.
+
+== LITH_OB_Fire_1 | %o fried to death.
+== LITH_OB_Fire_2 | %o is burning with passion. Er, fire. %r dead.
+== LITH_OB_Fire_3 | It'll be hard to tell if %o's corpse is %s.
+== LITH_OB_Fire_4 | %o went up in flames.
+== LITH_OB_Fire_5 | Smells like... %o.
+
+== LITH_OB_Suicide_1 | %o took the hard way out.
+== LITH_OB_Suicide_2 | %o won a Darwin award.
+== LITH_OB_Suicide_3 | %o took a permanent solution to a temporary problem.
+== LITH_OB_Suicide_4 | %o imploded.
+== LITH_OB_Suicide_5 | %o couldn't take it anymore.
+
+== LITH_OB_Default_1 | %o is ded
+== LITH_OB_Default_2 | %o was perforated by a chaingunner hiding in the sky.
+== LITH_OB_Default_3 | %o was removed from the board.
+== LITH_OB_Default_4 | %o dehumanized %hself.
+== LITH_OB_Default_5 | %o went poof.
+
+## Death Messages ------------------------------------------------------------|
+== LITH_DEATHMSG_01 | YOU ARE DEAD, DEAD, DEAD
+== LITH_DEATHMSG_02 | GAME OVER YEAAAAAAHHHHHHHHHHH
+== LITH_DEATHMSG_03 | MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.
+== LITH_DEATHMSG_04 | PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.
+== LITH_DEATHMSG_05 | YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.
+== LITH_DEATHMSG_06 | THE SKELETONS KNOW.
+== LITH_DEATHMSG_07 | SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.
+== LITH_DEATHMSG_08 | JESUS CHRIST AMAZING
+== LITH_DEATHMSG_09 | CONTRACT TERMINATED. REASON: DIED, LOL.
+== LITH_DEATHMSG_10 | PLS, EVEN I COULD HAVE SURVIVED THAT.
+== LITH_DEATHMSG_11 | HAHAHAHA!
+== LITH_DEATHMSG_12 | YOU SHOULDN'T HAVE DONE THAT.
+== LITH_DEATHMSG_13 | WOW! LOOK AT THOSE DEMON FEET.
+== LITH_DEATHMSG_14 | OUCH! THAT HAD TO HURT.
+== LITH_DEATHMSG_15 | LOOK AT ME! I'M FLAT!
+== LITH_DEATHMSG_16 | THANKS FOR PLAYING!
+== LITH_DEATHMSG_17 | YOU LAZY @&$#!
+== LITH_DEATHMSG_18 | HAVE YOU HAD ENOUGH?
+== LITH_DEATHMSG_19 | THE DEMONS GAVE YOU THE BOOT!
+== LITH_DEATHMSG_20 | AT LEAST YOU PLAY BETTER THAN KAISER!
+
+## Menus ---------------------------------------------------------------------|
+== MENU_NGAME  | * (New-Game)
+== MENU_OPTION | * (Options)
+== MENU_LOADG  | * (Load-Game)
+== MENU_SAVEG  | * (Save-Game)
+== MENU_UPDAT  | * (Update-Notes)
+== MENU_QUITG  | * (Quit-Game)
+
+== MENU_CHOOSECLASS  | Your Class Is:
+== MENU_WHICHEPISODE | Your Story Is:
+== MENU_CHOOSESKILL  | Your Skill Is:
+
+== DIFF_TOURIST | > I'm just a tourist.
+== DIFF_EASY    | > Throw me a bone.
+== DIFF_NORMAL  | > Hurt me plenty.
+== DIFF_HARD    | > Ultra-Violence!
+== DIFF_XHARD   | > Watch me die!
+== DIFF_NMARE   | > Crazed Nightmare!
+
+%% LITH_SKILL_TOURIST
+Are you certain?
+This one is just amusing.
+
+%% LITH_SKILL_EXTRAHARD
+Are you sure?
+This one is extra hard.
+
+%% LITH_SKILL_NIGHTMARE
+Are you sure?
+This one isn't even remotely fair.
+
+== DOSY     | (Press Y to quit.)
+== PRESSYN  | Press Y or N.
+== PRESSKEY | Press a key.
+
+== TXT_YES | [Yes]
+== TXT_NO  | [No]

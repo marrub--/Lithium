@@ -256,7 +256,7 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
    if(p->getCVarI("lith_player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->log("> You got the %S!",
+      p->log(StrParam("> %LS", "LITH_PICKUP_000"),
          Language("LITH_TXT_INFO_SHORT_%S", info->name));
    else
       p->log("> Acquired impossible object");

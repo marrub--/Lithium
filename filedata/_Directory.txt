@@ -1,27 +1,30 @@
 in directory ../pk7
 
+in language en -> en enu default
+in language jp -> jp
+
 -- Info Pages -----------------------------------------------------------------
-in file language.info.corporations.en.txt
+in file language.info.corporations.*.txt
    parse file: Info_Corporations.txt
 done
 
-in file language.info.enemies.en.txt
+in file language.info.enemies.*.txt
    parse file: Info_Enemies.txt
 done
 
-in file language.info.places.en.txt
+in file language.info.places.*.txt
    parse file: Info_Places.txt
 done
 
-in file language.info.yourself.en.txt
+in file language.info.yourself.*.txt
    parse file: Info_Yourself.txt
 done
 
-in file language.info.upgrades.en.txt
+in file language.info.upgrades.*.txt
    parse file: Info_Upgrades.txt
 done
 
-in file language.info.weapons.en.txt
+in file language.info.weapons.*.txt
    put data: sord           -> LITH_TXT_INFO_SHORT_Sword
    put data: Game Nanhai    -> LITH_TXT_INFO_SHORT_Gameboy
    put data: Spell Selector -> LITH_TXT_INFO_SHORT_CFist
@@ -34,21 +37,21 @@ in file language.info.weapons.en.txt
    comment: EOF
 done
 
-in file language.info.omake.en.txt
+in file language.info.omake.*.txt
    parse file: Info_Extra.txt
 done
 
 
 -- CBI Mail -------------------------------------------------------------------
-in file language.info.mail.en.txt
-   put file: Mail/Template.txt -> LITH_TXT_MAIL_TEMPLATE
+in file language.info.mail.*.txt
+   put file: Mail_Template.txt -> LITH_TXT_MAIL_TEMPLATE
 
    parse file: Mail.txt
 done
 
 
 -- CBI Pages ------------------------------------------------------------------
-in file language.arsenal.en.txt
+in file language.arsenal.*.txt
    parse file: Arsenal_Shop.txt
    parse file: Arsenal_Upgrades.txt
 
@@ -57,29 +60,20 @@ done
 
 
 -- Endings --------------------------------------------------------------------
-in file language.endings.en.txt
-   put file: End_Credits.txt    -> LITH_TXT_ENDING_CREDITS
-   put file: End_Dedication.txt -> LITH_TXT_ENDING_DEDICATION
-
-   put file: End_TimeOut1.txt -> LITH_TXT_ENDING_TIMEOUT_1
-   put file: End_TimeOut2.txt -> LITH_TXT_ENDING_TIMEOUT_2
-
-   put file: End_Normal_Marine.txt    -> LITH_TXT_ENDING_NORMAL_MARINE
-   put file: End_Normal_CyberMage.txt -> LITH_TXT_ENDING_NORMAL_CYBERMAGE
-
-   comment: EOF
+in file language.endings.*.txt
+   parse file: Endings.txt
 done
 
 
 -- Misc -----------------------------------------------------------------------
-in file language.log.en.txt
+in file language.log.*.txt
    parse file: Log.txt
    parse file: Log_Pickups.txt
 
    comment: EOF
 done
 
-in file language.misc.en.txt
+in file language.misc.*.txt
    parse file: Misc.txt
    parse file: Misc_QuitMessages.txt
    parse file: Misc_Changes.txt

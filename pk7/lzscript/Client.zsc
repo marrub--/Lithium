@@ -3,20 +3,19 @@ struct Lith_URANUS_PlayerData
    bool shiftDown;
 }
 
-// URANUS: Users Really Are Not UI Systems
-class Lith_URANUS : EventHandler
-{
-   transient ui Lith_URANUS_PlayerData m_pdata[MAXPLAYERS];
-
-   static clearscope Lith_URANUS Instance()
-      {return Lith_URANUS(Find("Lith_URANUS"));}
-}
-
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/UpdateMenu.zsc"
 #include "lzscript/Client/OptionsMenu.zsc"
 #include "lzscript/Client/SaveMenu.zsc"
 #include "lzscript/Client/LoadMenu.zsc"
+
+// URANUS: Users Really Are Not UI Systems
+class Lith_URANUS : EventHandler;
+
+transient ui Lith_URANUS_PlayerData m_pdata[MAXPLAYERS];
+
+static clearscope Lith_URANUS Instance()
+   {return Lith_URANUS(Find("Lith_URANUS"));}
 
 // EOF

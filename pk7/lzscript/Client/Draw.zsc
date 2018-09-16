@@ -7,11 +7,12 @@ struct Lith_URANUS_DrawData
    color     c;
    float     a;
 
-   int         cr;
-   Font        fnt;
-   BrokenLines txt;
-   array<int>  lnx;
-   int         lny;
+   int           cr;
+   Font          fnt;
+   array<string> txt;
+   array<int>    lnw;
+   array<int>    lnx;
+   int           lny;
 }
 
 struct Lith_URANUS_FadeMessage
@@ -23,18 +24,21 @@ struct Lith_URANUS_FadeMessage
 
 enum Lith_URANUS_DrawType
 {
+   dt_lin,
    dt_tex,
    dt_ate,
    dt_cte,
    dt_xte,
    dt_txt,
-   dt_atx,
+   dt_utx,
    dt_cls,
    dt_clc,
    dt_siz,
 }
 
 extend class Lith_URANUS;
+
+const FONT_SPACE = 4;
 
 /*
    The URANUS drawing system is essentially an instruction set with a
@@ -50,6 +54,17 @@ private transient play Lith_URANUS_FadeMessage[32] m_fmsg;
 private transient play vector2 m_vsc;
 private transient play int m_dww;
 private transient play bool m_nodraw;
+
+static float, float GetScSize(float vx, float vy)
+{
+   float sw = Screen.GetWidth();
+   float sh = Screen.GetHeight();
+
+   float hmul = sh <= sw ? sh / vy : sw / vx;
+   float wadd = (sw - vx * hmul) / 2.;
+
+   return hmul, wadd;
+}
 
 static void LZ(Actor mo, int w, int h)
 {
@@ -82,6 +97,25 @@ static bool LX(Actor mo, int num)
 {
    if(mo != players[consoleplayer].camera) return false;
    return Instance().m_fmsg[num].fade != 0;
+}
+
+static void LL(Actor mo, int x, int y, int z, int w, string c = "")
+{
+   if(mo != players[consoleplayer].camera) return;
+
+   let cl = Instance(); if(cl.m_nodraw) return;
+   let  p = cl.m_p;
+
+   cl.m_d[p].dt = dt_lin;
+
+   float hmul, wadd; [hmul, wadd] = GetScSize(cl.m_vsc.x, cl.m_vsc.y);
+
+   cl.m_d[p].x = x * hmul + wadd; cl.m_d[p].y = y * hmul;
+   cl.m_d[p].z = z * hmul + wadd; cl.m_d[p].w = w * hmul;
+
+   cl.m_d[p].c = c;
+
+   cl.m_p++;
 }
 
 static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
@@ -147,25 +181,99 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
 
    if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
-   if(a == -1)
-      cl.m_d[p].dt = dt_txt;
+   uint lns, lnx = 0;
+
+   if(StringTable.Localize("LITH_CHECK", false) != "Eng")
+   {
+      cl.m_d[p].dt = dt_utx;
+
+      cl.m_d[p].lny = 8;
+
+      array<string> brl;
+      txt.split(brl, "\n");
+      let lnum = brl.size();
+
+      cl.m_d[p].txt.clear();
+      cl.m_d[p].lnw.clear();
+
+      for(uint i = 0; i < lnum; i++)
+      {
+         uint w = 0;
+         uint pos, sta, len;
+
+         for(pos = 0, sta = 0, len = brl[i].length(); pos < len;)
+         {
+            string utf = CharAtUtf8(brl[i], pos);
+            pos += utf.length();
+
+            if(utf.charCodeAt(0) == Ch_Color) continue;
+
+            int ucp = Utf8ToUtf32(utf, 0);
+
+            uint ww;
+
+            if(ucp == Ch_Space)
+               ww = FONT_SPACE;
+            else
+            {
+               let metr = CallACS("Lith_GetFontMetric", ucp);
+               let xadv = CallACS("Lith_Metr_Xadv", metr);
+               ww = xadv;
+            }
+
+            if(w + ww > (cl.m_dww ? cl.m_dww : 0x7fff))
+            {
+               if(ucp != Ch_Space) pos -= utf.length();
+
+               cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
+               cl.m_d[p].lnw.push(w);
+
+               if(lnx < w) lnx = w;
+
+               sta = pos;
+               w = 0;
+            }
+            else
+               w += ww;
+         }
+
+         if(w > 0)
+         {
+            cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
+            cl.m_d[p].lnw.push(w);
+
+            if(lnx < w) lnx = w;
+         }
+      }
+
+      lns = cl.m_d[p].txt.size();
+   }
    else
    {
-      cl.m_d[p].dt = dt_atx;
-      cl.m_d[p].a = a;
+      cl.m_d[p].dt = dt_txt;
+
+      cl.m_d[p].fnt = Font.GetFont(fnt);
+      cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
+      let       brl = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7fff);
+
+      lns = brl.count();
+
+      cl.m_d[p].txt.resize(lns);
+      cl.m_d[p].lnw.resize(lns);
+
+      for(uint i = 0, w; i < lns; i++)
+      {
+         cl.m_d[p].txt[i] = brl.stringAt(i);
+         cl.m_d[p].lnw[i] = brl.stringWidth(i);
+
+         if(lnx < (w = cl.m_d[p].lnw[i])) lnx = w;
+      }
    }
 
+   if(a == -1) cl.m_d[p].a = 1;
+   else        cl.m_d[p].a = a;
+
    cl.m_d[p].cr = cr;
-
-   cl.m_d[p].fnt = Font.GetFont(fnt);
-   cl.m_d[p].txt = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7FFF);
-   cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
-
-   uint lns = cl.m_d[p].txt.count();
-   int  lnx = 0;
-
-   for(int i = 0, w; i < lns; i++)
-      if(lnx < (w = cl.m_d[p].txt.stringWidth(i))) lnx = w;
 
    switch(xa)
    {
@@ -182,17 +290,18 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
    switch(ya)
    {
    default:
-   case 1: cl.m_d[p].y = y;                    break;
+   case 1: cl.m_d[p].y = y;                           break;
    case 0: cl.m_d[p].y = y - cl.m_d[p].lny * lns / 2; break;
    case 2: cl.m_d[p].y = y - cl.m_d[p].lny * lns;     break;
    }
 
    cl.m_d[p].lnx.resize(lns);
+
    for(uint i = 0; i < lns; i++)
    {
-           if(xa == 3) cl.m_d[p].lnx[i] = cl.m_d[p].txt.stringWidth(i);
+           if(xa == 3) cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i];
       else if(xa <  4) cl.m_d[p].lnx[i] = 0;
-      else             cl.m_d[p].lnx[i] = cl.m_d[p].txt.stringWidth(i) / 2;
+      else             cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i] / 2;
    }
 
    cl.m_p++;
@@ -212,11 +321,7 @@ static void LC(Actor mo, int x, int y, int w, int h, int ww)
 
       cl.m_d[p].dt = dt_cls;
 
-      float sw = Screen.GetWidth();
-      float sh = Screen.GetHeight();
-
-      float hmul = sh <= sw ? sh / cl.m_vsc.y : sw / cl.m_vsc.x;
-      float wadd = (sw - cl.m_vsc.x * hmul) / 2.;
+      float hmul, wadd; [hmul, wadd] = GetScSize(cl.m_vsc.x, cl.m_vsc.y);
 
       cl.m_d[p].x = x * hmul + wadd; cl.m_d[p].y = y * hmul;
       cl.m_d[p].z = w * hmul;        cl.m_d[p].w = h * hmul;
@@ -248,6 +353,97 @@ static void LE()
    }
 }
 
+// CharAtUtf8 and Utf8ToUtf32 are
+// Copyright (c) 2018 Benjamin Moir. All rights reserved.
+// This work is licensed under the terms of the MIT license.  
+// To obtain a copy, visit <https://opensource.org/licenses/MIT>.
+static clearscope string CharAtUtf8(string str, uint pos)
+{
+   int b0 = str.charCodeAt(pos) & 0xff, b1, b2, b3;
+
+   // color code
+   if(b0 == Ch_Color)
+   {
+      string s;
+
+      if(str.charCodeAt(pos + 1) == Ch_BrackO)
+      {
+         uint sta = pos;
+         while(str.charCodeAt(pos++) != Ch_BrackC);
+         return str.mid(sta, pos - sta);
+      }
+      else
+         return str.mid(pos, 2);
+   }
+
+   int len;
+        if(b0 < 0x80) len = 1;
+   else if(b0 < 0xe0) len = 2;
+   else if(b0 < 0xf0) len = 3;
+   else               len = 4;
+
+   switch(len) {
+   case 4: b3 = str.charCodeAt(pos + 3) & 0xff;
+   case 3: b2 = str.charCodeAt(pos + 2) & 0xff;
+   case 2: b1 = str.charCodeAt(pos + 1) & 0xff;
+   case 1: break;
+   }
+
+   switch(len) {
+   default:
+   case 1: return String.Format("%c", b0);
+   case 2: return String.Format("%c%c", b0, b1);
+   case 3: return String.Format("%c%c%c", b0, b1, b2);
+   case 4: return String.Format("%c%c%c%c", b0, b1, b2, b3);
+   }
+}
+
+static clearscope int Utf8ToUtf32(string ch, int sta = 0)
+{
+   int len, b0 = ch.CharCodeAt(sta) & 0xff, b1, b2, b3;
+
+        if(b0 < 0x80) len = 1;
+   else if(b0 < 0xe0) len = 2;
+   else if(b0 < 0xf0) len = 3;
+   else               len = 4;
+
+   switch(len) {
+   case 4: b3 = ch.charCodeAt(sta + 3) & 0xff;
+   case 3: b2 = ch.charCodeAt(sta + 2) & 0xff;
+   case 2: b1 = ch.charCodeAt(sta + 1) & 0xff;
+   case 1: break;
+   }
+
+   switch(len) {
+   default:
+   case 1: return  b0;
+   case 2: return (b0 - 0xc0) * 0x40    | (b1 - 0x80);
+   case 3: return (b0 - 0xe0) * 0x1000  | (b1 - 0x80) * 0x40   | (b2 - 0x80);
+   case 4: return (b0 - 0xf0) * 0x40000 | (b1 - 0x80) * 0x1000 | (b2 - 0x80) * 0x40 | (b3 - 0x80);
+   }
+}
+
+override void WorldLoaded(WorldEvent evt)
+{
+   CallACS("Lith_InitFontMetrics");
+
+   let lmp = Lith_HERMES.ReadLump(Lith_HERMES.FindLump("lfiles/Font_Jp12.txt"));
+
+   array<string> lns, arg;
+
+   lmp.split(lns, "\n");
+
+   for(uint i = 0, l = lns.size(); i < l; i++)
+   {
+      if(lns[i] == "") continue;
+
+      arg.clear();
+      lns[i].split(arg, ",");
+
+      CallACS("Lith_SetFontMetric", arg[0].toint(), arg[1].toint(), arg[2].toint());
+   }
+}
+
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320;
@@ -255,47 +451,110 @@ override void RenderOverlay(RenderEvent evt)
 
    if(!automapactive) for(uint i = 0; i < m_p; i++)
    {
-      switch(m_d[i].dt)
-      {
-      case dt_tex: {
+      switch(m_d[i].dt) {
+      case dt_lin:
+         Screen.DrawLine(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w, m_d[i].c);
+         break;
+      case dt_tex:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch);
          break;
-      }
-      case dt_ate: {
+      case dt_ate:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
             DTA_Alpha, m_d[i].a);
          break;
-      }
-      case dt_cte: {
+      case dt_cte:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
             DTA_FillColor, m_d[i].c);
          break;
-      }
-      case dt_xte: {
+      case dt_xte:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
             DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
             DTA_Alpha, m_d[i].a,
             DTA_FillColor, m_d[i].c);
          break;
-      }
-      case dt_txt: {
+      case dt_txt:
          for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
             Screen.DrawText(m_d[i].fnt, m_d[i].cr,
-               m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt.stringAt(ln),
-               DTA_VirtualWidth, scw, DTA_VirtualHeight, sch);
-         break;
-      }
-      case dt_atx: {
-         for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
-            Screen.DrawText(m_d[i].fnt, m_d[i].cr,
-               m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt.stringAt(ln),
+               m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt[ln],
                DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
                DTA_Alpha, m_d[i].a);
          break;
-      }
+      case dt_utx:
+         for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
+         {
+            int x = m_d[i].x - m_d[i].lnx[ln];
+            int y = m_d[i].y + m_d[i].lny * (ln + 1);
+
+            name colo = 'j';
+
+            for(uint pos = 0, len = m_d[i].txt[ln].length(); pos < len;)
+            {
+               string utf = CharAtUtf8(m_d[i].txt[ln], pos);
+               pos += utf.length();
+
+               if(utf.charCodeAt(0) == Ch_Color) {colo = utf.mid(1, 256); continue;}
+
+               int ucp = Utf8ToUtf32(utf, 0);
+               if(ucp == Ch_Space) {x += FONT_SPACE; continue;}
+
+               string img = String.Format("lgfx/Font/Jp12/%i.png", ucp);
+               let    gfx = TexMan.CheckForTexture(img, TexMan.Type_Any);
+
+               if(gfx.isValid())
+               {
+                  uint cr;
+
+                  switch(colo) {
+                  default:  Console.printf("invalid color %s", colo);
+                  case 'j': case '-': case 'l': cr = 0xffffff; break;
+                  case 'a':                     cr = 0xeaadad; break;
+                  case 'b':                     cr = 0xd2b48c; break;
+                  case 'c':                     cr = 0xc0c0c0; break;
+                  case 'd':                     cr = 0x33ff33; break;
+                  case 'e':                     cr = 0xcc9966; break;
+                  case 'f':                     cr = 0xffcc00; break;
+                  case 'g':                     cr = 0xff4e60; break;
+                  case 'h':                     cr = 0x6e6eff; break;
+                  case 'i':                     cr = 0xffaa00; break;
+                  case 'k':                     cr = 0xeeee32; break;
+                  case 'm':                     cr = 0x2d2d2d; break;
+                  case 'n':                     cr = 0x33eeff; break;
+                  case 'o':                     cr = 0xfecc99; break;
+                  case 'p':                     cr = 0xd1d8a7; break;
+                  case 'q':                     cr = 0x129a12; break;
+                  case 'r':                     cr = 0xb22323; break;
+                  case 's':                     cr = 0x6c5d56; break;
+                  case 't':                     cr = 0xa674d7; break;
+                  case 'u':                     cr = 0x414141; break;
+                  case 'v':                     cr = 0x00fffe; break;
+                  case 'w':                     cr = 0xafccd3; break;
+                  case 'x':                     cr = 0xfb7329; break;
+                  case 'y':                     cr = 0x6c729f; break;
+                  case 'z':                     cr = 0x8cd0dc; break;
+                  case '[Lith_Purple]':         cr = 0x8c3bf8; break;
+                  case '[Lith_Grey]':           cr = 0xbfbfbf; break;
+                  case '[Lith_Green]':          cr = 0x00ff00; break;
+                  }
+
+                  let metr = CallACS("Lith_GetFontMetric", ucp);
+                  let xadv = CallACS("Lith_Metr_Xadv", metr);
+                  let yofs = CallACS("Lith_Metr_Yofs", metr);
+
+                  int w, h; [w, h] = TexMan.GetSize(gfx);
+
+                  Screen.DrawTexture(gfx, false, x, y-(h+yofs),
+                     DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+                     DTA_Alpha, m_d[i].a, DTA_AlphaChannel, true,
+                     DTA_FillColor, cr);
+
+                  x += xadv;
+               }
+            }
+         }
+         break;
       case dt_cls: Screen.SetClipRect(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w); break;
       case dt_clc: Screen.ClearClipRect(); break;
       case dt_siz: scw = m_d[i].x; sch = m_d[i].y; break;

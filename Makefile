@@ -40,10 +40,16 @@ DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
                 $(MAIN_INC)/lith_scorenums.h
 
 ## Targets
-.PHONY: bin clean dec fs text
+.PHONY: bin clean dec fs text font
 
 all: dec text fs bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
+
+tools/bin:
+	@mkdir tools/bin
+
+font:
+	@tools/ttfuck/ttfuck tools/BugMaruPGothic.ttc 8 "$$(find filedata -type f -name '*.txt' -exec awk 'BEGIN{FS=""}{for(i=1;i<NF;i++){print $$(i);}}' {} ';' | sort | uniq | awk '{print}' ORS='')" pk7/lfiles/Font_Jp12.txt pk7/lgfx/Font/Jp12
 
 source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: tools/wepc.rb source/Weapons.txt
 	@tools/wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c

@@ -63,17 +63,13 @@ enum
    hid_scope_squareS = hid_scope_squareE + 200,
    hid_scope_triE,
    hid_scope_triS = hid_scope_triE + 200,
-   hid_scope_stringstackE,
-   hid_scope_stringstackS = hid_scope_stringstackE + 200,
    hid_scope_overlayE,
    hid_scope_overlayS = hid_scope_overlayE + 5,
    hid_scope_lineE,
    hid_scope_lineS = hid_scope_lineE + 200,
 
    hid_scope_clearS = hid_scope_sineE,
-   hid_scope_clearE = hid_scope_stringstackS,
-
-   hid_debug = hid_base + 45000,
+   hid_scope_clearE = hid_scope_triS,
 };
 
 #endif

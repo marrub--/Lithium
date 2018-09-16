@@ -23,7 +23,7 @@ void Lith_PlayerDebugStats(struct player *p)
 {
    if(!(world.dbgLevel & log_devh)) return;
 
-   ACS_SetHudSize(450, 350);
+   SetSize(450, 350);
 
    ACS_SetFont("LTRMFONT");
    ACS_BeginPrint();
@@ -31,8 +31,7 @@ void Lith_PlayerDebugStats(struct player *p)
       ACS_PrintString(dbgstat[i]);
    for(int i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
-   ACS_MoreHudMessage();
-   HudMessagePlain(hid_debug, 10.1, 20.1, TICSECOND);
+   PrintText("confont", CR_WHITE, 10,1, 20,1);
 }
 
 //
@@ -231,15 +230,14 @@ static void HUD_StringStack(struct player *p)
          Dalloc(p->hudstrlist.next->unlink());
    }
 
-   ACS_SetHudSize(320, 200);
-   ACS_SetFont("confont");
+   SetSize(320, 200);
 
    size_t i = 0;
    for(list_t *rover = p->hudstrlist.prev; rover != &p->hudstrlist; rover = rover->prev, i++)
    {
       hudstr_t *hudstr = rover->object;
-      HudMessage("%S", hudstr->str);
-      HudMessageParams(HUDMSG_ALPHA | HUDMSG_ADDBLEND, hid_scope_stringstackS - i, CR_RED, 300.2, 20.1 + (i * 9), 0.0, 0.5);
+      PrintTextStr(hudstr->str);
+      PrintTextA("confont", CR_RED, 300,2, 20+i*9,1, 0.5);
    }
 }
 

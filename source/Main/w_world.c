@@ -144,7 +144,7 @@ __str Lith_CanonTime(int type)
    switch(type)
    {
    case CANONTIME_FULL:
-      return StrParam("%0.2i:%0.2i:%0.2i %i-7-1649",
+      return StrParam(Language("LITH_TIME_FMT_LONG"),
          hours % 24, minutes % 60, seconds % 60, days);
    case CANONTIME_SHORT:
       return StrParam("%0.2i:%0.2i %i-7-49",

@@ -148,6 +148,8 @@ enum Lith_ASCII
     Ch_BraceC,      // }
     Ch_Tilde,       // ~
     Ch_DEL,         // DEL
+
+    Ch_Color = Ch_FS,
 }
 
 const FIX = 32767.0;
