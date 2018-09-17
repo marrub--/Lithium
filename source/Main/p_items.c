@@ -322,26 +322,28 @@ void Lith_PlayerUpdateInventory(struct player *p)
 void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 {
    static int const x[] = {
-      150+8*-14,
-      150+8*1,
-      150+8*8,
-      150+8*0,
-      150+8*9,
-      150+8*3,
-      150+8*2,
-      150+8*6,
+      155+8*-14, // Backpack
+      155+8*  1, // L Upper Arm
+      155+8*  8, // R Upper Arm
+      155+8*  0, // L Lower Arm
+      155+8*  9, // R Lower Arm
+      155+8*  3, // Belt
+      155+8*  1, // L Leg
+      155+8*  7, // R Leg
    };
 
    static int const y[] = {
-      80+8*-1,
-      80+8*1,
-      80+8*1,
-      80+8*5,
-      80+8*5,
-      80+8*7,
-      80+8*9,
-      80+8*9,
+      80+8*-1, // Backpack
+      80+8*-2, // L Upper Arm
+      80+8*-2, // R Upper Arm
+      80+8* 2, // L Lower Arm
+      80+8* 2, // R Lower Arm
+      80+8* 5, // Belt
+      80+8* 9, // L Leg
+      80+8* 9, // R Leg
    };
+
+   PrintSpriteA(":UI:Body", 151,1, 40,1, 0.6);
 
    for(int i = 0; i < countof(p->inv); i++)
       Lith_Container(g, &p->inv[i], x[i], y[i]);
@@ -371,14 +373,14 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
    for(int i = 0; i < aslot_max; i++)
    {
       static int const x[] = {
-         190,
-         190,
+         195,
+         195,
          0, 0
       };
 
       static int const y[] = {
-         115,
-         84,
+         135,
+         90,
          0, 0
       };
 
@@ -392,7 +394,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
    }
 
    PrintTextStr(HERMES_S("GetArmorDT"));
-   PrintText("CBIFONT", CR_WHITE, 20,1, 40,1);
+   PrintText("CBIFONT", CR_WHITE, 240,2, 40,1);
 }
 
 //

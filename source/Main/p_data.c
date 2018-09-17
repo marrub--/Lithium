@@ -40,7 +40,7 @@ static void SetupAttributes(struct player *p)
 static void SetupInventory(struct player *p)
 {
    static container_t const baseinv[] = {
-      {10, 14},
+      {11, 14},
       {1, 3}, {1, 3}, {1, 3}, {1, 3},
       {4, 1},
       {2, 4}, {2, 4},
