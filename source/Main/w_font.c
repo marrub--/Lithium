@@ -86,6 +86,7 @@ script type("unloading")
 void Lith_CloseFontMetrics(void)
 {
    metricmap_t_dtor(&metrics);
+   mttab_p = 0;
 }
 
 // EOF
