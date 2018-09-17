@@ -54,6 +54,7 @@ private transient play Lith_URANUS_FadeMessage[32] m_fmsg;
 private transient play vector2 m_vsc;
 private transient play int m_dww;
 private transient play bool m_nodraw;
+private transient play bool m_forcedraw;
 
 static float, float GetScSize(float vx, float vy)
 {
@@ -66,12 +67,17 @@ static float, float GetScSize(float vx, float vy)
    return hmul, wadd;
 }
 
+static void ForceDraw(bool on)
+{
+   Instance().m_forcedraw = on;
+}
+
 static void LZ(Actor mo, int w, int h)
 {
-   if(mo != players[consoleplayer].camera) return;
-
    let cl = Instance();
-   let  p = cl.m_p;
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+
+   let p = cl.m_p;
 
    cl.m_d[p].dt = dt_siz;
 
@@ -85,9 +91,9 @@ static void LZ(Actor mo, int w, int h)
 
 static void LF(Actor mo, int num, int time, double fade)
 {
-   if(mo != players[consoleplayer].camera) return;
-
    let cl = Instance();
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+
    cl.m_fmsg[num].time = time;
    cl.m_fmsg[num].fsub = fade;
    cl.m_fmsg[num].fade = 1;
@@ -95,16 +101,18 @@ static void LF(Actor mo, int num, int time, double fade)
 
 static bool LX(Actor mo, int num)
 {
-   if(mo != players[consoleplayer].camera) return false;
-   return Instance().m_fmsg[num].fade != 0;
+   let cl = Instance();
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return false;
+   return cl.m_fmsg[num].fade != 0;
 }
 
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 {
-   if(mo != players[consoleplayer].camera) return;
+   let cl = Instance();
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
-   let cl = Instance(); if(cl.m_nodraw) return;
-   let  p = cl.m_p;
+   if(cl.m_nodraw) return;
+   let p = cl.m_p;
 
    cl.m_d[p].dt = dt_lin;
 
@@ -120,10 +128,11 @@ static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 
 static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
 {
-   if(mo != players[consoleplayer].camera || a ~== 0) return;
+   let cl = Instance();
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
-   let cl = Instance(); if(cl.m_nodraw) return;
-   let  p = cl.m_p;
+   if(a ~== 0 || cl.m_nodraw) return;
+   let p = cl.m_p;
 
    if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
@@ -174,10 +183,11 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
 
 static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
 {
-   if(mo != players[consoleplayer].camera || a ~== 0) return;
+   let cl = Instance();
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
-   let cl = Instance(); if(cl.m_nodraw) return;
-   let  p = cl.m_p;
+   if(a ~== 0 || cl.m_nodraw) return;
+   let p = cl.m_p;
 
    if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
 
@@ -237,13 +247,10 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
                w += ww;
          }
 
-         if(w > 0)
-         {
-            cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
-            cl.m_d[p].lnw.push(w);
+         cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
+         cl.m_d[p].lnw.push(w);
 
-            if(lnx < w) lnx = w;
-         }
+         if(lnx < w) lnx = w;
       }
 
       lns = cl.m_d[p].txt.size();
@@ -309,10 +316,10 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
 
 static void LC(Actor mo, int x, int y, int w, int h, int ww)
 {
-   if(mo != players[consoleplayer].camera) return;
-
    let cl = Instance();
-   let  p = cl.m_p;
+   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+
+   let p = cl.m_p;
 
    if(x || y || w || h)
    {
@@ -485,10 +492,10 @@ override void RenderOverlay(RenderEvent evt)
                DTA_Alpha, m_d[i].a);
          break;
       case dt_utx:
-         for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
+         for(uint ln = 0, lns = m_d[i].lnx.size(), y = m_d[i].y + m_d[i].lny; ln < lns; ln++)
          {
             int x = m_d[i].x - m_d[i].lnx[ln];
-            int y = m_d[i].y + m_d[i].lny * (ln + 1);
+            int xo = x;
 
             name colo = 'j';
 
@@ -552,9 +559,20 @@ override void RenderOverlay(RenderEvent evt)
                      DTA_Alpha, m_d[i].a, DTA_AlphaChannel, true,
                      DTA_FillColor, cr);
 
-                  x += xadv;
+                  if(x + xadv > scw)
+                  {
+                     y += m_d[i].lny;
+                     x = xo;
+
+                     while((utf = CharAtUtf8(m_d[i].txt[ln], pos)) == " ")
+                        pos += utf.length();
+                  }
+                  else
+                     x += xadv;
                }
             }
+
+            y += m_d[i].lny;
          }
          break;
       case dt_cls: Screen.SetClipRect(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w); break;

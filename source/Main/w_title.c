@@ -1,45 +1,32 @@
 // Copyright © 2017 Graham Sanderson, all rights reserved.
 #include "lith_common.h"
 
-// Types ---------------------------------------------------------------------|
-
-enum
-{
-   hid_t_begin = 10,
-   hid_t_blinker,
-   hid_t_opener,
-};
-
 // Static Functions ----------------------------------------------------------|
 
 //
 // Blinker
 //
-script
-void Blinker(void)
+static void Blinker(void)
 {
    static int const time = 20;
+   static fixed a;
+   static int t;
 
-   fixed a = 0;
-
-   for(int t = 0;; t++)
+   if(t < time)
    {
-      if(t < time)
-      {
-         HudMessage("\Cd[Press any key to begin]");
-         HudMessageAlpha(hid_t_blinker, 0.5, 0.8, TS, a);
-         a += 0.006;
-      }
-      else if(t >= time*2)
-      {
-         t = 0;
-         a += 0.004;
-      }
-
-      if(a > 1) a = 1;
-
-      ACS_Delay(1);
+      PrintTextStr("\Cd[Press any key to begin]");
+      PrintTextA("cbifont", 0, 160,0, 220,0, a);
+      a += 0.006;
    }
+   else if(t >= time*2)
+   {
+      t = 0;
+      a += 0.004;
+   }
+
+   if(a > 1) a = 1;
+
+   t++;
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -50,29 +37,61 @@ void Blinker(void)
 script
 void Lith_Title(void)
 {
+   URANUS("ForceDraw", true);
+
    ACS_Delay(35*5);
 
-   Blinker();
-
-   ACS_SetHudSize(320, 240);
+   SetSize(320, 240);
 
    __str txt = Language("LITH_TXT_OPENER");
    int   len = ACS_StrLen(txt);
    int   pos = 0;
 
-   int t = 0;
+   for(int t = 0;;)
+   {
+      PrintTextFmt("\Cd%.*S", pos, txt);
+      PrintText("cbifont", 0, 7,1, 6,1);
+
+      if(t == 0)
+      {
+         if(++pos >= len) break;
+
+         if(txt[pos] == '\n')
+            t = 20;
+         else
+            t = 1;
+      }
+      else
+         t--;
+
+      Blinker();
+      ACS_Delay(1);
+      URANUS("LE");
+   }
+
+   for(int i = 0; i < 35 * 7; i++)
+   {
+      PrintTextFmt("\Cd%S", txt);
+      PrintText("cbifont", 0, 7,1, 6,1);
+      Blinker();
+      ACS_Delay(1);
+      URANUS("LE");
+   }
+
+   for(fixed a = 1; a > 0; a -= 0.01)
+   {
+      PrintTextFmt("\Cd%S", txt);
+      PrintTextA("cbifont", 0, 7,1, 6,1, a);
+      Blinker();
+      ACS_Delay(1);
+      URANUS("LE");
+   }
 
    for(;;)
    {
-      if(pos < len) pos++;
-
-      HudMessage("%.*S", pos, txt);
-      HudMessageParams(HUDMSG_FADEOUT, hid_t_opener, CR_GREEN, 7.1, 6.1, 7, 7.0);
-
-      if(pos == len)
-         return;
-
-      ACS_Delay(txt[pos] == '\n' ? 20 : 1);
+      Blinker();
+      ACS_Delay(1);
+      URANUS("LE");
    }
 }
 
