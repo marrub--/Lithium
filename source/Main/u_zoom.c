@@ -81,7 +81,7 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
       for(int i = 0; i < 8; i++)
       {
          fixed64 xang = p->yawf + pi + (pi4 * i);
-         fixed xs = sin(xang), xc = cos(xang);
+         fixed xs = sinf(xang), xc = cosf(xang);
          int x = atan2f(xs, xc) * 320;
 
          PrintTextStr(points[i]);

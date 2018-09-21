@@ -85,7 +85,7 @@ void Lith_PlayerDamageBob(struct player *p)
       distance += (p->oldhealth - p->health) / (fixed64)p->maxhealth;
       distance *= 0.2lk;
 
-      fixed64 ys = sin(angle), yc = cos(angle);
+      fixed64 ys = sinf(angle), yc = cosf(angle);
       p->bobyaw   = ys * distance;
       p->bobpitch = yc * distance;
    }

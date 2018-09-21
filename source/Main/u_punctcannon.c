@@ -25,8 +25,8 @@ void Lith_PunctuatorFire(void)
 
          fixed64 yaw = atan2f(p->y - y, p->x - x);
 
-         fixed64 ps = sin(p->pitchf), cz = cos(p->pitchf);
-         fixed64 ys = sin(yaw      ), yc = cos(yaw      );
+         fixed64 ps = sinf(p->pitchf), cz = cosf(p->pitchf);
+         fixed64 ys = sinf(yaw      ), yc = cosf(yaw      );
 
          fixed64 cx = ps * yc;
          fixed64 cy = ps * ys;

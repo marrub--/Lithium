@@ -59,9 +59,6 @@ actor Lith_Blade : Lith_CWeapon
       loop
    
    Fire:
-      TNT1 A 0 A_JumpIfInventory("Lith_MagicAmmo", 5, 1)
-      goto Ready
-      TNT1 A 0 A_TakeInventory("Lith_MagicAmmo", 5)
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_Blade", false)
       TNT1 A 0 A_PlaySound("weapons/blade/slash", CHAN_7)
       TNT1 A 0 A_JumpIfInventory("PowerStrength", 0, 2)
