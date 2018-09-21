@@ -5,8 +5,6 @@
 #include "lith_monster.h"
 #include "lith_version.h"
 
-#include <math.h>
-
 #define InSecret \
    (world.game == Game_Doom2 && (world.cluster == 9 || world.cluster == 10))
 
@@ -192,18 +190,6 @@ script ext("ACS")
 void Lith_EmitEXP(int amount)
 {
    Lith_GiveAllEXP(amount);
-}
-
-//
-// Lith_MakeSerious
-//
-script ext("ACS")
-void Lith_MakeSerious()
-{
-   ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_None);
-   ACS_SetActorPropertyString(0, APROP_ActiveSound, "silence");
-   ACS_SetActorPropertyString(0, APROP_DeathSound,  "silence");
-   ACS_SetActorPropertyString(0, APROP_PainSound,   "silence");
 }
 
 //
@@ -504,7 +490,7 @@ static void MInit(void)
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
 
    // Init global score multiplier per-map.
-   world.scoremul = round(ACS_GetCVarFixed("lith_sv_scoremul") * 10) / 10;
+   world.scoremul = roundlk(ACS_GetCVarFixed("lith_sv_scoremul") * 10, 10) / 10;
 
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)

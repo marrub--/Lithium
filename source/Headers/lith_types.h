@@ -40,8 +40,8 @@ struct polar {
    fixed dst;
 };
 
-struct vec2f {
-   float x, y;
+struct vec2lk {
+   fixed64 x, y;
 };
 
 struct vec2i {

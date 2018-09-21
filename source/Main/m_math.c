@@ -1,6 +1,5 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_common.h"
-#include <math.h>
 
 #define BezierImpl(type, ret, func) \
    type xa = func(x1, x2, t); \
@@ -35,9 +34,9 @@ static void InitCRC64()
 }
 
 //
-// Lith_CRC64
+// crc64
 //
-u64 Lith_CRC64(void const *data, size_t len, u64 result)
+u64 crc64(void const *data, size_t len, u64 result)
 {
    byte const *ptr = data;
 
@@ -52,9 +51,9 @@ u64 Lith_CRC64(void const *data, size_t len, u64 result)
 }
 
 //
-// Lith_CRC64_str
+// crc64_str
 //
-u64 Lith_CRC64_str(void  __str_ars const *data, size_t len, u64 result)
+u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
 {
    byte __str_ars const *ptr = data;
 
@@ -69,22 +68,23 @@ u64 Lith_CRC64_str(void  __str_ars const *data, size_t len, u64 result)
 }
 
 //
-// RandomFloat
+// powlk
 //
-float RandomFloat(float max, float min)
+stkcall
+fixed64 powlk(fixed64 x, int y)
 {
-   if(max < min)
-      swap(float, min, max);
-
-   return (ACS_Random(0, 1048576) / 1048576.f) * (max - min) + min;
+   fixed64 z = 1;
+   while(y-- > 0) {z *= x;}
+   return z;
 }
 
 //
-// mag2f
+// mag2lk
 //
-float mag2f(float x, float y)
+stkcall
+fixed64 mag2lk(fixed64 x, fixed64 y)
 {
-   return sqrtf(x * x + y * y);
+   return ACS_FixedSqrt(x * x + y * y);
 }
 
 //
@@ -125,34 +125,7 @@ fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
 {
    fixed64 ret = ((1.0lk - t) * a) + (t * b);
 
-   if(roundlk(ret, 10) == b)
-      return b;
-
-   return ret;
-}
-
-//
-// lerpf
-//
-float lerpf(float a, float b, float t)
-{
-   float ret = ((1.0f - t) * a) + (t * b);
-
-   if((roundf(ret << 10) >> 10) == b)
-      return b;
-
-   return ret;
-}
-
-//
-// lerp
-//
-double lerp(double a, double b, double t)
-{
-   #pragma GDCC FIXED_LITERAL OFF
-   double ret = ((1.0 - t) * a) + (t * b);
-
-   if((round(ret << 10) >> 10) == b)
+   if(roundlk(ret, 30) == b)
       return b;
 
    return ret;
@@ -179,10 +152,10 @@ int ceilk(fixed n)
 }
 
 //
-// bzpolyf
+// bzpolylk
 //
 stkcall
-float bzpolyf(float a, float b, float t)
+fixed64 bzpolylk(fixed64 a, fixed64 b, fixed64 t)
 {
    return a + ((b - a) * t);
 }
@@ -191,23 +164,23 @@ float bzpolyf(float a, float b, float t)
 // bzpolyi
 //
 stkcall
-int bzpolyi(int a, int b, float t)
+int bzpolyi(int a, int b, fixed64 t)
 {
    return a + ((b - a) * t);
 }
 
 //
-// qbezierf
+// qbezierlk
 //
-struct vec2f qbezierf(float x1, float y1, float x2, float y2, float x3, float y3, float t)
+struct vec2lk qbezierlk(fixed64 x1, fixed64 y1, fixed64 x2, fixed64 y2, fixed64 x3, fixed64 y3, fixed64 t)
 {
-   BezierImpl(float, struct vec2f, bzpolyf);
+   BezierImpl(fixed64, struct vec2lk, bzpolylk);
 }
 
 //
 // qbezieri
 //
-struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t)
+struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, fixed64 t)
 {
    BezierImpl(int, struct vec2i, bzpolyi);
 }
@@ -217,7 +190,7 @@ struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, float t)
 //
 struct polar ctopol(fixed x, fixed y)
 {
-   return (struct polar){ACS_VectorAngle(x, y), mag2f(x, y)};
+   return (struct polar){ACS_VectorAngle(x, y), mag2lk(x, y)};
 }
 
 // EOF

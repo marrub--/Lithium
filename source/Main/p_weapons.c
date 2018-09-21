@@ -4,8 +4,6 @@
 #include "lith_monster.h"
 #include "lith_hudid.h"
 
-#include <math.h>
-
 // Static Functions ----------------------------------------------------------|
 
 //

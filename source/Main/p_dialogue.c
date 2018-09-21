@@ -266,7 +266,7 @@ void Lith_TeleportOutEffect(struct player *p)
 
    for(int j = 1; j <= 25; j++)
    {
-      fixed e = j / 25.f * 30;
+      fixed e = j / 25.lk * 30;
       ACS_SetHudSize(320 * e, 240);
       DrawSpriteFade("LITHCAM3", hid_teleport, (int)(160 * e), 120, TS, 0.2);
       ACS_Delay(1);

@@ -13,8 +13,7 @@ noinit struct player players[MAX_PLAYERS];
 
 // Static Objects ------------------------------------------------------------|
 
-static struct {__str on, off;} Lith_GUISounds[GUI_MAX] = {
-   {},
+static struct {__str on, off;} guisnd[GUI_MAX - 1] = {
    {"player/cbi/open", "player/cbi/close"},
 };
 
@@ -70,10 +69,10 @@ reinit:
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
 
-      // Update view
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - p->addroll);
+      // Update view (extra precision is required here to ensure accuracy)
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (float)p->addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (float)p->addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (float)p->addroll);
 
       // Tic passes
       ACS_Delay(1);
@@ -91,9 +90,9 @@ reinit:
       p->oldhealth = oldhealth;
 
       // Reset view for next tic
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + p->addroll);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (float)p->addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (float)p->addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (float)p->addroll);
 
       // If the map changes this we need to make sure it's still correct.
       p->validateTID();
@@ -187,7 +186,7 @@ static void Lith_PlayerDisconnect(void)
 script ext("ACS")
 void Lith_RecoilUp(fixed amount)
 {
-   withplayer(LocalPlayer) p->extrpitch += amount / 180;
+   withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
 }
 
 //
@@ -341,7 +340,7 @@ void Lith_PlayerCloseGUI(struct player *p)
       else
          p->frozen--;
 
-      ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
+      ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
       p->activegui = GUI_NONE;
    }
 }
@@ -363,15 +362,15 @@ void Lith_PlayerUseGUI(struct player *p, int type)
       else
          p->frozen++;
 
-      ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
+      ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
       p->activegui = type;
    }
    else if(p->activegui == type)
       p->closeGUI();
    else
    {
-      ACS_LocalAmbientSound(Lith_GUISounds[p->activegui].off, 127);
-      ACS_LocalAmbientSound(Lith_GUISounds[type].on, 127);
+      ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
+      ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
       p->activegui = type;
    }
 }
@@ -381,24 +380,23 @@ void Lith_PlayerUseGUI(struct player *p, int type)
 //
 i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 {
-   #pragma GDCC FIXED_LITERAL OFF
    // Could cause division by zero
    if(score == 0)
       return 0;
 
    if(!nomul) {
       score *= p->scoremul;
-      score *= 1 + (double)RandomFloat(0, p->attr.attrs[at_luk] / 77.7);
+      score *= 1 + (fixed64)ACS_RandomFixed(0, p->attr.attrs[at_luk] / 77.7);
       score *= world.scoremul;
    }
 
    // Get a multiplier for the score accumulator and sound volume
-   double mul = minmax(score, 0, 15000) / 15000.0;
-          mul = minmax(mul, 0.1, 1.0);
-   double vol = 0.7 * mul;
+   fixed64 mul = minmax(score, 0, 15000) / 15000.0lk;
+           mul = minmax(mul, 0.1lk, 1.0lk);
+   fixed64 vol = 0.7lk * mul;
 
    // Play a sound when we pick up score
-   if(!IsSmallNumber(vol) && p->getCVarI("lith_player_scoresound"))
+   if(vol > 0.001lk && p->getCVarI("lith_player_scoresound"))
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
 
    //
@@ -416,7 +414,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    p->score          += score;
    p->scoresum       += score;
    p->scoreaccum     += score;
-   p->scoreaccumtime += 20 * (mul * 2.0);
+   p->scoreaccumtime += 20 * (mul * 2.0lk);
 
    // Log score
    if(p->getCVarI("lith_player_scorelog"))

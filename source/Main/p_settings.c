@@ -11,17 +11,17 @@ if(p->num == 0) {
 }
 
 Category("GUI");
-Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1f, 2.0f);
-Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1f, 2.0f);
+Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1, 2.0);
+Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1, 2.0);
 Enum("Color theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
 Enum("Cursor",      "lith_gui_cursor", 0, gui_curs_max-1, "%S", CursName(set));
 ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
 
 Category("Player");
-Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0f, 1.0f);
+Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0, 1.0);
 Bool("Bob view when damaged",       "lith_player_damagebob");
-Float("Footstep volume",       "x", "lith_player_footstepvol", 0.0f, 1.0f);
-Float("View tilt",             "x", "lith_player_viewtilt", 0.0f, 1.0f);
+Float("Footstep volume",       "x", "lith_player_footstepvol", 0.0, 1.0);
+Float("View tilt",             "x", "lith_player_viewtilt", 0.0, 1.0);
 Bool("Log score gained",                  "lith_player_scorelog");
 Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");
@@ -37,10 +37,10 @@ Bool("Stupid pickup messages", "lith_player_stupidpickups");
 Bool("Log ammo pickups",       "lith_player_ammolog");
 
 Category("Weapons");
-Float("Scope zoom factor", "x", "lith_weapons_zoomfactor", 1.0f, 10.0f);
-Float("Scope opacity",     "x", "lith_weapons_scopealpha", 0.0f, 1.0f);
-Float("Weapon opacity",    "x", "lith_weapons_alpha",      0.0f, 1.0f);
-Float("Recoil amount",     "x", "lith_weapons_recoil",     0.0f, 1.0f);
+Float("Scope zoom factor", "x", "lith_weapons_zoomfactor", 1.0, 10.0);
+Float("Scope opacity",     "x", "lith_weapons_scopealpha", 0.0, 1.0);
+Float("Weapon opacity",    "x", "lith_weapons_alpha",      0.0, 1.0);
+Float("Recoil amount",     "x", "lith_weapons_recoil",     0.0, 1.0);
 if(p->pclass == pcl_marine) {
    Bool("Modal Rifle scope",          "lith_weapons_riflescope");
    Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
@@ -216,7 +216,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define Float(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(double set = p->getCVarK(cvar), diff;) \
+         __with(fixed64 set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
          if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, .suf = s))) \
@@ -252,7 +252,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define ServerFloat(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(double set = ACS_GetCVarFixed(cvar), diff;) \
+         __with(fixed64 set = ACS_GetCVarFixed(cvar), diff;) \
       { \
          Label(label); \
          if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, .suf = s))) \

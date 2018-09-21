@@ -5,8 +5,6 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
-#include <math.h>
-
 //
 // Lith_Timer
 //
@@ -22,7 +20,7 @@ int Lith_Timer(void)
 script ext("ACS")
 void Lith_UpdateScore(void)
 {
-   i96 score = InvNum("Lith_ScoreCount") * (double)RandomFloat(0.7f, 1.2f);
+   i96 score = InvNum("Lith_ScoreCount") * (fixed64)ACS_RandomFixed(0.7, 1.2);
    Lith_GiveAllScore(score, false);
    InvTake("Lith_ScoreCount", 0x7FFFFFFF);
 }

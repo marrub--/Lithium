@@ -57,9 +57,9 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
    fixed xmul = p->getCVarK("lith_gui_xmul");
    fixed ymul = p->getCVarK("lith_gui_ymul");
 
-                g->cx -= p->yawv   * (800.0f * xmul);
-   if(inverted) g->cy += p->pitchv * (800.0f * ymul);
-   else         g->cy -= p->pitchv * (800.0f * ymul);
+                g->cx -= p->yawv   * (800.0lk * xmul);
+   if(inverted) g->cy += p->pitchv * (800.0lk * ymul);
+   else         g->cy -= p->pitchv * (800.0lk * ymul);
 
    g->cx = minmax(g->cx, 0, g->w);
    g->cy = minmax(g->cy, 0, g->h);

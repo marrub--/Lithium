@@ -1,9 +1,9 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// Required for sincos(3).
-#define _GNU_SOURCE
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 #include "lith_monster.h"
+
+#include <math.h>
 
 #define UData UData_VitalScan(upgr)
 
@@ -116,10 +116,10 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 
    if(p->getCVarI("lith_scanner_slide"))
    {
-      float diff = p->yawf - UData.cangle;
+      fixed64 diff = p->yawf - (fixed64)UData.cangle;
       fixed ds = ACS_Sin(diff / tau) * tau;
       fixed dc = ACS_Cos(diff / tau) * tau;
-      UData.oangle = lerpf(UData.oangle, atan2f(ds, dc), 0.1);
+      UData.oangle = lerplk(UData.oangle, atan2f(ds, dc), 0.1);
       ox += UData.oangle * 64;
    }
 

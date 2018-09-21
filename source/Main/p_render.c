@@ -1,6 +1,4 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// Required for sincos(3).
-#define _GNU_SOURCE
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
@@ -77,24 +75,23 @@ void Lith_PlayerDamageBob(struct player *p)
 
    if(!InvNum("PowerStrength") && p->health < p->oldhealth)
    {
-      float angle = RandomFloat(tau, -tau);
-      float distance;
+      fixed64 angle = (fixed64)ACS_RandomFixed(tau, -tau);
+      fixed64 distance;
 
       if(p->bobyaw + p->bobpitch > 0.05)
-         angle = lerpf(angle, atan2f(p->bobpitch, p->bobyaw), 0.25f);
+         angle = lerplk(angle, atan2f(p->bobpitch, p->bobyaw), 0.25lk);
 
-      distance  = mag2f(p->bobyaw, p->bobpitch);
-      distance += (p->oldhealth - p->health) / (float)p->maxhealth;
-      distance *= 0.2f;
+      distance  = mag2lk(p->bobyaw, p->bobpitch);
+      distance += (p->oldhealth - p->health) / (fixed64)p->maxhealth;
+      distance *= 0.2lk;
 
-      float ys, yc;
-      sincosf(angle, &ys, &yc);
+      fixed64 ys = sin(angle), yc = cos(angle);
       p->bobyaw   = ys * distance;
       p->bobpitch = yc * distance;
    }
 
-   p->bobpitch = lerpf(p->bobpitch, 0.0f, 0.1f);
-   p->bobyaw   = lerpf(p->bobyaw,   0.0f, 0.1f);
+   p->bobpitch = lerplk(p->bobpitch, 0.0, 0.1);
+   p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
 }
 
 //
@@ -107,25 +104,31 @@ void Lith_PlayerView(struct player *p)
 {
    if(Lith_IsPaused) return;
 
-   float addp = 0, addy = 0;
+   fixed64 addp = 0, addy = 0;
 
    if(p->getCVarI("lith_player_damagebob"))
    {
-      float bobmul = p->getCVarK("lith_player_damagebobmul");
+      fixed64 bobmul = p->getCVarK("lith_player_damagebobmul");
       addp += p->bobpitch * bobmul;
       addy += p->bobyaw   * bobmul;
    }
 
-   p->extrpitch = lerpf(p->extrpitch, 0.0f, 0.1f);
-   p->extryaw   = lerpf(p->extryaw,   0.0f, 0.1f);
+   p->extrpitch = lerplk(p->extrpitch, 0.0lk, 0.1lk);
+   p->extryaw   = lerplk(p->extryaw,   0.0lk, 0.1lk);
 
    p->addpitch = addp + p->extrpitch;
    p->addyaw   = addy + p->extryaw;
 
    ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2) {
-      if(p->sidev) p->addroll = lerpf(p->addroll, -p->sidev * mul, 0.05);
-      else         p->addroll = lerpf(p->addroll, 0,               0.10);
+      if(p->sidev) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.05);
+      else         p->addroll = lerplk(p->addroll, 0,               0.10);
    }
+
+   DebugStat("exp: lv.%u %lu/%lu\n", p->attr.level, p->attr.exp, p->attr.expnext);
+   DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
+   DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
+   DebugStat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);
+   DebugStat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
 }
 
 //

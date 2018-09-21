@@ -2,8 +2,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-#include <math.h>
-
 //
 // Lith_GUI_ScrollBegin_Impl
 //
@@ -37,21 +35,21 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    // get height of scroller
    int notches; // height of scroller in caps
 
-   if(a->contenth > realh) notches = a->h / (float)a->contenth * caps;
+   if(a->contenth > realh) notches = a->h / (fixed64)a->contenth * caps;
    else                    notches = caps;
 
-   int   const scrlh = notches * caph;         // height in pixels of scroller
-   float const maxy  = (h - scrlh) / (float)h; // normalized maximum y value
+   int     const scrlh = notches * caph;           // height in pixels of scroller
+   fixed64 const maxy  = (h - scrlh) / (fixed64)h; // normalized maximum y value
 
    // decrement the sound timer
    if(scr->nextsnd) scr->nextsnd--;
 
    // move scroller
-   __with(float supposedy = scr->y * h;)
+   __with(fixed64 supposedy = scr->y * h;)
    {
       if(g->active == id)
       {
-         float const cy = g->cy - y - caph;
+         fixed64 const cy = g->cy - y - caph;
 
          // if it isn't grabbed and the cursor is over the scroller,
          // set the grab position to where the cursor is relative to it
@@ -80,7 +78,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
       }
 
       // finally, normalize and clamp
-      scr->y = supposedy / (float)h;
+      scr->y = supposedy / (fixed64)h;
       scr->y = minmax(scr->y, 0, maxy);
    }
 
@@ -88,7 +86,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    __with(int vofs = 0;) // offset in pixels of the content
    {
       if(a->contenth > realh)
-         vofs = round((a->contenth - realh) * (scr->y / maxy));
+         vofs = roundlk((a->contenth - realh) * (scr->y / maxy), 10);
 
       // set the scrollbar's offset
       scr->ox = a->x + pre->scrlw; // offset by scrollbar width
@@ -129,7 +127,7 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
 
       if(graphic) for(int i = 0; i < notches; i++)
       {
-         int const npos = round(caph + h * scr->y + caph * i);
+         int const npos = roundlk(caph + h * scr->y + caph * i, 10);
          PrintSprite(graphic, x,2, ory + npos,1);
       }
    }

@@ -68,21 +68,21 @@ typedef struct worldinfo_s
    __prop freeze         {call: Lith_FreezeTime()}
    __prop autosave       {get: ACS_GetCVar("lith_sv_autosave")}
 
-   bool   gsinit;
-   bool   singleplayer;
-   int    mapscleared;
-   int    prevcluster;
-   int    mapseed;
-   bool   unloaded;
-   bool   islithmap;
-   bool   enemycompat;
-   bool   enemycheck;
-   int    secretsfound;
-   double scoremul;
-   u64    ticks;
-   int    game;
-   int    apiversion;
-   int    soulsfreed;
+   bool    gsinit;
+   bool    singleplayer;
+   int     mapscleared;
+   int     prevcluster;
+   int     mapseed;
+   bool    unloaded;
+   bool    islithmap;
+   bool    enemycompat;
+   bool    enemycheck;
+   int     secretsfound;
+   fixed64 scoremul;
+   u64     ticks;
+   int     game;
+   int     apiversion;
+   int     soulsfreed;
 
    int fun;
 

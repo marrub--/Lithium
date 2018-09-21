@@ -417,7 +417,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          };
 
          __str query = StrParam("%.*S", txt_len, txt_buf);
-         u64 crc = Lith_CRC64_str(txt_buf, txt_len);
+         u64 crc = crc64_str(txt_buf, txt_len);
 
          bip->resnum = bip->rescur = 0;
 

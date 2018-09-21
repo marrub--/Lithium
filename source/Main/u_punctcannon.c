@@ -1,7 +1,7 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// Required for sincos(3).
-#define _GNU_SOURCE
 #include "lith_upgrades_common.h"
+
+#include <math.h>
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -23,21 +23,19 @@ void Lith_PunctuatorFire(void)
          fixed y = ACS_GetActorY(ptid);
          fixed z = ACS_GetActorZ(ptid);
 
-         float yaw = atan2f(p->y - y, p->x - x);
+         fixed64 yaw = atan2f(p->y - y, p->x - x);
 
-         float ps, cz;
-         float ys, yc;
-         sincosf(p->pitchf, &ps, &cz);
-         sincosf(yaw,       &ys, &yc);
+         fixed64 ps = sin(p->pitchf), cz = cos(p->pitchf);
+         fixed64 ys = sin(yaw      ), yc = cos(yaw      );
 
-         float cx = ps * yc;
-         float cy = ps * ys;
+         fixed64 cx = ps * yc;
+         fixed64 cy = ps * ys;
 
          for(int i = 0; i < 10; i++)
          {
-            float sx = x + (cx * -(32 * i));
-            float sy = y + (cy * -(32 * i));
-            float sz = z + (cz * -(32 * i));
+            fixed64 sx = x + (cx * -(32 * i));
+            fixed64 sy = y + (cy * -(32 * i));
+            fixed64 sz = z + (cz * -(32 * i));
 
             int etid = ACS_UniqueTID();
 

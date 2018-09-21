@@ -70,12 +70,12 @@
 
 enum {
    log_none,
-   log_dev   = 1 << 0,
-   log_devh  = 1 << 1,
-   log_boss  = 1 << 2,
-   log_dmon  = 1 << 3,
-   log_dmonV = 1 << 4,
-   log_dlg   = 1 << 5,
+   log_dev   = 1 << 0, // general debug info
+   log_devh  = 1 << 1, // prints live stats to the HUD (position, angles, etc)
+   log_boss  = 1 << 2, // debug info for the boss system
+   log_dmon  = 1 << 3, // debug info for the monster tracker
+   log_dmonV = 1 << 4, // verbose debug info for the monster tracker
+   log_dlg   = 1 << 5, // debug info for the dialogue/terminal compiler
 };
 
 // Extern Functions ----------------------------------------------------------|
@@ -112,4 +112,3 @@ extern int   dbgstatnum, dbgnotenum;
 #endif
 
 #endif
-

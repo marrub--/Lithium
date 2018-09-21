@@ -1,7 +1,7 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
-// Required for sincos(3).
-#define _GNU_SOURCE
 #include "lith_upgrades_common.h"
+
+#include <math.h>
 
 #define UData UData_Zoom(upgr)
 
@@ -46,9 +46,9 @@ script
 void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom < UData.zoom)
-      UData.vzoom = lerpf(UData.vzoom, UData.zoom, 0.099);
+      UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.099);
    else
-      UData.vzoom = lerpf(UData.vzoom, UData.zoom, 0.2);
+      UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.2);
 
    if(!KindaCloseEnough(UData.vzoom, UData.zoom))
    {
@@ -80,9 +80,8 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 
       for(int i = 0; i < 8; i++)
       {
-         float xang = p->yawf + pi + (pi4 * i);
-         float xs, xc;
-         sincosf(xang, &xs, &xc);
+         fixed64 xang = p->yawf + pi + (pi4 * i);
+         fixed xs = sin(xang), xc = cos(xang);
          int x = atan2f(xs, xc) * 320;
 
          PrintTextStr(points[i]);

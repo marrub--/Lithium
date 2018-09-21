@@ -2,16 +2,14 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-#include <math.h>
-
 //
 // Lith_GUI_Slider_Impl
 //
-double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
+fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
 {
    gui_slider_preset_t const *pre = a->preset ? a->preset : &guipre.slddef;
 
-   double w = pre->w - (pre->pad * 2);
+   fixed64 w = pre->w - (pre->pad * 2);
 
    int x = a->x + pre->pad;
    int y = a->y;
@@ -22,12 +20,12 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
    y += g->oy;
 
    // get a normalized value
-   double aval;
+   fixed64 aval;
 
    aval = (a->val - a->minima) / (a->maxima - a->minima);
    aval = minmax(aval, 0, 1);
 
-   double val;
+   fixed64 val;
 
    // move scroll notch
    if(g->active == id)
@@ -44,9 +42,9 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
       val = aval;
 
    // get result-normalized value
-   double norm = val * (a->maxima - a->minima) + a->minima;
+   fixed64 norm = val * (a->maxima - a->minima) + a->minima;
 
-   if(a->integ) norm = round(norm);
+   if(a->integ) norm = roundlk(norm, 10);
 
    // draw graphic
    ifauto(__str, gfx, Lith_GUI_Prefix1(g, pre, gfx))
@@ -68,7 +66,7 @@ double Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
    if(pre->font)
    {
       __str suf = a->suf ? a->suf : "";
-      float amt = roundf(norm * 100.f) / 100.f;
+      fixed64 amt = roundlk(norm * 100.lk, 10) / 100.lk;
       if(a->integ) PrintTextFmt("%i%S",     (int)amt, suf);
       else         PrintTextFmt("%.1k%S", (fixed)amt, suf);
 

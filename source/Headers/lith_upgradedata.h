@@ -95,8 +95,8 @@ struct upgr_data_VitalScan {
 };
 
 struct upgr_data_Zoom {
-   int   zoom;
-   float vzoom;
+   int     zoom;
+   fixed64 vzoom;
 };
 
 struct upgr_data_HomingRPG {

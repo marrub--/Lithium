@@ -5,8 +5,6 @@
 #include "lith_world.h"
 #include "lith_monster.h"
 
-#include <math.h>
-
 // Static Functions ----------------------------------------------------------|
 
 //
@@ -181,11 +179,6 @@ void Lith_PlayerUpdateData(struct player *p)
    p->keys.rs = InvNum("RedSkull");
    p->keys.ys = InvNum("YellowSkull");
    p->keys.bs = InvNum("BlueSkull");
-
-   DebugStat("exp: lv.%u %lu/%lu\n", p->attr.level, p->attr.exp, p->attr.expnext);
-   DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
-   DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
-   DebugStat("a.y: %k\na.p: %k\n", p->yaw * 360, p->pitch * 360);
 }
 
 //
@@ -275,7 +268,6 @@ static void LevelUp(struct player *p, u32 attr[at_max])
 stkcall
 void Lith_GiveEXP(struct player *p, u64 amt)
 {
-   #pragma GDCC FIXED_LITERAL OFF
    struct player_attributes *a = &p->attr;
 
    u32 attr[at_max] = {};
@@ -283,7 +275,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
 
    while(a->exp + amt >= a->expnext) {
       a->level++;
-      a->expnext  = 500 + (a->level * pow(1.385, a->level * 0.2) * 340);
+      a->expnext  = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
       for(int i = 0; i < 5; i++)
          attr[ACS_Random(0, 100) % at_max]++;
@@ -386,15 +378,15 @@ void Lith_ResetPlayer(struct player *p)
    p->frozen     = 0;
    p->semifrozen = 0;
 
-   p->addpitch = 0.0f;
-   p->addyaw   = 0.0f;
-   p->addroll  = 0.0f;
+   p->addpitch = 0;
+   p->addyaw   = 0;
+   p->addroll  = 0;
 
-   p->bobpitch = 0.0f;
-   p->bobyaw   = 0.0f;
+   p->bobpitch = 0;
+   p->bobyaw   = 0;
 
-   p->extrpitch = 0.0f;
-   p->extryaw   = 0.0f;
+   p->extrpitch = 0;
+   p->extryaw   = 0;
 
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;

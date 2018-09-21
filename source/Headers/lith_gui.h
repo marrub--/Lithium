@@ -81,14 +81,14 @@ typedef u32 id_t;
 
 typedef struct gui_scroll_state_s
 {
-   int    ox;
-   int    oy;
-   int    occludeS;
-   int    occludeE;
-   double y;
-   double grabpos;
-   bool   grabbed;
-   int    nextsnd;
+   int     ox;
+   int     oy;
+   int     occludeS;
+   int     occludeE;
+   fixed64 y;
+   fixed64 grabpos;
+   bool    grabbed;
+   int     nextsnd;
 } gui_scroll_state_t;
 
 typedef struct gui_typeon_state_s
@@ -106,10 +106,10 @@ typedef struct gui_txtbox_state_s
 
 typedef struct gui_delta_s
 {
-   float cx, cy;
-   bool  clicklft : 1;
-   bool  clickrgt : 1;
-   bool  clickany : 1;
+   fixed64 cx, cy;
+   bool    clicklft : 1;
+   bool    clickrgt : 1;
+   bool    clickany : 1;
 } gui_delta_t;
 
 typedef struct gui_state_s
@@ -221,13 +221,13 @@ typedef struct gui_slider_preset_s
 
 typedef struct gui_slider_args_s
 {
-   int    x;
-   int    y;
-   double minima;
-   double maxima;
-   double val;
-   bool   integ;
-   __str  suf;
+   int     x;
+   int     y;
+   fixed64 minima;
+   fixed64 maxima;
+   fixed64 val;
+   bool    integ;
+   __str   suf;
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 
@@ -317,7 +317,7 @@ bool Lith_GUI_ScrollOcclude(gui_state_t *g, gui_scroll_state_t const *scr, int y
 bool                Lith_GUI_Button_Impl     (gui_state_t *g, id_t id, gui_button_args_t const *a);
 bool                Lith_GUI_Checkbox_Impl   (gui_state_t *g, id_t id, gui_checkb_args_t const *a);
 void                Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const *a);
-double              Lith_GUI_Slider_Impl     (gui_state_t *g, id_t id, gui_slider_args_t const *a);
+fixed64             Lith_GUI_Slider_Impl     (gui_state_t *g, id_t id, gui_slider_args_t const *a);
 gui_txtbox_state_t *Lith_GUI_TextBox_Impl    (gui_state_t *g, id_t id, gui_txtbox_args_t const *a);
 
 #endif

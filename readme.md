@@ -12,21 +12,12 @@ Once you've done that you can then load the `pk7` folder into ZDoom as you would
 
 # Code
 
-The code in Lithium is half C and half DECORATE. The C code is compiled to ACS bytecode with [GDCC](https://github.com/DavidPH/GDCC), an awesome compiler made by a crazy compiler man.
-
-The C code is rather terse at times, and scarcely commented, but hopefully it should be understandable enough.
-
-I tend to use a lot of GDCC's C extensions, so some of the code may be a bit confusing for purists.
+The C code in `source/` is compiled to ACS bytecode with [GDCC](https://github.com/DavidPH/GDCC). It can be rather terse at times, and is scarcecly commented, but it is hopefully understandable on its own. Please note that it is currently not under a free software license. You may use it as reference but do not copy code from the project without asking first.
 
 # Licensing
 
-All of the content and source code in this project is copyrighted unless otherwise stated. Do not use it elsewhere without permission. See pk7/credits.txt for more information.
+All of the content and source code in this project is copyrighted unless otherwise stated. Respect content creators and do not use it elsewhere without permission. See `pk7/credits.txt` for more information.
 
 All DECORATE code in the `pk7/lscripts` folder is public domain as defined by [the CC0 license](http://creativecommons.org/publicdomain/zero/1.0/).
 
-The LithOS3 library is distributed under the MIT license as detailed in `pk7/licenses/LICENSE.lithos3.txt`.
-
-GDCC's libc is distributed under the LGPL license as detailed in `pk7/licenses/copylib.txt`.
-
-Respect content creators, ask permission before using something from this mod.
-
+GDCC's libc is distributed under the LGPL license as detailed in `pk7/copylib.txt`.

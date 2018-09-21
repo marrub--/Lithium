@@ -281,11 +281,11 @@ struct player
    int  tbptr;
 
    // Score
-   i96    scoreaccum;
-   __str  scoreaccumstr;
-   int    scoreaccumtime;
-   double scoremul;
-   float  discount;
+   i96     scoreaccum;
+   __str   scoreaccumstr;
+   int     scoreaccumtime;
+   fixed64 scoremul;
+   fixed64 discount;
 
    // Misc
    int   spuriousexplosions;
@@ -304,21 +304,21 @@ struct player
    __str stepnoise;
 
    // pitch/yaw in precalculated sane radian format
-   float pitchf;
-   float yawf;
+   fixed64 pitchf;
+   fixed64 yawf;
 
    // Additive angles
-   float addpitch;
-   float addyaw;
-   float addroll;
+   fixed64 addpitch;
+   fixed64 addyaw;
+   fixed64 addroll;
 
    // Damage bob angles
-   float bobpitch;
-   float bobyaw;
+   fixed64 bobpitch;
+   fixed64 bobyaw;
 
    // Extra angles
-   float extrpitch;
-   float extryaw;
+   fixed64 extrpitch;
+   fixed64 extryaw;
 
    // View TIDs
    int cameratid;

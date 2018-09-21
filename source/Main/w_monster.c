@@ -4,8 +4,6 @@
 #include "lith_world.h"
 #include "lith_scorenums.h"
 
-#include <math.h>
-
 #define HasResistances(m) ((m)->rank >= 2)
 
 #define GetInfo(m) \
@@ -222,9 +220,9 @@ static void ApplyLevels(dmon_t *m, int prev)
 
    if(m->level >= 5)
    {
-      float rn = m->rank / 10.f;
+      fixed rn = m->rank / 10.0;
       int hp10 = m->maxhealth / 10;
-      int newh = (m->level - prev) * hp10 * RandomFloat(rn - .1f, rn + .1f);
+      int newh = (m->level - prev) * hp10 * (fixed64)ACS_RandomFixed(rn - 0.1, rn + 0.1);
       ACS_SetActorProperty(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }

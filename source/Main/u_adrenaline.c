@@ -66,15 +66,15 @@ void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
    if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;
 
    int timemod = p->ticks % 45;
-   float amt = UData.charge / (float)CHARGE_MAX;
+   fixed64 amt = UData.charge / (fixed64)CHARGE_MAX;
 
    DrawSpriteXX(UData.readied ? ":HUD:H_D24" : ":HUD:H_D21",
       HUDMSG_FADEOUT | HUDMSG_ALPHA,
       hid_adrenind_fxS - timemod,
       77.1 - timemod,
       224.1,
-      (fixed)(0.3f * amt),
-      (fixed)(0.6f * amt),
+      (fixed)(0.3 * amt),
+      (fixed)(0.6 * amt),
       0.8);
 }
 

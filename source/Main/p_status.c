@@ -33,7 +33,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 
    if(attr > ATTR_VIS_MAX) {
       int vatr = attr - ATTR_VIS_MAX;
-      AttrBar(g, x, y, (vatr / (float)ATTR_VIS_DIFF) * ATTR_VIS_MAX, ":UI:AttrBar4");
+      AttrBar(g, x, y, (vatr / (fixed64)ATTR_VIS_DIFF) * ATTR_VIS_MAX, ":UI:AttrBar4");
       helptrns += 0.3;
    }
 
