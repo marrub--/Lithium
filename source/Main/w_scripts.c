@@ -15,14 +15,12 @@ int Lith_Timer(void)
 }
 
 //
-// Lith_UpdateScore
+// Lith_GiveScoreScript
 //
-script ext("ACS")
-void Lith_UpdateScore(void)
+script ext("ACS") addr("Lith_GiveScore")
+void Lith_GiveScoreScript(int score)
 {
-   i96 score = InvNum("Lith_ScoreCount") * (fixed64)ACS_RandomFixed(0.7, 1.2);
-   Lith_GiveAllScore(score, false);
-   InvTake("Lith_ScoreCount", 0x7FFFFFFF);
+   Lith_GiveAllScore(score * (fixed64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
 //

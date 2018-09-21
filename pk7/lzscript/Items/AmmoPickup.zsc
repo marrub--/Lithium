@@ -6,6 +6,8 @@ class Lith_AmmoItem : Lith_ScoreItem abstract
    property Give:  m_type,  m_amount;
    property Give2: m_type2, m_amount2;
 
+   override bool Lith_CanGiveScore() {return !lith_sv_noscoreammo;}
+
    override void PostBeginPlay()
    {
                   A_GiveInventory(m_type,  m_amount);
