@@ -208,7 +208,7 @@ ui void RunEndSequence()
       }
       case   'bg':
          m_bgcolo = m_node[m_en++].text;
-         m_bgimg  = TexMan.CheckForTexture("", TexMan.Type_Null);
+         m_bgimg.setNull();
          break;
       case 'case': {
          bool cnd;

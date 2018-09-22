@@ -3,6 +3,7 @@ user bool lith_hud_showweapons  = true;
 user bool lith_hud_showlog      = true;
 user bool lith_hud_showarmorind = true;
 user bool lith_hud_logfromtop   = false;
+user bool lith_hud_logbig       = false;
 
 user int  lith_xhair_r = 255;
 user int  lith_xhair_g = 255;

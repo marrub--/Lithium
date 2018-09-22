@@ -60,6 +60,7 @@ Bool("Show score",   "lith_hud_showscore");
 Bool("Show weapons", "lith_hud_showweapons");
 Bool("Show log",     "lith_hud_showlog");
 Bool("Draw log from top of screen", "lith_hud_logfromtop");
+Bool("Large log",                   "lith_hud_logbig");
 Bool("Draw reactive armor indicator", "lith_hud_showarmorind");
 
 Int("Crosshair red",   "/255", "lith_xhair_r", 0, 255);

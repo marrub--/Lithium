@@ -96,7 +96,10 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
 {
    if(p->getCVarI("lith_hud_showlog"))
    {
-      SetSize(480, 300);
+      int yo;
+
+      if(p->getCVarI("lith_hud_logbig")) {yo = 200; SetSize(320, 240);}
+      else                               {yo = 255; SetSize(480, 300);}
 
       int i = 0;
       forlistIt(logdata_t *ld, p->loginfo.hud, i++)
@@ -107,7 +110,7 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
          if(p->getCVarI("lith_hud_logfromtop"))
             {ya = 1; y = 20 + y;}
          else
-            {ya = 2; y = (255 - y) + yy;}
+            {ya = 2; y = (yo - y) + yy;}
 
          PrintTextStr(ld->info);
          PrintText("LOGFONT", cr, x,1, y,ya);

@@ -546,7 +546,7 @@ override void RenderOverlay(RenderEvent evt)
                   case 'h':                     cr = 0x6e6eff; break;
                   case 'i':                     cr = 0xffaa00; break;
                   case 'k':                     cr = 0xeeee32; break;
-                  case 'm':                     cr = 0x2d2d2d; break;
+                  case 'm':                     cr = 0x4d4d4d; break;
                   case 'n':                     cr = 0x33eeff; break;
                   case 'o':                     cr = 0xfecc99; break;
                   case 'p':                     cr = 0xd1d8a7; break;
