@@ -73,9 +73,9 @@
 "LITH_TXT_LOG_CBI_CRDistInter" = "$LITH_TXT_LOG_CBI_MRDistInter";
 
 // Level Up ------------------------------------------------------------------|
-"LITH_TXT_LOG_LevelUpStan" = "> あなたは「強さが高くなった」と思う。";
+"LITH_TXT_LOG_LevelUpStan" = "> 「強くなっている」と思った。";
 "LITH_TXT_LOG_LevelUpJem" = "> [INFO] メモリー戻した: %iKiB";
-"LITH_TXT_LOG_LevelUpFulk" = "> \cj<\cdVital\cj>\c- :: %iのinodeは戻った.";
+"LITH_TXT_LOG_LevelUpFulk" = "> \cj<\cdVital\cj>\c- :: %iのinodeは戻った。";
 "LITH_TXT_LOG_LevelUpAri" = "> 楽しみにしてる。";
 "LITH_TXT_LOG_LevelUpMod" = "$LITH_TXT_LOG_LevelUpStan";
 

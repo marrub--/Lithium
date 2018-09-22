@@ -1,92 +1,76 @@
 // Copyright © 2018 Graham Sanderson, all rights reserved.
 #include "lith_common.h"
 
-#include <GDCC/HashMap.h>
+#define nglyphs 34
+#define nblocks 64
+#define ngroups 32
+#define nplanes 16
 
-struct metric
+struct glyph
 {
    int key;
    int xadv;
    int yofs;
-
-   struct metric *next, **prev;
+   int tex;
 };
 
-#define metricmap_t_GetKey(o) ((o)->key)
-#define metricmap_t_GetNext(o) (&(o)->next)
-#define metricmap_t_GetPrev(o) (&(o)->prev)
-#define metricmap_t_HashKey(k) (k)
-#define metricmap_t_HashObj(o) ((o)->key)
-#define metricmap_t_KeyCmp(l, r) ((l) - (r))
-GDCC_HashMap_Decl(metricmap_t, int, struct metric)
-GDCC_HashMap_Defn(metricmap_t, int, struct metric)
+typedef struct glyph glyphdata[nglyphs];
+typedef glyphdata   *blockdata[nblocks];
+typedef blockdata   *groupdata[ngroups];
+typedef groupdata   *planedata[nplanes];
 
-static metricmap_t metrics;
-noinit static struct metric mttab[1024];
-static int mttab_p;
+static planedata *planes;
 
 //
-// Lith_InitFontMetrics
+// AllocFontMetric
 //
-script ext("ACS")
-void Lith_InitFontMetrics(void)
+stkcall
+static struct glyph *AllocFontMetric(unsigned key)
 {
-   metricmap_t_ctor(&metrics, 64, 64);
-}
+   if(! planes)  planes = Salloc(planedata);
+   groupdata   **groups = &( *planes)[key / (nglyphs * nblocks  * ngroups)];
 
-//
-// Lith_SetFontMetric
-//
-script ext("ACS")
-void Lith_SetFontMetric(int key, int xadv, int yofs)
-{
-   struct metric *metr = &mttab[mttab_p++];
+   if(!*groups) *groups = Salloc(groupdata);
+   blockdata   **blocks = &(**groups)[key / (nglyphs * nblocks) % ngroups ];
 
-   if(mttab_p > countof(mttab))
-      Log("metrics overflow, yell at developer");
+   if(!*blocks) *blocks = Salloc(blockdata);
+   glyphdata   **glyphs = &(**blocks)[key / (nglyphs)           % nblocks ];
 
-   metr->key  = key;
-   metr->xadv = xadv;
-   metr->yofs = yofs;
-
-   metrics.insert(metr);
+   if(!*glyphs) *glyphs = Salloc(glyphdata);
+   return                 &(**glyphs)[key                       % nglyphs ];
 }
 
 //
 // Lith_GetFontMetric
 //
 script ext("ACS")
-struct metric *Lith_GetFontMetric(int key)
+struct glyph *Lith_GetFontMetric(unsigned key)
 {
-   return metrics.find(key);
+   groupdata *groups = (*planes)[key / (nglyphs * nblocks  * ngroups)];
+   blockdata *blocks = (*groups)[key / (nglyphs * nblocks) % ngroups ];
+   glyphdata *glyphs = (*blocks)[key / (nglyphs)           % nblocks ];
+   return             &(*glyphs)[key                       % nglyphs ];
 }
 
 //
-// Lith_Metr_Xadv
+// Lith_SetFontMetric
 //
 script ext("ACS")
-int Lith_Metr_Xadv(struct metric *metr)
+void Lith_SetFontMetric(unsigned key, int xadv, int yofs)
 {
-   return metr->xadv;
+   struct glyph *metr = AllocFontMetric(key);
+
+   int tex = URANUS("GetTex", StrParam("lgfx/Font/Jp12/%u.png", key));
+   int   h = URANUS("GetTexH", tex);
+
+   metr->key  = key;
+   metr->xadv = xadv;
+   metr->yofs = h+yofs;
+   metr->tex  = tex;
 }
 
-//
-// Lith_Metr_Yofs
-//
-script ext("ACS")
-int Lith_Metr_Yofs(struct metric *metr)
-{
-   return metr->yofs;
-}
-
-//
-// Lith_CloseFontMetrics
-//
-script type("unloading")
-void Lith_CloseFontMetrics(void)
-{
-   metricmap_t_dtor(&metrics);
-   mttab_p = 0;
-}
+script ext("ACS") int Lith_Metr_Xadv(struct glyph *metr) {return metr->xadv;}
+script ext("ACS") int Lith_Metr_Yofs(struct glyph *metr) {return metr->yofs;}
+script ext("ACS") int Lith_Metr_Tex (struct glyph *metr) {return metr->tex ;}
 
 // EOF

@@ -432,8 +432,6 @@ static clearscope int Utf8ToUtf32(string ch, int sta = 0)
 
 override void WorldLoaded(WorldEvent evt)
 {
-   CallACS("Lith_InitFontMetrics");
-
    let lmp = Lith_HERMES.ReadLump(Lith_HERMES.FindLump("lfiles/Font_Jp12.txt"));
 
    array<string> lns, arg;
@@ -451,6 +449,25 @@ override void WorldLoaded(WorldEvent evt)
 
       CallACS("Lith_SetFontMetric", arg[0].toint(), arg[1].toint(), arg[2].toint());
    }
+}
+
+static int GetTex(string gfx)
+{
+   return int(TexMan.CheckForTexture(gfx, TexMan.Type_Any));
+}
+
+static int GetTexW(int gfx_)
+{
+   textureid gfx; gfx.setNull(); gfx += gfx_;
+   int w, h; [w, h] = TexMan.GetSize(gfx);
+   return w;
+}
+
+static int GetTexH(int gfx_)
+{
+   textureid gfx; gfx.setNull(); gfx += gfx_;
+   int w, h; [w, h] = TexMan.GetSize(gfx);
+   return h;
 }
 
 override void RenderOverlay(RenderEvent evt)
@@ -509,8 +526,8 @@ override void RenderOverlay(RenderEvent evt)
                int ucp = Utf8ToUtf32(utf, 0);
                if(ucp == Ch_Space) {x += FONT_SPACE; continue;}
 
-               string img = String.Format("lgfx/Font/Jp12/%i.png", ucp);
-               let    gfx = TexMan.CheckForTexture(img, TexMan.Type_Any);
+               let metr = CallACS("Lith_GetFontMetric", ucp);
+               textureid gfx; gfx.setNull(); gfx += CallACS("Lith_Metr_Tex", metr);
 
                if(gfx.isValid())
                {
@@ -548,13 +565,10 @@ override void RenderOverlay(RenderEvent evt)
                   case '[Lith_Green]':          cr = 0x00ff00; break;
                   }
 
-                  let metr = CallACS("Lith_GetFontMetric", ucp);
                   let xadv = CallACS("Lith_Metr_Xadv", metr);
                   let yofs = CallACS("Lith_Metr_Yofs", metr);
 
-                  int w, h; [w, h] = TexMan.GetSize(gfx);
-
-                  Screen.DrawTexture(gfx, false, x, y-(h+yofs),
+                  Screen.DrawTexture(gfx, false, x, y-yofs,
                      DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
                      DTA_Alpha, m_d[i].a, DTA_AlphaChannel, true,
                      DTA_FillColor, cr);

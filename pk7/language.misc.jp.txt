@@ -2,6 +2,11 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
+
+// Misc ----------------------------------------------------------------------|
+"LITH_TXT_ArsenalStan" = "ぶきぐら";
+"LITH_TXT_ArsenalJem" = "指令";
+"LITH_TXT_ArsenalAri" = "猟具";
 "LITH_TIME_FMT_LONG" = "%0.2i:%0.2i:%0.2i %i日7月1649年";
 "LITH_CHECK" = "Jp";
 "LITH_TXT_OPENER" =
