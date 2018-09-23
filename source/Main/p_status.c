@@ -37,17 +37,16 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       helptrns += 0.3;
    }
 
-   static __str const helpstrs[at_max] = {
-      [at_acc] = "Weapon damage",
-      [at_def] = "Armor efficiency",
-      [at_str] = "Health capacity",
-      [at_vit] = "Health pickup efficiency",
-      [at_stm] = "Health regeneration",
-      [at_luk] = "Random chance",
-      [at_rge] = "Damage buff when hit"
-   };
+   switch(at) {
+   case at_acc: PrintTextStr(L("LITH_ATTR_HELP_ACC")); break;
+   case at_def: PrintTextStr(L("LITH_ATTR_HELP_DEF")); break;
+   case at_str: PrintTextStr(L("LITH_ATTR_HELP_STR")); break;
+   case at_vit: PrintTextStr(L("LITH_ATTR_HELP_VIT")); break;
+   case at_stm: PrintTextStr(L("LITH_ATTR_HELP_STM")); break;
+   case at_luk: PrintTextStr(L("LITH_ATTR_HELP_LUK")); break;
+   case at_rge: PrintTextStr(L("LITH_ATTR_HELP_RGE")); break;
+   }
 
-   PrintTextStr(helpstrs[at]);
    PrintTextA("CHFONT", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
@@ -90,7 +89,7 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
    x  = 53;
    y += 10;
    for(int i = 0; i < at_max; i++, y += 10)
-      DrawAttr(g, x++, y, p, i);
+      DrawAttr(g, x, y, p, i);
 }
 
 // EOF

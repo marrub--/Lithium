@@ -192,7 +192,7 @@ prices being barred by a "call us to get the numbers."
 
 ##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_WeapnInte2 | W.R.D.
-== LITH_INFO_TITLE_WeapnInte2 | Weapon Refactoring Device
+== LITH_INFO_TITLE_WeapnInte2 | $LITH_CBI_WeapnInte2
 @@ LITH_INFO_DESCR_WeapnInte2
 Despite the idea being similar to the Weapon Interfacing Device Package, the
 Weapon Refactoring Device was conceptualized and prototyped over 40 years
@@ -208,7 +208,7 @@ amount of schematics, using computational learning algorithms and a large
 database of possible configurations.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ArmorInter | Armor Interface
+== LITH_INFO_SHORT_ArmorInter | $LITH_CBI_ArmorInter
 == LITH_INFO_TITLE_ArmorInter | Armor Interfacing Device
 @@ LITH_INFO_DESCR_ArmorInter
 The Armor Interface is a rather large yet thin, silver set of pauldrons and
@@ -225,7 +225,7 @@ flame-retardant liquid when fire damage is detected.
 
 ##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_CBIUpgr1 | High-Grade CPU
-== LITH_INFO_TITLE_CBIUpgr1 | KSKK Spec. Z6808 High-Grade CPU
+== LITH_INFO_TITLE_CBIUpgr1 | $LITH_CBI_CPU2
 @@ LITH_INFO_DESCR_CBIUpgr1
 A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to
 30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely
@@ -240,7 +240,7 @@ it a very solid feel and plenty of physical working memory.
 
 ##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_CBIUpgr2 | S. High-Grade CPU
-== LITH_INFO_TITLE_CBIUpgr2 | KSKK Spec. BC-0265 Super High-Grade CPU
+== LITH_INFO_TITLE_CBIUpgr2 | $LITH_CBI_CPU3
 @@ LITH_INFO_DESCR_CBIUpgr2
 The BC-0265 is a marvel of modular C/B Interface technology, not bigger than
 any standard CPU and capable of so, so much more. It comes equipped with

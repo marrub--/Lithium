@@ -3,10 +3,10 @@
 [jp]
 
 // Health --------------------------------------------------------------------|
-"LITH_LOG_ArmorBonus" = ">>> 鎧ボーナス";
-"LITH_LOG_BlueArmor" = ">>> 青鎧";
-"LITH_LOG_GreenArmor" = ">>> 緑鎧";
-"LITH_LOG_HealthBonus" = ">>> 生ボーナス";
+"LITH_LOG_ArmorBonus" = ">>> よろいボーナス";
+"LITH_LOG_BlueArmor" = ">>> 青よろい";
+"LITH_LOG_GreenArmor" = ">>> 緑よろい";
+"LITH_LOG_HealthBonus" = ">>> ＨＰボーナス";
 "LITH_LOG_Medikit" = ">>> メディキット";
 "LITH_LOG_MegaSphere" = ">>>> メガチャージ！";
 "LITH_LOG_SoulSphere" = ">>>> スーパーチャージ！";
@@ -56,11 +56,11 @@
 "LITH_LOG_Tourmaline" = ">> トールマリーン";
 
 // CBI Upgrades (Marine) -----------------------------------------------------|
-"LITH_LOG_CBI_MUpgr1" = "> KSKKスペック高級CPUはインストールされた";
-"LITH_LOG_CBI_MUpgr2" = "> KSKKスペック超高級CPUはインストールされた";
-"LITH_LOG_CBI_MArmorInter" = "> 鎧インタフェースはインストールされた";
-"LITH_LOG_CBI_MWeapnInter" = "> ぶき手直しデバイスはインストールされた";
-"LITH_LOG_CBI_MWeapnInte2" = "> ぶき手戻りデバイスはインストールされた";
+"LITH_LOG_CBI_MUpgr1" = "> ＫＳＫＫスペック高級ＣＰＵはインストールされた";
+"LITH_LOG_CBI_MUpgr2" = "> ＫＳＫＫスペック超高級ＣＰＵはインストールされた";
+"LITH_LOG_CBI_MArmorInter" = "> よろいインタフェースはインストールされた";
+"LITH_LOG_CBI_MWeapnInter" = "> 武器手直しデバイスはインストールされた";
+"LITH_LOG_CBI_MWeapnInte2" = "> 武器手戻りデバイスはインストールされた";
 "LITH_LOG_CBI_MRDistInter" = "> 現実変形インタフェースはインストールされた";
 
 // CBI Upgrades (Cyber-Mage) -------------------------------------------------|
@@ -73,8 +73,8 @@
 
 // Level Up ------------------------------------------------------------------|
 "LITH_LOG_LevelUpStan" = "> 「強くなっている」と思った。";
-"LITH_LOG_LevelUpJem" = "> [INFO] メモリー戻した: %iKiB";
-"LITH_LOG_LevelUpFulk" = "> \cj<\cdVital\cj>\c- :: %iのinodeは戻った。";
+"LITH_LOG_LevelUpJem" = "> ［ＩＮＦＯ］ メモリー戻した: %iＫｉＢ";
+"LITH_LOG_LevelUpFulk" = "> \cj＜\cdＶｉｔａｌ\cj＞\c- ：： %iのｉｎｏｄｅは戻った。";
 "LITH_LOG_LevelUpAri" = "> 楽しみにしてる。";
 "LITH_LOG_LevelUpMod" = "$LITH_LOG_LevelUpStan";
 
@@ -83,10 +83,10 @@
    "> \cg警告：このそばにはデーモンエナジーレベルは高すぎます。";
 
 "LITH_LOG_BossWarnJem" =
-   "> \cr[WARNING] デーモンエナジーレベルはこのそばに不当と上昇する。";
+   "> \cr［ＷＡＲＮＩＮＧ］ デーモンエナジーレベルはこのそばに不当と上昇する。";
 
 "LITH_LOG_BossWarnFulk" =
-   "> \cj<\ciWarning\cj>\c- :: デーモンエナジーレベルは高い。 元を見つけて破壊にせよ。";
+   "> \cj＜\ciＷａｒｎｉｎｇ\cj＞\c- ＬＬ デーモンエナジーレベルは高い。 元を見つけて破壊にせよ。";
 
 "LITH_LOG_BossWarnAri" =
    "> \cgこのそばに大量のデーモンエナジーは検出された。";

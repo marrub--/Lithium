@@ -120,8 +120,8 @@ void Lith_PlayerView(struct player *p)
    p->addyaw   = addy + p->extryaw;
 
    ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2) {
-      if(p->sidev) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.05);
-      else         p->addroll = lerplk(p->addroll, 0,               0.10);
+      if(p->sidev) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
+      else         p->addroll = lerplk(p->addroll, 0,               0.14);
    }
 
    DebugStat("exp: lv.%u %lu/%lu\n", p->attr.level, p->attr.exp, p->attr.expnext);

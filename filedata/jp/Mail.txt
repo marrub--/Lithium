@@ -7,7 +7,7 @@
 == LITH_MAIL_SIZE_IntroJem | 310
 
 ++ LITH_MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
-== LITH_MAIL_NAME_Cluster1Jem | 退避分104
+== LITH_MAIL_NAME_Cluster1Jem | 退避分１０４
 == LITH_MAIL_SIZE_Cluster1Jem | 245
 
 ## EOF

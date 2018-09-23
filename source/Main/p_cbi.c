@@ -32,28 +32,26 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
    int   ram;
    __str name;
 
-   Upgr(hasupgr2)
-      {CPU(1); ram = 150; name = L("LITH_INFO_TITLE_CBIUpgr2");}
-   else Upgr(hasupgr1)
-      {CPU(2); ram = 100; name = L("LITH_INFO_TITLE_CBIUpgr1");}
-   else
-      {CPU(3); ram =  50; name = "OFMD Spec. Nodea 541 Basic CPU";}
+        Upgr(hasupgr2) {CPU(1); ram = 150; name = L("LITH_CBI_CPU3");}
+   else Upgr(hasupgr1) {CPU(2); ram = 100; name = L("LITH_CBI_CPU2");}
+   else                {CPU(3); ram =  50; name = L("LITH_CBI_CPU1");}
 
    PrintTextStr(name);
    PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
-   Info("Performance: %i\CbPerf", world.cbiperf);
-   Info("In use: %i\CbPerf", p->cbi.pruse);
-   Info("RAM: %iTiB", ram);
+   Info(L("LITH_CBI_PERF"), world.cbiperf);
+   Info(L("LITH_CBI_PUSE"), p->cbi.pruse);
+   Info(L("LITH_CBI_WRAM"), ram);
 
    InfoSep;
 
-   Upgr(armorinter) Info("Has Armor Interface");
-   Upgr(weapninter) Info("Has Weapon Modification Device");
-   Upgr(weapninte2) Info("Has Weapon Refactoring Device");
-   Upgr(rdistinter) Info("Has Reality Distortion Interface");
+   Info(L("LITH_CBI_INTERFACES"));
+   Upgr(armorinter) Info("> %S", L("LITH_CBI_ArmorInter"));
+   Upgr(weapninter) Info("> %S", L("LITH_CBI_WeapnInter"));
+   Upgr(weapninte2) Info("> %S", L("LITH_CBI_WeapnInte2"));
+   Upgr(rdistinter) Info("> %S", L("LITH_CBI_RDistInter"));
 
    Upgr(armorinter) Slot("ArmorInter", 0, 1);
    Upgr(weapninter) Slot("WeapnInter", 0, 2);
@@ -67,17 +65,18 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
 static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 {
    CPU(2);
-   PrintTextStr("AOF 5900001 Rev7 CPU");
+   PrintTextStr(L("LITH_CBI_CPU4"));
    PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
-   Info("Performance: 34\CbPerf");
-   Info("In use: %i\CbPerf", p->cbi.pruse);
-   Info("RAM: 19TiB");
+   Info(L("LITH_CBI_PERF"), 34);
+   Info(L("LITH_CBI_PUSE"), p->cbi.pruse);
+   Info(L("LITH_CBI_WRAM"), 19);
 
    InfoSep;
 
+   Info(L("LITH_CBI_INTERFACES"));
                       Info("\CiBlade Spell Driver \Cbinstalled.");
                       Info("\CiDelear Spell Driver \Cbinstalled.");
    Upgr(c_slot3spell) Info("\CiFeuer Spell Driver \Cbinstalled.");
@@ -85,7 +84,7 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
    Upgr(c_slot5spell) Info("\CiHulgyon Spell Driver \Cbinstalled.");
    Upgr(c_slot6spell) Info("\CiHosh'danma Spell Driver \Cbinstalled.");
    Upgr(c_slot7spell) Info("\CgCercle de la Mort Spell Driver \Cbinstalled.");
-   Upgr(c_rdistinter) Info("Reality Distortion Interface \Cbinstalled.");
+   Upgr(c_rdistinter) Info("> %S", L("LITH_CBI_RDistInter"));
 
                       Slot("Slot1Spell", 0, 1);
                       Slot("Slot2Spell", 0, 2);

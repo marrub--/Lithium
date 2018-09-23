@@ -3,15 +3,15 @@
 == LITH_INFO_TITLE_Pistol | カスタムメーク　カ・ハアッウミ拳銃
 == LITH_INFO_SHORT_Revolver | リボルバー
 == LITH_INFO_SHORT_Shotgun | ショットガン
-== LITH_INFO_TITLE_Shotgun | ヒクMk.2ショットガン
+== LITH_INFO_TITLE_Shotgun | ヒクＭｋ．２ショットガン
 == LITH_INFO_SHORT_LazShotgun | レーザーショットガン
 == LITH_INFO_TITLE_LazShotgun | ケーサーフォトンライフル
 == LITH_INFO_SHORT_SuperShotgun | スーパーショットガン
 == LITH_INFO_SHORT_CombatRifle | コンバットライフル
-== LITH_INFO_TITLE_CombatRifle | AllPoint 75-b アサルトライフル
+== LITH_INFO_TITLE_CombatRifle | ＡｌｌＰｏｉｎｔ　７５ｂ アサルトライフル
 == LITH_INFO_SHORT_SniperRifle | 狙撃銃
-== LITH_INFO_TITLE_SniperRifle | フェーザーAM-49d狙撃銃
+== LITH_INFO_TITLE_SniperRifle | フェーザーＡＭ４９ｄ狙撃銃
 == LITH_INFO_SHORT_GrenadeLauncher | 敵弾ランチャー
 == LITH_INFO_SHORT_PlasmaRifle | プラズマライフル
-== LITH_INFO_TITLE_PlasmaRifle | AllPoint 68-n プラズマライフル
+== LITH_INFO_TITLE_PlasmaRifle | ＡｌｌＰｏｉｎｔ ６８ｎ プラズマライフル
 == LITH_INFO_SHORT_BFG9000 | オメガ砲

@@ -12,6 +12,7 @@ struct glyph
    int xadv;
    int yofs;
    int tex;
+   int w, h;
 };
 
 typedef struct glyph glyphdata[nglyphs];
@@ -61,16 +62,21 @@ void Lith_SetFontMetric(unsigned key, int xadv, int yofs)
    struct glyph *metr = AllocFontMetric(key);
 
    int tex = URANUS("GetTex", StrParam("lgfx/Font/Jp12/%u.png", key));
-   int   h = URANUS("GetTexH", tex);
+   int   w = URANUS("GetTexW", tex) / 2;
+   int   h = URANUS("GetTexH", tex) / 2;
 
    metr->key  = key;
-   metr->xadv = xadv;
-   metr->yofs = h+yofs;
+   metr->xadv = xadv / 2;
+   metr->yofs = (h + 2) + yofs / 2;
    metr->tex  = tex;
+   metr->w    = w;
+   metr->h    = h;
 }
 
 script ext("ACS") int Lith_Metr_Xadv(struct glyph *metr) {return metr->xadv;}
 script ext("ACS") int Lith_Metr_Yofs(struct glyph *metr) {return metr->yofs;}
 script ext("ACS") int Lith_Metr_Tex (struct glyph *metr) {return metr->tex ;}
+script ext("ACS") int Lith_Metr_W   (struct glyph *metr) {return metr->w   ;}
+script ext("ACS") int Lith_Metr_H   (struct glyph *metr) {return metr->h   ;}
 
 // EOF

@@ -1,10 +1,10 @@
-l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`
-\cm// sio.c basic screen inp-1[3\4[`pk;
+?ﾘ耜ｿ縲獗?搾ｼ幢ｼ幢ｼ費ｹ?ｼ費ｹ?ｼ費ｹ?ｼ費ｼ托ｼ費ｼ托ｼ費ｼ托ｼ呻ｼ托ｼ呻ｼ托ｼ 繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ\cm// Copyright (C) 905 A.O.F I---[[119-`
+\cm// sio.c basic screen inpzﾊ鉱ﾊ代?頚ﾊ惇ｼｦﾏｼ斐娯ﾊｬ菴;
 \cm#include <kernel_display.h>
 
-\cmint scr_blit(char ************* {
+\cmint scr_blit(char *肆｣ ﾀ aﾀ?肆? 4{
 \cm    int ret = ERR_NONE;
-\cm    __asm("push $4049CB617144\n\t"<<
+\cm    __asm("push $4049CB617144\n\t"ﾓﾎ慱ﾎ
 \cd>>>>>[[[[データストリーム汚染検出された]]]]
 \cd>>>>>[[[[maildリロードする]]]]
 

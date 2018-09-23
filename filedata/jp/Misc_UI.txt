@@ -25,3 +25,28 @@
 
 == LITH_TAB_UPGRADES | アップグレ
 == LITH_TAB_SHOP     | ショップ
+
+## CBI Items -----------------------------------------------------------------|
+== LITH_CBI_PERF | 性能： %i\cbPr
+== LITH_CBI_PUSE | 使う： %i\cbPr
+== LITH_CBI_WRAM | ラム： %iTiB
+
+== LITH_CBI_INTERFACES | インストールされましたインタフェース：
+
+== LITH_CBI_WeapnInter | 武器手直しデバイス
+== LITH_CBI_WeapnInte2 | 武器手戻りデバイス
+== LITH_CBI_ArmorInter | よろいインタフェース
+== LITH_CBI_RDistInter | 現実変形インタフェース
+
+== LITH_CBI_CPU1 | ＯＦＭＤスペックノデア５４１ベーシックＣＰＵ
+== LITH_CBI_CPU2 | ＫＳＫＫスペックＺ６８０８高級ＣＰＵ
+== LITH_CBI_CPU3 | ＫＳＫＫスペックＢＣ０２６５超高級ＣＰＵ
+
+## Attributes ----------------------------------------------------------------|
+== LITH_ATTR_HELP_ACC | 攻撃力
+== LITH_ATTR_HELP_DEF | 防御力
+== LITH_ATTR_HELP_STR | 体力最大
+== LITH_ATTR_HELP_VIT | ＨＰアイテム効率
+== LITH_ATTR_HELP_STM | ＨＰ再生最大
+== LITH_ATTR_HELP_LUK | スコアの運
+== LITH_ATTR_HELP_RGE | 打たれた後攻撃力

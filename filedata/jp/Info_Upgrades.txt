@@ -1,1 +1,16 @@
-## Info_Upgrades.txt stub
+== LITH_INFO_SHORT_WeapnInter | $LITH_CBI_WeapnInter
+== LITH_INFO_TITLE_WeapnInter | 武器インタフェースできるデバイス箱
+
+== LITH_INFO_SHORT_WeapnInte2 | $LITH_CBI_WeapnInte2
+== LITH_INFO_TITLE_WeapnInte2 | $LITH_CBI_WeapnInte2
+
+== LITH_INFO_SHORT_ArmorInter | $LITH_CBI_ArmorInter
+== LITH_INFO_TITLE_ArmorInter | よろいインタフェースできるデバイス
+
+== LITH_INFO_SHORT_CBIUpgr1 | 高級ＣＰＵ
+== LITH_INFO_TITLE_CBIUpgr1 | $LITH_CBI_CPU2
+
+== LITH_INFO_SHORT_CBIUpgr2 | 超高級ＣＰＵ
+== LITH_INFO_TITLE_CBIUpgr2 | $LITH_CBI_CPU3
+
+## EOF

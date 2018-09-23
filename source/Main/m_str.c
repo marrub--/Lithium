@@ -103,13 +103,14 @@ __str LanguageV(__str name)
    ACS_PrintLocalized(name);
    __str ret = ACS_EndStrParam();
 
-   if(ret[0] == '$')
+   while(ret[0] == '$')
    {
       __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
       ACS_BeginPrint();
       ACS_PrintLocalized(sub);
       __str nex = ACS_EndStrParam();
       if(sub != nex) ret = nex;
+      else           break;
    }
 
    return ret;
