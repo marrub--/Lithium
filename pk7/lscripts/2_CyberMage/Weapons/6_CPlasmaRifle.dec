@@ -51,7 +51,7 @@ actor Lith_PulseCharge
 
 actor Lith_CPlasmaRifle : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_CPlasmaRifle"
+   Tag "$LITH_INFO_SHORT_CPlasmaRifle"
    Weapon.UpSound "weapons/plasma/draw"
    Weapon.SlotNumber 6
    Weapon.SlotPriority 1

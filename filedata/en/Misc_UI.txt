@@ -1,0 +1,28 @@
+## UI ------------------------------------------------------------------------|
+== LITH_COST       | Cost:
+== LITH_CATEGORY   | Category
+== LITH_SCOREMULT  | Score Multiplier
+== LITH_BUY        | Buy
+== LITH_DEACTIVATE | Deactivate
+== LITH_ACTIVATE   | Activate
+
+== LITH_TAB_ARSENAL_Stan | Arsenal
+== LITH_TAB_ARSENAL_Jem  | Directives
+== LITH_TAB_ARSENAL_Ari  | Gear
+== LITH_TAB_ARSENAL_Mod  | $LITH_TAB_ARSENAL_Stan
+
+== LITH_TAB_STATUS    | Status
+== LITH_TAB_INVENTORY | Inventory
+== LITH_TAB_INFO      | Info
+== LITH_TAB_SETTINGS  | Settings
+
+== LITH_TAB_ATTRIBUTES | Attributes
+== LITH_TAB_CBI        | CBI
+
+== LITH_TAB_BIP        | BIP
+== LITH_TAB_LOG        | Log
+== LITH_TAB_STATISTICS | Statistics
+== LITH_TAB_NOTES      | Notes
+
+== LITH_TAB_UPGRADES | Upgrades
+== LITH_TAB_SHOP     | Shop

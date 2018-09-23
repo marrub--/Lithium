@@ -22,7 +22,7 @@ actor Lith_ParticleBeam : Lith_PlasmaLaze
 
 actor Lith_PlasmaRifle : Lith_MWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_PlasmaRifle"
+   Tag "$LITH_INFO_SHORT_PlasmaRifle"
    Weapon.UpSound "weapons/plasma/draw"
    Weapon.SlotNumber 6
    Weapon.SlotPriority 1

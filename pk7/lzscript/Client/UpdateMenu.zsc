@@ -63,9 +63,9 @@ void Lith_SetText()
    string s;
 
    if(m_page > 0)
-      s = String.Format("$LITH_TXT_%s_Page%i", m_clg[m_logn].name, m_page + 1);
+      s = String.Format("$LITH_%s_Page%i", m_clg[m_logn].name, m_page + 1);
    else
-      s = String.Format("$LITH_TXT_%s", m_clg[m_logn].name);
+      s = String.Format("$LITH_%s", m_clg[m_logn].name);
 
    m_text = StringTable.Localize(s);
 }

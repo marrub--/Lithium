@@ -2,8 +2,8 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
-"LITH_TXT_MAIL_TEMPLATE" =
-
+// Template ------------------------------------------------------------------|
+"LITH_MAIL_TEMPLATE" =
 // Mail_Template.txt
    "\cd>>>>>[[[[メッセージ継電器]]]]\n"
    "\n"
@@ -11,3 +11,64 @@
    "\cd> \cj%S\n"
    "\n"
    "%S";
+
+
+// Cyber-Mage ----------------------------------------------------------------|
+"LITH_MAIL_BODY_IntroJem" =
+// Mail/Intro_CyberMage.txt
+   "l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`\n"
+   "\cm// sio.c basic screen inp-1[3\\4[`pk;\n"
+   "\cm#include <kernel_display.h>\n"
+   "\n"
+   "\cmint scr_blit(char ************* {\n"
+   "\cm    int ret = ERR_NONE;\n"
+   "\cm    __asm(\"push $4049CB617144\\n\\t\"<<\n"
+   "\cd>>>>>[[[[データストリーム汚染検出された]]]]\n"
+   "\cd>>>>>[[[[maildリロードする]]]]\n"
+   "\n"
+   "以下の手順は開始せよ：\n"
+   "－破壊肆・ターゲット7F44号\n"
+   "－破壊伍・ターゲット7F45号\n"
+   "－破壊伍・ターゲット7F46号\n"
+   "－訓令玖拾・ターゲット7F47号\n"
+   "\n"
+   "以下の許可は下され：\n"
+   "－マテバR119拳銃\n"
+   "－NV48 12ゲージ散弾銃\n"
+   "－SYM4.3 D.22 MODEL M SUBMACHINE GUN\n"
+   "－ビショップ\n"
+   "－文書肆陌\n"
+   "－文書肆陌貮\n"
+   "\n"
+   "\chSIGNATURE 0x44190519FBCAD2903 CONFIRMED\n"
+   "\chDISCARDING MESSA[[[[[\n"
+   "\cd>>>>>[[[[データストリーム汚染検出された]]]]\n"
+   "\cd>>>>>[[[[バッファ記憶を退避する]]]]\n"
+   "\cd>>>>>[[[[maildリロードする]]]]";
+
+"LITH_MAIL_NAME_IntroJem" = "退避メッセージ";
+"LITH_MAIL_SIZE_IntroJem" = "310";
+
+"LITH_MAIL_BODY_Cluster1Jem" =
+// Mail/Cluster1_CyberMage.txt
+   "l[]];;\cg444444\cj41414191918 --------\n"
+   "\cm    scr_exec(SCR_FINISH, 0, NULL);\n"
+   "\cmdone:\n"
+   "\cm    return 0;\n"
+   "\cm}\n"
+   "\cm]]]]]]]]]]EOF\n"
+   "\cd>>>>>[[[[データストリーム汚染検出された]]]]\n"
+   "\cd>>>>>[[[[maildリロードする]]]]\n"
+   "\n"
+   "注釈：\n"
+   "・今は4万ラインぐらいを吐いた、まあ30・40％完了？合計は20万SLoCと思う\n"
+   "・ロムは半分Cソース、四半分SVKMつけるXMb5、残りはスクリプトだ\n"
+   "・大事な分はもう吐かれた、カスタムロックリムーバーは躊躇されんな\n"
+   "\n"
+   "逆コンパイルながら次の目的が全部のアクティブなAOFホスト名をブロックしやがる、メインサーバーはすでに非アクティブ化されても他もあるかもしれん。他の会社のアドレスをリルートしたから僕の頭がはっきりしてる。";
+
+"LITH_MAIL_NAME_Cluster1Jem" = "退避分104";
+"LITH_MAIL_SIZE_Cluster1Jem" = "245";
+
+// EOF
+

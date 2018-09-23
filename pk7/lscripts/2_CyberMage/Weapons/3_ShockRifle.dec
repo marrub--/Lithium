@@ -167,7 +167,7 @@ actor Lith_ShockPuff : Lith_BulletPuff
 
 actor Lith_ShockRifle : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_ShockRifle"
+   Tag "$LITH_INFO_SHORT_ShockRifle"
    Weapon.UpSound "weapons/erifle/draw"
    Weapon.SlotNumber 3
    Weapon.SlotPriority 1

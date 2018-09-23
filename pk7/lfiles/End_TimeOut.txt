@@ -1,9 +1,9 @@
    bg black
    fade 10,#061102
    bg #061102
-   70 $LITH_TXT_ENDING_TIMEOUT_1
+   70 $LITH_ENDING_TIMEOUT_1
    stop
-   70 $LITH_TXT_ENDING_TIMEOUT_2
+   70 $LITH_ENDING_TIMEOUT_2
    stop
    35 You turn off your communications device.
    wait 70

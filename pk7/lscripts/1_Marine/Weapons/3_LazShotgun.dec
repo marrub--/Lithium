@@ -18,7 +18,7 @@ actor Lith_LazShotgunTrail
 
 actor Lith_LazShotgun : Lith_MWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_LazShotgun"
+   Tag "$LITH_INFO_SHORT_LazShotgun"
    Weapon.UpSound "weapons/lshotgun/draw"
    Weapon.SlotNumber 3
    Weapon.SlotPriority 0.9

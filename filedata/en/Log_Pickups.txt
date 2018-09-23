@@ -3,6 +3,9 @@
 ## 2: Very rare
 ## 4: Randomized certainty
 
+== LITH_PICKUP_SELL_ORDER | 0
+== LITH_PICKUP_SELL | > Sold the %S for %lli\cnscr\c-.
+
 == LITH_PICKUP_NUM | 68
 == LITH_PICKUP_000 | You got the %S!
 == LITH_PICKUP_001 | Oh yes, the %S.
@@ -109,5 +112,3 @@ comment was about to bring down upon you, maybe you would have held
 your fucking tongue. But you couldn't, you didn't, and now you're paying
 the price, you goddamn idiot. I will shit fury all over you
 and you will drown in it. You're fucking dead, kiddo.
-
-## EOF

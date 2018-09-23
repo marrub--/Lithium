@@ -227,7 +227,7 @@ static void Lith_StupidPickup(struct player *p, int weapon)
    struct pickupname_s const *names = &pickupnames[weapon];
 
    if(!fmtnum)
-      fmtnum = strtoi_str(Language("LITH_PICKUP_NUM"), null, 10);
+      fmtnum = strtoi_str(L("LITH_PICKUP_NUM"), null, 10);
 
    int ifmt  = ACS_Random(0, fmtnum);
    int iname = ACS_Random(1, names->num - 1);
@@ -257,7 +257,7 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
       Lith_StupidPickup(p, info->type);
    else if(info->name)
       p->log(StrParam("> %LS", "LITH_PICKUP_000"),
-         Language("LITH_TXT_INFO_SHORT_%S", info->name));
+         Language("LITH_INFO_SHORT_%S", info->name));
    else
       p->log("> Acquired impossible object");
 }

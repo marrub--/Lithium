@@ -2,8 +2,7 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-"LITH_TXT_ENDING_CREDITS" =
-
+"LITH_ENDING_CREDITS" =
 // Endings/End_Credits.txt
    "\cd>>>>>                             [[[[ Lithium ]]]]\n"
    "\cd>>>>>                         Project Golan, Xevv 2\n"
@@ -32,15 +31,16 @@
    "\cnDavidPH\cj, for making this project possible.\n"
    "\cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being an inspiration.\n"
    "\cnYholl\cj and \cnZombie\cj, for tons of help dealing with ZDoom.";
-"LITH_TXT_ENDING_DEDICATION" =
 
+"LITH_ENDING_DEDICATION" =
 // Endings/End_Dedication.txt
    "Dedicated to the loving memory of Kaitlyn Anne Fox.\n"
    "         You were my biggest inspiration.\n"
    "\n"
    "                   Goodnight.";
-"LITH_TXT_ENDING_TIMEOUT_1" =
 
+
+"LITH_ENDING_TIMEOUT_1" =
 // Endings/End_TimeOut1.txt
    ">>>>>[[[[INCOMING MESSAGE]]]]\n"
    "\n"
@@ -62,8 +62,8 @@
    "\n"
    "77777777777777777777777777732069089143XXXXXXXXXX\n"
    "[[[[[[[[[>> data stream corrupt, retrying";
-"LITH_TXT_ENDING_TIMEOUT_2" =
 
+"LITH_ENDING_TIMEOUT_2" =
 // Endings/End_TimeOut2.txt
    ">>>>>[[[[REDELIVERING MESSAGE]]]]\n"
    "\n"
@@ -79,8 +79,9 @@
    "work. Thank you.\n"
    "\n"
    "Good luck, [REDACTED]";
-"LITH_TXT_ENDING_NORMAL_MARINE" =
 
+
+"LITH_ENDING_NORMAL_MARINE" =
 // Endings/End_Normal_Marine.txt
    "\cdYou awaken in a hospital bed, cybernetics turned off,\n"
    "\cdbody aching all over. It's over. The fight against\n"
@@ -101,8 +102,8 @@
    "\n"
    "\cgIf what you saw was real...\n"
    "\cg...maybe it's best nobody knows you're a hero.";
-"LITH_TXT_ENDING_NORMAL_CYBERMAGE" =
 
+"LITH_ENDING_NORMAL_CYBERMAGE" =
 // Endings/End_Normal_CyberMage.txt
    "\n"
    "\n"
@@ -128,4 +129,6 @@
    "\n"
    "\cvIt's time to go back.";
 
+
 // EOF
+

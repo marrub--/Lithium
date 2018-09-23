@@ -80,7 +80,7 @@ actor Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun
 actor Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun
 {
    Lith_Pickup.Sprite  "LWEPC"
-   Lith_Pickup.SpriteM "SGN2A"
+   Lith_Pickup.SpriteM "SSGGX"
    Lith_Pickup.SpriteC "CSHGY"
 
    Tag "Super Shotgun Pickup"

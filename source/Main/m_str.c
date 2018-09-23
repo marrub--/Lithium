@@ -15,7 +15,7 @@
 //
 __str StrUpper(__str in)
 {
-   ACS_BeginStrParam();
+   ACS_BeginPrint();
 
    for(char __str_ars const *c = in; *c; c++)
       ACS_PrintChar(toupper(*c));
@@ -97,16 +97,19 @@ __str Lith_ScoreSep(i96 num)
 //
 // LanguageV
 //
-static __str LanguageV(__str name)
+__str LanguageV(__str name)
 {
-   __str ret = StrParam("%LS", name);
+   ACS_BeginPrint();
+   ACS_PrintLocalized(name);
+   __str ret = ACS_EndStrParam();
 
    if(ret[0] == '$')
    {
       __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
-      __str nex = StrParam("%LS", sub);
-      if(sub != nex)
-         ret = nex;
+      ACS_BeginPrint();
+      ACS_PrintLocalized(sub);
+      __str nex = ACS_EndStrParam();
+      if(sub != nex) ret = nex;
    }
 
    return ret;

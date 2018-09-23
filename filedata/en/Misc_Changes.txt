@@ -9,7 +9,7 @@
 ## Removed  = \cg-
 ## Subspace = \cb]
 
-%% LITH_TXT_UPDATE_1_5_3
+%% LITH_UPDATE_1_5_3
 \cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:
 \cd+ Added a player levelling system with 7 stats.
 \cb] Monsters will scale to your level.
@@ -33,7 +33,7 @@
 \cj| Improved performance in high-monster-density maps.
 \cj| Improved GUI performance slightly.
 
-%% LITH_TXT_UPDATE_1_5_3_Page2
+%% LITH_UPDATE_1_5_3_Page2
 \cj| Changed the default automap colors.
 \cj| Replaced the small font and console fonts.
 \cj| Made players not collide with eachother in multiplayer.
@@ -46,11 +46,11 @@
 \cj| Fixed PauseManager sometimes crashing the VM.
 \cg- Removed mana regeneration.
 
-%% LITH_TXT_UPDATE_1_5_2
+%% LITH_UPDATE_1_5_2
 \cf(\ciSep. 4, 2017\cf) \cjFrom \cn1.5.1\cj to \cf1.5.2\cj:
 \cj| Fixed function pointer errors on upgrade init.
 
-%% LITH_TXT_UPDATE_1_5_1
+%% LITH_UPDATE_1_5_1
 \cf(\ciAug. 36, 2017\cf) \cjFrom \cn1.5\cj to \cf1.5.1\cj:
 \cd+ Added an auto-save setting.
 \cd+ Added an API, so external C code can access all of Lithium by
@@ -74,7 +74,7 @@
 \cj| Improved the Combat Rifle's reload animation slightly
 \cj| Fixed junk frames in Extra Hard enemies.
 
-%% LITH_TXT_UPDATE_1_5_1_Page2
+%% LITH_UPDATE_1_5_1_Page2
 \cj| Fixed death exits adding a bunch of junk to the upgrades menu.
 \cj| Fixed the "resurrect" cheat not working.
 \cj| Fixed the SPAS description listing the wrong capacity.
@@ -96,7 +96,7 @@
 \cg- Removed the trail from Delear's world sprite.
 \cg- Removed Score Golf mode
 
-%% LITH_TXT_UPDATE_1_5
+%% LITH_UPDATE_1_5
 \cf(\ciAug. 25, 2017\cf) \cjFrom \cn1.5 beta\cj to \cf1.5\cj:
 \cd+ Added the remaining Methods:
 \cb] Blade, slot 1 - small slash, basic melee
@@ -120,7 +120,7 @@
 \cd+ Added the rest of Cyber-Mage's mail.
 \cd+ Added messages when defeating phantoms.
 
-%% LITH_TXT_UPDATE_1_5_Page2
+%% LITH_UPDATE_1_5_Page2
 \cd+ Added an animation when the SMG overheats.
 \cd+ Added an armor type indicator to Cyber-Mage's HUD.
 \cd+ Added more pickup sounds.
@@ -144,7 +144,7 @@
 \cj| Fixed some info pages never being unlocked.
 \cj| Increased the Missile Launcher's damage.
 
-%% LITH_TXT_UPDATE_1_5_Page3
+%% LITH_UPDATE_1_5_Page3
 \cj| Slightly changed the SMG's draw sound.
 \cj| Moved the TITLEMAP to the doom2 filter, so it won't make some games unplayable.
 \cj| Made rain effects better (thanks, Kate!)
@@ -167,7 +167,7 @@
 \cj| Fixed shop weapons not being given correctly.
 \cj| Probably fixed some crashing. Probably.
 
-%% LITH_TXT_UPDATE_1_5b
+%% LITH_UPDATE_1_5b
 \cf(\ciJul. 17, 2017\cf) \cjFrom \cn1.5 alpha 2\cj to \cf1.5 beta\cj:
 \cd+ Enemies now have a level and rank, which determine their health
 \cd  and resistances, et al.
@@ -191,7 +191,7 @@
 \cj| Made weapon pickup sounds play when selling the weapon.
 \cj| Made the Star Destroyer sound slightly nicer in OpenAL.
 
-%% LITH_TXT_UPDATE_1_5b_Page2
+%% LITH_UPDATE_1_5b_Page2
 \cj| Made the Combat Rifle never auto-aim.
 \cj| Fixed the Barrier powerup not displaying stacked uses properly.
 \cj| Made the Spider Mastermind slightly more dangerous.
@@ -215,12 +215,12 @@
 \cd+ Added something.
 \cg- Removed the slide indicator from the HUD
 
-%% LITH_TXT_UPDATE_1_5a2
+%% LITH_UPDATE_1_5a2
 \cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.5 alpha\cj to \cf1.5 alpha 2\cj:
 \cj| Fixed pausing weapons being caused from external sources
 \cj  (which broke the adrenaline upgrade completely.)
 
-%% LITH_TXT_UPDATE_1_5a
+%% LITH_UPDATE_1_5a
 \cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.4\cj to \cf1.5 alpha\cj:
 \cd+ Added searching to the info panel.
 \cd+ Added an adrenaline indicator to the HUD.
@@ -244,7 +244,7 @@
 \cj| Fixed the Spider Mastermind not being terrifying enough.
 \cj| Made the rifle clickier as it runs out of ammo.
 
-%% LITH_TXT_UPDATE_1_5a_Page2
+%% LITH_UPDATE_1_5a_Page2
 \cj| Compressed some sounds, reducing the overall file size.
 \cj| Fixed some weird balance issues.
 \cj| Fixed chaingunners using the wrong sound.
@@ -259,7 +259,7 @@
 \cg- Removed heretic support. 2hard4me
 \cd+ Added fun
 
-%% LITH_TXT_UPDATE_1_4
+%% LITH_UPDATE_1_4
 \cf(\ciApr. 14, 2017\cf) \cjFrom \cn1.3.1\cj to \cf1.4\cj:
 \cd+ Added Phantoms.
 \cd+ Added a CBI upgrades/performance system.
@@ -283,7 +283,7 @@
 \cj| Replaced the HUD's background color with black.
 \cj| Made the SSG faster, and stronger.
 
-%% LITH_TXT_UPDATE_1_4_Page2
+%% LITH_UPDATE_1_4_Page2
 \cj| Fixed the Combat Rifle and Sniper Rifle not actually being hitscan.
 \cj| Gave Hell Knights/Barons and Cacodemons proper blood colors.
 \cj| Re-fixed shop buy messages logging wrong.
@@ -307,7 +307,7 @@
 \cg- Removed fun
 \cd+ Definitely did not add evil gost.
 
-%% LITH_TXT_UPDATE_1_3_1
+%% LITH_UPDATE_1_3_1
 \cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.3\cj to \cf1.3.1\cj:
 \cj| Fixed maps with ACS scripts in them occasionally causing
 \cj  reality to collapse.
@@ -316,7 +316,7 @@
 \cj| Increased shell ammo to 60.
 \cd+ Added a setting for cursor speed.
 
-%% LITH_TXT_UPDATE_1_3
+%% LITH_UPDATE_1_3
 \cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.2\cj to \cf1.3\cj:
 \cj| Rebalanced a lot of stuff, mainly weapons and score amounts.
 \cj| Made the cannon a lot easier to use.
@@ -340,7 +340,7 @@
 \cd+ Added settings for the Vital Scanner upgrade.
 \cd+ Added enemy compatibility checker.
 
-%% LITH_TXT_UPDATE_1_3_Page2
+%% LITH_UPDATE_1_3_Page2
 \cd+ Added a titlemap and title music.
 \cd+ Added (badly written) intermission texts.
 \cd+ Added a pretty loading screen.
@@ -364,7 +364,7 @@
 \cj| Fixed the arachnotron/spider mastermind names being wrong.
 \cj| Changed some miscallaneous text.
 
-%% LITH_TXT_UPDATE_1_3_Page3
+%% LITH_UPDATE_1_3_Page3
 \cj| Improved the way the Adrenaline upgrade works.
 \cj| Fixed items being picked up too much.
 \cj| Fixed score multiplier not being applied occasionally.
@@ -374,7 +374,7 @@
 \cj| Made the Vital Scanner upgrade cheaper.
 \cg- Removed some items from the shop.
 
-%% LITH_TXT_UPDATE_1_2
+%% LITH_UPDATE_1_2
 \cf(\ciFeb. 1, 2017\cf) \cjFrom \cn1.1\cj to \cf1.2\cj:
 \cd+ Added logos for companies in the BIP
 \cd+ Added a log tab to the CBI for showing things you've done or used
@@ -398,7 +398,7 @@
 \cd+ Added a knife which replaces the fist
 \cd+ Added menu sounds and a smallfont replacement
 
-%% LITH_TXT_UPDATE_1_2_Page2
+%% LITH_UPDATE_1_2_Page2
 \cj| Made the pistol do more damage
 \cj| Probably fixed more crashes
 \cj| Made combat rifle spit blood better
@@ -422,7 +422,7 @@
 \cj| Buffed bosses quite a bit
 \cj| Buffed some weapons
 
-%% LITH_TXT_UPDATE_1_1
+%% LITH_UPDATE_1_1
 \cf(\ciJan. 19, 2017\cf) \cjFrom \cn1.0\cj to \cf1.1\cj:
 \cd+ Added an indicator for weapons that take ammo and ones that have
 \cd  magazines
@@ -446,7 +446,7 @@
 \cd+ Added reloading to the Gauss Shotgun (now Gauss Rifle), which has a
 \cd  10-round magazine
 
-%% LITH_TXT_UPDATE_1_1_Page2
+%% LITH_UPDATE_1_1_Page2
 \cd+ Added a settings page to the CBI which lets you set up CVars
 \cd+ Gave the Hell Knight a new attack
 \cd+ Gave the Omega Cannon new sprites, new effects and better balance
@@ -469,7 +469,7 @@
 \cj| Fixed enemies not giving score on XDeath
 \cj| Changed the price of Torgue Mode
 
-%% LITH_TXT_UPDATE_1_1_Page3
+%% LITH_UPDATE_1_1_Page3
 \cj| Changed the amount of score the base upgrades take, making it easier
 \cj  to obtain score
 \cj| Improved GUI behaviour

@@ -52,15 +52,15 @@ static struct page_info GetPageInfo(bippage_t const *page)
 
    pinf.shname = page->category == BIPC_MAIL
       ? page->name
-      : Language("LITH_TXT_INFO_SHORT_%S", page->name);
+      : Language("LITH_INFO_SHORT_%S", page->name);
 
    pinf.body = page->body
       ? page->body
-      : Language("LITH_TXT_INFO_DESCR_%S", page->name);
+      : Language("LITH_INFO_DESCR_%S", page->name);
 
    pinf.flname = page->title
       ? page->title
-      : Language("LITH_TXT_INFO_TITLE_%S", page->name);
+      : Language("LITH_INFO_TITLE_%S", page->name);
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);
@@ -98,8 +98,8 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 optargs(1)
 static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
-   __str image = LanguageNull("LITH_TXT_INFO_IMAGE_%S", pinit->name);
-   int height = strtoi_str(Language("LITH_TXT_INFO_CSIZE_%S", pinit->name), null, 0);
+   __str image = LanguageNull("LITH_INFO_IMAGE_%S", pinit->name);
+   int height = strtoi_str(Language("LITH_INFO_CSIZE_%S", pinit->name), null, 0);
 
    bippage_t *page = Salloc(bippage_t);
 
@@ -243,10 +243,10 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
    p->setActivator();
 
-   flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S", title), null, 0);
+   flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S", title), null, 0);
 
    ifauto(__str, discrim, p->discrim) {
-      flags |= strtoi_str(Language("LITH_TXT_MAIL_FLAG_%S%S", title, discrim), null, 0);
+      flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S%S", title, discrim), null, 0);
       if(!(flags & MAILF_AllPlayers))
          title = StrParam("%S%S", title, discrim);
    }
@@ -255,17 +255,17 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    bippage_t *page = Salloc(bippage_t);
 
-   __str date = LanguageNull("LITH_TXT_MAIL_TIME_%S", title);
-   __str size = LanguageNull("LITH_TXT_MAIL_SIZE_%S", title);
-   __str send = LanguageNull("LITH_TXT_MAIL_SEND_%S", title);
-   __str name = LanguageNull("LITH_TXT_MAIL_NAME_%S", title);
-   __str body = Language    ("LITH_TXT_MAIL_BODY_%S", title);
+   __str date = LanguageNull("LITH_MAIL_TIME_%S", title);
+   __str size = LanguageNull("LITH_MAIL_SIZE_%S", title);
+   __str send = LanguageNull("LITH_MAIL_SEND_%S", title);
+   __str name = LanguageNull("LITH_MAIL_NAME_%S", title);
+   __str body = Language    ("LITH_MAIL_BODY_%S", title);
 
    if(!send) send = "<internal>";
 
    page->name  = date ? date : world.canontimeshort;
    page->title = name ? name : "<title omitted>";
-   page->body  = StrParam(Language("LITH_TXT_MAIL_TEMPLATE"), send, page->name, body);
+   page->body  = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 

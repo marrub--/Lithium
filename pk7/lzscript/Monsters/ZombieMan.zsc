@@ -30,7 +30,7 @@ default
    DeathSound "grunt/death";
    ActiveSound "grunt/active";
    Obituary "$OB_ZOMBIE";
-   Tag "$LITH_TXT_INFO_SHORT_ZombieMan";
+   Tag "$LITH_INFO_SHORT_ZombieMan";
 
    +FLOORCLIP
 }

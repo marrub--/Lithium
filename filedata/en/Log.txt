@@ -7,102 +7,100 @@
 ## >>>>>> | ???
 
 ## Health --------------------------------------------------------------------|
-== LITH_TXT_LOG_ArmorBonus  | >>> Armor Bonus
-== LITH_TXT_LOG_BlueArmor   | >>> Blue Armor
-== LITH_TXT_LOG_GreenArmor  | >>> Green Armor
-== LITH_TXT_LOG_HealthBonus | >>> Health Bonus
-== LITH_TXT_LOG_Medikit     | >>> Medikit
-== LITH_TXT_LOG_MegaSphere  | >>>> Mega Charge!
-== LITH_TXT_LOG_SoulSphere  | >>>> Super Charge!
-== LITH_TXT_LOG_StimPack    | >>> Stimpack
+== LITH_LOG_ArmorBonus  | >>> Armor Bonus
+== LITH_LOG_BlueArmor   | >>> Blue Armor
+== LITH_LOG_GreenArmor  | >>> Green Armor
+== LITH_LOG_HealthBonus | >>> Health Bonus
+== LITH_LOG_Medikit     | >>> Medikit
+== LITH_LOG_MegaSphere  | >>>> Mega Charge!
+== LITH_LOG_SoulSphere  | >>>> Super Charge!
+== LITH_LOG_StimPack    | >>> Stimpack
 
 ## Keys ----------------------------------------------------------------------|
-== LITH_TXT_LOG_RedCard     | >>>>> \cgRed KeyDisk
-== LITH_TXT_LOG_BlueCard    | >>>>> \chBlue KeyDisk
-== LITH_TXT_LOG_YellowCard  | >>>>> \ckYellow KeyDisk
-== LITH_TXT_LOG_RedSkull    | >>>>> \cgRed Skull
-== LITH_TXT_LOG_BlueSkull   | >>>>> \chBlue Skull
-== LITH_TXT_LOG_YellowSkull | >>>>> \ckYellow Skull
+== LITH_LOG_RedCard     | >>>>> \cgRed KeyDisk
+== LITH_LOG_BlueCard    | >>>>> \chBlue KeyDisk
+== LITH_LOG_YellowCard  | >>>>> \ckYellow KeyDisk
+== LITH_LOG_RedSkull    | >>>>> \cgRed Skull
+== LITH_LOG_BlueSkull   | >>>>> \chBlue Skull
+== LITH_LOG_YellowSkull | >>>>> \ckYellow Skull
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_TXT_LOG_RadSuit     | >>>>> Radiation Shielding Suit
-== LITH_TXT_LOG_InfraRed    | >>>>> CB-Goggles
-== LITH_TXT_LOG_Invuln      | \cj>>>>>> Invulnerability!
-== LITH_TXT_LOG_BlurSphere  | >>>>> Barrier
-== LITH_TXT_LOG_Backpack    | >>>>> Backpack + Discount Card
-== LITH_TXT_LOG_Berserk     | >>>>> Berserk
-== LITH_TXT_LOG_AllMap      | >>>>> Area Map
-== LITH_TXT_LOG_DoggoSphere | >>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
-== LITH_TXT_LOG_Dogs        | > Picked up dogs.
+== LITH_LOG_RadSuit     | >>>>> Radiation Shielding Suit
+== LITH_LOG_InfraRed    | >>>>> CB-Goggles
+== LITH_LOG_Invuln      | \cj>>>>>> Invulnerability!
+== LITH_LOG_BlurSphere  | >>>>> Barrier
+== LITH_LOG_Backpack    | >>>>> Backpack + Discount Card
+== LITH_LOG_Berserk     | >>>>> Berserk
+== LITH_LOG_AllMap      | >>>>> Area Map
+== LITH_LOG_DoggoSphere | >>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
+== LITH_LOG_Dogs        | > Picked up dogs.
 
 ## Ammo ----------------------------------------------------------------------|
-== LITH_TXT_LOG_Clip      | >> Radio
-== LITH_TXT_LOG_ClipBox   | >> Nonspecific Box of Ammunition
-== LITH_TXT_LOG_Shell     | >> Shells
-== LITH_TXT_LOG_ShellBox  | >> Box of Shells
-== LITH_TXT_LOG_Rocket    | >> Rocket
-== LITH_TXT_LOG_RocketBox | >> Box of Rockets
-== LITH_TXT_LOG_Cell      | >> Energy Charge
-== LITH_TXT_LOG_CellBox   | >> Demonic Energy Pack
+== LITH_LOG_Clip      | >> Radio
+== LITH_LOG_ClipBox   | >> Nonspecific Box of Ammunition
+== LITH_LOG_Shell     | >> Shells
+== LITH_LOG_ShellBox  | >> Box of Shells
+== LITH_LOG_Rocket    | >> Rocket
+== LITH_LOG_RocketBox | >> Box of Rockets
+== LITH_LOG_Cell      | >> Energy Charge
+== LITH_LOG_CellBox   | >> Demonic Energy Pack
 
 ## Bonuses -------------------------------------------------------------------|
-== LITH_TXT_LOG_Coin       | >> Coin
-== LITH_TXT_LOG_ScoreChip  | >> Score Chip
-== LITH_TXT_LOG_Ruby       | >> Flawed Ruby
-== LITH_TXT_LOG_Sapphire   | >> Flawed Sapphire
-== LITH_TXT_LOG_Amethyst   | >> Flawed Amethyst
-== LITH_TXT_LOG_Diamond    | >> Flawed Diamond
-== LITH_TXT_LOG_Emerald    | >> Flawed Emerald
-== LITH_TXT_LOG_Scheelite  | >> Scheelite
-== LITH_TXT_LOG_Nambulite  | >> Nambulite
-== LITH_TXT_LOG_Lepidolite | >> Lepidolite
-== LITH_TXT_LOG_Petalite   | >> Petalite
-== LITH_TXT_LOG_Tourmaline | >> Tourmaline
+== LITH_LOG_Coin       | >> Coin
+== LITH_LOG_ScoreChip  | >> Score Chip
+== LITH_LOG_Ruby       | >> Flawed Ruby
+== LITH_LOG_Sapphire   | >> Flawed Sapphire
+== LITH_LOG_Amethyst   | >> Flawed Amethyst
+== LITH_LOG_Diamond    | >> Flawed Diamond
+== LITH_LOG_Emerald    | >> Flawed Emerald
+== LITH_LOG_Scheelite  | >> Scheelite
+== LITH_LOG_Nambulite  | >> Nambulite
+== LITH_LOG_Lepidolite | >> Lepidolite
+== LITH_LOG_Petalite   | >> Petalite
+== LITH_LOG_Tourmaline | >> Tourmaline
 
 ## CBI Upgrades (Marine) -----------------------------------------------------|
-== LITH_TXT_LOG_CBI_MUpgr1      | > Installed KSKK Spec. High-Grade CPU
-== LITH_TXT_LOG_CBI_MUpgr2      | > Installed KSKK Spec. Super High-Grade CPU
-== LITH_TXT_LOG_CBI_MArmorInter | > Installed Armor Interface
-== LITH_TXT_LOG_CBI_MWeapnInter | > Installed Weapon Modification Device
-== LITH_TXT_LOG_CBI_MWeapnInte2 | > Installed Weapon Refactoring Device
-== LITH_TXT_LOG_CBI_MRDistInter | > Installed Reality Distortion Interface
+== LITH_LOG_CBI_MUpgr1      | > Installed KSKK Spec. High-Grade CPU
+== LITH_LOG_CBI_MUpgr2      | > Installed KSKK Spec. Super High-Grade CPU
+== LITH_LOG_CBI_MArmorInter | > Installed Armor Interface
+== LITH_LOG_CBI_MWeapnInter | > Installed Weapon Modification Device
+== LITH_LOG_CBI_MWeapnInte2 | > Installed Weapon Refactoring Device
+== LITH_LOG_CBI_MRDistInter | > Installed Reality Distortion Interface
 
 ## CBI Upgrades (Cyber-Mage) -------------------------------------------------|
-== LITH_TXT_LOG_CBI_CSlot3Spell | > Installed Feuer Spell Driver
-== LITH_TXT_LOG_CBI_CSlot4Spell | > Installed Romyetya Spell Driver
-== LITH_TXT_LOG_CBI_CSlot5Spell | > Installed Hulgyon Spell Driver
-== LITH_TXT_LOG_CBI_CSlot6Spell | > Installed Hosh'danma Spell Driver
-== LITH_TXT_LOG_CBI_CSlot7Spell | > Installed Cercle de la Mort Spell Driver
-== LITH_TXT_LOG_CBI_CRDistInter | > Installed Reality Distortion Interface
+== LITH_LOG_CBI_CSlot3Spell | > Installed Feuer Spell Driver
+== LITH_LOG_CBI_CSlot4Spell | > Installed Romyetya Spell Driver
+== LITH_LOG_CBI_CSlot5Spell | > Installed Hulgyon Spell Driver
+== LITH_LOG_CBI_CSlot6Spell | > Installed Hosh'danma Spell Driver
+== LITH_LOG_CBI_CSlot7Spell | > Installed Cercle de la Mort Spell Driver
+== LITH_LOG_CBI_CRDistInter | > Installed Reality Distortion Interface
 
 ## Level Up ------------------------------------------------------------------|
-%% LITH_TXT_LOG_LevelUpStan
+%% LITH_LOG_LevelUpStan
 > You feel stronger, somehow.
 
-%% LITH_TXT_LOG_LevelUpJem
+%% LITH_LOG_LevelUpJem
 > [INFO] Memory restored: %iKiB
 
-%% LITH_TXT_LOG_LevelUpFulk
+%% LITH_LOG_LevelUpFulk
 > \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
 
-%% LITH_TXT_LOG_LevelUpAri
+%% LITH_LOG_LevelUpAri
 > You're having fun with this.
 
-== LITH_TXT_LOG_LevelUpMod | $LITH_TXT_LOG_LevelUpStan
+== LITH_LOG_LevelUpMod | $LITH_LOG_LevelUpStan
 
 ## Boss Warnings -------------------------------------------------------------|
-%% LITH_TXT_LOG_BossWarnStan
+%% LITH_LOG_BossWarnStan
 > \cgWarning: High demonic energy levels detected in area.
 
-%% LITH_TXT_LOG_BossWarnJem
+%% LITH_LOG_BossWarnJem
 > \cr[WARNING] Demonic energy levels in area rising erratically.
 
-%% LITH_TXT_LOG_BossWarnFulk
+%% LITH_LOG_BossWarnFulk
 > \cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.
 
-%% LITH_TXT_LOG_BossWarnAri
+%% LITH_LOG_BossWarnAri
 > \cgDetected high amounts of demonic energy in area.
 
-== LITH_TXT_LOG_BossWarnMod | $LITH_TXT_LOG_BossWarnStan
-
-## EOF
+== LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan

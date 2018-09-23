@@ -57,7 +57,7 @@ actor Lith_ChargeFistPuff
 
 actor Lith_ChargeFist : Lith_Weapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_ChargeFist"
+   Tag "$LITH_INFO_SHORT_ChargeFist"
    Weapon.Kickback 100
    Weapon.SlotNumber 1
    Weapon.SlotPriority 1

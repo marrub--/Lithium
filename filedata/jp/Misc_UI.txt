@@ -1,0 +1,27 @@
+## UI ------------------------------------------------------------------------|
+== LITH_COST       | かかくは
+== LITH_CATEGORY   | しゅり
+== LITH_SCOREMULT  | スコア乗数
+== LITH_BUY        | 買う
+== LITH_DEACTIVATE | 非ｱｸﾃｨﾌﾞ化
+== LITH_ACTIVATE   | ｱｸﾃｨﾌﾞ化
+
+== LITH_TAB_ARSENAL_Stan | ぶきぐら
+== LITH_TAB_ARSENAL_Jem  | 指令
+== LITH_TAB_ARSENAL_Ari  | 猟具
+
+== LITH_TAB_STATUS    | ステータス
+== LITH_TAB_INVENTORY | 所持品
+== LITH_TAB_INFO      | インフォ
+== LITH_TAB_SETTINGS  | 設定
+
+== LITH_TAB_ATTRIBUTES | 属性
+== LITH_TAB_CBI        | ＣＢＩ
+
+== LITH_TAB_BIP        | ＢＩＰ
+== LITH_TAB_LOG        | ログ
+== LITH_TAB_STATISTICS | 統計
+== LITH_TAB_NOTES      | ノート
+
+== LITH_TAB_UPGRADES | アップグレ
+== LITH_TAB_SHOP     | ショップ

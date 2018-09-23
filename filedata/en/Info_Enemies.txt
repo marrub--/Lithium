@@ -1,5 +1,5 @@
 ##----------------------------------------------------------------------------|
-%% LITH_TXT_INFO_DESCR_RankThreatTest
+%% LITH_INFO_DESCR_RankThreatTest
 Rank:
    \cuNon-resident
    \csSubordinate
@@ -16,9 +16,9 @@ Threat:
    \crE
 
 ## Non-residents -------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_ZombieMan | Former Human
-== LITH_TXT_INFO_TITLE_ZombieMan | Possessed Human Rifleman
-%% LITH_TXT_INFO_DESCR_ZombieMan
+== LITH_INFO_SHORT_ZombieMan | Former Human
+== LITH_INFO_TITLE_ZombieMan | Possessed Human Rifleman
+%% LITH_INFO_DESCR_ZombieMan
 Class: \cuNon-resident\c-
 Threat: \csD\c-
 
@@ -26,9 +26,9 @@ Humans which have been abducted and possessed by Hell's forces. Some seem to he 
 
 The rifleman is slow and shambling, but still their rifle packs a punch, and they're capable of burst-firing somewhat accurate shots.
 
-== LITH_TXT_INFO_SHORT_ShotgunGuy | Former Sergeant
-== LITH_TXT_INFO_TITLE_ShotgunGuy | Possessed Human Sergeant
-%% LITH_TXT_INFO_DESCR_ShotgunGuy
+== LITH_INFO_SHORT_ShotgunGuy | Former Sergeant
+== LITH_INFO_TITLE_ShotgunGuy | Possessed Human Sergeant
+%% LITH_INFO_DESCR_ShotgunGuy
 Class: \cuNon-resident\c-
 Threat: \csD\c-
 
@@ -36,9 +36,9 @@ Humans which have been abducted and possessed by Hell's forces. Some seem to he 
 
 The sergeant is rather quick with his gun, but not very accurate. Watch out for them at close-range, you may notice that a face full of buckshot hurts.
 
-== LITH_TXT_INFO_SHORT_ChaingunGuy | Former Corporal
-== LITH_TXT_INFO_TITLE_ChaingunGuy | Possessed Human Corporal
-%% LITH_TXT_INFO_DESCR_ChaingunGuy
+== LITH_INFO_SHORT_ChaingunGuy | Former Corporal
+== LITH_INFO_TITLE_ChaingunGuy | Possessed Human Corporal
+%% LITH_INFO_DESCR_ChaingunGuy
 Class: \cuNon-resident\c-
 Threat: \ciC-\c-
 
@@ -47,9 +47,9 @@ Humans which have been abducted and possessed by Hell's forces. Some seem to he 
 Corporals are generally terrible at aiming, but put out so much lead that you're bound to get hit. A lot. ... By the way, why don't these guys drop their chainguns?
 
 ## Subordinates --------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_Imp | Hell Trooper
-== LITH_TXT_INFO_TITLE_Imp | Hell Trooper "Imp"
-%% LITH_TXT_INFO_DESCR_Imp
+== LITH_INFO_SHORT_Imp | Hell Trooper
+== LITH_INFO_TITLE_Imp | Hell Trooper "Imp"
+%% LITH_INFO_DESCR_Imp
 Class: \csSubordinate\c-
 Threat: \csD+\c-
 
@@ -57,9 +57,9 @@ Small-time grunts of Hell, they do little more than stall while the bigger threa
 
 Their claws and spikes hurt like hell, so try not to get too close.
 
-== LITH_TXT_INFO_SHORT_Demon | Hell Sergeant
-== LITH_TXT_INFO_TITLE_Demon | Hell Sergeant "Demon"
-%% LITH_TXT_INFO_DESCR_Demon
+== LITH_INFO_SHORT_Demon | Hell Sergeant
+== LITH_INFO_TITLE_Demon | Hell Sergeant "Demon"
+%% LITH_INFO_DESCR_Demon
 Class: \csSubordinate\c-
 Threat: \ciC\c-
 
@@ -67,9 +67,9 @@ These demons are known for their distinctive pink-colored skin and tendency to r
 
 Their bodies are rather strong-built, and can resist several point-blank shotgun blasts without dying.
 
-== LITH_TXT_INFO_SHORT_Spectre | Spectre
-== LITH_TXT_INFO_TITLE_Spectre | Hell Sergeant "Spectre"
-%% LITH_TXT_INFO_DESCR_Spectre
+== LITH_INFO_SHORT_Spectre | Spectre
+== LITH_INFO_TITLE_Spectre | Hell Sergeant "Spectre"
+%% LITH_INFO_DESCR_Spectre
 Class: \csSubordinate\c-
 Threat: \ciC+\c-
 
@@ -78,9 +78,9 @@ Demons which also happen to have cloaking magic active over their bodies.
 They tend to not make a sound until they lunge at you, so be sure to keep an eye out for cracks in the air around you.
 
 ## Residents -----------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_LostSoul | Lost Soul
-== LITH_TXT_INFO_TITLE_LostSoul | $LITH_TXT_INFO_SHORT_LostSoul
-%% LITH_TXT_INFO_DESCR_LostSoul
+== LITH_INFO_SHORT_LostSoul | Lost Soul
+== LITH_INFO_TITLE_LostSoul | $LITH_INFO_SHORT_LostSoul
+%% LITH_INFO_DESCR_LostSoul
 Class: \cjResident\c-
 Threat: \csD++\c-
 
@@ -90,9 +90,9 @@ Alone, they aren't very dangerous; all they can really do is lunge themselves at
 
 They have a tendency to turn semi-invisible and stalk around before attacking.
 
-== LITH_TXT_INFO_SHORT_Mancubus | Mancubus
-== LITH_TXT_INFO_TITLE_Mancubus | $LITH_TXT_INFO_SHORT_Mancubus
-%% LITH_TXT_INFO_DESCR_Mancubus
+== LITH_INFO_SHORT_Mancubus | Mancubus
+== LITH_INFO_TITLE_Mancubus | $LITH_INFO_SHORT_Mancubus
+%% LITH_INFO_DESCR_Mancubus
 Class: \cjResident\c-
 Threat: \ckB\c-
 
@@ -100,9 +100,9 @@ A gluttonous resident of Hell whose arms are flamethrowers made to kill and cook
 
 Although they may be quite beefy, they're quite slow and generally their attacks are as well. Dispatch them quickly and you should be fine.
 
-== LITH_TXT_INFO_SHORT_Arachnotron | Arachnotron
-== LITH_TXT_INFO_TITLE_Arachnotron | $LITH_TXT_INFO_SHORT_Arachnotron
-%% LITH_TXT_INFO_DESCR_Arachnotron
+== LITH_INFO_SHORT_Arachnotron | Arachnotron
+== LITH_INFO_TITLE_Arachnotron | $LITH_INFO_SHORT_Arachnotron
+%% LITH_INFO_DESCR_Arachnotron
 Class: \cjResident\c-
 Threat: \ckB\c-
 
@@ -110,18 +110,18 @@ Children of a great Spider Demon, they're equipped with plasma guns and cybernet
 
 Their attack is straightforward; fire plasma at you until you die, and then some. While their attack is quite strong, they're very weak and greatly prone to bullet and shrapnel damage.
 
-== LITH_TXT_INFO_SHORT_Cacodemon | Cacodemon
-== LITH_TXT_INFO_TITLE_Cacodemon | $LITH_TXT_INFO_SHORT_Cacodemon
-%% LITH_TXT_INFO_DESCR_Cacodemon
+== LITH_INFO_SHORT_Cacodemon | Cacodemon
+== LITH_INFO_TITLE_Cacodemon | $LITH_INFO_SHORT_Cacodemon
+%% LITH_INFO_DESCR_Cacodemon
 Class: \cjResident\c-
 Threat: \ckB-\c-
 
 A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an unknown reason. They're quite hearty, and their attacks are fairly deadly, but generally the Cacodemon is not a monster to fear.
 
 ## Nobles --------------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_HellKnight | Hell Knight
-== LITH_TXT_INFO_TITLE_HellKnight | $LITH_TXT_INFO_SHORT_HellKnight
-%% LITH_TXT_INFO_DESCR_HellKnight
+== LITH_INFO_SHORT_HellKnight | Hell Knight
+== LITH_INFO_TITLE_HellKnight | $LITH_INFO_SHORT_HellKnight
+%% LITH_INFO_DESCR_HellKnight
 Class: \cfNoble\c-
 Threat: \ckB\c-
 
@@ -129,9 +129,9 @@ The weakest of Hell's nobles, they serve the military as grunts to head assaults
 
 They throw long, thin magic attacks that corrode skin and bone. With skin only just more durable than iron, these demons are deadly in groups.
 
-== LITH_TXT_INFO_SHORT_BaronOfHell | Hell Baron
-== LITH_TXT_INFO_TITLE_BaronOfHell | $LITH_TXT_INFO_SHORT_BaronOfHell
-%% LITH_TXT_INFO_DESCR_BaronOfHell
+== LITH_INFO_SHORT_BaronOfHell | Hell Baron
+== LITH_INFO_TITLE_BaronOfHell | $LITH_INFO_SHORT_BaronOfHell
+%% LITH_INFO_DESCR_BaronOfHell
 Class: \cfNoble\c-
 Threat: \ckB++\c-
 
@@ -139,9 +139,9 @@ Stronger Hell nobles with red skin, horns and hooves. Similar in appearance to K
 
 Barons prefer to lead missions, plan overall tactics of an attack, and destroy their foes in glory. They attack in 45 degree angles, throwing strong magic energy everywhere.
 
-== LITH_TXT_INFO_SHORT_Revenant | Revenant
-== LITH_TXT_INFO_TITLE_Revenant | $LITH_TXT_INFO_SHORT_Revenant
-%% LITH_TXT_INFO_DESCR_Revenant
+== LITH_INFO_SHORT_Revenant | Revenant
+== LITH_INFO_TITLE_Revenant | $LITH_INFO_SHORT_Revenant
+%% LITH_INFO_DESCR_Revenant
 Class: \cfNoble\c-
 Threat: \ckB+\c-
 
@@ -150,9 +150,9 @@ Dead souls whom have been revived into a skeletal frame, with combat armor and m
 The Revenant is revered among demons for its honor serving after death.
 
 ## Tyrants -------------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_PainElemental | Pain Elemental
-== LITH_TXT_INFO_TITLE_PainElemental | Sin of Bellona, "Pain Elemental"
-%% LITH_TXT_INFO_DESCR_PainElemental
+== LITH_INFO_SHORT_PainElemental | Pain Elemental
+== LITH_INFO_TITLE_PainElemental | Sin of Bellona, "Pain Elemental"
+%% LITH_INFO_DESCR_PainElemental
 Class: \cgTyrant\c-
 Threat: \cgA\c-
 
@@ -160,9 +160,9 @@ An evil, mean-spirited demon that thrives purely off of the pain and suffering o
 
 This enemy is both annoying and hazardous at the same time, especially if left unchecked for an elongated period of time. Prioritize their destruction.
 
-== LITH_TXT_INFO_SHORT_Archvile | Archvile
-== LITH_TXT_INFO_TITLE_Archvile | Sin of Janus, "Arch-vile"
-%% LITH_TXT_INFO_DESCR_Archvile
+== LITH_INFO_SHORT_Archvile | Archvile
+== LITH_INFO_TITLE_Archvile | Sin of Janus, "Arch-vile"
+%% LITH_INFO_DESCR_Archvile
 Class: \cgTyrant\c-
 Threat: \cgA\c-
 
@@ -170,9 +170,9 @@ Brutal and vicious, caster of evil magic and healer of the sinful.
 
 The Arch-vile is a malicious, extremely dangerous being capable of destroying anything at any range with its powerful fire magic, and resurrecting dead enemies it comes by.
 
-== LITH_TXT_INFO_SHORT_SpiderMastermind | Spider Demon
-== LITH_TXT_INFO_TITLE_SpiderMastermind | Sin of Venus, "Spider Mastermind"
-%% LITH_TXT_INFO_DESCR_SpiderMastermind
+== LITH_INFO_SHORT_SpiderMastermind | Spider Demon
+== LITH_INFO_TITLE_SpiderMastermind | Sin of Venus, "Spider Mastermind"
+%% LITH_INFO_DESCR_SpiderMastermind
 Class: \cgTyrant\c-
 Threat: \cgA++\c-
 
@@ -180,9 +180,9 @@ The Spider Mastermind is a gigantic cybernetic arachnid with a chaingun. That al
 
 The Spider Mastermind also appears to be responsible for planning distant wars of Hell, manipulating the chain of command to their will.
 
-== LITH_TXT_INFO_SHORT_Cyberdemon | Cyber-Demon
-== LITH_TXT_INFO_TITLE_Cyberdemon | Sin of Mars, "Cyber-Demon"
-%% LITH_TXT_INFO_DESCR_Cyberdemon
+== LITH_INFO_SHORT_Cyberdemon | Cyber-Demon
+== LITH_INFO_TITLE_Cyberdemon | Sin of Mars, "Cyber-Demon"
+%% LITH_INFO_DESCR_Cyberdemon
 Class: \cgTyrant\c-
 Threat: \cgA++\c-
 
@@ -191,9 +191,9 @@ An extremely deadly species forged of metal and flesh intertwined, the Cyber-Dem
 Equipped with a self-cooling rocket propelled grenade launcher on their left arm, a cybernetic hoof, and height twice that of a normal man. The Cyber-Demon is an extremely cruel, warmongering beast that will destroy any target without prejudice for the glory of Hell.
 
 ## ??? -----------------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_Phantom | Phantom
-== LITH_TXT_INFO_TITLE_Phantom | $LITH_TXT_INFO_SHORT_Phantom
-%% LITH_TXT_INFO_DESCR_Phantom
+== LITH_INFO_SHORT_Phantom | Phantom
+== LITH_INFO_TITLE_Phantom | $LITH_INFO_SHORT_Phantom
+%% LITH_INFO_DESCR_Phantom
 Class: \cm???\c-
 Threat: \crE\c-
 
@@ -202,9 +202,9 @@ A threat yet unexplained, the phantom seeks to destroy all and will leave no one
 Extreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.
 
 ## Overlord ------------------------------------------------------------------|
-== LITH_TXT_INFO_SHORT_IconOfSin | Icon of Sin
-== LITH_TXT_INFO_TITLE_IconOfSin | Overlord of Hell, Icon of Sin
-%% LITH_TXT_INFO_DESCR_IconOfSin
+== LITH_INFO_SHORT_IconOfSin | Icon of Sin
+== LITH_INFO_TITLE_IconOfSin | Overlord of Hell, Icon of Sin
+%% LITH_INFO_DESCR_IconOfSin
 Class: \crOverlord\c-
 Threat: \crE\c-
 

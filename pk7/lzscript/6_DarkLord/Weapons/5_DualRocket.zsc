@@ -2,7 +2,7 @@ class Lith_DualRocket : Lith_DWeapon;
 
 default
 {
-   Tag "$LITH_TXT_INFO_SHORT_DualRocket";
+   Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
 }

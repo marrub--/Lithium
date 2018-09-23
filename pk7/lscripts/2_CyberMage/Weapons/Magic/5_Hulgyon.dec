@@ -136,7 +136,7 @@ actor Lith_HulgyonSprite2 : Lith_HulgyonSprite
 
 actor Lith_Hulgyon : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Hulgyon"
+   Tag "$LITH_INFO_SHORT_Hulgyon"
    Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/hulgyon/draw"

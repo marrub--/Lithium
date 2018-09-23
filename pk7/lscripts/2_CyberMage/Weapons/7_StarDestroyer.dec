@@ -264,7 +264,7 @@ actor Lith_SurgeOfDestiny : Lith_CustomFunction
 
 actor Lith_StarDestroyer : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_StarDestroyer"
+   Tag "$LITH_INFO_SHORT_StarDestroyer"
    Weapon.UpSound "weapons/shipgun/draw"
    Weapon.SlotNumber 7
    Weapon.SlotPriority 1

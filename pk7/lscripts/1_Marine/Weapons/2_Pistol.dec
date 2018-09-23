@@ -77,7 +77,7 @@ actor Lith_PistolMagazine2 : Lith_PistolMagazine
 
 actor Lith_Pistol : Lith_MWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Pistol"
+   Tag "$LITH_INFO_SHORT_Pistol"
    Weapon.SlotNumber 2
    Weapon.SlotPriority 1
    Weapon.BobSpeed 3

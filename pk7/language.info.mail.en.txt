@@ -2,8 +2,18 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-"LITH_TXT_MAIL_TEMPLATE" =
+// Flags ---------------------------------------------------------------------|
+// The flags for mail messages are as follows:
+// bit 1 - Does not print a message when received
+// bit 2 - Message is the same for all player classes
 
+"LITH_MAIL_FLAG_Intro" = "1";
+"LITH_MAIL_FLAG_JamesDefeated" = "2";
+"LITH_MAIL_FLAG_MakarovDefeated" = "2";
+"LITH_MAIL_FLAG_IsaacDefeated" = "2";
+
+// Template ------------------------------------------------------------------|
+"LITH_MAIL_TEMPLATE" =
 // Mail_Template.txt
    "\cd>>>>>[[[[RELAYING MESSAGE]]]]\n"
    "\n"
@@ -12,21 +22,9 @@
    "\n"
    "%S";
 
-// Flags ---------------------------------------------------------------------|
-
-// The flags for mail messages are as follows:
-
-// bit 1 - Does not print a message when received
-
-// bit 2 - Message is the same for all player classes
-"LITH_TXT_MAIL_FLAG_Intro" = "1";
-"LITH_TXT_MAIL_FLAG_JamesDefeated" = "2";
-"LITH_TXT_MAIL_FLAG_MakarovDefeated" = "2";
-"LITH_TXT_MAIL_FLAG_IsaacDefeated" = "2";
 
 // All Classes ---------------------------------------------------------------|
-"LITH_TXT_MAIL_BODY_JamesDefeated" =
-
+"LITH_MAIL_BODY_JamesDefeated" =
 // Mail/Phantom_James.txt
    "\ccI woke in a \cudark place\cc, unsure of my fate; if my life was renewed out of cruel retribution or of a final opportunity.\n"
    "\n"
@@ -37,9 +35,10 @@
    "\ccI can only guess that my family went to Heaven and that I was left the lone sinner.\n"
    "\n"
    "\cgThank you for putting this to an end.";
-"LITH_TXT_MAIL_SEND_JamesDefeated" = "jam0s@g0n0j0t00.1025";
-"LITH_TXT_MAIL_BODY_MakarovDefeated" =
 
+"LITH_MAIL_SEND_JamesDefeated" = "jam0s@g0n0j0t00.1025";
+
+"LITH_MAIL_BODY_MakarovDefeated" =
 // Mail/Phantom_Makarov.txt
    "There aren't many like you who can take such a being down. Maybe I should commend you for that, struggler.\n"
    "\n"
@@ -50,9 +49,10 @@
    "\crI am not the strongest of these manifestations.\n"
    "\n"
    "Maybe you don't need such advice.";
-"LITH_TXT_MAIL_SEND_MakarovDefeated" = "mak666v@org.r\\.\\\\\\-";
-"LITH_TXT_MAIL_BODY_IsaacDefeated" =
 
+"LITH_MAIL_SEND_MakarovDefeated" = "mak666v@org.r\\.\\\\\\-";
+
+"LITH_MAIL_BODY_IsaacDefeated" =
 // Mail/Phantom_Isaac.txt
    "\caOne shan't care what he shoots, but one may take care in where he treads.\n"
    "\n"
@@ -65,11 +65,11 @@
    "\ca            Here is a gift.\n"
    "\n"
    "\ca  I won't tell you to use it wisely.";
-"LITH_TXT_MAIL_SEND_IsaacDefeated" = "isaac@syn.400khz";
+
+"LITH_MAIL_SEND_IsaacDefeated" = "isaac@syn.400khz";
 
 // Marine --------------------------------------------------------------------|
-"LITH_TXT_MAIL_BODY_IntroStan" =
-
+"LITH_MAIL_BODY_IntroStan" =
 // Mail/Intro_Marine.txt
    "Your weapons have been deployed to various locations we were able to send other people to.  Do take care of them, acquiring the correct armaments for your job was quite expensive and now we've probably lost a few people.\n"
    "\n"
@@ -111,11 +111,12 @@
    "You will also be able to purchase the weapons you designated, in your words, as \"must-have\" in the Shop.  I warn you that these weapons may not be as effective as you think; we spent quite a lot of time making sure that the arms we sent you were top-notch.\n"
    "\n"
    "Lambert out.  Good luck, Blazkowicz.";
-"LITH_TXT_MAIL_SEND_IntroStan" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_TIME_IntroStan" = "13:00 25-7-49";
-"LITH_TXT_MAIL_SIZE_IntroStan" = "610";
-"LITH_TXT_MAIL_BODY_Cluster1Stan" =
 
+"LITH_MAIL_SEND_IntroStan" = "ALambert@corp.OFMD";
+"LITH_MAIL_TIME_IntroStan" = "13:00 25-7-49";
+"LITH_MAIL_SIZE_IntroStan" = "610";
+
+"LITH_MAIL_BODY_Cluster1Stan" =
 // Mail/Cluster1_Marine.txt
    "An explosion of some sort just happened nearby, it seems that the demons are reconstructing the world around you. You would best be careful not to trigger any other, er, events.\n"
    "\n"
@@ -124,9 +125,10 @@
    "You've been making good progress so far. Your military superiors seem to be considering giving you a promotion, even.\n"
    "\n"
    "Lambert out.";
-"LITH_TXT_MAIL_SEND_Cluster1Stan" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_Cluster2Stan" =
 
+"LITH_MAIL_SEND_Cluster1Stan" = "ALambert@corp.OFMD";
+
+"LITH_MAIL_BODY_Cluster2Stan" =
 // Mail/Cluster2_Marine.txt
    "There has been a change of plans going down the whole chain of command.\n"
    "Your status as a military operative is now cancelled, and you are to enter a full-on suicide mission funded by OFMD alone.\n"
@@ -134,9 +136,10 @@
    "There is an artifact nearby that we have sent you.  Once it is in your possession, immediately destroy it, and you will be transported to a city somewhere in Hell.  Command will await afterwards.\n"
    "\n"
    "Lambert out.";
-"LITH_TXT_MAIL_SEND_Cluster2Stan" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_Cluster3Stan" =
 
+"LITH_MAIL_SEND_Cluster2Stan" = "ALambert@corp.OFMD";
+
+"LITH_MAIL_BODY_Cluster3Stan" =
 // Mail/Cluster3_Marine.txt
    "Now that you have entered the city, you m\\\\r-3434[[\n"
    "\cgSYSTEM ERROR 0x4E4943456A6F6244554D42415353\n"
@@ -144,9 +147,10 @@
    "\cd>>>>>[[[[status: heap corrupted]]]]\n"
    "\cd>>>>>[[[[error handler malfunction error]]]]\n"
    "\cd>>>>>[[[[failure to proceed]]]]";
-"LITH_TXT_MAIL_SEND_Cluster3Stan" = "ALambert@corp.OFMD";
-"LITH_TXT_MAIL_BODY_PhantomStan" =
 
+"LITH_MAIL_SEND_Cluster3Stan" = "ALambert@corp.OFMD";
+
+"LITH_MAIL_BODY_PhantomStan" =
 // Mail/Intro2_Marine.txt
    "Hello, it has been forwarded to me that your Computer/Brain Interface hardware was not properly upgraded for this mission. I've had several communications errors with your secondary employers, and it is truly starting to get annoying.\n"
    "\n"
@@ -163,24 +167,26 @@
    "One Weapon Refactoring Device, which can perform large modifications on guns.\n"
    "\n"
    "See you.";
-"LITH_TXT_MAIL_SEND_PhantomStan" = "htic0@gov.<hidden>.mailserv";
-"LITH_TXT_MAIL_SIZE_PhantomStan" = "330";
-"LITH_TXT_MAIL_BODY_Secret1Stan" =
 
+"LITH_MAIL_SEND_PhantomStan" = "htic0@gov.<hidden>.mailserv";
+"LITH_MAIL_SIZE_PhantomStan" = "330";
+
+"LITH_MAIL_BODY_Secret1Stan" =
 // Mail/Secret1_Marine.txt
    "This place stinks of rotten flesh! I wonder what's going on here, these blue walls sure seem out of place for Hell...\n"
    "\n"
    "Perhaps some sinners are waiting to eat my rockets!";
-"LITH_TXT_MAIL_NAME_Secret1Stan" = "Saved Buffer";
-"LITH_TXT_MAIL_BODY_Secret2Stan" =
 
+"LITH_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+
+"LITH_MAIL_BODY_Secret2Stan" =
 // Mail/Secret2_Marine.txt
    "Now I've done it, this place just keeps going deeper and getting weirder... Damn, it's getting hot in here! Better turn up the heat some more.";
-"LITH_TXT_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+
+"LITH_MAIL_NAME_Secret1Stan" = "Saved Buffer";
 
 // Cyber-Mage ----------------------------------------------------------------|
-"LITH_TXT_MAIL_BODY_IntroJem" =
-
+"LITH_MAIL_BODY_IntroJem" =
 // Mail/Intro_CyberMage.txt
    "l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`\n"
    "\cm// sio.c basic screen inp-1[3\\4[`pk;\n"
@@ -211,12 +217,13 @@
    "\cd>>>>>[[[[datastream corruption detected]]]]\n"
    "\cd>>>>>[[[[auto-saving buffer]]]]\n"
    "\cd>>>>>[[[[reloading mail daemon]]]]";
-"LITH_TXT_MAIL_NAME_IntroJem" = "Saved Message";
-"LITH_TXT_MAIL_SEND_IntroJem" = "<hidden>@corp.AOF";
-"LITH_TXT_MAIL_TIME_IntroJem" = "13:44 25-7-49";
-"LITH_TXT_MAIL_SIZE_IntroJem" = "288";
-"LITH_TXT_MAIL_BODY_Cluster1Jem" =
 
+"LITH_MAIL_NAME_IntroJem" = "Saved Message";
+"LITH_MAIL_SEND_IntroJem" = "<hidden>@corp.AOF";
+"LITH_MAIL_TIME_IntroJem" = "13:44 25-7-49";
+"LITH_MAIL_SIZE_IntroJem" = "288";
+
+"LITH_MAIL_BODY_Cluster1Jem" =
 // Mail/Cluster1_CyberMage.txt
    "l[]];;\cg444444\cj41414191918 --------\n"
    "\cm    scr_exec(SCR_FINISH, 0, NULL);\n"
@@ -234,10 +241,11 @@
    "Important bits already dumped, the custom lock remover does not skimp on anything\n"
    "\n"
    "Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.";
-"LITH_TXT_MAIL_NAME_Cluster1Jem" = "Saved Text 104";
-"LITH_TXT_MAIL_SIZE_Cluster1Jem" = "240";
-"LITH_TXT_MAIL_BODY_Cluster2Jem" =
 
+"LITH_MAIL_NAME_Cluster1Jem" = "Saved Text 104";
+"LITH_MAIL_SIZE_Cluster1Jem" = "240";
+
+"LITH_MAIL_BODY_Cluster2Jem" =
 // Mail/Cluster2_CyberMage.txt
    "l[]];;\cg444444\cj41414191918 --------\n"
    "\cm    io_buf_get 0x1C, fp, out;\n"
@@ -254,10 +262,11 @@
    "The kernel and ROM etc. sources are all done dumping, the utilities are still going but those aren't important and have already been scanned for ASIC code.\n"
    "\n"
    "Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.";
-"LITH_TXT_MAIL_NAME_Cluster2Jem" = "Saved Text 152";
-"LITH_TXT_MAIL_SIZE_Cluster2Jem" = "288";
-"LITH_TXT_MAIL_BODY_Cluster3Jem" =
 
+"LITH_MAIL_NAME_Cluster2Jem" = "Saved Text 152";
+"LITH_MAIL_SIZE_Cluster2Jem" = "288";
+
+"LITH_MAIL_BODY_Cluster3Jem" =
 // Mail/Cluster3_CyberMage.txt
    "I've entered a strange realm that doesn't seem to make sense. This must really be Hell itself; no mistaking it now.\n"
    "\n"
@@ -268,10 +277,11 @@
    "Though my mind had just been regained, now sanity may lie out of my hands.\n"
    "\n"
    "It doesn't matter. I will see this through.";
-"LITH_TXT_MAIL_NAME_Cluster3Jem" = "Saved Text 244";
-"LITH_TXT_MAIL_SIZE_Cluster3Jem" = "218";
-"LITH_TXT_MAIL_BODY_PhantomJem" =
 
+"LITH_MAIL_NAME_Cluster3Jem" = "Saved Text 244";
+"LITH_MAIL_SIZE_Cluster3Jem" = "218";
+
+"LITH_MAIL_BODY_PhantomJem" =
 // Mail/Intro2_CyberMage.txt
    "\cg*** This is a global warning to all deceivers: If you are reading this, you are already being tracked and will be executed on sight. ***\n"
    "\n"
@@ -282,16 +292,20 @@
    "\cgYou will not get away with this intrepid game.\n"
    "\n"
    "\cg  - \cnOrder";
-"LITH_TXT_MAIL_SEND_PhantomJem" = "order@corp.AOF";
-"LITH_TXT_MAIL_BODY_Secret1Jem" =
 
+"LITH_MAIL_SEND_PhantomJem" = "order@corp.AOF";
+
+"LITH_MAIL_BODY_Secret1Jem" =
 // Mail/Secret1_CyberMage.txt
    "Another facet of this place, where does it end? I must destroy this place, the evil energy is overflowing here... and this architecture gives me bad vibes.";
-"LITH_TXT_MAIL_NAME_Secret1Jem" = "Saved Text 250";
-"LITH_TXT_MAIL_BODY_Secret2Jem" =
 
+"LITH_MAIL_NAME_Secret1Jem" = "Saved Text 250";
+
+"LITH_MAIL_BODY_Secret2Jem" =
 // Mail/Secret2_CyberMage.txt
    "Here seems to be the end of this terrifying compartment of Hell. I'd better blaze through this one.";
-"LITH_TXT_MAIL_NAME_Secret2Jem" = "Saved Text 252";
+
+"LITH_MAIL_NAME_Secret2Jem" = "Saved Text 252";
 
 // EOF
+

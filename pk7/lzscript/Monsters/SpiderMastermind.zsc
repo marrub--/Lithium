@@ -65,7 +65,7 @@ default
    DeathSound "spider/death";
    ActiveSound "spider/active";
    Obituary "$OB_SPIDER";
-   Tag "$LITH_TXT_INFO_SHORT_SpiderMastermind";
+   Tag "$LITH_INFO_SHORT_SpiderMastermind";
    
    +BOSS
    +MISSILEMORE

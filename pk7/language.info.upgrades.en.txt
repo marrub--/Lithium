@@ -2,11 +2,10 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_HeadsUpDisp" = "$LITH_TXT_UPGRADE_TITLE_HeadsUpDisp";
-"LITH_TXT_INFO_TITLE_HeadsUpDisp" = "Heads Up Display";
-"LITH_TXT_INFO_DESCR_HeadsUpDisp" =
+"LITH_INFO_SHORT_HeadsUpDisp" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_INFO_TITLE_HeadsUpDisp" = "Heads Up Display";
+"LITH_INFO_DESCR_HeadsUpDisp" =
    "This is a military issue Heads Up Display program, which tracks vital signs, "
    "munitions, armor status, and more with numeric signifiers."
    "\n\n"
@@ -16,9 +15,9 @@
    "to run out of ammunition, and then die.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_JetBooster" = "$LITH_TXT_UPGRADE_TITLE_JetBooster";
-"LITH_TXT_INFO_TITLE_JetBooster" = "Pe'i tha E. Jet Boots";
-"LITH_TXT_INFO_DESCR_JetBooster" =
+"LITH_INFO_SHORT_JetBooster" = "$LITH_UPGRADE_TITLE_JetBooster";
+"LITH_INFO_TITLE_JetBooster" = "Pe'i tha E. Jet Boots";
+"LITH_INFO_DESCR_JetBooster" =
    "These are standard jet boots produced by OFMD, upgraded for private use. They "
    "have a safety lock which deactivates while the user is mid-air so they don't "
    "backfire and burn your heels. Keeps the user smoothly held in air with a "
@@ -31,9 +30,9 @@
    "Press \"run\" while mid-air to activate.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_ReflexWetw" = "$LITH_TXT_UPGRADE_TITLE_ReflexWetw";
-"LITH_TXT_INFO_TITLE_ReflexWetw" = "Klaje Mosegon Reflex Enhancing Wetware";
-"LITH_TXT_INFO_DESCR_ReflexWetw" =
+"LITH_INFO_SHORT_ReflexWetw" = "$LITH_UPGRADE_TITLE_ReflexWetw";
+"LITH_INFO_TITLE_ReflexWetw" = "Klaje Mosegon Reflex Enhancing Wetware";
+"LITH_INFO_DESCR_ReflexWetw" =
    "Software for your Computer/Brain Interface that improves your ability to move, "
    "enhancing your speed, and giving you new movement options."
    "\n\n"
@@ -46,9 +45,9 @@
    "You can also now slide in any direction with ease by pressing \"run\".";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_CyberLegs" = "$LITH_TXT_UPGRADE_TITLE_CyberLegs";
-"LITH_TXT_INFO_TITLE_CyberLegs" = "Prexje Mosegon Speed Enhancing Wetware";
-"LITH_TXT_INFO_DESCR_CyberLegs" =
+"LITH_INFO_SHORT_CyberLegs" = "$LITH_UPGRADE_TITLE_CyberLegs";
+"LITH_INFO_TITLE_CyberLegs" = "Prexje Mosegon Speed Enhancing Wetware";
+"LITH_INFO_DESCR_CyberLegs" =
    "An update for your reflex wetware developed while you were being deployed on "
    "your mission. Improves your jump height and speed."
    "\n\n"
@@ -60,9 +59,9 @@
    "combat zone.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Yh0" = "$LITH_TXT_UPGRADE_TITLE_ReactArmor";
-"LITH_TXT_INFO_TITLE_Yh0" = "Yh-0 Reactive Plating System";
-"LITH_TXT_INFO_DESCR_Yh0" =
+"LITH_INFO_SHORT_Yh0" = "$LITH_UPGRADE_TITLE_ReactArmor";
+"LITH_INFO_TITLE_Yh0" = "Yh-0 Reactive Plating System";
+"LITH_INFO_DESCR_Yh0" =
    "Developed by avians of the planet Durla Prime, this armor plating is able to "
    "mitigate damage of one type almost completely for an indefinite amount of time."
    "\n\n"
@@ -74,9 +73,9 @@
    "lowered into what feels like a small tickle.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_DefenseNuke" = "$LITH_TXT_UPGRADE_TITLE_DefenseNuke";
-"LITH_TXT_INFO_TITLE_DefenseNuke" = "Defensive Atomic Bomb";
-"LITH_TXT_INFO_DESCR_DefenseNuke" =
+"LITH_INFO_SHORT_DefenseNuke" = "$LITH_UPGRADE_TITLE_DefenseNuke";
+"LITH_INFO_TITLE_DefenseNuke" = "Defensive Atomic Bomb";
+"LITH_INFO_DESCR_DefenseNuke" =
    "An extremely deadly slow-charge bomb that activates as you enter a dangerous "
    "area."
    "\n\n"
@@ -84,9 +83,9 @@
    "area will also be alerted to your presence. Be careful with this thing!";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Adrenaline" = "$LITH_TXT_UPGRADE_TITLE_Adrenaline";
-"LITH_TXT_INFO_TITLE_Adrenaline" = "Senxans Automatic Adrenaline Injector";
-"LITH_TXT_INFO_DESCR_Adrenaline" =
+"LITH_INFO_SHORT_Adrenaline" = "$LITH_UPGRADE_TITLE_Adrenaline";
+"LITH_INFO_TITLE_Adrenaline" = "Senxans Automatic Adrenaline Injector";
+"LITH_INFO_DESCR_Adrenaline" =
    "A rather brute upgrade that gathers wasted adrenaline from your body and "
    "injects it back into you all at once when you're in danger."
    "\n\n"
@@ -97,9 +96,9 @@
    "training given only to military forces.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_VitalScanner" = "$LITH_TXT_UPGRADE_TITLE_VitalScan";
-"LITH_TXT_INFO_TITLE_VitalScanner" = "Mit'keru Vital Scanner";
-"LITH_TXT_INFO_DESCR_VitalScanner" =
+"LITH_INFO_SHORT_VitalScanner" = "$LITH_UPGRADE_TITLE_VitalScan";
+"LITH_INFO_TITLE_VitalScanner" = "Mit'keru Vital Scanner";
+"LITH_INFO_DESCR_VitalScanner" =
    "A small nanomachine emitter is strapped to your belt, which fires out nanos "
    "programmed to grab vital signs of enemies under your crosshair, and display "
    "them in a numeric value on your heads up display."
@@ -108,9 +107,9 @@
    "is for the most part only usable in close-quarters.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_AutoReload" = "$LITH_TXT_UPGRADE_TITLE_AutoReload";
-"LITH_TXT_INFO_TITLE_AutoReload" = "K'meru Automatic Loading System";
-"LITH_TXT_INFO_DESCR_AutoReload" =
+"LITH_INFO_SHORT_AutoReload" = "$LITH_UPGRADE_TITLE_AutoReload";
+"LITH_INFO_TITLE_AutoReload" = "K'meru Automatic Loading System";
+"LITH_INFO_DESCR_AutoReload" =
    "A rather small robot that can fit in your backpack, which uses a learning "
    "algorithm to figure out how to load your guns."
    "\n\n"
@@ -119,9 +118,9 @@
    "military needs.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_SoulCleaver" = "$LITH_TXT_UPGRADE_TITLE_SoulCleaver";
-"LITH_TXT_INFO_TITLE_SoulCleaver" = "\cdSi Ritagliassero\c-, \chCaeruleorum\c- 44";
-"LITH_TXT_INFO_DESCR_SoulCleaver" =
+"LITH_INFO_SHORT_SoulCleaver" = "$LITH_UPGRADE_TITLE_SoulCleaver";
+"LITH_INFO_TITLE_SoulCleaver" = "\cdSi Ritagliassero\c-, \chCaeruleorum\c- 44";
+"LITH_INFO_DESCR_SoulCleaver" =
    "The 44th method of the \chCaeruleum\c- mode, this rather complex attack must "
    "be applied passively. It siphons power from the recently deceased and releases "
    "it into a ball of metaphysical attack energy."
@@ -131,9 +130,9 @@
    "opponents to be useful in combat.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_StealthSys" = "$LITH_TXT_UPGRADE_TITLE_StealthSys";
-"LITH_TXT_INFO_TITLE_StealthSys" = "Unnamed Stealth System";
-"LITH_TXT_INFO_DESCR_StealthSys" =
+"LITH_INFO_SHORT_StealthSys" = "$LITH_UPGRADE_TITLE_StealthSys";
+"LITH_INFO_TITLE_StealthSys" = "Unnamed Stealth System";
+"LITH_INFO_DESCR_StealthSys" =
    "An active light reflection system, using advanced camouflage developed years "
    "ago in \cm[redacted]\c- by the inhabitants of the planet. While the original "
    "version required a link with \cm[redacted]\c- in order to function (as the "
@@ -141,17 +140,17 @@
    "Solomon, requires only an energy source.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_HeadsUpDispJem" = "$LITH_TXT_UPGRADE_TITLE_HeadsUpDisp";
-"LITH_TXT_INFO_TITLE_HeadsUpDispJem" = "Heads Up Display";
-"LITH_TXT_INFO_DESCR_HeadsUpDispJem" =
+"LITH_INFO_SHORT_HeadsUpDispJem" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_INFO_TITLE_HeadsUpDispJem" = "Heads Up Display";
+"LITH_INFO_DESCR_HeadsUpDispJem" =
    "This program is the 37th version of the standard issue heads-up display for "
    "AOF employees. The binary remains uncredited, and the decompiled code has no "
    "authors listed in any of the files, though is well-commented.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Magic" = "$LITH_TXT_UPGRADE_TITLE_Magic";
-"LITH_TXT_INFO_TITLE_Magic" = "Mana Absorber";
-"LITH_TXT_INFO_DESCR_Magic" =
+"LITH_INFO_SHORT_Magic" = "$LITH_UPGRADE_TITLE_Magic";
+"LITH_INFO_TITLE_Magic" = "Mana Absorber";
+"LITH_INFO_DESCR_Magic" =
    "A small device reminiscent of a landmine which attaches to a chestplate, "
    "pauldron or shoulder pad, which uses an unknown \ckFlavum\c- mode spell that "
    "captures energy from the dead and dying."
@@ -161,9 +160,9 @@
    "from it with approximately 73.416% efficiency.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_ReflexWetwJem" = "$LITH_TXT_UPGRADE_TITLE_ReflexWetw";
-"LITH_TXT_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
-"LITH_TXT_INFO_DESCR_ReflexWetwJem" =
+"LITH_INFO_SHORT_ReflexWetwJem" = "$LITH_UPGRADE_TITLE_ReflexWetw";
+"LITH_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
+"LITH_INFO_DESCR_ReflexWetwJem" =
    "Software for your Computer/Brain Interface that improves your ability to move, "
    "enhancing your speed, and giving you new movement options."
    "\n\n"
@@ -178,9 +177,9 @@
    "mid-air.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_WeapnInter" = "Weapon Interface";
-"LITH_TXT_INFO_TITLE_WeapnInter" = "Weapon Interfacing Device Package";
-"LITH_TXT_INFO_DESCR_WeapnInter" =
+"LITH_INFO_SHORT_WeapnInter" = "Weapon Interface";
+"LITH_INFO_TITLE_WeapnInter" = "Weapon Interfacing Device Package";
+"LITH_INFO_DESCR_WeapnInter" =
    "The Weapon Interfacing Device Package (or simply Weapon Interface) is a small, "
    "silver briefcase with several components inside it all purpose built for "
    "modifying any kind of weaponry with extreme ease; In fact, it is built to "
@@ -196,9 +195,9 @@
    "prices being barred by a \"call us to get the numbers.\"";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_WeapnInte2" = "W.R.D.";
-"LITH_TXT_INFO_TITLE_WeapnInte2" = "Weapon Refactoring Device";
-"LITH_TXT_INFO_DESCR_WeapnInte2" =
+"LITH_INFO_SHORT_WeapnInte2" = "W.R.D.";
+"LITH_INFO_TITLE_WeapnInte2" = "Weapon Refactoring Device";
+"LITH_INFO_DESCR_WeapnInte2" =
    "Despite the idea being similar to the Weapon Interfacing Device Package, the "
    "Weapon Refactoring Device was conceptualized and prototyped over 40 years "
    "before the Weapon Interface was created."
@@ -213,9 +212,9 @@
    "database of possible configurations.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_ArmorInter" = "Armor Interface";
-"LITH_TXT_INFO_TITLE_ArmorInter" = "Armor Interfacing Device";
-"LITH_TXT_INFO_DESCR_ArmorInter" =
+"LITH_INFO_SHORT_ArmorInter" = "Armor Interface";
+"LITH_INFO_TITLE_ArmorInter" = "Armor Interfacing Device";
+"LITH_INFO_DESCR_ArmorInter" =
    "The Armor Interface is a rather large yet thin, silver set of pauldrons and "
    "chestplate that attaches onto one's body and can be worn under any kind of "
    "conventional armor."
@@ -229,9 +228,9 @@
    "flame-retardant liquid when fire damage is detected.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_CBIUpgr1" = "High-Grade CPU";
-"LITH_TXT_INFO_TITLE_CBIUpgr1" = "KSKK Spec. Z6808 High-Grade CPU";
-"LITH_TXT_INFO_DESCR_CBIUpgr1" =
+"LITH_INFO_SHORT_CBIUpgr1" = "High-Grade CPU";
+"LITH_INFO_TITLE_CBIUpgr1" = "KSKK Spec. Z6808 High-Grade CPU";
+"LITH_INFO_DESCR_CBIUpgr1" =
    "A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to "
    "30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely "
    "overly sufficient for any mathmetician or cybernetics junkie."
@@ -244,9 +243,9 @@
    "it a very solid feel and plenty of physical working memory.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_CBIUpgr2" = "S. High-Grade CPU";
-"LITH_TXT_INFO_TITLE_CBIUpgr2" = "KSKK Spec. BC-0265 Super High-Grade CPU";
-"LITH_TXT_INFO_DESCR_CBIUpgr2" =
+"LITH_INFO_SHORT_CBIUpgr2" = "S. High-Grade CPU";
+"LITH_INFO_TITLE_CBIUpgr2" = "KSKK Spec. BC-0265 Super High-Grade CPU";
+"LITH_INFO_DESCR_CBIUpgr2" =
    "The BC-0265 is a marvel of modular C/B Interface technology, not bigger than "
    "any standard CPU and capable of so, so much more. It comes equipped with "
    "150TiB of RAM, 70Pr without any dangerous overclocking, and 4906 physical "
@@ -260,3 +259,4 @@
    "data transfer through high density synapses and storage in each cell.";
 
 // EOF
+

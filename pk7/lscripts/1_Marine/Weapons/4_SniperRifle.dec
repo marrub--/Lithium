@@ -36,7 +36,7 @@ actor Lith_SniperRifleMagazine2 : Lith_SniperRifleMagazine
 
 actor Lith_SniperRifle : Lith_MWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_SniperRifle"
+   Tag "$LITH_INFO_SHORT_SniperRifle"
    Weapon.UpSound "weapons/sniper/draw"
    Weapon.SlotNumber 4
    Weapon.SlotPriority 0.9

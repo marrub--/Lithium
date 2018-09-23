@@ -1,9 +1,5 @@
 ## Misc ----------------------------------------------------------------------|
-== LITH_TXT_ArsenalStan | Arsenal
-== LITH_TXT_ArsenalJem  | Directives
-== LITH_TXT_ArsenalAri  | Gear
-== LITH_TXT_ArsenalMod  | $LITH_TXT_ArsenalStan
-
+== LITH_CHECK | Eng
 == LITH_TIME_FMT_LONG | %0.2i:%0.2i:%0.2i %i-7-1649
 
 == SECRETMESSAGE | \cnA secret is revealed!
@@ -14,8 +10,6 @@
 == BGFLAT30 | ZZLITHBG
 == BGFLAT15 | ZZLITHBG
 == BGFLAT31 | ZZLITHBG
-
-== LITH_CHECK | Eng
 
 ## Obituaries ----------------------------------------------------------------|
 == OB_DEFAULT |

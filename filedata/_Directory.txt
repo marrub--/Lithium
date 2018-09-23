@@ -25,10 +25,8 @@ in file language.info.upgrades.*.txt
 done
 
 in file language.info.weapons.*.txt
-   put data: sord           -> LITH_TXT_INFO_SHORT_Sword
-   put data: Game Nanhai    -> LITH_TXT_INFO_SHORT_Gameboy
-   put data: Spell Selector -> LITH_TXT_INFO_SHORT_CFist
-   put data: Knife          -> LITH_TXT_INFO_SHORT_Fist
+   put data: sord        -> LITH_INFO_SHORT_Sword
+   put data: Game Nanhai -> LITH_INFO_SHORT_Gameboy
 
    parse file: Info_Weapons_Outcasts.txt
    parse file: Info_Weapons_CyberMage.txt
@@ -44,8 +42,6 @@ done
 
 -- CBI Mail -------------------------------------------------------------------
 in file language.info.mail.*.txt
-   put file: Mail_Template.txt -> LITH_TXT_MAIL_TEMPLATE
-
    parse file: Mail.txt
 done
 
@@ -77,7 +73,8 @@ in file language.misc.*.txt
    parse file: Misc.txt
    parse file: Misc_QuitMessages.txt
    parse file: Misc_Changes.txt
-   put file: Misc_Opener.txt -> LITH_TXT_OPENER
+   parse file: Misc_UI.txt
+   put file: Misc_Opener.txt -> LITH_OPENER
 
    comment: EOF
 done

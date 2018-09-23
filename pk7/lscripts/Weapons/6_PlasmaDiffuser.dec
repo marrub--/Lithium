@@ -35,7 +35,7 @@ actor Lith_DiffPlasma : Lith_PlasmaBolt
 
 actor Lith_PlasmaDiffuser : Lith_Weapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_PlasmaDiffuser"
+   Tag "$LITH_INFO_SHORT_PlasmaDiffuser"
    Weapon.UpSound "weapons/plasdiff/draw"
    Weapon.SlotNumber 6
    Weapon.SlotPriority 0.9

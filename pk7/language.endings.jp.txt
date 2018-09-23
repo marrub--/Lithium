@@ -2,3 +2,5 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
+// Endings.txt stub
+

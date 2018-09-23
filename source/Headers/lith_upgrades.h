@@ -10,7 +10,7 @@
 #include "lith_list.h"
 
 #define Lith_UpgrBuy(p, upgr, ...) \
-   p->buy(&(upgr)->info->shopdef, (upgr), "LITH_TXT_UPGRADE_TITLE_%S", __VA_ARGS__)
+   p->buy(&(upgr)->info->shopdef, (upgr), "LITH_UPGRADE_TITLE_%S", __VA_ARGS__)
 
 // Extern Functions ----------------------------------------------------------|
 

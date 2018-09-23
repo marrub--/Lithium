@@ -2,7 +2,7 @@ class Lith_ShrapnelGun : Lith_DWeapon;
 
 default
 {
-   Tag "$LITH_TXT_INFO_SHORT_ShrapnelGun";
+   Tag "$LITH_INFO_SHORT_ShrapnelGun";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.9;
 }

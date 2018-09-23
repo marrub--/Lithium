@@ -2,60 +2,66 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-
 // Misc ----------------------------------------------------------------------|
-"LITH_TXT_ArsenalStan" = "Arsenal";
-"LITH_TXT_ArsenalJem" = "Directives";
-"LITH_TXT_ArsenalAri" = "Gear";
-"LITH_TXT_ArsenalMod" = "$LITH_TXT_ArsenalStan";
+"LITH_CHECK" = "Eng";
 "LITH_TIME_FMT_LONG" = "%0.2i:%0.2i:%0.2i %i-7-1649";
+
 "SECRETMESSAGE" = "\cnA secret is revealed!";
+
 "BGFLAT06" = "ZZLITHBG";
 "BGFLAT11" = "ZZLITHBG";
 "BGFLAT20" = "ZZLITHBG";
 "BGFLAT30" = "ZZLITHBG";
 "BGFLAT15" = "ZZLITHBG";
 "BGFLAT31" = "ZZLITHBG";
-"LITH_CHECK" = "Eng";
 
 // Obituaries ----------------------------------------------------------------|
 "OB_DEFAULT" = "";
+
 "LITH_OB_S_FatMac" = "%o's shoulders fell off their mounts.";
 "LITH_OB_S_Explosion" = "%o made %hself go boom.";
+
 "LITH_OB_Falling_1" = "%o took a long walk off a short floor.";
 "LITH_OB_Falling_2" = "The floor fell love with %o.";
 "LITH_OB_Falling_3" = "%o became paste with the power of gravity.";
 "LITH_OB_Falling_4" = "Goodbye, %o.";
 "LITH_OB_Falling_5" = "%o doesn't like heights.";
+
 "LITH_OB_Crush_1" = "%o likes small spaces too much.";
 "LITH_OB_Crush_2" = "%o had a crush on the ceiling.";
 "LITH_OB_Crush_3" = "The ceiling fell in love with %o.";
 "LITH_OB_Crush_4" = "Splat goes the %o.";
 "LITH_OB_Crush_5" = "%o was crushed.";
+
 "LITH_OB_Exit_1" = "%o didn't realize the futility of %p actions.";
 "LITH_OB_Exit_2" = "%o tried to get away.";
 "LITH_OB_Exit_3" = "There's no leaving for you, %o.";
 "LITH_OB_Exit_4" = "%o was ripped limb from limb by \cgme\c-.";
+
 "LITH_OB_Drowning_1" = "%o's lungs burst.";
 "LITH_OB_Drowning_2" = "%o's brain lacked the oxygen to go on.";
 "LITH_OB_Drowning_3" = "%o drowned.";
 "LITH_OB_Drowning_4" = "%o won't be heard from again.";
 "LITH_OB_Drowning_5" = "Better start looking for %o's body.";
+
 "LITH_OB_Slime_1" = "%o melted.";
 "LITH_OB_Slime_2" = "%o's boots don't appreciate %h anymore.";
 "LITH_OB_Slime_3" = "%o lost %p legs.";
 "LITH_OB_Slime_4" = "%o stood in something bad.";
 "LITH_OB_Slime_5" = "%o became goop.";
+
 "LITH_OB_Fire_1" = "%o fried to death.";
 "LITH_OB_Fire_2" = "%o is burning with passion. Er, fire. %r dead.";
 "LITH_OB_Fire_3" = "It'll be hard to tell if %o's corpse is %s.";
 "LITH_OB_Fire_4" = "%o went up in flames.";
 "LITH_OB_Fire_5" = "Smells like... %o.";
+
 "LITH_OB_Suicide_1" = "%o took the hard way out.";
 "LITH_OB_Suicide_2" = "%o won a Darwin award.";
 "LITH_OB_Suicide_3" = "%o took a permanent solution to a temporary problem.";
 "LITH_OB_Suicide_4" = "%o imploded.";
 "LITH_OB_Suicide_5" = "%o couldn't take it anymore.";
+
 "LITH_OB_Default_1" = "%o is ded";
 "LITH_OB_Default_2" = "%o was perforated by a chaingunner hiding in the sky.";
 "LITH_OB_Default_3" = "%o was removed from the board.";
@@ -91,27 +97,34 @@
 "MENU_SAVEG" = "* (Save-Game)";
 "MENU_UPDAT" = "* (Update-Notes)";
 "MENU_QUITG" = "* (Quit-Game)";
+
 "MENU_CHOOSECLASS" = "Your Class Is:";
 "MENU_WHICHEPISODE" = "Your Story Is:";
 "MENU_CHOOSESKILL" = "Your Skill Is:";
+
 "DIFF_TOURIST" = "> I'm just a tourist.";
 "DIFF_EASY" = "> Throw me a bone.";
 "DIFF_NORMAL" = "> Hurt me plenty.";
 "DIFF_HARD" = "> Ultra-Violence!";
 "DIFF_XHARD" = "> Watch me die!";
 "DIFF_NMARE" = "> Crazed Nightmare!";
+
 "LITH_SKILL_TOURIST" =
    "Are you certain?\n"
    "This one is just amusing.";
+
 "LITH_SKILL_EXTRAHARD" =
    "Are you sure?\n"
    "This one is extra hard.";
+
 "LITH_SKILL_NIGHTMARE" =
    "Are you sure?\n"
    "This one isn't even remotely fair.";
+
 "DOSY" = "(Press Y to quit.)";
 "PRESSYN" = "Press Y or N.";
 "PRESSKEY" = "Press a key.";
+
 "TXT_YES" = "[Yes]";
 "TXT_NO" = "[No]";
 
@@ -125,85 +138,112 @@
 "QUITMSG7" = "Exit?";
 "QUITMSG8" = "Wait, there's a youkai waiting for you at the exit!";
 "QUITMSG9" = "Get outta here, and get me some money too.";
+
 "QUITMSG10" =
    "Wait, don't go!\n"
    "I still have to sell you the expansion pack!";
+
 "QUITMSG11" =
    "There are still explosions to be had,\n"
    "are you really sure?";
+
 "QUITMSG12" =
    "Get out! Get out!\n"
    "Go and do your job!";
+
 "QUITMSG13" =
    "If you leave, I'll personally\n"
    "send pizzas to your doorstep.";
+
 "QUITMSG14" =
    "C'mon,\n"
    "just 5 more minutes?";
+
 "QUITMSG15" =
    "HEY\n"
    "HEY\n"
    "DIE";
+
 "QUITMSG16" = "Villain!! What color is your blood!!";
+
 "QUITMSG17" =
    "The Omega Cannon was created in a swamp dimension by\n"
    "an insane lizard-man who lusted for murder.\n"
    "How it got here is a mystery.";
+
 "QUITMSG18" =
    "Jeremy Stilko, Cyber-Mage, is blind, but can see\n"
    "thanks to cybernetics. The profile image he has\n"
    "is unusual in that he doesn't have a blindfold on.";
+
 "QUITMSG19" =
    "Cyber-Mage's weapon pickups look retro due to\n"
    "limitations in his bootleg space reformation wetware.";
+
 "QUITMSG20" = "Marine's Sniper Rifle was formerly his service weapon.";
+
 "QUITMSG21" =
    "The English language diversified in the past\n"
    "thousand years, splitting into dozens of dialects.\n"
    "The most common are Eastern and Northwest English.";
+
 "QUITMSG22" = "The Ensurer watches over all.";
+
 "QUITMSG23" =
    "The Star Destroyer's hum is a product of the\n"
    "energy buffer on its top channeling sound\n"
    "through the main hull of the gun, which may\n"
    "prove the existence of a fifth dimension.";
+
 "QUITMSG24" =
    "The amount of wetware jammed into Cyber-Mage's\n"
    "brain is not healthy for anyone.";
+
 "QUITMSG25" =
    "Marine was previously a gun collector, but stopped\n"
    "after regulations passed regarding personal defense\n"
    "weaponry in the military.";
+
 "QUITMSG26" =
    "The Shock Rifle was previously used for hunting,\n"
    "famed for its great power and ease of use.\n"
    "Before it was stripped down and modified, anyway.";
+
 "QUITMSG27" =
    "Rumors have spread of similarities between the\n"
    "phantoms haunting Hell and tales of past heroes.";
+
 "QUITMSG28" =
    "Within the week there will be OLD MEN,\n"
    "RUNNING THE WORLD, if you quit.";
+
 "QUITMSG29" =
    "On the planet Durla Prime, onesuch being exists whose\n"
    "only true name is \"King Crimera Haxfucker.\"";
+
 "QUITMSG30" = "AAAGH";
 "QUITMSG31" = "wan";
+
 "QUITMSG32" =
    "hellote i been looking at the sources what dont tell me how do i made a BSP grenades\n"
    "like it is regular grenades but when you make explode it deform bsp tree into shrub";
+
 "QUITMSG33" = "~text interface terminal malfunction error ~2992dud";
 "QUITMSG34" = "Internet pornography.";
 "QUITMSG35" = "if god is everywhere, then that means he's in this quit message and he needs to get the fuck OUT";
 "QUITMSG36" = "Now if you'll excuse me, I need to go die to the Soviet Union.";
+
 "QUITMSG37" =
    "The Charge Fist uses pneumatics to launch\n"
    "your fist forward, via advanced cybernetics.";
+
 "QUITMSG38" = "Can you at least offer weak opposition to exiting?";
+
 "QUITMSG39" =
    "BORN TO CRASH\n"
    "ZDoom is a fuck\n"
    "410,757,864,530 SCRIPT ERRORS";
+
 "QUITMSG40" = "GET OUT";
 "QUITMSG41" = "do-it.wad";
 "QUITMSG42" = "You'll do whatever it takes to get the JooJ done right, right?";
@@ -211,18 +251,22 @@
 "QUITMSG44" = "You dare defy ME?";
 "QUITMSG45" = "At this journey's end, where does one go but to a DOS prompt?";
 "QUITMSG46" = "I bet you'll come back for more. I know it.";
+
 "QUITMSG47" =
    "AFTER 3000 YEARS I AM FREE!\n"
    "DO YOU DARE QUIT AND LEAVE\n"
    "THE FATE OF THE WORLD IN MY HANDS?";
+
 "QUITMSG48" = "Quitting? What are you, a NERD?";
 "QUITMSG49" = "Master, your orders?";
 "QUITMSG50" = "Off to go play [insert game here], I see.";
 "QUITMSG51" = "Did you select the wrong menu option?";
 "QUITMSG52" = "This is all just a dream.";
+
 "QUITMSG53" =
    "This mod is just riddled with unsupported bytecode,\n"
    "you better get out of here before it blows.";
+
 "QUITMSG54" = "See you, space cowboy.";
 "QUITMSG55" = "FUCKING NINJAS STABBING LESBIAN NUNS";
 "QUITMSG56" = "Will you give your Door of Truth to me?";
@@ -234,22 +278,29 @@
 "QUITMSG62" = ":thinking:";
 "QUITMSG63" = "nyu~";
 "QUITMSG64" = "Hey, Ron! Can we say 'fuck' in the game?";
+
 "QUITMSG65" =
    "I'd leave - this is just more monsters and Score.\n"
    "What a load.";
+
 "QUITMSG66" = "Trust us now, it's time to let go.";
+
 "QUITMSG67" =
    "Enter the maze through your reflection,\n"
    "we have to follow through a new connection.";
+
 "QUITMSG68" = "YOU MEAN THIS GUY JUST QUITS WHEN HE WANTS??????";
 "QUITMSG69" = "[smooth saxophone plays]";
+
 "QUITMSG70" =
    "hetlo it is me of the durdandle i hav\n"
    "come to tell u that if u quit i will\n"
    "exit the universe and punch you through\n"
    "deep non-existence thank for cooperate";
+
 "QUITMSG71" = "Press Y to BECOME THE BEAST YOU WORSHIP.";
 "QUITMSG72" = "Fuck, fucking cock.";
+
 "QUITMSG73" =
    "hello hacker fucker\n"
    "this is marble\n"
@@ -259,23 +310,31 @@
    "where ever you are\n"
    "and break your legs\n"
    "and thats a promise";
+
 "QUITMSG74" = "Detonating in 5... 4... 3... 2...";
 "QUITMSG75" = "Look, bub. It's my way, or the highway.";
+
 "QUITMSG76" =
    "|  ||\n"
    "|| |_";
+
 "QUITMSG77" = "AOHA PZ TVZA LEJLSSLUA";
 "QUITMSG78" = "In modern times, Japanese pornography is hard to come by.";
 "QUITMSG79" = "Hey! Who's in charge here?";
+
 "QUITMSG80" =
    "If you leave, The Third Impact will become inevitable.\n"
    "Are you sure?";
+
 "QUITMSG81" = "Wait! The Wood Cube is going to drop!";
+
 "QUITMSG82" =
    "The Norwegians are leaving! The Norwegians are leaving!\n"
    "The Norwegians are leaving! The Norwegians are leaving!";
+
 "QUITMSG83" = "Saotome. Sukida.";
 "QUITMSG84" = "Throw yourself into the pit of Crest Worms?";
+
 "QUITMSG85" =
    "the way grows\n"
    "               dim\n"
@@ -293,23 +352,28 @@
    "\n"
    "another time\n"
    "another time";
+
 "QUITMSG86" = "Return to the wheat?";
 "QUITMSG87" = "Gotta keep it together y'all, 'cus it's about time.";
 "QUITMSG88" = "You leave, you give me your Yanagi card.";
+
 "QUITMSG89" =
    "Water, 35 liters; carbon, 20 kilograms;\n"
    "ammonia, 4 liters; lime, 1.5 kilograms;\n"
    "phosphorus, 800 grams; salt, 250 grams;\n"
    "saltpeter, 100 grams, and various other stuff.";
+
 "QUITMSG90" = "I've seen 'em come, I've seen 'em go.";
 "QUITMSG91" = "WINNERS DON'T PRESS Y";
 "QUITMSG92" = "Hand over the Platinum Chip?";
 "QUITMSG93" = "Destroy Liberty Prime?";
 "QUITMSG94" = "Press the Red Button?";
 "QUITMSG95" = "The Zone awaits...";
+
 "QUITMSG96" =
    "The suspense is killing me!\n"
    "Just do it already!";
+
 "QUITMSG97" = "If you quit, you will never become THE COPPER MAN.";
 "QUITMSG98" = ">stops in mid flow to sip his tea";
 "QUITMSG99" = "bepis";
@@ -320,19 +384,15 @@
 // Updates -------------------------------------------------------------------|
 
 // Header format:
-
 // \cf(\ciDate\cf) \cjFrom \cnOld\cj to \cfNew\cj:
 
 // Specifiers:
-
 // Addition = \cd+
-
 // Changed  = \cj|
-
 // Removed  = \cg-
-
 // Subspace = \cb]
-"LITH_TXT_UPDATE_1_5_3" =
+
+"LITH_UPDATE_1_5_3" =
    "\cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:\n"
    "\cd+ Added a player levelling system with 7 stats.\n"
    "\cb] Monsters will scale to your level.\n"
@@ -355,7 +415,8 @@
    "\cj| Made boss health easier to read while healthbars are disabled.\n"
    "\cj| Improved performance in high-monster-density maps.\n"
    "\cj| Improved GUI performance slightly.";
-"LITH_TXT_UPDATE_1_5_3_Page2" =
+
+"LITH_UPDATE_1_5_3_Page2" =
    "\cj| Changed the default automap colors.\n"
    "\cj| Replaced the small font and console fonts.\n"
    "\cj| Made players not collide with eachother in multiplayer.\n"
@@ -367,10 +428,12 @@
    "\cj| Fixed the size of Rend and the SMG's tracer bullets.\n"
    "\cj| Fixed PauseManager sometimes crashing the VM.\n"
    "\cg- Removed mana regeneration.";
-"LITH_TXT_UPDATE_1_5_2" =
+
+"LITH_UPDATE_1_5_2" =
    "\cf(\ciSep. 4, 2017\cf) \cjFrom \cn1.5.1\cj to \cf1.5.2\cj:\n"
    "\cj| Fixed function pointer errors on upgrade init.";
-"LITH_TXT_UPDATE_1_5_1" =
+
+"LITH_UPDATE_1_5_1" =
    "\cf(\ciAug. 36, 2017\cf) \cjFrom \cn1.5\cj to \cf1.5.1\cj:\n"
    "\cd+ Added an auto-save setting.\n"
    "\cd+ Added an API, so external C code can access all of Lithium by\n"
@@ -393,7 +456,8 @@
    "\cj| Improved the SMG's reload animation slightly\n"
    "\cj| Improved the Combat Rifle's reload animation slightly\n"
    "\cj| Fixed junk frames in Extra Hard enemies.";
-"LITH_TXT_UPDATE_1_5_1_Page2" =
+
+"LITH_UPDATE_1_5_1_Page2" =
    "\cj| Fixed death exits adding a bunch of junk to the upgrades menu.\n"
    "\cj| Fixed the \"resurrect\" cheat not working.\n"
    "\cj| Fixed the SPAS description listing the wrong capacity.\n"
@@ -414,7 +478,8 @@
    "\cj| Rewrote James' defeat message.\n"
    "\cg- Removed the trail from Delear's world sprite.\n"
    "\cg- Removed Score Golf mode";
-"LITH_TXT_UPDATE_1_5" =
+
+"LITH_UPDATE_1_5" =
    "\cf(\ciAug. 25, 2017\cf) \cjFrom \cn1.5 beta\cj to \cf1.5\cj:\n"
    "\cd+ Added the remaining Methods:\n"
    "\cb] Blade, slot 1 - small slash, basic melee\n"
@@ -437,7 +502,8 @@
    "\cd+ Added new info pages.\n"
    "\cd+ Added the rest of Cyber-Mage's mail.\n"
    "\cd+ Added messages when defeating phantoms.";
-"LITH_TXT_UPDATE_1_5_Page2" =
+
+"LITH_UPDATE_1_5_Page2" =
    "\cd+ Added an animation when the SMG overheats.\n"
    "\cd+ Added an armor type indicator to Cyber-Mage's HUD.\n"
    "\cd+ Added more pickup sounds.\n"
@@ -460,7 +526,8 @@
    "\cj| Made Barons never infight with Knights.\n"
    "\cj| Fixed some info pages never being unlocked.\n"
    "\cj| Increased the Missile Launcher's damage.";
-"LITH_TXT_UPDATE_1_5_Page3" =
+
+"LITH_UPDATE_1_5_Page3" =
    "\cj| Slightly changed the SMG's draw sound.\n"
    "\cj| Moved the TITLEMAP to the doom2 filter, so it won't make some games unplayable.\n"
    "\cj| Made rain effects better (thanks, Kate!)\n"
@@ -482,7 +549,8 @@
    "\cj| Fixed Delear taking too much Mana.\n"
    "\cj| Fixed shop weapons not being given correctly.\n"
    "\cj| Probably fixed some crashing. Probably.";
-"LITH_TXT_UPDATE_1_5b" =
+
+"LITH_UPDATE_1_5b" =
    "\cf(\ciJul. 17, 2017\cf) \cjFrom \cn1.5 alpha 2\cj to \cf1.5 beta\cj:\n"
    "\cd+ Enemies now have a level and rank, which determine their health\n"
    "\cd  and resistances, et al.\n"
@@ -505,7 +573,8 @@
    "\cj| Fixed horrible performance issues with the pause-in-menus setting.\n"
    "\cj| Made weapon pickup sounds play when selling the weapon.\n"
    "\cj| Made the Star Destroyer sound slightly nicer in OpenAL.";
-"LITH_TXT_UPDATE_1_5b_Page2" =
+
+"LITH_UPDATE_1_5b_Page2" =
    "\cj| Made the Combat Rifle never auto-aim.\n"
    "\cj| Fixed the Barrier powerup not displaying stacked uses properly.\n"
    "\cj| Made the Spider Mastermind slightly more dangerous.\n"
@@ -528,11 +597,13 @@
    "\cd+ Added more debugging settings.\n"
    "\cd+ Added something.\n"
    "\cg- Removed the slide indicator from the HUD";
-"LITH_TXT_UPDATE_1_5a2" =
+
+"LITH_UPDATE_1_5a2" =
    "\cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.5 alpha\cj to \cf1.5 alpha 2\cj:\n"
    "\cj| Fixed pausing weapons being caused from external sources\n"
    "\cj  (which broke the adrenaline upgrade completely.)";
-"LITH_TXT_UPDATE_1_5a" =
+
+"LITH_UPDATE_1_5a" =
    "\cf(\ciJul. 7, 2017\cf) \cjFrom \cn1.4\cj to \cf1.5 alpha\cj:\n"
    "\cd+ Added searching to the info panel.\n"
    "\cd+ Added an adrenaline indicator to the HUD.\n"
@@ -555,7 +626,8 @@
    "\cj  weapons in that slot.\n"
    "\cj| Fixed the Spider Mastermind not being terrifying enough.\n"
    "\cj| Made the rifle clickier as it runs out of ammo.";
-"LITH_TXT_UPDATE_1_5a_Page2" =
+
+"LITH_UPDATE_1_5a_Page2" =
    "\cj| Compressed some sounds, reducing the overall file size.\n"
    "\cj| Fixed some weird balance issues.\n"
    "\cj| Fixed chaingunners using the wrong sound.\n"
@@ -569,7 +641,8 @@
    "\cg  them back in 1.5 beta in some way.\n"
    "\cg- Removed heretic support. 2hard4me\n"
    "\cd+ Added fun";
-"LITH_TXT_UPDATE_1_4" =
+
+"LITH_UPDATE_1_4" =
    "\cf(\ciApr. 14, 2017\cf) \cjFrom \cn1.3.1\cj to \cf1.4\cj:\n"
    "\cd+ Added Phantoms.\n"
    "\cd+ Added a CBI upgrades/performance system.\n"
@@ -592,7 +665,8 @@
    "\cj| Fixed performance issues with the Settings screen.\n"
    "\cj| Replaced the HUD's background color with black.\n"
    "\cj| Made the SSG faster, and stronger.";
-"LITH_TXT_UPDATE_1_4_Page2" =
+
+"LITH_UPDATE_1_4_Page2" =
    "\cj| Fixed the Combat Rifle and Sniper Rifle not actually being hitscan.\n"
    "\cj| Gave Hell Knights/Barons and Cacodemons proper blood colors.\n"
    "\cj| Re-fixed shop buy messages logging wrong.\n"
@@ -615,7 +689,8 @@
    "\cj| Slightly rebalanced score given by enemies.\n"
    "\cg- Removed fun\n"
    "\cd+ Definitely did not add evil gost.";
-"LITH_TXT_UPDATE_1_3_1" =
+
+"LITH_UPDATE_1_3_1" =
    "\cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.3\cj to \cf1.3.1\cj:\n"
    "\cj| Fixed maps with ACS scripts in them occasionally causing\n"
    "\cj  reality to collapse.\n"
@@ -623,7 +698,8 @@
    "\cj| Fixed resurrected enemies not getting poisoned.\n"
    "\cj| Increased shell ammo to 60.\n"
    "\cd+ Added a setting for cursor speed.";
-"LITH_TXT_UPDATE_1_3" =
+
+"LITH_UPDATE_1_3" =
    "\cf(\ciMar. 16, 2017\cf) \cjFrom \cn1.2\cj to \cf1.3\cj:\n"
    "\cj| Rebalanced a lot of stuff, mainly weapons and score amounts.\n"
    "\cj| Made the cannon a lot easier to use.\n"
@@ -646,7 +722,8 @@
    "\cd+ Added a setting for drawing the log from the top of the screen.\n"
    "\cd+ Added settings for the Vital Scanner upgrade.\n"
    "\cd+ Added enemy compatibility checker.";
-"LITH_TXT_UPDATE_1_3_Page2" =
+
+"LITH_UPDATE_1_3_Page2" =
    "\cd+ Added a titlemap and title music.\n"
    "\cd+ Added (badly written) intermission texts.\n"
    "\cd+ Added a pretty loading screen.\n"
@@ -669,7 +746,8 @@
    "\cj| Fixed the pistol's info page.\n"
    "\cj| Fixed the arachnotron/spider mastermind names being wrong.\n"
    "\cj| Changed some miscallaneous text.";
-"LITH_TXT_UPDATE_1_3_Page3" =
+
+"LITH_UPDATE_1_3_Page3" =
    "\cj| Improved the way the Adrenaline upgrade works.\n"
    "\cj| Fixed items being picked up too much.\n"
    "\cj| Fixed score multiplier not being applied occasionally.\n"
@@ -678,7 +756,8 @@
    "\cj| Fixed rockets acting weird at certain angles.\n"
    "\cj| Made the Vital Scanner upgrade cheaper.\n"
    "\cg- Removed some items from the shop.";
-"LITH_TXT_UPDATE_1_2" =
+
+"LITH_UPDATE_1_2" =
    "\cf(\ciFeb. 1, 2017\cf) \cjFrom \cn1.1\cj to \cf1.2\cj:\n"
    "\cd+ Added logos for companies in the BIP\n"
    "\cd+ Added a log tab to the CBI for showing things you've done or used\n"
@@ -701,7 +780,8 @@
    "\cd+ Added a Sniper Rifle weapon to the shop\n"
    "\cd+ Added a knife which replaces the fist\n"
    "\cd+ Added menu sounds and a smallfont replacement";
-"LITH_TXT_UPDATE_1_2_Page2" =
+
+"LITH_UPDATE_1_2_Page2" =
    "\cj| Made the pistol do more damage\n"
    "\cj| Probably fixed more crashes\n"
    "\cj| Made combat rifle spit blood better\n"
@@ -724,7 +804,8 @@
    "\cj| Made the punctuator cannon's attacks pitchable\n"
    "\cj| Buffed bosses quite a bit\n"
    "\cj| Buffed some weapons";
-"LITH_TXT_UPDATE_1_1" =
+
+"LITH_UPDATE_1_1" =
    "\cf(\ciJan. 19, 2017\cf) \cjFrom \cn1.0\cj to \cf1.1\cj:\n"
    "\cd+ Added an indicator for weapons that take ammo and ones that have\n"
    "\cd  magazines\n"
@@ -747,7 +828,8 @@
    "\cd+ Added the Instant Death downgrade\n"
    "\cd+ Added reloading to the Gauss Shotgun (now Gauss Rifle), which has a\n"
    "\cd  10-round magazine";
-"LITH_TXT_UPDATE_1_1_Page2" =
+
+"LITH_UPDATE_1_1_Page2" =
    "\cd+ Added a settings page to the CBI which lets you set up CVars\n"
    "\cd+ Gave the Hell Knight a new attack\n"
    "\cd+ Gave the Omega Cannon new sprites, new effects and better balance\n"
@@ -769,7 +851,8 @@
    "\cj| Improved scope visuals\n"
    "\cj| Fixed enemies not giving score on XDeath\n"
    "\cj| Changed the price of Torgue Mode";
-"LITH_TXT_UPDATE_1_1_Page3" =
+
+"LITH_UPDATE_1_1_Page3" =
    "\cj| Changed the amount of score the base upgrades take, making it easier\n"
    "\cj  to obtain score\n"
    "\cj| Improved GUI behaviour\n"
@@ -790,8 +873,38 @@
    "\cj| Fixed the Lost Souls giving too much Score\n"
    "\cj| Added Thing ID validation to the player, which should possibly fix more\n"
    "\cj  advanced ZDoom maps breaking";
-"LITH_TXT_OPENER" =
 
+
+// UI ------------------------------------------------------------------------|
+"LITH_COST" = "Cost:";
+"LITH_CATEGORY" = "Category";
+"LITH_SCOREMULT" = "Score Multiplier";
+"LITH_BUY" = "Buy";
+"LITH_DEACTIVATE" = "Deactivate";
+"LITH_ACTIVATE" = "Activate";
+
+"LITH_TAB_ARSENAL_Stan" = "Arsenal";
+"LITH_TAB_ARSENAL_Jem" = "Directives";
+"LITH_TAB_ARSENAL_Ari" = "Gear";
+"LITH_TAB_ARSENAL_Mod" = "$LITH_TAB_ARSENAL_Stan";
+
+"LITH_TAB_STATUS" = "Status";
+"LITH_TAB_INVENTORY" = "Inventory";
+"LITH_TAB_INFO" = "Info";
+"LITH_TAB_SETTINGS" = "Settings";
+
+"LITH_TAB_ATTRIBUTES" = "Attributes";
+"LITH_TAB_CBI" = "CBI";
+
+"LITH_TAB_BIP" = "BIP";
+"LITH_TAB_LOG" = "Log";
+"LITH_TAB_STATISTICS" = "Statistics";
+"LITH_TAB_NOTES" = "Notes";
+
+"LITH_TAB_UPGRADES" = "Upgrades";
+"LITH_TAB_SHOP" = "Shop";
+
+"LITH_OPENER" =
 // Misc_Opener.txt
    "1626, New Era.\n"
    "\n"

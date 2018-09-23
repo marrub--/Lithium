@@ -170,7 +170,7 @@ class Lith_SMG : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_TXT_INFO_SHORT_SMG";
+   Tag "$LITH_INFO_SHORT_SMG";
    Weapon.UpSound "weapons/smg/draw";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;

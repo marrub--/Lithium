@@ -3,72 +3,75 @@
 ## bit 1 - Does not print a message when received
 ## bit 2 - Message is the same for all player classes
 
-== LITH_TXT_MAIL_FLAG_Intro           | 1
-== LITH_TXT_MAIL_FLAG_JamesDefeated   | 2
-== LITH_TXT_MAIL_FLAG_MakarovDefeated | 2
-== LITH_TXT_MAIL_FLAG_IsaacDefeated   | 2
+== LITH_MAIL_FLAG_Intro           | 1
+== LITH_MAIL_FLAG_JamesDefeated   | 2
+== LITH_MAIL_FLAG_MakarovDefeated | 2
+== LITH_MAIL_FLAG_IsaacDefeated   | 2
+
+## Template ------------------------------------------------------------------|
+++ LITH_MAIL_TEMPLATE | Mail_Template.txt
 
 ## All Classes ---------------------------------------------------------------|
-++ LITH_TXT_MAIL_BODY_JamesDefeated | Mail/Phantom_James.txt
-== LITH_TXT_MAIL_SEND_JamesDefeated | jam0s@g0n0j0t00.1025
+++ LITH_MAIL_BODY_JamesDefeated | Mail/Phantom_James.txt
+== LITH_MAIL_SEND_JamesDefeated | jam0s@g0n0j0t00.1025
 
-++ LITH_TXT_MAIL_BODY_MakarovDefeated | Mail/Phantom_Makarov.txt
-== LITH_TXT_MAIL_SEND_MakarovDefeated | mak666v@org.r\.\\\-
+++ LITH_MAIL_BODY_MakarovDefeated | Mail/Phantom_Makarov.txt
+== LITH_MAIL_SEND_MakarovDefeated | mak666v@org.r\.\\\-
 
-++ LITH_TXT_MAIL_BODY_IsaacDefeated | Mail/Phantom_Isaac.txt
-== LITH_TXT_MAIL_SEND_IsaacDefeated | isaac@syn.400khz
+++ LITH_MAIL_BODY_IsaacDefeated | Mail/Phantom_Isaac.txt
+== LITH_MAIL_SEND_IsaacDefeated | isaac@syn.400khz
 
 ## Marine --------------------------------------------------------------------|
-++ LITH_TXT_MAIL_BODY_IntroStan | Mail/Intro_Marine.txt
-== LITH_TXT_MAIL_SEND_IntroStan | ALambert@corp.OFMD
-== LITH_TXT_MAIL_TIME_IntroStan | 13:00 25-7-49
-== LITH_TXT_MAIL_SIZE_IntroStan | 610
+++ LITH_MAIL_BODY_IntroStan | Mail/Intro_Marine.txt
+== LITH_MAIL_SEND_IntroStan | ALambert@corp.OFMD
+== LITH_MAIL_TIME_IntroStan | 13:00 25-7-49
+== LITH_MAIL_SIZE_IntroStan | 610
 
-++ LITH_TXT_MAIL_BODY_Cluster1Stan | Mail/Cluster1_Marine.txt
-== LITH_TXT_MAIL_SEND_Cluster1Stan | ALambert@corp.OFMD
+++ LITH_MAIL_BODY_Cluster1Stan | Mail/Cluster1_Marine.txt
+== LITH_MAIL_SEND_Cluster1Stan | ALambert@corp.OFMD
 
-++ LITH_TXT_MAIL_BODY_Cluster2Stan | Mail/Cluster2_Marine.txt
-== LITH_TXT_MAIL_SEND_Cluster2Stan | ALambert@corp.OFMD
+++ LITH_MAIL_BODY_Cluster2Stan | Mail/Cluster2_Marine.txt
+== LITH_MAIL_SEND_Cluster2Stan | ALambert@corp.OFMD
 
-++ LITH_TXT_MAIL_BODY_Cluster3Stan | Mail/Cluster3_Marine.txt
-== LITH_TXT_MAIL_SEND_Cluster3Stan | ALambert@corp.OFMD
+++ LITH_MAIL_BODY_Cluster3Stan | Mail/Cluster3_Marine.txt
+== LITH_MAIL_SEND_Cluster3Stan | ALambert@corp.OFMD
 
-++ LITH_TXT_MAIL_BODY_PhantomStan | Mail/Intro2_Marine.txt
-== LITH_TXT_MAIL_SEND_PhantomStan | htic0@gov.<hidden>.mailserv
-== LITH_TXT_MAIL_SIZE_PhantomStan | 330
+++ LITH_MAIL_BODY_PhantomStan | Mail/Intro2_Marine.txt
+== LITH_MAIL_SEND_PhantomStan | htic0@gov.<hidden>.mailserv
+== LITH_MAIL_SIZE_PhantomStan | 330
 
-++ LITH_TXT_MAIL_BODY_Secret1Stan | Mail/Secret1_Marine.txt
-== LITH_TXT_MAIL_NAME_Secret1Stan | Saved Buffer
+++ LITH_MAIL_BODY_Secret1Stan | Mail/Secret1_Marine.txt
+== LITH_MAIL_NAME_Secret1Stan | Saved Buffer
 
-++ LITH_TXT_MAIL_BODY_Secret2Stan | Mail/Secret2_Marine.txt
-== LITH_TXT_MAIL_NAME_Secret1Stan | Saved Buffer
+++ LITH_MAIL_BODY_Secret2Stan | Mail/Secret2_Marine.txt
+== LITH_MAIL_NAME_Secret1Stan | Saved Buffer
 
 ## Cyber-Mage ----------------------------------------------------------------|
-++ LITH_TXT_MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
-== LITH_TXT_MAIL_NAME_IntroJem | Saved Message
-== LITH_TXT_MAIL_SEND_IntroJem | <hidden>@corp.AOF
-== LITH_TXT_MAIL_TIME_IntroJem | 13:44 25-7-49
-== LITH_TXT_MAIL_SIZE_IntroJem | 288
+++ LITH_MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
+== LITH_MAIL_NAME_IntroJem | Saved Message
+== LITH_MAIL_SEND_IntroJem | <hidden>@corp.AOF
+== LITH_MAIL_TIME_IntroJem | 13:44 25-7-49
+== LITH_MAIL_SIZE_IntroJem | 288
 
-++ LITH_TXT_MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
-== LITH_TXT_MAIL_NAME_Cluster1Jem | Saved Text 104
-== LITH_TXT_MAIL_SIZE_Cluster1Jem | 240
+++ LITH_MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
+== LITH_MAIL_NAME_Cluster1Jem | Saved Text 104
+== LITH_MAIL_SIZE_Cluster1Jem | 240
 
-++ LITH_TXT_MAIL_BODY_Cluster2Jem | Mail/Cluster2_CyberMage.txt
-== LITH_TXT_MAIL_NAME_Cluster2Jem | Saved Text 152
-== LITH_TXT_MAIL_SIZE_Cluster2Jem | 288
+++ LITH_MAIL_BODY_Cluster2Jem | Mail/Cluster2_CyberMage.txt
+== LITH_MAIL_NAME_Cluster2Jem | Saved Text 152
+== LITH_MAIL_SIZE_Cluster2Jem | 288
 
-++ LITH_TXT_MAIL_BODY_Cluster3Jem | Mail/Cluster3_CyberMage.txt
-== LITH_TXT_MAIL_NAME_Cluster3Jem | Saved Text 244
-== LITH_TXT_MAIL_SIZE_Cluster3Jem | 218
+++ LITH_MAIL_BODY_Cluster3Jem | Mail/Cluster3_CyberMage.txt
+== LITH_MAIL_NAME_Cluster3Jem | Saved Text 244
+== LITH_MAIL_SIZE_Cluster3Jem | 218
 
-++ LITH_TXT_MAIL_BODY_PhantomJem | Mail/Intro2_CyberMage.txt
-== LITH_TXT_MAIL_SEND_PhantomJem | order@corp.AOF
+++ LITH_MAIL_BODY_PhantomJem | Mail/Intro2_CyberMage.txt
+== LITH_MAIL_SEND_PhantomJem | order@corp.AOF
 
-++ LITH_TXT_MAIL_BODY_Secret1Jem | Mail/Secret1_CyberMage.txt
-== LITH_TXT_MAIL_NAME_Secret1Jem | Saved Text 250
+++ LITH_MAIL_BODY_Secret1Jem | Mail/Secret1_CyberMage.txt
+== LITH_MAIL_NAME_Secret1Jem | Saved Text 250
 
-++ LITH_TXT_MAIL_BODY_Secret2Jem | Mail/Secret2_CyberMage.txt
-== LITH_TXT_MAIL_NAME_Secret2Jem | Saved Text 252
+++ LITH_MAIL_BODY_Secret2Jem | Mail/Secret2_CyberMage.txt
+== LITH_MAIL_NAME_Secret2Jem | Saved Text 252
 
 ## EOF

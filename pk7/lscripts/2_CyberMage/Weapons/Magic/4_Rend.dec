@@ -36,7 +36,7 @@ actor Lith_RendHit2 : Lith_RendHit
 
 actor Lith_Rend : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Rend"
+   Tag "$LITH_INFO_SHORT_Rend"
    Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/rend/draw"

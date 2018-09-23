@@ -33,9 +33,9 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
    __str name;
 
    Upgr(hasupgr2)
-      {CPU(1); ram = 150; name = Language("LITH_TXT_INFO_TITLE_CBIUpgr2");}
+      {CPU(1); ram = 150; name = L("LITH_INFO_TITLE_CBIUpgr2");}
    else Upgr(hasupgr1)
-      {CPU(2); ram = 100; name = Language("LITH_TXT_INFO_TITLE_CBIUpgr1");}
+      {CPU(2); ram = 100; name = L("LITH_INFO_TITLE_CBIUpgr1");}
    else
       {CPU(3); ram =  50; name = "OFMD Spec. Nodea 541 Basic CPU";}
 

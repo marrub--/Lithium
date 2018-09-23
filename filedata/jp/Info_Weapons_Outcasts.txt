@@ -1,0 +1,4 @@
+## Outcast Weapons -----------------------------------------------------------|
+== LITH_INFO_SHORT_ChargeFist      | チャージ拳
+== LITH_INFO_SHORT_MissileLauncher | ミサイルランチャー
+== LITH_INFO_SHORT_PlasmaDiffuser  | プラズマ拡散銃

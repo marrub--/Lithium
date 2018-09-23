@@ -509,7 +509,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->log("%S", Language("LITH_TXT_LOG_BossWarn%S", p->discrim));
+      p->log("%S", Language("LITH_LOG_BossWarn%S", p->discrim));
 }
 
 //

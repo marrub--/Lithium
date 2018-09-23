@@ -43,7 +43,7 @@ void Lith_Title(void)
 
    SetSize(320, 240);
 
-   __str txt = Language("LITH_TXT_OPENER");
+   __str txt = L("LITH_OPENER");
    int   len = ACS_StrLen(txt);
    int   pos = 0;
 

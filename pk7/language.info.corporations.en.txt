@@ -2,12 +2,11 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_AllPoint" = "AllPoint";
-"LITH_TXT_INFO_TITLE_AllPoint" = "AllPoint Precision Firearms";
-"LITH_TXT_INFO_IMAGE_AllPoint" = ":BIP:AllPoint";
-"LITH_TXT_INFO_DESCR_AllPoint" =
+"LITH_INFO_SHORT_AllPoint" = "AllPoint";
+"LITH_INFO_TITLE_AllPoint" = "AllPoint Precision Firearms";
+"LITH_INFO_IMAGE_AllPoint" = ":BIP:AllPoint";
+"LITH_INFO_DESCR_AllPoint" =
    "Established mid first-century NE, AllPoint present heavy sniper rifles and "
    "plasma weapons for military and private use."
    "\n\n"
@@ -20,10 +19,10 @@
    "should just go back to window shopping.\"";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_AOF" = "A.O.F";
-"LITH_TXT_INFO_TITLE_AOF" = "A.O.F Inc.";
-"LITH_TXT_INFO_IMAGE_AOF" = ":BIP:AOF";
-"LITH_TXT_INFO_DESCR_AOF" =
+"LITH_INFO_SHORT_AOF" = "A.O.F";
+"LITH_INFO_TITLE_AOF" = "A.O.F Inc.";
+"LITH_INFO_IMAGE_AOF" = ":BIP:AOF";
+"LITH_INFO_DESCR_AOF" =
    "Not much is known about this shady corporation on the outside, and reports "
    "from insiders never painted a very pretty picture."
    "\n\n"
@@ -34,10 +33,10 @@
    "A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_AOFJem" = "$LITH_TXT_INFO_SHORT_AOF";
-"LITH_TXT_INFO_TITLE_AOFJem" = "A.O.F Inc. [Bishop-Class Clearance]";
-"LITH_TXT_INFO_IMAGE_AOFJem" = "$LITH_TXT_INFO_IMAGE_AOF";
-"LITH_TXT_INFO_DESCR_AOFJem" =
+"LITH_INFO_SHORT_AOFJem" = "$LITH_INFO_SHORT_AOF";
+"LITH_INFO_TITLE_AOFJem" = "A.O.F Inc. [Bishop-Class Clearance]";
+"LITH_INFO_IMAGE_AOFJem" = "$LITH_INFO_IMAGE_AOF";
+"LITH_INFO_DESCR_AOFJem" =
    "A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and "
    "\cm--------\cj for the purposes of exposing the universal secret of magic and "
    "restoring the world to what it once was pre-calamity."
@@ -50,10 +49,10 @@
    "modifications for existing weapons.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Cid" = "Cid";
-"LITH_TXT_INFO_TITLE_Cid" = "$LITH_TXT_INFO_SHORT_Cid";
-"LITH_TXT_INFO_IMAGE_Cid" = ":BIP:Cid";
-"LITH_TXT_INFO_DESCR_Cid" =
+"LITH_INFO_SHORT_Cid" = "Cid";
+"LITH_INFO_TITLE_Cid" = "$LITH_INFO_SHORT_Cid";
+"LITH_INFO_IMAGE_Cid" = ":BIP:Cid";
+"LITH_INFO_DESCR_Cid" =
    "Cid is a black market trading group, presumed to be led by four men. They sell "
    "artifacts from the Super Dimension, ultra-high-grade weapons, and anonymously "
    "donate to several charities on Earth."
@@ -62,9 +61,9 @@
    "of the strongest, longest standing black market groups ever.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Facer" = "Facer";
-"LITH_TXT_INFO_TITLE_Facer" = "$LITH_TXT_INFO_SHORT_Facer";
-"LITH_TXT_INFO_DESCR_Facer" =
+"LITH_INFO_SHORT_Facer" = "Facer";
+"LITH_INFO_TITLE_Facer" = "$LITH_INFO_SHORT_Facer";
+"LITH_INFO_DESCR_Facer" =
    "Facer (pronounced \"phaser\") was a company that produced precision firearms "
    "around 2403 CE. Based in Paris, France, the company started out as a two-man "
    "production, designing simple but powerful sniper rifles for attracting "
@@ -77,10 +76,10 @@
    "The company was resigned in 2480 after the death of its remaining founder.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_KSKK" = "KSKK";
-"LITH_TXT_INFO_TITLE_KSKK" = "Kazami Sensou Kenkyuu Kaihatsu GK";
-"LITH_TXT_INFO_IMAGE_KSKK" = ":BIP:KSKK";
-"LITH_TXT_INFO_DESCR_KSKK" =
+"LITH_INFO_SHORT_KSKK" = "KSKK";
+"LITH_INFO_TITLE_KSKK" = "Kazami Sensou Kenkyuu Kaihatsu GK";
+"LITH_INFO_IMAGE_KSKK" = ":BIP:KSKK";
+"LITH_INFO_DESCR_KSKK" =
    "A limited R&D company acting mainly in partnership with the military of the "
    "Great Empire of Kazami on Earth. Due to the strange and generally complex "
    "needs of the Kazami army, this company has developed a great many "
@@ -91,18 +90,18 @@
    "their more useful creations.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_KSKKJem" = "$LITH_TXT_INFO_SHORT_KSKK";
-"LITH_TXT_INFO_TITLE_KSKKJem" = "$LITH_TXT_INFO_TITLE_KSKK";
-"LITH_TXT_INFO_IMAGE_KSKKJem" = "$LITH_TXT_INFO_IMAGE_KSKK";
-"LITH_TXT_INFO_DESCR_KSKKJem" =
+"LITH_INFO_SHORT_KSKKJem" = "$LITH_INFO_SHORT_KSKK";
+"LITH_INFO_TITLE_KSKKJem" = "$LITH_INFO_TITLE_KSKK";
+"LITH_INFO_IMAGE_KSKKJem" = "$LITH_INFO_IMAGE_KSKK";
+"LITH_INFO_DESCR_KSKKJem" =
    "Kazami Sensou Kenkyuu Kaihatsu (Kazami Military R&D) is a godo kaisha "
    "business organization based in the Great Empire of Kazami, on Earth. They "
    "research, develop and produce a large variety of products for the Kazami army.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_MDDO" = "MDDO";
-"LITH_TXT_INFO_TITLE_MDDO" = "Maxim-Danil Defense Org";
-"LITH_TXT_INFO_DESCR_MDDO" =
+"LITH_INFO_SHORT_MDDO" = "MDDO";
+"LITH_INFO_TITLE_MDDO" = "Maxim-Danil Defense Org";
+"LITH_INFO_DESCR_MDDO" =
    "A now-defunct weapons manufacturer on Mars, founded and funded by the famous "
    "Maxim-Danil duo. They designed and produced weapons of all kinds on commission "
    "for military and paramilitary groups alike."
@@ -110,19 +109,19 @@
    "De-funded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Newvec" = "Newvec";
-"LITH_TXT_INFO_TITLE_Newvec" = "Newvec Armory Incorporated";
-"LITH_TXT_INFO_DESCR_Newvec" =
+"LITH_INFO_SHORT_Newvec" = "Newvec";
+"LITH_INFO_TITLE_Newvec" = "Newvec Armory Incorporated";
+"LITH_INFO_DESCR_Newvec" =
    "Newvec is a firearms company started a mere four years ago 1645. While they "
    "don't have much reputation as of now, they have a few very strong backers "
    "providing them funding. Newvec mostly produces weapons on commission, and only "
    "sells weapons to the public via online shipping.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_OFMD" = "OFMD";
-"LITH_TXT_INFO_TITLE_OFMD" = "Optic Fiber Maxim-Danil";
-"LITH_TXT_INFO_IMAGE_OFMD" = ":BIP:OFMD";
-"LITH_TXT_INFO_DESCR_OFMD" =
+"LITH_INFO_SHORT_OFMD" = "OFMD";
+"LITH_INFO_TITLE_OFMD" = "Optic Fiber Maxim-Danil";
+"LITH_INFO_IMAGE_OFMD" = ":BIP:OFMD";
+"LITH_INFO_DESCR_OFMD" =
    "Originally, this company only produced optic fiber cables for consumer use, "
    "but later branched out to create all kinds of computation technology."
    "\n\n"
@@ -134,10 +133,10 @@
    "cyber-tech.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_OFMDJem" = "$LITH_TXT_INFO_SHORT_OFMD";
-"LITH_TXT_INFO_TITLE_OFMDJem" = "$LITH_TXT_INFO_TITLE_OFMD";
-"LITH_TXT_INFO_IMAGE_OFMDJem" = "$LITH_TXT_INFO_IMAGE_OFMD";
-"LITH_TXT_INFO_DESCR_OFMDJem" =
+"LITH_INFO_SHORT_OFMDJem" = "$LITH_INFO_SHORT_OFMD";
+"LITH_INFO_TITLE_OFMDJem" = "$LITH_INFO_TITLE_OFMD";
+"LITH_INFO_IMAGE_OFMDJem" = "$LITH_INFO_IMAGE_OFMD";
+"LITH_INFO_DESCR_OFMDJem" =
    "Optic Fiber Maxim-Danil is a company which mainly produces electronics, and is "
    "one of the top-selling brands on the market for cables, computer parts, and "
    "other such common technology."
@@ -146,10 +145,10 @@
    "but later branched out to create all kinds of computation technology.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Omakeda" = "Omakeda";
-"LITH_TXT_INFO_TITLE_Omakeda" = "Omakeda Defense Co.";
-"LITH_TXT_INFO_IMAGE_Omakeda" = ":BIP:Omakeda";
-"LITH_TXT_INFO_DESCR_Omakeda" =
+"LITH_INFO_SHORT_Omakeda" = "Omakeda";
+"LITH_INFO_TITLE_Omakeda" = "Omakeda Defense Co.";
+"LITH_INFO_IMAGE_Omakeda" = ":BIP:Omakeda";
+"LITH_INFO_DESCR_Omakeda" =
    "Based in Hawaii, Omakeda Defense Co. produce self-defense and hunting weaponry "
    "for civilians. Due to their high quality and fair pricing, militaries  "
    "mercenaries around the world use their armaments as well."
@@ -158,10 +157,10 @@
    "profiting, most popular firearms manufacturers on Earth.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Semaphore" = "Semaphore, Inc.";
-"LITH_TXT_INFO_TITLE_Semaphore" = "Semaphore, Incorporated";
-"LITH_TXT_INFO_IMAGE_Semaphore" = ":BIP:Semaphore";
-"LITH_TXT_INFO_DESCR_Semaphore" =
+"LITH_INFO_SHORT_Semaphore" = "Semaphore, Inc.";
+"LITH_INFO_TITLE_Semaphore" = "Semaphore, Incorporated";
+"LITH_INFO_IMAGE_Semaphore" = ":BIP:Semaphore";
+"LITH_INFO_DESCR_Semaphore" =
    "Hiding out somewhere in the asteroid belt of Omicron Xevv, Semaphore, Inc is a "
    "space ship weapons designer and manufacturer started 6 years ago in 1643 NE by "
    "a small group of scientists and businessmen."
@@ -174,10 +173,10 @@
    "profitability.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_Sym43" = "SYM4.3";
-"LITH_TXT_INFO_TITLE_Sym43" = "SYM4.3 WEAPONS INCORPORATED";
-"LITH_TXT_INFO_IMAGE_Sym43" = ":BIP:Sym43";
-"LITH_TXT_INFO_DESCR_Sym43" =
+"LITH_INFO_SHORT_Sym43" = "SYM4.3";
+"LITH_INFO_TITLE_Sym43" = "SYM4.3 WEAPONS INCORPORATED";
+"LITH_INFO_IMAGE_Sym43" = ":BIP:Sym43";
+"LITH_INFO_DESCR_Sym43" =
    "Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3 "
    "produce explosive weapons and distribute many other kinds of weaponry via "
    "proxy. All weapons and ammunition sold by them are assigned a standard "
@@ -190,9 +189,9 @@
    "battles, having existed for over 700 years now.";
 
 //----------------------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_UnrealArms" = "Unreal Arms";
-"LITH_TXT_INFO_TITLE_UnrealArms" = "$LITH_TXT_INFO_SHORT_UnrealArms";
-"LITH_TXT_INFO_DESCR_UnrealArms" =
+"LITH_INFO_SHORT_UnrealArms" = "Unreal Arms";
+"LITH_INFO_TITLE_UnrealArms" = "$LITH_INFO_SHORT_UnrealArms";
+"LITH_INFO_DESCR_UnrealArms" =
    "A company currently residing in the Aetos Vi system. They manufacture "
    "high-grade exotic weaponry both on commission and for mass production."
    "\n\n"
@@ -201,3 +200,4 @@
    "nice price thanks to good shipping architecture in the Aetos Vi system.";
 
 // EOF
+

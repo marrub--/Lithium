@@ -82,7 +82,7 @@ actor Lith_VoidShot
 
 actor Lith_SPAS : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_SPAS"
+   Tag "$LITH_INFO_SHORT_SPAS"
    Weapon.UpSound "weapons/cshotgun/draw"
    Weapon.SlotNumber 3
    Weapon.SlotPriority 0.95

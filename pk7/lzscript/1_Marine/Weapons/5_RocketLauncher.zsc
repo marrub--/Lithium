@@ -62,7 +62,7 @@ class Lith_GrenadeLauncher : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_TXT_INFO_SHORT_GrenadeLauncher";
+   Tag "$LITH_INFO_SHORT_GrenadeLauncher";
    Weapon.UpSound "weapons/rocket/draw";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;

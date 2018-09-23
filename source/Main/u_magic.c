@@ -74,7 +74,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
          .h        = 64
       };
 
-      __str name = Language("LITH_TXT_INFO_SHORT_%S", m->name);
+      __str name = Language("LITH_INFO_SHORT_%S", m->name);
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);

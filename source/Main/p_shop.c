@@ -110,7 +110,7 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->shopscr, y, guipre.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
-      __str name = Language("LITH_TXT_SHOP_TITLE_%S", shopitems[i].name);
+      __str name = Language("LITH_SHOP_TITLE_%S", shopitems[i].name);
 
       int *shopsel = &CBIState(g)->shopsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
@@ -125,16 +125,16 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 
    SetClipW(111, 30, 184, 150, 184);
 
-   PrintTextFmt("%LS: %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
+   PrintTextFmt("%LS %S\Cnscr", "LITH_COST", Lith_ScoreSep(p->getCost(&item->shopdef)));
    PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
-   PrintTextStr(Language("LITH_TXT_SHOP_DESCR_%S", item->name));
+   PrintTextStr(Language("LITH_SHOP_DESCR_%S", item->name));
    PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    ClearClip();
 
-   if(Lith_GUI_Button(g, "Buy", 259, 170, !p->canBuy(&item->shopdef, item)))
-      p->buy(&item->shopdef, item, "LITH_TXT_SHOP_TITLE_%S", false);
+   if(Lith_GUI_Button(g, L("LITH_BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
+      p->buy(&item->shopdef, item, "LITH_SHOP_TITLE_%S", false);
 }
 
 // EOF

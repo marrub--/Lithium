@@ -1,1 +1,53 @@
+== LITH_SHOP_TITLE_RocketAmmo | ロケット箱
+@@ LITH_SHOP_DESCR_RocketAmmo
+ＳＹＭ４．３からロケット推進弾。　うまーい高収率榴弾。
 
+== LITH_SHOP_TITLE_PlasmaAmmo | プラズマ箱
+@@ LITH_SHOP_DESCR_PlasmaAmmo
+Ａ．Ｏ．Ｆ財から非常に凝縮したエネルギーセル。
+
+== LITH_SHOP_TITLE_Allmap | レベルマップ
+@@ LITH_SHOP_DESCR_Allmap
+ａｕｔｏｍａｐにレベルの全体を明らかにする。
+
+== LITH_SHOP_TITLE_Infrared | ＣＢゴーグル
+@@ LITH_SHOP_DESCR_Infrared
+あなたが暗闇に見ることができる光増幅ゴーグル。
+
+== LITH_SHOP_TITLE_RadSuit | ラドスーツ
+@@ LITH_SHOP_DESCR_RadSuit
+あなたが有害物質中を歩くことができる放射線遮蔽スーツ。
+
+== LITH_SHOP_TITLE_ChargeFist | $LITH_INFO_SHORT_ChargeFist
+@@ LITH_SHOP_DESCR_ChargeFist
+チャージできる近接武器。
+
+== LITH_SHOP_TITLE_Revolver | $LITH_INFO_SHORT_Revolver
+@@ LITH_SHOP_DESCR_Revolver
+強い拳銃。6個の弾が持てる。
+
+アップグレードできません。
+
+== LITH_SHOP_TITLE_LazShotgun | $LITH_INFO_SHORT_LazShotgun
+@@ LITH_SHOP_DESCR_LazShotgun
+穿孔レーザーショットガン。
+
+アップグレードできません。
+
+== LITH_SHOP_TITLE_SniperRifle | $LITH_INFO_SHORT_SniperRifle
+@@ LITH_SHOP_DESCR_SniperRifle
+スコープ付きボルトアクションライフル。
+
+アップグレードできません。
+
+== LITH_SHOP_TITLE_MissileLauncher | $LITH_INFO_SHORT_MissileLauncher
+@@ LITH_SHOP_DESCR_MissileLauncher
+ミニミサイルランチャー。
+
+アップグレードできません。
+
+== LITH_SHOP_TITLE_PlasmaDiffuser | $LITH_INFO_SHORT_PlasmaDiffuser
+@@ LITH_SHOP_DESCR_PlasmaDiffuser
+まるでプラズマライフル。
+
+アップグレードできません。

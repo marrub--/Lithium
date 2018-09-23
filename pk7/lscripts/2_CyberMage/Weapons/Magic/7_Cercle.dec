@@ -203,7 +203,7 @@ actor Lith_CircleParticle
 
 actor Lith_Cercle : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Cercle"
+   Tag "$LITH_INFO_SHORT_Cercle"
    Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/cercle/draw"

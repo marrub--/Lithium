@@ -453,7 +453,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
 
-      __str name = Language("LITH_TXT_UPGRADE_TITLE_%S", upgr->info->name);
+      __str name = Language("LITH_UPGRADE_TITLE_%S", upgr->info->name);
 
       int *upgrsel = &CBIState(g)->upgrsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
@@ -550,7 +550,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    // Effect
-   ifauto(__str, effect, LanguageNull("LITH_TXT_UPGRADE_EFFEC_%S", upgr->info->name))
+   ifauto(__str, effect, LanguageNull("LITH_UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("Effect: %S", effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
@@ -565,10 +565,10 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
 //
 static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
-   if(Lith_GUI_Button(g, "Buy", 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
+   if(Lith_GUI_Button(g, L("LITH_BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
 
-   if(Lith_GUI_Button(g, upgr->active ? "Deactivate" : "Activate", 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
+   if(Lith_GUI_Button(g, upgr->active ? L("LITH_DEACTIVATE") : L("LITH_ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
 }
 

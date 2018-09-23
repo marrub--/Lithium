@@ -15,7 +15,7 @@ def single_line txt, set
 end
 
 def comment arg
-   "\n//#{arg}\n"
+   "//#{arg}\n"
 end
 
 def buf_lines type, buf
@@ -26,7 +26,7 @@ def buf_lines type, buf
       buf.each.with_index.inject("") do |sum, (s, i)|
          if i < buf.size-1 then sum + "   \"#{escape s.chomp}\\n\"\n"
          else                   sum + "   \"#{escape s.chomp}\";\n" end
-      end
+      end + "\n"
    when :conc
       buf = [*buf, "\n"].each_cons(2).map do |s, n|
             if s == "\n" then "\n\n"
@@ -37,7 +37,7 @@ def buf_lines type, buf
       buf.each.with_index.inject("") do |sum, (s, i)|
          if i < buf.size-1 then sum + "   \"#{escape s}\"\n"
          else                   sum + "   \"#{escape s.chomp}\";\n" end
-      end
+      end + "\n"
    end
 end
 
@@ -70,11 +70,12 @@ def parse_file lnc, lns
          out << comment(" #{set}")
          out << buf_lines(:just, open("#{lnc}/#{set}", "rt").read.chomp.lines)
       else
-         if wr then buf << ln end
+         if wr then buf << ln
+         elsif ln.chomp.strip == "" then out << "\n" end
       end
    end
    if wr then out << buf_lines(wr, buf) end
-   out
+   out + "\n"
 end
 
 def proc_file lnc, lng, lns, nam

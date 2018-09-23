@@ -10,7 +10,7 @@ actor Lith_OmegaRailDummy : Lith_Dummy
 
 actor Lith_BFG9000 : Lith_MWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_BFG9000"
+   Tag "$LITH_INFO_SHORT_BFG9000"
    Weapon.UpSound "weapons/cannon/draw"
    Weapon.SlotNumber 7
    Weapon.SlotPriority 1

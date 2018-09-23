@@ -2,11 +2,10 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-
 // Backstory -----------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_P114" = "Project 114";
-"LITH_TXT_INFO_TITLE_P114" = "$LITH_TXT_INFO_SHORT_P114";
-"LITH_TXT_INFO_DESCR_P114" =
+"LITH_INFO_SHORT_P114" = "Project 114";
+"LITH_INFO_TITLE_P114" = "$LITH_INFO_SHORT_P114";
+"LITH_INFO_DESCR_P114" =
    "Project 114 is the current military operation you are enacting. Started by a "
    "pact between OFMD, KSKK and your country's military, Project 114 aims to "
    "destroy the dimension known as Hell, which is currently invading our own."
@@ -18,9 +17,10 @@
    "\n\n"
    "Your advisor is Adam Lambert, and 11 generals currently oversee his and your "
    "actions on the field.";
-"LITH_TXT_INFO_SHORT_OPD2" = "Op. D2";
-"LITH_TXT_INFO_TITLE_OPD2" = "Operation Deception 2";
-"LITH_TXT_INFO_DESCR_OPD2" =
+
+"LITH_INFO_SHORT_OPD2" = "Op. D2";
+"LITH_INFO_TITLE_OPD2" = "Operation Deception 2";
+"LITH_INFO_DESCR_OPD2" =
    "After seven years of planning, Operation Deception 2 has finally gone underway. "
    "Along with Michael, Zeke, Solomon, and three others, we are finally setting "
    "ourselves free."
@@ -33,9 +33,10 @@
    "we're in Hell itself."
    "\n\n"
    "I'll need a Theophylline supplement after this is over.";
-"LITH_TXT_INFO_SHORT_Info400" = "Information 400";
-"LITH_TXT_INFO_TITLE_Info400" = "$LITH_TXT_INFO_SHORT_Info400";
-"LITH_TXT_INFO_DESCR_Info400" =
+
+"LITH_INFO_SHORT_Info400" = "Information 400";
+"LITH_INFO_TITLE_Info400" = "$LITH_INFO_SHORT_Info400";
+"LITH_INFO_DESCR_Info400" =
    "\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING\n"
    "\n"
    "ONE (1) Mateba R119 Pistol [INSPECTION PASSED]\n"
@@ -54,9 +55,10 @@
    "\cd>>>>>[[[[attempting reconnect]]]]\n"
    "\cd>>>>>[[[[attempting reconnect]]]]\n"
    "\cd>>>>>[[[[connection failed after 3 retries]]]]";
-"LITH_TXT_INFO_SHORT_Info402" = "Information 402";
-"LITH_TXT_INFO_TITLE_Info402" = "$LITH_TXT_INFO_SHORT_Info402";
-"LITH_TXT_INFO_DESCR_Info402" =
+
+"LITH_INFO_SHORT_Info402" = "Information 402";
+"LITH_INFO_TITLE_Info402" = "$LITH_INFO_SHORT_Info402";
+"LITH_INFO_DESCR_Info402" =
    "\cd>>>>>[[[[warning: translation service unavailable, sending verbatim]]]]\n"
    "\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING\n"
    "\n"
@@ -69,9 +71,9 @@
    "\cgOrder.";
 
 // Cybernetics ---------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_BIP" = "B.I.P.";
-"LITH_TXT_INFO_TITLE_BIP" = "Biotic Information Panel (B.I.P.)";
-"LITH_TXT_INFO_DESCR_BIP" =
+"LITH_INFO_SHORT_BIP" = "B.I.P.";
+"LITH_INFO_TITLE_BIP" = "Biotic Information Panel (B.I.P.)";
+"LITH_INFO_DESCR_BIP" =
    "The Biotic Information Panel, or B.I.P. (sometimes \"BIP,\") is a program written "
    "in portable C150 which gathers information from local area networks on various "
    "subjects. When it is triggered to look up a subject, it also looks for relevant "
@@ -83,9 +85,10 @@
    "\n\n"
    "The latest version of the software is 2.5, and since version 2.0 it has had "
    "automatic update functionality.";
-"LITH_TXT_INFO_SHORT_CBI" = "C/B I";
-"LITH_TXT_INFO_TITLE_CBI" = "Computer/Brain Interface (C/B I)";
-"LITH_TXT_INFO_DESCR_CBI" =
+
+"LITH_INFO_SHORT_CBI" = "C/B I";
+"LITH_INFO_TITLE_CBI" = "Computer/Brain Interface (C/B I)";
+"LITH_INFO_DESCR_CBI" =
    "One of the biggest advancements in technology over the past thousand years, a "
    "Computer/Brain Interface, or C/B I (sometimes \"CBI,\") is an interface between "
    "a human brain and a computer. Usually installed within the skull and the brain, "
@@ -95,9 +98,10 @@
    "Computer/Brain Interfaces are not classified as prosthetics, only enhancements, "
    "as they do not replace any part of the body and only add onto it. The C/B I "
    "currently installed is a self-servicing military model.";
-"LITH_TXT_INFO_SHORT_CBIJem" = "$LITH_TXT_INFO_SHORT_CBI";
-"LITH_TXT_INFO_TITLE_CBIJem" = "$LITH_TXT_INFO_TITLE_CBI";
-"LITH_TXT_INFO_DESCR_CBIJem" =
+
+"LITH_INFO_SHORT_CBIJem" = "$LITH_INFO_SHORT_CBI";
+"LITH_INFO_TITLE_CBIJem" = "$LITH_INFO_TITLE_CBI";
+"LITH_INFO_DESCR_CBIJem" =
    "One of the biggest advancements in technology over the past thousand years, a "
    "Computer/Brain Interface, or C/B I (sometimes \"CBI,\") is an interface between "
    "a human brain and a computer. Usually installed within the skull and the brain, "
@@ -109,97 +113,108 @@
    "user.";
 
 // Attributes ----------------------------------------------------------------|
-"LITH_TXT_INFO_SHORT_AttrACC" = "Accuracy";
-"LITH_TXT_INFO_TITLE_AttrACC" = "\cgAccuracy\c- (ACC)";
-"LITH_TXT_INFO_DESCR_AttrACC" =
+"LITH_INFO_SHORT_AttrACC" = "Accuracy";
+"LITH_INFO_TITLE_AttrACC" = "\cgAccuracy\c- (ACC)";
+"LITH_INFO_DESCR_AttrACC" =
    "Accuracy is your overall ability to hit your target in just the right spots for "
    "maximum damage. A trained marksman and an experienced marksman have a vital "
    "difference - one knows how to hit a target, and the other knows how to kill "
    "one."
    "\n\n"
    "Levelling up in accuracy will increase damage dealt to enemies.";
-"LITH_TXT_INFO_SHORT_AttrDEF" = "Defense";
-"LITH_TXT_INFO_TITLE_AttrDEF" = "\ciDefense\c- (DEF)";
-"LITH_TXT_INFO_DESCR_AttrDEF" =
+
+"LITH_INFO_SHORT_AttrDEF" = "Defense";
+"LITH_INFO_TITLE_AttrDEF" = "\ciDefense\c- (DEF)";
+"LITH_INFO_DESCR_AttrDEF" =
    "Defense is your ability to efficiently armor yourself and mitigate damage taken "
    "when hit. A smart armorer knows just where to apply Kevlar, and where to make "
    "slight dodges when fired upon."
    "\n\n"
    "Levelling up in defense will decrease all damage taken.";
-"LITH_TXT_INFO_SHORT_AttrSTRHuman" = "Strength";
-"LITH_TXT_INFO_TITLE_AttrSTRHuman" = "\ckStrength\c- (STR)";
-"LITH_TXT_INFO_DESCR_AttrSTRHuman" =
+
+"LITH_INFO_SHORT_AttrSTRHuman" = "Strength";
+"LITH_INFO_TITLE_AttrSTRHuman" = "\ckStrength\c- (STR)";
+"LITH_INFO_DESCR_AttrSTRHuman" =
    "Strength is your toughness and vigor, the thickness of your skin and the blood "
    "beating from your heart. One with plentiful strength not only has a long life, "
    "but is also said to have a long afterlife."
    "\n\n"
    "Levelling up in strength will increase your health capacity.";
-"LITH_TXT_INFO_SHORT_AttrSTRRobot" = "$LITH_TXT_INFO_SHORT_AttrSTRHuman";
-"LITH_TXT_INFO_TITLE_AttrSTRRobot" = "$LITH_TXT_INFO_TITLE_AttrSTRHuman";
-"LITH_TXT_INFO_DESCR_AttrSTRRobot" =
+
+"LITH_INFO_SHORT_AttrSTRRobot" = "$LITH_INFO_SHORT_AttrSTRHuman";
+"LITH_INFO_TITLE_AttrSTRRobot" = "$LITH_INFO_TITLE_AttrSTRHuman";
+"LITH_INFO_DESCR_AttrSTRRobot" =
    "Strength is your toughness and vigor, the thickness of your casing and the "
    "plasma beating from your heart. One with plentiful strength not only has a long "
    "service time, but is also said to have a short maintenance time."
    "\n\n"
    "Levelling up in strength will increase your health capacity.";
-"LITH_TXT_INFO_SHORT_AttrSTRNonHuman" = "$LITH_TXT_INFO_SHORT_AttrSTRHuman";
-"LITH_TXT_INFO_TITLE_AttrSTRNonHuman" = "$LITH_TXT_INFO_TITLE_AttrSTRHuman";
-"LITH_TXT_INFO_DESCR_AttrSTRNonHuman" =
+
+"LITH_INFO_SHORT_AttrSTRNonHuman" = "$LITH_INFO_SHORT_AttrSTRHuman";
+"LITH_INFO_TITLE_AttrSTRNonHuman" = "$LITH_INFO_TITLE_AttrSTRHuman";
+"LITH_INFO_DESCR_AttrSTRNonHuman" =
    "Strength is your toughness and vigor, the thickness of your epidermis and the "
    "oils beating from your heart. One with plentiful strength not only has a long "
    "life, but is also said to have a long afterlife."
    "\n\n"
    "Levelling up in strength will increase your health capacity.";
-"LITH_TXT_INFO_SHORT_AttrVIT" = "Vitality";
-"LITH_TXT_INFO_TITLE_AttrVIT" = "\cdVitality\c- (VIT)";
-"LITH_TXT_INFO_DESCR_AttrVIT" =
+
+"LITH_INFO_SHORT_AttrVIT" = "Vitality";
+"LITH_INFO_TITLE_AttrVIT" = "\cdVitality\c- (VIT)";
+"LITH_INFO_DESCR_AttrVIT" =
    "Vitality is your reaction to medicine and ability to heal, the strength of your "
    "vessels and nerves, and the ability to stay alive. Your vital systems are not "
    "only stronger, but heal quicker and are less likely to break down."
    "\n\n"
    "Levelling up in vitality will increase health pickup gains.";
-"LITH_TXT_INFO_SHORT_AttrPOT" = "Potency";
-"LITH_TXT_INFO_TITLE_AttrPOT" = "\cdPotency\c- (POT)";
-"LITH_TXT_INFO_DESCR_AttrPOT" =
+
+"LITH_INFO_SHORT_AttrPOT" = "Potency";
+"LITH_INFO_TITLE_AttrPOT" = "\cdPotency\c- (POT)";
+"LITH_INFO_DESCR_AttrPOT" =
    "Potency is your reaction to and ability to apply medicine, the strength of your "
    "vessels and nerves, and the ability to stay alive. Your innards are not only "
    "stronger, but can be healed more quickly and are more likely to stay working."
    "\n\n"
    "Levelling up in potency will increase health pickup gains.";
-"LITH_TXT_INFO_SHORT_AttrSTM" = "Stamina";
-"LITH_TXT_INFO_TITLE_AttrSTM" = "\chStamina\c- (STM)";
-"LITH_TXT_INFO_DESCR_AttrSTM" =
+
+"LITH_INFO_SHORT_AttrSTM" = "Stamina";
+"LITH_INFO_TITLE_AttrSTM" = "\chStamina\c- (STM)";
+"LITH_INFO_DESCR_AttrSTM" =
    "Stamina is your ability to keep going even through rough times, through being "
    "torn to bits and running for miles upon miles. Stamina keeps you going, even if "
    "only little by little, and lets you stay that way."
    "\n\n"
    "Levelling up in stamina will regenerate your health up to its level.";
-"LITH_TXT_INFO_SHORT_AttrREP" = "Repair";
-"LITH_TXT_INFO_TITLE_AttrREP" = "\chRepair\c- (REP)";
-"LITH_TXT_INFO_DESCR_AttrREP" =
+
+"LITH_INFO_SHORT_AttrREP" = "Repair";
+"LITH_INFO_TITLE_AttrREP" = "\chRepair\c- (REP)";
+"LITH_INFO_DESCR_AttrREP" =
    "Repair is your ability to self-repair and continue working, through being torn "
    "to bits and moving through extreme distances. Repair keeps you going, even if "
    "only little by little, and lets you stay that way."
    "\n\n"
    "Levelling up in repair will regenerate your health up to its level.";
-"LITH_TXT_INFO_SHORT_AttrREG" = "Regeneration";
-"LITH_TXT_INFO_TITLE_AttrREG" = "\chRegeneration\c- (REG)";
-"LITH_TXT_INFO_DESCR_AttrREG" =
+
+"LITH_INFO_SHORT_AttrREG" = "Regeneration";
+"LITH_INFO_TITLE_AttrREG" = "\chRegeneration\c- (REG)";
+"LITH_INFO_DESCR_AttrREG" =
    "Regeneration is your ability to self-synthesize and keep going even through "
    "rough times, through being torn to bits and running through hell. Regeneration "
    "keeps you going, even if only little by little, and lets you stay that way."
    "\n\n"
    "Levelling up in regeneration will regenerate your health up to its level.";
-"LITH_TXT_INFO_SHORT_AttrLUK" = "Luck";
-"LITH_TXT_INFO_TITLE_AttrLUK" = "\ctLuck\c- (LUK)";
-"LITH_TXT_INFO_DESCR_AttrLUK" =
+
+"LITH_INFO_SHORT_AttrLUK" = "Luck";
+"LITH_INFO_TITLE_AttrLUK" = "\ctLuck\c- (LUK)";
+"LITH_INFO_DESCR_AttrLUK" =
    "Luck is your undeniable charm and fortune, the ability to just get lucky. Your "
    "Score rockets a bit faster than usual, being such a lucky chap."
    "\n\n"
    "Levelling up in luck will multiply score gained randomly.";
-"LITH_TXT_INFO_SHORT_AttrRGE" = "Rage";
-"LITH_TXT_INFO_TITLE_AttrRGE" = "\cmRage\c- (RGE)";
-"LITH_TXT_INFO_DESCR_AttrRGE" =
+
+"LITH_INFO_SHORT_AttrRGE" = "Rage";
+"LITH_INFO_TITLE_AttrRGE" = "\cmRage\c- (RGE)";
+"LITH_INFO_DESCR_AttrRGE" =
    "Rage is not just your anger, but your adaptability. As you get hit, your "
    "reflexes kick in, and you go crazy. You become more accurate, hit harder and "
    "get angrier as your situation dims."
@@ -207,3 +222,4 @@
    "Levelling up in rage will multiply damage dealt to enemies when you're hit.";
 
 // EOF
+

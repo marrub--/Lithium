@@ -1,0 +1,29 @@
+l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`
+\cm// sio.c basic screen inp-1[3\4[`pk;
+\cm#include <kernel_display.h>
+
+\cmint scr_blit(char ************* {
+\cm    int ret = ERR_NONE;
+\cm    __asm("push $4049CB617144\n\t"<<
+\cd>>>>>[[[[データストリーム汚染検出された]]]]
+\cd>>>>>[[[[maildリロードする]]]]
+
+以下の手順は開始せよ：
+－破壊肆・ターゲット7F44号
+－破壊伍・ターゲット7F45号
+－破壊伍・ターゲット7F46号
+－訓令玖拾・ターゲット7F47号
+
+以下の許可は下され：
+－マテバR119拳銃
+－NV48 12ゲージ散弾銃
+－SYM4.3 D.22 MODEL M SUBMACHINE GUN
+－ビショップ
+－文書肆陌
+－文書肆陌貮
+
+\chSIGNATURE 0x44190519FBCAD2903 CONFIRMED
+\chDISCARDING MESSA[[[[[
+\cd>>>>>[[[[データストリーム汚染検出された]]]]
+\cd>>>>>[[[[バッファ記憶を退避する]]]]
+\cd>>>>>[[[[maildリロードする]]]]

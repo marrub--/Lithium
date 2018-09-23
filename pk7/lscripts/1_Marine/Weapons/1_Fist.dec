@@ -40,7 +40,7 @@ actor Lith_KnifPuf
 
 actor Lith_Fist : Lith_MWeapon replaces Fist // why would you pick up a fist
 {
-   Tag "$LITH_TXT_INFO_SHORT_Fist"
+   Tag "$LITH_INFO_SHORT_Fist"
    Weapon.Kickback 100
    Weapon.SlotNumber 1
    Weapon.SlotPriority 0.9

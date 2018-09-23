@@ -90,7 +90,7 @@ actor Lith_FeuerExplosion
 
 actor Lith_Feuer : Lith_CWeapon
 {
-   Tag "$LITH_TXT_INFO_SHORT_Feuer"
+   Tag "$LITH_INFO_SHORT_Feuer"
    Weapon.SlotNumber 0
    Weapon.SlotPriority 1
    Weapon.UpSound "weapons/feuer/draw"

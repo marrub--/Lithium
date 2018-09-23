@@ -17,7 +17,7 @@ script ext("ACS")
 void Lith_LogS(int type)
 {
    __str name = HERMES_S("GetLogName");
-   if(name[0] != '>') name = Language("LITH_TXT_LOG_%S", name);
+   if(name[0] != '>') name = Language("LITH_LOG_%S", name);
    withplayer(LocalPlayer) switch(type)
    {
    case msg_ammo: if(!p->getCVarI("lith_player_ammolog")) break;

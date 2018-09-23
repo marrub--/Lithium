@@ -2,7 +2,7 @@ class Lith_MissileLauncher : Lith_Weapon;
 
 default
 {
-   Tag "$LITH_TXT_INFO_SHORT_MissileLauncher";
+   Tag "$LITH_INFO_SHORT_MissileLauncher";
    Weapon.UpSound "weapons/missile/draw";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 0.9;
