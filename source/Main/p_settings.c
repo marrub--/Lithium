@@ -69,7 +69,7 @@ Int("Crosshair red",   "/255", "lith_xhair_r", 0, 255);
 Int("Crosshair green", "/255", "lith_xhair_g", 0, 255);
 Int("Crosshair blue",  "/255", "lith_xhair_b", 0, 255);
 Int("Crosshair alpha", "/255", "lith_xhair_a", 0, 255);
-Enum("Crosshair style", "lith_xhair_style", 1, 7, "%S", XHairName(set));
+Enum("Crosshair style", "lith_xhair_style", 1, 10, "%S", XHairName(set));
 Bool("Crosshair enabled", "lith_xhair_enable");
 
 Category("Vital Scanner");
@@ -157,7 +157,8 @@ static __str CursName(int num)
 static __str XHairName(int num)
 {
    static __str const xhairs[] = {
-      "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur"
+      "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur",
+      "Angle", "Dot", "X+"
    };
 
    if(num < 1 || num > countof(xhairs)) return "Unknown";

@@ -1231,6 +1231,8 @@
 "LITH:Weapon:RendHit2" = "lgfx/Weapon/RendHit2.png";
 "LITH:Weapon:RendHit3" = "lgfx/Weapon/RendHit3.png";
 "LITH:Weapon:RendHit4" = "lgfx/Weapon/RendHit4.png";
+"LITH:XHairs:10b" = "lgfx/XHairs/10b.png";
+"LITH:XHairs:10w" = "lgfx/XHairs/10w.png";
 "LITH:XHairs:1b" = "lgfx/XHairs/1b.png";
 "LITH:XHairs:1w" = "lgfx/XHairs/1w.png";
 "LITH:XHairs:2b" = "lgfx/XHairs/2b.png";
@@ -1245,4 +1247,8 @@
 "LITH:XHairs:6w" = "lgfx/XHairs/6w.png";
 "LITH:XHairs:7b" = "lgfx/XHairs/7b.png";
 "LITH:XHairs:7w" = "lgfx/XHairs/7w.png";
+"LITH:XHairs:8b" = "lgfx/XHairs/8b.png";
+"LITH:XHairs:8w" = "lgfx/XHairs/8w.png";
+"LITH:XHairs:9b" = "lgfx/XHairs/9b.png";
+"LITH:XHairs:9w" = "lgfx/XHairs/9w.png";
 "LITH:ZoomOverlay" = "lgfx/ZoomOverlay.png";
