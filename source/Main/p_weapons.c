@@ -50,6 +50,8 @@ static void WeaponGrab(struct player *p, weaponinfo_t const *info)
 //
 static void Lith_PickupScore(struct player *p, int parm)
 {
+   extern void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score);
+
    weaponinfo_t const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
@@ -57,12 +59,7 @@ static void Lith_PickupScore(struct player *p, int parm)
    GiveWeaponItem(parm, info->slot);
    score = p->giveScore(score);
 
-   __str msg = L("LITH_LOG_Sell");
-
-   if(strtoi_str(L("LITH_LOG_SellOrder"), null, 10) == 0)
-      p->log(1, msg, Language("LITH_INFO_SHORT_%S", info->name), score);
-   else
-      p->log(1, msg, score, Language("LITH_INFO_SHORT_%S", info->name));
+   Lith_SellMessage(p, info, score);
 }
 
 // Extern Functions ----------------------------------------------------------|

@@ -4,6 +4,10 @@
 
 #define name(n) "LITH_PK_" #n
 
+#define StupidName(w) \
+   Language("%S_%.3i", pickupnames[w], \
+      ACS_Random(0, strtoi_str(Language("%S_NUM", pickupnames[w]), null, 10)))
+
 static __str const pickupnames[weapon_max] = {
    [weapon_unknown]    = name(weapon_unknown),
 
@@ -30,15 +34,9 @@ static __str const pickupnames[weapon_max] = {
 
 static void Lith_StupidPickup(struct player *p, int weapon)
 {
-   int num = strtoi_str(Language("%S_NUM", pickupnames[weapon]), null, 10);
+   int fmtnum = strtoi_str(L("LITH_PK_GET_NUM"),       null, 10);
+   int uncnum = strtoi_str(L("LITH_PK_UNCERTAIN_NUM"), null, 10);
 
-   static int fmtnum;
-   if(!fmtnum) fmtnum = strtoi_str(L("LITH_PK_GET_NUM"), null, 10);
-
-   static int uncnum;
-   if(!uncnum) uncnum = strtoi_str(L("LITH_PK_UNCERTAIN_NUM"), null, 10);
-
-   int iname = ACS_Random(0, num);
    int iunc  = ACS_Random(0, uncnum);
    int ifmt  = ACS_Random(0, fmtnum);
    int flag  = strtoi_str(Language("LITH_PK_GET_%.3i_FLAGS", ifmt), null, 0);
@@ -48,8 +46,8 @@ static void Lith_StupidPickup(struct player *p, int weapon)
       flag = strtoi_str(Language("LITH_PK_GET_%.3i_FLAGS", ifmt), null, 0);
    }
 
+   __str nam = StupidName(weapon);
    __str fmt = Language("LITH_PK_GET_%.3i", ifmt);
-   __str nam = Language("%S_%.3i", pickupnames[weapon], iname);
    __str unc = Language("LITH_PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->log(1, fmt, nam, nam, unc);
@@ -69,5 +67,22 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
       p->log(1, "Acquired impossible object");
 }
 
-// EOF
+void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
+{
+   int weapon = info->type;
+   bool ord = strtoi_str(L("LITH_LOG_SellOrder"), null, 10) == 0;
 
+   __str nam;
+
+   if(p->getCVarI("lith_player_stupidpickups"))
+      nam = StupidName(weapon);
+   else
+      nam = Language("LITH_INFO_SHORT_%S", info->name);
+
+   __str msg = L("LITH_LOG_Sell");
+
+   if(ord) p->log(1, msg, nam, score);
+   else    p->log(1, msg, score, nam);
+}
+
+// EOF
