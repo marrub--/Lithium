@@ -20,7 +20,7 @@ class Lith_Stimpack : Lith_HealthItem replaces Stimpack
    {
       Tag "Stimpack";
       Lith_HealthItem.Amount 10;
-      Lith_BasicPickup.LogName "Stimpack";
+      Lith_BasicPickup.LogName "Stimpack", 3;
       Inventory.PickupSound "player/pickup/stimpack";
    }
 
@@ -38,7 +38,7 @@ class Lith_Medikit : Lith_HealthItem replaces Medikit
    {
       Tag "Medikit";
       Lith_HealthItem.Amount 25;
-      Lith_BasicPickup.LogName "Medikit";
+      Lith_BasicPickup.LogName "Medikit", 3;
       Inventory.PickupSound "player/pickup/medikit";
    }
 

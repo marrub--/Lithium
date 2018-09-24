@@ -2,115 +2,113 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-// Message type reference:
-// >      | System
-// >>     | Low-priority (ammo, misc)
-// >>>    | Medium-priority (vital)
-// >>>>   | High-priority (high vital)
-// >>>>>  | Mission-vital (powerups, keys)
-// >>>>>> | ???
+// None
+// > System
+// >> Low priority (ammo, misc)
+// >>> Medium-priority (vital)
+// >>>> High-priority (high vital)
+// >>>>> Mission-vital (powerups, keys)
+// >>>>>> Error?
 
 // Health --------------------------------------------------------------------|
-"LITH_LOG_ArmorBonus" = ">>> Armor Bonus";
-"LITH_LOG_BlueArmor" = ">>> Blue Armor";
-"LITH_LOG_GreenArmor" = ">>> Green Armor";
-"LITH_LOG_HealthBonus" = ">>> Health Bonus";
-"LITH_LOG_Medikit" = ">>> Medikit";
-"LITH_LOG_MegaSphere" = ">>>> Mega Charge!";
-"LITH_LOG_SoulSphere" = ">>>> Super Charge!";
-"LITH_LOG_StimPack" = ">>> Stimpack";
+"LITH_LOG_HealthBonus" = "Health Bonus";
+"LITH_LOG_Medikit" = "Medikit";
+"LITH_LOG_MegaSphere" = "Mega Charge!";
+"LITH_LOG_SoulSphere" = "Super Charge!";
+"LITH_LOG_StimPack" = "Stimpack";
 
 // Keys ----------------------------------------------------------------------|
-"LITH_LOG_RedCard" = ">>>>> \cgRed KeyDisk";
-"LITH_LOG_BlueCard" = ">>>>> \chBlue KeyDisk";
-"LITH_LOG_YellowCard" = ">>>>> \ckYellow KeyDisk";
-"LITH_LOG_RedSkull" = ">>>>> \cgRed Skull";
-"LITH_LOG_BlueSkull" = ">>>>> \chBlue Skull";
-"LITH_LOG_YellowSkull" = ">>>>> \ckYellow Skull";
+"LITH_LOG_RedCard" = "\cgRed KeyDisk";
+"LITH_LOG_BlueCard" = "\chBlue KeyDisk";
+"LITH_LOG_YellowCard" = "\ckYellow KeyDisk";
+"LITH_LOG_RedSkull" = "\cgRed Skull";
+"LITH_LOG_BlueSkull" = "\chBlue Skull";
+"LITH_LOG_YellowSkull" = "\ckYellow Skull";
 
 // Powerups ------------------------------------------------------------------|
-"LITH_LOG_RadSuit" = ">>>>> Radiation Shielding Suit";
-"LITH_LOG_InfraRed" = ">>>>> CB-Goggles";
-"LITH_LOG_Invuln" = "\cj>>>>>> Invulnerability!";
-"LITH_LOG_BlurSphere" = ">>>>> Barrier";
-"LITH_LOG_Backpack" = ">>>>> Backpack + Discount Card";
-"LITH_LOG_Berserk" = ">>>>> Berserk";
-"LITH_LOG_AllMap" = ">>>>> Area Map";
-"LITH_LOG_DoggoSphere" = ">>>>> \cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
-"LITH_LOG_Dogs" = "> Picked up dogs.";
+"LITH_LOG_RadSuit" = "Radiation Shielding Suit";
+"LITH_LOG_InfraRed" = "CB-Goggles";
+"LITH_LOG_Invuln" = "\cjInvulnerability!";
+"LITH_LOG_BlurSphere" = "Barrier";
+"LITH_LOG_Backpack" = "Backpack + Discount Card";
+"LITH_LOG_Berserk" = "Berserk";
+"LITH_LOG_AllMap" = "Area Map";
+"LITH_LOG_DoggoSphere" = "\cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
+"LITH_LOG_Dogs" = "Picked up dogs.";
 
 // Ammo ----------------------------------------------------------------------|
-"LITH_LOG_Clip" = ">> Radio";
-"LITH_LOG_ClipBox" = ">> Nonspecific Box of Ammunition";
-"LITH_LOG_Shell" = ">> Shells";
-"LITH_LOG_ShellBox" = ">> Box of Shells";
-"LITH_LOG_Rocket" = ">> Rocket";
-"LITH_LOG_RocketBox" = ">> Box of Rockets";
-"LITH_LOG_Cell" = ">> Energy Charge";
-"LITH_LOG_CellBox" = ">> Demonic Energy Pack";
+"LITH_LOG_Clip" = "Radio";
+"LITH_LOG_ClipBox" = "Nonspecific Box of Ammunition";
+"LITH_LOG_Shell" = "Shells";
+"LITH_LOG_ShellBox" = "Box of Shells";
+"LITH_LOG_Rocket" = "Rocket";
+"LITH_LOG_RocketBox" = "Box of Rockets";
+"LITH_LOG_Cell" = "Energy Charge";
+"LITH_LOG_CellBox" = "Demonic Energy Pack";
 
 // Bonuses -------------------------------------------------------------------|
-"LITH_LOG_Coin" = ">> Coin";
-"LITH_LOG_ScoreChip" = ">> Score Chip";
-"LITH_LOG_Ruby" = ">> Flawed Ruby";
-"LITH_LOG_Sapphire" = ">> Flawed Sapphire";
-"LITH_LOG_Amethyst" = ">> Flawed Amethyst";
-"LITH_LOG_Diamond" = ">> Flawed Diamond";
-"LITH_LOG_Emerald" = ">> Flawed Emerald";
-"LITH_LOG_Scheelite" = ">> Scheelite";
-"LITH_LOG_Nambulite" = ">> Nambulite";
-"LITH_LOG_Lepidolite" = ">> Lepidolite";
-"LITH_LOG_Petalite" = ">> Petalite";
-"LITH_LOG_Tourmaline" = ">> Tourmaline";
+"LITH_LOG_Coin" = "Coin";
+"LITH_LOG_ScoreChip" = "Score Chip";
+"LITH_LOG_Ruby" = "Flawed Ruby";
+"LITH_LOG_Sapphire" = "Flawed Sapphire";
+"LITH_LOG_Amethyst" = "Flawed Amethyst";
+"LITH_LOG_Diamond" = "Flawed Diamond";
+"LITH_LOG_Emerald" = "Flawed Emerald";
+"LITH_LOG_Scheelite" = "Scheelite";
+"LITH_LOG_Nambulite" = "Nambulite";
+"LITH_LOG_Lepidolite" = "Lepidolite";
+"LITH_LOG_Petalite" = "Petalite";
+"LITH_LOG_Tourmaline" = "Tourmaline";
 
 // CBI Upgrades (Marine) -----------------------------------------------------|
-"LITH_LOG_CBI_MUpgr1" = "> Installed KSKK Spec. High-Grade CPU";
-"LITH_LOG_CBI_MUpgr2" = "> Installed KSKK Spec. Super High-Grade CPU";
-"LITH_LOG_CBI_MArmorInter" = "> Installed Armor Interface";
-"LITH_LOG_CBI_MWeapnInter" = "> Installed Weapon Modification Device";
-"LITH_LOG_CBI_MWeapnInte2" = "> Installed Weapon Refactoring Device";
-"LITH_LOG_CBI_MRDistInter" = "> Installed Reality Distortion Interface";
+"LITH_LOG_CBI_MUpgr1" = "$LITH_CBI_CPU2";
+"LITH_LOG_CBI_MUpgr2" = "$LITH_CBI_CPU3";
+"LITH_LOG_CBI_MArmorInter" = "$LITH_CBI_ArmorInter";
+"LITH_LOG_CBI_MWeapnInter" = "$LITH_CBI_WeapnInter";
+"LITH_LOG_CBI_MWeapnInte2" = "$LITH_CBI_WeapnInte2";
+"LITH_LOG_CBI_MRDistInter" = "$LITH_CBI_RDistInter";
 
 // CBI Upgrades (Cyber-Mage) -------------------------------------------------|
-"LITH_LOG_CBI_CSlot3Spell" = "> Installed Feuer Spell Driver";
-"LITH_LOG_CBI_CSlot4Spell" = "> Installed Romyetya Spell Driver";
-"LITH_LOG_CBI_CSlot5Spell" = "> Installed Hulgyon Spell Driver";
-"LITH_LOG_CBI_CSlot6Spell" = "> Installed Hosh'danma Spell Driver";
-"LITH_LOG_CBI_CSlot7Spell" = "> Installed Cercle de la Mort Spell Driver";
-"LITH_LOG_CBI_CRDistInter" = "> Installed Reality Distortion Interface";
+"LITH_LOG_CBI_CSlot3Spell" = "$LITH_CBI_Slot3Spell";
+"LITH_LOG_CBI_CSlot4Spell" = "$LITH_CBI_Slot4Spell";
+"LITH_LOG_CBI_CSlot5Spell" = "$LITH_CBI_Slot5Spell";
+"LITH_LOG_CBI_CSlot6Spell" = "$LITH_CBI_Slot6Spell";
+"LITH_LOG_CBI_CSlot7Spell" = "$LITH_CBI_Slot7Spell";
+"LITH_LOG_CBI_CRDistInter" = "$LITH_CBI_RDistInter";
 
 // Level Up ------------------------------------------------------------------|
 "LITH_LOG_LevelUpStan" =
-   "> You feel stronger, somehow.";
+   "You feel stronger, somehow.";
 
 "LITH_LOG_LevelUpJem" =
-   "> [INFO] Memory restored: %iKiB";
+   "[INFO] Memory restored: %iKiB";
 
 "LITH_LOG_LevelUpFulk" =
-   "> \cj<\cdVital\cj>\c- :: %i inodes reclaimed.";
+   "\cj<\cdVital\cj>\c- :: %i inodes reclaimed.";
 
 "LITH_LOG_LevelUpAri" =
-   "> You're having fun with this.";
+   "You're having fun with this.";
 
 "LITH_LOG_LevelUpMod" = "$LITH_LOG_LevelUpStan";
 
 // Boss Warnings -------------------------------------------------------------|
 "LITH_LOG_BossWarnStan" =
-   "> \cgWarning: High demonic energy levels detected in area.";
+   "\cgWarning: High demonic energy levels detected in area.";
 
 "LITH_LOG_BossWarnJem" =
-   "> \cr[WARNING] Demonic energy levels in area rising erratically.";
+   "\cr[WARNING] Demonic energy levels in area rising erratically.";
 
 "LITH_LOG_BossWarnFulk" =
-   "> \cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
+   "\cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
 
 "LITH_LOG_BossWarnAri" =
-   "> \cgDetected high amounts of demonic energy in area.";
+   "\cgDetected high amounts of demonic energy in area.";
 
 "LITH_LOG_BossWarnMod" = "$LITH_LOG_BossWarnStan";
 
 // Misc ----------------------------------------------------------------------|
-"LITH_LOG_StartGame" = "> Press \"%jS\" to open the menu.";
+"LITH_LOG_StartGame" = "Press \"%jS\" to open the menu.";
+"LITH_LOG_MailRecv" = "Mail received from <\cj%S\c->.";
 
 // Flags:
 // 1: Two copies of name
@@ -118,7 +116,8 @@
 // 4: Randomized certainty
 
 "LITH_PICKUP_SELL_ORDER" = "0";
-"LITH_PICKUP_SELL" = "> Sold the %S for %lli\cnscr\c-.";
+"LITH_PICKUP_SELL" = "Sold the %S for %lli\cnscr\c-.";
+"LITH_PICKUP_CBI" = "Installed %S.";
 
 "LITH_PICKUP_NUM" = "68";
 "LITH_PICKUP_000" = "You got the %S!";

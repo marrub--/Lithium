@@ -14,28 +14,30 @@
 // Lith_LogS
 //
 script ext("ACS")
-void Lith_LogS(int type)
+void Lith_LogS(int levl, int type)
 {
    __str name = HERMES_S("GetLogName");
-   if(name[0] != '>') name = Language("LITH_LOG_%S", name);
+
+   if(name[0] == '_') name = Language("LITH_LOG%S", name);
+
    withplayer(LocalPlayer) switch(type)
    {
-   case msg_ammo: if(!p->getCVarI("lith_player_ammolog")) break;
-   case msg_huds: p->logH("%S", name); break;
-   case msg_full: p->logF("%S", name); break;
-   case msg_both: p->log ("%S", name); break;
+   case msg_ammo: if(p->getCVarI("lith_player_ammolog"))
+   case msg_huds: p->logH(levl, "%S", name); break;
+   case msg_full: p->logF(      "%S", name); break;
+   case msg_both: p->log (levl, "%S", name); break;
    }
 }
 
 //
 // Lith_Log
 //
-void Lith_Log(struct player *p, __str fmt, ...)
+void Lith_Log(struct player *p, int levl, __str fmt, ...)
 {
    va_list vl;
 
    va_start(vl, fmt);
-   logdata_t *logdata = Lith_LogV(p, fmt, vl);
+   logdata_t *logdata = Lith_LogV(p, levl, fmt, vl);
    va_end(vl);
 
    logdata->time = LOG_TIME;
@@ -55,7 +57,7 @@ void Lith_LogF(struct player *p, __str fmt, ...)
    va_list vl;
 
    va_start(vl, fmt);
-   logdata_t *logdata = Lith_LogV(p, fmt, vl);
+   logdata_t *logdata = Lith_LogV(p, 0, fmt, vl);
    va_end(vl);
 
    logdata->linkfull.link(&p->loginfo.full);
@@ -65,12 +67,12 @@ void Lith_LogF(struct player *p, __str fmt, ...)
 //
 // Lith_LogH
 //
-void Lith_LogH(struct player *p, __str fmt, ...)
+void Lith_LogH(struct player *p, int levl, __str fmt, ...)
 {
    va_list vl;
 
    va_start(vl, fmt);
-   logdata_t *logdata = Lith_LogV(p, fmt, vl);
+   logdata_t *logdata = Lith_LogV(p, levl, fmt, vl);
    va_end(vl);
 
    logdata->time = LOG_TIME;
@@ -83,13 +85,20 @@ void Lith_LogH(struct player *p, __str fmt, ...)
 //
 // Lith_LogV
 //
-logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl)
+logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl)
 {
    logdata_t *logdata = Salloc(logdata_t);
    logdata->link    .construct(logdata);
    logdata->linkfull.construct(logdata);
 
    ACS_BeginPrint();
+
+   if(levl) {
+      for(int i = 0; i < levl; i++)
+         ACS_PrintChar('>');
+      ACS_PrintChar(' ');
+   }
+
    __vnprintf_str(fmt, vl);
 
    logdata->info = ACS_EndStrParam();

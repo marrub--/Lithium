@@ -135,7 +135,7 @@ class Lith_InventoryItem : Inventory abstract
    {
       if(Super.TryPickup(mo))
       {
-         Lith_HERMES.Log(mo, ">>> " .. getTag(), msg_both);
+         Lith_HERMES.Log(mo, msg_both, 3, getTag());
          return true;
       }
       else
@@ -155,16 +155,17 @@ class Lith_BasicPickup : Inventory
 
    private meta string m_logname;
    private meta int    m_logtype;
+   private meta int    m_loglevl;
 
    meta bool m_vacuum;
 
-   property LogName: m_logname;
+   property LogName: m_logname, m_loglevl;
    property LogType: m_logtype;
    property Vacuum:  m_vacuum;
 
    override bool TryPickup(in out Actor mo)
    {
-      if(m_logname) Lith_HERMES.Log(mo, m_logname, m_logtype);
+      if(m_logname) Lith_HERMES.Log(mo, m_logtype, m_loglevl, "_" .. m_logname);
       GoAwayAndDie();
       return true;
    }
@@ -187,8 +188,8 @@ class Lith_CustomInventory : CustomInventory
       Inventory.PickupMessage "";
    }
 
-   void Lith_A_Log(string name, int type)
-      {Lith_HERMES.Log(self, name, type);}
+   void Lith_A_Log(int type, int levl, string name)
+      {Lith_HERMES.Log(self, type, levl, "_" .. name);}
 
    states
    {

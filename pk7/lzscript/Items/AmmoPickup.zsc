@@ -38,7 +38,7 @@ class Lith_Shell : Lith_AmmoItem replaces Shell
    default
    {
       Inventory.PickupSound "player/pickup/shells";
-      Lith_BasicPickup.LogName "Shell";
+      Lith_BasicPickup.LogName "Shell", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Shell;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
@@ -57,7 +57,7 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox
    default
    {
       Inventory.PickupSound "player/pickup/shellb";
-      Lith_BasicPickup.LogName "ShellBox";
+      Lith_BasicPickup.LogName "ShellBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_ShellBox;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
@@ -76,7 +76,7 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo
    default
    {
       Inventory.PickupSound "player/pickup/rockets";
-      Lith_BasicPickup.LogName "Rocket";
+      Lith_BasicPickup.LogName "Rocket", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Rocket;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
@@ -95,7 +95,7 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox
    default
    {
       Inventory.PickupSound "player/pickup/rocketb";
-      Lith_BasicPickup.LogName "RocketBox";
+      Lith_BasicPickup.LogName "RocketBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_RocketBox;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
@@ -114,7 +114,7 @@ class Lith_Cell : Lith_AmmoItem replaces Cell
    default
    {
       Inventory.PickupSound "player/pickup/cells";
-      Lith_BasicPickup.LogName "Cell";
+      Lith_BasicPickup.LogName "Cell", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_Cell;
       Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
@@ -133,7 +133,7 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack
    default
    {
       Inventory.PickupSound "player/pickup/cellb";
-      Lith_BasicPickup.LogName "CellBox";
+      Lith_BasicPickup.LogName "CellBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
       Lith_ScoreItem.Score Score_CellPack;
       Lith_AmmoItem.Give  "Lith_PlasmaAmmo", AmmoAmt_CellPack;

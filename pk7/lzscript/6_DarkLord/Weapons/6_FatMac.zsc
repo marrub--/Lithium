@@ -64,7 +64,7 @@ action(weapon) void Lith_A_FireFatMac()
       A_Recoil(vl * 5);
 
       if(random(0, 10000) == 0)
-         Lith_HERMES.Log(self, "> This is my arm fucker", msg_huds);
+         Lith_HERMES.Log(self, msg_huds, 1, "This is my arm fucker");
    }
    else
       A_Recoil(5 + vl * 2);

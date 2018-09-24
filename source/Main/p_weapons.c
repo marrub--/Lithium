@@ -60,9 +60,9 @@ static void Lith_PickupScore(struct player *p, int parm)
    __str msg = L("LITH_PICKUP_SELL");
 
    if(strtoi_str(L("LITH_PICKUP_SELL_ORDER"), null, 10) == 0)
-      p->log(msg, Language("LITH_INFO_SHORT_%S", info->name), score);
+      p->log(1, msg, Language("LITH_INFO_SHORT_%S", info->name), score);
    else
-      p->log(msg, score, Language("LITH_INFO_SHORT_%S", info->name));
+      p->log(1, msg, score, Language("LITH_INFO_SHORT_%S", info->name));
 }
 
 // Extern Functions ----------------------------------------------------------|

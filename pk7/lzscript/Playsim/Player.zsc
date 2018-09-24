@@ -70,13 +70,13 @@ static string GetArmorDT(Actor mo)
    else   return "";
 }
 
-static void Log(Actor mo, string name, int type)
+static void Log(Actor mo, int type, int levl, string name)
 {
    let sv = Instance();
    if(sv && mo.player)
    {
       sv.m_logname = name;
-      mo.ACS_ScriptCall("Lith_LogS", type);
+      mo.ACS_ScriptCall("Lith_LogS", levl, type);
    }
 }
 

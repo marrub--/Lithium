@@ -33,10 +33,10 @@ typedef struct loginfo_s
    list_t maps;
 } loginfo_t;
 
-void Lith_Log(struct player *p, __str fmt, ...);  // log to hud and full log
+void Lith_Log(struct player *p, int levl, __str fmt, ...);  // log to hud and full log
+void Lith_LogH(struct player *p, int levl, __str fmt, ...); // log to hud only
 void Lith_LogF(struct player *p, __str fmt, ...); // log to full log only
-void Lith_LogH(struct player *p, __str fmt, ...); // log to hud only
-logdata_t *Lith_LogV(struct player *p, __str fmt, va_list vl); // vararg
+logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl); // vararg
 void Lith_PlayerLogEntry(struct player *p);
 
 #endif

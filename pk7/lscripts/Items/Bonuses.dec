@@ -1,7 +1,7 @@
 actor Lith_Coin : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 50
-   Lith_BasicPickup.LogName "Coin"
+   Lith_BasicPickup.LogName "Coin", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/coin"
    Scale 0.3
@@ -18,7 +18,7 @@ actor Lith_Coin : Lith_ScoreItem
 actor Lith_ScoreChip : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
-   Lith_BasicPickup.LogName "ScoreChip"
+   Lith_BasicPickup.LogName "ScoreChip", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/scorechip"
    Scale 0.4
@@ -35,7 +35,7 @@ actor Lith_ScoreChip : Lith_ScoreItem
 actor Lith_Ruby : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
-   Lith_BasicPickup.LogName "Ruby"
+   Lith_BasicPickup.LogName "Ruby", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
@@ -52,7 +52,7 @@ actor Lith_Ruby : Lith_ScoreItem
 actor Lith_Sapphire : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
-   Lith_BasicPickup.LogName "Sapphire"
+   Lith_BasicPickup.LogName "Sapphire", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
@@ -69,7 +69,7 @@ actor Lith_Sapphire : Lith_ScoreItem
 actor Lith_Amethyst : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
-   Lith_BasicPickup.LogName "Amethyst"
+   Lith_BasicPickup.LogName "Amethyst", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
@@ -86,7 +86,7 @@ actor Lith_Amethyst : Lith_ScoreItem
 actor Lith_Diamond : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 1000
-   Lith_BasicPickup.LogName "Diamond"
+   Lith_BasicPickup.LogName "Diamond", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
@@ -103,7 +103,7 @@ actor Lith_Diamond : Lith_ScoreItem
 actor Lith_Emerald : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 400
-   Lith_BasicPickup.LogName "Emerald"
+   Lith_BasicPickup.LogName "Emerald", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
@@ -120,7 +120,7 @@ actor Lith_Emerald : Lith_ScoreItem
 actor Lith_Scheelite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
-   Lith_BasicPickup.LogName "Scheelite"
+   Lith_BasicPickup.LogName "Scheelite", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
@@ -137,7 +137,7 @@ actor Lith_Scheelite : Lith_ScoreItem
 actor Lith_Nambulite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
-   Lith_BasicPickup.LogName "Nambulite"
+   Lith_BasicPickup.LogName "Nambulite", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
@@ -154,7 +154,7 @@ actor Lith_Nambulite : Lith_ScoreItem
 actor Lith_Lepidolite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
-   Lith_BasicPickup.LogName "Lepidolite"
+   Lith_BasicPickup.LogName "Lepidolite", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
@@ -171,7 +171,7 @@ actor Lith_Lepidolite : Lith_ScoreItem
 actor Lith_Petalite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
-   Lith_BasicPickup.LogName "Petalite"
+   Lith_BasicPickup.LogName "Petalite", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
@@ -188,7 +188,7 @@ actor Lith_Petalite : Lith_ScoreItem
 actor Lith_Tourmaline : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
-   Lith_BasicPickup.LogName "Tourmaline"
+   Lith_BasicPickup.LogName "Tourmaline", 2
    Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5

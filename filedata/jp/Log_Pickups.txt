@@ -1,5 +1,6 @@
 == LITH_PICKUP_SELL_ORDER | 1
-== LITH_PICKUP_SELL | > %lli\cnscr\c-で%Sを売った。
+== LITH_PICKUP_SELL | %lli\cnscr\c-で%Sを売った。
+== LITH_PICKUP_CBI  | %Sはインストールされました。
 
 == LITH_PICKUP_NUM | 13
 == LITH_PICKUP_000 | %Sは入手した！

@@ -410,14 +410,14 @@ void Lith_ResetPlayer(struct player *p)
 
    if(!p->staticinit)
    {
-      p->log("> Lithium " Lith_Version " :: Compiled %S", __DATE__);
+      p->log(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
-         p->logH("> player is %u bytes long!", sizeof(struct player) * 4);
-         p->logH("> strnull is \"%S\"", strnull);
+         p->logH(1, "player is %u bytes long!", sizeof(struct player) * 4);
+         p->logH(1, "strnull is \"%S\"", strnull);
          PrintDmonAllocSize(p);
       } else {
-         p->logH(L("LITH_LOG_StartGame"), "lith_k_opencbi");
+         p->logH(1, L("LITH_LOG_StartGame"), "lith_k_opencbi");
       }
 
       p->deliverMail("Intro");

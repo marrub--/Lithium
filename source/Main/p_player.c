@@ -243,7 +243,7 @@ void Lith_Obituary(void)
    obit = ACS_EndStrParam();
 
    LogDebug(log_dev, "%S", obit);
-   Lith_ForPlayer() p->log("> %S", obit);
+   Lith_ForPlayer() p->log(1, "%S", obit);
 }
 
 #define upgrademap_t_GetKey(o) ((o)->info->key)
@@ -405,7 +405,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    //
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
-      p->log("> You gained brouzouf.");
+      p->log(1, "You gained brouzouf.");
    }
 
    if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
@@ -421,7 +421,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 
    // Log score
    if(p->getCVarI("lith_player_scorelog"))
-      p->logH("> +\Cj%lli\Cnscr", score);
+      p->logH(1, "+\Cj%lli\Cnscr", score);
 
    return score;
 }
@@ -512,7 +512,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->log("%S", Language("LITH_LOG_BossWarn%S", p->discrim));
+      p->log(1, "%S", Language("LITH_LOG_BossWarn%S", p->discrim));
 }
 
 //

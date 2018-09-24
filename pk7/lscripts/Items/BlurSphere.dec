@@ -71,7 +71,7 @@ actor Lith_BlurSphere : Lith_CustomInventory
       PINS ABCD 6 bright
       loop
    Pickup:
-      TNT1 A 0 Lith_A_Log("BlurSphere", msg_both)
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "BlurSphere")
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_Barrier")
       TNT1 A 0 A_TakeInventory("Lith_HasBarrier")
       TNT1 A 0 A_GiveInventory("Lith_HasBarrier")

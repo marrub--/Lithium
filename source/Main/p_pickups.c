@@ -239,16 +239,16 @@ static void Lith_StupidPickup(struct player *p, int weapon)
       flag = strtoi_str(Language("LITH_PICKUP_%.3i_FLAGS", ifmt), null, 0);
    }
 
-   __str fmt = StrParam("> %LS", StrParam("LITH_PICKUP_%.3i", ifmt));
+   __str fmt = Language("LITH_PICKUP_%.3i", ifmt);
 
    if(flag & 1 && flag & 4)
-      p->log(fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
+      p->log(1, fmt, names->ptr[iname], names->ptr[iname], uncertainty[iunc]);
    else if(flag & 1)
-      p->log(fmt, names->ptr[iname], names->ptr[iname]);
+      p->log(1, fmt, names->ptr[iname], names->ptr[iname]);
    else if(flag & 4)
-      p->log(fmt, names->ptr[iname], uncertainty[iunc]);
+      p->log(1, fmt, names->ptr[iname], uncertainty[iunc]);
    else
-      p->log(fmt, names->ptr[iname]);
+      p->log(1, fmt, names->ptr[iname]);
 }
 
 void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
@@ -256,10 +256,10 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
    if(p->getCVarI("lith_player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->log(StrParam("> %LS", "LITH_PICKUP_000"),
+      p->log(1, StrParam("%S", L("LITH_PICKUP_000")),
          Language("LITH_INFO_SHORT_%S", info->name));
    else
-      p->log("> Acquired impossible object");
+      p->log(1, "Acquired impossible object");
 }
 
 // EOF

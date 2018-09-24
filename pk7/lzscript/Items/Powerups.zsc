@@ -4,7 +4,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
    {
       Tag "Backpack";
       Inventory.PickupSound "player/pickup/item";
-      Lith_BasicPickup.LogName "Backpack";
+      Lith_BasicPickup.LogName "Backpack", 5;
       Lith_ScoreItem.Score Score_Backpack;
       
       +COUNTITEM

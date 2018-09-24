@@ -4,7 +4,8 @@
 ## 4: Randomized certainty
 
 == LITH_PICKUP_SELL_ORDER | 0
-== LITH_PICKUP_SELL | > Sold the %S for %lli\cnscr\c-.
+== LITH_PICKUP_SELL | Sold the %S for %lli\cnscr\c-.
+== LITH_PICKUP_CBI  | Installed %S.
 
 == LITH_PICKUP_NUM | 68
 == LITH_PICKUP_000 | You got the %S!

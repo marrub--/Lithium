@@ -1,93 +1,74 @@
 ## Health --------------------------------------------------------------------|
-== LITH_LOG_ArmorBonus  | >>> よろいボーナス
-== LITH_LOG_BlueArmor   | >>> 青よろい
-== LITH_LOG_GreenArmor  | >>> 緑よろい
-== LITH_LOG_HealthBonus | >>> ＨＰボーナス
-== LITH_LOG_Medikit     | >>> メディキット
-== LITH_LOG_MegaSphere  | >>>> メガチャージ！
-== LITH_LOG_SoulSphere  | >>>> スーパーチャージ！
-== LITH_LOG_StimPack    | >>> スティムパック
+== LITH_LOG_HealthBonus | ＨＰボーナス
+== LITH_LOG_Medikit     | メディキット
+== LITH_LOG_MegaSphere  | メガチャージ！
+== LITH_LOG_SoulSphere  | スーパーチャージ！
+== LITH_LOG_StimPack    | スティムパック
 
 ## Keys ----------------------------------------------------------------------|
-== LITH_LOG_RedCard     | >>>>> \cg赤キーディスク
-== LITH_LOG_BlueCard    | >>>>> \ch青キーディスク
-== LITH_LOG_YellowCard  | >>>>> \ck黄キーディスク
-== LITH_LOG_RedSkull    | >>>>> \cg赤頭蓋骨
-== LITH_LOG_BlueSkull   | >>>>> \ch青頭蓋骨
-== LITH_LOG_YellowSkull | >>>>> \ck黄頭蓋骨
+== LITH_LOG_RedCard     | \cg赤キーディスク
+== LITH_LOG_BlueCard    | \ch青キーディスク
+== LITH_LOG_YellowCard  | \ck黄キーディスク
+== LITH_LOG_RedSkull    | \cg赤頭蓋骨
+== LITH_LOG_BlueSkull   | \ch青頭蓋骨
+== LITH_LOG_YellowSkull | \ck黄頭蓋骨
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_LOG_RadSuit     | >>>>> 放射線遮蔽スーツ
-== LITH_LOG_InfraRed    | >>>>> ＣＢゴーグル
-== LITH_LOG_Invuln      | \cj>>>>>> 不死身!
-== LITH_LOG_BlurSphere  | >>>>> バリア
-== LITH_LOG_Backpack    | >>>>> バックパックと割引カード
-== LITH_LOG_Berserk     | >>>>> ベルセルク
-== LITH_LOG_AllMap      | >>>>> レベルマップ
-== LITH_LOG_DoggoSphere | >>>>> \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
-== LITH_LOG_Dogs        | > 犬を得た
+== LITH_LOG_RadSuit     | 放射線遮蔽スーツ
+== LITH_LOG_InfraRed    | ＣＢゴーグル
+== LITH_LOG_Invuln      | 不死身!
+== LITH_LOG_BlurSphere  | バリア
+== LITH_LOG_Backpack    | バックパックと割引カード
+== LITH_LOG_Berserk     | ベルセルク
+== LITH_LOG_AllMap      | レベルマップ
+== LITH_LOG_DoggoSphere | \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
+== LITH_LOG_Dogs        | 犬を得た
 
 ## Ammo ----------------------------------------------------------------------|
-== LITH_LOG_Clip      | >> ラジオ
-== LITH_LOG_ClipBox   | >> 非特異的弾箱
-== LITH_LOG_Shell     | >> シェル
-== LITH_LOG_ShellBox  | >> シェル箱
-== LITH_LOG_Rocket    | >> ロケット
-== LITH_LOG_RocketBox | >> ロケット箱
-== LITH_LOG_Cell      | >> エナジーチャージ
-== LITH_LOG_CellBox   | >> デーモンエナジーパック
+== LITH_LOG_Clip      | ラジオ
+== LITH_LOG_ClipBox   | 非特異的弾箱
+== LITH_LOG_Shell     | シェル
+== LITH_LOG_ShellBox  | シェル箱
+== LITH_LOG_Rocket    | ロケット
+== LITH_LOG_RocketBox | ロケット箱
+== LITH_LOG_Cell      | エナジーチャージ
+== LITH_LOG_CellBox   | デーモンエナジーパック
 
 ## Bonuses -------------------------------------------------------------------|
-== LITH_LOG_Coin       | >> だま
-== LITH_LOG_ScoreChip  | >> スコアチップ
-== LITH_LOG_Ruby       | >> 欠陥のあるルービ
-== LITH_LOG_Sapphire   | >> 欠陥のあるサファイア
-== LITH_LOG_Amethyst   | >> 欠陥のあるアメジスト
-== LITH_LOG_Diamond    | >> 欠陥のあるダイヤモンド
-== LITH_LOG_Emerald    | >> 欠陥のあるエメラルド
-== LITH_LOG_Scheelite  | >> シェーライト
-== LITH_LOG_Nambulite  | >> ナンブライト
-== LITH_LOG_Lepidolite | >> レピドライト
-== LITH_LOG_Petalite   | >> ペタライト
-== LITH_LOG_Tourmaline | >> トールマリーン
-
-## CBI Upgrades (Marine) -----------------------------------------------------|
-== LITH_LOG_CBI_MUpgr1      | > ＫＳＫＫスペック高級ＣＰＵはインストールされた
-== LITH_LOG_CBI_MUpgr2      | > ＫＳＫＫスペック超高級ＣＰＵはインストールされた
-== LITH_LOG_CBI_MArmorInter | > よろいインタフェースはインストールされた
-== LITH_LOG_CBI_MWeapnInter | > 武器手直しデバイスはインストールされた
-== LITH_LOG_CBI_MWeapnInte2 | > 武器手戻りデバイスはインストールされた
-== LITH_LOG_CBI_MRDistInter | > 現実変形インタフェースはインストールされた
-
-## CBI Upgrades (Cyber-Mage) -------------------------------------------------|
-== LITH_LOG_CBI_CSlot3Spell | > フューアスペルドライバはインストールされた
-== LITH_LOG_CBI_CSlot4Spell | > ロムイェットヤスペルドライバはインストールされた
-== LITH_LOG_CBI_CSlot5Spell | > ハルギョンスペルドライバはインストールされた
-== LITH_LOG_CBI_CSlot6Spell | > ほしゅだんまスペルドライバはインストールされた
-== LITH_LOG_CBI_CSlot7Spell | > セルス・デ・ラ・モルテスペルドライバはインストールされた
-== LITH_LOG_CBI_CRDistInter | $LITH_LOG_CBI_MRDistInter
+== LITH_LOG_Coin       | だま
+== LITH_LOG_ScoreChip  | スコアチップ
+== LITH_LOG_Ruby       | 欠陥のあるルービ
+== LITH_LOG_Sapphire   | 欠陥のあるサファイア
+== LITH_LOG_Amethyst   | 欠陥のあるアメジスト
+== LITH_LOG_Diamond    | 欠陥のあるダイヤモンド
+== LITH_LOG_Emerald    | 欠陥のあるエメラルド
+== LITH_LOG_Scheelite  | シェーライト
+== LITH_LOG_Nambulite  | ナンブライト
+== LITH_LOG_Lepidolite | レピドライト
+== LITH_LOG_Petalite   | ペタライト
+== LITH_LOG_Tourmaline | トールマリーン
 
 ## Level Up ------------------------------------------------------------------|
-== LITH_LOG_LevelUpStan | > 「強くなっている」と思った。
-== LITH_LOG_LevelUpJem  | > ［ＩＮＦＯ］ メモリー戻した: %iＫｉＢ
-== LITH_LOG_LevelUpFulk | > \cj＜\cdＶｉｔａｌ\cj＞\c- ：： %iのｉｎｏｄｅは戻った。
-== LITH_LOG_LevelUpAri  | > 楽しみにしてる。
-== LITH_LOG_LevelUpMod  | $LITH_LOG_LevelUpStan
+== LITH_LOG_LevelUpStan | 「強くなっている」と思った。
+== LITH_LOG_LevelUpJem  | ［ＩＮＦＯ］ メモリー戻した: %iＫｉＢ
+== LITH_LOG_LevelUpFulk | \cj＜\cdＶｉｔａｌ\cj＞\c- ：： %iのｉｎｏｄｅは戻った。
+== LITH_LOG_LevelUpAri  | 楽しみにしてる。
 
 ## Boss Warnings -------------------------------------------------------------|
 %% LITH_LOG_BossWarnStan
-> \cg警告：このそばにはデーモンエナジーレベルは高すぎます。
+\cg警告：このそばにはデーモンエナジーレベルは高すぎます。
 
 %% LITH_LOG_BossWarnJem
-> \cr［ＷＡＲＮＩＮＧ］ デーモンエナジーレベルはこのそばに不当と上昇する。
+\cr［ＷＡＲＮＩＮＧ］ デーモンエナジーレベルはこのそばに不当と上昇する。
 
 %% LITH_LOG_BossWarnFulk
-> \cj＜\ciＷａｒｎｉｎｇ\cj＞\c- ＬＬ デーモンエナジーレベルは高い。 元を見つけて破壊にせよ。
+\cj＜\ciＷａｒｎｉｎｇ\cj＞\c- ＬＬ デーモンエナジーレベルは高い。 元を見つけて破壊にせよ。
 
 %% LITH_LOG_BossWarnAri
-> \cgこのそばに大量のデーモンエナジーは検出された。
+\cgこのそばに大量のデーモンエナジーは検出された。
 
 == LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan
 
 ## Misc ----------------------------------------------------------------------|
-== LITH_LOG_StartGame | > "%jS"を押してメニューを開く
+== LITH_LOG_StartGame | ”%jS”を押してメニューを開く
+== LITH_LOG_MailRecv  | ＜\cj%S\c-＞からメールを受信した。

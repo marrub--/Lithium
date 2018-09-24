@@ -4,7 +4,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
    {
       Tag "Health Bonus";
       Inventory.PickupSound "items/healthbonus";
-      Lith_BasicPickup.LogName "HealthBonus";
+      Lith_BasicPickup.LogName "HealthBonus", 3;
       Lith_BasicPickup.LogType msg_huds;
       Lith_BasicPickup.Vacuum 1;
       Scale 0.7;
@@ -29,7 +29,7 @@ class Lith_Radio : Lith_ScoreItem
    default
    {
       Lith_ScoreItem.Score Score_Clip;
-      Lith_BasicPickup.LogName "Clip";
+      Lith_BasicPickup.LogName "Clip", 2;
       Lith_BasicPickup.Vacuum 1;
       Inventory.PickupSound "player/pickup/scoresmall";
    }
@@ -53,7 +53,7 @@ class Lith_BoxOfAmmo : Lith_ScoreItem
    default
    {
       Lith_ScoreItem.Score Score_ClipBox;
-      Lith_BasicPickup.LogName "ClipBox";
+      Lith_BasicPickup.LogName "ClipBox", 2;
       Inventory.PickupSound "player/pickup/scorebig";
    }
 
