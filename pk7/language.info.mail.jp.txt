@@ -12,6 +12,8 @@
    "\n"
    "%S";
 
+"LITH_MAIL_INTERNAL" = "（内部）";
+"LITH_MAIL_NOTITLE" = "（タイトルなし）";
 
 // Cyber-Mage ----------------------------------------------------------------|
 "LITH_MAIL_BODY_IntroJem" =
@@ -47,6 +49,8 @@
    "\cd>>>>>[[[[maildリロードする]]]]";
 
 "LITH_MAIL_NAME_IntroJem" = "退避メッセージ";
+"LITH_MAIL_SEND_IntroJem" = "（隠した）@corp.AOF";
+"LITH_MAIL_TIME_IntroJem" = "13時44分 25日7月49年";
 "LITH_MAIL_SIZE_IntroJem" = "310";
 
 "LITH_MAIL_BODY_Cluster1Jem" =

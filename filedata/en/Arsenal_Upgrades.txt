@@ -6,7 +6,7 @@ Shows vital information.
 A Heads Up Display program built into your Computer/Brain Interface.
 
 ##----------------------------------------------------------------------------|
-== LITH_UPGRADE_TITLE_HeadsUpDis2 | Heads Up Disp.
+== LITH_UPGRADE_TITLE_HeadsUpDis2 | $LITH_UPGRADE_TITLE_HeadsUpDisp
 @@ LITH_UPGRADE_EFFEC_HeadsUpDis2
 Shows vital information.
 

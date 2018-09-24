@@ -275,7 +275,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    case weapon_cfist:
       SetSize(320, 240);
       fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;
-      PrintTextFmt("%.1lkkV \Cjcharge", charge);
+      PrintTextFmt(L("LITH_CHARGE_FMT"), charge);
       PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
       break;
    }

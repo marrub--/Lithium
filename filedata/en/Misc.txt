@@ -1,6 +1,12 @@
 ## Misc ----------------------------------------------------------------------|
 == LITH_CHECK | Eng
-== LITH_TIME_FMT_LONG | %0.2i:%0.2i:%0.2i %i-7-1649
+
+== LITH_TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i-7-1649
+== LITH_TIME_FMT_SHORT | %0.2i:%0.2i %i-7-49
+== LITH_TIME_FMT_DATE  | %i-7-1649
+
+== LITH_ENTER_FMT  | Entered %S at %S NE
+== LITH_CHARGE_FMT | %.1lkkV \cjcharge
 
 == SECRETMESSAGE | \cnA secret is revealed!
 

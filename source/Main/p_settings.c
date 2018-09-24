@@ -16,7 +16,9 @@ Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1, 2.0);
 Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1, 2.0);
 Enum("Color theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
 Enum("Cursor",      "lith_gui_cursor", 0, gui_curs_max-1, "%S", CursName(set));
-ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
+if(p->num == 0) {
+   ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
+}
 
 Category("Player");
 Float("Damage bob multiplier", "x", "lith_player_damagebobmul", 0.0, 1.0);

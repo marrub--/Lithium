@@ -77,13 +77,13 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
    InfoSep;
 
    Info(L("LITH_CBI_INTERFACES"));
-                      Info("\CiBlade Spell Driver \Cbinstalled.");
-                      Info("\CiDelear Spell Driver \Cbinstalled.");
-   Upgr(c_slot3spell) Info("\CiFeuer Spell Driver \Cbinstalled.");
-   Upgr(c_slot4spell) Info("\CiRomyetya Spell Driver \Cbinstalled.");
-   Upgr(c_slot5spell) Info("\CiHulgyon Spell Driver \Cbinstalled.");
-   Upgr(c_slot6spell) Info("\CiHosh'danma Spell Driver \Cbinstalled.");
-   Upgr(c_slot7spell) Info("\CgCercle de la Mort Spell Driver \Cbinstalled.");
+                      Info("> %S", L("LITH_CBI_Slot1Spell"));
+                      Info("> %S", L("LITH_CBI_Slot2Spell"));
+   Upgr(c_slot3spell) Info("> %S", L("LITH_CBI_Slot3Spell"));
+   Upgr(c_slot4spell) Info("> %S", L("LITH_CBI_Slot4Spell"));
+   Upgr(c_slot5spell) Info("> %S", L("LITH_CBI_Slot5Spell"));
+   Upgr(c_slot6spell) Info("> %S", L("LITH_CBI_Slot6Spell"));
+   Upgr(c_slot7spell) Info("> %S", L("LITH_CBI_Slot7Spell"));
    Upgr(c_rdistinter) Info("> %S", L("LITH_CBI_RDistInter"));
 
                       Slot("Slot1Spell", 0, 1);

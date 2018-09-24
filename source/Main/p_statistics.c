@@ -19,21 +19,21 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
    PrintTextStr(p->name);
    PrintText("SMALLFNT", CR_LIGHTBLUE, 20,1, 40,1);
 
-   Stat("Score Multiplier",    "%i%%", ceilk(p->scoremul * 100.0));
-   Stat("Weapons Found",       "%i",   p->weaponsheld);
-   Stat("Health Used",         "%li",  p->healthused);
-   Stat("Health Sum",          "%li",  p->healthsum);
-   Stat("Score Used",          "%lli", p->scoreused);
-   Stat("Score Sum",           "%lli", p->scoresum);
-   Stat("Secrets Found",       "%i",   world.secretsfound);
-   Stat("Units Travelled",     "%imu", p->unitstravelled);
-   Stat("Upgrades Owned",      "%i",   p->upgradesowned);
-   Stat("Items Bought",        "%i",   p->itemsbought);
-   Stat("Mail Received",       "%i",   p->bip.mailreceived);
-   Stat("Seconds Elapsed",     "%li",  p->ticks / 35l);
-   Stat("Spurious Explosions", "%i",   p->spuriousexplosions);
-   Stat("Brouzouf Gained",     "%i",   p->brouzouf);
-   Stat("Mail Truly Received", "%i",   p->bip.mailtrulyreceived);
+   Stat(L("LITH_STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
+   Stat(L("LITH_STAT_Weapons"),    "%i",   p->weaponsheld);
+   Stat(L("LITH_STAT_HealthUsed"), "%li",  p->healthused);
+   Stat(L("LITH_STAT_HealthSum"),  "%li",  p->healthsum);
+   Stat(L("LITH_STAT_ScoreUsed"),  "%lli", p->scoreused);
+   Stat(L("LITH_STAT_ScoreSum"),   "%lli", p->scoresum);
+   Stat(L("LITH_STAT_Secrets"),    "%i",   world.secretsfound);
+   Stat(L("LITH_STAT_Units"),      "%imu", p->unitstravelled);
+   Stat(L("LITH_STAT_Upgrades"),   "%i",   p->upgradesowned);
+   Stat(L("LITH_STAT_Items"),      "%i",   p->itemsbought);
+   Stat(L("LITH_STAT_Mail"),       "%i",   p->bip.mailreceived);
+   Stat(L("LITH_STAT_Time"),       "%li",  p->ticks / 35l);
+   Stat(L("LITH_STAT_Boom"),       "%i",   p->spuriousexplosions);
+   Stat(L("LITH_STAT_Brouzouf"),   "%i",   p->brouzouf);
+   Stat(L("LITH_STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
 
    #undef Stat
 }

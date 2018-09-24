@@ -57,6 +57,53 @@
    "アップグレードできません。";
 
 
-// Arsenal_Upgrades.txt stub
+// Body ----------------------------------------------------------------------|
+"LITH_UPGRADE_TITLE_HeadsUpDisp" = "ＨＵＤ";
+"LITH_UPGRADE_TITLE_JetBooster" = "ジェットブースタ";
+"LITH_UPGRADE_TITLE_ReflexWetw" = "反射ウエットウェア";
+"LITH_UPGRADE_TITLE_Zoom" = "ズームウエットウェア";
+"LITH_UPGRADE_TITLE_VitalScan" = "バイタルスキャナー";
+"LITH_UPGRADE_TITLE_CyberLegs" = "動きウエットウェア";
+"LITH_UPGRADE_TITLE_ReactArmor" = "反応よろい";
+"LITH_UPGRADE_TITLE_ReactArmor2" = "反応よろい２";
+"LITH_UPGRADE_TITLE_DefenseNuke" = "ミニヌーク";
+"LITH_UPGRADE_TITLE_Adrenaline" = "アドレナリン注射器";
+"LITH_UPGRADE_TITLE_Magic" = "マナ吸収";
+"LITH_UPGRADE_TITLE_SoulCleaver" = "ソール裂いて";
+"LITH_UPGRADE_TITLE_StealthSys" = "しのびシステム";
+"LITH_UPGRADE_TITLE_AutoReload" = "自動リロード";
+"LITH_UPGRADE_TITLE_AutoPistol" = "自動ピストル";
+"LITH_UPGRADE_TITLE_PlasPistol" = "プラズマピストル";
+"LITH_UPGRADE_TITLE_PoisonShot" = "毒シェル";
+"LITH_UPGRADE_TITLE_GaussShotty" = "ガウスライフル";
+"LITH_UPGRADE_TITLE_RifleModes" = "モーダルライフル";
+"LITH_UPGRADE_TITLE_LaserRCW" = "レーザーライフル";
+"LITH_UPGRADE_TITLE_HomingRPG" = "ホーミングロケット";
+"LITH_UPGRADE_TITLE_ChargeRPG" = "チャージランチャー";
+"LITH_UPGRADE_TITLE_PlasLaser" = "プラズマレーザー";
+"LITH_UPGRADE_TITLE_PartBeam" = "粒子線";
+"LITH_UPGRADE_TITLE_PunctCannon" = "穿刺砲";
+"LITH_UPGRADE_TITLE_OmegaRail" = "オメガレール砲";
+"LITH_UPGRADE_TITLE_Mateba_A" = "止め弾";
+"LITH_UPGRADE_TITLE_ShockRif_A" = "ショックチャージ";
+"LITH_UPGRADE_TITLE_ShockRif_B" = "電気高速";
+"LITH_UPGRADE_TITLE_SPAS_A" = "空虚ブレス";
+"LITH_UPGRADE_TITLE_SPAS_B" = "シェル自動ローダー";
+"LITH_UPGRADE_TITLE_SMG_A" = "ＳＭＧトライマグ";
+"LITH_UPGRADE_TITLE_SMG_B" = "シーカー弾丸";
+"LITH_UPGRADE_TITLE_SMG_C" = "安全システム";
+"LITH_UPGRADE_TITLE_IonRifle_A" = "ラド　イオナイザー";
+"LITH_UPGRADE_TITLE_IonRifle_B" = "オーバーローダー";
+"LITH_UPGRADE_TITLE_CPlasma_A" = "パルスチャージャー";
+"LITH_UPGRADE_TITLE_ShipGun_A" = "ロングニスのソル槍";
+"LITH_UPGRADE_TITLE_ShipGun_B" = "運命の大波";
+"LITH_UPGRADE_TITLE_DarkCannon" = "？？？？？？？？";
+"LITH_UPGRADE_TITLE_TorgueMode" = "バクハツだ";
+"LITH_UPGRADE_TITLE_7777777" = "７７７７７７７モード";
+"LITH_UPGRADE_TITLE_lolsords" = "スティールモード";
+"LITH_UPGRADE_TITLE_Goldeneye" = "００７モード";
+"LITH_UPGRADE_TITLE_Implying" = ">そうだね";
+"LITH_UPGRADE_TITLE_UNCEUNCE" = "うんつうんつ";
+"LITH_UPGRADE_TITLE_InstaDeath" = "インスタント死";
 
 // EOF

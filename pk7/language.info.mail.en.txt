@@ -22,6 +22,8 @@
    "\n"
    "%S";
 
+"LITH_MAIL_INTERNAL" = "<internal>";
+"LITH_MAIL_NOTITLE" = "<title omitted>";
 
 // All Classes ---------------------------------------------------------------|
 "LITH_MAIL_BODY_JamesDefeated" =

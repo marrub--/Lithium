@@ -508,13 +508,12 @@ override void RenderOverlay(RenderEvent evt)
                DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
                DTA_Alpha, m_d[i].a);
          break;
-      case dt_utx:
+      case dt_utx: {
+         name colo = 'j';
          for(uint ln = 0, lns = m_d[i].lnx.size(), y = m_d[i].y + m_d[i].lny; ln < lns; ln++)
          {
             int x = m_d[i].x - m_d[i].lnx[ln];
             int xo = x;
-
-            name colo = 'j';
 
             for(uint pos = 0, len = m_d[i].txt[ln].length(); pos < len;)
             {
@@ -592,6 +591,7 @@ override void RenderOverlay(RenderEvent evt)
             y += m_d[i].lny;
          }
          break;
+      }
       case dt_cls: Screen.SetClipRect(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w); break;
       case dt_clc: Screen.ClearClipRect(); break;
       case dt_siz: scw = m_d[i].x; sch = m_d[i].y; break;

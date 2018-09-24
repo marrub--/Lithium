@@ -109,6 +109,9 @@
 
 "LITH_LOG_BossWarnMod" = "$LITH_LOG_BossWarnStan";
 
+// Misc ----------------------------------------------------------------------|
+"LITH_LOG_StartGame" = "> Press \"%jS\" to open the menu.";
+
 // Flags:
 // 1: Two copies of name
 // 2: Very rare

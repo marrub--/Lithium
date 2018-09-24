@@ -131,7 +131,7 @@ void Lith_PlayerLogEntry(struct player *p)
 
    logmap->link.link(&p->loginfo.maps);
 
-   p->logF("Entered %S at %S NE", logmap->name, world.canontime);
+   p->logF(L("LITH_ENTER_FMT"), logmap->name, world.canontime);
 }
 
 //

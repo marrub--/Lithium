@@ -362,7 +362,10 @@ void Lith_PlayerUseGUI(struct player *p, int type)
       else
          p->frozen++;
 
-      ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
+      if(ACS_Random(0, 10000) == 777)
+         ACS_LocalAmbientSound("player/cbi/win95", 127);
+      else
+         ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
       p->activegui = type;
    }
    else if(p->activegui == type)

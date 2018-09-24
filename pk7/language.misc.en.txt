@@ -4,7 +4,13 @@
 
 // Misc ----------------------------------------------------------------------|
 "LITH_CHECK" = "Eng";
+
 "LITH_TIME_FMT_LONG" = "%0.2i:%0.2i:%0.2i %i-7-1649";
+"LITH_TIME_FMT_SHORT" = "%0.2i:%0.2i %i-7-49";
+"LITH_TIME_FMT_DATE" = "%i-7-1649";
+
+"LITH_ENTER_FMT" = "Entered %S at %S NE";
+"LITH_CHARGE_FMT" = "%.1lkkV \cjcharge";
 
 "SECRETMESSAGE" = "\cnA secret is revealed!";
 
@@ -877,11 +883,24 @@
 
 // UI ------------------------------------------------------------------------|
 "LITH_COST" = "Cost:";
+"LITH_EFFECT" = "Effect:";
+"LITH_FREE" = "Free";
 "LITH_CATEGORY" = "Category";
 "LITH_SCOREMULT" = "Score Multiplier";
 "LITH_BUY" = "Buy";
 "LITH_DEACTIVATE" = "Deactivate";
 "LITH_ACTIVATE" = "Activate";
+"LITH_EDIT" = "Edit";
+"LITH_CLEAR" = "Clear";
+"LITH_EMPTY" = "<empty>";
+"LITH_NOTE_FMT" = "\cmNote %i";
+
+"LITH_CAT_BODY" = "\cnBody";
+"LITH_CAT_WEAP" = "\caWeapon";
+"LITH_CAT_EXTR" = "\cfExtra";
+"LITH_CAT_DOWN" = "\ctDowngrade";
+
+"LITH_GUI_TEXTBOX" = "Put your cursor here to input text.";
 
 "LITH_TAB_ARSENAL_Stan" = "Arsenal";
 "LITH_TAB_ARSENAL_Jem" = "Directives";
@@ -916,10 +935,56 @@
 "LITH_CBI_ArmorInter" = "Armor Interface";
 "LITH_CBI_RDistInter" = "Reality Distortion Interface";
 
+"LITH_CBI_Slot1Spell" = "\ciBlade Spell Driver";
+"LITH_CBI_Slot2Spell" = "\ciDelear Spell Driver";
+"LITH_CBI_Slot3Spell" = "\ciFeuer Spell Driver";
+"LITH_CBI_Slot4Spell" = "\ciRomyetya Spell Driver";
+"LITH_CBI_Slot5Spell" = "\ciHulgyon Spell Driver";
+"LITH_CBI_Slot6Spell" = "\ciHosh'danma Spell Driver";
+"LITH_CBI_Slot7Spell" = "\cgCercle de la Mort Spell Driver";
+
 "LITH_CBI_CPU1" = "OFMD Spec. Nodea 541 Basic CPU";
 "LITH_CBI_CPU2" = "KSKK Spec. Z6808 High-Grade CPU";
 "LITH_CBI_CPU3" = "KSKK Spec. BC-0265 Super High-Grade CPU";
 "LITH_CBI_CPU4" = "AOF 5900001 Rev7 CPU";
+
+// BIP -----------------------------------------------------------------------|
+"LITH_BIP_NAME_Search" = "Search";
+"LITH_BIP_NAME_Weapons" = "Weapons";
+"LITH_BIP_NAME_Adversaries" = "Adversaries";
+"LITH_BIP_NAME_Items" = "Items";
+"LITH_BIP_NAME_Yourself" = "Yourself";
+"LITH_BIP_NAME_Upgrades" = "Upgrades";
+"LITH_BIP_NAME_Locations" = "Locations";
+"LITH_BIP_NAME_Companies" = "Companies";
+"LITH_BIP_NAME_Mail" = "Mail";
+
+"LITH_BIP_HELP_Search" = "Text search all categories.";
+"LITH_BIP_HELP_Weapons" = "Weapons and weapon upgrades.";
+"LITH_BIP_HELP_Adversaries" = "Enemies and bosses.";
+"LITH_BIP_HELP_Items" = "Armors and other loot.";
+"LITH_BIP_HELP_Yourself" = "Your attributes, abilities and history.";
+"LITH_BIP_HELP_Upgrades" = "Body upgrades.";
+"LITH_BIP_HELP_Locations" = "Places of interest around the galaxy.";
+"LITH_BIP_HELP_Companies" = "Important companies, historic and current.";
+"LITH_BIP_HELP_Mail" = "Received mail.";
+
+// Statistics ----------------------------------------------------------------|
+"LITH_STAT_ScoreMul" = "Score Multiplier";
+"LITH_STAT_Weapons" = "Weapons Found";
+"LITH_STAT_HealthUsed" = "Health Used";
+"LITH_STAT_HealthSum" = "Health Sum";
+"LITH_STAT_ScoreUsed" = "Score Used";
+"LITH_STAT_ScoreSum" = "Score Sum";
+"LITH_STAT_Secrets" = "Secrets Found";
+"LITH_STAT_Units" = "Units Travelled";
+"LITH_STAT_Upgrades" = "Upgrades Owned";
+"LITH_STAT_Items" = "Items Bought";
+"LITH_STAT_Mail" = "Mail Received";
+"LITH_STAT_Time" = "Seconds Elapsed";
+"LITH_STAT_Boom" = "Spurious Explosions";
+"LITH_STAT_Brouzouf" = "Brouzouf Gained";
+"LITH_STAT_TrueMail" = "Mail Truly Received";
 
 // Attributes ----------------------------------------------------------------|
 "LITH_ATTR_HELP_ACC" = "Weapon damage";

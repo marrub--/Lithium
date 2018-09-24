@@ -77,10 +77,10 @@ static upgradeinfo_t UpgrInfoBase[UPGR_BASE_MAX] = {
 static upgradeinfo_t UpgrInfoEx[UPGR_EXTRA_NUM];
 
 static __str const UpgrCateg[UC_MAX] = {
-   [UC_Body] = "\CnBody",
-   [UC_Weap] = "\CaWeapon",
-   [UC_Extr] = "\CfExtra",
-   [UC_Down] = "\CtDowngrade"
+   [UC_Body] = "LITH_CAT_BODY",
+   [UC_Weap] = "LITH_CAT_WEAP",
+   [UC_Extr] = "LITH_CAT_EXTR",
+   [UC_Down] = "LITH_CAT_DOWN"
 };
 
 static upgradeinfo_t *UpgrInfo;
@@ -409,7 +409,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
 
-      PrintTextFmt("Filter: %S", UpgrCateg[filter]);
+      PrintTextFmt("Filter: %S", L(UpgrCateg[filter]));
    }
    else
       PrintTextStr("Filter: \CjAll");
@@ -429,7 +429,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       {
          curcategory = upgr->info->category;
          y += guipre.btnlist.h;
-         PrintTextStr(UpgrCateg[curcategory]);
+         PrintTextStr(L(UpgrCateg[curcategory]));
          PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
       }
 
@@ -540,18 +540,18 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    }
 
    if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(p->getCost(&upgr->info->shopdef)), mark);
-   else                 cost = "Free";
+   else                 cost = L("LITH_FREE");
 
    PrintTextStr(cost);
    PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
 
    // Category
-   PrintTextStr(UpgrCateg[upgr->info->category]);
+   PrintTextStr(L(UpgrCateg[upgr->info->category]));
    PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
 
    // Effect
    ifauto(__str, effect, LanguageNull("LITH_UPGRADE_EFFEC_%S", upgr->info->name))
-      PrintTextFmt("Effect: %S", effect);
+      PrintTextFmt("%S %S", L("LITH_EFFECT"), effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
    PrintText("CBIFONT",

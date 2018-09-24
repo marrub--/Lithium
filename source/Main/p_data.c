@@ -417,7 +417,7 @@ void Lith_ResetPlayer(struct player *p)
          p->logH("> strnull is \"%S\"", strnull);
          PrintDmonAllocSize(p);
       } else {
-         p->logH("> Press \"%jS\" to open the menu.", "lith_k_opencbi");
+         p->logH(L("LITH_LOG_StartGame"), "lith_k_opencbi");
       }
 
       p->deliverMail("Intro");

@@ -145,10 +145,10 @@ __str Lith_CanonTime(int type)
       return StrParam(L("LITH_TIME_FMT_LONG"),
          hours % 24, minutes % 60, seconds % 60, days);
    case CANONTIME_SHORT:
-      return StrParam("%0.2i:%0.2i %i-7-49",
+      return StrParam(L("LITH_TIME_FMT_SHORT"),
          hours % 24, minutes % 60, days);
    case CANONTIME_DATE:
-      return StrParam("%i-7-1649", days);
+      return StrParam(L("LITH_TIME_FMT_DATE"), days);
    }
    return "invalid";
 }

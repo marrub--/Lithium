@@ -104,3 +104,6 @@
 > \cgDetected high amounts of demonic energy in area.
 
 == LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan
+
+## Misc ----------------------------------------------------------------------|
+== LITH_LOG_StartGame | > Press "%jS" to open the menu.

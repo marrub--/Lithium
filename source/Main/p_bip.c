@@ -261,10 +261,10 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    __str name = LanguageNull("LITH_MAIL_NAME_%S", title);
    __str body = Language    ("LITH_MAIL_BODY_%S", title);
 
-   if(!send) send = "<internal>";
+   if(!send) send = L("LITH_MAIL_INTERNAL");
 
    page->name  = date ? date : world.canontimeshort;
-   page->title = name ? name : "<title omitted>";
+   page->title = name ? name : L("LITH_MAIL_NOTITLE");
    page->body  = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
@@ -365,16 +365,10 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 
       bip->lastcategory = BIPC_MAIN;
 
-      static __str const lines[] = {
-         "Text search all categories.",
-         "Weapons and weapon upgrades.",
-         "Enemies and bosses.",
-         "Armors and other loot.",
-         "Your attributes, abilities and history.",
-         "Body upgrades.",
-         "Places of interest around the galaxy.",
-         "Important companies, historic and current.",
-         "Received mail."
+      __str const lines[] = {
+         L("LITH_BIP_HELP_Search"),
+#define LITH_X(name, capt) L("LITH_BIP_HELP_" capt),
+#include "lith_bip.h"
       };
 
       for(int i = 0; i < countof(lines); i++)
@@ -383,11 +377,11 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          PrintTextA("CBIFONT", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
-      if(Lith_GUI_Button(g, "Search", 45, 85 + n, Pre(btnbipmain)))
+      if(Lith_GUI_Button(g, L("LITH_BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
          bip->curcategory = BIPC_SEARCH;
       n += 10;
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, capt, 45, 85 + n, Pre(btnbipmain))) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, L("LITH_BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \

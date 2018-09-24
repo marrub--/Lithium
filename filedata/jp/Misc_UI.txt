@@ -1,10 +1,23 @@
 ## UI ------------------------------------------------------------------------|
 == LITH_COST       | かかくは
-== LITH_CATEGORY   | しゅり
+== LITH_EFFECT     | 効果は
+== LITH_FREE       | 無料
+== LITH_CATEGORY   | 種類
 == LITH_SCOREMULT  | スコア乗数
 == LITH_BUY        | 買う
-== LITH_DEACTIVATE | 非ｱｸﾃｨﾌﾞ化
-== LITH_ACTIVATE   | ｱｸﾃｨﾌﾞ化
+== LITH_DEACTIVATE | 非アクティブ化
+== LITH_ACTIVATE   | アクティブ化
+== LITH_EDIT       | 編集
+== LITH_CLEAR      | クリア
+== LITH_EMPTY      | 空
+== LITH_NOTE_FMT   | \cm%iつのノート
+
+== LITH_CAT_BODY | \cn体
+== LITH_CAT_WEAP | \ca武器
+== LITH_CAT_EXTR | \cfおまけ
+== LITH_CAT_DOWN | \ct格下げ
+
+== LITH_GUI_TEXTBOX | ここにカーソルを置いて入力する。
 
 == LITH_TAB_ARSENAL_Stan | ぶきぐら
 == LITH_TAB_ARSENAL_Jem  | 指令
@@ -38,14 +51,61 @@
 == LITH_CBI_ArmorInter | よろいインタフェース
 == LITH_CBI_RDistInter | 現実変形インタフェース
 
+== LITH_CBI_Slot1Spell | \ci刃スペルドライバ
+== LITH_CBI_Slot2Spell | \ciデレアースペルドライバ
+== LITH_CBI_Slot3Spell | \ciフューアスペルドライバ
+== LITH_CBI_Slot4Spell | \ciロムイェットヤスペルドライバ
+== LITH_CBI_Slot5Spell | \ciハルギョンスペルドライバ
+== LITH_CBI_Slot6Spell | \ciほしゅだんまスペルドライバ
+== LITH_CBI_Slot7Spell | \cgセルス・デ・ラ・モルテスペルドライバ
+
 == LITH_CBI_CPU1 | ＯＦＭＤスペックノデア５４１ベーシックＣＰＵ
 == LITH_CBI_CPU2 | ＫＳＫＫスペックＺ６８０８高級ＣＰＵ
 == LITH_CBI_CPU3 | ＫＳＫＫスペックＢＣ０２６５超高級ＣＰＵ
+== LITH_CBI_CPU4 | ＡＯＦ５９００００１ Ｒｅｖ７ ＣＰＵ
+
+## BIP -----------------------------------------------------------------------|
+== LITH_BIP_NAME_Search      | 調べる
+== LITH_BIP_NAME_Weapons     | 武器
+== LITH_BIP_NAME_Adversaries | 敵
+== LITH_BIP_NAME_Items       | アイテム
+== LITH_BIP_NAME_Yourself    | 自分
+== LITH_BIP_NAME_Upgrades    | アップグレード
+== LITH_BIP_NAME_Locations   | 場所
+== LITH_BIP_NAME_Companies   | 会社
+== LITH_BIP_NAME_Mail        | メール
+
+== LITH_BIP_HELP_Search      | 全種類をテキスト検索する。
+== LITH_BIP_HELP_Weapons     | 武器と武器のアップグレード。
+== LITH_BIP_HELP_Adversaries | 敵とボス。
+== LITH_BIP_HELP_Items       | よろいや掘り出し物など。
+== LITH_BIP_HELP_Yourself    | 自分の属性、能力、歴史。
+== LITH_BIP_HELP_Upgrades    | 体のアップグレード。
+== LITH_BIP_HELP_Locations   | 銀河系の周りから興味がある場所。
+== LITH_BIP_HELP_Companies   | 重要な会社、歴史的かつ現在の。
+== LITH_BIP_HELP_Mail        | 受信したメール。
+
+## Statistics ----------------------------------------------------------------|
+== LITH_STAT_ScoreMul   | スコア乗数
+== LITH_STAT_Weapons    | 手に入れた武器の量
+== LITH_STAT_HealthUsed | 捨てたＨＰの量
+== LITH_STAT_HealthSum  | ＨＰ合計
+== LITH_STAT_ScoreUsed  | 費やしたスコアの量
+== LITH_STAT_ScoreSum   | スコア合計
+== LITH_STAT_Secrets    | 見つかった秘密の場所の量
+== LITH_STAT_Units      | ユニット移動したの量
+== LITH_STAT_Upgrades   | 飼ったアップグレードの量
+== LITH_STAT_Items      | 買ったアイテムの量
+== LITH_STAT_Mail       | 受信したメールの量
+== LITH_STAT_Time       | 経過秒数
+== LITH_STAT_Boom       | 急に爆発の量
+== LITH_STAT_Brouzouf   | 得たｂｒｏｕｚｏｕｆの量
+== LITH_STAT_TrueMail   | 実に受信したメールの量
 
 ## Attributes ----------------------------------------------------------------|
 == LITH_ATTR_HELP_ACC | 攻撃力
 == LITH_ATTR_HELP_DEF | 防御力
-== LITH_ATTR_HELP_STR | 体力最大
+== LITH_ATTR_HELP_STR | ＨＰ最大
 == LITH_ATTR_HELP_VIT | ＨＰアイテム効率
 == LITH_ATTR_HELP_STM | ＨＰ再生最大
 == LITH_ATTR_HELP_LUK | スコアの運

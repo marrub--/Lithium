@@ -10,6 +10,8 @@
 
 ## Template ------------------------------------------------------------------|
 ++ LITH_MAIL_TEMPLATE | Mail_Template.txt
+== LITH_MAIL_INTERNAL | <internal>
+== LITH_MAIL_NOTITLE  | <title omitted>
 
 ## All Classes ---------------------------------------------------------------|
 ++ LITH_MAIL_BODY_JamesDefeated | Mail/Phantom_James.txt

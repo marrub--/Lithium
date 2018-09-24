@@ -93,6 +93,9 @@
 
 "LITH_LOG_BossWarnMod" = "$LITH_LOG_BossWarnStan";
 
+// Misc ----------------------------------------------------------------------|
+"LITH_LOG_StartGame" = "> \"%jS\"を押してメニューを開く";
+
 "LITH_PICKUP_SELL_ORDER" = "1";
 "LITH_PICKUP_SELL" = "> %lli\cnscr\c-で%Sを売った。";
 
