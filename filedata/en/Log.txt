@@ -105,3 +105,7 @@ You're having fun with this.
 ## Misc ----------------------------------------------------------------------|
 == LITH_LOG_StartGame | Press "%jS" to open the menu.
 == LITH_LOG_MailRecv  | Mail received from <\cj%S\c->.
+
+== LITH_LOG_SellOrder | 0
+== LITH_LOG_Sell | Sold the %S for %lli\cnscr\c-.
+== LITH_LOG_CBI  | Installed %S.

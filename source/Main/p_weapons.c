@@ -57,9 +57,9 @@ static void Lith_PickupScore(struct player *p, int parm)
    GiveWeaponItem(parm, info->slot);
    score = p->giveScore(score);
 
-   __str msg = L("LITH_PICKUP_SELL");
+   __str msg = L("LITH_LOG_Sell");
 
-   if(strtoi_str(L("LITH_PICKUP_SELL_ORDER"), null, 10) == 0)
+   if(strtoi_str(L("LITH_LOG_SellOrder"), null, 10) == 0)
       p->log(1, msg, Language("LITH_INFO_SHORT_%S", info->name), score);
    else
       p->log(1, msg, score, Language("LITH_INFO_SHORT_%S", info->name));

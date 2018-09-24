@@ -64,7 +64,7 @@ done
 -- Misc -----------------------------------------------------------------------
 in file language.log.*.txt
    parse file: Log.txt
-   parse file: Log_Pickups.txt
+   parse file: Log_Random.txt
 
    comment: EOF
 done
