@@ -15,7 +15,7 @@
 == LITH_PK_UNCERTAIN_007 | Yes. No. Yes?
 == LITH_PK_UNCERTAIN_008 | Yes, no, maybe. I don't know.
 
-== LITH_PK_GET_NUM | 70
+== LITH_PK_GET_NUM | 80
 == LITH_PK_GET_000 | You got the %S!
 == LITH_PK_GET_001 | Oh yes, the %S.
 == LITH_PK_GET_002 | The %S has been acquired.
@@ -123,6 +123,17 @@ the price, you goddamn idiot. I will shit fury all over you
 and you will drown in it. You're fucking dead, kiddo.
 == LITH_PK_GET_069 | A weapon to surpass Metal Gear, The %S.
 == LITH_PK_GET_070 | Appropriated the %S.
+== LITH_PK_GET_071 | Ooh, the %S.
+== LITH_PK_GET_072 | THAT %S BETTER NOT BOUNCE OR YOU'RE A DEAD MOTHERFUCKER
+== LITH_PK_GET_073 | Gluten-free %S for all your daily needs.
+== LITH_PK_GET_074 | You forcefully draw in the %S.
+== LITH_PK_GET_075 | They don't think it be %S but it do.
+== LITH_PK_GET_076 | The %S wrestled with your other items and won. It is now one of us.
+== LITH_PK_GET_077_FLAGS | 2
+== LITH_PK_GET_077 | hellote it is i durnadle and this is the 77th pickup messag you have gotten the %S and it is terrible becaus i did not make it please get rid of it
+== LITH_PK_GET_078 | BEES
+== LITH_PK_GET_079 | WELCOME TO THE %S ZONE
+== LITH_PK_GET_080 | YOU WA %S
 
 ## Random Weapon Names -------------------------------------------------------|
 == LITH_PK_weapon_unknown_NUM | 2
