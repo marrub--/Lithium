@@ -50,7 +50,10 @@ override void UiTick()
 {
    // because we override finales in the MAPINFO, this should only trigger
    // at the very end of the game. hopefully.
-   if(gamestate == GS_FINALE) CallACS("Lith_Finale");
+   // EDIT: it didn't
+   // TODO: check if next map is none for endings
+   if(gamestate == GS_FINALE)
+      CallACS("Lith_Finale");
 
    if(m_eseq == ESEQ_HALT && CVar.FindCVar('__lith_end').getString() != "")
    {

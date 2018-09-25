@@ -15,7 +15,7 @@
 == LITH_PK_UNCERTAIN_007 | Yes. No. Yes?
 == LITH_PK_UNCERTAIN_008 | Yes, no, maybe. I don't know.
 
-== LITH_PK_GET_NUM | 80
+== LITH_PK_GET_NUM | 90
 == LITH_PK_GET_000 | You got the %S!
 == LITH_PK_GET_001 | Oh yes, the %S.
 == LITH_PK_GET_002 | The %S has been acquired.
@@ -134,6 +134,18 @@ and you will drown in it. You're fucking dead, kiddo.
 == LITH_PK_GET_078 | BEES
 == LITH_PK_GET_079 | WELCOME TO THE %S ZONE
 == LITH_PK_GET_080 | YOU WA %S
+== LITH_PK_GET_081 | GET EQUIPPED WITH %S
+== LITH_PK_GET_082 | This is my %S. There are many like it, but this one is mine.
+== LITH_PK_GET_083 | Whan that %S with his boulette shoten, the droghte of blood hath perced to the rooten.
+== LITH_PK_GET_084 | ERROR: %S IS DEAD.
+== LITH_PK_GET_085 | %S... It's time.
+== LITH_PK_GET_086 | Hey what's up gamers, log here with another %S
+== LITH_PK_GET_087 | big %S energy
+== LITH_PK_GET_088 | *%S solo*
+== LITH_PK_GET_089 | This %S... It was made for me.
+== LITH_PK_GET_090 | This %S isn't special, I'll pick up anything!
+== LITH_PK_GET_091 | Dr. %S, I'm UAC.
+== LITH_PK_GET_092 | Honk if you're an underpaid %S
 
 ## Random Weapon Names -------------------------------------------------------|
 == LITH_PK_weapon_unknown_NUM | 2

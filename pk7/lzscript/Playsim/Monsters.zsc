@@ -27,6 +27,7 @@ static void SpawnBoss(Actor a, string name, int phase)
    int arg3 = a.args[3];
    int arg4 = a.args[4];
 
+   a.clearcounters();
    a.destroy();
 
    let b = Lith_Phantom(Actor.Spawn(name, pos));
