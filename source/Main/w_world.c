@@ -604,7 +604,7 @@ script ext("ACS")
 void Lith_Finale(void)
 {
    HERMES("SetEnding", "Normal");
-   ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
+   ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 // Scripts -------------------------------------------------------------------|
