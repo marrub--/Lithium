@@ -134,22 +134,31 @@ void Lith_AddAngleScript(int x, int y)
 //
 __str Lith_CanonTime(int type)
 {
-   int seconds = 53 + (world.ticks / 35);
-   int minutes = 30 + (seconds     / 60);
-   int hours   = 14 + (minutes     / 60);
-   int days    = 25 + (hours       / 24); // pls
+   int s = 53 + (world.ticks / 35);
+   int m = 30 + (s           / 60);
+   int h = 14 + (m           / 60);
+   int d = 25 + (h           / 24);
+   int M =  6 + (d           / 30);
+   int Y = 48 + (M           / 11);
+
+   s %= 60;
+   m %= 60;
+   h %= 24;
+
+   d = d % 31 + 1;
+   M = M % 12 + 1;
+   Y = Y      + 1;
 
    switch(type)
    {
    case CANONTIME_FULL:
-      return StrParam(L("LITH_TIME_FMT_LONG"),
-         hours % 24, minutes % 60, seconds % 60, days);
+      return StrParam(L("LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y);
    case CANONTIME_SHORT:
-      return StrParam(L("LITH_TIME_FMT_SHORT"),
-         hours % 24, minutes % 60, days);
+      return StrParam(L("LITH_TIME_FMT_SHORT"), h, m,    d, M, Y);
    case CANONTIME_DATE:
-      return StrParam(L("LITH_TIME_FMT_DATE"), days);
+      return StrParam(L("LITH_TIME_FMT_DATE"),           d, M, Y);
    }
+
    return "invalid";
 }
 
@@ -420,10 +429,20 @@ static void UpdateGame(void)
       if(ACS_GetCVarFixed("__lith_version") < n) \
          __with(ACS_SetCVarFixed("__lith_version", n);)
 
-   Update(15.1) ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0=>1.25
-   Update(15.2) ACS_SetCVar("lith_sv_difficulty", 10); // 1=>10
-   Update(16.0)
-      Lith_ForPlayer() p->setCVarK("lith_player_footstepvol", 0.2); // 1.0=>0.2
+   Update(Lith_v1_5_1)
+      ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0 => 1.25
+
+   Update(Lith_v1_5_2)
+      ACS_SetCVar("lith_sv_difficulty", 10); // 1 => 10
+
+   Update(Lith_v1_6_0)
+   {
+      Lith_ForPlayer()
+      {
+         p->setCVarK("lith_player_footstepvol", 0.2); // 1.0 => 0.2
+         p->setCVarI("lith_player_ammolog", true); // false => true
+      }
+   }
 
    #undef Update
 }
@@ -606,6 +625,29 @@ begin:
 
    LogDebug(log_dev, "LITH OPEN");
 
+   if(ACS_GetCVar("lith_sv_failtime") == 0)
+      for(;;)
+   {
+      Log("\n=======\n"
+          "The configuration for Lithium has been wiped, or you accidentally "
+          "set 'lith_sv_failtime' to 0 manually. If you did the latter, "
+          "please set it to something else. Otherwise, please follow these "
+          "instructions to fix your configuration:\n"
+          "\n"
+          "1. Navigate to your GZDoom folder.\n"
+          "2. Find the configuration settings file (if you have extensions "
+          "shown it will be the ini file in the folder) and open it.\n"
+          "3. Find the heading '[Doom.Player.Mod]' and delete any lines "
+          "starting with 'lith_' or '__lith_' under it.\n"
+          "4. Find the heading '[Doom.LocalServerInfo.Mod]' and delete any "
+          "lines starting with 'lith_' or '__lith_' under it.\n"
+          "5. Save the file and start GZDoom again. If the issue persists "
+          "try these steps again or delete your GZDoom configuration.\n"
+          "\n\n\n\n");
+      Log("Invalid settings detected. Please open the console (%jS or options menu) for more information.", "toggleconsole");
+      ACS_Delay(10);
+   }
+
    if(world.mapnum == 1911777)
    {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
@@ -655,7 +697,7 @@ begin:
          goto begin;
       }
 
-      if(world.ticks > 67 * 35 * 60 * 60 && !world.islithmap)
+      if(world.ticks > ACS_GetCVar("lith_sv_failtime") * 35 * 60 * 60 && !world.islithmap)
       {
          HERMES("SetEnding", "TimeOut");
          ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
@@ -735,4 +777,3 @@ static void Lith_WorldUnload(void)
 }
 
 // EOF
-

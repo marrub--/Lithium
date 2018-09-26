@@ -81,7 +81,7 @@ typedef struct worldinfo_s
    fixed64 scoremul;
    u64     ticks;
    int     game;
-   int     apiversion;
+   fixed   apiversion;
    int     soulsfreed;
 
    int fun;
