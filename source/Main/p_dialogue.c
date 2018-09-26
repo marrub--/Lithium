@@ -528,21 +528,10 @@ void Lith_RunDialogue(int num)
 //
 // Lith_RunTerminal
 //
-// Runs a numbered terminal.
-//
 script ext("ACS")
 void Lith_RunTerminal(int num)
 {
    Lith_RunDialogue(-num);
-}
-
-//
-// Lith_RunDialogueInt
-//
-scripti addr(24244) ext("ACS")
-void Lith_RunDialogueInt(int num)
-{
-   Lith_RunDialogue(num);
 }
 
 // EOF

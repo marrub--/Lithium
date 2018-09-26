@@ -26,7 +26,6 @@ actor Lith_MonsterSoul
    Speed 7
    
    Projectile
-   +FLOATBOB
    +SEEKERMISSILE
    +MTHRUSPECIES
    +THRUSPECIES

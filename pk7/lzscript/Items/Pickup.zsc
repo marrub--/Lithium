@@ -61,99 +61,98 @@ class Lith_UpgrGlow : Lith_ItemGlow
    }
 }
 
-class Lith_Pickup : CustomInventory
+class Lith_Pickup : CustomInventory;
+
+default
 {
-   default
+   Inventory.PickupMessage "";
+   Inventory.PickupSound "";
+   Lith_Pickup.Sprite "UNKNA";
+}
+
+private meta bool m_generic;
+
+private meta string m_sprGf;
+private meta string m_sprMf;
+private meta string m_sprCf;
+
+private int m_gla;
+private int m_glz;
+
+private Actor m_spr;
+
+private Lith_Sprite m_sprG;
+private Lith_Sprite m_sprM;
+private Lith_Sprite m_sprC;
+
+property Sprite:  m_sprGf;
+property SpriteM: m_sprMf;
+property SpriteC: m_sprCf;
+property Generic: m_generic;
+
+const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
+
+override void PostBeginPlay()
+{
+   if(m_sprGf) m_sprG.get(m_sprGf);
+   if(m_sprMf) m_sprM.get(m_sprMf);
+   if(m_sprCf) m_sprC.get(m_sprCf);
+
+   m_spr = Spawn("Lith_ItemSprite", pos);
+   m_spr.master = self;
+}
+
+override void Tick()
+{
+   Super.Tick();
+
+   if(!m_spr) return;
+
+   if(m_generic)
    {
-      Inventory.PickupMessage "";
-      Inventory.PickupSound "";
-      Lith_Pickup.Sprite "UNKNA";
+      Lith_SetSprite(m_sprG);
+      return;
    }
 
-   private meta bool m_generic;
+   if(!players[consoleplayer].camera)
+      return;
 
-   private meta string m_sprGf;
-   private meta string m_sprMf;
-   private meta string m_sprCf;
+   let p = players[consoleplayer].camera;
+        if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_sprM);
+   else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_sprC);
+   else                                 Lith_SetSprite(m_sprG);
+}
 
-   private int m_gla;
-   private int m_glz;
+void Lith_SetSprite(Lith_Sprite s)
+{
+   m_spr.sprite = s.spr;
+   m_spr.frame  = s.frm;
+}
 
-   private Actor m_spr;
+void Lith_ItemGlow(class<Actor> type)
+{
+   m_gla = (m_gla + 5) % 360;
+   m_glz = (m_glz + 2) % 360;
 
-   private Lith_Sprite m_sprG;
-   private Lith_Sprite m_sprM;
-   private Lith_Sprite m_sprC;
+   double sa = sin(m_gla);
+   double sz = sin(m_glz);
+   double ca = cos(m_gla);
 
-   property Sprite:  m_sprGf;
-   property SpriteM: m_sprMf;
-   property SpriteC: m_sprCf;
-   property Generic: m_generic;
-
-   const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
-
-   override void PostBeginPlay()
+   if(!lith_player_noitemfx)
    {
-      if(m_sprGf) m_sprG.get(m_sprGf);
-      if(m_sprMf) m_sprM.get(m_sprMf);
-      if(m_sprCf) m_sprC.get(m_sprCf);
-
-      m_spr = Spawn("Lith_ItemSprite", pos);
-      m_spr.master = self;
+      A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sz * 9);
+      A_SpawnItemEx(type, 0, sa * 32, 24 + ca * 32);
+      A_SpawnItemEx(type, ca * 32, sa * 32, 24 + sa * 32);
+      A_SpawnItemEx(type, ca * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
+      A_SpawnItemEx(type, sa * 32, 0, 24 + ca * 32);
+      A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sa * 32);
+      A_SpawnItemEx(type, (1 - sa) * 32 - 32, ca * 32, 24 + sa * 32);
    }
+}
 
-   override void Tick()
-   {
-      Super.Tick();
-
-      if(!m_spr) return;
-
-      if(m_generic)
-      {
-         Lith_SetSprite(m_sprG);
-         return;
-      }
-
-      if(!players[consoleplayer].camera)
-         return;
-
-      let p = players[consoleplayer].camera;
-           if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_sprM);
-      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_sprC);
-      else                                 Lith_SetSprite(m_sprG);
-   }
-
-   void Lith_SetSprite(Lith_Sprite s)
-   {
-      m_spr.sprite = s.spr;
-      m_spr.frame  = s.frm;
-   }
-
-   void Lith_ItemGlow(class<Actor> type)
-   {
-      m_gla = (m_gla + 5) % 360;
-      m_glz = (m_glz + 2) % 360;
-
-      double sa = sin(m_gla);
-      double sz = sin(m_glz);
-      double ca = cos(m_gla);
-
-      if(!lith_player_noitemfx)
-      {
-         A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sz * 9);
-         A_SpawnItemEx(type, 0, sa * 32, 24 + ca * 32);
-         A_SpawnItemEx(type, ca * 32, sa * 32, 24 + sa * 32);
-         A_SpawnItemEx(type, ca * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
-         A_SpawnItemEx(type, sa * 32, 0, 24 + ca * 32);
-         A_SpawnItemEx(type, sa * 32, ca * 32, 24 + sa * 32);
-         A_SpawnItemEx(type, (1 - sa) * 32 - 32, ca * 32, 24 + sa * 32);
-      }
-   }
-
-   action void Lith_A_ItemGlow(class<Actor> type)
-   {
-      invoker.Lith_ItemGlow(type);
-   }
+action void Lith_A_ItemGlow(class<Actor> type)
+{
+   invoker.Lith_ItemGlow(type);
 }
 
 // EOF

@@ -9,6 +9,8 @@ class Lith_DroppedMagazine : Actor
       Friction 0.7;
       Mass 140;
       Speed 0;
+      Radius 3;
+      Height 3;
 
       +MISSILE // damn it, zdoom
       +THRUACTORS

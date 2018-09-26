@@ -1,4 +1,22 @@
-actor Lith_BoughtItem : CustomInventory
+actor Lith_ExtraUpgradeSprite : Lith_AnimItemSprite
+{
+   Lith_AnimItemSprite.Phases 10
+   states
+   {
+   SetSpr:
+      IOBJ A 0 A_ChangeFlag("BRIGHT", true)
+      IOBJ AAA 0 Lith_A_JumpPhase
+      IOBJ B 0 A_ChangeFlag("BRIGHT", false)
+      IOBJ BB 0 Lith_A_JumpPhase
+      IOBJ B 0 A_ChangeFlag("BRIGHT", true)
+      IOBJ BBB 0 Lith_A_JumpPhase
+      IOBJ B 0 A_ChangeFlag("BRIGHT", false)
+      IOBJ AA 0 Lith_A_JumpPhase
+      stop
+   }
+}
+
+actor Lith_BoughtItem : Lith_CustomInventory
 {
    Inventory.PickupMessage ""
    Inventory.PickupSound ""
@@ -16,28 +34,20 @@ actor Lith_BoughtItem : CustomInventory
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_SetSpecial(84, 24243, user_upgradeid)
+      TNT1 A 0 Lith_A_SetNamedScriptSpecial("Lith_BoughtItemPickup", user_upgradeid)
       TNT1 A random(1, 35)
       TNT1 A 0 A_SpawnItemEx("Lith_P67TeleFog")
-      UCAN A 0 A_JumpIf(user_upgradebody, "Upgrade")
-      WUPG A 0 A_JumpIf(user_upgradeweap, "Upgrade")
-      TNT1 A 0 A_JumpIf(user_upgradeextr, "UpgradeExtr")
-   Item:
-      BPAK B 5 bright
-      BPAK B 5
-      loop
-   Upgrade:
+      UCAN A 0 A_JumpIf(user_upgradebody, "Animate")
+      WUPG A 0 A_JumpIf(user_upgradeweap, "Animate")
+      BPAK B 0 A_JumpIf(user_upgradeextr, "Extra")
+   Animate:
       "####" "#" 5 bright
       "####" "#" 5
       loop
-   UpgradeExtr:
-      TNT1 A 0 A_ChangeFlag("FLOATBOB", true)
-   UpgradeExtrLoop:
-      IOBJ A 3 bright
-      IOBJ B 2
-      IOBJ B 3 bright
-      IOBJ A 2
-      loop
+   Extra:
+      TNT1 A 0 A_SpawnItemEx("Lith_ExtraUpgradeSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER)
+      TNT1 A 1
+      wait
    }
 
    states(item)

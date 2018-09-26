@@ -159,7 +159,7 @@ void Lith_PoisonFXTicker()
 //
 // Lith_BoughtItemPickup
 //
-scripti addr(24243) ext("ACS")
+script ext("ACS")
 void Lith_BoughtItemPickup(int id)
 {
    int const chan = CHAN_ITEM|CHAN_NOPAUSE;

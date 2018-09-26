@@ -14,7 +14,6 @@
 
 #define stkcall [[__call("StkCall")]]
 #define script [[__call("ScriptS")]]
-#define scripti [[__call("ScriptI")]]
 #define optargs(x) [[__optional_args(x)]]
 #define noinit [[__no_init]]
 #define anonymous [[__anonymous]]

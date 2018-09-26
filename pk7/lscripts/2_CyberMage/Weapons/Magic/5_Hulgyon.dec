@@ -164,7 +164,7 @@ actor Lith_Hulgyon : Lith_CWeapon
       TNT1 A 0 A_JumpIfInventory("Lith_MagicAmmo", 50, 1)
       goto Ready
       TNT1 A 0 A_TakeInventory("Lith_MagicAmmo", 50)
-      TNT1 A 10 A_FireCustomMissile("Lith_HulgyonProjectile")
+      TNT1 A 10 A_FireProjectile("Lith_HulgyonProjectile")
       TNT1 AAAAAAAAAA 1 A_SpawnItemEx("Lith_HulgyonSprite2", cos(pitch)*32, 0, (height-19)-(sin(pitch)*32),0,0,0,0,SXF_NOCHECKPOSITION)
       goto Ready
    }

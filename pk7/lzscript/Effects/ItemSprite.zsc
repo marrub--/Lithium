@@ -1,45 +1,73 @@
-class Lith_ItemSprite : Actor
+class Lith_AnimItemSprite : Lith_ItemSprite
 {
    default
    {
-      +NOINTERACTION;
-      +NOTIMEFREEZE;
+      +BRIGHT;
    }
 
-   vector3 m_origpos;
-   int m_fang;
-   int m_fzang;
+   property Phases: m_phases;
+
+   meta int m_phases;
+   int m_iter, m_phase;
+
+   action state Lith_A_JumpPhase()
+      {return invoker.m_phase == invoker.m_iter++ ? ResolveState("Super::SpawnLoop") : null;}
 
    states
    {
    Spawn:
-      #### # 0;
-      #### # 0 {
-         m_fang  = random(0, 359);
-         m_fzang = random(0, 359);
-         return ResolveState("SpawnLoop");
-      }
+      TNT1 A 0 {m_phase = random(0, m_phases - 1);}
+      goto Super::Spawn;
    SpawnLoop:
-      #### # 0 {
-         if(!master || !master.bSPECIAL)
-            return ResolveState("Done");
-         else
-            return state(null);
+      TNT1 A 0 {
+         m_phase = (m_phase + 1) % m_phases;
+         m_iter = 0;
+         return ResolveState("SetSpr");
       }
-      #### # 0 {
-         m_fang  = (m_fang  + 2) % 360;
-         m_fzang = (m_fzang + 3) % 360;
-         m_origpos = pos;
-      }
-      #### # 1 bright A_Warp(AAPTR_MASTER, cos(m_fang) * 4.0, sin(m_fang) * 4.0, 16.0 + (sin(m_fzang) * 12.0), 0.0, WARPF_NOCHECKPOSITION);
-      #### # 0 {
-         A_Warp(AAPTR_MASTER, m_origpos.x, m_origpos.y, m_origpos.z, 0, WARPF_ABSOLUTEPOSITION);
-         return ResolveState("SpawnLoop");
-      }
-   Done:
-      TNT1 A 0;
-      stop;
    }
+}
+
+class Lith_ItemSprite : Actor;
+
+default
+{
+   +NOINTERACTION;
+   +NOTIMEFREEZE;
+}
+
+vector3 m_origpos;
+int m_fang;
+int m_fzang;
+
+states
+{
+Spawn:
+   #### # 0;
+   #### # 0 {
+      m_fang  = random(0, 359);
+      m_fzang = random(0, 359);
+      return ResolveState("SpawnLoop");
+   }
+SpawnLoop:
+   #### # 0 {
+      if(!master || !master.bSPECIAL)
+         return ResolveState("Done");
+      else
+         return state(null);
+   }
+   #### # 0 {
+      m_fang  = (m_fang  + 2) % 360;
+      m_fzang = (m_fzang + 3) % 360;
+      m_origpos = pos;
+   }
+   #### # 1 bright A_Warp(AAPTR_MASTER, cos(m_fang) * 4.0, sin(m_fang) * 4.0, 16.0 + (sin(m_fzang) * 12.0), 0.0, WARPF_NOCHECKPOSITION);
+   #### # 0 {
+      A_Warp(AAPTR_MASTER, m_origpos.x, m_origpos.y, m_origpos.z, 0, WARPF_ABSOLUTEPOSITION);
+      return ResolveState("SpawnLoop");
+   }
+Done:
+   TNT1 A 0;
+   stop;
 }
 
 // EOF

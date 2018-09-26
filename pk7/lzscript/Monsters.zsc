@@ -1,6 +1,9 @@
 #include "lzscript/Monsters/Phantom.zsc"
 #include "lzscript/Monsters/Isaac.zsc"
 
+#include "lzscript/Monsters/TitleMarine.zsc"
+#include "lzscript/Monsters/MapMarine.zsc"
+
 #include "lzscript/Monsters/Base.zsc"
 
 // Tier 1

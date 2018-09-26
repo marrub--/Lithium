@@ -30,7 +30,7 @@ class Lith_XH_Cyberdemon : Lith_Cyberdemon
    void Lith_A_XH_CyberdemonShoot()
    {
       A_PlaySound("enemies/cyberdemon/fire", CHAN_6);
-      A_CustomMissile("Lith_CyberRocket", 40, -13, frandom(-15, 15), CMF_OFFSETPITCH, frandom(-5, 5));
+      A_SpawnProjectile("Lith_CyberRocket", 40, -13, frandom(-15, 15), CMF_OFFSETPITCH|CMF_BADPITCH, frandom(-5, 5));
    }
 
    states
@@ -97,7 +97,7 @@ default
 void Lith_A_CyberdemonShoot()
 {
    A_PlaySound("enemies/cyberdemon/fire", CHAN_6);
-   A_CustomMissile("Lith_CyberRocket", 40, -13);
+   A_SpawnProjectile("Lith_CyberRocket", 40, -13, 0, CMF_BADPITCH);
 }
 
 states

@@ -118,10 +118,10 @@ actor Lith_SwordBlitter
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 A_CustomMissile("Lith_SwordHitter",  16,   8, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 1 A_CustomMissile("Lith_SwordHipper",   8,   0, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 0 A_CustomMissile("Lith_SwordHitter",  -8,  -8, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
-      TNT1 A 1 A_CustomMissile("Lith_SwordHipper", -16, -16, 0, CMF_AIMDIRECTION | CMF_TRACKOWNER)
+      TNT1 A 0 A_SpawnProjectile("Lith_SwordHitter",  16,   8, 0, CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_BADPITCH)
+      TNT1 A 1 A_SpawnProjectile("Lith_SwordHipper",   8,   0, 0, CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_BADPITCH)
+      TNT1 A 0 A_SpawnProjectile("Lith_SwordHitter",  -8,  -8, 0, CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_BADPITCH)
+      TNT1 A 1 A_SpawnProjectile("Lith_SwordHipper", -16, -16, 0, CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_BADPITCH)
       stop
    }
 }

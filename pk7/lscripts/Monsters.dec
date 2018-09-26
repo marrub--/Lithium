@@ -16,6 +16,5 @@
 #include "lscripts/Monsters/Isaac.dec"
 
 #include "lscripts/Monsters/TitleMap.dec"
-#include "lscripts/Monsters/MapMarine.dec"
 
 // EOF

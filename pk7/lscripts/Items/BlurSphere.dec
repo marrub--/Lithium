@@ -8,14 +8,15 @@ actor Lith_BarrierFX
 {
    RenderStyle "Add"
    Scale 0.3
-   
+
    +NOTIMEFREEZE
    +NOINTERACTION
-   
+
    states
    {
    Spawn:
-      LBAR A 10 nodelay A_PlaySound("player/barrier", CHAN_NOPAUSE|CHAN_LISTENERZ)
+      TNT1 A 0
+      LBAR A 10 A_PlaySound("player/barrier", CHAN_NOPAUSE|CHAN_LISTENERZ)
    SpawnLoop:
       LBAR A 0 A_SetScale(scalex * 0.86)
       LBAR A 1 A_FadeOut(0.25)
@@ -51,25 +52,32 @@ actor Lith_BarrierSpell : Lith_CustomFunction
    }
 }
 
+actor Lith_BlurSphereSprite : Lith_AnimItemSprite
+{
+   Lith_AnimItemSprite.Phases 36
+   +VISIBILITYPULSE
+   states {SetSpr: PINS AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 0 Lith_A_JumpPhase stop}
+}
+
 actor Lith_BlurSphere : Lith_CustomInventory
 {
    //$Category "Powerups"
-   
+
    Tag "Fragma"
    Inventory.PickupSound "player/pickup/barrier"
-   
-   +FLOATBOB
+
    +COUNTITEM
-   +VISIBILITYPULSE
    +INVENTORY.BIGPOWERUP
    +INVENTORY.FANCYPICKUPSOUND
    +INVENTORY.ALWAYSPICKUP
-   
+
    states
    {
    Spawn:
-      PINS ABCD 6 bright
-      loop
+      TNT1 A 0
+      TNT1 A 0 A_SpawnItemEx("Lith_BlurSphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER)
+      TNT1 A 1
+      wait
    Pickup:
       TNT1 A 0 Lith_A_Log(msg_both, 5, "BlurSphere")
       TNT1 A 0 ACS_NamedExecuteAlways("Lith_Barrier")
