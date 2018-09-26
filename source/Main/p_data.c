@@ -394,6 +394,8 @@ void Lith_ResetPlayer(struct player *p)
 
    p->alpha = 1;
 
+   p->attr.lvupstr = strnull;
+
    //
    // Re-init data
 
