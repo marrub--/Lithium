@@ -29,5 +29,11 @@ void Lith_PlayerEnterUpgrades(struct player *p);
 
 upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr);
 
+// Extern Objects ------------------------------------------------------------|
+
+#ifndef EXTERNAL_CODE
+extern upgradeinfo_t const upgrinfobase[UPGR_BASE_MAX];
+#endif
+
 #endif
 

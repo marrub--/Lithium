@@ -45,15 +45,9 @@ DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
 all: dec text fs bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
-tools/bin:
-	@mkdir tools/bin
-
 font: tools/ttfuck/ttfuck tools/getcmap.rb
 	@rm pk7/lgfx/Font/Jp12/*.png
 	@tools/ttfuck/ttfuck tools/BugMaruPGothic.ttc 12 "$$(tools/getcmap.rb)" pk7/lfiles/Font_Jp12.txt pk7/lgfx/Font/Jp12
-
-source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: tools/wepc.rb source/Weapons.txt
-	@tools/wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
 
 dec: tools/decompat.rb $(DECOMPAT_INPUTS)
 	@tools/decompat.rb $(DECOMPAT_INPUTS)
@@ -66,6 +60,13 @@ fs: tools/hashfs.rb
 
 clean:
 	@rm -f $(MAIN_OUTPUTS) $(LIB_OUTPUTS)
+
+## Generated C files
+source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: tools/wepc.rb source/Weapons.txt
+	@tools/wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
+
+source/Headers/lith_upgradenames.h source/Main/p_upgrinfo.c: tools/upgc.rb source/Upgrades.txt
+	@tools/upgc.rb source/Upgrades.txt,source/Headers/lith_upgradenames.h,source/Main/p_upgrinfo.c
 
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)

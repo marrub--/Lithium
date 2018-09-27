@@ -141,7 +141,7 @@ typedef struct upgradeinfo {
    int   group;
    u32   requires;
 
-   int id, key;
+   int key, id;
 
    upgr_fn_cb_t Activate;
    upgr_fn_cb_t Deactivate;

@@ -1,0 +1,71 @@
+Upgrades to be processed into C files. Colon denotes a category.
+Plus denotes an upgrade. Any other text is ignored by the parser.
+
+ Name        Info Page    [Cost]  Class [Pr] [.Score Mul] [Group] [(Req)]
+:Body
++HeadsUpDisp HeadsUpDisp          pM    1 -.05 HUD
++HeadsUpDis2 HeadsUpDisp          pC|gI 1 -.05 HUD
++JetBooster  JetBooster           pM      -.05
++ReflexWetw  ReflexWetw           gO    5 -.05
++Zoom        -                    gA
++VitalScan   VitalScanner         gA    2
++CyberLegs   CyberLegs    1220000 pM    4
++ReactArmor  Yh0          3500200 pM    20 (AI)
++ReactArmor2 Yh0          2990200 pM    10 (AI|RA)
++DefenseNuke DefenseNuke  580030  pM       (AI)
++Adrenaline  Adrenaline   1801000 pM    10
+
+Cyber-Mage
++Magic       Magic                pC
++SoulCleaver SoulCleaver  1100000 pC
++StealthSys  StealthSys   1800450 pC
+
+Dark Lord
++Subweapons  Subweapons           pD
+
+:Weap
+Outcasts
++AutoReload  AutoReload   950050  gO 2
+
+Marine
++AutoPistol  -            140940  pM   Pistol
++PlasPistol  -            340000  pM   Pistol   (WMD)
++GaussShotty ShotgunUpgr  1079430 pM 1 Shotgun  (WMD)
++PoisonShot  ShotgunUpg2  1010420 pM   Shotgun  (WMD)
++RifleModes  RifleUpgr    340100  pM
++LaserRCW    RifleUpg2    1008080 pM 1          (WMD)
++ChargeRPG   LauncherUpgr 1550000 pM   Launcher (WMD|WRD)
++HomingRPG   LauncherUpg2 2505010 pM 1 Launcher (WMD)
++PlasLaser   PlasmaUpgr   2250000 pM   Plasma   (WMD)
++PartBeam    PlasmaUpg2   2500000 pM 1 Plasma   (WMD|WRD)
++PunctCannon CannonUpgr   5100700 pM   BFG      (WMD)
++OmegaRail   CannonUpg2   5800100 pM 5 BFG      (WMD|WRD)
+
+Cyber-Mage
++Mateba_A   MatebaUpgr   614100  pC Pistol
++ShockRif_A ShockRifUpgr 1519590 pC Shotgun
++ShockRif_B ShockRifUpg2 1911590 pC Shotgun
++SPAS_A     SPASUpgr     2140400 pC SSG
++SPAS_B     SPASUpg2     1511100 pC SSG
++SMG_A      SMGUpgr      2055000 pC
++SMG_B      SMGUpg2      2888000 pC
++SMG_C      SMGUpg3      998900  pC
++IonRifle_A IonRifleUpgr 1977000 pC
++IonRifle_B IonRifleUpg2 2855050 pC
++CPlasma_A  CPlasmaUpgr  2230500 pC Plasma
++ShipGun_A  ShipGunUpgr  6988800 pC BFG
++ShipGun_B  ShipGunUpg2  7767700 pC BFG
+
+:Extr
++TorgueMode - 8000000    gA 8         (RDI)
++7777777    - 8235430    gA 7 .10     (RDI)
++lolsords   - 1000000    gA   .20     (RDI)
++Goldeneye  - 70000      gA   .07     (RDI)
++DarkCannon - 0x7FFFFFFF pM       BFG (WMD|WRD|RDI)
+
+:Down
++Implying   - gA .20
++UNCEUNCE   - gA .30
++InstaDeath - gA .50
+
+EOF
