@@ -4,10 +4,6 @@
 #include "lith_world.h"
 #include "lith_hudid.h"
 
-// Extern Objects ------------------------------------------------------------|
-
-extern payoutinfo_t payout;
-
 // Extern Functions ----------------------------------------------------------|
 
 //

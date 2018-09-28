@@ -1,18 +1,9 @@
-// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// Copyright © 2016-2018 Graham Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
 #include "lith_monster.h"
 #include "lith_version.h"
-
-#define InSecret \
-   (world.game == Game_Doom2 && (world.cluster == 9 || world.cluster == 10))
-
-#define InHell \
-   (world.game == Game_Doom2 && world.cluster >= 8)
-
-#define OnEarth \
-   (world.game == Game_Doom2 && world.cluster == 7)
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -26,11 +17,6 @@ worldinfo_t world = {.apiversion = Lith_APIVersion};
 payoutinfo_t payout;
 
 // Static Objects ------------------------------------------------------------|
-
-static bool  lmvar rain_chk;
-static fixed lmvar rain_px;
-static fixed lmvar rain_py;
-static int   lmvar rain_dist;
 
 static bool reopen;
 static bool dorain;
@@ -121,15 +107,6 @@ fixed Lith_AddAngle(int x, int y)
 }
 
 //
-// Lith_AddAngleScript
-//
-script addr("Lith_AddAngle")
-void Lith_AddAngleScript(int x, int y)
-{
-   Lith_AddAngle(x, y);
-}
-
-//
 // Lith_CanonTime
 //
 __str Lith_CanonTime(int type)
@@ -151,12 +128,9 @@ __str Lith_CanonTime(int type)
 
    switch(type)
    {
-   case CANONTIME_FULL:
-      return StrParam(L("LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y);
-   case CANONTIME_SHORT:
-      return StrParam(L("LITH_TIME_FMT_SHORT"), h, m,    d, M, Y);
-   case CANONTIME_DATE:
-      return StrParam(L("LITH_TIME_FMT_DATE"),           d, M, Y);
+   case CANONTIME_FULL:  return StrParam(L("LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y);
+   case CANONTIME_SHORT: return StrParam(L("LITH_TIME_FMT_SHORT"), h, m,    d, M, Y);
+   case CANONTIME_DATE:  return StrParam(L("LITH_TIME_FMT_DATE"),           d, M, Y);
    }
 
    return "invalid";
@@ -170,35 +144,15 @@ int Lith_UniqueID(int tid)
    int pn;
 
    // Negative values are for players.
-   if((pn = Lith_GetPlayerNumber(tid)) != -1)
-      return -(pn + 1);
+   if((pn = Lith_GetPlayerNumber(tid)) != -1) return -(pn + 1);
 
    // If we already have a unique identifier, return that.
    int id = Lith_CheckActorInventory(tid, "Lith_UniqueID");
 
    // Otherwise we have to give a new unique identifier.
-   if(id == 0)
-      Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
+   if(id == 0) Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
 
    return id;
-}
-
-//
-// Lith_EmitScore
-//
-script ext("ACS")
-void Lith_EmitScore(int amount)
-{
-   Lith_GiveAllScore(amount, false);
-}
-
-//
-// Lith_EmitEXP
-//
-script ext("ACS")
-void Lith_EmitEXP(int amount)
-{
-   Lith_GiveAllEXP(amount);
 }
 
 //
@@ -248,105 +202,7 @@ int LWData(int info)
    return 0;
 }
 
-//
-// Lith_RainDropSpawn
-//
-script ext("ACS")
-void Lith_RainDropSpawn()
-{
-   if(rain_chk)
-   {
-      int dist =
-         mag2i(ACS_GetActorX(0) - rain_px, ACS_GetActorY(0) - rain_py);
-      if(dist < rain_dist)
-         rain_dist = dist;
-   }
-}
-
 // Static Functions ----------------------------------------------------------|
-
-//
-// DoRain
-//
-script
-static void DoRain()
-{
-   if(ACS_PlayerCount() > 1)
-      return;
-
-   dorain = true;
-
-   struct player *p = &players[0];
-   p->setActivator();
-
-   ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
-   ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.001, true, ATTN_NONE);
-
-   fixed skydist, curskydist = 1;
-   for(;;)
-   {
-      if((rain_chk = !ACS_CheckActorCeilingTexture(0, "F_SKY1")))
-      {
-         rain_dist = 1024;
-         rain_px = p->x;
-         rain_py = p->y;
-      }
-      else
-         InvTake("Lith_SMGHeat", 1);
-
-      if((InHell || InSecret) && !world.islithmap)
-         HERMES("SpawnRain", "Lith_BloodRainDrop");
-      else
-         HERMES("SpawnRain", "Lith_RainDrop");
-
-      ACS_Delay(1);
-
-      if(rain_chk)
-      {
-         skydist = rain_dist / 1024.0;
-         skydist = minmax(skydist, 0, 1);
-      }
-      else
-         skydist = 0;
-
-      curskydist = lerpk(curskydist, skydist, 0.035);
-      ACS_SoundVolume(p->weathertid, CHAN_BODY,  1 - curskydist);
-      ACS_SoundVolume(p->weathertid, CHAN_VOICE, 1 - curskydist);
-   }
-}
-
-//
-// DoPayout
-//
-static void DoPayout(void)
-{
-   fixed64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
-
-   #define GenPay(name) \
-      if(payout.name##max) \
-      { \
-         payout.name##pct = (payout.name##num / (fixed64)payout.name##max) * 100; \
-         payout.name##scr = payout.name##pct * 600; \
-      }
-
-   GenPay(kill)
-   GenPay(item)
-
-   #undef GenPay
-
-   payout.total  = payout.killscr + payout.itemscr;
-   payout.total -= payout.tax = payout.total * taxpct;
-
-   Lith_ForPlayer()
-   {
-      script
-      extern void Lith_PlayerPayout(struct player *p);
-
-      Lith_PlayerPayout(p);
-   }
-
-   memset(&payout, 0, sizeof payout);
-}
 
 //
 // CheckEnemyCompat
@@ -524,6 +380,9 @@ static void MInit(void)
 //
 static void MSInit(void)
 {
+   script
+   extern void Lith_DoRain();
+
    LogDebug(log_dev, "MSINIT RUNNING");
 
    payout.killmax += world.mapkillmax;
@@ -532,8 +391,12 @@ static void MSInit(void)
    // Line 1888300 is used as a control line for mod features.
    // Check for if rain should be used.
    if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
-      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")))
-      DoRain();
+      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")) &&
+      ACS_PlayerCount() <= 1)
+   {
+      dorain = true;
+      Lith_DoRain();
+   }
 }
 
 //
@@ -568,6 +431,8 @@ static void WSInit(void)
 //
 static void WInit(void)
 {
+   extern void Lith_DoPayout(void);
+
    LogDebug(log_dev, "WINIT RUNNING");
 
    if(!ACS_GetCVar("lith_sv_nobosses"))
@@ -575,7 +440,7 @@ static void WInit(void)
 
    // Payout, which is not done on the first map.
    if(world.mapscleared != 0)
-      DoPayout();
+      Lith_DoPayout();
 
    // Cluster messages.
    #define Message(cmp, n, name) \

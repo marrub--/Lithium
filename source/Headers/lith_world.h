@@ -6,6 +6,15 @@
 
 #include "lith_wdata.h"
 
+#define InSecret \
+   (world.game == Game_Doom2 && (world.cluster == 9 || world.cluster == 10))
+
+#define InHell \
+   (world.game == Game_Doom2 && world.cluster >= 8)
+
+#define OnEarth \
+   (world.game == Game_Doom2 && world.cluster == 7)
+
 enum
 {
    skill_tourist,
@@ -119,6 +128,7 @@ typedef struct worldinfo_s
 #ifndef EXTERNAL_CODE
 extern bool lmvar mapinit;
 extern worldinfo_t world;
+extern payoutinfo_t payout;
 #else
 worldinfo_t *Lith_GetWorldExtern(void);
 #define world (*Lith_GetWorldExtern())

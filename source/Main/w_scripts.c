@@ -15,6 +15,33 @@ int Lith_Timer(void)
 }
 
 //
+// Lith_AddAngleScript
+//
+script addr("Lith_AddAngle")
+void Lith_AddAngleScript(int x, int y)
+{
+   Lith_AddAngle(x, y);
+}
+
+//
+// Lith_EmitScore
+//
+script ext("ACS")
+void Lith_EmitScore(int amount)
+{
+   Lith_GiveAllScore(amount, false);
+}
+
+//
+// Lith_EmitEXP
+//
+script ext("ACS")
+void Lith_EmitEXP(int amount)
+{
+   Lith_GiveAllEXP(amount);
+}
+
+//
 // Lith_GiveScoreScript
 //
 script ext("ACS") addr("Lith_GiveScore")
