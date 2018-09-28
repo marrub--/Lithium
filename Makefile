@@ -65,8 +65,8 @@ clean:
 source/Headers/lith_weapons.h source/Main/p_weaponinfo.c: tools/wepc.rb source/Weapons.txt
 	@tools/wepc.rb source/Weapons.txt,source/Headers/lith_weapons.h,source/Main/p_weaponinfo.c
 
-source/Headers/lith_upgradenames.h source/Main/p_upgrinfo.c: tools/upgc.rb source/Upgrades.txt
-	@tools/upgc.rb source/Upgrades.txt,source/Headers/lith_upgradenames.h,source/Main/p_upgrinfo.c
+source/Headers/lith_upgradenames.h source/Main/p_upgrinfo.c source/Headers/lith_upgradefuncs.h: tools/upgc.rb source/Upgrades.txt
+	@tools/upgc.rb source/Upgrades.txt,source/Headers/lith_upgradenames.h,source/Main/p_upgrinfo.c,source/Headers/lith_upgradefuncs.h
 
 ## .ir -> .bin
 $(LIB_BINARY): $(LIB_OUTPUTS)
