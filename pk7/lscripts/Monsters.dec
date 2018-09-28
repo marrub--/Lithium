@@ -1,19 +1,29 @@
 #include "lscripts/Monsters/System.dec"
-
-#include "lscripts/Monsters/Tier1.dec"
-#include "lscripts/Monsters/Tier2.dec"
-#include "lscripts/Monsters/Tier3.dec"
-#include "lscripts/Monsters/Tier4.dec"
-
-#include "lscripts/Monsters/XHTier1.dec"
-#include "lscripts/Monsters/XHTier2.dec"
-#include "lscripts/Monsters/XHTier3.dec"
-#include "lscripts/Monsters/XHTier4.dec"
-
 #include "lscripts/Monsters/Phantom.dec"
-#include "lscripts/Monsters/James.dec"
-#include "lscripts/Monsters/Makarov.dec"
-#include "lscripts/Monsters/Isaac.dec"
+
+#include "lscripts/Monsters/1_ChaingunGuy.dec"
+#include "lscripts/Monsters/1_Imp.dec"
+#include "lscripts/Monsters/1_ShotgunGuy.dec"
+
+#include "lscripts/Monsters/2_Demon.dec"
+#include "lscripts/Monsters/2_LostSoul.dec"
+#include "lscripts/Monsters/2_Spectre.dec"
+
+#include "lscripts/Monsters/3_Arachnotron.dec"
+#include "lscripts/Monsters/3_Baron.dec"
+#include "lscripts/Monsters/3_Cacodemon.dec"
+#include "lscripts/Monsters/3_Knight.dec"
+#include "lscripts/Monsters/3_Mancubus.dec"
+#include "lscripts/Monsters/3_Revenant.dec"
+
+#include "lscripts/Monsters/4_Archvile.dec"
+#include "lscripts/Monsters/4_PainElemental.dec"
+
+#include "lscripts/Monsters/6_James.dec"
+#include "lscripts/Monsters/6_Makarov.dec"
+#include "lscripts/Monsters/6_Isaac.dec"
+
+#include "lscripts/Monsters/ExtraHard.dec"
 
 #include "lscripts/Monsters/TitleMap.dec"
 

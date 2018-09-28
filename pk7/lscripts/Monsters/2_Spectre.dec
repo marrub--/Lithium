@@ -1,0 +1,13 @@
+actor Lith_Spectre : Lith_Demon replaces Spectre
+{
+   SeeSound ""
+   ActiveSound ""
+   RenderStyle "Fuzzy"
+   Alpha 0.5
+   Speed 11
+   Tag "$LITH_INFO_SHORT_Spectre"
+   
+   +SHADOW
+}
+
+// EOF

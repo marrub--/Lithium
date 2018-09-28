@@ -136,6 +136,10 @@
 
 *  BLLTR0 sprite
 
+                                * Ryan Cordell *
+
+*  XDeaths for the Cacodemon, Demon, Archvile, and Revenant
+
 *                                 * Seryder *
 
 *  Briefcase sprite (WUPGA0)

@@ -1,16 +1,14 @@
+#include "lzscript/Monsters/Base.zsc"
 #include "lzscript/Monsters/Phantom.zsc"
-#include "lzscript/Monsters/Isaac.zsc"
+
+#include "lzscript/Monsters/1_ZombieMan.zsc"
+
+#include "lzscript/Monsters/5_Cyberdemon.zsc"
+#include "lzscript/Monsters/5_SpiderMastermind.zsc"
+
+#include "lzscript/Monsters/6_Isaac.zsc"
 
 #include "lzscript/Monsters/TitleMarine.zsc"
 #include "lzscript/Monsters/MapMarine.zsc"
-
-#include "lzscript/Monsters/Base.zsc"
-
-// Tier 1
-#include "lzscript/Monsters/ZombieMan.zsc"
-
-// Tier 5
-#include "lzscript/Monsters/Cyberdemon.zsc"
-#include "lzscript/Monsters/SpiderMastermind.zsc"
 
 // EOF

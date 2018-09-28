@@ -1,5 +1,4 @@
 // Taken from Psychic with permission.
-
 class Lith_PuffSmoke : Actor
 {
    default
@@ -36,7 +35,6 @@ class Lith_BulletPuff : Actor replaces BulletPuff
       +NOGRAVITY
       +NOBLOCKMAP
       +FLOORCLIP
-      +NOEXTREMEDEATH
       +FORCEXYBILLBOARD
       +PUFFGETSOWNER
       +MTHRUSPECIES

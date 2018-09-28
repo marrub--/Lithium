@@ -1,0 +1,26 @@
+actor Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
+{
+   DamageType "Lith_Energy"
+   
+   states
+   {
+   Spawn:
+      APLS AB 5 bright
+      loop
+   }
+}
+
+actor Lith_Arachnotron : Arachnotron replaces Arachnotron
+{
+   DamageFactor "Lith_Energy", 0.6
+   Tag "$LITH_INFO_SHORT_Arachnotron"
+   
+   states
+   {
+   Death:
+      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Arachnotron)
+      goto Super::Death
+   }
+}
+
+// EOF

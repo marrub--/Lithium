@@ -1,18 +1,7 @@
-actor Lith_PainElemental : PainElemental replaces PainElemental
-{
-   Tag "$LITH_INFO_SHORT_PainElemental"
-   
-   states
-   {
-   Death:
-      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_PainElemental)
-      goto Super::Death
-   }
-}
-
 actor Lith_Archvile : Archvile replaces Archvile
 {
    Health 800
+   GibHealth 400
    PainChance 2
    Tag "$LITH_INFO_SHORT_Archvile"
    
@@ -34,8 +23,14 @@ actor Lith_Archvile : Archvile replaces Archvile
    Death:
       "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Archvile)
       goto Super::Death
+   XDeath:
+      VILX A 5
+      VILX B 5 A_XScream
+      VILX C 5 A_NoBlocking
+      VILX DEF 5
+      VILX G -1
+      stop
    }
 }
 
 // EOF
-
