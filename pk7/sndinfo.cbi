@@ -1,44 +1,44 @@
-player/cbi/win95 lsounds/Startup.flac // Windows 95 / Brian Eno
+player/cbi/win95 lsounds/GUI/Startup.flac // Windows 95 / Brian Eno
 
-player/cbi/open  lsounds/Player/CBI/Open.flac  // Halo 3
-player/cbi/close lsounds/Player/CBI/Close.flac // 〃
+player/cbi/open  lsounds/GUI/Open.flac  // Halo 3
+player/cbi/close lsounds/GUI/Close.flac // 〃
 
-player/cbi/buttoncurs  lsounds/Player/CBI/ButtonCursor.flac // Rosenkreuzstilette
-player/cbi/buttonpress lsounds/Player/CBI/ButtonPress.flac  // Doom 3
+player/cbi/buttoncurs  lsounds/GUI/ButtonCursor.flac // Rosenkreuzstilette
+player/cbi/buttonpress lsounds/GUI/ButtonPress.flac  // Doom 3
 
-player/cbi/slidertick lsounds/Player/CBI/SliderTick.flac // Phantasy Star Nova
+player/cbi/slidertick lsounds/GUI/SliderTick.flac // Phantasy Star Nova
 
-player/cbi/find     lsounds/Player/CBI/Find.flac     // Phantasy Star Nova
-player/cbi/finddone lsounds/Player/CBI/FindDone.flac // 〃
-player/cbi/findfail lsounds/Player/CBI/FindFail.flac // 〃
+player/cbi/find     lsounds/GUI/Find.flac     // Phantasy Star Nova
+player/cbi/finddone lsounds/GUI/FindDone.flac // 〃
+player/cbi/findfail lsounds/GUI/FindFail.flac // 〃
 
-player/cbi/invcur lsounds/Player/CBI/InvCur.flac // Phantasy Star Nova
-player/cbi/invmov lsounds/Player/CBI/InvMov.flac // 〃
+player/cbi/invcur lsounds/GUI/InvCur.flac // Phantasy Star Nova
+player/cbi/invmov lsounds/GUI/InvMov.flac // 〃
 
-player/cbi/key1 lsounds/Player/CBI/Key1.flac // ???
-player/cbi/key2 lsounds/Player/CBI/Key2.flac // 〃
-player/cbi/key3 lsounds/Player/CBI/Key3.flac // 〃
+player/cbi/key1 lsounds/GUI/Key1.flac // ???
+player/cbi/key2 lsounds/GUI/Key2.flac // 〃
+player/cbi/key3 lsounds/GUI/Key3.flac // 〃
 
-player/cbi/clickon  lsounds/Player/CBI/ClickOn.flac  // 3maze - Buttons and Switches
-player/cbi/clickoff lsounds/Player/CBI/ClickOff.flac // 〃
-player/cbi/clicklst lsounds/Player/CBI/ClickList.wav // Resident Evil 4
+player/cbi/clickon  lsounds/GUI/ClickOn.flac  // 3maze - Buttons and Switches
+player/cbi/clickoff lsounds/GUI/ClickOff.flac // 〃
+player/cbi/clicklst lsounds/GUI/ClickList.wav // Resident Evil 4
 
-player/cbi/auto/toggle  lsounds/Player/CBI/AutoGroupToggle.flac  // Deus Ex
-player/cbi/auto/buy     lsounds/Player/CBI/AutoGroupBuy.flac     // The Sound Keeper - Dark Sci-Fi UI Sounds
-player/cbi/auto/invalid lsounds/Player/CBI/AutoGroupInvalid.flac // Touhou 13
+player/cbi/auto/toggle  lsounds/GUI/AutoGroupToggle.flac  // Deus Ex
+player/cbi/auto/buy     lsounds/GUI/AutoGroupBuy.flac     // The Sound Keeper - Dark Sci-Fi UI Sounds
+player/cbi/auto/invalid lsounds/GUI/AutoGroupInvalid.flac // Touhou 13
 
-player/cbi/dlgopen  lsounds/Player/CBI/DialogueOpen.wav  // Resident Evil 4
-player/cbi/dlgclick lsounds/Player/CBI/DialogueClick.wav // 〃
+player/cbi/dlgopen  lsounds/GUI/DialogueOpen.wav  // Resident Evil 4
+player/cbi/dlgclick lsounds/GUI/DialogueClick.wav // 〃
 
-player/cbi/clickinvalid lsounds/Player/CBI/ClickInvalid.flac // Steam
-player/cbi/mail         lsounds/Player/CBI/MailReceive.flac  // Fallout 4
-player/cbi/tabswitch    lsounds/Player/CBI/TabSwitch.flac    // 〃
+player/cbi/clickinvalid lsounds/GUI/ClickInvalid.flac // Steam
+player/cbi/mail         lsounds/GUI/MailReceive.flac  // Fallout 4
+player/cbi/tabswitch    lsounds/GUI/TabSwitch.flac    // 〃
 
-player/cbi/scroll    lsounds/Player/CBI/Scroll.flac       // Mac OS 9
-player/cbi/scrollend lsounds/Player/CBI/ScrollRelease.wav // 〃
+player/cbi/scroll    lsounds/GUI/Scroll.flac       // Mac OS 9
+player/cbi/scrollend lsounds/GUI/ScrollRelease.wav // 〃
 
-player/cbi/left  lsounds/Player/CBI/Left.wav  // Mac OS 9
-player/cbi/right lsounds/Player/CBI/Right.wav // 〃
+player/cbi/left  lsounds/GUI/Left.wav  // Mac OS 9
+player/cbi/right lsounds/GUI/Right.wav // 〃
 
 $alias player/cbi/invrem player/cbi/findfail
 

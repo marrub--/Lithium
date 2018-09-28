@@ -1,45 +1,45 @@
 //
 // Pickup
 //
-player/pickup/upgrbody    lsounds/Player/Pickup/UpgrBody.ogg     // Killing Floor, ???
-player/pickup/upgrextr    lsounds/Player/Pickup/UpgrExtr.flac    // Phantasy Star Nova
-player/pickup/upgrweap    lsounds/Player/Pickup/UpgrWeap.ogg     // Halo 3
-player/pickup/upgrcbi     lsounds/Player/Pickup/CBIUpgrade.flac  // 〃
-player/pickup/item        lsounds/Player/Pickup/Item.ogg         // Firearms: Source
-player/pickup/barrier     lsounds/Player/Pickup/Barrier.flac     // Touhou 13
-player/pickup/infrared    lsounds/Player/Pickup/Goggles.ogg      // ???
-player/pickup/redkey      lsounds/Player/Pickup/RedKey.flac      // ???
-player/pickup/yellowkey   lsounds/Player/Pickup/YellowKey.flac   // 〃
-player/pickup/bluekey     lsounds/Player/Pickup/BlueKey.flac     // 〃
-player/pickup/redskull2   lsounds/SKULL.ogg                      // Deus Ex
-player/pickup/redskull1   lsounds/Player/Pickup/RedSkull.flac    // Halo 3
-player/pickup/yellowskull lsounds/Player/Pickup/YellowSkull.flac // 〃
-player/pickup/blueskull   lsounds/Player/Pickup/BlueSkull.flac   // 〃
-player/pickup/evil        lsounds/Player/Pickup/EvilItem.flac    // Phantasy Star: Nova
-player/pickup/cells       lsounds/Player/Pickup/CellSmall.flac   // ???
-player/pickup/cellb       lsounds/Player/Pickup/CellPack.flac    // 〃
-player/pickup/shells      lsounds/Player/Pickup/ShellSmall.ogg   // 〃
-player/pickup/shellb      lsounds/Player/Pickup/ShellPack.ogg    // 〃
-player/pickup/rockets     lsounds/Player/Pickup/RocketSmall.flac // Halo 3
-player/pickup/rocketb     lsounds/Player/Pickup/RocketBig.flac   // Quake 2
-player/pickup/mana        lsounds/Player/Pickup/Mana.flac        // Devil May Cry 2
-player/pickup/scorebig    lsounds/Player/Pickup/ScoreBig.flac    // Self-made
-player/pickup/scoresmall  lsounds/Player/Pickup/ScoreSmall.flac  // 〃
-player/pickup/stimpack    lsounds/Player/Pickup/StimPack.flac    // Doom 3
-player/pickup/medikit     lsounds/Player/Pickup/Medikit.flac     // Fallout 4
+player/pickup/upgrbody    lsounds/Items/UpgrBody.ogg     // Killing Floor, ???
+player/pickup/upgrextr    lsounds/Items/UpgrExtr.flac    // Phantasy Star Nova
+player/pickup/upgrweap    lsounds/Items/UpgrWeap.ogg     // Halo 3
+player/pickup/upgrcbi     lsounds/Items/CBIUpgrade.flac  // 〃
+player/pickup/item        lsounds/Items/Item.ogg         // Firearms: Source
+player/pickup/barrier     lsounds/Items/Barrier.flac     // Touhou 13
+player/pickup/infrared    lsounds/Items/Goggles.ogg      // ???
+player/pickup/redkey      lsounds/Items/RedKey.flac      // ???
+player/pickup/yellowkey   lsounds/Items/YellowKey.flac   // 〃
+player/pickup/bluekey     lsounds/Items/BlueKey.flac     // 〃
+player/pickup/redskull2   lsounds/Items/SKULL.ogg        // Deus Ex
+player/pickup/redskull1   lsounds/Items/RedSkull.flac    // Halo 3
+player/pickup/yellowskull lsounds/Items/YellowSkull.flac // 〃
+player/pickup/blueskull   lsounds/Items/BlueSkull.flac   // 〃
+player/pickup/evil        lsounds/Items/EvilItem.flac    // Phantasy Star: Nova
+player/pickup/cells       lsounds/Items/CellSmall.flac   // ???
+player/pickup/cellb       lsounds/Items/CellPack.flac    // 〃
+player/pickup/shells      lsounds/Items/ShellSmall.ogg   // 〃
+player/pickup/shellb      lsounds/Items/ShellPack.ogg    // 〃
+player/pickup/rockets     lsounds/Items/RocketSmall.flac // Halo 3
+player/pickup/rocketb     lsounds/Items/RocketBig.flac   // Quake 2
+player/pickup/mana        lsounds/Items/Mana.flac        // Devil May Cry 2
+player/pickup/scorebig    lsounds/Items/ScoreBig.flac    // Self-made
+player/pickup/scoresmall  lsounds/Items/ScoreSmall.flac  // 〃
+player/pickup/stimpack    lsounds/Items/Stimpack.flac    // Doom 3
+player/pickup/medikit     lsounds/Items/Medikit.flac     // Fallout 4
 
-player/pickup/scorechip lsounds/Player/Pickup/ScoreChip.flac // Half-Life 2
+player/pickup/scorechip lsounds/Items/ScoreChip.flac // Half-Life 2
 
-player/pickup/coin1 lsounds/Player/Pickup/Coin1.flac // Sony Media 1001 Sound Effects
-player/pickup/coin2 lsounds/Player/Pickup/Coin2.flac // 〃
-player/pickup/coin3 lsounds/Player/Pickup/Coin3.flac // 〃
+player/pickup/coin1 lsounds/Items/Coin1.flac // Sony Media 1001 Sound Effects
+player/pickup/coin2 lsounds/Items/Coin2.flac // 〃
+player/pickup/coin3 lsounds/Items/Coin3.flac // 〃
 
-player/pickup/gem lsounds/Player/Pickup/Gem.flac // Fallout 4
+player/pickup/gem lsounds/Items/Gem.flac // Fallout 4
 
-player/pickup/material1 lsounds/Player/Pickup/Material1.ogg // Chronicles of Riddick
-player/pickup/material2 lsounds/Player/Pickup/Material2.ogg // 〃
-player/pickup/material3 lsounds/Player/Pickup/Material3.ogg // 〃
-player/pickup/material4 lsounds/Player/Pickup/Material4.ogg // 〃
+player/pickup/material1 lsounds/Items/Material1.ogg // Chronicles of Riddick
+player/pickup/material2 lsounds/Items/Material2.ogg // 〃
+player/pickup/material3 lsounds/Items/Material3.ogg // 〃
+player/pickup/material4 lsounds/Items/Material4.ogg // 〃
 
 $random player/pickup/coin {
    player/pickup/coin1
@@ -95,20 +95,20 @@ $random player/pickup/redskull {
 //
 // :V
 //
-items/healthbonus1  lsounds/bdup/DSHBON1.wav
-items/healthbonus2  lsounds/bdup/DSHBON2.wav
-items/healthbonus3  lsounds/bdup/DSHBON3.wav
-items/healthbonus4  lsounds/bdup/DSHBON4.wav
-items/healthbonus5  lsounds/bdup/DSHBON5.wav
-items/healthbonus6  lsounds/bdup/DSHBON6.wav
-items/healthbonus7  lsounds/bdup/DSHBON7.wav
-items/healthbonus8  lsounds/bdup/DSHBON8.wav
-items/healthbonus9  lsounds/bdup/DSHBON9.ogg
-items/healthbonus10 lsounds/bdup/DSHBON10.ogg
-items/healthbonus11 lsounds/bdup/DSHBON11.ogg
-items/healthbonus12 lsounds/bdup/DSHBON12.ogg
-items/healthbonus13 lsounds/bdup/DSHBON13.ogg
-items/healthbonus14 lsounds/bdup/DSHBON14.ogg
+items/healthbonus1  lsounds/Items/bdup/DSHBON1.wav
+items/healthbonus2  lsounds/Items/bdup/DSHBON2.wav
+items/healthbonus3  lsounds/Items/bdup/DSHBON3.wav
+items/healthbonus4  lsounds/Items/bdup/DSHBON4.wav
+items/healthbonus5  lsounds/Items/bdup/DSHBON5.wav
+items/healthbonus6  lsounds/Items/bdup/DSHBON6.wav
+items/healthbonus7  lsounds/Items/bdup/DSHBON7.wav
+items/healthbonus8  lsounds/Items/bdup/DSHBON8.wav
+items/healthbonus9  lsounds/Items/bdup/DSHBON9.ogg
+items/healthbonus10 lsounds/Items/bdup/DSHBON10.ogg
+items/healthbonus11 lsounds/Items/bdup/DSHBON11.ogg
+items/healthbonus12 lsounds/Items/bdup/DSHBON12.ogg
+items/healthbonus13 lsounds/Items/bdup/DSHBON13.ogg
+items/healthbonus14 lsounds/Items/bdup/DSHBON14.ogg
 
 $random items/healthbonusrandom {
    items/healthbonus1
@@ -127,7 +127,7 @@ $random items/healthbonusrandom {
    items/healthbonus14
 }
 
-items/vial lsounds/Player/Pickup/HealthBonus.wav
+items/vial lsounds/Items/HealthBonus.wav
 
 $random items/healthbonus {
    items/vial items/vial items/vial items/vial items/vial items/vial

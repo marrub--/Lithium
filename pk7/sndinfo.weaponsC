@@ -1,28 +1,28 @@
 //
 // Mateba
 //
-weapons/mateba/fire     lsounds/Mateba/Fire.flac    // ???
-weapons/mateba/open     lsounds/Mateba/Open.flac    // ???
-weapons/mateba/eject    lsounds/Mateba/Eject.flac   // Killing Floor
-weapons/mateba/load     lsounds/Mateba/Load.flac    // 〃
-weapons/mateba/close    lsounds/Mateba/Close.flac   // Half-Life 2, Fallout 4
-weapons/mateba/draw     lsounds/Mateba/Draw.flac    // ???
-weapons/mateba/finalize lsounds/Mateba/Finalize.ogg // Monster Girl Quest
+weapons/mateba/fire     lsounds/WeaponsC/Mateba/Fire.flac    // ???
+weapons/mateba/open     lsounds/WeaponsC/Mateba/Open.flac    // ???
+weapons/mateba/eject    lsounds/WeaponsC/Mateba/Eject.flac   // Killing Floor
+weapons/mateba/load     lsounds/WeaponsC/Mateba/Load.flac    // 〃
+weapons/mateba/close    lsounds/WeaponsC/Mateba/Close.flac   // Half-Life 2, Fallout 4
+weapons/mateba/draw     lsounds/WeaponsC/Mateba/Draw.flac    // ???
+weapons/mateba/finalize lsounds/WeaponsC/Mateba/Finalize.ogg // Monster Girl Quest
 $alias weapons/mateba/pickup weapons/mateba/draw
 
 //
 // Shock Rifle
 //
-weapons/erifle/pickup    lsounds/ShockRifle/Pickup.flac    // Halo 3
-weapons/erifle/draw      lsounds/ShockRifle/Draw.flac      // 〃
-weapons/erifle/fire      lsounds/ShockRifle/Fire.flac      // Return to Castle Wolfenstein, Halo 3
-weapons/erifle/zap1      lsounds/ShockRifle/Zap1.wav       // Half-Life 2
-weapons/erifle/zap2      lsounds/ShockRifle/Zap2.wav       // 〃
-weapons/erifle/zap3      lsounds/ShockRifle/Zap3.wav       // 〃
-weapons/erifle/reloadout lsounds/ShockRifle/ReloadOut.flac // Return to Castle Wolfenstein
-weapons/erifle/reloadin  lsounds/ShockRifle/ReloadIn.flac  // 〃
-weapons/erifle/shock1    lsounds/ShockRifle/Shock1.wav     // Half-Life 2
-weapons/erifle/shock2    lsounds/ShockRifle/Shock2.wav     // 〃
+weapons/erifle/pickup    lsounds/WeaponsC/ShockRifle/Pickup.flac    // Halo 3
+weapons/erifle/draw      lsounds/WeaponsC/ShockRifle/Draw.flac      // 〃
+weapons/erifle/fire      lsounds/WeaponsC/ShockRifle/Fire.flac      // Return to Castle Wolfenstein, Halo 3
+weapons/erifle/zap1      lsounds/WeaponsC/ShockRifle/Zap1.wav       // Half-Life 2
+weapons/erifle/zap2      lsounds/WeaponsC/ShockRifle/Zap2.wav       // 〃
+weapons/erifle/zap3      lsounds/WeaponsC/ShockRifle/Zap3.wav       // 〃
+weapons/erifle/reloadout lsounds/WeaponsC/ShockRifle/ReloadOut.flac // Return to Castle Wolfenstein
+weapons/erifle/reloadin  lsounds/WeaponsC/ShockRifle/ReloadIn.flac  // 〃
+weapons/erifle/shock1    lsounds/WeaponsC/ShockRifle/Shock1.wav     // Half-Life 2
+weapons/erifle/shock2    lsounds/WeaponsC/ShockRifle/Shock2.wav     // 〃
 
 $random weapons/erifle/shock {
    weapons/erifle/shock1
@@ -40,47 +40,47 @@ $volume weapons/erifle/zap 0.15
 //
 // SPAS
 //
-weapons/cshotgun/fire   lsounds/CShotgun/Fire.flac      // FEAR, Dynamic Range
-weapons/cshotgun/fire2  lsounds/CShotgun/Fire2.flac     // 〃
-weapons/cshotgun/load   lsounds/CShotgun/Load.flac      // Halo 3
-weapons/cshotgun/pump   lsounds/CShotgun/Pump.flac      // Dynamic Range
-weapons/cshotgun/empty  lsounds/CShotgun/FireEmpty.flac // EYE: Divine Cybermancy
-weapons/cshotgun/pickup lsounds/CShotgun/Pickup.flac    // FEAR, Dynamic Range
-weapons/cshotgun/draw   lsounds/CShotgun/Draw.flac      // Dynamic Range
+weapons/cshotgun/fire   lsounds/WeaponsC/SPAS/Fire.flac      // FEAR, Dynamic Range
+weapons/cshotgun/fire2  lsounds/WeaponsC/SPAS/Fire2.flac     // 〃
+weapons/cshotgun/load   lsounds/WeaponsC/SPAS/Load.flac      // Halo 3
+weapons/cshotgun/pump   lsounds/WeaponsC/SPAS/Pump.flac      // Dynamic Range
+weapons/cshotgun/empty  lsounds/WeaponsC/SPAS/FireEmpty.flac // EYE: Divine Cybermancy
+weapons/cshotgun/pickup lsounds/WeaponsC/SPAS/Pickup.flac    // FEAR, Dynamic Range
+weapons/cshotgun/draw   lsounds/WeaponsC/SPAS/Draw.flac      // Dynamic Range
 
 //
 // SMG
 //
-weapons/smg/fire     lsounds/SMG/Fire.flac         // FEAR
-weapons/smg/firedone lsounds/SMG/FireDone.flac     // 〃
-weapons/smg/eject    lsounds/SMG/EjectRod.flac     // Killing Floor
-weapons/smg/insert   lsounds/SMG/InsertRod.flac    // 〃
-weapons/smg/heat     lsounds/SMG/HeatDisperse.flac // Self-made
-weapons/smg/open     lsounds/SMG/TopOpen.flac      // Half-Life 2
-weapons/smg/close    lsounds/SMG/TopClose.flac     // 〃
-weapons/smg/magout   lsounds/SMG/MagOut.flac       // 〃
-weapons/smg/magin2   lsounds/SMG/MagInLong.flac    // 〃
-weapons/smg/magin    lsounds/SMG/MagIn.flac        // EYE: Divine Cybermancy
-weapons/smg/draw     lsounds/SMG/Draw.flac         // Halo 3
-weapons/smg/pickup   lsounds/SMG/Pickup.flac       // FEAR
+weapons/smg/fire     lsounds/WeaponsC/SMG/Fire.flac         // FEAR
+weapons/smg/firedone lsounds/WeaponsC/SMG/FireDone.flac     // 〃
+weapons/smg/eject    lsounds/WeaponsC/SMG/EjectRod.flac     // Killing Floor
+weapons/smg/insert   lsounds/WeaponsC/SMG/InsertRod.flac    // 〃
+weapons/smg/heat     lsounds/WeaponsC/SMG/HeatDisperse.flac // Self-made
+weapons/smg/open     lsounds/WeaponsC/SMG/TopOpen.flac      // Half-Life 2
+weapons/smg/close    lsounds/WeaponsC/SMG/TopClose.flac     // 〃
+weapons/smg/magout   lsounds/WeaponsC/SMG/MagOut.flac       // 〃
+weapons/smg/magin2   lsounds/WeaponsC/SMG/MagInLong.flac    // 〃
+weapons/smg/magin    lsounds/WeaponsC/SMG/MagIn.flac        // EYE: Divine Cybermancy
+weapons/smg/draw     lsounds/WeaponsC/SMG/Draw.flac         // Halo 3
+weapons/smg/pickup   lsounds/WeaponsC/SMG/Pickup.flac       // FEAR
 
 //
 // Ion Rifle
 //
-weapons/ionrifle/fire    lsounds/IonRifle/Fire.flac      // Fallout: New Vegas
-weapons/ionrifle/fire2   lsounds/IonRifle/Fire2.flac     // 〃
-weapons/ionrifle/eject   lsounds/IonRifle/Eject.flac     // Killing Floor
-weapons/ionrifle/load    lsounds/IonRifle/Load.flac      // 〃
-weapons/ionrifle/magout  lsounds/IonRifle/MagOut.flac    // Halo 3
-weapons/ionrifle/magin   lsounds/IonRifle/MagIn.flac     // 〃
-weapons/ionrifle/zoomout lsounds/IonRifle/ZoomOut.flac   // 〃
-weapons/ionrifle/zoomin  lsounds/IonRifle/ZoomIn.flac    // 〃
-weapons/ionrifle/empty   lsounds/IonRifle/FireEmpty.flac // Killing Floor
-weapons/ionrifle/draw    lsounds/IonRifle/Draw.flac      // Killing Floor, Fallout 3
-weapons/ionrifle/pickup  lsounds/IonRifle/Pickup.flac    // Killing Floor, Halo 3
-weapons/ionrifle/cfire1  lsounds/IonRifle/Charged1.flac  // Halo 3
-weapons/ionrifle/cfire2  lsounds/IonRifle/Charged2.flac  // 〃
-weapons/ionrifle/charge  lsounds/IonRifle/Charge.flac    // Quake 2
+weapons/ionrifle/fire    lsounds/WeaponsC/IonRifle/Fire.flac      // Fallout: New Vegas
+weapons/ionrifle/fire2   lsounds/WeaponsC/IonRifle/Fire2.flac     // 〃
+weapons/ionrifle/eject   lsounds/WeaponsC/IonRifle/Eject.flac     // Killing Floor
+weapons/ionrifle/load    lsounds/WeaponsC/IonRifle/Load.flac      // 〃
+weapons/ionrifle/magout  lsounds/WeaponsC/IonRifle/MagOut.flac    // Halo 3
+weapons/ionrifle/magin   lsounds/WeaponsC/IonRifle/MagIn.flac     // 〃
+weapons/ionrifle/zoomout lsounds/WeaponsC/IonRifle/ZoomOut.flac   // 〃
+weapons/ionrifle/zoomin  lsounds/WeaponsC/IonRifle/ZoomIn.flac    // 〃
+weapons/ionrifle/empty   lsounds/WeaponsC/IonRifle/FireEmpty.flac // Killing Floor
+weapons/ionrifle/draw    lsounds/WeaponsC/IonRifle/Draw.flac      // Killing Floor, Fallout 3
+weapons/ionrifle/pickup  lsounds/WeaponsC/IonRifle/Pickup.flac    // Killing Floor, Halo 3
+weapons/ionrifle/cfire1  lsounds/WeaponsC/IonRifle/Charged1.flac  // Halo 3
+weapons/ionrifle/cfire2  lsounds/WeaponsC/IonRifle/Charged2.flac  // 〃
+weapons/ionrifle/charge  lsounds/WeaponsC/IonRifle/Charge.flac    // Quake 2
 
 $random weapons/ionrifle/cfire {
    weapons/ionrifle/cfire1
@@ -92,15 +92,15 @@ $alias weapons/ionrifle/heat weapons/smg/heat
 //
 // Star Destroyer
 //
-weapons/shipgun/explode   lsounds/StarDestroyer/Explode.flac      // Halo 3
-weapons/shipgun/fire      lsounds/StarDestroyer/Fire.flac         // 〃
-weapons/shipgun/firesol   lsounds/StarDestroyer/FireSolspear.flac // Halo 3, Fallout 4
-weapons/shipgun/prepare   lsounds/StarDestroyer/Charge.flac       // Halo 3, Devil May Cry 2
-weapons/shipgun/empty     lsounds/StarDestroyer/FireEmpty.flac    // Counter-Strike: Source, Phantasy Star Online
-weapons/shipgun/draw      lsounds/StarDestroyer/Draw.flac         // Fallout: New Vegas
-weapons/shipgun/pickup    lsounds/StarDestroyer/Pickup.flac       // Halo 3, Doom 3
-weapons/shipgun/firesurge lsounds/StarDestroyer/FireSurge.flac    // Doom 3, Quake 2
-weapons/shipgun/idle      lsounds/StarDestroyer/Idle.flac         // Phantasy Star Nova
+weapons/shipgun/explode   lsounds/WeaponsC/StarDestroyer/Explode.flac      // Halo 3
+weapons/shipgun/fire      lsounds/WeaponsC/StarDestroyer/Fire.flac         // 〃
+weapons/shipgun/firesol   lsounds/WeaponsC/StarDestroyer/FireSolspear.flac // Halo 3, Fallout 4
+weapons/shipgun/prepare   lsounds/WeaponsC/StarDestroyer/Charge.flac       // Halo 3, Devil May Cry 2
+weapons/shipgun/empty     lsounds/WeaponsC/StarDestroyer/FireEmpty.flac    // Counter-Strike: Source, Phantasy Star Online
+weapons/shipgun/draw      lsounds/WeaponsC/StarDestroyer/Draw.flac         // Fallout: New Vegas
+weapons/shipgun/pickup    lsounds/WeaponsC/StarDestroyer/Pickup.flac       // Halo 3, Doom 3
+weapons/shipgun/firesurge lsounds/WeaponsC/StarDestroyer/FireSurge.flac    // Doom 3, Quake 2
+weapons/shipgun/idle      lsounds/WeaponsC/StarDestroyer/Idle.flac         // Phantasy Star Nova
 
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
@@ -108,23 +108,23 @@ $attenuation weapons/shipgun/explode 0.6
 //
 // Blade
 //
-weapons/blade/slash lsounds/Blade/Slash.ogg // Monster Girl Quest
-weapons/blade/hit   lsounds/Blade/Hit.ogg   // 〃
+weapons/blade/slash lsounds/WeaponsM/Blade/Slash.ogg // Monster Girl Quest
+weapons/blade/hit   lsounds/WeaponsM/Blade/Hit.ogg   // 〃
 
 //
 // Delear
 //
-weapons/delear/fire   lsounds/Delear/Fire.flac   // Devil May Cry 3
-weapons/delear/open   lsounds/Delear/Open.flac   // Devil May Cry 3, ???
-weapons/delear/charge lsounds/Delear/Charge.flac // Devil May Cry 3, Deus Ex
-weapons/delear/close  lsounds/Delear/Close.flac  // Alliance of Valiant Arms
+weapons/delear/fire   lsounds/WeaponsC/Delear/Fire.flac   // Devil May Cry 3
+weapons/delear/open   lsounds/WeaponsC/Delear/Open.flac   // Devil May Cry 3, ???
+weapons/delear/charge lsounds/WeaponsC/Delear/Charge.flac // Devil May Cry 3, Deus Ex
+weapons/delear/close  lsounds/WeaponsC/Delear/Close.flac  // Alliance of Valiant Arms
 
 //
 // Feuer
 //
-weapons/feuer/explode lsounds/Feuer/Explode.ogg // Monster Girl Quest
-weapons/feuer/fire    lsounds/Feuer/Fire.wav    // Touhou 13
-weapons/feuer/final   lsounds/Feuer/Final.flac  // 〃
+weapons/feuer/explode lsounds/WeaponsC/Feuer/Explode.ogg // Monster Girl Quest
+weapons/feuer/fire    lsounds/WeaponsC/Feuer/Fire.wav    // Touhou 13
+weapons/feuer/final   lsounds/WeaponsC/Feuer/Final.flac  // 〃
 
 $limit weapons/feuer/explode 0
 $volume weapons/feuer/fire 0.9
@@ -132,11 +132,11 @@ $volume weapons/feuer/fire 0.9
 //
 // Rend
 //
-weapons/rend/slash1  lsounds/Rend/Fire1.flac   // ???
-weapons/rend/slash2  lsounds/Rend/Fire2.flac   // ???
-weapons/rend/slash3  lsounds/Rend/Fire3.flac   // ???
-weapons/rend/end     lsounds/Rend/End.flac     // Phantasy Star Nova
-weapons/rend/reflect lsounds/Rend/Reflect.flac // 〃
+weapons/rend/slash1  lsounds/WeaponsC/Rend/Fire1.flac   // ???
+weapons/rend/slash2  lsounds/WeaponsC/Rend/Fire2.flac   // ???
+weapons/rend/slash3  lsounds/WeaponsC/Rend/Fire3.flac   // ???
+weapons/rend/end     lsounds/WeaponsC/Rend/End.flac     // Phantasy Star Nova
+weapons/rend/reflect lsounds/WeaponsC/Rend/Reflect.flac // 〃
 
 $random weapons/rend/slash {
    weapons/rend/slash1
@@ -149,14 +149,14 @@ $alias weapons/rend/hit weapons/blade/hit
 //
 // Hulgyon
 //
-weapons/hulgyon/proc lsounds/Hulgyon/Proc.flac // Touhou 13
+weapons/hulgyon/proc lsounds/WeaponsC/Hulgyon/Proc.flac // Touhou 13
 $limit weapons/hulgyon/proc 0
 
 //
 // Star Shot
 //
-weapons/sshot/fire   lsounds/StarShot/Fire.flac   // Halo 3
-weapons/sshot/firero lsounds/StarShot/RunOut.flac // Monster Girl Quest
+weapons/sshot/fire   lsounds/WeaponsC/StarShot/Fire.flac   // Halo 3
+weapons/sshot/firero lsounds/WeaponsC/StarShot/RunOut.flac // Monster Girl Quest
 
 $alias weapons/sshot/hit weapons/shotgun/gauss/puff
 $limit weapons/sshot/hit 0
@@ -165,7 +165,7 @@ $limit weapons/sshot/fire 0
 //
 // Cercle
 //
-weapons/cercle/begin  lsounds/Cercle/Begin.flac  // Phantasy Star Online
-weapons/cercle/attack lsounds/Cercle/Attack.flac // 〃
+weapons/cercle/begin  lsounds/WeaponsC/Cercle/Begin.flac  // Phantasy Star Online
+weapons/cercle/attack lsounds/WeaponsC/Cercle/Attack.flac // 〃
 
 // EOF

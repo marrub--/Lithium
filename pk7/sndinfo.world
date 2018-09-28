@@ -1,8 +1,8 @@
 //
 // Body
 //
-body/bullethit1 lsounds/Body/Bullet1.wav // Half-Life
-body/bullethit2 lsounds/Body/Bullet2.wav // 〃
+body/bullethit1 lsounds/World/Bullet1.wav // Half-Life
+body/bullethit2 lsounds/World/Bullet2.wav // 〃
 
 $random body/bullethit {
    body/bullethit1
@@ -12,20 +12,20 @@ $random body/bullethit {
 //
 // Ambience
 //
-amb/rain       lsounds/Ambience/Rain.ogg           // ???
-amb/wind       lsounds/Ambience/Wind.ogg           // 〃
-amb/rainout    lsounds/Ambience/RainOut.ogg        // 〃
-amb/windout    lsounds/Ambience/WindOut.ogg        // 〃
-amb/bigcomp    lsounds/Ambience/BigComputer.ogg    // EYE: Divine Cybermancy
-amb/alarmdist1 lsounds/Ambience/AlarmDistant.flac  // Half-Life 2
-amb/alarmdist2 lsounds/Ambience/AlarmDistant2.flac // 〃
-amb/alarmdist3 lsounds/Ambience/AlarmDistant3.flac // 〃
-amb/alarmdist4 lsounds/Ambience/AlarmDistant4.flac // 〃
-amb/ship       lsounds/Ambience/Ship.flac          // 〃
-amb/field      lsounds/Ambience/NoEntry.flac       // 〃
-amb/vent       lsounds/Ambience/VentPump.wav       // 〃
-amb/lightson   lsounds/Ambience/LightsOn.flac      // 〃
-amb/computer   lsounds/Ambience/Computer.wav       // Quake
+amb/rain       lsounds/World/Ambience/Rain.ogg           // ???
+amb/wind       lsounds/World/Ambience/Wind.ogg           // 〃
+amb/rainout    lsounds/World/Ambience/RainOut.ogg        // 〃
+amb/windout    lsounds/World/Ambience/WindOut.ogg        // 〃
+amb/bigcomp    lsounds/World/Ambience/BigComputer.ogg    // EYE: Divine Cybermancy
+amb/alarmdist1 lsounds/World/Ambience/AlarmDistant.flac  // Half-Life 2
+amb/alarmdist2 lsounds/World/Ambience/AlarmDistant2.flac // 〃
+amb/alarmdist3 lsounds/World/Ambience/AlarmDistant3.flac // 〃
+amb/alarmdist4 lsounds/World/Ambience/AlarmDistant4.flac // 〃
+amb/ship       lsounds/World/Ambience/Ship.flac          // 〃
+amb/field      lsounds/World/Ambience/NoEntry.flac       // 〃
+amb/vent       lsounds/World/Ambience/VentPump.wav       // 〃
+amb/lightson   lsounds/World/Ambience/LightsOn.flac      // 〃
+amb/computer   lsounds/World/Ambience/Computer.wav       // Quake
 
 $random amb/alarmdist {
    amb/alarmdist1
@@ -45,8 +45,8 @@ $ambient 42427 amb/computer  point 2.0  continuous    1.0
 //
 // Barrels
 //
-misc/barrel/hit1 lsounds/Barrel/Hit.flac
-misc/barrel/hit2 lsounds/Barrel/Hit2.flac
+misc/barrel/hit1 lsounds/World/Barrel/Hit.flac
+misc/barrel/hit2 lsounds/World/Barrel/Hit2.flac
 
 $random misc/barrel/hit {
    misc/barrel/hit1

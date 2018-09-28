@@ -1,8 +1,12 @@
 //
-// R. Armor
+// Upgrades
 //
-player/rarmor/mode   lsounds/Player/RArmor/ChangeMode.flac // Halo 3
-player/rarmor/damage lsounds/Player/RArmor/Damage.flac     // Touhou 13
+player/rarmor/mode   lsounds/PlayerM/RArmor/ChangeMode.flac // Halo 3
+player/rarmor/damage lsounds/PlayerM/RArmor/Damage.flac     // Touhou 13
+
+player/rocketboost lsounds/PlayerM/RocketBoost.flac       // ???
+player/adren/inj   lsounds/PlayerM/Adrenaline/Inject.flac // Killing Floor
+player/adren/ready lsounds/PlayerM/Adrenaline/Ready.flac  // 〃
 
 //
 // Marine

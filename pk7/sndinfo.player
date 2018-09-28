@@ -1,31 +1,33 @@
 player/score1       lsounds/Player/Score1.flac             // Self-made
 player/score2       lsounds/Player/Score2.flac             // 〃
 player/score3       lsounds/Player/Score3.flac             // 〃
-player/rocketboost  lsounds/Player/RocketBoost.flac        // ???
-player/doublejump   lsounds/Player/DoubleJump.flac         // DemonSteele
+player/doublejump   lsounds/Player/DoubleJump.flac         // DemonSteele/Smash Bros
 player/slide        lsounds/Player/Slide.flac              // 〃
 player/getsigil     lsounds/Player/DivisionSigilPickup.ogg // Resident Evil 4, Fallout 4
 player/nuke         lsounds/Player/Nuke.ogg                // Touhou 13
 player/barrier      lsounds/Player/Barrier.flac            // 〃
 player/death1       lsounds/Player/DeathCharge.ogg         // 〃
 player/death2       lsounds/Player/Death.ogg               // 〃
-player/adren/inj    lsounds/Player/AdrenalineInject.flac   // Killing Floor
-player/adren/ready  lsounds/Player/InjectorReady.flac      // 〃
-player/counter      lsounds/Player/Counter.flac            // Halo 3
-player/counterdone  lsounds/Player/CounterDone.flac        // 〃
-player/zoomin       lsounds/Player/ZoomIn.flac             // 〃
+player/zoomin       lsounds/Player/ZoomIn.flac             // Halo 3
 player/zoomout      lsounds/Player/ZoomOut.flac            // 〃
-player/YOUVEGOTMAIL lsounds/Player/Mail.ogg                // AOL
 player/hitground    lsounds/Player/HitGround.flac          // EYE: Divine Cybermancy
-player/trmopen      lsounds/Terminal/Open.wav              // Marathon
-player/trmswitch    lsounds/Terminal/Switch.wav            // 〃
 player/infraredoff  lsounds/Player/InfraredOff.flac        // Counter-Strike: Source
-player/step1        lsounds/Footsteps/Step1.flac           // ???
-player/step2        lsounds/Footsteps/Step2.flac           // ???
-player/step3        lsounds/Footsteps/Step3.flac           // ???
-player/step4        lsounds/Footsteps/Step4.flac           // ???
 player/levelup      lsounds/Player/LevelUp.flac            // Phantasy Star Online
-player/wings        lsounds/Player/Wings.wav               // Hexen
+
+player/counter     lsounds/GUI/Payout/Counter.flac     // Halo 3
+player/counterdone lsounds/GUI/Payout/CounterDone.flac // 〃
+
+player/YOUVEGOTMAIL lsounds/GUI/Mail.ogg // AOL
+
+player/trmopen   lsounds/GUI/Terminal/Open.wav   // Marathon
+player/trmswitch lsounds/GUI/Terminal/Switch.wav // 〃
+
+player/step1 lsounds/Player/Footsteps/Step1.flac // ???
+player/step2 lsounds/Player/Footsteps/Step2.flac // ???
+player/step3 lsounds/Player/Footsteps/Step3.flac // ???
+player/step4 lsounds/Player/Footsteps/Step4.flac // ???
+
+player/wings lsounds/Weapons/Wings.wav // Hexen
 
 $volume player/death2 0.7
 $volume player/nuke 0.7
@@ -49,5 +51,8 @@ $random player/score {
 $playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
 $playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
 $playersound player male *land    lsounds/Player/Land.wav     // Hexen
+$playersound player male *dive    lsounds/Player/Splash.flac  // ???
+
+$playersounddup player male *surface *dive
 
 // EOF

@@ -1,15 +1,15 @@
 //
 // Cyber-Mage
 //
-$playersound    cybermage male *death   lsounds/CyberMage/Death.flac     // Doom
-$playersound    cybermage male *xdeath  lsounds/CyberMage/XDeath.flac    // 〃
-$playersound    cybermage male *pain100 lsounds/CyberMage/PainSmall.flac // 〃
-$playersounddup cybermage male *pain75  *pain100                         // 〃
-$playersound    cybermage male *pain50  lsounds/CyberMage/Pain.flac      // 〃
-$playersounddup cybermage male *pain25  *pain50                          // 〃
-$playersound    cybermage male *grunt   lsounds/CyberMage/Grunt.flac     // Doom 64
+$playersound    cybermage male *death   lsounds/PlayerC/Death.flac     // Doom
+$playersound    cybermage male *xdeath  lsounds/PlayerC/XDeath.flac    // 〃
+$playersound    cybermage male *pain100 lsounds/PlayerC/PainSmall.flac // 〃
+$playersounddup cybermage male *pain75  *pain100                       // 〃
+$playersound    cybermage male *pain50  lsounds/PlayerC/Pain.flac      // 〃
+$playersounddup cybermage male *pain25  *pain50                        // 〃
+$playersound    cybermage male *grunt   lsounds/PlayerC/Grunt.flac     // Doom 64
 
-player/manafull lsounds/CyberMage/FullCharge.flac // Touhou 13
+player/manafull lsounds/PlayerC/FullCharge.flac // Touhou 13
 
 $alias player/cyber-mage/step player/step
 
