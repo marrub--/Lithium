@@ -139,6 +139,7 @@
                                 * Ryan Cordell *
 
 *  XDeaths for the Cacodemon, Demon, Archvile, and Revenant
+*  Archvile attack effects
 
 *                                 * Seryder *
 
