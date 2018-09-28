@@ -561,7 +561,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
    }
    else
    {
-      PrintSpriteA(":UI:bip", 20,1, 40,1, 0.6);
+      PrintSpriteA(":UI:bip", 20,1, 40,1, 0.1);
       PrintTextStr("BIOTIC INFORMATION PANEL ver2.5");
       PrintText("CBIFONT", CR_WHITE, 35,1, 40,1);
    }

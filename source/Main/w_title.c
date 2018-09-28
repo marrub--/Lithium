@@ -42,6 +42,7 @@ void Lith_Title(void)
    ACS_Delay(35*5);
 
    SetSize(320, 240);
+   SetClipW(0, 0, 320, 240, 310);
 
    __str txt = L("LITH_OPENER");
    int   len = ACS_StrLen(txt);
