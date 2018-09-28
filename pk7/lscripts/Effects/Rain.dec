@@ -18,6 +18,7 @@ actor Lith_RainDrop
    +NOTIMEFREEZE
    +NOGRAVITY
    +DONTSPLASH
+   +FORCEYBILLBOARD
    
    states
    {
