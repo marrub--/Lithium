@@ -140,6 +140,7 @@
 
 *  XDeaths for the Cacodemon, Demon, Archvile, and Revenant
 *  Archvile attack effects
+*  Arachnotron attack effects
 
 *                                 * Seryder *
 
