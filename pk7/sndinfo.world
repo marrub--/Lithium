@@ -53,4 +53,12 @@ $random misc/barrel/hit {
    misc/barrel/hit2
 }
 
+//
+// Splashes
+//
+world/splash/nukage lsounds/World/Splashes/Nukage.flac // ???
+world/splash/sludge lsounds/World/Splashes/Sludge.wav  // Hexen
+world/splash/water  lsounds/World/Splashes/Water.wav   // 〃
+world/splash/lava   lsounds/World/Splashes/Lava.wav    // 〃
+
 // EOF

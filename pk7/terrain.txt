@@ -1,0 +1,126 @@
+splash Lith_WaterSplashObject
+{
+   SmallClass "Lith_WaterSplashSmall"
+   SmallSound "world/splash/water"
+   SmallClip  0
+
+   BaseClass "Lith_WaterSplashLarge"
+   Sound     "world/splash/water"
+   NoAlert
+}
+
+splash Lith_BloodSplashObject
+{
+   SmallClass "Lith_BloodSplashSmall"
+   SmallSound "world/splash/water"
+   SmallClip  0
+
+   BaseClass "Lith_BloodSplashLarge"
+   Sound     "world/splash/water"
+   NoAlert
+}
+
+splash Lith_NukageSplashObject
+{
+   SmallClass "Lith_NukageSplashSmall"
+   SmallSound "world/splash/nukage"
+   SmallClip  0
+
+   BaseClass "Lith_NukageSplashLarge"
+   Sound     "world/splash/nukage"
+   NoAlert
+}
+
+splash Lith_SludgeSplashObject
+{
+   SmallClass "Lith_SludgeSplashSmall"
+   SmallSound "world/splash/sludge"
+   SmallClip  0
+
+   BaseClass "Lith_SludgeSplashLarge"
+   Sound     "world/splash/sludge"
+   NoAlert
+}
+
+splash Lith_LavaSplashObject
+{
+   SmallClass "Lith_LavaSplashSmall"
+   SmallSound "world/splash/lava"
+   SmallClip  0
+
+   BaseClass "Lith_LavaSplashLarge"
+   Sound     "world/splash/lava"
+   NoAlert
+}
+
+terrain Lith_Water
+{
+   Liquid
+
+   Splash     "Lith_WaterSplashObject"
+   DamageType "Ice"
+   FootClip   10
+}
+
+terrain Lith_Blood
+{
+   Liquid
+
+   Splash     "Lith_BloodSplashObject"
+   DamageType "Ice"
+   FootClip   10
+}
+
+terrain Lith_Nukage
+{
+   Liquid
+
+   Splash      "Lith_NukageSplashObject"
+   DamageType  "Poison"
+   FootClip    14
+}
+
+terrain Lith_Sludge
+{
+   Liquid
+
+   Splash     "Lith_SludgeSplashObject"
+   DamageType "Ice"
+   FootClip   20
+}
+
+terrain Lith_Lava
+{
+   Liquid
+
+   Splash     "Lith_LavaSplashObject"
+   DamageType "Fire"
+   FootClip   12
+}
+
+floor optional "FWATER1" "Lith_Water"
+floor optional "FWATER2" "Lith_Water"
+floor optional "FWATER3" "Lith_Water"
+floor optional "FWATER4" "Lith_Water"
+
+floor optional "BLOOD1" "Lith_Blood"
+floor optional "BLOOD2" "Lith_Blood"
+floor optional "BLOOD3" "Lith_Blood"
+
+floor optional "NUKAGE1" "Lith_Nukage"
+floor optional "NUKAGE2" "Lith_Nukage"
+floor optional "NUKAGE3" "Lith_Nukage"
+
+floor optional "SLIME01" "Lith_Sludge"
+floor optional "SLIME02" "Lith_Sludge"
+floor optional "SLIME03" "Lith_Sludge"
+floor optional "SLIME04" "Lith_Sludge"
+floor optional "SLIME05" "Lith_Sludge"
+floor optional "SLIME06" "Lith_Sludge"
+floor optional "SLIME07" "Lith_Sludge"
+floor optional "SLIME08" "Lith_Sludge"
+
+floor optional "LAVA1" "Lith_Lava"
+floor optional "LAVA2" "Lith_Lava"
+floor optional "LAVA3" "Lith_Lava"
+floor optional "LAVA4" "Lith_Lava"

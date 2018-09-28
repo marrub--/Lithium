@@ -27,6 +27,7 @@ player/pickup/scorebig    lsounds/Items/ScoreBig.flac    // Self-made
 player/pickup/scoresmall  lsounds/Items/ScoreSmall.flac  // 〃
 player/pickup/stimpack    lsounds/Items/Stimpack.flac    // Doom 3
 player/pickup/medikit     lsounds/Items/Medikit.flac     // Fallout 4
+player/pickup/invuln      lsounds/Items/Invuln.flac      // ???
 
 player/pickup/scorechip lsounds/Items/ScoreChip.flac // Half-Life 2
 

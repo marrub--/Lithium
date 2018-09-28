@@ -75,7 +75,7 @@ actor Lith_InvulnerabilitySphereSprite : Lith_AnimItemSprite
 actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces InvulnerabilitySphere
 {
    Tag "Invulnerability"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/invuln"
    
    +COUNTITEM
    +INVENTORY.BIGPOWERUP
