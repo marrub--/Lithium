@@ -5,7 +5,7 @@
 
 @"lfiles/BIPInfo_Mod.txt" // if you want to add extra pages, use this file
 
-^WEAPONS // ------------------------------------------------------------------|
+^WEAPONS //-------------------------------------------------------------------|
 
 gO ChargeFist -> KSKK
 
@@ -62,7 +62,7 @@ pC Hulgyon  -> Heaven
 pC StarShot -> AOF
 pC Cercle   -> Earth
 
-^ENEMIES* // -----------------------------------------------------------------|
+^ENEMIES* //------------------------------------------------------------------|
 
 gA ZombieMan
 gA ShotgunGuy
@@ -89,7 +89,44 @@ gA Cyberdemon
 gA Phantom
 gA IconOfSin
 
-^YOURSELF* // ----------------------------------------------------------------|
+^ITEMS //---------------------------------------------------------------------|
+
+gA ScoreChip
+gA HealthBonus
+
+gA AllMap
+gA Berserk
+gA Infrared
+gA RadSuit
+gA Backpack
+
+gA Stimpack
+gA Medikit
+
+gA KeyDisk
+gA KeySkull
+
+gA Fragma
+gA Invulnerability
+gA Heart
+gA Taochyan
+
+gA ArmStandard
+gA ArmImproved
+gA ArmTeflon
+gA ArmDendrite
+gA ArmAerodynamic
+gA ArmHazMat
+gA ArmPinkSilver
+gA ArmMidori
+
+pM WeapnInter -> OFMD AllPoint
+pM WeapnInte2
+pM ArmorInter
+pM CBIUpgr1   -> KSKK
+pM CBIUpgr2   -> KSKK
+
+^YOURSELF* //-----------------------------------------------------------------|
 
 pM P114
 pC OPD2
@@ -113,7 +150,7 @@ gN    AttrREG
 gA    AttrLUK
 gA    AttrRGE
 
-^UPGRADES // -----------------------------------------------------------------|
+^UPGRADES //------------------------------------------------------------------|
 
 pM HeadsUpDisp -> OFMD
 pM JetBooster  -> OFMD
@@ -132,13 +169,7 @@ pC StealthSys
 gO VitalScanner -> KSKK
 gO AutoReload   -> KSKK
 
-pM WeapnInter -> OFMD AllPoint
-pM WeapnInte2
-pM ArmorInter
-pM CBIUpgr1   -> KSKK
-pM CBIUpgr2   -> KSKK
-
-^PLACES // -------------------------------------------------------------------|
+^PLACES //--------------------------------------------------------------------|
 
 gO AetosVi
 pC Algidistari
@@ -151,7 +182,7 @@ gO OmicronXevv
 pM SuperDimension -> BFG9000 SIGFPE
 pC Heaven
 
-^CORPORATIONS // -------------------------------------------------------------|
+^CORPORATIONS //--------------------------------------------------------------|
 
 gO AllPoint
 pM AOF
@@ -169,7 +200,7 @@ gO Semaphore  -> OmicronXevv
 gO Sym43      -> AetosVi
 pM UnrealArms -> AetosVi
 
-^EXTRA* // -------------------------------------------------------------------|
+^EXTRA* //--------------------------------------------------------------------|
 
 gA Extra1
 gA Extra2

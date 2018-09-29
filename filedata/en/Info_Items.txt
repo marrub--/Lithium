@@ -1,0 +1,83 @@
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_WeapnInter | Weapon Interface
+== LITH_INFO_TITLE_WeapnInter | Weapon Interfacing Device Package
+@@ LITH_INFO_DESCR_WeapnInter
+The Weapon Interfacing Device Package (or simply Weapon Interface) is a small,
+silver briefcase with several components inside it all purpose built for
+modifying any kind of weaponry with extreme ease; In fact, it is built to
+completely disassemble, install upgrades into, and reassemble a weapon in under
+20 seconds.
+
+The package was created approximately 30 years ago by researchers at OFMD and
+AllPoint. Them both seeing the potential sales figures for such a device during
+a great war, OFMD and AllPoint signed a mutual contract to develop the package
+and share profits between eachother.
+
+The success of this device was massive, despite how expensive it is, with its
+prices being barred by a "call us to get the numbers."
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_WeapnInte2 | W.R.D.
+== LITH_INFO_TITLE_WeapnInte2 | $LITH_CBI_WeapnInte2
+@@ LITH_INFO_DESCR_WeapnInte2
+Despite the idea being similar to the Weapon Interfacing Device Package, the
+Weapon Refactoring Device was conceptualized and prototyped over 40 years
+before the Weapon Interface was created.
+
+The Weapon Refactoring Device is a large, dense, black suitcase with the
+letters "WRD" on the front. Inside is a gigantic, see-through box filled with
+indescribable amounts of strange looking wires, tubes, chips, boards and
+markings in some foreign language you can't read.
+
+This device is capable of completely assembling any weapon given parts and any
+amount of schematics, using computational learning algorithms and a large
+database of possible configurations.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmorInter | $LITH_CBI_ArmorInter
+== LITH_INFO_TITLE_ArmorInter | Armor Interfacing Device
+@@ LITH_INFO_DESCR_ArmorInter
+The Armor Interface is a rather large yet thin, silver set of pauldrons and
+chestplate that attaches onto one's body and can be worn under any kind of
+conventional armor.
+
+It comes equipped with several million nerve-like sensors capable of detecting
+damage to the user and their extremeties, as well as what kind of damage was
+taken.
+
+Using these, it has the capability for (but is not installed in its default
+configuration with) methods of damage mitigation, such as secreting
+flame-retardant liquid when fire damage is detected.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_CBIUpgr1 | High-Grade CPU
+== LITH_INFO_TITLE_CBIUpgr1 | $LITH_CBI_CPU2
+@@ LITH_INFO_DESCR_CBIUpgr1
+A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to
+30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely
+overly sufficient for any mathmetician or cybernetics junkie.
+
+However, the Z6808 is unfortunately yet insufficient for heavily augmented
+military use, and is deployed to you only as a temporary measure so you can
+later acquire a more comfortable BC-0265 CPU.
+
+The unit houses 2048 physical cores and two billion hybrid synapses, giving
+it a very solid feel and plenty of physical working memory.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_CBIUpgr2 | S. High-Grade CPU
+== LITH_INFO_TITLE_CBIUpgr2 | $LITH_CBI_CPU3
+@@ LITH_INFO_DESCR_CBIUpgr2
+The BC-0265 is a marvel of modular C/B Interface technology, not bigger than
+any standard CPU and capable of so, so much more. It comes equipped with
+150TiB of RAM, 70Pr without any dangerous overclocking, and 4906 physical
+cores.
+
+Developed solely for military use, the BC-0265 has gone through vigorous field
+testing and many trials, and now you wield the result of those efforts.
+
+Despite only having 3 billion neurons, not much more than high-grade CPUs,
+the quality of each is much higher, being able to withstand much more precise
+data transfer through high density synapses and storage in each cell.
+
+## EOF

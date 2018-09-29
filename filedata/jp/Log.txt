@@ -49,7 +49,7 @@
 == LITH_LOG_Tourmaline | トールマリーン
 
 ## Level Up ------------------------------------------------------------------|
-== LITH_LOG_LevelUpStan | 「強くなっている」と思った。
+== LITH_LOG_LevelUpStan | なぜか、強くなっていると感じた。
 == LITH_LOG_LevelUpJem  | ［ＩＮＦＯ］ メモリー戻した: %iＫｉＢ
 == LITH_LOG_LevelUpFulk | \cj＜\cdＶｉｔａｌ\cj＞\c- ：： %iのｉｎｏｄｅは戻った。
 == LITH_LOG_LevelUpAri  | 楽しみにしてる。
@@ -70,5 +70,5 @@
 == LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan
 
 ## Misc ----------------------------------------------------------------------|
-== LITH_LOG_StartGame | ”%jS”を押してメニューを開く
+== LITH_LOG_StartGame | ”%jS”を押してメニューを開く。
 == LITH_LOG_MailRecv  | ＜\cj%S\c-＞からメールを受信した。
