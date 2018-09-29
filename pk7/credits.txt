@@ -1,14 +1,14 @@
 %%%                                                                         %%%
 %%          /7       //777777777777777777777777777  ///                      %%
 %          /:/7     //........................../  /::/ 77    777    777//    %
-%         /://               //77/     ///    /// /:7/==:7  :/::/7 //77//     %
-%        /://    /777       //77=======::////::///:7/ /:7   //:::77::::/      %
-%       /://    /::/       //77/====7-::::::::// /7/ /:/   7/::/777777//      %
-%      /://    /::/       //77/    /:://   /:// /7/ /:=/  :777/    777/       %
-%     /:======/::/=======//77/    /:://   /:// /77/ 7::::=77/:    /:://       %
-%    /:::::://::/==========//    ===//   /:// /77/   7==/:7//     7://        %
-%           /::/                        /://  ^^^                /7//:        %
-%            ^^                         ^^^                        ^^         %
+%         /://               //77/     ///    /// /:7/77:7   /::/7 //77//     %
+%        /://    /777       //77=======::////::///:7/ /:7   //::::7::::/      %
+%       /://    /::/       //77/====7::::::::://:/7/ /:/   //::/777777//      %
+%      /://    /::/       //77/    /:://   /://:/7/ /:=/  /777/  7 /7//       %
+%     /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /:://       %
+%    /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /:://        %
+%           /::/                        /://  ^^                //7//         %
+%           ^^^                         ^^^                     ^^^^          %
 %                                                                             %
 %                            Project Golan, Xevv 2                            %
 %                                                                             %
@@ -136,11 +136,16 @@
 
 *  BLLTR0 sprite
 
-                                * Ryan Cordell *
+*                               * Ryan Cordell *
 
+*  I lifted a bunch of stuff from Enblanco, because wow thems some pretties
+*  Here's a list of the stuff I stole from it (with permission:)
+*  Green/blue armor pickups
 *  XDeaths for the Cacodemon, Demon, Archvile, and Revenant
 *  Archvile attack effects
 *  Arachnotron attack effects
+*  Baron attack effects
+*  Splash effects
 
 *                                 * Seryder *
 
@@ -155,6 +160,7 @@
 *  Mateba reload animation
 *  SPAS reload animation
 *  Windows XP theme
+*  Armor sprites
 
 *                              * Shadowlink226 *
 
@@ -224,6 +230,7 @@
 
 --- Testers ------------------------------------------------------------------|
 
+ * a1337spy
  * anomalouslymandatory
  * AgentSpooks/Lotte
  * Ikazu-san

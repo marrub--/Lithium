@@ -12,6 +12,10 @@ in file language.info.enemies.*.txt
    parse file: Info_Enemies.txt
 done
 
+in file language.info.items.*.txt
+   parse file: Info_Items.txt
+done
+
 in file language.info.places.*.txt
    parse file: Info_Places.txt
 done
