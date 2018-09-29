@@ -14,7 +14,6 @@ actor Lith_Cacodemon : Cacodemon replaces Cacodemon
 {
    Tag "$LITH_INFO_SHORT_Cacodemon"
    BloodColor "Blue"
-   Health 1
 
    states
    {
