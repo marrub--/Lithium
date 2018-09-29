@@ -3,6 +3,8 @@
 
 #include "lzscript/Monsters/1_ZombieMan.zsc"
 
+#include "lzscript/Monsters/4_Archvile.zsc"
+
 #include "lzscript/Monsters/5_Cyberdemon.zsc"
 #include "lzscript/Monsters/5_SpiderMastermind.zsc"
 

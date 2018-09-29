@@ -16,7 +16,6 @@
 #include "lscripts/Monsters/3_Mancubus.dec"
 #include "lscripts/Monsters/3_Revenant.dec"
 
-#include "lscripts/Monsters/4_Archvile.dec"
 #include "lscripts/Monsters/4_PainElemental.dec"
 
 #include "lscripts/Monsters/6_James.dec"
