@@ -76,8 +76,7 @@ class Lith_SuperShotgun : Lith_MWeapon
       SSGG A 1 offset(0, 35);
       SSGG A 1 offset(0, 33);
       SSGG A 1 offset(0, 32);
-      SSGG A 0 A_JumpIfInventory("Lith_ShellAmmo", 2, 1);
-      goto Ready;
+   OpenAnim:
       SSGG DEFGH 3;
       SSGG I 2;
       SSGG J 2 A_PlaySound("weapons/ssg/open", CHAN_5);
@@ -89,12 +88,20 @@ class Lith_SuperShotgun : Lith_MWeapon
             Lith_A_Casing("Lith_CasShellHot", 20, -4, 30, frandom(3,4), frandom(-7,-8), frandom(2,9));
          }
       }
+      SSGG Z 0 A_JumpIfInventory("Lith_ShellAmmo", 2, "LoadAnim");
+      SSGG Z 1 offset(4, 35);
+      SSGG Z 1 offset(15, 37);
+      SSGG Z 1 offset(30, 42);
+      SSGG Z 2 offset(54, 54);
+      SSGG Z 0 offset(1, 32);
+      goto CloseAnim;
    LoadAnim:
       SSGG KL 3;
       SSGG M 4;
       SSGG N 2 A_PlaySound("weapons/ssg/load", CHAN_6);
       SSGG O 2;
       SSGG O 0 A_JumpIf(--invoker.m_iter != 0, "LoadAnim");
+   CloseAnim:
       SSGG P 3;
       SSGG Q 3;
       SSGG R 3 A_PlaySound("weapons/ssg/close", CHAN_7);
