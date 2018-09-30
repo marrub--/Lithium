@@ -79,7 +79,7 @@ for ln in ifp
       ofh.puts "   UPGR_#{nam},"
 
       ofc.puts <<-END
-   {{"#{nam}", #{inf}, #{scr}}, #{pcl}, #{cat}, #{prf}, #{mul}, #{grp}, #{req}, UPGR_#{nam}},
+   {{"#{nam}", #{inf}, #{scr}}, #{pcl}, #{cat}, #{prf}, #{grp}, #{req}, #{mul}, UPGR_#{nam}},
 END
 
       unless flg.empty?
