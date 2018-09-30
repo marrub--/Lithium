@@ -10,8 +10,9 @@ popular a few thousand years ago from its (at the time) unique design and
 style.
 
 This version is suited for a left-handed user, with a barrel that opens to the
-right. The weapon loads twelve .454 Casull rounds much like the Mateba Grifone
-variant.
+right. The weapon loads twelve .454 Casull rounds, six in a cylinder and six in
+a magazine in the grip. The weapon fires every other round out of the magazine
+through the ejection port, and the rest are kept in the cylinder.
 
 Due to the original design being lost in time, this revolver sports several
 accuracy deficiencies, but nonetheless has the classic look and feel of the
