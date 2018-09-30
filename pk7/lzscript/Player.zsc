@@ -17,7 +17,7 @@ default
    Species "Lith_Player";
    Lith_Player.ViewBob 1;
 
-   +THRUSPECIES;
+   +THRUSPECIES
 }
 
 meta double m_vbob;
@@ -263,8 +263,8 @@ override void Tick()
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
 {
-   if(mod == 'Lith_PlayerMissile')
-      return 0;
+   // ÜBER KLUDGE
+   if(inflictor.species == species && inflictor.bDONTHARMSPECIES) return 0;
 
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
 

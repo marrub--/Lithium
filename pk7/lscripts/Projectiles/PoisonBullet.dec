@@ -90,6 +90,7 @@ actor Lith_PoisonBullet : Lith_BulletPuff
    Species "Lith_Player"
    Alpha 0.9
    
+   +DONTHARMSPECIES
    +NOGRAVITY
    +NOBLOCKMAP
    +FLOORCLIP

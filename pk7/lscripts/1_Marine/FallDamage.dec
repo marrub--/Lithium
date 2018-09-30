@@ -18,10 +18,12 @@ actor Lith_PuffItDownBro // Taken from DemonSteele
 
 actor Lith_ExplodoBoots
 {
-   DamageType "Lith_PlayerMissile"
+   Species "Lith_Player"
+   DamageType "Melee"
    Height 0
    Radius 0
    
+   +DONTHARMSPECIES
    +NOTIMEFREEZE
    +NOGRAVITY
    +NOBLOCKMAP

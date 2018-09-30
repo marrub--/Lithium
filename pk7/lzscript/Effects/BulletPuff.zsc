@@ -32,6 +32,7 @@ class Lith_BulletPuff : Actor replaces BulletPuff
       Species "Lith_Player";
       Alpha 0.9;
 
+      +DONTHARMSPECIES
       +NOGRAVITY
       +NOBLOCKMAP
       +FLOORCLIP

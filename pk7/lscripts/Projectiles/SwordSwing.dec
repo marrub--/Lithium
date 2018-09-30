@@ -59,6 +59,7 @@ actor Lith_SwordHitter
    DamageType "Lith_Melee"
    
    Projectile
+   +DONTHARMSPECIES
    +MTHRUSPECIES
    +EXPLODEONWATER
    +RIPPER

@@ -16,7 +16,9 @@ actor Lith_Dummy
 
 actor Lith_PlayerDummyPuff : Lith_Dummy
 {
+   Species "Lith_Player"
    DamageType "Lith_PlayerMissile"
+   +DONTHARMSPECIES
 }
 
 actor Lith_DummyArmor : BasicArmorBonus {}

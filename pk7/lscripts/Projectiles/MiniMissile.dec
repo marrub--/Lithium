@@ -10,6 +10,7 @@ actor Lith_MiniMissile
    DamageType "Lith_Shrapnel"
    
    Projectile
+   +DONTHARMSPECIES
    +ROCKETTRAIL
    +MTHRUSPECIES
    +EXPLODEONWATER

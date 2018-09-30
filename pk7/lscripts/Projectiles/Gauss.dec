@@ -23,6 +23,7 @@ actor Lith_GaussPuff
    Species "Lith_Player"
    DamageType "Lith_Energy"
    
+   +DONTHARMSPECIES
    +BRIGHT
    +PUFFONACTORS
    +PUFFGETSOWNER

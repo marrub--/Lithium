@@ -76,6 +76,7 @@ actor Lith_PlasmaBolt
    Species "Lith_Player"
    
    Projectile
+   +DONTHARMSPECIES
    +MTHRUSPECIES
    
    var int user_trailstep;

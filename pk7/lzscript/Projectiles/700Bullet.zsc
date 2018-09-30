@@ -7,6 +7,7 @@ class Lith_700Bullet : Lith_BulletPuff
       DamageType "Lith_Bullets";
       Species "Lith_Player";
 
+      +DONTHARMSPECIES
       +MTHRUSPECIES
       +FORCERADIUSDMG
       +PUFFONACTORS

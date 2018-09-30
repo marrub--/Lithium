@@ -48,8 +48,10 @@ actor Lith_OmegaRailBeam : Lith_OmegaRailFXBase
    Translation "Lith_OmegaRail"
    XScale 0.8
    YScale 0.7
-   DamageType "Lith_PlayerMissile"
+   Species "Lith_Player"
+   DamageType "Lith_Energy"
    
+   +DONTHARMSPECIES
    +EXTREMEDEATH
    +FORCERADIUSDMG
    

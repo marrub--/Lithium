@@ -40,10 +40,11 @@ class Lith_DarkMatterPuff : Actor
       DamageType "Lith_DarkMatter";
       Species "Lith_Player";
       
-      +NOGRAVITY;
-      +ALWAYSPUFF;
-      +MTHRUSPECIES;
-      +HITTRACER;
+      +DONTHARMSPECIES
+      +NOGRAVITY
+      +ALWAYSPUFF
+      +MTHRUSPECIES
+      +HITTRACER
    }
    
    states
@@ -62,10 +63,11 @@ class Lith_DarkMatterRailgun : Actor
       DamageType "Lith_DarkMatter";
       Species "Lith_Player";
       
-      +NOGRAVITY;
-      +NOBLOCKMAP;
-      +NOCLIP;
-      +MTHRUSPECIES;
+      +DONTHARMSPECIES
+      +NOGRAVITY
+      +NOBLOCKMAP
+      +NOCLIP
+      +MTHRUSPECIES
    }
    
    states
@@ -86,8 +88,8 @@ class Lith_DarkMatterParticle : Actor
       RenderStyle "Subtract";
       Alpha 0.9;
       
-      +NOINTERACTION;
-      +BRIGHT;
+      +NOINTERACTION
+      +BRIGHT
    }
    
    states
@@ -114,10 +116,11 @@ class Lith_DarkMatter : Actor
       Mass 999999;
       
       Projectile;
-      +FORCEXYBILLBOARD;
-      +MTHRUSPECIES;
-      +BRIGHT;
-      +FORCERADIUSDMG;
+      +DONTHARMSPECIES
+      +FORCEXYBILLBOARD
+      +MTHRUSPECIES
+      +BRIGHT
+      +FORCERADIUSDMG
    }
 
    states

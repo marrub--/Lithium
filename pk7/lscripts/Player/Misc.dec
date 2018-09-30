@@ -1,7 +1,9 @@
 actor Lith_EXPLOOOSION
 {
-   DamageType "Lith_PlayerMissile"
+   Species "Lith_Player"
+   DamageType "Lith_Shrapnel"
    
+   +DONTHARMSPECIES
    +NOTIMEFREEZE
    +NOGRAVITY
    
@@ -19,11 +21,9 @@ actor Lith_EXPLOOOSION
 
 actor Lith_GEExplosion
 {
-   DamageType "Lith_PlayerMissile"
-   
    +NOTIMEFREEZE
    +NOGRAVITY
-   
+
    states
    {
    Spawn:

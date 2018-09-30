@@ -19,8 +19,11 @@ actor Lith_CircleSpear
    RenderStyle "Add"
    Damage (77)
    DamageType "Lith_Magic"
+   Species "Lith_Player"
 
    Projectile
+   +DONTHARMSPECIES
+   +MTHRUSPECIES
    +NOTIMEFREEZE
    +RIPPER
    +BRIGHT
@@ -68,8 +71,11 @@ actor Lith_CircleElectricity
    RenderStyle "Add"
    Damage 7
    DamageType "Lith_Magic"
+   Species "Lith_Player"
 
    Projectile
+   +DONTHARMSPECIES
+   +MTHRUSPECIES
    +RANDOMIZE
    +NOTIMEFREEZE
    +RIPPER
@@ -91,7 +97,9 @@ actor Lith_CircleWallFx
    YScale 5.1
    Alpha 0.7
    DamageType "Lith_Magic"
+   Species "Lith_Player"
 
+   +DONTHARMSPECIES
    +NOTIMEFREEZE
    +NOCLIP
    +NOGRAVITY
@@ -139,8 +147,11 @@ actor Lith_CircleWall : Lith_CircleWallFx
    Radius 8
    Height 32
    DamageType "Lith_Magic"
+   Species "Lith_Player"
 
    var int user_trigger;
+
+   +DONTHARMSPECIES
 
    states
    {

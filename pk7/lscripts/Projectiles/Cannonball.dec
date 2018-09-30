@@ -40,9 +40,10 @@ actor Lith_CannonBall
    Gravity 0.55
    BounceType "Hexen"
    Species "Lith_Player"
-   DamageType "Lith_PlayerMissile"
+   DamageType "Lith_Shrapnel"
    
    Projectile
+   +DONTHARMSPECIES
    +RIPPER
    +BOUNCEONACTORS
    +BOUNCEAUTOOFFFLOORONLY

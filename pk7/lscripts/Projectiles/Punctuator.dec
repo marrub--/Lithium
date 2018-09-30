@@ -3,8 +3,10 @@ actor Lith_PunctuatorExplosion
    RenderStyle "Add"
    Alpha 0.3
    Scale 0.9
-   DamageType "Lith_PlayerMissile"
+   Species "Lith_Player"
+   DamageType "Lith_Shrapnel"
    
+   +DONTHARMSPECIES
    +BLOODLESSIMPACT
    +NOINTERACTION
    +FORCERADIUSDMG
@@ -25,8 +27,9 @@ actor Lith_PunctuatorExplosion
 actor Lith_PunctuatorPuff
 {
    Species "Lith_Player"
-   DamageType "Lith_PlayerMissile"
+   DamageType "Lith_Shrapnel"
    
+   +DONTHARMSPECIES
    +NOINTERACTION
    +PUFFONACTORS
    +NODECAL
