@@ -29,7 +29,7 @@ class Lith_Armor_Standard_Lower : Lith_Armor
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
-   states {Spawn: ARM1 B -1; stop;}
+   states {Spawn: ARM1 C -1; stop;}
 }
 
 class Lith_Armor_Improved_Upper : Lith_Armor
@@ -51,7 +51,7 @@ class Lith_Armor_Improved_Lower : Lith_Armor
       Lith_Armor.SlotSave aslot_lower, 2, 3;
    }
 
-   states {Spawn: ARM2 B -1; stop;}
+   states {Spawn: ARM2 C -1; stop;}
 }
 
 class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
@@ -63,7 +63,7 @@ class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_energy;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM3 A -1; stop;}
 }
 
 class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
@@ -75,7 +75,7 @@ class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_energy;
    }
 
-   states {Spawn: ARM2 B -1; stop;}
+   states {Spawn: ARM3 C -1; stop;}
 }
 
 class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
@@ -87,7 +87,7 @@ class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_fire;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM4 A -1; stop;}
 }
 
 class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
@@ -99,7 +99,7 @@ class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_fire;
    }
 
-   states {Spawn: ARM2 B -1; stop;}
+   states {Spawn: ARM4 C -1; stop;}
 }
 
 class Lith_Armor_Aerodynamic_Upper : Lith_Armor_Aerodynamic
@@ -110,7 +110,7 @@ class Lith_Armor_Aerodynamic_Upper : Lith_Armor_Aerodynamic
       Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM5 A -1; stop;}
 }
 
 class Lith_Armor_Aerodynamic_Lower : Lith_Armor_Aerodynamic
@@ -121,7 +121,7 @@ class Lith_Armor_Aerodynamic_Lower : Lith_Armor_Aerodynamic
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
-   states {Spawn: ARM2 B -1; stop;}
+   states {Spawn: ARM5 C -1; stop;}
 }
 
 class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
@@ -132,7 +132,7 @@ class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
       Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM6 A -1; stop;}
 }
 
 class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
@@ -143,7 +143,7 @@ class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
-   states {Spawn: ARM2 B -1; stop;}
+   states {Spawn: ARM6 C -1; stop;}
 }
 
 class Lith_Armor_PinkSilver_Upper : Lith_Armor_Resistant
@@ -155,7 +155,7 @@ class Lith_Armor_PinkSilver_Upper : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_magic;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM7 A -1; stop;}
 }
 
 class Lith_Armor_PinkSilver_Lower : Lith_Armor_Resistant
@@ -167,7 +167,7 @@ class Lith_Armor_PinkSilver_Lower : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_magic;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM7 C -1; stop;}
 }
 
 class Lith_Armor_Midori_Upper : Lith_Armor_Resistant
@@ -179,7 +179,7 @@ class Lith_Armor_Midori_Upper : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM8 A -1; stop;}
 }
 
 class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
@@ -191,7 +191,7 @@ class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }
 
-   states {Spawn: ARM2 A -1; stop;}
+   states {Spawn: ARM8 C -1; stop;}
 }
 
 // EOF
