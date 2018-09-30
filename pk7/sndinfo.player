@@ -13,6 +13,7 @@ player/zoomout      lsounds/Player/ZoomOut.flac            // 〃
 player/hitground    lsounds/Player/HitGround.flac          // EYE: Divine Cybermancy
 player/infraredoff  lsounds/Player/InfraredOff.flac        // Counter-Strike: Source
 player/levelup      lsounds/Player/LevelUp.flac            // Phantasy Star Online
+player/glare        lsounds/Player/Glare.ogg               // Monster Girl Quest
 
 player/counter     lsounds/GUI/Payout/Counter.flac     // Halo 3
 player/counterdone lsounds/GUI/Payout/CounterDone.flac // 〃

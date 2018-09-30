@@ -503,6 +503,28 @@ void Lith_Discount()
    withplayer(LocalPlayer) p->discount = 0.9;
 }
 
+//
+// Lith_Glare
+//
+script type("net") ext("ACS")
+void Lith_Glare(void)
+{
+   withplayer(LocalPlayer)
+   {
+      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
+
+      ACS_LocalAmbientSound("player/glare", 127);
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, "Lith_PlayerDummyPuff", "None",
+         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
+
+      ACS_Delay(14);
+
+      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
+
+      ACS_Delay(19);
+   }
+}
+
 // Static Functions ----------------------------------------------------------|
 
 //
