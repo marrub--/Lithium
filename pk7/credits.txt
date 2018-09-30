@@ -80,7 +80,7 @@
 
 *  SteggleSphere sprites
 
-                              * InsanityBringer *
+*                             * InsanityBringer *
 
 *  Quaternion and view unprojection code (used in crosshairs)
 
