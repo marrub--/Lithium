@@ -15,8 +15,8 @@
 // Extern Functions ----------------------------------------------------------|
 
 // These are included here so the compiler may check the function signatures.
-#define Fn_F(n, cb) void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
-#define Fn_S(n, cb) script Fn_F(n, cb)
+#define Fn_F(n, cb) stkcall void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
+#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
 #include "lith_upgradefuncs.h"
 
 

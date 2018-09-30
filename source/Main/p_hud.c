@@ -38,7 +38,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 {
    if(p->getCVarI("lith_hud_showscore"))
    {
-      __str scr = StrParam(fmt, Lith_ScoreSep(scrn));
+      __str scr = StrParam(fmt, scoresep(scrn));
 
       PrintTextFmt("\C%S%S", cr, scr);
       PrintText(font, 0, x,xa, y,ya);
@@ -51,7 +51,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
       if(p->scoreaccumtime > 0)
       {
          SetFade(fid_scacum, 5, 0.1);
-         p->scoreaccumstr = StrParam("%c%S", p->scoreaccum >= 0 ? '+' : ' ', Lith_ScoreSep(p->scoreaccum));
+         p->scoreaccumstr = StrParam("%c%S", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
       }
 
       if(CheckFade(fid_schit1))
@@ -79,12 +79,12 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
 {
    #define Inc (horz ? (x -= 10) : (y += 10))
-   if(p->keys.rs) PrintSpriteA(":HUD:H_KS1", x,2, y,1, a), Inc;
-   if(p->keys.ys) PrintSpriteA(":HUD:H_KS2", x,2, y,1, a), Inc;
-   if(p->keys.bs) PrintSpriteA(":HUD:H_KS3", x,2, y,1, a), Inc;
-   if(p->keys.rc) PrintSpriteA(":HUD:H_KC1", x,2, y,1, a), Inc;
-   if(p->keys.yc) PrintSpriteA(":HUD:H_KC2", x,2, y,1, a), Inc;
-   if(p->keys.bc) PrintSpriteA(":HUD:H_KC3", x,2, y,1, a), Inc;
+   if(p->krs) PrintSpriteA(":HUD:H_KS1", x,2, y,1, a), Inc;
+   if(p->kys) PrintSpriteA(":HUD:H_KS2", x,2, y,1, a), Inc;
+   if(p->kbs) PrintSpriteA(":HUD:H_KS3", x,2, y,1, a), Inc;
+   if(p->krc) PrintSpriteA(":HUD:H_KC1", x,2, y,1, a), Inc;
+   if(p->kyc) PrintSpriteA(":HUD:H_KC2", x,2, y,1, a), Inc;
+   if(p->kbc) PrintSpriteA(":HUD:H_KC3", x,2, y,1, a), Inc;
    #undef Inc
 }
 

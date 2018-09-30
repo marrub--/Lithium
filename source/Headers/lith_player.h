@@ -90,11 +90,11 @@ enum
 //
 struct player_delta
 {
+   // Members ----------------------------------------------------------------|
+
    // Status
-   int   maxhealth;
    fixed alpha;
    i96   score;
-   int   indialogue;
 
    // Position
    fixed x, y, z;
@@ -109,13 +109,21 @@ struct player_delta
    fixed jumpboost;
 
    // Input
-   int  buttons;
-   bool scopetoken;
-   int  frozen;
-   int  semifrozen;
+   int buttons;
 
    // Attributes
    struct player_attributes attr;
+
+   // Bitfields --------------------------------------------------------------|
+
+   // Status
+   uint maxhealth  ;//: 9;
+   uint indialogue ;//: 7;
+
+   // Input
+   bool scopetoken ;//: 1;
+   uint frozen     ;//: 7;
+   uint semifrozen ;//: 7;
 };
 
 // Extern Functions ----------------------------------------------------------|
@@ -141,8 +149,8 @@ stkcall void Lith_TakeScore(struct player *p, i96 score);
 stkcall void Lith_GiveEXP(struct player *p, u64 amt);
 
 // misc
-upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
-bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
+stkcall upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
+stkcall bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
 stkcall void Lith_ClearTextBuf(struct player *p);
 stkcall __str Lith_PlayerDiscriminator(int pclass);
 
@@ -231,12 +239,6 @@ struct player
 
    // Members ----------------------------------------------------------------|
 
-   // Initialization
-   bool wasinit;
-   bool active;
-   bool dead;
-   bool reinit;
-
    // Info
    int   tid;
    int   num;
@@ -255,30 +257,21 @@ struct player
    int oldhealth;
 
    // BIP
-   bip_t bip, *bipptr;
+   struct bip bip, *bipptr;
 
    // Upgrades
    struct upgr_data upgrdata;
    upgrade_t        upgrades[UPGR_STATIC_MAX];
    upgrademap_t     upgrademap;
-   int              upgrmax;
-   bool             upgrinit;
 
    // Inventory
    container_t inv[8];
    container_t misc;
    item_t     *useitem;
    item_t     *selitem;
-   bool        movitem;
 
    // HUD
-   loginfo_t  loginfo;
-   bool       hudenabled;
-
-   // DECORATE/ZScript
-   int  decvars[8];
-   char txtbuf[8];
-   int  tbptr;
+   loginfo_t loginfo;
 
    // Score
    i96     scoreaccum;
@@ -288,16 +281,12 @@ struct player
    fixed64 discount;
 
    // Misc
-   int   spuriousexplosions;
-   int   brouzouf;
-   bool  hadinfrared;
    fixed rage;
-   __str notes[16];
-   bool  autoreload;
+   __str notes  [16];
+   int   decvars[8];
+   char  txtbuf [8];
 
    // Static data
-   bool  staticinit;
-   int   spawnhealth;
    fixed spawndfactor;
    fixed jumpheight;
    fixed viewheight;
@@ -325,46 +314,73 @@ struct player
    int weathertid;
 
    // GUI
-   int   activegui;
+   uint  activegui;
    cbi_t cbi;
 
    // Statistics
-   int weaponsheld;
-   int itemsbought;
-   int upgradesowned;
-
-   i64 healthsum;
-   i64 healthused;
+   uint healthsum;
+   uint healthused;
 
    i96 scoresum;
    i96 scoreused;
 
-   int unitstravelled;
+   uint unitstravelled;
 
    // Weapons
    weapondata_t weapon;
-
-   int    riflefiremode;
-   list_t hudstrlist;
-
    __str weaponclass;
 
+   list_t hudstrlist;
+
+   // Bitfields --------------------------------------------------------------|
+
+   // Initialization
+   bool wasinit ;//: 1;
+   bool active  ;//: 1;
+   bool dead    ;//: 1;
+   bool reinit  ;//: 1;
+
+   // Upgrades
+   uint upgrmax  ;//: 8;
+   bool upgrinit ;//: 1;
+
+   // Inventory
+   bool movitem ;//: 1;
+
+   // HUD
+   bool hudenabled ;//: 1;
+
+   // Misc
+   uint nextstep    ;//: 6;
+   bool hadinfrared ;//: 1;
+   uint tbptr       ;//: 4;
+
+   // Static data
+   bool staticinit  ;//: 1;
+   uint spawnhealth ;//: 9;
+
+   // Statistics
+   uint spuriousexplosions ;//: 10;
+   uint brouzouf           ;//: 20;
+
+   uint weaponsheld   ;//: 4;
+   uint itemsbought   ;//: 16;
+   uint upgradesowned ;//: 12;
+
+   // Weapons
+   int  riflefiremode ;//: 5;
+   bool autoreload    ;//: 1;
+
    // Keys
-   struct keycards_s
-   {
-      bool rc : 1;
-      bool yc : 1;
-      bool bc : 1;
-      bool rs : 1;
-      bool ys : 1;
-      bool bs : 1;
-   } keys;
+   bool krc ;//: 1;
+   bool kyc ;//: 1;
+   bool kbc ;//: 1;
+   bool krs ;//: 1;
+   bool kys ;//: 1;
+   bool kbs ;//: 1;
 
    // 🌌 「÷」 0
-   struct divsigil
-   {
-      bool acquired;
-   } sigil;
+   bool sgacquired ;//: 1;
 };
 
 typedef void (*player_cb_t)(struct player *p);

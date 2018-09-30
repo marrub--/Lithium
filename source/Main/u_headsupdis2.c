@@ -78,6 +78,7 @@ static void HUD_Health(struct player *p)
 //
 // Activate
 //
+stkcall
 void Upgr_HeadsUpDis2_Activate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
@@ -86,6 +87,7 @@ void Upgr_HeadsUpDis2_Activate(struct player *p, upgrade_t *upgr)
 //
 // Disable
 //
+stkcall
 void Upgr_HeadsUpDis2_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
@@ -94,6 +96,7 @@ void Upgr_HeadsUpDis2_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 {
    Lith_HUD_Log(p, CR_RED, 0, -10);

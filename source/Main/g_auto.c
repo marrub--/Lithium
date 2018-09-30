@@ -8,6 +8,7 @@
 //
 // Lith_GUI_Auto
 //
+stkcall
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide)
 {
    x += g->ox;
@@ -34,6 +35,7 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
 //
 // Lith_GUI_Init
 //
+stkcall
 void Lith_GUI_Init(gui_state_t *g, void *state)
 {
    g->state = state;
@@ -43,6 +45,7 @@ void Lith_GUI_Init(gui_state_t *g, void *state)
 //
 // Lith_GUI_UpdateState
 //
+stkcall
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 {
    bool inverted = p->getCVarI("lith_player_invertmouse");
@@ -77,6 +80,7 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 //
 // Lith_GUI_Begin
 //
+stkcall
 void Lith_GUI_Begin(gui_state_t *g, int w, int h)
 {
    if(!w) w = 320;
@@ -91,6 +95,7 @@ void Lith_GUI_Begin(gui_state_t *g, int w, int h)
 //
 // Lith_GUI_End
 //
+stkcall
 void Lith_GUI_End(gui_state_t *g, enum cursor curs)
 {
    __str cgfx;
@@ -119,6 +124,7 @@ void Lith_GUI_End(gui_state_t *g, enum cursor curs)
 //
 // Lith_GUI_Clip
 //
+stkcall
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 {
    g->useclip = true;
@@ -132,6 +138,7 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 //
 // Lith_GUI_ClipRelease
 //
+stkcall
 void Lith_GUI_ClipRelease(gui_state_t *g)
 {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
@@ -141,6 +148,7 @@ void Lith_GUI_ClipRelease(gui_state_t *g)
 //
 // Lith_GUI_TypeOn
 //
+stkcall
 void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
 {
    typeon->txt = text;
@@ -151,10 +159,11 @@ void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
 //
 // Lith_RemoveTextColors
 //
+stkcall
 __str Lith_RemoveTextColors(__str str, int size)
 {
    noinit
-   static char buf[8192];
+   static char buf[4096];
    int j = 0;
 
    if(size > countof(buf)) return "[programmer error, please report]";
@@ -176,12 +185,13 @@ __str Lith_RemoveTextColors(__str str, int size)
       buf[j++] = str[i];
    }
 
-   return StrParam("%.*s", j, buf);
+   return l_strncpy(buf, j);
 }
 
 //
 // Lith_GUI_TypeOnUpdate
 //
+stkcall
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon)
 {
    int num = ACS_Random(2, 15);

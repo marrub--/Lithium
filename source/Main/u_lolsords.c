@@ -8,6 +8,7 @@
 //
 // Activate
 //
+stkcall
 void Upgr_lolsords_Activate(struct player *p, upgrade_t *upgr)
 {
    UData.origweapon = p->weaponclass;
@@ -17,6 +18,7 @@ void Upgr_lolsords_Activate(struct player *p, upgrade_t *upgr)
 //
 // Deactivate
 //
+stkcall
 void Upgr_lolsords_Deactivate(struct player *p, upgrade_t *upgr)
 {
    InvTake("Lith_Sword", 1);

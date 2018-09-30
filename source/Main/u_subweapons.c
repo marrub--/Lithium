@@ -25,6 +25,7 @@ void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_Subweapons_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled) return;

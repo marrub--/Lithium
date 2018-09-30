@@ -53,8 +53,8 @@ enum
 
 typedef bool (*upgr_reinit_cb_t)(struct upgradeinfo *ui);
 
-                      typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
-script typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
+stkcall typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
+script  typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
 
 struct upgr_data_Adrenaline {
    int  charge;
@@ -63,7 +63,7 @@ struct upgr_data_Adrenaline {
 
 struct upgr_data_JetBooster {
    int charge;
-   bool discharged : 1;
+   bool discharged ;//: 1;
 };
 
 struct upgr_data_lolsords {
@@ -75,23 +75,23 @@ struct upgr_data_ReactArmor {
 };
 
 struct upgr_data_ReflexWetw {
-   u32  charge : 6;
-   bool leaped : 1;
+   u32  charge ;//: 6;
+   bool leaped ;//: 1;
 };
 
 struct upgr_data_VitalScan {
    int   target;
    int   oldtarget;
    __str tagstr;
-   int   health;
-   int   oldhealth;
-   int   maxhealth;
+   uint  health;
+   uint  oldhealth;
+   uint  maxhealth;
    fixed cangle;
    fixed oangle;
    fixed splitfrac;
-   u32  split : 3;
-   u32  rank  : 4;
-   bool freak : 1;
+   u32  split ;//: 3;
+   u32  rank  ;//: 4;
+   bool freak ;//: 1;
 };
 
 struct upgr_data_Zoom {
@@ -106,7 +106,7 @@ struct upgr_data_HomingRPG {
 struct upgr_data_Magic {
    fixed manaperc;
    gui_state_t gst;
-   bool ui : 1;
+   bool ui ;//: 1;
 };
 
 struct upgr_data_StealthSys {
@@ -137,9 +137,9 @@ typedef struct upgradeinfo {
    int   pclass;
    int   category;
    int   perf;
-   fixed scoreadd;
    int   group;
-   u32   requires;
+   int   requires;
+   fixed scoreadd;
 
    int key, id;
 
@@ -166,9 +166,9 @@ typedef struct upgrade {
 
    upgradeinfo_t const *info;
 
-   bool active    : 1;
-   bool owned     : 1;
-   bool wasactive : 1; // for reinitializing on map load
+   bool active    ;//: 1;
+   bool owned     ;//: 1;
+   bool wasactive ;//: 1; // for reinitializing on map load
 } upgrade_t;
 
 void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname);

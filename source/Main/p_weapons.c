@@ -171,8 +171,7 @@ void Lith_PlayerPreWeapons(struct player *p)
 
    // Reset data temporarily.
    w->cur = null;
-   for(int i = 0; i < SLOT_MAX; i++)
-      w->slot[i] = 0;
+   for(int i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
 
    // Iterate over each weapon setting information on it.
    for(int i = weapon_min; i < weapon_max; i++)
@@ -203,12 +202,14 @@ void Lith_PlayerPreWeapons(struct player *p)
 
       // For slot 3 weapons that don't take ammo, check if they should.
       switch(i)
+      {
       case weapon_shotgun:
       case weapon_c_rifle:
          if(p->getCVarI("lith_weapons_slot3ammo")) {
             wep->ammotype |= AT_Ammo;
             wep->ammoclass = "Lith_ShellAmmo";
          }
+      }
 
       // Set magazine and ammo counts.
       if(w->cur == wep)
@@ -270,10 +271,12 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       HERMES("Lith_DelearSprite");
       break;
    case weapon_cfist:
-      SetSize(320, 240);
-      fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;
-      PrintTextFmt(L("LITH_CHARGE_FMT"), charge);
-      PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
+      __with(fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;)
+      {
+         SetSize(320, 240);
+         PrintTextFmt(L("LITH_CHARGE_FMT"), charge);
+         PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
+      }
       break;
    }
 }
@@ -308,7 +311,7 @@ int Lith_GetFinalizerMaxHealth(void)
 {
    int sh = ACS_GetActorProperty(0, APROP_SpawnHealth);
 
-   ifauto(dmon_t *, m, DmonPtr())
+   ifauto(dmon_t *, m, DmonSelf())
       return sh + (m->maxhealth - sh) * 0.5;
    else
       return sh;

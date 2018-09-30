@@ -78,6 +78,7 @@ static int CompUpgrInfo(void const *lhs, void const *rhs)
 //
 // SetDataPtr
 //
+stkcall
 static void SetDataPtr(struct player *p, upgrade_t *upgr)
 {
    upgr->dataptr = &p->upgrdata;
@@ -477,7 +478,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%S%S", Lith_ScoreSep(p->getCost(&upgr->info->shopdef)), mark);
+   if(upgr->info->cost) cost = StrParam("%S%S", scoresep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = L("LITH_FREE");
 
    PrintTextStr(cost);

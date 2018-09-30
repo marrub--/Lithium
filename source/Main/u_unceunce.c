@@ -6,6 +6,7 @@
 //
 // Activate
 //
+stkcall
 void Upgr_UNCEUNCE_Activate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetMusic("lmusic/Unce.ogg");
@@ -14,6 +15,7 @@ void Upgr_UNCEUNCE_Activate(struct player *p, upgrade_t *upgr)
 //
 // Deactivate
 //
+stkcall
 void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetMusic("*");

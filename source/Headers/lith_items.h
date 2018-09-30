@@ -5,6 +5,7 @@
 #define foritem(cont) forlist(item_t *it, (cont).items) if(it)
 
 // NB: these need to be ScriptS or they'll disappear on map load
+//     (we can't use a GSReinit callback because that would be really bad)
 script typedef bool (*item_b_cb_t)(struct item *item);
 script typedef void (*item_v_cb_t)(struct item *item);
 script typedef void (*item_p_cb_t)(struct item *item, struct container *cont);
@@ -12,7 +13,7 @@ script typedef void (*item_p_cb_t)(struct item *item, struct container *cont);
 typedef struct itemdata
 {
    __str name;
-   int w, h;
+   uint w, h;
    __str spr;
 
    item_b_cb_t Use;
@@ -25,7 +26,7 @@ typedef struct item
 {
    anonymous itemdata_t data;
 
-   int x, y;
+   uint x, y;
 
    struct container *container;
    struct player *user;
@@ -35,7 +36,7 @@ typedef struct item
 
 typedef struct container
 {
-   int w, h;
+   uint w, h;
    __str bg;
    list_t items;
    struct player *user;

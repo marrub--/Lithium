@@ -362,7 +362,7 @@ static void OnFinalize(dmon_t *m)
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
    {
-      if(p->sigil.acquired)
+      if(p->sgacquired)
       {
          if(p->weapon.cur->info->type == weapon_c_starshot && rand() == 1)
             ACS_Teleport_EndGame();
@@ -493,7 +493,7 @@ void Lith_MonsterInfo()
 script ext("ACS")
 void Lith_MonsterFinalized()
 {
-   ifauto(dmon_t *, m, DmonPtr())
+   ifauto(dmon_t *, m, DmonSelf())
       OnFinalize(m);
 }
 

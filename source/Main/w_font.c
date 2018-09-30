@@ -26,7 +26,7 @@ static planedata *planes;
 // AllocFontMetric
 //
 stkcall
-static struct glyph *AllocFontMetric(unsigned key)
+static struct glyph *AllocFontMetric(uint key)
 {
    if(! planes)  planes = Salloc(planedata);
    groupdata   **groups = &( *planes)[key / (nglyphs * nblocks  * ngroups)];
@@ -45,7 +45,7 @@ static struct glyph *AllocFontMetric(unsigned key)
 // Lith_GetFontMetric
 //
 script ext("ACS")
-struct glyph *Lith_GetFontMetric(unsigned key)
+struct glyph *Lith_GetFontMetric(uint key)
 {
    groupdata *groups = (*planes)[key / (nglyphs * nblocks  * ngroups)];
    blockdata *blocks = (*groups)[key / (nglyphs * nblocks) % ngroups ];
@@ -57,7 +57,7 @@ struct glyph *Lith_GetFontMetric(unsigned key)
 // Lith_SetFontMetric
 //
 script ext("ACS")
-void Lith_SetFontMetric(unsigned key, int xadv, int yofs)
+void Lith_SetFontMetric(uint key, int xadv, int yofs)
 {
    struct glyph *metr = AllocFontMetric(key);
 

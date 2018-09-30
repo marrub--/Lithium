@@ -71,7 +71,7 @@ static struct page_info GetPageInfo(bippage_t const *page)
 //
 // SetCurPage
 //
-static void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
+static void SetCurPage(gui_state_t *g, struct bip *bip, bippage_t *page, __str body)
 {
    bip->curpage = page;
 
@@ -82,7 +82,7 @@ static void SetCurPage(gui_state_t *g, bip_t *bip, bippage_t *page, __str body)
 //
 // UnlockPage
 //
-static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
+static void UnlockPage(struct bip *bip, bippage_t *page, int pclass)
 {
    bip->pageavail++;
    bip->categoryavail[page->category]++;
@@ -96,7 +96,7 @@ static void UnlockPage(bip_t *bip, bippage_t *page, int pclass)
 // AddToBIP
 //
 optargs(1)
-static void AddToBIP(bip_t *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
+static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
    __str image = LanguageNull("LITH_INFO_IMAGE_%S", pinit->name);
    int height = strtoi_str(Language("LITH_INFO_CSIZE_%S", pinit->name), null, 0);
@@ -143,7 +143,7 @@ static int PClFromStr(__str name)
 //
 // LoadBIPInfo
 //
-static int LoadBIPInfo(__str fname, bip_t *bip, int pclass)
+static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
 {
    struct tokbuf tb = {
       .bbeg = 4, .bend = 10,
@@ -213,7 +213,7 @@ static int LoadBIPInfo(__str fname, bip_t *bip, int pclass)
 script
 void Lith_PlayerInitBIP(struct player *p)
 {
-   bip_t *bip = &p->bip;
+   struct bip *bip = &p->bip;
 
    ForCategory()
       bip->infogr[categ].free(true);
@@ -251,7 +251,7 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
          title = StrParam("%S%S", title, discrim);
    }
 
-   bip_t *bip = &p->bip;
+   struct bip *bip = &p->bip;
 
    bippage_t *page = Salloc(bippage_t);
 
@@ -295,7 +295,7 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 //
 // Lith_FindBIPPage
 //
-bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
+bippage_t *Lith_FindBIPPage(struct bip *bip, __str name)
 {
    if(!name)
       return null;
@@ -310,7 +310,7 @@ bippage_t *Lith_FindBIPPage(bip_t *bip, __str name)
 //
 // Lith_UnlockBIPPage
 //
-bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
+bippage_t *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 {
    bippage_t *page = bip->find(name);
 
@@ -330,7 +330,7 @@ bippage_t *Lith_UnlockBIPPage(bip_t *bip, __str name, int pclass)
 // Lith_DeallocateBIP
 //
 script
-void Lith_DeallocateBIP(bip_t *bip)
+void Lith_DeallocateBIP(struct bip *bip)
 {
    ForCategory()
       bip->infogr[categ].free(true);
@@ -353,7 +353,7 @@ static bool CheckMatch(struct page_info *pinf, __str query)
 //
 void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 {
-   bip_t *bip = &p->bip;
+   struct bip *bip = &p->bip;
    int avail, max;
 
    if(bip->curcategory == BIPC_MAIN)

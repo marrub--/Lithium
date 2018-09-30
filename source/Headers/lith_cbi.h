@@ -54,7 +54,6 @@ enum
 typedef struct cbi_s
 {
    gui_state_t guistate;
-   int theme, oldtheme;
 
    struct cbistate
    {
@@ -87,7 +86,9 @@ typedef struct cbi_s
       gui_txtbox_state_t notebox;
    } st;
 
-   int pruse;
+   uint theme    ;//: 7;
+   uint oldtheme ;//: 7;
+   uint pruse    ;//: 7;
 } cbi_t;
 
 // Extern Functions ----------------------------------------------------------|
@@ -95,4 +96,3 @@ typedef struct cbi_s
 void Lith_PlayerResetCBIGUI(struct player *p);
 
 #endif
-

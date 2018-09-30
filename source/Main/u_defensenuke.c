@@ -6,6 +6,7 @@
 //
 // Enter
 //
+stkcall
 void Upgr_DefenseNuke_Enter(struct player *p, upgrade_t *upgr)
 {
    InvGive("Lith_Nuke", 1);

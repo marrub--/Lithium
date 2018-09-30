@@ -63,24 +63,28 @@ void DmonDebugInfo(void)
 script
 dmon_t *DmonPtr(int tid, int ptr)
 {
-   if(tid || ptr)
-      ACS_SetActivator(tid, ptr);
+   if(tid || ptr) ACS_SetActivator(tid, ptr);
+   return DmonSelf();
+}
 
-   ifauto(int, id, InvNum("Lith_MonsterID"))
-      return Dmon(id - 1);
-   else
-      return null;
+//
+// DmonSelf
+//
+stkcall
+dmon_t *DmonSelf(void)
+{
+   ifauto(int, id, InvNum("Lith_MonsterID")) return Dmon(id - 1);
+   else                                      return null;
 }
 
 //
 // Dmon
 //
+stkcall
 dmon_t *Dmon(int id)
 {
-   if(dmonalloc[id].active)
-      return &dmonalloc[id];
-   else
-      return null;
+   if(dmonalloc[id].active) return &dmonalloc[id];
+   else                     return null;
 }
 
 //

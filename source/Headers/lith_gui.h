@@ -107,9 +107,9 @@ typedef struct gui_txtbox_state_s
 typedef struct gui_delta_s
 {
    fixed64 cx, cy;
-   bool    clicklft : 1;
-   bool    clickrgt : 1;
-   bool    clickany : 1;
+   bool    clicklft ;//: 1;
+   bool    clickrgt ;//: 1;
+   bool    clickany ;//: 1;
 } gui_delta_t;
 
 typedef struct gui_state_s
@@ -289,25 +289,31 @@ struct gui_presets const *Lith_GUIPreExtern(void);
 
 // Extern Functions ----------------------------------------------------------|
 
-optargs(1)
+stkcall optargs(1)
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide);
 
-optargs(1)
+stkcall optargs(1)
 void Lith_GUI_Init(gui_state_t *g, void *state);
 
+stkcall
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p);
 
-optargs(2)
+stkcall optargs(2)
 void Lith_GUI_Begin(gui_state_t *g, int w, int h);
+stkcall
 void Lith_GUI_End(gui_state_t *g, enum cursor curs);
 
-optargs(1)
+stkcall optargs(1)
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww);
+stkcall
 void Lith_GUI_ClipRelease(gui_state_t *g);
 
+stkcall
 __str Lith_RemoveTextColors(__str str, int size);
 
+stkcall
 void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text);
+stkcall
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon);
 
 void Lith_GUI_ScrollEnd(gui_state_t *g, gui_scroll_state_t *scr);

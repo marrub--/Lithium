@@ -37,7 +37,7 @@ void Lith_PlayerPayout(struct player *p)
       \
       if(i < 35) \
       { \
-         HudMessageF("CNFONT", "%S\Cnscr", Lith_ScoreSep(lerplk(0, pay.name##scr, i / 34.0lk))); \
+         HudMessageF("CNFONT", "%S\Cnscr", scoresep(lerplk(0, pay.name##scr, i / 34.0lk))); \
          HudMessageParams(HUDMSG_FADEOUT, hid, CR_WHITE, 280.2, y + 0.1, 2, 0.2); \
       } \
       \
@@ -71,11 +71,11 @@ void Lith_PlayerPayout(struct player *p)
       if(pay.itemmax) {GenCount("ARTIFACTS",  item); counting |= pay.itemnum;}
 
       if(i > 35) {y += 7; Head("TOTAL"); y += 16;}
-      if(i > 35 * 1.25) {Left("Tax"); Right("%S\Cnscr", Lith_ScoreSep(pay.tax)); y += 9;}
+      if(i > 35 * 1.25) {Left("Tax"); Right("%S\Cnscr", scoresep(pay.tax)); y += 9;}
 
       if(i > 35 * 1.5)
       {
-         Left("Total"); Right("%S\Cnscr", Lith_ScoreSep(pay.total)); y += 16;
+         Left("Total"); Right("%S\Cnscr", scoresep(pay.total)); y += 16;
 
          Head("PAYMENT"); y += 16;
          Left("Primary Account"); Right("%STRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");

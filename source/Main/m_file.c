@@ -95,7 +95,7 @@ static int NetClose(void *nfdata)
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), StrParam("%.*s", itrsize, itr));
+         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strncpy(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;
@@ -240,7 +240,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          if(inlen)
          {
             input = Ralloc(input, inputsz + inlen + 1);
-            Lith_strcpy_str(input + inputsz, cvar);
+            lstrcpy_str(input + inputsz, cvar);
 
             inputsz += inlen;
          }

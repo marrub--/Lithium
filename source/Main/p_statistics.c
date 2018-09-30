@@ -21,8 +21,8 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
 
    Stat(L("LITH_STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
    Stat(L("LITH_STAT_Weapons"),    "%i",   p->weaponsheld);
-   Stat(L("LITH_STAT_HealthUsed"), "%li",  p->healthused);
-   Stat(L("LITH_STAT_HealthSum"),  "%li",  p->healthsum);
+   Stat(L("LITH_STAT_HealthUsed"), "%u",   p->healthused);
+   Stat(L("LITH_STAT_HealthSum"),  "%u",   p->healthsum);
    Stat(L("LITH_STAT_ScoreUsed"),  "%lli", p->scoreused);
    Stat(L("LITH_STAT_ScoreSum"),   "%lli", p->scoresum);
    Stat(L("LITH_STAT_Secrets"),    "%i",   world.secretsfound);

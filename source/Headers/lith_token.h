@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#define Lith_TokStr(tok) StrParam("%.*s", (tok)->textC, (tok)->textV)
+#define Lith_TokStr(tok) l_strncpy((tok)->textV, (tok)->textC)
 
 // Types ---------------------------------------------------------------------|
 

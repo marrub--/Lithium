@@ -225,7 +225,7 @@ void Lith_GetSigil()
    {
       p->closeGUI();
 
-      p->sigil.acquired = true;
+      p->sgacquired = true;
 
       ACS_Thing_Remove(InvNum("Lith_DivisionSigilSpriteTID"));
       InvTake("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);

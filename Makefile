@@ -30,7 +30,7 @@ MAIN_SOURCES=$(wildcard $(MAIN_SRC)/*.c)
 MAIN_HEADERS=$(wildcard $(MAIN_INC)/*.h)
 MAIN_OUTPUTS=$(MAIN_SOURCES:$(MAIN_SRC)/%.c=$(MAIN_IR)/%.ir)
 MAIN_BINARY=$(PK7_BIN)/lithmain.bin
-MAIN_CFLAGS=$(CFLAGS) --warn-all --no-warn-parentheses -i$(MAIN_INC) --alloc-Aut 2150
+MAIN_CFLAGS=$(CFLAGS) --warn-all --no-warn-parentheses -i$(MAIN_INC) --alloc-Aut 4096
 MAIN_LFLAGS=$(LFLAGS) -llithlib --bc-zdacs-init-script-name '__lithmain.bin_init' --alloc-min Sta "" $(MAIN_STA)
 
 DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \

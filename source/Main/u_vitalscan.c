@@ -41,7 +41,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       int shp = ACS_GetActorProperty(0, APROP_SpawnHealth);
 
       int id = Lith_UniqueID();
-      dmon_t *m = DmonPtr();
+      dmon_t *m = DmonSelf();
 
       bool healthset = false;
 
@@ -77,11 +77,11 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
          else  UData.maxhealth = shp;
       }
 
-      if(m)
+      if(m && shp && m->maxhealth)
       {
          int level  = shadow ? m->level - ACS_Random(-5, 5) : m->level;
          int nsplit = min(m->maxhealth / (fixed)shp, 7);
-         int split  = ceilk((chp / (fixed)m->maxhealth) * nsplit);
+         int split  = ceilk(chp / (fixed)m->maxhealth * nsplit);
          int splith = m->maxhealth / (fixed)nsplit;
          UData.tagstr    = StrParam("%S lv.%i", UData.tagstr, level);
          UData.rank      = m->rank;
@@ -106,10 +106,10 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 {
-   if(!p->hudenabled || !UData.target)
-      return;
+   if(!p->hudenabled || !UData.target) return;
 
    int ox = p->getCVarI("lith_scanner_xoffs");
    int oy = p->getCVarI("lith_scanner_yoffs");
@@ -151,8 +151,8 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 216.2 + oy, 0.1, 0.4);
 
    ACS_SetFont(UData.freak ? "ALIENFONT" : font);
-   if(UData.maxhealth) HudMessage("%i/%i", UData.health, UData.maxhealth);
-   else                HudMessage("%ihp", UData.health);
+   if(UData.maxhealth) HudMessage("%u/%u", UData.health, UData.maxhealth);
+   else                HudMessage("%uhp",  UData.health);
    HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 225.2 + oy, 0.1, 0.4);
 
    // Health bar

@@ -62,8 +62,9 @@ typedef struct dmon dmonarr dmon_t;
 extern int dmonarr dmonid;
 #endif
 
-script optargs(2) dmon_t *DmonPtr(int tid, int ptr);
-dmon_t *Dmon(int id);
+script dmon_t *DmonPtr(int tid, int ptr);
+stkcall dmon_t *DmonSelf(void);
+stkcall dmon_t *Dmon(int id);
 dmon_t *AllocDmon(void);
 
 void PrintDmonAllocSize(struct player *p);

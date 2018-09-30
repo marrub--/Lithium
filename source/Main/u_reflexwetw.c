@@ -31,6 +31,7 @@ void Lith_DodgeView()
 //
 // Activate
 //
+stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul += 0.3;
@@ -41,6 +42,7 @@ void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
 //
 // Deactivate
 //
+stkcall
 void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.3;

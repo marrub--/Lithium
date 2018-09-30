@@ -81,8 +81,8 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
    StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));
    if(p->pclass & pcl_magicuser)
       StatusInfo(g, x, y += 10, "MP", StrParam("%i/%i", p->mana, p->manamax));
-   StatusInfo(g, x, y += 10, "EXP",  StrParam("%lu", p->attr.exp));
-   StatusInfo(g, x, y += 10, "Next", StrParam("%lu", p->attr.expnext));
+   StatusInfo(g, x, y += 10, "EXP",  StrParam("%u", p->attr.exp));
+   StatusInfo(g, x, y += 10, "Next", StrParam("%u", p->attr.expnext));
    x = 20;
    if(p->pclass & pcl_magicuser) y += 20;
    else                          y += 30;

@@ -10,6 +10,7 @@
 //
 // Activate
 //
+stkcall
 void Upgr_JetBooster_Activate(struct player *p, upgrade_t *upgr)
 {
    UData.charge = CHARGE_MAX;
@@ -46,6 +47,7 @@ void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled || UData.charge == CHARGE_MAX) return;

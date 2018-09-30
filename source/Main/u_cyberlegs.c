@@ -6,6 +6,7 @@
 //
 // Activate
 //
+stkcall
 void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul += 0.2;
@@ -15,6 +16,7 @@ void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
 //
 // Deactivate
 //
+stkcall
 void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.2;

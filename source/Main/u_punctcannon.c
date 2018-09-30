@@ -52,6 +52,7 @@ void Lith_PunctuatorFire(void)
 //
 // Deactivate
 //
+stkcall
 void Upgr_PunctCannon_Deactivate(struct player *p, upgrade_t *upgr)
 {
    InvGive("Lith_GTFO", 1);

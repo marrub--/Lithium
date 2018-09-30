@@ -257,6 +257,7 @@ GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
 //
 // Lith_PlayerGetNamedUpgrade
 //
+stkcall
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
 {
    upgrade_t *upgr = p->upgrademap.find(name);
@@ -267,6 +268,7 @@ upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
 //
 // Lith_PlayerGetUpgradeActive
 //
+stkcall
 bool Lith_PlayerGetUpgradeActive(struct player *p, int name)
 {
    ifauto(upgrade_t *, upgr, p->upgrademap.find(name)) return upgr->active;
@@ -533,15 +535,15 @@ static void Lith_PlayerRunScripts(struct player *p)
    script extern void Lith_PlayerUpdateWeapons(struct player *p);
    script extern void Lith_PlayerUpdateLog(struct player *p);
 
-   script extern void Lith_PlayerFootstep(struct player *p);
-   script extern void Lith_PlayerItemFx(struct player *p);
-   script extern void Lith_PlayerDamageBob(struct player *p);
-   script extern void Lith_PlayerView(struct player *p);
-   script extern void Lith_PlayerRenderUpgrades(struct player *p);
-   script extern void Lith_PlayerHUD(struct player *p);
-   script extern void Lith_PlayerStyle(struct player *p);
-   script extern void Lith_PlayerLevelup(struct player *p);
-   script extern void Lith_PlayerDebugStats(struct player *p);
+   script  extern void Lith_PlayerFootstep(struct player *p);
+   stkcall extern void Lith_PlayerItemFx(struct player *p);
+   script  extern void Lith_PlayerDamageBob(struct player *p);
+   script  extern void Lith_PlayerView(struct player *p);
+   script  extern void Lith_PlayerRenderUpgrades(struct player *p);
+   script  extern void Lith_PlayerHUD(struct player *p);
+   script  extern void Lith_PlayerStyle(struct player *p);
+   script  extern void Lith_PlayerLevelup(struct player *p);
+   script  extern void Lith_PlayerDebugStats(struct player *p);
 
    // Pre-logic: Update data from the engine.
    Lith_PlayerPreWeapons(p); // Update weapon info

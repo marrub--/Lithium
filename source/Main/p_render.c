@@ -52,7 +52,7 @@ void Lith_PlayerFootstep(struct player *p)
 //
 // Lith_PlayerItemFx
 //
-script
+stkcall
 void Lith_PlayerItemFx(struct player *p)
 {
    bool hasir = InvNum("PowerLightAmp");
@@ -90,8 +90,8 @@ void Lith_PlayerDamageBob(struct player *p)
       p->bobpitch = yc * distance;
    }
 
-   p->bobpitch = lerplk(p->bobpitch, 0.0, 0.1);
-   p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
+   if(p->bobpitch) p->bobpitch = lerplk(p->bobpitch, 0.0, 0.1);
+   if(p->bobyaw  ) p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
 }
 
 //
@@ -113,18 +113,19 @@ void Lith_PlayerView(struct player *p)
       addy += p->bobyaw   * bobmul;
    }
 
-   p->extrpitch = lerplk(p->extrpitch, 0.0lk, 0.1lk);
-   p->extryaw   = lerplk(p->extryaw,   0.0lk, 0.1lk);
+   if(p->extrpitch) p->extrpitch = lerplk(p->extrpitch, 0.0lk, 0.1lk);
+   if(p->extryaw  ) p->extryaw   = lerplk(p->extryaw,   0.0lk, 0.1lk);
 
    p->addpitch = addp + p->extrpitch;
    p->addyaw   = addy + p->extryaw;
 
-   ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2) {
-      if(p->sidev) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
-      else         p->addroll = lerplk(p->addroll, 0,               0.14);
+   ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2)
+   {
+           if(p->sidev  ) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
+      else if(p->addroll) p->addroll = lerplk(p->addroll, 0,               0.14);
    }
 
-   DebugStat("exp: lv.%u %lu/%lu\n", p->attr.level, p->attr.exp, p->attr.expnext);
+   DebugStat("exp: lv.%u %u/%u\n", p->attr.level, p->attr.exp, p->attr.expnext);
    DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
    DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
    DebugStat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);

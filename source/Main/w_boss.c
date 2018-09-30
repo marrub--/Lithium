@@ -203,7 +203,7 @@ void Lith_SpawnBoss(void)
 
    HERMES("SpawnBoss", StrParam("Lith_Boss_%S", boss->name), boss->phase);
 
-   LogDebug(log_boss, "Lith_SpawnBoss: Boss %s phase %i spawned", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
    DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);
 
    world.bossspawned = true;

@@ -163,20 +163,21 @@ int LPData(int info, int permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
-   withplayer(LocalPlayer)
-      switch(info)
+   union {fixed k; int i;} u;
+
+   withplayer(LocalPlayer) switch(info)
    {
    case pdata_weapon:     return p->weapontype;
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
-   case pdata_hassigil:   return p->sigil.acquired;
-   case pdata_weaponzoom: return bitsk(p->getCVarK("lith_weapons_zoomfactor"));
-   case pdata_recoil:     return bitsk(p->getCVarK("lith_weapons_recoil"));
+   case pdata_hassigil:   return p->sgacquired;
+   case pdata_weaponzoom: return u.k = p->getCVarK("lith_weapons_zoomfactor"), u.i;
+   case pdata_recoil:     return u.k = p->getCVarK("lith_weapons_recoil"),     u.i;
    case pdata_slot3ammo:  return p->getCVarI("lith_weapons_slot3ammo");
    case pdata_pclass:     return p->pclass;
    case pdata_semifrozen: return p->semifrozen > 0;
-   case pdata_addp:       return bitsk(p->addpitch);
-   case pdata_addy:       return bitsk(p->addyaw);
+   case pdata_addp:       return u.k = p->addpitch, u.i;
+   case pdata_addy:       return u.k = p->addyaw,   u.i;
    }
 
    return 0;

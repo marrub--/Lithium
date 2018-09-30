@@ -72,7 +72,7 @@ static functable_t ftbl;
 #define strtable_t_GetKey(o) ((o)->key)
 #define strtable_t_GetNext(o) (&(o)->next)
 #define strtable_t_GetPrev(o) (&(o)->prev)
-#define strtable_t_HashKey(k) (CStrHash(k))
+#define strtable_t_HashKey(k) (lstrhash(k))
 #define strtable_t_HashObj(o) ((o)->keyhash)
 #define strtable_t_KeyCmp(l, r) (strcmp(l, r))
 GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
@@ -80,7 +80,7 @@ GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
 #define functable_t_GetKey(o) ((o)->name)
 #define functable_t_GetNext(o) (&(o)->next)
 #define functable_t_GetPrev(o) (&(o)->prev)
-#define functable_t_HashKey(k) (CStrHash(k))
+#define functable_t_HashKey(k) (lstrhash(k))
 #define functable_t_HashObj(o) ((o)->keyhash)
 #define functable_t_KeyCmp(l, r) (strcmp(l, r))
 GDCC_HashMap_Defn(functable_t, char const *, struct dlgfunc)
@@ -587,14 +587,14 @@ void Lith_GSInit_Dialogue(void)
 
    strtable_t_ctor(&stbl, countof(strs), 1);
    for(int i = 0; i < countof(strs); i++) {
-      strs[i].keyhash = CStrHash(strs[i].key);
+      strs[i].keyhash = lstrhash(strs[i].key);
       strs[i].name = i;
       stbl.insert(&strs[i]);
    }
 
    functable_t_ctor(&ftbl, countof(funcs), 1);
    for(int i = 0; i < countof(funcs); i++) {
-      funcs[i].keyhash = CStrHash(funcs[i].name);
+      funcs[i].keyhash = lstrhash(funcs[i].name);
       if(!funcs[i].genCode) funcs[i].genCode = GenCode_Generic;
       ftbl.insert(&funcs[i]);
    }

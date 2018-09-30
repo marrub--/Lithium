@@ -5,15 +5,15 @@
 #include <ctype.h>
 #include <GDCC.h>
 
-#define StrHashImpl() \
+#define l_strhashImpl() \
    u32 ret = 0; \
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
 //
-// StrUpper
+// lstrupper
 //
-__str StrUpper(__str in)
+__str lstrupper(__str in)
 {
    ACS_BeginPrint();
 
@@ -24,27 +24,27 @@ __str StrUpper(__str in)
 }
 
 //
-// StrHash
+// l_strhash
 //
 stkcall
-u32 StrHash(char __str_ars const *s)
+u32 l_strhash(char __str_ars const *s)
 {
-   StrHashImpl();
+   l_strhashImpl();
 }
 
 //
-// CStrHash
+// lstrhash
 //
 stkcall
-u32 CStrHash(char const *s)
+u32 lstrhash(char const *s)
 {
-   StrHashImpl();
+   l_strhashImpl();
 }
 
 //
-// Lith_strcpy_str
+// lstrcpy_str
 //
-char *Lith_strcpy_str(char *dest, char __str_ars const *src)
+char *lstrcpy_str(char *dest, char __str_ars const *src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
    return dest;
@@ -55,18 +55,29 @@ char *Lith_strcpy_str(char *dest, char __str_ars const *src)
    return *s1 - *s2
 
 //
-// Lith_strcmp_str
+// lstrcmp_str
 //
-int Lith_strcmp_str(char const *s1, char __str_ars const *s2)
+int lstrcmp_str(char const *s1, char __str_ars const *s2)
 {
    StrCmpImpl();
 }
 
 //
-// Lith_ScoreSep
+// l_strncpy
 //
 stkcall
-__str Lith_ScoreSep(i96 num)
+__str l_strncpy(void const *s, int n)
+{
+   ACS_BeginPrint();
+   ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n);
+   return ACS_EndStrParam();
+}
+
+//
+// scoresep
+//
+stkcall
+__str scoresep(i96 num)
 {
    static char out[48];
 

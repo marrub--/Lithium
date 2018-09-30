@@ -20,10 +20,10 @@ enum
 
 struct player_attributes
 {
-   u64   exp, expnext;
+   u32   exp, expnext;
    u32   level;
-   __str names[at_max];
    u32   attrs[at_max];
+   __str names[at_max];
    __str lvupstr;
 };
 

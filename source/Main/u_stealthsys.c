@@ -8,6 +8,7 @@
 //
 // Deactivate
 //
+stkcall
 void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->alpha = 1;

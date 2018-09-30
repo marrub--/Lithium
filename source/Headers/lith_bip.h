@@ -17,9 +17,9 @@ LITH_X(MAIL,         "Mail")
 // Extern Functions ----------------------------------------------------------|
 
 script void Lith_PlayerInitBIP(struct player *p);
-struct bippage_s *Lith_FindBIPPage(struct bip_s *bip, __str name);
-optargs(1) struct bippage_s *Lith_UnlockBIPPage(struct bip_s *bip, __str name, int pclass);
-script void Lith_DeallocateBIP(struct bip_s *bip);
+struct bippage_s *Lith_FindBIPPage(struct bip *bip, __str name);
+optargs(1) struct bippage_s *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass);
+script void Lith_DeallocateBIP(struct bip *bip);
 script optargs(1) void Lith_DeliverMail(struct player *p, __str title, int flags);
 
 // Types ---------------------------------------------------------------------|
@@ -56,33 +56,41 @@ typedef struct bippage_s
    bip_unlocks_t unlocks;
 } bippage_t;
 
-typedef struct bip_s
+struct bip
 {
+   // Attributes -------------------------------------------------------------|
+
    __prop find       {call: Lith_FindBIPPage  (this)}
    __prop unlock     {call: Lith_UnlockBIPPage(this)}
    __prop deallocate {call: Lith_DeallocateBIP(this)}
 
+   // Members ----------------------------------------------------------------|
+
    // Stats
-   int categoryavail[BIPC_MAX];
-   int categorymax[BIPC_MAX];
-   int pageavail;
-   int pagemax;
-   int mailreceived;
-   int mailtrulyreceived;
+   uint categoryavail[BIPC_MAX];
+   uint categorymax[BIPC_MAX];
 
    // State
-   bool       init;
    bippage_t *curpage;
-   int        curpagenum;
-   int        curcategory;
-   int        lastcategory;
-   int        scroll;
    bippage_t *result[8];
-   int        resnum;
-   int        rescur;
 
    // Info
    list_t infogr[BIPC_MAX];
-} bip_t;
+
+   // Bitfields --------------------------------------------------------------|
+
+   // Stats
+   uint pageavail ;//: 10;
+   uint pagemax   ;//: 10;
+   uint mailreceived      ;//: 6;
+   uint mailtrulyreceived ;//: 6;
+
+   // State
+   bool init ;//: 1;
+   uint curcategory  ;//: 4;
+   uint lastcategory ;//: 4;
+   uint resnum ;//: 3;
+   uint rescur ;//: 3;
+};
 
 #endif

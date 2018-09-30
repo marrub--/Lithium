@@ -29,6 +29,7 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uint96_t u96;
 
+typedef unsigned      uint;
 typedef unsigned char byte;
 
 typedef      _Accum fixed;

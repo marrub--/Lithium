@@ -9,6 +9,7 @@
 //
 // Activate
 //
+stkcall
 void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
 {
    InvTake("Lith_AdrenalineToken", 1);
@@ -61,6 +62,7 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;

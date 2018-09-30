@@ -6,6 +6,7 @@
 //
 // Deactivate
 //
+stkcall
 void Upgr_RifleModes_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->riflefiremode = 0;
@@ -14,6 +15,7 @@ void Upgr_RifleModes_Deactivate(struct player *p, upgrade_t *upgr)
 //
 // Render
 //
+stkcall
 void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
 {
    if(p->getCVarI("lith_weapons_riflescope") &&
