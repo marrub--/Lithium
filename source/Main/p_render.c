@@ -38,15 +38,50 @@ void Lith_PlayerDebugStats(struct player *p)
 script
 void Lith_PlayerFootstep(struct player *p)
 {
+   static struct {__str nam, snd; int nxt;} const stepsnd[] = {
+      {"FWATER1", "player/stepw", 11},
+      {"FWATER2", "player/stepw", 11},
+      {"FWATER3", "player/stepw", 11},
+      {"FWATER4", "player/stepw", 11},
+      {"BLOOD1",  "player/stepw", 15},
+      {"BLOOD2",  "player/stepw", 15},
+      {"BLOOD3",  "player/stepw", 15},
+      {"NUKAGE1", "player/steps", 15},
+      {"NUKAGE2", "player/steps", 15},
+      {"NUKAGE3", "player/steps", 15},
+      {"SLIME01", "player/steps", 12},
+      {"SLIME02", "player/steps", 12},
+      {"SLIME03", "player/steps", 12},
+      {"SLIME04", "player/steps", 12},
+      {"SLIME05", "player/steps", 12},
+      {"SLIME06", "player/steps", 12},
+      {"SLIME07", "player/steps", 12},
+      {"SLIME08", "player/steps", 12},
+      {"LAVA1",   "player/stepl", 17},
+      {"LAVA2",   "player/stepl", 17},
+      {"LAVA3",   "player/stepl", 17},
+      {"LAVA4",   "player/stepl", 17},
+   };
+
    if(Lith_IsPaused) return;
 
-   fixed vol = p->getCVarK("lith_player_footstepvol");
-   if(!vol || ACS_Timer() % 10 != 0 || p->z - p->floorz > 16) return;
+   if(p->nextstep) {p->nextstep--; return;}
 
    fixed dstmul = absk(p->getVel()) / 24.0;
-   if(!(vol *= min(dstmul, 1))) return;
+   fixed vol = p->getCVarK("lith_player_footstepvol") * min(dstmul, 1);
 
-   ACS_PlaySound(p->cameratid, p->stepnoise, CHAN_BODY, vol);
+   __str floor = ACS_GetActorFloorTexture(0);
+   __str snd   = p->stepnoise;
+   int   next  = 10;
+
+   if(vol && p->z - p->floorz <= 16)
+   {
+      for(int i = 0; i < countof(stepsnd); i++)
+         if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
+
+      ACS_PlaySound(p->cameratid, snd, CHAN_BODY, vol);
+      p->nextstep = next;
+   }
 }
 
 //

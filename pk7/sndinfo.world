@@ -57,8 +57,45 @@ $random misc/barrel/hit {
 // Splashes
 //
 world/splash/nukage lsounds/World/Splashes/Nukage.flac // ???
-world/splash/sludge lsounds/World/Splashes/Sludge.wav  // Hexen
-world/splash/water  lsounds/World/Splashes/Water.wav   // 〃
-world/splash/lava   lsounds/World/Splashes/Lava.wav    // 〃
+
+world/splash/water1 lsounds/World/Splashes/Water1.flac // Call of Duty: Modern Warfare 2
+world/splash/water2 lsounds/World/Splashes/Water2.flac // 〃
+world/splash/water3 lsounds/World/Splashes/Water3.flac // 〃
+world/splash/water4 lsounds/World/Splashes/Water4.flac // 〃
+world/splash/water5 lsounds/World/Splashes/Water5.flac // 〃
+
+world/splash/sludge1 lsounds/World/Splashes/Sludge1.flac // ???
+world/splash/sludge2 lsounds/World/Splashes/Sludge2.flac // ???
+world/splash/sludge3 lsounds/World/Splashes/Sludge3.flac // ???
+world/splash/sludge4 lsounds/World/Splashes/Sludge4.flac // ???
+
+world/splash/lava1 lsounds/World/Splashes/Lava1.flac // ???
+world/splash/lava2 lsounds/World/Splashes/Lava2.flac // ???
+world/splash/lava3 lsounds/World/Splashes/Lava3.flac // ???
+world/splash/lava4 lsounds/World/Splashes/Lava4.flac // ???
+
+$random world/splash/water {
+   world/splash/water1
+   world/splash/water2
+   world/splash/water3
+   world/splash/water4
+   world/splash/water5
+}
+
+$random world/splash/sludge {
+   world/splash/sludge1
+   world/splash/sludge2
+   world/splash/sludge3
+   world/splash/sludge4
+}
+
+$random world/splash/lava {
+   world/splash/lava1
+   world/splash/lava2
+   world/splash/lava3
+   world/splash/lava4
+}
+
+$alias world/splash/nukage world/splash/sludge
 
 // EOF

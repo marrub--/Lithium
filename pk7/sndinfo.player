@@ -27,6 +27,21 @@ player/step2 lsounds/Player/Footsteps/Step2.flac // ???
 player/step3 lsounds/Player/Footsteps/Step3.flac // ???
 player/step4 lsounds/Player/Footsteps/Step4.flac // ???
 
+player/stepw1 lsounds/Player/Footsteps/Water1.flac // Black Mesa
+player/stepw2 lsounds/Player/Footsteps/Water2.flac // 〃
+player/stepw3 lsounds/Player/Footsteps/Water3.flac // 〃
+player/stepw4 lsounds/Player/Footsteps/Water4.flac // 〃
+
+player/stepl1 lsounds/Player/Footsteps/Lava1.flac // Insurgency
+player/stepl2 lsounds/Player/Footsteps/Lava2.flac // 〃
+player/stepl3 lsounds/Player/Footsteps/Lava3.flac // 〃
+player/stepl4 lsounds/Player/Footsteps/Lava4.flac // 〃
+
+player/steps1 lsounds/Player/Footsteps/Slime1.flac // Battlefield 4
+player/steps2 lsounds/Player/Footsteps/Slime2.flac // 〃
+player/steps3 lsounds/Player/Footsteps/Slime3.flac // 〃
+player/steps4 lsounds/Player/Footsteps/Slime4.flac // 〃
+
 player/wings lsounds/Weapons/Wings.wav // Hexen
 
 $volume player/death2 0.7
@@ -42,17 +57,37 @@ $random player/step {
    player/step4
 }
 
+$random player/stepw {
+   player/stepw1
+   player/stepw2
+   player/stepw3
+   player/stepw4
+}
+
+$random player/stepl {
+   player/stepl1
+   player/stepl2
+   player/stepl3
+   player/stepl4
+}
+
+$random player/steps {
+   player/steps1
+   player/steps2
+   player/steps3
+   player/steps4
+}
+
 $random player/score {
    player/score1
    player/score2
    player/score3
 }
 
-$playersound player male *jump    lsounds/Player/Jump.flac    // General 6000
-$playersound player male *usefail lsounds/Player/Usefail.flac // Self-made
-$playersound player male *land    lsounds/Player/Land.wav     // Hexen
-$playersound player male *dive    lsounds/Player/Splash.flac  // ???
-
-$playersounddup player male *surface *dive
+$playersound player male *jump    lsounds/Player/Jump.flac     // General 6000
+$playersound player male *usefail lsounds/Player/Usefail.flac  // Self-made
+$playersound player male *land    lsounds/Player/Land.wav      // Hexen
+$playersound player male *dive    lsounds/Player/SplashIn.flac // Call of Duty: Modern Warfare 2
+$playersound player male *surface lsounds/Player/Splash.flac   // 〃
 
 // EOF
