@@ -246,7 +246,11 @@ override void Tick()
 
    Super.Tick();
 
-   Lith_RainEffect();
+   if(CVar.GetCVar('lith_player_rainshader', player).getBool())
+      Lith_RainEffect();
+   else
+      Shader.SetEnabled(player, "Lith_Rain", false);
+
    Lith_ItemVacuum();
 
    Lith_URANUS.LZ(self, 320, 240);

@@ -29,6 +29,7 @@ Bool("Log score gained",                  "lith_player_scorelog");
 Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse");
+Bool("Enable rain shader",                "lith_player_rainshader");
 
 Category("Items");
 if(p->num == 0) {
