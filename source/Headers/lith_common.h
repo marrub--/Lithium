@@ -40,13 +40,17 @@
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
 
-#define HERMES(...) ACS_ScriptCall("Lith_HERMES", __VA_ARGS__)
-#define HERMES_F(...) ACS_ScriptCallFixed("Lith_HERMES", __VA_ARGS__)
-#define HERMES_S(...) ACS_ScriptCallString("Lith_HERMES", __VA_ARGS__)
+#define scall  ACS_ScriptCall
+#define scallk ACS_ScriptCallFixed
+#define scalls ACS_ScriptCallString
 
-#define URANUS(...) ACS_ScriptCall("Lith_URANUS", __VA_ARGS__)
-#define URANUS_F(...) ACS_ScriptCallFixed("Lith_URANUS", __VA_ARGS__)
-#define URANUS_S(...) ACS_ScriptCallString("Lith_URANUS", __VA_ARGS__)
+#define HERMES(...)   scall ("Lith_HERMES", __VA_ARGS__)
+#define HERMES_F(...) scallk("Lith_HERMES", __VA_ARGS__)
+#define HERMES_S(...) scalls("Lith_HERMES", __VA_ARGS__)
+
+#define URANUS(...)   scall ("Lith_URANUS", __VA_ARGS__)
+#define URANUS_F(...) scallk("Lith_URANUS", __VA_ARGS__)
+#define URANUS_S(...) scalls("Lith_URANUS", __VA_ARGS__)
 
 #define Lith_IsPaused HERMES("GetPaused")
 

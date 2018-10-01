@@ -28,6 +28,11 @@ player/pickup/scoresmall  lsounds/Items/ScoreSmall.flac  // 〃
 player/pickup/stimpack    lsounds/Items/Stimpack.flac    // Doom 3
 player/pickup/medikit     lsounds/Items/Medikit.flac     // Fallout 4
 player/pickup/invuln      lsounds/Items/Invuln.flac      // ???
+player/pickup/mega        lsounds/Items/Mega.flac        // Halo 3
+player/pickup/super       lsounds/Items/Super.flac       // 〃
+player/pickup/allmap      lsounds/Items/AllMap.flac      // Half-Life
+player/pickup/radsuit     lsounds/Items/Radsuit.flac     // Call of Duty: Modern Warfare 2
+player/pickup/berserk     lsounds/Items/Berserk.flac     // 〃
 
 player/pickup/scorechip lsounds/Items/ScoreChip.flac // Half-Life 2
 

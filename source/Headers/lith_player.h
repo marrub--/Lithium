@@ -284,7 +284,9 @@ struct player
    fixed rage;
    __str notes  [16];
    int   decvars[8];
-   char  txtbuf [8];
+
+   // Input
+   char txtbuf[8];
 
    // Static data
    fixed spawndfactor;
@@ -353,7 +355,9 @@ struct player
    // Misc
    uint nextstep    ;//: 6;
    bool hadinfrared ;//: 1;
-   uint tbptr       ;//: 4;
+
+   // Input
+   uint tbptr ;//: 4;
 
    // Static data
    bool staticinit  ;//: 1;

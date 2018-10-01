@@ -1,7 +1,7 @@
 actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 {
    Tag "Computer Area Map"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/allmap"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -21,7 +21,7 @@ actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 {
    Tag "Berserk"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/berserk"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -104,7 +104,7 @@ actor Lith_MegasphereSprite : Lith_AnimItemSprite
 actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
    Tag "Tao'chyan"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/mega"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -126,7 +126,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
 {
    Tag "Radiation Shielding Suit"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/radsuit"
    
    +INVENTORY.FANCYPICKUPSOUND
    
@@ -151,7 +151,7 @@ actor Lith_SoulSphereSprite : Lith_AnimItemSprite
 actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
 {
    Tag "Heart"
-   Inventory.PickupSound "misc/p_pkup"
+   Inventory.PickupSound "player/pickup/super"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
