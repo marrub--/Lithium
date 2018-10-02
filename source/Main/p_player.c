@@ -180,72 +180,6 @@ static void Lith_PlayerDisconnect(void)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_RecoilUp
-//
-script ext("ACS")
-void Lith_RecoilUp(fixed amount)
-{
-   withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
-}
-
-//
-// Lith_Obituary
-//
-script ext("ACS")
-void Lith_Obituary(void)
-{
-   static __str const pronoun[pro_max][5] = {
-      {"they", "them", "their", "theirs", "they're"},
-      {"he",   "him",  "his",   "his",    "he's"},
-      {"she",  "her",  "her",   "hers",   "she's"},
-      {"it",   "it",   "its",   "its'",   "it's"},
-   };
-
-   struct player *p = LocalPlayer;
-
-   __str obit = HERMES_S("GetObituary");
-   if(obit == "") return;
-
-   if(obit == "(falling)")
-      obit = Language("LITH_OB_Falling_%i", ACS_Random(1, 5));
-   else if(obit == "(crush)")
-      obit = Language("LITH_OB_Crush_%i", ACS_Random(1, 5));
-   else if(obit == "(exit)")
-      obit = Language("LITH_OB_Exit_%i", ACS_Random(1, 5));
-   else if(obit == "(drowning)")
-      obit = Language("LITH_OB_Drowning_%i", ACS_Random(1, 5));
-   else if(obit == "(slime)")
-      obit = Language("LITH_OB_Slime_%i", ACS_Random(1, 5));
-   else if(obit == "(fire)")
-      obit = Language("LITH_OB_Fire_%i", ACS_Random(1, 5));
-   else if(obit == "(suicide)")
-      obit = Language("LITH_OB_Suicide_%i", ACS_Random(1, 5));
-   else if(obit == "(default)")
-      obit = Language("LITH_OB_Default_%i", ACS_Random(1, 5));
-
-   ACS_BeginPrint();
-
-   for(char __str_ars const *s = obit; *s;)
-   {
-      if(s[0] == '%') switch(s[1])
-      {
-      case 'o': s += 2; ACS_PrintName(p->num+1);                 continue;
-      case 'g': s += 2; ACS_PrintString(pronoun[p->pronoun][0]); continue;
-      case 'h': s += 2; ACS_PrintString(pronoun[p->pronoun][1]); continue;
-      case 'p': s += 2; ACS_PrintString(pronoun[p->pronoun][2]); continue;
-      case 's': s += 2; ACS_PrintString(pronoun[p->pronoun][3]); continue;
-      case 'r': s += 2; ACS_PrintString(pronoun[p->pronoun][4]); continue;
-      }
-      ACS_PrintChar(*(s++));
-   }
-
-   obit = ACS_EndStrParam();
-
-   LogDebug(log_dev, "%S", obit);
-   Lith_ForPlayer() p->log(1, "%S", obit);
-}
-
 #define upgrademap_t_GetKey(o) ((o)->info->key)
 #define upgrademap_t_GetNext(o) (&(o)->next)
 #define upgrademap_t_GetPrev(o) (&(o)->prev)
@@ -299,21 +233,6 @@ __str Lith_PlayerDiscriminator(int pclass)
    case pcl_thoth:     return "Kiri";
    }
    return "Mod";
-}
-
-//
-// Lith_StepSpeed
-//
-script ext("ACS")
-int Lith_StepSpeed()
-{
-   struct player *p = LocalPlayer;
-
-	fixed vel = ACS_VectorLength(absk(p->velx), absk(p->vely));
-   fixed num = 1k - (vel / 24k);
-	fixed mul = minmax(num, 0.35k, 1k);
-
-	return 6 * (mul + 0.6k);
 }
 
 //
@@ -444,85 +363,6 @@ void Lith_TakeScore(struct player *p, i96 score)
 
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
-}
-
-//
-// Lith_GiveMeAllOfTheScore
-//
-script ext("ACS")
-void Lith_GiveMeAllOfTheScore(void)
-{
-   withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
-}
-
-//
-// Lith_GiveHealthBonus
-//
-script ext("ACS")
-void Lith_GiveHealthBonus(int amount)
-{
-   withplayer(LocalPlayer)
-   {
-      amount += p->health;
-      if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
-      p->health = amount;
-   }
-}
-
-//
-// Lith_GiveHealth
-//
-script ext("ACS")
-void Lith_GiveHealth(int amount)
-{
-   withplayer(LocalPlayer)
-   {
-      amount += p->health;
-      amount *= 1 + p->attr.attrs[at_vit] / 80.0;
-      if(amount > p->maxhealth) amount = p->maxhealth;
-      p->health = amount;
-   }
-}
-
-//
-// Lith_CheckHealth
-//
-script ext("ACS")
-bool Lith_CheckHealth()
-{
-   withplayer(LocalPlayer) return p->health < p->maxhealth;
-   return 0;
-}
-
-//
-// Lith_Discount
-//
-script ext("ACS")
-void Lith_Discount()
-{
-   withplayer(LocalPlayer) p->discount = 0.9;
-}
-
-//
-// Lith_Glare
-//
-script type("net") ext("ACS")
-void Lith_Glare(void)
-{
-   withplayer(LocalPlayer)
-   {
-      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
-
-      ACS_LocalAmbientSound("player/glare", 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, "Lith_PlayerDummyPuff", "None",
-         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
-
-      ACS_Delay(14);
-
-      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
-
-      ACS_Delay(19);
-   }
 }
 
 // Static Functions ----------------------------------------------------------|

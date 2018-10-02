@@ -65,6 +65,15 @@ static void Lith_PickupScore(struct player *p, int parm)
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_PlayerCurWeaponType
+//
+stkcall
+int Lith_PlayerCurWeaponType(struct player *p)
+{
+   return p->weapon.cur->info->type;
+}
+
+//
 // Lith_WeaponPickup
 //
 script ext("ACS")
@@ -394,5 +403,45 @@ int Lith_GetWRF(void)
    return flags;
 }
 
-// EOF
+//
+// Lith_PoisonFXTicker
+//
+script ext("ACS")
+void Lith_PoisonFXTicker()
+{
+   for(int i = 0; i < 17; i++)
+   {
+      Lith_PausableTick();
 
+      if(InvNum("Lith_PoisonFXReset"))
+      {
+         InvTake("Lith_PoisonFXReset", 999);
+         InvTake("Lith_PoisonFXTimer", 999);
+         InvGive("Lith_PoisonFXGiverGiver", 1);
+         return;
+      }
+   }
+
+   if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+   {
+      InvTake("Lith_PoisonFXReset", 999);
+      InvTake("Lith_PoisonFXTimer", 999);
+      InvTake("Lith_PoisonFXGiverGiver", 999);
+   }
+   else if(InvNum("Lith_PoisonFXTimer"))
+   {
+      InvGive("Lith_PoisonFXGiver", 1);
+      InvTake("Lith_PoisonFXTimer", 1);
+   }
+}
+
+//
+// Lith_RecoilUp
+//
+script ext("ACS")
+void Lith_RecoilUp(fixed amount)
+{
+   withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
+}
+
+// EOF

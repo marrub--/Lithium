@@ -38,20 +38,26 @@ enum mtype {
    mtype_max
 };
 
+struct monster_info {
+   u64        exp;
+   i96        score;
+   enum mtype type;
+   __str      name;
+   int        flags;
+};
+
 struct dmon {
    bool active;
    int  id;
-   enum mtype type;
 
    bool wasdead;
-   u64  exp;
    int  level;
    int  rank;
    int  maxhealth;
    int  resist[dmgtype_max];
-   i96  score;
 
-   struct dmon_stat *ms;
+   struct dmon_stat          *ms;
+   struct monster_info const *mi;
 };
 
 __addrdef extern __mod_arr dmonarr;

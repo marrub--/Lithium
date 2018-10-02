@@ -79,15 +79,6 @@ static void SetPClass(struct player *p)
 // Extern Functions ----------------------------------------------------------|
 
 //
-// Lith_PlayerCurWeaponType
-//
-stkcall
-int Lith_PlayerCurWeaponType(struct player *p)
-{
-   return p->weapon.cur->info->type;
-}
-
-//
 // Lith_ButtonPressed
 //
 stkcall
@@ -179,29 +170,6 @@ void Lith_PlayerUpdateData(struct player *p)
    p->krs = InvNum("RedSkull");
    p->kys = InvNum("YellowSkull");
    p->kbs = InvNum("BlueSkull");
-}
-
-//
-// Lith_GiveMail
-//
-script ext("ACS")
-void Lith_GiveMail(int num)
-{
-   static __str const names[] = {
-      "Intro",
-      "Cluster1",
-      "Cluster2",
-      "Cluster3",
-      "Phantom",
-      "JamesDefeated",
-      "MakarovDefeated",
-      "IsaacDefeated"
-   };
-
-   num %= countof(names);
-
-   withplayer(LocalPlayer)
-      p->deliverMail(names[num]);
 }
 
 //

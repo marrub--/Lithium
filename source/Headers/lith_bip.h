@@ -14,11 +14,15 @@ LITH_X(MAIL,         "Mail")
 
 #include "lith_list.h"
 
+#define ForCategory() for(int categ = BIPC_NONE + 1; categ < BIPC_MAX; categ++)
+#define ForPage() forlist(struct page *page, bip->infogr[categ])
+#define ForCategoryAndPage() ForCategory() ForPage()
+
 // Extern Functions ----------------------------------------------------------|
 
 script void Lith_PlayerInitBIP(struct player *p);
-struct bippage_s *Lith_FindBIPPage(struct bip *bip, __str name);
-optargs(1) struct bippage_s *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass);
+struct page *Lith_FindBIPPage(struct bip *bip, __str name);
+optargs(1) struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass);
 script void Lith_DeallocateBIP(struct bip *bip);
 script optargs(1) void Lith_DeliverMail(struct player *p, __str title, int flags);
 
@@ -43,7 +47,7 @@ enum
 
 typedef __str bip_unlocks_t[5];
 
-typedef struct bippage_s
+struct page
 {
    __str  name;
    __str  image;
@@ -54,7 +58,14 @@ typedef struct bippage_s
    bool   unlocked;
    list_t link;
    bip_unlocks_t unlocks;
-} bippage_t;
+};
+
+struct page_info
+{
+   __str shname;
+   __str flname;
+   __str body;
+};
 
 struct bip
 {
@@ -71,8 +82,8 @@ struct bip
    uint categorymax[BIPC_MAX];
 
    // State
-   bippage_t *curpage;
-   bippage_t *result[8];
+   struct page *curpage;
+   struct page *result[8];
 
    // Info
    list_t infogr[BIPC_MAX];
@@ -92,5 +103,9 @@ struct bip
    uint resnum ;//: 3;
    uint rescur ;//: 3;
 };
+
+// Extern Functions ----------------------------------------------------------|
+
+struct page_info Lith_GetPageInfo(struct page const *page);
 
 #endif

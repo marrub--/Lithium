@@ -16,10 +16,11 @@ int  lmvar mapid;
 worldinfo_t world = {.apiversion = Lith_APIVersion};
 payoutinfo_t payout;
 
+bool dorain;
+
 // Static Objects ------------------------------------------------------------|
 
 static bool reopen;
-static bool dorain;
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -32,108 +33,6 @@ void Lith_SpawnBosses(i96 sum, bool force);
 worldinfo_t *Lith_GetWorldExtern(void)
 {
    return &world;
-}
-
-//
-// Lith_FreezeTime
-//
-stkcall
-void Lith_FreezeTime(bool on)
-{
-   static int lmvar frozen;
-
-   if(on)
-   {
-      if(!frozen++)
-      {
-         Lith_ForPlayer()
-         {
-            p->frozen++;
-            p->setVel(0, 0, 0);
-         }
-
-         Lith_ForPlayer()
-         {
-            Lith_GiveActorInventory(p->tid, "Lith_TimeHax", 1);
-            Lith_GiveActorInventory(p->tid, "Lith_TimeHax2", 1);
-            break;
-         }
-      }
-   }
-   else
-   {
-      if(!--frozen)
-      {
-         Lith_ForPlayer() p->frozen--;
-
-         Lith_ForPlayer()
-         {
-            Lith_TakeActorInventory(p->tid, "PowerTimeFreezer", 1);
-            Lith_TakeActorInventory(p->tid, "Lith_TimeHax2", 1);
-            break;
-         }
-      }
-   }
-}
-
-//
-// Lith_BeginAngles
-//
-stkcall
-void Lith_BeginAngles(int x, int y)
-{
-   world.a_cur = 0;
-   for(int i = 0; i < countof(world.a_angles); i++)
-   {
-      world.a_angles[i].ang = 0;
-      world.a_angles[i].dst = 0;
-   }
-   world.a_x = x;
-   world.a_y = y;
-}
-
-//
-// Lith_AddAngle
-//
-stkcall
-fixed Lith_AddAngle(int x, int y)
-{
-   if(world.a_cur >= countof(world.a_angles))
-      return 0;
-
-   struct polar *p = &world.a_angles[world.a_cur++];
-   *p = ctopol(x - world.a_x, y - world.a_y);
-   return p->ang;
-}
-
-//
-// Lith_CanonTime
-//
-__str Lith_CanonTime(int type)
-{
-   int s = 53 + (world.ticks / 35);
-   int m = 30 + (s           / 60);
-   int h = 14 + (m           / 60);
-   int d = 25 + (h           / 24);
-   int M =  6 + (d           / 30);
-   int Y = 48 + (M           / 11);
-
-   s %= 60;
-   m %= 60;
-   h %= 24;
-
-   d = d % 31 + 1;
-   M = M % 12 + 1;
-   Y = Y      + 1;
-
-   switch(type)
-   {
-   case CANONTIME_FULL:  return StrParam(L("LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y);
-   case CANONTIME_SHORT: return StrParam(L("LITH_TIME_FMT_SHORT"), h, m,    d, M, Y);
-   case CANONTIME_DATE:  return StrParam(L("LITH_TIME_FMT_DATE"),           d, M, Y);
-   }
-
-   return "invalid";
 }
 
 //
@@ -153,54 +52,6 @@ int Lith_UniqueID(int tid)
    if(id == 0) Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
 
    return id;
-}
-
-//
-// LPData
-//
-script ext("ACS")
-int LPData(int info, int permutation, bool target)
-{
-   if(target) ACS_SetActivatorToTarget(0);
-
-   union {fixed k; int i;} u;
-
-   withplayer(LocalPlayer) switch(info)
-   {
-   case pdata_weapon:     return p->weapontype;
-   case pdata_upgrade:    return p->getUpgrActive(permutation);
-   case pdata_riflemode:  return p->riflefiremode;
-   case pdata_hassigil:   return p->sgacquired;
-   case pdata_weaponzoom: return u.k = p->getCVarK("lith_weapons_zoomfactor"), u.i;
-   case pdata_recoil:     return u.k = p->getCVarK("lith_weapons_recoil"),     u.i;
-   case pdata_slot3ammo:  return p->getCVarI("lith_weapons_slot3ammo");
-   case pdata_pclass:     return p->pclass;
-   case pdata_semifrozen: return p->semifrozen > 0;
-   case pdata_addp:       return u.k = p->addpitch, u.i;
-   case pdata_addy:       return u.k = p->addyaw,   u.i;
-   }
-
-   return 0;
-}
-
-//
-// LWData
-//
-script ext("ACS")
-int LWData(int info)
-{
-   switch(info)
-   {
-   case wdata_bossspawned: return world.bossspawned;
-   case wdata_enemycheck:  return world.enemycheck;
-   case wdata_fun:         return world.fun;
-   case wdata_soulsfreed:  return world.soulsfreed;
-   case wdata_dorain:      return dorain;
-   case wdata_ptid:   Lith_ForPlayer() return p->tid;
-   case wdata_pclass: Lith_ForPlayer() return p->pclass;
-   }
-
-   return 0;
 }
 
 // Static Functions ----------------------------------------------------------|
