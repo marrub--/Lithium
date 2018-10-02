@@ -49,6 +49,7 @@
 *                                 * a1337spy *
 
 *  Sounds for stuff
+*  Score chip sprite
 
 *                               * Anthony Cole *
 
