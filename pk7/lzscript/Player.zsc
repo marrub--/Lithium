@@ -270,7 +270,7 @@ override void Tick()
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
 {
    // ÜBER KLUDGE
-   if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES)
+   if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
       return 0;
 
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
