@@ -111,10 +111,9 @@ override void WorldThingDamaged(WorldEvent evt)
 
 override bool InputProcess(InputEvent evt)
 {
-   let sv = Lith_HERMES.Instance();
    let cl = Lith_URANUS.Instance();
 
-   if(!cl || !sv) return false;
+   if(!cl) return false;
 
    if((evt.type == InputEvent.Type_KeyDown ||
        evt.type == InputEvent.Type_KeyUp) &&
@@ -126,7 +125,7 @@ override bool InputProcess(InputEvent evt)
 
       return false;
    }
-   else if(sv.m_pdata[consoleplayer].grabInput &&
+   else if(Lith_Player(players[consoleplayer].mo).m_grabInput &&
       evt.type == InputEvent.Type_KeyDown && evt.keyString)
    {
       int ch = evt.keyChar;

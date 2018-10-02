@@ -135,7 +135,7 @@ void Lith_PlayerUpdateData(struct player *p)
    static int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
 
-   HERMES("SetInput", p->num, false);
+   p->grabInput = false;
 
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
@@ -202,16 +202,6 @@ void Lith_GiveMail(int num)
 
    withplayer(LocalPlayer)
       p->deliverMail(names[num]);
-}
-
-//
-// Lith_ClearTextBuf
-//
-stkcall
-void Lith_ClearTextBuf(struct player *p)
-{
-   memset(p->txtbuf, 0, sizeof p->txtbuf[0]);
-   p->tbptr = 0;
 }
 
 //

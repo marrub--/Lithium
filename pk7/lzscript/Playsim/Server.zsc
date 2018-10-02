@@ -1,8 +1,3 @@
-struct Lith_HERMES_PlayerData
-{
-   bool grabInput;
-}
-
 #include "lzscript/Playsim/Player.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
@@ -18,7 +13,6 @@ play string m_obituary;
 play bool m_paused;
 play name m_dmgtype;
 play bool m_dmgworld;
-play Lith_HERMES_PlayerData m_pdata[MAXPLAYERS];
 
 static void SetEnding(string ending)
 {

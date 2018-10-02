@@ -394,8 +394,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
    }
    else if(bip->curcategory == BIPC_SEARCH)
    {
-      gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p->num, p->txtbuf);
-      p->clearTextBuf();
+      gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
 
       bip->lastcategory = BIPC_MAIN;
 

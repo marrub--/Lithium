@@ -151,7 +151,6 @@ stkcall void Lith_GiveEXP(struct player *p, u64 amt);
 // misc
 stkcall upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 stkcall bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
-stkcall void Lith_ClearTextBuf(struct player *p);
 stkcall __str Lith_PlayerDiscriminator(int pclass);
 
 script void Lith_PlayerUpdateData(struct player *p);
@@ -195,6 +194,8 @@ struct player
                   set: ACS_SetActorProperty(->tid, APROP_Health)}
    __prop setActivator {call: ACS_SetActivator(->tid)}
    __prop getVel {call: mag2k(->velx, ->vely)}
+   __prop grabInput {get: getmem(->tid, "m_grabInput"),
+                     set: setmem(->tid, "m_grabInput")}
 
    // inventory
    __prop addItem {call: Lith_PlayerAddItem(this)}
@@ -219,7 +220,6 @@ struct player
    __prop getUpgr       {call: Lith_PlayerGetNamedUpgrade(this)}
    __prop getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
    __prop deliverMail   {call: Lith_DeliverMail(this)}
-   __prop clearTextBuf  {call: Lith_ClearTextBuf(this)}
    __prop bipUnlock     {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
    __prop discrim       {get:  Lith_PlayerDiscriminator(->pclass)}
    __prop classname     {get:  ACS_GetActorPropertyString(->tid, APROP_NameTag)}

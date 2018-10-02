@@ -17,13 +17,12 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
 
    bool hot = g->hot == id;
 
-   if(hot)
-      HERMES("SetInput", a->pnum, true);
+   if(hot) a->p->grabInput = true;
 
-   if(*a->inbuf)
+   if(*a->p->txtbuf)
       ACS_LocalAmbientSound("player/cbi/keypress", 30);
 
-   for(char *c = a->inbuf; *c; c++)
+   for(char *c = a->p->txtbuf; *c; c++)
    {
       switch(*c)
       {
@@ -54,6 +53,9 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       PrintTextFmt("\C%c%S", hot ? 'c' : 'm', L("LITH_GUI_TEXTBOX"));
    PrintText("CBIFONT", CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
+
+   memset(a->p->txtbuf, 0, sizeof a->p->txtbuf);
+   a->p->tbptr = 0;
 
    return st;
 }

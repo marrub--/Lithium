@@ -101,7 +101,7 @@ typedef struct gui_typeon_state_s
 typedef struct gui_txtbox_state_s
 {
    Lith_CPS_Decl(txtbuf, 128);
-   int  tbptr;
+   int tbptr;
 } gui_txtbox_state_t;
 
 typedef struct gui_delta_s
@@ -114,7 +114,8 @@ typedef struct gui_delta_s
 
 typedef struct gui_state_s
 {
-   anonymous gui_delta_t cur;
+   anonymous
+   gui_delta_t cur;
    gui_delta_t old;
 
    int ox, oy;
@@ -234,10 +235,8 @@ typedef struct gui_slider_args_s
 typedef struct gui_txtbox_args_s
 {
    gui_txtbox_state_t *st;
-   int   x;
-   int   y;
-   int   pnum;
-   char *inbuf;
+   int x, y;
+   struct player *p;
 } gui_txtbox_args_t;
 
 struct gui_presets {

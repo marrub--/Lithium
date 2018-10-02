@@ -28,20 +28,11 @@ static string GetObituary()
    else   return "";
 }
 
-static void SetInput(int pnum, bool on)
-{
-   let sv = Instance();
-   if(sv) sv.m_pdata[pnum].grabInput = on;
-}
-
 static string GetLogName()
 {
    let sv = Instance();
    return sv ? sv.m_logname : "";
 }
-
-static string GetInvType(Actor mo)
-   {return Lith_InventoryItem(mo).m_invtype;}
 
 static void DeleteItem(Actor mo, int item)
 {

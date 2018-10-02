@@ -44,6 +44,13 @@
 #define scallk ACS_ScriptCallFixed
 #define scalls ACS_ScriptCallString
 
+#define getmem  ACS_GetUserVariable
+#define getmemk ACS_GetUserVariableFixed
+#define getmems ACS_GetUserVariableString
+
+#define setmem  ACS_SetUserVariable
+#define setmemk ACS_SetUserVariableFixed
+
 #define HERMES(...)   scall ("Lith_HERMES", __VA_ARGS__)
 #define HERMES_F(...) scallk("Lith_HERMES", __VA_ARGS__)
 #define HERMES_S(...) scalls("Lith_HERMES", __VA_ARGS__)

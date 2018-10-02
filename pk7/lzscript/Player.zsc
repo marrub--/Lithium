@@ -27,6 +27,8 @@ private Lith_Quaternion m_qp, m_qy;
 
 Lith_Cyberspace m_cs;
 
+bool m_grabInput;
+
 property ViewBob: m_vbob;
 
 override void BeginPlay()

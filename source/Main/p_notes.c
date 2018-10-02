@@ -9,8 +9,7 @@
 //
 void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
 {
-   gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->notebox, 48, 40, p->num, p->txtbuf);
-   p->clearTextBuf();
+   gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->notebox, 48, 40, p);
 
    PrintTextStr(L("LITH_EDIT"));
    PrintText("CBIFONT", CR_WHITE, 32,2, 40,0);

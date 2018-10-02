@@ -90,7 +90,7 @@ script
 static void GivePlayerZ(int tid, struct player *p, __str name)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
-      ACS_SetUserVariable(tid, name, p->z);
+      setmem(tid, name, p->z);
       ACS_Delay(1);
    }
 }
@@ -165,8 +165,8 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
       int y   = ACS_Sin(ang) * dst;
       int z   = ACS_Random(8, 48);
       ACS_Spawn("Lith_ManaLeak", p->x + x, p->y + y, p->z + z, tid);
-      ACS_SetUserVariable(tid, "user_x", x);
-      ACS_SetUserVariable(tid, "user_y", y);
+      setmem(tid, "user_x", x);
+      setmem(tid, "user_y", y);
       ACS_SetActorPropertyFixed(tid, APROP_Alpha, manaperc / 2);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
       GivePlayerZ(tid, p, "user_z");
