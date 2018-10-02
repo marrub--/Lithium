@@ -314,8 +314,7 @@ bippage_t *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 {
    bippage_t *page = bip->find(name);
 
-   if(!page && pclass)
-      ifauto(__str, discrim, Lith_PlayerDiscriminator(pclass))
+   if(!page && pclass) ifauto(__str, discrim, Lith_PlayerDiscriminator(pclass))
    {
       page = bip->find(StrParam("%S%S", name, discrim));
    }
@@ -324,6 +323,15 @@ bippage_t *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
       UnlockPage(bip, page, pclass);
 
    return page;
+}
+
+//
+// Lith_BIPUnlock
+//
+script ext("ACS")
+void Lith_BIPUnlock(int pnum)
+{
+   withplayer(&players[pnum]) p->bipUnlock(getmems(0, "m_infopage"));
 }
 
 //

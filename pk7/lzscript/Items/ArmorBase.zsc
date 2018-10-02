@@ -96,62 +96,11 @@ class Lith_AAGH : Inventory
    }
 }
 
-class Lith_SlottedItem : Lith_InventoryItem abstract
-{
-   default
-   {
-      Lith_InventoryItem.InvType "SlottedItem";
-   }
-
-   int m_slot;
-
-   protected Lith_AAGH m_owner;
-
-   property Slot: m_slot;
-
-   override void Lith_OnAttach()
-      {m_owner = null;}
-
-   override bool Lith_UseItem(Actor mo)
-   {
-      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
-
-      if(ar && ar.Lith_RemoveSlot(m_slot) && ar.Lith_AddSlot(self))
-      {
-         m_owner = ar;
-         return true;
-      }
-      else
-         return false;
-   }
-
-   override void Lith_Destroy()
-   {
-      if(m_owner)
-      {
-         m_owner.Lith_OmitSlot(m_slot);
-         m_owner = null;
-      }
-
-      Super.Lith_Destroy();
-   }
-
-   virtual int Lith_SaveAmt(name type = 'None') {return 0;}
-
-   override Inventory CreateCopy(Actor mo)
-   {
-      let copy = Lith_SlottedItem(Super.CreateCopy(mo));
-
-      copy.m_slot = m_slot;
-
-      return copy;
-   }
-}
-
 class Lith_Armor : Lith_SlottedItem abstract
 {
    default
    {
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvType "Armor";
 
       +INVENTORY.ISARMOR

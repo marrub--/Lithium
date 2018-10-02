@@ -14,15 +14,15 @@
    "\n\n"
    "Produced by A.O.F Inc.";
 
-"LITH_SHOP_TITLE_Allmap" = "Area Map";
-"LITH_SHOP_DESCR_Allmap" =
+"LITH_SHOP_TITLE_AllMap" = "$LITH_INFO_SHORT_AllMap";
+"LITH_SHOP_DESCR_AllMap" =
    "A map of the area for your Automap. Reveals all locations you have and haven't seen.";
 
-"LITH_SHOP_TITLE_Infrared" = "CB-Goggles";
+"LITH_SHOP_TITLE_Infrared" = "$LITH_INFO_SHORT_Infrared";
 "LITH_SHOP_DESCR_Infrared" =
    "Light amplifying goggles that let you see in the dark.";
 
-"LITH_SHOP_TITLE_RadSuit" = "Rad. Suit";
+"LITH_SHOP_TITLE_RadSuit" = "$LITH_INFO_SHORT_RadSuit";
 "LITH_SHOP_DESCR_RadSuit" =
    "A radiation shielding suit which lets you walk through hazardous materials.";
 

@@ -12,9 +12,8 @@ script typedef void (*item_p_cb_t)(struct item *item, struct container *cont);
 
 typedef struct itemdata
 {
-   __str name;
+   __str name, spr, tag;
    uint w, h;
-   __str spr;
 
    item_b_cb_t Use;
    item_v_cb_t Tick;

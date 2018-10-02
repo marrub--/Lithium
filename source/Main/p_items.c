@@ -103,16 +103,11 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
 {
    item->link.construct(item);
 
-   if(data)
-      item->data = *data;
-   else
-      item->data = (itemdata_t){"Blank Item", 1, 1, ":Items:T4"};
+   if(data) item->data = *data;
+   else     Log("invalid item, developer is an idiot");
 
-   if(!item->Destroy)
-      item->Destroy = Lith_Item_Destroy;
-
-   if(!item->Place)
-      item->Place = Lith_Item_Place;
+   if(!item->Destroy) item->Destroy = Lith_Item_Destroy;
+   if(!item->Place  ) item->Place   = Lith_Item_Place;
 }
 
 //
@@ -317,6 +312,97 @@ void Lith_PlayerUpdateInventory(struct player *p)
 }
 
 //
+// Lith_ItemCreate
+//
+script ext("ACS")
+void *Lith_ItemCreate(int w, int h)
+{
+   __str type = getmems(0, "m_invtype");
+   __str tag  = getmems(0, "m_invname");
+   __str spr  = StrParam(":ItemSpr:%S", tag);
+   __str name = ACS_GetActorPropertyString(0, APROP_NameTag);
+
+   LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
+
+   #define Type(t, ...) \
+      if(type == t) \
+         return Lith_Item_New(&(itemdata_t const){name, spr, tag, w, h, __VA_ARGS__})
+
+   Type("SlottedItem", .Use = Lith_Item_Use);
+   Type("Armor",       .Use = Lith_Item_Use);
+
+   return null;
+}
+
+//
+// Lith_ItemAttach
+//
+script ext("ACS")
+bool Lith_ItemAttach(void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
+
+   withplayer(LocalPlayer)
+   {
+      p->bipUnlock(item->tag);
+      return p->addItem(item);
+   }
+
+   return false;
+}
+
+//
+// Lith_ItemDetach
+//
+script ext("ACS")
+void Lith_ItemDetach(void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
+
+   item->Destroy(item);
+}
+
+//
+// Lith_ItemUnlink
+//
+script ext("ACS")
+void Lith_ItemUnlink(void *_item)
+{
+   item_t *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
+
+   withplayer(LocalPlayer)
+   {
+      item->Place(item, &p->misc);
+      item->x = item->y = 0;
+
+      p->selitem = null;
+      p->movitem = false;
+   }
+}
+
+//
+// Lith_ItemCanPlace
+//
+script ext("ACS")
+bool Lith_ItemCanPlace(void *_item)
+{
+   item_t *item = _item;
+
+   withplayer(LocalPlayer)
+      for(int i = 0; i < countof(p->inv); i++)
+         if(ItemCanPlaceAny(&p->inv[i], item))
+            return true;
+
+   return false;
+}
+
+//
 // Lith_CBITab_Items
 //
 void Lith_CBITab_Items(gui_state_t *g, struct player *p)
@@ -395,90 +481,6 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 
    PrintTextStr(HERMES_S("GetArmorDT"));
    PrintText("CBIFONT", CR_WHITE, 240,2, 40,1);
-}
-
-//
-// Lith_ItemCreate
-//
-script ext("ACS")
-void *Lith_ItemCreate()
-{
-   __str type = HERMES_S("GetInvType");
-
-   LogDebug(log_dev, "Lith_ItemCreate: creating %S", type);
-
-   #define Type(name, ...) \
-      if(type == name) \
-         return Lith_Item_New(&(itemdata_t const){ACS_GetActorPropertyString(0, APROP_NameTag), __VA_ARGS__})
-
-   Type("SlottedItem", 1, 1, ":Items:T4", .Use = Lith_Item_Use);
-   Type("Armor",       3, 2, ":Items:T1", .Use = Lith_Item_Use);
-
-   return null;
-}
-
-//
-// Lith_ItemAttach
-//
-script ext("ACS")
-bool Lith_ItemAttach(void *_item)
-{
-   item_t *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
-
-   withplayer(LocalPlayer)
-      return p->addItem(item);
-   return false;
-}
-
-//
-// Lith_ItemDetach
-//
-script ext("ACS")
-void Lith_ItemDetach(void *_item)
-{
-   item_t *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
-
-   item->Destroy(item);
-}
-
-//
-// Lith_ItemUnlink
-//
-script ext("ACS")
-void Lith_ItemUnlink(void *_item)
-{
-   item_t *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
-
-   withplayer(LocalPlayer)
-   {
-      item->Place(item, &p->misc);
-      item->x = item->y = 0;
-
-      p->selitem = null;
-      p->movitem = false;
-   }
-}
-
-//
-// Lith_ItemCanPlace
-//
-script ext("ACS")
-bool Lith_ItemCanPlace(void *_item)
-{
-   item_t *item = _item;
-
-   withplayer(LocalPlayer)
-      for(int i = 0; i < countof(p->inv); i++)
-         if(ItemCanPlaceAny(&p->inv[i], item))
-            return true;
-
-   return false;
 }
 
 // EOF

@@ -65,6 +65,7 @@ actor Lith_BlurSphere : Lith_CustomInventory
 
    Tag "Fragma"
    Inventory.PickupSound "player/pickup/barrier"
+   Lith_CustomInventory.InfoPage "Fragma"
 
    +COUNTITEM
    +INVENTORY.BIGPOWERUP

@@ -49,16 +49,20 @@ class Lith_InventoryItem : Inventory abstract
    {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
-      Tag "Invalid Item";
 
       +INVENTORY.UNTOSSABLE
       +INVENTORY.UNDROPPABLE
    }
 
    string m_invtype;
+   string m_invname;
    uint   m_invitem;
 
+   int m_w, m_h;
+
    property InvType: m_invtype;
+   property InvName: m_invname;
+   property Size: m_w, m_h;
 
    bool Lith_Attach()
    {
@@ -91,13 +95,19 @@ class Lith_InventoryItem : Inventory abstract
    }
 
    private void Lith_CreateItem()
-      {m_invitem = CallACS("Lith_ItemCreate");}
+      {m_invitem = CallACS("Lith_ItemCreate", m_w, m_h);}
+
+   virtual string Lith_GetName()
+      {return StringTable.Localize("LITH_ITEM_TAG_" .. m_invname, false);}
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_InventoryItem(Super.CreateCopy(mo));
 
       copy.m_invtype = m_invtype;
+      copy.m_invname = m_invname;
+
+      setTag(Lith_GetName());
 
       if(copy != self) copy.Lith_CreateItem();
 
@@ -110,6 +120,7 @@ class Lith_InventoryItem : Inventory abstract
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
+      setTag(Lith_GetName());
       Lith_CreateItem();
    }
 
@@ -143,6 +154,71 @@ class Lith_InventoryItem : Inventory abstract
    }
 }
 
+class Lith_SlottedItem : Lith_InventoryItem abstract
+{
+   default
+   {
+      Lith_InventoryItem.Size 1, 1;
+      Lith_InventoryItem.InvType "SlottedItem";
+   }
+
+   int m_slot;
+
+   protected Lith_AAGH m_owner;
+
+   property Slot: m_slot;
+
+   override void Lith_OnAttach()
+      {m_owner = null;}
+
+   override bool Lith_UseItem(Actor mo)
+   {
+      let ar = Lith_AAGH(mo.findInventory("Lith_AAGH"));
+
+      if(ar && ar.Lith_RemoveSlot(m_slot) && ar.Lith_AddSlot(self))
+      {
+         m_owner = ar;
+         return true;
+      }
+      else
+         return false;
+   }
+
+   override void Lith_Destroy()
+   {
+      if(m_owner)
+      {
+         m_owner.Lith_OmitSlot(m_slot);
+         m_owner = null;
+      }
+
+      Super.Lith_Destroy();
+   }
+
+   override string Lith_GetName()
+   {
+      let msg = Super.Lith_GetName();
+      switch(m_slot) {
+      case aslot_lower: return msg .. " (Lower)";
+      case aslot_upper: return msg .. " (Upper)";
+      case aslot_ring:  return msg .. " (Ring)";
+      case aslot_pauld: return msg .. " (Shoulders)";
+      default:          return msg;
+      }
+   }
+
+   virtual int Lith_SaveAmt(name type = 'None') {return 0;}
+
+   override Inventory CreateCopy(Actor mo)
+   {
+      let copy = Lith_SlottedItem(Super.CreateCopy(mo));
+
+      copy.m_slot = m_slot;
+
+      return copy;
+   }
+}
+
 class Lith_BasicPickup : Inventory
 {
    default
@@ -158,14 +234,17 @@ class Lith_BasicPickup : Inventory
    private meta int    m_loglevl;
 
    meta bool m_vacuum;
+   string m_infopage;
 
-   property LogName: m_logname, m_loglevl;
-   property LogType: m_logtype;
-   property Vacuum:  m_vacuum;
+   property LogName:  m_logname, m_loglevl;
+   property LogType:  m_logtype;
+   property Vacuum:   m_vacuum;
+   property InfoPage: m_infopage;
 
    override bool TryPickup(in out Actor mo)
    {
       if(m_logname) Lith_HERMES.Log(mo, m_logtype, m_loglevl, "_" .. m_logname);
+      if(m_infopage) CallACS("Lith_BIPUnlock", mo.playerNumber());
       GoAwayAndDie();
       return true;
    }
@@ -188,11 +267,24 @@ class Lith_CustomInventory : CustomInventory
       Inventory.PickupMessage "";
    }
 
+   string m_infopage;
+
+   property InfoPage: m_infopage;
+
    void Lith_A_Log(int type, int levl, string name)
       {Lith_HERMES.Log(self, type, levl, "_" .. name);}
 
+   void Lith_A_BIPUnlock(Actor invoker, string name)
+      {m_infopage = name; invoker.ACS_ScriptCall("Lith_BIPUnlock", playerNumber());}
+
    action void Lith_A_SetNamedScriptSpecial(name sc, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0)
       {A_SetSpecial(84, -int(sc), arg0, arg1, arg2, arg3);}
+
+   override bool TryPickup(in out Actor mo)
+   {
+      if(m_infopage) CallACS("Lith_BIPUnlock", mo.playerNumber());
+      return Super.TryPickup(mo);
+   }
 
    states
    {

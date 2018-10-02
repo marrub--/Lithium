@@ -155,7 +155,7 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
       cl.m_d[p].c = c;
    }
 
-   if(tex.charCodeAt(0) == Ch_Colon)
+   while(tex.charCodeAt(0) == Ch_Colon)
       tex = StringTable.Localize(String.Format("LITH%s", tex), false);
 
    cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
@@ -483,21 +483,21 @@ override void RenderOverlay(RenderEvent evt)
          break;
       case dt_tex:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch);
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0);
          break;
       case dt_ate:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
             DTA_Alpha, m_d[i].a);
          break;
       case dt_cte:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
             DTA_FillColor, m_d[i].c);
          break;
       case dt_xte:
          Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
+            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
             DTA_Alpha, m_d[i].a,
             DTA_FillColor, m_d[i].c);
          break;

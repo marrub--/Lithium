@@ -7,11 +7,11 @@
 ## >>>>>> Error?
 
 ## Health --------------------------------------------------------------------|
-== LITH_LOG_HealthBonus | Health Bonus
-== LITH_LOG_Medikit     | Medikit
+== LITH_LOG_HealthBonus | $LITH_INFO_SHORT_HealthBonus
+== LITH_LOG_Medikit     | $LITH_INFO_SHORT_Medikit
 == LITH_LOG_MegaSphere  | Mega Charge!
 == LITH_LOG_SoulSphere  | Super Charge!
-== LITH_LOG_StimPack    | Stimpack
+== LITH_LOG_StimPack    | $LITH_INFO_SHORT_Stimpack
 
 ## Keys ----------------------------------------------------------------------|
 == LITH_LOG_RedCard     | \cgRed KeyDisk
@@ -22,13 +22,13 @@
 == LITH_LOG_YellowSkull | \ckYellow Skull
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_LOG_RadSuit     | Radiation Shielding Suit
-== LITH_LOG_InfraRed    | CB-Goggles
+== LITH_LOG_RadSuit     | $LITH_INFO_TITLE_RadSuit
+== LITH_LOG_InfraRed    | $LITH_INFO_SHORT_Infrared
 == LITH_LOG_Invuln      | \cjInvulnerability!
-== LITH_LOG_BlurSphere  | Barrier
+== LITH_LOG_BlurSphere  | $LITH_INFO_SHORT_Fragma
 == LITH_LOG_Backpack    | Backpack + Discount Card
-== LITH_LOG_Berserk     | Berserk
-== LITH_LOG_AllMap      | Area Map
+== LITH_LOG_Berserk     | $LITH_INFO_SHORT_Berserk
+== LITH_LOG_AllMap      | $LITH_INFO_SHORT_AllMap
 == LITH_LOG_DoggoSphere | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
 == LITH_LOG_Dogs        | Picked up dogs.
 
@@ -44,7 +44,7 @@
 
 ## Bonuses -------------------------------------------------------------------|
 == LITH_LOG_Coin       | Coin
-== LITH_LOG_ScoreChip  | Score Chip
+== LITH_LOG_ScoreChip  | $LITH_INFO_SHORT_ScoreChip
 == LITH_LOG_Ruby       | Flawed Ruby
 == LITH_LOG_Sapphire   | Flawed Sapphire
 == LITH_LOG_Amethyst   | Flawed Amethyst

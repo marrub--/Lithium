@@ -1,4 +1,120 @@
 ##----------------------------------------------------------------------------|
+== LITH_ITEM_TAG_ArmStandard    | Standard Armor
+== LITH_ITEM_TAG_ArmImproved    | Improved Armor
+== LITH_ITEM_TAG_ArmTeflon      | Teflon-weave Armor
+== LITH_ITEM_TAG_ArmDendrite    | Dendrite Armor
+== LITH_ITEM_TAG_ArmAerodynamic | Aerodynamic Armor
+== LITH_ITEM_TAG_ArmHazMat      | Haz-Mat Armor
+## thank you
+== LITH_ITEM_TAG_ArmPinkSilver  | Pink Silver
+== LITH_ITEM_TAG_ArmMidori      | Midori
+
+== LITH:ItemSpr:ArmStandard    | sprites/Items/Armor/ARM1A0.png
+== LITH:ItemSpr:ArmImproved    | sprites/Items/Armor/ARM2A0.png
+== LITH:ItemSpr:ArmTeflon      | sprites/Items/Armor/ARM3A0.png
+== LITH:ItemSpr:ArmDendrite    | sprites/Items/Armor/ARM4A0.png
+== LITH:ItemSpr:ArmAerodynamic | sprites/Items/Armor/ARM5A0.png
+== LITH:ItemSpr:ArmHazMat      | sprites/Items/Armor/ARM6A0.png
+== LITH:ItemSpr:ArmPinkSilver  | sprites/Items/Armor/ARM7A0.png
+== LITH:ItemSpr:ArmMidori      | sprites/Items/Armor/ARM8A0.png
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ScoreChip | Score Chip
+== LITH_INFO_TITLE_ScoreChip | GIC 781000 Score Chip
+@@ LITH_INFO_DESCR_ScoreChip
+After a great EMV2 crack resulted in the loss of over one quadrillion Score
+globally, generally targeting corporate giants (many of which have since gone
+bankrupt or merged with other companies,) the Global Interests Committee began
+work on a new standard for the safe, portable transfer of funds between banks
+across the galaxy.
+
+GIC 7810XX describe several dozen separate devices, payment methods, and other
+related standardized security measures. Among these is GIC 781000, colloquially
+known as the Score Chip: an embossed PCB with an integrated circuit capable of
+both NFC and contact-based transaction. Score Chips use strong cryptography to
+secure transactions and digitally store Score without direct use of a bank,
+similar to old crypto-currencies and even older paper currencies.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_HealthBonus | Health Bonus
+== LITH_INFO_TITLE_HealthBonus | Energy Vial
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_AllMap | Area Map
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Berserk | Berserk
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Infrared | CB-Goggles
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_RadSuit | Rad. Suit
+== LITH_INFO_TITLE_RadSuit | Radiation Shielding Suit
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Backpack | Backpack
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Stimpack | Stimpack
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Medikit | Medikit
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_KeyDisk | KeyDisk
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_KeySkull | Skull Key
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Fragma | Barrier
+== LITH_INFO_TITLE_Fragma | Fragma
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Invulnerability | Invulnerability
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Heart | Super Charge
+== LITH_INFO_TITLE_Heart | Heart
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Taochyan | Mega Charge
+== LITH_INFO_TITLE_Taochyan | Tao'chyan
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmStandard | $LITH_ITEM_TAG_ArmStandard
+== LITH_INFO_TITLE_ArmStandard | $LITH_INFO_SHORT_ArmStandard
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmImproved | $LITH_ITEM_TAG_ArmImproved
+== LITH_INFO_TITLE_ArmImproved | $LITH_INFO_SHORT_ArmImproved
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmTeflon | Teflon Armor
+== LITH_INFO_TITLE_ArmTeflon | $LITH_ITEM_TAG_ArmTeflon
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmDendrite | $LITH_ITEM_TAG_ArmDendrite
+== LITH_INFO_TITLE_ArmDendrite | $LITH_INFO_SHORT_ArmDendrite
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmAerodynamic | $LITH_ITEM_TAG_ArmAerodynamic
+== LITH_INFO_TITLE_ArmAerodynamic | $LITH_INFO_SHORT_ArmAerodynamic
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmHazMat | $LITH_ITEM_TAG_ArmHazMat
+== LITH_INFO_TITLE_ArmHazMat | $LITH_INFO_SHORT_ArmHazMat
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmPinkSilver | $LITH_ITEM_TAG_ArmPinkSilver
+== LITH_INFO_TITLE_ArmPinkSilver | $LITH_INFO_SHORT_ArmPinkSilver
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ArmMidori | $LITH_ITEM_TAG_ArmMidori
+== LITH_INFO_TITLE_ArmMidori | $LITH_INFO_SHORT_ArmMidori
+
+##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_WeapnInter | Weapon Interface
 == LITH_INFO_TITLE_WeapnInter | Weapon Interfacing Device Package
 @@ LITH_INFO_DESCR_WeapnInter

@@ -14,7 +14,7 @@ class Lith_Armor_Standard_Upper : Lith_Armor
 {
    default
    {
-      Tag "Standard Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmStandard";
       Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
@@ -25,7 +25,7 @@ class Lith_Armor_Standard_Lower : Lith_Armor
 {
    default
    {
-      Tag "Standard Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmStandard";
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
@@ -36,7 +36,7 @@ class Lith_Armor_Improved_Upper : Lith_Armor
 {
    default
    {
-      Tag "Improved Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmImproved";
       Lith_Armor.SlotSave aslot_upper, 3, 4;
    }
 
@@ -47,7 +47,7 @@ class Lith_Armor_Improved_Lower : Lith_Armor
 {
    default
    {
-      Tag "Improved Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmImproved";
       Lith_Armor.SlotSave aslot_lower, 2, 3;
    }
 
@@ -58,7 +58,7 @@ class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Teflon-weave Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmTeflon";
       Lith_Armor.SlotSave aslot_upper, 3, 4;
       Lith_Armor_Resistant.Resist ldt_energy;
    }
@@ -70,7 +70,7 @@ class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Teflon-weave Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmTeflon";
       Lith_Armor.SlotSave aslot_lower, 1, 2;
       Lith_Armor_Resistant.Resist ldt_energy;
    }
@@ -82,7 +82,7 @@ class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Dendrite Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmDendrite";
       Lith_Armor.SlotSave aslot_upper, 3, 4;
       Lith_Armor_Resistant.Resist ldt_fire;
    }
@@ -94,7 +94,7 @@ class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Dendrite Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmDendrite";
       Lith_Armor.SlotSave aslot_lower, 1, 2;
       Lith_Armor_Resistant.Resist ldt_fire;
    }
@@ -106,7 +106,7 @@ class Lith_Armor_Aerodynamic_Upper : Lith_Armor_Aerodynamic
 {
    default
    {
-      Tag "Aerodynamic Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmAerodynamic";
       Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
@@ -117,7 +117,7 @@ class Lith_Armor_Aerodynamic_Lower : Lith_Armor_Aerodynamic
 {
    default
    {
-      Tag "Aerodynamic Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmAerodynamic";
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
@@ -128,7 +128,7 @@ class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
 {
    default
    {
-      Tag "Haz-Mat Armor (Upper)";
+      Lith_InventoryItem.InvName "ArmHazMat";
       Lith_Armor.SlotSave aslot_upper, 2, 3;
    }
 
@@ -139,7 +139,7 @@ class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
 {
    default
    {
-      Tag "Haz-Mat Armor (Lower)";
+      Lith_InventoryItem.InvName "ArmHazMat";
       Lith_Armor.SlotSave aslot_lower, 1, 2;
    }
 
@@ -150,7 +150,7 @@ class Lith_Armor_PinkSilver_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Pink Silver (Upper)";
+      Lith_InventoryItem.InvName "ArmPinkSilver";
       Lith_Armor.SlotSave aslot_upper, 3, 4;
       Lith_Armor_Resistant.Resist ldt_magic;
    }
@@ -162,7 +162,7 @@ class Lith_Armor_PinkSilver_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Pink Silver (Lower)";
+      Lith_InventoryItem.InvName "ArmPinkSilver";
       Lith_Armor.SlotSave aslot_lower, 2, 3;
       Lith_Armor_Resistant.Resist ldt_magic;
    }
@@ -174,7 +174,7 @@ class Lith_Armor_Midori_Upper : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Midori (Upper)";
+      Lith_InventoryItem.InvName "ArmMidori";
       Lith_Armor.SlotSave aslot_upper, 2, 3;
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }
@@ -186,7 +186,7 @@ class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
 {
    default
    {
-      Tag "Midori (Lower)";
+      Lith_InventoryItem.InvName "ArmMidori";
       Lith_Armor.SlotSave aslot_lower, 2, 3;
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }

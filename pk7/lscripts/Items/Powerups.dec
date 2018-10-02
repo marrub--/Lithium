@@ -2,6 +2,7 @@ actor Lith_AllMap : Lith_CustomInventory replaces Allmap
 {
    Tag "Computer Area Map"
    Inventory.PickupSound "player/pickup/allmap"
+   Lith_CustomInventory.InfoPage "AllMap"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -22,6 +23,7 @@ actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 {
    Tag "Berserk"
    Inventory.PickupSound "player/pickup/berserk"
+   Lith_CustomInventory.InfoPage "Berserk"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -49,6 +51,7 @@ actor Lith_Infrared : Lith_CustomInventory replaces Infrared
 {
    Tag "CB-Goggles"
    Inventory.PickupSound "player/pickup/infrared"
+   Lith_CustomInventory.InfoPage "Infrared"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -76,6 +79,7 @@ actor Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
 {
    Tag "Invulnerability"
    Inventory.PickupSound "player/pickup/invuln"
+   Lith_CustomInventory.InfoPage "Invulnerability"
    
    +COUNTITEM
    +INVENTORY.BIGPOWERUP
@@ -105,6 +109,7 @@ actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
    Tag "Tao'chyan"
    Inventory.PickupSound "player/pickup/mega"
+   Lith_CustomInventory.InfoPage "Taochyan"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND
@@ -127,6 +132,7 @@ actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
 {
    Tag "Radiation Shielding Suit"
    Inventory.PickupSound "player/pickup/radsuit"
+   Lith_CustomInventory.InfoPage "RadSuit"
    
    +INVENTORY.FANCYPICKUPSOUND
    
@@ -152,6 +158,7 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
 {
    Tag "Heart"
    Inventory.PickupSound "player/pickup/super"
+   Lith_CustomInventory.InfoPage "Heart"
    
    +COUNTITEM
    +INVENTORY.FANCYPICKUPSOUND

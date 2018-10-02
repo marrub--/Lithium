@@ -7,6 +7,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       Lith_BasicPickup.LogName "HealthBonus", 3;
       Lith_BasicPickup.LogType msg_huds;
       Lith_BasicPickup.Vacuum 1;
+      Lith_BasicPickup.InfoPage "HealthBonus";
       Scale 0.7;
    }
 
