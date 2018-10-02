@@ -46,7 +46,7 @@ void Upgr_Zoom_Deactivate(struct player *p, upgrade_t *upgr)
 script
 void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 {
-   if(UData.vzoom == 0) return;
+   if(UData.zoom == 0 && UData.vzoom == 0) return;
 
    if(UData.vzoom < UData.zoom)
       UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.099);
