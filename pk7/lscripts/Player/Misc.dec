@@ -48,17 +48,6 @@ actor Lith_Nuke : Lith_CustomFunction
    }
 }
 
-actor Lith_Blood : Blood replaces Blood
-{
-   states
-   {
-   Spawn:
-      BLUD CBA 8
-      BLUD A 0 A_RadiusGive("Lith_SpectralSteggles", 64, RGF_PLAYERS)
-      stop
-   }
-}
-
 actor Lith_BlindingLight1 : Lith_CustomFunction
 {
    states
