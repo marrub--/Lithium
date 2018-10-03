@@ -1,4 +1,4 @@
-// Taken from Psychic with permission.
+// Taken from Psychic and Enblanco with permission.
 class Lith_PuffSmoke : Actor
 {
    default
@@ -23,6 +23,98 @@ class Lith_PuffSmoke : Actor
    }
 }
 
+class Lith_HotEmber : Actor
+{
+   default
+   {
+      Radius 2;
+      Height 2;
+      Mass 8;
+      Gravity 0.45;
+      Renderstyle "Translucent";
+      Alpha 0.9;
+      Scale 0.3;
+      +NOBLOCKMAP
+      -NOGRAVITY
+   }
+
+   states
+   {
+   Spawn:
+      EPUF A 1 bright;
+      EPUF BBCC 4 bright A_SpawnItemEx("Lith_HotEmberTrail", frandom(0, 0.5), frandom(-0.5, 0.5), frandom(-0.5, 0.5), frandom(0, 0.5), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
+      EPUF DEFG 4 bright;
+      stop;
+   }
+}
+
+class Lith_HotEmberTrail : Actor
+{
+   default
+   {
+      Radius 2;
+      Height 2;
+      Renderstyle "Translucent";
+      Alpha 0.9;
+      Scale 0.3;
+      +NOGRAVITY
+      +DONTSPLASH
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      EPUF EFG 5;
+      stop;
+   }
+}
+
+class Lith_BulletAfterSmoke : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.01;
+      Speed 20;
+      Radius 3;
+      Height 3;
+      Scale 0.3;
+
+      Projectile;
+      +THRUACTORS
+      +FORCEXYBILLBOARD
+      +DONTSPLASH
+   }
+
+   float m_xs, m_ys;
+
+   override void PostBeginPlay()
+   {
+      scale.x *= frandom(2, 6);
+      scale.y *= frandom(0.4, 1.5);
+      m_xs = frandom(0.005, 0.01);
+      m_ys = frandom(0.001, 0.005);
+   }
+
+   override void Tick()
+   {
+      Super.Tick();
+      scale.x += m_xs;
+      scale.y += m_ys;
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 A_FadeIn(frandom(0.001, 0.005));
+      SMOK DEFG random(14, 56);
+      SMOK HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 A_FadeOut(0.005);
+      stop;
+   }
+}
+
 class Lith_BulletPuff : Actor replaces BulletPuff
 {
    default
@@ -42,6 +134,27 @@ class Lith_BulletPuff : Actor replaces BulletPuff
       -ALLOWPARTICLES
    }
 
+   void Lith_A_SmokeFX()
+   {
+      for(int i = 0, m = random(0, 2); i < m; i++)
+         A_SpawnItemEx("Lith_BulletAfterSmoke", frandom(-1,1), frandom(-1,1), frandom(-2,2),
+            frandom(-0.5,0.5), frandom(-0.5,0.5), frandom(-0.2,0.2));
+   }
+
+   void Lith_A_RicochetFX()
+   {
+      if(random() < 32) return;
+
+      for(int i = 0, m = random(0, 3); i < m; i++)
+         A_SpawnItemEx("Lith_HotEmber", frandom(-1, 1), frandom(-1, 1), frandom(0, 1), frandom(-4, 4), frandom(-4, 4), frandom(2, 5), 0, SXF_NOCHECKPOSITION);
+
+      A_SpawnParticle("FFFFFF", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+         frandom(-8,8), frandom(-8,8), frandom(-2,2),
+         frandom( 0,1), frandom(-5,5), frandom( 5,10),
+         0, 0, frandom(-0.5, -3),
+         1.0, -1);
+   }
+
    states
    {
    explod:
@@ -53,6 +166,8 @@ class Lith_BulletPuff : Actor replaces BulletPuff
       stop;
    Spawn:
       XPUF Q 0;
+      XPUF Q 0 Lith_A_SmokeFX;
+      XPUF Q 0 Lith_A_RicochetFX;
       XPUF Q 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_TorgueMode, true), "explod");
       XPUF Q 0 A_SpawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random(-10, 10));
       XPUF Q 0 A_Jump(256, "PuffNormal", "PuffMirrored");

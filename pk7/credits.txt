@@ -147,6 +147,7 @@
 *  Arachnotron attack effects
 *  Baron attack effects
 *  Splash effects
+*  Bullet puff sparks
 
 *                                 * Seryder *
 

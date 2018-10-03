@@ -14,18 +14,20 @@ class Lith_GunSmoke : Actor
       +THRUACTORS
       +FORCEXYBILLBOARD
    }
-   
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      A_ScaleVelocity(0.01);
+      A_SetScale(scale.x * frandom(0.04, 0.18));
+      if(random() < 128) A_SetScale(scale.x - (scale.x * 2), scale.y);
+   }
+
    states
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 {
-         A_ScaleVelocity(0.01);
-         A_SetScale(scale.x * frandom(0.04, 0.18));
-         if(random() < 128)
-            A_SetScale(scale.x - (scale.x * 2), scale.y);
-      }
-      SMOK ABCDEFGHIJKLMNOPQ 1 A_FadeTo(0, 0.01, 1);
+      SMOK ABCDEFGHIJKLMNOPQ 1 A_FadeTo(0, 0.01, FTF_REMOVE);
       stop;
    }
 }

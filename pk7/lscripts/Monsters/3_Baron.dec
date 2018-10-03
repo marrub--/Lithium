@@ -59,7 +59,7 @@ actor Lith_BaronHellfireTrailSpawner
    Spawn:
       TNT1 A 0
       TNT1 A 0 A_SpawnItemEx("Lith_BaronHellfireTrail", -16, 0, 0, frandom(0.0, -1.0))
-      TNT1 A 0 A_SpawnParticle("37732B", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 2, 0,
+      TNT1 A 0 A_SpawnParticle("37732B", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 5, 0,
                           frandom(-8,8), frandom(-8,8), frandom(-2,2),
                           frandom(0, 10), frandom(-0.1, 0.1), frandom(-1, 1),
                           0, 0, 0.02,
