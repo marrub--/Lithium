@@ -168,6 +168,22 @@ class Lith_SlottedItem : Lith_InventoryItem abstract
 
    property Slot: m_slot;
 
+   private void Lith_SetSound()
+   {
+      switch(m_slot) {
+      default:
+      case aslot_upper: pickupSound = "player/pickup/armor"; break;
+      case aslot_lower: pickupSound = "player/pickup/boots"; break;
+      case aslot_ring:  pickupSound = "player/pickup/ring";  break;
+      }
+   }
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      Lith_SetSound();
+   }
+
    override void Lith_OnAttach()
       {m_owner = null;}
 
@@ -214,6 +230,7 @@ class Lith_SlottedItem : Lith_InventoryItem abstract
       let copy = Lith_SlottedItem(Super.CreateCopy(mo));
 
       copy.m_slot = m_slot;
+      Lith_SetSound();
 
       return copy;
    }

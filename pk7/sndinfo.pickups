@@ -33,6 +33,9 @@ player/pickup/super       lsounds/Items/Super.flac       // 〃
 player/pickup/allmap      lsounds/Items/AllMap.flac      // Half-Life
 player/pickup/radsuit     lsounds/Items/Radsuit.flac     // Call of Duty: Modern Warfare 2
 player/pickup/berserk     lsounds/Items/Berserk.flac     // 〃
+player/pickup/armor       lsounds/Items/Armor.flac       // E.Y.E: Divine Cybermancy
+player/pickup/boots       lsounds/Items/Boots.flac       // 〃
+player/pickup/ring        lsounds/Items/Ring.flac        // 〃
 
 player/pickup/scorechip lsounds/Items/ScoreChip.flac // Half-Life 2
 
