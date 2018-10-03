@@ -1,6 +1,8 @@
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
 #include "lith_common.h"
 
+#include <math.h>
+
 #define BezierImpl(type, ret, func) \
    type xa = func(x1, x2, t); \
    type ya = func(y1, y2, t); \
@@ -190,7 +192,7 @@ struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, fixed64 t)
 //
 struct polar ctopol(fixed x, fixed y)
 {
-   return (struct polar){ACS_VectorAngle(x, y), mag2lk(x, y)};
+   return (struct polar){ACS_VectorAngle(x, y), mag2i(x, y)};
 }
 
 // EOF

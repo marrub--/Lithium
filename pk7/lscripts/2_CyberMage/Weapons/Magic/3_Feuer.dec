@@ -9,8 +9,7 @@ actor Lith_FeuerTest
    states
    {
    Spawn:
-      BLLT E 1
-      BLLT E 1 A_FadeOut((sin(CallACS("Lith_Timer") * 5) + 1) * 0.5)
+      BLLT E -1
       stop
    }
 }
