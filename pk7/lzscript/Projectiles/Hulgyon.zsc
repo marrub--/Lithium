@@ -1,0 +1,70 @@
+class Lith_HulgyonHit : Actor
+{
+   default
+   {
+      DamageType "Lith_Magic";
+
+      +NOGRAVITY
+      +THRUACTORS
+   }
+
+   void Lith_A_Spawn(float z)
+   {
+      A_SpawnItemEx("Lith_HulgyonEffect", 0,0,z  , flags: SXF_TRANSFERPOINTERS);
+      A_SpawnItemEx("Lith_HulgyonEffect", 0,0,z+4, flags: SXF_TRANSFERPOINTERS);
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_AlertMonsters;
+      TNT1 A 0 A_PlaySound("weapons/hulgyon/proc");
+      TNT1 A 1 Lith_A_Spawn( 0);
+      TNT1 A 1 Lith_A_Spawn(10);
+      TNT1 A 1 Lith_A_Spawn(20);
+      TNT1 A 1 Lith_A_Spawn(30);
+      TNT1 A 1 Lith_A_Spawn(40);
+      stop;
+   }
+}
+
+class Lith_HulgyonProjectile : Actor
+{
+   default
+   {
+      Damage 0;
+      Speed 30;
+      RenderStyle "Add";
+      XScale 4;
+      Radius 4;
+      Height 16;
+      Projectile;
+      +FLOORHUGGER
+      +RIPPER
+      +BRIGHT
+   }
+
+   int m_lz;
+
+   state Lith_A_Step()
+   {
+      if(z - m_lz > 48 || z - m_lz < -48) return ResolveState("Null");
+      m_lz = z;
+      return null;
+   }
+
+   states
+   {
+   Spawn:
+      BLLT J 0;
+      BLLT J 0 {m_lz = z;}
+   SpawnLoop:
+      BLLT JJJ 1 Lith_A_Step;
+      BLLT J 0 A_SpawnItemEx("Lith_HulgyonHit", flags: SXF_TRANSFERPOINTERS);
+      BLLT JJ 1 Lith_A_Step;
+      loop;
+   }
+}
+
+// EOF

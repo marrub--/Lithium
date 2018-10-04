@@ -142,7 +142,7 @@ class Lith_DarkMatter : Actor
                A_PlaySound("weapons/dark/fire", CHAN_WEAPON, 1, false, 0.5);
                int num = random(0, 10);
                for(int j = 0; j < num; j++)
-                  A_SpawnItemEx("Lith_DarkMatterRailgun", frandom(-32,32),frandom(-32,32),frandom(-16,16), 0,0,0, 0, SXF_SETTARGET);
+                  A_SpawnItemEx("Lith_DarkMatterRailgun", frandom(-32,32),frandom(-32,32),frandom(-16,16), flags: SXF_SETTARGET);
             }
          }
          

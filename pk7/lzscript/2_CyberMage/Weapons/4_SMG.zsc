@@ -235,19 +235,16 @@ Fire1:
          invoker.m_spready = invoker.m_recoil * frandom(-1, 1);
 
          if(CallACS("LPData", pdata_upgrade, UPGR_SMG_B))
-            A_FireProjectile("Lith_SMGTracer3", invoker.m_spreadx,
-               false, 0, 0, 0, invoker.m_spready);
+            A_FireProjectile("Lith_SMGTracer3", invoker.m_spreadx, pitch: invoker.m_spready);
          else
          {
             A_FireBullets(invoker.m_spreadx, invoker.m_spready, -1,
                8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE);
 
             if(CallACS("LPData", pdata_upgrade, UPGR_SMG_A))
-               A_FireProjectile("Lith_SMGTracer2", invoker.m_spreadx,
-                  false, 0, 0, 0, invoker.m_spready);
+               A_FireProjectile("Lith_SMGTracer2", invoker.m_spreadx, pitch: invoker.m_spready);
             else
-               A_FireProjectile("Lith_SMGTracer", invoker.m_spreadx,
-                  false, 0, 0, 0, invoker.m_spready);
+               A_FireProjectile("Lith_SMGTracer", invoker.m_spreadx, pitch: invoker.m_spready);
          }
       }
 

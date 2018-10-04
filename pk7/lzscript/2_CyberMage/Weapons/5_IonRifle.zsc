@@ -131,7 +131,7 @@ class Lith_IonRifleHax : FastProjectile
       TNT1 A 1;
       loop;
    Death:
-      TNT1 A 0 A_SpawnItemEx("Lith_IonRifleExplosion", 0,0,0, 0,0,0, 0, SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
+      TNT1 A 0 A_SpawnItemEx("Lith_IonRifleExplosion", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
       stop;
    }
 }
