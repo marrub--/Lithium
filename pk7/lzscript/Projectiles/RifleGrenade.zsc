@@ -24,7 +24,7 @@ class Lith_RifleGrenade : Actor
       Radius 8;
       Height 8;
       Speed 25;
-      Damage 20;
+      Damage 10;
       BounceType "Doom";
       BounceCount 2;
       Gravity 0.5;
