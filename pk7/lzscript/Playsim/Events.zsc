@@ -99,6 +99,12 @@ override void WorldThingSpawned(WorldEvent evt)
    }
 }
 
+override void WorldTick()
+{
+   if(m_bosslevel) for(int i = 0, m = level.lines.size(); i < m; i++) for(int j = 0; j < 3; j++)
+      level.lines[i].sidedef[0].setTextureYoffset(j, sin(level.totaltime)*4);
+}
+
 override void WorldThingDamaged(WorldEvent evt)
 {
    if(evt.damageType == 'Lith_Bullets' && evt.damage >= 8 && !evt.thing.bNOBLOOD)
