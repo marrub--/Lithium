@@ -68,24 +68,6 @@ actor Lith_XH_BaronOfHell : Lith_BaronOfHell
 {
 }
 
-actor Lith_XH_RevenantTracer : Lith_RevenantTracer
-{
-   Scale 0.7
-   Damage 1
-   Radius 2
-   Height 2
-   
-   states
-   {
-   Spawn:
-      FATB A 0
-      FATB A 0 A_JumpIf(user_timer > 35, "Death")
-      FATB A 0 A_SetUserVar(user_timer, user_timer + 1)
-      FATB AB 2 bright A_Tracer
-      loop
-   }
-}
-
 actor Lith_XH_Revenant : Lith_Revenant
 {
    Health 200
