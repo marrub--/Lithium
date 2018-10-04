@@ -246,8 +246,8 @@
 
 --- Other Credits ------------------------------------------------------------|
 
-Bassilla GUI theme
-   Kurashiki:    (Bassilla art   )
+Basilissa GUI theme
+   Kurashiki:    (Basilissa art  )
    Sgt. Shivers: (Everything else)
 
 Cannon sprites

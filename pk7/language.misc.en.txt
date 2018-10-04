@@ -502,7 +502,7 @@
    "\cd+ Added sprites for the Ion Rifle.\n"
    "\cd+ Added new menus! All of them! Really, launch the game! THEY'RE COOL THANK YOU JIMMY\n"
    "\cd+ Added the Ghost GUI theme.\n"
-   "\cd+ Added the Bassilla GUI theme (thanks, Shivers and Kurashiki!)\n"
+   "\cd+ Added the Basilissa GUI theme (thanks, Shivers and Kurashiki!)\n"
    "\cd+ Added in-game changelog.\n"
    "\cd+ Added missing info pages.\n"
    "\cd+ Added new info pages.\n"

@@ -130,7 +130,7 @@ static __str ColorName(char ch)
 static __str ThemeName(int num)
 {
    static __str const themes[] = {
-      "Green", "Rose", "Umi", "Ender", "Orange", "Grey", "Bassilla", "Ghost",
+      "Green", "Rose", "Umi", "Ender", "Orange", "Grey", "Basilissa", "Ghost",
       "WinXP",
    };
 

@@ -82,15 +82,15 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(p->cbi.theme != p->cbi.oldtheme) switch((p->cbi.oldtheme = p->cbi.theme))
    {
    default:
-   case cbi_theme_green:    p->cbi.guistate.gfxprefix = ":UI_Green:";    break;
-   case cbi_theme_rose:     p->cbi.guistate.gfxprefix = ":UI_Rose:";     break;
-   case cbi_theme_umi:      p->cbi.guistate.gfxprefix = ":UI_Umi:";      break;
-   case cbi_theme_ender:    p->cbi.guistate.gfxprefix = ":UI_Ender:";    break;
-   case cbi_theme_orange:   p->cbi.guistate.gfxprefix = ":UI_Orange:";   break;
-   case cbi_theme_grey:     p->cbi.guistate.gfxprefix = ":UI_Grey:";     break;
-   case cbi_theme_bassilla: p->cbi.guistate.gfxprefix = ":UI_Bassilla:"; break;
-   case cbi_theme_ghost:    p->cbi.guistate.gfxprefix = ":UI_Ghost:";    break;
-   case cbi_theme_winxp:    p->cbi.guistate.gfxprefix = ":UI_WinXP:";    break;
+   case cbi_theme_green:     p->cbi.guistate.gfxprefix = ":UI_Green:";     break;
+   case cbi_theme_rose:      p->cbi.guistate.gfxprefix = ":UI_Rose:";      break;
+   case cbi_theme_umi:       p->cbi.guistate.gfxprefix = ":UI_Umi:";       break;
+   case cbi_theme_ender:     p->cbi.guistate.gfxprefix = ":UI_Ender:";     break;
+   case cbi_theme_orange:    p->cbi.guistate.gfxprefix = ":UI_Orange:";    break;
+   case cbi_theme_grey:      p->cbi.guistate.gfxprefix = ":UI_Grey:";      break;
+   case cbi_theme_basilissa: p->cbi.guistate.gfxprefix = ":UI_Basilissa:"; break;
+   case cbi_theme_ghost:     p->cbi.guistate.gfxprefix = ":UI_Ghost:";     break;
+   case cbi_theme_winxp:     p->cbi.guistate.gfxprefix = ":UI_WinXP:";     break;
    }
 
    Lith_GUI_Begin(g, 320, 240);
