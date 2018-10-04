@@ -11,5 +11,6 @@ version "3.2"
 #include "lzscript/Items.zsc"
 #include "lzscript/Weapons.zsc"
 #include "lzscript/Player.zsc"
+#include "lzscript/Decorations.zsc"
 
 // EOF

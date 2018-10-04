@@ -27,6 +27,17 @@ amb/vent       lsounds/World/Ambience/VentPump.wav       // 〃
 amb/lightson   lsounds/World/Ambience/LightsOn.flac      // 〃
 amb/computer   lsounds/World/Ambience/Computer.wav       // Quake
 
+amb/fire lsounds/World/Ambience/Fire.wav // Hexen
+$limit amb/fire 0
+
+$alias amb/spark weapons/erifle/zap
+$volume amb/spark 0.01
+
+$alias amb/turnon  player/cbi/clickon
+$alias amb/turnoff player/cbi/clickoff
+$volume amb/turnon  0.1
+$volume amb/turnoff 0.1
+
 $random amb/alarmdist {
    amb/alarmdist1
    amb/alarmdist2

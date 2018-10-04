@@ -1,0 +1,51 @@
+class Lith_Candlestick : Lith_FlareDecor replaces Candlestick
+{
+   default
+   {
+      Health 60;
+      Radius 20;
+      Height 14;
+      DeathHeight 14;
+      ProjectilePassHeight -14;
+      Lith_FlareDecor.Type "Lith_CandleFlare";
+      Lith_SwitchableDecor.Noise "amb/fire";
+      Lith_SwitchableDecor.Volume 0.3;
+   }
+
+   states {
+   Spawn:    CAND ABCDBDABCAC 3 bright; loop;
+   Inactive: CAND I -1; stop;
+   Death:
+      CAND X 0 A_PlaySound("amb/puff", CHAN_AUTO);
+      CAND X -1;
+      stop;
+   }
+}
+
+class Lith_Candelabra : Lith_FlareDecor replaces Candelabra
+{
+   default
+   {
+      Health 250;
+      Radius 16;
+      Height 60;
+      DeathHeight 60;
+      ProjectilePassHeight -60;
+      Lith_FlareDecor.Type "Lith_CandelabraFlare";
+      Lith_SwitchableDecor.Noise "amb/fire";
+   }
+
+   states {
+   Spawn:    CBRA ABCDBDABCAC 3 bright; loop;
+   Inactive: CBRA I -1; stop;
+   Death:
+      CBRA X 0 A_PlaySound("amb/metalx", CHAN_AUTO);
+      CBRA X -1;
+      stop;
+   }
+}
+
+class Lith_CandleFlare     : Lith_DecorFlareY {default {Height 13; Scale 0.4;}}
+class Lith_CandelabraFlare : Lith_CandleFlare {default {Height 55; XScale 1.7; YScale 0.7;}}
+
+// EOF

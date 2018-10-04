@@ -1,0 +1,46 @@
+class Lith_TorchTall : Lith_TorchDecor
+{
+   default
+   {
+      Health 200;
+      Height 68;
+      DeathHeight 68;
+      ProjectilePassHeight -68;
+      Lith_TorchDecor.Height 55;
+   }
+
+   states {Spawn: LRTP A 0; goto Spawn1;}
+}
+
+class Lith_TorchTallR : Lith_TorchTall replaces RedTorch
+{
+   default
+   {
+      Lith_FlareDecor.Type "Lith_TorchTallRFlare";
+      Lith_TorchDecor.TypeColo "Lith_TorchRFlame", "B30000", "FF7F1B", "EBDB57";
+   }
+}
+
+class Lith_TorchTallG : Lith_TorchTall replaces GreenTorch
+{
+   default
+   {
+      Lith_FlareDecor.Type "Lith_TorchTallGFlare";
+      Lith_TorchDecor.TypeColo "Lith_TorchGFlame", "3F832F", "67DF5F", "77FF6F";
+   }
+}
+
+class Lith_TorchTallB : Lith_TorchTall replaces BlueTorch
+{
+   default
+   {
+      Lith_FlareDecor.Type "Lith_TorchTallBFlare";
+      Lith_TorchDecor.TypeColo "Lith_TorchBFlame", "0000B3", "3737FF", "ABABFF";
+   }
+}
+
+class Lith_TorchTallRFlare : Lith_DecorFlareR {default {Height 55; Scale 0.8;}}
+class Lith_TorchTallGFlare : Lith_DecorFlareG {default {Height 55; Scale 0.8;}}
+class Lith_TorchTallBFlare : Lith_DecorFlareB {default {Height 55; Scale 0.8;}}
+
+// EOF

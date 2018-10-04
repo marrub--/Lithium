@@ -1,0 +1,19 @@
+class Lith_TechPillar : Actor replaces TechPillar
+{
+   default
+   {
+      Radius 16;
+      Height 128;
+      ProjectilePassHeight -128;
+      Mass 0x7FFFFFFF;
+      +SOLID
+      +SHOOTABLE
+      +NOBLOOD
+      +NOTAUTOAIMED
+      +FORCEYBILLBOARD
+   }
+
+   states {Spawn: ELEC A -1; stop;}
+}
+
+// EOF

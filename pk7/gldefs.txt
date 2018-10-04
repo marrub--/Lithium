@@ -12,4 +12,122 @@ hardwareshader postprocess scene
    uniform float lith_m
 }
 
+pointlight Lith_Candle
+{
+   color 1.0 1.0 0.3
+   size 24
+   offset 0 -4 0
+   attenuate 1
+}
+
+pointlight Lith_Candelabra
+{
+   color 1.0 1.0 0.3
+   size 67
+   offset 0 -24 0
+   attenuate 1
+}
+
+pulselight Lith_BigLamp
+{
+   color 0.8 0.8 1.0
+   size 96
+   secondarySize 99
+   interval 0.4
+   offset 0 -30 0
+   attenuate 1
+}
+
+pulselight Lith_SmallLamp
+{
+   color 0.8 0.8 1.0
+   size 84
+   secondarySize 87
+   interval 0.4
+   offset 0 -20 0
+   attenuate 1
+}
+
+pulselight Lith_Lamp
+{
+   color 1.0 1.0 0.8
+   size 84
+   secondarySize 87
+   interval 1.14
+   offset 0 -10 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchSmallR
+{
+   color 1.0 0.5 0.2
+   size 72
+   secondarySize 81
+   interval 0.1
+   offset 0 -2 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchSmallG
+{
+   color 0.3 1.0 0.3
+   size 72
+   secondarySize 81
+   interval 0.1
+   offset 0 -2 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchSmallB
+{
+   color 0.3 0.3 1.0
+   size 72
+   secondarySize 81
+   interval 0.1
+   offset 0 -2 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchTallR
+{
+   color 1.0 0.5 0.2
+   size 90
+   secondarySize 99
+   interval 0.1
+   offset 0 -5 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchTallG
+{
+   color 0.3 1.0 0.3
+   size 90
+   secondarySize 99
+   interval 0.1
+   offset 0 -5 0
+   attenuate 1
+}
+
+flickerlight2 Lith_TorchTallB
+{
+   color 0.3 0.3 1.0
+   size 90
+   secondarySize 99
+   interval 0.1
+   offset 0 -5 0
+   attenuate 1
+}
+
+object Lith_CandleFlare      {frame YLGL {light Lith_Candle}}
+object Lith_CandelabraFlare  {frame YLGL {light Lith_Candelabra}}
+object Lith_TechLampFlare    {frame BLGL {light Lith_BigLamp}}
+object Lith_TechLamp2Flare   {frame BLGL {light Lith_SmallLamp}}
+object Lith_ColumnFlare      {frame YLGL {light Lith_Lamp}}
+object Lith_TorchSmallRFlare {frame RDGL {light Lith_TorchSmallR}}
+object Lith_TorchSmallGFlare {frame GRGL {light Lith_TorchSmallG}}
+object Lith_TorchSmallBFlare {frame BLGL {light Lith_TorchSmallB}}
+object Lith_TorchTallRFlare  {frame RDGL {light Lith_TorchTallR}}
+object Lith_TorchTallGFlare  {frame GRGL {light Lith_TorchTallG}}
+object Lith_TorchTallBFlare  {frame BLGL {light Lith_TorchTallB}}
+
 // EOF

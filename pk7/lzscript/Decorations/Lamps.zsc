@@ -1,0 +1,91 @@
+class Lith_LampSpark : Actor
+{
+   default
+   {
+      Radius 6;
+      Height 6;
+      RenderStyle "Add";
+      +NOINTERACTION
+   }
+
+   States
+   {
+   Spawn:
+      SPRK A 0;
+      SPRK A 0 {scale.x *= randompick(-1, 1);}
+      SPRK A 1 bright;
+      SPRK B 1 bright A_PlaySound("amb/spark", CHAN_AUTO, 1.0, 0, ATTN_NORM);
+      SPRK CD 2 bright;
+      SPRK EF 3;
+      SPRK GH 4 A_FadeOut;
+      stop;
+   }
+}
+
+class Lith_TechLamp : Lith_FlareDecor replaces TechLamp
+{
+   default
+   {
+      Health 100;
+      Radius 16;
+      Height 80;
+      DeathHeight 80;
+      ProjectilePassHeight -80;
+      Lith_FlareDecor.Type "Lith_TechLampFlare";
+      Lith_SwitchableDecor.Noise "amb/lamp1";
+   }
+
+   states
+   {
+   Spawn:    TLMP ABCD 4 bright; loop;
+   Inactive: TLMP Y -1; stop;
+   Death:    TLMP X 0;
+   Death1:
+      #### # 1 A_PlaySound("amb/shatter", CHAN_AUTO, 1.0, 0, ATTN_NORM);
+      #### # 35 A_SpawnItemEx("Lith_LampSpark", frandom(-0.5, 0.5), frandom(-0.5, 0.5), height-8, 0, 0, frandom(-1,1), frandom(-1,1), frandom(2,4), 168);
+      wait;
+   }
+}
+
+class Lith_TechLamp2 : Lith_TechLamp replaces TechLamp2
+{
+   default
+   {
+      Health 80;
+      Height 60;
+      DeathHeight 60;
+      ProjectilePassHeight -60;
+      Lith_FlareDecor.Type "Lith_TechLamp2Flare";
+      Lith_SwitchableDecor.Noise "amb/lamp2";
+   }
+
+   states {
+   Spawn:    TLP2 ABCD 4 bright; loop;
+   Inactive: TLP2 Y -1; stop;
+   Death:    TLP2 X 0; goto Death1;
+   }
+}
+
+class Lith_Column : Lith_TechLamp2 replaces Column
+{
+   default
+   {
+      Health 50;
+      Height 48;
+      DeathHeight 48;
+      ProjectilePassHeight -48;
+      Lith_FlareDecor.Type "Lith_ColumnFlare";
+   }
+
+   states {
+   Spawn:    COLU ABCDEDCB 4 bright; loop;
+   Inactive: COLU Y -1; stop;
+   Death:    COLU X 0; goto Death1;
+   }
+}
+
+class Lith_TechLampFlare  : Lith_DecorFlareB   {default {Height 65;}}
+class Lith_TechLamp2Flare : Lith_TechLampFlare {default {Height 50; Scale 0.7;}}
+class Lith_ColumnFlare    : Lith_DecorFlareY   {default {Height 40; Scale 0.7;}}
+
+// EOF

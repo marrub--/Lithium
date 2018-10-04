@@ -101,7 +101,7 @@ override void WorldThingSpawned(WorldEvent evt)
 
 override void WorldThingDamaged(WorldEvent evt)
 {
-   if(evt.damageType == 'Lith_Bullets' && evt.damage >= 8)
+   if(evt.damageType == 'Lith_Bullets' && evt.damage >= 8 && !evt.thing.bNOBLOOD)
    {
       let mo = Actor.Spawn("Lith_Dummy", evt.thing.pos + (0, 0, evt.thing.height / 2));
       float vol = clamp(evt.damage / 14.0, 0, 1);

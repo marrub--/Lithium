@@ -1,0 +1,114 @@
+class Lith_SwitchableDecor : Actor
+{
+   default
+   {
+      Mass 0x7FFFFFFF;
+      Activation THINGSPEC_Default | THINGSPEC_NoDeathSpecial | THINGSPEC_Switch | THINGSPEC_Deactivate;
+      Lith_SwitchableDecor.Volume 1;
+      +SOLID
+      +USESPECIAL
+      +FORCEYBILLBOARD
+   }
+
+   private meta sound m_idlenoise;
+   private meta float m_volume;
+
+   property Noise: m_idlenoise;
+   property Volume: m_volume;
+
+   virtual void Lith_Active()
+   {
+      if(m_idlenoise)
+         A_PlaySound(m_idlenoise, CHAN_5, m_volume, true, ATTN_STATIC);
+   }
+
+   virtual void Lith_Inactive() {A_StopSound(CHAN_5);}
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      Lith_Active();
+   }
+
+   override void Die(Actor source, Actor inflictor, int dmgflags)
+   {
+      Super.Die(source, inflictor, dmgflags);
+      Lith_Inactive();
+   }
+
+   override void Activate(Actor mo)
+   {
+      if(health > 0) {
+         Lith_Active();
+         A_PlaySound("amb/turnon", CHAN_6);
+         SetStateLabel("Spawn");
+      }
+   }
+
+   override void Deactivate(Actor mo)
+   {
+      if(health > 0) {
+         Lith_Inactive();
+         A_PlaySound("amb/turnoff", CHAN_6);
+         SetStateLabel("Inactive");
+      }
+   }
+}
+
+class Lith_DestructableSwitchDecor : Lith_SwitchableDecor
+{
+   default
+   {
+      +SHOOTABLE
+      +NOBLOOD
+      +NOTAUTOAIMED
+   }
+}
+
+class Lith_FlareDecor : Lith_DestructableSwitchDecor
+{
+   private meta class<Actor> m_type;
+   private Actor m_flare;
+
+   property Type: m_type;
+
+   override void Lith_Active()
+   {
+      Super.Lith_Active();
+      m_flare = Actor.Spawn(m_type, pos);
+      m_flare.master = self;
+   }
+
+   override void Lith_Inactive()
+   {
+      Super.Lith_Inactive();
+      if(m_flare) m_flare.destroy();
+   }
+}
+
+class Lith_DecorFlare : Actor
+{
+   default
+   {
+      Radius 2;
+      Renderstyle "Add";
+      Alpha 0.5;
+      +NOTONAUTOMAP
+      +NOINTERACTION
+      +FORCEXYBILLBOARD
+   }
+
+   states
+   {
+   SpawnLoop:
+      #### # 1 A_Warp(AAPTR_MASTER, 0, 0, height, 0, WARPF_COPYINTERPOLATION | WARPF_NOCHECKPOSITION);
+      wait;
+   }
+}
+
+class Lith_DecorFlareB : Lith_DecorFlare {states {Spawn: BLGL A 0; goto SpawnLoop;}}
+class Lith_DecorFlareG : Lith_DecorFlare {states {Spawn: GRGL A 0; goto SpawnLoop;}}
+class Lith_DecorFlareR : Lith_DecorFlare {states {Spawn: RDGL A 0; goto SpawnLoop;}}
+class Lith_DecorFlareY : Lith_DecorFlare {states {Spawn: YLGL A 0; goto SpawnLoop;}}
+
+// EOF
