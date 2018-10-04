@@ -113,7 +113,7 @@ actor Lith_CPlasmaRifle : Lith_CWeapon
    FireEmpty:
       CPLG A 0 A_StopSound(CHAN_7)
       CPLG A 0 A_StopSound(CHAN_6)
-      CPLG A 1 A_PlaySound("weapons/plasma/empty", 7)
+      CPLG A 1 A_PlaySound("weapons/plasma/empty", CHAN_7)
       CPLG A 1 offset(0, 37)
       CPLG A 1 offset(0, 36)
       CPLG A 1 offset(0, 35)

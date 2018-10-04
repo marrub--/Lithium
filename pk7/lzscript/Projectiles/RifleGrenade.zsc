@@ -48,9 +48,9 @@ class Lith_RifleGrenade : Actor
          bNOGRAVITY = true;
          A_Explode();
          if(CallACS("LPData", pdata_upgrade, UPGR_7777777, true))
-            A_PlaySound("marathon/explode", 6);
+            A_PlaySound("marathon/explode", CHAN_6);
          else
-            A_PlaySound("explosion", 6);
+            A_PlaySound("explosion", CHAN_6);
       }
       MEXP AB 2 bright;
       MEXP CD 3 bright;

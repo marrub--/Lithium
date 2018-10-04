@@ -80,7 +80,7 @@ actor Lith_BFG9000 : Lith_MWeapon
       goto FireCannonBig
    
    FireEmpty:
-      "####" A 2 A_PlaySound("weapons/cannon/empty", 7)
+      "####" A 2 A_PlaySound("weapons/cannon/empty", CHAN_7)
       "####" A 1 offset(0, 28)
       "####" A 1 offset(0, 29)
       "####" A 1 offset(0, 32)

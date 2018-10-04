@@ -62,7 +62,7 @@ class Lith_SuperShotgun : Lith_MWeapon
       SSGG A 0 A_AlertMonsters;
       SSGG A 0 A_FireBullets(9, 6, 16, 6, "BulletPuff");
       SSGG A 0 Lith_A_GunSmoke;
-      SSGG A 0 A_PlaySound("weapons/ssg/fire", 7);
+      SSGG A 0 A_PlaySound("weapons/ssg/fire", CHAN_7);
       SSGG A 0 A_Recoil(1.2);
       SSGG A 0 Lith_A_RecoilUp(1.5);
       SSGG A 0 A_GunFlash;

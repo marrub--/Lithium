@@ -5,10 +5,10 @@ actor Lith_SwordPuff : Lith_BulletPuff
    states
    {
    PuffNormal:
-      XPUF A 0 A_PlaySound("weapons/sword/swing1", 7)
+      XPUF A 0 A_PlaySound("weapons/sword/swing1", CHAN_7)
       goto Super::PuffNormal
    PuffMirrored:
-      XPUF A 0 A_PlaySound("weapons/sword/swing1", 7)
+      XPUF A 0 A_PlaySound("weapons/sword/swing1", CHAN_7)
       goto Super::PuffMirrored
    }
 }
@@ -92,7 +92,7 @@ actor Lith_Sword : Lith_Weapon
       SORD AB 2
       SORD CD 1
       TNT1 A 5
-      SORD E 1 A_PlaySound("weapons/sword/swing", 7)
+      SORD E 1 A_PlaySound("weapons/sword/swing", CHAN_7)
       SORD F 1 A_SpawnItemEx("Lith_SwordBlitter", 0, 0, 24, 0, 0, 0, 0, SXF_SETTARGET | SXF_NOCHECKPOSITION)
       SORD GH 1
       TNT1 A 4

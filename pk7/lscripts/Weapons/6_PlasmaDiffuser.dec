@@ -77,7 +77,7 @@ actor Lith_PlasmaDiffuser : Lith_Weapon
    FireEmpty:
       PDFG A 0 A_StopSound(CHAN_7)
       PDFG A 0 A_StopSound(CHAN_6)
-      PDFG A 1 A_PlaySound("weapons/plasdiff/empty", 7)
+      PDFG A 1 A_PlaySound("weapons/plasdiff/empty", CHAN_7)
       PDFG A 1 offset(0, 37)
       PDFG A 1 offset(0, 36)
       PDFG A 1 offset(0, 35)

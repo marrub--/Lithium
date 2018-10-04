@@ -61,7 +61,7 @@ action(weapon) void Lith_A_JustAttack()
    {
       invoker.m_just = 0;
       A_AlertMonsters();
-      A_PlaySound("weapons/shotgun/just", 7);
+      A_PlaySound("weapons/shotgun/just", CHAN_7);
       A_RailAttack(20, 0, false, "", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "BulletPuff", 0, 0, 0, 48, 3, 3);
    }
 }

@@ -89,19 +89,19 @@ Reload:
    MTBG F 2;
    MTBG G 2;
    MTBG H 2;
-   MTBG I 4 A_PlaySound("weapons/mateba/open", 7);
+   MTBG I 4 A_PlaySound("weapons/mateba/open", CHAN_7);
    MTBG J 3;
    MTBG K 2;
-   MTBG L 3 A_PlaySound("weapons/mateba/eject", 6);
+   MTBG L 3 A_PlaySound("weapons/mateba/eject", CHAN_6);
    MTBG L 0 {
       for(int i = 0; i < invoker.m_fired / 2; i++)
          Lith_A_Casing("Lith_CasSmall", 10, frandom(1,2), 32, frandom(1,2), frandom(1,3), 0);
    }
    MTBG M 3 Lith_A_ReloadFinish;
    MTBG N 3;
-   MTBG O 2 A_PlaySound("weapons/mateba/load", 5);
+   MTBG O 2 A_PlaySound("weapons/mateba/load", CHAN_5);
    MTBG P 3;
-   MTBG Q 3 A_PlaySound("weapons/mateba/close", 7);
+   MTBG Q 3 A_PlaySound("weapons/mateba/close", CHAN_7);
    MTBG R 3;
    MTBG S 4;
    goto Ready;
