@@ -224,7 +224,7 @@
    "RUNNING THE WORLD, if you quit.";
 
 "QUITMSG29" =
-   "On the planet Durla Prime, onesuch being exists whose\n"
+   "On the planet Durla Prime, one such being exists whose\n"
    "only true name is \"King Crimera Haxfucker.\"";
 
 "QUITMSG30" = "AAAGH";
@@ -400,7 +400,7 @@
 
 "LITH_UPDATE_1_5_3" =
    "\cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:\n"
-   "\cd+ Added a player levelling system with 7 stats.\n"
+   "\cd+ Added a player leveling system with 7 stats.\n"
    "\cb] Monsters will scale to your level.\n"
    "\cd+ Added palette flashes for picking up special items.\n"
    "\cd+ Added a puff to homing SMG tracers.\n"
@@ -418,16 +418,16 @@
    "\cj| Changed ammo pickup score multiplier.\n"
    "\cj| Fixed selling weapons giving extra score.\n"
    "\cj| Fixed the aspect ratio of HUD elements.\n"
-   "\cj| Made boss health easier to read while healthbars are disabled.\n"
+   "\cj| Made boss health easier to read while health bars are disabled.\n"
    "\cj| Improved performance in high-monster-density maps.\n"
    "\cj| Improved GUI performance slightly.";
 
 "LITH_UPDATE_1_5_3_Page2" =
-   "\cj| Changed the default automap colors.\n"
+   "\cj| Changed the default Automap colors.\n"
    "\cj| Replaced the small font and console fonts.\n"
-   "\cj| Made players not collide with eachother in multiplayer.\n"
-   "\cj| Fixed Cyber-Mage's magic selector breaking weapons in multiplayer.\n"
-   "\cj| Fixed pause-in-menus breaking stuff in multiplayer.\n"
+   "\cj| Made players not collide with each other in multi-player.\n"
+   "\cj| Fixed Cyber-Mage's magic selector breaking weapons in multi-player.\n"
+   "\cj| Fixed pause-in-menus breaking stuff in multi-player.\n"
    "\cj| Fixed visual rank not being set properly on non-compatible enemies.\n"
    "\cj| Fixed Heretic weapons not being replaced.\n"
    "\cj| Fixed Phantoms turning into chickens breaking the confines of reality.\n"
@@ -444,7 +444,7 @@
    "\cd+ Added an auto-save setting.\n"
    "\cd+ Added an API, so external C code can access all of Lithium by\n"
    "\cd  LOADing lithmain.\n"
-   "\cd+ Added indicators for upgrades that work with eachother.\n"
+   "\cd+ Added indicators for upgrades that work with each other.\n"
    "\cd+ Added a footstep sound setting.\n"
    "\cd+ Added a view tilt setting.\n"
    "\cd+ Added the Elec. Binding upgrade.\n"
@@ -492,7 +492,7 @@
    "\cb] Feuer, slot 3 - fires out two fireballs\n"
    "\cb] Delear, slot 2 - fires out 16 projectiles in succession\n"
    "\cb] Romyetya, slot 4 - rapid slashing attacks\n"
-   "\cb] Hulgyon, slot 5 - fires pillars of energy infront of you\n"
+   "\cb] Hulgyon, slot 5 - fires pillars of energy in front of you\n"
    "\cb] Hosh'danma, slot 6 - violently fires out a bunch of stars\n"
    "\cb] Cercle de la Mort, slot 7.\n"
    "\cd+ Added the remaining upgrades. Go figure those out yourself I'm tired.\n"
@@ -547,7 +547,7 @@
    "\cj| Made Finalizer deal damage on hit.\n"
    "\cj| Made Finalizer disintegrate enemies when killed.\n"
    "\cj| Fixed Hell Knight attack frames.\n"
-   "\cj| Made the monster tracker allocate into a different adderess space. (This is faster.)\n"
+   "\cj| Made the monster tracker allocate into a different address space. (This is faster.)\n"
    "\cj| Improved performance slightly in some trigonometry-heavy areas.\n"
    "\cj| Fixed CBI items being installable twice.\n"
    "\cj| Made damage bobbing a bit smoother.\n"
@@ -614,7 +614,7 @@
    "\cd+ Added searching to the info panel.\n"
    "\cd+ Added an adrenaline indicator to the HUD.\n"
    "\cd+ Added a test map (named TESTMAP).\n"
-   "\cd+ Added some environment/ambience settings.\n"
+   "\cd+ Added some environment/ambiance settings.\n"
    "\cd  May act slightly weird sometimes.\n"
    "\cd+ Added map spawn IDs for stuff.\n"
    "\cd+ Added a No Bosses CVar (lith_sv_nobosses).\n"
@@ -658,7 +658,7 @@
    "\cd+ Added a Laser Rifle upgrade.\n"
    "\cd+ Added a Homing Rocket upgrade.\n"
    "\cd+ Added new sprites for the Gauss Rifle.\n"
-   "\cd+ Added a Quick Knife buttom.\n"
+   "\cd+ Added a Quick Knife button.\n"
    "\cd+ Added a mail system.\n"
    "\cd+ Added LegenDoom Lite compatibility.\n"
    "\cd+ Added a score golf mode.\n"
@@ -751,7 +751,7 @@
    "\cj| Fixed Auto Reload not having a description.\n"
    "\cj| Fixed the pistol's info page.\n"
    "\cj| Fixed the arachnotron/spider mastermind names being wrong.\n"
-   "\cj| Changed some miscallaneous text.";
+   "\cj| Changed some miscellaneous text.";
 
 "LITH_UPDATE_1_3_Page3" =
    "\cj| Improved the way the Adrenaline upgrade works.\n"
@@ -796,7 +796,7 @@
    "\cj| Fixed all the crashes ever probably\n"
    "\cj| Changed the pistol's capacity to 14 rounds instead of 7\n"
    "\cj| Moved murderous enemies to the Extra Hard skill\n"
-   "\cj| Fixed not being able to pick up weaons sometimes\n"
+   "\cj| Fixed not being able to pick up weapons sometimes\n"
    "\cj| Made the pistol, rocket launcher and shotgun's firing animations better\n"
    "\cj| Fixed the spiral rocket attack not being strong enough and not doing\n"
    "\cj  damage to Cyberdemons\n"
@@ -977,7 +977,7 @@
 "LITH_STAT_ScoreUsed" = "Score Used";
 "LITH_STAT_ScoreSum" = "Score Sum";
 "LITH_STAT_Secrets" = "Secrets Found";
-"LITH_STAT_Units" = "Units Travelled";
+"LITH_STAT_Units" = "Units Traveled";
 "LITH_STAT_Upgrades" = "Upgrades Owned";
 "LITH_STAT_Items" = "Items Bought";
 "LITH_STAT_Mail" = "Mail Received";
@@ -988,7 +988,7 @@
 
 // Attributes ----------------------------------------------------------------|
 "LITH_ATTR_HELP_ACC" = "Weapon damage";
-"LITH_ATTR_HELP_DEF" = "Damage resistence";
+"LITH_ATTR_HELP_DEF" = "Damage resistance";
 "LITH_ATTR_HELP_STR" = "Health capacity";
 "LITH_ATTR_HELP_VIT" = "Health item efficiency";
 "LITH_ATTR_HELP_STM" = "Health regeneration maximum";
@@ -1013,6 +1013,6 @@
    "\n"
    "A portal to Hell itself.\n"
    "\n"
-   "May those who attempt to stop it have godspeed, or Lithium shall forever rain from the skies.";
+   "May those who attempt to stop it have Godspeed, or Lithium shall forever rain from the skies.";
 
 // EOF

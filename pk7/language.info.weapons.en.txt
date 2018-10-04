@@ -62,7 +62,7 @@
 "LITH_INFO_TITLE_MatebaUpgr" = "\cdFinirentur\c-, \cgRussorum\c- 19";
 "LITH_INFO_DESCR_MatebaUpgr" =
    "The 19th method of the \cgRussum\c- mode, Finirentur, known as the Finalizer, "
-   "is a very powerful red magic that creates a sigil infront of the user which "
+   "is a very powerful red magic that creates a sigil in front of the user which "
    "then fires out a projectile at fairly high speed. This projectile is capable "
    "of instantly deceasing any mid-heavily wounded, living being."
    "\n\n"
@@ -140,7 +140,7 @@
    "which also is used to accelerate shots slightly more, causing more damaging "
    "projectiles."
    "\n\n"
-   "Somehow, the accelerated shots also seem to blend into eachother slightly."
+   "Somehow, the accelerated shots also seem to blend into each other slightly."
    "\n\n"
    "The weapon must be fired a bit slower (and is forced to) due to the violent "
    "nature of the magic being used, and the added recoil.";
@@ -262,7 +262,7 @@
 "LITH_INFO_SHORT_StarDestroyer" = "Star Destroyer";
 "LITH_INFO_TITLE_StarDestroyer" = "The Star Destroyer";
 "LITH_INFO_DESCR_StarDestroyer" =
-   "An atrocious weapon supposedly made from the life research of seven mages of "
+   "An atrocious weapon supposedly made from the life research of seven magi of "
    "Hell, the Star Destroyer was made with the sole purpose of destroying whatever "
    "created it so hard that it would never, ever come back again."
    "\n\n"

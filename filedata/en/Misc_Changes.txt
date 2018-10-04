@@ -11,7 +11,7 @@
 
 %% LITH_UPDATE_1_5_3
 \cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:
-\cd+ Added a player levelling system with 7 stats.
+\cd+ Added a player leveling system with 7 stats.
 \cb] Monsters will scale to your level.
 \cd+ Added palette flashes for picking up special items.
 \cd+ Added a puff to homing SMG tracers.
@@ -29,16 +29,16 @@
 \cj| Changed ammo pickup score multiplier.
 \cj| Fixed selling weapons giving extra score.
 \cj| Fixed the aspect ratio of HUD elements.
-\cj| Made boss health easier to read while healthbars are disabled.
+\cj| Made boss health easier to read while health bars are disabled.
 \cj| Improved performance in high-monster-density maps.
 \cj| Improved GUI performance slightly.
 
 %% LITH_UPDATE_1_5_3_Page2
-\cj| Changed the default automap colors.
+\cj| Changed the default Automap colors.
 \cj| Replaced the small font and console fonts.
-\cj| Made players not collide with eachother in multiplayer.
-\cj| Fixed Cyber-Mage's magic selector breaking weapons in multiplayer.
-\cj| Fixed pause-in-menus breaking stuff in multiplayer.
+\cj| Made players not collide with each other in multi-player.
+\cj| Fixed Cyber-Mage's magic selector breaking weapons in multi-player.
+\cj| Fixed pause-in-menus breaking stuff in multi-player.
 \cj| Fixed visual rank not being set properly on non-compatible enemies.
 \cj| Fixed Heretic weapons not being replaced.
 \cj| Fixed Phantoms turning into chickens breaking the confines of reality.
@@ -55,7 +55,7 @@
 \cd+ Added an auto-save setting.
 \cd+ Added an API, so external C code can access all of Lithium by
 \cd  LOADing lithmain.
-\cd+ Added indicators for upgrades that work with eachother.
+\cd+ Added indicators for upgrades that work with each other.
 \cd+ Added a footstep sound setting.
 \cd+ Added a view tilt setting.
 \cd+ Added the Elec. Binding upgrade.
@@ -103,7 +103,7 @@
 \cb] Feuer, slot 3 - fires out two fireballs
 \cb] Delear, slot 2 - fires out 16 projectiles in succession
 \cb] Romyetya, slot 4 - rapid slashing attacks
-\cb] Hulgyon, slot 5 - fires pillars of energy infront of you
+\cb] Hulgyon, slot 5 - fires pillars of energy in front of you
 \cb] Hosh'danma, slot 6 - violently fires out a bunch of stars
 \cb] Cercle de la Mort, slot 7.
 \cd+ Added the remaining upgrades. Go figure those out yourself I'm tired.
@@ -158,7 +158,7 @@
 \cj| Made Finalizer deal damage on hit.
 \cj| Made Finalizer disintegrate enemies when killed.
 \cj| Fixed Hell Knight attack frames.
-\cj| Made the monster tracker allocate into a different adderess space. (This is faster.)
+\cj| Made the monster tracker allocate into a different address space. (This is faster.)
 \cj| Improved performance slightly in some trigonometry-heavy areas.
 \cj| Fixed CBI items being installable twice.
 \cj| Made damage bobbing a bit smoother.
@@ -225,7 +225,7 @@
 \cd+ Added searching to the info panel.
 \cd+ Added an adrenaline indicator to the HUD.
 \cd+ Added a test map (named TESTMAP).
-\cd+ Added some environment/ambience settings.
+\cd+ Added some environment/ambiance settings.
 \cd  May act slightly weird sometimes.
 \cd+ Added map spawn IDs for stuff.
 \cd+ Added a No Bosses CVar (lith_sv_nobosses).
@@ -269,7 +269,7 @@
 \cd+ Added a Laser Rifle upgrade.
 \cd+ Added a Homing Rocket upgrade.
 \cd+ Added new sprites for the Gauss Rifle.
-\cd+ Added a Quick Knife buttom.
+\cd+ Added a Quick Knife button.
 \cd+ Added a mail system.
 \cd+ Added LegenDoom Lite compatibility.
 \cd+ Added a score golf mode.
@@ -362,7 +362,7 @@
 \cj| Fixed Auto Reload not having a description.
 \cj| Fixed the pistol's info page.
 \cj| Fixed the arachnotron/spider mastermind names being wrong.
-\cj| Changed some miscallaneous text.
+\cj| Changed some miscellaneous text.
 
 %% LITH_UPDATE_1_3_Page3
 \cj| Improved the way the Adrenaline upgrade works.
@@ -407,7 +407,7 @@
 \cj| Fixed all the crashes ever probably
 \cj| Changed the pistol's capacity to 14 rounds instead of 7
 \cj| Moved murderous enemies to the Extra Hard skill
-\cj| Fixed not being able to pick up weaons sometimes
+\cj| Fixed not being able to pick up weapons sometimes
 \cj| Made the pistol, rocket launcher and shotgun's firing animations better
 \cj| Fixed the spiral rocket attack not being strong enough and not doing
 \cj  damage to Cyberdemons

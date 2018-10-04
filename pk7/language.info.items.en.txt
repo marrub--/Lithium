@@ -131,7 +131,7 @@
    "The package was created approximately 30 years ago by researchers at OFMD and "
    "AllPoint. Them both seeing the potential sales figures for such a device during "
    "a great war, OFMD and AllPoint signed a mutual contract to develop the package "
-   "and share profits between eachother."
+   "and share profits between each other."
    "\n\n"
    "The success of this device was massive, despite how expensive it is, with its "
    "prices being barred by a \"call us to get the numbers.\"";
@@ -162,7 +162,7 @@
    "conventional armor."
    "\n\n"
    "It comes equipped with several million nerve-like sensors capable of detecting "
-   "damage to the user and their extremeties, as well as what kind of damage was "
+   "damage to the user and their extremities, as well as what kind of damage was "
    "taken."
    "\n\n"
    "Using these, it has the capability for (but is not installed in its default "
@@ -175,7 +175,7 @@
 "LITH_INFO_DESCR_CBIUpgr1" =
    "A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to "
    "30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely "
-   "overly sufficient for any mathmetician or cybernetics junkie."
+   "overly sufficient for any mathematician or cybernetics junkie."
    "\n\n"
    "However, the Z6808 is unfortunately yet insufficient for heavily augmented "
    "military use, and is deployed to you only as a temporary measure so you can "

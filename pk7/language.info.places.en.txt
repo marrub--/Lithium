@@ -26,7 +26,7 @@
    "central star."
    "\n\n"
    "Several of the planets in this system such as Neptune 11 are quite large and "
-   "are semi-habitable, thus becoming quite suitable for mages of the "
+   "are semi-habitable, thus becoming quite suitable for magi of the "
    "\chCaeruleum\c- mode to test magic on.";
 
 //----------------------------------------------------------------------------|

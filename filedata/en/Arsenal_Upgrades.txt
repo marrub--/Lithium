@@ -221,7 +221,7 @@ extreme-yield explosive bolts from the same charge as the cannon type does.
 ##----------------------------------------------------------------------------|
 == LITH_UPGRADE_TITLE_OmegaRail | Omega Railgun
 @@ LITH_UPGRADE_EFFEC_OmegaRail
-Your cannon fires highly deadly, pinpoint accurate plasmatic death.
+Your cannon fires highly deadly, pinpoint accurate plasma death.
 
 Implements a plasma charger in your cannon, made with reverse-engineered
 magical compounds.

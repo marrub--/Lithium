@@ -121,7 +121,7 @@
    "difference - one knows how to hit a target, and the other knows how to kill "
    "one."
    "\n\n"
-   "Levelling up in accuracy will increase damage dealt to enemies.";
+   "Leveling up in accuracy will increase damage dealt to enemies.";
 
 "LITH_INFO_SHORT_AttrDEF" = "Defense";
 "LITH_INFO_TITLE_AttrDEF" = "\ciDefense\c- (DEF)";
@@ -130,7 +130,7 @@
    "when hit. A smart armorer knows just where to apply Kevlar, and where to make "
    "slight dodges when fired upon."
    "\n\n"
-   "Levelling up in defense will decrease all damage taken.";
+   "Leveling up in defense will decrease all damage taken.";
 
 "LITH_INFO_SHORT_AttrSTRHuman" = "Strength";
 "LITH_INFO_TITLE_AttrSTRHuman" = "\ckStrength\c- (STR)";
@@ -139,7 +139,7 @@
    "beating from your heart. One with plentiful strength not only has a long life, "
    "but is also said to have a long afterlife."
    "\n\n"
-   "Levelling up in strength will increase your health capacity.";
+   "Leveling up in strength will increase your health capacity.";
 
 "LITH_INFO_SHORT_AttrSTRRobot" = "$LITH_INFO_SHORT_AttrSTRHuman";
 "LITH_INFO_TITLE_AttrSTRRobot" = "$LITH_INFO_TITLE_AttrSTRHuman";
@@ -148,7 +148,7 @@
    "plasma beating from your heart. One with plentiful strength not only has a long "
    "service time, but is also said to have a short maintenance time."
    "\n\n"
-   "Levelling up in strength will increase your health capacity.";
+   "Leveling up in strength will increase your health capacity.";
 
 "LITH_INFO_SHORT_AttrSTRNonHuman" = "$LITH_INFO_SHORT_AttrSTRHuman";
 "LITH_INFO_TITLE_AttrSTRNonHuman" = "$LITH_INFO_TITLE_AttrSTRHuman";
@@ -157,7 +157,7 @@
    "oils beating from your heart. One with plentiful strength not only has a long "
    "life, but is also said to have a long afterlife."
    "\n\n"
-   "Levelling up in strength will increase your health capacity.";
+   "Leveling up in strength will increase your health capacity.";
 
 "LITH_INFO_SHORT_AttrVIT" = "Vitality";
 "LITH_INFO_TITLE_AttrVIT" = "\cdVitality\c- (VIT)";
@@ -166,7 +166,7 @@
    "vessels and nerves, and the ability to stay alive. Your vital systems are not "
    "only stronger, but heal quicker and are less likely to break down."
    "\n\n"
-   "Levelling up in vitality will increase health pickup gains.";
+   "Leveling up in vitality will increase health pickup gains.";
 
 "LITH_INFO_SHORT_AttrPOT" = "Potency";
 "LITH_INFO_TITLE_AttrPOT" = "\cdPotency\c- (POT)";
@@ -175,7 +175,7 @@
    "vessels and nerves, and the ability to stay alive. Your innards are not only "
    "stronger, but can be healed more quickly and are more likely to stay working."
    "\n\n"
-   "Levelling up in potency will increase health pickup gains.";
+   "Leveling up in potency will increase health pickup gains.";
 
 "LITH_INFO_SHORT_AttrSTM" = "Stamina";
 "LITH_INFO_TITLE_AttrSTM" = "\chStamina\c- (STM)";
@@ -184,7 +184,7 @@
    "torn to bits and running for miles upon miles. Stamina keeps you going, even if "
    "only little by little, and lets you stay that way."
    "\n\n"
-   "Levelling up in stamina will regenerate your health up to its level.";
+   "Leveling up in stamina will regenerate your health up to its level.";
 
 "LITH_INFO_SHORT_AttrREP" = "Repair";
 "LITH_INFO_TITLE_AttrREP" = "\chRepair\c- (REP)";
@@ -193,7 +193,7 @@
    "to bits and moving through extreme distances. Repair keeps you going, even if "
    "only little by little, and lets you stay that way."
    "\n\n"
-   "Levelling up in repair will regenerate your health up to its level.";
+   "Leveling up in repair will regenerate your health up to its level.";
 
 "LITH_INFO_SHORT_AttrREG" = "Regeneration";
 "LITH_INFO_TITLE_AttrREG" = "\chRegeneration\c- (REG)";
@@ -202,7 +202,7 @@
    "rough times, through being torn to bits and running through hell. Regeneration "
    "keeps you going, even if only little by little, and lets you stay that way."
    "\n\n"
-   "Levelling up in regeneration will regenerate your health up to its level.";
+   "Leveling up in regeneration will regenerate your health up to its level.";
 
 "LITH_INFO_SHORT_AttrLUK" = "Luck";
 "LITH_INFO_TITLE_AttrLUK" = "\ctLuck\c- (LUK)";
@@ -210,7 +210,7 @@
    "Luck is your undeniable charm and fortune, the ability to just get lucky. Your "
    "Score rockets a bit faster than usual, being such a lucky chap."
    "\n\n"
-   "Levelling up in luck will multiply score gained randomly.";
+   "Leveling up in luck will multiply score gained randomly.";
 
 "LITH_INFO_SHORT_AttrRGE" = "Rage";
 "LITH_INFO_TITLE_AttrRGE" = "\cmRage\c- (RGE)";
@@ -219,7 +219,7 @@
    "reflexes kick in, and you go crazy. You become more accurate, hit harder and "
    "get angrier as your situation dims."
    "\n\n"
-   "Levelling up in rage will multiply damage dealt to enemies when you're hit.";
+   "Leveling up in rage will multiply damage dealt to enemies when you're hit.";
 
 // EOF
 

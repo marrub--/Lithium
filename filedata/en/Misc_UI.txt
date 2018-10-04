@@ -94,7 +94,7 @@
 == LITH_STAT_ScoreUsed  | Score Used
 == LITH_STAT_ScoreSum   | Score Sum
 == LITH_STAT_Secrets    | Secrets Found
-== LITH_STAT_Units      | Units Travelled
+== LITH_STAT_Units      | Units Traveled
 == LITH_STAT_Upgrades   | Upgrades Owned
 == LITH_STAT_Items      | Items Bought
 == LITH_STAT_Mail       | Mail Received
@@ -105,7 +105,7 @@
 
 ## Attributes ----------------------------------------------------------------|
 == LITH_ATTR_HELP_ACC | Weapon damage
-== LITH_ATTR_HELP_DEF | Damage resistence
+== LITH_ATTR_HELP_DEF | Damage resistance
 == LITH_ATTR_HELP_STR | Health capacity
 == LITH_ATTR_HELP_VIT | Health item efficiency
 == LITH_ATTR_HELP_STM | Health regeneration maximum
