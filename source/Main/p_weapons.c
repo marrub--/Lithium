@@ -327,35 +327,6 @@ int Lith_GetFinalizerMaxHealth(void)
 }
 
 //
-// Lith_SwitchRifleMode
-//
-script ext("ACS")
-void Lith_SwitchRifleFiremode(void)
-{
-   withplayer(LocalPlayer)
-   {
-      int max = rifle_firemode_max;
-
-      if(!p->getUpgrActive(UPGR_RifleModes))
-         max--;
-
-      p->riflefiremode = ++p->riflefiremode % max;
-      ACS_LocalAmbientSound("weapons/rifle/firemode", 127);
-   }
-}
-
-//
-// Lith_ResetRifleMode
-//
-script ext("ACS")
-void Lith_ResetRifleMode()
-{
-   withplayer(LocalPlayer)
-      if(p->getCVarI("lith_weapons_riflemodeclear"))
-         p->riflefiremode = rifle_firemode_auto;
-}
-
-//
 // Lith_SurgeOfDestiny
 //
 script ext("ACS")

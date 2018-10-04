@@ -183,7 +183,6 @@ FireBurstDone:
 FireGrenade:
    TNT1 A 0 A_JumpIf(invoker.m_grenfire, "GrenadeReload");
    TNT1 A 0 {invoker.m_grenfire = true;}
-   CRFG A 3 A_WeaponReady(LITH_BOBONLY);
    
    CRFG A 0 {
       if(CallACS("LPData", pdata_upgrade, UPGR_7777777))
@@ -239,10 +238,13 @@ GrenadeReload:
    CRFG A 1 offset(8, 40);
    CRFG A 1 offset(5, 38);
    CRFG A 1 offset(2, 35);
-   CRFG A 5 offset(0, 32) A_WeaponReady(LITH_BOBONLY);
+   CRFG A 8 offset(0, 32) A_WeaponReady(LITH_BOBONLY);
    goto Ready;
 
 AltFire:
+   CRFG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_RifleModes), "SwitchMode");
+   goto FireGrenade;
+SwitchMode:
    CRFG A 0 ACS_NamedExecuteAlways("Lith_SwitchRifleFiremode", 0);
    CRFG DEF 1 A_WeaponReady(LITH_BOBONLY);
    CRFG A 9 A_WeaponReady(WRF_NOSECONDARY);

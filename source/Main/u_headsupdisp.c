@@ -122,20 +122,6 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
    }
 }
 
-//
-// HUD_Mode
-//
-static void HUD_Mode(struct player *p)
-{
-   if(p->weapontype == weapon_rifle)
-   {
-      int addy = p->getUpgrActive(UPGR_RifleModes) ? 0 : 16;
-      PrintSprite(":HUD:H_W3", 215,2, 240 + addy,2);
-      PrintSprite(StrParam(":HUD:H_W%u", (rifle_firemode_max - p->riflefiremode) + 3),
-         215,2, 208 + (p->riflefiremode * 16) + addy,2);
-   }
-}
-
 // Extern Functions ----------------------------------------------------------|
 
 //
@@ -170,8 +156,6 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
       PrintSprite(":HUD:Bar", 279,2, 238,2);
 
    Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, "k", 282, 237);
-
-   HUD_Mode(p);
 
    // Status
    HUD_Ammo(p);
