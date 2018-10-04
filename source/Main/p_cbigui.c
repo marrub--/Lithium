@@ -5,6 +5,17 @@
 #include "lith_list.h"
 #include "lith_world.h"
 
+#define Themes(X) \
+   X("Green")     \
+   X("Rose")      \
+   X("Umi")       \
+   X("Ender")     \
+   X("Orange")    \
+   X("Grey")      \
+   X("Basilissa") \
+   X("Ghost")     \
+   X("WinXP")
+
 // Static Functions ----------------------------------------------------------|
 
 //
@@ -70,6 +81,18 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 // Extern Functions ----------------------------------------------------------|
 
 //
+// Lith_ThemeName
+//
+__str Lith_ThemeName(uint num)
+{
+   #define X(n) n,
+   static __str const themes[cbi_theme_max] = {Themes(X)};
+   #undef X
+
+   return themes[num >= cbi_theme_max ? 0 : num];
+}
+
+//
 // Lith_PlayerUpdateCBIGUI
 //
 script
@@ -79,18 +102,15 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 
    p->cbi.theme = p->getCVarI("lith_gui_theme");
 
-   if(p->cbi.theme != p->cbi.oldtheme) switch((p->cbi.oldtheme = p->cbi.theme))
+   if(p->cbi.theme != p->cbi.oldtheme)
    {
-   default:
-   case cbi_theme_green:     p->cbi.guistate.gfxprefix = ":UI_Green:";     break;
-   case cbi_theme_rose:      p->cbi.guistate.gfxprefix = ":UI_Rose:";      break;
-   case cbi_theme_umi:       p->cbi.guistate.gfxprefix = ":UI_Umi:";       break;
-   case cbi_theme_ender:     p->cbi.guistate.gfxprefix = ":UI_Ender:";     break;
-   case cbi_theme_orange:    p->cbi.guistate.gfxprefix = ":UI_Orange:";    break;
-   case cbi_theme_grey:      p->cbi.guistate.gfxprefix = ":UI_Grey:";      break;
-   case cbi_theme_basilissa: p->cbi.guistate.gfxprefix = ":UI_Basilissa:"; break;
-   case cbi_theme_ghost:     p->cbi.guistate.gfxprefix = ":UI_Ghost:";     break;
-   case cbi_theme_winxp:     p->cbi.guistate.gfxprefix = ":UI_WinXP:";     break;
+      #define X(n) ":UI_" n ":",
+      static __str const names[] = {Themes(X)};
+      #undef X
+
+      if(p->cbi.theme >= cbi_theme_max) p->cbi.theme = 0;
+
+      p->cbi.guistate.gfxprefix = names[p->cbi.oldtheme = p->cbi.theme];
    }
 
    Lith_GUI_Begin(g, 320, 240);

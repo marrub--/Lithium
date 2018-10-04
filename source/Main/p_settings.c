@@ -14,7 +14,7 @@ if(p->num == 0) {
 Category("GUI");
 Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1, 2.0);
 Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1, 2.0);
-Enum("Color theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", ThemeName(set));
+Enum("Color theme", "lith_gui_theme", 0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
 Enum("Cursor",      "lith_gui_cursor", 0, gui_curs_max-1, "%S", CursName(set));
 if(p->num == 0) {
    ServerBool("Pause while in menu", "lith_sv_pauseinmenus");
@@ -122,20 +122,6 @@ static __str ColorName(char ch)
 
    if(ch < 'a' || ch > 'v') return "Unknown";
    else                     return colors[ch - 'a'];
-}
-
-//
-// ThemeName
-//
-static __str ThemeName(int num)
-{
-   static __str const themes[] = {
-      "Green", "Rose", "Umi", "Ender", "Orange", "Grey", "Basilissa", "Ghost",
-      "WinXP",
-   };
-
-   if(num < 0 || num >= cbi_theme_max) return "Unknown";
-   else                                return themes[num];
 }
 
 //
