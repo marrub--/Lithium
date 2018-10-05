@@ -1,5 +1,6 @@
 #include "lzscript/Monsters/Base.zsc"
 #include "lzscript/Monsters/Phantom.zsc"
+#include "lzscript/Monsters/BossBrain.zsc"
 
 #include "lzscript/Monsters/1_ZombieMan.zsc"
 
