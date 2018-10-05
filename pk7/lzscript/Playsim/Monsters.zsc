@@ -1,3 +1,17 @@
+class Lith_BossFucker : Inventory
+{
+   override void Tick()
+   {
+      if(!owner.tracer || owner.tracer.health <= 0)
+      {
+         owner.A_BossDeath();
+         owner.clearCounters();
+         owner.destroy();
+         destroy();
+      }
+   }
+}
+
 extend class Lith_HERMES;
 
 static void PrepareForRagnarok(Actor mo)
@@ -16,33 +30,51 @@ static void MonsterBarrierLook(Actor mo)
 
 static void SpawnBoss(Actor a, string name, int phase)
 {
-   let pos = a.pos;
-   let ang = a.angle;
-   let tid = a.tid;
+   let b = Lith_Phantom(Actor.Spawn(name, a.pos));
 
-   int spec = a.special;
-   int arg0 = a.args[0];
-   int arg1 = a.args[1];
-   int arg2 = a.args[2];
-   int arg3 = a.args[3];
-   int arg4 = a.args[4];
+   // copy info
+   b.spawnangle = a.spawnangle;
+   b.spawnpoint = a.spawnpoint;
+   b.angle      = a.angle;
+   b.pitch      = a.pitch;
+   b.roll       = a.roll;
+   b.special    = a.special;
+   b.special1   = a.special1;
+   b.special2   = a.special2;
+   b.args[0]    = a.args[0];
+   b.args[1]    = a.args[1];
+   b.args[2]    = a.args[2];
+   b.args[3]    = a.args[3];
+   b.args[4]    = a.args[4];
+   b.vel        = a.vel;
+   b.master     = a.master;
+   b.target     = a.target;
+   b.tracer     = a.tracer;
 
-   a.clearcounters();
-   a.destroy();
+   b.changeTID(a.tid);
 
-   let b = Lith_Phantom(Actor.Spawn(name, pos));
+   b.bCOUNTSECRET = a.spawnflags & MTF_SECRET;
+   b.spawnflags   = a.spawnflags & ~MTF_SECRET;
+   b.handleSpawnFlags();
+   b.spawnflags = a.spawnflags;
+
+   // delete it if it's not a boss, otherwise prepare for omega hack
+   if(!a.bBOSS && !a.bBOSSDEATH)
+   {
+      a.clearCounters();
+      a.destroy();
+   }
+   else
+   {
+      // great, it's going to screw everything up, let's "fix" that
+      a.setXYZ((65535, 65535, 0)); // Banish.
+      a.removeFromHash();
+      a.tics = int.max;
+      a.tracer = b;
+      a.giveInventory("Lith_BossFucker", 1);
+   }
 
    b.m_phase = phase;
-
-   b.angle = ang;
-   b.changeTID(tid);
-
-   b.special = spec;
-   b.args[0] = arg0;
-   b.args[1] = arg1;
-   b.args[2] = arg2;
-   b.args[3] = arg3;
-   b.args[4] = arg4;
 
    if(phase == 2)
    {

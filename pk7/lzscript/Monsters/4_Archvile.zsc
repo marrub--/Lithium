@@ -36,7 +36,7 @@ class Lith_ArchvileImmolatorBlast : Actor
    default
    {
       Translation "192:199=160:167", "200:207=32:39", "240:247=40:47";
-      Mass 0x7FFFFFFF;
+      Mass int.max;
 
       +FLOORHUGGER
       +FORCEYBILLBOARD
