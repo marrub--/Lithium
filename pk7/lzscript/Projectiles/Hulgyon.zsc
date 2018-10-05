@@ -49,8 +49,8 @@ class Lith_HulgyonProjectile : Actor
 
    state Lith_A_Step()
    {
-      if(z - m_lz > 48 || z - m_lz < -48) return ResolveState("Null");
-      m_lz = z;
+      if(pos.z - m_lz > 48 || pos.z - m_lz < -48) return ResolveState("Null");
+      m_lz = pos.z;
       return null;
    }
 
@@ -58,7 +58,7 @@ class Lith_HulgyonProjectile : Actor
    {
    Spawn:
       BLLT J 0;
-      BLLT J 0 {m_lz = z;}
+      BLLT J 0 {m_lz = pos.z;}
    SpawnLoop:
       BLLT JJJ 1 Lith_A_Step;
       BLLT J 0 A_SpawnItemEx("Lith_HulgyonHit", flags: SXF_TRANSFERPOINTERS);

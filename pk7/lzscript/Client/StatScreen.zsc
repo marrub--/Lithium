@@ -79,6 +79,8 @@ override void Ticker()
          if(cnt       > 1) cnt--;
       }
 
+      if(p.cmd.buttons & BT_ALTATTACK) sp_state++;
+
       if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
       {
          m_ready = true;
