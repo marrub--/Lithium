@@ -86,9 +86,9 @@ typedef struct cbi_s
       gui_txtbox_state_t notebox;
    } st;
 
-   uint theme    ;//: 7;
-   uint oldtheme ;//: 7;
-   uint pruse    ;//: 7;
+   uint theme;
+   uint oldtheme;
+   uint pruse;
 } cbi_t;
 
 // Extern Functions ----------------------------------------------------------|

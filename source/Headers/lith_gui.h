@@ -107,9 +107,10 @@ typedef struct gui_txtbox_state_s
 typedef struct gui_delta_s
 {
    fixed64 cx, cy;
-   bool    clicklft ;//: 1;
-   bool    clickrgt ;//: 1;
-   bool    clickany ;//: 1;
+
+   bool clicklft;
+   bool clickrgt;
+   bool clickany;
 } gui_delta_t;
 
 typedef struct gui_state_s

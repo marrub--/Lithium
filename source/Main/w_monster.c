@@ -192,8 +192,8 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
    int i = 0;
    do {
       int tid = ACS_UniqueTID();
-      int x   = m->ms->x + ACS_Random(-8, 8);
-      int y   = m->ms->y + ACS_Random(-8, 8);
+      int x   = m->ms->x + ACS_Random(-16, 16);
+      int y   = m->ms->y + ACS_Random(-16, 16);
       ACS_Spawn("Lith_ManaPickup", x, y, m->ms->z + 4, tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);

@@ -1,12 +1,12 @@
 class Lith_RandomSpawn : Actor
 {
    private meta int m_rsn;
-   private string m_name;
+   private class<Actor> m_type;
 
    property SpawnNum: m_rsn;
 
    static void Set(Actor mo, string tospawn)
-      {Lith_RandomSpawn(mo).m_name = tospawn;}
+      {Lith_RandomSpawn(mo).m_type = tospawn;}
 
    static void CopyImportantStuff(Actor lhs, Actor rhs)
    {
@@ -32,7 +32,7 @@ class Lith_RandomSpawn : Actor
    {
       CallACS("Lith_RandomSpawn", m_rsn);
 
-      let mo = Spawn(m_name, pos, NO_REPLACE);
+      let mo = Spawn(m_type, pos, NO_REPLACE);
 
       if(mo)
       {

@@ -117,12 +117,12 @@ typedef struct worldinfo_s
 
    // Debugging
    int  dbgLevel;
-   bool dbgItems ;//: 1;
-   bool dbgBIP   ;//: 1;
-   bool dbgScore ;//: 1;
-   bool dbgUpgr  ;//: 1;
-   bool dbgSave  ;//: 1;
-   bool dbgNoMon ;//: 1;
+   bool dbgItems;
+   bool dbgBIP;
+   bool dbgScore;
+   bool dbgUpgr;
+   bool dbgSave;
+   bool dbgNoMon;
 } worldinfo_t;
 
 #ifndef EXTERNAL_CODE

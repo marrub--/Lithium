@@ -69,39 +69,34 @@ struct page_info
 
 struct bip
 {
-   // Attributes -------------------------------------------------------------|
-
    __prop find       {call: Lith_FindBIPPage  (this)}
    __prop unlock     {call: Lith_UnlockBIPPage(this)}
    __prop deallocate {call: Lith_DeallocateBIP(this)}
-
-   // Members ----------------------------------------------------------------|
 
    // Stats
    uint categoryavail[BIPC_MAX];
    uint categorymax[BIPC_MAX];
 
+   uint pageavail;
+   uint pagemax;
+
+   uint mailreceived;
+   uint mailtrulyreceived;
+
    // State
+   bool init;
+
    struct page *curpage;
    struct page *result[8];
 
+   uint curcategory;
+   uint lastcategory;
+
+   uint resnum;
+   uint rescur;
+
    // Info
    list_t infogr[BIPC_MAX];
-
-   // Bitfields --------------------------------------------------------------|
-
-   // Stats
-   uint pageavail ;//: 10;
-   uint pagemax   ;//: 10;
-   uint mailreceived      ;//: 6;
-   uint mailtrulyreceived ;//: 6;
-
-   // State
-   bool init ;//: 1;
-   uint curcategory  ;//: 4;
-   uint lastcategory ;//: 4;
-   uint resnum ;//: 3;
-   uint rescur ;//: 3;
 };
 
 // Extern Functions ----------------------------------------------------------|

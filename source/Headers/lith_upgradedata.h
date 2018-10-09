@@ -63,7 +63,7 @@ struct upgr_data_Adrenaline {
 
 struct upgr_data_JetBooster {
    int charge;
-   bool discharged ;//: 1;
+   bool discharged;
 };
 
 struct upgr_data_lolsords {
@@ -75,8 +75,8 @@ struct upgr_data_ReactArmor {
 };
 
 struct upgr_data_ReflexWetw {
-   u32  charge ;//: 6;
-   bool leaped ;//: 1;
+   u32  charge;
+   bool leaped;
 };
 
 struct upgr_data_VitalScan {
@@ -89,9 +89,9 @@ struct upgr_data_VitalScan {
    fixed cangle;
    fixed oangle;
    fixed splitfrac;
-   u32  split ;//: 3;
-   u32  rank  ;//: 4;
-   bool freak ;//: 1;
+   u32  split;
+   u32  rank;
+   bool freak;
 };
 
 struct upgr_data_Zoom {
@@ -106,7 +106,7 @@ struct upgr_data_HomingRPG {
 struct upgr_data_Magic {
    fixed manaperc;
    gui_state_t gst;
-   bool ui ;//: 1;
+   bool ui;
 };
 
 struct upgr_data_StealthSys {
@@ -166,9 +166,9 @@ typedef struct upgrade {
 
    upgradeinfo_t const *info;
 
-   bool active    ;//: 1;
-   bool owned     ;//: 1;
-   bool wasactive ;//: 1; // for reinitializing on map load
+   bool active;
+   bool owned;
+   bool wasactive; // for reinitializing on map load
 } upgrade_t;
 
 void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, int max, char const *fname);
