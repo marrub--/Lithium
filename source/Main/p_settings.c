@@ -9,6 +9,7 @@ if(p->num == 0) {
    ServerBool("Disable phantoms",  "lith_sv_nobosses");
    ServerBool("Don't pick up ammo when full",  "lith_sv_nofullammo");
    ServerBool("Don't give score when picking up ammo",  "lith_sv_noscoreammo");
+   ServerBool("Drop shotguns from zombies", "lith_sv_wepdrop");
 }
 
 Category("GUI");

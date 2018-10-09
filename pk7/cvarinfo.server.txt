@@ -11,5 +11,6 @@ server bool  lith_sv_nobosses     = false;
 server bool  lith_sv_nofullammo   = true;
 server bool  lith_sv_noscoreammo  = true;
 server int   lith_sv_failtime     = 67;
+server bool  lith_sv_wepdrop      = false;
 
 // EOF

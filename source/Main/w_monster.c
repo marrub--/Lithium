@@ -225,6 +225,13 @@ static void OnFinalize(dmon_t *m)
             SpawnManaPickup(m, p);
          }
 
+         if(m->mi->type == mtype_zombie && ACS_GetCVar("lith_sv_wepdrop") && !p->weapon.slot[3])
+         {
+            int tid = ACS_UniqueTID();
+            ACS_SpawnForced("Shotgun", m->ms->x, m->ms->y, m->ms->z, tid);
+            ACS_SetActorFlag(tid, "DROPPED", false);
+         }
+
          if(p->getUpgrActive(UPGR_SoulCleaver))
             SoulCleave(m, p);
       }
