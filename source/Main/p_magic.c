@@ -16,8 +16,7 @@ void Lith_Blade(bool hit)
    DrawSpriteX(hit ? ":Weapon:BladeHit" : ":Weapon:Blade", HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 3, 0.15);
 
    withplayer(LocalPlayer)
-      if(p->z > p->floorz)
-         p->setVel(p->velx / 2, p->vely / 2, 0);
+      if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
 //
@@ -37,8 +36,7 @@ void Lith_Rend(bool hit, int set)
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TICSECOND * 2, 0.1);
 
    withplayer(LocalPlayer)
-      if(p->z > p->floorz)
-         p->setVel(p->velx / 2, p->vely / 2, 0);
+      if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
 //

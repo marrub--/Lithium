@@ -98,7 +98,6 @@ struct player_delta
 
    // Position
    fixed x, y, z;
-   fixed floorz;
    fixed pitch, yaw, roll;
 
    // Movement
@@ -186,6 +185,8 @@ struct player
    __prop getVel {call: mag2k(->velx, ->vely)}
    __prop grabInput {get: getmem(->tid, "m_grabInput"),
                      set: setmem(->tid, "m_grabInput")}
+   __prop onground {get: getmem(->tid, "m_onground")}
+   __prop waterlevel {get: ACS_GetActorProperty(->tid, APROP_Waterlevel)}
 
    // inventory
    __prop addItem {call: Lith_PlayerAddItem(this)}

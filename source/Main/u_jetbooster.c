@@ -29,9 +29,7 @@ void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 
    if(p->frozen) return;
 
-   fixed grounddist = p->z - p->floorz;
-
-   if(p->buttonPressed(BT_SPEED) && grounddist > 16.0 && UData.charge >= CHARGE_MAX)
+   if(p->buttonPressed(BT_SPEED) && !p->onground && UData.charge >= CHARGE_MAX)
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 

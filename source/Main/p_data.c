@@ -131,10 +131,9 @@ void Lith_PlayerUpdateData(struct player *p)
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
 
-   p->x      = ACS_GetActorX(0);
-   p->y      = ACS_GetActorY(0);
-   p->z      = ACS_GetActorZ(0);
-   p->floorz = ACS_GetActorFloorZ(0);
+   p->x = ACS_GetActorX(0);
+   p->y = ACS_GetActorY(0);
+   p->z = ACS_GetActorZ(0);
 
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);

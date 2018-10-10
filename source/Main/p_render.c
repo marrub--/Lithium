@@ -74,7 +74,7 @@ void Lith_PlayerFootstep(struct player *p)
    __str snd   = p->stepnoise;
    int   next  = 10;
 
-   if(vol && p->z - p->floorz <= 16)
+   if(vol && p->onground)
    {
       for(int i = 0; i < countof(stepsnd); i++)
          if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}

@@ -28,6 +28,7 @@ private Lith_Quaternion m_qp, m_qy;
 Lith_Cyberspace m_cs;
 
 bool m_grabInput;
+bool m_onground;
 
 property ViewBob: m_vbob;
 
@@ -57,6 +58,8 @@ override void PlayerThink()
       cmd.pitch = cmd.yaw = cmd.roll = 0;
       player.turnticks = 0;
    }
+
+   m_onground = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
 
    Super.PlayerThink();
 }

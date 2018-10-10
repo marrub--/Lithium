@@ -59,14 +59,11 @@ void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
 
    if(p->frozen) return;
 
-   fixed grounddist = p->z - p->floorz;
-
    if(UData.charge >= CHARGE_MAX)
    {
-      if(grounddist == 0.0)
-         UData.leaped = 0;
+      if(p->onground) UData.leaped = 0;
 
-      if(p->buttons & BT_SPEED && (grounddist <= 16 ||
+      if(p->buttons & BT_SPEED && (p->onground ||
          !p->getUpgrActive(UPGR_JetBooster) ||
          UData_JetBooster(p->getUpgr(UPGR_JetBooster)).discharged))
       {
@@ -81,9 +78,9 @@ void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
       }
    }
 
-   if(p->buttonPressed(BT_JUMP) && !InvNum("PowerFlight") &&
+   if(p->waterlevel == 0 && p->buttonPressed(BT_JUMP) && !InvNum("PowerFlight") &&
       !InvNum("Lith_RocketBooster") && !UData.leaped &&
-      ((grounddist <= 16.0 && UData.charge < CHARGE_MAX) || grounddist > 16.0))
+      (!p->onground || UData.charge < CHARGE_MAX))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
