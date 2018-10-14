@@ -6,6 +6,14 @@
 #include "lzscript/6_DarkLord/DarkLord.zsc"
 #include "lzscript/7_Thoth/Thoth.zsc"
 
+class Lith_MegaProtection : Inventory
+{
+   default
+   {
+      Inventory.MaxAmount 200;
+   }
+}
+
 class Lith_Player : DoomPlayer;
 
 default
@@ -277,6 +285,12 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
       return 0;
 
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
+
+   if(damage > 1 && CountInv("Lith_MegaProtection"))
+   {
+      TakeInventory("Lith_MegaProtection", damage / 2);
+      damage /= 2;
+   }
 
    let sv = Lith_HERMES.Instance();
    sv.m_dmgtype = mod;
