@@ -4,7 +4,7 @@ actor Lith_PlasmaHit
    Alpha 0.25
    Scale 0.65
    Species "Lith_Player"
-   DamageType "Lith_Energy"
+   DamageType "Electric"
    
    +DONTHARMSPECIES
    +BRIGHT

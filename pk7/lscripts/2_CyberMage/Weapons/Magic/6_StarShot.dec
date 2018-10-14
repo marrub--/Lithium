@@ -7,7 +7,7 @@ actor Lith_Star
    Scale 0.7
    Mass 0
    RenderStyle "Add"
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    SeeSound "weapons/sshot/fire"
    
    Projectile

@@ -90,7 +90,7 @@ actor Lith_BaronHellfireTrail
 
 actor Lith_BaronBall : BaronBall replaces BaronBall
 {
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    Damage 4
    RenderStyle "Translucent"
    Alpha 1

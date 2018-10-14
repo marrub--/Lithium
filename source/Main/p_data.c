@@ -253,25 +253,19 @@ void Lith_GiveEXP(struct player *p, u64 amt)
 script
 void Lith_ResetPlayer(struct player *p)
 {
-   //
    // Zero-init
-
    if(!p->wasinit) {
       memset(p, 0, sizeof *p);
       p->wasinit = true;
    }
 
-   //
    // Constant data
-
    p->active = true;
    p->reinit = p->dead = false;
    p->num    = ACS_PlayerNumber();
    p->bipptr = &p->bip;
 
-   //
    // Static data (pre-init)
-
    if(!p->staticinit)
    {
       SetPClass(p);
@@ -298,9 +292,7 @@ void Lith_ResetPlayer(struct player *p)
          p->notes[i] = "";
    }
 
-   //
    // Map-static data
-
    memset(&p->old, 0, sizeof p->old);
 
    // If the map sets the TID on the first tic, it could already be set here.
@@ -315,7 +307,6 @@ void Lith_ResetPlayer(struct player *p)
    if(world.dbgScore)
       p->score = 0xFFFFFFFFFFFFFFFFll;
 
-   //
    // Reset data
 
    // Any linked lists on the player need to be initialized here.
@@ -353,9 +344,7 @@ void Lith_ResetPlayer(struct player *p)
 
    p->attr.lvupstr = strnull;
 
-   //
-   // Re-init data
-
+   // Map-static data
    if(!p->bip.init)
       Lith_PlayerInitBIP(p);
 
@@ -364,9 +353,7 @@ void Lith_ResetPlayer(struct player *p)
    else
       Lith_PlayerReinitUpgrades(p);
 
-   //
    // Static data
-
    if(!p->staticinit)
    {
       p->log(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);

@@ -86,7 +86,7 @@ actor Lith_PoisonBlob
 actor Lith_PoisonBullet : Lith_BulletPuff
 {
    RenderStyle "Add"
-   DamageType "Lith_Bullets"
+   DamageType "Bullet"
    Species "Lith_Player"
    Alpha 0.9
    

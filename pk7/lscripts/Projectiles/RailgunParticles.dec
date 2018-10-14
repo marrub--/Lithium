@@ -49,7 +49,7 @@ actor Lith_OmegaRailBeam : Lith_OmegaRailFXBase
    XScale 0.8
    YScale 0.7
    Species "Lith_Player"
-   DamageType "Lith_Energy"
+   DamageType "Electric"
    
    +DONTHARMSPECIES
    +EXTREMEDEATH

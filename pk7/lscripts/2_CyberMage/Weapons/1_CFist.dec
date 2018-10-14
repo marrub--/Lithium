@@ -4,7 +4,7 @@ actor Lith_CFist : Lith_CWeapon
    Weapon.Kickback 100
    Weapon.SlotNumber 1
    Weapon.SlotPriority 0.9
-   DamageType "Lith_Melee"
+   DamageType "Melee"
    
    +WEAPON.WIMPY_WEAPON
    +WEAPON.MELEEWEAPON

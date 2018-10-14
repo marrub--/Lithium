@@ -2,7 +2,7 @@ class Lith_HulgyonHit : Actor
 {
    default
    {
-      DamageType "Lith_Magic";
+      DamageType "Magic";
 
       +NOGRAVITY
       +THRUACTORS

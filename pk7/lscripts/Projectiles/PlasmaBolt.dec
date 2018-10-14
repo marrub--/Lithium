@@ -72,7 +72,7 @@ actor Lith_PlasmaBolt
    Height 12
    Speed 50
    Damage (10)
-   DamageType "Lith_Energy"
+   DamageType "Electric"
    Species "Lith_Player"
    
    Projectile

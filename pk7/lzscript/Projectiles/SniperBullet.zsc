@@ -3,7 +3,7 @@ class Lith_SniperBullet : Lith_BulletPuff
    default
    {
       Mass 20;
-      DamageType "Lith_Bullets";
+      DamageType "Bullet";
       Species "Lith_Player";
       
       +DONTHARMSPECIES

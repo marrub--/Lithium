@@ -1,6 +1,6 @@
 actor Lith_FatShot : FatShot replaces FatShot
 {
-   DamageType "Lith_Fire"
+   DamageType "Fire"
    Damage 7
    Speed 10
    

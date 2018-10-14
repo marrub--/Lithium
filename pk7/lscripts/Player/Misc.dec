@@ -1,7 +1,7 @@
 actor Lith_EXPLOOOSION
 {
    Species "Lith_Player"
-   DamageType "Lith_Shrapnel"
+   DamageType "Shrapnel"
    
    +DONTHARMSPECIES
    +NOTIMEFREEZE

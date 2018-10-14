@@ -15,23 +15,17 @@ class Lith_AAGH : Inventory
       switch(type)
       {
       default:
-      case 'Bullet':
-      case 'Lith_Bullets':   return ldt_bullets;
+      case 'Bullet':    return ldt_bullets;
       case 'Plasma':
       case 'Railgun':
-      case 'Electric':
-      case 'Lith_Energy':    return ldt_energy;
-      case 'Fire':
-      case 'Lith_Fire':      return ldt_fire;
-      case 'FireMagic':
-      case 'Lith_FireMagic': return ldt_firemagic;
-      case 'Magic':
-      case 'Lith_Magic':     return ldt_magic;
+      case 'Electric':  return ldt_energy;
+      case 'Fire':      return ldt_fire;
+      case 'FireMagic': return ldt_firemagic;
+      case 'Magic':     return ldt_magic;
+      case 'Melee':     return ldt_melee;
       case 'Shrapnel':
-      case 'Explosion':
-      case 'Lith_Shrapnel':  return ldt_shrapnel;
-      case 'Ice':
-      case 'Lith_Ice':       return ldt_ice;
+      case 'Explosion': return ldt_shrapnel;
+      case 'Ice':       return ldt_ice;
       }
    }
 

@@ -4,7 +4,7 @@ actor Lith_PunctuatorExplosion
    Alpha 0.3
    Scale 0.9
    Species "Lith_Player"
-   DamageType "Lith_Shrapnel"
+   DamageType "Shrapnel"
    
    +DONTHARMSPECIES
    +BLOODLESSIMPACT
@@ -27,7 +27,7 @@ actor Lith_PunctuatorExplosion
 actor Lith_PunctuatorPuff
 {
    Species "Lith_Player"
-   DamageType "Lith_Shrapnel"
+   DamageType "Shrapnel"
    
    +DONTHARMSPECIES
    +NOINTERACTION

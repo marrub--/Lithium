@@ -3,7 +3,7 @@ class Lith_RifleBullet : Lith_BulletPuff
    default
    {
       Mass 9999;
-      DamageType "Lith_Bullets";
+      DamageType "Bullet";
       Species "Lith_Player";
       
       +DONTHARMSPECIES

@@ -4,7 +4,7 @@ class Lith_700Bullet : Lith_BulletPuff
    {
       Mass 10;
       Scale 1.5;
-      DamageType "Lith_Bullets";
+      DamageType "Bullet";
       Species "Lith_Player";
 
       +DONTHARMSPECIES

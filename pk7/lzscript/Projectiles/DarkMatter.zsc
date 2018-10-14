@@ -37,7 +37,7 @@ class Lith_DarkMatterPuff : Actor
 {
    default
    {
-      DamageType "Lith_DarkMatter";
+      DamageType "DarkMatter";
       Species "Lith_Player";
       
       +DONTHARMSPECIES
@@ -60,7 +60,7 @@ class Lith_DarkMatterRailgun : Actor
 {
    default
    {
-      DamageType "Lith_DarkMatter";
+      DamageType "DarkMatter";
       Species "Lith_Player";
       
       +DONTHARMSPECIES
@@ -112,7 +112,7 @@ class Lith_DarkMatter : Actor
       Scale 0.25;
       Species "Lith_Player";
       RenderStyle "Subtract";
-      DamageType "Lith_DarkMatter";
+      DamageType "DarkMatter";
       Mass 999999;
       
       Projectile;

@@ -44,7 +44,7 @@ actor Lith_ImpBall : DoomImpBall
    Speed 16
    FastSpeed 32
    Scale 1.35
-   DamageType "Lith_Fire"
+   DamageType "Fire"
    
    states
    {

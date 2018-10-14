@@ -2,7 +2,7 @@ class Lith_CyberRocket : Rocket replaces Rocket
 {
    default
    {
-      DamageType "Lith_Shrapnel";
+      DamageType "Shrapnel";
       Scale 0.75;
       Radius 8;
       Height 4;

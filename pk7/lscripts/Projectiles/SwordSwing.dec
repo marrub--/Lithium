@@ -56,7 +56,7 @@ actor Lith_SwordHitter
    Speed 40
    Damage 30
    Species "Lith_Player"
-   DamageType "Lith_Melee"
+   DamageType "Melee"
    
    Projectile
    +DONTHARMSPECIES

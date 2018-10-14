@@ -81,7 +81,7 @@ class Lith_Archvile : Archvile replaces Archvile
          if(target && checkSight(target))
             A_VileTarget("Lith_ArchvileImmolator");
       }
-      VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "Lith_FireMagic");
+      VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "FireMagic");
       VILE P 20 bright;
       goto Super::See;
    Death:

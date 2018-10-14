@@ -43,7 +43,7 @@ actor Lith_FeuerFinal
 {
    RenderStyle "Add"
    Scale 0.3
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    Damage 10
 
    Projectile
@@ -67,7 +67,7 @@ actor Lith_FeuerExplosion
 {
    RenderStyle "Add"
    Scale 0.15
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    Damage (10)
 
    Projectile

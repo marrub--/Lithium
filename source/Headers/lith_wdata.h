@@ -1,6 +1,7 @@
 // zsc output: pk7/lzscript/Headers/lith_wdata.h
 
 // Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+
 enum // Lith_WData
 {
    wdata_bossspawned,
@@ -63,6 +64,20 @@ enum // Lith_MsgType
    msg_huds,
    msg_full,
    msg_both
+};
+
+
+enum // Lith_DamageType
+{
+   ldt_bullets,
+   ldt_energy,
+   ldt_fire,
+   ldt_firemagic,
+   ldt_magic,
+   ldt_melee,
+   ldt_shrapnel,
+   ldt_ice,
+   ldt_none
 };
 
 // EOF

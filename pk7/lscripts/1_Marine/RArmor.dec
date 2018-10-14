@@ -4,22 +4,22 @@ actor Lith_RA_Hax : PowerProtection
    ActiveSound "player/rarmor/damage"
 }
 
-actor Lith_RA_Bullets1   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.7 DamageFactor "Bullet", 0.7}
-actor Lith_RA_Energy1    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.7 DamageFactor "Railgun", 0.7 DamageFactor "Electric", 0.7 DamageFactor "Plasma", 0.7}
-actor Lith_RA_Fire1      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.7 DamageFactor "Fire", 0.7}
-actor Lith_RA_FireMagic1 : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.7}
-actor Lith_RA_Magic1     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.7}
-actor Lith_RA_Melee1     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.7 DamageFactor "Melee", 0.7}
-actor Lith_RA_Shrapnel1  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.7}
-actor Lith_RA_Ice1       : Lith_RA_Hax {DamageFactor "Ice",            0.7}
+actor Lith_RA_Bullets1  :Lith_RA_Hax{DamageFactor "Bullet",    0.7}
+actor Lith_RA_Energy1   :Lith_RA_Hax{DamageFactor "Railgun",   0.7 DamageFactor "Electric", 0.7 DamageFactor "Plasma", 0.7}
+actor Lith_RA_Fire1     :Lith_RA_Hax{DamageFactor "Fire",      0.7}
+actor Lith_RA_FireMagic1:Lith_RA_Hax{DamageFactor "FireMagic", 0.7}
+actor Lith_RA_Magic1    :Lith_RA_Hax{DamageFactor "Magic",     0.7}
+actor Lith_RA_Melee1    :Lith_RA_Hax{DamageFactor "Melee",     0.7}
+actor Lith_RA_Shrapnel1 :Lith_RA_Hax{DamageFactor "Shrapnel",  0.7 DamageFactor "Explosion", 0.7}
+actor Lith_RA_Ice1      :Lith_RA_Hax{DamageFactor "Ice",       0.7}
 
-actor Lith_RA_Bullets2   : Lith_RA_Hax {DamageFactor "Lith_Bullets",   0.5 DamageFactor "Bullet", 0.5}
-actor Lith_RA_Energy2    : Lith_RA_Hax {DamageFactor "Lith_Energy",    0.5 DamageFactor "Railgun", 0.5 DamageFactor "Electric", 0.5 DamageFactor "Plasma", 0.5}
-actor Lith_RA_Fire2      : Lith_RA_Hax {DamageFactor "Lith_Fire",      0.5 DamageFactor "Fire", 0.5}
-actor Lith_RA_FireMagic2 : Lith_RA_Hax {DamageFactor "Lith_FireMagic", 0.5}
-actor Lith_RA_Magic2     : Lith_RA_Hax {DamageFactor "Lith_Magic",     0.5}
-actor Lith_RA_Melee2     : Lith_RA_Hax {DamageFactor "Lith_Melee",     0.5 DamageFactor "Melee", 0.5}
-actor Lith_RA_Shrapnel2  : Lith_RA_Hax {DamageFactor "Lith_Shrapnel",  0.5}
-actor Lith_RA_Ice2       : Lith_RA_Hax {DamageFactor "Ice",            0.5}
+actor Lith_RA_Bullets2  :Lith_RA_Hax{DamageFactor "Bullet",    0.5}
+actor Lith_RA_Energy2   :Lith_RA_Hax{DamageFactor "Railgun",   0.5 DamageFactor "Electric", 0.5 DamageFactor "Plasma", 0.5}
+actor Lith_RA_Fire2     :Lith_RA_Hax{DamageFactor "Fire",      0.5}
+actor Lith_RA_FireMagic2:Lith_RA_Hax{DamageFactor "FireMagic", 0.5}
+actor Lith_RA_Magic2    :Lith_RA_Hax{DamageFactor "Magic",     0.5}
+actor Lith_RA_Melee2    :Lith_RA_Hax{DamageFactor "Melee",     0.5}
+actor Lith_RA_Shrapnel2 :Lith_RA_Hax{DamageFactor "Shrapnel",  0.5 DamageFactor "Explosion", 0.5}
+actor Lith_RA_Ice2      :Lith_RA_Hax{DamageFactor "Ice",       0.5}
 
 // EOF

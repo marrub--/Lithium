@@ -296,9 +296,9 @@ override void Die(Actor source, Actor inflictor, int dmgflags)
 
    if(source == self) switch(sv.m_dmgtype)
    {
-   case 'FatMacRecoil':  ob = "$LITH_OB_S_FatMac";    break;
-   case 'Lith_Shrapnel': ob = "$LITH_OB_S_Explosion"; break;
-   default:              ob = "(suicide)";            break;
+   case 'FatMacRecoil': ob = "$LITH_OB_S_FatMac";    break;
+   case 'Shrapnel':     ob = "$LITH_OB_S_Explosion"; break;
+   default:             ob = "(suicide)";            break;
    }
    else if(source)
       ob = sv.m_dmgtype == 'Melee' ? source.hitobituary : source.obituary;

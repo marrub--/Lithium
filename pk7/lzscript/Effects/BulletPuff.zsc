@@ -120,7 +120,7 @@ class Lith_BulletPuff : Actor replaces BulletPuff
    default
    {
       RenderStyle "Add";
-      DamageType "Lith_Bullets";
+      DamageType "Bullet";
       Species "Lith_Player";
       Alpha 0.9;
 

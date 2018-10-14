@@ -2,7 +2,7 @@ class Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 {
    default
    {
-      DamageType "Lith_Shrapnel";
+      DamageType "Shrapnel";
    }
    
    int m_timer;

@@ -66,7 +66,7 @@ class Lith_DelearDot : FastProjectile
       Radius 4;
       Height 2;
       DamageFunction (20 * random(1, 2));
-      DamageType "Lith_Magic";
+      DamageType "Magic";
       MissileType "Lith_DelearDotTrail";
       MissileHeight 8;
    }

@@ -30,7 +30,7 @@ class Lith_RifleGrenade : Actor
       Gravity 0.5;
       BounceSound "weapons/rifle/grenadebounce";
       Species "Lith_Player";
-      DamageType "Lith_Shrapnel";
+      DamageType "Shrapnel";
       
       Projectile;
       +MTHRUSPECIES

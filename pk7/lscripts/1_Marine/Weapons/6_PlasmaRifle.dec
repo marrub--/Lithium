@@ -5,7 +5,7 @@ actor Lith_ParticleBeam : Lith_PlasmaLaze
    Mass 0
    Translation "Lith_ParticleBeam"
    Species "Lith_Player"
-   DamageType "Lith_Energy"
+   DamageType "Electric"
    
    +DONTHARMSPECIES
    +FORCEXYBILLBOARD

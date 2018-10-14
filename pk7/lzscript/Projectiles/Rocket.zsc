@@ -27,7 +27,7 @@ class Lith_Rocket : Actor
       Damage 20;
       DeathSound "explosion";
       Species "Lith_Player";
-      DamageType "Lith_Shrapnel";
+      DamageType "Shrapnel";
       Gravity 0.2;
       
       Projectile;

@@ -1,6 +1,6 @@
 actor Lith_Arachnotron : Arachnotron replaces Arachnotron
 {
-   DamageFactor "Lith_Energy", 0.6
+   DamageFactor "Electric", 0.6
    Tag "$LITH_INFO_SHORT_Arachnotron"
    
    states
@@ -59,7 +59,7 @@ actor Lith_ArchoPlasmParticles
 
 actor Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
 {
-   DamageType "Lith_Energy"
+   DamageType "Electric"
    Radius 13
    Height 8
    Speed 25

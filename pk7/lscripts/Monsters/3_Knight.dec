@@ -42,7 +42,7 @@ actor Lith_PKTrail
    Damage 2
    RenderStyle "Add"
    Alpha 1
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    
    Projectile
    
@@ -68,7 +68,7 @@ actor Lith_PolarKnight
    Alpha 0.8
    SeeSound "enemies/hellknight/throw"
    Decal "BaronScorch"
-   DamageType "Lith_Magic"
+   DamageType "Magic"
    
    Projectile
    

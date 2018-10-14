@@ -7,7 +7,7 @@ actor Lith_MiniMissile
    Damage 5
    DeathSound "weapons/missile/explode"
    Species "Lith_Player"
-   DamageType "Lith_Shrapnel"
+   DamageType "Shrapnel"
    
    Projectile
    +DONTHARMSPECIES

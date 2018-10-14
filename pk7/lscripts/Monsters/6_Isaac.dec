@@ -19,7 +19,7 @@ actor Lith_IsaacThompsonBullet : FastProjectile
    MissileType "Lith_IsaacThompsonTrail"
    RenderStyle "Translucent"
    Species "Lith_Phantom"
-   DamageType "Lith_Bullets"
+   DamageType "Bullet"
    Alpha 0.9
    Scale 0.3
    Radius 4
