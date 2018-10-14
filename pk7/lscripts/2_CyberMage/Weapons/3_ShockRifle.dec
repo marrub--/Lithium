@@ -94,7 +94,7 @@ actor Lith_ShockEffect2 : Lith_ShockEffect
    states
    {
    Spawn:
-      ZAP1 FEDCBA 1 A_CustomRailgun(5, 0, "None", "White", RGF_SILENT|RGF_NOPIERCING|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 32, "Lith_PlayerDummyPuff", frandom(0, 360), frandom(0, 360), frandom(64,100), 10, 0.2, 0)
+      ZAP1 FEFEFEDCBCBABA 2 A_CustomRailgun(5, 0, "None", "White", RGF_SILENT|RGF_NOPIERCING|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 10, "Lith_PlayerDummyPuff", frandom(0, 360), frandom(0, 360), frandom(100,200), 10, 0.2, 0)
       stop
    }
 }
