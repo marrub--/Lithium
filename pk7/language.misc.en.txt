@@ -11,6 +11,7 @@
 
 "LITH_ENTER_FMT" = "Entered %S at %S NE";
 "LITH_CHARGE_FMT" = "%.1lkkV \cjcharge";
+"LITH_MANA_CHARGE" = "[Siphoning Mana]";
 
 "SECRETMESSAGE" = "\cnA secret is revealed!";
 

@@ -11,7 +11,7 @@ struct cupgdef
    int pclass;
    int key;
    __str msg;
-   __str bipunlock;
+   __str nam;
 };
 
 static struct cupgdef const cdefs[] = {
@@ -46,10 +46,10 @@ struct cupgdef const *GetCUpgr(int pclass, int num)
 //
 // Lith_InstallCBIItem
 //
+script
 void Lith_InstallCBIItem(int num)
 {
-   if(num < 0 || num >= cupg_max || world.cbiupgr[num])
-      return;
+   if(num < 0 || num >= cupg_max || world.cbiupgr[num]) return;
 
    world.cbiupgr[num] = true;
 
@@ -58,9 +58,21 @@ void Lith_InstallCBIItem(int num)
    case cupg_hasupgr2: world.cbiperf += 40; break;
    }
 
-   Lith_ForPlayer() {
+   Lith_ForPlayer()
+   {
+      p->setActivator();
+
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->bipunlock) p->bipUnlock(c->bipunlock);
+         if(c->nam)
+      {
+         p->bipUnlock(c->nam);
+         Log("%S", c->nam);
+         if(c->nam == "Feuer"   ) InvGive("Lith_Feuer",    1);
+         if(c->nam == "Rend"    ) InvGive("Lith_Rend",     1);
+         if(c->nam == "Hulgyon" ) InvGive("Lith_Hulgyon",  1);
+         if(c->nam == "StarShot") InvGive("Lith_StarShot", 1);
+         if(c->nam == "Cercle"  ) InvGive("Lith_Cercle",   1);
+      }
    }
 }
 

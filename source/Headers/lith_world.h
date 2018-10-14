@@ -58,6 +58,7 @@ optargs(1) int Lith_UniqueID(int tid);
 stkcall void Lith_BeginAngles(int x, int y);
 stkcall fixed Lith_AddAngle(int x, int y);
 stkcall void Lith_FreezeTime(bool on);
+script void Lith_InstallCBIItem(int num);
 
 typedef struct worldinfo_s
 {

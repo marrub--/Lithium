@@ -4,6 +4,8 @@ class Lith_CyberMagePlayer : Lith_Player
    {
       Player.StartItem "Lith_Mateba";
       Player.StartItem "Lith_CFist";
+      Player.StartItem "Lith_Delear";
+      Player.StartItem "Lith_Blade";
       Player.DisplayName "Cyber-Mage";
       Player.SoundClass "cybermage";
       Player.Portrait "lgfx/Portraits/CyberMage.png";

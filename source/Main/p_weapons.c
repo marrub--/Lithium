@@ -209,9 +209,9 @@ void Lith_PlayerPreWeapons(struct player *p)
       case weapon_plasma:  if(p->getUpgrActive(UPGR_PartBeam))    wep->ammotype = AT_AMag; break;
       }
 
-      // For slot 3 weapons that don't take ammo, check if they should.
       switch(i)
       {
+      // For slot 3 weapons that don't take ammo, check if they should.
       case weapon_shotgun:
       case weapon_c_rifle:
          if(p->getCVarI("lith_weapons_slot3ammo")) {
@@ -236,15 +236,7 @@ void Lith_PlayerPreWeapons(struct player *p)
          }
       }
 
-      // Remove inactive magic weapons.
-      else if(info->flags & wf_magic && ++wep->magictake > 20)
-      {
-         InvTake(info->classname, 1);
-         wep->magictake = 0;
-         continue;
-      }
-
-      // Auto-reload anything else.
+      // Auto-reload.
       if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5)
@@ -274,15 +266,20 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       else                InvTake("Lith_SMGHeat", 1);
    }
 
+   SetSize(320, 240);
+
    switch(p->weapontype)
    {
+   case weapon_c_fist:
+      PrintTextStr(L("LITH_MANA_CHARGE"));
+      PrintTextA("CBIFONT", CR_BRICK, 160,0, 100,0, 0.5);
+      break;
    case weapon_c_delear:
       HERMES("Lith_DelearSprite");
       break;
    case weapon_cfist:
       __with(fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;)
       {
-         SetSize(320, 240);
          PrintTextFmt(L("LITH_CHARGE_FMT"), charge);
          PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
       }

@@ -38,7 +38,7 @@
 
 
 // Cyber-Mage ----------------------------------------------------------------|
-"LITH_INFO_SHORT_CFist" = "Spell Selector";
+"LITH_INFO_SHORT_CFist" = "Mana Siphon";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_Mateba" = "Mateba";

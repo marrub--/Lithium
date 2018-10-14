@@ -25,6 +25,7 @@ static struct magic_info const minf[] = {
    {cupg_c_slot6spell, 205, 140, N("StarShot")},
    {cupg_c_slot7spell, 130, 100, N("Cercle")  },
 };
+#undef N
 
 // Static Functions ----------------------------------------------------------|
 
@@ -34,7 +35,6 @@ static struct magic_info const minf[] = {
 script
 static void GiveMagic(struct magic_info const *m)
 {
-   InvGive(m->classname, 1);
    ACS_SetWeapon(m->classname);
 }
 
@@ -145,12 +145,10 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 
    UData.manaperc = manaperc;
 
-   if(p->weapontype != weapon_c_fist) {
-      if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
-         Lith_SetMagicUI(true);
-      else if(!(p->buttons & BT_USER4) && p->old.buttons & BT_USER4)
-         Lith_SetMagicUI(false);
-   }
+   if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
+      Lith_SetMagicUI(true);
+   else if(!(p->buttons & BT_USER4) && p->old.buttons & BT_USER4)
+      Lith_SetMagicUI(false);
 
    if(UData.ui)
       UpdateMagicUI(p, upgr);

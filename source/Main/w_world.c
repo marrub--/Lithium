@@ -165,7 +165,6 @@ static void GSInit(void)
    extern void Lith_GSInit_Upgrade(void);
    extern void Lith_GSInit_Weapon(void);
    extern void Lith_GSInit_Dialogue(void);
-   extern void Lith_InstallCBIItem(int num);
 
    LogDebug(log_dev, "GINIT RUNNING");
 
@@ -188,9 +187,6 @@ static void GSInit(void)
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
       world.cbiperf = 10;
-      if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
-         for(int i = 0; i < cupg_max; i++)
-            Lith_InstallCBIItem(i);
 
       world.gsinit = true;
    }
@@ -312,6 +308,10 @@ static void WInit(void)
       Message(== 9,  3, "Secret1");
       Message(== 10, 4, "Secret2");
    }
+
+   if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
+      for(int i = 0; i < cupg_max; i++)
+         Lith_InstallCBIItem(i);
 }
 
 //
@@ -342,8 +342,7 @@ begin:
 
    LogDebug(log_dev, "LITH OPEN");
 
-   if(ACS_GetCVar("lith_sv_failtime") == 0)
-      for(;;)
+   if(ACS_GetCVar("lith_sv_failtime") == 0) for(;;)
    {
       Log("\n=======\n"
           "The configuration for Lithium has been wiped, or you accidentally "

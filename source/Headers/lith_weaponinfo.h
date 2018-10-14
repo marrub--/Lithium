@@ -45,7 +45,6 @@ typedef struct invweapon_s
    int magcur;
    int ammomax;
    int ammocur;
-   int magictake; // bullshit hack
 } invweapon_t;
 
 typedef struct weapondata_s
