@@ -35,4 +35,74 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
    }
 }
 
+class Lith_Shobon : Actor
+{
+   default
+   {
+      +NOINTERACTION
+   }
+
+   vector2 m_dorupos;
+
+   override void Tick()
+   {
+      Super.Tick();
+
+      if(master)
+      {
+         let v = master.vel;
+
+         if(!(v.x ~== 0) || !(v.y ~== 0))
+         {
+            float a  = atan2(v.y, v.x) - 180;
+            float m  = v.xy.length();
+            float x_ = Lith_UTIL.Lerp(m_dorupos.x, cos(a) * 32, m / 32.);
+            float y_ = Lith_UTIL.Lerp(m_dorupos.y, sin(a) * 32, m / 32.);
+            m_dorupos = (x_, y_);
+         }
+
+         SetOrigin(master.pos + m_dorupos, true);
+      }
+   }
+
+   states
+   {
+   Spawn:
+      SHOB A -1;
+      stop;
+   }
+}
+
+class Lith_ShobonSphere : Lith_CustomInventory
+{
+   default
+   {
+      //$Category "Powerups"
+
+      Tag "Shobon Sphere";
+      Inventory.PickupSound "misc/p_pkup";
+
+      +COUNTITEM
+      +INVENTORY.BIGPOWERUP
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states(Actor)
+   {
+   Spawn:
+      TNT1 A 0;
+      SHOB B 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_TRANSFERSPRITEFRAME);
+      TNT1 A 1;
+      wait;
+   }
+
+   states(Item)
+   {
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "ShobonSphere");
+      TNT1 A 0 A_SpawnItemEx("Lith_Shobon", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      stop;
+   }
+}
+
 // EOF

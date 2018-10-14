@@ -288,7 +288,7 @@ class Lith_CustomInventory : CustomInventory
 
    property InfoPage: m_infopage;
 
-   void Lith_A_Log(int type, int levl, string name)
+   action void Lith_A_Log(int type, int levl, string name)
       {Lith_HERMES.Log(self, type, levl, "_" .. name);}
 
    void Lith_A_BIPUnlock(Actor invoker, string name)

@@ -43,8 +43,9 @@ actor Lith_Berserk : Lith_CustomInventory replaces Berserk
 actor Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
 {
    Tag "Barrier"
-   DropItem "Lith_BlurSphere", 255, 9999
+   DropItem "Lith_BlurSphere", 255, 9998
    DropItem "Lith_SteggleSphere", 255, 1
+   DropItem "Lith_ShobonSphere", 255, 1
 }
 
 actor Lith_Infrared : Lith_CustomInventory replaces Infrared
