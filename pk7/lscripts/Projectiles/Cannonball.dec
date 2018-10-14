@@ -5,6 +5,7 @@ actor Lith_CannonExplosionParticle
    Gravity 0.8
    
    -NOGRAVITY
+   +NOCLIP
    
    states
    {
@@ -21,6 +22,8 @@ actor Lith_CannonSmokeParticle : Lith_CannonExplosionParticle
    Mass 3
    Gravity 0.4
    RenderStyle "Add"
+   
+   +NOCLIP
    
    states
    {
