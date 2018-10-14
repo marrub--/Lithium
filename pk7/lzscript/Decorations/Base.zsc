@@ -75,7 +75,7 @@ class Lith_FlareDecor : Lith_DestructableSwitchDecor
    override void Lith_Active()
    {
       Super.Lith_Active();
-      m_flare = Actor.Spawn(m_type, pos);
+      m_flare = Spawn(m_type, pos);
       m_flare.master = self;
    }
 

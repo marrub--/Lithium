@@ -10,24 +10,24 @@ $random body/bullethit {
 }
 
 //
-// Ambience
+// Ambiance
 //
-amb/rain       lsounds/World/Ambience/Rain.ogg           // ???
-amb/wind       lsounds/World/Ambience/Wind.ogg           // 〃
-amb/rainout    lsounds/World/Ambience/RainOut.ogg        // 〃
-amb/windout    lsounds/World/Ambience/WindOut.ogg        // 〃
-amb/bigcomp    lsounds/World/Ambience/BigComputer.ogg    // EYE: Divine Cybermancy
-amb/alarmdist1 lsounds/World/Ambience/AlarmDistant.flac  // Half-Life 2
-amb/alarmdist2 lsounds/World/Ambience/AlarmDistant2.flac // 〃
-amb/alarmdist3 lsounds/World/Ambience/AlarmDistant3.flac // 〃
-amb/alarmdist4 lsounds/World/Ambience/AlarmDistant4.flac // 〃
-amb/ship       lsounds/World/Ambience/Ship.flac          // 〃
-amb/field      lsounds/World/Ambience/NoEntry.flac       // 〃
-amb/vent       lsounds/World/Ambience/VentPump.wav       // 〃
-amb/lightson   lsounds/World/Ambience/LightsOn.flac      // 〃
-amb/computer   lsounds/World/Ambience/Computer.wav       // Quake
+amb/rain       lsounds/World/Ambiance/Rain.ogg           // ???
+amb/wind       lsounds/World/Ambiance/Wind.ogg           // 〃
+amb/rainout    lsounds/World/Ambiance/RainOut.ogg        // 〃
+amb/windout    lsounds/World/Ambiance/WindOut.ogg        // 〃
+amb/bigcomp    lsounds/World/Ambiance/BigComputer.ogg    // EYE: Divine Cybermancy
+amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant.flac  // Half-Life 2
+amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2.flac // 〃
+amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3.flac // 〃
+amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4.flac // 〃
+amb/ship       lsounds/World/Ambiance/Ship.flac          // 〃
+amb/field      lsounds/World/Ambiance/NoEntry.flac       // 〃
+amb/vent       lsounds/World/Ambiance/VentPump.wav       // 〃
+amb/lightson   lsounds/World/Ambiance/LightsOn.flac      // 〃
+amb/computer   lsounds/World/Ambiance/Computer.wav       // Quake
 
-amb/fire lsounds/World/Ambience/Fire.wav // Hexen
+amb/fire lsounds/World/Ambiance/Fire.wav // Hexen
 $limit amb/fire 0
 
 $alias amb/spark weapons/erifle/zap
@@ -63,6 +63,25 @@ $random misc/barrel/hit {
    misc/barrel/hit1
    misc/barrel/hit2
 }
+
+//
+// Decorations
+//
+amb/lamp1    lsounds/World/Ambiance/LampTall.flac     // ???
+amb/lamp2    lsounds/World/Ambiance/LampSmall.flac    // ???
+amb/shatter1 lsounds/World/Ambiance/GlassBreak1.flac  // Half-Life 2
+amb/shatter2 lsounds/World/Ambiance/GlassBreak2.flac  // 〃
+amb/metalx   lsounds/World/Ambiance/MetalExplode.flac // 〃
+amb/woodx    lsounds/World/Ambiance/WoodExplode.flac  // 〃
+
+$random amb/shatter {
+   amb/shatter1
+   amb/shatter2
+}
+
+$volume amb/lamp1 0.3
+$volume amb/lamp2 0.3
+$volume amb/shatter 0.4
 
 //
 // Splashes

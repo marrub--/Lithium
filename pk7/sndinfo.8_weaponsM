@@ -180,9 +180,11 @@ $random weapons/rocket/fire {
 //
 // Omega Cannon
 //
-weapons/cannon/fire    lsounds/WeaponsM/OmegaCannon/Fire.flac      // Serious Sam: The First Encounter HD
+weapons/cannon/fire    lsounds/WeaponsM/OmegaCannon/Fire.flac      // Serious Sam: The First Encounter HD, Halo 3
+weapons/cannon/firebig lsounds/WeaponsM/OmegaCannon/FireBig.flac   // 〃
+weapons/cannon/fired   lsounds/WeaponsM/OmegaCannon/FireDark.flac  // Serious Sam: The First Encounter HD
 weapons/cannon/prepare lsounds/WeaponsM/OmegaCannon/Prepare.flac   // 〃
-weapons/cannon/explode lsounds/WeaponsM/OmegaCannon/Explode.flac   // 〃
+weapons/cannon/explode lsounds/WeaponsM/OmegaCannon/Explode.flac   // Serious Sam: The First Encounter HD, Half-Life 2
 weapons/cannon/empty   lsounds/WeaponsM/OmegaCannon/FireEmpty.flac // Killing Floor
 weapons/cannon/pickup  lsounds/WeaponsM/OmegaCannon/Pickup.flac    // Halo 3, Doom 3
 weapons/cannon/draw    lsounds/WeaponsM/OmegaCannon/Draw.flac      // Fallout: New Vegas

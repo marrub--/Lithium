@@ -105,7 +105,7 @@ actor Lith_BFG9000 : Lith_MWeapon
       DCNG A 2 bright offset(1, 37)
       DCNG A 3 bright offset(1, 38)
       DCNG A 0 bright A_GunFlash("DummyFlash")
-      DCNG A 0 bright A_PlaySound("weapons/cannon/fire", CHAN_5)
+      DCNG A 0 bright A_PlaySound("weapons/cannon/fired", CHAN_5)
       DCNG B 1 bright offset(0, 62) A_FireProjectile("Lith_DarkMatter", 0, false, 0, 0, FPF_NOAUTOAIM)
       DCNG C 1 bright
       DCNG D 1 bright offset(0, 57)
@@ -127,7 +127,7 @@ actor Lith_BFG9000 : Lith_MWeapon
       CNNG A 2 bright offset(1, 37)
       CNNG A 3 bright offset(1, 38)
       CNNG A 0 bright A_GunFlash("DummyFlash")
-      CNNG A 0 bright A_PlaySound("weapons/cannon/fire", CHAN_5)
+      CNNG A 0 bright A_PlaySound("weapons/cannon/firebig", CHAN_5)
       CNNG A 0 bright A_Recoil(4)
       CNNG A 0 bright Lith_A_RecoilUp(4)
       CNNG C 2 bright offset(0, 62) A_FireProjectile("Lith_CannonBall", 0, false, 0, -24, FPF_NOAUTOAIM)

@@ -1,4 +1,5 @@
 $rolloff * custom 0 2025
+$pitchshiftrange 2
 
 //
 // World
@@ -27,8 +28,12 @@ $alias ghost/spawn player/pickup/barrier
 //
 intermission/tick      lsounds/GUI/Menu/InterTick.flac // Halo 3
 intermission/nextstage lsounds/GUI/Menu/InterNext.flac // Halo 3, Phantasy Star Online
-intermission/paststats lsounds/GUI/Menu/InterPass.wav // Phantasy Star Online
-intermission/mid       lsounds/GUI/Menu/InterMid.wav  // 〃
+intermission/paststats lsounds/GUI/Menu/InterPass.wav  // Phantasy Star Online
+intermission/mid       lsounds/GUI/Menu/InterMid.wav   // 〃
+
+$pitchshift intermission/nextstage 0
+$pitchshift intermission/paststats 0
+$pitchshift intermission/mid 0
 
 //
 // Menu
@@ -63,5 +68,20 @@ $random misc/quitsound {
    weapons/sniper/draw
    weapons/sword/hit
 }
+
+$pitchshift misc/chat 0
+$pitchshift misc/chat2 0
+
+$pitchshift menu/backup 0
+$pitchshift menu/cursor 0
+$pitchshift menu/activate 0
+$pitchshift menu/choose 0
+$pitchshift menu/invalid 0
+$pitchshift menu/change 0
+$pitchshift menu/dismiss 0
+$pitchshift menu/prompt 0
+$pitchshift menu/clear 0
+
+$pitchshift misc/quitsound 0
 
 // EOF

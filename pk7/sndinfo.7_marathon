@@ -1,12 +1,12 @@
-// All sounds from Marathon Trilogy
+// All sounds from Marathon 2.
 
-marathon/pickup lsounds/Marathon/Pickup.flac
-marathon/explode lsounds/Marathon/Explode.flac
+marathon/pickup   lsounds/Marathon/Pickup.flac
+marathon/explode  lsounds/Marathon/Explode.flac
 marathon/hitsolid lsounds/Marathon/HitSolid.flac
 
-marathon/rifle/fire lsounds/Marathon/RifleFire.flac
+marathon/rifle/fire    lsounds/Marathon/RifleFire.flac
 marathon/rifle/grenade lsounds/Marathon/GrenadeLaunch.flac
-marathon/rifle/reload lsounds/Marathon/RifleReload.flac
+marathon/rifle/reload  lsounds/Marathon/RifleReload.flac
 
 marathon/hitwall1 lsounds/Marathon/HitWall1.flac
 marathon/hitwall2 lsounds/Marathon/HitWall2.flac
@@ -16,7 +16,15 @@ marathon/hit1 lsounds/Marathon/Hit1.flac
 marathon/hit2 lsounds/Marathon/Hit2.flac
 marathon/hit3 lsounds/Marathon/Hit3.flac
 
-$random marathon/hitwall {marathon/hitwall1 marathon/hitwall2}
-$random marathon/hit {marathon/hit1 marathon/hit2 marathon/hit3}
+$random marathon/hitwall {
+   marathon/hitwall1
+   marathon/hitwall2
+}
+
+$random marathon/hit {
+   marathon/hit1
+   marathon/hit2
+   marathon/hit3
+}
 
 // EOF
