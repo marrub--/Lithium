@@ -20,7 +20,6 @@
 "LITH:BIP:Omakeda" = "lgfx/BIP/Omakeda.png";
 "LITH:BIP:Semaphore" = "lgfx/BIP/Semaphore.png";
 "LITH:BIP:Sym43" = "lgfx/BIP/Sym43.png";
-"LITH:CannonBall" = "lgfx/CannonBall.png";
 "LITH:Dialogue:Back" = "lgfx/Dialogue/Back.png";
 "LITH:Dialogue:IconAOF" = "lgfx/Dialogue/IconAOF.png";
 "LITH:Dialogue:IconNone" = "lgfx/Dialogue/IconNone.png";

@@ -15,7 +15,7 @@ statelabel m_laststate;
 
 override void Tick()
 {
-   if(owner && owner.player && owner.health > 0 && !level.frozen)
+   if(owner && owner.player && owner.health > 0 && !globalfreeze && !level.frozen)
    {
       if(owner.player.readyWeapon != self)
       {

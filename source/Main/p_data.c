@@ -389,13 +389,13 @@ void Lith_PlayerUpdateStats(struct player *p)
 {
    fixed boost = 1 + p->jumpboost;
 
-   if(p->frozen     != p->old.frozen)
+   if(p->frozen != p->old.frozen)
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
 
-   if(p->speedmul   != p->old.speedmul)
+   if(p->speedmul != p->old.speedmul)
       ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
 
-   if(p->jumpboost  != p->old.jumpboost)
+   if(p->jumpboost != p->old.jumpboost)
       ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * boost);
 }
 
