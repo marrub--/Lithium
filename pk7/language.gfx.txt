@@ -678,4 +678,6 @@
 "LITH:XHairs:8w" = "lgfx/XHairs/8w.png";
 "LITH:XHairs:9b" = "lgfx/XHairs/9b.png";
 "LITH:XHairs:9w" = "lgfx/XHairs/9w.png";
+"LITH:XHairs:L" = "lgfx/XHairs/L.png";
+"LITH:XHairs:R" = "lgfx/XHairs/R.png";
 "LITH:ZoomOverlay" = "lgfx/ZoomOverlay.png";

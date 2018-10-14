@@ -73,6 +73,7 @@ Int("Crosshair blue",  "/255", "lith_xhair_b", 0, 255);
 Int("Crosshair alpha", "/255", "lith_xhair_a", 0, 255);
 Enum("Crosshair style", "lith_xhair_style", 1, 10, "%S", XHairName(set));
 Bool("Crosshair enabled", "lith_xhair_enable");
+Bool("Crosshair juicer enabled", "lith_xhair_enablejuicer");
 
 Category("Vital Scanner");
 Int("X offset",         "px", "lith_scanner_xoffs", -160, 160);

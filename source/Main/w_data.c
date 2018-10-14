@@ -26,8 +26,9 @@ int LPData(int info, int permutation, bool target)
    case pdata_slot3ammo:  return p->getCVarI("lith_weapons_slot3ammo");
    case pdata_pclass:     return p->pclass;
    case pdata_semifrozen: return p->semifrozen > 0;
-   case pdata_addp:       return u.k = p->addpitch, u.i;
-   case pdata_addy:       return u.k = p->addyaw,   u.i;
+   case pdata_addp:       return u.k = p->addpitch,  u.i;
+   case pdata_addy:       return u.k = p->addyaw,    u.i;
+   case pdata_recoilp:    return u.k = p->extrpitch, u.i;
    }
 
    return 0;

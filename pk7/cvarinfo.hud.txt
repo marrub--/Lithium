@@ -11,6 +11,7 @@ user int  lith_xhair_b = 255;
 user int  lith_xhair_a = 200;
 user int  lith_xhair_style = 1;
 user bool lith_xhair_enable = true;
+user bool lith_xhair_enablejuicer = true;
 
 user bool lith_scanner_slide   = true;
 user bool lith_scanner_bar     = true;
