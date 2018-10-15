@@ -272,7 +272,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    {
    case weapon_c_fist:
       PrintTextStr(L("LITH_MANA_CHARGE"));
-      PrintTextA("CBIFONT", CR_BRICK, 160,0, 100,0, 0.5);
+      PrintTextA("cbifont", CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       HERMES("Lith_DelearSprite");
@@ -281,7 +281,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       __with(fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;)
       {
          PrintTextFmt(L("LITH_CHARGE_FMT"), charge);
-         PrintText("CBIFONT", CR_LIGHTBLUE, 270,2, 200,2);
+         PrintText("cbifont", CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
    }

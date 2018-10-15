@@ -12,7 +12,7 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
    gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->notebox, 48, 40, p);
 
    PrintTextStr(L("LITH_EDIT"));
-   PrintText("CBIFONT", CR_WHITE, 32,2, 40,0);
+   PrintText("cbifont", CR_WHITE, 32,2, 40,0);
    Lith_GUI_BasicCheckbox(g, &CBIState(g)->noteedit, 39, 40);
 
    if(Lith_GUI_Button(g, L("LITH_CLEAR"), 16, 48, Pre(btnclear)))
@@ -26,7 +26,7 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
          continue;
 
       PrintTextFmt(L("LITH_NOTE_FMT"), i + 1);
-      PrintText("CBIFONT", CR_WHITE, 32+g->ox,2, i * 30 + g->oy,1);
+      PrintText("cbifont", CR_WHITE, 32+g->ox,2, i * 30 + g->oy,1);
 
       if(Lith_GUI_Button_Id(g, i, p->notes[i] == "" ? L("LITH_EMPTY") : p->notes[i],
          37, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))

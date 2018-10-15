@@ -12,8 +12,8 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
    int n = 0;
 
    #define Stat(name, f, x) \
-      PrintTextStr(name); PrintText("CBIFONT", CR_WHITE, 23,1,  50 + 8*n,1); \
-      PrintTextFmt(f, x); PrintText("CBIFONT", CR_WHITE, 300,2, 50 + 8*n,1); \
+      PrintTextStr(name); PrintText("cbifont", CR_WHITE, 23,1,  50 + 8*n,1); \
+      PrintTextFmt(f, x); PrintText("cbifont", CR_WHITE, 300,2, 50 + 8*n,1); \
       n++
 
    PrintTextStr(p->name);

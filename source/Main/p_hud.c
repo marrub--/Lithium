@@ -113,7 +113,7 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
             {ya = 2; y = (yo - y) + yy;}
 
          PrintTextStr(ld->info);
-         PrintText("LOGFONT", cr, x,1, y,ya);
+         PrintText("logfont", cr, x,1, y,ya);
 
          if(ld->time > LOG_TIME - 10)
             SetFade(fid_logadS + i, 1, 0.07);
@@ -121,7 +121,7 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
          if(CheckFade(fid_logadS + i))
          {
             PrintTextStr(ld->info);
-            PrintTextF("LOGFONT", CR_WHITE, x,1, y,ya, fid_logadS + i);
+            PrintTextF("logfont", CR_WHITE, x,1, y,ya, fid_logadS + i);
          }
       }
 

@@ -126,10 +126,10 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
    SetClipW(111, 30, 184, 150, 184);
 
    PrintTextFmt("%LS %S\Cnscr", "LITH_COST", scoresep(p->getCost(&item->shopdef)));
-   PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
+   PrintText("cbifont", CR_WHITE, 111,1, 30,1);
 
    PrintTextStr(Language("LITH_SHOP_DESCR_%S", item->name));
-   PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
+   PrintText("cbifont", CR_WHITE, 111,1, 40,1);
 
    ClearClip();
 

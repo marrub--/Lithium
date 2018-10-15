@@ -25,7 +25,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    fixed helptrns = 0.5;
 
    PrintTextFmt("%.3S", name);
-   PrintText("CHFONT", CR_WHITE, x-24,1, y,1);
+   PrintText("chfont", CR_WHITE, x-24,1, y,1);
 
    PrintSprite(":UI:AttrBar1", x,1, y,1);
 
@@ -47,10 +47,10 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    case at_rge: PrintTextStr(L("LITH_ATTR_HELP_RGE")); break;
    }
 
-   PrintTextA("CHFONT", CR_WHITE, x+1,1, y+1,1, helptrns);
+   PrintTextA("chfont", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
-   PrintText("CHFONT", CR_WHITE, x+202,1, y,1);
+   PrintText("chfont", CR_WHITE, x+202,1, y,1);
 }
 
 //
@@ -59,9 +59,9 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 {
    PrintTextStr(left);
-   PrintText("CHFONT", CR_WHITE, x,1, y,1);
+   PrintText("chfont", CR_WHITE, x,1, y,1);
    PrintTextStr(right);
-   PrintText("CHFONT", CR_WHITE, x+80,2, y,1);
+   PrintText("chfont", CR_WHITE, x+80,2, y,1);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -73,10 +73,10 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
 {
    int x = 30, y = 40;
    PrintTextStr(p->name);
-   PrintText("CHFONT", CR_WHITE, x,1, y,1);
+   PrintText("chfont", CR_WHITE, x,1, y,1);
    y += 10;
    PrintTextStr(p->classname);
-   PrintText("CHFONT", CR_WHITE, x,1, y,1);
+   PrintText("chfont", CR_WHITE, x,1, y,1);
    StatusInfo(g, x, y += 10, "Lv.",  StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));
    if(p->pclass & pcl_magicuser)

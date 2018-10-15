@@ -111,7 +111,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
 
    // Top-left text
    PrintTextStr("SGXLine r4205");
-   PrintText("LTRMFONT", CR_RED, 0,1, 0,1);
+   PrintText("ltrmfont", CR_RED, 0,1, 0,1);
 
    // Top-right text
    switch(vmstate->trmActi)
@@ -123,11 +123,11 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    default:
       PrintTextFmt("Remote: %S",               remote); break;
    }
-   PrintText("LTRMFONT", CR_RED, right,2, 0,1);
+   PrintText("ltrmfont", CR_RED, right,2, 0,1);
 
    // Bottom-left text
    PrintTextFmt("<55.883.115.7>");
-   PrintText("LTRMFONT", CR_RED, 0,1, bottom,2);
+   PrintText("ltrmfont", CR_RED, 0,1, bottom,2);
 
    // Bottom-right text
    switch(vmstate->trmActi)
@@ -136,7 +136,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    case TACT_LOGOFF: PrintTextStr(world.canondate);      break;
    default:          PrintTextStr("Use To Acknowledge"); break;
    }
-   PrintText("LTRMFONT", CR_RED, right,2, bottom,2);
+   PrintText("ltrmfont", CR_RED, right,2, bottom,2);
 
    // Contents
    __str pict;
@@ -153,7 +153,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
          if(vmstate->text != "")
          {
             PrintTextStr(vmstate->text);
-            PrintText("LTRMFONT", CR_WHITE, midx,0, midy + 35,0);
+            PrintText("ltrmfont", CR_WHITE, midx,0, midy + 35,0);
             y -= 10;
          }
 
@@ -167,14 +167,14 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       SetSize(tsizex, tsizey);
       SetClipW(tleft, ttop, 300, 300, 300);
       PrintTextStr(vmstate->text);
-      PrintText("LTRMFONT", CR_WHITE, tleft,1, ttop,1);
+      PrintText("ltrmfont", CR_WHITE, tleft,1, ttop,1);
       SetSize(g->w, g->h);
       ClearClip();
       break;
 
    case TACT_INFO:
       PrintTextStr(vmstate->text);
-      PrintText("LTRMFONT", CR_WHITE, midx,0, midy,0);
+      PrintText("ltrmfont", CR_WHITE, midx,0, midy,0);
       break;
    }
 
@@ -206,12 +206,12 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    PrintSpriteA(icon,             0,1, 0,1, 0.7);
 
    PrintTextStr(name);
-   PrintText("LHUDFONT", CR_GREEN, 30,1, 35,1);
+   PrintText("lhudfont", CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %S\n\n\C-%S", remo, world.canontime,
       vmstate->text);
-   PrintText("CBIFONT", CR_WHITE, left,1, top,1);
+   PrintText("cbifont", CR_WHITE, left,1, top,1);
    ClearClip();
 
    if(vmstate->optNum)

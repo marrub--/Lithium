@@ -39,7 +39,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
       int n = 0;
 
       PrintTextStr("INFO CATEGORIES");
-      PrintText("CBIFONT", CR_PURPLE, 40,1, 70,1);
+      PrintText("cbifont", CR_PURPLE, 40,1, 70,1);
 
       bip->lastcategory = BIPC_MAIN;
 
@@ -52,7 +52,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
       for(int i = 0; i < countof(lines); i++)
       {
          PrintTextStr(lines[i]);
-         PrintTextA("CBIFONT", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
+         PrintTextA("cbifont", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
       if(Lith_GUI_Button(g, L("LITH_BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
@@ -148,7 +148,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
       else
       {
          PrintTextStr("No results");
-         PrintText("CBIFONT", CR_DARKGREY, 70,0, 95,0);
+         PrintText("cbifont", CR_DARKGREY, 70,0, 95,0);
       }
    }
    else
@@ -199,11 +199,11 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          PrintSpriteA(":UI:Background", 0,1, 0,1, 0.5);
 
          PrintTextStr(pinf.flname);
-         PrintText("CBIFONT", CR_ORANGE, 200,4, 45 + oy,1);
+         PrintText("cbifont", CR_ORANGE, 200,4, 45 + oy,1);
 
          #define DrawText(txt, pos, cr, x, y) \
             PrintTextFmt("%.*S%S", pos, txt, pos == typeon->len ? Ticker("\n|", "") : "|"), \
-            PrintText("CBIFONT", cr, x,1, y+oy,1)
+            PrintText("cbifont", cr, x,1, y+oy,1)
 
          // render an outline if the page has an image
          if(page->image)
@@ -240,13 +240,13 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
    {
       PrintSpriteA(":UI:bip", 20,1, 40,1, 0.1);
       PrintTextStr("BIOTIC INFORMATION PANEL ver2.5");
-      PrintText("CBIFONT", CR_WHITE, 35,1, 40,1);
+      PrintText("cbifont", CR_WHITE, 35,1, 40,1);
    }
 
    if(max)
    {
       PrintTextFmt("%i/%i AVAILABLE", avail, max);
-      PrintText("CBIFONT", CR_WHITE, 300,2, 30,1);
+      PrintText("cbifont", CR_WHITE, 300,2, 30,1);
    }
 }
 

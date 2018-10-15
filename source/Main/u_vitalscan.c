@@ -133,24 +133,24 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    {
       int delta = UData.oldhealth - UData.health;
 
-      HudMessageF("CBIFONT", "-%i", delta);
+      HudMessageF("cbifont", "-%i", delta);
       HudMessageParams(HUDMSG_FADEOUT, hid_vschitS, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
 
       for(int i = 1; i < 5 && delta >= 100 * i; i++)
       {
-         HudMessageF("CBIFONT", "-%i", delta);
+         HudMessageF("cbifont", "-%i", delta);
          HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vschitS - i, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
       }
    }
 
    // Tag and health
    bool  afnt = p->getCVarI("lith_scanner_altfont");
-   __str font = afnt ? "CHFONT" : "CBIFONT";
+   __str font = afnt ? "chfont" : "cbifont";
 
    HudMessageF(font, "%S", UData.tagstr);
    HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 216.2 + oy, 0.1, 0.4);
 
-   ACS_SetFont(UData.freak ? "ALIENFONT" : font);
+   ACS_SetFont(UData.freak ? "alienfont" : font);
    if(UData.maxhealth) HudMessage("%u/%u", UData.health, UData.maxhealth);
    else                HudMessage("%uhp",  UData.health);
    HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 225.2 + oy, 0.1, 0.4);

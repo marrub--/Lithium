@@ -131,7 +131,7 @@ void Lith_GetSigil()
 
       ACS_Delay(3);
 
-      HudMessageF("DBIGFONT", "D I V I S I O N  S I G I L");
+      HudMessageF("dbigfont", "D I V I S I O N  S I G I L");
       HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TICSECOND * 5, 0.3);
 
       HudMessageF("SMALLFNT",

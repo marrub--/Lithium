@@ -36,7 +36,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
    }
    else
       PrintTextStr("Filter: \CjAll");
-   PrintText("CBIFONT", CR_WHITE, 15,1, 215,1);
+   PrintText("cbifont", CR_WHITE, 15,1, 215,1);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, guipre.btnlist.w, 178, guipre.btnlist.h * numbtns);
 
@@ -53,7 +53,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
          curcategory = upgr->info->category;
          y += guipre.btnlist.h;
          PrintTextStr(L(upgrcateg[curcategory]));
-         PrintText("CBIFONT", CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
+         PrintText("cbifont", CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
       }
 
       y += guipre.btnlist.h;
@@ -96,7 +96,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
    #define Req(name) \
    { \
       PrintTextStr("Requires " name "."); \
-      PrintText("CBIFONT", CR_RED, 111,1, 200 + y,2); \
+      PrintText("cbifont", CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
 
@@ -120,7 +120,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
       else
          PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf);
 
-      PrintText("CBIFONT", CR_WHITE, 111,1, 200 + y,2);
+      PrintText("cbifont", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 
@@ -139,7 +139,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
       else    {cr = 'n'; perc = 100 + perc;}
 
       PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc);
-      PrintText("CBIFONT", CR_WHITE, 111,1, 200 + y,2);
+      PrintText("cbifont", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 }
@@ -166,18 +166,18 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    else                 cost = L("LITH_FREE");
 
    PrintTextStr(cost);
-   PrintText("CBIFONT", CR_WHITE, 111,1, 30,1);
+   PrintText("cbifont", CR_WHITE, 111,1, 30,1);
 
    // Category
    PrintTextStr(L(upgrcateg[upgr->info->category]));
-   PrintText("CBIFONT", CR_WHITE, 111,1, 40,1);
+   PrintText("cbifont", CR_WHITE, 111,1, 40,1);
 
    // Effect
    ifauto(__str, effect, LanguageNull("LITH_UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("%S %S", L("LITH_EFFECT"), effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
-   PrintText("CBIFONT",
+   PrintText("cbifont",
       upgr->info->key == UPGR_UNCEUNCE ? crs[ACS_Timer() / 4 % countof(crs)] : CR_WHITE, 111,1, 50,1);
 
    ClearClip();

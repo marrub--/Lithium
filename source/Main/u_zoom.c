@@ -89,7 +89,7 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
          int x = atan2f(xs, xc) * 320;
 
          PrintTextStr(points[i]);
-         PrintText("CBIFONT", CR_WHITE, 160 + x,0, 120,0);
+         PrintText("cbifont", CR_WHITE, 160 + x,0, 120,0);
       }
    }
 }

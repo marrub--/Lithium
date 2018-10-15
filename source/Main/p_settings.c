@@ -182,7 +182,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define Label(label) \
    do { \
       PrintTextStr(label); \
-      PrintText("CBIFONT", CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
+      PrintText("cbifont", CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
    } while(0)
 
 #define Category(name) \
@@ -190,7 +190,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
       { \
          PrintTextStr(name); \
-         PrintText("CHFONT", CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
+         PrintText("chfont", CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
       } \
       y += 20; \
    } while(0)
@@ -278,7 +278,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          if(Lith_GUI_Button_Id(g, 1, .x = 280 -  guipre.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
-         PrintText("CBIFONT", CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
+         PrintText("cbifont", CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
       } \
       y += 10; \
    } while(0)

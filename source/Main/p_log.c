@@ -168,7 +168,7 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
    selmap = sel->object;
 
    PrintTextStr(selmap->name);
-   PrintText("CBIFONT", CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
+   PrintText("cbifont", CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
 
    forlist(logdata_t *logdata, p->loginfo.full)
       num += (logdata->from == selmap->levelnum);
@@ -188,7 +188,7 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
       PrintSprite(":UI:LogList", g->ox,1, y + g->oy,1);
 
       PrintTextStr(logdata->info);
-      PrintText("CBIFONT", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
+      PrintText("cbifont", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
 

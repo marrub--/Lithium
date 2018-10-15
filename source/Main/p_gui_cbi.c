@@ -12,7 +12,7 @@
 #define Info(...) \
    do { \
       PrintTextFmt(__VA_ARGS__); \
-      PrintText("CBIFONT", CR_WHITE, 23,1, y,1); \
+      PrintText("cbifont", CR_WHITE, 23,1, y,1); \
       y += 10; \
    } while(0)
 
@@ -37,7 +37,7 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
    else                {CPU(3); ram =  50; name = L("LITH_CBI_CPU1");}
 
    PrintTextStr(name);
-   PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
+   PrintText("cbifont", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
@@ -66,7 +66,7 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 {
    CPU(2);
    PrintTextStr(L("LITH_CBI_CPU4"));
-   PrintText("CBIFONT", CR_WHITE, 20,1, 60,1);
+   PrintText("cbifont", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 

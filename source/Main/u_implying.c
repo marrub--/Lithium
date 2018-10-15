@@ -35,7 +35,7 @@ void Upgr_Implying_Update(struct player *p, upgrade_t *upgr)
    for(int i = 0; i < 40; i++)
    {
       PrintTextStr(strings[rand() % countof(strings)]);
-      PrintText("DBIGFONT", 0, rand() % 320,0, rand() % 240,0);
+      PrintText("dbigfont", 0, rand() % 320,0, rand() % 240,0);
    }
 }
 

@@ -23,7 +23,7 @@ void Lith_PlayerDebugStats(struct player *p)
 
    SetSize(450, 350);
 
-   ACS_SetFont("LTRMFONT");
+   ACS_SetFont("ltrmfont");
    ACS_BeginPrint();
    for(int i = 0; i < dbgstatnum; i++)
       ACS_PrintString(dbgstat[i]);
