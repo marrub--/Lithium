@@ -51,6 +51,7 @@ struct dmon {
    int  id;
 
    bool wasdead;
+   int  exp;
    int  level;
    int  rank;
    int  maxhealth;

@@ -1,4 +1,15 @@
 //
+// Misc
+//
+enemies/levelup1 lsounds/Monsters/LevelUp1.ogg // ???
+enemies/levelup2 lsounds/Monsters/LevelUp2.ogg // ???
+
+$random enemies/levelup {
+   enemies/levelup1
+   enemies/levelup2
+}
+
+//
 // Zombies
 //
 enemies/zombie/ready lsounds/Monsters/ZombieMan/Ready.flac // Fallout 3

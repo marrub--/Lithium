@@ -107,12 +107,22 @@ override void WorldTick()
 
 override void WorldThingDamaged(WorldEvent evt)
 {
-   if(evt.damageType == 'Bullet' && evt.damage >= 8 && !evt.thing.bNOBLOOD)
+   let src = evt.damagesource;
+   let dst = evt.thing;
+
+   if(!dst) return;
+
+   if(evt.damageType == 'Bullet' && evt.damage >= 8 && !dst.bNOBLOOD)
    {
-      let mo = Actor.Spawn("Lith_Dummy", evt.thing.pos + (0, 0, evt.thing.height / 2));
+      let mo = Actor.Spawn("Lith_Dummy", dst.pos + (0, 0, dst.height / 2));
       float vol = clamp(evt.damage / 14.0, 0, 1);
       mo.A_PlaySound("body/bullethit", CHAN_BODY, vol * frandom(0.5, 1.1));
    }
+
+   if(!src) return;
+
+   if(src.countInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.player))
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", evt.damage * 3.77);
 }
 
 override bool InputProcess(InputEvent evt)

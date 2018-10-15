@@ -1,3 +1,24 @@
+class Lith_MonsterLevelUp : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      DVBL D 0;
+      DVBL C 4;
+      DVBL D 32 A_PlaySound("enemies/levelup", CHAN_BODY, 0.5);
+      DVBL EF 4;
+      DVBL GH 3;
+      DVBL I 1 A_FadeOut;
+      wait;
+   }
+}
+
 class Lith_Monster : Actor;
 
 default

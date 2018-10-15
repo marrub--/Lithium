@@ -240,7 +240,13 @@ static void OnDeath(dmon_t *m)
 
 // Extern Functions ----------------------------------------------------------|
 
-script stksize(0x7f)
+script ext("ACS")
+void Lith_GiveMonsterEXP(int amt)
+{
+   ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
+}
+
+script
 void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
@@ -267,6 +273,20 @@ void Lith_MonsterMain(dmon_t *m)
          do {ACS_Delay(3); GetInfo(m);} while(m->ms->health <= 0);
 
          LogDebug(log_dmon, "monster %i resurrected", m->id);
+      }
+
+      if(m->exp > 500)
+      {
+         int prev = m->level;
+
+         div_t d = div(m->exp, 500);
+         m->level += d.quot;
+         m->exp    = d.rem;
+
+         ACS_SpawnForced("Lith_MonsterLevelUp", m->ms->x, m->ms->y, m->ms->z);
+         ApplyLevels(m, prev);
+
+         LogDebug(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
       }
 
       if(HasResistances(m) && m->level >= 20)
