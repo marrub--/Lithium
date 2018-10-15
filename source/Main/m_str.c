@@ -10,9 +10,6 @@
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
-//
-// lstrupper
-//
 __str lstrupper(__str in)
 {
    ACS_BeginPrint();
@@ -23,27 +20,18 @@ __str lstrupper(__str in)
    return ACS_EndStrParam();
 }
 
-//
-// l_strhash
-//
 stkcall
 u32 l_strhash(char __str_ars const *s)
 {
    l_strhashImpl();
 }
 
-//
-// lstrhash
-//
 stkcall
 u32 lstrhash(char const *s)
 {
    l_strhashImpl();
 }
 
-//
-// lstrcpy_str
-//
 char *lstrcpy_str(char *dest, char __str_ars const *src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
@@ -54,17 +42,11 @@ char *lstrcpy_str(char *dest, char __str_ars const *src)
    for(; *s1 && *s2; ++s1, ++s2) {if(*s1 != *s2) return *s1 - *s2;} \
    return *s1 - *s2
 
-//
-// lstrcmp_str
-//
 int lstrcmp_str(char const *s1, char __str_ars const *s2)
 {
    StrCmpImpl();
 }
 
-//
-// l_strncpy
-//
 stkcall
 __str l_strncpy(void const *s, int n)
 {
@@ -73,9 +55,6 @@ __str l_strncpy(void const *s, int n)
    return ACS_EndStrParam();
 }
 
-//
-// scoresep
-//
 stkcall
 __str scoresep(i96 num)
 {
@@ -105,9 +84,6 @@ __str scoresep(i96 num)
    return ACS_EndStrParam();
 }
 
-//
-// LanguageV
-//
 __str LanguageV(__str name)
 {
    ACS_BeginPrint();
@@ -127,9 +103,6 @@ __str LanguageV(__str name)
    return ret;
 }
 
-//
-// Language
-//
 __str Language(__str fmt, ...)
 {
    va_list vl;
@@ -143,9 +116,6 @@ __str Language(__str fmt, ...)
    return LanguageV(ACS_EndStrParam());
 }
 
-//
-// LanguageNull
-//
 __str LanguageNull(__str fmt, ...)
 {
    va_list vl;
@@ -162,9 +132,6 @@ __str LanguageNull(__str fmt, ...)
    return name == alias ? null : alias;
 }
 
-//
-// StrParam
-//
 __str StrParam(__str fmt, ...)
 {
    va_list vl;
@@ -178,9 +145,6 @@ __str StrParam(__str fmt, ...)
    return ACS_EndStrParam();
 }
 
-//
-// StrParamBegin
-//
 void StrParamBegin(__str fmt, ...)
 {
    va_list vl;

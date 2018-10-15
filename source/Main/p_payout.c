@@ -6,9 +6,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PlayerPayout
-//
 script
 void Lith_PlayerPayout(struct player *p)
 {

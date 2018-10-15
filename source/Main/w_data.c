@@ -5,9 +5,6 @@
 
 extern bool dorain;
 
-//
-// LPData
-//
 script ext("ACS")
 int LPData(int info, int permutation, bool target)
 {
@@ -34,9 +31,6 @@ int LPData(int info, int permutation, bool target)
    return 0;
 }
 
-//
-// LWData
-//
 script ext("ACS")
 int LWData(int info)
 {

@@ -6,9 +6,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_Blade
-//
 script ext("ACS")
 void Lith_Blade(bool hit)
 {
@@ -19,9 +16,6 @@ void Lith_Blade(bool hit)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-//
-// Lith_Rend
-//
 script ext("ACS")
 void Lith_Rend(bool hit, int set)
 {
@@ -39,9 +33,6 @@ void Lith_Rend(bool hit, int set)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-//
-// Lith_Feuer
-//
 script ext("ACS")
 void Lith_Feuer(bool left, bool fire)
 {
@@ -85,9 +76,6 @@ void Lith_Feuer(bool left, bool fire)
    }
 }
 
-//
-// Lith_Cercle
-//
 script ext("ACS")
 void Lith_Cercle(void)
 {
@@ -171,9 +159,6 @@ void Lith_Cercle(void)
    }
 }
 
-//
-// Lith_MagicSelect
-//
 script ext("ACS")
 void Lith_MagicSelect(int num)
 {

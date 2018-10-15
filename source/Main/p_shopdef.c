@@ -6,17 +6,11 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_ShopGetCost
-//
 i96 Lith_ShopGetCost(struct player *p, shopdef_t const *def)
 {
    return PlayerDiscount(def->cost);
 }
 
-//
-// Lith_ShopCanBuy
-//
 bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj)
 {
    return
@@ -24,9 +18,6 @@ bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj)
       (def->shopCanBuy ? def->shopCanBuy(p, def, obj) : true);
 }
 
-//
-// Lith_ShopBuy
-//
 bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog)
 {
    if(!p->canBuy(def, obj))

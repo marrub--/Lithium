@@ -39,9 +39,6 @@ static shopitem_t shopitems[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Shop_CanBuy
-//
 static bool Shop_CanBuy(struct player *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
@@ -50,9 +47,6 @@ static bool Shop_CanBuy(struct player *p, shopdef_t const *, void *item_)
    return max == 0 || cur < max;
 }
 
-//
-// Shop_Buy
-//
 static void Shop_Buy(struct player *p, shopdef_t const *, void *item_)
 {
    shopitem_t *item = item_;
@@ -60,9 +54,6 @@ static void Shop_Buy(struct player *p, shopdef_t const *, void *item_)
    InvGive(item->classname, item->count);
 }
 
-//
-// Shop_Give
-//
 static bool Shop_Give(struct player *p, shopdef_t const *, void *item_, int tid)
 {
    shopitem_t *item = item_;
@@ -78,9 +69,6 @@ static bool Shop_Give(struct player *p, shopdef_t const *, void *item_, int tid)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_GInit_Shop
-//
 void Lith_GInit_Shop(void)
 {
    for(int i = 0; i < countof(shopitems); i++)
@@ -92,9 +80,6 @@ void Lith_GInit_Shop(void)
    }
 }
 
-//
-// Lith_CBITab_Shop
-//
 void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 {
    int nitems = 0;

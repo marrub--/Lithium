@@ -18,9 +18,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Lith_CBITab_Arsenal
-//
 static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
 {
    extern void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p);
@@ -36,9 +33,6 @@ static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
    }
 }
 
-//
-// Lith_CBITab_Stat
-//
 static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
 {
    extern void Lith_CBITab_CBI   (gui_state_t *g, struct player *p);
@@ -54,9 +48,6 @@ static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
    }
 }
 
-//
-// Lith_CBITab_Info
-//
 static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 {
    extern void Lith_CBITab_BIP       (gui_state_t *g, struct player *p);
@@ -80,9 +71,6 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_ThemeName
-//
 __str Lith_ThemeName(uint num)
 {
    #define X(n) n,
@@ -92,9 +80,6 @@ __str Lith_ThemeName(uint num)
    return themes[num >= cbi_theme_max ? 0 : num];
 }
 
-//
-// Lith_PlayerUpdateCBIGUI
-//
 script
 void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
@@ -145,9 +130,6 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    Lith_GUI_End(g, p->getCVarI("lith_gui_cursor"));
 }
 
-//
-// Lith_PlayerResetCBIGUI
-//
 void Lith_PlayerResetCBIGUI(struct player *p)
 {
    p->cbi.guistate.cx = 320 / 2;
@@ -165,9 +147,6 @@ void Lith_PlayerResetCBIGUI(struct player *p)
 
 // Scripts -------------------------------------------------------------------|
 
-//
-// Lith_KeyOpenCBI
-//
 script ext("ACS") type("net")
 void Lith_KeyOpenCBI(void)
 {

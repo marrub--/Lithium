@@ -34,9 +34,6 @@
 
 typedef uint32_t ident_t;
 
-//
-// savechunk_t
-//
 typedef struct savechunk_s
 {
    ident_t  iden; // four char identifier
@@ -44,9 +41,6 @@ typedef struct savechunk_s
    uint32_t size; // size of chunk data in bytes
 } savechunk_t;
 
-//
-// savefile_t
-//
 typedef struct savefile_s
 {
    FILE *fp;

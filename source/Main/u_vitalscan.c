@@ -9,9 +9,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Update
-//
 script
 void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 {
@@ -103,9 +100,6 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
    }
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 {

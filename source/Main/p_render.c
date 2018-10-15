@@ -13,9 +13,6 @@ static void HUD_Waves(struct player *p);
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PlayerDebugStats
-//
 script
 void Lith_PlayerDebugStats(struct player *p)
 {
@@ -32,9 +29,6 @@ void Lith_PlayerDebugStats(struct player *p)
    PrintText("confont", CR_WHITE, 10,1, 20,1);
 }
 
-//
-// Lith_PlayerFootstep
-//
 script
 void Lith_PlayerFootstep(struct player *p)
 {
@@ -84,9 +78,6 @@ void Lith_PlayerFootstep(struct player *p)
    }
 }
 
-//
-// Lith_PlayerItemFx
-//
 stkcall
 void Lith_PlayerItemFx(struct player *p)
 {
@@ -98,11 +89,7 @@ void Lith_PlayerItemFx(struct player *p)
    p->hadinfrared = hasir;
 }
 
-//
-// Lith_PlayerDamageBob
-//
 // Update view bobbing when you get damaged.
-//
 script
 void Lith_PlayerDamageBob(struct player *p)
 {
@@ -129,11 +116,7 @@ void Lith_PlayerDamageBob(struct player *p)
    if(p->bobyaw  ) p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
 }
 
-//
-// Lith_PlayerView
-//
 // Update additive view.
-//
 script
 void Lith_PlayerView(struct player *p)
 {
@@ -167,9 +150,6 @@ void Lith_PlayerView(struct player *p)
    DebugStat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
 }
 
-//
-// Lith_PlayerStyle
-//
 script
 void Lith_PlayerStyle(struct player *p)
 {
@@ -182,9 +162,6 @@ void Lith_PlayerStyle(struct player *p)
    }
 }
 
-//
-// Lith_PlayerHUD
-//
 script
 void Lith_PlayerHUD(struct player *p)
 {
@@ -228,9 +205,6 @@ void Lith_PlayerHUD(struct player *p)
    }
 }
 
-//
-// Lith_PlayerLevelup
-//
 script
 void Lith_PlayerLevelup(struct player *p)
 {
@@ -247,9 +221,6 @@ void Lith_PlayerLevelup(struct player *p)
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// HUD_StringStack
-//
 static void HUD_StringStack(struct player *p)
 {
    typedef struct hudstr_s
@@ -281,9 +252,6 @@ static void HUD_StringStack(struct player *p)
    }
 }
 
-//
-// HUD_Waves
-//
 static void HUD_Waves(struct player *p)
 {
    fixed health = (fixed)p->health / (fixed)p->maxhealth;

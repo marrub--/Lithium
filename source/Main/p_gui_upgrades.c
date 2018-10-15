@@ -9,9 +9,6 @@ static __str const upgrcateg[UC_MAX] = {
    [UC_Down] = "LITH_CAT_DOWN"
 };
 
-//
-// GUIUpgradesList
-//
 static void GUIUpgradesList(gui_state_t *g, struct player *p)
 {
    if(Lith_GUI_Button(g, .x = 90, 213, Pre(btnprev)))
@@ -86,9 +83,6 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
    Lith_GUI_ScrollEnd(g, &CBIState(g)->upgrscr);
 }
 
-//
-// GUIUpgradeRequirements
-//
 static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    int y = 0;
@@ -144,9 +138,6 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
    }
 }
 
-//
-// GUIUpgradeDescription
-//
 static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    SetClipW(111, 30, 190, 170, 184);
@@ -183,9 +174,6 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    ClearClip();
 }
 
-//
-// GUIUpgradeButtons
-//
 static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
    if(Lith_GUI_Button(g, L("LITH_BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
@@ -195,9 +183,6 @@ static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
       upgr->toggle(p);
 }
 
-//
-// Lith_CBITab_Upgrades
-//
 void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p)
 {
    GUIUpgradesList(g, p);

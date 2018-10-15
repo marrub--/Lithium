@@ -10,9 +10,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_LogS
-//
 script ext("ACS")
 void Lith_LogS(int levl, int type)
 {
@@ -29,9 +26,6 @@ void Lith_LogS(int levl, int type)
    }
 }
 
-//
-// Lith_Log
-//
 void Lith_Log(struct player *p, int levl, __str fmt, ...)
 {
    va_list vl;
@@ -49,9 +43,6 @@ void Lith_Log(struct player *p, int levl, __str fmt, ...)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
-//
-// Lith_LogF
-//
 void Lith_LogF(struct player *p, __str fmt, ...)
 {
    va_list vl;
@@ -64,9 +55,6 @@ void Lith_LogF(struct player *p, __str fmt, ...)
    logdata->keep = true;
 }
 
-//
-// Lith_LogH
-//
 void Lith_LogH(struct player *p, int levl, __str fmt, ...)
 {
    va_list vl;
@@ -82,9 +70,6 @@ void Lith_LogH(struct player *p, int levl, __str fmt, ...)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
-//
-// Lith_LogV
-//
 logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl)
 {
    logdata_t *logdata = Salloc(logdata_t);
@@ -107,9 +92,6 @@ logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl)
    return logdata;
 }
 
-//
-// Lith_PlayerUpdateLog
-//
 script
 void Lith_PlayerUpdateLog(struct player *p)
 {
@@ -127,9 +109,6 @@ void Lith_PlayerUpdateLog(struct player *p)
    }
 }
 
-//
-// Lith_PlayerLogEntry
-//
 void Lith_PlayerLogEntry(struct player *p)
 {
    logmap_t *logmap = Salloc(logmap_t);
@@ -143,9 +122,6 @@ void Lith_PlayerLogEntry(struct player *p)
    p->logF(L("LITH_ENTER_FMT"), logmap->name, world.canontime);
 }
 
-//
-// Lith_CBITab_Log
-//
 void Lith_CBITab_Log(gui_state_t *g, struct player *p)
 {
    size_t num = 0;

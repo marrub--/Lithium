@@ -2,18 +2,12 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-//
-// Lith_GiveMeAllOfTheScore
-//
 script ext("ACS")
 void Lith_GiveMeAllOfTheScore(void)
 {
    withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
 }
 
-//
-// Lith_GiveHealthBonus
-//
 script ext("ACS")
 void Lith_GiveHealthBonus(int amount)
 {
@@ -25,9 +19,6 @@ void Lith_GiveHealthBonus(int amount)
    }
 }
 
-//
-// Lith_GiveHealth
-//
 script ext("ACS")
 void Lith_GiveHealth(int amount)
 {
@@ -40,9 +31,6 @@ void Lith_GiveHealth(int amount)
    }
 }
 
-//
-// Lith_CheckHealth
-//
 script ext("ACS")
 bool Lith_CheckHealth()
 {
@@ -50,18 +38,12 @@ bool Lith_CheckHealth()
    return 0;
 }
 
-//
-// Lith_Discount
-//
 script ext("ACS")
 void Lith_Discount()
 {
    withplayer(LocalPlayer) p->discount = 0.9;
 }
 
-//
-// Lith_Glare
-//
 script type("net") ext("ACS")
 void Lith_Glare(void)
 {

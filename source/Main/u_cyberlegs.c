@@ -3,9 +3,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
 {
@@ -13,9 +10,6 @@ void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
    p->jumpboost += 0.5;
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
 {
@@ -23,9 +17,6 @@ void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
    p->jumpboost -= 0.5;
 }
 
-//
-// Update
-//
 script
 void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
 {

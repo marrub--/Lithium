@@ -6,9 +6,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// CheckTarget
-//
 script
 static int CheckTarget(struct player *p)
 {
@@ -20,9 +17,6 @@ static int CheckTarget(struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_HomingMissile
-//
 script ext("ACS")
 void Lith_HomingMissile()
 {
@@ -30,9 +24,6 @@ void Lith_HomingMissile()
    ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
 }
 
-//
-// Update
-//
 script
 void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
 {

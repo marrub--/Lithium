@@ -5,9 +5,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// BagItem_Tick
-//
 script
 static void BagItem_Tick(item_t *_item)
 {
@@ -17,9 +14,6 @@ static void BagItem_Tick(item_t *_item)
       if(it->Tick) it->Tick(it);
 }
 
-//
-// BagItem_Place
-//
 script
 static void BagItem_Place(item_t *_item, container_t *cont)
 {
@@ -33,9 +27,6 @@ static void BagItem_Place(item_t *_item, container_t *cont)
       it->Place(it, &item->content);
 }
 
-//
-// BagItem_Destroy
-//
 script
 static void BagItem_Destroy(item_t *_item)
 {
@@ -47,9 +38,6 @@ static void BagItem_Destroy(item_t *_item)
    Lith_Item_Destroy(&item->item);
 }
 
-//
-// ItemCanPlace
-//
 static bool ItemCanPlace(container_t *cont, item_t *item, int x, int y)
 {
    if(x < 0 || y < 0)
@@ -79,9 +67,6 @@ static bool ItemCanPlace(container_t *cont, item_t *item, int x, int y)
    return true;
 }
 
-//
-// ItemCanPlaceAny
-//
 static bool ItemCanPlaceAny(container_t *cont, item_t *item)
 {
    int xn = cont->w / item->w;
@@ -96,9 +81,6 @@ static bool ItemCanPlaceAny(container_t *cont, item_t *item)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_Item_Init
-//
 void Lith_Item_Init(item_t *item, itemdata_t const *data)
 {
    item->link.construct(item);
@@ -110,9 +92,6 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
    if(!item->Place  ) item->Place   = Lith_Item_Place;
 }
 
-//
-// Lith_Item_New
-//
 item_t *Lith_Item_New(itemdata_t const *data)
 {
    item_t *item = Salloc(item_t);
@@ -122,9 +101,6 @@ item_t *Lith_Item_New(itemdata_t const *data)
    return item;
 }
 
-//
-// Lith_Item_Destroy
-//
 script
 void Lith_Item_Destroy(item_t *item)
 {
@@ -143,18 +119,12 @@ void Lith_Item_Destroy(item_t *item)
    Dalloc(item);
 }
 
-//
-// Lith_Item_Use
-//
 script
 bool Lith_Item_Use(item_t *item)
 {
    return HERMES("UseItem", item);
 }
 
-//
-// Lith_Item_Place
-//
 script
 void Lith_Item_Place(item_t *item, container_t *cont)
 {
@@ -164,9 +134,6 @@ void Lith_Item_Place(item_t *item, container_t *cont)
    item->user = cont->user;
 }
 
-//
-// Lith_Item_Unlink
-//
 void Lith_Item_Unlink(item_t *item)
 {
    if(item->container)
@@ -176,9 +143,6 @@ void Lith_Item_Unlink(item_t *item)
    }
 }
 
-//
-// Lith_BagItem_New
-//
 bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
 {
    bagitem_t *item = Salloc(bagitem_t);
@@ -198,9 +162,6 @@ bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
    return item;
 }
 
-//
-// Lith_ItemPlace
-//
 bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
 {
    if(!ItemCanPlace(cont, item, x, y)) return false;
@@ -213,9 +174,6 @@ bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
    return true;
 }
 
-//
-// Lith_ItemPlaceFirst
-//
 script
 bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 {
@@ -226,9 +184,6 @@ bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
    return false;
 }
 
-//
-// Lith_PlayerAddItem
-//
 bool Lith_PlayerAddItem(struct player *p, item_t *item)
 {
    for(int i = 0; i < countof(p->inv); i++)
@@ -238,9 +193,6 @@ bool Lith_PlayerAddItem(struct player *p, item_t *item)
    return false;
 }
 
-//
-// Lith_Container
-//
 void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
 {
    struct player *p = cont->user;
@@ -286,9 +238,6 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
    }
 }
 
-//
-// Lith_PlayerUpdateInventory
-//
 script
 void Lith_PlayerUpdateInventory(struct player *p)
 {
@@ -311,9 +260,6 @@ void Lith_PlayerUpdateInventory(struct player *p)
       if(it->Tick) it->Tick(it);
 }
 
-//
-// Lith_ItemCreate
-//
 script ext("ACS")
 void *Lith_ItemCreate(int w, int h)
 {
@@ -335,9 +281,6 @@ void *Lith_ItemCreate(int w, int h)
    return null;
 }
 
-//
-// Lith_ItemAttach
-//
 script ext("ACS")
 bool Lith_ItemAttach(void *_item)
 {
@@ -354,9 +297,6 @@ bool Lith_ItemAttach(void *_item)
    return false;
 }
 
-//
-// Lith_ItemDetach
-//
 script ext("ACS")
 void Lith_ItemDetach(void *_item)
 {
@@ -367,9 +307,6 @@ void Lith_ItemDetach(void *_item)
    item->Destroy(item);
 }
 
-//
-// Lith_ItemUnlink
-//
 script ext("ACS")
 void Lith_ItemUnlink(void *_item)
 {
@@ -387,9 +324,6 @@ void Lith_ItemUnlink(void *_item)
    }
 }
 
-//
-// Lith_ItemCanPlace
-//
 script ext("ACS")
 bool Lith_ItemCanPlace(void *_item)
 {
@@ -403,9 +337,6 @@ bool Lith_ItemCanPlace(void *_item)
    return false;
 }
 
-//
-// Lith_CBITab_Items
-//
 void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 {
    static int const x[] = {

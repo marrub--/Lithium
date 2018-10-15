@@ -2,9 +2,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-//
-// Lith_GUI_Checkbox_Impl
-//
 bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
 {
    gui_checkb_preset_t const *pre = a->preset ? a->preset : &guipre.cbxdef;

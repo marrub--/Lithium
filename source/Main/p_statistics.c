@@ -4,9 +4,6 @@
 #include "lith_world.h"
 #include "lith_gui.h"
 
-//
-// Lith_CBITab_Statistics
-//
 void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
 {
    int n = 0;

@@ -43,9 +43,6 @@ static __str const dmgtype_names[dmgtype_max] = {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// ApplyLevels
-//
 static void ApplyLevels(dmon_t *m, int prev)
 {
    GetInfo(m);
@@ -81,9 +78,6 @@ static void ApplyLevels(dmon_t *m, int prev)
    }
 }
 
-//
-// ShowBarrier
-//
 stkcall
 static void ShowBarrier(dmon_t const *m, fixed alpha)
 {
@@ -118,9 +112,6 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
    }
 }
 
-//
-// BaseMonsterLevel
-//
 static void BaseMonsterLevel(dmon_t *m)
 {
    fixed rn1 = ACS_RandomFixed(1, MAXRANK);
@@ -161,12 +152,8 @@ static void BaseMonsterLevel(dmon_t *m)
    ApplyLevels(m, 0);
 }
 
-//
-// SoulCleave
-//
 // Spawn a Monster Soul and temporarily set the species of it until the
 // actor is no longer solid, so it won't explode immediately.
-//
 script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
@@ -184,9 +171,6 @@ static void SoulCleave(dmon_t *m, struct player *p)
    ACS_SetActorPropertyString(tid, APROP_Species, "Lith_Player");
 }
 
-//
-// SpawnManaPickup
-//
 static void SpawnManaPickup(dmon_t *m, struct player *p)
 {
    int i = 0;
@@ -201,9 +185,6 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
    } while(i < m->maxhealth);
 }
 
-//
-// OnFinalize
-//
 static void OnFinalize(dmon_t *m)
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
@@ -246,9 +227,6 @@ static void OnFinalize(dmon_t *m)
    m->ms->finalized = true;
 }
 
-//
-// OnDeath
-//
 static void OnDeath(dmon_t *m)
 {
    LogDebug(log_dmon, "monster %i is ded", m->id);
@@ -262,9 +240,6 @@ static void OnDeath(dmon_t *m)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_MonsterMain
-//
 script stksize(0x7f)
 void Lith_MonsterMain(dmon_t *m)
 {
@@ -304,9 +279,6 @@ void Lith_MonsterMain(dmon_t *m)
    }
 }
 
-//
-// Lith_MonsterInfo
-//
 script ext("ACS")
 void Lith_MonsterInfo()
 {
@@ -338,9 +310,6 @@ void Lith_MonsterInfo()
    InvGive("Lith_MonsterInvalid", 1);
 }
 
-//
-// Lith_MonsterFinalized
-//
 script ext("ACS")
 void Lith_MonsterFinalized()
 {

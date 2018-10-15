@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_TBufProc
-//
 int Lith_TBufProc(struct token *tok, void *udata)
 {
    switch(tok->type)
@@ -20,9 +17,6 @@ int Lith_TBufProc(struct token *tok, void *udata)
    return tokproc_next;
 }
 
-//
-// Lith_TBufProcL
-//
 int Lith_TBufProcL(struct token *tok, void *udata)
 {
    switch(tok->type)
@@ -34,9 +28,6 @@ int Lith_TBufProcL(struct token *tok, void *udata)
    return tokproc_next;
 }
 
-//
-// Lith_TBufCtor
-//
 void Lith_TBufCtor(struct tokbuf *tb)
 {
    tb->orig.line = 1;
@@ -44,9 +35,6 @@ void Lith_TBufCtor(struct tokbuf *tb)
    if(!tb->tokProcess) tb->tokProcess = Lith_TBufProc;
 }
 
-//
-// Lith_TBufDtor
-//
 void Lith_TBufDtor(struct tokbuf *tb)
 {
    if(tb->toks) for(int i = 0; i < tb->bend; i++)
@@ -55,9 +43,6 @@ void Lith_TBufDtor(struct tokbuf *tb)
    Dalloc(tb->toks);
 }
 
-//
-// Lith_TBufGet
-//
 struct token *Lith_TBufGet(struct tokbuf *tb)
 {
    if(++tb->tpos < tb->tend)
@@ -94,34 +79,22 @@ done:
    return &tb->toks[tb->tpos];
 }
 
-//
-// Lith_TBufPeek
-//
 struct token *Lith_TBufPeek(struct tokbuf *tb)
 {
    Lith_TBufGet(tb);
    return Lith_TBufUnGet(tb);
 }
 
-//
-// Lith_TBufUnGet
-//
 struct token *Lith_TBufUnGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos--];
 }
 
-//
-// Lith_TBufReGet
-//
 struct token *Lith_TBufReGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos];
 }
 
-//
-// Lith_TBufDrop
-//
 bool Lith_TBufDrop(struct tokbuf *tb, int t)
 {
    if(Lith_TBufGet(tb)->type != t)

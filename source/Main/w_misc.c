@@ -3,9 +3,6 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
-//
-// Lith_BeginAngles
-//
 stkcall
 void Lith_BeginAngles(int x, int y)
 {
@@ -19,9 +16,6 @@ void Lith_BeginAngles(int x, int y)
    world.a_y = y;
 }
 
-//
-// Lith_AddAngle
-//
 stkcall
 fixed Lith_AddAngle(int x, int y)
 {
@@ -33,45 +27,30 @@ fixed Lith_AddAngle(int x, int y)
    return p->ang;
 }
 
-//
-// Lith_AddAngleScript
-//
 script addr("Lith_AddAngle")
 void Lith_AddAngleScript(int x, int y)
 {
    Lith_AddAngle(x, y);
 }
 
-//
-// Lith_EmitScore
-//
 script ext("ACS")
 void Lith_EmitScore(int amount)
 {
    Lith_GiveAllScore(amount, false);
 }
 
-//
-// Lith_EmitEXP
-//
 script ext("ACS")
 void Lith_EmitEXP(int amount)
 {
    Lith_GiveAllEXP(amount);
 }
 
-//
-// Lith_GiveScoreScript
-//
 script ext("ACS") addr("Lith_GiveScore")
 void Lith_GiveScoreScript(int score)
 {
    Lith_GiveAllScore(score * (fixed64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
-//
-// Lith_BoughtItemPickup
-//
 script ext("ACS")
 void Lith_BoughtItemPickup(int id)
 {

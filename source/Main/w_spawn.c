@@ -78,9 +78,6 @@ static struct witem const clipbx[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// RandomWeighted
-//
 static __str RandomWeighted(struct witem const *list, int count)
 {
    int sel = ACS_Random(1, list[count - 1].weight);
@@ -93,9 +90,6 @@ static __str RandomWeighted(struct witem const *list, int count)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_RandomSpawn
-//
 script ext("ACS")
 void Lith_RandomSpawn(int rsn)
 {

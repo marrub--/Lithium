@@ -13,9 +13,6 @@
 
 // Type Definitions ----------------------------------------------------------|
 
-//
-// memfile_t
-//
 typedef struct memfile_t
 {
    byte  *mem;
@@ -23,9 +20,6 @@ typedef struct memfile_t
    size_t pos;
 } memfile_t;
 
-//
-// netfile_t
-//
 typedef struct netfile_s
 {
    anonymous
@@ -36,9 +30,6 @@ typedef struct netfile_s
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// PrintMem
-//
 void PrintMem(byte const *data, size_t size)
 {
    int termpos = 0;
@@ -60,12 +51,8 @@ void PrintMem(byte const *data, size_t size)
    printf(c"\nEOF\n\n");
 }
 
-//
-// NetClose
-//
 // fclose for netfiles.
 // Output to the CVar with a Base64 representation of the output buffer.
-//
 static int NetClose(void *nfdata)
 {
    netfile_t *nf = nfdata;
@@ -112,9 +99,6 @@ static int NetClose(void *nfdata)
    return 0;
 }
 
-//
-// MemRead
-//
 static ssize_t MemRead(void *memdata, char *buf, size_t size)
 {
    memfile_t *mem   = memdata;
@@ -128,10 +112,6 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
    return size;
 }
 
-//
-// MemWrite
-//
-//
 static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
 {
    memfile_t *mem = memdata;
@@ -154,9 +134,6 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
    return size;
 }
 
-//
-// MemSeek
-//
 static int MemSeek(void *memdata, off_t *offset, int whence)
 {
    memfile_t *mem = memdata;
@@ -178,9 +155,6 @@ static int MemSeek(void *memdata, off_t *offset, int whence)
    return 0;
 }
 
-//
-// MemClose
-//
 static int MemClose(void *memdata)
 {
    memfile_t *mem = memdata;
@@ -192,9 +166,6 @@ static int MemClose(void *memdata)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// W_Open
-//
 FILE *W_Open(__str fname, char const *rw)
 {
    __str f;
@@ -205,11 +176,7 @@ FILE *W_Open(__str fname, char const *rw)
    return __fmemopen_str(f, ACS_StrLen(f), rw);
 }
 
-//
-// Lith_NFOpen
-//
 // fopen() equivalent for netfiles.
-//
 FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 {
    FILE *fp = null;
@@ -283,11 +250,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
    return fp;
 }
 
-//
-// Lith_FWrite32
-//
 // Unpacks integers into a file stream.
-//
 size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;
@@ -303,9 +266,6 @@ size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE 
    return res;
 }
 
-//
-// Lith_FWrite_str
-//
 size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;
@@ -317,11 +277,7 @@ size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *r
    return res;
 }
 
-//
-// Lith_FRead32
-//
 // Reads packed integers from a file stream.
-//
 size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;

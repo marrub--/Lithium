@@ -6,9 +6,6 @@
 
 #include <ctype.h>
 
-//
-// Lith_GUI_TextBox_Impl
-//
 gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_args_t const *a)
 {
    gui_txtbox_state_t *st = a->st;

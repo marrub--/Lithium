@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_lolsords_Activate(struct player *p, upgrade_t *upgr)
 {
@@ -15,9 +12,6 @@ void Upgr_lolsords_Activate(struct player *p, upgrade_t *upgr)
    InvGive("Lith_Sword", 1);
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_lolsords_Deactivate(struct player *p, upgrade_t *upgr)
 {
@@ -25,9 +19,6 @@ void Upgr_lolsords_Deactivate(struct player *p, upgrade_t *upgr)
    ACS_SetWeapon(UData.origweapon);
 }
 
-//
-// Update
-//
 script
 void Upgr_lolsords_Update(struct player *p, upgrade_t *upgr)
 {

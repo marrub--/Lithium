@@ -10,9 +10,6 @@
 
 // Scripts -------------------------------------------------------------------|
 
-//
-// Lith_KeyZoom
-//
 script ext("ACS") type("net")
 void Lith_KeyZoom(int amt)
 {
@@ -31,18 +28,12 @@ void Lith_KeyZoom(int amt)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_Zoom_Deactivate(struct player *p, upgrade_t *upgr)
 {
    UData.zoom = UData.vzoom = 0;
 }
 
-//
-// Update
-//
 script
 void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 {
@@ -65,9 +56,6 @@ void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 }
 
 
-//
-// Render
-//
 stkcall
 void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 {

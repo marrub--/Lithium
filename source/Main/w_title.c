@@ -3,9 +3,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Blinker
-//
 static void Blinker(void)
 {
    static int const time = 20;
@@ -31,9 +28,6 @@ static void Blinker(void)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_Title
-//
 script
 void Lith_Title(void)
 {

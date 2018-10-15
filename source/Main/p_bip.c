@@ -21,9 +21,6 @@ struct page_init
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// DecryptBody
-//
 static __str DecryptBody(char __str_ars const *str)
 {
    ACS_BeginPrint();
@@ -32,9 +29,6 @@ static __str DecryptBody(char __str_ars const *str)
    return ACS_EndStrParam();
 }
 
-//
-// UnlockPage
-//
 static void UnlockPage(struct bip *bip, struct page *page, int pclass)
 {
    bip->pageavail++;
@@ -45,9 +39,6 @@ static void UnlockPage(struct bip *bip, struct page *page, int pclass)
       bip->unlock(page->unlocks[i], pclass);
 }
 
-//
-// AddToBIP
-//
 optargs(1)
 static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
@@ -70,9 +61,6 @@ static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init co
    if(isfree) UnlockPage(bip, page, pclass);
 }
 
-//
-// CatFromStr
-//
 stkcall
 static int CatFromStr(__str name)
 {
@@ -82,9 +70,6 @@ static int CatFromStr(__str name)
    return BIPC_NONE;
 }
 
-//
-// PClFromStr
-//
 stkcall
 static int PClFromStr(__str name)
 {
@@ -93,9 +78,6 @@ static int PClFromStr(__str name)
    return 0;
 }
 
-//
-// LoadBIPInfo
-//
 static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
 {
    struct tokbuf tb = {
@@ -160,9 +142,6 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PlayerInitBIP
-//
 script
 void Lith_PlayerInitBIP(struct player *p)
 {
@@ -188,9 +167,6 @@ void Lith_PlayerInitBIP(struct player *p)
    bip->init = true;
 }
 
-//
-// Lith_DeliverMail
-//
 script
 void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
@@ -245,9 +221,6 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    }
 }
 
-//
-// Lith_FindBIPPage
-//
 struct page *Lith_FindBIPPage(struct bip *bip, __str name)
 {
    if(!name)
@@ -260,9 +233,6 @@ struct page *Lith_FindBIPPage(struct bip *bip, __str name)
    return null;
 }
 
-//
-// Lith_UnlockBIPPage
-//
 struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 {
    struct page *page = bip->find(name);
@@ -278,18 +248,12 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
    return page;
 }
 
-//
-// Lith_BIPUnlock
-//
 script ext("ACS")
 void Lith_BIPUnlock(int pnum)
 {
    withplayer(&players[pnum]) p->bipUnlock(getmems(0, "m_infopage"));
 }
 
-//
-// Lith_DeallocateBIP
-//
 script
 void Lith_DeallocateBIP(struct bip *bip)
 {
@@ -298,9 +262,6 @@ void Lith_DeallocateBIP(struct bip *bip)
    bip->init = false;
 }
 
-//
-// Lith_GetPageInfo
-//
 struct page_info Lith_GetPageInfo(struct page const *page)
 {
    struct page_info pinf;
@@ -323,9 +284,6 @@ struct page_info Lith_GetPageInfo(struct page const *page)
    return pinf;
 }
 
-//
-// Lith_GiveMail
-//
 script ext("ACS")
 void Lith_GiveMail(int num)
 {

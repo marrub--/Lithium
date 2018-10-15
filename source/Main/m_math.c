@@ -13,9 +13,6 @@
 static u64 lmvar crctable[256]; // NB: Don't try to hash >8bit data.
 static bool lmvar crcinit;
 
-//
-// InitCRC64
-//
 static void InitCRC64()
 {
    u64 const polynomial = 0xC96C5795D7870F42; // ECMA 182
@@ -35,9 +32,6 @@ static void InitCRC64()
    crcinit = true;
 }
 
-//
-// crc64
-//
 u64 crc64(void const *data, size_t len, u64 result)
 {
    byte const *ptr = data;
@@ -52,9 +46,6 @@ u64 crc64(void const *data, size_t len, u64 result)
    return ~result;
 }
 
-//
-// crc64_str
-//
 u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
 {
    byte __str_ars const *ptr = data;
@@ -69,9 +60,6 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
    return ~result;
 }
 
-//
-// powlk
-//
 stkcall
 fixed64 powlk(fixed64 x, int y)
 {
@@ -80,36 +68,24 @@ fixed64 powlk(fixed64 x, int y)
    return z;
 }
 
-//
-// mag2lk
-//
 stkcall
 fixed64 mag2lk(fixed64 x, fixed64 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
-//
-// mag2k
-//
 stkcall
 fixed mag2k(fixed x, fixed y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
-//
-// mag2i
-//
 stkcall
 int mag2i(int x, int y)
 {
    return ACS_Sqrt(x * x + y * y);
 }
 
-//
-// lerpk
-//
 fixed lerpk(fixed a, fixed b, fixed t)
 {
    fixed ret = ((1.0k - t) * a) + (t * b);
@@ -120,9 +96,6 @@ fixed lerpk(fixed a, fixed b, fixed t)
    return ret;
 }
 
-//
-// lerplk
-//
 fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
 {
    fixed64 ret = ((1.0lk - t) * a) + (t * b);
@@ -133,18 +106,12 @@ fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
    return ret;
 }
 
-//
-// aabb
-//
 stkcall
 bool aabb(int x, int y, int z, int w, int x2, int y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }
 
-//
-// ceilk
-//
 stkcall
 int ceilk(fixed n)
 {
@@ -153,43 +120,28 @@ int ceilk(fixed n)
    else             return (int)u.a;
 }
 
-//
-// bzpolylk
-//
 stkcall
 fixed64 bzpolylk(fixed64 a, fixed64 b, fixed64 t)
 {
    return a + ((b - a) * t);
 }
 
-//
-// bzpolyi
-//
 stkcall
 int bzpolyi(int a, int b, fixed64 t)
 {
    return a + ((b - a) * t);
 }
 
-//
-// qbezierlk
-//
 struct vec2lk qbezierlk(fixed64 x1, fixed64 y1, fixed64 x2, fixed64 y2, fixed64 x3, fixed64 y3, fixed64 t)
 {
    BezierImpl(fixed64, struct vec2lk, bzpolylk);
 }
 
-//
-// qbezieri
-//
 struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, fixed64 t)
 {
    BezierImpl(int, struct vec2i, bzpolyi);
 }
 
-//
-// ctopol
-//
 struct polar ctopol(fixed x, fixed y)
 {
    return (struct polar){ACS_VectorAngle(x, y), mag2i(x, y)};

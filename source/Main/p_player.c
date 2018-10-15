@@ -24,9 +24,6 @@ script static void Lith_BossWarning(struct player *p);
 
 // Scripts -------------------------------------------------------------------|
 
-//
-// Lith_PlayerEntry
-//
 script type("enter")
 static void Lith_PlayerEntry(void)
 {
@@ -101,9 +98,6 @@ reinit:
    }
 }
 
-//
-// Lith_PlayerDeath
-//
 script type("death")
 static void Lith_PlayerDeath(void)
 {
@@ -140,27 +134,18 @@ static void Lith_PlayerDeath(void)
    }
 }
 
-//
-// Lith_PlayerRespawn
-//
 script type("respawn")
 static void Lith_PlayerRespawn(void)
 {
    LocalPlayer->reinit = true;
 }
 
-//
-// Lith_PlayerReturn
-//
 script type("return")
 static void Lith_PlayerReturn(void)
 {
    LocalPlayer->reinit = true;
 }
 
-//
-// Lith_PlayerDisconnect
-//
 script type("disconnect")
 static void Lith_PlayerDisconnect(void)
 {
@@ -188,9 +173,6 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
 GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
 
-//
-// Lith_PlayerGetNamedUpgrade
-//
 stkcall
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
 {
@@ -199,9 +181,6 @@ upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
    return upgr;
 }
 
-//
-// Lith_PlayerGetUpgradeActive
-//
 stkcall
 bool Lith_PlayerGetUpgradeActive(struct player *p, int name)
 {
@@ -209,17 +188,11 @@ bool Lith_PlayerGetUpgradeActive(struct player *p, int name)
    else                                                return false;
 }
 
-//
-// Lith_GetPlayersExtern
-//
 struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
 {
    return &players;
 }
 
-//
-// Lith_PlayerDiscriminator
-//
 stkcall
 __str Lith_PlayerDiscriminator(int pclass)
 {
@@ -235,9 +208,6 @@ __str Lith_PlayerDiscriminator(int pclass)
    return "Mod";
 }
 
-//
-// Lith_GetPlayer
-//
 struct player *Lith_GetPlayer(int tid, int ptr)
 {
    int pnum = Lith_GetPlayerNumber(tid, ptr);
@@ -245,9 +215,6 @@ struct player *Lith_GetPlayer(int tid, int ptr)
    else          return null;
 }
 
-//
-// Lith_PlayerCloseGUI
-//
 stkcall
 void Lith_PlayerCloseGUI(struct player *p)
 {
@@ -266,9 +233,6 @@ void Lith_PlayerCloseGUI(struct player *p)
    }
 }
 
-//
-// Lith_PlayerUseGUI
-//
 stkcall
 void Lith_PlayerUseGUI(struct player *p, int type)
 {
@@ -299,9 +263,6 @@ void Lith_PlayerUseGUI(struct player *p, int type)
    }
 }
 
-//
-// Lith_GiveScore
-//
 i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 {
    // Could cause division by zero
@@ -323,7 +284,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    if(vol > 0.001lk && p->getCVarI("lith_player_scoresound"))
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
 
-   //
+   // hue
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
       p->log(1, "You gained brouzouf.");
@@ -347,9 +308,6 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    return score;
 }
 
-//
-// Lith_TakeScore
-//
 stkcall
 void Lith_TakeScore(struct player *p, i96 score)
 {
@@ -367,9 +325,6 @@ void Lith_TakeScore(struct player *p, i96 score)
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Lith_BossWarning
-//
 script
 static void Lith_BossWarning(struct player *p)
 {
@@ -379,11 +334,7 @@ static void Lith_BossWarning(struct player *p)
       p->log(1, "%S", Language("LITH_LOG_BossWarn%S", p->discrim));
 }
 
-//
-// Lith_PlayerRunScripts
-//
 // Run main loop scripts.
-//
 static void Lith_PlayerRunScripts(struct player *p)
 {
    script extern void Lith_PlayerPreWeapons(struct player *p);
@@ -448,9 +399,6 @@ static void Lith_PlayerRunScripts(struct player *p)
    Lith_PlayerDebugStats(p);
 }
 
-//
-// Lith_PlayerUpdateAttributes
-//
 script
 static void Lith_PlayerUpdateAttributes(struct player *p)
 {
@@ -475,9 +423,6 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
    p->rage = lerpk(p->rage, 0, 0.02);
 }
 
-//
-// Lith_PlayerPreScore
-//
 script
 static void Lith_PlayerPreScore(struct player *p)
 {
@@ -493,9 +438,6 @@ static void Lith_PlayerPreScore(struct player *p)
       p->scoreaccumtime++;
 }
 
-//
-// Lith_PlayerPreStats
-//
 script
 static void Lith_PlayerPreStats(struct player *p)
 {

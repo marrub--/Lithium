@@ -4,9 +4,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_CPS_Print
-//
 __str Lith_CPS_Print(u32 *cps)
 {
    ACS_BeginPrint();

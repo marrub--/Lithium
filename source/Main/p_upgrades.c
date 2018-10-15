@@ -11,25 +11,16 @@ static int g_upgrmax = UPGR_BASE_MAX;
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Lith_UpgrCanBuy
-//
 static bool Lith_UpgrCanBuy(struct player *p, shopdef_t const *, void *upgr)
 {
    return !((upgrade_t *)upgr)->owned;
 }
 
-//
-// Lith_UpgrShopBuy
-//
 static void Lith_UpgrShopBuy(struct player *p, shopdef_t const *, void *upgr)
 {
    ((upgrade_t *)upgr)->setOwned(p);
 }
 
-//
-// Lith_UpgrGive
-//
 static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int tid)
 {
    upgrade_t const *upgr = upgr_;
@@ -46,9 +37,6 @@ static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int t
    return true;
 }
 
-//
-// Compg_upgrinfo
-//
 static int Compg_upgrinfo(void const *lhs, void const *rhs)
 {
    upgradeinfo_t const *u1 = lhs, *u2 = rhs;
@@ -57,9 +45,6 @@ static int Compg_upgrinfo(void const *lhs, void const *rhs)
    else        return u1->key - u2->key;
 }
 
-//
-// SetDataPtr
-//
 stkcall
 static void SetDataPtr(struct player *p, upgrade_t *upgr)
 {
@@ -68,9 +53,6 @@ static void SetDataPtr(struct player *p, upgrade_t *upgr)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_UpgradeRegister_
-//
 upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
 {
    upgradeinfo_t *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
@@ -78,9 +60,6 @@ upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
    return ui;
 }
 
-//
-// Lith_GSReinit_Upgrade
-//
 void Lith_GSReinit_Upgrade(void)
 {
    for(int i = 0; i < g_upgrmax; i++)
@@ -106,9 +85,6 @@ void Lith_GSReinit_Upgrade(void)
    }
 }
 
-//
-// Lith_GSInit_Upgrade
-//
 void Lith_GSInit_Upgrade(void)
 {
    g_upgrinfo = Calloc(g_upgrmax, sizeof(upgradeinfo_t));
@@ -126,9 +102,6 @@ void Lith_GSInit_Upgrade(void)
    Lith_GSReinit_Upgrade();
 }
 
-//
-// Lith_UpgrSetOwned
-//
 void Lith_UpgrSetOwned(struct player *p, upgrade_t *upgr)
 {
    if(upgr->owned) return;
@@ -140,9 +113,6 @@ void Lith_UpgrSetOwned(struct player *p, upgrade_t *upgr)
       upgr->toggle(p);
 }
 
-//
-// Lith_PlayerInitUpgrades
-//
 script
 void Lith_PlayerInitUpgrades(struct player *p)
 {
@@ -174,9 +144,6 @@ void Lith_PlayerInitUpgrades(struct player *p)
    #undef CheckPClass
 }
 
-//
-// Lith_PlayerDeallocUpgrades
-//
 void Lith_PlayerDeallocUpgrades(struct player *p)
 {
    upgrademap_t_dtor(&p->upgrademap);
@@ -188,9 +155,6 @@ void Lith_PlayerDeallocUpgrades(struct player *p)
    p->upgrinit = false;
 }
 
-//
-// Lith_PlayerDeinitUpgrades
-//
 void Lith_PlayerDeinitUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
@@ -198,9 +162,6 @@ void Lith_PlayerDeinitUpgrades(struct player *p)
          upgr->wasactive = true,  upgr->toggle(p);
 }
 
-//
-// Lith_PlayerReinitUpgrades
-//
 void Lith_PlayerReinitUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
@@ -208,9 +169,6 @@ void Lith_PlayerReinitUpgrades(struct player *p)
          upgr->wasactive = false, upgr->toggle(p);
 }
 
-//
-// Lith_PlayerUpdateUpgrades
-//
 script
 void Lith_PlayerUpdateUpgrades(struct player *p)
 {
@@ -222,9 +180,6 @@ void Lith_PlayerUpdateUpgrades(struct player *p)
          upgr->info->Update(p, upgr);
 }
 
-//
-// Lith_PlayerRenderUpgrades
-//
 script
 void Lith_PlayerRenderUpgrades(struct player *p)
 {
@@ -238,9 +193,6 @@ void Lith_PlayerRenderUpgrades(struct player *p)
    }
 }
 
-//
-// Lith_PlayerEnterUpgrades
-//
 void Lith_PlayerEnterUpgrades(struct player *p)
 {
    ForUpgrade(upgr)
@@ -248,9 +200,6 @@ void Lith_PlayerEnterUpgrades(struct player *p)
          upgr->info->Enter(p, upgr);
 }
 
-//
-// Lith_UpgrCanActivate
-//
 bool Lith_UpgrCanActivate(struct player *p, upgrade_t *upgr)
 {
    if(!upgr->active)
@@ -270,9 +219,6 @@ bool Lith_UpgrCanActivate(struct player *p, upgrade_t *upgr)
    return upgr->owned;
 }
 
-//
-// Lith_UpgrToggle
-//
 bool Lith_UpgrToggle(struct player *p, upgrade_t *upgr)
 {
    if(!upgr->canUse(p)) return false;

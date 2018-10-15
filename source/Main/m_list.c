@@ -6,27 +6,18 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_LinkDefault
-//
 void Lith_LinkDefault(list_t *list, void *object)
 {
    list->prev = list->next = list;
    list->object = object;
 }
 
-//
-// Lith_ListLink
-//
 void Lith_ListLink(list_t *head, list_t *list)
 {
    (list->prev = head->prev)->next = list;
    (list->next = head      )->prev = list;
 }
 
-//
-// Lith_ListUnlink
-//
 void *Lith_ListUnlink(list_t *list)
 {
    list->prev->next = list->next;
@@ -36,9 +27,6 @@ void *Lith_ListUnlink(list_t *list)
    return list->object;
 }
 
-//
-// Lith_ListSize
-//
 size_t Lith_ListSize(list_t *head)
 {
    size_t count = 0;
@@ -47,9 +35,6 @@ size_t Lith_ListSize(list_t *head)
    return count;
 }
 
-//
-// Lith_ListFree
-//
 void Lith_ListFree(list_t *head, bool dofree)
 {
    if(head->next)

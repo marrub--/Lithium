@@ -3,18 +3,12 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_UNCEUNCE_Activate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetMusic("lmusic/Unce.ogg");
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
 {
@@ -22,9 +16,6 @@ void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 
-//
-// Update
-//
 script
 void Upgr_UNCEUNCE_Update(struct player *p, upgrade_t *upgr)
 {

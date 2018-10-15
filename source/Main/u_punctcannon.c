@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PunctuatorFire
-//
 script ext("ACS")
 void Lith_PunctuatorFire(void)
 {
@@ -49,9 +46,6 @@ void Lith_PunctuatorFire(void)
    }
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_PunctCannon_Deactivate(struct player *p, upgrade_t *upgr)
 {

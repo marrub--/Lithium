@@ -2,9 +2,6 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-//
-// Lith_Obituary
-//
 script ext("ACS")
 void Lith_Obituary(void)
 {

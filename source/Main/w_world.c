@@ -27,17 +27,11 @@ static bool reopen;
 script ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force);
 
-//
-// Lith_GetWorldExtern
-//
 worldinfo_t *Lith_GetWorldExtern(void)
 {
    return &world;
 }
 
-//
-// Lith_UniqueID
-//
 int Lith_UniqueID(int tid)
 {
    int pn;
@@ -56,9 +50,6 @@ int Lith_UniqueID(int tid)
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// CheckEnemyCompat
-//
 script
 static void CheckEnemyCompat(void)
 {
@@ -86,9 +77,6 @@ static void CheckEnemyCompat(void)
    }
 }
 
-//
-// SpawnBoss
-//
 script
 static void SpawnBoss()
 {
@@ -100,9 +88,6 @@ static void SpawnBoss()
    }
 }
 
-//
-// GetDebugInfo
-//
 static void GetDebugInfo(void)
 {
    bool all = ACS_GetCVar("__lith_debug_all");
@@ -116,9 +101,6 @@ static void GetDebugInfo(void)
    world.dbgNoMon =        ACS_GetCVar("__lith_debug_nomonsters");
 }
 
-//
-// CheckModCompat
-//
 static void CheckModCompat(void)
 {
    int tid;
@@ -128,9 +110,6 @@ static void CheckModCompat(void)
    world.drlamonsters = ACS_GetCVar("DRLA_is_using_monsters");
 }
 
-//
-// UpdateGame
-//
 static void UpdateGame(void)
 {
    #define Update(n) \
@@ -155,9 +134,6 @@ static void UpdateGame(void)
    #undef Update
 }
 
-//
-// GSInit
-//
 static void GSInit(void)
 {
    extern void Lith_GInit_Shop(void);
@@ -194,9 +170,6 @@ static void GSInit(void)
       Lith_GSReinit_Upgrade();
 }
 
-//
-// MInit
-//
 static void MInit(void)
 {
    LogDebug(log_dev, "MINIT RUNNING");
@@ -223,9 +196,6 @@ static void MInit(void)
    ACS_SetAirControl(0.77);
 }
 
-//
-// MSInit
-//
 static void MSInit(void)
 {
    script
@@ -247,9 +217,6 @@ static void MSInit(void)
    }
 }
 
-//
-// WSInit
-//
 static void WSInit(void)
 {
    LogDebug(log_dev, "WSINIT RUNNING");
@@ -274,9 +241,6 @@ static void WSInit(void)
    }
 }
 
-//
-// WInit
-//
 static void WInit(void)
 {
    extern void Lith_DoPayout(void);
@@ -314,9 +278,6 @@ static void WInit(void)
          Lith_InstallCBIItem(i);
 }
 
-//
-// Lith_Finale
-//
 script ext("ACS")
 void Lith_Finale(void)
 {
@@ -326,9 +287,6 @@ void Lith_Finale(void)
 
 // Scripts -------------------------------------------------------------------|
 
-//
-// Lith_World
-//
 script type("open")
 static void Lith_World(void)
 {
@@ -463,18 +421,12 @@ begin:
    }
 }
 
-//
-// Lith_WorldReopen
-//
 script ext("ACS")
 void Lith_WorldReopen(void)
 {
    reopen = true;
 }
 
-//
-// Lith_WorldUnload
-//
 script type("unloading")
 static void Lith_WorldUnload(void)
 {

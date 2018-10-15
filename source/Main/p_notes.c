@@ -4,9 +4,6 @@
 #include "lith_world.h"
 #include "lith_gui.h"
 
-//
-// Lith_CBITab_Notes
-//
 void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
 {
    gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->notebox, 48, 40, p);

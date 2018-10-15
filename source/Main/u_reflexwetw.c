@@ -7,9 +7,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_DodgeView
-//
 script ext("ACS")
 void Lith_DodgeView()
 {
@@ -28,9 +25,6 @@ void Lith_DodgeView()
    }
 }
 
-//
-// Activate
-//
 stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
 {
@@ -39,18 +33,12 @@ void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
    UData.leaped = 0;
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->speedmul -= 0.3;
 }
 
-//
-// Update
-//
 script
 void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
 {

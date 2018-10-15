@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_GUI_Auto
-//
 stkcall
 void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide)
 {
@@ -32,9 +29,6 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
    }
 }
 
-//
-// Lith_GUI_Init
-//
 stkcall
 void Lith_GUI_Init(gui_state_t *g, void *state)
 {
@@ -42,9 +36,6 @@ void Lith_GUI_Init(gui_state_t *g, void *state)
    g->gfxprefix = ":UI:";
 }
 
-//
-// Lith_GUI_UpdateState
-//
 stkcall
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 {
@@ -77,9 +68,6 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
       g->slidetime++;
 }
 
-//
-// Lith_GUI_Begin
-//
 stkcall
 void Lith_GUI_Begin(gui_state_t *g, int w, int h)
 {
@@ -92,9 +80,6 @@ void Lith_GUI_Begin(gui_state_t *g, int w, int h)
    SetSize(g->w, g->h);
 }
 
-//
-// Lith_GUI_End
-//
 stkcall
 void Lith_GUI_End(gui_state_t *g, enum cursor curs)
 {
@@ -121,9 +106,6 @@ void Lith_GUI_End(gui_state_t *g, enum cursor curs)
       g->active = 0;
 }
 
-//
-// Lith_GUI_Clip
-//
 stkcall
 void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 {
@@ -135,9 +117,6 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
    SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);
 }
 
-//
-// Lith_GUI_ClipRelease
-//
 stkcall
 void Lith_GUI_ClipRelease(gui_state_t *g)
 {
@@ -145,9 +124,6 @@ void Lith_GUI_ClipRelease(gui_state_t *g)
    ClearClip();
 }
 
-//
-// Lith_GUI_TypeOn
-//
 stkcall
 void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
 {
@@ -156,9 +132,6 @@ void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
    typeon->pos = 0;
 }
 
-//
-// Lith_RemoveTextColors
-//
 stkcall
 __str Lith_RemoveTextColors(__str str, int size)
 {
@@ -188,9 +161,6 @@ __str Lith_RemoveTextColors(__str str, int size)
    return l_strncpy(buf, j);
 }
 
-//
-// Lith_GUI_TypeOnUpdate
-//
 stkcall
 gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon)
 {

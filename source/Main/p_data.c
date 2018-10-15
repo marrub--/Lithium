@@ -7,9 +7,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// SetupAttributes
-//
 static void SetupAttributes(struct player *p)
 {
    p->attr.names[at_acc] = "ACC";
@@ -32,9 +29,6 @@ static void SetupAttributes(struct player *p)
    p->attr.level = 1;
 }
 
-//
-// SetupInventory
-//
 static void SetupInventory(struct player *p)
 {
    static container_t const baseinv[] = {
@@ -55,9 +49,6 @@ static void SetupInventory(struct player *p)
    p->misc.user = p;
 }
 
-//
-// SetPClass
-//
 static void SetPClass(struct player *p)
 {
    __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
@@ -78,18 +69,12 @@ static void SetPClass(struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_ButtonPressed
-//
 stkcall
 bool Lith_ButtonPressed(struct player *p, int bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
 
-//
-// Lith_SetPlayerVelocity
-//
 stkcall
 bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add)
 {
@@ -101,9 +86,6 @@ bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, true);
 }
 
-//
-// Lith_ValidatePlayerTID
-//
 void Lith_ValidatePlayerTID(struct player *p)
 {
    if(ACS_ActivatorTID() == 0) {
@@ -115,11 +97,7 @@ void Lith_ValidatePlayerTID(struct player *p)
    }
 }
 
-//
-// Lith_PlayerUpdateData
-//
 // Update all of the player's data.
-//
 script
 void Lith_PlayerUpdateData(struct player *p)
 {
@@ -171,9 +149,6 @@ void Lith_PlayerUpdateData(struct player *p)
    p->kbs = InvNum("BlueSkull");
 }
 
-//
-// Lith_KeyDown
-//
 script ext("ACS")
 void Lith_KeyDown(int pnum, int ch)
 {
@@ -182,9 +157,6 @@ void Lith_KeyDown(int pnum, int ch)
          p->txtbuf[p->tbptr++] = ch;
 }
 
-//
-// LevelUp
-//
 script
 static void LevelUp(struct player *p, u32 attr[at_max])
 {
@@ -219,9 +191,6 @@ static void LevelUp(struct player *p, u32 attr[at_max])
    p->attr.lvupstr = strnull;
 }
 
-//
-// Lith_GiveEXP
-//
 stkcall
 void Lith_GiveEXP(struct player *p, u64 amt)
 {
@@ -245,11 +214,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
    a->exp += amt;
 }
 
-//
-// Lith_ResetPlayer
-//
 // Reset some things on the player when they spawn.
-//
 script
 void Lith_ResetPlayer(struct player *p)
 {
@@ -381,9 +346,6 @@ void Lith_ResetPlayer(struct player *p)
    }
 }
 
-//
-// Lith_PlayerUpdateStats
-//
 stkcall
 void Lith_PlayerUpdateStats(struct player *p)
 {

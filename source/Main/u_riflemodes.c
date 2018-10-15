@@ -3,9 +3,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_SwitchRifleMode
-//
 script ext("ACS")
 void Lith_SwitchRifleFiremode(void)
 {
@@ -16,9 +13,6 @@ void Lith_SwitchRifleFiremode(void)
    }
 }
 
-//
-// Lith_ResetRifleMode
-//
 script ext("ACS")
 void Lith_ResetRifleMode()
 {
@@ -27,18 +21,12 @@ void Lith_ResetRifleMode()
          p->riflefiremode = 0;
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_RifleModes_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->riflefiremode = 0;
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
 {

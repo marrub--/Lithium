@@ -52,9 +52,6 @@ static i96 scorethreshold = 1000000;
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Lith_SpawnBossReward
-//
 static void Lith_SpawnBossReward(void)
 {
    int x = ACS_GetActorX(0);
@@ -72,9 +69,6 @@ static void Lith_SpawnBossReward(void)
    }
 }
 
-//
-// Lith_TriggerBoss
-//
 static void Lith_TriggerBoss(void)
 {
    static bool firstboss = true;
@@ -107,9 +101,6 @@ static void Lith_TriggerBoss(void)
    }
 }
 
-//
-// CheckDead
-//
 static bool CheckDead(struct boss *b, int num)
 {
    for(int i = 0; i < num; i++)
@@ -119,18 +110,12 @@ static bool CheckDead(struct boss *b, int num)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PhantomSound
-//
 script ext("ACS")
 void Lith_PhantomSound(void)
 {
    ACS_AmbientSound("enemies/phantom/spawned", 127);
 }
 
-//
-// Lith_PhantomTeleport
-//
 script ext("ACS")
 void Lith_PhantomTeleport(void)
 {
@@ -144,9 +129,6 @@ void Lith_PhantomTeleport(void)
    }
 }
 
-//
-// Lith_PhantomDeath
-//
 script ext("ACS")
 void Lith_PhantomDeath(void)
 {
@@ -190,9 +172,6 @@ void Lith_PhantomDeath(void)
    world.bossspawned = false;
 }
 
-//
-// Lith_SpawnBoss
-//
 script ext("ACS")
 void Lith_SpawnBoss(void)
 {
@@ -209,9 +188,6 @@ void Lith_SpawnBoss(void)
    world.bossspawned = true;
 }
 
-//
-// Lith_TriggerBoss_Script
-//
 script addr("Lith_TriggerBoss") optargs(1)
 void Lith_TriggerBoss_Script(int diff, int num, int phase)
 {
@@ -228,9 +204,6 @@ void Lith_TriggerBoss_Script(int diff, int num, int phase)
    Lith_TriggerBoss();
 }
 
-//
-// Lith_SpawnBosses
-//
 script ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force)
 {

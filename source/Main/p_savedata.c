@@ -7,9 +7,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_SaveWriteChunk
-//
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size)
 {
    if(world.dbgSave)
@@ -17,9 +14,6 @@ void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t s
    Lith_FWrite32(&(savechunk_t){iden, vers & Save_VersMask, size}, sizeof(savechunk_t), 4, save->fp);
 }
 
-//
-// Lith_SaveBegin
-//
 savefile_t *Lith_SaveBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
@@ -35,9 +29,6 @@ savefile_t *Lith_SaveBegin(struct player *p)
    return null;
 }
 
-//
-// Lith_SaveEnd
-//
 script
 void Lith_SaveEnd(savefile_t *save)
 {
@@ -46,9 +37,6 @@ void Lith_SaveEnd(savefile_t *save)
    Dalloc(save);
 }
 
-//
-// Lith_LoadChunk
-//
 int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t chunker)
 {
    rewind(save->fp);
@@ -84,9 +72,6 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
    return -1;
 }
 
-//
-// Lith_LoadBegin
-//
 savefile_t *Lith_LoadBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
@@ -109,9 +94,6 @@ savefile_t *Lith_LoadBegin(struct player *p)
    return null;
 }
 
-//
-// Lith_LoadEnd
-//
 void Lith_LoadEnd(savefile_t *save)
 {
    fclose(save->fp);

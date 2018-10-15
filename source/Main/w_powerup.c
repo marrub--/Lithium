@@ -5,9 +5,6 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
-//
-// Lith_DOGS
-//
 script ext("ACS")
 void Lith_DOGS()
 {
@@ -35,9 +32,6 @@ void Lith_DOGS()
    }
 }
 
-//
-// Lith_SteggleEnergy
-//
 script ext("ACS")
 void Lith_SteggleEnergy()
 {
@@ -63,9 +57,6 @@ void Lith_SteggleEnergy()
    }
 }
 
-//
-// Lith_Barrier
-//
 script ext("ACS")
 void Lith_Barrier()
 {
@@ -76,9 +67,6 @@ void Lith_Barrier()
    }
 }
 
-//
-// Lith_BarrierBullets
-//
 script ext("ACS")
 void Lith_BarrierBullets()
 {
@@ -96,9 +84,6 @@ void Lith_BarrierBullets()
    }
 }
 
-//
-// Lith_BarrierCheck
-//
 script ext("ACS")
 bool Lith_BarrierCheck()
 {
@@ -106,9 +91,6 @@ bool Lith_BarrierCheck()
    return ACS_CheckFlag(0, "COUNTKILL");
 }
 
-//
-// Lith_GetSigil
-//
 script ext("ACS")
 void Lith_GetSigil()
 {

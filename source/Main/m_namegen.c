@@ -7,9 +7,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_RandomName
-//
 __str Lith_RandomName(int id)
 {
    static __str syllables[] = {

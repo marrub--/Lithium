@@ -6,9 +6,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// GiveWeaponItem
-//
 static void GiveWeaponItem(int parm, int slot)
 {
    switch(parm)
@@ -26,9 +23,6 @@ static void GiveWeaponItem(int parm, int slot)
    }
 }
 
-//
-// WeaponGrab
-//
 static void WeaponGrab(struct player *p, weaponinfo_t const *info)
 {
    if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound, 127);
@@ -45,9 +39,6 @@ static void WeaponGrab(struct player *p, weaponinfo_t const *info)
    }
 }
 
-//
-// Lith_PickupScore
-//
 static void Lith_PickupScore(struct player *p, int parm)
 {
    extern void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score);
@@ -64,18 +55,12 @@ static void Lith_PickupScore(struct player *p, int parm)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_PlayerCurWeaponType
-//
 stkcall
 int Lith_PlayerCurWeaponType(struct player *p)
 {
    return p->weapon.cur->info->type;
 }
 
-//
-// Lith_WeaponPickup
-//
 script ext("ACS")
 bool Lith_WeaponPickup(int name)
 {
@@ -119,9 +104,6 @@ bool Lith_WeaponPickup(int name)
    }
 }
 
-//
-// Lith_CircleSpread
-//
 script ext("ACS")
 fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 {
@@ -143,9 +125,6 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
       return P;
 }
 
-//
-// Lith_ChargeFistDamage
-//
 script ext("ACS")
 int Lith_ChargeFistDamage()
 {
@@ -154,9 +133,6 @@ int Lith_ChargeFistDamage()
    return amount * ACS_Random(1, 3);
 }
 
-//
-// Lith_GSInit_Weapon
-//
 void Lith_GSInit_Weapon(void)
 {
    for(int i = 0; i < weapon_max; i++)
@@ -166,11 +142,7 @@ void Lith_GSInit_Weapon(void)
    }
 }
 
-//
-// Lith_PlayerPreWeapons
-//
 // Update information on what weapons we have.
-//
 script
 void Lith_PlayerPreWeapons(struct player *p)
 {
@@ -250,9 +222,6 @@ void Lith_PlayerPreWeapons(struct player *p)
    if(!w->cur) w->cur = &w->inv[weapon_unknown];
 }
 
-//
-// Lith_PlayerUpdateWeapons
-//
 script
 void Lith_PlayerUpdateWeapons(struct player *p)
 {
@@ -287,9 +256,6 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    }
 }
 
-//
-// Lith_AmmoRunOut
-//
 script ext("ACS")
 fixed Lith_AmmoRunOut(bool ro, fixed mul)
 {
@@ -309,9 +275,6 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
    return 0;
 }
 
-//
-// Lith_GetFinalizerMaxHealth
-//
 script ext("ACS")
 int Lith_GetFinalizerMaxHealth(void)
 {
@@ -323,9 +286,6 @@ int Lith_GetFinalizerMaxHealth(void)
       return sh;
 }
 
-//
-// Lith_SurgeOfDestiny
-//
 script ext("ACS")
 void Lith_SurgeOfDestiny(void)
 {
@@ -335,9 +295,6 @@ void Lith_SurgeOfDestiny(void)
    }
 }
 
-//
-// Lith_GetWRF
-//
 script ext("ACS")
 int Lith_GetWRF(void)
 {
@@ -371,9 +328,6 @@ int Lith_GetWRF(void)
    return flags;
 }
 
-//
-// Lith_PoisonFXTicker
-//
 script ext("ACS")
 void Lith_PoisonFXTicker()
 {
@@ -403,9 +357,6 @@ void Lith_PoisonFXTicker()
    }
 }
 
-//
-// Lith_RecoilUp
-//
 script ext("ACS")
 void Lith_RecoilUp(fixed amount)
 {

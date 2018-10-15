@@ -2,12 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-//
-// Lith_GUI_ScrollBegin_Impl
-//
 // This function is excessively commented in case I need to change it.
 // Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
-//
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const *a)
 {
    gui_scroll_preset_t const *pre = a->preset ? a->preset : &guipre.scrdef;
@@ -140,9 +136,6 @@ void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const 
    Lith_GUI_Clip(g, x, ory, a->w, realh, a->ww);
 }
 
-//
-// Lith_GUI_ScrollEnd
-//
 void Lith_GUI_ScrollEnd(gui_state_t *g, gui_scroll_state_t *scr)
 {
    // reset offsets
@@ -153,9 +146,6 @@ void Lith_GUI_ScrollEnd(gui_state_t *g, gui_scroll_state_t *scr)
    Lith_GUI_ClipRelease(g);
 }
 
-//
-// Lith_GUI_ScrollOcclude
-//
 bool Lith_GUI_ScrollOcclude(gui_state_t *g, gui_scroll_state_t const *scr, int y, int h)
 {
    return y > scr->occludeE || (h && (y + h) - scr->occludeS < 0);

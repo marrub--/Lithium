@@ -3,18 +3,12 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
-//
-// Lith_Timer
-//
 script ext("ACS")
 int Lith_Timer(void)
 {
    return ACS_Timer();
 }
 
-//
-// Lith_CanonTime
-//
 __str Lith_CanonTime(int type)
 {
    int s = 53 + (world.ticks / 35);
@@ -42,9 +36,6 @@ __str Lith_CanonTime(int type)
    return "invalid";
 }
 
-//
-// Lith_FreezeTime
-//
 stkcall
 void Lith_FreezeTime(bool on)
 {

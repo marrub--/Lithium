@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
 {
@@ -15,9 +12,6 @@ void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
    InvTake("Lith_StealthSystem", 1);
 }
 
-//
-// Update
-//
 script
 void Upgr_StealthSys_Update(struct player *p, upgrade_t *upgr)
 {

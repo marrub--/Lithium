@@ -85,9 +85,6 @@ GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
 #define functable_t_KeyCmp(l, r) (strcmp(l, r))
 GDCC_HashMap_Defn(functable_t, char const *, struct dlgfunc)
 
-//
-// StrName
-//
 static int StrName(char const *s)
 {
    ifauto(struct strent *, e, stbl.find(s))
@@ -96,9 +93,6 @@ static int StrName(char const *s)
       return STR_NULL;
 }
 
-//
-// NextCode
-//
 static int *NextCode(struct pstate *d)
 {
    Vec_GrowN(d->def->code, 1, 32);
@@ -112,9 +106,6 @@ static int *NextCode(struct pstate *d)
    else if(argv[0].s == "d") *d->nextCode() = DCD_##code##_D; \
    else
 
-//
-// GenCode_Trace
-//
 static void GenCode_Trace(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(TRACE)
@@ -124,9 +115,6 @@ static void GenCode_Trace(struct pstate *d, union arg *argv, int argc)
    }
 }
 
-//
-// GenCode_Push
-//
 static void GenCode_Push(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(PUSH)
@@ -136,9 +124,6 @@ static void GenCode_Push(struct pstate *d, union arg *argv, int argc)
    }
 }
 
-//
-// GenCode_Pop
-//
 static void GenCode_Pop(struct pstate *d, union arg *argv, int argc)
 {
    GenCode_Reg(POP)
@@ -171,20 +156,13 @@ GenCode_Arith(RSH)
 
 #undef GenCode_Arith
 
-//
-// GenCode_Generic
-//
 static void GenCode_Generic(struct pstate *d, union arg *argv, int argc)
 {
    for(int i = 0; i < argc; i++)
       *d->nextCode() = argv[i].i;
 }
 
-//
-// GetCode_Cond
-//
 // Parses and generates code for a conditional statement.
-//
 static void GetCode_Cond(struct pstate *d)
 {
    int code = DCD_NOP;
@@ -253,11 +231,7 @@ static void GetCode_Cond(struct pstate *d)
    if(ptr) d->def->codeV[ptr] = d->def->codeC;
 }
 
-//
-// GetCode_Option
-//
 // Parses and generates code for an option statement.
-//
 static void GetCode_Option(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -281,22 +255,14 @@ static void GetCode_Option(struct pstate *d)
    if(ptr) d->def->codeV[ptr] = d->def->codeC;
 }
 
-//
-// GetCode_Exec
-//
 // Parses and generates code for an exec statement.
-//
 static void GetCode_Exec(struct pstate *d)
 {
    *d->nextCode() = DCD_TRMWAIT;
    GetStatement(d);
 }
 
-//
-// GetCode_Generic
-//
 // Parses and generates code for a generic statement.
-//
 static void GetCode_Generic(struct pstate *d)
 {
    struct token *tok = d->tb.reget();
@@ -356,20 +322,13 @@ static void GetCode_Generic(struct pstate *d)
    func->genCode(d, argv, argc);
 }
 
-//
-// GetCode_Text
-//
 static void GetCode_Text(struct pstate *d, struct token *tok, int code)
 {
    *d->nextCode() = code;
    *d->nextCode() = (int)Lith_TokStr(tok);
 }
 
-//
-// GetCode_Line
-//
 // Parse and generate a line of code.
-//
 static void GetCode_Line(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -395,22 +354,14 @@ static void GetCode_Line(struct pstate *d)
    }
 }
 
-//
-// GetBlock
-//
 // Parse and generate a block statement.
-//
 static void GetBlock(struct pstate *d)
 {
    while(!d->tb.drop(tok_bracec) && !d->tb.drop(tok_eof))
       GetStatement(d);
 }
 
-//
-// GetConcatBlock
-//
 // Parse and generate a concat block statement.
-//
 static void GetConcatBlock(struct pstate *d)
 {
    *d->nextCode() = DCD_CONCAT;
@@ -419,11 +370,7 @@ static void GetConcatBlock(struct pstate *d)
    *d->nextCode() = DCD_CONCATEND;
 }
 
-//
-// GetStatement
-//
 // Parse and generate a statement.
-//
 static void GetStatement(struct pstate *d)
 {
         if(d->tb.drop(tok_braceo)) GetBlock(d);
@@ -431,9 +378,6 @@ static void GetStatement(struct pstate *d)
    else                            GetCode_Line(d);
 }
 
-//
-// SetupDialogue
-//
 static void SetupDialogue(struct pstate *d, int num)
 {
    struct dlgdef *last = d->def;
@@ -447,9 +391,6 @@ static void SetupDialogue(struct pstate *d, int num)
    LogDebug(log_dlg, "set up dialogue %i", num);
 }
 
-//
-// GetDecl_Dialogue
-//
 static void GetDecl_Dialogue(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -463,9 +404,6 @@ static void GetDecl_Dialogue(struct pstate *d)
    }
 }
 
-//
-// GetDecl_Terminal
-//
 static void GetDecl_Terminal(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -479,9 +417,6 @@ static void GetDecl_Terminal(struct pstate *d)
    }
 }
 
-//
-// SetupPage
-//
 static void SetupPage(struct pstate *d, int num)
 {
    d->def->pages[num] = d->def->codeC;
@@ -489,9 +424,6 @@ static void SetupPage(struct pstate *d, int num)
    LogDebug(log_dlg, "--- page %i (%i)", num, d->def->codeC);
 }
 
-//
-// GetDecl_Page
-//
 static void GetDecl_Page(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -507,9 +439,6 @@ static void GetDecl_Page(struct pstate *d)
    *d->nextCode() = DCD_DIE;
 }
 
-//
-// GetDecl_TrmPage
-//
 static void GetDecl_TrmPage(struct pstate *d, int num)
 {
    SetupPage(d, num);
@@ -520,12 +449,8 @@ static void GetDecl_TrmPage(struct pstate *d, int num)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_GSInit_Dialogue
-//
 // Loads all string indices into the global stbl, and all function
 // prototypes into the global ftbl.
-//
 void Lith_GSInit_Dialogue(void)
 {
    #pragma GDCC STRENT_LITERAL OFF
@@ -600,9 +525,6 @@ void Lith_GSInit_Dialogue(void)
    }
 }
 
-//
-// Lith_LoadMapDialogue
-//
 void Lith_LoadMapDialogue(void)
 {
    // Free any previous dialogue definitions.

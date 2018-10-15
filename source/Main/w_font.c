@@ -22,9 +22,6 @@ typedef groupdata   *planedata[nplanes];
 
 static planedata *planes;
 
-//
-// AllocFontMetric
-//
 stkcall
 static struct glyph *AllocFontMetric(uint key)
 {
@@ -41,9 +38,6 @@ static struct glyph *AllocFontMetric(uint key)
    return                 &(**glyphs)[key                       % nglyphs ];
 }
 
-//
-// Lith_GetFontMetric
-//
 script ext("ACS")
 struct glyph *Lith_GetFontMetric(uint key)
 {
@@ -53,9 +47,6 @@ struct glyph *Lith_GetFontMetric(uint key)
    return             &(*glyphs)[key                       % nglyphs ];
 }
 
-//
-// Lith_SetFontMetric
-//
 script ext("ACS")
 void Lith_SetFontMetric(uint key, int xadv, int yofs)
 {

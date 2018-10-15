@@ -13,9 +13,6 @@ int   dbgstatnum,  dbgnotenum;
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// SetInventory
-//
 stkcall
 static void SetInventory(__str item, int amount)
 {
@@ -24,9 +21,6 @@ static void SetInventory(__str item, int amount)
    else if(s > 0) InvGive(item,  s);
 }
 
-//
-// SetActorInventory
-//
 stkcall
 static void SetActorInventory(int tid, __str item, int amount)
 {
@@ -37,18 +31,12 @@ static void SetActorInventory(int tid, __str item, int amount)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_DumpAlloc
-//
 script
 void Lith_DumpAlloc(void)
 {
    __GDCC__alloc_dump();
 }
 
-//
-// Lith_FadeFlash
-//
 stkcall
 void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
 {
@@ -56,9 +44,6 @@ void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds)
    ACS_FadeTo(r, g, b, 0.0, seconds);
 }
 
-//
-// Lith_GetTID
-//
 script
 int Lith_GetTID(int tid, int ptr)
 {
@@ -67,9 +52,6 @@ int Lith_GetTID(int tid, int ptr)
    return ACS_ActivatorTID();
 }
 
-//
-// Lith_GetPlayerNumber
-//
 script
 int Lith_GetPlayerNumber(int tid, int ptr)
 {
@@ -78,9 +60,6 @@ int Lith_GetPlayerNumber(int tid, int ptr)
    return ACS_PlayerNumber();
 }
 
-//
-// Lith_ValidPointer
-//
 script
 bool Lith_ValidPointer(int tid, int ptr)
 {
@@ -90,9 +69,6 @@ bool Lith_ValidPointer(int tid, int ptr)
       return true;
 }
 
-//
-// Lith_SetPointer
-//
 script
 bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags)
 {
@@ -101,9 +77,6 @@ bool Lith_SetPointer(int tid, int ptr, int assign, int tid2, int ptr2, int flags
    return ACS_SetPointer(assign, tid2, ptr2, flags);
 }
 
-//
-// Lith_CheckActorInventory
-//
 stkcall
 int Lith_CheckActorInventory(int tid, __str item)
 {
@@ -111,9 +84,6 @@ int Lith_CheckActorInventory(int tid, __str item)
    else         return ACS_CheckActorInventory(tid, item);
 }
 
-//
-// Lith_GiveActorInventory
-//
 stkcall
 void Lith_GiveActorInventory(int tid, __str item, int amount)
 {
@@ -121,9 +91,6 @@ void Lith_GiveActorInventory(int tid, __str item, int amount)
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
-//
-// Lith_TakeActorInventory
-//
 stkcall
 void Lith_TakeActorInventory(int tid, __str item, int amount)
 {
@@ -131,9 +98,6 @@ void Lith_TakeActorInventory(int tid, __str item, int amount)
    else         ACS_TakeActorInventory(tid, item, amount);
 }
 
-//
-// Lith_SetActorInventory
-//
 stkcall
 void Lith_SetActorInventory(int tid, __str item, int amount)
 {
@@ -141,9 +105,6 @@ void Lith_SetActorInventory(int tid, __str item, int amount)
    else         SetActorInventory(tid, item, amount);
 }
 
-//
-// Lith_DebugStat
-//
 void Lith_DebugStat(__str fmt, ...)
 {
    if(!(world.dbgLevel & log_devh)) return;
@@ -159,9 +120,6 @@ void Lith_DebugStat(__str fmt, ...)
    dbgstat[dbgstatnum++] = ACS_EndStrParam();
 }
 
-//
-// Lith_DebugNote
-//
 void Lith_DebugNote(__str fmt, ...)
 {
    if(!(world.dbgLevel & log_devh)) return;

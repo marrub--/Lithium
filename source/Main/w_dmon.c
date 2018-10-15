@@ -18,17 +18,11 @@ int dmonarr dmonid;
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// PrintDmonAllocSize
-//
 void PrintDmonAllocSize(struct player *p)
 {
    p->logH(1, "dmonalloc is %.2k megabytes!", (sizeof(dmonalloc) * 4) / 1024 / 1024.0);
 }
 
-//
-// DmonDebugInfo
-//
 void DmonDebugInfo(void)
 {
    static int lmvar idprev;
@@ -57,9 +51,6 @@ void DmonDebugInfo(void)
    idprev = dmonid;
 }
 
-//
-// DmonPtr
-//
 script
 dmon_t *DmonPtr(int tid, int ptr)
 {
@@ -67,9 +58,6 @@ dmon_t *DmonPtr(int tid, int ptr)
    return DmonSelf();
 }
 
-//
-// DmonSelf
-//
 stkcall
 dmon_t *DmonSelf(void)
 {
@@ -77,9 +65,6 @@ dmon_t *DmonSelf(void)
    else                                      return null;
 }
 
-//
-// Dmon
-//
 stkcall
 dmon_t *Dmon(int id)
 {
@@ -87,9 +72,6 @@ dmon_t *Dmon(int id)
    else                     return null;
 }
 
-//
-// AllocDmon
-//
 dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];

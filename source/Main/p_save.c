@@ -6,18 +6,12 @@
 
 // Chunk "note" --------------------------------------------------------------|
 
-//
-// note_Len
-//
 static u32 note_Len(__str s)
 {
    u32 len = ACS_StrLen(s);
    return len > 255 ? 255 : len;
 }
 
-//
-// Lith_Save_note
-//
 script
 static void Lith_Save_note(savefile_t *save)
 {
@@ -37,9 +31,6 @@ static void Lith_Save_note(savefile_t *save)
    }
 }
 
-//
-// Lith_Load_note
-//
 script
 static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 {
@@ -55,9 +46,6 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 
 // Chunk "fun0" --------------------------------------------------------------|
 
-//
-// Lith_Save_fun0
-//
 script
 static void Lith_Save_fun0(savefile_t *save)
 {
@@ -66,9 +54,6 @@ static void Lith_Save_fun0(savefile_t *save)
    fputc(save->p->fun, save->fp);
 }
 
-//
-// Lith_Load_fun0
-//
 script
 static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
 {
@@ -77,9 +62,6 @@ static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_SetFun
-//
 script ext("ACS")
 void Lith_SetFun(int fun)
 {
@@ -90,9 +72,6 @@ void Lith_SetFun(int fun)
    }
 }
 
-//
-// Lith_PlayerSaveData
-//
 script
 void Lith_PlayerSaveData(struct player *p)
 {
@@ -106,9 +85,6 @@ void Lith_PlayerSaveData(struct player *p)
    }
 }
 
-//
-// Lith_PlayerLoadData
-//
 script
 void Lith_PlayerLoadData(struct player *p)
 {

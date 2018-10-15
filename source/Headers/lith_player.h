@@ -83,11 +83,7 @@ enum
    GUI_MAX
 };
 
-//
-// player_delta
-//
 // Data that needs to be kept track of between frames.
-//
 struct player_delta
 {
    // Status
@@ -152,9 +148,6 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 
 // Types ---------------------------------------------------------------------|
 
-//
-// struct player
-//
 //       7/4/2016: That's a lot of data!
 // edit  9/4/2016: Holy shit, that's really a lot of data!
 // edit  7/5/2016: JESUS TAKE THE WHEEL
@@ -166,7 +159,6 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 // edit 11/7/2017: and now it's over 5000 bytes.
 // edit 14/7/2017: lol nevermind it's only 2kb now
 // edit 31/8/2017: m e r g e
-//
 struct player
 {
    // state

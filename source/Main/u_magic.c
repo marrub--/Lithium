@@ -29,18 +29,12 @@ static struct magic_info const minf[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// GiveMagic
-//
 script
 static void GiveMagic(struct magic_info const *m)
 {
    ACS_SetWeapon(m->classname);
 }
 
-//
-// UpdateMagicUI
-//
 script
 static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 {
@@ -83,9 +77,6 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
    Lith_GUI_End(g, gui_curs_outline);
 }
 
-//
-// GivePlayerZ
-//
 script
 static void GivePlayerZ(int tid, struct player *p, __str name)
 {
@@ -97,9 +88,6 @@ static void GivePlayerZ(int tid, struct player *p, __str name)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_SetMagicUI
-//
 script ext("ACS")
 void Lith_SetMagicUI(bool on)
 {
@@ -132,9 +120,6 @@ void Lith_SetMagicUI(bool on)
    }
 }
 
-//
-// Update
-//
 script
 void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 {
@@ -171,9 +156,6 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
    }
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
 {

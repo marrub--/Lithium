@@ -30,9 +30,6 @@ static struct cupgdef const cdefs[] = {
    {pC, cupg_c_rdistinter, "CRDistInter"            },
 };
 
-//
-// GetCUpgr
-//
 struct cupgdef const *GetCUpgr(int pclass, int num)
 {
    for(int i = 0; i < countof(cdefs); i++) {
@@ -43,9 +40,6 @@ struct cupgdef const *GetCUpgr(int pclass, int num)
    return null;
 }
 
-//
-// Lith_InstallCBIItem
-//
 script
 void Lith_InstallCBIItem(int num)
 {
@@ -75,27 +69,18 @@ void Lith_InstallCBIItem(int num)
    }
 }
 
-//
-// Lith_InstallSpawnedCBIItems
-//
 void Lith_InstallSpawnedCBIItems(void)
 {
    for(int i = 0; i < cbispawniter; i++)
       Lith_InstallCBIItem(cbispawn[i]);
 }
 
-//
-// Lith_CBIItemWasSpawned
-//
 script ext("ACS")
 void Lith_CBIItemWasSpawned(int num)
 {
    cbispawn[cbispawniter++] = num;
 }
 
-//
-// Lith_PickupCBIItem
-//
 script ext("ACS")
 void Lith_PickupCBIItem(int num)
 {

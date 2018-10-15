@@ -4,9 +4,6 @@
 #include "lith_bip.h"
 #include "lith_list.h"
 
-//
-// SetCurPage
-//
 static void SetCurPage(gui_state_t *g, struct bip *bip, struct page *page, __str body)
 {
    bip->curpage = page;
@@ -15,9 +12,6 @@ static void SetCurPage(gui_state_t *g, struct bip *bip, struct page *page, __str
    Lith_GUI_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
-//
-// CheckMatch
-//
 script
 static bool CheckMatch(struct page_info *pinf, __str query)
 {
@@ -26,9 +20,6 @@ static bool CheckMatch(struct page_info *pinf, __str query)
           strcasestr_str(pinf->body,   query);
 }
 
-//
-// Lith_CBITab_BIP
-//
 void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 {
    struct bip *bip = &p->bip;

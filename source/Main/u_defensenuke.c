@@ -3,9 +3,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Enter
-//
 stkcall
 void Upgr_DefenseNuke_Enter(struct player *p, upgrade_t *upgr)
 {

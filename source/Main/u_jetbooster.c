@@ -7,18 +7,12 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_JetBooster_Activate(struct player *p, upgrade_t *upgr)
 {
    UData.charge = CHARGE_MAX;
 }
 
-//
-// Update
-//
 script
 void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 {
@@ -42,9 +36,6 @@ void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
    }
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
 {

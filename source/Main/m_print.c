@@ -20,9 +20,6 @@
       ACS_MoreHudMessage(); \
    } while(0)
 
-//
-// DrawSprite
-//
 stkcall
 void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 {
@@ -31,9 +28,6 @@ void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
    ACS_EndHudMessage();
 }
 
-//
-// DrawSpriteX
-//
 stkcall
 void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
 {
@@ -42,9 +36,6 @@ void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fi
    ACS_EndHudMessage(a1);
 }
 
-//
-// DrawSpriteXX
-//
 stkcall
 void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
 {
@@ -53,9 +44,6 @@ void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, f
    ACS_EndHudMessage(a1, a2);
 }
 
-//
-// DrawSpriteXXX
-//
 stkcall
 void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
 {
@@ -64,9 +52,6 @@ void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, 
    ACS_EndHudMessage(a1, a2, a3);
 }
 
-//
-// DrawSpritePlain
-//
 stkcall
 void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 {
@@ -75,9 +60,6 @@ void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
    ACS_EndHudMessage();
 }
 
-//
-// DrawSpriteAlpha
-//
 stkcall
 void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
 {
@@ -86,9 +68,6 @@ void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alp
    ACS_EndHudMessage(alpha);
 }
 
-//
-// DrawSpriteFade
-//
 stkcall
 void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
 {
@@ -97,9 +76,6 @@ void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fade
    ACS_EndHudMessage(fadetime);
 }
 
-//
-// HudMessage
-//
 void HudMessage(__str fmt, ...)
 {
    va_list vl;
@@ -113,9 +89,6 @@ void HudMessage(__str fmt, ...)
    ACS_MoreHudMessage();
 }
 
-//
-// Log
-//
 void Log(__str fmt, ...)
 {
    va_list vl;

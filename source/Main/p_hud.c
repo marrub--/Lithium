@@ -5,9 +5,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_HUD_WeaponSlots_Impl
-//
 void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 {
    if(p->getCVarI("lith_hud_showweapons"))
@@ -31,9 +28,6 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-//
-// Lith_HUD_Score
-//
 void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr, int x, int xa, int y, int ya)
 {
    if(p->getCVarI("lith_hud_showscore"))
@@ -73,9 +67,6 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
    }
 }
 
-//
-// Lith_HUD_KeyInd
-//
 void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
 {
    #define Inc (horz ? (x -= 10) : (y += 10))
@@ -88,9 +79,6 @@ void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
    #undef Inc
 }
 
-//
-// Lith_HUD_Log
-//
 script
 void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
 {

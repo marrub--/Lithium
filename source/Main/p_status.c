@@ -5,9 +5,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// AttrBar
-//
 static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
 {
    Lith_GUI_Clip(g, x, y, w * 4, 8);
@@ -15,9 +12,6 @@ static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
    Lith_GUI_ClipRelease(g);
 }
 
-//
-// DrawAttr
-//
 static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 {
    u32   attr = p->attr.attrs[at];
@@ -53,9 +47,6 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    PrintText("chfont", CR_WHITE, x+202,1, y,1);
 }
 
-//
-// StatusInfo
-//
 static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 {
    PrintTextStr(left);
@@ -66,9 +57,6 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_CBITab_Status
-//
 void Lith_CBITab_Status(gui_state_t *g, struct player *p)
 {
    int x = 30, y = 40;

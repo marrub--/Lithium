@@ -8,9 +8,6 @@ static fixed lmvar rain_px;
 static fixed lmvar rain_py;
 static int   lmvar rain_dist;
 
-//
-// DoRain
-//
 script
 void Lith_DoRain()
 {
@@ -53,9 +50,6 @@ void Lith_DoRain()
    }
 }
 
-//
-// Lith_RainDropSpawn
-//
 script ext("ACS")
 void Lith_RainDropSpawn()
 {

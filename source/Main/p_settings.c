@@ -110,9 +110,6 @@ if(p->num == 0) {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// ColorName
-//
 static __str ColorName(char ch)
 {
    static __str const colors[] = {
@@ -126,9 +123,6 @@ static __str ColorName(char ch)
    else                     return colors[ch - 'a'];
 }
 
-//
-// CursName
-//
 static __str CursName(int num)
 {
    static __str const cursors[] = {
@@ -140,9 +134,6 @@ static __str CursName(int num)
    else                               return cursors[num];
 }
 
-//
-// XHairName
-//
 static __str XHairName(int num)
 {
    static __str const xhairs[] = {
@@ -156,9 +147,6 @@ static __str XHairName(int num)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_CBITab_Settings
-//
 void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 {
    int y = 0;

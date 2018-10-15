@@ -24,9 +24,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// CBITab_Marine
-//
 static void CBITab_Marine(gui_state_t *g, struct player *p)
 {
    int   ram;
@@ -59,9 +56,6 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
    Upgr(rdistinter) Slot("RDistInter", 0, 4);
 }
 
-//
-// CBITab_CyberMage
-//
 static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 {
    CPU(2);
@@ -98,9 +92,6 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_CBITab_CBI
-//
 void Lith_CBITab_CBI(gui_state_t *g, struct player *p)
 {
    switch(p->pclass)

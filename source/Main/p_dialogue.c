@@ -76,9 +76,6 @@ struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// Lith_TerminalGUI
-//
 script
 static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
@@ -188,9 +185,6 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    }
 }
 
-//
-// Lith_DialogueGUI
-//
 script
 static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
 {
@@ -230,9 +224,6 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    Lith_GUI_End(g, gui_curs_outlineinv);
 }
 
-//
-// AddText
-//
 static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
 {
    if(!vmstate->concat) {
@@ -248,9 +239,6 @@ static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_TeleportOutEffect
-//
 script ext("ACS")
 void Lith_TeleportOutEffect(struct player *p)
 {
@@ -273,11 +261,7 @@ void Lith_TeleportOutEffect(struct player *p)
    }
 }
 
-//
-// Lith_DialogueVM
-//
 // Main dialogue VM.
-//
 script
 void Lith_DialogueVM(struct player *p, int num)
 {
@@ -512,9 +496,6 @@ done:
    p->indialogue -= 2;
 }
 
-//
-// Lith_RunDialogue
-//
 script ext("ACS")
 void Lith_RunDialogue(int num)
 {
@@ -525,9 +506,6 @@ void Lith_RunDialogue(int num)
    }
 }
 
-//
-// Lith_RunTerminal
-//
 script ext("ACS")
 void Lith_RunTerminal(int num)
 {

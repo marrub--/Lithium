@@ -6,9 +6,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// HUD_Ammo
-//
 static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
@@ -60,9 +57,6 @@ static void HUD_Ammo(struct player *p)
    }
 }
 
-//
-// HUD_Health
-//
 static void HUD_Health(struct player *p, upgrade_t *upgr)
 {
    static __str weapongfx[SLOT_MAX] = {
@@ -124,27 +118,18 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_HeadsUpDisp_Activate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
 }
 
-//
-// Disable
-//
 stkcall
 void Upgr_HeadsUpDisp_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
 {

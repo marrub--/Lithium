@@ -4,9 +4,6 @@
 #include "lith_token.h"
 #include "lith_tokbuf.h"
 
-//
-// Lith_CSLoadMap
-//
 script ext("ACS")
 void Lith_CSLoadMap(void)
 {

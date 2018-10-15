@@ -4,9 +4,6 @@
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// HUD_Ammo
-//
 static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
@@ -61,9 +58,6 @@ static void HUD_Ammo(struct player *p)
    }
 }
 
-//
-// HUD_Health
-//
 static void HUD_Health(struct player *p)
 {
    PrintSprite(":HUD_C:SplitBack", 0,1, 239,2);
@@ -75,27 +69,18 @@ static void HUD_Health(struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_HeadsUpDis2_Activate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = true;
 }
 
-//
-// Disable
-//
 stkcall
 void Upgr_HeadsUpDis2_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->hudenabled = false;
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 {

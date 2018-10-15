@@ -3,27 +3,18 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_7777777_Activate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetActorPropertyFixed(0, APROP_Gravity, 0.0);
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_7777777_Deactivate(struct player *p, upgrade_t *upgr)
 {
    ACS_SetActorPropertyFixed(0, APROP_Gravity, 1.0);
 }
 
-//
-// Update
-//
 script
 void Upgr_7777777_Update(struct player *p, upgrade_t *upgr)
 {

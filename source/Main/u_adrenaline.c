@@ -6,18 +6,12 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Activate
-//
 stkcall
 void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
 {
    InvTake("Lith_AdrenalineToken", 1);
 }
 
-//
-// Update
-//
 script
 void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
 {
@@ -59,9 +53,6 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
    InvTake("Lith_AdrenalineToken", 1);
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
 {

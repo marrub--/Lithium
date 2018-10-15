@@ -18,9 +18,6 @@ static struct {__str abbr, full;} const ArmorNames[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-//
-// RA_Take
-//
 static void RA_Take(int n)
 {
    InvTake(StrParam("Lith_RA_Bullets%i", n),   999);
@@ -33,9 +30,6 @@ static void RA_Take(int n)
    InvTake(StrParam("Lith_RA_Ice%i", n),       999);
 }
 
-//
-// RA_Give
-//
 static void RA_Give(__str name, int n)
 {
    InvGive(StrParam("Lith_RA_%S%i", name, n), 1);
@@ -43,9 +37,6 @@ static void RA_Give(__str name, int n)
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_RA_Give
-//
 script ext("ACS")
 void Lith_RA_Give(int num)
 {
@@ -75,9 +66,6 @@ void Lith_RA_Give(int num)
    }
 }
 
-//
-// Deactivate
-//
 stkcall
 void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 {
@@ -87,9 +75,6 @@ void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
    RA_Take(2);
 }
 
-//
-// Render
-//
 stkcall
 void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 {

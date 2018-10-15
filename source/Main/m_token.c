@@ -42,9 +42,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Lith_ParseToken
-//
 void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig)
 {
    if(!tok || !fp || !orig) return;

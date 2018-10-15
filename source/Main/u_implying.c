@@ -3,9 +3,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-//
-// Update
-//
 script
 void Upgr_Implying_Update(struct player *p, upgrade_t *upgr)
 {
