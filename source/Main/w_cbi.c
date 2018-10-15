@@ -66,7 +66,6 @@ void Lith_InstallCBIItem(int num)
          if(c->nam)
       {
          p->bipUnlock(c->nam);
-         Log("%S", c->nam);
          if(c->nam == "Feuer"   ) InvGive("Lith_Feuer",    1);
          if(c->nam == "Rend"    ) InvGive("Lith_Rend",     1);
          if(c->nam == "Hulgyon" ) InvGive("Lith_Hulgyon",  1);
