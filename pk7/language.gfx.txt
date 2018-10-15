@@ -209,6 +209,7 @@
 "LITH:UI:AttrBar2" = "lgfx/UI/AttrBar2.png";
 "LITH:UI:AttrBar3" = "lgfx/UI/AttrBar3.png";
 "LITH:UI:AttrBar4" = "lgfx/UI/AttrBar4.png";
+"LITH:UI:Bag" = "lgfx/UI/Bag.png";
 "LITH:UI:bip" = "lgfx/UI/bip.png";
 "LITH:UI:Blade" = "lgfx/UI/Blade.png";
 "LITH:UI:BladeSel" = "lgfx/UI/BladeSel.png";

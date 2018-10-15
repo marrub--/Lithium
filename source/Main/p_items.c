@@ -250,7 +250,7 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
    int w = cont->w * 8;
 
    for(int y = 0; y < h; y += 8) for(int x = 0; x < w; x += 8)
-      PrintSprite(bg, sx+x,1, sy+y,1);
+      PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
 
    if(p && p->movitem && g->clicklft && aabb(sx, sy, sx+w, sy+h, g->cx, g->cy))
       if(Lith_ItemPlace(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8))
@@ -319,6 +319,7 @@ void *Lith_ItemCreate(int w, int h)
 {
    __str type = getmems(0, "m_invtype");
    __str tag  = getmems(0, "m_invname");
+   u32   scr  = getmem (0, "m_invsell");
    __str spr  = StrParam(":ItemSpr:%S", tag);
    __str name = ACS_GetActorPropertyString(0, APROP_NameTag);
 
@@ -326,7 +327,7 @@ void *Lith_ItemCreate(int w, int h)
 
    #define Type(t, ...) \
       if(type == t) \
-         return Lith_Item_New(&(itemdata_t const){name, spr, tag, w, h, __VA_ARGS__})
+         return Lith_Item_New(&(itemdata_t const){name, spr, tag, w, h, scr, __VA_ARGS__})
 
    Type("SlottedItem", .Use = Lith_Item_Use);
    Type("Armor",       .Use = Lith_Item_Use);
@@ -430,57 +431,59 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
    };
 
    PrintSpriteA(":UI:Body", 151,1, 40,1, 0.6);
+   PrintSpriteA(":UI:Bag",  47 ,1, 44,1, 0.6);
 
    for(int i = 0; i < countof(p->inv); i++)
       Lith_Container(g, &p->inv[i], x[i], y[i]);
 
-   if(p->selitem)
+   item_t *sel = p->selitem;
+
+   if(sel)
    {
-      PrintTextStr(p->selitem->name);
-      PrintText("CBIFONT", CR_WHITE, x[0],1, y[0] - 10,2);
+      int x_ = x[0];
+      int y_ = y[0] + 60;
+
+      PrintTextStr(sel->name);
+      PrintText("CBIFONT", CR_WHITE, x_,1, y_,1);
+      y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
 
-      if(Lith_GUI_Button(g, "Move", x[0], y[0]-9, Pre(btnclear)))
+      if(Lith_GUI_Button(g, "Move", x_, y_, Pre(btnclear)))
          p->movitem = !p->movitem;
+      y_ += 8;
 
-      if(p->selitem->Use)
-         if(Lith_GUI_Button(g, "Use", x[0]+60, y[0]-9, Pre(btnclear)))
-            p->useitem = p->selitem;
-
-      if(Lith_GUI_Button(g, "Discard", x[0]+25, y[0]-9, Pre(btnclear)))
+      if(sel->Use)
       {
-         p->selitem->Destroy(p->selitem);
+         if(Lith_GUI_Button(g, "Use", x_, y_, Pre(btnclear)))
+            p->useitem = sel;
+         y_ += 8;
+      }
+
+      if(sel->scr)
+      {
+         PrintTextFmt("(%S\Cnscr\C-)", scoresep(sel->scr));
+         PrintText("CBIFONT", CR_WHITE, x_+18,1, y_,1);
+      }
+
+      if(Lith_GUI_Button(g, sel->scr ? "Sell" : "Discard", x_, y_, Pre(btnclear)))
+      {
+         if(sel->scr) p->giveScore(sel->scr, true);
+         sel->Destroy(sel);
          ACS_LocalAmbientSound("player/cbi/invrem", 127);
       }
    }
 
+   PrintTextFmt("Equipped (%S)", HERMES_S("GetArmorDT"));
+   PrintText("CBIFONT", CR_WHITE, 40,1, 38,1);
+
    for(int i = 0; i < aslot_max; i++)
+      ifw(__str name = HERMES_S("GetArmorSlot", i), name != "")
    {
-      static int const x[] = {
-         195,
-         195,
-         0, 0
-      };
-
-      static int const y[] = {
-         135,
-         90,
-         0, 0
-      };
-
-      __str name = HERMES_S("GetArmorSlot", i);
-
-      if(name != "")
-      {
-         PrintTextStr(name);
-         PrintText("CBIFONT", CR_WHITE, x[i],0, y[i],0);
-      }
+      PrintTextStr(name);
+      PrintText("CBIFONT", CR_WHITE, 40,1, 45+7*i,1);
    }
-
-   PrintTextStr(HERMES_S("GetArmorDT"));
-   PrintText("CBIFONT", CR_WHITE, 240,2, 40,1);
 }
 
 // EOF

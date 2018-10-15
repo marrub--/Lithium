@@ -239,6 +239,7 @@ void Lith_PlayerLevelup(struct player *p)
       p->logH(1, Language("LITH_LOG_LevelUp%S", p->discrim), ACS_Random(1000, 9000));
    }
    if(p->attr.lvupstr) {
+      SetSize(320, 240);
       PrintTextStr(p->attr.lvupstr);
       PrintText("cnfont", CR_WHITE, 7,1, 17,1);
    }

@@ -14,6 +14,7 @@ typedef struct itemdata
 {
    __str name, spr, tag;
    uint w, h;
+   i96 scr;
 
    item_b_cb_t Use;
    item_v_cb_t Tick;

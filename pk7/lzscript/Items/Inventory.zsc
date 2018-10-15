@@ -57,11 +57,13 @@ class Lith_InventoryItem : Inventory abstract
    string m_invtype;
    string m_invname;
    uint   m_invitem;
+   uint   m_invsell;
 
    int m_w, m_h;
 
    property InvType: m_invtype;
    property InvName: m_invname;
+   property InvSell: m_invsell;
    property Size: m_w, m_h;
 
    bool Lith_Attach()

@@ -199,7 +199,7 @@ static void LevelUp(struct player *p, u32 attr[at_max])
       for(int j = 0; j < at_max; j++)
          if(i > 35*2 / (fixed)at_max * j)
       {
-         __str s = StrParam("LEVEL UP");
+         __str s = "LEVEL UP";
 
          for(int k = 0, l = 0; k <= j; k++, l++)
          {
