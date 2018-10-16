@@ -233,10 +233,8 @@ private void Lith_PlayerIndicator(PlayerInfo p)
    }
 }
 
-override void Tick()
+void Lith_PreTick()
 {
-   if(level.levelnum == 1911777) return;
-
    // create pitch and yaw quaternions for unprojection
    vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
    pvec /= pvec.length();
@@ -264,9 +262,10 @@ override void Tick()
       if(m_cs) m_cs.Lith_DrawFrame();
       Lith_URANUS.LE();
    }
+}
 
-   Super.Tick();
-
+void Lith_PostTick()
+{
    if(CVar.GetCVar('lith_player_rainshader', player).getBool())
       Lith_RainEffect();
    else
@@ -284,6 +283,17 @@ override void Tick()
    if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
       if(playeringame[i] && players[i] != player && players[i].mo)
          Lith_PlayerIndicator(players[i]);
+}
+
+override void Tick()
+{
+   if(level.levelnum == 1911777) return;
+
+   if(player.mo == self) Lith_PreTick();
+
+   Super.Tick();
+
+   if(player.mo == self) Lith_PostTick();
 }
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
