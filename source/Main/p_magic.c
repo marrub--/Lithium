@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017 Alison Sanderson, all rights reserved.
 // vim: columns=110
 #include "lith_player.h"
 #include "lith_hudid.h"

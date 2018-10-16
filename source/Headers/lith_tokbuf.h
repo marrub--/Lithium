@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017 Alison Sanderson, all rights reserved.
 #ifndef lith_tokbuf_h
 #define lith_tokbuf_h
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-## Copyright © 2018 Graham Sanderson, all rights reserved.
+## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## upgc: Upgrade info text compiler.
 
 arg = ARGV[0]

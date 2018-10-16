@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 
 // Static Functions ----------------------------------------------------------|

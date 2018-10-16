@@ -1,4 +1,4 @@
-## Copyright © 2016-2017 Graham Sanderson
+## Copyright © 2016-2017 Alison Sanderson
 ## Compiler
 CC=gdcc-cc
 LD=gdcc-ld

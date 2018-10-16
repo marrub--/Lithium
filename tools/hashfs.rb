@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-## Copyright © 2018 Graham Sanderson, all rights reserved.
+## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## HashFS: Compile a directory structure into an enumerated list.
 
 require 'fileutils'

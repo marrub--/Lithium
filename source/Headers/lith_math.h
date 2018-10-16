@@ -1,4 +1,4 @@
-// Copyright © 2018 Graham Sanderson, all rights reserved.
+// Copyright © 2018 Alison Sanderson, all rights reserved.
 
 #define max(x, y) ((x) < (y) ? (y) : (x))
 #define min(x, y) ((x) < (y) ? (x) : (y))

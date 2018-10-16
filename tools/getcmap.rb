@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-## Copyright © 2018 Graham Sanderson, all rights reserved.
+## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## GetCMap: Generates a character map from the filedata directory.
 
 require 'set'

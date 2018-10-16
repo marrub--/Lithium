@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
 
 #define UData UData_ReflexWetw(upgr)

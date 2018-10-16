@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017 Alison Sanderson, all rights reserved.
 #ifndef lith_token_h
 #define lith_token_h
 

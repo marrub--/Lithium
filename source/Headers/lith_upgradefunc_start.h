@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017 Alison Sanderson, all rights reserved.
 #ifdef Ret
    #define Case(n) Ret(n) case UPGR_##n:;
    #define A(n) Fn_F(n, Activate)

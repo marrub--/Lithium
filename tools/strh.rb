@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-## Copyright © 2017 Graham Sanderson, all rights reserved.
+## Copyright © 2017 Alison Sanderson, all rights reserved.
 ## strh: Simple string hash utility.
 
 res = 0

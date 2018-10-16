@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 // vim: columns=110
 #ifndef LITH_UPGRADES_H
 #define LITH_UPGRADES_H

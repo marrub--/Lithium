@@ -1,6 +1,6 @@
 // zsc output: pk7/lzscript/Headers/lith_pdata.h
 
-// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 enum // Lith_PData
 {
    pdata_weapon,

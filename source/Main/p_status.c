@@ -1,4 +1,4 @@
-// Copyright © 2017 Graham Sanderson, all rights reserved.
+// Copyright © 2017-2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -25,7 +25,8 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 
    AttrBar(g, x, y, attr, ":UI:AttrBar2");
 
-   if(attr > ATTR_VIS_MAX) {
+   if(attr > ATTR_VIS_MAX)
+   {
       int vatr = attr - ATTR_VIS_MAX;
       AttrBar(g, x, y, (vatr / (fixed64)ATTR_VIS_DIFF) * ATTR_VIS_MAX, ":UI:AttrBar4");
       helptrns += 0.3;
@@ -51,6 +52,7 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 {
    PrintTextStr(left);
    PrintText("chfont", CR_WHITE, x,1, y,1);
+
    PrintTextStr(right);
    PrintText("chfont", CR_WHITE, x+80,2, y,1);
 }
@@ -60,22 +62,29 @@ static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
 void Lith_CBITab_Status(gui_state_t *g, struct player *p)
 {
    int x = 30, y = 40;
+
    PrintTextStr(p->name);
    PrintText("chfont", CR_WHITE, x,1, y,1);
    y += 10;
+
    PrintTextStr(p->classname);
    PrintText("chfont", CR_WHITE, x,1, y,1);
+
    StatusInfo(g, x, y += 10, "Lv.",  StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));
+
    if(p->pclass & pcl_magicuser)
       StatusInfo(g, x, y += 10, "MP", StrParam("%i/%i", p->mana, p->manamax));
+
    StatusInfo(g, x, y += 10, "EXP",  StrParam("%u", p->attr.exp));
    StatusInfo(g, x, y += 10, "Next", StrParam("%u", p->attr.expnext));
-   x = 20;
+
    if(p->pclass & pcl_magicuser) y += 20;
    else                          y += 30;
+
    x  = 53;
    y += 10;
+
    for(int i = 0; i < at_max; i++, y += 10)
       DrawAttr(g, x, y, p, i);
 }

@@ -1,4 +1,4 @@
-// Copyright © 2017-2018 Graham Sanderson, all rights reserved.
+// Copyright © 2017-2018 Alison Sanderson, all rights reserved.
 #ifndef LITH_ITEMS_H
 #define LITH_ITEMS_H
 

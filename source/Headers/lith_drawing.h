@@ -1,4 +1,4 @@
-// Copyright © 2018 Graham Sanderson, all rights reserved.
+// Copyright © 2018 Alison Sanderson, all rights reserved.
 
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TICSECOND (0.029)

@@ -1,4 +1,4 @@
-// Copyright © 2018 Graham Sanderson, all rights reserved.
+// Copyright © 2018 Alison Sanderson, all rights reserved.
 #ifndef lith_types_h
 #define lith_types_h
 

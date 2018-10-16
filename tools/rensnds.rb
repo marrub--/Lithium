@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-## Copyright © 2018 Graham Sanderson, all rights reserved.
+## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## RenSnds: Renames stuff in sndinfo files.
 ## An input file can be generated with:
 ## git diff --staged --name-status -C | sed '/R100/!d' | cut -f 2,3 | sed 's/pk7\///g'

@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Graham Sanderson, all rights reserved.
+// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 // Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
 // Used with permission.
 #include "lith_common.h"
