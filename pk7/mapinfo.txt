@@ -2,10 +2,10 @@
 
 gameinfo
 {
-   PlayerClasses           = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
-                             "Lith_InformantPlayer", "Lith_WandererPlayer",
-                             "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
-                             "Lith_ThothPlayer"
+   PlayerClasses           = "Lith_MarinePlayer",    "Lith_CyberMagePlayer"//,
+                             //"Lith_InformantPlayer", "Lith_WandererPlayer",
+                             //"Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
+                             //"Lith_ThothPlayer"
    DimColor                = "Black"
    DimAmount               = 0.25
    MenuFontColor_Title     = "Green"
