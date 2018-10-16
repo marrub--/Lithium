@@ -65,6 +65,13 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
          PrintTextF(font, CR_WHITE, x,xa, y+10,ya, fid_scacum);
       }
    }
+
+   if(p->getCVarI("lith_hud_showlvl"))
+   {
+      PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
+      if(p->attr.points) __nprintf_str(" (%u pts)", p->attr.points);
+      PrintText(font, 0, x,xa, y+20,ya);
+   }
 }
 
 void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)

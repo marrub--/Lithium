@@ -1,4 +1,5 @@
 user bool lith_hud_showscore    = true;
+user bool lith_hud_showlvl      = false;
 user bool lith_hud_showweapons  = true;
 user bool lith_hud_showlog      = true;
 user bool lith_hud_showarmorind = true;
