@@ -9,6 +9,111 @@
 ## Removed  = \cg-
 ## Subspace = \cb]
 
+%% LITH_UPDATE_1_6
+\cf(\ciOct. 16, 2018\cf) \cjFrom \cn1.5.3\cj to \cf1.6\cj:
+\cd+ Added a Japanese translation using a custom ZScript text renderer.
+\cd+ Added two new BIP categories, "Yourself" and "Items."
+\cd+ Added a Windows XP theme.
+\cd+ Added a bunch of quit messages.
+\cd+ Added an intro text to the title screen.
+\cd+ Added (optional) recoil to most weapons.
+\cd+ Added blinding light effects to the Star Destroyer's projectile.
+\cd+ Added inventory tetris.
+\cd+ Added sounds to the GUI.
+\cd+ Added notes section.
+\cd+ Added a voltage display to the Charge Fist.
+\cd+ Added cursor themes to the GUI.
+\cd+ Added an option to make shotgun slot weapons use ammo.
+\cd+ Added a new armor system using inventory tetris.
+\cd+ Added small score items to replace armor and health bonuses.
+\cd+ Added large score items to replace ammo boxes.
+\cd+ Added a new intermission screen.
+\cd+ Added a raindrops on screen effect.
+\cd+ Added bips.
+\cd+ Added a setting for not picking up ammo when full (on by default.)
+\cd+ Added a setting for not getting score for ammo (on by default.)
+
+%% LITH_UPDATE_1_6_Page2
+\cd+ Added casings to weapons.
+\cd+ Added dynamic crosshairs.
+\cd+ Added indicators for where other players are in multiplayer.
+\cd+ Added two new levelup systems, "Auto" and "Hybrid."
+\cb] Hybrid is now the default.
+\cd+ Added new game endings, with original music by _sink.
+\cd+ Added a visual line for homing rocket tracers.
+\cd+ Added a big log setting for 320x240 screens.
+\cd+ Added an invalid configuration checker.
+\cd+ Added new gibbing animations for some monsters.
+\cd+ Added new attack effects for some monsters.
+\cd+ Added a bunch of new terrain effects.
+\cd+ Added new environmental effects.
+\cd+ Added new decoration interactions.
+\cd+ Added new bullet puff effects.
+\cd+ Added new blood effects.
+\cd+ Added a button for triggering shootable buttons or poking enemies.
+\cd+ Added new pickup noises for powerups.
+\cd+ Added an option to drop shotguns from zombies.
+\cd+ Added the ability for monsters to level up.
+\cd+ Added an option to show the player's level on the HUD.
+\cd+ Added a new SSG reload animation.
+
+%% LITH_UPDATE_1_6_Page3
+\cd+ Added an idle sound for the Star Destroyer.
+\cj| Fixed countless stability issues.
+\cj| Fixed pause in menus taking effect in multiplayer.
+\cj| Redid a lot of internal code, fixing tons of bugs in the process.
+\cj| Fixed some effects not respecting the object's scale.
+\cj| Fixed issues with monster resurrection.
+\cj| Fixed Marine's HUD text being inconsistently colored.
+\cj| Made Romyetya and Blade stop you mid-air.
+\cj| Made the spell selector hold the player's view in place.
+\cj| Renamed "Pr" to "Perf" for clarity.
+\cj| Made weapon sell messages respect stupidpickups.
+\cj| Improved the Combat Rifle's feel and sound.
+\cj| Improved layout of UI in general.
+\cj| Consolidated CBI tabs.
+\cj| Replaced the slot 1 spell selector with a mana siphon.
+\cb] The spell selector can still be used with Special Action.
+\cj| Nerfed Reactive Armor.
+\cj| Nerfed rifle grenades.
+\cj| Improved revenant attacks.
+\cj| Fixed the Ion Rifle auto-aiming too much.
+\cj| Fixed spelling of "Basilissa."
+\cj| Fixed solid footing not being detected properly.
+
+%% LITH_UPDATE_1_6_Page4
+\cj| Made Shock Charge much, much stronger.
+\cj| Made Megaspheres mitigate damage temporarily.
+\cj| Fixed cannonball effects getting stuck.
+\cj| Made Hulgyon stronger.
+\cj| Improve the Icon of Sin's effects.
+\cj| Improved the Combat Rifle's controls.
+\cj| Made the SSG unload when out of ammo.
+\cj| Improved the Omega Cannon's sounds.
+\cj| Made it easier to hit enemies with Blade and Romyetya.
+\cj| Improved menu feel in general.
+\cj| Improved Marine's pistol.
+\cj| Made Blade not take mana.
+\cj| Made bosses more difficult.
+\cj| Fixed phantoms being hyper and stupid (but not hyperstupid.)
+\cj| Rebalanced attributes a bit.
+\cj| Nerfed Vitality.
+\cj| Reduced the amount of ammo Feuer uses.
+\cj| Made obituaries show on the HUD proper.
+\cj| Improved Colorful Hell compatibility.
+\cj| Fixed Shut Up and Lithium compatibility.
+\cj| Fixed the Finalizer upgrade not destroying monsters correctly.
+\cj| Fixed a lot of typos.
+
+%% LITH_UPDATE_1_6_Page5
+\cj| Fixed the ion rifle being reloadable while scoped.
+\cj| Made the falling grunt sound play less.
+\cj| Improved performance while raining.
+\cj| Got rid of dead code.
+\cg- Removed ZDoom 2.8.1 compatibility.
+\cb] GZDoom 2.5 or greater is required now.
+\cg- Removed Serious Mode.
+
 %% LITH_UPDATE_1_5_3
 \cf(\ciNov. 22, 2017\cf) \cjFrom \cn1.5.2\cj to \cf1.5.3\cj:
 \cd+ Added a player leveling system with 7 stats.
