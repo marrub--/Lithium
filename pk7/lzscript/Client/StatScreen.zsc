@@ -109,8 +109,8 @@ override void DrawStats()
    int souls = CallACS("LWData", wdata_soulsfreed);
    if(souls) Lith_DrawCent(160, 120, (souls * m_souls) .. " SOULS FREED");
 
-   DrawName(140, wbs.lname0, lnametexts[0]);
    Lith_DrawCent(160, 0, "(LEAVE-AREA)");
+   DrawName(40 * CleanYFac, wbs.lname0, lnametexts[0]);
 
    if(cnt_time >= 0)
    {
@@ -130,9 +130,8 @@ override void DrawShowNextLoc()
 {
    bg.drawBackground(CurState, true, snl_pointeron);
 
-   DrawName(240, wbs.lname1, lnametexts[1]);
-
    if(bcnt % 20 < 10) Lith_DrawCent(160, 70, "(ENTER-AREA)");
+   DrawName(110 * CleanYFac, wbs.lname1, lnametexts[1]);
 }
 
 // EOF
