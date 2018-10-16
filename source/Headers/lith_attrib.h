@@ -1,10 +1,17 @@
-// Copyright © 2017 Alison Sanderson, all rights reserved.
+// Copyright © 2017-2018 Alison Sanderson, all rights reserved.
 #ifndef LITH_ATTRIB_H
 #define LITH_ATTRIB_H
 
 #define ATTR_BAS_MAX 60
 #define ATTR_VIS_MAX 50
 #define ATTR_VIS_DIFF (ATTR_BAS_MAX - ATTR_VIS_MAX)
+
+enum
+{
+   atsys_auto,
+   atsys_hybrid,
+   atsys_manual,
+};
 
 enum
 {
@@ -22,6 +29,7 @@ struct player_attributes
 {
    u32   exp, expnext;
    u32   level;
+   u32   points;
    u32   attrs[at_max];
    __str names[at_max];
    __str lvupstr;

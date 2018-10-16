@@ -171,7 +171,10 @@ static void LevelUp(struct player *p, u32 attr[at_max])
       for(int j = 0; j < at_max; j++)
          if(i > 35*2 / (fixed)at_max * j)
       {
-         __str s = "LEVEL UP";
+         ACS_BeginPrint();
+         __nprintf_str("LEVEL %u", p->attr.level);
+         if(p->attr.points) __nprintf_str(" (%u points)", p->attr.points);
+         __str s = ACS_EndStrParam();
 
          for(int k = 0, l = 0; k <= j; k++, l++)
          {
@@ -199,14 +202,22 @@ void Lith_GiveEXP(struct player *p, u64 amt)
    u32 attr[at_max] = {};
    int levelup = 0;
 
-   while(a->exp + amt >= a->expnext) {
+   while(a->exp + amt >= a->expnext)
+   {
       a->level++;
-      a->expnext  = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
+      a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
-      for(int i = 0; i < 5; i++)
-         attr[ACS_Random(0, 100) % at_max]++;
-
-      levelup++;
+      __with(int pts = 7;) switch(p->getCVarI("lith_player_lvsys"))
+      {
+      case atsys_manual: a->points += 7; break;
+      case atsys_hybrid:
+         a->points += 2;
+         pts       -= 2;
+      case atsys_auto:
+         for(int i = 0; i < pts; i++) attr[ACS_Random(0, 100) % at_max]++;
+         levelup++;
+         break;
+      }
    }
 
    if(levelup) LevelUp(p, attr);
