@@ -59,6 +59,11 @@
 
 *  Vent texture
 
+*                              * Combine_Kegan *
+
+*  Ideas for stuff, shitposting
+*  Shobon.
+
 *                                 * DavidPH *
 
 *  Glorious, glorious GDCC
@@ -171,6 +176,10 @@
 *                                  * Skaven *
 
 *  Intermission music (The Alchemist)
+
+*                                * Skelegant *
+
+*  Shobon Sphere sprite
 
 *                              * TerminusEst13 *
 
