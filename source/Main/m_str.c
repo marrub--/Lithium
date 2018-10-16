@@ -1,11 +1,10 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 
 #include <stdio.h>
 #include <ctype.h>
-#include <GDCC.h>
 
-#define l_strhashImpl() \
+#define StrHashImpl() \
    u32 ret = 0; \
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
@@ -23,13 +22,13 @@ __str lstrupper(__str in)
 stkcall
 u32 l_strhash(char __str_ars const *s)
 {
-   l_strhashImpl();
+   StrHashImpl();
 }
 
 stkcall
 u32 lstrhash(char const *s)
 {
-   l_strhashImpl();
+   StrHashImpl();
 }
 
 char *lstrcpy_str(char *dest, char __str_ars const *src)
@@ -45,14 +44,6 @@ char *lstrcpy_str(char *dest, char __str_ars const *src)
 int lstrcmp_str(char const *s1, char __str_ars const *s2)
 {
    StrCmpImpl();
-}
-
-stkcall
-__str l_strncpy(void const *s, int n)
-{
-   ACS_BeginPrint();
-   ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n);
-   return ACS_EndStrParam();
 }
 
 stkcall
@@ -103,19 +94,6 @@ __str LanguageV(__str name)
    return ret;
 }
 
-__str Language(__str fmt, ...)
-{
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
-   va_end(vl);
-
-   return LanguageV(ACS_EndStrParam());
-}
-
 __str LanguageNull(__str fmt, ...)
 {
    va_list vl;
@@ -130,30 +108,6 @@ __str LanguageNull(__str fmt, ...)
    __str alias = LanguageV(name);
 
    return name == alias ? null : alias;
-}
-
-__str StrParam(__str fmt, ...)
-{
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
-   va_end(vl);
-
-   return ACS_EndStrParam();
-}
-
-void StrParamBegin(__str fmt, ...)
-{
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
-   va_end(vl);
 }
 
 // EOF
