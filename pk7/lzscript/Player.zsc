@@ -180,7 +180,7 @@ private void Lith_Crosshair()
 
    // trace to where the crosshair should be in world space
    FLineTraceData ltd;
-   LineTrace(ry, 2048, rp, 0, player.viewz-pos.z-attackzoffset/2, 0, 0, ltd);
+   LineTrace(ry, 2048, rp, 0, (height/2)+attackzoffset, 0, 0, ltd);
 
    // unproject
    int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
