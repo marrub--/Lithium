@@ -100,8 +100,12 @@ class Lith_BulletAfterSmoke : Actor
    override void Tick()
    {
       Super.Tick();
-      scale.x += m_xs;
-      scale.y += m_ys;
+
+      if(!level.frozen && !globalfreeze)
+      {
+         scale.x += m_xs;
+         scale.y += m_ys;
+      }
    }
 
    states

@@ -42,19 +42,25 @@ class Lith_SpiralRocket : Lith_Rocket
 
    override void Tick()
    {
-      SetOrigin(pos + m_apos, false);
+      if(!level.frozen && !globalfreeze)
+         SetOrigin(pos + m_apos, false);
+
       Super.Tick();
-      A_SpawnItemEx("Lith_SpiralRocketHackActor9000", flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
-      SetOrigin(pos - m_apos, false);
 
-      if(vel.x || vel.y || vel.z)
+      if(!level.frozen && !globalfreeze)
       {
-         m_apos.x = cos(angle + 90) * sin(m_phasexyz) * 12;
-         m_apos.y = sin(angle + 90) * sin(m_phasexyz) * 12;
-         m_apos.z =                   cos(m_phasexyz) * 12;
-      }
+         A_SpawnItemEx("Lith_SpiralRocketHackActor9000", flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+         SetOrigin(pos - m_apos, false);
 
-      m_phasexyz = (m_phasexyz + 7) % 360;
+         if(vel.x || vel.y || vel.z)
+         {
+            m_apos.x = cos(angle + 90) * sin(m_phasexyz) * 12;
+            m_apos.y = sin(angle + 90) * sin(m_phasexyz) * 12;
+            m_apos.z =                   cos(m_phasexyz) * 12;
+         }
+
+         m_phasexyz = (m_phasexyz + 7) % 360;
+      }
    }
 }
 
