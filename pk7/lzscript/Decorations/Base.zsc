@@ -33,6 +33,7 @@ class Lith_SwitchableDecor : Actor
    override void Die(Actor source, Actor inflictor, int dmgflags)
    {
       Super.Die(source, inflictor, dmgflags);
+      bUSESPECIAL = false;
       Lith_Inactive();
    }
 
