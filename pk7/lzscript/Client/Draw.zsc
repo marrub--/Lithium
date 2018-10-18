@@ -56,15 +56,20 @@ private transient play int m_dww;
 private transient play bool m_nodraw;
 private transient play bool m_forcedraw;
 
-static float, float GetScSize(float vx, float vy)
+float, float GetScSized(float x, float y, bool kludge = false)
 {
+   float vw = m_vsc.x;
+   float vh = m_vsc.y;
+
    float sw = Screen.GetWidth();
    float sh = Screen.GetHeight();
 
-   float hmul = sh <= sw ? sh / vy : sw / vx;
-   float wadd = (sw - vx * hmul) / 2.;
+   vector2 xy, sc;
 
-   return hmul, wadd;
+   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
+   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
+
+   return xy.x, xy.y;
 }
 
 static void ForceDraw(bool on)
@@ -116,10 +121,8 @@ static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 
    cl.m_d[p].dt = dt_lin;
 
-   float hmul, wadd; [hmul, wadd] = GetScSize(cl.m_vsc.x, cl.m_vsc.y);
-
-   cl.m_d[p].x = x * hmul + wadd; cl.m_d[p].y = y * hmul;
-   cl.m_d[p].z = z * hmul + wadd; cl.m_d[p].w = w * hmul;
+   [cl.m_d[p].x, cl.m_d[p].y] = cl.getScSized(x, y);
+   [cl.m_d[p].z, cl.m_d[p].w] = cl.getScSized(z, w);
 
    cl.m_d[p].c = c;
 
@@ -328,10 +331,8 @@ static void LC(Actor mo, int x, int y, int w, int h, int ww)
 
       cl.m_d[p].dt = dt_cls;
 
-      float hmul, wadd; [hmul, wadd] = GetScSize(cl.m_vsc.x, cl.m_vsc.y);
-
-      cl.m_d[p].x = x * hmul + wadd; cl.m_d[p].y = y * hmul;
-      cl.m_d[p].z = w * hmul;        cl.m_d[p].w = h * hmul;
+      [cl.m_d[p].x, cl.m_d[p].y] = cl.getScSized(x, y);
+      [cl.m_d[p].z, cl.m_d[p].w] = cl.getScSized(w, h, true);
    }
    else
    {
