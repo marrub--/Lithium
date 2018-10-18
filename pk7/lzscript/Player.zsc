@@ -298,10 +298,19 @@ override void Tick()
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
 {
-   // ÜBER KLUDGE
+   // ÜBER KLUDGE (override behaviour for DONTHARMSPECIES)
    if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
       return 0;
 
+   // set global damage info (ouch)
+   let sv = Lith_HERMES.Instance();
+
+   sv.m_dmgworld = !(inflictor || source);
+   sv.m_dmgtype = mod;
+
+   if(sv.m_dmgworld || source == self) mod = 'None';
+
+   // special protection
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
 
    if(damage > 1 && CountInv("Lith_MegaProtection"))
@@ -310,12 +319,7 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
       damage /= 2;
    }
 
-   let sv = Lith_HERMES.Instance();
-   sv.m_dmgtype = mod;
-   if(sv.m_dmgworld = !(inflictor || source) || source == self)
-      return Super.DamageMobj(inflictor, source, damage, 'None', flags, angle);
-   else
-      return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+   return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 }
 
 override void Die(Actor source, Actor inflictor, int dmgflags)

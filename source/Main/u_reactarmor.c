@@ -14,6 +14,7 @@ static struct {__str abbr, full;} const ArmorNames[] = {
    "MEL", "Melee",
    "SHR", "Shrapnel",
    "ICE", "Ice",
+   "HZD", "Hazard",
 };
 
 // Static Functions ----------------------------------------------------------|

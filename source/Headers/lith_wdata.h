@@ -77,6 +77,7 @@ enum // Lith_DamageType
    ldt_melee,
    ldt_shrapnel,
    ldt_ice,
+   ldt_hazard,
    ldt_none
 };
 

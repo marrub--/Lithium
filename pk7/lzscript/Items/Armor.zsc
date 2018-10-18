@@ -10,49 +10,53 @@ class Lith_Armor_Aerodynamic : Lith_Armor
       {return m_owner ? 1.1 : 1;}
 }
 
-class Lith_Armor_Standard_Upper : Lith_Armor
+class Lith_Armor_Standard_Upper : Lith_Armor_Resistant
 {
    default
    {
       Lith_InventoryItem.InvName "ArmStandard";
       Lith_InventoryItem.InvSell 9600;
       Lith_Armor.SlotSave aslot_upper, 2, 3;
+      Lith_Armor_Resistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM1 A -1; stop;}
 }
 
-class Lith_Armor_Standard_Lower : Lith_Armor
+class Lith_Armor_Standard_Lower : Lith_Armor_Resistant
 {
    default
    {
       Lith_InventoryItem.InvName "ArmStandard";
       Lith_InventoryItem.InvSell 6600;
       Lith_Armor.SlotSave aslot_lower, 1, 2;
+      Lith_Armor_Resistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM1 C -1; stop;}
 }
 
-class Lith_Armor_Improved_Upper : Lith_Armor
+class Lith_Armor_Improved_Upper : Lith_Armor_Resistant
 {
    default
    {
       Lith_InventoryItem.InvName "ArmImproved";
       Lith_InventoryItem.InvSell 11000;
       Lith_Armor.SlotSave aslot_upper, 3, 4;
+      Lith_Armor_Resistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM2 A -1; stop;}
 }
 
-class Lith_Armor_Improved_Lower : Lith_Armor
+class Lith_Armor_Improved_Lower : Lith_Armor_Resistant
 {
    default
    {
       Lith_InventoryItem.InvName "ArmImproved";
       Lith_InventoryItem.InvSell 8000;
       Lith_Armor.SlotSave aslot_lower, 2, 3;
+      Lith_Armor_Resistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM2 C -1; stop;}

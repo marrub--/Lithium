@@ -14,6 +14,7 @@ class Lith_AAGH : Inventory
    {
       switch(type)
       {
+      case 'None': if(Lith_HERMES.Instance().m_dmgworld) return ldt_hazard;
       default:
       case 'Bullet':    return ldt_bullets;
       case 'Plasma':
