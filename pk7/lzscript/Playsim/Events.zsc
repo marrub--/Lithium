@@ -121,7 +121,7 @@ override void WorldThingDamaged(WorldEvent evt)
 
    if(!src) return;
 
-   if(src.countInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.player))
+   if(src != dst && src.countInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.player))
       src.ACS_ScriptCall("Lith_GiveMonsterEXP", evt.damage * 3.77);
 }
 
