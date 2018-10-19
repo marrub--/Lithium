@@ -179,8 +179,10 @@ private void Lith_Crosshair()
    float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;
 
    // trace to where the crosshair should be in world space
+   float sz = height / 2 + attackzoffset * player.crouchfactor - floorclip;
+
    FLineTraceData ltd;
-   LineTrace(ry, 2048, rp, 0, (height/2)+attackzoffset, 0, 0, ltd);
+   LineTrace(ry, 2048, rp, 0, sz, 0, 0, ltd);
 
    // unproject
    int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
