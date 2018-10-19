@@ -1,7 +1,7 @@
 sprite BLL2A0, 31, 25
 {
-	offset 16, 13
-	patch BLLTA0, 0, 0 {translation "192:207=168:191"}
+   offset 16, 13
+   patch BLLTA0, 0, 0 {translation "192:207=168:191"}
 }
 
 graphic DIVSIGI1 , 40, 34 {xscale 1.5 yscale 1.5 offset -4,   0 patch DIVIA0, 0, 0}

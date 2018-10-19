@@ -58,16 +58,6 @@ void Lith_SteggleEnergy()
 }
 
 script ext("ACS")
-void Lith_Barrier()
-{
-   withplayer(LocalPlayer) for(int i = 0; p->active && i < 35 * 30; i++)
-   {
-      InvGive("Lith_BarrierSpell", 1);
-      ACS_Delay(1);
-   }
-}
-
-script ext("ACS")
 void Lith_BarrierBullets()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))

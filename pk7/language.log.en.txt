@@ -35,6 +35,7 @@
 "LITH_LOG_AllMap" = "$LITH_INFO_SHORT_AllMap";
 "LITH_LOG_DoggoSphere" = "\cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 "LITH_LOG_Dogs" = "Picked up dogs.";
+"LITH_LOG_ShobonSphere" = "( -w-)";
 
 // Ammo ----------------------------------------------------------------------|
 "LITH_LOG_Clip" = "Radio";

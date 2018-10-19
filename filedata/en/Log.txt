@@ -22,15 +22,16 @@
 == LITH_LOG_YellowSkull | \ckYellow Skull
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_LOG_RadSuit     | $LITH_INFO_TITLE_RadSuit
-== LITH_LOG_InfraRed    | $LITH_INFO_SHORT_Infrared
-== LITH_LOG_Invuln      | \cjInvulnerability!
-== LITH_LOG_BlurSphere  | $LITH_INFO_SHORT_Fragma
-== LITH_LOG_Backpack    | Backpack + Discount Card
-== LITH_LOG_Berserk     | $LITH_INFO_SHORT_Berserk
-== LITH_LOG_AllMap      | $LITH_INFO_SHORT_AllMap
-== LITH_LOG_DoggoSphere | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
-== LITH_LOG_Dogs        | Picked up dogs.
+== LITH_LOG_RadSuit      | $LITH_INFO_TITLE_RadSuit
+== LITH_LOG_InfraRed     | $LITH_INFO_SHORT_Infrared
+== LITH_LOG_Invuln       | \cjInvulnerability!
+== LITH_LOG_BlurSphere   | $LITH_INFO_SHORT_Fragma
+== LITH_LOG_Backpack     | Backpack + Discount Card
+== LITH_LOG_Berserk      | $LITH_INFO_SHORT_Berserk
+== LITH_LOG_AllMap       | $LITH_INFO_SHORT_AllMap
+== LITH_LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
+== LITH_LOG_Dogs         | Picked up dogs.
+== LITH_LOG_ShobonSphere | ( -w-)
 
 ## Ammo ----------------------------------------------------------------------|
 == LITH_LOG_Clip      | Radio
