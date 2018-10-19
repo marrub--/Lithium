@@ -29,7 +29,7 @@ typedef struct list_s
    __prop construct {call: Lith_LinkDefault(this)}
    __prop link      {call: Lith_ListLink(__arg, this)}
    __prop unlink    {call: Lith_ListUnlink(this)}
-   __prop size      {get:  Lith_ListSize(this)}
+   __prop size      {call: Lith_ListSize(this)}
    __prop free      {call: Lith_ListFree(this)}
 
    void *object;

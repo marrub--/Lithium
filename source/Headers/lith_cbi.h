@@ -67,7 +67,7 @@ typedef struct cbi_s
       gui_scroll_state_t bipinfoscr;
       gui_txtbox_state_t bipsearch;
 
-      void              *logsel;
+      int                logsel;
       gui_scroll_state_t logscr;
 
       gui_scroll_state_t settingscr;

@@ -53,7 +53,7 @@ void Lith_Obituary(void)
    obit = ACS_EndStrParam();
 
    LogDebug(log_dev, "%S", obit);
-   Lith_ForPlayer() p->log(1, "%S", obit);
+   Lith_ForPlayer() p->logB(1, "%S", obit);
 }
 
 // EOF

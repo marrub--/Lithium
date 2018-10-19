@@ -2,41 +2,43 @@
 #ifndef LITH_LOG_H
 #define LITH_LOG_H
 
-#include "lith_list.h"
+#include "lith_darray.h"
 
-#include <stdarg.h>
-
-#define LOG_TIME 140
-#define LOG_MAX 7
-
-typedef struct logmap_s
+struct logmap
 {
-   int levelnum;
    __str name;
-   list_t link;
-} logmap_t;
+   int   lnum;
 
-typedef struct logdata_s
+   Vec_Decl(struct logfdt, data);
+};
+
+struct logfdt
 {
    __str info;
-   int time;
-   int from;
-   bool keep;
-   list_t link;
-   list_t linkfull;
-} logdata_t;
+};
 
-typedef struct loginfo_s
+struct logdat
 {
-   list_t hud;
-   list_t full;
-   list_t maps;
-} loginfo_t;
+   anonymous
+   struct logfdt fdta;
+   u32           time;
+   u32           ftim;
+};
 
-void Lith_Log(struct player *p, int levl, __str fmt, ...);  // log to hud and full log
-void Lith_LogH(struct player *p, int levl, __str fmt, ...); // log to hud only
-void Lith_LogF(struct player *p, __str fmt, ...); // log to full log only
-logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl); // vararg
+struct loginfo
+{
+   struct logdat hudV[7];
+   size_t        hudC;
+
+   Vec_Decl(struct logmap, maps);
+
+   struct logmap *curmap;
+   u32            curtime;
+};
+
+void Lith_LogB(struct player *p, int levl, __str fmt, ...); // log to HUD and full log
+void Lith_LogH(struct player *p, int levl, __str fmt, ...); // log to HUD only
+void Lith_LogF(struct player *p,           __str fmt, ...); // log to full log only
 void Lith_PlayerLogEntry(struct player *p);
 
 #endif

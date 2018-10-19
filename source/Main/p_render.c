@@ -237,7 +237,7 @@ static void HUD_StringStack(struct player *p)
 
       hudstr->link.link(&p->hudstrlist);
 
-      if(p->hudstrlist.size == 20)
+      if(p->hudstrlist.size() == 20)
          Dalloc(p->hudstrlist.next->unlink());
    }
 

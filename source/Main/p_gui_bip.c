@@ -145,7 +145,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
    else
    {
       list_t *list = &bip->infogr[bip->curcategory];
-      size_t n = list->size;
+      size_t n = list->size();
       size_t i = 0;
 
       Lith_GUI_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);

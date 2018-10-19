@@ -153,10 +153,7 @@ static void Lith_PlayerDisconnect(void)
 
    p->bip.deallocate();
 
-   p->loginfo.hud.free();
    p->hudstrlist.free(true);
-   p->loginfo.full.free(true);
-   p->loginfo.maps.free(true);
 
    upgrademap_t_dtor(&p->upgrademap);
 
@@ -287,7 +284,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    // hue
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
-      p->log(1, "You gained brouzouf.");
+      p->logB(1, "You gained brouzouf.");
    }
 
    if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
@@ -331,7 +328,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->log(1, "%S", Language("LITH_LOG_BossWarn%S", p->discrim));
+      p->logB(1, "%S", Language("LITH_LOG_BossWarn%S", p->discrim));
 }
 
 // Run main loop scripts.

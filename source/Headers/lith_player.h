@@ -191,7 +191,7 @@ struct player
    __prop giveEXP {call: Lith_GiveEXP(this)}
 
    // log
-   __prop log  {call: Lith_Log (this)}
+   __prop logB {call: Lith_LogB(this)}
    __prop logF {call: Lith_LogF(this)}
    __prop logH {call: Lith_LogH(this)}
 
@@ -265,7 +265,7 @@ struct player
 
    // HUD
    bool hudenabled;
-   loginfo_t loginfo;
+   struct loginfo log;
 
    list_t hudstrlist;
 

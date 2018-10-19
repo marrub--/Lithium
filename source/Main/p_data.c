@@ -286,10 +286,7 @@ void Lith_ResetPlayer(struct player *p)
    // Reset data
 
    // Any linked lists on the player need to be initialized here.
-   p->loginfo.hud.free();
    p->hudstrlist.free(true);
-   if(!p->loginfo.full.next) p->loginfo.full.construct();
-   if(!p->loginfo.maps.next) p->loginfo.maps.construct();
 
    // pls not exit map with murder thingies out
    // is bad practice
@@ -332,7 +329,7 @@ void Lith_ResetPlayer(struct player *p)
    // Static data
    if(!p->staticinit)
    {
-      p->log(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
+      p->logB(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
          p->logH(1, "player is %u bytes long!", sizeof(struct player) * 4);

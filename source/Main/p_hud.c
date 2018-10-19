@@ -86,42 +86,4 @@ void Lith_HUD_KeyInd(struct player *p, int x, int y, bool horz, fixed a)
    #undef Inc
 }
 
-script
-void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
-{
-   if(p->getCVarI("lith_hud_showlog"))
-   {
-      int yo;
-
-      if(p->getCVarI("lith_hud_logbig")) {yo = 200; SetSize(320, 240);}
-      else                               {yo = 255; SetSize(480, 300);}
-
-      int i = 0;
-      forlistIt(logdata_t *ld, p->loginfo.hud, i++)
-      {
-         int y = 10 * i;
-         int ya;
-
-         if(p->getCVarI("lith_hud_logfromtop"))
-            {ya = 1; y = 20 + y;}
-         else
-            {ya = 2; y = (yo - y) + yy;}
-
-         PrintTextStr(ld->info);
-         PrintText("logfont", cr, x,1, y,ya);
-
-         if(ld->time > LOG_TIME - 10)
-            SetFade(fid_logadS + i, 1, 0.07);
-
-         if(CheckFade(fid_logadS + i))
-         {
-            PrintTextStr(ld->info);
-            PrintTextF("logfont", CR_WHITE, x,1, y,ya, fid_logadS + i);
-         }
-      }
-
-      SetSize(320, 240);
-   }
-}
-
 // EOF

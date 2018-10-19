@@ -154,7 +154,7 @@ void Lith_PlayerInitBIP(struct player *p)
    if(world.dbgLevel) p->logH(1, "There are %i info pages!", total);
 
    ForCategory()
-      bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size;
+      bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
 
    if(world.dbgBIP)
    {
@@ -209,7 +209,7 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    {
       ACS_Delay(20);
 
-      p->log(1, L("LITH_LOG_MailRecv"), send);
+      p->logB(1, L("LITH_LOG_MailRecv"), send);
 
       if(ACS_Random(1, 10000) == 1)
       {
