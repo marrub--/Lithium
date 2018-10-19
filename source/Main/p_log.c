@@ -39,7 +39,7 @@ void Lith_Log(struct player *p, int levl, __str fmt, ...)
    logdata->linkfull.link(&p->loginfo.full);
    logdata->keep = true;
 
-   if(p->loginfo.hud.size > LOG_MAX)
+   while(p->loginfo.hud.size > LOG_MAX)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
@@ -48,7 +48,7 @@ void Lith_LogF(struct player *p, __str fmt, ...)
    va_list vl;
 
    va_start(vl, fmt);
-   logdata_t *logdata = Lith_LogV(p, 0, fmt, vl);
+   logdata_t *logdata = Lith_LogVF(p, 0, fmt, vl);
    va_end(vl);
 
    logdata->linkfull.link(&p->loginfo.full);
@@ -60,13 +60,13 @@ void Lith_LogH(struct player *p, int levl, __str fmt, ...)
    va_list vl;
 
    va_start(vl, fmt);
-   logdata_t *logdata = Lith_LogV(p, levl, fmt, vl);
+   logdata_t *logdata = Lith_LogVH(p, levl, fmt, vl);
    va_end(vl);
 
    logdata->time = LOG_TIME;
    logdata->link.link(&p->loginfo.hud);
 
-   if(p->loginfo.hud.size > LOG_MAX)
+   while(p->loginfo.hud.size > LOG_MAX)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
@@ -88,6 +88,47 @@ logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl)
 
    logdata->info = ACS_EndStrParam();
    logdata->from = world.mapnum;
+
+   return logdata;
+}
+
+logdata_t *Lith_LogVF(struct player *p, int levl, __str fmt, va_list vl)
+{
+   logdata_t *logdata = Salloc(logdata_t);
+   logdata->linkfull.construct(logdata);
+
+   ACS_BeginPrint();
+
+   if(levl) {
+      for(int i = 0; i < levl; i++)
+         ACS_PrintChar('>');
+      ACS_PrintChar(' ');
+   }
+
+   __vnprintf_str(fmt, vl);
+
+   logdata->info = ACS_EndStrParam();
+   logdata->from = world.mapnum;
+
+   return logdata;
+}
+
+logdata_t *Lith_LogVH(struct player *p, int levl, __str fmt, va_list vl)
+{
+   logdata_t *logdata = Salloc(logdata_t);
+   logdata->link    .construct(logdata);
+
+   ACS_BeginPrint();
+
+   if(levl) {
+      for(int i = 0; i < levl; i++)
+         ACS_PrintChar('>');
+      ACS_PrintChar(' ');
+   }
+
+   __vnprintf_str(fmt, vl);
+
+   logdata->info = ACS_EndStrParam();
 
    return logdata;
 }
