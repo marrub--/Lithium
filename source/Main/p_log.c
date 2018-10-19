@@ -39,7 +39,7 @@ void Lith_Log(struct player *p, int levl, __str fmt, ...)
    logdata->linkfull.link(&p->loginfo.full);
    logdata->keep = true;
 
-   while(p->loginfo.hud.size > LOG_MAX)
+   if(p->loginfo.hud.size > LOG_MAX)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
@@ -66,7 +66,7 @@ void Lith_LogH(struct player *p, int levl, __str fmt, ...)
    logdata->time = LOG_TIME;
    logdata->link.link(&p->loginfo.hud);
 
-   while(p->loginfo.hud.size > LOG_MAX)
+   if(p->loginfo.hud.size > LOG_MAX)
       Dalloc(p->loginfo.hud.next->unlink());
 }
 
