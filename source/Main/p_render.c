@@ -18,15 +18,14 @@ void Lith_PlayerDebugStats(struct player *p)
 {
    if(!(world.dbgLevel & log_devh)) return;
 
-   SetSize(450, 350);
+   SetSize(320, 240);
 
-   ACS_SetFont("ltrmfont");
    ACS_BeginPrint();
    for(int i = 0; i < dbgstatnum; i++)
       ACS_PrintString(dbgstat[i]);
    for(int i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
-   PrintText("confont", CR_WHITE, 10,1, 20,1);
+   PrintText("smallfnt", CR_WHITE, 10,1, 20,1);
 }
 
 script

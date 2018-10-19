@@ -89,42 +89,43 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       midx = right/2, midy = bottom/2,
 
       // text
-      tsizex = 640, tsizey = 400,
-      ttop  = tsizey*.08,
-      tleft = tsizex/2-32
+      tsizex  = 320, tsizey = 240,
+      tright  = tsizex,
+      ttop    = tsizey*.08,
+      tbottom = tsizey*.75,
+      tleft   = tsizex/2 - 10,
+
+      tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   __str remote = vmstate->sreg[DSTR_REMOTE] ?
-      vmstate->sreg[DSTR_REMOTE] : "<unknown>@raddr.4E19";
+   __str remote = vmstate->sreg[DSTR_REMOTE] ? vmstate->sreg[DSTR_REMOTE] : "<unknown>@raddr.4E19";
 
    Lith_GUI_Begin(g, sizex, sizey);
    Lith_GUI_UpdateState(g, p);
 
    // Background
    SetSize(480, 300);
-   PrintSprite(":Terminal:Back",   midx,0, 0,1);
-   PrintSprite(":Terminal:Border", midx,0, 0,1);
-   SetSize(g->w, g->h);
+   PrintSprite(":Terminal:Back",   480/2,0, 0,1);
+   PrintSprite(":Terminal:Border", 480/2,0, 0,1);
 
    // Top-left text
+   SetSize(tsizex, tsizey);
    PrintTextStr("SGXLine r4205");
-   PrintText("ltrmfont", CR_RED, 0,1, 0,1);
+   PrintText("smallfnt", CR_RED, 0,1, 0,1);
 
    // Top-right text
    switch(vmstate->trmActi)
    {
-   case TACT_LOGON:
-      PrintTextFmt("Opening Connection to %S", remote); break;
-   case TACT_LOGOFF:
-      PrintTextStr("Disconnecting...");                 break;
-   default:
-      PrintTextFmt("Remote: %S",               remote); break;
+   case TACT_LOGON:  PrintTextFmt("Opening Connection to %S", remote); break;
+   case TACT_LOGOFF: PrintTextStr("Disconnecting...");                 break;
+   default:          PrintTextFmt("Remote: %S",               remote); break;
    }
-   PrintText("ltrmfont", CR_RED, right,2, 0,1);
+
+   PrintText("smallfnt", CR_RED, tright,2, 0,1);
 
    // Bottom-left text
    PrintTextFmt("<55.883.115.7>");
-   PrintText("ltrmfont", CR_RED, 0,1, bottom,2);
+   PrintText("smallfnt", CR_RED, 0,1, tbottom,2);
 
    // Bottom-right text
    switch(vmstate->trmActi)
@@ -133,13 +134,15 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    case TACT_LOGOFF: PrintTextStr(world.canondate);      break;
    default:          PrintTextStr("Use To Acknowledge"); break;
    }
-   PrintText("ltrmfont", CR_RED, right,2, bottom,2);
+
+   PrintText("smallfnt", CR_RED, tright,2, tbottom,2);
 
    // Contents
+   SetSize(g->w, g->h);
+
    __str pict;
 
-   if(vmstate->trmPict)
-      pict = StrParam(":Terminal:%S", vmstate->trmPict);
+   if(vmstate->trmPict) pict = StrParam(":Terminal:%S", vmstate->trmPict);
 
    switch(vmstate->trmActi)
    {
@@ -149,8 +152,11 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       {
          if(vmstate->text != "")
          {
+            SetSize(tsizex, tsizey);
             PrintTextStr(vmstate->text);
-            PrintText("ltrmfont", CR_WHITE, midx,0, midy + 35,0);
+            PrintText("smallfnt", CR_WHITE, tmidx,0, tmidy + 35,0);
+            SetSize(g->w, g->h);
+
             y -= 10;
          }
 
@@ -162,16 +168,22 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       PrintSprite(pict, midx/2,0, midy,0);
 
       SetSize(tsizex, tsizey);
-      SetClipW(tleft, ttop, 300, 300, 300);
+      SetClipW(tleft, ttop, 150, 300, 150);
+
       PrintTextStr(vmstate->text);
-      PrintText("ltrmfont", CR_WHITE, tleft,1, ttop,1);
+      PrintText("smallfnt", CR_WHITE, tleft,1, ttop,1);
+
       SetSize(g->w, g->h);
       ClearClip();
       break;
 
    case TACT_INFO:
+      SetSize(tsizex, tsizey);
+
       PrintTextStr(vmstate->text);
-      PrintText("ltrmfont", CR_WHITE, midx,0, midy,0);
+      PrintText("smallfnt", CR_WHITE, 2,1, ttop+2,1);
+
+      SetSize(g->w, g->h);
       break;
    }
 
