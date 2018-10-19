@@ -26,4 +26,10 @@
 
 #include "lscripts/Monsters/TitleMap.dec"
 
+actor Lith_CommanderKeen : CommanderKeen replaces CommanderKeen
+{
+   Tag "Commander Keen"
+   +NOBLOOD
+}
+
 // EOF
