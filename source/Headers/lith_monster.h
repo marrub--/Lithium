@@ -48,7 +48,7 @@ struct monster_info {
 
 struct dmon {
    bool active;
-   int  id;
+   u32  id;
 
    bool wasdead;
    int  exp;
@@ -61,17 +61,11 @@ struct dmon {
    struct monster_info const *mi;
 };
 
-__addrdef extern __mod_arr dmonarr;
-
-typedef struct dmon dmonarr dmon_t;
-
-#ifndef EXTERNAL_CODE
-extern int dmonarr dmonid;
-#endif
+typedef struct dmon dmon_t;
 
 script dmon_t *DmonPtr(int tid, int ptr);
 stkcall dmon_t *DmonSelf(void);
-stkcall dmon_t *Dmon(int id);
+stkcall dmon_t *Dmon(u32 id);
 dmon_t *AllocDmon(void);
 
 void PrintDmonAllocSize(struct player *p);

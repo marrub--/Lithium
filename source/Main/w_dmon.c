@@ -8,13 +8,9 @@
 // Static Objects ------------------------------------------------------------|
 
 // This is lazy-allocated. Don't touch or GDCC will break your computer's face.
-noinit static dmon_t dmonalloc[DMON_MAX];
-
-// Extern Objects ------------------------------------------------------------|
-
-__addrdef __mod_arr dmonarr;
-
-int dmonarr dmonid;
+noinit
+static dmon_t dmonalloc[DMON_MAX];
+static int    dmonid;
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -30,11 +26,13 @@ void DmonDebugInfo(void)
    if(world.dbgLevel < log_dmon)
       return;
 
-   if(idprev < dmonid) {
+   if(idprev < dmonid)
+   {
       int hilvl = 0, lolvl = MAXLEVEL;
       int hirnk = 0, lornk = MAXRANK;
 
-      for(int i = idprev; i < dmonid; i++) {
+      for(int i = idprev; i < dmonid; i++)
+      {
          dmon_t *m = &dmonalloc[i];
          if(m->level < lolvl) lolvl = m->level;
          if(m->level > hilvl) hilvl = m->level;
@@ -51,6 +49,11 @@ void DmonDebugInfo(void)
    idprev = dmonid;
 }
 
+void DmonInit()
+{
+   dmonid = 0;
+}
+
 script
 dmon_t *DmonPtr(int tid, int ptr)
 {
@@ -61,12 +64,12 @@ dmon_t *DmonPtr(int tid, int ptr)
 stkcall
 dmon_t *DmonSelf(void)
 {
-   ifauto(int, id, InvNum("Lith_MonsterID")) return Dmon(id - 1);
+   ifauto(u32, id, InvNum("Lith_MonsterID")) return Dmon(id - 1);
    else                                      return null;
 }
 
 stkcall
-dmon_t *Dmon(int id)
+dmon_t *Dmon(u32 id)
 {
    if(dmonalloc[id].active) return &dmonalloc[id];
    else                     return null;
@@ -75,14 +78,7 @@ dmon_t *Dmon(int id)
 dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];
-   *m = (dmon_t){}; // NB: this can't be memset because it's in a
-                    // separate address space
-
-   m->active = true;
-   m->id = dmonid;
-
-   dmonid++;
-
+   *m = (dmon_t){.active = true, .id = dmonid++};
    return m;
 }
 

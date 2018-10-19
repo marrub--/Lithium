@@ -80,18 +80,18 @@ struct upgr_data_ReflexWetw {
 };
 
 struct upgr_data_VitalScan {
-   int   target;
-   int   oldtarget;
-   __str tagstr;
-   uint  health;
-   uint  oldhealth;
-   uint  maxhealth;
-   fixed cangle;
-   fixed oangle;
-   fixed splitfrac;
-   u32  split;
-   u32  rank;
-   bool freak;
+   int     target;
+   int     oldtarget;
+   __str   tagstr;
+   uint    health;
+   uint    oldhealth;
+   uint    maxhealth;
+   fixed64 cangle;
+   fixed64 oangle;
+   fixed64 splitfrac;
+   u32     split;
+   u32     rank;
+   bool    freak;
 };
 
 struct upgr_data_Zoom {

@@ -219,9 +219,11 @@ static void MSInit(void)
 
 static void WSInit(void)
 {
+   extern void DmonInit();
+
    LogDebug(log_dev, "WSINIT RUNNING");
 
-   dmonid = 0;
+   DmonInit();
    world.bossspawned = false;
 
    if(world.unloaded)

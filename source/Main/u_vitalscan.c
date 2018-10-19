@@ -22,7 +22,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       ACS_PlayerNumber() != -1;
 
    if(ACS_GetActorProperty(0, APROP_Health) <= 0)
-      UData.target = UData.oldtarget = 0;
+      UData = (struct upgr_data_VitalScan){};
    else if(validtarget)
    {
       bool legendary = world.legendoom && InvNum("LDLegendaryMonsterToken");
@@ -38,7 +38,15 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       int shp = ACS_GetActorProperty(0, APROP_SpawnHealth);
 
       int id = Lith_UniqueID();
-      dmon_t *m = DmonSelf();
+      dmon_t const *const m = DmonSelf();
+
+      int ot = UData.target;
+
+      if(UData.target != id)
+         UData = (struct upgr_data_VitalScan){.oldhealth = UData.health};
+
+      UData.oldtarget = ot;
+      UData.target    = id;
 
       bool healthset = false;
 
@@ -94,9 +102,6 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0)) * tau;
-
-      if((UData.oldtarget = UData.target) != (UData.target = id))
-         UData.oldhealth = UData.health;
    }
 }
 
