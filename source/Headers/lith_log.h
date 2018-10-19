@@ -37,6 +37,8 @@ void Lith_Log(struct player *p, int levl, __str fmt, ...);  // log to hud and fu
 void Lith_LogH(struct player *p, int levl, __str fmt, ...); // log to hud only
 void Lith_LogF(struct player *p, __str fmt, ...); // log to full log only
 logdata_t *Lith_LogV(struct player *p, int levl, __str fmt, va_list vl); // vararg
+logdata_t *Lith_LogVF(struct player *p, int levl, __str fmt, va_list vl); // vararg for full only
+logdata_t *Lith_LogVH(struct player *p, int levl, __str fmt, va_list vl); // vararg for hud only
 void Lith_PlayerLogEntry(struct player *p);
 
 #endif
