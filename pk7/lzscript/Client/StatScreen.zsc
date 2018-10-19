@@ -79,6 +79,18 @@ override void Ticker()
          if(cnt       > 1) cnt--;
       }
 
+      if(cnt_kills [0] > plrs[me].skills ) cnt_kills [0] = plrs[me].skills;
+      if(cnt_items [0] > plrs[me].sitems ) cnt_items [0] = plrs[me].sitems;
+      if(cnt_secret[0] > plrs[me].ssecret) cnt_secret[0] = plrs[me].ssecret;
+
+      let tt  = Thinker.Tics2Seconds(plrs[me].stime);
+      let pt  = wbs.partime / Thinker.TICRATE;
+      let ttt = Thinker.Tics2Seconds(wbs.totaltime);
+
+      if(cnt_time       > tt ) cnt_time       = tt;
+      if(cnt_par        > pt ) cnt_par        = pt;
+      if(cnt_total_time > ttt) cnt_total_time = ttt;
+
       if(p.cmd.buttons & BT_ALTATTACK) sp_state++;
 
       if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
