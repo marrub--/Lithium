@@ -1,5 +1,7 @@
 actor Lith_WeaponPickup : Lith_Pickup
 {
+   Lith_Pickup.Glow "Lith_WeapGlow"
+
    var int user_pickupparm;
 
    states
@@ -7,13 +9,6 @@ actor Lith_WeaponPickup : Lith_Pickup
    Spawn:
       TNT1 A 0
       TNT1 A 0 A_CheckFlag("DROPPED", "Null")
-   SpawnLoop:
-      TNT1 A 1 A_CheckSight("NoGlow")
-      TNT1 A 0 Lith_A_ItemGlow("Lith_WeapGlow")
-      loop
-   NoGlow:
-      TNT1 A 1
-      TNT1 A 0 A_CheckSight("NoGlow")
       goto SpawnLoop
    Pickup:
       TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_fist)

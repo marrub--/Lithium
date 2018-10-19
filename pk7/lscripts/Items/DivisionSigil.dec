@@ -1,18 +1,7 @@
 actor Lith_ItemPickup : Lith_Pickup
 {
    Inventory.PickupSound "player/pickup/evil"
-
-   states
-   {
-   SpawnLoop:
-      TNT1 A 1 A_CheckSight("NoGlow")
-      TNT1 A 0 Lith_A_ItemGlow("Lith_ItemGlow")
-      loop
-   NoGlow:
-      TNT1 A 1
-      TNT1 A 0 A_CheckSight("NoGlow")
-      goto SpawnLoop
-   }
+   Lith_Pickup.Glow "Lith_ItemGlow"
 }
 
 actor Lith_DivisionSigilSprite : Lith_AnimItemSprite
