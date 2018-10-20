@@ -25,6 +25,8 @@ alias __lith_puketrm  "pukename Lith_RunTerminal %1"
 alias __lith_pukedlg  "pukename Lith_RunDialogue %1"
 alias __lith_pukemail "pukename Lith_GiveMail %1"
 
+alias __lith_info "pukename Lith_PrintMonsterInfo"
+
 // Binds ---------------------------------------------------------------------|
 defaultbind i lith_k_opencbi
 defaultbind g +lith_k_qact

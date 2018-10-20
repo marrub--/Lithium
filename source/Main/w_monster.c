@@ -64,8 +64,9 @@ static void ApplyLevels(dmon_t *m, int prev)
    if(m->level >= 5)
    {
       fixed rn = m->rank / 10.0;
-      int hp10 = m->maxhealth / 10;
-      int newh = (m->level - prev) * hp10 * (fixed64)ACS_RandomFixed(rn - 0.1, rn + 0.1);
+      i64 hp10 = m->maxhealth / 10;
+      i64 newh = ((m->level - prev) * hp10 * (i64)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff)) / 0xfff;
+      LogDebug(log_dmonV, "monster %i: newh %li", m->id, newh);
       ACS_SetActorProperty(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
@@ -239,6 +240,36 @@ static void OnDeath(dmon_t *m)
 }
 
 // Extern Functions ----------------------------------------------------------|
+
+script ext("ACS")
+void Lith_PrintMonsterInfo(void)
+{
+   dmon_t *m = DmonPtr(0, AAPTR_PLAYER_GETTARGET);
+
+   if(m)
+   {
+      Log("%p (%p %p) %S active: %u id: %.3u\n"
+          "wasdead: %u finalized: %u painwait: %i\n"
+          "level: %.3i rank: %i exp: %i\n"
+          "health: %i/%i\n"
+          "x: %k y: %k z: %k\n"
+          "r: %k h: %k\n"
+          "mi->exp: %lu mi->score: %lli\n"
+          "mi->flags: %i mi->type: %i",
+          m, m->ms, m->mi, m->mi->name, m->active, m->id,
+          m->wasdead, m->ms->finalized, m->ms->painwait,
+          m->level, m->rank, m->exp,
+          m->ms->health, m->maxhealth,
+          m->ms->x, m->ms->y, m->ms->z,
+          m->ms->r, m->ms->h,
+          m->mi->exp, m->mi->score,
+          m->mi->flags, m->mi->type);
+      for(int i = 0; i < countof(m->resist); i++)
+         Log("resist %i: %i", i, m->resist[i]);
+   }
+   else
+      Log("no active monster");
+}
 
 script ext("ACS")
 void Lith_GiveMonsterEXP(int amt)
