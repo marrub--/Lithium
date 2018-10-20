@@ -188,7 +188,7 @@ void Lith_SpawnBoss(void)
    world.bossspawned = true;
 }
 
-script addr("Lith_TriggerBoss") optargs(1)
+script ext("ACS") addr("Lith_TriggerBoss") optargs(1)
 void Lith_TriggerBoss_Script(int diff, int num, int phase)
 {
    switch(diff)

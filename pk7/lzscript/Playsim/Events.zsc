@@ -82,6 +82,13 @@ override void WorldThingSpawned(WorldEvent evt)
 {
    let th = evt.thing;
 
+   if(th is "CommanderKeen")
+   {
+      th.bNOBLOOD = true;
+      th.setTag("Commander Keen");
+      return;
+   }
+
    if(th.bISMONSTER)
    {
       th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
