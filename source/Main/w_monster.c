@@ -8,14 +8,14 @@
 
 #define GetInfo(m) \
    do { \
-      (m)->ms->x = ACS_GetActorX(0); \
-      (m)->ms->y = ACS_GetActorY(0); \
-      (m)->ms->z = ACS_GetActorZ(0); \
+      (m)->ms->x = GetX(0); \
+      (m)->ms->y = GetY(0); \
+      (m)->ms->z = GetZ(0); \
       \
-      (m)->ms->r = ACS_GetActorPropertyFixed(0, APROP_Radius); \
-      (m)->ms->h = ACS_GetActorPropertyFixed(0, APROP_Height); \
+      (m)->ms->r = GetPropK(0, APROP_Radius); \
+      (m)->ms->h = GetPropK(0, APROP_Height); \
       \
-      (m)->ms->health = ACS_GetActorProperty(0, APROP_Health); \
+      (m)->ms->health = GetPropI(0, APROP_Health); \
    } while(0)
 
 // Types ---------------------------------------------------------------------|
@@ -67,7 +67,7 @@ static void ApplyLevels(dmon_t *m, int prev)
       i64 hp10 = m->maxhealth / 10;
       i64 newh = ((m->level - prev) * hp10 * (i64)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff)) / 0xfff;
       LogDebug(log_dmonV, "monster %i: newh %li", m->id, newh);
-      ACS_SetActorProperty(0, APROP_Health, m->ms->health + newh);
+      SetPropI(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
 
@@ -95,7 +95,7 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
       return;
 
    world.begAngles(m->ms->x, m->ms->y);
-   HERMES("MonsterBarrierLook");
+   ServCallI("MonsterBarrierLook");
 
    for(int i = 0; i < world.a_cur; i++)
    {
@@ -108,8 +108,7 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
       __str bar = m->rank >= 5 ? "Lith_MonsterHeptaura" : "Lith_MonsterBarrier";
 
       ACS_SpawnForced(bar, x, y, m->ms->z + m->ms->h / 2, tid);
-      ACS_SetActorPropertyFixed(tid, APROP_Alpha,
-         (1 - a->dst / (256 * (m->rank - 1))) * alpha);
+      SetPropK(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
    }
 }
 
@@ -160,16 +159,14 @@ static void SoulCleave(dmon_t *m, struct player *p)
 {
    int tid = ACS_UniqueTID();
    ACS_SpawnForced("Lith_MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
-   ACS_SetActorProperty(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
+   SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
-   ACS_SetActorPropertyString(tid, APROP_Species,
-      ACS_GetActorPropertyString(0, APROP_Species));
+   SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
 
-   for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++)
-      ACS_Delay(1);
+   for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++) ACS_Delay(1);
 
-   ACS_SetActorPropertyString(tid, APROP_Species, "Lith_Player");
+   SetPropS(tid, APROP_Species, "Lith_Player");
 }
 
 static void SpawnManaPickup(dmon_t *m, struct player *p)
@@ -328,7 +325,7 @@ void Lith_MonsterMain(dmon_t *m)
          ShowBarrier(m, m->level / 100.);
 
       if(InvNum("Lith_Ionized") && tic % 5 == 0)
-         HERMES("Lith_IonizeFX");
+         ServCallI("Lith_IonizeFX");
 
       ACS_Delay(2);
    }

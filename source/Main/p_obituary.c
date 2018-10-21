@@ -14,7 +14,7 @@ void Lith_Obituary(void)
 
    struct player *p = LocalPlayer;
 
-   __str obit = HERMES_S("GetObituary");
+   __str obit = ServCallS("GetObituary");
    if(obit == "") return;
 
    if(obit == "(falling)")

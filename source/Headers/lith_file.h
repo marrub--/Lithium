@@ -4,8 +4,8 @@
 
 #include <stdio.h>
 
-#define W_Find(name) HERMES("FindLump", name)
-#define W_Read(lmp)  HERMES_S("ReadLump", lmp)
+#define W_Find(name) ServCallI("FindLump", name)
+#define W_Read(lmp)  ServCallS("ReadLump", lmp)
 
 FILE *W_Open(__str fname, char const *rw);
 FILE *Lith_NFOpen(int pnum, __str pcvar, char rw);

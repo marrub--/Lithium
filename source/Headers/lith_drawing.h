@@ -5,43 +5,43 @@
 #define TS TICSECOND
 
 #define PrintSprite(name, x, xa, y, ya) \
-   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   DrawCallI("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
 
 #define PrintSpriteA(name, x, xa, y, ya, a) \
-   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   DrawCallI("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintSpriteF(name, x, xa, y, ya, n) \
-   URANUS("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   DrawCallI("LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
 
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
 
 #define PrintText(font, cr, x, xa, y, ya) \
-   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   DrawCallI("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya))
 
 #define PrintTextA(font, cr, x, xa, y, ya, a) \
-   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   DrawCallI("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintTextF(font, cr, x, xa, y, ya, n) \
-   URANUS("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   DrawCallI("LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
 
 #define SetClip(x, y, w, h) \
-   URANUS("LC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
+   DrawCallI("LC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
 
 #define SetClipW(x, y, w, h, ww) \
-   URANUS("LC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
+   DrawCallI("LC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
 
 #define ClearClip() \
-   URANUS("LC", 0, 0, 0, 0, 0)
+   DrawCallI("LC", 0, 0, 0, 0, 0)
 
 #define SetSize(w, h) \
-   URANUS("LZ", (int)(w), (int)(h))
+   DrawCallI("LZ", (int)(w), (int)(h))
 
 #define SetFade(n, time, fade) \
-   URANUS("LF", (int)(n), (int)(time), (fixed)(fade))
+   DrawCallI("LF", (int)(n), (int)(time), (fixed)(fade))
 
 #define CheckFade(n) \
-   URANUS("LX", n)
+   DrawCallI("LX", n)
 
 #define HudMessageLog(...) \
    ( \

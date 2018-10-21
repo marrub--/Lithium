@@ -105,7 +105,7 @@ void Lith_RandomSpawn(int rsn)
    case lrsn_clipbx: item = RandomWeighted(clipbx, countof(clipbx)); break;
    }
 
-   scall("Lith_RandomSpawn", "Set", item);
+   SCallI("Lith_RandomSpawn", "Set", item);
 }
 
 // EOF

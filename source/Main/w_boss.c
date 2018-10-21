@@ -54,9 +54,9 @@ static i96 scorethreshold = 1000000;
 
 static void Lith_SpawnBossReward(void)
 {
-   int x = ACS_GetActorX(0);
-   int y = ACS_GetActorY(0);
-   int z = ACS_GetActorZ(0);
+   int x = GetX(0);
+   int y = GetY(0);
+   int z = GetZ(0);
 
    switch(rewardnum++)
    {
@@ -92,7 +92,7 @@ static void Lith_TriggerBoss(void)
 
    LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %S phase %i", boss->name, boss->phase);
 
-   HERMES("TriggerBoss");
+   ServCallI("TriggerBoss");
 
    if(firstboss) {
       firstboss = false;
@@ -180,7 +180,7 @@ void Lith_SpawnBoss(void)
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
-   HERMES("SpawnBoss", StrParam("Lith_Boss_%S", boss->name), boss->phase);
+   ServCallI("SpawnBoss", StrParam("Lith_Boss_%S", boss->name), boss->phase);
 
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
    DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);

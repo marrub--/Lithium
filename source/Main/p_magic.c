@@ -45,9 +45,9 @@ void Lith_Feuer(bool left, bool fire)
       int sx = p->x;
       int sy = p->y;
       int sz = p->z + 32;
-      int ex = ACS_GetActorX(pufftid);
-      int ey = ACS_GetActorY(pufftid);
-      int ez = ACS_GetActorZ(pufftid);
+      int ex = GetX(pufftid);
+      int ey = GetY(pufftid);
+      int ez = GetZ(pufftid);
 
       struct polar cpp = ctopol(ex - sx, ey - sy);
       cpp.dst /= 4;
@@ -88,8 +88,8 @@ void Lith_Cercle(void)
          ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024,
             FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
 
-         ax = ACS_GetActorX(pufftid);
-         ay = ACS_GetActorY(pufftid);
+         ax = GetX(pufftid);
+         ay = GetY(pufftid);
          az = ACS_GetActorFloorZ(pufftid);
       }
 
@@ -117,16 +117,16 @@ void Lith_Cercle(void)
       ACS_Delay(35);
 
       int fxtid2 = ACS_UniqueTID();
-      setmem(fxtid, "user_trigger", true);
-      setmem(fxtid, "user_fxtid", fxtid2);
+      SetMembI(fxtid, "user_trigger", true);
+      SetMembI(fxtid, "user_fxtid", fxtid2);
 
       ACS_AmbientSound("weapons/cercle/attack", 127);
 
       ACS_Delay(35);
-      setmem(fxtid2, "user_trigger", true);
+      SetMembI(fxtid2, "user_trigger", true);
 
       ACS_Delay(7);
-      setmem(fxtid2, "user_trigger", true);
+      SetMembI(fxtid2, "user_trigger", true);
 
       ACS_Delay(35);
 
@@ -149,7 +149,7 @@ void Lith_Cercle(void)
       ACS_Delay(10);
 
       // NB: The projectiles take the TIDs of the throwers, so this is actually triggering them.
-      setmem(fxtid3, "user_trigger", true);
+      SetMembI(fxtid3, "user_trigger", true);
 
       // Just in case.
       ACS_Thing_Remove(fxtid);

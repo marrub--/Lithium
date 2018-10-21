@@ -21,7 +21,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       ACS_CheckFlag(0, "COUNTKILL") ||
       ACS_PlayerNumber() != -1;
 
-   if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+   if(GetPropI(0, APROP_Health) <= 0)
       UData = (struct upgr_data_VitalScan){};
    else if(validtarget)
    {
@@ -34,8 +34,8 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       bool boss   = ACS_CheckFlag(0, "BOSS");
       bool shadow = ACS_CheckFlag(0, "SHADOW");
 
-      int chp = ACS_GetActorProperty(0, APROP_Health);
-      int shp = ACS_GetActorProperty(0, APROP_SpawnHealth);
+      int chp = GetPropI(0, APROP_Health);
+      int shp = GetPropI(0, APROP_SpawnHealth);
 
       int id = Lith_UniqueID();
       dmon_t const *const m = DmonSelf();
@@ -101,7 +101,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       }
 
       UData.freak  = six || freak || phantom || boss;
-      UData.cangle = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0)) * tau;
+      UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
    }
 }
 

@@ -197,8 +197,8 @@ void Lith_PlayerPreWeapons(struct player *p)
       {
          if(wep->ammotype & AT_NMag)
          {
-            wep->magmax = HERMES("GetMaxMag", p->num, wep->info->classname);
-            wep->magcur = HERMES("GetCurMag", p->num, wep->info->classname);
+            wep->magmax = ServCallI("GetMaxMag", p->num, wep->info->classname);
+            wep->magcur = ServCallI("GetCurMag", p->num, wep->info->classname);
          }
 
          if(wep->ammotype & AT_Ammo)
@@ -212,7 +212,7 @@ void Lith_PlayerPreWeapons(struct player *p)
       if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 5)
-            HERMES("AutoReload", p->num, info->classname);
+            ServCallI("AutoReload", p->num, info->classname);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
@@ -244,7 +244,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       PrintTextA("cbifont", CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
-      HERMES("Lith_DelearSprite");
+      ServCallI("Lith_DelearSprite");
       break;
    case weapon_cfist:
       __with(fixed64 charge = 5 + InvNum("Lith_FistCharge") / 10.lk;)
@@ -278,7 +278,7 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
 script ext("ACS")
 int Lith_GetFinalizerMaxHealth(void)
 {
-   int sh = ACS_GetActorProperty(0, APROP_SpawnHealth);
+   int sh = GetPropI(0, APROP_SpawnHealth);
 
    ifauto(dmon_t *, m, DmonSelf())
       return sh + (m->maxhealth - sh) * 0.5;
@@ -344,7 +344,7 @@ void Lith_PoisonFXTicker()
       }
    }
 
-   if(ACS_GetActorProperty(0, APROP_Health) <= 0)
+   if(GetPropI(0, APROP_Health) <= 0)
    {
       InvTake("Lith_PoisonFXReset", 999);
       InvTake("Lith_PoisonFXTimer", 999);

@@ -43,7 +43,7 @@ reinit:
    if(p->num == 0)
    {
       world.fun = p->fun;
-      HERMES("Fun", world.fun);
+      ServCallI("Fun", world.fun);
    }
 
    Lith_BossWarning(p);
@@ -221,7 +221,7 @@ void Lith_PlayerCloseGUI(struct player *p)
    {
       if(world.pauseinmenus)
       {
-         HERMES("SetPaused", false);
+         ServCallI("SetPaused", false);
          Lith_ForPlayer() p->frozen--;
       }
       else
@@ -240,7 +240,7 @@ void Lith_PlayerUseGUI(struct player *p, int type)
    {
       if(world.pauseinmenus)
       {
-         HERMES("SetPaused", true);
+         ServCallI("SetPaused", true);
          Lith_ForPlayer() p->frozen++;
       }
       else
@@ -384,7 +384,7 @@ static void Lith_PlayerRunScripts(struct player *p)
       // Post-logic: Update the engine's data.
       Lith_PlayerUpdateStats(p); // Update engine info
 
-      if(world.pauseinmenus) HERMES("PauseTick", p->num);
+      if(world.pauseinmenus) ServCallI("PauseTick", p->num);
    }
 
    // Rendering
@@ -454,19 +454,15 @@ static void Lith_PlayerPreScore(struct player *p)
       p->scoreaccumtime = 0;
    }
 
-   if(p->scoreaccumtime > 0)
-      p->scoreaccumtime--;
-   else if(p->scoreaccumtime < 0)
-      p->scoreaccumtime++;
+        if(p->scoreaccumtime > 0) p->scoreaccumtime--;
+   else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
 }
 
 script
 static void Lith_PlayerPreStats(struct player *p)
 {
-   if(p->health < p->oldhealth)
-      p->healthused += p->oldhealth - p->health;
-   else if(p->health > p->oldhealth && ACS_Timer() != 1)
-      p->healthsum += p->health - p->oldhealth;
+        if(p->health < p->oldhealth                    ) p->healthused += p->oldhealth - p->health;
+   else if(p->health > p->oldhealth && ACS_Timer() != 1) p->healthsum  += p->health    - p->oldhealth;
 
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);

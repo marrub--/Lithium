@@ -31,7 +31,7 @@ static void Blinker(void)
 script
 void Lith_Title(void)
 {
-   URANUS("ForceDraw", true);
+   DrawCallI("ForceDraw", true);
 
    ACS_Delay(35*5);
 
@@ -61,7 +61,7 @@ void Lith_Title(void)
 
       Blinker();
       ACS_Delay(1);
-      URANUS("LE");
+      DrawCallI("LE");
    }
 
    for(int i = 0; i < 35 * 7; i++)
@@ -70,7 +70,7 @@ void Lith_Title(void)
       PrintText("cbifont", 0, 7,1, 6,1);
       Blinker();
       ACS_Delay(1);
-      URANUS("LE");
+      DrawCallI("LE");
    }
 
    for(fixed a = 1; a > 0; a -= 0.01)
@@ -79,14 +79,14 @@ void Lith_Title(void)
       PrintTextA("cbifont", 0, 7,1, 6,1, a);
       Blinker();
       ACS_Delay(1);
-      URANUS("LE");
+      DrawCallI("LE");
    }
 
    for(;;)
    {
       Blinker();
       ACS_Delay(1);
-      URANUS("LE");
+      DrawCallI("LE");
    }
 }
 

@@ -106,7 +106,7 @@ void Lith_Item_Destroy(item_t *item)
 {
    LogDebug(log_dev, "Lith_Item_Destroy: destroying item %p", item);
 
-   HERMES("DeleteItem", item);
+   ServCallI("DeleteItem", item);
 
    withplayer(item->user)
    {
@@ -122,7 +122,7 @@ void Lith_Item_Destroy(item_t *item)
 script
 bool Lith_Item_Use(item_t *item)
 {
-   return HERMES("UseItem", item);
+   return ServCallI("UseItem", item);
 }
 
 script
@@ -263,11 +263,11 @@ void Lith_PlayerUpdateInventory(struct player *p)
 script ext("ACS")
 void *Lith_ItemCreate(int w, int h)
 {
-   __str type = getmems(0, "m_invtype");
-   __str tag  = getmems(0, "m_invname");
-   u32   scr  = getmem (0, "m_invsell");
+   __str type = GetMembS(0, "m_invtype");
+   __str tag  = GetMembS(0, "m_invname");
+   u32   scr  = GetMembI(0, "m_invsell");
    __str spr  = StrParam(":ItemSpr:%S", tag);
-   __str name = ACS_GetActorPropertyString(0, APROP_NameTag);
+   __str name = GetPropS(0, APROP_NameTag);
 
    LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
 
@@ -406,11 +406,11 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       }
    }
 
-   PrintTextFmt("Equipped (%S)", HERMES_S("GetArmorDT"));
+   PrintTextFmt("Equipped (%S)", ServCallS("GetArmorDT"));
    PrintText("cbifont", CR_WHITE, 40,1, 38,1);
 
    for(int i = 0; i < aslot_max; i++)
-      ifw(__str name = HERMES_S("GetArmorSlot", i), name != "")
+      ifw(__str name = ServCallS("GetArmorSlot", i), name != "")
    {
       PrintTextStr(name);
       PrintText("cbifont", CR_WHITE, 40,1, 45+7*i,1);

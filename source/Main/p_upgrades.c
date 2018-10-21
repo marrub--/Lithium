@@ -25,13 +25,13 @@ static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int t
 {
    upgrade_t const *upgr = upgr_;
 
-   setmem(tid, "user_upgradeid", upgr->info->key);
+   SetMembI(tid, "user_upgradeid", upgr->info->key);
 
    switch(upgr->info->category)
    {
-   case UC_Body: setmem(tid, "user_upgradebody", true); break;
-   case UC_Weap: setmem(tid, "user_upgradeweap", true); break;
-   default:      setmem(tid, "user_upgradeextr", true); break;
+   case UC_Body: SetMembI(tid, "user_upgradebody", true); break;
+   case UC_Weap: SetMembI(tid, "user_upgradeweap", true); break;
+   default:      SetMembI(tid, "user_upgradeextr", true); break;
    }
 
    return true;

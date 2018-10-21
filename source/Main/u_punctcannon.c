@@ -16,9 +16,9 @@ void Lith_PunctuatorFire(void)
 
       if(ACS_ThingCount(T_NONE, ptid))
       {
-         fixed x = ACS_GetActorX(ptid);
-         fixed y = ACS_GetActorY(ptid);
-         fixed z = ACS_GetActorZ(ptid);
+         fixed x = GetX(ptid);
+         fixed y = GetY(ptid);
+         fixed z = GetZ(ptid);
 
          fixed64 yaw = atan2f(p->y - y, p->x - x);
 

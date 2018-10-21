@@ -111,7 +111,7 @@ void Lith_PlayerLogEntry(struct player *p)
 script ext("ACS")
 void Lith_LogS(int levl, int type)
 {
-   __str name = HERMES_S("GetLogName");
+   __str name = ServCallS("GetLogName");
 
    if(name[0] == '_') name = Language("LITH_LOG%S", name);
 

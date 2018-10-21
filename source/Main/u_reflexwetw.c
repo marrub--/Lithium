@@ -17,11 +17,11 @@ void Lith_DodgeView()
       for(int i = 0; i < 20; i++)
       {
          fixed mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
-         ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh * mul);
+         SetPropK(0, APROP_ViewHeight, vh * mul);
          ACS_Delay(1);
       }
 
-      ACS_SetActorPropertyFixed(0, APROP_ViewHeight, vh);
+      SetPropK(0, APROP_ViewHeight, vh);
    }
 }
 

@@ -23,15 +23,11 @@
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
 #define countof(a) (sizeof(a) / sizeof(*(a)))
-#define swap(t, a, b) \
-   do { \
-      t _tmp = a; \
-      a = b; \
-      b = _tmp; \
-   } while(0)
+#define swap(t, a, b) do {t _tmp = a; a = b; b = _tmp;} while(0)
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
+
 #define LogDebug(level, ...) \
    do if(ACS_GetCVar("__lith_debug_level") & (level)) \
       Log(#level ": " __VA_ARGS__); \
@@ -40,26 +36,38 @@
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
 
-#define scall  ACS_ScriptCall
-#define scallk ACS_ScriptCallFixed
-#define scalls ACS_ScriptCallString
+#define SCallI ACS_ScriptCall
+#define SCallK ACS_ScriptCallFixed
+#define SCallS ACS_ScriptCallString
 
-#define getmem  ACS_GetUserVariable
-#define getmemk ACS_GetUserVariableFixed
-#define getmems ACS_GetUserVariableString
+#define GetMembI ACS_GetUserVariable
+#define GetMembK ACS_GetUserVariableFixed
+#define GetMembS ACS_GetUserVariableString
 
-#define setmem  ACS_SetUserVariable
-#define setmemk ACS_SetUserVariableFixed
+#define SetMembI ACS_SetUserVariable
+#define SetMembK ACS_SetUserVariableFixed
 
-#define HERMES(...)   scall ("Lith_HERMES", __VA_ARGS__)
-#define HERMES_F(...) scallk("Lith_HERMES", __VA_ARGS__)
-#define HERMES_S(...) scalls("Lith_HERMES", __VA_ARGS__)
+#define GetPropI ACS_GetActorProperty
+#define GetPropK ACS_GetActorPropertyFixed
+#define GetPropS ACS_GetActorPropertyString
 
-#define URANUS(...)   scall ("Lith_URANUS", __VA_ARGS__)
-#define URANUS_F(...) scallk("Lith_URANUS", __VA_ARGS__)
-#define URANUS_S(...) scalls("Lith_URANUS", __VA_ARGS__)
+#define SetPropI ACS_SetActorProperty
+#define SetPropK ACS_SetActorPropertyFixed
+#define SetPropS ACS_SetActorPropertyString
 
-#define Lith_IsPaused HERMES("GetPaused")
+#define GetX ACS_GetActorX
+#define GetY ACS_GetActorY
+#define GetZ ACS_GetActorZ
+
+#define ServCallI(...) SCallI("Lith_HERMES", __VA_ARGS__)
+#define ServCallK(...) SCallK("Lith_HERMES", __VA_ARGS__)
+#define ServCallS(...) SCallS("Lith_HERMES", __VA_ARGS__)
+
+#define DrawCallI(...) SCallI("Lith_URANUS", __VA_ARGS__)
+#define DrawCallK(...) SCallK("Lith_URANUS", __VA_ARGS__)
+#define DrawCallS(...) SCallS("Lith_URANUS", __VA_ARGS__)
+
+#define Lith_IsPaused ServCallI("GetPaused")
 
 #define Lith_PausableTick() \
    do ACS_Delay(1); \

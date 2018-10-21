@@ -40,11 +40,8 @@ void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
          }
       }
 
-      if(ACS_SetActivator(0, AAPTR_TRACER) && ACS_GetActorProperty(0, APROP_Health) > 0)
-         ACS_SpawnForced("Lith_TargetMarker",
-            ACS_GetActorX(0),
-            ACS_GetActorY(0),
-            ACS_GetActorZ(0) + (ACS_GetActorPropertyFixed(0, APROP_Height) / 2k));
+      if(ACS_SetActivator(0, AAPTR_TRACER) && GetPropI(0, APROP_Health) > 0)
+         ACS_SpawnForced("Lith_TargetMarker", GetX(0), GetY(0), GetZ(0) + (GetPropK(0, APROP_Height) / 2k));
    }
 }
 

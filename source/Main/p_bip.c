@@ -251,7 +251,7 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 script ext("ACS")
 void Lith_BIPUnlock(int pnum)
 {
-   withplayer(&players[pnum]) p->bipUnlock(getmems(0, "m_infopage"));
+   withplayer(&players[pnum]) p->bipUnlock(GetMembS(0, "m_infopage"));
 }
 
 script

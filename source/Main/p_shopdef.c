@@ -38,9 +38,9 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namef
 
       ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 128.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
 
-      fixed x = ACS_GetActorX(pufftid);
-      fixed y = ACS_GetActorY(pufftid);
-      fixed z = ACS_GetActorZ(pufftid);
+      fixed x = GetX(pufftid);
+      fixed y = GetY(pufftid);
+      fixed z = GetZ(pufftid);
 
       if((x || y || z) && ACS_Spawn("Lith_BoughtItem", x, y, z, tid = ACS_UniqueTID()))
       {

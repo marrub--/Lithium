@@ -27,7 +27,7 @@ void Lith_DOGS()
 
       ACS_SetMusic("lsounds/Silence.flac");
 
-      ACS_SetActorProperty(tid, APROP_MasterTID, p->tid);
+      SetPropI(tid, APROP_MasterTID, p->tid);
       ACS_SetActorState(tid, "PureSteggleEnergy");
    }
 }
@@ -41,9 +41,9 @@ void Lith_SteggleEnergy()
 
       for(;;)
       {
-         fixed x = ACS_GetActorX(0);
-         fixed y = ACS_GetActorY(0);
-         fixed z = ACS_GetActorZ(0);
+         fixed x = GetX(0);
+         fixed y = GetY(0);
+         fixed z = GetZ(0);
 
          fixed nx = lerpk(x, p->x, 0.01);
          fixed ny = lerpk(y, p->y, 0.01);
@@ -62,9 +62,9 @@ void Lith_BarrierBullets()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
    {
-      fixed ang   = ACS_VectorAngle(ACS_GetActorX(0) - p->x, ACS_GetActorY(0) - p->y);
-      fixed xang  = ACS_VectorAngle(p->x - ACS_GetActorX(0), p->y - ACS_GetActorY(0));
-      fixed zdiff = p->z - ACS_GetActorZ(0);
+      fixed ang   = ACS_VectorAngle(GetX(0) - p->x, GetY(0) - p->y);
+      fixed xang  = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0));
+      fixed zdiff = p->z - GetZ(0);
       fixed s     = ACS_Sin(ang) * 48.0;
       fixed c     = ACS_Cos(ang) * 48.0;
       fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);

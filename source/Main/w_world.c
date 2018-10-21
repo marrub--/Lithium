@@ -283,7 +283,7 @@ static void WInit(void)
 script ext("ACS")
 void Lith_Finale(void)
 {
-   HERMES("SetEnding", "Normal");
+   ServCallI("SetEnding", "Normal");
    ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
@@ -375,7 +375,7 @@ begin:
 
       if(world.ticks > ACS_GetCVar("lith_sv_failtime") * 35 * 60 * 60 && !world.islithmap)
       {
-         HERMES("SetEnding", "TimeOut");
+         ServCallI("SetEnding", "TimeOut");
          ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
          return;
       }

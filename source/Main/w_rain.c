@@ -30,9 +30,9 @@ void Lith_DoRain()
          InvTake("Lith_SMGHeat", 1);
 
       if((InHell || InSecret) && !world.islithmap)
-         HERMES("SpawnRain", "Lith_BloodRainDrop");
+         ServCallI("SpawnRain", "Lith_BloodRainDrop");
       else
-         HERMES("SpawnRain", "Lith_RainDrop");
+         ServCallI("SpawnRain", "Lith_RainDrop");
 
       ACS_Delay(1);
 
@@ -55,10 +55,8 @@ void Lith_RainDropSpawn()
 {
    if(rain_chk)
    {
-      int dist =
-         mag2i(ACS_GetActorX(0) - rain_px, ACS_GetActorY(0) - rain_py);
-      if(dist < rain_dist)
-         rain_dist = dist;
+      int dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
+      if(dist < rain_dist) rain_dist = dist;
    }
 }
 

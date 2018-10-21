@@ -171,14 +171,14 @@ struct player
    __prop mana          {get:  Lith_CheckActorInventory(->tid, "Lith_MagicAmmo")}
    __prop manamax       {get:  ACS_GetMaxInventory(->tid, "Lith_MagicAmmo")}
    __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
-   __prop health {get: ACS_GetActorProperty(->tid, APROP_Health),
-                  set: ACS_SetActorProperty(->tid, APROP_Health)}
+   __prop health {get: GetPropI(->tid, APROP_Health),
+                  set: SetPropI(->tid, APROP_Health)}
    __prop setActivator {call: ACS_SetActivator(->tid)}
-   __prop getVel {call: mag2k(->velx, ->vely)}
-   __prop grabInput {get: getmem(->tid, "m_grabInput"),
-                     set: setmem(->tid, "m_grabInput")}
-   __prop onground {get: getmem(->tid, "m_onground")}
-   __prop waterlevel {get: ACS_GetActorProperty(->tid, APROP_Waterlevel)}
+   __prop getVel       {call: mag2k(->velx, ->vely)}
+   __prop grabInput  {get: GetMembI(->tid, "m_grabInput"),
+                      set: SetMembI(->tid, "m_grabInput")}
+   __prop onground   {get: GetMembI(->tid, "m_onground")}
+   __prop waterlevel {get: GetPropI(->tid, APROP_Waterlevel)}
 
    // inventory
    __prop addItem {call: Lith_PlayerAddItem(this)}
@@ -205,7 +205,7 @@ struct player
    __prop deliverMail   {call: Lith_DeliverMail(this)}
    __prop bipUnlock     {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
    __prop discrim       {get:  Lith_PlayerDiscriminator(->pclass)}
-   __prop classname     {get:  ACS_GetActorPropertyString(->tid, APROP_NameTag)}
+   __prop classname     {get:  GetPropS(->tid, APROP_NameTag)}
 
    // cvars
    __prop getCVarI {call: ACS_GetUserCVar      (->num)}

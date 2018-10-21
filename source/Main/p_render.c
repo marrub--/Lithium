@@ -154,11 +154,11 @@ script
 void Lith_PlayerStyle(struct player *p)
 {
    if(p->scopetoken) {
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Subtract);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_scopealpha") * p->alpha);
+      SetPropI(0, APROP_RenderStyle, STYLE_Subtract);
+      SetPropK(0, APROP_Alpha, p->getCVarK("lith_weapons_scopealpha") * p->alpha);
    } else {
-      ACS_SetActorProperty(0, APROP_RenderStyle, STYLE_Translucent);
-      ACS_SetActorPropertyFixed(0, APROP_Alpha, p->getCVarK("lith_weapons_alpha") * p->alpha);
+      SetPropI(0, APROP_RenderStyle, STYLE_Translucent);
+      SetPropK(0, APROP_Alpha, p->getCVarK("lith_weapons_alpha") * p->alpha);
    }
 }
 

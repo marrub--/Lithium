@@ -118,9 +118,9 @@ void Lith_PlayerUpdateData(struct player *p)
    ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
    ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
 
-   p->x = ACS_GetActorX(0);
-   p->y = ACS_GetActorY(0);
-   p->z = ACS_GetActorZ(0);
+   p->x = GetX(0);
+   p->y = GetY(0);
+   p->z = GetZ(0);
 
    p->velx = ACS_GetActorVelX(0);
    p->vely = ACS_GetActorVelY(0);
@@ -259,9 +259,8 @@ void Lith_ResetPlayer(struct player *p)
 
       // i cri tears of pain for APROP_SpawnHealth
       p->viewheight   = ACS_GetActorViewHeight(0);
-      p->jumpheight   = ACS_GetActorPropertyFixed(0, APROP_JumpZ);
-      p->spawnhealth  = ACS_GetActorProperty(0, APROP_Health);
-      p->spawndfactor = ACS_GetActorPropertyFixed(0, APROP_DamageFactor);
+      p->jumpheight   = GetPropK(0, APROP_JumpZ);
+      p->spawnhealth  = GetPropI(0, APROP_Health);
       p->maxhealth    = p->spawnhealth;
       p->discount     = 1.0;
       p->stepnoise    = StrParam("player/%S/step", p->classname);
@@ -300,7 +299,7 @@ void Lith_ResetPlayer(struct player *p)
    // pls not exit map with murder thingies out
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
-   ACS_SetActorPropertyFixed(0, APROP_ViewHeight, p->viewheight);
+   SetPropK(0, APROP_ViewHeight, p->viewheight);
    InvTake("Lith_WeaponScopedToken", 999);
 
    Lith_PlayerResetCBIGUI(p);
@@ -372,10 +371,10 @@ void Lith_PlayerUpdateStats(struct player *p)
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
 
    if(p->speedmul != p->old.speedmul)
-      ACS_SetActorPropertyFixed(0, APROP_Speed, 0.7 + p->speedmul);
+      SetPropK(0, APROP_Speed, 0.7 + p->speedmul);
 
    if(p->jumpboost != p->old.jumpboost)
-      ACS_SetActorPropertyFixed(0, APROP_JumpZ, p->jumpheight * boost);
+      SetPropK(0, APROP_JumpZ, p->jumpheight * boost);
 }
 
 // EOF
