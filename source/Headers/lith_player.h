@@ -292,7 +292,6 @@ struct player
 
    // Static data
    uint  spawnhealth;
-   fixed spawndfactor;
    fixed jumpheight;
    fixed viewheight;
    __str stepnoise;

@@ -426,7 +426,7 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
    if(Lith_IsPaused) return;
 
    fixed acc = p->attr.attrs[at_acc] / 150.0;
-   fixed def = p->attr.attrs[at_def] / 150.0;
+   fixed def = p->attr.attrs[at_def] / 170.0;
    int   str = p->attr.attrs[at_str];
    int   stm = p->attr.attrs[at_stm];
    int  stmt = 75 - stm;
@@ -437,9 +437,9 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
    }
 
    p->maxhealth = p->spawnhealth + str;
-   ACS_SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
-   ACS_SetActorPropertyFixed(0, APROP_DamageFactor,     p->spawndfactor - def);
-   ACS_SetActorProperty     (0, APROP_SpawnHealth, p->maxhealth);
+   SetPropK(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
+   SetMembI(0, "m_dmgfac", minmax(100 * def, 0, 100));
+   SetPropI(0, APROP_SpawnHealth, p->maxhealth);
 
    if(p->health < stm+10 && (stmt < 2 || p->ticks % stmt == 0))
       p->health = p->health + 1;

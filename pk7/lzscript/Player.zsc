@@ -38,6 +38,8 @@ Lith_Cyberspace m_cs;
 bool m_grabInput;
 bool m_onground;
 
+int m_dmgfac;
+
 property ViewBob: m_vbob;
 
 override void BeginPlay()
@@ -308,17 +310,23 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
    let sv = Lith_HERMES.Instance();
 
    sv.m_dmgworld = !(inflictor || source);
-   sv.m_dmgtype = mod;
+   sv.m_dmgtype  = mod;
 
+   // hack: remove the damage type for world stuff so obituaries are easier to override
    if(sv.m_dmgworld || source == self) mod = 'None';
 
    // special protection
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
 
-   if(damage > 1 && CountInv("Lith_MegaProtection"))
+   if(damage > 1)
    {
-      TakeInventory("Lith_MegaProtection", damage / 2);
-      damage /= 2;
+      if(CountInv("Lith_MegaProtection"))
+      {
+         TakeInventory("Lith_MegaProtection", damage / 2);
+         damage /= 2;
+      }
+
+      if(m_dmgfac > 0) damage = max(1, damage * (100 - m_dmgfac) / 100);
    }
 
    return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
