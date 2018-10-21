@@ -19,8 +19,8 @@ page 0
 
 page 2
 {
-   if class Marine    `Who are you?
-   if class CyberMage `Right. The Cybernati.
+   if class pcl_marine    `Who are you?
+   if class pcl_cybermage `Right. The Cybernati.
 
    add 5
    push a
@@ -58,7 +58,7 @@ page 3
    `What, you want something?
    `
 
-   if class CyberMage
+   if class pcl_cybermage
    {
       `What did you need, Stilko?
       option "The nightmares are back." page 10

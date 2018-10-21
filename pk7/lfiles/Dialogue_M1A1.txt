@@ -7,7 +7,7 @@ unfinished
 {
    remote "OCS@localhost"
    
-   if class CyberMage
+   if class pcl_cybermage
    {
       logon "LogonAOF"
       `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
@@ -107,7 +107,7 @@ unfinished
 {
    remote "OCS@localhost"
 
-   if class CyberMage
+   if class pcl_cybermage
    {
       logon "LogonAOF"
       `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>

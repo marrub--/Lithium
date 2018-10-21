@@ -223,13 +223,8 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
 struct page *Lith_FindBIPPage(struct bip *bip, __str name)
 {
-   if(!name)
-      return null;
-
-   ForCategoryAndPage()
-      if(page->name == name)
-         return page;
-
+   if(!name) return null;
+   ForCategoryAndPage() if(page->name == name) return page;
    return null;
 }
 
@@ -238,12 +233,9 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
    struct page *page = bip->find(name);
 
    if(!page && pclass) ifauto(__str, discrim, Lith_PlayerDiscriminator(pclass))
-   {
       page = bip->find(StrParam("%S%S", name, discrim));
-   }
 
-   if(page && !page->unlocked)
-      UnlockPage(bip, page, pclass);
+   if(page && !page->unlocked) UnlockPage(bip, page, pclass);
 
    return page;
 }
@@ -257,8 +249,7 @@ void Lith_BIPUnlock(int pnum)
 script
 void Lith_DeallocateBIP(struct bip *bip)
 {
-   ForCategory()
-      bip->infogr[categ].free(true);
+   ForCategory() bip->infogr[categ].free(true);
    bip->init = false;
 }
 
@@ -280,6 +271,22 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);
+
+   if(pinf.body[0] == '#')
+   {
+      bool top = false;
+
+      ACS_BeginPrint();
+      ACS_BeginPrint();
+
+      for(int i = 1, l = ACS_StrLen(pinf.body); i < l; i++)
+      {
+         if(!top && pinf.body[i] == '\n') {top = true; ACS_PrintString(L(ACS_EndStrParam()));}
+         ACS_PrintChar(pinf.body[i]);
+      }
+
+      pinf.body = ACS_EndStrParam();
+   }
 
    return pinf;
 }

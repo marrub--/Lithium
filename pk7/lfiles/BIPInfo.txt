@@ -134,8 +134,9 @@ pC Info400
 pC Info402
 
 gA BIP
-pM CBI
+pM CBIStan
 pC CBIJem
+pD CBIAri
 
 gA    AttrACC
 gA    AttrDEF

@@ -82,31 +82,41 @@ software is included in most C/B operating system bases.
 The latest version of the software is 2.5, and since version 2.0 it has had
 automatic update functionality.
 
-== LITH_INFO_SHORT_CBI | C/B I
-== LITH_INFO_TITLE_CBI | Computer/Brain Interface (C/B I)
-@@ LITH_INFO_DESCR_CBI
+== LITH_INFO_SHORT_CBIBase | C/B I
+== LITH_INFO_TITLE_CBIBase | Computer/Brain Interface (C/B I)
+@@ LITH_INFO_DESCR_CBIBase
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
 a human brain and a computer. Usually installed within the skull and the brain,
 as well as in other areas of the central nervous system, a C/B I is a machine
 with almost infinite uses.
+
+== LITH_INFO_SHORT_CBIStan | $LITH_INFO_SHORT_CBIBase
+== LITH_INFO_TITLE_CBIStan | $LITH_INFO_TITLE_CBIBase
+@@ LITH_INFO_DESCR_CBIStan
+#LITH_INFO_DESCR_CBIBase
 
 Computer/Brain Interfaces are not classified as prosthetics, only enhancements,
 as they do not replace any part of the body and only add onto it. The C/B I
 currently installed is a self-servicing military model.
 
-== LITH_INFO_SHORT_CBIJem | $LITH_INFO_SHORT_CBI
-== LITH_INFO_TITLE_CBIJem | $LITH_INFO_TITLE_CBI
+== LITH_INFO_SHORT_CBIJem | $LITH_INFO_SHORT_CBIBase
+== LITH_INFO_TITLE_CBIJem | $LITH_INFO_TITLE_CBIBase
 @@ LITH_INFO_DESCR_CBIJem
-One of the biggest advancements in technology over the past thousand years, a
-Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
-a human brain and a computer. Usually installed within the skull and the brain,
-as well as in other areas of the central nervous system, a C/B I is a machine
-with almost infinite uses.
+#LITH_INFO_DESCR_CBIBase
 
 While Computer/Brain Interfaces are not usually classified as prosthetics, the
 one currently installed is due to extensive bodily restructuring done to the
 user.
+
+== LITH_INFO_SHORT_CBIAri | $LITH_INFO_SHORT_CBIBase
+== LITH_INFO_TITLE_CBIAri | $LITH_INFO_TITLE_CBIBase
+@@ LITH_INFO_DESCR_CBIAri
+#LITH_INFO_DESCR_CBIBase
+
+The currently installed Computer/Brain Interface is not known by this system.
+Please file a report on the Software Sans Pretium bug tracker and attach info
+about your interface to get it added to the descriptions list.
 
 ## Attributes ----------------------------------------------------------------|
 == LITH_INFO_SHORT_AttrACC | Accuracy
