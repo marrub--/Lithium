@@ -21,7 +21,7 @@ enum
    at_vit,
    at_stm,
    at_luk,
-   at_rge,
+   at_spc,
    at_max
 };
 

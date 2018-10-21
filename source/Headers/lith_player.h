@@ -243,6 +243,7 @@ struct player
    struct player_delta cur;
    struct player_delta old;
    int oldhealth;
+   int oldmana;
 
    // BIP
    struct bip bip, *bipptr;

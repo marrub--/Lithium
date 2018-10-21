@@ -164,7 +164,7 @@ void Lith_PhantomDeath(void)
    world.soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
-   DebugNote("score threshold raised to %lli", scorethreshold);
+   DebugNote("score threshold raised to %lli\n", scorethreshold);
 
    boss->phase++;
    boss = null;

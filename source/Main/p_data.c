@@ -15,7 +15,16 @@ static void SetupAttributes(struct player *p)
    p->attr.names[at_vit] = "VIT";
    p->attr.names[at_stm] = "STM";
    p->attr.names[at_luk] = "LUK";
-   p->attr.names[at_rge] = "RGE";
+
+   switch(p->pclass) {
+   case pcl_marine:    p->attr.names[at_spc] = "RGE"; break;
+   case pcl_cybermage: p->attr.names[at_spc] = "CON"; break;
+   case pcl_informant: p->attr.names[at_spc] = "ADR"; break;
+   case pcl_wanderer:  p->attr.names[at_spc] = "AGI"; break;
+   case pcl_assassin:  p->attr.names[at_spc] = "RSH"; break;
+   case pcl_darklord:  p->attr.names[at_spc] = "REF"; break;
+   case pcl_thoth:     p->attr.names[at_spc] = "???"; break;
+   }
 
    if(p->pclass & pcl_robot) {
       p->attr.names[at_vit] = "POT";

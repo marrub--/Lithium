@@ -62,6 +62,7 @@ reinit:
       // These can be changed any time, so save them here.
       struct player_delta olddelta = p->cur;
       int oldhealth = p->health;
+      int oldmana   = p->mana;
 
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
@@ -85,6 +86,7 @@ reinit:
       // Update previous-tic values
       p->old       = olddelta;
       p->oldhealth = oldhealth;
+      p->oldmana   = oldmana;
 
       // Reset view for next tic
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (float)p->addpitch);
@@ -396,18 +398,43 @@ static void Lith_PlayerRunScripts(struct player *p)
    Lith_PlayerDebugStats(p);
 }
 
+stkcall
+static void AttrRGE(struct player *p)
+{
+   int rge = p->attr.attrs[at_spc];
+
+   if(p->health < p->oldhealth)
+      p->rage += rge * (p->oldhealth - p->health) / 1000.0;
+
+   p->rage = lerpk(p->rage, 0, 0.02);
+}
+
+stkcall
+static void AttrCON(struct player *p)
+{
+   int rge = p->attr.attrs[at_spc];
+
+   if(p->mana > p->oldmana)
+      p->rage += rge * (p->mana - p->oldmana) / 1100.0;
+
+   p->rage = lerpk(p->rage, 0, 0.03);
+}
+
 script
 static void Lith_PlayerUpdateAttributes(struct player *p)
 {
+   if(Lith_IsPaused) return;
+
    fixed acc = p->attr.attrs[at_acc] / 150.0;
    fixed def = p->attr.attrs[at_def] / 150.0;
    int   str = p->attr.attrs[at_str];
    int   stm = p->attr.attrs[at_stm];
    int  stmt = 75 - stm;
-   int   rge = p->attr.attrs[at_rge];
 
-   if(p->health < p->oldhealth)
-      p->rage += rge * (p->oldhealth - p->health) / 1000.0;
+   switch(p->pclass) {
+   case pcl_marine:    AttrRGE(p); break;
+   case pcl_cybermage: AttrCON(p); break;
+   }
 
    p->maxhealth = p->spawnhealth + str;
    ACS_SetActorPropertyFixed(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
@@ -416,8 +443,6 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
 
    if(p->health < stm+10 && (stmt < 2 || p->ticks % stmt == 0))
       p->health = p->health + 1;
-
-   p->rage = lerpk(p->rage, 0, 0.02);
 }
 
 script

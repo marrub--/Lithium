@@ -92,33 +92,33 @@ gA IconOfSin
 ^ITEMS //---------------------------------------------------------------------|
 
 gA ScoreChip
-//gA HealthBonus
+gA HealthBonus
 
-//gA AllMap
-//gA Berserk
-//gA Infrared
-//gA RadSuit
-//gA Backpack
+gA AllMap
+gA Berserk
+gA Infrared
+gA RadSuit
+gA Backpack
 
-//gA Stimpack
-//gA Medikit
+gA Stimpack
+gA Medikit
 
-//gA KeyDisk
-//gA KeySkull
+gA KeyDisk
+gA KeySkull
 
-//gA Fragma
-//gA Invulnerability
-//gA Heart
-//gA Taochyan
+gA Fragma
+gA Invulnerability
+gA Heart
+gA Taochyan
 
-//gA ArmStandard
-//gA ArmImproved
-//gA ArmTeflon
-//gA ArmDendrite
-//gA ArmAerodynamic
-//gA ArmHazMat
-//gA ArmPinkSilver
-//gA ArmMidori
+gA ArmStandard
+gA ArmImproved
+gA ArmTeflon
+gA ArmDendrite
+gA ArmAerodynamic
+gA ArmHazMat
+gA ArmPinkSilver
+gA ArmMidori
 
 pM WeapnInter -> OFMD AllPoint
 pM WeapnInte2
@@ -148,7 +148,12 @@ gH    AttrSTM
 gR    AttrREP
 gN    AttrREG
 gA    AttrLUK
-gA    AttrRGE
+pM    AttrRGE
+pC    AttrCON
+pI    AttrADR
+pW    AttrAGI
+pA    AttrRSH
+pD    AttrREF
 
 ^UPGRADES //------------------------------------------------------------------|
 

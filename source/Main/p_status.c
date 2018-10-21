@@ -39,16 +39,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       helptrns += 0.3;
    }
 
-   switch(at) {
-   case at_acc: PrintTextStr(L("LITH_ATTR_HELP_ACC")); break;
-   case at_def: PrintTextStr(L("LITH_ATTR_HELP_DEF")); break;
-   case at_str: PrintTextStr(L("LITH_ATTR_HELP_STR")); break;
-   case at_vit: PrintTextStr(L("LITH_ATTR_HELP_VIT")); break;
-   case at_stm: PrintTextStr(L("LITH_ATTR_HELP_STM")); break;
-   case at_luk: PrintTextStr(L("LITH_ATTR_HELP_LUK")); break;
-   case at_rge: PrintTextStr(L("LITH_ATTR_HELP_RGE")); break;
-   }
-
+   PrintTextStr(Language("LITH_ATTR_HELP_%S", p->attr.names[at]));
    PrintTextA("chfont", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
