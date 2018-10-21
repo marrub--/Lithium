@@ -242,11 +242,15 @@ static void OnDeath(dmon_t *m)
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
+void Lith_GiveEXPToMonster(int amt)
+{
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
+}
+
+script ext("ACS")
 void Lith_PrintMonsterInfo(void)
 {
-   dmon_t *m = DmonPtr(0, AAPTR_PLAYER_GETTARGET);
-
-   if(m)
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
    {
       Log("%p (%p %p) %S active: %u id: %.3u\n"
           "wasdead: %u finalized: %u painwait: %i\n"
@@ -265,7 +269,7 @@ void Lith_PrintMonsterInfo(void)
           m->mi->exp, m->mi->score,
           m->mi->flags, m->mi->type);
       for(int i = 0; i < countof(m->resist); i++)
-         Log("resist %i: %i", i, m->resist[i]);
+         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
    }
    else
       Log("no active monster");
