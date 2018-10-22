@@ -58,6 +58,8 @@ static void SpawnBoss(Actor a, string name, int phase)
    b.handleSpawnFlags();
    b.spawnflags = a.spawnflags;
 
+   b.health += a.health / 2;
+
    // delete it if it's not a boss, otherwise prepare for omega hack
    if(!a.bBOSS && !a.bBOSSDEATH)
    {
@@ -72,7 +74,7 @@ static void SpawnBoss(Actor a, string name, int phase)
       for(int i = 1; i < 8; i++) a.A_StopSound(i);
       a.setXYZ((65535, 65535, 0)); // Banish.
       a.removeFromHash();
-      a.tics = int.max;
+      a.tics = -1;
       a.tracer = b;
       a.giveInventory("Lith_BossFucker", 1);
    }
