@@ -57,15 +57,7 @@ void Lith_InstallCBIItem(int num)
       p->setActivator();
 
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->nam)
-      {
-         p->bipUnlock(c->nam);
-         if(c->nam == "Feuer"   ) InvGive("Lith_Feuer",    1);
-         if(c->nam == "Rend"    ) InvGive("Lith_Rend",     1);
-         if(c->nam == "Hulgyon" ) InvGive("Lith_Hulgyon",  1);
-         if(c->nam == "StarShot") InvGive("Lith_StarShot", 1);
-         if(c->nam == "Cercle"  ) InvGive("Lith_Cercle",   1);
-      }
+         if(c->nam) p->bipUnlock(c->nam);
    }
 }
 

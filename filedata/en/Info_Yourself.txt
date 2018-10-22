@@ -227,4 +227,12 @@ get angrier as your situation dims.
 
 Leveling up in rage will multiply damage dealt to enemies when you're hit.
 
+== LITH_INFO_SHORT_AttrCON | Concentration
+== LITH_INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
+@@ LITH_INFO_DESCR_AttrCON
+Concentration is your ability to focus energy during bursts of mana absorption
+into your very senses.
+
+Leveling up in concentration will multiply damage dealt when you gain mana.
+
 ## EOF

@@ -1,7 +1,7 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-// vim: columns=110
 #include "lith_player.h"
 #include "lith_monster.h"
+#include "lith_world.h"
 #include "lith_hudid.h"
 
 // Static Functions ----------------------------------------------------------|
@@ -233,6 +233,17 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       else if(heat < 300) InvTake("Lith_SMGHeat", 3);
       else if(heat < 400) InvTake("Lith_SMGHeat", 2);
       else                InvTake("Lith_SMGHeat", 1);
+   }
+
+   if(p->pclass == pcl_cybermage)
+   {
+                                           InvGive("Lith_Blade",    1);
+                                           InvGive("Lith_Delear",   1);
+      if(world.cbiupgr[cupg_c_slot3spell]) InvGive("Lith_Feuer",    1);
+      if(world.cbiupgr[cupg_c_slot4spell]) InvGive("Lith_Rend",     1);
+      if(world.cbiupgr[cupg_c_slot5spell]) InvGive("Lith_Hulgyon",  1);
+      if(world.cbiupgr[cupg_c_slot6spell]) InvGive("Lith_StarShot", 1);
+      if(world.cbiupgr[cupg_c_slot7spell]) InvGive("Lith_Cercle",   1);
    }
 
    SetSize(320, 240);
