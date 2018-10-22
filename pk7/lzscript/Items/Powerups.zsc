@@ -40,6 +40,45 @@ class Lith_PowerInvulnerableGiver : PowerupGiver
    }
 }
 
+class Lith_PowerInvulnerableGiver2 : Lith_PowerInvulnerableGiver
+   {default {Powerup.Color "GoldMap";}}
+
+class Lith_InvulnerabilitySphere : Lith_CustomInventory replaces InvulnerabilitySphere
+{
+   default
+   {
+      Tag "Invulnerability";
+      Inventory.PickupSound "player/pickup/invuln";
+      Lith_CustomInventory.InfoPage "Invulnerability";
+
+      +COUNTITEM
+      +INVENTORY.BIGPOWERUP
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states(Actor)
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_InvulnerabilitySphereSprite", flags: SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   }
+
+   states(Item)
+   {
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 6, "Invuln");
+      TNT1 A 0 {
+         if(CVar.GetCVar('lith_player_altinvuln', player).getBool())
+            A_GiveInventory("Lith_PowerInvulnerableGiver2");
+         else
+            A_GiveInventory("Lith_PowerInvulnerableGiver");
+      }
+      stop;
+   }
+}
+
 class Lith_Backpack : Lith_ScoreItem replaces Backpack
 {
    default

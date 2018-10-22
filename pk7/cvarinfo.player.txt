@@ -13,6 +13,7 @@ user   float lith_player_footstepvol   = 0.2;
 user   float lith_player_viewtilt      = 0.0;
 user   bool  lith_player_rainshader    = true;
 user   int   lith_player_lvsys         = 1;
+user   bool  lith_player_altinvuln     = false;
 
 // These are 200 bytes of storage per, so overall we have around 6kb available.
 // If this isn't enough more of these can be added trivially (ACS doesn't

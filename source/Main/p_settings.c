@@ -30,6 +30,7 @@ Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");
 Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse");
 Bool("Enable rain shader",                "lith_player_rainshader");
+Bool("Alternate invulnerability palette", "lith_player_altinvuln");
 
 Category("Items");
 Bool("Teleport in bought items and upgrades", "lith_player_teleshop");
