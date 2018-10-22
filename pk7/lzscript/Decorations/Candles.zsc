@@ -5,7 +5,7 @@ class Lith_Candlestick : Lith_FlareDecor replaces Candlestick
       Health 60;
       Radius 20;
       Height 14;
-      DeathHeight 14;
+      DeathHeight 0;
       ProjectilePassHeight -14;
       Lith_FlareDecor.Type "Lith_CandleFlare";
       Lith_SwitchableDecor.Noise "amb/fire";
