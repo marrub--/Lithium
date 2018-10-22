@@ -168,7 +168,7 @@ class Lith_Armor_PinkSilver_Upper : Lith_Armor_Resistant
    {
       Lith_InventoryItem.InvName "ArmPinkSilver";
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_upper, 3, 4;
+      Lith_Armor.SlotSave aslot_upper, 6, 7;
       Lith_Armor_Resistant.Resist ldt_magic;
    }
 
@@ -181,7 +181,7 @@ class Lith_Armor_PinkSilver_Lower : Lith_Armor_Resistant
    {
       Lith_InventoryItem.InvName "ArmPinkSilver";
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_lower, 2, 3;
+      Lith_Armor.SlotSave aslot_lower, 4, 5;
       Lith_Armor_Resistant.Resist ldt_magic;
    }
 
@@ -194,7 +194,7 @@ class Lith_Armor_Midori_Upper : Lith_Armor_Resistant
    {
       Lith_InventoryItem.InvName "ArmMidori";
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_upper, 2, 3;
+      Lith_Armor.SlotSave aslot_upper, 6, 7;
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }
 
@@ -207,7 +207,7 @@ class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
    {
       Lith_InventoryItem.InvName "ArmMidori";
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_lower, 2, 3;
+      Lith_Armor.SlotSave aslot_lower, 4, 5;
       Lith_Armor_Resistant.Resist ldt_firemagic;
    }
 

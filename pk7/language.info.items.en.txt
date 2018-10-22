@@ -88,35 +88,87 @@
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmStandard" = "$LITH_ITEM_TAG_ArmStandard";
-"LITH_INFO_TITLE_ArmStandard" = "$LITH_INFO_SHORT_ArmStandard";
+"LITH_INFO_TITLE_ArmStandard" = "Standard Military Armor";
+"LITH_INFO_DESCR_ArmStandard" =
+   "A standard plated ballistic vest able to absorb a bit of damage from bullets. "
+   "Attribution to the current design has been lost to time from the hundreds of "
+   "revisions it has gone through, with parts of it dating back as far as 2082 CE."
+   "\n\n"
+   "Resists bullet damage. Upper 2 DT, lower 1 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmImproved" = "$LITH_ITEM_TAG_ArmImproved";
-"LITH_INFO_TITLE_ArmImproved" = "$LITH_INFO_SHORT_ArmImproved";
+"LITH_INFO_TITLE_ArmImproved" = "Improved Military Armor";
+"LITH_INFO_DESCR_ArmImproved" =
+   "An improved, but more expensive, version of standard military armor. Has "
+   "harder plates and a more absorbent synthetic material to compensate damage "
+   "with. Materials for this are mainly produced by SYM4.3, but the actual assembly "
+   "is done by many others."
+   "\n\n"
+   "Resists bullet damage. Upper 3 DT, lower 2 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmTeflon" = "Teflon Armor";
 "LITH_INFO_TITLE_ArmTeflon" = "$LITH_ITEM_TAG_ArmTeflon";
+"LITH_INFO_DESCR_ArmTeflon" =
+   "An armor with a vest made of a synthetic material composed of "
+   "Polytetrafluoroethylene (PTFE or brand name Teflon,) Kevlar, and others, made "
+   "to resist electric shock by deflection. The material is interleaved with, as "
+   "well, a material similar to the Improved Military Armor's. Produced by Sheka "
+   "Kaff, Inc."
+   "\n\n"
+   "Resists electric damage. Upper 3 DT, lower 1 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmDendrite" = "$LITH_ITEM_TAG_ArmDendrite";
 "LITH_INFO_TITLE_ArmDendrite" = "$LITH_INFO_SHORT_ArmDendrite";
+"LITH_INFO_DESCR_ArmDendrite" =
+   "An armor with a nickel dendritic micro-structure woven with tungsten and other "
+   "materials for extreme heat resistance. Produced by Sheka Kaff, Inc."
+   "\n\n"
+   "Resists fire damage. Upper 3 DT, lower 1 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmAerodynamic" = "$LITH_ITEM_TAG_ArmAerodynamic";
 "LITH_INFO_TITLE_ArmAerodynamic" = "$LITH_INFO_SHORT_ArmAerodynamic";
+"LITH_INFO_DESCR_ArmAerodynamic" =
+   "Light wind-gliding armor with a blue finish that allows the wearer increased "
+   "speed by wind resistance. Produced by Yigan."
+   "\n\n"
+   "No resistances. Upper 2 DT, lower 1 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmHazMat" = "$LITH_ITEM_TAG_ArmHazMat";
 "LITH_INFO_TITLE_ArmHazMat" = "$LITH_INFO_SHORT_ArmHazMat";
+"LITH_INFO_DESCR_ArmHazMat" =
+   "An insulating lead suit made to keep out radiation and other hazardous "
+   "environment conditions. Produced by Yigan."
+   "\n\n"
+   "Resists world damage. Upper 2 DT, lower 1 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmPinkSilver" = "$LITH_ITEM_TAG_ArmPinkSilver";
 "LITH_INFO_TITLE_ArmPinkSilver" = "$LITH_INFO_SHORT_ArmPinkSilver";
+"LITH_INFO_DESCR_ArmPinkSilver" =
+   "An artifact from an unknown dimension. On the back, the number \"72\" is written "
+   "in purple. Using a currently unknown magic layer, this armor has metaphysical "
+   "resistance as well as physical resistance. Upon closer inspection, you notice "
+   "a peculiar drawing on the inside that resembles a cute fox with a heart tail. "
+   "Next to the drawing is a message written in blue paint reading \"I miss you.\""
+   "\n\n"
+   "Resists magical damage. Upper 6 DT, lower 4 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_ArmMidori" = "$LITH_ITEM_TAG_ArmMidori";
 "LITH_INFO_TITLE_ArmMidori" = "$LITH_INFO_SHORT_ArmMidori";
+"LITH_INFO_DESCR_ArmMidori" =
+   "An artifact from the Reverse Ace dimension. A dark, matte green suit with "
+   "various religious and spiritual symbols hanging from it. Despite being placed "
+   "on the armor mainly with beaded strings, the objects don't seem to come off "
+   "no matter how hard you pull on them. This armor, through an unknown magic "
+   "layer, is the only known object capable of resisting fire magic."
+   "\n\n"
+   "Resists fire magic damage. Upper 6 DT, lower 4 DT.";
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_WeapnInter" = "Weapon Interface";
