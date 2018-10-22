@@ -111,14 +111,14 @@ gA Invulnerability
 gA Heart
 gA Taochyan
 
-gA ArmStandard
-gA ArmImproved
-gA ArmTeflon
-gA ArmDendrite
-gA ArmAerodynamic
-gA ArmHazMat
+gA ArmStandard    -> Earth
+gA ArmImproved    -> SYM43
+gA ArmTeflon      -> ShekaKaff
+gA ArmDendrite    -> ShekaKaff
+gA ArmAerodynamic -> Yigan
+gA ArmHazMat      -> Yigan
 gA ArmPinkSilver
-gA ArmMidori
+gA ArmMidori      -> ReverseAce
 
 pM WeapnInter -> OFMD AllPoint
 pM WeapnInte2
@@ -205,6 +205,8 @@ gO Omakeda    -> Earth
 gO Semaphore  -> OmicronXevv
 gO Sym43      -> AetosVi
 pM UnrealArms -> AetosVi
+gA Yigan
+gA ShekaKaff
 
 ^EXTRA* //--------------------------------------------------------------------|
 

@@ -58,6 +58,9 @@ if(p->num == 0) {
    ServerBool("Drop magazines from weapons", "lith_weapons_magdrops");
    ServerBool("Casings fade out",            "lith_weapons_casingfadeout");
    ServerBool("Magazines fade out",          "lith_weapons_magfadeout");
+   if(p->pclass == pcl_marine) {
+      ServerBool("Rainbow lasers", "lith_weapons_rainbowlaser");
+   }
 }
 
 Category("Heads Up Display");

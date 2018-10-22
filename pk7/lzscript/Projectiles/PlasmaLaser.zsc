@@ -1,0 +1,82 @@
+class Lith_PlasmaHit : Lith_PlasmaLaze
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.25;
+      Scale 0.65;
+      Species "Lith_Player";
+      DamageType "Electric";
+
+      +DONTHARMSPECIES
+      +BRIGHT
+      +NOINTERACTION
+      +PUFFONACTORS
+      +PUFFGETSOWNER
+      +NOGRAVITY
+      +NOBLOCKMAP
+      +FLOORCLIP
+      +EXTREMEDEATH
+      +FORCEXYBILLBOARD
+      +MTHRUSPECIES
+      -ALLOWPARTICLES
+   }
+
+   states
+   {
+   Crash:
+      BLL2 A 0;
+      BLL2 A 0 A_JumpIf(CallACS("Lith_Timer") % 3, "Null");
+      BLL2 A 0 A_PlaySound("weapons/plasma/laser/spark", CHAN_7, 1.0, true);
+   PrettiesLoop:
+      BLL2 A 0 A_JumpIf(alpha >= 1, "PrettiesDone");
+      BLL2 A 1 A_FadeIn(0.07);
+      loop;
+   PrettiesDone:
+      BLL2 A 1 A_FadeOut(0.1);
+      wait;
+   Spawn:
+   Melee:
+      BLL2 A 0;
+      BLL2 A 0 A_JumpIf(CallACS("Lith_Timer") % 3, "Null");
+      BLL2 A 0 A_PlaySound("weapons/plasma/laser/spark", CHAN_7, 1.0, true);
+      BLL2 A 1 A_FadeOut(0.05);
+      wait;
+   }
+}
+
+class Lith_PlasmaLaze : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.3;
+
+      +FORCEXYBILLBOARD
+      +NOINTERACTION
+      +NOTIMEFREEZE
+   }
+
+   override void Tick()
+   {
+      static const color crs[] = {"red", "orange", "yellow", "green", "cyan", "blue", "purple", "deep pink"};
+
+      if(lith_weapons_rainbowlaser)
+      {
+         A_SetRenderStyle(alpha, STYLE_AddStencil);
+         setShade(crs[uint(-int(target.distance2D(self) / 20) + level.totaltime) % crs.size()]);
+      }
+
+      Super.Tick();
+   }
+
+   states
+   {
+   Spawn:
+      BLLT E 2;
+      stop;
+   }
+}
+
+// EOF
+
