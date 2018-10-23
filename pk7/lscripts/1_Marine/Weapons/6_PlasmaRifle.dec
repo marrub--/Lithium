@@ -175,6 +175,7 @@ actor Lith_PlasmaRifle : Lith_MWeapon
       PLSG A 1 Lith_A_JumpIfMagFull
       PLSG A 1 offset(-2, 34)
       PLSG A 1 offset(-4, 37)
+      PLSG A 0 Lith_A_ReloadBobDn(0.5)
       PLSG A 1 offset(-9, 43) A_PlaySound("weapons/plasma/part/reloadout", CHAN_6)
       PLSG A 1 offset(-12, 47)
       PLSG A 1 offset(-14, 52)
@@ -183,6 +184,7 @@ actor Lith_PlasmaRifle : Lith_MWeapon
       PLSG A 8 offset(-10, 60)
       PLSG A 8 offset(-11, 60)
       PLSG A 0 Lith_A_ReloadFinish
+      PLSG A 0 Lith_A_ReloadBobUp(0.5)
       PLSG A 2 offset(-13, 59) A_PlaySound("weapons/plasma/part/reloadin", CHAN_7)
       PLSG A 2 offset(-11, 49)
       PLSG A 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE)

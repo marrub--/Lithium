@@ -43,13 +43,7 @@ class Lith_SMGTracer : FastProjectile
    }
 }
 
-class Lith_SMGTrail2 : Lith_SMGTrail
-{
-   default
-   {
-      Translation "Lith_SMGTrail2";
-   }
-}
+class Lith_SMGTrail2 : Lith_SMGTrail {default {Translation "Lith_SMGTrail2";}}
 
 class Lith_SMGTrail3 : Actor
 {
@@ -158,13 +152,7 @@ class Lith_SMGMagazine2 : Lith_SMGMagazine
    }
 }
 
-class Lith_SMGHeat : Inventory
-{
-   default
-   {
-      Inventory.MaxAmount 500;
-   }
-}
+class Lith_SMGHeat : Inventory {default {Inventory.MaxAmount 500;}}
 
 class Lith_SMG : Lith_CWeapon;
 
@@ -264,7 +252,7 @@ FireAnim1:
    CSMG A 1 A_StopSound(CHAN_WEAPON);
    CSMG A 0 A_PlaySound("weapons/smg/firedone", CHAN_5);
    goto Ready;
-   
+
 ReloadHeatFromFiring:
    CSMG A 0 A_StopSound(CHAN_WEAPON);
    CSMG A 0 A_PlaySound("weapons/smg/firedone", CHAN_5);
@@ -276,10 +264,15 @@ ReloadHeat:
    CSMG A 1 offset(4, 32);
    CSMG A 1 offset(8, 38);
    CSMG A 2 offset(12, 45) A_PlaySound("weapons/smg/open", CHAN_6);
+   CSMG A 0 Lith_A_ReloadBobDn(0.2);
    CSMG A 2 offset(16, 53);
+   CSMG A 0 Lith_A_ReloadBobDn(0.2);
    CSMG A 2 offset(19, 60);
+   CSMG A 0 Lith_A_ReloadBobDn(0.3);
    CSMG A 2 offset(21, 64);
+   CSMG A 0 Lith_A_ReloadBobDn(0.4);
    CSMG A 3 offset(23, 67);
+   CSMG A 0 Lith_A_ReloadBobDn(0.1);
    CSMG A 3 offset(22, 69) A_PlaySound("weapons/smg/eject", CHAN_6);
    CSMG A 3 offset(19, 70);
    CSMG A 0 A_TakeInventory("Lith_SMGHeat", 999);
@@ -298,13 +291,19 @@ ReloadHeat:
    CSMG A 3 offset(19, 67);
    CSMG A 8 offset(20, 66) A_PlaySound("weapons/smg/insert", CHAN_6);
    CSMG A 10 offset(21, 62);
+   CSMG A 0 Lith_A_ReloadBobUp(0.1);
    CSMG A 5 offset(20, 60);
+   CSMG A 0 Lith_A_ReloadBobUp(0.1);
    CSMG A 4 offset(21, 63);
+   CSMG A 0 Lith_A_ReloadBobUp(0.1);
    CSMG A 3 offset(23, 66);
+   CSMG A 0 Lith_A_ReloadBobUp(0.1);
    CSMG A 2 offset(24, 68);
+   CSMG A 0 Lith_A_ReloadBobUp(0.1);
    CSMG A 2 offset(25, 63);
    CSMG A 2 offset(24, 59);
    CSMG A 2 offset(22, 57) A_PlaySound("weapons/smg/close", CHAN_6);
+   CSMG A 0 Lith_A_ReloadBobDn(0.2);
    CSMG A 1 offset(20, 54);
    CSMG A 1 offset(16, 49);
    CSMG A 1 offset(12, 44);
@@ -324,7 +323,9 @@ Reload:
    CSMG A 1;
    CSMG D 1 offset(-2, 34);
    CSMG E 1 offset(-4, 37);
+   CSMG F 0 Lith_A_ReloadBobUp(0.2);
    CSMG F 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_6);
+   CSMG F 0 Lith_A_ReloadBobUp(0.2);
    CSMG F 1 offset(-12, 47);
    CSMG F 1 offset(-14, 52) Lith_A_DropMag("Lith_SMGMagazine", "Lith_SMGMagazine2", 4,-1,20, frandom(0,2),frandom(-1,1),0);
    CSMG F 2 offset(-12, 55);
@@ -333,8 +334,11 @@ Reload:
    CSMG F 8 offset(-11, 60);
    CSMG A 0 Lith_A_ReloadFinish;
    CSMG E 2 offset(-13, 59) A_PlaySound("weapons/smg/magin", CHAN_7);
+   CSMG E 0 Lith_A_ReloadBobDn(0.5);
    CSMG E 2 offset(-11, 49);
+   CSMG E 0 Lith_A_ReloadBobDn(0.2);
    CSMG E 2 offset(-11, 47);
+   CSMG E 0 Lith_A_ReloadBobDn(0.5);
    CSMG E 7 offset(-11, 45);
    CSMG E 1 offset(-12, 49);
    CSMG D 1 offset(-8, 53);

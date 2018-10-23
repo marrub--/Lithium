@@ -215,15 +215,22 @@ GrenadeReload:
    CRFG A 1 offset(12, 45);
    CRFG A 1 offset(16, 53);
    CRFG A 1 offset(19, 60);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG A 1 offset(21, 64);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG A 1 offset(23, 67);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG A 1 offset(22, 69);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG A 1 offset(19, 70);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG A 7 offset(18, 72);
    CRFG A 1 offset(17, 69);
    CRFG A 1 offset(19, 67);
    CRFG A 1 offset(20, 66);
+   CRFG A 0 Lith_A_ReloadBobUp(0.4);
    CRFG A 1 offset(21, 62);
+   CRFG A 0 Lith_A_ReloadBobUp(0.4);
    CRFG A 1 offset(20, 60) {invoker.m_grenfire = false;}
    CRFG A 1 offset(21, 63);
    CRFG A 1 offset(23, 66);
@@ -246,6 +253,7 @@ AltFire:
    goto FireGrenade;
 SwitchMode:
    CRFG A 0 ACS_NamedExecuteAlways("Lith_SwitchRifleFiremode", 0);
+   CRFG A 0 Lith_A_ReloadBobDn(0.1);
    CRFG DEF 1 A_WeaponReady(LITH_BOBONLY);
    CRFG A 9 A_WeaponReady(WRF_NOSECONDARY);
    goto Ready;
@@ -254,16 +262,22 @@ Reload:
    CRFG K 1 Lith_A_JumpIfMagFull;
    CRFG J 1 offset(-2, 34);
    CRFG J 1 offset(-4, 37);
+   CRFG J 0 Lith_A_ReloadBobUp(0.1);
    CRFG J 1 offset(-9, 43) A_PlaySound("weapons/rifle/reloadout", CHAN_6);
+   CRFG J 0 Lith_A_ReloadBobUp(0.1);
    CRFG J 1 offset(-12, 47);
+   CRFG J 0 Lith_A_ReloadBobUp(0.1);
    CRFG J 0 Lith_A_DropMag("Lith_CombatRifleMagazine", "Lith_CombatRifleMagazine2", 9,0,20, frandom(0,1),frandom(-1,-4),0);
    CRFG J 1 offset(-14, 52);
+   CRFG J 0 Lith_A_ReloadBobUp(0.1);
    CRFG J 2 offset(-12, 55);
    CRFG J 3 offset(-11, 57);
    CRFG J 8 offset(-10, 60);
    CRFG J 8 offset(-11, 60);
    CRFG J 0 Lith_A_ReloadFinish;
+   CRFG J 0 Lith_A_ReloadBobDn(0.1);
    CRFG J 2 offset(-13, 59) A_PlaySound("weapons/rifle/reloadin", CHAN_7);
+   CRFG J 0 Lith_A_ReloadBobDn(0.7);
    CRFG J 2 offset(-11, 49);
    CRFG J 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    CRFG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

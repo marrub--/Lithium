@@ -38,7 +38,9 @@ Reload:
    MISG A 1 offset(-2, 34);
    MISG A 1 offset(-4, 37);
    MISG A 1 offset(-9, 43) A_PlaySound("weapons/missile/reloadout", CHAN_6);
+   MISG A 0 Lith_A_ReloadBobUp(0.3);
    MISG A 1 offset(-12, 47);
+   MISG A 0 Lith_A_ReloadBobUp(0.4);
    MISG A 1 offset(-14, 52);
    MISG A 2 offset(-12, 55);
    MISG A 3 offset(-11, 57);
@@ -46,6 +48,7 @@ Reload:
    MISG A 8 offset(-11, 60);
    MISG A 0 Lith_A_ReloadFinish;
    MISG A 2 offset(-13, 59) A_PlaySound("weapons/missile/reloadin", CHAN_7);
+   MISG A 0 Lith_A_ReloadBobDn(0.4);
    MISG A 2 offset(-11, 49);
    MISG A 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    MISG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

@@ -121,7 +121,9 @@ actor Lith_SniperRifle : Lith_MWeapon
       "####" "#" 1 offset(19, 60)
       "####" "#" 1 offset(21, 64)
       "####" "#" 1 offset(23, 67)
+      "####" "#" 0 Lith_A_ReloadBobDn(0.5)
       "####" "#" 1 offset(22, 74) A_PlaySound("weapons/sniper/boltback", CHAN_5)
+      "####" "#" 0 Lith_A_ReloadBobDn(0.5)
       "####" "#" 1 offset(19, 78)
       "####" "#" 0 Lith_A_Casing("Lith_CasBigHot", 15, 4, 30, frandom(3,4), frandom(7,8), frandom(2,4))
       "####" "#" 5 offset(18, 80)
@@ -157,6 +159,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       SNPG A 1
       SNPG A 1 offset(-2, 34)
       SNPG A 1 offset(-4, 37)
+      SNPG A 0 Lith_A_ReloadBobUp(0.5)
       SNPG A 1 offset(-9, 43) A_PlaySound("weapons/sniper/magout", CHAN_6)
       SNPG A 1 offset(-12, 47)
       SNPG A 1 offset(-14, 52)
@@ -165,6 +168,7 @@ actor Lith_SniperRifle : Lith_MWeapon
       SNPG A 8 offset(-10, 60)
       SNPG A 8 offset(-11, 60)
       SNPG A 0 Lith_A_ReloadFinish
+      SNPG A 0 Lith_A_ReloadBobDn(0.5)
       SNPG A 2 offset(-13, 59) A_PlaySound("weapons/sniper/magin", CHAN_7)
       SNPG A 2 offset(-11, 49)
       SNPG A 2 offset(-11, 47)

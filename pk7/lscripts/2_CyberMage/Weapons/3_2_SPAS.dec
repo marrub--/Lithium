@@ -192,6 +192,7 @@ actor Lith_SPAS : Lith_CWeapon
       CSHR H 2 A_PlaySound("weapons/cshotgun/load", CHAN_6)
       CSHR IJKLMNOPQR 2
       CSHR A 0 Lith_A_ReloadFinish
+      CSHR S 0 Lith_A_ReloadBobDn(1.5)
       CSHR S 2 A_PlaySound("weapons/cshotgun/pump", CHAN_7)
       CSHR TUVWXYZB 2
       goto Ready

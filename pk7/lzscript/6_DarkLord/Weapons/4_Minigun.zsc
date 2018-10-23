@@ -166,6 +166,7 @@ Reload:
    MNGG # 1 offset(4, 37);
    MNGG # 1 offset(9, 43) A_PlaySound("weapons/minigun/magout", CHAN_5);
    MNGG # 1 offset(12, 47);
+   MNGG # 0 Lith_A_ReloadBobDn(0.7);
    MNGG # 1 offset(14, 52);
    MNGG # 2 offset(12, 55);
    MNGG # 3 offset(11, 57);
@@ -173,6 +174,7 @@ Reload:
    MNGG # 19 offset(11, 60);
    MNGG # 0 Lith_A_ReloadFinish;
    MNGG # 1 offset(13, 59) A_PlaySound("weapons/minigun/magin", CHAN_5);
+   MNGG # 0 Lith_A_ReloadBobUp(0.4);
    MNGG # 4 offset(11, 49);
    MNGG # 2 offset(11, 47);
    MNGG # 7 offset(11, 45);

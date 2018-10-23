@@ -362,9 +362,13 @@ Reload:
    TNT1 A 0 Lith_A_JumpIfMagFull;
    TNT1 A 0 Lith_A_ScopeOut;
    IONG A 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-2, 34) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-4, 37) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
+   IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-9, 43) A_PlaySound("weapons/ionrifle/magout", CHAN_7);
+   IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-12, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 1 offset(-14, 52) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 2 offset(-12, 55) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
@@ -374,7 +378,9 @@ Reload:
    IONG A 8 offset(-12, 60) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 0 Lith_A_ReloadFinish;
    IONG A 2 offset(-13, 59) A_PlaySound("weapons/ionrifle/magin", CHAN_6);
+   IONG A 0 Lith_A_ReloadBobUp(0.4);
    IONG A 2 offset(-11, 49);
+   IONG A 0 Lith_A_ReloadBobUp(0.4);
    IONG A 2 offset(-11, 47);
    IONG A 7 offset(-11, 45);
    IONG A 7 offset(-12, 45);

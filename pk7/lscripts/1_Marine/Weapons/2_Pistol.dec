@@ -189,10 +189,12 @@ actor Lith_Pistol : Lith_MWeapon
       PISG A 1 offset(0, 34)
       PISG A 1 offset(0, 36)
       PISG B 1 offset(0, 50)
+      PISG A 0 Lith_A_ReloadBobUp(0.2)
       PISG B 1 offset(-1, 51)
       PISG B 1
       PISG B 4 offset(-2, 53) Lith_A_DropMag("Lith_PistolMagazine", "Lith_PistolMagazine2", 5,0,20, frandom(1,3),0,0)
       PISG C 5
+      PISG A 0 Lith_A_ReloadBobDn(0.2)
       PISG B 1 offset(-1, 50)
       PISG B 1 offset(0, 45)
       PISG B 1 offset(0, 36)
