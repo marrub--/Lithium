@@ -1,4 +1,4 @@
-class Lith_MissileLauncher : Lith_Weapon;
+class Lith_MissileLauncher : Lith_OutcastsWeapon;
 
 default
 {

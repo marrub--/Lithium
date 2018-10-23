@@ -55,7 +55,7 @@ actor Lith_ChargeFistPuff
    }
 }
 
-actor Lith_ChargeFist : Lith_Weapon
+actor Lith_ChargeFist : Lith_OutcastsWeapon
 {
    Tag "$LITH_INFO_SHORT_ChargeFist"
    Weapon.Kickback 100

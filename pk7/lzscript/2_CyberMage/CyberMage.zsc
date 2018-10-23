@@ -25,7 +25,7 @@ class Lith_StealthSystem : PowerInvisibility
    }
 }
 
-class Lith_CWeapon : Lith_Weapon
+class Lith_CWeapon : Lith_OutcastsWeapon
 {
    default
    {

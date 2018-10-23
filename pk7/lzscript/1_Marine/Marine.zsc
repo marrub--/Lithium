@@ -22,7 +22,7 @@ class Lith_RocketBooster : PowerFlight
    }
 }
 
-class Lith_MWeapon : Lith_Weapon
+class Lith_MWeapon : Lith_OutcastsWeapon
 {
    default
    {

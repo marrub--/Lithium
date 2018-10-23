@@ -14,7 +14,6 @@ actor Lith_BFG9000 : Lith_MWeapon
    Weapon.UpSound "weapons/cannon/draw"
    Weapon.SlotNumber 7
    Weapon.SlotPriority 1
-   Weapon.BobStyle "InverseSmooth"
    Weapon.BobRangeX 1.7
    Weapon.BobSpeed 0.7
    

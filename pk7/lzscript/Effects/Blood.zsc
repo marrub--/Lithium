@@ -83,9 +83,9 @@ class Lith_Blood : Blood replaces Blood
    states
    {
    Spawn:
-      TNT1 A 0 nodelay A_Jump(256, "Heavy");
-      TNT1 A 0 A_Jump(256, "Medium");
-      TNT1 A 0 A_Jump(256, "Low");
+      TNT1 A 0 nodelay {return ResolveState("Heavy");}
+      TNT1 A 0 {return ResolveState("Medium");}
+      TNT1 A 0 {return ResolveState("Low");}
       BLUD A 0 Lith_A_Dogs;
       stop;
    Heavy:
