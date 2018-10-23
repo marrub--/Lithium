@@ -64,8 +64,8 @@ static void ApplyLevels(dmon_t *m, int prev)
    if(m->level >= 5)
    {
       fixed rn = m->rank / 10.0;
-      i64 hp10 = m->maxhealth / 10;
-      i64 newh = ((m->level - prev) * hp10 * (i64)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff)) / 0xfff;
+      int hp10 = m->maxhealth / 10;
+      int newh = ((m->level - prev) * (i96)hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff)) / 0xfff;
       LogDebug(log_dmonV, "monster %i: newh %li", m->id, newh);
       SetPropI(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
