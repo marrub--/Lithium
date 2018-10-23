@@ -16,8 +16,7 @@ play bool m_dmgworld;
 
 static void SetEnding(string ending)
 {
-   let c = CVar.FindCVar('__lith_end');
-   if(c.getString() == "") c.setString(ending);
+   if(__lith_end == "") CVar.FindCVar('__lith_end').setString(ending);
 }
 
 static clearscope Lith_HERMES Instance()

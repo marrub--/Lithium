@@ -61,15 +61,22 @@ Fire:
 Reload:
    700E B 1 Lith_A_JumpIfMagFull;
    700E B 1 offset(2, 31) A_PlaySound("weapons/700e/move", CHAN_6);
+   700E B 0 Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(1, 32);
+   700E B 0 Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(3, 32);
+   700E B 0 Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(4, 33);
+   700E B 0 Lith_A_ReloadBobUp(0.5);
    700E C 6 offset(5, 34);
    700E C 2 offset(2, 38);
    700E D 1 offset(3, 32) A_PlaySound("weapons/700e/out", CHAN_5);
    700E D 1 offset(1, 32);
+   700E D 0 Lith_A_ReloadBobDn(0.25);
    700E D 1 offset(-1, 32);
+   700E D 0 Lith_A_ReloadBobDn(0.25);
    700E E 1 offset(-1, 32);
+   700E D 0 Lith_A_ReloadBobDn(0.25);
    700E E 1 offset(-2, 32);
    700E F 1 offset(-3, 40);
    700E F 1 offset(-4, 54) {
@@ -80,6 +87,7 @@ Reload:
    TNT1 A 8;
    TNT1 A 4 Lith_A_ReloadFinish;
    700E C 1 offset(-35, 100);
+   700E C 0 Lith_A_ReloadBobUp(2);
    700E C 1 offset(-20, 90) A_PlaySound("weapons/700e/in", CHAN_5);
    700E C 1 offset(-15, 70);
    700E C 1 offset(-10, 60);

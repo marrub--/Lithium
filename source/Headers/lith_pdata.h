@@ -8,7 +8,6 @@ enum // Lith_PData
    pdata_riflemode,
    pdata_hassigil,
    pdata_weaponzoom,
-   pdata_recoil,
    pdata_pclass,
    pdata_semifrozen,
    pdata_slot3ammo,

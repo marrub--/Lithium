@@ -54,9 +54,9 @@ override void UiTick()
    if(gamestate == GS_FINALE && (!level.nextmap || level.nextmap.left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
 
-   if(m_eseq == ESEQ_HALT && CVar.FindCVar('__lith_end').getString() != "")
+   if(m_eseq == ESEQ_HALT && __lith_end != "")
    {
-      LoadEnding(String.Format("lfiles/End_%s.txt", CVar.FindCVar('__lith_end').getString()));
+      LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end));
       CVar.FindCVar('__lith_end').setString("");
    }
    else if(m_eseq >= ESEQ_RUN)

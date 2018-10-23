@@ -46,6 +46,7 @@ Float("Scope zoom factor",  "x", "lith_weapons_zoomfactor", 1.0, 10.0);
 Float("Scope opacity",      "x", "lith_weapons_scopealpha", 0.0, 1.0);
 Float("Weapon opacity",     "x", "lith_weapons_alpha",      0.0, 1.0);
 Float("Recoil amount",      "x", "lith_weapons_recoil",     0.0, 1.0);
+Float("Reload bob",         "x", "lith_weapons_reloadbob",  0.0, 1.0);
 Bool("Slot 3 weapons take ammo", "lith_weapons_slot3ammo");
 if(p->pclass == pcl_marine) {
    Bool("Modal Rifle scope",          "lith_weapons_riflescope");
