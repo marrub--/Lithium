@@ -53,12 +53,11 @@ static i96 scorethreshold = 1000000;
 
 static void Lith_SpawnBossReward(void)
 {
-   int x = GetX(0);
-   int y = GetY(0);
-   int z = GetZ(0);
+   fixed x = GetX(0);
+   fixed y = GetY(0);
+   fixed z = GetZ(0);
 
-   switch(rewardnum++)
-   {
+   switch(rewardnum++) {
    case 0: ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
    case 1: ACS_SpawnForced("Lith_BossReward2", x, y, z); break;
    case 2: ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
