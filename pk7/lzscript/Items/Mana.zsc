@@ -48,7 +48,7 @@ class Lith_ManaPickup : Lith_BasicPickup
    
    int user_deathwait;
    
-   states(actor)
+   states(Actor)
    {
    Spawn:
       BLLT Q 0;

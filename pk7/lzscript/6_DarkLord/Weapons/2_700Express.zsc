@@ -9,14 +9,14 @@ default
    +WEAPON.NOAUTOFIRE;
 }
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);

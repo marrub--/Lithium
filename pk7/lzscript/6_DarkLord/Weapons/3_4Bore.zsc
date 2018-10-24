@@ -7,7 +7,7 @@ default
    Weapon.SlotPriority 1;
 }
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_ShotgunPickup");
@@ -22,7 +22,7 @@ action(weapon) void Lith_A_Fire4Bore()
    A_PlaySound("weapons/4bore/fire", CHAN_WEAPON);
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    SHTG A 1 Lith_A_Ready;

@@ -10,7 +10,7 @@ actor Lith_DivisionSigilSprite : Lith_AnimItemSprite
 
    +BRIGHT
 
-   states(actor)
+   states(Actor)
    {
    SetSpr:
       DIVI ABCDEFGHIJKLMNOPQRSTUVW 0 Lith_A_JumpPhase

@@ -30,10 +30,16 @@ class Lith_MWeapon : Lith_OutcastsWeapon
    }
 }
 
+#include "lzscript/1_Marine/Weapons/1_Fist.zsc"
+#include "lzscript/1_Marine/Weapons/2_Pistol.zsc"
 #include "lzscript/1_Marine/Weapons/2_Revolver.zsc"
 #include "lzscript/1_Marine/Weapons/3_Shotgun.zsc"
+#include "lzscript/1_Marine/Weapons/3_LazShotgun.zsc"
 #include "lzscript/1_Marine/Weapons/3_2_SuperShotgun.zsc"
 #include "lzscript/1_Marine/Weapons/4_CombatRifle.zsc"
+#include "lzscript/1_Marine/Weapons/4_SniperRifle.zsc"
 #include "lzscript/1_Marine/Weapons/5_RocketLauncher.zsc"
+#include "lzscript/1_Marine/Weapons/6_PlasmaRifle.zsc"
+#include "lzscript/1_Marine/Weapons/7_OmegaCannon.zsc"
 
 // EOF

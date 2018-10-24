@@ -4,12 +4,12 @@ class Lith_DelearDotTrail : Actor
    {
       Scale 0.4;
       RenderStyle "Add";
-      
+
       +NOTIMEFREEZE
       +NOINTERACTION
       +FORCEXYBILLBOARD
    }
-   
+
    states
    {
    Spawn:
@@ -45,11 +45,11 @@ class Lith_DelearExplosion : Actor
    {
       RenderStyle "Add";
       Scale 0.35;
-      
+
       +NOINTERACTION
       +FORCEXYBILLBOARD
    }
-   
+
    states
    {
    Spawn:
@@ -70,7 +70,7 @@ class Lith_DelearDot : FastProjectile
       MissileType "Lith_DelearDotTrail";
       MissileHeight 8;
    }
-   
+
    states
    {
    Spawn:
@@ -96,7 +96,7 @@ default
    -WEAPON.NOAUTOFIRE
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    TNT1 A 1 Lith_A_Ready;

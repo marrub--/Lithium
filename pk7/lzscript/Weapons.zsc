@@ -1,10 +1,15 @@
 class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 
+#include "lzscript/Weapons/1_ChargeFist.zsc"
 #include "lzscript/Weapons/5_MissileLauncher.zsc"
+#include "lzscript/Weapons/6_PlasmaDiffuser.zsc"
+
+#include "lzscript/Weapons/Sword.zsc"
+#include "lzscript/Weapons/Wings.zsc"
 
 class Lith_OutcastsWeapon : Lith_Weapon
 {
-   states(weapon)
+   states(Weapon)
    {
    User4:
       #### # 0 {return CallACS("LPData", pdata_pclass) == pcl_marine ? null : ResolveState("ReadySelector");}
@@ -210,7 +215,7 @@ action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float 
 }
 
 // States.
-states(actor)
+states(Actor)
 {
 Spawn:
    TNT1 A 0;
@@ -218,7 +223,7 @@ Spawn:
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 ReadySelector:
    TNT1 A 0 {return ResolveState("Ready");}

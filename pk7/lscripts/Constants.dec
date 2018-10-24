@@ -1,4 +1,4 @@
-const float FIX = 65536.0;
-const int  IFIX = 65536;
+const float FIX = 32768.0;
+const int  IFIX = 32768;
 
 // EOF

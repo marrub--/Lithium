@@ -21,3 +21,5 @@ decalgroup Lith_DoomPoster 60
    Lith_DoomPoster3 1
    Lith_DoomPoster4 1
 }
+
+// EOF

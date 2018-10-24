@@ -1,6 +1,6 @@
 class Lith_DarkMatterDie : CustomInventory
 {
-   states(item)
+   states(Item)
    {
    Pickup:
       TNT1 A 0

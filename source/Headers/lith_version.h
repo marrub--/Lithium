@@ -1,6 +1,6 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#define Lith_Version "1.6 (Hyper-Dilithium)"
-#define Lith_APIVersion Lith_v1_6_0
+#define Lith_Version "1.6.1 (Hyper-Trilithium)"
+#define Lith_APIVersion Lith_v1_6_1
 #define Lith_CheckAPIVersion() \
    do { \
       if(world.apiversion != Lith_APIVersion) { \
@@ -10,6 +10,7 @@
       } \
    } while(0)
 #include <stdio.h>
+#define Lith_v1_6_1   16.1  // 1.6.1 (Hyper-Trilithium)
 #define Lith_v1_6_0   16.0  // 1.6 (Hyper-Dilithium)
 #define Lith_v1_5_3   15.3  // 1.5.3 (Indicolite Pegmatite)
 #define Lith_v1_5_2   15.2  // 1.5.2 (Rubellite Pegmatite)

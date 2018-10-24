@@ -3,11 +3,9 @@
 #include "lscripts/Projectiles/PoisonBullet.dec"
 #include "lscripts/Projectiles/MiniMissile.dec"
 #include "lscripts/Projectiles/HomingRocket.dec"
-#include "lscripts/Projectiles/PlasmaBolt.dec"
 #include "lscripts/Projectiles/Cannonball.dec"
 #include "lscripts/Projectiles/Punctuator.dec"
 #include "lscripts/Projectiles/RailgunParticles.dec"
 #include "lscripts/Projectiles/SwordSwing.dec"
-#include "lscripts/Projectiles/MonsterSoul.dec"
 
 // EOF

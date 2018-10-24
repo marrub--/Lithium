@@ -4,11 +4,11 @@ class Lith_RifleLaserTrail : Actor
    {
       RenderStyle "Add";
       Scale 0.14;
-      
+
       +NOINTERACTION
       +NOTIMEFREEZE
    }
-   
+
    states
    {
    Spawn:
@@ -70,21 +70,21 @@ default
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Lith_Weapon.MagSize 40;
-   
+
    +WEAPON.NOAUTOAIM
 }
 
 int  m_burst;
 bool m_grenfire;
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    CRFG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
@@ -106,12 +106,9 @@ Fire:
    CRFG A 0 {invoker.m_burst = 0;}
    CRFG A 0 A_JumpIf(CallACS("LPData", pdata_riflemode) == rifle_firemode_burst,   "FireBurst");
    CRFG A 0 A_JumpIf(CallACS("LPData", pdata_riflemode) == rifle_firemode_grenade, "FireGrenade");
-   
    TNT1 A 0 Lith_A_JumpIfMagEmpty;
    TNT1 A 0 Lith_A_MagIncr;
-   
    CRFG A 0 A_GunFlash("DummyFlash");
-   
    CRFG A 0 {
       if(!CallACS("LPData", pdata_upgrade, UPGR_LaserRCW))
       {
@@ -151,9 +148,7 @@ Fire:
 FireBurst:
    TNT1 A 0 Lith_A_JumpIfMagEmpty;
    TNT1 A 0 Lith_A_MagIncr;
-   
    CRFG A 0 A_GunFlash("DummyFlash");
-   
    CRFG AA 0 {
       if(!CallACS("LPData", pdata_upgrade, UPGR_LaserRCW))
       {
@@ -173,30 +168,24 @@ FireBurst:
    loop;
 FireBurstDone:
    CRFG A 4 A_WeaponReady(LITH_BOBONLY);
-   
    CRFG A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_LaserRCW), 2);
    CRFG A 2 A_WeaponReady(LITH_BOBONLY);
-   
    CRFG AAAAAA 1 A_Refire;
    goto Ready;
-
 FireGrenade:
    TNT1 A 0 A_JumpIf(invoker.m_grenfire, "GrenadeReload");
    TNT1 A 0 {invoker.m_grenfire = true;}
-   
    CRFG A 0 {
       if(CallACS("LPData", pdata_upgrade, UPGR_7777777))
          A_PlaySound("marathon/rifle/grenade", CHAN_WEAPON);
       else
          A_PlaySound("weapons/rifle/grenade", CHAN_WEAPON);
    }
-   
    CRFG A 0 A_AlertMonsters;
    CRFG G 2 bright A_FireProjectile("Lith_RifleGrenade");
    CRFG H 2 bright;
    CRFG I 2 bright;
    CRFG A 5;
-   
    CRFG A 1 A_ReFire;
    goto Ready;
 GrenadeReload:
@@ -206,8 +195,6 @@ GrenadeReload:
       else
          A_PlaySound("weapons/rifle/rldmount", CHAN_6);
    }
-
-   // oh jesus
    CRFG A 1 offset(1, 32);
    CRFG A 1 offset(3, 32);
    CRFG A 1 offset(4, 32);

@@ -33,10 +33,21 @@ class Lith_CWeapon : Lith_OutcastsWeapon
    }
 }
 
+#include "lzscript/2_CyberMage/Weapons/Magic/1_Blade.zsc"
 #include "lzscript/2_CyberMage/Weapons/Magic/2_Delear.zsc"
+#include "lzscript/2_CyberMage/Weapons/Magic/3_Feuer.zsc"
+#include "lzscript/2_CyberMage/Weapons/Magic/4_Rend.zsc"
+#include "lzscript/2_CyberMage/Weapons/Magic/5_Hulgyon.zsc"
+#include "lzscript/2_CyberMage/Weapons/Magic/6_StarShot.zsc"
+#include "lzscript/2_CyberMage/Weapons/Magic/7_Cercle.zsc"
 
+#include "lzscript/2_CyberMage/Weapons/1_CFist.zsc"
 #include "lzscript/2_CyberMage/Weapons/2_Mateba.zsc"
+#include "lzscript/2_CyberMage/Weapons/3_ShockRifle.zsc"
+#include "lzscript/2_CyberMage/Weapons/3_2_SPAS.zsc"
 #include "lzscript/2_CyberMage/Weapons/4_SMG.zsc"
 #include "lzscript/2_CyberMage/Weapons/5_IonRifle.zsc"
+#include "lzscript/2_CyberMage/Weapons/6_CPlasmaRifle.zsc"
+#include "lzscript/2_CyberMage/Weapons/7_StarDestroyer.zsc"
 
 // EOF

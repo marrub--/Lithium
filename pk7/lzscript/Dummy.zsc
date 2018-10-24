@@ -1,0 +1,67 @@
+class Lith_Dummy : Actor
+{
+   default
+   {
+      +NOTIMEFREEZE
+      +ALWAYSPUFF
+      +PUFFONACTORS
+      +NOGRAVITY
+      +BLOODLESSIMPACT
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 1;
+      stop;
+   }
+}
+
+class Lith_PlayerDummyPuff : Lith_Dummy
+{
+   default
+   {
+      Species "Lith_Player";
+      DamageType "Electric";
+      +DONTHARMSPECIES
+   }
+}
+
+class Lith_DummyArmor : BasicArmorBonus {}
+
+// Don't remove this, it is actually used for checking if this mod is loaded.
+class Lith_GreyHam : HealthBonus
+{
+   //$Category "Health and Armor"
+
+   default
+   {
+      Tag "Grey Ham";
+      Inventory.PickupMessage "Picked up a grey ham.";
+   }
+
+   states
+   {
+   Spawn:
+      MURB A -1;
+      stop;
+   }
+}
+
+class Lith_Bip : Actor
+{
+   default
+   {
+      +BRIGHT
+      +NOBLOCKMAP
+   }
+
+   states
+   {
+   Spawn:
+      ABIP A -1;
+      stop;
+   }
+}
+
+// EOF

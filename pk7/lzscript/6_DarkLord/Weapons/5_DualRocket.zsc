@@ -7,14 +7,14 @@ default
    Weapon.SlotPriority 1;
 }
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    GRLG A 1 Lith_A_Ready;
@@ -24,6 +24,7 @@ Deselect:
    GRLG AA 0 A_Lower;
    GRLG A 1;
    loop;
+
 Select:
    GRLG AA 0 A_Raise;
    GRLG A 1;

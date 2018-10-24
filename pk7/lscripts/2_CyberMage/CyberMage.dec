@@ -1,17 +1,3 @@
 #include "lscripts/2_CyberMage/ManaLeak.dec"
 
-#include "lscripts/2_CyberMage/Weapons/1_CFist.dec"
-#include "lscripts/2_CyberMage/Weapons/2_Mateba.dec"
-#include "lscripts/2_CyberMage/Weapons/3_ShockRifle.dec"
-#include "lscripts/2_CyberMage/Weapons/3_2_SPAS.dec"
-#include "lscripts/2_CyberMage/Weapons/6_CPlasmaRifle.dec"
-#include "lscripts/2_CyberMage/Weapons/7_StarDestroyer.dec"
-
-#include "lscripts/2_CyberMage/Weapons/Magic/1_Blade.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/3_Feuer.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/4_Rend.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/5_Hulgyon.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/6_StarShot.dec"
-#include "lscripts/2_CyberMage/Weapons/Magic/7_Cercle.dec"
-
 // EOF

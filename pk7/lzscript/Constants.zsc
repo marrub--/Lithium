@@ -139,7 +139,8 @@ enum Lith_ASCII
    Ch_Color = Ch_FS,
 }
 
-const FIX = 32767.0;
+const IFIX = 32768;
+const  FIX = 32768.0;
 
 const AmmoAmt_Bullet       = 10;
 const AmmoAmt_BulletBox    = 50;

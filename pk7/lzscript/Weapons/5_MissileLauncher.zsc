@@ -17,7 +17,7 @@ default
 
 int m_reset;
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    MISG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);

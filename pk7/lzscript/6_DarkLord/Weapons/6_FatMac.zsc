@@ -70,14 +70,14 @@ action(weapon) void Lith_A_FireFatMac()
       A_Recoil(5 + vl * 2);
 }
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    IONG A 1 Lith_A_Ready;
@@ -87,6 +87,7 @@ Deselect:
    IONG AAA 0 A_Lower;
    IONG A 1;
    loop;
+
 Select:
    IONG AAA 0 A_Raise;
    IONG A 1;
@@ -101,7 +102,6 @@ FireEmpty:
    IONG A 1 offset(0, 33);
    IONG A 5 offset(0, 32);
    goto Ready;
-
 Fire:
    TNT1 A 0 A_JumpIf(CountInv("Lith_PlasmaAmmo") < 700, "FireEmpty");
    TNT1 A 0 A_TakeInventory("Lith_PlasmaAmmo", 700);

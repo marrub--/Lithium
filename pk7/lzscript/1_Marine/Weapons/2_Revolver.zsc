@@ -14,7 +14,7 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    REVO A 1 Lith_A_Ready(WRF_ALLOWRELOAD);

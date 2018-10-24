@@ -1,3 +1,128 @@
+class Lith_FinalizerKill2 : Actor
+{
+   default
+   {
+      RenderStyle "AddStencil";
+      StencilColor "Red";
+      Alpha 0.9;
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      #### # 5;
+      #### # 1 A_FadeOut(0.05);
+      wait;
+   }
+}
+
+class Lith_FinalizerKill : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      #### # 10;
+      #### # 0 A_SpawnItemEx("Lith_FinalizerKill2", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+      #### # 1 A_FadeOut(0.05);
+      wait;
+   }
+}
+
+class Lith_Finalizer : Lith_CustomFunction
+{
+   states
+   {
+   Pickup:
+      TNT1 A 0 A_JumpIf(bBOSS, "Nope");
+      TNT1 A 0 A_JumpIf(float(health) / CallACS("Lith_GetFinalizerMaxHealth") > 0.5, "Nope");
+      TNT1 A 0 A_SpawnItemEx("Lith_FinalizerKill", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_MonsterFinalized");
+      TNT1 A 0 A_BossDeath;
+      TNT1 A 0 Thing_Remove(0);
+      stop;
+   Nope:
+      TNT1 A 0 A_DamageSelf(50);
+      stop;
+   }
+}
+
+class Lith_FinalizerEffect : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.2;
+      Radius 0;
+      Height 0;
+
+      +FORCEXYBILLBOARD
+      +NOINTERACTION
+      +NOTIMEFREEZE
+   }
+
+   states
+   {
+   Spawn:
+      BLLT O 10 bright;
+      BLLT O 1 bright A_FadeOut(0.2);
+      wait;
+   }
+}
+
+class Lith_FinalizerShotEffect : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.8;
+
+      +NOINTERACTION
+      +NOTIMEFREEZE
+   }
+
+   states
+   {
+   Spawn:
+      BLLT E 1 bright A_FadeOut;
+      wait;
+   }
+}
+
+class Lith_FinalizerShot : FastProjectile
+{
+   default
+   {
+      RenderStyle "Add";
+      Speed 90;
+      Height 6;
+      Radius 6;
+      MissileType "Lith_FinalizerShotEffect";
+
+      Projectile;
+      +HITTRACER
+      +NOTIMEFREEZE
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 1;
+      wait;
+   Death:
+      TNT1 A 0 A_GiveInventory("Lith_Finalizer", 1, AAPTR_TRACER);
+      stop;
+   }
+}
+
 class Lith_Mateba : Lith_CWeapon;
 
 default
@@ -10,18 +135,18 @@ default
    Weapon.BobRangeY 0.3;
    Weapon.UpSound "weapons/mateba/draw";
    Lith_Weapon.MagSize 12;
-   
+
    +WEAPON.NOAUTOFIRE
 }
 
-states(actor)
+states(Actor)
 {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
    stop;
 }
 
-states(weapon)
+states(Weapon)
 {
 Ready:
    MTBG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
@@ -44,10 +169,8 @@ Fire:
       if(invoker.m_fired & 1)
          Lith_A_Casing("Lith_CasSmallHot", 14, 2, 32, frandom(1,2), frandom(3,5), frandom(2,3));
    }
-
    TNT1 A 0 A_JumpIf(!CallACS("LPData", pdata_upgrade, UPGR_Mateba_A), 2);
    TNT1 A 0 Lith_A_JumpIfMagEmpty("Finalize");
-
    TNT1 A 0 Lith_A_RecoilDn(0.2);
    TNT1 A 0 A_FireBullets(2, 2, -1, 30, "BulletPuff", FBF_NORANDOM);
    TNT1 A 0 Lith_A_GunSmokeSmall;
@@ -63,7 +186,6 @@ Fire:
    MTBG A 1 offset(0, 32) A_WeaponReady(WRF_NOBOB);
    MTBG A 1 A_WeaponReady(WRF_NOBOB);
    goto Ready;
-
 Finalize:
    TNT1 A 0 Lith_A_GunSmokeSmall;
    TNT1 A 0 A_SpawnItemEx("Lith_FinalizerEffect", cos(pitch)*24, 0, ((height-19)+2) - sin(pitch)*24);

@@ -71,7 +71,7 @@ class Lith_DWeapon : Lith_Weapon
       A_Recoil(0.07);
    }
 
-   states(weapon)
+   states(Weapon)
    {
    User4:
       #### # 0 {
