@@ -73,7 +73,7 @@ class Lith_PlasmaBolt : Actor
       Radius 12;
       Height 12;
       Speed 50;
-      Damage (10);
+      DamageFunction 10;
       DamageType "Electric";
       Species "Lith_Player";
 
@@ -88,7 +88,7 @@ class Lith_PlasmaBolt : Actor
    {
    Spawn:
       TNT1 A 3;
-      TNT1 A 0 A_Jump(256, "Trail");
+      TNT1 A 0 {return ResolveState("Trail");}
    Trail:
       TNT1 A 0 A_JumpIf(m_trailstep >= 5, "TrailDone");
       TNT1 A 0 {m_trailstep++;}
@@ -99,7 +99,7 @@ class Lith_PlasmaBolt : Actor
       goto Step;
    Step:
       TNT1 A 1;
-      TNT1 A 0 A_Jump(256, "Trail");
+      TNT1 A 0 {return ResolveState("Trail");}
    Death:
       TNT1 AAAA 0 A_SpawnParticle("Green", SPF_FULLBRIGHT, 15, 4, 0, frandom(-5, 5),frandom(-5, 5),frandom(-5, 5), frandom(-5, 5),frandom(-5, 5),frandom(-5, 5));
       TNT1 A 2 A_PlaySound("weapons/plasma/explode", CHAN_AUTO);
