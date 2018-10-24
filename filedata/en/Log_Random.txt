@@ -15,7 +15,7 @@
 == LITH_PK_UNCERTAIN_007 | Yes. No. Yes?
 == LITH_PK_UNCERTAIN_008 | Yes, no, maybe. I don't know.
 
-== LITH_PK_GET_NUM | 90
+== LITH_PK_GET_NUM | 93
 == LITH_PK_GET_000 | You got the %S!
 == LITH_PK_GET_001 | Oh yes, the %S.
 == LITH_PK_GET_002 | The %S has been acquired.
@@ -146,6 +146,7 @@ and you will drown in it. You're fucking dead, kiddo.
 == LITH_PK_GET_090 | This %S isn't special, I'll pick up anything!
 == LITH_PK_GET_091 | Dr. %S, I'm UAC.
 == LITH_PK_GET_092 | Honk if you're an underpaid %S
+== LITH_PK_GET_093 | YOU AM NO REAL %S
 
 ## Random Weapon Names -------------------------------------------------------|
 == LITH_PK_weapon_unknown_NUM | 2
@@ -272,7 +273,7 @@ and you will drown in it. You're fucking dead, kiddo.
 == LITH_PK_weapon_c_sniper_012 | Illegal Rat
 == LITH_PK_weapon_c_sniper_013 | Ion Juicer
 
-== LITH_PK_weapon_c_shipgun_NUM | 11
+== LITH_PK_weapon_c_shipgun_NUM | 13
 == LITH_PK_weapon_c_shipgun_000 | Stahp Blastroyer
 == LITH_PK_weapon_c_shipgun_001 | Rats Derkler
 == LITH_PK_weapon_c_shipgun_002 | Fnukni Gigagnu
@@ -285,3 +286,5 @@ and you will drown in it. You're fucking dead, kiddo.
 == LITH_PK_weapon_c_shipgun_009 | S.S. Enterprise
 == LITH_PK_weapon_c_shipgun_010 | Stungle Dungle
 == LITH_PK_weapon_c_shipgun_011 | Srassa Drass
+== LITH_PK_weapon_c_shipgun_012 | Store Destroyer
+== LITH_PK_weapon_c_shipgun_013 | Master Spark
