@@ -1,3 +1,59 @@
+class Lith_IsaacThompsonTrail : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.8;
+      Alpha 0.8;
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      PUFF A 1 A_FadeOut;
+      wait;
+   }
+}
+
+class Lith_IsaacThompsonBullet : FastProjectile
+{
+   default
+   {
+      MissileType "Lith_IsaacThompsonTrail";
+      RenderStyle "Translucent";
+      Species "Lith_Phantom";
+      DamageType "Bullet";
+      Alpha 0.9;
+      Scale 0.3;
+      Radius 4;
+      Height 4;
+      DamageFunction 4 * random(1, 4);
+      Speed 128;
+
+      +BLOODSPLATTER
+      +MTHRUSPECIES
+      +DONTHARMSPECIES
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 1;
+      wait;
+   Crash:
+   Death:
+      PUFF CD 4;
+      stop;
+   XDeath:
+      TNT1 A 0;
+      stop;
+   }
+}
+
+class Lith_IsaacThompsonBullet2 : Lith_IsaacThompsonBullet {default {Damage 1;}}
+
 class Lith_Boss_Michael : Lith_BasicPhantom
 {
    default
@@ -5,14 +61,14 @@ class Lith_Boss_Michael : Lith_BasicPhantom
       Tag "Michael, Brother of Isaac";
       Health 4000;
       Speed 7;
-      
+
       +THRUSPECIES
       +NOINFIGHTING
    }
 
    override void Lith_OnDeath()
       {if(master && master.health > 0) A_KillMaster();}
-   
+
    states
    {
    See:
@@ -33,7 +89,7 @@ class Lith_Boss_Johnson : Lith_BasicPhantom
       Tag "Isaac, Superbiorem Est";
       Health 40;
       Speed 3;
-      
+
       +THRUSPECIES
       +NOINFIGHTING
    }

@@ -1,0 +1,42 @@
+class Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
+{
+   default
+   {
+      DamageType "Electric";
+   }
+
+   states
+   {
+   Spawn:
+      BAL2 AB 4 bright;
+      loop;
+   }
+}
+
+class Lith_Cacodemon : Cacodemon replaces Cacodemon
+{
+   default
+   {
+      Tag "$LITH_INFO_SHORT_Cacodemon";
+      BloodColor "Blue";
+   }
+
+   states
+   {
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Cacodemon);
+      goto Super::Death;
+   XDeath:
+      CACX A 5;
+      CACX B 5 A_XScream;
+      CACX C 5 A_NoBlocking;
+      CACX D 4;
+      CACX E 3;
+      CACX F 4;
+      CACX G 5;
+      CACX H -1;
+      stop;
+   }
+}
+
+// EOF

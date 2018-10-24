@@ -1,0 +1,68 @@
+class Lith_Imp : DoomImp replaces DoomImp
+{
+   default
+   {
+      Speed 9;
+      Health 79;
+      MinMissileChance 160;
+      Scale 0.9;
+      Radius 18;
+      Height 50;
+      Tag "$LITH_INFO_SHORT_Imp";
+   }
+
+   states
+   {
+   Spawn:
+      TROO AB 10 A_Look;
+      loop;
+   See:
+      TROO AABBCCDD 2 A_Chase;
+      loop;
+   Melee:
+   Missile:
+      TROO EF 6 A_FaceTarget;
+      TROO G 6 A_CustomComboAttack("Lith_ImpBall", 32, 3 * random(1, 8), "imp/melee");
+      TROO G 2;
+      goto See;
+   Pain:
+      TROO H 2;
+      TROO H 2 A_Pain;
+      TROO H 0 A_Jump(256, "See");
+   XDeath:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp * 1.5);
+      goto Super::XDeath;
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp);
+      goto Super::Death;
+   Raise:
+      TROO ML 8;
+      TROO KJI 6;
+      TROO A 0 {return ResolveState("See");}
+      stop;
+   }
+}
+
+class Lith_ImpBall : DoomImpBall
+{
+   default
+   {
+      Speed 16;
+      FastSpeed 32;
+      Scale 1.35;
+      DamageType "Fire";
+   }
+
+   states
+   {
+   Spawn:
+      BAL1 AB 4 bright;
+      loop;
+   Death:
+      BAL1 A 0 A_SetScale(1.0);
+      BAL1 CDE 6 bright;
+      stop;
+   }
+}
+
+// EOF

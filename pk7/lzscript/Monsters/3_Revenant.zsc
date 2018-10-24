@@ -1,12 +1,35 @@
+class Lith_Revenant : Revenant replaces Revenant
+{
+   default
+   {
+      Health 350;
+      Tag "$LITH_INFO_SHORT_Revenant";
+   }
+
+   states
+   {
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Revenant);
+      goto Super::Death;
+   XDeath:
+      REVX A 3;
+      REVX B 4 A_XScream;
+      REVX C 5 A_NoBlocking;
+      REVX DE 5;
+      REVX F -1;
+      stop;
+   }
+}
+
 class Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
 {
    default
    {
       DamageType "Shrapnel";
    }
-   
+
    int m_timer;
-   
+
    states
    {
    Spawn:
@@ -32,7 +55,7 @@ class Lith_XH_RevenantTracer : Lith_RevenantTracer
       Radius 2;
       Height 2;
    }
-   
+
    states
    {
    Spawn:

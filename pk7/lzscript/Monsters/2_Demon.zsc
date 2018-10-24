@@ -1,0 +1,37 @@
+class Lith_Demon : Demon replaces Demon
+{
+   default
+   {
+      Radius 29;
+      MeleeRange 52;
+      Tag "$LITH_INFO_SHORT_Demon";
+   }
+
+   states
+   {
+   Missile:
+      SARG A 0 A_JumpIfCloser(192, "MissileReal");
+      goto See;
+   MissileReal:
+      SARG A 2 A_FaceTarget;
+      SARG E 0 A_PlaySound("demon/melee", CHAN_BODY);
+      SARG E 0 A_FaceTarget;
+      SARG E 0 ThrustThingZ(0, 16, 0, 1);
+      SARG E 8 ThrustThing(angle * 256 / 360, 32, 0, 0);
+      SARG F 8;
+      SARG G 8 A_CustomMeleeAttack(4 * random(1, 10), "demon/melee");
+      goto See;
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Demon);
+      goto Super::Death;
+   XDeath:
+      SARX A 5;
+      SARX B 5 A_XScream;
+      SARX C 5 A_NoBlocking;
+      SARX DEF 5;
+      SARX G -1;
+      stop;
+   }
+}
+
+// EOF

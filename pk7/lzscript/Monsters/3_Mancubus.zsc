@@ -1,0 +1,46 @@
+class Lith_FatShot : FatShot replaces FatShot
+{
+   default
+   {
+      DamageType "Fire";
+      Damage 7;
+      Speed 10;
+   }
+
+   states
+   {
+   Spawn:
+      MANF AB 4 bright;
+      loop;
+   }
+}
+
+class Lith_Mancubus : Fatso replaces Fatso
+{
+   default
+   {
+      PainChance 50;
+      Tag "$LITH_INFO_SHORT_Mancubus";
+   }
+
+   states
+   {
+   Missile:
+      FATT G 10 A_FatRaise;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack1;
+      FATT IG 6 A_FaceTarget;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack2;
+      FATT IG 6 A_FaceTarget;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack3;
+      FATT IG 6 A_FaceTarget;
+      goto See;
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Mancubus);
+      goto Super::Death;
+   }
+}
+
+// EOF

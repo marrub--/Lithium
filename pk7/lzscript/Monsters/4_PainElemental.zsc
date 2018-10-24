@@ -1,0 +1,16 @@
+class Lith_PainElemental : PainElemental replaces PainElemental
+{
+   default
+   {
+      Tag "$LITH_INFO_SHORT_PainElemental";
+   }
+
+   states
+   {
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_PainElemental);
+      goto Super::Death;
+   }
+}
+
+// EOF

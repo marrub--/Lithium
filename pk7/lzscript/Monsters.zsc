@@ -2,17 +2,35 @@
 #include "lzscript/Monsters/Phantom.zsc"
 #include "lzscript/Monsters/BossBrain.zsc"
 
+#include "lzscript/Monsters/1_ChaingunGuy.zsc"
+#include "lzscript/Monsters/1_Imp.zsc"
+#include "lzscript/Monsters/1_ShotgunGuy.zsc"
 #include "lzscript/Monsters/1_ZombieMan.zsc"
 
+#include "lzscript/Monsters/2_Demon.zsc"
+#include "lzscript/Monsters/2_LostSoul.zsc"
+#include "lzscript/Monsters/2_Spectre.zsc"
+
+#include "lzscript/Monsters/3_Arachnotron.zsc"
+#include "lzscript/Monsters/3_Baron.zsc"
+#include "lzscript/Monsters/3_Cacodemon.zsc"
+#include "lzscript/Monsters/3_Knight.zsc"
+#include "lzscript/Monsters/3_Mancubus.zsc"
 #include "lzscript/Monsters/3_Revenant.zsc"
 
 #include "lzscript/Monsters/4_Archvile.zsc"
+#include "lzscript/Monsters/4_PainElemental.zsc"
 
 #include "lzscript/Monsters/5_Cyberdemon.zsc"
 #include "lzscript/Monsters/5_SpiderMastermind.zsc"
 
 #include "lzscript/Monsters/6_Isaac.zsc"
+#include "lzscript/Monsters/6_James.zsc"
+#include "lzscript/Monsters/6_Makarov.zsc"
 
+#include "lzscript/Monsters/ExtraHard.zsc"
+
+#include "lzscript/Monsters/TitleMap.zsc"
 #include "lzscript/Monsters/TitleMarine.zsc"
 #include "lzscript/Monsters/MapMarine.zsc"
 

@@ -1,0 +1,95 @@
+class Lith_HellKnight : HellKnight replaces HellKnight
+{
+   default
+   {
+      Speed 4;
+      Species "Lith_HellKnight";
+      Tag "$LITH_INFO_SHORT_HellKnight";
+      BloodColor "DarkGreen";
+   }
+
+   states
+   {
+   Spawn:
+      BOS2 AB 10 A_Look;
+      loop;
+   See:
+      BOS2 AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase;
+      loop;
+   Melee:
+   Missile:
+      BOS2 EF 6 A_FaceTarget;
+      BOS2 G 1;
+      BOS2 G 0 A_CustomComboAttack("Lith_PolarKnight", 32, 10 * random(1, 8), "baron/melee");
+      BOS2 GGG 1 A_SpawnProjectile("Lith_PKTrail", 32, 0, 0, CMF_BADPITCH);
+      goto See;
+   Pain:
+      BOS2 H 2;
+      BOS2 H 2 A_Pain;
+      goto See;
+   Death:
+      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_HellKnight);
+      goto Super::Death;
+   Raise:
+      BOS2 O 8;
+      BOS2 NMLKJI 8;
+      goto See;
+   }
+}
+
+class Lith_PKTrail : Actor
+{
+   default
+   {
+      Speed 14;
+      Radius 2;
+      Height 5;
+      Damage 2;
+      RenderStyle "Add";
+      Alpha 1;
+      DamageType "Magic";
+
+      Projectile;
+   }
+
+   states
+   {
+   Spawn:
+      BAL7 AAAABBBB 1 bright;
+      loop;
+   Death:
+      BAL7 CDE 6 bright;
+      stop;
+   }
+}
+
+class Lith_PolarKnight : Actor
+{
+   default
+   {
+      Scale 0.45;
+      Radius 2;
+      Height 5;
+      Speed 14;
+      Damage 7;
+      RenderStyle "Add";
+      Alpha 0.8;
+      SeeSound "enemies/hellknight/throw";
+      Decal "BaronScorch";
+      DamageType "Magic";
+
+      Projectile;
+   }
+
+   states
+   {
+   Spawn:
+      BLLT F 1 bright;
+      loop;
+   Death:
+      BLLT F 1 bright A_FadeOut(0.08);
+      loop;
+   }
+}
+
+// EOF
