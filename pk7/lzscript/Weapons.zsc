@@ -53,7 +53,7 @@ class Lith_OutcastsWeapon : Lith_Weapon
    _KnifeFinish:
       TNT1 AAAAAAAAA 0 A_Lower;
       TNT1 A 1;
-      TNT1 A 0 {return ResolveState("Select");}
+      TNT1 A 0 ResolveState("Select");
       stop;
    }
 }
@@ -217,7 +217,7 @@ Spawn:
 states(Weapon)
 {
 ReadySelector:
-   TNT1 A 0 {return ResolveState("Ready");}
+   TNT1 A 0 ResolveState("Ready");
 DummyFlash:
    TNT1 A 0 A_AlertMonsters;
    stop;

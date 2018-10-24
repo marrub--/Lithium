@@ -92,7 +92,7 @@ class Lith_DWeapon : Lith_Weapon
       #### # 2 offset(5, 35);
       #### # 3 offset(2, 33);
       #### # 1 offset(0, 32);
-      #### # 0 {return ResolveState("ReadySelector");}
+      #### # 0 ResolveState("ReadySelector");
    _ArmGun:
       ARGN B 1 bright Lith_ArmGunPreFire;
       ARGN A 1 bright Lith_ArmGunFire;

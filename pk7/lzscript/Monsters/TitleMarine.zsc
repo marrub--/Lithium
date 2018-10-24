@@ -43,7 +43,7 @@ Missile.Shotgun:
    #### F 1 A_Chase(null, null, CHF_NIGHTMAREFAST);
    #### F 1 A_Chase(null, null, CHF_FASTCHASE | CHF_NIGHTMAREFAST);
    #### F 0 A_JumpIfCloser(128, "RunAway");
-   #### A 0 {return ResolveState("See");}
+   #### A 0 ResolveState("See");
 Missile.Chaingun:
    #### E 0 A_Chase(null, null, CHF_NIGHTMAREFAST);
    #### E 1 A_FaceTarget;
@@ -86,7 +86,7 @@ Missile.ChaingunLoop:
    #### F 0 A_JumpIfCloser(128, "RunAway");
    #### F 0 A_Jump(32, "RunAway");
    #### A 0 A_M_Refire;
-   #### A 0 {return ResolveState("Missile.ChaingunLoop");}
+   #### A 0 ResolveState("Missile.ChaingunLoop");
 RunAway:
    #### A 0 {bFRIGHTENED = true;}
    #### AAAABBBBCCCCDDDD 1 A_Chase(flags: CHF_FASTCHASE | CHF_NIGHTMAREFAST);
@@ -105,7 +105,7 @@ Melee:
    #### E 1 A_Chase(null, null, CHF_NIGHTMAREFAST);
    #### E 1 A_Chase(null, null, CHF_FASTCHASE | CHF_NIGHTMAREFAST);
    #### E 0 A_M_SawRefire;
-   #### A 0 {return ResolveState("Melee");}
+   #### A 0 ResolveState("Melee");
    stop;
 }
 

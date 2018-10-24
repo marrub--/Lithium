@@ -19,7 +19,7 @@ class Lith_CasingBase : Actor
    Spawn:
       TNT1 A 0;
       TNT1 A 0 A_JumpIf(!lith_weapons_casings, "Null");
-      TNT1 A 0 {return ResolveState("Spawn1");}
+      TNT1 A 0 ResolveState("Spawn1");
       stop;
    Done:
       #### # 0 A_JumpIf(lith_weapons_casingfadeout, "DoneFade");

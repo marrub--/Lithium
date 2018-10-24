@@ -51,9 +51,11 @@ states
 Spawn:
    POSS AB 10 A_Look;
    loop;
+
 See:
    POSS AABBCCDD 4 A_Chase;
    loop;
+
 Missile:
    POSS E 0 {m_shots = random(1, 3);}
    POSS E 2 A_FaceTarget;
@@ -69,14 +71,17 @@ MissileLoop:
    loop;
 MissileEnd:
    POSS E 8;
-   goto See;
+   POSS E 0 ResolveState("See");
+   stop;
+
 Pain:
    POSS G 3;
    POSS G 3 A_Pain;
-   goto See;
+   POSS G 0 ResolveState("See");
+   stop;
+
 Death:
    POSS H -1;
-   wait;
 Crash:
    POSS H 5 Lith_A_Die;
    POSS IJK 5;
@@ -84,16 +89,17 @@ Crash:
    stop;
 Death.Extreme:
    POSS M -1;
-   wait;
 Crash.Extreme:
    POSS M 5 Lith_A_XDie;
    POSS NOPQRST 5;
    POSS U -1;
    stop;
+
 Raise:
    POSS K 5;
    POSS JTH 5;
-   goto See;
+   POSS A 0 ResolveState("See");
+   stop;
 }
 
 // EOF

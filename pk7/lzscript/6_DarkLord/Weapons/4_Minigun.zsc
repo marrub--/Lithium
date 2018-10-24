@@ -121,7 +121,7 @@ SpawnPickup:
 states(Weapon)
 {
 ReadySelector:
-   TNT1 A 0 {return ResolveState(invoker.m_laststate);}
+   TNT1 A 0 ResolveState(invoker.m_laststate);
 Ready:
    MNGG A 1 Lith_A_MinigunReady("Ready", "Fire");
    MNGG A 0 Lith_A_MinigunPostReady("Ready2");
