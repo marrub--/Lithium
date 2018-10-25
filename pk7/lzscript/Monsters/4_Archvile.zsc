@@ -27,7 +27,7 @@ class Lith_ArchvileImmolator : Actor
       TNT1 A 0;
       TNT1 A 1 A_SpawnItemEx("Lith_ArchvileImmolatorBlast",0,0,floorz);
       TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("FFFF73");
-      TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("732B00")
+      TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("732B00");
       TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("7F1B1B");
       stop;
    }
