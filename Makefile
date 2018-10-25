@@ -45,9 +45,9 @@ DECOMPAT_INPUTS=$(MAIN_INC)/lith_weapons.h \
 all: dec text fs bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
-font: tools/ttfuck/ttfuck tools/getcmap.rb
+font: tools/ttfuck/ttfuck.exe tools/getcmap.rb
 	@rm pk7/lgfx/Font/Jp12/*.png
-	@tools/ttfuck/ttfuck tools/BugMaruPGothic.ttc 12 "$$(tools/getcmap.rb)" pk7/lfiles/Font_Jp12.txt pk7/lgfx/Font/Jp12
+	@tools/ttfuck/ttfuck.exe tools/Font.ttf 8 "$$(tools/getcmap.rb)" pk7/lfiles/Font_Jp12.txt pk7/lgfx/Font/Jp12
 
 dec: tools/decompat.rb $(DECOMPAT_INPUTS)
 	@tools/decompat.rb $(DECOMPAT_INPUTS)

@@ -66,7 +66,7 @@
 "LITH_UPGRADE_TITLE_CyberLegs" = "動きウエットウェア";
 "LITH_UPGRADE_TITLE_ReactArmor" = "反応よろい";
 "LITH_UPGRADE_TITLE_ReactArmor2" = "反応よろい２";
-"LITH_UPGRADE_TITLE_DefenseNuke" = "ミニヌーク";
+"LITH_UPGRADE_TITLE_DefenseNuke" = "ミニニューク";
 "LITH_UPGRADE_TITLE_Adrenaline" = "アドレナリン注射器";
 "LITH_UPGRADE_TITLE_Magic" = "マナ吸収";
 "LITH_UPGRADE_TITLE_SoulCleaver" = "ソール裂いて";

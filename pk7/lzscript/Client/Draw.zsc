@@ -459,6 +459,7 @@ static int GetTex(string gfx)
 
 static int GetTexW(int gfx_)
 {
+   if(gfx_ < 0) return 0;
    textureid gfx; gfx.setNull(); gfx += gfx_;
    int w, h; [w, h] = TexMan.GetSize(gfx);
    return w;
@@ -466,6 +467,7 @@ static int GetTexW(int gfx_)
 
 static int GetTexH(int gfx_)
 {
+   if(gfx_ < 0) return 0;
    textureid gfx; gfx.setNull(); gfx += gfx_;
    int w, h; [w, h] = TexMan.GetSize(gfx);
    return h;
@@ -526,8 +528,11 @@ override void RenderOverlay(RenderEvent evt)
                int ucp = Utf8ToUtf32(utf, 0);
                if(ucp == Ch_Space) {x += FONT_SPACE; continue;}
 
-               let metr = CallACS("Lith_GetFontMetric", ucp);
-               textureid gfx; gfx.setNull(); gfx += CallACS("Lith_Metr_Tex", metr);
+               int metr = CallACS("Lith_GetFontMetric", ucp);
+               int gfx_ = CallACS("Lith_Metr_Tex", metr);
+               if(gfx_ < 0) continue;
+
+               textureid gfx; gfx.setNull(); gfx += gfx_;
 
                if(gfx.isValid())
                {
@@ -567,11 +572,8 @@ override void RenderOverlay(RenderEvent evt)
 
                   let xadv = CallACS("Lith_Metr_Xadv", metr);
                   let yofs = CallACS("Lith_Metr_Yofs", metr);
-                  let    w = CallACS("Lith_Metr_W",    metr);
-                  let    h = CallACS("Lith_Metr_H",    metr);
 
                   Screen.DrawTexture(gfx, false, x, y-yofs,
-                     DTA_DestWidth, w, DTA_DestHeight, h,
                      DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
                      DTA_Alpha, m_d[i].a, DTA_AlphaChannel, true,
                      DTA_FillColor, cr);

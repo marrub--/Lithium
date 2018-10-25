@@ -53,12 +53,12 @@ void Lith_SetFontMetric(uint key, int xadv, int yofs)
    struct glyph *metr = AllocFontMetric(key);
 
    int tex = DrawCallI("GetTex", StrParam("lgfx/Font/Jp12/%u.png", key));
-   int   w = DrawCallI("GetTexW", tex) / 2;
-   int   h = DrawCallI("GetTexH", tex) / 2;
+   int   w = DrawCallI("GetTexW", tex);
+   int   h = DrawCallI("GetTexH", tex);
 
    metr->key  = key;
-   metr->xadv = xadv / 2;
-   metr->yofs = (h + 2) + yofs / 2;
+   metr->xadv = xadv;
+   metr->yofs = h + yofs;
    metr->tex  = tex;
    metr->w    = w;
    metr->h    = h;
