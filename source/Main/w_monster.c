@@ -64,9 +64,10 @@ static void ApplyLevels(dmon_t *m, int prev)
    if(m->level >= 5)
    {
       fixed rn = m->rank / 10.0;
-      int hp10 = m->maxhealth / 10;
-      int newh = ((m->level - prev) * (i96)hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff)) / 0xfff;
-      LogDebug(log_dmonV, "monster %i: newh %li", m->id, newh);
+      i96 delt = m->level - prev;
+      i96 hp10 = m->spawnhealth / 10;
+      int newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
+      LogDebug(log_dmonV, "monster %i: newh %i", m->id, newh);
       SetPropI(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
@@ -118,30 +119,27 @@ static void BaseMonsterLevel(dmon_t *m)
    fixed rn2 = ACS_RandomFixed(1, MAXLEVEL);
    fixed bias;
 
+   switch(world.game) {
+   case Game_Episodic: bias = world.mapscleared / 10.0; break;
+   default:            bias = world.mapscleared / 40.0; break;
+   }
+
+   Lith_ForPlayer() {rn2 += p->attr.level / 2.0; break;}
+
+   bias *= bias;
+   bias += ACS_GameSkill() / (fixed)skill_nightmare * 0.1;
+   bias += world.difficulty / 100.0;
+   bias *= ACS_RandomFixed(1, 1.5);
+
    if(world.fun & lfun_ragnarok)
    {
       m->rank  = MAXRANK;
-      m->level = MAXLEVEL;
+      m->level = MAXLEVEL + rn2 * bias;
    }
    else
    {
-      switch(world.game) {
-      case Game_Episodic: bias = world.mapscleared / 10.0; break;
-      default:            bias = world.mapscleared / 40.0; break;
-      }
-
-      Lith_ForPlayer() {
-         rn2 += p->attr.level / 2.0;
-         break;
-      }
-
-      bias *= bias;
-      bias += (ACS_GameSkill() / (fixed)skill_nightmare) * 0.1;
-      bias += world.difficulty / 100.0;
-      bias *= ACS_RandomFixed(1, 1.5);
-
       m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
-      m->level = minmax(rn2 * bias * 1, 1, MAXLEVEL);
+      m->level = minmax(rn2 * bias    , 1, MAXLEVEL);
    }
 
    if(HasResistances(m)) {
@@ -287,7 +285,7 @@ void Lith_MonsterMain(dmon_t *m)
 
    m->ms = &ms;
    GetInfo(m);
-   m->maxhealth = m->ms->health;
+   m->spawnhealth = m->maxhealth = m->ms->health;
 
    BaseMonsterLevel(m);
 

@@ -16,9 +16,10 @@ extend class Lith_HERMES;
 
 static void PrepareForRagnarok(Actor mo)
 {
-   mo.damageMultiply = 1.4;
+   mo.damageMultiply += 2;
    mo.scale.x *= frandom(0.9, 1.1);
    mo.scale.y *= frandom(0.9, 1.1);
+   mo.bLOOKALLAROUND = true;
 }
 
 static void MonsterBarrierLook(Actor mo)

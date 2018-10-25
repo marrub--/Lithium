@@ -55,6 +55,7 @@ struct dmon {
    int  level;
    int  rank;
    int  maxhealth;
+   int  spawnhealth;
    int  resist[dmgtype_max];
 
    struct dmon_stat          *ms;
