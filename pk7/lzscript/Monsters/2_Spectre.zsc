@@ -1,16 +1,19 @@
-class Lith_Spectre : Lith_Demon replaces Spectre
+class Lith_XH_Spectre : Lith_Spectre
 {
-   default
-   {
-      SeeSound "";
-      ActiveSound "";
-      RenderStyle "Fuzzy";
-      Alpha 0.5;
-      Speed 11;
-      Tag "$LITH_INFO_SHORT_Spectre";
+}
 
-      +SHADOW
-   }
+class Lith_Spectre : Lith_Demon replaces Spectre;
+
+default
+{
+   Lith_Monster.Score Score_Spectre;
+   SeeSound "";
+   RenderStyle "Fuzzy";
+   Alpha 0.5;
+   Speed 11;
+   Tag "$LITH_INFO_SHORT_Spectre";
+
+   +SHADOW
 }
 
 // EOF

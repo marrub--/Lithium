@@ -7,10 +7,11 @@ class Lith_XH_ZombieMan : Lith_ZombieMan
 
    override void Lith_A_ZombieManShot()
    {
-      if(CheckIfCloser(target, 1024, false))
-         A_WolfAttack(WAF_NORANDOM|WAF_USEPUFF, "enemies/zombie/fire", 3.0 / 4.0, frandom(1, 4) * 3.0);
-      else
-         A_WolfAttack(WAF_NORANDOM, "enemies/chainguy/fire", 1.0 / 5.0, frandom(1, 8) * 3.0);
+      if(!Lith_BarrierBullets())
+         if(CheckIfCloser(target, 1024, false))
+            A_WolfAttack(WAF_NORANDOM|WAF_USEPUFF, "enemies/zombie/fire", 3.0 / 4.0, 20);
+         else
+            A_WolfAttack(WAF_NORANDOM, "enemies/chainguy/fire", 1.0 / 5.0, 60);
    }
 }
 
@@ -38,9 +39,7 @@ default
 virtual void Lith_A_ZombieManShot()
 {
    A_PlaySound("enemies/zombie/fire", CHAN_WEAPON);
-   if(target && target.countInv("Lith_HasBarrier"))
-      ACS_NamedExecuteAlways("Lith_BarrierBullets", 0);
-   else
+   if(!Lith_BarrierBullets())
       A_CustomBulletAttack(22.5, 5, 1, random(1, 4) * 3, "BulletPuff", 0, CBAF_NORANDOM);
 }
 

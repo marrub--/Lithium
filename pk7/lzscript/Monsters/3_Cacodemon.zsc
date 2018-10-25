@@ -13,30 +13,81 @@ class Lith_CacodemonBall : CacodemonBall replaces CacodemonBall
    }
 }
 
-class Lith_Cacodemon : Cacodemon replaces Cacodemon
+class Lith_XH_Cacodemon : Lith_Cacodemon
 {
-   default
-   {
-      Tag "$LITH_INFO_SHORT_Cacodemon";
-      BloodColor "Blue";
-   }
+}
 
-   states
-   {
-   Death:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Cacodemon);
-      goto Super::Death;
-   XDeath:
-      CACX A 5;
-      CACX B 5 A_XScream;
-      CACX C 5 A_NoBlocking;
-      CACX D 4;
-      CACX E 3;
-      CACX F 4;
-      CACX G 5;
-      CACX H -1;
-      stop;
-   }
+class Lith_Cacodemon : Lith_Monster replaces Cacodemon;
+
+default
+{
+   Lith_Monster.Score Score_Cacodemon;
+   Health 400;
+   Radius 31;
+   Height 56;
+   Mass 400;
+   Speed 8;
+   PainChance 128;
+   SeeSound "caco/sight";
+   PainSound "caco/pain";
+   DeathSound "caco/death";
+   ActiveSound "caco/active";
+   BloodColor "Blue";
+   Obituary "$OB_CACO";
+   HitObituary "$OB_CACOHIT";
+   Tag "$LITH_INFO_SHORT_Cacodemon";
+
+   +FLOAT
+   +NOGRAVITY
+}
+
+states
+{
+Spawn:
+   HEAD A 10 A_Look;
+   loop;
+
+See:
+   HEAD A 3 A_Chase;
+   loop;
+
+Missile:
+   HEAD BC 5 A_FaceTarget;
+   HEAD D 5 bright A_HeadAttack;
+   HEAD D 0 ResolveState("See");
+   stop;
+
+Pain:
+   HEAD E 3;
+   HEAD E 3 A_Pain;
+   HEAD F 6;
+   HEAD F 0 ResolveState("See");
+   stop;
+
+Death:
+   HEAD G -1;
+Crash:
+   HEAD G 8 {Lith_A_Die(); A_SetFloorClip();}
+   HEAD HIJK 8;
+   HEAD L -1;
+   stop;
+Death.Extreme:
+   CACX A -1;
+Crash.Extreme:
+   CACX A 5 Lith_A_XDie;
+   CACX BC 5;
+   CACX D 4;
+   CACX E 3;
+   CACX F 4;
+   CACX G 5;
+   CACX H -1;
+   stop;
+
+Raise:
+   HEAD L 8 A_UnsetFloorClip;
+   HEAD KJIHG 8;
+   HEAD A 0 ResolveState("See");
+   stop;
 }
 
 // EOF

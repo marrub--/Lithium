@@ -32,16 +32,27 @@ property Score: m_scoregive;
 
 void Lith_A_Die()
 {
-   CallACS("Lith_EmitScore", m_scoregive);
+   if(m_scoregive) CallACS("Lith_EmitScore", m_scoregive);
    A_Scream();
    A_NoBlocking();
 }
 
 void Lith_A_XDie()
 {
-   CallACS("Lith_EmitScore", m_scoregive * 1.5);
+   if(m_scoregive) CallACS("Lith_EmitScore", m_scoregive * 1.5);
    A_XScream();
    A_NoBlocking();
+}
+
+bool Lith_BarrierBullets(int n = 1)
+{
+   if(target && target.countInv("Lith_HasBarrier"))
+   {
+      for(int i = 0; i < n; i++) CallACS("Lith_BarrierBullets");
+      return true;
+   }
+   else
+      return false;
 }
 
 // EOF

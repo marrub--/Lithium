@@ -79,7 +79,7 @@ class Lith_BasicPhantom : Lith_Phantom
    }
 }
 
-class Lith_Phantom : Actor;
+class Lith_Phantom : Lith_Monster;
 
 default
 {
@@ -91,7 +91,6 @@ default
    RenderStyle "Stencil";
    StencilColor "Black";
 
-   Monster;
    +NOPAIN
    +THRUSPECIES
    +DONTHARMSPECIES
@@ -180,12 +179,14 @@ Spawn:
 Spawn2:
    PLAY #### 1 {A_Look(); A_Wander();}
    PLAY # 0 {m_step++;}
-   goto Spawn;
+   PLAY # 0 ResolveState("Spawn");
+   stop;
 GetOutOfDodge:
+   #### # 0 Lith_A_Die;
    #### # 1 A_FadeOut(0.05);
-   loop;
+   wait;
 Death:
-   PLAY H 10;
+   PLAY H 10 Lith_A_Die;
    PLAY I 60;
    TNT1 A 70;
    stop;

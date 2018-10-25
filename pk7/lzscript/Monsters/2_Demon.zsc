@@ -1,37 +1,87 @@
-class Lith_Demon : Demon replaces Demon
+class Lith_XH_Demon : Lith_Demon
 {
-   default
-   {
-      Radius 29;
-      MeleeRange 52;
-      Tag "$LITH_INFO_SHORT_Demon";
-   }
+}
 
-   states
-   {
-   Missile:
-      SARG A 0 A_JumpIfCloser(192, "MissileReal");
-      goto See;
-   MissileReal:
-      SARG A 2 A_FaceTarget;
-      SARG E 0 A_PlaySound("demon/melee", CHAN_BODY);
-      SARG E 0 A_FaceTarget;
-      SARG E 0 ThrustThingZ(0, 16, 0, 1);
-      SARG E 8 ThrustThing(angle * 256 / 360, 32, 0, 0);
-      SARG F 8;
-      SARG G 8 A_CustomMeleeAttack(4 * random(1, 10), "demon/melee");
-      goto See;
-   Death:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Demon);
-      goto Super::Death;
-   XDeath:
-      SARX A 5;
-      SARX B 5 A_XScream;
-      SARX C 5 A_NoBlocking;
-      SARX DEF 5;
-      SARX G -1;
-      stop;
-   }
+class Lith_Demon : Lith_Monster replaces Demon;
+
+default
+{
+   Lith_Monster.Score Score_Demon;
+   Health 150;
+   PainChance 180;
+   Speed 10;
+   Radius 29;
+   Height 56;
+   Mass 400;
+   MeleeRange 52;
+   SeeSound "demon/sight";
+   AttackSound "demon/melee";
+   PainSound "demon/pain";
+   DeathSound "demon/death";
+   ActiveSound "demon/active";
+   Obituary "$OB_DEMONHIT";
+   Tag "$LITH_INFO_SHORT_Demon";
+
+   +FLOORCLIP
+}
+
+states
+{
+Spawn:
+   SARG AB 10 A_Look;
+   loop;
+
+See:
+   SARG AABBCCDD 2 fast A_Chase;
+   loop;
+
+Melee:
+   SARG EF 8 fast A_FaceTarget;
+   SARG G 8 fast A_SargAttack;
+   SARG G 0 ResolveState("See");
+   stop;
+
+Missile:
+   SARG A 0 A_JumpIfCloser(192, 2);
+   SARG G 0 ResolveState("See");
+   SARG A 2 A_FaceTarget;
+   SARG E 0 A_PlaySound("demon/melee", CHAN_BODY);
+   SARG E 0 A_FaceTarget;
+   SARG E 0 ThrustThingZ(0, 16, 0, 1);
+   SARG E 8 ThrustThing(angle * 256 / 360, 32, 0, 0);
+   SARG F 8;
+   SARG G 8 A_CustomMeleeAttack(4 * random(1, 10), "demon/melee");
+   SARG G 0 ResolveState("See");
+   stop;
+
+Pain:
+   SARG H 2 fast;
+   SARG H 2 fast A_Pain;
+   SARG H 0 ResolveState("See");
+   stop;
+
+Death:
+   SARG I -1;
+Crash:
+   SARG I 8 Lith_A_Die;
+   SARG J 8;
+   SARG KLM 4;
+   SARG N -1;
+   stop;
+Death.Extreme:
+   SARX A -1;
+Crash.Extreme:
+   SARX A 5 Lith_A_XDie;
+   SARX B 5;
+   SARX C 5;
+   SARX DEF 5;
+   SARX G -1;
+   stop;
+
+Raise:
+   SARG NMLKJI 5;
+   SARG I 0 ResolveState("See");
+   stop;
 }
 
 // EOF

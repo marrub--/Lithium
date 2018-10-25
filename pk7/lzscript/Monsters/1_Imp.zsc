@@ -1,45 +1,34 @@
-class Lith_Imp : DoomImp replaces DoomImp
+class Lith_XH_ImpBall : Lith_ImpBall
 {
    default
    {
-      Speed 9;
-      Health 79;
-      MinMissileChance 160;
-      Scale 0.9;
-      Radius 18;
-      Height 50;
-      Tag "$LITH_INFO_SHORT_Imp";
+      Speed 24;
+      FastSpeed 48;
+   }
+}
+
+class Lith_XH_Imp : Lith_Imp
+{
+   default
+   {
+      Speed 8;
+      Health 80;
+      MinMissileChance 140;
+
+      +MISSILEMORE
    }
 
    states
    {
-   Spawn:
-      TROO AB 10 A_Look;
-      loop;
    See:
-      TROO AABBCCDD 2 A_Chase;
+      TROO AAABBBCCCDDD 1 A_Chase;
       loop;
    Melee:
    Missile:
       TROO EF 6 A_FaceTarget;
-      TROO G 6 A_CustomComboAttack("Lith_ImpBall", 32, 3 * random(1, 8), "imp/melee");
+      TROO G 5 A_CustomComboAttack("Lith_XH_ImpBall", 32, 3 * random(1, 8), "imp/melee");
       TROO G 2;
       goto See;
-   Pain:
-      TROO H 2;
-      TROO H 2 A_Pain;
-      TROO H 0 A_Jump(256, "See");
-   XDeath:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp * 1.5);
-      goto Super::XDeath;
-   Death:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Imp);
-      goto Super::Death;
-   Raise:
-      TROO ML 8;
-      TROO KJI 6;
-      TROO A 0 {return ResolveState("See");}
-      stop;
    }
 }
 
@@ -63,6 +52,75 @@ class Lith_ImpBall : DoomImpBall
       BAL1 CDE 6 bright;
       stop;
    }
+}
+
+class Lith_Imp : Lith_Monster replaces DoomImp;
+
+default
+{
+   Lith_Monster.Score Score_Imp;
+   Health 79;
+   Radius 18;
+   Height 50;
+   Mass 100;
+   Speed 9;
+   MinMissileChance 160;
+   Scale 0.9;
+   Tag "$LITH_INFO_SHORT_Imp";
+   SeeSound "imp/sight";
+   PainSound "imp/pain";
+   DeathSound "imp/death";
+   ActiveSound "imp/active";
+   HitObituary "$OB_IMPHIT";
+   Obituary "$OB_IMP";
+
+   +FLOORCLIP
+}
+
+states
+{
+Spawn:
+   TROO AB 10 A_Look;
+   loop;
+
+See:
+   TROO AABBCCDD 2 A_Chase;
+   loop;
+
+Melee:
+Missile:
+   TROO EF 6 A_FaceTarget;
+   TROO G 6 A_CustomComboAttack("Lith_ImpBall", 32, 3 * random(1, 8), "imp/melee");
+   TROO G 2;
+   goto See;
+
+Pain:
+   TROO H 2;
+   TROO H 2 A_Pain;
+   TROO H 0 ResolveState("See");
+   stop;
+
+Death:
+   TROO I -1;
+Crash:
+   TROO I 8 Lith_A_Die;
+   TROO J 8;
+   TROO KL 6;
+   TROO M -1;
+   stop;
+Death.Extreme:
+   TROO N -1;
+Crash.Extreme:
+   TROO O 5 Lith_A_XDie;
+   TROO PQRST 5;
+   TROO U -1;
+   stop;
+
+Raise:
+   TROO ML 8;
+   TROO KJI 6;
+   TROO A 0 ResolveState("See");
+   stop;
 }
 
 // EOF

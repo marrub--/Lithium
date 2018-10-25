@@ -15,32 +15,74 @@ class Lith_FatShot : FatShot replaces FatShot
    }
 }
 
-class Lith_Mancubus : Fatso replaces Fatso
+class Lith_XH_Mancubus : Lith_Mancubus
 {
-   default
-   {
-      PainChance 50;
-      Tag "$LITH_INFO_SHORT_Mancubus";
-   }
+}
 
-   states
-   {
-   Missile:
-      FATT G 10 A_FatRaise;
-      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
-      FATT HH 5 bright A_FatAttack1;
-      FATT IG 6 A_FaceTarget;
-      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
-      FATT HH 5 bright A_FatAttack2;
-      FATT IG 6 A_FaceTarget;
-      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
-      FATT HH 5 bright A_FatAttack3;
-      FATT IG 6 A_FaceTarget;
-      goto See;
-   Death:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Mancubus);
-      goto Super::Death;
-   }
+class Lith_Mancubus : Lith_Monster replaces Fatso;
+
+default
+{
+   Lith_Monster.Score Score_Mancubus;
+   Health 600;
+   Radius 48;
+   Height 64;
+   Mass 1000;
+   Speed 8;
+   PainChance 50;
+   SeeSound "fatso/sight";
+   PainSound "fatso/pain";
+   DeathSound "fatso/death";
+   ActiveSound "fatso/active";
+   Obituary "$OB_FATSO";
+   Tag "$LITH_INFO_SHORT_Mancubus";
+
+   +FLOORCLIP
+   +BOSSDEATH
+}
+
+states
+{
+Spawn:
+   FATT AB 15 A_Look;
+   loop;
+
+See:
+   FATT AABBCCDDEEFF 4 A_Chase;
+   loop;
+
+Missile:
+   FATT G 10 A_FatRaise;
+   FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+   FATT HH 5 bright A_FatAttack1;
+   FATT IG 6 A_FaceTarget;
+   FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+   FATT HH 5 bright A_FatAttack2;
+   FATT IG 6 A_FaceTarget;
+   FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+   FATT HH 5 bright A_FatAttack3;
+   FATT IG 6 A_FaceTarget;
+   FATT G 0 ResolveState("See");
+   stop;
+
+Pain:
+   FATT J 3;
+   FATT J 3 A_Pain;
+   FATT J 0 ResolveState("See");
+   stop;
+
+Death:
+   FATT K -1;
+Crash:
+   FATT K 6 Lith_A_Die;
+   FATT LMNOPQRS 6;
+   FATT T -1 A_BossDeath;
+   stop;
+
+Raise:
+   FATT RQPONMLK 5;
+   FATT A 0 ResolveState("See");
+   stop;
 }
 
 // EOF
