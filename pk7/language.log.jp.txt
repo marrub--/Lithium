@@ -27,6 +27,7 @@
 "LITH_LOG_AllMap" = "レベルマップ";
 "LITH_LOG_DoggoSphere" = "\cgわん\ciわん\ckわん\cdわん\chわん\ctわん";
 "LITH_LOG_Dogs" = "犬を得た";
+"LITH_LOG_ShobonSphere" = "（´・ω・｀）";
 
 // Ammo ----------------------------------------------------------------------|
 "LITH_LOG_Clip" = "ラジオ";
@@ -76,6 +77,10 @@
 // Misc ----------------------------------------------------------------------|
 "LITH_LOG_StartGame" = "”%jS”を押してメニューを開く。";
 "LITH_LOG_MailRecv" = "＜\cj%S\c-＞からメールを受信した。";
+
+"LITH_LOG_SellOrder" = "1";
+"LITH_LOG_Sell" = "%lli\cnscr\c-で%Sを売った。";
+"LITH_LOG_CBI" = "%Sをインストールされた。";
 
 "LITH_PICKUP_SELL_ORDER" = "1";
 "LITH_PICKUP_SELL" = "%lli\cnscr\c-で%Sを売った。";

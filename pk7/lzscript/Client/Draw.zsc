@@ -512,7 +512,7 @@ override void RenderOverlay(RenderEvent evt)
                DTA_Alpha, m_d[i].a);
          break;
       case dt_utx: {
-         name colo = 'j';
+         uint cr = 0xffffff;
          for(uint ln = 0, lns = m_d[i].lnx.size(), y = m_d[i].y + m_d[i].lny; ln < lns; ln++)
          {
             int x = m_d[i].x - m_d[i].lnx[ln];
@@ -523,21 +523,9 @@ override void RenderOverlay(RenderEvent evt)
                string utf = CharAtUtf8(m_d[i].txt[ln], pos);
                pos += utf.length();
 
-               if(utf.charCodeAt(0) == Ch_Color) {colo = utf.mid(1, 256); continue;}
-
-               int ucp = Utf8ToUtf32(utf, 0);
-               if(ucp == Ch_Space) {x += FONT_SPACE; continue;}
-
-               int metr = CallACS("Lith_GetFontMetric", ucp);
-               int gfx_ = CallACS("Lith_Metr_Tex", metr);
-               if(gfx_ < 0) continue;
-
-               textureid gfx; gfx.setNull(); gfx += gfx_;
-
-               if(gfx.isValid())
+               if(utf.charCodeAt(0) == Ch_Color)
                {
-                  uint cr;
-
+                  name colo = utf.mid(1, 256);
                   switch(colo) {
                   default:  Console.printf("invalid color %s", colo);
                   case 'j': case '-': case 'l': cr = 0xffffff; break;
@@ -569,7 +557,20 @@ override void RenderOverlay(RenderEvent evt)
                   case '[Lith_Grey]':           cr = 0xbfbfbf; break;
                   case '[Lith_Green]':          cr = 0x00ff00; break;
                   }
+                  continue;
+               }
 
+               int ucp = Utf8ToUtf32(utf, 0);
+               if(ucp == Ch_Space) {x += FONT_SPACE; continue;}
+
+               int metr = CallACS("Lith_GetFontMetric", ucp);
+               int gfx_ = CallACS("Lith_Metr_Tex", metr);
+               if(gfx_ < 0) continue;
+
+               textureid gfx; gfx.setNull(); gfx += gfx_;
+
+               if(gfx.isValid())
+               {
                   let xadv = CallACS("Lith_Metr_Xadv", metr);
                   let yofs = CallACS("Lith_Metr_Yofs", metr);
 

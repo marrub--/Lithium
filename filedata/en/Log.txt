@@ -74,19 +74,11 @@
 == LITH_LOG_CBI_CRDistInter | $LITH_CBI_RDistInter
 
 ## Level Up ------------------------------------------------------------------|
-%% LITH_LOG_LevelUpStan
-You feel stronger, somehow.
-
-%% LITH_LOG_LevelUpJem
-[INFO] Memory restored: %iKiB
-
-%% LITH_LOG_LevelUpFulk
-\cj<\cdVital\cj>\c- :: %i inodes reclaimed.
-
-%% LITH_LOG_LevelUpAri
-You're having fun with this.
-
-== LITH_LOG_LevelUpMod | $LITH_LOG_LevelUpStan
+== LITH_LOG_LevelUpStan | You feel stronger, somehow.
+== LITH_LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
+== LITH_LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
+== LITH_LOG_LevelUpAri  | You're having fun with this.
+== LITH_LOG_LevelUpMod  | $LITH_LOG_LevelUpStan
 
 ## Boss Warnings -------------------------------------------------------------|
 %% LITH_LOG_BossWarnStan
