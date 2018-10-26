@@ -4,6 +4,7 @@ class Lith_Blood1 : Actor
    {
       RenderStyle "Translucent";
       Alpha 0.7;
+
       +NOBLOCKMAP
       +NOTELEPORT
    }
@@ -11,53 +12,18 @@ class Lith_Blood1 : Actor
    states
    {
    Spawn:
-      BLUD ABC 4;
+      BLUD ABC 8;
       stop;
    }
 }
 
-class Lith_Blood2 : Actor
-{
-   default
-   {
-      RenderStyle "Translucent";
-      Alpha 0.7;
-      +NOBLOCKMAP
-      +NOTELEPORT
-   }
-
-   states
-   {
-   Spawn:
-      BLUD BC 3;
-      stop;
-   }
-}
-
-class Lith_Blood3 : Actor
-{
-   default
-   {
-      RenderStyle "Translucent";
-      Alpha 0.7;
-      +NOBLOCKMAP
-      +NOTELEPORT
-   }
-
-   states
-   {
-   Spawn:
-      BLUD C 2;
-      stop;
-   }
-}
+class Lith_Blood2 : Lith_Blood1 {states {Spawn: BLUD BC 8; stop;}}
+class Lith_Blood3 : Lith_Blood1 {states {Spawn: BLUD  C 8; stop;}}
 
 class Lith_Blood : Blood replaces Blood
 {
    default
    {
-      RenderStyle "Translucent";
-      Alpha 0.7;
       +CORPSE
    }
 
@@ -67,15 +33,22 @@ class Lith_Blood : Blood replaces Blood
       {
          let mo = it.thing;
          if(mo.player && mo.countInv("Lith_Dogs"))
-            mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0, 0, 32, 10, 0, 9, frandom(0, 360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
+         {
+            mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32,
+                                                         10,0,9,
+                             frandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
+         }
       }
    }
 
    void Lith_A_SpawnBlood(class<Actor> cl)
    {
-      A_SpawnItemEx(cl, frandom(-1,1), frandom(-1,1), frandom(-1,1),
-                        frandom(-8,8), frandom(-8,8), frandom( 4,8),
-                    0, SXF_TRANSFERTRANSLATION, 64);
+      for(int i = 0, n = random(1, 2); i < n; i++)
+      {
+         A_SpawnItemEx(cl, frandom(-1,1), frandom(-1,1), frandom(-1,1),
+                           frandom(-2,2), frandom(-2,2), frandom( 1,2),
+                       0, SXF_TRANSFERTRANSLATION, 64);
+      }
    }
 
    int m_lev;
