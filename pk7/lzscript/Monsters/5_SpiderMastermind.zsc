@@ -5,10 +5,10 @@ class Lith_SpiderMastermindBulletTrail : Actor
       RenderStyle "Add";
       Scale 0.6;
       Alpha 0.8;
-      
+
       +NOINTERACTION
    }
-   
+
    states
    {
    Spawn:
@@ -28,7 +28,7 @@ class Lith_SpiderMastermindBullet : FastProjectile
       Height 2;
       Damage 0;
       Speed 256;
-      
+
       +BLOODSPLATTER
       +MTHRUSPECIES
    }
@@ -66,7 +66,7 @@ default
    ActiveSound "spider/active";
    Obituary "$OB_SPIDER";
    Tag "$LITH_INFO_SHORT_SpiderMastermind";
-   
+
    +BOSS
    +MISSILEMORE
    +FLOORCLIP
@@ -116,12 +116,14 @@ states
 Spawn:
    SPID AB 10 A_Look;
    loop;
+
 See:
    SPID A 7 Lith_A_Metal;
    SPID BBCC 3 A_Chase;
    SPID D 7 Lith_A_Metal;
    SPID EEFF 3 A_Chase;
    loop;
+
 Missile:
    SPID A 2 bright;
    SPID A 0 A_PlaySound("enemies/spiderdemon/ready", CHAN_5|CHAN_NOPAUSE, 1, false, 0.3);
@@ -137,9 +139,9 @@ MissileLoop:
 Jump:
    SPID I 10 A_StopSound(CHAN_WEAPON);
    goto Missile;
+
 Death:
    SPID J -1;
-   wait;
 Crash:
    SPID J 0 A_StopSound(CHAN_WEAPON);
    SPID J 20 Lith_A_Die;

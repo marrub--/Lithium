@@ -10,7 +10,7 @@ class Lith_CyberRocket : Rocket replaces Rocket
       DamageFunction (15 * random(1, 8));
       DeathSound "explosion";
    }
-   
+
    states
    {
    Spawn:
@@ -84,7 +84,7 @@ default
    ActiveSound "cyber/active";
    Obituary "$OB_CYBORG";
    Tag "$LITH_INFO_SHORT_Cyberdemon";
-   
+
    +BOSS
    +MISSILEMORE
    +MISSILEEVENMORE
@@ -105,12 +105,14 @@ states
 Spawn:
    CYBR AB 10 A_Look;
    loop;
+
 See:
    CYBR A 3 A_Hoof;
    CYBR ABBCC 3 A_Chase;
    CYBR D 3 A_Metal;
    CYBR D 3 A_Chase;
    loop;
+
 Missile:
    CYBR E 2 A_FaceTarget;
    CYBR E 0 A_PlaySound("enemies/cyberdemon/ready", CHAN_5);
@@ -128,9 +130,9 @@ Missile:
    CYBR F 3 bright Lith_A_CyberdemonShoot;
    CYBR E 1 bright A_FaceTarget;
    goto See;
+
 Death:
    CYBR H -1;
-   wait;
 Crash:
    CYBR H 10;
    CYBR I 10 Lith_A_Die;

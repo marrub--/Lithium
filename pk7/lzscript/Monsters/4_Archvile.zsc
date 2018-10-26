@@ -57,46 +57,92 @@ class Lith_ArchvileImmolatorBlast : Actor
    }
 }
 
-class Lith_Archvile : Archvile replaces Archvile
+class Lith_XH_Archvile : Lith_Archvile
 {
-   default
-   {
-      Health 800;
-      GibHealth 400;
-      PainChance 2;
-      Tag "$LITH_INFO_SHORT_Archvile";
-   }
+}
 
-   states
-   {
-   Missile:
-      VILE G 0 bright A_VileStart;
-      VILE G 10 bright A_FaceTarget;
-      VILE H 8 bright A_VileTarget;
-      VILE IJKLM 8 bright A_FaceTarget;
-      VILE N 0 bright A_JumpIfTargetInLOS(1);
-      goto Missile1;
-      VILE N 0 bright A_GiveToTarget("Lith_AdrenalineToken", 1);
-   Missile1:
-      VILE N 8 bright A_FaceTarget;
-      VILE N 0 bright {
-         if(target && checkSight(target))
-            A_VileTarget("Lith_ArchvileImmolator");
-      }
-      VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "FireMagic");
-      VILE P 20 bright;
-      goto Super::See;
-   Death:
-      "####" "#" 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_Archvile);
-      goto Super::Death;
-   XDeath:
-      VILX A 5;
-      VILX B 5 A_XScream;
-      VILX C 5 A_NoBlocking;
-      VILX DEF 5;
-      VILX G -1;
-      stop;
+class Lith_Archvile : Lith_Monster replaces Archvile;
+
+default
+{
+   Lith_Monster.Score Score_Archvile;
+   Health 800;
+   Radius 20;
+   Height 56;
+   Mass 500;
+   Speed 15;
+   PainChance 10;
+   MaxTargetRange 896;
+   GibHealth 400;
+   PainChance 2;
+   SeeSound "vile/sight";
+   PainSound "vile/pain";
+   DeathSound "vile/death";
+   ActiveSound "vile/active";
+   MeleeSound "vile/stop";
+   Obituary "$OB_VILE";
+   Tag "$LITH_INFO_SHORT_Archvile";
+
+   +QUICKTORETALIATE
+   +FLOORCLIP
+   +NOTARGET
+}
+
+states
+{
+Spawn:
+   VILE AB 10 A_Look;
+   loop;
+
+See:
+   VILE AABBCCDDEEFF 2 A_VileChase;
+   loop;
+
+Missile:
+   VILE G 0 bright A_VileStart;
+   VILE G 10 bright A_FaceTarget;
+   VILE H 8 bright A_VileTarget;
+   VILE IJKLM 8 bright A_FaceTarget;
+   VILE N 0 bright A_JumpIfTargetInLOS(1);
+   goto Missile1;
+   VILE N 0 bright A_GiveToTarget("Lith_AdrenalineToken", 1);
+Missile1:
+   VILE N 8 bright A_FaceTarget;
+   VILE N 0 bright {
+      if(target && checkSight(target))
+         A_VileTarget("Lith_ArchvileImmolator");
    }
+   VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "FireMagic");
+   VILE P 20 bright;
+   VILE P 0 ResolveState("See");
+   stop;
+
+Heal:
+   VILE "[\]" 10 bright;
+   VILE "]" 0 ResolveState("See");
+   stop;
+
+Pain:
+   VILE Q 5;
+   VILE Q 5 A_Pain;
+   VILE Q 5 ResolveState("See");
+   stop;
+
+Death:
+   VILE Q -1;
+Crash:
+   VILE Q 7 Lith_A_Die;
+   VILE RSTUVWXY 7;
+   VILE Z -1;
+   stop;
+
+Death.Extreme:
+   VILX A -1;
+Crash.Extreme:
+   VILX A 5 Lith_A_XDie;
+   VILX BCDEF 5;
+   VILX G -1;
+   stop;
 }
 
 // EOF

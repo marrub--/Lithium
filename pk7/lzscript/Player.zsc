@@ -6,13 +6,7 @@
 #include "lzscript/6_DarkLord/DarkLord.zsc"
 #include "lzscript/7_Thoth/Thoth.zsc"
 
-class Lith_MegaProtection : Inventory
-{
-   default
-   {
-      Inventory.MaxAmount 200;
-   }
-}
+class Lith_MegaProtection : Inventory {default {Inventory.MaxAmount 200;}}
 
 class Lith_Player : DoomPlayer;
 

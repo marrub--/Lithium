@@ -1,16 +1,67 @@
-class Lith_PainElemental : PainElemental replaces PainElemental
+class Lith_XH_PainElemental : Lith_PainElemental
 {
-   default
-   {
-      Tag "$LITH_INFO_SHORT_PainElemental";
-   }
-
    states
    {
-   Death:
-      #### # 0 ACS_NamedExecuteWithResult("Lith_EmitScore", Score_PainElemental);
-      goto Super::Death;
+   Crash:
+      TNT1 A 0 A_Explode;
+      goto Super::Crash;
    }
+}
+
+class Lith_PainElemental : Lith_Monster replaces PainElemental;
+
+default
+{
+   Lith_Monster.Score Score_PainElemental;
+   Health 400;
+   Radius 31;
+   Height 56;
+   Mass 400;
+   Speed 8;
+   PainChance 128;
+   SeeSound "pain/sight";
+   PainSound "pain/pain";
+   DeathSound "pain/death";
+   ActiveSound "pain/active";
+   Tag "$LITH_INFO_SHORT_PainElemental";
+
+   +FLOAT
+   +NOGRAVITY
+}
+
+states
+{
+Spawn:
+   PAIN A 10 A_Look;
+   loop;
+
+See:
+   PAIN AABBCC 3 A_Chase;
+   loop;
+
+Missile:
+   PAIN D 5 A_FaceTarget;
+   PAIN E 5 A_FaceTarget;
+   PAIN F 5 bright A_FaceTarget;
+   PAIN F 0 bright A_PainAttack;
+   PAIN F 0 bright ResolveState("See");
+   stop;
+
+Pain:
+   PAIN G 6;
+   PAIN G 6 A_Pain;
+   PAIN G 0 ResolveState("See");
+   stop;
+
+Death:
+   PAIN H -1 bright;
+Crash:
+   PAIN H 8 bright;
+   PAIN I 8 bright Lith_A_Die;
+   PAIN JK 8 bright;
+   PAIN L 8 bright A_PainDie;
+   PAIN M 8 bright;
+   stop;
 }
 
 // EOF

@@ -30,8 +30,6 @@
 #include "lzscript/Monsters/6_Makarov.zsc"
 #include "lzscript/Monsters/6_Michael.zsc"
 
-#include "lzscript/Monsters/ExtraHard.zsc"
-
 #include "lzscript/Monsters/TitleMap.zsc"
 #include "lzscript/Monsters/TitleMarine.zsc"
 #include "lzscript/Monsters/MapMarine.zsc"
