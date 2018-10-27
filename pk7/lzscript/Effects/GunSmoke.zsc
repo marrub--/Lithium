@@ -4,13 +4,14 @@ class Lith_GunSmoke : Actor
    default
    {
       RenderStyle "Add";
-      Alpha 0.25;
+      Alpha 0.5;
       Speed 20;
       Radius 3;
       Height 3;
       Scale 0.3;
-      
+
       Projectile;
+      +NOINTERACTION
       +THRUACTORS
       +FORCEXYBILLBOARD
    }
@@ -18,8 +19,9 @@ class Lith_GunSmoke : Actor
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
+      alpha = frandom(0.1, 0.4);
       A_ScaleVelocity(0.01);
-      A_SetScale(scale.x * frandom(0.04, 0.18));
+      A_SetScale(scale.x * frandom(0.07, 0.14));
       if(random() < 128) A_SetScale(scale.x - (scale.x * 2), scale.y);
    }
 
@@ -27,7 +29,7 @@ class Lith_GunSmoke : Actor
    {
    Spawn:
       TNT1 A 0;
-      SMOK ABCDEFGHIJKLMNOPQ 1 A_FadeTo(0, 0.01, FTF_REMOVE);
+      SMOK ABCDEFGHIJKLMNOPQ 5 A_FadeTo(0, 0.01, FTF_REMOVE);
       stop;
    }
 }
@@ -40,22 +42,22 @@ class Lith_GunSmokeEmitter : Actor
       Height 4;
       Speed 7;
       Damage 0;
-      
+
       Projectile;
       +THRUACTORS
       +NOCLIP
    }
 
-   const m_flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
-   
+   const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
+
    states
    {
    Spawn:
       TNT1 A 1;
    Death:
       TNT1 A 0 {
-         for(int i = 0; i < 3; i++)
-            A_SpawnItemEx("Lith_GunSmoke", zvel: vel.z, flags: m_flags);
+         for(int i = 0, n = random(5, 7); i < n; i++)
+            A_SpawnItemEx("Lith_GunSmoke", frandom(-1,1),frandom(-1,1),frandom(-1,1), zvel: vel.z, flags: flags);
       }
       stop;
    }
@@ -69,8 +71,8 @@ class Lith_GunSmokeSpawner : Actor
       Height 4;
       Speed 7;
       Damage 0;
-      Lith_GunSmokeSpawner.Particles 4;
-      
+      Lith_GunSmokeSpawner.Particles 10;
+
       Projectile;
       +THRUACTORS
       +NOCLIP
@@ -80,18 +82,18 @@ class Lith_GunSmokeSpawner : Actor
 
    property Particles: m_part;
 
-   const m_flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
+   const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
 
    void Lith_A_SpawnSmoke(float vx, float vy)
    {
-      A_SpawnItemEx("Lith_GunSmoke", 0, 0, 0, vel.x + vx, vel.y + vy, vel.z, 0, m_flags);
+      A_SpawnItemEx("Lith_GunSmoke", frandom(-4,4),frandom(-1,1),frandom(-2,2), vel.x + vx,vel.y + vy,vel.z, 0, flags);
    }
 
    void Lith_A_SpawnParticles(color c)
    {
-      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, random(3, 8), random(1, 2), frandom(-15, 15), 0, 0, 0, frandom(1.0, 16.0), frandom(-0.1, 0.1), (vel.z * 1.5) + frandom(-0.5, 0.5), 0.0, 0.0, -0.05, 0.98, -1);
+      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, random(3, 8), random(1, 2), frandom(-15, 15), frandom(-1,1),frandom(-1,1),frandom(-1,1), frandom(1, 16),frandom(-0.1, 0.1),(vel.z*1.5)+frandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
    }
-   
+
    states
    {
    Spawn:
@@ -99,13 +101,11 @@ class Lith_GunSmokeSpawner : Actor
    Death:
       TNT1 A 0 {
          Lith_A_SpawnSmoke(0, frandom(-0.2, 0.2));
-         for(int i = 0; i < m_part / 2; i++)
-            Lith_A_SpawnSmoke(frandom(-0.2, 0.2), frandom(-0.2, 0.2));
+         for(int i = 0, n = random(m_part/2, m_part); i < n; i++)
+            Lith_A_SpawnSmoke(frandom(-10, 10), frandom(-10, 10));
          for(int i = 0, j = random(m_part + 1, m_part + 3); i < j; i++)
-            Lith_A_SpawnParticles("Orange");
-         for(int i = 0, j = random(m_part + 1, m_part + 2); i < j; i++)
             Lith_A_SpawnParticles("Yellow");
-         for(int i = 0, j = random(m_part + 0, m_part + 1); i < j; i++)
+         for(int i = 0, j = random(m_part + 1, m_part + 2); i < j; i++)
             Lith_A_SpawnParticles("White");
       }
       stop;
@@ -116,7 +116,7 @@ class Lith_GunSmokeSpawnerSmall : Lith_GunSmokeSpawner
 {
    default
    {
-      Lith_GunSmokeSpawner.Particles 1;
+      Lith_GunSmokeSpawner.Particles 5;
    }
 }
 
