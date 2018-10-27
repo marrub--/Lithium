@@ -196,7 +196,28 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
 
    uint lns, lnx = 0;
 
-   if(StringTable.Localize("LITH_CHECK", false) != "Eng")
+   if(cl.m_eng)
+   {
+      cl.m_d[p].dt = dt_txt;
+
+      cl.m_d[p].fnt = Font.GetFont(fnt);
+      cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
+      let       brl = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7fff);
+
+      lns = brl.count();
+
+      cl.m_d[p].txt.resize(lns);
+      cl.m_d[p].lnw.resize(lns);
+
+      for(uint i = 0, w; i < lns; i++)
+      {
+         cl.m_d[p].txt[i] = brl.stringAt(i);
+         cl.m_d[p].lnw[i] = brl.stringWidth(i);
+
+         if(lnx < (w = cl.m_d[p].lnw[i])) lnx = w;
+      }
+   }
+   else
    {
       cl.m_d[p].dt = dt_utx;
 
@@ -257,27 +278,6 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
       }
 
       lns = cl.m_d[p].txt.size();
-   }
-   else
-   {
-      cl.m_d[p].dt = dt_txt;
-
-      cl.m_d[p].fnt = Font.GetFont(fnt);
-      cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
-      let       brl = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7fff);
-
-      lns = brl.count();
-
-      cl.m_d[p].txt.resize(lns);
-      cl.m_d[p].lnw.resize(lns);
-
-      for(uint i = 0, w; i < lns; i++)
-      {
-         cl.m_d[p].txt[i] = brl.stringAt(i);
-         cl.m_d[p].lnw[i] = brl.stringWidth(i);
-
-         if(lnx < (w = cl.m_d[p].lnw[i])) lnx = w;
-      }
    }
 
    if(a == -1) cl.m_d[p].a = 1;
@@ -363,7 +363,7 @@ static void LE()
 
 // CharAtUtf8 and Utf8ToUtf32 are
 // Copyright (c) 2018 Benjamin Moir. All rights reserved.
-// This work is licensed under the terms of the MIT license.  
+// This work is licensed under the terms of the MIT license.
 // To obtain a copy, visit <https://opensource.org/licenses/MIT>.
 static clearscope string CharAtUtf8(string str, uint pos)
 {
@@ -431,25 +431,28 @@ static clearscope int Utf8ToUtf32(string ch, int sta = 0)
    }
 }
 
+bool m_fontloaded;
+bool m_eng;
+
 override void WorldLoaded(WorldEvent evt)
 {
-   let lmp = Lith_HERMES.ReadLump(Lith_HERMES.FindLump("lfiles/Font_Jp12.txt"));
+   if(m_fontloaded) return;
 
-   array<string> lns, arg;
-
-   lmp.split(lns, "\n");
-
-   for(uint i = 0, l = lns.size(); i < l; i++)
+   // Unfortunately, due to the script runaway limit in ACS, we need to do this
+   // here so everything is initialized without breaking.
+   for(int fontnum = 0;; fontnum++)
    {
-      if(lns[i] == "") continue;
-
-      arg.clear();
-      lns[i].split(arg, ",");
-
-      if(arg.size() < 3) {Console.printf("broke on %s", lns[i]); break;}
-
-      CallACS("Lith_SetFontMetric", arg[0].toint(), arg[1].toint(), arg[2].toint());
+      if(!CallACS("Lith_SetupFontsBegin", fontnum)) break;
+      while(CallACS("Lith_SetupFontsContinue"));
    }
+
+   m_fontloaded = true;
+}
+
+override void WorldTick()
+{
+   m_eng = StringTable.Localize("LITH_CHECK", false) == "Eng";
+   if(!m_eng) CallACS("Lith_SetFontFace", CVar.GetCVar('lith_gui_jpfont', players[consoleplayer]).getInt());
 }
 
 static int GetTex(string gfx)

@@ -19,6 +19,8 @@ Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1, 2.0);
 Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1, 2.0);
 Enum("Color theme",                   "lith_gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
 Enum("Cursor",                        "lith_gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
+Enum("Japanese font",                 "lith_gui_jpfont", 0, font_num-1, "%S", FontName(set));
+Text("To enable Japanese support, type \"language jp\" into the console.");
 
 Category("Player");
 Float("Damage bob multiplier",       "x", "lith_player_damagebobmul", 0.0, 1.0);
@@ -104,6 +106,7 @@ if(p->num == 0) {
 #undef ServerInt
 #undef Enum
 #undef CBox
+#undef Text
 #undef FromUI
 
 #else
@@ -159,6 +162,16 @@ static __str XHairName(int num)
    else                                 return xhairs[num - 1];
 }
 
+static __str FontName(int num)
+{
+   static __str const fonts[] = {
+      "Misaki Gothic", "Misaki Mincho", "JF Dot Gothic"
+   };
+
+   if(num < 0 || num >= font_num) return "Unknown";
+   else                           return fonts[num];
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
@@ -174,6 +187,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define ServerInt(...) y += 10
 #define Enum(...) y += 10
 #define CBox(...) y += 10
+#define Text(...) y += 10
 #define FromUI
 #include "p_settings.c"
 
@@ -293,6 +307,13 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          if(Lith_GUI_Checkbox(g, on, 240, y + 5, Pre(cbxsmall))) \
             (__VA_ARGS__); \
       } \
+      y += 10; \
+   } while(0)
+
+#define Text(label) \
+   do { \
+      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+         Label(label); \
       y += 10; \
    } while(0)
 

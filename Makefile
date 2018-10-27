@@ -46,8 +46,13 @@ all: dec text fs bin
 bin: $(LIB_BINARY) $(MAIN_BINARY)
 
 font: tools/ttfuck/ttfuck.exe tools/getcmap.rb
-	@rm pk7/lgfx/Font/Jp12/*.png
-	@tools/ttfuck/ttfuck.exe tools/Font.ttf 8 "$$(tools/getcmap.rb)" pk7/lfiles/Font_Jp12.txt pk7/lgfx/Font/Jp12
+	@rm -f pk7/lgfx/Font/*/*.png
+	@tools/mkfont.rb
+
+tools/ttfuck/ttfuck.exe:
+	@wget http://mab.greyserv.net/f/ttfuck.7z
+	@7za x ttfuck.7z -otools/ttfuck
+	@rm ttfuck.7z
 
 dec: tools/decompat.rb $(DECOMPAT_INPUTS)
 	@tools/decompat.rb $(DECOMPAT_INPUTS)

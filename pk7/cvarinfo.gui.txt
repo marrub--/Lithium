@@ -2,5 +2,6 @@ user float lith_gui_xmul   = 1.0;
 user float lith_gui_ymul   = 1.0;
 user int   lith_gui_theme  = 0;
 user int   lith_gui_cursor = 0;
+user int   lith_gui_jpfont = 0;
 
 // EOF

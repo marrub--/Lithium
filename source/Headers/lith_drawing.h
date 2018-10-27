@@ -79,6 +79,14 @@
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
 
+enum
+{
+   font_misaki_gothic, // 美咲ゴシック
+   font_misaki_mincho, // 美咲明朝
+   font_jfdot_gothic,  // JFドットk6x8
+   font_num,
+};
+
 stkcall void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold);
 stkcall void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1);
 stkcall void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2);

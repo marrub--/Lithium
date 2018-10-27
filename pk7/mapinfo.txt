@@ -25,7 +25,7 @@ gameinfo
    IntermissionMusic       = "lmusic/alchemis.it"
    QuitSound               = "misc/quitsound"
    PrecacheSounds          = "amb/rain", "amb/wind"
-   AddEventHandlers        = "Lith_URANUS", "Lith_HERMES", "Lith_Events"
+   AddEventHandlers        = "Lith_HERMES", "Lith_Events", "Lith_URANUS"
    StatScreen_Single       = "Lith_STATUS"
    PickupColor             = "#A0F3A0"
    QuitMessages            = "$QUITMSG1",   "$QUITMSG2",  "$QUITMSG3",  "$QUITMSG4",  "$QUITMSG5",  "$QUITMSG6",  "$QUITMSG7",
