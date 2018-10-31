@@ -90,7 +90,7 @@ fixed lerpk(fixed a, fixed b, fixed t)
 {
    fixed ret = ((1.0k - t) * a) + (t * b);
 
-   if(roundk(ret, 10) == b)
+   if(roundk(ret, 15) == b)
       return b;
 
    return ret;
@@ -100,7 +100,7 @@ fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
 {
    fixed64 ret = ((1.0lk - t) * a) + (t * b);
 
-   if(roundlk(ret, 30) == b)
+   if(roundlk(ret, 15) == b)
       return b;
 
    return ret;
