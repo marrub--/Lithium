@@ -17,6 +17,7 @@ class Lith_KnifPuf : Actor
       +MTHRUSPECIES
       +NOEXTREMEDEATH
       +FORCEPAIN
+      +HITTRACER
    }
 
    states
