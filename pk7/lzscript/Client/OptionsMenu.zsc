@@ -10,7 +10,7 @@ override void Init(Menu parent, OptionMenuDescriptor desc)
    {
       let it = desc.mItems[i];
       it.mCentered = true;
-      if(it.mLabel.charAt(0) != " " && it.mLabel.charAt(0) != "[")
+      if(it.mLabel.length() > 0 && it.mLabel.charAt(0) != " " && it.mLabel.charAt(0) != "[")
          it.mLabel = "[ " .. StringTable.Localize(it.mLabel) .. " ]";
    }
 

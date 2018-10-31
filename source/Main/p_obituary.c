@@ -7,9 +7,9 @@ void Lith_Obituary(void)
 {
    static __str const pronoun[pro_max][5] = {
       {"they", "them", "their", "theirs", "they're"},
-      {"he",   "him",  "his",   "his",    "he's"},
-      {"she",  "her",  "her",   "hers",   "she's"},
-      {"it",   "it",   "its",   "its'",   "it's"},
+      {"she",  "her",  "her",   "hers",   "she's"  },
+      {"he",   "him",  "his",   "his",    "he's"   },
+      {"it",   "it",   "its",   "its'",   "it's"   },
    };
 
    struct player *p = LocalPlayer;
@@ -17,29 +17,22 @@ void Lith_Obituary(void)
    __str obit = ServCallS("GetObituary");
    if(obit == "") return;
 
-   if(obit == "(falling)")
-      obit = Language("LITH_OB_Falling_%i", ACS_Random(1, 5));
-   else if(obit == "(crush)")
-      obit = Language("LITH_OB_Crush_%i", ACS_Random(1, 5));
-   else if(obit == "(exit)")
-      obit = Language("LITH_OB_Exit_%i", ACS_Random(1, 5));
-   else if(obit == "(drowning)")
-      obit = Language("LITH_OB_Drowning_%i", ACS_Random(1, 5));
-   else if(obit == "(slime)")
-      obit = Language("LITH_OB_Slime_%i", ACS_Random(1, 5));
-   else if(obit == "(fire)")
-      obit = Language("LITH_OB_Fire_%i", ACS_Random(1, 5));
-   else if(obit == "(suicide)")
-      obit = Language("LITH_OB_Suicide_%i", ACS_Random(1, 5));
-   else if(obit == "(default)")
-      obit = Language("LITH_OB_Default_%i", ACS_Random(1, 5));
+   int rn = ACS_Random(1, 5);
+
+        if(obit == "(falling)")  obit = Language("LITH_OB_Falling_%i",  rn);
+   else if(obit == "(crush)")    obit = Language("LITH_OB_Crush_%i",    rn);
+   else if(obit == "(exit)")     obit = Language("LITH_OB_Exit_%i",     rn);
+   else if(obit == "(drowning)") obit = Language("LITH_OB_Drowning_%i", rn);
+   else if(obit == "(slime)")    obit = Language("LITH_OB_Slime_%i",    rn);
+   else if(obit == "(fire)")     obit = Language("LITH_OB_Fire_%i",     rn);
+   else if(obit == "(suicide)")  obit = Language("LITH_OB_Suicide_%i",  rn);
+   else if(obit == "(default)")  obit = Language("LITH_OB_Default_%i",  rn);
 
    ACS_BeginPrint();
 
    for(char __str_ars const *s = obit; *s;)
    {
-      if(s[0] == '%') switch(s[1])
-      {
+      if(s[0] == '%') switch(s[1]) {
       case 'o': s += 2; ACS_PrintName(p->num+1);                 continue;
       case 'g': s += 2; ACS_PrintString(pronoun[p->pronoun][0]); continue;
       case 'h': s += 2; ACS_PrintString(pronoun[p->pronoun][1]); continue;
@@ -47,6 +40,7 @@ void Lith_Obituary(void)
       case 's': s += 2; ACS_PrintString(pronoun[p->pronoun][3]); continue;
       case 'r': s += 2; ACS_PrintString(pronoun[p->pronoun][4]); continue;
       }
+
       ACS_PrintChar(*(s++));
    }
 

@@ -112,6 +112,47 @@
 == DIFF_XHARD   | > Watch me die!
 == DIFF_NMARE   | > Crazed Nightmare!
 
+== PLYRMNU_PRESSSPACE | Press \cjSPACE
+== PLYRMNU_SEEFRONT   | to see the front.
+== PLYRMNU_SEEBACK    | to see the back.
+
+== OPTVAL_MALE    | Masculine
+== OPTVAL_FEMALE  | Feminine
+== OPTVAL_NEUTRAL | Non-binary
+== OPTVAL_OTHER   | Other
+
+== OPTVAL_OFF  | [Off]
+== OPTVAL_ON   | [On]
+== OPTVAL_AUTO | [Auto]
+
+== SAFEMESSAGE | >>> [[[Are you sure?]]] <<<
+
+== CNTRLMNU_ALTATTACK    | Secondary Fire/Zoom
+== CNTRLMNU_RELOAD       | Reload
+== CNTRLMNU_RUN          | Dodge / Run
+== CNTRLMNU_USER1        | Weapon Action
+== CNTRLMNU_USER4        | Special Action
+== CNTRLMNU_SAY          | Speak
+== CNTRLMNU_TEAMSAY      | Speak to Team
+== CNTRLMNU_AUTOMAP      | Toggle Automap
+== CNTRLMNU_CHASECAM     | Third Person
+== CNTRLMNU_COOPSPY      | Co-op Spy
+== CNTRLMNU_CONSOLE      | Open Console
+== CNTRLMNU_ZOOM         | \cm[Unused] Zoom
+== CNTRLMNU_TOGGLERUN    | \cm[Unused] Toggle Run
+== CNTRLMNU_USER2        | \cm[Unused] Action 2
+== CNTRLMNU_USER3        | \cm[Unused] Action 3
+== CNTRLMNU_USEITEM      | \cm[Unused] Use Item
+== CNTRLMNU_USEALLITEMS  | \cm[Unused] Use All Items
+== CNTRLMNU_NEXTITEM     | \cm[Unused] Next Item
+== CNTRLMNU_PREVIOUSITEM | \cm[Unused] Prev. Item
+== CNTRLMNU_DROPITEM     | \cm[Unused] Drop Item
+== CNTRLMNU_QUERYITEM    | \cm[Unused] Query Item
+== CNTRLMNU_DROPWEAPON   | \cm[Unused] Drop Weapon
+== CNTRLMNU_MISSION      | \cm[Unused] Objectives
+== CNTRLMNU_KEYS         | \cm[Unused] Keys List
+== CNTRLMNU_STATS        | \cm[Unused] Stats
+
 %% LITH_SKILL_TOURIST
 Are you certain?
 This one is just amusing.

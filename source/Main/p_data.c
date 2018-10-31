@@ -269,7 +269,8 @@ void Lith_ResetPlayer(struct player *p)
       {
       case 0: p->pronoun = pro_male;   break;
       case 1: p->pronoun = pro_female; break;
-      case 2: p->pronoun = pro_object; break;
+      case 2: p->pronoun = pro_nb;     break;
+      case 3: p->pronoun = pro_object; break;
       }
 
       for(int i = 0; i < countof(p->notes); i++)

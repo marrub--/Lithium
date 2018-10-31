@@ -69,9 +69,9 @@ enum
 
 enum
 {
-   pro_none,
-   pro_male,
+   pro_nb,
    pro_female,
+   pro_male,
    pro_object,
    pro_max,
 };

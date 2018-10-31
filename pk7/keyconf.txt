@@ -1,8 +1,6 @@
 // Key Sections --------------------------------------------------------------|
 addkeysection "Lithium Actions" Lithium
 addmenukey "Open CBI" lith_k_opencbi
-addmenukey "Weapon Action" +lith_k_wact
-addmenukey "Special Action" +lith_k_qact
 addmenukey "Zoom In"  lith_k_zoomin
 addmenukey "Zoom Out" lith_k_zoomout
 addmenukey "Glare" lith_k_glare
@@ -10,13 +8,7 @@ addmenukey "Glare" lith_k_glare
 // Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 
-alias +lith_k_wact "+user1"
-alias -lith_k_wact "-user1"
-
-alias +lith_k_qact "+user4"
-alias -lith_k_qact "-user4"
-
-alias lith_k_zoomin  "pukename Lith_KeyZoom  30"
+alias lith_k_zoomin  "pukename Lith_KeyZoom 30"
 alias lith_k_zoomout "pukename Lith_KeyZoom -60"
 
 alias lith_k_glare "pukename Lith_Glare"
