@@ -48,6 +48,9 @@ typedef struct bagitem
    container_t content;
 } bagitem_t;
 
+void Lith_PlayerInitInventory(struct player *p);
+void Lith_PlayerDeallocInventory(struct player *p);
+
 optargs(1) void Lith_Item_Init(item_t *item, itemdata_t const *data);
 optargs(1) item_t *Lith_Item_New(itemdata_t const *data);
 void Lith_Item_Unlink(item_t *item);

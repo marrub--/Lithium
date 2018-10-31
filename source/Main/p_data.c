@@ -38,26 +38,6 @@ static void SetupAttributes(struct player *p)
    p->attr.level = 1;
 }
 
-static void SetupInventory(struct player *p)
-{
-   static container_t const baseinv[] = {
-      {11, 7},
-      {1, 3}, {1, 3}, {1, 3}, {1, 3},
-      {4, 1},
-      {2, 4}, {2, 4},
-   };
-
-   memmove(p->inv, baseinv, sizeof(baseinv));
-
-   for(int i = 0; i < countof(p->inv); i++) {
-      p->inv[i].items.construct();
-      p->inv[i].user = p;
-   }
-
-   p->misc.items.construct();
-   p->misc.user = p;
-}
-
 static void SetPClass(struct player *p)
 {
    __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
@@ -255,7 +235,6 @@ void Lith_ResetPlayer(struct player *p)
    {
       SetPClass(p);
       SetupAttributes(p);
-      SetupInventory(p);
 
       // i cri tears of pain for APROP_SpawnHealth
       p->viewheight   = ACS_GetActorViewHeight(0);
@@ -327,13 +306,12 @@ void Lith_ResetPlayer(struct player *p)
    p->attr.lvupstr = strnull;
 
    // Map-static data
-   if(!p->bip.init)
-      Lith_PlayerInitBIP(p);
+   if(!p->bip.init) Lith_PlayerInitBIP(p);
 
-   if(!p->upgrinit)
-      Lith_PlayerInitUpgrades(p);
-   else
-      Lith_PlayerReinitUpgrades(p);
+   if(!p->upgrinit) Lith_PlayerInitUpgrades(p);
+   else             Lith_PlayerReinitUpgrades(p);
+
+   if(!p->invinit) Lith_PlayerInitInventory(p);
 
    // Static data
    if(!p->staticinit)

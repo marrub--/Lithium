@@ -81,6 +81,41 @@ static bool ItemCanPlaceAny(container_t *cont, item_t *item)
 
 // Extern Functions ----------------------------------------------------------|
 
+void Lith_PlayerInitInventory(struct player *p)
+{
+   static container_t const baseinv[] = {
+      {11, 7},
+      {1, 3}, {1, 3}, {1, 3}, {1, 3},
+      {4, 1},
+      {2, 4}, {2, 4},
+   };
+
+   memmove(p->inv, baseinv, sizeof(baseinv));
+
+   for(int i = 0; i < countof(p->inv); i++) {
+      p->inv[i].items.construct();
+      p->inv[i].user = p;
+   }
+
+   p->misc.items.construct();
+   p->misc.user = p;
+}
+
+void Lith_PlayerDeallocInventory(struct player *p)
+{
+   for(int i = 0; i < countof(p->inv); i++)
+   {
+      foritem(p->inv[i]) it->Destroy(it);
+      p->inv[i].user = null;
+   }
+
+   foritem(p->misc) it->Destroy(it);
+   p->misc.user = null;
+
+   p->useitem = p->selitem = null;
+   p->movitem = false;
+}
+
 void Lith_Item_Init(item_t *item, itemdata_t const *data)
 {
    item->link.construct(item);

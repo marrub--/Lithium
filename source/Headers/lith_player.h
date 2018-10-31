@@ -263,6 +263,7 @@ struct player
    item_t *useitem;
    item_t *selitem;
    bool    movitem;
+   bool    invinit;
 
    // HUD
    bool hudenabled;

@@ -107,6 +107,8 @@ static void Lith_PlayerDeath(void)
    p->dead = true;
 
    Lith_PlayerDeinitUpgrades(p);
+   Lith_PlayerDeallocInventory(p); // unfortunately, we can't keep anything
+                                   // even when we want to
 
    if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
