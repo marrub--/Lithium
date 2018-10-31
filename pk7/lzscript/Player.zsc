@@ -287,11 +287,11 @@ override void Tick()
 {
    if(level.levelnum == 1911777) return;
 
-   if(player.mo == self) Lith_PreTick();
+   if(player && player.mo == self) Lith_PreTick();
 
    Super.Tick();
 
-   if(player.mo == self) Lith_PostTick();
+   if(player && player.mo == self) Lith_PostTick();
 }
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)

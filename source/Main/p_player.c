@@ -27,8 +27,7 @@ script static void Lith_BossWarning(struct player *p);
 script type("enter")
 static void Lith_PlayerEntry(void)
 {
-   if(ACS_GameType() == GAME_TITLE_MAP)
-      return;
+   if(ACS_GameType() == GAME_TITLE_MAP) return;
 
    struct player *p = LocalPlayer;
 
