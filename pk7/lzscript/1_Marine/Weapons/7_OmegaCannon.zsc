@@ -1,5 +1,5 @@
 class Lith_GTFO : Inventory {default {Inventory.MaxAmount 1;}}
-class Lith_OmegaRailDummy : Lith_Dummy {default {Decal "Scorch";}}
+class Lith_OmegaRailDummy : Lith_Dummy {}
 
 class Lith_BFG9000 : Lith_MWeapon;
 

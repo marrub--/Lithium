@@ -36,7 +36,6 @@ class Lith_PolarKnight : Actor
       RenderStyle "Add";
       Alpha 0.8;
       SeeSound "enemies/hellknight/throw";
-      Decal "BaronScorch";
       DamageType "Magic";
 
       Projectile;

@@ -251,8 +251,7 @@ Fire1:
             A_FireProjectile("Lith_SMGTracer3", invoker.m_spreadx, pitch: invoker.m_spready);
          else
          {
-            A_FireBullets(invoker.m_spreadx, invoker.m_spready, -1,
-               8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE);
+            A_FireBullets(invoker.m_spreadx, invoker.m_spready, -1, 8, "BulletPuff", FBF_NORANDOM|FBF_EXPLICITANGLE);
 
             if(CallACS("LPData", pdata_upgrade, UPGR_SMG_A))
                A_FireProjectile("Lith_SMGTracer2", invoker.m_spreadx, pitch: invoker.m_spready);

@@ -19,6 +19,16 @@ class Lith_LazShotgunTrail : Actor
    }
 }
 
+class Lith_LazShotgunPuff : Actor
+{
+   default
+   {
+      DamageType "Electric";
+      +ALWAYSPUFF
+      +FORCEDECAL
+   }
+}
+
 class Lith_LazShotgun : Lith_MWeapon;
 
 default
@@ -49,7 +59,7 @@ Select:
 
 Fire:
    LSHT A 0 A_AlertMonsters;
-   LSHT AAAAAAA 0 A_RailAttack(7 * random(1, 4), 0, true, "", "Red", RGF_SILENT | RGF_FULLBRIGHT, 2, "BulletPuff", 4, 4, 0, 10, 5, 0, "Lith_LazShotgunTrail", -8);
+   LSHT AAAAAAA 0 A_RailAttack(7 * random(1, 4), 0, true, "", "Red", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_LazShotgunPuff", 4, 4, 0, 10, 5, 0, "Lith_LazShotgunTrail", -8);
    LSHT A 0 A_PlaySound("weapons/lshotgun/fire", CHAN_WEAPON);
    LSHT A 0 A_Recoil(0.5);
    LSHT I 2 bright Lith_A_RecoilUp(0.75);

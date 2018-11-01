@@ -78,6 +78,16 @@ class Lith_ShockEnemyGiver : CustomInventory
    }
 }
 
+class Lith_ShockEffectPuff : Lith_Dummy
+{
+   default
+   {
+      Species "Lith_Player";
+      DamageType "Electric";
+      +DONTHARMSPECIES
+   }
+}
+
 class Lith_ShockEffect : Actor
 {
    default
@@ -112,7 +122,7 @@ class Lith_ShockEffect2 : Lith_ShockEffect
    states
    {
    Spawn:
-      ZAP1 FEFEFEDCBCBABA 2 A_CustomRailgun(5, 0, "", "White", RGF_SILENT|RGF_NOPIERCING|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 10, "Lith_PlayerDummyPuff", frandom(0, 360), frandom(0, 360), frandom(100,200), 10, 0.2, 0);
+      ZAP1 FEFEFEDCBCBABA 2 A_CustomRailgun(5, 0, "", "White", RGF_SILENT|RGF_NOPIERCING|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 10, "Lith_ShockEffectPuff", frandom(0, 360), frandom(0, 360), frandom(100,200), 10, 0.2, 0);
       stop;
    }
 }

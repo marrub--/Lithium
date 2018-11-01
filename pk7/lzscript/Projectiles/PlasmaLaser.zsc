@@ -45,38 +45,36 @@ class Lith_PlasmaHit : Lith_PlasmaLaze
    }
 }
 
-class Lith_PlasmaLaze : Actor
+class Lith_PlasmaLaze : Actor;
+
+default
 {
-   default
-   {
-      RenderStyle "Add";
-      Scale 0.3;
+   RenderStyle "Add";
+   Scale 0.3;
 
-      +FORCEXYBILLBOARD
-      +NOINTERACTION
-      +NOTIMEFREEZE
+   +FORCEXYBILLBOARD
+   +NOINTERACTION
+   +NOTIMEFREEZE
+}
+
+override void Tick()
+{
+   static const color crs[] = {"red", "orange", "yellow", "green", "cyan", "blue", "purple", "deep pink"};
+
+   if(lith_weapons_rainbowlaser)
+   {
+      A_SetRenderStyle(alpha, STYLE_AddStencil);
+      setShade(crs[uint(-int(target.distance2D(self) / 20) + level.totaltime) % crs.size()]);
    }
 
-   override void Tick()
-   {
-      static const color crs[] = {"red", "orange", "yellow", "green", "cyan", "blue", "purple", "deep pink"};
+   Super.Tick();
+}
 
-      if(lith_weapons_rainbowlaser)
-      {
-         A_SetRenderStyle(alpha, STYLE_AddStencil);
-         setShade(crs[uint(-int(target.distance2D(self) / 20) + level.totaltime) % crs.size()]);
-      }
-
-      Super.Tick();
-   }
-
-   states
-   {
-   Spawn:
-      BLLT E 2;
-      stop;
-   }
+states
+{
+Spawn:
+   BLLT E 2;
+   stop;
 }
 
 // EOF
-

@@ -24,10 +24,7 @@ actor Lith_SwordHitler
    {
    Spawn:
       SHKR B 0
-      SHKR BBBBBBBB 0 A_SpawnItemEx("Lith_SwordHipcher",
-                                    frandom(-24,24),frandom(-24,24),frandom(-24,24),
-                                    frandom(-8,8),frandom(-8,8),frandom(-8,8),
-                                    0, SXF_NOCHECKPOSITION, 240)
+      SHKR BBBBBBBB 0 A_SpawnItemEx("Lith_SwordHipcher", frandom(-24,24),frandom(-24,24),frandom(-24,24), frandom(-8,8),frandom(-8,8),frandom(-8,8), 0, SXF_NOCHECKPOSITION, 240)
       SHKR B 1 bright A_FadeOut(0.1)
       wait
    }
@@ -69,28 +66,19 @@ actor Lith_SwordHitter
    
    states
    {
-   ded:
-      TNT1 A 0
-      stop
    Spawn:
       TNT1 A 0
       TNT1 A 3 A_PlaySound("weapons/sword/attack")
    SpawnLoop:
       TNT1 A 0 A_JumpIf(user_trailstep >= 8, "TrailDone")
       TNT1 A 0 A_SetUserVar(user_trailstep, user_trailstep + 1)
-      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither",
-                                   ((user_trailstep * 4.0) * velx) / -35.0,
-                                  -((user_trailstep * 4.0) * vely) / -35.0,
-                             2.0 + ((user_trailstep * 4.0) * velz) / -35.0,
-                             0, 0, 0,
-                             0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION,
-                             user_delta * 40)
+      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", ((user_trailstep * 4.0) * velx) / -35.0, -((user_trailstep * 4.0) * vely) / -35.0, 2.0 + ((user_trailstep * 4.0) * velz) / -35.0, 0, 0, 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION, user_delta * 40)
       loop
    TrailDone:
       TNT1 A 0 A_SetUserVar(user_trailstep, 0)
       TNT1 A 0 A_SpawnItemEx("Lith_SwordHitler", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
       TNT1 A 0 A_SetUserVar(user_delta, user_delta + 1)
-      TNT1 A 0 A_JumpIf(user_delta >= 15, "ded")
+      TNT1 A 0 A_JumpIf(user_delta >= 15, "Null")
       TNT1 A 1
       goto SpawnLoop
    }

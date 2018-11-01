@@ -71,7 +71,6 @@ class Lith_BaronBallSilent : Lith_BaronBall
    {
       SeeSound "";
       DeathSound "";
-      Decal "";
    }
 }
 
