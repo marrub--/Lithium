@@ -8,6 +8,7 @@ actor Lith_GaussExplosionParticle
    +NOBLOCKMAP
    +FORCEXYBILLBOARD
    +NOTELEPORT
+   +NOCLIP
    
    states
    {
@@ -48,10 +49,7 @@ actor Lith_GaussPuff
       BLLT A 0
       BLLT A 0 A_PlaySound("weapons/shotgun/gauss/puff")
       BLLT A 0 A_PlaySound("weapons/shotgun/gauss/spark", CHAN_5)
-      BLLT AAAAAAAAA 0 A_SpawnItemEx("Lith_GaussExplosionParticle",
-                                     frandom(-4, 4), frandom(-4, 4), frandom(-8, 8),
-                                     frandom(-4, 4), frandom(-4, 4), frandom(4, 7),
-                                     0, SXF_NOCHECKPOSITION)
+      BLLT AAAAAAAAA 0 A_SpawnItemEx("Lith_GaussExplosionParticle", frandom(-4, 4), frandom(-4, 4), frandom(-8, 8), frandom(-4, 4), frandom(-4, 4), frandom(4, 7), 0, SXF_NOCHECKPOSITION)
       BLLT A 1 A_FadeOut(0.1)
       wait
    }
