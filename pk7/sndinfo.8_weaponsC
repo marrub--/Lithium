@@ -56,11 +56,12 @@ weapons/smg/firedone lsounds/WeaponsC/SMG/FireDone.flac     // 〃
 weapons/smg/eject    lsounds/WeaponsC/SMG/EjectRod.flac     // Killing Floor
 weapons/smg/insert   lsounds/WeaponsC/SMG/InsertRod.flac    // 〃
 weapons/smg/heat     lsounds/WeaponsC/SMG/HeatDisperse.flac // Self-made
+weapons/smg/lift     lsounds/WeaponsC/SMG/Lift.flac         // Call of Duty: Modern Warfare 2
 weapons/smg/open     lsounds/WeaponsC/SMG/TopOpen.flac      // Half-Life 2
 weapons/smg/close    lsounds/WeaponsC/SMG/TopClose.flac     // 〃
-weapons/smg/magout   lsounds/WeaponsC/SMG/MagOut.flac       // 〃
 weapons/smg/magin2   lsounds/WeaponsC/SMG/MagInLong.flac    // 〃
-weapons/smg/magin    lsounds/WeaponsC/SMG/MagIn.flac        // EYE: Divine Cybermancy
+weapons/smg/magout   lsounds/WeaponsC/SMG/MagOut.flac       // Call of Duty: Modern Warfare 2
+weapons/smg/magin    lsounds/WeaponsC/SMG/MagIn.flac        // 〃
 weapons/smg/draw     lsounds/WeaponsC/SMG/Draw.flac         // Halo 3
 weapons/smg/pickup   lsounds/WeaponsC/SMG/Pickup.flac       // FEAR
 
