@@ -1,4 +1,4 @@
-actor Lith_MiniMissile
+actor Lith_MiniMissile : Lith_Explosive
 {
    Scale 0.25
    Radius 2
@@ -25,9 +25,7 @@ actor Lith_MiniMissile
       wait
    Death:
       TNT1 A 0 A_Explode(32, 42)
-      MEXP AB 2 bright
-      MEXP CD 3 bright
-      MEXP EF 4 bright
+      TNT1 A 0 Lith_A_JumpExplosion
       stop
    }
 }

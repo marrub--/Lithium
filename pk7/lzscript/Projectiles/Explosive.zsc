@@ -1,0 +1,37 @@
+class Lith_Explosive : Actor;
+
+bool CheckMarathon(bool target = true)
+   {return CallACS("LPData", pdata_upgrade, UPGR_7777777, target);}
+
+void Lith_A_ExplodeSound(int chan = CHAN_6, bool target = true)
+{
+   if(CheckMarathon(target)) A_PlaySound("marathon/explode", chan);
+   else                      A_PlaySound("explosion",        chan);
+}
+
+state Lith_A_JumpExplosion(bool target = true)
+{
+   if(CheckMarathon(target)) return ResolveState("ExplodeMarathon");
+   else                      return ResolveState("Explode");
+}
+
+state Lith_A_DoExplosion()
+{
+   bNOGRAVITY = true;
+   Lith_A_ExplodeSound();
+   return Lith_A_JumpExplosion();
+}
+
+states
+{
+Explode:
+   MEXP AB 2 bright;
+   MEXP CD 3 bright;
+   MEXP EF 4 bright;
+   stop;
+ExplodeMarathon:
+   MA7G BCDEFG 4 bright;
+   stop;
+}
+
+// EOF

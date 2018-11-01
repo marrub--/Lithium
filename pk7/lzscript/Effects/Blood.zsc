@@ -20,93 +20,92 @@ class Lith_Blood1 : Actor
 class Lith_Blood2 : Lith_Blood1 {states {Spawn: BLUD BC 8; stop;}}
 class Lith_Blood3 : Lith_Blood1 {states {Spawn: BLUD  C 8; stop;}}
 
-class Lith_Blood : Blood replaces Blood
+class Lith_Blood : Blood replaces Blood;
+
+default
 {
-   default
-   {
-      +CORPSE
-   }
+   +CORPSE
+}
 
-   void Lith_A_Dogs()
+void Lith_A_Dogs()
+{
+   for(let it = BlockThingsIterator.Create(self, 64); it.next();)
    {
-      for(let it = BlockThingsIterator.Create(self, 64); it.next();)
+      let mo = it.thing;
+      if(mo.player && mo.countInv("Lith_Dogs"))
       {
-         let mo = it.thing;
-         if(mo.player && mo.countInv("Lith_Dogs"))
-         {
-            mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32,
-                                                         10,0,9,
-                             frandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
-         }
+         mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32,
+                                                      10,0,9,
+                          frandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
       }
    }
+}
 
-   void Lith_A_SpawnBlood(class<Actor> cl)
+void Lith_A_SpawnBlood(class<Actor> cl)
+{
+   for(int i = 0, n = random(1, 2); i < n; i++)
    {
-      for(int i = 0, n = random(1, 2); i < n; i++)
-      {
-         A_SpawnItemEx(cl, frandom(-1,1), frandom(-1,1), frandom(-1,1),
-                           frandom(-2,2), frandom(-2,2), frandom( 1,2),
-                       0, SXF_TRANSFERTRANSLATION, 64);
-      }
+      A_SpawnItemEx(cl, frandom(-1,1), frandom(-1,1), frandom(-1,1),
+                        frandom(-2,2), frandom(-2,2), frandom( 1,2),
+                    0, SXF_TRANSFERTRANSLATION, 64);
    }
+}
 
-   int m_lev;
+int m_lev;
 
-   states
-   {
-   Spawn:
-      TNT1 A 0 nodelay ResolveState("Heavy");
-      TNT1 A 0 ResolveState("Medium");
-      TNT1 A 0 ResolveState("Low");
-      BLUD A 0 Lith_A_Dogs;
-      stop;
-   Heavy:
-      BLUD A 0 {m_lev = 1;}
-      BLUD AA 4 Lith_A_SpawnBlood("Lith_Blood1");
-   Medium:
-      BLUD C 0 {m_lev = 2;}
-      BLUD BB 4 Lith_A_SpawnBlood("Lith_Blood2");
-   Low:
-      BLUD E 0 {m_lev = 3;}
-      BLUD CC 4 Lith_A_SpawnBlood("Lith_Blood3");
-	  BLUD CCCCCCCCCC 2 A_FadeOut(0.1);
-      stop;
-   Crash:
-      BLSP A 0 {
-         A_Stop();
-         A_SetScale(frandom(0.6, 0.9), scale.y);
-         setXYZ(pos + (frandom(-4,4), frandom(-4,4), 0));
-         switch(m_lev) {
-         case 1: alpha = 0.75; return ResolveState("OkHigh");
-         case 2: alpha = 0.50; return ResolveState("OkMedium");
-         case 3: alpha = 0.25; return ResolveState("OkLow");
-         }
-         return state(null);
+states
+{
+Spawn:
+   TNT1 A 0 nodelay ResolveState("Heavy");
+   TNT1 A 0 ResolveState("Medium");
+   TNT1 A 0 ResolveState("Low");
+   BLUD A 0 Lith_A_Dogs;
+   stop;
+Heavy:
+   BLUD A 0 {m_lev = 1;}
+   BLUD AA 4 Lith_A_SpawnBlood("Lith_Blood1");
+Medium:
+   BLUD C 0 {m_lev = 2;}
+   BLUD BB 4 Lith_A_SpawnBlood("Lith_Blood2");
+Low:
+   BLUD E 0 {m_lev = 3;}
+   BLUD CC 4 Lith_A_SpawnBlood("Lith_Blood3");
+   BLUD CCCCCCCCCC 2 A_FadeOut(0.1);
+   stop;
+Crash:
+   BLSP A 0 {
+      A_Stop();
+      A_SetScale(frandom(0.6, 0.9), scale.y);
+      setXYZ(pos + (frandom(-4,4), frandom(-4,4), 0));
+      switch(m_lev) {
+      case 1: alpha = 0.75; return ResolveState("OkHigh");
+      case 2: alpha = 0.50; return ResolveState("OkMedium");
+      case 3: alpha = 0.25; return ResolveState("OkLow");
       }
-      stop;
-   OkHigh:   BLSP A 0; goto Ok;
-   OkMedium: BLSP B 0; goto Ok;
-   OkLow:    BLSP C 0; goto Ok;
-   Ok:
-      BLSP # random(140, 200);
-      BLSP # 0 {
-         switch(m_lev) {
-         case 1: return ResolveState("DoneHigh");
-         case 2: return ResolveState("DoneMedium");
-         case 3: return ResolveState("DoneLow");
-         }
-         return state(null);
-      }
-      stop;
-   DoneHigh:
-      BLSP BBBBBBBBBB 1 A_FadeOut(0.01);
-   DoneMedium:
-      BLSP CCCCCCCCCC 1 A_FadeOut(0.01);
-   DoneLow:
-      BLSP DDDDDDDDDD 1 A_FadeOut(0.01);
-      stop;
+      return state(null);
    }
+   stop;
+OkHigh:   BLSP A 0; goto Ok;
+OkMedium: BLSP B 0; goto Ok;
+OkLow:    BLSP C 0; goto Ok;
+Ok:
+   BLSP # random(140, 200);
+   BLSP # 0 {
+      switch(m_lev) {
+      case 1: return ResolveState("DoneHigh");
+      case 2: return ResolveState("DoneMedium");
+      case 3: return ResolveState("DoneLow");
+      }
+      return state(null);
+   }
+   stop;
+DoneHigh:
+   BLSP BBBBBBBBBB 1 A_FadeOut(0.01);
+DoneMedium:
+   BLSP CCCCCCCCCC 1 A_FadeOut(0.01);
+DoneLow:
+   BLSP DDDDDDDDDD 1 A_FadeOut(0.01);
+   stop;
 }
 
 // EOF
