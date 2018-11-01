@@ -18,6 +18,13 @@
 == LITH:ItemSpr:ArmPinkSilver  | sprites/Items/Armor/ARM7A0.png
 == LITH:ItemSpr:ArmMidori      | sprites/Items/Armor/ARM8A0.png
 
+== LITH:HUD:H_KC1 | sprites/Items/Keys/RKEYB0.png
+== LITH:HUD:H_KC2 | sprites/Items/Keys/YKEYB0.png
+== LITH:HUD:H_KC3 | sprites/Items/Keys/BKEYB0.png
+== LITH:HUD:H_KS1 | sprites/Items/Keys/RSKUB0.png
+== LITH:HUD:H_KS2 | sprites/Items/Keys/YSKUB0.png
+== LITH:HUD:H_KS3 | sprites/Items/Keys/BSKUB0.png
+
 ##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_ScoreChip | Score Chip
 == LITH_INFO_TITLE_ScoreChip | GIC 781000 Score Chip

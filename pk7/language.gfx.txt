@@ -63,12 +63,6 @@
 "LITH:HUD:H_D45" = "lgfx/HUD/H_D45.png";
 "LITH:HUD:H_D46" = "lgfx/HUD/H_D46.png";
 "LITH:HUD:H_D47" = "lgfx/HUD/H_D47.png";
-"LITH:HUD:H_KC1" = "lgfx/HUD/H_KC1.png";
-"LITH:HUD:H_KC2" = "lgfx/HUD/H_KC2.png";
-"LITH:HUD:H_KC3" = "lgfx/HUD/H_KC3.png";
-"LITH:HUD:H_KS1" = "lgfx/HUD/H_KS1.png";
-"LITH:HUD:H_KS2" = "lgfx/HUD/H_KS2.png";
-"LITH:HUD:H_KS3" = "lgfx/HUD/H_KS3.png";
 "LITH:HUD:H_W1" = "lgfx/HUD/H_W1.png";
 "LITH:HUD:H_W3" = "lgfx/HUD/H_W3.png";
 "LITH:HUD:H_W4" = "lgfx/HUD/H_W4.png";

@@ -48,6 +48,7 @@ Spawn:
       m_fzang = random(0, 359);
       return ResolveState("SpawnLoop");
    }
+   stop;
 SpawnLoop:
    #### # 0 {
       if(!master || !master.bSPECIAL)
@@ -65,6 +66,7 @@ SpawnLoop:
       A_Warp(AAPTR_MASTER, m_origpos.x, m_origpos.y, m_origpos.z, 0, WARPF_ABSOLUTEPOSITION);
       return ResolveState("SpawnLoop");
    }
+   stop;
 Done:
    TNT1 A 0;
    stop;
