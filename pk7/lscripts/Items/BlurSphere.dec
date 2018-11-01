@@ -46,7 +46,7 @@ actor Lith_BarrierSpell : Lith_CustomFunction
    }
 }
 
-actor Lith_BlurSphereSprite : Lith_AnimItemSprite
+actor Lith_BlurSphereSprite : Lith_MagicSphereItemSprite
 {
    Lith_AnimItemSprite.Phases 36
    +VISIBILITYPULSE

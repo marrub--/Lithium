@@ -27,6 +27,9 @@ class Lith_AnimItemSprite : Lith_ItemSprite
    }
 }
 
+class Lith_MagicSphereItemSprite : Lith_AnimItemSprite
+   {states {Done: #### # 1 A_FadeOut; wait;}}
+
 class Lith_ItemSprite : Actor;
 
 default

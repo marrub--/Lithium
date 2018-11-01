@@ -71,13 +71,13 @@ actor Lith_Infrared : Lith_CustomInventory replaces Infrared
    }
 }
 
-actor Lith_InvulnerabilitySphereSprite : Lith_AnimItemSprite
+actor Lith_InvulnerabilitySphereSprite : Lith_MagicSphereItemSprite
 {
    Lith_AnimItemSprite.Phases 24
    states {SetSpr: PINV AAAAAABBBBBBCCCCCCDDDDDD 0 Lith_A_JumpPhase stop}
 }
 
-actor Lith_MegasphereSprite : Lith_AnimItemSprite
+actor Lith_MegasphereSprite : Lith_MagicSphereItemSprite
 {
    Lith_AnimItemSprite.Phases 30
    states {SetSpr: MEGA AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase stop}
@@ -127,7 +127,7 @@ actor Lith_RadSuit : Lith_CustomInventory replaces RadSuit
    }
 }
 
-actor Lith_SoulSphereSprite : Lith_AnimItemSprite
+actor Lith_SoulSphereSprite : Lith_MagicSphereItemSprite
 {
    Lith_AnimItemSprite.Phases 30
    states {SetSpr: SOUL AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase stop}
