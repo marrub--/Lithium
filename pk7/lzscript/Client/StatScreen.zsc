@@ -35,7 +35,7 @@ override void Start(wbstartstruct wbss)
 
 override void UpdateNoState()
 {
-   if(!--cnt)
+   if(--cnt <= 0)
    {
       End();
       level.worldDone();
@@ -91,7 +91,14 @@ override void Ticker()
       if(cnt_par        > pt ) cnt_par        = pt;
       if(cnt_total_time > ttt) cnt_total_time = ttt;
 
-      if(p.cmd.buttons & BT_ALTATTACK) sp_state++;
+      if(p.cmd.buttons & BT_ALTATTACK && sp_state < 7)
+      {
+         switch(sp_state++) {
+         case 2: cnt_kills [0] = plrs[me].skills;  break;
+         case 4: cnt_items [0] = plrs[me].sitems;  break;
+         case 6: cnt_secret[0] = plrs[me].ssecret; break;
+         }
+      }
 
       if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
       {
