@@ -129,12 +129,16 @@ Makes your pistol fire in full auto.
 Simply changes the trigger mechanism a bit to make the pistol fire
 automatically.
 
+\cdCompatible with Plasma Pistol.
+
 ##----------------------------------------------------------------------------|
 == LITH_UPGRADE_TITLE_PlasPistol | Plasma Pistol
 @@ LITH_UPGRADE_EFFEC_PlasPistol
 Makes your pistol fire strong plasma.
 
 Changes the internal mechanisms of the gun to fire charged plasma.
+
+\cdCompatible with Auto Pistol.
 
 ##----------------------------------------------------------------------------|
 == LITH_UPGRADE_TITLE_PoisonShot | Poison Shot

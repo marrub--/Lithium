@@ -28,8 +28,8 @@ Outcasts
 +AutoReload  AutoReload 950050 gO AD--- 2
 
 Marine
-+AutoPistol  -             140940 pM -----   Pistol
-+PlasPistol  -             340000 pM -----   Pistol   (WMD)
++AutoPistol  -             140940 pM -----
++PlasPistol  -             340000 pM -----            (WMD)
 +GaussShotty ShotgunUpgr  1079430 pM ----- 1 Shotgun  (WMD)
 +PoisonShot  ShotgunUpg2  1010420 pM -----   Shotgun  (WMD)
 +RifleModes  RifleUpgr     340100 pM -D-R-

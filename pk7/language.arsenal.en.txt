@@ -198,14 +198,18 @@
    "Makes your pistol fire in full auto."
    "\n\n"
    "Simply changes the trigger mechanism a bit to make the pistol fire "
-   "automatically.";
+   "automatically."
+   "\n\n"
+   "\cdCompatible with Plasma Pistol.";
 
 //----------------------------------------------------------------------------|
 "LITH_UPGRADE_TITLE_PlasPistol" = "Plasma Pistol";
 "LITH_UPGRADE_EFFEC_PlasPistol" =
    "Makes your pistol fire strong plasma."
    "\n\n"
-   "Changes the internal mechanisms of the gun to fire charged plasma.";
+   "Changes the internal mechanisms of the gun to fire charged plasma."
+   "\n\n"
+   "\cdCompatible with Auto Pistol.";
 
 //----------------------------------------------------------------------------|
 "LITH_UPGRADE_TITLE_PoisonShot" = "Poison Shot";
