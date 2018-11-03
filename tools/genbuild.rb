@@ -13,6 +13,8 @@ end
 upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
 wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
 
+deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.join(" ")}"
+
 fp = open "build.ninja", "wb"
 
 fp << <<NINJA
@@ -26,9 +28,7 @@ lflags = $target --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
 cflags = $target $warn -i$hdr --alloc-Aut 4096
 
 rule cc
-   msvc_deps_prefix = h:
-   deps = msvc
-   command = tools/finddep.rb $in & gdcc-cc $cflags -DFileHash=$hash -c $in -o $out
+   command = gdcc-cc $cflags -DFileHash=$hash -c $in -o $out
    description = CC $out
 rule makelib
    command = gdcc-makelib $target -c $type -o $out
@@ -84,7 +84,7 @@ inputs = []
 Dir["source/Main/*"].each do |f|
    f = File.basename f
    fp << <<~NINJA
-      build $ir/#{f}.ir: cc $src/#{f} | #{upgcin} #{wepcin}
+      build $ir/#{f}.ir: cc $src/#{f} | #{deps}
          hash = #{hash f}
    NINJA
    inputs << "$ir/#{f}.ir"
