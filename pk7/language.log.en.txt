@@ -26,7 +26,7 @@
 "LITH_LOG_YellowSkull" = "\ckYellow Skull";
 
 // Powerups ------------------------------------------------------------------|
-"LITH_LOG_RadSuit" = "$LITH_INFO_TITLE_RadSuit";
+"LITH_LOG_RadSuit" = "Radiation Shielding Suit";
 "LITH_LOG_InfraRed" = "$LITH_INFO_SHORT_Infrared";
 "LITH_LOG_Invuln" = "\cjInvulnerability!";
 "LITH_LOG_BlurSphere" = "$LITH_INFO_SHORT_Fragma";

@@ -5,63 +5,6 @@
 
 @"lfiles/BIPInfo_Mod.txt" // if you want to add extra pages, use this file
 
-^WEAPONS //-------------------------------------------------------------------|
-
-gO ChargeFist -> KSKK
-
-pM Pistol*         -> Omakeda
-pM Revolver        -> Earth
-pM Shotgun         -> Omakeda
-pM ShotgunUpgr     -> Shotgun AOF DurlaPrime
-pM ShotgunUpg2     -> Shotgun
-pM LazShotgun      -> Earth
-pM SuperShotgun    -> ChAri
-pM CombatRifle     -> AllPoint
-pM RifleUpgr       -> CombatRifle
-pM RifleUpg2       -> CombatRifle Semaphore
-pM SniperRifle     -> Facer
-pM GrenadeLauncher -> Sym43
-pM LauncherUpgr    -> GrenadeLauncher UnrealArms
-pM LauncherUpg2    -> GrenadeLauncher Sym43
-pM PlasmaRifle     -> AllPoint MDDO
-pM PlasmaUpgr      -> PlasmaRifle
-pM PlasmaUpg2      -> PlasmaRifle Semaphore
-pM BFG9000         -> Cid
-pM CannonUpgr      -> BFG9000 SuperDimension
-pM CannonUpg2      -> BFG9000
-
-pC Mateba*       -> AOF
-pC MatebaUpgr    -> Mateba AOF Algidistari
-pC ShockRifle    -> ChAri
-pC ShockRifUpgr  -> ShockRifle
-pC ShockRifUpg2  -> ShockRifle
-pC SPAS          -> AOF Newvec
-pC SPASUpgr      -> SPAS
-pC SPASUpg2      -> SPAS Newvec
-pC SMG           -> Omakeda Sym43
-pC SMGUpgr       -> SMG AOF Sym43
-pC SMGUpg2       -> SMG AOF
-pC SMGUpg3       -> SMG Sym43
-pC IonRifle      -> KSKK
-pC IonRifleUpgr  -> IonRifle KSKK
-pC IonRifleUpg2  -> IonRifle KSKK
-pC CPlasmaRifle  -> AllPoint MDDO
-pC CPlasmaUpgr   -> CPlasmaRifle MDDO
-pC StarDestroyer -> Hell
-pC ShipGunUpgr   -> StarDestroyer
-pC ShipGunUpg2   -> StarDestroyer
-
-gO MissileLauncher
-gO PlasmaDiffuser -> Sym43 MDDO Semaphore
-
-pC Blade*
-pC Delear*  -> Earth
-pC Feuer
-pC Rend
-pC Hulgyon  -> Heaven
-pC StarShot -> AOF
-pC Cercle   -> Earth
-
 ^ENEMIES* //------------------------------------------------------------------|
 
 gA ZombieMan
@@ -95,20 +38,21 @@ gA ScoreChip
 gA HealthBonus
 
 gA AllMap
-gA Berserk
-gA Infrared
-gA RadSuit
-gA Backpack
+pM BackpackStan
+pC BackpackJem
+gA Berserk       -> JAQTen
+gA Infrared      -> SYM43
+gA RadSuit       -> SYM43
 
-gA Stimpack
-gA Medikit
+gA Medikit  -> JJJ
+gA Stimpack -> JJJ
 
-gA KeyDisk
+gA KeyDisk  -> Hell
 gA KeySkull
 
 gA Fragma
-gA Invulnerability
 gA Heart
+gA Invulnerability
 gA Taochyan
 
 gA ArmStandard    -> Earth
@@ -182,11 +126,13 @@ pC Algidistari
 gO ChAri          -> AetosVi
 pM DurlaPrime     -> Earth AetosVi
 gO Earth
-pC Hell           -> Earth
+pC Heaven
+gA Hell           -> Earth
 gO Mars           -> Earth OFMD
 gO OmicronXevv
-pM SuperDimension -> BFG9000 SIGFPE
-pC Heaven
+gA ReverseAce
+pM SuperDimension -> BFG9000 //SIGFPE
+gA Tsukama
 
 ^CORPORATIONS //--------------------------------------------------------------|
 
@@ -195,6 +141,8 @@ pM AOF
 pC AOFJem
 pM Cid        -> SuperDimension Earth
 pM Facer
+gA JAQTen
+gA JJJ
 pM KSKK       -> Earth
 pC KSKKJem    -> Earth
 gO MDDO       -> Mars OFMD
@@ -203,10 +151,67 @@ pM OFMD
 pC OFMDJem
 gO Omakeda    -> Earth
 gO Semaphore  -> OmicronXevv
-gO Sym43      -> AetosVi
+gA ShekaKaff
+gO SYM43      -> AetosVi
 pM UnrealArms -> AetosVi
 gA Yigan
-gA ShekaKaff
+
+^WEAPONS //-------------------------------------------------------------------|
+
+gO ChargeFist -> KSKK
+
+pM Pistol*         -> Omakeda
+pM Revolver        -> Earth
+pM Shotgun         -> Omakeda
+pM ShotgunUpgr     -> Shotgun AOF DurlaPrime
+pM ShotgunUpg2     -> Shotgun
+pM LazShotgun      -> Earth
+pM SuperShotgun    -> ChAri
+pM CombatRifle     -> AllPoint
+pM RifleUpgr       -> CombatRifle
+pM RifleUpg2       -> CombatRifle Semaphore
+pM SniperRifle     -> Facer
+pM GrenadeLauncher -> SYM43
+pM LauncherUpgr    -> GrenadeLauncher UnrealArms
+pM LauncherUpg2    -> GrenadeLauncher SYM43
+pM PlasmaRifle     -> AllPoint MDDO
+pM PlasmaUpgr      -> PlasmaRifle
+pM PlasmaUpg2      -> PlasmaRifle Semaphore
+pM BFG9000         -> Cid
+pM CannonUpgr      -> BFG9000 SuperDimension
+pM CannonUpg2      -> BFG9000
+
+pC Mateba*       -> AOF
+pC MatebaUpgr    -> Mateba AOF Algidistari
+pC ShockRifle    -> ChAri
+pC ShockRifUpgr  -> ShockRifle
+pC ShockRifUpg2  -> ShockRifle
+pC SPAS          -> AOF Newvec
+pC SPASUpgr      -> SPAS
+pC SPASUpg2      -> SPAS Newvec
+pC SMG           -> Omakeda SYM43
+pC SMGUpgr       -> SMG AOF SYM43
+pC SMGUpg2       -> SMG AOF
+pC SMGUpg3       -> SMG SYM43
+pC IonRifle      -> KSKK
+pC IonRifleUpgr  -> IonRifle KSKK
+pC IonRifleUpg2  -> IonRifle KSKK
+pC CPlasmaRifle  -> AllPoint MDDO
+pC CPlasmaUpgr   -> CPlasmaRifle MDDO
+pC StarDestroyer -> Hell
+pC ShipGunUpgr   -> StarDestroyer
+pC ShipGunUpg2   -> StarDestroyer
+
+gO MissileLauncher
+gO PlasmaDiffuser -> SYM43 MDDO Semaphore
+
+pC Blade*
+pC Delear*  -> Earth
+pC Feuer
+pC Rend
+pC Hulgyon  -> Heaven
+pC StarShot -> AOF
+pC Cercle   -> Earth
 
 ^EXTRA* //--------------------------------------------------------------------|
 

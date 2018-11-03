@@ -31,9 +31,12 @@ static __str DecryptBody(char __str_ars const *str)
 
 static void UnlockPage(struct bip *bip, struct page *page, int pclass)
 {
-   bip->pageavail++;
-   bip->categoryavail[page->category]++;
-   page->unlocked = true;
+   if(!page->unlocked)
+   {
+      bip->pageavail++;
+      bip->categoryavail[page->category]++;
+      page->unlocked = true;
+   }
 
    for(int i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++)
       bip->unlock(page->unlocks[i], pclass);
@@ -92,7 +95,6 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
    bool catfree = false;
    int categ = BIPC_NONE;
    int total = 0;
-   struct page_init page;
 
    for(struct token *tok; (tok = tb.get())->type != tok_eof;) switch(tok->type)
    {
@@ -110,8 +112,9 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
       catfree = tb.drop(tok_mul);
       break;
    case tok_identi:
+   {
       // Classes... Name [*] [-> Unlocks...]
-      memset(&page, 0, sizeof page);
+      struct page_init page = {};
 
       do
          page.pclass |= PClFromStr(Lith_TokStr(tok));
@@ -132,6 +135,7 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
          AddToBIP(bip, categ, pclass, &page, page.isfree || catfree);
       total++;
       break;
+   }
    }
 
    tb.dtor();
@@ -156,13 +160,7 @@ void Lith_PlayerInitBIP(struct player *p)
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
 
-   if(world.dbgBIP)
-   {
-      bip->pageavail = bip->pagemax;
-
-      ForCategory()        bip->categoryavail[categ] = bip->categorymax[categ];
-      ForCategoryAndPage() page->unlocked = true;
-   }
+   if(world.dbgBIP) ForCategoryAndPage() UnlockPage(bip, page, p->pclass);
 
    bip->init = true;
 }
@@ -236,6 +234,8 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
       page = bip->find(StrParam("%S%S", name, discrim));
 
    if(page && !page->unlocked) UnlockPage(bip, page, pclass);
+
+   if(!page) LogDebug(log_bip, "no page '%S' found", name);
 
    return page;
 }

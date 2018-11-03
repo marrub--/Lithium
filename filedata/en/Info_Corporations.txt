@@ -169,10 +169,10 @@ have also produced small-batch infantry weapons for gauging interest and
 profitability.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Sym43 | SYM4.3
-== LITH_INFO_TITLE_Sym43 | SYM4.3 WEAPONS INCORPORATED
-== LITH_INFO_IMAGE_Sym43 | :BIP:Sym43
-@@ LITH_INFO_DESCR_Sym43
+== LITH_INFO_SHORT_SYM43 | SYM4.3
+== LITH_INFO_TITLE_SYM43 | SYM4.3 WEAPONS INCORPORATED
+== LITH_INFO_IMAGE_SYM43 | :BIP:Sym43
+@@ LITH_INFO_DESCR_SYM43
 Currently believed to be based somewhere in the Aetos-Vi system, SYM4.3
 produce explosive weapons and distribute many other kinds of weaponry via
 proxy. All weapons and ammunition sold by them are assigned a standard

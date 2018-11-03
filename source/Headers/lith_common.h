@@ -95,6 +95,7 @@ enum {
    log_dmon  = 1 << 3, // debug info for the monster tracker
    log_dmonV = 1 << 4, // verbose debug info for the monster tracker
    log_dlg   = 1 << 5, // debug info for the dialogue/terminal compiler
+   log_bip   = 1 << 6, // debug info for the BIP
 };
 
 // Extern Functions ----------------------------------------------------------|
