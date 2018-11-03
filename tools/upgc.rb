@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
-## Copyright © 2018 Alison Sanderson, all rights reserved.
-## upgc: Upgrade info text compiler.
+## Copyright Â© 2018 Alison Sanderson, all rights reserved.
+## UpgC: Upgrade info text compiler.
 
-arg = ARGV[0]
-ifp, ofh, ofc, off = arg.split(',')
+ifp, ofh, ofc, off = ARGV[0], ARGV[1], ARGV[2], ARGV[3]
 ifp, ofh, ofc, off = open(ifp, "rt"), open(ofh, "wt"), open(ofc, "wt"), open(off, "wt")
 
 ofh.puts <<-END

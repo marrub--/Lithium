@@ -280,8 +280,9 @@ Ion Rifle sprites
    torridGristle: (Assault rifle sprite     )
    Marrub:        (Redraw                   )
 
-Japanese font
-   BugSoft (BugMaru Gothic <http://debugx.net/BugSoft.aspx?Soft=BugMaruGothic>)
+Japanese fonts
+   JF Dot k6x8          (<http://jikasei.me/font/jf-dotfont/>         )
+   Misaki Gothic/Mincho (<http://www.geocities.jp/littlimi/misaki.htm>)
 
 Laser Shotgun sprites
    Mike12:                      (Vented shotgun             )

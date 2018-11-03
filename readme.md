@@ -14,6 +14,8 @@ Once you've done that you can then load the `pk7` folder into ZDoom as you would
 
 The C code in `source/` is compiled to ACS bytecode with [GDCC](https://github.com/DavidPH/GDCC). It can be rather terse at times, and is scarcely commented, but it is hopefully understandable on its own. Please note that it is currently not under a free software license. You may use it as reference but do not copy code from the project without asking first.
 
+To compile, generate a build file with `tools/genbuild.rb` and run `ninja`.
+
 # Licensing
 
 All of the content and source code in this project is copyrighted unless otherwise stated. Respect content creators and do not use it elsewhere without permission. See `pk7/credits.txt` for more information.

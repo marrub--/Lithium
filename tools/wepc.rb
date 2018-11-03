@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 ## Copyright © 2017 Alison Sanderson, all rights reserved.
-## wepc: Weapon info text compiler.
-## vim: columns=110
+## WepC: Weapon info text compiler.
 
 def outHeader fp, weps
    fp.puts <<-END
@@ -152,9 +151,7 @@ def procFile ifp, ofh, ofc
    outSource ofc, weps, wepn
 end
 
-for arg in ARGV
-   ifn, ofh, ofc = arg.split(',')
-   procFile open(ifn, "rt"), open(ofh, "wt"), open(ofc, "wt")
-end
+ifn, ofh, ofc = ARGV[0], ARGV[1], ARGV[2]
+procFile open(ifn, "rt"), open(ofh, "wt"), open(ofc, "wt")
 
 ## EOF

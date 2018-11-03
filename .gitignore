@@ -5,3 +5,4 @@ compile.bat
 *.dbs
 *.wad.b*
 *.swp
+*.ninja*

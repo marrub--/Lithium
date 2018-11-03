@@ -1,4 +1,4 @@
-// Copyright © 2018 Alison Sanderson, all rights reserved.
+// Copyright Â© 2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
