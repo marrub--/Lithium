@@ -1,5 +1,10 @@
 extend class Lith_HERMES;
 
+static bool IsHeretic()
+{
+   return gameinfo.gametype & GAME_Heretic != 0;
+}
+
 static void SpawnRain(Actor mo, string type)
 {
    for(int i = 0; i < 27; i++)

@@ -1,3 +1,32 @@
+class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
+{
+   default
+   {
+      Tag "Chaos Device";
+      Inventory.PickupSound "misc/p_pkup";
+      Inventory.RespawnTics 4320;
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+      +INVENTORY.PICKUPFLASH
+   }
+
+   states(Actor)
+   {
+   Spawn:
+      ATLP ABCB 4;
+      loop;
+   }
+
+   states(Item)
+   {
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiTeleport");
+      TNT1 A 0 {useInventory(giveInventoryType("ArtiTeleport"));}
+      stop;
+   }
+}
+
 class Lith_HasBarrier : Powerup
 {
    default
@@ -107,7 +136,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       mo.ACS_ScriptCall("Lith_Discount");
       return Super.TryPickup(mo);
    }
-   
+
    states
    {
    Spawn:
@@ -181,7 +210,7 @@ class Lith_ShobonSphere : Lith_CustomInventory
    {
    Pickup:
       TNT1 A 0 Lith_A_Log(msg_both, 5, "ShobonSphere");
-      TNT1 A 0 A_SpawnItemEx("Lith_Shobon", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      TNT1 A 0 A_SpawnItemEx("Lith_Shobon", flags: SXF_SETMASTER);
       stop;
    }
 }

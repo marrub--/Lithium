@@ -156,5 +156,26 @@ actor Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
    }
 }
 
-// EOF
+actor Lith_ArtiFly : Lith_CustomInventory replaces ArtiFly
+{
+   Tag "Wings of Wrath"
+   Inventory.PickupSound "misc/p_pkup"
+   Inventory.RespawnTics 4320
 
+   +COUNTITEM
+   +INVENTORY.FANCYPICKUPSOUND
+   +INVENTORY.PICKUPFLASH
+
+   states
+   {
+   Spawn:
+      SOAR ABCB 5
+      loop
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiFly")
+      TNT1 A 0 A_GiveInventory("PowerFlight")
+      stop
+   }
+}
+
+// EOF

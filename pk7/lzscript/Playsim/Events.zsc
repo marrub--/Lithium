@@ -4,7 +4,7 @@ class Lith_Events : EventHandler;
 
 bool m_bosslevel;
 
-override void WorldLoaded(WorldEvent evt)
+override void WorldLoaded(WorldEvent ev)
 {
    static const string[] bosslevels = {
       "058fb092ea1b70da1e3cbf501c4a91a1", // E1M8
@@ -14,10 +14,10 @@ override void WorldLoaded(WorldEvent evt)
       "5eecd88f4491f516d590ce4bbf45f532"  // MAP30
    };
 
-   if(evt.isSaveGame)
+   if(ev.isSaveGame)
       return;
 
-   if(evt.isReopen)
+   if(ev.isReopen)
       CallACS("Lith_WorldReopen");
    else
    {
@@ -33,13 +33,13 @@ override void WorldLoaded(WorldEvent evt)
    }
 }
 
-override void WorldThingDestroyed(WorldEvent evt)
+override void WorldThingDestroyed(WorldEvent ev)
 {
-   if(evt.thing is "Lith_InventoryItem")
-      Lith_InventoryItem(evt.thing).Lith_Destroy();
+   if(ev.thing is "Lith_InventoryItem")
+      Lith_InventoryItem(ev.thing).Lith_Destroy();
 }
 
-override void WorldUnloaded(WorldEvent evt)
+override void WorldUnloaded(WorldEvent ev)
 {
    let it = ThinkerIterator.Create("Lith_InventoryItem");
    for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
@@ -63,12 +63,12 @@ override void UiTick()
       RunEndSequence();
 }
 
-override void RenderOverlay(RenderEvent evt)
-   {if(m_eseq >= ESEQ_RUN) DrawEndSequence(evt);}
+override void RenderOverlay(RenderEvent ev)
+   {if(m_eseq >= ESEQ_RUN) DrawEndSequence(ev);}
 
-override void PlayerEntered(PlayerEvent evt)
+override void PlayerEntered(PlayerEvent ev)
 {
-   PlayerInfo p = players[evt.playerNumber];
+   PlayerInfo p = players[ev.playerNumber];
 
    // in case the player isn't derived from Lith_Player
    if(p && p.mo && !p.mo.findInventory("Lith_AAGH"))
@@ -78,9 +78,9 @@ override void PlayerEntered(PlayerEvent evt)
    }
 }
 
-override void WorldThingSpawned(WorldEvent evt)
+override void WorldThingSpawned(WorldEvent ev)
 {
-   let th = evt.thing;
+   let th = ev.thing;
 
    if(th is "CommanderKeen")
    {
@@ -112,46 +112,88 @@ override void WorldTick()
       level.lines[i].sidedef[0].setTextureYoffset(j, sin(level.totaltime)*4);
 }
 
-override void WorldThingDamaged(WorldEvent evt)
+override void WorldThingDamaged(WorldEvent ev)
 {
-   let src = evt.damagesource;
-   let dst = evt.thing;
+   let src = ev.damagesource;
+   let dst = ev.thing;
 
    if(!dst) return;
 
-   if(evt.damageType == 'Bullet' && evt.damage >= 8 && !dst.bNOBLOOD)
+   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD)
    {
       let mo = Actor.Spawn("Lith_Dummy", dst.pos + (0, 0, dst.height / 2));
-      float vol = clamp(evt.damage / 14.0, 0, 1);
+      float vol = clamp(ev.damage / 14.0, 0, 1);
       mo.A_PlaySound("body/bullethit", CHAN_BODY, vol * frandom(0.5, 1.1));
    }
 
    if(!src) return;
 
    if(src != dst && src.countInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.player))
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", evt.damage * 3.77);
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.damage * 3.77);
 }
 
-override bool InputProcess(InputEvent evt)
+override void CheckReplacement(ReplaceEvent ev)
+{
+   bool isfinal = ev.isFinal;
+   ev.isFinal = false;
+   switch(ev.replacee.getClassName()) {
+   case 'BlasterAmmo':
+   case 'GoldWandAmmo':
+   case 'MaceAmmo':            ev.replacement = "Clip";                  break;
+   case 'BlasterHefty':
+   case 'GoldWandHefty':
+   case 'MaceHefty':           ev.replacement = "ClipBox";               break;
+   case 'CrossbowAmmo':        ev.replacement = "Shell";                 break;
+   case 'CrossbowHefty':       ev.replacement = "ShellBox";              break;
+   case 'PhoenixRodAmmo':      ev.replacement = "RocketAmmo";            break;
+   case 'ArtiTimeBomb':
+   case 'PhoenixRodHefty':     ev.replacement = "RocketBox";             break;
+   case 'SkullRodAmmo':        ev.replacement = "Cell";                  break;
+   case 'ArtiEgg':
+   case 'SkullRodHefty':       ev.replacement = "CellPack";              break;
+   case 'Staff':               ev.replacement = "Fist";                  break;
+   case 'Gauntlets':           ev.replacement = "Chainsaw";              break;
+   case 'GoldWand':            ev.replacement = "Pistol";                break;
+   case 'Crossbow':            ev.replacement = "Shotgun";               break;
+   case 'Blaster':             ev.replacement = "Chaingun";              break;
+   case 'PhoenixRod':          ev.replacement = "RocketLauncher";        break;
+   case 'Mace':                ev.replacement = "PlasmaRifle";           break;
+   case 'SkullRod':            ev.replacement = "BFG9000";               break;
+   case 'ArtiHealth':          ev.replacement = "Medikit";               break;
+   case 'ArtiInvisibility':    ev.replacement = "BlurSphere";            break;
+   case 'ArtiInvulnerability': ev.replacement = "InvulnerabilitySphere"; break;
+   case 'ArtiSuperHealth':     ev.replacement = "SoulSphere";            break;
+   case 'ArtiTomeOfPower':     ev.replacement = "Berserk";               break;
+   case 'ArtiTorch':           ev.replacement = "Infrared";              break;
+   case 'BagOfHolding':        ev.replacement = "Backpack";              break;
+   case 'CrystalVial':         ev.replacement = "StimPack";              break;
+   case 'EnchantedShield':     ev.replacement = "BlueArmor";             break;
+   case 'SilverShield':        ev.replacement = "GreenArmor";            break;
+   case 'SuperMap':            ev.replacement = "AllMap";                break;
+   default: ev.isFinal = isfinal; break;
+   }
+}
+
+override bool InputProcess(InputEvent ev)
 {
    let cl = Lith_URANUS.Instance();
 
    if(!cl) return false;
 
-   if((evt.type == InputEvent.Type_KeyDown ||
-       evt.type == InputEvent.Type_KeyUp) &&
-      (evt.keyScan == InputEvent.Key_LShift ||
-       evt.keyScan == InputEvent.Key_RShift))
+   if((ev.type == InputEvent.Type_KeyDown ||
+       ev.type == InputEvent.Type_KeyUp) &&
+      (ev.keyScan == InputEvent.Key_LShift ||
+       ev.keyScan == InputEvent.Key_RShift))
    {
       cl.m_pdata[consoleplayer].shiftDown =
-         (evt.type == InputEvent.Type_KeyDown);
+         (ev.type == InputEvent.Type_KeyDown);
 
       return false;
    }
    else if(Lith_Player(players[consoleplayer].mo).m_grabInput &&
-      evt.type == InputEvent.Type_KeyDown && evt.keyString)
+      ev.type == InputEvent.Type_KeyDown && ev.keyString)
    {
-      int ch = evt.keyChar;
+      int ch = ev.keyChar;
 
       if(cl.m_pdata[consoleplayer].shiftDown &&
          (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
@@ -162,14 +204,14 @@ override bool InputProcess(InputEvent evt)
       EventHandler.SendNetworkEvent("Lith_Key", ch);
       return true;
    }
-   
+
    return false;
 }
 
-override void NetworkProcess(ConsoleEvent evt)
+override void NetworkProcess(ConsoleEvent ev)
 {
-   if(evt.name == "Lith_Key")
-      CallACS("Lith_KeyDown", evt.player, evt.args[0]);
+   if(ev.name == "Lith_Key")
+      CallACS("Lith_KeyDown", ev.player, ev.args[0]);
 }
 
 // EOF

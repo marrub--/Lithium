@@ -32,6 +32,8 @@
 == LITH_LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
 == LITH_LOG_Dogs         | Picked up dogs.
 == LITH_LOG_ShobonSphere | ( -w-)
+== LITH_LOG_ArtiFly      | Wings of Wrath
+== LITH_LOG_ArtiTeleport | Chaos Device
 
 ## Ammo ----------------------------------------------------------------------|
 == LITH_LOG_Clip      | Radio
