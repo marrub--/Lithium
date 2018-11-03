@@ -1,49 +1,49 @@
-player/score1       lsounds/Player/Score1.flac             // Self-made
-player/score2       lsounds/Player/Score2.flac             // 〃
-player/score3       lsounds/Player/Score3.flac             // 〃
-player/doublejump   lsounds/Player/DoubleJump.flac         // DemonSteele/Smash Bros
-player/slide        lsounds/Player/Slide.flac              // 〃
-player/getsigil     lsounds/Player/DivisionSigilPickup.ogg // Resident Evil 4, Fallout 4
-player/nuke         lsounds/Player/Nuke.ogg                // Touhou 13
-player/barrier      lsounds/Player/Barrier.flac            // 〃
-player/death1       lsounds/Player/DeathCharge.ogg         // 〃
-player/death2       lsounds/Player/Death.ogg               // 〃
-player/zoomin       lsounds/Player/ZoomIn.flac             // Halo 3
-player/zoomout      lsounds/Player/ZoomOut.flac            // 〃
-player/hitground    lsounds/Player/HitGround.flac          // EYE: Divine Cybermancy
-player/infraredoff  lsounds/Player/InfraredOff.flac        // Counter-Strike: Source
-player/levelup      lsounds/Player/LevelUp.flac            // Phantasy Star Online
-player/glare        lsounds/Player/Glare.ogg               // Monster Girl Quest
+player/score1       lsounds/Player/Score1              // Self-made
+player/score2       lsounds/Player/Score2              // 〃
+player/score3       lsounds/Player/Score3              // 〃
+player/doublejump   lsounds/Player/DoubleJump          // DemonSteele/Smash Bros
+player/slide        lsounds/Player/Slide               // 〃
+player/getsigil     lsounds/Player/DivisionSigilPickup // Resident Evil 4, Fallout 4
+player/nuke         lsounds/Player/Nuke                // Touhou 13
+player/barrier      lsounds/Player/Barrier             // 〃
+player/death1       lsounds/Player/DeathCharge         // 〃
+player/death2       lsounds/Player/Death               // 〃
+player/zoomin       lsounds/Player/ZoomIn              // Halo 3
+player/zoomout      lsounds/Player/ZoomOut             // 〃
+player/hitground    lsounds/Player/HitGround           // EYE: Divine Cybermancy
+player/infraredoff  lsounds/Player/InfraredOff         // Counter-Strike: Source
+player/levelup      lsounds/Player/LevelUp             // Phantasy Star Online
+player/glare        lsounds/Player/Glare               // Monster Girl Quest
 
-player/counter     lsounds/GUI/Payout/Counter.flac     // Halo 3
-player/counterdone lsounds/GUI/Payout/CounterDone.flac // 〃
+player/counter     lsounds/GUI/Payout/Counter     // Halo 3
+player/counterdone lsounds/GUI/Payout/CounterDone // 〃
 
-player/YOUVEGOTMAIL lsounds/GUI/Mail.ogg // AOL
+player/YOUVEGOTMAIL lsounds/GUI/Mail // AOL
 
-player/trmopen   lsounds/GUI/Terminal/Open.wav   // Marathon
-player/trmswitch lsounds/GUI/Terminal/Switch.wav // 〃
+player/trmopen   lsounds/GUI/Terminal/Open   // Marathon
+player/trmswitch lsounds/GUI/Terminal/Switch // 〃
 
-player/step1 lsounds/Player/Footsteps/Step1.flac // ???
-player/step2 lsounds/Player/Footsteps/Step2.flac // ???
-player/step3 lsounds/Player/Footsteps/Step3.flac // ???
-player/step4 lsounds/Player/Footsteps/Step4.flac // ???
+player/step1 lsounds/Player/Footsteps/Step1 // ???
+player/step2 lsounds/Player/Footsteps/Step2 // ???
+player/step3 lsounds/Player/Footsteps/Step3 // ???
+player/step4 lsounds/Player/Footsteps/Step4 // ???
 
-player/stepw1 lsounds/Player/Footsteps/Water1.flac // Black Mesa
-player/stepw2 lsounds/Player/Footsteps/Water2.flac // 〃
-player/stepw3 lsounds/Player/Footsteps/Water3.flac // 〃
-player/stepw4 lsounds/Player/Footsteps/Water4.flac // 〃
+player/stepw1 lsounds/Player/Footsteps/Water1 // Black Mesa
+player/stepw2 lsounds/Player/Footsteps/Water2 // 〃
+player/stepw3 lsounds/Player/Footsteps/Water3 // 〃
+player/stepw4 lsounds/Player/Footsteps/Water4 // 〃
 
-player/stepl1 lsounds/Player/Footsteps/Lava1.flac // Insurgency
-player/stepl2 lsounds/Player/Footsteps/Lava2.flac // 〃
-player/stepl3 lsounds/Player/Footsteps/Lava3.flac // 〃
-player/stepl4 lsounds/Player/Footsteps/Lava4.flac // 〃
+player/stepl1 lsounds/Player/Footsteps/Lava1 // Insurgency
+player/stepl2 lsounds/Player/Footsteps/Lava2 // 〃
+player/stepl3 lsounds/Player/Footsteps/Lava3 // 〃
+player/stepl4 lsounds/Player/Footsteps/Lava4 // 〃
 
-player/steps1 lsounds/Player/Footsteps/Slime1.flac // Battlefield 4
-player/steps2 lsounds/Player/Footsteps/Slime2.flac // 〃
-player/steps3 lsounds/Player/Footsteps/Slime3.flac // 〃
-player/steps4 lsounds/Player/Footsteps/Slime4.flac // 〃
+player/steps1 lsounds/Player/Footsteps/Slime1 // Battlefield 4
+player/steps2 lsounds/Player/Footsteps/Slime2 // 〃
+player/steps3 lsounds/Player/Footsteps/Slime3 // 〃
+player/steps4 lsounds/Player/Footsteps/Slime4 // 〃
 
-player/wings lsounds/Weapons/Wings.wav // Hexen
+player/wings lsounds/Weapons/Wings // Hexen
 
 $volume player/death2 0.7
 $volume player/nuke 0.7
@@ -85,10 +85,10 @@ $random player/score {
    player/score3
 }
 
-$playersound player male *jump    lsounds/Player/Jump.flac     // General 6000
-$playersound player male *usefail lsounds/Player/Usefail.flac  // Self-made
-$playersound player male *land    lsounds/Player/Land.wav      // Hexen
-$playersound player male *dive    lsounds/Player/SplashIn.flac // Call of Duty: Modern Warfare 2
-$playersound player male *surface lsounds/Player/Splash.flac   // 〃
+$playersound player male *jump    lsounds/Player/Jump     // General 6000
+$playersound player male *usefail lsounds/Player/UseFail  // Self-made
+$playersound player male *land    lsounds/Player/Land     // Hexen
+$playersound player male *dive    lsounds/Player/SplashIn // Call of Duty: Modern Warfare 2
+$playersound player male *surface lsounds/Player/Splash   // 〃
 
 // EOF

@@ -1,16 +1,16 @@
 //
 // Informant
 //
-player/informant/land1 lsounds/PlayerI/Land1.flac // Phantasy Star: Nova
-player/informant/land2 lsounds/PlayerI/Land2.flac // 〃
-player/informant/land3 lsounds/PlayerI/Land3.flac // 〃
+player/informant/land1 lsounds/PlayerI/Land1 // Phantasy Star: Nova
+player/informant/land2 lsounds/PlayerI/Land2 // 〃
+player/informant/land3 lsounds/PlayerI/Land3 // 〃
 
-player/informant/step1 lsounds/PlayerI/Footsteps/Step1.flac // Fallout 4
-player/informant/step2 lsounds/PlayerI/Footsteps/Step2.flac // 〃
-player/informant/step3 lsounds/PlayerI/Footsteps/Step3.flac // 〃
-player/informant/step4 lsounds/PlayerI/Footsteps/Step4.flac // 〃
+player/informant/step1 lsounds/PlayerI/Footsteps/Step1 // Fallout 4
+player/informant/step2 lsounds/PlayerI/Footsteps/Step2 // 〃
+player/informant/step3 lsounds/PlayerI/Footsteps/Step3 // 〃
+player/informant/step4 lsounds/PlayerI/Footsteps/Step4 // 〃
 
-player/informant/dodge lsounds/PlayerI/Dodge.flac // Monster Girl Quest
+player/informant/dodge lsounds/PlayerI/Dodge // Monster Girl Quest
 
 $random player/informant/land {
    player/informant/land1
@@ -27,12 +27,12 @@ $random player/informant/step {
 
 $playeralias    informant male *land    player/informant/land
 $playeralias    informant male *grunt   silence
-$playersound    informant male *jump    lsounds/PlayerI/Jump.flac       // Self-made
-$playersound    informant male *death   lsounds/PlayerI/Death.flac      // 〃
-$playersound    informant male *xdeath  lsounds/PlayerI/XDeath.flac     // 〃
-$playersound    informant male *pain100 lsounds/PlayerI/PainSmall.flac  // Doom
-$playersounddup informant male *pain75  *pain100                        // 〃
-$playersound    informant male *pain50  lsounds/PlayerI/Pain.flac       // 〃
-$playersounddup informant male *pain25  *pain50                         // 〃
+$playersound    informant male *jump    lsounds/PlayerI/Jump       // Self-made
+$playersound    informant male *death   lsounds/PlayerI/Death      // 〃
+$playersound    informant male *xdeath  lsounds/PlayerI/XDeath     // 〃
+$playersound    informant male *pain100 lsounds/PlayerI/PainSmall  // Doom
+$playersounddup informant male *pain75  *pain100                   // 〃
+$playersound    informant male *pain50  lsounds/PlayerI/Pain       // 〃
+$playersounddup informant male *pain25  *pain50                    // 〃
 
 // EOF

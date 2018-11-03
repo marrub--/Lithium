@@ -1,8 +1,8 @@
 //
 // Body
 //
-body/bullethit1 lsounds/World/Bullet1.wav // Half-Life
-body/bullethit2 lsounds/World/Bullet2.wav // 〃
+body/bullethit1 lsounds/World/Bullet1 // Half-Life
+body/bullethit2 lsounds/World/Bullet2 // 〃
 
 $random body/bullethit {
    body/bullethit1
@@ -12,22 +12,22 @@ $random body/bullethit {
 //
 // Ambiance
 //
-amb/rain       lsounds/World/Ambiance/Rain.ogg           // ???
-amb/wind       lsounds/World/Ambiance/Wind.ogg           // 〃
-amb/rainout    lsounds/World/Ambiance/RainOut.ogg        // 〃
-amb/windout    lsounds/World/Ambiance/WindOut.ogg        // 〃
-amb/bigcomp    lsounds/World/Ambiance/BigComputer.ogg    // EYE: Divine Cybermancy
-amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant.flac  // Half-Life 2
-amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2.flac // 〃
-amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3.flac // 〃
-amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4.flac // 〃
-amb/ship       lsounds/World/Ambiance/Ship.flac          // 〃
-amb/field      lsounds/World/Ambiance/NoEntry.flac       // 〃
-amb/vent       lsounds/World/Ambiance/VentPump.wav       // 〃
-amb/lightson   lsounds/World/Ambiance/LightsOn.flac      // 〃
-amb/computer   lsounds/World/Ambiance/Computer.wav       // Quake
+amb/rain       lsounds/World/Ambiance/Rain          // ???
+amb/wind       lsounds/World/Ambiance/Wind          // 〃
+amb/rainout    lsounds/World/Ambiance/RainOut       // 〃
+amb/windout    lsounds/World/Ambiance/WindOut       // 〃
+amb/bigcomp    lsounds/World/Ambiance/BigComputer   // EYE: Divine Cybermancy
+amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant  // Half-Life 2
+amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2 // 〃
+amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3 // 〃
+amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4 // 〃
+amb/ship       lsounds/World/Ambiance/Ship          // 〃
+amb/field      lsounds/World/Ambiance/NoEntry       // 〃
+amb/vent       lsounds/World/Ambiance/VentPump      // 〃
+amb/lightson   lsounds/World/Ambiance/LightsOn      // 〃
+amb/computer   lsounds/World/Ambiance/Computer      // Quake
 
-amb/fire lsounds/World/Ambiance/Fire.wav // Hexen
+amb/fire lsounds/World/Ambiance/Fire // Hexen
 $limit amb/fire 0
 
 $alias amb/spark weapons/erifle/zap
@@ -56,8 +56,8 @@ $ambient 42427 amb/computer  point 2.0  continuous    1.0
 //
 // Barrels
 //
-misc/barrel/hit1 lsounds/World/Barrel/Hit.flac
-misc/barrel/hit2 lsounds/World/Barrel/Hit2.flac
+misc/barrel/hit1 lsounds/World/Barrel/Hit
+misc/barrel/hit2 lsounds/World/Barrel/Hit2
 
 $random misc/barrel/hit {
    misc/barrel/hit1
@@ -67,12 +67,12 @@ $random misc/barrel/hit {
 //
 // Decorations
 //
-amb/lamp1    lsounds/World/Ambiance/LampTall.flac     // ???
-amb/lamp2    lsounds/World/Ambiance/LampSmall.flac    // ???
-amb/shatter1 lsounds/World/Ambiance/GlassBreak1.flac  // Half-Life 2
-amb/shatter2 lsounds/World/Ambiance/GlassBreak2.flac  // 〃
-amb/metalx   lsounds/World/Ambiance/MetalExplode.flac // 〃
-amb/woodx    lsounds/World/Ambiance/WoodExplode.flac  // 〃
+amb/lamp1    lsounds/World/Ambiance/LampTall     // ???
+amb/lamp2    lsounds/World/Ambiance/LampSmall    // ???
+amb/shatter1 lsounds/World/Ambiance/GlassBreak1  // Half-Life 2
+amb/shatter2 lsounds/World/Ambiance/GlassBreak2  // 〃
+amb/metalx   lsounds/World/Ambiance/MetalExplode // 〃
+amb/woodx    lsounds/World/Ambiance/WoodExplode  // 〃
 
 $random amb/shatter {
    amb/shatter1
@@ -86,23 +86,23 @@ $volume amb/shatter 0.4
 //
 // Splashes
 //
-world/splash/nukage lsounds/World/Splashes/Nukage.flac // ???
+world/splash/nukage lsounds/World/Splashes/Nukage // ???
 
-world/splash/water1 lsounds/World/Splashes/Water1.flac // Call of Duty: Modern Warfare 2
-world/splash/water2 lsounds/World/Splashes/Water2.flac // 〃
-world/splash/water3 lsounds/World/Splashes/Water3.flac // 〃
-world/splash/water4 lsounds/World/Splashes/Water4.flac // 〃
-world/splash/water5 lsounds/World/Splashes/Water5.flac // 〃
+world/splash/water1 lsounds/World/Splashes/Water1 // Call of Duty: Modern Warfare 2
+world/splash/water2 lsounds/World/Splashes/Water2 // 〃
+world/splash/water3 lsounds/World/Splashes/Water3 // 〃
+world/splash/water4 lsounds/World/Splashes/Water4 // 〃
+world/splash/water5 lsounds/World/Splashes/Water5 // 〃
 
-world/splash/sludge1 lsounds/World/Splashes/Sludge1.flac // ???
-world/splash/sludge2 lsounds/World/Splashes/Sludge2.flac // ???
-world/splash/sludge3 lsounds/World/Splashes/Sludge3.flac // ???
-world/splash/sludge4 lsounds/World/Splashes/Sludge4.flac // ???
+world/splash/sludge1 lsounds/World/Splashes/Sludge1 // ???
+world/splash/sludge2 lsounds/World/Splashes/Sludge2 // ???
+world/splash/sludge3 lsounds/World/Splashes/Sludge3 // ???
+world/splash/sludge4 lsounds/World/Splashes/Sludge4 // ???
 
-world/splash/lava1 lsounds/World/Splashes/Lava1.flac // ???
-world/splash/lava2 lsounds/World/Splashes/Lava2.flac // ???
-world/splash/lava3 lsounds/World/Splashes/Lava3.flac // ???
-world/splash/lava4 lsounds/World/Splashes/Lava4.flac // ???
+world/splash/lava1 lsounds/World/Splashes/Lava1 // ???
+world/splash/lava2 lsounds/World/Splashes/Lava2 // ???
+world/splash/lava3 lsounds/World/Splashes/Lava3 // ???
+world/splash/lava4 lsounds/World/Splashes/Lava4 // ???
 
 $random world/splash/water {
    world/splash/water1

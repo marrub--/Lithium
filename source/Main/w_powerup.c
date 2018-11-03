@@ -25,7 +25,7 @@ void Lith_DOGS()
 
       ACS_Delay(35);
 
-      ACS_SetMusic("lsounds/Silence.flac");
+      ACS_SetMusic("lsounds/Silence");
 
       SetPropI(tid, APROP_MasterTID, p->tid);
       ACS_SetActorState(tid, "PureSteggleEnergy");

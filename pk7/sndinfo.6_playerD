@@ -1,8 +1,8 @@
 //
 // Dark Lord
 //
-player/darklord/step lsounds/PlayerD/Step.flac // Resident Evil 4
+player/darklord/step lsounds/PlayerD/Step // Resident Evil 4
 
-$playersound darklord male *land lsounds/PlayerD/Land.ogg // Resident Evil 4, Slave Zero
+$playersound darklord male *land lsounds/PlayerD/Land // Resident Evil 4, Slave Zero
 
 // EOF

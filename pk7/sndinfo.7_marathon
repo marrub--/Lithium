@@ -1,20 +1,19 @@
-// All sounds from Marathon 2.
+// All sounds from Marathon Trilogy
 
-marathon/pickup   lsounds/Marathon/Pickup.flac
-marathon/explode  lsounds/Marathon/Explode.flac
-marathon/hitsolid lsounds/Marathon/HitSolid.flac
+marathon/pickup   lsounds/Marathon/Pickup
+marathon/explode  lsounds/Marathon/Explode
+marathon/hitsolid lsounds/Marathon/HitSolid
 
-marathon/rifle/fire    lsounds/Marathon/RifleFire.flac
-marathon/rifle/grenade lsounds/Marathon/GrenadeLaunch.flac
-marathon/rifle/reload  lsounds/Marathon/RifleReload.flac
+marathon/rifle/fire    lsounds/Marathon/RifleFire
+marathon/rifle/grenade lsounds/Marathon/GrenadeLaunch
+marathon/rifle/reload  lsounds/Marathon/RifleReload
 
-marathon/hitwall1 lsounds/Marathon/HitWall1.flac
-marathon/hitwall2 lsounds/Marathon/HitWall2.flac
-marathon/hitwall3 lsounds/Marathon/HitWall3.flac
+marathon/hitwall1 lsounds/Marathon/HitWall1
+marathon/hitwall2 lsounds/Marathon/HitWall2
 
-marathon/hit1 lsounds/Marathon/Hit1.flac
-marathon/hit2 lsounds/Marathon/Hit2.flac
-marathon/hit3 lsounds/Marathon/Hit3.flac
+marathon/hit1 lsounds/Marathon/Hit1
+marathon/hit2 lsounds/Marathon/Hit2
+marathon/hit3 lsounds/Marathon/Hit3
 
 $random marathon/hitwall {
    marathon/hitwall1
@@ -26,5 +25,14 @@ $random marathon/hit {
    marathon/hit2
    marathon/hit3
 }
+
+// EOFSta181: 309c1adcast
+//                 D^te: 3fc1a
+//
+//
+//
+//           furnish 20-a
+//
+//
 
 // EOF

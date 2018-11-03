@@ -4,32 +4,32 @@ $pitchshiftrange 2
 //
 // World
 //
-explosion DSBAREXP // Whatever you have loaded :y
+explosion DSBAREXP
 $limit explosion 0
 $attenuation explosion 0.7
 
-misc/teleport lsounds/World/Teleport/Teleport.flac // Self-made
-silence       lsounds/Silence.flac                 // 〃
+misc/teleport lsounds/World/Teleport/Teleport // Self-made
+silence       lsounds/Silence                 // 〃
 
-MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM.ogg // ?????
-YOUSONOFABITCH lsounds/YOUSONOFABITCH.ogg // ???????????
-AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA.ogg // ?????????????
-misc/booom     lsounds/World/boom.flac    // ??????????????
-misc/pop       lsounds/pop.flac           // ????????????????
+MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM // ?????
+YOUSONOFABITCH lsounds/YOUSONOFABITCH // ???????????
+AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA // ?????????????
+misc/booom     lsounds/World/boom     // ??????????????
+misc/pop       lsounds/pop            // ????????????????
 
-misc/teleout lsounds/World/Teleport/TeleportOut.flac // Touhou 13
-misc/telein  lsounds/World/Teleport/TeleportIn.flac  // 〃
+misc/teleout lsounds/World/Teleport/TeleportOut // Touhou 13
+misc/telein  lsounds/World/Teleport/TeleportIn  // 〃
 
-ghost/hit lsounds/Weapons/GhostHit.flac // Touhou 13
+ghost/hit lsounds/Weapons/GhostHit // Touhou 13
 $alias ghost/spawn player/pickup/barrier
 
 //
 // Intermission
 //
-intermission/tick      lsounds/GUI/Menu/InterTick.flac // Halo 3
-intermission/nextstage lsounds/GUI/Menu/InterNext.flac // Halo 3, Phantasy Star Online
-intermission/paststats lsounds/GUI/Menu/InterPass.wav  // Phantasy Star Online
-intermission/mid       lsounds/GUI/Menu/InterMid.wav   // 〃
+intermission/tick      lsounds/GUI/Menu/InterTick // Halo 3
+intermission/nextstage lsounds/GUI/Menu/InterNext // Halo 3, Phantasy Star Online
+intermission/paststats lsounds/GUI/Menu/InterPass // Phantasy Star Online
+intermission/mid       lsounds/GUI/Menu/InterMid  // 〃
 
 $pitchshift intermission/nextstage 0
 $pitchshift intermission/paststats 0
@@ -38,13 +38,13 @@ $pitchshift intermission/mid 0
 //
 // Menu
 //
-misc/chat lsounds/GUI/Chat.flac // FEAR
+misc/chat lsounds/GUI/Chat // FEAR
 $alias misc/chat2 misc/chat
 
-menu/backup   lsounds/GUI/Menu/Back.wav     // Phantasy Star Online
-menu/cursor   lsounds/GUI/Menu/Move.wav     // 〃
-menu/activate lsounds/GUI/Menu/Activate.wav // 〃
-menu/choose   lsounds/GUI/Menu/Choose.wav   // 〃
+menu/backup   lsounds/GUI/Menu/Back     // Phantasy Star Online
+menu/cursor   lsounds/GUI/Menu/Move     // 〃
+menu/activate lsounds/GUI/Menu/Activate // 〃
+menu/choose   lsounds/GUI/Menu/Choose   // 〃
 
 $alias menu/invalid player/cbi/clickinvalid
 $alias menu/change  player/cbi/slidertick
