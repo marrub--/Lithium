@@ -72,6 +72,36 @@ off as a civilian hunting weapons seller.
 The company was resigned in 2480 after the death of its remaining founder.
 
 ##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_JAQTen | JAQTen
+== LITH_INFO_TITLE_JAQTen | $LITH_INFO_SHORT_JAQTen
+@@ LITH_INFO_DESCR_JAQTen
+JAQTen are the producers of many heavy armaments, performance improving drugs,
+and soup products. Some of the deadliest weapons in the galaxy are currently
+designed and manufactured by them, along with some of the most potentially
+dangerous drugs. They are mainly known for their canned soup products, which
+they began producing long before military gear.
+
+Due to ongoing conflicts in the Tsukama system at the time of their conception
+during the First Space War in 752 NE, JAQTen's canning facilities were
+repurposed into heavy machinery factories to help the allied Earth troops
+fight. Along with their sales of super-durable MREs to militaries, they were
+able to stay afloat in such an age, and still produce many products today.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_JJJ | JJJ
+== LITH_INFO_TITLE_JJJ | JJJ Inc.
+@@ LITH_INFO_DESCR_JJJ
+A company that produces primarily medical supplies such as first-aid products,
+but also produces larger medical equipment such as Magnetic Resonance Imaging
+machines and the like. They are the leading brand in many fields, and hold the
+highest profit margins of any consumer packaged goods company in the western
+sector.
+
+Despite the large amount of litigation against them due to questionable
+practices in consumer safety and human rights, they still hold strong due to
+their large presence as a household brand and large amount of bank.
+
+##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_KSKK | KSKK
 == LITH_INFO_TITLE_KSKK | Kazami Sensou Kenkyuu Kaihatsu GK
 == LITH_INFO_IMAGE_KSKK | :BIP:KSKK
@@ -169,6 +199,19 @@ have also produced small-batch infantry weapons for gauging interest and
 profitability.
 
 ##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_ShekaKaff | Sheka Kaff
+== LITH_INFO_TITLE_ShekaKaff | Shekaram Kaffrakal Links & Mats
+@@ LITH_INFO_DESCR_ShekaKaff
+Shekaram Kaffrakal, usually referred to as Sheka Kaff, is a company that
+produces, weaves, and distributes a large variety of clothing, armor, and
+miscellaneous fabric materials.
+
+Sheka Kaff is currently stationed in the Tsukama system, on the planet Ni.
+All of their staff appear to speak a language that nobody, even cryptographers,
+can seem to understand or decipher. Despite this, all of their listings and
+business material is written in standard Eastern English.
+
+##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_SYM43 | SYM4.3
 == LITH_INFO_TITLE_SYM43 | SYM4.3 WEAPONS INCORPORATED
 == LITH_INFO_IMAGE_SYM43 | :BIP:Sym43
@@ -194,5 +237,20 @@ high-grade exotic weaponry both on commission and for mass production.
 Unreal Arms create what are dubbed by critics "some of the nicest-feeling
 weapons you can get your hands on", and yet are still able to sell them for a
 nice price thanks to good shipping architecture in the Aetos Vi system.
+
+##----------------------------------------------------------------------------|
+== LITH_INFO_SHORT_Yigan | Yigan
+== LITH_INFO_TITLE_Yigan | $LITH_INFO_SHORT_Yigan
+@@ LITH_INFO_DESCR_Yigan
+One of the larger producers of personal armor in the galaxy, Yigan were formed
+around 20 years ago and are the only company currently capable of holding a
+candle to Sheka Kaff. While their factories are placed on Mars, it is unknown
+where their actual headquarters is, which has made it very difficult to gather
+information about them.
+
+They mostly produce specialty armors for defense against elements such as
+energy and fire, but also produce some simpler wares to get ahead in the
+growing market. Several lawsuits have been filed against them for theft of
+materials, but no conclusive evidence has been found as of yet.
 
 ## EOF
