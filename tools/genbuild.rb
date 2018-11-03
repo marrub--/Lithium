@@ -34,7 +34,7 @@ rule makelib
    command = gdcc-makelib $target -c $type -o $out
    description = MakeLib $out
 rule ld
-   command = gdcc-ld $lflags --alloc-min Sta "" $sta $in $out
+   command = gdcc-ld $lflags --alloc-min Sta "" $sta $in -o $out
    description = LD $out
 rule fs
    command = tools/hashfs.rb
@@ -93,11 +93,11 @@ end
 fp << <<NINJA
 
 build $bin/lithmain.bin: ld #{inputs.join " "}
-   lflags = $lflags -llithlib --bc-zdacs-init-script-name '__lithmain.bin_init'
+   lflags = $lflags -llithlib --bc-zdacs-init-script-name "__lithmain.bin_init"
    sta = 1400000
 
 build $bin/lithlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
-   lflags = $lflags --bc-zdacs-init-script-name '__lithlib.bin_init'
+   lflags = $lflags --bc-zdacs-init-script-name "__lithlib.bin_init"
    sta = 70000
 
 default dec text fs $bin/lithmain.bin $bin/lithlib.bin
