@@ -1,9 +1,7 @@
 extend class Lith_HERMES;
 
-static bool IsHeretic()
-{
-   return gameinfo.gametype & GAME_Heretic != 0;
-}
+static bool IsHeretic() {return gameinfo.gametype & GAME_Heretic != 0;}
+static bool IsChex()    {return gameinfo.gametype & GAME_Chex    != 0;}
 
 static void SpawnRain(Actor mo, string type)
 {

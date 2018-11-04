@@ -45,6 +45,22 @@ static struct monster_info const monsterinfo[] = {
    {M(SpiderDemon),   mtype_mastermind,    "SpiderMastermind"},
    {M(CyberDemon),    mtype_cyberdemon,    "Cyberdemon"      },
 
+   // Chex Quest
+   {M(Imp),         mtype_imp,        "ArmoredFlemoidusBipedicus"},
+   {M(Imp),         mtype_imp,        "Quadrumpus"},
+   {M(LostSoul),    mtype_lostsoul,   "ChexSoul"},
+   {M(LostSoul),    mtype_lostsoul,   "FlemMine"},
+   {M(BaronOfHell), mtype_baron,      "Flembrane"},
+   {M(BaronOfHell), mtype_baron,      "FlemoidusMaximus"},
+   {M(ShotgunGuy),  mtype_zombie,     "FlemoidusBipedicus"},
+   {M(ZombieMan),   mtype_zombie,     "FlemoidusCommonus"},
+   {M(Spectre),     mtype_demon,      "FlemoidusCycloptisCommonus"},
+   {M(Demon),       mtype_demon,      "FlemoidusStridicus"},
+   {M(Demon),       mtype_demon,      "Larva"},
+   {M(Cacodemon),   mtype_cacodemon,  "SuperCycloptis"},
+   {M(SpiderDemon), mtype_mastermind, "Flembomination"},
+   {M(CyberDemon),  mtype_cyberdemon, "Snotfolus"},
+
    // Heretic
    {M(Imp),         mtype_imp,         "Gargoyle"  },
    {M(Demon),       mtype_demon,       "Golem"     },

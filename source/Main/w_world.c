@@ -69,7 +69,7 @@ static void CheckEnemyCompat(void)
       if(strstr_str(cl, "Lith_") || ACS_StrCmp(cl, "RLFormer", 8) == 0)
          world.enemycompat = true;
 
-      if(ServCallI("IsHeretic"))
+      if(ServCallI("IsHeretic") || ServCallI("IsChex"))
          world.enemycompat = false;
 
       if(world.enemycompat) LogDebug(log_dev, "Enemies are \Cdcompatible");
