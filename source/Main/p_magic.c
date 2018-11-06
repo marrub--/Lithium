@@ -116,16 +116,16 @@ void Lith_Cercle(void)
       ACS_Delay(35);
 
       int fxtid2 = ACS_UniqueTID();
-      SetMembI(fxtid, "user_trigger", true);
-      SetMembI(fxtid, "user_fxtid", fxtid2);
+      SetMembI(fxtid, "m_trigger", true);
+      SetMembI(fxtid, "m_fxtid", fxtid2);
 
       ACS_AmbientSound("weapons/cercle/attack", 127);
 
       ACS_Delay(35);
-      SetMembI(fxtid2, "user_trigger", true);
+      SetMembI(fxtid2, "m_trigger", true);
 
       ACS_Delay(7);
-      SetMembI(fxtid2, "user_trigger", true);
+      SetMembI(fxtid2, "m_trigger", true);
 
       ACS_Delay(35);
 
@@ -148,7 +148,7 @@ void Lith_Cercle(void)
       ACS_Delay(10);
 
       // NB: The projectiles take the TIDs of the throwers, so this is actually triggering them.
-      SetMembI(fxtid3, "user_trigger", true);
+      SetMembI(fxtid3, "m_trigger", true);
 
       // Just in case.
       ACS_Thing_Remove(fxtid);
