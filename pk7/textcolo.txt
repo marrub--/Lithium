@@ -13,4 +13,14 @@ Lith_Green
    #005000 #00FF00
 }
 
+Lith_Red
+{
+   #1F1F1F #BF0F4A
+}
+
+Lith_Blue
+{
+   #111688 #3B47F8
+}
+
 // EOF

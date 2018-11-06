@@ -1,19 +1,20 @@
 Upgrades to be processed into C files. Colon denotes a category.
 Plus denotes an upgrade. Any other text is ignored by the parser.
 
- Name        Info Page     [Cost] Class Funcs [Pr] [[-].Score Mul] [Group] [(Req)]
+ Name        Info Page     [Cost] Cl Funcs [Pr] [[-].Score Mul] [Group] [(Req)]
 :Body
-+HeadsUpDisp HeadsUpDisp          pM       AD-R-  1 -.05 HUD
-+HeadsUpDis2 HeadsUpDisp          pC|gM|gI AD-R-  1 -.05 HUD
-+JetBooster  JetBooster           pM       A-UR-    -.05
-+ReflexWetw  ReflexWetw           gO       ADU--  5 -.05
-+Zoom        -                    gA       -DUR-
-+VitalScan   VitalScanner         gA       --UR-  2
-+CyberLegs   CyberLegs    1220000 pM       ADU--  4
-+ReactArmor  Yh0          3500200 pM       -D-R- 20 (AI)
-+ReactArmor2 Yh0          2990200 pM       ----- 10 (AI|RA)
-+DefenseNuke DefenseNuke   580030 pM       ----E    (AI)
-+Adrenaline  Adrenaline   1801000 pM       A-UR- 10
++HeadsUpDisp HeadsUpDisp          pM AD-R-  1 -.05 HUD
++HeadsUpDis2 HeadsUpDisp          pC AD-R-  1 -.05 HUD
++HeadsUpDis3 HeadsUpDisp          pD AD-R-  1 -.05 HUD
++JetBooster  JetBooster           pM A-UR-    -.05
++ReflexWetw  ReflexWetw           gO ADU--  5 -.05
++Zoom        -                    gA -DUR-
++VitalScan   VitalScanner         gA --UR-  2
++CyberLegs   CyberLegs    1220000 pM ADU--  4
++ReactArmor  Yh0          3500200 pM -D-R- 20 (AI)
++ReactArmor2 Yh0          2990200 pM ----- 10 (AI|RA)
++DefenseNuke DefenseNuke   580030 pM ----E    (AI)
++Adrenaline  Adrenaline   1801000 pM A-UR- 10
 
 Cyber-Mage
 +Magic       Magic               pC --UR-

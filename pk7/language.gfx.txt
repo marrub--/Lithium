@@ -141,6 +141,12 @@
 "LITH:HUD_C:SplitBack" = "lgfx/HUD_C/SplitBack.png";
 "LITH:HUD_C:SplitFront" = "lgfx/HUD_C/SplitFront.png";
 "LITH:HUD_C:VIT" = "lgfx/HUD_C/VIT.png";
+"LITH:HUD_D:AMM" = "lgfx/HUD_D/AMM.png";
+"LITH:HUD_D:Ammo2Back" = "lgfx/HUD_D/Ammo2Back.png";
+"LITH:HUD_D:AmmoBack" = "lgfx/HUD_D/AmmoBack.png";
+"LITH:HUD_D:HPBack" = "lgfx/HUD_D/HPBack.png";
+"LITH:HUD_D:MAG" = "lgfx/HUD_D/MAG.png";
+"LITH:HUD_D:WepBack" = "lgfx/HUD_D/WepBack.png";
 "LITH:HUD_I:AMMO" = "lgfx/HUD_I/AMMO.png";
 "LITH:HUD_I:AmmoExtend" = "lgfx/HUD_I/AmmoExtend.png";
 "LITH:HUD_I:AmmoWepsBack" = "lgfx/HUD_I/AmmoWepsBack.png";

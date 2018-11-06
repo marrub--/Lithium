@@ -127,11 +127,14 @@ void Lith_PlayerUpdateData(struct player *p)
 
    p->scopetoken = InvNum("Lith_WeaponScopedToken");
 
-   p->krc = InvNum("RedCard")    ||
+   p->krc = InvNum("RedCard")     ||
+            InvNum("ChexRedCard") ||
             InvNum("KeyGreen");
-   p->kyc = InvNum("YellowCard") ||
+   p->kyc = InvNum("YellowCard")     ||
+            InvNum("ChexYellowCard") ||
             InvNum("KeyYellow");
-   p->kbc = InvNum("BlueCard")   ||
+   p->kbc = InvNum("BlueCard")     ||
+            InvNum("ChexBlueCard") ||
             InvNum("KeyBlue");
    p->krs = InvNum("RedSkull");
    p->kys = InvNum("YellowSkull");

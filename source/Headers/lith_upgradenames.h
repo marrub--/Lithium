@@ -7,6 +7,7 @@ enum // Lith_UpgradeName
 {
    UPGR_HeadsUpDisp,
    UPGR_HeadsUpDis2,
+   UPGR_HeadsUpDis3,
    UPGR_JetBooster,
    UPGR_ReflexWetw,
    UPGR_Zoom,

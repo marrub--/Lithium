@@ -559,6 +559,8 @@ override void RenderOverlay(RenderEvent evt)
                   case '[Lith_Purple]':         cr = 0x8c3bf8; break;
                   case '[Lith_Grey]':           cr = 0xbfbfbf; break;
                   case '[Lith_Green]':          cr = 0x00ff00; break;
+                  case '[Lith_Red]':            cr = 0xbf0f4a; break;
+                  case '[Lith_Blue]':           cr = 0x3b47f8; break;
                   }
                   continue;
                }

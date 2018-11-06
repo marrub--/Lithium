@@ -60,14 +60,14 @@ static void HUD_Ammo(struct player *p)
 static void HUD_Health(struct player *p, upgrade_t *upgr)
 {
    static __str weapongfx[SLOT_MAX] = {
-      [0] = ":HUD:H_D27",
-      [1] = ":HUD:H_D28",
-      [2] = ":HUD:H_D24",
-      [3] = ":HUD:H_D23",
-      [4] = ":HUD:H_D22",
-      [5] = ":HUD:H_D21",
-      [6] = ":HUD:H_D25",
-      [7] = ":HUD:H_D26"
+      ":HUD:H_D27",
+      ":HUD:H_D28",
+      ":HUD:H_D24",
+      ":HUD:H_D23",
+      ":HUD:H_D22",
+      ":HUD:H_D21",
+      ":HUD:H_D25",
+      ":HUD:H_D26"
    };
 
    PrintSprite(InvNum("PowerStrength") ?
