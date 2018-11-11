@@ -73,7 +73,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
    invoker.m_laststate = lb;
 
    A_SetTics(invoker.Lith_WindupTime());
-   Lith_A_Ready(flags);
+   state st = Lith_A_Ready(flags); if(st) return st;
 
    if(player.buttons & BT_ATTACK && level.totaltime & 1)
    {

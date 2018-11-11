@@ -124,8 +124,19 @@ const Lith_PF =
    SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
    SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
 
-action void Lith_A_Ready(int flags = 0)
-   {A_WeaponReady(flags | CallACS("Lith_GetWRF"));}
+virtual state Lith_Ready(int flags) {return null;}
+
+action state Lith_A_Ready(int flags = 0)
+{
+   let st = invoker.Lith_Ready(flags);
+   if(st)
+      return st;
+   else
+   {
+      A_WeaponReady(flags | CallACS("Lith_GetWRF"));
+      return null;
+   }
+}
 
 action(Actor) void Lith_A_SpawnPickup(class<Actor> a)
    {A_SpawnItemEx(a, flags: Lith_PF);}
