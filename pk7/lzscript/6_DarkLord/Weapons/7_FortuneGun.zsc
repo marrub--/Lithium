@@ -18,7 +18,7 @@ SpawnPickup:
 states(Weapon)
 {
 Ready:
-   PISG A 1 A_WeaponReady(CallACS("Lith_GetWRF"));
+   PISG A 1 Lith_A_Ready;
    loop;
 
 Deselect:

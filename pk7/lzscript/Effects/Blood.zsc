@@ -56,7 +56,7 @@ int m_lev;
 states
 {
 Spawn:
-   TNT1 A 0 nodelay ResolveState("Heavy");
+   TNT1 A 0 nodelay ResolveState("Heavy"); // HACK: this is STILL hardcoded!
    TNT1 A 0 ResolveState("Medium");
    TNT1 A 0 ResolveState("Low");
    BLUD A 0 Lith_A_Dogs;

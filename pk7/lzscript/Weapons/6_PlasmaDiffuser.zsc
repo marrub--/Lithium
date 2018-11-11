@@ -41,7 +41,7 @@ default
    +WEAPON.CHEATNOTWEAPON
 }
 
-states
+states(Weapon)
 {
 Ready:
    PDFG A 1 Lith_A_Ready;

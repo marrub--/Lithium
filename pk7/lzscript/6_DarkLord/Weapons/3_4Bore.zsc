@@ -14,7 +14,7 @@ SpawnPickup:
    stop;
 }
 
-action(weapon) void Lith_A_Fire4Bore()
+action(Weapon) void Lith_A_Fire4Bore()
 {
    A_SetBlend("White", 0.2, 6);
    A_GunFlash("DummyFlash");

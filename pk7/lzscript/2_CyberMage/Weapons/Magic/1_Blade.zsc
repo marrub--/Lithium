@@ -46,7 +46,7 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
-states
+states(Weapon)
 {
 Ready:
    TNT1 A 1 bright Lith_A_Ready;

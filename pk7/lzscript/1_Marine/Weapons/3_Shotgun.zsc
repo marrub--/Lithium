@@ -65,7 +65,7 @@ default
 
 int m_just;
 
-action(weapon) void Lith_A_JustAttack()
+action(Weapon) void Lith_A_JustAttack()
 {
    if(invoker.m_just)
    {

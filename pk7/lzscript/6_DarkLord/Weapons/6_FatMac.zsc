@@ -49,7 +49,7 @@ default
    +WEAPON.NOAUTOFIRE;
 }
 
-action(weapon) void Lith_A_FireFatMac()
+action(Weapon) void Lith_A_FireFatMac()
 {
    A_GunFlash("DummyFlash");
    A_SetBlend("White", 0.3, 10);

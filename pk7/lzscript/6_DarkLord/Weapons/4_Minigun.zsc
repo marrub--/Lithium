@@ -64,7 +64,7 @@ int Lith_WindupTime()
    return 1 + (1.0 - m_windup) * 10.0;
 }
 
-action(weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
+action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 {
    int flags = WRF_NOPRIMARY;
    if(invoker.m_windup ~== 0) flags |= WRF_ALLOWRELOAD;
@@ -89,12 +89,12 @@ action(weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
       return null;
 }
 
-action(weapon) state Lith_A_MinigunPostReady(statelabel l)
+action(Weapon) state Lith_A_MinigunPostReady(statelabel l)
 {
    return invoker.m_windup ? ResolveState(l) : null;
 }
 
-action(weapon) void Lith_A_MinigunFire()
+action(Weapon) void Lith_A_MinigunFire()
 {
    Lith_A_MagIncr();
    A_AlertMonsters();
@@ -105,7 +105,7 @@ action(weapon) void Lith_A_MinigunFire()
    A_Recoil(0.07);
 }
 
-action(weapon) void Lith_A_MinigunPostFire()
+action(Weapon) void Lith_A_MinigunPostFire()
 {
    Lith_A_RecoilDn(0.35);
    A_SetTics(invoker.Lith_WindupTime()-1);
