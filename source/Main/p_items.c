@@ -99,6 +99,8 @@ void Lith_PlayerInitInventory(struct player *p)
 
    p->misc.items.construct();
    p->misc.user = p;
+
+   p->invinit = true;
 }
 
 void Lith_PlayerDeallocInventory(struct player *p)
