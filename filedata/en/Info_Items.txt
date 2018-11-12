@@ -55,7 +55,7 @@ Gives 1 health.
 
 ##----------------------------------------------------------------------------|
 == LITH_INFO_SHORT_AllMap | Area Map
-== LITH_INFO_TITLE_AllMap | $LITH_INFO_TITLE_AllMap
+== LITH_INFO_TITLE_AllMap | $LITH_INFO_SHORT_AllMap
 @@ LITH_INFO_DESCR_AllMap
 A monitor containing a map of the entire current area of operation. Has an out
 port on the frame that hooks into your Computer/Brain Interface and outputs
