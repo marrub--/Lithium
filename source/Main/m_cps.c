@@ -4,14 +4,13 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-__str Lith_CPS_Print(u32 *cps)
+char const *Lith_CPS_Print(u32 *cps, int l)
 {
-   ACS_BeginPrint();
-
-   for(int i = 0, ch; (ch = Lith_CPS_GetC(cps, i)); i++)
-      ACS_PrintChar(ch);
-
-   return ACS_EndStrParam();
+   noinit static char buf[4096];
+   int i, ch;
+   for(i = 0; (ch = Lith_CPS_GetC(cps, i)) && (!l || i < l); i++) buf[i] = ch;
+   buf[i] = '\0';
+   return buf;
 }
 
 // EOF

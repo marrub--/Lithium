@@ -281,7 +281,7 @@ struct player
    int decvars[8];
 
    fixed rage;
-   __str notes[16];
+   char *notes[16];
 
    uint nextstep;
    bool hadinfrared;

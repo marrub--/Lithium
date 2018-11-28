@@ -21,6 +21,6 @@
 #define Lith_CPS_GetC(name, i) \
    (((name)[(i) / 4] & (0xFF << ((i) % 4 * 8))) >> ((i) % 4 * 8))
 
-__str Lith_CPS_Print(u32 *cps);
+char const *Lith_CPS_Print(u32 *cps, int l);
 
 #endif

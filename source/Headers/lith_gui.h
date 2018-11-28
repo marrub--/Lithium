@@ -70,9 +70,9 @@
 #define Lith_GUI_TextBox_Reset(st) ((st)->tbptr = 0)
 
 #define Lith_GUI_TextBox_OnTextEntered(st) \
-   __with(__str txt_buf = Lith_CPS_Print(st->txtbuf); char __str_ars const *_tmp = txt_buf;) \
-      ifauto(char __str_ars const *, _c, strchr_str(txt_buf, '\n')) \
-         __with(size_t txt_len = _c - _tmp; Lith_GUI_TextBox_Reset(st);)
+   __with(char const *txt_buf = Lith_CPS_Print(st->txtbuf, st->tbptr);) \
+      ifauto(char const *, _c, strchr(txt_buf, '\n')) \
+         __with(size_t txt_len = _c - txt_buf; Lith_GUI_TextBox_Reset(st);)
 
 // Types ---------------------------------------------------------------------|
 

@@ -266,13 +266,22 @@ size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE 
    return res;
 }
 
+size_t Lith_FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
+{
+   size_t res = 0;
+
+   for(char const *itr = ptr; count--; res++)
+      if(fputc(*itr++, fp) == EOF) return res;
+
+   return res;
+}
+
 size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;
 
    for(char const __str_ars *itr = ptr; count--; res++)
-      if(fputc(*itr++, fp) == EOF)
-         return res;
+      if(fputc(*itr++, fp) == EOF) return res;
 
    return res;
 }

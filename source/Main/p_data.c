@@ -250,9 +250,6 @@ void Lith_ResetPlayer(struct player *p)
       case 2: p->pronoun = pro_nb;     break;
       case 3: p->pronoun = pro_object; break;
       }
-
-      for(int i = 0; i < countof(p->notes); i++)
-         p->notes[i] = "";
    }
 
    // Map-static data

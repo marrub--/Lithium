@@ -6,11 +6,7 @@
 
 // Chunk "note" --------------------------------------------------------------|
 
-static u32 note_Len(__str s)
-{
-   u32 len = ACS_StrLen(s);
-   return len > 255 ? 255 : len;
-}
+#define note_Len(s) __with(int len = s ? strlen(s) : 0; len = min(len, 255);)
 
 script
 static void Lith_Save_note(savefile_t *save)
@@ -18,16 +14,15 @@ static void Lith_Save_note(savefile_t *save)
    u32 chunklen = 0;
 
    for(int i = 0; i < countof(save->p->notes); i++)
-      chunklen += note_Len(save->p->notes[i]) + 1;
+      note_Len(save->p->notes[i]) chunklen += len + 1;
 
    Lith_SaveWriteChunk(save, Ident_note, SaveV_note, chunklen);
 
    for(int i = 0; i < countof(save->p->notes); i++)
+      note_Len(save->p->notes[i])
    {
-      u32 len = note_Len(save->p->notes[i]);
-
       fputc(len, save->fp);
-      Lith_FWrite_str(save->p->notes[i], len, save->fp);
+      if(len) Lith_FWrite(save->p->notes[i], len, save->fp);
    }
 }
 
@@ -37,10 +32,11 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
    for(int i = 0; i < countof(save->p->notes); i++)
    {
       u32 len = fgetc(save->fp);
+      if(!len) continue;
 
-      ACS_BeginPrint();
-      for(u32 j = 0; j < len; j++) ACS_PrintChar(fgetc(save->fp) & 0xFF);
-      save->p->notes[i] = ACS_EndStrParam();
+      Dalloc(save->p->notes[i]);
+      char *n = save->p->notes[i] = Nalloc(len + 1);
+      for(int j = 0; j < len; j++) n[j] = fgetc(save->fp) & 0xFF;
    }
 }
 

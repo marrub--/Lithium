@@ -25,10 +25,16 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
       PrintTextFmt(L("LITH_NOTE_FMT"), i + 1);
       PrintText("cbifont", CR_WHITE, 32+g->ox,2, i * 30 + g->oy,1);
 
-      if(Lith_GUI_Button_Id(g, i, p->notes[i] == "" ? L("LITH_EMPTY") : p->notes[i],
+      if(Lith_GUI_Button_Id(g, i, p->notes[i] ? StrParam("%s", p->notes[i]) : L("LITH_EMPTY"),
          37, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
       {
-         p->notes[i] = Lith_CPS_Print(CBIState(g)->notebox.txtbuf);
+         int l = CBIState(g)->notebox.tbptr;
+         char const *s = Lith_CPS_Print(CBIState(g)->notebox.txtbuf, l);
+
+         Dalloc(p->notes[i]);
+         p->notes[i] = Nalloc(l + 1);
+         memmove(p->notes[i], s, l);
+
          p->saveData();
       }
    }

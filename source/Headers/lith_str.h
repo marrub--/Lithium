@@ -1,5 +1,4 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-
 #include <GDCC.h>
 #include <stdio.h>
 
@@ -16,13 +15,16 @@
 
 #define l_strncpy(s, n) \
    (ACS_BeginPrint(), \
-    ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n), \
+    PrintChars(s, n), \
     ACS_EndStrParam())
 
 #define Language(...) \
    (ACS_BeginPrint(), \
     __nprintf_str(__VA_ARGS__), \
     LanguageV(ACS_EndStrParam()))
+
+#define PrintChars(s, n) \
+    ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n)
 
 __str lstrupper(__str in);
 stkcall u32 l_strhash(char __str_ars const *s);
