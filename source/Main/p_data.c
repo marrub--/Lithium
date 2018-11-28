@@ -9,29 +9,29 @@
 
 static void SetupAttributes(struct player *p)
 {
-   p->attr.names[at_acc] = "ACC";
-   p->attr.names[at_def] = "DEF";
-   p->attr.names[at_str] = "STR";
-   p->attr.names[at_vit] = "VIT";
-   p->attr.names[at_stm] = "STM";
-   p->attr.names[at_luk] = "LUK";
+   p->attr.names[at_acc] = c"ACC";
+   p->attr.names[at_def] = c"DEF";
+   p->attr.names[at_str] = c"STR";
+   p->attr.names[at_vit] = c"VIT";
+   p->attr.names[at_stm] = c"STM";
+   p->attr.names[at_luk] = c"LUK";
 
    switch(p->pclass) {
-   case pcl_marine:    p->attr.names[at_spc] = "RGE"; break;
-   case pcl_cybermage: p->attr.names[at_spc] = "CON"; break;
-   case pcl_informant: p->attr.names[at_spc] = "ADR"; break;
-   case pcl_wanderer:  p->attr.names[at_spc] = "AGI"; break;
-   case pcl_assassin:  p->attr.names[at_spc] = "RSH"; break;
-   case pcl_darklord:  p->attr.names[at_spc] = "REF"; break;
-   case pcl_thoth:     p->attr.names[at_spc] = "???"; break;
+   case pcl_marine:    p->attr.names[at_spc] = c"RGE"; break;
+   case pcl_cybermage: p->attr.names[at_spc] = c"CON"; break;
+   case pcl_informant: p->attr.names[at_spc] = c"ADR"; break;
+   case pcl_wanderer:  p->attr.names[at_spc] = c"AGI"; break;
+   case pcl_assassin:  p->attr.names[at_spc] = c"RSH"; break;
+   case pcl_darklord:  p->attr.names[at_spc] = c"REF"; break;
+   case pcl_thoth:     p->attr.names[at_spc] = c"???"; break;
    }
 
    if(p->pclass & pcl_robot) {
-      p->attr.names[at_vit] = "POT";
-      p->attr.names[at_stm] = "REP";
+      p->attr.names[at_vit] = c"POT";
+      p->attr.names[at_stm] = c"REP";
    } else if(p->pclass & pcl_nonhuman) {
-      p->attr.names[at_vit] = "POT";
-      p->attr.names[at_stm] = "REG";
+      p->attr.names[at_vit] = c"POT";
+      p->attr.names[at_stm] = c"REG";
    }
 
    p->attr.expnext = 500;
@@ -163,10 +163,11 @@ static void LevelUp(struct player *p, u32 attr[at_max])
       for(int j = 0; j < at_max; j++)
          if(i > 35*2 / (fixed)at_max * j)
       {
-         ACS_BeginPrint();
-         __nprintf_str("LEVEL %u", p->attr.level);
-         if(p->attr.points) __nprintf_str(" (%u points)", p->attr.points);
-         __str s = ACS_EndStrParam();
+         char *sp = p->attr.lvupstr;
+
+         sp += sprintf(sp, c"LEVEL %u", p->attr.level);
+         if(p->attr.points) sprintf(sp, c" (%u points)", p->attr.points);
+         *sp++ = '\n';
 
          for(int k = 0, l = 0; k <= j; k++, l++)
          {
@@ -174,16 +175,14 @@ static void LevelUp(struct player *p, u32 attr[at_max])
             while(l < at_max && !attr[l]) l++;
             if(l >= at_max) break;
 
-            s = StrParam("%S\n%S +%u (%u)", s, p->attr.names[l], attr[l], p->attr.attrs[l]);
+            sp += sprintf(sp, c"%s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
          }
-
-         p->attr.lvupstr = s;
       }
 
       ACS_Delay(1);
    }
 
-   p->attr.lvupstr = strnull;
+   p->attr.lvupstr[0] = '\0';
 }
 
 stkcall
@@ -306,7 +305,7 @@ void Lith_ResetPlayer(struct player *p)
 
    p->alpha = 1;
 
-   p->attr.lvupstr = strnull;
+   p->attr.lvupstr[0] = '\0';
 
    // Map-static data
    if(!p->bip.init) Lith_PlayerInitBIP(p);

@@ -212,9 +212,12 @@ void Lith_PlayerLevelup(struct player *p)
       ACS_LocalAmbientSound("player/levelup", 127);
       p->logH(1, Language("LITH_LOG_LevelUp%S", p->discrim), ACS_Random(1000, 9000));
    }
-   if(p->attr.lvupstr) {
+
+   if(p->attr.lvupstr[0])
+   {
       SetSize(320, 240);
-      PrintTextStr(p->attr.lvupstr);
+      ACS_BeginPrint();
+      PrintChars(p->attr.lvupstr, strlen(p->attr.lvupstr));
       PrintText("cnfont", CR_WHITE, 7,1, 17,1);
    }
 }

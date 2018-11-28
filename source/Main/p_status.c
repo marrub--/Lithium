@@ -14,8 +14,8 @@ static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
 
 static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
 {
-   u32   attr = p->attr.attrs[at];
-   __str name = p->attr.names[at];
+   u32         attr = p->attr.attrs[at];
+   char const *name = p->attr.names[at];
    fixed helptrns = 0.5;
 
    if(p->attr.points)
@@ -25,7 +25,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       p->attr.attrs[at]++;
    }
 
-   PrintTextFmt("%.3S", name);
+   PrintTextFmt("%.3s", name);
    PrintText("chfont", CR_WHITE, x-24,1, y,1);
 
    PrintSprite(":UI:AttrBar1", x,1, y,1);
@@ -39,7 +39,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       helptrns += 0.3;
    }
 
-   PrintTextStr(Language("LITH_ATTR_HELP_%S", p->attr.names[at]));
+   PrintTextStr(Language("LITH_ATTR_HELP_%s", name));
    PrintTextA("chfont", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);

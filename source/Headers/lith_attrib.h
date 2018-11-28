@@ -27,12 +27,13 @@ enum
 
 struct player_attributes
 {
-   u32   exp, expnext;
-   u32   level;
-   u32   points;
-   u32   attrs[at_max];
-   __str names[at_max];
-   __str lvupstr;
+   u32 exp, expnext;
+   u32 level;
+   u32 points;
+   u32 attrs[at_max];
+
+   char const *names[at_max];
+   char lvupstr[1024];
 };
 
 #endif
