@@ -225,7 +225,6 @@ struct player
    bool active;
    bool dead;
    bool reinit;
-   bool staticinit;
 
    // Info
    int   tid;

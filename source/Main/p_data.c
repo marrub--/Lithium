@@ -221,10 +221,7 @@ script
 void Lith_ResetPlayer(struct player *p)
 {
    // Zero-init
-   if(!p->wasinit) {
-      memset(p, 0, sizeof *p);
-      p->wasinit = true;
-   }
+   if(!p->wasinit) memset(p, 0, sizeof *p);
 
    // Constant data
    p->active = true;
@@ -233,7 +230,7 @@ void Lith_ResetPlayer(struct player *p)
    p->bipptr = &p->bip;
 
    // Static data (pre-init)
-   if(!p->staticinit)
+   if(!p->wasinit)
    {
       SetPClass(p);
       SetupAttributes(p);
@@ -316,7 +313,7 @@ void Lith_ResetPlayer(struct player *p)
    if(!p->invinit) Lith_PlayerInitInventory(p);
 
    // Static data
-   if(!p->staticinit)
+   if(!p->wasinit)
    {
       p->logB(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
@@ -330,7 +327,7 @@ void Lith_ResetPlayer(struct player *p)
 
       p->deliverMail("Intro");
 
-      p->staticinit = true;
+      p->wasinit = true;
    }
 
    if(world.dbgItems)
