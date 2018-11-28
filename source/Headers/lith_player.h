@@ -138,7 +138,7 @@ stkcall void Lith_GiveEXP(struct player *p, u64 amt);
 // misc
 stkcall upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name);
 stkcall bool Lith_PlayerGetUpgradeActive(struct player *p, int name);
-stkcall __str Lith_PlayerDiscriminator(int pclass);
+stkcall char const *Lith_PlayerDiscriminator(int pclass);
 
 script void Lith_PlayerUpdateData(struct player *p);
 

@@ -194,18 +194,18 @@ struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
 }
 
 stkcall
-__str Lith_PlayerDiscriminator(int pclass)
+char const *Lith_PlayerDiscriminator(int pclass)
 {
    switch(pclass) {
-   case pcl_marine:    return "Stan";
-   case pcl_cybermage: return "Jem";
-   case pcl_informant: return "Fulk";
-   case pcl_wanderer:  return "Luke";
-   case pcl_assassin:  return "Omi";
-   case pcl_darklord:  return "Ari";
-   case pcl_thoth:     return "Kiri";
+   case pcl_marine:    return c"Stan";
+   case pcl_cybermage: return c"Jem";
+   case pcl_informant: return c"Fulk";
+   case pcl_wanderer:  return c"Luke";
+   case pcl_assassin:  return c"Omi";
+   case pcl_darklord:  return c"Ari";
+   case pcl_thoth:     return c"Kiri";
    }
-   return "Mod";
+   return c"Mod";
 }
 
 struct player *Lith_GetPlayer(int tid, int ptr)
@@ -331,7 +331,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->logB(1, "%S", Language("LITH_LOG_BossWarn%S", p->discrim));
+      p->logB(1, "%S", Language("LITH_LOG_BossWarn%s", p->discrim));
 }
 
 // Run main loop scripts.

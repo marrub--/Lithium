@@ -208,9 +208,10 @@ void Lith_PlayerHUD(struct player *p)
 script
 void Lith_PlayerLevelup(struct player *p)
 {
-   if(p->old.attr.level && p->old.attr.level < p->attr.level) {
+   if(p->old.attr.level && p->old.attr.level < p->attr.level)
+   {
       ACS_LocalAmbientSound("player/levelup", 127);
-      p->logH(1, Language("LITH_LOG_LevelUp%S", p->discrim), ACS_Random(1000, 9000));
+      p->logH(1, Language("LITH_LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
    }
 
    if(p->attr.lvupstr[0])

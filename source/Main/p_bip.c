@@ -171,12 +171,9 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    p->setActivator();
 
    flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S", title), null, 0);
+   flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S%s", title, p->discrim), null, 0);
 
-   ifauto(__str, discrim, p->discrim) {
-      flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S%S", title, discrim), null, 0);
-      if(!(flags & MAILF_AllPlayers))
-         title = StrParam("%S%S", title, discrim);
-   }
+   if(!(flags & MAILF_AllPlayers)) title = StrParam("%S%s", title, p->discrim);
 
    struct bip *bip = &p->bip;
 
@@ -230,8 +227,8 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 {
    struct page *page = bip->find(name);
 
-   if(!page && pclass) ifauto(__str, discrim, Lith_PlayerDiscriminator(pclass))
-      page = bip->find(StrParam("%S%S", name, discrim));
+   if(!page && pclass) ifauto(char const *, discrim, Lith_PlayerDiscriminator(pclass))
+      page = bip->find(StrParam("%S%s", name, discrim));
 
    if(page && !page->unlocked) UnlockPage(bip, page, pclass);
 

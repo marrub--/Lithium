@@ -108,7 +108,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);
 
-   __str tabnames[] = {Language("LITH_TAB_ARSENAL_%S", p->discrim),
+   __str tabnames[] = {Language("LITH_TAB_ARSENAL_%s", p->discrim),
                        L("LITH_TAB_STATUS"),
                        L("LITH_TAB_INVENTORY"),
                        L("LITH_TAB_INFO"),
