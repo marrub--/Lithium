@@ -8,7 +8,7 @@ struct Lith_UTIL
 
    static int Round(double n)
    {
-      return n % 1 < 0.5 ? int(n) : int(n+0.5);
+      return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 }
 
@@ -20,7 +20,7 @@ class Lith_EAngle
 class Lith_Quaternion
 {
    float x, y, z, w;
-   
+
    static Lith_Quaternion Create(float angle, float lx, float ly, float lz)
    {
       let q = new("Lith_Quaternion");
@@ -42,7 +42,7 @@ class Lith_Quaternion
       z = lz * sin(angle / 2);
       w =      cos(angle / 2);
    }
-   
+
    void makeVector(float lx, float ly, float lz)
    {
       x = lx;
@@ -50,7 +50,7 @@ class Lith_Quaternion
       z = lz;
       w = 0;
    }
-   
+
    Lith_Quaternion makeConjugate()
    {
       let q = new("Lith_Quaternion");
@@ -78,14 +78,14 @@ class Lith_Quaternion
       float t1 = 1 - 2 * (x * x + ysqr);
       float t2 = clamp(2 * (w * y - z * x), -1, 1);
       float t3 = 2 * (w * z + x * y);
-      float t4 = 1 - 2 * (ysqr + z * z);  
+      float t4 = 1 - 2 * (ysqr + z * z);
 
       let a = new("Lith_EAngle");
 
       a.b = atan2(t0, t1);
       a.p = asin(t2);
       a.h = atan2(t3, t4);
-      
+
       return a;
    }
 

@@ -1,6 +1,0 @@
-statusbar fullscreen, fullscreenoffsets {}
-
-statusbar inventoryfullscreen, fullscreenoffsets
-   {drawinventorybar Doom, translucent, 1, INDEXFONT, -16+center, 145;}
-
-// EOF

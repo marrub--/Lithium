@@ -30,25 +30,27 @@ class Lith_UpdateMenu : ListMenu;
 string m_text;
 int m_logn, m_page;
 
-Lith_Changelog[13] m_clg;
+const CLGS = 13;
+
+Lith_Changelog[CLGS] m_clg;
 
 override void Init(Menu parent, ListMenuDescriptor desc)
 {
    Super.Init(parent, desc);
 
-   m_clg[0 ].name = "Update_1_6";   m_clg[0 ].page = 5;
-   m_clg[1 ].name = "Update_1_5_3"; m_clg[1 ].page = 2;
-   m_clg[2 ].name = "Update_1_5_2"; m_clg[2 ].page = 1;
-   m_clg[3 ].name = "Update_1_5_1"; m_clg[3 ].page = 2;
-   m_clg[4 ].name = "Update_1_5";   m_clg[4 ].page = 3;
-   m_clg[5 ].name = "Update_1_5b";  m_clg[5 ].page = 2;
-   m_clg[6 ].name = "Update_1_5a2"; m_clg[6 ].page = 1;
-   m_clg[7 ].name = "Update_1_5a";  m_clg[7 ].page = 2;
-   m_clg[8 ].name = "Update_1_4";   m_clg[8 ].page = 2;
-   m_clg[9 ].name = "Update_1_3_1"; m_clg[9 ].page = 1;
-   m_clg[10].name = "Update_1_3";   m_clg[10].page = 3;
-   m_clg[11].name = "Update_1_2";   m_clg[11].page = 2;
-   m_clg[12].name = "Update_1_1";   m_clg[12].page = 3;
+   m_clg[CLGS-13].name = "Update_1_6";   m_clg[CLGS-13].page = 5;
+   m_clg[CLGS-12].name = "Update_1_5_3"; m_clg[CLGS-12].page = 2;
+   m_clg[CLGS-11].name = "Update_1_5_2"; m_clg[CLGS-11].page = 1;
+   m_clg[CLGS-10].name = "Update_1_5_1"; m_clg[CLGS-10].page = 2;
+   m_clg[CLGS-9 ].name = "Update_1_5";   m_clg[CLGS-9 ].page = 3;
+   m_clg[CLGS-8 ].name = "Update_1_5b";  m_clg[CLGS-8 ].page = 2;
+   m_clg[CLGS-7 ].name = "Update_1_5a2"; m_clg[CLGS-7 ].page = 1;
+   m_clg[CLGS-6 ].name = "Update_1_5a";  m_clg[CLGS-6 ].page = 2;
+   m_clg[CLGS-5 ].name = "Update_1_4";   m_clg[CLGS-5 ].page = 2;
+   m_clg[CLGS-4 ].name = "Update_1_3_1"; m_clg[CLGS-4 ].page = 1;
+   m_clg[CLGS-3 ].name = "Update_1_3";   m_clg[CLGS-3 ].page = 3;
+   m_clg[CLGS-2 ].name = "Update_1_2";   m_clg[CLGS-2 ].page = 2;
+   m_clg[CLGS-1 ].name = "Update_1_1";   m_clg[CLGS-1 ].page = 3;
 
    Lith_SetText();
 }

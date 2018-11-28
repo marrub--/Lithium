@@ -6,11 +6,11 @@ static void SetPaused(bool on)
 
    let sv = Lith_HERMES.Instance();
    if(sv) sv.m_paused = on;
-   
+
    for(int i = 0; i < MAXPLAYERS; i++)
    {
       if(!playeringame[i] || players[i].mo == null) continue;
-      
+
       PlayerInfo pl = players[i];
       if(on) {
          pl.mo.viewbob = 0;
