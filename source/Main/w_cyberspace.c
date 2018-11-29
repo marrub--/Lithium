@@ -12,7 +12,7 @@ void Lith_CSLoadMap(void)
 
    __fscanf_str(fp, "%i %i", &w, &h);
 
-   map = Malloc(sizeof(int) * w * h);
+   map = Malloc(sizeof *map * w * h);
 
    for(int y = 0; y < h; y++) for(int x = 0; x < w; x++)
       __fscanf_str(fp, "%i ", &map[x + y * w]);

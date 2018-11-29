@@ -11,7 +11,9 @@ void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t s
 {
    if(world.dbgSave)
       Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
-   Lith_FWrite32(&(savechunk_t){iden, vers & Save_VersMask, size}, sizeof(savechunk_t), 4, save->fp);
+
+   savechunk_t chunk = {iden, vers & Save_VersMask, size};
+   Lith_FWrite32(&chunk, sizeof chunk, 4, save->fp);
 }
 
 savefile_t *Lith_SaveBegin(struct player *p)
@@ -47,7 +49,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
    for(int i = 0;; i++)
    {
       savechunk_t chunk;
-      Lith_FRead32(&chunk, sizeof(chunk), 4, save->fp);
+      Lith_FRead32(&chunk, sizeof chunk, 4, save->fp);
 
       // End of file reached, or we reached the EOF chunk.
       // Otherwise, if the chunk description matches, process it.

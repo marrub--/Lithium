@@ -315,7 +315,7 @@ void Lith_ResetPlayer(struct player *p)
       p->logB(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
-         p->logH(1, "player is %u bytes long!", sizeof(struct player) * 4);
+         p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "strnull is \"%S\"", strnull);
          PrintDmonAllocSize(p);
       } else {

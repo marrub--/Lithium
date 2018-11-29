@@ -55,7 +55,7 @@ static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init co
    page->unlocked = false;
    page->image    = image;
    page->height   = height;
-   memmove(page->unlocks, pinit->unlocks, sizeof(page->unlocks));
+   memmove(page->unlocks, pinit->unlocks, sizeof page->unlocks);
 
    page->link.construct(page);
    page->link.link(&bip->infogr[categ]);

@@ -26,7 +26,7 @@ static __str LogV(int levl, __str fmt, va_list vl)
 static void LogPop(struct player *p)
 {
    p->log.hudC--;
-   memmove(&p->log.hudV[0], &p->log.hudV[1], sizeof(p->log.hudV[0]) * p->log.hudC);
+   memmove(&p->log.hudV[0], &p->log.hudV[1], sizeof p->log.hudV[0] * p->log.hudC);
 }
 
 static void LogH(struct player *p, struct logdat *ld)

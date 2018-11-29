@@ -31,7 +31,7 @@ int Lith_TBufProcL(struct token *tok, void *udata)
 void Lith_TBufCtor(struct tokbuf *tb)
 {
    tb->orig.line = 1;
-   tb->toks = Calloc(tb->bend, sizeof(struct token));
+   tb->toks = Calloc(tb->bend, sizeof *tb->toks);
    if(!tb->tokProcess) tb->tokProcess = Lith_TBufProc;
 }
 

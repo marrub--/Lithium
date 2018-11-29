@@ -87,14 +87,14 @@ void Lith_GSReinit_Upgrade(void)
 
 void Lith_GSInit_Upgrade(void)
 {
-   g_upgrinfo = Calloc(g_upgrmax, sizeof(upgradeinfo_t));
-   memmove(g_upgrinfo, upgrinfobase, sizeof(upgrinfobase));
+   g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
+   memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
 
    for(int i = 0; i < countof(g_upgrinfoex); i++)
       if(g_upgrinfoex[i].name != null)
          g_upgrinfo[UPGR_BASE_MAX + i] = g_upgrinfoex[i];
 
-   qsort(g_upgrinfo, g_upgrmax, sizeof(upgradeinfo_t), Compg_upgrinfo);
+   qsort(g_upgrinfo, g_upgrmax, sizeof *g_upgrinfo, Compg_upgrinfo);
 
    for(int i = 0; i < g_upgrmax; i++)
       g_upgrinfo[i].id = i;

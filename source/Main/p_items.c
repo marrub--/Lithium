@@ -90,7 +90,7 @@ void Lith_PlayerInitInventory(struct player *p)
       {2, 4}, {2, 4},
    };
 
-   memmove(p->inv, baseinv, sizeof(baseinv));
+   memmove(p->inv, baseinv, sizeof baseinv);
 
    for(int i = 0; i < countof(p->inv); i++) {
       p->inv[i].items.construct();
