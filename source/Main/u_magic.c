@@ -9,21 +9,20 @@
 struct magic_info {
    int st;
    int x, y;
-   __str name;
-   __str classname;
+   char const *name, *classname;
 };
 
 // Static Objects ------------------------------------------------------------|
 
-#define N(name) name, "Lith_" name
+#define N(name) name, c"Lith_" name
 static struct magic_info const minf[] = {
-   {-1,                130, 180, N("Blade")   },
-   {-1,                 60, 140, N("Delear")  },
-   {cupg_c_slot3spell,  60,  60, N("Feuer")   },
-   {cupg_c_slot4spell, 130,  10, N("Rend")    },
-   {cupg_c_slot5spell, 205,  60, N("Hulgyon") },
-   {cupg_c_slot6spell, 205, 140, N("StarShot")},
-   {cupg_c_slot7spell, 130, 100, N("Cercle")  },
+   {-1,                130, 180, N(c"Blade")   },
+   {-1,                 60, 140, N(c"Delear")  },
+   {cupg_c_slot3spell,  60,  60, N(c"Feuer")   },
+   {cupg_c_slot4spell, 130,  10, N(c"Rend")    },
+   {cupg_c_slot5spell, 205,  60, N(c"Hulgyon") },
+   {cupg_c_slot6spell, 205, 140, N(c"StarShot")},
+   {cupg_c_slot7spell, 130, 100, N(c"Cercle")  },
 };
 #undef N
 
@@ -32,7 +31,7 @@ static struct magic_info const minf[] = {
 script
 static void GiveMagic(struct magic_info const *m)
 {
-   ACS_SetWeapon(m->classname);
+   ACS_SetWeapon(l_strdup(m->classname));
 }
 
 script
@@ -51,11 +50,10 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
    {
       struct magic_info const *m = &minf[i];
 
-      if(m->st != -1 && !world.cbiupgr[m->st])
-         continue;
+      if(m->st != -1 && !world.cbiupgr[m->st]) continue;
 
-      char gfx[18]; sprintf(gfx, c":UI:%S",    m->name);
-      char hot[18]; sprintf(hot, c":UI:%SSel", m->name);
+      char gfx[18]; sprintf(gfx, c":UI:%s",    m->name);
+      char hot[18]; sprintf(hot, c":UI:%sSel", m->name);
 
       gui_button_preset_t pre = {
          .gfx      = gfx,
@@ -71,7 +69,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
          .h        = 64
       };
 
-      __str name = Language("LITH_INFO_SHORT_%S", m->name);
+      __str name = Language("LITH_INFO_SHORT_%s", m->name);
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
