@@ -217,7 +217,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
+         if(Lith_GUI_Button(g, on ? c"On" : c"Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(cvar, !on); \
       } \
       y += 10; \
@@ -253,7 +253,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          __with(bool on = ACS_GetCVar(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
+         if(Lith_GUI_Button(g, on ? c"On" : c"Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
             ACS_SetCVar(cvar, !on); \
       } \
       y += 10; \

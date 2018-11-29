@@ -73,7 +73,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
 
-      __str name = Language("LITH_UPGRADE_TITLE_%S", upgr->info->name);
+      char *name = LanguageC(c"LITH_UPGRADE_TITLE_%S", upgr->info->name);
 
       int *upgrsel = &CBIState(g)->upgrsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
@@ -176,10 +176,10 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
 
 static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
-   if(Lith_GUI_Button(g, L("LITH_BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
+   if(Lith_GUI_Button(g, LC(c"LITH_BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
 
-   if(Lith_GUI_Button(g, upgr->active ? L("LITH_DEACTIVATE") : L("LITH_ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
+   if(Lith_GUI_Button(g, upgr->active ? LC(c"LITH_DEACTIVATE") : LC(c"LITH_ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
 }
 

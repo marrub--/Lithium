@@ -5,6 +5,8 @@
 #include "lith_list.h"
 #include "lith_world.h"
 
+#define TABCHARS 20
+
 #define Themes(X) \
    X("Green")     \
    X("Rose")      \
@@ -23,9 +25,10 @@ static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
    extern void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Shop    (gui_state_t *g, struct player *p);
 
-   __str const tabnames[] = {L("LITH_TAB_UPGRADES"),
-                             L("LITH_TAB_SHOP")};
-   Lith_GUI_Tabs(g, &CBIState(g)->arsetab, tabnames, 13, 13, 1);
+   char tn[2][TABCHARS];
+   LanguageVC(tn[0], c"LITH_TAB_UPGRADES");
+   LanguageVC(tn[1], c"LITH_TAB_SHOP");
+   Lith_GUI_Tabs(g, &CBIState(g)->arsetab, tn, 13, 13, 1);
 
    switch(CBIState(g)->arsetab) {
    case cbi_tab_arsenal_upgrades: Lith_CBITab_Upgrades(g, p); break;
@@ -38,9 +41,10 @@ static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
    extern void Lith_CBITab_CBI   (gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Status(gui_state_t *g, struct player *p);
 
-   __str const tabnames[] = {L("LITH_TAB_ATTRIBUTES"),
-                             L("LITH_TAB_CBI")};
-   Lith_GUI_Tabs(g, &CBIState(g)->stattab, tabnames, 13, 13, 1);
+   char tn[2][TABCHARS];
+   LanguageVC(tn[0], c"LITH_TAB_ATTRIBUTES");
+   LanguageVC(tn[1], c"LITH_TAB_CBI");
+   Lith_GUI_Tabs(g, &CBIState(g)->stattab, tn, 13, 13, 1);
 
    switch(CBIState(g)->stattab) {
    case cbi_tab_stat_attr: Lith_CBITab_Status(g, p); break;
@@ -55,11 +59,12 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
    extern void Lith_CBITab_Statistics(gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Notes     (gui_state_t *g, struct player *p);
 
-   __str const tabnames[] = {L("LITH_TAB_BIP"),
-                             L("LITH_TAB_LOG"),
-                             L("LITH_TAB_STATISTICS"),
-                             L("LITH_TAB_NOTES")};
-   Lith_GUI_Tabs(g, &CBIState(g)->infotab, tabnames, 13, 13, 1);
+   char tn[4][TABCHARS];
+   LanguageVC(tn[0], c"LITH_TAB_BIP");
+   LanguageVC(tn[1], c"LITH_TAB_LOG");
+   LanguageVC(tn[2], c"LITH_TAB_STATISTICS");
+   LanguageVC(tn[3], c"LITH_TAB_NOTES");
+   Lith_GUI_Tabs(g, &CBIState(g)->infotab, tn, 13, 13, 1);
 
    switch(CBIState(g)->infotab) {
    case cbi_tab_info_bip:        Lith_CBITab_BIP       (g, p); break;
@@ -108,18 +113,18 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);
 
-   __str tabnames[] = {Language("LITH_TAB_ARSENAL_%s", p->discrim),
-                       L("LITH_TAB_STATUS"),
-                       L("LITH_TAB_INVENTORY"),
-                       L("LITH_TAB_INFO"),
-                       L("LITH_TAB_SETTINGS")};
-   Lith_GUI_Tabs(g, &CBIState(g)->maintab, tabnames, 13, 13, 0);
+   char tn[5][TABCHARS];
+   LanguageCV(tn[0], c"LITH_TAB_ARSENAL_%s", p->discrim);
+   LanguageVC(tn[1], c"LITH_TAB_STATUS");
+   LanguageVC(tn[2], c"LITH_TAB_INVENTORY");
+   LanguageVC(tn[3], c"LITH_TAB_INFO");
+   LanguageVC(tn[4], c"LITH_TAB_SETTINGS");
+   Lith_GUI_Tabs(g, &CBIState(g)->maintab, tn, 13, 13, 0);
 
    extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
 
-   switch(CBIState(g)->maintab)
-   {
+   switch(CBIState(g)->maintab) {
    case cbi_tab_arsenal:  Lith_CBITab_Arsenal (g, p); break;
    case cbi_tab_status:   Lith_CBITab_Stat    (g, p); break;
    case cbi_tab_items:    Lith_CBITab_Items   (g, p); break;

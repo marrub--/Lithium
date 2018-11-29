@@ -46,17 +46,19 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          PrintTextA("cbifont", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
-      if(Lith_GUI_Button(g, L("LITH_BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
+      if(Lith_GUI_Button(g, LC(c"LITH_BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
          bip->curcategory = BIPC_SEARCH;
       n += 10;
+#pragma GDCC STRENT_LITERAL OFF
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, L("LITH_BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, LC("LITH_BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \
       } \
       n += 10;
 #include "lith_bip.h"
+#pragma GDCC STRENT_LITERAL ON
 
       avail = bip->pageavail;
       max   = bip->pagemax;
@@ -118,8 +120,9 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          {
             struct page *page = bip->result[i];
             struct page_info pinf = Lith_GetPageInfo(page);
+            char flname[32]; sprintf(flname, c"%S", pinf.flname);
 
-            if(Lith_GUI_Button_Id(g, i, pinf.flname, 70, 95 + (i * 10), Pre(btnbipmain)))
+            if(Lith_GUI_Button_Id(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain)))
             {
                bip->lastcategory = bip->curcategory;
                bip->curcategory = page->category;
@@ -159,7 +162,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
             continue;
 
          struct page_info pinf = Lith_GetPageInfo(page);
-         __str name = StrParam("%S%S", bip->curpage == page ? "\Ci" : "", pinf.shname);
+         char name[32]; sprintf(name, c"%s%S", bip->curpage == page ? c"\Ci" : c"", pinf.shname);
 
          if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, Pre(btnlist)))
             SetCurPage(g, bip, page, pinf.body);
@@ -224,7 +227,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 
    if(bip->curcategory != BIPC_MAIN)
    {
-      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
+      if(Lith_GUI_Button(g, c"<BACK", 20, 38, false, Pre(btnbipback)))
          bip->curcategory = bip->lastcategory;
    }
    else

@@ -14,17 +14,15 @@ struct magic_info {
 
 // Static Objects ------------------------------------------------------------|
 
-#define N(name) name, c"Lith_" name
 static struct magic_info const minf[] = {
-   {-1,                130, 180, N(c"Blade")   },
-   {-1,                 60, 140, N(c"Delear")  },
-   {cupg_c_slot3spell,  60,  60, N(c"Feuer")   },
-   {cupg_c_slot4spell, 130,  10, N(c"Rend")    },
-   {cupg_c_slot5spell, 205,  60, N(c"Hulgyon") },
-   {cupg_c_slot6spell, 205, 140, N(c"StarShot")},
-   {cupg_c_slot7spell, 130, 100, N(c"Cercle")  },
+   {-1,                130, 180, c"Blade",    c"Lith_Blade"   },
+   {-1,                 60, 140, c"Delear",   c"Lith_Delear"  },
+   {cupg_c_slot3spell,  60,  60, c"Feuer",    c"Lith_Feuer"   },
+   {cupg_c_slot4spell, 130,  10, c"Rend",     c"Lith_Rend"    },
+   {cupg_c_slot5spell, 205,  60, c"Hulgyon",  c"Lith_Hulgyon" },
+   {cupg_c_slot6spell, 205, 140, c"StarShot", c"Lith_StarShot"},
+   {cupg_c_slot7spell, 130, 100, c"Cercle",   c"Lith_Cercle"  },
 };
-#undef N
 
 // Static Functions ----------------------------------------------------------|
 
@@ -69,7 +67,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
          .h        = 64
       };
 
-      __str name = Language("LITH_INFO_SHORT_%s", m->name);
+      char name[24]; sprintf(name, c"LITH_INFO_SHORT_%s", m->name);
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);

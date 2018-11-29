@@ -94,7 +94,7 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->shopscr, y, guipre.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
-      __str name = Language("LITH_SHOP_TITLE_%S", shopitems[i].name);
+      char *name = LanguageC(name, "LITH_SHOP_TITLE_%S", shopitems[i].name);
 
       int *shopsel = &CBIState(g)->shopsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
@@ -117,7 +117,7 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 
    ClearClip();
 
-   if(Lith_GUI_Button(g, L("LITH_BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
+   if(Lith_GUI_Button(g, LC(c"LITH_BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
       p->buy(&item->shopdef, item, "LITH_SHOP_TITLE_%S", false);
 }
 

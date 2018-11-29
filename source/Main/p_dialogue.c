@@ -225,7 +225,8 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       int y = 220 - (14 * vmstate->optNum);
       for(int i = 0; i < vmstate->optNum; i++, y += 14)
       {
-         if(Lith_GUI_Button_Id(g, i, vmstate->option[i].name, 45, y, Pre(btndlgsel)))
+         char name[128]; lstrcpy_str(name, vmstate->option[i].name);
+         if(Lith_GUI_Button_Id(g, i, name, 45, y, Pre(btndlgsel)))
          {
             vmstate->action = ACT_SELOPTION;
             vmstate->optSel = i;

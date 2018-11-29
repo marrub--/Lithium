@@ -35,7 +35,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       else                     color = pre->cdef;
       if(!color) color = c"j";
 
-      PrintTextFmt("\C%s%S", color, a->label);
+      PrintTextFmt("\C%s%s", color, a->label);
       PrintText(l_strdup(pre->font), CR_WHITE, x,pre->ax, y,pre->ay);
    }
 

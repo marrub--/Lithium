@@ -418,13 +418,13 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
 
-      if(Lith_GUI_Button(g, "Move", x_, y_, Pre(btnclear)))
+      if(Lith_GUI_Button(g, c"Move", x_, y_, Pre(btnclear)))
          p->movitem = !p->movitem;
       y_ += 8;
 
       if(sel->Use)
       {
-         if(Lith_GUI_Button(g, "Use", x_, y_, Pre(btnclear)))
+         if(Lith_GUI_Button(g, c"Use", x_, y_, Pre(btnclear)))
             p->useitem = sel;
          y_ += 8;
       }
@@ -435,7 +435,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
          PrintText("cbifont", CR_WHITE, x_+18,1, y_,1);
       }
 
-      if(Lith_GUI_Button(g, sel->scr ? "Sell" : "Discard", x_, y_, Pre(btnclear)))
+      if(Lith_GUI_Button(g, sel->scr ? c"Sell" : c"Discard", x_, y_, Pre(btnclear)))
       {
          if(sel->scr) p->giveScore(sel->scr, true);
          sel->Destroy(sel);

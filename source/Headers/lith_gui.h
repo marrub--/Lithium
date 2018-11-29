@@ -160,7 +160,7 @@ typedef struct gui_button_preset_s
 
 typedef struct gui_button_args_s
 {
-   __str       label;
+   char const *label;
    int         x, y;
    bool        disabled;
    char const *color;
