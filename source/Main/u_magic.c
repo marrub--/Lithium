@@ -54,15 +54,18 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
       if(m->st != -1 && !world.cbiupgr[m->st])
          continue;
 
+      char gfx[18]; sprintf(gfx, c":UI:%S",    m->name);
+      char hot[18]; sprintf(hot, c":UI:%SSel", m->name);
+
       gui_button_preset_t pre = {
-         .gfx      = StrParam(":UI:%S",    m->name),
-         .hot      = StrParam(":UI:%SSel", m->name),
-         .snd      = "player/cbi/buttonpress",
-         .cdef     = "d",
-         .cact     = "r",
-         .chot     = "k",
-         .cdis     = "m",
-         .font     = "cbifont",
+         .gfx      = gfx,
+         .hot      = hot,
+         .snd      = c"player/cbi/buttonpress",
+         .cdef     = c"d",
+         .cact     = c"r",
+         .chot     = c"k",
+         .cdis     = c"m",
+         .font     = c"cbifont",
          .external = true,
          .w        = 64,
          .h        = 64

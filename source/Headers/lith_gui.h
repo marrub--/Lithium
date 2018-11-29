@@ -45,6 +45,15 @@
    (!(pre)->external \
       ? ((pre)->mem ? (ACS_BeginPrint(), ACS_PrintString((g)->gfxprefix), ACS_PrintString((pre)->mem), ACS_EndStrParam()) : null) \
       : (pre)->mem)
+#define Lith_GUI_Prefix2(g, gfx, pre, mem) \
+   do { \
+      if(!(pre)->mem) \
+         (gfx)[0] = '\0'; \
+      else if((pre)->external) \
+         strncpy(gfx, (pre)->mem, sizeof(gfx)); \
+      else \
+         snprintf(gfx, sizeof(gfx), c"%S%s", (g)->gfxprefix, (pre)->mem); \
+   } while(0)
 
 #define Lith_GUI_ScrollReset(g, st) \
    (*(st) = (gui_scroll_state_t){})
@@ -134,14 +143,14 @@ typedef struct gui_state_s
 
 typedef struct gui_button_preset_s
 {
-   __str gfx;
-   __str hot;
-   __str snd;
-   __str cdef;
-   __str cact;
-   __str chot;
-   __str cdis;
-   __str font;
+   char const *gfx;
+   char const *hot;
+   char const *snd;
+   char const *cdef;
+   char const *cact;
+   char const *chot;
+   char const *cdis;
+   char const *font;
    int ax;
    int ay;
    int w;
@@ -151,11 +160,11 @@ typedef struct gui_button_preset_s
 
 typedef struct gui_button_args_s
 {
-   __str label;
-   int   x, y;
-   bool  disabled;
-   __str color;
-   bool  slide;
+   __str       label;
+   int         x, y;
+   bool        disabled;
+   char const *color;
+   bool        slide;
    gui_button_preset_t const *preset;
 } gui_button_args_t;
 

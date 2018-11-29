@@ -9,19 +9,18 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
 
-   __with(__str graphic;)
+   __with(char graphic[30];)
    {
-      if(g->hot == id && pre->hot) graphic = Lith_GUI_Prefix1(g, pre, hot);
-      else                         graphic = Lith_GUI_Prefix1(g, pre, gfx);
+      if(g->hot == id && pre->hot) Lith_GUI_Prefix2(g, graphic, pre, hot);
+      else                         Lith_GUI_Prefix2(g, graphic, pre, gfx);
 
-      if(graphic)
-         PrintSprite(graphic, a->x + g->ox,1, a->y + g->oy,1);
+      if(graphic[0]) PrintSprite(l_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
    }
 
    if(a->label && pre->font)
    {
       int x, y;
-      __str color;
+      char const *color;
 
       if(pre->ax == 4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
       else                         x = a->x + g->ox;
@@ -34,10 +33,10 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       else if(g->hot    == id) color = pre->chot;
       else if(a->color)        color = a->color;
       else                     color = pre->cdef;
-      color = color ? color : "j";
+      if(!color) color = c"j";
 
-      PrintTextFmt("\C%S%S", color, a->label);
-      PrintText(pre->font, CR_WHITE, x,pre->ax, y,pre->ay);
+      PrintTextFmt("\C%s%S", color, a->label);
+      PrintText(l_strdup(pre->font), CR_WHITE, x,pre->ax, y,pre->ay);
    }
 
    if(!a->disabled)
@@ -55,7 +54,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
 
       if(g->hot == id && g->active == id && click) {
          if(g->slide == id) g->slidecount++;
-         if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
+         if(pre->snd) ACS_LocalAmbientSound(l_strdup(pre->snd), 127);
          return true;
       }
    }

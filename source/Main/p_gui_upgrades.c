@@ -58,13 +58,13 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->upgrscr, y, guipre.btnlist.h))
          continue;
 
-      __str color;
+      char const *color;
       if(!upgr->owned && !p->canBuy(&upgr->info->shopdef, upgr))
-         color = "u";
+         color = c"u";
       else switch(upgr->info->key)
       {
-      case UPGR_TorgueMode: color = "g"; break;
-      case UPGR_DarkCannon: color = "m"; break;
+      case UPGR_TorgueMode: color = c"g"; break;
+      case UPGR_DarkCannon: color = c"m"; break;
       default:              color = null;
       }
 
