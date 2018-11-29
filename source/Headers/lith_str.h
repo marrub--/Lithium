@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #define L(name) LanguageV(name)
+#define LC(name) LanguageVC(null, name)
 
 #define StrParamBegin(...) \
    (ACS_BeginPrint(), \
@@ -17,6 +18,8 @@
    (ACS_BeginPrint(), \
     __nprintf_str(__VA_ARGS__), \
     LanguageV(ACS_EndStrParam()))
+
+#define LanguageC(...) LanguageCV(null, __VA_ARGS__)
 
 #define PrintChars(s, n) \
     ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n)
@@ -39,5 +42,7 @@ int lstrcmp_str(char const *s1, char __str_ars const *s2);
 stkcall __str scoresep(i96 num);
 __str LanguageV(__str name);
 __str LanguageNull(__str fmt, ...);
+char *LanguageVC(char *out, char const *name);
+char *LanguageCV(char *out, char const *name, ...);
 
 // EOF

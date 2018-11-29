@@ -94,6 +94,30 @@ __str LanguageV(__str name)
    return ret;
 }
 
+char *LanguageVC(char *out, char const *name)
+{
+   noinit static char sbuf[8192];
+   if(!out) out = sbuf;
+
+   sprintf(out, c"%LS", l_strdup(name));
+
+   while(out[0] == '$') sprintf(out, c"%LS", l_strdup(&out[1]));
+
+   return out;
+}
+
+char *LanguageCV(char *out, char const *fmt, ...)
+{
+   noinit static char nbuf[256];
+   va_list vl;
+
+   va_start(vl, fmt);
+   vsprintf(nbuf, fmt, vl);
+   va_end(vl);
+
+   return LanguageVC(out, nbuf);
+}
+
 __str LanguageNull(__str fmt, ...)
 {
    va_list vl;
