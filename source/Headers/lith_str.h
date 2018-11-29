@@ -13,11 +13,6 @@
     __nprintf_str(__VA_ARGS__), \
     ACS_EndStrParam())
 
-#define l_strncpy(s, n) \
-   (ACS_BeginPrint(), \
-    PrintChars(s, n), \
-    ACS_EndStrParam())
-
 #define Language(...) \
    (ACS_BeginPrint(), \
     __nprintf_str(__VA_ARGS__), \
@@ -26,7 +21,17 @@
 #define PrintChars(s, n) \
     ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n)
 
-__str lstrupper(__str in);
+#define l_strndup(s, n) \
+   (ACS_BeginPrint(), \
+    PrintChars(s, n), \
+    ACS_EndStrParam())
+
+#define l_strdup(s) \
+   (ACS_BeginPrint(), \
+    PrintChars(s, strlen(s)), \
+    ACS_EndStrParam())
+
+__str l_strupper(__str in);
 stkcall u32 l_strhash(char __str_ars const *s);
 stkcall u32 lstrhash(char const *s);
 char *lstrcpy_str(char *dest, char __str_ars const *src);

@@ -25,7 +25,7 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
       PrintTextFmt(L("LITH_NOTE_FMT"), i + 1);
       PrintText("cbifont", CR_WHITE, 32+g->ox,2, i * 30 + g->oy,1);
 
-      if(Lith_GUI_Button_Id(g, i, p->notes[i] ? StrParam("%s", p->notes[i]) : L("LITH_EMPTY"),
+      if(Lith_GUI_Button_Id(g, i, p->notes[i] ? l_strdup(p->notes[i]) : L("LITH_EMPTY"),
          37, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
       {
          int l = CBIState(g)->notebox.tbptr;

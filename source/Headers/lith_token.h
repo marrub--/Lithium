@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#define Lith_TokStr(tok) l_strncpy((tok)->textV, (tok)->textC)
+#define Lith_TokStr(tok) l_strndup((tok)->textV, (tok)->textC)
 
 // Types ---------------------------------------------------------------------|
 

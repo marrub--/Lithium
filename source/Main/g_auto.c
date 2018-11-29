@@ -158,7 +158,7 @@ __str Lith_RemoveTextColors(__str str, int size)
       buf[j++] = str[i];
    }
 
-   return l_strncpy(buf, j);
+   return l_strndup(buf, j);
 }
 
 stkcall

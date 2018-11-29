@@ -9,7 +9,7 @@
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
-__str lstrupper(__str in)
+__str l_strupper(__str in)
 {
    ACS_BeginPrint();
 

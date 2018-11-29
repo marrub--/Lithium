@@ -82,7 +82,7 @@ static int NetClose(void *nfdata)
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strncpy(itr, itrsize));
+         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;

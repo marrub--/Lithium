@@ -78,7 +78,6 @@ typedef struct cbi_s
       int                upgrsel;
       int                upgrselold;
       int                upgrfilter;
-      gui_typeon_state_t upgrtypeon;
       gui_scroll_state_t upgrscr;
 
       bool               noteedit;
