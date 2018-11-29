@@ -222,13 +222,13 @@ typedef struct gui_slider_preset_s
 
 typedef struct gui_slider_args_s
 {
-   int     x;
-   int     y;
-   fixed64 minima;
-   fixed64 maxima;
-   fixed64 val;
-   bool    integ;
-   __str   suf;
+   int         x;
+   int         y;
+   fixed64     minima;
+   fixed64     maxima;
+   fixed64     val;
+   bool        integ;
+   char const *suf;
    gui_slider_preset_t const *preset;
 } gui_slider_args_t;
 

@@ -3,10 +3,10 @@
 Category("Gameplay");
 Enum("Level-up system", "lith_player_lvsys", atsys_auto, atsys_manual, "%S", LvSysName(set));
 if(p->num == 0) {
-   ServerInt("Difficulty Base",      "%", "lith_sv_difficulty", 1, 100);
-   ServerFloat("Score multiplier",   "x", "lith_sv_scoremul",   0, 10);
+   ServerInt("Difficulty Base",     c"%", "lith_sv_difficulty", 1, 100);
+   ServerFloat("Score multiplier",  c"x", "lith_sv_scoremul",   0, 10);
    ServerBool("Explode on death",         "lith_sv_revenge");
-   ServerInt("Autosave Interval",  "min", "lith_sv_autosave",   0, 30);
+   ServerInt("Autosave Interval", c"min", "lith_sv_autosave",   0, 30);
    ServerBool("Disable phantoms",                       "lith_sv_nobosses");
    ServerBool("Don't pick up ammo when full",           "lith_sv_nofullammo");
    ServerBool("Don't give score when picking up ammo",  "lith_sv_noscoreammo");
@@ -15,18 +15,18 @@ if(p->num == 0) {
 }
 
 Category("GUI");
-Float("Horizontal cursor speed", "x", "lith_gui_xmul", 0.1, 2.0);
-Float("Vertical cursor speed",   "x", "lith_gui_ymul", 0.1, 2.0);
-Enum("Color theme",                   "lith_gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
-Enum("Cursor",                        "lith_gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
-Enum("Japanese font",                 "lith_gui_jpfont", 0, font_num-1, "%S", FontName(set));
-Text("To enable Japanese support, type \"language jp\" into the console.");
+Float("Horizontal cursor speed", c"x", "lith_gui_xmul", 0.1, 2.0);
+Float("Vertical cursor speed",   c"x", "lith_gui_ymul", 0.1, 2.0);
+Enum("Color theme",                    "lith_gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
+Enum("Cursor",                         "lith_gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
+Enum("Japanese font",                  "lith_gui_jpfont", 0, font_num-1, "%S", FontName(set));
+Text("To use Japanese language, type \"language jp\" into the console.");
 
 Category("Player");
-Float("Damage bob multiplier",       "x", "lith_player_damagebobmul", 0.0, 1.0);
+Float("Damage bob multiplier",      c"x", "lith_player_damagebobmul", 0.0, 1.0);
 Bool("Bob view when damaged",             "lith_player_damagebob");
-Float("Footstep volume",             "x", "lith_player_footstepvol",  0.0, 1.0);
-Float("View tilt",                   "x", "lith_player_viewtilt",     0.0, 1.0);
+Float("Footstep volume",            c"x", "lith_player_footstepvol",  0.0, 1.0);
+Float("View tilt",                  c"x", "lith_player_viewtilt",     0.0, 1.0);
 Bool("Log score gained",                  "lith_player_scorelog");
 Bool("Play a sound when score is gained", "lith_player_scoresound");
 Bool("Play sounds on the results screen", "lith_player_resultssound");
@@ -44,11 +44,11 @@ if(p->num == 0) {
 }
 
 Category("Weapons");
-Float("Scope zoom factor",  "x", "lith_weapons_zoomfactor", 1.0, 10.0);
-Float("Scope opacity",      "x", "lith_weapons_scopealpha", 0.0, 1.0);
-Float("Weapon opacity",     "x", "lith_weapons_alpha",      0.0, 1.0);
-Float("Recoil amount",      "x", "lith_weapons_recoil",     0.0, 1.0);
-Float("Reload bob",         "x", "lith_weapons_reloadbob",  0.0, 1.0);
+Float("Scope zoom factor", c"x", "lith_weapons_zoomfactor", 1.0, 10.0);
+Float("Scope opacity",     c"x", "lith_weapons_scopealpha", 0.0, 1.0);
+Float("Weapon opacity",    c"x", "lith_weapons_alpha",      0.0, 1.0);
+Float("Recoil amount",     c"x", "lith_weapons_recoil",     0.0, 1.0);
+Float("Reload bob",        c"x", "lith_weapons_reloadbob",  0.0, 1.0);
 Bool("Slot 3 weapons take ammo", "lith_weapons_slot3ammo");
 if(p->pclass == pcl_marine) {
    Bool("Modal Rifle scope",          "lith_weapons_riflescope");
@@ -75,17 +75,17 @@ Bool("Draw log from top of screen",   "lith_hud_logfromtop");
 Bool("Large log",                     "lith_hud_logbig");
 Bool("Draw reactive armor indicator", "lith_hud_showarmorind");
 
-Int("Crosshair red",     "/255", "lith_xhair_r",     0, 255);
-Int("Crosshair green",   "/255", "lith_xhair_g",     0, 255);
-Int("Crosshair blue",    "/255", "lith_xhair_b",     0, 255);
-Int("Crosshair alpha",   "/255", "lith_xhair_a",     0, 255);
+Int("Crosshair red",    c"/255", "lith_xhair_r",     0, 255);
+Int("Crosshair green",  c"/255", "lith_xhair_g",     0, 255);
+Int("Crosshair blue",   c"/255", "lith_xhair_b",     0, 255);
+Int("Crosshair alpha",  c"/255", "lith_xhair_a",     0, 255);
 Enum("Crosshair style",          "lith_xhair_style", 1,  10, "%S", XHairName(set));
 Bool("Crosshair enabled",        "lith_xhair_enable");
 Bool("Crosshair juicer enabled", "lith_xhair_enablejuicer");
 
 Category("Vital Scanner");
-Int("X offset",   "px", "lith_scanner_xoffs", -160, 160);
-Int("Y offset",   "px", "lith_scanner_yoffs", -180,  20);
+Int("X offset",  c"px", "lith_scanner_xoffs", -160, 160);
+Int("Y offset",  c"px", "lith_scanner_yoffs", -180,  20);
 Enum("Color",           "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set));
 Bool("Slide to target", "lith_scanner_slide");
 Bool("Health bar",      "lith_scanner_bar");
