@@ -16,6 +16,7 @@
 #include "lith_drawing.h"
 #include "lith_math.h"
 #include "lith_str.h"
+#include "lith_char.h"
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)

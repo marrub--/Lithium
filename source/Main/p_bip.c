@@ -7,8 +7,6 @@
 #include "lith_file.h"
 #include "lith_tokbuf.h"
 
-#include <ctype.h>
-
 // Types ---------------------------------------------------------------------|
 
 struct page_init
@@ -25,7 +23,7 @@ static __str DecryptBody(char __str_ars const *str)
 {
    ACS_BeginPrint();
    for(; *str; str++)
-      ACS_PrintChar(!isprint(*str) ? *str : *str ^ 7);
+      ACS_PrintChar(!IsPrint(*str) ? *str : *str ^ 7);
    return ACS_EndStrParam();
 }
 

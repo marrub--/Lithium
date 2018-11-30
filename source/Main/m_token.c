@@ -1,8 +1,7 @@
 // Copyright © 2017 Alison Sanderson, all rights reserved.
 #include "lith_token.h"
 #include "lith_darray.h"
-
-#include <ctype.h>
+#include "lith_char.h"
 
 #define textNext() Vec_Grow(tok->text, 1), Vec_Next(tok->text)
 
@@ -15,9 +14,6 @@
       textNext() = '\0'; \
       unget(); \
    } while(0)
-
-#define IsIdenti(ch) (isalnum(ch) || (ch) == '_')
-#define IsNum(ch)    (isalnum(ch) || (ch) == '_' || (ch) == '.')
 
 #define InComment(ch) ((ch) != '\n' && !feof(fp))
 
@@ -96,7 +92,7 @@ begin:;
            if(getch() == '-')        tok1(tok_sub2);
       else if(ch == '=')             tok1(tok_subeq);
       else if(ch == '>')             tok1(tok_rarrow);
-      else if(isdigit(ch)) {unget(); ch = '-'; break;}
+      else if(IsDigit(ch)) {unget(); ch = '-'; break;}
       else                 {unget(); tok1(tok_sub);}
       return;
 
@@ -137,7 +133,7 @@ begin:;
    case '.':
       if(getch() == '.')
          tok2('.', tok_dot2, tok_dot3);
-      else if(isdigit(ch))
+      else if(IsDigit(ch))
          {unget(); break;}
       else
          {unget(); tok1(tok_dot);}
@@ -158,23 +154,23 @@ begin:;
       return;
    }
 
-   if(isblank(ch))
+   if(IsBlank(ch))
    {
-      while(isblank(getch()));
+      while(ch = getch(), IsBlank(ch));
       unget();
       goto begin;
    }
-   else if(isdigit(ch) || ch == '.' || ch == '-')
+   else if(IsDigit(ch) || ch == '.' || ch == '-')
    {
       tok1(tok_number);
       textNext() = ch;
       getch();
-      tokText(IsNum);
+      tokText(IsNumId);
    }
-   else if(IsIdenti(ch))
+   else if(IsIdent(ch))
    {
       tok1(tok_identi);
-      tokText(IsIdenti);
+      tokText(IsIdent);
    }
    else
    {

@@ -2,7 +2,6 @@
 #include "lith_common.h"
 
 #include <stdio.h>
-#include <ctype.h>
 
 #define DrawSpriteBegin(name) \
    do { \
@@ -117,7 +116,7 @@ void Lith_PrintMem(void const *data, size_t size)
          pos = 0;
       }
 
-      printf(isprint(d[i]) ? c"%c  " : c"%.2X ",  d[i]);
+      printf(IsPrint(d[i]) ? c"%c  " : c"%.2X ",  d[i]);
 
       pos += 3;
    }

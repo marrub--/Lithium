@@ -4,8 +4,6 @@
 #include "lith_world.h"
 #include "lith_cps.h"
 
-#include <ctype.h>
-
 gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_args_t const *a)
 {
    gui_txtbox_state_t *st = a->st;
@@ -30,7 +28,7 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 1 < Lith_CPS_Count(st->txtbuf) && (isprint(*c) || isspace(*c)))
+         if(st->tbptr + 1 < Lith_CPS_Count(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
          {
             Lith_CPS_SetC(st->txtbuf, st->tbptr, *c);
             st->tbptr++;
