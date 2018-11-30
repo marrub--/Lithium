@@ -19,8 +19,8 @@ extern struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
-optargs(1)
 static int *NextCode(struct pstate *d);
+static int AddString(struct pstate *d, char const *s, int l);
 static void GetStatement(struct pstate *d);
 
 // Types ---------------------------------------------------------------------|
@@ -42,18 +42,20 @@ struct strent {
 struct dlgfunc {
    char const *name, *args;
    int lit[4];
-   void (*genCode)(struct pstate *d, union arg *argv, int argc);
+   void (*genCode)(struct pstate *d, struct arg *argv, int argc);
    size_t keyhash;
    struct dlgfunc *next, **prev;
 };
 
-union arg {
-   __str s;
-   int   i;
+struct arg {
+   int  s;
+   int  i;
+   char t;
 };
 
 struct pstate {
-   __prop nextCode {call: NextCode(this)}
+   __prop nextCode  {call: NextCode(this)}
+   __prop addString {call: AddString(this)}
 
    struct tokbuf tb;
    struct dlgdef *def;
@@ -99,32 +101,40 @@ static int *NextCode(struct pstate *d)
    return &Vec_Next(d->def->code);
 }
 
+static int AddString(struct pstate *d, char const *s, int l)
+{
+   int p = d->def->stabC;
+   Vec_Grow(d->def->stab, l);
+   Vec_MoveEnd(d->def->stab, s, l);
+   return p;
+}
+
 #define GenCode_Reg(code) \
-        if(argv[0].s == "a") *d->nextCode() = DCD_##code##_A; \
-   else if(argv[0].s == "b") *d->nextCode() = DCD_##code##_B; \
-   else if(argv[0].s == "c") *d->nextCode() = DCD_##code##_C; \
-   else if(argv[0].s == "d") *d->nextCode() = DCD_##code##_D; \
+        if(d->def->stabV[argv[0].s] == 'a') *d->nextCode() = DCD_##code##_A; \
+   else if(d->def->stabV[argv[0].s] == 'b') *d->nextCode() = DCD_##code##_B; \
+   else if(d->def->stabV[argv[0].s] == 'c') *d->nextCode() = DCD_##code##_C; \
+   else if(d->def->stabV[argv[0].s] == 'd') *d->nextCode() = DCD_##code##_D; \
    else
 
-static void GenCode_Trace(struct pstate *d, union arg *argv, int argc)
+static void GenCode_Trace(struct pstate *d, struct arg *argv, int argc)
 {
    GenCode_Reg(TRACE)
    {
       *d->nextCode() = DCD_TRACE_S;
-      *d->nextCode() = argv[0].i;
+      *d->nextCode() = argv[0].s;
    }
 }
 
-static void GenCode_Push(struct pstate *d, union arg *argv, int argc)
+static void GenCode_Push(struct pstate *d, struct arg *argv, int argc)
 {
    GenCode_Reg(PUSH)
    {
       *d->nextCode() = DCD_PUSH_I;
-      *d->nextCode() = strtoi_str(argv[0].s, null, 0);
+      *d->nextCode() = argv[0].s;
    }
 }
 
-static void GenCode_Pop(struct pstate *d, union arg *argv, int argc)
+static void GenCode_Pop(struct pstate *d, struct arg *argv, int argc)
 {
    GenCode_Reg(POP)
    {
@@ -134,12 +144,12 @@ static void GenCode_Pop(struct pstate *d, union arg *argv, int argc)
 }
 
 #define GenCode_Arith(code) \
-   static void GenCode_Arith_##code(struct pstate *d, union arg *argv, int argc) \
+   static void GenCode_Arith_##code(struct pstate *d, struct arg *argv, int argc) \
    { \
       GenCode_Reg(code) \
       { \
          *d->nextCode() = DCD_##code##_I; \
-         *d->nextCode() = strtoi_str(argv[0].s, null, 0); \
+         *d->nextCode() = argv[0].i; \
       } \
    }
 
@@ -156,10 +166,13 @@ GenCode_Arith(RSH)
 
 #undef GenCode_Arith
 
-static void GenCode_Generic(struct pstate *d, union arg *argv, int argc)
+static void GenCode_Generic(struct pstate *d, struct arg *argv, int argc)
 {
    for(int i = 0; i < argc; i++)
-      *d->nextCode() = argv[i].i;
+   {
+      if(argv[i].t == 'S') *d->nextCode() = argv[i].s;
+      else                 *d->nextCode() = argv[i].i;
+   }
 }
 
 // Parses and generates code for a conditional statement.
@@ -203,7 +216,7 @@ static void GetCode_Cond(struct pstate *d)
          return;
       }
       else
-         *d->nextCode() = (int)Lith_TokStr(tok);
+         *d->nextCode() = d->addString(tok->textV, tok->textC);
    }
    else
       LogOri(tok, "GetCode_Cond: invalid token in conditional statement");
@@ -247,7 +260,7 @@ static void GetCode_Option(struct pstate *d)
       *d->nextCode() = DCD_PUTOPT;
       ptr = d->def->codeC;
       d->nextCode();
-      *d->nextCode() = (int)Lith_TokStr(tok);
+      *d->nextCode() = d->addString(tok->textV, tok->textC);
    }
    else
       LogOri(tok, "GetCode_Option: invalid option parameter");
@@ -280,7 +293,7 @@ static void GetCode_Generic(struct pstate *d)
    }
 
    // Get arguments.
-   union arg argv[8] = {};
+   struct arg argv[8] = {};
    int argc = 0;
    int lit  = 0;
 
@@ -298,10 +311,9 @@ static void GetCode_Generic(struct pstate *d)
          return;
       }
 
-      switch(func->args[argc])
-      {
-      case 'I': argv[argc++].i = strtoi(tok->textV, null, 0); break;
-      case 'S': argv[argc++].s = Lith_TokStr(tok);            break;
+      switch(argv[argc].t = func->args[argc]) {
+      case 'I': argv[argc++].i = strtoi(tok->textV, null, 0);          break;
+      case 'S': argv[argc++].s = d->addString(tok->textV, tok->textC); break;
       }
 
       LogDebug(log_dlg, "arg %i: %s", argc, tok->textV);
@@ -313,11 +325,10 @@ static void GetCode_Generic(struct pstate *d)
    // Fill in unfinished arguments.
    while(func->args[argc])
    {
-      switch(func->args[argc])
-      {
-      case 'I': argv[argc++].i = 0;                break;
-      case 'S': argv[argc++].s = "";               break;
-      case 'L': argv[argc++].i = func->lit[lit++]; break;
+      switch(argv[argc].t = func->args[argc]) {
+      case 'I': argv[argc++].i = 0;                    break;
+      case 'S': argv[argc++].s = d->addString(c"", 0); break;
+      case 'L': argv[argc++].i = func->lit[lit++];     break;
       }
 
       LogDebug(log_dlg, "arg %i emptied", argc);
@@ -329,7 +340,7 @@ static void GetCode_Generic(struct pstate *d)
 static void GetCode_Text(struct pstate *d, struct token *tok, int code)
 {
    *d->nextCode() = code;
-   *d->nextCode() = (int)Lith_TokStr(tok);
+   *d->nextCode() = d->addString(tok->textV, tok->textC);
 }
 
 // Parse and generate a line of code.
@@ -465,16 +476,16 @@ void Lith_GSInit_Dialogue(void)
       {"push", "S", .genCode = GenCode_Push},
       {"pop",  "S", .genCode = GenCode_Pop},
 
-      {"add", "S", .genCode = GenCode_Arith_ADD},
-      {"sub", "S", .genCode = GenCode_Arith_SUB},
-      {"mul", "S", .genCode = GenCode_Arith_MUL},
-      {"div", "S", .genCode = GenCode_Arith_DIV},
-      {"mod", "S", .genCode = GenCode_Arith_MOD},
-      {"ior", "S", .genCode = GenCode_Arith_IOR},
-      {"and", "S", .genCode = GenCode_Arith_AND},
-      {"xor", "S", .genCode = GenCode_Arith_XOR},
-      {"lsh", "S", .genCode = GenCode_Arith_LSH},
-      {"rsh", "S", .genCode = GenCode_Arith_RSH},
+      {"add", "I", .genCode = GenCode_Arith_ADD},
+      {"sub", "I", .genCode = GenCode_Arith_SUB},
+      {"mul", "I", .genCode = GenCode_Arith_MUL},
+      {"div", "I", .genCode = GenCode_Arith_DIV},
+      {"mod", "I", .genCode = GenCode_Arith_MOD},
+      {"ior", "I", .genCode = GenCode_Arith_IOR},
+      {"and", "I", .genCode = GenCode_Arith_AND},
+      {"xor", "I", .genCode = GenCode_Arith_XOR},
+      {"lsh", "I", .genCode = GenCode_Arith_LSH},
+      {"rsh", "I", .genCode = GenCode_Arith_RSH},
 
       {"die",  "L", DCD_DIE},
       {"exit", "L", DCD_DIE},
@@ -537,6 +548,7 @@ void Lith_LoadMapDialogue(void)
       for(struct dlgdef *def = dlgdefs; def;) {
          struct dlgdef *next = def->next;
          Vec_Clear(def->code);
+         Vec_Clear(def->stab);
          Dalloc(def);
          def = next;
       }
@@ -581,16 +593,20 @@ done:
 
    if(world.dbgLevel & log_dlg)
    {
-      static __str const dcdnames[] = {
+      #pragma GDCC STRENT_LITERAL OFF
+      static char const *dcdnames[] = {
          #define DCD(name) #name,
          #include "lith_dialogue.h"
       };
+      #pragma GDCC STRENT_LITERAL ON
 
       for(struct dlgdef *def = dlgdefs; def; def = def->next) {
          Log("Dumping code for script %i...", def->num);
          for(int i = 0; i < def->codeC; i++)
-            Log("%i (%S)", def->codeV[i], def->codeV[i] < countof(dcdnames)
-               ? dcdnames[def->codeV[i]] : "<none>");
+            Log("%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
+               ? dcdnames[def->codeV[i]] : c"");
+         Log("Dumping string table for script %i...\n%s");
+         Lith_PrintMem(def->stabV, def->stabC);
       }
 
       Log("Done.");

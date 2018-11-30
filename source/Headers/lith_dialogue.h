@@ -92,10 +92,9 @@ enum
 
 enum
 {
-   DSTR_NAME   = 0,
-   DSTR_ICON   = 1,
-   DSTR_PICT   = 1,
-   DSTR_REMOTE = 2,
+   DSTR_NAME,
+   DSTR_ICON,
+   DSTR_REMOTE,
 };
 
 enum
@@ -109,10 +108,10 @@ struct dlgdef
 {
    int num;
    int pages[48];
-   Vec_Decl(int, code);
+   Vec_Decl(int,  code);
+   Vec_Decl(char, stab);
 
    struct dlgdef *next;
 };
 
 #endif
-

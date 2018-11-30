@@ -5,13 +5,11 @@
 #include "lith_hudid.h"
 #include "lith_dialogue.h"
 
-#define Next_I (*++codeptr)
-#define Next_S ((__str)Next_I)
-
-#define DoCurCode  goto *cases[*codeptr]
-#define DoNextCode goto *cases[Next_I]
-#define Done       goto done
-#define Op(name) opcase_##name
+#define IMM *++vm.pc
+#define STR &def->stabV[IMM]
+#define JCC goto *cases[*vm.pc]
+#define JNC goto *cases[IMM]
+#define HLT goto done
 
 // Types ---------------------------------------------------------------------|
 
@@ -32,43 +30,43 @@ enum
    TACT_PICT,
 };
 
-typedef struct dlgoption_s
+struct vmopt
 {
-   __str name;
-   int  *ptr;
-} dlgoption_t;
+   char const *name;
+   int        *ptr;
+};
 
-typedef struct dlgcurstate_s
+struct vmstate
 {
-   __str trmPict;
-   int   trmActi;
-   int   trmTime;
-} dlgcurstate_t;
+   char const *trmPict;
+   int         trmActi;
+   int         trmTime;
+};
 
-typedef struct dlgvmstate_s
+struct vm
 {
-   __str text;
+   Vec_Decl(char, text);
 
    int stk[16];
-   int *sptr;
+   int *sp, *pc;
 
-   __str sreg[4];
-   int rega;
-   int regb;
-   int regc;
-   int regd;
+   char const *sr[4]; // String Registers
+   int         ra;    // Integer Registers
+   int         rb;
+   int         rc;
+   int         rd;
 
    int action;
 
-   dlgoption_t option[8];
-   int         optNum;
-   int         optSel;
-   int         concat;
+   struct vmopt option[8];
+   int          optNum;
+   int          optSel;
+   int          concat;
 
    anonymous
-   dlgcurstate_t cur;
-   dlgcurstate_t next;
-} dlgvmstate_t;
+   struct vmstate cur;
+   struct vmstate next;
+};
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -77,7 +75,7 @@ struct dlgdef *lmvar dlgdefs;
 // Static Functions ----------------------------------------------------------|
 
 script
-static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
+static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
 {
    enum {
       // background
@@ -98,7 +96,9 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   __str remote = vmstate->sreg[DSTR_REMOTE] ? vmstate->sreg[DSTR_REMOTE] : "<unknown>@raddr.4E19";
+   char const *remote = vm->sr[DSTR_REMOTE] ?
+                        vm->sr[DSTR_REMOTE] :
+                        c"<unknown>@raddr.4E19";
 
    Lith_GUI_Begin(g, sizex, sizey);
    Lith_GUI_UpdateState(g, p);
@@ -114,11 +114,11 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    PrintText("smallfnt", CR_RED, 0,1, 0,1);
 
    // Top-right text
-   switch(vmstate->trmActi)
+   switch(vm->trmActi)
    {
-   case TACT_LOGON:  PrintTextFmt("Opening Connection to %S", remote); break;
+   case TACT_LOGON:  PrintTextFmt("Opening Connection to %s", remote); break;
    case TACT_LOGOFF: PrintTextStr("Disconnecting...");                 break;
-   default:          PrintTextFmt("Remote: %S",               remote); break;
+   default:          PrintTextFmt("Remote: %s",               remote); break;
    }
 
    PrintText("smallfnt", CR_RED, tright,2, 0,1);
@@ -128,7 +128,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    PrintText("smallfnt", CR_RED, 0,1, tbottom,2);
 
    // Bottom-right text
-   switch(vmstate->trmActi)
+   switch(vm->trmActi)
    {
    case TACT_LOGON:
    case TACT_LOGOFF: PrintTextStr(world.canondate);      break;
@@ -140,37 +140,37 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    // Contents
    SetSize(g->w, g->h);
 
-   __str pict;
+   char pict[32]; sprintf(pict, c":Terminal:%s", vm->trmPict);
 
-   if(vmstate->trmPict) pict = StrParam(":Terminal:%S", vmstate->trmPict);
-
-   switch(vmstate->trmActi)
+   switch(vm->trmActi)
    {
    case TACT_LOGON:
    case TACT_LOGOFF:
       __with(int y = midy;)
       {
-         if(vmstate->text != "")
+         if(vm->textV)
          {
             SetSize(tsizex, tsizey);
-            PrintTextStr(vmstate->text);
+            ACS_BeginPrint();
+            PrintChars(vm->textV, vm->textC);
             PrintText("smallfnt", CR_WHITE, tmidx,0, tmidy + 35,0);
             SetSize(g->w, g->h);
 
             y -= 10;
          }
 
-         PrintSprite(pict, midx,0, y,0);
+         PrintSprite(l_strdup(pict), midx,0, y,0);
       }
       break;
 
    case TACT_PICT:
-      PrintSprite(pict, midx/2,0, midy,0);
+      PrintSprite(l_strdup(pict), midx/2,0, midy,0);
 
       SetSize(tsizex, tsizey);
       SetClipW(tleft, ttop, 150, 300, 150);
 
-      PrintTextStr(vmstate->text);
+      ACS_BeginPrint();
+      PrintChars(vm->textV, vm->textC);
       PrintText("smallfnt", CR_WHITE, tleft,1, ttop,1);
 
       SetSize(g->w, g->h);
@@ -180,7 +180,8 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    case TACT_INFO:
       SetSize(tsizex, tsizey);
 
-      PrintTextStr(vmstate->text);
+      ACS_BeginPrint();
+      PrintChars(vm->textV, vm->textC);
       PrintText("smallfnt", CR_WHITE, 2,1, ttop+2,1);
 
       SetSize(g->w, g->h);
@@ -192,62 +193,90 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vms
    if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.indialogue)
    {
       ACS_LocalAmbientSound("player/trmswitch", 127);
-      vmstate->action = ACT_ACKNOWLEDGE;
+      vm->action = ACT_ACKNOWLEDGE;
       return;
    }
 }
 
 script
-static void Lith_DialogueGUI(gui_state_t *g, struct player *p, dlgvmstate_t *vmstate)
+static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
 {
    enum {left = 37, top = 75};
-   __str icon = StrParam(":Dialogue:Icon%S", vmstate->sreg[DSTR_ICON]);
-   __str name = vmstate->sreg[DSTR_NAME];
-   __str remo = vmstate->sreg[DSTR_REMOTE];
+   char icon[32]; sprintf(icon, c":Dialogue:Icon%s", vm->sr[DSTR_ICON]);
+   char const *name = vm->sr[DSTR_NAME];
+   char const *remo = vm->sr[DSTR_REMOTE];
 
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
    PrintSpriteA(":Dialogue:Back", 0,1, 0,1, 0.7);
-   PrintSpriteA(icon,             0,1, 0,1, 0.7);
+   PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
 
-   PrintTextStr(name);
+   ACS_BeginPrint();
+   PrintChars(name, strlen(name));
    PrintText("lhudfont", CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %S\n\n\C-%S", remo, world.canontime,
-      vmstate->text);
+   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %S\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
    PrintText("cbifont", CR_WHITE, left,1, top,1);
    ClearClip();
 
-   if(vmstate->optNum)
+   if(vm->optNum)
    {
-      int y = 220 - (14 * vmstate->optNum);
-      for(int i = 0; i < vmstate->optNum; i++, y += 14)
+      int y = 220 - (14 * vm->optNum);
+      for(int i = 0; i < vm->optNum; i++, y += 14)
+         if(Lith_GUI_Button_Id(g, i, vm->option[i].name, 45, y, Pre(btndlgsel)))
       {
-         char name[128]; lstrcpy_str(name, vmstate->option[i].name);
-         if(Lith_GUI_Button_Id(g, i, name, 45, y, Pre(btndlgsel)))
-         {
-            vmstate->action = ACT_SELOPTION;
-            vmstate->optSel = i;
-         }
+         vm->action = ACT_SELOPTION;
+         vm->optSel = i;
       }
    }
 
    Lith_GUI_End(g, gui_curs_outlineinv);
 }
 
-static __str AddText(dlgvmstate_t *vmstate, __str s, bool local)
+static void SetText(struct vm *vm, char const *s)
 {
-   if(!vmstate->concat) {
-      if(local) return StrParam("%S%LS\n", vmstate->text, s);
-      else      return StrParam("%S%S\n",  vmstate->text, s);
-   } else if(s != "") {
-      if(local) return StrParam("%S%LS ", vmstate->text, s);
-      else      return StrParam("%S%S ",  vmstate->text, s);
-   } else {
-      return StrParam("%S\n\n", vmstate->text);
+   int l = strlen(s) + 1;
+   Vec_Resize(vm->text, l);
+   memmove(vm->textV, s, l);
+}
+
+static void AddText(struct vm *vm, char const *s)
+{
+   if(s[0])
+   {
+      int l = strlen(s);
+
+      Vec_Grow(vm->text, l + 1);
+      vm->textC--;
+      Vec_MoveEnd(vm->text, s, l);
+      Vec_Next(vm->text) = vm->concat ? ' ' : '\n';
+      Vec_Next(vm->text) = '\0';
    }
+   else
+   {
+      Vec_Grow(vm->text, 2);
+      vm->textC--;
+      Vec_Next(vm->text) = '\n';
+      Vec_Next(vm->text) = '\n';
+      Vec_Next(vm->text) = '\0';
+   }
+}
+
+static void PutText(struct vm *vm, char const *s)
+{
+   int l = strlen(s);
+
+   Vec_Grow(vm->text, l);
+   vm->textC--;
+   Vec_MoveEnd(vm->text, s, l + 1);
+}
+
+static void ResetText(struct vm *vm)
+{
+   Vec_Resize(vm->text, 1);
+   vm->textV[0] = '\0';
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -295,217 +324,196 @@ void Lith_DialogueVM(struct player *p, int num)
    Lith_GUI_Init(&gst);
 
    // VM state
-   dlgvmstate_t vmstate = {};
-   vmstate.text = "";
-   for(int i = 0; i < 4; i++)
-      vmstate.sreg[i] = "";
-   vmstate.sptr = &vmstate.stk[0];
+   struct vm vm = {};
+   vm.sp = &vm.stk[0];
+   ResetText(&vm);
 
    // terminals are numbered negative
-   if(num < 0)
+   // TODO: determine mission status
+   if(num < 0) {gst.cx = 320;     gst.cy = 200;    }
+   else        {gst.cx = 320 / 2; gst.cy = 200 / 2;}
+
+   static __label *const cases[] = {
+      #define DCD(name) &&opDCD_##name,
+      #include "lith_dialogue.h"
+   };
+
+   vm.pc = &def->codeV[def->pages[0]];
+   JCC;
+
+opDCD_NOP: JNC;
+opDCD_DIE: HLT;
+
+opDCD_PUSH_I: *vm.sp++ = IMM;   JNC;
+opDCD_PUSH_A: *vm.sp++ = vm.ra; JNC;
+opDCD_PUSH_B: *vm.sp++ = vm.rb; JNC;
+opDCD_PUSH_C: *vm.sp++ = vm.rc; JNC;
+opDCD_PUSH_D: *vm.sp++ = vm.rd; JNC;
+
+opDCD_POP:            --vm.sp; JNC;
+opDCD_POP_A: vm.ra = *--vm.sp; JNC;
+opDCD_POP_B: vm.rb = *--vm.sp; JNC;
+opDCD_POP_C: vm.rc = *--vm.sp; JNC;
+opDCD_POP_D: vm.rd = *--vm.sp; JNC;
+
+#define Arith(op, r) vm.ra op##= r
+#define ArithSet(sfx, r) \
+   opDCD_ADD_##sfx: Arith(+,  r); JNC; \
+   opDCD_SUB_##sfx: Arith(-,  r); JNC; \
+   opDCD_MUL_##sfx: Arith(*,  r); JNC; \
+   opDCD_DIV_##sfx: Arith(/,  r); JNC; \
+   opDCD_MOD_##sfx: Arith(%,  r); JNC; \
+   opDCD_IOR_##sfx: Arith(|,  r); JNC; \
+   opDCD_AND_##sfx: Arith(&,  r); JNC; \
+   opDCD_XOR_##sfx: Arith(^,  r); JNC; \
+   opDCD_LSH_##sfx: Arith(<<, r); JNC; \
+   opDCD_RSH_##sfx: Arith(>>, r); JNC
+ArithSet(I, IMM);
+ArithSet(A, vm.ra);
+ArithSet(B, vm.rb);
+ArithSet(C, vm.rc);
+ArithSet(D, vm.rd);
+#undef Arith
+#undef ArithSet
+
+opDCD_JPAGE: vm.pc = &def->codeV[def->pages[IMM]]; JCC;
+opDCD_JMP:   vm.pc = &def->codeV[IMM];             JCC;
+
+#define GenJump(t) \
+   __with(int *j = &def->codeV[IMM];) if(t) {vm.pc = j; JCC;} JNC
+opDCD_JNZ:     GenJump(vm.sp[-1] != 0);
+opDCD_JNITEM:  GenJump(!InvNum(l_strdup(STR)));
+opDCD_JNCLASS: GenJump(p->pclass != IMM);
+#undef GenJump
+
+opDCD_SCRIPTI:
+   __with(int s = IMM, a = IMM, b = IMM, c = IMM, d = IMM;)
+      ACS_ExecuteWithResult(s, a, b, c, d);
+   JNC;
+opDCD_SCRIPTS:
+   __with(char const *s = STR; int a = IMM, b = IMM, c = IMM, d = IMM;)
+      ACS_NamedExecuteWithResult(l_strdup(s), a, b, c, d);
+   JNC;
+
+opDCD_TELEPORT_INTRALEVEL:
+   ACS_Delay(5);
+   ACS_Teleport(0, IMM, false);
+   HLT;
+opDCD_TELEPORT_INTERLEVEL:
+   ACS_Delay(5);
+   Lith_TeleportOutEffect(p);
+   ACS_Delay(34);
+   ACS_Teleport_NewMap(IMM, 0, 0);
+   HLT;
+
+opDCD_TRACE_S: Log("%s",   STR);   JNC;
+opDCD_TRACE_A: Log("%.8X", vm.ra); JNC;
+opDCD_TRACE_B: Log("%.8X", vm.rb); JNC;
+opDCD_TRACE_C: Log("%.8X", vm.rc); JNC;
+opDCD_TRACE_D: Log("%.8X", vm.rd); JNC;
+
+opDCD_SETSTRING:
+   __with(int num = IMM; char const *str = STR;)
+      vm.sr[num] = str;
+   JNC;
+
+opDCD_SETTEXT:      SetText(&vm,    STR ); JNC;
+opDCD_SETTEXTLOCAL: SetText(&vm, LC(STR)); JNC;
+opDCD_ADDTEXT:      AddText(&vm,    STR ); JNC;
+opDCD_ADDTEXTLOCAL: AddText(&vm, LC(STR)); JNC;
+
+opDCD_CONCAT:
+   vm.concat++;
+   JNC;
+
+opDCD_CONCATEND:
+   PutText(&vm, c"\n");
+   vm.concat--;
+   JNC;
+
+opDCD_PUTOPT:
+   __with(int *j = &def->codeV[IMM];)
    {
-      gst.cx = 320;
-      gst.cy = 200;
-      // TODO: determine mission status
+      struct vmopt *option = vm.option + vm.optNum++;
+
+      option->name = STR;
+      option->ptr  = vm.pc + 1;
+
+      vm.pc = j;
    }
-   else
+   JCC;
+
+opDCD_DLGWAIT:
+   ACS_LocalAmbientSound("player/cbi/dlgopen", 127);
+
+   p->frozen++;
+   p->setVel(0, 0, 0);
+
+   if(vm.textV[0]) HudMessageLog("%.*s", vm.textC, vm.textV);
+
+   do {
+      Lith_DialogueGUI(&gst, p, &vm);
+      ACS_Delay(1);
+   } while(vm.action == ACT_NONE);
+
+   p->frozen--;
+   goto guiact;
+
+opDCD_LOGON:   vm.next.trmActi = TACT_LOGON;  goto login;
+opDCD_LOGOFF:  vm.next.trmActi = TACT_LOGOFF; goto login;
+opDCD_INFO:    vm.next.trmActi = TACT_INFO;   goto terminal;
+opDCD_PICT:    vm.next.trmActi = TACT_PICT;   goto pict;
+opDCD_TRMWAIT: goto terminal;
+
+login:
+   vm.next.trmTime = 42;
+pict:
+   vm.next.trmPict = STR;
+terminal:
+   if(vm.trmActi != TACT_NONE)
    {
-      gst.cx = 320 / 2;
-      gst.cy = 200 / 2;
-   }
+      if(vm.trmActi == TACT_LOGON || vm.trmActi == TACT_LOGOFF)
+         ACS_LocalAmbientSound("player/trmopen", 127);
 
-   for(int *codeptr = def->codeV + def->pages[0];;)
-   {
-      static __label *const cases[] = {
-         #define DCD(name) &&opcase_DCD_##name,
-         #include "lith_dialogue.h"
-      };
-
-      DoCurCode;
-   Op(DCD_NOP): DoNextCode;
-   Op(DCD_DIE): Done;
-
-   Op(DCD_PUSH_I): *(vmstate.sptr++) = Next_I;       DoNextCode;
-   Op(DCD_PUSH_A): *(vmstate.sptr++) = vmstate.rega; DoNextCode;
-   Op(DCD_PUSH_B): *(vmstate.sptr++) = vmstate.regb; DoNextCode;
-   Op(DCD_PUSH_C): *(vmstate.sptr++) = vmstate.regc; DoNextCode;
-   Op(DCD_PUSH_D): *(vmstate.sptr++) = vmstate.regd; DoNextCode;
-
-   Op(DCD_POP):                    --vmstate.sptr ; DoNextCode;
-   Op(DCD_POP_A): vmstate.rega = *(--vmstate.sptr); DoNextCode;
-   Op(DCD_POP_B): vmstate.regb = *(--vmstate.sptr); DoNextCode;
-   Op(DCD_POP_C): vmstate.regc = *(--vmstate.sptr); DoNextCode;
-   Op(DCD_POP_D): vmstate.regd = *(--vmstate.sptr); DoNextCode;
-
-   #define Arith(op, r) \
-      vmstate.rega op##= r
-   #define ArithSet(sfx, r) \
-      Op(DCD_ADD_##sfx): Arith(+,  r); DoNextCode; \
-      Op(DCD_SUB_##sfx): Arith(-,  r); DoNextCode; \
-      Op(DCD_MUL_##sfx): Arith(*,  r); DoNextCode; \
-      Op(DCD_DIV_##sfx): Arith(/,  r); DoNextCode; \
-      Op(DCD_MOD_##sfx): Arith(%,  r); DoNextCode; \
-      Op(DCD_IOR_##sfx): Arith(|,  r); DoNextCode; \
-      Op(DCD_AND_##sfx): Arith(&,  r); DoNextCode; \
-      Op(DCD_XOR_##sfx): Arith(^,  r); DoNextCode; \
-      Op(DCD_LSH_##sfx): Arith(<<, r); DoNextCode; \
-      Op(DCD_RSH_##sfx): Arith(>>, r); DoNextCode
-   ArithSet(I, Next_I);
-   ArithSet(A, vmstate.rega);
-   ArithSet(B, vmstate.regb);
-   ArithSet(C, vmstate.regc);
-   ArithSet(D, vmstate.regd);
-   #undef Arith
-   #undef ArithSet
-
-   Op(DCD_JPAGE): codeptr = def->codeV + def->pages[Next_I]; DoCurCode;
-   Op(DCD_JMP):   codeptr = def->codeV +            Next_I;  DoCurCode;
-
-   #define GenJump(check) \
-      __with(void *jmpto = def->codeV + Next_I;) \
-         if(check) {codeptr = jmpto; DoCurCode;} \
-      DoNextCode
-   Op(DCD_JNZ):     GenJump(vmstate.sptr[-1] != 0);
-   Op(DCD_JNITEM):  GenJump(!InvNum(Next_S));
-   Op(DCD_JNCLASS): GenJump(p->pclass != Next_I);
-   #undef GenJump
-
-   Op(DCD_SCRIPTI):
-      __with(int s = Next_I, a = Next_I, b = Next_I, c = Next_I, d = Next_I;)
-         ACS_ExecuteWithResult(s, a, b, c, d);
-      DoNextCode;
-   Op(DCD_SCRIPTS):
-      __with(__str s = Next_S; int a = Next_I, b = Next_I, c = Next_I, d = Next_I;)
-         ACS_NamedExecuteWithResult(s, a, b, c, d);
-      DoNextCode;
-
-   Op(DCD_TELEPORT_INTRALEVEL):
-      ACS_Delay(5);
-      ACS_Teleport(0, Next_I, false);
-      Done;
-   Op(DCD_TELEPORT_INTERLEVEL):
-      ACS_Delay(5);
-      Lith_TeleportOutEffect(p);
-      ACS_Delay(34);
-      ACS_Teleport_NewMap(Next_I, 0, 0);
-      Done;
-
-   Op(DCD_TRACE_S): Log("%S",   Next_S      ); DoNextCode;
-   Op(DCD_TRACE_A): Log("%.8X", vmstate.rega); DoNextCode;
-   Op(DCD_TRACE_B): Log("%.8X", vmstate.regb); DoNextCode;
-   Op(DCD_TRACE_C): Log("%.8X", vmstate.regc); DoNextCode;
-   Op(DCD_TRACE_D): Log("%.8X", vmstate.regd); DoNextCode;
-
-   Op(DCD_SETSTRING):
-      __with(int num = Next_I; __str str = Next_S;)
-         vmstate.sreg[num] = str;
-      DoNextCode;
-
-   Op(DCD_SETTEXT):
-      vmstate.text =                   Next_S;         DoNextCode;
-   Op(DCD_SETTEXTLOCAL):
-      vmstate.text = StrParam("%LS",   Next_S);        DoNextCode;
-   Op(DCD_ADDTEXT):
-      vmstate.text = AddText(&vmstate, Next_S, false); DoNextCode;
-   Op(DCD_ADDTEXTLOCAL):
-      vmstate.text = AddText(&vmstate, Next_S, true);  DoNextCode;
-
-   Op(DCD_CONCAT):
-      vmstate.concat++;
-      DoNextCode;
-
-   Op(DCD_CONCATEND):
-      vmstate.text = StrParam("%S\n", vmstate.text);
-      vmstate.concat--;
-      DoNextCode;
-
-   Op(DCD_PUTOPT):
-      __with(void *jmpto = def->codeV + Next_I;)
-      {
-         dlgoption_t *option = vmstate.option + vmstate.optNum++;
-
-         option->name = Next_S;
-         option->ptr  = ++codeptr;
-
-         codeptr = jmpto;
-      }
-      DoCurCode;
-
-   Op(DCD_DLGWAIT):
-      ACS_LocalAmbientSound("player/cbi/dlgopen", 127);
-
+      bool timer = vm.trmTime != 0;
       p->frozen++;
       p->setVel(0, 0, 0);
 
-      if(vmstate.text != "")
-         HudMessageLog("%S", vmstate.text);
+      if(vm.textV[0]) HudMessageLog("%.*s", vm.textC, vm.textV);
 
       do {
-         Lith_DialogueGUI(&gst, p, &vmstate);
+         Lith_TerminalGUI(&gst, p, &vm);
          ACS_Delay(1);
-      }
-      while(vmstate.action == ACT_NONE);
+      } while(vm.action == ACT_NONE && (!timer || --vm.trmTime >= 0));
 
       p->frozen--;
-      goto guiact;
-
-   Op(DCD_LOGON):   vmstate.next.trmActi = TACT_LOGON;  goto login;
-   Op(DCD_LOGOFF):  vmstate.next.trmActi = TACT_LOGOFF; goto login;
-   Op(DCD_INFO):    vmstate.next.trmActi = TACT_INFO;   goto terminal;
-   Op(DCD_PICT):    vmstate.next.trmActi = TACT_PICT;   goto pict;
-   Op(DCD_TRMWAIT): goto terminal;
-
-   login:
-      vmstate.next.trmTime = 42;
-   pict:
-      vmstate.next.trmPict = Next_S;
-   terminal:
-      if(vmstate.trmActi != TACT_NONE)
-      {
-         if(vmstate.trmActi == TACT_LOGON || vmstate.trmActi == TACT_LOGOFF)
-            ACS_LocalAmbientSound("player/trmopen", 127);
-
-         bool timer = vmstate.trmTime != 0;
-         p->frozen++;
-         p->setVel(0, 0, 0);
-
-         if(vmstate.text != "")
-            HudMessageLog("%S", vmstate.text);
-
-         do {
-            Lith_TerminalGUI(&gst, p, &vmstate);
-            ACS_Delay(1);
-         }
-         while(vmstate.action == ACT_NONE &&
-            (!timer || --vmstate.trmTime >= 0));
-
-         p->frozen--;
-      }
-
-      vmstate.cur = vmstate.next;
-      vmstate.next.trmActi = TACT_NONE;
-      vmstate.next.trmTime = 0;
-   guiact:
-      __with(int action = vmstate.action;)
-      {
-         vmstate.action = ACT_NONE;
-         vmstate.text = "";
-
-         switch(action)
-         {
-         case ACT_ACKNOWLEDGE: break;
-         case ACT_SELOPTION:
-            codeptr = vmstate.option[vmstate.optSel].ptr;
-            vmstate.optSel = 0;
-            vmstate.optNum = 0;
-            DoCurCode;
-         case ACT_EXIT: Done;
-         }
-      }
-      DoNextCode;
    }
 
+   vm.cur = vm.next;
+   vm.next.trmActi = TACT_NONE;
+   vm.next.trmTime = 0;
+guiact:
+   __with(int action = vm.action;)
+   {
+      vm.action = ACT_NONE;
+      ResetText(&vm);
+
+      switch(action)
+      {
+      case ACT_ACKNOWLEDGE: break;
+      case ACT_SELOPTION:
+         vm.pc = vm.option[vm.optSel].ptr;
+         vm.optSel = 0;
+         vm.optNum = 0;
+         JCC;
+      case ACT_EXIT: HLT;
+      }
+   }
+   JNC;
+
 done:
+   Vec_Clear(vm.text);
+
    p->indialogue -= 2;
 }
 
@@ -526,4 +534,3 @@ void Lith_RunTerminal(int num)
 }
 
 // EOF
-
