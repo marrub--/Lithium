@@ -158,7 +158,7 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
 {
-   if(!p->hudenabled) return;
+   if(!p->hudenabled || p->indialogue) return;
 
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
    int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
