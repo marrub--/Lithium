@@ -7,8 +7,6 @@
 
 #include "lith_base64.h"
 
-#include <ctype.h>
-
 #define SAVE_BLOCK_SIZE 230
 
 // Type Definitions ----------------------------------------------------------|
@@ -30,27 +28,6 @@ typedef struct netfile_s
 
 // Static Functions ----------------------------------------------------------|
 
-void PrintMem(byte const *data, size_t size)
-{
-   int termpos = 0;
-
-   for(size_t i = 0; i < size; i++)
-   {
-      if(termpos + 3 > 79)
-      {
-         printf(c"\n");
-         termpos = 0;
-      }
-
-      if(isprint(data[i])) printf(c"%c  ",  data[i]);
-      else                 printf(c"%.2X ", data[i]);
-
-      termpos += 3;
-   }
-
-   printf(c"\nEOF\n\n");
-}
-
 // fclose for netfiles.
 // Output to the CVar with a Base64 representation of the output buffer.
 static int NetClose(void *nfdata)
@@ -62,7 +39,7 @@ static int NetClose(void *nfdata)
    {
       printf(c"NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
       printf(c"Data follows\n");
-      PrintMem((void *)nf->mem, nf->pos);
+      Lith_PrintMem(nf->mem, nf->pos);
    }
 
    // Base64 encode the buffer.
@@ -228,7 +205,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          {
             printf(c"Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
             printf(c"Data follows\n");
-            PrintMem(data, size);
+            Lith_PrintMem(data, size);
          }
 
          if(data)

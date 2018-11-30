@@ -102,6 +102,8 @@ enum {
 
 void Log(__str fmt, ...);
 
+script void Lith_PrintMem(void const *data, size_t size);
+
 stkcall void Lith_FadeFlash(int r, int g, int b, fixed amount, fixed seconds);
 script optargs(1) int Lith_GetTID(int tid, int ptr);
 script optargs(1) int Lith_GetPlayerNumber(int tid, int ptr);

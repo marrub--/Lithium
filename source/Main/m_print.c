@@ -2,6 +2,7 @@
 #include "lith_common.h"
 
 #include <stdio.h>
+#include <ctype.h>
 
 #define DrawSpriteBegin(name) \
    do { \
@@ -100,6 +101,28 @@ void Log(__str fmt, ...)
    va_end(vl);
 
    ACS_EndLog();
+}
+
+script
+void Lith_PrintMem(void const *data, size_t size)
+{
+   byte const *d = data;
+   int pos = 0;
+
+   for(size_t i = 0; i < size; i++)
+   {
+      if(pos + 3 > 79)
+      {
+         puts(c"");
+         pos = 0;
+      }
+
+      printf(isprint(d[i]) ? c"%c  " : c"%.2X ",  d[i]);
+
+      pos += 3;
+   }
+
+   puts(c"\nEOF\n\n");
 }
 
 // EOF
