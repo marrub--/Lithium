@@ -26,10 +26,10 @@ typedef planedata   *font;
 
 // Static Objects ------------------------------------------------------------|
 
-static __str fontnames[] = {
-   [font_misaki_gothic] = "MisakiG",
-   [font_misaki_mincho] = "MisakiM",
-   [font_jfdot_gothic]  = "JFDotG",
+static char const *fontnames[] = {
+   [font_misaki_gothic] = c"MisakiG",
+   [font_misaki_mincho] = c"MisakiM",
+   [font_jfdot_gothic]  = c"JFDotG",
 };
 
 static font fonts[font_num];
@@ -61,7 +61,7 @@ static void SetFontMetric(uint key, int xadv, int yofs)
 {
    struct glyph *metr = AllocFontMetric(&fonts[curfont], key);
 
-   int tex = DrawCallI("GetTex", StrParam("lgfx/Font/%S/%u.png", fontnames[curfont], key));
+   int tex = DrawCallI("GetTex", StrParam("lgfx/Font/%s/%u.png", fontnames[curfont], key));
    int   w = DrawCallI("GetTexW", tex);
    int   h = DrawCallI("GetTexH", tex);
 
@@ -99,13 +99,13 @@ bool Lith_SetupFontsBegin(uint fontnum)
    if(fontnum >= font_num) return false;
 
    curfont = fontnum;
-   fp = W_Open(StrParam("lfiles/Font_%S.txt", fontnames[fontnum]), c"r");
+   fp = W_Open(StrParam("lfiles/Font_%s.txt", fontnames[fontnum]), c"r");
 
    if(fp)
       return true;
    else
    {
-      Log("Warning: Font file not found for font %u (%S), UI may break",
+      Log("Warning: Font file not found for font %u (%s), UI may break",
          fontnum, fontnames[fontnum]);
       return false;
    }
@@ -114,12 +114,12 @@ bool Lith_SetupFontsBegin(uint fontnum)
 script ext("ACS")
 bool Lith_SetupFontsContinue(void)
 {
-   for(int i = 0; i < 200; i++)
+   for(int i = 0; i < 300; i++)
    {
       uint key;
       int xadv, yofs;
 
-      if(__fscanf_str(fp, "%u,%i,%i\n", &key, &xadv, &yofs) != 3)
+      if(fscanf(fp, c"%u,%i,%i\n", &key, &xadv, &yofs) != 3)
       {
          fclose(fp);
          return false;
