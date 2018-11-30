@@ -13,7 +13,7 @@ end
 upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
 wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
 
-deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.join(" ")}"
+deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(" ")}"
 
 fp = open "build.ninja", "wb"
 
