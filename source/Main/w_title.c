@@ -38,13 +38,12 @@ void Lith_Title(void)
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   __str txt = L("LITH_OPENER");
-   int   len = ACS_StrLen(txt);
-   int   pos = 0;
+   char const *txt = LC(c"LITH_OPENER");
+   int len = strlen(txt);
 
-   for(int t = 0;;)
+   for(int t = 0, pos = 0;;)
    {
-      PrintTextFmt("\Cd%.*S", pos, txt);
+      PrintTextFmt("\Cd%.*s", pos, txt);
       PrintText("cbifont", 0, 7,1, 6,1);
 
       if(t == 0)
@@ -66,7 +65,7 @@ void Lith_Title(void)
 
    for(int i = 0; i < 35 * 7; i++)
    {
-      PrintTextFmt("\Cd%S", txt);
+      PrintTextFmt("\Cd%s", txt);
       PrintText("cbifont", 0, 7,1, 6,1);
       Blinker();
       ACS_Delay(1);
@@ -75,7 +74,7 @@ void Lith_Title(void)
 
    for(fixed a = 1; a > 0; a -= 0.01)
    {
-      PrintTextFmt("\Cd%S", txt);
+      PrintTextFmt("\Cd%s", txt);
       PrintTextA("cbifont", 0, 7,1, 6,1, a);
       Blinker();
       ACS_Delay(1);
