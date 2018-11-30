@@ -57,7 +57,11 @@ void Lith_InstallCBIItem(int num)
       p->setActivator();
 
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->nam) p->bipUnlock(c->nam);
+         if(c->nam)
+      {
+         bip_name_t tag; lstrcpy_str(tag, c->nam);
+         p->bipUnlock(tag);
+      }
    }
 }
 

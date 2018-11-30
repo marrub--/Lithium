@@ -327,7 +327,8 @@ bool Lith_ItemAttach(void *_item)
 
    withplayer(LocalPlayer)
    {
-      p->bipUnlock(item->tag);
+      bip_name_t tag; lstrcpy_str(tag, item->tag);
+      p->bipUnlock(tag);
       return p->addItem(item);
    }
 

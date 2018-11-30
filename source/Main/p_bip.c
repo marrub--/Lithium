@@ -11,10 +11,10 @@
 
 struct page_init
 {
-   int pclass;
-   __str name;
+   int           pclass;
+   bip_name_t    name;
    bip_unlocks_t unlocks;
-   bool isfree;
+   bool          isfree;
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -36,19 +36,19 @@ static void UnlockPage(struct bip *bip, struct page *page, int pclass)
       page->unlocked = true;
    }
 
-   for(int i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++)
+   for(int i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
       bip->unlock(page->unlocks[i], pclass);
 }
 
 optargs(1)
 static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
-   __str image = LanguageNull("LITH_INFO_IMAGE_%S", pinit->name);
-   int height = strtoi_str(Language("LITH_INFO_CSIZE_%S", pinit->name), null, 0);
+   __str image = LanguageNull("LITH_INFO_IMAGE_%s", pinit->name);
+   int height = strtoi_str(Language("LITH_INFO_CSIZE_%s", pinit->name), null, 0);
 
    struct page *page = Salloc(struct page);
 
-   page->name     = pinit->name;
+   memmove(page->name, pinit->name, sizeof page->name);
    page->category = categ;
    page->unlocked = false;
    page->image    = image;
@@ -77,6 +77,32 @@ static int PClFromStr(__str name)
 #define LITH_X(n, pc) if(name == #n || name == #pc) return pc;
 #include "lith_player.h"
    return 0;
+}
+
+script
+static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *tok, int categ, int pclass, bool catfree)
+{
+   struct page_init page = {};
+
+   do
+      page.pclass |= PClFromStr(Lith_TokStr(tok));
+   while(tb->drop(tok_or) && (tok = tb->get()));
+
+   tok = tb->get();
+   memmove(page.name, tok->textV, tok->textC);
+   page.isfree = tb->drop(tok_mul);
+
+   if(tb->drop(tok_rarrow))
+      for(int i = 0; i < countof(page.unlocks) && !tb->drop(tok_lnend); i++)
+   {
+      tok = tb->get();
+      memmove(page.unlocks[i], tok->textV, tok->textC);
+   }
+
+   if(categ != BIPC_NONE && pclass & page.pclass)
+      AddToBIP(bip, categ, pclass, &page, page.isfree || catfree);
+
+   return tok;
 }
 
 static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
@@ -110,30 +136,10 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
       catfree = tb.drop(tok_mul);
       break;
    case tok_identi:
-   {
       // Classes... Name [*] [-> Unlocks...]
-      struct page_init page = {};
-
-      do
-         page.pclass |= PClFromStr(Lith_TokStr(tok));
-      while(tb.drop(tok_or) && (tok = tb.get()));
-
-      tok = tb.get();
-      page.name = Lith_TokStr(tok);
-      page.isfree = tb.drop(tok_mul);
-
-      if(tb.drop(tok_rarrow))
-         for(int i = 0; i < countof(page.unlocks) && !tb.drop(tok_lnend); i++)
-      {
-         tok = tb.get();
-         page.unlocks[i] = Lith_TokStr(tok);
-      }
-
-      if(categ != BIPC_NONE && pclass & page.pclass)
-         AddToBIP(bip, categ, pclass, &page, page.isfree || catfree);
+      tok = AddPage(bip, &tb, tok, categ, pclass, catfree);
       total++;
       break;
-   }
    }
 
    tb.dtor();
@@ -185,9 +191,9 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    if(!send) send = L("LITH_MAIL_INTERNAL");
 
-   page->name  = date ? date : l_strdup(world.canontimeshort);
-   page->title = name ? name : L("LITH_MAIL_NOTITLE");
-   page->body  = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
+   lstrcpy_str(page->name, date ? date : l_strdup(world.canontimeshort));
+   page->title    = name ? name : L("LITH_MAIL_NOTITLE");
+   page->body     = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 
@@ -214,23 +220,26 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    }
 }
 
-struct page *Lith_FindBIPPage(struct bip *bip, __str name)
+struct page *Lith_FindBIPPage(struct bip *bip, char const *name)
 {
    if(!name) return null;
-   ForCategoryAndPage() if(page->name == name) return page;
+   ForCategoryAndPage() if(strcmp(page->name, name) == 0) return page;
    return null;
 }
 
-struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
+struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, int pclass)
 {
    struct page *page = bip->find(name);
 
    if(!page && pclass) ifauto(char const *, discrim, Lith_PlayerDiscriminator(pclass))
-      page = bip->find(StrParam("%S%s", name, discrim));
+   {
+      bip_name_t tag; sprintf(tag, c"%s%s", name, discrim);
+      page = bip->find(tag);
+   }
 
    if(page && !page->unlocked) UnlockPage(bip, page, pclass);
 
-   if(!page) LogDebug(log_bip, "no page '%S' found", name);
+   if(!page) LogDebug(log_bip, "no page '%s' found", name);
 
    return page;
 }
@@ -238,7 +247,11 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass)
 script ext("ACS")
 void Lith_BIPUnlock(int pnum)
 {
-   withplayer(&players[pnum]) p->bipUnlock(GetMembS(0, "m_infopage"));
+   withplayer(&players[pnum])
+   {
+      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, "m_infopage"));
+      p->bipUnlock(tag);
+   }
 }
 
 script
@@ -253,16 +266,16 @@ struct page_info Lith_GetPageInfo(struct page const *page)
    struct page_info pinf;
 
    pinf.shname = page->category == BIPC_MAIL
-      ? page->name
-      : Language("LITH_INFO_SHORT_%S", page->name);
+      ? l_strdup(page->name)
+      : Language("LITH_INFO_SHORT_%s", page->name);
 
    pinf.body = page->body
       ? page->body
-      : Language("LITH_INFO_DESCR_%S", page->name);
+      : Language("LITH_INFO_DESCR_%s", page->name);
 
    pinf.flname = page->title
       ? page->title
-      : Language("LITH_INFO_TITLE_%S", page->name);
+      : Language("LITH_INFO_TITLE_%s", page->name);
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);

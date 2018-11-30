@@ -25,7 +25,11 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namef
 
    if(!nolog) p->logF("Bought %S", Language(namefmt, def->name));
 
-   if(def->bipunlock) p->bipUnlock(def->bipunlock);
+   if(def->bipunlock)
+   {
+      bip_name_t tag; lstrcpy_str(tag, def->bipunlock);
+      p->bipUnlock(tag);
+   }
 
    p->takeScore(p->getCost(def));
 

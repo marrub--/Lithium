@@ -94,7 +94,8 @@ bool Lith_WeaponPickup(int name)
       WeaponGrab(p, info);
 
       p->weaponsheld++;
-      p->bipUnlock(info->name);
+      bip_name_t tag; lstrcpy_str(tag, info->name);
+      p->bipUnlock(tag);
 
       GiveWeaponItem(parm, info->slot);
       Lith_PickupMessage(p, info);

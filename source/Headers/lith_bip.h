@@ -21,8 +21,8 @@ LITH_X(MAIL,         "Mail")
 // Extern Functions ----------------------------------------------------------|
 
 script void Lith_PlayerInitBIP(struct player *p);
-struct page *Lith_FindBIPPage(struct bip *bip, __str name);
-optargs(1) struct page *Lith_UnlockBIPPage(struct bip *bip, __str name, int pclass);
+struct page *Lith_FindBIPPage(struct bip *bip, char const *name);
+optargs(1) struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, int pclass);
 script void Lith_DeallocateBIP(struct bip *bip);
 script optargs(1) void Lith_DeliverMail(struct player *p, __str title, int flags);
 
@@ -45,11 +45,12 @@ enum
    MAILF_AllPlayers = 1 << 1,
 };
 
-typedef __str bip_unlocks_t[5];
+typedef char bip_name_t[20];
+typedef bip_name_t bip_unlocks_t[5];
 
 struct page
 {
-   __str  name;
+   bip_name_t name;
    __str  image;
    __str  body;
    __str  title;

@@ -18,7 +18,7 @@
    "\cd>>>>>[[[[RELAYING MESSAGE]]]]\n"
    "\n"
    "\cd> Remote: <\cj%S\cd>\n"
-   "\cd> Date: \cj%S\n"
+   "\cd> Date: \cj%s\n"
    "\n"
    "%S";
 
