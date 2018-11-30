@@ -17,8 +17,6 @@
 #include "lith_math.h"
 #include "lith_str.h"
 
-#define strnull (__str)0
-
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 

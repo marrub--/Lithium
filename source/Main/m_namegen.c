@@ -9,26 +9,27 @@
 
 __str Lith_RandomName(int id)
 {
-   static __str syllables[] = {
-      /*か*/ "ka","k'","khi","kaz",
-      /*が*/ "ga","go","gor","got","gn",
-      /*さ*/ "sha","sk","shu","shi",
-      /*ざ*/ "zk",
-      /*た*/ "th","tch","ch","tt","t'","tar","cth",
-      /*な*/ "nil","n'",
-      /*だ*/ "do","dak'","dax",
-      /*は*/ "fta","h",
-      /*ば*/ "bur","bel'",
-      /*ま*/ "ma","mo","mar",
-      /*ら*/ "rly","l","r'",
-      /*う*/ "u","ul",
-      /*え*/ "eh","er",
-      /*無*/ "ver","xel'",
+   #pragma GDCC STRENT_LITERAL OFF
+   static char const *syll[] = {
+      "ka","k'","khi","kaz","kr",
+      "ga","go","gor","got","gn","gl",
+      "sha","sk","shu","shi","si",
+      "zk","zan",
+      "th","tch","ch","tt","t'","tar","cth",
+      "nil","n'",
+      "do","dak'","dax",
+      "fta","h","ff",
+      "bur","bel'",
+      "ma","mo","mar",
+      "rly","l","r'",
+      "u","ul",
+      "eh","er",
+      "ver","xel'","xe",
    };
 
-   static __str lul[] = {"ohgodwhat","kdizd","help","ohno","explod","why","fuck"};
+   static char const *lulz[] = {"ohgodwhat","kdizd","help","ohno","explod","why","fuck"};
 
-   static __str names[] = {
+   static char const *name[] = {
       "Gorgoth",
       "Merdiklo",
       "Starface",
@@ -140,7 +141,7 @@ __str Lith_RandomName(int id)
       "Olok",
    };
 
-   static __str suffixes[] = {
+   static char const *suff[] = {
       "Supreme",
       "Lord of Brimstone",
       "Eater of Souls",
@@ -170,28 +171,41 @@ __str Lith_RandomName(int id)
       "Incarnation of Death",
       "Hideous Destructor",
       "Horrendeous Tyrant",
+      "Destroyer",
+      "Sinful",
+      "Dogma of Evil",
+      "Alpha and Omega",
    };
+   #pragma GDCC STRENT_LITERAL ON
 
-   __str ret = "";
+   srand(id ? world.mapseed + id : ACS_Random(0, 0x7FFFFFFF));
 
-   if(id)
-      srand(world.mapseed + id);
-   else
-      srand(ACS_Random(0, 0x7FFFFFFF));
+   ACS_BeginPrint();
+   ACS_PrintString("\Cg");
+
+   char const *n = name[rand() % countof(name)];
 
    if(id && (rand() % 10) == 0)
-      ret = names[rand() % countof(names)];
-   else
-      for(int i = 0, n = 3 + (rand() % 6); i < n; i++)
-         if((rand() % 101) == 0)
-            ret = StrParam("%S%S", ret, lul[rand() % countof(lul)]);
-         else
-            ret = StrParam("%S%S", ret, syllables[rand() % countof(syllables)]);
+      PrintChars(n, strlen(n));
+   else for(int i = 0, n = 3 + (rand() % 6); i < n; i++)
+   {
+      char const *s = rand() % 101 == 0 ?
+                      lulz[rand() % countof(lulz)] :
+                      syll[rand() % countof(syll)];
+
+      if(i == 0) ACS_PrintChar(toupper(s++[0]));
+
+      PrintChars(s, strlen(s));
+   }
 
    if(id)
-      ret = StrParam("%S, the %S", ret, suffixes[rand() % countof(suffixes)]);
+   {
+      char const *s = suff[rand() % countof(suff)];
+      ACS_PrintString(", the ");
+      PrintChars(s, strlen(s));
+   }
 
-   return StrParam("\Cg%c%S", toupper(ACS_StrLeft(ret, 1)[0]), ACS_StrRight(ret, ACS_StrLen(ret) - 1));
+   return ACS_EndStrParam();
 }
 
 // EOF

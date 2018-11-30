@@ -316,7 +316,7 @@ void Lith_ResetPlayer(struct player *p)
 
       if(world.dbgLevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
-         p->logH(1, "strnull is \"%S\"", strnull);
+         p->logH(1, "strnull is \"%S\"", null);
          PrintDmonAllocSize(p);
       } else {
          p->logH(1, L("LITH_LOG_StartGame"), "lith_k_opencbi");
