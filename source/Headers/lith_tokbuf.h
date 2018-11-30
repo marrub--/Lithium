@@ -3,21 +3,21 @@
 #define lith_tokbuf_h
 
 #include "lith_token.h"
+#include "lith_types.h"
 
 #include <stdbool.h>
 
 // Extern Functions ----------------------------------------------------------|
 
-void          Lith_TBufCtor (struct tokbuf *tb);
-void          Lith_TBufDtor (struct tokbuf *tb);
-struct token *Lith_TBufGet  (struct tokbuf *tb);
-struct token *Lith_TBufPeek (struct tokbuf *tb);
-struct token *Lith_TBufUnGet(struct tokbuf *tb);
-struct token *Lith_TBufReGet(struct tokbuf *tb);
-bool          Lith_TBufDrop (struct tokbuf *tb, int t);
-
-int Lith_TBufProc (struct token *tok, void *udata);
-int Lith_TBufProcL(struct token *tok, void *udata);
+        void          Lith_TBufCtor (struct tokbuf *tb);
+        void          Lith_TBufDtor (struct tokbuf *tb);
+        struct token *Lith_TBufGet  (struct tokbuf *tb);
+        struct token *Lith_TBufPeek (struct tokbuf *tb);
+stkcall struct token *Lith_TBufUnGet(struct tokbuf *tb);
+stkcall struct token *Lith_TBufReGet(struct tokbuf *tb);
+        bool          Lith_TBufDrop (struct tokbuf *tb, int t);
+stkcall int           Lith_TBufProc (struct token *tok);
+stkcall int           Lith_TBufProcL(struct token *tok);
 
 // Types ---------------------------------------------------------------------|
 
@@ -47,9 +47,7 @@ struct tokbuf
    int tpos, tend;
    int bbeg, bend;
 
-   void *udata;
-
-   int (*tokProcess)(struct token *tok, void *udata);
+   stkcall int (*tokProcess)(struct token *tok);
 };
 
 #endif

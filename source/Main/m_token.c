@@ -2,6 +2,7 @@
 #include "lith_token.h"
 #include "lith_darray.h"
 #include "lith_char.h"
+#include "lith_file.h"
 
 #define textNext() Vec_Grow(tok->text, 1), Vec_Next(tok->text)
 
@@ -15,7 +16,7 @@
       unget(); \
    } while(0)
 
-#define InComment(ch) ((ch) != '\n' && !feof(fp))
+#define InComment(ch) ((ch) != '\n' && !FEOF(fp))
 
 #define unget() ((orig->colu -= 1), ungetc(ch, fp))
 #define getch() ((orig->colu += 1), ch = fgetc(fp))
@@ -48,7 +49,7 @@ begin:;
    Vec_Clear(tok->text);
 
    getch();
-   if(feof(fp) || ch == EOF) {
+   if(FEOF(fp) || ch == EOF) {
       unget();
       tok1(tok_eof);
       return;
@@ -110,7 +111,7 @@ begin:;
          tok1(tok_cmtblk);
          getch();
 
-         for(int lvl = 1; lvl && !feof(fp); getch())
+         for(int lvl = 1; lvl && !FEOF(fp); getch())
          {
             if(ch == '/') {
                if(getch() == '*') {lvl++; continue;}
@@ -148,7 +149,7 @@ begin:;
    case '\'': tok1(tok_charac); goto string;
    case '"':  tok1(tok_string); goto string;
    string:
-      for(int i = 0, beg = ch; getch() != beg && !feof(fp);)
+      for(int i = 0, beg = ch; getch() != beg && !FEOF(fp);)
          textNext() = ch;
       textNext() = '\0';
       return;

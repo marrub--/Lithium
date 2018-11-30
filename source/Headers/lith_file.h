@@ -7,6 +7,8 @@
 #define W_Find(name) ServCallI("FindLump", name)
 #define W_Read(lmp)  ServCallS("ReadLump", lmp)
 
+#define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
+
 FILE *W_Open(__str fname, char const *rw);
 FILE *Lith_NFOpen(int pnum, __str pcvar, char rw);
 size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp);
