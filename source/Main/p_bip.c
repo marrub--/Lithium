@@ -187,7 +187,7 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    if(!send) send = L("LITH_MAIL_INTERNAL");
 
-   page->name  = date ? date : world.canontimeshort;
+   page->name  = date ? date : l_strdup(world.canontimeshort);
    page->title = name ? name : L("LITH_MAIL_NOTITLE");
    page->body  = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;

@@ -131,8 +131,8 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    switch(vm->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: PrintTextStr(world.canondate);      break;
-   default:          PrintTextStr("Use To Acknowledge"); break;
+   case TACT_LOGOFF: PrintTextFmt("%s", world.canondate); break;
+   default:          PrintTextStr("Use To Acknowledge");  break;
    }
 
    PrintText("smallfnt", CR_RED, tright,2, tbottom,2);
@@ -217,7 +217,7 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
    PrintText("lhudfont", CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %S\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
+   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
    PrintText("cbifont", CR_WHITE, left,1, top,1);
    ClearClip();
 

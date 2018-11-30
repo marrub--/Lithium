@@ -53,7 +53,7 @@ enum game_s
    Game_Episodic,
 };
 
-__str Lith_CanonTime(int type);
+char const *Lith_CanonTime(int type);
 optargs(1) int Lith_UniqueID(int tid);
 stkcall void Lith_BeginAngles(int x, int y);
 stkcall fixed Lith_AddAngle(int x, int y);

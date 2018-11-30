@@ -9,7 +9,7 @@
 "LITH_TIME_FMT_SHORT" = "%0.2i:%0.2i %i日 %i月 部%i年";
 "LITH_TIME_FMT_DATE" = "%i日 %i月 新部%i年";
 
-"LITH_ENTER_FMT" = "%Sを入った　%SＮＥで";
+"LITH_ENTER_FMT" = "%Sを入った　%sＮＥで";
 "LITH_CHARGE_FMT" = "%.1lkｋＶ\cjチャージ";
 "LITH_MANA_CHARGE" = "[マナは吸い上げる]";
 

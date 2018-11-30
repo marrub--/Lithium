@@ -9,8 +9,10 @@ int Lith_Timer(void)
    return ACS_Timer();
 }
 
-__str Lith_CanonTime(int type)
+char const *Lith_CanonTime(int type)
 {
+   noinit static char ft[64], st[64], dt[64];
+
    int s = 53 + (world.ticks / 35);
    int m = 30 + (s           / 60);
    int h = 14 + (m           / 60);
@@ -26,14 +28,13 @@ __str Lith_CanonTime(int type)
    M = M % 12 + 1;
    Y = Y      + 1;
 
-   switch(type)
-   {
-   case CANONTIME_FULL:  return StrParam(L("LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y);
-   case CANONTIME_SHORT: return StrParam(L("LITH_TIME_FMT_SHORT"), h, m,    d, M, Y);
-   case CANONTIME_DATE:  return StrParam(L("LITH_TIME_FMT_DATE"),           d, M, Y);
+   switch(type) {
+   case CANONTIME_FULL:  sprintf(ft, LC(c"LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
+   case CANONTIME_SHORT: sprintf(st, LC(c"LITH_TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
+   case CANONTIME_DATE:  sprintf(dt, LC(c"LITH_TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
-   return "invalid";
+   return c"";
 }
 
 stkcall
