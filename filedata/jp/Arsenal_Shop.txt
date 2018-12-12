@@ -1,30 +1,30 @@
 == LITH_SHOP_TITLE_RocketAmmo | ロケット箱
 @@ LITH_SHOP_DESCR_RocketAmmo
-ＳＹＭ４．３からロケット推進弾。　うまーい高収率榴弾。
+SYM4.3社のロケット推進弾。 指一本で結構すっきりさせる高収量榴弾
 
 == LITH_SHOP_TITLE_PlasmaAmmo | プラズマ箱
 @@ LITH_SHOP_DESCR_PlasmaAmmo
-Ａ．Ｏ．Ｆ財から非常に凝縮したエネルギーセル。
+A.O.F財団の高縮合エネルギーセル。
 
 == LITH_SHOP_TITLE_Allmap | レベルマップ
 @@ LITH_SHOP_DESCR_Allmap
-ａｕｔｏｍａｐにレベルの全体を明らかにする。
+レベル全体を明らかにするAutoMAP。
 
 == LITH_SHOP_TITLE_Infrared | ＣＢゴーグル
 @@ LITH_SHOP_DESCR_Infrared
-あなたが暗闇に見ることができる光増幅ゴーグル。
+暗闇を見通す光増幅ゴーグル。
 
 == LITH_SHOP_TITLE_RadSuit | ラドスーツ
 @@ LITH_SHOP_DESCR_RadSuit
-あなたが有害物質中を歩くことができる放射線遮蔽スーツ。
+有害物質の中を安全に歩ける放射線遮蔽スーツ。
 
 == LITH_SHOP_TITLE_ChargeFist | $LITH_INFO_SHORT_ChargeFist
 @@ LITH_SHOP_DESCR_ChargeFist
-チャージできる近接武器。
+チャージ可能の近接武器。
 
 == LITH_SHOP_TITLE_Revolver | $LITH_INFO_SHORT_Revolver
 @@ LITH_SHOP_DESCR_Revolver
-強い拳銃。6個の弾が持てる。
+弾が6発持てる強力な拳銃。
 
 アップグレードできません。
 
