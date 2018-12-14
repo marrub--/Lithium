@@ -64,8 +64,8 @@ dmon_t *DmonPtr(int tid, int ptr)
 stkcall
 dmon_t *DmonSelf(void)
 {
-   ifauto(u32, id, InvNum("Lith_MonsterID")) return Dmon(id - 1);
-   else                                      return null;
+   ifauto(u32, id, InvNum(OBJ "MonsterID")) return Dmon(id - 1);
+   else                                     return null;
 }
 
 stkcall

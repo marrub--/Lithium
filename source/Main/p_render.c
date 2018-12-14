@@ -61,7 +61,7 @@ void Lith_PlayerFootstep(struct player *p)
    if(p->nextstep) {p->nextstep--; return;}
 
    fixed dstmul = absk(p->getVel()) / 24.0;
-   fixed vol = p->getCVarK("lith_player_footstepvol") * min(dstmul, 1);
+   fixed vol = p->getCVarK(CVAR "player_footstepvol") * min(dstmul, 1);
 
    __str floor = ACS_GetActorFloorTexture(0);
    __str snd   = p->stepnoise;
@@ -123,9 +123,9 @@ void Lith_PlayerView(struct player *p)
 
    fixed64 addp = 0, addy = 0;
 
-   if(p->getCVarI("lith_player_damagebob"))
+   if(p->getCVarI(CVAR "player_damagebob"))
    {
-      fixed64 bobmul = p->getCVarK("lith_player_damagebobmul");
+      fixed64 bobmul = p->getCVarK(CVAR "player_damagebobmul");
       addp += p->bobpitch * bobmul;
       addy += p->bobyaw   * bobmul;
    }
@@ -136,7 +136,7 @@ void Lith_PlayerView(struct player *p)
    p->addpitch = addp + p->extrpitch;
    p->addyaw   = addy + p->extryaw;
 
-   ifauto(fixed, mul, p->getCVarK("lith_player_viewtilt") * 0.2)
+   ifauto(fixed, mul, p->getCVarK(CVAR "player_viewtilt") * 0.2)
    {
            if(p->sidev  ) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
       else if(p->addroll) p->addroll = lerplk(p->addroll, 0,               0.14);
@@ -155,10 +155,10 @@ void Lith_PlayerStyle(struct player *p)
 {
    if(p->scopetoken) {
       SetPropI(0, APROP_RenderStyle, STYLE_Subtract);
-      SetPropK(0, APROP_Alpha, p->getCVarK("lith_weapons_scopealpha") * p->alpha);
+      SetPropK(0, APROP_Alpha, p->getCVarK(CVAR "weapons_scopealpha") * p->alpha);
    } else {
       SetPropI(0, APROP_RenderStyle, STYLE_Translucent);
-      SetPropK(0, APROP_Alpha, p->getCVarK("lith_weapons_alpha") * p->alpha);
+      SetPropK(0, APROP_Alpha, p->getCVarK(CVAR "weapons_alpha") * p->alpha);
    }
 }
 

@@ -2,7 +2,7 @@
 // Edit only if you aren't going to recompile.
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-enum Lith_PData
+enum PData
 {
    pdata_weapon,
    pdata_upgrade,
@@ -17,7 +17,7 @@ enum Lith_PData
    pdata_recoilp,
 };
 
-enum Lith_PClass
+enum PClass
 {
    pcl_unknown,
 

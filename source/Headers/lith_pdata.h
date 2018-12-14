@@ -1,7 +1,7 @@
 // zsc output: pk7/lzscript/Headers/lith_pdata.h
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-enum // Lith_PData
+enum // PData
 {
    pdata_weapon,
    pdata_upgrade,
@@ -16,7 +16,7 @@ enum // Lith_PData
    pdata_recoilp,
 };
 
-enum // Lith_PClass
+enum // PClass
 {
    pcl_unknown,
 

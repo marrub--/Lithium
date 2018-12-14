@@ -43,8 +43,8 @@ static void UnlockPage(struct bip *bip, struct page *page, int pclass)
 optargs(1)
 static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
-   __str image = LanguageNull("LITH_INFO_IMAGE_%s", pinit->name);
-   int height = strtoi_str(Language("LITH_INFO_CSIZE_%s", pinit->name), null, 0);
+   __str image = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
+   int height = strtoi_str(Language(LANG "INFO_CSIZE_%s", pinit->name), null, 0);
 
    struct page *page = Salloc(struct page);
 
@@ -174,8 +174,8 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
    p->setActivator();
 
-   flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S", title), null, 0);
-   flags |= strtoi_str(Language("LITH_MAIL_FLAG_%S%s", title, p->discrim), null, 0);
+   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S", title), null, 0);
+   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S%s", title, p->discrim), null, 0);
 
    if(!(flags & MAILF_AllPlayers)) title = StrParam("%S%s", title, p->discrim);
 
@@ -183,17 +183,17 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    struct page *page = Salloc(struct page);
 
-   __str date = LanguageNull("LITH_MAIL_TIME_%S", title);
-   __str size = LanguageNull("LITH_MAIL_SIZE_%S", title);
-   __str send = LanguageNull("LITH_MAIL_SEND_%S", title);
-   __str name = LanguageNull("LITH_MAIL_NAME_%S", title);
-   __str body = Language    ("LITH_MAIL_BODY_%S", title);
+   __str date = LanguageNull(LANG "MAIL_TIME_%S", title);
+   __str size = LanguageNull(LANG "MAIL_SIZE_%S", title);
+   __str send = LanguageNull(LANG "MAIL_SEND_%S", title);
+   __str name = LanguageNull(LANG "MAIL_NAME_%S", title);
+   __str body = Language    (LANG "MAIL_BODY_%S", title);
 
-   if(!send) send = L("LITH_MAIL_INTERNAL");
+   if(!send) send = L(LANG "MAIL_INTERNAL");
 
    lstrcpy_str(page->name, date ? date : l_strdup(world.canontimeshort));
-   page->title    = name ? name : L("LITH_MAIL_NOTITLE");
-   page->body     = StrParam(L("LITH_MAIL_TEMPLATE"), send, page->name, body);
+   page->title    = name ? name : L(LANG "MAIL_NOTITLE");
+   page->body     = StrParam(L(LANG "MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 
@@ -208,7 +208,7 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    {
       ACS_Delay(20);
 
-      p->logB(1, L("LITH_LOG_MailRecv"), send);
+      p->logB(1, L(LANG "LOG_MailRecv"), send);
 
       if(ACS_Random(1, 10000) == 1)
       {
@@ -267,15 +267,15 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 
    pinf.shname = page->category == BIPC_MAIL
       ? l_strdup(page->name)
-      : Language("LITH_INFO_SHORT_%s", page->name);
+      : Language(LANG "INFO_SHORT_%s", page->name);
 
    pinf.body = page->body
       ? page->body
-      : Language("LITH_INFO_DESCR_%s", page->name);
+      : Language(LANG "INFO_DESCR_%s", page->name);
 
    pinf.flname = page->title
       ? page->title
-      : Language("LITH_INFO_TITLE_%s", page->name);
+      : Language(LANG "INFO_TITLE_%s", page->name);
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);

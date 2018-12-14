@@ -58,12 +58,12 @@ static void Lith_SpawnBossReward(void)
    fixed z = GetZ(0);
 
    switch(rewardnum++) {
-   case 0: ACS_SpawnForced("Lith_BossReward1", x, y, z); break;
-   case 1: ACS_SpawnForced("Lith_BossReward2", x, y, z); break;
-   case 2: ACS_SpawnForced("Lith_BossReward3", x, y, z); break;
-   case 3: ACS_SpawnForced("Lith_BossReward4", x, y, z); break;
-   case 4: ACS_SpawnForced("Lith_BossReward5", x, y, z); break;
-   case 7: ACS_SpawnForced("Lith_BossReward6", x, y, z); break;
+   case 0: ACS_SpawnForced(OBJ "BossReward1", x, y, z); break;
+   case 1: ACS_SpawnForced(OBJ "BossReward2", x, y, z); break;
+   case 2: ACS_SpawnForced(OBJ "BossReward3", x, y, z); break;
+   case 3: ACS_SpawnForced(OBJ "BossReward4", x, y, z); break;
+   case 4: ACS_SpawnForced(OBJ "BossReward5", x, y, z); break;
+   case 7: ACS_SpawnForced(OBJ "BossReward6", x, y, z); break;
    }
 }
 
@@ -122,7 +122,7 @@ void Lith_PhantomTeleport(void)
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
    for(int i = 0; i < 15; i++) {
-      InvGive("Lith_PhantomTeleport", 1);
+      InvGive(OBJ "PhantomTeleport", 1);
       ACS_Delay(1);
    }
 }
@@ -137,9 +137,9 @@ void Lith_PhantomDeath(void)
       // Death
       ACS_AmbientSound("player/death1", 127);
       ACS_Delay(35);
-      InvGive("Lith_PlayerDeath", 1);
+      InvGive(OBJ "PlayerDeath", 1);
       ACS_Delay(25);
-      InvGive("Lith_PlayerDeathNuke", 1);
+      InvGive(OBJ "PlayerDeathNuke", 1);
       ACS_Delay(25);
       Lith_ForPlayer() p->deliverMail(StrParam("%SDefeated", boss->name));
       boss->dead = true;
@@ -152,7 +152,7 @@ void Lith_PhantomDeath(void)
       ACS_AmbientSound("enemies/phantom/escape", 127);
       ACS_SetActorState(0, "GetOutOfDodge");
       ACS_Delay(5);
-      InvGive("Lith_PhantomOut", 1);
+      InvGive(OBJ "PhantomOut", 1);
       ACS_Delay(2);
    }
 
@@ -178,7 +178,7 @@ void Lith_SpawnBoss(void)
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
-   ServCallI("SpawnBoss", StrParam("Lith_Boss_%S", boss->name), boss->phase);
+   ServCallI("SpawnBoss", StrParam(OBJ "Boss_%S", boss->name), boss->phase);
 
    LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
    DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);

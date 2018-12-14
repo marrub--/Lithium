@@ -7,9 +7,10 @@
 
 #define Placeholder1 "MMMMHMHMMMHMMM"
 #define Placeholder2 "YOUSONOFABITCH"
-#define A(a) "Lith_" a "Ammo"
+#define A(a) OBJ a "Ammo"
+#define O(a) OBJ a
 #define P(a) "weapons/" a "/pickup"
-#define N(a) .classname = "Lith_" a, .name = a
+#define N(a) .classname = OBJ a, .name = a
 #define F(...) .flags = __VA_ARGS__
 weaponinfo_t const weaponinfo[weapon_max] = {
    {0, pcl_any, null, "MMMMHMHMMMHMMM"},
@@ -36,13 +37,13 @@ weaponinfo_t const weaponinfo[weapon_max] = {
    {5, pcl_cybermage, N("IonRifle"), P("ionrifle"), AT_AMag, A("Rocket")},
    {6, pcl_cybermage, N("CPlasmaRifle"), P("plasma"), AT_Ammo, A("Plasma")},
    {7, pcl_cybermage, N("StarDestroyer"), P("shipgun"), AT_Ammo, A("Cannon")},
-   {0, pcl_cybermage, N("Blade"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Delear"), Placeholder1, AT_AMag, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Feuer"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Rend"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Hulgyon"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("StarShot"), Placeholder1, AT_AMag, "Lith_Mana", F(wf_magic)},
-   {0, pcl_cybermage, N("Cercle"), Placeholder1, AT_Ammo, "Lith_Mana", F(wf_magic)},
+   {0, pcl_cybermage, N("Blade"), Placeholder1, AT_Ammo, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("Delear"), Placeholder1, AT_AMag, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("Feuer"), Placeholder1, AT_Ammo, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("Rend"), Placeholder1, AT_Ammo, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("Hulgyon"), Placeholder1, AT_Ammo, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("StarShot"), Placeholder1, AT_AMag, O("Mana"), F(wf_magic)},
+   {0, pcl_cybermage, N("Cercle"), Placeholder1, AT_Ammo, O("Mana"), F(wf_magic)},
    {2, pcl_darklord, N("700Express"), Placeholder2, AT_NMag},
    {3, pcl_darklord, N("4Bore"), Placeholder2, AT_Ammo, A("Shell")},
    {3, pcl_darklord, N("ShrapnelGun"), Placeholder2, AT_Ammo, A("Shell")},

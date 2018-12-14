@@ -21,19 +21,19 @@ static struct {__str abbr, full;} const ArmorNames[] = {
 
 static void RA_Take(int n)
 {
-   InvTake(StrParam("Lith_RA_Bullets%i", n),   999);
-   InvTake(StrParam("Lith_RA_Energy%i", n),    999);
-   InvTake(StrParam("Lith_RA_Fire%i", n),      999);
-   InvTake(StrParam("Lith_RA_FireMagic%i", n), 999);
-   InvTake(StrParam("Lith_RA_Magic%i", n),     999);
-   InvTake(StrParam("Lith_RA_Melee%i", n),     999);
-   InvTake(StrParam("Lith_RA_Shrapnel%i", n),  999);
-   InvTake(StrParam("Lith_RA_Ice%i", n),       999);
+   InvTake(StrParam(OBJ "RA_Bullets%i", n),   999);
+   InvTake(StrParam(OBJ "RA_Energy%i", n),    999);
+   InvTake(StrParam(OBJ "RA_Fire%i", n),      999);
+   InvTake(StrParam(OBJ "RA_FireMagic%i", n), 999);
+   InvTake(StrParam(OBJ "RA_Magic%i", n),     999);
+   InvTake(StrParam(OBJ "RA_Melee%i", n),     999);
+   InvTake(StrParam(OBJ "RA_Shrapnel%i", n),  999);
+   InvTake(StrParam(OBJ "RA_Ice%i", n),       999);
 }
 
 static void RA_Give(__str name, int n)
 {
-   InvGive(StrParam("Lith_RA_%S%i", name, n), 1);
+   InvGive(StrParam(OBJ "RA_%S%i", name, n), 1);
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -79,7 +79,7 @@ void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 {
-   if(UData.activearmor && p->getCVarI("lith_hud_showarmorind"))
+   if(UData.activearmor && p->getCVarI(CVAR "hud_showarmorind"))
    {
       PrintSprite(":HUD:SplitLeft", 12,1, 225,2);
 

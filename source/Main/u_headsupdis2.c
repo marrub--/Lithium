@@ -50,7 +50,7 @@ static void HUD_Ammo(struct player *p)
 
    if(p->weapontype == weapon_c_smg)
    {
-      fixed heat = InvNum("Lith_SMGHeat")/500.0;
+      fixed heat = InvNum(OBJ "SMGHeat")/500.0;
       PrintSprite(":HUD_C:BarSmall", 320,2, 205,2);
       SetClip(320-63, 205-9, heat * 63, 9);
       PrintSprite(":HUD_C:HeatBar", 320,2, 205,2);
@@ -90,7 +90,7 @@ void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
    Lith_HUD_KeyInd(p, 180, 21, true, 0.8);
    Lith_HUD_Score(p, "\C[Lith_Red]%S\Cnscr", p->score, "cnfont", "a", 160,0, 3,1);
 
-   if(p->getCVarI("lith_hud_showweapons"))
+   if(p->getCVarI(CVAR "hud_showweapons"))
       PrintSprite(":HUD_C:Bar", 320,2, 220,2);
 
    Lith_HUD_WeaponSlots(p, CR_DARKRED, CR_DARKGREEN, CR_BLUE, "g", 323, 219);

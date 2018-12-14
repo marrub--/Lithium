@@ -1,5 +1,5 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#define Lith_Version "1.6.1 (Hyper-Trilithium)"
+#define Lith_Version "Lithium 1.6.1 (Hyper-Trilithium)"
 #define Lith_APIVersion Lith_v1_6_1
 #define Lith_CheckAPIVersion() \
    do { \

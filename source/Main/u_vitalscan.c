@@ -28,7 +28,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       bool legendary = world.legendoom && InvNum("LDLegendaryMonsterToken");
       bool henshin   = world.legendoom && InvNum("LDLegendaryMonsterTransformed");
 
-      bool phantom = InvNum("Lith_IsPhantom");
+      bool phantom = InvNum(OBJ "IsPhantom");
 
       bool freak  = ACS_CheckFlag(0, "INVULNERABLE") || ACS_CheckFlag(0, "NODAMAGE");
       bool boss   = ACS_CheckFlag(0, "BOSS");
@@ -56,7 +56,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 
          UData.tagstr = Lith_RandomName(freak ? 0 : id);
 
-         if(p->getCVarI("lith_scanner_bar"))
+         if(p->getCVarI(CVAR "scanner_bar"))
          {
             UData.oldhealth = UData.health = ACS_Random(0, 666666);
             UData.maxhealth = ACS_Random(0, 666666);
@@ -65,7 +65,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       }
       else
       {
-         char color = p->getCVarI("lith_scanner_color") & 0x7F;
+         char color = p->getCVarI(CVAR "scanner_color") & 0x7F;
 
               if(six)     UData.tagstr = "\Cg6";
          else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
@@ -110,10 +110,10 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled || !UData.target) return;
 
-   int ox = p->getCVarI("lith_scanner_xoffs");
-   int oy = p->getCVarI("lith_scanner_yoffs");
+   int ox = p->getCVarI(CVAR "scanner_xoffs");
+   int oy = p->getCVarI(CVAR "scanner_yoffs");
 
-   if(p->getCVarI("lith_scanner_slide"))
+   if(p->getCVarI(CVAR "scanner_slide"))
    {
       fixed64 diff = p->yawf - (fixed64)UData.cangle;
       fixed ds = ACS_Sin(diff / tau) * tau;
@@ -143,7 +143,7 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    }
 
    // Tag and health
-   bool  afnt = p->getCVarI("lith_scanner_altfont");
+   bool  afnt = p->getCVarI(CVAR "scanner_altfont");
    __str font = afnt ? "chfont" : "cbifont";
 
    HudMessageF(font, "%S", UData.tagstr);
@@ -155,7 +155,7 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 225.2 + oy, 0.1, 0.4);
 
    // Health bar
-   if(p->getCVarI("lith_scanner_bar"))
+   if(p->getCVarI(CVAR "scanner_bar"))
    {
       int y = afnt ? 201 : 205;
       ACS_SetHudClipRect(120 + ox, y + oy, 80 * UData.splitfrac, 2);

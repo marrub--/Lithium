@@ -52,7 +52,7 @@ void Lith_Glare(void)
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
       ACS_LocalAmbientSound("player/glare", 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, "Lith_Dummy", "None",
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, OBJ "Dummy", "None",
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
       ACS_Delay(14);

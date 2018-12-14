@@ -74,7 +74,7 @@ static void ApplyLevels(dmon_t *m, int prev)
 
    for(int i = 0; i < dmgtype_max; i++) {
       ifauto(int, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam("Lith_M_%S%i", dmgtype_names[i],
+         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i],
             min(resist, MAXRANK)), 1);
       }
    }
@@ -106,7 +106,7 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
       fixed x   = m->ms->x + ACS_Cos(a->ang) * dst;
       fixed y   = m->ms->y + ACS_Sin(a->ang) * dst;
       int   tid = ACS_UniqueTID();
-      __str bar = m->rank >= 5 ? "Lith_MonsterHeptaura" : "Lith_MonsterBarrier";
+      __str bar = m->rank >= 5 ? OBJ "MonsterHeptaura" : OBJ "MonsterBarrier";
 
       ACS_SpawnForced(bar, x, y, m->ms->z + m->ms->h / 2, tid);
       SetPropK(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
@@ -156,7 +156,7 @@ script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
    int tid = ACS_UniqueTID();
-   ACS_SpawnForced("Lith_MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
+   ACS_SpawnForced(OBJ "MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
    SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
@@ -164,7 +164,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
 
    for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++) ACS_Delay(1);
 
-   SetPropS(tid, APROP_Species, "Lith_Player");
+   SetPropS(tid, APROP_Species, OBJ "Player");
 }
 
 static void SpawnManaPickup(dmon_t *m, struct player *p)
@@ -174,7 +174,7 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
       int tid = ACS_UniqueTID();
       int x   = m->ms->x + ACS_Random(-16, 16);
       int y   = m->ms->y + ACS_Random(-16, 16);
-      ACS_Spawn("Lith_ManaPickup", x, y, m->ms->z + 4, tid);
+      ACS_Spawn(OBJ "ManaPickup", x, y, m->ms->z + 4, tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       i += 150;
@@ -191,7 +191,7 @@ static void OnFinalize(dmon_t *m)
             ACS_Teleport_EndGame();
 
          if(m->mi->type == mtype_imp && m->level >= 50 && m->rank >= 4)
-            ACS_SpawnForced("Lith_ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
+            ACS_SpawnForced(OBJ "ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
       }
 
       if(!m->ms->finalized)
@@ -202,7 +202,7 @@ static void OnFinalize(dmon_t *m)
             SpawnManaPickup(m, p);
          }
 
-         if(m->mi->type == mtype_zombie && ACS_GetCVar("lith_sv_wepdrop") && !p->weapon.slot[3])
+         if(m->mi->type == mtype_zombie && ACS_GetCVar(CVAR "sv_wepdrop") && !p->weapon.slot[3])
          {
             int tid = ACS_UniqueTID();
             ACS_SpawnForced("Shotgun", m->ms->x, m->ms->y, m->ms->z, tid);
@@ -281,7 +281,7 @@ void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
 
-   InvGive("Lith_MonsterID", m->id + 1);
+   InvGive(OBJ "MonsterID", m->id + 1);
 
    m->ms = &ms;
    GetInfo(m);
@@ -313,7 +313,7 @@ void Lith_MonsterMain(dmon_t *m)
          m->level += d.quot;
          m->exp    = d.rem;
 
-         ACS_SpawnForced("Lith_MonsterLevelUp", m->ms->x, m->ms->y, m->ms->z);
+         ACS_SpawnForced(OBJ "MonsterLevelUp", m->ms->x, m->ms->y, m->ms->z);
          ApplyLevels(m, prev);
 
          LogDebug(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
@@ -322,8 +322,8 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / 100.);
 
-      if(InvNum("Lith_Ionized") && tic % 5 == 0)
-         ServCallI("Lith_IonizeFX");
+      if(InvNum(OBJ "Ionized") && tic % 5 == 0)
+         ServCallI(OBJ "IonizeFX");
 
       ACS_Delay(2);
    }
@@ -357,7 +357,7 @@ void Lith_MonsterInfo()
    LogDebug(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
-   InvGive("Lith_MonsterInvalid", 1);
+   InvGive(OBJ "MonsterInvalid", 1);
 }
 
 script ext("ACS")

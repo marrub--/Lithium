@@ -3,10 +3,10 @@
 #include "lith_world.h"
 
 static __str const upgrcateg[UC_MAX] = {
-   [UC_Body] = "LITH_CAT_BODY",
-   [UC_Weap] = "LITH_CAT_WEAP",
-   [UC_Extr] = "LITH_CAT_EXTR",
-   [UC_Down] = "LITH_CAT_DOWN"
+   [UC_Body] = LANG "CAT_BODY",
+   [UC_Weap] = LANG "CAT_WEAP",
+   [UC_Extr] = LANG "CAT_EXTR",
+   [UC_Down] = LANG "CAT_DOWN"
 };
 
 static void GUIUpgradesList(gui_state_t *g, struct player *p)
@@ -73,7 +73,9 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
 
-      char *name = LanguageC(c"LITH_UPGRADE_TITLE_%S", upgr->info->name);
+#pragma GDCC STRENT_LITERAL OFF
+      char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
+#pragma GDCC STRENT_LITERAL ON
 
       int *upgrsel = &CBIState(g)->upgrsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
@@ -154,7 +156,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    }
 
    if(upgr->info->cost) cost = StrParam("%S%S", scoresep(p->getCost(&upgr->info->shopdef)), mark);
-   else                 cost = L("LITH_FREE");
+   else                 cost = L(LANG "FREE");
 
    PrintTextStr(cost);
    PrintText("cbifont", CR_WHITE, 111,1, 30,1);
@@ -164,8 +166,8 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    PrintText("cbifont", CR_WHITE, 111,1, 40,1);
 
    // Effect
-   ifauto(__str, effect, LanguageNull("LITH_UPGRADE_EFFEC_%S", upgr->info->name))
-      PrintTextFmt("%S %S", L("LITH_EFFECT"), effect);
+   ifauto(__str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
+      PrintTextFmt("%S %S", L(LANG "EFFECT"), effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
    PrintText("cbifont",
@@ -176,11 +178,15 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
 
 static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
-   if(Lith_GUI_Button(g, LC(c"LITH_BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
+#pragma GDCC STRENT_LITERAL OFF
+   if(Lith_GUI_Button(g, LC(LANG "BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
+#pragma GDCC STRENT_LITERAL ON
       Lith_UpgrBuy(p, upgr, false);
 
-   if(Lith_GUI_Button(g, upgr->active ? LC(c"LITH_DEACTIVATE") : LC(c"LITH_ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
+#pragma GDCC STRENT_LITERAL OFF
+   if(Lith_GUI_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
+#pragma GDCC STRENT_LITERAL ON
 }
 
 void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p)

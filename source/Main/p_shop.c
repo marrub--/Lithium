@@ -21,15 +21,15 @@ typedef struct shopitem_s
 
 static shopitem_t shopitems[] = {
 // {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]},
-   {{"RocketAmmo", null, 9000},  gA, 5,    "Lith_RocketAmmo"},
-   {{"PlasmaAmmo", null, 75750}, gA, 1000, "Lith_PlasmaAmmo"},
+   {{"RocketAmmo", null, 9000},  gA, 5,    OBJ "RocketAmmo"},
+   {{"PlasmaAmmo", null, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
 
-   {{"ChargeFist",      "ChargeFist",      100000},  pM, 1,    "Lith_ChargeFist",      sif_weapon},
-   {{"Revolver",        "Revolver",        500000},  pM, 1,    "Lith_Revolver",        sif_weapon},
-   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1,    "Lith_LazShotgun",      sif_weapon},
-   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1,    "Lith_SniperRifle",     sif_weapon},
-   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1,    "Lith_MissileLauncher", sif_weapon},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1,    "Lith_PlasmaDiffuser",  sif_weapon},
+   {{"ChargeFist",      "ChargeFist",      100000},  pM, 1,    OBJ "ChargeFist",      sif_weapon},
+   {{"Revolver",        "Revolver",        500000},  pM, 1,    OBJ "Revolver",        sif_weapon},
+   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1,    OBJ "LazShotgun",      sif_weapon},
+   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1,    OBJ "SniperRifle",     sif_weapon},
+   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1,    OBJ "MissileLauncher", sif_weapon},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1,    OBJ "PlasmaDiffuser",  sif_weapon},
 
    {{"Allmap",   null, 100000}, gA, 1, "Allmap"},
    {{"Infrared", null, 70000},  gA, 1, "Infrared"},
@@ -94,7 +94,7 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->shopscr, y, guipre.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
-      char *name = LanguageC(name, "LITH_SHOP_TITLE_%S", shopitems[i].name);
+      char *name = LanguageC(name, LANG "SHOP_TITLE_%S", shopitems[i].name);
 
       int *shopsel = &CBIState(g)->shopsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
@@ -109,16 +109,18 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 
    SetClipW(111, 30, 184, 150, 184);
 
-   PrintTextFmt("%LS %S\Cnscr", "LITH_COST", scoresep(p->getCost(&item->shopdef)));
+   PrintTextFmt("%LS %S\Cnscr", LANG "COST", scoresep(p->getCost(&item->shopdef)));
    PrintText("cbifont", CR_WHITE, 111,1, 30,1);
 
-   PrintTextStr(Language("LITH_SHOP_DESCR_%S", item->name));
+   PrintTextStr(Language(LANG "SHOP_DESCR_%S", item->name));
    PrintText("cbifont", CR_WHITE, 111,1, 40,1);
 
    ClearClip();
 
-   if(Lith_GUI_Button(g, LC(c"LITH_BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
-      p->buy(&item->shopdef, item, "LITH_SHOP_TITLE_%S", false);
+#pragma GDCC STRENT_LITERAL OFF
+   if(Lith_GUI_Button(g, LC(LANG "BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
+#pragma GDCC STRENT_LITERAL ON
+      p->buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
 
 // EOF

@@ -2,7 +2,7 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-#define name(n) "LITH_PK_" #n
+#define name(n) LANG "PK_" #n
 
 #define StupidName(w) \
    Language("%S_%.3i", pickupnames[w], \
@@ -34,21 +34,21 @@ static __str const pickupnames[weapon_max] = {
 
 static void Lith_StupidPickup(struct player *p, int weapon)
 {
-   int fmtnum = strtoi_str(L("LITH_PK_GET_NUM"),       null, 10);
-   int uncnum = strtoi_str(L("LITH_PK_UNCERTAIN_NUM"), null, 10);
+   int fmtnum = strtoi_str(L(LANG "PK_GET_NUM"),       null, 10);
+   int uncnum = strtoi_str(L(LANG "PK_UNCERTAIN_NUM"), null, 10);
 
    int iunc  = ACS_Random(0, uncnum);
    int ifmt  = ACS_Random(0, fmtnum);
-   int flag  = strtoi_str(Language("LITH_PK_GET_%.3i_FLAGS", ifmt), null, 0);
+   int flag  = strtoi_str(Language(LANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
 
    if(flag & 2) {
       ifmt = ACS_Random(0, fmtnum);
-      flag = strtoi_str(Language("LITH_PK_GET_%.3i_FLAGS", ifmt), null, 0);
+      flag = strtoi_str(Language(LANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
    }
 
    __str nam = StupidName(weapon);
-   __str fmt = Language("LITH_PK_GET_%.3i", ifmt);
-   __str unc = Language("LITH_PK_UNCERTAIN_%.3i", iunc);
+   __str fmt = Language(LANG "PK_GET_%.3i", ifmt);
+   __str unc = Language(LANG "PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) p->logB(1, fmt, nam, nam);
@@ -58,10 +58,10 @@ static void Lith_StupidPickup(struct player *p, int weapon)
 
 void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
 {
-   if(p->getCVarI("lith_player_stupidpickups"))
+   if(p->getCVarI(CVAR "player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->logB(1, L("LITH_PK_GET_000"), Language("LITH_INFO_SHORT_%S", info->name));
+      p->logB(1, L(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
    else
       p->logB(1, "Acquired impossible object");
 }
@@ -69,16 +69,16 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
 void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
 {
    int weapon = info->type;
-   bool ord = strtoi_str(L("LITH_LOG_SellOrder"), null, 10) == 0;
+   bool ord = strtoi_str(L(LANG "LOG_SellOrder"), null, 10) == 0;
 
    __str nam;
 
-   if(p->getCVarI("lith_player_stupidpickups"))
+   if(p->getCVarI(CVAR "player_stupidpickups"))
       nam = StupidName(weapon);
    else
-      nam = Language("LITH_INFO_SHORT_%S", info->name);
+      nam = Language(LANG "INFO_SHORT_%S", info->name);
 
-   __str msg = L("LITH_LOG_Sell");
+   __str msg = L(LANG "LOG_Sell");
 
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);

@@ -67,7 +67,7 @@ void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
    }
 
    if(p->waterlevel == 0 && p->buttonPressed(BT_JUMP) && !InvNum("PowerFlight") &&
-      !InvNum("Lith_RocketBooster") && !UData.leaped &&
+      !InvNum(OBJ "RocketBooster") && !UData.leaped &&
       (!p->onground || UData.charge < CHARGE_MAX))
    {
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);

@@ -78,7 +78,7 @@ void Lith_PlayerPayout(struct player *p)
          Left("Primary Account"); Right("%STRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
       }
 
-      if(p->getCVarI("lith_player_resultssound"))
+      if(p->getCVarI(CVAR "player_resultssound"))
       {
          if(counting) {
                  if(i <  35) ACS_LocalAmbientSound("player/counter", 80);

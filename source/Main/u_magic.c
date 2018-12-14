@@ -14,15 +14,17 @@ struct magic_info {
 
 // Static Objects ------------------------------------------------------------|
 
+#pragma GDCC STRENT_LITERAL OFF
 static struct magic_info const minf[] = {
-   {-1,                130, 180, c"Blade",    c"Lith_Blade"   },
-   {-1,                 60, 140, c"Delear",   c"Lith_Delear"  },
-   {cupg_c_slot3spell,  60,  60, c"Feuer",    c"Lith_Feuer"   },
-   {cupg_c_slot4spell, 130,  10, c"Rend",     c"Lith_Rend"    },
-   {cupg_c_slot5spell, 205,  60, c"Hulgyon",  c"Lith_Hulgyon" },
-   {cupg_c_slot6spell, 205, 140, c"StarShot", c"Lith_StarShot"},
-   {cupg_c_slot7spell, 130, 100, c"Cercle",   c"Lith_Cercle"  },
+   {-1,                130, 180, "Blade",    OBJ "Blade"   },
+   {-1,                 60, 140, "Delear",   OBJ "Delear"  },
+   {cupg_c_slot3spell,  60,  60, "Feuer",    OBJ "Feuer"   },
+   {cupg_c_slot4spell, 130,  10, "Rend",     OBJ "Rend"    },
+   {cupg_c_slot5spell, 205,  60, "Hulgyon",  OBJ "Hulgyon" },
+   {cupg_c_slot6spell, 205, 140, "StarShot", OBJ "StarShot"},
+   {cupg_c_slot7spell, 130, 100, "Cercle",   OBJ "Cercle"  },
 };
+#pragma GDCC STRENT_LITERAL ON
 
 // Static Functions ----------------------------------------------------------|
 
@@ -50,24 +52,26 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 
       if(m->st != -1 && !world.cbiupgr[m->st]) continue;
 
-      char gfx[18]; sprintf(gfx, c":UI:%s",    m->name);
-      char hot[18]; sprintf(hot, c":UI:%sSel", m->name);
+#pragma GDCC STRENT_LITERAL OFF
+      char gfx[18]; sprintf(gfx, ":UI:%s",    m->name);
+      char hot[18]; sprintf(hot, ":UI:%sSel", m->name);
 
       gui_button_preset_t pre = {
          .gfx      = gfx,
          .hot      = hot,
-         .snd      = c"player/cbi/buttonpress",
-         .cdef     = c"d",
-         .cact     = c"r",
-         .chot     = c"k",
-         .cdis     = c"m",
-         .font     = c"cbifont",
+         .snd      = "player/cbi/buttonpress",
+         .cdef     = "d",
+         .cact     = "r",
+         .chot     = "k",
+         .cdis     = "m",
+         .font     = "cbifont",
          .external = true,
          .w        = 64,
          .h        = 64
       };
 
-      char name[24]; sprintf(name, c"LITH_INFO_SHORT_%s", m->name);
+      char name[24]; sprintf(name, LANG "INFO_SHORT_%s", m->name);
+#pragma GDCC STRENT_LITERAL ON
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
@@ -146,7 +150,7 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
       int x   = ACS_Cos(ang) * dst;
       int y   = ACS_Sin(ang) * dst;
       int z   = ACS_Random(8, 48);
-      ACS_Spawn("Lith_ManaLeak", p->x + x, p->y + y, p->z + z, tid);
+      ACS_Spawn(OBJ "ManaLeak", p->x + x, p->y + y, p->z + z, tid);
       SetMembI(tid, "user_x", x);
       SetMembI(tid, "user_y", y);
       SetPropK(tid, APROP_Alpha, manaperc / 2);

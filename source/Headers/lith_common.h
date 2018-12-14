@@ -28,7 +28,7 @@
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar("__lith_debug_level") & (level)) \
+   do if(ACS_GetCVar(DCVAR "debug_level") & (level)) \
       Log(#level ": " __VA_ARGS__); \
    while(0)
 
@@ -58,19 +58,24 @@
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ
 
-#define ServCallI(...) SCallI("Lith_HERMES", __VA_ARGS__)
-#define ServCallK(...) SCallK("Lith_HERMES", __VA_ARGS__)
-#define ServCallS(...) SCallS("Lith_HERMES", __VA_ARGS__)
-
-#define DrawCallI(...) SCallI("Lith_URANUS", __VA_ARGS__)
-#define DrawCallK(...) SCallK("Lith_URANUS", __VA_ARGS__)
-#define DrawCallS(...) SCallS("Lith_URANUS", __VA_ARGS__)
-
 #define Lith_IsPaused ServCallI("GetPaused")
+#define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
 
-#define Lith_PausableTick() \
-   do ACS_Delay(1); \
-   while(Lith_IsPaused)
+#define ServName OBJ "HERMES"
+#define DrawName OBJ "URANUS"
+
+#define CVAR "lith_"
+#define DCVAR "__lith_"
+#define OBJ "Lith_"
+#define LANG "LITH_"
+
+#define ServCallI(...) SCallI(ServName, __VA_ARGS__)
+#define ServCallK(...) SCallK(ServName, __VA_ARGS__)
+#define ServCallS(...) SCallS(ServName, __VA_ARGS__)
+
+#define DrawCallI(...) SCallI(DrawName, __VA_ARGS__)
+#define DrawCallK(...) SCallK(DrawName, __VA_ARGS__)
+#define DrawCallS(...) SCallS(DrawName, __VA_ARGS__)
 
 #define DebugStat(...) \
    (world.dbgLevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)

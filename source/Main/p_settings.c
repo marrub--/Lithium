@@ -1,100 +1,100 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #ifdef FromUI
 Category("Gameplay");
-Enum("Level-up system", "lith_player_lvsys", atsys_auto, atsys_manual, "%S", LvSysName(set));
+Enum("Level-up system", CVAR "player_lvsys", atsys_auto, atsys_manual, "%S", LvSysName(set));
 if(p->num == 0) {
-   ServerInt("Difficulty Base",     c"%", "lith_sv_difficulty", 1, 100);
-   ServerFloat("Score multiplier",  c"x", "lith_sv_scoremul",   0, 10);
-   ServerBool("Explode on death",         "lith_sv_revenge");
-   ServerInt("Autosave Interval", c"min", "lith_sv_autosave",   0, 30);
-   ServerBool("Disable phantoms",                       "lith_sv_nobosses");
-   ServerBool("Don't pick up ammo when full",           "lith_sv_nofullammo");
-   ServerBool("Don't give score when picking up ammo",  "lith_sv_noscoreammo");
-   ServerBool("Drop shotguns from zombies",             "lith_sv_wepdrop");
-   ServerBool("Pause while in menu",                    "lith_sv_pauseinmenus");
+   ServerInt("Difficulty Base",     c"%", CVAR "sv_difficulty", 1, 100);
+   ServerFloat("Score multiplier",  c"x", CVAR "sv_scoremul",   0, 10);
+   ServerBool("Explode on death",         CVAR "sv_revenge");
+   ServerInt("Autosave Interval", c"min", CVAR "sv_autosave",   0, 30);
+   ServerBool("Disable phantoms",                       CVAR "sv_nobosses");
+   ServerBool("Don't pick up ammo when full",           CVAR "sv_nofullammo");
+   ServerBool("Don't give score when picking up ammo",  CVAR "sv_noscoreammo");
+   ServerBool("Drop shotguns from zombies",             CVAR "sv_wepdrop");
+   ServerBool("Pause while in menu",                    CVAR "sv_pauseinmenus");
 }
 
 Category("GUI");
-Float("Horizontal cursor speed", c"x", "lith_gui_xmul", 0.1, 2.0);
-Float("Vertical cursor speed",   c"x", "lith_gui_ymul", 0.1, 2.0);
-Enum("Color theme",                    "lith_gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
-Enum("Cursor",                         "lith_gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
-Enum("Japanese font",                  "lith_gui_jpfont", 0, font_num-1, "%S", FontName(set));
+Float("Horizontal cursor speed", c"x", CVAR "gui_xmul", 0.1, 2.0);
+Float("Vertical cursor speed",   c"x", CVAR "gui_ymul", 0.1, 2.0);
+Enum("Color theme",                    CVAR "gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
+Enum("Cursor",                         CVAR "gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
+Enum("Japanese font",                  CVAR "gui_jpfont", 0, font_num-1, "%S", FontName(set));
 Text("To use Japanese language, type \"language jp\" into the console.");
 
 Category("Player");
-Float("Damage bob multiplier",      c"x", "lith_player_damagebobmul", 0.0, 1.0);
-Bool("Bob view when damaged",             "lith_player_damagebob");
-Float("Footstep volume",            c"x", "lith_player_footstepvol",  0.0, 1.0);
-Float("View tilt",                  c"x", "lith_player_viewtilt",     0.0, 1.0);
-Bool("Log score gained",                  "lith_player_scorelog");
-Bool("Play a sound when score is gained", "lith_player_scoresound");
-Bool("Play sounds on the results screen", "lith_player_resultssound");
-Bool("Invert mouse in netgames (hack)",   "lith_player_invertmouse");
-Bool("Enable rain shader",                "lith_player_rainshader");
-Bool("Alternate invulnerability palette", "lith_player_altinvuln");
+Float("Damage bob multiplier",      c"x", CVAR "player_damagebobmul", 0.0, 1.0);
+Bool("Bob view when damaged",             CVAR "player_damagebob");
+Float("Footstep volume",            c"x", CVAR "player_footstepvol",  0.0, 1.0);
+Float("View tilt",                  c"x", CVAR "player_viewtilt",     0.0, 1.0);
+Bool("Log score gained",                  CVAR "player_scorelog");
+Bool("Play a sound when score is gained", CVAR "player_scoresound");
+Bool("Play sounds on the results screen", CVAR "player_resultssound");
+Bool("Invert mouse in netgames (hack)",   CVAR "player_invertmouse");
+Bool("Enable rain shader",                CVAR "player_rainshader");
+Bool("Alternate invulnerability palette", CVAR "player_altinvuln");
 
 Category("Items");
-Bool("Teleport in bought items and upgrades", "lith_player_teleshop");
-Bool("Stupid pickup messages",                "lith_player_stupidpickups");
-Bool("Log ammo pickups",                      "lith_player_ammolog");
+Bool("Teleport in bought items and upgrades", CVAR "player_teleshop");
+Bool("Stupid pickup messages",                CVAR "player_stupidpickups");
+Bool("Log ammo pickups",                      CVAR "player_ammolog");
 if(p->num == 0) {
-   ServerBool("Bright weapon pickups", "lith_player_brightweps");
-   ServerBool("No item effects",       "lith_player_noitemfx");
+   ServerBool("Bright weapon pickups", CVAR "player_brightweps");
+   ServerBool("No item effects",       CVAR "player_noitemfx");
 }
 
 Category("Weapons");
-Float("Scope zoom factor", c"x", "lith_weapons_zoomfactor", 1.0, 10.0);
-Float("Scope opacity",     c"x", "lith_weapons_scopealpha", 0.0, 1.0);
-Float("Weapon opacity",    c"x", "lith_weapons_alpha",      0.0, 1.0);
-Float("Recoil amount",     c"x", "lith_weapons_recoil",     0.0, 1.0);
-Float("Reload bob",        c"x", "lith_weapons_reloadbob",  0.0, 1.0);
-Bool("Slot 3 weapons take ammo", "lith_weapons_slot3ammo");
+Float("Scope zoom factor", c"x", CVAR "weapons_zoomfactor", 1.0, 10.0);
+Float("Scope opacity",     c"x", CVAR "weapons_scopealpha", 0.0, 1.0);
+Float("Weapon opacity",    c"x", CVAR "weapons_alpha",      0.0, 1.0);
+Float("Recoil amount",     c"x", CVAR "weapons_recoil",     0.0, 1.0);
+Float("Reload bob",        c"x", CVAR "weapons_reloadbob",  0.0, 1.0);
+Bool("Slot 3 weapons take ammo", CVAR "weapons_slot3ammo");
 if(p->pclass == pcl_marine) {
-   Bool("Modal Rifle scope",          "lith_weapons_riflescope");
-   Bool("Clear rifle mode on switch", "lith_weapons_riflemodeclear");
+   Bool("Modal Rifle scope",          CVAR "weapons_riflescope");
+   Bool("Clear rifle mode on switch", CVAR "weapons_riflemodeclear");
 } else if(p->pclass == pcl_cybermage) {
-   Bool("Magic selection animations", "lith_weapons_magicselanims");
+   Bool("Magic selection animations", CVAR "weapons_magicselanims");
 }
 if(p->num == 0) {
-   ServerBool("Emit casings from weapons",   "lith_weapons_casings");
-   ServerBool("Drop magazines from weapons", "lith_weapons_magdrops");
-   ServerBool("Casings fade out",            "lith_weapons_casingfadeout");
-   ServerBool("Magazines fade out",          "lith_weapons_magfadeout");
+   ServerBool("Emit casings from weapons",   CVAR "weapons_casings");
+   ServerBool("Drop magazines from weapons", CVAR "weapons_magdrops");
+   ServerBool("Casings fade out",            CVAR "weapons_casingfadeout");
+   ServerBool("Magazines fade out",          CVAR "weapons_magfadeout");
    if(p->pclass == pcl_marine) {
-      ServerBool("Rainbow lasers", "lith_weapons_rainbowlaser");
+      ServerBool("Rainbow lasers", CVAR "weapons_rainbowlaser");
    }
 }
 
 Category("Heads Up Display");
-Bool("Show score",                    "lith_hud_showscore");
-Bool("Show level",                    "lith_hud_showlvl");
-Bool("Show weapons",                  "lith_hud_showweapons");
-Bool("Show log",                      "lith_hud_showlog");
-Bool("Draw log from top of screen",   "lith_hud_logfromtop");
-Bool("Large log",                     "lith_hud_logbig");
-Bool("Draw reactive armor indicator", "lith_hud_showarmorind");
+Bool("Show score",                    CVAR "hud_showscore");
+Bool("Show level",                    CVAR "hud_showlvl");
+Bool("Show weapons",                  CVAR "hud_showweapons");
+Bool("Show log",                      CVAR "hud_showlog");
+Bool("Draw log from top of screen",   CVAR "hud_logfromtop");
+Bool("Large log",                     CVAR "hud_logbig");
+Bool("Draw reactive armor indicator", CVAR "hud_showarmorind");
 
-Int("Crosshair red",    c"/255", "lith_xhair_r",     0, 255);
-Int("Crosshair green",  c"/255", "lith_xhair_g",     0, 255);
-Int("Crosshair blue",   c"/255", "lith_xhair_b",     0, 255);
-Int("Crosshair alpha",  c"/255", "lith_xhair_a",     0, 255);
-Enum("Crosshair style",          "lith_xhair_style", 1,  10, "%S", XHairName(set));
-Bool("Crosshair enabled",        "lith_xhair_enable");
-Bool("Crosshair juicer enabled", "lith_xhair_enablejuicer");
+Int("Crosshair red",    c"/255", CVAR "xhair_r",     0, 255);
+Int("Crosshair green",  c"/255", CVAR "xhair_g",     0, 255);
+Int("Crosshair blue",   c"/255", CVAR "xhair_b",     0, 255);
+Int("Crosshair alpha",  c"/255", CVAR "xhair_a",     0, 255);
+Enum("Crosshair style",          CVAR "xhair_style", 1,  10, "%S", XHairName(set));
+Bool("Crosshair enabled",        CVAR "xhair_enable");
+Bool("Crosshair juicer enabled", CVAR "xhair_enablejuicer");
 
 Category("Vital Scanner");
-Int("X offset",  c"px", "lith_scanner_xoffs", -160, 160);
-Int("Y offset",  c"px", "lith_scanner_yoffs", -180,  20);
-Enum("Color",           "lith_scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set));
-Bool("Slide to target", "lith_scanner_slide");
-Bool("Health bar",      "lith_scanner_bar");
-Bool("Alternate font",  "lith_scanner_altfont");
+Int("X offset",  c"px", CVAR "scanner_xoffs", -160, 160);
+Int("Y offset",  c"px", CVAR "scanner_yoffs", -180,  20);
+Enum("Color",           CVAR "scanner_color", 'a', 'v', "\C%c%S", set, ColorName(set));
+Bool("Slide to target", CVAR "scanner_slide");
+Bool("Health bar",      CVAR "scanner_bar");
+Bool("Alternate font",  CVAR "scanner_altfont");
 
 if(p->num == 0) {
    Category("World");
-   ServerBool("Rain in outside areas", "lith_sv_rain");
-   ServerBool("Replace skies",         "lith_sv_sky");
+   ServerBool("Rain in outside areas", CVAR "sv_rain");
+   ServerBool("Replace skies",         CVAR "sv_sky");
 }
 
 #undef Category

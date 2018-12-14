@@ -18,8 +18,8 @@ void Lith_DOGS()
       {
          fixed ang = ACS_RandomFixed(0, 1);
          fixed dst = ACS_RandomFixed(0, 64);
-         ACS_SpawnForced("Lith_Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
-         InvGive("Lith_Alerter", 1);
+         ACS_SpawnForced(OBJ "Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
+         InvGive(OBJ "Alerter", 1);
          ACS_Delay(10);
       }
 
@@ -69,7 +69,7 @@ void Lith_BarrierBullets()
       fixed c     = ACS_Cos(ang) * 48.0;
       fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);
 
-      ACS_SpawnForced("Lith_BarrierFX", p->x + c, p->y + s, z);
+      ACS_SpawnForced(OBJ "BarrierFX", p->x + c, p->y + s, z);
       ACS_LineAttack(p->tid, ang + ACS_RandomFixed(-0.1, 0.1), PITCH_BASE + ACS_RandomFixed(0.45, 0.55), 10);
    }
 }
@@ -90,8 +90,8 @@ void Lith_GetSigil()
 
       p->sgacquired = true;
 
-      ACS_Thing_Remove(InvNum("Lith_DivisionSigilSpriteTID"));
-      InvTake("Lith_DivisionSigilSpriteTID", 0x7FFFFFFF);
+      ACS_Thing_Remove(InvNum(OBJ "DivisionSigilSpriteTID"));
+      InvTake(OBJ "DivisionSigilSpriteTID", 0x7FFFFFFF);
 
       if(world.dbgLevel)
          return;

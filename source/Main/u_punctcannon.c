@@ -12,7 +12,7 @@ void Lith_PunctuatorFire(void)
    {
       int ptid = ACS_UniqueTID();
 
-      ACS_LineAttack(0, p->yaw, p->pitch, 128, "Lith_PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);
+      ACS_LineAttack(0, p->yaw, p->pitch, 128, OBJ "PunctuatorPuff", "None", 2048.0, FHF_NORANDOMPUFFZ, ptid);
 
       if(ACS_ThingCount(T_NONE, ptid))
       {
@@ -36,7 +36,7 @@ void Lith_PunctuatorFire(void)
 
             int etid = ACS_UniqueTID();
 
-            ACS_SpawnForced("Lith_PunctuatorExplosion", sx, sy, sz, etid);
+            ACS_SpawnForced(OBJ "PunctuatorExplosion", sx, sy, sz, etid);
 
             ACS_SetActivator(etid);
             ACS_SetPointer(AAPTR_TARGET, p->tid);
@@ -49,7 +49,7 @@ void Lith_PunctuatorFire(void)
 stkcall
 void Upgr_PunctCannon_Deactivate(struct player *p, upgrade_t *upgr)
 {
-   InvGive("Lith_GTFO", 1);
+   InvGive(OBJ "GTFO", 1);
 }
 
 // EOF

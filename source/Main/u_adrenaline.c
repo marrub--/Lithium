@@ -9,7 +9,7 @@
 stkcall
 void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
 {
-   InvTake("Lith_AdrenalineToken", 1);
+   InvTake(OBJ "AdrenalineToken", 1);
 }
 
 script
@@ -31,26 +31,26 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
    else
    {
       // Ready
-      if(!InvNum("Lith_AdrenalineToken"))
-         InvGive("Lith_AdrenalineProjectileChecker", 1);
+      if(!InvNum(OBJ "AdrenalineToken"))
+         InvGive(OBJ "AdrenalineProjectileChecker", 1);
 
       // Use
-      if(InvNum("Lith_AdrenalineToken"))
+      if(InvNum(OBJ "AdrenalineToken"))
       {
-         InvTake("Lith_AdrenalineToken", 1);
+         InvTake(OBJ "AdrenalineToken", 1);
 
          ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
          p->logH(4, "Adrenaline administered.");
 
          UData.charge = UData.readied = 0;
 
-         InvGive("Lith_TimeHax2", 1);
+         InvGive(OBJ "TimeHax2", 1);
          ACS_Delay(36);
-         InvTake("Lith_TimeHax2", 1);
+         InvTake(OBJ "TimeHax2", 1);
       }
    }
 
-   InvTake("Lith_AdrenalineToken", 1);
+   InvTake(OBJ "AdrenalineToken", 1);
 }
 
 stkcall

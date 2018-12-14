@@ -27,7 +27,7 @@ void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
       for(fixed i = absvel; i >= 100; i -= 100)
       {
          int tid;
-         ACS_SpawnForced("Lith_ExplodoBoots", p->x, p->y, p->z, tid = ACS_UniqueTID());
+         ACS_SpawnForced(OBJ "ExplodoBoots", p->x, p->y, p->z, tid = ACS_UniqueTID());
          ACS_SetActivator(tid);
          ACS_SetPointer(AAPTR_TARGET, p->tid);
          p->setActivator();

@@ -13,7 +13,7 @@ static void HUD_Ammo(struct player *p)
    __str typebg;
    int y;
 
-   if(p->getCVarI("lith_hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
+   if(p->getCVarI(CVAR "hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
    else                                    {y = 0;  typebg = ":HUD:SplitFront";}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo)
@@ -139,7 +139,7 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
    Lith_HUD_Score(p, "%S\Cnscr", p->score, "cnfont", "j", 320,2, 3,1);
 
-   if(p->getCVarI("lith_hud_showweapons"))
+   if(p->getCVarI(CVAR "hud_showweapons"))
       PrintSprite(":HUD:Bar", 279,2, 238,2);
 
    Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, "k", 282, 237);

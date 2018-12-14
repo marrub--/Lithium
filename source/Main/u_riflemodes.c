@@ -17,7 +17,7 @@ script ext("ACS")
 void Lith_ResetRifleMode()
 {
    withplayer(LocalPlayer)
-      if(p->getCVarI("lith_weapons_riflemodeclear"))
+      if(p->getCVarI(CVAR "weapons_riflemodeclear"))
          p->riflefiremode = 0;
 }
 
@@ -32,7 +32,7 @@ void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
 {
    if(p->weapontype != weapon_rifle) return;
 
-   if(p->getCVarI("lith_weapons_riflescope") &&
+   if(p->getCVarI(CVAR "weapons_riflescope") &&
       p->riflefiremode == rifle_firemode_burst)
    {
       SetClip(40, 108, 240, 40);

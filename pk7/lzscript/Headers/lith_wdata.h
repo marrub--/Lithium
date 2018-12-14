@@ -3,7 +3,7 @@
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 
-enum Lith_WData
+enum WData
 {
    wdata_bossspawned,
    wdata_enemycheck,
@@ -14,12 +14,12 @@ enum Lith_WData
    wdata_pclass,
 };
 
-enum Lith_Fun
+enum Fun
 {
    lfun_ragnarok = 1 << 0,
 };
 
-enum Lith_CBIUpgradeM
+enum CBIUpgradeM
 {
    cupg_weapninter,
    cupg_hasupgr1,
@@ -30,7 +30,7 @@ enum Lith_CBIUpgradeM
    cupg_max
 };
 
-enum Lith_CBIUpgradeC
+enum CBIUpgradeC
 {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
@@ -40,7 +40,7 @@ enum Lith_CBIUpgradeC
    cupg_c_rdistinter,
 };
 
-enum Lith_RandomSpawnNum
+enum RandomSpawnNum
 {
    lrsn_garmor,
    lrsn_barmor,
@@ -50,7 +50,7 @@ enum Lith_RandomSpawnNum
    lrsn_clipbx,
 };
 
-enum Lith_ArmorSlot
+enum ArmorSlot
 {
    aslot_lower,
    aslot_upper,
@@ -59,7 +59,7 @@ enum Lith_ArmorSlot
    aslot_max
 };
 
-enum Lith_MsgType
+enum MsgType
 {
    msg_ammo,
    msg_huds,
@@ -68,7 +68,7 @@ enum Lith_MsgType
 };
 
 
-enum Lith_DamageType
+enum LDamageType
 {
    ldt_bullets,
    ldt_energy,

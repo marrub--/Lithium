@@ -39,7 +39,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       helptrns += 0.3;
    }
 
-   PrintTextStr(Language("LITH_ATTR_HELP_%s", name));
+   PrintTextStr(Language(LANG "ATTR_HELP_%s", name));
    PrintTextA("chfont", CR_WHITE, x+1,1, y+1,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);

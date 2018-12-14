@@ -27,12 +27,12 @@ void Lith_DoRain()
          rain_py = p->y;
       }
       else
-         InvTake("Lith_SMGHeat", 1);
+         InvTake(OBJ "SMGHeat", 1);
 
       if((InHell || InSecret) && !world.islithmap)
-         ServCallI("SpawnRain", "Lith_BloodRainDrop");
+         ServCallI("SpawnRain", OBJ "BloodRainDrop");
       else
-         ServCallI("SpawnRain", "Lith_RainDrop");
+         ServCallI("SpawnRain", OBJ "RainDrop");
 
       ACS_Delay(1);
 

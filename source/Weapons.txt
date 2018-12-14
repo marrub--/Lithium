@@ -34,13 +34,13 @@ Percent denotes flags. Any other text is ignored by the parser.
 ;c_fist cfist c_mateba c_rifle c_spas c_smg c_sniper c_plasma c_shipgun
 
 %wf_magic
-+c_blade    0 Blade    Placeholder1 Ammo "Lith_Mana"
-+c_delear   0 Delear   Placeholder1 AMag "Lith_Mana"
-+c_fire     0 Feuer    Placeholder1 Ammo "Lith_Mana"
-+c_rend     0 Rend     Placeholder1 Ammo "Lith_Mana"
-+c_hulgyon  0 Hulgyon  Placeholder1 Ammo "Lith_Mana"
-+c_starshot 0 StarShot Placeholder1 AMag "Lith_Mana"
-+c_cercle   0 Cercle   Placeholder1 Ammo "Lith_Mana"
++c_blade    0 Blade    Placeholder1 Ammo O("Mana")
++c_delear   0 Delear   Placeholder1 AMag O("Mana")
++c_fire     0 Feuer    Placeholder1 Ammo O("Mana")
++c_rend     0 Rend     Placeholder1 Ammo O("Mana")
++c_hulgyon  0 Hulgyon  Placeholder1 Ammo O("Mana")
++c_starshot 0 StarShot Placeholder1 AMag O("Mana")
++c_cercle   0 Cercle   Placeholder1 Ammo O("Mana")
 %
 
 :darklord

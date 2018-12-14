@@ -35,18 +35,18 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namef
 
    bool delivered = false;
 
-   if(!nodelivery && p->getCVarI("lith_player_teleshop"))
+   if(!nodelivery && p->getCVarI(CVAR "player_teleshop"))
    {
       int pufftid;
       int tid;
 
-      ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 128.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+      ACS_LineAttack(0, p->yaw, p->pitch, 0, OBJ "Dummy", OBJ "NoDamage", 128.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
 
       fixed x = GetX(pufftid);
       fixed y = GetY(pufftid);
       fixed z = GetZ(pufftid);
 
-      if((x || y || z) && ACS_Spawn("Lith_BoughtItem", x, y, z, tid = ACS_UniqueTID()))
+      if((x || y || z) && ACS_Spawn(OBJ "BoughtItem", x, y, z, tid = ACS_UniqueTID()))
       {
          if(def->shopGive(p, def, obj, tid))
             p->logH(1, "\CjItem delivered.");

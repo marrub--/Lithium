@@ -10,7 +10,7 @@ void Upgr_Goldeneye_Update(struct player *p, upgrade_t *upgr)
    {
       fixed dist = ACS_RandomFixed(128, 256);
       fixed angl = ACS_RandomFixed(0, 1);
-      ACS_SpawnForced("Lith_GEExplosion", p->x + ACS_Cos(angl) * dist, p->y + ACS_Sin(angl) * dist, p->z + 32);
+      ACS_SpawnForced(OBJ "GEExplosion", p->x + ACS_Cos(angl) * dist, p->y + ACS_Sin(angl) * dist, p->z + 32);
    }
 }
 

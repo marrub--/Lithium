@@ -7,19 +7,29 @@ def writehead out
    out.write "// Edit only if you aren't going to recompile.\n\n"
 end
 
-def tozsc fp, out
+def tozsc lns, out
    writehead out
 
-   for ln in fp
+   for ln in lns
       out.write ln.chomp.sub(/enum \/\/ /, "enum ") + "\n"
    end
 end
 
 for arg in ARGV
-   fp = open(arg, "rt")
-   zsc = fp.gets[15..-1].chomp
-   fp.gets
-   tozsc fp, open(zsc, "wt")
+   fp = open arg, "rt"
+   lns = fp.readlines()
+   zscs = []
+   loop do
+      ln = lns.shift
+      if ln.start_with? "// zsc output: "
+         zscs << ln[15..-1].chomp
+      else
+         break
+      end
+   end
+   for zsc in zscs
+      tozsc lns, open(zsc, "wt")
+   end
 end
 
 ## EOF

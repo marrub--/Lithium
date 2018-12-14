@@ -28,7 +28,7 @@ void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
       fixed angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
       ACS_PlaySound(0, "player/rocketboost");
-      InvGive("Lith_RocketBooster", 1);
+      InvGive(OBJ "RocketBooster", 1);
       p->setVel(p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
 
       UData.charge = 0;

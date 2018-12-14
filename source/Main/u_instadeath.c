@@ -7,7 +7,7 @@ script
 void Upgr_InstaDeath_Update(struct player *p, upgrade_t *upgr)
 {
    if(p->health < p->oldhealth)
-      InvGive("Lith_Die", 1);
+      InvGive(OBJ "Die", 1);
 }
 
 // EOF

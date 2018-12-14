@@ -35,8 +35,8 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
       bip->lastcategory = BIPC_MAIN;
 
       __str const lines[] = {
-         L("LITH_BIP_HELP_Search"),
-#define LITH_X(name, capt) L("LITH_BIP_HELP_" capt),
+         L(LANG "BIP_HELP_Search"),
+#define LITH_X(name, capt) L(LANG "BIP_HELP_" capt),
 #include "lith_bip.h"
       };
 
@@ -46,12 +46,12 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          PrintTextA("cbifont", CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
       }
 
-      if(Lith_GUI_Button(g, LC(c"LITH_BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
+#pragma GDCC STRENT_LITERAL OFF
+      if(Lith_GUI_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
          bip->curcategory = BIPC_SEARCH;
       n += 10;
-#pragma GDCC STRENT_LITERAL OFF
 #define LITH_X(name, capt) \
-      if(Lith_GUI_Button_Id(g, BIPC_##name, LC("LITH_BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
+      if(Lith_GUI_Button_Id(g, BIPC_##name, LC(LANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = null; \

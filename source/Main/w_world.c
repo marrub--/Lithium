@@ -40,10 +40,10 @@ int Lith_UniqueID(int tid)
    if((pn = Lith_GetPlayerNumber(tid)) != -1) return -(pn + 1);
 
    // If we already have a unique identifier, return that.
-   int id = Lith_CheckActorInventory(tid, "Lith_UniqueID");
+   int id = Lith_CheckActorInventory(tid, OBJ "UniqueID");
 
    // Otherwise we have to give a new unique identifier.
-   if(id == 0) Lith_GiveActorInventory(tid, "Lith_UniqueID", id = ++mapid);
+   if(id == 0) Lith_GiveActorInventory(tid, OBJ "UniqueID", id = ++mapid);
 
    return id;
 }
@@ -60,13 +60,13 @@ static void CheckEnemyCompat(void)
    if(ACS_SpawnForced("ZombieMan", 0, 0, 0, tid = ACS_UniqueTID(), 0))
    {
       ACS_SetActivator(tid);
-      InvGive("Lith_EnemyChecker", 1);
+      InvGive(OBJ "EnemyChecker", 1);
 
       __str cl = ACS_GetActorClass(0);
 
       LogDebug(log_dev, "Enemy check on %S", cl);
 
-      if(strstr_str(cl, "Lith_") || ACS_StrCmp(cl, "RLFormer", 8) == 0)
+      if(strstr_str(cl, OBJ) || ACS_StrCmp(cl, "RLFormer", 8) == 0)
          world.enemycompat = true;
 
       if(ServCallI("IsHeretic") || ServCallI("IsChex"))
@@ -93,15 +93,15 @@ static void SpawnBoss()
 
 static void GetDebugInfo(void)
 {
-   bool all = ACS_GetCVar("__lith_debug_all");
+   bool all = ACS_GetCVar(DCVAR "debug_all");
 
-   world.dbgLevel =        ACS_GetCVar("__lith_debug_level");
-   world.dbgItems = all || ACS_GetCVar("__lith_debug_items");
-   world.dbgBIP   = all || ACS_GetCVar("__lith_debug_bip");
-   world.dbgScore = all || ACS_GetCVar("__lith_debug_score");
-   world.dbgUpgr  = all || ACS_GetCVar("__lith_debug_upgrades");
-   world.dbgSave  = all || ACS_GetCVar("__lith_debug_save");
-   world.dbgNoMon =        ACS_GetCVar("__lith_debug_nomonsters");
+   world.dbgLevel =        ACS_GetCVar(DCVAR "debug_level");
+   world.dbgItems = all || ACS_GetCVar(DCVAR "debug_items");
+   world.dbgBIP   = all || ACS_GetCVar(DCVAR "debug_bip");
+   world.dbgScore = all || ACS_GetCVar(DCVAR "debug_score");
+   world.dbgUpgr  = all || ACS_GetCVar(DCVAR "debug_upgrades");
+   world.dbgSave  = all || ACS_GetCVar(DCVAR "debug_save");
+   world.dbgNoMon =        ACS_GetCVar(DCVAR "debug_nomonsters");
 }
 
 static void CheckModCompat(void)
@@ -116,21 +116,21 @@ static void CheckModCompat(void)
 static void UpdateGame(void)
 {
    #define Update(n) \
-      if(ACS_GetCVarFixed("__lith_version") < n) \
-         __with(ACS_SetCVarFixed("__lith_version", n);)
+      if(ACS_GetCVarFixed(DCVAR "version") < n) \
+         __with(ACS_SetCVarFixed(DCVAR "version", n);)
 
    Update(Lith_v1_5_1)
-      ACS_SetCVarFixed("lith_sv_scoremul", 1.25); // 2.0 => 1.25
+      ACS_SetCVarFixed(CVAR "sv_scoremul", 1.25); // 2.0 => 1.25
 
    Update(Lith_v1_5_2)
-      ACS_SetCVar("lith_sv_difficulty", 10); // 1 => 10
+      ACS_SetCVar(CVAR "sv_difficulty", 10); // 1 => 10
 
    Update(Lith_v1_6_0)
    {
       Lith_ForPlayer()
       {
-         p->setCVarK("lith_player_footstepvol", 0.2); // 1.0 => 0.2
-         p->setCVarI("lith_player_ammolog", true); // false => true
+         p->setCVarK(CVAR "player_footstepvol", 0.2); // 1.0 => 0.2
+         p->setCVarI(CVAR "player_ammolog", true); // false => true
       }
    }
 
@@ -138,7 +138,7 @@ static void UpdateGame(void)
    {
       Lith_ForPlayer()
       {
-         p->setCVarK("lith_weapons_zoomfactor", 1.5); // 3.0 => 1.5
+         p->setCVarK(CVAR "weapons_zoomfactor", 1.5); // 3.0 => 1.5
       }
    }
    #undef Update
@@ -169,7 +169,7 @@ static void GSInit(void)
 
       CheckEnemyCompat();
 
-      world.game         = ACS_GetCVar("__lith_game");
+      world.game         = ACS_GetCVar(DCVAR "game");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
       world.cbiperf = 10;
@@ -188,7 +188,7 @@ static void MInit(void)
    Lith_LoadMapDialogue();
 
    world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
-   world.pauseinmenus = world.singleplayer && ACS_GetCVar("lith_sv_pauseinmenus");
+   world.pauseinmenus = world.singleplayer && ACS_GetCVar(CVAR "sv_pauseinmenus");
 
    world.soulsfreed = 0;
 
@@ -196,7 +196,7 @@ static void MInit(void)
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
 
    // Init global score multiplier per-map.
-   world.scoremul = roundlk(ACS_GetCVarFixed("lith_sv_scoremul") * 10, 10) / 10;
+   world.scoremul = roundlk(ACS_GetCVarFixed(CVAR "sv_scoremul") * 10, 10) / 10;
 
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)
@@ -219,7 +219,7 @@ static void MSInit(void)
    // Line 1888300 is used as a control line for mod features.
    // Check for if rain should be used.
    if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
-      (ACS_GetCVar("lith_sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")) &&
+      (ACS_GetCVar(CVAR "sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")) &&
       ACS_PlayerCount() <= 1)
    {
       dorain = true;
@@ -239,7 +239,7 @@ static void WSInit(void)
    if(world.unloaded)
       world.mapscleared++;
 
-   if(ACS_GetCVar("lith_sv_sky") && !world.islithmap)
+   if(ACS_GetCVar(CVAR "sv_sky") && !world.islithmap)
    {
       if(InHell)
       {
@@ -259,7 +259,7 @@ static void WInit(void)
 
    LogDebug(log_dev, "WINIT RUNNING");
 
-   if(!ACS_GetCVar("lith_sv_nobosses"))
+   if(!ACS_GetCVar(CVAR "sv_nobosses"))
       SpawnBoss();
 
    // Payout, which is not done on the first map.
@@ -285,7 +285,7 @@ static void WInit(void)
       Message(== 10, 4, "Secret2");
    }
 
-   if(ACS_GetCVar("lith_sv_nobosses") || world.dbgItems)
+   if(ACS_GetCVar(CVAR "sv_nobosses") || world.dbgItems)
       for(int i = 0; i < cupg_max; i++)
          Lith_InstallCBIItem(i);
 }
@@ -312,11 +312,11 @@ begin:
 
    LogDebug(log_dev, "LITH OPEN");
 
-   if(ACS_GetCVar("lith_sv_failtime") == 0) for(;;)
+   if(ACS_GetCVar(CVAR "sv_failtime") == 0) for(;;)
    {
       Log("\n=======\n"
-          "The configuration for Lithium has been wiped, or you accidentally "
-          "set 'lith_sv_failtime' to 0 manually. If you did the latter, "
+          "The configuration for this mod has been wiped, or you accidentally "
+          "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
           "please set it to something else. Otherwise, please follow these "
           "instructions to fix your configuration:\n"
           "\n"
@@ -324,9 +324,9 @@ begin:
           "2. Find the configuration settings file (if you have extensions "
           "shown it will be the ini file in the folder) and open it.\n"
           "3. Find the heading '[Doom.Player.Mod]' and delete any lines "
-          "starting with 'lith_' or '__lith_' under it.\n"
+          "starting with '" CVAR "' or '" DCVAR "' under it.\n"
           "4. Find the heading '[Doom.LocalServerInfo.Mod]' and delete any "
-          "lines starting with 'lith_' or '__lith_' under it.\n"
+          "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
           "5. Save the file and start GZDoom again. If the issue persists "
           "try these steps again or delete your GZDoom configuration.\n"
           "\n\n\n\n");
@@ -383,7 +383,7 @@ begin:
          goto begin;
       }
 
-      if(world.ticks > ACS_GetCVar("lith_sv_failtime") * 35 * 60 * 60 && !world.islithmap)
+      if(world.ticks > ACS_GetCVar(CVAR "sv_failtime") * 35 * 60 * 60 && !world.islithmap)
       {
          ServCallI("SetEnding", "TimeOut");
          ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);

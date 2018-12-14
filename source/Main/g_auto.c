@@ -39,7 +39,7 @@ void Lith_GUI_Init(gui_state_t *g, void *state)
 stkcall
 void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 {
-   bool inverted = p->getCVarI("lith_player_invertmouse");
+   bool inverted = p->getCVarI(CVAR "player_invertmouse");
 
    // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
    // This breaks network sync so we can only do it in singleplayer.
@@ -48,8 +48,8 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 
    g->old = g->cur;
 
-   fixed xmul = p->getCVarK("lith_gui_xmul");
-   fixed ymul = p->getCVarK("lith_gui_ymul");
+   fixed xmul = p->getCVarK(CVAR "gui_xmul");
+   fixed ymul = p->getCVarK(CVAR "gui_ymul");
 
                 g->cx -= p->yawv   * (800.0lk * xmul);
    if(inverted) g->cy += p->pitchv * (800.0lk * ymul);

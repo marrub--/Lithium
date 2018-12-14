@@ -16,21 +16,21 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
    PrintTextStr(p->name);
    PrintText("SMALLFNT", CR_LIGHTBLUE, 20,1, 40,1);
 
-   Stat(L("LITH_STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
-   Stat(L("LITH_STAT_Weapons"),    "%i",   p->weaponsheld);
-   Stat(L("LITH_STAT_HealthUsed"), "%u",   p->healthused);
-   Stat(L("LITH_STAT_HealthSum"),  "%u",   p->healthsum);
-   Stat(L("LITH_STAT_ScoreUsed"),  "%lli", p->scoreused);
-   Stat(L("LITH_STAT_ScoreSum"),   "%lli", p->scoresum);
-   Stat(L("LITH_STAT_Secrets"),    "%i",   world.secretsfound);
-   Stat(L("LITH_STAT_Units"),      "%imu", p->unitstravelled);
-   Stat(L("LITH_STAT_Upgrades"),   "%i",   p->upgradesowned);
-   Stat(L("LITH_STAT_Items"),      "%i",   p->itemsbought);
-   Stat(L("LITH_STAT_Mail"),       "%i",   p->bip.mailreceived);
-   Stat(L("LITH_STAT_Time"),       "%li",  p->ticks / 35l);
-   Stat(L("LITH_STAT_Boom"),       "%i",   p->spuriousexplosions);
-   Stat(L("LITH_STAT_Brouzouf"),   "%i",   p->brouzouf);
-   Stat(L("LITH_STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
+   Stat(L(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
+   Stat(L(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);
+   Stat(L(LANG "STAT_HealthUsed"), "%u",   p->healthused);
+   Stat(L(LANG "STAT_HealthSum"),  "%u",   p->healthsum);
+   Stat(L(LANG "STAT_ScoreUsed"),  "%lli", p->scoreused);
+   Stat(L(LANG "STAT_ScoreSum"),   "%lli", p->scoresum);
+   Stat(L(LANG "STAT_Secrets"),    "%i",   world.secretsfound);
+   Stat(L(LANG "STAT_Units"),      "%imu", p->unitstravelled);
+   Stat(L(LANG "STAT_Upgrades"),   "%i",   p->upgradesowned);
+   Stat(L(LANG "STAT_Items"),      "%i",   p->itemsbought);
+   Stat(L(LANG "STAT_Mail"),       "%i",   p->bip.mailreceived);
+   Stat(L(LANG "STAT_Time"),       "%li",  p->ticks / 35l);
+   Stat(L(LANG "STAT_Boom"),       "%i",   p->spuriousexplosions);
+   Stat(L(LANG "STAT_Brouzouf"),   "%i",   p->brouzouf);
+   Stat(L(LANG "STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
 
    #undef Stat
 }

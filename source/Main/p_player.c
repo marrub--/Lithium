@@ -119,20 +119,20 @@ static void Lith_PlayerDeath(void)
 
    if(world.singleplayer)
    {
-      if(ACS_GetCVar("lith_sv_revenge"))
+      if(ACS_GetCVar(CVAR "sv_revenge"))
       {
          ACS_LocalAmbientSound("player/death1", 127);
          ACS_Delay(35);
-         InvGive("Lith_PlayerDeath", 1);
+         InvGive(OBJ "PlayerDeath", 1);
          ACS_Delay(25);
-         InvGive("Lith_PlayerDeathNuke", 1);
+         InvGive(OBJ "PlayerDeathNuke", 1);
          ACS_Delay(25);
       }
 
       while(p->dead)
       {
          ACS_Delay(35 * 5);
-         Log("%S", Language("LITH_DEATHMSG_%.2i", ACS_Random(1, 20)));
+         Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }
    }
 }
@@ -281,7 +281,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    fixed64 vol = 0.7lk * mul;
 
    // Play a sound when we pick up score
-   if(vol > 0.001lk && p->getCVarI("lith_player_scoresound"))
+   if(vol > 0.001lk && p->getCVarI(CVAR "player_scoresound"))
       ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
 
    // hue
@@ -292,7 +292,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 
    if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
       p->spuriousexplosions++;
-      ACS_SpawnForced("Lith_EXPLOOOSION", p->x, p->y, p->z);
+      ACS_SpawnForced(OBJ "EXPLOOOSION", p->x, p->y, p->z);
    }
 
    // Add score and set score accumulator
@@ -302,7 +302,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    p->scoreaccumtime += 20 * (mul * 2.0lk);
 
    // Log score
-   if(p->getCVarI("lith_player_scorelog"))
+   if(p->getCVarI(CVAR "player_scorelog"))
       p->logH(1, "+\Cj%lli\Cnscr", score);
 
    return score;
@@ -331,7 +331,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->logB(1, "%S", Language("LITH_LOG_BossWarn%s", p->discrim));
+      p->logB(1, "%S", Language(LANG "LOG_BossWarn%s", p->discrim));
 }
 
 // Run main loop scripts.

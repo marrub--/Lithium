@@ -9,7 +9,7 @@ stkcall
 void Upgr_StealthSys_Deactivate(struct player *p, upgrade_t *upgr)
 {
    p->alpha = 1;
-   InvTake("Lith_StealthSystem", 1);
+   InvTake(OBJ "StealthSystem", 1);
 }
 
 script
@@ -20,9 +20,9 @@ void Upgr_StealthSys_Update(struct player *p, upgrade_t *upgr)
 
    int time = UData.mulvel * 20;
    if(!time || ACS_Timer() % time == 0)
-      InvGive("Lith_StealthSystem", 1);
+      InvGive(OBJ "StealthSystem", 1);
    else
-      InvTake("Lith_StealthSystem", 1);
+      InvTake(OBJ "StealthSystem", 1);
 }
 
 // EOF

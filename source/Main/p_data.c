@@ -41,13 +41,18 @@ static void SetupAttributes(struct player *p)
 static void SetPClass(struct player *p)
 {
    __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
-           if(cl == "Lith_MarinePlayer"   ) p->pclass = pcl_marine;
-      else if(cl == "Lith_CyberMagePlayer") p->pclass = pcl_cybermage;
-      else if(cl == "Lith_InformantPlayer") p->pclass = pcl_informant;
-      else if(cl == "Lith_WandererPlayer" ) p->pclass = pcl_wanderer;
-      else if(cl == "Lith_AssassinPlayer" ) p->pclass = pcl_assassin;
-      else if(cl == "Lith_DarkLordPlayer" ) p->pclass = pcl_darklord;
-      else if(cl == "Lith_ThothPlayer"    ) p->pclass = pcl_thoth;
+      #if LITHIUM
+           if(cl == OBJ "MarinePlayer"   ) p->pclass = pcl_marine;
+      else if(cl == OBJ "CyberMagePlayer") p->pclass = pcl_cybermage;
+      else if(cl == OBJ "InformantPlayer") p->pclass = pcl_informant;
+      else if(cl == OBJ "WandererPlayer" ) p->pclass = pcl_wanderer;
+      else if(cl == OBJ "AssassinPlayer" ) p->pclass = pcl_assassin;
+      else if(cl == OBJ "DarkLordPlayer" ) p->pclass = pcl_darklord;
+      else if(cl == OBJ "ThothPlayer"    ) p->pclass = pcl_thoth;
+      #else
+      if(cl == OBJ "Player")
+         p->pclass = pcl_marine;
+      #endif
       else for(;;)
       {
          Log("Invalid player class detected, everything is going to explode!");
@@ -125,7 +130,7 @@ void Lith_PlayerUpdateData(struct player *p)
    p->name        = StrParam("%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
 
-   p->scopetoken = InvNum("Lith_WeaponScopedToken");
+   p->scopetoken = InvNum(OBJ "WeaponScopedToken");
 
    p->krc = InvNum("RedCard")     ||
             InvNum("ChexRedCard") ||
@@ -198,7 +203,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
       a->level++;
       a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
-      __with(int pts = 7;) switch(p->getCVarI("lith_player_lvsys"))
+      __with(int pts = 7;) switch(p->getCVarI(CVAR "player_lvsys"))
       {
       case atsys_manual: a->points += 7; break;
       case atsys_hybrid:
@@ -261,8 +266,8 @@ void Lith_ResetPlayer(struct player *p)
 
    // This keeps spawning more camera actors when you die, but that should be
    // OK as long as you don't die 2 billion times.
-   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
-   ACS_SpawnForced("Lith_CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
+   ACS_SpawnForced(OBJ "CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
+   ACS_SpawnForced(OBJ "CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
    if(world.dbgScore)
       p->score = 0xFFFFFFFFFFFFFFFFll;
@@ -276,7 +281,7 @@ void Lith_ResetPlayer(struct player *p)
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    SetPropK(0, APROP_ViewHeight, p->viewheight);
-   InvTake("Lith_WeaponScopedToken", 999);
+   InvTake(OBJ "WeaponScopedToken", 999);
 
    Lith_PlayerResetCBIGUI(p);
 
@@ -312,14 +317,14 @@ void Lith_ResetPlayer(struct player *p)
    // Static data
    if(!p->wasinit)
    {
-      p->logB(1, "Lithium " Lith_Version " :: Compiled %S", __DATE__);
+      p->logB(1, Lith_Version " :: Compiled %S", __DATE__);
 
       if(world.dbgLevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "strnull is \"%S\"", null);
          PrintDmonAllocSize(p);
       } else {
-         p->logH(1, L("LITH_LOG_StartGame"), "lith_k_opencbi");
+         p->logH(1, L(LANG "LOG_StartGame"), CVAR "k_opencbi");
       }
 
       p->deliverMail("Intro");

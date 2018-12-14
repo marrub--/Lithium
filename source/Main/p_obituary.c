@@ -19,14 +19,14 @@ void Lith_Obituary(void)
 
    int rn = ACS_Random(1, 5);
 
-        if(obit == "(falling)")  obit = Language("LITH_OB_Falling_%i",  rn);
-   else if(obit == "(crush)")    obit = Language("LITH_OB_Crush_%i",    rn);
-   else if(obit == "(exit)")     obit = Language("LITH_OB_Exit_%i",     rn);
-   else if(obit == "(drowning)") obit = Language("LITH_OB_Drowning_%i", rn);
-   else if(obit == "(slime)")    obit = Language("LITH_OB_Slime_%i",    rn);
-   else if(obit == "(fire)")     obit = Language("LITH_OB_Fire_%i",     rn);
-   else if(obit == "(suicide)")  obit = Language("LITH_OB_Suicide_%i",  rn);
-   else if(obit == "(default)")  obit = Language("LITH_OB_Default_%i",  rn);
+        if(obit == "(falling)")  obit = Language(LANG "OB_Falling_%i",  rn);
+   else if(obit == "(crush)")    obit = Language(LANG "OB_Crush_%i",    rn);
+   else if(obit == "(exit)")     obit = Language(LANG "OB_Exit_%i",     rn);
+   else if(obit == "(drowning)") obit = Language(LANG "OB_Drowning_%i", rn);
+   else if(obit == "(slime)")    obit = Language(LANG "OB_Slime_%i",    rn);
+   else if(obit == "(fire)")     obit = Language(LANG "OB_Fire_%i",     rn);
+   else if(obit == "(suicide)")  obit = Language(LANG "OB_Suicide_%i",  rn);
+   else if(obit == "(default)")  obit = Language(LANG "OB_Default_%i",  rn);
 
    ACS_BeginPrint();
 

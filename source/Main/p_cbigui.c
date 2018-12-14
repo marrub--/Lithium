@@ -20,14 +20,16 @@
 
 // Static Functions ----------------------------------------------------------|
 
+#pragma GDCC STRENT_LITERAL OFF
+
 static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
 {
    extern void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Shop    (gui_state_t *g, struct player *p);
 
    char tn[2][TABCHARS];
-   LanguageVC(tn[0], c"LITH_TAB_UPGRADES");
-   LanguageVC(tn[1], c"LITH_TAB_SHOP");
+   LanguageVC(tn[0], LANG "TAB_UPGRADES");
+   LanguageVC(tn[1], LANG "TAB_SHOP");
    Lith_GUI_Tabs(g, &CBIState(g)->arsetab, tn, 13, 13, 1);
 
    switch(CBIState(g)->arsetab) {
@@ -42,8 +44,8 @@ static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
    extern void Lith_CBITab_Status(gui_state_t *g, struct player *p);
 
    char tn[2][TABCHARS];
-   LanguageVC(tn[0], c"LITH_TAB_ATTRIBUTES");
-   LanguageVC(tn[1], c"LITH_TAB_CBI");
+   LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
+   LanguageVC(tn[1], LANG "TAB_CBI");
    Lith_GUI_Tabs(g, &CBIState(g)->stattab, tn, 13, 13, 1);
 
    switch(CBIState(g)->stattab) {
@@ -60,10 +62,10 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
    extern void Lith_CBITab_Notes     (gui_state_t *g, struct player *p);
 
    char tn[4][TABCHARS];
-   LanguageVC(tn[0], c"LITH_TAB_BIP");
-   LanguageVC(tn[1], c"LITH_TAB_LOG");
-   LanguageVC(tn[2], c"LITH_TAB_STATISTICS");
-   LanguageVC(tn[3], c"LITH_TAB_NOTES");
+   LanguageVC(tn[0], LANG "TAB_BIP");
+   LanguageVC(tn[1], LANG "TAB_LOG");
+   LanguageVC(tn[2], LANG "TAB_STATISTICS");
+   LanguageVC(tn[3], LANG "TAB_NOTES");
    Lith_GUI_Tabs(g, &CBIState(g)->infotab, tn, 13, 13, 1);
 
    switch(CBIState(g)->infotab) {
@@ -73,6 +75,8 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
    case cbi_tab_info_notes:      Lith_CBITab_Notes     (g, p); break;
    }
 }
+
+#pragma GDCC STRENT_LITERAL ON
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -90,7 +94,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
    gui_state_t *g = &p->cbi.guistate;
 
-   p->cbi.theme = p->getCVarI("lith_gui_theme");
+   p->cbi.theme = p->getCVarI(CVAR "gui_theme");
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
@@ -113,13 +117,15 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);
 
+#pragma GDCC STRENT_LITERAL OFF
    char tn[5][TABCHARS];
-   LanguageCV(tn[0], c"LITH_TAB_ARSENAL_%s", p->discrim);
-   LanguageVC(tn[1], c"LITH_TAB_STATUS");
-   LanguageVC(tn[2], c"LITH_TAB_INVENTORY");
-   LanguageVC(tn[3], c"LITH_TAB_INFO");
-   LanguageVC(tn[4], c"LITH_TAB_SETTINGS");
+   LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);
+   LanguageVC(tn[1], LANG "TAB_STATUS");
+   LanguageVC(tn[2], LANG "TAB_INVENTORY");
+   LanguageVC(tn[3], LANG "TAB_INFO");
+   LanguageVC(tn[4], LANG "TAB_SETTINGS");
    Lith_GUI_Tabs(g, &CBIState(g)->maintab, tn, 13, 13, 0);
+#pragma GDCC STRENT_LITERAL ON
 
    extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
@@ -132,7 +138,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }
 
-   Lith_GUI_End(g, p->getCVarI("lith_gui_cursor"));
+   Lith_GUI_End(g, p->getCVarI(CVAR "gui_cursor"));
 }
 
 void Lith_PlayerResetCBIGUI(struct player *p)

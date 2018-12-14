@@ -28,13 +28,15 @@ char const *Lith_CanonTime(int type)
    M = M % 12 + 1;
    Y = Y      + 1;
 
+#pragma GDCC STRENT_LITERAL OFF
    switch(type) {
-   case CANONTIME_FULL:  sprintf(ft, LC(c"LITH_TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
-   case CANONTIME_SHORT: sprintf(st, LC(c"LITH_TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
-   case CANONTIME_DATE:  sprintf(dt, LC(c"LITH_TIME_FMT_DATE"),           d, M, Y); return dt;
+   case CANONTIME_FULL:  sprintf(ft, LC(LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
+   case CANONTIME_SHORT: sprintf(st, LC(LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
+   case CANONTIME_DATE:  sprintf(dt, LC(LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
-   return c"";
+   return "";
+#pragma GDCC STRENT_LITERAL ON
 }
 
 stkcall
@@ -54,8 +56,8 @@ void Lith_FreezeTime(bool on)
 
          Lith_ForPlayer()
          {
-            Lith_GiveActorInventory(p->tid, "Lith_TimeHax", 1);
-            Lith_GiveActorInventory(p->tid, "Lith_TimeHax2", 1);
+            Lith_GiveActorInventory(p->tid, OBJ "TimeHax", 1);
+            Lith_GiveActorInventory(p->tid, OBJ "TimeHax2", 1);
             break;
          }
       }
@@ -69,7 +71,7 @@ void Lith_FreezeTime(bool on)
          Lith_ForPlayer()
          {
             Lith_TakeActorInventory(p->tid, "PowerTimeFreezer", 1);
-            Lith_TakeActorInventory(p->tid, "Lith_TimeHax2", 1);
+            Lith_TakeActorInventory(p->tid, OBJ "TimeHax2", 1);
             break;
          }
       }

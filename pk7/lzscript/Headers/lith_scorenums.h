@@ -2,7 +2,7 @@
 // Edit only if you aren't going to recompile.
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-enum Lith_ScoreNum
+enum ScoreNum
 {
    // Score values
    Score_Clip      = 1000,
@@ -50,7 +50,7 @@ enum Lith_ScoreNum
    Score_DSparil = 10000000, // Energy
 };
 
-enum Lith_EXPNum
+enum EXPNum
 {
    // Tier 1
    Exp_ZombieMan   = 5,

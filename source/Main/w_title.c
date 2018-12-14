@@ -1,4 +1,5 @@
 // Copyright © 2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 
 // Static Functions ----------------------------------------------------------|
@@ -38,8 +39,10 @@ void Lith_Title(void)
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   char const *txt = LC(c"LITH_OPENER");
+#pragma GDCC STRENT_LITERAL OFF
+   char const *txt = LC(LANG "OPENER");
    int len = strlen(txt);
+#pragma GDCC STRENT_LITERAL ON
 
    for(int t = 0, pos = 0;;)
    {
@@ -88,5 +91,6 @@ void Lith_Title(void)
       DrawCallI("LE");
    }
 }
+#endif
 
 // EOF

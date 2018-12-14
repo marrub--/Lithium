@@ -37,9 +37,9 @@ void Lith_Feuer(bool left, bool fire)
 {
    withplayer(LocalPlayer)
    {
-      __str actor = fire ? "Lith_FeuerExplosion" : "Lith_FeuerTest";
+      __str actor = fire ? OBJ "FeuerExplosion" : OBJ "FeuerTest";
       int pufftid;
-      ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024, FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+      ACS_LineAttack(0, p->yaw, p->pitch, 0, OBJ "Dummy", OBJ "NoDamage", 1024, FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
 
       int sx = p->x;
       int sy = p->y;
@@ -69,7 +69,7 @@ void Lith_Feuer(bool left, bool fire)
 
       if(fire) {
          int tid;
-         ACS_SpawnForced("Lith_FeuerFinal", ex, ey, ez, tid = ACS_UniqueTID());
+         ACS_SpawnForced(OBJ "FeuerFinal", ex, ey, ez, tid = ACS_UniqueTID());
          Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       }
    }
@@ -84,7 +84,7 @@ void Lith_Cercle(void)
 
       __with(int pufftid;)
       {
-         ACS_LineAttack(0, p->yaw, p->pitch, 0, "Lith_Dummy", "Lith_NoDamage", 1024,
+         ACS_LineAttack(0, p->yaw, p->pitch, 0, OBJ "Dummy", OBJ "NoDamage", 1024,
             FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
 
          ax = GetX(pufftid);
@@ -104,7 +104,7 @@ void Lith_Cercle(void)
          fixed py = ACS_Sin(i / 100.0) * 77;
          int tid;
 
-         ACS_SpawnForced("Lith_CircleParticle", ax + px, ay + py, az + 7, tid = ACS_UniqueTID());
+         ACS_SpawnForced(OBJ "CircleParticle", ax + px, ay + py, az + 7, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 100.0);
          Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
@@ -136,7 +136,7 @@ void Lith_Cercle(void)
          fixed py = ACS_Sin(i / 3.0) * 60;
          int tid;
 
-         ACS_SpawnForced("Lith_CircleSpearThrower", ax + px, ay + py, az + 24, tid = ACS_UniqueTID());
+         ACS_SpawnForced(OBJ "CircleSpearThrower", ax + px, ay + py, az + 24, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 3.0);
          Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
@@ -163,7 +163,7 @@ void Lith_MagicSelect(int num)
 {
    withplayer(LocalPlayer)
    {
-      if(!p->getCVarI("lith_weapons_magicselanims")) return;
+      if(!p->getCVarI(CVAR "weapons_magicselanims")) return;
 
       switch(num)
       {

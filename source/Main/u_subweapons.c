@@ -6,16 +6,16 @@
 script
 void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
 {
-   if(InvNum("Lith_SubweaponShots") < 2)
+   if(InvNum(OBJ "SubweaponShots") < 2)
    {
-      if(InvNum("Lith_SubweaponCharge") == InvMax("Lith_SubweaponCharge"))
+      if(InvNum(OBJ "SubweaponCharge") == InvMax(OBJ "SubweaponCharge"))
       {
          ACS_LocalAmbientSound("weapons/subweapon/charge", 127);
-         InvGive("Lith_SubweaponShots", 1);
-         InvTake("Lith_SubweaponCharge", 999);
+         InvGive(OBJ "SubweaponShots", 1);
+         InvTake(OBJ "SubweaponCharge", 999);
       }
       else
-         InvGive("Lith_SubweaponCharge", 1);
+         InvGive(OBJ "SubweaponCharge", 1);
    }
 }
 
@@ -24,9 +24,9 @@ void Upgr_Subweapons_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled) return;
 
-   int const sn = InvNum("Lith_SubweaponShots");
-   int const cn = InvNum("Lith_SubweaponCharge");
-   int const cm = InvMax("Lith_SubweaponCharge");
+   int const sn = InvNum(OBJ "SubweaponShots");
+   int const cn = InvNum(OBJ "SubweaponCharge");
+   int const cm = InvMax(OBJ "SubweaponCharge");
 
    PrintTextFmt("SHOTS: %i\nCHARGE: %i/%i", sn, cn, cm);
    PrintText("chfont", CR_WHITE, 10,1, 120,2);
