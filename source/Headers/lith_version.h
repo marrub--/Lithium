@@ -1,5 +1,9 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #define Lith_Version "Lithium 1.6.1 (Hyper-Trilithium)"
+#else
+#define Lith_Version "DoubleTap 1.0"
+#endif
 #define Lith_APIVersion Lith_v1_6_1
 #define Lith_CheckAPIVersion() \
    do { \

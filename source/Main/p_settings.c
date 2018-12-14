@@ -11,7 +11,9 @@ if(p->num == 0) {
    ServerBool("Don't pick up ammo when full",           CVAR "sv_nofullammo");
    ServerBool("Don't give score when picking up ammo",  CVAR "sv_noscoreammo");
    ServerBool("Drop shotguns from zombies",             CVAR "sv_wepdrop");
+   #if LITHIUM
    ServerBool("Pause while in menu",                    CVAR "sv_pauseinmenus");
+   #endif
 }
 
 Category("GUI");

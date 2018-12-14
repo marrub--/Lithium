@@ -1,0 +1,237 @@
+version "3.6"
+
+class DtUniqueID : Inventory {default {Inventory.MaxAmount int.max;}}
+
+class DtServer : EventHandler
+{
+   static clearscope int FindLump(string name)
+   {
+      return Wads.CheckNumForFullName(name);
+   }
+
+   static clearscope string ReadLump(int lump)
+   {
+      let s = Wads.ReadLump(lump);
+      s.replace("\\c", "\c");
+      return s;
+   }
+
+   static void Fun(int fun)
+   {
+   }
+}
+
+class DtRender : EventHandler
+{
+   struct DtRenderPlayerData
+   {
+      bool shiftDown;
+   }
+
+   transient ui DtRenderPlayerData m_pdata[MAXPLAYERS];
+
+   static clearscope DtRender Instance()
+      {return DtRender(Find("DtRender"));}
+}
+
+class DtStatusBar : BaseStatusBar
+{
+}
+
+class DtPlayer : DoomPlayer
+{
+   default
+   {
+      Player.SideMove 2, 1;
+      Player.ForwardMove 2, 1;
+      Player.AirCapacity 0;
+      Player.GruntSpeed 16;
+      Player.WeaponSlot 1, "Fist", "Chainsaw";
+      Player.WeaponSlot 2, "Pistol";
+      Player.WeaponSlot 3, "DtShotgun", "SuperShotgun";
+      Player.WeaponSlot 4, "Chaingun";
+      Player.WeaponSlot 5, "RocketLauncher";
+      Player.WeaponSlot 6, "PlasmaRifle";
+      Player.WeaponSlot 7, "BFG9000";
+      Species "DtPlayer";
+
+      +THRUSPECIES
+   }
+
+   bool m_grabInput;
+   bool m_onground;
+
+   int m_dmgfac;
+
+   override void PlayerThink()
+   {
+      if(CallACS("LPData", pdata_semifrozen))
+      {
+         UserCmd cmd = player.cmd;
+         cmd.pitch = cmd.yaw = cmd.roll = 0;
+         player.turnticks = 0;
+      }
+
+      m_onground = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
+
+      Super.PlayerThink();
+   }
+
+   override void Tick()
+   {
+      if(players[consoleplayer].camera == self)
+         DtRender.LE();
+      Super.Tick();
+   }
+
+   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
+   {
+      // ÜBER KLUDGE (override behaviour for DONTHARMSPECIES)
+      if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
+         return 0;
+
+      if(damage > 1)
+      {
+         if(m_dmgfac > 0) damage = max(1, damage * (100 - m_dmgfac) / 100);
+      }
+
+      return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+   }
+}
+
+class DtGreenArmor : GreenArmor {}
+class DtYellowArmor : DtGreenArmor
+   {default {Armor.SaveAmount 150; Translation "DtGreenToYellow";}}
+class DtBlueArmor : BlueArmor {}
+class DtPurpleArmor : DtBlueArmor
+   {default {Armor.SaveAmount 250; Translation "DtBlueToPurple";}}
+class DtArmorBonus  : ArmorBonus replaces ArmorBonus
+   {default {Armor.MaxSaveAmount 300;}}
+class DtSoulSphere : SoulSphere {}
+class DtRedSphere : DtSoulSphere
+   {default {Inventory.Amount 150; Inventory.MaxAmount 250; Translation "DtGreenToRed";}}
+
+class DtGreenArmorReplacer : RandomSpawner replaces GreenArmor
+{
+   default
+   {
+      DropItem "DtGreenArmor";
+      DropItem "DtYellowArmor";
+   }
+}
+
+class DtBlueArmorReplacer : RandomSpawner replaces BlueArmor
+{
+   default
+   {
+      DropItem "DtBlueArmor";
+      DropItem "DtPurpleArmor";
+   }
+}
+
+class DtSoulSphereReplacer : RandomSpawner replaces SoulSphere
+{
+   default
+   {
+      DropItem "DtSoulSphere";
+      DropItem "DtRedSphere";
+   }
+}
+
+class DtTimeHax  : PowerTimeFreezer {default {Powerup.Duration 1;}}
+class DtTimeHax2 : PowerTimeFreezer {default {Powerup.Duration -80;}}
+
+class DtShotgunFreeze : Powerup
+{
+   default
+   {
+      Powerup.Duration -2;
+   }
+
+   override void InitEffect()
+   {
+      int freezemask;
+
+      Super.InitEffect();
+
+      if(owner == null || owner.player == null) return;
+
+      // Give the player and his teammates the power to move when time is frozen.
+      freezemask = 1 << owner.PlayerNumber();
+      owner.player.timefreezer |= freezemask;
+      for(int i = 0; i < MAXPLAYERS; i++)
+         if(playeringame[i] && players[i].mo != null && players[i].mo.IsTeammate(Owner))
+            players[i].timefreezer |= freezemask;
+
+      // [RH] The effect ends one tic after the counter hits zero, so make
+      // sure we start at an odd count.
+      EffectTics += !(EffectTics & 1);
+      if((EffectTics & 1) == 0)
+         EffectTics++;
+      // Make sure the effect starts and ends on an even tic.
+      if((level.time & 1) == 0)
+         level.frozen = true;
+      // Compensate for skipped tic, but beware of overflow.
+      else if(EffectTics < 0x7fffffff)
+         EffectTics++;
+   }
+   override void DoEffect()
+   {
+      Super.DoEffect();
+      if(level.time & 1 || (owner != null && owner.player != null && owner.player.cheats & CF_PREDICTING))
+         return;
+      level.frozen = true;
+   }
+
+   override void EndEffect()
+   {
+      Super.EndEffect();
+
+      // If there is an owner, remove the timefreeze flag corresponding to
+      // her from all players.
+      if(owner != null && owner.player != null)
+      {
+         int freezemask = ~(1 << owner.PlayerNumber());
+         for (int i = 0; i < MAXPLAYERS; ++i)
+            players[i].timefreezer &= freezemask;
+      }
+
+      // Are there any players who still have timefreezer bits set?
+      for(int i = 0; i < MAXPLAYERS; ++i)
+         if(playeringame[i] && players[i].timefreezer != 0)
+            return;
+
+      // No, so allow other actors to move about freely once again.
+      level.frozen = false;
+   }
+}
+
+class DtShotgun : Shotgun replaces Shotgun
+{
+   states
+   {
+   Fire:
+      SHTG A 3;
+      SHTG A 5 A_FireShotgun;
+      SHTG A 2 A_GiveInventory("DtShotgunFreeze", 1);
+      SHTG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  1 A_ReFire("Fire2");
+      goto Cock;
+   Fire2:
+      SHTG A 7 A_FireShotgun;
+   Cock:
+      SHTG B 5 A_TakeInventory("DtShotgunFreeze", 1);
+      SHTG C 5;
+      SHTG D 4;
+      SHTG CB 5;
+      SHTG A 3;
+      SHTG A 7 A_ReFire;
+      goto Ready;
+   }
+}
+
+#include "dtzscript/const.zsc"
+#include "dtzscript/pdata.zsc"
+#include "dtzscript/wdata.zsc"
+#include "dtzscript/draw.zsc"
+
+// EOF

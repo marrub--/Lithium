@@ -1,0 +1,52 @@
+user   float dtap_player_damagebobmul  = 0.6;
+user   bool  dtap_player_damagebob     = true;
+user   bool  dtap_player_scoresound    = true;
+user   bool  dtap_player_invertmouse   = false;
+user   bool  dtap_player_scorelog      = false;
+user   bool  dtap_player_ammolog       = true;
+user   bool  dtap_player_resultssound  = true;
+user   bool  dtap_player_stupidpickups = false;
+server bool  dtap_player_brightweps    = false;
+server bool  dtap_player_noitemfx      = false;
+user   bool  dtap_player_teleshop      = false;
+user   float dtap_player_footstepvol   = 0.2;
+user   float dtap_player_viewtilt      = 0.0;
+user   bool  dtap_player_rainshader    = true;
+user   int   dtap_player_lvsys         = 1;
+user   bool  dtap_player_altinvuln     = false;
+
+// These are 200 bytes of storage per, so overall we have around 6kb available.
+// If this isn't enough more of these can be added trivially (ACS doesn't
+// assume the amount of available storage)
+user string dtap_psave_0  = "";
+user string dtap_psave_1  = "";
+user string dtap_psave_2  = "";
+user string dtap_psave_3  = "";
+user string dtap_psave_4  = "";
+user string dtap_psave_5  = "";
+user string dtap_psave_6  = "";
+user string dtap_psave_7  = "";
+user string dtap_psave_8  = "";
+user string dtap_psave_9  = "";
+user string dtap_psave_10 = "";
+user string dtap_psave_11 = "";
+user string dtap_psave_12 = "";
+user string dtap_psave_13 = "";
+user string dtap_psave_14 = "";
+user string dtap_psave_15 = "";
+user string dtap_psave_16 = "";
+user string dtap_psave_17 = "";
+user string dtap_psave_18 = "";
+user string dtap_psave_19 = "";
+user string dtap_psave_20 = "";
+user string dtap_psave_21 = "";
+user string dtap_psave_22 = "";
+user string dtap_psave_23 = "";
+user string dtap_psave_24 = "";
+user string dtap_psave_25 = "";
+user string dtap_psave_26 = "";
+user string dtap_psave_27 = "";
+user string dtap_psave_28 = "";
+user string dtap_psave_29 = "";
+
+// EOF

@@ -1,0 +1,16 @@
+server float __dtap_version;
+
+server int   dtap_sv_difficulty   = 10;
+server bool  dtap_sv_rain         = false;
+server bool  dtap_sv_sky          = false;
+server bool  dtap_sv_revenge      = true;
+server float dtap_sv_scoremul     = 1.25;
+server bool  dtap_sv_pauseinmenus = true;
+server int   dtap_sv_autosave     = 0;
+server bool  dtap_sv_nobosses     = false;
+server bool  dtap_sv_nofullammo   = true;
+server bool  dtap_sv_noscoreammo  = true;
+server int   dtap_sv_failtime     = 67;
+server bool  dtap_sv_wepdrop      = false;
+
+// EOF

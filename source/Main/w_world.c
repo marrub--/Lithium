@@ -53,6 +53,7 @@ int Lith_UniqueID(int tid)
 script
 static void CheckEnemyCompat(void)
 {
+#if LITHIUM
    if(ACS_GetCVar("sv_nomonsters") || world.enemycheck)
       return;
 
@@ -78,6 +79,7 @@ static void CheckEnemyCompat(void)
       world.enemycheck = true;
       ACS_Thing_Remove(0);
    }
+#endif
 }
 
 script
@@ -187,8 +189,11 @@ static void MInit(void)
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
 
-   world.islithmap    = (world.mapnum & 0xFFFFFC00) == 0x01202000;
+   world.islithmap = (world.mapnum & 0xFFFFFC00) == 0x01202000;
+
+#if LITHIUM
    world.pauseinmenus = world.singleplayer && ACS_GetCVar(CVAR "sv_pauseinmenus");
+#endif
 
    world.soulsfreed = 0;
 

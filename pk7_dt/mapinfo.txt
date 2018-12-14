@@ -1,0 +1,32 @@
+// Game Info -----------------------------------------------------------------|
+
+gameinfo
+{
+   PlayerClasses       = "DtPlayer"
+   DimColor            = "Black"
+   DimAmount           = 0
+   NoRandomPlayerClass = true
+   AdvisoryTime        = 0
+   DrawReadThis        = false
+   IntermissionCounter = true
+   AddEventHandlers    = "DtServer", "DtRender"
+   StatusBarClass      = "DtStatusBar"
+   PickupColor         = "#A0F3A0"
+}
+
+// Automap Info --------------------------------------------------------------|
+
+automap
+{
+   Base                 = "Doom"
+   ShowLocks            = true
+   Background           = "#000000"
+   YourColor            = "#00FF00"
+   WallColor            = "#00FF00"
+   FloorDiffWallColor   = "#008800"
+   CeilingDiffWallColor = "#008800"
+   SpecialWallColor     = "#FF00FF"
+   GridColor            = "#FF0000"
+}
+
+// EOF

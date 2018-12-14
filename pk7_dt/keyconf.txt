@@ -1,0 +1,17 @@
+// Key Sections --------------------------------------------------------------|
+addkeysection "DoubleTap Actions" DoubleTap
+addmenukey "Open UI" dtap_k_opencbi
+addmenukey "Glare" dtap_k_glare
+
+// Aliases -------------------------------------------------------------------|
+alias dtap_k_opencbi "pukename Lith_KeyOpenCBI"
+
+alias dtap_k_glare "pukename Lith_Glare"
+
+alias __dtap_info "pukename Lith_PrintMonsterInfo"
+
+// Binds ---------------------------------------------------------------------|
+defaultbind i dtap_k_opencbi
+defaultbind g +dtap_k_qact
+
+// EOF

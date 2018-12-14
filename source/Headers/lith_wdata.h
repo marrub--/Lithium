@@ -1,4 +1,5 @@
 // zsc output: pk7/lzscript/Headers/lith_wdata.h
+// zsc output: pk7_dt/dtzscript/wdata.zsc
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 

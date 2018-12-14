@@ -1,0 +1,69 @@
+ALIENFONT
+{
+   "/" "dtgfx/AlienNumbers/47.png"
+   "0" "dtgfx/AlienNumbers/48.png"
+   "1" "dtgfx/AlienNumbers/49.png"
+   "2" "dtgfx/AlienNumbers/50.png"
+   "3" "dtgfx/AlienNumbers/51.png"
+   "4" "dtgfx/AlienNumbers/52.png"
+   "5" "dtgfx/AlienNumbers/53.png"
+   "6" "dtgfx/AlienNumbers/54.png"
+   "7" "dtgfx/AlienNumbers/55.png"
+   "8" "dtgfx/AlienNumbers/56.png"
+   "9" "dtgfx/AlienNumbers/57.png"
+}
+
+LHUDFONTSMALL
+{
+   "1" "dtgfx/HUDFontSmall/49.png"
+   "2" "dtgfx/HUDFontSmall/50.png"
+   "3" "dtgfx/HUDFontSmall/51.png"
+   "4" "dtgfx/HUDFontSmall/52.png"
+   "5" "dtgfx/HUDFontSmall/53.png"
+   "6" "dtgfx/HUDFontSmall/54.png"
+   "7" "dtgfx/HUDFontSmall/55.png"
+}
+
+LHUDFONT
+{
+   // This is fucking awful, but Template doesn't let you use long filenames.
+   "/" "dtgfx/HUDFont/47.png"
+   "0" "dtgfx/HUDFont/48.png"
+   "1" "dtgfx/HUDFont/49.png"
+   "2" "dtgfx/HUDFont/50.png"
+   "3" "dtgfx/HUDFont/51.png"
+   "4" "dtgfx/HUDFont/52.png"
+   "5" "dtgfx/HUDFont/53.png"
+   "6" "dtgfx/HUDFont/54.png"
+   "7" "dtgfx/HUDFont/55.png"
+   "8" "dtgfx/HUDFont/56.png"
+   "9" "dtgfx/HUDFont/57.png"
+   "A" "dtgfx/HUDFont/65.png"
+   "B" "dtgfx/HUDFont/66.png"
+   "C" "dtgfx/HUDFont/67.png"
+   "D" "dtgfx/HUDFont/68.png"
+   "E" "dtgfx/HUDFont/69.png"
+   "F" "dtgfx/HUDFont/70.png"
+   "G" "dtgfx/HUDFont/71.png"
+   "H" "dtgfx/HUDFont/72.png"
+   "I" "dtgfx/HUDFont/73.png"
+   "J" "dtgfx/HUDFont/74.png"
+   "K" "dtgfx/HUDFont/75.png"
+   "L" "dtgfx/HUDFont/76.png"
+   "M" "dtgfx/HUDFont/77.png"
+   "N" "dtgfx/HUDFont/78.png"
+   "O" "dtgfx/HUDFont/79.png"
+   "P" "dtgfx/HUDFont/80.png"
+   "Q" "dtgfx/HUDFont/81.png"
+   "R" "dtgfx/HUDFont/82.png"
+   "S" "dtgfx/HUDFont/83.png"
+   "T" "dtgfx/HUDFont/84.png"
+   "U" "dtgfx/HUDFont/85.png"
+   "V" "dtgfx/HUDFont/86.png"
+   "W" "dtgfx/HUDFont/87.png"
+   "X" "dtgfx/HUDFont/88.png"
+   "Y" "dtgfx/HUDFont/89.png"
+   "Z" "dtgfx/HUDFont/90.png"
+}
+
+// EOF

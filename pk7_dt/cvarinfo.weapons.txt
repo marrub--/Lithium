@@ -1,0 +1,16 @@
+user   float dtap_weapons_zoomfactor     = 1.5;
+user   float dtap_weapons_scopealpha     = 0.2;
+user   float dtap_weapons_alpha          = 1.0;
+user   bool  dtap_weapons_riflescope     = false;
+user   bool  dtap_weapons_riflemodeclear = false;
+server bool  dtap_weapons_magdrops       = true;
+server bool  dtap_weapons_casings        = true;
+server bool  dtap_weapons_magfadeout     = true;
+server bool  dtap_weapons_casingfadeout  = true;
+user   bool  dtap_weapons_magicselanims  = true;
+user   float dtap_weapons_recoil         = 1.0;
+user   float dtap_weapons_reloadbob      = 0.6;
+user   bool  dtap_weapons_slot3ammo      = false;
+server bool  dtap_weapons_rainbowlaser   = false;
+
+// EOF

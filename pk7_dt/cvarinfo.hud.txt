@@ -1,0 +1,24 @@
+user bool dtap_hud_showscore    = true;
+user bool dtap_hud_showlvl      = false;
+user bool dtap_hud_showweapons  = true;
+user bool dtap_hud_showlog      = true;
+user bool dtap_hud_showarmorind = true;
+user bool dtap_hud_logfromtop   = false;
+user bool dtap_hud_logbig       = false;
+
+user int  dtap_xhair_r = 255;
+user int  dtap_xhair_g = 255;
+user int  dtap_xhair_b = 255;
+user int  dtap_xhair_a = 200;
+user int  dtap_xhair_style = 1;
+user bool dtap_xhair_enable = true;
+user bool dtap_xhair_enablejuicer = true;
+
+user bool dtap_scanner_slide   = true;
+user bool dtap_scanner_bar     = true;
+user int  dtap_scanner_xoffs   = 0;
+user int  dtap_scanner_yoffs   = 0;
+user int  dtap_scanner_color   = 106; // 'j'
+user bool dtap_scanner_altfont = false;
+
+// EOF

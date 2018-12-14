@@ -117,6 +117,7 @@ static void Lith_PlayerDeath(void)
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
 
+   #if LITHIUM
    if(world.singleplayer)
    {
       if(ACS_GetCVar(CVAR "sv_revenge"))
@@ -135,6 +136,7 @@ static void Lith_PlayerDeath(void)
          Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }
    }
+   #endif
 }
 
 script type("respawn")

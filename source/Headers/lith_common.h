@@ -58,6 +58,7 @@
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ
 
+#if LITHIUM
 #define Lith_IsPaused ServCallI("GetPaused")
 #define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
 
@@ -68,6 +69,18 @@
 #define DCVAR "__lith_"
 #define OBJ "Lith_"
 #define LANG "LITH_"
+#else
+#define Lith_IsPaused false
+#define Lith_PausableTick()
+
+#define ServName OBJ "Server"
+#define DrawName OBJ "Render"
+
+#define CVAR "dtap_"
+#define DCVAR "__dtap_"
+#define OBJ "Dt"
+#define LANG "DTAP_"
+#endif
 
 #define ServCallI(...) SCallI(ServName, __VA_ARGS__)
 #define ServCallK(...) SCallK(ServName, __VA_ARGS__)
