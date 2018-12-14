@@ -159,7 +159,7 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
    }
 
    while(tex.charCodeAt(0) == Ch_Colon)
-      tex = StringTable.Localize(String.Format("LITH%s", tex), false);
+      tex = StringTable.Localize(tex, false);
 
    cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
 

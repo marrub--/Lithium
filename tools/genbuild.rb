@@ -12,16 +12,17 @@ end
 
 upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
 wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
+textin = Dir["filedata/*.txt"].to_a.map{|s| s.gsub "filedata/", ""}.join(" ")
+fsin   = "pk7/language.gfx.txt,pk7/lgfx"
 
 deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(" ")}"
 
 fp = open "build.ninja", "wb"
 
-fp << <<NINJA
-src    = source/Main
-hdr    = source/Headers
-bin    = pk7/acs
-ir     = ir
+fp << <<_ninja_
+src = source/Main
+hdr = source/Headers
+ir  = ir
 target = --bc-target=ZDoom
 warn   = --warn-all --no-warn-parentheses
 lflags = $target --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
@@ -37,10 +38,10 @@ rule ld
    command = gdcc-ld $lflags --alloc-min Sta "" $sta $in -o $out
    description = LD $out
 rule fs
-   command = tools/hashfs.rb
+   command = tools/hashfs.rb #{fsin}
    description = HashFS
 rule text
-   command = cd filedata; ../tools/compilefs.rb _Directory.txt
+   command = cd filedata; ../tools/compilefs.rb #{textin}
    description = CompileFS
 rule dec
    command = tools/decompat.rb $in
@@ -59,50 +60,40 @@ rule upgc
    description = UpgC
 
 build tools/ttfuck/ttfuck.exe: gettf
-
 build fs: fs | tools/hashfs.rb
-
 build text: text | tools/compilefs.rb
-
 build dec: dec $hdr/lith_weapons.h $hdr/lith_pdata.h $hdr/lith_wdata.h $hdr/lith_upgradenames.h $hdr/lith_scorenums.h | tools/decompat.rb
-
 build font: font | tools/ttfuck/ttfuck.exe
-
 build #{wepcin}: wepc source/Weapons.txt | tools/wepc.rb
-
 build #{upgcin}: upgc source/Upgrades.txt | tools/upgc.rb
-
 build $ir/libc.ir: makelib
    type = libc
 build $ir/libGDCC.ir: makelib
    type = libGDCC
+_ninja_
 
-NINJA
-
-inputs = []
+inputs_lithium = []
 
 Dir["source/Main/*"].each do |f|
    f = File.basename f
-   fp << <<~NINJA
-      build $ir/#{f}.ir: cc $src/#{f} | #{deps}
-         hash = #{hash f}
-   NINJA
-   inputs << "$ir/#{f}.ir"
+   fp << <<~_ninja_
+   build $ir/lithium/#{f}.ir: cc $src/#{f} | #{deps}
+      hash = #{hash f}
+      cflags = $cflags -DLITHIUM=1
+   _ninja_
+   inputs_lithium   << "$ir/lithium/#{f}.ir"
 end
 
-fp << <<NINJA
-
-build $bin/lithmain.bin: ld #{inputs.join " "}
+fp << <<_ninja_
+build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
    lflags = $lflags -llithlib --bc-zdacs-init-script-name "__lithmain.bin_init"
    sta = 1400000
-
-build $bin/lithlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
+build pk7/acs/lithlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
    lflags = $lflags --bc-zdacs-init-script-name "__lithlib.bin_init"
    sta = 70000
+build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
 
-default dec text fs $bin/lithmain.bin $bin/lithlib.bin
-
-## EOF
-NINJA
+default lithium
+_ninja_
 
 ## EOF

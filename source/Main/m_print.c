@@ -8,10 +8,7 @@
       while(name[0] == ':') \
       { \
          ACS_BeginPrint(); \
-         ACS_BeginPrint(); \
-         ACS_PrintString("LITH"); \
-         ACS_PrintString(name); \
-         ACS_PrintLocalized(ACS_EndStrParam()); \
+         ACS_PrintLocalized(name); \
          name = ACS_EndStrParam(); \
       } \
       ACS_SetFont(name); \
