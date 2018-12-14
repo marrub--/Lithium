@@ -47,12 +47,15 @@ class DtPlayer : DoomPlayer
       Player.AirCapacity 0;
       Player.GruntSpeed 16;
       Player.WeaponSlot 1, "Fist", "Chainsaw";
-      Player.WeaponSlot 2, "Pistol";
+      Player.WeaponSlot 2, "DtPistol";
       Player.WeaponSlot 3, "DtShotgun", "SuperShotgun";
       Player.WeaponSlot 4, "Chaingun";
       Player.WeaponSlot 5, "RocketLauncher";
       Player.WeaponSlot 6, "PlasmaRifle";
       Player.WeaponSlot 7, "BFG9000";
+      Player.StartItem "DtPistol";
+      Player.StartItem "Fist";
+      Player.StartItem "Clip", 50;
       Species "DtPlayer";
 
       +THRUSPECIES
@@ -203,6 +206,22 @@ class DtShotgunFreeze : Powerup
 
       // No, so allow other actors to move about freely once again.
       level.frozen = false;
+   }
+}
+
+class DtPistol : Pistol replaces Pistol
+{
+   states
+   {
+   Fire:
+      PISG A 2;
+      PISG B 3 A_FirePistol;
+      PISG C 2;
+      PISG B 3 A_ReFire;
+      goto Ready;
+   Flash:
+      PISF A 4 bright A_Light1;
+      goto LightDone;
    }
 }
 

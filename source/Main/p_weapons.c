@@ -147,6 +147,7 @@ void Lith_GSInit_Weapon(void)
 script
 void Lith_PlayerPreWeapons(struct player *p)
 {
+   #if LITHIUM
    weapondata_t *w = &p->weapon;
 
    w->prev = w->cur;
@@ -221,6 +222,7 @@ void Lith_PlayerPreWeapons(struct player *p)
    }
 
    if(!w->cur) w->cur = &w->inv[weapon_unknown];
+   #endif
 }
 
 script
