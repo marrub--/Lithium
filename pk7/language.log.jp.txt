@@ -13,9 +13,9 @@
 "LITH_LOG_RedCard" = "\cg赤キーディスク";
 "LITH_LOG_BlueCard" = "\ch青キーディスク";
 "LITH_LOG_YellowCard" = "\ck黄キーディスク";
-"LITH_LOG_RedSkull" = "\cg赤頭蓋骨";
-"LITH_LOG_BlueSkull" = "\ch青頭蓋骨";
-"LITH_LOG_YellowSkull" = "\ck黄頭蓋骨";
+"LITH_LOG_RedSkull" = "\cg赤スカルキー";
+"LITH_LOG_BlueSkull" = "\ch青スカルキー";
+"LITH_LOG_YellowSkull" = "\ck黄スカルキー";
 
 // Powerups ------------------------------------------------------------------|
 "LITH_LOG_RadSuit" = "放射線遮蔽スーツ";
@@ -23,15 +23,15 @@
 "LITH_LOG_Invuln" = "不死身!";
 "LITH_LOG_BlurSphere" = "バリア";
 "LITH_LOG_Backpack" = "バックパックと割引カード";
-"LITH_LOG_Berserk" = "ベルセルク";
+"LITH_LOG_Berserk" = "バーサク";
 "LITH_LOG_AllMap" = "レベルマップ";
 "LITH_LOG_DoggoSphere" = "\cgわん\ciわん\ckわん\cdわん\chわん\ctわん";
 "LITH_LOG_Dogs" = "犬を得た";
-"LITH_LOG_ShobonSphere" = "（´・ω・｀）";
+"LITH_LOG_ShobonSphere" = "(´・ω・｀）";
 
 // Ammo ----------------------------------------------------------------------|
 "LITH_LOG_Clip" = "ラジオ";
-"LITH_LOG_ClipBox" = "非特異的弾箱";
+"LITH_LOG_ClipBox" = "非特異性弾箱";
 "LITH_LOG_Shell" = "シェル";
 "LITH_LOG_ShellBox" = "シェル箱";
 "LITH_LOG_Rocket" = "ロケット";
@@ -40,66 +40,66 @@
 "LITH_LOG_CellBox" = "デーモンエナジーパック";
 
 // Bonuses -------------------------------------------------------------------|
-"LITH_LOG_Coin" = "だま";
+"LITH_LOG_Coin" = "コイン";
 "LITH_LOG_ScoreChip" = "スコアチップ";
-"LITH_LOG_Ruby" = "欠陥のあるルービ";
-"LITH_LOG_Sapphire" = "欠陥のあるサファイア";
-"LITH_LOG_Amethyst" = "欠陥のあるアメジスト";
-"LITH_LOG_Diamond" = "欠陥のあるダイヤモンド";
-"LITH_LOG_Emerald" = "欠陥のあるエメラルド";
+"LITH_LOG_Ruby" = "欠けたルビー";
+"LITH_LOG_Sapphire" = "欠けたサファイア";
+"LITH_LOG_Amethyst" = "欠けたアメジスト";
+"LITH_LOG_Diamond" = "欠けたダイヤモンド";
+"LITH_LOG_Emerald" = "欠けたエメラルド";
 "LITH_LOG_Scheelite" = "シェーライト";
 "LITH_LOG_Nambulite" = "ナンブライト";
 "LITH_LOG_Lepidolite" = "レピドライト";
 "LITH_LOG_Petalite" = "ペタライト";
-"LITH_LOG_Tourmaline" = "トールマリーン";
+"LITH_LOG_Tourmaline" = "トルマリン";
 
 // Level Up ------------------------------------------------------------------|
-"LITH_LOG_LevelUpStan" = "なぜか、強くなっていると感じた。";
-"LITH_LOG_LevelUpJem" = "［ＩＮＦＯ］ メモリー戻した: %iＫｉＢ";
-"LITH_LOG_LevelUpFulk" = "\cj＜\cdＶｉｔａｌ\cj＞\c- ：： %iのｉｎｏｄｅは戻った。";
-"LITH_LOG_LevelUpAri" = "楽しみにしてる。";
+"LITH_LOG_LevelUpStan" = "なぜか、強くなった感じがした。";
+"LITH_LOG_LevelUpJem" = "[INFO] メモリー復元: %iＫｉＢ";
+"LITH_LOG_LevelUpFulk" = "\cj＜\cdVital\cj＞\c- :: %iの inode 再生。";
+"LITH_LOG_LevelUpAri" = "こりゃ楽しみだ。";
 
 // Boss Warnings -------------------------------------------------------------|
 "LITH_LOG_BossWarnStan" =
-   "\cg警告：このそばにはデーモンエナジーレベルは高すぎます。";
+   "\cg[注意]：付近に高濃度デーモンエナジーを検出。";
 
 "LITH_LOG_BossWarnJem" =
-   "\cr［ＷＡＲＮＩＮＧ］ デーモンエナジーレベルはこのそばに不当と上昇する。";
+   "\cr[警告] 付近のデーモンエナジーレベルが不安定に上昇。";
 
 "LITH_LOG_BossWarnFulk" =
-   "\cj＜\ciＷａｒｎｉｎｇ\cj＞\c- ＬＬ デーモンエナジーレベルは高い。 元を見つけて破壊にせよ。";
+   "\cj＜\ciケイコク\cj＞\c- LL スゴクタカイ デーモンエナジーレベル。イソギ デモト ハカイセヨ。";
 
 "LITH_LOG_BossWarnAri" =
-   "\cgこのそばに大量のデーモンエナジーは検出された。";
+   "\cg付近に大量のデーモンエナジーを検出。";
 
 "LITH_LOG_BossWarnMod" = "$LITH_LOG_BossWarnStan";
 
 // Misc ----------------------------------------------------------------------|
-"LITH_LOG_StartGame" = "”%jS”を押してメニューを開く。";
+"LITH_LOG_StartGame" = "”%jS”でメニューを開く。";
 "LITH_LOG_MailRecv" = "＜\cj%S\c-＞からメールを受信した。";
 
 "LITH_LOG_SellOrder" = "1";
 "LITH_LOG_Sell" = "%lli\cnscr\c-で%Sを売った。";
-"LITH_LOG_CBI" = "%Sをインストールされた。";
+"LITH_LOG_CBI" = "%Sはインストールされた。";
 
 "LITH_PICKUP_SELL_ORDER" = "1";
 "LITH_PICKUP_SELL" = "%lli\cnscr\c-で%Sを売った。";
 "LITH_PICKUP_CBI" = "%Sはインストールされました。";
 
 "LITH_PICKUP_NUM" = "13";
-"LITH_PICKUP_000" = "%Sは入手した！";
-"LITH_PICKUP_001" = "ああ、%Sだ。";
-"LITH_PICKUP_002" = "%Sが得ました。";
-"LITH_PICKUP_003" = "うおお、%Sの時間だよ！";
-"LITH_PICKUP_004" = "これは・・%S、だよね？";
-"LITH_PICKUP_005" = "そうだ、%Sよ。";
-"LITH_PICKUP_006" = "マジで？それは・・・%S？";
-"LITH_PICKUP_007" = "%S。やっとにきた。";
-"LITH_PICKUP_008" = "%S、です。";
-"LITH_PICKUP_009" = "？？ ？？？ ？？？？ ？？ ？？？？？？？？？ ？？？？ ？？";
-"LITH_PICKUP_010" = "やっと見つけた、新しい%Sは・・";
+"LITH_PICKUP_000" = "%Sを入手した!";
+"LITH_PICKUP_001" = "おう、%Sだ。";
+"LITH_PICKUP_002" = "%Sを得た。";
+"LITH_PICKUP_003" = "ハッハー、%Sの時間だ!!";
+"LITH_PICKUP_004" = "これは・・・%S、だよな？";
+"LITH_PICKUP_005" = "そうだ、確か %Sだ。";
+"LITH_PICKUP_006" = "マジで？こりゃあ・・・%S？";
+"LITH_PICKUP_007" = "%S。やっときたか。";
+"LITH_PICKUP_008" = "%S、デース。";
+"LITH_PICKUP_009" = "？? ？？? ？？？? ？? ?？?？?？?？? ???? ？?";
+"LITH_PICKUP_010" = "やっと見つけた、新品の%S・・・";
 "LITH_PICKUP_011" = "%Sがあなたと結婚した。";
 "LITH_PICKUP_012" = "%Sを壊した。";
-"LITH_PICKUP_013" = "何やってんの！？この%Sは・・・！";
+"LITH_PICKUP_013" = "何だこの%Sは・・・！";
 
 // EOF

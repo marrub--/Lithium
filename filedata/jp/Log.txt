@@ -6,9 +6,9 @@
 == LITH_LOG_StimPack    | スティムパック
 
 ## Keys ----------------------------------------------------------------------|
-== LITH_LOG_RedCard     | \cg赤ディスクキー
-== LITH_LOG_BlueCard    | \ch青ディスクキー
-== LITH_LOG_YellowCard  | \ck黄ディスクキー
+== LITH_LOG_RedCard     | \cg赤キーディスク
+== LITH_LOG_BlueCard    | \ch青キーディスク
+== LITH_LOG_YellowCard  | \ck黄キーディスク
 == LITH_LOG_RedSkull    | \cg赤スカルキー
 == LITH_LOG_BlueSkull   | \ch青スカルキー
 == LITH_LOG_YellowSkull | \ck黄スカルキー
