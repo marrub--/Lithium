@@ -13,7 +13,7 @@ end
 upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
 wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
 textin = Dir["filedata/*.txt"].to_a.map{|s| s.gsub "filedata/", ""}.join(" ")
-fsin   = "pk7/language.gfx.txt,pk7/lgfx pk7_dt/language.gfx.txt,pk7_dt/dtgfx"
+fsin   = "pk7/language.gfx.txt,pk7/,lgfx pk7_dt/language.gfx.txt,pk7_dt/,dtgfx"
 
 deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(" ")}"
 
