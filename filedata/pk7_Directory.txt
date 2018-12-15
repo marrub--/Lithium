@@ -1,86 +1,88 @@
 in directory ../pk7
 
-in language en -> en enu default
-in language jp -> jp
+prefix LITH_
+
+language en -> en enu default
+language jp -> jp
 
 -- Info Pages -----------------------------------------------------------------
 in file language.info.corporations.*.txt
-   parse file: Info_Corporations.txt
+   parse file Info_Corporations.txt
 done
 
 in file language.info.enemies.*.txt
-   parse file: Info_Enemies.txt
+   parse file Info_Enemies.txt
 done
 
 in file language.info.items.*.txt
-   parse file: Info_Items.txt
+   parse file Info_Items.txt
 done
 
 in file language.info.places.*.txt
-   parse file: Info_Places.txt
+   parse file Info_Places.txt
 done
 
 in file language.info.yourself.*.txt
-   parse file: Info_Yourself.txt
+   parse file Info_Yourself.txt
 done
 
 in file language.info.upgrades.*.txt
-   parse file: Info_Upgrades.txt
+   parse file Info_Upgrades.txt
 done
 
 in file language.info.weapons.*.txt
-   put data: sord        -> LITH_INFO_SHORT_Sword
-   put data: Game Nanhai -> LITH_INFO_SHORT_Gameboy
+   put data sord        -> \#INFO_SHORT_Sword
+   put data Game Nanhai -> \#INFO_SHORT_Gameboy
 
-   parse file: Info_Weapons_Outcasts.txt
-   parse file: Info_Weapons_CyberMage.txt
-   parse file: Info_Weapons_Marine.txt
+   parse file Info_Weapons_Outcasts.txt
+   parse file Info_Weapons_CyberMage.txt
+   parse file Info_Weapons_Marine.txt
 
-   comment: EOF
+   comment EOF
 done
 
 in file language.info.omake.*.txt
-   parse file: Info_Extra.txt
+   parse file Info_Extra.txt
 done
 
 
 -- CBI Mail -------------------------------------------------------------------
 in file language.info.mail.*.txt
-   parse file: Mail.txt
+   parse file Mail.txt
 done
 
 
 -- CBI Pages ------------------------------------------------------------------
 in file language.arsenal.*.txt
-   parse file: Arsenal_Shop.txt
-   parse file: Arsenal_Upgrades.txt
+   parse file Arsenal_Shop.txt
+   parse file Arsenal_Upgrades.txt
 
-   comment: EOF
+   comment EOF
 done
 
 
 -- Endings --------------------------------------------------------------------
 in file language.endings.*.txt
-   parse file: Endings.txt
+   parse file Endings.txt
 done
 
 
 -- Misc -----------------------------------------------------------------------
 in file language.log.*.txt
-   parse file: Log.txt
-   parse file: Log_Random.txt
+   parse file Log.txt
+   parse file Log_Random.txt
 
-   comment: EOF
+   comment EOF
 done
 
 in file language.misc.*.txt
-   parse file: Misc.txt
-   parse file: Misc_QuitMessages.txt
-   parse file: Misc_Changes.txt
-   parse file: Misc_UI.txt
-   put file: Misc_Opener.txt -> LITH_OPENER
+   parse file Misc.txt
+   parse file Misc_QuitMessages.txt
+   parse file Misc_Changes.txt
+   parse file Misc_UI.txt
+   put file Misc_Opener.txt -> \#OPENER
 
-   comment: EOF
+   comment EOF
 done
 
 EOF

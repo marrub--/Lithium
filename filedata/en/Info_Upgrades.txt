@@ -1,7 +1,7 @@
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_HeadsUpDisp | $LITH_UPGRADE_TITLE_HeadsUpDisp
-== LITH_INFO_TITLE_HeadsUpDisp | Heads Up Display
-@@ LITH_INFO_DESCR_HeadsUpDisp
+== \#INFO_SHORT_HeadsUpDisp | $\#UPGRADE_TITLE_HeadsUpDisp
+== \#INFO_TITLE_HeadsUpDisp | Heads Up Display
+@@ \#INFO_DESCR_HeadsUpDisp
 This is a military issue Heads Up Display program, which tracks vital signs,
 munitions, armor status, and more with numeric signifiers.
 
@@ -11,9 +11,9 @@ about to die, your armor is about to break and get you killed, or you're about
 to run out of ammunition, and then die.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_JetBooster | $LITH_UPGRADE_TITLE_JetBooster
-== LITH_INFO_TITLE_JetBooster | Pe'i tha E. Jet Boots
-@@ LITH_INFO_DESCR_JetBooster
+== \#INFO_SHORT_JetBooster | $\#UPGRADE_TITLE_JetBooster
+== \#INFO_TITLE_JetBooster | Pe'i tha E. Jet Boots
+@@ \#INFO_DESCR_JetBooster
 These are standard jet boots produced by OFMD, upgraded for private use. They
 have a safety lock which deactivates while the user is mid-air so they don't
 backfire and burn your heels. Keeps the user smoothly held in air with a
@@ -26,9 +26,9 @@ stay stable mid-air for approximately 7 months without fail.
 Press "run" while mid-air to activate.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ReflexWetw | $LITH_UPGRADE_TITLE_ReflexWetw
-== LITH_INFO_TITLE_ReflexWetw | Klaje Mosegon Reflex Enhancing Wetware
-@@ LITH_INFO_DESCR_ReflexWetw
+== \#INFO_SHORT_ReflexWetw | $\#UPGRADE_TITLE_ReflexWetw
+== \#INFO_TITLE_ReflexWetw | Klaje Mosegon Reflex Enhancing Wetware
+@@ \#INFO_DESCR_ReflexWetw
 Software for your Computer/Brain Interface that improves your ability to move,
 enhancing your speed, and giving you new movement options.
 
@@ -41,9 +41,9 @@ upwards with sheer force.
 You can also now slide in any direction with ease by pressing "run".
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_CyberLegs | $LITH_UPGRADE_TITLE_CyberLegs
-== LITH_INFO_TITLE_CyberLegs | Prexje Mosegon Speed Enhancing Wetware
-@@ LITH_INFO_DESCR_CyberLegs
+== \#INFO_SHORT_CyberLegs | $\#UPGRADE_TITLE_CyberLegs
+== \#INFO_TITLE_CyberLegs | Prexje Mosegon Speed Enhancing Wetware
+@@ \#INFO_DESCR_CyberLegs
 An update for your reflex wetware developed while you were being deployed on
 your mission. Improves your jump height and speed.
 
@@ -55,9 +55,9 @@ Couldn't be deployed initially to you due to complications in shipping to a
 combat zone.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Yh0 | $LITH_UPGRADE_TITLE_ReactArmor
-== LITH_INFO_TITLE_Yh0 | Yh-0 Reactive Plating System
-@@ LITH_INFO_DESCR_Yh0
+== \#INFO_SHORT_Yh0 | $\#UPGRADE_TITLE_ReactArmor
+== \#INFO_TITLE_Yh0 | Yh-0 Reactive Plating System
+@@ \#INFO_DESCR_Yh0
 Developed by avians of the planet Durla Prime, this armor plating is able to
 mitigate damage of one type almost completely for an indefinite amount of time.
 
@@ -69,9 +69,9 @@ Works over your currently equipped armor, so damage from even rockets may be
 lowered into what feels like a small tickle.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_DefenseNuke | $LITH_UPGRADE_TITLE_DefenseNuke
-== LITH_INFO_TITLE_DefenseNuke | Defensive Atomic Bomb
-@@ LITH_INFO_DESCR_DefenseNuke
+== \#INFO_SHORT_DefenseNuke | $\#UPGRADE_TITLE_DefenseNuke
+== \#INFO_TITLE_DefenseNuke | Defensive Atomic Bomb
+@@ \#INFO_DESCR_DefenseNuke
 An extremely deadly slow-charge bomb that activates as you enter a dangerous
 area.
 
@@ -79,9 +79,9 @@ Unfortunately, due to this weapon being extravagantly loud, anything in the
 area will also be alerted to your presence. Be careful with this thing!
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Adrenaline | $LITH_UPGRADE_TITLE_Adrenaline
-== LITH_INFO_TITLE_Adrenaline | Senxans Automatic Adrenaline Injector
-@@ LITH_INFO_DESCR_Adrenaline
+== \#INFO_SHORT_Adrenaline | $\#UPGRADE_TITLE_Adrenaline
+== \#INFO_TITLE_Adrenaline | Senxans Automatic Adrenaline Injector
+@@ \#INFO_DESCR_Adrenaline
 A rather brute upgrade that gathers wasted adrenaline from your body and
 injects it back into you all at once when you're in danger.
 
@@ -92,9 +92,9 @@ Using this without going insane or otherwise passing out requires intense
 training given only to military forces.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_VitalScanner | $LITH_UPGRADE_TITLE_VitalScan
-== LITH_INFO_TITLE_VitalScanner | Mit'keru Vital Scanner
-@@ LITH_INFO_DESCR_VitalScanner
+== \#INFO_SHORT_VitalScanner | $\#UPGRADE_TITLE_VitalScan
+== \#INFO_TITLE_VitalScanner | Mit'keru Vital Scanner
+@@ \#INFO_DESCR_VitalScanner
 A small nanomachine emitter is strapped to your belt, which fires out nanos
 programmed to grab vital signs of enemies under your crosshair, and display
 them in a numeric value on your heads up display.
@@ -103,9 +103,9 @@ Unfortunately, the range of this emitter is not as great as it could be, and
 is for the most part only usable in close-quarters.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_AutoReload | $LITH_UPGRADE_TITLE_AutoReload
-== LITH_INFO_TITLE_AutoReload | K'meru Automatic Loading System
-@@ LITH_INFO_DESCR_AutoReload
+== \#INFO_SHORT_AutoReload | $\#UPGRADE_TITLE_AutoReload
+== \#INFO_TITLE_AutoReload | K'meru Automatic Loading System
+@@ \#INFO_DESCR_AutoReload
 A rather small robot that can fit in your backpack, which uses a learning
 algorithm to figure out how to load your guns.
 
@@ -114,9 +114,9 @@ retooled to work separately from them so it could be mass produced for
 military needs.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SoulCleaver | $LITH_UPGRADE_TITLE_SoulCleaver
-== LITH_INFO_TITLE_SoulCleaver | \cdSi Ritagliassero\c-, \chCaeruleorum\c- 44
-@@ LITH_INFO_DESCR_SoulCleaver
+== \#INFO_SHORT_SoulCleaver | $\#UPGRADE_TITLE_SoulCleaver
+== \#INFO_TITLE_SoulCleaver | \cdSi Ritagliassero\c-, \chCaeruleorum\c- 44
+@@ \#INFO_DESCR_SoulCleaver
 The 44th method of the \chCaeruleum\c- mode, this rather complex attack must
 be applied passively. It siphons power from the recently deceased and releases
 it into a ball of metaphysical attack energy.
@@ -126,9 +126,9 @@ its strange circumstances and the general requirement of strong, plentiful
 opponents to be useful in combat.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_StealthSys | $LITH_UPGRADE_TITLE_StealthSys
-== LITH_INFO_TITLE_StealthSys | Unnamed Stealth System
-@@ LITH_INFO_DESCR_StealthSys
+== \#INFO_SHORT_StealthSys | $\#UPGRADE_TITLE_StealthSys
+== \#INFO_TITLE_StealthSys | Unnamed Stealth System
+@@ \#INFO_DESCR_StealthSys
 An active light reflection system, using advanced camouflage developed years
 ago in \cm[redacted]\c- by the inhabitants of the planet. While the original
 version required a link with \cm[redacted]\c- in order to function (as the
@@ -136,17 +136,17 @@ natives could easily do so,) this version, which was developed by Deceiver
 Solomon, requires only an energy source.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_HeadsUpDispJem | $LITH_UPGRADE_TITLE_HeadsUpDisp
-== LITH_INFO_TITLE_HeadsUpDispJem | Heads Up Display
-@@ LITH_INFO_DESCR_HeadsUpDispJem
+== \#INFO_SHORT_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
+== \#INFO_TITLE_HeadsUpDispJem | Heads Up Display
+@@ \#INFO_DESCR_HeadsUpDispJem
 This program is the 37th version of the standard issue heads-up display for
 AOF employees. The binary remains uncredited, and the decompiled code has no
 authors listed in any of the files, though is well-commented.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Magic | $LITH_UPGRADE_TITLE_Magic
-== LITH_INFO_TITLE_Magic | Mana Absorber
-@@ LITH_INFO_DESCR_Magic
+== \#INFO_SHORT_Magic | $\#UPGRADE_TITLE_Magic
+== \#INFO_TITLE_Magic | Mana Absorber
+@@ \#INFO_DESCR_Magic
 A small device reminiscent of a landmine which attaches to a chestplate,
 pauldron or shoulder pad, which uses an unknown \ckFlavum\c- mode spell that
 captures energy from the dead and dying.
@@ -156,9 +156,9 @@ mana, and upon that source losing metaphysical structure, siphons all mana
 from it with approximately 73.416% efficiency.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ReflexWetwJem | $LITH_UPGRADE_TITLE_ReflexWetw
-== LITH_INFO_TITLE_ReflexWetwJem | Reflex Enhancing Wetware
-@@ LITH_INFO_DESCR_ReflexWetwJem
+== \#INFO_SHORT_ReflexWetwJem | $\#UPGRADE_TITLE_ReflexWetw
+== \#INFO_TITLE_ReflexWetwJem | Reflex Enhancing Wetware
+@@ \#INFO_DESCR_ReflexWetwJem
 Software for your Computer/Brain Interface that improves your ability to move,
 enhancing your speed, and giving you new movement options.
 

@@ -1,53 +1,53 @@
-== LITH_SHOP_TITLE_RocketAmmo | ロケット箱
-@@ LITH_SHOP_DESCR_RocketAmmo
+== \#SHOP_TITLE_RocketAmmo | ロケット箱
+@@ \#SHOP_DESCR_RocketAmmo
 SYM4.3社のロケット推進弾。 指一本で結構すっきりさせる高収量榴弾
 
-== LITH_SHOP_TITLE_PlasmaAmmo | プラズマ箱
-@@ LITH_SHOP_DESCR_PlasmaAmmo
+== \#SHOP_TITLE_PlasmaAmmo | プラズマ箱
+@@ \#SHOP_DESCR_PlasmaAmmo
 A.O.F財団の高縮合エネルギーセル。
 
-== LITH_SHOP_TITLE_Allmap | レベルマップ
-@@ LITH_SHOP_DESCR_Allmap
+== \#SHOP_TITLE_Allmap | レベルマップ
+@@ \#SHOP_DESCR_Allmap
 レベル全体を明らかにするAutoMAP。
 
-== LITH_SHOP_TITLE_Infrared | ＣＢゴーグル
-@@ LITH_SHOP_DESCR_Infrared
+== \#SHOP_TITLE_Infrared | ＣＢゴーグル
+@@ \#SHOP_DESCR_Infrared
 暗闇を見通す光増幅ゴーグル。
 
-== LITH_SHOP_TITLE_RadSuit | ラドスーツ
-@@ LITH_SHOP_DESCR_RadSuit
+== \#SHOP_TITLE_RadSuit | ラドスーツ
+@@ \#SHOP_DESCR_RadSuit
 有害物質の中を安全に歩ける放射線遮蔽スーツ。
 
-== LITH_SHOP_TITLE_ChargeFist | $LITH_INFO_SHORT_ChargeFist
-@@ LITH_SHOP_DESCR_ChargeFist
+== \#SHOP_TITLE_ChargeFist | $\#INFO_SHORT_ChargeFist
+@@ \#SHOP_DESCR_ChargeFist
 チャージ可能の近接武器。
 
-== LITH_SHOP_TITLE_Revolver | $LITH_INFO_SHORT_Revolver
-@@ LITH_SHOP_DESCR_Revolver
+== \#SHOP_TITLE_Revolver | $\#INFO_SHORT_Revolver
+@@ \#SHOP_DESCR_Revolver
 弾が6発持てる強力な拳銃。
 
 アップグレードできません。
 
-== LITH_SHOP_TITLE_LazShotgun | $LITH_INFO_SHORT_LazShotgun
-@@ LITH_SHOP_DESCR_LazShotgun
+== \#SHOP_TITLE_LazShotgun | $\#INFO_SHORT_LazShotgun
+@@ \#SHOP_DESCR_LazShotgun
 穿孔レーザーショットガン。
 
 アップグレードできません。
 
-== LITH_SHOP_TITLE_SniperRifle | $LITH_INFO_SHORT_SniperRifle
-@@ LITH_SHOP_DESCR_SniperRifle
+== \#SHOP_TITLE_SniperRifle | $\#INFO_SHORT_SniperRifle
+@@ \#SHOP_DESCR_SniperRifle
 スコープ付きボルトアクションライフル。
 
 アップグレードできません。
 
-== LITH_SHOP_TITLE_MissileLauncher | $LITH_INFO_SHORT_MissileLauncher
-@@ LITH_SHOP_DESCR_MissileLauncher
+== \#SHOP_TITLE_MissileLauncher | $\#INFO_SHORT_MissileLauncher
+@@ \#SHOP_DESCR_MissileLauncher
 ミニミサイルランチャー。
 
 アップグレードできません。
 
-== LITH_SHOP_TITLE_PlasmaDiffuser | $LITH_INFO_SHORT_PlasmaDiffuser
-@@ LITH_SHOP_DESCR_PlasmaDiffuser
+== \#SHOP_TITLE_PlasmaDiffuser | $\#INFO_SHORT_PlasmaDiffuser
+@@ \#SHOP_DESCR_PlasmaDiffuser
 まるでプラズマライフル。
 
 アップグレードできません。

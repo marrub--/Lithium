@@ -1,10 +1,10 @@
 ## Cyber-Mage ----------------------------------------------------------------|
-== LITH_INFO_SHORT_CFist | Mana Siphon
+== \#INFO_SHORT_CFist | Mana Siphon
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Mateba | Mateba
-== LITH_INFO_TITLE_Mateba | Mateba R119
-@@ LITH_INFO_DESCR_Mateba
+== \#INFO_SHORT_Mateba | Mateba
+== \#INFO_TITLE_Mateba | Mateba R119
+@@ \#INFO_DESCR_Mateba
 A re-creation of the classic Mateba Model 6 Unica revolver, which was rather
 popular a few thousand years ago from its (at the time) unique design and
 style.
@@ -19,9 +19,9 @@ accuracy deficiencies, but nonetheless has the classic look and feel of the
 original gun. Produced by A.O.F Inc. for knight-class units.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_MatebaUpgr | $LITH_UPGRADE_TITLE_Mateba_A
-== LITH_INFO_TITLE_MatebaUpgr | \cdFinirentur\c-, \cgRussorum\c- 19
-@@ LITH_INFO_DESCR_MatebaUpgr
+== \#INFO_SHORT_MatebaUpgr | $\#UPGRADE_TITLE_Mateba_A
+== \#INFO_TITLE_MatebaUpgr | \cdFinirentur\c-, \cgRussorum\c- 19
+@@ \#INFO_DESCR_MatebaUpgr
 The 19th method of the \cgRussum\c- mode, Finirentur, known as the Finalizer,
 is a very powerful red magic that creates a sigil in front of the user which
 then fires out a projectile at fairly high speed. This projectile is capable
@@ -34,9 +34,9 @@ Inc, the Finirentur method was created recently by mages of Neptune 11 in
 Algidistari.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ShockRifle | Shock Rifle
-== LITH_INFO_TITLE_ShockRifle | Home-made Shock Rifle
-@@ LITH_INFO_DESCR_ShockRifle
+== \#INFO_SHORT_ShockRifle | Shock Rifle
+== \#INFO_TITLE_ShockRifle | Home-made Shock Rifle
+@@ \#INFO_DESCR_ShockRifle
 This weapon is a modification of a rifle made on Ch'ari, a memento your friend
 gave to you to ravage for parts. The magazine has been moved from the bottom
 (which is now an ejection port) to the back, where it's convenient to reload.
@@ -50,17 +50,17 @@ While the weapon only has a 7-round magazine, it fires extremely deadly
 well-manufactured, likely under the care of a very skilled Kiri craftsman.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ShockRifUpgr | $LITH_UPGRADE_TITLE_ShockRif_A
-== LITH_INFO_TITLE_ShockRifUpgr | Shock Charge
-@@ LITH_INFO_DESCR_ShockRifUpgr
+== \#INFO_SHORT_ShockRifUpgr | $\#UPGRADE_TITLE_ShockRif_A
+== \#INFO_TITLE_ShockRifUpgr | Shock Charge
+@@ \#INFO_DESCR_ShockRifUpgr
 A simple modification to the barrel that wraps an explosive sigil around the
 bullet as it leaves the gun, causing it to explode into electricity upon
 impact.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ShockRifUpg2 | $LITH_UPGRADE_TITLE_ShockRif_B
-== LITH_INFO_TITLE_ShockRifUpg2 | Electric Binding
-@@ LITH_INFO_DESCR_ShockRifUpg2
+== \#INFO_SHORT_ShockRifUpg2 | $\#UPGRADE_TITLE_ShockRif_B
+== \#INFO_TITLE_ShockRifUpg2 | Electric Binding
+@@ \#INFO_DESCR_ShockRifUpg2
 A modification for your Shock Rifle, crafted as an experiment: a bit of
 extremely heated liquid crystal is extruded onto the bullet upon receiving, and
 then super-charged.
@@ -70,9 +70,9 @@ when the projectiles get stuck in groups with this compound, the combined
 energy still remaining in them explodes violently.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SPAS | Shotgun
-== LITH_INFO_TITLE_SPAS | NV48 12-Gauge Shotgun
-@@ LITH_INFO_DESCR_SPAS
+== \#INFO_SHORT_SPAS | Shotgun
+== \#INFO_TITLE_SPAS | NV48 12-Gauge Shotgun
+@@ \#INFO_DESCR_SPAS
 The first (and currently only) shotgun produced by Newvec corp, an extended
 production line was fulfilled by contract from A.O.F Inc. for knight-class
 units thanks to the overwhelming fire-power and cheapness of this weapon.
@@ -82,9 +82,9 @@ design is extremely simple, but it does not overheat or jam often, is cheap to
 produce, and is very, very powerful.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SPASUpgr | $LITH_UPGRADE_TITLE_SPAS_A
-== LITH_INFO_TITLE_SPASUpgr | \cdInvalidassero\c-, \cgRussorum\c- 14
-@@ LITH_INFO_DESCR_SPASUpgr
+== \#INFO_SHORT_SPASUpgr | $\#UPGRADE_TITLE_SPAS_A
+== \#INFO_TITLE_SPASUpgr | \cdInvalidassero\c-, \cgRussorum\c- 14
+@@ \#INFO_DESCR_SPASUpgr
 The 14th method of the \cgRussum\c- mode, Invalidassero is a fairly potent,
 purple-ish colored magic substance that sticks to projectiles such as buckshot.
 
@@ -93,9 +93,9 @@ projectiles to both go off-target and do loads of damage, as well as explode
 on impact. The origin of this method is unknown.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SPASUpg2 | $LITH_UPGRADE_TITLE_SPAS_B
-== LITH_INFO_TITLE_SPASUpg2 | NV48-1 Shell Auto-loader
-@@ LITH_INFO_DESCR_SPASUpg2
+== \#INFO_SHORT_SPASUpg2 | $\#UPGRADE_TITLE_SPAS_B
+== \#INFO_TITLE_SPASUpg2 | NV48-1 Shell Auto-loader
+@@ \#INFO_DESCR_SPASUpg2
 An upgrade for the NV48 which uses a small magic buffer to automatically load
 shells from a four-dimensional area. A rather simple, yet effective solution,
 which also is used to accelerate shots slightly more, causing more damaging
@@ -107,9 +107,9 @@ The weapon must be fired a bit slower (and is forced to) due to the violent
 nature of the magic being used, and the added recoil.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SMG | Sub-Machine Gun
-== LITH_INFO_TITLE_SMG | SYM4.3 D.22 MODEL M SUBMACHINE GUN
-@@ LITH_INFO_DESCR_SMG
+== \#INFO_SHORT_SMG | Sub-Machine Gun
+== \#INFO_TITLE_SMG | SYM4.3 D.22 MODEL M SUBMACHINE GUN
+@@ \#INFO_DESCR_SMG
 This rather oddly shaped submachine gun was mass-produced by Omakeda during
 their earlier years, when they were still getting their designs down. While
 the gun has overheating issues, it mitigates this by allowing the user to feed
@@ -122,9 +122,9 @@ bullpup. It has since been re-branded by SYM4.3, who now produce it for
 Omakeda with royalties.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SMGUpgr | $LITH_UPGRADE_TITLE_SMG_A
-== LITH_INFO_TITLE_SMGUpgr | Arms Annex F474
-@@ LITH_INFO_DESCR_SMGUpgr
+== \#INFO_SHORT_SMGUpgr | $\#UPGRADE_TITLE_SMG_A
+== \#INFO_TITLE_SMGUpgr | Arms Annex F474
+@@ \#INFO_DESCR_SMGUpgr
 The AA/F474 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which
 attaches a magic buffer into the magazine upon insertion, causing it to
 over-load another two magazines worth of ammunition while firing.
@@ -135,9 +135,9 @@ suddenly and cause the buffer to rip. If this did occur, the weapon would
 displode, and bullets would fly out constantly.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SMGUpg2 | $LITH_UPGRADE_TITLE_SMG_B
-== LITH_INFO_TITLE_SMGUpg2 | Arms Annex 138D5
-@@ LITH_INFO_DESCR_SMGUpg2
+== \#INFO_SHORT_SMGUpg2 | $\#UPGRADE_TITLE_SMG_B
+== \#INFO_TITLE_SMGUpg2 | Arms Annex 138D5
+@@ \#INFO_DESCR_SMGUpg2
 The AA/138D5 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which
 places a Blue-type FFC Magic Extruder into the barrel.
 
@@ -146,9 +146,9 @@ homing capabilities. The bullets may not only lean toward enemies you aim at,
 but also enemies nearby given a good enough range.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_SMGUpg3 | $LITH_UPGRADE_TITLE_SMG_C
-== LITH_INFO_TITLE_SMGUpg3 | SYM4.3 D.24 MODEL M SAFE TRIGGER
-@@ LITH_INFO_DESCR_SMGUpg3
+== \#INFO_SHORT_SMGUpg3 | $\#UPGRADE_TITLE_SMG_C
+== \#INFO_TITLE_SMGUpg3 | SYM4.3 D.24 MODEL M SAFE TRIGGER
+@@ \#INFO_DESCR_SMGUpg3
 Complaints from users of the Model M SMG were not many for SYM4.3, but despite
 this, they were actually the most abundant of complaints the company had ever
 received on any weapon.
@@ -161,9 +161,9 @@ For all intents and purposes, this plan worked great for everyone buying new or
 intending to buy the upgrade kit.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_IonRifle | Ion Rifle
-== LITH_INFO_TITLE_IonRifle | KDA-[Thrown] Model 11 Ion Rifle
-@@ LITH_INFO_DESCR_IonRifle
+== \#INFO_SHORT_IonRifle | Ion Rifle
+== \#INFO_TITLE_IonRifle | KDA-[Thrown] Model 11 Ion Rifle
+@@ \#INFO_DESCR_IonRifle
 Produced by KSKK under the pseudonym "Kazami Defense Arms" (for various legal
 reasons.) Fires volatile ions at railgun speeds, which go straight
 through just about any being with flesh until resulting in a violent,
@@ -178,9 +178,9 @@ opening the weapon prematurely after firing, and the complexity that would be
 needed to have a fully automatic round cycling system.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_IonRifleUpgr | $LITH_UPGRADE_TITLE_IonRifle_A
-== LITH_INFO_TITLE_IonRifleUpgr | KDA-[Radiator] M11 Radioactive Ionizer
-@@ LITH_INFO_DESCR_IonRifleUpgr
+== \#INFO_SHORT_IonRifleUpgr | $\#UPGRADE_TITLE_IonRifle_A
+== \#INFO_TITLE_IonRifleUpgr | KDA-[Radiator] M11 Radioactive Ionizer
+@@ \#INFO_DESCR_IonRifleUpgr
 An odd upgrade for the Model 11 Ion Rifle by Kazami Defense Arms that modifies
 the internal barrel to not only superheat projectiles, but irradiate them with
 a small amount of radioactive isotope.
@@ -192,9 +192,9 @@ torn apart from the inside.
 Don't you just want to buy 5 of 'em?
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_IonRifleUpg2 | $LITH_UPGRADE_TITLE_IonRifle_B
-== LITH_INFO_TITLE_IonRifleUpg2 | KDA-[Overloader] M11 Overload Charger
-@@ LITH_INFO_DESCR_IonRifleUpg2
+== \#INFO_SHORT_IonRifleUpg2 | $\#UPGRADE_TITLE_IonRifle_B
+== \#INFO_TITLE_IonRifleUpg2 | KDA-[Overloader] M11 Overload Charger
+@@ \#INFO_DESCR_IonRifleUpg2
 The Overloader is a modification for the Model 11 Ion Rifle by Kazami Defense
 Arms. It removes the heat charging cap, allowing the weapon to over-charge to
 just over twice the normal amount of heat, allowing the projectile to be
@@ -205,14 +205,14 @@ Due to the immense amount of heat in the chamber, the weapon must be cooled off
 by air exposure for a few moments after firing.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_CPlasmaRifle | Plasma Rifle
-== LITH_INFO_TITLE_CPlasmaRifle | $LITH_INFO_SHORT_PlasmaRifle
-== LITH_INFO_DESCR_CPlasmaRifle | $LITH_INFO_DESCR_PlasmaRifle
+== \#INFO_SHORT_CPlasmaRifle | Plasma Rifle
+== \#INFO_TITLE_CPlasmaRifle | $\#INFO_SHORT_PlasmaRifle
+== \#INFO_DESCR_CPlasmaRifle | $\#INFO_DESCR_PlasmaRifle
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_CPlasmaUpgr | $LITH_UPGRADE_TITLE_CPlasma_A
-== LITH_INFO_TITLE_CPlasmaUpgr | MD 47.65.69.73.74 Pulse Charger
-@@ LITH_INFO_DESCR_CPlasmaUpgr
+== \#INFO_SHORT_CPlasmaUpgr | $\#UPGRADE_TITLE_CPlasma_A
+== \#INFO_TITLE_CPlasmaUpgr | MD 47.65.69.73.74 Pulse Charger
+@@ \#INFO_DESCR_CPlasmaUpgr
 When MDDO was designing the Plasma Rifle, they were mostly experimenting with
 weapons manufacturing and attempting to make sense of mass production. One of
 the results of this internal testing was the Pulse Charger: An oscillating
@@ -220,9 +220,9 @@ plasma emitter similar to the original mechanism, but made for accuracy over
 speed.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_StarDestroyer | Star Destroyer
-== LITH_INFO_TITLE_StarDestroyer | The Star Destroyer
-@@ LITH_INFO_DESCR_StarDestroyer
+== \#INFO_SHORT_StarDestroyer | Star Destroyer
+== \#INFO_TITLE_StarDestroyer | The Star Destroyer
+@@ \#INFO_DESCR_StarDestroyer
 An atrocious weapon supposedly made from the life research of seven magi of
 Hell, the Star Destroyer was made with the sole purpose of destroying whatever
 created it so hard that it would never, ever come back again.
@@ -237,9 +237,9 @@ causing hundreds of smaller projectiles to come out as it rips through
 anything in its path.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ShipGunUpgr | $LITH_UPGRADE_TITLE_ShipGun_A
-== LITH_INFO_TITLE_ShipGunUpgr | The Forsaken Longinus Solspear
-@@ LITH_INFO_DESCR_ShipGunUpgr
+== \#INFO_SHORT_ShipGunUpgr | $\#UPGRADE_TITLE_ShipGun_A
+== \#INFO_TITLE_ShipGunUpgr | The Forsaken Longinus Solspear
+@@ \#INFO_DESCR_ShipGunUpgr
 The first of the three ancient bolts of the Star Destroyer, the Longinus
 Solspear. The bolt modifies the projectile to focus all of its power on moving
 forward; like a spear piercing through all in its path. Crushingly powerful,
@@ -250,9 +250,9 @@ This bolt appears to think on its own, though this is possibly just local
 distortion caused by the high amount of condensed demonic energy.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_ShipGunUpg2 | $LITH_UPGRADE_TITLE_ShipGun_B
-== LITH_INFO_TITLE_ShipGunUpg2 | The Galliant Surge of Destiny
-@@ LITH_INFO_DESCR_ShipGunUpg2
+== \#INFO_SHORT_ShipGunUpg2 | $\#UPGRADE_TITLE_ShipGun_B
+== \#INFO_TITLE_ShipGunUpg2 | The Galliant Surge of Destiny
+@@ \#INFO_DESCR_ShipGunUpg2
 The second of the three ancient bolts of the Star Destroyer, the Surge of
 Destiny does not fire a projectile at all -- instead, it surrounds the user in
 a bright, vibrant aura of protection while unloading tons of smaller
@@ -262,16 +262,16 @@ The bolt seeks to protect and defend rather than attack, though this is
 possibly just speculation.
 
 ## Cyber-Mage Magic ----------------------------------------------------------|
-== LITH_INFO_SHORT_Blade | Blade
-== LITH_INFO_TITLE_Blade | \cdSfregiassero\c-, \ciAurantiorum\c- 2
-@@ LITH_INFO_DESCR_Blade
+== \#INFO_SHORT_Blade | Blade
+== \#INFO_TITLE_Blade | \cdSfregiassero\c-, \ciAurantiorum\c- 2
+@@ \#INFO_DESCR_Blade
 The 2nd method of the \ciAurantia\c- mode, the most dead-simple of attacks that
 could be made with \ciAurantia\c- sigils. A potent slash with no physical form.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Delear | Delear
-== LITH_INFO_TITLE_Delear | \cdDelerentur Ex\c-, \ciAurantiorum\c- 24
-@@ LITH_INFO_DESCR_Delear
+== \#INFO_SHORT_Delear | Delear
+== \#INFO_TITLE_Delear | \cdDelerentur Ex\c-, \ciAurantiorum\c- 24
+@@ \#INFO_DESCR_Delear
 The 24th method of the \ciAurantia\c- mode, a rather basic attack which fires
 sixteen orange dots in a sequence from two sides, over two rows. The
 simplicity of casting and ease of use makes this spell a rather common sight.
@@ -281,9 +281,9 @@ further simplified by various spellcasters. Your version of it prefers a flat
 shape rather than a curved one that most use.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Feuer | Feuer
-== LITH_INFO_TITLE_Feuer | \cdIncenderentur Ex\c-, \ciAurantiorum\c- 32
-@@ LITH_INFO_DESCR_Feuer
+== \#INFO_SHORT_Feuer | Feuer
+== \#INFO_TITLE_Feuer | \cdIncenderentur Ex\c-, \ciAurantiorum\c- 32
+@@ \#INFO_DESCR_Feuer
 The 32nd method of the \ciAurantia\c- mode, a fire attack that throws two balls
 of fire toward a target, destroying anything in their path.
 
@@ -292,9 +292,9 @@ It was originally dubbed the "magic missile" before some esoteric historians
 began to protest for unknown reason.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Rend | Romyetya
-== LITH_INFO_TITLE_Rend | \cdFinderentur Ex\c-, \ciAurantiorum\c- 4
-@@ LITH_INFO_DESCR_Rend
+== \#INFO_SHORT_Rend | Romyetya
+== \#INFO_TITLE_Rend | \cdFinderentur Ex\c-, \ciAurantiorum\c- 4
+@@ \#INFO_DESCR_Rend
 The 4th method of the \ciAurantia\c- mode, similar in form and creation to
 Blade, however quite different due to the modified Front sigil, which is
 replaced with an Extend sigil.
@@ -303,17 +303,17 @@ Far faster, more damaging, and longer range than Blade, Finderentur is useful
 in many situations.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Hulgyon | Hulgyon
-== LITH_INFO_TITLE_Hulgyon | \cdHumarentur Ex\c-, \ciAurantiorum\c- 16
-@@ LITH_INFO_DESCR_Hulgyon
+== \#INFO_SHORT_Hulgyon | Hulgyon
+== \#INFO_TITLE_Hulgyon | \cdHumarentur Ex\c-, \ciAurantiorum\c- 16
+@@ \#INFO_DESCR_Hulgyon
 The 16th method of the \ciAurantia\c- mode. Intermediate attack that creates
 several piercing pillars of light forward of the user. One of the few
 classical methods still in use, created by Apollo in 3021 CE.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_StarShot | Hosh'danma
-== LITH_INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
-@@ LITH_INFO_DESCR_StarShot
+== \#INFO_SHORT_StarShot | Hosh'danma
+== \#INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
+@@ \#INFO_DESCR_StarShot
 The 8th method of the \ciAurantia\c- mode. An advanced attack which summons
 two star-shaped sigils that fire projectiles out at will before fading out.
 Created by several dozen spellcasters at A.O.F Inc. for bishop-class units to
@@ -322,10 +322,10 @@ missions, including the West Steel Corp. incident, where it was used to
 destroy several micro-fighters and around 195 personnel aboard the enemy ship.
 
 ##----------------------------------------------------------------------------|
-== LITH_INFO_SHORT_Cercle | Cercle de la Mort
-== LITH_INFO_TITLE_Cercle | \cdPeccarentur Ex\c-, \cgRussorum\c- 7
-== LITH_INFO_CSIZE_Cercle | 218
-@@ LITH_INFO_DESCR_Cercle
+== \#INFO_SHORT_Cercle | Cercle de la Mort
+== \#INFO_TITLE_Cercle | \cdPeccarentur Ex\c-, \cgRussorum\c- 7
+== \#INFO_CSIZE_Cercle | 218
+@@ \#INFO_DESCR_Cercle
 The 7th method of the \cgRussum\c- mode, the "Circle of the Dead." An awesome
 attack which takes all of one's metaphysical strength to use, one of the
 strongest attacks that can be used by spellcasters without external help.

@@ -9,22 +9,25 @@ Toplevel commands include:
 
 <in file> filename
    Begins a block (terminated by <done>) which will output the result of each
-   data command into the given file.
+   data command into the given file. The file name will have any "*" in it
+   replaced with the current language name.
+
+<language> name -> header
+   Describes a language to be used.
 
 Data commands output processed data to the current file.
-"put" commands use the syntax "arg -> alias" to denote the alias to output.
 
 Data commands include:
-<comment:>
+<comment> content
    Outputs the argument as a comment.
 
-<put data:>
+<put data> data -> alias
    Outputs the argument to the given alias.
 
-<put file:>
+<put file> filename -> alias
    Outputs the contents of a file to the given alias.
 
-<parse file:>
+<parse file> filename
    Parses the given file using parsefile syntax.
 
 "parsefiles" are another format provided by compilefs, created to make large

@@ -1,17 +1,17 @@
 ## Template ------------------------------------------------------------------|
-++ LITH_MAIL_TEMPLATE | Mail_Template.txt
-== LITH_MAIL_INTERNAL | （内部）
-== LITH_MAIL_NOTITLE  | （タイトルなし）
+++ \#MAIL_TEMPLATE | Mail_Template.txt
+== \#MAIL_INTERNAL | （内部）
+== \#MAIL_NOTITLE  | （タイトルなし）
 
 ## Cyber-Mage ----------------------------------------------------------------|
-++ LITH_MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
-== LITH_MAIL_NAME_IntroJem | 退避メッセージ
-== LITH_MAIL_SEND_IntroJem | （隠した）@corp.AOF
-== LITH_MAIL_TIME_IntroJem | 13時44分 25日7月49年
-== LITH_MAIL_SIZE_IntroJem | 310
+++ \#MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
+== \#MAIL_NAME_IntroJem | 退避メッセージ
+== \#MAIL_SEND_IntroJem | （隠した）@corp.AOF
+== \#MAIL_TIME_IntroJem | 13時44分 25日7月49年
+== \#MAIL_SIZE_IntroJem | 310
 
-++ LITH_MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
-== LITH_MAIL_NAME_Cluster1Jem | 退避分１０４
-== LITH_MAIL_SIZE_Cluster1Jem | 245
+++ \#MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
+== \#MAIL_NAME_Cluster1Jem | 退避分１０４
+== \#MAIL_SIZE_Cluster1Jem | 245
 
 ## EOF

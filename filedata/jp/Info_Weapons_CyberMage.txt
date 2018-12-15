@@ -1,21 +1,21 @@
 ## Cyber-Mage ----------------------------------------------------------------|
-== LITH_INFO_SHORT_Mateba | マテバ
-== LITH_INFO_TITLE_Mateba | マテバＲ１１９
-== LITH_INFO_SHORT_ShockRifle | ショックライフル
-== LITH_INFO_TITLE_ShockRifle | 自家製ショックライフル
-== LITH_INFO_SHORT_SPAS | ショットガン
-== LITH_INFO_TITLE_SPAS | ＮＶ４８ １２ゲージショットガン
-== LITH_INFO_SHORT_SMG | サブマシンガン
-== LITH_INFO_SHORT_IonRifle | イオンライフル
-== LITH_INFO_TITLE_IonRifle | ＫＤＡ「Ｔｈｒｏｗｎ」モデル１１号イオンライフル
-== LITH_INFO_SHORT_CPlasmaRifle | プラズマライフル
-== LITH_INFO_SHORT_StarDestroyer | 星砕き砲
-== LITH_INFO_TITLE_StarDestroyer | $LITH_INFO_SHORT_StarDestroyer
+== \#INFO_SHORT_Mateba | マテバ
+== \#INFO_TITLE_Mateba | マテバＲ１１９
+== \#INFO_SHORT_ShockRifle | ショックライフル
+== \#INFO_TITLE_ShockRifle | 自家製ショックライフル
+== \#INFO_SHORT_SPAS | ショットガン
+== \#INFO_TITLE_SPAS | ＮＶ４８ １２ゲージショットガン
+== \#INFO_SHORT_SMG | サブマシンガン
+== \#INFO_SHORT_IonRifle | イオンライフル
+== \#INFO_TITLE_IonRifle | ＫＤＡ「Ｔｈｒｏｗｎ」モデル１１号イオンライフル
+== \#INFO_SHORT_CPlasmaRifle | プラズマライフル
+== \#INFO_SHORT_StarDestroyer | 星砕き砲
+== \#INFO_TITLE_StarDestroyer | $\#INFO_SHORT_StarDestroyer
 
-== LITH_INFO_SHORT_Blade    | 刃
-== LITH_INFO_SHORT_Delear   | デレアー
-== LITH_INFO_SHORT_Feuer    | フューア
-== LITH_INFO_SHORT_Rend     | ロムイェットヤ
-== LITH_INFO_SHORT_Hulgyon  | ハルギョン
-== LITH_INFO_SHORT_StarShot | ほしゅだんま
-== LITH_INFO_SHORT_Cercle   | セルス・デ・ラ・モルテ
+== \#INFO_SHORT_Blade    | 刃
+== \#INFO_SHORT_Delear   | デレアー
+== \#INFO_SHORT_Feuer    | フューア
+== \#INFO_SHORT_Rend     | ロムイェットヤ
+== \#INFO_SHORT_Hulgyon  | ハルギョン
+== \#INFO_SHORT_StarShot | ほしゅだんま
+== \#INFO_SHORT_Cercle   | セルス・デ・ラ・モルテ

@@ -1,121 +1,121 @@
 ## UI ------------------------------------------------------------------------|
-== LITH_COST       | Cost:
-== LITH_EFFECT     | Effect:
-== LITH_FREE       | Free
-== LITH_CATEGORY   | Category
-== LITH_SCOREMULT  | Score Multiplier
-== LITH_BUY        | Buy
-== LITH_DEACTIVATE | Deactivate
-== LITH_ACTIVATE   | Activate
-== LITH_EDIT       | Edit
-== LITH_CLEAR      | Clear
-== LITH_EMPTY      | <empty>
-== LITH_NOTE_FMT   | \cmNote %i
+== \#COST       | Cost:
+== \#EFFECT     | Effect:
+== \#FREE       | Free
+== \#CATEGORY   | Category
+== \#SCOREMULT  | Score Multiplier
+== \#BUY        | Buy
+== \#DEACTIVATE | Deactivate
+== \#ACTIVATE   | Activate
+== \#EDIT       | Edit
+== \#CLEAR      | Clear
+== \#EMPTY      | <empty>
+== \#NOTE_FMT   | \cmNote %i
 
-== LITH_CAT_BODY | \cnBody
-== LITH_CAT_WEAP | \caWeapon
-== LITH_CAT_EXTR | \cfExtra
-== LITH_CAT_DOWN | \ctDowngrade
+== \#CAT_BODY | \cnBody
+== \#CAT_WEAP | \caWeapon
+== \#CAT_EXTR | \cfExtra
+== \#CAT_DOWN | \ctDowngrade
 
-== LITH_GUI_TEXTBOX | Put your cursor here to input text.
+== \#GUI_TEXTBOX | Put your cursor here to input text.
 
-== LITH_TAB_ARSENAL_Stan | Arsenal
-== LITH_TAB_ARSENAL_Jem  | Directives
-== LITH_TAB_ARSENAL_Ari  | Gear
-== LITH_TAB_ARSENAL_Mod  | $LITH_TAB_ARSENAL_Stan
+== \#TAB_ARSENAL_Stan | Arsenal
+== \#TAB_ARSENAL_Jem  | Directives
+== \#TAB_ARSENAL_Ari  | Gear
+== \#TAB_ARSENAL_Mod  | $\#TAB_ARSENAL_Stan
 
-== LITH_TAB_STATUS    | Status
-== LITH_TAB_INVENTORY | Inventory
-== LITH_TAB_INFO      | Info
-== LITH_TAB_SETTINGS  | Settings
+== \#TAB_STATUS    | Status
+== \#TAB_INVENTORY | Inventory
+== \#TAB_INFO      | Info
+== \#TAB_SETTINGS  | Settings
 
-== LITH_TAB_ATTRIBUTES | Attributes
-== LITH_TAB_CBI        | CBI
+== \#TAB_ATTRIBUTES | Attributes
+== \#TAB_CBI        | CBI
 
-== LITH_TAB_BIP        | BIP
-== LITH_TAB_LOG        | Log
-== LITH_TAB_STATISTICS | Statistics
-== LITH_TAB_NOTES      | Notes
+== \#TAB_BIP        | BIP
+== \#TAB_LOG        | Log
+== \#TAB_STATISTICS | Statistics
+== \#TAB_NOTES      | Notes
 
-== LITH_TAB_UPGRADES | Upgrades
-== LITH_TAB_SHOP     | Shop
+== \#TAB_UPGRADES | Upgrades
+== \#TAB_SHOP     | Shop
 
 ## CBI Items -----------------------------------------------------------------|
-== LITH_CBI_PERF | Performance: %i\cbPerf
-== LITH_CBI_PUSE | In use: %i\cbPerf
-== LITH_CBI_WRAM | RAM: %iTiB
+== \#CBI_PERF | Performance: %i\cbPerf
+== \#CBI_PUSE | In use: %i\cbPerf
+== \#CBI_WRAM | RAM: %iTiB
 
-== LITH_CBI_INTERFACES | Interfaces Installed:
+== \#CBI_INTERFACES | Interfaces Installed:
 
-== LITH_CBI_WeapnInter | Weapon Modification Device
-== LITH_CBI_WeapnInte2 | Weapon Refactoring Device
-== LITH_CBI_ArmorInter | Armor Interface
-== LITH_CBI_RDistInter | Reality Distortion Interface
+== \#CBI_WeapnInter | Weapon Modification Device
+== \#CBI_WeapnInte2 | Weapon Refactoring Device
+== \#CBI_ArmorInter | Armor Interface
+== \#CBI_RDistInter | Reality Distortion Interface
 
-== LITH_CBI_Slot1Spell | \ciBlade Spell Driver
-== LITH_CBI_Slot2Spell | \ciDelear Spell Driver
-== LITH_CBI_Slot3Spell | \ciFeuer Spell Driver
-== LITH_CBI_Slot4Spell | \ciRomyetya Spell Driver
-== LITH_CBI_Slot5Spell | \ciHulgyon Spell Driver
-== LITH_CBI_Slot6Spell | \ciHosh'danma Spell Driver
-== LITH_CBI_Slot7Spell | \cgCercle de la Mort Spell Driver
+== \#CBI_Slot1Spell | \ciBlade Spell Driver
+== \#CBI_Slot2Spell | \ciDelear Spell Driver
+== \#CBI_Slot3Spell | \ciFeuer Spell Driver
+== \#CBI_Slot4Spell | \ciRomyetya Spell Driver
+== \#CBI_Slot5Spell | \ciHulgyon Spell Driver
+== \#CBI_Slot6Spell | \ciHosh'danma Spell Driver
+== \#CBI_Slot7Spell | \cgCercle de la Mort Spell Driver
 
-== LITH_CBI_CPU1 | OFMD Spec. Nodea 541 Basic CPU
-== LITH_CBI_CPU2 | KSKK Spec. Z6808 High-Grade CPU
-== LITH_CBI_CPU3 | KSKK Spec. BC-0265 Super High-Grade CPU
-== LITH_CBI_CPU4 | AOF 5900001 Rev7 CPU
+== \#CBI_CPU1 | OFMD Spec. Nodea 541 Basic CPU
+== \#CBI_CPU2 | KSKK Spec. Z6808 High-Grade CPU
+== \#CBI_CPU3 | KSKK Spec. BC-0265 Super High-Grade CPU
+== \#CBI_CPU4 | AOF 5900001 Rev7 CPU
 
 ## BIP -----------------------------------------------------------------------|
-== LITH_BIP_NAME_Search      | Search
-== LITH_BIP_NAME_Weapons     | Weapons
-== LITH_BIP_NAME_Adversaries | Adversaries
-== LITH_BIP_NAME_Items       | Items
-== LITH_BIP_NAME_Yourself    | Yourself
-== LITH_BIP_NAME_Upgrades    | Upgrades
-== LITH_BIP_NAME_Locations   | Locations
-== LITH_BIP_NAME_Companies   | Companies
-== LITH_BIP_NAME_Mail        | Mail
+== \#BIP_NAME_Search      | Search
+== \#BIP_NAME_Weapons     | Weapons
+== \#BIP_NAME_Adversaries | Adversaries
+== \#BIP_NAME_Items       | Items
+== \#BIP_NAME_Yourself    | Yourself
+== \#BIP_NAME_Upgrades    | Upgrades
+== \#BIP_NAME_Locations   | Locations
+== \#BIP_NAME_Companies   | Companies
+== \#BIP_NAME_Mail        | Mail
 
-== LITH_BIP_HELP_Search      | Text search all categories.
-== LITH_BIP_HELP_Weapons     | Weapons and weapon upgrades.
-== LITH_BIP_HELP_Adversaries | Enemies and bosses.
-== LITH_BIP_HELP_Items       | Armors and other loot.
-== LITH_BIP_HELP_Yourself    | Your attributes, abilities and history.
-== LITH_BIP_HELP_Upgrades    | Body upgrades.
-== LITH_BIP_HELP_Locations   | Places of interest around the galaxy.
-== LITH_BIP_HELP_Companies   | Important companies, historic and current.
-== LITH_BIP_HELP_Mail        | Received mail.
+== \#BIP_HELP_Search      | Text search all categories.
+== \#BIP_HELP_Weapons     | Weapons and weapon upgrades.
+== \#BIP_HELP_Adversaries | Enemies and bosses.
+== \#BIP_HELP_Items       | Armors and other loot.
+== \#BIP_HELP_Yourself    | Your attributes, abilities and history.
+== \#BIP_HELP_Upgrades    | Body upgrades.
+== \#BIP_HELP_Locations   | Places of interest around the galaxy.
+== \#BIP_HELP_Companies   | Important companies, historic and current.
+== \#BIP_HELP_Mail        | Received mail.
 
 ## Statistics ----------------------------------------------------------------|
-== LITH_STAT_ScoreMul   | Score Multiplier
-== LITH_STAT_Weapons    | Weapons Found
-== LITH_STAT_HealthUsed | Health Used
-== LITH_STAT_HealthSum  | Health Sum
-== LITH_STAT_ScoreUsed  | Score Used
-== LITH_STAT_ScoreSum   | Score Sum
-== LITH_STAT_Secrets    | Secrets Found
-== LITH_STAT_Units      | Units Traveled
-== LITH_STAT_Upgrades   | Upgrades Owned
-== LITH_STAT_Items      | Items Bought
-== LITH_STAT_Mail       | Mail Received
-== LITH_STAT_Time       | Seconds Elapsed
-== LITH_STAT_Boom       | Spurious Explosions
-== LITH_STAT_Brouzouf   | Brouzouf Gained
-== LITH_STAT_TrueMail   | Mail Truly Received
+== \#STAT_ScoreMul   | Score Multiplier
+== \#STAT_Weapons    | Weapons Found
+== \#STAT_HealthUsed | Health Used
+== \#STAT_HealthSum  | Health Sum
+== \#STAT_ScoreUsed  | Score Used
+== \#STAT_ScoreSum   | Score Sum
+== \#STAT_Secrets    | Secrets Found
+== \#STAT_Units      | Units Traveled
+== \#STAT_Upgrades   | Upgrades Owned
+== \#STAT_Items      | Items Bought
+== \#STAT_Mail       | Mail Received
+== \#STAT_Time       | Seconds Elapsed
+== \#STAT_Boom       | Spurious Explosions
+== \#STAT_Brouzouf   | Brouzouf Gained
+== \#STAT_TrueMail   | Mail Truly Received
 
 ## Attributes ----------------------------------------------------------------|
-== LITH_ATTR_HELP_ACC | Weapon damage
-== LITH_ATTR_HELP_DEF | Damage resistance
-== LITH_ATTR_HELP_STR | Health capacity
-== LITH_ATTR_HELP_VIT | Health item efficiency
-== LITH_ATTR_HELP_POT | $LITH_ATTR_HELP_VIT
-== LITH_ATTR_HELP_STM | Health regeneration maximum
-== LITH_ATTR_HELP_REP | $LITH_ATTR_HELP_STM
-== LITH_ATTR_HELP_REG | $LITH_ATTR_HELP_STM
-== LITH_ATTR_HELP_LUK | Score gained
-== LITH_ATTR_HELP_RGE | Damage buff when hit
-== LITH_ATTR_HELP_CON | Damage buff when gaining mana
-== LITH_ATTR_HELP_ADR | Damage buff when gaining meter
-== LITH_ATTR_HELP_AGI | Speed and damage mitigation when dodging
-== LITH_ATTR_HELP_RSH | Damage buff when gaining health
-== LITH_ATTR_HELP_REF | Movement speed when hit
+== \#ATTR_HELP_ACC | Weapon damage
+== \#ATTR_HELP_DEF | Damage resistance
+== \#ATTR_HELP_STR | Health capacity
+== \#ATTR_HELP_VIT | Health item efficiency
+== \#ATTR_HELP_POT | $\#ATTR_HELP_VIT
+== \#ATTR_HELP_STM | Health regeneration maximum
+== \#ATTR_HELP_REP | $\#ATTR_HELP_STM
+== \#ATTR_HELP_REG | $\#ATTR_HELP_STM
+== \#ATTR_HELP_LUK | Score gained
+== \#ATTR_HELP_RGE | Damage buff when hit
+== \#ATTR_HELP_CON | Damage buff when gaining mana
+== \#ATTR_HELP_ADR | Damage buff when gaining meter
+== \#ATTR_HELP_AGI | Speed and damage mitigation when dodging
+== \#ATTR_HELP_RSH | Damage buff when gaining health
+== \#ATTR_HELP_REF | Movement speed when hit

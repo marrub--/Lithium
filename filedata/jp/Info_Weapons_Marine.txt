@@ -1,17 +1,17 @@
 ## Marine --------------------------------------------------------------------|
-== LITH_INFO_SHORT_Pistol | ピストル
-== LITH_INFO_TITLE_Pistol | カスタムメーク　カ・ハアッウミ拳銃
-== LITH_INFO_SHORT_Revolver | リボルバー
-== LITH_INFO_SHORT_Shotgun | ショットガン
-== LITH_INFO_TITLE_Shotgun | ヒクＭｋ．２ショットガン
-== LITH_INFO_SHORT_LazShotgun | レーザーショットガン
-== LITH_INFO_TITLE_LazShotgun | ケーサーフォトンライフル
-== LITH_INFO_SHORT_SuperShotgun | スーパーショットガン
-== LITH_INFO_SHORT_CombatRifle | コンバットライフル
-== LITH_INFO_TITLE_CombatRifle | ＡｌｌＰｏｉｎｔ　７５ｂ アサルトライフル
-== LITH_INFO_SHORT_SniperRifle | 狙撃銃
-== LITH_INFO_TITLE_SniperRifle | フェーザーＡＭ４９ｄ狙撃銃
-== LITH_INFO_SHORT_GrenadeLauncher | 敵弾ランチャー
-== LITH_INFO_SHORT_PlasmaRifle | プラズマライフル
-== LITH_INFO_TITLE_PlasmaRifle | ＡｌｌＰｏｉｎｔ ６８ｎ プラズマライフル
-== LITH_INFO_SHORT_BFG9000 | オメガ砲
+== \#INFO_SHORT_Pistol | ピストル
+== \#INFO_TITLE_Pistol | カスタムメーク　カ・ハアッウミ拳銃
+== \#INFO_SHORT_Revolver | リボルバー
+== \#INFO_SHORT_Shotgun | ショットガン
+== \#INFO_TITLE_Shotgun | ヒクＭｋ．２ショットガン
+== \#INFO_SHORT_LazShotgun | レーザーショットガン
+== \#INFO_TITLE_LazShotgun | ケーサーフォトンライフル
+== \#INFO_SHORT_SuperShotgun | スーパーショットガン
+== \#INFO_SHORT_CombatRifle | コンバットライフル
+== \#INFO_TITLE_CombatRifle | ＡｌｌＰｏｉｎｔ　７５ｂ アサルトライフル
+== \#INFO_SHORT_SniperRifle | 狙撃銃
+== \#INFO_TITLE_SniperRifle | フェーザーＡＭ４９ｄ狙撃銃
+== \#INFO_SHORT_GrenadeLauncher | 敵弾ランチャー
+== \#INFO_SHORT_PlasmaRifle | プラズマライフル
+== \#INFO_TITLE_PlasmaRifle | ＡｌｌＰｏｉｎｔ ６８ｎ プラズマライフル
+== \#INFO_SHORT_BFG9000 | オメガ砲

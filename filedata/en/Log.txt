@@ -7,100 +7,100 @@
 ## >>>>>> Error?
 
 ## Health --------------------------------------------------------------------|
-== LITH_LOG_HealthBonus | $LITH_INFO_SHORT_HealthBonus
-== LITH_LOG_Medikit     | $LITH_INFO_SHORT_Medikit
-== LITH_LOG_MegaSphere  | Mega Charge!
-== LITH_LOG_SoulSphere  | Super Charge!
-== LITH_LOG_StimPack    | $LITH_INFO_SHORT_Stimpack
+== \#LOG_HealthBonus | $\#INFO_SHORT_HealthBonus
+== \#LOG_Medikit     | $\#INFO_SHORT_Medikit
+== \#LOG_MegaSphere  | Mega Charge!
+== \#LOG_SoulSphere  | Super Charge!
+== \#LOG_StimPack    | $\#INFO_SHORT_Stimpack
 
 ## Keys ----------------------------------------------------------------------|
-== LITH_LOG_RedCard     | \cgRed KeyDisk
-== LITH_LOG_BlueCard    | \chBlue KeyDisk
-== LITH_LOG_YellowCard  | \ckYellow KeyDisk
-== LITH_LOG_RedSkull    | \cgRed Skull
-== LITH_LOG_BlueSkull   | \chBlue Skull
-== LITH_LOG_YellowSkull | \ckYellow Skull
+== \#LOG_RedCard     | \cgRed KeyDisk
+== \#LOG_BlueCard    | \chBlue KeyDisk
+== \#LOG_YellowCard  | \ckYellow KeyDisk
+== \#LOG_RedSkull    | \cgRed Skull
+== \#LOG_BlueSkull   | \chBlue Skull
+== \#LOG_YellowSkull | \ckYellow Skull
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_LOG_RadSuit      | Radiation Shielding Suit
-== LITH_LOG_InfraRed     | $LITH_INFO_SHORT_Infrared
-== LITH_LOG_Invuln       | \cjInvulnerability!
-== LITH_LOG_BlurSphere   | $LITH_INFO_SHORT_Fragma
-== LITH_LOG_Backpack     | Backpack + Discount Card
-== LITH_LOG_Berserk      | $LITH_INFO_SHORT_Berserk
-== LITH_LOG_AllMap       | $LITH_INFO_SHORT_AllMap
-== LITH_LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
-== LITH_LOG_Dogs         | Picked up dogs.
-== LITH_LOG_ShobonSphere | ( -w-)
-== LITH_LOG_ArtiFly      | Wings of Wrath
-== LITH_LOG_ArtiTeleport | Chaos Device
+== \#LOG_RadSuit      | Radiation Shielding Suit
+== \#LOG_InfraRed     | $\#INFO_SHORT_Infrared
+== \#LOG_Invuln       | \cjInvulnerability!
+== \#LOG_BlurSphere   | $\#INFO_SHORT_Fragma
+== \#LOG_Backpack     | Backpack + Discount Card
+== \#LOG_Berserk      | $\#INFO_SHORT_Berserk
+== \#LOG_AllMap       | $\#INFO_SHORT_AllMap
+== \#LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
+== \#LOG_Dogs         | Picked up dogs.
+== \#LOG_ShobonSphere | ( -w-)
+== \#LOG_ArtiFly      | Wings of Wrath
+== \#LOG_ArtiTeleport | Chaos Device
 
 ## Ammo ----------------------------------------------------------------------|
-== LITH_LOG_Clip      | Radio
-== LITH_LOG_ClipBox   | Nonspecific Box of Ammunition
-== LITH_LOG_Shell     | Shells
-== LITH_LOG_ShellBox  | Box of Shells
-== LITH_LOG_Rocket    | Rocket
-== LITH_LOG_RocketBox | Box of Rockets
-== LITH_LOG_Cell      | Energy Charge
-== LITH_LOG_CellBox   | Demonic Energy Pack
+== \#LOG_Clip      | Radio
+== \#LOG_ClipBox   | Nonspecific Box of Ammunition
+== \#LOG_Shell     | Shells
+== \#LOG_ShellBox  | Box of Shells
+== \#LOG_Rocket    | Rocket
+== \#LOG_RocketBox | Box of Rockets
+== \#LOG_Cell      | Energy Charge
+== \#LOG_CellBox   | Demonic Energy Pack
 
 ## Bonuses -------------------------------------------------------------------|
-== LITH_LOG_Coin       | Coin
-== LITH_LOG_ScoreChip  | $LITH_INFO_SHORT_ScoreChip
-== LITH_LOG_Ruby       | Flawed Ruby
-== LITH_LOG_Sapphire   | Flawed Sapphire
-== LITH_LOG_Amethyst   | Flawed Amethyst
-== LITH_LOG_Diamond    | Flawed Diamond
-== LITH_LOG_Emerald    | Flawed Emerald
-== LITH_LOG_Scheelite  | Scheelite
-== LITH_LOG_Nambulite  | Nambulite
-== LITH_LOG_Lepidolite | Lepidolite
-== LITH_LOG_Petalite   | Petalite
-== LITH_LOG_Tourmaline | Tourmaline
+== \#LOG_Coin       | Coin
+== \#LOG_ScoreChip  | $\#INFO_SHORT_ScoreChip
+== \#LOG_Ruby       | Flawed Ruby
+== \#LOG_Sapphire   | Flawed Sapphire
+== \#LOG_Amethyst   | Flawed Amethyst
+== \#LOG_Diamond    | Flawed Diamond
+== \#LOG_Emerald    | Flawed Emerald
+== \#LOG_Scheelite  | Scheelite
+== \#LOG_Nambulite  | Nambulite
+== \#LOG_Lepidolite | Lepidolite
+== \#LOG_Petalite   | Petalite
+== \#LOG_Tourmaline | Tourmaline
 
 ## CBI Upgrades (Marine) -----------------------------------------------------|
-== LITH_LOG_CBI_MUpgr1      | $LITH_CBI_CPU2
-== LITH_LOG_CBI_MUpgr2      | $LITH_CBI_CPU3
-== LITH_LOG_CBI_MArmorInter | $LITH_CBI_ArmorInter
-== LITH_LOG_CBI_MWeapnInter | $LITH_CBI_WeapnInter
-== LITH_LOG_CBI_MWeapnInte2 | $LITH_CBI_WeapnInte2
-== LITH_LOG_CBI_MRDistInter | $LITH_CBI_RDistInter
+== \#LOG_CBI_MUpgr1      | $\#CBI_CPU2
+== \#LOG_CBI_MUpgr2      | $\#CBI_CPU3
+== \#LOG_CBI_MArmorInter | $\#CBI_ArmorInter
+== \#LOG_CBI_MWeapnInter | $\#CBI_WeapnInter
+== \#LOG_CBI_MWeapnInte2 | $\#CBI_WeapnInte2
+== \#LOG_CBI_MRDistInter | $\#CBI_RDistInter
 
 ## CBI Upgrades (Cyber-Mage) -------------------------------------------------|
-== LITH_LOG_CBI_CSlot3Spell | $LITH_CBI_Slot3Spell
-== LITH_LOG_CBI_CSlot4Spell | $LITH_CBI_Slot4Spell
-== LITH_LOG_CBI_CSlot5Spell | $LITH_CBI_Slot5Spell
-== LITH_LOG_CBI_CSlot6Spell | $LITH_CBI_Slot6Spell
-== LITH_LOG_CBI_CSlot7Spell | $LITH_CBI_Slot7Spell
-== LITH_LOG_CBI_CRDistInter | $LITH_CBI_RDistInter
+== \#LOG_CBI_CSlot3Spell | $\#CBI_Slot3Spell
+== \#LOG_CBI_CSlot4Spell | $\#CBI_Slot4Spell
+== \#LOG_CBI_CSlot5Spell | $\#CBI_Slot5Spell
+== \#LOG_CBI_CSlot6Spell | $\#CBI_Slot6Spell
+== \#LOG_CBI_CSlot7Spell | $\#CBI_Slot7Spell
+== \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
 
 ## Level Up ------------------------------------------------------------------|
-== LITH_LOG_LevelUpStan | You feel stronger, somehow.
-== LITH_LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
-== LITH_LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
-== LITH_LOG_LevelUpAri  | You're having fun with this.
-== LITH_LOG_LevelUpMod  | $LITH_LOG_LevelUpStan
+== \#LOG_LevelUpStan | You feel stronger, somehow.
+== \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
+== \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
+== \#LOG_LevelUpAri  | You're having fun with this.
+== \#LOG_LevelUpMod  | $\#LOG_LevelUpStan
 
 ## Boss Warnings -------------------------------------------------------------|
-%% LITH_LOG_BossWarnStan
+%% \#LOG_BossWarnStan
 \cgWarning: High demonic energy levels detected in area.
 
-%% LITH_LOG_BossWarnJem
+%% \#LOG_BossWarnJem
 \cr[WARNING] Demonic energy levels in area rising erratically.
 
-%% LITH_LOG_BossWarnFulk
+%% \#LOG_BossWarnFulk
 \cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.
 
-%% LITH_LOG_BossWarnAri
+%% \#LOG_BossWarnAri
 \cgDetected high amounts of demonic energy in area.
 
-== LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan
+== \#LOG_BossWarnMod | $\#LOG_BossWarnStan
 
 ## Misc ----------------------------------------------------------------------|
-== LITH_LOG_StartGame | Press "%jS" to open the menu.
-== LITH_LOG_MailRecv  | Mail received from <\cj%S\c->.
+== \#LOG_StartGame | Press "%jS" to open the menu.
+== \#LOG_MailRecv  | Mail received from <\cj%S\c->.
 
-== LITH_LOG_SellOrder | 0
-== LITH_LOG_Sell | Sold the %S for %lli\cnscr\c-.
-== LITH_LOG_CBI  | Installed %S.
+== \#LOG_SellOrder | 0
+== \#LOG_Sell | Sold the %S for %lli\cnscr\c-.
+== \#LOG_CBI  | Installed %S.

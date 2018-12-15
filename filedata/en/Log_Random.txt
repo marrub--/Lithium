@@ -4,98 +4,98 @@
 ## 4: Randomized certainty
 
 ## Random Pickup Messages ----------------------------------------------------|
-== LITH_PK_UNCERTAIN_NUM | 8
-== LITH_PK_UNCERTAIN_000 | Yes.
-== LITH_PK_UNCERTAIN_001 | Maybe.
-== LITH_PK_UNCERTAIN_002 | Hmm, yes. Indeed.
-== LITH_PK_UNCERTAIN_003 | Yeah.
-== LITH_PK_UNCERTAIN_004 | Yep.
-== LITH_PK_UNCERTAIN_005 | Ye.
-== LITH_PK_UNCERTAIN_006 | Mmyes.
-== LITH_PK_UNCERTAIN_007 | Yes. No. Yes?
-== LITH_PK_UNCERTAIN_008 | Yes, no, maybe. I don't know.
+== \#PK_UNCERTAIN_NUM | 8
+== \#PK_UNCERTAIN_000 | Yes.
+== \#PK_UNCERTAIN_001 | Maybe.
+== \#PK_UNCERTAIN_002 | Hmm, yes. Indeed.
+== \#PK_UNCERTAIN_003 | Yeah.
+== \#PK_UNCERTAIN_004 | Yep.
+== \#PK_UNCERTAIN_005 | Ye.
+== \#PK_UNCERTAIN_006 | Mmyes.
+== \#PK_UNCERTAIN_007 | Yes. No. Yes?
+== \#PK_UNCERTAIN_008 | Yes, no, maybe. I don't know.
 
-== LITH_PK_GET_NUM | 93
-== LITH_PK_GET_000 | You got the %S!
-== LITH_PK_GET_001 | Oh yes, the %S.
-== LITH_PK_GET_002 | The %S has been acquired.
-== LITH_PK_GET_003 | Snatched up a %S!
-== LITH_PK_GET_004 | Oh baby, it's time for %S!
-== LITH_PK_GET_005 | There was a %S here, but you stole it. It is now in your inventory. You Monster.
-== LITH_PK_GET_006 | Acquired a %S.
-== LITH_PK_GET_007 | The %S is safe and sound with you.
-== LITH_PK_GET_008 | I bet that %S totally wanted you to pick it up.
-== LITH_PK_GET_009 | It's not like the %S wanted you to pick it up or anything.
-== LITH_PK_GET_010 | It's a %S... I think.
-== LITH_PK_GET_011_FLAGS | 4
-== LITH_PK_GET_011 | You thought you picked up a %S ... %S
-== LITH_PK_GET_012 | 1 in 3 %Ss do not approve of being picked up.
-== LITH_PK_GET_013 | Studies show that normal people do not steal %Ss.
-== LITH_PK_GET_014 | OH NO, NOT %S
-== LITH_PK_GET_015_FLAGS | 4
-== LITH_PK_GET_015 | What? Is that.. %S? ... %S
-== LITH_PK_GET_016 | Magnetically attached a %S to your body, crushing your every bone.
-== LITH_PK_GET_017 | DavidPH was here, nyu.
-== LITH_PK_GET_018 | %S-senpai still won't notice you.
-== LITH_PK_GET_019 | Grabbed a %S!
-== LITH_PK_GET_020 | Snatched up a %S!
-== LITH_PK_GET_021 | Embraced the %S carefully!
-== LITH_PK_GET_022 | There's a thing that looks like a %S here. You picked it up. Past-tense.
-== LITH_PK_GET_023 | Another day, another %S.
-== LITH_PK_GET_024 | Xaser didn't make this %S, so it sucks. You should drop it.
-== LITH_PK_GET_025 | \cg%S. Finally.
-== LITH_PK_GET_026_FLAGS | 4
-== LITH_PK_GET_026 | The %S. %S
-== LITH_PK_GET_027 | I don't know about you, but I quite like the %S. I'll pick it up for you.
-== LITH_PK_GET_028 | ...Huh? You do something? I wasn't paying attention.
-== LITH_PK_GET_029_FLAGS | 1
-== LITH_PK_GET_029 | The %S. It is very much a %S.
-== LITH_PK_GET_030 | %S, desu.
-== LITH_PK_GET_031 | ?? ??? ???? ?? ????????? ???? ??
-== LITH_PK_GET_032_FLAGS | 1
-== LITH_PK_GET_032 | My %S lies over the ocean, my %S lies over the sea.
-== LITH_PK_GET_033 | Liberated the %S from gypsies.
-== LITH_PK_GET_034 | Granted the %S true independence.
-== LITH_PK_GET_035_FLAGS | 1
-== LITH_PK_GET_035 | The %S, for maximum %S-ing.
-== LITH_PK_GET_036_FLAGS | 4
-== LITH_PK_GET_036 | Brutal %S, featuring 5x more explosions! .. %S
-== LITH_PK_GET_037_FLAGS | 2
-== LITH_PK_GET_037 | aeiou
-== LITH_PK_GET_038 | What is a man? A miserable pile of %Ss!
-== LITH_PK_GET_039 | The %S was delicious.
-== LITH_PK_GET_040_FLAGS | 1
-== LITH_PK_GET_040 | There's plenty of %Ss in the sea, but you're the only %S for me.
-== LITH_PK_GET_041 | Disassembled the %S and reassembled it into your inventory.
-== LITH_PK_GET_042 | The %S is keepin' it real, as usual.
-== LITH_PK_GET_043 | The %S finds you agreeable, and lets you pick it up.
-== LITH_PK_GET_044 | You have attained true %S.
-== LITH_PK_GET_045_FLAGS | 2
-== LITH_PK_GET_045 | DRUGS
-== LITH_PK_GET_046 | >%S >2012
-== LITH_PK_GET_047 | TNT1 A 0 A_TakeInventory("%S", 1)
-== LITH_PK_GET_048 | Super rare %S acquired!
-== LITH_PK_GET_049 | Sacked the %S!
-== LITH_PK_GET_050 | The %S is your new waifu.
-== LITH_PK_GET_051 | The %S is grateful for your presence.
-== LITH_PK_GET_052 | The %S appears to be emitting hatred.
-== LITH_PK_GET_053 | [%S intensifies]
-== LITH_PK_GET_054 | Ah, yes, the %S.
-== LITH_PK_GET_055 | Wait, the %S is resonating!
-== LITH_PK_GET_056 | Oh, I guess it's an %S.
-== LITH_PK_GET_057 | THIS IS SOME KIND OF %S
-== LITH_PK_GET_058 | A perfectly proportioned, rare breed of %S appears.
-== LITH_PK_GET_059 | %S version 7.0 installed.
-== LITH_PK_GET_060 | Hazardous %S contained.
-== LITH_PK_GET_061 | Warning: Dangerous %S levels detected.
-== LITH_PK_GET_062 | Oh, yeah, I'm *sure* the %S will help.
-== LITH_PK_GET_063 | YOU WOULDN'T DOWNLOAD A %S
-== LITH_PK_GET_064 | Vital %S destroyed.
-== LITH_PK_GET_065 | Explosive %S apparatus destroyed.
-== LITH_PK_GET_066 | The %S shoots back at you, but you were stronger.
-== LITH_PK_GET_067 | why are you reading this? eyes on the road, dumpass.
-== LITH_PK_GET_068_FLAGS | 2
-%% LITH_PK_GET_068
+== \#PK_GET_NUM | 93
+== \#PK_GET_000 | You got the %S!
+== \#PK_GET_001 | Oh yes, the %S.
+== \#PK_GET_002 | The %S has been acquired.
+== \#PK_GET_003 | Snatched up a %S!
+== \#PK_GET_004 | Oh baby, it's time for %S!
+== \#PK_GET_005 | There was a %S here, but you stole it. It is now in your inventory. You Monster.
+== \#PK_GET_006 | Acquired a %S.
+== \#PK_GET_007 | The %S is safe and sound with you.
+== \#PK_GET_008 | I bet that %S totally wanted you to pick it up.
+== \#PK_GET_009 | It's not like the %S wanted you to pick it up or anything.
+== \#PK_GET_010 | It's a %S... I think.
+== \#PK_GET_011_FLAGS | 4
+== \#PK_GET_011 | You thought you picked up a %S ... %S
+== \#PK_GET_012 | 1 in 3 %Ss do not approve of being picked up.
+== \#PK_GET_013 | Studies show that normal people do not steal %Ss.
+== \#PK_GET_014 | OH NO, NOT %S
+== \#PK_GET_015_FLAGS | 4
+== \#PK_GET_015 | What? Is that.. %S? ... %S
+== \#PK_GET_016 | Magnetically attached a %S to your body, crushing your every bone.
+== \#PK_GET_017 | DavidPH was here, nyu.
+== \#PK_GET_018 | %S-senpai still won't notice you.
+== \#PK_GET_019 | Grabbed a %S!
+== \#PK_GET_020 | Snatched up a %S!
+== \#PK_GET_021 | Embraced the %S carefully!
+== \#PK_GET_022 | There's a thing that looks like a %S here. You picked it up. Past-tense.
+== \#PK_GET_023 | Another day, another %S.
+== \#PK_GET_024 | Xaser didn't make this %S, so it sucks. You should drop it.
+== \#PK_GET_025 | \cg%S. Finally.
+== \#PK_GET_026_FLAGS | 4
+== \#PK_GET_026 | The %S. %S
+== \#PK_GET_027 | I don't know about you, but I quite like the %S. I'll pick it up for you.
+== \#PK_GET_028 | ...Huh? You do something? I wasn't paying attention.
+== \#PK_GET_029_FLAGS | 1
+== \#PK_GET_029 | The %S. It is very much a %S.
+== \#PK_GET_030 | %S, desu.
+== \#PK_GET_031 | ?? ??? ???? ?? ????????? ???? ??
+== \#PK_GET_032_FLAGS | 1
+== \#PK_GET_032 | My %S lies over the ocean, my %S lies over the sea.
+== \#PK_GET_033 | Liberated the %S from gypsies.
+== \#PK_GET_034 | Granted the %S true independence.
+== \#PK_GET_035_FLAGS | 1
+== \#PK_GET_035 | The %S, for maximum %S-ing.
+== \#PK_GET_036_FLAGS | 4
+== \#PK_GET_036 | Brutal %S, featuring 5x more explosions! .. %S
+== \#PK_GET_037_FLAGS | 2
+== \#PK_GET_037 | aeiou
+== \#PK_GET_038 | What is a man? A miserable pile of %Ss!
+== \#PK_GET_039 | The %S was delicious.
+== \#PK_GET_040_FLAGS | 1
+== \#PK_GET_040 | There's plenty of %Ss in the sea, but you're the only %S for me.
+== \#PK_GET_041 | Disassembled the %S and reassembled it into your inventory.
+== \#PK_GET_042 | The %S is keepin' it real, as usual.
+== \#PK_GET_043 | The %S finds you agreeable, and lets you pick it up.
+== \#PK_GET_044 | You have attained true %S.
+== \#PK_GET_045_FLAGS | 2
+== \#PK_GET_045 | DRUGS
+== \#PK_GET_046 | >%S >2012
+== \#PK_GET_047 | TNT1 A 0 A_TakeInventory("%S", 1)
+== \#PK_GET_048 | Super rare %S acquired!
+== \#PK_GET_049 | Sacked the %S!
+== \#PK_GET_050 | The %S is your new waifu.
+== \#PK_GET_051 | The %S is grateful for your presence.
+== \#PK_GET_052 | The %S appears to be emitting hatred.
+== \#PK_GET_053 | [%S intensifies]
+== \#PK_GET_054 | Ah, yes, the %S.
+== \#PK_GET_055 | Wait, the %S is resonating!
+== \#PK_GET_056 | Oh, I guess it's an %S.
+== \#PK_GET_057 | THIS IS SOME KIND OF %S
+== \#PK_GET_058 | A perfectly proportioned, rare breed of %S appears.
+== \#PK_GET_059 | %S version 7.0 installed.
+== \#PK_GET_060 | Hazardous %S contained.
+== \#PK_GET_061 | Warning: Dangerous %S levels detected.
+== \#PK_GET_062 | Oh, yeah, I'm *sure* the %S will help.
+== \#PK_GET_063 | YOU WOULDN'T DOWNLOAD A %S
+== \#PK_GET_064 | Vital %S destroyed.
+== \#PK_GET_065 | Explosive %S apparatus destroyed.
+== \#PK_GET_066 | The %S shoots back at you, but you were stronger.
+== \#PK_GET_067 | why are you reading this? eyes on the road, dumpass.
+== \#PK_GET_068_FLAGS | 2
+%% \#PK_GET_068
 What the fuck did you just fucking say about %S, you little bitch?
 I'll have you know I graduated top of my class in the Navy Seals,
 and I've been involved in numerous secret raids on Al-Quaeda, and I
@@ -121,170 +121,170 @@ comment was about to bring down upon you, maybe you would have held
 your fucking tongue. But you couldn't, you didn't, and now you're paying
 the price, you goddamn idiot. I will shit fury all over you
 and you will drown in it. You're fucking dead, kiddo.
-== LITH_PK_GET_069 | A weapon to surpass Metal Gear, The %S.
-== LITH_PK_GET_070 | Appropriated the %S.
-== LITH_PK_GET_071 | Ooh, the %S.
-== LITH_PK_GET_072 | THAT %S BETTER NOT BOUNCE OR YOU'RE A DEAD MOTHERFUCKER
-== LITH_PK_GET_073 | Gluten-free %S for all your daily needs.
-== LITH_PK_GET_074 | You forcefully draw in the %S.
-== LITH_PK_GET_075 | They don't think it be %S but it do.
-== LITH_PK_GET_076 | The %S wrestled with your other items and won. It is now one of us.
-== LITH_PK_GET_077_FLAGS | 2
-== LITH_PK_GET_077 | hellote it is i durnadle and this is the 77th pickup messag you have gotten the %S and it is terrible becaus i did not make it please get rid of it
-== LITH_PK_GET_078 | BEES
-== LITH_PK_GET_079 | WELCOME TO THE %S ZONE
-== LITH_PK_GET_080 | YOU WA %S
-== LITH_PK_GET_081 | GET EQUIPPED WITH %S
-== LITH_PK_GET_082 | This is my %S. There are many like it, but this one is mine.
-== LITH_PK_GET_083 | Whan that %S with his boulette shoten, the droghte of blood hath perced to the rooten.
-== LITH_PK_GET_084 | ERROR: %S IS DEAD.
-== LITH_PK_GET_085 | %S... It's time.
-== LITH_PK_GET_086 | Hey what's up gamers, log here with another %S
-== LITH_PK_GET_087 | big %S energy
-== LITH_PK_GET_088 | *%S solo*
-== LITH_PK_GET_089 | This %S... It was made for me.
-== LITH_PK_GET_090 | This %S isn't special, I'll pick up anything!
-== LITH_PK_GET_091 | Dr. %S, I'm UAC.
-== LITH_PK_GET_092 | Honk if you're an underpaid %S
-== LITH_PK_GET_093 | YOU AM NO REAL %S
+== \#PK_GET_069 | A weapon to surpass Metal Gear, The %S.
+== \#PK_GET_070 | Appropriated the %S.
+== \#PK_GET_071 | Ooh, the %S.
+== \#PK_GET_072 | THAT %S BETTER NOT BOUNCE OR YOU'RE A DEAD MOTHERFUCKER
+== \#PK_GET_073 | Gluten-free %S for all your daily needs.
+== \#PK_GET_074 | You forcefully draw in the %S.
+== \#PK_GET_075 | They don't think it be %S but it do.
+== \#PK_GET_076 | The %S wrestled with your other items and won. It is now one of us.
+== \#PK_GET_077_FLAGS | 2
+== \#PK_GET_077 | hellote it is i durnadle and this is the 77th pickup messag you have gotten the %S and it is terrible becaus i did not make it please get rid of it
+== \#PK_GET_078 | BEES
+== \#PK_GET_079 | WELCOME TO THE %S ZONE
+== \#PK_GET_080 | YOU WA %S
+== \#PK_GET_081 | GET EQUIPPED WITH %S
+== \#PK_GET_082 | This is my %S. There are many like it, but this one is mine.
+== \#PK_GET_083 | Whan that %S with his boulette shoten, the droghte of blood hath perced to the rooten.
+== \#PK_GET_084 | ERROR: %S IS DEAD.
+== \#PK_GET_085 | %S... It's time.
+== \#PK_GET_086 | Hey what's up gamers, log here with another %S
+== \#PK_GET_087 | big %S energy
+== \#PK_GET_088 | *%S solo*
+== \#PK_GET_089 | This %S... It was made for me.
+== \#PK_GET_090 | This %S isn't special, I'll pick up anything!
+== \#PK_GET_091 | Dr. %S, I'm UAC.
+== \#PK_GET_092 | Honk if you're an underpaid %S
+== \#PK_GET_093 | YOU AM NO REAL %S
 
 ## Random Weapon Names -------------------------------------------------------|
-== LITH_PK_weapon_unknown_NUM | 2
-== LITH_PK_weapon_unknown_000 | Literally What The Fuck
-== LITH_PK_weapon_unknown_001 | How Even
-== LITH_PK_weapon_unknown_002 | Why Are You Doing This
+== \#PK_weapon_unknown_NUM | 2
+== \#PK_weapon_unknown_000 | Literally What The Fuck
+== \#PK_weapon_unknown_001 | How Even
+== \#PK_weapon_unknown_002 | Why Are You Doing This
 
-== LITH_PK_weapon_cfist_NUM | 3
-== LITH_PK_weapon_cfist_000 | Chaaji Fisuto
-== LITH_PK_weapon_cfist_001 | Charred Fist
-== LITH_PK_weapon_cfist_002 | Charged Mr. Fisto
-== LITH_PK_weapon_cfist_003 | Chargle Fargle
+== \#PK_weapon_cfist_NUM | 3
+== \#PK_weapon_cfist_000 | Chaaji Fisuto
+== \#PK_weapon_cfist_001 | Charred Fist
+== \#PK_weapon_cfist_002 | Charged Mr. Fisto
+== \#PK_weapon_cfist_003 | Chargle Fargle
 
-== LITH_PK_weapon_pistol_NUM | 9
-== LITH_PK_weapon_pistol_000 | Postil
-== LITH_PK_weapon_pistol_001 | Peestol
-== LITH_PK_weapon_pistol_002 | Pinstool
-== LITH_PK_weapon_pistol_003 | Peetool
-== LITH_PK_weapon_pistol_004 | Pistell
-== LITH_PK_weapon_pistol_005 | Pistuh
-== LITH_PK_weapon_pistol_006 | Listep
-== LITH_PK_weapon_pistol_007 | hurty peestal
-== LITH_PK_weapon_pistol_008 | Pete Stool
-== LITH_PK_weapon_pistol_009 | Bandity Pistal
+== \#PK_weapon_pistol_NUM | 9
+== \#PK_weapon_pistol_000 | Postil
+== \#PK_weapon_pistol_001 | Peestol
+== \#PK_weapon_pistol_002 | Pinstool
+== \#PK_weapon_pistol_003 | Peetool
+== \#PK_weapon_pistol_004 | Pistell
+== \#PK_weapon_pistol_005 | Pistuh
+== \#PK_weapon_pistol_006 | Listep
+== \#PK_weapon_pistol_007 | hurty peestal
+== \#PK_weapon_pistol_008 | Pete Stool
+== \#PK_weapon_pistol_009 | Bandity Pistal
 
-== LITH_PK_weapon_revolver_NUM | 3
-== LITH_PK_weapon_revolver_000 | Rvleolr
-== LITH_PK_weapon_revolver_001 | Revolrvo
-== LITH_PK_weapon_revolver_002 | Volvo
-== LITH_PK_weapon_revolver_003 | Rebolber :=DD
+== \#PK_weapon_revolver_NUM | 3
+== \#PK_weapon_revolver_000 | Rvleolr
+== \#PK_weapon_revolver_001 | Revolrvo
+== \#PK_weapon_revolver_002 | Volvo
+== \#PK_weapon_revolver_003 | Rebolber :=DD
 
-== LITH_PK_weapon_shotgun_NUM | 5
-== LITH_PK_weapon_shotgun_000 | Shtegnu
-== LITH_PK_weapon_shotgun_001 | Shartgun
-== LITH_PK_weapon_shotgun_002 | Shitgun
-== LITH_PK_weapon_shotgun_003 | Shtognu
-== LITH_PK_weapon_shotgun_004 | Shetgun
-== LITH_PK_weapon_shotgun_005 | Sug Glug
+== \#PK_weapon_shotgun_NUM | 5
+== \#PK_weapon_shotgun_000 | Shtegnu
+== \#PK_weapon_shotgun_001 | Shartgun
+== \#PK_weapon_shotgun_002 | Shitgun
+== \#PK_weapon_shotgun_003 | Shtognu
+== \#PK_weapon_shotgun_004 | Shetgun
+== \#PK_weapon_shotgun_005 | Sug Glug
 
-== LITH_PK_weapon_ssg_NUM | 6
-== LITH_PK_weapon_ssg_000 | Sbepru Shtetgun
-== LITH_PK_weapon_ssg_001 | Suber Shodgub
-== LITH_PK_weapon_ssg_002 | Soer Shotgan
-== LITH_PK_weapon_ssg_003 | Suupaa Shottogan
-== LITH_PK_weapon_ssg_004 | Susser Sarsaparilla
-== LITH_PK_weapon_ssg_005 | Shovel Subbutt
-== LITH_PK_weapon_ssg_006 | Suggle Kruggle
+== \#PK_weapon_ssg_NUM | 6
+== \#PK_weapon_ssg_000 | Sbepru Shtetgun
+== \#PK_weapon_ssg_001 | Suber Shodgub
+== \#PK_weapon_ssg_002 | Soer Shotgan
+== \#PK_weapon_ssg_003 | Suupaa Shottogan
+== \#PK_weapon_ssg_004 | Susser Sarsaparilla
+== \#PK_weapon_ssg_005 | Shovel Subbutt
+== \#PK_weapon_ssg_006 | Suggle Kruggle
 
-== LITH_PK_weapon_rifle_NUM | 4
-== LITH_PK_weapon_rifle_000 | Cmobta Riffel
-== LITH_PK_weapon_rifle_001 | Combit Raffle
-== LITH_PK_weapon_rifle_002 | Combat Rifl
-== LITH_PK_weapon_rifle_003 | Rifcom Litbl
-== LITH_PK_weapon_rifle_004 | Bltbm Liffem
+== \#PK_weapon_rifle_NUM | 4
+== \#PK_weapon_rifle_000 | Cmobta Riffel
+== \#PK_weapon_rifle_001 | Combit Raffle
+== \#PK_weapon_rifle_002 | Combat Rifl
+== \#PK_weapon_rifle_003 | Rifcom Litbl
+== \#PK_weapon_rifle_004 | Bltbm Liffem
 
-== LITH_PK_weapon_launcher_NUM | 3
-== LITH_PK_weapon_launcher_000 | Ruckebt Laurence
-== LITH_PK_weapon_launcher_001 | Rawket Lawnchair
-== LITH_PK_weapon_launcher_002 | Rokkit Luncher
-== LITH_PK_weapon_launcher_003 | Pocket Lunchbox
+== \#PK_weapon_launcher_NUM | 3
+== \#PK_weapon_launcher_000 | Ruckebt Laurence
+== \#PK_weapon_launcher_001 | Rawket Lawnchair
+== \#PK_weapon_launcher_002 | Rokkit Luncher
+== \#PK_weapon_launcher_003 | Pocket Lunchbox
 
-== LITH_PK_weapon_plasma_NUM | 6
-== LITH_PK_weapon_plasma_000 | Spalmo Rinfer
-== LITH_PK_weapon_plasma_001 | Layzuh Beem
-== LITH_PK_weapon_plasma_002 | Shooty-pew-pew Gun
-== LITH_PK_weapon_plasma_003 | Elfir Amsalp
-== LITH_PK_weapon_plasma_004 | Pulsmer Rifram
-== LITH_PK_weapon_plasma_005 | Plisplam Fimfam
-== LITH_PK_weapon_plasma_006 | Plastic Hamdonk
+== \#PK_weapon_plasma_NUM | 6
+== \#PK_weapon_plasma_000 | Spalmo Rinfer
+== \#PK_weapon_plasma_001 | Layzuh Beem
+== \#PK_weapon_plasma_002 | Shooty-pew-pew Gun
+== \#PK_weapon_plasma_003 | Elfir Amsalp
+== \#PK_weapon_plasma_004 | Pulsmer Rifram
+== \#PK_weapon_plasma_005 | Plisplam Fimfam
+== \#PK_weapon_plasma_006 | Plastic Hamdonk
 
-== LITH_PK_weapon_bfg_NUM | 4
-== LITH_PK_weapon_bfg_000 | Biffgee Nintendo
-== LITH_PK_weapon_bfg_001 | BFG 8000
-== LITH_PK_weapon_bfg_002 | Biffug 9999
-== LITH_PK_weapon_bfg_003 | Bilmap Frignarp Gnu 9
-== LITH_PK_weapon_bfg_004 | Frosty Balga Gams
+== \#PK_weapon_bfg_NUM | 4
+== \#PK_weapon_bfg_000 | Biffgee Nintendo
+== \#PK_weapon_bfg_001 | BFG 8000
+== \#PK_weapon_bfg_002 | Biffug 9999
+== \#PK_weapon_bfg_003 | Bilmap Frignarp Gnu 9
+== \#PK_weapon_bfg_004 | Frosty Balga Gams
 
-== LITH_PK_weapon_c_mateba_NUM | 11
-== LITH_PK_weapon_c_mateba_000 | Metabolism
-== LITH_PK_weapon_c_mateba_001 | Materberb
-== LITH_PK_weapon_c_mateba_002 | Beet Tam
-== LITH_PK_weapon_c_mateba_003 | Able Temabl
-== LITH_PK_weapon_c_mateba_004 | Tomato
-== LITH_PK_weapon_c_mateba_005 | Material Defender
-== LITH_PK_weapon_c_mateba_006 | Murdererererer
-== LITH_PK_weapon_c_mateba_007 | Mad Bee
-== LITH_PK_weapon_c_mateba_008 | Matatebb
-== LITH_PK_weapon_c_mateba_009 | Marteba
-== LITH_PK_weapon_c_mateba_010 | Metabe
-== LITH_PK_weapon_c_mateba_011 | Mercury Poisoning
+== \#PK_weapon_c_mateba_NUM | 11
+== \#PK_weapon_c_mateba_000 | Metabolism
+== \#PK_weapon_c_mateba_001 | Materberb
+== \#PK_weapon_c_mateba_002 | Beet Tam
+== \#PK_weapon_c_mateba_003 | Able Temabl
+== \#PK_weapon_c_mateba_004 | Tomato
+== \#PK_weapon_c_mateba_005 | Material Defender
+== \#PK_weapon_c_mateba_006 | Murdererererer
+== \#PK_weapon_c_mateba_007 | Mad Bee
+== \#PK_weapon_c_mateba_008 | Matatebb
+== \#PK_weapon_c_mateba_009 | Marteba
+== \#PK_weapon_c_mateba_010 | Metabe
+== \#PK_weapon_c_mateba_011 | Mercury Poisoning
 
-== LITH_PK_weapon_c_rifle_NUM | 3
-== LITH_PK_weapon_c_rifle_000 | Sock Rifle
-== LITH_PK_weapon_c_rifle_001 | Shock Stifle
-== LITH_PK_weapon_c_rifle_002 | Stock Knifle
-== LITH_PK_weapon_c_rifle_003 | ShohS RifiR
+== \#PK_weapon_c_rifle_NUM | 3
+== \#PK_weapon_c_rifle_000 | Sock Rifle
+== \#PK_weapon_c_rifle_001 | Shock Stifle
+== \#PK_weapon_c_rifle_002 | Stock Knifle
+== \#PK_weapon_c_rifle_003 | ShohS RifiR
 
-== LITH_PK_weapon_c_smg_NUM | 10
-== LITH_PK_weapon_c_smg_000 | Chug Smug
-== LITH_PK_weapon_c_smg_001 | Real Supersand
-== LITH_PK_weapon_c_smg_002 | Secure Gambler
-== LITH_PK_weapon_c_smg_003 | Sag Mill
-== LITH_PK_weapon_c_smg_004 | Santa Surprise
-== LITH_PK_weapon_c_smg_005 | Sandlebar Snorkel
-== LITH_PK_weapon_c_smg_006 | Submarine Screendoor
-== LITH_PK_weapon_c_smg_007 | Sbubby Mcgungus
-== LITH_PK_weapon_c_smg_008 | Slow Reggae
-== LITH_PK_weapon_c_smg_009 | Adolescent Assault Rifle
-== LITH_PK_weapon_c_smg_010 | Smig
+== \#PK_weapon_c_smg_NUM | 10
+== \#PK_weapon_c_smg_000 | Chug Smug
+== \#PK_weapon_c_smg_001 | Real Supersand
+== \#PK_weapon_c_smg_002 | Secure Gambler
+== \#PK_weapon_c_smg_003 | Sag Mill
+== \#PK_weapon_c_smg_004 | Santa Surprise
+== \#PK_weapon_c_smg_005 | Sandlebar Snorkel
+== \#PK_weapon_c_smg_006 | Submarine Screendoor
+== \#PK_weapon_c_smg_007 | Sbubby Mcgungus
+== \#PK_weapon_c_smg_008 | Slow Reggae
+== \#PK_weapon_c_smg_009 | Adolescent Assault Rifle
+== \#PK_weapon_c_smg_010 | Smig
 
-== LITH_PK_weapon_c_sniper_NUM | 13
-== LITH_PK_weapon_c_sniper_000 | Iron Raffle
-== LITH_PK_weapon_c_sniper_001 | Eye on Rustle
-== LITH_PK_weapon_c_sniper_002 | Onion Riffraff
-== LITH_PK_weapon_c_sniper_003 | Plasmagun's Lazy Cousin
-== LITH_PK_weapon_c_sniper_004 | Homemade Pringle Cannon
-== LITH_PK_weapon_c_sniper_005 | Idle Riffraff
-== LITH_PK_weapon_c_sniper_006 | Ionic Breeze
-== LITH_PK_weapon_c_sniper_007 | Ix Rix
-== LITH_PK_weapon_c_sniper_008 | Io Rofl
-== LITH_PK_weapon_c_sniper_009 | 100% Ion
-== LITH_PK_weapon_c_sniper_010 | Ions of Ion
-== LITH_PK_weapon_c_sniper_011 | Slight Chance of Ions Today
-== LITH_PK_weapon_c_sniper_012 | Illegal Rat
-== LITH_PK_weapon_c_sniper_013 | Ion Juicer
+== \#PK_weapon_c_sniper_NUM | 13
+== \#PK_weapon_c_sniper_000 | Iron Raffle
+== \#PK_weapon_c_sniper_001 | Eye on Rustle
+== \#PK_weapon_c_sniper_002 | Onion Riffraff
+== \#PK_weapon_c_sniper_003 | Plasmagun's Lazy Cousin
+== \#PK_weapon_c_sniper_004 | Homemade Pringle Cannon
+== \#PK_weapon_c_sniper_005 | Idle Riffraff
+== \#PK_weapon_c_sniper_006 | Ionic Breeze
+== \#PK_weapon_c_sniper_007 | Ix Rix
+== \#PK_weapon_c_sniper_008 | Io Rofl
+== \#PK_weapon_c_sniper_009 | 100% Ion
+== \#PK_weapon_c_sniper_010 | Ions of Ion
+== \#PK_weapon_c_sniper_011 | Slight Chance of Ions Today
+== \#PK_weapon_c_sniper_012 | Illegal Rat
+== \#PK_weapon_c_sniper_013 | Ion Juicer
 
-== LITH_PK_weapon_c_shipgun_NUM | 13
-== LITH_PK_weapon_c_shipgun_000 | Stahp Blastroyer
-== LITH_PK_weapon_c_shipgun_001 | Rats Derkler
-== LITH_PK_weapon_c_shipgun_002 | Fnukni Gigagnu
-== LITH_PK_weapon_c_shipgun_003 | Solarr Bitchmace
-== LITH_PK_weapon_c_shipgun_004 | Stan Distro
-== LITH_PK_weapon_c_shipgun_005 | Technicolor Bangstick
-== LITH_PK_weapon_c_shipgun_006 | Shooty Shooty Point 'n Shooty
-== LITH_PK_weapon_c_shipgun_007 | The Entire Doomsday Engine
-== LITH_PK_weapon_c_shipgun_008 | Deleterious Thisus
-== LITH_PK_weapon_c_shipgun_009 | S.S. Enterprise
-== LITH_PK_weapon_c_shipgun_010 | Stungle Dungle
-== LITH_PK_weapon_c_shipgun_011 | Srassa Drass
-== LITH_PK_weapon_c_shipgun_012 | Store Destroyer
-== LITH_PK_weapon_c_shipgun_013 | Master Spark
+== \#PK_weapon_c_shipgun_NUM | 13
+== \#PK_weapon_c_shipgun_000 | Stahp Blastroyer
+== \#PK_weapon_c_shipgun_001 | Rats Derkler
+== \#PK_weapon_c_shipgun_002 | Fnukni Gigagnu
+== \#PK_weapon_c_shipgun_003 | Solarr Bitchmace
+== \#PK_weapon_c_shipgun_004 | Stan Distro
+== \#PK_weapon_c_shipgun_005 | Technicolor Bangstick
+== \#PK_weapon_c_shipgun_006 | Shooty Shooty Point 'n Shooty
+== \#PK_weapon_c_shipgun_007 | The Entire Doomsday Engine
+== \#PK_weapon_c_shipgun_008 | Deleterious Thisus
+== \#PK_weapon_c_shipgun_009 | S.S. Enterprise
+== \#PK_weapon_c_shipgun_010 | Stungle Dungle
+== \#PK_weapon_c_shipgun_011 | Srassa Drass
+== \#PK_weapon_c_shipgun_012 | Store Destroyer
+== \#PK_weapon_c_shipgun_013 | Master Spark

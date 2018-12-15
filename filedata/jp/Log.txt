@@ -1,79 +1,79 @@
 ## Health --------------------------------------------------------------------|
-== LITH_LOG_HealthBonus | ＨＰボーナス
-== LITH_LOG_Medikit     | メディキット
-== LITH_LOG_MegaSphere  | メガチャージ！
-== LITH_LOG_SoulSphere  | スーパーチャージ！
-== LITH_LOG_StimPack    | スティムパック
+== \#LOG_HealthBonus | ＨＰボーナス
+== \#LOG_Medikit     | メディキット
+== \#LOG_MegaSphere  | メガチャージ！
+== \#LOG_SoulSphere  | スーパーチャージ！
+== \#LOG_StimPack    | スティムパック
 
 ## Keys ----------------------------------------------------------------------|
-== LITH_LOG_RedCard     | \cg赤キーディスク
-== LITH_LOG_BlueCard    | \ch青キーディスク
-== LITH_LOG_YellowCard  | \ck黄キーディスク
-== LITH_LOG_RedSkull    | \cg赤スカルキー
-== LITH_LOG_BlueSkull   | \ch青スカルキー
-== LITH_LOG_YellowSkull | \ck黄スカルキー
+== \#LOG_RedCard     | \cg赤キーディスク
+== \#LOG_BlueCard    | \ch青キーディスク
+== \#LOG_YellowCard  | \ck黄キーディスク
+== \#LOG_RedSkull    | \cg赤スカルキー
+== \#LOG_BlueSkull   | \ch青スカルキー
+== \#LOG_YellowSkull | \ck黄スカルキー
 
 ## Powerups ------------------------------------------------------------------|
-== LITH_LOG_RadSuit      | 放射線遮蔽スーツ
-== LITH_LOG_InfraRed     | ＣＢゴーグル
-== LITH_LOG_Invuln       | 不死身!
-== LITH_LOG_BlurSphere   | バリア
-== LITH_LOG_Backpack     | バックパックと割引カード
-== LITH_LOG_Berserk      | バーサク
-== LITH_LOG_AllMap       | レベルマップ
-== LITH_LOG_DoggoSphere  | \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
-== LITH_LOG_Dogs         | 犬を得た
-== LITH_LOG_ShobonSphere | (´・ω・｀）
+== \#LOG_RadSuit      | 放射線遮蔽スーツ
+== \#LOG_InfraRed     | ＣＢゴーグル
+== \#LOG_Invuln       | 不死身!
+== \#LOG_BlurSphere   | バリア
+== \#LOG_Backpack     | バックパックと割引カード
+== \#LOG_Berserk      | バーサク
+== \#LOG_AllMap       | レベルマップ
+== \#LOG_DoggoSphere  | \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
+== \#LOG_Dogs         | 犬を得た
+== \#LOG_ShobonSphere | (´・ω・｀）
 
 ## Ammo ----------------------------------------------------------------------|
-== LITH_LOG_Clip      | ラジオ
-== LITH_LOG_ClipBox   | 非特異性弾箱
-== LITH_LOG_Shell     | シェル
-== LITH_LOG_ShellBox  | シェル箱
-== LITH_LOG_Rocket    | ロケット
-== LITH_LOG_RocketBox | ロケット箱
-== LITH_LOG_Cell      | エナジーチャージ
-== LITH_LOG_CellBox   | デーモンエナジーパック
+== \#LOG_Clip      | ラジオ
+== \#LOG_ClipBox   | 非特異性弾箱
+== \#LOG_Shell     | シェル
+== \#LOG_ShellBox  | シェル箱
+== \#LOG_Rocket    | ロケット
+== \#LOG_RocketBox | ロケット箱
+== \#LOG_Cell      | エナジーチャージ
+== \#LOG_CellBox   | デーモンエナジーパック
 
 ## Bonuses -------------------------------------------------------------------|
-== LITH_LOG_Coin       | コイン
-== LITH_LOG_ScoreChip  | スコアチップ
-== LITH_LOG_Ruby       | 欠けたルビー
-== LITH_LOG_Sapphire   | 欠けたサファイア
-== LITH_LOG_Amethyst   | 欠けたアメジスト
-== LITH_LOG_Diamond    | 欠けたダイヤモンド
-== LITH_LOG_Emerald    | 欠けたエメラルド
-== LITH_LOG_Scheelite  | シェーライト
-== LITH_LOG_Nambulite  | ナンブライト
-== LITH_LOG_Lepidolite | レピドライト
-== LITH_LOG_Petalite   | ペタライト
-== LITH_LOG_Tourmaline | トルマリン
+== \#LOG_Coin       | コイン
+== \#LOG_ScoreChip  | スコアチップ
+== \#LOG_Ruby       | 欠けたルビー
+== \#LOG_Sapphire   | 欠けたサファイア
+== \#LOG_Amethyst   | 欠けたアメジスト
+== \#LOG_Diamond    | 欠けたダイヤモンド
+== \#LOG_Emerald    | 欠けたエメラルド
+== \#LOG_Scheelite  | シェーライト
+== \#LOG_Nambulite  | ナンブライト
+== \#LOG_Lepidolite | レピドライト
+== \#LOG_Petalite   | ペタライト
+== \#LOG_Tourmaline | トルマリン
 
 ## Level Up ------------------------------------------------------------------|
-== LITH_LOG_LevelUpStan | なぜか、強くなった感じがした。
-== LITH_LOG_LevelUpJem  | [INFO] メモリー復元: %iＫｉＢ
-== LITH_LOG_LevelUpFulk | \cj＜\cdVital\cj＞\c- :: %iの inode 再生。
-== LITH_LOG_LevelUpAri  | こりゃ楽しみだ。
+== \#LOG_LevelUpStan | なぜか、強くなった感じがした。
+== \#LOG_LevelUpJem  | [INFO] メモリー復元: %iＫｉＢ
+== \#LOG_LevelUpFulk | \cj＜\cdVital\cj＞\c- :: %iの inode 再生。
+== \#LOG_LevelUpAri  | こりゃ楽しみだ。
 
 ## Boss Warnings -------------------------------------------------------------|
-%% LITH_LOG_BossWarnStan
+%% \#LOG_BossWarnStan
 \cg[注意]：付近に高濃度デーモンエナジーを検出。
 
-%% LITH_LOG_BossWarnJem
+%% \#LOG_BossWarnJem
 \cr[警告] 付近のデーモンエナジーレベルが不安定に上昇。
 
-%% LITH_LOG_BossWarnFulk
+%% \#LOG_BossWarnFulk
 \cj＜\ciケイコク\cj＞\c- LL スゴクタカイ デーモンエナジーレベル。イソギ デモト ハカイセヨ。
 
-%% LITH_LOG_BossWarnAri
+%% \#LOG_BossWarnAri
 \cg付近に大量のデーモンエナジーを検出。
 
-== LITH_LOG_BossWarnMod | $LITH_LOG_BossWarnStan
+== \#LOG_BossWarnMod | $\#LOG_BossWarnStan
 
 ## Misc ----------------------------------------------------------------------|
-== LITH_LOG_StartGame | ”%jS”でメニューを開く。
-== LITH_LOG_MailRecv  | ＜\cj%S\c-＞からメールを受信した。
+== \#LOG_StartGame | ”%jS”でメニューを開く。
+== \#LOG_MailRecv  | ＜\cj%S\c-＞からメールを受信した。
 
-== LITH_LOG_SellOrder | 1
-== LITH_LOG_Sell | %lli\cnscr\c-で%Sを売った。
-== LITH_LOG_CBI  | %Sはインストールされた。
+== \#LOG_SellOrder | 1
+== \#LOG_Sell | %lli\cnscr\c-で%Sを売った。
+== \#LOG_CBI  | %Sはインストールされた。
