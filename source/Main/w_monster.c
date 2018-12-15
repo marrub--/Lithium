@@ -4,6 +4,8 @@
 #include "lith_world.h"
 #include "lith_scorenums.h"
 
+StrEntON
+
 #define HasResistances(m) ((m)->rank >= 2)
 
 #define GetInfo(m) \

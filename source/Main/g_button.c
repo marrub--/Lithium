@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
 {
    gui_button_preset_t const *pre = a->preset ? a->preset : &guipre.btndef;

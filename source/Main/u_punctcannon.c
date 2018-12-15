@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+StrEntON
+
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")

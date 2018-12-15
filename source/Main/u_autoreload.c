@@ -1,6 +1,8 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 #include "lith_upgrades_common.h"
 
+StrEntOFF
+
 // Extern Functions ----------------------------------------------------------|
 
 stkcall

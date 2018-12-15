@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 script ext("ACS")
 int Lith_Timer(void)
 {

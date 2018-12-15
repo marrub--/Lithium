@@ -3,6 +3,8 @@
 #include "lith_hud.h"
 #include "lith_hudid.h"
 
+StrEntON
+
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)

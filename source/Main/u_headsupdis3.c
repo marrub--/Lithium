@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_hud.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void HUD_Ammo(struct player *p)

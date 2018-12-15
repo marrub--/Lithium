@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
+StrEntON
+
 #define UData UData_HomingRPG(upgr)
 
 // Static Functions ----------------------------------------------------------|

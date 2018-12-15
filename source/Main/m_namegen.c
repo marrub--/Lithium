@@ -5,11 +5,12 @@
 #include "lith_world.h"
 #include <ctype.h>
 
+StrEntOFF
+
 // Extern Functions ----------------------------------------------------------|
 
 __str Lith_RandomName(int id)
 {
-   #pragma GDCC STRENT_LITERAL OFF
    static char const *syll[] = {
       "ka","k'","khi","kaz","kr",
       "ga","go","gor","got","gn","gl",
@@ -176,12 +177,11 @@ __str Lith_RandomName(int id)
       "Dogma of Evil",
       "Alpha and Omega",
    };
-   #pragma GDCC STRENT_LITERAL ON
 
    srand(id ? world.mapseed + id : ACS_Random(0, 0x7FFFFFFF));
 
    ACS_BeginPrint();
-   ACS_PrintString("\Cg");
+   ACS_PrintString(s"\Cg");
 
    char const *n = name[rand() % countof(name)];
 
@@ -201,7 +201,7 @@ __str Lith_RandomName(int id)
    if(id)
    {
       char const *s = suff[rand() % countof(suff)];
-      ACS_PrintString(", the ");
+      ACS_PrintString(s", the ");
       PrintChars(s, strlen(s));
    }
 
@@ -209,4 +209,3 @@ __str Lith_RandomName(int id)
 }
 
 // EOF
-

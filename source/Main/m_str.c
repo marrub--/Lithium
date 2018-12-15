@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
+StrEntOFF
+
 #define StrHashImpl() \
    u32 ret = 0; \
    for(; *s; s++) ret = *s + 101 * ret; \
@@ -51,7 +53,7 @@ __str scoresep(i96 num)
 {
    static char out[48];
 
-   if(!num) return "0";
+   if(!num) return s"0";
 
    char *outp = out + countof(out) - 1;
    int cnum = 0;
@@ -99,9 +101,9 @@ char *LanguageVC(char *out, char const *name)
    noinit static char sbuf[8192];
    if(!out) out = sbuf;
 
-   sprintf(out, c"%LS", l_strdup(name));
+   sprintf(out, "%LS", l_strdup(name));
 
-   while(out[0] == '$') sprintf(out, c"%LS", l_strdup(&out[1]));
+   while(out[0] == '$') sprintf(out, "%LS", l_strdup(&out[1]));
 
    return out;
 }

@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_cps.h"
 
+StrEntOFF
+
 // Extern Functions ----------------------------------------------------------|
 
 char const *Lith_CPS_Print(u32 *cps, int l)

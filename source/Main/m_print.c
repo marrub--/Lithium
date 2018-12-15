@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+StrEntOFF
+
 #define DrawSpriteBegin(name) \
    do { \
       while(name[0] == ':') \
@@ -109,16 +111,16 @@ void Lith_PrintMem(void const *data, size_t size)
    {
       if(pos + 3 > 79)
       {
-         puts(c"");
+         puts("");
          pos = 0;
       }
 
-      printf(IsPrint(d[i]) ? c"%c  " : c"%.2X ",  d[i]);
+      printf(IsPrint(d[i]) ? "%c  " : c"%.2X ",  d[i]);
 
       pos += 3;
    }
 
-   puts(c"\nEOF\n\n");
+   puts("\nEOF\n\n");
 }
 
 // EOF

@@ -5,6 +5,8 @@
 #include "lith_list.h"
 #include "lith_world.h"
 
+StrEntOFF
+
 #define TABCHARS 20
 
 #define Themes(X) \
@@ -19,8 +21,6 @@
    X("WinXP")
 
 // Static Functions ----------------------------------------------------------|
-
-#pragma GDCC STRENT_LITERAL OFF
 
 static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
 {
@@ -76,12 +76,11 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
    }
 }
 
-#pragma GDCC STRENT_LITERAL ON
-
 // Extern Functions ----------------------------------------------------------|
 
 __str Lith_ThemeName(uint num)
 {
+   StrEntON
    #define X(n) n,
    static __str const themes[cbi_theme_max] = {Themes(X)};
    #undef X
@@ -98,7 +97,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
-      #define X(n) ":UI_" n ":",
+      #define X(n) s":UI_" n ":",
       static __str const names[] = {Themes(X)};
       #undef X
 
@@ -112,12 +111,11 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(!p->indialogue)
       Lith_GUI_UpdateState(g, p);
 
-   PrintSpriteA(StrParam("%SBackground", g->gfxprefix), 0,1, 0,1, 0.7);
+   PrintSpriteA(StrParam(s"%SBackground", g->gfxprefix), 0,1, 0,1, 0.7);
 
    if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
       p->useGUI(GUI_CBI);
 
-#pragma GDCC STRENT_LITERAL OFF
    char tn[5][TABCHARS];
    LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);
    LanguageVC(tn[1], LANG "TAB_STATUS");
@@ -125,7 +123,6 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    LanguageVC(tn[3], LANG "TAB_INFO");
    LanguageVC(tn[4], LANG "TAB_SETTINGS");
    Lith_GUI_Tabs(g, &CBIState(g)->maintab, tn, 13, 13, 0);
-#pragma GDCC STRENT_LITERAL ON
 
    extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
    extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);

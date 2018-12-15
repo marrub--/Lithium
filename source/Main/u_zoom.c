@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+StrEntON
+
 #define UData UData_Zoom(upgr)
 
 #define IsKindaSmallNumber(x) ((x) > -0.5 && (x) < 0.5)

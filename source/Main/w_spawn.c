@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Types ---------------------------------------------------------------------|
 
 struct witem

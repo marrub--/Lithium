@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
 {
    gui_slider_preset_t const *pre = a->preset ? a->preset : &guipre.slddef;

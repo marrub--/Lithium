@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
+StrEntOFF
+
 #define UData UData_Magic(upgr)
 
 // Types ---------------------------------------------------------------------|
@@ -14,24 +16,23 @@ struct magic_info {
 
 // Static Objects ------------------------------------------------------------|
 
-#pragma GDCC STRENT_LITERAL OFF
 static struct magic_info const minf[] = {
-   {-1,                130, 180, "Blade",    OBJ "Blade"   },
-   {-1,                 60, 140, "Delear",   OBJ "Delear"  },
-   {cupg_c_slot3spell,  60,  60, "Feuer",    OBJ "Feuer"   },
-   {cupg_c_slot4spell, 130,  10, "Rend",     OBJ "Rend"    },
-   {cupg_c_slot5spell, 205,  60, "Hulgyon",  OBJ "Hulgyon" },
-   {cupg_c_slot6spell, 205, 140, "StarShot", OBJ "StarShot"},
-   {cupg_c_slot7spell, 130, 100, "Cercle",   OBJ "Cercle"  },
+   {-1,                130, 180, "Blade"   },
+   {-1,                 60, 140, "Delear"  },
+   {cupg_c_slot3spell,  60,  60, "Feuer"   },
+   {cupg_c_slot4spell, 130,  10, "Rend"    },
+   {cupg_c_slot5spell, 205,  60, "Hulgyon" },
+   {cupg_c_slot6spell, 205, 140, "StarShot"},
+   {cupg_c_slot7spell, 130, 100, "Cercle"  },
 };
-#pragma GDCC STRENT_LITERAL ON
 
 // Static Functions ----------------------------------------------------------|
 
 script
 static void GiveMagic(struct magic_info const *m)
 {
-   ACS_SetWeapon(l_strdup(m->classname));
+   StrEntON
+   ACS_SetWeapon(StrParam(OBJ "%S", m->name));
 }
 
 script
@@ -42,7 +43,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   PrintSprite(":UI:MagicSelectBack", 0,1, 0,1);
+   PrintSprite(s":UI:MagicSelectBack", 0,1, 0,1);
 
    bool any = false;
 
@@ -52,7 +53,6 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 
       if(m->st != -1 && !world.cbiupgr[m->st]) continue;
 
-#pragma GDCC STRENT_LITERAL OFF
       char gfx[18]; sprintf(gfx, ":UI:%s",    m->name);
       char hot[18]; sprintf(hot, ":UI:%sSel", m->name);
 
@@ -71,7 +71,6 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
       };
 
       char name[24]; sprintf(name, LANG "INFO_SHORT_%s", m->name);
-#pragma GDCC STRENT_LITERAL ON
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
@@ -105,7 +104,7 @@ void Lith_SetMagicUI(bool on)
          UData.ui = true;
          p->semifrozen++;
 
-         UData.gst.gfxprefix = ":UI:";
+         UData.gst.gfxprefix = s":UI:";
          UData.gst.cx = 320/2;
          UData.gst.cy = 240/2;
 
@@ -126,6 +125,7 @@ void Lith_SetMagicUI(bool on)
 script
 void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 {
+   StrEntON
    fixed manaperc = p->mana / (fixed)p->manamax;
 
    if(UData.manaperc < 1 && manaperc == 1)
@@ -162,6 +162,7 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
 {
+   StrEntON
    if(!p->hudenabled || p->indialogue) return;
 
    int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);

@@ -4,6 +4,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Extern Functions ----------------------------------------------------------|
 
 i96 Lith_ShopGetCost(struct player *p, shopdef_t const *def)

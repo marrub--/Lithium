@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 script ext("ACS")
 void Lith_GiveMeAllOfTheScore(void)
 {

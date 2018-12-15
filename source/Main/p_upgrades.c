@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
+StrEntOFF
+
 // Static Objects ------------------------------------------------------------|
 
 static upgradeinfo_t g_upgrinfoex[UPGR_EXTRA_NUM];
@@ -25,13 +27,13 @@ static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int t
 {
    upgrade_t const *upgr = upgr_;
 
-   SetMembI(tid, "user_upgradeid", upgr->info->key);
+   SetMembI(tid, s"user_upgradeid", upgr->info->key);
 
    switch(upgr->info->category)
    {
-   case UC_Body: SetMembI(tid, "user_upgradebody", true); break;
-   case UC_Weap: SetMembI(tid, "user_upgradeweap", true); break;
-   default:      SetMembI(tid, "user_upgradeextr", true); break;
+   case UC_Body: SetMembI(tid, s"user_upgradebody", true); break;
+   case UC_Weap: SetMembI(tid, s"user_upgradeweap", true); break;
+   default:      SetMembI(tid, s"user_upgradeextr", true); break;
    }
 
    return true;

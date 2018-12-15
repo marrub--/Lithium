@@ -2,6 +2,8 @@
 // Edit only if you aren't going to recompile.
 #include "lith_upgrades_common.h"
 
+StrEntON
+
 // Extern Objects ------------------------------------------------------------|
 
 upgradeinfo_t const upgrinfobase[UPGR_BASE_MAX] = {

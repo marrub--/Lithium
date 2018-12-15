@@ -3,6 +3,8 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")

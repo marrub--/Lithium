@@ -5,6 +5,8 @@
 
 #include <math.h>
 
+StrEntON
+
 #define UData UData_VitalScan(upgr)
 
 // Extern Functions ----------------------------------------------------------|

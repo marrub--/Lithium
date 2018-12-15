@@ -5,6 +5,8 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
+StrEntON
+
 script ext("ACS")
 void Lith_DOGS()
 {

@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 extern bool dorain;
 
 script ext("ACS")

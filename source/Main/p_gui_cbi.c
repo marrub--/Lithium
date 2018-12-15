@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 #define Upgr(name) if(world.cbiupgr[cupg_##name])
 
 #define InfoStart int y  = 70

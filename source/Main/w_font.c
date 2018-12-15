@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_file.h"
 
+StrEntON
+
 #define nglyphs 34
 #define nblocks 64
 #define ngroups 32

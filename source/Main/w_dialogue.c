@@ -6,6 +6,8 @@
 #include "lith_file.h"
 #include "lith_tokbuf.h"
 
+StrEntON
+
 #define LogTok(tok, s) \
    Log("(%i:%i) " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, tok->type, \
       tok->textV ? tok->textV : c"<no string>")
@@ -468,7 +470,7 @@ static void GetDecl_TrmPage(struct pstate *d, int num)
 // prototypes into the global ftbl.
 void Lith_GSInit_Dialogue(void)
 {
-   #pragma GDCC STRENT_LITERAL OFF
+   StrEntOFF
 
    static struct dlgfunc funcs[] = {
       {"nop", "L", DCD_NOP},
@@ -593,23 +595,22 @@ done:
 
    if(world.dbgLevel & log_dlg)
    {
-      #pragma GDCC STRENT_LITERAL OFF
+      StrEntOFF
       static char const *dcdnames[] = {
          #define DCD(name) #name,
          #include "lith_dialogue.h"
       };
-      #pragma GDCC STRENT_LITERAL ON
 
       for(struct dlgdef *def = dlgdefs; def; def = def->next) {
-         Log("Dumping code for script %i...", def->num);
+         Log(s"Dumping code for script %i...", def->num);
          for(int i = 0; i < def->codeC; i++)
-            Log("%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
+            Log(s"%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
                ? dcdnames[def->codeV[i]] : c"");
-         Log("Dumping string table for script %i...\n%s");
+         Log(s"Dumping string table for script %i...\n%s");
          Lith_PrintMem(def->stabV, def->stabC);
       }
 
-      Log("Done.");
+      Log(s"Done.");
    }
 }
 

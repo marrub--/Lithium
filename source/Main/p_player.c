@@ -7,6 +7,8 @@
 
 #include <limits.h>
 
+StrEntON
+
 // Extern Objects ------------------------------------------------------------|
 
 noinit struct player players[MAX_PLAYERS];

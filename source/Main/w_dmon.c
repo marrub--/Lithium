@@ -3,6 +3,8 @@
 #include "lith_world.h"
 #include "lith_player.h"
 
+StrEntON
+
 #define DMON_MAX 0x7FFF
 
 // Static Objects ------------------------------------------------------------|

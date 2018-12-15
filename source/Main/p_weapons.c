@@ -4,6 +4,8 @@
 #include "lith_world.h"
 #include "lith_hudid.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void GiveWeaponItem(int parm, int slot)

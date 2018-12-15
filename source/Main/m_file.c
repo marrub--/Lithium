@@ -7,6 +7,8 @@
 
 #include "lith_base64.h"
 
+StrEntOFF
+
 #define SAVE_BLOCK_SIZE 230
 
 // Type Definitions ----------------------------------------------------------|
@@ -37,8 +39,8 @@ static int NetClose(void *nfdata)
    // If debugging, print out information about the buffer being written.
    if(world.dbgSave)
    {
-      printf(c"NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
-      printf(c"Data follows\n");
+      printf("NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
+      printf("Data follows\n");
       Lith_PrintMem(nf->mem, nf->pos);
    }
 
@@ -59,13 +61,13 @@ static int NetClose(void *nfdata)
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
+         ACS_SetUserCVarString(nf->pnum, StrParam(s"%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;
       }
 
-      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), "");
+      ACS_SetUserCVarString(nf->pnum, StrParam(s"%S_%i", nf->pcvar, cvarnum), s"");
 
       Dalloc(coded);
    }
@@ -165,7 +167,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
 
-      fp = fopencookie(nf, c"w", (cookie_io_functions_t){
+      fp = fopencookie(nf, "w", (cookie_io_functions_t){
          .write = MemWrite,
          .close = NetClose
       });
@@ -178,7 +180,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
       for(int cvarnum;; cvarnum++)
       {
-         __str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
+         __str  cvar  = ACS_GetUserCVarString(pnum, StrParam(s"%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
 
          if(inlen)
@@ -203,8 +205,8 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
          // If debugging, print out information about the buffer being read.
          if(world.dbgSave)
          {
-            printf(c"Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
-            printf(c"Data follows\n");
+            printf("Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
+            printf("Data follows\n");
             Lith_PrintMem(data, size);
          }
 
@@ -215,7 +217,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
             mem->mem = data;
             mem->len = size;
 
-            fp = fopencookie(mem, c"r", (cookie_io_functions_t){
+            fp = fopencookie(mem, "r", (cookie_io_functions_t){
                .read  = MemRead,
                .seek  = MemSeek,
                .close = MemClose,
@@ -290,4 +292,3 @@ size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restri
 }
 
 // EOF
-

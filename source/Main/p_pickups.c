@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 #define name(n) LANG "PK_" #n
 
 #define StupidName(w) \

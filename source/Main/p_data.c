@@ -5,33 +5,36 @@
 #include "lith_world.h"
 #include "lith_monster.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void SetupAttributes(struct player *p)
 {
-   p->attr.names[at_acc] = c"ACC";
-   p->attr.names[at_def] = c"DEF";
-   p->attr.names[at_str] = c"STR";
-   p->attr.names[at_vit] = c"VIT";
-   p->attr.names[at_stm] = c"STM";
-   p->attr.names[at_luk] = c"LUK";
+   StrEntOFF
+   p->attr.names[at_acc] = "ACC";
+   p->attr.names[at_def] = "DEF";
+   p->attr.names[at_str] = "STR";
+   p->attr.names[at_vit] = "VIT";
+   p->attr.names[at_stm] = "STM";
+   p->attr.names[at_luk] = "LUK";
 
    switch(p->pclass) {
-   case pcl_marine:    p->attr.names[at_spc] = c"RGE"; break;
-   case pcl_cybermage: p->attr.names[at_spc] = c"CON"; break;
-   case pcl_informant: p->attr.names[at_spc] = c"ADR"; break;
-   case pcl_wanderer:  p->attr.names[at_spc] = c"AGI"; break;
-   case pcl_assassin:  p->attr.names[at_spc] = c"RSH"; break;
-   case pcl_darklord:  p->attr.names[at_spc] = c"REF"; break;
-   case pcl_thoth:     p->attr.names[at_spc] = c"???"; break;
+   case pcl_marine:    p->attr.names[at_spc] = "RGE"; break;
+   case pcl_cybermage: p->attr.names[at_spc] = "CON"; break;
+   case pcl_informant: p->attr.names[at_spc] = "ADR"; break;
+   case pcl_wanderer:  p->attr.names[at_spc] = "AGI"; break;
+   case pcl_assassin:  p->attr.names[at_spc] = "RSH"; break;
+   case pcl_darklord:  p->attr.names[at_spc] = "REF"; break;
+   case pcl_thoth:     p->attr.names[at_spc] = "???"; break;
    }
 
    if(p->pclass & pcl_robot) {
-      p->attr.names[at_vit] = c"POT";
-      p->attr.names[at_stm] = c"REP";
+      p->attr.names[at_vit] = "POT";
+      p->attr.names[at_stm] = "REP";
    } else if(p->pclass & pcl_nonhuman) {
-      p->attr.names[at_vit] = c"POT";
-      p->attr.names[at_stm] = c"REG";
+      p->attr.names[at_vit] = "POT";
+      p->attr.names[at_stm] = "REG";
    }
 
    p->attr.expnext = 500;

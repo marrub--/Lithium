@@ -58,6 +58,8 @@ def outSource fp, weps, wepn
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 // Extern Objects ------------------------------------------------------------|
 
 #define Placeholder1 "MMMMHMHMMMHMMM"

@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntOFF
+
 void Lith_DoPayout(void)
 {
    fixed64 taxpct = ACS_RandomFixed(0, 4 / 100.0);

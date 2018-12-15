@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 static bool  lmvar rain_chk;
 static fixed lmvar rain_px;
 static fixed lmvar rain_py;

@@ -4,7 +4,6 @@
 
 // unfortunate early project decisions.
 #pragma GDCC FIXED_LITERAL ON
-#pragma GDCC STRENT_LITERAL ON
 
 #include <ACS_ZDoom.h>
 #include <stdlib.h>
@@ -59,15 +58,15 @@
 #define GetZ ACS_GetActorZ
 
 #if LITHIUM
-#define Lith_IsPaused ServCallI("GetPaused")
+#define Lith_IsPaused ServCallI(s"GetPaused")
 #define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
 
 #define ServName OBJ "HERMES"
 #define DrawName OBJ "URANUS"
 
-#define CVAR "lith_"
-#define DCVAR "__lith_"
-#define OBJ "Lith_"
+#define CVAR s"lith_"
+#define DCVAR s"__lith_"
+#define OBJ s"Lith_"
 #define LANG "LITH_"
 #else
 #define Lith_IsPaused false
@@ -76,9 +75,9 @@
 #define ServName OBJ "Server"
 #define DrawName OBJ "Render"
 
-#define CVAR "dtap_"
-#define DCVAR "__dtap_"
-#define OBJ "Dt"
+#define CVAR s"dtap_"
+#define DCVAR s"__dtap_"
+#define OBJ s"Dt"
 #define LANG "DTAP_"
 #endif
 
@@ -96,11 +95,13 @@
 #define DebugNote(...) \
    (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
 
-// Convenience names
 #define InvNum  ACS_CheckInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
 #define InvTake ACS_TakeInventory
 #define InvGive ACS_GiveInventory
+
+#define StrEntON  _Pragma("GDCC STRENT_LITERAL ON")
+#define StrEntOFF _Pragma("GDCC STRENT_LITERAL OFF")
 
 // Types ---------------------------------------------------------------------|
 

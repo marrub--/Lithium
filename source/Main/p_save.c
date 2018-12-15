@@ -4,6 +4,8 @@
 #include "lith_savedata.h"
 #include "lith_file.h"
 
+StrEntOFF
+
 // Chunk "note" --------------------------------------------------------------|
 
 #define note_Len(s) __with(int len = s ? strlen(s) : 0; len = min(len, 255);)

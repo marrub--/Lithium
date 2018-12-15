@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 
+StrEntOFF
+
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_LinkDefault(list_t *list, void *object)

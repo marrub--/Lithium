@@ -5,6 +5,8 @@
 #include "lith_hudid.h"
 #include "lith_dialogue.h"
 
+StrEntON
+
 #define IMM *++vm.pc
 #define STR &def->stabV[IMM]
 #define JCC goto *cases[*vm.pc]

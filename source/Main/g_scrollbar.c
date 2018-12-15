@@ -2,6 +2,8 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
+StrEntON
+
 // This function is excessively commented in case I need to change it.
 // Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
 void Lith_GUI_ScrollBegin_Impl(gui_state_t *g, id_t id, gui_scroll_args_t const *a)

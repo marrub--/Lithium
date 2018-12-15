@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 stkcall
 void Lith_BeginAngles(int x, int y)
 {

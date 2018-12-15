@@ -3,6 +3,8 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)

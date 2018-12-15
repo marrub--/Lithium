@@ -161,6 +161,7 @@ struct player *Lith_GetPlayer(int tid, int ptr);
 // edit 31/8/2017: m e r g e
 struct player
 {
+   StrEntON
    // state
    __prop reset         {call: Lith_ResetPlayer(this)}
    __prop loadData      {call: Lith_PlayerLoadData(this)}

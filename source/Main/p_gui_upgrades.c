@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_world.h"
 
+StrEntON
+
 static __str const upgrcateg[UC_MAX] = {
    [UC_Body] = LANG "CAT_BODY",
    [UC_Weap] = LANG "CAT_WEAP",

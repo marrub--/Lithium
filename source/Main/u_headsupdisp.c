@@ -2,6 +2,8 @@
 #include "lith_upgrades_common.h"
 #include "lith_hud.h"
 
+StrEntON
+
 #define UData UData_HeadsUpDisp(upgr)
 
 // Static Functions ----------------------------------------------------------|

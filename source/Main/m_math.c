@@ -3,6 +3,8 @@
 
 #include <math.h>
 
+StrEntOFF
+
 #define BezierImpl(type, ret, func) \
    type xa = func(x1, x2, t); \
    type ya = func(y1, y2, t); \

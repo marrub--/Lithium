@@ -7,6 +7,8 @@
 #include "lith_file.h"
 #include "lith_tokbuf.h"
 
+StrEntON
+
 // Types ---------------------------------------------------------------------|
 
 struct page_init

@@ -117,6 +117,8 @@ if(p->num == 0) {
 #include "lith_player.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static __str LvSysName(int num)

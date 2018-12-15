@@ -6,6 +6,8 @@
 
 #include <math.h>
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void HUD_StringStack(struct player *p);

@@ -5,6 +5,8 @@
 #include "lith_monster.h"
 #include "lith_version.h"
 
+StrEntON
+
 // Extern Objects ------------------------------------------------------------|
 
 __addrdef __mod_arr lmvar;

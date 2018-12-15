@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <GDCC.h>
 
+StrEntOFF
+
 // Extern Objects ------------------------------------------------------------|
 
 __str dbgstat[64], dbgnote[64];

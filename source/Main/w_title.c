@@ -2,6 +2,8 @@
 #if LITHIUM
 #include "lith_common.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static void Blinker(void)

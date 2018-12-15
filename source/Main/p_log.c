@@ -6,6 +6,8 @@
 #include "lith_hudid.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Static Functions ----------------------------------------------------------|
 
 static __str LogV(int levl, __str fmt, va_list vl)

@@ -5,6 +5,8 @@
 #include "lith_savedata.h"
 #include "lith_world.h"
 
+StrEntON
+
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size)

@@ -3,6 +3,8 @@
 #include "lith_world.h"
 #include "lith_player.h"
 
+StrEntON
+
 static int lmvar cbispawn[cupg_max];
 static int lmvar cbispawniter;
 

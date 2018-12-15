@@ -4,6 +4,8 @@
 #include "lith_bip.h"
 #include "lith_list.h"
 
+StrEntON
+
 static void SetCurPage(gui_state_t *g, struct bip *bip, struct page *page, __str body)
 {
    bip->curpage = page;
