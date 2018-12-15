@@ -2,18 +2,19 @@
 #include "lith_common.h"
 #include "lith_player.h"
 
-StrEntON
+StrEntOFF
 
 script ext("ACS")
 void Lith_Obituary(void)
 {
-   static __str const pronoun[pro_max][5] = {
+   static char const *pronoun[pro_max][5] = {
       {"they", "them", "their", "theirs", "they're"},
       {"she",  "her",  "her",   "hers",   "she's"  },
       {"he",   "him",  "his",   "his",    "he's"   },
       {"it",   "it",   "its",   "its'",   "it's"   },
    };
 
+   StrEntON
    struct player *p = LocalPlayer;
 
    __str obit = ServCallS("GetObituary");
@@ -34,13 +35,15 @@ void Lith_Obituary(void)
 
    for(char __str_ars const *s = obit; *s;)
    {
+      char const *pr;
       if(s[0] == '%') switch(s[1]) {
-      case 'o': s += 2; ACS_PrintName(p->num+1);                 continue;
-      case 'g': s += 2; ACS_PrintString(pronoun[p->pronoun][0]); continue;
-      case 'h': s += 2; ACS_PrintString(pronoun[p->pronoun][1]); continue;
-      case 'p': s += 2; ACS_PrintString(pronoun[p->pronoun][2]); continue;
-      case 's': s += 2; ACS_PrintString(pronoun[p->pronoun][3]); continue;
-      case 'r': s += 2; ACS_PrintString(pronoun[p->pronoun][4]); continue;
+      case 'o': s += 2; ACS_PrintName(p->num+1); continue;
+      case 'g': s += 2; pr = pronoun[p->pronoun][0]; goto print;
+      case 'h': s += 2; pr = pronoun[p->pronoun][1]; goto print;
+      case 'p': s += 2; pr = pronoun[p->pronoun][2]; goto print;
+      case 's': s += 2; pr = pronoun[p->pronoun][3]; goto print;
+      case 'r': s += 2; pr = pronoun[p->pronoun][4]; goto print;
+      print: PrintChars(pr, strlen(pr)); continue;
       }
 
       ACS_PrintChar(*(s++));
@@ -48,8 +51,10 @@ void Lith_Obituary(void)
 
    obit = ACS_EndStrParam();
 
-   LogDebug(log_dev, "%S", obit);
-   Lith_ForPlayer() p->logB(1, "%S", obit);
+   if(obit != "") {
+      LogDebug(log_dev, "%S", obit);
+      Lith_ForPlayer() p->logB(1, "%S", obit);
+   }
 }
 
 // EOF
