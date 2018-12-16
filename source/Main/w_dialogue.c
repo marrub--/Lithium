@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_world.h"
 #include "lith_player.h"
@@ -613,6 +614,6 @@ done:
       Log(s"Done.");
    }
 }
+#endif
 
 // EOF
-

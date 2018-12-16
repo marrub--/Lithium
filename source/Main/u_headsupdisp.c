@@ -140,9 +140,9 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
    if(p->indialogue) return;
 
    Lith_HUD_Log(p, CR_GREEN, 0, 0);
-   Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
 
    #if LITHIUM
+   Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
    Lith_HUD_Score(p, "%S\Cnscr", p->score, "cnfont", "j", 320,2, 3,1);
 
    if(p->getCVarI(CVAR "hud_showweapons"))

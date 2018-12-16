@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_world.h"
 
@@ -109,5 +110,6 @@ void Lith_RandomSpawn(int rsn)
 
    SCallI("Lith_RandomSpawn", "Set", item);
 }
+#endif
 
 // EOF

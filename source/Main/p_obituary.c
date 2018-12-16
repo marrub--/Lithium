@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 
@@ -56,5 +57,6 @@ void Lith_Obituary(void)
       Lith_ForPlayer() p->logB(1, "%S", obit);
    }
 }
+#endif
 
 // EOF

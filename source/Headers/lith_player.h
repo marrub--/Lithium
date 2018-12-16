@@ -8,6 +8,7 @@ LITH_X(pW, pcl_wanderer)
 LITH_X(pA, pcl_assassin)
 LITH_X(pD, pcl_darklord)
 LITH_X(pT, pcl_thoth)
+LITH_X(pX, pcl_doubletap)
 
 LITH_X(gO, pcl_outcasts)
 LITH_X(gM, pcl_missioners)

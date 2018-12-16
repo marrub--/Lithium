@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_weapons.h"
 #include "lith_player.h"
@@ -121,5 +122,6 @@ void Lith_GetSigil()
       world.freeze(false);
    }
 }
+#endif
 
 // EOF

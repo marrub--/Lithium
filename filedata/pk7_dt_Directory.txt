@@ -1,0 +1,28 @@
+in directory ../pk7_dt
+
+prefix DTAP_
+
+language en -> en enu default
+
+-- CBI Mail -------------------------------------------------------------------
+in file language.info.mail.*.txt
+   parse file Mail.txt
+done
+
+
+-- Misc -----------------------------------------------------------------------
+in file language.log.*.txt
+   parse file Log.txt
+
+   comment EOF
+done
+
+in file language.misc.*.txt
+   parse file Misc.txt
+   parse file Misc_QuitMessages.txt
+   parse file Misc_UI.txt
+
+   comment EOF
+done
+
+EOF

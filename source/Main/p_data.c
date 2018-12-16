@@ -54,7 +54,7 @@ static void SetPClass(struct player *p)
       else if(cl == OBJ "ThothPlayer"    ) p->pclass = pcl_thoth;
       #else
       if(cl == OBJ "Player")
-         p->pclass = pcl_marine;
+         p->pclass = pcl_doubletap;
       #endif
       else for(;;)
       {
@@ -75,10 +75,8 @@ bool Lith_ButtonPressed(struct player *p, int bt)
 stkcall
 bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add)
 {
-   if(add)
-      p->velx += velx, p->vely += vely, p->velz += velz;
-   else
-      p->velx = velx, p->vely = vely, p->velz = velz;
+   if(add) p->velx += velx, p->vely += vely, p->velz += velz;
+   else    p->velx  = velx, p->vely  = vely, p->velz  = velz;
 
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, true);
 }
@@ -244,12 +242,12 @@ void Lith_ResetPlayer(struct player *p)
       SetupAttributes(p);
 
       // i cri tears of pain for APROP_SpawnHealth
-      p->viewheight   = ACS_GetActorViewHeight(0);
-      p->jumpheight   = GetPropK(0, APROP_JumpZ);
-      p->spawnhealth  = GetPropI(0, APROP_Health);
-      p->maxhealth    = p->spawnhealth;
-      p->discount     = 1.0;
-      p->stepnoise    = StrParam("player/%S/step", p->classname);
+      p->viewheight  = ACS_GetActorViewHeight(0);
+      p->jumpheight  = GetPropK(0, APROP_JumpZ);
+      p->spawnhealth = GetPropI(0, APROP_Health);
+      p->maxhealth   = p->spawnhealth;
+      p->discount    = 1.0;
+      p->stepnoise   = StrParam("player/%S/step", p->classname);
 
       switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
       case 0: p->pronoun = pro_male;   break;
@@ -314,7 +312,9 @@ void Lith_ResetPlayer(struct player *p)
    if(!p->upgrinit) Lith_PlayerInitUpgrades(p);
    else             Lith_PlayerReinitUpgrades(p);
 
+   #if LITHIUM
    if(!p->invinit) Lith_PlayerInitInventory(p);
+   #endif
 
    // Static data
    if(!p->wasinit)
@@ -324,7 +324,9 @@ void Lith_ResetPlayer(struct player *p)
       if(world.dbgLevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "strnull is \"%S\"", null);
+         #if LITHIUM
          PrintDmonAllocSize(p);
+         #endif
       } else {
          p->logH(1, L(LANG "LOG_StartGame"), CVAR "k_opencbi");
       }
@@ -334,6 +336,7 @@ void Lith_ResetPlayer(struct player *p)
       p->wasinit = true;
    }
 
+   #if LITHIUM
    if(world.dbgItems)
    {
       for(int i = weapon_min; i < weapon_max; i++) {
@@ -342,6 +345,7 @@ void Lith_ResetPlayer(struct player *p)
             InvGive(info->classname, 1);
       }
    }
+   #endif
 }
 
 stkcall

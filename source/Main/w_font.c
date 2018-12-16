@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_file.h"
 
@@ -132,5 +133,6 @@ bool Lith_SetupFontsContinue(void)
 
    return true;
 }
+#endif
 
 // EOF

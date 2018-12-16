@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_world.h"
 #include "lith_player.h"
@@ -92,5 +93,6 @@ void Lith_PickupCBIItem(int num)
 
    Lith_InstallCBIItem(num);
 }
+#endif
 
 // EOF

@@ -5,13 +5,15 @@ Enum("Level-up system", CVAR "player_lvsys", atsys_auto, atsys_manual, "%S", LvS
 if(p->num == 0) {
    ServerInt("Difficulty Base",     c"%", CVAR "sv_difficulty", 1, 100);
    ServerFloat("Score multiplier",  c"x", CVAR "sv_scoremul",   0, 10);
+   #if LITHIUM
    ServerBool("Explode on death",         CVAR "sv_revenge");
+   #endif
    ServerInt("Autosave Interval", c"min", CVAR "sv_autosave",   0, 30);
+   #if LITHIUM
    ServerBool("Disable phantoms",                       CVAR "sv_nobosses");
    ServerBool("Don't pick up ammo when full",           CVAR "sv_nofullammo");
    ServerBool("Don't give score when picking up ammo",  CVAR "sv_noscoreammo");
    ServerBool("Drop shotguns from zombies",             CVAR "sv_wepdrop");
-   #if LITHIUM
    ServerBool("Pause while in menu",                    CVAR "sv_pauseinmenus");
    #endif
 }
@@ -21,8 +23,10 @@ Float("Horizontal cursor speed", c"x", CVAR "gui_xmul", 0.1, 2.0);
 Float("Vertical cursor speed",   c"x", CVAR "gui_ymul", 0.1, 2.0);
 Enum("Color theme",                    CVAR "gui_theme",  0, cbi_theme_max-1, "%S", Lith_ThemeName(set));
 Enum("Cursor",                         CVAR "gui_cursor", 0,  gui_curs_max-1, "%S", CursName(set));
+#if LITHIUM
 Enum("Japanese font",                  CVAR "gui_jpfont", 0, font_num-1, "%S", FontName(set));
 Text("To use Japanese language, type \"language jp\" into the console.");
+#endif
 
 Category("Player");
 Float("Damage bob multiplier",      c"x", CVAR "player_damagebobmul", 0.0, 1.0);
@@ -31,11 +35,16 @@ Float("Footstep volume",            c"x", CVAR "player_footstepvol",  0.0, 1.0);
 Float("View tilt",                  c"x", CVAR "player_viewtilt",     0.0, 1.0);
 Bool("Log score gained",                  CVAR "player_scorelog");
 Bool("Play a sound when score is gained", CVAR "player_scoresound");
+#if LITHIUM
 Bool("Play sounds on the results screen", CVAR "player_resultssound");
+#endif
 Bool("Invert mouse in netgames (hack)",   CVAR "player_invertmouse");
+#if LITHIUM
 Bool("Enable rain shader",                CVAR "player_rainshader");
 Bool("Alternate invulnerability palette", CVAR "player_altinvuln");
+#endif
 
+#if LITHIUM
 Category("Items");
 Bool("Teleport in bought items and upgrades", CVAR "player_teleshop");
 Bool("Stupid pickup messages",                CVAR "player_stupidpickups");
@@ -84,6 +93,7 @@ Int("Crosshair alpha",  c"/255", CVAR "xhair_a",     0, 255);
 Enum("Crosshair style",          CVAR "xhair_style", 1,  10, "%S", XHairName(set));
 Bool("Crosshair enabled",        CVAR "xhair_enable");
 Bool("Crosshair juicer enabled", CVAR "xhair_enablejuicer");
+#endif
 
 Category("Vital Scanner");
 Int("X offset",  c"px", CVAR "scanner_xoffs", -160, 160);
@@ -93,11 +103,13 @@ Bool("Slide to target", CVAR "scanner_slide");
 Bool("Health bar",      CVAR "scanner_bar");
 Bool("Alternate font",  CVAR "scanner_altfont");
 
+#if LITHIUM
 if(p->num == 0) {
    Category("World");
    ServerBool("Rain in outside areas", CVAR "sv_rain");
    ServerBool("Replace skies",         CVAR "sv_sky");
 }
+#endif
 
 #undef Category
 #undef Bool
@@ -329,4 +341,3 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #endif
 
 // EOF
-

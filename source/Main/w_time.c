@@ -13,6 +13,7 @@ int Lith_Timer(void)
 
 char const *Lith_CanonTime(int type)
 {
+   StrEntOFF
    noinit static char ft[64], st[64], dt[64];
 
    int s = 53 + (world.ticks / 35);
@@ -30,7 +31,6 @@ char const *Lith_CanonTime(int type)
    M = M % 12 + 1;
    Y = Y      + 1;
 
-#pragma GDCC STRENT_LITERAL OFF
    switch(type) {
    case CANONTIME_FULL:  sprintf(ft, LC(LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
    case CANONTIME_SHORT: sprintf(st, LC(LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
@@ -38,7 +38,6 @@ char const *Lith_CanonTime(int type)
    }
 
    return "";
-#pragma GDCC STRENT_LITERAL ON
 }
 
 stkcall

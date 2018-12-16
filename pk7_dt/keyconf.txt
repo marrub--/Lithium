@@ -1,10 +1,15 @@
 // Key Sections --------------------------------------------------------------|
 addkeysection "DoubleTap Actions" DoubleTap
 addmenukey "Open UI" dtap_k_opencbi
+addmenukey "Zoom In"  dtap_k_zoomin
+addmenukey "Zoom Out" dtap_k_zoomout
 addmenukey "Glare" dtap_k_glare
 
 // Aliases -------------------------------------------------------------------|
 alias dtap_k_opencbi "pukename Lith_KeyOpenCBI"
+
+alias dtap_k_zoomin  "pukename Lith_KeyZoom 30"
+alias dtap_k_zoomout "pukename Lith_KeyZoom -60"
 
 alias dtap_k_glare "pukename Lith_Glare"
 

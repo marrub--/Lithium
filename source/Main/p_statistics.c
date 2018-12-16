@@ -16,7 +16,7 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
       n++
 
    PrintTextStr(p->name);
-   PrintText("SMALLFNT", CR_LIGHTBLUE, 20,1, 40,1);
+   PrintText("smallfnt", CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat(L(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
    Stat(L(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);

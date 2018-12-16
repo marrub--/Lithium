@@ -117,8 +117,7 @@ void Lith_LogS(int levl, int type)
 
    if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
-   withplayer(LocalPlayer) switch(type)
-   {
+   withplayer(LocalPlayer) switch(type) {
    case msg_ammo: if(p->getCVarI(CVAR "player_ammolog"))
    case msg_huds: p->logH(levl, "%S", name); break;
    case msg_full: p->logF(      "%S", name); break;

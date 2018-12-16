@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 
@@ -85,5 +86,6 @@ void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);
 }
+#endif
 
 // EOF

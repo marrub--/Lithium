@@ -1,4 +1,5 @@
-// Copyright © 2017 Alison Sanderson, all rights reserved.
+// Copyright © 2017-2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_player.h"
 #include "lith_hudid.h"
 #include "lith_world.h"
@@ -187,5 +188,6 @@ void Lith_MagicSelect(int num)
       }
    }
 }
+#endif
 
 // EOF

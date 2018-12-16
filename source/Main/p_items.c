@@ -1,4 +1,5 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -456,5 +457,6 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       PrintText("cbifont", CR_WHITE, 40,1, 45+7*i,1);
    }
 }
+#endif
 
 // EOF

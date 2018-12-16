@@ -39,6 +39,58 @@ class DtRender : EventHandler
 
 class DtStatusBar : BaseStatusBar
 {
+   HUDFont mHUDFont;
+   InventoryBarState DiParms;
+
+   override void Init()
+   {
+      Super.Init();
+      SetSize(32, 320, 200);
+      Font fnt = "LHUDFONT";
+      mHUDFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), true, 1, 1);
+      fnt = "LHUDFONTSMALL";
+      DiParms = InventoryBarState.Create();
+   }
+
+   const left   = 0;
+   const right  = -left;
+   const bottom = -0;
+
+   override void Draw(int state, double TicFrac)
+   {
+      Super.Draw(state, TicFrac);
+      if (state == HUD_StatusBar || state == HUD_Fullscreen)
+      {
+         BeginHUD();
+         DrawImage("dtgfx/HUD/H_B1.png", (left+50, bottom-2));
+         DrawImage("MEDIA0", (left+20, bottom-2));
+         DrawString(mHUDFont, FormatNumber(CPlayer.Health, 3), (left+34, bottom-15));
+         let armor = CPlayer.Mo.FindInventory("BasicArmor");
+         if(armor != null && armor.Amount > 0)
+         {
+            DrawImage("dtgfx/HUD/H_B1.png", (left+50, bottom-22));
+            DrawInventoryIcon(armor, (left+20, bottom-22));
+            DrawString(mHUDFont, FormatNumber(armor.Amount, 3), (left+34, bottom-35));
+         }
+         Inventory ammotype1, ammotype2;
+         [ammotype1, ammotype2] = GetCurrentAmmo();
+         int invY = -20;
+         if(ammotype1 != null)
+         {
+            DrawImage("dtgfx/HUD/H_B2.png", (right-50, bottom-2));
+            DrawInventoryIcon(ammotype1, (right-20, bottom-2));
+            DrawString(mHUDFont, FormatNumber(ammotype1.Amount, 3), (right-34, bottom-15), DI_TEXT_ALIGN_RIGHT);
+            invY -= 20;
+         }
+         if(IsInventoryBarVisible())
+            DrawInventoryBar(DiParms, (0, 0), 7, DI_SCREEN_CENTER_BOTTOM, HX_SHADOW);
+         else if(!Level.NoInventoryBar && CPlayer.Mo.InvSel != null)
+         {
+            DrawInventoryIcon(CPlayer.Mo.InvSel, (-14, invY + 17));
+            DrawString(mHUDFont, FormatNumber(CPlayer.Mo.InvSel.Amount, 3), (-30, invY), DI_TEXT_ALIGN_RIGHT);
+         }
+      }
+   }
 }
 
 class DtPlayer : DoomPlayer
@@ -59,7 +111,12 @@ class DtPlayer : DoomPlayer
       Player.StartItem "DtPistol";
       Player.StartItem "Fist";
       Player.StartItem "Clip", 50;
+      Player.ViewHeight 48;
+      Player.AttackZOffset 15;
+      Player.DisplayName "Marine";
+      Player.SoundClass "marine";
       Species "DtPlayer";
+      Tag "Marine";
 
       +THRUSPECIES
    }
@@ -213,16 +270,41 @@ class DtShotgunFreeze : Powerup
 
 class DtPistol : Pistol replaces Pistol
 {
+   int m_Mag;
+
+   action void A_DtFirePistol()
+   {
+      A_GunFlash();
+      A_PlaySound("weapons/pistol", CHAN_WEAPON);
+      A_FireBullets(3, 0, 1, 5, "BulletPuff");
+   }
+
+   action void A_DtReload()
+   {
+      invoker.m_Mag = 0;
+      A_PlaySound("weapons/pistol/reload", CHAN_5);
+   }
+
    states
    {
    Fire:
       PISG A 2;
-      PISG B 3 A_FirePistol;
+      PISG B 3 A_DtFirePistol;
+      PISG A 0 A_JumpIf(++invoker.m_Mag == 14, "Reload");
       PISG C 2;
       PISG B 3 A_ReFire;
       goto Ready;
+   Reload:
+      PISG A 1 offset(-4, 40) A_DtReload();
+      PISG A 1 offset(-6, 45);
+      PISG A 2 offset(-6, 46);
+      PISG A 2 offset(-3, 41);
+      PISG A 1 offset(-1, 35);
+      PISG A 1 offset(-1, 32);
+      PISG A 2 A_ReFire;
+      goto Ready;
    Flash:
-      PISF A 4 bright A_Light1;
+      PISF A 2 bright A_Light1;
       goto LightDone;
    }
 }
@@ -250,9 +332,9 @@ class DtShotgun : Shotgun replaces Shotgun
    }
 }
 
-#include "dtzscript/const.zsc"
-#include "dtzscript/pdata.zsc"
-#include "dtzscript/wdata.zsc"
-#include "dtzscript/draw.zsc"
+#include "dtzsc/const.zsc"
+#include "dtzsc/pdata.zsc"
+#include "dtzsc/wdata.zsc"
+#include "dtzsc/draw.zsc"
 
 // EOF

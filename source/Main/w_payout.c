@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -34,5 +35,6 @@ void Lith_DoPayout(void)
 
    memset(&payout, 0, sizeof payout);
 }
+#endif
 
 // EOF

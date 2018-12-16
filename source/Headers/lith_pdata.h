@@ -1,5 +1,5 @@
 // zsc output: pk7/lzscript/Headers/lith_pdata.h
-// zsc output: pk7_dt/dtzscript/pdata.zsc
+// zsc output: pk7_dt/dtzsc/pdata.zsc
 
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 enum // PData
@@ -29,6 +29,7 @@ enum // PClass
    pcl_assassin  = 1 << 4,
    pcl_darklord  = 1 << 5,
    pcl_thoth     = 1 << 6,
+   pcl_doubletap = 1 << 7,
 
    // Groups
    pcl_outcasts   = pcl_marine    | pcl_cybermage,
@@ -36,13 +37,13 @@ enum // PClass
    pcl_intruders  = pcl_assassin  | pcl_darklord | pcl_thoth,
 
    // Lifeform Type
-   pcl_human    = pcl_marine   | pcl_cybermage | pcl_assassin,
-   pcl_nonhuman = pcl_wanderer | pcl_darklord  | pcl_thoth,
-   pcl_robot    = pcl_informant,
+   pcl_human    = pcl_marine    | pcl_cybermage | pcl_assassin,
+   pcl_nonhuman = pcl_wanderer  | pcl_darklord  | pcl_thoth,
+   pcl_robot    = pcl_informant | pcl_doubletap,
 
    // Misc. Abilities
-   pcl_any       = pcl_outcasts  | pcl_missioners | pcl_intruders,
-   pcl_magicuser = pcl_cybermage | pcl_wanderer   | pcl_thoth,
+   pcl_any       = pcl_human | pcl_nonhuman | pcl_robot,
+   pcl_magicuser = pcl_cybermage | pcl_wanderer | pcl_thoth,
 };
 
 // EOF

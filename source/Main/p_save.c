@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_savedata.h"
@@ -95,6 +96,6 @@ void Lith_PlayerLoadData(struct player *p)
       Lith_LoadEnd(save);
    }
 }
+#endif
 
 // EOF
-

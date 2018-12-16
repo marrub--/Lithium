@@ -40,7 +40,9 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       int shp = GetPropI(0, APROP_SpawnHealth);
 
       int id = Lith_UniqueID();
+      #if LITHIUM
       dmon_t const *const m = DmonSelf();
+      #endif
 
       int ot = UData.target;
 
@@ -79,11 +81,14 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       {
          UData.oldhealth = UData.health;
          UData.health    = chp;
-
-         if(m) UData.maxhealth = m->maxhealth;
-         else  UData.maxhealth = shp;
+         #if LITHIUM
+         UData.maxhealth = m ? m->maxhealth : shp;
+         #else
+         UData.maxhealth = shp;
+         #endif
       }
 
+      #if LITHIUM
       if(m && shp && m->maxhealth)
       {
          int level  = shadow ? m->level - ACS_Random(-5, 5) : m->level;
@@ -96,6 +101,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
          UData.split     = minmax(split, 1, 7);
       }
       else
+      #endif
       {
          UData.rank = 0;
          UData.splitfrac = chp / (fixed)shp;

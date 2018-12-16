@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_player.h"
 #include "lith_monster.h"
 #include "lith_world.h"
@@ -149,7 +150,6 @@ void Lith_GSInit_Weapon(void)
 script
 void Lith_PlayerPreWeapons(struct player *p)
 {
-   #if LITHIUM
    weapondata_t *w = &p->weapon;
 
    w->prev = w->cur;
@@ -224,7 +224,6 @@ void Lith_PlayerPreWeapons(struct player *p)
    }
 
    if(!w->cur) w->cur = &w->inv[weapon_unknown];
-   #endif
 }
 
 script
@@ -378,5 +377,6 @@ void Lith_RecoilUp(fixed amount)
 {
    withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
 }
+#endif
 
 // EOF

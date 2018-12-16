@@ -52,10 +52,10 @@ int Lith_UniqueID(int tid)
 
 // Static Functions ----------------------------------------------------------|
 
+#if LITHIUM
 script
 static void CheckEnemyCompat(void)
 {
-#if LITHIUM
    if(ACS_GetCVar("sv_nomonsters") || world.enemycheck)
       return;
 
@@ -81,7 +81,6 @@ static void CheckEnemyCompat(void)
       world.enemycheck = true;
       ACS_Thing_Remove(0);
    }
-#endif
 }
 
 script
@@ -93,19 +92,6 @@ static void SpawnBoss()
       Lith_SpawnBosses(p->scoresum, false);
       break;
    }
-}
-
-static void GetDebugInfo(void)
-{
-   bool all = ACS_GetCVar(DCVAR "debug_all");
-
-   world.dbgLevel =        ACS_GetCVar(DCVAR "debug_level");
-   world.dbgItems = all || ACS_GetCVar(DCVAR "debug_items");
-   world.dbgBIP   = all || ACS_GetCVar(DCVAR "debug_bip");
-   world.dbgScore = all || ACS_GetCVar(DCVAR "debug_score");
-   world.dbgUpgr  = all || ACS_GetCVar(DCVAR "debug_upgrades");
-   world.dbgSave  = all || ACS_GetCVar(DCVAR "debug_save");
-   world.dbgNoMon =        ACS_GetCVar(DCVAR "debug_nomonsters");
 }
 
 static void CheckModCompat(void)
@@ -147,6 +133,20 @@ static void UpdateGame(void)
    }
    #undef Update
 }
+#endif
+
+static void GetDebugInfo(void)
+{
+   bool all = ACS_GetCVar(DCVAR "debug_all");
+
+   world.dbgLevel =        ACS_GetCVar(DCVAR "debug_level");
+   world.dbgItems = all || ACS_GetCVar(DCVAR "debug_items");
+   world.dbgBIP   = all || ACS_GetCVar(DCVAR "debug_bip");
+   world.dbgScore = all || ACS_GetCVar(DCVAR "debug_score");
+   world.dbgUpgr  = all || ACS_GetCVar(DCVAR "debug_upgrades");
+   world.dbgSave  = all || ACS_GetCVar(DCVAR "debug_save");
+   world.dbgNoMon =        ACS_GetCVar(DCVAR "debug_nomonsters");
+}
 
 static void GSInit(void)
 {
@@ -158,20 +158,24 @@ static void GSInit(void)
 
    LogDebug(log_dev, "GINIT RUNNING");
 
+   GetDebugInfo();
+   #if LITHIUM
    CheckModCompat();
    UpdateGame();
-   GetDebugInfo();
    Lith_GInit_Shop();
+   #endif
 
    if(!world.gsinit)
    {
       LogDebug(log_dev, "GSINIT RUNNING");
 
       Lith_GSInit_Upgrade();
+      #if LITHIUM
       Lith_GSInit_Weapon();
       Lith_GSInit_Dialogue();
 
       CheckEnemyCompat();
+      #endif
 
       world.game         = ACS_GetCVar(DCVAR "game");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
@@ -188,16 +192,16 @@ static void MInit(void)
 {
    LogDebug(log_dev, "MINIT RUNNING");
 
+   #if LITHIUM
    extern void Lith_LoadMapDialogue(void);
    Lith_LoadMapDialogue();
 
    world.islithmap = (world.mapnum & 0xFFFFFC00) == 0x01202000;
 
-#if LITHIUM
    world.pauseinmenus = world.singleplayer && ACS_GetCVar(CVAR "sv_pauseinmenus");
-#endif
 
    world.soulsfreed = 0;
+   #endif
 
    // Init a random seed from the map.
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
@@ -220,6 +224,7 @@ static void MSInit(void)
 
    LogDebug(log_dev, "MSINIT RUNNING");
 
+   #if LITHIUM
    payout.killmax += world.mapkillmax;
    payout.itemmax += world.mapitemmax;
 
@@ -232,6 +237,7 @@ static void MSInit(void)
       dorain = true;
       Lith_DoRain();
    }
+   #endif
 }
 
 static void WSInit(void)
@@ -240,11 +246,12 @@ static void WSInit(void)
 
    LogDebug(log_dev, "WSINIT RUNNING");
 
-   DmonInit();
-   world.bossspawned = false;
-
    if(world.unloaded)
       world.mapscleared++;
+
+   #if LITHIUM
+   DmonInit();
+   world.bossspawned = false;
 
    if(ACS_GetCVar(CVAR "sv_sky") && !world.islithmap)
    {
@@ -258,6 +265,7 @@ static void WSInit(void)
       else
          ACS_ChangeSky("LITHSKS1", "LITHSKS1");
    }
+   #endif
 }
 
 static void WInit(void)
@@ -266,12 +274,14 @@ static void WInit(void)
 
    LogDebug(log_dev, "WINIT RUNNING");
 
+   #if LITHIUM
    if(!ACS_GetCVar(CVAR "sv_nobosses"))
       SpawnBoss();
 
    // Payout, which is not done on the first map.
    if(world.mapscleared != 0)
       Lith_DoPayout();
+   #endif
 
    // Cluster messages.
    #define Message(cmp, n, name) \
@@ -292,9 +302,11 @@ static void WInit(void)
       Message(== 10, 4, "Secret2");
    }
 
+   #if LITHIUM
    if(ACS_GetCVar(CVAR "sv_nobosses") || world.dbgItems)
       for(int i = 0; i < cupg_max; i++)
          Lith_InstallCBIItem(i);
+   #endif
 }
 
 script ext("ACS")
@@ -310,12 +322,14 @@ script type("open")
 static void Lith_World(void)
 {
 begin:
+   #if LITHIUM
    if(ACS_GameType() == GAME_TITLE_MAP) {
       script
       extern void Lith_Title(void);
       Lith_Title();
       return;
    }
+   #endif
 
    LogDebug(log_dev, "LITH OPEN");
 
@@ -390,12 +404,14 @@ begin:
          goto begin;
       }
 
+      #if LITHIUM
       if(world.ticks > ACS_GetCVar(CVAR "sv_failtime") * 35 * 60 * 60 && !world.islithmap)
       {
          ServCallI("SetEnding", "TimeOut");
          ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);
          return;
       }
+      #endif
 
       int secrets = world.mapsecrets;
       int kills   = world.mapkills;
@@ -414,6 +430,7 @@ begin:
       prevkills   = kills;
       previtems   = items;
 
+      #if LITHIUM
       if(world.enemycheck && !world.dbgNoMon) {
          extern void DmonDebugInfo(void);
          DmonDebugInfo();
@@ -429,6 +446,7 @@ begin:
       }
 
       DebugStat("mission%%: %i\n", missionprc);
+      #endif
 
       ACS_Delay(1);
 
@@ -453,7 +471,9 @@ static void Lith_WorldUnload(void)
    world.unloaded = true;
    LogDebug(log_dev, "WORLD UNLOADED");
 
+   #if LITHIUM
    Lith_InstallSpawnedCBIItems();
+   #endif
 
    Lith_ForPlayer() {
       p->setActivator();

@@ -56,15 +56,14 @@ void Lith_GiveScoreScript(int score)
 script ext("ACS")
 void Lith_BoughtItemPickup(int id)
 {
-   int const chan = CHAN_ITEM|CHAN_NOPAUSE;
+   static int const chan = CHAN_ITEM|CHAN_NOPAUSE;
    withplayer(LocalPlayer) if(id)
    {
       upgrade_t *upgr = p->getUpgr(id);
 
       if(!upgr->owned)
       {
-         switch(upgr->info->category)
-         {
+         switch(upgr->info->category) {
          case UC_Body: ACS_PlaySound(0, "player/pickup/upgrbody", chan, 1, false, ATTN_NONE); break;
          case UC_Weap: ACS_PlaySound(0, "player/pickup/upgrweap", chan, 1, false, ATTN_NONE); break;
          case UC_Extr: ACS_PlaySound(0, "player/pickup/upgrextr", chan, 1, false, ATTN_NONE); break;

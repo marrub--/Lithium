@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 
@@ -124,6 +125,6 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
 #pragma GDCC STRENT_LITERAL ON
       p->buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
+#endif
 
 // EOF
-

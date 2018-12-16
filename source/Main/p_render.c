@@ -10,8 +10,10 @@ StrEntON
 
 // Static Functions ----------------------------------------------------------|
 
+#if LITHIUM
 static void HUD_StringStack(struct player *p);
 static void HUD_Waves(struct player *p);
+#endif
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -79,6 +81,7 @@ void Lith_PlayerFootstep(struct player *p)
    }
 }
 
+#if LITHIUM
 stkcall
 void Lith_PlayerItemFx(struct player *p)
 {
@@ -89,6 +92,7 @@ void Lith_PlayerItemFx(struct player *p)
 
    p->hadinfrared = hasir;
 }
+#endif
 
 // Update view bobbing when you get damaged.
 script
@@ -152,6 +156,7 @@ void Lith_PlayerView(struct player *p)
    DebugStat("rage: %k\n", p->rage);
 }
 
+#if LITHIUM
 script
 void Lith_PlayerStyle(struct player *p)
 {
@@ -206,6 +211,7 @@ void Lith_PlayerHUD(struct player *p)
       }
    }
 }
+#endif
 
 script
 void Lith_PlayerLevelup(struct player *p)
@@ -227,6 +233,7 @@ void Lith_PlayerLevelup(struct player *p)
 
 // Static Functions ----------------------------------------------------------|
 
+#if LITHIUM
 static void HUD_StringStack(struct player *p)
 {
    typedef struct hudstr_s
@@ -291,6 +298,6 @@ static void HUD_Waves(struct player *p)
    pos = (5 + timer) % 160;
    DrawSpriteFade(":HUD:H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
+#endif
 
 // EOF
-

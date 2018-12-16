@@ -1,0 +1,51 @@
+player/cbi/win95 lsounds/GUI/Startup // Windows 95 / Brian Eno
+
+player/cbi/open  lsounds/GUI/Open  // Halo 3
+player/cbi/close lsounds/GUI/Close // 〃
+
+player/cbi/buttoncurs  lsounds/GUI/ButtonCursor // Rosenkreuzstilette
+player/cbi/buttonpress lsounds/GUI/ButtonPress  // Doom 3
+
+player/cbi/slidertick lsounds/GUI/SliderTick // Phantasy Star Nova
+
+player/cbi/find     lsounds/GUI/Find     // Phantasy Star Nova
+player/cbi/finddone lsounds/GUI/FindDone // 〃
+player/cbi/findfail lsounds/GUI/FindFail // 〃
+
+player/cbi/invcur lsounds/GUI/InvCur // Phantasy Star Nova
+player/cbi/invmov lsounds/GUI/InvMov // 〃
+
+player/cbi/key1 lsounds/GUI/Key1 // ???
+player/cbi/key2 lsounds/GUI/Key2 // 〃
+player/cbi/key3 lsounds/GUI/Key3 // 〃
+
+player/cbi/clickon  lsounds/GUI/ClickOn  // 3maze - Buttons and Switches
+player/cbi/clickoff lsounds/GUI/ClickOff // 〃
+player/cbi/clicklst lsounds/GUI/ClickList // Resident Evil 4
+
+player/cbi/auto/toggle  lsounds/GUI/AutoGroupToggle  // Deus Ex
+player/cbi/auto/buy     lsounds/GUI/AutoGroupBuy     // The Sound Keeper - Dark Sci-Fi UI Sounds
+player/cbi/auto/invalid lsounds/GUI/AutoGroupInvalid // Touhou 13
+
+player/cbi/dlgopen  lsounds/GUI/DialogueOpen  // Resident Evil 4
+player/cbi/dlgclick lsounds/GUI/DialogueClick // 〃
+
+player/cbi/clickinvalid lsounds/GUI/ClickInvalid // Steam
+player/cbi/mail         lsounds/GUI/MailReceive  // Fallout 4
+player/cbi/tabswitch    lsounds/GUI/TabSwitch    // 〃
+
+player/cbi/scroll    lsounds/GUI/Scroll       // Mac OS 9
+player/cbi/scrollend lsounds/GUI/ScrollRelease // 〃
+
+player/cbi/left  lsounds/GUI/Left  // Mac OS 9
+player/cbi/right lsounds/GUI/Right // 〃
+
+$alias player/cbi/invrem player/cbi/findfail
+
+$random player/cbi/keypress {
+   player/cbi/key1
+   player/cbi/key2
+   player/cbi/key3
+}
+
+// EOF

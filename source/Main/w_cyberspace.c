@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_file.h"
 #include "lith_token.h"
@@ -22,5 +23,6 @@ void Lith_CSLoadMap(void)
    fclose(fp);
    Dalloc(map);
 }
+#endif
 
 // EOF

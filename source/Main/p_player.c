@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_list.h"
@@ -22,7 +22,9 @@ static struct {__str on, off;} guisnd[GUI_MAX - 1] = {
 // Static Functions ----------------------------------------------------------|
 
 static void Lith_PlayerRunScripts(struct player *p);
+#if LITHIUM
 script static void Lith_BossWarning(struct player *p);
+#endif
 
 // Scripts -------------------------------------------------------------------|
 
@@ -39,6 +41,7 @@ reinit:
    p->reset();
    Lith_PlayerLogEntry(p);
    Lith_PlayerEnterUpgrades(p);
+   #if LITHIUM
    p->loadData();
 
    if(p->num == 0)
@@ -48,6 +51,7 @@ reinit:
    }
 
    Lith_BossWarning(p);
+   #endif
 
    while(p->active)
    {
@@ -76,6 +80,7 @@ reinit:
       // Tic passes
       ACS_Delay(1);
 
+      #if LITHIUM
       if(p->dlgnum)
       {
          script extern void Lith_DialogueVM(struct player *p, int dlgnum);
@@ -83,6 +88,7 @@ reinit:
          Lith_DialogueVM(p, p->dlgnum);
          p->dlgnum = 0;
       }
+      #endif
 
       // Update previous-tic values
       p->old       = olddelta;
@@ -109,8 +115,10 @@ static void Lith_PlayerDeath(void)
    p->dead = true;
 
    Lith_PlayerDeinitUpgrades(p);
+   #if LITHIUM
    Lith_PlayerDeallocInventory(p); // unfortunately, we can't keep anything
                                    // even when we want to
+   #endif
 
    if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
    {
@@ -329,6 +337,7 @@ void Lith_TakeScore(struct player *p, i96 score)
 
 // Static Functions ----------------------------------------------------------|
 
+#if LITHIUM
 script
 static void Lith_BossWarning(struct player *p)
 {
@@ -337,6 +346,7 @@ static void Lith_BossWarning(struct player *p)
    if(world.bossspawned)
       p->logB(1, "%S", Language(LANG "LOG_BossWarn%s", p->discrim));
 }
+#endif
 
 // Run main loop scripts.
 static void Lith_PlayerRunScripts(struct player *p)
@@ -363,7 +373,9 @@ static void Lith_PlayerRunScripts(struct player *p)
    script  extern void Lith_PlayerDebugStats(struct player *p);
 
    // Pre-logic: Update data from the engine.
+   #if LITHIUM
    Lith_PlayerPreWeapons(p); // Update weapon info
+   #endif
    Lith_PlayerPreScore(p);   // Update score
 
    if(ACS_Timer() > 4)
@@ -376,14 +388,18 @@ static void Lith_PlayerRunScripts(struct player *p)
 
    if(!p->dead)
    {
+      #if LITHIUM
       // Logic: Update our data.
       Lith_PlayerUpdateInventory(p);
+      #endif
 
       switch(p->activegui)
       case GUI_CBI: Lith_PlayerUpdateCBIGUI(p);
 
       Lith_PlayerUpdateAttributes(p);
+      #if LITHIUM
       Lith_PlayerUpdateWeapons(p);
+      #endif
       Lith_PlayerUpdateLog(p);
 
       // Post-logic: Update the engine's data.
@@ -394,11 +410,15 @@ static void Lith_PlayerRunScripts(struct player *p)
 
    // Rendering
    Lith_PlayerFootstep(p);
+   #if LITHIUM
    Lith_PlayerItemFx(p);
+   #endif
    Lith_PlayerDamageBob(p);
    Lith_PlayerView(p);
+   #if LITHIUM
    Lith_PlayerHUD(p);
    Lith_PlayerStyle(p);
+   #endif
    Lith_PlayerLevelup(p);
    Lith_PlayerDebugStats(p);
 }
@@ -475,4 +495,3 @@ static void Lith_PlayerPreStats(struct player *p)
 }
 
 // EOF
-

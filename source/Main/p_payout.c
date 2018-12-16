@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -103,6 +104,6 @@ void Lith_PlayerPayout(struct player *p)
 #undef Head
 #undef GenCount
 }
+#endif
 
 // EOF
-

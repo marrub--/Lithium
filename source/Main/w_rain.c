@@ -1,4 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
@@ -61,5 +62,6 @@ void Lith_RainDropSpawn()
       if(dist < rain_dist) rain_dist = dist;
    }
 }
+#endif
 
 // EOF

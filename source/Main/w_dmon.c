@@ -1,4 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+#if LITHIUM
 #include "lith_monster.h"
 #include "lith_world.h"
 #include "lith_player.h"
@@ -83,5 +84,6 @@ dmon_t *AllocDmon(void)
    *m = (dmon_t){.active = true, .id = dmonid++};
    return m;
 }
+#endif
 
 // EOF
