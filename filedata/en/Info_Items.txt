@@ -9,21 +9,21 @@
 == \#ITEM_TAG_ArmPinkSilver  | Pink Silver
 == \#ITEM_TAG_ArmMidori      | Midori
 
-== LITH:ItemSpr:ArmStandard    | sprites/Items/Armor/ARM1A0.png
-== LITH:ItemSpr:ArmImproved    | sprites/Items/Armor/ARM2A0.png
-== LITH:ItemSpr:ArmTeflon      | sprites/Items/Armor/ARM3A0.png
-== LITH:ItemSpr:ArmDendrite    | sprites/Items/Armor/ARM4A0.png
-== LITH:ItemSpr:ArmAerodynamic | sprites/Items/Armor/ARM5A0.png
-== LITH:ItemSpr:ArmHazMat      | sprites/Items/Armor/ARM6A0.png
-== LITH:ItemSpr:ArmPinkSilver  | sprites/Items/Armor/ARM7A0.png
-== LITH:ItemSpr:ArmMidori      | sprites/Items/Armor/ARM8A0.png
+== :ItemSpr:ArmStandard    | sprites/Items/Armor/ARM1A0.png
+== :ItemSpr:ArmImproved    | sprites/Items/Armor/ARM2A0.png
+== :ItemSpr:ArmTeflon      | sprites/Items/Armor/ARM3A0.png
+== :ItemSpr:ArmDendrite    | sprites/Items/Armor/ARM4A0.png
+== :ItemSpr:ArmAerodynamic | sprites/Items/Armor/ARM5A0.png
+== :ItemSpr:ArmHazMat      | sprites/Items/Armor/ARM6A0.png
+== :ItemSpr:ArmPinkSilver  | sprites/Items/Armor/ARM7A0.png
+== :ItemSpr:ArmMidori      | sprites/Items/Armor/ARM8A0.png
 
-== LITH:HUD:H_KC1 | sprites/Items/Keys/RKEYB0.png
-== LITH:HUD:H_KC2 | sprites/Items/Keys/YKEYB0.png
-== LITH:HUD:H_KC3 | sprites/Items/Keys/BKEYB0.png
-== LITH:HUD:H_KS1 | sprites/Items/Keys/RSKUB0.png
-== LITH:HUD:H_KS2 | sprites/Items/Keys/YSKUB0.png
-== LITH:HUD:H_KS3 | sprites/Items/Keys/BSKUB0.png
+== :HUD:H_KC1 | sprites/Items/Keys/RKEYB0.png
+== :HUD:H_KC2 | sprites/Items/Keys/YKEYB0.png
+== :HUD:H_KC3 | sprites/Items/Keys/BKEYB0.png
+== :HUD:H_KS1 | sprites/Items/Keys/RSKUB0.png
+== :HUD:H_KS2 | sprites/Items/Keys/YSKUB0.png
+== :HUD:H_KS3 | sprites/Items/Keys/BSKUB0.png
 
 ##----------------------------------------------------------------------------|
 == \#INFO_SHORT_ScoreChip | Score Chip
