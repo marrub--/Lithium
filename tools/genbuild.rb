@@ -12,10 +12,10 @@ end
 
 upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
 wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
-textin = Dir["filedata/*.txt"].to_a.map{|s| s.gsub "filedata/", ""}.join(" ")
+textin = Dir["filedata/*.txt"].to_a.map{|s| s.gsub "filedata/", ""}.join(?\s)
 fsin   = "pk7/language.gfx.txt,pk7/,lgfx pk7_dt/language.gfx.txt,pk7_dt/,dtgfx"
 
-deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(" ")}"
+deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(?\s)}"
 
 fp = open "build.ninja", "wb"
 
@@ -90,13 +90,13 @@ Dir["source/Main/*"].each do |f|
 end
 
 fp << <<_ninja_
-build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
+build pk7/acs/lithmain.bin: ld #{inputs_lithium.join ?\s}
    lflags = $lflags -llithlib --bc-zdacs-init-script-name "__lithmain.bin_init"
    sta = 1400000
 build pk7/acs/lithlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
    lflags = $lflags --bc-zdacs-init-script-name "__lithlib.bin_init"
    sta = 70000
-build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join " "}
+build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join ?\s}
    lflags = $lflags -ldtlib --bc-zdacs-init-script-name "__dtmain.bin_init"
    sta = 1400000
 build pk7_dt/acs/dtlib.bin: ld $ir/libc.ir $ir/libGDCC.ir

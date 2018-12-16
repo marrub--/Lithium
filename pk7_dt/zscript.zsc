@@ -1,6 +1,9 @@
 version "3.6"
 
-class DtUniqueID : Inventory {default {Inventory.MaxAmount int.max;}}
+class DtDummy : Actor {}
+class DtCameraHax : Actor {}
+
+class DtUniqueID : Inventory {default {Inventory.MaxAmount int.Max;}}
 
 class DtServer : EventHandler
 {
@@ -12,7 +15,7 @@ class DtServer : EventHandler
    static clearscope string ReadLump(int lump)
    {
       let s = Wads.ReadLump(lump);
-      s.replace("\\c", "\c");
+      s.Replace("\\c", "\c");
       return s;
    }
 
@@ -25,7 +28,7 @@ class DtRender : EventHandler
 {
    struct DtRenderPlayerData
    {
-      bool shiftDown;
+      bool ShiftDown;
    }
 
    transient ui DtRenderPlayerData m_pdata[MAXPLAYERS];
@@ -61,28 +64,28 @@ class DtPlayer : DoomPlayer
       +THRUSPECIES
    }
 
-   bool m_grabInput;
-   bool m_onground;
+   bool m_GrabInput;
+   bool m_OnGround;
 
-   int m_dmgfac;
+   int m_DmgFac;
 
    override void PlayerThink()
    {
       if(CallACS("LPData", pdata_semifrozen))
       {
-         UserCmd cmd = player.cmd;
+         UserCmd cmd = Player.Cmd;
          cmd.pitch = cmd.yaw = cmd.roll = 0;
-         player.turnticks = 0;
+         Player.TurnTicks = 0;
       }
 
-      m_onground = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
+      m_OnGround = Pos.Z - FloorZ <= 16 || bONMOBJ || bMBFBOUNCER || Player.Cheats & CF_NOCLIP2;
 
       Super.PlayerThink();
    }
 
    override void Tick()
    {
-      if(players[consoleplayer].camera == self)
+      if(Players[ConsolePlayer].Camera == self)
          DtRender.LE();
       Super.Tick();
    }
@@ -90,12 +93,12 @@ class DtPlayer : DoomPlayer
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
       // ÜBER KLUDGE (override behaviour for DONTHARMSPECIES)
-      if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
+      if(inflictor && inflictor.Species == Species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
          return 0;
 
       if(damage > 1)
       {
-         if(m_dmgfac > 0) damage = max(1, damage * (100 - m_dmgfac) / 100);
+         if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
       }
 
       return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
@@ -153,18 +156,16 @@ class DtShotgunFreeze : Powerup
 
    override void InitEffect()
    {
-      int freezemask;
-
       Super.InitEffect();
 
-      if(owner == null || owner.player == null) return;
+      if(owner == null || owner.Player == null) return;
 
       // Give the player and his teammates the power to move when time is frozen.
-      freezemask = 1 << owner.PlayerNumber();
-      owner.player.timefreezer |= freezemask;
+      int freezemask = 1 << owner.PlayerNumber();
+      Owner.Player.TimeFreezer |= freezemask;
       for(int i = 0; i < MAXPLAYERS; i++)
-         if(playeringame[i] && players[i].mo != null && players[i].mo.IsTeammate(Owner))
-            players[i].timefreezer |= freezemask;
+         if(PlayerInGame[i] && Players[i].Mo != null && Players[i].Mo.IsTeammate(Owner))
+            Players[i].TimeFreezer |= freezemask;
 
       // [RH] The effect ends one tic after the counter hits zero, so make
       // sure we start at an odd count.
@@ -172,18 +173,19 @@ class DtShotgunFreeze : Powerup
       if((EffectTics & 1) == 0)
          EffectTics++;
       // Make sure the effect starts and ends on an even tic.
-      if((level.time & 1) == 0)
-         level.frozen = true;
+      if((Level.Time & 1) == 0)
+         Level.Frozen = true;
       // Compensate for skipped tic, but beware of overflow.
       else if(EffectTics < 0x7fffffff)
          EffectTics++;
    }
+
    override void DoEffect()
    {
       Super.DoEffect();
-      if(level.time & 1 || (owner != null && owner.player != null && owner.player.cheats & CF_PREDICTING))
+      if(Level.Time & 1 || (Owner != null && Owner.Player != null && Owner.Player.Cheats & CF_PREDICTING))
          return;
-      level.frozen = true;
+      Level.Frozen = true;
    }
 
    override void EndEffect()
@@ -192,20 +194,20 @@ class DtShotgunFreeze : Powerup
 
       // If there is an owner, remove the timefreeze flag corresponding to
       // her from all players.
-      if(owner != null && owner.player != null)
+      if(Owner != null && Owner.Player != null)
       {
-         int freezemask = ~(1 << owner.PlayerNumber());
+         int freezemask = ~(1 << Owner.PlayerNumber());
          for (int i = 0; i < MAXPLAYERS; ++i)
-            players[i].timefreezer &= freezemask;
+            Players[i].TimeFreezer &= freezemask;
       }
 
       // Are there any players who still have timefreezer bits set?
       for(int i = 0; i < MAXPLAYERS; ++i)
-         if(playeringame[i] && players[i].timefreezer != 0)
+         if(PlayerInGame[i] && Players[i].TimeFreezer != 0)
             return;
 
       // No, so allow other actors to move about freely once again.
-      level.frozen = false;
+      Level.Frozen = false;
    }
 }
 

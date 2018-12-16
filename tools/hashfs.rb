@@ -16,7 +16,7 @@ def run of, pkdir, dir
    Dir.glob "#{pdir}/**/*.png" do |item|
       unless item.include? "/Font/"
          m = re.match item
-         of.puts "\":#{m[1].gsub '/', ':'}\" = \"#{item.gsub pkdir, ''}\";"
+         of.puts %(":#{m[1].gsub '/', ':'}" = "#{item.gsub pkdir, ''}";)
       end
    end
 end

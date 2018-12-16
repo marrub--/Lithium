@@ -251,8 +251,7 @@ void Lith_ResetPlayer(struct player *p)
       p->discount     = 1.0;
       p->stepnoise    = StrParam("player/%S/step", p->classname);
 
-      switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER))
-      {
+      switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
       case 0: p->pronoun = pro_male;   break;
       case 1: p->pronoun = pro_female; break;
       case 2: p->pronoun = pro_nb;     break;

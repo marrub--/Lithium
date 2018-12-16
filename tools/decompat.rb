@@ -11,7 +11,7 @@ def tozsc lns, out
    writehead out
 
    for ln in lns
-      out.write ln.chomp.sub(/enum \/\/ /, "enum ") + "\n"
+      out.write ln.chomp.sub(/enum \/\/ /, "enum ") + ?\n
    end
 end
 

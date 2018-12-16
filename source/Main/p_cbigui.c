@@ -91,6 +91,9 @@ __str Lith_ThemeName(uint num)
 script
 void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
+   extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
+
    gui_state_t *g = &p->cbi.guistate;
 
    p->cbi.theme = p->getCVarI(CVAR "gui_theme");
@@ -123,9 +126,6 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    LanguageVC(tn[3], LANG "TAB_INFO");
    LanguageVC(tn[4], LANG "TAB_SETTINGS");
    Lith_GUI_Tabs(g, &CBIState(g)->maintab, tn, 13, 13, 0);
-
-   extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
 
    switch(CBIState(g)->maintab) {
    case cbi_tab_arsenal:  Lith_CBITab_Arsenal (g, p); break;

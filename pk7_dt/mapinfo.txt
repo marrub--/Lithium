@@ -1,5 +1,3 @@
-// Game Info -----------------------------------------------------------------|
-
 gameinfo
 {
    PlayerClasses       = "DtPlayer"
@@ -13,8 +11,6 @@ gameinfo
    StatusBarClass      = "DtStatusBar"
    PickupColor         = "#A0F3A0"
 }
-
-// Automap Info --------------------------------------------------------------|
 
 automap
 {
