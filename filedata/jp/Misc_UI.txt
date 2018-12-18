@@ -1,25 +1,25 @@
 ## UI ------------------------------------------------------------------------|
-== \#COST       | かかくは
-== \#EFFECT     | 効果は
+== \#COST       | 価格
+== \#EFFECT     | 効果
 == \#FREE       | 無料
 == \#CATEGORY   | 種類
-== \#SCOREMULT  | スコア乗数
+== \#SCOREMULT  | スコア倍率
 == \#BUY        | 買う
-== \#DEACTIVATE | 非アクティブ化
-== \#ACTIVATE   | アクティブ化
+== \#DEACTIVATE | 解除
+== \#ACTIVATE   | 起動
 == \#EDIT       | 編集
 == \#CLEAR      | クリア
 == \#EMPTY      | 空
 == \#NOTE_FMT   | \cm%iつのノート
 
-== \#CAT_BODY | \cn体
+== \#CAT_BODY | \cn素体
 == \#CAT_WEAP | \ca武器
 == \#CAT_EXTR | \cfおまけ
 == \#CAT_DOWN | \ct格下げ
 
-== \#GUI_TEXTBOX | ここにカーソルを置いて入力する。
+== \#GUI_TEXTBOX | ここにカーソルを置いて入力。
 
-== \#TAB_ARSENAL_Stan | ぶきぐら
+== \#TAB_ARSENAL_Stan | 兵器
 == \#TAB_ARSENAL_Jem  | 指令
 == \#TAB_ARSENAL_Ari  | 猟具
 
@@ -36,28 +36,28 @@
 == \#TAB_STATISTICS | 統計
 == \#TAB_NOTES      | ノート
 
-== \#TAB_UPGRADES | アップグレ
+== \#TAB_UPGRADES | 機能改善
 == \#TAB_SHOP     | ショップ
 
 ## CBI Items -----------------------------------------------------------------|
 == \#CBI_PERF | 性能： %i\cbPr
-== \#CBI_PUSE | 使う： %i\cbPr
-== \#CBI_WRAM | ラム： %iTiB
+== \#CBI_PUSE | 使用率： %i\cbPr
+== \#CBI_WRAM | ＲＡＭ： %iTiB
 
-== \#CBI_INTERFACES | インストールされましたインタフェース：
+== \#CBI_INTERFACES | インストールされたインターフェース：
 
-== \#CBI_WeapnInter | 武器手直しデバイス
-== \#CBI_WeapnInte2 | 武器手戻りデバイス
-== \#CBI_ArmorInter | よろいインタフェース
-== \#CBI_RDistInter | 現実変形インタフェース
+== \#CBI_WeapnInter | 武器改造デバイス
+== \#CBI_WeapnInte2 | 武器変質デバイス
+== \#CBI_ArmorInter | アーマーインタフェイス
+== \#CBI_RDistInter | 現実歪曲インタフェイス
 
-== \#CBI_Slot1Spell | \ci刃スペルドライバ
-== \#CBI_Slot2Spell | \ciデレアースペルドライバ
-== \#CBI_Slot3Spell | \ciフューアスペルドライバ
-== \#CBI_Slot4Spell | \ciロムイェットヤスペルドライバ
-== \#CBI_Slot5Spell | \ciハルギョンスペルドライバ
-== \#CBI_Slot6Spell | \ciほしゅだんまスペルドライバ
-== \#CBI_Slot7Spell | \cgセルス・デ・ラ・モルテスペルドライバ
+== \#CBI_Slot1Spell | \ciブレード スペルドライバ
+== \#CBI_Slot2Spell | \ciciディリアン スペルドライバ
+== \#CBI_Slot3Spell | \ciフューア スペルドライバ
+== \#CBI_Slot4Spell | \ciciロミエッタ スペルドライバ
+== \#CBI_Slot5Spell | \ciハルシオン スペルドライバ
+== \#CBI_Slot6Spell | \ciホシュ'ダンマ スペルドライバ
+== \#CBI_Slot7Spell | \cgセルス・デ・ラ・モルテ スペルドライバ
 
 == \#CBI_CPU1 | ＯＦＭＤスペックノデア５４１ベーシックＣＰＵ
 == \#CBI_CPU2 | ＫＳＫＫスペックＺ６８０８高級ＣＰＵ
@@ -65,7 +65,7 @@
 == \#CBI_CPU4 | ＡＯＦ５９００００１ Ｒｅｖ７ ＣＰＵ
 
 ## BIP -----------------------------------------------------------------------|
-== \#BIP_NAME_Search      | 調べる
+== \#BIP_NAME_Search      | 検索
 == \#BIP_NAME_Weapons     | 武器
 == \#BIP_NAME_Adversaries | 敵
 == \#BIP_NAME_Items       | アイテム
@@ -78,35 +78,35 @@
 == \#BIP_HELP_Search      | 全種類をテキスト検索する。
 == \#BIP_HELP_Weapons     | 武器と武器のアップグレード。
 == \#BIP_HELP_Adversaries | 敵とボス。
-== \#BIP_HELP_Items       | よろいや掘り出し物など。
+== \#BIP_HELP_Items       | アーマーや掘り出し物など。
 == \#BIP_HELP_Yourself    | 自分の属性、能力、歴史。
-== \#BIP_HELP_Upgrades    | 体のアップグレード。
-== \#BIP_HELP_Locations   | 銀河系の周りから興味がある場所。
-== \#BIP_HELP_Companies   | 重要な会社、歴史的かつ現在の。
+== \#BIP_HELP_Upgrades    | 素体のアップグレード。
+== \#BIP_HELP_Locations   | 銀河系周辺の名所。
+== \#BIP_HELP_Companies   | 歴史的かつ現在の、重要な会社。
 == \#BIP_HELP_Mail        | 受信したメール。
 
 ## Statistics ----------------------------------------------------------------|
-== \#STAT_ScoreMul   | スコア乗数
+== \#STAT_ScoreMul   | スコア倍率
 == \#STAT_Weapons    | 手に入れた武器の量
-== \#STAT_HealthUsed | 捨てたＨＰの量
+== \#STAT_HealthUsed | 捨てたＨＰ
 == \#STAT_HealthSum  | ＨＰ合計
-== \#STAT_ScoreUsed  | 費やしたスコアの量
+== \#STAT_ScoreUsed  | 費やしたスコア
 == \#STAT_ScoreSum   | スコア合計
-== \#STAT_Secrets    | 見つかった秘密の場所の量
-== \#STAT_Units      | ユニット移動したの量
-== \#STAT_Upgrades   | 飼ったアップグレードの量
-== \#STAT_Items      | 買ったアイテムの量
-== \#STAT_Mail       | 受信したメールの量
-== \#STAT_Time       | 経過秒数
-== \#STAT_Boom       | 急に爆発の量
-== \#STAT_Brouzouf   | 得たｂｒｏｕｚｏｕｆの量
-== \#STAT_TrueMail   | 実に受信したメールの量
+== \#STAT_Secrets    | 見つかったシークレット数
+== \#STAT_Units      | ユニット転送量
+== \#STAT_Upgrades   | 所有アップグレード
+== \#STAT_Items      | 買ったアイテム
+== \#STAT_Mail       | 受信したメール
+== \#STAT_Time       | 経過時間
+== \#STAT_Boom       | 疑似爆発の量
+== \#STAT_Brouzouf   | 得たｂｒｏｕｚｏｕｆ
+== \#STAT_TrueMail   | 実際受信したメール
 
 ## Attributes ----------------------------------------------------------------|
 == \#ATTR_HELP_ACC | 攻撃力
 == \#ATTR_HELP_DEF | 防御力
-== \#ATTR_HELP_STR | ＨＰ最大
-== \#ATTR_HELP_VIT | ＨＰアイテム効率
-== \#ATTR_HELP_STM | ＨＰ再生最大
-== \#ATTR_HELP_LUK | スコアの運
-== \#ATTR_HELP_RGE | 打たれた後攻撃力
+== \#ATTR_HELP_STR | 最大ＨＰ
+== \#ATTR_HELP_VIT | 回復効率
+== \#ATTR_HELP_STM | 最大再生ＨＰ
+== \#ATTR_HELP_LUK | スコア増加運
+== \#ATTR_HELP_RGE | 反撃攻撃力
