@@ -2,24 +2,28 @@
 ## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## GenBuild: Generates a Ninja build file for the project.
 
+require 'set'
+
 def hash s
    res = 0
-   s.each_codepoint do |ch| res = res * 101 + ch; res &= 0x7FFFFFFF end
+   s.each_codepoint{|ch| res = res * 101 + ch; res &= 0x7FFFFFFF}
    res
 end
 
 `rm -f build.ninja .ninja_deps .ninja_log`
 
-upgcin = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
-wepcin = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
-textin = Dir["filedata/*.txt"].to_a.map{|s| s.gsub "filedata/", ""}.join(?\s)
-fsin   = "pk7/language.gfx.txt,pk7/,lgfx pk7_dt/language.gfx.txt,pk7_dt/,dtgfx"
-
-deps = "#{upgcin} #{wepcin} #{Dir["source/Headers/*"].to_a.map{|s| s.gsub "source/Headers", "$hdr"}.join(?\s)}"
+UPGCIN = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
+WEPCIN = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
+MONCIN = "$hdr/lith_monsterinfo.h"
+TEXTIN = Dir["filedata/*.txt"].to_a.each{|s| s.gsub! "filedata/", ""}.join(?\s)
+FSIN   = "pk7/language.gfx.txt,pk7/,lgfx pk7_dt/language.gfx.txt,pk7_dt/,dtgfx"
+DEPS_I = [*UPGCIN.split, *WEPCIN.split, *MONCIN.split]
+DEPS_H = Dir["source/Headers/*"].to_a.each{|s| s.gsub! "source/Headers", "$hdr"}
+DEPS   = Set[*DEPS_I, *DEPS_H].to_a.join(?\s)
 
 fp = open "build.ninja", "wb"
 
-fp << <<_ninja_
+fp << <<_end_
 src = source/Main
 hdr = source/Headers
 ir  = ir
@@ -38,10 +42,10 @@ rule ld
    command = gdcc-ld $lflags --alloc-min Sta "" $sta $in -o $out
    description = LD $out
 rule fs
-   command = tools/hashfs.rb #{fsin}
+   command = tools/hashfs.rb #{FSIN}
    description = HashFS
 rule text
-   command = cd filedata; ../tools/compilefs.rb #{textin}
+   command = cd filedata; ../tools/compilefs.rb #{TEXTIN}
    description = CompileFS
 rule dec
    command = tools/decompat.rb $in
@@ -58,38 +62,42 @@ rule wepc
 rule upgc
    command = tools/upgc.rb $in $out
    description = UpgC
+rule monc
+   command = tools/monc.rb $in $out
+   description = MonC
 
 build tools/ttfuck/ttfuck.exe: gettf
 build fs: fs | tools/hashfs.rb
 build text: text | tools/compilefs.rb
 build dec: dec $hdr/lith_weapons.h $hdr/lith_pdata.h $hdr/lith_wdata.h $hdr/lith_upgradenames.h $hdr/lith_scorenums.h | tools/decompat.rb
 build font: font | tools/ttfuck/ttfuck.exe
-build #{wepcin}: wepc source/Weapons.txt | tools/wepc.rb
-build #{upgcin}: upgc source/Upgrades.txt | tools/upgc.rb
+build #{WEPCIN}: wepc source/Weapons.txt | tools/wepc.rb
+build #{UPGCIN}: upgc source/Upgrades.txt | tools/upgc.rb
+build #{MONCIN}: monc source/Monsters.txt | tools/monc.rb
 build $ir/libc.ir: makelib
    type = libc
 build $ir/libGDCC.ir: makelib
    type = libGDCC
-_ninja_
+_end_
 
 inputs_lithium = []
 inputs_doubletap = []
 
-Dir["source/Main/*"].each do |f|
-   f = File.basename f
-   fp << <<~_ninja_
-   build $ir/lithium/#{f}.ir: cc $src/#{f} | #{deps}
+for f in Dir["source/Main/*"]
+   f.replace File.basename f
+   fp << <<~_end_
+   build $ir/lithium/#{f}.ir: cc $src/#{f} | #{DEPS}
       hash = #{hash f}
       cflags = $cflags -DLITHIUM=1
-   build $ir/doubletap/#{f}.ir: cc $src/#{f} | #{deps}
+   build $ir/doubletap/#{f}.ir: cc $src/#{f} | #{DEPS}
       hash = #{hash f}
       cflags = $cflags -DDOUBLETAP=1
-   _ninja_
+   _end_
    inputs_lithium   << "$ir/lithium/#{f}.ir"
    inputs_doubletap << "$ir/doubletap/#{f}.ir"
 end
 
-fp << <<_ninja_
+fp << <<_end_
 build pk7/acs/lithmain.bin: ld #{inputs_lithium.join ?\s}
    lflags = $lflags -llithlib --bc-zdacs-init-script-name "__lithmain.bin_init"
    sta = 1400000
@@ -106,6 +114,6 @@ build doubletap: phony dec text fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
 
 default lithium
-_ninja_
+_end_
 
 ## EOF

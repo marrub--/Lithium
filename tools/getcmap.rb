@@ -6,9 +6,8 @@ require 'set'
 
 chs = Set[]
 
-`find filedata -type f -name '*.txt'`.split("\n").each do |f|
-   f = open(f).read
-   f.each_char {|c| chs << c}
+`find filedata -type f -name '*.txt'`.split(?\n).each do |f|
+   f.replace(open(f).read).each_char{|c| chs << c}
 end
 
 print chs.to_a.sort!.join

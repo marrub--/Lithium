@@ -16,12 +16,12 @@ def run of, pkdir, dir
    Dir.glob "#{pdir}/**/*.png" do |item|
       unless item.include? "/Font/"
          m = re.match item
-         of.puts %(":#{m[1].gsub '/', ':'}" = "#{item.gsub pkdir, ''}";)
+         of.puts %(":#{m[1].gsub ?/, ?:}" = "#{item.gsub pkdir, ""}";)
       end
    end
 end
 
 for arg in ARGV
-   fname, pkdir, dir = arg.split ","
+   fname, pkdir, dir = arg.split ?,
    run open(fname, "w"), pkdir, dir
 end

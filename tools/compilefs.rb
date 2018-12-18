@@ -2,24 +2,28 @@
 ## Copyright © 2017 Alison Sanderson, all rights reserved.
 ## CompileFS: Formatted text → LANGUAGE processor.
 
-def readlines fname
-   open(fname, "rt").read.chomp.lines
+def read_lines fname
+   s = open(fname, "rt").read
+   s.chomp!
+   s.lines
 end
 
 def escape text
-   text.gsub(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>").gsub(/\n/, "\\n")
+   text.gsub!(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>")
+   text.gsub!(?\n, "\\n")
+   text
 end
 
 def split_arg text, sp
-   text.split(sp, 2).map do |s| s.strip end
+   text.split(sp, 2).each{|s| s.strip!}
 end
 
 def single_line txt, set
-   %<"#{txt}" = "#{escape set}";\n>
+   txt.replace %<"#{txt}" = "#{escape set}";\n>
 end
 
 def comment arg
-   "//#{arg}\n"
+   arg.replace "//#{arg}\n"
 end
 
 def buf_lines type, buf
@@ -27,21 +31,29 @@ def buf_lines type, buf
    buf.pop if buf.last.chomp.empty?
    case type
    when :just
-      buf.each.with_index.inject("") do |sum, (s, i)|
-         if i < buf.size-1 then sum + %<   "#{escape s.chomp}\\n"\n>
-         else                   sum + %<   "#{escape s.chomp}";\n> end
-      end + ?\n
+      t = ""
+      buf.each.with_index do |s, i|
+         s.chomp!
+         if i < buf.size-1 then t << %<   "#{escape s}\\n"\n>
+         else                   t << %<   "#{escape s}";\n> end
+      end
+      t << ?\n
+      t
    when :conc
-      buf = [*buf, "\n"].each_cons(2).map do |s, n|
-            if s == "\n" then "\n\n"
-         elsif n == "\n" then s.chomp
-         else                 s.chomp + ?\s end
+      buf = [*buf, ?\n].each_cons(2).map do |s, n|
+            if s == ?\n then s.replace "\n\n"
+         elsif n == ?\n then s.chomp!
+         else                s.chomp!; s << ?\s end
+         s
       end
 
-      buf.each.with_index.inject("") do |sum, (s, i)|
-         if i < buf.size-1 then sum + %<   "#{escape s}"\n>
-         else                   sum + %<   "#{escape s.chomp}";\n> end
-      end + "\n"
+      t = ""
+      buf.each.with_index do |s, i|
+         if i < buf.size-1 then           t << %<   "#{escape s}"\n>
+         else                   s.chomp!; t << %<   "#{escape s}";\n> end
+      end
+      t << ?\n
+      t
    end
 end
 
@@ -50,7 +62,7 @@ def parse_file lnc, lns, pfx
    buf = nil
    out = ""
    for ln in lns
-      ln = ln.gsub('\#', pfx)
+      ln = ln.gsub("\\#", pfx)
       if ln =~ /^##(.+)$/
          if wr then out << buf_lines(wr, buf); wr = nil end
          out << comment($~[1].chomp)
@@ -70,14 +82,15 @@ def parse_file lnc, lns, pfx
          set = $~[2].strip
          out << %<"#{$~[1].strip}" =\n>
          out << comment(" #{set}")
-         out << buf_lines(:just, readlines("#{lnc}/#{set}"))
+         out << buf_lines(:just, read_lines("#{lnc}/#{set}"))
       else
          if wr then buf << ln
          elsif ln.chomp.strip == "" then out << ?\n end
       end
    end
    if wr then out << buf_lines(wr, buf) end
-   out + "\n"
+   out << ?\n
+   out
 end
 
 def proc_file lnc, lng, lns, nam, pfx
@@ -89,7 +102,7 @@ def proc_file lnc, lng, lns, nam, pfx
       _end_
 
    for ln in lns
-      ln = ln.gsub('\#', pfx)
+      ln = ln.gsub("\\#", pfx)
       if ln =~ /^\s*comment (.+)$/
          txt << comment(" #{$~[1].strip}")
       elsif ln =~ /^\s*put data (.+)->(.+)$/
@@ -98,9 +111,9 @@ def proc_file lnc, lng, lns, nam, pfx
          fnam = $~[1].strip
          txt << %<"#{$~[2].strip}" =\n>
          txt << comment(" #{fnam}")
-         txt << buf_lines(:just, readlines("#{lnc}/#{fnam}"))
+         txt << buf_lines(:just, read_lines("#{lnc}/#{fnam}"))
       elsif ln =~ /^\s*parse file (.+)$/
-         txt << parse_file(lnc, readlines("#{lnc}/#{$~[1].strip}"), pfx)
+         txt << parse_file(lnc, read_lines("#{lnc}/#{$~[1].strip}"), pfx)
       end
    end
 
@@ -119,9 +132,9 @@ def run_file lns
       if ln =~ /^\s*language (.+) -> (.+)$/
          lng << {lnc: $~[1].strip, lng: $~[2].strip}
       elsif ln =~ /^\s*in directory (.+)$/
-         dir = $~[1].strip
+         dir.replace $~[1].strip
       elsif ln =~ /^\s*prefix (.+)$/
-         pfx = $~[1].strip
+         pfx.replace $~[1].strip
       elsif ln =~ /^\s*in file (.+)$/
          arg = $~[1].strip
          txt = []
@@ -140,7 +153,7 @@ def run_file lns
 end
 
 for arg in ARGV
-   run_file readlines(arg)
+   run_file read_lines(arg)
 end
 
 ## EOF

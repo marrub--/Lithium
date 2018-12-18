@@ -21,8 +21,7 @@
 
 #define LanguageC(...) LanguageCV(null, __VA_ARGS__)
 
-#define PrintChars(s, n) \
-    ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n)
+#define PrintChars(s, n) ACS_PrintGlobalCharRange((int)s, __GDCC__Sta, 0, n)
 
 #define l_strndup(s, n) \
    (ACS_BeginPrint(), \

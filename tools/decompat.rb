@@ -16,8 +16,7 @@ def tozsc lns, out
 end
 
 for arg in ARGV
-   fp = open arg, "rt"
-   lns = fp.readlines()
+   lns = open(arg, "rt").readlines()
    zscs = []
    loop do
       ln = lns.shift

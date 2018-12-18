@@ -2,8 +2,17 @@
 ## Copyright © 2018 Alison Sanderson, all rights reserved.
 ## UpgC: Upgrade info text compiler.
 
-ifp, ofh, ofc, off = ARGV[0], ARGV[1], ARGV[2], ARGV[3]
-ifp, ofh, ofc, off = open(ifp, "rt"), open(ofh, "wt"), open(ofc, "wt"), open(off, "wt")
+SCR = /[[:digit:]]/
+PRF = /[[:digit:]]/
+MUL = /-?\./
+GRP = /[[:alpha:]]/
+
+def reqs res
+   res[1...-1].split(?|).each{|a| a.replace "UR_#{a}"}.join(?|)
+end
+
+ifp, ofh = open(ARGV[0], "rt"), open(ARGV[1], "wt")
+ofc, off = open(ARGV[2], "wt"), open(ARGV[3], "wt")
 
 ofh.puts <<_end_h_; ofc.puts <<_end_c_; off.puts <<_end_f_
 // zsc output: pk7/lzscript/Headers/lith_upgradenames.h
@@ -30,53 +39,44 @@ _end_c_
 
 _end_f_
 
-cat = nil
+cat = ""
 
 for ln in ifp
    ln.chomp!
    next if ln.empty?
 
-   pre = ln[0]
    res = ln[1..-1]
-   case pre
-   when ?: then cat = "UC_" + res
-   when ?+ then
+   case ln[0]
+   when ?:; cat.replace "UC_#{res}"
+   when ?+
       res = res.split
-
       nam = res.shift
       inf = res.shift
-      inf = if inf == ?- then "null"
-            else              %("#{inf}") end
-
-      scr = if /[0-9]/ =~ res[0][0] then res.shift
-            else                         ?0 end
-
+      inf.replace(inf == ?- ? "null" : %("#{inf}"))
+      scr = if res[0][0] =~ SCR; res.shift else ?0 end
       pcl = res.shift
       flg = []
 
       for c, i in res.shift.chars.each_with_index
-            if c == ?-           then next
-         elsif c == ?A && i == 0 then flg << c
-         elsif c == ?D && i == 1 then flg << c
-         elsif c == ?U && i == 2 then flg << c
-         elsif c == ?R && i == 3 then flg << c
-         elsif c == ?E && i == 4 then flg << c
+            if c == ?-;           next
+         elsif c == ?A && i == 0; flg << c
+         elsif c == ?D && i == 1; flg << c
+         elsif c == ?U && i == 2; flg << c
+         elsif c == ?R && i == 3; flg << c
+         elsif c == ?E && i == 4; flg << c
          else raise "you done fucked up" end
       end
 
-      prf = if res[0] && /[0-9]/ =~ res[0][0] then res.shift
-            else                                   ?0 end
-      mul = if res[0] && /-?\./  =~ res[0]    then res.shift
-            else                                   ?0 end
-      grp = if res[0] && /[A-Z]/ =~ res[0][0] then "UG_#{res.shift}"
-            else                                   ?0 end
-      req = if res[0] && ?(      == res[0][0] then res.shift[1...-1].split(?|).collect{|a| "UR_#{a}"}.join(?|)
-            else                                   ?0 end
+      prf = if res[0] && res[0][0] =~ PRF;       res.shift   else ?0 end
+      mul = if res[0] && res[0]    =~ MUL;       res.shift   else ?0 end
+      grp = if res[0] && res[0][0] =~ GRP; "UG_#{res.shift}" else ?0 end
+      req = if res[0] && res[0][0] == ?(;  reqs  res.shift   else ?0 end
 
       ofh.puts "   UPGR_#{nam},"
 
-      ofc.puts \
-%(   {{"#{nam}", #{inf}, #{scr}}, #{pcl}, #{cat}, #{prf}, #{grp}, #{req}, #{mul}, UPGR_#{nam}},)
+      ofc.puts <<_end_
+   {{"#{nam}", #{inf}, #{scr}}, #{pcl}, #{cat}, #{prf}, #{grp}, #{req}, #{mul}, UPGR_#{nam}},
+_end_
 
       unless flg.empty?
          off.puts <<_end_
