@@ -1,10 +1,10 @@
 ## Misc ----------------------------------------------------------------------|
 == \#CHECK | Jp
 
-== \#TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i日 %i月 新部%i年
-== \#TIME_FMT_SHORT | %0.2i:%0.2i %i日 %i月 部%i年
-== \#TIME_FMT_DATE  | %i日 %i月 新部%i年
+== \#TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i日%i月 新部%i年
+== \#TIME_FMT_SHORT | %0.2i:%0.2i %i日%i月 部%i年
+== \#TIME_FMT_DATE  | %i日%i月 新部%i年
 
-== \#ENTER_FMT  | %Sを入った　%sＮＥで
+== \#ENTER_FMT  | %S.ne に侵入... 日付:%S
 == \#CHARGE_FMT | %.1lkｋＶ\cjチャージ
-== \#MANA_CHARGE | [マナは吸い上げる]
+== \#MANA_CHARGE | [マナ補給中]
