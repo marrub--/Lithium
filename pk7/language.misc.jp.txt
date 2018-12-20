@@ -9,36 +9,36 @@
 "LITH_TIME_FMT_SHORT" = "%0.2i:%0.2i %i日 %i月 部%i年";
 "LITH_TIME_FMT_DATE" = "%i日 %i月 新部%i年";
 
-"LITH_ENTER_FMT" = "%Sを入った　%sＮＥで";
+"LITH_ENTER_FMT" = "%S に入った... 日付:%S NE";
 "LITH_CHARGE_FMT" = "%.1lkｋＶ\cjチャージ";
-"LITH_MANA_CHARGE" = "[マナは吸い上げる]";
+"LITH_MANA_CHARGE" = "[マナ補給中]";
 
 // Misc_QuitMessages.txt stub
 
 // Misc_Changes.txt stub
 
 // UI ------------------------------------------------------------------------|
-"LITH_COST" = "かかくは";
-"LITH_EFFECT" = "効果は";
+"LITH_COST" = "価格";
+"LITH_EFFECT" = "効果";
 "LITH_FREE" = "無料";
 "LITH_CATEGORY" = "種類";
-"LITH_SCOREMULT" = "スコア乗数";
+"LITH_SCOREMULT" = "スコア倍率";
 "LITH_BUY" = "買う";
-"LITH_DEACTIVATE" = "非アクティブ化";
-"LITH_ACTIVATE" = "アクティブ化";
+"LITH_DEACTIVATE" = "解除";
+"LITH_ACTIVATE" = "起動";
 "LITH_EDIT" = "編集";
 "LITH_CLEAR" = "クリア";
 "LITH_EMPTY" = "空";
 "LITH_NOTE_FMT" = "\cm%iつのノート";
 
-"LITH_CAT_BODY" = "\cn体";
+"LITH_CAT_BODY" = "\cn素体";
 "LITH_CAT_WEAP" = "\ca武器";
 "LITH_CAT_EXTR" = "\cfおまけ";
 "LITH_CAT_DOWN" = "\ct格下げ";
 
-"LITH_GUI_TEXTBOX" = "ここにカーソルを置いて入力する。";
+"LITH_GUI_TEXTBOX" = "ここにカーソルを置いて入力。";
 
-"LITH_TAB_ARSENAL_Stan" = "ぶきぐら";
+"LITH_TAB_ARSENAL_Stan" = "兵器";
 "LITH_TAB_ARSENAL_Jem" = "指令";
 "LITH_TAB_ARSENAL_Ari" = "猟具";
 
@@ -55,28 +55,28 @@
 "LITH_TAB_STATISTICS" = "統計";
 "LITH_TAB_NOTES" = "ノート";
 
-"LITH_TAB_UPGRADES" = "アップグレ";
+"LITH_TAB_UPGRADES" = "機能改善";
 "LITH_TAB_SHOP" = "ショップ";
 
 // CBI Items -----------------------------------------------------------------|
 "LITH_CBI_PERF" = "性能： %i\cbPr";
-"LITH_CBI_PUSE" = "使う： %i\cbPr";
-"LITH_CBI_WRAM" = "ラム： %iTiB";
+"LITH_CBI_PUSE" = "使用率： %i\cbPr";
+"LITH_CBI_WRAM" = "ＲＡＭ： %iTiB";
 
-"LITH_CBI_INTERFACES" = "インストールされましたインタフェース：";
+"LITH_CBI_INTERFACES" = "インストールされたインターフェース：";
 
-"LITH_CBI_WeapnInter" = "武器手直しデバイス";
-"LITH_CBI_WeapnInte2" = "武器手戻りデバイス";
-"LITH_CBI_ArmorInter" = "よろいインタフェース";
-"LITH_CBI_RDistInter" = "現実変形インタフェース";
+"LITH_CBI_WeapnInter" = "武器改造デバイス";
+"LITH_CBI_WeapnInte2" = "武器変質デバイス";
+"LITH_CBI_ArmorInter" = "アーマーインタフェイス";
+"LITH_CBI_RDistInter" = "現実歪曲インタフェイス";
 
-"LITH_CBI_Slot1Spell" = "\ci刃スペルドライバ";
-"LITH_CBI_Slot2Spell" = "\ciデレアースペルドライバ";
-"LITH_CBI_Slot3Spell" = "\ciフューアスペルドライバ";
-"LITH_CBI_Slot4Spell" = "\ciロムイェットヤスペルドライバ";
-"LITH_CBI_Slot5Spell" = "\ciハルギョンスペルドライバ";
-"LITH_CBI_Slot6Spell" = "\ciほしゅだんまスペルドライバ";
-"LITH_CBI_Slot7Spell" = "\cgセルス・デ・ラ・モルテスペルドライバ";
+"LITH_CBI_Slot1Spell" = "\ciブレード スペルドライバ";
+"LITH_CBI_Slot2Spell" = "\ciciディリアン スペルドライバ";
+"LITH_CBI_Slot3Spell" = "\ciフューア スペルドライバ";
+"LITH_CBI_Slot4Spell" = "\ciロミエッタ スペルドライバ";
+"LITH_CBI_Slot5Spell" = "\ciハルギョン スペルドライバ";
+"LITH_CBI_Slot6Spell" = "\ciホシュ'ダンマ スペルドライバ";
+"LITH_CBI_Slot7Spell" = "\cgセルス・デ・ラ・モルテ スペルドライバ";
 
 "LITH_CBI_CPU1" = "ＯＦＭＤスペックノデア５４１ベーシックＣＰＵ";
 "LITH_CBI_CPU2" = "ＫＳＫＫスペックＺ６８０８高級ＣＰＵ";
@@ -84,7 +84,7 @@
 "LITH_CBI_CPU4" = "ＡＯＦ５９００００１ Ｒｅｖ７ ＣＰＵ";
 
 // BIP -----------------------------------------------------------------------|
-"LITH_BIP_NAME_Search" = "調べる";
+"LITH_BIP_NAME_Search" = "検索";
 "LITH_BIP_NAME_Weapons" = "武器";
 "LITH_BIP_NAME_Adversaries" = "敵";
 "LITH_BIP_NAME_Items" = "アイテム";
@@ -97,38 +97,38 @@
 "LITH_BIP_HELP_Search" = "全種類をテキスト検索する。";
 "LITH_BIP_HELP_Weapons" = "武器と武器のアップグレード。";
 "LITH_BIP_HELP_Adversaries" = "敵とボス。";
-"LITH_BIP_HELP_Items" = "よろいや掘り出し物など。";
+"LITH_BIP_HELP_Items" = "アーマーや掘り出し物など。";
 "LITH_BIP_HELP_Yourself" = "自分の属性、能力、歴史。";
-"LITH_BIP_HELP_Upgrades" = "体のアップグレード。";
-"LITH_BIP_HELP_Locations" = "銀河系の周りから興味がある場所。";
-"LITH_BIP_HELP_Companies" = "重要な会社、歴史的かつ現在の。";
+"LITH_BIP_HELP_Upgrades" = "素体のアップグレード。";
+"LITH_BIP_HELP_Locations" = "銀河系周辺の名所。";
+"LITH_BIP_HELP_Companies" = "歴史的かつ現在の、重要な会社。";
 "LITH_BIP_HELP_Mail" = "受信したメール。";
 
 // Statistics ----------------------------------------------------------------|
-"LITH_STAT_ScoreMul" = "スコア乗数";
+"LITH_STAT_ScoreMul" = "スコア倍率";
 "LITH_STAT_Weapons" = "手に入れた武器の量";
-"LITH_STAT_HealthUsed" = "捨てたＨＰの量";
+"LITH_STAT_HealthUsed" = "捨てたＨＰ";
 "LITH_STAT_HealthSum" = "ＨＰ合計";
-"LITH_STAT_ScoreUsed" = "費やしたスコアの量";
+"LITH_STAT_ScoreUsed" = "費やしたスコア";
 "LITH_STAT_ScoreSum" = "スコア合計";
-"LITH_STAT_Secrets" = "見つかった秘密の場所の量";
-"LITH_STAT_Units" = "ユニット移動したの量";
-"LITH_STAT_Upgrades" = "飼ったアップグレードの量";
-"LITH_STAT_Items" = "買ったアイテムの量";
-"LITH_STAT_Mail" = "受信したメールの量";
-"LITH_STAT_Time" = "経過秒数";
-"LITH_STAT_Boom" = "急に爆発の量";
-"LITH_STAT_Brouzouf" = "得たｂｒｏｕｚｏｕｆの量";
-"LITH_STAT_TrueMail" = "実に受信したメールの量";
+"LITH_STAT_Secrets" = "見つかったシークレット数";
+"LITH_STAT_Units" = "ユニット転送量";
+"LITH_STAT_Upgrades" = "所有アップグレード";
+"LITH_STAT_Items" = "買ったアイテム";
+"LITH_STAT_Mail" = "受信したメール";
+"LITH_STAT_Time" = "経過時間";
+"LITH_STAT_Boom" = "疑似爆発の量";
+"LITH_STAT_Brouzouf" = "得たｂｒｏｕｚｏｕｆ";
+"LITH_STAT_TrueMail" = "実際受信したメール";
 
 // Attributes ----------------------------------------------------------------|
 "LITH_ATTR_HELP_ACC" = "攻撃力";
 "LITH_ATTR_HELP_DEF" = "防御力";
-"LITH_ATTR_HELP_STR" = "ＨＰ最大";
-"LITH_ATTR_HELP_VIT" = "ＨＰアイテム効率";
-"LITH_ATTR_HELP_STM" = "ＨＰ再生最大";
-"LITH_ATTR_HELP_LUK" = "スコアの運";
-"LITH_ATTR_HELP_RGE" = "打たれた後攻撃力";
+"LITH_ATTR_HELP_STR" = "最大ＨＰ";
+"LITH_ATTR_HELP_VIT" = "回復効率";
+"LITH_ATTR_HELP_STM" = "最大再生ＨＰ";
+"LITH_ATTR_HELP_LUK" = "スコア増加運";
+"LITH_ATTR_HELP_RGE" = "反撃攻撃力";
 
 "LITH_OPENER" =
 // Misc_Opener.txt
