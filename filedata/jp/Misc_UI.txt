@@ -54,8 +54,8 @@
 == \#CBI_Slot1Spell | \ciブレード スペルドライバ
 == \#CBI_Slot2Spell | \ciciディリアン スペルドライバ
 == \#CBI_Slot3Spell | \ciフューア スペルドライバ
-== \#CBI_Slot4Spell | \ciciロミエッタ スペルドライバ
-== \#CBI_Slot5Spell | \ciハルシオン スペルドライバ
+== \#CBI_Slot4Spell | \ciロミエッタ スペルドライバ
+== \#CBI_Slot5Spell | \ciハルギョン スペルドライバ
 == \#CBI_Slot6Spell | \ciホシュ'ダンマ スペルドライバ
 == \#CBI_Slot7Spell | \cgセルス・デ・ラ・モルテ スペルドライバ
 
