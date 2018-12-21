@@ -2,8 +2,6 @@
 // Edit only if you aren't going to recompile.
 [en enu default]
 
-"LITH_INFO_SHORT_Sword" = "sord";
-"LITH_INFO_SHORT_Gameboy" = "Game Nanhai";
 // Outcast Weapons -----------------------------------------------------------|
 "LITH_INFO_SHORT_ChargeFist" = "Charge Fist";
 "LITH_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";

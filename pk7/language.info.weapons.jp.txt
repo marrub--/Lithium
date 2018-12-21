@@ -2,8 +2,6 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
-"LITH_INFO_SHORT_Sword" = "sord";
-"LITH_INFO_SHORT_Gameboy" = "Game Nanhai";
 // Outcast Weapons -----------------------------------------------------------|
 "LITH_INFO_SHORT_ChargeFist" = "チャージ拳";
 "LITH_INFO_TITLE_ChargeFist" = "Utsu Denkasou Assault Bracelet";

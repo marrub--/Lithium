@@ -192,8 +192,6 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          if(page->image)
             PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-         PrintSpriteA(":UI:Background", 0,1, 0,1, 0.5);
-
          PrintTextStr(pinf.flname);
          PrintText("cbifont", CR_ORANGE, 200,4, 45 + oy,1);
 

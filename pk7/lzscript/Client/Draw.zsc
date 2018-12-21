@@ -158,8 +158,11 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
       cl.m_d[p].c = c;
    }
 
-   while(tex.charCodeAt(0) == Ch_Colon)
+   for(int i = 0; tex.charCodeAt(0) == Ch_Colon; i++)
+   {
+      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
+   }
 
    cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
 
@@ -531,36 +534,39 @@ override void RenderOverlay(RenderEvent evt)
                   name colo = utf.mid(1, 256);
                   switch(colo) {
                   default:  Console.printf("invalid color %s", colo);
-                  case 'j': case '-': case 'l': cr = 0xffffff; break;
-                  case 'a':                     cr = 0xeaadad; break;
-                  case 'b':                     cr = 0xd2b48c; break;
-                  case 'c':                     cr = 0xc0c0c0; break;
-                  case 'd':                     cr = 0x33ff33; break;
-                  case 'e':                     cr = 0xcc9966; break;
-                  case 'f':                     cr = 0xffcc00; break;
-                  case 'g':                     cr = 0xff4e60; break;
-                  case 'h':                     cr = 0x6e6eff; break;
-                  case 'i':                     cr = 0xffaa00; break;
-                  case 'k':                     cr = 0xeeee32; break;
-                  case 'm':                     cr = 0x4d4d4d; break;
-                  case 'n':                     cr = 0x33eeff; break;
-                  case 'o':                     cr = 0xfecc99; break;
-                  case 'p':                     cr = 0xd1d8a7; break;
-                  case 'q':                     cr = 0x129a12; break;
-                  case 'r':                     cr = 0xb22323; break;
-                  case 's':                     cr = 0x6c5d56; break;
-                  case 't':                     cr = 0xa674d7; break;
-                  case 'u':                     cr = 0x414141; break;
-                  case 'v':                     cr = 0x00fffe; break;
-                  case 'w':                     cr = 0xafccd3; break;
-                  case 'x':                     cr = 0xfb7329; break;
-                  case 'y':                     cr = 0x6c729f; break;
-                  case 'z':                     cr = 0x8cd0dc; break;
-                  case '[Lith_Purple]':         cr = 0x8c3bf8; break;
-                  case '[Lith_Grey]':           cr = 0xbfbfbf; break;
-                  case '[Lith_Green]':          cr = 0x00ff00; break;
-                  case '[Lith_Red]':            cr = 0xbf0f4a; break;
-                  case '[Lith_Blue]':           cr = 0x3b47f8; break;
+                  case 'j':
+                  case '-':
+                  case 'l':
+                  case '|': cr = 0xffffff; break;
+                  case 'a': cr = 0xeaadad; break;
+                  case 'b': cr = 0xd2b48c; break;
+                  case 'c': cr = 0xc0c0c0; break;
+                  case 'd': cr = 0x33ff33; break;
+                  case 'e': cr = 0xcc9966; break;
+                  case 'f': cr = 0xffcc00; break;
+                  case 'g': cr = 0xff4e60; break;
+                  case 'h': cr = 0x6e6eff; break;
+                  case 'i': cr = 0xffaa00; break;
+                  case 'k': cr = 0xeeee32; break;
+                  case 'm': cr = 0x4d4d4d; break;
+                  case 'n': cr = 0x33eeff; break;
+                  case 'o': cr = 0xfecc99; break;
+                  case 'p': cr = 0xd1d8a7; break;
+                  case 'q': cr = 0x129a12; break;
+                  case 'r': cr = 0xb22323; break;
+                  case 's': cr = 0x6c5d56; break;
+                  case 't': cr = 0xa674d7; break;
+                  case 'u': cr = 0x414141; break;
+                  case 'v': cr = 0x00fffe; break;
+                  case 'w': cr = 0xafccd3; break;
+                  case 'x': cr = 0xfb7329; break;
+                  case 'y': cr = 0x6c729f; break;
+                  case 'z': cr = 0x8cd0dc; break;
+                  case '[Lith_Purple]': cr = 0x8c3bf8; break;
+                  case '[Lith_Grey]':   cr = 0xbfbfbf; break;
+                  case '[Lith_Green]':  cr = 0x00ff00; break;
+                  case '[Lith_Red]':    cr = 0xbf0f4a; break;
+                  case '[Lith_Blue]':   cr = 0x3b47f8; break;
                   }
                   continue;
                }

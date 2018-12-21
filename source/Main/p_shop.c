@@ -97,7 +97,8 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->shopscr, y, guipre.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
-      char *name = LanguageC(name, LANG "SHOP_TITLE_%S", shopitems[i].name);
+      StrEntOFF
+      char const *name = LanguageC(LANG "SHOP_TITLE_%S", shopitems[i].name);
 
       int *shopsel = &CBIState(g)->shopsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))

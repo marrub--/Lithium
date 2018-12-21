@@ -160,7 +160,7 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
 
    for(int i = 0; tex.charCodeAt(0) == Ch_Colon; i++)
    {
-      if(i > 5) Console.printf("invalid texture: %s", tex);
+      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
    }
 
