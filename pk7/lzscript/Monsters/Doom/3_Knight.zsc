@@ -71,7 +71,7 @@ default
    DeathSound "knight/death";
    Obituary "$OB_KNIGHT";
    HitObituary "$OB_KNIGHTHIT";
-   Tag "$LITH_INFO_SHORT_HellKnight";
+   Tag "Hell Knight";
 
    -BOSSDEATH;
 }

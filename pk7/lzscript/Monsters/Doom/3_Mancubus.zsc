@@ -35,7 +35,7 @@ default
    DeathSound "fatso/death";
    ActiveSound "fatso/active";
    Obituary "$OB_FATSO";
-   Tag "$LITH_INFO_SHORT_Mancubus";
+   Tag "Mancubus";
 
    +FLOORCLIP
    +BOSSDEATH

@@ -22,7 +22,7 @@ class Lith_Sword : Lith_Weapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Sword";
+   Tag "sord";
    Weapon.Kickback 100;
    Weapon.SlotNumber 0;
 

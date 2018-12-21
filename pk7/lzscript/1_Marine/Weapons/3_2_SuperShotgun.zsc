@@ -2,7 +2,7 @@ class Lith_SuperShotgun : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_SuperShotgun";
+   Tag "Super Shotgun";
    Weapon.UpSound "weapons/ssg/draw";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;

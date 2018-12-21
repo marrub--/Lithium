@@ -39,7 +39,7 @@ class Lith_PlasmaRifle : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_PlasmaRifle";
+   Tag "Plasma Rifle";
    Weapon.UpSound "weapons/plasma/draw";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;

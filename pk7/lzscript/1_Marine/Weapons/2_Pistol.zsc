@@ -92,7 +92,7 @@ class Lith_Pistol : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Pistol";
+   Tag "Pistol";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.BobSpeed 3;

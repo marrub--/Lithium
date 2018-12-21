@@ -31,9 +31,6 @@ in file language.info.upgrades.*.txt
 done
 
 in file language.info.weapons.*.txt
-   put data sord        -> \#INFO_SHORT_Sword
-   put data Game Nanhai -> \#INFO_SHORT_Gameboy
-
    parse file Info_Weapons_Outcasts.txt
    parse file Info_Weapons_CyberMage.txt
    parse file Info_Weapons_Marine.txt

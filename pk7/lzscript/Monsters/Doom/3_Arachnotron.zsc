@@ -95,7 +95,7 @@ default
    DeathSound "baby/death";
    ActiveSound "baby/active";
    Obituary "$OB_BABY";
-   Tag "$LITH_INFO_SHORT_Arachnotron";
+   Tag "Arachnotron";
 
    +FLOORCLIP
    +BOSSDEATH

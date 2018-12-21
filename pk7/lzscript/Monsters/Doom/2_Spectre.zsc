@@ -11,7 +11,7 @@ default
    RenderStyle "Fuzzy";
    Alpha 0.5;
    Speed 11;
-   Tag "$LITH_INFO_SHORT_Spectre";
+   Tag "Spectre";
 
    +SHADOW
 }

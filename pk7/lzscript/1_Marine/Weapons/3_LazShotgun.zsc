@@ -33,7 +33,7 @@ class Lith_LazShotgun : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_LazShotgun";
+   Tag "Laser Shotgun";
    Weapon.UpSound "weapons/lshotgun/draw";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.9;

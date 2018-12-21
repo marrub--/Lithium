@@ -40,7 +40,7 @@ class Lith_StarShot : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_StarShot";
+   Tag "Hosh'danma";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/starshot/draw";

@@ -58,7 +58,7 @@ class Lith_ChargeFist : Lith_OutcastsWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_ChargeFist";
+   Tag "Charge Fist";
    Weapon.Kickback 100;
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;

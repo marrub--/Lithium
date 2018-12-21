@@ -86,7 +86,7 @@ class Lith_Delear : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Delear";
+   Tag "Delear";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/delear/draw";

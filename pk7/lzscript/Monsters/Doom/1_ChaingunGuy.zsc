@@ -25,7 +25,7 @@ default
    DeathSound "chainguy/death";
    ActiveSound "chainguy/active";
    Obituary "$OB_CHAINGUY";
-   Tag "$LITH_INFO_SHORT_ChaingunGuy";
+   Tag "Former Corporal";
 
    +FLOORCLIP;
 }

@@ -75,7 +75,7 @@ class Lith_CombatRifle : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_CombatRifle";
+   Tag "Combat Rifle";
    Weapon.UpSound "weapons/rifle/draw";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;

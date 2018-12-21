@@ -44,7 +44,7 @@ class Lith_SniperRifle : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_SniperRifle";
+   Tag "Sniper Rifle";
    Weapon.UpSound "weapons/sniper/draw";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 0.9;

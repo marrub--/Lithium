@@ -280,7 +280,7 @@ class Lith_StarDestroyer : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_StarDestroyer";
+   Tag "Star Destroyer";
    Weapon.UpSound "weapons/shipgun/draw";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;

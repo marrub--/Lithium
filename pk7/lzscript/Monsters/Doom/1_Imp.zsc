@@ -66,7 +66,7 @@ default
    Speed 9;
    MinMissileChance 160;
    Scale 0.9;
-   Tag "$LITH_INFO_SHORT_Imp";
+   Tag "Hell Trooper";
    SeeSound "imp/sight";
    PainSound "imp/pain";
    DeathSound "imp/death";

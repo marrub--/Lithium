@@ -44,7 +44,7 @@ class Lith_Fist : Lith_MWeapon replaces Fist; // why would you pick up a fist
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Fist";
+   Tag "Knife";
    Weapon.Kickback 100;
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;

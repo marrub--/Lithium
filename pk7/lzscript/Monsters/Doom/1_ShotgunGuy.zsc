@@ -29,7 +29,7 @@ default
    DeathSound "shotguy/death";
    ActiveSound "shotguy/active";
    Obituary "$OB_SHOTGUY";
-   Tag "$LITH_INFO_SHORT_ShotgunGuy";
+   Tag "Former Sergeant";
 
    +FLOORCLIP
 }

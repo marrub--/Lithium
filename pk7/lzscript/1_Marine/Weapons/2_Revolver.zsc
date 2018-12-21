@@ -2,7 +2,7 @@ class Lith_Revolver : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Revolver";
+   Tag "Revolver";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 0.9;
    Weapon.BobSpeed 2.5;

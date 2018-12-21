@@ -97,7 +97,7 @@ default
    ActiveSound "baron/active";
    Obituary "$OB_BARON";
    HitObituary "$OB_BARONHIT";
-   Tag "$LITH_INFO_SHORT_BaronOfHell";
+   Tag "Hell Noble";
 
    +MISSILEMORE
    +FLOORCLIP

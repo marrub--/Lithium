@@ -240,7 +240,7 @@ class Lith_Cercle : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Cercle";
+   Tag "Cercle de la Morte";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cercle/draw";

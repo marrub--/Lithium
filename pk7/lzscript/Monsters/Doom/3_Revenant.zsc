@@ -93,7 +93,7 @@ default
    MeleeSound "skeleton/melee";
    Obituary "$OB_UNDEAD";
    HitObituary "$OB_UNDEADHIT";
-   Tag "$LITH_INFO_SHORT_Revenant";
+   Tag "Revenant";
 
    +FLOORCLIP
    +MISSILEMORE

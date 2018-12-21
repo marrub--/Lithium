@@ -25,7 +25,7 @@ actor Lith_DivisionSigil : Lith_ItemPickup
    
    Inventory.Icon "DIVSIGI1"
    Inventory.MaxAmount 1
-   Tag "$LITH_INV_SIGIL"
+   Tag "Division Sigil"
    
    +INVENTORY.INVBAR
    -INVENTORY.PICKUPFLASH

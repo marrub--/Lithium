@@ -38,7 +38,7 @@ class Lith_Rend : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Rend";
+   Tag "Romyetya";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rend/draw";

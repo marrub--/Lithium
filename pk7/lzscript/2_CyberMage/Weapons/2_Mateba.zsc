@@ -127,7 +127,7 @@ class Lith_Mateba : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_Mateba";
+   Tag "Mateba";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.BobSpeed 2.5;

@@ -2,7 +2,7 @@ class Lith_CFist : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_CFist";
+   Tag "Mana Absorber";
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
 

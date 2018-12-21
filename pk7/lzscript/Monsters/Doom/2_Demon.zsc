@@ -20,7 +20,7 @@ default
    DeathSound "demon/death";
    ActiveSound "demon/active";
    Obituary "$OB_DEMONHIT";
-   Tag "$LITH_INFO_SHORT_Demon";
+   Tag "Hell Sergeant";
 
    +FLOORCLIP
 }

@@ -162,7 +162,7 @@ class Lith_IonRifle : Lith_CWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_IonRifle";
+   Tag "Ion Rifle";
    Weapon.UpSound "weapons/ionrifle/draw";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;

@@ -21,7 +21,7 @@ default
    DeathSound "skull/death";
    ActiveSound "skull/active";
    Obituary "$OB_SKULL";
-   Tag "$LITH_INFO_SHORT_LostSoul";
+   Tag "Lost Soul";
 
    +FLOAT
    +NOGRAVITY

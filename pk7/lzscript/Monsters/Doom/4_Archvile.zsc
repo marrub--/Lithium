@@ -81,7 +81,7 @@ default
    ActiveSound "vile/active";
    MeleeSound "vile/stop";
    Obituary "$OB_VILE";
-   Tag "$LITH_INFO_SHORT_Archvile";
+   Tag "Arch-vile";
 
    +QUICKTORETALIATE
    +FLOORCLIP

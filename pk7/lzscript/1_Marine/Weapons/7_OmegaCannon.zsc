@@ -5,7 +5,7 @@ class Lith_BFG9000 : Lith_MWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_BFG9000";
+   Tag "Omega Cannon";
    Weapon.UpSound "weapons/cannon/draw";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;

@@ -2,7 +2,7 @@ class Lith_700Express : Lith_DWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_700Express";
+   Tag ".700 Express";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Lith_Weapon.MagSize 4;

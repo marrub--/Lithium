@@ -35,7 +35,7 @@ default
    BloodColor "Blue";
    Obituary "$OB_CACO";
    HitObituary "$OB_CACOHIT";
-   Tag "$LITH_INFO_SHORT_Cacodemon";
+   Tag "Cacodemon";
 
    +FLOAT
    +NOGRAVITY

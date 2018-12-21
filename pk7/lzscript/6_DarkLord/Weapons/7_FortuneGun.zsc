@@ -2,7 +2,7 @@ class Lith_FortuneGun : Lith_DWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_FortuneGun";
+   Tag "Fortune";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
    +WEAPON.NOAUTOFIRE;

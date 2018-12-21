@@ -86,7 +86,7 @@ default
    DeathSound "cyber/death";
    ActiveSound "cyber/active";
    Obituary "$OB_CYBORG";
-   Tag "$LITH_INFO_SHORT_Cyberdemon";
+   Tag "Cyber-Demon";
 
    +BOSS
    +MISSILEMORE

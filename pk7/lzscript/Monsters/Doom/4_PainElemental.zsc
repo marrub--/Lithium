@@ -23,7 +23,7 @@ default
    PainSound "pain/pain";
    DeathSound "pain/death";
    ActiveSound "pain/active";
-   Tag "$LITH_INFO_SHORT_PainElemental";
+   Tag "Pain Elemental";
 
    +FLOAT
    +NOGRAVITY

@@ -33,7 +33,7 @@ class Lith_PlasmaDiffuser : Lith_OutcastsWeapon;
 
 default
 {
-   Tag "$LITH_INFO_SHORT_PlasmaDiffuser";
+   Tag "Plasma Diffuser";
    Weapon.UpSound "weapons/plasdiff/draw";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 0.9;
