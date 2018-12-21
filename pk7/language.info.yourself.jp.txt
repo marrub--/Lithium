@@ -2,5 +2,114 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
-// Info_Yourself.txt stub
+// Backstory -----------------------------------------------------------------|
+"LITH_INFO_SHORT_P114" = "プロジェクト114";
+"LITH_INFO_TITLE_P114" = "$LITH_INFO_SHORT_P114";
+"LITH_INFO_DESCR_P114" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_OPD2" = "Op. D2";
+"LITH_INFO_TITLE_OPD2" = "Operation Deception 2";
+"LITH_INFO_DESCR_OPD2" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_Info400" = "Information 400";
+"LITH_INFO_TITLE_Info400" = "$LITH_INFO_SHORT_Info400";
+"LITH_INFO_DESCR_Info400" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_Info402" = "Information 402";
+"LITH_INFO_TITLE_Info402" = "$LITH_INFO_SHORT_Info402";
+"LITH_INFO_DESCR_Info402" =
+   "翻訳なし";
+
+// Cybernetics ---------------------------------------------------------------|
+"LITH_INFO_SHORT_BIP" = "B.I.P.";
+"LITH_INFO_TITLE_BIP" = "Biotic Information Panel (B.I.P.)";
+"LITH_INFO_DESCR_BIP" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_CBIBase" = "C/B I";
+"LITH_INFO_TITLE_CBIBase" = "Computer/Brain Interface (C/B I)";
+"LITH_INFO_DESCR_CBIBase" =
+   "翻訳なし";
+
+"LITH_INFO_DESCR_CBIStan" =
+   "#LITH_INFO_DESCR_CBIBase"
+   "\n\n"
+   "翻訳なし(Marineの文)";
+
+"LITH_INFO_DESCR_CBIJem" =
+   "#LITH_INFO_DESCR_CBIBase"
+   "\n\n"
+   "翻訳なし(CyberMageの文)";
+
+"LITH_INFO_DESCR_CBIAri" =
+   "#LITH_INFO_DESCR_CBIBase"
+   "\n\n"
+   "翻訳なし(DarkLordの文)";
+
+// Attributes ----------------------------------------------------------------|
+"LITH_INFO_SHORT_AttrACC" = "Accuracy";
+"LITH_INFO_TITLE_AttrACC" = "\cgAccuracy\c- (ACC)";
+"LITH_INFO_DESCR_AttrACC" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrDEF" = "Defense";
+"LITH_INFO_TITLE_AttrDEF" = "\ciDefense\c- (DEF)";
+"LITH_INFO_DESCR_AttrDEF" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrSTRHuman" = "Strength";
+"LITH_INFO_TITLE_AttrSTRHuman" = "\ckStrength\c- (STR)";
+"LITH_INFO_DESCR_AttrSTRHuman" =
+   "翻訳なし(Marine・CyberMage・Assassinの文)";
+
+"LITH_INFO_DESCR_AttrSTRRobot" =
+   "翻訳なし(Informantの文)";
+
+"LITH_INFO_DESCR_AttrSTRNonHuman" =
+   "翻訳なし(Wanderer・DarkLord・Thothの文)";
+
+"LITH_INFO_SHORT_AttrVIT" = "Vitality";
+"LITH_INFO_TITLE_AttrVIT" = "\cdVitality\c- (VIT)";
+"LITH_INFO_DESCR_AttrVIT" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrPOT" = "Potency";
+"LITH_INFO_TITLE_AttrPOT" = "\cdPotency\c- (POT)";
+"LITH_INFO_DESCR_AttrPOT" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrSTM" = "Stamina";
+"LITH_INFO_TITLE_AttrSTM" = "\chStamina\c- (STM)";
+"LITH_INFO_DESCR_AttrSTM" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrREP" = "Repair";
+"LITH_INFO_TITLE_AttrREP" = "\chRepair\c- (REP)";
+"LITH_INFO_DESCR_AttrREP" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrREG" = "Regeneration";
+"LITH_INFO_TITLE_AttrREG" = "\chRegeneration\c- (REG)";
+"LITH_INFO_DESCR_AttrREG" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrLUK" = "Luck";
+"LITH_INFO_TITLE_AttrLUK" = "\ctLuck\c- (LUK)";
+"LITH_INFO_DESCR_AttrLUK" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrRGE" = "Rage";
+"LITH_INFO_TITLE_AttrRGE" = "\cmRage\c- (RGE)";
+"LITH_INFO_DESCR_AttrRGE" =
+   "翻訳なし";
+
+"LITH_INFO_SHORT_AttrCON" = "Concentration";
+"LITH_INFO_TITLE_AttrCON" = "\cmConcentration\c- (CON)";
+"LITH_INFO_DESCR_AttrCON" =
+   "翻訳なし";
+
+// EOF
 

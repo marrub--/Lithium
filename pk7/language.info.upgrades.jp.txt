@@ -2,20 +2,75 @@
 // Edit only if you aren't going to recompile.
 [jp]
 
-"LITH_INFO_SHORT_WeapnInter" = "$LITH_CBI_WeapnInter";
-"LITH_INFO_TITLE_WeapnInter" = "武器インタフェースデバイス箱";
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_HeadsUpDisp" = "Heads Up Display";
+"LITH_INFO_DESCR_HeadsUpDisp" =
+   "翻訳なし";
 
-"LITH_INFO_SHORT_WeapnInte2" = "$LITH_CBI_WeapnInte2";
-"LITH_INFO_TITLE_WeapnInte2" = "$LITH_CBI_WeapnInte2";
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_JetBooster" = "Pe'i tha E. Jet Boots";
+"LITH_INFO_DESCR_JetBooster" =
+   "翻訳なし";
 
-"LITH_INFO_SHORT_ArmorInter" = "$LITH_CBI_ArmorInter";
-"LITH_INFO_TITLE_ArmorInter" = "アーマーインタフェースデバイス";
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_ReflexWetw" = "Klaje Mosegon Reflex Enhancing Wetware";
+"LITH_INFO_DESCR_ReflexWetw" =
+   "翻訳なし";
 
-"LITH_INFO_SHORT_CBIUpgr1" = "高級ＣＰＵ";
-"LITH_INFO_TITLE_CBIUpgr1" = "$LITH_CBI_CPU2";
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
+"LITH_INFO_DESCR_ReflexWetwJem" =
+   "翻訳なし(CyberMageの文)";
 
-"LITH_INFO_SHORT_CBIUpgr2" = "超高級ＣＰＵ";
-"LITH_INFO_TITLE_CBIUpgr2" = "$LITH_CBI_CPU3";
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_CyberLegs" = "Prexje Mosegon Speed Enhancing Wetware";
+"LITH_INFO_DESCR_CyberLegs" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_Yh0" = "Yh-0 Reactive Plating System";
+"LITH_INFO_DESCR_Yh0" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_DefenseNuke" = "Defensive Atomic Bomb";
+"LITH_INFO_DESCR_DefenseNuke" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_Adrenaline" = "Senxans Automatic Adrenaline Injector";
+"LITH_INFO_DESCR_Adrenaline" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_VitalScanner" = "Mit'keru Vital Scanner";
+"LITH_INFO_DESCR_VitalScanner" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_AutoReload" = "K'meru Automatic Loading System";
+"LITH_INFO_DESCR_AutoReload" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_SoulCleaver" = "\cdSi Ritagliassero\c-, \chCaeruleorum\c- 44";
+"LITH_INFO_DESCR_SoulCleaver" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_StealthSys" = "Unnamed Stealth System";
+"LITH_INFO_DESCR_StealthSys" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_HeadsUpDispJem" = "Heads Up Display";
+"LITH_INFO_DESCR_HeadsUpDispJem" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_TITLE_Magic" = "Mana Absorber";
+"LITH_INFO_DESCR_Magic" =
+   "翻訳なし";
 
 // EOF
 

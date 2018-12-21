@@ -3,11 +3,8 @@
 [jp]
 
 // Health --------------------------------------------------------------------|
-"LITH_LOG_HealthBonus" = "ＨＰボーナス";
-"LITH_LOG_Medikit" = "メディキット";
 "LITH_LOG_MegaSphere" = "メガチャージ！";
 "LITH_LOG_SoulSphere" = "スーパーチャージ！";
-"LITH_LOG_StimPack" = "スティムパック";
 
 // Keys ----------------------------------------------------------------------|
 "LITH_LOG_RedCard" = "\cg赤キーディスク";
@@ -19,12 +16,8 @@
 
 // Powerups ------------------------------------------------------------------|
 "LITH_LOG_RadSuit" = "放射線遮蔽スーツ";
-"LITH_LOG_InfraRed" = "ＣＢゴーグル";
 "LITH_LOG_Invuln" = "不死身!";
-"LITH_LOG_BlurSphere" = "バリア";
 "LITH_LOG_Backpack" = "バックパックと割引カード";
-"LITH_LOG_Berserk" = "バーサク";
-"LITH_LOG_AllMap" = "レベルマップ";
 "LITH_LOG_DoggoSphere" = "\cgわん\ciわん\ckわん\cdわん\chわん\ctわん";
 "LITH_LOG_Dogs" = "犬を得た";
 "LITH_LOG_ShobonSphere" = "(´・ω・｀）";
@@ -41,7 +34,6 @@
 
 // Bonuses -------------------------------------------------------------------|
 "LITH_LOG_Coin" = "コイン";
-"LITH_LOG_ScoreChip" = "スコアチップ";
 "LITH_LOG_Ruby" = "欠けたルビー";
 "LITH_LOG_Sapphire" = "欠けたサファイア";
 "LITH_LOG_Amethyst" = "欠けたアメジスト";

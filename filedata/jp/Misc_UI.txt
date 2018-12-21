@@ -52,7 +52,7 @@
 == \#CBI_RDistInter | 現実歪曲インタフェイス
 
 == \#CBI_Slot1Spell | \ciブレード スペルドライバ
-== \#CBI_Slot2Spell | \ciciディリアン スペルドライバ
+== \#CBI_Slot2Spell | \ciディリアン スペルドライバ
 == \#CBI_Slot3Spell | \ciフューア スペルドライバ
 == \#CBI_Slot4Spell | \ciロミエッタ スペルドライバ
 == \#CBI_Slot5Spell | \ciハルギョン スペルドライバ

@@ -3,6 +3,27 @@
 == \#MAIL_INTERNAL | （内部）
 == \#MAIL_NOTITLE  | （タイトルなし）
 
+## All Classes ---------------------------------------------------------------|
+++ \#MAIL_BODY_JamesDefeated   | Mail/Phantom_James.txt
+++ \#MAIL_BODY_MakarovDefeated | Mail/Phantom_Makarov.txt
+++ \#MAIL_BODY_IsaacDefeated   | Mail/Phantom_Isaac.txt
+
+## Marine --------------------------------------------------------------------|
+++ \#MAIL_BODY_IntroStan | Mail/Intro_Marine.txt
+
+++ \#MAIL_BODY_Cluster1Stan | Mail/Cluster1_Marine.txt
+++ \#MAIL_BODY_Cluster2Stan | Mail/Cluster2_Marine.txt
+++ \#MAIL_BODY_Cluster3Stan | Mail/Cluster3_Marine.txt
+
+++ \#MAIL_BODY_PhantomStan | Mail/Intro2_Marine.txt
+== \#MAIL_SEND_PhantomStan | htic0@gov.（隠した）.mailserv
+
+++ \#MAIL_BODY_Secret1Stan | Mail/Secret1_Marine.txt
+== \#MAIL_NAME_Secret1Stan | 退避分
+
+++ \#MAIL_BODY_Secret2Stan | Mail/Secret2_Marine.txt
+== \#MAIL_NAME_Secret2Stan | 退避分
+
 ## Cyber-Mage ----------------------------------------------------------------|
 ++ \#MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
 == \#MAIL_NAME_IntroJem | 退避メッセージ

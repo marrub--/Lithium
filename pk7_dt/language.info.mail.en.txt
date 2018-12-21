@@ -185,7 +185,7 @@
 // Mail/Secret2_Marine.txt
    "Now I've done it, this place just keeps going deeper and getting weirder... Damn, it's getting hot in here! Better turn up the heat some more.";
 
-"DTAP_MAIL_NAME_Secret1Stan" = "Saved Buffer";
+"DTAP_MAIL_NAME_Secret2Stan" = "Saved Buffer";
 
 // Cyber-Mage ----------------------------------------------------------------|
 "DTAP_MAIL_BODY_IntroJem" =

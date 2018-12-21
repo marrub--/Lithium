@@ -1,4 +1,17 @@
 ## Outcast Weapons -----------------------------------------------------------|
-== \#INFO_SHORT_ChargeFist      | チャージ拳
+== \#INFO_SHORT_ChargeFist | チャージ拳
+== \#INFO_TITLE_ChargeFist | Utsu Denkasou Assault Bracelet
+@@ \#INFO_DESCR_ChargeFist
+翻訳なし
+
+##----------------------------------------------------------------------------|
 == \#INFO_SHORT_MissileLauncher | ミサイルランチャー
-== \#INFO_SHORT_PlasmaDiffuser  | プラズマ拡散銃
+== \#INFO_TITLE_MissileLauncher | X-400 Lance-missiles
+@@ \#INFO_DESCR_MissileLauncher
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_PlasmaDiffuser | プラズマ拡散銃
+== \#INFO_TITLE_PlasmaDiffuser | SYM4.3 D.640 PLASMA DIFFUSER
+@@ \#INFO_DESCR_PlasmaDiffuser
+翻訳なし

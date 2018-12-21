@@ -1,1 +1,168 @@
-## Info_Items.txt stub
+##----------------------------------------------------------------------------|
+== \#ITEM_TAG_ArmStandard    | Standard Armor
+== \#ITEM_TAG_ArmImproved    | Improved Armor
+== \#ITEM_TAG_ArmTeflon      | Teflon-weave Armor
+== \#ITEM_TAG_ArmDendrite    | Dendrite Armor
+== \#ITEM_TAG_ArmAerodynamic | Aerodynamic Armor
+== \#ITEM_TAG_ArmHazMat      | Haz-Mat Armor
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_ScoreChip | スコアチップ
+== \#INFO_TITLE_ScoreChip | GIC 781000スコアチップ
+@@ \#INFO_DESCR_ScoreChip
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_HealthBonus | ＨＰボーナス
+== \#INFO_TITLE_HealthBonus | Energy Vial
+@@ \#INFO_DESCR_HealthBonus
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_AllMap | レベルマップ
+== \#INFO_TITLE_AllMap | $\#INFO_SHORT_AllMap
+@@ \#INFO_DESCR_AllMap
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Berserk | バーサク
+== \#INFO_TITLE_Berserk | JAQTen BERSERK Pack
+@@ \#INFO_DESCR_Berserk
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Infrared | ＣＢゴーグル
+== \#INFO_TITLE_Infrared | SYM4.3 D.556 ACTIVE-INFRARED CB-GOGGLES
+@@ \#INFO_DESCR_Infrared
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_RadSuit | ラドスーツ
+== \#INFO_TITLE_RadSuit | SYM4.3 D.223 RADIATION SHIELDING SUIT
+@@ \#INFO_DESCR_RadSuit
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_BackpackBase | バックパック
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_BackpackStan
+翻訳なし(Marineの文)
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_BackpackJem
+翻訳なし(CyberMageの文)
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Stimpack | スティムパック
+== \#INFO_TITLE_Stimpack | JJJ 111 Stim-pak(R)
+@@ \#INFO_DESCR_Stimpack
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Medikit | メディキット
+== \#INFO_TITLE_Medikit | JJJ 444 Medi-kit(R)
+@@ \#INFO_DESCR_Medikit
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_KeyDisk | キーディスク
+== \#INFO_TITLE_KeyDisk | MiCo KeyDisk
+@@ \#INFO_DESCR_KeyDisk
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_KeySkull | スカルキー
+== \#INFO_TITLE_KeySkull | $\#INFO_SHORT_KeySkull
+@@ \#INFO_DESCR_KeySkull
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Fragma | バリア
+== \#INFO_TITLE_Fragma | \cdReflecterentur\c-, \ctPurpurarum\c- 42
+@@ \#INFO_DESCR_Fragma
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Invulnerability | 不死身
+== \#INFO_TITLE_Invulnerability | Unknown Invulnerability Magic
+@@ \#INFO_DESCR_Invulnerability
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Heart | スーパーチャージ
+== \#INFO_TITLE_Heart | \cdAmarentur\c-, \cdViridium\c- 6
+@@ \#INFO_DESCR_Heart
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Taochyan | メガチャージ
+== \#INFO_TITLE_Taochyan | \cdCurarentur\c-, \caRosarum\c- 9
+@@ \#INFO_DESCR_Taochyan
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_TITLE_ArmStandard | Standard Military Armor
+@@ \#INFO_DESCR_ArmStandard
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_TITLE_ArmImproved | Improved Military Armor
+@@ \#INFO_DESCR_ArmImproved
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmTeflon
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmDendrite
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmAerodynamic
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmHazMat
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmPinkSilver
+翻訳なし
+
+##----------------------------------------------------------------------------|
+@@ \#INFO_DESCR_ArmMidori
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_WeapnInter | $\#CBI_WeapnInter
+== \#INFO_TITLE_WeapnInter | 武器インタフェースデバイス箱
+@@ \#INFO_DESCR_WeapnInter
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_WeapnInte2 | $\#CBI_WeapnInte2
+== \#INFO_TITLE_WeapnInte2 | $\#CBI_WeapnInte2
+@@ \#INFO_DESCR_WeapnInte2
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_ArmorInter | $\#CBI_ArmorInter
+== \#INFO_TITLE_ArmorInter | アーマーインタフェースデバイス
+@@ \#INFO_DESCR_ArmorInter
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_CBIUpgr1 | 高級ＣＰＵ
+== \#INFO_TITLE_CBIUpgr1 | $\#CBI_CPU2
+@@ \#INFO_DESCR_CBIUpgr1
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_CBIUpgr2 | 超高級ＣＰＵ
+== \#INFO_TITLE_CBIUpgr2 | $\#CBI_CPU3
+@@ \#INFO_DESCR_CBIUpgr2
+翻訳なし
+
+## EOF

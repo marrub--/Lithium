@@ -15,6 +15,57 @@
 "LITH_MAIL_INTERNAL" = "（内部）";
 "LITH_MAIL_NOTITLE" = "（タイトルなし）";
 
+// All Classes ---------------------------------------------------------------|
+"LITH_MAIL_BODY_JamesDefeated" =
+// Mail/Phantom_James.txt
+   "翻訳なし";
+
+"LITH_MAIL_BODY_MakarovDefeated" =
+// Mail/Phantom_Makarov.txt
+   "翻訳なし";
+
+"LITH_MAIL_BODY_IsaacDefeated" =
+// Mail/Phantom_Isaac.txt
+   "翻訳なし";
+
+
+// Marine --------------------------------------------------------------------|
+"LITH_MAIL_BODY_IntroStan" =
+// Mail/Intro_Marine.txt
+   "翻訳なし";
+
+
+"LITH_MAIL_BODY_Cluster1Stan" =
+// Mail/Cluster1_Marine.txt
+   "翻訳なし";
+
+"LITH_MAIL_BODY_Cluster2Stan" =
+// Mail/Cluster2_Marine.txt
+   "翻訳なし";
+
+"LITH_MAIL_BODY_Cluster3Stan" =
+// Mail/Cluster3_Marine.txt
+   "翻訳なし";
+
+
+"LITH_MAIL_BODY_PhantomStan" =
+// Mail/Intro2_Marine.txt
+   "翻訳なし";
+
+"LITH_MAIL_SEND_PhantomStan" = "htic0@gov.（隠した）.mailserv";
+
+"LITH_MAIL_BODY_Secret1Stan" =
+// Mail/Secret1_Marine.txt
+   "翻訳なし";
+
+"LITH_MAIL_NAME_Secret1Stan" = "退避分";
+
+"LITH_MAIL_BODY_Secret2Stan" =
+// Mail/Secret2_Marine.txt
+   "翻訳なし";
+
+"LITH_MAIL_NAME_Secret2Stan" = "退避分";
+
 // Cyber-Mage ----------------------------------------------------------------|
 "LITH_MAIL_BODY_IntroJem" =
 // Mail/Intro_CyberMage.txt

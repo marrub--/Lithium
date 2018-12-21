@@ -1,9 +1,6 @@
 ## Health --------------------------------------------------------------------|
-== \#LOG_HealthBonus | ＨＰボーナス
-== \#LOG_Medikit     | メディキット
 == \#LOG_MegaSphere  | メガチャージ！
 == \#LOG_SoulSphere  | スーパーチャージ！
-== \#LOG_StimPack    | スティムパック
 
 ## Keys ----------------------------------------------------------------------|
 == \#LOG_RedCard     | \cg赤キーディスク
@@ -15,12 +12,8 @@
 
 ## Powerups ------------------------------------------------------------------|
 == \#LOG_RadSuit      | 放射線遮蔽スーツ
-== \#LOG_InfraRed     | ＣＢゴーグル
 == \#LOG_Invuln       | 不死身!
-== \#LOG_BlurSphere   | バリア
 == \#LOG_Backpack     | バックパックと割引カード
-== \#LOG_Berserk      | バーサク
-== \#LOG_AllMap       | レベルマップ
 == \#LOG_DoggoSphere  | \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
 == \#LOG_Dogs         | 犬を得た
 == \#LOG_ShobonSphere | (´・ω・｀）
@@ -37,7 +30,6 @@
 
 ## Bonuses -------------------------------------------------------------------|
 == \#LOG_Coin       | コイン
-== \#LOG_ScoreChip  | スコアチップ
 == \#LOG_Ruby       | 欠けたルビー
 == \#LOG_Sapphire   | 欠けたサファイア
 == \#LOG_Amethyst   | 欠けたアメジスト

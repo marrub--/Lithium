@@ -1,1 +1,110 @@
-## Info_Yourself.txt stub
+## Backstory -----------------------------------------------------------------|
+== \#INFO_SHORT_P114 | プロジェクト114
+== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114 
+@@ \#INFO_DESCR_P114
+翻訳なし
+
+== \#INFO_SHORT_OPD2 | Op. D2
+== \#INFO_TITLE_OPD2 | Operation Deception 2
+@@ \#INFO_DESCR_OPD2
+翻訳なし
+
+== \#INFO_SHORT_Info400 | Information 400
+== \#INFO_TITLE_Info400 | $\#INFO_SHORT_Info400
+%% \#INFO_DESCR_Info400
+翻訳なし
+
+== \#INFO_SHORT_Info402 | Information 402
+== \#INFO_TITLE_Info402 | $\#INFO_SHORT_Info402
+%% \#INFO_DESCR_Info402
+翻訳なし
+
+## Cybernetics ---------------------------------------------------------------|
+== \#INFO_SHORT_BIP | B.I.P.
+== \#INFO_TITLE_BIP | Biotic Information Panel (B.I.P.)
+@@ \#INFO_DESCR_BIP
+翻訳なし
+
+== \#INFO_SHORT_CBIBase | C/B I
+== \#INFO_TITLE_CBIBase | Computer/Brain Interface (C/B I)
+@@ \#INFO_DESCR_CBIBase
+翻訳なし
+
+@@ \#INFO_DESCR_CBIStan
+#\#INFO_DESCR_CBIBase
+
+翻訳なし(Marineの文)
+
+@@ \#INFO_DESCR_CBIJem
+#\#INFO_DESCR_CBIBase
+
+翻訳なし(CyberMageの文)
+
+@@ \#INFO_DESCR_CBIAri
+#\#INFO_DESCR_CBIBase
+
+翻訳なし(DarkLordの文)
+
+## Attributes ----------------------------------------------------------------|
+== \#INFO_SHORT_AttrACC | Accuracy
+== \#INFO_TITLE_AttrACC | \cgAccuracy\c- (ACC)
+@@ \#INFO_DESCR_AttrACC
+翻訳なし
+
+== \#INFO_SHORT_AttrDEF | Defense
+== \#INFO_TITLE_AttrDEF | \ciDefense\c- (DEF)
+@@ \#INFO_DESCR_AttrDEF
+翻訳なし
+
+== \#INFO_SHORT_AttrSTRHuman | Strength
+== \#INFO_TITLE_AttrSTRHuman | \ckStrength\c- (STR)
+@@ \#INFO_DESCR_AttrSTRHuman
+翻訳なし(Marine・CyberMage・Assassinの文)
+
+@@ \#INFO_DESCR_AttrSTRRobot
+翻訳なし(Informantの文)
+
+@@ \#INFO_DESCR_AttrSTRNonHuman
+翻訳なし(Wanderer・DarkLord・Thothの文)
+
+== \#INFO_SHORT_AttrVIT | Vitality
+== \#INFO_TITLE_AttrVIT | \cdVitality\c- (VIT)
+@@ \#INFO_DESCR_AttrVIT
+翻訳なし
+
+== \#INFO_SHORT_AttrPOT | Potency
+== \#INFO_TITLE_AttrPOT | \cdPotency\c- (POT)
+@@ \#INFO_DESCR_AttrPOT
+翻訳なし
+
+== \#INFO_SHORT_AttrSTM | Stamina
+== \#INFO_TITLE_AttrSTM | \chStamina\c- (STM)
+@@ \#INFO_DESCR_AttrSTM
+翻訳なし
+
+== \#INFO_SHORT_AttrREP | Repair
+== \#INFO_TITLE_AttrREP | \chRepair\c- (REP)
+@@ \#INFO_DESCR_AttrREP
+翻訳なし
+
+== \#INFO_SHORT_AttrREG | Regeneration
+== \#INFO_TITLE_AttrREG | \chRegeneration\c- (REG)
+@@ \#INFO_DESCR_AttrREG
+翻訳なし
+
+== \#INFO_SHORT_AttrLUK | Luck
+== \#INFO_TITLE_AttrLUK | \ctLuck\c- (LUK)
+@@ \#INFO_DESCR_AttrLUK
+翻訳なし
+
+== \#INFO_SHORT_AttrRGE | Rage
+== \#INFO_TITLE_AttrRGE | \cmRage\c- (RGE)
+@@ \#INFO_DESCR_AttrRGE
+翻訳なし
+
+== \#INFO_SHORT_AttrCON | Concentration
+== \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
+@@ \#INFO_DESCR_AttrCON
+翻訳なし
+
+## EOF
