@@ -3,21 +3,20 @@
 [en enu default]
 
 //----------------------------------------------------------------------------|
-"LITH_INFO_DESCR_RankThreatTest" =
-   "Rank:\n"
-   "   \cuNon-resident\n"
-   "   \csSubordinate\n"
-   "   \cjResident\n"
-   "   \cfNoble\n"
-   "   \cgTyrant\n"
-   "   \crOverlord\c-\n"
-   "\n"
-   "Threat:\n"
-   "   \csD\n"
-   "   \ciC\n"
-   "   \ckB\n"
-   "   \cgA\n"
-   "   \crE";
+// Rank:
+//    \cuNon-resident
+//    \csSubordinate
+//    \cjResident
+//    \cfNoble
+//    \cgTyrant
+//    \crOverlord\c-
+
+// Threat:
+//    \csD
+//    \ciC
+//    \ckB
+//    \cgA
+//    \crE
 
 // Non-residents -------------------------------------------------------------|
 "LITH_INFO_SHORT_ZombieMan" = "Former Human";

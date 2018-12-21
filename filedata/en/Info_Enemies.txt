@@ -1,19 +1,18 @@
 ##----------------------------------------------------------------------------|
-%% \#INFO_DESCR_RankThreatTest
-Rank:
-   \cuNon-resident
-   \csSubordinate
-   \cjResident
-   \cfNoble
-   \cgTyrant
-   \crOverlord\c-
+## Rank:
+##    \cuNon-resident
+##    \csSubordinate
+##    \cjResident
+##    \cfNoble
+##    \cgTyrant
+##    \crOverlord\c-
 
-Threat:
-   \csD
-   \ciC
-   \ckB
-   \cgA
-   \crE
+## Threat:
+##    \csD
+##    \ciC
+##    \ckB
+##    \cgA
+##    \crE
 
 ## Non-residents -------------------------------------------------------------|
 == \#INFO_SHORT_ZombieMan | Former Human

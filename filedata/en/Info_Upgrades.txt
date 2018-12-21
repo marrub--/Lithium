@@ -41,6 +41,23 @@ upwards with sheer force.
 You can also now slide in any direction with ease by pressing "run".
 
 ##----------------------------------------------------------------------------|
+== \#INFO_SHORT_ReflexWetwJem | $\#UPGRADE_TITLE_ReflexWetw
+== \#INFO_TITLE_ReflexWetwJem | Reflex Enhancing Wetware
+@@ \#INFO_DESCR_ReflexWetwJem
+Software for your Computer/Brain Interface that improves your ability to move,
+enhancing your speed, and giving you new movement options.
+
+Newer versions of this program have a backdoor built into them. This old
+version was given to you by Spellcaster and Deceiver Michael as part of your
+mission. The binary credits have been overwritten with "CrAcKeD bY mEt&".
+
+You can jump while mid-air by pressing "jump" again, hurtling your body
+upwards with sheer force.
+
+You can also slide in any direction with ease by pressing "run", even while
+mid-air.
+
+##----------------------------------------------------------------------------|
 == \#INFO_SHORT_CyberLegs | $\#UPGRADE_TITLE_CyberLegs
 == \#INFO_TITLE_CyberLegs | Prexje Mosegon Speed Enhancing Wetware
 @@ \#INFO_DESCR_CyberLegs
@@ -154,22 +171,5 @@ captures energy from the dead and dying.
 Using this method, it uses hostility detection to find potential sources of
 mana, and upon that source losing metaphysical structure, siphons all mana
 from it with approximately 73.416% efficiency.
-
-##----------------------------------------------------------------------------|
-== \#INFO_SHORT_ReflexWetwJem | $\#UPGRADE_TITLE_ReflexWetw
-== \#INFO_TITLE_ReflexWetwJem | Reflex Enhancing Wetware
-@@ \#INFO_DESCR_ReflexWetwJem
-Software for your Computer/Brain Interface that improves your ability to move,
-enhancing your speed, and giving you new movement options.
-
-Newer versions of this program have a backdoor built into them. This old
-version was given to you by Spellcaster and Deceiver Michael as part of your
-mission. The binary credits have been overwritten with "CrAcKeD bY mEt&".
-
-You can jump while mid-air by pressing "jump" again, hurtling your body
-upwards with sheer force.
-
-You can also slide in any direction with ease by pressing "run", even while
-mid-air.
 
 ## EOF

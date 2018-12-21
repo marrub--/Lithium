@@ -45,6 +45,23 @@
    "You can also now slide in any direction with ease by pressing \"run\".";
 
 //----------------------------------------------------------------------------|
+"LITH_INFO_SHORT_ReflexWetwJem" = "$LITH_UPGRADE_TITLE_ReflexWetw";
+"LITH_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
+"LITH_INFO_DESCR_ReflexWetwJem" =
+   "Software for your Computer/Brain Interface that improves your ability to move, "
+   "enhancing your speed, and giving you new movement options."
+   "\n\n"
+   "Newer versions of this program have a backdoor built into them. This old "
+   "version was given to you by Spellcaster and Deceiver Michael as part of your "
+   "mission. The binary credits have been overwritten with \"CrAcKeD bY mEt&\"."
+   "\n\n"
+   "You can jump while mid-air by pressing \"jump\" again, hurtling your body "
+   "upwards with sheer force."
+   "\n\n"
+   "You can also slide in any direction with ease by pressing \"run\", even while "
+   "mid-air.";
+
+//----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_CyberLegs" = "$LITH_UPGRADE_TITLE_CyberLegs";
 "LITH_INFO_TITLE_CyberLegs" = "Prexje Mosegon Speed Enhancing Wetware";
 "LITH_INFO_DESCR_CyberLegs" =
@@ -158,23 +175,6 @@
    "Using this method, it uses hostility detection to find potential sources of "
    "mana, and upon that source losing metaphysical structure, siphons all mana "
    "from it with approximately 73.416% efficiency.";
-
-//----------------------------------------------------------------------------|
-"LITH_INFO_SHORT_ReflexWetwJem" = "$LITH_UPGRADE_TITLE_ReflexWetw";
-"LITH_INFO_TITLE_ReflexWetwJem" = "Reflex Enhancing Wetware";
-"LITH_INFO_DESCR_ReflexWetwJem" =
-   "Software for your Computer/Brain Interface that improves your ability to move, "
-   "enhancing your speed, and giving you new movement options."
-   "\n\n"
-   "Newer versions of this program have a backdoor built into them. This old "
-   "version was given to you by Spellcaster and Deceiver Michael as part of your "
-   "mission. The binary credits have been overwritten with \"CrAcKeD bY mEt&\"."
-   "\n\n"
-   "You can jump while mid-air by pressing \"jump\" again, hurtling your body "
-   "upwards with sheer force."
-   "\n\n"
-   "You can also slide in any direction with ease by pressing \"run\", even while "
-   "mid-air.";
 
 // EOF
 

@@ -46,7 +46,7 @@
 == \#MAIL_NAME_Secret1Stan | Saved Buffer
 
 ++ \#MAIL_BODY_Secret2Stan | Mail/Secret2_Marine.txt
-== \#MAIL_NAME_Secret1Stan | Saved Buffer
+== \#MAIL_NAME_Secret2Stan | Saved Buffer
 
 ## Cyber-Mage ----------------------------------------------------------------|
 ++ \#MAIL_BODY_IntroJem | Mail/Intro_CyberMage.txt
