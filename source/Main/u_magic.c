@@ -70,7 +70,8 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
          .h        = 64
       };
 
-      char name[24]; sprintf(name, LANG "INFO_SHORT_%s", m->name);
+      char name[24];
+      LanguageCV(name, LANG "INFO_SHORT_%s", m->name);
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
