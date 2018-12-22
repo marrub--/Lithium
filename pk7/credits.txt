@@ -27,12 +27,12 @@
 |                                                                             |
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 *                                                                             *
-* See licenses/copylib.txt for license information on GDCC libc, as included  *
-* in linked binary form in <acs/lithlib.bin>.                                 *
+* See licenses/copylib.txt for license information on GDCC libc, as included -*
+* in linked binary form in <acs/lithlib.bin>. --------------------------------*
 *                                                                             *
-* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.    *
+* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>. ---*
 *                                                                             *
-* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>.  *
+* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>. -*
 *                                                                             *
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -117,6 +117,11 @@
 *  maybe
 *  Fallout 4 sound rip
 *  Phantasy Star Nova sound rip
+*  Inspiration for this mod
+
+*                               * Marphy Black *
+
+*  Doom 2 Minor Sprite Fixes project: v1.19's compatible sprites are included
 
 *                               * Marrub (me) *
 
