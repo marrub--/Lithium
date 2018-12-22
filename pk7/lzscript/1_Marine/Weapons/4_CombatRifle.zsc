@@ -24,7 +24,7 @@ class Lith_LaserRiflePuff : Actor
 {
    default
    {
-      DamageType "Energy";
+      DamageType "Electric";
       +ALWAYSPUFF
       +FORCEDECAL
    }

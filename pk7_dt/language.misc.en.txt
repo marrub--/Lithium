@@ -97,6 +97,16 @@
 "DTAP_DEATHMSG_19" = "THE DEMONS GAVE YOU THE BOOT!";
 "DTAP_DEATHMSG_20" = "AT LEAST YOU PLAY BETTER THAN KAISER!";
 
+// DamNums -------------------------------------------------------------------|
+"DAMNUM_TYPECOLOR_BULLET" = "DamWhite";
+"DAMNUM_TYPECOLOR_ELECTRIC" = "DamCyan";
+"DAMNUM_TYPECOLOR_FIRE" = "DamOrange";
+"DAMNUM_TYPECOLOR_FIREMAGIC" = "DamRed";
+"DAMNUM_TYPECOLOR_ICE" = "DamLightBlue";
+"DAMNUM_TYPECOLOR_MAGIC" = "DamYellow";
+"DAMNUM_TYPECOLOR_MELEE" = "DamGray";
+"DAMNUM_TYPECOLOR_SHRAPNEL" = "DamGold";
+
 // Menus ---------------------------------------------------------------------|
 "MENU_NGAME" = "* (New-Game)";
 "MENU_OPTION" = "* (Options)";

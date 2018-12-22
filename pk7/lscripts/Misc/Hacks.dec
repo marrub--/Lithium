@@ -1,9 +1,3 @@
-damagetype Lith_NoDamage
-{
-   Factor 0
-   ReplaceFactor
-}
-
 actor Lith_CameraHax
 {
    Radius 2

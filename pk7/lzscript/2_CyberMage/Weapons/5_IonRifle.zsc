@@ -89,7 +89,7 @@ class Lith_IonRifleExplosion : Actor
       Radius 0;
       Height 0;
       RenderStyle "Add";
-      DamageType "Plasma";
+      DamageType "Electric";
 
       +NOBLOCKMAP
       +NOGRAVITY
@@ -116,7 +116,7 @@ class Lith_IonRifleHax : FastProjectile
       Damage 100;
       Height 1;
       Radius 1;
-      DamageType "Plasma";
+      DamageType "Electric";
 
       +NOGRAVITY
       +NOBLOCKMAP

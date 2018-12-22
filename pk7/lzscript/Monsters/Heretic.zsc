@@ -324,7 +324,7 @@ class Lith_Heretic_DSparilLightning : Sorcerer2FX1 replaces Sorcerer2FX1
 {
    default
    {
-      DamageType "Energy";
+      DamageType "Electric";
       Speed 24;
       Damage 100;
       Species "ImAWizard";

@@ -1,34 +1,29 @@
-// Game Info -----------------------------------------------------------------|
-
 gameinfo
 {
-   PlayerClasses           = "Lith_MarinePlayer",    "Lith_CyberMagePlayer"/*,
-                             "Lith_InformantPlayer", "Lith_WandererPlayer",
-                             "Lith_AssassinPlayer"*/,  "Lith_DarkLordPlayer"/*,
-                             "Lith_ThothPlayer"*/
-   DimColor                = "Black"
-   DimAmount               = 0.25
-   MenuFontColor_Title     = "Green"
-   MenuFontColor_Label     = "White"
-   MenuFontColor_Value     = "Purple"
-   MenuFontColor_Action    = "White"
-   MenuFontColor_Header    = "Green"
-   MenuFontColor_Highlight = "Green"
-   MenuFontColor_Selection = "Green"
-   NoRandomPlayerClass     = true
-   BorderFlat              = "ZZLITHBG"
+   AddEventHandlers        = "Lith_HERMES", "Lith_Events", "Lith_URANUS"
    AdvisoryTime            = 0
+   BorderFlat              = "ZZLITHBG"
+   DimAmount               = 0.25
+   DimColor                = "Black"
    DrawReadThis            = false
-   PauseSign               = "lgfx/Pause.png"
    InfoPage                = "HELP"
    IntermissionCounter     = true
    IntermissionMusic       = "lmusic/alchemis.it"
-   QuitSound               = "misc/quitsound"
+   MenuFontColor_Action    = "White"
+   MenuFontColor_Header    = "Green"
+   MenuFontColor_Highlight = "Green"
+   MenuFontColor_Label     = "White"
+   MenuFontColor_Selection = "Green"
+   MenuFontColor_Title     = "Green"
+   MenuFontColor_Value     = "Purple"
+   NoRandomPlayerClass     = true
+   PauseSign               = "lgfx/Pause.png"
+   PickupColor             = "#A0F3A0"
+   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer"/*, "Lith_InformantPlayer", "Lith_WandererPlayer", "Lith_AssassinPlayer"*/,  "Lith_DarkLordPlayer"/*, "Lith_ThothPlayer"*/
    PrecacheSounds          = "amb/rain", "amb/wind"
-   AddEventHandlers        = "Lith_HERMES", "Lith_Events", "Lith_URANUS"
+   QuitSound               = "misc/quitsound"
    StatScreen_Single       = "Lith_STATUS"
    StatusBarClass          = "BaseStatusBar"
-   PickupColor             = "#A0F3A0"
    QuitMessages            = "$QUITMSG1",   "$QUITMSG2",  "$QUITMSG3",  "$QUITMSG4",  "$QUITMSG5",  "$QUITMSG6",  "$QUITMSG7",
                              "$QUITMSG8",   "$QUITMSG9",  "$QUITMSG10", "$QUITMSG11", "$QUITMSG12", "$QUITMSG13", "$QUITMSG14",
                              "$QUITMSG15",  "$QUITMSG16", "$QUITMSG17", "$QUITMSG18", "$QUITMSG19", "$QUITMSG20", "$QUITMSG21",
@@ -46,79 +41,76 @@ gameinfo
                              "$QUITMSG100", "$QUITMSG101"
 }
 
-// Automap Info --------------------------------------------------------------|
-
 automap
 {
    Base                 = "Doom"
-   ShowLocks            = true
    Background           = "#000000"
-   YourColor            = "#00FF00"
-   WallColor            = "#00FF00"
-   FloorDiffWallColor   = "#008800"
    CeilingDiffWallColor = "#008800"
-   SpecialWallColor     = "#FF00FF"
+   FloorDiffWallColor   = "#008800"
    GridColor            = "#FF0000"
+   ShowLocks            = true
+   SpecialWallColor     = "#FF00FF"
+   WallColor            = "#00FF00"
+   YourColor            = "#00FF00"
 }
-
-// Skill Info ----------------------------------------------------------------|
 
 clearskills
 
 skill tourist
 {
+   ACSReturn     = 0
+   ArmorFactor   = 2
    DamageFactor  = 0.1
-   SpawnFilter   = 5
-   Name          = "$DIFF_TOURIST"
+   HealthFactor  = 2
    Key           = "t"
+   MonsterHealth = 0.1
+   MustConfirm   = "$LITH_SKILL_TOURIST"
+   Name          = "$DIFF_TOURIST"
    RespawnTime   = 0.5
+   SpawnFilter   = 5
    EasyBossBrain
    EasyKey
-   MonsterHealth = 0.1
-   ArmorFactor   = 2
    TotalInfighting
-   HealthFactor  = 2
-   ACSReturn     = 0
-   MustConfirm   = "$LITH_SKILL_TOURIST"
 }
 
 skill easy
 {
-   DamageFactor   = 0.9
-   SpawnFilter    = 2
-   Name           = "$DIFF_EASY"
-   Key            = "b"
-   Aggressiveness = -0.3
-   MonsterHealth  = 0.9
    ACSReturn      = 1
+   Aggressiveness = -0.3
+   DamageFactor   = 0.9
+   Key            = "b"
+   MonsterHealth  = 0.9
+   Name           = "$DIFF_EASY"
+   SpawnFilter    = 2
 }
 
 skill normal
 {
-   SpawnFilter = 3
-   Name        = "$DIFF_NORMAL"
-   Key         = "h"
-   DefaultSkill
    ACSReturn   = 2
+   Key         = "h"
+   Name        = "$DIFF_NORMAL"
+   SpawnFilter = 3
+   DefaultSkill
 }
 
 skill hard
 {
-   SpawnFilter = 4
-   Name        = "$DIFF_HARD"
-   Key         = "u"
    ACSReturn   = 3
+   Key         = "u"
+   Name        = "$DIFF_HARD"
+   SpawnFilter = 4
 }
 
 skill extrahard
 {
-   SpawnFilter    = 5
-   Name           = "$DIFF_XHARD"
-   Key            = "p"
-   DamageFactor   = 1.05
+   ACSReturn      = 4
    Aggressiveness = 0.1
+   DamageFactor   = 1.05
+   Key            = "p"
    MustConfirm    = "$LITH_SKILL_EXTRAHARD"
-   
+   Name           = "$DIFF_XHARD"
+   SpawnFilter    = 5
+
    ReplaceActor = "ZombieMan",        "Lith_XH_ZombieMan"
    ReplaceActor = "ShotgunGuy",       "Lith_XH_ShotgunGuy"
    ReplaceActor = "ChaingunGuy",      "Lith_XH_ChaingunGuy"
@@ -136,44 +128,38 @@ skill extrahard
    ReplaceActor = "Archvile",         "Lith_XH_Archvile"
    ReplaceActor = "SpiderMastermind", "Lith_XH_SpiderMastermind"
    ReplaceActor = "Cyberdemon",       "Lith_XH_Cyberdemon"
-   
-   ACSReturn = 4
 }
 
 skill nightmare
 {
-   DamageFactor  = 2
-   SpawnFilter   = 5
-   Name          = "$DIFF_NMARE"
-   Key           = "t"
-   RespawnTime   = 0.5
-   MonsterHealth = 0.5
-   ArmorFactor   = 2
-   NoInfighting
-   HealthFactor  = 2
-   MustConfirm   = "$LITH_SKILL_NIGHTMARE"
    ACSReturn     = 5
+   ArmorFactor   = 2
+   DamageFactor  = 2
+   HealthFactor  = 2
+   Key           = "t"
+   MonsterHealth = 0.5
+   MustConfirm   = "$LITH_SKILL_NIGHTMARE"
+   Name          = "$DIFF_NMARE"
+   RespawnTime   = 0.5
+   SpawnFilter   = 5
+   NoInfighting
 }
-
-// Map Info ------------------------------------------------------------------|
 
 map TITLEMAP "Lithium Title"
 {
+   Music = "lmusic/Shredder.ogg"
    Sky1  = "LITHSKRD", 0.05
    Sky2  = "LITHSKS1"
-   Music = "lmusic/Shredder.ogg"
-
    DoubleSky
 }
 
 map TESTMAP "Test Map"
 {
    LevelNum = 18883000
+   Music    = "lmusic/dandalins story.it"
+   Next     = 1
    Sky1     = "LITHBGS4", 0.1
    Sky2     = "LITHSKD2"
-   Next     = 1
-   Music    = "lmusic/dandalins story.it"
-   
    DoubleSky
 }
 
@@ -183,9 +169,7 @@ map LITHEND ""
    NoIntermission
 }
 
-// Editor Numbers ------------------------------------------------------------|
-
-DoomEdNums
+doomednums
 {
    22420 = Lith_BossReward1
    22421 = Lith_BossReward2
@@ -193,7 +177,6 @@ DoomEdNums
    22423 = Lith_BossReward4
    22424 = Lith_BossReward5
    22425 = Lith_BossReward6
-   
    22426 = Lith_SteggleSphere
    22427 = Lith_BlurSphere
    22428 = Lith_GreyHam
@@ -203,27 +186,31 @@ DoomEdNums
    22432 = Lith_BoomBarrel
 }
 
-// hack fuck -----------------------------------------------------------------|
+damagetype Lith_NoDamage
+{
+   Factor = 0
+   ReplaceFactor
+}
 
-intermission Inter_Pic1 {}
-intermission Inter_Pic2 {}
-intermission Inter_Pic3 {}
-intermission Inter_Bunny {}
-intermission Inter_Underwater {}
+intermission Inter_Bunny       {}
+intermission Inter_BuyStrife   {}
+intermission Inter_Cast        {}
+intermission Inter_Chess       {}
 intermission Inter_Demonscroll {}
-intermission Inter_BuyStrife {}
-intermission Inter_Cast {}
-intermission Inter_Chess {}
+intermission Inter_Pic1        {}
+intermission Inter_Pic2        {}
+intermission Inter_Pic3        {}
+intermission Inter_Underwater  {}
 
-cluster 1 {}
-cluster 2 {}
-cluster 3 {}
-cluster 4 {}
-cluster 5 {}
-cluster 6 {}
-cluster 7 {}
-cluster 8 {}
-cluster 9 {}
+cluster  1 {}
+cluster  2 {}
+cluster  3 {}
+cluster  4 {}
+cluster  5 {}
+cluster  6 {}
+cluster  7 {}
+cluster  8 {}
+cluster  9 {}
 cluster 10 {}
 
 // EOF
