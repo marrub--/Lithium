@@ -227,7 +227,7 @@ private void Lith_PlayerIndicator(PlayerInfo p)
       string text = String.Format("%s [%i]\n", p.getUserName(), mo.playerNumber());
       if(mo.health <= 0) text = text .. "Dead";
       else               text = text .. String.Format("%iHP", mo.health);
-      Lith_URANUS.LT(self, text, "CBIFONT", Font.CR_WHITE, x-9, y-2, 1, 1, a);
+      Lith_URANUS.LT(self, text, "CBIFONT", Font.CR_WHITE, Lith_URANUS.LTArgsA(x-9, y-2, 1, 1, a));
    }
 }
 

@@ -16,14 +16,29 @@
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
 
+#define PrintTextArgs_N(x, y, xa, ya) \
+   (((uint)(x) << 14) | ((uint)(y) << 5) | ((uint)(xa) << 2) | (uint)(ya))
+
+#define PrintTextArgs_A(x, y, xa, ya, a) \
+   (PrintTextArgs_N(x, y, xa, ya) | 0x40000000 | ((uint)((fixed)(a) * 0x3F) << 24))
+
+#define PrintTextArgs_F(x, y, xa, ya, n) \
+   (PrintTextArgs_N(x, y, xa, ya) | (((uint)(n) + 1) << 24))
+
 #define PrintText(font, cr, x, xa, y, ya) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya))
+
+#define PrintTextX(font, cr, x, xa, y, ya) \
+   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya) | 0x80000000)
 
 #define PrintTextA(font, cr, x, xa, y, ya, a) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_A(x, y, xa, ya, a))
 
 #define PrintTextF(font, cr, x, xa, y, ya, n) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n))
+
+#define PrintTextFX(font, cr, x, xa, y, ya, n) \
+   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n) | 0x80000000)
 
 #define SetClip(x, y, w, h) \
    DrawCallI(s"LC", (int)(x), (int)(y), (int)(w), (int)(h), 0)

@@ -35,7 +35,7 @@ static void HUD_Ammo(struct player *p)
          PrintTextStr("\C[Lith_Green]OUT");
       else
          PrintTextFmt("\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintText("lhudfont", 0, 224,1, 229-y,0);
+      PrintTextX("lhudfont", 0, 224,1, 229-y,0);
    }
 
    if(wep->ammotype & AT_Ammo)
@@ -51,7 +51,7 @@ static void HUD_Ammo(struct player *p)
       }
 
       PrintTextFmt("\C[Lith_Green]%i", wep->ammocur);
-      PrintText("lhudfont", 0, x+224,1, 229-y,0);
+      PrintTextX("lhudfont", 0, x+224,1, 229-y,0);
    }
 
    if(typegfx)
@@ -77,7 +77,7 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
       ":HUD:SplitBackRed" : ":HUD:SplitBack", 0,1, 239,2);
 
    PrintTextFmt("\C[Lith_Green]%i", p->health);
-   PrintText("lhudfont", 0, 34,1, 231,0);
+   PrintTextX("lhudfont", 0, 34,1, 231,0);
 
    PrintSprite(":HUD:VIT", 2,1, 237,2);
 
@@ -100,7 +100,7 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
    if(CheckFade(fid_health))
    {
       PrintTextFmt("%i", p->health);
-      PrintTextF("lhudfont", UData.cr, 34,1, 231,0, fid_health);
+      PrintTextFX("lhudfont", UData.cr, 34,1, 231,0, fid_health);
    }
 
    __str gfx = weapongfx[p->weapon.cur->info->slot];

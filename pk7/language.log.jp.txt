@@ -74,24 +74,20 @@
 "LITH_LOG_Sell" = "%lli\cnscr\c-で%Sを売った。";
 "LITH_LOG_CBI" = "%Sはインストールされた。";
 
-"LITH_PICKUP_SELL_ORDER" = "1";
-"LITH_PICKUP_SELL" = "%lli\cnscr\c-で%Sを売った。";
-"LITH_PICKUP_CBI" = "%Sはインストールされました。";
-
-"LITH_PICKUP_NUM" = "13";
-"LITH_PICKUP_000" = "%Sを入手した!";
-"LITH_PICKUP_001" = "おう、%Sだ。";
-"LITH_PICKUP_002" = "%Sを得た。";
-"LITH_PICKUP_003" = "ハッハー、%Sの時間だ!!";
-"LITH_PICKUP_004" = "これは・・・%S、だよな？";
-"LITH_PICKUP_005" = "そうだ、確か %Sだ。";
-"LITH_PICKUP_006" = "マジで？こりゃあ・・・%S？";
-"LITH_PICKUP_007" = "%S。やっときたか。";
-"LITH_PICKUP_008" = "%S、デース。";
-"LITH_PICKUP_009" = "？? ？？? ？？？? ？? ?？?？?？?？? ???? ？?";
-"LITH_PICKUP_010" = "やっと見つけた、新品の%S・・・";
-"LITH_PICKUP_011" = "%Sがあなたと結婚した。";
-"LITH_PICKUP_012" = "%Sを壊した。";
-"LITH_PICKUP_013" = "何だこの%Sは・・・！";
+"LITH_PK_GET_NUM" = "13";
+"LITH_PK_GET_000" = "%Sを入手した!";
+"LITH_PK_GET_001" = "おう、%Sだ。";
+"LITH_PK_GET_002" = "%Sを得た。";
+"LITH_PK_GET_003" = "ハッハー、%Sの時間だ!!";
+"LITH_PK_GET_004" = "これは・・・%S、だよな？";
+"LITH_PK_GET_005" = "そうだ、確か %Sだ。";
+"LITH_PK_GET_006" = "マジで？こりゃあ・・・%S？";
+"LITH_PK_GET_007" = "%S。やっときたか。";
+"LITH_PK_GET_008" = "%S、デース。";
+"LITH_PK_GET_009" = "？? ？？? ？？？? ？? ?？?？?？?？? ???? ？?";
+"LITH_PK_GET_010" = "やっと見つけた、新品の%S・・・";
+"LITH_PK_GET_011" = "%Sがあなたと結婚した。";
+"LITH_PK_GET_012" = "%Sを壊した。";
+"LITH_PK_GET_013" = "何だこの%Sは・・・！";
 
 // EOF

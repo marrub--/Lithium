@@ -17,7 +17,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       fixed y = a->y+.2;
 
       PrintTextFmt("%i", i);
-      PrintText("LHUDFONTSMALL", a->ncol[min(slot - 1, 2)], x,2, y,2);
+      PrintTextX("lhudfontsmall", a->ncol[min(slot - 1, 2)], x,2, y,2);
 
       if(p->weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 0.05);
@@ -25,7 +25,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       if(CheckFade(fid_slotnS + i))
       {
          PrintTextFmt("\C%S%i", a->scol, i);
-         PrintTextF("LHUDFONTSMALL", 0, x,2, y,2, fid_slotnS + i);
+         PrintTextFX("lhudfontsmall", 0, x,2, y,2, fid_slotnS + i);
       }
    }
 }
@@ -37,7 +37,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
       __str scr = StrParam(fmt, scoresep(scrn));
 
       PrintTextFmt("\C%S%S", cr, scr);
-      PrintText(font, 0, x,xa, y,ya);
+      PrintTextX(font, 0, x,xa, y,ya);
 
       if(p->score > p->old.score)
          SetFade(fid_schit1, 4, 0.1);
@@ -53,18 +53,18 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
       if(CheckFade(fid_schit1))
       {
          PrintTextFmt("%S", scr);
-         PrintTextF(font, CR_ORANGE, x,xa, y,ya, fid_schit1);
+         PrintTextFX(font, CR_ORANGE, x,xa, y,ya, fid_schit1);
       }
       else if(CheckFade(fid_schit2))
       {
          PrintTextFmt("%S", scr);
-         PrintTextF(font, CR_PURPLE, x,xa, y,ya, fid_schit2);
+         PrintTextFX(font, CR_PURPLE, x,xa, y,ya, fid_schit2);
       }
 
       if(CheckFade(fid_scacum))
       {
          PrintTextStr(p->scoreaccumstr);
-         PrintTextF(font, CR_WHITE, x,xa, y+10,ya, fid_scacum);
+         PrintTextFX(font, CR_WHITE, x,xa, y+10,ya, fid_scacum);
       }
    }
 
@@ -72,7 +72,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
    {
       PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf_str(" (%u pts)", p->attr.points);
-      PrintText(font, 0, x,xa, y+20,ya);
+      PrintTextX(font, 0, x,xa, y+20,ya);
    }
 }
 

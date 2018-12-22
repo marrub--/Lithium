@@ -127,7 +127,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    PrintText("smallfnt", CR_RED, tright,2, 0,1);
 
    // Bottom-left text
-   PrintTextFmt("<55.883.115.7>");
+   PrintTextStr("<55.883.115.7>");
    PrintText("smallfnt", CR_RED, 0,1, tbottom,2);
 
    // Bottom-right text

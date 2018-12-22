@@ -168,16 +168,14 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
 
    int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_d[p].tex);
 
-   switch(xa)
-   {
+   switch(xa) {
    default:
    case 1: cl.m_d[p].x = x;          break;
    case 0: cl.m_d[p].x = x - sx / 2; break;
    case 2: cl.m_d[p].x = x - sx;     break;
    }
 
-   switch(ya)
-   {
+   switch(ya) {
    default:
    case 1: cl.m_d[p].y = y;          break;
    case 0: cl.m_d[p].y = y - sy / 2; break;
@@ -187,19 +185,53 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
    cl.m_p++;
 }
 
-static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, int ya, double a = -1)
+static int LTArgsN(uint x, uint y, uint xa, uint ya)
+{
+   return (x << 14) | (y << 5) | (xa << 2) | ya;
+}
+
+static int LTArgsA(uint x, uint y, uint xa, uint ya, double a)
+{
+   return LTArgsN(x, y, xa, ya) | 0x40000000 | (uint(a * 0x3F) << 24);
+}
+
+// BIT LAYOUT OF ARGUMENT
+// 0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
+// 1000 0000 0000 0000 0000 0000 0000 0000 31  1 - "no unicode" flag
+// 0100 0000 0000 0000 0000 0000 0000 0000 30  1 - alpha flag
+// 0011 1111 0000 0000 0000 0000 0000 0000 24  6 - alpha OR fade num
+// 0000 0000 1111 1111 1100 0000 0000 0000 14 10 - X position
+// 0000 0000 0000 0000 0011 1111 1110 0000  5  9 - Y position
+// 0000 0000 0000 0000 0000 0000 0001 1100  2  3 - X alignment
+// 0000 0000 0000 0000 0000 0000 0000 0011  0  2 - Y alignment
+static void LT(Actor mo, string txt, string fnt, int cr, int arg)
 {
    let cl = Instance();
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
-   if(a ~== 0 || cl.m_nodraw) return;
-   let p = cl.m_p;
+   bool af = arg & 0x40000000;
+   uint aa = (arg >> 24) & 0x3F;
 
-   if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
+   if((af && aa == 0) || cl.m_nodraw) return;
+
+   uint x  = (arg >> 14) & 0x3FF;
+   uint y  = (arg >>  5) & 0x1FF;
+   uint xa = (arg >>  2) & 0x7;
+   uint ya = (arg      ) & 0x3;
+
+   bool uf = arg & 0x80000000;
 
    uint lns, lnx = 0;
 
-   if(cl.m_eng)
+   let p = cl.m_p;
+
+   cl.m_d[p].a = !af && aa != 0 ? cl.m_fmsg[aa - 1].fade
+                                : af ? aa ? double(aa) / 0x3F
+                                          : 0.0
+                                     : 1.0;
+   cl.m_d[p].cr = cr;
+
+   if(uf || cl.m_eng)
    {
       cl.m_d[p].dt = dt_txt;
 
@@ -283,13 +315,7 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
       lns = cl.m_d[p].txt.size();
    }
 
-   if(a == -1) cl.m_d[p].a = 1;
-   else        cl.m_d[p].a = a;
-
-   cl.m_d[p].cr = cr;
-
-   switch(xa)
-   {
+   switch(xa) {
    default:
    case 3:
    case 4:
@@ -300,8 +326,7 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
    case 2: cl.m_d[p].x = x - lnx;     break;
    }
 
-   switch(ya)
-   {
+   switch(ya) {
    default:
    case 1: cl.m_d[p].y = y;                           break;
    case 0: cl.m_d[p].y = y - cl.m_d[p].lny * lns / 2; break;
@@ -310,8 +335,7 @@ static void LT(Actor mo, string txt, string fnt, int cr, int x, int y, int xa, i
 
    cl.m_d[p].lnx.resize(lns);
 
-   for(uint i = 0; i < lns; i++)
-   {
+   for(uint i = 0; i < lns; i++) {
            if(xa == 3) cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i];
       else if(xa <  4) cl.m_d[p].lnx[i] = 0;
       else             cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i] / 2;

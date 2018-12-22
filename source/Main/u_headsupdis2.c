@@ -28,7 +28,7 @@ static void HUD_Ammo(struct player *p)
          PrintTextStr("\C[Lith_Red]OUT");
       else
          PrintTextFmt("\C[Lith_Red]%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintText("lhudfont", 0, 242,1, 229,0);
+      PrintTextX("lhudfont", 0, 242,1, 229,0);
    }
 
    if(type & 2)
@@ -44,7 +44,7 @@ static void HUD_Ammo(struct player *p)
       }
 
       PrintTextFmt("\C[Lith_Red]%i", wep->ammocur);
-      PrintText("lhudfont", 0, x+242,1, 229,0);
+      PrintTextX("lhudfont", 0, x+242,1, 229,0);
    }
 
    if(typegfx)
@@ -66,7 +66,7 @@ static void HUD_Health(struct player *p)
    PrintSprite(":HUD_C:VIT",       2,1, 237,2);
 
    PrintTextFmt("\C[Lith_Red]%i", p->health);
-   PrintText("lhudfont", 0, 21,1, 229,0);
+   PrintTextX("lhudfont", 0, 21,1, 229,0);
 }
 
 // Extern Functions ----------------------------------------------------------|
