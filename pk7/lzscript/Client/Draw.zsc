@@ -503,6 +503,32 @@ static int GetTexH(int gfx_)
    return h;
 }
 
+const c_black     = 0x4d4d4d;
+const c_blue      = 0x6e6eff;
+const c_brick     = 0xeaadad;
+const c_brown     = 0xcc9966;
+const c_gold      = 0xffcc00;
+const c_white     = 0xffffff;
+const c_yellow    = 0xeeee32;
+const c_tan       = 0xd2b48c;
+const c_gray      = 0xc0c0c0;
+const c_green     = 0x33ff33;
+const c_red       = 0xff4e60;
+const c_orange    = 0xffaa00;
+const c_lightblue = 0x33eeff;
+const c_cream     = 0xfecc99;
+const c_olive     = 0xd1d8a7;
+const c_darkgreen = 0x129a12;
+const c_darkred   = 0xb22323;
+const c_darkbrown = 0x6c5d56;
+const c_purple    = 0xa674d7;
+const c_darkgray  = 0x414141;
+const c_cyan      = 0x00fffe;
+const c_ice       = 0xafccd3;
+const c_fire      = 0xfb7329;
+const c_sapphire  = 0x6c729f;
+const c_teal      = 0x8cd0dc;
+
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320;
@@ -542,7 +568,37 @@ override void RenderOverlay(RenderEvent evt)
                DTA_Alpha, m_d[i].a);
          break;
       case dt_utx: {
-         uint cr = 0xffffff;
+         uint defcr;
+         switch(m_d[i].cr) {
+         case Font.CR_BLACK:     defcr = c_black;     break;
+         case Font.CR_BLUE:      defcr = c_blue;      break;
+         case Font.CR_BRICK:     defcr = c_brick;     break;
+         case Font.CR_BROWN:     defcr = c_brown;     break;
+         case Font.CR_CREAM:     defcr = c_cream;     break;
+         case Font.CR_CYAN:      defcr = c_cyan;      break;
+         case Font.CR_DARKBROWN: defcr = c_darkbrown; break;
+         case Font.CR_DARKGRAY:  defcr = c_darkgray;  break;
+         case Font.CR_DARKGREEN: defcr = c_darkgreen; break;
+         case Font.CR_DARKRED:   defcr = c_darkred;   break;
+         case Font.CR_FIRE:      defcr = c_fire;      break;
+         case Font.CR_GOLD:      defcr = c_gold;      break;
+         case Font.CR_GREEN:     defcr = c_green;     break;
+         case Font.CR_GRAY:      defcr = c_gray;      break;
+         case Font.CR_ICE:       defcr = c_ice;       break;
+         case Font.CR_LIGHTBLUE: defcr = c_lightblue; break;
+         case Font.CR_OLIVE:     defcr = c_olive;     break;
+         case Font.CR_ORANGE:    defcr = c_orange;    break;
+         case Font.CR_PURPLE:    defcr = c_purple;    break;
+         case Font.CR_RED:       defcr = c_red;       break;
+         case Font.CR_SAPPHIRE:  defcr = c_sapphire;  break;
+         case Font.CR_TAN:       defcr = c_tan;       break;
+         case Font.CR_TEAL:      defcr = c_teal;      break;
+         default:
+         case Font.CR_UNTRANSLATED:
+         case Font.CR_WHITE:     defcr = c_white;     break;
+         case Font.CR_YELLOW:    defcr = c_yellow;    break;
+         }
+         uint cr = defcr;
          for(uint ln = 0, lns = m_d[i].lnx.size(), y = m_d[i].y + m_d[i].lny; ln < lns; ln++)
          {
             int x = m_d[i].x - m_d[i].lnx[ln];
@@ -557,40 +613,39 @@ override void RenderOverlay(RenderEvent evt)
                {
                   name colo = utf.mid(1, 256);
                   switch(colo) {
-                  default:  Console.printf("invalid color %s", colo);
-                  case 'j':
+                  default:
                   case '-':
-                  case 'l':
-                  case '|': cr = 0xffffff; break;
-                  case 'a': cr = 0xeaadad; break;
-                  case 'b': cr = 0xd2b48c; break;
-                  case 'c': cr = 0xc0c0c0; break;
-                  case 'd': cr = 0x33ff33; break;
-                  case 'e': cr = 0xcc9966; break;
-                  case 'f': cr = 0xffcc00; break;
-                  case 'g': cr = 0xff4e60; break;
-                  case 'h': cr = 0x6e6eff; break;
-                  case 'i': cr = 0xffaa00; break;
-                  case 'k': cr = 0xeeee32; break;
-                  case 'm': cr = 0x4d4d4d; break;
-                  case 'n': cr = 0x33eeff; break;
-                  case 'o': cr = 0xfecc99; break;
-                  case 'p': cr = 0xd1d8a7; break;
-                  case 'q': cr = 0x129a12; break;
-                  case 'r': cr = 0xb22323; break;
-                  case 's': cr = 0x6c5d56; break;
-                  case 't': cr = 0xa674d7; break;
-                  case 'u': cr = 0x414141; break;
-                  case 'v': cr = 0x00fffe; break;
-                  case 'w': cr = 0xafccd3; break;
-                  case 'x': cr = 0xfb7329; break;
-                  case 'y': cr = 0x6c729f; break;
-                  case 'z': cr = 0x8cd0dc; break;
-                  case '[Lith_Purple]': cr = 0x8c3bf8; break;
-                  case '[Lith_Grey]':   cr = 0xbfbfbf; break;
-                  case '[Lith_Green]':  cr = 0x00ff00; break;
-                  case '[Lith_Red]':    cr = 0xbf0f4a; break;
+                  case 'l': cr = defcr;       break;
+                  case 'a': cr = c_brick;     break;
+                  case 'b': cr = c_tan;       break;
+                  case 'c': cr = c_gray;      break;
+                  case 'd': cr = c_green;     break;
+                  case 'e': cr = c_brown;     break;
+                  case 'f': cr = c_gold;      break;
+                  case 'g': cr = c_red;       break;
+                  case 'h': cr = c_blue;      break;
+                  case 'i': cr = c_orange;    break;
+                  case 'j': cr = c_white;     break;
+                  case 'k': cr = c_yellow;    break;
+                  case 'm': cr = c_black;     break;
+                  case 'n': cr = c_lightblue; break;
+                  case 'o': cr = c_cream;     break;
+                  case 'p': cr = c_olive;     break;
+                  case 'q': cr = c_darkgreen; break;
+                  case 'r': cr = c_darkred;   break;
+                  case 's': cr = c_darkbrown; break;
+                  case 't': cr = c_purple;    break;
+                  case 'u': cr = c_darkgray;  break;
+                  case 'v': cr = c_cyan;      break;
+                  case 'w': cr = c_ice;       break;
+                  case 'x': cr = c_fire;      break;
+                  case 'y': cr = c_sapphire;  break;
+                  case 'z': cr = c_teal;      break;
                   case '[Lith_Blue]':   cr = 0x3b47f8; break;
+                  case '[Lith_Green]':  cr = 0x00ff00; break;
+                  case '[Lith_Grey]':   cr = 0xbfbfbf; break;
+                  case '[Lith_Purple]': cr = 0x8c3bf8; break;
+                  case '[Lith_Red]':    cr = 0xbf0f4a; break;
                   }
                   continue;
                }
