@@ -5,7 +5,7 @@ default
    Tag "Minigun";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
-   Lith_Weapon.MagSize 200;
+   Lith_Weapon.MagSize 400;
 }
 
 double     m_windup;
@@ -61,7 +61,7 @@ override void Tick()
 
 int Lith_WindupTime()
 {
-   return 1 + (1.0 - m_windup) * 10.0;
+   return (1.0 - m_windup) * 10.0;
 }
 
 action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
@@ -72,7 +72,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 
    invoker.m_laststate = lb;
 
-   A_SetTics(invoker.Lith_WindupTime());
+   A_SetTics(invoker.Lith_WindupTime() + 1);
    state st = Lith_A_Ready(flags); if(st) return st;
 
    if(player.buttons & BT_ATTACK && level.totaltime & 1)
@@ -82,6 +82,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
       else
       {
          A_PlaySound("weapons/minigun/empty", CHAN_WEAPON);
+         A_WeaponOffset(frandom(2, 3), frandom(32, 34), WOF_INTERPOLATE);
          return null;
       }
    }
@@ -99,8 +100,8 @@ action(Weapon) void Lith_A_MinigunFire()
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
-   A_WeaponOffset(frandom(1, 4), frandom(32, 35), WOF_INTERPOLATE);
-   A_FireBullets(6, 1.5, -1, 7);
+   A_WeaponOffset(frandom(3, 8), frandom(34, 39), WOF_INTERPOLATE);
+   A_FireBullets(7, 1.7, 2, 7);
    Lith_A_RecoilUp(0.15);
    A_Recoil(0.07);
 }
@@ -108,7 +109,7 @@ action(Weapon) void Lith_A_MinigunFire()
 action(Weapon) void Lith_A_MinigunPostFire()
 {
    Lith_A_RecoilDn(0.35);
-   A_SetTics(invoker.Lith_WindupTime()-1);
+   A_SetTics(invoker.Lith_WindupTime());
 }
 
 states(Actor)

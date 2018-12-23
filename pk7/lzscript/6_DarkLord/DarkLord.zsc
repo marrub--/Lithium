@@ -10,10 +10,10 @@ class Lith_DarkLordPlayer : Lith_Player
       Player.Portrait "lgfx/Portraits/DarkLord.png";
       Player.ViewHeight 50;
       Player.AttackZOffset 17;
-      Player.MaxHealth 125;
+      Player.MaxHealth 200;
       Player.SideMove 1, 0.5;
       Player.ForwardMove 1, 0.5;
-      Health 125;
+      Health 200;
       Tag "DarkLord";
    }
 
