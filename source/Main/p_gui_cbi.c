@@ -1,9 +1,9 @@
-// Copyright © 2017 Alison Sanderson, all rights reserved.
+// Copyright © 2017-2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_world.h"
 
-StrEntON
+StrEntOFF
 
 #define Upgr(name) if(world.cbiupgr[cupg_##name])
 
@@ -12,44 +12,43 @@ StrEntON
 
 #define Info(...) \
    do { \
-      PrintTextFmt(__VA_ARGS__); \
-      PrintText("cbifont", CR_WHITE, 23,1, y,1); \
+      char text[128]; \
+      int l = sprintf(text, __VA_ARGS__); \
+      PrintTextChr(text, l); \
+      PrintText(s"cbifont", CR_WHITE, 23,1, y,1); \
       y += 10; \
    } while(0)
 
-#define Slot(name, x, y) \
-   PrintSprite(":UI:" name "", 300-x*48,2, 48*y-20,1)
-
-#define CPU(num) \
-   PrintSprite(":UI:CPU" #num "", 0,1, 0,1)
+#define Slot(name, x, y) PrintSprite(s":UI:" name, 300-x*48,2, 48*y-20,1)
+#define CPU(num) PrintSprite(s":UI:CPU" #num, 0,1, 0,1)
 
 // Static Functions ----------------------------------------------------------|
 
 static void CBITab_Marine(gui_state_t *g, struct player *p)
 {
-   int   ram;
-   __str name;
+   int ram;
+   char const *name;
 
-        Upgr(hasupgr2) {CPU(1); ram = 150; name = L(LANG "CBI_CPU3");}
-   else Upgr(hasupgr1) {CPU(2); ram = 100; name = L(LANG "CBI_CPU2");}
-   else                {CPU(3); ram =  50; name = L(LANG "CBI_CPU1");}
+        Upgr(hasupgr2) {CPU(1); ram = 150; name = LC(LANG "CBI_CPU3");}
+   else Upgr(hasupgr1) {CPU(2); ram = 100; name = LC(LANG "CBI_CPU2");}
+   else                {CPU(3); ram =  50; name = LC(LANG "CBI_CPU1");}
 
-   PrintTextStr(name);
-   PrintText("cbifont", CR_WHITE, 20,1, 60,1);
+   PrintTextChr(name, strlen(name));
+   PrintText(s"cbifont", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
-   Info(L(LANG "CBI_PERF"), world.cbiperf);
-   Info(L(LANG "CBI_PUSE"), p->cbi.pruse);
-   Info(L(LANG "CBI_WRAM"), ram);
+   Info(LC(LANG "CBI_PERF"), world.cbiperf);
+   Info(LC(LANG "CBI_PUSE"), p->cbi.pruse);
+   Info(LC(LANG "CBI_WRAM"), ram);
 
    InfoSep;
 
-   Info(L(LANG "CBI_INTERFACES"));
-   Upgr(armorinter) Info("> %S", L(LANG "CBI_ArmorInter"));
-   Upgr(weapninter) Info("> %S", L(LANG "CBI_WeapnInter"));
-   Upgr(weapninte2) Info("> %S", L(LANG "CBI_WeapnInte2"));
-   Upgr(rdistinter) Info("> %S", L(LANG "CBI_RDistInter"));
+   Info(LC(LANG "CBI_INTERFACES"));
+   Upgr(armorinter) Info("> %s", LC(LANG "CBI_ArmorInter"));
+   Upgr(weapninter) Info("> %s", LC(LANG "CBI_WeapnInter"));
+   Upgr(weapninte2) Info("> %s", LC(LANG "CBI_WeapnInte2"));
+   Upgr(rdistinter) Info("> %s", LC(LANG "CBI_RDistInter"));
 
    Upgr(armorinter) Slot("ArmorInter", 0, 1);
    Upgr(weapninter) Slot("WeapnInter", 0, 2);
@@ -59,27 +58,29 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
 
 static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 {
+   char const *name = LC(LANG "CBI_CPU4");
+
    CPU(2);
-   PrintTextStr(L(LANG "CBI_CPU4"));
-   PrintText("cbifont", CR_WHITE, 20,1, 60,1);
+   PrintTextChr(name, strlen(name));
+   PrintText(s"cbifont", CR_WHITE, 20,1, 60,1);
 
    InfoStart;
 
-   Info(L(LANG "CBI_PERF"), 34);
-   Info(L(LANG "CBI_PUSE"), p->cbi.pruse);
-   Info(L(LANG "CBI_WRAM"), 19);
+   Info(LC(LANG "CBI_PERF"), 34);
+   Info(LC(LANG "CBI_PUSE"), p->cbi.pruse);
+   Info(LC(LANG "CBI_WRAM"), 19);
 
    InfoSep;
 
-   Info(L(LANG "CBI_INTERFACES"));
-                      Info("> %S", L(LANG "CBI_Slot1Spell"));
-                      Info("> %S", L(LANG "CBI_Slot2Spell"));
-   Upgr(c_slot3spell) Info("> %S", L(LANG "CBI_Slot3Spell"));
-   Upgr(c_slot4spell) Info("> %S", L(LANG "CBI_Slot4Spell"));
-   Upgr(c_slot5spell) Info("> %S", L(LANG "CBI_Slot5Spell"));
-   Upgr(c_slot6spell) Info("> %S", L(LANG "CBI_Slot6Spell"));
-   Upgr(c_slot7spell) Info("> %S", L(LANG "CBI_Slot7Spell"));
-   Upgr(c_rdistinter) Info("> %S", L(LANG "CBI_RDistInter"));
+   Info(LC(LANG "CBI_INTERFACES"));
+                      Info("> %s", LC(LANG "CBI_Slot1Spell"));
+                      Info("> %s", LC(LANG "CBI_Slot2Spell"));
+   Upgr(c_slot3spell) Info("> %s", LC(LANG "CBI_Slot3Spell"));
+   Upgr(c_slot4spell) Info("> %s", LC(LANG "CBI_Slot4Spell"));
+   Upgr(c_slot5spell) Info("> %s", LC(LANG "CBI_Slot5Spell"));
+   Upgr(c_slot6spell) Info("> %s", LC(LANG "CBI_Slot6Spell"));
+   Upgr(c_slot7spell) Info("> %s", LC(LANG "CBI_Slot7Spell"));
+   Upgr(c_rdistinter) Info("> %s", LC(LANG "CBI_RDistInter"));
 
                       Slot("Slot1Spell", 0, 1);
                       Slot("Slot2Spell", 0, 2);
@@ -95,8 +96,7 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 
 void Lith_CBITab_CBI(gui_state_t *g, struct player *p)
 {
-   switch(p->pclass)
-   {
+   switch(p->pclass) {
    case pcl_marine:    CBITab_Marine   (g, p); break;
    case pcl_cybermage: CBITab_CyberMage(g, p); break;
    }

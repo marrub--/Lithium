@@ -1,8 +1,7 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
-#define TICSECOND (0.029)
-#define TS TICSECOND
+#define TS 0.029
 
 #define PrintSprite(name, x, xa, y, ya) \
    DrawCallI(s"LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
@@ -15,6 +14,7 @@
 
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
+#define PrintTextChr(s, n) (ACS_BeginPrint(), PrintChars(s, n))
 
 #define PrintTextArgs_N(x, y, xa, ya) \
    (((uint)(x) << 14) | ((uint)(y) << 5) | ((uint)(xa) << 2) | (uint)(ya))
@@ -61,7 +61,7 @@
 #define HudMessageLog(...) \
    ( \
       HudMessage(__VA_ARGS__), \
-      ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP|HUDMSG_NOTWITH3DVIEW|HUDMSG_NOTWITHOVERLAYMAP|HUDMSG_LOG, hid_log_throwaway, CR_UNTRANSLATED, 0, 0, TICSECOND), \
+      ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP|HUDMSG_NOTWITH3DVIEW|HUDMSG_NOTWITHOVERLAYMAP|HUDMSG_LOG, hid_log_throwaway, CR_UNTRANSLATED, 0, 0, TS), \
       ACS_EndHudMessage() \
    )
 

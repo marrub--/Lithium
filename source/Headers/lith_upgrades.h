@@ -29,7 +29,6 @@
 #define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
 #include "lith_upgradefuncs.h"
 
-
 script void Lith_PlayerInitUpgrades(struct player *p);
 void Lith_PlayerDeallocUpgrades(struct player *p);
 void Lith_PlayerDeinitUpgrades(struct player *p);
@@ -46,4 +45,3 @@ extern upgradeinfo_t const upgrinfobase[UPGR_BASE_MAX];
 #endif
 
 #endif
-

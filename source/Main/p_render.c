@@ -201,8 +201,7 @@ void Lith_PlayerHUD(struct player *p)
       {
          fixed a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
          DrawSpriteX(":HUD_I:ScopeOverlay",
-            HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1,
-            TICSECOND, a);
+            HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1, TS, a);
       }
       else
       {

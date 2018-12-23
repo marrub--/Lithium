@@ -15,19 +15,19 @@ void Lith_PlayerPayout(struct player *p)
 #define Left(...) \
    ( \
       HudMessageF("cnfont", __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 16.1, y + .1, TICSECOND, .2) \
+      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 16.1, y + .1, TS, .2) \
    )
 
 #define Right(...) \
    ( \
       HudMessageF("cnfont", __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 280.2, y + .1, TICSECOND, .2) \
+      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 280.2, y + .1, TS, .2) \
    )
 
 #define Head(...) \
    ( \
       HudMessageF("dbigfont", __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 8.1, y + 0.1, TICSECOND, 0.2) \
+      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 8.1, y + 0.1, TS, 0.2) \
    )
 
 #define GenCount(word, name) \
@@ -61,7 +61,7 @@ void Lith_PlayerPayout(struct player *p)
 
       if(i < 16) {
          HudMessageF("dbigfont", "RESULTS");
-         HudMessageParams(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid, CR_WHITE, 8 + 0.1, y + .1, TICSECOND, 0.5);
+         HudMessageParams(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid, CR_WHITE, 8 + 0.1, y + .1, TS, 0.5);
       }
 
       y += 16;

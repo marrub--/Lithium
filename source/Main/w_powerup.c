@@ -101,23 +101,23 @@ void Lith_GetSigil()
 
       world.freeze(true);
 
-      ACS_FadeTo(0, 0, 0, 0.4, TICSECOND * 3);
+      ACS_FadeTo(0, 0, 0, 0.4, TS * 3);
       ACS_SetHudSize(320, 200);
 
       ACS_Delay(3);
 
       HudMessageF("dbigfont", "D I V I S I O N  S I G I L");
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TICSECOND * 5, 0.3);
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TS * 5, 0.3);
 
       HudMessageF("SMALLFNT",
          "=== Warning ===\n"
          "This item is unfathomably dangerous.\n"
          "Use at the expense of your world.");
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TICSECOND * 2, 0.3);
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TS * 2, 0.3);
 
       ACS_Delay(35 * 7);
 
-      ACS_FadeTo(0, 0, 0, 0.0, TICSECOND * 5);
+      ACS_FadeTo(0, 0, 0, 0.0, TS * 5);
 
       world.freeze(false);
    }
