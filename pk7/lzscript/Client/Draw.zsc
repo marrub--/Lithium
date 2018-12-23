@@ -74,12 +74,12 @@ float, float GetScSized(float x, float y, bool kludge = false)
 
 static void ForceDraw(bool on)
 {
-   Instance().m_forcedraw = on;
+   Lith_URANUS(Find("Lith_URANUS")).m_forcedraw = on;
 }
 
 static void LZ(Actor mo, int w, int h)
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    let p = cl.m_p;
@@ -96,7 +96,7 @@ static void LZ(Actor mo, int w, int h)
 
 static void LF(Actor mo, int num, int time, double fade)
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    cl.m_fmsg[num].time = time;
@@ -106,14 +106,14 @@ static void LF(Actor mo, int num, int time, double fade)
 
 static bool LX(Actor mo, int num)
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return false;
    return cl.m_fmsg[num].fade != 0;
 }
 
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    if(cl.m_nodraw) return;
@@ -131,7 +131,7 @@ static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 
 static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    if(a ~== 0 || cl.m_nodraw) return;
@@ -206,7 +206,7 @@ static int LTArgsA(uint x, uint y, uint xa, uint ya, double a)
 // 0000 0000 0000 0000 0000 0000 0000 0011  0  2 - Y alignment
 static void LT(Actor mo, string txt, string fnt, int cr, int arg)
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    bool af = arg & 0x40000000;
@@ -346,7 +346,7 @@ static void LT(Actor mo, string txt, string fnt, int cr, int arg)
 
 static void LC(Actor mo, int x, int y, int w, int h, int ww)
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
 
    let p = cl.m_p;
@@ -373,7 +373,7 @@ static void LC(Actor mo, int x, int y, int w, int h, int ww)
 
 static void LE()
 {
-   let cl = Instance();
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
 
    cl.m_p = 0;
 

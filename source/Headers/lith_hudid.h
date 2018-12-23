@@ -4,6 +4,8 @@
 
 enum
 {
+   fid_health,
+   fid_vscan,
    fid_schit1,
    fid_schit2,
    fid_scacum,
@@ -11,7 +13,6 @@ enum
    fid_slotnE = fid_slotnS + 8,
    fid_logadS,
    fid_logadE = fid_logadS + 8,
-   fid_health,
 };
 
 enum
@@ -37,15 +38,6 @@ enum
 
    hid_magicsel,
    hid_blade,
-
-   hid_vscbar,
-   hid_vscbarn,
-   hid_vschp,
-   hid_vsctag,
-   hid_vschitE,
-   hid_vschitS = hid_vschitE + 5,
-   hid_vscrankE,
-   hid_vscrankS = hid_vscrankE + 20,
 
    hid_jetE,
    hid_jetS = hid_jetE + 15,

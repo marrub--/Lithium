@@ -47,7 +47,10 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       int ot = UData.target;
 
       if(UData.target != id)
-         UData = (struct upgr_data_VitalScan){.oldhealth = UData.health};
+      {
+         memset(&UData, 0, sizeof UData);
+         UData.oldhealth = UData.health;
+      }
 
       UData.oldtarget = ot;
       UData.target    = id;
@@ -110,6 +113,15 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
+
+      // Hit indicator
+      if(UData.hdtime != 0) UData.hdtime--;
+      else                  UData.hdelta = 0;
+
+      if(UData.health < UData.oldhealth) {
+         UData.hdelta = UData.oldhealth - UData.health;
+         UData.hdtime = 30;
+      }
    }
 }
 
@@ -117,6 +129,8 @@ stkcall
 void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 {
    if(!p->hudenabled || !UData.target) return;
+
+   if(UData.hdtime == 30) SetFade(fid_vscan, 10, 0.1);
 
    int ox = p->getCVarI(CVAR "scanner_xoffs");
    int oy = p->getCVarI(CVAR "scanner_yoffs");
@@ -132,48 +146,36 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 
    // Rank
    if(UData.rank) for(int i = 1; i <= UData.rank; i++)
-      DrawSpriteFade(StrParam(":UI:Rank%i", i),
-         hid_vscrankS - (i - 1), 100.1 + ox + (i * 6), 216.1 + oy, 0.1, 0.1);
+      PrintSprite(StrParam(":UI:Rank%i", i), 100+ox + i*6,1, 216+oy,1);
 
    // Hit indicator
-   if(UData.health < UData.oldhealth)
-   {
-      int delta = UData.oldhealth - UData.health;
-
-      HudMessageF("cbifont", "-%i", delta);
-      HudMessageParams(HUDMSG_FADEOUT, hid_vschitS, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
-
-      for(int i = 1; i < 5 && delta >= 100 * i; i++)
-      {
-         HudMessageF("cbifont", "-%i", delta);
-         HudMessageParams(HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_vschitS - i, CR_RED, 160.4 + ox, 235.2 + oy, 0.1, 0.4);
-      }
+   if(UData.hdelta && CheckFade(fid_vscan)) {
+      PrintTextFmt("-%i", UData.hdelta);
+      PrintTextFX("cbifont", CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
    // Tag and health
    bool  afnt = p->getCVarI(CVAR "scanner_altfont");
    __str font = afnt ? "chfont" : "cbifont";
 
-   HudMessageF(font, "%S", UData.tagstr);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vsctag, CR_WHITE, 160.4 + ox, 216.2 + oy, 0.1, 0.4);
+   PrintTextStr(UData.tagstr);
+   PrintTextX(font, CR_WHITE, 160+ox,4, 216+oy,2);
 
-   ACS_SetFont(UData.freak ? "alienfont" : font);
-   if(UData.maxhealth) HudMessage("%u/%u", UData.health, UData.maxhealth);
-   else                HudMessage("%uhp",  UData.health);
-   HudMessageParams(HUDMSG_FADEOUT, hid_vschp, CR_WHITE, 160.4 + ox, 225.2 + oy, 0.1, 0.4);
+   if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
+   else                PrintTextFmt("%uhp",  UData.health);
+   PrintTextX(UData.freak ? "alienfont" : font, CR_WHITE, 160+ox,4, 225+oy,2);
 
    // Health bar
    if(p->getCVarI(CVAR "scanner_bar"))
    {
       int y = afnt ? 201 : 205;
-      ACS_SetHudClipRect(120 + ox, y + oy, 80 * UData.splitfrac, 2);
-      DrawSpritePlain(StrParam(":UI:HealthBar%i", UData.split), hid_vscbar, 120.1+ox, y+.1+oy, 0.1);
-      ACS_SetHudClipRect(0, 0, 0, 0);
+      SetClip(120 + ox, y + oy, 80 * UData.splitfrac, 2);
+      PrintSprite(StrParam(":UI:HealthBar%i", UData.split), 120+ox,1, y+oy,1);
+      ClearClip();
 
       if(UData.split > 1)
-         DrawSpritePlain(StrParam(":UI:HealthBar%i", UData.split - 1), hid_vscbarn, 120.1+ox, y+.1+oy, 0.1);
+         PrintSprite(StrParam(":UI:HealthBar%i", UData.split - 1), 120+ox,1, y+oy,1);
    }
 }
 
 // EOF
-
