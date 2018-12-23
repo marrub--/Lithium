@@ -163,35 +163,36 @@ Fire3:
 
 Reload:
    MNGG # 1 Lith_A_JumpIfMagFull;
-   MNGG # 1 offset(2, 34) {invoker.m_reloading = true;}
-   MNGG # 1 offset(4, 37);
-   MNGG # 1 offset(9, 43) A_PlaySound("weapons/minigun/magout", CHAN_5);
-   MNGG # 1 offset(12, 47);
-   MNGG # 0 Lith_A_ReloadBobDn(0.7);
-   MNGG # 1 offset(14, 52);
-   MNGG # 2 offset(12, 55);
-   MNGG # 3 offset(11, 57);
-   MNGG # 9 offset(10, 60);
-   MNGG # 19 offset(11, 60);
-   MNGG # 0 Lith_A_ReloadFinish;
-   MNGG # 1 offset(13, 59) A_PlaySound("weapons/minigun/magin", CHAN_5);
-   MNGG # 0 Lith_A_ReloadBobUp(0.4);
-   MNGG # 4 offset(11, 49);
-   MNGG # 2 offset(11, 47);
-   MNGG # 7 offset(11, 45);
-   MNGG # 1 offset(12, 49);
-   MNGG # 1 offset(8, 53);
-   MNGG # 1 offset(1, 57);
-   MNGG # 1 offset(-3, 56);
-   MNGG # 2 offset(-8, 52);
-   MNGG # 2 offset(-10, 49);
-   MNGG # 2 offset(-8, 47);
-   MNGG # 3 offset(-5, 43);
-   MNGG # 3 offset(-3, 40);
-   MNGG # 3 offset(-1, 37);
-   MNGG # 2 offset(-1, 34);
-   MNGG # 1;
-   MNGG # 0 {invoker.m_reloading = false;}
+   MNGG S 1 offset(2, 34) {invoker.m_reloading = true;}
+   MNGG T 1 offset(4, 37);
+   MNGG U 1 offset(9, 37) A_PlaySound("weapons/minigun/magout", CHAN_5);
+   MNGG G 1 offset(12, 37);
+   MNGG G 0 Lith_A_ReloadBobDn(0.7);
+   MNGG H 1 offset(14, 42);
+   MNGG I 2 offset(12, 45);
+   MNGG J 3 offset(11, 47);
+   MNGG K 9 offset(10, 50);
+   MNGG L 19 offset(11, 50);
+   MNGG L 0 Lith_A_ReloadFinish;
+   MNGG M 1 offset(13, 49) A_PlaySound("weapons/minigun/magin", CHAN_5);
+   MNGG M 0 Lith_A_ReloadBobUp(0.4);
+   MNGG N 2 offset(11, 39);
+   MNGG O 1 offset(11, 37);
+   MNGG P 1 offset(11, 35);
+   MNGG Q 4 offset(11, 35);
+   MNGG Q 3 offset(12, 39);
+   MNGG Q 2 offset(8, 43);
+   MNGG A 2 offset(1, 47);
+   MNGG A 1 offset(-3, 46);
+   MNGG A 2 offset(-8, 42);
+   MNGG A 2 offset(-10, 39);
+   MNGG A 2 offset(-8, 37);
+   MNGG A 3 offset(-5, 33);
+   MNGG A 3 offset(-3, 30);
+   MNGG A 3 offset(-1, 31);
+   MNGG A 2 offset(-1, 32);
+   MNGG A 1;
+   MNGG A 0 {invoker.m_reloading = false;}
    goto ReadySelector;
 }
 
