@@ -323,7 +323,7 @@ void Lith_DialogueVM(struct player *p, int num)
 
    // GUI state
    gui_state_t gst = {};
-   gst.gfxprefix = ":UI_Green:";
+   gst.gfxprefix = c":UI_Green:";
    Lith_GUI_Init(&gst);
 
    // VM state

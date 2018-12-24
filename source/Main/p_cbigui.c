@@ -99,24 +99,26 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
-      #define X(n) s":UI_" n ":",
-      static __str const names[] = {Themes(X)};
+      #define X(n) ":UI_" n ":",
+      static char const *names[] = {Themes(X)};
       #undef X
 
       if(p->cbi.theme >= cbi_theme_max) p->cbi.theme = 0;
 
-      p->cbi.guistate.gfxprefix = names[p->cbi.oldtheme = p->cbi.theme];
+      g->gfxprefix   = names[p->cbi.oldtheme = p->cbi.theme];
+      g->gfxprefixsz = strlen(g->gfxprefix);
    }
 
    Lith_GUI_Begin(g, 320, 240);
 
-   if(!p->indialogue)
-      Lith_GUI_UpdateState(g, p);
+   if(!p->indialogue) Lith_GUI_UpdateState(g, p);
 
-   PrintSpriteA(StrParam(s"%SBackground", g->gfxprefix), 0,1, 0,1, 0.7);
+   ACS_BeginPrint();
+   PrintChars(g->gfxprefix, g->gfxprefixsz);
+   ACS_PrintString(s"Background");
+   PrintSpriteA(ACS_EndStrParam(), 0,1, 0,1, 0.7);
 
-   if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit)))
-      p->useGUI(GUI_CBI);
+   if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit))) p->useGUI(GUI_CBI);
 
    char tn[5][TABCHARS];
    LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);

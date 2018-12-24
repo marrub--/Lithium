@@ -37,13 +37,16 @@
 #define Lith_GUI_Prefix(set) \
    if(set) { \
       ACS_BeginPrint(); \
-      ACS_PrintString(g->gfxprefix); \
+      PrintChars(g->gfxprefix, g->gfxprefixsz); \
       ACS_PrintString(set); \
       set = ACS_EndStrParam(); \
    } else (void)0
 #define Lith_GUI_Prefix1(g, pre, mem) \
    (!(pre)->external \
-      ? ((pre)->mem ? (ACS_BeginPrint(), ACS_PrintString((g)->gfxprefix), ACS_PrintString((pre)->mem), ACS_EndStrParam()) : null) \
+      ? ((pre)->mem ? (ACS_BeginPrint(), \
+                       PrintChars((g)->gfxprefix, (g)->gfxprefixsz), \
+                       ACS_PrintString((pre)->mem), \
+                       ACS_EndStrParam()) : null) \
       : (pre)->mem)
 #define Lith_GUI_Prefix2(g, gfx, pre, mem) \
    do { \
@@ -52,7 +55,10 @@
       else if((pre)->external) \
          strncpy(gfx, (pre)->mem, sizeof(gfx)); \
       else \
-         snprintf(gfx, sizeof(gfx), c"%S%s", (g)->gfxprefix, (pre)->mem); \
+      { \
+         memcpy(gfx, (g)->gfxprefix, (g)->gfxprefixsz + 1); \
+         strcat(gfx, (pre)->mem); \
+      } \
    } while(0)
 
 #define Lith_GUI_ScrollReset(g, st) \
@@ -138,7 +144,8 @@ typedef struct gui_state_s
 
    void *state;
 
-   __str gfxprefix;
+   char const *gfxprefix;
+   uint gfxprefixsz;
 } gui_state_t;
 
 typedef struct gui_button_preset_s

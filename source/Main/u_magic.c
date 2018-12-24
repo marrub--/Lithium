@@ -104,7 +104,7 @@ void Lith_SetMagicUI(bool on)
          UData.ui = true;
          p->semifrozen++;
 
-         UData.gst.gfxprefix = s":UI:";
+         UData.gst.gfxprefix = ":UI:";
          UData.gst.cx = 320/2;
          UData.gst.cy = 240/2;
 

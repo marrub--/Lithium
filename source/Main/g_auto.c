@@ -35,7 +35,7 @@ stkcall
 void Lith_GUI_Init(gui_state_t *g, void *state)
 {
    g->state = state;
-   g->gfxprefix = ":UI:";
+   g->gfxprefix = c":UI:";
 }
 
 stkcall
@@ -141,7 +141,7 @@ __str Lith_RemoveTextColors(__str str, int size)
    static char buf[4096];
    int j = 0;
 
-   if(size > countof(buf)) return "[programmer error, please report]";
+   if(size > countof(buf)) return null;
 
    for(int i = 0; i < size; i++)
    {
