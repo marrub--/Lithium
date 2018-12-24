@@ -3,14 +3,14 @@
 #include "lith_common.h"
 #include "lith_world.h"
 
-StrEntON
+StrEntOFF
 
 // Types ---------------------------------------------------------------------|
 
 struct witem
 {
    int weight;
-   __str item;
+   char const *item;
 };
 
 // Static Objects ------------------------------------------------------------|
@@ -81,14 +81,14 @@ static struct witem const clipbx[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-static __str RandomWeighted(struct witem const *list, int count)
+stkcall
+static char const *RandomWeighted(struct witem const *l, int c)
 {
-   int sel = ACS_Random(1, list[count - 1].weight);
+   int sel = ACS_Random(1, l[c - 1].weight);
 
-   for(int i = 0; i < count; i++)
-      if(sel <= list[i].weight) return list[i].item;
+   for(int i = 0; i < c; i++) if(sel <= l[i].weight) return l[i].item;
 
-   return "shush, this will return before this";
+   return null;
 }
 
 // Extern Functions ----------------------------------------------------------|
@@ -96,19 +96,19 @@ static __str RandomWeighted(struct witem const *list, int count)
 script ext("ACS")
 void Lith_RandomSpawn(int rsn)
 {
-   __str item;
+   char const *item;
 
-   switch(rsn)
-   {
+   switch(rsn) {
    case lrsn_garmor: item = RandomWeighted(garmor, countof(garmor)); break;
    case lrsn_barmor: item = RandomWeighted(barmor, countof(barmor)); break;
    case lrsn_hbonus: item = RandomWeighted(hbonus, countof(hbonus)); break;
    case lrsn_abonus: item = RandomWeighted(abonus, countof(abonus)); break;
    case lrsn_clip:   item = RandomWeighted(clip,   countof(clip  )); break;
    case lrsn_clipbx: item = RandomWeighted(clipbx, countof(clipbx)); break;
+   default: return;
    }
 
-   SCallI("Lith_RandomSpawn", "Set", item);
+   SCallI(s"Lith_RandomSpawn", s"Set", l_strdup(item));
 }
 #endif
 
