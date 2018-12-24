@@ -137,7 +137,7 @@
 
 ##----------------------------------------------------------------------------|
 == \#INFO_SHORT_WeapnInter | $\#CBI_WeapnInter
-== \#INFO_TITLE_WeapnInter | 武器インタフェースデバイス箱
+== \#INFO_TITLE_WeapnInter | 武器インタフェイスデバイス箱
 @@ \#INFO_DESCR_WeapnInter
 翻訳なし
 
@@ -148,8 +148,8 @@
 翻訳なし
 
 ##----------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmorInter | $\#CBI_ArmorInter
-== \#INFO_TITLE_ArmorInter | アーマーインタフェースデバイス
+== \#INFO_SHORT_ArmorInter | ｱｰﾏｰインタフェイス
+== \#INFO_TITLE_ArmorInter | アーマーインタフェイスデバイス
 @@ \#INFO_DESCR_ArmorInter
 翻訳なし
 

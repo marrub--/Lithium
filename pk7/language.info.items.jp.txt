@@ -141,7 +141,7 @@
 
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_WeapnInter" = "$LITH_CBI_WeapnInter";
-"LITH_INFO_TITLE_WeapnInter" = "武器インタフェースデバイス箱";
+"LITH_INFO_TITLE_WeapnInter" = "武器インタフェイスデバイス箱";
 "LITH_INFO_DESCR_WeapnInter" =
    "翻訳なし";
 
@@ -152,8 +152,8 @@
    "翻訳なし";
 
 //----------------------------------------------------------------------------|
-"LITH_INFO_SHORT_ArmorInter" = "$LITH_CBI_ArmorInter";
-"LITH_INFO_TITLE_ArmorInter" = "アーマーインタフェースデバイス";
+"LITH_INFO_SHORT_ArmorInter" = "ｱｰﾏｰインタフェイス";
+"LITH_INFO_TITLE_ArmorInter" = "アーマーインタフェイスデバイス";
 "LITH_INFO_DESCR_ArmorInter" =
    "翻訳なし";
 
