@@ -48,4 +48,6 @@ struct vec2i {
    int x, y;
 };
 
+union fixedint {int_k_t i; fixed k;};
+
 #endif

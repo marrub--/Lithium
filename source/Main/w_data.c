@@ -12,7 +12,7 @@ int LPData(int info, int permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
-   union {fixed k; int i;} u;
+   union fixedint u;
 
    withplayer(LocalPlayer) switch(info)
    {

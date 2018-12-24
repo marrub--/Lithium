@@ -70,16 +70,16 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 
       PrintSpriteA(":ZoomOverlay", 160,0, 120,0, 0.5);
 
-      __str points[8] = {"E", "SE", "S", "SW", "W", "NW", "N", "NE"};
+      static char const points[] = "E SES SWW NWN NE";
 
       for(int i = 0; i < 8; i++)
       {
-         fixed64 xang = p->yawf + pi + (pi4 * i);
-         fixed xs = sinf(xang), xc = cosf(xang);
-         int x = atan2f(xs, xc) * 320;
+         fixed yaw = (p->yaw + i * 0.125 + 0.125) % 1.0;
+         int x = yaw * 320 * 4;
+         if(x < 0 || x > 320) continue;
 
-         PrintTextStr(points[i]);
-         PrintText("cbifont", CR_WHITE, 160 + x,0, 120,0);
+         PrintTextChr(&points[i * 2], 2);
+         PrintText("cbifont", CR_WHITE, x,1, 120,0);
       }
    }
 }

@@ -117,9 +117,9 @@ bool aabb(int x, int y, int z, int w, int x2, int y2)
 stkcall
 int ceilk(fixed n)
 {
-   union {int_k_t i; fixed a;} u = {.a = n};
-   if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.a + 1;
-   else             return (int)u.a;
+   union fixedint u = {.k = n};
+   if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.k + 1;
+   else             return (int)u.k;
 }
 
 stkcall
