@@ -46,7 +46,7 @@ optargs(1)
 static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
    __str image = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
-   int height = strtoi_str(Language(LANG "INFO_CSIZE_%s", pinit->name), null, 0);
+   int height = strtoi_str(Language(cLANG "INFO_CSIZE_%s", pinit->name), null, 0);
 
    struct page *page = Salloc(struct page);
 
@@ -176,10 +176,10 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
    p->setActivator();
 
-   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S", title), null, 0);
-   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S%s", title, p->discrim), null, 0);
+   flags |= strtoi_str(Language(cLANG "MAIL_FLAG_%S", title), null, 0);
+   flags |= strtoi_str(Language(cLANG "MAIL_FLAG_%S%s", title, p->discrim), null, 0);
 
-   if(!(flags & MAILF_AllPlayers)) title = StrParam("%S%s", title, p->discrim);
+   if(!(flags & MAILF_AllPlayers)) title = StrParam(c"%S%s", title, p->discrim);
 
    struct bip *bip = &p->bip;
 
@@ -189,13 +189,13 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    __str size = LanguageNull(LANG "MAIL_SIZE_%S", title);
    __str send = LanguageNull(LANG "MAIL_SEND_%S", title);
    __str name = LanguageNull(LANG "MAIL_NAME_%S", title);
-   __str body = Language    (LANG "MAIL_BODY_%S", title);
+   __str body = Language   (cLANG "MAIL_BODY_%S", title);
 
    if(!send) send = L(LANG "MAIL_INTERNAL");
 
    lstrcpy_str(page->name, date ? date : l_strdup(world.canontimeshort));
    page->title    = name ? name : L(LANG "MAIL_NOTITLE");
-   page->body     = StrParam(L(LANG "MAIL_TEMPLATE"), send, page->name, body);
+   page->body     = StrParam(LC(cLANG "MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 
@@ -269,15 +269,15 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 
    pinf.shname = page->category == BIPC_MAIL
       ? l_strdup(page->name)
-      : Language(LANG "INFO_SHORT_%s", page->name);
+      : Language(cLANG "INFO_SHORT_%s", page->name);
 
    pinf.body = page->body
       ? page->body
-      : Language(LANG "INFO_DESCR_%s", page->name);
+      : Language(cLANG "INFO_DESCR_%s", page->name);
 
    pinf.flname = page->title
       ? page->title
-      : Language(LANG "INFO_TITLE_%s", page->name);
+      : Language(cLANG "INFO_TITLE_%s", page->name);
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);

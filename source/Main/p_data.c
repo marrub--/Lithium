@@ -58,7 +58,7 @@ static void SetPClass(struct player *p)
       #endif
       else for(;;)
       {
-         Log("Invalid player class detected, everything is going to explode!");
+         Log(c"Invalid player class detected, everything is going to explode!");
          ACS_Delay(1);
       }
    }
@@ -128,7 +128,7 @@ void Lith_PlayerUpdateData(struct player *p)
 
    p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   p->name        = StrParam("%tS", p->num);
+   p->name        = StrParam(c"%tS", p->num);
    p->weaponclass = ACS_GetWeapon();
 
    p->scopetoken = InvNum(OBJ "WeaponScopedToken");
@@ -181,7 +181,7 @@ static void LevelUp(struct player *p, u32 attr[at_max])
             while(l < at_max && !attr[l]) l++;
             if(l >= at_max) break;
 
-            sp += sprintf(sp, c"%s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
+            sp += sprintf(sp, c"%.3s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
          }
       }
 
@@ -247,7 +247,7 @@ void Lith_ResetPlayer(struct player *p)
       p->spawnhealth = GetPropI(0, APROP_Health);
       p->maxhealth   = p->spawnhealth;
       p->discount    = 1.0;
-      p->stepnoise   = StrParam("player/%S/step", p->classname);
+      p->stepnoise   = StrParam(c"player/%S/step", p->classname);
 
       switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
       case 0: p->pronoun = pro_male;   break;

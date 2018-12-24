@@ -46,7 +46,7 @@ void Lith_Title(void)
 
    for(int t = 0, pos = 0;;)
    {
-      PrintTextFmt("\Cd%.*s", pos, txt);
+      PrintTextFmt(c"\Cd%.*s", pos, txt);
       PrintText("cbifont", 0, 7,1, 6,1);
 
       if(t == 0)
@@ -68,7 +68,7 @@ void Lith_Title(void)
 
    for(int i = 0; i < 35 * 7; i++)
    {
-      PrintTextFmt("\Cd%s", txt);
+      PrintTextFmt(c"\Cd%s", txt);
       PrintText("cbifont", 0, 7,1, 6,1);
       Blinker();
       ACS_Delay(1);
@@ -77,7 +77,7 @@ void Lith_Title(void)
 
    for(fixed a = 1; a > 0; a -= 0.01)
    {
-      PrintTextFmt("\Cd%s", txt);
+      PrintTextFmt(c"\Cd%s", txt);
       PrintTextA("cbifont", 0, 7,1, 6,1, a);
       Blinker();
       ACS_Delay(1);

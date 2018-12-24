@@ -143,7 +143,7 @@ static void Lith_PlayerDeath(void)
       while(p->dead)
       {
          ACS_Delay(35 * 5);
-         Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         Log(c"%S", Language(cLANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }
    }
    #endif
@@ -189,7 +189,7 @@ stkcall
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
 {
    upgrade_t *upgr = p->upgrademap.find(name);
-   if(!upgr) Log("null pointer trying to find upgrade %i", name);
+   if(!upgr) Log(c"null pointer trying to find upgrade %i", name);
    return upgr;
 }
 
@@ -344,7 +344,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->logB(1, "%S", Language(LANG "LOG_BossWarn%s", p->discrim));
+      p->logB(1, "%S", Language(cLANG "LOG_BossWarn%s", p->discrim));
 }
 #endif
 

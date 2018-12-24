@@ -34,7 +34,7 @@ static void HUD_Ammo(struct player *p)
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
          PrintTextStr("\C[Lith_Green]OUT");
       else
-         PrintTextFmt("\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+         PrintTextFmt(c"\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextX("lhudfont", 0, 224,1, 229-y,0);
    }
 
@@ -50,7 +50,7 @@ static void HUD_Ammo(struct player *p)
          x = -59;
       }
 
-      PrintTextFmt("\C[Lith_Green]%i", wep->ammocur);
+      PrintTextFmt(c"\C[Lith_Green]%i", wep->ammocur);
       PrintTextX("lhudfont", 0, x+224,1, 229-y,0);
    }
 
@@ -76,7 +76,7 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
    PrintSprite(InvNum("PowerStrength") ?
       ":HUD:SplitBackRed" : ":HUD:SplitBack", 0,1, 239,2);
 
-   PrintTextFmt("\C[Lith_Green]%i", p->health);
+   PrintTextFmt(c"\C[Lith_Green]%i", p->health);
    PrintTextX("lhudfont", 0, 34,1, 231,0);
 
    PrintSprite(":HUD:VIT", 2,1, 237,2);
@@ -99,7 +99,7 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
 
    if(CheckFade(fid_health))
    {
-      PrintTextFmt("%i", p->health);
+      PrintTextFmt(c"%i", p->health);
       PrintTextFX("lhudfont", UData.cr, 34,1, 231,0, fid_health);
    }
 
@@ -145,7 +145,7 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
    Lith_HUD_Score(p, "%S\Cnscr", p->score, "cnfont", "j", 320,2, 3,1);
 
-   if(p->getCVarI(CVAR "hud_showweapons"))
+   if(p->getCVarI(sCVAR "hud_showweapons"))
       PrintSprite(":HUD:Bar", 279,2, 238,2);
 
    Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, "k", 282, 237);

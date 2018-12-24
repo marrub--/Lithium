@@ -64,7 +64,7 @@ static void SetFontMetric(uint key, int xadv, int yofs)
 {
    struct glyph *metr = AllocFontMetric(&fonts[curfont], key);
 
-   int tex = DrawCallI("GetTex", StrParam("lgfx/Font/%s/%u.png", fontnames[curfont], key));
+   int tex = DrawCallI("GetTex", StrParam(c"lgfx/Font/%s/%u.png", fontnames[curfont], key));
    int   w = DrawCallI("GetTexW", tex);
    int   h = DrawCallI("GetTexH", tex);
 
@@ -102,13 +102,13 @@ bool Lith_SetupFontsBegin(uint fontnum)
    if(fontnum >= font_num) return false;
 
    curfont = fontnum;
-   fp = W_Open(StrParam("lfiles/Font_%s.txt", fontnames[fontnum]), c"r");
+   fp = W_Open(StrParam(c"lfiles/Font_%s.txt", fontnames[fontnum]), c"r");
 
    if(fp)
       return true;
    else
    {
-      Log("Warning: Font file not found for font %u (%s), UI may break",
+      Log(c"Warning: Font file not found for font %u (%s), UI may break",
          fontnum, fontnames[fontnum]);
       return false;
    }

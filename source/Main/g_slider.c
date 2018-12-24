@@ -66,8 +66,8 @@ fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a
    {
       char const *suf = a->suf ? a->suf : c"";
       fixed64 amt = roundlk(norm * 100.lk, 10) / 100.lk;
-      if(a->integ) PrintTextFmt("%i%s",     (int)amt, suf);
-      else         PrintTextFmt("%.1k%s", (fixed)amt, suf);
+      if(a->integ) PrintTextFmt(c"%i%s",     (int)amt, suf);
+      else         PrintTextFmt(c"%.1k%s", (fixed)amt, suf);
 
       PrintText(pre->font, CR_WHITE, x + pre->w/2,4, y + pre->h/2,0);
    }

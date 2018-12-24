@@ -15,22 +15,21 @@ void Lith_Obituary(void)
       {"it",   "it",   "its",   "its'",   "it's"   },
    };
 
-   StrEntON
    struct player *p = LocalPlayer;
 
-   __str obit = ServCallS("GetObituary");
-   if(obit == "") return;
+   __str obit = ServCallS(s"GetObituary");
+   if(obit == s"") return;
 
    int rn = ACS_Random(1, 5);
 
-        if(obit == "(falling)")  obit = Language(LANG "OB_Falling_%i",  rn);
-   else if(obit == "(crush)")    obit = Language(LANG "OB_Crush_%i",    rn);
-   else if(obit == "(exit)")     obit = Language(LANG "OB_Exit_%i",     rn);
-   else if(obit == "(drowning)") obit = Language(LANG "OB_Drowning_%i", rn);
-   else if(obit == "(slime)")    obit = Language(LANG "OB_Slime_%i",    rn);
-   else if(obit == "(fire)")     obit = Language(LANG "OB_Fire_%i",     rn);
-   else if(obit == "(suicide)")  obit = Language(LANG "OB_Suicide_%i",  rn);
-   else if(obit == "(default)")  obit = Language(LANG "OB_Default_%i",  rn);
+        if(obit == s"(falling)")  obit = Language(LANG "OB_Falling_%i",  rn);
+   else if(obit == s"(crush)")    obit = Language(LANG "OB_Crush_%i",    rn);
+   else if(obit == s"(exit)")     obit = Language(LANG "OB_Exit_%i",     rn);
+   else if(obit == s"(drowning)") obit = Language(LANG "OB_Drowning_%i", rn);
+   else if(obit == s"(slime)")    obit = Language(LANG "OB_Slime_%i",    rn);
+   else if(obit == s"(fire)")     obit = Language(LANG "OB_Fire_%i",     rn);
+   else if(obit == s"(suicide)")  obit = Language(LANG "OB_Suicide_%i",  rn);
+   else if(obit == s"(default)")  obit = Language(LANG "OB_Default_%i",  rn);
 
    ACS_BeginPrint();
 
@@ -52,9 +51,9 @@ void Lith_Obituary(void)
 
    obit = ACS_EndStrParam();
 
-   if(obit != "") {
+   if(obit != s"") {
       LogDebug(log_dev, "%S", obit);
-      Lith_ForPlayer() p->logB(1, "%S", obit);
+      Lith_ForPlayer() p->logB(1, s"%S", obit);
    }
 }
 #endif

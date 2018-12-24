@@ -43,10 +43,10 @@ void DmonDebugInfo(void)
          if(m->rank  > hirnk) hirnk = m->rank;
       }
 
-      Log("\Cghighest\C- level enemy: lv.%i", hilvl);
-      Log("\Chlowest \C- level enemy: lv.%i", lolvl);
-      Log("\Cghighest\C- rank enemy:  r%i", hirnk);
-      Log("\Chlowest \C- rank enemy:  r%i", lornk);
+      Log(c"\Cghighest\C- level enemy: lv.%i", hilvl);
+      Log(c"\Chlowest \C- level enemy: lv.%i", lolvl);
+      Log(c"\Cghighest\C- rank enemy:  r%i", hirnk);
+      Log(c"\Chlowest \C- rank enemy:  r%i", lornk);
    }
 
    idprev = dmonid;

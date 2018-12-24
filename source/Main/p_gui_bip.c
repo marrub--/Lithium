@@ -237,7 +237,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 
    if(max)
    {
-      PrintTextFmt("%i/%i AVAILABLE", avail, max);
+      PrintTextFmt(c"%i/%i AVAILABLE", avail, max);
       PrintText("cbifont", CR_WHITE, 300,2, 30,1);
    }
 }

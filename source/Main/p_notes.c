@@ -24,7 +24,7 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->notescr, i * 30, 30))
          continue;
 
-      PrintTextFmt(L(LANG "NOTE_FMT"), i + 1);
+      PrintTextFmt(LC(cLANG "NOTE_FMT"), i + 1);
       PrintText("cbifont", CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
 
       if(Lith_GUI_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(cLANG "EMPTY"),

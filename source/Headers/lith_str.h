@@ -7,16 +7,16 @@
 
 #define StrParamBegin(...) \
    (ACS_BeginPrint(), \
-    __nprintf_str(__VA_ARGS__))
+    __nprintf(__VA_ARGS__))
 
 #define StrParam(...) \
    (ACS_BeginPrint(), \
-    __nprintf_str(__VA_ARGS__), \
+    __nprintf(__VA_ARGS__), \
     ACS_EndStrParam())
 
 #define Language(...) \
    (ACS_BeginPrint(), \
-    __nprintf_str(__VA_ARGS__), \
+    __nprintf(__VA_ARGS__), \
     LanguageV(ACS_EndStrParam()))
 
 #define LanguageC(...) LanguageCV(null, __VA_ARGS__)

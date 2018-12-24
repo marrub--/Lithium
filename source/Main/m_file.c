@@ -61,13 +61,13 @@ static int NetClose(void *nfdata)
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         ACS_SetUserCVarString(nf->pnum, StrParam(s"%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
+         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;
       }
 
-      ACS_SetUserCVarString(nf->pnum, StrParam(s"%S_%i", nf->pcvar, cvarnum), s"");
+      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), s"");
 
       Dalloc(coded);
    }
@@ -180,7 +180,7 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
 
       for(int cvarnum;; cvarnum++)
       {
-         __str  cvar  = ACS_GetUserCVarString(pnum, StrParam(s"%S_%i", pcvar, cvarnum));
+         __str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
 
          if(inlen)

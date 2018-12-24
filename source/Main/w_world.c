@@ -335,6 +335,7 @@ begin:
 
    if(ACS_GetCVar(sCVAR "sv_failtime") == 0) for(;;)
    {
+      StrEntOFF
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
           "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "

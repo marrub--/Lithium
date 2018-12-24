@@ -48,7 +48,7 @@ void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
    }
 
    PrintSprite(":HUD:H_W3", 215,2, 240,2);
-   PrintSprite(StrParam(":HUD:H_W%u", (rifle_firemode_max - p->riflefiremode) + 3),
+   PrintSprite(StrParam(c":HUD:H_W%u", (rifle_firemode_max - p->riflefiremode) + 3),
       215,2, 208 + (p->riflefiremode * 16),2);
 }
 

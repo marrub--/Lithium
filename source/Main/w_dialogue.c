@@ -10,11 +10,11 @@
 StrEntON
 
 #define LogTok(tok, s) \
-   Log("(%i:%i) " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, tok->type, \
+   Log(c"(%i:%i) " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, tok->type, \
       tok->textV ? tok->textV : c"<no string>")
 
 #define LogOri(tok, s) \
-   Log("(%i:%i) " s, tok->orig.line, tok->orig.colu)
+   Log(c"(%i:%i) " s, tok->orig.line, tok->orig.colu)
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -544,6 +544,7 @@ void Lith_GSInit_Dialogue(void)
 
 void Lith_LoadMapDialogue(void)
 {
+   StrEntOFF
    // Free any previous dialogue definitions.
    if(dlgdefs)
    {
@@ -561,7 +562,7 @@ void Lith_LoadMapDialogue(void)
 
    struct pstate d = {{
       .bbeg = 4, .bend = 10,
-      .fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), c"r")
+      .fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r")
    }};
 
    if(!d.tb.fp) return;
@@ -595,22 +596,21 @@ done:
 
    if(world.dbgLevel & log_dlg)
    {
-      StrEntOFF
       static char const *dcdnames[] = {
          #define DCD(name) #name,
          #include "lith_dialogue.h"
       };
 
       for(struct dlgdef *def = dlgdefs; def; def = def->next) {
-         Log(s"Dumping code for script %i...", def->num);
+         Log("Dumping code for script %i...", def->num);
          for(int i = 0; i < def->codeC; i++)
-            Log(s"%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
+            Log("%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
                ? dcdnames[def->codeV[i]] : c"");
-         Log(s"Dumping string table for script %i...\n%s");
+         Log("Dumping string table for script %i...\n%s");
          Lith_PrintMem(def->stabV, def->stabC);
       }
 
-      Log(s"Done.");
+      Log("Done.");
    }
 }
 #endif

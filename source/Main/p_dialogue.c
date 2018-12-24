@@ -119,9 +119,9 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    // Top-right text
    switch(vm->trmActi)
    {
-   case TACT_LOGON:  PrintTextFmt("Opening Connection to %s", remote); break;
-   case TACT_LOGOFF: PrintTextStr("Disconnecting...");                 break;
-   default:          PrintTextFmt("Remote: %s",               remote); break;
+   case TACT_LOGON:  PrintTextFmt(c"Opening Connection to %s", remote); break;
+   case TACT_LOGOFF: PrintTextStr("Disconnecting...");                  break;
+   default:          PrintTextFmt(c"Remote: %s",               remote); break;
    }
 
    PrintText("smallfnt", CR_RED, tright,2, 0,1);
@@ -134,8 +134,8 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    switch(vm->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: PrintTextFmt("%s", world.canondate); break;
-   default:          PrintTextStr("Use To Acknowledge");  break;
+   case TACT_LOGOFF: PrintTextFmt(c"%s", world.canondate); break; // TODO
+   default:          PrintTextStr("Use To Acknowledge");   break;
    }
 
    PrintText("smallfnt", CR_RED, tright,2, tbottom,2);
@@ -220,7 +220,7 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
    PrintText("lhudfont", CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
+   PrintTextFmt(c"\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
    PrintText("cbifont", CR_WHITE, left,1, top,1);
    ClearClip();
 
@@ -409,11 +409,11 @@ opDCD_TELEPORT_INTERLEVEL:
    ACS_Teleport_NewMap(IMM, 0, 0);
    HLT;
 
-opDCD_TRACE_S: Log("%s",   STR);   JNC;
-opDCD_TRACE_A: Log("%.8X", vm.ra); JNC;
-opDCD_TRACE_B: Log("%.8X", vm.rb); JNC;
-opDCD_TRACE_C: Log("%.8X", vm.rc); JNC;
-opDCD_TRACE_D: Log("%.8X", vm.rd); JNC;
+opDCD_TRACE_S: Log(c"%s",   STR);   JNC;
+opDCD_TRACE_A: Log(c"%.8X", vm.ra); JNC;
+opDCD_TRACE_B: Log(c"%.8X", vm.rb); JNC;
+opDCD_TRACE_C: Log(c"%.8X", vm.rc); JNC;
+opDCD_TRACE_D: Log(c"%.8X", vm.rd); JNC;
 
 opDCD_SETSTRING:
    __with(int num = IMM; char const *str = STR;)

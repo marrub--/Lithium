@@ -77,7 +77,7 @@ static void ApplyLevels(dmon_t *m, int prev)
 
    for(int i = 0; i < dmgtype_max; i++) {
       ifauto(int, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i],
+         InvGive(StrParam(cOBJ "M_%s%i", dmgtype_names[i],
             min(resist, MAXRANK)), 1);
       }
    }
@@ -250,14 +250,14 @@ void Lith_PrintMonsterInfo(void)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
    {
-      Log("%p (%p %p) %S active: %u id: %.3u\n"
-          "wasdead: %u finalized: %u painwait: %i\n"
-          "level: %.3i rank: %i exp: %i\n"
-          "health: %i/%i\n"
-          "x: %k y: %k z: %k\n"
-          "r: %k h: %k\n"
-          "mi->exp: %lu mi->score: %lli\n"
-          "mi->flags: %i mi->type: %i",
+      Log(c"%p (%p %p) %S active: %u id: %.3u\n"
+           "wasdead: %u finalized: %u painwait: %i\n"
+           "level: %.3i rank: %i exp: %i\n"
+           "health: %i/%i\n"
+           "x: %k y: %k z: %k\n"
+           "r: %k h: %k\n"
+           "mi->exp: %lu mi->score: %lli\n"
+           "mi->flags: %i mi->type: %i",
           m, m->ms, m->mi, m->mi->name, m->active, m->id,
           m->wasdead, m->ms->finalized, m->ms->painwait,
           m->level, m->rank, m->exp,
@@ -267,10 +267,10 @@ void Lith_PrintMonsterInfo(void)
           m->mi->exp, m->mi->score,
           m->mi->flags, m->mi->type);
       for(int i = 0; i < countof(m->resist); i++)
-         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
+         Log(c"resist %s: %i", dmgtype_names[i], m->resist[i]);
    }
    else
-      Log("no active monster");
+      Log(c"no active monster");
 }
 
 script ext("ACS")

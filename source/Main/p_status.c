@@ -27,7 +27,7 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       p->attr.attrs[at]++;
    }
 
-   PrintTextFmt("%.3s", name);
+   PrintTextChr(name, 3);
    PrintText("chfont", CR_WHITE, x-24,1, y,1);
 
    PrintSprite(":UI:AttrBar1", x,1, y,1);
@@ -41,10 +41,10 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
       helptrns += 0.3;
    }
 
-   PrintTextStr(Language(LANG "ATTR_HELP_%s", name));
+   PrintTextStr(Language(cLANG "ATTR_HELP_%.3s", name));
    PrintTextA("chfont", CR_WHITE, x+1,1, y+1,1, helptrns);
 
-   PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
+   PrintTextFmt(c"%u/%i", attr, ATTR_VIS_MAX);
    PrintText("chfont", CR_WHITE, x+202,1, y,1);
 }
 
@@ -70,21 +70,21 @@ void Lith_CBITab_Status(gui_state_t *g, struct player *p)
    PrintTextStr(p->classname);
    PrintText("chfont", CR_WHITE, x,1, y,1);
 
-   StatusInfo(g, x, y += 10, "Lv.",  StrParam("%u", p->attr.level));
-   StatusInfo(g, x, y += 10, "HP",   StrParam("%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, x, y += 10, "Lv.",  StrParam(c"%u", p->attr.level));
+   StatusInfo(g, x, y += 10, "HP",   StrParam(c"%i/%i", p->health, p->maxhealth));
 
    if(p->pclass & pcl_magicuser)
-      StatusInfo(g, x, y += 10, "MP", StrParam("%i/%i", p->mana, p->manamax));
+      StatusInfo(g, x, y += 10, "MP", StrParam(c"%i/%i", p->mana, p->manamax));
 
-   StatusInfo(g, x, y += 10, "EXP",  StrParam("%u", p->attr.exp));
-   StatusInfo(g, x, y += 10, "Next", StrParam("%u", p->attr.expnext));
+   StatusInfo(g, x, y += 10, "EXP",  StrParam(c"%u", p->attr.exp));
+   StatusInfo(g, x, y += 10, "Next", StrParam(c"%u", p->attr.expnext));
 
    x  = 20;
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
    if(p->attr.points)
    {
-      PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
+      PrintTextFmt(c"Divide %u points among your attributes.", p->attr.points);
       PrintText("chfont", CR_WHITE, x,1, y,1);
    }
 

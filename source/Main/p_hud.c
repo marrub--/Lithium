@@ -16,7 +16,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       fixed x = a->x+.2 - 8 * (SLOT_MAX - i);
       fixed y = a->y+.2;
 
-      PrintTextFmt("%i", i);
+      PrintTextFmt(c"%i", i);
       PrintTextX("lhudfontsmall", a->ncol[min(slot - 1, 2)], x,2, y,2);
 
       if(p->weapon.cur->info->slot == i)
@@ -24,7 +24,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 
       if(CheckFade(fid_slotnS + i))
       {
-         PrintTextFmt("\C%S%i", a->scol, i);
+         PrintTextFmt(c"\C%S%i", a->scol, i);
          PrintTextFX("lhudfontsmall", 0, x,2, y,2, fid_slotnS + i);
       }
    }
@@ -34,9 +34,10 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 {
    if(p->getCVarI(sCVAR "hud_showscore"))
    {
-      __str scr = StrParam(fmt, scoresep(scrn));
+      char fmt_[128]; sprintf(fmt_, c"%S", fmt); // TODO
+      __str scr = StrParam(fmt_, scoresep(scrn));
 
-      PrintTextFmt("\C%S%S", cr, scr);
+      PrintTextFmt(c"\C%S%S", cr, scr);
       PrintTextX(font, 0, x,xa, y,ya);
 
       if(p->score > p->old.score)
@@ -47,7 +48,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
       if(p->scoreaccumtime > 0)
       {
          SetFade(fid_scacum, 5, 0.1);
-         p->scoreaccumstr = StrParam("%c%S", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
+         p->scoreaccumstr = StrParam(c"%c%S", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
       }
 
       if(CheckFade(fid_schit1))
@@ -70,7 +71,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 
    if(p->getCVarI(sCVAR "hud_showlvl"))
    {
-      PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
+      PrintTextFmt(c"\C%SLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf_str(" (%u pts)", p->attr.points);
       PrintTextX(font, 0, x,xa, y+20,ya);
    }

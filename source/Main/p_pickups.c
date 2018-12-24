@@ -8,8 +8,8 @@ StrEntON
 #define name(n) LANG "PK_" #n
 
 #define StupidName(w) \
-   Language("%S_%.3i", pickupnames[w], \
-      ACS_Random(0, strtoi_str(Language("%S_NUM", pickupnames[w]), null, 10)))
+   Language(c"%S_%.3i", pickupnames[w], \
+      ACS_Random(0, strtoi_str(Language(c"%S_NUM", pickupnames[w]), null, 10)))
 
 static __str const pickupnames[weapon_max] = {
    [weapon_unknown]    = name(weapon_unknown),
@@ -42,16 +42,16 @@ static void Lith_StupidPickup(struct player *p, int weapon)
 
    int iunc  = ACS_Random(0, uncnum);
    int ifmt  = ACS_Random(0, fmtnum);
-   int flag  = strtoi_str(Language(LANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
+   int flag  = strtoi_str(Language(cLANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
 
    if(flag & 2) {
       ifmt = ACS_Random(0, fmtnum);
-      flag = strtoi_str(Language(LANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
+      flag = strtoi_str(Language(cLANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
    }
 
    __str nam = StupidName(weapon);
-   __str fmt = Language(LANG "PK_GET_%.3i", ifmt);
-   __str unc = Language(LANG "PK_UNCERTAIN_%.3i", iunc);
+   __str fmt = Language(cLANG "PK_GET_%.3i", ifmt);
+   __str unc = Language(cLANG "PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) p->logB(1, fmt, nam, nam);
@@ -64,7 +64,7 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
    if(p->getCVarI(sCVAR "player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->logB(1, L(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
+      p->logB(1, L(LANG "PK_GET_000"), Language(cLANG "INFO_SHORT_%S", info->name));
    else
       p->logB(1, "Acquired impossible object");
 }
@@ -79,7 +79,7 @@ void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
    if(p->getCVarI(sCVAR "player_stupidpickups"))
       nam = StupidName(weapon);
    else
-      nam = Language(LANG "INFO_SHORT_%S", info->name);
+      nam = Language(cLANG "INFO_SHORT_%S", info->name);
 
    __str msg = L(LANG "LOG_Sell");
 

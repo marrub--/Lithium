@@ -13,7 +13,7 @@ StrEntON
 void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size)
 {
    if(world.dbgSave)
-      Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
+      Log(c"Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
 
    savechunk_t chunk = {iden, vers & Save_VersMask, size};
    Lith_FWrite32(&chunk, sizeof chunk, 4, save->fp);
@@ -47,7 +47,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
    rewind(save->fp);
 
    if(world.dbgSave)
-      Log("Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
+      Log(c"Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
 
    for(int i = 0;; i++)
    {
@@ -63,7 +63,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
       {
          if(chunker) chunker(save, &chunk);
 
-         if(world.dbgSave) Log("Lith_LoadChunk: Found valid chunk at %i", i);
+         if(world.dbgSave) Log(c"Lith_LoadChunk: Found valid chunk at %i", i);
 
          return i;
       }
@@ -72,7 +72,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
    }
 
    if(world.dbgSave)
-      Log("Lith_LoadChunk: Couldn't find anything");
+      Log(c"Lith_LoadChunk: Couldn't find anything");
 
    return -1;
 }

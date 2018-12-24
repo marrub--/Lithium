@@ -31,8 +31,7 @@ static struct magic_info const minf[] = {
 script
 static void GiveMagic(struct magic_info const *m)
 {
-   StrEntON
-   ACS_SetWeapon(StrParam(OBJ "%S", m->name));
+   ACS_SetWeapon(StrParam(OBJ "%s", m->name));
 }
 
 script

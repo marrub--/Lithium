@@ -31,7 +31,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
 
-      PrintTextFmt("Filter: %S", L(upgrcateg[filter]));
+      PrintTextFmt(c"Filter: %S", L(upgrcateg[filter]));
    }
    else
       PrintTextStr("Filter: \CjAll");
@@ -110,11 +110,11 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
       bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
 
       if(upgr->active)
-         PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt(c"Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf); // TODO
       else if(over)
-         PrintTextFmt("Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt(c"Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf); // TODO
       else
-         PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf);
+         PrintTextFmt(c"Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf); // TODO
 
       PrintText("cbifont", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
@@ -134,7 +134,7 @@ static void GUIUpgradeRequirements(gui_state_t *g, struct player *p, upgrade_t *
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
-      PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc);
+      PrintTextFmt(c"%S will multiply score by \C%c%i\C-%%", op, cr, perc); // TODO
       PrintText("cbifont", CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
@@ -155,7 +155,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%S%S", scoresep(p->getCost(&upgr->info->shopdef)), mark);
+   if(upgr->info->cost) cost = StrParam(c"%S%S", scoresep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = L(LANG "FREE");
 
    PrintTextStr(cost);
@@ -167,7 +167,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
 
    // Effect
    ifauto(__str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
-      PrintTextFmt("%S %S", L(LANG "EFFECT"), effect);
+      PrintTextFmt(c"%S %S", L(LANG "EFFECT"), effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
    PrintText("cbifont",

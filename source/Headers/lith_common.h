@@ -27,8 +27,8 @@
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar(DCVAR "debug_level") & (level)) \
-      Log(#level ": " __VA_ARGS__); \
+   do if(ACS_GetCVar(sDCVAR "debug_level") & (level)) \
+      Log(c"" #level ": " __VA_ARGS__); \
    while(0)
 
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
@@ -128,7 +128,7 @@ enum {
 
 // Extern Functions ----------------------------------------------------------|
 
-void Log(__str fmt, ...);
+void Log(char const *fmt, ...);
 
 script void Lith_PrintMem(void const *data, size_t size);
 

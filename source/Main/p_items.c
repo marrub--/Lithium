@@ -126,7 +126,7 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
    item->link.construct(item);
 
    if(data) item->data = *data;
-   else     Log("invalid item, developer is an idiot");
+   else     Log(c"invalid item, developer is an idiot");
 
    if(!item->Destroy) item->Destroy = Lith_Item_Destroy;
    if(!item->Place  ) item->Place   = Lith_Item_Place;
@@ -306,7 +306,7 @@ void *Lith_ItemCreate(int w, int h)
    __str type = GetMembS(0, "m_invtype");
    __str tag  = GetMembS(0, "m_invname");
    u32   scr  = GetMembI(0, "m_invsell");
-   __str spr  = StrParam(":ItemSpr:%S", tag);
+   __str spr  = StrParam(c":ItemSpr:%S", tag);
    __str name = GetPropS(0, APROP_NameTag);
 
    LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
@@ -435,7 +435,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
 
       if(sel->scr)
       {
-         PrintTextFmt("(%S\Cnscr\C-)", scoresep(sel->scr));
+         PrintTextFmt(c"(%S\Cnscr\C-)", scoresep(sel->scr));
          PrintText("cbifont", CR_WHITE, x_+18,1, y_,1);
       }
 
@@ -447,7 +447,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       }
    }
 
-   PrintTextFmt("Equipped (%S)", ServCallS("GetArmorDT"));
+   PrintTextFmt(c"Equipped (%S)", ServCallS("GetArmorDT"));
    PrintText("cbifont", CR_WHITE, 40,1, 38,1);
 
    for(int i = 0; i < aslot_max; i++)

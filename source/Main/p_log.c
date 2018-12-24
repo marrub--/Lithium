@@ -100,7 +100,7 @@ void Lith_PlayerLogEntry(struct player *p)
       Vec_GrowN(p->log.maps, 1, 32);
       lm = &Vec_Next(p->log.maps);
       *lm = (struct logmap){
-         .name = StrParam("%tS", PRINTNAME_LEVELNAME),
+         .name = StrParam(c"%tS", PRINTNAME_LEVELNAME),
          .lnum = lnum
       };
    }
@@ -115,7 +115,7 @@ void Lith_LogS(int levl, int type)
 {
    __str name = ServCallS("GetLogName");
 
-   if(name[0] == '_') name = Language(LANG "LOG%S", name);
+   if(name[0] == '_') name = Language(cLANG "LOG%S", name);
 
    withplayer(LocalPlayer) switch(type) {
    case msg_ammo: if(p->getCVarI(sCVAR "player_ammolog"))

@@ -27,7 +27,7 @@ static void HUD_Ammo(struct player *p)
       if(type & 2 && !wep->ammocur)
          PrintTextStr("\C[Lith_Blue]OUT");
       else
-         PrintTextFmt("\C[Lith_Blue]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+         PrintTextFmt(c"\C[Lith_Blue]%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextX("lhudfont", 0, 242,1, 227,0);
    }
 
@@ -43,7 +43,7 @@ static void HUD_Ammo(struct player *p)
          x = -58;
       }
 
-      PrintTextFmt("\C[Lith_Blue]%i", wep->ammocur);
+      PrintTextFmt(c"\C[Lith_Blue]%i", wep->ammocur);
       PrintTextX("lhudfont", 0, x+242,1, 227,0);
    }
 
@@ -65,7 +65,7 @@ static void HUD_Health(struct player *p)
 
    PrintSprite(":HUD_D:HPBack", 0,1, 239,2);
 
-   PrintTextFmt("\C[Lith_Blue]%i", p->health);
+   PrintTextFmt(c"\C[Lith_Blue]%i", p->health);
    PrintTextX("lhudfont", 0, 18,1, 228,0);
 
    __str gfx = weapongfx[p->weapon.cur->info->slot];

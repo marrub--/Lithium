@@ -88,14 +88,14 @@ void HudMessage(__str fmt, ...)
    ACS_MoreHudMessage();
 }
 
-void Log(__str fmt, ...)
+void Log(char const *fmt, ...)
 {
    va_list vl;
 
    ACS_BeginPrint();
 
    va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
 
    ACS_EndLog();

@@ -25,8 +25,8 @@ void Lith_Rend(bool hit, int set)
 
    if(!hit) num = set;
 
-   __str graphic = hit ? StrParam(":Weapon:RendHit%i", num)
-                       : StrParam(":Weapon:Rend%i",    num);
+   __str graphic = hit ? StrParam(c":Weapon:RendHit%i", num)
+                       : StrParam(c":Weapon:Rend%i",    num);
 
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 2, 0.1);
@@ -182,7 +182,7 @@ void Lith_MagicSelect(int num)
 
       ACS_SetHudSize(64, 64);
       for(int i = 0; i < 4; i++) {
-         DrawSpriteAlpha(StrParam(":MagicSel:Slot%i_%i", num, i + 1),
+         DrawSpriteAlpha(StrParam(c":MagicSel:Slot%i_%i", num, i + 1),
             hid_magicsel, 0.1, 0.1, TS*3, 0.5);
          ACS_Delay(3);
       }

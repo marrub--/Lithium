@@ -190,7 +190,7 @@ void Lith_PlayerHUD(struct player *p)
       if(p->pclass == pcl_cybermage)
       {
          int time = (ACS_Timer() % 16) / 4;
-         DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
+         DrawSpriteXX(StrParam(c":HUD_C:ScopeOverlay%i", time + 1),
             HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
 
          for(int i = 0; i < 200; i++)
@@ -218,7 +218,7 @@ void Lith_PlayerLevelup(struct player *p)
    if(p->old.attr.level && p->old.attr.level < p->attr.level)
    {
       ACS_LocalAmbientSound("player/levelup", 127);
-      p->logH(1, Language("LITH_LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
+      p->logH(1, Language(cLANG "LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
    }
 
    if(p->attr.lvupstr[0])
@@ -245,7 +245,7 @@ static void HUD_StringStack(struct player *p)
    {
       hudstr_t *hudstr = Salloc(hudstr_t);
       hudstr->link.construct(hudstr);
-      hudstr->str = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
+      hudstr->str = StrParam(c"%.8X", ACS_Random(0, 0x7FFFFFFF));
 
       hudstr->link.link(&p->hudstrlist);
 
@@ -275,7 +275,7 @@ static void HUD_Waves(struct player *p)
 
    // Sine (health)
    pos = (10 + timer) % 160;
-   DrawSpriteFade(StrParam(":HUD:H_D1%i", frame),
+   DrawSpriteFade(StrParam(c":HUD:H_D1%i", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
       25.1 + pos,

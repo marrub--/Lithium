@@ -75,9 +75,9 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
          char color = p->getCVarI(sCVAR "scanner_color") & 0x7F;
 
               if(six)     UData.tagstr = "\Cg6";
-         else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
-         else if(phantom) UData.tagstr = StrParam("\Cg%tS", 0);
-         else             UData.tagstr = StrParam("\C%c%tS", color, 0);
+         else if(henshin) UData.tagstr = StrParam(c"\CgLegendary\C%c %tS", color, 0);
+         else if(phantom) UData.tagstr = StrParam(c"\Cg%tS", 0);
+         else             UData.tagstr = StrParam(c"\C%c%tS", color, 0);
       }
 
       if(!healthset)
@@ -98,7 +98,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
          int nsplit = min(m->maxhealth / (fixed)shp, 7);
          int split  = ceilk(chp / (fixed)m->maxhealth * nsplit);
          int splith = m->maxhealth / (fixed)nsplit;
-         UData.tagstr    = StrParam("%S lv.%i", UData.tagstr, level);
+         UData.tagstr    = StrParam(c"%S lv.%i", UData.tagstr, level);
          UData.rank      = m->rank;
          UData.splitfrac = (chp - (splith * (split - 1))) / (fixed)splith;
          UData.split     = minmax(split, 1, 7);
@@ -146,11 +146,11 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 
    // Rank
    if(UData.rank) for(int i = 1; i <= UData.rank; i++)
-      PrintSprite(StrParam(":UI:Rank%i", i), 100+ox + i*6,1, 216+oy,1);
+      PrintSprite(StrParam(c":UI:Rank%i", i), 100+ox + i*6,1, 216+oy,1);
 
    // Hit indicator
    if(UData.hdelta && CheckFade(fid_vscan)) {
-      PrintTextFmt("-%i", UData.hdelta);
+      PrintTextFmt(c"-%i", UData.hdelta);
       PrintTextFX("cbifont", CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
@@ -161,8 +161,8 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    PrintTextStr(UData.tagstr);
    PrintTextX(font, CR_WHITE, 160+ox,4, 216+oy,2);
 
-   if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
-   else                PrintTextFmt("%uhp",  UData.health);
+   if(UData.maxhealth) PrintTextFmt(c"%u/%u", UData.health, UData.maxhealth);
+   else                PrintTextFmt(c"%uhp",  UData.health);
    PrintTextX(UData.freak ? "alienfont" : font, CR_WHITE, 160+ox,4, 225+oy,2);
 
    // Health bar
@@ -170,11 +170,11 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    {
       int y = afnt ? 201 : 205;
       SetClip(120 + ox, y + oy, 80 * UData.splitfrac, 2);
-      PrintSprite(StrParam(":UI:HealthBar%i", UData.split), 120+ox,1, y+oy,1);
+      PrintSprite(StrParam(c":UI:HealthBar%i", UData.split), 120+ox,1, y+oy,1);
       ClearClip();
 
       if(UData.split > 1)
-         PrintSprite(StrParam(":UI:HealthBar%i", UData.split - 1), 120+ox,1, y+oy,1);
+         PrintSprite(StrParam(c":UI:HealthBar%i", UData.split - 1), 120+ox,1, y+oy,1);
    }
 }
 
