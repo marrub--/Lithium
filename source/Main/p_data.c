@@ -12,29 +12,29 @@ StrEntON
 static void SetupAttributes(struct player *p)
 {
    StrEntOFF
-   p->attr.names[at_acc] = "ACC";
-   p->attr.names[at_def] = "DEF";
-   p->attr.names[at_str] = "STR";
-   p->attr.names[at_vit] = "VIT";
-   p->attr.names[at_stm] = "STM";
-   p->attr.names[at_luk] = "LUK";
+   memcpy(p->attr.names[at_acc], "ACC", 3);
+   memcpy(p->attr.names[at_def], "DEF", 3);
+   memcpy(p->attr.names[at_str], "STR", 3);
+   memcpy(p->attr.names[at_vit], "VIT", 3);
+   memcpy(p->attr.names[at_stm], "STM", 3);
+   memcpy(p->attr.names[at_luk], "LUK", 3);
 
    switch(p->pclass) {
-   case pcl_marine:    p->attr.names[at_spc] = "RGE"; break;
-   case pcl_cybermage: p->attr.names[at_spc] = "CON"; break;
-   case pcl_informant: p->attr.names[at_spc] = "ADR"; break;
-   case pcl_wanderer:  p->attr.names[at_spc] = "AGI"; break;
-   case pcl_assassin:  p->attr.names[at_spc] = "RSH"; break;
-   case pcl_darklord:  p->attr.names[at_spc] = "REF"; break;
-   case pcl_thoth:     p->attr.names[at_spc] = "???"; break;
+   case pcl_marine:    memcpy(p->attr.names[at_spc], "RGE", 3); break;
+   case pcl_cybermage: memcpy(p->attr.names[at_spc], "CON", 3); break;
+   case pcl_informant: memcpy(p->attr.names[at_spc], "ADR", 3); break;
+   case pcl_wanderer:  memcpy(p->attr.names[at_spc], "AGI", 3); break;
+   case pcl_assassin:  memcpy(p->attr.names[at_spc], "RSH", 3); break;
+   case pcl_darklord:  memcpy(p->attr.names[at_spc], "REF", 3); break;
+   case pcl_thoth:     memcpy(p->attr.names[at_spc], "???", 3); break;
    }
 
    if(p->pclass & pcl_robot) {
-      p->attr.names[at_vit] = "POT";
-      p->attr.names[at_stm] = "REP";
+      memcpy(p->attr.names[at_vit], "POT", 3);
+      memcpy(p->attr.names[at_stm], "REP", 3);
    } else if(p->pclass & pcl_nonhuman) {
-      p->attr.names[at_vit] = "POT";
-      p->attr.names[at_stm] = "REG";
+      memcpy(p->attr.names[at_vit], "POT", 3);
+      memcpy(p->attr.names[at_stm], "REG", 3);
    }
 
    p->attr.expnext = 500;

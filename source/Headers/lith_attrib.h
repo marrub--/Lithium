@@ -32,7 +32,7 @@ struct player_attributes
    u32 points;
    u32 attrs[at_max];
 
-   char const *names[at_max];
+   char names[at_max][3];
    char lvupstr[130];
 };
 
