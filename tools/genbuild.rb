@@ -29,7 +29,7 @@ hdr = source/Headers
 ir  = ir
 target = --bc-target=ZDoom
 warn   = --warn-all --no-warn-parentheses
-lflags = $target --bc-zdacs-init-delay --bc-zdacs-chunk-STRE
+lflags = $target --bc-zdacs-init-delay
 cflags = $target $warn -i$hdr --alloc-Aut 4096
 
 rule cc
