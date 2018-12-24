@@ -30,12 +30,11 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr, int x, int xa, int y, int ya)
+void Lith_HUD_Score(struct player *p, char const *fmt, i96 scrn, __str font, __str cr, int x, int xa, int y, int ya)
 {
    if(p->getCVarI(sCVAR "hud_showscore"))
    {
-      char fmt_[128]; sprintf(fmt_, c"%S", fmt); // TODO
-      __str scr = StrParam(fmt_, scoresep(scrn));
+      __str scr = StrParam(fmt, scoresep(scrn));
 
       PrintTextFmt(c"\C%S%S", cr, scr);
       PrintTextX(font, 0, x,xa, y,ya);

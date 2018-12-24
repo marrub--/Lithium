@@ -117,8 +117,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    PrintText("smallfnt", CR_RED, 0,1, 0,1);
 
    // Top-right text
-   switch(vm->trmActi)
-   {
+   switch(vm->trmActi) {
    case TACT_LOGON:  PrintTextFmt(c"Opening Connection to %s", remote); break;
    case TACT_LOGOFF: PrintTextStr("Disconnecting...");                  break;
    default:          PrintTextFmt(c"Remote: %s",               remote); break;
@@ -134,8 +133,14 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    switch(vm->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: PrintTextFmt(c"%s", world.canondate); break; // TODO
-   default:          PrintTextStr("Use To Acknowledge");   break;
+   case TACT_LOGOFF: {
+      char const *date = world.canondate;
+      PrintTextChr(date, strlen(date));
+      break;
+   }
+   default:
+      PrintTextStr("Use To Acknowledge");
+      break;
    }
 
    PrintText("smallfnt", CR_RED, tright,2, tbottom,2);
@@ -143,7 +148,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    // Contents
    SetSize(g->w, g->h);
 
-   char pict[32]; sprintf(pict, c":Terminal:%s", vm->trmPict);
+   char pict[32] = ":Terminal:"; strcat(pict, vm->trmPict);
 
    switch(vm->trmActi)
    {
@@ -205,9 +210,10 @@ script
 static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
 {
    enum {left = 37, top = 75};
-   char icon[32]; sprintf(icon, c":Dialogue:Icon%s", vm->sr[DSTR_ICON]);
+
    char const *name = vm->sr[DSTR_NAME];
    char const *remo = vm->sr[DSTR_REMOTE];
+   char icon[32] = ":Dialogue:Icon"; strcat(icon, vm->sr[DSTR_ICON]);
 
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);

@@ -20,13 +20,12 @@ bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj)
       (def->shopCanBuy ? def->shopCanBuy(p, def, obj) : true);
 }
 
-bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namefmt, bool nodelivery, bool nolog)
+bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
 {
    if(!p->canBuy(def, obj))
       return false;
 
-   char namefmt_[128]; sprintf(namefmt_, c"%S", namefmt); // TODO
-   if(!nolog) p->logF("Bought %S", Language(namefmt_, def->name));
+   if(!nolog) p->logF("Bought %S", Language(namefmt, def->name));
 
    if(def->bipunlock)
    {

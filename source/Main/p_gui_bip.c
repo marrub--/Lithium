@@ -120,7 +120,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          {
             struct page *page = bip->result[i];
             struct page_info pinf = Lith_GetPageInfo(page);
-            char flname[32]; sprintf(flname, c"%S", pinf.flname);
+            char flname[32]; lstrcpy_str(flname, pinf.flname);
 
             if(Lith_GUI_Button_Id(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain)))
             {

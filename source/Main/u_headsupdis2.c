@@ -90,7 +90,7 @@ void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 
    Lith_HUD_Log(p, CR_RED, 0, -10);
    Lith_HUD_KeyInd(p, 180, 21, true, 0.8);
-   Lith_HUD_Score(p, "\C[Lith_Red]%S\Cnscr", p->score, "cnfont", "a", 160,0, 3,1);
+   Lith_HUD_Score(p, c"\C[Lith_Red]%S\Cnscr", p->score, "cnfont", "a", 160,0, 3,1);
 
    if(p->getCVarI(CVAR "hud_showweapons"))
       PrintSprite(":HUD_C:Bar", 320,2, 220,2);

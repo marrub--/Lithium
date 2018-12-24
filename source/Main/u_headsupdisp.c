@@ -143,7 +143,7 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
 
    #if LITHIUM
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
-   Lith_HUD_Score(p, "%S\Cnscr", p->score, "cnfont", "j", 320,2, 3,1);
+   Lith_HUD_Score(p, c"%S\Cnscr", p->score, "cnfont", "j", 320,2, 3,1);
 
    if(p->getCVarI(sCVAR "hud_showweapons"))
       PrintSprite(":HUD:Bar", 279,2, 238,2);

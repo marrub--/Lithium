@@ -4,6 +4,14 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#define CpyStrLocal(out, st) \
+   do { \
+      ACS_BeginPrint(); \
+      ACS_PrintLocalized(st); \
+      __str s = ACS_EndStrParam(); \
+      for(int i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
+   } while(0)
+
 StrEntOFF
 
 #define StrHashImpl() \
@@ -99,11 +107,11 @@ __str LanguageV(__str name)
 char *LanguageVC(char *out, char const *name)
 {
    noinit static char sbuf[8192];
+
    if(!out) out = sbuf;
+   CpyStrLocal(out, l_strdup(name));
 
-   sprintf(out, "%LS", l_strdup(name));
-
-   while(out[0] == '$') sprintf(out, "%LS", l_strdup(&out[1]));
+   while(out[0] == '$') CpyStrLocal(out, l_strdup(&out[1]));
 
    return out;
 }

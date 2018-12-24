@@ -235,7 +235,7 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, int pclass)
 
    if(!page && pclass) ifauto(char const *, discrim, Lith_PlayerDiscriminator(pclass))
    {
-      bip_name_t tag; sprintf(tag, c"%s%s", name, discrim);
+      bip_name_t tag = {}; strcpy(tag, name); strcat(tag, discrim);
       page = bip->find(tag);
    }
 

@@ -121,7 +121,7 @@ void Lith_CBITab_Shop(gui_state_t *g, struct player *p)
    ClearClip();
 
    if(Lith_GUI_Button(g, LC(cLANG "BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
-      p->buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
+      p->buy(&item->shopdef, item, cLANG "SHOP_TITLE_%S", false);
 }
 #endif
 
