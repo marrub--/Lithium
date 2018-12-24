@@ -194,7 +194,7 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
          PrintText("cbifont", CR_ORANGE, 200,4, 45 + oy,1);
 
          #define DrawText(txt, pos, cr, x, y) \
-            PrintTextFmt("%.*S%S", pos, txt, pos == typeon->len ? Ticker("\n|", "") : "|"), \
+            PrintTextFmt(c"%.*S%s", pos, txt, pos == typeon->len ? Ticker(c"\n|", c"") : c"|"), \
             PrintText("cbifont", cr, x,1, y+oy,1)
 
          // render an outline if the page has an image
