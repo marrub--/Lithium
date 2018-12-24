@@ -14,10 +14,8 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
    PrintText("cbifont", CR_WHITE, 32,2, 40,0);
    Lith_GUI_BasicCheckbox(g, &CBIState(g)->noteedit, 39, 40);
 
-#pragma GDCC STRENT_LITERAL OFF
-   if(Lith_GUI_Button(g, LC(LANG "CLEAR"), 16, 48, Pre(btnclear)))
+   if(Lith_GUI_Button(g, LC(cLANG "CLEAR"), 16, 48, Pre(btnclear)))
       Lith_GUI_TextBox_Reset(st);
-#pragma GDCC STRENT_LITERAL ON
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->notescr, 15, 63, 280, 160, 30 * countof(p->notes), 240);
 
@@ -27,12 +25,10 @@ void Lith_CBITab_Notes(gui_state_t *g, struct player *p)
          continue;
 
       PrintTextFmt(L(LANG "NOTE_FMT"), i + 1);
-      PrintText("cbifont", CR_WHITE, 32+g->ox,2, i * 30 + g->oy,1);
+      PrintText("cbifont", CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
 
-#pragma GDCC STRENT_LITERAL OFF
-      if(Lith_GUI_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(LANG "EMPTY"),
-         37, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
-#pragma GDCC STRENT_LITERAL ON
+      if(Lith_GUI_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(cLANG "EMPTY"),
+         44, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
       {
          int l = CBIState(g)->notebox.tbptr;
          char const *s = Lith_CPS_Print(CBIState(g)->notebox.txtbuf, l);

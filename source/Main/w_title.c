@@ -41,10 +41,8 @@ void Lith_Title(void)
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-#pragma GDCC STRENT_LITERAL OFF
-   char const *txt = LC(LANG "OPENER");
+   char const *txt = LC(cLANG "OPENER");
    int len = strlen(txt);
-#pragma GDCC STRENT_LITERAL ON
 
    for(int t = 0, pos = 0;;)
    {

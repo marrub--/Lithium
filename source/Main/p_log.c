@@ -118,7 +118,7 @@ void Lith_LogS(int levl, int type)
    if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
    withplayer(LocalPlayer) switch(type) {
-   case msg_ammo: if(p->getCVarI(CVAR "player_ammolog"))
+   case msg_ammo: if(p->getCVarI(sCVAR "player_ammolog"))
    case msg_huds: p->logH(levl, "%S", name); break;
    case msg_full: p->logF(      "%S", name); break;
    case msg_both: p->logB(levl, "%S", name); break;
@@ -177,11 +177,11 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
 script
 void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
 {
-   if(p->getCVarI(CVAR "hud_showlog"))
+   if(p->getCVarI(sCVAR "hud_showlog"))
    {
       int yo;
 
-      if(p->getCVarI(CVAR "hud_logbig")) {yo = 200; SetSize(320, 240);}
+      if(p->getCVarI(sCVAR "hud_logbig")) {yo = 200; SetSize(320, 240);}
       else                               {yo = 255; SetSize(480, 300);}
 
       int i = 0;
@@ -192,7 +192,7 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
          int y = 10 * i;
          int ya;
 
-         if(p->getCVarI(CVAR "hud_logfromtop"))
+         if(p->getCVarI(sCVAR "hud_logfromtop"))
             {ya = 1; y = 20 + y;}
          else
             {ya = 2; y = (yo - y) + yy;}

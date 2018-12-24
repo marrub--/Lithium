@@ -11,7 +11,7 @@ StrEntOFF
 struct magic_info {
    int st;
    int x, y;
-   char const *name, *classname;
+   char const *name;
 };
 
 // Static Objects ------------------------------------------------------------|
@@ -81,10 +81,10 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 }
 
 script
-static void GivePlayerZ(int tid, struct player *p, __str name)
+static void GivePlayerZ(int tid, struct player *p)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
-      SetMembI(tid, name, p->z);
+      SetMembI(tid, s"user_z", p->z);
       ACS_Delay(1);
    }
 }
@@ -156,7 +156,7 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
       SetMembI(tid, "user_y", y);
       SetPropK(tid, APROP_Alpha, manaperc / 2);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
-      GivePlayerZ(tid, p, "user_z");
+      GivePlayerZ(tid, p);
    }
 }
 

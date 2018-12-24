@@ -37,7 +37,7 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, __str namef
 
    bool delivered = false;
 
-   if(!nodelivery && p->getCVarI(CVAR "player_teleshop"))
+   if(!nodelivery && p->getCVarI(sCVAR "player_teleshop"))
    {
       int pufftid;
       int tid;

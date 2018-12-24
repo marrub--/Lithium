@@ -208,12 +208,11 @@ static void GetCode_Cond(struct pstate *d)
 
       if(code == DCD_JNCLASS)
       {
-         #pragma GDCC STRENT_LITERAL OFF
+         StrEntOFF
          #define LITH_X(l, r) \
             if(strcmp(tok->textV, #l) == 0 || strcmp(tok->textV, #r) == 0) \
                {*d->nextCode() = r; goto ok;}
          #include "lith_player.h"
-         #pragma GDCC STRENT_LITERAL ON
 
          LogOri(tok, "GetCode_Cond: invalid playerclass type");
          return;

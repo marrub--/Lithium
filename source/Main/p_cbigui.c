@@ -1,4 +1,4 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
 #include "lith_common.h"
 #include "lith_player.h"
 #include "lith_hudid.h"
@@ -96,7 +96,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 
    gui_state_t *g = &p->cbi.guistate;
 
-   p->cbi.theme = p->getCVarI(CVAR "gui_theme");
+   p->cbi.theme = p->getCVarI(sCVAR "gui_theme");
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
@@ -135,7 +135,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }
 
-   Lith_GUI_End(g, p->getCVarI(CVAR "gui_cursor"));
+   Lith_GUI_End(g, p->getCVarI(sCVAR "gui_cursor"));
 }
 
 void Lith_PlayerResetCBIGUI(struct player *p)

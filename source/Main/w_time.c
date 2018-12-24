@@ -3,7 +3,7 @@
 #include "lith_player.h"
 #include "lith_world.h"
 
-StrEntON
+StrEntOFF
 
 script ext("ACS")
 int Lith_Timer(void)
@@ -13,7 +13,6 @@ int Lith_Timer(void)
 
 char const *Lith_CanonTime(int type)
 {
-   StrEntOFF
    noinit static char ft[64], st[64], dt[64];
 
    int s = 53 + (world.ticks / 35);
@@ -43,6 +42,7 @@ char const *Lith_CanonTime(int type)
 stkcall
 void Lith_FreezeTime(bool on)
 {
+   StrEntON
    static int lmvar frozen;
 
    if(on)

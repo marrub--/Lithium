@@ -16,8 +16,8 @@ static void HUD_Ammo(struct player *p)
    __str typebg;
    int y;
 
-   if(p->getCVarI(CVAR "hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
-   else                                    {y = 0;  typebg = ":HUD:SplitFront";}
+   if(p->getCVarI(sCVAR "hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
+   else                                     {y = 0;  typebg = ":HUD:SplitFront";}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo)
    {

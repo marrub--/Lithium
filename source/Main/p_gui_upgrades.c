@@ -75,9 +75,7 @@ static void GUIUpgradesList(gui_state_t *g, struct player *p)
       else if(upgr->owned)  preset = &guipre.btnlistactive;
       else                  preset = &guipre.btnlistsel;
 
-#pragma GDCC STRENT_LITERAL OFF
-      char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
-#pragma GDCC STRENT_LITERAL ON
+      char *name = LanguageC(cLANG "UPGRADE_TITLE_%S", upgr->info->name);
 
       int *upgrsel = &CBIState(g)->upgrsel;
       if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
@@ -180,15 +178,11 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
 
 static void GUIUpgradeButtons(gui_state_t *g, struct player *p, upgrade_t *upgr)
 {
-#pragma GDCC STRENT_LITERAL OFF
-   if(Lith_GUI_Button(g, LC(LANG "BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
-#pragma GDCC STRENT_LITERAL ON
+   if(Lith_GUI_Button(g, LC(cLANG "BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
       Lith_UpgrBuy(p, upgr, false);
 
-#pragma GDCC STRENT_LITERAL OFF
-   if(Lith_GUI_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
+   if(Lith_GUI_Button(g, upgr->active ? LC(cLANG "DEACTIVATE") : LC(cLANG "ACTIVATE"), 111 + guipre.btndef.w + 2, 205, !upgr->canUse(p)))
       upgr->toggle(p);
-#pragma GDCC STRENT_LITERAL ON
 }
 
 void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p)

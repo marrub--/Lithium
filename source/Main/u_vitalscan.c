@@ -63,7 +63,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 
          UData.tagstr = Lith_RandomName(freak ? 0 : id);
 
-         if(p->getCVarI(CVAR "scanner_bar"))
+         if(p->getCVarI(sCVAR "scanner_bar"))
          {
             UData.oldhealth = UData.health = ACS_Random(0, 666666);
             UData.maxhealth = ACS_Random(0, 666666);
@@ -72,7 +72,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
       }
       else
       {
-         char color = p->getCVarI(CVAR "scanner_color") & 0x7F;
+         char color = p->getCVarI(sCVAR "scanner_color") & 0x7F;
 
               if(six)     UData.tagstr = "\Cg6";
          else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
@@ -132,10 +132,10 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
 
    if(UData.hdtime == 30) SetFade(fid_vscan, 10, 0.1);
 
-   int ox = p->getCVarI(CVAR "scanner_xoffs");
-   int oy = p->getCVarI(CVAR "scanner_yoffs");
+   int ox = p->getCVarI(sCVAR "scanner_xoffs");
+   int oy = p->getCVarI(sCVAR "scanner_yoffs");
 
-   if(p->getCVarI(CVAR "scanner_slide"))
+   if(p->getCVarI(sCVAR "scanner_slide"))
    {
       fixed64 diff = p->yawf - (fixed64)UData.cangle;
       fixed ds = ACS_Sin(diff / tau) * tau;
@@ -155,7 +155,7 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    }
 
    // Tag and health
-   bool  afnt = p->getCVarI(CVAR "scanner_altfont");
+   bool  afnt = p->getCVarI(sCVAR "scanner_altfont");
    __str font = afnt ? "chfont" : "cbifont";
 
    PrintTextStr(UData.tagstr);
@@ -166,7 +166,7 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    PrintTextX(UData.freak ? "alienfont" : font, CR_WHITE, 160+ox,4, 225+oy,2);
 
    // Health bar
-   if(p->getCVarI(CVAR "scanner_bar"))
+   if(p->getCVarI(sCVAR "scanner_bar"))
    {
       int y = afnt ? 201 : 205;
       SetClip(120 + ox, y + oy, 80 * UData.splitfrac, 2);

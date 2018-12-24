@@ -61,7 +61,7 @@ static void Lith_StupidPickup(struct player *p, int weapon)
 
 void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
 {
-   if(p->getCVarI(CVAR "player_stupidpickups"))
+   if(p->getCVarI(sCVAR "player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
       p->logB(1, L(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
@@ -76,7 +76,7 @@ void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
 
    __str nam;
 
-   if(p->getCVarI(CVAR "player_stupidpickups"))
+   if(p->getCVarI(sCVAR "player_stupidpickups"))
       nam = StupidName(weapon);
    else
       nam = Language(LANG "INFO_SHORT_%S", info->name);

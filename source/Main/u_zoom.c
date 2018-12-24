@@ -7,9 +7,6 @@ StrEntON
 
 #define UData UData_Zoom(upgr)
 
-#define IsKindaSmallNumber(x) ((x) > -0.5 && (x) < 0.5)
-#define KindaCloseEnough(x, y) (IsKindaSmallNumber(x - y))
-
 // Scripts -------------------------------------------------------------------|
 
 script ext("ACS") type("net")
@@ -46,12 +43,11 @@ void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
    else
       UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.2);
 
-   if(!KindaCloseEnough(UData.vzoom, UData.zoom))
+   fixed diff = UData.vzoom - UData.zoom;
+   if(diff > 0.5 || diff < -0.5)
    {
-      if(UData.vzoom < UData.zoom)
-         ACS_LocalAmbientSound("player/zoomin",  30);
-      else
-         ACS_LocalAmbientSound("player/zoomout", 30);
+      if(UData.vzoom < UData.zoom) ACS_LocalAmbientSound("player/zoomin",  30);
+      else                         ACS_LocalAmbientSound("player/zoomout", 30);
    }
    else
       UData.vzoom = UData.zoom;
@@ -85,4 +81,3 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 }
 
 // EOF
-

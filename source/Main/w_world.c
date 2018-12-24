@@ -106,21 +106,21 @@ static void CheckModCompat(void)
 static void UpdateGame(void)
 {
    #define Update(n) \
-      if(ACS_GetCVarFixed(DCVAR "version") < n) \
-         __with(ACS_SetCVarFixed(DCVAR "version", n);)
+      if(ACS_GetCVarFixed(sDCVAR "version") < n) \
+         __with(ACS_SetCVarFixed(sDCVAR "version", n);)
 
    Update(Lith_v1_5_1)
-      ACS_SetCVarFixed(CVAR "sv_scoremul", 1.25); // 2.0 => 1.25
+      ACS_SetCVarFixed(sCVAR "sv_scoremul", 1.25); // 2.0 => 1.25
 
    Update(Lith_v1_5_2)
-      ACS_SetCVar(CVAR "sv_difficulty", 10); // 1 => 10
+      ACS_SetCVar(sCVAR "sv_difficulty", 10); // 1 => 10
 
    Update(Lith_v1_6_0)
    {
       Lith_ForPlayer()
       {
-         p->setCVarK(CVAR "player_footstepvol", 0.2); // 1.0 => 0.2
-         p->setCVarI(CVAR "player_ammolog", true); // false => true
+         p->setCVarK(sCVAR "player_footstepvol", 0.2); // 1.0 => 0.2
+         p->setCVarI(sCVAR "player_ammolog", true); // false => true
       }
    }
 
@@ -128,7 +128,7 @@ static void UpdateGame(void)
    {
       Lith_ForPlayer()
       {
-         p->setCVarK(CVAR "weapons_zoomfactor", 1.5); // 3.0 => 1.5
+         p->setCVarK(sCVAR "weapons_zoomfactor", 1.5); // 3.0 => 1.5
       }
    }
    #undef Update
@@ -137,15 +137,15 @@ static void UpdateGame(void)
 
 static void GetDebugInfo(void)
 {
-   bool all = ACS_GetCVar(DCVAR "debug_all");
+   bool all = ACS_GetCVar(sDCVAR "debug_all");
 
-   world.dbgLevel =        ACS_GetCVar(DCVAR "debug_level");
-   world.dbgItems = all || ACS_GetCVar(DCVAR "debug_items");
-   world.dbgBIP   = all || ACS_GetCVar(DCVAR "debug_bip");
-   world.dbgScore = all || ACS_GetCVar(DCVAR "debug_score");
-   world.dbgUpgr  = all || ACS_GetCVar(DCVAR "debug_upgrades");
-   world.dbgSave  = all || ACS_GetCVar(DCVAR "debug_save");
-   world.dbgNoMon =        ACS_GetCVar(DCVAR "debug_nomonsters");
+   world.dbgLevel =        ACS_GetCVar(sDCVAR "debug_level");
+   world.dbgItems = all || ACS_GetCVar(sDCVAR "debug_items");
+   world.dbgBIP   = all || ACS_GetCVar(sDCVAR "debug_bip");
+   world.dbgScore = all || ACS_GetCVar(sDCVAR "debug_score");
+   world.dbgUpgr  = all || ACS_GetCVar(sDCVAR "debug_upgrades");
+   world.dbgSave  = all || ACS_GetCVar(sDCVAR "debug_save");
+   world.dbgNoMon =        ACS_GetCVar(sDCVAR "debug_nomonsters");
 }
 
 static void GSInit(void)
@@ -177,7 +177,7 @@ static void GSInit(void)
       CheckEnemyCompat();
       #endif
 
-      world.game         = ACS_GetCVar(DCVAR "game");
+      world.game         = ACS_GetCVar(sDCVAR "game");
       world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
       world.cbiperf = 10;
@@ -198,7 +198,7 @@ static void MInit(void)
 
    world.islithmap = (world.mapnum & 0xFFFFFC00) == 0x01202000;
 
-   world.pauseinmenus = world.singleplayer && ACS_GetCVar(CVAR "sv_pauseinmenus");
+   world.pauseinmenus = world.singleplayer && ACS_GetCVar(sCVAR "sv_pauseinmenus");
 
    world.soulsfreed = 0;
    #endif
@@ -207,7 +207,7 @@ static void MInit(void)
    world.mapseed = ACS_Random(0, 0x7FFFFFFF);
 
    // Init global score multiplier per-map.
-   world.scoremul = roundlk(ACS_GetCVarFixed(CVAR "sv_scoremul") * 10, 10) / 10;
+   world.scoremul = roundlk(ACS_GetCVarFixed(sCVAR "sv_scoremul") * 10, 10) / 10;
 
    // Give players some extra score if they're playing on extra hard or above.
    if(ACS_GameSkill() >= skill_extrahard)
@@ -231,7 +231,7 @@ static void MSInit(void)
    // Line 1888300 is used as a control line for mod features.
    // Check for if rain should be used.
    if(!ACS_GetLineUDMFInt(1888300, "user_lith_norain") &&
-      (ACS_GetCVar(CVAR "sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")) &&
+      (ACS_GetCVar(sCVAR "sv_rain") || ACS_GetLineUDMFInt(1888300, "user_lith_userain")) &&
       ACS_PlayerCount() <= 1)
    {
       dorain = true;
@@ -253,7 +253,7 @@ static void WSInit(void)
    DmonInit();
    world.bossspawned = false;
 
-   if(ACS_GetCVar(CVAR "sv_sky") && !world.islithmap)
+   if(ACS_GetCVar(sCVAR "sv_sky") && !world.islithmap)
    {
       if(InHell)
       {
@@ -275,7 +275,7 @@ static void WInit(void)
    LogDebug(log_dev, "WINIT RUNNING");
 
    #if LITHIUM
-   if(!ACS_GetCVar(CVAR "sv_nobosses"))
+   if(!ACS_GetCVar(sCVAR "sv_nobosses"))
       SpawnBoss();
 
    // Payout, which is not done on the first map.
@@ -303,7 +303,7 @@ static void WInit(void)
    }
 
    #if LITHIUM
-   if(ACS_GetCVar(CVAR "sv_nobosses") || world.dbgItems)
+   if(ACS_GetCVar(sCVAR "sv_nobosses") || world.dbgItems)
       for(int i = 0; i < cupg_max; i++)
          Lith_InstallCBIItem(i);
    #endif
@@ -333,7 +333,7 @@ begin:
 
    LogDebug(log_dev, "LITH OPEN");
 
-   if(ACS_GetCVar(CVAR "sv_failtime") == 0) for(;;)
+   if(ACS_GetCVar(sCVAR "sv_failtime") == 0) for(;;)
    {
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
@@ -405,7 +405,7 @@ begin:
       }
 
       #if LITHIUM
-      if(world.ticks > ACS_GetCVar(CVAR "sv_failtime") * 35 * 60 * 60 && !world.islithmap)
+      if(world.ticks > ACS_GetCVar(sCVAR "sv_failtime") * 35 * 60 * 60 && !world.islithmap)
       {
          ServCallI("SetEnding", "TimeOut");
          ACS_ChangeLevel("LITHEND", 0, CHANGELEVEL_NOINTERMISSION, -1);

@@ -170,8 +170,8 @@ struct player
    __prop weapontype    {get:  Lith_PlayerCurWeaponType(this)}
    __prop buttonPressed {call: Lith_ButtonPressed(this)}
    __prop setVel        {call: Lith_SetPlayerVelocity(this)}
-   __prop mana          {get:  Lith_CheckActorInventory(->tid, OBJ "MagicAmmo")}
-   __prop manamax       {get:  ACS_GetMaxInventory(->tid, OBJ "MagicAmmo")}
+   __prop mana          {get:  Lith_CheckActorInventory(->tid, sOBJ "MagicAmmo")}
+   __prop manamax       {get:  ACS_GetMaxInventory(->tid, sOBJ "MagicAmmo")}
    __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
    __prop health {get: GetPropI(->tid, APROP_Health),
                   set: SetPropI(->tid, APROP_Health)}

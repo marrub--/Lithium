@@ -204,7 +204,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
       a->level++;
       a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
-      __with(int pts = 7;) switch(p->getCVarI(CVAR "player_lvsys"))
+      __with(int pts = 7;) switch(p->getCVarI(sCVAR "player_lvsys"))
       {
       case atsys_manual: a->points += 7; break;
       case atsys_hybrid:
@@ -328,7 +328,7 @@ void Lith_ResetPlayer(struct player *p)
          PrintDmonAllocSize(p);
          #endif
       } else {
-         p->logH(1, L(LANG "LOG_StartGame"), CVAR "k_opencbi");
+         p->logH(1, L(LANG "LOG_StartGame"), sCVAR "k_opencbi");
       }
 
       p->deliverMail("Intro");

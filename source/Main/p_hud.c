@@ -9,7 +9,7 @@ StrEntON
 
 void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 {
-   if(p->getCVarI(CVAR "hud_showweapons"))
+   if(p->getCVarI(sCVAR "hud_showweapons"))
       for(int i = 1; i < SLOT_MAX; i++)
          ifauto(int, slot, p->weapon.slot[i])
    {
@@ -32,7 +32,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 
 void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr, int x, int xa, int y, int ya)
 {
-   if(p->getCVarI(CVAR "hud_showscore"))
+   if(p->getCVarI(sCVAR "hud_showscore"))
    {
       __str scr = StrParam(fmt, scoresep(scrn));
 
@@ -52,12 +52,12 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
 
       if(CheckFade(fid_schit1))
       {
-         PrintTextFmt("%S", scr);
+         PrintTextStr(scr);
          PrintTextFX(font, CR_ORANGE, x,xa, y,ya, fid_schit1);
       }
       else if(CheckFade(fid_schit2))
       {
-         PrintTextFmt("%S", scr);
+         PrintTextStr(scr);
          PrintTextFX(font, CR_PURPLE, x,xa, y,ya, fid_schit2);
       }
 
@@ -68,7 +68,7 @@ void Lith_HUD_Score(struct player *p, __str fmt, i96 scrn, __str font, __str cr,
       }
    }
 
-   if(p->getCVarI(CVAR "hud_showlvl"))
+   if(p->getCVarI(sCVAR "hud_showlvl"))
    {
       PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf_str(" (%u pts)", p->attr.points);

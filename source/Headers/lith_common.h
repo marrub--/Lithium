@@ -61,25 +61,35 @@
 #define Lith_IsPaused ServCallI(s"GetPaused")
 #define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
 
-#define ServName OBJ "HERMES"
-#define DrawName OBJ "URANUS"
+#define ServName sOBJ "HERMES"
+#define DrawName sOBJ "URANUS"
 
-#define CVAR s"lith_"
-#define DCVAR s"__lith_"
-#define OBJ s"Lith_"
-#define LANG "LITH_"
+#define CVAR  "lith_"
+#define DCVAR "__lith_"
+#define LANG  "LITH_"
+#define OBJ   "Lith_"
 #else
 #define Lith_IsPaused false
 #define Lith_PausableTick()
 
-#define ServName OBJ "Server"
-#define DrawName OBJ "Render"
+#define ServName sOBJ "Server"
+#define DrawName sOBJ "Render"
 
-#define CVAR s"dtap_"
-#define DCVAR s"__dtap_"
-#define OBJ s"Dt"
-#define LANG "DTAP_"
+#define OBJ   "Dt"
+#define CVAR  "dtap_"
+#define DCVAR "__dtap_"
+#define LANG  "DTAP_"
 #endif
+
+#define cCVAR  c"" CVAR
+#define cDCVAR c"" DCVAR
+#define cLANG  c"" LANG
+#define cOBJ   c"" OBJ
+
+#define sCVAR  s"" CVAR
+#define sDCVAR s"" DCVAR
+#define sLANG  s"" LANG
+#define sOBJ   s"" OBJ
 
 #define ServCallI(...) SCallI(ServName, __VA_ARGS__)
 #define ServCallK(...) SCallK(ServName, __VA_ARGS__)

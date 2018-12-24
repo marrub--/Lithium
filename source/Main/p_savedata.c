@@ -23,7 +23,7 @@ savefile_t *Lith_SaveBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 
-   if((save->fp = Lith_NFOpen(p->num, CVAR "psave", 'w')))
+   if((save->fp = Lith_NFOpen(p->num, sCVAR "psave", 'w')))
    {
       save->p = p;
       Lith_SaveWriteChunk(save, Ident_Lith, SaveV_Lith, 0);
@@ -81,7 +81,7 @@ savefile_t *Lith_LoadBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 
-   if((save->fp = Lith_NFOpen(p->num, CVAR "psave", 'r')))
+   if((save->fp = Lith_NFOpen(p->num, sCVAR "psave", 'r')))
    {
       save->p = p;
 

@@ -20,8 +20,8 @@ int LPData(int info, int permutation, bool target)
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
    case pdata_hassigil:   return p->sgacquired;
-   case pdata_weaponzoom: return u.k = p->getCVarK(CVAR "weapons_zoomfactor"), u.i;
-   case pdata_slot3ammo:  return p->getCVarI(CVAR "weapons_slot3ammo");
+   case pdata_weaponzoom: return u.k = p->getCVarK(sCVAR "weapons_zoomfactor"), u.i;
+   case pdata_slot3ammo:  return p->getCVarI(sCVAR "weapons_slot3ammo");
    case pdata_pclass:     return p->pclass;
    case pdata_semifrozen: return p->semifrozen > 0;
    case pdata_addp:       return u.k = p->addpitch,  u.i;

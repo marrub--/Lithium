@@ -81,7 +81,7 @@ void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 {
-   if(UData.activearmor && p->getCVarI(CVAR "hud_showarmorind"))
+   if(UData.activearmor && p->getCVarI(sCVAR "hud_showarmorind"))
    {
       PrintSprite(":HUD:SplitLeft", 12,1, 225,2);
 

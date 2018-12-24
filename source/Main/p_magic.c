@@ -166,7 +166,7 @@ void Lith_MagicSelect(int num)
 {
    withplayer(LocalPlayer)
    {
-      if(!p->getCVarI(CVAR "weapons_magicselanims")) return;
+      if(!p->getCVarI(sCVAR "weapons_magicselanims")) return;
 
       switch(num)
       {
