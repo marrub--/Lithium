@@ -10,8 +10,8 @@ StrEntON
 
 struct boss
 {
-   __str const name;
-   int   const phasenum;
+   char const *name;
+   int  const  phasenum;
 
    int  phase;
    bool dead;
@@ -31,15 +31,15 @@ enum
 // Static Objects ------------------------------------------------------------|
 
 static struct boss bosses_easy[] = {
-   {"James",   2},
+   {c"James",   2},
 };
 
 static struct boss bosses_medi[] = {
-   {"Makarov", 3},
+   {c"Makarov", 3},
 };
 
 static struct boss bosses_hard[] = {
-   {"Isaac",   3},
+   {c"Isaac",   3},
 };
 
 static struct boss *lmvar boss;
@@ -77,13 +77,13 @@ static void Lith_TriggerBoss(void)
    if(!boss) return;
 
    if(boss->dead) {
-      Log("Lith_TriggerBoss: %S is dead, invalid num", boss->name);
+      Log(c"Lith_TriggerBoss: %s is dead, invalid num", boss->name);
       boss = null;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      Log("Lith_TriggerBoss: invalid boss phase");
+      Log(c"Lith_TriggerBoss: invalid boss phase");
       boss = null;
       return;
    }
@@ -91,7 +91,7 @@ static void Lith_TriggerBoss(void)
    if(!boss->phase)
       boss->phase = 1;
 
-   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %S phase %i", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %s phase %i", boss->name, boss->phase);
 
    ServCallI("TriggerBoss");
 
@@ -144,7 +144,7 @@ void Lith_PhantomDeath(void)
       ACS_Delay(25);
       InvGive(OBJ "PlayerDeathNuke", 1);
       ACS_Delay(25);
-      Lith_ForPlayer() p->deliverMail(StrParam("%SDefeated", boss->name));
+      Lith_ForPlayer() p->deliverMail(StrParam(c"%sDefeated", boss->name));
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;
@@ -159,7 +159,7 @@ void Lith_PhantomDeath(void)
       ACS_Delay(2);
    }
 
-   LogDebug(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_PhantomDeath: %s phase %i defeated", boss->name, boss->phase);
 
    Lith_SpawnBossReward();
    world.soulsfreed++;
@@ -181,10 +181,10 @@ void Lith_SpawnBoss(void)
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
-   ServCallI("SpawnBoss", StrParam(OBJ "Boss_%S", boss->name), boss->phase);
+   ServCallI("SpawnBoss", StrParam(cOBJ "Boss_%s", boss->name), boss->phase);
 
-   LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
-   DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_SpawnBoss: Boss %s phase %i spawned", boss->name, boss->phase);
+   DebugNote("boss: %s phase %i spawned\n", boss->name, boss->phase);
 
    world.bossspawned = true;
 }
