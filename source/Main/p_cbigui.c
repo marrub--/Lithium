@@ -78,11 +78,10 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-__str Lith_ThemeName(uint num)
+char const *Lith_ThemeName(uint num)
 {
-   StrEntON
    #define X(n) n,
-   static __str const themes[cbi_theme_max] = {Themes(X)};
+   static char const *themes[cbi_theme_max] = {Themes(X)};
    #undef X
 
    return themes[num >= cbi_theme_max ? 0 : num];

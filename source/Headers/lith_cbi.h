@@ -93,6 +93,6 @@ typedef struct cbi_s
 // Extern Functions ----------------------------------------------------------|
 
 void Lith_PlayerResetCBIGUI(struct player *p);
-__str Lith_ThemeName(uint num);
+char const *Lith_ThemeName(uint num);
 
 #endif
