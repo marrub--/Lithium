@@ -35,13 +35,13 @@ struct dmon_stat {
 
 #include "lith_monsterinfo.h"
 
-static __str const dmgtype_names[dmgtype_max] = {
-   "Bullets",
-   "Energy",
-   "Fire",
-   "Magic",
-   "Melee",
-   "Shrapnel"
+static char const *dmgtype_names[dmgtype_max] = {
+   c"Bullets",
+   c"Energy",
+   c"Fire",
+   c"Magic",
+   c"Melee",
+   c"Shrapnel"
 };
 
 // Static Functions ----------------------------------------------------------|
