@@ -170,16 +170,16 @@ struct player
    __prop weapontype    {get:  Lith_PlayerCurWeaponType(this)}
    __prop buttonPressed {call: Lith_ButtonPressed(this)}
    __prop setVel        {call: Lith_SetPlayerVelocity(this)}
-   __prop mana          {get:  Lith_CheckActorInventory(->tid, sOBJ "MagicAmmo")}
-   __prop manamax       {get:  ACS_GetMaxInventory(->tid, sOBJ "MagicAmmo")}
+   __prop mana          {get:  Lith_CheckActorInventory(->tid, s_MagicAmmo)}
+   __prop manamax       {get:  ACS_GetMaxInventory(->tid, s_MagicAmmo)}
    __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
    __prop health {get: GetPropI(->tid, APROP_Health),
                   set: SetPropI(->tid, APROP_Health)}
    __prop setActivator {call: ACS_SetActivator(->tid)}
    __prop getVel       {call: mag2k(->velx, ->vely)}
-   __prop grabInput  {get: GetMembI(->tid, "m_grabInput"),
-                      set: SetMembI(->tid, "m_grabInput")}
-   __prop onground   {get: GetMembI(->tid, "m_onground")}
+   __prop grabInput  {get: GetMembI(->tid, s_m_grabInput),
+                      set: SetMembI(->tid, s_m_grabInput)}
+   __prop onground   {get: GetMembI(->tid, s_m_onground)}
    __prop waterlevel {get: GetPropI(->tid, APROP_Waterlevel)}
 
    // inventory

@@ -14,12 +14,12 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
    #define Stat(name, f, x) \
       s = name; \
       l = strlen(s); \
-      PrintTextChr(s, l); PrintText(s"cbifont", CR_WHITE, 23,1,  50 + 8*n,1); \
-      PrintTextFmt(f, x); PrintText(s"cbifont", CR_WHITE, 300,2, 50 + 8*n,1); \
+      PrintTextChr(s, l); PrintText(s_cbifont, CR_WHITE, 23,1,  50 + 8*n,1); \
+      PrintTextFmt(f, x); PrintText(s_cbifont, CR_WHITE, 300,2, 50 + 8*n,1); \
       n++
 
    PrintTextStr(p->name);
-   PrintText(s"smallfnt", CR_LIGHTBLUE, 20,1, 40,1);
+   PrintText(s_smallfnt, CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
    Stat(LC(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);
@@ -36,8 +36,6 @@ void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
    Stat(LC(LANG "STAT_Boom"),       "%i",   p->spuriousexplosions);
    Stat(LC(LANG "STAT_Brouzouf"),   "%i",   p->brouzouf);
    Stat(LC(LANG "STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
-
-   #undef Stat
 }
 
 // EOF

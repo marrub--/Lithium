@@ -6,8 +6,8 @@
 #pragma GDCC FIXED_LITERAL ON
 
 #include <ACS_ZDoom.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "lith_types.h"
@@ -15,6 +15,7 @@
 #include "lith_drawing.h"
 #include "lith_math.h"
 #include "lith_str.h"
+#include "lith_stab.h"
 #include "lith_char.h"
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
@@ -27,7 +28,7 @@
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar(sDCVAR "debug_level") & (level)) \
+   do if(ACS_GetCVar(s_debug_level) & (level)) \
       Log(c"" #level ": " __VA_ARGS__); \
    while(0)
 
@@ -58,11 +59,8 @@
 #define GetZ ACS_GetActorZ
 
 #if LITHIUM
-#define Lith_IsPaused ServCallI(s"GetPaused")
+#define Lith_IsPaused ServCallI(s_GetPaused)
 #define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
-
-#define ServName sOBJ "HERMES"
-#define DrawName sOBJ "URANUS"
 
 #define CVAR  "lith_"
 #define DCVAR "__lith_"
@@ -71,9 +69,6 @@
 #else
 #define Lith_IsPaused false
 #define Lith_PausableTick()
-
-#define ServName sOBJ "Server"
-#define DrawName sOBJ "Render"
 
 #define OBJ   "Dt"
 #define CVAR  "dtap_"
@@ -91,13 +86,13 @@
 #define sLANG  s"" LANG
 #define sOBJ   s"" OBJ
 
-#define ServCallI(...) SCallI(ServName, __VA_ARGS__)
-#define ServCallK(...) SCallK(ServName, __VA_ARGS__)
-#define ServCallS(...) SCallS(ServName, __VA_ARGS__)
+#define ServCallI(...) SCallI(s_Serv, __VA_ARGS__)
+#define ServCallK(...) SCallK(s_Serv, __VA_ARGS__)
+#define ServCallS(...) SCallS(s_Serv, __VA_ARGS__)
 
-#define DrawCallI(...) SCallI(DrawName, __VA_ARGS__)
-#define DrawCallK(...) SCallK(DrawName, __VA_ARGS__)
-#define DrawCallS(...) SCallS(DrawName, __VA_ARGS__)
+#define DrawCallI(...) SCallI(s_Draw, __VA_ARGS__)
+#define DrawCallK(...) SCallK(s_Draw, __VA_ARGS__)
+#define DrawCallS(...) SCallS(s_Draw, __VA_ARGS__)
 
 #define DebugStat(...) \
    (world.dbgLevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)

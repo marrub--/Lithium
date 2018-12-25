@@ -19,6 +19,9 @@ StrEntOFF
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
+#define X(n, s) __str const s_##n = s"" s;
+#include "lith_stab.h"
+
 __str l_strupper(__str in)
 {
    ACS_BeginPrint();

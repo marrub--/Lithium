@@ -72,11 +72,11 @@ typedef struct worldinfo_s
    __prop canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
    __prop canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
    __prop canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
-   __prop difficulty     {get: ACS_GetCVar(sCVAR "sv_difficulty")}
+   __prop difficulty     {get: ACS_GetCVar(s_sv_difficulty)}
    __prop begAngles      {call: Lith_BeginAngles()}
    __prop addAngles      {call: Lith_AddAngle()}
    __prop freeze         {call: Lith_FreezeTime()}
-   __prop autosave       {get: ACS_GetCVar(sCVAR "sv_autosave")}
+   __prop autosave       {get: ACS_GetCVar(s_sv_autosave)}
 
    bool    gsinit;
    bool    singleplayer;

@@ -75,7 +75,7 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
          if(x < 0 || x > 320) continue;
 
          PrintTextChr(&points[i * 2], 2);
-         PrintText("cbifont", CR_WHITE, x,1, 120,0);
+         PrintText(s_cbifont, CR_WHITE, x,1, 120,0);
       }
    }
 }

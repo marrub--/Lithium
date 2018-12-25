@@ -81,7 +81,7 @@ script ext("ACS")
 bool Lith_BarrierCheck()
 {
    ACS_SetActivatorToTarget(0);
-   return ACS_CheckFlag(0, "COUNTKILL");
+   return ACS_CheckFlag(0, s_COUNTKILL);
 }
 
 script ext("ACS")
@@ -106,10 +106,10 @@ void Lith_GetSigil()
 
       ACS_Delay(3);
 
-      HudMessageF("dbigfont", "D I V I S I O N  S I G I L");
+      HudMessageF(s_dbigfont, "D I V I S I O N  S I G I L");
       HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TS * 5, 0.3);
 
-      HudMessageF("SMALLFNT",
+      HudMessageF(s_smallfnt,
          "=== Warning ===\n"
          "This item is unfathomably dangerous.\n"
          "Use at the expense of your world.");

@@ -29,7 +29,7 @@ void Lith_PlayerDebugStats(struct player *p)
       ACS_PrintString(dbgstat[i]);
    for(int i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
-   PrintText("smallfnt", CR_WHITE, 10,1, 20,1);
+   PrintText(s_smallfnt, CR_WHITE, 10,1, 20,1);
 }
 
 script
@@ -226,7 +226,7 @@ void Lith_PlayerLevelup(struct player *p)
       SetSize(320, 240);
       ACS_BeginPrint();
       PrintChars(p->attr.lvupstr, strlen(p->attr.lvupstr));
-      PrintText("cnfont", CR_WHITE, 7,1, 17,1);
+      PrintText(s_cnfont, CR_WHITE, 7,1, 17,1);
    }
 }
 
@@ -260,7 +260,7 @@ static void HUD_StringStack(struct player *p)
    {
       hudstr_t *hudstr = rover->object;
       PrintTextStr(hudstr->str);
-      PrintTextA("confont", CR_RED, 300,2, 20+i*9,1, 0.5);
+      PrintTextA(s_confont, CR_RED, 300,2, 20+i*9,1, 0.5);
    }
 }
 

@@ -28,7 +28,7 @@ static void HUD_Ammo(struct player *p)
          PrintTextStr("\C[Lith_Blue]OUT");
       else
          PrintTextFmt(c"\C[Lith_Blue]%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintTextX("lhudfont", 0, 242,1, 227,0);
+      PrintTextX(s_lhudfont, 0, 242,1, 227,0);
    }
 
    if(type & 2)
@@ -44,7 +44,7 @@ static void HUD_Ammo(struct player *p)
       }
 
       PrintTextFmt(c"\C[Lith_Blue]%i", wep->ammocur);
-      PrintTextX("lhudfont", 0, x+242,1, 227,0);
+      PrintTextX(s_lhudfont, 0, x+242,1, 227,0);
    }
 
    if(typegfx) PrintSprite(typegfx, 318,2, 232,2);
@@ -66,7 +66,7 @@ static void HUD_Health(struct player *p)
    PrintSprite(":HUD_D:HPBack", 0,1, 239,2);
 
    PrintTextFmt(c"\C[Lith_Blue]%i", p->health);
-   PrintTextX("lhudfont", 0, 18,1, 228,0);
+   PrintTextX(s_lhudfont, 0, 18,1, 228,0);
 
    __str gfx = weapongfx[p->weapon.cur->info->slot];
 
@@ -102,7 +102,7 @@ void Upgr_HeadsUpDis3_Render(struct player *p, upgrade_t *upgr)
 
    Lith_HUD_Log(p, CR_LIGHTBLUE, 0, -10);
    Lith_HUD_KeyInd(p, 180, 21, true, 0.8);
-   Lith_HUD_Score(p, c"\C[Lith_Blue]%S\Cnscr", p->score, "cnfont", "a", 160,0, 3,1);
+   Lith_HUD_Score(p, c"\C[Lith_Blue]%S\Cnscr", p->score, s_cnfont, "a", 160,0, 3,1);
 
    if(p->getCVarI(CVAR "hud_showweapons"))
       PrintSprite(":HUD_D:WepBack", 320,2, 219,2);

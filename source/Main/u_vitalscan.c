@@ -20,7 +20,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 
    bool validtarget =
       six ||
-      ACS_CheckFlag(0, "COUNTKILL") ||
+      ACS_CheckFlag(0, s_COUNTKILL) ||
       ACS_PlayerNumber() != -1;
 
    if(GetPropI(0, APROP_Health) <= 0)
@@ -151,19 +151,19 @@ void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
    // Hit indicator
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt(c"-%i", UData.hdelta);
-      PrintTextFX("cbifont", CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
+      PrintTextFX(s_cbifont, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
    // Tag and health
    bool  afnt = p->getCVarI(sCVAR "scanner_altfont");
-   __str font = afnt ? "chfont" : "cbifont";
+   __str font = afnt ? s_chfont : s_cbifont;
 
    PrintTextStr(UData.tagstr);
    PrintTextX(font, CR_WHITE, 160+ox,4, 216+oy,2);
 
    if(UData.maxhealth) PrintTextFmt(c"%u/%u", UData.health, UData.maxhealth);
    else                PrintTextFmt(c"%uhp",  UData.health);
-   PrintTextX(UData.freak ? "alienfont" : font, CR_WHITE, 160+ox,4, 225+oy,2);
+   PrintTextX(UData.freak ? s_alienfont : font, CR_WHITE, 160+ox,4, 225+oy,2);
 
    // Health bar
    if(p->getCVarI(sCVAR "scanner_bar"))

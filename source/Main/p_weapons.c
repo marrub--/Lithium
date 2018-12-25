@@ -256,7 +256,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    {
    case weapon_c_fist:
       PrintTextStr(L(LANG "MANA_CHARGE"));
-      PrintTextA("cbifont", CR_BRICK, 160,0, 100,0, 0.5);
+      PrintTextA(s_cbifont, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(OBJ "DelearSprite");
@@ -265,7 +265,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
       __with(fixed64 charge = 5 + InvNum(OBJ "FistCharge") / 10.lk;)
       {
          PrintTextFmt(LC(cLANG "CHARGE_FMT"), charge);
-         PrintText("cbifont", CR_LIGHTBLUE, 270,2, 200,2);
+         PrintText(s_cbifont, CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
    }

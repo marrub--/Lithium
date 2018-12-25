@@ -15,7 +15,7 @@ static void Blinker(void)
    if(t < time)
    {
       PrintTextStr("\Cd[Press any key to begin]");
-      PrintTextA("cbifont", 0, 160,0, 220,0, a);
+      PrintTextA(s_cbifont, 0, 160,0, 220,0, a);
       a += 0.006;
    }
    else if(t >= time*2)
@@ -47,7 +47,7 @@ void Lith_Title(void)
    for(int t = 0, pos = 0;;)
    {
       PrintTextFmt(c"\Cd%.*s", pos, txt);
-      PrintText("cbifont", 0, 7,1, 6,1);
+      PrintText(s_cbifont, 0, 7,1, 6,1);
 
       if(t == 0)
       {
@@ -69,7 +69,7 @@ void Lith_Title(void)
    for(int i = 0; i < 35 * 7; i++)
    {
       PrintTextFmt(c"\Cd%s", txt);
-      PrintText("cbifont", 0, 7,1, 6,1);
+      PrintText(s_cbifont, 0, 7,1, 6,1);
       Blinker();
       ACS_Delay(1);
       DrawCallI("LE");
@@ -78,7 +78,7 @@ void Lith_Title(void)
    for(fixed a = 1; a > 0; a -= 0.01)
    {
       PrintTextFmt(c"\Cd%s", txt);
-      PrintTextA("cbifont", 0, 7,1, 6,1, a);
+      PrintTextA(s_cbifont, 0, 7,1, 6,1, a);
       Blinker();
       ACS_Delay(1);
       DrawCallI("LE");

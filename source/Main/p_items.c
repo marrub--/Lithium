@@ -416,7 +416,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       int y_ = y[0] + 60;
 
       PrintTextStr(sel->name);
-      PrintText("cbifont", CR_WHITE, x_,1, y_,1);
+      PrintText(s_cbifont, CR_WHITE, x_,1, y_,1);
       y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
@@ -436,7 +436,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       if(sel->scr)
       {
          PrintTextFmt(c"(%S\Cnscr\C-)", scoresep(sel->scr));
-         PrintText("cbifont", CR_WHITE, x_+18,1, y_,1);
+         PrintText(s_cbifont, CR_WHITE, x_+18,1, y_,1);
       }
 
       if(Lith_GUI_Button(g, sel->scr ? c"Sell" : c"Discard", x_, y_, Pre(btnclear)))
@@ -448,13 +448,13 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
    }
 
    PrintTextFmt(c"Equipped (%S)", ServCallS("GetArmorDT"));
-   PrintText("cbifont", CR_WHITE, 40,1, 38,1);
+   PrintText(s_cbifont, CR_WHITE, 40,1, 38,1);
 
    for(int i = 0; i < aslot_max; i++)
       ifw(__str name = ServCallS("GetArmorSlot", i), name != "")
    {
       PrintTextStr(name);
-      PrintText("cbifont", CR_WHITE, 40,1, 45+7*i,1);
+      PrintText(s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
    }
 }
 #endif

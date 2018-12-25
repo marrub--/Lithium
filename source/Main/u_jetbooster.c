@@ -48,7 +48,7 @@ void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
 
    DrawSpriteFade(":HUD:H_B3", hid_jetbg, 320.2, 80.1, 0.0, 0.5);
 
-   HudMessageF("SMALLFNT", "Jet");
+   HudMessageF(s_smallfnt, "Jet");
    HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 320.2, 160.1, 0.1, 0.5);
 
    for(int i = 0; i < max; i++)

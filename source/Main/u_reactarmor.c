@@ -86,7 +86,7 @@ void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
       PrintSprite(s":HUD:SplitLeft", 12,1, 225,2);
 
       PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
-      PrintTextX(s"lhudfont", CR_LIGHTBLUE, 32,1, 216,0);
+      PrintTextX(s_lhudfont, CR_LIGHTBLUE, 32,1, 216,0);
    }
 }
 

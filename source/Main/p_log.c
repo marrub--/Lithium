@@ -154,7 +154,7 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
    PrintTextStr(lm->name);
-   PrintText("cbifont", CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
+   PrintText(s_cbifont, CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * 8);
 
@@ -167,7 +167,7 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
       PrintSprite(":UI:LogList", g->ox,1, y + g->oy,1);
 
       PrintTextStr(lm->dataV[i].info);
-      PrintText("cbifont", CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
+      PrintText(s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
 
@@ -198,14 +198,14 @@ void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
             {ya = 2; y = (yo - y) + yy;}
 
          PrintTextStr(ld->info);
-         PrintText("logfont", cr, x,1, y,ya);
+         PrintText(s_logfont, cr, x,1, y,ya);
 
          if(ld->ftim) SetFade(fid_logadS + i, 1, 0.07);
 
          if(CheckFade(fid_logadS + i))
          {
             PrintTextStr(ld->info);
-            PrintTextF("logfont", CR_WHITE, x,1, y,ya, fid_logadS + i);
+            PrintTextF(s_logfont, CR_WHITE, x,1, y,ya, fid_logadS + i);
          }
       }
 

@@ -139,7 +139,7 @@ static void GetDebugInfo(void)
 {
    bool all = ACS_GetCVar(sDCVAR "debug_all");
 
-   world.dbgLevel =        ACS_GetCVar(sDCVAR "debug_level");
+   world.dbgLevel =        ACS_GetCVar(s_debug_level);
    world.dbgItems = all || ACS_GetCVar(sDCVAR "debug_items");
    world.dbgBIP   = all || ACS_GetCVar(sDCVAR "debug_bip");
    world.dbgScore = all || ACS_GetCVar(sDCVAR "debug_score");

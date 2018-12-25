@@ -114,7 +114,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    // Top-left text
    SetSize(tsizex, tsizey);
    PrintTextStr("SGXLine r4205");
-   PrintText("smallfnt", CR_RED, 0,1, 0,1);
+   PrintText(s_smallfnt, CR_RED, 0,1, 0,1);
 
    // Top-right text
    switch(vm->trmActi) {
@@ -123,11 +123,11 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    default:          PrintTextFmt(c"Remote: %s",               remote); break;
    }
 
-   PrintText("smallfnt", CR_RED, tright,2, 0,1);
+   PrintText(s_smallfnt, CR_RED, tright,2, 0,1);
 
    // Bottom-left text
    PrintTextStr("<55.883.115.7>");
-   PrintText("smallfnt", CR_RED, 0,1, tbottom,2);
+   PrintText(s_smallfnt, CR_RED, 0,1, tbottom,2);
 
    // Bottom-right text
    switch(vm->trmActi)
@@ -143,7 +143,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
       break;
    }
 
-   PrintText("smallfnt", CR_RED, tright,2, tbottom,2);
+   PrintText(s_smallfnt, CR_RED, tright,2, tbottom,2);
 
    // Contents
    SetSize(g->w, g->h);
@@ -161,7 +161,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
             SetSize(tsizex, tsizey);
             ACS_BeginPrint();
             PrintChars(vm->textV, vm->textC);
-            PrintText("smallfnt", CR_WHITE, tmidx,0, tmidy + 35,0);
+            PrintText(s_smallfnt, CR_WHITE, tmidx,0, tmidy + 35,0);
             SetSize(g->w, g->h);
 
             y -= 10;
@@ -179,7 +179,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
       ACS_BeginPrint();
       PrintChars(vm->textV, vm->textC);
-      PrintText("smallfnt", CR_WHITE, tleft,1, ttop,1);
+      PrintText(s_smallfnt, CR_WHITE, tleft,1, ttop,1);
 
       SetSize(g->w, g->h);
       ClearClip();
@@ -190,7 +190,7 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
       ACS_BeginPrint();
       PrintChars(vm->textV, vm->textC);
-      PrintText("smallfnt", CR_WHITE, 2,1, ttop+2,1);
+      PrintText(s_smallfnt, CR_WHITE, 2,1, ttop+2,1);
 
       SetSize(g->w, g->h);
       break;
@@ -223,11 +223,11 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
    ACS_BeginPrint();
    PrintChars(name, strlen(name));
-   PrintText("lhudfont", CR_GREEN, 30,1, 35,1);
+   PrintText(s_lhudfont, CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
    PrintTextFmt(c"\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
-   PrintText("cbifont", CR_WHITE, left,1, top,1);
+   PrintText(s_cbifont, CR_WHITE, left,1, top,1);
    ClearClip();
 
    if(vm->optNum)

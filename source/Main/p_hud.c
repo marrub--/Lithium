@@ -17,7 +17,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       fixed y = a->y+.2;
 
       PrintTextFmt(c"%i", i);
-      PrintTextX("lhudfontsmall", a->ncol[min(slot - 1, 2)], x,2, y,2);
+      PrintTextX(s_lhudfontsmall, a->ncol[min(slot - 1, 2)], x,2, y,2);
 
       if(p->weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 0.05);
@@ -25,7 +25,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       if(CheckFade(fid_slotnS + i))
       {
          PrintTextFmt(c"\C%S%i", a->scol, i);
-         PrintTextFX("lhudfontsmall", 0, x,2, y,2, fid_slotnS + i);
+         PrintTextFX(s_lhudfontsmall, 0, x,2, y,2, fid_slotnS + i);
       }
    }
 }

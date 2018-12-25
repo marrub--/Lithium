@@ -14,19 +14,19 @@ void Lith_PlayerPayout(struct player *p)
 {
 #define Left(...) \
    ( \
-      HudMessageF("cnfont", __VA_ARGS__), \
+      HudMessageF(s_cnfont, __VA_ARGS__), \
       HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 16.1, y + .1, TS, .2) \
    )
 
 #define Right(...) \
    ( \
-      HudMessageF("cnfont", __VA_ARGS__), \
+      HudMessageF(s_cnfont, __VA_ARGS__), \
       HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 280.2, y + .1, TS, .2) \
    )
 
 #define Head(...) \
    ( \
-      HudMessageF("dbigfont", __VA_ARGS__), \
+      HudMessageF(s_dbigfont, __VA_ARGS__), \
       HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 8.1, y + 0.1, TS, 0.2) \
    )
 
@@ -37,7 +37,7 @@ void Lith_PlayerPayout(struct player *p)
       \
       if(i < 35) \
       { \
-         HudMessageF("cnfont", "%S\Cnscr", scoresep(lerplk(0, pay.name##scr, i / 34.0lk))); \
+         HudMessageF(s_cnfont, "%S\Cnscr", scoresep(lerplk(0, pay.name##scr, i / 34.0lk))); \
          HudMessageParams(HUDMSG_FADEOUT, hid, CR_WHITE, 280.2, y + 0.1, 2, 0.2); \
       } \
       \
@@ -60,7 +60,7 @@ void Lith_PlayerPayout(struct player *p)
       Head("RESULTS");
 
       if(i < 16) {
-         HudMessageF("dbigfont", "RESULTS");
+         HudMessageF(s_dbigfont, "RESULTS");
          HudMessageParams(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid, CR_WHITE, 8 + 0.1, y + .1, TS, 0.5);
       }
 

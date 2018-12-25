@@ -48,7 +48,7 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       PrintTextFmt(c"%s%s", Lith_CPS_Print(st->txtbuf, st->tbptr), hot ? Ticker(c"|", c"") : c"");
    else
       PrintTextFmt(c"\C%c%s", hot ? 'c' : 'm', LC(cLANG "GUI_TEXTBOX"));
-   PrintText("cbifont", CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
+   PrintText(s_cbifont, CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
    memset(a->p->txtbuf, 0, sizeof a->p->txtbuf);

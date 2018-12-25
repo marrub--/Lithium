@@ -4,13 +4,13 @@
 #define TS 0.029
 
 #define PrintSprite(name, x, xa, y, ya) \
-   DrawCallI(s"LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya))
+   DrawCallI(s_LS, name, (int)(x), (int)(y), (int)(xa), (int)(ya))
 
 #define PrintSpriteA(name, x, xa, y, ya, a) \
-   DrawCallI(s"LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
+   DrawCallI(s_LS, name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(a))
 
 #define PrintSpriteF(name, x, xa, y, ya, n) \
-   DrawCallI(s"LS", name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
+   DrawCallI(s_LS, name, (int)(x), (int)(y), (int)(xa), (int)(ya), (fixed)(-(n) - 2))
 
 #define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s) (ACS_BeginPrint(), ACS_PrintString(s))
@@ -26,37 +26,37 @@
    (PrintTextArgs_N(x, y, xa, ya) | (((uint)(n) + 1) << 24))
 
 #define PrintText(font, cr, x, xa, y, ya) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya))
+   DrawCallI(s_LT, ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya))
 
 #define PrintTextX(font, cr, x, xa, y, ya) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya) | 0x80000000)
+   DrawCallI(s_LT, ACS_EndStrParam(), font, cr, PrintTextArgs_N(x, y, xa, ya) | 0x80000000)
 
 #define PrintTextA(font, cr, x, xa, y, ya, a) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_A(x, y, xa, ya, a))
+   DrawCallI(s_LT, ACS_EndStrParam(), font, cr, PrintTextArgs_A(x, y, xa, ya, a))
 
 #define PrintTextF(font, cr, x, xa, y, ya, n) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n))
+   DrawCallI(s_LT, ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n))
 
 #define PrintTextFX(font, cr, x, xa, y, ya, n) \
-   DrawCallI(s"LT", ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n) | 0x80000000)
+   DrawCallI(s_LT, ACS_EndStrParam(), font, cr, PrintTextArgs_F(x, y, xa, ya, n) | 0x80000000)
 
 #define SetClip(x, y, w, h) \
-   DrawCallI(s"LC", (int)(x), (int)(y), (int)(w), (int)(h), 0)
+   DrawCallI(s_LC, (int)(x), (int)(y), (int)(w), (int)(h), 0)
 
 #define SetClipW(x, y, w, h, ww) \
-   DrawCallI(s"LC", (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
+   DrawCallI(s_LC, (int)(x), (int)(y), (int)(w), (int)(h), (int)(ww))
 
 #define ClearClip() \
-   DrawCallI(s"LC", 0, 0, 0, 0, 0)
+   DrawCallI(s_LC, 0, 0, 0, 0, 0)
 
 #define SetSize(w, h) \
-   DrawCallI(s"LZ", (int)(w), (int)(h))
+   DrawCallI(s_LZ, (int)(w), (int)(h))
 
 #define SetFade(n, time, fade) \
-   DrawCallI(s"LF", (int)(n), (int)(time), (fixed)(fade))
+   DrawCallI(s_LF, (int)(n), (int)(time), (fixed)(fade))
 
 #define CheckFade(n) \
-   DrawCallI(s"LX", n)
+   DrawCallI(s_LX, n)
 
 #define HudMessageLog(...) \
    ( \
