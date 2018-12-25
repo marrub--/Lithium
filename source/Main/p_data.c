@@ -12,29 +12,29 @@ StrEntON
 static void SetupAttributes(struct player *p)
 {
    StrEntOFF
-   memcpy(p->attr.names[at_acc], "ACC", 3);
-   memcpy(p->attr.names[at_def], "DEF", 3);
-   memcpy(p->attr.names[at_str], "STR", 3);
-   memcpy(p->attr.names[at_vit], "VIT", 3);
-   memcpy(p->attr.names[at_stm], "STM", 3);
-   memcpy(p->attr.names[at_luk], "LUK", 3);
+   memmove(p->attr.names[at_acc], "ACC", 3);
+   memmove(p->attr.names[at_def], "DEF", 3);
+   memmove(p->attr.names[at_str], "STR", 3);
+   memmove(p->attr.names[at_vit], "VIT", 3);
+   memmove(p->attr.names[at_stm], "STM", 3);
+   memmove(p->attr.names[at_luk], "LUK", 3);
 
    switch(p->pclass) {
-   case pcl_marine:    memcpy(p->attr.names[at_spc], "RGE", 3); break;
-   case pcl_cybermage: memcpy(p->attr.names[at_spc], "CON", 3); break;
-   case pcl_informant: memcpy(p->attr.names[at_spc], "ADR", 3); break;
-   case pcl_wanderer:  memcpy(p->attr.names[at_spc], "AGI", 3); break;
-   case pcl_assassin:  memcpy(p->attr.names[at_spc], "RSH", 3); break;
-   case pcl_darklord:  memcpy(p->attr.names[at_spc], "REF", 3); break;
-   case pcl_thoth:     memcpy(p->attr.names[at_spc], "???", 3); break;
+   case pcl_marine:    memmove(p->attr.names[at_spc], "RGE", 3); break;
+   case pcl_cybermage: memmove(p->attr.names[at_spc], "CON", 3); break;
+   case pcl_informant: memmove(p->attr.names[at_spc], "ADR", 3); break;
+   case pcl_wanderer:  memmove(p->attr.names[at_spc], "AGI", 3); break;
+   case pcl_assassin:  memmove(p->attr.names[at_spc], "RSH", 3); break;
+   case pcl_darklord:  memmove(p->attr.names[at_spc], "REF", 3); break;
+   case pcl_thoth:     memmove(p->attr.names[at_spc], "???", 3); break;
    }
 
    if(p->pclass & pcl_robot) {
-      memcpy(p->attr.names[at_vit], "POT", 3);
-      memcpy(p->attr.names[at_stm], "REP", 3);
+      memmove(p->attr.names[at_vit], "POT", 3);
+      memmove(p->attr.names[at_stm], "REP", 3);
    } else if(p->pclass & pcl_nonhuman) {
-      memcpy(p->attr.names[at_vit], "POT", 3);
-      memcpy(p->attr.names[at_stm], "REG", 3);
+      memmove(p->attr.names[at_vit], "POT", 3);
+      memmove(p->attr.names[at_stm], "REG", 3);
    }
 
    p->attr.expnext = 500;

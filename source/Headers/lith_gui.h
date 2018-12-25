@@ -56,7 +56,7 @@
          strncpy(gfx, (pre)->mem, sizeof(gfx)); \
       else \
       { \
-         memcpy(gfx, (g)->gfxprefix, (g)->gfxprefixsz + 1); \
+         memmove(gfx, (g)->gfxprefix, (g)->gfxprefixsz + 1); \
          strcat(gfx, (pre)->mem); \
       } \
    } while(0)
