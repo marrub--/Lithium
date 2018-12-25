@@ -299,7 +299,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    // hue
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
-      p->logB(1, "You gained brouzouf.");
+      p->logB(1, c"You gained brouzouf.");
    }
 
    if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
@@ -315,7 +315,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 
    // Log score
    if(p->getCVarI(CVAR "player_scorelog"))
-      p->logH(1, "+\Cj%lli\Cnscr", score);
+      p->logH(1, c"+\Cj%lli\Cnscr", score);
 
    return score;
 }
@@ -344,7 +344,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->logB(1, "%S", Language(cLANG "LOG_BossWarn%s", p->discrim));
+      p->logB(1, LanguageC(cLANG "LOG_BossWarn%s", p->discrim));
 }
 #endif
 

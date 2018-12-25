@@ -25,7 +25,7 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
    else if(!UData.readied)
    {
       ACS_PlaySound(0, "player/adren/ready", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      p->logH(1, "Adrenaline injector ready.");
+      p->logH(1, c"Adrenaline injector ready."); // TODO
       UData.readied = true;
    }
 
@@ -42,7 +42,7 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
          InvTake(OBJ "AdrenalineToken", 1);
 
          ACS_PlaySound(0, "player/adren/inj", 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-         p->logH(4, "Adrenaline administered.");
+         p->logH(4, c"Adrenaline administered."); // TODO
 
          UData.charge = UData.readied = 0;
 

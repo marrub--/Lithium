@@ -50,8 +50,9 @@ static void Lith_StupidPickup(struct player *p, int weapon)
    }
 
    __str nam = StupidName(weapon);
-   __str fmt = Language(cLANG "PK_GET_%.3i", ifmt);
-   __str unc = Language(cLANG "PK_UNCERTAIN_%.3i", iunc);
+
+   char const *fmt = LanguageC(cLANG "PK_GET_%.3i", ifmt);
+   __str       unc = Language (cLANG "PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) p->logB(1, fmt, nam, nam);
@@ -64,9 +65,9 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
    if(p->getCVarI(sCVAR "player_stupidpickups"))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->logB(1, L(LANG "PK_GET_000"), Language(cLANG "INFO_SHORT_%S", info->name));
+      p->logB(1, LC(cLANG "PK_GET_000"), Language(cLANG "INFO_SHORT_%S", info->name));
    else
-      p->logB(1, "Acquired impossible object");
+      p->logB(1, c"Acquired impossible object");
 }
 
 void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
@@ -81,7 +82,7 @@ void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
    else
       nam = Language(cLANG "INFO_SHORT_%S", info->name);
 
-   __str msg = L(LANG "LOG_Sell");
+   char const *msg = LC(cLANG "LOG_Sell");
 
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);

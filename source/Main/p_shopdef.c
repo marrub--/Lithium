@@ -25,7 +25,7 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const 
    if(!p->canBuy(def, obj))
       return false;
 
-   if(!nolog) p->logF("Bought %S", Language(namefmt, def->name));
+   if(!nolog) p->logF(c"Bought %S", Language(namefmt, def->name)); // TODO
 
    if(def->bipunlock)
    {
@@ -51,14 +51,14 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const 
       if((x || y || z) && ACS_Spawn(OBJ "BoughtItem", x, y, z, tid = ACS_UniqueTID()))
       {
          if(def->shopGive(p, def, obj, tid))
-            p->logH(1, "\CjItem delivered.");
+            p->logH(1, c"\CjItem delivered."); // TODO
          else
             ACS_Thing_Remove(tid);
 
          delivered = true;
       }
       else
-         p->logH(1, "\CgCouldn't deliver item\C-, placing directly in inventory.");
+         p->logH(1, c"\CgCouldn't deliver item\C-, placing directly in inventory."); // TODO
    }
 
    if(!delivered) def->shopBuy(p, def, obj);

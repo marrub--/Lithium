@@ -53,7 +53,7 @@ void Lith_Obituary(void)
 
    if(obit != s"") {
       LogDebug(log_dev, "%S", obit);
-      Lith_ForPlayer() p->logB(1, s"%S", obit);
+      Lith_ForPlayer() p->logB(1, "%S", obit);
    }
 }
 #endif

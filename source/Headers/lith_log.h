@@ -36,9 +36,9 @@ struct loginfo
    u32            curtime;
 };
 
-void Lith_LogB(struct player *p, int levl, __str fmt, ...); // log to HUD and full log
-void Lith_LogH(struct player *p, int levl, __str fmt, ...); // log to HUD only
-void Lith_LogF(struct player *p,           __str fmt, ...); // log to full log only
+void Lith_LogB(struct player *p, int levl, char const *fmt, ...); // log to HUD and full log
+void Lith_LogH(struct player *p, int levl, char const *fmt, ...); // log to HUD only
+void Lith_LogF(struct player *p,           char const *fmt, ...); // log to full log only
 void Lith_PlayerLogEntry(struct player *p);
 
 #endif

@@ -88,7 +88,7 @@ void Lith_PickupCBIItem(int num)
 
    Lith_ForPlayer() {
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->msg) p->logB(1, L(LANG "LOG_CBI"), Language(cLANG "LOG_CBI_%S", c->msg));
+         if(c->msg) p->logB(1, LC(cLANG "LOG_CBI"), Language(cLANG "LOG_CBI_%S", c->msg));
    }
 
    Lith_InstallCBIItem(num);

@@ -61,7 +61,7 @@ void Lith_RA_Give(int num)
 
          ACS_LocalAmbientSound(s"player/rarmor/mode", 127);
 
-         p->logH(3, s"Activating Armor->%s()", name);
+         p->logH(3, "Activating Armor->%s()", name); // TODO
 
          if(p->getUpgrActive(UPGR_ReactArmor2)) RA_Give(name, 2);
          else                                   RA_Give(name, 1);

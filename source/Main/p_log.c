@@ -10,7 +10,7 @@ StrEntON
 
 // Static Functions ----------------------------------------------------------|
 
-static __str LogV(int levl, __str fmt, va_list vl)
+static __str LogV(int levl, char const *fmt, va_list vl)
 {
    ACS_BeginPrint();
 
@@ -20,7 +20,7 @@ static __str LogV(int levl, __str fmt, va_list vl)
       ACS_PrintChar(' ');
    }
 
-   __vnprintf_str(fmt, vl);
+   __vnprintf(fmt, vl);
 
    return ACS_EndStrParam();
 }
@@ -49,7 +49,7 @@ static void LogF(struct player *p, struct logfdt *lf)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_LogB(struct player *p, int levl, __str fmt, ...)
+void Lith_LogB(struct player *p, int levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
@@ -62,7 +62,7 @@ void Lith_LogB(struct player *p, int levl, __str fmt, ...)
    LogH(p, &ld);
 }
 
-void Lith_LogH(struct player *p, int levl, __str fmt, ...)
+void Lith_LogH(struct player *p, int levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
@@ -74,7 +74,7 @@ void Lith_LogH(struct player *p, int levl, __str fmt, ...)
    LogH(p, &ld);
 }
 
-void Lith_LogF(struct player *p, __str fmt, ...)
+void Lith_LogF(struct player *p, char const *fmt, ...)
 {
    struct logfdt lf = {};
 
@@ -107,7 +107,7 @@ void Lith_PlayerLogEntry(struct player *p)
 
    p->log.curmap = lm;
 
-   p->logF(L(LANG "ENTER_FMT"), lm->name, world.canontime);
+   p->logF(LC(cLANG "ENTER_FMT"), lm->name, world.canontime);
 }
 
 script ext("ACS")
@@ -119,9 +119,9 @@ void Lith_LogS(int levl, int type)
 
    withplayer(LocalPlayer) switch(type) {
    case msg_ammo: if(p->getCVarI(sCVAR "player_ammolog"))
-   case msg_huds: p->logH(levl, "%S", name); break;
-   case msg_full: p->logF(      "%S", name); break;
-   case msg_both: p->logB(levl, "%S", name); break;
+   case msg_huds: p->logH(levl, c"%S", name); break;
+   case msg_full: p->logF(      c"%S", name); break;
+   case msg_both: p->logB(levl, c"%S", name); break;
    }
 }
 
