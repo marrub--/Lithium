@@ -76,8 +76,8 @@ DCD(INFO)
 DCD(PICT)
 DCD(TRMWAIT)
 #undef DCD
-#elif !defined(LITH_DIALOGUE_H)
-#define LITH_DIALOGUE_H
+#elif !defined(lith_dialogue_h)
+#define lith_dialogue_h
 
 #include "lith_world.h"
 #include "lith_darray.h"

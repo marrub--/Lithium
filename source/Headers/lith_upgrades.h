@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_UPGRADES_H
-#define LITH_UPGRADES_H
+#ifndef lith_upgrades_h
+#define lith_upgrades_h
 
 #include "lith_common.h"
 #include "lith_upgradenames.h"

@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_LIST_H
-#define LITH_LIST_H
+#ifndef lith_list_h
+#define lith_list_h
 
 #include "lith_common.h"
 

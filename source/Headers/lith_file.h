@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_FILE_H
-#define LITH_FILE_H
+#ifndef lith_file_h
+#define lith_file_h
 
 #include <stdio.h>
 

@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_WORLD_H
-#define LITH_WORLD_H
+#ifndef lith_world_h
+#define lith_world_h
 
 #include <stdbool.h>
 

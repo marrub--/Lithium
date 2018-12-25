@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_MONSTER_H
-#define LITH_MONSTER_H
+#ifndef lith_monster_h
+#define lith_monster_h
 
 #include "lith_common.h"
 #include "lith_list.h"
@@ -71,5 +71,5 @@ dmon_t *AllocDmon(void);
 
 void PrintDmonAllocSize(struct player *p);
 
-#endif//LITH_MONSTER_H
+#endif
 

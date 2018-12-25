@@ -9,8 +9,8 @@ LITH_X(PLACES,       "Locations")
 LITH_X(CORPORATIONS, "Companies")
 LITH_X(MAIL,         "Mail")
 #undef LITH_X
-#elif !defined(LITH_BIP_H)
-#define LITH_BIP_H
+#elif !defined(lith_bip_h)
+#define lith_bip_h
 
 #include "lith_list.h"
 

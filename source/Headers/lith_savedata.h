@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_SAVEDATA_H
-#define LITH_SAVEDATA_H
+#ifndef lith_savedata_h
+#define lith_savedata_h
 
 #include <stdio.h>
 #include <stdint.h>

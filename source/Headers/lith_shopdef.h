@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_SHOPDEF_H
-#define LITH_SHOPDEF_H
+#ifndef lith_shopdef_h
+#define lith_shopdef_h
 
 enum
 {

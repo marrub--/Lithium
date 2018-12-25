@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_LOG_H
-#define LITH_LOG_H
+#ifndef lith_log_h
+#define lith_log_h
 
 #include "lith_darray.h"
 

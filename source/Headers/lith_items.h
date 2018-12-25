@@ -1,6 +1,6 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
-#ifndef LITH_ITEMS_H
-#define LITH_ITEMS_H
+#ifndef lith_items_h
+#define lith_items_h
 
 #define foritem(cont) forlist(item_t *it, (cont).items) if(it)
 

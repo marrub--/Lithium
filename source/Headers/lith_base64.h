@@ -1,5 +1,5 @@
 /*
- * Base64 encoding/decoding (RFC1341
+ * Base64 encoding/decoding (RFC1341)
  *
  * Copyright (c) 2005, Jouni Malinen <j@w1.fi>
  *
@@ -35,8 +35,8 @@
  *
  */
 
-#ifndef BASE64_H
-#define BASE64_H
+#ifndef lith_base64_h
+#define lith_base64_h
 
 #include <stddef.h>
 #include "lith_types.h"
@@ -44,4 +44,4 @@
 byte *base64_encode(byte const *src, size_t len, size_t *out_len);
 byte *base64_decode(byte const *src, size_t len, size_t *out_len);
 
-#endif /* BASE64_H */
+#endif

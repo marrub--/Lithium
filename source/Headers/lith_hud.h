@@ -1,6 +1,6 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#ifndef LITH_HUD_H
-#define LITH_HUD_H
+#ifndef lith_hud_h
+#define lith_hud_h
 
 #include "lith_world.h"
 

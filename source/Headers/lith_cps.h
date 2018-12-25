@@ -1,6 +1,6 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#ifndef LITH_CPS_H
-#define LITH_CPS_H
+#ifndef lith_cps_h
+#define lith_cps_h
 
 #define Lith_CPS_Count(name) (countof(name) * 4)
 

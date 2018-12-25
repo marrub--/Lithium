@@ -18,8 +18,8 @@ LITH_X(gH, pcl_human)
 LITH_X(gN, pcl_nonhuman)
 LITH_X(gR, pcl_robot)
 #undef LITH_X
-#elif !defined(LITH_PLAYER_H)
-#define LITH_PLAYER_H
+#elif !defined(lith_player_h)
+#define lith_player_h
 
 #include "lith_common.h"
 #include "lith_cbi.h"

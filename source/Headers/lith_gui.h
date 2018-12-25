@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_GUI_H
-#define LITH_GUI_H
+#ifndef lith_gui_h
+#define lith_gui_h
 
 #include "lith_cps.h"
 

@@ -1,6 +1,6 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
-#ifndef LITH_ATTRIB_H
-#define LITH_ATTRIB_H
+#ifndef lith_attrib_h
+#define lith_attrib_h
 
 #define ATTR_BAS_MAX 60
 #define ATTR_VIS_MAX 50

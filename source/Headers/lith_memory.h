@@ -1,6 +1,6 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#ifndef LITH_MEMORY_H
-#define LITH_MEMORY_H
+#ifndef lith_memory_h
+#define lith_memory_h
 
 #define Calloc_real(n, s) calloc(n, s)
 #define Dalloc_real(p)    free(p)

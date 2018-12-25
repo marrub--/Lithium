@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_WEAPONINFO_H
-#define LITH_WEAPONINFO_H
+#ifndef lith_weaponinfo_h
+#define lith_weaponinfo_h
 
 #include "lith_weapons.h"
 

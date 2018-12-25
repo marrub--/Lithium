@@ -1,6 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#ifndef LITH_COMMON_H
-#define LITH_COMMON_H
+#ifndef lith_common_h
+#define lith_common_h
 
 // unfortunate early project decisions.
 #pragma GDCC FIXED_LITERAL ON
