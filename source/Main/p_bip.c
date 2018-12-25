@@ -45,7 +45,7 @@ static void UnlockPage(struct bip *bip, struct page *page, int pclass)
 optargs(1)
 static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
 {
-   __str image = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
+   __str image = LanguageNull(cLANG "INFO_IMAGE_%s", pinit->name);
    int height = strtoi_str(Language(cLANG "INFO_CSIZE_%s", pinit->name), null, 0);
 
    struct page *page = Salloc(struct page);
@@ -174,6 +174,15 @@ void Lith_PlayerInitBIP(struct player *p)
 script
 void Lith_DeliverMail(struct player *p, __str title, int flags)
 {
+   // Note: Due to the way this code works, if you switch languages at runtime,
+   // mail won't be updated. I provide a lore answer (excuse) for this: When
+   // you switch languages, it switches the preferred translation service for
+   // delivered mail, but it's done when the mail is delivered due to a bug in
+   // the BIP software. All of the mail in the game is delivered to the player
+   // in Sce, a south-eastern sector language, but the player themself can't
+   // read this language and so it is translated for them into the actual
+   // language that the person behind the screen reads.
+
    p->setActivator();
 
    flags |= strtoi_str(Language(cLANG "MAIL_FLAG_%S", title), null, 0);
@@ -185,15 +194,15 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    struct page *page = Salloc(struct page);
 
-   __str date = LanguageNull(LANG "MAIL_TIME_%S", title);
-   __str size = LanguageNull(LANG "MAIL_SIZE_%S", title);
-   __str send = LanguageNull(LANG "MAIL_SEND_%S", title);
-   __str name = LanguageNull(LANG "MAIL_NAME_%S", title);
-   __str body = Language   (cLANG "MAIL_BODY_%S", title);
+   __str date = LanguageNull(cLANG "MAIL_TIME_%S", title);
+   __str size = LanguageNull(cLANG "MAIL_SIZE_%S", title);
+   __str send = LanguageNull(cLANG "MAIL_SEND_%S", title);
+   __str name = LanguageNull(cLANG "MAIL_NAME_%S", title);
+   __str body = Language    (cLANG "MAIL_BODY_%S", title);
 
    if(!send) send = L(LANG "MAIL_INTERNAL");
 
-   lstrcpy_str(page->name, date ? date : l_strdup(world.canontimeshort));
+   page->shname   = date ? date : l_strdup(world.canontimeshort);
    page->title    = name ? name : L(LANG "MAIL_NOTITLE");
    page->body     = StrParam(LC(cLANG "MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
@@ -267,8 +276,8 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 {
    struct page_info pinf;
 
-   pinf.shname = page->category == BIPC_MAIL
-      ? l_strdup(page->name)
+   pinf.shname = page->shname
+      ? page->shname
       : Language(cLANG "INFO_SHORT_%s", page->name);
 
    pinf.body = page->body

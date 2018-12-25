@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <ctype.h>
 
+StrEntOFF
+
 #define CpyStrLocal(out, st) \
    do { \
       ACS_BeginPrint(); \
@@ -11,8 +13,6 @@
       __str s = ACS_EndStrParam(); \
       for(int i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
    } while(0)
-
-StrEntOFF
 
 #define StrHashImpl() \
    u32 ret = 0; \
@@ -131,14 +131,14 @@ char *LanguageCV(char *out, char const *fmt, ...)
    return LanguageVC(out, nbuf);
 }
 
-__str LanguageNull(__str fmt, ...)
+__str LanguageNull(char const *fmt, ...)
 {
    va_list vl;
 
    ACS_BeginPrint();
 
    va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
 
    __str name = ACS_EndStrParam();

@@ -166,7 +166,7 @@ static void GUIUpgradeDescription(gui_state_t *g, struct player *p, upgrade_t *u
    PrintText(s_cbifont, CR_WHITE, 111,1, 40,1);
 
    // Effect
-   ifauto(__str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
+   ifauto(__str, effect, LanguageNull(cLANG "UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt(c"%S %S", L(LANG "EFFECT"), effect);
 
    static int const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};

@@ -40,7 +40,7 @@ char *lstrcpy_str(char *dest, char __str_ars const *src);
 int lstrcmp_str(char const *s1, char __str_ars const *s2);
 stkcall __str scoresep(i96 num);
 __str LanguageV(__str name);
-__str LanguageNull(__str fmt, ...);
+__str LanguageNull(char const *fmt, ...);
 char *LanguageVC(char *out, char const *name);
 char *LanguageCV(char *out, char const *name, ...);
 

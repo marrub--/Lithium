@@ -51,6 +51,7 @@ typedef bip_name_t bip_unlocks_t[5];
 struct page
 {
    bip_name_t name;
+   __str  shname;
    __str  image;
    __str  body;
    __str  title;
