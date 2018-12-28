@@ -1,15 +1,13 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "common.h"
+#include "w_world.h"
 
 // Types ---------------------------------------------------------------------|
 
 struct witem
 {
-   int weight;
+   i32 weight;
    char const *item;
 };
 
@@ -82,19 +80,19 @@ static struct witem const clipbx[] = {
 // Static Functions ----------------------------------------------------------|
 
 stkcall
-static char const *RandomWeighted(struct witem const *l, int c)
+static char const *RandomWeighted(struct witem const *l, i32 c)
 {
-   int sel = ACS_Random(1, l[c - 1].weight);
+   i32 sel = ACS_Random(1, l[c - 1].weight);
 
-   for(int i = 0; i < c; i++) if(sel <= l[i].weight) return l[i].item;
+   for(i32 i = 0; i < c; i++) if(sel <= l[i].weight) return l[i].item;
 
-   return null;
+   return nil;
 }
 
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
-void Lith_RandomSpawn(int rsn)
+void Lith_RandomSpawn(i32 rsn)
 {
    char const *item;
 
@@ -108,7 +106,7 @@ void Lith_RandomSpawn(int rsn)
    default: return;
    }
 
-   SCallI(s"Lith_RandomSpawn", s"Set", l_strdup(item));
+   SCallI(so_RandomSpawn, sm_Set, l_strdup(item));
 }
 #endif
 

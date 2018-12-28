@@ -1,28 +1,21 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_log.h"
-#include "lith_player.h"
-#include "lith_list.h"
-#include "lith_hudid.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_log.h"
+#include "p_player.h"
+#include "m_list.h"
+#include "p_hudid.h"
+#include "w_world.h"
 
 // Static Functions ----------------------------------------------------------|
 
-static __str LogV(int levl, char const *fmt, va_list vl)
+static void LogV(i32 levl)
 {
    ACS_BeginPrint();
 
-   if(levl)
-   {
-      for(int i = 0; i < levl; i++) ACS_PrintChar('>');
+   if(levl) {
+      for(i32 i = 0; i < levl; i++) ACS_PrintChar('>');
       ACS_PrintChar(' ');
    }
-
-   __vnprintf(fmt, vl);
-
-   return ACS_EndStrParam();
 }
 
 static void LogPop(struct player *p)
@@ -49,27 +42,35 @@ static void LogF(struct player *p, struct logfdt *lf)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_LogB(struct player *p, int levl, char const *fmt, ...)
+void Lith_LogB(struct player *p, i32 levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
+   LogV(levl);
+
    va_list vl;
    va_start(vl, fmt);
-   ld.info = LogV(levl, fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
+
+   ld.inf = ACS_EndStrParam();
 
    LogF(p, &ld.fdta);
    LogH(p, &ld);
 }
 
-void Lith_LogH(struct player *p, int levl, char const *fmt, ...)
+void Lith_LogH(struct player *p, i32 levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
+   LogV(levl);
+
    va_list vl;
    va_start(vl, fmt);
-   ld.info = LogV(levl, fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
+
+   ld.inf = ACS_EndStrParam();
 
    LogH(p, &ld);
 }
@@ -78,50 +79,52 @@ void Lith_LogF(struct player *p, char const *fmt, ...)
 {
    struct logfdt lf = {};
 
+   ACS_BeginPrint();
+
    va_list vl;
    va_start(vl, fmt);
-   lf.info = LogV(0, fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
+
+   lf.inf = ACS_EndStrParam();
 
    LogF(p, &lf);
 }
 
 void Lith_PlayerLogEntry(struct player *p)
 {
-   struct logmap *lm = null;
-   int lnum = world.mapnum;
+   struct logmap *lm = nil;
+   i32 lnum = world.mapnum;
 
-   for(int i = 0; i < p->log.mapsC; i++)
-      if(p->log.mapsV[i].lnum == lnum)
-         {lm = &p->log.mapsV[i]; break;}
+   for(i32 i = 0; i < p->log.mapsC; i++)
+      if(p->log.mapsV[i].lnum == lnum) {lm = &p->log.mapsV[i]; break;}
 
    if(!lm)
    {
       Vec_GrowN(p->log.maps, 1, 32);
       lm = &Vec_Next(p->log.maps);
-      *lm = (struct logmap){
-         .name = StrParam(c"%tS", PRINTNAME_LEVELNAME),
-         .lnum = lnum
-      };
+      lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
+      lm->lnum = lnum;
    }
 
    p->log.curmap = lm;
 
-   p->logF(LC(cLANG "ENTER_FMT"), lm->name, world.canontime);
+   char const *time = world.canontime;
+   p->logF(LC(LANG "ENTER_FMT"), lm->name, time);
 }
 
 script ext("ACS")
-void Lith_LogS(int levl, int type)
+void Lith_LogS(i32 levl, i32 type)
 {
-   __str name = ServCallS("GetLogName");
+   str name = ServCallS(sm_GetLogName);
 
-   if(name[0] == '_') name = Language(cLANG "LOG%S", name);
+   if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
    withplayer(LocalPlayer) switch(type) {
-   case msg_ammo: if(p->getCVarI(sCVAR "player_ammolog"))
-   case msg_huds: p->logH(levl, c"%S", name); break;
-   case msg_full: p->logF(      c"%S", name); break;
-   case msg_both: p->logB(levl, c"%S", name); break;
+   case msg_ammo: if(p->getCVarI(sc_player_ammolog))
+   case msg_huds: p->logH(levl, "%S", name); break;
+   case msg_full: p->logF(      "%S", name); break;
+   case msg_both: p->logB(levl, "%S", name); break;
    }
 }
 
@@ -139,35 +142,32 @@ void Lith_PlayerUpdateLog(struct player *p)
    else
       p->log.curtime--;
 
-   for(int i = 0; i < p->log.hudC; i++)
+   for(i32 i = 0; i < p->log.hudC; i++)
       if(p->log.hudV[i].ftim) p->log.hudV[i].ftim--;
 }
 
-void Lith_CBITab_Log(gui_state_t *g, struct player *p)
+void Lith_CBITab_Log(struct gui_state *g, struct player *p)
 {
    if(Lith_GUI_Button(g, .x = 25, 38, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;
 
-   if(Lith_GUI_Button(g, .x = 25 + guipre.btnprev.w, 38, Pre(btnnext)))
+   if(Lith_GUI_Button(g, .x = 25 + gui_p.btnprev.w, 38, Pre(btnnext)))
       if(++CBIState(g)->logsel >= p->log.mapsC) CBIState(g)->logsel = 0;
 
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
-   PrintTextStr(lm->name);
-   PrintText(s_cbifont, CR_WHITE, 28+guipre.btnprev.w+guipre.btnnext.w,1, 40,1);
+   PrintText_str(lm->name, s_cbifont, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
    Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * 8);
 
-   for(int i = 0; i < lm->dataC; i++)
+   for(i32 i = 0; i < lm->dataC; i++)
    {
-      int const y = 8 * i;
+      i32 const y = 8 * i;
 
       if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, 8)) continue;
 
-      PrintSprite(":UI:LogList", g->ox,1, y + g->oy,1);
-
-      PrintTextStr(lm->dataV[i].info);
-      PrintText(s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
+      PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
+      PrintText_str(lm->dataV[i].inf, s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
 
@@ -175,36 +175,34 @@ void Lith_CBITab_Log(gui_state_t *g, struct player *p)
 }
 
 script
-void Lith_HUD_Log(struct player *p, int cr, int x, int yy)
+void Lith_HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
 {
-   if(p->getCVarI(sCVAR "hud_showlog"))
+   if(p->getCVarI(sc_hud_showlog))
    {
-      int yo;
+      i32 yo;
 
-      if(p->getCVarI(sCVAR "hud_logbig")) {yo = 200; SetSize(320, 240);}
-      else                               {yo = 255; SetSize(480, 300);}
+      if(p->getCVarI(sc_hud_logbig)) {yo = 200; SetSize(320, 240);}
+      else                           {yo = 255; SetSize(480, 300);}
 
-      int i = 0;
-      for(int i = 0; i < p->log.hudC; i++)
+      i32 i = 0;
+      for(i32 i = 0; i < p->log.hudC; i++)
       {
          struct logdat const *const ld = &p->log.hudV[i];
 
-         int y = 10 * i;
-         int ya;
+         i32 y = 10 * i;
+         i32 ya;
 
-         if(p->getCVarI(sCVAR "hud_logfromtop"))
-            {ya = 1; y = 20 + y;}
-         else
-            {ya = 2; y = (yo - y) + yy;}
+         if(p->getCVarI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
+         else                               {ya = 2; y = (yo - y) + yy;}
 
-         PrintTextStr(ld->info);
-         PrintText(s_logfont, cr, x,1, y,ya);
+         PrintText_str(ld->inf, s_logfont, cr, x,1, y,ya);
 
          if(ld->ftim) SetFade(fid_logadS + i, 1, 0.07);
 
          if(CheckFade(fid_logadS + i))
          {
-            PrintTextStr(ld->info);
+            char const *s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
+            PrintTextChS(s);
             PrintTextF(s_logfont, CR_WHITE, x,1, y,ya, fid_logadS + i);
          }
       }

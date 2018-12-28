@@ -1,27 +1,24 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 extern bool dorain;
 
 script ext("ACS")
-int LPData(int info, int permutation, bool target)
+i32 LPData(i32 info, i32 permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
    union fixedint u;
 
-   withplayer(LocalPlayer) switch(info)
-   {
+   withplayer(LocalPlayer) switch(info) {
    case pdata_weapon:     return p->weapontype;
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
    case pdata_hassigil:   return p->sgacquired;
-   case pdata_weaponzoom: return u.k = p->getCVarK(sCVAR "weapons_zoomfactor"), u.i;
-   case pdata_slot3ammo:  return p->getCVarI(sCVAR "weapons_slot3ammo");
+   case pdata_weaponzoom: return u.k = p->getCVarK(sc_weapons_zoomfactor), u.i;
+   case pdata_slot3ammo:  return p->getCVarI(sc_weapons_slot3ammo);
    case pdata_pclass:     return p->pclass;
    case pdata_semifrozen: return p->semifrozen > 0;
    case pdata_addp:       return u.k = p->addpitch,  u.i;
@@ -33,10 +30,9 @@ int LPData(int info, int permutation, bool target)
 }
 
 script ext("ACS")
-int LWData(int info)
+i32 LWData(i32 info)
 {
-   switch(info)
-   {
+   switch(info) {
    case wdata_bossspawned: return world.bossspawned;
    case wdata_enemycheck:  return world.enemycheck;
    case wdata_fun:         return world.fun;

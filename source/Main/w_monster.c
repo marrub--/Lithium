@@ -1,11 +1,9 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_monster.h"
-#include "lith_player.h"
-#include "lith_world.h"
-#include "lith_scorenums.h"
-
-StrEntON
+#include "w_monster.h"
+#include "p_player.h"
+#include "w_world.h"
+#include "w_scorenums.h"
 
 #define HasResistances(m) ((m)->rank >= 2)
 
@@ -24,40 +22,42 @@ StrEntON
 // Types ---------------------------------------------------------------------|
 
 struct dmon_stat {
-   fixed x, y, z;
-   fixed r, h;
-   int   health;
-   int   painwait;
-   bool  finalized;
+   k32  x, y, z;
+   k32  r, h;
+   i32  health;
+   i32  painwait;
+   bool finalized;
 };
 
 // Static Objects ------------------------------------------------------------|
 
-#include "lith_monsterinfo.h"
+StrEntON
+#include "w_moninfo.h"
+StrEntOFF
 
-static char const *dmgtype_names[dmgtype_max] = {
-   c"Bullets",
-   c"Energy",
-   c"Fire",
-   c"Magic",
-   c"Melee",
-   c"Shrapnel"
+static str const dmgtype_names[dmgtype_max] = {
+   s"Bullets",
+   s"Energy",
+   s"Fire",
+   s"Magic",
+   s"Melee",
+   s"Shrapnel"
 };
 
 // Static Functions ----------------------------------------------------------|
 
-static void ApplyLevels(dmon_t *m, int prev)
+static void ApplyLevels(dmon_t *m, i32 prev)
 {
    GetInfo(m);
 
-   for(int i = prev + 1; i <= m->level; i++)
+   for(i32 i = prev + 1; i <= m->level; i++)
    {
       if(i % 10 == 0)
       {
          // if we have resistances, randomly pick a resistance we already have
          if(HasResistances(m))
          {
-            int r;
+            i32 r;
             do {r = ACS_Random(0, dmgtype_max-1);} while(m->resist[r] == 0);
             m->resist[r] += 2;
          }
@@ -66,31 +66,30 @@ static void ApplyLevels(dmon_t *m, int prev)
 
    if(m->level >= 5)
    {
-      fixed rn = m->rank / 10.0;
+      k32 rn = m->rank / 10.0;
       i96 delt = m->level - prev;
       i96 hp10 = m->spawnhealth / 10;
-      int newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
+      i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
       LogDebug(log_dmonV, "monster %i: newh %i", m->id, newh);
       SetPropI(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
 
-   for(int i = 0; i < dmgtype_max; i++) {
-      ifauto(int, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(cOBJ "M_%s%i", dmgtype_names[i],
-            min(resist, MAXRANK)), 1);
+   for(i32 i = 0; i < dmgtype_max; i++) {
+      ifauto(i32, resist, m->resist[i] / 15.0) {
+         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i], min(resist, MAXRANK)), 1);
       }
    }
 }
 
 stkcall
-static void ShowBarrier(dmon_t const *m, fixed alpha)
+static void ShowBarrier(dmon_t const *m, k32 alpha)
 {
    bool anyplayer = false;
 
    // Optimization: Check for players nearby first.
-   int const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
-   int const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
+   i32 const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
+   i32 const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
 
    Lith_ForPlayer() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
       {anyplayer = true; break;}
@@ -99,17 +98,17 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
       return;
 
    world.begAngles(m->ms->x, m->ms->y);
-   ServCallI("MonsterBarrierLook");
+   ServCallI(sm_MonsterBarrierLook);
 
-   for(int i = 0; i < world.a_cur; i++)
+   for(i32 i = 0; i < world.a_cur; i++)
    {
       struct polar *a = &world.a_angles[i];
 
-      fixed dst = m->ms->r / 2 + a->dst / 4;
-      fixed x   = m->ms->x + ACS_Cos(a->ang) * dst;
-      fixed y   = m->ms->y + ACS_Sin(a->ang) * dst;
-      int   tid = ACS_UniqueTID();
-      __str bar = m->rank >= 5 ? OBJ "MonsterHeptaura" : OBJ "MonsterBarrier";
+      k32 dst = m->ms->r / 2 + a->dst / 4;
+      k32 x   = m->ms->x + ACS_Cos(a->ang) * dst;
+      k32 y   = m->ms->y + ACS_Sin(a->ang) * dst;
+      i32   tid = ACS_UniqueTID();
+      str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
 
       ACS_SpawnForced(bar, x, y, m->ms->z + m->ms->h / 2, tid);
       SetPropK(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
@@ -118,9 +117,9 @@ static void ShowBarrier(dmon_t const *m, fixed alpha)
 
 static void BaseMonsterLevel(dmon_t *m)
 {
-   fixed rn1 = ACS_RandomFixed(1, MAXRANK);
-   fixed rn2 = ACS_RandomFixed(1, MAXLEVEL);
-   fixed bias;
+   k32 rn1 = ACS_RandomFixed(1, MAXRANK);
+   k32 rn2 = ACS_RandomFixed(1, MAXLEVEL);
+   k32 bias;
 
    switch(world.game) {
    case Game_Episodic: bias = world.mapscleared / 10.0; break;
@@ -130,7 +129,7 @@ static void BaseMonsterLevel(dmon_t *m)
    Lith_ForPlayer() {rn2 += p->attr.level / 2.0; break;}
 
    bias *= bias;
-   bias += ACS_GameSkill() / (fixed)skill_nightmare * 0.1;
+   bias += ACS_GameSkill() / (k32)skill_nightmare * 0.1;
    bias += world.difficulty / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
@@ -146,7 +145,7 @@ static void BaseMonsterLevel(dmon_t *m)
    }
 
    if(HasResistances(m)) {
-      for(int i = 0; i < m->rank; i++)
+      for(i32 i = 0; i < m->rank; i++)
          m->resist[ACS_Random(1, dmgtype_max)-1] += 5;
    }
 
@@ -158,26 +157,26 @@ static void BaseMonsterLevel(dmon_t *m)
 script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
-   int tid = ACS_UniqueTID();
-   ACS_SpawnForced(OBJ "MonsterSoul", m->ms->x, m->ms->y, m->ms->z + 16, tid);
+   i32 tid = ACS_UniqueTID();
+   ACS_SpawnForced(so_MonsterSoul, m->ms->x, m->ms->y, m->ms->z + 16, tid);
    SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
    Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
 
-   for(int i = 0; ACS_CheckFlag(0, "SOLID") && i < 15; i++) ACS_Delay(1);
+   for(i32 i = 0; ACS_CheckFlag(0, s_SOLID) && i < 15; i++) ACS_Delay(1);
 
-   SetPropS(tid, APROP_Species, OBJ "Player");
+   SetPropS(tid, APROP_Species, so_Player);
 }
 
 static void SpawnManaPickup(dmon_t *m, struct player *p)
 {
-   int i = 0;
+   i32 i = 0;
    do {
-      int tid = ACS_UniqueTID();
-      int x   = m->ms->x + ACS_Random(-16, 16);
-      int y   = m->ms->y + ACS_Random(-16, 16);
-      ACS_Spawn(OBJ "ManaPickup", x, y, m->ms->z + 4, tid);
+      i32 tid = ACS_UniqueTID();
+      i32 x   = m->ms->x + ACS_Random(-16, 16);
+      i32 y   = m->ms->y + ACS_Random(-16, 16);
+      ACS_Spawn(so_ManaPickup, x, y, m->ms->z + 4, tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       i += 150;
@@ -194,7 +193,7 @@ static void OnFinalize(dmon_t *m)
             ACS_Teleport_EndGame();
 
          if(m->mi->type == mtype_imp && m->level >= 50 && m->rank >= 4)
-            ACS_SpawnForced(OBJ "ClawOfImp", m->ms->x, m->ms->y, m->ms->z);
+            ACS_SpawnForced(so_ClawOfImp, m->ms->x, m->ms->y, m->ms->z);
       }
 
       if(!m->ms->finalized)
@@ -205,11 +204,11 @@ static void OnFinalize(dmon_t *m)
             SpawnManaPickup(m, p);
          }
 
-         if(m->mi->type == mtype_zombie && ACS_GetCVar(CVAR "sv_wepdrop") && !p->weapon.slot[3])
+         if(m->mi->type == mtype_zombie && ACS_GetCVar(sc_sv_wepdrop) && !p->weapon.slot[3])
          {
-            int tid = ACS_UniqueTID();
-            ACS_SpawnForced("Shotgun", m->ms->x, m->ms->y, m->ms->z, tid);
-            ACS_SetActorFlag(tid, "DROPPED", false);
+            i32 tid = ACS_UniqueTID();
+            ACS_SpawnForced(so_Shotgun, m->ms->x, m->ms->y, m->ms->z, tid);
+            ACS_SetActorFlag(tid, s_DROPPED, false);
          }
 
          if(p->getUpgrActive(UPGR_SoulCleaver))
@@ -240,7 +239,7 @@ static void OnDeath(dmon_t *m)
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
-void Lith_GiveEXPToMonster(int amt)
+void Lith_GiveEXPToMonster(i32 amt)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
 }
@@ -250,14 +249,14 @@ void Lith_PrintMonsterInfo(void)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
    {
-      Log(c"%p (%p %p) %S active: %u id: %.3u\n"
-           "wasdead: %u finalized: %u painwait: %i\n"
-           "level: %.3i rank: %i exp: %i\n"
-           "health: %i/%i\n"
-           "x: %k y: %k z: %k\n"
-           "r: %k h: %k\n"
-           "mi->exp: %lu mi->score: %lli\n"
-           "mi->flags: %i mi->type: %i",
+      Log("%p (%p %p) %S active: %u id: %.3u\n"
+          "wasdead: %u finalized: %u painwait: %i\n"
+          "level: %.3i rank: %i exp: %i\n"
+          "health: %i/%i\n"
+          "x: %k y: %k z: %k\n"
+          "r: %k h: %k\n"
+          "mi->exp: %lu mi->score: %lli\n"
+          "mi->flags: %i mi->type: %i",
           m, m->ms, m->mi, m->mi->name, m->active, m->id,
           m->wasdead, m->ms->finalized, m->ms->painwait,
           m->level, m->rank, m->exp,
@@ -266,15 +265,15 @@ void Lith_PrintMonsterInfo(void)
           m->ms->r, m->ms->h,
           m->mi->exp, m->mi->score,
           m->mi->flags, m->mi->type);
-      for(int i = 0; i < countof(m->resist); i++)
-         Log(c"resist %s: %i", dmgtype_names[i], m->resist[i]);
+      for(i32 i = 0; i < countof(m->resist); i++)
+         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
    }
    else
-      Log(c"no active monster");
+      Log("no active monster");
 }
 
 script ext("ACS")
-void Lith_GiveMonsterEXP(int amt)
+void Lith_GiveMonsterEXP(i32 amt)
 {
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
 }
@@ -284,7 +283,7 @@ void Lith_MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
 
-   InvGive(OBJ "MonsterID", m->id + 1);
+   InvGive(so_MonsterID, m->id + 1);
 
    m->ms = &ms;
    GetInfo(m);
@@ -295,7 +294,7 @@ void Lith_MonsterMain(dmon_t *m)
    LogDebug(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
-   for(int tic = 0;; tic++)
+   for(i32 tic = 0;; tic++)
    {
       GetInfo(m);
 
@@ -310,13 +309,13 @@ void Lith_MonsterMain(dmon_t *m)
 
       if(m->exp > 500)
       {
-         int prev = m->level;
+         i32 prev = m->level;
 
          div_t d = div(m->exp, 500);
          m->level += d.quot;
          m->exp    = d.rem;
 
-         ACS_SpawnForced(OBJ "MonsterLevelUp", m->ms->x, m->ms->y, m->ms->z);
+         ACS_SpawnForced(so_MonsterLevelUp, m->ms->x, m->ms->y, m->ms->z);
          ApplyLevels(m, prev);
 
          LogDebug(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
@@ -325,8 +324,8 @@ void Lith_MonsterMain(dmon_t *m)
       if(HasResistances(m) && m->level >= 20)
          ShowBarrier(m, m->level / 100.);
 
-      if(InvNum(OBJ "Ionized") && tic % 5 == 0)
-         ServCallI(OBJ "IonizeFX");
+      if(InvNum(so_Ionized) && tic % 5 == 0)
+         ServCallI(sm_IonizeFX);
 
       ACS_Delay(2);
    }
@@ -337,9 +336,9 @@ void Lith_MonsterInfo()
 {
    while(!world.gsinit) ACS_Delay(1);
 
-   __str cname = ACS_GetActorClass(0);
+   str cname = ACS_GetActorClass(0);
 
-   for(int i = 0; i < countof(monsterinfo); i++)
+   for(i32 i = 0; i < countof(monsterinfo); i++)
    {
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
@@ -360,7 +359,7 @@ void Lith_MonsterInfo()
    LogDebug(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
-   InvGive(OBJ "MonsterInvalid", 1);
+   InvGive(so_MonsterInvalid, 1);
 }
 
 script ext("ACS")

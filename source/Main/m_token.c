@@ -1,14 +1,14 @@
 // Copyright © 2017 Alison Sanderson, all rights reserved.
-#include "lith_token.h"
-#include "lith_darray.h"
-#include "lith_char.h"
-#include "lith_file.h"
+#include "m_token.h"
+#include "m_vec.h"
+#include "m_char.h"
+#include "m_file.h"
 
 #define textNext() Vec_Grow(tok->text, 1), Vec_Next(tok->text)
 
 #define tokText(fn) \
    do { \
-      for(int pc = 0; fn(ch); pc = ch, getch()) { \
+      for(i32 pc = 0; fn(ch); pc = ch, getch()) { \
          advLine(); \
          textNext() = ch; \
       } \
@@ -44,7 +44,7 @@ void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig)
    if(!tok || !fp || !orig) return;
 
 begin:;
-   int ch;
+   i32 ch;
 
    Vec_Clear(tok->text);
 
@@ -111,7 +111,7 @@ begin:;
          tok1(tok_cmtblk);
          getch();
 
-         for(int lvl = 1; lvl && !FEOF(fp); getch())
+         for(i32 lvl = 1; lvl && !FEOF(fp); getch())
          {
             if(ch == '/') {
                if(getch() == '*') {lvl++; continue;}
@@ -149,7 +149,7 @@ begin:;
    case '\'': tok1(tok_charac); goto string;
    case '"':  tok1(tok_string); goto string;
    string:
-      for(int i = 0, beg = ch; getch() != beg && !FEOF(fp);)
+      for(i32 i = 0, beg = ch; getch() != beg && !FEOF(fp);)
          textNext() = ch;
       textNext() = '\0';
       return;

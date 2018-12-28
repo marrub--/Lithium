@@ -1,7 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-
-StrEntOFF
+#include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -20,10 +18,9 @@ void Upgr_7777777_Deactivate(struct player *p, upgrade_t *upgr)
 script
 void Upgr_7777777_Update(struct player *p, upgrade_t *upgr)
 {
-   fixed vel = -2;
+   k32 vel = -2;
    if(p->velz > 0) vel = p->velz;
    p->setVel(p->velx, p->vely, vel);
 }
 
 // EOF
-

@@ -1,38 +1,34 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_player.h"
-#include "lith_monster.h"
-#include "lith_world.h"
-#include "lith_hudid.h"
-
-StrEntON
+#include "p_player.h"
+#include "w_monster.h"
+#include "w_world.h"
+#include "p_hudid.h"
 
 // Static Functions ----------------------------------------------------------|
 
-static void GiveWeaponItem(int parm, int slot)
+static void GiveWeaponItem(i32 parm, i32 slot)
 {
-   switch(parm)
-   {
+   switch(parm) {
    case weapon_c_fist:
-   case weapon_fist:      InvGive(OBJ "Death",      1);    break;
-   case weapon_c_spas:    InvGive(OBJ "ShellAmmo",  8);    break;
-   case weapon_ssg:       InvGive(OBJ "ShellAmmo",  4);    break;
-   case weapon_c_sniper:  InvGive(OBJ "RocketAmmo", 6);    break;
-   case weapon_launcher:  InvGive(OBJ "RocketAmmo", 2);    break;
+   case weapon_fist:      InvGive(so_Death,      1);    break;
+   case weapon_c_spas:    InvGive(so_ShellAmmo,  8);    break;
+   case weapon_ssg:       InvGive(so_ShellAmmo,  4);    break;
+   case weapon_c_sniper:  InvGive(so_RocketAmmo, 6);    break;
+   case weapon_launcher:  InvGive(so_RocketAmmo, 2);    break;
    case weapon_c_plasma:
-   case weapon_plasma:    InvGive(OBJ "PlasmaAmmo", 1500); break;
-   case weapon_c_shipgun: InvGive(OBJ "CannonAmmo", 5);    break;
-   case weapon_bfg:       InvGive(OBJ "CannonAmmo", 4);    break;
+   case weapon_plasma:    InvGive(so_PlasmaAmmo, 1500); break;
+   case weapon_c_shipgun: InvGive(so_CannonAmmo, 5);    break;
+   case weapon_bfg:       InvGive(so_CannonAmmo, 4);    break;
    }
 }
 
 static void WeaponGrab(struct player *p, weaponinfo_t const *info)
 {
-   if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound, 127);
-   else                                ACS_LocalAmbientSound("marathon/pickup", 127);
+   if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound,  127);
+   else                                ACS_LocalAmbientSound(ss_marathon_pickup, 127);
 
-   switch(info->slot)
-   {
+   switch(info->slot) {
    default: Lith_FadeFlash(255, 255, 255, 0.5, 0.4); break;
    case 3:  Lith_FadeFlash(0,   255, 0,   0.5, 0.5); break;
    case 4:  Lith_FadeFlash(255, 255, 0,   0.5, 0.5); break;
@@ -42,7 +38,7 @@ static void WeaponGrab(struct player *p, weaponinfo_t const *info)
    }
 }
 
-static void Lith_PickupScore(struct player *p, int parm)
+static void Lith_PickupScore(struct player *p, i32 parm)
 {
    extern void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score);
 
@@ -59,22 +55,22 @@ static void Lith_PickupScore(struct player *p, int parm)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-int Lith_PlayerCurWeaponType(struct player *p)
+i32 Lith_PlayerCurWeaponType(struct player *p)
 {
    return p->weapon.cur->info->type;
 }
 
 script ext("ACS")
-bool Lith_WeaponPickup(int name)
+bool Lith_WeaponPickup(i32 name)
 {
    extern void Lith_PickupMessage(struct player *p, weaponinfo_t const *info);
-   extern int Lith_WeaponFromName(struct player *p, int name);
+   extern i32 Lith_WeaponFromName(struct player *p, i32 name);
 
    struct player *p = LocalPlayer;
    if(NoPlayer(p)) return false;
 
-   bool weaponstay = ACS_GetCVar("sv_weaponstay");
-   int parm = weapon_unknown;
+   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
+   i32 parm = weapon_unknown;
 
    parm = Lith_WeaponFromName(p, name);
 
@@ -109,16 +105,16 @@ bool Lith_WeaponPickup(int name)
 }
 
 script ext("ACS")
-fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
+k32 Lith_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
 {
-   static fixed A;
-   static fixed P;
+   static k32 A;
+   static k32 P;
 
    if(!getpitch)
    {
-      fixed dx = ACS_RandomFixed(mdx,  0.0);
-      fixed dy = ACS_RandomFixed(mdy,  0.0);
-      fixed a  = ACS_RandomFixed(1.0, -1.0);
+      k32 dx = ACS_RandomFixed(mdx,  0.0);
+      k32 dy = ACS_RandomFixed(mdy,  0.0);
+      k32 a  = ACS_RandomFixed(1.0, -1.0);
 
       A = ACS_Sin(a) * dx;
       P = ACS_Cos(a) * dy;
@@ -130,16 +126,16 @@ fixed Lith_CircleSpread(fixed mdx, fixed mdy, bool getpitch)
 }
 
 script ext("ACS")
-int Lith_ChargeFistDamage()
+i32 Lith_ChargeFistDamage()
 {
-   int amount = InvNum(OBJ "FistCharge");
-   InvTake(OBJ "FistCharge", 0x7FFFFFFF);
+   i32 amount = InvNum(so_FistCharge);
+   InvTake(so_FistCharge, 0x7FFFFFFF);
    return amount * ACS_Random(1, 3);
 }
 
 void Lith_GSInit_Weapon(void)
 {
-   for(int i = 0; i < weapon_max; i++)
+   for(i32 i = 0; i < weapon_max; i++)
    {
       weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
       info->type = i;
@@ -155,11 +151,11 @@ void Lith_PlayerPreWeapons(struct player *p)
    w->prev = w->cur;
 
    // Reset data temporarily.
-   w->cur = null;
-   for(int i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
+   w->cur = nil;
+   for(i32 i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
 
    // Iterate over each weapon setting information on it.
-   for(int i = weapon_min; i < weapon_max; i++)
+   for(i32 i = weapon_min; i < weapon_max; i++)
    {
       weaponinfo_t const *info = &weaponinfo[i];
       invweapon_t *wep = &w->inv[i];
@@ -190,9 +186,9 @@ void Lith_PlayerPreWeapons(struct player *p)
       // For slot 3 weapons that don't take ammo, check if they should.
       case weapon_shotgun:
       case weapon_c_rifle:
-         if(p->getCVarI(CVAR "weapons_slot3ammo")) {
+         if(p->getCVarI(sc_weapons_slot3ammo)) {
             wep->ammotype |= AT_Ammo;
-            wep->ammoclass = OBJ "ShellAmmo";
+            wep->ammoclass = so_ShellAmmo;
          }
       }
 
@@ -201,8 +197,8 @@ void Lith_PlayerPreWeapons(struct player *p)
       {
          if(wep->ammotype & AT_NMag)
          {
-            wep->magmax = ServCallI("GetMaxMag", p->num, wep->info->classname);
-            wep->magcur = ServCallI("GetCurMag", p->num, wep->info->classname);
+            wep->magmax = ServCallI(sm_GetMaxMag, p->num, wep->info->classname);
+            wep->magcur = ServCallI(sm_GetCurMag, p->num, wep->info->classname);
          }
 
          if(wep->ammotype & AT_Ammo)
@@ -215,8 +211,8 @@ void Lith_PlayerPreWeapons(struct player *p)
       // Auto-reload.
       if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
-         if(wep->autoreload >= 35 * 5)
-            ServCallI("AutoReload", p->num, info->classname);
+         if(wep->autoreload >= 35 * 3)
+            ServCallI(sm_AutoReload, p->num, info->classname);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
@@ -231,23 +227,23 @@ void Lith_PlayerUpdateWeapons(struct player *p)
 {
    if(!Lith_IsPaused)
    {
-      int heat = InvNum(OBJ "SMGHeat");
-           if(heat < 100) InvTake(OBJ "SMGHeat", 5);
-      else if(heat < 200) InvTake(OBJ "SMGHeat", 4);
-      else if(heat < 300) InvTake(OBJ "SMGHeat", 3);
-      else if(heat < 400) InvTake(OBJ "SMGHeat", 2);
-      else                InvTake(OBJ "SMGHeat", 1);
+      i32 heat = InvNum(so_SMGHeat);
+           if(heat < 100) InvTake(so_SMGHeat, 5);
+      else if(heat < 200) InvTake(so_SMGHeat, 4);
+      else if(heat < 300) InvTake(so_SMGHeat, 3);
+      else if(heat < 400) InvTake(so_SMGHeat, 2);
+      else                InvTake(so_SMGHeat, 1);
    }
 
    if(p->pclass == pcl_cybermage)
    {
-                                           InvGive(OBJ "Blade",    1);
-                                           InvGive(OBJ "Delear",   1);
-      if(world.cbiupgr[cupg_c_slot3spell]) InvGive(OBJ "Feuer",    1);
-      if(world.cbiupgr[cupg_c_slot4spell]) InvGive(OBJ "Rend",     1);
-      if(world.cbiupgr[cupg_c_slot5spell]) InvGive(OBJ "Hulgyon",  1);
-      if(world.cbiupgr[cupg_c_slot6spell]) InvGive(OBJ "StarShot", 1);
-      if(world.cbiupgr[cupg_c_slot7spell]) InvGive(OBJ "Cercle",   1);
+                                           InvGive(so_Blade,    1);
+                                           InvGive(so_Delear,   1);
+      if(world.cbiupgr[cupg_c_slot3spell]) InvGive(so_Feuer,    1);
+      if(world.cbiupgr[cupg_c_slot4spell]) InvGive(so_Rend,     1);
+      if(world.cbiupgr[cupg_c_slot5spell]) InvGive(so_Hulgyon,  1);
+      if(world.cbiupgr[cupg_c_slot6spell]) InvGive(so_StarShot, 1);
+      if(world.cbiupgr[cupg_c_slot7spell]) InvGive(so_Cercle,   1);
    }
 
    SetSize(320, 240);
@@ -255,16 +251,15 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    switch(p->weapontype)
    {
    case weapon_c_fist:
-      PrintTextStr(L(LANG "MANA_CHARGE"));
-      PrintTextA(s_cbifont, CR_BRICK, 160,0, 100,0, 0.5);
+      PrintTextA_str(L(st_mana_charge), s_cbifont, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
-      ServCallI(OBJ "DelearSprite");
+      ServCallI(sm_DelearSprite);
       break;
    case weapon_cfist:
-      __with(fixed64 charge = 5 + InvNum(OBJ "FistCharge") / 10.lk;)
+      __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.lk;)
       {
-         PrintTextFmt(LC(cLANG "CHARGE_FMT"), charge);
+         PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
          PrintText(s_cbifont, CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
@@ -272,12 +267,12 @@ void Lith_PlayerUpdateWeapons(struct player *p)
 }
 
 script ext("ACS")
-fixed Lith_AmmoRunOut(bool ro, fixed mul)
+k32 Lith_AmmoRunOut(bool ro, k32 mul)
 {
    withplayer(LocalPlayer)
    {
       invweapon_t const *wep = p->weapon.cur;
-      fixed inv = wep->magcur / (fixed)wep->magmax;
+      k32 inv = wep->magcur / (k32)wep->magmax;
 
       mul = mul ? mul : 1.2;
 
@@ -291,9 +286,9 @@ fixed Lith_AmmoRunOut(bool ro, fixed mul)
 }
 
 script ext("ACS")
-int Lith_GetFinalizerMaxHealth(void)
+i32 Lith_GetFinalizerMaxHealth(void)
 {
-   int sh = GetPropI(0, APROP_SpawnHealth);
+   i32 sh = GetPropI(0, APROP_SpawnHealth);
 
    ifauto(dmon_t *, m, DmonSelf())
       return sh + (m->maxhealth - sh) * 0.5;
@@ -304,14 +299,14 @@ int Lith_GetFinalizerMaxHealth(void)
 script ext("ACS")
 void Lith_SurgeOfDestiny(void)
 {
-   for(int i = 0; i < (35 * 7) / 2; i++) {
-      InvGive(OBJ "SurgeOfDestiny", 1);
+   for(i32 i = 0; i < (35 * 7) / 2; i++) {
+      InvGive(so_SurgeOfDestiny, 1);
       ACS_Delay(2);
    }
 }
 
 script ext("ACS")
-int Lith_GetWRF(void)
+i32 Lith_GetWRF(void)
 {
    enum
    {
@@ -329,7 +324,7 @@ int Lith_GetWRF(void)
       WRF_ALLOWUSER4    = 1024
    };
 
-   int flags = 0;
+   i32 flags = 0;
 
    withplayer(LocalPlayer)
    {
@@ -346,34 +341,34 @@ int Lith_GetWRF(void)
 script ext("ACS")
 void Lith_PoisonFXTicker()
 {
-   for(int i = 0; i < 17; i++)
+   for(i32 i = 0; i < 17; i++)
    {
       Lith_PausableTick();
 
-      if(InvNum(OBJ "PoisonFXReset"))
+      if(InvNum(so_PoisonFXReset))
       {
-         InvTake(OBJ "PoisonFXReset", 999);
-         InvTake(OBJ "PoisonFXTimer", 999);
-         InvGive(OBJ "PoisonFXGiverGiver", 1);
+         InvTake(so_PoisonFXReset, 999);
+         InvTake(so_PoisonFXTimer, 999);
+         InvGive(so_PoisonFXGiverGiver, 1);
          return;
       }
    }
 
    if(GetPropI(0, APROP_Health) <= 0)
    {
-      InvTake(OBJ "PoisonFXReset", 999);
-      InvTake(OBJ "PoisonFXTimer", 999);
-      InvTake(OBJ "PoisonFXGiverGiver", 999);
+      InvTake(so_PoisonFXReset, 999);
+      InvTake(so_PoisonFXTimer, 999);
+      InvTake(so_PoisonFXGiverGiver, 999);
    }
-   else if(InvNum(OBJ "PoisonFXTimer"))
+   else if(InvNum(so_PoisonFXTimer))
    {
-      InvGive(OBJ "PoisonFXGiver", 1);
-      InvTake(OBJ "PoisonFXTimer", 1);
+      InvGive(so_PoisonFXGiver, 1);
+      InvTake(so_PoisonFXTimer, 1);
    }
 }
 
 script ext("ACS")
-void Lith_RecoilUp(fixed amount)
+void Lith_RecoilUp(k32 amount)
 {
    withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
 }

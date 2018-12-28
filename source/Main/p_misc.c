@@ -1,8 +1,6 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
 
 script ext("ACS")
 void Lith_GiveMeAllOfTheScore(void)
@@ -11,7 +9,7 @@ void Lith_GiveMeAllOfTheScore(void)
 }
 
 script ext("ACS")
-void Lith_GiveHealthBonus(int amount)
+void Lith_GiveHealthBonus(i32 amount)
 {
    withplayer(LocalPlayer)
    {
@@ -22,7 +20,7 @@ void Lith_GiveHealthBonus(int amount)
 }
 
 script ext("ACS")
-void Lith_GiveHealth(int amount)
+void Lith_GiveHealth(i32 amount)
 {
    withplayer(LocalPlayer)
    {
@@ -53,8 +51,8 @@ void Lith_Glare(void)
    {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      ACS_LocalAmbientSound("player/glare", 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, OBJ "Dummy", "None",
+      ACS_LocalAmbientSound(ss_player_glare, 127);
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
       ACS_Delay(14);

@@ -1,13 +1,11 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #define _GNU_SOURCE // Needed for fopencookie. See: man 7 feature_test_macros
 
-#include "lith_common.h"
-#include "lith_file.h"
-#include "lith_world.h"
+#include "common.h"
+#include "m_file.h"
+#include "w_world.h"
 
-#include "lith_base64.h"
-
-StrEntOFF
+#include "m_base64.h"
 
 #define SAVE_BLOCK_SIZE 230
 
@@ -24,15 +22,15 @@ typedef struct netfile_s
 {
    anonymous
    memfile_t memfile;
-   __str     pcvar;
-   int       pnum;
+   str     pcvar;
+   i32       pnum;
 } netfile_t;
 
 // Static Functions ----------------------------------------------------------|
 
 // fclose for netfiles.
 // Output to the CVar with a Base64 representation of the output buffer.
-static int NetClose(void *nfdata)
+static i32 NetClose(void *nfdata)
 {
    netfile_t *nf = nfdata;
 
@@ -50,7 +48,7 @@ static int NetClose(void *nfdata)
 
    if(coded)
    {
-      int cvarnum = 0;
+      i32 cvarnum = 0;
 
       for(byte const *itr = coded; outsize; cvarnum++)
       {
@@ -67,7 +65,7 @@ static int NetClose(void *nfdata)
          outsize -= itrsize;
       }
 
-      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), s"");
+      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), s_NIL);
 
       Dalloc(coded);
    }
@@ -113,7 +111,7 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
    return size;
 }
 
-static int MemSeek(void *memdata, off_t *offset, int whence)
+static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
 {
    memfile_t *mem = memdata;
    size_t     pos;
@@ -134,7 +132,7 @@ static int MemSeek(void *memdata, off_t *offset, int whence)
    return 0;
 }
 
-static int MemClose(void *memdata)
+static i32 MemClose(void *memdata)
 {
    memfile_t *mem = memdata;
    Dalloc(mem->mem);
@@ -145,20 +143,20 @@ static int MemClose(void *memdata)
 
 // Extern Functions ----------------------------------------------------------|
 
-FILE *W_Open(__str fname, char const *rw)
+FILE *W_Open(str fname, char const *rw)
 {
-   __str f;
-   ifw(int lmp = W_Find(fname), lmp == -1)
-      return null;
+   str f;
+   ifw(i32 lmp = W_Find(fname), lmp == -1)
+      return nil;
    else
       f = W_Read(lmp);
    return __fmemopen_str(f, ACS_StrLen(f), rw);
 }
 
 // fopen() equivalent for netfiles.
-FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
+FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
 {
-   FILE *fp = null;
+   FILE *fp = nil;
 
    if(rw == 'w')
    {
@@ -175,12 +173,12 @@ FILE *Lith_NFOpen(int pnum, __str pcvar, char rw)
    else if(rw == 'r')
    {
       // Get inputs from all possible CVars.
-      char  *input   = null;
+      char  *input   = nil;
       size_t inputsz = 0;
 
-      for(int cvarnum;; cvarnum++)
+      for(i32 cvarnum;; cvarnum++)
       {
-         __str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
+         str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
 
          if(inlen)
@@ -237,7 +235,7 @@ size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE 
    for(byte const *itr = ptr; count--; res += bytes)
    {
       u32 c = *itr++;
-      for(int i = 0; i < bytes; i++)
+      for(i32 i = 0; i < bytes; i++)
          if(fputc((c & (0xFF << (i * 8))) >> (i * 8), fp) == EOF)
             return res;
    }
@@ -272,9 +270,9 @@ size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restri
 
    for(char *itr = buf; count--;)
    {
-      int c = 0, t;
+      i32 c = 0, t;
 
-      for(int i = 0; i < bytes; i++, res++)
+      for(i32 i = 0; i < bytes; i++, res++)
       {
          if((t = fgetc(fp)) == EOF)
          {

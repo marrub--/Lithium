@@ -1,17 +1,15 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
+#include "common.h"
 
 #include <stdio.h>
 #include <ctype.h>
-
-StrEntOFF
 
 #define CpyStrLocal(out, st) \
    do { \
       ACS_BeginPrint(); \
       ACS_PrintLocalized(st); \
-      __str s = ACS_EndStrParam(); \
-      for(int i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
+      str s = ACS_EndStrParam(); \
+      for(i32 i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
    } while(0)
 
 #define StrHashImpl() \
@@ -19,10 +17,12 @@ StrEntOFF
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
-#define X(n, s) __str const s_##n = s"" s;
-#include "lith_stab.h"
+StrEntON
+#define X(n, s) str const n = s;
+#include "m_stab.h"
+StrEntOFF
 
-__str l_strupper(__str in)
+str l_strupper(str in)
 {
    ACS_BeginPrint();
 
@@ -54,20 +54,20 @@ char *lstrcpy_str(char *dest, char __str_ars const *src)
    for(; *s1 && *s2; ++s1, ++s2) {if(*s1 != *s2) return *s1 - *s2;} \
    return *s1 - *s2
 
-int lstrcmp_str(char const *s1, char __str_ars const *s2)
+i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
 {
    StrCmpImpl();
 }
 
 stkcall
-__str scoresep(i96 num)
+str scoresep(i96 num)
 {
    static char out[48];
 
-   if(!num) return s"0";
+   if(!num) return st_0;
 
    char *outp = out + countof(out) - 1;
-   int cnum = 0;
+   i32 cnum = 0;
 
    while(num)
    {
@@ -83,23 +83,21 @@ __str scoresep(i96 num)
 
    if(!cnum) outp++;
 
-   ACS_BeginPrint();
-   ACS_PrintGlobalCharArray((int)outp, __GDCC__Sta);
-   return ACS_EndStrParam();
+   return l_strdup(outp);
 }
 
-__str LanguageV(__str name)
+str LanguageV(str name)
 {
    ACS_BeginPrint();
    ACS_PrintLocalized(name);
-   __str ret = ACS_EndStrParam();
+   str ret = ACS_EndStrParam();
 
    while(ret[0] == '$')
    {
-      __str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
+      str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
       ACS_BeginPrint();
       ACS_PrintLocalized(sub);
-      __str nex = ACS_EndStrParam();
+      str nex = ACS_EndStrParam();
       if(sub != nex) ret = nex;
       else           break;
    }
@@ -131,7 +129,7 @@ char *LanguageCV(char *out, char const *fmt, ...)
    return LanguageVC(out, nbuf);
 }
 
-__str LanguageNull(char const *fmt, ...)
+str LanguageNull(char const *fmt, ...)
 {
    va_list vl;
 
@@ -141,10 +139,10 @@ __str LanguageNull(char const *fmt, ...)
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   __str name = ACS_EndStrParam();
-   __str alias = LanguageV(name);
+   str name = ACS_EndStrParam();
+   str alias = LanguageV(name);
 
-   return name == alias ? null : alias;
+   return name == alias ? nil : alias;
 }
 
 // EOF

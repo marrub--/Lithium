@@ -1,17 +1,14 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_version.h"
-#include "lith_world.h"
-#include "lith_monster.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "m_version.h"
+#include "w_world.h"
+#include "w_monster.h"
 
 // Static Functions ----------------------------------------------------------|
 
 static void SetupAttributes(struct player *p)
 {
-   StrEntOFF
    memmove(p->attr.names[at_acc], "ACC", 3);
    memmove(p->attr.names[at_def], "DEF", 3);
    memmove(p->attr.names[at_str], "STR", 3);
@@ -43,22 +40,22 @@ static void SetupAttributes(struct player *p)
 
 static void SetPClass(struct player *p)
 {
-   __with(__str cl = p->pcstr = ACS_GetActorClass(0);) {
+   __with(str cl = p->pcstr = ACS_GetActorClass(0);) {
       #if LITHIUM
-           if(cl == OBJ "MarinePlayer"   ) p->pclass = pcl_marine;
-      else if(cl == OBJ "CyberMagePlayer") p->pclass = pcl_cybermage;
-      else if(cl == OBJ "InformantPlayer") p->pclass = pcl_informant;
-      else if(cl == OBJ "WandererPlayer" ) p->pclass = pcl_wanderer;
-      else if(cl == OBJ "AssassinPlayer" ) p->pclass = pcl_assassin;
-      else if(cl == OBJ "DarkLordPlayer" ) p->pclass = pcl_darklord;
-      else if(cl == OBJ "ThothPlayer"    ) p->pclass = pcl_thoth;
+           if(cl == so_MarinePlayer   ) p->pclass = pcl_marine;
+      else if(cl == so_CyberMagePlayer) p->pclass = pcl_cybermage;
+      else if(cl == so_InformantPlayer) p->pclass = pcl_informant;
+      else if(cl == so_WandererPlayer ) p->pclass = pcl_wanderer;
+      else if(cl == so_AssassinPlayer ) p->pclass = pcl_assassin;
+      else if(cl == so_DarkLordPlayer ) p->pclass = pcl_darklord;
+      else if(cl == so_ThothPlayer    ) p->pclass = pcl_thoth;
       #else
-      if(cl == OBJ "Player")
+      if(cl == so_Player)
          p->pclass = pcl_doubletap;
       #endif
       else for(;;)
       {
-         Log(c"Invalid player class detected, everything is going to explode!");
+         Log("Invalid player class detected, everything is going to explode!");
          ACS_Delay(1);
       }
    }
@@ -67,13 +64,13 @@ static void SetPClass(struct player *p)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-bool Lith_ButtonPressed(struct player *p, int bt)
+bool Lith_ButtonPressed(struct player *p, i32 bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
 
 stkcall
-bool Lith_SetPlayerVelocity(struct player *p, fixed velx, fixed vely, fixed velz, bool add)
+bool Lith_SetPlayerVelocity(struct player *p, k32 velx, k32 vely, k32 velz, bool add)
 {
    if(add) p->velx += velx, p->vely += vely, p->velz += velz;
    else    p->velx  = velx, p->vely  = vely, p->velz  = velz;
@@ -96,7 +93,7 @@ void Lith_ValidatePlayerTID(struct player *p)
 script
 void Lith_PlayerUpdateData(struct player *p)
 {
-   static int const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+   static i32 const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
 
    p->grabInput = false;
@@ -128,27 +125,27 @@ void Lith_PlayerUpdateData(struct player *p)
 
    p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   p->name        = StrParam(c"%tS", p->num);
+   p->name        = (ACS_BeginPrint(), ACS_PrintName(p->num), ACS_EndStrParam());
    p->weaponclass = ACS_GetWeapon();
 
-   p->scopetoken = InvNum(OBJ "WeaponScopedToken");
+   p->scopetoken = InvNum(so_WeaponScopedToken);
 
-   p->krc = InvNum("RedCard")     ||
-            InvNum("ChexRedCard") ||
-            InvNum("KeyGreen");
-   p->kyc = InvNum("YellowCard")     ||
-            InvNum("ChexYellowCard") ||
-            InvNum("KeyYellow");
-   p->kbc = InvNum("BlueCard")     ||
-            InvNum("ChexBlueCard") ||
-            InvNum("KeyBlue");
-   p->krs = InvNum("RedSkull");
-   p->kys = InvNum("YellowSkull");
-   p->kbs = InvNum("BlueSkull");
+   p->krc = InvNum(so_RedCard)     ||
+            InvNum(so_ChexRedCard) ||
+            InvNum(so_KeyGreen);
+   p->kyc = InvNum(so_YellowCard)     ||
+            InvNum(so_ChexYellowCard) ||
+            InvNum(so_KeyYellow);
+   p->kbc = InvNum(so_BlueCard)     ||
+            InvNum(so_ChexBlueCard) ||
+            InvNum(so_KeyBlue);
+   p->krs = InvNum(so_RedSkull);
+   p->kys = InvNum(so_YellowSkull);
+   p->kbs = InvNum(so_BlueSkull);
 }
 
 script ext("ACS")
-void Lith_KeyDown(int pnum, int ch)
+void Lith_KeyDown(i32 pnum, i32 ch)
 {
    withplayer(&players[pnum])
       if(p->tbptr + 1 < countof(p->txtbuf))
@@ -160,28 +157,28 @@ static void LevelUp(struct player *p, u32 attr[at_max])
 {
    u32 level = p->attr.level;
 
-   for(int i = 0; i < at_max; i++) p->attr.attrs[i] += attr[i];
+   for(i32 i = 0; i < at_max; i++) p->attr.attrs[i] += attr[i];
 
-   for(int i = 0; i < 35 * 5; i++)
+   for(i32 i = 0; i < 35 * 5; i++)
    {
       if(level != p->attr.level) return; // a new levelup started, so exit
 
-      for(int j = 0; j < at_max; j++)
-         if(i > 35*2 / (fixed)at_max * j)
+      for(i32 j = 0; j < at_max; j++)
+         if(i > 35*2 / (k32)at_max * j)
       {
          char *sp = p->attr.lvupstr;
 
-         sp += sprintf(sp, c"LEVEL %u", p->attr.level);
-         if(p->attr.points) sprintf(sp, c" (%u points)", p->attr.points);
+         sp += sprintf(sp, "LEVEL %u", p->attr.level);
+         if(p->attr.points) sprintf(sp, " (%u points)", p->attr.points);
          *sp++ = '\n';
 
-         for(int k = 0, l = 0; k <= j; k++, l++)
+         for(i32 k = 0, l = 0; k <= j; k++, l++)
          {
             // skip over any +0 attributes
             while(l < at_max && !attr[l]) l++;
             if(l >= at_max) break;
 
-            sp += sprintf(sp, c"%.3s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
+            sp += sprintf(sp, "%.3s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
          }
       }
 
@@ -197,21 +194,21 @@ void Lith_GiveEXP(struct player *p, u64 amt)
    struct player_attributes *a = &p->attr;
 
    u32 attr[at_max] = {};
-   int levelup = 0;
+   i32 levelup = 0;
 
    while(a->exp + amt >= a->expnext)
    {
       a->level++;
       a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
-      __with(int pts = 7;) switch(p->getCVarI(sCVAR "player_lvsys"))
+      __with(i32 pts = 7;) switch(p->getCVarI(sc_player_lvsys))
       {
       case atsys_manual: a->points += 7; break;
       case atsys_hybrid:
          a->points += 2;
          pts       -= 2;
       case atsys_auto:
-         for(int i = 0; i < pts; i++) attr[ACS_Random(0, 100) % at_max]++;
+         for(i32 i = 0; i < pts; i++) attr[ACS_Random(0, 100) % at_max]++;
          levelup++;
          break;
       }
@@ -247,7 +244,7 @@ void Lith_ResetPlayer(struct player *p)
       p->spawnhealth = GetPropI(0, APROP_Health);
       p->maxhealth   = p->spawnhealth;
       p->discount    = 1.0;
-      p->stepnoise   = StrParam(c"player/%S/step", p->classname);
+      p->stepnoise   = StrParam("player/%S/step", p->classname);
 
       switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
       case 0: p->pronoun = pro_male;   break;
@@ -264,15 +261,12 @@ void Lith_ResetPlayer(struct player *p)
    p->tid = 0;
    p->validateTID();
 
-   // This keeps spawning more camera actors when you die, but that should be
-   // OK as long as you don't die 2 billion times.
-   ACS_SpawnForced(OBJ "CameraHax", 0, 0, 0, p->cameratid  = ACS_UniqueTID());
-   ACS_SpawnForced(OBJ "CameraHax", 0, 0, 0, p->weathertid = ACS_UniqueTID());
+   if(p->cameratid)  ACS_Thing_Remove(p->cameratid);
+   if(p->weathertid) ACS_Thing_Remove(p->weathertid);
+   ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->cameratid  = ACS_UniqueTID());
+   ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
-   if(world.dbgScore)
-      p->score = 0xFFFFFFFFFFFFFFFFll;
-
-   // Reset data
+   if(world.dbgScore) p->score = 0xFFFFFFFFFFFFFFFFll;
 
    // Any linked lists on the player need to be initialized here.
    p->hudstrlist.free(true);
@@ -281,7 +275,7 @@ void Lith_ResetPlayer(struct player *p)
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    SetPropK(0, APROP_ViewHeight, p->viewheight);
-   InvTake(OBJ "WeaponScopedToken", 999);
+   InvTake(so_WeaponScopedToken, 999);
 
    Lith_PlayerResetCBIGUI(p);
 
@@ -306,7 +300,6 @@ void Lith_ResetPlayer(struct player *p)
 
    p->attr.lvupstr[0] = '\0';
 
-   // Map-static data
    if(!p->bip.init) Lith_PlayerInitBIP(p);
 
    if(!p->upgrinit) Lith_PlayerInitUpgrades(p);
@@ -319,19 +312,19 @@ void Lith_ResetPlayer(struct player *p)
    // Static data
    if(!p->wasinit)
    {
-      p->logB(1, c"" Lith_Version " :: Compiled %S", __DATE__);
+      p->logB(1, Lith_Version " :: Compiled %s", __DATE__);
 
       if(world.dbgLevel) {
-         p->logH(1, c"player is %u bytes long!", sizeof *p * 4);
-         p->logH(1, c"strnull is \"%S\"", null);
+         p->logH(1, "player is %u bytes long!", sizeof *p * 4);
+         p->logH(1, "strnil is \"%S\"", nil);
          #if LITHIUM
          PrintDmonAllocSize(p);
          #endif
       } else {
-         p->logH(1, LC(cLANG "LOG_StartGame"), sCVAR "k_opencbi");
+         p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
       }
 
-      p->deliverMail("Intro");
+      p->deliverMail(st_mail_intro);
 
       p->wasinit = true;
    }
@@ -339,9 +332,9 @@ void Lith_ResetPlayer(struct player *p)
    #if LITHIUM
    if(world.dbgItems)
    {
-      for(int i = weapon_min; i < weapon_max; i++) {
+      for(i32 i = weapon_min; i < weapon_max; i++) {
          weaponinfo_t const *info = &weaponinfo[i];
-         if(info->classname != null && info->pclass & p->pclass && !(info->flags & wf_magic))
+         if(info->classname != nil && info->pclass & p->pclass && !(info->flags & wf_magic))
             InvGive(info->classname, 1);
       }
    }
@@ -351,7 +344,7 @@ void Lith_ResetPlayer(struct player *p)
 stkcall
 void Lith_PlayerUpdateStats(struct player *p)
 {
-   fixed boost = 1 + p->jumpboost;
+   k32 boost = 1 + p->jumpboost;
 
    if(p->frozen != p->old.frozen)
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);

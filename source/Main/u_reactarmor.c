@@ -1,7 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-
-StrEntOFF
+#include "u_common.h"
 
 #define UData UData_ReactArmor(upgr)
 
@@ -21,7 +19,7 @@ static struct {char const *abbr, *full;} const ArmorNames[] = {
 
 // Static Functions ----------------------------------------------------------|
 
-static void RA_Take(int n)
+static void RA_Take(i32 n)
 {
    InvTake(StrParam(OBJ "RA_Bullets%i", n),   999);
    InvTake(StrParam(OBJ "RA_Energy%i", n),    999);
@@ -33,7 +31,7 @@ static void RA_Take(int n)
    InvTake(StrParam(OBJ "RA_Ice%i", n),       999);
 }
 
-static void RA_Give(char const *name, int n)
+static void RA_Give(char const *name, i32 n)
 {
    InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
 }
@@ -41,7 +39,7 @@ static void RA_Give(char const *name, int n)
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
-void Lith_RA_Give(int num)
+void Lith_RA_Give(i32 num)
 {
    withplayer(LocalPlayer)
    {
@@ -59,7 +57,7 @@ void Lith_RA_Give(int num)
          RA_Take(1);
          RA_Take(2);
 
-         ACS_LocalAmbientSound(s"player/rarmor/mode", 127);
+         ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
 
          p->logH(3, "Activating Armor->%s()", name); // TODO
 
@@ -81,9 +79,9 @@ void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 {
-   if(UData.activearmor && p->getCVarI(sCVAR "hud_showarmorind"))
+   if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))
    {
-      PrintSprite(s":HUD:SplitLeft", 12,1, 225,2);
+      PrintSprite(sp_HUD_SplitLeft, 12,1, 225,2);
 
       PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
       PrintTextX(s_lhudfont, CR_LIGHTBLUE, 32,1, 216,0);
@@ -91,4 +89,3 @@ void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
 }
 
 // EOF
-

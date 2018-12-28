@@ -1,17 +1,15 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
+#include "common.h"
+#include "p_player.h"
 
-StrEntON
-
-#define name(n) LANG "PK_" #n
+#define name(n) sLANG "PK_" #n
 
 #define StupidName(w) \
-   Language(c"%S_%.3i", pickupnames[w], \
-      ACS_Random(0, strtoi_str(Language(c"%S_NUM", pickupnames[w]), null, 10)))
+   Language("%S_%.3i", pickupnames[w], \
+      ACS_Random(0, strtoi_str(Language(c"%S_NUM", pickupnames[w]), nil, 10)))
 
-static __str const pickupnames[weapon_max] = {
+static str const pickupnames[weapon_max] = {
    [weapon_unknown]    = name(weapon_unknown),
 
    [weapon_fist]       = name(weapon_unknown),
@@ -35,24 +33,24 @@ static __str const pickupnames[weapon_max] = {
    [weapon_c_shipgun]  = name(weapon_c_shipgun),
 };
 
-static void Lith_StupidPickup(struct player *p, int weapon)
+static void Lith_StupidPickup(struct player *p, i32 weapon)
 {
-   int fmtnum = strtoi_str(L(LANG "PK_GET_NUM"),       null, 10);
-   int uncnum = strtoi_str(L(LANG "PK_UNCERTAIN_NUM"), null, 10);
+   i32 fmtnum = strtoi(LC(LANG "PK_GET_NUM"),       nil, 10);
+   i32 uncnum = strtoi(LC(LANG "PK_UNCERTAIN_NUM"), nil, 10);
 
-   int iunc  = ACS_Random(0, uncnum);
-   int ifmt  = ACS_Random(0, fmtnum);
-   int flag  = strtoi_str(Language(cLANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
+   i32 iunc  = ACS_Random(0, uncnum);
+   i32 ifmt  = ACS_Random(0, fmtnum);
+   i32 flag  = strtoi(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt), nil, 0);
 
    if(flag & 2) {
       ifmt = ACS_Random(0, fmtnum);
-      flag = strtoi_str(Language(cLANG "PK_GET_%.3i_FLAGS", ifmt), null, 0);
+      flag = strtoi(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt), nil, 0);
    }
 
-   __str nam = StupidName(weapon);
+   str nam = StupidName(weapon);
 
-   char const *fmt = LanguageC(cLANG "PK_GET_%.3i", ifmt);
-   __str       unc = Language (cLANG "PK_UNCERTAIN_%.3i", iunc);
+   char const *fmt = LanguageC(LANG "PK_GET_%.3i", ifmt);
+   str         unc = Language (LANG "PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) p->logB(1, fmt, nam, nam);
@@ -62,27 +60,27 @@ static void Lith_StupidPickup(struct player *p, int weapon)
 
 void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
 {
-   if(p->getCVarI(sCVAR "player_stupidpickups"))
+   if(p->getCVarI(sc_player_stupidpickups))
       Lith_StupidPickup(p, info->type);
    else if(info->name)
-      p->logB(1, LC(cLANG "PK_GET_000"), Language(cLANG "INFO_SHORT_%S", info->name));
+      p->logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
    else
-      p->logB(1, c"Acquired impossible object");
+      p->logB(1, "Acquired impossible object");
 }
 
 void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
 {
-   int weapon = info->type;
-   bool ord = strtoi_str(L(LANG "LOG_SellOrder"), null, 10) == 0;
+   i32 weapon = info->type;
+   bool ord = strtoi(LC(LANG "LOG_SellOrder"), nil, 10) == 0;
 
-   __str nam;
+   str nam;
 
-   if(p->getCVarI(sCVAR "player_stupidpickups"))
+   if(p->getCVarI(sc_player_stupidpickups))
       nam = StupidName(weapon);
    else
-      nam = Language(cLANG "INFO_SHORT_%S", info->name);
+      nam = Language(LANG "INFO_SHORT_%S", info->name);
 
-   char const *msg = LC(cLANG "LOG_Sell");
+   char const *msg = LC(LANG "LOG_Sell");
 
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);

@@ -1,19 +1,17 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 void Lith_DoPayout(void)
 {
-   fixed64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
+   k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
    #define GenPay(name) \
       if(payout.name##max) \
       { \
-         payout.name##pct = (payout.name##num / (fixed64)payout.name##max) * 100; \
+         payout.name##pct = (payout.name##num / (k64)payout.name##max) * 100; \
          payout.name##scr = payout.name##pct * 600; \
       }
 

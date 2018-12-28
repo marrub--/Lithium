@@ -1,9 +1,7 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
+#include "common.h"
 
 #include <stdio.h>
-
-StrEntOFF
 
 void Log(char const *fmt, ...)
 {
@@ -22,7 +20,7 @@ script
 void Lith_PrintMem(void const *data, size_t size)
 {
    byte const *d = data;
-   int pos = 0;
+   i32 pos = 0;
 
    for(size_t i = 0; i < size; i++)
    {

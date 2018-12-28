@@ -1,12 +1,10 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
+#include "common.h"
+#include "p_player.h"
 
-StrEntON
-
-bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
+bool Lith_GUI_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
 {
-   gui_button_preset_t const *pre = a->preset ? a->preset : &guipre.btndef;
+   struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
 
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
@@ -21,7 +19,7 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
 
    if(a->label && pre->font)
    {
-      int x, y;
+      i32 x, y;
       char const *color;
 
       if(pre->ax == 4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
@@ -35,9 +33,9 @@ bool Lith_GUI_Button_Impl(gui_state_t *g, id_t id, gui_button_args_t const *a)
       else if(g->hot    == id) color = pre->chot;
       else if(a->color)        color = a->color;
       else                     color = pre->cdef;
-      if(!color) color = c"j";
+      if(!color) color = "j";
 
-      PrintTextFmt(c"\C%s%s", color, a->label);
+      PrintTextFmt("\C%s%s", color, a->label);
       PrintText(l_strdup(pre->font), CR_WHITE, x,pre->ax, y,pre->ay);
    }
 

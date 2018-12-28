@@ -1,39 +1,44 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 #define Upgr(name) if(world.cbiupgr[cupg_##name])
 
-#define InfoStart int y  = 70
+#define InfoStart i32 y  = 70
 #define InfoSep       y += 20
 
 #define Info(...) \
    do { \
-      char text[128]; \
-      int l = sprintf(text, __VA_ARGS__); \
-      PrintTextChr(text, l); \
+      PrintTextFmt(__VA_ARGS__); \
       PrintText(s_cbifont, CR_WHITE, 23,1, y,1); \
       y += 10; \
    } while(0)
 
-#define Slot(name, x, y) PrintSprite(s":UI:" name, 300-x*48,2, 48*y-20,1)
-#define CPU(num) PrintSprite(s":UI:CPU" #num, 0,1, 0,1)
+#define Slot(name, x, y) \
+   do { \
+      static str const path = s":UI:" name; \
+      PrintSprite(path, 300-x*48,2, 48*y-20,1); \
+   } while(0)
+
+#define CPU(num) \
+   do { \
+      static str const path = s":UI:CPU" #num; \
+      PrintSprite(path, 0,1, 0,1); \
+   } while(0)
 
 // Static Functions ----------------------------------------------------------|
 
-static void CBITab_Marine(gui_state_t *g, struct player *p)
+static void CBITab_Marine(struct gui_state *g, struct player *p)
 {
-   int ram;
+   i32 ram;
    char const *name;
 
         Upgr(hasupgr2) {CPU(1); ram = 150; name = LC(LANG "CBI_CPU3");}
    else Upgr(hasupgr1) {CPU(2); ram = 100; name = LC(LANG "CBI_CPU2");}
    else                {CPU(3); ram =  50; name = LC(LANG "CBI_CPU1");}
 
-   PrintTextChr(name, strlen(name));
+   PrintTextChS(name);
    PrintText(s_cbifont, CR_WHITE, 20,1, 60,1);
 
    InfoStart;
@@ -56,12 +61,12 @@ static void CBITab_Marine(gui_state_t *g, struct player *p)
    Upgr(rdistinter) Slot("RDistInter", 0, 4);
 }
 
-static void CBITab_CyberMage(gui_state_t *g, struct player *p)
+static void CBITab_CyberMage(struct gui_state *g, struct player *p)
 {
    char const *name = LC(LANG "CBI_CPU4");
 
    CPU(2);
-   PrintTextChr(name, strlen(name));
+   PrintTextChS(name);
    PrintText(s_cbifont, CR_WHITE, 20,1, 60,1);
 
    InfoStart;
@@ -94,7 +99,7 @@ static void CBITab_CyberMage(gui_state_t *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_CBI(gui_state_t *g, struct player *p)
+void Lith_CBITab_CBI(struct gui_state *g, struct player *p)
 {
    switch(p->pclass) {
    case pcl_marine:    CBITab_Marine   (g, p); break;

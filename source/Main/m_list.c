@@ -1,49 +1,45 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_list.h"
+// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
+#include "m_list.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
-StrEntOFF
-
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_LinkDefault(list_t *list, void *object)
+void Lith_LinkDefault(list *ls, void *object)
 {
-   list->prev = list->next = list;
-   list->object = object;
+   ls->prev = ls->next = ls;
+   ls->object = object;
 }
 
-void Lith_ListLink(list_t *head, list_t *list)
+void Lith_ListLink(list *head, list *ls)
 {
-   (list->prev = head->prev)->next = list;
-   (list->next = head      )->prev = list;
+   (ls->prev = head->prev)->next = ls;
+   (ls->next = head      )->prev = ls;
 }
 
-void *Lith_ListUnlink(list_t *list)
+void *Lith_ListUnlink(list *ls)
 {
-   list->prev->next = list->next;
-   list->next->prev = list->prev;
-   list->prev = list->next = list;
-
-   return list->object;
+   ls->prev->next = ls->next;
+   ls->next->prev = ls->prev;
+   ls->prev = ls->next = ls;
+   return ls->object;
 }
 
-size_t Lith_ListSize(list_t *head)
+size_t Lith_ListSize(list *head)
 {
    size_t count = 0;
-   for(list_t *rover = head->next; rover && rover != head; rover = rover->next)
-      count++;
+   for_list_none(*head) count++;
    return count;
 }
 
-void Lith_ListFree(list_t *head, bool dofree)
+void Lith_ListFree(list *head, bool dofree)
 {
    if(head->next)
    {
       while(head->next != head)
       {
-         list_t *rover = head->next;
+         list *rover = head->next;
          rover->unlink();
          if(dofree)
             Dalloc(rover->object);
@@ -54,4 +50,3 @@ void Lith_ListFree(list_t *head, bool dofree)
 }
 
 // EOF
-

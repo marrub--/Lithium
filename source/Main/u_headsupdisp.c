@@ -1,8 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-#include "lith_hud.h"
-
-StrEntON
+#include "u_common.h"
+#include "p_hud.h"
 
 #define UData UData_HeadsUpDisp(upgr)
 
@@ -13,44 +11,45 @@ static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
 
-   __str typebg;
-   int y;
+   str typebg;
+   i32 y;
 
-   if(p->getCVarI(sCVAR "hud_showweapons")) {y = 14; typebg = ":HUD:SplitRight";}
-   else                                     {y = 0;  typebg = ":HUD:SplitFront";}
+   if(p->getCVarI(sc_hud_showweapons)) {y = 14; typebg = sp_HUD_SplitRight;}
+   else                                {y = 0;  typebg = sp_HUD_SplitFront;}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo)
    {
-      PrintSprite(":HUD:BarBig", 279,2, 238-y,2);
+      PrintSprite(sp_HUD_BarBig, 279,2, 238-y,2);
       PrintSprite(typebg, 320,2, 238,2);
    }
 
-   __str typegfx = null;
+   str typegfx = nil;
 
    if(wep->ammotype & AT_NMag)
    {
-      typegfx = ":HUD:MAG";
+      typegfx = sp_HUD_MAG;
 
+      str txt;
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
-         PrintTextStr("\C[Lith_Green]OUT");
+         txt = st_out_green;
       else
-         PrintTextFmt(c"\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintTextX(s_lhudfont, 0, 224,1, 229-y,0);
+         txt = StrParam("\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+      PrintTextX_str(txt, s_lhudfont, 0, 224,1, 229-y,0);
    }
 
    if(wep->ammotype & AT_Ammo)
    {
-      typegfx = ":HUD:AMMO";
+      typegfx = sp_HUD_AMMO;
 
-      int x = 0;
+      i32 x = 0;
 
       if(wep->ammotype & AT_NMag)
       {
-         PrintSprite(":HUD:BarBig", 220,2, 238-y,2);
+         PrintSprite(sp_HUD_BarBig, 220,2, 238-y,2);
          x = -59;
       }
 
-      PrintTextFmt(c"\C[Lith_Green]%i", wep->ammocur);
+      PrintTextFmt("\C[Lith_Green]%i", wep->ammocur);
       PrintTextX(s_lhudfont, 0, x+224,1, 229-y,0);
    }
 
@@ -62,26 +61,25 @@ static void HUD_Ammo(struct player *p)
 
 static void HUD_Health(struct player *p, upgrade_t *upgr)
 {
-   static __str weapongfx[SLOT_MAX] = {
-      ":HUD:H_D27",
-      ":HUD:H_D28",
-      ":HUD:H_D24",
-      ":HUD:H_D23",
-      ":HUD:H_D22",
-      ":HUD:H_D21",
-      ":HUD:H_D25",
-      ":HUD:H_D26"
+   static str weapongfx[SLOT_MAX] = {
+      s":HUD:H_D27",
+      s":HUD:H_D28",
+      s":HUD:H_D24",
+      s":HUD:H_D23",
+      s":HUD:H_D22",
+      s":HUD:H_D21",
+      s":HUD:H_D25",
+      s":HUD:H_D26"
    };
 
-   PrintSprite(InvNum("PowerStrength") ?
-      ":HUD:SplitBackRed" : ":HUD:SplitBack", 0,1, 239,2);
+   PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
 
-   PrintTextFmt(c"\C[Lith_Green]%i", p->health);
+   PrintTextFmt("\C[Lith_Green]%i", p->health);
    PrintTextX(s_lhudfont, 0, 34,1, 231,0);
 
-   PrintSprite(":HUD:VIT", 2,1, 237,2);
+   PrintSprite(sp_HUD_VIT, 2,1, 237,2);
 
-   fixed ft = 0;
+   k32 ft = 0;
 
    if(p->health < p->oldhealth)
    {
@@ -99,20 +97,20 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
 
    if(CheckFade(fid_health))
    {
-      PrintTextFmt(c"%i", p->health);
+      PrintTextFmt("%i", p->health);
       PrintTextFX(s_lhudfont, UData.cr, 34,1, 231,0, fid_health);
    }
 
-   __str gfx = weapongfx[p->weapon.cur->info->slot];
+   str gfx = weapongfx[p->weapon.cur->info->slot];
 
-   int x = (8 + p->ticks) % 57;
+   i32 x = (8 + p->ticks) % 57;
 
-   for(int i = 0; i < 20; i++)
+   for(i32 i = 0; i < 20; i++)
    {
-      int xx = x - i;
+      i32 xx = x - i;
       if(xx < 0) xx += 57;
 
-      int y = 9;
+      i32 y = 9;
       if(xx < 11) y += 11 - xx % 12;
 
       PrintSpriteA(gfx, 88-xx,1, 214+y,1, (20 - i) / 20.);
@@ -143,12 +141,12 @@ void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
 
    #if LITHIUM
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
-   Lith_HUD_Score(p, c"%S\Cnscr", p->score, s_cnfont, "j", 320,2, 3,1);
+   Lith_HUD_Score(p, "%S\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
 
-   if(p->getCVarI(sCVAR "hud_showweapons"))
-      PrintSprite(":HUD:Bar", 279,2, 238,2);
+   if(p->getCVarI(sc_hud_showweapons))
+      PrintSprite(sp_HUD_Bar, 279,2, 238,2);
 
-   Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, "k", 282, 237);
+   Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, s"k", 282, 237);
 
    // Status
    HUD_Ammo(p);

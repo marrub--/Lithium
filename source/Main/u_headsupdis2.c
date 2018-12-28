@@ -1,8 +1,6 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-#include "lith_hud.h"
-
-StrEntON
+#include "u_common.h"
+#include "p_hud.h"
 
 // Static Functions ----------------------------------------------------------|
 
@@ -10,40 +8,40 @@ static void HUD_Ammo(struct player *p)
 {
    invweapon_t const *wep = p->weapon.cur;
 
-   int type = 0;
+   i32 type = 0;
 
-   __str typegfx = null;
+   str typegfx = nil;
 
    if(wep->ammotype & AT_NMag) type |= 1;
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic)) type |= 2;
 
-   if(type)
-      PrintSprite(":HUD_C:SplitFront", 320,2, 238,2);
+   if(type) PrintSprite(sp_HUD_C_SplitFront, 320,2, 238,2);
 
    if(type & 1)
    {
-      typegfx = ":HUD_C:MAG";
+      typegfx = sp_HUD_C_MAG;
 
+      str txt;
       if(type & 2 && !wep->ammocur)
-         PrintTextStr("\C[Lith_Red]OUT");
+         txt = st_out_red;
       else
-         PrintTextFmt(c"\C[Lith_Red]%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintTextX(s_lhudfont, 0, 242,1, 229,0);
+         txt = StrParam("\C[Lith_Red]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+      PrintTextX_str(txt, s_lhudfont, 0, 242,1, 229,0);
    }
 
    if(type & 2)
    {
-      typegfx = ":HUD_C:AMMO";
+      typegfx = sp_HUD_C_AMMO;
 
-      int x = 0;
+      i32 x = 0;
 
       if(type & 1)
       {
-         PrintSprite(":HUD_C:Back", 240,2, 238,2);
+         PrintSprite(sp_HUD_C_Back, 240,2, 238,2);
          x = -58;
       }
 
-      PrintTextFmt(c"\C[Lith_Red]%i", wep->ammocur);
+      PrintTextFmt("\C[Lith_Red]%i", wep->ammocur);
       PrintTextX(s_lhudfont, 0, x+242,1, 229,0);
    }
 
@@ -52,20 +50,20 @@ static void HUD_Ammo(struct player *p)
 
    if(p->weapontype == weapon_c_smg)
    {
-      fixed heat = InvNum(OBJ "SMGHeat")/500.0;
-      PrintSprite(":HUD_C:BarSmall", 320,2, 205,2);
+      k32 heat = InvNum(so_SMGHeat)/500.0;
+      PrintSprite(sp_HUD_C_BarSmall, 320,2, 205,2);
       SetClip(320-63, 205-9, heat * 63, 9);
-      PrintSprite(":HUD_C:HeatBar", 320,2, 205,2);
+      PrintSprite(sp_HUD_C_HeatBar, 320,2, 205,2);
       SetClip(0, 0, 0, 0);
    }
 }
 
 static void HUD_Health(struct player *p)
 {
-   PrintSprite(":HUD_C:SplitBack", 0,1, 239,2);
-   PrintSprite(":HUD_C:VIT",       2,1, 237,2);
+   PrintSprite(sp_HUD_C_SplitBack, 0,1, 239,2);
+   PrintSprite(sp_HUD_C_VIT,       2,1, 237,2);
 
-   PrintTextFmt(c"\C[Lith_Red]%i", p->health);
+   PrintTextFmt("\C[Lith_Red]%i", p->health);
    PrintTextX(s_lhudfont, 0, 21,1, 229,0);
 }
 
@@ -90,12 +88,12 @@ void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 
    Lith_HUD_Log(p, CR_RED, 0, -10);
    Lith_HUD_KeyInd(p, 180, 21, true, 0.8);
-   Lith_HUD_Score(p, c"\C[Lith_Red]%S\Cnscr", p->score, s_cnfont, "a", 160,0, 3,1);
+   Lith_HUD_Score(p, "\C[Lith_Red]%S\Cnscr", p->score, s_cnfont, s"a", 160,0, 3,1);
 
-   if(p->getCVarI(CVAR "hud_showweapons"))
-      PrintSprite(":HUD_C:Bar", 320,2, 220,2);
+   if(p->getCVarI(sc_hud_showweapons))
+      PrintSprite(sp_HUD_C_Bar, 320,2, 220,2);
 
-   Lith_HUD_WeaponSlots(p, CR_DARKRED, CR_DARKGREEN, CR_BLUE, "g", 323, 219);
+   Lith_HUD_WeaponSlots(p, CR_DARKRED, CR_DARKGREEN, CR_BLUE, s"g", 323, 219);
 
    // Status
    HUD_Ammo(p);
@@ -103,4 +101,3 @@ void Upgr_HeadsUpDis2_Render(struct player *p, upgrade_t *upgr)
 }
 
 // EOF
-

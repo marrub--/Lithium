@@ -1,113 +1,116 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
 #ifdef FromUI
 Category("Gameplay");
-Enum("Level-up system", sCVAR "player_lvsys", atsys_auto, atsys_manual, c"%s", LvSysName(set));
+Enum("Level-up system", sc_player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {
-   ServerInt("Difficulty Base",     c"%", sCVAR "sv_difficulty", 1, 100);
-   ServerFloat("Score multiplier",  c"x", sCVAR "sv_scoremul",   0, 10);
+   ServerInt("Difficulty Base",     "%", sc_sv_difficulty, 1, 100);
+   ServerFloat("Score multiplier",  "x", sc_sv_scoremul,   0, 10);
    #if LITHIUM
-   ServerBool("Explode on death",         sCVAR "sv_revenge");
+   ServerBool("Explode on death",        sc_sv_revenge);
    #endif
-   ServerInt("Autosave Interval", c"min", sCVAR "sv_autosave",   0, 30);
+   ServerInt("Autosave Interval", "min", sc_sv_autosave,   0, 30);
    #if LITHIUM
-   ServerBool("Disable phantoms",                       sCVAR "sv_nobosses");
-   ServerBool("Don't pick up ammo when full",           sCVAR "sv_nofullammo");
-   ServerBool("Don't give score when picking up ammo",  sCVAR "sv_noscoreammo");
-   ServerBool("Drop shotguns from zombies",             sCVAR "sv_wepdrop");
-   ServerBool("Pause while in menu",                    sCVAR "sv_pauseinmenus");
+   ServerBool("Disable phantoms",                      sc_sv_nobosses);
+   ServerBool("Don't pick up ammo when full",          sc_sv_nofullammo);
+   ServerBool("Don't give score when picking up ammo", sc_sv_noscoreammo);
+   ServerBool("Drop shotguns from zombies",            sc_sv_wepdrop);
+   ServerBool("Pause while in menu",                   sc_sv_pauseinmenus);
    #endif
 }
 
 Category("GUI");
-Float("Horizontal cursor speed", c"x", sCVAR "gui_xmul", 0.1, 2.0);
-Float("Vertical cursor speed",   c"x", sCVAR "gui_ymul", 0.1, 2.0);
-Enum("Color theme",                    sCVAR "gui_theme",  0, cbi_theme_max-1, c"%s", Lith_ThemeName(set));
-Enum("Cursor",                         sCVAR "gui_cursor", 0,  gui_curs_max-1, c"%s", CursName(set));
+Float("Horizontal cursor speed", "x", sc_gui_xmul, 0.1, 2.0);
+Float("Vertical cursor speed",   "x", sc_gui_ymul, 0.1, 2.0);
+Enum("Color theme",                   sc_gui_theme,  0, cbi_theme_max-1, "%s", Lith_ThemeName(set));
+Enum("Cursor",                        sc_gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
 #if LITHIUM
-Enum("Japanese font",                  sCVAR "gui_jpfont", 0, font_num-1, c"%s", FontName(set));
-Text("To use Japanese language, type \"language jp\" into the console.");
+Enum("Japanese font",                 sc_gui_jpfont, 0, font_num-1, "%s", FontName(set));
+Text("");
+Text("To use Japanese language,");
+Text("type \"language jp\" into the console");
+Text("and restart the game.");
 #endif
 
 Category("Player");
-Float("Damage bob multiplier",      c"x", sCVAR "player_damagebobmul", 0.0, 1.0);
-Bool("Bob view when damaged",             sCVAR "player_damagebob");
-Float("Footstep volume",            c"x", sCVAR "player_footstepvol",  0.0, 1.0);
-Float("View tilt",                  c"x", sCVAR "player_viewtilt",     0.0, 1.0);
-Bool("Log score gained",                  sCVAR "player_scorelog");
-Bool("Play a sound when score is gained", sCVAR "player_scoresound");
+Float("Damage bob multiplier",       "x", sc_player_damagebobmul, 0.0, 1.0);
+Bool("Bob view when damaged",             sc_player_damagebob);
+Float("Footstep volume",             "x", sc_player_footstepvol,  0.0, 1.0);
+Float("View tilt",                   "x", sc_player_viewtilt,     0.0, 1.0);
+Bool("Log score gained",                  sc_player_scorelog);
+Bool("Play a sound when score is gained", sc_player_scoresound);
 #if LITHIUM
-Bool("Play sounds on the results screen", sCVAR "player_resultssound");
+Bool("Play sounds on the results screen", sc_player_resultssound);
 #endif
-Bool("Invert mouse in netgames (hack)",   sCVAR "player_invertmouse");
+Bool("Invert mouse in netgames (hack)",   sc_player_invertmouse);
 #if LITHIUM
-Bool("Enable rain shader",                sCVAR "player_rainshader");
-Bool("Alternate invulnerability palette", sCVAR "player_altinvuln");
+Bool("Enable rain shader",                sc_player_rainshader);
+Bool("Alternate invulnerability palette", sc_player_altinvuln);
 #endif
 
 #if LITHIUM
 Category("Items");
-Bool("Teleport in bought items and upgrades", sCVAR "player_teleshop");
-Bool("Stupid pickup messages",                sCVAR "player_stupidpickups");
-Bool("Log ammo pickups",                      sCVAR "player_ammolog");
+Bool("Teleport in bought items and upgrades", sc_player_teleshop);
+Bool("Stupid pickup messages",                sc_player_stupidpickups);
+Bool("Log ammo pickups",                      sc_player_ammolog);
 if(p->num == 0) {
-   ServerBool("Bright weapon pickups", sCVAR "player_brightweps");
-   ServerBool("No item effects",       sCVAR "player_noitemfx");
+   ServerBool("Bright weapon pickups", sc_player_brightweps);
+   ServerBool("No item effects",       sc_player_noitemfx);
 }
 
 Category("Weapons");
-Float("Scope zoom factor", c"x", sCVAR "weapons_zoomfactor", 1.0, 10.0);
-Float("Scope opacity",     c"x", sCVAR "weapons_scopealpha", 0.0, 1.0);
-Float("Weapon opacity",    c"x", sCVAR "weapons_alpha",      0.0, 1.0);
-Float("Recoil amount",     c"x", sCVAR "weapons_recoil",     0.0, 1.0);
-Float("Reload bob",        c"x", sCVAR "weapons_reloadbob",  0.0, 1.0);
-Bool("Slot 3 weapons take ammo", sCVAR "weapons_slot3ammo");
+Float("Scope zoom factor", "x", sc_weapons_zoomfactor, 1.0, 10.0);
+Float("Scope opacity",     "x", sc_weapons_scopealpha, 0.0, 1.0);
+Float("Weapon opacity",    "x", sc_weapons_alpha,      0.0, 1.0);
+Float("Recoil amount",     "x", sc_weapons_recoil,     0.0, 1.0);
+Float("Reload bob",        "x", sc_weapons_reloadbob,  0.0, 1.0);
+Bool("Slot 3 weapons take ammo", sc_weapons_slot3ammo);
 if(p->pclass == pcl_marine) {
-   Bool("Modal Rifle scope",          sCVAR "weapons_riflescope");
-   Bool("Clear rifle mode on switch", sCVAR "weapons_riflemodeclear");
+   Bool("Modal Rifle scope",          sc_weapons_riflescope);
+   Bool("Clear rifle mode on switch", sc_weapons_riflemodeclear);
 } else if(p->pclass == pcl_cybermage) {
-   Bool("Magic selection animations", sCVAR "weapons_magicselanims");
+   Bool("Magic selection animations", sc_weapons_magicselanims);
 }
 if(p->num == 0) {
-   ServerBool("Emit casings from weapons",   sCVAR "weapons_casings");
-   ServerBool("Drop magazines from weapons", sCVAR "weapons_magdrops");
-   ServerBool("Casings fade out",            sCVAR "weapons_casingfadeout");
-   ServerBool("Magazines fade out",          sCVAR "weapons_magfadeout");
+   ServerBool("Emit casings from weapons",   sc_weapons_casings);
+   ServerBool("Drop magazines from weapons", sc_weapons_magdrops);
+   ServerBool("Casings fade out",            sc_weapons_casingfadeout);
+   ServerBool("Magazines fade out",          sc_weapons_magfadeout);
    if(p->pclass == pcl_marine) {
-      ServerBool("Rainbow lasers", sCVAR "weapons_rainbowlaser");
+      ServerBool("Rainbow lasers", sc_weapons_rainbowlaser);
    }
 }
 
 Category("Heads Up Display");
-Bool("Show score",                    sCVAR "hud_showscore");
-Bool("Show level",                    sCVAR "hud_showlvl");
-Bool("Show weapons",                  sCVAR "hud_showweapons");
-Bool("Show log",                      sCVAR "hud_showlog");
-Bool("Draw log from top of screen",   sCVAR "hud_logfromtop");
-Bool("Large log",                     sCVAR "hud_logbig");
-Bool("Draw reactive armor indicator", sCVAR "hud_showarmorind");
+Bool("Show score",                    sc_hud_showscore);
+Bool("Show level",                    sc_hud_showlvl);
+Bool("Show weapons",                  sc_hud_showweapons);
+Bool("Show log",                      sc_hud_showlog);
+Bool("Draw log from top of screen",   sc_hud_logfromtop);
+Bool("Large log",                     sc_hud_logbig);
+Bool("Draw reactive armor indicator", sc_hud_showarmorind);
 
-Int("Crosshair red",    c"/255", sCVAR "xhair_r",     0, 255);
-Int("Crosshair green",  c"/255", sCVAR "xhair_g",     0, 255);
-Int("Crosshair blue",   c"/255", sCVAR "xhair_b",     0, 255);
-Int("Crosshair alpha",  c"/255", sCVAR "xhair_a",     0, 255);
-Enum("Crosshair style",          sCVAR "xhair_style", 1,  10, c"%s", XHairName(set));
-Bool("Crosshair enabled",        sCVAR "xhair_enable");
-Bool("Crosshair juicer enabled", sCVAR "xhair_enablejuicer");
+Int("Crosshair red",     "/255", sc_xhair_r,     0, 255);
+Int("Crosshair green",   "/255", sc_xhair_g,     0, 255);
+Int("Crosshair blue",    "/255", sc_xhair_b,     0, 255);
+Int("Crosshair alpha",   "/255", sc_xhair_a,     0, 255);
+Enum("Crosshair style",          sc_xhair_style, 1,  10, "%s", XHairName(set));
+Bool("Crosshair enabled",        sc_xhair_enable);
+Bool("Crosshair juicer enabled", sc_xhair_enablejuicer);
 #endif
 
 Category("Vital Scanner");
-Int("X offset",  c"px", sCVAR "scanner_xoffs", -160, 160);
-Int("Y offset",  c"px", sCVAR "scanner_yoffs", -180,  20);
-Enum("Color",           sCVAR "scanner_color", 'a', 'v', c"\C%c%s", set, ColorName(set));
-Bool("Slide to target", sCVAR "scanner_slide");
-Bool("Health bar",      sCVAR "scanner_bar");
-Bool("Alternate font",  sCVAR "scanner_altfont");
+Int("X offset",   "px", sc_scanner_xoffs, -160, 160);
+Int("Y offset",   "px", sc_scanner_yoffs, -180,  20);
+Enum("Color",           sc_scanner_color, 'a', 'v', "\C%c%s", set, ColorName(set));
+Bool("Slide to target", sc_scanner_slide);
+Bool("Health bar",      sc_scanner_bar);
+Bool("Alternate font",  sc_scanner_altfont);
 
 #if LITHIUM
 if(p->num == 0) {
    Category("World");
-   ServerBool("Rain in outside areas", sCVAR "sv_rain");
-   ServerBool("Replace skies",         sCVAR "sv_sky");
+   ServerBool("Rain in outside areas", sc_sv_rain);
+   ServerBool("Replace skies",         sc_sv_sky);
 }
 #endif
 
@@ -125,17 +128,14 @@ if(p->num == 0) {
 
 #else
 
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 // Static Functions ----------------------------------------------------------|
 
-static char const *LvSysName(int num)
+static char const *LvSysName(i32 num)
 {
-   StrEntOFF
    static char const *names[] = {"Auto", "Hybrid", "Manual"};
 
    if(num < atsys_auto || num > atsys_manual) return "Unknown";
@@ -144,7 +144,6 @@ static char const *LvSysName(int num)
 
 static char const *ColorName(char ch)
 {
-   StrEntOFF
    static char const *colors[] = {
       "Brick", "Tan", "Grey", "Green", "Brown", "Gold", "Red", "Blue",
       "Orange", "White", "Yellow", "Default", "Black", "Light Blue", "Cream",
@@ -156,9 +155,8 @@ static char const *ColorName(char ch)
    else                     return colors[ch - 'a'];
 }
 
-static char const *CursName(int num)
+static char const *CursName(i32 num)
 {
-   StrEntOFF
    static char const *cursors[] = {
       "Green", "Pink", "Blue", "Orange", "Red", "White", "Outline",
       "Outline (Tail)", "Inv. Outline", "Inv. Outline (Tail)"
@@ -168,9 +166,8 @@ static char const *CursName(int num)
    else                               return cursors[num];
 }
 
-static char const *XHairName(int num)
+static char const *XHairName(i32 num)
 {
-   StrEntOFF
    static char const *xhairs[] = {
       "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur",
       "Angle", "Dot", "X+"
@@ -180,9 +177,8 @@ static char const *XHairName(int num)
    else                                 return xhairs[num - 1];
 }
 
-static char const *FontName(int num)
+static char const *FontName(i32 num)
 {
-   StrEntOFF
    static char const *fonts[] = {
       "Misaki Gothic", "Misaki Mincho", "JF Dot Gothic"
    };
@@ -193,9 +189,9 @@ static char const *FontName(int num)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
+void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 {
-   int y = 0;
+   i32 y = 0;
 
 #define Category(...) y += 20
 #define Bool(...) y += 10
@@ -216,16 +212,16 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 
 #define Label(label) \
    do { \
-      PrintTextStr(label); \
-      PrintText(s_cbifont, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
+      static str const text = s"" label; \
+      PrintText_str(text, s_cbifont, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
    } while(0)
 
 #define Category(name) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
       { \
-         PrintTextStr(name); \
-         PrintText(s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
+         static str const text = s"" name; \
+         PrintText_str(text, s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
       } \
       y += 20; \
    } while(0)
@@ -236,7 +232,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? c"On" : c"Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
+         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(cvar, !on); \
       } \
       y += 10; \
@@ -245,10 +241,10 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define Float(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(fixed64 set = p->getCVarK(cvar), diff;) \
+         __with(k64 set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
             p->setCVarK(cvar, set + diff); \
       } \
       y += 10; \
@@ -257,10 +253,10 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define Int(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(int set = p->getCVarI(cvar), diff;) \
+         __with(i32 set = p->getCVarI(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
             p->setCVarI(cvar, set + diff); \
       } \
       y += 10; \
@@ -272,7 +268,7 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
          __with(bool on = ACS_GetCVar(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? c"On" : c"Off", 280 - guipre.btnlist.w, y, Pre(btnlist))) \
+         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             ACS_SetCVar(cvar, !on); \
       } \
       y += 10; \
@@ -281,10 +277,10 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define ServerFloat(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(fixed64 set = ACS_GetCVarFixed(cvar), diff;) \
+         __with(k64 set = ACS_GetCVarFixed(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
             ACS_SetCVarFixed(cvar, set + diff); \
       } \
       y += 10; \
@@ -293,10 +289,10 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define ServerInt(label, s, cvar, minima, maxima) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(int set = ACS_GetCVar(cvar), diff;) \
+         __with(i32 set = ACS_GetCVar(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - guipre.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
             ACS_SetCVar(cvar, set + diff); \
       } \
       y += 10; \
@@ -305,12 +301,12 @@ void Lith_CBITab_Settings(gui_state_t *g, struct player *p)
 #define Enum(label, cvar, minima, maxima, fmt, ...) \
    do { \
       if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(int set = p->getCVarI(cvar);) \
+         __with(i32 set = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button_Id(g, 0, .x = 280 - (guipre.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
+         if(Lith_GUI_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
             p->setCVarI(cvar, set - 1); \
-         if(Lith_GUI_Button_Id(g, 1, .x = 280 -  guipre.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
+         if(Lith_GUI_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
          PrintText(s_cbifont, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \

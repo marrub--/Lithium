@@ -1,9 +1,7 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
+#include "common.h"
 
 #include <stdio.h>
-
-StrEntOFF
 
 #define DrawSpriteBegin(name) \
    do { \
@@ -20,7 +18,7 @@ StrEntOFF
    } while(0)
 
 stkcall
-void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
+void DrawSprite(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -28,7 +26,7 @@ void DrawSprite(__str name, int flags, int id, fixed x, fixed y, fixed hold)
 }
 
 stkcall
-void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1)
+void DrawSpriteX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -36,7 +34,7 @@ void DrawSpriteX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fi
 }
 
 stkcall
-void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2)
+void DrawSpriteXX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1, k32 a2)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -44,7 +42,7 @@ void DrawSpriteXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, f
 }
 
 stkcall
-void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, fixed a1, fixed a2, fixed a3)
+void DrawSpriteXXX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1, k32 a2, k32 a3)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(flags|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -52,7 +50,7 @@ void DrawSpriteXXX(__str name, int flags, int id, fixed x, fixed y, fixed hold, 
 }
 
 stkcall
-void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
+void DrawSpritePlain(str name, i32 id, k32 x, k32 y, k32 hold)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -60,7 +58,7 @@ void DrawSpritePlain(__str name, int id, fixed x, fixed y, fixed hold)
 }
 
 stkcall
-void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alpha)
+void DrawSpriteAlpha(str name, i32 id, k32 x, k32 y, k32 hold, k32 alpha)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_ALPHA|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
@@ -68,21 +66,21 @@ void DrawSpriteAlpha(__str name, int id, fixed x, fixed y, fixed hold, fixed alp
 }
 
 stkcall
-void DrawSpriteFade(__str name, int id, fixed x, fixed y, fixed hold, fixed fadetime)
+void DrawSpriteFade(str name, i32 id, k32 x, k32 y, k32 hold, k32 fadetime)
 {
    DrawSpriteBegin(name);
    ACS_OptHudMessage(HUDMSG_FADEOUT|HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold);
    ACS_EndHudMessage(fadetime);
 }
 
-void HudMessage(__str fmt, ...)
+void HudMessage(char const *fmt, ...)
 {
    va_list vl;
 
    ACS_BeginPrint();
 
    va_start(vl, fmt);
-   __vnprintf_str(fmt, vl);
+   __vnprintf(fmt, vl);
    va_end(vl);
 
    ACS_MoreHudMessage();

@@ -1,10 +1,8 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
+#include "common.h"
+#include "p_player.h"
 
-StrEntOFF
-
-struct gui_presets const guipre = {
+struct gui_presets const gui_p = {
    .btndef = {
       .gfx      = "Button",
       .hot      = "ButtonHot",
@@ -165,8 +163,8 @@ struct gui_presets const guipre = {
    },
 
    .btnbipmain = {
-      .gfx      = null,
-      .hot      = null,
+      .gfx      = nil,
+      .hot      = nil,
       .snd      = "player/cbi/buttonpress",
       .cdef     = "j",
       .cact     = "g",
@@ -180,8 +178,8 @@ struct gui_presets const guipre = {
    },
 
    .btnbipback = {
-      .gfx      = null,
-      .hot      = null,
+      .gfx      = nil,
+      .hot      = nil,
       .snd      = "player/cbi/buttonpress",
       .cdef     = "j",
       .cact     = "g",
@@ -210,8 +208,8 @@ struct gui_presets const guipre = {
    },
 
    .btnclear = {
-      .gfx      = null,
-      .hot      = null,
+      .gfx      = nil,
+      .hot      = nil,
       .snd      = "player/cbi/buttonpress",
       .cdef     = "j",
       .cact     = "g",
@@ -225,8 +223,8 @@ struct gui_presets const guipre = {
    },
 
    .btnnote = {
-      .gfx      = null,
-      .hot      = null,
+      .gfx      = nil,
+      .hot      = nil,
       .snd      = "player/cbi/buttoncurs",
       .cdef     = "j",
       .cact     = "g",
@@ -295,8 +293,7 @@ struct gui_presets const guipre = {
 
 struct gui_presets const *Lith_GUIPreExtern(void)
 {
-   return &guipre;
+   return &gui_p;
 }
 
 // EOF
-

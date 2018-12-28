@@ -1,10 +1,8 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_monster.h"
-#include "lith_world.h"
-#include "lith_player.h"
-
-StrEntON
+#include "w_monster.h"
+#include "w_world.h"
+#include "p_player.h"
 
 #define DMON_MAX 0x7FFF
 
@@ -13,28 +11,28 @@ StrEntON
 // This is lazy-allocated. Don't touch or GDCC will break your computer's face.
 noinit
 static dmon_t dmonalloc[DMON_MAX];
-static int    dmonid;
+static i32    dmonid;
 
 // Extern Functions ----------------------------------------------------------|
 
 void PrintDmonAllocSize(struct player *p)
 {
-   p->logH(1, c"dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
+   p->logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
 }
 
 void DmonDebugInfo(void)
 {
-   static int lmvar idprev;
+   static i32 lmvar idprev;
 
    if(world.dbgLevel < log_dmon)
       return;
 
    if(idprev < dmonid)
    {
-      int hilvl = 0, lolvl = MAXLEVEL;
-      int hirnk = 0, lornk = MAXRANK;
+      i32 hilvl = 0, lolvl = MAXLEVEL;
+      i32 hirnk = 0, lornk = MAXRANK;
 
-      for(int i = idprev; i < dmonid; i++)
+      for(i32 i = idprev; i < dmonid; i++)
       {
          dmon_t *m = &dmonalloc[i];
          if(m->level < lolvl) lolvl = m->level;
@@ -43,10 +41,10 @@ void DmonDebugInfo(void)
          if(m->rank  > hirnk) hirnk = m->rank;
       }
 
-      Log(c"\Cghighest\C- level enemy: lv.%i", hilvl);
-      Log(c"\Chlowest \C- level enemy: lv.%i", lolvl);
-      Log(c"\Cghighest\C- rank enemy:  r%i", hirnk);
-      Log(c"\Chlowest \C- rank enemy:  r%i", lornk);
+      Log("\Cghighest\C- level enemy: lv.%i", hilvl);
+      Log("\Chlowest \C- level enemy: lv.%i", lolvl);
+      Log("\Cghighest\C- rank enemy:  r%i", hirnk);
+      Log("\Chlowest \C- rank enemy:  r%i", lornk);
    }
 
    idprev = dmonid;
@@ -58,7 +56,7 @@ void DmonInit()
 }
 
 script
-dmon_t *DmonPtr(int tid, int ptr)
+dmon_t *DmonPtr(i32 tid, i32 ptr)
 {
    if(tid || ptr) ACS_SetActivator(tid, ptr);
    return DmonSelf();
@@ -67,15 +65,15 @@ dmon_t *DmonPtr(int tid, int ptr)
 stkcall
 dmon_t *DmonSelf(void)
 {
-   ifauto(u32, id, InvNum(OBJ "MonsterID")) return Dmon(id - 1);
-   else                                     return null;
+   ifauto(u32, id, InvNum(so_MonsterID)) return Dmon(id - 1);
+   else                                  return nil;
 }
 
 stkcall
 dmon_t *Dmon(u32 id)
 {
    if(dmonalloc[id].active) return &dmonalloc[id];
-   else                     return null;
+   else                     return nil;
 }
 
 dmon_t *AllocDmon(void)

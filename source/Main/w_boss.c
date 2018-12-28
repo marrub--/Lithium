@@ -1,22 +1,20 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 // Types ---------------------------------------------------------------------|
 
 struct boss
 {
-   char const *name;
-   int  const  phasenum;
+   str const name;
+   i32 const phasenum;
 
-   int  phase;
+   i32  phase;
    bool dead;
 
-   list_t link;
+   list link;
 };
 
 enum
@@ -31,24 +29,24 @@ enum
 // Static Objects ------------------------------------------------------------|
 
 static struct boss bosses_easy[] = {
-   {c"James",   2},
+   {s"James",   2},
 };
 
 static struct boss bosses_medi[] = {
-   {c"Makarov", 3},
+   {s"Makarov", 3},
 };
 
 static struct boss bosses_hard[] = {
-   {c"Isaac",   3},
+   {s"Isaac",   3},
 };
 
 static struct boss *lmvar boss;
-static int          lmvar bosstid;
+static i32          lmvar bosstid;
 
 static bool alldead[diff_max];
 
-static int rewardnum;
-static int difficulty;
+static i32 rewardnum;
+static i32 difficulty;
 static struct boss *lastboss;
 static i96 scorethreshold = 1000000;
 
@@ -56,17 +54,17 @@ static i96 scorethreshold = 1000000;
 
 static void Lith_SpawnBossReward(void)
 {
-   fixed x = GetX(0);
-   fixed y = GetY(0);
-   fixed z = GetZ(0);
+   k32 x = GetX(0);
+   k32 y = GetY(0);
+   k32 z = GetZ(0);
 
    switch(rewardnum++) {
-   case 0: ACS_SpawnForced(OBJ "BossReward1", x, y, z); break;
-   case 1: ACS_SpawnForced(OBJ "BossReward2", x, y, z); break;
-   case 2: ACS_SpawnForced(OBJ "BossReward3", x, y, z); break;
-   case 3: ACS_SpawnForced(OBJ "BossReward4", x, y, z); break;
-   case 4: ACS_SpawnForced(OBJ "BossReward5", x, y, z); break;
-   case 7: ACS_SpawnForced(OBJ "BossReward6", x, y, z); break;
+   case 0: ACS_SpawnForced(so_BossReward1, x, y, z); break;
+   case 1: ACS_SpawnForced(so_BossReward2, x, y, z); break;
+   case 2: ACS_SpawnForced(so_BossReward3, x, y, z); break;
+   case 3: ACS_SpawnForced(so_BossReward4, x, y, z); break;
+   case 4: ACS_SpawnForced(so_BossReward5, x, y, z); break;
+   case 7: ACS_SpawnForced(so_BossReward6, x, y, z); break;
    }
 }
 
@@ -77,34 +75,33 @@ static void Lith_TriggerBoss(void)
    if(!boss) return;
 
    if(boss->dead) {
-      Log(c"Lith_TriggerBoss: %s is dead, invalid num", boss->name);
-      boss = null;
+      Log("Lith_TriggerBoss: %S is dead, invalid num", boss->name);
+      boss = nil;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      Log(c"Lith_TriggerBoss: invalid boss phase");
-      boss = null;
+      Log("Lith_TriggerBoss: invalid boss phase");
+      boss = nil;
       return;
    }
 
    if(!boss->phase)
       boss->phase = 1;
 
-   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %s phase %i", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %S phase %i", boss->name, boss->phase);
 
-   ServCallI("TriggerBoss");
+   ServCallI(sm_TriggerBoss);
 
    if(firstboss) {
       firstboss = false;
-      Lith_ForPlayer()
-         p->deliverMail("Phantom");
+      Lith_ForPlayer() p->deliverMail(st_mail_phantom);
    }
 }
 
-static bool CheckDead(struct boss *b, int num)
+static bool CheckDead(struct boss *b, i32 num)
 {
-   for(int i = 0; i < num; i++)
+   for(i32 i = 0; i < num; i++)
       if(!b[i].dead) return false;
    return true;
 }
@@ -114,18 +111,18 @@ static bool CheckDead(struct boss *b, int num)
 script ext("ACS")
 void Lith_PhantomSound(void)
 {
-   ACS_AmbientSound("enemies/phantom/spawned", 127);
+   ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
 script ext("ACS")
 void Lith_PhantomTeleport(void)
 {
-   fixed ang = ACS_GetActorAngle(0);
+   k32 ang = ACS_GetActorAngle(0);
 
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
-   for(int i = 0; i < 15; i++) {
-      InvGive(OBJ "PhantomTeleport", 1);
+   for(i32 i = 0; i < 15; i++) {
+      InvGive(so_PhantomTeleport, 1);
       ACS_Delay(1);
    }
 }
@@ -138,13 +135,13 @@ void Lith_PhantomDeath(void)
    if(boss->phase == boss->phasenum)
    {
       // Death
-      ACS_AmbientSound("player/death1", 127);
+      ACS_AmbientSound(ss_player_death1, 127);
       ACS_Delay(35);
-      InvGive(OBJ "PlayerDeath", 1);
+      InvGive(so_PlayerDeath, 1);
       ACS_Delay(25);
-      InvGive(OBJ "PlayerDeathNuke", 1);
+      InvGive(so_PlayerDeathNuke, 1);
       ACS_Delay(25);
-      Lith_ForPlayer() p->deliverMail(StrParam(c"%sDefeated", boss->name));
+      Lith_ForPlayer() p->deliverMail(StrParam("%SDefeated", boss->name));
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;
@@ -152,23 +149,23 @@ void Lith_PhantomDeath(void)
    else
    {
       // Escape
-      ACS_AmbientSound("enemies/phantom/escape", 127);
-      ACS_SetActorState(0, "GetOutOfDodge");
+      ACS_AmbientSound(ss_enemies_phantom_escape, 127);
+      ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
-      InvGive(OBJ "PhantomOut", 1);
+      InvGive(so_PhantomOut, 1);
       ACS_Delay(2);
    }
 
-   LogDebug(log_boss, "Lith_PhantomDeath: %s phase %i defeated", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
 
    Lith_SpawnBossReward();
    world.soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
-   DebugNote("score threshold raised to %lli\n", scorethreshold);
+   DebugNote(c"score threshold raised to %lli\n", scorethreshold);
 
    boss->phase++;
-   boss = null;
+   boss = nil;
 
    world.bossspawned = false;
 }
@@ -181,16 +178,16 @@ void Lith_SpawnBoss(void)
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
-   ServCallI("SpawnBoss", StrParam(cOBJ "Boss_%s", boss->name), boss->phase);
+   ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%S", boss->name), boss->phase);
 
-   LogDebug(log_boss, "Lith_SpawnBoss: Boss %s phase %i spawned", boss->name, boss->phase);
-   DebugNote("boss: %s phase %i spawned\n", boss->name, boss->phase);
+   LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
+   DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);
 
    world.bossspawned = true;
 }
 
 script ext("ACS") addr("Lith_TriggerBoss") optargs(1)
-void Lith_TriggerBoss_Script(int diff, int num, int phase)
+void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
 {
    switch(diff)
    {
@@ -214,7 +211,7 @@ void Lith_SpawnBosses(i96 sum, bool force)
    alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
    alldead[diff_hard] = CheckDead(bosses_hard, countof(bosses_hard));
 
-   int diff =
+   i32 diff =
       difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
 
    if(alldead[diff])

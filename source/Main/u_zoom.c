@@ -1,16 +1,14 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
+#include "u_common.h"
 
 #include <math.h>
-
-StrEntON
 
 #define UData UData_Zoom(upgr)
 
 // Scripts -------------------------------------------------------------------|
 
 script ext("ACS") type("net")
-void Lith_KeyZoom(int amt)
+void Lith_KeyZoom(i32 amt)
 {
    if(ACS_Timer() < 10) return;
 
@@ -43,11 +41,11 @@ void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
    else
       UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.2);
 
-   fixed diff = UData.vzoom - UData.zoom;
+   k32 diff = UData.vzoom - UData.zoom;
    if(diff > 0.5 || diff < -0.5)
    {
-      if(UData.vzoom < UData.zoom) ACS_LocalAmbientSound("player/zoomin",  30);
-      else                         ACS_LocalAmbientSound("player/zoomout", 30);
+      if(UData.vzoom < UData.zoom) ACS_LocalAmbientSound(ss_player_zoomin,  30);
+      else                         ACS_LocalAmbientSound(ss_player_zoomout, 30);
    }
    else
       UData.vzoom = UData.zoom;
@@ -59,19 +57,19 @@ void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
 {
    if(UData.vzoom)
    {
-      PrintSpriteA(":Vignette", 160,0, 120,0, 0.3);
+      PrintSpriteA(sp_Vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(p->cameratid, "LITHCAM2", 90 - UData.vzoom);
-      PrintSprite("LITHCAM2", 160,0, 120,0);
+      ACS_SetCameraToTexture(p->cameratid, s_LITHCAM2, 90 - UData.vzoom);
+      PrintSprite(s_LITHCAM2, 160,0, 120,0);
 
-      PrintSpriteA(":ZoomOverlay", 160,0, 120,0, 0.5);
+      PrintSpriteA(sp_ZoomOverlay, 160,0, 120,0, 0.5);
 
       static char const points[] = "E SES SWW NWN NE";
 
-      for(int i = 0; i < 8; i++)
+      for(i32 i = 0; i < 8; i++)
       {
-         fixed yaw = (p->yaw + i * 0.125 + 0.125) % 1.0;
-         int x = yaw * 320 * 4;
+         k32 yaw = (p->yaw + i * 0.125 + 0.125) % 1.0;
+         i32 x = yaw * 320 * 4;
          if(x < 0 || x > 320) continue;
 
          PrintTextChr(&points[i * 2], 2);

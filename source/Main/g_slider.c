@@ -1,17 +1,15 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
+#include "common.h"
+#include "p_player.h"
 
-StrEntON
-
-fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a)
+k64 Lith_GUI_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
 {
-   gui_slider_preset_t const *pre = a->preset ? a->preset : &guipre.slddef;
+   struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
 
-   fixed64 w = pre->w - (pre->pad * 2);
+   k64 w = pre->w - (pre->pad * 2);
 
-   int x = a->x + pre->pad;
-   int y = a->y;
+   i32 x = a->x + pre->pad;
+   i32 y = a->y;
 
    Lith_GUI_Auto(g, id, x, y, w, pre->h);
 
@@ -19,12 +17,12 @@ fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a
    y += g->oy;
 
    // get a normalized value
-   fixed64 aval;
+   k64 aval;
 
    aval = (a->val - a->minima) / (a->maxima - a->minima);
    aval = minmax(aval, 0, 1);
 
-   fixed64 val;
+   k64 val;
 
    // move scroll notch
    if(g->active == id)
@@ -41,16 +39,16 @@ fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a
       val = aval;
 
    // get result-normalized value
-   fixed64 norm = val * (a->maxima - a->minima) + a->minima;
+   k64 norm = val * (a->maxima - a->minima) + a->minima;
 
    if(a->integ) norm = roundlk(norm, 10);
 
    // draw graphic
-   ifauto(__str, gfx, Lith_GUI_Prefix1(g, pre, gfx))
+   ifauto(str, gfx, Lith_GUI_Prefix1(g, pre, gfx))
       PrintSprite(gfx, x - pre->pad,1, y + pre->h / 2,0);
 
    // draw notch
-   __with(__str graphic;)
+   __with(str graphic;)
    {
       if(g->hot == id || g->active == id)
          graphic = Lith_GUI_Prefix1(g, pre, notchhot);
@@ -64,10 +62,10 @@ fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a
    // draw value
    if(pre->font)
    {
-      char const *suf = a->suf ? a->suf : c"";
-      fixed64 amt = roundlk(norm * 100.lk, 10) / 100.lk;
-      if(a->integ) PrintTextFmt(c"%i%s",     (int)amt, suf);
-      else         PrintTextFmt(c"%.1k%s", (fixed)amt, suf);
+      char const *suf = a->suf ? a->suf : "";
+      k64 amt = roundlk(norm * 100.lk, 10) / 100.lk;
+      if(a->integ) PrintTextFmt("%i%s",     (i32)amt, suf);
+      else         PrintTextFmt("%.1k%s", (k32)amt, suf);
 
       PrintText(pre->font, CR_WHITE, x + pre->w/2,4, y + pre->h/2,0);
    }
@@ -80,4 +78,3 @@ fixed64 Lith_GUI_Slider_Impl(gui_state_t *g, id_t id, gui_slider_args_t const *a
 }
 
 // EOF
-

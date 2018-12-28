@@ -1,14 +1,12 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-#include "lith_cps.h"
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
+#include "m_cps.h"
 
-StrEntON
-
-gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_args_t const *a)
+struct gui_txt *Lith_GUI_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt const *a)
 {
-   gui_txtbox_state_t *st = a->st;
+   struct gui_txt *st = a->st;
 
    Lith_GUI_Auto(g, id, a->x, a->y, 260, 10);
 
@@ -16,8 +14,7 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
 
    if(hot) a->p->grabInput = true;
 
-   if(*a->p->txtbuf)
-      ACS_LocalAmbientSound("player/cbi/keypress", 30);
+   if(*a->p->txtbuf) ACS_LocalAmbientSound(ss_player_cbi_keypress, 30);
 
    for(char *c = a->p->txtbuf; *c; c++)
    {
@@ -30,24 +27,24 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 1 < Lith_CPS_Count(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
+         if(st->tbptr + 1 < Cps_Count(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
          {
-            Lith_CPS_SetC(st->txtbuf, st->tbptr, *c);
+            Cps_SetC(st->txtbuf, st->tbptr, *c);
             st->tbptr++;
          }
          break;
       }
    }
 
-   Lith_CPS_SetC(st->txtbuf, st->tbptr, '\0');
+   Cps_SetC(st->txtbuf, st->tbptr, '\0');
 
-   PrintSprite(":UI:TextBoxBack", a->x-3 + g->ox,1, a->y-3 + g->oy,1);
+   PrintSprite(sp_UI_TextBoxBack, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
 
    SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
    if(st->tbptr)
-      PrintTextFmt(c"%s%s", Lith_CPS_Print(st->txtbuf, st->tbptr), hot ? Ticker(c"|", c"") : c"");
+      PrintTextFmt("%s%s", Cps_Print(st->txtbuf, st->tbptr), hot ? Ticker("|", "") : "");
    else
-      PrintTextFmt(c"\C%c%s", hot ? 'c' : 'm', LC(cLANG "GUI_TEXTBOX"));
+      PrintTextFmt("\C%c%s", hot ? 'c' : 'm', LC(LANG "GUI_TEXTBOX"));
    PrintText(s_cbifont, CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
@@ -58,4 +55,3 @@ gui_txtbox_state_t *Lith_GUI_TextBox_Impl(gui_state_t *g, id_t id, gui_txtbox_ar
 }
 
 // EOF
-

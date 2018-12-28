@@ -1,10 +1,10 @@
-#include "lzscript/Headers/lith_weapons.h"
-#include "lzscript/Headers/lith_pdata.h"
-#include "lzscript/Headers/lith_wdata.h"
-#include "lzscript/Headers/lith_upgradenames.h"
-#include "lzscript/Headers/lith_scorenums.h"
+#include "lzscript/Constants/p_weapons.zsc"
+#include "lzscript/Constants/p_data.zsc"
+#include "lzscript/Constants/w_data.zsc"
+#include "lzscript/Constants/u_names.zsc"
+#include "lzscript/Constants/w_scorenums.zsc"
 
-enum Lith_ASCII
+enum ASCII
 {
    Ch_NUL, // null
    Ch_SOH, // start of heading
@@ -99,7 +99,7 @@ enum Lith_ASCII
    Ch_Y,           // Y
    Ch_Z,           // Z
    Ch_BrackO,      // [
-   Ch_Backslash,   // \
+   Ch_Backslash,   // \ backslash
    Ch_BrackC,      // ]
    Ch_Exponent,    // ^
    Ch_Underscore,  // _

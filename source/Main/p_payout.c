@@ -1,11 +1,9 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-#include "lith_hudid.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
+#include "p_hudid.h"
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -45,16 +43,16 @@ void Lith_PlayerPayout(struct player *p)
       hid--; \
    } else (void)0
 
-   payoutinfo_t pay = payout;
+   struct payoutinfo pay = payout;
 
    p->setActivator();
    ACS_Delay(25);
    ACS_SetHudSize(320, 240);
 
-   for(int i = 0; i < 35*3; i++)
+   for(i32 i = 0; i < 35*3; i++)
    {
-      int hid = hid_base_payout;
-      int y = 20;
+      i32 hid = hid_base_payout;
+      i32 y = 20;
       bool counting = false;
 
       Head("RESULTS");
@@ -78,18 +76,18 @@ void Lith_PlayerPayout(struct player *p)
          Left("Total"); Right("%S\Cnscr", scoresep(pay.total)); y += 16;
 
          Head("PAYMENT"); y += 16;
-         Left("Primary Account"); Right("%STRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
+         Left("Primary Account"); Right("%sTRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
       }
 
-      if(p->getCVarI(sCVAR "player_resultssound"))
+      if(p->getCVarI(sc_player_resultssound))
       {
          if(counting) {
-                 if(i <  35) ACS_LocalAmbientSound("player/counter", 80);
-            else if(i == 35) ACS_LocalAmbientSound("player/counterdone", 80);
+                 if(i <  35) ACS_LocalAmbientSound(ss_player_counter, 80);
+            else if(i == 35) ACS_LocalAmbientSound(ss_player_counterdone, 80);
          }
 
-         if(i == (int)(35 * 1.25) || i == (int)(35 * 1.5))
-            ACS_LocalAmbientSound("player/counterdone", 80);
+         if(i == (i32)(35 * 1.25) || i == (i32)(35 * 1.5))
+            ACS_LocalAmbientSound(ss_player_counterdone, 80);
       }
 
       ACS_Delay(1);
@@ -98,11 +96,6 @@ void Lith_PlayerPayout(struct player *p)
    ACS_Delay(20);
 
    p->giveScore(pay.total, true);
-
-#undef Left
-#undef Right
-#undef Head
-#undef GenCount
 }
 #endif
 

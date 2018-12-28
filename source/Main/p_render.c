@@ -1,12 +1,10 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_hudid.h"
-#include "lith_world.h"
+#include "common.h"
+#include "p_player.h"
+#include "p_hudid.h"
+#include "w_world.h"
 
 #include <math.h>
-
-StrEntON
 
 // Static Functions ----------------------------------------------------------|
 
@@ -25,9 +23,9 @@ void Lith_PlayerDebugStats(struct player *p)
    SetSize(320, 240);
 
    ACS_BeginPrint();
-   for(int i = 0; i < dbgstatnum; i++)
+   for(i32 i = 0; i < dbgstatnum; i++)
       ACS_PrintString(dbgstat[i]);
-   for(int i = 0; i < dbgnotenum; i++)
+   for(i32 i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
    PrintText(s_smallfnt, CR_WHITE, 10,1, 20,1);
 }
@@ -35,45 +33,45 @@ void Lith_PlayerDebugStats(struct player *p)
 script
 void Lith_PlayerFootstep(struct player *p)
 {
-   static struct {__str nam, snd; int nxt;} const stepsnd[] = {
-      {"FWATER1", "player/stepw", 11},
-      {"FWATER2", "player/stepw", 11},
-      {"FWATER3", "player/stepw", 11},
-      {"FWATER4", "player/stepw", 11},
-      {"BLOOD1",  "player/stepw", 15},
-      {"BLOOD2",  "player/stepw", 15},
-      {"BLOOD3",  "player/stepw", 15},
-      {"NUKAGE1", "player/steps", 15},
-      {"NUKAGE2", "player/steps", 15},
-      {"NUKAGE3", "player/steps", 15},
-      {"SLIME01", "player/steps", 12},
-      {"SLIME02", "player/steps", 12},
-      {"SLIME03", "player/steps", 12},
-      {"SLIME04", "player/steps", 12},
-      {"SLIME05", "player/steps", 12},
-      {"SLIME06", "player/steps", 12},
-      {"SLIME07", "player/steps", 12},
-      {"SLIME08", "player/steps", 12},
-      {"LAVA1",   "player/stepl", 17},
-      {"LAVA2",   "player/stepl", 17},
-      {"LAVA3",   "player/stepl", 17},
-      {"LAVA4",   "player/stepl", 17},
+   static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
+      {s"FWATER1", s"player/stepw", 11},
+      {s"FWATER2", s"player/stepw", 11},
+      {s"FWATER3", s"player/stepw", 11},
+      {s"FWATER4", s"player/stepw", 11},
+      {s"BLOOD1",  s"player/stepw", 15},
+      {s"BLOOD2",  s"player/stepw", 15},
+      {s"BLOOD3",  s"player/stepw", 15},
+      {s"NUKAGE1", s"player/steps", 15},
+      {s"NUKAGE2", s"player/steps", 15},
+      {s"NUKAGE3", s"player/steps", 15},
+      {s"SLIME01", s"player/steps", 12},
+      {s"SLIME02", s"player/steps", 12},
+      {s"SLIME03", s"player/steps", 12},
+      {s"SLIME04", s"player/steps", 12},
+      {s"SLIME05", s"player/steps", 12},
+      {s"SLIME06", s"player/steps", 12},
+      {s"SLIME07", s"player/steps", 12},
+      {s"SLIME08", s"player/steps", 12},
+      {s"LAVA1",   s"player/stepl", 17},
+      {s"LAVA2",   s"player/stepl", 17},
+      {s"LAVA3",   s"player/stepl", 17},
+      {s"LAVA4",   s"player/stepl", 17},
    };
 
    if(Lith_IsPaused) return;
 
    if(p->nextstep) {p->nextstep--; return;}
 
-   fixed dstmul = absk(p->getVel()) / 24.0;
-   fixed vol = p->getCVarK(sCVAR "player_footstepvol") * min(dstmul, 1);
+   k32 dstmul = absk(p->getVel()) / 24.0;
+   k32 vol = p->getCVarK(sc_player_footstepvol) * min(dstmul, 1);
 
-   __str floor = ACS_GetActorFloorTexture(0);
-   __str snd   = p->stepnoise;
-   int   next  = 10;
+   str floor = ACS_GetActorFloorTexture(0);
+   str snd   = p->stepnoise;
+   i32   next  = 10;
 
    if(vol && p->onground)
    {
-      for(int i = 0; i < countof(stepsnd); i++)
+      for(i32 i = 0; i < countof(stepsnd); i++)
          if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
 
       ACS_PlaySound(p->cameratid, snd, CHAN_BODY, vol);
@@ -85,10 +83,10 @@ void Lith_PlayerFootstep(struct player *p)
 stkcall
 void Lith_PlayerItemFx(struct player *p)
 {
-   bool hasir = InvNum("PowerLightAmp");
+   bool hasir = InvNum(so_PowerLightAmp);
 
    if(!hasir && p->hadinfrared)
-      ACS_LocalAmbientSound("player/infraredoff", 127);
+      ACS_LocalAmbientSound(ss_player_infraredoff, 127);
 
    p->hadinfrared = hasir;
 }
@@ -100,19 +98,19 @@ void Lith_PlayerDamageBob(struct player *p)
 {
    if(Lith_IsPaused) return;
 
-   if(!InvNum("PowerStrength") && p->health < p->oldhealth)
+   if(!InvNum(so_PowerStrength) && p->health < p->oldhealth)
    {
-      fixed64 angle = (fixed64)ACS_RandomFixed(tau, -tau);
-      fixed64 distance;
+      k64 angle = (k64)ACS_RandomFixed(tau, -tau);
+      k64 distance;
 
       if(p->bobyaw + p->bobpitch > 0.05)
          angle = lerplk(angle, atan2f(p->bobpitch, p->bobyaw), 0.25lk);
 
       distance  = mag2lk(p->bobyaw, p->bobpitch);
-      distance += (p->oldhealth - p->health) / (fixed64)p->maxhealth;
+      distance += (p->oldhealth - p->health) / (k64)p->maxhealth;
       distance *= 0.2lk;
 
-      fixed64 ys = sinf(angle), yc = cosf(angle);
+      k64 ys = sinf(angle), yc = cosf(angle);
       p->bobyaw   = ys * distance;
       p->bobpitch = yc * distance;
    }
@@ -127,11 +125,11 @@ void Lith_PlayerView(struct player *p)
 {
    if(Lith_IsPaused) return;
 
-   fixed64 addp = 0, addy = 0;
+   k64 addp = 0, addy = 0;
 
-   if(p->getCVarI(sCVAR "player_damagebob"))
+   if(p->getCVarI(sc_player_damagebob))
    {
-      fixed64 bobmul = p->getCVarK(sCVAR "player_damagebobmul");
+      k64 bobmul = p->getCVarK(sc_player_damagebobmul);
       addp += p->bobpitch * bobmul;
       addy += p->bobyaw   * bobmul;
    }
@@ -142,7 +140,7 @@ void Lith_PlayerView(struct player *p)
    p->addpitch = addp + p->extrpitch;
    p->addyaw   = addy + p->extryaw;
 
-   ifauto(fixed, mul, p->getCVarK(sCVAR "player_viewtilt") * 0.2)
+   ifauto(k32, mul, p->getCVarK(sc_player_viewtilt) * 0.2)
    {
            if(p->sidev  ) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
       else if(p->addroll) p->addroll = lerplk(p->addroll, 0,               0.14);
@@ -162,10 +160,10 @@ void Lith_PlayerStyle(struct player *p)
 {
    if(p->scopetoken) {
       SetPropI(0, APROP_RenderStyle, STYLE_Subtract);
-      SetPropK(0, APROP_Alpha, p->getCVarK(sCVAR "weapons_scopealpha") * p->alpha);
+      SetPropK(0, APROP_Alpha, p->getCVarK(sc_weapons_scopealpha) * p->alpha);
    } else {
       SetPropI(0, APROP_RenderStyle, STYLE_Translucent);
-      SetPropK(0, APROP_Alpha, p->getCVarK(sCVAR "weapons_alpha") * p->alpha);
+      SetPropK(0, APROP_Alpha, p->getCVarK(sc_weapons_alpha) * p->alpha);
    }
 }
 
@@ -178,9 +176,10 @@ void Lith_PlayerHUD(struct player *p)
    {
       p->hudstrlist.free(true);
 
-      for(int i = hid_scope_clearS; i <= hid_scope_clearE; i++)
+      for(i32 i = hid_scope_clearS; i <= hid_scope_clearE; i++)
       {
-         HudMessage("");
+         ACS_BeginPrint();
+         ACS_MoreHudMessage();
          HudMessagePlain(i, 0.0, 0.0, 0.0);
       }
    }
@@ -189,18 +188,18 @@ void Lith_PlayerHUD(struct player *p)
    {
       if(p->pclass == pcl_cybermage)
       {
-         int time = (ACS_Timer() % 16) / 4;
-         DrawSpriteXX(StrParam(c":HUD_C:ScopeOverlay%i", time + 1),
+         i32 time = (ACS_Timer() % 16) / 4;
+         DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
             HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
 
-         for(int i = 0; i < 200; i++)
-            DrawSpriteXX(":HUD:H_D41", HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
+         for(i32 i = 0; i < 200; i++)
+            DrawSpriteXX(sp_HUD_H_D41, HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
                hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
       }
       else if(p->pclass == pcl_informant)
       {
-         fixed a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
-         DrawSpriteX(":HUD_I:ScopeOverlay",
+         k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
+         DrawSpriteX(sp_HUD_I_ScopeOverlay,
             HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1, TS, a);
       }
       else
@@ -217,15 +216,14 @@ void Lith_PlayerLevelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level)
    {
-      ACS_LocalAmbientSound("player/levelup", 127);
-      p->logH(1, LanguageC(cLANG "LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
+      ACS_LocalAmbientSound(ss_player_levelup, 127);
+      p->logH(1, LanguageC(LANG "LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
    }
 
    if(p->attr.lvupstr[0])
    {
       SetSize(320, 240);
-      ACS_BeginPrint();
-      PrintChars(p->attr.lvupstr, strlen(p->attr.lvupstr));
+      PrintTextChS(p->attr.lvupstr);
       PrintText(s_cnfont, CR_WHITE, 7,1, 17,1);
    }
 }
@@ -235,17 +233,13 @@ void Lith_PlayerLevelup(struct player *p)
 #if LITHIUM
 static void HUD_StringStack(struct player *p)
 {
-   typedef struct hudstr_s
-   {
-      __str str;
-      list_t link;
-   } hudstr_t;
+   struct hudstr {str s; list link;};
 
    if((ACS_Timer() % 3) == 0)
    {
-      hudstr_t *hudstr = Salloc(hudstr_t);
+      struct hudstr *hudstr = Salloc(struct hudstr);
       hudstr->link.construct(hudstr);
-      hudstr->str = StrParam(c"%.8X", ACS_Random(0, 0x7FFFFFFF));
+      hudstr->s = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
 
       hudstr->link.link(&p->hudstrlist);
 
@@ -256,46 +250,40 @@ static void HUD_StringStack(struct player *p)
    SetSize(320, 200);
 
    size_t i = 0;
-   for(list_t *rover = p->hudstrlist.prev; rover != &p->hudstrlist; rover = rover->prev, i++)
-   {
-      hudstr_t *hudstr = rover->object;
-      PrintTextStr(hudstr->str);
-      PrintTextA(s_confont, CR_RED, 300,2, 20+i*9,1, 0.5);
-   }
+   for_list_back_it(struct hudstr *hudstr, p->hudstrlist, i++)
+      PrintTextA_str(hudstr->s, s_confont, CR_RED, 300,2, 20+i*9,1, 0.5);
 }
 
 static void HUD_Waves(struct player *p)
 {
-   fixed health = (fixed)p->health / (fixed)p->maxhealth;
-   int frame = minmax(health * 4, 1, 5);
-   int timer = ACS_Timer();
-   int pos;
+   k32 health = (k32)p->health / (k32)p->maxhealth;
+   i32 frame = minmax(health * 4, 1, 5);
+   i32 timer = ACS_Timer();
+   i32 pos;
 
    ACS_SetHudSize(320, 200);
 
    // Sine (health)
    pos = (10 + timer) % 160;
-   DrawSpriteFade(StrParam(c":HUD:H_D1%i", frame),
+   DrawSpriteFade(StrParam(":HUD:H_D1%i", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
       25.1 + pos,
       1.5, 0.3);
 
    // Square
-   {
-      fixed a = ACS_Cos(pos / 32.0);
+   k32 a = ACS_Cos(pos / 32.0);
 
-      pos = (7 + timer) % 160;
-      DrawSpriteFade(roundk(a, 2) != 0.0 ? ":HUD:H_D16" : ":HUD:H_D46",
-         hid_scope_squareS - pos,
-         300.1 + (a >= 0) * 7.0,
-         25.1 + pos,
-         1.9, 0.1);
-   }
+   pos = (7 + timer) % 160;
+   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46,
+      hid_scope_squareS - pos,
+      300.1 + (a >= 0) * 7.0,
+      25.1 + pos,
+      1.9, 0.1);
 
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade(":HUD:H_D14", hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
 #endif
 

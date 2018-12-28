@@ -1,7 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-
-StrEntON
+#include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -22,14 +20,14 @@ void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
 script
 void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
 {
-   fixed absvel = absk(p->old.velz) * 10.0k;
+   k32 absvel = absk(p->old.velz) * 10.0k;
 
    if(p->velz == 0 && absvel > 160)
    {
-      for(fixed i = absvel; i >= 100; i -= 100)
+      for(k32 i = absvel; i >= 100; i -= 100)
       {
-         int tid;
-         ACS_SpawnForced(OBJ "ExplodoBoots", p->x, p->y, p->z, tid = ACS_UniqueTID());
+         i32 tid;
+         ACS_SpawnForced(so_ExplodoBoots, p->x, p->y, p->z, tid = ACS_UniqueTID());
          ACS_SetActivator(tid);
          ACS_SetPointer(AAPTR_TARGET, p->tid);
          p->setActivator();
@@ -38,4 +36,3 @@ void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
 }
 
 // EOF
-

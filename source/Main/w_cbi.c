@@ -1,50 +1,48 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_world.h"
-#include "lith_player.h"
+#include "common.h"
+#include "w_world.h"
+#include "p_player.h"
 
-StrEntON
-
-static int lmvar cbispawn[cupg_max];
-static int lmvar cbispawniter;
+static i32 lmvar cbispawn[cupg_max];
+static i32 lmvar cbispawniter;
 
 struct cupgdef
 {
-   int pclass;
-   int key;
-   __str msg;
-   __str nam;
+   i32 pclass;
+   i32 key;
+   str msg;
+   str nam;
 };
 
 static struct cupgdef const cdefs[] = {
-   {pM, cupg_weapninter, "MWeapnInter", "WeapnInter"},
-   {pM, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
-   {pM, cupg_armorinter, "MArmorInter", "ArmorInter"},
-   {pM, cupg_hasupgr1,   "MUpgr1",      "CBIUpgr1"  },
-   {pM, cupg_hasupgr2,   "MUpgr2",      "CBIUpgr2"  },
-   {pM, cupg_rdistinter, "MRDistInter"              },
+   {pM, cupg_weapninter, s"MWeapnInter", s"WeapnInter"},
+   {pM, cupg_weapninte2, s"MWeapnInte2", s"WeapnInte2"},
+   {pM, cupg_armorinter, s"MArmorInter", s"ArmorInter"},
+   {pM, cupg_hasupgr1,   s"MUpgr1",      s"CBIUpgr1"  },
+   {pM, cupg_hasupgr2,   s"MUpgr2",      s"CBIUpgr2"  },
+   {pM, cupg_rdistinter, s"MRDistInter"               },
 
-   {pC, cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
-   {pC, cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
-   {pC, cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
-   {pC, cupg_c_slot6spell, "CSlot6Spell", "StarShot"},
-   {pC, cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
-   {pC, cupg_c_rdistinter, "CRDistInter"            },
+   {pC, cupg_c_slot3spell, s"CSlot3Spell", s"Feuer"   },
+   {pC, cupg_c_slot4spell, s"CSlot4Spell", s"Rend"    },
+   {pC, cupg_c_slot5spell, s"CSlot5Spell", s"Hulgyon" },
+   {pC, cupg_c_slot6spell, s"CSlot6Spell", s"StarShot"},
+   {pC, cupg_c_slot7spell, s"CSlot7Spell", s"Cercle"  },
+   {pC, cupg_c_rdistinter, s"CRDistInter"             },
 };
 
-struct cupgdef const *GetCUpgr(int pclass, int num)
+struct cupgdef const *GetCUpgr(i32 pclass, i32 num)
 {
-   for(int i = 0; i < countof(cdefs); i++) {
+   for(i32 i = 0; i < countof(cdefs); i++) {
       struct cupgdef const *c = &cdefs[i];
       if(c->pclass & pclass && c->key == num)
          return c;
    }
-   return null;
+   return nil;
 }
 
 script
-void Lith_InstallCBIItem(int num)
+void Lith_InstallCBIItem(i32 num)
 {
    if(num < 0 || num >= cupg_max || world.cbiupgr[num]) return;
 
@@ -70,25 +68,25 @@ void Lith_InstallCBIItem(int num)
 
 void Lith_InstallSpawnedCBIItems(void)
 {
-   for(int i = 0; i < cbispawniter; i++)
+   for(i32 i = 0; i < cbispawniter; i++)
       Lith_InstallCBIItem(cbispawn[i]);
 }
 
 script ext("ACS")
-void Lith_CBIItemWasSpawned(int num)
+void Lith_CBIItemWasSpawned(i32 num)
 {
    cbispawn[cbispawniter++] = num;
 }
 
 script ext("ACS")
-void Lith_PickupCBIItem(int num)
+void Lith_PickupCBIItem(i32 num)
 {
    withplayer(LocalPlayer)
       Lith_FadeFlash(0, 255, 0, 0.7, 0.5);
 
    Lith_ForPlayer() {
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->msg) p->logB(1, LC(cLANG "LOG_CBI"), Language(cLANG "LOG_CBI_%S", c->msg));
+         if(c->msg) p->logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%S", c->msg));
    }
 
    Lith_InstallCBIItem(num);

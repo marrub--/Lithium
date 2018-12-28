@@ -1,9 +1,7 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
+#include "common.h"
 
 #include <math.h>
-
-StrEntOFF
 
 #define BezierImpl(type, ret, func) \
    type xa = func(x1, x2, t); \
@@ -23,7 +21,7 @@ static void InitCRC64()
    {
       u64 remainder = i;
 
-      for(int j = 0; j < 8; j++) {
+      for(i32 j = 0; j < 8; j++) {
          if(remainder & 1) remainder = (remainder >> 1) ^ polynomial;
          else              remainder >>= 1;
       }
@@ -63,34 +61,34 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
 }
 
 stkcall
-fixed64 powlk(fixed64 x, int y)
+k64 powlk(k64 x, i32 y)
 {
-   fixed64 z = 1;
+   k64 z = 1;
    while(y-- > 0) {z *= x;}
    return z;
 }
 
 stkcall
-fixed64 mag2lk(fixed64 x, fixed64 y)
+k64 mag2lk(k64 x, k64 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
 stkcall
-fixed mag2k(fixed x, fixed y)
+k32 mag2k(k32 x, k32 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
 stkcall
-int mag2i(int x, int y)
+i32 mag2i(i32 x, i32 y)
 {
    return ACS_Sqrt(x * x + y * y);
 }
 
-fixed lerpk(fixed a, fixed b, fixed t)
+k32 lerpk(k32 a, k32 b, k32 t)
 {
-   fixed ret = ((1.0k - t) * a) + (t * b);
+   k32 ret = ((1.0k - t) * a) + (t * b);
 
    if(roundk(ret, 15) == b)
       return b;
@@ -98,9 +96,9 @@ fixed lerpk(fixed a, fixed b, fixed t)
    return ret;
 }
 
-fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
+k64 lerplk(k64 a, k64 b, k64 t)
 {
-   fixed64 ret = ((1.0lk - t) * a) + (t * b);
+   k64 ret = ((1.0lk - t) * a) + (t * b);
 
    if(roundlk(ret, 15) == b)
       return b;
@@ -109,42 +107,42 @@ fixed64 lerplk(fixed64 a, fixed64 b, fixed64 t)
 }
 
 stkcall
-bool aabb(int x, int y, int z, int w, int x2, int y2)
+bool aabb(i32 x, i32 y, i32 z, i32 w, i32 x2, i32 y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }
 
 stkcall
-int ceilk(fixed n)
+i32 ceilk(k32 n)
 {
    union fixedint u = {.k = n};
    if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.k + 1;
-   else             return (int)u.k;
+   else             return (i32)u.k;
 }
 
 stkcall
-fixed64 bzpolylk(fixed64 a, fixed64 b, fixed64 t)
+k64 bzpolylk(k64 a, k64 b, k64 t)
 {
    return a + ((b - a) * t);
 }
 
 stkcall
-int bzpolyi(int a, int b, fixed64 t)
+i32 bzpolyi(i32 a, i32 b, k64 t)
 {
    return a + ((b - a) * t);
 }
 
-struct vec2lk qbezierlk(fixed64 x1, fixed64 y1, fixed64 x2, fixed64 y2, fixed64 x3, fixed64 y3, fixed64 t)
+struct vec2lk qbezierlk(k64 x1, k64 y1, k64 x2, k64 y2, k64 x3, k64 y3, k64 t)
 {
-   BezierImpl(fixed64, struct vec2lk, bzpolylk);
+   BezierImpl(k64, struct vec2lk, bzpolylk);
 }
 
-struct vec2i qbezieri(int x1, int y1, int x2, int y2, int x3, int y3, fixed64 t)
+struct vec2i qbezieri(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, k64 t)
 {
-   BezierImpl(int, struct vec2i, bzpolyi);
+   BezierImpl(i32, struct vec2i, bzpolyi);
 }
 
-struct polar ctopol(fixed x, fixed y)
+struct polar ctopol(k32 x, k32 y)
 {
    return (struct polar){ACS_VectorAngle(x, y), mag2i(x, y)};
 }

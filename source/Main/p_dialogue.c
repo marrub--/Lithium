@@ -1,12 +1,10 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_world.h"
-#include "lith_player.h"
-#include "lith_hudid.h"
-#include "lith_dialogue.h"
-
-StrEntON
+#include "common.h"
+#include "w_world.h"
+#include "p_player.h"
+#include "p_hudid.h"
+#include "dialogue.h"
 
 #define IMM *++vm.pc
 #define STR &def->stabV[IMM]
@@ -36,35 +34,35 @@ enum
 struct vmopt
 {
    char const *name;
-   int        *ptr;
+   i32        *ptr;
 };
 
 struct vmstate
 {
    char const *trmPict;
-   int         trmActi;
-   int         trmTime;
+   i32         trmActi;
+   i32         trmTime;
 };
 
 struct vm
 {
    Vec_Decl(char, text);
 
-   int stk[16];
-   int *sp, *pc;
+   i32 stk[16];
+   i32 *sp, *pc;
 
    char const *sr[4]; // String Registers
-   int         ra;    // Integer Registers
-   int         rb;
-   int         rc;
-   int         rd;
+   i32         ra;    // Integer Registers
+   i32         rb;
+   i32         rc;
+   i32         rd;
 
-   int action;
+   i32 action;
 
    struct vmopt option[8];
-   int          optNum;
-   int          optSel;
-   int          concat;
+   i32          optNum;
+   i32          optSel;
+   i32          concat;
 
    anonymous
    struct vmstate cur;
@@ -78,7 +76,7 @@ struct dlgdef *lmvar dlgdefs;
 // Static Functions ----------------------------------------------------------|
 
 script
-static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
+static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {
       // background
@@ -101,49 +99,48 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
    char const *remote = vm->sr[DSTR_REMOTE] ?
                         vm->sr[DSTR_REMOTE] :
-                        c"<unknown>@raddr.4E19";
+                        "<unknown>@raddr.4E19";
 
    Lith_GUI_Begin(g, sizex, sizey);
    Lith_GUI_UpdateState(g, p);
 
    // Background
    SetSize(480, 300);
-   PrintSprite(":Terminal:Back",   480/2,0, 0,1);
-   PrintSprite(":Terminal:Border", 480/2,0, 0,1);
+   PrintSprite(sp_Terminal_Back,   480/2,0, 0,1);
+   PrintSprite(sp_Terminal_Border, 480/2,0, 0,1);
 
    // Top-left text
    SetSize(tsizex, tsizey);
-   PrintTextStr("SGXLine r4205");
-   PrintText(s_smallfnt, CR_RED, 0,1, 0,1);
+   PrintText_str(st_term_sgxline, s_smallfnt, CR_RED, 0,1, 0,1);
 
    // Top-right text
+   str tpright;
    switch(vm->trmActi) {
-   case TACT_LOGON:  PrintTextFmt(c"Opening Connection to %s", remote); break;
-   case TACT_LOGOFF: PrintTextStr("Disconnecting...");                  break;
-   default:          PrintTextFmt(c"Remote: %s",               remote); break;
+   default:          tpright = StrParam("Remote: %s",               remote); break;
+   case TACT_LOGON:  tpright = StrParam("Opening Connection to %s", remote); break;
+   case TACT_LOGOFF: tpright = st_term_disconnecting;                        break;
    }
-
-   PrintText(s_smallfnt, CR_RED, tright,2, 0,1);
+   PrintText_str(tpright, s_smallfnt, CR_RED, tright,2, 0,1);
 
    // Bottom-left text
-   PrintTextStr("<55.883.115.7>");
-   PrintText(s_smallfnt, CR_RED, 0,1, tbottom,2);
+   PrintText_str(st_term_ip, s_smallfnt, CR_RED, 0,1, tbottom,2);
 
    // Bottom-right text
+   str btright;
    switch(vm->trmActi)
    {
    case TACT_LOGON:
    case TACT_LOGOFF: {
       char const *date = world.canondate;
-      PrintTextChr(date, strlen(date));
+      btright = l_strdup(date);
       break;
    }
    default:
-      PrintTextStr("Use To Acknowledge");
+      btright = st_term_use_to_ack;
       break;
    }
 
-   PrintText(s_smallfnt, CR_RED, tright,2, tbottom,2);
+   PrintText_str(btright, s_smallfnt, CR_RED, tright,2, tbottom,2);
 
    // Contents
    SetSize(g->w, g->h);
@@ -154,13 +151,12 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
    {
    case TACT_LOGON:
    case TACT_LOGOFF:
-      __with(int y = midy;)
+      __with(i32 y = midy;)
       {
          if(vm->textV)
          {
             SetSize(tsizex, tsizey);
-            ACS_BeginPrint();
-            PrintChars(vm->textV, vm->textC);
+            PrintTextChr(vm->textV, vm->textC);
             PrintText(s_smallfnt, CR_WHITE, tmidx,0, tmidy + 35,0);
             SetSize(g->w, g->h);
 
@@ -170,26 +166,22 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
          PrintSprite(l_strdup(pict), midx,0, y,0);
       }
       break;
-
    case TACT_PICT:
       PrintSprite(l_strdup(pict), midx/2,0, midy,0);
 
       SetSize(tsizex, tsizey);
       SetClipW(tleft, ttop, 150, 300, 150);
 
-      ACS_BeginPrint();
-      PrintChars(vm->textV, vm->textC);
+      PrintTextChr(vm->textV, vm->textC);
       PrintText(s_smallfnt, CR_WHITE, tleft,1, ttop,1);
 
       SetSize(g->w, g->h);
       ClearClip();
       break;
-
    case TACT_INFO:
       SetSize(tsizex, tsizey);
 
-      ACS_BeginPrint();
-      PrintChars(vm->textV, vm->textC);
+      PrintTextChr(vm->textV, vm->textC);
       PrintText(s_smallfnt, CR_WHITE, 2,1, ttop+2,1);
 
       SetSize(g->w, g->h);
@@ -200,14 +192,14 @@ static void Lith_TerminalGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
    if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.indialogue)
    {
-      ACS_LocalAmbientSound("player/trmswitch", 127);
+      ACS_LocalAmbientSound(ss_player_trmswitch, 127);
       vm->action = ACT_ACKNOWLEDGE;
       return;
    }
 }
 
 script
-static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
+static void Lith_DialogueGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {left = 37, top = 75};
 
@@ -218,22 +210,22 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   PrintSpriteA(":Dialogue:Back", 0,1, 0,1, 0.7);
+   PrintSpriteA(sp_Dialogue_Back, 0,1, 0,1, 0.7);
    PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
 
    ACS_BeginPrint();
-   PrintChars(name, strlen(name));
+   PrintChrSt(name);
    PrintText(s_lhudfont, CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt(c"\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
+   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
    PrintText(s_cbifont, CR_WHITE, left,1, top,1);
    ClearClip();
 
    if(vm->optNum)
    {
-      int y = 220 - (14 * vm->optNum);
-      for(int i = 0; i < vm->optNum; i++, y += 14)
+      i32 y = 220 - (14 * vm->optNum);
+      for(i32 i = 0; i < vm->optNum; i++, y += 14)
          if(Lith_GUI_Button_Id(g, i, vm->option[i].name, 45, y, Pre(btndlgsel)))
       {
          vm->action = ACT_SELOPTION;
@@ -246,7 +238,7 @@ static void Lith_DialogueGUI(gui_state_t *g, struct player *p, struct vm *vm)
 
 static void SetText(struct vm *vm, char const *s)
 {
-   int l = strlen(s) + 1;
+   i32 l = strlen(s) + 1;
    Vec_Resize(vm->text, l);
    memmove(vm->textV, s, l);
 }
@@ -255,7 +247,7 @@ static void AddText(struct vm *vm, char const *s)
 {
    if(s[0])
    {
-      int l = strlen(s);
+      i32 l = strlen(s);
 
       Vec_Grow(vm->text, l + 1);
       vm->textC--;
@@ -275,7 +267,7 @@ static void AddText(struct vm *vm, char const *s)
 
 static void PutText(struct vm *vm, char const *s)
 {
-   int l = strlen(s);
+   i32 l = strlen(s);
 
    Vec_Grow(vm->text, l);
    vm->textC--;
@@ -295,26 +287,25 @@ void Lith_TeleportOutEffect(struct player *p)
 {
    if(!p) p = LocalPlayer;
 
-   ACS_AmbientSound("misc/teleout", 127);
+   ACS_AmbientSound(ss_misc_teleout, 127);
 
    ACS_SetHudSize(320, 200);
-   ACS_SetCameraToTexture(p->tid, "LITHCAM3", 90);
+   ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
 
-   DrawSpritePlain(":Terminal:TeleportOut", hid_teleportback,
-      160.0, 100.0, 1);
+   DrawSpritePlain(sp_Terminal_TeleportOut, hid_teleportback, 160.0, 100.0, 1);
 
-   for(int j = 1; j <= 25; j++)
+   for(i32 j = 1; j <= 25; j++)
    {
-      fixed e = j / 25.lk * 30;
+      k32 e = j / 25.lk * 30;
       ACS_SetHudSize(320 * e, 240);
-      DrawSpriteFade("LITHCAM3", hid_teleport, (int)(160 * e), 120, TS, 0.2);
+      DrawSpriteFade(s_LITHCAM3, hid_teleport, (i32)(160 * e), 120, TS, 0.2);
       ACS_Delay(1);
    }
 }
 
 // Main dialogue VM.
 script
-void Lith_DialogueVM(struct player *p, int num)
+void Lith_DialogueVM(struct player *p, i32 num)
 {
    if(p->dead || p->indialogue > 1)
       return;
@@ -328,8 +319,8 @@ void Lith_DialogueVM(struct player *p, int num)
    p->indialogue++;
 
    // GUI state
-   gui_state_t gst = {};
-   gst.gfxprefix = c":UI_Green:";
+   struct gui_state gst = {};
+   gst.gfxprefix = ":UI_Green:";
    Lith_GUI_Init(&gst);
 
    // VM state
@@ -344,7 +335,7 @@ void Lith_DialogueVM(struct player *p, int num)
 
    static __label *const cases[] = {
       #define DCD(name) &&opDCD_##name,
-      #include "lith_dialogue.h"
+      #include "dialogue.h"
    };
 
    vm.pc = &def->codeV[def->pages[0]];
@@ -389,18 +380,18 @@ opDCD_JPAGE: vm.pc = &def->codeV[def->pages[IMM]]; JCC;
 opDCD_JMP:   vm.pc = &def->codeV[IMM];             JCC;
 
 #define GenJump(t) \
-   __with(int *j = &def->codeV[IMM];) if(t) {vm.pc = j; JCC;} JNC
+   __with(i32 *j = &def->codeV[IMM];) if(t) {vm.pc = j; JCC;} JNC
 opDCD_JNZ:     GenJump(vm.sp[-1] != 0);
 opDCD_JNITEM:  GenJump(!InvNum(l_strdup(STR)));
 opDCD_JNCLASS: GenJump(p->pclass != IMM);
 #undef GenJump
 
 opDCD_SCRIPTI:
-   __with(int s = IMM, a = IMM, b = IMM, c = IMM, d = IMM;)
+   __with(i32 s = IMM, a = IMM, b = IMM, c = IMM, d = IMM;)
       ACS_ExecuteWithResult(s, a, b, c, d);
    JNC;
 opDCD_SCRIPTS:
-   __with(char const *s = STR; int a = IMM, b = IMM, c = IMM, d = IMM;)
+   __with(char const *s = STR; i32 a = IMM, b = IMM, c = IMM, d = IMM;)
       ACS_NamedExecuteWithResult(l_strdup(s), a, b, c, d);
    JNC;
 
@@ -415,15 +406,15 @@ opDCD_TELEPORT_INTERLEVEL:
    ACS_Teleport_NewMap(IMM, 0, 0);
    HLT;
 
-opDCD_TRACE_S: Log(c"%s",   STR);   JNC;
-opDCD_TRACE_A: Log(c"%.8X", vm.ra); JNC;
-opDCD_TRACE_B: Log(c"%.8X", vm.rb); JNC;
-opDCD_TRACE_C: Log(c"%.8X", vm.rc); JNC;
-opDCD_TRACE_D: Log(c"%.8X", vm.rd); JNC;
+opDCD_TRACE_S: Log("%s",   STR);   JNC;
+opDCD_TRACE_A: Log("%.8X", vm.ra); JNC;
+opDCD_TRACE_B: Log("%.8X", vm.rb); JNC;
+opDCD_TRACE_C: Log("%.8X", vm.rc); JNC;
+opDCD_TRACE_D: Log("%.8X", vm.rd); JNC;
 
 opDCD_SETSTRING:
-   __with(int num = IMM; char const *str = STR;)
-      vm.sr[num] = str;
+   __with(i32 num = IMM; char const *s = STR;)
+      vm.sr[num] = s;
    JNC;
 
 opDCD_SETTEXT:      SetText(&vm,    STR ); JNC;
@@ -436,12 +427,12 @@ opDCD_CONCAT:
    JNC;
 
 opDCD_CONCATEND:
-   PutText(&vm, c"\n");
+   PutText(&vm, "\n");
    vm.concat--;
    JNC;
 
 opDCD_PUTOPT:
-   __with(int *j = &def->codeV[IMM];)
+   __with(i32 *j = &def->codeV[IMM];)
    {
       struct vmopt *option = vm.option + vm.optNum++;
 
@@ -453,7 +444,7 @@ opDCD_PUTOPT:
    JCC;
 
 opDCD_DLGWAIT:
-   ACS_LocalAmbientSound("player/cbi/dlgopen", 127);
+   ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
 
    p->frozen++;
    p->setVel(0, 0, 0);
@@ -482,7 +473,7 @@ terminal:
    if(vm.trmActi != TACT_NONE)
    {
       if(vm.trmActi == TACT_LOGON || vm.trmActi == TACT_LOGOFF)
-         ACS_LocalAmbientSound("player/trmopen", 127);
+         ACS_LocalAmbientSound(ss_player_trmopen, 127);
 
       bool timer = vm.trmTime != 0;
       p->frozen++;
@@ -502,7 +493,7 @@ terminal:
    vm.next.trmActi = TACT_NONE;
    vm.next.trmTime = 0;
 guiact:
-   __with(int action = vm.action;)
+   __with(i32 action = vm.action;)
    {
       vm.action = ACT_NONE;
       ResetText(&vm);
@@ -527,7 +518,7 @@ done:
 }
 
 script ext("ACS")
-void Lith_RunDialogue(int num)
+void Lith_RunDialogue(i32 num)
 {
    withplayer(LocalPlayer) if(!p->indialogue)
    {
@@ -537,7 +528,7 @@ void Lith_RunDialogue(int num)
 }
 
 script ext("ACS")
-void Lith_RunTerminal(int num)
+void Lith_RunTerminal(i32 num)
 {
    Lith_RunDialogue(-num);
 }

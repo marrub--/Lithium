@@ -1,26 +1,24 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 script ext("ACS")
-int Lith_Timer(void)
+i32 Lith_Timer(void)
 {
    return ACS_Timer();
 }
 
-char const *Lith_CanonTime(int type)
+char const *Lith_CanonTime(i32 type)
 {
    noinit static char ft[64], st[64], dt[64];
 
-   int s = 53 + (world.ticks / 35);
-   int m = 30 + (s           / 60);
-   int h = 14 + (m           / 60);
-   int d = 25 + (h           / 24);
-   int M =  6 + (d           / 30);
-   int Y = 48 + (M           / 11);
+   i32 s = 53 + (world.ticks / 35);
+   i32 m = 30 + (s           / 60);
+   i32 h = 14 + (m           / 60);
+   i32 d = 25 + (h           / 24);
+   i32 M =  6 + (d           / 30);
+   i32 Y = 48 + (M           / 11);
 
    s %= 60;
    m %= 60;
@@ -36,14 +34,14 @@ char const *Lith_CanonTime(int type)
    case CANONTIME_DATE:  sprintf(dt, LC(LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
-   return "";
+   return nil;
 }
 
 stkcall
 void Lith_FreezeTime(bool on)
 {
    StrEntON
-   static int lmvar frozen;
+   static i32 lmvar frozen;
 
    if(on)
    {
@@ -57,8 +55,8 @@ void Lith_FreezeTime(bool on)
 
          Lith_ForPlayer()
          {
-            Lith_GiveActorInventory(p->tid, OBJ "TimeHax", 1);
-            Lith_GiveActorInventory(p->tid, OBJ "TimeHax2", 1);
+            Lith_GiveActorInventory(p->tid, so_TimeHax, 1);
+            Lith_GiveActorInventory(p->tid, so_TimeHax2, 1);
             break;
          }
       }
@@ -71,8 +69,8 @@ void Lith_FreezeTime(bool on)
 
          Lith_ForPlayer()
          {
-            Lith_TakeActorInventory(p->tid, "PowerTimeFreezer", 1);
-            Lith_TakeActorInventory(p->tid, OBJ "TimeHax2", 1);
+            Lith_TakeActorInventory(p->tid, so_PowerTimeFreezer, 1);
+            Lith_TakeActorInventory(p->tid, so_TimeHax2, 1);
             break;
          }
       }

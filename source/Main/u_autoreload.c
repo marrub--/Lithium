@@ -1,7 +1,5 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-
-StrEntOFF
+#include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -18,4 +16,3 @@ void Upgr_AutoReload_Deactivate(struct player *p, upgrade_t *upgr)
 }
 
 // EOF
-

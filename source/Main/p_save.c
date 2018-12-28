@@ -1,27 +1,25 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_savedata.h"
-#include "lith_file.h"
-
-StrEntOFF
+#include "common.h"
+#include "p_player.h"
+#include "p_savedata.h"
+#include "m_file.h"
 
 // Chunk "note" --------------------------------------------------------------|
 
-#define note_Len(s) __with(int len = s ? strlen(s) : 0; len = min(len, 255);)
+#define note_Len(s) __with(i32 len = s ? strlen(s) : 0; len = min(len, 255);)
 
 script
 static void Lith_Save_note(savefile_t *save)
 {
    u32 chunklen = 0;
 
-   for(int i = 0; i < countof(save->p->notes); i++)
+   for(i32 i = 0; i < countof(save->p->notes); i++)
       note_Len(save->p->notes[i]) chunklen += len + 1;
 
    Lith_SaveWriteChunk(save, Ident_note, SaveV_note, chunklen);
 
-   for(int i = 0; i < countof(save->p->notes); i++)
+   for(i32 i = 0; i < countof(save->p->notes); i++)
       note_Len(save->p->notes[i])
    {
       fputc(len, save->fp);
@@ -32,14 +30,14 @@ static void Lith_Save_note(savefile_t *save)
 script
 static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 {
-   for(int i = 0; i < countof(save->p->notes); i++)
+   for(i32 i = 0; i < countof(save->p->notes); i++)
    {
       u32 len = fgetc(save->fp);
       if(!len) continue;
 
       Dalloc(save->p->notes[i]);
       char *n = save->p->notes[i] = Nalloc(len + 1);
-      for(int j = 0; j < len; j++) n[j] = fgetc(save->fp) & 0xFF;
+      for(i32 j = 0; j < len; j++) n[j] = fgetc(save->fp) & 0xFF;
    }
 }
 
@@ -62,7 +60,7 @@ static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
-void Lith_SetFun(int fun)
+void Lith_SetFun(i32 fun)
 {
    withplayer(LocalPlayer)
    {

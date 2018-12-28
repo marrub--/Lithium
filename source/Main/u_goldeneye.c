@@ -1,7 +1,5 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-
-StrEntON
+#include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|
 
@@ -10,11 +8,10 @@ void Upgr_Goldeneye_Update(struct player *p, upgrade_t *upgr)
 {
    if(ACS_Random(0, 0x7F) < 0x50)
    {
-      fixed dist = ACS_RandomFixed(128, 256);
-      fixed angl = ACS_RandomFixed(0, 1);
-      ACS_SpawnForced(OBJ "GEExplosion", p->x + ACS_Cos(angl) * dist, p->y + ACS_Sin(angl) * dist, p->z + 32);
+      k32 dist = ACS_RandomFixed(128, 256);
+      k32 angl = ACS_RandomFixed(0, 1);
+      ACS_SpawnForced(so_GEExplosion, p->x + ACS_Cos(angl) * dist, p->y + ACS_Sin(angl) * dist, p->z + 32);
    }
 }
 
 // EOF
-

@@ -1,10 +1,8 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 // Static Functions ----------------------------------------------------------|
 
@@ -13,7 +11,7 @@ static void BagItem_Tick(item_t *_item)
 {
    bagitem_t *item = (bagitem_t *)_item;
 
-   foritem(item->content)
+   for_item(item->content)
       if(it->Tick) it->Tick(it);
 }
 
@@ -26,7 +24,7 @@ static void BagItem_Place(item_t *_item, container_t *cont)
 
    item->content.user = item->user;
 
-   foritem(item->content)
+   for_item(item->content)
       it->Place(it, &item->content);
 }
 
@@ -35,32 +33,32 @@ static void BagItem_Destroy(item_t *_item)
 {
    bagitem_t *item = (bagitem_t *)_item;
 
-   foritem(item->content)
+   for_item(item->content)
       it->Destroy(it);
 
    Lith_Item_Destroy(&item->item);
 }
 
-static bool ItemCanPlace(container_t *cont, item_t *item, int x, int y)
+static bool ItemCanPlace(container_t *cont, item_t *item, i32 x, i32 y)
 {
    if(x < 0 || y < 0)
       return false;
 
-   int x2 = x + item->w;
-   int y2 = y + item->h;
+   i32 x2 = x + item->w;
+   i32 y2 = y + item->h;
 
    if(x2 > cont->w || y2 > cont->h)
       return false;
 
-   int z = x + item->w;
-   int w = y + item->h;
+   i32 z = x + item->w;
+   i32 w = y + item->h;
 
-   foritem(*cont) if(it != item)
+   for_item(*cont) if(it != item)
    {
-      int const u = it->x;
-      int const v = it->y;
-      int const s = u + it->w;
-      int const t = v + it->h;
+      i32 const u = it->x;
+      i32 const v = it->y;
+      i32 const s = u + it->w;
+      i32 const t = v + it->h;
 
       if(aabb(u, v, s, t, x, y) || aabb(u, v, s, t, z - 1, w - 1) ||
          aabb(x, y, z, w, u, v) || aabb(x, y, z, w, s - 1, t - 1))
@@ -72,10 +70,10 @@ static bool ItemCanPlace(container_t *cont, item_t *item, int x, int y)
 
 static bool ItemCanPlaceAny(container_t *cont, item_t *item)
 {
-   int xn = cont->w / item->w;
-   int yn = cont->h / item->h;
+   i32 xn = cont->w / item->w;
+   i32 yn = cont->h / item->h;
 
-   for(int y = 0; y < yn; y++) for(int x = 0; x < xn; x++)
+   for(i32 y = 0; y < yn; y++) for(i32 x = 0; x < xn; x++)
       if(ItemCanPlace(cont, item, x * item->w, y * item->h))
          return true;
 
@@ -95,7 +93,7 @@ void Lith_PlayerInitInventory(struct player *p)
 
    memmove(p->inv, baseinv, sizeof baseinv);
 
-   for(int i = 0; i < countof(p->inv); i++) {
+   for(i32 i = 0; i < countof(p->inv); i++) {
       p->inv[i].items.construct();
       p->inv[i].user = p;
    }
@@ -108,16 +106,16 @@ void Lith_PlayerInitInventory(struct player *p)
 
 void Lith_PlayerDeallocInventory(struct player *p)
 {
-   for(int i = 0; i < countof(p->inv); i++)
+   for(i32 i = 0; i < countof(p->inv); i++)
    {
-      foritem(p->inv[i]) it->Destroy(it);
-      p->inv[i].user = null;
+      for_item(p->inv[i]) it->Destroy(it);
+      p->inv[i].user = nil;
    }
 
-   foritem(p->misc) it->Destroy(it);
-   p->misc.user = null;
+   for_item(p->misc) it->Destroy(it);
+   p->misc.user = nil;
 
-   p->useitem = p->selitem = null;
+   p->useitem = p->selitem = nil;
    p->movitem = false;
 }
 
@@ -126,7 +124,7 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
    item->link.construct(item);
 
    if(data) item->data = *data;
-   else     Log(c"invalid item, developer is an idiot");
+   else     Log("invalid item, developer is an idiot");
 
    if(!item->Destroy) item->Destroy = Lith_Item_Destroy;
    if(!item->Place  ) item->Place   = Lith_Item_Place;
@@ -146,12 +144,12 @@ void Lith_Item_Destroy(item_t *item)
 {
    LogDebug(log_dev, "Lith_Item_Destroy: destroying item %p", item);
 
-   ServCallI("DeleteItem", item);
+   ServCallI(sm_DeleteItem, item);
 
    withplayer(item->user)
    {
-      if(p->useitem == item) p->useitem = null;
-      if(p->selitem == item) p->selitem = null;
+      if(p->useitem == item) p->useitem = nil;
+      if(p->selitem == item) p->selitem = nil;
       p->movitem = false;
    }
 
@@ -162,7 +160,7 @@ void Lith_Item_Destroy(item_t *item)
 script
 bool Lith_Item_Use(item_t *item)
 {
-   return ServCallI("UseItem", item);
+   return ServCallI(sm_UseItem, item);
 }
 
 script
@@ -179,11 +177,11 @@ void Lith_Item_Unlink(item_t *item)
    if(item->container)
    {
       item->link.unlink();
-      item->container = null;
+      item->container = nil;
    }
 }
 
-bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
+bagitem_t *Lith_BagItem_New(i32 w, i32 h, str bg, itemdata_t const *data)
 {
    bagitem_t *item = Salloc(bagitem_t);
 
@@ -202,7 +200,7 @@ bagitem_t *Lith_BagItem_New(int w, int h, __str bg, itemdata_t const *data)
    return item;
 }
 
-bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
+bool Lith_ItemPlace(container_t *cont, item_t *item, i32 x, i32 y)
 {
    if(!ItemCanPlace(cont, item, x, y)) return false;
 
@@ -217,7 +215,7 @@ bool Lith_ItemPlace(container_t *cont, item_t *item, int x, int y)
 script
 bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 {
-   for(int y = 0; y < cont->h; y++) for(int x = 0; x < cont->w; x++)
+   for(i32 y = 0; y < cont->h; y++) for(i32 x = 0; x < cont->w; x++)
       if(Lith_ItemPlace(cont, item, x, y))
          return true;
 
@@ -226,37 +224,37 @@ bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
 
 bool Lith_PlayerAddItem(struct player *p, item_t *item)
 {
-   for(int i = 0; i < countof(p->inv); i++)
+   for(i32 i = 0; i < countof(p->inv); i++)
       if(Lith_ItemPlaceFirst(&p->inv[i], item))
          return true;
 
    return false;
 }
 
-void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
+void Lith_Container(struct gui_state *g, container_t *cont, i32 sx, i32 sy)
 {
    struct player *p = cont->user;
 
-   __str bg = cont->bg ? cont->bg : ":UI:InvBack";
-   int h = cont->h * 8;
-   int w = cont->w * 8;
+   str bg = cont->bg ? cont->bg : sp_UI_InvBack;
+   i32 h = cont->h * 8;
+   i32 w = cont->w * 8;
 
-   for(int y = 0; y < h; y += 8) for(int x = 0; x < w; x += 8)
+   for(i32 y = 0; y < h; y += 8) for(i32 x = 0; x < w; x += 8)
       PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
 
    if(p && p->movitem && g->clicklft && aabb(sx, sy, sx+w, sy+h, g->cx, g->cy))
       if(Lith_ItemPlace(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8))
    {
       p->movitem = false;
-      ACS_LocalAmbientSound("player/cbi/invmov", 127);
+      ACS_LocalAmbientSound(ss_player_cbi_invmov, 127);
    }
 
-   foritem(*cont)
+   for_item(*cont)
    {
-      int x = sx + it->x * 8;
-      int y = sy + it->y * 8;
-      int ex = x + it->w * 8;
-      int ey = y + it->h * 8;
+      i32 x = sx + it->x * 8;
+      i32 y = sy + it->y * 8;
+      i32 ex = x + it->w * 8;
+      i32 ey = y + it->h * 8;
 
       PrintSprite(it->spr, x,1, y,1);
 
@@ -265,15 +263,15 @@ void Lith_Container(gui_state_t *g, container_t *cont, int sx, int sy)
       if(p->selitem != it && g->clicklft && aabb(x, y, ex, ey, g->cx, g->cy))
       {
          p->selitem = it;
-         ACS_LocalAmbientSound("player/cbi/invcur", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_invcur, 127);
       }
 
       if(p->selitem == it)
       {
-         fixed a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
+         k32 a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
 
-         for(int xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
-            PrintSpriteA(":UI:InvSel", x,1, y,1, a);
+         for(i32 xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
+            PrintSpriteA(sp_UI_InvSel, x,1, y,1, a);
       }
    }
 }
@@ -287,27 +285,27 @@ void Lith_PlayerUpdateInventory(struct player *p)
 
       LogDebug(log_dev, "using %S (%p)", item->name, item);
       if(item->Use && !item->Use(item))
-         ACS_LocalAmbientSound("player/cbi/auto/invalid", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
 
-      p->useitem = null;
+      p->useitem = nil;
    }
 
-   for(int i = 0; i < countof(p->inv); i++)
-      foritem(p->inv[i])
+   for(i32 i = 0; i < countof(p->inv); i++)
+      for_item(p->inv[i])
          if(it->Tick) it->Tick(it);
 
-   foritem(p->misc)
+   for_item(p->misc)
       if(it->Tick) it->Tick(it);
 }
 
 script ext("ACS")
-void *Lith_ItemCreate(int w, int h)
+void *Lith_ItemCreate(i32 w, i32 h)
 {
-   __str type = GetMembS(0, "m_invtype");
-   __str tag  = GetMembS(0, "m_invname");
-   u32   scr  = GetMembI(0, "m_invsell");
-   __str spr  = StrParam(c":ItemSpr:%S", tag);
-   __str name = GetPropS(0, APROP_NameTag);
+   str type = GetMembS(0, sm_InvType);
+   str tag  = GetMembS(0, sm_InvName);
+   u32 scr  = GetMembI(0, sm_InvSell);
+   str spr  = StrParam(":ItemSpr:%S", tag);
+   str name = GetPropS(0, APROP_NameTag);
 
    LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
 
@@ -315,10 +313,10 @@ void *Lith_ItemCreate(int w, int h)
       if(type == t) \
          return Lith_Item_New(&(itemdata_t const){name, spr, tag, w, h, scr, __VA_ARGS__})
 
-   Type("SlottedItem", .Use = Lith_Item_Use);
-   Type("Armor",       .Use = Lith_Item_Use);
+   Type(si_SlottedItem, .Use = Lith_Item_Use);
+   Type(si_Armor,       .Use = Lith_Item_Use);
 
-   return null;
+   return nil;
 }
 
 script ext("ACS")
@@ -360,7 +358,7 @@ void Lith_ItemUnlink(void *_item)
       item->Place(item, &p->misc);
       item->x = item->y = 0;
 
-      p->selitem = null;
+      p->selitem = nil;
       p->movitem = false;
    }
 }
@@ -371,16 +369,16 @@ bool Lith_ItemCanPlace(void *_item)
    item_t *item = _item;
 
    withplayer(LocalPlayer)
-      for(int i = 0; i < countof(p->inv); i++)
+      for(i32 i = 0; i < countof(p->inv); i++)
          if(ItemCanPlaceAny(&p->inv[i], item))
             return true;
 
    return false;
 }
 
-void Lith_CBITab_Items(gui_state_t *g, struct player *p)
+void Lith_CBITab_Items(struct gui_state *g, struct player *p)
 {
-   static int const x[] = {
+   static i32 const x[] = {
       155+8*-14, // Backpack
       155+8*  1, // L Upper Arm
       155+8*  8, // R Upper Arm
@@ -391,7 +389,7 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       155+8*  7, // R Leg
    };
 
-   static int const y[] = {
+   static i32 const y[] = {
       80+8*-1, // Backpack
       80+8*-2, // L Upper Arm
       80+8*-2, // R Upper Arm
@@ -402,60 +400,56 @@ void Lith_CBITab_Items(gui_state_t *g, struct player *p)
       80+8* 9, // R Leg
    };
 
-   PrintSpriteA(":UI:Body", 151,1, 40,1, 0.6);
-   PrintSpriteA(":UI:Bag",  47 ,1, 44,1, 0.6);
+   PrintSpriteA(sp_UI_Body, 151,1, 40,1, 0.6);
+   PrintSpriteA(sp_UI_Bag,  47 ,1, 44,1, 0.6);
 
-   for(int i = 0; i < countof(p->inv); i++)
+   for(i32 i = 0; i < countof(p->inv); i++)
       Lith_Container(g, &p->inv[i], x[i], y[i]);
 
    item_t *sel = p->selitem;
 
    if(sel)
    {
-      int x_ = x[0];
-      int y_ = y[0] + 60;
+      i32 x_ = x[0];
+      i32 y_ = y[0] + 60;
 
-      PrintTextStr(sel->name);
-      PrintText(s_cbifont, CR_WHITE, x_,1, y_,1);
+      PrintText_str(sel->name, s_cbifont, CR_WHITE, x_,1, y_,1);
       y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
 
-      if(Lith_GUI_Button(g, c"Move", x_, y_, Pre(btnclear)))
+      if(Lith_GUI_Button(g, "Move", x_, y_, Pre(btnclear)))
          p->movitem = !p->movitem;
       y_ += 8;
 
       if(sel->Use)
       {
-         if(Lith_GUI_Button(g, c"Use", x_, y_, Pre(btnclear)))
+         if(Lith_GUI_Button(g, "Use", x_, y_, Pre(btnclear)))
             p->useitem = sel;
          y_ += 8;
       }
 
       if(sel->scr)
       {
-         PrintTextFmt(c"(%S\Cnscr\C-)", scoresep(sel->scr));
+         PrintTextFmt("(%S\Cnscr\C-)", scoresep(sel->scr));
          PrintText(s_cbifont, CR_WHITE, x_+18,1, y_,1);
       }
 
-      if(Lith_GUI_Button(g, sel->scr ? c"Sell" : c"Discard", x_, y_, Pre(btnclear)))
+      if(Lith_GUI_Button(g, sel->scr ? "Sell" : "Discard", x_, y_, Pre(btnclear)))
       {
          if(sel->scr) p->giveScore(sel->scr, true);
          sel->Destroy(sel);
-         ACS_LocalAmbientSound("player/cbi/invrem", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
       }
    }
 
-   PrintTextFmt(c"Equipped (%S)", ServCallS("GetArmorDT"));
+   PrintTextFmt("Equipped (%S)", ServCallS(sm_GetArmorDT));
    PrintText(s_cbifont, CR_WHITE, 40,1, 38,1);
 
-   for(int i = 0; i < aslot_max; i++)
-      ifw(__str name = ServCallS("GetArmorSlot", i), name != "")
-   {
-      PrintTextStr(name);
-      PrintText(s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
-   }
+   for(i32 i = 0; i < aslot_max; i++)
+      ifw(str name = ServCallS(sm_GetArmorSlot, i), name != s_NIL)
+         PrintText_str(name, s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
 }
 #endif
 

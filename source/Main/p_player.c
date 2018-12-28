@@ -1,13 +1,11 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_list.h"
-#include "lith_hudid.h"
-#include "lith_world.h"
+#include "common.h"
+#include "p_player.h"
+#include "m_list.h"
+#include "p_hudid.h"
+#include "w_world.h"
 
 #include <limits.h>
-
-StrEntON
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -15,8 +13,8 @@ noinit struct player players[MAX_PLAYERS];
 
 // Static Objects ------------------------------------------------------------|
 
-static struct {__str on, off;} guisnd[GUI_MAX - 1] = {
-   {"player/cbi/open", "player/cbi/close"},
+static struct {str on, off;} guisnd[gui_max - 1] = {
+   {s"player/cbi/open", s"player/cbi/close"},
 };
 
 // Static Functions ----------------------------------------------------------|
@@ -47,7 +45,7 @@ reinit:
    if(p->num == 0)
    {
       world.fun = p->fun;
-      ServCallI("Fun", world.fun);
+      ServCallI(sm_Fun, world.fun);
    }
 
    Lith_BossWarning(p);
@@ -66,8 +64,8 @@ reinit:
 
       // These can be changed any time, so save them here.
       struct player_delta olddelta = p->cur;
-      int oldhealth = p->health;
-      int oldmana   = p->mana;
+      i32 oldhealth = p->health;
+      i32 oldmana   = p->mana;
 
       // Run logic and rendering
       Lith_PlayerRunScripts(p);
@@ -83,7 +81,7 @@ reinit:
       #if LITHIUM
       if(p->dlgnum)
       {
-         script extern void Lith_DialogueVM(struct player *p, int dlgnum);
+         script extern void Lith_DialogueVM(struct player *p, i32 dlgnum);
 
          Lith_DialogueVM(p, p->dlgnum);
          p->dlgnum = 0;
@@ -115,12 +113,13 @@ static void Lith_PlayerDeath(void)
    p->dead = true;
 
    Lith_PlayerDeinitUpgrades(p);
+
    #if LITHIUM
-   Lith_PlayerDeallocInventory(p); // unfortunately, we can't keep anything
-                                   // even when we want to
+   // unfortunately, we can't keep anything even when we want to
+   Lith_PlayerDeallocInventory(p);
    #endif
 
-   if(world.singleplayer || ACS_GetCVar("sv_cooploseinventory"))
+   if(world.singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
    {
       Lith_PlayerDeallocUpgrades(p);
       p->bip.deallocate();
@@ -130,20 +129,20 @@ static void Lith_PlayerDeath(void)
    #if LITHIUM
    if(world.singleplayer)
    {
-      if(ACS_GetCVar(CVAR "sv_revenge"))
+      if(ACS_GetCVar(sc_sv_revenge))
       {
-         ACS_LocalAmbientSound("player/death1", 127);
+         ACS_LocalAmbientSound(ss_player_death1, 127);
          ACS_Delay(35);
-         InvGive(OBJ "PlayerDeath", 1);
+         InvGive(so_PlayerDeath, 1);
          ACS_Delay(25);
-         InvGive(OBJ "PlayerDeathNuke", 1);
+         InvGive(so_PlayerDeathNuke, 1);
          ACS_Delay(25);
       }
 
       while(p->dead)
       {
          ACS_Delay(35 * 5);
-         Log(c"%S", Language(cLANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }
    }
    #endif
@@ -183,18 +182,18 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_HashKey(k) (k)
 #define upgrademap_t_HashObj(o) ((o)->info->key)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
-GDCC_HashMap_Defn(upgrademap_t, int, upgrade_t)
+GDCC_HashMap_Defn(upgrademap_t, i32, upgrade_t)
 
 stkcall
-upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, int name)
+upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
 {
    upgrade_t *upgr = p->upgrademap.find(name);
-   if(!upgr) Log(c"null pointer trying to find upgrade %i", name);
+   if(!upgr) Log("null pointer trying to find upgrade %i", name);
    return upgr;
 }
 
 stkcall
-bool Lith_PlayerGetUpgradeActive(struct player *p, int name)
+bool Lith_PlayerGetUpgradeActive(struct player *p, i32 name)
 {
    ifauto(upgrade_t *, upgr, p->upgrademap.find(name)) return upgr->active;
    else                                                return false;
@@ -206,61 +205,61 @@ struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
 }
 
 stkcall
-char const *Lith_PlayerDiscriminator(int pclass)
+char const *Lith_PlayerDiscriminator(i32 pclass)
 {
    switch(pclass) {
-   case pcl_marine:    return c"Stan";
-   case pcl_cybermage: return c"Jem";
-   case pcl_informant: return c"Fulk";
-   case pcl_wanderer:  return c"Luke";
-   case pcl_assassin:  return c"Omi";
-   case pcl_darklord:  return c"Ari";
-   case pcl_thoth:     return c"Kiri";
+   case pcl_marine:    return "Stan";
+   case pcl_cybermage: return "Jem";
+   case pcl_informant: return "Fulk";
+   case pcl_wanderer:  return "Luke";
+   case pcl_assassin:  return "Omi";
+   case pcl_darklord:  return "Ari";
+   case pcl_thoth:     return "Kiri";
    }
-   return c"Mod";
+   return "Mod";
 }
 
-struct player *Lith_GetPlayer(int tid, int ptr)
+struct player *Lith_GetPlayer(i32 tid, i32 ptr)
 {
-   int pnum = Lith_GetPlayerNumber(tid, ptr);
+   i32 pnum = Lith_GetPlayerNumber(tid, ptr);
    if(pnum >= 0) return &players[pnum];
-   else          return null;
+   else          return nil;
 }
 
 stkcall
 void Lith_PlayerCloseGUI(struct player *p)
 {
-   if(p->activegui != GUI_NONE)
+   if(p->activegui != gui_none)
    {
       if(world.pauseinmenus)
       {
-         ServCallI("SetPaused", false);
+         ServCallI(sm_SetPaused, false);
          Lith_ForPlayer() p->frozen--;
       }
       else
          p->frozen--;
 
       ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
-      p->activegui = GUI_NONE;
+      p->activegui = gui_none;
    }
 }
 
 stkcall
-void Lith_PlayerUseGUI(struct player *p, int type)
+void Lith_PlayerUseGUI(struct player *p, i32 type)
 {
    if(p->dead) return;
-   if(p->activegui == GUI_NONE)
+   if(p->activegui == gui_none)
    {
       if(world.pauseinmenus)
       {
-         ServCallI("SetPaused", true);
+         ServCallI(sm_SetPaused, true);
          Lith_ForPlayer() p->frozen++;
       }
       else
          p->frozen++;
 
       if(ACS_Random(0, 10000) == 777)
-         ACS_LocalAmbientSound("player/cbi/win95", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_win95, 127);
       else
          ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
       p->activegui = type;
@@ -283,28 +282,28 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 
    if(!nomul) {
       score *= p->scoremul;
-      score *= 1 + (fixed64)ACS_RandomFixed(0, p->attr.attrs[at_luk] / 77.7);
+      score *= 1 + (k64)ACS_RandomFixed(0, p->attr.attrs[at_luk] / 77.7);
       score *= world.scoremul;
    }
 
    // Get a multiplier for the score accumulator and sound volume
-   fixed64 mul = minmax(score, 0, 15000) / 15000.0lk;
+   k64 mul = minmax(score, 0, 15000) / 15000.0lk;
            mul = minmax(mul, 0.1lk, 1.0lk);
-   fixed64 vol = 0.7lk * mul;
+   k64 vol = 0.7lk * mul;
 
    // Play a sound when we pick up score
-   if(vol > 0.001lk && p->getCVarI(CVAR "player_scoresound"))
-      ACS_PlaySound(p->cameratid, "player/score", CHAN_ITEM, vol, false, ATTN_STATIC);
+   if(vol > 0.001lk && p->getCVarI(sc_player_scoresound))
+      ACS_PlaySound(p->cameratid, ss_player_score, CHAN_ITEM, vol, false, ATTN_STATIC);
 
    // hue
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
-      p->logB(1, c"You gained brouzouf.");
+      p->logB(1, "You gained brouzouf.");
    }
 
    if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
       p->spuriousexplosions++;
-      ACS_SpawnForced(OBJ "EXPLOOOSION", p->x, p->y, p->z);
+      ACS_SpawnForced(so_EXPLOOOSION, p->x, p->y, p->z);
    }
 
    // Add score and set score accumulator
@@ -314,8 +313,8 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
    p->scoreaccumtime += 20 * (mul * 2.0lk);
 
    // Log score
-   if(p->getCVarI(CVAR "player_scorelog"))
-      p->logH(1, c"+\Cj%lli\Cnscr", score);
+   if(p->getCVarI(sc_player_scorelog))
+      p->logH(1, "+\Cj%lli\Cnscr", score);
 
    return score;
 }
@@ -344,7 +343,7 @@ static void Lith_BossWarning(struct player *p)
    ACS_Delay(35 * 5);
 
    if(world.bossspawned)
-      p->logB(1, LanguageC(cLANG "LOG_BossWarn%s", p->discrim));
+      p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 #endif
 
@@ -394,7 +393,7 @@ static void Lith_PlayerRunScripts(struct player *p)
       #endif
 
       switch(p->activegui)
-      case GUI_CBI: Lith_PlayerUpdateCBIGUI(p);
+      case gui_cbi: Lith_PlayerUpdateCBIGUI(p);
 
       Lith_PlayerUpdateAttributes(p);
       #if LITHIUM
@@ -405,7 +404,7 @@ static void Lith_PlayerRunScripts(struct player *p)
       // Post-logic: Update the engine's data.
       Lith_PlayerUpdateStats(p); // Update engine info
 
-      if(world.pauseinmenus) ServCallI("PauseTick", p->num);
+      if(world.pauseinmenus) ServCallI(sm_PauseTick, p->num);
    }
 
    // Rendering
@@ -426,7 +425,7 @@ static void Lith_PlayerRunScripts(struct player *p)
 stkcall
 static void AttrRGE(struct player *p)
 {
-   int rge = p->attr.attrs[at_spc];
+   i32 rge = p->attr.attrs[at_spc];
 
    if(p->health < p->oldhealth)
       p->rage += rge * (p->oldhealth - p->health) / 1000.0;
@@ -437,7 +436,7 @@ static void AttrRGE(struct player *p)
 stkcall
 static void AttrCON(struct player *p)
 {
-   int rge = p->attr.attrs[at_spc];
+   i32 rge = p->attr.attrs[at_spc];
 
    if(p->mana > p->oldmana)
       p->rage += rge * (p->mana - p->oldmana) / 1100.0;
@@ -450,20 +449,20 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
 {
    if(Lith_IsPaused) return;
 
-   fixed acc = p->attr.attrs[at_acc] / 150.0;
-   fixed def = p->attr.attrs[at_def] / 170.0;
-   int   str = p->attr.attrs[at_str];
-   int   stm = p->attr.attrs[at_stm];
-   int  stmt = 75 - stm;
+   k32  acc = p->attr.attrs[at_acc] / 150.0;
+   k32  def = p->attr.attrs[at_def] / 170.0;
+   i32 strn = p->attr.attrs[at_str];
+   i32  stm = p->attr.attrs[at_stm];
+   i32 stmt = 75 - stm;
 
    switch(p->pclass) {
    case pcl_marine:    AttrRGE(p); break;
    case pcl_cybermage: AttrCON(p); break;
    }
 
-   p->maxhealth = p->spawnhealth + str;
+   p->maxhealth = p->spawnhealth + strn;
    SetPropK(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
-   SetMembI(0, "m_dmgfac", minmax(100 * def, 0, 100));
+   SetMembI(0, sm_DmgFac, minmax(100 * def, 0, 100));
    SetPropI(0, APROP_SpawnHealth, p->maxhealth);
 
    if(p->health < stm+10 && (stmt < 2 || p->ticks % stmt == 0))

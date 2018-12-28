@@ -1,25 +1,19 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-#include "lith_gui.h"
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
+#include "gui.h"
 
-StrEntOFF
-
-void Lith_CBITab_Statistics(gui_state_t *g, struct player *p)
+void Lith_CBITab_Statistics(struct gui_state *g, struct player *p)
 {
-   int n = 0, l;
-   char const *s;
+   i32 n = 0;
 
    #define Stat(name, f, x) \
-      s = name; \
-      l = strlen(s); \
-      PrintTextChr(s, l); PrintText(s_cbifont, CR_WHITE, 23,1,  50 + 8*n,1); \
+      PrintTextChS(name); PrintText(s_cbifont, CR_WHITE, 23,1,  50 + 8*n,1); \
       PrintTextFmt(f, x); PrintText(s_cbifont, CR_WHITE, 300,2, 50 + 8*n,1); \
       n++
 
-   PrintTextStr(p->name);
-   PrintText(s_smallfnt, CR_LIGHTBLUE, 20,1, 40,1);
+   PrintText_str(p->name, s_smallfnt, CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
    Stat(LC(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);

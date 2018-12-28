@@ -1,15 +1,13 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
-StrEntON
-
-static bool  lmvar rain_chk;
-static fixed lmvar rain_px;
-static fixed lmvar rain_py;
-static int   lmvar rain_dist;
+static bool lmvar rain_chk;
+static k32  lmvar rain_px;
+static k32  lmvar rain_py;
+static i32  lmvar rain_dist;
 
 script
 void Lith_DoRain()
@@ -17,25 +15,25 @@ void Lith_DoRain()
    struct player *p = &players[0];
    p->setActivator();
 
-   ACS_PlaySound(p->weathertid, "amb/wind", CHAN_BODY,  0.001, true, ATTN_NONE);
-   ACS_PlaySound(p->weathertid, "amb/rain", CHAN_VOICE, 0.001, true, ATTN_NONE);
+   ACS_PlaySound(p->weathertid, ss_amb_wind, CHAN_BODY,  0.001, true, ATTN_NONE);
+   ACS_PlaySound(p->weathertid, ss_amb_rain, CHAN_VOICE, 0.001, true, ATTN_NONE);
 
-   fixed skydist, curskydist = 1;
+   k32 skydist, curskydist = 1;
    for(;;)
    {
-      if((rain_chk = !ACS_CheckActorCeilingTexture(0, "F_SKY1")))
+      if((rain_chk = !ACS_CheckActorCeilingTexture(0, s_F_SKY1)))
       {
          rain_dist = 1024;
          rain_px = p->x;
          rain_py = p->y;
       }
       else
-         InvTake(OBJ "SMGHeat", 1);
+         InvTake(so_SMGHeat, 1);
 
       if((InHell || InSecret) && !world.islithmap)
-         ServCallI("SpawnRain", OBJ "BloodRainDrop");
+         ServCallI(sm_SpawnRain, so_BloodRainDrop);
       else
-         ServCallI("SpawnRain", OBJ "RainDrop");
+         ServCallI(sm_SpawnRain, so_RainDrop);
 
       ACS_Delay(1);
 
@@ -58,7 +56,7 @@ void Lith_RainDropSpawn()
 {
    if(rain_chk)
    {
-      int dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
+      i32 dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
       if(dist < rain_dist) rain_dist = dist;
    }
 }

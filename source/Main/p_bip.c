@@ -1,19 +1,17 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_bip.h"
-#include "lith_list.h"
-#include "lith_world.h"
-#include "lith_file.h"
-#include "lith_tokbuf.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "p_bip.h"
+#include "m_list.h"
+#include "w_world.h"
+#include "m_file.h"
+#include "m_tokbuf.h"
 
 // Types ---------------------------------------------------------------------|
 
 struct page_init
 {
-   int           pclass;
+   i32           pclass;
    bip_name_t    name;
    bip_unlocks_t unlocks;
    bool          isfree;
@@ -21,15 +19,14 @@ struct page_init
 
 // Static Functions ----------------------------------------------------------|
 
-static __str DecryptBody(char __str_ars const *str)
+static str DecryptBody(char __str_ars const *s)
 {
    ACS_BeginPrint();
-   for(; *str; str++)
-      ACS_PrintChar(!IsPrint(*str) ? *str : *str ^ 7);
+   for(; *s; s++) ACS_PrintChar(!IsPrint(*s) ? *s : *s ^ 7);
    return ACS_EndStrParam();
 }
 
-static void UnlockPage(struct bip *bip, struct page *page, int pclass)
+static void UnlockPage(struct bip *bip, struct page *page, i32 pclass)
 {
    if(!page->unlocked)
    {
@@ -38,15 +35,15 @@ static void UnlockPage(struct bip *bip, struct page *page, int pclass)
       page->unlocked = true;
    }
 
-   for(int i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
+   for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
       bip->unlock(page->unlocks[i], pclass);
 }
 
 optargs(1)
-static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init const *pinit, bool isfree)
+static void AddToBIP(struct bip *bip, i32 categ, i32 pclass, struct page_init const *pinit, bool isfree)
 {
-   __str image = LanguageNull(cLANG "INFO_IMAGE_%s", pinit->name);
-   int height = strtoi_str(Language(cLANG "INFO_CSIZE_%s", pinit->name), null, 0);
+   str image  = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
+   i32 height = strtoi_str(Language(LANG "INFO_CSIZE_%s", pinit->name), nil, 0);
 
    struct page *page = Salloc(struct page);
 
@@ -65,24 +62,24 @@ static void AddToBIP(struct bip *bip, int categ, int pclass, struct page_init co
 }
 
 stkcall
-static int CatFromStr(__str name)
+static i32 CatFromStr(str name)
 {
-   if(name == "EXTRA") return BIPC_EXTRA;
-#define LITH_X(n, _) if(name == #n) return BIPC_##n;
-#include "lith_bip.h"
+   if(name == st_bipc_EXTRA) return BIPC_EXTRA;
+   #define LITH_X(n, _) if(name == st_bipc_##n) return BIPC_##n;
+   #include "p_bip.h"
    return BIPC_NONE;
 }
 
 stkcall
-static int PClFromStr(__str name)
+static i32 PClFromStr(str name)
 {
-#define LITH_X(n, pc) if(name == #n || name == #pc) return pc;
-#include "lith_player.h"
+   #define LITH_X(n, pc) if(name == st_##n || name == st_##pc) return pc;
+   #include "p_player.h"
    return 0;
 }
 
 script
-static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *tok, int categ, int pclass, bool catfree)
+static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *tok, i32 categ, i32 pclass, bool catfree)
 {
    struct page_init page = {};
 
@@ -95,7 +92,7 @@ static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *t
    page.isfree = tb->drop(tok_mul);
 
    if(tb->drop(tok_rarrow))
-      for(int i = 0; i < countof(page.unlocks) && !tb->drop(tok_lnend); i++)
+      for(i32 i = 0; i < countof(page.unlocks) && !tb->drop(tok_lnend); i++)
    {
       tok = tb->get();
       memmove(page.unlocks[i], tok->textV, tok->textC);
@@ -107,7 +104,7 @@ static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *t
    return tok;
 }
 
-static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
+static i32 LoadBIPInfo(str fname, struct bip *bip, i32 pclass)
 {
    struct tokbuf tb = {
       .bbeg = 4, .bend = 10,
@@ -119,8 +116,8 @@ static int LoadBIPInfo(__str fname, struct bip *bip, int pclass)
    tb.ctor();
 
    bool catfree = false;
-   int categ = BIPC_NONE;
-   int total = 0;
+   i32 categ = BIPC_NONE;
+   i32 total = 0;
 
    for(struct token *tok; (tok = tb.get())->type != tok_eof;) switch(tok->type)
    {
@@ -160,8 +157,8 @@ void Lith_PlayerInitBIP(struct player *p)
    ForCategory()
       bip->infogr[categ].free(true);
 
-   int total = LoadBIPInfo("lfiles/BIPInfo.txt", bip, p->pclass);
-   if(world.dbgLevel) p->logH(1, c"There are %i info pages!", total);
+   i32 total = LoadBIPInfo(sp_lfiles_BIPInfo, bip, p->pclass);
+   if(world.dbgLevel) p->logH(1, "There are %i info pages!", total);
 
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
@@ -172,7 +169,7 @@ void Lith_PlayerInitBIP(struct player *p)
 }
 
 script
-void Lith_DeliverMail(struct player *p, __str title, int flags)
+void Lith_DeliverMail(struct player *p, str title, i32 flags)
 {
    // Note: Due to the way this code works, if you switch languages at runtime,
    // mail won't be updated. I provide a lore answer (excuse) for this: When
@@ -185,30 +182,30 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
 
    p->setActivator();
 
-   flags |= strtoi_str(Language(cLANG "MAIL_FLAG_%S", title), null, 0);
-   flags |= strtoi_str(Language(cLANG "MAIL_FLAG_%S%s", title, p->discrim), null, 0);
+   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S", title), nil, 0);
+   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S%s", title, p->discrim), nil, 0);
 
-   if(!(flags & MAILF_AllPlayers)) title = StrParam(c"%S%s", title, p->discrim);
+   if(!(flags & MAILF_AllPlayers)) title = StrParam("%S%s", title, p->discrim);
 
    struct bip *bip = &p->bip;
 
    struct page *page = Salloc(struct page);
 
-   __str date = LanguageNull(cLANG "MAIL_TIME_%S", title);
-   __str size = LanguageNull(cLANG "MAIL_SIZE_%S", title);
-   __str send = LanguageNull(cLANG "MAIL_SEND_%S", title);
-   __str name = LanguageNull(cLANG "MAIL_NAME_%S", title);
-   __str body = Language    (cLANG "MAIL_BODY_%S", title);
+   str date = LanguageNull(LANG "MAIL_TIME_%S", title);
+   str size = LanguageNull(LANG "MAIL_SIZE_%S", title);
+   str send = LanguageNull(LANG "MAIL_SEND_%S", title);
+   str name = LanguageNull(LANG "MAIL_NAME_%S", title);
+   str body = Language    (LANG "MAIL_BODY_%S", title);
 
-   if(!send) send = L(LANG "MAIL_INTERNAL");
+   if(!send) send = L(st_mail_internal);
 
    page->shname   = date ? date : l_strdup(world.canontimeshort);
-   page->title    = name ? name : L(LANG "MAIL_NOTITLE");
-   page->body     = StrParam(LC(cLANG "MAIL_TEMPLATE"), send, page->name, body);
+   page->title    = name ? name : L(st_mail_notitle);
+   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, page->name, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 
-   if(size) page->height = strtoi_str(size, null, 0);
+   if(size) page->height = strtoi_str(size, nil, 0);
 
    page->link.construct(page);
    page->link.link(&bip->infogr[BIPC_MAIL]);
@@ -219,26 +216,26 @@ void Lith_DeliverMail(struct player *p, __str title, int flags)
    {
       ACS_Delay(20);
 
-      p->logB(1, LC(cLANG "LOG_MailRecv"), send);
+      p->logB(1, LC(LANG "LOG_MailRecv"), send);
 
       if(ACS_Random(1, 10000) == 1)
       {
          bip->mailtrulyreceived++;
-         ACS_LocalAmbientSound("player/YOUVEGOTMAIL", 127);
+         ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
       }
       else
-         ACS_LocalAmbientSound("player/cbi/mail", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
    }
 }
 
 struct page *Lith_FindBIPPage(struct bip *bip, char const *name)
 {
-   if(!name) return null;
+   if(!name) return nil;
    ForCategoryAndPage() if(strcmp(page->name, name) == 0) return page;
-   return null;
+   return nil;
 }
 
-struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, int pclass)
+struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, i32 pclass)
 {
    struct page *page = bip->find(name);
 
@@ -256,11 +253,11 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, int pclass)
 }
 
 script ext("ACS")
-void Lith_BIPUnlock(int pnum)
+void Lith_BIPUnlock(i32 pnum)
 {
    withplayer(&players[pnum])
    {
-      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, "m_infopage"));
+      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
       p->bipUnlock(tag);
    }
 }
@@ -278,15 +275,15 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 
    pinf.shname = page->shname
       ? page->shname
-      : Language(cLANG "INFO_SHORT_%s", page->name);
+      : Language(LANG "INFO_SHORT_%s", page->name);
 
    pinf.body = page->body
       ? page->body
-      : Language(cLANG "INFO_DESCR_%s", page->name);
+      : Language(LANG "INFO_DESCR_%s", page->name);
 
    pinf.flname = page->title
       ? page->title
-      : Language(cLANG "INFO_TITLE_%s", page->name);
+      : Language(LANG "INFO_TITLE_%s", page->name);
 
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);
@@ -298,7 +295,7 @@ struct page_info Lith_GetPageInfo(struct page const *page)
       ACS_BeginPrint();
       ACS_BeginPrint();
 
-      for(int i = 1, l = ACS_StrLen(pinf.body); i < l; i++)
+      for(i32 i = 1, l = ACS_StrLen(pinf.body); i < l; i++)
       {
          if(!top && pinf.body[i] == '\n') {top = true; ACS_PrintString(L(ACS_EndStrParam()));}
          ACS_PrintChar(pinf.body[i]);
@@ -311,17 +308,17 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 }
 
 script ext("ACS")
-void Lith_GiveMail(int num)
+void Lith_GiveMail(i32 num)
 {
-   static __str const names[] = {
-      "Intro",
-      "Cluster1",
-      "Cluster2",
-      "Cluster3",
-      "Phantom",
-      "JamesDefeated",
-      "MakarovDefeated",
-      "IsaacDefeated"
+   static str const names[] = {
+      s"Intro",
+      s"Cluster1",
+      s"Cluster2",
+      s"Cluster3",
+      s"Phantom",
+      s"JamesDefeated",
+      s"MakarovDefeated",
+      s"IsaacDefeated"
    };
 
    num %= countof(names);

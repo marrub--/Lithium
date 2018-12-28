@@ -22,6 +22,6 @@ def run of, pkdir, dir
 end
 
 for arg in ARGV
-   fname, pkdir, dir = arg.split ?,
+   fname, pkdir, dir = arg.split ?:
    run open(fname, "w"), pkdir, dir
 end

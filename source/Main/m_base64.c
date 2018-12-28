@@ -35,8 +35,9 @@
  *
  */
 
-#include "lith_base64.h"
-#include "lith_memory.h"
+#include "m_base64.h"
+#include "m_memory.h"
+#include "m_types.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -48,9 +49,9 @@ static byte const base64_table[65] =
  * base64_encode - Base64 encode
  * @src: Data to be encoded
  * @len: Length of the data to be encoded
- * @out_len: Pointer to output length variable, or %NULL if not used
+ * @out_len: Pointer to output length variable, or %nil if not used
  * Returns: Allocated buffer of out_len bytes of encoded data,
- * or %NULL on failure
+ * or %nil on failure
  *
  * Caller is responsible for freeing the returned buffer. Returned buffer is
  * nul terminated to make it easier to use as a C string. The nul terminator is
@@ -65,10 +66,10 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
    olen = len * 4 / 3 + 4; /* 3-byte blocks to 4-byte */
    olen++; /* nul termination */
    if (olen < len)
-      return NULL; /* integer overflow */
+      return nil; /* integer overflow */
    out = Malloc(olen);
-   if (out == NULL)
-      return NULL;
+   if (out == nil)
+      return nil;
 
    end = src + len;
    in = src;
@@ -107,7 +108,7 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
  * @len: Length of the data to be decoded
  * @out_len: Pointer to output length variable
  * Returns: Allocated buffer of out_len bytes of decoded data,
- * or %NULL on failure
+ * or %nil on failure
  *
  * Caller is responsible for freeing the returned buffer.
  */
@@ -119,7 +120,7 @@ byte *base64_decode(const byte *src, size_t len, size_t *out_len)
 
    byte *out, *pos, block[4], tmp;
    size_t i, count, olen;
-   int pad = 0;
+   i32 pad = 0;
 
    if(!dtable_init)
    {
@@ -137,12 +138,12 @@ byte *base64_decode(const byte *src, size_t len, size_t *out_len)
    }
 
    if (count == 0 || count % 4)
-      return NULL;
+      return nil;
 
    olen = count / 4 * 3;
    pos = out = Malloc(olen);
-   if (out == NULL)
-      return NULL;
+   if (out == nil)
+      return nil;
 
    count = 0;
    for (i = 0; i < len; i++) {
@@ -167,7 +168,7 @@ byte *base64_decode(const byte *src, size_t len, size_t *out_len)
             else {
                /* Invalid padding */
                Dalloc(out);
-               return NULL;
+               return nil;
             }
             break;
          }

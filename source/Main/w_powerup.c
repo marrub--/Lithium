@@ -1,37 +1,35 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_weapons.h"
-#include "lith_player.h"
-#include "lith_hudid.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_weapons.h"
+#include "p_player.h"
+#include "p_hudid.h"
+#include "w_world.h"
 
 script ext("ACS")
 void Lith_DOGS()
 {
    withplayer(LocalPlayer)
    {
-      int tid = ACS_UniqueTID();
+      i32 tid = ACS_UniqueTID();
 
-      ACS_SetMusic("lmusic/DOGS.ogg");
+      ACS_SetMusic(sp_lmusic_DOGS);
 
-      for(int i = 0; i < (35 * 30) / 10; i++)
+      for(i32 i = 0; i < (35 * 30) / 10; i++)
       {
-         fixed ang = ACS_RandomFixed(0, 1);
-         fixed dst = ACS_RandomFixed(0, 64);
-         ACS_SpawnForced(OBJ "Steggles", p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
-         InvGive(OBJ "Alerter", 1);
+         k32 ang = ACS_RandomFixed(0, 1);
+         k32 dst = ACS_RandomFixed(0, 64);
+         ACS_SpawnForced(so_Steggles, p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
+         InvGive(so_Alerter, 1);
          ACS_Delay(10);
       }
 
       ACS_Delay(35);
 
-      ACS_SetMusic("lsounds/Silence");
+      ACS_SetMusic(sp_lsounds_Silence);
 
       SetPropI(tid, APROP_MasterTID, p->tid);
-      ACS_SetActorState(tid, "PureSteggleEnergy");
+      ACS_SetActorState(tid, sm_PureSteggleEnergy);
    }
 }
 
@@ -44,13 +42,13 @@ void Lith_SteggleEnergy()
 
       for(;;)
       {
-         fixed x = GetX(0);
-         fixed y = GetY(0);
-         fixed z = GetZ(0);
+         k32 x = GetX(0);
+         k32 y = GetY(0);
+         k32 z = GetZ(0);
 
-         fixed nx = lerpk(x, p->x, 0.01);
-         fixed ny = lerpk(y, p->y, 0.01);
-         fixed nz = lerpk(z, p->z, 0.01);
+         k32 nx = lerpk(x, p->x, 0.01);
+         k32 ny = lerpk(y, p->y, 0.01);
+         k32 nz = lerpk(z, p->z, 0.01);
 
          ACS_Warp(0, nx, ny, nz, 0, WARPF_ABSOLUTEPOSITION|WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
          ACS_SetActorAngle(0, ACS_VectorAngle(p->x - x, p->y - y));
@@ -65,14 +63,14 @@ void Lith_BarrierBullets()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
    {
-      fixed ang   = ACS_VectorAngle(GetX(0) - p->x, GetY(0) - p->y);
-      fixed xang  = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0));
-      fixed zdiff = p->z - GetZ(0);
-      fixed s     = ACS_Sin(ang) * 48.0;
-      fixed c     = ACS_Cos(ang) * 48.0;
-      fixed z     = (p->z + p->viewheight / 2) - (zdiff / 2);
+      k32 ang   = ACS_VectorAngle(GetX(0) - p->x, GetY(0) - p->y);
+      k32 xang  = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0));
+      k32 zdiff = p->z - GetZ(0);
+      k32 s     = ACS_Sin(ang) * 48.0;
+      k32 c     = ACS_Cos(ang) * 48.0;
+      k32 z     = (p->z + p->viewheight / 2) - (zdiff / 2);
 
-      ACS_SpawnForced(OBJ "BarrierFX", p->x + c, p->y + s, z);
+      ACS_SpawnForced(so_BarrierFX, p->x + c, p->y + s, z);
       ACS_LineAttack(p->tid, ang + ACS_RandomFixed(-0.1, 0.1), PITCH_BASE + ACS_RandomFixed(0.45, 0.55), 10);
    }
 }
@@ -93,8 +91,8 @@ void Lith_GetSigil()
 
       p->sgacquired = true;
 
-      ACS_Thing_Remove(InvNum(OBJ "DivisionSigilSpriteTID"));
-      InvTake(OBJ "DivisionSigilSpriteTID", 0x7FFFFFFF);
+      ACS_Thing_Remove(InvNum(so_DivisionSigilSpriteTID));
+      InvTake(so_DivisionSigilSpriteTID, 0x7FFFFFFF);
 
       if(world.dbgLevel)
          return;
@@ -106,13 +104,16 @@ void Lith_GetSigil()
 
       ACS_Delay(3);
 
-      HudMessageF(s_dbigfont, "D I V I S I O N  S I G I L");
+      ACS_SetFont(s_dbigfont);
+      ACS_BeginPrint();
+      ACS_PrintString(st_div_get);
+      ACS_MoreHudMessage();
       HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TS * 5, 0.3);
 
-      HudMessageF(s_smallfnt,
-         "=== Warning ===\n"
-         "This item is unfathomably dangerous.\n"
-         "Use at the expense of your world.");
+      ACS_SetFont(s_dbigfont);
+      ACS_BeginPrint();
+      ACS_PrintString(st_div_warning);
+      ACS_MoreHudMessage();
       HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TS * 2, 0.3);
 
       ACS_Delay(35 * 7);

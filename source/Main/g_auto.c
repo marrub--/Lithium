@@ -1,14 +1,16 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
-StrEntON
+// Static Objects ------------------------------------------------------------|
+
+noinit static char tcbuf[4096];
 
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool slide)
+void Lith_GUI_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
 {
    x += g->ox;
    y += g->oy;
@@ -32,26 +34,25 @@ void Lith_GUI_Auto(gui_state_t *g, id_t id, int x, int y, int w, int h, bool sli
 }
 
 stkcall
-void Lith_GUI_Init(gui_state_t *g, void *state)
+void Lith_GUI_Init(struct gui_state *g, void *state)
 {
    g->state = state;
    g->gfxprefix = c":UI:";
 }
 
 stkcall
-void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
+void Lith_GUI_UpdateState(struct gui_state *g, struct player *p)
 {
-   bool inverted = p->getCVarI(sCVAR "player_invertmouse");
+   bool inverted = p->getCVarI(sc_player_invertmouse);
 
    // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
    // This breaks network sync so we can only do it in singleplayer.
-   if(world.singleplayer)
-      inverted |= ACS_GetCVar("invertmouse");
+   if(world.singleplayer) inverted |= ACS_GetCVar(sc_invertmouse);
 
    g->old = g->cur;
 
-   fixed xmul = p->getCVarK(sCVAR "gui_xmul");
-   fixed ymul = p->getCVarK(sCVAR "gui_ymul");
+   k32 xmul = p->getCVarK(sc_gui_xmul);
+   k32 ymul = p->getCVarK(sc_gui_xmul);
 
                 g->cx -= p->yawv   * (800.0lk * xmul);
    if(inverted) g->cy += p->pitchv * (800.0lk * ymul);
@@ -71,7 +72,7 @@ void Lith_GUI_UpdateState(gui_state_t *g, struct player *p)
 }
 
 stkcall
-void Lith_GUI_Begin(gui_state_t *g, int w, int h)
+void Lith_GUI_Begin(struct gui_state *g, i32 w, i32 h)
 {
    if(!w) w = 320;
    if(!h) h = 200;
@@ -83,23 +84,22 @@ void Lith_GUI_Begin(gui_state_t *g, int w, int h)
 }
 
 stkcall
-void Lith_GUI_End(gui_state_t *g, enum cursor curs)
+void Lith_GUI_End(struct gui_state *g, enum cursor curs)
 {
-   __str cgfx;
+   str cgfx;
 
-   switch(curs)
-   {
+   switch(curs) {
    default:
-   case gui_curs_green:       cgfx = ":UI:Cursor";            break;
-   case gui_curs_pink:        cgfx = ":UI:CursorPink";        break;
-   case gui_curs_blue:        cgfx = ":UI:CursorBlue";        break;
-   case gui_curs_orange:      cgfx = ":UI:CursorOrange";      break;
-   case gui_curs_red:         cgfx = ":UI:CursorRed";         break;
-   case gui_curs_white:       cgfx = ":UI:CursorWhite";       break;
-   case gui_curs_outline:     cgfx = ":UI:CursorOutline";     break;
-   case gui_curs_outline2:    cgfx = ":UI:CursorOutline2";    break;
-   case gui_curs_outlineinv:  cgfx = ":UI:CursorOutlineInv";  break;
-   case gui_curs_outline2inv: cgfx = ":UI:CursorOutline2Inv"; break;
+   case gui_curs_green:       cgfx = sp_UI_Cursor;            break;
+   case gui_curs_pink:        cgfx = sp_UI_CursorPink;        break;
+   case gui_curs_blue:        cgfx = sp_UI_CursorBlue;        break;
+   case gui_curs_orange:      cgfx = sp_UI_CursorOrange;      break;
+   case gui_curs_red:         cgfx = sp_UI_CursorRed;         break;
+   case gui_curs_white:       cgfx = sp_UI_CursorWhite;       break;
+   case gui_curs_outline:     cgfx = sp_UI_CursorOutline;     break;
+   case gui_curs_outline2:    cgfx = sp_UI_CursorOutline2;    break;
+   case gui_curs_outlineinv:  cgfx = sp_UI_CursorOutlineInv;  break;
+   case gui_curs_outline2inv: cgfx = sp_UI_CursorOutline2Inv; break;
    }
 
    PrintSprite(cgfx, g->cx,1, g->cy,1);
@@ -109,7 +109,7 @@ void Lith_GUI_End(gui_state_t *g, enum cursor curs)
 }
 
 stkcall
-void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
+void Lith_GUI_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
 {
    g->useclip = true;
    g->clpxE = x + w;
@@ -120,53 +120,62 @@ void Lith_GUI_Clip(gui_state_t *g, int x, int y, int w, int h, int ww)
 }
 
 stkcall
-void Lith_GUI_ClipRelease(gui_state_t *g)
+void Lith_GUI_ClipRelease(struct gui_state *g)
 {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
    ClearClip();
 }
 
 stkcall
-void Lith_GUI_TypeOn(gui_state_t *g, gui_typeon_state_t *typeon, __str text)
+void Lith_GUI_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
 {
    typeon->txt = text;
    typeon->len = ACS_StrLen(text);
    typeon->pos = 0;
 }
 
+#define RemoveTextColorsImpl() \
+   i32 j = 0; \
+   \
+   if(size > countof(tcbuf)) return nil; \
+   \
+   for(i32 i = 0; i < size; i++) \
+   { \
+      if(s[i] == '\C') \
+      { \
+         i++; \
+         if(s[i] == '[') \
+            while(s[i] && s[i++] != ']'); \
+         else \
+            i++; \
+      } \
+      \
+      if(i >= size || j >= size || !s[i]) \
+         break; \
+      \
+      tcbuf[j++] = s[i]; \
+   } \
+   \
+   tcbuf[j++] = '\0'; \
+   \
+   return tcbuf;
+
 stkcall
-__str Lith_RemoveTextColors(__str str, int size)
+char const *RemoveTextColors_str(char __str_ars const *s, i32 size)
 {
-   noinit
-   static char buf[4096];
-   int j = 0;
-
-   if(size > countof(buf)) return null;
-
-   for(int i = 0; i < size; i++)
-   {
-      if(str[i] == '\C')
-      {
-         i++;
-         if(str[i] == '[')
-            while(str[i] && str[i++] != ']');
-         else
-            i++;
-      }
-
-      if(i >= size || j >= size || !str[i])
-         break;
-
-      buf[j++] = str[i];
-   }
-
-   return l_strndup(buf, j);
+   RemoveTextColorsImpl();
 }
 
 stkcall
-gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state_t *typeon)
+char const *RemoveTextColors(char const *s, i32 size)
 {
-   int num = ACS_Random(2, 15);
+   RemoveTextColorsImpl();
+}
+
+stkcall
+struct gui_typ const *Lith_GUI_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon)
+{
+   i32 num = ACS_Random(2, 15);
 
    if((typeon->pos += num) > typeon->len)
       typeon->pos = typeon->len;
@@ -175,4 +184,3 @@ gui_typeon_state_t const *Lith_GUI_TypeOnUpdate(gui_state_t *g, gui_typeon_state
 }
 
 // EOF
-

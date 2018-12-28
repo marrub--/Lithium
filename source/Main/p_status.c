@@ -1,27 +1,25 @@
 // Copyright © 2017-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "w_world.h"
 
 // Static Functions ----------------------------------------------------------|
 
-static void AttrBar(gui_state_t *g, int x, int y, int w, __str gfx)
+static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 {
    Lith_GUI_Clip(g, x, y, w * 4, 8);
    PrintSprite(gfx, x,1, y,1);
    Lith_GUI_ClipRelease(g);
 }
 
-static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
+static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at)
 {
    u32         attr = p->attr.attrs[at];
    char const *name = p->attr.names[at];
-   fixed helptrns = 0.5;
+   k32 helptrns = 0.5;
 
    if(p->attr.points)
-      if(Lith_GUI_Button_Id(g, at, .x = x-42 + guipre.btnnext.w, y-2, Pre(btnnext), .slide = true))
+      if(Lith_GUI_Button_Id(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
    {
       p->attr.points--;
       p->attr.attrs[at]++;
@@ -30,68 +28,62 @@ static void DrawAttr(gui_state_t *g, int x, int y, struct player *p, int at)
    PrintTextChr(name, 3);
    PrintText(s_chfont, CR_WHITE, x-24,1, y,1);
 
-   PrintSprite(":UI:AttrBar1", x,1, y,1);
+   PrintSprite(sp_UI_AttrBar1, x,1, y,1);
 
-   AttrBar(g, x, y, attr, ":UI:AttrBar2");
+   AttrBar(g, x, y, attr, sp_UI_AttrBar2);
 
    if(attr > ATTR_VIS_MAX)
    {
-      int vatr = attr - ATTR_VIS_MAX;
-      AttrBar(g, x, y, (vatr / (fixed64)ATTR_VIS_DIFF) * ATTR_VIS_MAX, ":UI:AttrBar4");
+      i32 vatr = attr - ATTR_VIS_MAX;
+      AttrBar(g, x, y, (vatr / (k64)ATTR_VIS_DIFF) * ATTR_VIS_MAX, sp_UI_AttrBar4);
       helptrns += 0.3;
    }
 
-   PrintTextStr(Language(cLANG "ATTR_HELP_%.3s", name));
-   PrintTextA(s_chfont, CR_WHITE, x+1,1, y+1,1, helptrns);
+   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_chfont, CR_WHITE, x+1,1, y+1,1, helptrns);
 
-   PrintTextFmt(c"%u/%i", attr, ATTR_VIS_MAX);
+   PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
    PrintText(s_chfont, CR_WHITE, x+202,1, y,1);
 }
 
-static void StatusInfo(gui_state_t *g, int x, int y, __str left, __str right)
+static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
 {
-   PrintTextStr(left);
-   PrintText(s_chfont, CR_WHITE, x,1, y,1);
-
-   PrintTextStr(right);
-   PrintText(s_chfont, CR_WHITE, x+80,2, y,1);
+   PrintText_str(left,  s_chfont, CR_WHITE, x,1, y,1);
+   PrintText_str(right, s_chfont, CR_WHITE, x+80,2, y,1);
 }
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_Status(gui_state_t *g, struct player *p)
+void Lith_CBITab_Status(struct gui_state *g, struct player *p)
 {
-   int x = 30, y = 40;
+   i32 x = 30, y = 40;
 
-   PrintTextStr(p->name);
-   PrintText(s_chfont, CR_WHITE, x,1, y,1);
+   PrintText_str(p->name, s_chfont, CR_WHITE, x,1, y,1);
    y += 10;
 
-   PrintTextStr(p->classname);
-   PrintText(s_chfont, CR_WHITE, x,1, y,1);
+   PrintText_str(p->classname, s_chfont, CR_WHITE, x,1, y,1);
 
-   StatusInfo(g, x, y += 10, "Lv.",  StrParam(c"%u", p->attr.level));
-   StatusInfo(g, x, y += 10, "HP",   StrParam(c"%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, x, y += 10, st_lv, StrParam("%u", p->attr.level));
+   StatusInfo(g, x, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));
 
    if(p->pclass & pcl_magicuser)
-      StatusInfo(g, x, y += 10, "MP", StrParam(c"%i/%i", p->mana, p->manamax));
+      StatusInfo(g, x, y += 10, st_mp, StrParam("%i/%i", p->mana, p->manamax));
 
-   StatusInfo(g, x, y += 10, "EXP",  StrParam(c"%u", p->attr.exp));
-   StatusInfo(g, x, y += 10, "Next", StrParam(c"%u", p->attr.expnext));
+   StatusInfo(g, x, y += 10, st_exp,  StrParam("%u", p->attr.exp));
+   StatusInfo(g, x, y += 10, st_next, StrParam("%u", p->attr.expnext));
 
    x  = 20;
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
    if(p->attr.points)
    {
-      PrintTextFmt(c"Divide %u points among your attributes.", p->attr.points);
+      PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
       PrintText(s_chfont, CR_WHITE, x,1, y,1);
    }
 
    x  = 53;
    y += 10;
 
-   for(int i = 0; i < at_max; i++, y += 10)
+   for(i32 i = 0; i < at_max; i++, y += 10)
       DrawAttr(g, x, y, p, i);
 }
 

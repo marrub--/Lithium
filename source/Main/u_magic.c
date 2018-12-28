@@ -1,16 +1,14 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "u_common.h"
+#include "w_world.h"
 
 #define UData UData_Magic(upgr)
 
 // Types ---------------------------------------------------------------------|
 
 struct magic_info {
-   int st;
-   int x, y;
+   i32 st;
+   i32 x, y;
    char const *name;
 };
 
@@ -37,16 +35,16 @@ static void GiveMagic(struct magic_info const *m)
 script
 static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 {
-   gui_state_t *g = &UData.gst;
+   struct gui_state *g = &UData.gst;
 
    Lith_GUI_Begin(g, 320, 240);
    Lith_GUI_UpdateState(g, p);
 
-   PrintSprite(s":UI:MagicSelectBack", 0,1, 0,1);
+   PrintSprite(sp_UI_MagicSelectBack, 0,1, 0,1);
 
    bool any = false;
 
-   for(int i = 0; i < countof(minf); i++)
+   for(i32 i = 0; i < countof(minf); i++)
    {
       struct magic_info const *m = &minf[i];
 
@@ -55,7 +53,7 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
       char gfx[18] = ":UI:"; strcat(gfx, m->name);
       char hot[18] = ":UI:"; strcat(hot, m->name); strcat(hot, "Sel");
 
-      gui_button_preset_t pre = {
+      struct gui_pre_btn pre = {
          .gfx      = gfx,
          .hot      = hot,
          .snd      = "player/cbi/buttonpress",
@@ -79,10 +77,10 @@ static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
 }
 
 script
-static void GivePlayerZ(int tid, struct player *p)
+static void GivePlayerZ(i32 tid, struct player *p)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
-      SetMembI(tid, s"user_z", p->z);
+      SetMembI(tid, sm_UserZ, p->z);
       ACS_Delay(1);
    }
 }
@@ -125,10 +123,10 @@ script
 void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 {
    StrEntON
-   fixed manaperc = p->mana / (fixed)p->manamax;
+   k32 manaperc = p->mana / (k32)p->manamax;
 
    if(UData.manaperc < 1 && manaperc == 1)
-      ACS_LocalAmbientSound("player/manafull", 127);
+      ACS_LocalAmbientSound(ss_player_manafull, 127);
 
    UData.manaperc = manaperc;
 
@@ -141,17 +139,17 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
       UpdateMagicUI(p, upgr);
 
    if(manaperc >= 0.7)
-      for(int i = 0; i < 5 * manaperc; i++)
+      for(i32 i = 0; i < 5 * manaperc; i++)
    {
-      fixed dst = ACS_RandomFixed(32, 56);
-      fixed ang = ACS_RandomFixed(0, 1);
-      int tid = ACS_UniqueTID();
-      int x   = ACS_Cos(ang) * dst;
-      int y   = ACS_Sin(ang) * dst;
-      int z   = ACS_Random(8, 48);
-      ACS_Spawn(OBJ "ManaLeak", p->x + x, p->y + y, p->z + z, tid);
-      SetMembI(tid, "user_x", x);
-      SetMembI(tid, "user_y", y);
+      k32 dst = ACS_RandomFixed(32, 56);
+      k32 ang = ACS_RandomFixed(0, 1);
+      i32 tid = ACS_UniqueTID();
+      i32 x   = ACS_Cos(ang) * dst;
+      i32 y   = ACS_Sin(ang) * dst;
+      i32 z   = ACS_Random(8, 48);
+      ACS_Spawn(so_ManaLeak, p->x + x, p->y + y, p->z + z, tid);
+      SetMembI(tid, sm_UserX, x);
+      SetMembI(tid, sm_UserY, y);
       SetPropK(tid, APROP_Alpha, manaperc / 2);
       Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
       GivePlayerZ(tid, p);
@@ -161,23 +159,21 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 stkcall
 void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
 {
-   StrEntON
    if(!p->hudenabled || p->indialogue) return;
 
-   int hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
-   int fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
+   i32 hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
+   i32 fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);
 
-   PrintSprite(":HUD_C:MagicIcon", 1,1, 213,2);
-   PrintSprite(":HUD_C:BarSmall2", 1,1, 220,2);
+   PrintSprite(sp_HUD_C_MagicIcon, 1,1, 213,2);
+   PrintSprite(sp_HUD_C_BarSmall2, 1,1, 220,2);
 
    SetClip(2, 219-5, hprc, 5);
-   PrintSprite(":HUD_C:ManaBar1", 2,1, 219,2);
+   PrintSprite(sp_HUD_C_ManaBar1, 2,1, 219,2);
    ClearClip();
 
    SetClip(2, 219-5, fprc, 5);
-   PrintSprite(":HUD_C:ManaBar2", 2,1, 219,2);
+   PrintSprite(sp_HUD_C_ManaBar2, 2,1, 219,2);
    ClearClip();
 }
 
 // EOF
-

@@ -1,19 +1,17 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
 #if LITHIUM
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_file.h"
-#include "lith_savedata.h"
-#include "lith_world.h"
-
-StrEntON
+#include "common.h"
+#include "p_player.h"
+#include "m_file.h"
+#include "p_savedata.h"
+#include "w_world.h"
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_SaveWriteChunk(savefile_t *save, ident_t iden, uint32_t vers, size_t size)
+void Lith_SaveWriteChunk(savefile_t *save, u32 iden, u32 vers, size_t size)
 {
    if(world.dbgSave)
-      Log(c"Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
+      Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
 
    savechunk_t chunk = {iden, vers & Save_VersMask, size};
    Lith_FWrite32(&chunk, sizeof chunk, 4, save->fp);
@@ -23,7 +21,7 @@ savefile_t *Lith_SaveBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 
-   if((save->fp = Lith_NFOpen(p->num, sCVAR "psave", 'w')))
+   if((save->fp = Lith_NFOpen(p->num, sc_psave, 'w')))
    {
       save->p = p;
       Lith_SaveWriteChunk(save, Ident_Lith, SaveV_Lith, 0);
@@ -31,7 +29,7 @@ savefile_t *Lith_SaveBegin(struct player *p)
    }
 
    Dalloc(save);
-   return null;
+   return nil;
 }
 
 script
@@ -42,14 +40,14 @@ void Lith_SaveEnd(savefile_t *save)
    Dalloc(save);
 }
 
-int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t chunker)
+i32 Lith_LoadChunk(savefile_t *save, u32 iden, u32 vers, loadchunker_t chunker)
 {
    rewind(save->fp);
 
    if(world.dbgSave)
-      Log(c"Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
+      Log("Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
 
-   for(int i = 0;; i++)
+   for(i32 i = 0;; i++)
    {
       savechunk_t chunk;
       Lith_FRead32(&chunk, sizeof chunk, 4, save->fp);
@@ -63,7 +61,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
       {
          if(chunker) chunker(save, &chunk);
 
-         if(world.dbgSave) Log(c"Lith_LoadChunk: Found valid chunk at %i", i);
+         if(world.dbgSave) Log("Lith_LoadChunk: Found valid chunk at %i", i);
 
          return i;
       }
@@ -72,7 +70,7 @@ int Lith_LoadChunk(savefile_t *save, ident_t iden, uint32_t vers, loadchunker_t 
    }
 
    if(world.dbgSave)
-      Log(c"Lith_LoadChunk: Couldn't find anything");
+      Log("Lith_LoadChunk: Couldn't find anything");
 
    return -1;
 }
@@ -81,7 +79,7 @@ savefile_t *Lith_LoadBegin(struct player *p)
 {
    savefile_t *save = Salloc(savefile_t);
 
-   if((save->fp = Lith_NFOpen(p->num, sCVAR "psave", 'r')))
+   if((save->fp = Lith_NFOpen(p->num, sc_psave, 'r')))
    {
       save->p = p;
 
@@ -89,14 +87,14 @@ savefile_t *Lith_LoadBegin(struct player *p)
       if(Lith_LoadChunk(save, Ident_Lith, SaveV_Lith) != 0)
       {
          Lith_LoadEnd(save);
-         return null;
+         return nil;
       }
 
       return save;
    }
 
    Dalloc(save);
-   return null;
+   return nil;
 }
 
 void Lith_LoadEnd(savefile_t *save)

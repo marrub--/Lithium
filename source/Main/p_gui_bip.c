@@ -1,12 +1,10 @@
 // Copyright © 2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_bip.h"
-#include "lith_list.h"
+#include "common.h"
+#include "p_player.h"
+#include "p_bip.h"
+#include "m_list.h"
 
-StrEntON
-
-static void SetCurPage(gui_state_t *g, struct bip *bip, struct page *page, __str body)
+static void SetCurPage(struct gui_state *g, struct bip *bip, struct page *page, str body)
 {
    bip->curpage = page;
 
@@ -15,50 +13,46 @@ static void SetCurPage(gui_state_t *g, struct bip *bip, struct page *page, __str
 }
 
 script
-static bool CheckMatch(struct page_info *pinf, __str query)
+static bool CheckMatch(struct page_info *pinf, str query)
 {
    return strcasestr_str(pinf->shname, query) ||
           strcasestr_str(pinf->flname, query) ||
           strcasestr_str(pinf->body,   query);
 }
 
-static void MainUI(gui_state_t *g, struct player *p, struct bip *bip)
+static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
 {
-   int n = 0;
+   i32 n = 0;
 
-   PrintTextStr("INFO CATEGORIES");
-   PrintText(s_cbifont, CR_PURPLE, 40,1, 70,1);
+   PrintText_str(st_info_categories, s_cbifont, CR_PURPLE, 40,1, 70,1);
 
    bip->lastcategory = BIPC_MAIN;
 
-   __str const lines[] = {
-      L(LANG "BIP_HELP_Search"),
-#define LITH_X(name, capt) L(LANG "BIP_HELP_" capt),
-#include "lith_bip.h"
+   str const lines[] = {
+      L(st_bip_help_search),
+      #define LITH_X(name, capt) L(st_bip_help_##name),
+      #include "p_bip.h"
    };
 
-   for(int i = 0; i < countof(lines); i++)
-   {
-      PrintTextStr(lines[i]);
-      PrintTextA(s_cbifont, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
-   }
+   for(i32 i = 0; i < countof(lines); i++)
+      PrintTextA_str(lines[i], s_cbifont, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
 
-   if(Lith_GUI_Button(g, LC(cLANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
+   if(Lith_GUI_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
       bip->curcategory = BIPC_SEARCH;
    n += 10;
 #define LITH_X(name, capt) \
    if(Lith_GUI_Button_Id(g, BIPC_##name, LC(cLANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
    { \
       bip->curcategory = BIPC_##name; \
-      bip->curpage     = null; \
+      bip->curpage     = nil; \
    } \
    n += 10;
-#include "lith_bip.h"
+#include "p_bip.h"
 }
 
-static void SearchUI(gui_state_t *g, struct player *p, struct bip *bip)
+static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
 {
-   gui_txtbox_state_t *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
+   struct gui_txt *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
 
    bip->lastcategory = BIPC_MAIN;
 
@@ -73,17 +67,17 @@ static void SearchUI(gui_state_t *g, struct player *p, struct bip *bip)
          0x9FD558A2C8C8D163L,
       };
 
-      __str query = l_strndup(txt_buf, txt_len);
+      str query = l_strndup(txt_buf, txt_len);
       u64 crc = crc64(txt_buf, txt_len);
 
       bip->resnum = bip->rescur = 0;
 
-      for(int i = 0; i < countof(extranames); i++)
+      for(i32 i = 0; i < countof(extranames); i++)
       {
          if(crc == extranames[i])
          {
-            list_t *link = bip->infogr[BIPC_EXTRA].next;
-            for(int j = 0; j < i; j++)
+            list *link = bip->infogr[BIPC_EXTRA].next;
+            for(i32 j = 0; j < i; j++)
                link = link->next;
             bip->result[bip->resnum++] = link->object;
          }
@@ -104,12 +98,12 @@ static void SearchUI(gui_state_t *g, struct player *p, struct bip *bip)
       }
 
       if(bip->resnum == 0)
-         ACS_LocalAmbientSound("player/cbi/findfail", 127);
+         ACS_LocalAmbientSound(ss_player_cbi_findfail, 127);
    }
 
    if(bip->resnum)
    {
-      for(int i = 0; i < bip->rescur; i++)
+      for(i32 i = 0; i < bip->rescur; i++)
       {
          struct page *page = bip->result[i];
          struct page_info pinf = Lith_GetPageInfo(page);
@@ -127,26 +121,23 @@ static void SearchUI(gui_state_t *g, struct player *p, struct bip *bip)
          bip->rescur != bip->resnum)
       {
          if(++bip->rescur == bip->resnum)
-            ACS_LocalAmbientSound("player/cbi/finddone", 127);
+            ACS_LocalAmbientSound(ss_player_cbi_finddone, 127);
          else
-            ACS_LocalAmbientSound("player/cbi/find", 127);
+            ACS_LocalAmbientSound(ss_player_cbi_find, 127);
       }
    }
    else
-   {
-      PrintTextStr("No results"); // TODO
-      PrintText(s_cbifont, CR_DARKGREY, 70,0, 95,0);
-   }
+      PrintText_str(st_no_results, s_cbifont, CR_DARKGREY, 70,0, 95,0);
 }
 
-static void DrawPage(gui_state_t *g, struct player *p, struct bip *bip)
+static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
 {
    struct page *page = bip->curpage;
    struct page_info pinf = Lith_GetPageInfo(page);
 
-   gui_typeon_state_t const *typeon = Lith_GUI_TypeOnUpdate(g, &CBIState(g)->biptypeon);
+   struct gui_typ const *typeon = Lith_GUI_TypeOnUpdate(g, &CBIState(g)->biptypeon);
 
-   int oy = 0;
+   i32 oy = 0;
 
    if(page->height)
    {
@@ -156,52 +147,54 @@ static void DrawPage(gui_state_t *g, struct player *p, struct bip *bip)
    else
       SetClipW(111, 40, 200, 180, 184);
 
-   if(page->image)
-      PrintSpriteA(page->image, 296,2, 180,2, 0.4);
+   if(page->image) PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-   PrintTextStr(pinf.flname);
-   PrintText(s_cbifont, CR_ORANGE, 200,4, 45 + oy,1);
+   PrintText_str(pinf.flname, s_cbifont, CR_ORANGE, 200,4, 45 + oy,1);
 
-   #define DrawText(txt, pos, cr, x, y) \
-      PrintTextFmt(c"%.*S%s", pos, txt, pos == typeon->len ? Ticker(c"\n|", c"") : c"|"), \
+   #define DrawText(txt, cr, x, y) \
+      PrintTextStr(txt); \
+      if(typeon->pos == typeon->len) {if(Ticker(true, false)) ACS_PrintString(st_nl_bar);} \
+      else                                                    ACS_PrintChar('|'); \
       PrintText(s_cbifont, cr, x,1, y+oy,1)
 
    // render an outline if the page has an image
    if(page->image)
    {
-      __str s = Lith_RemoveTextColors(typeon->txt, typeon->pos);
-      int len = ACS_StrLen(s);
+      char const *txt = RemoveTextColors_str(typeon->txt, typeon->pos);
+      str s = l_strdup(txt);
 
-      DrawText(s, len, CR_BLACK, 112, 61); DrawText(s, len, CR_BLACK, 110, 61);
-      DrawText(s, len, CR_BLACK, 112, 59); DrawText(s, len, CR_BLACK, 110, 59);
+      DrawText(s, CR_BLACK, 112, 61); DrawText(s, CR_BLACK, 110, 61);
+      DrawText(s, CR_BLACK, 112, 59); DrawText(s, CR_BLACK, 110, 59);
 
-      DrawText(s, len, CR_BLACK, 111, 59);
-      DrawText(s, len, CR_BLACK, 111, 61);
+      DrawText(s, CR_BLACK, 111, 59);
+      DrawText(s, CR_BLACK, 111, 61);
 
-      DrawText(s, len, CR_BLACK, 112, 60);
-      DrawText(s, len, CR_BLACK, 110, 60);
+      DrawText(s, CR_BLACK, 112, 60);
+      DrawText(s, CR_BLACK, 110, 60);
    }
 
-   DrawText(typeon->txt, typeon->pos, CR_WHITE, 111, 60);
+   ACS_BeginPrint();
+   __nprintf("%.*S", typeon->pos, typeon->txt); // TODO: I think there's a better way of doing this?
+   DrawText(ACS_EndStrParam(), CR_WHITE, 111, 60);
 
    if(page->height) Lith_GUI_ScrollEnd(g, &CBIState(g)->bipinfoscr);
    else             ClearClip();
 }
 
-static void CategoryUI(gui_state_t *g, struct player *p, struct bip *bip)
+static void CategoryUI(struct gui_state *g, struct player *p, struct bip *bip)
 {
-   list_t *list = &bip->infogr[bip->curcategory];
-   size_t n = list->size();
+   list *ls = &bip->infogr[bip->curcategory];
+   size_t n = ls->size();
    size_t i = 0;
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, guipre.btnlist.w, 170, guipre.btnlist.h * n);
+   Lith_GUI_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
    if(bip->curcategory != BIPC_EXTRA)
-      forlistIt(struct page *page, *list, i++)
+      for_list_it(struct page *page, *ls, i++)
    {
-      int y = guipre.btnlist.h * i;
+      i32 y = gui_p.btnlist.h * i;
 
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->bipscr, y, guipre.btnlist.h))
+      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
 
       struct page_info pinf = Lith_GetPageInfo(page);
@@ -217,10 +210,10 @@ static void CategoryUI(gui_state_t *g, struct player *p, struct bip *bip)
    if(bip->curpage) DrawPage(g, p, bip);
 }
 
-void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
+void Lith_CBITab_BIP(struct gui_state *g, struct player *p)
 {
    struct bip *bip = &p->bip;
-   int avail, max = 0;
+   i32 avail, max = 0;
 
    if(bip->curcategory == BIPC_MAIN)
    {
@@ -239,19 +232,18 @@ void Lith_CBITab_BIP(gui_state_t *g, struct player *p)
 
    if(bip->curcategory != BIPC_MAIN)
    {
-      if(Lith_GUI_Button(g, c"<BACK", 20, 38, false, Pre(btnbipback)))
+      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
          bip->curcategory = bip->lastcategory;
    }
    else
    {
-      PrintSpriteA(":UI:bip", 20,1, 40,1, 0.1);
-      PrintTextStr("BIOTIC INFORMATION PANEL ver2.5");
-      PrintText(s_cbifont, CR_WHITE, 35,1, 40,1);
+      PrintSpriteA(sp_UI_bip, 20,1, 40,1, 0.1);
+      PrintText_str(st_bip_header, s_cbifont, CR_WHITE, 35,1, 40,1);
    }
 
    if(max)
    {
-      PrintTextFmt(c"%i/%i AVAILABLE", avail, max);
+      PrintTextFmt("%i/%i AVAILABLE", avail, max);
       PrintText(s_cbifont, CR_WHITE, 300,2, 30,1);
    }
 }

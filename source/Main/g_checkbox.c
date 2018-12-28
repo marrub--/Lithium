@@ -1,18 +1,16 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
+#include "common.h"
+#include "p_player.h"
 
-StrEntON
-
-bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
+bool Lith_GUI_Checkbox_Impl(struct gui_state *g, u32 id, struct gui_arg_cbx const *a)
 {
-   gui_checkb_preset_t const *pre = a->preset ? a->preset : &guipre.cbxdef;
+   struct gui_pre_cbx const *pre = a->preset ? a->preset : &gui_p.cbxdef;
 
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x-(pre->w/2), a->y-(pre->h/2), pre->w, pre->h);
 
-   __with(__str gfx    = Lith_GUI_Prefix1(g, pre, gfx);
-          __str chkgfx = Lith_GUI_Prefix1(g, pre, chkgfx);)
+   __with(str gfx    = Lith_GUI_Prefix1(g, pre, gfx);
+          str chkgfx = Lith_GUI_Prefix1(g, pre, chkgfx);)
    {
       if(a->disabled) {
          if(pre->dis)    gfx    = Lith_GUI_Prefix1(g, pre, dis);
@@ -43,4 +41,3 @@ bool Lith_GUI_Checkbox_Impl(gui_state_t *g, id_t id, gui_checkb_args_t const *a)
 }
 
 // EOF
-

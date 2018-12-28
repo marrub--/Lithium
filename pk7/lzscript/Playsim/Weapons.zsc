@@ -5,7 +5,7 @@ static void Lith_IonizeFX(Actor mo)
    mo.A_SpawnItemEx("Lith_IonizedFX", 0,0,0, 0,0,-1, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
 }
 
-static void Lith_DelearSprite(Actor mo)
+static void DelearSprite(Actor mo)
 {
    let w = Lith_Delear(mo.findInventory("Lith_Delear"));
    if(!w) return;

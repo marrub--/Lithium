@@ -12,11 +12,12 @@ end
 
 `rm -f build.ninja .ninja_deps .ninja_log`
 
-UPGCIN = "$hdr/lith_upgradenames.h $src/p_upgrinfo.c $hdr/lith_upgradefuncs.h"
-WEPCIN = "$hdr/lith_weapons.h $src/p_weaponinfo.c"
-MONCIN = "$hdr/lith_monsterinfo.h"
+UPGCIN = "$hdr/u_names.h $src/p_upgrinfo.c $hdr/u_func.h"
+WEPCIN = "$hdr/p_weapons.h $src/p_weaponinfo.c"
+MONCIN = "$hdr/w_moninfo.h"
+DECOIN = "$hdr/p_weapons.h $hdr/p_data.h $hdr/w_data.h $hdr/u_names.h $hdr/w_scorenums.h"
 TEXTIN = Dir["filedata/*.txt"].to_a.each{|s| s.gsub! "filedata/", ""}.join(?\s)
-FSIN   = "pk7/language.gfx.txt,pk7/,lgfx pk7_dt/language.gfx.txt,pk7_dt/,dtgfx"
+HSFSIN = "pk7/language.gfx.txt:pk7/:lgfx pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
 DEPS_I = [*UPGCIN.split, *WEPCIN.split, *MONCIN.split]
 DEPS_H = Dir["source/Headers/*"].to_a.each{|s| s.gsub! "source/Headers", "$hdr"}
 DEPS   = Set[*DEPS_I, *DEPS_H].to_a.join(?\s)
@@ -42,7 +43,7 @@ rule ld
    command = gdcc-ld $lflags --alloc-min Sta "" $sta $in -o $out
    description = LD $out
 rule fs
-   command = tools/hashfs.rb #{FSIN}
+   command = tools/hashfs.rb #{HSFSIN}
    description = HashFS
 rule text
    command = cd filedata; ../tools/compilefs.rb #{TEXTIN}
@@ -69,7 +70,7 @@ rule monc
 build tools/ttfuck/ttfuck.exe: gettf
 build fs: fs | tools/hashfs.rb
 build text: text | tools/compilefs.rb
-build dec: dec $hdr/lith_weapons.h $hdr/lith_pdata.h $hdr/lith_wdata.h $hdr/lith_upgradenames.h $hdr/lith_scorenums.h | tools/decompat.rb
+build dec: dec #{DECOIN} | tools/decompat.rb
 build font: font | tools/ttfuck/ttfuck.exe
 build #{WEPCIN}: wepc source/Weapons.txt | tools/wepc.rb
 build #{UPGCIN}: upgc source/Upgrades.txt | tools/upgc.rb

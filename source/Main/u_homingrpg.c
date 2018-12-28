@@ -1,15 +1,13 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-#include "lith_world.h"
-
-StrEntON
+#include "u_common.h"
+#include "w_world.h"
 
 #define UData UData_HomingRPG(upgr)
 
 // Static Functions ----------------------------------------------------------|
 
 script
-static int CheckTarget(struct player *p)
+static i32 CheckTarget(struct player *p)
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
       return Lith_UniqueID(0);
@@ -33,19 +31,18 @@ void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
    {
       if(p->buttons & BT_ALTATTACK)
       {
-         int id;
+         i32 id;
          if((id = CheckTarget(p)) && id != UData.id)
          {
-            ACS_LocalAmbientSound("weapons/rocket/mark", 127);
+            ACS_LocalAmbientSound(ss_weapons_rocket_mark, 127);
             ACS_SetPointer(AAPTR_TRACER, 0, AAPTR_PLAYER_GETTARGET);
             UData.id = id;
          }
       }
 
       if(ACS_SetActivator(0, AAPTR_TRACER) && GetPropI(0, APROP_Health) > 0)
-         ACS_SpawnForced(OBJ "TargetMarker", GetX(0), GetY(0), GetZ(0) + (GetPropK(0, APROP_Height) / 2k));
+         ACS_SpawnForced(so_TargetMarker, GetX(0), GetY(0), GetZ(0) + (GetPropK(0, APROP_Height) / 2k));
    }
 }
 
 // EOF
-

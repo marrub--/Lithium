@@ -1,15 +1,13 @@
 // Copyright © 2016-2017 Alison Sanderson, all rights reserved.
-#include "lith_upgrades_common.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "u_common.h"
+#include "w_world.h"
 
 // Static Objects ------------------------------------------------------------|
 
 static upgradeinfo_t g_upgrinfoex[UPGR_EXTRA_NUM];
 
 static upgradeinfo_t *g_upgrinfo;
-static int g_upgrmax = UPGR_BASE_MAX;
+static i32 g_upgrmax = UPGR_BASE_MAX;
 
 // Static Functions ----------------------------------------------------------|
 
@@ -23,26 +21,26 @@ static void Lith_UpgrShopBuy(struct player *p, shopdef_t const *, void *upgr)
    ((upgrade_t *)upgr)->setOwned(p);
 }
 
-static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, int tid)
+static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, i32 tid)
 {
    upgrade_t const *upgr = upgr_;
 
-   SetMembI(tid, s"user_upgradeid", upgr->info->key);
+   SetMembI(tid, sm_UpgradeId, upgr->info->key);
 
    switch(upgr->info->category)
    {
-   case UC_Body: SetMembI(tid, s"user_upgradebody", true); break;
-   case UC_Weap: SetMembI(tid, s"user_upgradeweap", true); break;
-   default:      SetMembI(tid, s"user_upgradeextr", true); break;
+   case UC_Body: SetMembI(tid, sm_UpgradeBody, true); break;
+   case UC_Weap: SetMembI(tid, sm_UpgradeWeap, true); break;
+   default:      SetMembI(tid, sm_UpgradeExtr, true); break;
    }
 
    return true;
 }
 
-static int Compg_upgrinfo(void const *lhs, void const *rhs)
+static i32 Compg_upgrinfo(void const *lhs, void const *rhs)
 {
    upgradeinfo_t const *u1 = lhs, *u2 = rhs;
-   int c1 = u1->category - u2->category;
+   i32 c1 = u1->category - u2->category;
    if(c1 != 0) return c1;
    else        return u1->key - u2->key;
 }
@@ -64,7 +62,7 @@ upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
 
 void Lith_GSReinit_Upgrade(void)
 {
-   for(int i = 0; i < g_upgrmax; i++)
+   for(i32 i = 0; i < g_upgrmax; i++)
    {
       upgradeinfo_t *ui = &g_upgrinfo[i];
 
@@ -81,7 +79,7 @@ void Lith_GSReinit_Upgrade(void)
       #define Ret(n) continue;
       #define Fn_F(n, cb) ui->cb = Upgr_##n##_##cb;
       #define Fn_S(n, cb) Fn_F(n, cb)
-      #include "lith_upgradefuncs.h"
+      #include "u_func.h"
          continue;
       }
    }
@@ -92,13 +90,13 @@ void Lith_GSInit_Upgrade(void)
    g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
    memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
 
-   for(int i = 0; i < countof(g_upgrinfoex); i++)
-      if(g_upgrinfoex[i].name != null)
+   for(i32 i = 0; i < countof(g_upgrinfoex); i++)
+      if(g_upgrinfoex[i].name)
          g_upgrinfo[UPGR_BASE_MAX + i] = g_upgrinfoex[i];
 
    qsort(g_upgrinfo, g_upgrmax, sizeof *g_upgrinfo, Compg_upgrinfo);
 
-   for(int i = 0; i < g_upgrmax; i++)
+   for(i32 i = 0; i < g_upgrmax; i++)
       g_upgrinfo[i].id = i;
 
    Lith_GSReinit_Upgrade();
@@ -119,14 +117,14 @@ script
 void Lith_PlayerInitUpgrades(struct player *p)
 {
    #define CheckPClass() (g_upgrinfo[i].pclass & p->pclass)
-   for(int i = 0; i < g_upgrmax; i++)
+   for(i32 i = 0; i < g_upgrmax; i++)
       if(CheckPClass())
          p->upgrmax++;
 
    upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
    memset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
-   for(int i = 0, j = 0; i < g_upgrmax; i++)
+   for(i32 i = 0, j = 0; i < g_upgrmax; i++)
       if(CheckPClass())
    {
       upgrade_t *upgr = &p->upgrades[j];
@@ -151,7 +149,7 @@ void Lith_PlayerDeallocUpgrades(struct player *p)
    upgrademap_t_dtor(&p->upgrademap);
    p->upgrmax = 0;
 
-   for(int i = 0; i < countof(p->upgrades); i++)
+   for(i32 i = 0; i < countof(p->upgrades); i++)
       memset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
 
    p->upgrinit = false;

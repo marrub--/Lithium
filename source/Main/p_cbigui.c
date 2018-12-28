@@ -1,11 +1,9 @@
 // Copyright © 2016-2018 Alison Sanderson, all rights reserved.
-#include "lith_common.h"
-#include "lith_player.h"
-#include "lith_hudid.h"
-#include "lith_list.h"
-#include "lith_world.h"
-
-StrEntOFF
+#include "common.h"
+#include "p_player.h"
+#include "p_hudid.h"
+#include "m_list.h"
+#include "w_world.h"
 
 #define TABCHARS 20
 
@@ -22,10 +20,10 @@ StrEntOFF
 
 // Static Functions ----------------------------------------------------------|
 
-static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
+static void Lith_CBITab_Arsenal(struct gui_state *g, struct player *p)
 {
-   extern void Lith_CBITab_Upgrades(gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Shop    (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Upgrades(struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Shop    (struct gui_state *g, struct player *p);
 
    char tn[2][TABCHARS];
    LanguageVC(tn[0], LANG "TAB_UPGRADES");
@@ -38,10 +36,10 @@ static void Lith_CBITab_Arsenal(gui_state_t *g, struct player *p)
    }
 }
 
-static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
+static void Lith_CBITab_Stat(struct gui_state *g, struct player *p)
 {
-   extern void Lith_CBITab_CBI   (gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Status(gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_CBI   (struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Status(struct gui_state *g, struct player *p);
 
    char tn[2][TABCHARS];
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
@@ -54,12 +52,12 @@ static void Lith_CBITab_Stat(gui_state_t *g, struct player *p)
    }
 }
 
-static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
+static void Lith_CBITab_Info(struct gui_state *g, struct player *p)
 {
-   extern void Lith_CBITab_BIP       (gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Log       (gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Statistics(gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Notes     (gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_BIP       (struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Log       (struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Statistics(struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Notes     (struct gui_state *g, struct player *p);
 
    char tn[4][TABCHARS];
    LanguageVC(tn[0], LANG "TAB_BIP");
@@ -78,7 +76,7 @@ static void Lith_CBITab_Info(gui_state_t *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-char const *Lith_ThemeName(uint num)
+char const *Lith_ThemeName(u32 num)
 {
    #define X(n) n,
    static char const *themes[cbi_theme_max] = {Themes(X)};
@@ -90,12 +88,12 @@ char const *Lith_ThemeName(uint num)
 script
 void Lith_PlayerUpdateCBIGUI(struct player *p)
 {
-   extern void Lith_CBITab_Items   (gui_state_t *g, struct player *p);
-   extern void Lith_CBITab_Settings(gui_state_t *g, struct player *p);
+   extern void Lith_CBITab_Items   (struct gui_state *g, struct player *p);
+   extern void Lith_CBITab_Settings(struct gui_state *g, struct player *p);
 
-   gui_state_t *g = &p->cbi.guistate;
+   struct gui_state *g = &p->cbi.guistate;
 
-   p->cbi.theme = p->getCVarI(sCVAR "gui_theme");
+   p->cbi.theme = p->getCVarI(sc_gui_theme);
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
@@ -105,8 +103,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
 
       if(p->cbi.theme >= cbi_theme_max) p->cbi.theme = 0;
 
-      g->gfxprefix   = names[p->cbi.oldtheme = p->cbi.theme];
-      g->gfxprefixsz = strlen(g->gfxprefix);
+      g->gfxprefix = names[p->cbi.oldtheme = p->cbi.theme];
    }
 
    Lith_GUI_Begin(g, 320, 240);
@@ -114,11 +111,11 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    if(!p->indialogue) Lith_GUI_UpdateState(g, p);
 
    ACS_BeginPrint();
-   PrintChars(g->gfxprefix, g->gfxprefixsz);
-   ACS_PrintString(s"Background");
+   PrintChrSt(g->gfxprefix);
+   ACS_PrintString(sp_Background);
    PrintSpriteA(ACS_EndStrParam(), 0,1, 0,1, 0.7);
 
-   if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit))) p->useGUI(GUI_CBI);
+   if(Lith_GUI_Button(g, .x = 296, 13, Pre(btnexit))) p->useGUI(gui_cbi);
 
    char tn[5][TABCHARS];
    LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);
@@ -136,7 +133,7 @@ void Lith_PlayerUpdateCBIGUI(struct player *p)
    case cbi_tab_settings: Lith_CBITab_Settings(g, p); break;
    }
 
-   Lith_GUI_End(g, p->getCVarI(sCVAR "gui_cursor"));
+   Lith_GUI_End(g, p->getCVarI(sc_gui_cursor));
 }
 
 void Lith_PlayerResetCBIGUI(struct player *p)
@@ -151,7 +148,7 @@ void Lith_PlayerResetCBIGUI(struct player *p)
    p->cbi.oldtheme = -1;
 
    p->bip.curcategory = BIPC_MAIN;
-   p->bip.curpage = null;
+   p->bip.curpage = nil;
 }
 
 // Scripts -------------------------------------------------------------------|
@@ -162,8 +159,7 @@ void Lith_KeyOpenCBI(void)
    if(ACS_Timer() < 10) return;
 
    withplayer(LocalPlayer)
-      p->useGUI(GUI_CBI);
+      p->useGUI(gui_cbi);
 }
 
 // EOF
-

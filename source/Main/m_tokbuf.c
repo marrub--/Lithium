@@ -1,12 +1,12 @@
 // Copyright © 2017 Alison Sanderson, all rights reserved.
-#include "lith_tokbuf.h"
+#include "m_tokbuf.h"
 
 #include <string.h>
 
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-int Lith_TBufProc(struct token *tok)
+i32 Lith_TBufProc(struct token *tok)
 {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
@@ -18,7 +18,7 @@ int Lith_TBufProc(struct token *tok)
 }
 
 stkcall
-int Lith_TBufProcL(struct token *tok)
+i32 Lith_TBufProcL(struct token *tok)
 {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
@@ -37,7 +37,7 @@ void Lith_TBufCtor(struct tokbuf *tb)
 
 void Lith_TBufDtor(struct tokbuf *tb)
 {
-   if(tb->toks) for(int i = 0; i < tb->bend; i++)
+   if(tb->toks) for(i32 i = 0; i < tb->bend; i++)
       Vec_Clear(tb->toks[i].text);
 
    Dalloc(tb->toks);
@@ -48,7 +48,7 @@ struct token *Lith_TBufGet(struct tokbuf *tb)
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
    // Free beginning of buffer.
-   for(int i = 0; i < tb->bbeg; i++) {
+   for(i32 i = 0; i < tb->bbeg; i++) {
       Vec_Clear(tb->toks[i].text);
       //memset(&tb->toks[i], 0, sizeof tb->toks[i]);
    }
@@ -56,8 +56,8 @@ struct token *Lith_TBufGet(struct tokbuf *tb)
    // Move end of buffer to beginning.
    if(tb->tend)
    {
-      int s = tb->tend - tb->bbeg;
-      for(int i = s, j = 0; i < tb->tend; i++, j++)
+      i32 s = tb->tend - tb->bbeg;
+      for(i32 i = s, j = 0; i < tb->tend; i++, j++)
          tb->toks[j] = tb->toks[i];
       memset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }
@@ -97,7 +97,7 @@ struct token *Lith_TBufReGet(struct tokbuf *tb)
    return &tb->toks[tb->tpos];
 }
 
-bool Lith_TBufDrop(struct tokbuf *tb, int t)
+bool Lith_TBufDrop(struct tokbuf *tb, i32 t)
 {
    if(Lith_TBufGet(tb)->type != t)
       {Lith_TBufUnGet(tb); return false;}
