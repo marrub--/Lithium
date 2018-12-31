@@ -74,7 +74,7 @@ default
    Lith_Pickup.Sprite "UNKNA";
 }
 
-private meta bool m_generic;
+private int m_Flags;
 
 private meta string m_sprGf;
 private meta string m_sprMf;
@@ -94,8 +94,9 @@ private class<Actor> m_glow;
 property Sprite:  m_sprGf;
 property SpriteM: m_sprMf;
 property SpriteC: m_sprCf;
-property Generic: m_generic;
 property Glow:    m_glow;
+
+flagdef Generic: m_Flags, 0;
 
 const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
 
@@ -115,7 +116,7 @@ override void Tick()
 
    if(!m_spr) return;
 
-   if(m_generic)
+   if(bGENERIC)
    {
       Lith_SetSprite(m_sprG);
       return;

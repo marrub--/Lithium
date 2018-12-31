@@ -2,10 +2,11 @@ actor Lith_Coin : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 50
    Lith_BasicPickup.LogName "Coin", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/coin"
    Scale 0.3
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -19,11 +20,12 @@ actor Lith_ScoreChip : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
    Lith_BasicPickup.LogName "ScoreChip", 2
-   Lith_BasicPickup.Vacuum 1
    Lith_BasicPickup.InfoPage "ScoreChip"
    Inventory.PickupSound "player/pickup/scorechip"
    Scale 0.4
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -37,10 +39,11 @@ actor Lith_Ruby : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
    Lith_BasicPickup.LogName "Ruby", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -54,10 +57,11 @@ actor Lith_Sapphire : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 300
    Lith_BasicPickup.LogName "Sapphire", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -71,10 +75,11 @@ actor Lith_Amethyst : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 200
    Lith_BasicPickup.LogName "Amethyst", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.3
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -88,10 +93,11 @@ actor Lith_Diamond : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 1000
    Lith_BasicPickup.LogName "Diamond", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -105,10 +111,11 @@ actor Lith_Emerald : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 400
    Lith_BasicPickup.LogName "Emerald", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/gem"
    Scale 0.4
    Radius 10
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -122,10 +129,11 @@ actor Lith_Scheelite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
    Lith_BasicPickup.LogName "Scheelite", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -139,10 +147,11 @@ actor Lith_Nambulite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 15000
    Lith_BasicPickup.LogName "Nambulite", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -156,10 +165,11 @@ actor Lith_Lepidolite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Lepidolite", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -173,10 +183,11 @@ actor Lith_Petalite : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Petalite", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {
@@ -190,10 +201,11 @@ actor Lith_Tourmaline : Lith_ScoreItem
 {
    Lith_ScoreItem.Score 30000
    Lith_BasicPickup.LogName "Tourmaline", 2
-   Lith_BasicPickup.Vacuum 1
    Inventory.PickupSound "player/pickup/material"
    Scale 0.5
    Radius 12
+
+   +LITH_BASICPICKUP.VACUUM
 
    states
    {

@@ -106,10 +106,10 @@ actor Lith_BossReward5 : Lith_CBIItem
 actor Lith_BossReward6 : Lith_CBIItem
 {
    Lith_Pickup.Sprite "IOBJC"
-   Lith_Pickup.Generic 1
-
    Tag "Reality Distortion Interface"
-   
+
+   +LITH_PICKUP.GENERIC
+
    states
    {
    Spawn:

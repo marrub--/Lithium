@@ -17,9 +17,9 @@ actor Lith_WeaponPickup : Lith_Pickup
 actor Lith_FistPickup : Lith_WeaponPickup replaces Fist
 {
    Lith_Pickup.Sprite "FISTA"
-   Lith_Pickup.Generic 1
-
    Tag "Fist Pickup"
+
+   +LITH_PICKUP.GENERIC
 }
 
 actor Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw

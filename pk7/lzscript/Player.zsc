@@ -106,7 +106,7 @@ private void Lith_ItemVacuum()
    {
       let inv = Lith_BasicPickup(it.thing);
 
-      if(inv && inv.m_vacuum && inv.bSPECIAL && inv.checkSight(self))
+      if(inv && inv.bVACUUM && inv.bSPECIAL && inv.checkSight(self))
       {
          let dst = distance2D(inv);
          let t = clamp((140 - dst) / 1000., 0., 1.);

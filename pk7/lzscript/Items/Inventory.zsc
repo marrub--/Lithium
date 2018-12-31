@@ -252,13 +252,15 @@ class Lith_BasicPickup : Inventory
    private meta int    m_logtype;
    private meta int    m_loglevl;
 
-   meta bool m_vacuum;
+   private int m_Flags;
+
    string m_infopage;
 
    property LogName:  m_logname, m_loglevl;
    property LogType:  m_logtype;
-   property Vacuum:   m_vacuum;
    property InfoPage: m_infopage;
+
+   flagdef Vacuum: m_Flags, 0;
 
    override bool TryPickup(in out Actor mo)
    {

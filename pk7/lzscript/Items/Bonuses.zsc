@@ -6,9 +6,10 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       Inventory.PickupSound "items/healthbonus";
       Lith_BasicPickup.LogName "HealthBonus", 3;
       Lith_BasicPickup.LogType msg_huds;
-      Lith_BasicPickup.Vacuum 1;
       Lith_BasicPickup.InfoPage "HealthBonus";
       Scale 0.7;
+
+      +LITH_BASICPICKUP.VACUUM
    }
 
    override bool TryPickup(in out Actor mo)
@@ -31,8 +32,9 @@ class Lith_Radio : Lith_ScoreItem
    {
       Lith_ScoreItem.Score Score_Clip;
       Lith_BasicPickup.LogName "Clip", 2;
-      Lith_BasicPickup.Vacuum 1;
       Inventory.PickupSound "player/pickup/scoresmall";
+
+      +LITH_BASICPICKUP.VACUUM
    }
 
    override void PostBeginPlay()
