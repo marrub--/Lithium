@@ -116,16 +116,14 @@ static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
    memfile_t *mem = memdata;
    size_t     pos;
 
-   switch(whence)
-   {
-   case SEEK_SET: pos = *offset; break;
+   switch(whence) {
+   case SEEK_SET: pos = *offset;            break;
    case SEEK_CUR: pos = *offset + mem->pos; break;
    case SEEK_END: pos = *offset + mem->len; break;
    default: return EOF;
    }
 
-   if(pos > mem->len)
-      return EOF;
+   if(pos > mem->len) return EOF;
 
    *offset = mem->pos = pos;
 

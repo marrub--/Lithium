@@ -141,7 +141,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
 
    if(page->height)
    {
-      Lith_GUI_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180, page->height, 184);
+      Lith_GUI_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180, page->height * 8 + 20, 184);
       oy = g->oy - 40;
    }
    else
@@ -174,7 +174,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
    }
 
    ACS_BeginPrint();
-   __nprintf("%.*S", typeon->pos, typeon->txt); // TODO: I think there's a better way of doing this?
+   __nprintf("%.*S", typeon->pos, typeon->txt);
    DrawText(ACS_EndStrParam(), CR_WHITE, 111, 60);
 
    if(page->height) Lith_GUI_ScrollEnd(g, &CBIState(g)->bipinfoscr);

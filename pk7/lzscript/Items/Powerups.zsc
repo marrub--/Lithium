@@ -2,13 +2,13 @@ class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
 {
    default
    {
-      Tag "Chaos Device";
+      Inventory.PickupFlash "PickupFlash";
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
+      Tag "Chaos Device";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
-      +INVENTORY.PICKUPFLASH
    }
 
    states(Actor)

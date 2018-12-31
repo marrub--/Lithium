@@ -64,7 +64,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       {
       case UPGR_TorgueMode: color = "g"; break;
       case UPGR_DarkCannon: color = "m"; break;
-      default:              color = nil;
+      default:              color = nil; break;
       }
 
       struct gui_pre_btn const *preset;

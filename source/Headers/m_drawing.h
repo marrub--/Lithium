@@ -20,27 +20,34 @@
 #define PrintTextArg0(cr, flg) \
    (((u32)(cr) & 0xff) | (u32)(flg))
 
-#define PrintTextArg1(x, y, xa, ya) \
+#define PrintTextArg1(x, xa) \
    ( \
-      (((u32)(x) & 0x3ff) << 14) /* X position */ | \
-      (((u32)(y) & 0x1ff) <<  5) /* Y position */ | \
-      ( (u32)(xa) << 2) /* X alignment */ | \
-      ( (u32)(ya)     ) /* Y alignment */ | \
-      (((u32)(x) & 0x80000000)     ) /* X sign */ | \
-      (((u32)(y) & 0x80000000) >> 1) /* Y sign */ \
+      ((u32)(x) & 0x0FFFFFFF) | \
+      ((u32)(x) & 0x80000000) | \
+      ((u32)(xa) << 28) \
+   )
+
+#define PrintTextArg2(y, ya) \
+   ( \
+      ((u32)(y) & 0x1FFFFFFF) | \
+      ((u32)(y) & 0x80000000) | \
+      ((u32)(ya) << 29) \
    )
 
 #define PrintTextArgs_N(cr, flg, x, y, xa, ya) \
    PrintTextArg0(cr, flg), \
-   PrintTextArg1(x, y, xa, ya)
+   PrintTextArg1(x, xa), \
+   PrintTextArg2(y, ya)
 
 #define PrintTextArgs_A(cr, flg, x, y, xa, ya, a) \
    PrintTextArg0(cr, (flg) | 0x40000000 | ((u32)((k32)(a) * 0x3f) << 24)), \
-   PrintTextArg1(x, y, xa, ya)
+   PrintTextArg1(x, xa), \
+   PrintTextArg2(y, ya)
 
 #define PrintTextArgs_F(cr, flg, x, y, xa, ya, n) \
    PrintTextArg0(cr, (flg) | (((u32)(n) + 1) << 24)), \
-   PrintTextArg1(x, y, xa, ya)
+   PrintTextArg1(x, xa), \
+   PrintTextArg2(y, ya)
 
 #define PrintTextEnd() ACS_EndStrParam()
 

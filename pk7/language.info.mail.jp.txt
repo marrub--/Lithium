@@ -8,7 +8,7 @@
    "\cd>>>>>[[[[返信メッセージ]]]]\n"
    "\n"
    "\cd> リモートユーザー： ＜\cj%S\cd＞\n"
-   "\cd> \cj%s\n"
+   "\cd> 日付： \cj%s\n"
    "\n"
    "%S";
 
@@ -101,8 +101,8 @@
 
 "LITH_MAIL_NAME_IntroJem" = "退避メッセージ";
 "LITH_MAIL_SEND_IntroJem" = "（隠した）@corp.AOF";
-"LITH_MAIL_TIME_IntroJem" = "13時44分 25日7月49年";
-"LITH_MAIL_SIZE_IntroJem" = "310";
+"LITH_MAIL_TIME_IntroJem" = "13:44 25日7月部49年";
+"LITH_MAIL_SIZE_IntroJem" = "38";
 
 "LITH_MAIL_BODY_Cluster1Jem" =
 // Mail/Cluster1_CyberMage.txt
@@ -123,7 +123,7 @@
    "逆コンパイルながら次の目的が全部のアクティブなAOFホスト名をブロックしやがる、メインサーバーはすでに非アクティブ化されても他もあるかもしれん。他の会社のアドレスをリルートしたから僕の頭がはっきりしてる。";
 
 "LITH_MAIL_NAME_Cluster1Jem" = "退避分１０４";
-"LITH_MAIL_SIZE_Cluster1Jem" = "245";
+"LITH_MAIL_SIZE_Cluster1Jem" = "29";
 
 // EOF
 

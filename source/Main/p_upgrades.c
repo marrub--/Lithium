@@ -27,8 +27,7 @@ static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, i32 t
 
    SetMembI(tid, sm_UpgradeId, upgr->info->key);
 
-   switch(upgr->info->category)
-   {
+   switch(upgr->info->category) {
    case UC_Body: SetMembI(tid, sm_UpgradeBody, true); break;
    case UC_Weap: SetMembI(tid, sm_UpgradeWeap, true); break;
    default:      SetMembI(tid, sm_UpgradeExtr, true); break;

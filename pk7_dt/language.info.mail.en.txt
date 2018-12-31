@@ -116,7 +116,7 @@
 
 "DTAP_MAIL_SEND_IntroStan" = "ALambert@corp.OFMD";
 "DTAP_MAIL_TIME_IntroStan" = "13:00 25-7-49";
-"DTAP_MAIL_SIZE_IntroStan" = "610";
+"DTAP_MAIL_SIZE_IntroStan" = "77";
 
 "DTAP_MAIL_BODY_Cluster1Stan" =
 // Mail/Cluster1_Marine.txt
@@ -223,7 +223,7 @@
 "DTAP_MAIL_NAME_IntroJem" = "Saved Message";
 "DTAP_MAIL_SEND_IntroJem" = "<hidden>@corp.AOF";
 "DTAP_MAIL_TIME_IntroJem" = "13:44 25-7-49";
-"DTAP_MAIL_SIZE_IntroJem" = "288";
+"DTAP_MAIL_SIZE_IntroJem" = "36";
 
 "DTAP_MAIL_BODY_Cluster1Jem" =
 // Mail/Cluster1_CyberMage.txt
@@ -245,7 +245,7 @@
    "Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.";
 
 "DTAP_MAIL_NAME_Cluster1Jem" = "Saved Text 104";
-"DTAP_MAIL_SIZE_Cluster1Jem" = "240";
+"DTAP_MAIL_SIZE_Cluster1Jem" = "30";
 
 "DTAP_MAIL_BODY_Cluster2Jem" =
 // Mail/Cluster2_CyberMage.txt
@@ -266,7 +266,7 @@
    "Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.";
 
 "DTAP_MAIL_NAME_Cluster2Jem" = "Saved Text 152";
-"DTAP_MAIL_SIZE_Cluster2Jem" = "288";
+"DTAP_MAIL_SIZE_Cluster2Jem" = "36";
 
 "DTAP_MAIL_BODY_Cluster3Jem" =
 // Mail/Cluster3_CyberMage.txt
@@ -281,7 +281,7 @@
    "It doesn't matter. I will see this through.";
 
 "DTAP_MAIL_NAME_Cluster3Jem" = "Saved Text 244";
-"DTAP_MAIL_SIZE_Cluster3Jem" = "218";
+"DTAP_MAIL_SIZE_Cluster3Jem" = "28";
 
 "DTAP_MAIL_BODY_PhantomJem" =
 // Mail/Intro2_CyberMage.txt

@@ -324,7 +324,7 @@ destroy several micro-fighters and around 195 personnel aboard the enemy ship.
 ##----------------------------------------------------------------------------|
 == \#INFO_SHORT_Cercle | Cercle de la Mort
 == \#INFO_TITLE_Cercle | \cdPeccarentur Ex\c-, \cgRussorum\c- 7
-== \#INFO_CSIZE_Cercle | 218
+== \#INFO_SSIZE_Cercle | 28
 @@ \#INFO_DESCR_Cercle
 The 7th method of the \cgRussum\c- mode, the "Circle of the Dead." An awesome
 attack which takes all of one's metaphysical strength to use, one of the

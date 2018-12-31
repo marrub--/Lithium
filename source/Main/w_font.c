@@ -10,6 +10,7 @@
 
 // Types ---------------------------------------------------------------------|
 
+// NOTE: DO NOT change the layout of this without also changing `RetOfs`s
 struct glyph
 {
    i32 key;
@@ -37,12 +38,12 @@ static font fonts[font_num];
 
 static FILE *fp;
 
-static u32 curfont, setfont;
+static i32 curfont, setfont;
 
 // Static Functions ----------------------------------------------------------|
 
 stkcall
-static struct glyph *AllocFontMetric(font *planes, u32 key)
+static struct glyph *AllocFontMetric(font *planes, i32 key)
 {
    if(!*planes) *planes = Salloc(planedata);
    groupdata   **groups = &(**planes)[key / (nglyphs * nblocks  * ngroups)];
@@ -58,7 +59,7 @@ static struct glyph *AllocFontMetric(font *planes, u32 key)
 }
 
 stkcall
-static void SetFontMetric(u32 key, i32 xadv, i32 yofs)
+static void SetFontMetric(i32 key, i32 xadv, i32 yofs)
 {
    struct glyph *metr = AllocFontMetric(&fonts[curfont], key);
 
@@ -77,25 +78,35 @@ static void SetFontMetric(u32 key, i32 xadv, i32 yofs)
 // Extern Functions ----------------------------------------------------------|
 
 script ext("ACS")
-struct glyph *Lith_GetFontMetric(u32 key)
+struct glyph *Lith_GetFontMetric(i32 key)
 {
-   planedata *planes = fonts[setfont];
-   groupdata *groups = (*planes)[key / (nglyphs * nblocks  * ngroups)];
-   blockdata *blocks = (*groups)[key / (nglyphs * nblocks) % ngroups ];
-   glyphdata *glyphs = (*blocks)[key /  nglyphs            % nblocks ];
-   return             &(*glyphs)[key                       % nglyphs ];
+   return &(*(*(*(*fonts[setfont])
+      [key / (nglyphs * nblocks  * ngroups)])
+      [key / (nglyphs * nblocks) % ngroups ])
+      [key /  nglyphs            % nblocks ])
+      [key                       % nglyphs ];
 }
 
-script ext("ACS") i32 Lith_Metr_Xadv(struct glyph *metr) {return metr->xadv;}
-script ext("ACS") i32 Lith_Metr_Yofs(struct glyph *metr) {return metr->yofs;}
-script ext("ACS") i32 Lith_Metr_Tex (struct glyph *metr) {return metr->tex ;}
-script ext("ACS") i32 Lith_Metr_W   (struct glyph *metr) {return metr->w   ;}
-script ext("ACS") i32 Lith_Metr_H   (struct glyph *metr) {return metr->h   ;}
+// hand-written assembly for these, saves a few cycles
+#define RetOfs(n) \
+   __asm \
+   ( \
+      "AddI(Stk 1() LocReg 1(Lit 1(:metr)) Lit 1(" #n "_s31.0))" \
+      "Move(Stk 1() Sta 1(Stk 1()))" \
+      "Retn(Stk 1())" \
+   ); \
+   return 0 /* dummy return to keep the compiler quiet */
 
-script ext("ACS") void Lith_SetFontFace(u32 f) {setfont = f;}
+script ext("ACS") i32 Lith_Metr_Xadv(struct glyph *metr) {RetOfs(1);}
+script ext("ACS") i32 Lith_Metr_Yofs(struct glyph *metr) {RetOfs(2);}
+script ext("ACS") i32 Lith_Metr_Tex (struct glyph *metr) {RetOfs(3);}
+script ext("ACS") i32 Lith_Metr_W   (struct glyph *metr) {RetOfs(4);}
+script ext("ACS") i32 Lith_Metr_H   (struct glyph *metr) {RetOfs(5);}
+
+script ext("ACS") void Lith_SetFontFace(i32 f) {setfont = f;}
 
 script ext("ACS")
-bool Lith_SetupFontsBegin(u32 fontnum)
+bool Lith_SetupFontsBegin(i32 fontnum)
 {
    if(fontnum >= font_num) return false;
 
@@ -117,10 +128,10 @@ bool Lith_SetupFontsContinue(void)
 {
    for(i32 i = 0; i < 300; i++)
    {
-      u32 key;
+      i32 key;
       i32 xadv, yofs;
 
-      if(fscanf(fp, "%u,%i,%i\n", &key, &xadv, &yofs) != 3)
+      if(fscanf(fp, "%i,%i,%i\n", &key, &xadv, &yofs) != 3)
       {
          fclose(fp);
          return false;

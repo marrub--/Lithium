@@ -43,7 +43,7 @@ optargs(1)
 static void AddToBIP(struct bip *bip, i32 categ, i32 pclass, struct page_init const *pinit, bool isfree)
 {
    str image  = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
-   i32 height = strtoi_str(Language(LANG "INFO_CSIZE_%s", pinit->name), nil, 0);
+   i32 height = strtoi_str(Language(LANG "INFO_SSIZE_%s", pinit->name), nil, 0);
 
    struct page *page = Salloc(struct page);
 
@@ -199,9 +199,11 @@ void Lith_DeliverMail(struct player *p, str title, i32 flags)
 
    if(!send) send = L(st_mail_internal);
 
+   char const *time = world.canontime;
+
    page->shname   = date ? date : l_strdup(world.canontimeshort);
    page->title    = name ? name : L(st_mail_notitle);
-   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, page->name, body);
+   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, time, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 

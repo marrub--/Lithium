@@ -361,7 +361,7 @@
 //----------------------------------------------------------------------------|
 "LITH_INFO_SHORT_Cercle" = "Cercle de la Mort";
 "LITH_INFO_TITLE_Cercle" = "\cdPeccarentur Ex\c-, \cgRussorum\c- 7";
-"LITH_INFO_CSIZE_Cercle" = "218";
+"LITH_INFO_SSIZE_Cercle" = "28";
 "LITH_INFO_DESCR_Cercle" =
    "The 7th method of the \cgRussum\c- mode, the \"Circle of the Dead.\" An awesome "
    "attack which takes all of one's metaphysical strength to use, one of the "

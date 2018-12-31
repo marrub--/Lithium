@@ -570,17 +570,14 @@ void Lith_LoadMapDialogue(void)
          break;
       }
 
-      switch(StrName(tok->textV))
-      {
+      switch(StrName(tok->textV)) {
       case STR_dialogue:   GetDecl_Dialogue(&d); break;
       case STR_page:       GetDecl_Page    (&d); break;
       case STR_terminal:   GetDecl_Terminal(&d); break;
       case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
       case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
       case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
-      default:
-         Log("Lith_LoadMapDialogue: invalid identifier \"%s\"", tok->textV);
-         goto done;
+      default: Log("Lith_LoadMapDialogue: invalid identifier \"%s\"", tok->textV); goto done;
       }
    }
 

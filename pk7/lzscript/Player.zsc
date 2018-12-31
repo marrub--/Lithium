@@ -217,18 +217,10 @@ private void Lith_Crosshair()
 
 private void Lith_PlayerIndicator(PlayerInfo p)
 {
-   let mo = p.mo;
+   let mo = p.MO;
 
    int x, y; bool seen; [x, y, seen] = Lith_Unproject(mo.pos + (0, 0, mo.height));
-
-   if(seen)
-   {
-      float a = clamp(abs((x - 160) / 90.), 0.2, 1);
-      string text = String.Format("%s [%i]\n", p.getUserName(), mo.playerNumber());
-      if(mo.health <= 0) text = text .. "Dead";
-      else               text = text .. String.Format("%iHP", mo.health);
-      Lith_URANUS.LT(self, text, "CBIFONT", Font.CR_WHITE, Lith_URANUS.LTArgsA(x-9, y-2, 1, 1, a));
-   }
+   if(seen) CallACS("Lith_DrawPlayerIcon", mo.PlayerNumber(), x, y);
 }
 
 void Lith_PreTick()

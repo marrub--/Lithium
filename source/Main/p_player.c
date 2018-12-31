@@ -184,6 +184,22 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
 GDCC_HashMap_Defn(upgrademap_t, i32, upgrade_t)
 
+script ext("ACS")
+void Lith_DrawPlayerIcon(int num, int x, int y)
+{
+   withplayer(&players[num])
+   {
+      k32 a = absk((x - 160) / 90.0);
+           if(a < 0.2) a = 0.2;
+      else if(a > 1.0) a = 1.0;
+
+      PrintTextFmt("%S <%i>\n", p->name, p->num);
+      __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
+      if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
+      PrintTextA(s_cbifont, CR_WHITE, x-9,1, y-2,1, a);
+   }
+}
+
 stkcall
 upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
 {

@@ -189,8 +189,7 @@ void Lith_SpawnBoss(void)
 script ext("ACS") addr("Lith_TriggerBoss") optargs(1)
 void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
 {
-   switch(diff)
-   {
+   switch(diff) {
    case diff_easy: boss = &bosses_easy[num]; break;
    case diff_medi: boss = &bosses_medi[num]; break;
    case diff_hard: boss = &bosses_hard[num]; break;

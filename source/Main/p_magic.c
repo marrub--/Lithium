@@ -167,12 +167,9 @@ void Lith_MagicSelect(i32 num)
       if(!p->getCVarI(sc_weapons_magicselanims)) return;
 
       switch(num) {
-      case 1:
-      case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;
-      case 2:
-      case 3: ACS_FadeTo(255, 155, 0, 0.3, 0.0); break;
-      case 6:
-      case 7: ACS_FadeTo(255, 0,   0, 0.3, 0.0); break;
+      case 1: case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;
+      case 2: case 3: ACS_FadeTo(255, 155, 0, 0.3, 0.0); break;
+      case 6: case 7: ACS_FadeTo(255, 0,   0, 0.3, 0.0); break;
       }
 
       ACS_FadeTo(0, 0, 0, 0.0, 0.3);

@@ -174,8 +174,7 @@ void Lith_PlayerPreWeapons(struct player *p)
       wep->ammoclass = info->defammoclass;
 
       // Special exceptions.
-      switch(i)
-      {
+      switch(i) {
       case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_NMag; break;
       case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo; break;
       case weapon_plasma:  if(p->getUpgrActive(UPGR_PartBeam))    wep->ammotype = AT_AMag; break;

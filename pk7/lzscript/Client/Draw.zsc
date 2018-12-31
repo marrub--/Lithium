@@ -12,107 +12,111 @@ extend class Lith_URANUS;
 
 enum DrawType
 {
-   dt_lin,
-   dt_tex,
-   dt_ate,
-   dt_cte,
-   dt_xte,
-   dt_txt,
-   dt_utx,
-   dt_cls,
-   dt_clc,
-   dt_siz,
+   Type_ClipSet,
+   Type_ClipClear,
+   Type_SetSize,
+   Type_Line,
+   Type_Sprite,
+   Type_SpriteAlpha,
+   Type_SpriteStencil,
+   Type_SpriteStencilAlpha,
+   Type_Text,
+   Type_TextAlpha,
+   Type_TextUnicode,
 }
 
 struct DrawData
 {
-   uint8 dt;
-   int16 x, y, z, w;
+   uint8 Type;
+   int16 X, Y, Z, W;
 
-   textureid tex;
-   color     c;
-   float     a;
+   textureid Tex;
+   color     C;
+   float     A;
 
-   uint8         cr;
-   uint8         lny;
-   Font          fnt;
-   array<string> txt;
-   array<int>    lnw;
-   array<int>    lnx;
+   uint8         Cr;
+   uint8         LnY;
+   Font          Fnt;
+   array<string> Txt;
+   array<int>    LnW;
+   array<int>    LnX;
 }
 
 struct FadeMsg
 {
-   uint16 time;
-   float  fsub;
-   float  fade;
+   uint16 Time;
+   float  FSub;
+   float  Fade;
 }
 
 // Constants -----------------------------------------------------------------|
 
-const font_space = 4;
+const LT_X_MASK = 0x0FFFFFFF;
+const LT_Y_MASK = 0x1FFFFFFF;
 
-const c_black     = 0x4d4d4d;
-const c_blue      = 0x6e6eff;
-const c_brick     = 0xeaadad;
-const c_brown     = 0xcc9966;
-const c_gold      = 0xffcc00;
-const c_white     = 0xffffff;
-const c_yellow    = 0xeeee32;
-const c_tan       = 0xd2b48c;
-const c_gray      = 0xc0c0c0;
-const c_green     = 0x33ff33;
-const c_red       = 0xff4e60;
-const c_orange    = 0xffaa00;
-const c_lightblue = 0x33eeff;
-const c_cream     = 0xfecc99;
-const c_olive     = 0xd1d8a7;
-const c_darkgreen = 0x129a12;
-const c_darkred   = 0xb22323;
-const c_darkbrown = 0x6c5d56;
-const c_purple    = 0xa674d7;
-const c_darkgray  = 0x414141;
-const c_cyan      = 0x00fffe;
-const c_ice       = 0xafccd3;
-const c_fire      = 0xfb7329;
-const c_sapphire  = 0x6c729f;
-const c_teal      = 0x8cd0dc;
+const FONT_SPACE = 4;
+
+const C_BLACK     = 0x4d4d4d;
+const C_BLUE      = 0x6e6eff;
+const C_BRICK     = 0xeaadad;
+const C_BROWN     = 0xcc9966;
+const C_GOLD      = 0xffcc00;
+const C_WHITE     = 0xffffff;
+const C_YELLOW    = 0xeeee32;
+const C_TAN       = 0xd2b48c;
+const C_GRAY      = 0xc0c0c0;
+const C_GREEN     = 0x33ff33;
+const C_RED       = 0xff4e60;
+const C_ORANGE    = 0xffaa00;
+const C_LIGHTBLUE = 0x33eeff;
+const C_CREAM     = 0xfecc99;
+const C_OLIVE     = 0xd1d8a7;
+const C_DARKGREEN = 0x129a12;
+const C_DARKRED   = 0xb22323;
+const C_DARKBROWN = 0x6c5d56;
+const C_PURPLE    = 0xa674d7;
+const C_DARKGRAY  = 0x414141;
+const C_CYAN      = 0x00fffe;
+const C_ICE       = 0xafccd3;
+const C_FIRE      = 0xfb7329;
+const C_SAPPHIRE  = 0x6c729f;
+const C_TEAL      = 0x8cd0dc;
 
 // Members -------------------------------------------------------------------|
 
-private transient play DrawData[400] m_d;
-private transient play uint m_p;
-private transient play FadeMsg[32] m_fmsg;
-private transient play vector2 m_vsc;
-private transient play int m_dww;
-private transient play bool m_nodraw;
-private transient play bool m_forcedraw;
+private transient play DrawData[400] m_D;
+private transient play uint m_DPtr;
+private transient play FadeMsg[32] m_FadeMsg;
+private transient play vector2 m_VirtualSize;
+private transient play int m_BreakWidth;
+private transient play bool m_NoDraw;
+private transient play bool m_ForceDraw;
 
-bool m_fontloaded;
-bool m_eng;
+bool m_FontLoaded;
+bool m_English;
 
 // Static Functions ----------------------------------------------------------|
 
 static void ForceDraw(bool on)
 {
-   Lith_URANUS(Find("Lith_URANUS")).m_forcedraw = on;
+   Lith_URANUS(Find("Lith_URANUS")).m_ForceDraw = on;
 }
 
 static void LZ(Actor mo, int w, int h)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   let p = cl.m_p;
+   let p = cl.m_DPtr;
 
-   cl.m_d[p].dt = dt_siz;
+   cl.m_D[p].Type = Type_SetSize;
 
-   cl.m_d[p].x = w;
-   cl.m_d[p].y = h;
+   cl.m_D[p].X = w;
+   cl.m_D[p].Y = h;
 
-   cl.m_p++;
+   cl.m_DPtr++;
 
-   cl.m_vsc = (w, h);
+   cl.m_VirtualSize = (w, h);
 }
 
 /* BIT LAYOUT OF ARGUMENTS
@@ -127,94 +131,94 @@ static void LZ(Actor mo, int w, int h)
 static void LF(Actor mo, int arg0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    uint num = arg0 & 0x3f;
 
-   cl.m_fmsg[num].time = (arg0 >> 6) & 0x7f;
-   cl.m_fmsg[num].fsub = float(arg0 >> 16) / 0xffff;
-   cl.m_fmsg[num].fade = 1;
+   cl.m_FadeMsg[num].Time =      (arg0 >>  6) & 0x7f;
+   cl.m_FadeMsg[num].FSub = float(arg0 >> 16) / 0xffff;
+   cl.m_FadeMsg[num].Fade = 1;
 }
 
 static bool LX(Actor mo, int num)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return false;
-   return cl.m_fmsg[num].fade != 0;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
+   return cl.m_FadeMsg[num].Fade != 0;
 }
 
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   if(cl.m_nodraw) return;
-   let p = cl.m_p;
+   if(cl.m_NoDraw) return;
+   let p = cl.m_DPtr;
 
-   cl.m_d[p].dt = dt_lin;
+   cl.m_D[p].Type = Type_Line;
 
-   [cl.m_d[p].x, cl.m_d[p].y] = cl.getScSized(x, y);
-   [cl.m_d[p].z, cl.m_d[p].w] = cl.getScSized(z, w);
+   [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
+   [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(z, w);
 
-   cl.m_d[p].c = c;
+   cl.m_D[p].C = c;
 
-   cl.m_p++;
+   cl.m_DPtr++;
 }
 
 static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   if(a ~== 0 || cl.m_nodraw) return;
-   let p = cl.m_p;
+   if(a ~== 0 || cl.m_NoDraw) return;
+   let p = cl.m_DPtr;
 
-   if(a < -1) a = cl.m_fmsg[uint(-a - 2)].fade;
+   if(a < -1) a = cl.m_FadeMsg[uint(-a - 2)].Fade;
 
    if(a == -1)
-      cl.m_d[p].dt = dt_tex;
+      cl.m_D[p].Type = Type_Sprite;
    else
    {
       if(a < 0.001) return;
 
-      cl.m_d[p].dt = dt_ate;
-      cl.m_d[p].a = a;
+      cl.m_D[p].Type = Type_SpriteAlpha;
+      cl.m_D[p].A = a;
    }
 
    if(c != "")
    {
-      if(cl.m_d[p].dt == dt_ate)
-         cl.m_d[p].dt = dt_xte;
+      if(cl.m_D[p].Type == Type_SpriteAlpha)
+         cl.m_D[p].Type = Type_SpriteStencilAlpha;
       else
-         cl.m_d[p].dt = dt_cte;
-      cl.m_d[p].c = c;
+         cl.m_D[p].Type = Type_SpriteStencil;
+      cl.m_D[p].C = c;
    }
 
-   for(int i = 0; tex.charCodeAt(0) == Ch_Colon; i++)
+   for(int i = 0; tex.CharCodeAt(0) == Ch_Colon; i++)
    {
       if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
    }
 
-   cl.m_d[p].tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
+   cl.m_D[p].Tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
 
-   int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_d[p].tex);
+   int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_D[p].Tex);
 
    switch(xa) {
    default:
-   case 1: cl.m_d[p].x = x;          break;
-   case 0: cl.m_d[p].x = x - sx / 2; break;
-   case 2: cl.m_d[p].x = x - sx;     break;
+   case 1: cl.m_D[p].X = x;          break;
+   case 0: cl.m_D[p].X = x - sx / 2; break;
+   case 2: cl.m_D[p].X = x - sx;     break;
    }
 
    switch(ya) {
    default:
-   case 1: cl.m_d[p].y = y;          break;
-   case 0: cl.m_d[p].y = y - sy / 2; break;
-   case 2: cl.m_d[p].y = y - sy;     break;
+   case 1: cl.m_D[p].Y = y;          break;
+   case 0: cl.m_D[p].Y = y - sy / 2; break;
+   case 2: cl.m_D[p].Y = y - sy;     break;
    }
 
-   cl.m_p++;
+   cl.m_DPtr++;
 }
 
 /* BIT LAYOUT OF ARGUMENTS
@@ -229,81 +233,83 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
 
                                       arg1
    1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - X sign
-   -1-- ---- ---- ---- ---- ---- ---- ---- 30  1 - Y sign
-   ---- ---- 1111 1111 11-- ---- ---- ---- 14 10 - X position
-   ---- ---- ---- ---- --11 1111 111- ----  5  9 - Y position
-   ---- ---- ---- ---- ---- ---- ---1 11--  2  3 - X alignment
-   ---- ---- ---- ---- ---- ---- ---- --11  0  2 - Y alignment
+   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - X alignment
+   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - X position
+
+                                      arg2
+   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
+   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
+   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
 */
-static void LT(Actor mo, string txt, string fnt, int arg0, int arg1)
+static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    bool af =  arg0        & 0x40000000;
    uint aa = (arg0 >> 24) & 0x3F;
 
-   if((af && aa == 0) || cl.m_nodraw) return;
+   if((af && aa == 0) || cl.m_NoDraw) return;
 
-   int  x  = (arg1 >> 14) & 0x3FF;
-   int  y  = (arg1 >>  5) & 0x1FF;
-   uint xa = (arg1 >>  2) & 0x7;
-   uint ya =  arg1        & 0x3;
+   int  x  =  arg1        & LT_X_MASK;
+   int  y  =  arg2        & LT_Y_MASK;
+   uint xa = (arg1 >> 28) & 0x7;
+   uint ya = (arg2 >> 29) & 0x3;
    bool uf =  arg0        & 0x80000000;
 
-   if(arg1 & 0x80000000) x = x - 0x400;
-   if(arg1 & 0x40000000) y = y - 0x200;
+   if(arg1 & 0x80000000) x = x - LT_X_MASK + 1;
+   if(arg2 & 0x80000000) y = y - LT_Y_MASK + 1;
 
-   let p = cl.m_p;
+   let p = cl.m_DPtr;
 
-   cl.m_d[p].a = !af && aa != 0 ? cl.m_fmsg[aa - 1].fade
-                                : af ? aa ? float(aa) / 0x3F
-                                          : 0.0
+   cl.m_D[p].A = !af && aa != 0 ? cl.m_FadeMsg[aa - 1].Fade
+                                : af ? float(aa) / 0x3F
                                      : 1.0;
-   cl.m_d[p].cr = arg0 & 0xff;
+
+   cl.m_D[p].Cr = arg0 & 0xff;
 
    uint lns, lnx = 0;
 
-   if(uf || cl.m_eng)
+   if(uf || cl.m_English)
    {
-      cl.m_d[p].dt = dt_txt;
+      cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
 
-      cl.m_d[p].fnt = Font.GetFont(fnt);
-      cl.m_d[p].lny = cl.m_d[p].fnt.getHeight();
-      let       brl = cl.m_d[p].fnt.breakLines(txt, cl.m_dww ? cl.m_dww : 0x7fff);
+      cl.m_D[p].Fnt = Font.GetFont(fnt);
+      cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
+      let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
 
-      lns = brl.count();
+      lns = brl.Count();
 
-      cl.m_d[p].txt.resize(lns);
-      cl.m_d[p].lnw.resize(lns);
+      cl.m_D[p].Txt.Resize(lns);
+      cl.m_D[p].LnW.Resize(lns);
 
       for(uint i = 0, w; i < lns; i++)
       {
-         cl.m_d[p].txt[i] = brl.stringAt(i);
-         cl.m_d[p].lnw[i] = brl.stringWidth(i);
+         cl.m_D[p].Txt[i] = brl.StringAt(i);
+         cl.m_D[p].LnW[i] = brl.StringWidth(i);
 
-         if(lnx < (w = cl.m_d[p].lnw[i])) lnx = w;
+         if(lnx < (w = cl.m_D[p].LnW[i])) lnx = w;
       }
    }
    else
    {
-      cl.m_d[p].dt = dt_utx;
+      cl.m_D[p].Type = Type_TextUnicode;
 
-      cl.m_d[p].lny = 8;
+      cl.m_D[p].LnY = 8;
 
       array<string> brl;
-      txt.split(brl, "\n");
-      let lnum = brl.size();
+      txt.Split(brl, "\n");
+      let lnum = brl.Size();
 
-      cl.m_d[p].txt.clear();
-      cl.m_d[p].lnw.clear();
+      cl.m_D[p].Txt.Clear();
+      cl.m_D[p].LnW.Clear();
 
       for(uint i = 0; i < lnum; i++)
       {
          uint w = 0;
          uint pos, sta, len;
 
-         for(pos = 0, sta = 0, len = brl[i].length(); pos < len;)
+         for(pos = 0, sta = 0, len = brl[i].Length(); pos < len;)
          {
             let str = brl[i];
             uint uclen, ucp; [uclen, ucp] = Utf32AtUtf8(str, pos);
@@ -318,7 +324,7 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1)
             uint ww;
 
             if(ucp == Ch_Space)
-               ww = font_space;
+               ww = FONT_SPACE;
             else
             {
                let metr = CallACS("Lith_GetFontMetric", ucp);
@@ -326,12 +332,12 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1)
                ww = xadv;
             }
 
-            if(w + ww > (cl.m_dww ? cl.m_dww : 0x7fff))
+            if(w + ww > (cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff))
             {
                if(ucp != Ch_Space) pos -= uclen;
 
-               cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
-               cl.m_d[p].lnw.push(w);
+               cl.m_D[p].Txt.Push(brl[i].mid(sta, pos - sta));
+               cl.m_D[p].LnW.Push(w);
 
                if(lnx < w) lnx = w;
 
@@ -342,42 +348,42 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1)
                w += ww;
          }
 
-         cl.m_d[p].txt.push(brl[i].mid(sta, pos - sta));
-         cl.m_d[p].lnw.push(w);
+         cl.m_D[p].Txt.Push(brl[i].Mid(sta, pos - sta));
+         cl.m_D[p].LnW.Push(w);
 
          if(lnx < w) lnx = w;
       }
 
-      lns = cl.m_d[p].txt.size();
+      lns = cl.m_D[p].Txt.Size();
    }
 
    switch(xa) {
    default:
    case 3:
    case 4:
-   case 1: cl.m_d[p].x = x;           break;
-   case 5: cl.m_d[p].x = x + lnx / 2; break;
+   case 1: cl.m_D[p].X = x;           break;
+   case 5: cl.m_D[p].X = x + lnx / 2; break;
    case 6:
-   case 0: cl.m_d[p].x = x - lnx / 2; break;
-   case 2: cl.m_d[p].x = x - lnx;     break;
+   case 0: cl.m_D[p].X = x - lnx / 2; break;
+   case 2: cl.m_D[p].X = x - lnx;     break;
    }
 
    switch(ya) {
    default:
-   case 1: cl.m_d[p].y = y;                           break;
-   case 0: cl.m_d[p].y = y - cl.m_d[p].lny * lns / 2; break;
-   case 2: cl.m_d[p].y = y - cl.m_d[p].lny * lns;     break;
+   case 1: cl.m_D[p].Y = y;                           break;
+   case 0: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns / 2; break;
+   case 2: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns;     break;
    }
 
-   cl.m_d[p].lnx.resize(lns);
+   cl.m_D[p].LnX.Resize(lns);
 
    for(uint i = 0; i < lns; i++) {
-           if(xa == 3) cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i];
-      else if(xa <  4) cl.m_d[p].lnx[i] = 0;
-      else             cl.m_d[p].lnx[i] = cl.m_d[p].lnw[i] / 2;
+           if(xa == 3) cl.m_D[p].LnX[i] = cl.m_D[p].LnW[i];
+      else if(xa <  4) cl.m_D[p].LnX[i] = 0;
+      else             cl.m_D[p].LnX[i] = cl.m_D[p].LnW[i] / 2;
    }
 
-   cl.m_p++;
+   cl.m_DPtr++;
 }
 
 /* BIT LAYOUT OF ARGUMENTS
@@ -398,9 +404,9 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1)
 static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_forcedraw && mo != players[consoleplayer].camera) return;
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   let p = cl.m_p;
+   let p = cl.m_DPtr;
 
    if(arg0 || arg1)
    {
@@ -410,48 +416,38 @@ static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
       uint h = (arg1 >> 16) & 0xffff;
 
       // simple optimization (which also prevents division by zero)
-      if((cl.m_nodraw = w <= 0 || h <= 0)) return;
+      if((cl.m_NoDraw = w <= 0 || h <= 0)) return;
 
-      cl.m_d[p].dt = dt_cls;
+      cl.m_D[p].Type = Type_ClipSet;
 
-      [cl.m_d[p].x, cl.m_d[p].y] = cl.getScSized(x, y);
-      [cl.m_d[p].z, cl.m_d[p].w] = cl.getScSized(w, h, true);
+      [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
+      [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
    }
    else
    {
-      cl.m_nodraw = false;
-      cl.m_d[p].dt = dt_clc;
+      cl.m_NoDraw = false;
+      cl.m_D[p].Type = Type_ClipClear;
    }
 
-   cl.m_dww = arg2;
-   cl.m_p++;
+   cl.m_BreakWidth = arg2;
+   cl.m_DPtr++;
 }
 
 static void LE()
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
 
-   cl.m_p = 0;
+   cl.m_DPtr = 0;
 
-   for(uint i = 0; i < cl.m_fmsg.size(); i++)
+   for(uint i = 0; i < cl.m_FadeMsg.size(); i++)
    {
-      if(!cl.m_fmsg[i].fade)
+      if(!cl.m_FadeMsg[i].Fade)
          continue;
-      else if(!cl.m_fmsg[i].time)
-         cl.m_fmsg[i].fade = max(cl.m_fmsg[i].fade - cl.m_fmsg[i].fsub, 0);
+      else if(!cl.m_FadeMsg[i].Time)
+         cl.m_FadeMsg[i].Fade = max(cl.m_FadeMsg[i].Fade - cl.m_FadeMsg[i].FSub, 0);
       else
-         cl.m_fmsg[i].time--;
+         cl.m_FadeMsg[i].Time--;
    }
-}
-
-static int LTArgsN(uint x, uint y, uint xa, uint ya)
-{
-   return (x << 14) | (y << 5) | (xa << 2) | ya;
-}
-
-static int LTArgsA(uint x, uint y, uint xa, uint ya, float a)
-{
-   return LTArgsN(x, y, xa, ya) | 0x40000000 | (uint(a * 0x3F) << 24);
 }
 
 static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
@@ -459,7 +455,7 @@ static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
    // Copyright (c) 2018 Benjamin Moir. All rights reserved.
    // This work is licensed under the terms of the MIT license.
    // To obtain a copy, visit <https://opensource.org/licenses/MIT>.
-   uint len, b0 = str.charCodeAt(pos) & 0xff, b1, b2, b3;
+   uint len, b0 = str.CharCodeAt(pos) & 0xff, b1, b2, b3;
 
         if(b0 < 0x80) len = 1;
    else if(b0 < 0xe0) len = 2;
@@ -467,9 +463,9 @@ static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
    else               len = 4;
 
    switch(len) {
-   case 4: b3 = str.charCodeAt(pos + 3) & 0xff;
-   case 3: b2 = str.charCodeAt(pos + 2) & 0xff;
-   case 2: b1 = str.charCodeAt(pos + 1) & 0xff;
+   case 4: b3 = str.CharCodeAt(pos + 3) & 0xff;
+   case 3: b2 = str.CharCodeAt(pos + 2) & 0xff;
+   case 2: b1 = str.CharCodeAt(pos + 1) & 0xff;
    case 1: break;
    }
 
@@ -484,14 +480,14 @@ static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
 
 static clearscope name, uint ParseColor(string str, uint pos)
 {
-   if(str.charCodeAt(pos) == Ch_BrackO)
+   if(str.CharCodeAt(pos) == Ch_BrackO)
    {
       uint sta = pos;
-      while(str.charCodeAt(++pos) != Ch_BrackC);
-      return str.mid(sta, pos - sta), pos;
+      while(str.CharCodeAt(++pos) != Ch_BrackC);
+      return str.Mid(sta, pos - sta), pos;
    }
    else
-      return str.charAt(pos++), pos;
+      return str.CharAt(pos++), pos;
 }
 
 static int GetTex(string gfx)
@@ -502,7 +498,7 @@ static int GetTex(string gfx)
 static int GetTexW(int gfx_)
 {
    if(gfx_ < 0) return 0;
-   textureid gfx; gfx.setNull(); gfx += gfx_;
+   textureid gfx; gfx.SetNull(); gfx += gfx_;
    int w, h; [w, h] = TexMan.GetSize(gfx);
    return w;
 }
@@ -510,16 +506,88 @@ static int GetTexW(int gfx_)
 static int GetTexH(int gfx_)
 {
    if(gfx_ < 0) return 0;
-   textureid gfx; gfx.setNull(); gfx += gfx_;
+   textureid gfx; gfx.SetNull(); gfx += gfx_;
    int w, h; [w, h] = TexMan.GetSize(gfx);
    return h;
+}
+
+private static clearscope uint GetDefColor(int cr)
+{
+   switch(cr) {
+   case Font.CR_BLACK:     return C_BLACK;
+   case Font.CR_BLUE:      return C_BLUE;
+   case Font.CR_BRICK:     return C_BRICK;
+   case Font.CR_BROWN:     return C_BROWN;
+   case Font.CR_CREAM:     return C_CREAM;
+   case Font.CR_CYAN:      return C_CYAN;
+   case Font.CR_DARKBROWN: return C_DARKBROWN;
+   case Font.CR_DARKGRAY:  return C_DARKGRAY;
+   case Font.CR_DARKGREEN: return C_DARKGREEN;
+   case Font.CR_DARKRED:   return C_DARKRED;
+   case Font.CR_FIRE:      return C_FIRE;
+   case Font.CR_GOLD:      return C_GOLD;
+   case Font.CR_GREEN:     return C_GREEN;
+   case Font.CR_GRAY:      return C_GRAY;
+   case Font.CR_ICE:       return C_ICE;
+   case Font.CR_LIGHTBLUE: return C_LIGHTBLUE;
+   case Font.CR_OLIVE:     return C_OLIVE;
+   case Font.CR_ORANGE:    return C_ORANGE;
+   case Font.CR_PURPLE:    return C_PURPLE;
+   case Font.CR_RED:       return C_RED;
+   case Font.CR_SAPPHIRE:  return C_SAPPHIRE;
+   case Font.CR_TAN:       return C_TAN;
+   case Font.CR_TEAL:      return C_TEAL;
+   default:
+   case Font.CR_UNTRANSLATED:
+   case Font.CR_WHITE:     return C_WHITE;
+   case Font.CR_YELLOW:    return C_YELLOW;
+   }
+}
+
+private static clearscope uint GetParsedColor(uint defcr, name cr)
+{
+   switch(cr) {
+   case 'a': return C_BRICK;
+   case 'b': return C_TAN;
+   case 'c': return C_GRAY;
+   case 'd': return C_GREEN;
+   case 'e': return C_BROWN;
+   case 'f': return C_GOLD;
+   case 'g': return C_RED;
+   case 'h': return C_BLUE;
+   case 'i': return C_ORANGE;
+   case 'j': return C_WHITE;
+   case 'k': return C_YELLOW;
+   default:
+   case '-':
+   case 'l': return defcr;
+   case 'm': return C_BLACK;
+   case 'n': return C_LIGHTBLUE;
+   case 'o': return C_CREAM;
+   case 'p': return C_OLIVE;
+   case 'q': return C_DARKGREEN;
+   case 'r': return C_DARKRED;
+   case 's': return C_DARKBROWN;
+   case 't': return C_PURPLE;
+   case 'u': return C_DARKGRAY;
+   case 'v': return C_CYAN;
+   case 'w': return C_ICE;
+   case 'x': return C_FIRE;
+   case 'y': return C_SAPPHIRE;
+   case 'z': return C_TEAL;
+   case '[Lith_Blue]':   return 0x3b47f8;
+   case '[Lith_Green]':  return 0x00ff00;
+   case '[Lith_Grey]':   return 0xbfbfbf;
+   case '[Lith_Purple]': return 0x8c3bf8;
+   case '[Lith_Red]':    return 0xbf0f4a;
+   }
 }
 
 // Member Functions ----------------------------------------------------------|
 
 override void WorldLoaded(WorldEvent evt)
 {
-   if(m_fontloaded) return;
+   if(m_FontLoaded) return;
 
    // Unfortunately, due to the script runaway limit in ACS, we need to do this
    // here so everything is initialized without breaking.
@@ -529,199 +597,133 @@ override void WorldLoaded(WorldEvent evt)
       while(CallACS("Lith_SetupFontsContinue"));
    }
 
-   m_fontloaded = true;
+   m_FontLoaded = true;
 }
 
 override void WorldTick()
 {
-   if(!(m_eng = StringTable.Localize("LITH_CHECK", false) == "Eng"))
+   if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng"))
       CallACS("Lith_SetFontFace",
-         CVar.GetCVar('lith_gui_jpfont', players[consoleplayer]).getInt());
+         CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt());
+}
+
+private ui void DrawTextUnicode(int scw, int sch, int i)
+{
+   uint defcr = GetDefColor(m_D[i].Cr);
+   uint cr = defcr;
+   for(uint ln = 0, lns = m_D[i].LnX.Size(), y = m_D[i].Y + m_D[i].LnY; ln < lns; ln++)
+   {
+      int x = m_D[i].X - m_D[i].LnX[ln];
+      int xo = x;
+
+      for(uint pos = 0, len = m_D[i].Txt[ln].Length(); pos < len;)
+      {
+         let str = m_D[i].Txt[ln];
+         uint uclen, ucp; [uclen, ucp] = Utf32AtUtf8(str, pos);
+         pos += uclen;
+
+         if(ucp == Ch_Color)
+         {
+            name colo; [colo, pos] = ParseColor(str, pos);
+            cr = GetParsedColor(defcr, colo);
+         }
+         else if(ucp == Ch_Space)
+            x += FONT_SPACE;
+         else
+         {
+            int metr = CallACS("Lith_GetFontMetric", ucp);
+            int gfx_ = CallACS("Lith_Metr_Tex",  metr);
+            let xadv = CallACS("Lith_Metr_Xadv", metr);
+            let yofs = CallACS("Lith_Metr_Yofs", metr);
+            if(gfx_ < 0) continue;
+
+            textureid gfx; gfx.SetNull(); gfx += gfx_;
+            if(!gfx.IsValid()) continue;
+
+            Screen.DrawTexture(gfx, false, x, y-yofs,
+               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+               DTA_Alpha,m_D[i].A, DTA_AlphaChannel,true, DTA_FillColor,cr);
+
+            if(x + xadv > scw)
+            {
+               y += m_D[i].LnY;
+               x = xo;
+
+               while(str.CharCodeAt(pos++) == Ch_Space);
+            }
+            else
+               x += xadv;
+         }
+      }
+
+      y += m_D[i].LnY;
+   }
 }
 
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320, sch = 240;
 
-   if(!automapactive) for(uint i = 0; i < m_p; i++) switch(m_d[i].dt)
+   if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
    {
-   case dt_lin:
-      Screen.DrawLine(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w, m_d[i].c);
+   case Type_ClipSet:
+      Screen.SetClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
       break;
-   case dt_tex:
-      Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-         DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0);
-      break;
-   case dt_ate:
-      Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-         DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
-         DTA_Alpha, m_d[i].a);
-      break;
-   case dt_cte:
-      Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-         DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
-         DTA_FillColor, m_d[i].c);
-      break;
-   case dt_xte:
-      Screen.DrawTexture(m_d[i].tex, false, m_d[i].x, m_d[i].y,
-         DTA_VirtualWidth, scw, DTA_VirtualHeight, sch, DTA_TopOffset,0,DTA_LeftOffset,0,
-         DTA_Alpha, m_d[i].a,
-         DTA_FillColor, m_d[i].c);
-      break;
-   case dt_txt:
-      for(uint ln = 0, lns = m_d[i].lnx.size(); ln < lns; ln++)
-         Screen.DrawText(m_d[i].fnt, m_d[i].cr,
-            m_d[i].x-m_d[i].lnx[ln], m_d[i].y+m_d[i].lny*ln, m_d[i].txt[ln],
-            DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-            DTA_Alpha, m_d[i].a);
-      break;
-   case dt_utx:
-   {
-      uint defcr;
-      switch(m_d[i].cr) {
-      case Font.CR_BLACK:     defcr = c_black;     break;
-      case Font.CR_BLUE:      defcr = c_blue;      break;
-      case Font.CR_BRICK:     defcr = c_brick;     break;
-      case Font.CR_BROWN:     defcr = c_brown;     break;
-      case Font.CR_CREAM:     defcr = c_cream;     break;
-      case Font.CR_CYAN:      defcr = c_cyan;      break;
-      case Font.CR_DARKBROWN: defcr = c_darkbrown; break;
-      case Font.CR_DARKGRAY:  defcr = c_darkgray;  break;
-      case Font.CR_DARKGREEN: defcr = c_darkgreen; break;
-      case Font.CR_DARKRED:   defcr = c_darkred;   break;
-      case Font.CR_FIRE:      defcr = c_fire;      break;
-      case Font.CR_GOLD:      defcr = c_gold;      break;
-      case Font.CR_GREEN:     defcr = c_green;     break;
-      case Font.CR_GRAY:      defcr = c_gray;      break;
-      case Font.CR_ICE:       defcr = c_ice;       break;
-      case Font.CR_LIGHTBLUE: defcr = c_lightblue; break;
-      case Font.CR_OLIVE:     defcr = c_olive;     break;
-      case Font.CR_ORANGE:    defcr = c_orange;    break;
-      case Font.CR_PURPLE:    defcr = c_purple;    break;
-      case Font.CR_RED:       defcr = c_red;       break;
-      case Font.CR_SAPPHIRE:  defcr = c_sapphire;  break;
-      case Font.CR_TAN:       defcr = c_tan;       break;
-      case Font.CR_TEAL:      defcr = c_teal;      break;
-      default:
-      case Font.CR_UNTRANSLATED:
-      case Font.CR_WHITE:     defcr = c_white;     break;
-      case Font.CR_YELLOW:    defcr = c_yellow;    break;
-      }
-
-      uint cr = defcr;
-      for(uint ln = 0, lns = m_d[i].lnx.size(), y = m_d[i].y + m_d[i].lny; ln < lns; ln++)
-      {
-         int x = m_d[i].x - m_d[i].lnx[ln];
-         int xo = x;
-
-         for(uint pos = 0, len = m_d[i].txt[ln].length(); pos < len;)
-         {
-            let str = m_d[i].txt[ln];
-            uint uclen, ucp; [uclen, ucp] = Utf32AtUtf8(str, pos);
-            pos += uclen;
-
-            if(ucp == Ch_Color)
-            {
-               name colo; [colo, pos] = ParseColor(str, pos);
-
-               switch(colo) {
-               default:
-               case 'a': cr = c_brick;     break;
-               case 'b': cr = c_tan;       break;
-               case 'c': cr = c_gray;      break;
-               case 'd': cr = c_green;     break;
-               case 'e': cr = c_brown;     break;
-               case 'f': cr = c_gold;      break;
-               case 'g': cr = c_red;       break;
-               case 'h': cr = c_blue;      break;
-               case 'i': cr = c_orange;    break;
-               case 'j': cr = c_white;     break;
-               case 'k': cr = c_yellow;    break;
-               case '-':
-               case 'l': cr = defcr;       break;
-               case 'm': cr = c_black;     break;
-               case 'n': cr = c_lightblue; break;
-               case 'o': cr = c_cream;     break;
-               case 'p': cr = c_olive;     break;
-               case 'q': cr = c_darkgreen; break;
-               case 'r': cr = c_darkred;   break;
-               case 's': cr = c_darkbrown; break;
-               case 't': cr = c_purple;    break;
-               case 'u': cr = c_darkgray;  break;
-               case 'v': cr = c_cyan;      break;
-               case 'w': cr = c_ice;       break;
-               case 'x': cr = c_fire;      break;
-               case 'y': cr = c_sapphire;  break;
-               case 'z': cr = c_teal;      break;
-               case '[Lith_Blue]':   cr = 0x3b47f8; break;
-               case '[Lith_Green]':  cr = 0x00ff00; break;
-               case '[Lith_Grey]':   cr = 0xbfbfbf; break;
-               case '[Lith_Purple]': cr = 0x8c3bf8; break;
-               case '[Lith_Red]':    cr = 0xbf0f4a; break;
-               }
-            }
-            else if(ucp == Ch_Space)
-               x += font_space;
-            else
-            {
-               int metr = CallACS("Lith_GetFontMetric", ucp);
-               int gfx_ = CallACS("Lith_Metr_Tex", metr);
-               if(gfx_ < 0) continue;
-
-               textureid gfx; gfx.setNull(); gfx += gfx_;
-
-               if(gfx.isValid())
-               {
-                  let xadv = CallACS("Lith_Metr_Xadv", metr);
-                  let yofs = CallACS("Lith_Metr_Yofs", metr);
-
-                  Screen.DrawTexture(gfx, false, x, y-yofs,
-                     DTA_VirtualWidth, scw, DTA_VirtualHeight, sch,
-                     DTA_Alpha, m_d[i].a, DTA_AlphaChannel, true,
-                     DTA_FillColor, cr);
-
-                  if(x + xadv > scw)
-                  {
-                     y += m_d[i].lny;
-                     x = xo;
-
-                     for(;;)
-                     {
-                        [uclen, ucp] = Utf32AtUtf8(str, pos);
-                        if(ucp != Ch_Space) break;
-                        pos += uclen;
-                     }
-                  }
-                  else
-                     x += xadv;
-               }
-            }
-         }
-
-         y += m_d[i].lny;
-      }
-      break;
-   }
-   case dt_cls:
-      Screen.SetClipRect(m_d[i].x, m_d[i].y, m_d[i].z, m_d[i].w);
-      break;
-   case dt_clc:
+   case Type_ClipClear:
       Screen.ClearClipRect();
       break;
-   case dt_siz:
-      scw = m_d[i].x;
-      sch = m_d[i].y;
+   case Type_SetSize:
+      scw = m_D[i].X;
+      sch = m_D[i].Y;
+      break;
+   case Type_Line:
+      Screen.DrawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
+      break;
+   case Type_Sprite:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0);
+      break;
+   case Type_SpriteAlpha:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
+         DTA_Alpha,m_D[i].A);
+      break;
+   case Type_SpriteStencil:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
+         DTA_FillColor,m_D[i].C);
+      break;
+   case Type_SpriteStencilAlpha:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
+         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+      break;
+   case Type_Text:
+      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
+            m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
+            DTA_VirtualWidth,scw, DTA_VirtualHeight,sch);
+      break;
+   case Type_TextAlpha:
+      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
+            m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
+            DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+            DTA_Alpha,m_D[i].A);
+      break;
+   case Type_TextUnicode:
+      DrawTextUnicode(scw, sch, i);
       break;
    }
 
-   let p = Lith_Player(evt.camera);
-   if(p && p.m_cs) p.m_cs.Lith_Render();
+   let p = Lith_Player(evt.Camera);
+   if(p && p.m_Cs) p.m_Cs.Lith_Render();
 }
 
 float, float GetScSized(float x, float y, bool kludge = false)
 {
-   float vw = m_vsc.x;
-   float vh = m_vsc.y;
+   float vw = m_VirtualSize.X;
+   float vh = m_VirtualSize.Y;
 
    float sw = Screen.GetWidth();
    float sh = Screen.GetHeight();
@@ -731,7 +733,7 @@ float, float GetScSized(float x, float y, bool kludge = false)
    if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
    else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
 
-   return xy.x, xy.y;
+   return xy.X, xy.Y;
 }
 
 // EOF

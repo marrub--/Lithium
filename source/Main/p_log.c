@@ -148,6 +148,8 @@ void Lith_PlayerUpdateLog(struct player *p)
 
 void Lith_CBITab_Log(struct gui_state *g, struct player *p)
 {
+   static int const ht = 10;
+
    if(Lith_GUI_Button(g, .x = 25, 38, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;
 
@@ -158,13 +160,13 @@ void Lith_CBITab_Log(struct gui_state *g, struct player *p)
 
    PrintText_str(lm->name, s_cbifont, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * 8);
+   Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
 
    for(i32 i = 0; i < lm->dataC; i++)
    {
-      i32 const y = 8 * i;
+      i32 const y = ht * i;
 
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, 8)) continue;
+      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
       PrintText_str(lm->dataV[i].inf, s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
