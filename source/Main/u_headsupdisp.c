@@ -9,7 +9,7 @@
 #if LITHIUM
 static void HUD_Ammo(struct player *p)
 {
-   invweapon_t const *wep = p->weapon.cur;
+   struct invweapon const *wep = p->weapon.cur;
 
    str typebg;
    i32 y;
@@ -59,7 +59,7 @@ static void HUD_Ammo(struct player *p)
    }
 }
 
-static void HUD_Health(struct player *p, upgrade_t *upgr)
+static void HUD_Health(struct player *p, struct upgrade *upgr)
 {
    static str weapongfx[SLOT_MAX] = {
       s":HUD:H_D27",
@@ -121,19 +121,19 @@ static void HUD_Health(struct player *p, upgrade_t *upgr)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_HeadsUpDisp_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Activate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = true;
 }
 
 stkcall
-void Upgr_HeadsUpDisp_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = false;
 }
 
 stkcall
-void Upgr_HeadsUpDisp_Render(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->indialogue) return;
 

@@ -62,6 +62,8 @@ struct dmon {
    struct monster_info const *mi;
 };
 
+// this must be kept as a typedef, because it could be moved to another
+// address space, and then I'd have to do a bunch of rewriting again
 typedef struct dmon dmon_t;
 
 script dmon_t *DmonPtr(i32 tid, i32 ptr);

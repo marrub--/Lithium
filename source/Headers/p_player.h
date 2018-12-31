@@ -81,7 +81,7 @@ stkcall void Lith_TakeScore(struct player *p, i96 score);
 stkcall void Lith_GiveEXP(struct player *p, u64 amt);
 
 // misc
-stkcall upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name);
+stkcall struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name);
 stkcall bool Lith_PlayerGetUpgradeActive(struct player *p, i32 name);
 stkcall char const *Lith_PlayerDiscriminator(i32 pclass);
 
@@ -93,7 +93,7 @@ struct player *Lith_GetPlayer(i32 tid, i32 ptr);
 
 // Types ---------------------------------------------------------------------|
 
-GDCC_HashMap_Decl(upgrademap_t, i32, upgrade_t)
+GDCC_HashMap_Decl(upgrademap_t, i32, struct upgrade)
 
 enum
 {
@@ -248,20 +248,20 @@ struct player
 
    // Upgrades
    struct upgr_data upgrdata;
-   upgrade_t        upgrades[UPGR_STATIC_MAX];
+   struct upgrade   upgrades[UPGR_STATIC_MAX];
    upgrademap_t     upgrademap;
 
    u32  upgrmax;
    bool upgrinit;
 
    // Inventory
-   container_t inv[8];
-   container_t misc;
+   struct container inv[8];
+   struct container misc;
 
-   item_t *useitem;
-   item_t *selitem;
-   bool    movitem;
-   bool    invinit;
+   struct item *useitem;
+   struct item *selitem;
+   bool         movitem;
+   bool         invinit;
 
    // HUD
    bool hudenabled;
@@ -339,7 +339,7 @@ struct player
    u32 upgradesowned;
 
    // Weapons
-   weapondata_t weapon;
+   struct weapondata weapon;
    str weaponclass;
 
    i32  riflefiremode;

@@ -57,7 +57,7 @@ void Lith_BoughtItemPickup(i32 id)
    static i32 const chan = CHAN_ITEM|CHAN_NOPAUSE;
    withplayer(LocalPlayer) if(id)
    {
-      upgrade_t *upgr = p->getUpgr(id);
+      struct upgrade *upgr = p->getUpgr(id);
 
       if(!upgr->owned)
       {

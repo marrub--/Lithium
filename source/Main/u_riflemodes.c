@@ -22,13 +22,13 @@ void Lith_ResetRifleMode()
 }
 
 stkcall
-void Upgr_RifleModes_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->riflefiremode = 0;
 }
 
 stkcall
-void Upgr_RifleModes_Render(struct player *p, upgrade_t *upgr)
+void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->weapontype != weapon_rifle) return;
 

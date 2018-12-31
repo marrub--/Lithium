@@ -14,7 +14,7 @@ void Lith_KeyZoom(i32 amt)
 
    withplayer(LocalPlayer)
    {
-      upgrade_t *upgr = p->getUpgr(UPGR_Zoom);
+      struct upgrade *upgr = p->getUpgr(UPGR_Zoom);
       if(upgr) {
          if(upgr->active)    UData.zoom += amt;
          if(UData.zoom < 0)  UData.zoom  = 0;
@@ -26,13 +26,13 @@ void Lith_KeyZoom(i32 amt)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_Zoom_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_Zoom_Deactivate(struct player *p, struct upgrade *upgr)
 {
    UData.zoom = UData.vzoom = 0;
 }
 
 script
-void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Zoom_Update(struct player *p, struct upgrade *upgr)
 {
    if(UData.zoom == 0 && UData.vzoom == 0) return;
 
@@ -53,7 +53,7 @@ void Upgr_Zoom_Update(struct player *p, upgrade_t *upgr)
 
 
 stkcall
-void Upgr_Zoom_Render(struct player *p, upgrade_t *upgr)
+void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 {
    if(UData.vzoom)
    {

@@ -13,7 +13,7 @@
 
 #define ForUpgrade(name) \
    for(i32 _i = 0; _i < p->upgrmax; _i++) \
-      __with(upgrade_t *name = &p->upgrades[_i];)
+      __with(struct upgrade *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
 #define CheckRequires_AI  CheckRequires(UR_AI,  world.cbiupgr[cupg_armorinter])
@@ -25,8 +25,8 @@
 // Extern Functions ----------------------------------------------------------|
 
 // These are included here so the compiler may check the function signatures.
-#define Fn_F(n, cb) stkcall void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
-#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, upgrade_t *upgr);
+#define Fn_F(n, cb) stkcall void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
+#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #include "u_func.h"
 
 script void Lith_PlayerInitUpgrades(struct player *p);
@@ -36,10 +36,10 @@ void Lith_PlayerReinitUpgrades(struct player *p);
 
 void Lith_PlayerEnterUpgrades(struct player *p);
 
-upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr);
+struct upgradeinfo *Lith_UpgradeRegister(struct upgradeinfo const *upgr);
 
 // Extern Objects ------------------------------------------------------------|
 
-extern upgradeinfo_t const upgrinfobase[UPGR_BASE_MAX];
+extern struct upgradeinfo const upgrinfobase[UPGR_BASE_MAX];
 
 #endif

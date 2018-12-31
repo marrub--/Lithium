@@ -4,7 +4,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Upgr_Goldeneye_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Goldeneye_Update(struct player *p, struct upgrade *upgr)
 {
    if(ACS_Random(0, 0x7F) < 0x50)
    {

@@ -11,7 +11,7 @@ enum {
 
 struct shopitem
 {
-   anonymous shopdef_t shopdef;
+   anonymous struct shopdef shopdef;
    i32 pclass;
    i32 count;
    str classname;
@@ -41,7 +41,7 @@ StrEntOFF
 
 // Static Functions ----------------------------------------------------------|
 
-static bool Shop_CanBuy(struct player *p, shopdef_t const *, void *item_)
+static bool Shop_CanBuy(struct player *p, struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
    i32 cur = InvNum(item->classname);
@@ -49,14 +49,14 @@ static bool Shop_CanBuy(struct player *p, shopdef_t const *, void *item_)
    return max == 0 || cur < max;
 }
 
-static void Shop_Buy(struct player *p, shopdef_t const *, void *item_)
+static void Shop_Buy(struct player *p, struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
    p->itemsbought++;
    InvGive(item->classname, item->count);
 }
 
-static bool Shop_Give(struct player *p, shopdef_t const *, void *item_, i32 tid)
+static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32 tid)
 {
    struct shopitem *item = item_;
    p->itemsbought++;
@@ -76,9 +76,9 @@ void Lith_GInit_Shop(void)
    for(i32 i = 0; i < countof(shopitems); i++)
    {
       struct shopitem *info = &shopitems[i];
-      info->shopBuy    = Shop_Buy;
-      info->shopCanBuy = Shop_CanBuy;
-      info->shopGive   = Shop_Give;
+      info->ShopBuy    = Shop_Buy;
+      info->ShopCanBuy = Shop_CanBuy;
+      info->ShopGive   = Shop_Give;
    }
 }
 

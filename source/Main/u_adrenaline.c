@@ -7,13 +7,13 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_Adrenaline_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Activate(struct player *p, struct upgrade *upgr)
 {
    InvTake(so_AdrenalineToken, 1);
 }
 
 script
-void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 {
    // Charge
    if(UData.charge < CHARGE_MAX)
@@ -54,7 +54,7 @@ void Upgr_Adrenaline_Update(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_Adrenaline_Render(struct player *p, upgrade_t *upgr)
+void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;
 

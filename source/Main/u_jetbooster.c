@@ -8,13 +8,13 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_JetBooster_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_JetBooster_Activate(struct player *p, struct upgrade *upgr)
 {
    UData.charge = CHARGE_MAX;
 }
 
 script
-void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
+void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
 {
    UData.discharged = UData.charge > 60 && UData.charge < CHARGE_MAX;
 
@@ -37,7 +37,7 @@ void Upgr_JetBooster_Update(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_JetBooster_Render(struct player *p, upgrade_t *upgr)
+void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled || UData.charge == CHARGE_MAX) return;
 

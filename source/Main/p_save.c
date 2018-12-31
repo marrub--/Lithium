@@ -10,7 +10,7 @@
 #define note_Len(s) __with(i32 len = s ? strlen(s) : 0; len = min(len, 255);)
 
 script
-static void Lith_Save_note(savefile_t *save)
+static void Lith_Save_note(struct savefile *save)
 {
    u32 chunklen = 0;
 
@@ -28,7 +28,7 @@ static void Lith_Save_note(savefile_t *save)
 }
 
 script
-static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
+static void Lith_Load_note(struct savefile *save, struct savechunk *chunk)
 {
    for(i32 i = 0; i < countof(save->p->notes); i++)
    {
@@ -44,7 +44,7 @@ static void Lith_Load_note(savefile_t *save, savechunk_t *chunk)
 // Chunk "fun0" --------------------------------------------------------------|
 
 script
-static void Lith_Save_fun0(savefile_t *save)
+static void Lith_Save_fun0(struct savefile *save)
 {
    Lith_SaveWriteChunk(save, Ident_fun0, SaveV_fun0, 1);
 
@@ -52,7 +52,7 @@ static void Lith_Save_fun0(savefile_t *save)
 }
 
 script
-static void Lith_Load_fun0(savefile_t *save, savechunk_t *chunk)
+static void Lith_Load_fun0(struct savefile *save, struct savechunk *chunk)
 {
    save->p->fun = fgetc(save->fp);
 }
@@ -72,7 +72,7 @@ void Lith_SetFun(i32 fun)
 script
 void Lith_PlayerSaveData(struct player *p)
 {
-   savefile_t *save;
+   struct savefile *save;
 
    if((save = Lith_SaveBegin(p)))
    {
@@ -85,7 +85,7 @@ void Lith_PlayerSaveData(struct player *p)
 script
 void Lith_PlayerLoadData(struct player *p)
 {
-   savefile_t *save;
+   struct savefile *save;
 
    if((save = Lith_LoadBegin(p)))
    {

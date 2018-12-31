@@ -4,7 +4,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr)
 {
    if(InvNum(so_SubweaponShots) < 2)
    {
@@ -20,7 +20,7 @@ void Upgr_Subweapons_Update(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_Subweapons_Render(struct player *p, upgrade_t *upgr)
+void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;
 

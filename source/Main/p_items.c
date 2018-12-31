@@ -7,18 +7,18 @@
 // Static Functions ----------------------------------------------------------|
 
 script
-static void BagItem_Tick(item_t *_item)
+static void BagItem_Tick(struct item *_item)
 {
-   bagitem_t *item = (bagitem_t *)_item;
+   struct bagitem *item = (struct bagitem *)_item;
 
    for_item(item->content)
       if(it->Tick) it->Tick(it);
 }
 
 script
-static void BagItem_Place(item_t *_item, container_t *cont)
+static void BagItem_Place(struct item *_item, struct container *cont)
 {
-   bagitem_t *item = (bagitem_t *)_item;
+   struct bagitem *item = (struct bagitem *)_item;
 
    Lith_Item_Place(&item->item, cont);
 
@@ -29,9 +29,9 @@ static void BagItem_Place(item_t *_item, container_t *cont)
 }
 
 script
-static void BagItem_Destroy(item_t *_item)
+static void BagItem_Destroy(struct item *_item)
 {
-   bagitem_t *item = (bagitem_t *)_item;
+   struct bagitem *item = (struct bagitem *)_item;
 
    for_item(item->content)
       it->Destroy(it);
@@ -39,7 +39,7 @@ static void BagItem_Destroy(item_t *_item)
    Lith_Item_Destroy(&item->item);
 }
 
-static bool ItemCanPlace(container_t *cont, item_t *item, i32 x, i32 y)
+static bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y)
 {
    if(x < 0 || y < 0)
       return false;
@@ -68,7 +68,7 @@ static bool ItemCanPlace(container_t *cont, item_t *item, i32 x, i32 y)
    return true;
 }
 
-static bool ItemCanPlaceAny(container_t *cont, item_t *item)
+static bool ItemCanPlaceAny(struct container *cont, struct item *item)
 {
    i32 xn = cont->w / item->w;
    i32 yn = cont->h / item->h;
@@ -84,7 +84,7 @@ static bool ItemCanPlaceAny(container_t *cont, item_t *item)
 
 void Lith_PlayerInitInventory(struct player *p)
 {
-   static container_t const baseinv[] = {
+   static struct container const baseinv[] = {
       {11, 7},
       {1, 3}, {1, 3}, {1, 3}, {1, 3},
       {4, 1},
@@ -119,7 +119,7 @@ void Lith_PlayerDeallocInventory(struct player *p)
    p->movitem = false;
 }
 
-void Lith_Item_Init(item_t *item, itemdata_t const *data)
+void Lith_Item_Init(struct item *item, struct itemdata const *data)
 {
    item->link.construct(item);
 
@@ -130,9 +130,9 @@ void Lith_Item_Init(item_t *item, itemdata_t const *data)
    if(!item->Place  ) item->Place   = Lith_Item_Place;
 }
 
-item_t *Lith_Item_New(itemdata_t const *data)
+struct item *Lith_Item_New(struct itemdata const *data)
 {
-   item_t *item = Salloc(item_t);
+   struct item *item = Salloc(struct item);
 
    Lith_Item_Init(item, data);
 
@@ -140,7 +140,7 @@ item_t *Lith_Item_New(itemdata_t const *data)
 }
 
 script
-void Lith_Item_Destroy(item_t *item)
+void Lith_Item_Destroy(struct item *item)
 {
    LogDebug(log_dev, "Lith_Item_Destroy: destroying item %p", item);
 
@@ -158,13 +158,13 @@ void Lith_Item_Destroy(item_t *item)
 }
 
 script
-bool Lith_Item_Use(item_t *item)
+bool Lith_Item_Use(struct item *item)
 {
    return ServCallI(sm_UseItem, item);
 }
 
 script
-void Lith_Item_Place(item_t *item, container_t *cont)
+void Lith_Item_Place(struct item *item, struct container *cont)
 {
    Lith_Item_Unlink(item);
    item->link.link(&cont->items);
@@ -172,7 +172,7 @@ void Lith_Item_Place(item_t *item, container_t *cont)
    item->user = cont->user;
 }
 
-void Lith_Item_Unlink(item_t *item)
+void Lith_Item_Unlink(struct item *item)
 {
    if(item->container)
    {
@@ -181,9 +181,9 @@ void Lith_Item_Unlink(item_t *item)
    }
 }
 
-bagitem_t *Lith_BagItem_New(i32 w, i32 h, str bg, itemdata_t const *data)
+struct bagitem *Lith_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data)
 {
-   bagitem_t *item = Salloc(bagitem_t);
+   struct bagitem *item = Salloc(struct bagitem);
 
    Lith_Item_Init(&item->item, data);
 
@@ -200,7 +200,7 @@ bagitem_t *Lith_BagItem_New(i32 w, i32 h, str bg, itemdata_t const *data)
    return item;
 }
 
-bool Lith_ItemPlace(container_t *cont, item_t *item, i32 x, i32 y)
+bool Lith_ItemPlace(struct container *cont, struct item *item, i32 x, i32 y)
 {
    if(!ItemCanPlace(cont, item, x, y)) return false;
 
@@ -213,7 +213,7 @@ bool Lith_ItemPlace(container_t *cont, item_t *item, i32 x, i32 y)
 }
 
 script
-bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
+bool Lith_ItemPlaceFirst(struct container *cont, struct item *item)
 {
    for(i32 y = 0; y < cont->h; y++) for(i32 x = 0; x < cont->w; x++)
       if(Lith_ItemPlace(cont, item, x, y))
@@ -222,7 +222,7 @@ bool Lith_ItemPlaceFirst(container_t *cont, item_t *item)
    return false;
 }
 
-bool Lith_PlayerAddItem(struct player *p, item_t *item)
+bool Lith_PlayerAddItem(struct player *p, struct item *item)
 {
    for(i32 i = 0; i < countof(p->inv); i++)
       if(Lith_ItemPlaceFirst(&p->inv[i], item))
@@ -231,7 +231,7 @@ bool Lith_PlayerAddItem(struct player *p, item_t *item)
    return false;
 }
 
-void Lith_Container(struct gui_state *g, container_t *cont, i32 sx, i32 sy)
+void Lith_Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy)
 {
    struct player *p = cont->user;
 
@@ -281,7 +281,7 @@ void Lith_PlayerUpdateInventory(struct player *p)
 {
    if(p->useitem)
    {
-      item_t *item = p->useitem;
+      struct item *item = p->useitem;
 
       LogDebug(log_dev, "using %S (%p)", item->name, item);
       if(item->Use && !item->Use(item))
@@ -311,7 +311,7 @@ void *Lith_ItemCreate(i32 w, i32 h)
 
    #define Type(t, ...) \
       if(type == t) \
-         return Lith_Item_New(&(itemdata_t const){name, spr, tag, w, h, scr, __VA_ARGS__})
+         return Lith_Item_New(&(struct itemdata const){name, spr, tag, w, h, scr, __VA_ARGS__})
 
    Type(si_SlottedItem, .Use = Lith_Item_Use);
    Type(si_Armor,       .Use = Lith_Item_Use);
@@ -322,7 +322,7 @@ void *Lith_ItemCreate(i32 w, i32 h)
 script ext("ACS")
 bool Lith_ItemAttach(void *_item)
 {
-   item_t *item = _item;
+   struct item *item = _item;
 
    LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
 
@@ -339,7 +339,7 @@ bool Lith_ItemAttach(void *_item)
 script ext("ACS")
 void Lith_ItemDetach(void *_item)
 {
-   item_t *item = _item;
+   struct item *item = _item;
 
    LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
 
@@ -349,7 +349,7 @@ void Lith_ItemDetach(void *_item)
 script ext("ACS")
 void Lith_ItemUnlink(void *_item)
 {
-   item_t *item = _item;
+   struct item *item = _item;
 
    LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
 
@@ -366,7 +366,7 @@ void Lith_ItemUnlink(void *_item)
 script ext("ACS")
 bool Lith_ItemCanPlace(void *_item)
 {
-   item_t *item = _item;
+   struct item *item = _item;
 
    withplayer(LocalPlayer)
       for(i32 i = 0; i < countof(p->inv); i++)
@@ -406,7 +406,7 @@ void Lith_CBITab_Items(struct gui_state *g, struct player *p)
    for(i32 i = 0; i < countof(p->inv); i++)
       Lith_Container(g, &p->inv[i], x[i], y[i]);
 
-   item_t *sel = p->selitem;
+   struct item *sel = p->selitem;
 
    if(sel)
    {

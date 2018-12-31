@@ -4,20 +4,20 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_UNCEUNCE_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Activate(struct player *p, struct upgrade *upgr)
 {
    ACS_SetMusic(sp_lmusic_Unce);
 }
 
 stkcall
-void Upgr_UNCEUNCE_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Deactivate(struct player *p, struct upgrade *upgr)
 {
    ACS_SetMusic(sp_Any);
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 
 script
-void Upgr_UNCEUNCE_Update(struct player *p, upgrade_t *upgr)
+void Upgr_UNCEUNCE_Update(struct player *p, struct upgrade *upgr)
 {
    k32 reeeed = ACS_Sin(p->ticks / 35.0) + 1.0 / 2.0;
    k32 greeen = ACS_Cos(p->ticks / 24.0) + 1.0 / 2.0;

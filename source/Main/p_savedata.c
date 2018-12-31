@@ -8,18 +8,18 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_SaveWriteChunk(savefile_t *save, u32 iden, u32 vers, size_t size)
+void Lith_SaveWriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 {
    if(world.dbgSave)
       Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
 
-   savechunk_t chunk = {iden, vers & Save_VersMask, size};
+   struct savechunk chunk = {iden, vers & Save_VersMask, size};
    Lith_FWrite32(&chunk, sizeof chunk, 4, save->fp);
 }
 
-savefile_t *Lith_SaveBegin(struct player *p)
+struct savefile *Lith_SaveBegin(struct player *p)
 {
-   savefile_t *save = Salloc(savefile_t);
+   struct savefile *save = Salloc(struct savefile);
 
    if((save->fp = Lith_NFOpen(p->num, sc_psave, 'w')))
    {
@@ -33,14 +33,14 @@ savefile_t *Lith_SaveBegin(struct player *p)
 }
 
 script
-void Lith_SaveEnd(savefile_t *save)
+void Lith_SaveEnd(struct savefile *save)
 {
    Lith_SaveWriteChunk(save, Ident_Lend, SaveV_Lend, 0);
    fclose(save->fp);
    Dalloc(save);
 }
 
-i32 Lith_LoadChunk(savefile_t *save, u32 iden, u32 vers, loadchunker_t chunker)
+i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker)
 {
    rewind(save->fp);
 
@@ -49,7 +49,7 @@ i32 Lith_LoadChunk(savefile_t *save, u32 iden, u32 vers, loadchunker_t chunker)
 
    for(i32 i = 0;; i++)
    {
-      savechunk_t chunk;
+      struct savechunk chunk;
       Lith_FRead32(&chunk, sizeof chunk, 4, save->fp);
 
       // End of file reached, or we reached the EOF chunk.
@@ -75,9 +75,9 @@ i32 Lith_LoadChunk(savefile_t *save, u32 iden, u32 vers, loadchunker_t chunker)
    return -1;
 }
 
-savefile_t *Lith_LoadBegin(struct player *p)
+struct savefile *Lith_LoadBegin(struct player *p)
 {
-   savefile_t *save = Salloc(savefile_t);
+   struct savefile *save = Salloc(struct savefile);
 
    if((save->fp = Lith_NFOpen(p->num, sc_psave, 'r')))
    {
@@ -97,7 +97,7 @@ savefile_t *Lith_LoadBegin(struct player *p)
    return nil;
 }
 
-void Lith_LoadEnd(savefile_t *save)
+void Lith_LoadEnd(struct savefile *save)
 {
    fclose(save->fp);
    Dalloc(save);

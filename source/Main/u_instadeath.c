@@ -4,7 +4,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Upgr_InstaDeath_Update(struct player *p, upgrade_t *upgr)
+void Upgr_InstaDeath_Update(struct player *p, struct upgrade *upgr)
 {
    if(p->health < p->oldhealth)
       InvGive(so_Die, 1);

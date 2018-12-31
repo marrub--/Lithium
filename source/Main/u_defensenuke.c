@@ -4,7 +4,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_DefenseNuke_Enter(struct player *p, upgrade_t *upgr)
+void Upgr_DefenseNuke_Enter(struct player *p, struct upgrade *upgr)
 {
    InvGive(so_Nuke, 1);
 }

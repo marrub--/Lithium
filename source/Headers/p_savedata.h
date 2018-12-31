@@ -32,30 +32,30 @@
 
 // Types ---------------------------------------------------------------------|
 
-typedef struct savechunk_s
+struct savechunk
 {
    u32 iden; // four char identifier
    u32 vrfl; // version (lower 8 bits) + flags (upper 24 bits)
    u32 size; // size of chunk data in bytes
-} savechunk_t;
+};
 
-typedef struct savefile_s
+struct savefile
 {
    FILE *fp;
    struct player *p;
-} savefile_t;
+};
 
-script typedef void (*loadchunker_t)(savefile_t *save, savechunk_t *chunk);
+script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *chunk);
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_SaveWriteChunk(savefile_t *save, u32 iden, u32 vers, size_t size);
-savefile_t *Lith_SaveBegin(struct player *p);
-script void Lith_SaveEnd(savefile_t *save);
+void Lith_SaveWriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size);
+struct savefile *Lith_SaveBegin(struct player *p);
+script void Lith_SaveEnd(struct savefile *save);
 
 optargs(1)
-i32 Lith_LoadChunk(savefile_t *save, u32 iden, u32 vers, loadchunker_t chunker);
-savefile_t *Lith_LoadBegin(struct player *p);
-void Lith_LoadEnd(savefile_t *save);
+i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker);
+struct savefile *Lith_LoadBegin(struct player *p);
+void Lith_LoadEnd(struct savefile *save);
 
 #endif

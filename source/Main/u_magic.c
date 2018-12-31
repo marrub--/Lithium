@@ -33,7 +33,7 @@ static void GiveMagic(struct magic_info const *m)
 }
 
 script
-static void UpdateMagicUI(struct player *p, upgrade_t *upgr)
+static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
 {
    struct gui_state *g = &UData.gst;
 
@@ -94,7 +94,7 @@ void Lith_SetMagicUI(bool on)
    {
       if(p->dead) return;
 
-      upgrade_t *upgr = p->getUpgr(UPGR_Magic);
+      struct upgrade *upgr = p->getUpgr(UPGR_Magic);
 
       if(on)
       {
@@ -120,7 +120,7 @@ void Lith_SetMagicUI(bool on)
 }
 
 script
-void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
 {
    StrEntON
    k32 manaperc = p->mana / (k32)p->manamax;
@@ -157,7 +157,7 @@ void Upgr_Magic_Update(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_Magic_Render(struct player *p, upgrade_t *upgr)
+void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled || p->indialogue) return;
 

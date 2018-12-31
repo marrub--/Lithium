@@ -4,7 +4,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Upgr_Implying_Update(struct player *p, upgrade_t *upgr)
+void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
 {
    static str strings[] = {
       s"\Cd>implying",

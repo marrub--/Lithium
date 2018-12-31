@@ -72,7 +72,7 @@ StrEntON
 #define P(a) "weapons/" a "/pickup"
 #define N(a) .classname = OBJ a, .name = a
 #define F(...) .flags = __VA_ARGS__
-weaponinfo_t const weaponinfo[weapon_max] = {
+struct weaponinfo const weaponinfo[weapon_max] = {
    {0, pcl_any, nil, "MMMMHMHMMMHMMM"},
 #{
    ret = ""

@@ -182,7 +182,7 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_HashKey(k) (k)
 #define upgrademap_t_HashObj(o) ((o)->info->key)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
-GDCC_HashMap_Defn(upgrademap_t, i32, upgrade_t)
+GDCC_HashMap_Defn(upgrademap_t, i32, struct upgrade)
 
 script ext("ACS")
 void Lith_DrawPlayerIcon(int num, int x, int y)
@@ -201,9 +201,9 @@ void Lith_DrawPlayerIcon(int num, int x, int y)
 }
 
 stkcall
-upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
+struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
 {
-   upgrade_t *upgr = p->upgrademap.find(name);
+   struct upgrade *upgr = p->upgrademap.find(name);
    if(!upgr) Log("null pointer trying to find upgrade %i", name);
    return upgr;
 }
@@ -211,7 +211,7 @@ upgrade_t *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
 stkcall
 bool Lith_PlayerGetUpgradeActive(struct player *p, i32 name)
 {
-   ifauto(upgrade_t *, upgr, p->upgrademap.find(name)) return upgr->active;
+   ifauto(struct upgrade *, upgr, p->upgrademap.find(name)) return upgr->active;
    else                                                return false;
 }
 

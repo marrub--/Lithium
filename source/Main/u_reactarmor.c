@@ -46,7 +46,7 @@ void Lith_RA_Give(i32 num)
       if(!p->getUpgrActive(UPGR_ReactArmor))
          return;
 
-      upgrade_t *upgr = p->getUpgr(UPGR_ReactArmor);
+      struct upgrade *upgr = p->getUpgr(UPGR_ReactArmor);
 
       if(UData.activearmor != num + 1)
       {
@@ -68,7 +68,7 @@ void Lith_RA_Give(i32 num)
 }
 
 stkcall
-void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
 {
    UData.activearmor = 0;
 
@@ -77,7 +77,7 @@ void Upgr_ReactArmor_Deactivate(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_ReactArmor_Render(struct player *p, upgrade_t *upgr)
+void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
 {
    if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))
    {

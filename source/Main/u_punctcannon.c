@@ -47,7 +47,7 @@ void Lith_PunctuatorFire(void)
 }
 
 stkcall
-void Upgr_PunctCannon_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
 {
    InvGive(so_GTFO, 1);
 }

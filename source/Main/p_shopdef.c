@@ -6,19 +6,19 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-i96 Lith_ShopGetCost(struct player *p, shopdef_t const *def)
+i96 Lith_ShopGetCost(struct player *p, struct shopdef const *def)
 {
    return PlayerDiscount(def->cost);
 }
 
-bool Lith_ShopCanBuy(struct player *p, shopdef_t const *def, void *obj)
+bool Lith_ShopCanBuy(struct player *p, struct shopdef const *def, void *obj)
 {
    return
       p->score - p->getCost(def) >= 0 &&
-      (def->shopCanBuy ? def->shopCanBuy(p, def, obj) : true);
+      (def->ShopCanBuy ? def->ShopCanBuy(p, def, obj) : true);
 }
 
-bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
+bool Lith_ShopBuy(struct player *p, struct shopdef const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
 {
    if(!p->canBuy(def, obj))
       return false;
@@ -48,7 +48,7 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const 
 
       if((x || y || z) && ACS_Spawn(so_BoughtItem, x, y, z, tid = ACS_UniqueTID()))
       {
-         if(def->shopGive(p, def, obj, tid))
+         if(def->ShopGive(p, def, obj, tid))
             p->logH(1, "\CjItem delivered."); // TODO
          else
             ACS_Thing_Remove(tid);
@@ -59,7 +59,7 @@ bool Lith_ShopBuy(struct player *p, shopdef_t const *def, void *obj, char const 
          p->logH(1, "\CgCouldn't deliver item\C-, placing directly in inventory."); // TODO
    }
 
-   if(!delivered) def->shopBuy(p, def, obj);
+   if(!delivered) def->ShopBuy(p, def, obj);
 
    return true;
 }

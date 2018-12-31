@@ -11,20 +11,19 @@
 
 // Type Definitions ----------------------------------------------------------|
 
-typedef struct memfile_t
+struct memfile
 {
    byte  *mem;
    size_t len;
    size_t pos;
-} memfile_t;
+};
 
-typedef struct netfile_s
+struct netfile
 {
-   anonymous
-   memfile_t memfile;
-   str     pcvar;
-   i32       pnum;
-} netfile_t;
+   anonymous struct memfile memfile;
+   str pcvar;
+   i32 pnum;
+};
 
 // Static Functions ----------------------------------------------------------|
 
@@ -32,7 +31,7 @@ typedef struct netfile_s
 // Output to the CVar with a Base64 representation of the output buffer.
 static i32 NetClose(void *nfdata)
 {
-   netfile_t *nf = nfdata;
+   struct netfile *nf = nfdata;
 
    // If debugging, print out information about the buffer being written.
    if(world.dbgSave)
@@ -78,7 +77,7 @@ static i32 NetClose(void *nfdata)
 
 static ssize_t MemRead(void *memdata, char *buf, size_t size)
 {
-   memfile_t *mem   = memdata;
+   struct memfile *mem   = memdata;
    size_t     avail = mem->len - mem->pos;
 
    if(size > avail)
@@ -91,7 +90,7 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
 
 static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
 {
-   memfile_t *mem = memdata;
+   struct memfile *mem = memdata;
    size_t avail = mem->len - mem->pos;
 
    if(size >= avail)
@@ -113,7 +112,7 @@ static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
 
 static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
 {
-   memfile_t *mem = memdata;
+   struct memfile *mem = memdata;
    size_t     pos;
 
    switch(whence) {
@@ -132,7 +131,7 @@ static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
 
 static i32 MemClose(void *memdata)
 {
-   memfile_t *mem = memdata;
+   struct memfile *mem = memdata;
    Dalloc(mem->mem);
    Dalloc(mem);
 
@@ -158,7 +157,7 @@ FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
 
    if(rw == 'w')
    {
-      netfile_t *nf = Salloc(netfile_t);
+      struct netfile *nf = Salloc(struct netfile);
 
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
@@ -208,7 +207,7 @@ FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
 
          if(data)
          {
-            memfile_t *mem = Salloc(memfile_t);
+            struct memfile *mem = Salloc(struct memfile);
 
             mem->mem = data;
             mem->len = size;

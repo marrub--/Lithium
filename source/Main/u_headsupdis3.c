@@ -6,7 +6,7 @@
 
 static void HUD_Ammo(struct player *p)
 {
-   invweapon_t const *wep = p->weapon.cur;
+   struct invweapon const *wep = p->weapon.cur;
 
    i32 type = 0;
 
@@ -82,19 +82,19 @@ static void HUD_Health(struct player *p)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_HeadsUpDis3_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Activate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = true;
 }
 
 stkcall
-void Upgr_HeadsUpDis3_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = false;
 }
 
 stkcall
-void Upgr_HeadsUpDis3_Render(struct player *p, upgrade_t *upgr)
+void Upgr_HeadsUpDis3_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->indialogue) return;
 

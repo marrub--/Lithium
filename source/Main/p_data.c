@@ -333,7 +333,7 @@ void Lith_ResetPlayer(struct player *p)
    if(world.dbgItems)
    {
       for(i32 i = weapon_min; i < weapon_max; i++) {
-         weaponinfo_t const *info = &weaponinfo[i];
+         struct weaponinfo const *info = &weaponinfo[i];
          if(info->classname != nil && info->pclass & p->pclass && !(info->flags & wf_magic))
             InvGive(info->classname, 1);
       }

@@ -15,7 +15,7 @@ StrEntON
 #define P(a) "weapons/" a "/pickup"
 #define N(a) .classname = OBJ a, .name = a
 #define F(...) .flags = __VA_ARGS__
-weaponinfo_t const weaponinfo[weapon_max] = {
+struct weaponinfo const weaponinfo[weapon_max] = {
    {0, pcl_any, nil, "MMMMHMHMMMHMMM"},
    {1,pcl_outcasts,N("ChargeFist"),P("cfist"),AT_None},
    {5,pcl_outcasts,N("MissileLauncher"),P("missile"),AT_AMag,A("Rocket")},

@@ -25,7 +25,7 @@ void Lith_HomingMissile()
 }
 
 script
-void Upgr_HomingRPG_Update(struct player *p, upgrade_t *upgr)
+void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
 {
    if(p->weapontype == weapon_launcher)
    {

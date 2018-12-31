@@ -23,7 +23,7 @@ static void GiveWeaponItem(i32 parm, i32 slot)
    }
 }
 
-static void WeaponGrab(struct player *p, weaponinfo_t const *info)
+static void WeaponGrab(struct player *p, struct weaponinfo const *info)
 {
    if(!p->getUpgrActive(UPGR_7777777)) ACS_LocalAmbientSound(info->pickupsound,  127);
    else                                ACS_LocalAmbientSound(ss_marathon_pickup, 127);
@@ -40,9 +40,9 @@ static void WeaponGrab(struct player *p, weaponinfo_t const *info)
 
 static void Lith_PickupScore(struct player *p, i32 parm)
 {
-   extern void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score);
+   extern void Lith_SellMessage(struct player *p, struct weaponinfo const *info, i96 score);
 
-   weaponinfo_t const *info = &weaponinfo[parm];
+   struct weaponinfo const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
 
@@ -63,7 +63,7 @@ i32 Lith_PlayerCurWeaponType(struct player *p)
 script ext("ACS")
 bool Lith_WeaponPickup(i32 name)
 {
-   extern void Lith_PickupMessage(struct player *p, weaponinfo_t const *info);
+   extern void Lith_PickupMessage(struct player *p, struct weaponinfo const *info);
    extern i32 Lith_WeaponFromName(struct player *p, i32 name);
 
    struct player *p = LocalPlayer;
@@ -77,7 +77,7 @@ bool Lith_WeaponPickup(i32 name)
    if(parm >= weapon_max || parm < weapon_min)
       return true;
 
-   weaponinfo_t const *info = &weaponinfo[parm];
+   struct weaponinfo const *info = &weaponinfo[parm];
 
    if(HasWeapon(p, parm))
    {
@@ -137,7 +137,7 @@ void Lith_GSInit_Weapon(void)
 {
    for(i32 i = 0; i < weapon_max; i++)
    {
-      weaponinfo_t *info = (weaponinfo_t *)&weaponinfo[i];
+      struct weaponinfo *info = (struct weaponinfo *)&weaponinfo[i];
       info->type = i;
    }
 }
@@ -146,7 +146,7 @@ void Lith_GSInit_Weapon(void)
 script
 void Lith_PlayerPreWeapons(struct player *p)
 {
-   weapondata_t *w = &p->weapon;
+   struct weapondata *w = &p->weapon;
 
    w->prev = w->cur;
 
@@ -157,8 +157,8 @@ void Lith_PlayerPreWeapons(struct player *p)
    // Iterate over each weapon setting information on it.
    for(i32 i = weapon_min; i < weapon_max; i++)
    {
-      weaponinfo_t const *info = &weaponinfo[i];
-      invweapon_t *wep = &w->inv[i];
+      struct weaponinfo const *info = &weaponinfo[i];
+      struct invweapon *wep = &w->inv[i];
 
       if(!(p->pclass & info->pclass) || !(wep->owned = InvNum(info->classname)))
          continue;
@@ -270,7 +270,7 @@ k32 Lith_AmmoRunOut(bool ro, k32 mul)
 {
    withplayer(LocalPlayer)
    {
-      invweapon_t const *wep = p->weapon.cur;
+      struct invweapon const *wep = p->weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
 
       mul = mul ? mul : 1.2;

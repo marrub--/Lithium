@@ -51,11 +51,6 @@ enum
    UR_RA  = 1 << 4,
 };
 
-typedef bool (*upgr_reinit_cb_t)(struct upgradeinfo *ui);
-
-stkcall typedef void (*upgr_fn_cb_t)(struct player *, struct upgrade *);
-script  typedef void (*upgr_sc_cb_t)(struct player *, struct upgrade *);
-
 struct upgr_data_Adrenaline {
    i32  charge;
    bool readied;
@@ -133,8 +128,8 @@ struct upgr_data {
    struct upgr_data_HeadsUpDisp u13;
 };
 
-typedef struct upgradeinfo {
-   anonymous shopdef_t shopdef;
+struct upgradeinfo {
+   anonymous struct shopdef shopdef;
 
    i32 pclass;
    i32 category;
@@ -145,19 +140,19 @@ typedef struct upgradeinfo {
 
    i32 key, id;
 
-   upgr_fn_cb_t Activate;
-   upgr_fn_cb_t Deactivate;
-   upgr_sc_cb_t Update;
-   upgr_fn_cb_t Enter;
-   upgr_fn_cb_t Render;
-   upgr_fn_cb_t Init;
-} upgradeinfo_t;
+   stkcall void (*Activate)(struct player *, struct upgrade *);
+   stkcall void (*Deactivate)(struct player *, struct upgrade *);
+   script  void (*Update)(struct player *, struct upgrade *);
+   stkcall void (*Enter)(struct player *, struct upgrade *);
+   stkcall void (*Render)(struct player *, struct upgrade *);
+   stkcall void (*Init)(struct player *, struct upgrade *);
+};
 
 bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr);
 bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr);
 void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr);
 
-typedef struct upgrade {
+struct upgrade {
    __prop canUse   {call: Lith_UpgrCanActivate(__arg, this)}
    __prop toggle   {call: Lith_UpgrToggle(__arg, this)}
    __prop setOwned {call: Lith_UpgrSetOwned(__arg, this)}
@@ -166,13 +161,13 @@ typedef struct upgrade {
 
    struct upgrade *next, **prev;
 
-   upgradeinfo_t const *info;
+   struct upgradeinfo const *info;
 
    bool active;
    bool owned;
    bool wasactive; // for reinitializing on map load
-} upgrade_t;
+};
 
-void Lith_LoadUpgrInfoBalance(upgradeinfo_t *uinfo, i32 max, char const *fname);
+void Lith_LoadUpgrInfoBalance(struct upgradeinfo *uinfo, i32 max, char const *fname);
 
 #endif

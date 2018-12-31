@@ -4,21 +4,21 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Upgr_CyberLegs_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Activate(struct player *p, struct upgrade *upgr)
 {
    p->speedmul += 0.2;
    p->jumpboost += 0.5;
 }
 
 stkcall
-void Upgr_CyberLegs_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->speedmul -= 0.2;
    p->jumpboost -= 0.5;
 }
 
 script
-void Upgr_CyberLegs_Update(struct player *p, upgrade_t *upgr)
+void Upgr_CyberLegs_Update(struct player *p, struct upgrade *upgr)
 {
    k32 absvel = absk(p->old.velz) * 10.0k;
 

@@ -21,7 +21,7 @@ enum
    wf_magic = 1 << 0
 };
 
-typedef struct weaponinfo_s
+struct weaponinfo
 {
    i32 slot;
    i32 pclass;
@@ -32,11 +32,11 @@ typedef struct weaponinfo_s
    str classname;
    i32 type;
    i32 flags;
-} weaponinfo_t;
+};
 
-typedef struct invweapon_s
+struct invweapon
 {
-   weaponinfo_t const *info;
+   struct weaponinfo const *info;
    bool owned;
    i32 autoreload;
    i32 ammotype;
@@ -45,16 +45,16 @@ typedef struct invweapon_s
    i32 magcur;
    i32 ammomax;
    i32 ammocur;
-} invweapon_t;
+};
 
-typedef struct weapondata_s
+struct weapondata
 {
    i32 slot[SLOT_MAX];
-   invweapon_t inv[weapon_max];
-   invweapon_t *cur;
-   invweapon_t *prev;
-} weapondata_t;
+   struct invweapon inv[weapon_max];
+   struct invweapon *cur;
+   struct invweapon *prev;
+};
 
-extern weaponinfo_t const weaponinfo[weapon_max];
+extern struct weaponinfo const weaponinfo[weapon_max];
 
 #endif

@@ -26,7 +26,7 @@ void Lith_DodgeView()
 }
 
 stkcall
-void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
 {
    #if LITHIUM
    p->speedmul += 0.3;
@@ -36,7 +36,7 @@ void Upgr_ReflexWetw_Activate(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Deactivate(struct player *p, struct upgrade *upgr)
 {
    #if LITHIUM
    p->speedmul -= 0.3;
@@ -44,7 +44,7 @@ void Upgr_ReflexWetw_Deactivate(struct player *p, upgrade_t *upgr)
 }
 
 script
-void Upgr_ReflexWetw_Update(struct player *p, upgrade_t *upgr)
+void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
 {
    if(UData.charge < CHARGE_MAX)
       UData.charge++;

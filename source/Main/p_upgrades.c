@@ -4,26 +4,26 @@
 
 // Static Objects ------------------------------------------------------------|
 
-static upgradeinfo_t g_upgrinfoex[UPGR_EXTRA_NUM];
+static struct upgradeinfo g_upgrinfoex[UPGR_EXTRA_NUM];
 
-static upgradeinfo_t *g_upgrinfo;
+static struct upgradeinfo *g_upgrinfo;
 static i32 g_upgrmax = UPGR_BASE_MAX;
 
 // Static Functions ----------------------------------------------------------|
 
-static bool Lith_UpgrCanBuy(struct player *p, shopdef_t const *, void *upgr)
+static bool Lith_UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr)
 {
-   return !((upgrade_t *)upgr)->owned;
+   return !((struct upgrade *)upgr)->owned;
 }
 
-static void Lith_UpgrShopBuy(struct player *p, shopdef_t const *, void *upgr)
+static void Lith_UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr)
 {
-   ((upgrade_t *)upgr)->setOwned(p);
+   ((struct upgrade *)upgr)->setOwned(p);
 }
 
-static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, i32 tid)
+static bool Lith_UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid)
 {
-   upgrade_t const *upgr = upgr_;
+   struct upgrade const *upgr = upgr_;
 
    SetMembI(tid, sm_UpgradeId, upgr->info->key);
 
@@ -38,23 +38,23 @@ static bool Lith_UpgrGive(struct player *, shopdef_t const *, void *upgr_, i32 t
 
 static i32 Compg_upgrinfo(void const *lhs, void const *rhs)
 {
-   upgradeinfo_t const *u1 = lhs, *u2 = rhs;
+   struct upgradeinfo const *u1 = lhs, *u2 = rhs;
    i32 c1 = u1->category - u2->category;
    if(c1 != 0) return c1;
    else        return u1->key - u2->key;
 }
 
 stkcall
-static void SetDataPtr(struct player *p, upgrade_t *upgr)
+static void SetDataPtr(struct player *p, struct upgrade *upgr)
 {
    upgr->dataptr = &p->upgrdata;
 }
 
 // Extern Functions ----------------------------------------------------------|
 
-upgradeinfo_t *Lith_UpgradeRegister(upgradeinfo_t const *upgr)
+struct upgradeinfo *Lith_UpgradeRegister(struct upgradeinfo const *upgr)
 {
-   upgradeinfo_t *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
+   struct upgradeinfo *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
    *ui = *upgr;
    return ui;
 }
@@ -63,14 +63,14 @@ void Lith_GSReinit_Upgrade(void)
 {
    for(i32 i = 0; i < g_upgrmax; i++)
    {
-      upgradeinfo_t *ui = &g_upgrinfo[i];
+      struct upgradeinfo *ui = &g_upgrinfo[i];
 
       // Set up static function pointers
       ui->Init = SetDataPtr; // this is set again by UpgrReinit
 
-      ui->shopBuy    = Lith_UpgrShopBuy;
-      ui->shopCanBuy = Lith_UpgrCanBuy;
-      ui->shopGive   = Lith_UpgrGive;
+      ui->ShopBuy    = Lith_UpgrShopBuy;
+      ui->ShopCanBuy = Lith_UpgrCanBuy;
+      ui->ShopGive   = Lith_UpgrGive;
 
       // Set up individual upgrades' function pointers
       switch(ui->key)
@@ -101,7 +101,7 @@ void Lith_GSInit_Upgrade(void)
    Lith_GSReinit_Upgrade();
 }
 
-void Lith_UpgrSetOwned(struct player *p, upgrade_t *upgr)
+void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr)
 {
    if(upgr->owned) return;
 
@@ -126,7 +126,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
    for(i32 i = 0, j = 0; i < g_upgrmax; i++)
       if(CheckPClass())
    {
-      upgrade_t *upgr = &p->upgrades[j];
+      struct upgrade *upgr = &p->upgrades[j];
 
       g_upgrinfo[i].Init(p, upgr);
       upgr->info = &g_upgrinfo[i];
@@ -199,7 +199,7 @@ void Lith_PlayerEnterUpgrades(struct player *p)
          upgr->info->Enter(p, upgr);
 }
 
-bool Lith_UpgrCanActivate(struct player *p, upgrade_t *upgr)
+bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr)
 {
    if(!upgr->active)
    {
@@ -218,7 +218,7 @@ bool Lith_UpgrCanActivate(struct player *p, upgrade_t *upgr)
    return upgr->owned;
 }
 
-bool Lith_UpgrToggle(struct player *p, upgrade_t *upgr)
+bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr)
 {
    if(!upgr->canUse(p)) return false;
 

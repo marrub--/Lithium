@@ -10,7 +10,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
+void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
 {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
@@ -124,7 +124,7 @@ void Upgr_VitalScan_Update(struct player *p, upgrade_t *upgr)
 }
 
 stkcall
-void Upgr_VitalScan_Render(struct player *p, upgrade_t *upgr)
+void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled || !UData.target) return;
 

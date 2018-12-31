@@ -58,7 +58,7 @@ static void Lith_StupidPickup(struct player *p, i32 weapon)
    else                          p->logB(1, fmt, nam);
 }
 
-void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
+void Lith_PickupMessage(struct player *p, struct weaponinfo const *info)
 {
    if(p->getCVarI(sc_player_stupidpickups))
       Lith_StupidPickup(p, info->type);
@@ -68,7 +68,7 @@ void Lith_PickupMessage(struct player *p, weaponinfo_t const *info)
       p->logB(1, "Acquired impossible object");
 }
 
-void Lith_SellMessage(struct player *p, weaponinfo_t const *info, i96 score)
+void Lith_SellMessage(struct player *p, struct weaponinfo const *info, i96 score)
 {
    i32 weapon = info->type;
    bool ord = strtoi(LC(LANG "LOG_SellOrder"), nil, 10) == 0;
