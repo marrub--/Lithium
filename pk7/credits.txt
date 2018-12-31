@@ -1,38 +1,43 @@
 %%%                                                                         %%%
 %%          /7       //777777777777777777777777777  ///                      %%
-%          /:/7     //........................../  /::/ 77    777    777//    %
-%         /://               //77/     ///    /// /:7/77:7   /::/7 //77//     %
-%        /://    /777       //77=======::////::///:7/ /:7   //::::7::::/      %
+%          /:/7     //........................../  /::/ 77    777    777///   %
+%         /://               //77/     ///    /// /:7/77:7   /::/7 //77///    %
+%        /://    /777       //77=======::////::///:7/ /:7   //::::7:::://     %
 %       /://    /::/       //77/====7::::::::://:/7/ /:/   //::/777777//      %
 %      /://    /::/       //77/    /:://   /://:/7/ /:=/  /777/  7 /7//       %
-%     /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /:://       %
-%    /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /:://        %
-%           /::/                        /://  ^^                //7//         %
-%           ^^^                         ^^^                     ^^^^          %
+%     /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /::/        %
+%    /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /::/         %
+%           /::/                        /://  ^^                //7/          %
+%           ^^^                         ^^^                     ^^^           %
 %                                                                             %
 %                            Project Golan, Xevv 2                            %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                             %
-% I have probably miscredited or forgotten to credit some people. ------------%
-% Please tell me if I did and I will correct it. -----------------------------%
+% I have probably miscredited or forgotten to credit some people.             %
+% Please tell me if I did and I will correct it.                              %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 |                                                                             |
 | If you want to use something from this mod, *please* ask me (Marrub) first. |
-| I don't want myself or anyone else who's given me stuff (directly or not) --|
-| to get pissed off because proper attribution or permission wasn't given. ---|
+| I don't want myself or anyone else who's given me stuff (directly or not)   |
+| to get pissed off because proper attribution or permission wasn't given.    |
 |                                                                             |
-| Sound credits are all in the "sndinfo" files as comments. ------------------|
+| Sound credits are all in the "sndinfo" files as comments.                   |
 |                                                                             |
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 *                                                                             *
-* See licenses/copylib.txt for license information on GDCC libc, as included -*
-* in linked binary form in <acs/lithlib.bin>. --------------------------------*
+* See licenses/GDCC-libc.txt for licensing of GDCC libc, as is included in    *
+* linked binary form in <acs/lithlib.bin>.                                    *
 *                                                                             *
-* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>. ---*
+* See licenses/base64.txt for licensing of Base64 Decoding/Encoding, as is    *
+* included in linked binary form in <acs/lithmain.bin>.                       *
 *                                                                             *
-* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>. -*
+* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.    *
+*                                                                             *
+* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>.  *
+*                                                                             *
+* Base64 sources are included within Lithium's sources.                       *
 *                                                                             *
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
