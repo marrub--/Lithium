@@ -475,13 +475,13 @@ override vector2 BobWeapon(double ticfrac)
          {
          case Bob_Smooth:
          case Bob_Normal:
-            bobx *= Cos(ang);
-            boby *= Abs(Sin(ang));
+            bobx *= Cos(ang) + Sin(ang / 5) / 7;
+            boby *= 0.5 * (1 + Sin(ang * 2));
             break;
          case Bob_InverseSmooth:
          case Bob_Inverse:
             bobx *= Cos(ang) + Sin(ang / 5) / 7;
-            boby *= 1 - Abs(Sin(ang));
+            boby *= 0.5 * (1 - Sin(ang * 2));
             break;
          case Bob_Alpha:
             bobx *= Sin(ang);
