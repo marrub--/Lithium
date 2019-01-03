@@ -22,7 +22,7 @@ class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
    {
    Pickup:
       TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiTeleport");
-      TNT1 A 0 {useInventory(giveInventoryType("ArtiTeleport"));}
+      TNT1 A 0 {UseInventory(GiveInventoryType("ArtiTeleport"));}
       stop;
    }
 }
@@ -37,22 +37,22 @@ class Lith_HasBarrier : Powerup
 
    override void Tick()
    {
-      if(!globalfreeze && !level.frozen)
+      if(!GlobalFreeze && !Level.Frozen)
       {
-         owner.giveInventory("Lith_BarrierSpell", 1);
+         Owner.GiveInventory("Lith_BarrierSpell", 1);
          Super.Tick();
       }
    }
 }
 
 class Lith_PowerLightAmp : PowerLightAmp
-   {override void Tick() {if(!globalfreeze && !level.frozen) Super.Tick();}}
+   {override void Tick() {if(!GlobalFreeze && !Level.Frozen) Super.Tick();}}
 
 class Lith_PowerInvulnerable : PowerInvulnerable
-   {override void Tick() {if(!globalfreeze && !level.frozen) Super.Tick();}}
+   {override void Tick() {if(!GlobalFreeze && !Level.Frozen) Super.Tick();}}
 
 class Lith_PowerIronFeet : PowerIronFeet
-   {override void Tick() {if(!globalfreeze && !level.frozen) Super.Tick();}}
+   {override void Tick() {if(!GlobalFreeze && !Level.Frozen) Super.Tick();}}
 
 // this is a rather terrible hack, but there's actually no other way to give
 // the player the special inverted screen color map in the engine...
@@ -99,7 +99,7 @@ class Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
    Pickup:
       TNT1 A 0 Lith_A_Log(msg_both, 6, "Invuln");
       TNT1 A 0 {
-         if(CVar.GetCVar('lith_player_altinvuln', player).getBool())
+         if(CVar.GetCVar('lith_player_altinvuln', Player).GetBool())
             A_GiveInventory("Lith_PowerInvulnerableGiver2");
          else
             A_GiveInventory("Lith_PowerInvulnerableGiver");
@@ -131,10 +131,10 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       Super.PostBeginPlay();
    }
 
-   override bool TryPickup(in out Actor mo)
+   override void Lith_OnPickup(Actor mo)
    {
       mo.ACS_ScriptCall("Lith_Discount");
-      return Super.TryPickup(mo);
+      Super.Lith_OnPickup(mo);
    }
 
    states
@@ -152,26 +152,26 @@ class Lith_Shobon : Actor
       +NOINTERACTION
    }
 
-   vector2 m_dorupos;
+   vector2 m_DoruPos;
 
    override void Tick()
    {
       Super.Tick();
 
-      if(master)
+      if(Master)
       {
-         let v = master.vel;
+         let v = Master.Vel;
 
-         if(!(v.x ~== 0) || !(v.y ~== 0))
+         if(!(v.X ~== 0) || !(v.Y ~== 0))
          {
-            float a  = atan2(v.y, v.x) - 180;
-            float m  = v.xy.length();
-            float x_ = Lith_UTIL.Lerp(m_dorupos.x, cos(a) * 32, m / 32.);
-            float y_ = Lith_UTIL.Lerp(m_dorupos.y, sin(a) * 32, m / 32.);
-            m_dorupos = (x_, y_);
+            float a  = Atan2(v.Y, v.X) - 180;
+            float m  = v.XY.Length();
+            float x_ = Lith_UTIL.Lerp(m_DoruPos.X, Cos(a) * 32, m / 32.);
+            float y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
+            m_DoruPos = (x_, y_);
          }
 
-         SetOrigin(master.pos + m_dorupos, true);
+         SetOrigin(Master.Pos + m_DoruPos, true);
       }
    }
 

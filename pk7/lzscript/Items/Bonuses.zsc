@@ -12,10 +12,10 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       +LITH_BASICPICKUP.VACUUM
    }
 
-   override bool TryPickup(in out Actor mo)
+   override void Lith_OnPickup(Actor mo)
    {
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 1);
-      return Super.TryPickup(mo);
+      Super.Lith_OnPickup(mo);
    }
 
    states

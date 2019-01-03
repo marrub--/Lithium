@@ -34,7 +34,7 @@ class Lith_ItemGlow : Actor
    {
    Spawn:
       #### # 5 bright;
-      #### # 0 bright A_JumpIf(players[consoleplayer].camera.vec2to(self).length() > 600, "Spawn1");
+      #### # 0 bright A_JumpIf(Players[ConsolePlayer].Camera.Vec2To(self).Length() > 600, "Spawn1");
       #### # 1 bright A_FadeOut(1.0 / 35.0);
       wait;
    Spawn1:
@@ -76,25 +76,25 @@ default
 
 private int m_Flags;
 
-private meta string m_sprGf;
-private meta string m_sprMf;
-private meta string m_sprCf;
+private meta string m_SprGf;
+private meta string m_SprMf;
+private meta string m_SprCf;
 
-private int m_gla;
-private int m_glz;
+private int m_GlA;
+private int m_GlZ;
 
-private Actor m_spr;
+private Actor m_Spr;
 
-private Lith_Sprite m_sprG;
-private Lith_Sprite m_sprM;
-private Lith_Sprite m_sprC;
+private Lith_Sprite m_SprG;
+private Lith_Sprite m_SprM;
+private Lith_Sprite m_SprC;
 
-private class<Actor> m_glow;
+private class<Actor> m_Glow;
 
-property Sprite:  m_sprGf;
-property SpriteM: m_sprMf;
-property SpriteC: m_sprCf;
-property Glow:    m_glow;
+property Sprite:  m_SprGf;
+property SpriteM: m_SprMf;
+property SpriteC: m_SprCf;
+property Glow:    m_Glow;
 
 flagdef Generic: m_Flags, 0;
 
@@ -102,64 +102,62 @@ const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
 
 override void PostBeginPlay()
 {
-   if(m_sprGf) m_sprG.get(m_sprGf);
-   if(m_sprMf) m_sprM.get(m_sprMf);
-   if(m_sprCf) m_sprC.get(m_sprCf);
+   if(m_SprGf) m_SprG.Get(m_SprGf);
+   if(m_SprMf) m_SprM.Get(m_SprMf);
+   if(m_SprCf) m_SprC.Get(m_SprCf);
 
-   m_spr = Spawn("Lith_ItemSprite", pos);
-   m_spr.master = self;
+   m_Spr = Spawn("Lith_ItemSprite", Pos);
+   m_Spr.Master = self;
 }
 
 override void Tick()
 {
    Super.Tick();
 
-   if(!m_spr) return;
+   if(!m_Spr) return;
 
    if(bGENERIC)
    {
-      Lith_SetSprite(m_sprG);
+      Lith_SetSprite(m_SprG);
       return;
    }
 
-   if(!players[consoleplayer].camera)
+   if(!Players[ConsolePlayer].Camera)
       return;
 
-   let p = players[consoleplayer].camera;
-        if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_sprM);
-   else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_sprC);
-   else                                 Lith_SetSprite(m_sprG);
+   let p = Players[ConsolePlayer].Camera;
+        if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_SprM);
+   else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_SprC);
+   else                                 Lith_SetSprite(m_SprG);
 }
 
 void Lith_SetSprite(Lith_Sprite s)
 {
-   m_spr.sprite = s.spr;
-   m_spr.frame  = s.frm;
+   m_Spr.Sprite = s.Spr;
+   m_Spr.Frame  = s.Frm;
 }
 
 void Lith_ItemGlow()
 {
-   m_gla = (m_gla + 5) % 360;
-   m_glz = (m_glz + 2) % 360;
+   m_GlA = (m_GlA + 5) % 360;
+   m_GlZ = (m_GlZ + 2) % 360;
 
-   if(!lith_player_noitemfx && players[consoleplayer].camera.checksight(self, SF_IGNOREVISIBILITY|SF_SEEPASTSHOOTABLELINES|SF_SEEPASTBLOCKEVERYTHING))
+   if(!lith_player_noitemfx && Players[ConsolePlayer].Camera.CheckSight(self, SF_IGNOREVISIBILITY|SF_SEEPASTSHOOTABLELINES|SF_SEEPASTBLOCKEVERYTHING))
    {
-      double sa = sin(m_gla);
-      double sz = sin(m_glz);
-      double ca = cos(m_gla);
+      double sa = Sin(m_GlA);
+      double sz = Sin(m_GlZ);
+      double ca = Cos(m_GlA);
 
-      A_SpawnItemEx(m_glow,      sa  * 32,      ca  * 32,      24 + sz *  9);
-      A_SpawnItemEx(m_glow,             0,      sa  * 32,      24 + ca * 32);
-      A_SpawnItemEx(m_glow,      ca  * 32,      sa  * 32,      24 + sa * 32);
-      A_SpawnItemEx(m_glow,      ca  * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
-      A_SpawnItemEx(m_glow,      sa  * 32,                  0, 24 + ca * 32);
-      A_SpawnItemEx(m_glow,      sa  * 32,      ca  * 32,      24 + sa * 32);
-      A_SpawnItemEx(m_glow, (1 - sa) * 32 - 32, ca  * 32,      24 + sa * 32);
+      A_SpawnItemEx(m_Glow,      sa  * 32,      ca  * 32,      24 + sz *  9);
+      A_SpawnItemEx(m_Glow,             0,      sa  * 32,      24 + ca * 32);
+      A_SpawnItemEx(m_Glow,      ca  * 32,      sa  * 32,      24 + sa * 32);
+      A_SpawnItemEx(m_Glow,      ca  * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
+      A_SpawnItemEx(m_Glow,      sa  * 32,                  0, 24 + ca * 32);
+      A_SpawnItemEx(m_Glow,      sa  * 32,      ca  * 32,      24 + sa * 32);
+      A_SpawnItemEx(m_Glow, (1 - sa) * 32 - 32, ca  * 32,      24 + sa * 32);
    }
 }
 
-states {
-SpawnLoop: TNT1 A 1 {invoker.Lith_ItemGlow();} loop;
-}
+states {SpawnLoop: TNT1 A 1 {invoker.Lith_ItemGlow();} loop;}
 
 // EOF

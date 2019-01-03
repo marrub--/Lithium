@@ -8,13 +8,13 @@ class Lith_AAGH : Inventory
       +INVENTORY.UNDROPPABLE
    }
 
-   Lith_SlottedItem m_slotted[aslot_max];
+   Lith_SlottedItem m_Slotted[aslot_max];
 
    static LDamageType Lith_NameToDT(name type)
    {
       switch(type)
       {
-      case 'None': if(Lith_HERMES.Instance().m_dmgworld) return ldt_hazard;
+      case 'None': if(Lith_HERMES.Instance().m_DmgWorld) return ldt_hazard;
       default:
       case 'Bullet':    return ldt_bullets;
       case 'Plasma':
@@ -32,12 +32,12 @@ class Lith_AAGH : Inventory
 
    bool Lith_AddSlot(Lith_SlottedItem o)
    {
-      let slot = o.m_slot;
+      let slot = o.m_Slot;
 
-      if(!m_slotted[slot])
+      if(!m_Slotted[slot])
       {
          o.Lith_Unlink();
-         m_slotted[slot] = o;
+         m_Slotted[slot] = o;
 
 //       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
 
@@ -49,16 +49,16 @@ class Lith_AAGH : Inventory
 
    void Lith_OmitSlot(int slot)
    {
-      m_slotted[slot] = null;
+      m_Slotted[slot] = null;
    }
 
    bool Lith_RemoveSlot(int slot)
    {
-      if(m_slotted[slot])
+      if(m_Slotted[slot])
       {
-         if(m_slotted[slot].Lith_Attach())
+         if(m_Slotted[slot].Lith_Attach())
          {
-            m_slotted[slot] = null;
+            m_Slotted[slot] = null;
 
 //          Console.printf("%p: removed: %i", self, slot);
          }
@@ -73,8 +73,8 @@ class Lith_AAGH : Inventory
    {
       int save = 0;
       for(int i = 0; i < aslot_max; i++)
-         if(m_slotted[i])
-            save += m_slotted[i].Lith_SaveAmt(type);
+         if(m_Slotted[i])
+            save += m_Slotted[i].Lith_SaveAmt(type);
       return save;
    }
 
@@ -101,23 +101,23 @@ class Lith_Armor : Lith_SlottedItem abstract
       +INVENTORY.ISARMOR
    }
 
-   private int m_save0;
-   private int m_save1;
+   private int m_Save0;
+   private int m_Save1;
 
-   protected int m_cursave;
+   protected int m_CurSave;
 
-   property Save: m_save0, m_save1;
-   property SlotSave: m_slot, m_save0, m_save1;
+   property Save: m_Save0, m_Save1;
+   property SlotSave: m_Slot, m_Save0, m_Save1;
 
-   override int Lith_SaveAmt(name type) {return m_cursave;}
+   override int Lith_SaveAmt(name type) {return m_CurSave;}
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_Armor(Super.CreateCopy(mo));
 
-      copy.m_save0   = m_save0;
-      copy.m_save1   = m_save1;
-      copy.m_cursave = m_cursave;
+      copy.m_Save0   = m_Save0;
+      copy.m_Save1   = m_Save1;
+      copy.m_CurSave = m_CurSave;
 
       return copy;
    }
@@ -125,21 +125,21 @@ class Lith_Armor : Lith_SlottedItem abstract
    override void BeginPlay()
    {
       Super.BeginPlay();
-      m_cursave = m_save0;
+      m_CurSave = m_Save0;
    }
 }
 
 class Lith_Armor_Resistant : Lith_Armor
 {
-   protected int m_resist;
+   protected int m_Resist;
 
-   property Resist: m_resist;
+   property Resist: m_Resist;
 
    override Inventory CreateCopy(Actor mo)
    {
       let copy = Lith_Armor_Resistant(Super.CreateCopy(mo));
 
-      copy.m_resist = m_resist;
+      copy.m_Resist = m_Resist;
 
       return copy;
    }
@@ -147,7 +147,7 @@ class Lith_Armor_Resistant : Lith_Armor
    override int Lith_SaveAmt(name type)
    {
       let dt = Lith_AAGH.Lith_NameToDT(type);
-      return m_resist == dt ? m_cursave * 2 : m_cursave;
+      return m_Resist == dt ? m_CurSave * 2 : m_CurSave;
    }
 }
 

@@ -1,16 +1,16 @@
 class Lith_HealthItem : Lith_BasicPickup
 {
-   private meta int m_amount;
+   private meta int m_Amount;
 
-   property Amount: m_amount;
+   property Amount: m_Amount;
 
    override bool CanPickup(Actor mo)
       {return mo.ACS_ScriptCall("Lith_CheckHealth");}
 
-   override bool TryPickup(in out Actor mo)
+   override void Lith_OnPickup(Actor mo)
    {
-      mo.ACS_ScriptCall("Lith_GiveHealth", m_amount);
-      return Super.TryPickup(mo);
+      mo.ACS_ScriptCall("Lith_GiveHealth", m_Amount);
+      Super.Lith_OnPickup(mo);
    }
 }
 

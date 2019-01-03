@@ -1,10 +1,10 @@
 class Lith_MultiSpawner : Actor
 {
-   private meta int          m_num;
-   private meta class<Actor> m_name;
+   private meta int          m_Num;
+   private meta class<Actor> m_Name;
 
-   property Amount: m_num;
-   property Type:   m_name;
+   property Amount: m_Num;
+   property Type:   m_Name;
 
    default
    {
@@ -13,16 +13,16 @@ class Lith_MultiSpawner : Actor
 
    override void PostBeginPlay()
    {
-      for(int i = 0; i < m_num; i++)
+      for(int i = 0; i < m_Num; i++)
       {
-         let mo = Spawn(m_name, pos, NO_REPLACE);
+         let mo = Spawn(m_Name, Pos, NO_REPLACE);
 
          if(mo)
          {
-            mo.spawnAngle = spawnAngle;
-            mo.spawnPoint = spawnPoint;
-            mo.angle      = angle;
-            mo.vel        = (frandom[L_MS](-2, 2), frandom[L_MS](-2, 2), 0);
+            mo.SpawnAngle = SpawnAngle;
+            mo.SpawnPoint = SpawnPoint;
+            mo.Angle      = Angle;
+            mo.Vel        = (FRandom[L_MS](-2, 2), FRandom[L_MS](-2, 2), 0);
             mo.bDROPPED   = bDROPPED;
 
             if(i == 0) Lith_RandomSpawn.CopyImportantStuff(mo, self);

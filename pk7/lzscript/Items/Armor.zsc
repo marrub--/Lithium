@@ -1,13 +1,13 @@
 class Lith_Armor_HazMat : Lith_Armor
 {
    override int Lith_SaveAmt(name type)
-      {return Lith_HERMES.Instance().m_dmgworld ? 10 : m_cursave;}
+      {return Lith_HERMES.Instance().m_DmgWorld ? 10 : m_CurSave;}
 }
 
 class Lith_Armor_Aerodynamic : Lith_Armor
 {
    override double GetSpeedFactor()
-      {return m_owner ? 1.1 : 1;}
+      {return m_Owner ? 1.1 : 1;}
 }
 
 class Lith_Armor_Standard_Upper : Lith_Armor_Resistant

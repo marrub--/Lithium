@@ -1,8 +1,8 @@
 class Lith_ScoreItem : Lith_BasicPickup
 {
-   private meta int m_score;
+   private meta int m_Score;
 
-   property Score: m_score;
+   property Score: m_Score;
 
    default
    {
@@ -11,11 +11,10 @@ class Lith_ScoreItem : Lith_BasicPickup
 
    virtual bool Lith_CanGiveScore() {return true;}
 
-   override bool TryPickup(in out Actor toucher)
+   override void Lith_OnPickup(Actor mo)
    {
-      if(Lith_CanGiveScore())
-         toucher.ACS_ScriptCall("Lith_GiveScore", m_score);
-      return Super.TryPickup(toucher);
+      if(Lith_CanGiveScore()) mo.ACS_ScriptCall("Lith_GiveScore", m_Score);
+      Super.Lith_OnPickup(mo);
    }
 
    states

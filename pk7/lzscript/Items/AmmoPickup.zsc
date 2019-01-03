@@ -1,27 +1,19 @@
 class Lith_AmmoItem : Lith_ScoreItem abstract
 {
-   private meta int              m_amount, m_amount2;
-   private meta class<Inventory> m_type,   m_type2;
+   private meta class<Inventory> m_Type, m_Type2;
+   private int m_Amount, m_Amount2;
 
-   property Give:  m_type,  m_amount;
-   property Give2: m_type2, m_amount2;
+   property Give:  m_Type,  m_Amount;
+   property Give2: m_Type2, m_Amount2;
 
    override bool Lith_CanGiveScore() {return !lith_sv_noscoreammo;}
 
-   override void PostBeginPlay()
-   {
-                  A_GiveInventory(m_type,  m_amount);
-      if(m_type2) A_GiveInventory(m_type2, m_amount2);
-
-      Super.PostBeginPlay();
-   }
-
    private bool Lith_AmmoNotFull(Actor mo)
    {
-      let i1 = mo.findInventory(m_type);
-      let i2 = mo.findInventory(m_type2);
-      return m_type  && (!i1 || i1.amount < i1.maxamount) ||
-             m_type2 && (!i2 || i2.amount < i2.maxamount);
+      let i1 = mo.FindInventory(m_Type);
+      let i2 = mo.FindInventory(m_Type2);
+      return m_Type  && m_Amount  && (!i1 || i1.Amount < i1.MaxAmount) ||
+             m_Type2 && m_Amount2 && (!i2 || i2.Amount < i2.MaxAmount);
    }
 
    override bool CanPickup(Actor mo)
@@ -30,6 +22,42 @@ class Lith_AmmoItem : Lith_ScoreItem abstract
          return !lith_sv_nofullammo || Lith_AmmoNotFull(mo);
       else
          return false;
+   }
+
+   private void Lith_AbsorbAmmo(Actor mo, class<Inventory> typ, in out int amt)
+   {
+      if(!typ) return;
+
+      let it = mo.FindInventory(typ);
+      if(!it) {it = Inventory(Spawn(typ)); it.Amount = 0; it.CallTryPickup(mo);}
+
+      if((it.Amount + amt - it.MaxAmount) <= 0)
+      {
+         // less than or equals max, absorb the whole item
+         it.Amount += amt;
+         amt        = 0;
+      }
+      else
+      {
+         // more than max, absorb some of the item
+         amt      -= it.MaxAmount - it.Amount;
+         it.Amount = it.MaxAmount;
+      }
+   }
+
+   override bool TryPickup(in out Actor mo)
+   {
+      if(lith_sv_noscoreammo && lith_sv_nofullammo)
+      {
+         Lith_AbsorbAmmo(mo, m_Type,  m_Amount);
+         Lith_AbsorbAmmo(mo, m_Type2, m_Amount2);
+         if(m_Amount == 0 && m_Amount2 == 0)
+            return Super.TryPickup(mo);
+         else
+            return true;
+      }
+      else
+         return Super.TryPickup(mo);
    }
 }
 
@@ -43,7 +71,7 @@ class Lith_Shell : Lith_AmmoItem replaces Shell
       Lith_ScoreItem.Score Score_Shell;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
    }
-   
+
    states
    {
    Spawn:
@@ -62,7 +90,7 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox
       Lith_ScoreItem.Score Score_ShellBox;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
    }
-   
+
    states
    {
    Spawn:
@@ -81,7 +109,7 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo
       Lith_ScoreItem.Score Score_Rocket;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
    }
-   
+
    states
    {
    Spawn:
@@ -100,7 +128,7 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox
       Lith_ScoreItem.Score Score_RocketBox;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
    }
-   
+
    states
    {
    Spawn:
@@ -119,7 +147,7 @@ class Lith_Cell : Lith_AmmoItem replaces Cell
       Lith_ScoreItem.Score Score_Cell;
       Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
    }
-   
+
    states
    {
    Spawn:
@@ -139,7 +167,7 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack
       Lith_AmmoItem.Give  "Lith_PlasmaAmmo", AmmoAmt_CellPack;
       Lith_AmmoItem.Give2 "Lith_CannonAmmo", AmmoAmt_CannonPack;
    }
-   
+
    states
    {
    Spawn:
@@ -149,4 +177,3 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack
 }
 
 // EOF
-
