@@ -119,6 +119,65 @@ class Lith_BulletAfterSmoke : Actor
    }
 }
 
+class Lith_BulletTracer : FastProjectile
+{
+   default
+   {
+      Damage 0;
+      Radius 2;
+      Height 2;
+      Speed 67;
+      RenderStyle "Add";
+
+      +NODAMAGE
+   }
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      int n = randompick(45, -45);
+      A_SetRoll(frandom(n - 2, n + 2));
+   }
+
+   states
+   {
+   Spawn:
+      TRAC A -1 bright;
+      stop;
+   Death:
+      TNT1 A 1;
+      stop;
+   }
+}
+
+class Lith_BulletRicochetSpark : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+
+      +NOINTERACTION
+   }
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      A_SetRoll(frandom(0, 359));
+      A_SetScale(frandom(0.5, 1.0));
+      A_SetPitch(frandom(-5, 5));
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      SPRK ABCD 0 A_Jump(51, "Spawn1");
+   Spawn1:
+      #### # random(1, 2) bright;
+      stop;
+   }
+}
+
 class Lith_BulletPuff : Actor replaces BulletPuff;
 
 default
@@ -172,27 +231,34 @@ states
 {
 Spawn:
    XPUF Q 0;
+   XPUF Q 0 A_SpawnItemEx("Lith_BulletRicochetSpark");
    XPUF Q 0 A_SpawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random(-10, 10));
    XPUF Q 0 A_Jump(256, "PuffNormal", "PuffMirrored");
 PuffNormal:
    XPUF Q 0 A_Jump(32, "PuffNormalAlt");
-   XPUF QRSTU 1 bright;
+   XPUF QR 1 bright light("Lith_BulletPuff1");
+   XPUF STU 1 bright light("Lith_BulletPuff2");
 PuffNormalEnd:
-   XPUF FGH 1 bright;
+   XPUF FG 1 bright light("Lith_BulletPuff3");
+   XPUF H 1 bright;
    stop;
 PuffNormalAlt:
-   XPUF A 0 A_PlaySound("effects/puff/ricochet");
-   XPUF ABCDE 1 bright;
+   XPUF A 0 A_PlaySound("effects/puff/ricochet", volume: lith_weapons_ricochetvol);
+   XPUF AB 1 bright;
+   XPUF CDE 1 bright light("Lith_BulletPuff2");
    goto PuffNormalEnd;
 PuffMirrored:
    XPUF V 0 A_Jump(32, "PuffMirroredAlt");
-   XPUF VWXYZ 1 bright;
+   XPUF VW 1 bright light("Lith_BulletPuff1");
+   XPUF XYZ 1 bright light("Lith_BulletPuff2");
 PuffMirroredEnd:
-   XPUF NOP 1 bright;
+   XPUF NO 1 bright light("Lith_BulletPuff3");
+   XPUF P 1 bright;
    stop;
 PuffMirroredAlt:
-   XPUF I 0 A_PlaySound("effects/puff/ricochet");
-   XPUF IJKLM 1 bright;
+   XPUF I 0 A_PlaySound("effects/puff/ricochet", volume: lith_weapons_ricochetvol);
+   XPUF IJ 1 bright;
+   XPUF KLM 1 bright light("Lith_BulletPuff2");
    goto PuffMirroredEnd;
 }
 

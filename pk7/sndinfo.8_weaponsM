@@ -104,7 +104,7 @@ weapons/rifle/fire3      lsounds/WeaponsM/CombatRifle/Fire3       // 〃
 weapons/rifle/firesnipe1 lsounds/WeaponsM/CombatRifle/FireSnipe1  // 〃
 weapons/rifle/firesnipe2 lsounds/WeaponsM/CombatRifle/FireSnipe2  // 〃
 weapons/rifle/firesnipe3 lsounds/WeaponsM/CombatRifle/FireSnipe3  // 〃
-weapons/rifle/firero     lsounds/WeaponsM/CombatRifle/FireRunOut  // Counter-Strike: Source
+weapons/rifle/firero     lsounds/Weapons/RunOut                   // Counter-Strike: Source
 weapons/rifle/rldmount   lsounds/WeaponsM/CombatRifle/ReloadMount // Fallout 4, Halo 3, Serious Sam: The First Encounter HD
 weapons/rifle/pickup     lsounds/WeaponsM/CombatRifle/Pickup      // Halo 3
 weapons/rifle/draw       lsounds/WeaponsM/CombatRifle/Draw        // 〃

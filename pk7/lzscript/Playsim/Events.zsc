@@ -2,11 +2,11 @@
 
 class Lith_Events : EventHandler;
 
-bool m_bosslevel;
+bool m_BossLevel;
 
 override void WorldLoaded(WorldEvent ev)
 {
-   static const string[] bosslevels = {
+   static const string BOSSLEVELS[] = {
       "058fb092ea1b70da1e3cbf501c4a91a1", // E1M8
       "effe91df41ad41f6973c06f0ad67ddb9", // E2M8
       "ef128313112110ed6c1549af96af26c9", // E3M8
@@ -14,20 +14,21 @@ override void WorldLoaded(WorldEvent ev)
       "5eecd88f4491f516d590ce4bbf45f532"  // MAP30
    };
 
-   if(ev.isSaveGame)
+   if(ev.IsSaveGame)
       return;
 
-   if(ev.isReopen)
+   if(ev.IsReopen)
       CallACS("Lith_WorldReopen");
    else
    {
       CallACS("__lithlib.bin_init");
       CallACS("__lithmain.bin_init");
 
-      let sum = level.getChecksum();
-      for(int i = 0; i < bosslevels.size(); i++) if(sum == bosslevels[i])
+      let sum = Level.GetChecksum();
+      for(int i = 0; i < BOSSLEVELS.Size(); i++)
+         if(sum == BOSSLEVELS[i])
       {
-         m_bosslevel = true;
+         m_BossLevel = true;
          break;
       }
    }
@@ -35,15 +36,15 @@ override void WorldLoaded(WorldEvent ev)
 
 override void WorldThingDestroyed(WorldEvent ev)
 {
-   if(ev.thing is "Lith_InventoryItem")
-      Lith_InventoryItem(ev.thing).Lith_Destroy();
+   if(ev.Thing is "Lith_InventoryItem")
+      Lith_InventoryItem(ev.Thing).Lith_Destroy();
 }
 
 override void WorldUnloaded(WorldEvent ev)
 {
    let it = ThinkerIterator.Create("Lith_InventoryItem");
-   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());)
-      if(!mo.owner) mo.Lith_Destroy();
+   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());)
+      if(!mo.Owner) mo.Lith_Destroy();
 }
 
 override void UiTick()
@@ -51,13 +52,13 @@ override void UiTick()
    // because we override finales in the MAPINFO, this should only trigger
    // at the very end of the game. hopefully.
    // EDIT: it didn't, so I had to add more hacks
-   if(gamestate == GS_FINALE && (!level.nextmap || level.nextmap.left(6) == "enDSeQ"))
+   if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
 
    if(m_eseq == ESEQ_HALT && __lith_end != "")
    {
       LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end));
-      CVar.FindCVar('__lith_end').setString("");
+      CVar.FindCVar('__lith_end').SetString("");
    }
    else if(m_eseq >= ESEQ_RUN)
       RunEndSequence();
@@ -68,24 +69,24 @@ override void RenderOverlay(RenderEvent ev)
 
 override void PlayerEntered(PlayerEvent ev)
 {
-   PlayerInfo p = players[ev.playerNumber];
+   PlayerInfo p = Players[ev.PlayerNumber];
 
    // in case the player isn't derived from Lith_Player
-   if(p && p.mo && !p.mo.findInventory("Lith_AAGH"))
+   if(p && p.MO && !p.MO.FindInventory("Lith_AAGH"))
    {
-      p.mo.giveInventoryType("Lith_AAGH");
-      p.mo.giveInventoryType("Lith_IDOL");
+      p.MO.GiveInventoryType("Lith_AAGH");
+      p.MO.GiveInventoryType("Lith_IDOL");
    }
 }
 
 override void WorldThingSpawned(WorldEvent ev)
 {
-   let th = ev.thing;
+   let th = ev.Thing;
 
    if(th is "CommanderKeen")
    {
       th.bNOBLOOD = true;
-      th.setTag("Commander Keen");
+      th.SetTag("Commander Keen");
       return;
    }
 
@@ -96,109 +97,111 @@ override void WorldThingSpawned(WorldEvent ev)
       if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
-      if(m_bosslevel && th.bBOSS)
+      if(m_BossLevel && th.bBOSS)
       {
-         th.health *= frandom(2, 3);
-         th.reactiontime = 0;
-         th.damageMultiply *= frandom(1.1, 1.6);
-         th.damageFactor   *= frandom(0.3, 0.5);
+         th.Health *= FRandom(2, 3);
+         th.ReactionTime = 0;
+         th.DamageMultiply *= FRandom(1.1, 1.6);
+         th.DamageFactor   *= FRandom(0.3, 0.5);
       }
    }
 }
 
 override void WorldTick()
 {
-   if(m_bosslevel) for(int i = 0, m = level.lines.size(); i < m; i++) for(int j = 0; j < 3; j++)
-      level.lines[i].sidedef[0].setTextureYoffset(j, sin(level.totaltime)*4);
+   if(m_BossLevel)
+      for(int i = 0, m = Level.Lines.Size(); i < m; i++)
+         for(int j = 0; j < 3; j++)
+            Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);
 }
 
 override void WorldThingDamaged(WorldEvent ev)
 {
-   let src = ev.damagesource;
-   let dst = ev.thing;
+   let src = ev.DamageSource;
+   let dst = ev.Thing;
 
    if(!dst) return;
 
-   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD)
+   if(ev.DamageType == 'Bullet' && ev.Damage >= 8 && !dst.bNOBLOOD)
    {
-      let mo = Actor.Spawn("Lith_Dummy", dst.pos + (0, 0, dst.height / 2));
-      float vol = clamp(ev.damage / 14.0, 0, 1);
-      mo.A_PlaySound("body/bullethit", CHAN_BODY, vol * frandom(0.5, 1.1));
+      let mo = Actor.Spawn("Lith_Dummy", dst.Pos + (0, 0, dst.Height / 2));
+      float vol = Clamp(ev.damage / 10.0, 0, 1);
+      mo.A_PlaySound("body/bullethit", CHAN_BODY, vol * FRandom(0.5, 1.1));
    }
 
    if(!src) return;
 
-   if(src != dst && src.countInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.player))
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.damage * 3.77);
+   if(src != dst && src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.Damage * 3.77);
 }
 
 override void CheckReplacement(ReplaceEvent ev)
 {
-   bool isfinal = ev.isFinal;
-   ev.isFinal = false;
-   switch(ev.replacee.getClassName()) {
+   bool isfinal = ev.IsFinal;
+   ev.IsFinal = false;
+   switch(ev.Replacee.GetClassName()) {
    case 'MiniZorchRecharge':
    case 'BlasterAmmo':
    case 'GoldWandAmmo':
-   case 'MaceAmmo':            ev.replacement = "Clip";                  break;
+   case 'MaceAmmo':            ev.Replacement = "Clip";                  break;
    case 'MiniZorchPack':
    case 'BlasterHefty':
    case 'GoldWandHefty':
-   case 'MaceHefty':           ev.replacement = "ClipBox";               break;
+   case 'MaceHefty':           ev.Replacement = "ClipBox";               break;
    case 'LargeZorchRecharge':
-   case 'CrossbowAmmo':        ev.replacement = "Shell";                 break;
+   case 'CrossbowAmmo':        ev.Replacement = "Shell";                 break;
    case 'LargeZorchPack':
-   case 'CrossbowHefty':       ev.replacement = "ShellBox";              break;
+   case 'CrossbowHefty':       ev.Replacement = "ShellBox";              break;
    case 'PropulsorZorch':
-   case 'PhoenixRodAmmo':      ev.replacement = "RocketAmmo";            break;
+   case 'PhoenixRodAmmo':      ev.Replacement = "RocketAmmo";            break;
    case 'PropulsorZorchPack':
    case 'ArtiTimeBomb':
-   case 'PhoenixRodHefty':     ev.replacement = "RocketBox";             break;
+   case 'PhoenixRodHefty':     ev.Replacement = "RocketBox";             break;
    case 'PhasingZorch':
-   case 'SkullRodAmmo':        ev.replacement = "Cell";                  break;
+   case 'SkullRodAmmo':        ev.Replacement = "Cell";                  break;
    case 'PhasingZorchPack':
    case 'ArtiEgg':
-   case 'SkullRodHefty':       ev.replacement = "CellPack";              break;
+   case 'SkullRodHefty':       ev.Replacement = "CellPack";              break;
    case 'Bootspoon':
-   case 'Staff':               ev.replacement = "Fist";                  break;
+   case 'Staff':               ev.Replacement = "Fist";                  break;
    case 'SuperBootspork':
-   case 'Gauntlets':           ev.replacement = "Chainsaw";              break;
+   case 'Gauntlets':           ev.Replacement = "Chainsaw";              break;
    case 'MiniZorcher':
-   case 'GoldWand':            ev.replacement = "Pistol";                break;
+   case 'GoldWand':            ev.Replacement = "Pistol";                break;
    case 'LargeZorcher':
-   case 'Crossbow':            ev.replacement = "Shotgun";               break;
-   case 'SuperLargeZorcher':   ev.replacement = "SuperShotgun";          break;
+   case 'Crossbow':            ev.Replacement = "Shotgun";               break;
+   case 'SuperLargeZorcher':   ev.Replacement = "SuperShotgun";          break;
    case 'RapidZorcher':
-   case 'Blaster':             ev.replacement = "Chaingun";              break;
+   case 'Blaster':             ev.Replacement = "Chaingun";              break;
    case 'ZorchPropulsor':
-   case 'PhoenixRod':          ev.replacement = "RocketLauncher";        break;
+   case 'PhoenixRod':          ev.Replacement = "RocketLauncher";        break;
    case 'PhasingZorcher':
-   case 'Mace':                ev.replacement = "PlasmaRifle";           break;
+   case 'Mace':                ev.Replacement = "PlasmaRifle";           break;
    case 'LAZDevice':
-   case 'SkullRod':            ev.replacement = "BFG9000";               break;
+   case 'SkullRod':            ev.Replacement = "BFG9000";               break;
    case 'BowlOfVegetables':
-   case 'ArtiHealth':          ev.replacement = "Medikit";               break;
-   case 'ArtiInvisibility':    ev.replacement = "BlurSphere";            break;
-   case 'ArtiInvulnerability': ev.replacement = "InvulnerabilitySphere"; break;
+   case 'ArtiHealth':          ev.Replacement = "Medikit";               break;
+   case 'ArtiInvisibility':    ev.Replacement = "BlurSphere";            break;
+   case 'ArtiInvulnerability': ev.Replacement = "InvulnerabilitySphere"; break;
    case 'SuperchargeBreakfast':
-   case 'ArtiSuperHealth':     ev.replacement = "SoulSphere";            break;
-   case 'ArtiTomeOfPower':     ev.replacement = "Berserk";               break;
+   case 'ArtiSuperHealth':     ev.Replacement = "SoulSphere";            break;
+   case 'ArtiTomeOfPower':     ev.Replacement = "Berserk";               break;
    case 'UltraGoggles':
-   case 'ArtiTorch':           ev.replacement = "Infrared";              break;
+   case 'ArtiTorch':           ev.Replacement = "Infrared";              break;
    case 'Zorchpack':
-   case 'BagOfHolding':        ev.replacement = "Backpack";              break;
+   case 'BagOfHolding':        ev.Replacement = "Backpack";              break;
    case 'BowlOfFruit':
-   case 'CrystalVial':         ev.replacement = "StimPack";              break;
+   case 'CrystalVial':         ev.Replacement = "StimPack";              break;
    case 'SuperChexArmor':
-   case 'EnchantedShield':     ev.replacement = "BlueArmor";             break;
+   case 'EnchantedShield':     ev.Replacement = "BlueArmor";             break;
    case 'ChexArmor':
-   case 'SilverShield':        ev.replacement = "GreenArmor";            break;
+   case 'SilverShield':        ev.Replacement = "GreenArmor";            break;
    case 'ComputerAreaMap':
-   case 'SuperMap':            ev.replacement = "AllMap";                break;
-   case 'GlassOfWater':        ev.replacement = "HealthBonus";           break;
-   case 'SlimeRepellent':      ev.replacement = "ArmorBonus";            break;
-   case 'SlimeProofSuit':      ev.replacement = "RadSuit";               break;
-   default: ev.isFinal = isfinal; break;
+   case 'SuperMap':            ev.Replacement = "AllMap";                break;
+   case 'GlassOfWater':        ev.Replacement = "HealthBonus";           break;
+   case 'SlimeRepellent':      ev.Replacement = "ArmorBonus";            break;
+   case 'SlimeProofSuit':      ev.Replacement = "RadSuit";               break;
+   default: ev.IsFinal = isfinal; break;
    }
 }
 
@@ -208,22 +211,18 @@ override bool InputProcess(InputEvent ev)
 
    if(!cl) return false;
 
-   if((ev.type == InputEvent.Type_KeyDown ||
-       ev.type == InputEvent.Type_KeyUp) &&
-      (ev.keyScan == InputEvent.Key_LShift ||
-       ev.keyScan == InputEvent.Key_RShift))
+   if((ev.Type    == InputEvent.Type_KeyDown || ev.Type    == InputEvent.Type_KeyUp) &&
+      (ev.KeyScan == InputEvent.Key_LShift   || ev.KeyScan == InputEvent.Key_RShift))
    {
-      cl.m_pdata[consoleplayer].shiftDown =
-         (ev.type == InputEvent.Type_KeyDown);
-
+      cl.m_PData[ConsolePlayer].ShiftDown = (ev.Type == InputEvent.Type_KeyDown);
       return false;
    }
-   else if(Lith_Player(players[consoleplayer].mo).m_grabInput &&
-      ev.type == InputEvent.Type_KeyDown && ev.keyString)
+   else if(Lith_Player(Players[ConsolePlayer].MO).m_GrabInput &&
+      ev.Type == InputEvent.Type_KeyDown && ev.KeyString)
    {
-      int ch = ev.keyChar;
+      int ch = ev.KeyChar;
 
-      if(cl.m_pdata[consoleplayer].shiftDown &&
+      if(cl.m_PData[ConsolePlayer].ShiftDown &&
          (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
       {
          ch -= 32;
@@ -238,8 +237,7 @@ override bool InputProcess(InputEvent ev)
 
 override void NetworkProcess(ConsoleEvent ev)
 {
-   if(ev.name == "Lith_Key")
-      CallACS("Lith_KeyDown", ev.player, ev.args[0]);
+   if(ev.Name == "Lith_Key") CallACS("Lith_KeyDown", ev.Player, ev.Args[0]);
 }
 
 // EOF

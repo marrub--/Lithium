@@ -29,26 +29,18 @@ default
 
 void Lith_A_Dogs()
 {
-   for(let it = BlockThingsIterator.Create(self, 64); it.next();)
+   for(let it = BlockThingsIterator.Create(self, 64); it.Next();)
    {
       let mo = it.thing;
-      if(mo.player && mo.countInv("Lith_Dogs"))
-      {
-         mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32,
-                                                      10,0,9,
-                          frandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
-      }
+      if(mo.player && mo.CountInv("Lith_Dogs"))
+         mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32, 10,0,9, FRandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
    }
 }
 
 void Lith_A_SpawnBlood(class<Actor> cl)
 {
-   for(int i = 0, n = random(1, 2); i < n; i++)
-   {
-      A_SpawnItemEx(cl, frandom(-1,1), frandom(-1,1), frandom(-1,1),
-                        frandom(-2,2), frandom(-2,2), frandom( 1,2),
-                    0, SXF_TRANSFERTRANSLATION, 64);
-   }
+   for(int i = 0, n = Random(1, 2); i < n; i++)
+      A_SpawnItemEx(cl, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), FRandom(-2,2),FRandom(-2,2),FRandom(1,2), 0, SXF_TRANSFERTRANSLATION, 64);
 }
 
 int m_lev;
@@ -75,8 +67,8 @@ Low:
 Crash:
    BLSP A 0 {
       A_Stop();
-      A_SetScale(frandom(0.6, 0.9), scale.y);
-      setXYZ(pos + (frandom(-4,4), frandom(-4,4), 0));
+      A_SetScale(FRandom(0.6, 0.9), Scale.Y);
+      setXYZ(pos + (FRandom(-4,4), FRandom(-4,4), 0));
       switch(m_lev) {
       case 1: alpha = 0.75; return ResolveState("OkHigh");
       case 2: alpha = 0.50; return ResolveState("OkMedium");
@@ -89,7 +81,7 @@ OkHigh:   BLSP A 0; goto Ok;
 OkMedium: BLSP B 0; goto Ok;
 OkLow:    BLSP C 0; goto Ok;
 Ok:
-   BLSP # random(140, 200);
+   BLSP # Random(140, 200);
    BLSP # 0 {
       switch(m_lev) {
       case 1: return ResolveState("DoneHigh");

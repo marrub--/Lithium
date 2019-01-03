@@ -276,9 +276,12 @@ k32 Lith_AmmoRunOut(bool ro, k32 mul)
       mul = mul ? mul : 1.2;
 
       if(ro) inv = inv * mul;
-      else   inv = mul - inv * 0.35;
+      else   inv = mul - inv * 0.4;
 
-      return minmax(inv, 0.0, 1.0);
+           if(inv < 0) inv = 0;
+      else if(inv > 1) inv = 1;
+
+      return inv;
    }
 
    return 0;

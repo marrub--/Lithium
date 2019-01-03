@@ -113,8 +113,6 @@ property ScopeOutSound: m_scopeoutsnd;
 property ScopeInSound:  m_scopeinsnd;
 property ScopeZoom:     m_scopezoom;
 
-const Lith_BOBONLY = WRF_NOSWITCH | WRF_NOFIRE;
-
 // These flags are used for spawning pickup actors.
 // UDMF maps have a surprising amount of control over things, so we have
 // to use a load of flags to make this work properly.
@@ -147,8 +145,17 @@ bool Lith_MagEmpty()
 virtual void Lith_ReloadFinish(bool isauto)
    {m_fired = 0;}
 
-action(Weapon) state Lith_A_JumpIfMagEmpty(statelabel sn = "Reload")
-   {return invoker.Lith_MagEmpty() ? ResolveState(sn) : null;}
+action(Weapon) state Lith_A_JumpIfMagEmpty(bool autoreload = true, statelabel rsn = "Reload", statelabel esn = "FireEmpty")
+{
+   statelabel sn;
+   if(autoreload) {
+      if(CVar.GetCVar('lith_weapons_reloadempty', Player).GetBool()) sn = rsn;
+      else                                                           sn = esn;
+   } else {
+      sn = rsn;
+   }
+   return invoker.Lith_MagEmpty() ? ResolveState(sn) : null;
+}
 
 action(Weapon) state Lith_A_JumpIfMagFull(statelabel sn = "ReadySelector")
    {return invoker.m_fired ? null : ResolveState(sn);}
@@ -174,16 +181,16 @@ action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", in
 }
 
 action(Weapon) void Lith_A_RecoilUp(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', player).getFloat() * amt * FIX);}
+   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt * FIX);}
 
 action(Weapon) void Lith_A_RecoilDn(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', player).getFloat() * (-amt/4) * FIX);}
+   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4) * FIX);}
 
 action(Weapon) void Lith_A_ReloadBobUp(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', player).getFloat() * amt * FIX);}
+   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt * FIX);}
 
 action(Weapon) void Lith_A_ReloadBobDn(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', player).getFloat() * -amt * FIX);}
+   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt * FIX);}
 
 action(Weapon) void Lith_A_ScopeIn()
 {
@@ -237,6 +244,11 @@ action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float 
    px += frandom(-1, 1); py += frandom(-1, 1); pz += frandom(-1, 1);
    vx += frandom(-1, 1); vy += frandom(-1, 1); vz += frandom(-1, 1);
    A_SpawnItemEx(cas, cos(pitch)*px, py, pz-sin(pitch)*px+vh, vx, vy, vz);
+}
+
+action(Weapon) void Lith_FireBullets(float spread_horz, float spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192)
+{
+   A_FireBullets(spread_horz, spread_vert, numbullets, damage, pufftype, flags, range, "Lith_BulletTracer", 7 + frandom(-1, 0), tracer_x + frandom(-0.7, 0.7));
 }
 
 states(Actor)

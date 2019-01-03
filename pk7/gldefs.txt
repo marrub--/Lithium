@@ -32,7 +32,7 @@ pulselight Lith_BigLamp
 {
    color 0.8 0.8 1.0
    size 96
-   secondarySize 99
+   secondarysize 99
    interval 0.4
    offset 0 -30 0
    attenuate 1
@@ -42,7 +42,7 @@ pulselight Lith_SmallLamp
 {
    color 0.8 0.8 1.0
    size 84
-   secondarySize 87
+   secondarysize 87
    interval 0.4
    offset 0 -20 0
    attenuate 1
@@ -52,9 +52,36 @@ pulselight Lith_Lamp
 {
    color 1.0 1.0 0.8
    size 84
-   secondarySize 87
+   secondarysize 87
    interval 1.14
    offset 0 -10 0
+   attenuate 1
+}
+
+flickerlight Lith_BulletPuff1
+{
+   color 0.5 0.49 0.0
+   size 18
+   secondarysize 12
+   chance 0.8
+   attenuate 1
+}
+
+flickerlight Lith_BulletPuff2
+{
+   color 0.5 0.43 0.0
+   size 10
+   secondarysize 6
+   chance 0.8
+   attenuate 1
+}
+
+flickerlight Lith_BulletPuff3
+{
+   color 0.5 0.35 0.0
+   size 6
+   secondarysize 4
+   chance 0.8
    attenuate 1
 }
 
@@ -62,7 +89,7 @@ flickerlight2 Lith_TorchSmallR
 {
    color 1.0 0.5 0.2
    size 72
-   secondarySize 81
+   secondarysize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
@@ -72,7 +99,7 @@ flickerlight2 Lith_TorchSmallG
 {
    color 0.3 1.0 0.3
    size 72
-   secondarySize 81
+   secondarysize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
@@ -82,7 +109,7 @@ flickerlight2 Lith_TorchSmallB
 {
    color 0.3 0.3 1.0
    size 72
-   secondarySize 81
+   secondarysize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
@@ -92,7 +119,7 @@ flickerlight2 Lith_TorchTallR
 {
    color 1.0 0.5 0.2
    size 90
-   secondarySize 99
+   secondarysize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1
@@ -102,7 +129,7 @@ flickerlight2 Lith_TorchTallG
 {
    color 0.3 1.0 0.3
    size 90
-   secondarySize 99
+   secondarysize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1
@@ -112,7 +139,7 @@ flickerlight2 Lith_TorchTallB
 {
    color 0.3 0.3 1.0
    size 90
-   secondarySize 99
+   secondarysize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1

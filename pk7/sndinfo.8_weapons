@@ -144,19 +144,43 @@ $random weapons/sword/hit {
 //
 // Misc.
 //
+weapons/empty lsounds/Weapons/Empty // Half-Life 2 MMod
+
 effects/rocket/fly lsounds/WeaponsM/GrenadeLauncher/RocketFly // Unreal Tournament '99
 
-effects/puff/ricochet1 lsounds/Weapons/Effects/BulletPuff/Puff1 // Devil May Cry 2
-effects/puff/ricochet2 lsounds/Weapons/Effects/BulletPuff/Puff2 // 〃
-effects/puff/ricochet3 lsounds/Weapons/Effects/BulletPuff/Puff3 // 〃
-effects/puff/ricochet4 lsounds/Weapons/Effects/BulletPuff/Puff4 // 〃
+effects/puff/ricochet1  lsounds/Weapons/Effects/Ricochet/Ric1  // Devil May Cry 2
+effects/puff/ricochet2  lsounds/Weapons/Effects/Ricochet/Ric2  // 〃
+effects/puff/ricochet3  lsounds/Weapons/Effects/Ricochet/Ric3  // 〃
+effects/puff/ricochet4  lsounds/Weapons/Effects/Ricochet/Ric4  // 〃
+effects/puff/ricochet5  lsounds/Weapons/Effects/Ricochet/Ric5  // Half-Life 2
+effects/puff/ricochet6  lsounds/Weapons/Effects/Ricochet/Ric6  // 〃
+effects/puff/ricochet7  lsounds/Weapons/Effects/Ricochet/Ric7  // 〃
+effects/puff/ricochet8  lsounds/Weapons/Effects/Ricochet/Ric8  // 〃
+effects/puff/ricochet9  lsounds/Weapons/Effects/Ricochet/Ric9  // 〃
+effects/puff/ricochet10 lsounds/Weapons/Effects/Ricochet/Ric10 // Half-Life 2 MMod
+effects/puff/ricochet11 lsounds/Weapons/Effects/Ricochet/Ric11 // 〃
+effects/puff/ricochet12 lsounds/Weapons/Effects/Ricochet/Ric12 // 〃
+effects/puff/ricochet13 lsounds/Weapons/Effects/Ricochet/Ric13 // 〃
+effects/puff/ricochet14 lsounds/Weapons/Effects/Ricochet/Ric14 // 〃
 
 $random effects/puff/ricochet {
    effects/puff/ricochet1
    effects/puff/ricochet2
    effects/puff/ricochet3
    effects/puff/ricochet4
+   effects/puff/ricochet5
+   effects/puff/ricochet6
+   effects/puff/ricochet7
+   effects/puff/ricochet8
+   effects/puff/ricochet9
+   effects/puff/ricochet10
+   effects/puff/ricochet11
+   effects/puff/ricochet12
+   effects/puff/ricochet13
+   effects/puff/ricochet14
 }
+
+$limit effects/puff/ricochet 0
 
 effects/geexplosion1  lsounds/Weapons/Effects/GEExplosion/expl1  // GoldenEye 007
 effects/geexplosion2  lsounds/Weapons/Effects/GEExplosion/expl2  // 〃

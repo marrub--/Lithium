@@ -2,8 +2,6 @@ class Lith_InformantPlayer : Lith_Player
 {
    default
    {
-      Player.StartItem "Lith_Claymore";
-      Player.StartItem "Lith_Gladius";
       Player.DisplayName "Informant";
       Player.SoundClass "informant";
       Player.Portrait "lgfx/Portraits/Informant.png";
@@ -58,6 +56,6 @@ class Lith_IWeapon : Lith_Weapon
    }
 }
 
-#include "lzscript/3_Informant/Weapons/2_Flintlock.zsc"
+#include "lzscript/3_Informant/2_Flintlock.zsc"
 
 // EOF

@@ -139,8 +139,8 @@ enum ASCII
    Ch_Color = Ch_FS,
 }
 
-const IFIX = 32768;
-const  FIX = 32768.0;
+const IFIX = 65536;
+const  FIX = 65536.0;
 
 const AmmoAmt_Bullet       = 10;
 const AmmoAmt_BulletBox    = 50;

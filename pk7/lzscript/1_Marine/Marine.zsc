@@ -2,14 +2,19 @@ class Lith_MarinePlayer : Lith_Player
 {
    default
    {
-      Player.StartItem "Lith_Pistol";
-      Player.StartItem "Lith_Fist";
       Player.DisplayName "Marine";
       Player.SoundClass "marine";
       Player.Portrait "lgfx/Portraits/Marine.png";
       Player.ViewHeight 48;
       Player.AttackZOffset 15;
       Tag "Marine";
+   }
+
+   override void GiveDefaultInventory()
+   {
+      Super.GiveDefaultInventory();
+      Lith_GiveDefWeapon("Lith_Pistol");
+      Lith_GiveDefItem("Lith_Fist", 1);
    }
 }
 
@@ -30,16 +35,16 @@ class Lith_MWeapon : Lith_OutcastsWeapon
    }
 }
 
-#include "lzscript/1_Marine/Weapons/1_Fist.zsc"
-#include "lzscript/1_Marine/Weapons/2_Pistol.zsc"
-#include "lzscript/1_Marine/Weapons/2_Revolver.zsc"
-#include "lzscript/1_Marine/Weapons/3_Shotgun.zsc"
-#include "lzscript/1_Marine/Weapons/3_LazShotgun.zsc"
-#include "lzscript/1_Marine/Weapons/3_2_SuperShotgun.zsc"
-#include "lzscript/1_Marine/Weapons/4_CombatRifle.zsc"
-#include "lzscript/1_Marine/Weapons/4_SniperRifle.zsc"
-#include "lzscript/1_Marine/Weapons/5_RocketLauncher.zsc"
-#include "lzscript/1_Marine/Weapons/6_PlasmaRifle.zsc"
-#include "lzscript/1_Marine/Weapons/7_OmegaCannon.zsc"
+#include "lzscript/1_Marine/1_Fist.zsc"
+#include "lzscript/1_Marine/2_Pistol.zsc"
+#include "lzscript/1_Marine/2_Revolver.zsc"
+#include "lzscript/1_Marine/3_Shotgun.zsc"
+#include "lzscript/1_Marine/3_LazShotgun.zsc"
+#include "lzscript/1_Marine/3_2_SuperShotgun.zsc"
+#include "lzscript/1_Marine/4_CombatRifle.zsc"
+#include "lzscript/1_Marine/4_SniperRifle.zsc"
+#include "lzscript/1_Marine/5_RocketLauncher.zsc"
+#include "lzscript/1_Marine/6_PlasmaRifle.zsc"
+#include "lzscript/1_Marine/7_OmegaCannon.zsc"
 
 // EOF

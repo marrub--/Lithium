@@ -28,7 +28,9 @@ void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
    i32 const cn = InvNum(so_SubweaponCharge);
    i32 const cm = InvMax(so_SubweaponCharge);
 
-   PrintTextFmt("SHOTS: %i\nCHARGE: %i/%i", sn, cn, cm);
+   i32 const prc = cn == 0 ? 100 : cn / (k32)cm * 100;
+
+   PrintTextFmt("SHOTS: %i\nCHARGE: %-3i%%", sn, prc);
    PrintText(s_chfont, CR_WHITE, 10,1, 120,2);
 }
 

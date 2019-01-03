@@ -53,6 +53,7 @@ weapons/cshotgun/draw   lsounds/WeaponsC/SPAS/Draw      // Dynamic Range
 //
 weapons/smg/fire     lsounds/WeaponsC/SMG/Fire         // FEAR
 weapons/smg/firedone lsounds/WeaponsC/SMG/FireDone     // 〃
+weapons/smg/firehit  lsounds/WeaponsC/SMG/FireHit      // Half-Life 2 MMod
 weapons/smg/eject    lsounds/WeaponsC/SMG/EjectRod     // Killing Floor
 weapons/smg/insert   lsounds/WeaponsC/SMG/InsertRod    // 〃
 weapons/smg/heat     lsounds/WeaponsC/SMG/HeatDisperse // Self-made

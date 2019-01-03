@@ -2,10 +2,6 @@ class Lith_CyberMagePlayer : Lith_Player
 {
    default
    {
-      Player.StartItem "Lith_Mateba";
-      Player.StartItem "Lith_CFist";
-      Player.StartItem "Lith_Delear";
-      Player.StartItem "Lith_Blade";
       Player.DisplayName "Cyber-Mage";
       Player.SoundClass "cybermage";
       Player.Portrait "lgfx/Portraits/CyberMage.png";
@@ -13,6 +9,15 @@ class Lith_CyberMagePlayer : Lith_Player
       Player.AttackZOffset 12;
       Player.JumpZ 9;
       Tag "Cyber-Mage";
+   }
+
+   override void GiveDefaultInventory()
+   {
+      Super.GiveDefaultInventory();
+      Lith_GiveDefWeapon("Lith_Mateba");
+      Lith_GiveDefItem("Lith_CFist", 1);
+      Lith_GiveDefItem("Lith_Delear", 1);
+      Lith_GiveDefItem("Lith_Blade", 1);
    }
 }
 
@@ -33,21 +38,21 @@ class Lith_CWeapon : Lith_OutcastsWeapon
    }
 }
 
-#include "lzscript/2_CyberMage/Weapons/Magic/1_Blade.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/2_Delear.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/3_Feuer.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/4_Rend.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/5_Hulgyon.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/6_StarShot.zsc"
-#include "lzscript/2_CyberMage/Weapons/Magic/7_Cercle.zsc"
+#include "lzscript/2_CyberMage/Magic/1_Blade.zsc"
+#include "lzscript/2_CyberMage/Magic/2_Delear.zsc"
+#include "lzscript/2_CyberMage/Magic/3_Feuer.zsc"
+#include "lzscript/2_CyberMage/Magic/4_Rend.zsc"
+#include "lzscript/2_CyberMage/Magic/5_Hulgyon.zsc"
+#include "lzscript/2_CyberMage/Magic/6_StarShot.zsc"
+#include "lzscript/2_CyberMage/Magic/7_Cercle.zsc"
 
-#include "lzscript/2_CyberMage/Weapons/1_CFist.zsc"
-#include "lzscript/2_CyberMage/Weapons/2_Mateba.zsc"
-#include "lzscript/2_CyberMage/Weapons/3_ShockRifle.zsc"
-#include "lzscript/2_CyberMage/Weapons/3_2_SPAS.zsc"
-#include "lzscript/2_CyberMage/Weapons/4_SMG.zsc"
-#include "lzscript/2_CyberMage/Weapons/5_IonRifle.zsc"
-#include "lzscript/2_CyberMage/Weapons/6_CPlasmaRifle.zsc"
-#include "lzscript/2_CyberMage/Weapons/7_StarDestroyer.zsc"
+#include "lzscript/2_CyberMage/1_CFist.zsc"
+#include "lzscript/2_CyberMage/2_Mateba.zsc"
+#include "lzscript/2_CyberMage/3_ShockRifle.zsc"
+#include "lzscript/2_CyberMage/3_2_SPAS.zsc"
+#include "lzscript/2_CyberMage/4_SMG.zsc"
+#include "lzscript/2_CyberMage/5_IonRifle.zsc"
+#include "lzscript/2_CyberMage/6_CPlasmaRifle.zsc"
+#include "lzscript/2_CyberMage/7_StarDestroyer.zsc"
 
 // EOF

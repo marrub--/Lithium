@@ -1,9 +1,49 @@
 // UTIL: Utilities and Tools Interpserse Languages
 struct Lith_UTIL
 {
+   // fucking degrees system...
+   static double ConstDeg(double x)
+   {
+      x %= 360;
+      if(x < 0) x += 360;
+      return x;
+   }
+
+   static double DiffDeg(double a, double b)
+   {
+      double d = (b - a) % 360;
+      if(d < 0) d += 360;
+      return d;
+   }
+
+   static double SDiffDeg(double a, double b)
+   {
+      double d = b - a;
+      if(d ~== 0) return 0;
+      d %= 360;
+      return 2 * d % 360 - d;
+   }
+
+   static double AngleLerp(double a, double b, double t)
+   {
+      return a + SDiffDeg(a, b) * t;
+   }
+
    static double Lerp(double a, double b, double t)
    {
       return (1 - t) * a + t * b;
+   }
+
+   static vector2 Vec2Lerp(vector2 a, vector2 b, double t)
+   {
+      let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+      return vec;
+   }
+
+   static vector3 Vec3Lerp(vector3 a, vector3 b, double t)
+   {
+      let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+      return vec;
    }
 
    static int Round(double n)

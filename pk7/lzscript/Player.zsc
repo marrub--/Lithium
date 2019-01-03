@@ -34,15 +34,21 @@ bool m_onground;
 
 int m_dmgfac;
 
+double m_VPitch, m_LastVPitch;
+double m_IPitch, m_LastIPitch;
+
+double m_VYaw, m_LastVYaw;
+double m_IYaw, m_LastIYaw;
+
+double m_ZVel, m_LastZVel;
+double m_VZVel, m_LastVZVel;
+
 property ViewBob: m_vbob;
 
 override void BeginPlay()
 {
    Super.BeginPlay();
    viewbob = m_vbob;
-
-   GiveInventoryType("Lith_AAGH");
-   GiveInventoryType("Lith_IDOL");
 }
 
 override void PostBeginPlay()
@@ -50,6 +56,29 @@ override void PostBeginPlay()
    Super.PostBeginPlay();
 
 // m_cs = Lith_Cyberspace.Create();
+}
+
+override void GiveDefaultInventory()
+{
+   GiveInventoryType("Lith_AAGH");
+   GiveInventoryType("Lith_IDOL");
+}
+
+void Lith_GiveDefItem(class<Inventory> type, int amount)
+{
+   let item = Inventory(Spawn(type));
+   item.bIGNORESKILL = true;
+   item.Amount = amount;
+   item.CallTryPickup(self);
+}
+
+void Lith_GiveDefWeapon(class<Weapon> type)
+{
+   let wep = Weapon(Spawn(type));
+   wep.bIGNORESKILL = true;
+   wep.Amount = 1;
+   wep.CallTryPickup(self);
+   Player.ReadyWeapon = Player.PendingWeapon = wep;
 }
 
 override void PlayerThink()
@@ -102,7 +131,8 @@ private void Lith_ItemVacuum()
          it.thing.destroy();
       }
    }
-   else for(let it = BlockThingsIterator.Create(self, 70); it.next();)
+   else
+      for(let it = BlockThingsIterator.Create(self, 70); it.next();)
    {
       let inv = Lith_BasicPickup(it.thing);
 
@@ -273,6 +303,31 @@ void Lith_PostTick()
    if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
       if(playeringame[i] && players[i] != player && players[i].mo)
          Lith_PlayerIndicator(players[i]);
+
+   m_LastIPitch = m_IPitch;
+   m_LastVPitch = m_VPitch;
+   m_IPitch = Lith_UTIL.Lerp(m_IPitch, Pitch, 0.377);
+   m_VPitch = Min(m_IPitch - m_LastIPitch, 0.4);
+
+   m_LastIYaw = m_IYaw;
+   m_LastVYaw = m_VYaw;
+   m_IYaw = Lith_UTIL.AngleLerp(m_IYaw, Angle, 0.377);
+   if(m_IYaw - m_LastIYaw ~== 0)
+      m_VYaw = 0;
+   else
+      m_VYaw = m_IYaw - m_LastIYaw;
+
+   if(Vel.Z - m_LastZVel > double.Epsilon)
+   {
+      if(m_LastZVel >= 0) m_ZVel += Vel.Z;
+      else                m_ZVel += 5 - m_LastZVel * 2;
+   }
+
+   m_ZVel = Lith_UTIL.Lerp(m_ZVel, 0, 0.277);
+   m_LastZVel = Vel.Z;
+
+   m_LastVZVel = m_VZVel;
+   m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
 }
 
 override void Tick()
@@ -348,6 +403,112 @@ override void Die(Actor source, Actor inflictor, int dmgflags)
    sv.m_obituary = StringTable.Localize(ob);
 
    CallACS("Lith_Obituary");
+}
+
+override void CheckPitch()
+{
+   if(!Level.IsFreelookAllowed())
+      Pitch = 0;
+   else
+   {
+      int clook = Player.Cmd.Pitch;
+
+      if(clook != 0)
+      {
+         if(clook == int16.min)
+            Player.Centering = true;
+         else if(!Player.Centering)
+            Pitch = Clamp(Pitch - clook * (360 / FIX), Player.MinPitch, Player.MaxPitch);
+      }
+   }
+
+   if(Player.Centering)
+   {
+      if(Abs(Pitch) > 2)
+         A_SetPitch(Pitch * (3 / 4.0), SPF_INTERPOLATE);
+      else
+      {
+         Pitch = 0;
+         Player.Centering = false;
+         if(PlayerNumber() == ConsolePlayer)
+            LocalViewPitch = 0;
+      }
+   }
+}
+
+override vector2 BobWeapon(double ticfrac)
+{
+   if(!Player) return (0, 0);
+
+   let wep = Player.ReadyWeapon;
+   if(!wep) return (0, 0);
+
+   vector2 p[2];
+   p[0] = (0, 0);
+   p[1] = (0, 0);
+
+   if(!wep.bDONTBOB) for(int i = 0; i < 2; i++)
+   {
+      double ang = wep.BobSpeed * 128 * Player.GetWBobSpeed() * (Level.Time - 1 + i) * 0.044;
+      double bobtarget = Player.Bob;
+
+      if(CVar.GetCVar('lith_weapons_nofirebob', Player).GetBool() && !(Player.WeaponState & WF_WEAPONBOBBING))
+         bobtarget = 0;
+
+      if(Abs(bobtarget - CurBob) <= 1)
+         CurBob = bobtarget;
+      else
+      {
+         double zoom = Max(1.0, Abs(CurBob - bobtarget) / 40);
+         if(CurBob > bobtarget) CurBob -= zoom;
+         else                   CurBob += zoom;
+      }
+
+      double bobx = 0, boby = 0;
+
+      if(CurBob != 0)
+      {
+         bobx = Player.Bob * wep.BobRangeX * ViewBob;
+         boby = Player.Bob * wep.BobRangeY * ViewBob;
+
+         switch(wep.BobStyle)
+         {
+         case Bob_Smooth:
+         case Bob_Normal:
+            bobx *= Cos(ang);
+            boby *= Abs(Sin(ang));
+            break;
+         case Bob_InverseSmooth:
+         case Bob_Inverse:
+            bobx *= Cos(ang) + Sin(ang / 5) / 7;
+            boby *= 1 - Abs(Sin(ang));
+            break;
+         case Bob_Alpha:
+            bobx *= Sin(ang);
+            boby *= Abs(Sin(ang));
+            break;
+         case Bob_InverseAlpha:
+            bobx *= Sin(ang);
+            boby *= 1 - Abs(Sin(ang));
+            break;
+         }
+      }
+
+      p[i] = (bobx, boby);
+   }
+
+   vector2 interp = p[0] * (1 - ticfrac) + p[1] * ticfrac;
+
+   interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
+   interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
+   interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);
+
+   return interp;
+}
+
+override void CheckAirSupply()
+{
+   // No.
 }
 
 // EOF

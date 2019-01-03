@@ -63,11 +63,11 @@ void Lith_PlayerFootstep(struct player *p)
    if(p->nextstep) {p->nextstep--; return;}
 
    k32 dstmul = absk(p->getVel()) / 24.0;
-   k32 vol = p->getCVarK(sc_player_footstepvol) * min(dstmul, 1);
+   k32 vol    = p->getCVarK(sc_player_footstepvol) * min(dstmul, 1);
 
    str floor = ACS_GetActorFloorTexture(0);
    str snd   = p->stepnoise;
-   i32   next  = 10;
+   i32 next  = 10;
 
    if(vol && p->onground)
    {

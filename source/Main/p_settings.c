@@ -71,10 +71,13 @@ if(p->pclass == pcl_marine) {
    Bool("Magic selection animations", sc_weapons_magicselanims);
 }
 if(p->num == 0) {
+   ServerFloat("Ricochet volume", "x",       sc_weapons_ricochetvol, 0.0, 1.0);
    ServerBool("Emit casings from weapons",   sc_weapons_casings);
    ServerBool("Drop magazines from weapons", sc_weapons_magdrops);
    ServerBool("Casings fade out",            sc_weapons_casingfadeout);
    ServerBool("Magazines fade out",          sc_weapons_magfadeout);
+   ServerBool("Reload empty weapons",        sc_weapons_reloadempty);
+   ServerBool("No mid-fire bobbing",         sc_weapons_nofirebob);
    if(p->pclass == pcl_marine) {
       ServerBool("Rainbow lasers", sc_weapons_rainbowlaser);
    }
