@@ -50,8 +50,8 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
 
       if(m->st != -1 && !world.cbiupgr[m->st]) continue;
 
-      char gfx[18] = ":UI:"; strcat(gfx, m->name);
-      char hot[18] = ":UI:"; strcat(hot, m->name); strcat(hot, "Sel");
+      char gfx[32] = ":UI:"; strcat(gfx, m->name);
+      char hot[32] = ":UI:"; strcat(hot, m->name); strcat(hot, "Sel");
 
       struct gui_pre_btn pre = {
          .gfx      = gfx,
@@ -67,7 +67,7 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
          .h        = 64
       };
 
-      char name[24]; LanguageCV(name, LANG "INFO_SHORT_%s", m->name);
+      char name[128]; LanguageCV(name, LANG "INFO_SHORT_%s", m->name);
 
       if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
