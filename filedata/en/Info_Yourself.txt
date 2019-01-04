@@ -234,5 +234,3 @@ Concentration is your ability to focus energy during bursts of mana absorption
 into your very senses.
 
 Leveling up in concentration will multiply damage dealt when you gain mana.
-
-## EOF

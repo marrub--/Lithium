@@ -1,4 +1,8 @@
-const float FIX = 32768.0;
-const int  IFIX = 32768;
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+const float FIX = 65536.0;
+const int  IFIX = 65536;
 
 // EOF

@@ -34,5 +34,3 @@
 ++ \#MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
 == \#MAIL_NAME_Cluster1Jem | 退避分１０４
 == \#MAIL_SIZE_Cluster1Jem | 29
-
-## EOF

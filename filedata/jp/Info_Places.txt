@@ -47,5 +47,3 @@
 == \#INFO_SHORT_Heaven | 天国
 @@ \#INFO_DESCR_Heaven
 翻訳なし
-
-## EOF

@@ -1,4 +1,6 @@
-// Copyright © 2018 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TS 0.029

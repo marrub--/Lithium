@@ -1,4 +1,7 @@
-// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 // Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
 // Used with permission.
 #include "common.h"

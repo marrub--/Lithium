@@ -1,4 +1,8 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson, Ryan Cordell and Xaser. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 // Taken from Psychic and Enblanco with permission.
+
 class Lith_PuffSmoke : Actor
 {
    default

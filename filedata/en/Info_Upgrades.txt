@@ -171,5 +171,3 @@ captures energy from the dead and dying.
 Using this method, it uses hostility detection to find potential sources of
 mana, and upon that source losing metaphysical structure, siphons all mana
 from it with approximately 73.416% efficiency.
-
-## EOF

@@ -1,3 +1,7 @@
+Distributed under the CC0 public domain license.
+By Alison Sanderson. Attribution is encouraged, though not required.
+See licenses/cc0.txt for more information.
+
 in directory ../pk7
 
 prefix LITH_
@@ -34,8 +38,6 @@ in file language.info.weapons.*.txt
    parse file Info_Weapons_Outcasts.txt
    parse file Info_Weapons_CyberMage.txt
    parse file Info_Weapons_Marine.txt
-
-   comment EOF
 done
 
 in file language.info.omake.*.txt
@@ -53,8 +55,6 @@ done
 in file language.arsenal.*.txt
    parse file Arsenal_Shop.txt
    parse file Arsenal_Upgrades.txt
-
-   comment EOF
 done
 
 
@@ -68,8 +68,6 @@ done
 in file language.log.*.txt
    parse file Log.txt
    parse file Log_Random.txt
-
-   comment EOF
 done
 
 in file language.misc.*.txt
@@ -78,8 +76,6 @@ in file language.misc.*.txt
    parse file Misc_Changes.txt
    parse file Misc_UI.txt
    put file Misc_Opener.txt -> \#OPENER
-
-   comment EOF
 done
 
 EOF

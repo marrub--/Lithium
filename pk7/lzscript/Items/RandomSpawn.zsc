@@ -1,52 +1,55 @@
-class Lith_RandomSpawn : Actor
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_RandomSpawn : Actor;
+
+private meta int m_SpawnNum;
+private class<Actor> m_Type;
+
+property SpawnNum: m_SpawnNum;
+
+static void Set(Actor mo, string tospawn)
+   {Lith_RandomSpawn(mo).m_Type = tospawn;}
+
+static void CopyImportantStuff(Actor lhs, Actor rhs)
 {
-   private meta int m_SpawnNum;
-   private class<Actor> m_Type;
+   lhs.Special  = rhs.Special;
+   lhs.Special1 = rhs.Special1;
+   lhs.Special2 = rhs.Special2;
 
-   property SpawnNum: m_SpawnNum;
+   for(int i = 0; i < 5; i++)
+      lhs.Args[i] = rhs.Args[i];
 
-   static void Set(Actor mo, string tospawn)
-      {Lith_RandomSpawn(mo).m_Type = tospawn;}
+   lhs.ChangeTID(rhs.TID);
 
-   static void CopyImportantStuff(Actor lhs, Actor rhs)
+   lhs.SpawnFlags = rhs.SpawnFlags & ~MTF_SECRET;
+   lhs.HandleSpawnFlags();
+   lhs.SpawnFlags = rhs.SpawnFlags;
+
+   lhs.bCOUNTITEM = rhs.bCOUNTITEM;
+
+   rhs.bCOUNTITEM = false;
+}
+
+override void PostBeginPlay()
+{
+   CallACS("Lith_RandomSpawn", m_SpawnNum);
+
+   let mo = Spawn(m_Type, Pos, NO_REPLACE);
+
+   if(mo)
    {
-      lhs.Special  = rhs.Special;
-      lhs.Special1 = rhs.Special1;
-      lhs.Special2 = rhs.Special2;
+      mo.SpawnAngle = SpawnAngle;
+      mo.SpawnPoint = SpawnPoint;
+      mo.Angle      = Angle;
+      mo.Vel        = Vel;
+      mo.bDROPPED   = bDROPPED;
 
-      for(int i = 0; i < 5; i++)
-         lhs.Args[i] = rhs.Args[i];
-
-      lhs.ChangeTID(rhs.TID);
-
-      lhs.SpawnFlags = rhs.SpawnFlags & ~MTF_SECRET;
-      lhs.HandleSpawnFlags();
-      lhs.SpawnFlags = rhs.SpawnFlags;
-
-      lhs.bCOUNTITEM = rhs.bCOUNTITEM;
-
-      rhs.bCOUNTITEM = false;
+      CopyImportantStuff(mo, self);
    }
 
-   override void PostBeginPlay()
-   {
-      CallACS("Lith_RandomSpawn", m_SpawnNum);
-
-      let mo = Spawn(m_Type, Pos, NO_REPLACE);
-
-      if(mo)
-      {
-         mo.SpawnAngle = SpawnAngle;
-         mo.SpawnPoint = SpawnPoint;
-         mo.Angle      = Angle;
-         mo.Vel        = Vel;
-         mo.bDROPPED   = bDROPPED;
-
-         CopyImportantStuff(mo, self);
-      }
-
-      Destroy();
-   }
+   Destroy();
 }
 
 // EOF

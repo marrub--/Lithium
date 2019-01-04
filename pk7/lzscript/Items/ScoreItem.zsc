@@ -1,28 +1,31 @@
-class Lith_ScoreItem : Lith_BasicPickup
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_ScoreItem : Lith_BasicPickup;
+
+private meta int m_Score;
+
+property Score: m_Score;
+
+default
 {
-   private meta int m_Score;
+   Lith_BasicPickup.LogType msg_huds;
+}
 
-   property Score: m_Score;
+virtual bool Lith_CanGiveScore() {return true;}
 
-   default
-   {
-      Lith_BasicPickup.LogType msg_huds;
-   }
+override void Lith_OnPickup(Actor mo)
+{
+   if(Lith_CanGiveScore()) mo.ACS_ScriptCall("Lith_GiveScore", m_Score);
+   Super.Lith_OnPickup(mo);
+}
 
-   virtual bool Lith_CanGiveScore() {return true;}
-
-   override void Lith_OnPickup(Actor mo)
-   {
-      if(Lith_CanGiveScore()) mo.ACS_ScriptCall("Lith_GiveScore", m_Score);
-      Super.Lith_OnPickup(mo);
-   }
-
-   states
-   {
-   Spawn:
-      ABIP A -1;
-      stop;
-   }
+states
+{
+Spawn:
+   ABIP A -1;
+   stop;
 }
 
 // EOF

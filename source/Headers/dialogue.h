@@ -1,4 +1,7 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #ifdef DCD
 // VM state
 DCD(NOP)

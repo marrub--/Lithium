@@ -1,3 +1,7 @@
+Distributed under the CC0 public domain license.
+By Alison Sanderson. Attribution is encouraged, though not required.
+See licenses/cc0.txt for more information.
+
 in directory ../pk7_dt
 
 prefix DTAP_
@@ -13,16 +17,12 @@ done
 -- Misc -----------------------------------------------------------------------
 in file language.log.*.txt
    parse file Log.txt
-
-   comment EOF
 done
 
 in file language.misc.*.txt
    parse file Misc.txt
    parse file Misc_QuitMessages.txt
    parse file Misc_UI.txt
-
-   comment EOF
 done
 
 EOF

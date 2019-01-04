@@ -252,5 +252,3 @@ They mostly produce specialty armors for defense against elements such as
 energy and fire, but also produce some simpler wares to get ahead in the
 growing market. Several lawsuits have been filed against them for theft of
 materials, but no conclusive evidence has been found as of yet.
-
-## EOF

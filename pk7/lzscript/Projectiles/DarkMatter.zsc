@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 class Lith_DarkMatterDie : CustomInventory
 {
    states(Item)
@@ -6,12 +10,12 @@ class Lith_DarkMatterDie : CustomInventory
       TNT1 A 0
       {
          self.A_SetRenderStyle(frandom(0.1, 0.9), STYLE_Subtract);
-         
+
          for(int i = 0; i < 77; i++)
             self.A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-32,32), frandom(-32,32), frandom(0, 64), frandom(-2, 2), frandom(-2, 2), frandom(1, 2), 0, SXF_NOCHECKPOSITION);
-         
+
          self.A_Die();
-         
+
          Actor.Spawn("Lith_DarkMatterDeath").target = self;
          return true;
       }
@@ -39,14 +43,14 @@ class Lith_DarkMatterPuff : Actor
    {
       DamageType "DarkMatter";
       Species "Lith_Player";
-      
+
       +DONTHARMSPECIES
       +NOGRAVITY
       +ALWAYSPUFF
       +MTHRUSPECIES
       +HITTRACER
    }
-   
+
    states
    {
    Spawn:
@@ -62,14 +66,14 @@ class Lith_DarkMatterRailgun : Actor
    {
       DamageType "DarkMatter";
       Species "Lith_Player";
-      
+
       +DONTHARMSPECIES
       +NOGRAVITY
       +NOBLOCKMAP
       +NOCLIP
       +MTHRUSPECIES
    }
-   
+
    states
    {
    Spawn:
@@ -87,11 +91,11 @@ class Lith_DarkMatterParticle : Actor
    {
       RenderStyle "Subtract";
       Alpha 0.9;
-      
+
       +NOINTERACTION
       +BRIGHT
    }
-   
+
    states
    {
    Spawn:
@@ -114,7 +118,7 @@ class Lith_DarkMatter : Actor
       RenderStyle "Subtract";
       DamageType "DarkMatter";
       Mass 999999;
-      
+
       Projectile;
       +DONTHARMSPECIES
       +FORCEXYBILLBOARD
@@ -131,10 +135,10 @@ class Lith_DarkMatter : Actor
       BLLT F 1
       {
          A_RadiusGive("Lith_DarkMatterDie", 128, RGF_MONSTERS|RGF_NOTARGET);
-         
+
          if(random(0, 20) == 2)
             A_PlaySound("weapons/dark/water", CHAN_6, 1, false, 0.25);
-         
+
          for(int i = 0; i < 2; i++)
          {
             if(random(0, 15) == 5)
@@ -145,7 +149,7 @@ class Lith_DarkMatter : Actor
                   A_SpawnItemEx("Lith_DarkMatterRailgun", frandom(-32,32),frandom(-32,32),frandom(-16,16), flags: SXF_SETTARGET);
             }
          }
-         
+
          for(int i = 0; i < 7; i++)
             A_SpawnItemEx("Lith_DarkMatterParticle", frandom(-16,16),frandom(-16,16),frandom(-16,16), frandom(-2,2),frandom(-2,2),frandom(-2,0));
       }

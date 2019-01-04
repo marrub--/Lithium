@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 user   float lith_player_damagebobmul  = 0.6;
 user   bool  lith_player_damagebob     = true;
 user   bool  lith_player_scoresound    = true;

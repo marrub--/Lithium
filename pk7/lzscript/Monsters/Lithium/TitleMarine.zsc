@@ -1,4 +1,8 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 // Code from Fuck Super Shotguns, which I made. I probably released that one.
+
 class Lith_TitleMarine : ScriptedMarine;
 
 default

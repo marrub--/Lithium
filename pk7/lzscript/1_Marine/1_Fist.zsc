@@ -1,4 +1,5 @@
-// ALL THINGS HERE TAKEN FROM LEGENDOOM
+// ALL THINGS HERE TAKEN FROM LEGENDOOM THANKS YHOLE
+
 class Lith_Knif : Inventory {default {Inventory.MaxAmount 1;}}
 
 class Lith_KnifPuf1 : Actor

@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 class Lith_RedCard : Lith_BasicPickup replaces RedCard
 {
    default
@@ -12,7 +16,7 @@ class Lith_RedCard : Lith_BasicPickup replaces RedCard
       A_GiveInventory("RedCard");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -30,13 +34,13 @@ class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
       Lith_BasicPickup.LogName "BlueCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
    }
-   
+
    override void PostBeginPlay()
    {
       A_GiveInventory("BlueCard");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -54,13 +58,13 @@ class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
       Lith_BasicPickup.LogName "YellowCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
    }
-   
+
    override void PostBeginPlay()
    {
       A_GiveInventory("YellowCard");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -78,13 +82,13 @@ class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
       Lith_BasicPickup.LogName "RedSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-   
+
    override void PostBeginPlay()
    {
       A_GiveInventory("RedSkull");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -102,13 +106,13 @@ class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
       Lith_BasicPickup.LogName "BlueSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-   
+
    override void PostBeginPlay()
    {
       A_GiveInventory("BlueSkull");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -126,13 +130,13 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
       Lith_BasicPickup.LogName "YellowSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-   
+
    override void PostBeginPlay()
    {
       A_GiveInventory("YellowSkull");
       Super.PostBeginPlay();
    }
-   
+
    states
    {
    Spawn:
@@ -143,4 +147,3 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
 }
 
 // EOF
-

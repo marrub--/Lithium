@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 Lith_ItemGlow = "112:127=168:183", "5:15=185:185", "224:231=168:171"
 Lith_SMGTrail2 = "160:167=16:28", "64:79=22:28"
 Lith_SMGTrail3 = "160:167=192:199", "64:79=197:201"

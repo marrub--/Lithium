@@ -1,36 +1,39 @@
-class Lith_MultiSpawner : Actor
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_MultiSpawner : Actor;
+
+private meta int          m_Num;
+private meta class<Actor> m_Name;
+
+property Amount: m_Num;
+property Type:   m_Name;
+
+default
 {
-   private meta int          m_Num;
-   private meta class<Actor> m_Name;
+   Lith_MultiSpawner.Amount 1;
+}
 
-   property Amount: m_Num;
-   property Type:   m_Name;
-
-   default
+override void PostBeginPlay()
+{
+   for(int i = 0; i < m_Num; i++)
    {
-      Lith_MultiSpawner.Amount 1;
-   }
+      let mo = Spawn(m_Name, Pos, NO_REPLACE);
 
-   override void PostBeginPlay()
-   {
-      for(int i = 0; i < m_Num; i++)
+      if(mo)
       {
-         let mo = Spawn(m_Name, Pos, NO_REPLACE);
+         mo.SpawnAngle = SpawnAngle;
+         mo.SpawnPoint = SpawnPoint;
+         mo.Angle      = Angle;
+         mo.Vel        = (FRandom[L_MS](-2, 2), FRandom[L_MS](-2, 2), 0);
+         mo.bDROPPED   = bDROPPED;
 
-         if(mo)
-         {
-            mo.SpawnAngle = SpawnAngle;
-            mo.SpawnPoint = SpawnPoint;
-            mo.Angle      = Angle;
-            mo.Vel        = (FRandom[L_MS](-2, 2), FRandom[L_MS](-2, 2), 0);
-            mo.bDROPPED   = bDROPPED;
-
-            if(i == 0) Lith_RandomSpawn.CopyImportantStuff(mo, self);
-         }
+         if(i == 0) Lith_RandomSpawn.CopyImportantStuff(mo, self);
       }
-
-      Destroy();
    }
+
+   Destroy();
 }
 
 // EOF

@@ -1,5 +1,9 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 // I think Per Kristian made these originally. I'm not entirely sure because
 // they're from an old personal mod of mine that doesn't have any credits.
+
 actor Lith_CasingSmoke
 {
    RenderStyle "Add"

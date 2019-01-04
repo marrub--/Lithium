@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 class Lith_ManaPickupTrail : Actor
 {
    default
@@ -19,52 +23,51 @@ class Lith_ManaPickupTrail : Actor
    }
 }
 
-class Lith_ManaPickup : Lith_BasicPickup
+class Lith_ManaPickup : Lith_BasicPickup;
+
+default
 {
-   default
-   {
-      RenderStyle "Add";
-      Radius 4;
-      Height 4;
-      Inventory.PickupSound "player/pickup/mana";
-      Inventory.PickupMessage "";
+   RenderStyle "Add";
+   Radius 4;
+   Height 4;
+   Inventory.PickupSound "player/pickup/mana";
+   Inventory.PickupMessage "";
 
-      +INVENTORY.ALWAYSPICKUP
-      +INVENTORY.TRANSFER
-      +INVENTORY.NOSCREENFLASH
-      +NOGRAVITY
-      +NOCLIP
-      +SEEKERMISSILE
-      +BRIGHT
+   +INVENTORY.ALWAYSPICKUP
+   +INVENTORY.TRANSFER
+   +INVENTORY.NOSCREENFLASH
+   +NOGRAVITY
+   +NOCLIP
+   +SEEKERMISSILE
+   +BRIGHT
+}
+
+override void PostBeginPlay()
+{
+   A_SetTranslation("Lith_Mana" .. Random(1, 8));
+   A_SetScale(0.8 * frandom(0.5, 1));
+   A_GiveInventory("Lith_MagicAmmo", Random(7, 10));
+   ThrustThingZ(0, 16, 0, 1);
+}
+
+int m_DeathWait;
+
+states(Actor)
+{
+Spawn:
+   BLLT Q 0;
+   BLLT Q 0 A_JumpIf(m_DeathWait++ >= 35 * 15, "Death");
+   BLLT Q 0 A_ChangeVelocity(14, 14, Vel.Z*0.9, CVF_REPLACE);
+   BLLT Q 0 A_SpawnItemEx("Lith_ManaPickupTrail", flags: SXF_TRANSFERTRANSLATION);
+   BLLT Q 0 {
+      if(CheckIfTargetInLOS())
+         A_SeekerMissile(360, 40, SMF_PRECISE|SMF_CURSPEED);
    }
-
-   override void PostBeginPlay()
-   {
-      A_SetTranslation("Lith_Mana" .. Random(1, 8));
-      A_SetScale(0.8 * frandom(0.5, 1));
-      A_GiveInventory("Lith_MagicAmmo", Random(7, 10));
-      ThrustThingZ(0, 16, 0, 1);
-   }
-
-   int m_DeathWait;
-
-   states(Actor)
-   {
-   Spawn:
-      BLLT Q 0;
-      BLLT Q 0 A_JumpIf(m_DeathWait++ >= 35 * 15, "Death");
-      BLLT Q 0 A_ChangeVelocity(14, 14, Vel.Z*0.9, CVF_REPLACE);
-      BLLT Q 0 A_SpawnItemEx("Lith_ManaPickupTrail", flags: SXF_TRANSFERTRANSLATION);
-      BLLT Q 0 {
-         if(CheckIfTargetInLOS())
-            A_SeekerMissile(360, 40, SMF_PRECISE|SMF_CURSPEED);
-      }
-      BLLT Q 1;
-      loop;
-   Death:
-      BLLT Q 1 A_FadeOut;
-      wait;
-   }
+   BLLT Q 1;
+   loop;
+Death:
+   BLLT Q 1 A_FadeOut;
+   wait;
 }
 
 // EOF

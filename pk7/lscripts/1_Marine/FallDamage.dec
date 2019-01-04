@@ -1,4 +1,6 @@
-actor Lith_PuffItDownBro // Taken from DemonSteele
+// Taken from DemonSteele, with permission.
+
+actor Lith_PuffItDownBro
 {
    RenderStyle Add
    Alpha 0.5

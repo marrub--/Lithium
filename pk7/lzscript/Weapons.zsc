@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 
 #include "lzscript/Weapons/1_ChargeFist.zsc"

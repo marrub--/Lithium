@@ -106,5 +106,3 @@
 == \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
 @@ \#INFO_DESCR_AttrCON
 翻訳なし
-
-## EOF

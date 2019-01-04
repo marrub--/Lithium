@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #include "lzscript/Items/Inventory.zsc"
 #include "lzscript/Items/ScoreItem.zsc"
 #include "lzscript/Items/RandomSpawn.zsc"

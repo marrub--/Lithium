@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 user   float dtap_player_damagebobmul  = 0.6;
 user   bool  dtap_player_damagebob     = true;
 user   bool  dtap_player_scoresound    = true;

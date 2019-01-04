@@ -1,4 +1,7 @@
 // vim: syntax=c
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 // This is a configuration file for Lithium's info pages. The current category
 // is set with ^ Category [*], and then the syntax is simply:
 // Classes... Name [*] [-> Unlocks...]

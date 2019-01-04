@@ -164,5 +164,3 @@
 == \#INFO_TITLE_CBIUpgr2 | $\#CBI_CPU3
 @@ \#INFO_DESCR_CBIUpgr2
 翻訳なし
-
-## EOF

@@ -1,12 +1,16 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 struct Lith_Sprite
 {
-   spriteid spr;
-   int      frm;
+   spriteid Spr;
+   int      Frm;
 
-   play void get(string full)
+   play void Get(string full)
    {
-      spr = Actor.GetSpriteIndex(full.left(4));
-      frm = full.charCodeAt(4) - Ch_A;
+      Spr = Actor.GetSpriteIndex(full.left(4));
+      Frm = full.CharCodeAt(4) - Ch_A;
    }
 }
 

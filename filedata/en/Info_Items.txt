@@ -364,5 +364,3 @@ testing and many trials, and now you wield the result of those efforts.
 Despite only having 3 billion neurons, not much more than high-grade CPUs,
 the quality of each is much higher, being able to withstand much more precise
 data transfer through high density synapses and storage in each cell.
-
-## EOF

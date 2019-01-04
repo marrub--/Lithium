@@ -75,5 +75,3 @@
 
 ++ \#MAIL_BODY_Secret2Jem | Mail/Secret2_CyberMage.txt
 == \#MAIL_NAME_Secret2Jem | Saved Text 252
-
-## EOF

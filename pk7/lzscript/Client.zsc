@@ -1,7 +1,6 @@
-struct Lith_URANUS_PlayerData
-{
-   bool shiftDown;
-}
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/StatScreen.zsc"
@@ -13,7 +12,12 @@ struct Lith_URANUS_PlayerData
 // URANUS: Users Really Are Not UI Systems
 class Lith_URANUS : EventHandler;
 
-transient ui Lith_URANUS_PlayerData m_pdata[MAXPLAYERS];
+struct PlayerData clearscope
+{
+   bool ShiftDown;
+}
+
+transient ui PlayerData m_PData[MAXPLAYERS];
 
 static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}

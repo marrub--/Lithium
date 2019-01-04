@@ -6,5 +6,3 @@
 
 ++ \#ENDING_NORMAL_MARINE    | Endings/End_Normal_Marine.txt
 ++ \#ENDING_NORMAL_CYBERMAGE | Endings/End_Normal_CyberMage.txt
-
-## EOF

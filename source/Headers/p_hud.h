@@ -1,4 +1,7 @@
-// Copyright © 2018 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #ifndef p_hud_h
 #define p_hud_h
 

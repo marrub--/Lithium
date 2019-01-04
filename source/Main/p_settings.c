@@ -1,4 +1,7 @@
-// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #ifdef FromUI
 Category("Gameplay");
 Enum("Level-up system", sc_player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));

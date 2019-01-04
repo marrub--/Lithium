@@ -18,6 +18,4 @@ To compile, generate a build file with `tools/genbuild.rb` and run `ninja`.
 
 # Licensing
 
-All of the content and source code in this project is copyright © 2016-2019 Alison Sanderson unless otherwise stated. Respect content creators and do not use it elsewhere without permission. See `pk7/credits.txt` for more information.
-
-All DECORATE code in the `pk7/lscripts` folder is public domain as defined by [the CC0 license](http://creativecommons.org/publicdomain/zero/1.0/).
+Respect content creators and do not use the content of this mod elsewhere without permission. See [credits.txt](credits.txt) for full licensing information and attribution.

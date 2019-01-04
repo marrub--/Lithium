@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #include "lzscript/1_Marine/Marine.zsc"
 #include "lzscript/2_CyberMage/CyberMage.zsc"
 #include "lzscript/3_Informant/Informant.zsc"
@@ -22,17 +26,17 @@ default
    +THRUSPECIES
 }
 
-meta double m_vbob;
+meta double m_VBob;
 
-private double m_rainlerp;
-private Lith_Quaternion m_qp, m_qy;
+private double m_RainLerp;
+private Lith_Quaternion m_QP, m_QY;
 
-Lith_Cyberspace m_cs;
+Lith_Cyberspace m_CS;
 
-bool m_grabInput;
-bool m_onground;
+bool m_GrabInput;
+bool m_OnGround;
 
-int m_dmgfac;
+int m_DmgFac;
 
 double m_VPitch, m_LastVPitch;
 double m_IPitch, m_LastIPitch;
@@ -43,19 +47,19 @@ double m_IYaw, m_LastIYaw;
 double m_ZVel, m_LastZVel;
 double m_VZVel, m_LastVZVel;
 
-property ViewBob: m_vbob;
+property ViewBob: m_VBob;
 
 override void BeginPlay()
 {
    Super.BeginPlay();
-   viewbob = m_vbob;
+   viewbob = m_VBob;
 }
 
 override void PostBeginPlay()
 {
    Super.PostBeginPlay();
 
-// m_cs = Lith_Cyberspace.Create();
+// m_CS = Lith_Cyberspace.Create();
 }
 
 override void GiveDefaultInventory()
@@ -92,7 +96,7 @@ override void PlayerThink()
       player.turnticks = 0;
    }
 
-   m_onground = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
+   m_OnGround = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
 
    Super.PlayerThink();
 }
@@ -100,20 +104,20 @@ override void PlayerThink()
 private void Lith_RainEffect()
 {
    Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 15.);
-   Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_rainlerp);
+   Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_RainLerp);
 
    if(player && CallACS("LWData", wdata_dorain) &&
       ceilingpic == skyflatnum && pitch < -5)
    {
       float m = -pitch - 5;
-      m_rainlerp = Lith_UTIL.Lerp(m_rainlerp, m / 85., 0.1);
+      m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, m / 85., 0.1);
       Shader.SetEnabled(player, "Lith_Rain", true);
    }
-   else if(m_rainlerp > 0.01)
-      m_rainlerp = Lith_UTIL.Lerp(m_rainlerp, 0, 0.1);
+   else if(m_RainLerp > 0.01)
+      m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, 0, 0.1);
    else
    {
-      m_rainlerp = 0;
+      m_RainLerp = 0;
       Shader.SetEnabled(player, "Lith_Rain", false);
    }
 }
@@ -170,8 +174,8 @@ int, int, bool Lith_Unproject(vector3 loc)
    q = qy.multiply(q).multiply(qy.makeConjugate());
 
    // unproject
-   q = m_qy.multiply(q).multiply(m_qy.makeConjugate());
-   q = m_qp.multiply(q).multiply(m_qp.makeConjugate());
+   q = m_QY.multiply(q).multiply(m_QY.makeConjugate());
+   q = m_QP.multiply(q).multiply(m_QP.makeConjugate());
 
    la = q.generateVector();
    la /= la.length();
@@ -261,8 +265,8 @@ void Lith_PreTick()
 
    float newpitch = atan2(pvec.y, pvec.x);
 
-   m_qp = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
-   m_qy = Lith_Quaternion.Create(-   angle, 0, 0, 1);
+   m_QP = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
+   m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);
 
    // stupid hack to keep the view from moving around
    if(CallACS("LPData", pdata_semifrozen))
@@ -274,12 +278,12 @@ void Lith_PreTick()
    }
 
    // update cyberspace
-   if(m_cs) m_cs.Lith_RotateView(2);
+   if(m_CS) m_CS.Lith_RotateView(2);
 
    // draw stuff if we're the camera
    if(players[consoleplayer].camera == self)
    {
-      if(m_cs) m_cs.Lith_DrawFrame();
+      if(m_CS) m_CS.Lith_DrawFrame();
       Lith_URANUS.LE();
    }
 }
@@ -367,7 +371,7 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
          damage /= 2;
       }
 
-      if(m_dmgfac > 0) damage = max(1, damage * (100 - m_dmgfac) / 100);
+      if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
    }
 
    return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);

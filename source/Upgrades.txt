@@ -1,3 +1,7 @@
+Distributed under the CC0 public domain license.
+By Alison Sanderson. Attribution is encouraged, though not required.
+See licenses/cc0.txt for more information.
+
 Upgrades to be processed into C files. Colon denotes a category.
 Plus denotes an upgrade. Any other text is ignored by the parser.
 

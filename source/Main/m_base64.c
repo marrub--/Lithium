@@ -101,7 +101,6 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
    return out;
 }
 
-
 /**
  * base64_decode - Base64 decode
  * @src: Data to be decoded

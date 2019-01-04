@@ -1,4 +1,7 @@
-// Copyright © 2016-2018 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #if LITHIUM
 #define Lith_Version "Lithium 1.6.1 (Hyper-Trilithium)"
 #else

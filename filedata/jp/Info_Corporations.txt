@@ -105,5 +105,3 @@
 == \#INFO_TITLE_Yigan | Yigan合同会社
 @@ \#INFO_DESCR_Yigan
 翻訳なし
-
-## EOF

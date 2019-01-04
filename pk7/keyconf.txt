@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 // Key Sections --------------------------------------------------------------|
 addkeysection "Lithium Actions" Lithium
 addmenukey "Open CBI" lith_k_opencbi

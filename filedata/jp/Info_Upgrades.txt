@@ -67,5 +67,3 @@
 == \#INFO_TITLE_Magic | Mana Absorber
 @@ \#INFO_DESCR_Magic
 翻訳なし
-
-## EOF

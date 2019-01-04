@@ -1,4 +1,6 @@
-// Terminals -----------------------------------------------------------------|
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
 
 //
 terminal 1
@@ -55,11 +57,11 @@ unfinished
       `
       @@
       `\cgThe planet \cnNanto\cg is now directly right of us. The faster than
-      `light engine worked better than I expected, and a landing should be
-      `possible soon.
+      `light engine worked better than \ch(\crI\ch)\cg expected, and a landing
+      `should be possible soon.
       `
-      `\cnNisiv 16\cg seems to be full of \ch(?\cractive demonic
-      `energy\ch|\crdemonic presence\ch)\cg. This is a bit of a problem for me.
+      `\cnNisiv 16\cg appears to be full of \ch(?\cractive demonic
+      `energy\ch|\crdemonic presence\ch)\cg. This is a problem for me.
       @@
       
       pict 2

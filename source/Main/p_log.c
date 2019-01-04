@@ -1,4 +1,7 @@
-// Copyright © 2016-2017 Alison Sanderson, all rights reserved.
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 #include "common.h"
 #include "p_log.h"
 #include "p_player.h"
@@ -171,7 +174,6 @@ void Lith_CBITab_Log(struct gui_state *g, struct player *p)
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
       PrintText_str(lm->dataV[i].inf, s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
-
 
    Lith_GUI_ScrollEnd(g, &CBIState(g)->logscr);
 }

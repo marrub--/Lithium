@@ -1,3 +1,7 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson & Benjamin Moir. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
 /*
    The URANUS drawing system is essentially an instruction set with a
    (very) simple state machine to draw stuff to the screen, either via ACS
@@ -452,9 +456,6 @@ static void LE()
 
 static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
 {
-   // Copyright (c) 2018 Benjamin Moir. All rights reserved.
-   // This work is licensed under the terms of the MIT license.
-   // To obtain a copy, visit <https://opensource.org/licenses/MIT>.
    uint len, b0 = str.CharCodeAt(pos) & 0xff, b1, b2, b3;
 
         if(b0 < 0x80) len = 1;
