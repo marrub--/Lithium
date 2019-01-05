@@ -12,8 +12,30 @@
 // Static Functions ----------------------------------------------------------|
 
 #if LITHIUM
-static void HUD_StringStack(struct player *p);
-static void HUD_Waves(struct player *p);
+static void ScopeC(struct player *p)
+{
+   i32 time = (ACS_Timer() % 16) / 4;
+   DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
+      HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
+
+   for(i32 i = 0; i < 200; i++)
+      DrawSpriteXX(sp_HUD_H_D41, HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
+}
+
+static void ScopeI(struct player *p)
+{
+   k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
+   DrawSpriteX(sp_HUD_I_ScopeOverlay, HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1, TS, a);
+}
+
+static void ScopeM(struct player *p)
+{
+   static void StringStack(struct player *p);
+   static void Waves(struct player *p);
+
+   Waves(p);
+   StringStack(p);
+}
 #endif
 
 // Extern Functions ----------------------------------------------------------|
@@ -187,29 +209,10 @@ void Lith_PlayerHUD(struct player *p)
       }
    }
 
-   if(p->scopetoken)
-   {
-      if(p->pclass == pcl_cybermage)
-      {
-         i32 time = (ACS_Timer() % 16) / 4;
-         DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
-            HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
-
-         for(i32 i = 0; i < 200; i++)
-            DrawSpriteXX(sp_HUD_H_D41, HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA,
-               hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
-      }
-      else if(p->pclass == pcl_informant)
-      {
-         k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
-         DrawSpriteX(sp_HUD_I_ScopeOverlay,
-            HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1, TS, a);
-      }
-      else
-      {
-         HUD_Waves(p);
-         HUD_StringStack(p);
-      }
+   if(p->scopetoken) switch(p->pclass) {
+   case pcl_cybermage: ScopeC(p); break;
+   case pcl_informant: ScopeI(p); break;
+   case pcl_marine:    ScopeM(p); break;
    }
 }
 #endif
@@ -234,11 +237,11 @@ void Lith_PlayerLevelup(struct player *p)
 // Static Functions ----------------------------------------------------------|
 
 #if LITHIUM
-static void HUD_StringStack(struct player *p)
+static void StringStack(struct player *p)
 {
    struct hudstr {str s; list link;};
 
-   if((ACS_Timer() % 3) == 0)
+   if(ACS_Timer() % 3 == 0)
    {
       struct hudstr *hudstr = Salloc(struct hudstr);
       hudstr->link.construct(hudstr);
@@ -257,17 +260,16 @@ static void HUD_StringStack(struct player *p)
       PrintTextA_str(hudstr->s, s_confont, CR_RED, 300,2, 20+i*9,1, 0.5);
 }
 
-static void HUD_Waves(struct player *p)
+static void Waves(struct player *p)
 {
-   k32 health = (k32)p->health / (k32)p->maxhealth;
-   i32 frame = minmax(health * 4, 1, 5);
-   i32 timer = ACS_Timer();
-   i32 pos;
+   k32 health = p->health / (k32)p->maxhealth;
+   i32 frame  = minmax(health * 4, 1, 5);
+   i32 timer  = ACS_Timer();
 
    ACS_SetHudSize(320, 200);
 
    // Sine (health)
-   pos = (10 + timer) % 160;
+   i32 pos = (10 + timer) % 160;
    DrawSpriteFade(StrParam(":HUD:H_D1%i", frame),
       hid_scope_sineS - pos,
       300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),

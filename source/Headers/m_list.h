@@ -15,27 +15,18 @@
 
 #define for_list_back_none_it(name, ...) \
    for(list *rover = (name).prev, *nextp; rover && rover != &(name); rover = nextp, __VA_ARGS__) \
-      __with(nextp = rover->next;)
+      __with(nextp = rover->prev;)
 
 #define for_list_it(var, name, ...) \
-   for_list_none_it(name, __VA_ARGS__) \
-      __with(var = rover->object;)
-
+   for_list_none_it(name, __VA_ARGS__) __with(var = rover->object;)
 #define for_list_back_it(var, name, ...) \
-   for_list_back_none_it(name, __VA_ARGS__) \
-      __with(var = rover->object;)
+   for_list_back_none_it(name, __VA_ARGS__) __with(var = rover->object;)
 
-#define for_list_back(var, name) \
-   for_list_back_it(var, name, (void)0)
+#define for_list(var, name)           for_list_it(var, name, (void)0)
+#define for_list_back(var, name) for_list_back_it(var, name, (void)0)
 
-#define for_list(var, name) \
-   for_list_it(var, name, (void)0)
-
-#define for_list_back_none(name) \
-   for_list_back_none_it(name, (void)0)
-
-#define for_list_none(name) \
-   for_list_none_it(name, (void)0)
+#define for_list_none(name)           for_list_none_it(name, (void)0)
+#define for_list_back_none(name) for_list_back_none_it(name, (void)0)
 
 // Extern Functions ----------------------------------------------------------|
 
