@@ -9,6 +9,9 @@
 #include "lzscript/Client/SaveMenu.zsc"
 #include "lzscript/Client/LoadMenu.zsc"
 
+class Lith_StatusBar : BaseStatusBar
+   {override void Init() {Super.Init(); SetSize(0, 320, 240);}}
+
 // URANUS: Users Really Are Not UI Systems
 class Lith_URANUS : EventHandler;
 
