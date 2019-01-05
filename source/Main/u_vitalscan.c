@@ -152,14 +152,14 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    // Hit indicator
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt("-%i", UData.hdelta);
-      PrintTextFX(s_cbifont, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
+      PrintTextF(s_cbifont, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
    // Tag and health
-   bool  afnt = p->getCVarI(sc_scanner_altfont);
-   str font = afnt ? s_chfont : s_cbifont;
+   bool afnt = p->getCVarI(sc_scanner_altfont);
+   str  font = afnt ? s_chfont : s_cbifont;
 
-   PrintTextX_str(UData.tagstr, font, CR_WHITE, 160+ox,4, 216+oy,2);
+   PrintText_str(UData.tagstr, font, CR_WHITE, 160+ox,4, 216+oy,2);
 
    if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
    else                PrintTextFmt("%uhp",  UData.health);

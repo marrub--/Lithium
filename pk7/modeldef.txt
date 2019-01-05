@@ -14,7 +14,7 @@ model "Lith_BulletTracer"
    Model 0 "1x1.obj"
    Skin 0 "tracer.png"
 
-   FrameIndex TRAC A 0 0
+   FrameIndex ____ A 0 0
 }
 
 model "Lith_BulletRicochetSpark"
@@ -30,7 +30,7 @@ model "Lith_BulletRicochetSpark"
    Model 0 "1x1.obj"
    Skin 0 "spark1.png"
 
-   FrameIndex SPRK A 0 0
+   FrameIndex ____ A 0 0
 }
 
 model "Lith_BulletRicochetSpark"
@@ -46,7 +46,7 @@ model "Lith_BulletRicochetSpark"
    Model 0 "1x1.obj"
    Skin 0 "spark2.png"
 
-   FrameIndex SPRK B 0 0
+   FrameIndex ____ B 0 0
 }
 
 model "Lith_BulletRicochetSpark"
@@ -62,7 +62,7 @@ model "Lith_BulletRicochetSpark"
    Model 0 "1x1.obj"
    Skin 0 "spark3.png"
 
-   FrameIndex SPRK C 0 0
+   FrameIndex ____ C 0 0
 }
 
 model "Lith_BulletRicochetSpark"
@@ -78,7 +78,7 @@ model "Lith_BulletRicochetSpark"
    Model 0 "1x1.obj"
    Skin 0 "spark4.png"
 
-   FrameIndex SPRK D 0 0
+   FrameIndex ____ D 0 0
 }
 
 // EOF

@@ -35,7 +35,7 @@ class DtRender : EventHandler
       bool ShiftDown;
    }
 
-   transient ui DtRenderPlayerData m_pdata[MAXPLAYERS];
+   transient ui DtRenderPlayerData m_PData[MAXPLAYERS];
 
    static clearscope DtRender Instance()
       {return DtRender(Find("DtRender"));}

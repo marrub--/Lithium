@@ -12,17 +12,17 @@ static void Lith_IonizeFX(Actor mo)
 static void DelearSprite(Actor mo_)
 {
    let mo = Lith_Player(mo_);
-   let w = Lith_Delear(mo.findInventory("Lith_Delear"));
+   let w = Lith_Delear(mo.FindInventory("Lith_Delear"));
    if(!w) return;
-   int sf = w.m_fired;
+   int sf = w.m_Fired;
    int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE;
    float a = mo.m_IYaw;
-   float cp = cos(mo.m_IPitch) * 32;
-   float sp = sin(mo.m_IPitch) * 32;
-   float h = mo.height - 19;
-   float vx = mo.vel.x;
-   float vy = mo.vel.y;
-   float vz = mo.vel.z;
+   float cp = Cos(mo.m_IPitch) * 32;
+   float sp = Sin(mo.m_IPitch) * 32;
+   float h = mo.Height - 19;
+   float vx = mo.Vel.X;
+   float vy = mo.Vel.Y;
+   float vz = mo.Vel.Z;
    if(sf < 16) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+2 -sp,vx,vy,vz,a,flags);
    if(sf < 15) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+4 -sp,vx,vy,vz,a,flags);
    if(sf < 14) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+6 -sp,vx,vy,vz,a,flags);

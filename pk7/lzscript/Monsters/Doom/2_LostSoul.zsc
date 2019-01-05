@@ -10,21 +10,21 @@ class Lith_LostSoul : Lith_Monster replaces LostSoul;
 
 default
 {
-   Lith_Monster.Score Score_LostSoul;
-   Health 70;
-   Radius 16;
-   Height 56;
-   Mass 50;
-   Speed 8;
-   Damage 3;
-   PainChance 256;
-   RenderStyle "Add";
+   ActiveSound "skull/active";
    Alpha 0.7;
    AttackSound "skull/melee";
-   PainSound "skull/pain";
+   Damage 3;
    DeathSound "skull/death";
-   ActiveSound "skull/active";
+   Health 70;
+   Height 56;
+   Lith_Monster.Score Score_LostSoul;
+   Mass 50;
    Obituary "$OB_SKULL";
+   PainChance 256;
+   PainSound "skull/pain";
+   Radius 16;
+   RenderStyle "Add";
+   Speed 8;
    Tag "Lost Soul";
 
    +FLOAT
@@ -37,7 +37,7 @@ default
    -COUNTKILL
 }
 
-bool m_invisible;
+bool m_Invisible;
 
 states
 {
@@ -46,20 +46,20 @@ Spawn:
    loop;
 GoInvisible:
    SKUL AABBAABBAA 1 bright A_FadeTo(0.08);
-   SKUL A 0 {m_invisible = true;}
+   SKUL A 0 {m_Invisible = true;}
    goto See;
 StopBeingInvisibleBaka:
    SKUL AABBAABBAA 1 bright A_FadeTo(0.7);
-   SKUL A 0 {m_invisible = false;}
+   SKUL A 0 {m_Invisible = false;}
    goto Missile;
 
 See:
-   SKUL A 0 A_JumpIf(!m_invisible && random(0, 128) < 64, "GoInvisible");
+   SKUL A 0 A_JumpIf(!m_Invisible && random(0, 128) < 64, "GoInvisible");
    SKUL AAAAABBBBB 1 bright A_FastChase;
    loop;
 
 Missile:
-   SKUL A 0 A_JumpIf(m_invisible, "StopBeingInvisibleBaka");
+   SKUL A 0 A_JumpIf(m_Invisible, "StopBeingInvisibleBaka");
    SKUL C 10 bright A_FaceTarget;
    SKUL D 4 bright A_SkullAttack;
 MissileLoop:

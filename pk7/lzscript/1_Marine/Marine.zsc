@@ -6,11 +6,11 @@ class Lith_MarinePlayer : Lith_Player
 {
    default
    {
-      Player.DisplayName "Marine";
-      Player.SoundClass "marine";
-      Player.Portrait "lgfx/Portraits/Marine.png";
-      Player.ViewHeight 48;
       Player.AttackZOffset 15;
+      Player.DisplayName "Marine";
+      Player.Portrait "lgfx/Portraits/Marine.png";
+      Player.SoundClass "marine";
+      Player.ViewHeight 48;
       Tag "Marine";
    }
 
@@ -27,6 +27,7 @@ class Lith_RocketBooster : PowerFlight
    default
    {
       Powerup.Duration 60;
+
       -INVENTORY.HUBPOWER
    }
 }

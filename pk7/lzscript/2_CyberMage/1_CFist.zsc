@@ -10,9 +10,9 @@ default
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
 
-   +WEAPON.WIMPY_WEAPON
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
+   +WEAPON.WIMPY_WEAPON
 }
 
 states(Actor)
@@ -26,7 +26,7 @@ states(Weapon)
 {
 Ready:
    TNT1 A 1 Lith_A_Ready(WRF_NOFIRE);
-   TNT1 A 0 {if(CallACS("Lith_Timer") % 7 == 0) {GiveInventory("Lith_MagicAmmo", 1);}}
+   TNT1 A 0 {if(CallACS("Lith_Timer") % 7 == 0) GiveInventory("Lith_MagicAmmo", 1);}
    loop;
 
 Deselect:
@@ -42,7 +42,7 @@ SelectLoop:
    loop;
 
 Fire:
-   goto Ready;
+   goto ReadySelector;
 }
 
 // EOF

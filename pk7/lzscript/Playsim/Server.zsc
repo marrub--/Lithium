@@ -12,15 +12,15 @@
 // HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
 class Lith_HERMES : EventHandler;
 
-play string m_logname;
-play string m_obituary;
-play bool m_paused;
-play name m_dmgtype;
-play bool m_dmgworld;
+play string m_LogName;
+play string m_Obituary;
+play bool m_Paused;
+play name m_DmgType;
+play bool m_DmgWorld;
 
 static void SetEnding(string ending)
 {
-   if(__lith_end == "") CVar.FindCVar('__lith_end').setString(ending);
+   if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);
 }
 
 static clearscope Lith_HERMES Instance()

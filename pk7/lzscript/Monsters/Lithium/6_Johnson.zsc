@@ -25,7 +25,7 @@ override void Tick()
 override void Lith_OnDeath()
 {
    let m = Lith_Boss_Isaac(master);
-   if(m) m.m_dupes--;
+   if(m) m.m_Dupes--;
 }
 
 states

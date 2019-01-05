@@ -6,18 +6,18 @@ class Lith_ShrapnelProjectile : Actor
 {
    default
    {
-      Radius 8;
-      Height 8;
-      Speed 25;
-      Damage 8;
       BounceType "Doom";
-      Gravity 0.5;
-      Species "Lith_Player";
+      Damage 8;
       DamageType "Shrapnel";
+      Gravity 0.5;
+      Height 8;
+      Radius 8;
+      Species "Lith_Player";
+      Speed 25;
 
       Projectile;
-      +MTHRUSPECIES
       +EXPLODEONWATER
+      +MTHRUSPECIES
       -NOGRAVITY
    }
 
@@ -38,7 +38,7 @@ default
    Weapon.SlotPriority 0.9;
 }
 
-action void Lith_A_FireShrapnel()
+action(Weapon) void Lith_A_FireShrapnel()
 {
    A_FireProjectile("Lith_ShrapnelProjectile", frandom(-5, 5), false, frandom(-5, 5), frandom(-7, 7), FPF_NOAUTOAIM);
 }
@@ -67,13 +67,11 @@ Select:
    loop;
 
 Fire:
-   SHT2 AAAAAA 0 Lith_A_FireShrapnel;
-   SHT2 A 1;
-   SHT2 AAAA 0 Lith_A_FireShrapnel;
-   SHT2 A 1;
-   SHT2 AA 0 Lith_A_FireShrapnel;
-   SHT2 A 35;
-   goto Ready;
+   SHT2 A 1 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
+   SHT2 A 1 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
+   SHT2 A 1 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
+   SHT2 A 34;
+   goto ReadySelector;
 }
 
 // EOF

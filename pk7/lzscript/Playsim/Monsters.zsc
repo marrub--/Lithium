@@ -6,12 +6,12 @@ class Lith_BossFucker : Inventory
 {
    override void Tick()
    {
-      if(!owner.tracer || owner.tracer.health <= 0)
+      if(!Owner.Tracer || Owner.Tracer.Health <= 0)
       {
-         owner.A_BossDeath();
-         owner.clearCounters();
-         owner.destroy();
-         destroy();
+         Owner.A_BossDeath();
+         Owner.ClearCounters();
+         Owner.Destroy();
+         Destroy();
       }
    }
 }
@@ -20,56 +20,55 @@ extend class Lith_HERMES;
 
 static void PrepareForRagnarok(Actor mo)
 {
-   mo.damageMultiply += 2;
-   mo.scale.x *= frandom(0.9, 1.1);
-   mo.scale.y *= frandom(0.9, 1.1);
+   mo.DamageMultiply += 2;
+   mo.Scale.X *= FRandom(0.9, 1.1);
+   mo.Scale.Y *= FRandom(0.9, 1.1);
    mo.bLOOKALLAROUND = true;
 }
 
 static void MonsterBarrierLook(Actor mo)
 {
-   for(let it = BlockThingsIterator.Create(mo, 192*2); it.next();)
-      if(it.thing.player)
-         CallACS("Lith_AddAngle", it.thing.pos.x, it.thing.pos.y);
+   for(let it = BlockThingsIterator.Create(mo, 192*2); it.Next();)
+      if(it.Thing.Player) CallACS("Lith_AddAngle", it.Thing.Pos.X, it.Thing.Pos.Y);
 }
 
 static void SpawnBoss(Actor a, string name, int phase)
 {
-   let b = Lith_Phantom(Actor.Spawn(name, a.pos));
+   let b = Lith_Phantom(Actor.Spawn(name, a.Pos));
 
    // copy info
-   b.spawnangle = a.spawnangle;
-   b.spawnpoint = a.spawnpoint;
-   b.angle      = a.angle;
-   b.pitch      = a.pitch;
-   b.roll       = a.roll;
-   b.special    = a.special;
-   b.special1   = a.special1;
-   b.special2   = a.special2;
-   b.args[0]    = a.args[0];
-   b.args[1]    = a.args[1];
-   b.args[2]    = a.args[2];
-   b.args[3]    = a.args[3];
-   b.args[4]    = a.args[4];
-   b.vel        = a.vel;
-   b.master     = a.master;
-   b.target     = a.target;
-   b.tracer     = a.tracer;
+   b.Angle      = a.Angle;
+   b.Args[0]    = a.Args[0];
+   b.Args[1]    = a.Args[1];
+   b.Args[2]    = a.Args[2];
+   b.Args[3]    = a.Args[3];
+   b.Args[4]    = a.Args[4];
+   b.Master     = a.Master;
+   b.Pitch      = a.Pitch;
+   b.Roll       = a.Roll;
+   b.SpawnAngle = a.SpawnAngle;
+   b.SpawnPoint = a.SpawnPoint;
+   b.Special    = a.Special;
+   b.Special1   = a.Special1;
+   b.Special2   = a.Special2;
+   b.Target     = a.Target;
+   b.Tracer     = a.Tracer;
+   b.Vel        = a.Vel;
 
-   b.changeTID(a.tid);
+   b.ChangeTID(a.TID);
 
-   b.bCOUNTSECRET = a.spawnflags & MTF_SECRET;
-   b.spawnflags   = a.spawnflags & ~MTF_SECRET;
-   b.handleSpawnFlags();
-   b.spawnflags = a.spawnflags;
+   b.bCOUNTSECRET = a.SpawnFlags &  MTF_SECRET;
+   b.SpawnFlags   = a.SpawnFlags & ~MTF_SECRET;
+   b.HandleSpawnFlags();
+   b.SpawnFlags = a.SpawnFlags;
 
-   b.health += a.health / 2;
+   b.Health += a.Health / 2;
 
    // delete it if it's not a boss, otherwise prepare for omega hack
    if(!a.bBOSS && !a.bBOSSDEATH)
    {
-      a.clearCounters();
-      a.destroy();
+      a.ClearCounters();
+      a.Destroy();
    }
    else
    {
@@ -77,27 +76,27 @@ static void SpawnBoss(Actor a, string name, int phase)
       // we shut them up, banish them to the shadow realm, remove them from
       // the world, lobotomize them and make them into a zombie. morbid...
       for(int i = 1; i < 8; i++) a.A_StopSound(i);
-      a.setXYZ((65535, 65535, 0)); // Banish.
-      a.removeFromHash();
-      a.tics = -1;
-      a.tracer = b;
-      a.giveInventory("Lith_BossFucker", 1);
+      a.SetXYZ((65535, 65535, 0)); // Banish.
+      a.RemoveFromHash();
+      a.Tics = -1;
+      a.Tracer = b;
+      a.GiveInventory("Lith_BossFucker", 1);
    }
 
-   b.m_phase = phase;
+   b.m_Phase = phase;
 
    if(phase == 2)
    {
-      b.damageMultiply = 1.5;
-      b.reactionTime   = 4;
-      b.health        *= 1.5;
+      b.DamageMultiply = 1.5;
+      b.ReactionTime   = 4;
+      b.Health        *= 1.5;
       b.bMISSILEMORE   = true;
    }
    else if(phase == 3)
    {
-      b.damageMultiply   = 2;
-      b.reactionTime     = 2;
-      b.health          *= 2;
+      b.DamageMultiply   = 2;
+      b.ReactionTime     = 2;
+      b.Health          *= 2;
       b.bMISSILEMORE     = true;
       b.bMISSILEEVENMORE = true;
    }
@@ -108,9 +107,9 @@ static void TriggerBoss()
    if(CallACS("LWData", wdata_bossspawned)) return;
 
    Actor mo;
-   for(let it = ThinkerIterator.Create(); (mo = Actor(it.next()));)
+   for(let it = ThinkerIterator.Create(); (mo = Actor(it.Next()));)
    {
-      if(mo.bISMONSTER && mo.health >= 500) {
+      if(mo.bISMONSTER && mo.Health >= 500) {
          mo.ACS_NamedExecuteAlways("Lith_SpawnBoss", 0);
          break;
       }

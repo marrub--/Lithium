@@ -9,23 +9,23 @@ class Lith_AnimItemSprite : Lith_ItemSprite
       +BRIGHT;
    }
 
-   property Phases: m_phases;
+   property Phases: m_Phases;
 
-   meta int m_phases;
-   int m_iter, m_phase;
+   meta int m_Phases;
+   int m_Iter, m_Phase;
 
    action state Lith_A_JumpPhase()
-      {return invoker.m_phase == invoker.m_iter++ ? ResolveState("Super::SpawnLoop") : null;}
+      {return invoker.m_Phase == invoker.m_Iter++ ? ResolveState("Super::SpawnLoop") : null;}
 
    states
    {
    Spawn:
-      TNT1 A 0 {m_phase = random(0, m_phases - 1);}
+      TNT1 A 0 {m_Phase = random(0, m_Phases - 1);}
       goto Super::Spawn;
    SpawnLoop:
       TNT1 A 0 {
-         m_phase = (m_phase + 1) % m_phases;
-         m_iter = 0;
+         m_Phase = (m_Phase + 1) % m_Phases;
+         m_Iter = 0;
          return ResolveState("SetSpr");
       }
    }
@@ -42,17 +42,17 @@ default
    +NOTIMEFREEZE;
 }
 
-vector3 m_origpos;
-int m_fang;
-int m_fzang;
+vector3 m_OrigPos;
+int m_FAng;
+int m_FZAng;
 
 states
 {
 Spawn:
    #### # 0;
    #### # 0 {
-      m_fang  = random(0, 359);
-      m_fzang = random(0, 359);
+      m_FAng  = random(0, 359);
+      m_FZAng = random(0, 359);
       return ResolveState("SpawnLoop");
    }
    stop;
@@ -64,13 +64,13 @@ SpawnLoop:
          return state(null);
    }
    #### # 0 {
-      m_fang  = (m_fang  + 2) % 360;
-      m_fzang = (m_fzang + 3) % 360;
-      m_origpos = pos;
+      m_FAng  = (m_FAng  + 2) % 360;
+      m_FZAng = (m_FZAng + 3) % 360;
+      m_OrigPos = pos;
    }
-   #### # 1 bright A_Warp(AAPTR_MASTER, cos(m_fang) * 4.0, sin(m_fang) * 4.0, 16.0 + (sin(m_fzang) * 12.0), 0.0, WARPF_NOCHECKPOSITION);
+   #### # 1 bright A_Warp(AAPTR_MASTER, cos(m_FAng) * 4.0, sin(m_FAng) * 4.0, 16.0 + (sin(m_FZAng) * 12.0), 0.0, WARPF_NOCHECKPOSITION);
    #### # 0 {
-      A_Warp(AAPTR_MASTER, m_origpos.x, m_origpos.y, m_origpos.z, 0, WARPF_ABSOLUTEPOSITION);
+      A_Warp(AAPTR_MASTER, m_OrigPos.x, m_OrigPos.y, m_OrigPos.z, 0, WARPF_ABSOLUTEPOSITION);
       return ResolveState("SpawnLoop");
    }
    stop;

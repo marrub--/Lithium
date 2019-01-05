@@ -24,7 +24,7 @@ class Lith_HulgyonHit : Actor
       TNT1 A 0;
       TNT1 A 0 A_AlertMonsters;
       TNT1 A 0 A_PlaySound("weapons/hulgyon/proc");
-      TNT1 A 1 Lith_A_Spawn( 0);
+      TNT1 A 1 Lith_A_Spawn(0);
       TNT1 A 1 Lith_A_Spawn(10);
       TNT1 A 1 Lith_A_Spawn(20);
       TNT1 A 1 Lith_A_Spawn(30);
@@ -38,23 +38,24 @@ class Lith_HulgyonProjectile : Actor
    default
    {
       Damage 0;
-      Speed 30;
-      RenderStyle "Add";
-      XScale 4;
-      Radius 4;
       Height 16;
+      Radius 4;
+      RenderStyle "Add";
+      Speed 30;
+      XScale 4;
+
       Projectile;
       +FLOORHUGGER
       +RIPPER
       +BRIGHT
    }
 
-   int m_lz;
+   int m_LZ;
 
    state Lith_A_Step()
    {
-      if(pos.z - m_lz > 48 || pos.z - m_lz < -48) return ResolveState("Null");
-      m_lz = pos.z;
+      if(Pos.Z - m_LZ > 48 || Pos.Z - m_LZ < -48) return ResolveState("Null");
+      m_LZ = Pos.Z;
       return null;
    }
 
@@ -62,7 +63,7 @@ class Lith_HulgyonProjectile : Actor
    {
    Spawn:
       BLLT J 0;
-      BLLT J 0 {m_lz = pos.z;}
+      BLLT J 0 {m_LZ = Pos.Z;}
    SpawnLoop:
       BLLT JJJ 1 Lith_A_Step;
       BLLT J 0 A_SpawnItemEx("Lith_HulgyonHit", flags: SXF_TRANSFERPOINTERS);

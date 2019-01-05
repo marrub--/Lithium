@@ -78,9 +78,9 @@ class Lith_GunSmokeSpawner : Actor
       +NOCLIP
    }
 
-   meta int m_part;
+   meta int m_Part;
 
-   property Particles: m_part;
+   property Particles: m_Part;
 
    const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
 
@@ -101,11 +101,11 @@ class Lith_GunSmokeSpawner : Actor
    Death:
       TNT1 A 0 {
          Lith_A_SpawnSmoke(0, frandom(-0.2, 0.2));
-         for(int i = 0, n = random(m_part/2, m_part); i < n; i++)
+         for(int i = 0, n = random(m_Part/2, m_Part); i < n; i++)
             Lith_A_SpawnSmoke(frandom(-10, 10), frandom(-10, 10));
-         for(int i = 0, j = random(m_part + 1, m_part + 3); i < j; i++)
+         for(int i = 0, j = random(m_Part + 1, m_Part + 3); i < j; i++)
             Lith_A_SpawnParticles("Yellow");
-         for(int i = 0, j = random(m_part + 1, m_part + 2); i < j; i++)
+         for(int i = 0, j = random(m_Part + 1, m_Part + 2); i < j; i++)
             Lith_A_SpawnParticles("White");
       }
       stop;

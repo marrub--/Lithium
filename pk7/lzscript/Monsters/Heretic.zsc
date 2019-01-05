@@ -356,7 +356,7 @@ class Lith_Heretic_DSparilDiscipleSpawner : Sorcerer2FX2 replaces Sorcerer2FX2
       +MTHRUSPECIES
    }
 
-   int m_wazards;
+   int m_Wazards;
 
    states
    {
@@ -365,7 +365,7 @@ class Lith_Heretic_DSparilDiscipleSpawner : Sorcerer2FX2 replaces Sorcerer2FX2
    SpawnLoop:
       FX11 B 5 bright A_SpawnItemEx("Wizard");
       FX11 A 15 bright;
-      FX11 A 0 bright A_JumpIf(++m_wazards == 3, "Death");
+      FX11 A 0 bright A_JumpIf(++m_Wazards == 3, "Death");
       loop;
    Death:
       FX11 BCDEFG 5 bright;

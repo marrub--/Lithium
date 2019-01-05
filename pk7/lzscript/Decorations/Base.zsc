@@ -14,16 +14,16 @@ class Lith_SwitchableDecor : Actor
       +FORCEYBILLBOARD
    }
 
-   private meta sound m_idlenoise;
-   private meta float m_volume;
+   private meta sound m_IdleNoise;
+   private meta float m_Volume;
 
-   property Noise: m_idlenoise;
-   property Volume: m_volume;
+   property Noise: m_IdleNoise;
+   property Volume: m_Volume;
 
    virtual void Lith_Active()
    {
-      if(m_idlenoise)
-         A_PlaySound(m_idlenoise, CHAN_5, m_volume, true, ATTN_STATIC);
+      if(m_IdleNoise)
+         A_PlaySound(m_IdleNoise, CHAN_5, m_Volume, true, ATTN_STATIC);
    }
 
    virtual void Lith_Inactive() {A_StopSound(CHAN_5);}
@@ -72,22 +72,22 @@ class Lith_DestructableSwitchDecor : Lith_SwitchableDecor
 
 class Lith_FlareDecor : Lith_DestructableSwitchDecor
 {
-   private meta class<Actor> m_type;
-   private Actor m_flare;
+   private meta class<Actor> m_Type;
+   private Actor m_Flare;
 
-   property Type: m_type;
+   property Type: m_Type;
 
    override void Lith_Active()
    {
       Super.Lith_Active();
-      m_flare = Spawn(m_type, pos);
-      m_flare.master = self;
+      m_Flare = Spawn(m_Type, pos);
+      m_Flare.master = self;
    }
 
    override void Lith_Inactive()
    {
       Super.Lith_Inactive();
-      if(m_flare) m_flare.destroy();
+      if(m_Flare) m_Flare.destroy();
    }
 }
 

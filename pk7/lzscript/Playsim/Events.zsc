@@ -59,17 +59,17 @@ override void UiTick()
    if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
 
-   if(m_eseq == ESEQ_HALT && __lith_end != "")
+   if(m_ESeq == ESEQ_HALT && __lith_end != "")
    {
       LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end));
       CVar.FindCVar('__lith_end').SetString("");
    }
-   else if(m_eseq >= ESEQ_RUN)
+   else if(m_ESeq >= ESEQ_RUN)
       RunEndSequence();
 }
 
 override void RenderOverlay(RenderEvent ev)
-   {if(m_eseq >= ESEQ_RUN) DrawEndSequence(ev);}
+   {if(m_ESeq >= ESEQ_RUN) DrawEndSequence(ev);}
 
 override void PlayerEntered(PlayerEvent ev)
 {

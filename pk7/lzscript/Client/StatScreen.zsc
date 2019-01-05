@@ -5,8 +5,8 @@
 // STATUS: Super Totally Awesome Totally Useful Statistics
 class Lith_STATUS : DoomStatusScreen;
 
-int m_souls;
-bool m_ready;
+int m_Souls;
+bool m_Ready;
 
 private void Lith_DrawSetq(int x, int y, string text)
 {
@@ -32,7 +32,7 @@ private void Lith_DrawCent(int x, int y, string text)
 
 override void Start(wbstartstruct wbss)
 {
-   m_souls = random(400, 700);
+   m_Souls = random(400, 700);
    S_Sound("intermission/mid", CHAN_5 | CHAN_UI | CHAN_LOOP, 0.43, ATTN_NONE);
    Super.Start(wbss);
 }
@@ -54,7 +54,7 @@ override void UpdateStats()
       Super.UpdateStats();
       break;
    case 9:
-      if(m_ready) sp_state++;
+      if(m_Ready) sp_state++;
       break;
    case 10:
       PlaySound("intermission/paststats");
@@ -67,7 +67,7 @@ override void Ticker()
 {
    if(++bcnt == 1) StartMusic();
 
-   m_ready = false;
+   m_Ready = false;
 
    for(int i = 0; i < MAXPLAYERS; i++) if(playeringame[i])
    {
@@ -106,7 +106,7 @@ override void Ticker()
 
       if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
       {
-         m_ready = true;
+         m_Ready = true;
          playerready[i] = true;
       }
 
@@ -130,7 +130,7 @@ override void DrawStats()
    Lith_DrawPrct(2, "* (SETQ SCRTS", cnt_secret[0], wbs.maxsecret);
 
    int souls = CallACS("LWData", wdata_soulsfreed);
-   if(souls) Lith_DrawCent(160, 120, (souls * m_souls) .. " SOULS FREED");
+   if(souls) Lith_DrawCent(160, 120, (souls * m_Souls) .. " SOULS FREED");
 
    Lith_DrawCent(160, 0, "(LEAVE-AREA)");
    DrawName(40 * CleanYFac, wbs.lname0, lnametexts[0]);

@@ -4,9 +4,9 @@
 
 struct Lith_EndSeqNode
 {
-   name type;
-   uint tics;
-   string text;
+   name   Type;
+   uint   Tics;
+   string Text;
 }
 
 extend class Lith_Events;
@@ -26,19 +26,17 @@ enum Lith_EndSeqState
    ESEQ_FADEMUS,
 }
 
-const fxk = 0xFFFF;
-
 // Program
-private ui uint m_en;
-private ui Lith_EndSeqNode m_node[32];
-private ui uint16 m_jmp[99];
+private ui uint m_P;
+private ui Lith_EndSeqNode m_Node[32];
+private ui uint16 m_Jmp[99];
 
 // State
-private ui uint m_eseq;
-private ui color m_bgcolo, m_fdcolo;
-private ui string m_text;
-private ui textureid m_bgimg;
-private ui int m_time, m_tics, m_skip;
+private ui uint m_ESeq;
+private ui color m_BgColo, m_FdColo;
+private ui string m_Text;
+private ui textureid m_BgImg;
+private ui int m_Time, m_Tics, m_Skip;
 
 ui void LoadEnding(string fname)
 {
@@ -46,211 +44,212 @@ ui void LoadEnding(string fname)
 
    array<string> lns, arg;
 
-   lmp.split(lns, "\n");
+   lmp.Split(lns, "\n");
 
-   m_bgcolo = "Black";
-   m_fdcolo = "Black";
-   m_text   = "";
+   m_BgColo = "Black";
+   m_FdColo = "Black";
+   m_Text   = "";
 
    for(uint i = 0, l = lns.size(); i < l; i++)
    {
       if(lns[i] == "") continue;
 
-      string ln = lns[i]. mid(3);
-      string jp = lns[i].left(2);
-      uint space = ln.indexof(" ");
+      string ln = lns[i].Mid(3);
+      string jp = lns[i].Left(2);
+      uint space = ln.Indexof(" ");
 
-      string fn = space >= 0 ? ln.left(space  ) : ln;
-      string ar = space >= 0 ? ln. mid(space+1) : "";
+      string fn = space >= 0 ? ln.Left(space) : ln;
+      string ar = space >= 0 ? ln.Mid(space+1) : "";
 
-      if(jp.toint() > 0)
-         m_jmp[jp.toint()] = i;
+      if(jp.ToInt() > 0) m_Jmp[jp.ToInt()] = i;
 
-      if(fn.toint() > 0 || fn == "0")
+      if(fn.ToInt() > 0 || fn == "0")
       {
-         m_node[i].type = 'text';
-         m_node[i].tics = fn.toint();
-         m_node[i].text = StringTable.Localize(ar, true);
+         m_Node[i].Type = 'text';
+         m_Node[i].Tics = fn.ToInt();
+         m_Node[i].Text = StringTable.Localize(ar, true);
          continue;
       }
 
       if(ar != "")
       {
-         arg.clear();
-         ar.split(arg, ",");
+         arg.Clear();
+         ar.Split(arg, ",");
       }
 
       let nam = name(fn);
+      m_Node[i].Type = nam;
       switch(nam) {
       case 'stop':
-      case 'done': m_node[i].type = nam; break;
-      case  'img':
-      case  'mus':
-      case   'bg': m_node[i].type = nam; m_node[i].text = arg[0];         break;
+      case 'done':
+         break;
+      case 'img':
+      case 'mus':
+      case 'bg':
+         m_Node[i].Text = arg[0];
+         break;
       case 'fmus':
-      case 'wait': m_node[i].type = nam; m_node[i].tics = arg[0].toint(); break;
+      case 'wait':
+         m_Node[i].Tics = arg[0].ToInt();
+         break;
       case 'case':
-         m_node[i].type = nam;
-         m_node[i].text = arg[0];
-         m_node[i].tics = arg[1].toint();
+         m_Node[i].Text = arg[0];
+         m_Node[i].Tics = arg[1].ToInt();
          break;
       case 'fade':
-         m_node[i].type = nam;
-         m_node[i].tics = arg[0].toint();
-         m_node[i].text = arg[1];
+         m_Node[i].Tics = arg[0].ToInt();
+         m_Node[i].Text = arg[1];
          break;
       }
    }
 
-   m_eseq = ESEQ_RUN;
+   m_ESeq = ESEQ_RUN;
 }
 
 ui void DrawEndSequence(RenderEvent evt)
 {
-   Screen.Dim(m_bgcolo, 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
+   Screen.Dim(m_BgColo, 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
 
-   if(m_bgimg)
-      Screen.DrawTexture(m_bgimg, false, 0, 0,
-         DTA_VirtualWidth, 320, DTA_VirtualHeight, 200);
+   if(m_BgImg) Screen.DrawTexture(m_BgImg, false, 0, 0, DTA_VirtualWidth, 320, DTA_VirtualHeight, 200);
 
-   string txt = m_text;
+   string txt = m_Text;
 
-   if(m_eseq == ESEQ_WRITEOUT)
+   if(m_ESeq == ESEQ_WRITEOUT)
    {
-      uint len = m_text.length();
-      uint prc = m_time*fxk / m_tics; // divide (k/i)
-      uint amt = len * prc / fxk; // multiply (i*k) and remove decimal
-      txt = m_text.left(amt);
+      uint len = m_Text.length();
+      uint prc = m_Time*IFIX / m_Tics; // divide (k/i)
+      uint amt = len * prc / IFIX; // multiply (i*k) and remove decimal
+      txt = m_Text.left(amt);
    }
 
-   if(txt != "")
-      Screen.DrawText("smallfnt", Font.CR_WHITE, 10, 10, txt,
-         DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   if(txt != "") Screen.DrawText("smallfnt", Font.CR_WHITE, 10, 10, txt, DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 
-   switch(m_eseq) {
+   switch(m_ESeq) {
    case ESEQ_FADEMUS:
-      SetMusicVolume(1 - m_time / float(m_tics));
+      SetMusicVolume(1 - m_Time / float(m_Tics));
       break;
    case ESEQ_FADEIN:
    case ESEQ_FADEOUT: {
-      float fd = m_time / float(m_tics);
-      if(m_eseq == ESEQ_FADEIN) fd = 1 - fd;
-      Screen.Dim(m_fdcolo, fd, 0, 0, Screen.GetWidth(), Screen.GetHeight());
+      float fd = m_Time / float(m_Tics);
+      if(m_ESeq == ESEQ_FADEIN) fd = 1 - fd;
+      Screen.Dim(m_FdColo, fd, 0, 0, Screen.GetWidth(), Screen.GetHeight());
       break;
    }
    }
 
-   if(m_skip)
-      Screen.DrawText("smallfnt", Font.CR_WHITE, 5, 0, String.Format("Skip: %u", 1 + m_skip / 10),
-         DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   if(m_Skip) Screen.DrawText("smallfnt", Font.CR_WHITE, 5, 0, String.Format("Skip: %u", 1 + m_Skip / 10), DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
 ui void RunEndSequence()
 {
-   PlayerInfo p = players[consoleplayer];
-   let btn = p.cmd.buttons;
-   let old = p.oldbuttons;
+   PlayerInfo p = Players[ConsolePlayer];
+   let btn = p.Cmd.Buttons;
+   let old = p.OldButtons;
 
-   if(m_eseq >= ESEQ_WAIT)
+   if(m_ESeq >= ESEQ_WAIT)
    {
       if(btn & BT_ALTATTACK)
       {
-         if(m_skip)
+         if(m_Skip)
          {
-            if(--m_skip == 0) {
-               m_eseq = ESEQ_RUN;
-               m_en++;
+            if(--m_Skip == 0) {
+               m_ESeq = ESEQ_RUN;
+               m_P++;
             }
          }
          else
-            m_skip = 25;
+            m_Skip = 25;
       }
-      else if(m_time < m_tics)
+      else if(m_Time < m_Tics)
       {
-         m_skip = 0;
+         m_Skip = 0;
 
-         if(btn & BT_USE && m_time > 12) m_time += 3;
-         else                            m_time++;
+         if(btn & BT_USE && m_Time > 12) m_Time += 3;
+         else                            m_Time++;
 
-         if(m_time > m_tics) m_time = m_tics;
+         if(m_Time > m_Tics) m_Time = m_Tics;
       }
       else
       {
-         m_skip = 0;
+         m_Skip = 0;
 
-         m_eseq = ESEQ_RUN;
-         m_en++;
+         m_ESeq = ESEQ_RUN;
+         m_P++;
       }
    }
-   else if(m_eseq == ESEQ_STOP)
+   else if(m_ESeq == ESEQ_STOP)
    {
-      if(btn & BT_ALTATTACK || (btn ^ old && (btn & old) == p.oldbuttons && p.bot == null))
+      if(btn & BT_ALTATTACK || (btn ^ old && (btn & old) == p.OldButtons && p.Bot == null))
       {
-         m_eseq = ESEQ_RUN;
-         m_en++;
+         m_ESeq = ESEQ_RUN;
+         m_P++;
       }
    }
 
-   while(m_eseq == ESEQ_RUN)
+   while(m_ESeq == ESEQ_RUN)
    {
-      switch(m_node[m_en].type) {
-      case  'mus': S_ChangeMusic(m_node[m_en++].text); break;
+      switch(m_Node[m_P].Type) {
+      case 'mus':
+         S_ChangeMusic(m_Node[m_P++].Text);
+         break;
       case 'done':
          Menu.SetMenu('EndGameMenu');
          MessageBoxMenu(Menu.GetCurrentMenu()).HandleResult(true);
-         m_eseq = ESEQ_HALT;
+         m_ESeq = ESEQ_HALT;
          break;
-      case 'stop': m_eseq = ESEQ_STOP;             break;
-      case  'img': {
-         string tex = m_node[m_en++].text;
+      case 'stop':
+         m_ESeq = ESEQ_STOP;
+         break;
+      case 'img': {
+         string tex = m_Node[m_P++].Text;
 
          if(tex.charCodeAt(0) == Ch_Colon)
             tex = StringTable.Localize(String.Format("LITH%s", tex), false);
 
-         m_bgimg = TexMan.CheckForTexture(tex, TexMan.Type_Any);
+         m_BgImg = TexMan.CheckForTexture(tex, TexMan.Type_Any);
          break;
       }
-      case   'bg':
-         m_bgcolo = m_node[m_en++].text;
-         m_bgimg.setNull();
+      case 'bg':
+         m_BgColo = m_Node[m_P++].Text;
+         m_BgImg.SetNull();
          break;
       case 'case': {
          bool cnd;
 
-         switch(name(m_node[m_en].text)) {
-         case 'marine':    cnd = p.cls == "Lith_MarinePlayer";    break;
-         case 'cybermage': cnd = p.cls == "Lith_CyberMagePlayer"; break;
+         switch(name(m_Node[m_P].Text)) {
+         case 'marine':    cnd = p.Cls == "Lith_MarinePlayer";    break;
+         case 'cybermage': cnd = p.Cls == "Lith_CyberMagePlayer"; break;
          default:          cnd = false;                           break;
          }
 
-         if(cnd) m_en++;
-         else    m_en = m_jmp[m_node[m_en].tics];
+         if(cnd) m_P++;
+         else    m_P = m_Jmp[m_Node[m_P].Tics];
 
          break;
       }
       case 'wait':
-         m_tics = m_node[m_en].tics;
-         m_time = 1;
-         m_eseq = ESEQ_WAIT;
+         m_Tics = m_Node[m_P].Tics;
+         m_Time = 1;
+         m_ESeq = ESEQ_WAIT;
          break;
       case 'fmus':
-         m_tics = m_node[m_en].tics;
-         m_time = 1;
-         m_eseq = ESEQ_FADEMUS;
+         m_Tics = m_Node[m_P].Tics;
+         m_Time = 1;
+         m_ESeq = ESEQ_FADEMUS;
          break;
       case 'fade':
-         m_fdcolo = m_node[m_en].text;
-         m_tics   = m_node[m_en].tics;
-         m_time   = 1;
-         if(m_tics < 0) {m_eseq = ESEQ_FADEIN; m_tics = -m_tics;}
-         else            m_eseq = ESEQ_FADEOUT;
+         m_FdColo = m_Node[m_P].Text;
+         m_Tics   = m_Node[m_P].Tics;
+         m_Time   = 1;
+         if(m_Tics < 0) {m_ESeq = ESEQ_FADEIN; m_Tics = -m_Tics;}
+         else            m_ESeq = ESEQ_FADEOUT;
          break;
       case 'text':
-         m_text = m_node[m_en].text;
-         m_tics = m_node[m_en].tics;
-         m_time = 1;
-         if(m_tics > 0) m_eseq = ESEQ_WRITEOUT;
-         else           m_en++;
+         m_Text = m_Node[m_P].Text;
+         m_Tics = m_Node[m_P].Tics;
+         m_Time = 1;
+         if(m_Tics > 0) m_ESeq = ESEQ_WRITEOUT;
+         else           m_P++;
          break;
       }
    }

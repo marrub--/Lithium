@@ -6,16 +6,16 @@ class Lith_DarkLordPlayer : Lith_Player
 {
    default
    {
-      Lith_Player.ViewBob 0.4;
-      Player.DisplayName "Dark Lord";
-      Player.SoundClass "darklord";
-      Player.Portrait "lgfx/Portraits/DarkLord.png";
-      Player.ViewHeight 50;
-      Player.AttackZOffset 17;
-      Player.MaxHealth 200;
-      Player.SideMove 1, 0.5;
-      Player.ForwardMove 1, 0.5;
       Health 200;
+      Lith_Player.ViewBob 0.4;
+      Player.AttackZOffset 17;
+      Player.DisplayName "Dark Lord";
+      Player.ForwardMove 1, 0.5;
+      Player.MaxHealth 200;
+      Player.Portrait "lgfx/Portraits/DarkLord.png";
+      Player.SideMove 1, 0.5;
+      Player.SoundClass "darklord";
+      Player.ViewHeight 50;
       Tag "DarkLord";
    }
 
@@ -51,6 +51,7 @@ class Lith_DarkLordSprint : PowerSpeed
    {
       Powerup.Duration 2;
       Speed 2.1;
+
       +POWERSPEED.NOTRAIL
    }
 }

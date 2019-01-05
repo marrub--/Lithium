@@ -9,6 +9,7 @@ default
    Tag "Fortune";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
+
    +WEAPON.NOAUTOFIRE;
 }
 
@@ -36,7 +37,7 @@ Select:
    loop;
 
 Fire:
-   goto Ready;
+   goto ReadySelector;
 }
 
 // EOF

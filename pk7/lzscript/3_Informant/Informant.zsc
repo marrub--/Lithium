@@ -17,17 +17,17 @@ class Lith_InformantPlayer : Lith_Player
       +NOBLOOD;
    }
 
-   private int m_dodgeDbc;
-   private int m_iframes;
+   private int m_DodgeDbc;
+   private int m_IFrames;
 
    override void Tick()
    {
-      if(m_iframes) m_iframes--;
+      if(m_IFrames) m_IFrames--;
 
       if(health > 0)
       {
-         if(m_dodgeDbc)
-            m_dodgeDbc--;
+         if(m_DodgeDbc)
+            m_DodgeDbc--;
          else if(player && player.buttons & BT_SPEED)
          {
             let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
@@ -35,8 +35,8 @@ class Lith_InformantPlayer : Lith_Player
             let s = sin(a) * 32;
             CallACS("Lith_DodgeView");
             A_ChangeVelocity(c, s);
-            m_iframes = 20;
-            m_dodgeDbc = TICRATE;
+            m_IFrames = 20;
+            m_DodgeDbc = TICRATE;
          }
       }
 
@@ -45,7 +45,7 @@ class Lith_InformantPlayer : Lith_Player
 
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
-      if(m_iframes)
+      if(m_IFrames)
          return 0;
       else
          return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);

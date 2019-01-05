@@ -7,12 +7,12 @@ class Lith_StarShrapnel : Actor
    default
    {
       DamageFunction 10;
-      Speed 32;
-      Radius 2;
       Height 2;
-      Scale 0.7;
       Mass 0;
+      Radius 2;
       RenderStyle "Add";
+      Scale 0.7;
+      Speed 32;
 
       Projectile;
       +NODAMAGETHRUST
@@ -24,9 +24,11 @@ class Lith_StarShrapnel : Actor
       BLLT M 4 bright;
       loop;
    Death:
-      MICX A 0 bright A_PlaySound("weapons/dark/impact", CHAN_BODY, 0.3);
-      MICX A 0 bright A_SetScale(0.5);
-      MICX ABCDEFG 1 bright;
+      MICX A 1 bright {
+         A_PlaySound("weapons/dark/impact", CHAN_BODY, 0.3);
+         A_SetScale(0.5);
+      }
+      MICX BCDEFG 1 bright;
       stop;
    }
 }
@@ -52,10 +54,10 @@ class Lith_StarWoosh1 : Actor
 {
    default
    {
-      Radius 8;
       Height 8;
-      Scale 0.7;
+      Radius 8;
       RenderStyle "Add";
+      Scale 0.7;
 
       +NOINTERACTION
    }
@@ -64,9 +66,9 @@ class Lith_StarWoosh1 : Actor
    {
    Death:
    Spawn:
-      TNT1 A 0;
-      BLLT L 0 bright A_JumpIf(scale.x < 0.01, "Null");
-      BLLT L 2 bright A_SetScale(scale.x*frandom(0.9,1.0));
+      BLLT L 0;
+      BLLT L 0 bright A_JumpIf(Scale.X < 0.01, "Null");
+      BLLT L 2 bright A_SetScale(Scale.X*FRandom(0.9,1.0));
       loop;
    }
 }
@@ -76,7 +78,8 @@ class Lith_StarWoosh2 : Lith_StarWoosh1
    states
    {
    Spawn:
-      BLLT L 0 bright A_SetScale(scale.x*frandom(0.95,1.0));
+      BLLT L 0;
+      BLLT L 0 bright A_SetScale(Scale.X*FRandom(0.95,1.0));
       BLLT L 1 bright A_FadeOut(0.05);
       loop;
    }
@@ -95,14 +98,14 @@ class Lith_StarProjectile : Actor
       RenderStyle "Add";
 
       Projectile;
-      +RIPPER
       +FORCERADIUSDMG
+      +RIPPER
       +SEEKERMISSILE
    }
 
-   int m_soundtimer;
-   int m_rushtimer;
-   int m_homingshrapneltimer;
+   int m_SoundTimer;
+   int m_RushTimer;
+   int m_HomingShrapnelTimer;
 
    states
    {
@@ -110,53 +113,62 @@ class Lith_StarProjectile : Actor
       TNT1 A 4;
       TNT1 A 0 A_PlaySound("weapons/dark/wind", CHAN_7, 1.0, true);
    Spawn1:
-      BLLT L 0 bright A_AlertMonsters;
-      BLLT L 0 bright {m_rushtimer++;}
-      BLLT L 0 bright A_JumpIf(m_rushtimer > 35*7, "Rush");
-      BLLT L 0 bright A_JumpIf(scale.x < 0.7, "ScaleUp");
+      BLLT L 0 bright {m_RushTimer++; A_AlertMonsters();}
+      BLLT L 0 bright A_JumpIf(m_RushTimer > 35*7, "Rush");
+      BLLT L 0 bright A_JumpIf(Scale.X < 0.7, "ScaleUp");
    SoundCheck:
-      BLLT L 0 bright {m_homingshrapneltimer++;}
-      BLLT L 0 bright A_JumpIf(m_homingshrapneltimer >= 10, "DoHomingMissile");
+      BLLT L 0 bright {m_HomingShrapnelTimer++;}
+      BLLT L 0 bright A_JumpIf(m_HomingShrapnelTimer >= 10, "DoHomingMissile");
    SoundCheck1:
-      BLLT L 0 bright {m_soundtimer--;}
-      BLLT L 0 bright A_JumpIf(m_soundtimer > 0, "DoMissile");
-      BLLT L 0 bright {m_soundtimer = 3;}
-      BLLT L 0 bright A_PlaySound("weapons/dark/fire", CHAN_5);
+      BLLT L 0 bright {m_SoundTimer--;}
+      BLLT L 0 bright A_JumpIf(m_SoundTimer > 0, "DoMissile");
+      BLLT L 0 bright {m_SoundTimer = 3; A_PlaySound("weapons/dark/fire", CHAN_5);}
    DoMissile:
-      BLLT L 0 bright A_Explode(40, 8 + 45 * scale.x, 0);
-      BLLT LLLLL 0 bright A_SpawnProjectile("Lith_StarShrapnel", CallACS("Lith_CircleSpread", 45*scale.x*FIX, 45*scale.x*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*scale.x*FIX, 45*scale.x*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+      BLLT L 0 bright {
+         A_Explode(40, 8 + 45 * Scale.X, 0);
+         for(int i = 0; i < 5; i++)
+            A_SpawnProjectile("Lith_StarShrapnel", CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+      }
       goto DoSeek;
    DoHomingMissile:
-      BLLT L 0 bright {m_homingshrapneltimer = 0;}
-      BLLT LL 0 bright A_SpawnProjectile("Lith_StarShrapnelHoming", CallACS("Lith_CircleSpread", 45*scale.x*FIX, 45*scale.x*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*scale.x*FIX, 45*scale.x*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+      BLLT L 0 bright {
+         m_HomingShrapnelTimer = 0;
+         for(int i = 0; i < 2; i++)
+            A_SpawnProjectile("Lith_StarShrapnelHoming", CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+      }
       goto SoundCheck1;
    ScaleUp:
-      BLLT L 0 bright A_SetScale(scale.x * 1.01);
+      BLLT L 0 bright A_SetScale(Scale.X * 1.01);
       goto SoundCheck;
    DoSeek:
       BLLT L 0 bright A_SeekerMissile(0, 1, SMF_LOOK);
       goto DoWoosh;
    Rush:
-      BLLT L 0 bright {bRIPPER = false;}
-      BLLT L 0 bright A_ChangeVelocity(vel.x*1.1, vel.y*1.1, vel.z*1.1, CVF_REPLACE);
+      BLLT L 0 bright {
+         bRIPPER = false;
+         A_ChangeVelocity(Vel.X*1.1, Vel.Y*1.1, Vel.Z*1.1, CVF_REPLACE);
+      }
    DoWoosh:
-      BLLT L 0 bright A_SpawnItemEx("Lith_StarWoosh1", 0,0,0, 4,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION);
-      BLLT L 0 bright A_SpawnItemEx("Lith_StarWoosh2", 0,0,0, 3,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION);
-      BLLT L 0 bright A_Quake(1, 2, 0, 512);
-      BLLT L 0 bright A_Quake(3, 2, 0, 256);
-      BLLT L 0 bright A_Quake(5, 2, 0, 64);
-      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight1", 256, RGF_PLAYERS);
-      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight2", 128, RGF_PLAYERS);
-      BLLT L 0 bright A_RadiusGive("Lith_BlindingLight3", 64,  RGF_PLAYERS);
-      BLLT L 1 bright;
+      BLLT L 1 bright {
+         A_SpawnItemEx("Lith_StarWoosh1", 0,0,0, 4,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION);
+         A_SpawnItemEx("Lith_StarWoosh2", 0,0,0, 3,0,0, 180, SXF_TRANSFERSCALE|SXF_NOCHECKPOSITION);
+         A_Quake(1, 2, 0, 512);
+         A_Quake(3, 2, 0, 256);
+         A_Quake(5, 2, 0, 64);
+         A_RadiusGive("Lith_BlindingLight1", 256, RGF_PLAYERS);
+         A_RadiusGive("Lith_BlindingLight2", 128, RGF_PLAYERS);
+         A_RadiusGive("Lith_BlindingLight3", 64,  RGF_PLAYERS);
+      }
       goto Spawn1;
    Death:
-      SDXP A 0 A_Explode(128, 512, 0);
-      SDXP A 0 A_StopSound(CHAN_7);
-      SDXP A 0 A_PlaySound("weapons/shipgun/explode", CHAN_6);
-      SDXP A 0 A_SetScale(1);
-      SDXP A 0 bright A_RadiusGive("Lith_BlindingLight3", 512, RGF_PLAYERS);
-      SDXP ABCDEFGHIJKLMNOPQRS 1 bright;
+      SDXP A 1 bright {
+         A_Explode(128, 512, 0);
+         A_StopSound(CHAN_7);
+         A_PlaySound("weapons/shipgun/explode", CHAN_6);
+         A_SetScale(1);
+         A_RadiusGive("Lith_BlindingLight3", 512, RGF_PLAYERS);
+      }
+      SDXP BCDEFGHIJKLMNOPQRS 1 bright;
       SDXP T 1 bright A_FadeOut;
       wait;
    }
@@ -166,12 +178,12 @@ class Lith_SolspearThingy : Actor
 {
    default
    {
-      Scale 0.15;
       RenderStyle "Add";
+      Scale 0.15;
 
       +BRIGHT
-      +NOGRAVITY
       +NOCLIP
+      +NOGRAVITY
    }
 
    states
@@ -188,36 +200,37 @@ class Lith_Solspear : Actor
 {
    default
    {
-      Damage 500;
-      Speed 48;
-      Radius 8;
-      Height 8;
-      Scale 0.15;
-      RenderStyle "Add";
-      BounceType "Hexen";
-      BounceSound "weapons/dark/fire";
-      BounceFactor 1;
-      WallBounceFactor 1;
       BounceCount 15;
+      BounceFactor 1;
+      BounceSound "weapons/dark/fire";
+      BounceType "Hexen";
+      Damage 500;
+      Height 8;
+      Radius 8;
+      RenderStyle "Add";
+      Scale 0.15;
+      Speed 48;
+      WallBounceFactor 1;
 
       Projectile;
       +BRIGHT
       +RIPPER
    }
 
-   const flags = SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION;
+   const FLAGS = SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION;
 
    states
    {
    Spawn:
-      TNT1 A 0;
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -8 , flags: flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -16, flags: flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -24, flags: flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -32, flags: flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -40, flags: flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_SolspearThingy", -48, flags: flags);
-      BLLT L 1;
+      BLLT L 0;
+      BLLT L 1 {
+         A_SpawnItemEx("Lith_SolspearThingy",  -8, flags: FLAGS);
+         A_SpawnItemEx("Lith_SolspearThingy", -16, flags: FLAGS);
+         A_SpawnItemEx("Lith_SolspearThingy", -24, flags: FLAGS);
+         A_SpawnItemEx("Lith_SolspearThingy", -32, flags: FLAGS);
+         A_SpawnItemEx("Lith_SolspearThingy", -40, flags: FLAGS);
+         A_SpawnItemEx("Lith_SolspearThingy", -48, flags: FLAGS);
+      }
       loop;
    }
 }
@@ -226,22 +239,23 @@ class Lith_StarBarrier : Actor
 {
    default
    {
-      Translation "Lith_StarBarrier";
+      Alpha 0.8;
       RenderStyle "Add";
+      Translation "Lith_StarBarrier";
       XScale 0.3;
       YScale 0.4;
-      Alpha 0.8;
 
-      +NOTIMEFREEZE
       +NOINTERACTION
+      +NOTIMEFREEZE
    }
 
    states
    {
    Spawn:
-      LBAR A 1 A_ScaleVelocity(frandom(0.5,1));
+      LBAR A 0;
+      LBAR A 1 A_ScaleVelocity(FRandom(0.5,1));
    SpawnLoop:
-      LBAR A 1 A_FadeOut(frandom(0.04, 0.09));
+      LBAR A 1 A_FadeOut(FRandom(0.04, 0.09));
       loop;
    }
 }
@@ -259,23 +273,27 @@ class Lith_SurgeProtector : Powerup
 
 class Lith_SurgeOfDestiny : Lith_CustomFunction
 {
-   const flags = SXF_NOCHECKPOSITION;
+   const FLAGS = SXF_NOCHECKPOSITION;
 
    states
    {
    Pickup:
-      TNT1 A 0 A_GiveInventory("Lith_SurgeProtector");
-      TNT1 A 0 A_Explode(128, 192, 0);
-      TNT1 A 0 A_PlaySound("weapons/dark/fire", CHAN_7);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  50, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  90, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 135, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 180, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 225, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 270, flags);
-      TNT1 A 0 A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 310, flags);
-      TNT1 AAAAAAAAA 0 A_FireProjectile("Lith_StarShrapnel", frandom(0, 360), false, 0, 32, FPF_AIMATANGLE|FPF_NOAUTOAIM);
-      TNT1 AAA 0 A_FireProjectile("Lith_StarShrapnelHoming", frandom(0, 360), false, 0, 32, FPF_AIMATANGLE|FPF_NOAUTOAIM);
+      TNT1 A 0 {
+         A_GiveInventory("Lith_SurgeProtector");
+         A_Explode(128, 192, 0);
+         A_PlaySound("weapons/dark/fire", CHAN_7);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  50, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  90, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 135, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 180, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 225, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 270, FLAGS);
+         A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2, 310, FLAGS);
+         for(int i = 0; i < 9; i++)
+            A_FireProjectile("Lith_StarShrapnel", FRandom(0, 360), false, 0, 32, FPF_AIMATANGLE|FPF_NOAUTOAIM);
+         for(int i = 0; i < 3; i++)
+            A_FireProjectile("Lith_StarShrapnelHoming", FRandom(0, 360), false, 0, 32, FPF_AIMATANGLE|FPF_NOAUTOAIM);
+      }
       stop;
    }
 }
@@ -285,13 +303,33 @@ class Lith_StarDestroyer : Lith_CWeapon;
 default
 {
    Tag "Star Destroyer";
-   Weapon.UpSound "weapons/shipgun/draw";
-   Weapon.SlotNumber 7;
-   Weapon.SlotPriority 1;
    Weapon.BobRangeX 1.7;
    Weapon.BobSpeed 0.7;
+   Weapon.SlotNumber 7;
+   Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/shipgun/draw";
 
    +WEAPON.NOAUTOFIRE
+}
+
+action(Weapon) void Lith_A_FireStar()
+{
+   A_GunFlash("DummyFlash");
+   if(CallACS("LPData", pdata_upgrade, UPGR_ShipGun_A))
+   {
+      A_PlaySound("weapons/shipgun/firesol", CHAN_5);
+      A_FireProjectile("Lith_Solspear");
+   }
+   else if(CallACS("LPData", pdata_upgrade, UPGR_ShipGun_B))
+   {
+      A_PlaySound("weapons/shipgun/firesurge", CHAN_5);
+      CallACS("Lith_SurgeOfDestiny");
+   }
+   else
+   {
+      A_PlaySound("weapons/shipgun/fire", CHAN_5);
+      A_FireProjectile("Lith_StarProjectile");
+   }
 }
 
 states(Actor)
@@ -310,48 +348,34 @@ Ready:
 Deselect:
    SDSG A 0 A_StopSound(CHAN_6);
 DeselectLoop:
-   SDSG AAA 0 A_Lower;
-   SDSG A 1;
+   SDSG AA 0 A_Lower;
+   SDSG A 1 A_Lower;
    loop;
 
 Select:
    SDSG A 0 A_PlaySound("weapons/shipgun/idle", CHAN_6, 1, true);
 SelectLoop:
-   SDSG AA 0 A_Raise;
-   SDSG A 1;
+   SDSG A 0 A_Raise;
+   SDSG A 1 A_Raise;
    loop;
 
 Fire:
-   SDSG A 0 A_JumpIfInventory("Lith_CannonAmmo", 5, 1);
-   goto FireEmpty;
+   SDSG A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 5, "FireEmpty");
    SDSG A 1 A_PlaySound("weapons/shipgun/prepare", CHAN_WEAPON);
-   SDSG ABCDEFFGGHHAABCDEFGH 1 bright;
+   SDSG ABCDEFFGGH 1 bright;
+   SDSG HAABCDEFGH 1 bright;
    SDSG ABBCCDDEFG 1 bright offset(0, 33);
    SDSG HADEFHBCGH 1 bright offset(0, 34);
-   SDSG A 0 A_TakeInventory("Lith_CannonAmmo", 5, TIF_NOTAKEINFINITE);
-   SDSG A 0 A_AlertMonsters;
-   SDSG A 1 bright;
+   SDSG A 1 bright {
+      A_TakeInventory("Lith_CannonAmmo", 5, TIF_NOTAKEINFINITE);
+      A_AlertMonsters();
+   }
    SDSG A 1 bright offset(-1, 33);
    SDSG A 1 bright offset(-1, 34);
    SDSG A 1 bright offset(-1, 36);
    SDSG A 2 bright offset(1, 37);
    SDSF A 3 bright offset(1, 38);
-   SDSF A 0 A_GunFlash("DummyFlash");
-   SDSF A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ShipGun_A), "FireSolspear");
-   SDSF A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ShipGun_B), "FireSurge");
-FireStar:
-   SDSF A 0 A_PlaySound("weapons/shipgun/fire", CHAN_5);
-   SDSF A 0 A_FireProjectile("Lith_StarProjectile");
-   goto FireAnim;
-FireSolspear:
-   SDSF A 0 A_PlaySound("weapons/shipgun/firesol", CHAN_5);
-   SDSF A 0 A_FireProjectile("Lith_Solspear");
-   goto FireAnim;
-FireSurge:
-   SDSF A 0 A_PlaySound("weapons/shipgun/firesurge", CHAN_5);
-   SDSF A 0 ACS_NamedExecuteWithResult("Lith_SurgeOfDestiny");
-FireAnim:
-   SDSF B 2 bright offset(0, 62);
+   SDSF B 2 bright offset(0, 62) Lith_A_FireStar;
    SDSF C 1 bright offset(0, 57);
    SDSF D 1 bright offset(0, 47);
    SDSF E 1 bright offset(0, 44);
@@ -359,7 +383,7 @@ FireAnim:
    SDSF G 1 bright offset(0, 37);
    SDSF H 1 bright offset(0, 35);
    SDSG AABBCCDDEEFFGGHH 1 offset(0, 32) A_ReFire;
-   goto Ready;
+   goto ReadySelector;
 FireEmpty:
    SDSG A 2 A_PlaySound("weapons/shipgun/empty", CHAN_7);
    SDSG B 1 offset(0, 28);
@@ -375,7 +399,7 @@ FireEmpty:
    SDSG D 1 offset(0, 34);
    SDSG EFG 1 offset(0, 32);
    SDSG H 1 A_ReFire;
-   goto Ready;
+   goto ReadySelector;
 }
 
 // EOF

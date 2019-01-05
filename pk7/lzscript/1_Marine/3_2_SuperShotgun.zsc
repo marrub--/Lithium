@@ -7,13 +7,25 @@ class Lith_SuperShotgun : Lith_MWeapon;
 default
 {
    Tag "Super Shotgun";
-   Weapon.UpSound "weapons/ssg/draw";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
+   Weapon.UpSound "weapons/ssg/draw";
 }
 
-int m_iter;
-int m_shots;
+int m_Iter;
+int m_Shots;
+
+action(Weapon) void Lith_A_FireSSG()
+{
+   A_TakeInventory("Lith_ShellAmmo", 2, TIF_NOTAKEINFINITE);
+   A_AlertMonsters();
+   Lith_FireBullets(9, 6, 16, 8);
+   Lith_A_GunSmoke();
+   A_PlaySound("weapons/ssg/fire", CHAN_7);
+   A_Recoil(1.2);
+   Lith_A_RecoilUp(1.5);
+   A_GunFlash();
+}
 
 states(Actor)
 {
@@ -25,62 +37,48 @@ SpawnPickup:
 states(Weapon)
 {
 Ready:
-   SSGG A 0 {invoker.m_iter = invoker.m_shots = 0;}
+   SSGG A 0 {invoker.m_Iter = invoker.m_Shots = 0;}
    SSGG A 1 Lith_A_Ready;
    loop;
 
 Deselect:
-   SHTG A 0 A_Lower;
+   SSGG A 0 A_Lower;
    SSGG A 1 A_Lower;
    loop;
 
 Select:
-   SHTG A 0 A_Raise;
+   SSGG A 0 A_Raise;
    SSGG A 1 A_Raise;
    loop;
 
 FireEmpty:
-   SSGG A 1;
-   SSGG A 2 offset(0, 38);
-   SSGG A 1 offset(0, 40);
-   SSGG A 1 offset(0, 37) A_PlaySound("weapons/ssg/empty", CHAN_5);
-   SSGG A 1 offset(0, 34);
-   SSGG A 1 offset(0, 33);
-   SSGG A 5 offset(0, 32);
-   SSGG AAAA 1 A_ReFire;
-   goto Ready;
+   #### # 1;
+   #### # 2 offset(0, 38);
+   #### # 1 offset(0, 40);
+   #### # 1 offset(0, 37) A_PlaySound("weapons/ssg/empty", CHAN_5);
+   #### # 1 offset(0, 34);
+   #### # 1 offset(0, 33);
+   #### # 5 offset(0, 32);
+   #### #### 1 A_ReFire;
+   goto ReadySelector;
 Fire:
-   SSGG A 0 A_JumpIfInventory("Lith_ShellAmmo", 4, 1);
-   goto AltFire;
-   SSGG A 2;
-   SSGG A 0 {invoker.m_iter = invoker.m_shots = 2;}
-   goto Attack;
+   #### # 0 A_JumpIf(CountInv("Lith_ShellAmmo") < 4, "AltFire");
+   SSGG A 2 {invoker.m_Iter = invoker.m_Shots = 2;}
+   goto DoFire;
 Flash:
    SSGG B 1 bright A_Light1;
    SSGG C 1 bright A_Light2;
    goto LightDone;
 
 AltFire:
-   SSGG A 0 A_JumpIfInventory("Lith_ShellAmmo", 2, 1);
-   goto FireEmpty;
-   SSGG A 2;
-   SSGG A 0 {invoker.m_iter = invoker.m_shots = 1;}
-Attack:
-   SSGG A 0 A_TakeInventory("Lith_ShellAmmo", 2, TIF_NOTAKEINFINITE);
-   SSGG A 0 A_AlertMonsters;
-   SSGG A 0 Lith_FireBullets(9, 6, 16, 8);
-   SSGG A 0 Lith_A_GunSmoke;
-   SSGG A 0 A_PlaySound("weapons/ssg/fire", CHAN_7);
-   SSGG A 0 A_Recoil(1.2);
-   SSGG A 0 Lith_A_RecoilUp(1.5);
-   SSGG A 0 A_GunFlash;
-   SSGG A 1;
+   #### # 0 A_JumpIf(CountInv("Lith_ShellAmmo") < 2, "FireEmpty");
+   SSGG A 2 {invoker.m_Iter = invoker.m_Shots = 1;}
+DoFire:
+   SSGG A 1 Lith_A_FireSSG;
+   SSGG A 1 bright offset(0, 40) Lith_A_RecoilDn(0.5);
+   SSGG A 1 bright offset(0, 37) Lith_A_RecoilDn(0.5);
    SSGG A 0 Lith_A_RecoilDn(0.5);
-   SSGG A 1 bright offset(0, 40);
-   SSGG A 0 Lith_A_RecoilDn(0.5);
-   SSGG A 1 bright offset(0, 37);
-   SSGG A 0 Lith_A_RecoilDn(0.5);
-   SSGG A 0 A_JumpIf(--invoker.m_shots != 0, "Attack");
+   SSGG A 0 A_JumpIf(--invoker.m_Shots != 0, "DoFire");
    SSGG A 1 offset(0, 35);
    SSGG A 1 offset(0, 33);
    SSGG A 1 offset(0, 32);
@@ -89,34 +87,31 @@ OpenAnim:
    SSGG I 2;
    SSGG J 2 A_PlaySound("weapons/ssg/open", CHAN_5);
    SSGG Z 1;
-   SSGG Z 0 {
-      for(int i = 0; i < invoker.m_iter; i++)
+   SSGG Z 1 offset(4, 35) {
+      for(int i = 0; i < invoker.m_Iter; i++)
       {
-         Lith_A_Casing("Lith_CasShellHot", 20, -1, 30, frandom(3,4), frandom(-7,-8), frandom(2,9));
-         Lith_A_Casing("Lith_CasShellHot", 20, -4, 30, frandom(3,4), frandom(-7,-8), frandom(2,9));
+         Lith_A_Casing("Lith_CasShellHot", 20, -1, 30, FRandom(3,4), FRandom(-7,-8), FRandom(2,9));
+         Lith_A_Casing("Lith_CasShellHot", 20, -4, 30, FRandom(3,4), FRandom(-7,-8), FRandom(2,9));
       }
+      return A_JumpIfInventory("Lith_ShellAmmo", 2, "LoadAnim");
    }
-   SSGG Z 0 A_JumpIfInventory("Lith_ShellAmmo", 2, "LoadAnim");
-   SSGG Z 1 offset(4, 35);
    SSGG Z 1 offset(15, 37);
    SSGG Z 1 offset(30, 42);
    SSGG Z 2 offset(54, 54);
-   SSGG Z 0 offset(1, 32);
    goto CloseAnim;
 LoadAnim:
    SSGG KL 3;
    SSGG M 4;
    SSGG N 2 A_PlaySound("weapons/ssg/load", CHAN_6);
    SSGG O 2;
-   SSGG O 0 A_JumpIf(--invoker.m_iter != 0, "LoadAnim");
+   SSGG O 0 A_JumpIf(--invoker.m_Iter != 0, "LoadAnim");
 CloseAnim:
-   SSGG P 3;
+   SSGG P 3 offset(1, 32);
    SSGG Q 3;
    SSGG R 3 A_PlaySound("weapons/ssg/close", CHAN_7);
    SSGG S 3;
    SSGG AAAAA 1 A_ReFire;
-   goto Ready;
+   goto ReadySelector;
 }
 
 // EOF
-

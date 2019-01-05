@@ -6,8 +6,8 @@ class Lith_PlasmaBoltTrail : Actor
 {
    default
    {
-      RenderStyle "Add";
       Alpha 0.2;
+      RenderStyle "Add";
       Scale 0.125;
 
       +NOINTERACTION
@@ -83,12 +83,12 @@ class Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
    states
    {
    Trail:
-      TNT1 A 0 A_JumpIf(m_trailstep >= 10, "TrailDone");
-      TNT1 A 0 {m_trailstep++;}
-      TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Red", ((m_trailstep * 10.0) * vel.x) / -35.0, -((m_trailstep * 10.0) * vel.y) / -35.0, 2.0 + ((m_trailstep * 10.0) * vel.z) / -35.0, flags: SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
+      TNT1 A 0 A_JumpIf(m_TrailStep >= 10, "TrailDone");
+      TNT1 A 0 {m_TrailStep++;}
+      TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Red", ((m_TrailStep * 10.0) * vel.x) / -35.0, -((m_TrailStep * 10.0) * vel.y) / -35.0, 2.0 + ((m_TrailStep * 10.0) * vel.z) / -35.0, flags: SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
       loop;
    TrailDone:
-      TNT1 A 0 {m_trailstep = 0;}
+      TNT1 A 0 {m_TrailStep = 0;}
       goto Step;
    Death:
       TNT1 AAAA 0 A_SpawnParticle("Red", SPF_FULLBRIGHT, 15, 4, 0, frandom(-5, 5),frandom(-5, 5),frandom(-5, 5), frandom(-5, 5),frandom(-5, 5),frandom(-5, 5));
@@ -113,7 +113,7 @@ default
    +MTHRUSPECIES
 }
 
-int m_trailstep;
+int m_TrailStep;
 
 states
 {
@@ -121,12 +121,12 @@ Spawn:
    TNT1 A 3;
    TNT1 A 0 ResolveState("Trail");
 Trail:
-   TNT1 A 0 A_JumpIf(m_trailstep >= 5, "TrailDone");
-   TNT1 A 0 {m_trailstep++;}
-   TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Green", ((m_trailstep * 10.0) * vel.x) / -35.0, -((m_trailstep * 10.0) * vel.y) / -35.0, 2.0 + ((m_trailstep * 10.0) * vel.z) / -35.0, flags: SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
+   TNT1 A 0 A_JumpIf(m_TrailStep >= 5, "TrailDone");
+   TNT1 A 0 {m_TrailStep++;}
+   TNT1 A 0 A_SpawnItemEx("Lith_PlasmaBoltTrail_Green", ((m_TrailStep * 10.0) * vel.x) / -35.0, -((m_TrailStep * 10.0) * vel.y) / -35.0, 2.0 + ((m_TrailStep * 10.0) * vel.z) / -35.0, flags: SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
    loop;
 TrailDone:
-   TNT1 A 0 {m_trailstep = 0;}
+   TNT1 A 0 {m_TrailStep = 0;}
    goto Step;
 Step:
    TNT1 A 1;

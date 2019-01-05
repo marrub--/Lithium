@@ -354,11 +354,11 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
    // set global damage info (ouch)
    let sv = Lith_HERMES.Instance();
 
-   sv.m_dmgworld = !(inflictor || source);
-   sv.m_dmgtype  = mod;
+   sv.m_DmgWorld = !(inflictor || source);
+   sv.m_DmgType  = mod;
 
    // hack: remove the damage type for world stuff so obituaries are easier to override
-   if(sv.m_dmgworld || source == self) mod = 'None';
+   if(sv.m_DmgWorld || source == self) mod = 'None';
 
    // special protection
    CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
@@ -385,15 +385,15 @@ override void Die(Actor source, Actor inflictor, int dmgflags)
    let sv = Lith_HERMES.Instance();
    string ob;
 
-   if(source == self) switch(sv.m_dmgtype)
+   if(source == self) switch(sv.m_DmgType)
    {
    case 'FatMacRecoil': ob = "$LITH_OB_S_FatMac";    break;
    case 'Shrapnel':     ob = "$LITH_OB_S_Explosion"; break;
    default:             ob = "(suicide)";            break;
    }
    else if(source)
-      ob = sv.m_dmgtype == 'Melee' ? source.hitobituary : source.obituary;
-   else switch(sv.m_dmgtype)
+      ob = sv.m_DmgType == 'Melee' ? source.hitobituary : source.obituary;
+   else switch(sv.m_DmgType)
    {
    case 'Falling':  ob = "(falling)";  break;
    case 'Crush':    ob = "(crush)";    break;
@@ -404,7 +404,7 @@ override void Die(Actor source, Actor inflictor, int dmgflags)
    default:         ob = "(default)";  break;
    }
 
-   sv.m_obituary = StringTable.Localize(ob);
+   sv.m_Obituary = StringTable.Localize(ob);
 
    CallACS("Lith_Obituary");
 }

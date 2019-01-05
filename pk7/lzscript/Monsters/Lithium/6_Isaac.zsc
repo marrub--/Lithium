@@ -6,9 +6,9 @@ class Lith_IsaacThompsonTrail : Actor
 {
    default
    {
+      Alpha 0.8;
       RenderStyle "Add";
       Scale 0.8;
-      Alpha 0.8;
 
       +NOINTERACTION
    }
@@ -25,20 +25,20 @@ class Lith_IsaacThompsonBullet : FastProjectile
 {
    default
    {
-      MissileType "Lith_IsaacThompsonTrail";
-      RenderStyle "Translucent";
-      Species "Lith_Phantom";
-      DamageType "Bullet";
       Alpha 0.9;
-      Scale 0.3;
-      Radius 4;
-      Height 4;
       DamageFunction 4 * random(1, 4);
+      DamageType "Bullet";
+      Height 4;
+      MissileType "Lith_IsaacThompsonTrail";
+      Radius 4;
+      RenderStyle "Translucent";
+      Scale 0.3;
+      Species "Lith_Phantom";
       Speed 128;
 
       +BLOODSPLATTER
-      +MTHRUSPECIES
       +DONTHARMSPECIES
+      +MTHRUSPECIES
    }
 
    states
@@ -66,7 +66,7 @@ default
 
 override void Lith_PostInit()
 {
-   if(m_phase == 3)
+   if(m_Phase == 3)
       A_SpawnItemEx("Lith_Boss_Michael", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
 
    Super.Lith_PostInit();
@@ -80,14 +80,14 @@ override void Lith_OnDeath()
 
 void Lith_A_SpawnDupe()
 {
-   if(random(0, 32) == 0 && m_phase == 3 && m_dupes < 3)
+   if(random(0, 32) == 0 && m_Phase == 3 && m_Dupes < 3)
    {
-      m_dupes++;
+      m_Dupes++;
       A_SpawnItemEx("Lith_Boss_Johnson", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
    }
 }
 
-int m_dupes;
+int m_Dupes;
 
 states
 {

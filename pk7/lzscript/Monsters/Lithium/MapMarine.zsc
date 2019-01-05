@@ -25,15 +25,17 @@ default
    +USESPECIAL
 }
 
-int m_init;
+int m_Init;
 
 states
 {
 Spawn:
    TNT1 A 0;
-   TNT1 A 0 A_JumpIf(m_init, "Idle");
-   TNT1 A 0 {m_init = 1;}
-   TNT1 A 0 A_SetSpecial(84, -int('Lith_RunDialogue'), args[0]);
+   TNT1 A 0 A_JumpIf(m_Init, "Idle");
+   TNT1 A 0 {
+      m_Init = 1;
+      A_SetSpecial(84, -int('Lith_RunDialogue'), Args[0]);
+   }
 Idle:
    NMA6 A 4;
    loop;
