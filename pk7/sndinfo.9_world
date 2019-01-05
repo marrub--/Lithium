@@ -3,17 +3,6 @@
 // See licenses/cc0.txt for more information.
 
 //
-// Body
-//
-body/bullethit1 lsounds/World/Bullet1 // Half-Life
-body/bullethit2 lsounds/World/Bullet2 // 〃
-
-$random body/bullethit {
-   body/bullethit1
-   body/bullethit2
-}
-
-//
 // Ambiance
 //
 amb/rain       lsounds/World/Ambiance/Rain          // ???

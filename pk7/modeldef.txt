@@ -81,4 +81,36 @@ model "Lith_BulletRicochetSpark"
    FrameIndex ____ D 0 0
 }
 
+model "Lith_BloodHitSpray"
+{
+   DontCullBackfaces
+   UseActorRoll
+   UseActorPitch
+
+   Scale 1.0 30.0 30.0
+   PitchOffset 45
+
+   Path "lmodels"
+   Model 0 "1x1.obj"
+   Skin 0 "blood_drop.png"
+
+   FrameIndex ____ A 0 0
+}
+
+model "Lith_BloodHitCore"
+{
+   DontCullBackfaces
+   UseActorRoll
+   UseActorPitch
+
+   Scale 1.0 27.0 27.0
+   PitchOffset 45
+
+   Path "lmodels"
+   Model 0 "1x1.obj"
+   Skin 0 "blood_core.png"
+
+   FrameIndex ____ A 0 0
+}
+
 // EOF

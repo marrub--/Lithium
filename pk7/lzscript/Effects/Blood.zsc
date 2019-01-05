@@ -2,34 +2,93 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-class Lith_Blood1 : Actor
+class Lith_BloodHitSpray : Actor
 {
    default
    {
       RenderStyle "Translucent";
-      Alpha 0.7;
 
-      +NOBLOCKMAP
-      +NOTELEPORT
+      +NOINTERACTION
+      +DONTSPLASH
+   }
+
+   float m_Step;
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      Alpha = FRandom(0.7, 0.9);
+      A_SetRoll(FRandom(0, 359));
+      A_SetScale(FRandom(0.5, 1.0));
+      A_SetPitch(FRandom(-5, 5));
+      m_Step = FRandom(0.01, 0.02);
+   }
+
+   override void Tick()
+   {
+      Super.Tick();
+      if(!GlobalFreeze && !Level.Frozen)
+      {
+         if(m_Step < 0.015) SetXYZ(Pos + (0, 0, 0.04));
+         else               SetXYZ(Pos - (0, 0, 0.04));
+         Scale *= 1.004;
+         Alpha -= m_Step;
+         if(Alpha <= 0)
+            Destroy();
+      }
    }
 
    states
    {
    Spawn:
-      BLUD ABC 8;
+      ____ A 500;
       stop;
    }
 }
 
-class Lith_Blood2 : Lith_Blood1 {states {Spawn: BLUD BC 8; stop;}}
-class Lith_Blood3 : Lith_Blood1 {states {Spawn: BLUD  C 8; stop;}}
+class Lith_BloodHitCore : Actor
+{
+   default
+   {
+      RenderStyle "Translucent";
+
+      +NOINTERACTION
+      +DONTSPLASH
+   }
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      if(!Translation) A_SetTranslation('Lith_AllToRed');
+      Alpha = FRandom(0.7, 1);
+      Angle += FRandom(-6, 6);
+      A_SetRoll(FRandom(0, 359));
+      A_SetScale(Scale.X * FRandom(0.5, 1.0));
+      A_SetPitch(FRandom(-5, 5));
+      A_SpawnItemEx("Lith_BloodHitSpray", flags: SXF_TRANSFERTRANSLATION|SXF_TRANSFERSCALE);
+      if(Random(0, 255) < 128) A_PlaySound("body/flesh", CHAN_BODY);
+   }
+
+   states
+   {
+   Spawn:
+      ____ A 4;
+      ____ AAAAAAAA 1 {A_SetScale(Scale.X * 0.95); A_FadeOut(0.1);}
+      stop;
+   }
+}
 
 class Lith_Blood : Blood replaces Blood;
 
 default
 {
+   RenderStyle "Translucent";
+
    +CORPSE
+   +DONTSPLASH
 }
+
+int m_Lev;
 
 void Lith_A_Dogs()
 {
@@ -41,13 +100,20 @@ void Lith_A_Dogs()
    }
 }
 
-void Lith_A_SpawnBlood(class<Actor> cl)
+void Lith_A_SetLevel(int num)
 {
-   for(int i = 0, n = Random(1, 2); i < n; i++)
-      A_SpawnItemEx(cl, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), FRandom(-2,2),FRandom(-2,2),FRandom(1,2), 0, SXF_TRANSFERTRANSLATION, 64);
-}
+   if(!m_Lev)
+   {
+      bool _;
+      Actor a;
+      [_, a] = A_SpawnItemEx("Lith_BloodHitCore", FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), flags: SXF_TRANSFERTRANSLATION);
+      a.Scale /= num;
+      Vel.X += FRandom(-2,2);
+      Vel.Y += FRandom(-2,2);
+   }
 
-int m_lev;
+   m_Lev = num;
+}
 
 states
 {
@@ -58,25 +124,23 @@ Spawn:
    BLUD A 0 Lith_A_Dogs;
    stop;
 Heavy:
-   BLUD A 0 {m_lev = 1;}
-   BLUD AA 4 Lith_A_SpawnBlood("Lith_Blood1");
+   BLUD A 8 Lith_A_SetLevel(1);
 Medium:
-   BLUD C 0 {m_lev = 2;}
-   BLUD BB 4 Lith_A_SpawnBlood("Lith_Blood2");
+   BLUD B 8 Lith_A_SetLevel(2);
 Low:
-   BLUD E 0 {m_lev = 3;}
-   BLUD CC 4 Lith_A_SpawnBlood("Lith_Blood3");
+   BLUD C 8 Lith_A_SetLevel(3);
    BLUD CCCCCCCCCC 2 A_FadeOut(0.1);
    stop;
 Crash:
    BLSP A 0 {
       A_Stop();
-      A_SetScale(FRandom(0.6, 0.9), Scale.Y);
-      setXYZ(pos + (FRandom(-4,4), FRandom(-4,4), 0));
-      switch(m_lev) {
-      case 1: alpha = 0.75; return ResolveState("OkHigh");
-      case 2: alpha = 0.50; return ResolveState("OkMedium");
-      case 3: alpha = 0.25; return ResolveState("OkLow");
+      Alpha = 1;
+      Scale = (FRandom(0.6, 2.2), FRandom(1, 1.2));
+      SetXYZ(Pos + (FRandom(-8,8), FRandom(-8,8), 0));
+      switch(m_Lev) {
+      case 1: return ResolveState("OkHigh");
+      case 2: return ResolveState("OkMedium");
+      case 3: return ResolveState("OkLow");
       }
       return state(null);
    }
@@ -85,9 +149,9 @@ OkHigh:   BLSP A 0; goto Ok;
 OkMedium: BLSP B 0; goto Ok;
 OkLow:    BLSP C 0; goto Ok;
 Ok:
-   BLSP # Random(140, 200);
+   BLSP # 4200;
    BLSP # 0 {
-      switch(m_lev) {
+      switch(m_Lev) {
       case 1: return ResolveState("DoneHigh");
       case 2: return ResolveState("DoneMedium");
       case 3: return ResolveState("DoneLow");
@@ -96,11 +160,11 @@ Ok:
    }
    stop;
 DoneHigh:
-   BLSP BBBBBBBBBB 1 A_FadeOut(0.01);
+   BLSP BBBBBBBBBBBBBBBBBBBB 1 A_FadeOut(0.005);
 DoneMedium:
-   BLSP CCCCCCCCCC 1 A_FadeOut(0.01);
+   BLSP CCCCCCCCCCCCCCCCCCCC 1 A_FadeOut(0.005);
 DoneLow:
-   BLSP DDDDDDDDDD 1 A_FadeOut(0.01);
+   BLSP DDDDDDDDDDDDDDDDDDDD 1 A_FadeOut(0.005);
    stop;
 }
 

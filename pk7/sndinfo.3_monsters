@@ -3,6 +3,31 @@
 // See licenses/cc0.txt for more information.
 
 //
+// Body
+//
+body/bullethit1 lsounds/Monsters/Body/Bullet1 // Half-Life
+body/bullethit2 lsounds/Monsters/Body/Bullet2 // 〃
+
+body/flesh1 lsounds/Monsters/Body/Flesh1 // Half-Life 2 MMod
+body/flesh2 lsounds/Monsters/Body/Flesh2 // 〃
+body/flesh3 lsounds/Monsters/Body/Flesh3 // 〃
+body/flesh4 lsounds/Monsters/Body/Flesh4 // 〃
+body/flesh5 lsounds/Monsters/Body/Flesh5 // 〃
+
+$random body/bullethit {
+   body/bullethit1
+   body/bullethit2
+}
+
+$random body/flesh {
+   body/flesh1
+   body/flesh2
+   body/flesh3
+   body/flesh4
+   body/flesh5
+}
+
+//
 // Misc
 //
 enemies/levelup1 lsounds/Monsters/LevelUp1 // ???
