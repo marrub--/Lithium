@@ -13,7 +13,7 @@
 "LITH_TIME_FMT_DATE" = "%i日%i月新部%i年";
 
 "LITH_ENTER_FMT" = "%S に入った... 日付:%s";
-"LITH_CHARGE_FMT" = "%.1lkｋＶ\cjチャージ";
+"LITH_CHARGE_FMT" = "%.1lkkV\cjチャージ";
 "LITH_MANA_CHARGE" = "[マナ補給中]";
 
 // Obituaries ----------------------------------------------------------------|
@@ -21,51 +21,51 @@
 "LITH_OB_S_Explosion" = "%oは爆発した。";
 
 "LITH_OB_Falling_1" = "%o took a long walk off a short floor.";
-"LITH_OB_Falling_2" = "The floor fell love with %o.";
+"LITH_OB_Falling_2" = "床は%oが大好きになった。";
 "LITH_OB_Falling_3" = "%o became paste with the power of gravity.";
-"LITH_OB_Falling_4" = "サヨナラ、%o。";
+"LITH_OB_Falling_4" = "サヨナラ、%oよ。";
 "LITH_OB_Falling_5" = "%o doesn't like heights.";
 
-"LITH_OB_Crush_1" = "%o likes small spaces too much.";
-"LITH_OB_Crush_2" = "%o had a crush on the ceiling.";
-"LITH_OB_Crush_3" = "The ceiling fell in love with %o.";
-"LITH_OB_Crush_4" = "Splat goes the %o.";
-"LITH_OB_Crush_5" = "%o was crushed.";
+"LITH_OB_Crush_1" = "%oは閉所が好きすぎた。";
+"LITH_OB_Crush_2" = "%oは天井が大好きになった。";
+"LITH_OB_Crush_3" = "天井は%oが大好きになった。";
+"LITH_OB_Crush_4" = "%oはグチャってなった。";
+"LITH_OB_Crush_5" = "%oがひしゃげた。";
 
 "LITH_OB_Exit_1" = "%o didn't realize the futility of their actions.";
-"LITH_OB_Exit_2" = "%o tried to get away.";
-"LITH_OB_Exit_3" = "There's no leaving for you, %o.";
-"LITH_OB_Exit_4" = "%o was ripped limb from limb by \cgme\c-.";
+"LITH_OB_Exit_2" = "%oが逃げようとした。";
+"LITH_OB_Exit_3" = "去りませんわ、%oよ。";
+"LITH_OB_Exit_4" = "\cgワタシ\c-の手で%oの手足が引き裂かれた。";
 
 "LITH_OB_Drowning_1" = "%o's lungs burst.";
 "LITH_OB_Drowning_2" = "%o's brain lacked the oxygen to go on.";
-"LITH_OB_Drowning_3" = "%o drowned.";
+"LITH_OB_Drowning_3" = "%oはおぼれ死んだ。";
 "LITH_OB_Drowning_4" = "%o won't be heard from again.";
 "LITH_OB_Drowning_5" = "Better start looking for %o's body.";
 
-"LITH_OB_Slime_1" = "%o melted.";
+"LITH_OB_Slime_1" = "%oがとろけた。";
 "LITH_OB_Slime_2" = "%o's boots don't appreciate them anymore.";
 "LITH_OB_Slime_3" = "%o lost their legs.";
 "LITH_OB_Slime_4" = "%o stood in something bad.";
-"LITH_OB_Slime_5" = "%o became goop.";
+"LITH_OB_Slime_5" = "%oが液になった。";
 
 "LITH_OB_Fire_1" = "%o fried to death.";
-"LITH_OB_Fire_2" = "%o is burning with passion. Er, fire. They're dead.";
+"LITH_OB_Fire_2" = "%oのパッションが燃える！っえっと、「火」が燃える。";
 "LITH_OB_Fire_3" = "It'll be hard to tell if %o's corpse is theirs.";
-"LITH_OB_Fire_4" = "%o went up in flames.";
-"LITH_OB_Fire_5" = "Smells like... %o.";
+"LITH_OB_Fire_4" = "%oが火で死んだ。";
+"LITH_OB_Fire_5" = "それは・・・%oのくさい。";
 
 "LITH_OB_Suicide_1" = "%o took the hard way out.";
-"LITH_OB_Suicide_2" = "%o won a Darwin award.";
+"LITH_OB_Suicide_2" = "%oはダーウィン賞を受賞。";
 "LITH_OB_Suicide_3" = "%o took a permanent solution to a temporary problem.";
-"LITH_OB_Suicide_4" = "%o imploded.";
+"LITH_OB_Suicide_4" = "%oが破裂した。";
 "LITH_OB_Suicide_5" = "%o couldn't take it anymore.";
 
-"LITH_OB_Default_1" = "%o is ded";
+"LITH_OB_Default_1" = "%oが氏んだ";
 "LITH_OB_Default_2" = "%o was perforated by a chaingunner hiding in the sky.";
 "LITH_OB_Default_3" = "%o was removed from the board.";
 "LITH_OB_Default_4" = "%o dehumanized themself.";
-"LITH_OB_Default_5" = "%o went poof.";
+"LITH_OB_Default_5" = "%oが消えた。";
 
 // Misc_QuitMessages.txt stub
 

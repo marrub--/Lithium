@@ -6,7 +6,7 @@
 == \#TIME_FMT_DATE  | %i日%i月新部%i年
 
 == \#ENTER_FMT  | %S に入った... 日付:%s
-== \#CHARGE_FMT | %.1lkｋＶ\cjチャージ
+== \#CHARGE_FMT | %.1lkkV\cjチャージ
 == \#MANA_CHARGE | [マナ補給中]
 
 ## Obituaries ----------------------------------------------------------------|
@@ -14,48 +14,48 @@
 == \#OB_S_Explosion | %oは爆発した。
 
 == \#OB_Falling_1 | %o took a long walk off a short floor.
-== \#OB_Falling_2 | The floor fell love with %o.
+== \#OB_Falling_2 | 床は%oが大好きになった。
 == \#OB_Falling_3 | %o became paste with the power of gravity.
-== \#OB_Falling_4 | サヨナラ、%o。
+== \#OB_Falling_4 | サヨナラ、%oよ。
 == \#OB_Falling_5 | %o doesn't like heights.
 
-== \#OB_Crush_1 | %o likes small spaces too much.
-== \#OB_Crush_2 | %o had a crush on the ceiling.
-== \#OB_Crush_3 | The ceiling fell in love with %o.
-== \#OB_Crush_4 | Splat goes the %o.
-== \#OB_Crush_5 | %o was crushed.
+== \#OB_Crush_1 | %oは閉所が好きすぎた。
+== \#OB_Crush_2 | %oは天井が大好きになった。
+== \#OB_Crush_3 | 天井は%oが大好きになった。
+== \#OB_Crush_4 | %oはグチャってなった。
+== \#OB_Crush_5 | %oがひしゃげた。
 
 == \#OB_Exit_1 | %o didn't realize the futility of their actions.
-== \#OB_Exit_2 | %o tried to get away.
-== \#OB_Exit_3 | There's no leaving for you, %o.
-== \#OB_Exit_4 | %o was ripped limb from limb by \cgme\c-.
+== \#OB_Exit_2 | %oが逃げようとした。
+== \#OB_Exit_3 | 去りませんわ、%oよ。
+== \#OB_Exit_4 | \cgワタシ\c-の手で%oの手足が引き裂かれた。
 
 == \#OB_Drowning_1 | %o's lungs burst.
 == \#OB_Drowning_2 | %o's brain lacked the oxygen to go on.
-== \#OB_Drowning_3 | %o drowned.
+== \#OB_Drowning_3 | %oはおぼれ死んだ。
 == \#OB_Drowning_4 | %o won't be heard from again.
 == \#OB_Drowning_5 | Better start looking for %o's body.
 
-== \#OB_Slime_1 | %o melted.
+== \#OB_Slime_1 | %oがとろけた。
 == \#OB_Slime_2 | %o's boots don't appreciate them anymore.
 == \#OB_Slime_3 | %o lost their legs.
 == \#OB_Slime_4 | %o stood in something bad.
-== \#OB_Slime_5 | %o became goop.
+== \#OB_Slime_5 | %oが液になった。
 
 == \#OB_Fire_1 | %o fried to death.
-== \#OB_Fire_2 | %o is burning with passion. Er, fire. They're dead.
+== \#OB_Fire_2 | %oのパッションが燃える！っえっと、「火」が燃える。
 == \#OB_Fire_3 | It'll be hard to tell if %o's corpse is theirs.
-== \#OB_Fire_4 | %o went up in flames.
-== \#OB_Fire_5 | Smells like... %o.
+== \#OB_Fire_4 | %oが火で死んだ。
+== \#OB_Fire_5 | それは・・・%oのくさい。
 
 == \#OB_Suicide_1 | %o took the hard way out.
-== \#OB_Suicide_2 | %o won a Darwin award.
+== \#OB_Suicide_2 | %oはダーウィン賞を受賞。
 == \#OB_Suicide_3 | %o took a permanent solution to a temporary problem.
-== \#OB_Suicide_4 | %o imploded.
+== \#OB_Suicide_4 | %oが破裂した。
 == \#OB_Suicide_5 | %o couldn't take it anymore.
 
-== \#OB_Default_1 | %o is ded
+== \#OB_Default_1 | %oが氏んだ
 == \#OB_Default_2 | %o was perforated by a chaingunner hiding in the sky.
 == \#OB_Default_3 | %o was removed from the board.
 == \#OB_Default_4 | %o dehumanized themself.
-== \#OB_Default_5 | %o went poof.
+== \#OB_Default_5 | %oが消えた。
