@@ -29,8 +29,8 @@ class Lith_BloodHitSpray : Actor
       Super.Tick();
       if(!GlobalFreeze && !Level.Frozen)
       {
-         if(m_Step < 0.015) SetXYZ(Pos + (0, 0, 0.04));
-         else               SetXYZ(Pos - (0, 0, 0.04));
+         if(m_Step < 0.015) SetOrigin(Pos + (0, 0, 0.04), true);
+         else               SetOrigin(Pos - (0, 0, 0.04), true);
          Scale *= 1.004;
          Alpha -= m_Step;
          if(Alpha <= 0)
@@ -90,6 +90,12 @@ default
 
 int m_Lev;
 
+override void Tick()
+{
+   Super.Tick();
+   if(bNOINTERACTION) SetOrigin((Pos.XY, FloorZ), true);
+}
+
 void Lith_A_Dogs()
 {
    for(let it = BlockThingsIterator.Create(self, 64); it.Next();)
@@ -132,23 +138,21 @@ Low:
    BLUD CCCCCCCCCC 2 A_FadeOut(0.1);
    stop;
 Crash:
-   BLSP A 0 {
-      A_Stop();
+   BLSP # 0 {
       Alpha = 1;
+      Vel = (0, 0, 0);
       Scale = (FRandom(0.6, 2.2), FRandom(1, 1.2));
+      bNOINTERACTION = true;
+      LinkContext ctx;
+      UnlinkFromWorld(ctx);
       SetXYZ(Pos + (FRandom(-8,8), FRandom(-8,8), 0));
+      LinkToWorld(ctx);
       switch(m_Lev) {
-      case 1: return ResolveState("OkHigh");
-      case 2: return ResolveState("OkMedium");
-      case 3: return ResolveState("OkLow");
+      case 1: Frame = Ch_A - Ch_A; break;
+      case 2: Frame = Ch_B - Ch_A; break;
+      case 3: Frame = Ch_C - Ch_A; break;
       }
-      return state(null);
    }
-   stop;
-OkHigh:   BLSP A 0; goto Ok;
-OkMedium: BLSP B 0; goto Ok;
-OkLow:    BLSP C 0; goto Ok;
-Ok:
    BLSP # 4200;
    BLSP # 0 {
       switch(m_Lev) {
