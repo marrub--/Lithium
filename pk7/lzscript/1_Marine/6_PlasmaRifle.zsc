@@ -34,7 +34,7 @@ class Lith_ParticleBeam : Lith_PlasmaLaze
    {
    Spawn:
       BLLT A 0;
-      BLLT A 2 A_Explode(4, 256, 0);
+      BLLT A 2 A_Explode(8, 256, 0);
       BFS1 A 1 A_FadeOut(0.1);
       wait;
    }
@@ -74,7 +74,7 @@ action(Weapon) void Lith_A_FireRail()
    A_AlertMonsters();
    A_TakeInventory("Lith_PlasmaAmmo", 200, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/plasma/part/fire", CHAN_WEAPON);
-   A_RailAttack(300, 0, false, "", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_ParticleBeamPuff", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8);
+   A_RailAttack(400, 0, false, "", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_ParticleBeamPuff", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8);
 }
 
 action(Weapon) void Lith_A_FireAltPlasma()
