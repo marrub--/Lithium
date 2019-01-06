@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_file.c: I/O stream handling.
+
 #define _GNU_SOURCE // Needed for fopencookie. See: man 7 feature_test_macros
 
 #include "common.h"
@@ -37,7 +39,7 @@ static i32 NetClose(void *nfdata)
    struct netfile *nf = nfdata;
 
    // If debugging, print out information about the buffer being written.
-   if(world.dbgSave)
+   if(dbgflag & dbgf_save)
    {
       printf("NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
       printf("Data follows\n");
@@ -201,7 +203,7 @@ FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
          Dalloc(input);
 
          // If debugging, print out information about the buffer being read.
-         if(world.dbgSave)
+         if(dbgflag & dbgf_save)
          {
             printf("Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
             printf("Data follows\n");

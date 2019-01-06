@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// dialogue_vm.c: Main dialogue VM.
+
 #if LITHIUM
 #include "common.h"
 #include "w_world.h"
@@ -285,7 +287,7 @@ static void ResetText(struct vm *vm)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_TeleportOutEffect(struct player *p)
 {
    if(!p) p = LocalPlayer;
@@ -520,7 +522,7 @@ done:
    p->indialogue -= 2;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RunDialogue(i32 num)
 {
    withplayer(LocalPlayer) if(!p->indialogue)
@@ -530,7 +532,7 @@ void Lith_RunDialogue(i32 num)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RunTerminal(i32 num)
 {
    Lith_RunDialogue(-num);

@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_shopdef.c: Unified shop definition handling.
+
 #include "common.h"
 #include "p_shopdef.h"
 #include "p_player.h"

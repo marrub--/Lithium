@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_monster.c: Monster entry points.
+
 #if LITHIUM
 #include "w_monster.h"
 #include "p_player.h"
@@ -241,13 +243,13 @@ static void OnDeath(dmon_t *m)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_GiveEXPToMonster(i32 amt)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PrintMonsterInfo(void)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
@@ -275,7 +277,7 @@ void Lith_PrintMonsterInfo(void)
       Log("no active monster");
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_GiveMonsterEXP(i32 amt)
 {
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
@@ -334,10 +336,10 @@ void Lith_MonsterMain(dmon_t *m)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_MonsterInfo()
 {
-   while(!world.gsinit) ACS_Delay(1);
+   while(ACS_Timer() < 3) ACS_Delay(1);
 
    str cname = ACS_GetActorClass(0);
 
@@ -365,7 +367,7 @@ void Lith_MonsterInfo()
    InvGive(so_MonsterInvalid, 1);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_MonsterFinalized()
 {
    ifauto(dmon_t *, m, DmonSelf())

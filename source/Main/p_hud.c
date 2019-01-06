@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_hud.c: Generalized HUD functions.
+
 #include "p_player.h"
 #include "p_hud.h"
 #include "p_hudid.h"
@@ -48,7 +50,7 @@ void Lith_HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str c
       if(p->scoreaccumtime > 0)
       {
          SetFade(fid_scacum, 5, 0.1);
-         p->scoreaccumstr = StrParam("%c%S", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
+         p->scoreaccumstr = StrParam("%c%s", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
       }
 
       if(CheckFade(fid_schit1))

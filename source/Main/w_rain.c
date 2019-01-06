@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_rain.c: Weather code.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -54,7 +56,7 @@ void Lith_DoRain()
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RainDropSpawn()
 {
    if(rain_chk)

@@ -2,11 +2,13 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_riflemodes.c: RifleModes upgrade.
+
 #include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SwitchRifleFiremode(void)
 {
    withplayer(LocalPlayer)
@@ -16,7 +18,7 @@ void Lith_SwitchRifleFiremode(void)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_ResetRifleMode()
 {
    withplayer(LocalPlayer)

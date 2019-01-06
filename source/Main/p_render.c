@@ -2,10 +2,11 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_render.c: Miscellaneous player effects.
+
 #include "common.h"
 #include "p_player.h"
 #include "p_hudid.h"
-#include "w_world.h"
 
 #include <math.h>
 
@@ -43,7 +44,7 @@ static void ScopeM(struct player *p)
 script
 void Lith_PlayerDebugStats(struct player *p)
 {
-   if(!(world.dbgLevel & log_devh)) return;
+   if(!(dbglevel & log_devh)) return;
 
    SetSize(320, 240);
 

@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_headsupdisp.c: HeadsUpDisp upgrade.
+
 #include "u_common.h"
 #include "p_hud.h"
 
@@ -144,7 +146,7 @@ void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
 
    #if LITHIUM
    Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
-   Lith_HUD_Score(p, "%S\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
+   Lith_HUD_Score(p, "%s\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_Bar, 279,2, 238,2);

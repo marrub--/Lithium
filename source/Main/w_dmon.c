@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_dmon.c: Monster tracker functions.
+
 #if LITHIUM
 #include "w_monster.h"
 #include "w_world.h"
@@ -27,8 +29,7 @@ void DmonDebugInfo(void)
 {
    static i32 lmvar idprev;
 
-   if(world.dbgLevel < log_dmon)
-      return;
+   if(!(dbglevel & log_dmon)) return;
 
    if(idprev < dmonid)
    {

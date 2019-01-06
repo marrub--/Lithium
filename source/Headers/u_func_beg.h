@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_func_beg.h: Opening segment of u_func.h.
+
 #ifdef Ret
    #define Case(n) Ret(n) case UPGR_##n:;
    #define A(n) Fn_F(n, Activate)

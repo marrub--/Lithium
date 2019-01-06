@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_file.h: I/O stream handling.
+
 #ifndef m_file_h
 #define m_file_h
 

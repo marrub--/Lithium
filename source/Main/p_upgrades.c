@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_upgrades.c: Upgrade handling.
+
 #include "u_common.h"
 #include "w_world.h"
 
@@ -62,7 +64,7 @@ struct upgradeinfo *Lith_UpgradeRegister(struct upgradeinfo const *upgr)
    return ui;
 }
 
-void Lith_GSReinit_Upgrade(void)
+void Lith_MInit_Upgrade(void)
 {
    for(i32 i = 0; i < g_upgrmax; i++)
    {
@@ -87,7 +89,7 @@ void Lith_GSReinit_Upgrade(void)
    }
 }
 
-void Lith_GSInit_Upgrade(void)
+void Lith_GInit_Upgrade(void)
 {
    g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
    memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
@@ -100,8 +102,6 @@ void Lith_GSInit_Upgrade(void)
 
    for(i32 i = 0; i < g_upgrmax; i++)
       g_upgrinfo[i].id = i;
-
-   Lith_GSReinit_Upgrade();
 }
 
 void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr)
@@ -136,7 +136,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
 
       p->upgrademap.insert(upgr);
 
-      if(upgr->info->cost == 0 || world.dbgUpgr)
+      if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
          Lith_UpgrBuy(p, upgr, true, true);
 
       j++;

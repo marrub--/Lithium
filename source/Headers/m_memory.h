@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_memory.h: Memory allocation functions.
+
 #ifndef m_memory_h
 #define m_memory_h
 

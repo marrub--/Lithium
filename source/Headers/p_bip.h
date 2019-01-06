@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_bip.h: Info page data.
+
 #if defined(LITH_X)
 LITH_X(WEAPONS,      "Weapons")
 LITH_X(ENEMIES,      "Adversaries")

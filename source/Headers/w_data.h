@@ -5,6 +5,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_data.h: Exposed world data.
+
 enum // WData
 {
    wdata_bossspawned,

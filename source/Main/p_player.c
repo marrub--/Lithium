@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_player.c: Player entry points.
+
 #include "common.h"
 #include "p_player.h"
 #include "m_list.h"
@@ -37,7 +39,7 @@ static void Lith_PlayerEntry(void)
    struct player *p = LocalPlayer;
 
 reinit:
-   while(!mapinit) ACS_Delay(1);
+   while(!player_init) ACS_Delay(1);
 
    p->reset();
    Lith_PlayerLogEntry(p);
@@ -187,8 +189,8 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
 GDCC_HashMap_Defn(upgrademap_t, i32, struct upgrade)
 
-script ext("ACS")
-void Lith_DrawPlayerIcon(int num, int x, int y)
+script_str ext("ACS")
+void Lith_DrawPlayerIcon(i32 num, i32 x, i32 y)
 {
    withplayer(&players[num])
    {
@@ -351,6 +353,25 @@ void Lith_TakeScore(struct player *p, i96 score)
 
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
+}
+
+script_str type("net") ext("ACS")
+void Lith_Glare(void)
+{
+   withplayer(LocalPlayer)
+   {
+      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
+
+      ACS_LocalAmbientSound(ss_player_glare, 127);
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
+         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
+
+      ACS_Delay(14);
+
+      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
+
+      ACS_Delay(19);
+   }
 }
 
 // Static Functions ----------------------------------------------------------|

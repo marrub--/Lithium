@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_weapons.c: Weapon information handling.
+
 #if LITHIUM
 #include "p_player.h"
 #include "w_monster.h"
@@ -63,7 +65,7 @@ i32 Lith_PlayerCurWeaponType(struct player *p)
    return p->weapon.cur->info->type;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 bool Lith_WeaponPickup(i32 name)
 {
    extern void Lith_PickupMessage(struct player *p, struct weaponinfo const *info);
@@ -107,7 +109,7 @@ bool Lith_WeaponPickup(i32 name)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 k32 Lith_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
 {
    static k32 A;
@@ -128,7 +130,7 @@ k32 Lith_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
       return P;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 i32 Lith_ChargeFistDamage()
 {
    i32 amount = InvNum(so_FistCharge);
@@ -136,7 +138,7 @@ i32 Lith_ChargeFistDamage()
    return amount * ACS_Random(1, 3);
 }
 
-void Lith_GSInit_Weapon(void)
+void Lith_GInit_Weapon(void)
 {
    for(i32 i = 0; i < weapon_max; i++)
    {
@@ -268,7 +270,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 k32 Lith_AmmoRunOut(bool ro, k32 mul)
 {
    withplayer(LocalPlayer)
@@ -290,7 +292,7 @@ k32 Lith_AmmoRunOut(bool ro, k32 mul)
    return 0;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 i32 Lith_GetFinalizerMaxHealth(void)
 {
    i32 sh = GetPropI(0, APROP_SpawnHealth);
@@ -301,7 +303,7 @@ i32 Lith_GetFinalizerMaxHealth(void)
       return sh;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SurgeOfDestiny(void)
 {
    for(i32 i = 0; i < (35 * 7) / 2; i++) {
@@ -310,7 +312,7 @@ void Lith_SurgeOfDestiny(void)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 i32 Lith_GetWRF(void)
 {
    enum
@@ -343,7 +345,7 @@ i32 Lith_GetWRF(void)
    return flags;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PoisonFXTicker()
 {
    for(i32 i = 0; i < 17; i++)
@@ -372,7 +374,7 @@ void Lith_PoisonFXTicker()
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RecoilUp(k32 amount)
 {
    withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;

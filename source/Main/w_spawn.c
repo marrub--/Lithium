@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_spawn.c: Random spawners.
+
 #if LITHIUM
 #include "common.h"
 #include "w_world.h"
@@ -94,7 +96,7 @@ static char const *RandomWeighted(struct witem const *l, i32 c)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RandomSpawn(i32 rsn)
 {
    char const *item;

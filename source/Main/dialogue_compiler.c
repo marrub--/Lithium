@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// dialogue_compiler.c: Dialogue code compiler.
+
 #if LITHIUM
 #include "common.h"
 #include "w_world.h"
@@ -468,7 +470,7 @@ static void GetDecl_TrmPage(struct pstate *d, i32 num)
 
 // Loads all string indices into the global stbl, and all function
 // prototypes into the global ftbl.
-void Lith_GSInit_Dialogue(void)
+void Lith_GInit_Dialogue(void)
 {
    static struct dlgfunc funcs[] = {
       {"nop", "L", DCD_NOP},
@@ -588,7 +590,7 @@ done:
    d.tb.dtor();
    fclose(d.tb.fp);
 
-   if(world.dbgLevel & log_dlg)
+   if(dbglevel & log_dlg)
    {
       static char const *dcdnames[] = {
          #define DCD(name) #name,

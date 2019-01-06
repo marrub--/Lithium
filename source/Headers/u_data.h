@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_data.h: Upgrade data and handling functions.
+
 #ifndef u_data_h
 #define u_data_h
 

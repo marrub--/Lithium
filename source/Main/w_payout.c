@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_payout.c: Handles payout information.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"

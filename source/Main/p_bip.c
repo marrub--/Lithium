@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_bip.c: Info page handling and loading.
+
 #include "common.h"
 #include "p_player.h"
 #include "p_bip.h"
@@ -161,12 +163,12 @@ void Lith_PlayerInitBIP(struct player *p)
       bip->infogr[categ].free(true);
 
    i32 total = LoadBIPInfo(sp_lfiles_BIPInfo, bip, p->pclass);
-   if(world.dbgLevel) p->logH(1, "There are %i info pages!", total);
+   if(dbglevel) p->logH(1, "There are %i info pages!", total);
 
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
 
-   if(world.dbgBIP) ForCategoryAndPage() UnlockPage(bip, page, p->pclass);
+   if(dbgflag & dbgf_bip) ForCategoryAndPage() UnlockPage(bip, page, p->pclass);
 
    bip->init = true;
 }
@@ -257,7 +259,7 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, i32 pclass)
    return page;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_BIPUnlock(i32 pnum)
 {
    withplayer(&players[pnum])
@@ -312,7 +314,7 @@ struct page_info Lith_GetPageInfo(struct page const *page)
    return pinf;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_GiveMail(i32 num)
 {
    static str const names[] = {

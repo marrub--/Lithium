@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_magic.c: Magic weapon functions.
+
 #if LITHIUM
 #include "p_player.h"
 #include "p_hudid.h"
@@ -9,7 +11,7 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
@@ -19,7 +21,7 @@ void Lith_Blade(bool hit)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Rend(bool hit, i32 set)
 {
    static i32 num;
@@ -36,7 +38,7 @@ void Lith_Rend(bool hit, i32 set)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Feuer(bool left, bool fire)
 {
    withplayer(LocalPlayer)
@@ -79,7 +81,7 @@ void Lith_Feuer(bool left, bool fire)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Cercle(void)
 {
    withplayer(LocalPlayer)
@@ -162,7 +164,7 @@ void Lith_Cercle(void)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_MagicSelect(i32 num)
 {
    withplayer(LocalPlayer)

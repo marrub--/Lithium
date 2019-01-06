@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_cbi.c: Main CBI GUI entry point.
+
 #include "common.h"
 #include "p_player.h"
 #include "p_hudid.h"
@@ -156,7 +158,7 @@ void Lith_PlayerResetCBIGUI(struct player *p)
 
 // Scripts -------------------------------------------------------------------|
 
-script ext("ACS") type("net")
+script_str ext("ACS") type("net")
 void Lith_KeyOpenCBI(void)
 {
    if(ACS_Timer() < 10) return;

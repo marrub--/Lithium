@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// items.h: Inventory items.
+
 #ifndef items_h
 #define items_h
 
@@ -14,7 +16,7 @@ struct itemdata
    i96 scr;
 
    // these need to be ScriptS or they'll disappear on map load
-   // (we can't use a GSReinit callback because that would be really bad)
+   // (we shouldn't use a MInit callback because it would cause too much recursion)
    script bool (*Use)(struct item *);
    script void (*Tick)(struct item *);
    script void (*Destroy)(struct item *);

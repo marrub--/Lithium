@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_draw.c: Legacy drawing functions.
+
 #include "common.h"
 
 #include <stdio.h>

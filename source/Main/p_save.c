@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_save.c: Save file loading/saving.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -62,7 +64,7 @@ static void Lith_Load_fun0(struct savefile *save, struct savechunk *chunk)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SetFun(i32 fun)
 {
    withplayer(LocalPlayer)

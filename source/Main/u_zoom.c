@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_zoom.c: Zoom upgrade.
+
 #include "u_common.h"
 
 #include <math.h>
@@ -10,7 +12,7 @@
 
 // Scripts -------------------------------------------------------------------|
 
-script ext("ACS") type("net")
+script_str ext("ACS") type("net")
 void Lith_KeyZoom(i32 amt)
 {
    if(ACS_Timer() < 10) return;

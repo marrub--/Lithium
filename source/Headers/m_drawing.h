@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_drawing.h: Drawing functions.
+
 // Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
 #define TS 0.029
 

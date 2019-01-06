@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_stab.h: ACS string table.
+
 #if defined(X)
 
 // Strings

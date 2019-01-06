@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_settings.c: Settings configuration UI.
+
 #ifdef FromUI
 Category("Gameplay");
 Enum("Level-up system", sc_player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));

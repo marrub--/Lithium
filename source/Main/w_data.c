@@ -2,13 +2,15 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_data.c: Data exposing functions.
+
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
 extern bool dorain;
 
-script ext("ACS")
+script_str ext("ACS")
 i32 LPData(i32 info, i32 permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
@@ -32,7 +34,7 @@ i32 LPData(i32 info, i32 permutation, bool target)
    return 0;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 i32 LWData(i32 info)
 {
    switch(info) {

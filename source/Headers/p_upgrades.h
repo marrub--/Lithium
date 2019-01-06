@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_upgrades.h: Upgrade entry points and utilities.
+
 #ifndef p_upgrades_h
 #define p_upgrades_h
 

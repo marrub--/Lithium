@@ -2,11 +2,13 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_obituary.c: Obituary string formatting and dispatch.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Obituary(void)
 {
    static char const *pronoun[pro_max][5] = {

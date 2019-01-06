@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_math.h: Math functions.
+
 #define max(x, y) ((x) < (y) ? (y) : (x))
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))

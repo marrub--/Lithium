@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_title.c: Title map scripts.
+
 #if LITHIUM
 #include "common.h"
 

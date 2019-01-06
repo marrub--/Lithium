@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_log.c: Log UI and logging functions.
+
 #include "common.h"
 #include "p_log.h"
 #include "p_player.h"
@@ -116,7 +118,7 @@ void Lith_PlayerLogEntry(struct player *p)
    p->logF(LC(LANG "ENTER_FMT"), lm->name, time);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_LogS(i32 levl, i32 type)
 {
    str name = ServCallS(sm_GetLogName);
@@ -151,7 +153,7 @@ void Lith_PlayerUpdateLog(struct player *p)
 
 void Lith_CBITab_Log(struct gui_state *g, struct player *p)
 {
-   static int const ht = 10;
+   static i32 const ht = 10;
 
    if(Lith_GUI_Button(g, .x = 25, 38, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;

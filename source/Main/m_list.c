@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_list.c: Linked list functions.
+
 #include "m_list.h"
 #include <stdlib.h>
 #include <string.h>

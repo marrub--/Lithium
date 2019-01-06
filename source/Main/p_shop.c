@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_shop.c: Player shop handling.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -74,7 +76,7 @@ static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_GInit_Shop(void)
+void Lith_MInit_Shop(void)
 {
    for(i32 i = 0; i < countof(shopitems); i++)
    {
@@ -115,7 +117,7 @@ void Lith_CBITab_Shop(struct gui_state *g, struct player *p)
 
    SetClipW(111, 30, 184, 150, 184);
 
-   PrintTextFmt("%s %S\Cnscr", LC(LANG "COST"), scoresep(p->getCost(&item->shopdef)));
+   PrintTextFmt("%s %s\Cnscr", LC(LANG "COST"), scoresep(p->getCost(&item->shopdef)));
    PrintText(s_cbifont, CR_WHITE, 111,1, 30,1);
 
    PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_cbifont, CR_WHITE, 111,1, 40,1);

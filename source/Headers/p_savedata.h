@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_savedata.h: Save file format.
+
 #ifndef p_savedata_h
 #define p_savedata_h
 

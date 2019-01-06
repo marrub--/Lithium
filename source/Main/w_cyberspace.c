@@ -2,13 +2,15 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_cyberspace.c: Main Cyberspace handling.
+
 #if LITHIUM
 #include "common.h"
 #include "m_file.h"
 #include "m_token.h"
 #include "m_tokbuf.h"
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_CSLoadMap(void)
 {
    FILE *fp = W_Open(sp_lfiles_Cyberspace, "r");

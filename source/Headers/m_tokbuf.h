@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_tokbuf.h: Buffered token stream.
+
 #ifndef m_tokbuf_h
 #define m_tokbuf_h
 

@@ -2,16 +2,9 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-// u_func_end.h: Exiting segment of u_func.h.
+// p_sys.h: Player modules.
 
-#undef Ret
-#undef Fn_F
-#undef Fn_S
-#undef Case
-#undef A
-#undef D
-#undef U
-#undef E
-#undef R
+#ifndef p_sys_h
+#define p_sys_h
 
-// EOF
+#endif

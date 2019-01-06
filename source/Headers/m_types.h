@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_types.h: Common type definitions and attribute macros.
+
 #ifndef m_types_h
 #define m_types_h
 
@@ -13,7 +15,8 @@
 #define nil NULL
 
 #define stkcall    [[__call("StkCall")]]
-#define script     [[__call("ScriptS")]]
+#define script     [[__call("ScriptI")]]
+#define script_str [[__call("ScriptS")]]
 #define optargs(x) [[__optional_args(x)]]
 #define noinit     [[__no_init]]
 #define anonymous  [[__anonymous]]

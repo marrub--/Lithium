@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_boss.c: Phantom and boss handling.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -111,13 +113,13 @@ static bool CheckDead(struct boss *b, i32 num)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PhantomSound(void)
 {
    ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PhantomTeleport(void)
 {
    k32 ang = ACS_GetActorAngle(0);
@@ -130,7 +132,7 @@ void Lith_PhantomTeleport(void)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
@@ -173,7 +175,7 @@ void Lith_PhantomDeath(void)
    world.bossspawned = false;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SpawnBoss(void)
 {
    if(!boss) return;
@@ -189,7 +191,7 @@ void Lith_SpawnBoss(void)
    world.bossspawned = true;
 }
 
-script ext("ACS") addr("Lith_TriggerBoss") optargs(1)
+script_str ext("ACS") addr("Lith_TriggerBoss") optargs(1)
 void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
 {
    switch(diff) {
@@ -204,7 +206,7 @@ void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
    Lith_TriggerBoss();
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force)
 {
    if(!force && sum < scorethreshold) return;

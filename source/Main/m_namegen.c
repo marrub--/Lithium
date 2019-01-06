@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_namegen.c: Procedural monster name generation.
+
 // Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
 // Used with permission.
 #include "common.h"

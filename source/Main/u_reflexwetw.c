@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_reflexwetw.c: ReflexWetw upgrade.
+
 #include "u_common.h"
 
 #define UData UData_ReflexWetw(upgr)
@@ -10,7 +12,7 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_DodgeView()
 {
    withplayer(LocalPlayer)

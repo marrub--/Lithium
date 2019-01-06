@@ -2,13 +2,15 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_punctcannon.c: PunctCannon upgrade.
+
 #include "u_common.h"
 
 #include <math.h>
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PunctuatorFire(void)
 {
    withplayer(LocalPlayer)

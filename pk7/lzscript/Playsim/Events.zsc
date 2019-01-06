@@ -25,8 +25,8 @@ override void WorldLoaded(WorldEvent ev)
       CallACS("Lith_WorldReopen");
    else
    {
-      CallACS("__lithlib.bin_init");
-      CallACS("__lithmain.bin_init");
+      CallACS("lithlib@gsinit");
+      CallACS("lithmain@gsinit");
 
       let sum = Level.GetChecksum();
       for(int i = 0; i < BOSSLEVELS.Size(); i++)

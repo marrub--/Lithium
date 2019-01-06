@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_items.c: Inventory handling and UI.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -301,7 +303,7 @@ void Lith_PlayerUpdateInventory(struct player *p)
       if(it->Tick) it->Tick(it);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void *Lith_ItemCreate(i32 w, i32 h)
 {
    str type = GetMembS(0, sm_InvType);
@@ -322,7 +324,7 @@ void *Lith_ItemCreate(i32 w, i32 h)
    return nil;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 bool Lith_ItemAttach(void *_item)
 {
    struct item *item = _item;
@@ -339,7 +341,7 @@ bool Lith_ItemAttach(void *_item)
    return false;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_ItemDetach(void *_item)
 {
    struct item *item = _item;
@@ -349,7 +351,7 @@ void Lith_ItemDetach(void *_item)
    item->Destroy(item);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_ItemUnlink(void *_item)
 {
    struct item *item = _item;
@@ -366,7 +368,7 @@ void Lith_ItemUnlink(void *_item)
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 bool Lith_ItemCanPlace(void *_item)
 {
    struct item *item = _item;
@@ -435,7 +437,7 @@ void Lith_CBITab_Items(struct gui_state *g, struct player *p)
 
       if(sel->scr)
       {
-         PrintTextFmt("(%S\Cnscr\C-)", scoresep(sel->scr));
+         PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
          PrintText(s_cbifont, CR_WHITE, x_+18,1, y_,1);
       }
 

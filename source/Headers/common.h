@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// common.h: Common functions and debugging functions.
+
 #ifndef common_h
 #define common_h
 
@@ -29,10 +31,12 @@
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
+#ifndef NDEBUG
 #define LogDebug(level, ...) \
-   do if(ACS_GetCVar(sc_debug_level) & (level)) \
-      Log(c"" #level ": " __VA_ARGS__); \
-   while(0)
+   do if(dbglevel & (level)) Log(c"" #level ": " __VA_ARGS__); while(0)
+#else
+#define LogDebug(...)
+#endif
 
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
@@ -97,10 +101,10 @@
 #define DrawCallS(...) SCallS(sm_Draw, __VA_ARGS__)
 
 #define DebugStat(...) \
-   (world.dbgLevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)
+   (dbglevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)
 
 #define DebugNote(...) \
-   (world.dbgLevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
+   (dbglevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
 
 #define InvNum  ACS_CheckInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
@@ -121,6 +125,17 @@ enum {
    log_dmonV = 1 << 4, // verbose debug info for the monster tracker
    log_dlg   = 1 << 5, // debug info for the dialogue/terminal compiler
    log_bip   = 1 << 6, // debug info for the BIP
+   log_sys   = 1 << 7, // meta debug info
+   log_sysV  = 1 << 7, // tick info
+};
+
+enum {
+   dbgf_bip   = 1 << 0,
+   dbgf_items = 1 << 1,
+   dbgf_nomon = 1 << 2,
+   dbgf_save  = 1 << 3,
+   dbgf_score = 1 << 4,
+   dbgf_upgr  = 1 << 5,
 };
 
 // Extern Functions ----------------------------------------------------------|
@@ -144,11 +159,14 @@ void Lith_DebugNote(char const *fmt, ...);
 // Address Space Definitions -------------------------------------------------|
 
 __addrdef extern __mod_arr lmvar;
-__addrdef extern __hub_arr lwvar;
+__addrdef extern __hub_arr lhvar;
 
 // Extern Objects ------------------------------------------------------------|
 
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
+
+extern i32 lmvar dbglevel;
+extern i32 lmvar dbgflag;
 
 #endif

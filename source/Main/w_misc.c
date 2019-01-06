@@ -2,9 +2,95 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_misc.c: Miscellaneous scripts.
+
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
+
+stkcall
+static void SetInventory(str item, i32 amount)
+{
+   i32 s = InvNum(item) - amount;
+        if(s < 0) InvTake(item, -s);
+   else if(s > 0) InvGive(item,  s);
+}
+
+stkcall
+static void SetActorInventory(i32 tid, str item, i32 amount)
+{
+   i32 s = ACS_CheckActorInventory(tid, item) - amount;
+        if(s < 0) ACS_TakeActorInventory(tid, item, -s);
+   else if(s > 0) ACS_GiveActorInventory(tid, item,  s);
+}
+
+stkcall
+void Lith_FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
+{
+   ACS_FadeTo(r, g, b, amount, 0.0);
+   ACS_FadeTo(r, g, b, 0.0, seconds);
+}
+
+script
+i32 Lith_GetTID(i32 tid, i32 ptr)
+{
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
+   return ACS_ActivatorTID();
+}
+
+script
+i32 Lith_GetPlayerNumber(i32 tid, i32 ptr)
+{
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
+   return ACS_PlayerNumber();
+}
+
+script
+bool Lith_ValidPointer(i32 tid, i32 ptr)
+{
+   if(tid || ptr)
+      return ACS_SetActivator(tid, ptr);
+   else
+      return true;
+}
+
+script
+bool Lith_SetPointer(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags)
+{
+   if(tid || ptr)
+      ACS_SetActivator(tid, ptr);
+   return ACS_SetPointer(assign, tid2, ptr2, flags);
+}
+
+stkcall
+i32 Lith_CheckActorInventory(i32 tid, str item)
+{
+   if(tid == 0) return InvNum(item);
+   else         return ACS_CheckActorInventory(tid, item);
+}
+
+stkcall
+void Lith_GiveActorInventory(i32 tid, str item, i32 amount)
+{
+   if(tid == 0) InvGive(item, amount);
+   else         ACS_GiveActorInventory(tid, item, amount);
+}
+
+stkcall
+void Lith_TakeActorInventory(i32 tid, str item, i32 amount)
+{
+   if(tid == 0) InvTake(item, amount);
+   else         ACS_TakeActorInventory(tid, item, amount);
+}
+
+stkcall
+void Lith_SetActorInventory(i32 tid, str item, i32 amount)
+{
+   if(tid == 0) SetInventory(item, amount);
+   else         SetActorInventory(tid, item, amount);
+}
 
 stkcall
 void Lith_BeginAngles(i32 x, i32 y)
@@ -30,31 +116,31 @@ k32 Lith_AddAngle(i32 x, i32 y)
    return p->ang;
 }
 
-script addr("Lith_AddAngle")
+script_str ext("ACS") addr("Lith_AddAngle")
 void Lith_AddAngleScript(i32 x, i32 y)
 {
    Lith_AddAngle(x, y);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_EmitScore(i32 amount)
 {
    Lith_GiveAllScore(amount, false);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_EmitEXP(i32 amount)
 {
    Lith_GiveAllEXP(amount);
 }
 
-script ext("ACS") addr("Lith_GiveScore")
+script_str ext("ACS") addr("Lith_GiveScore")
 void Lith_GiveScoreScript(i32 score)
 {
    Lith_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_BoughtItemPickup(i32 id)
 {
    static i32 const chan = CHAN_ITEM|CHAN_NOPAUSE;

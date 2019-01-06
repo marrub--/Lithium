@@ -2,11 +2,13 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_time.c: Timing information and setting.
+
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-script ext("ACS")
+script_str ext("ACS")
 i32 Lith_Timer(void)
 {
    return ACS_Timer();

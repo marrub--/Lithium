@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_gui_bip.c: Info tab GUI.
+
 #include "common.h"
 #include "p_player.h"
 #include "p_bip.h"

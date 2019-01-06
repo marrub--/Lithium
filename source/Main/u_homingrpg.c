@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_homingrpg.c: HomingRPG upgrade.
+
 #include "u_common.h"
 #include "w_world.h"
 
@@ -20,7 +22,7 @@ static i32 CheckTarget(struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_HomingMissile()
 {
    struct player *p = Lith_GetPlayer(0, AAPTR_TARGET);

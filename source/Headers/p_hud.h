@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_hud.h: Generalized HUD functions.
+
 #ifndef p_hud_h
 #define p_hud_h
 

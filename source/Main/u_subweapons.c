@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_subweapons.c: Subweapons upgrade.
+
 #include "u_common.h"
 
 // Extern Functions ----------------------------------------------------------|

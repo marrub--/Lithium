@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_char.h: ASCII character classification macros.
+
 #define IsGraph(ch) ((ch) >  ' ' && (ch) <= '~')
 #define IsPrint(ch) ((ch) >= ' ' && (ch) <= '~')
 #define IsPunct(ch) ((ch) >= '!' && (ch) <= '/' || \

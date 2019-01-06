@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_reactarmor.c: ReactArmor upgrade.
+
 #include "u_common.h"
 
 #define UData UData_ReactArmor(upgr)
@@ -41,7 +43,7 @@ static void RA_Give(char const *name, i32 n)
 
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_RA_Give(i32 num)
 {
    withplayer(LocalPlayer)

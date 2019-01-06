@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_world.h: World data.
+
 #ifndef w_world_h
 #define w_world_h
 
@@ -81,7 +83,6 @@ struct worldinfo
    __prop freeze         {call: Lith_FreezeTime()}
    __prop autosave       {get: ACS_GetCVar(sc_sv_autosave)}
 
-   bool gsinit;
    bool singleplayer;
    i32  mapscleared;
    i32  prevcluster;
@@ -118,18 +119,9 @@ struct worldinfo
    struct polar a_angles[8];
    i32 a_cur;
    i32 decvars[8];
-
-   // Debugging
-   i32  dbgLevel;
-   bool dbgItems;
-   bool dbgBIP;
-   bool dbgScore;
-   bool dbgUpgr;
-   bool dbgSave;
-   bool dbgNoMon;
 };
 
-extern bool lmvar mapinit;
+extern bool lmvar player_init;
 extern struct worldinfo world;
 extern struct payoutinfo payout;
 

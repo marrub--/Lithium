@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_monster.h: Monster tracking and information.
+
 #ifndef w_monster_h
 #define w_monster_h
 

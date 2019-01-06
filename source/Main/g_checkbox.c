@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// g_checkbox.c: GUI checkboxes.
+
 #include "common.h"
 #include "p_player.h"
 

@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_player.h: Player data and functions.
+
 #if defined(LITH_X)
 // Shorthand and classes. For parsing and headers.
 LITH_X(pM, pcl_marine)
@@ -34,6 +36,7 @@ LITH_X(gR, pcl_robot)
 #include "p_wepinfo.h"
 #include "p_shopdef.h"
 #include "p_attrib.h"
+#include "p_sys.h"
 #include "items.h"
 
 #include <GDCC/HashMap.h>

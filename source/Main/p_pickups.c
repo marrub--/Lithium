@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_pickups.c: Pickup message handling.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"

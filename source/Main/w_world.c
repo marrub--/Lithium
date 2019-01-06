@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_world.c: World entry points.
+
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -11,23 +13,28 @@
 // Extern Objects ------------------------------------------------------------|
 
 __addrdef __mod_arr lmvar;
-__addrdef __hub_arr lwvar;
-
-bool lmvar mapinit;
-i32  lmvar mapid;
+__addrdef __hub_arr lhvar;
 
 struct worldinfo world = {.apiversion = Lith_APIVersion};
 struct payoutinfo payout;
 
 bool dorain;
 
+bool lmvar player_init;
+
 // Static Objects ------------------------------------------------------------|
 
 static bool reopen;
 
+static i32 lmvar mapid;
+
+static bool lmvar modinit;
+static bool lhvar hubinit;
+static bool       gblinit;
+
 // Extern Functions ----------------------------------------------------------|
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SpawnBosses(i96 sum, bool force);
 
 struct worldinfo *Lith_GetWorldExtern(void)
@@ -140,58 +147,80 @@ static void GetDebugInfo(void)
 {
    bool all = ACS_GetCVar(sc_debug_all);
 
-   world.dbgLevel =        ACS_GetCVar(sc_debug_level);
-   world.dbgItems = all || ACS_GetCVar(sc_debug_items);
-   world.dbgBIP   = all || ACS_GetCVar(sc_debug_bip);
-   world.dbgScore = all || ACS_GetCVar(sc_debug_score);
-   world.dbgUpgr  = all || ACS_GetCVar(sc_debug_upgrades);
-   world.dbgSave  = all || ACS_GetCVar(sc_debug_save);
-   world.dbgNoMon =        ACS_GetCVar(sc_debug_nomonsters);
+   dbglevel = ACS_GetCVar(sc_debug_level);
+
+   if(       ACS_GetCVar(sc_debug_nomonsters)) dbgflag |= dbgf_nomon;
+   if(all || ACS_GetCVar(sc_debug_bip))        dbgflag |= dbgf_bip;
+   if(all || ACS_GetCVar(sc_debug_items))      dbgflag |= dbgf_items;
+   if(all || ACS_GetCVar(sc_debug_save))       dbgflag |= dbgf_save;
+   if(all || ACS_GetCVar(sc_debug_score))      dbgflag |= dbgf_score;
+   if(all || ACS_GetCVar(sc_debug_upgrades))   dbgflag |= dbgf_upgr;
 }
 
-static void GSInit(void)
+static void MInitPre(void)
 {
-   extern void Lith_GInit_Shop(void);
-   extern void Lith_GSReinit_Upgrade(void);
-   extern void Lith_GSInit_Upgrade(void);
-   extern void Lith_GSInit_Weapon(void);
-   extern void Lith_GSInit_Dialogue(void);
+   LogDebug(log_dev, "%s", __func__);
 
-   LogDebug(log_dev, "GINIT RUNNING");
-
-   GetDebugInfo();
    #if LITHIUM
    CheckModCompat();
    UpdateGame();
-   Lith_GInit_Shop();
+   #endif
+}
+
+static void GInit(void)
+{
+   extern void Lith_GInit_Upgrade(void);
+   extern void Lith_GInit_Weapon(void);
+   extern void Lith_GInit_Dialogue(void);
+
+   LogDebug(log_dev, "%s", __func__);
+
+   Lith_GInit_Upgrade();
+   #if LITHIUM
+   Lith_GInit_Weapon();
+   Lith_GInit_Dialogue();
+
+   CheckEnemyCompat();
    #endif
 
-   if(!world.gsinit)
+   world.game         = ACS_GetCVar(sc_game);
+   world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
+
+   world.cbiperf = 10;
+
+   gblinit = true;
+}
+
+static void MInitPst(void)
+{
+   script extern void Lith_DoRain();
+
+   LogDebug(log_dev, "%s", __func__);
+
+   #if LITHIUM
+   payout.killmax += world.mapkillmax;
+   payout.itemmax += world.mapitemmax;
+
+   // Line 1888300 is used as a control line for mod features.
+   // Check for if rain should be used.
+   if(!ACS_GetLineUDMFInt(1888300, sm_MapNoRain) &&
+      (ACS_GetCVar(sc_sv_rain) || ACS_GetLineUDMFInt(1888300, sm_MapUseRain)) &&
+      ACS_PlayerCount() <= 1)
    {
-      LogDebug(log_dev, "GSINIT RUNNING");
-
-      Lith_GSInit_Upgrade();
-      #if LITHIUM
-      Lith_GSInit_Weapon();
-      Lith_GSInit_Dialogue();
-
-      CheckEnemyCompat();
-      #endif
-
-      world.game         = ACS_GetCVar(sc_game);
-      world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
-
-      world.cbiperf = 10;
-
-      world.gsinit = true;
+      dorain = true;
+      Lith_DoRain();
    }
-   else
-      Lith_GSReinit_Upgrade();
+   #endif
+
+   modinit = true;
 }
 
 static void MInit(void)
 {
-   LogDebug(log_dev, "MINIT RUNNING");
+   extern void Lith_MInit_Upgrade(void);
+   extern void Lith_MInit_Shop(void);
+
+   LogDebug(log_dev, "%s", __func__);
 
    #if LITHIUM
    extern void Lith_LoadMapDialogue(void);
@@ -216,36 +245,16 @@ static void MInit(void)
 
    // Set the air control because ZDoom's default sucks.
    ACS_SetAirControl(0.77);
+
+   Lith_MInit_Upgrade();
+   Lith_MInit_Shop();
 }
 
-static void MSInit(void)
-{
-   script
-   extern void Lith_DoRain();
-
-   LogDebug(log_dev, "MSINIT RUNNING");
-
-   #if LITHIUM
-   payout.killmax += world.mapkillmax;
-   payout.itemmax += world.mapitemmax;
-
-   // Line 1888300 is used as a control line for mod features.
-   // Check for if rain should be used.
-   if(!ACS_GetLineUDMFInt(1888300, sm_MapNoRain) &&
-      (ACS_GetCVar(sc_sv_rain) || ACS_GetLineUDMFInt(1888300, sm_MapUseRain)) &&
-      ACS_PlayerCount() <= 1)
-   {
-      dorain = true;
-      Lith_DoRain();
-   }
-   #endif
-}
-
-static void WSInit(void)
+static void HInitPre(void)
 {
    extern void DmonInit();
 
-   LogDebug(log_dev, "WSINIT RUNNING");
+   LogDebug(log_dev, "%s", __func__);
 
    if(world.unloaded)
       world.mapscleared++;
@@ -269,11 +278,11 @@ static void WSInit(void)
    #endif
 }
 
-static void WInit(void)
+static void HInit(void)
 {
    extern void Lith_DoPayout(void);
 
-   LogDebug(log_dev, "WINIT RUNNING");
+   LogDebug(log_dev, "%s", __func__);
 
    #if LITHIUM
    if(!ACS_GetCVar(sc_sv_nobosses))
@@ -286,31 +295,32 @@ static void WInit(void)
 
    // Cluster messages.
    #define Message(cmp, n, name) \
-      if(world.cluster cmp && !msgs[n]) { \
-         Lith_ForPlayer() \
-            p->deliverMail(name); \
-         msgs[n] = true; \
+      if(cmp && !(msgs & (1 << n))) { \
+         Lith_ForPlayer() p->deliverMail(name); \
+         msgs |= 1 << n; \
       } else ((void)0)
 
-   static bool msgs[5];
+   static i32 msgs;
 
    if(world.game == Game_Doom2)
    {
-      Message(>= 6,  0, st_mail_cluster1);
-      Message(>= 7,  1, st_mail_cluster2);
-      Message(== 8,  2, st_mail_cluster3);
-      Message(== 9,  3, st_mail_secret1);
-      Message(== 10, 4, st_mail_secret2);
+      Message(world.cluster >= 6,  0, st_mail_cluster1);
+      Message(world.cluster >= 7,  1, st_mail_cluster2);
+      Message(world.cluster == 8,  2, st_mail_cluster3);
+      Message(world.cluster == 9,  3, st_mail_secret1);
+      Message(world.cluster == 10, 4, st_mail_secret2);
    }
 
    #if LITHIUM
-   if(ACS_GetCVar(sc_sv_nobosses) || world.dbgItems)
+   if(ACS_GetCVar(sc_sv_nobosses) || dbgflag & dbgf_items)
       for(i32 i = 0; i < cupg_max; i++)
          Lith_InstallCBIItem(i);
    #endif
+
+   hubinit = true;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_Finale(void)
 {
    ServCallI(sm_SetEnding, st_normal);
@@ -323,16 +333,24 @@ script type("open")
 static void Lith_World(void)
 {
 begin:
+   GetDebugInfo();
+
+   // yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
+   // we can still detect it by using Timer, so correct this variable.
+   if(hubinit && ACS_Timer() < 2) hubinit = false;
+
    #if LITHIUM
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      script
-      extern void Lith_Title(void);
+      script extern void Lith_Title(void);
       Lith_Title();
+      return;
+   } else if(world.mapnum == 1911777) {
+      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
    #endif
 
-   LogDebug(log_dev, "LITH OPEN");
+   LogDebug(log_dev, "%s", __func__);
 
    if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;)
    {
@@ -351,44 +369,33 @@ begin:
           "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
           "5. Save the file and start GZDoom again. If the issue persists "
           "try these steps again or delete your GZDoom configuration.\n"
-          "\n\n\n\n");
-      Log("Invalid settings detected. Please open the console (%jS or options menu) for more information.", "toggleconsole");
+          "\n\n\n\n\n\n");
+      Log("Invalid settings detected. Please open the console (\"%jS\" or options menu) for more information.", "toggleconsole");
       ACS_Delay(10);
-   }
-
-   if(world.mapnum == 1911777)
-   {
-      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
-      return;
    }
 
    dbgnotenum = 0;
 
+   // Let the map do... whatever.
    ACS_Delay(1);
 
-   GSInit(); // Init global state.
-   MInit();  // Map init.
+   if(!modinit) MInitPre();
+   if(!gblinit) GInit();
+   if(!modinit) MInit();
 
-   // World-static pre-player init.
-   bool doworldinit = false;
+   // Hub-static pre-player init.
+   if(!hubinit) HInitPre();
 
-   if(ACS_Timer() <= 2)
-   {
-      WSInit();
-      doworldinit = true;
-   }
+   world.unloaded = false; // Unloaded flag can be reset now.
+   player_init = true;
 
-   world.unloaded = false; // World unloaded flag can be reset now.
-   mapinit = true;         // Sigil for when Lith_PlayerEntry can run.
+   ACS_Delay(1); // Wait for players to get initialized.
 
-   ACS_Delay(1); // Delay so players get initialized.
+   // Hub-static post-player init.
+   if(!hubinit) HInit();
 
-   // World-static post-player init.
-   if(doworldinit)
-      WInit();
-
-   // Map-static post-world init.
-   MSInit();
+   // Module-static post-hub init.
+   if(!modinit) MInitPst();
 
    // Main loop.
    i32 prevsecrets = 0;
@@ -401,7 +408,7 @@ begin:
    for(;;)
    {
       if(reopen) {
-         mapinit = reopen = false;
+         player_init = reopen = false;
          goto begin;
       }
 
@@ -432,7 +439,7 @@ begin:
       previtems   = items;
 
       #if LITHIUM
-      if(world.enemycheck && !world.dbgNoMon) {
+      if(world.enemycheck && !(dbgflag & dbgf_nomon)) {
          extern void DmonDebugInfo(void);
          DmonDebugInfo();
       }
@@ -459,7 +466,7 @@ begin:
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_WorldReopen(void)
 {
    reopen = true;
@@ -470,7 +477,7 @@ static void Lith_WorldUnload(void)
 {
    extern void Lith_InstallSpawnedCBIItems(void);
    world.unloaded = true;
-   LogDebug(log_dev, "WORLD UNLOADED");
+   LogDebug(log_dev, "%s", __func__);
 
    #if LITHIUM
    Lith_InstallSpawnedCBIItems();

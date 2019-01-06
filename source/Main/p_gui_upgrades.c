@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_gui_upgrades.c: Upgrades tab GUI.
+
 #include "u_common.h"
 #include "w_world.h"
 
@@ -154,7 +156,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%S%s", scoresep(p->getCost(&upgr->info->shopdef)), mark);
+   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(p->getCost(&upgr->info->shopdef)), mark);
    else                 cost = L(st_free);
 
    PrintText_str(cost, s_cbifont, CR_WHITE, 111,1, 30,1);

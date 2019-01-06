@@ -14,35 +14,54 @@ end
 
 `rm -f build.ninja .ninja_deps .ninja_log`
 
-UPGCIN = "$hdr/u_names.h $src/p_upgrinfo.c $hdr/u_func.h"
-WEPCIN = "$hdr/p_weapons.h $src/p_weaponinfo.c"
-MONCIN = "$hdr/w_moninfo.h"
-DECOIN = "$hdr/p_weapons.h $hdr/p_data.h $hdr/w_data.h $hdr/u_names.h $hdr/w_scorenums.h"
-TEXTIN = Dir["filedata/*.txt"].to_a.each{|s| s.gsub! "filedata/", ""}.join(?\s)
+SRC    = "s"
+HDR    = "h"
+IR     = "i"
+TARGET = "t"
+WARN   = "w"
+LFLAGS = "l"
+CFLAGS = "c"
+HASH   = "x"
+STA    = "z"
+TYPE   = "z"
+DLITH  = "y"
+DDTAP  = "d"
+INITSC = "j"
+NUMOUT = "n"
+
+UPGCIN = "$#{HDR}/u_names.h $#{SRC}/p_upgrinfo.c $#{HDR}/u_func.h"
+WEPCIN = "$#{HDR}/p_weapons.h $#{SRC}/p_weaponinfo.c"
+MONCIN = "$#{HDR}/w_moninfo.h"
+DECOIN = "$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h " \
+         "$#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
+TEXTIN = Dir["filedata/*.txt"].to_a.each{|s| s.gsub! "filedata/", ""}.join(" ")
 HSFSIN = "pk7/language.gfx.txt:pk7/:lgfx pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
 DEPS_I = [*UPGCIN.split, *WEPCIN.split, *MONCIN.split]
-DEPS_H = Dir["source/Headers/*"].to_a.each{|s| s.gsub! "source/Headers", "$hdr"}
-DEPS   = Set[*DEPS_I, *DEPS_H].to_a.join(?\s)
+DEPS_H = Dir["source/Headers/*"].to_a.each{|s| s.gsub! "source/Headers", "$#{HDR}"}
+DEPS   = Set[*DEPS_I, *DEPS_H].to_a.join(" ")
 
 fp = open "build.ninja", "wb"
 
 fp << <<_end_
-src = source/Main
-hdr = source/Headers
-ir  = ir
-target = --bc-target=ZDoom
-warn   = --warn-all --no-warn-parentheses
-lflags = $target --bc-zdacs-init-delay
-cflags = $target $warn -i$hdr --alloc-Aut 4096
+#{SRC   } = source/Main
+#{HDR   } = source/Headers
+#{IR    } = ir
+#{TARGET} = --bc-target=ZDoom
+#{WARN  } = --warn-all --no-warn-parentheses
+#{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay
+#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096
+#{DLITH } = -DLITHIUM=1
+#{DDTAP } = -DDOUBLETAP=1
+#{INITSC} = --bc-zdacs-init-script-name
 
 rule cc
-   command = gdcc-cc $cflags -DFileHash=$hash -c $in -o $out
+   command = gdcc-cc $#{CFLAGS} -DFileHash=$#{HASH} -c $in -o $out
    description = CC $out
 rule makelib
-   command = gdcc-makelib $target -c $type -o $out
+   command = gdcc-makelib $#{TARGET} -c $#{TYPE} -o $out
    description = MakeLib $out
 rule ld
-   command = gdcc-ld $lflags --alloc-min Sta "" $sta $in -o $out
+   command = gdcc-ld $#{LFLAGS} --alloc-min Sta "" $#{STA} $in -o $out --bc-zdacs-dump-ScriptI $#{NUMOUT} --func-minimum ScriptI 17000
    description = LD $out
 rule fs
    command = tools/hashfs.rb #{HSFSIN}
@@ -77,10 +96,10 @@ build font: font | tools/ttfuck/ttfuck.exe
 build #{WEPCIN}: wepc source/Weapons.txt | tools/wepc.rb
 build #{UPGCIN}: upgc source/Upgrades.txt | tools/upgc.rb
 build #{MONCIN}: monc source/Monsters.txt | tools/monc.rb
-build $ir/libc.ir: makelib
-   type = libc
-build $ir/libGDCC.ir: makelib
-   type = libGDCC
+build $#{IR}/libc.ir: makelib
+   #{TYPE} = libc
+build $#{IR}/libGDCC.ir: makelib
+   #{TYPE} = libGDCC
 _end_
 
 inputs_lithium = []
@@ -89,30 +108,34 @@ inputs_doubletap = []
 for f in Dir["source/Main/*"]
    f.replace File.basename f
    fp << <<~_end_
-   build $ir/lithium/#{f}.ir: cc $src/#{f} | #{DEPS}
-      hash = #{hash f}
-      cflags = $cflags -DLITHIUM=1
-   build $ir/doubletap/#{f}.ir: cc $src/#{f} | #{DEPS}
-      hash = #{hash f}
-      cflags = $cflags -DDOUBLETAP=1
+   build $#{IR}/lithium/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+      #{HASH  } = #{hash f}
+      #{CFLAGS} = $#{CFLAGS} $#{DLITH}
+   build $#{IR}/doubletap/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+      #{HASH  } = #{hash f}
+      #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
    _end_
-   inputs_lithium   << "$ir/lithium/#{f}.ir"
-   inputs_doubletap << "$ir/doubletap/#{f}.ir"
+   inputs_lithium   << "$#{IR}/lithium/#{f}.ir"
+   inputs_doubletap << "$#{IR}/doubletap/#{f}.ir"
 end
 
 fp << <<_end_
-build pk7/acs/lithmain.bin: ld #{inputs_lithium.join ?\s}
-   lflags = $lflags -llithlib --bc-zdacs-init-script-name "__lithmain.bin_init"
-   sta = 1400000
-build pk7/acs/lithlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
-   lflags = $lflags --bc-zdacs-init-script-name "__lithlib.bin_init"
-   sta = 70000
-build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join ?\s}
-   lflags = $lflags -ldtlib --bc-zdacs-init-script-name "__dtmain.bin_init"
-   sta = 1400000
-build pk7_dt/acs/dtlib.bin: ld $ir/libc.ir $ir/libGDCC.ir
-   lflags = $lflags --bc-zdacs-init-script-name "__dtlib.bin_init"
-   sta = 70000
+build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
+   #{LFLAGS} = $#{LFLAGS} -llithlib $#{INITSC} "lithmain@gsinit"
+   #{STA   } = 1400000
+   #{NUMOUT} = ir/lithmain_ld.txt
+build pk7/acs/lithlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
+   #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithlib@gsinit"
+   #{STA   } = 70000
+   #{NUMOUT} = ir/lithlib_ld.txt
+build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join " "}
+   #{LFLAGS} = $#{LFLAGS} -ldtlib $#{INITSC} "dtmain@gsinit"
+   #{STA   } = 1400000
+   #{NUMOUT} = ir/dtmain_ld.txt
+build pk7_dt/acs/dtlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
+   #{LFLAGS} = $#{LFLAGS} $#{INITSC} "dtlib@gsinit"
+   #{STA   } = 70000
+   #{NUMOUT} = ir/dtlib_ld.txt
 build doubletap: phony dec text fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
 

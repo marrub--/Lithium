@@ -2,14 +2,16 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-#if LITHIUM
+// p_powerup.c: Various functions used by powerups.
+
 #include "common.h"
 #include "p_weapons.h"
 #include "p_player.h"
 #include "p_hudid.h"
 #include "w_world.h"
 
-script ext("ACS")
+#if LITHIUM
+script_str ext("ACS")
 void Lith_DOGS()
 {
    withplayer(LocalPlayer)
@@ -36,7 +38,7 @@ void Lith_DOGS()
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_SteggleEnergy()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_FRIENDPLAYER))
@@ -61,7 +63,7 @@ void Lith_SteggleEnergy()
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_BarrierBullets()
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
@@ -78,14 +80,14 @@ void Lith_BarrierBullets()
    }
 }
 
-script ext("ACS")
+script_str ext("ACS")
 bool Lith_BarrierCheck()
 {
    ACS_SetActivatorToTarget(0);
    return ACS_CheckFlag(0, s_COUNTKILL);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_GetSigil()
 {
    withplayer(LocalPlayer)
@@ -97,8 +99,7 @@ void Lith_GetSigil()
       ACS_Thing_Remove(InvNum(so_DivisionSigilSpriteTID));
       InvTake(so_DivisionSigilSpriteTID, 0x7FFFFFFF);
 
-      if(world.dbgLevel)
-         return;
+      if(dbglevel) return;
 
       world.freeze(true);
 
@@ -127,5 +128,41 @@ void Lith_GetSigil()
    }
 }
 #endif
+
+script_str ext("ACS")
+void Lith_GiveHealthBonus(i32 amount)
+{
+   withplayer(LocalPlayer)
+   {
+      amount += p->health;
+      if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
+      p->health = amount;
+   }
+}
+
+script_str ext("ACS")
+void Lith_GiveHealth(i32 amount)
+{
+   withplayer(LocalPlayer)
+   {
+      amount += p->health;
+      amount *= 1 + p->attr.attrs[at_vit] / 80.0;
+      if(amount > p->maxhealth) amount = p->maxhealth;
+      p->health = amount;
+   }
+}
+
+script_str ext("ACS")
+bool Lith_CheckHealth()
+{
+   withplayer(LocalPlayer) return p->health < p->maxhealth;
+   return 0;
+}
+
+script_str ext("ACS")
+void Lith_Discount()
+{
+   withplayer(LocalPlayer) p->discount = 0.9;
+}
 
 // EOF

@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// dialogue.h: Dialogue VM code data.
+
 #ifdef DCD
 // VM state
 DCD(NOP)

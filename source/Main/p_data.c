@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_data.c: Player data tracking.
+
 #include "common.h"
 #include "p_player.h"
 #include "m_version.h"
@@ -147,7 +149,7 @@ void Lith_PlayerUpdateData(struct player *p)
    p->kbs = InvNum(so_BlueSkull);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_KeyDown(i32 pnum, i32 ch)
 {
    withplayer(&players[pnum])
@@ -226,18 +228,14 @@ void Lith_GiveEXP(struct player *p, u64 amt)
 script
 void Lith_ResetPlayer(struct player *p)
 {
-   // Zero-init
-   if(!p->wasinit) memset(p, 0, sizeof *p);
-
-   // Constant data
-   p->active = true;
-   p->reinit = p->dead = false;
-   p->num    = ACS_PlayerNumber();
-   p->bipptr = &p->bip;
-
-   // Static data (pre-init)
    if(!p->wasinit)
    {
+      memset(p, 0, sizeof *p);
+
+      p->active = true;
+      p->num    = ACS_PlayerNumber();
+      p->bipptr = &p->bip;
+
       SetPClass(p);
       SetupAttributes(p);
 
@@ -255,12 +253,14 @@ void Lith_ResetPlayer(struct player *p)
       case 2: p->pronoun = pro_nb;     break;
       case 3: p->pronoun = pro_object; break;
       }
+
    }
 
-   // Map-static data
    memset(&p->old, 0, sizeof p->old);
 
-   // If the map sets the TID on the first tic, it could already be set here.
+   p->reinit = p->dead = false;
+
+   // If the map sets the TID early on, it could already be set here.
    p->tid = 0;
    p->validateTID();
 
@@ -269,7 +269,7 @@ void Lith_ResetPlayer(struct player *p)
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->cameratid  = ACS_UniqueTID());
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
-   if(world.dbgScore) p->score = 0xFFFFFFFFFFFFFFFFll;
+   if(dbgflag & dbgf_score) p->score = 0xFFFFFFFFFFFFFFFFll;
 
    // Any linked lists on the player need to be initialized here.
    p->hudstrlist.free(true);
@@ -312,12 +312,11 @@ void Lith_ResetPlayer(struct player *p)
    if(!p->invinit) Lith_PlayerInitInventory(p);
    #endif
 
-   // Static data
    if(!p->wasinit)
    {
       p->logB(1, Lith_Version " :: Compiled %s", __DATE__);
 
-      if(world.dbgLevel) {
+      if(dbglevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "strnil is \"%S\"", nil);
          #if LITHIUM
@@ -333,7 +332,7 @@ void Lith_ResetPlayer(struct player *p)
    }
 
    #if LITHIUM
-   if(world.dbgItems)
+   if(dbgflag & dbgf_items)
    {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];

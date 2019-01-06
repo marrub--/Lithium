@@ -2,7 +2,10 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// m_str.c: Various string functions.
+
 #include "common.h"
+#include "m_cps.h"
 
 #include <stdio.h>
 #include <ctype.h>
@@ -24,6 +27,15 @@ StrEntON
 #define X(n, s) str const n = s;
 #include "m_stab.h"
 StrEntOFF
+
+char const *Cps_Print(u32 *cps, i32 l)
+{
+   noinit static char buf[4096];
+   i32 i, ch;
+   for(i = 0; (ch = Cps_GetC(cps, i)) && (!l || i < l); i++) buf[i] = ch;
+   buf[i] = '\0';
+   return buf;
+}
 
 str l_strupper(str in)
 {
@@ -63,11 +75,15 @@ i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
 }
 
 stkcall
-str scoresep(i96 num)
+char const *scoresep(i96 num)
 {
    static char out[48];
 
-   if(!num) return st_0;
+   if(!num) {
+      out[0] = '0';
+      out[1] = '\0';
+      return out;
+   }
 
    char *outp = out + countof(out) - 1;
    i32 cnum = 0;
@@ -86,7 +102,7 @@ str scoresep(i96 num)
 
    if(!cnum) outp++;
 
-   return l_strdup(outp);
+   return outp;
 }
 
 str LanguageV(str name)

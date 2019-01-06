@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// u_adrenaline.c: Adrenaline upgrade.
+
 #include "u_common.h"
 
 #define UData UData_Adrenaline(upgr)

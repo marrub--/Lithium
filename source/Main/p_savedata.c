@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_savedata.c: Archived player data handling.
+
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
@@ -13,7 +15,7 @@
 
 void Lith_SaveWriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 {
-   if(world.dbgSave)
+   if(dbgflag & dbgf_save)
       Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
 
    struct savechunk chunk = {iden, vers & Save_VersMask, size};
@@ -47,7 +49,7 @@ i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
 {
    rewind(save->fp);
 
-   if(world.dbgSave)
+   if(dbgflag & dbgf_save)
       Log("Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
 
    for(i32 i = 0;; i++)
@@ -64,7 +66,7 @@ i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
       {
          if(chunker) chunker(save, &chunk);
 
-         if(world.dbgSave) Log("Lith_LoadChunk: Found valid chunk at %i", i);
+         if(dbgflag & dbgf_save) Log("Lith_LoadChunk: Found valid chunk at %i", i);
 
          return i;
       }
@@ -72,7 +74,7 @@ i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
          fseek(save->fp, chunk.size, SEEK_CUR);
    }
 
-   if(world.dbgSave)
+   if(dbgflag & dbgf_save)
       Log("Lith_LoadChunk: Couldn't find anything");
 
    return -1;

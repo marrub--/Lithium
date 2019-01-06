@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// w_cbi.c: CBI upgrade/boss reward payouts.
+
 #if LITHIUM
 #include "common.h"
 #include "w_world.h"
@@ -75,13 +77,13 @@ void Lith_InstallSpawnedCBIItems(void)
       Lith_InstallCBIItem(cbispawn[i]);
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_CBIItemWasSpawned(i32 num)
 {
    cbispawn[cbispawniter++] = num;
 }
 
-script ext("ACS")
+script_str ext("ACS")
 void Lith_PickupCBIItem(i32 num)
 {
    withplayer(LocalPlayer)

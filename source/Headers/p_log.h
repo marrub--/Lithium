@@ -2,6 +2,8 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+// p_log.h: Action logging functions.
+
 #ifndef p_log_h
 #define p_log_h
 
