@@ -129,7 +129,7 @@ Fire:
    CSHG A 0 {
       A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE);
       Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
-      if(!CallACS("LPData", pdata_upgrade, UPGR_SPAS_B))
+      if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B))
          Lith_A_MagIncr();
       // don't ask
       if(Pos.Z - FloorZ >= 24)
@@ -141,12 +141,12 @@ Fire:
       A_Recoil(0.7);
       Lith_A_RecoilUp(0.4);
    }
-   CSHG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_SPAS_A), "FireVoid");
+   CSHG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_A), "FireVoid");
    CSHG A 0 {
       Lith_FireBullets(10.5, 3.5, 12, 6);
       Lith_A_GunSmoke();
    }
-   CSHG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_SPAS_B), "FireAuto");
+   CSHG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B), "FireAuto");
    CSHG B 1 bright offset(0, 35) {A_Light(1); A_PlaySound("weapons/cshotgun/fire", CHAN_WEAPON);}
    CSHG B 1 bright offset(0, 35);
    CSHG C 1 bright offset(0, 34) {A_Light(2); Lith_A_RecoilDn(0.2);}
@@ -202,7 +202,7 @@ FireEmpty:
    goto ReadySelector;
 
 Reload:
-   CSHG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_SPAS_B), "Ready");
+   CSHG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B), "Ready");
    CSHG A 0 Lith_A_JumpIfMagFull;
    CSHR ABCDE 1;
    CSHR FG 2;

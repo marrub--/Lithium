@@ -94,10 +94,10 @@ static char const *RandomWeighted(struct witem const *l, i32 c)
    return nil;
 }
 
-// Extern Functions ----------------------------------------------------------|
+// Scripts -------------------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_RandomSpawn(i32 rsn)
+script_str ext("ACS") addr("Lith_RandomSpawn")
+void Sc_RandomSpawn(i32 rsn)
 {
    char const *item;
 

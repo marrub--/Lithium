@@ -8,11 +8,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-script_str ext("ACS")
-i32 Lith_Timer(void)
-{
-   return ACS_Timer();
-}
+// Extern Functions ----------------------------------------------------------|
 
 char const *Lith_CanonTime(i32 type)
 {
@@ -80,6 +76,14 @@ void Lith_FreezeTime(bool on)
          }
       }
    }
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_Timer")
+i32 Sc_Timer(void)
+{
+   return ACS_Timer();
 }
 
 // EOF

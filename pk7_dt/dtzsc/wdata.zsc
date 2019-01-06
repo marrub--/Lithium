@@ -85,4 +85,20 @@ enum LDamageType
    ldt_none
 };
 
+enum LScriptNum
+{
+   lsc_getfontmetric = 17100,
+   lsc_metr_xadv,
+   lsc_metr_yofs,
+   lsc_metr_tex,
+   lsc_metr_w,
+   lsc_metr_h,
+   lsc_drawplayericon,
+   lsc_pdata,
+   lsc_wdata,
+   lsc_addangle,
+   lsc_monsterinfo,
+   lsc_raindropspawn,
+};
+
 // EOF

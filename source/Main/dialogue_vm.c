@@ -285,13 +285,9 @@ static void ResetText(struct vm *vm)
    vm->textV[0] = '\0';
 }
 
-// Extern Functions ----------------------------------------------------------|
-
-script_str ext("ACS")
-void Lith_TeleportOutEffect(struct player *p)
+script
+static void TeleportOutEffect(struct player *p)
 {
-   if(!p) p = LocalPlayer;
-
    ACS_AmbientSound(ss_misc_teleout, 127);
 
    ACS_SetHudSize(320, 200);
@@ -307,6 +303,8 @@ void Lith_TeleportOutEffect(struct player *p)
       ACS_Delay(1);
    }
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 // Main dialogue VM.
 script
@@ -406,7 +404,7 @@ opDCD_TELEPORT_INTRALEVEL:
    HLT;
 opDCD_TELEPORT_INTERLEVEL:
    ACS_Delay(5);
-   Lith_TeleportOutEffect(p);
+   TeleportOutEffect(p);
    ACS_Delay(34);
    ACS_Teleport_NewMap(IMM, 0, 0);
    HLT;
@@ -522,8 +520,16 @@ done:
    p->indialogue -= 2;
 }
 
-script_str ext("ACS")
-void Lith_RunDialogue(i32 num)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_TeleportOutEffect")
+void Sc_TeleportOutEffect(struct player *p)
+{
+   withplayer(LocalPlayer) TeleportOutEffect(p);
+}
+
+script_str ext("ACS") addr("Lith_RunDialogue")
+void Sc_RunDialogue(i32 num)
 {
    withplayer(LocalPlayer) if(!p->indialogue)
    {
@@ -532,10 +538,14 @@ void Lith_RunDialogue(i32 num)
    }
 }
 
-script_str ext("ACS")
-void Lith_RunTerminal(i32 num)
+script_str ext("ACS") addr("Lith_RunTerminal")
+void Sc_RunTerminal(i32 num)
 {
-   Lith_RunDialogue(-num);
+   withplayer(LocalPlayer) if(!p->indialogue)
+   {
+      p->dlgnum = -num;
+      p->indialogue++;
+   }
 }
 #endif
 

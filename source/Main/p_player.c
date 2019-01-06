@@ -32,7 +32,7 @@ script static void Lith_BossWarning(struct player *p);
 // Scripts -------------------------------------------------------------------|
 
 script type("enter")
-static void Lith_PlayerEntry(void)
+static void Sc_PlayerEntry(void)
 {
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -111,7 +111,7 @@ reinit:
 }
 
 script type("death")
-static void Lith_PlayerDeath(void)
+static void Sc_PlayerDeath(void)
 {
    struct player *p = LocalPlayer;
 
@@ -154,19 +154,19 @@ static void Lith_PlayerDeath(void)
 }
 
 script type("respawn")
-static void Lith_PlayerRespawn(void)
+static void Sc_PlayerRespawn(void)
 {
    LocalPlayer->reinit = true;
 }
 
 script type("return")
-static void Lith_PlayerReturn(void)
+static void Sc_PlayerReturn(void)
 {
    LocalPlayer->reinit = true;
 }
 
 script type("disconnect")
-static void Lith_PlayerDisconnect(void)
+static void Sc_PlayerDisconnect(void)
 {
    struct player *p = LocalPlayer;
 
@@ -188,22 +188,6 @@ static void Lith_PlayerDisconnect(void)
 #define upgrademap_t_HashObj(o) ((o)->info->key)
 #define upgrademap_t_KeyCmp(l, r) ((l) - (r))
 GDCC_HashMap_Defn(upgrademap_t, i32, struct upgrade)
-
-script_str ext("ACS")
-void Lith_DrawPlayerIcon(i32 num, i32 x, i32 y)
-{
-   withplayer(&players[num])
-   {
-      k32 a = absk((x - 160) / 90.0);
-           if(a < 0.2) a = 0.2;
-      else if(a > 1.0) a = 1.0;
-
-      PrintTextFmt("%S <%i>\n", p->name, p->num);
-      __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
-      if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
-      PrintTextA(s_cbifont, CR_WHITE, x-9,1, y-2,1, a);
-   }
-}
 
 stkcall
 struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
@@ -353,25 +337,6 @@ void Lith_TakeScore(struct player *p, i96 score)
 
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
-}
-
-script_str type("net") ext("ACS")
-void Lith_Glare(void)
-{
-   withplayer(LocalPlayer)
-   {
-      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
-
-      ACS_LocalAmbientSound(ss_player_glare, 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
-         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
-
-      ACS_Delay(14);
-
-      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
-
-      ACS_Delay(19);
-   }
 }
 
 // Static Functions ----------------------------------------------------------|
@@ -531,6 +496,43 @@ static void Lith_PlayerPreStats(struct player *p)
    if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
    if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
    if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script ext("ACS") addr(lsc_drawplayericon)
+void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
+{
+   withplayer(&players[num])
+   {
+      k32 a = absk((x - 160) / 90.0);
+           if(a < 0.2) a = 0.2;
+      else if(a > 1.0) a = 1.0;
+
+      PrintTextFmt("%S <%i>\n", p->name, p->num);
+      __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
+      if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
+      PrintTextA(s_cbifont, CR_WHITE, x-9,1, y-2,1, a);
+   }
+}
+
+script_str type("net") ext("ACS") addr("Lith_Glare")
+void Sc_Glare(void)
+{
+   withplayer(LocalPlayer)
+   {
+      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
+
+      ACS_LocalAmbientSound(ss_player_glare, 127);
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
+         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
+
+      ACS_Delay(14);
+
+      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
+
+      ACS_Delay(19);
+   }
 }
 
 // EOF

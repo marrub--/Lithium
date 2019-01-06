@@ -10,25 +10,24 @@
 
 #define CHARGE_MAX (35 * 0.8)
 
-// Extern Functions ----------------------------------------------------------|
+// Static Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_DodgeView()
+script
+static void DodgeView(struct player *p)
 {
-   withplayer(LocalPlayer)
+   k32 vh = p->viewheight;
+
+   for(i32 i = 0; i < 20; i++)
    {
-      k32 vh = p->viewheight;
-
-      for(i32 i = 0; i < 20; i++)
-      {
-         k32 mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
-         SetPropK(0, APROP_ViewHeight, vh * mul);
-         ACS_Delay(1);
-      }
-
-      SetPropK(0, APROP_ViewHeight, vh);
+      k32 mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
+      SetPropK(0, APROP_ViewHeight, vh * mul);
+      ACS_Delay(1);
    }
+
+   SetPropK(0, APROP_ViewHeight, vh);
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
@@ -69,7 +68,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
          ACS_LocalAmbientSound(ss_player_slide, 127);
          p->setVel(p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0);
 
-         Lith_DodgeView();
+         DodgeView(p);
 
          UData.charge = 0;
       }
@@ -86,6 +85,14 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
 
       UData.leaped = 1;
    }
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_DodgeView")
+void Sc_DodgeView(void)
+{
+   withplayer(LocalPlayer) DodgeView(p);
 }
 
 // EOF

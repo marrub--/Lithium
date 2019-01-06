@@ -77,14 +77,16 @@ void Lith_InstallSpawnedCBIItems(void)
       Lith_InstallCBIItem(cbispawn[i]);
 }
 
-script_str ext("ACS")
-void Lith_CBIItemWasSpawned(i32 num)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_CBIItemWasSpawned")
+void Sc_CBIItemWasSpawned(i32 num)
 {
    cbispawn[cbispawniter++] = num;
 }
 
-script_str ext("ACS")
-void Lith_PickupCBIItem(i32 num)
+script_str ext("ACS") addr("Lith_PickupCBIItem")
+void Sc_PickupCBIItem(i32 num)
 {
    withplayer(LocalPlayer)
       Lith_FadeFlash(0, 255, 0, 0.7, 0.5);

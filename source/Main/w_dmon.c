@@ -54,7 +54,7 @@ void DmonDebugInfo(void)
    idprev = dmonid;
 }
 
-void DmonInit()
+void DmonInit(void)
 {
    dmonid = 0;
 }

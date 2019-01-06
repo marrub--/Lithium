@@ -9,10 +9,10 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-// Extern Functions ----------------------------------------------------------|
+// Scripts -------------------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_Blade(bool hit)
+script_str ext("ACS") addr("Lith_Blade")
+void Sc_Blade(bool hit)
 {
    ACS_SetHudSize(800, 600);
    DrawSpriteX(hit ? sp_Weapon_BladeHit : sp_Weapon_Blade, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 3, 0.15);
@@ -21,8 +21,8 @@ void Lith_Blade(bool hit)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-script_str ext("ACS")
-void Lith_Rend(bool hit, i32 set)
+script_str ext("ACS") addr("Lith_Rend")
+void Sc_Rend(bool hit, i32 set)
 {
    static i32 num;
 
@@ -38,8 +38,8 @@ void Lith_Rend(bool hit, i32 set)
       if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
 }
 
-script_str ext("ACS")
-void Lith_Feuer(bool left, bool fire)
+script_str ext("ACS") addr("Lith_Feuer")
+void Sc_Feuer(bool left, bool fire)
 {
    withplayer(LocalPlayer)
    {
@@ -81,8 +81,8 @@ void Lith_Feuer(bool left, bool fire)
    }
 }
 
-script_str ext("ACS")
-void Lith_Cercle(void)
+script_str ext("ACS") addr("Lith_Cercle")
+void Sc_Cercle(void)
 {
    withplayer(LocalPlayer)
    {
@@ -164,8 +164,8 @@ void Lith_Cercle(void)
    }
 }
 
-script_str ext("ACS")
-void Lith_MagicSelect(i32 num)
+script_str ext("ACS") addr("Lith_MagicSelect")
+void Sc_MagicSelect(i32 num)
 {
    withplayer(LocalPlayer)
    {

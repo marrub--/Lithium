@@ -140,8 +140,8 @@ Fire:
    GRLG A 0 {
       invoker.m_Loaded = invoker.m_Iter = invoker.m_Mode = 0;
    }
-   GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ChargeRPG), "FireUnreal");
-   GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_HomingRPG), "FireHoming");
+   GRLG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_ChargeRPG), "FireUnreal");
+   GRLG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_HomingRPG), "FireHoming");
    GRLG A 0 Lith_A_FireRocket;
 FireAnim:
    GRLG B 1 bright A_GunFlash;
@@ -179,10 +179,10 @@ Flash:
 
 AltFire:
    GRLG A 1;
-   GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_HomingRPG), "Ready");
+   GRLG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_HomingRPG), "Ready");
    GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
    GRLG A 0 {
-      if(CallACS("LPData", pdata_upgrade, UPGR_ChargeRPG)) Lith_A_FireRocket();
+      if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_ChargeRPG)) Lith_A_FireRocket();
       else                                                 Lith_A_FireGrenade();
    }
    goto FireAnim;

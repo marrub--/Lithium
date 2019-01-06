@@ -107,7 +107,7 @@ Fire:
    goto Release1;
 Fire1:
    CFIS A 0 A_GiveInventory("Lith_FistCharge", 35);
-   CFIS A 0 A_JumpIf(CallACS("LPData", pdata_pclass) == pcl_marine, 2);
+   CFIS A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_pclass) == pcl_marine, 2);
    CCFS A 0;
    #### A 1 A_PlaySound("weapons/cfist/ready", CHAN_6);
    #### B 1 A_PlaySound("weapons/cfist/charge", CHAN_5, 1, true);
@@ -124,7 +124,7 @@ Release:
    TNT1 A 0 A_PlaySound("weapons/cfist/chargeend", CHAN_5);
    TNT1 A 0 A_GunFlash("SekritHax", GFF_NOEXTCHANGE); // OH NO NOT yholehax
 Release1:
-   CFI2 A 0 A_JumpIf(CallACS("LPData", pdata_pclass) == pcl_marine, "Release2");
+   CFI2 A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_pclass) == pcl_marine, "Release2");
    CCF2 A 0;
    // GOTTA RELEASE FAST
 Release2:
@@ -160,7 +160,7 @@ HitRecoil:
    goto ReadySelector;
    // the crimera has struck again
 SekritHax:
-   CFIS A 0 A_JumpIf(CallACS("LPData", pdata_pclass) == pcl_marine, 2);
+   CFIS A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_pclass) == pcl_marine, 2);
    CCFS A 0;
    #### HI 1;
    stop;

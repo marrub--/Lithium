@@ -19,7 +19,7 @@ class Lith_ItemGlow : Actor
    {
       sprite = Actor.GetSpriteIndex("PBAL");
 
-      switch(CallACS("LWData", wdata_pclass))
+      switch(ACS_ExecuteWithResult(lsc_wdata, wdata_pclass))
       {
       case pcl_marine:    frame = Ch_A - Ch_A; break;
       case pcl_cybermage: frame = Ch_C - Ch_A; break;

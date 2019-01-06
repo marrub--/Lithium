@@ -118,21 +118,6 @@ void Lith_PlayerLogEntry(struct player *p)
    p->logF(LC(LANG "ENTER_FMT"), lm->name, time);
 }
 
-script_str ext("ACS")
-void Lith_LogS(i32 levl, i32 type)
-{
-   str name = ServCallS(sm_GetLogName);
-
-   if(name[0] == '_') name = Language(LANG "LOG%S", name);
-
-   withplayer(LocalPlayer) switch(type) {
-   case msg_ammo: if(p->getCVarI(sc_player_ammolog))
-   case msg_huds: p->logH(levl, "%S", name); break;
-   case msg_full: p->logF(      "%S", name); break;
-   case msg_both: p->logB(levl, "%S", name); break;
-   }
-}
-
 script
 void Lith_PlayerUpdateLog(struct player *p)
 {
@@ -214,6 +199,23 @@ void Lith_HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
       }
 
       SetSize(320, 240);
+   }
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_LogS")
+void Sc_Log(i32 levl, i32 type)
+{
+   str name = ServCallS(sm_GetLogName);
+
+   if(name[0] == '_') name = Language(LANG "LOG%S", name);
+
+   withplayer(LocalPlayer) switch(type) {
+   case msg_ammo: if(p->getCVarI(sc_player_ammolog))
+   case msg_huds: p->logH(levl, "%S", name); break;
+   case msg_full: p->logF(      "%S", name); break;
+   case msg_both: p->logB(levl, "%S", name); break;
    }
 }
 

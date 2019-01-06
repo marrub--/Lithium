@@ -109,7 +109,7 @@ Select:
 
 Fire:
    CPLG A 0 A_JumpIf(CountInv("Lith_PlasmaAmmo") == 0, "FireEmpty");
-   CPLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_CPlasma_A), "FirePulse");
+   CPLG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_CPlasma_A), "FirePulse");
    CPLG B 2 offset(0, 36) bright Lith_A_FireCPlasma;
    CPLG C 1 offset(0, 35) bright;
    CPLG D 1 offset(0, 32);

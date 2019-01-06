@@ -10,24 +10,6 @@
 
 #define UData UData_Zoom(upgr)
 
-// Scripts -------------------------------------------------------------------|
-
-script_str ext("ACS") type("net")
-void Lith_KeyZoom(i32 amt)
-{
-   if(ACS_Timer() < 10) return;
-
-   withplayer(LocalPlayer)
-   {
-      struct upgrade *upgr = p->getUpgr(UPGR_Zoom);
-      if(upgr) {
-         if(upgr->active)    UData.zoom += amt;
-         if(UData.zoom < 0)  UData.zoom  = 0;
-         if(UData.zoom > 80) UData.zoom  = 80;
-      }
-   }
-}
-
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
@@ -78,6 +60,24 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 
          PrintTextChr(&points[i * 2], 2);
          PrintText(s_cbifont, CR_WHITE, x,1, 120,0);
+      }
+   }
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") type("net") addr("Lith_KeyZoom")
+void Sc_KeyZoom(i32 amt)
+{
+   if(ACS_Timer() < 10) return;
+
+   withplayer(LocalPlayer)
+   {
+      struct upgrade *upgr = p->getUpgr(UPGR_Zoom);
+      if(upgr) {
+         if(upgr->active)    UData.zoom += amt;
+         if(UData.zoom < 0)  UData.zoom  = 0;
+         if(UData.zoom > 80) UData.zoom  = 80;
       }
    }
 }

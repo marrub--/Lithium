@@ -303,84 +303,6 @@ void Lith_PlayerUpdateInventory(struct player *p)
       if(it->Tick) it->Tick(it);
 }
 
-script_str ext("ACS")
-void *Lith_ItemCreate(i32 w, i32 h)
-{
-   str type = GetMembS(0, sm_InvType);
-   str tag  = GetMembS(0, sm_InvName);
-   u32 scr  = GetMembI(0, sm_InvSell);
-   str spr  = StrParam(":ItemSpr:%S", tag);
-   str name = GetPropS(0, APROP_NameTag);
-
-   LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
-
-   #define Type(t, ...) \
-      if(type == t) \
-         return Lith_Item_New(&(struct itemdata const){name, spr, tag, w, h, scr, __VA_ARGS__})
-
-   Type(si_SlottedItem, .Use = Lith_Item_Use);
-   Type(si_Armor,       .Use = Lith_Item_Use);
-
-   return nil;
-}
-
-script_str ext("ACS")
-bool Lith_ItemAttach(void *_item)
-{
-   struct item *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
-
-   withplayer(LocalPlayer)
-   {
-      bip_name_t tag; lstrcpy_str(tag, item->tag);
-      p->bipUnlock(tag);
-      return p->addItem(item);
-   }
-
-   return false;
-}
-
-script_str ext("ACS")
-void Lith_ItemDetach(void *_item)
-{
-   struct item *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
-
-   item->Destroy(item);
-}
-
-script_str ext("ACS")
-void Lith_ItemUnlink(void *_item)
-{
-   struct item *item = _item;
-
-   LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
-
-   withplayer(LocalPlayer)
-   {
-      item->Place(item, &p->misc);
-      item->x = item->y = 0;
-
-      p->selitem = nil;
-      p->movitem = false;
-   }
-}
-
-script_str ext("ACS")
-bool Lith_ItemCanPlace(void *_item)
-{
-   struct item *item = _item;
-
-   withplayer(LocalPlayer)
-      for(i32 i = 0; i < countof(p->inv); i++)
-         if(ItemCanPlaceAny(&p->inv[i], item))
-            return true;
-
-   return false;
-}
-
 void Lith_CBITab_Items(struct gui_state *g, struct player *p)
 {
    static i32 const x[] = {
@@ -455,6 +377,86 @@ void Lith_CBITab_Items(struct gui_state *g, struct player *p)
    for(i32 i = 0; i < aslot_max; i++)
       ifw(str name = ServCallS(sm_GetArmorSlot, i), name != s_NIL)
          PrintText_str(name, s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_ItemCreate")
+void *Sc_ItemCreate(i32 w, i32 h)
+{
+   str type = GetMembS(0, sm_InvType);
+   str tag  = GetMembS(0, sm_InvName);
+   u32 scr  = GetMembI(0, sm_InvSell);
+   str spr  = StrParam(":ItemSpr:%S", tag);
+   str name = GetPropS(0, APROP_NameTag);
+
+   LogDebug(log_dev, "Lith_ItemCreate: creating %S (%S) %S", type, tag, spr);
+
+   #define Type(t, ...) \
+      if(type == t) \
+         return Lith_Item_New(&(struct itemdata const){name, spr, tag, w, h, scr, __VA_ARGS__})
+
+   Type(si_SlottedItem, .Use = Lith_Item_Use);
+   Type(si_Armor,       .Use = Lith_Item_Use);
+
+   return nil;
+}
+
+script_str ext("ACS") addr("Lith_ItemAttach")
+bool Sc_ItemAttach(void *_item)
+{
+   struct item *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemAttach: attaching item %p", item);
+
+   withplayer(LocalPlayer)
+   {
+      bip_name_t tag; lstrcpy_str(tag, item->tag);
+      p->bipUnlock(tag);
+      return p->addItem(item);
+   }
+
+   return false;
+}
+
+script_str ext("ACS") addr("Lith_ItemDetach")
+void Sc_ItemDetach(void *_item)
+{
+   struct item *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemDetach: detaching item %p", item);
+
+   item->Destroy(item);
+}
+
+script_str ext("ACS") addr("Lith_ItemUnlink")
+void Sc_ItemUnlink(void *_item)
+{
+   struct item *item = _item;
+
+   LogDebug(log_dev, "Lith_ItemUnlink: unlinking item %p", item);
+
+   withplayer(LocalPlayer)
+   {
+      item->Place(item, &p->misc);
+      item->x = item->y = 0;
+
+      p->selitem = nil;
+      p->movitem = false;
+   }
+}
+
+script_str ext("ACS") addr("Lith_ItemCanPlace")
+bool Sc_ItemCanPlace(void *_item)
+{
+   struct item *item = _item;
+
+   withplayer(LocalPlayer)
+      for(i32 i = 0; i < countof(p->inv); i++)
+         if(ItemCanPlaceAny(&p->inv[i], item))
+            return true;
+
+   return false;
 }
 #endif
 

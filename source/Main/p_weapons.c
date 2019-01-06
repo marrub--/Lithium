@@ -65,79 +65,6 @@ i32 Lith_PlayerCurWeaponType(struct player *p)
    return p->weapon.cur->info->type;
 }
 
-script_str ext("ACS")
-bool Lith_WeaponPickup(i32 name)
-{
-   extern void Lith_PickupMessage(struct player *p, struct weaponinfo const *info);
-   extern i32 Lith_WeaponFromName(struct player *p, i32 name);
-
-   struct player *p = LocalPlayer;
-   if(NoPlayer(p)) return false;
-
-   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
-   i32 parm = weapon_unknown;
-
-   parm = Lith_WeaponFromName(p, name);
-
-   if(parm >= weapon_max || parm < weapon_min)
-      return true;
-
-   struct weaponinfo const *info = &weaponinfo[parm];
-
-   if(HasWeapon(p, parm))
-   {
-      if(!weaponstay) {
-         WeaponGrab(p, info);
-         Lith_PickupScore(p, parm);
-      }
-
-      return !weaponstay;
-   }
-   else
-   {
-      WeaponGrab(p, info);
-
-      p->weaponsheld++;
-      bip_name_t tag; lstrcpy_str(tag, info->name);
-      p->bipUnlock(tag);
-
-      GiveWeaponItem(parm, info->slot);
-      Lith_PickupMessage(p, info);
-      InvGive(info->classname, 1);
-
-      return !weaponstay;
-   }
-}
-
-script_str ext("ACS")
-k32 Lith_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
-{
-   static k32 A;
-   static k32 P;
-
-   if(!getpitch)
-   {
-      k32 dx = ACS_RandomFixed(mdx,  0.0);
-      k32 dy = ACS_RandomFixed(mdy,  0.0);
-      k32 a  = ACS_RandomFixed(1.0, -1.0);
-
-      A = ACS_Sin(a) * dx;
-      P = ACS_Cos(a) * dy;
-
-      return A;
-   }
-   else
-      return P;
-}
-
-script_str ext("ACS")
-i32 Lith_ChargeFistDamage()
-{
-   i32 amount = InvNum(so_FistCharge);
-   InvTake(so_FistCharge, 0x7FFFFFFF);
-   return amount * ACS_Random(1, 3);
-}
-
 void Lith_GInit_Weapon(void)
 {
    for(i32 i = 0; i < weapon_max; i++)
@@ -270,8 +197,83 @@ void Lith_PlayerUpdateWeapons(struct player *p)
    }
 }
 
-script_str ext("ACS")
-k32 Lith_AmmoRunOut(bool ro, k32 mul)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_WeaponPickup")
+bool Sc_WeaponPickup(i32 name)
+{
+   extern void Lith_PickupMessage(struct player *p, struct weaponinfo const *info);
+   extern i32 Lith_WeaponFromName(struct player *p, i32 name);
+
+   struct player *p = LocalPlayer;
+   if(NoPlayer(p)) return false;
+
+   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
+   i32 parm = weapon_unknown;
+
+   parm = Lith_WeaponFromName(p, name);
+
+   if(parm >= weapon_max || parm < weapon_min)
+      return true;
+
+   struct weaponinfo const *info = &weaponinfo[parm];
+
+   if(HasWeapon(p, parm))
+   {
+      if(!weaponstay) {
+         WeaponGrab(p, info);
+         Lith_PickupScore(p, parm);
+      }
+
+      return !weaponstay;
+   }
+   else
+   {
+      WeaponGrab(p, info);
+
+      p->weaponsheld++;
+      bip_name_t tag; lstrcpy_str(tag, info->name);
+      p->bipUnlock(tag);
+
+      GiveWeaponItem(parm, info->slot);
+      Lith_PickupMessage(p, info);
+      InvGive(info->classname, 1);
+
+      return !weaponstay;
+   }
+}
+
+script_str ext("ACS") addr("Lith_CircleSpread")
+k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
+{
+   static k32 A;
+   static k32 P;
+
+   if(!getpitch)
+   {
+      k32 dx = ACS_RandomFixed(mdx,  0.0);
+      k32 dy = ACS_RandomFixed(mdy,  0.0);
+      k32 a  = ACS_RandomFixed(1.0, -1.0);
+
+      A = ACS_Sin(a) * dx;
+      P = ACS_Cos(a) * dy;
+
+      return A;
+   }
+   else
+      return P;
+}
+
+script_str ext("ACS") addr("Lith_ChargeFistDamage")
+i32 Sc_ChargeFistDamage(void)
+{
+   i32 amount = InvNum(so_FistCharge);
+   InvTake(so_FistCharge, 0x7FFFFFFF);
+   return amount * ACS_Random(1, 3);
+}
+
+script_str ext("ACS") addr("Lith_AmmoRunOut")
+k32 Sc_AmmoRunOut(bool ro, k32 mul)
 {
    withplayer(LocalPlayer)
    {
@@ -292,8 +294,8 @@ k32 Lith_AmmoRunOut(bool ro, k32 mul)
    return 0;
 }
 
-script_str ext("ACS")
-i32 Lith_GetFinalizerMaxHealth(void)
+script_str ext("ACS") addr("Lith_GetFinalizerMaxHealth")
+i32 Sc_GetFinalizerMaxHealth(void)
 {
    i32 sh = GetPropI(0, APROP_SpawnHealth);
 
@@ -303,8 +305,8 @@ i32 Lith_GetFinalizerMaxHealth(void)
       return sh;
 }
 
-script_str ext("ACS")
-void Lith_SurgeOfDestiny(void)
+script_str ext("ACS") addr("Lith_SurgeOfDestiny")
+void Sc_SurgeOfDestiny(void)
 {
    for(i32 i = 0; i < (35 * 7) / 2; i++) {
       InvGive(so_SurgeOfDestiny, 1);
@@ -312,8 +314,8 @@ void Lith_SurgeOfDestiny(void)
    }
 }
 
-script_str ext("ACS")
-i32 Lith_GetWRF(void)
+script_str ext("ACS") addr("Lith_GetWRF")
+i32 Sc_GetWRF(void)
 {
    enum
    {
@@ -345,8 +347,8 @@ i32 Lith_GetWRF(void)
    return flags;
 }
 
-script_str ext("ACS")
-void Lith_PoisonFXTicker()
+script_str ext("ACS") addr("Lith_PoisonFXTicker")
+void Sc_PoisonFXTicker(void)
 {
    for(i32 i = 0; i < 17; i++)
    {
@@ -374,8 +376,8 @@ void Lith_PoisonFXTicker()
    }
 }
 
-script_str ext("ACS")
-void Lith_RecoilUp(k32 amount)
+script_str ext("ACS") addr("Lith_RecoilUp")
+void Sc_RecoilUp(k32 amount)
 {
    withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
 }

@@ -89,7 +89,7 @@ override void PlayerThink()
 {
    if(level.levelnum == 1911777) return;
 
-   if(CallACS("LPData", pdata_semifrozen))
+   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen))
    {
       UserCmd cmd = player.cmd;
       cmd.pitch = cmd.yaw = cmd.roll = 0;
@@ -106,7 +106,7 @@ private void Lith_RainEffect()
    Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 15.);
    Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_RainLerp);
 
-   if(player && CallACS("LWData", wdata_dorain) &&
+   if(player && ACS_ExecuteWithResult(lsc_wdata, wdata_dorain) &&
       ceilingpic == skyflatnum && pitch < -5)
    {
       float m = -pitch - 5;
@@ -124,7 +124,7 @@ private void Lith_RainEffect()
 
 private void Lith_ItemVacuum()
 {
-   if(CallACS("LWData", wdata_fun) & 2)
+   if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & 2)
       for(let it = BlockThingsIterator.Create(self, 70); it.next();)
    {
       if(Inventory(it.thing))
@@ -205,8 +205,8 @@ private void Lith_Crosshair()
    if(gamestate == GS_TITLELEVEL) return;
 
    // get the "actual" view angles
-   float rp = pitch + CallACS("LPData", pdata_addp)/FIX * 180;
-   float ry = angle + CallACS("LPData", pdata_addy)/FIX * 360;
+   float rp = pitch + ACS_ExecuteWithResult(lsc_pdata, pdata_addp)/FIX * 180;
+   float ry = angle + ACS_ExecuteWithResult(lsc_pdata, pdata_addy)/FIX * 360;
 
    // trace to where the crosshair should be in world space
    float sz = height / 2 + attackzoffset * player.crouchfactor;
@@ -218,7 +218,7 @@ private void Lith_Crosshair()
    int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
 
    // draw a tracer for targeting system
-   if(tracer && tracer.health > 0 && CallACS("LPData", pdata_weapon) == weapon_launcher)
+   if(tracer && tracer.health > 0 && ACS_ExecuteWithResult(lsc_pdata, pdata_weapon) == weapon_launcher)
    {
       int thx, thy; bool ok; [thx, thy, ok] = Lith_Unproject(tracer.pos + (0, 0, tracer.height / 2));
       if(ok) Lith_URANUS.LL(self, xhx, xhy, thx, thy, "red");
@@ -242,7 +242,7 @@ private void Lith_Crosshair()
 
    if(CVar.GetCVar('lith_xhair_enablejuicer', player).getBool())
    {
-      int xp = ceil(CallACS("LPData", pdata_recoilp)/FIX * 500) + 10;
+      int xp = ceil(ACS_ExecuteWithResult(lsc_pdata, pdata_recoilp)/FIX * 500) + 10;
 
       Lith_URANUS.LS(self, ":XHairs:L", xhx - xp, xhy, 0, 0, a/255., c);
       Lith_URANUS.LS(self, ":XHairs:R", xhx + xp, xhy, 0, 0, a/255., c);
@@ -254,7 +254,7 @@ private void Lith_PlayerIndicator(PlayerInfo p)
    let mo = p.MO;
 
    int x, y; bool seen; [x, y, seen] = Lith_Unproject(mo.pos + (0, 0, mo.height));
-   if(seen) CallACS("Lith_DrawPlayerIcon", mo.PlayerNumber(), x, y);
+   if(seen) ACS_ExecuteWithResult(lsc_drawplayericon, mo.PlayerNumber(), x, y);
 }
 
 void Lith_PreTick()
@@ -269,7 +269,7 @@ void Lith_PreTick()
    m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);
 
    // stupid hack to keep the view from moving around
-   if(CallACS("LPData", pdata_semifrozen))
+   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen))
    {
       angle -= 1;
       pitch -= 1;

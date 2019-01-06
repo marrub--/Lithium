@@ -2,7 +2,7 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-// m_debug.c: Debugging functions.
+// debug.c: Debugging functions.
 
 #include "common.h"
 #include "p_player.h"
@@ -10,20 +10,12 @@
 #include <stdio.h>
 #include <GDCC.h>
 
+// Extern Objects ------------------------------------------------------------|
+
 str dbgstat[64], dbgnote[64];
 i32 dbgstatnum,  dbgnotenum;
 
-script_str ext("ACS")
-void Lith_GiveMeAllOfTheScore(void)
-{
-   withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
-}
-
-script_str ext("ACS")
-void Lith_DumpAlloc(void)
-{
-   __GDCC__alloc_dump();
-}
+// Extern Functions ----------------------------------------------------------|
 
 void Lith_DebugStat(char const *fmt, ...)
 {
@@ -88,6 +80,47 @@ void Lith_PrintMem(void const *data, size_t size)
    }
 
    puts("\nEOF\n\n");
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_GiveMail")
+void Sc_DbgGiveMail(i32 num)
+{
+   static str const names[] = {
+      s"Intro",
+      s"Cluster1",
+      s"Cluster2",
+      s"Cluster3",
+      s"Phantom",
+      s"JamesDefeated",
+      s"MakarovDefeated",
+      s"IsaacDefeated"
+   };
+
+   num %= countof(names);
+
+   withplayer(LocalPlayer)
+      p->deliverMail(names[num]);
+}
+
+script_str ext("ACS") addr("Lith_GiveMeAllOfTheScore")
+void Sc_DbgGiveScore(void)
+{
+   withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
+}
+
+script_str ext("ACS") addr("Lith_DumpAlloc")
+void Sc_DbgDumpAlloc(void)
+{
+   __GDCC__alloc_dump();
+}
+
+script_str ext("ACS") addr("Lith_PrintMonsterInfo")
+void Sc_PrintMonsterInfo(void)
+{
+   extern void PrintMonsterInfo(void);
+   PrintMonsterInfo();
 }
 
 // EOF

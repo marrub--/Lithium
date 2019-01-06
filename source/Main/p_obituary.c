@@ -8,8 +8,10 @@
 #include "common.h"
 #include "p_player.h"
 
-script_str ext("ACS")
-void Lith_Obituary(void)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_Obituary")
+void Sc_Obituary(void)
 {
    static char const *pronoun[pro_max][5] = {
       {"they", "them", "their", "theirs", "they're"},

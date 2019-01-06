@@ -176,7 +176,7 @@ class Lith_ShockPuff : Lith_BulletPuff
          A_PlaySound("weapons/erifle/zap");
          A_SpawnItemEx("Lith_ShockEffect");
       }
-      TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ShockRif_A, true), "Charged");
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_ShockRif_A, true), "Charged");
       goto Super::Spawn;
    Melee:
    Spawn:
@@ -185,9 +185,9 @@ class Lith_ShockPuff : Lith_BulletPuff
          A_PlaySound("weapons/erifle/zap");
          A_SpawnItemEx("Lith_ShockEffect");
       }
-      TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ShockRif_B, true), "Binding");
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_ShockRif_B, true), "Binding");
       TNT1 A 0 A_GiveInventory("Lith_ShockEnemyGiver", 1, AAPTR_TRACER);
-      TNT1 A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_ShockRif_A, true), "Charged");
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_ShockRif_A, true), "Charged");
       stop;
    Charged:
       TNT1 A 0 A_SpawnItemEx("Lith_ShockEffect2", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);

@@ -19,7 +19,7 @@ bool m_KnifeReFire;
 states(Weapon)
 {
 User4:
-   #### # 0 {return CallACS("LPData", pdata_pclass) == pcl_marine ? null : ResolveState("ReadySelector");}
+   #### # 0 {return ACS_ExecuteWithResult(lsc_pdata, pdata_pclass) == pcl_marine ? null : ResolveState("ReadySelector");}
 _UseKnife:
    #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ReadySelector");
    #### # 0 A_JumpIf(invoker.m_KnifeReFire, "_KnifeStart");

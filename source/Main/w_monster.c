@@ -243,46 +243,6 @@ static void OnDeath(dmon_t *m)
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_GiveEXPToMonster(i32 amt)
-{
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
-}
-
-script_str ext("ACS")
-void Lith_PrintMonsterInfo(void)
-{
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
-   {
-      Log("%p (%p %p) %S active: %u id: %.3u\n"
-          "wasdead: %u finalized: %u painwait: %i\n"
-          "level: %.3i rank: %i exp: %i\n"
-          "health: %i/%i\n"
-          "x: %k y: %k z: %k\n"
-          "r: %k h: %k\n"
-          "mi->exp: %lu mi->score: %lli\n"
-          "mi->flags: %i mi->type: %i",
-          m, m->ms, m->mi, m->mi->name, m->active, m->id,
-          m->wasdead, m->ms->finalized, m->ms->painwait,
-          m->level, m->rank, m->exp,
-          m->ms->health, m->maxhealth,
-          m->ms->x, m->ms->y, m->ms->z,
-          m->ms->r, m->ms->h,
-          m->mi->exp, m->mi->score,
-          m->mi->flags, m->mi->type);
-      for(i32 i = 0; i < countof(m->resist); i++)
-         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
-   }
-   else
-      Log("no active monster");
-}
-
-script_str ext("ACS")
-void Lith_GiveMonsterEXP(i32 amt)
-{
-   ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
-}
-
 script
 void Lith_MonsterMain(dmon_t *m)
 {
@@ -336,8 +296,49 @@ void Lith_MonsterMain(dmon_t *m)
    }
 }
 
-script_str ext("ACS")
-void Lith_MonsterInfo()
+void PrintMonsterInfo(void)
+{
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
+   {
+      Log("%p (%p %p) %S active: %u id: %.3u\n"
+          "wasdead: %u finalized: %u painwait: %i\n"
+          "level: %.3i rank: %i exp: %i\n"
+          "health: %i/%i\n"
+          "x: %k y: %k z: %k\n"
+          "r: %k h: %k\n"
+          "mi->exp: %lu mi->score: %lli\n"
+          "mi->flags: %i mi->type: %i",
+          m, m->ms, m->mi, m->mi->name, m->active, m->id,
+          m->wasdead, m->ms->finalized, m->ms->painwait,
+          m->level, m->rank, m->exp,
+          m->ms->health, m->maxhealth,
+          m->ms->x, m->ms->y, m->ms->z,
+          m->ms->r, m->ms->h,
+          m->mi->exp, m->mi->score,
+          m->mi->flags, m->mi->type);
+      for(i32 i = 0; i < countof(m->resist); i++)
+         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
+   }
+   else
+      Log("no active monster");
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_GiveEXPToMonster")
+void Sc_GiveEXPToMonster(i32 amt)
+{
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
+}
+
+script_str ext("ACS") addr("Lith_GiveMonsterEXP")
+void Sc_GiveMonsterEXP(i32 amt)
+{
+   ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
+}
+
+script ext("ACS") addr(lsc_monsterinfo)
+void Sc_MonsterInfo(void)
 {
    while(ACS_Timer() < 3) ACS_Delay(1);
 
@@ -367,8 +368,8 @@ void Lith_MonsterInfo()
    InvGive(so_MonsterInvalid, 1);
 }
 
-script_str ext("ACS")
-void Lith_MonsterFinalized()
+script_str ext("ACS") addr("Lith_MonsterFinalized")
+void Sc_MonsterFinalized(void)
 {
    ifauto(dmon_t *, m, DmonSelf())
       OnFinalize(m);

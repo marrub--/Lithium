@@ -24,7 +24,7 @@ actor Lith_RainDrop
    {
    Spawn:
       TNT1 A 0
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_RainDropSpawn")
+      TNT1 A 0 ACS_ExecuteWithResult(lsc_raindropspawn)
       TNT1 A 0 A_ChangeVelocity(0, 0, frandom(-12, -16), CVF_REPLACE)
       TNT1 A 0 A_SetScale(0.5, frandom(1.5, 3.5))
    Looping:

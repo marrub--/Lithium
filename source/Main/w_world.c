@@ -34,8 +34,7 @@ static bool       gblinit;
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_SpawnBosses(i96 sum, bool force);
+script void Lith_SpawnBosses(i96 sum, bool force);
 
 struct worldinfo *Lith_GetWorldExtern(void)
 {
@@ -92,7 +91,7 @@ static void CheckEnemyCompat(void)
 }
 
 script
-static void SpawnBoss()
+static void SpawnBoss(void)
 {
    ACS_Delay(1); // Delay another tic for monster spawners.
 
@@ -320,17 +319,10 @@ static void HInit(void)
    hubinit = true;
 }
 
-script_str ext("ACS")
-void Lith_Finale(void)
-{
-   ServCallI(sm_SetEnding, st_normal);
-   ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
-}
-
 // Scripts -------------------------------------------------------------------|
 
 script type("open")
-static void Lith_World(void)
+static void Sc_World(void)
 {
 begin:
    GetDebugInfo();
@@ -466,14 +458,14 @@ begin:
    }
 }
 
-script_str ext("ACS")
-void Lith_WorldReopen(void)
+script_str ext("ACS") addr("Lith_WorldReopen")
+void Sc_WorldReopen(void)
 {
    reopen = true;
 }
 
 script type("unloading")
-static void Lith_WorldUnload(void)
+static void Sc_WorldUnload(void)
 {
    extern void Lith_InstallSpawnedCBIItems(void);
    world.unloaded = true;
@@ -489,6 +481,13 @@ static void Lith_WorldUnload(void)
       p->closeGUI();
       Lith_PlayerUpdateStats(p);
    }
+}
+
+script_str ext("ACS") addr("Lith_Finale")
+void Sc_Finale(void)
+{
+   ServCallI(sm_SetEnding, st_normal);
+   ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 // EOF

@@ -129,7 +129,7 @@ override void DrawStats()
    Lith_DrawPrct(1, "* (SETQ ITEMS", cnt_items [0], wbs.maxitems );
    Lith_DrawPrct(2, "* (SETQ SCRTS", cnt_secret[0], wbs.maxsecret);
 
-   int souls = CallACS("LWData", wdata_soulsfreed);
+   int souls = ACS_ExecuteWithResult(lsc_wdata, wdata_soulsfreed);
    if(souls) Lith_DrawCent(160, 120, (souls * m_Souls) .. " SOULS FREED");
 
    Lith_DrawCent(160, 0, "(LEAVE-AREA)");

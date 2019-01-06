@@ -43,8 +43,31 @@ static void RA_Give(char const *name, i32 n)
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_RA_Give(i32 num)
+stkcall
+void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
+{
+   UData.activearmor = 0;
+
+   RA_Take(1);
+   RA_Take(2);
+}
+
+stkcall
+void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
+{
+   if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))
+   {
+      PrintSprite(sp_HUD_SplitLeft, 12,1, 225,2);
+
+      PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
+      PrintTextX(s_lhudfont, CR_LIGHTBLUE, 32,1, 216,0);
+   }
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_RA_Give")
+void Sc_GiveRA(i32 num)
 {
    withplayer(LocalPlayer)
    {
@@ -69,27 +92,6 @@ void Lith_RA_Give(i32 num)
          if(p->getUpgrActive(UPGR_ReactArmor2)) RA_Give(name, 2);
          else                                   RA_Give(name, 1);
       }
-   }
-}
-
-stkcall
-void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
-{
-   UData.activearmor = 0;
-
-   RA_Take(1);
-   RA_Take(2);
-}
-
-stkcall
-void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
-{
-   if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))
-   {
-      PrintSprite(sp_HUD_SplitLeft, 12,1, 225,2);
-
-      PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
-      PrintTextX(s_lhudfont, CR_LIGHTBLUE, 32,1, 216,0);
    }
 }
 

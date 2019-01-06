@@ -96,9 +96,9 @@ override void WorldThingSpawned(WorldEvent ev)
 
    if(th.bISMONSTER)
    {
-      th.ACS_NamedExecuteAlways("Lith_MonsterInfo");
+      Level.ExecuteSpecial(84, th, null, false, lsc_monsterinfo);
 
-      if(CallACS("LWData", wdata_fun) & lfun_ragnarok)
+      if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
       if(m_BossLevel && th.bBOSS)

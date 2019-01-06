@@ -64,16 +64,6 @@ static void Lith_Load_fun0(struct savefile *save, struct savechunk *chunk)
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_SetFun(i32 fun)
-{
-   withplayer(LocalPlayer)
-   {
-      p->fun = fun;
-      p->saveData();
-   }
-}
-
 script
 void Lith_PlayerSaveData(struct player *p)
 {
@@ -100,5 +90,24 @@ void Lith_PlayerLoadData(struct player *p)
    }
 }
 #endif
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_SetFun")
+void Sc_SetFun(i32 fun)
+{
+   withplayer(LocalPlayer)
+   {
+      p->fun = fun;
+      p->saveData();
+   }
+}
+
+script_str ext("ACS") addr("Lith_GetFun")
+i32 Sc_GetFun(void)
+{
+   withplayer(LocalPlayer) return p->fun;
+   return 0;
+}
 
 // EOF

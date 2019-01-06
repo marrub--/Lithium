@@ -259,16 +259,6 @@ struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, i32 pclass)
    return page;
 }
 
-script_str ext("ACS")
-void Lith_BIPUnlock(i32 pnum)
-{
-   withplayer(&players[pnum])
-   {
-      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
-      p->bipUnlock(tag);
-   }
-}
-
 script
 void Lith_DeallocateBIP(struct bip *bip)
 {
@@ -314,24 +304,16 @@ struct page_info Lith_GetPageInfo(struct page const *page)
    return pinf;
 }
 
-script_str ext("ACS")
-void Lith_GiveMail(i32 num)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_BIPUnlock")
+void Sc_UnlockPage(i32 pnum)
 {
-   static str const names[] = {
-      s"Intro",
-      s"Cluster1",
-      s"Cluster2",
-      s"Cluster3",
-      s"Phantom",
-      s"JamesDefeated",
-      s"MakarovDefeated",
-      s"IsaacDefeated"
-   };
-
-   num %= countof(names);
-
-   withplayer(LocalPlayer)
-      p->deliverMail(names[num]);
+   withplayer(&players[pnum])
+   {
+      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
+      p->bipUnlock(tag);
+   }
 }
 
 // EOF

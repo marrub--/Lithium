@@ -15,7 +15,7 @@ static k32  lmvar rain_py;
 static i32  lmvar rain_dist;
 
 script
-void Lith_DoRain()
+void Lith_DoRain(void)
 {
    struct player *p = &players[0];
    p->setActivator();
@@ -56,8 +56,10 @@ void Lith_DoRain()
    }
 }
 
-script_str ext("ACS")
-void Lith_RainDropSpawn()
+// Scripts -------------------------------------------------------------------|
+
+script ext("ACS") addr(lsc_raindropspawn)
+void Sc_RainDropSpawn(void)
 {
    if(rain_chk)
    {

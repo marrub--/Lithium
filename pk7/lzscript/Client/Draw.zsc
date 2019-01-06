@@ -331,8 +331,8 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
                ww = FONT_SPACE;
             else
             {
-               let metr = CallACS("Lith_GetFontMetric", ucp);
-               let xadv = CallACS("Lith_Metr_Xadv", metr);
+               let metr = ACS_ExecuteWithResult(lsc_getfontmetric, ucp);
+               let xadv = ACS_ExecuteWithResult(lsc_metr_xadv, metr);
                ww = xadv;
             }
 
@@ -632,10 +632,10 @@ private ui void DrawTextUnicode(int scw, int sch, int i)
             x += FONT_SPACE;
          else
          {
-            int metr = CallACS("Lith_GetFontMetric", ucp);
-            int gfx_ = CallACS("Lith_Metr_Tex",  metr);
-            let xadv = CallACS("Lith_Metr_Xadv", metr);
-            let yofs = CallACS("Lith_Metr_Yofs", metr);
+            int metr = ACS_ExecuteWithResult(lsc_getfontmetric, ucp);
+            int gfx_ = ACS_ExecuteWithResult(lsc_metr_tex,  metr);
+            let xadv = ACS_ExecuteWithResult(lsc_metr_xadv, metr);
+            let yofs = ACS_ExecuteWithResult(lsc_metr_yofs, metr);
             if(gfx_ < 0) continue;
 
             textureid gfx; gfx.SetNull(); gfx += gfx_;

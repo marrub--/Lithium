@@ -6,6 +6,7 @@
 
 #if LITHIUM
 #include "common.h"
+#include "w_data.h"
 #include "m_file.h"
 
 #define nglyphs 34
@@ -80,10 +81,10 @@ static void SetFontMetric(i32 key, i32 xadv, i32 yofs)
    metr->h    = h;
 }
 
-// Extern Functions ----------------------------------------------------------|
+// Scripts -------------------------------------------------------------------|
 
-script_str ext("ACS")
-struct glyph *Lith_GetFontMetric(i32 key)
+script ext("ACS") addr(lsc_getfontmetric)
+struct glyph *Sc_GetFontMetric(i32 key)
 {
    return &(*(*(*(*fonts[setfont])
       [key / (nglyphs * nblocks  * ngroups)])
@@ -102,16 +103,16 @@ struct glyph *Lith_GetFontMetric(i32 key)
    ); \
    return 0 /* dummy return to keep the compiler quiet */
 
-script_str ext("ACS") i32 Lith_Metr_Xadv(struct glyph *metr) {RetOfs(1);}
-script_str ext("ACS") i32 Lith_Metr_Yofs(struct glyph *metr) {RetOfs(2);}
-script_str ext("ACS") i32 Lith_Metr_Tex (struct glyph *metr) {RetOfs(3);}
-script_str ext("ACS") i32 Lith_Metr_W   (struct glyph *metr) {RetOfs(4);}
-script_str ext("ACS") i32 Lith_Metr_H   (struct glyph *metr) {RetOfs(5);}
+script ext("ACS") addr(lsc_metr_xadv) i32 Sc_Metr_Xadv(struct glyph *metr) {RetOfs(1);}
+script ext("ACS") addr(lsc_metr_yofs) i32 Sc_Metr_Yofs(struct glyph *metr) {RetOfs(2);}
+script ext("ACS") addr(lsc_metr_tex)  i32 Sc_Metr_Tex (struct glyph *metr) {RetOfs(3);}
+script ext("ACS") addr(lsc_metr_w)    i32 Sc_Metr_W   (struct glyph *metr) {RetOfs(4);}
+script ext("ACS") addr(lsc_metr_h)    i32 Sc_Metr_H   (struct glyph *metr) {RetOfs(5);}
 
-script_str ext("ACS") void Lith_SetFontFace(i32 f) {setfont = f;}
+script_str ext("ACS") addr("Lith_SetFontFace") void Sc_SetFontFace(i32 f) {setfont = f;}
 
-script_str ext("ACS")
-bool Lith_SetupFontsBegin(i32 fontnum)
+script_str ext("ACS") addr("Lith_SetupFontsBegin")
+bool Sc_SetupFontsBegin(i32 fontnum)
 {
    if(fontnum >= font_num) return false;
 
@@ -128,8 +129,8 @@ bool Lith_SetupFontsBegin(i32 fontnum)
    }
 }
 
-script_str ext("ACS")
-bool Lith_SetupFontsContinue(void)
+script_str ext("ACS") addr("Lith_SetupFontsContinue")
+bool Sc_SetupFontsContinue(void)
 {
    for(i32 i = 0; i < 300; i++)
    {

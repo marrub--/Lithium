@@ -10,9 +10,11 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
+// Scripts -------------------------------------------------------------------|
+
 #if LITHIUM
-script_str ext("ACS")
-void Lith_DOGS()
+script_str ext("ACS") addr("Lith_DOGS")
+void Sc_DOGS(void)
 {
    withplayer(LocalPlayer)
    {
@@ -38,8 +40,8 @@ void Lith_DOGS()
    }
 }
 
-script_str ext("ACS")
-void Lith_SteggleEnergy()
+script_str ext("ACS") addr("Lith_SteggleEnergy")
+void Sc_SteggleEnergy(void)
 {
    withplayer(Lith_GetPlayer(0, AAPTR_FRIENDPLAYER))
    {
@@ -63,8 +65,8 @@ void Lith_SteggleEnergy()
    }
 }
 
-script_str ext("ACS")
-void Lith_BarrierBullets()
+script_str ext("ACS") addr("Lith_BarrierBullets")
+void Sc_BarrierBullets(void)
 {
    withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
    {
@@ -80,15 +82,15 @@ void Lith_BarrierBullets()
    }
 }
 
-script_str ext("ACS")
-bool Lith_BarrierCheck()
+script_str ext("ACS") addr("Lith_BarrierCheck")
+bool Sc_BarrierCheck(void)
 {
    ACS_SetActivatorToTarget(0);
    return ACS_CheckFlag(0, s_COUNTKILL);
 }
 
-script_str ext("ACS")
-void Lith_GetSigil()
+script_str ext("ACS") addr("Lith_GetSigil")
+void Sc_GetSigil(void)
 {
    withplayer(LocalPlayer)
    {
@@ -129,8 +131,8 @@ void Lith_GetSigil()
 }
 #endif
 
-script_str ext("ACS")
-void Lith_GiveHealthBonus(i32 amount)
+script_str ext("ACS") addr("Lith_GiveHealthBonus")
+void Sc_GiveHealthBonus(i32 amount)
 {
    withplayer(LocalPlayer)
    {
@@ -140,8 +142,8 @@ void Lith_GiveHealthBonus(i32 amount)
    }
 }
 
-script_str ext("ACS")
-void Lith_GiveHealth(i32 amount)
+script_str ext("ACS") addr("Lith_GiveHealth")
+void Sc_GiveHealth(i32 amount)
 {
    withplayer(LocalPlayer)
    {
@@ -152,15 +154,15 @@ void Lith_GiveHealth(i32 amount)
    }
 }
 
-script_str ext("ACS")
-bool Lith_CheckHealth()
+script_str ext("ACS") addr("Lith_CheckHealth")
+bool Sc_CheckHealth(void)
 {
    withplayer(LocalPlayer) return p->health < p->maxhealth;
    return 0;
 }
 
-script_str ext("ACS")
-void Lith_Discount()
+script_str ext("ACS") addr("Lith_Discount")
+void Sc_Discount(void)
 {
    withplayer(LocalPlayer) p->discount = 0.9;
 }

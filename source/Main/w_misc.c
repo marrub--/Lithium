@@ -8,6 +8,8 @@
 #include "p_player.h"
 #include "w_world.h"
 
+// Static Functions ----------------------------------------------------------|
+
 stkcall
 static void SetInventory(str item, i32 amount)
 {
@@ -23,6 +25,8 @@ static void SetActorInventory(i32 tid, str item, i32 amount)
         if(s < 0) ACS_TakeActorInventory(tid, item, -s);
    else if(s > 0) ACS_GiveActorInventory(tid, item,  s);
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 stkcall
 void Lith_FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
@@ -116,26 +120,28 @@ k32 Lith_AddAngle(i32 x, i32 y)
    return p->ang;
 }
 
-script_str ext("ACS") addr("Lith_AddAngle")
-void Lith_AddAngleScript(i32 x, i32 y)
+// Scripts -------------------------------------------------------------------|
+
+script ext("ACS") addr(lsc_addangle)
+void Sc_AddAngle(i32 x, i32 y)
 {
    Lith_AddAngle(x, y);
 }
 
-script_str ext("ACS")
-void Lith_EmitScore(i32 amount)
+script_str ext("ACS") addr("Lith_EmitScore")
+void Sc_EmitScore(i32 amount)
 {
    Lith_GiveAllScore(amount, false);
 }
 
-script_str ext("ACS")
-void Lith_EmitEXP(i32 amount)
+script_str ext("ACS") addr("Lith_EmitEXP")
+void Sc_EmitEXP(i32 amount)
 {
    Lith_GiveAllEXP(amount);
 }
 
 script_str ext("ACS") addr("Lith_GiveScore")
-void Lith_GiveScoreScript(i32 score)
+void Sc_GiveScore(i32 score)
 {
    Lith_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
 }

@@ -90,39 +90,35 @@ static void GivePlayerZ(i32 tid, struct player *p)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
-
-script_str ext("ACS")
-void Lith_SetMagicUI(bool on)
+static void SetMagicUI(struct player *p, bool on)
 {
-   withplayer(LocalPlayer)
+   if(p->dead) return;
+
+   struct upgrade *upgr = p->getUpgr(UPGR_Magic);
+
+   if(on)
    {
-      if(p->dead) return;
+      UData.ui = true;
+      p->semifrozen++;
 
-      struct upgrade *upgr = p->getUpgr(UPGR_Magic);
+      UData.gst.gfxprefix = ":UI:";
+      UData.gst.cx = 320/2;
+      UData.gst.cy = 240/2;
 
-      if(on)
-      {
-         UData.ui = true;
-         p->semifrozen++;
+      Lith_GUI_Init(&UData.gst);
+   }
+   else if(!on && UData.ui)
+   {
+      if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
 
-         UData.gst.gfxprefix = ":UI:";
-         UData.gst.cx = 320/2;
-         UData.gst.cy = 240/2;
+      UData.ui = false;
+      p->semifrozen--;
 
-         Lith_GUI_Init(&UData.gst);
-      }
-      else if(!on && UData.ui)
-      {
-         if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
-
-         UData.ui = false;
-         p->semifrozen--;
-
-         memset(&UData.gst, 0, sizeof UData.gst);
-      }
+      memset(&UData.gst, 0, sizeof UData.gst);
    }
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 script
 void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
@@ -136,9 +132,9 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
    UData.manaperc = manaperc;
 
    if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
-      Lith_SetMagicUI(true);
+      SetMagicUI(p, true);
    else if(!(p->buttons & BT_USER4) && p->old.buttons & BT_USER4)
-      Lith_SetMagicUI(false);
+      SetMagicUI(p, false);
 
    if(UData.ui)
       UpdateMagicUI(p, upgr);
@@ -179,6 +175,14 @@ void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
    SetClip(2, 219-5, fprc, 5);
    PrintSprite(sp_HUD_C_ManaBar2, 2,1, 219,2);
    ClearClip();
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_SetMagicUI")
+void Sc_SetMagicUI(bool on)
+{
+   withplayer(LocalPlayer) SetMagicUI(p, on);
 }
 
 // EOF

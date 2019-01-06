@@ -10,8 +10,16 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_PunctuatorFire(void)
+stkcall
+void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
+{
+   InvGive(so_GTFO, 1);
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_PunctuatorFire")
+void Sc_PunctuatorFire(void)
 {
    withplayer(LocalPlayer)
    {
@@ -49,12 +57,6 @@ void Lith_PunctuatorFire(void)
          }
       }
    }
-}
-
-stkcall
-void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
-{
-   InvGive(so_GTFO, 1);
 }
 
 // EOF

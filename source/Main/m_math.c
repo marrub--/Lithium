@@ -18,7 +18,7 @@
 static u64 lmvar crctable[256]; // NB: Don't try to hash >8bit data.
 static bool lmvar crcinit;
 
-static void InitCRC64()
+static void InitCRC64(void)
 {
    u64 const polynomial = 0xC96C5795D7870F42; // ECMA 182
 

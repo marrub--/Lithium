@@ -10,8 +10,10 @@
 #include "m_token.h"
 #include "m_tokbuf.h"
 
-script_str ext("ACS")
-void Lith_CSLoadMap(void)
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_CSLoadMap")
+void Sc_CSLoadMap(void)
 {
    FILE *fp = W_Open(sp_lfiles_Cyberspace, "r");
    i32 w, h, *map;

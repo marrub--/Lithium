@@ -113,14 +113,48 @@ static bool CheckDead(struct boss *b, i32 num)
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_PhantomSound(void)
+script
+void Lith_SpawnBosses(i96 sum, bool force)
+{
+   if(!force && sum < scorethreshold) return;
+
+   alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
+   alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
+   alldead[diff_hard] = CheckDead(bosses_hard, countof(bosses_hard));
+
+   i32 diff =
+      difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
+
+   if(alldead[diff])
+   {
+      LogDebug(log_boss, "%s: All dead, returning", __func__);
+      return;
+   }
+
+   LogDebug(log_boss, "%s: Spawning boss, difficulty %i", __func__, diff);
+
+   if(!lastboss || lastboss->dead) switch(diff)
+   {
+   case diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
+   case diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
+   case diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
+   }
+   else
+      boss = lastboss;
+
+   Lith_TriggerBoss();
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_PhantomSound")
+void Sc_PhantomSound(void)
 {
    ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
-script_str ext("ACS")
-void Lith_PhantomTeleport(void)
+script_str ext("ACS") addr("Lith_PhantomTeleport")
+void Sc_PhantomTeleport(void)
 {
    k32 ang = ACS_GetActorAngle(0);
 
@@ -132,8 +166,8 @@ void Lith_PhantomTeleport(void)
    }
 }
 
-script_str ext("ACS")
-void Lith_PhantomDeath(void)
+script_str ext("ACS") addr("Lith_PhantomDeath")
+void Sc_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
 
@@ -175,8 +209,8 @@ void Lith_PhantomDeath(void)
    world.bossspawned = false;
 }
 
-script_str ext("ACS")
-void Lith_SpawnBoss(void)
+script_str ext("ACS") addr("Lith_SpawnBoss")
+void Sc_SpawnBoss(void)
 {
    if(!boss) return;
 
@@ -192,7 +226,7 @@ void Lith_SpawnBoss(void)
 }
 
 script_str ext("ACS") addr("Lith_TriggerBoss") optargs(1)
-void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
+void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
 {
    switch(diff) {
    case diff_easy: boss = &bosses_easy[num]; break;
@@ -202,38 +236,6 @@ void Lith_TriggerBoss_Script(i32 diff, i32 num, i32 phase)
 
    if(phase)
       {boss->dead = false; boss->phase = phase;}
-
-   Lith_TriggerBoss();
-}
-
-script_str ext("ACS")
-void Lith_SpawnBosses(i96 sum, bool force)
-{
-   if(!force && sum < scorethreshold) return;
-
-   alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
-   alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
-   alldead[diff_hard] = CheckDead(bosses_hard, countof(bosses_hard));
-
-   i32 diff =
-      difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
-
-   if(alldead[diff])
-   {
-      LogDebug(log_boss, "Lith_SpawnBosses: All dead, returning");
-      return;
-   }
-
-   LogDebug(log_boss, "Lith_SpawnBosses: Spawning boss, difficulty %i", diff);
-
-   if(!lastboss || lastboss->dead) switch(diff)
-   {
-   case diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
-   case diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
-   case diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
-   }
-   else
-      boss = lastboss;
 
    Lith_TriggerBoss();
 }

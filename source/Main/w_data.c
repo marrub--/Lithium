@@ -8,10 +8,14 @@
 #include "p_player.h"
 #include "w_world.h"
 
+// Extern Objects ------------------------------------------------------------|
+
 extern bool dorain;
 
-script_str ext("ACS")
-i32 LPData(i32 info, i32 permutation, bool target)
+// Scripts -------------------------------------------------------------------|
+
+script ext("ACS") addr(lsc_pdata)
+i32 Sc_LPData(i32 info, i32 permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
@@ -34,8 +38,8 @@ i32 LPData(i32 info, i32 permutation, bool target)
    return 0;
 }
 
-script_str ext("ACS")
-i32 LWData(i32 info)
+script ext("ACS") addr(lsc_wdata)
+i32 Sc_LWData(i32 info)
 {
    switch(info) {
    case wdata_bossspawned: return world.bossspawned;

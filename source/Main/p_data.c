@@ -149,14 +149,6 @@ void Lith_PlayerUpdateData(struct player *p)
    p->kbs = InvNum(so_BlueSkull);
 }
 
-script_str ext("ACS")
-void Lith_KeyDown(i32 pnum, i32 ch)
-{
-   withplayer(&players[pnum])
-      if(p->tbptr + 1 < countof(p->txtbuf))
-         p->txtbuf[p->tbptr++] = ch;
-}
-
 script
 static void LevelUp(struct player *p, u32 attr[at_max])
 {
@@ -356,6 +348,16 @@ void Lith_PlayerUpdateStats(struct player *p)
 
    if(p->jumpboost != p->old.jumpboost)
       SetPropK(0, APROP_JumpZ, p->jumpheight * boost);
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_KeyDown")
+void Sc_KeyDown(i32 pnum, i32 ch)
+{
+   withplayer(&players[pnum])
+      if(p->tbptr + 1 < countof(p->txtbuf))
+         p->txtbuf[p->tbptr++] = ch;
 }
 
 // EOF

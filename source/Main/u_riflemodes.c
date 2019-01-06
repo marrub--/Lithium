@@ -8,24 +8,6 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-script_str ext("ACS")
-void Lith_SwitchRifleFiremode(void)
-{
-   withplayer(LocalPlayer)
-   {
-      p->riflefiremode = ++p->riflefiremode % rifle_firemode_max;
-      ACS_LocalAmbientSound(ss_weapons_rifle_firemode, 127);
-   }
-}
-
-script_str ext("ACS")
-void Lith_ResetRifleMode()
-{
-   withplayer(LocalPlayer)
-      if(p->getCVarI(sc_weapons_riflemodeclear))
-         p->riflefiremode = 0;
-}
-
 stkcall
 void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
 {
@@ -53,6 +35,26 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
    PrintSprite(sp_HUD_H_W3, 215,2, 240,2);
    PrintSprite(StrParam(":HUD:H_W%u", (rifle_firemode_max - p->riflefiremode) + 3),
       215,2, 208 + (p->riflefiremode * 16),2);
+}
+
+// Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_SwitchRifleFiremode")
+void Sc_SwitchRifleFiremode(void)
+{
+   withplayer(LocalPlayer)
+   {
+      p->riflefiremode = ++p->riflefiremode % rifle_firemode_max;
+      ACS_LocalAmbientSound(ss_weapons_rifle_firemode, 127);
+   }
+}
+
+script_str ext("ACS") addr("Lith_ResetRifleMode")
+void Sc_ResetRifleMode(void)
+{
+   withplayer(LocalPlayer)
+      if(p->getCVarI(sc_weapons_riflemodeclear))
+         p->riflefiremode = 0;
 }
 
 // EOF
