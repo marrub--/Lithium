@@ -180,7 +180,7 @@ Flash:
 AltFire:
    GRLG A 1;
    GRLG A 0 A_JumpIf(CallACS("LPData", pdata_upgrade, UPGR_HomingRPG), "Ready");
-   GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo"), "FireEmpty");
+   GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
    GRLG A 0 {
       if(CallACS("LPData", pdata_upgrade, UPGR_ChargeRPG)) Lith_A_FireRocket();
       else                                                 Lith_A_FireGrenade();
