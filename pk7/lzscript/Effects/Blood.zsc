@@ -17,31 +17,29 @@ class Lith_BloodHitSpray : Actor
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      Alpha = FRandom(0.7, 0.9);
-      A_SetRoll(FRandom(0, 359));
-      A_SetScale(FRandom(0.5, 1.0));
-      A_SetPitch(FRandom(-5, 5));
-      m_Step = FRandom(0.01, 0.02);
+      Alpha  = FRandom(.7,   .9);
+      Pitch  = FRandom(-5,    5);
+      Roll   = FRandom(0,   359);
+      Scale *= FRandom(.5,    1);
+      m_Step = FRandom(.01, .02);
    }
 
    override void Tick()
    {
-      Super.Tick();
       if(!GlobalFreeze && !Level.Frozen)
       {
-         if(m_Step < 0.015) SetOrigin(Pos + (0, 0, 0.04), true);
-         else               SetOrigin(Pos - (0, 0, 0.04), true);
+         if(m_Step < .015) SetOrigin(Pos + (0, 0, .04), true);
+         else              SetOrigin(Pos - (0, 0, .04), true);
          Scale *= 1.004;
          Alpha -= m_Step;
-         if(Alpha <= 0)
-            Destroy();
+         if(Alpha <= 0) Destroy();
       }
    }
 
    states
    {
    Spawn:
-      ____ A 500;
+      ____ A -1;
       stop;
    }
 }
@@ -56,24 +54,47 @@ class Lith_BloodHitCore : Actor
       +DONTSPLASH
    }
 
+   int m_Tics;
+
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
       if(!Translation) A_SetTranslation('Lith_AllToRed');
-      Alpha = FRandom(0.7, 1);
-      Angle += FRandom(-6, 6);
-      A_SetRoll(FRandom(0, 359));
-      A_SetScale(Scale.X * FRandom(0.5, 1.0));
-      A_SetPitch(FRandom(-5, 5));
-      A_SpawnItemEx("Lith_BloodHitSpray", flags: SXF_TRANSFERTRANSLATION|SXF_TRANSFERSCALE);
+      Alpha  = FRandom(0.7,   1);
+      Pitch  = FRandom(-5,    5);
+      Angle += FRandom(-6,    6);
+      Roll   = FRandom(0,   359);
+      Scale *= FRandom(0.5, 1.0);
+      let mo = Spawn("Lith_BloodHitSpray", Pos, ALLOW_REPLACE);
+      mo.Translation = Translation;
+      mo.Scale = Scale;
+      mo.Angle = Angle;
       if(Random(0, 255) < 128) A_PlaySound("body/flesh", CHAN_BODY);
+   }
+
+   override void Tick()
+   {
+      if(!GlobalFreeze && !Level.Frozen)
+      {
+         if(++m_Tics > 4)
+         {
+            Scale *= .95;
+            Alpha -= .1;
+            if(Alpha <= 0) Destroy();
+         }
+      }
+   }
+
+   override void MarkPrecacheSounds()
+   {
+      Super.MarkPrecacheSounds();
+      MarkSound("body/flesh");
    }
 
    states
    {
    Spawn:
-      ____ A 4;
-      ____ AAAAAAAA 1 {A_SetScale(Scale.X * 0.95); A_FadeOut(0.1);}
+      ____ A -1;
       stop;
    }
 }
@@ -82,27 +103,32 @@ class Lith_Blood : Blood replaces Blood;
 
 default
 {
-   RenderStyle "Translucent";
-
    +CORPSE
    +DONTSPLASH
 }
 
 int m_Lev;
+int m_WaitTics;
 
 override void Tick()
 {
-   Super.Tick();
    if(bNOINTERACTION) SetOrigin((Pos.XY, FloorZ), true);
+   if(m_WaitTics == 0) Super.Tick();
+   else                m_WaitTics -= 1;
 }
 
 void Lith_A_Dogs()
 {
    for(let it = BlockThingsIterator.Create(self, 64); it.Next();)
    {
-      let mo = it.thing;
-      if(mo.player && mo.CountInv("Lith_Dogs"))
-         mo.A_SpawnItemEx("Lith_RealSpectralSteggles", 0,0,32, 10,0,9, FRandom(0,360), SXF_NOCHECKPOSITION|SXF_SETTARGET);
+      let mo = it.Thing;
+      if(mo.Player && mo.CountInv("Lith_Dogs"))
+      {
+         let steg = Spawn("Lith_RealSpectralSteggles", Pos + (0,0,32), ALLOW_REPLACE);
+         steg.Vel = (10,0,9);
+         steg.Angle = FRandom(0, 359);
+         steg.Target = self;
+      }
    }
 }
 
@@ -110,10 +136,10 @@ void Lith_A_SetLevel(int num)
 {
    if(!m_Lev)
    {
-      bool _;
-      Actor a;
-      [_, a] = A_SpawnItemEx("Lith_BloodHitCore", FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), flags: SXF_TRANSFERTRANSLATION);
-      a.Scale /= num;
+      let mo = Spawn("Lith_BloodHitCore", Pos + (FRandom(-1,1),FRandom(-1,1),FRandom(-1,1)), ALLOW_REPLACE);
+      mo.Translation = Translation;
+      mo.Scale /= num;
+      mo.Angle = Angle;
       Vel.X += FRandom(-2,2);
       Vel.Y += FRandom(-2,2);
    }
@@ -135,26 +161,27 @@ Medium:
    BLUD B 8 Lith_A_SetLevel(2);
 Low:
    BLUD C 8 Lith_A_SetLevel(3);
-   BLUD CCCCCCCCCC 2 A_FadeOut(0.1);
+   BLUD CCCCCCCCCC 2 A_FadeOut(.1);
    stop;
 Crash:
-   BLSP # 0 {
+   BLSP # 1 {
       Alpha = 1;
       Vel = (0, 0, 0);
-      Scale = (FRandom(0.6, 2.2), FRandom(1, 1.2));
+      Scale = (FRandom(.6, 2.2), FRandom(1, 1.2));
       bNOINTERACTION = true;
       LinkContext ctx;
       UnlinkFromWorld(ctx);
       SetXYZ(Pos + (FRandom(-8,8), FRandom(-8,8), 0));
       LinkToWorld(ctx);
+      m_WaitTics = lith_sv_bloodtime;
       switch(m_Lev) {
       case 1: Frame = Ch_A - Ch_A; break;
       case 2: Frame = Ch_B - Ch_A; break;
       case 3: Frame = Ch_C - Ch_A; break;
       }
    }
-   BLSP # 4200;
    BLSP # 0 {
+      A_SetRenderStyle(1, STYLE_Translucent);
       switch(m_Lev) {
       case 1: return ResolveState("DoneHigh");
       case 2: return ResolveState("DoneMedium");
@@ -164,11 +191,11 @@ Crash:
    }
    stop;
 DoneHigh:
-   BLSP BBBBBBBBBBBBBBBBBBBB 1 A_FadeOut(0.005);
+   BLSP BBBBBBBBBBBBBBBBBBBB 1 A_FadeOut(.01);
 DoneMedium:
-   BLSP CCCCCCCCCCCCCCCCCCCC 1 A_FadeOut(0.005);
+   BLSP CCCCCCCCCCCCCCCCCCCC 1 A_FadeOut(.01);
 DoneLow:
-   BLSP DDDDDDDDDDDDDDDDDDDD 1 A_FadeOut(0.005);
+   BLSP DDDDDDDDDDDDDDDDDDDD 1 A_FadeOut(.01);
    stop;
 }
 
