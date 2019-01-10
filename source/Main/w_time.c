@@ -12,14 +12,15 @@
 
 char const *Lith_CanonTime(i32 type)
 {
-   noinit static char ft[64], st[64], dt[64];
+   noinit static char ft[64], st[64], dt[64], lf[256];
 
-   i32 s = 53 + (world.ticks / 35);
-   i32 m = 30 + (s           / 60);
-   i32 h = 14 + (m           / 60);
-   i32 d = 25 + (h           / 24);
-   i32 M =  6 + (d           / 30);
-   i32 Y = 48 + (M           / 11);
+   i32 t = world.ticks;
+   i32 s = 53 + t / 35;
+   i32 m = 30 + s / 60;
+   i32 h = 14 + m / 60;
+   i32 d = 25 + h / 24;
+   i32 M =  6 + d / 30;
+   i32 Y = 48 + M / 11;
 
    s %= 60;
    m %= 60;
@@ -30,9 +31,9 @@ char const *Lith_CanonTime(i32 type)
    Y = Y      + 1;
 
    switch(type) {
-   case CANONTIME_FULL:  sprintf(ft, LC(LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
-   case CANONTIME_SHORT: sprintf(st, LC(LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
-   case CANONTIME_DATE:  sprintf(dt, LC(LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
+   case CANONTIME_FULL:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
+   case CANONTIME_SHORT: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
+   case CANONTIME_DATE:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
    return nil;

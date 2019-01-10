@@ -204,11 +204,9 @@ void Lith_DeliverMail(struct player *p, str title, i32 flags)
 
    if(!send) send = L(st_mail_internal);
 
-   char const *time = world.canontime;
-
    page->shname   = date ? date : l_strdup(world.canontimeshort);
    page->title    = name ? name : L(st_mail_notitle);
-   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, time, body);
+   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, world.canontime, body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 

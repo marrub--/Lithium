@@ -135,14 +135,8 @@ static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *v
    switch(vm->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: {
-      char const *date = world.canondate;
-      btright = l_strdup(date);
-      break;
-   }
-   default:
-      btright = st_term_use_to_ack;
-      break;
+   case TACT_LOGOFF: btright = l_strdup(world.canondate); break;
+   default:          btright = st_term_use_to_ack;        break;
    }
 
    PrintText_str(btright, s_smallfnt, CR_RED, tright,2, tbottom,2);

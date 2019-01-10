@@ -114,8 +114,7 @@ void Lith_PlayerLogEntry(struct player *p)
 
    p->log.curmap = lm;
 
-   char const *time = world.canontime;
-   p->logF(LC(LANG "ENTER_FMT"), lm->name, time);
+   p->logF(LC(LANG "ENTER_FMT"), lm->name, world.canontime);
 }
 
 script
