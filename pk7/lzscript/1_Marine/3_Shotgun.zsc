@@ -108,7 +108,7 @@ action(Weapon) void Lith_A_FireGauss()
    Lith_A_TakeSlot3OptAmmo();
    Lith_A_JustAttack();
    A_AlertMonsters();
-   Lith_FireBullets(0, 0, 1, 14, pufftype: "Lith_GaussPuff");
+   A_FireBullets(0, 0, 1, 14, pufftype: "Lith_GaussPuff");
    A_Quake(1, 5, 0, 64);
    A_RailAttack(9, 0, false, "LightBlue", "Blue", RGF_NOPIERCING|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0.05, 0.05, 0, 5, FRandom(0.35, 1), 0.5);
    A_PlaySound("weapons/shotgun/gauss/fire", CHAN_WEAPON);

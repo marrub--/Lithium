@@ -41,4 +41,15 @@ static void DelearSprite(Actor mo_)
    if(sf <  1) mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,a,flags);
 }
 
+static void GivePoison(Actor mo)
+{
+   if(mo.CountInv("Lith_PoisonFXTimer"))
+      mo.GiveInventory("Lith_PoisonFXReset", 1);
+   else
+   {
+      mo.GiveInventory("Lith_PoisonFXTimer", 20);
+      mo.GiveInventory("Lith_PoisonFXGiver", 1);
+   }
+}
+
 // EOF

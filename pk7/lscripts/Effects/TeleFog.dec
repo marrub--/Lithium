@@ -4,7 +4,7 @@
 
 actor Lith_TeleFogRing
 {
-   RenderStyle Add
+   RenderStyle "Add"
    
    +NOINTERACTION
    +BRIGHT
@@ -12,8 +12,8 @@ actor Lith_TeleFogRing
    States
    {
    Spawn:
-      TELE AAAAA 2 A_FadeOut(0.1)
-      Stop
+      TELE AAAAA 2 A_FadeOut
+      stop
    }
 }
 
@@ -22,8 +22,8 @@ actor Lith_P67TeleFog : TeleportFog replaces TeleportFog
    States
    {
    Spawn:
-      TNT1 AAAA 5 A_SpawnItemEx("Lith_TeleFogRing", 0,0,0, 0,0,4)
-      Stop
+      TNT1 AAAA 5 nodelay A_SpawnItemEx("Lith_TeleFogRing", 0,0,0, 0,0,4)
+      stop
    }
 }
 

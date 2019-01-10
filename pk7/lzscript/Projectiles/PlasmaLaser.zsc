@@ -33,7 +33,7 @@ class Lith_PlasmaHit : Lith_PlasmaLaze
       BLL2 A 0 A_JumpIf(CallACS("Lith_Timer") % 3, "Null");
       BLL2 A 0 A_PlaySound("weapons/plasma/laser/spark", CHAN_7, 1.0, true);
    PrettiesLoop:
-      BLL2 A 0 A_JumpIf(alpha >= 1, "PrettiesDone");
+      BLL2 A 0 A_JumpIf(Alpha >= 1, "PrettiesDone");
       BLL2 A 1 A_FadeIn(0.07);
       loop;
    PrettiesDone:
@@ -67,8 +67,8 @@ override void Tick()
 
    if(lith_weapons_rainbowlaser)
    {
-      A_SetRenderStyle(alpha, STYLE_AddStencil);
-      setShade(crs[uint(-int(target.distance2D(self) / 20) + level.totaltime) % crs.size()]);
+      A_SetRenderStyle(Alpha, STYLE_AddStencil);
+      SetShade(crs[uint(-int(Target.Distance2D(self) / 20) + Level.TotalTime) % crs.Size()]);
    }
 
    Super.Tick();

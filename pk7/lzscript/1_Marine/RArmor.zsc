@@ -1,0 +1,41 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_RA_Hax : PowerProtection
+{
+   default
+   {
+      Powerup.Duration int.max;
+      ActiveSound "player/rarmor/damage";
+   }
+}
+
+// note: the Hazard ones don't actually do anything.
+class Lith_RA_Bullets1   : Lith_RA_Hax {default {DamageFactor "Bullet",    .7;}}
+class Lith_RA_Energy1    : Lith_RA_Hax {default {DamageFactor "Railgun",   .7;
+                                                 DamageFactor "Electric",  .7;
+                                                 DamageFactor "Plasma",    .7;}}
+class Lith_RA_Fire1      : Lith_RA_Hax {default {DamageFactor "Fire",      .7;}}
+class Lith_RA_FireMagic1 : Lith_RA_Hax {default {DamageFactor "FireMagic", .7;}}
+class Lith_RA_Magic1     : Lith_RA_Hax {default {DamageFactor "Magic",     .7;}}
+class Lith_RA_Melee1     : Lith_RA_Hax {default {DamageFactor "Melee",     .7;}}
+class Lith_RA_Shrapnel1  : Lith_RA_Hax {default {DamageFactor "Shrapnel",  .7;
+                                                 DamageFactor "Explosion", .7;}}
+class Lith_RA_Ice1       : Lith_RA_Hax {default {DamageFactor "Ice",       .7;}}
+class Lith_RA_Hazard1    : Lith_RA_Hax {default {DamageFactor "Slime",     .7;}}
+// ---------------------------------------------------------------------------|
+class Lith_RA_Bullets2   : Lith_RA_Hax {default {DamageFactor "Bullet",    .5;}}
+class Lith_RA_Energy2    : Lith_RA_Hax {default {DamageFactor "Railgun",   .5;
+                                                 DamageFactor "Electric",  .5;
+                                                 DamageFactor "Plasma",    .5;}}
+class Lith_RA_Fire2      : Lith_RA_Hax {default {DamageFactor "Fire",      .5;}}
+class Lith_RA_FireMagic2 : Lith_RA_Hax {default {DamageFactor "FireMagic", .5;}}
+class Lith_RA_Magic2     : Lith_RA_Hax {default {DamageFactor "Magic",     .5;}}
+class Lith_RA_Melee2     : Lith_RA_Hax {default {DamageFactor "Melee",     .5;}}
+class Lith_RA_Shrapnel2  : Lith_RA_Hax {default {DamageFactor "Shrapnel",  .5;
+                                                 DamageFactor "Explosion", .5;}}
+class Lith_RA_Ice2       : Lith_RA_Hax {default {DamageFactor "Ice",       .5;}}
+class Lith_RA_Hazard2    : Lith_RA_Hax {default {DamageFactor "Slime",     .5;}}
+
+// EOF

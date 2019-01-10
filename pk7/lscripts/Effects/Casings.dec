@@ -1,8 +1,8 @@
 // Distributed under the CC0 public domain license.
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
-// I think Per Kristian made these originally. I'm not entirely sure because
-// they're from an old personal mod of mine that doesn't have any credits.
+// Previously I thought Per Kristian made these, but they're actually
+// my original work after checking.
 
 actor Lith_CasingSmoke
 {
@@ -22,7 +22,7 @@ actor Lith_CasingSmoke
    {
    Spawn:
       SMOK C random(2, 5)
-      SMOK DEFGH 4 A_FadeOut(frandom(0.05, 0.15))
+      SMOK DEFGH 4 A_FadeOut(FRandom(0.05, 0.15))
       stop
    }
 }
@@ -53,7 +53,7 @@ actor Lith_CasShellHot : Lith_CasShell
    {
    Spawn1:
       TNT1 A 0
-      SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0))
+      SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, FRandom(-0.2,0),FRandom(-0.2,0))
    Spawn2:
       SCAS ABCDEFGH 1
       loop
@@ -86,7 +86,7 @@ actor Lith_CasSmallHot : Lith_CasSmall
    {
    Spawn1:
       TNT1 A 0
-      BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0))
+      BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, FRandom(-0.2,0),FRandom(-0.2,0))
    Spawn2:
       BCAS ABCDEFGH 1
       loop

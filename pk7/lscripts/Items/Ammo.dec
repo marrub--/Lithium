@@ -2,34 +2,11 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-actor Lith_MagicAmmo : Ammo
-{
-   Inventory.MaxAmount 1000
-}
-
-actor Lith_BulletAmmo : Ammo
-{
-   Inventory.MaxAmount 500
-}
-
-actor Lith_ShellAmmo : Ammo
-{
-   Inventory.MaxAmount 60
-}
-
-actor Lith_RocketAmmo : Ammo
-{
-   Inventory.MaxAmount 200
-}
-
-actor Lith_PlasmaAmmo : Ammo
-{
-   Inventory.MaxAmount 14000
-}
-
-actor Lith_CannonAmmo : Ammo
-{
-   Inventory.MaxAmount 40
-}
+actor Lith_MagicAmmo  : Ammo {Inventory.MaxAmount 1000}
+actor Lith_BulletAmmo : Ammo {Inventory.MaxAmount 500}
+actor Lith_ShellAmmo  : Ammo {Inventory.MaxAmount 60}
+actor Lith_RocketAmmo : Ammo {Inventory.MaxAmount 200}
+actor Lith_PlasmaAmmo : Ammo {Inventory.MaxAmount 14000}
+actor Lith_CannonAmmo : Ammo {Inventory.MaxAmount 40}
 
 // EOF

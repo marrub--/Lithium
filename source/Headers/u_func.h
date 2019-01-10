@@ -49,7 +49,6 @@ Case(DefenseNuke)
    E(DefenseNuke)
 
 Case(Adrenaline)
-   A(Adrenaline)
    U(Adrenaline)
    R(Adrenaline)
 

@@ -17,6 +17,8 @@ default
 
 override void PostBeginPlay()
 {
+   Super.PostBeginPlay();
+
    for(int i = 0; i < m_Num; i++)
    {
       let mo = Spawn(m_Name, Pos, NO_REPLACE);

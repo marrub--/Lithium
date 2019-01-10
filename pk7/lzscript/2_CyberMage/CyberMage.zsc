@@ -42,6 +42,8 @@ class Lith_CWeapon : Lith_OutcastsWeapon
    }
 }
 
+#include "lzscript/2_CyberMage/ManaLeak.zsc"
+
 #include "lzscript/2_CyberMage/Magic/1_Blade.zsc"
 #include "lzscript/2_CyberMage/Magic/2_Delear.zsc"
 #include "lzscript/2_CyberMage/Magic/3_Feuer.zsc"

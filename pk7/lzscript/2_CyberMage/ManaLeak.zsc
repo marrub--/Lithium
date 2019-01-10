@@ -1,0 +1,33 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_ManaLeak : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.1;
+      VSpeed 2;
+
+      +NOINTERACTION
+      +NOTIMEFREEZE
+   }
+
+   int user_X;
+   int user_Y;
+   int user_Z;
+
+   states
+   {
+   Spawn:
+      BLLT J 0;
+      BLLT J 1 {
+         A_Warp(AAPTR_MASTER, user_X, user_Y, Pos.Z-user_Z, 0, WARPF_ABSOLUTEANGLE|WARPF_NOCHECKPOSITION|WARPF_COPYINTERPOLATION);
+         A_FadeOut();
+      }
+      loop;
+   }
+}
+
+// EOF

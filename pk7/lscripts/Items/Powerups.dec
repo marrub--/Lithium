@@ -87,6 +87,13 @@ actor Lith_MegasphereSprite : Lith_MagicSphereItemSprite
    states {SetSpr: MEGA AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase stop}
 }
 
+actor Lith_BlurSphereSprite : Lith_MagicSphereItemSprite
+{
+   Lith_AnimItemSprite.Phases 36
+   +VISIBILITYPULSE
+   states {SetSpr: PINS AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 0 Lith_A_JumpPhase stop}
+}
+
 actor Lith_Megasphere : Lith_CustomInventory replaces Megasphere
 {
    Tag "Tao'chyan"

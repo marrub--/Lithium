@@ -5,7 +5,4 @@
 #include "lscripts/Player/Misc.dec"
 #include "lscripts/Player/Death.dec"
 
-#include "lscripts/1_Marine/Marine.dec"
-#include "lscripts/2_CyberMage/CyberMage.dec"
-
 // EOF

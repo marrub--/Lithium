@@ -55,7 +55,6 @@ See:
 Missile:
    CPOS E 2 A_FaceTarget;
    CPOS E 0 A_PlaySound("enemies/chainguy/bolt", CHAN_WEAPON|CHAN_NOPAUSE);
-   CPOS E 0 A_GiveToTarget("Lith_AdrenalineToken", 1);
    CPOS EE 6 A_FaceTarget;
 MissileLoop:
    CPOS F 4 bright Lith_A_ChaingunGuyShot;

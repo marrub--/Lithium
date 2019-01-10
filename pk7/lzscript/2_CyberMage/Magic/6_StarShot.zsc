@@ -80,7 +80,7 @@ Fire:
       A_FireProjectile("Lith_Star", FRandom(-2,2), false, -16, 16, FPF_NOAUTOAIM, -FRandom(-2,3));
       A_FireProjectile("Lith_Star", FRandom(-2,2), false,  16, 16, FPF_NOAUTOAIM, -FRandom(-2,3));
       A_Recoil(0.01);
-      A_SetAngle(Angle + FRandom(-0.2, 0.2));
+      Angle += FRandom(-0.2, 0.2);
       A_Quake(1, 4, 0, 128);
    }
    goto ReadySelector;

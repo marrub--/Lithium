@@ -6,7 +6,6 @@
 
 #include "lscripts/Misc.dec"
 #include "lscripts/Effects.dec"
-#include "lscripts/Projectiles.dec"
 #include "lscripts/Items.dec"
 #include "lscripts/Weapons.dec"
 #include "lscripts/Player.dec"

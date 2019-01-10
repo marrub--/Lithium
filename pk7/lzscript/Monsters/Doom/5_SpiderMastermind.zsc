@@ -137,7 +137,6 @@ See:
 Missile:
    SPID A 2 bright;
    SPID A 0 A_PlaySound("enemies/spiderdemon/ready", CHAN_5|CHAN_NOPAUSE, 1, false, 0.3);
-   SPID A 0 A_GiveToTarget("Lith_AdrenalineToken", 1);
    SPID A 20 bright A_FaceTarget;
    SPID A 0 A_PlaySound("enemies/spiderdemon/fire", CHAN_WEAPON, 1, true, 0.4);
 MissileLoop:

@@ -3,7 +3,6 @@
 // See licenses/cc0.txt for more information.
 
 #include "lscripts/Effects/Casings.dec"
-#include "lscripts/Effects/Rain.dec"
 #include "lscripts/Effects/Splashes.dec"
 #include "lscripts/Effects/TeleFog.dec"
 

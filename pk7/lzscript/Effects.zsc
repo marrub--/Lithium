@@ -9,5 +9,6 @@
 #include "lzscript/Effects/Magazine.zsc"
 #include "lzscript/Effects/Casings.zsc"
 #include "lzscript/Effects/GunSmoke.zsc"
+#include "lzscript/Effects/Rain.zsc"
 
 // EOF

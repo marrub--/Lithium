@@ -358,7 +358,7 @@ void Sc_PoisonFXTicker(void)
       {
          InvTake(so_PoisonFXReset, 999);
          InvTake(so_PoisonFXTimer, 999);
-         InvGive(so_PoisonFXGiverGiver, 1);
+         ServCallI(sm_GivePoison);
          return;
       }
    }
@@ -367,7 +367,6 @@ void Sc_PoisonFXTicker(void)
    {
       InvTake(so_PoisonFXReset, 999);
       InvTake(so_PoisonFXTimer, 999);
-      InvTake(so_PoisonFXGiverGiver, 999);
    }
    else if(InvNum(so_PoisonFXTimer))
    {

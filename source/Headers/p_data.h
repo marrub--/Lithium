@@ -7,6 +7,18 @@
 
 // p_data.h: Exposed player data.
 
+enum // LAttrib
+{
+   at_acc,
+   at_def,
+   at_str,
+   at_vit,
+   at_stm,
+   at_luk,
+   at_spc,
+   at_max
+};
+
 enum // PData
 {
    pdata_weapon,
@@ -20,6 +32,7 @@ enum // PData
    pdata_addp,
    pdata_addy,
    pdata_recoilp,
+   pdata_attr,
 };
 
 enum // PClass

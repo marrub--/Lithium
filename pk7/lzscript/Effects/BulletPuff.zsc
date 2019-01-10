@@ -47,7 +47,7 @@ class Lith_HotEmber : Actor
    {
    Spawn:
       EPUF A 1 bright;
-      EPUF BBCC 4 bright A_SpawnItemEx("Lith_HotEmberTrail", frandom(0, 0.5), frandom(-0.5, 0.5), frandom(-0.5, 0.5), frandom(0, 0.5), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
+      EPUF BBCC 4 bright A_SpawnItemEx("Lith_HotEmberTrail", FRandom(0, 0.5), FRandom(-0.5, 0.5), FRandom(-0.5, 0.5), FRandom(0, 0.5), FRandom(-0.5, 0.5), FRandom(-0.5, 0.5));
       EPUF DEFG 4 bright;
       stop;
    }
@@ -95,10 +95,11 @@ class Lith_BulletAfterSmoke : Actor
 
    override void PostBeginPlay()
    {
-      scale.x *= frandom(2, 6);
-      scale.y *= frandom(0.4, 1.5);
-      m_SX = frandom(0.005, 0.01);
-      m_SY = frandom(0.001, 0.005);
+      Super.PostBeginPlay();
+      Scale.X *= FRandom(2, 6);
+      Scale.Y *= FRandom(0.4, 1.5);
+      m_SX = FRandom(0.005, 0.01);
+      m_SY = FRandom(0.001, 0.005);
    }
 
    override void Tick()
@@ -107,8 +108,8 @@ class Lith_BulletAfterSmoke : Actor
 
       if(!level.frozen && !globalfreeze)
       {
-         scale.x += m_SX;
-         scale.y += m_SY;
+         Scale.X += m_SX;
+         Scale.Y += m_SY;
       }
    }
 
@@ -116,7 +117,7 @@ class Lith_BulletAfterSmoke : Actor
    {
    Spawn:
       TNT1 A 0;
-      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 A_FadeIn(frandom(0.001, 0.005));
+      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 A_FadeIn(FRandom(0.001, 0.005));
       SMOK DEFG random(14, 56);
       SMOK HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 A_FadeOut(0.005);
       stop;
@@ -140,8 +141,8 @@ class Lith_BulletTracer : FastProjectile
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      int n = randompick(45, -45);
-      A_SetRoll(frandom(n - 2, n + 2));
+      int n = RandomPick(45, -45);
+      Roll = FRandom(n - 2, n + 2);
    }
 
    states
@@ -165,9 +166,10 @@ class Lith_BulletRicochetSpark : Actor
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_SetRoll(frandom(0, 359));
-      A_SetScale(frandom(0.5, 1.0));
-      A_SetPitch(frandom(-5, 5));
+      Roll = FRandom(0, 359);
+      Pitch = FRandom(-5, 5);
+      double sc = FRandom(.5, 1);
+      Scale = (sc, sc);
    }
 
    states
@@ -203,8 +205,8 @@ default
 void Lith_A_SmokeFX()
 {
    for(int i = 0, m = random(0, 2); i < m; i++)
-      A_SpawnItemEx("Lith_BulletAfterSmoke", frandom(-1,1), frandom(-1,1), frandom(-2,2),
-         frandom(-0.5,0.5), frandom(-0.5,0.5), frandom(-0.2,0.2));
+      A_SpawnItemEx("Lith_BulletAfterSmoke", FRandom(-1,1), FRandom(-1,1), FRandom(-2,2),
+         FRandom(-0.5,0.5), FRandom(-0.5,0.5), FRandom(-0.2,0.2));
 }
 
 void Lith_A_RicochetFX()
@@ -212,12 +214,12 @@ void Lith_A_RicochetFX()
    if(random() < 32) return;
 
    for(int i = 0, m = random(0, 3); i < m; i++)
-      A_SpawnItemEx("Lith_HotEmber", frandom(-1, 1), frandom(-1, 1), frandom(0, 1), frandom(-4, 4), frandom(-4, 4), frandom(2, 5), 0, SXF_NOCHECKPOSITION);
+      A_SpawnItemEx("Lith_HotEmber", FRandom(-1, 1), FRandom(-1, 1), FRandom(0, 1), FRandom(-4, 4), FRandom(-4, 4), FRandom(2, 5), 0, SXF_NOCHECKPOSITION);
 
    A_SpawnParticle("FFFFFF", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-      frandom(-8,8), frandom(-8,8), frandom(-2,2),
-      frandom( 0,1), frandom(-5,5), frandom( 5,10),
-      0, 0, frandom(-0.5, -3),
+      FRandom(-8,8), FRandom(-8,8), FRandom(-2,2),
+      FRandom( 0,1), FRandom(-5,5), FRandom( 5,10),
+      0, 0, FRandom(-0.5, -3),
       1.0, -1);
 }
 

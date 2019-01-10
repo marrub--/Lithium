@@ -15,21 +15,21 @@ class Lith_ArchvileImmolator : Actor
 {
    void Lith_A_SpawnParticles(color c)
    {
-      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, 35, random(2,6), 0,
-         frandom(-16,16),frandom(-16,16),frandom(0,1),
-         0,0,frandom(0,10),
-         frandom(-0.1, 0.1),frandom(-0.1, 0.1));
-      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, 35, random(2,6), 0,
-         frandom(-16,16),frandom(-16,16),frandom(0,1),
-         frandom(-10,10),frandom(-10,10),0,
-         frandom(-0.1, 0.1),frandom(-0.1, 0.1));
+      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, 35, Random(2,6), 0,
+         FRandom(-16,16),FRandom(-16,16),FRandom(0,1),
+         0,0,FRandom(0,10),
+         FRandom(-0.1, 0.1),FRandom(-0.1, 0.1));
+      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, 35, Random(2,6), 0,
+         FRandom(-16,16),FRandom(-16,16),FRandom(0,1),
+         FRandom(-10,10),FRandom(-10,10),0,
+         FRandom(-0.1, 0.1),FRandom(-0.1, 0.1));
    }
 
    states
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 1 A_SpawnItemEx("Lith_ArchvileImmolatorBlast",0,0,floorz);
+      TNT1 A 1 A_SpawnItemEx("Lith_ArchvileImmolatorBlast",0,0,FloorZ);
       TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("FFFF73");
       TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("732B00");
       TNT1 AAAAAAAAAA 0 Lith_A_SpawnParticles("7F1B1B");
@@ -42,7 +42,7 @@ class Lith_ArchvileImmolatorBlast : Actor
    default
    {
       Translation "192:199=160:167", "200:207=32:39", "240:247=40:47";
-      Mass int.max;
+      Mass int.Max;
 
       +FLOORHUGGER
       +FORCEYBILLBOARD
@@ -107,13 +107,13 @@ Missile:
    VILE G 10 bright A_FaceTarget;
    VILE H 8 bright A_VileTarget;
    VILE IJKLM 8 bright A_FaceTarget;
-   VILE N 0 bright A_JumpIfTargetInLOS(1);
-   goto Missile1;
-   VILE N 0 bright A_GiveToTarget("Lith_AdrenalineToken", 1);
-Missile1:
+   VILE N 0 bright {
+      if(Target && CheckSight(Target))
+         {} // TODO
+   }
    VILE N 8 bright A_FaceTarget;
    VILE N 0 bright {
-      if(target && checkSight(target))
+      if(Target && CheckSight(Target))
          A_VileTarget("Lith_ArchvileImmolator");
    }
    VILE O 8 bright A_VileAttack("vile/stop", 20, 70, 70, 1.0, "FireMagic");
@@ -122,8 +122,8 @@ Missile1:
    stop;
 
 Heal:
-   VILE "[\]" 10 bright;
-   VILE "]" 0 ResolveState("See");
+   VILE [\] 10 bright;
+   VILE ] 0 ResolveState("See");
    stop;
 
 Pain:

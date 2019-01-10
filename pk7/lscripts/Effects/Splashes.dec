@@ -6,7 +6,7 @@ actor Lith_Splash
 {
    Radius 5
    Height 5
-   Renderstyle "Translucent"
+   RenderStyle "Translucent"
 
    +NOCLIP
    +RANDOMIZE
@@ -27,11 +27,10 @@ actor Lith_WaterSplashLarge : Lith_Splash
    {
    Spawn:
       WSPS A 0
-      WSPS A 0 A_SetScale(frandom(0.8, 1.2), scalex)
+      WSPS A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
       WSPS A 0 A_Jump(128,1,2,3)
       WSPS AAA 1
-      WSPM AAAAAAAA 0 A_SpawnParticle("00009B", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                  frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      WSPM AAAAAAAA 0 A_SpawnParticle("00009B", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       WSPS BC 2
       WSPS DE 3
       WSPS FGHI 4
@@ -47,9 +46,8 @@ actor Lith_WaterSplashSmall : Lith_WaterSplashLarge
    {
    Spawn:
       WSPM A 0
-      WSPM A 0 A_SetScale(frandom(0.8, 1.2), scalex)
-      WSPM AAAA 0 A_SpawnParticle("00009B", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                  frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      WSPM A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
+      WSPM AAAA 0 A_SpawnParticle("00009B", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       WSPM ABC 2
       WSPM D 3
       WSPM EF 4
@@ -66,11 +64,10 @@ actor Lith_BloodSplashLarge : Lith_WaterSplashLarge
    {
    Spawn:
       WSPS A 0
-      WSPS A 0 A_SetScale(frandom(0.8, 1.2), scalex)
+      WSPS A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
       WSPS A 0 A_Jump(128,1,2,3)
       WSPS AAA 2
-      WSPS AAAA 0 A_SpawnParticle("831F1F", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                  frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      WSPS AAAA 0 A_SpawnParticle("831F1F", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       WSPS BC 3
       WSPS DE 2
       WSPS FGHI 3
@@ -86,9 +83,8 @@ actor Lith_BloodSplashSmall : Lith_BloodSplashLarge
    {
    Spawn:
       WSPM A 0
-      WSPM A 0 A_SetScale(frandom(0.8, 1.2), scalex)
-      WSPM AA 0 A_SpawnParticle("831F1F", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                  frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      WSPM A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
+      WSPM AA 0 A_SpawnParticle("831F1F", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       WSPM ABC 3
       WSPM D 4
       WSPM EF 5
@@ -104,10 +100,10 @@ actor Lith_NukageSplashLarge : Lith_Splash
    {
       Spawn:
          NSPS A 0
-         NSPS A 0 A_SetScale(frandom(0.8, 1.2), scalex)
+         NSPS A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
          NSPS A 0 A_Jump(128,1,2,3)
          NSPS AAA 2
-         NSPS AAAA 0 A_SpawnItemEx("Lith_NukageParticle", frandom(0.5, 2), frandom(-8, 8), frandom(0, 2), frandom(0, 10), frandom(0, 1), frandom(3, 12), 10, 0, frandom(0,360))
+         NSPS AAAA 0 A_SpawnItemEx("Lith_NukageParticle", FRandom(0.5, 2), FRandom(-8, 8), FRandom(0, 2), FRandom(0, 10), FRandom(0, 1), FRandom(3, 12), 10, 0, FRandom(0,360))
          NSPS BC 3
          NSPS DE 2
          NSPS FGHI 3
@@ -123,8 +119,8 @@ actor Lith_NukageSplashSmall : Lith_NukageSplashLarge
    {
    Spawn:
       NSPM A 0
-      NSPM A 0 A_SetScale(frandom(0.8, 1.2), scalex)
-      NSPM AA 0 A_SpawnItemEx("Lith_NukageParticle", frandom(0.5, 2), frandom(-8, 8), frandom(0, 2), frandom(0, 10), frandom(0, 1), frandom(3, 12), 10, 0, frandom(0,360))
+      NSPM A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
+      NSPM AA 0 A_SpawnItemEx("Lith_NukageParticle", FRandom(0.5, 2), FRandom(-8, 8), FRandom(0, 2), FRandom(0, 10), FRandom(0, 1), FRandom(3, 12), 10, 0, FRandom(0,360))
       NSPM ABC 2
       NSPM D 2
       NSPM EF 3
@@ -162,11 +158,10 @@ actor Lith_SludgeSplashLarge : Lith_NukageSplashLarge
    {
    Spawn:
       NSPS A 0
-      NSPS A 0 A_SetScale(frandom(0.8, 1.2), scalex)
+      NSPS A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
       NSPS A 0 A_Jump(128,1,2,3)
       NSPS AAA 2
-      NSPS AAAA 0 A_SpawnParticle("8F5F37", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                  frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      NSPS AAAA 0 A_SpawnParticle("8F5F37", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       NSPS BC 4
       NSPS DE 3
       NSPS FGHI 4
@@ -180,9 +175,8 @@ actor Lith_SludgeSplashSmall : Lith_SludgeSplashLarge
    {
    Spawn:
       NSPM A 0
-      NSPM A 0 A_SetScale(frandom(0.8, 1.2), scalex)
-      NSPM AA 0 A_SpawnParticle("8F5F37", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, frandom(0, 2), frandom(-2, 2), frandom(0, 2),
-                frandom(-1,1), frandom(-1,1), frandom(5, 10), 0, 0, -1)
+      NSPM A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
+      NSPM AA 0 A_SpawnParticle("8F5F37", SPF_FULLBRIGHT | SPF_RELATIVE, 35, 6, 0, FRandom(0, 2), FRandom(-2, 2), FRandom(0, 2), FRandom(-1,1), FRandom(-1,1), FRandom(5, 10), 0, 0, -1)
       NSPM A 2
       NSPM BC 3
       NSPM DEF 4
@@ -192,18 +186,18 @@ actor Lith_SludgeSplashSmall : Lith_SludgeSplashLarge
 
 actor Lith_LavaSplashLarge : Lith_Splash
 {
-   Renderstyle Add
+   RenderStyle "Add"
    Alpha 0.9
 
    states
    {
    Spawn:
       LSPS A 0
-      LSPS A 0 A_SetScale(frandom(0.5, 0.8), frandom(0.5, 0.8))
+      LSPS A 0 A_SetScale(FRandom(0.5, 0.8), FRandom(0.5, 0.8))
       LSPS A 0
       LSPS A 0 A_Jump(128,1,2,3)
       LSPS A 3 bright
-      LSPS AAAAAAAA 0 A_SpawnItemEx("Lith_LavaParticle", frandom(0.5, 2), frandom(-8, 8), frandom(0, 2), frandom(-10, 10), frandom(-1, 1), frandom(3, 12), 10, 0, frandom(0,360))
+      LSPS AAAAAAAA 0 A_SpawnItemEx("Lith_LavaParticle", FRandom(0.5, 2), FRandom(-8, 8), FRandom(0, 2), FRandom(-10, 10), FRandom(-1, 1), FRandom(3, 12), 10, 0, FRandom(0,360))
       LSPS BC 2 bright
       LSPS DE 3 bright
       LSPS FGHI 4
@@ -217,8 +211,8 @@ actor Lith_LavaSplashSmall : Lith_LavaSplashLarge
    {
    Spawn:
       LSPM A 0
-      LSPM A 0 A_SetScale(frandom(0.8, 1.2), scalex)
-      LSPM AAAA 0 A_SpawnItemEx("Lith_LavaParticle", frandom(0.5, 2), frandom(-8, 8), frandom(0, 2), frandom(-10, 10), frandom(-1, 1), frandom(3, 12), 10, 0, frandom(0,360))
+      LSPM A 0 A_SetScale(FRandom(0.8, 1.2), ScaleX)
+      LSPM AAAA 0 A_SpawnItemEx("Lith_LavaParticle", FRandom(0.5, 2), FRandom(-8, 8), FRandom(0, 2), FRandom(-10, 10), FRandom(-1, 1), FRandom(3, 12), 10, 0, FRandom(0,360))
       LSPM A 1
       LSPM BC 2
       LSPM DEF 3

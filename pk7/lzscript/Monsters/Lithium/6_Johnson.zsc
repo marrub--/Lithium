@@ -18,13 +18,13 @@ default
 
 override void Tick()
 {
-   if(health < 20) setTag("Johnson, Ally of Isaac");
    Super.Tick();
+   if(Health < 20) SetTag("Johnson, Ally of Isaac");
 }
 
 override void Lith_OnDeath()
 {
-   let m = Lith_Boss_Isaac(master);
+   let m = Lith_Boss_Isaac(Master);
    if(m) m.m_Dupes--;
 }
 

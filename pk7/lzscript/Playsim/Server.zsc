@@ -2,13 +2,6 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-#include "lzscript/Playsim/Player.zsc"
-#include "lzscript/Playsim/Monsters.zsc"
-#include "lzscript/Playsim/Weapons.zsc"
-#include "lzscript/Playsim/World.zsc"
-#include "lzscript/Playsim/Pause.zsc"
-#include "lzscript/Playsim/Files.zsc"
-
 // HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
 class Lith_HERMES : EventHandler;
 

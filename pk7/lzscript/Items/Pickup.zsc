@@ -17,6 +17,8 @@ class Lith_ItemGlow : Actor
 
    override void PostBeginPlay()
    {
+      Super.PostBeginPlay();
+
       sprite = Actor.GetSpriteIndex("PBAL");
 
       switch(ACS_ExecuteWithResult(lsc_wdata, wdata_pclass))
@@ -106,6 +108,8 @@ const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
 
 override void PostBeginPlay()
 {
+   Super.PostBeginPlay();
+
    if(m_SprGf) m_SprG.Get(m_SprGf);
    if(m_SprMf) m_SprM.Get(m_SprMf);
    if(m_SprCf) m_SprC.Get(m_SprCf);

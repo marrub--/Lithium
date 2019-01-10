@@ -2,8 +2,7 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-#include "lzscript/Playsim/EndSeq.zsc"
-
+// This one doesn't have any funny acronym, sorry.
 class Lith_Events : EventHandler;
 
 bool m_BossLevel;
@@ -71,18 +70,6 @@ override void UiTick()
 override void RenderOverlay(RenderEvent ev)
    {if(m_ESeq >= ESEQ_RUN) DrawEndSequence(ev);}
 
-override void PlayerEntered(PlayerEvent ev)
-{
-   PlayerInfo p = Players[ev.PlayerNumber];
-
-   // in case the player isn't derived from Lith_Player
-   if(p && p.MO && !p.MO.FindInventory("Lith_AAGH"))
-   {
-      p.MO.GiveInventoryType("Lith_AAGH");
-      p.MO.GiveInventoryType("Lith_IDOL");
-   }
-}
-
 override void WorldThingSpawned(WorldEvent ev)
 {
    let th = ev.Thing;
@@ -96,7 +83,7 @@ override void WorldThingSpawned(WorldEvent ev)
 
    if(th.bISMONSTER)
    {
-      Level.ExecuteSpecial(84, th, null, false, lsc_monsterinfo);
+      Lith_UTIL.Exec(th, lsc_monsterinfo);
 
       if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
@@ -137,6 +124,22 @@ override void WorldThingDamaged(WorldEvent ev)
 
    if(src != dst && src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
       src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.Damage * 3.77);
+}
+
+override void WorldThingDied(WorldEvent ev)
+{
+   let mo = ev.Thing;
+   if(mo.bCOUNTKILL && !mo.bNOBLOOD && mo.Health < mo.GetGibHealth())
+      for(int i = 0; i < 20; i++)
+   {
+      let xo = FRandom(-mo.Radius,mo.Radius);
+      let yo = FRandom(-mo.Radius,mo.Radius);
+      let zo = FRandom(         0,mo.Height);
+      let p = mo.Pos + (xo,yo,zo);
+      let bl = Actor.Spawn("Lith_BloodHitCore", p, ALLOW_REPLACE);
+      bl.Translation = mo.BloodTranslation;
+      if(ev.Inflictor) bl.A_Face(ev.Inflictor);
+   }
 }
 
 override void CheckReplacement(ReplaceEvent ev)

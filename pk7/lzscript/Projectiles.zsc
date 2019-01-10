@@ -3,15 +3,24 @@
 // See licenses/cc0.txt for more information.
 
 #include "lzscript/Projectiles/700Bullet.zsc"
+#include "lzscript/Projectiles/Cannonball.zsc"
 #include "lzscript/Projectiles/DarkMatter.zsc"
 #include "lzscript/Projectiles/Explosive.zsc"
+#include "lzscript/Projectiles/Gauss.zsc"
+#include "lzscript/Projectiles/HomingRocket.zsc"
 #include "lzscript/Projectiles/Hulgyon.zsc"
+#include "lzscript/Projectiles/MiniMissile.zsc"
 #include "lzscript/Projectiles/MonsterSoul.zsc"
 #include "lzscript/Projectiles/PlasmaBolt.zsc"
 #include "lzscript/Projectiles/PlasmaLaser.zsc"
+#include "lzscript/Projectiles/PoisonBullet.zsc"
+#include "lzscript/Projectiles/Punctuator.zsc"
+#include "lzscript/Projectiles/RailgunParticles.zsc"
 #include "lzscript/Projectiles/RifleBullet.zsc"
 #include "lzscript/Projectiles/RifleGrenade.zsc"
 #include "lzscript/Projectiles/Rocket.zsc"
+#include "lzscript/Projectiles/ShotgunTrail.zsc"
 #include "lzscript/Projectiles/SniperBullet.zsc"
+#include "lzscript/Projectiles/SwordSwing.zsc"
 
 // EOF

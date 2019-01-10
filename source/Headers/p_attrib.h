@@ -18,18 +18,6 @@ enum
    atsys_manual,
 };
 
-enum
-{
-   at_acc,
-   at_def,
-   at_str,
-   at_vit,
-   at_stm,
-   at_luk,
-   at_spc,
-   at_max
-};
-
 struct player_attributes
 {
    u32 exp, expnext;

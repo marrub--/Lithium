@@ -98,12 +98,12 @@ action(Weapon) void Lith_A_ReloadFinish()
 action(Weapon) void Lith_A_TakeSlot3OptAmmo(int amt = 1)
 {
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo))
-      self.A_TakeInventory("Lith_ShellAmmo", amt, TIF_NOTAKEINFINITE);
+      A_TakeInventory("Lith_ShellAmmo", amt, TIF_NOTAKEINFINITE);
 }
 
 action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", int req = 1)
 {
-   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo) || self.CountInv("Lith_ShellAmmo") >= req)
+   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo) || CountInv("Lith_ShellAmmo") >= req)
       return null;
    else
       return ResolveState(sn);
@@ -161,23 +161,23 @@ action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
 
 action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, float px, float py, float pz, float vx, float vy, float vz)
 {
-   float vh = player.viewz - player.mo.viewheight - pos.z;
-   px += frandom(-1, 1); py += frandom(-1, 1); pz += frandom(-1, 1);
-   vx += frandom(-1, 1); vy += frandom(-1, 1); vz += frandom(-1, 1);
+   float vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
+   px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
+   vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
    A_SpawnItemEx(invoker.Lith_MagEmpty() || !mag2 ? mag1 : mag2, px,py,pz+vh, vx,vy,vz);
 }
 
 action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float pz, float vx, float vy, float vz)
 {
-   float vh = player.viewz - player.mo.viewheight - pos.z;
-   px += frandom(-1, 1); py += frandom(-1, 1); pz += frandom(-1, 1);
-   vx += frandom(-1, 1); vy += frandom(-1, 1); vz += frandom(-1, 1);
-   A_SpawnItemEx(cas, cos(pitch)*px, py, pz-sin(pitch)*px+vh, vx, vy, vz);
+   float vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
+   px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
+   vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
+   A_SpawnItemEx(cas, Cos(Pitch)*px, py, pz-Sin(Pitch)*px+vh, vx, vy, vz);
 }
 
 action(Weapon) void Lith_FireBullets(float spread_horz, float spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192)
 {
-   A_FireBullets(spread_horz, spread_vert, numbullets, damage, pufftype, flags, range, "Lith_BulletTracer", 7 + frandom(-1, 0), tracer_x + frandom(-0.7, 0.7));
+   A_FireBullets(spread_horz, spread_vert, numbullets, damage, pufftype, flags, range, "Lith_BulletTracer", 7 + FRandom(-1, 0), tracer_x + FRandom(-0.7, 0.7));
 }
 
 states(Actor)

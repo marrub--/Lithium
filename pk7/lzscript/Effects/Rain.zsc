@@ -1,0 +1,70 @@
+// Effects taken from Realm667.
+// I think Tormenter made these originally, sorry if that's incorrect.
+// Thanks to Kate for making these look better.
+
+class Lith_RainDrop : Actor
+{
+   default
+   {
+      Alpha 0.25;
+      Height 2;
+      Radius 2;
+      RenderStyle "Add";
+      XScale 0.5;
+      YScale 2.0;
+
+      +DONTSPLASH
+      +DROPOFF
+      +FORCEYBILLBOARD
+      +NOBLOCKMAP
+      +NOINTERACTION
+      +NOTELEPORT
+      +NOTIMEFREEZE
+      +NOTRIGGER
+   }
+
+   bool m_Done;
+
+   override void PostBeginPlay()
+   {
+      Super.PostBeginPlay();
+      ACS_ExecuteWithResult(lsc_raindropspawn);
+      Vel     = (0, 0, FRandom(-12, -16));
+      Scale.Y = FRandom(1.5, 3.5);
+      m_Done  = false;
+   }
+
+   override void Tick()
+   {
+      Super.Tick();
+
+      if(!m_Done && (WaterLevel > 0 || Pos.Z <= FloorZ))
+      {
+         SetState(ResolveState("Death"));
+         m_Done = true;
+      }
+   }
+
+   states
+   {
+   Spawn:
+      RNDR A -1;
+      stop;
+   Death:
+      RNDR A 0 {Vel = (0, 0, 0); Scale = (1, 1);}
+      RNDR BCDEFGH 3 A_FadeOut(0.0375);
+      stop;
+   }
+}
+
+class Lith_BloodRainDrop : Lith_RainDrop
+{
+   default
+   {
+      Alpha 0.5;
+      RenderStyle "Subtract";
+      Translation "Lith_BloodRainDrop";
+   }
+}
+
+// EOF

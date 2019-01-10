@@ -12,13 +12,13 @@ Plus denotes an upgrade. Any other text is ignored by the parser.
 +HeadsUpDis3 HeadsUpDisp          pD    AD-R-  1 -.05 HUD
 +JetBooster  JetBooster           pM    A-UR-    -.05
 +ReflexWetw  ReflexWetw           gO|pX ADU--  5 -.05
-+Zoom        -                    gA   -DUR-
-+VitalScan   VitalScanner         gA   --UR-  2
-+CyberLegs   CyberLegs    1220000 pM   ADU--  4
-+ReactArmor  Yh0          3500200 pM   -D-R- 20 (AI)
-+ReactArmor2 Yh0          2990200 pM   ----- 10 (AI|RA)
-+DefenseNuke DefenseNuke   580030 pM   ----E    (AI)
-+Adrenaline  Adrenaline   1801000 pM   A-UR- 10
++Zoom        -                    gA    -DUR-
++VitalScan   VitalScanner         gA    --UR-  2
++CyberLegs   CyberLegs    1220000 pM    ADU--  4
++ReactArmor  Yh0          3500200 pM    -D-R- 20 (AI)
++ReactArmor2 Yh0          2990200 pM    ----- 10 (AI|RA)
++DefenseNuke DefenseNuke   580030 pM    ----E    (AI)
++Adrenaline  Adrenaline   1801000 pM    --UR- 10
 
 Cyber-Mage
 +Magic       Magic               pC --UR-
@@ -62,11 +62,11 @@ Cyber-Mage
 +ShipGun_B  ShipGunUpg2  7767700 pC ----- BFG
 
 :Extr
-+TorgueMode - 8000000    gA ----- 8         (RDI)
-+7777777    - 8235430    gA ADU-- 7 .10     (RDI)
-+lolsords   - 1000000    gA ADU--   .20     (RDI)
-+Goldeneye  - 70000      gA --U--   .07     (RDI)
-+DarkCannon - 0x7FFFFFFF pM -----       BFG (WMD|WRD|RDI)
++TorgueMode - 8000000 gA ----- 8         (RDI)
++7777777    - 8235430 gA ADU-- 7 .10     (RDI)
++lolsords   - 1000000 gA ADU--   .20     (RDI)
++Goldeneye  -   70000 gA --U--   .07     (RDI)
++DarkCannon - 1500000 pM -----       BFG (WMD|WRD|RDI)
 
 :Down
 +Implying   - gA --U-- .20

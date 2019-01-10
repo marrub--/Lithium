@@ -19,7 +19,7 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
-   union fixedint u;
+   union ik32 u;
 
    withplayer(LocalPlayer) switch(info) {
    case pdata_weapon:     return p->weapontype;
@@ -33,6 +33,7 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
    case pdata_addp:       return u.k = p->addpitch,  u.i;
    case pdata_addy:       return u.k = p->addyaw,    u.i;
    case pdata_recoilp:    return u.k = p->extrpitch, u.i;
+   case pdata_attr:       return p->attr.attrs[permutation];
    }
 
    return 0;

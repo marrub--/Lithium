@@ -41,8 +41,7 @@ class Lith_SpiralRocket : Lith_Rocket
    vector3 m_APos;
    int m_PhaseXYZ;
 
-   override void PostBeginPlay()
-      {m_PhaseXYZ = Random(0, 359);}
+   override void PostBeginPlay() {Super.PostBeginPlay(); m_PhaseXYZ = Random(0, 359);}
 
    override void Tick()
    {

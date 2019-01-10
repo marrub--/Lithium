@@ -4,6 +4,5 @@
 
 #include "lscripts/Misc/Functions.dec"
 #include "lscripts/Misc/Hacks.dec"
-#include "lscripts/Misc/Adrenaline.dec"
 
 // EOF

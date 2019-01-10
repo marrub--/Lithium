@@ -2,18 +2,20 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+#include "lzscript/Items/AmmoPickup.zsc"
+#include "lzscript/Items/Armor.zsc"
+#include "lzscript/Items/ArmorBase.zsc"
+#include "lzscript/Items/Barrier.zsc"
+#include "lzscript/Items/Bonuses.zsc"
+#include "lzscript/Items/BoughtItem.zsc"
+#include "lzscript/Items/Health.zsc"
 #include "lzscript/Items/Inventory.zsc"
-#include "lzscript/Items/ScoreItem.zsc"
-#include "lzscript/Items/RandomSpawn.zsc"
+#include "lzscript/Items/Keys.zsc"
+#include "lzscript/Items/Mana.zsc"
 #include "lzscript/Items/MultiSpawner.zsc"
 #include "lzscript/Items/Pickup.zsc"
-#include "lzscript/Items/ArmorBase.zsc"
-#include "lzscript/Items/Armor.zsc"
-#include "lzscript/Items/Mana.zsc"
-#include "lzscript/Items/AmmoPickup.zsc"
-#include "lzscript/Items/Keys.zsc"
 #include "lzscript/Items/Powerups.zsc"
-#include "lzscript/Items/Health.zsc"
-#include "lzscript/Items/Bonuses.zsc"
+#include "lzscript/Items/RandomSpawn.zsc"
+#include "lzscript/Items/ScoreItem.zsc"
 
 // EOF

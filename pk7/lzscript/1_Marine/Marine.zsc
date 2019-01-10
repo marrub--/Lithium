@@ -40,6 +40,9 @@ class Lith_MWeapon : Lith_OutcastsWeapon
    }
 }
 
+#include "lzscript/1_Marine/FallDamage.zsc"
+#include "lzscript/1_Marine/RArmor.zsc"
+
 #include "lzscript/1_Marine/1_Fist.zsc"
 #include "lzscript/1_Marine/2_Pistol.zsc"
 #include "lzscript/1_Marine/2_Revolver.zsc"

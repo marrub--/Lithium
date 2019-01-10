@@ -7,15 +7,9 @@
 #include "u_common.h"
 
 #define UData UData_Adrenaline(upgr)
-#define CHARGE_MAX (30 * 35)
+#define CHARGE_MAX (35 * 30)
 
 // Extern Functions ----------------------------------------------------------|
-
-stkcall
-void Upgr_Adrenaline_Activate(struct player *p, struct upgrade *upgr)
-{
-   InvTake(so_AdrenalineToken, 1);
-}
 
 script
 void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
@@ -33,29 +27,19 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    }
 
    // Ready to use
-   else
+   else if(ServCallI(sm_AdrenalineCheck))
    {
-      // Ready
-      if(!InvNum(so_AdrenalineToken))
-         InvGive(so_AdrenalineProjectileChecker, 1);
+      UData.charge = UData.readied = 0;
 
-      // Use
-      if(InvNum(so_AdrenalineToken))
-      {
-         InvTake(so_AdrenalineToken, 1);
+      p->logH(4, "Adrenaline administered."); // TODO
+      ACS_PlaySound(0, ss_player_adren_inj, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+      Lith_FadeFlash(255, 255, 255, 0.4, 0.6);
+      InvGive(so_TimeHax2, 1);
 
-         ACS_PlaySound(0, ss_player_adren_inj, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-         p->logH(4, "Adrenaline administered."); // TODO
+      ACS_Delay(36);
 
-         UData.charge = UData.readied = 0;
-
-         InvGive(so_TimeHax2, 1);
-         ACS_Delay(36);
-         InvTake(so_TimeHax2, 1);
-      }
+      InvTake(so_TimeHax2, 1);
    }
-
-   InvTake(so_AdrenalineToken, 1);
 }
 
 stkcall

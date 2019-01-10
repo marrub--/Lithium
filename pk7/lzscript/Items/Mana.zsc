@@ -30,6 +30,7 @@ default
    RenderStyle "Add";
    Radius 4;
    Height 4;
+   Scale 0.8;
    Inventory.PickupSound "player/pickup/mana";
    Inventory.PickupMessage "";
 
@@ -44,9 +45,10 @@ default
 
 override void PostBeginPlay()
 {
+   Super.PostBeginPlay();
    A_SetTranslation("Lith_Mana" .. Random(1, 8));
-   A_SetScale(0.8 * frandom(0.5, 1));
-   A_GiveInventory("Lith_MagicAmmo", Random(7, 10));
+   Scale *= FRandom(0.5, 1);
+   GiveInventory("Lith_MagicAmmo", Random(7, 10));
    ThrustThingZ(0, 16, 0, 1);
 }
 

@@ -31,24 +31,6 @@ class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
    }
 }
 
-class Lith_HasBarrier : Powerup
-{
-   default
-   {
-      Powerup.Duration -30;
-      Powerup.Color "C3 DF E8", 0.1;
-   }
-
-   override void Tick()
-   {
-      if(!GlobalFreeze && !Level.Frozen)
-      {
-         Owner.GiveInventory("Lith_BarrierSpell", 1);
-         Super.Tick();
-      }
-   }
-}
-
 class Lith_PowerLightAmp : PowerLightAmp
    {override void Tick() {if(!GlobalFreeze && !Level.Frozen) Super.Tick();}}
 
@@ -127,12 +109,12 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
 
    override void PostBeginPlay()
    {
+      Super.PostBeginPlay();
       A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk);
       A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk);
       A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk);
       A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk);
       A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk);
-      Super.PostBeginPlay();
    }
 
    override void Lith_OnPickup(Actor mo)

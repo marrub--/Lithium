@@ -1,0 +1,28 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_ShotgunTrail : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.4;
+      Scale 0.1;
+
+      +NOBLOCKMAP
+      +NOGRAVITY
+   }
+
+   states
+   {
+   Spawn:
+      PBAL A 0;
+      PBAL A 20 bright A_Warp(AAPTR_DEFAULT, 0, 0, -8, 0, WARPF_NOCHECKPOSITION);
+   SpawnLoop:
+      PBAL A 1 bright A_FadeOut(0.1 / 15.0);
+      loop;
+   }
+}
+
+// EOF

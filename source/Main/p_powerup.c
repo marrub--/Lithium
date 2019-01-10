@@ -82,13 +82,6 @@ void Sc_BarrierBullets(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_BarrierCheck")
-bool Sc_BarrierCheck(void)
-{
-   ACS_SetActivatorToTarget(0);
-   return ACS_CheckFlag(0, s_COUNTKILL);
-}
-
 script_str ext("ACS") addr("Lith_GetSigil")
 void Sc_GetSigil(void)
 {

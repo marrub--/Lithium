@@ -1,0 +1,120 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_PoisonFX : Actor
+{
+   default
+   {
+      Alpha 0.8;
+      RenderStyle "AddStencil";
+      StencilColor "Green";
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      #### # 2;
+      #### # 1 A_FadeOut;
+      wait;
+   }
+}
+
+class Lith_PoisonFXTimer : Inventory {default {Inventory.MaxAmount 20;}}
+class Lith_PoisonFXReset : Inventory {default {Inventory.MaxAmount 1;}}
+
+class Lith_PoisonFXGiver : Lith_CustomFunction
+{
+   override bool TryPickup(in out Actor mo)
+   {
+      // MEGA FUCKING HACK: ACS interfacing with ZScript is a trainwreck
+      Target = mo.Target;
+      int dmg = Lith_Player(Target) ?
+                ACS_ExecuteWithResult(lsc_pdata, pdata_attr, at_acc, true) / 4 :
+                0;
+
+      mo.A_DamageSelf(10 + dmg, "Poison");
+      mo.A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5);
+      mo.A_SpawnItemEx("Lith_PoisonFX", 0,0,8, flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+      mo.ACS_ScriptCall("Lith_PoisonFXTicker");
+      GoAwayAndDie();
+      return true;
+   }
+}
+
+class Lith_PoisonBlob : Actor
+{
+   default
+   {
+      Alpha 1;
+      Mass 20;
+      RenderStyle "Translucent";
+      Scale 0.5;
+
+      +BRIGHT
+      +NOBLOCKMAP
+      +NOCLIP
+      -NOGRAVITY
+   }
+
+   states
+   {
+   Spawn:
+      BLLT G 5;
+      BLLT G 0 A_PlaySound("weapons/shotgun/poison/acid", CHAN_5);
+   SpawnLoop:
+      BLLT G 0 A_JumpIf(Pos.Z == FloorZ, "Crash"); // >:I
+      BLLT G 1 A_FadeOut(0.01);
+      loop;
+   Crash:
+      RADB ABCDEFGHIJKLM 1 A_FadeOut(0.01);
+      wait;
+   }
+}
+
+class Lith_PoisonBullet : Lith_BulletPuff
+{
+   default
+   {
+      Alpha 0.9;
+      DamageType "Bullet";
+      RenderStyle "Add";
+      Species "Lith_Player";
+
+      +DONTHARMSPECIES
+      +FLOORCLIP
+      +FORCEXYBILLBOARD
+      +HITTRACER
+      +MTHRUSPECIES
+      +NOBLOCKMAP
+      +NOEXTREMEDEATH
+      +NOGRAVITY
+      +PUFFGETSOWNER
+      +PUFFONACTORS
+      -ALLOWPARTICLES
+   }
+
+   void Lith_SpawnPoisonBlobs()
+   {
+      for(int i = 0; i < 5; i++)
+         A_SpawnItemEx("Lith_PoisonBlob", 0,0,0, FRandom(-1,1),FRandom(-1,1),FRandom(2,6), 0, 0, 64);
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 {if(Tracer) Lith_HERMES.GivePoison(Tracer);}
+      TNT1 A 0 A_JumpIf(!Tracer || Tracer.bNOBLOOD, "Crash");
+      TNT1 A 0 Lith_SpawnPoisonBlobs;
+      stop;
+   Crash:
+      XPUF Q 0;
+      XPUF Q 0 Lith_SpawnPoisonBlobs;
+      goto Super::Spawn;
+   }
+}
+
+// EOF

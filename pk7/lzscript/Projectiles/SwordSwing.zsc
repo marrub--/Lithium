@@ -1,0 +1,139 @@
+// Distributed under the CC0 public domain license.
+// By Alison Sanderson. Attribution is encouraged, though not required.
+// See licenses/cc0.txt for more information.
+
+class Lith_SwordHipcher : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.25;
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      SMOK A 15 A_FadeOut(0.1);
+      wait;
+   }
+}
+
+class Lith_SwordHitler : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.5;
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      SHKR B 0;
+      SHKR B 0 {
+         for(int i = 0; i < 8; i++)
+            A_SpawnItemEx("Lith_SwordHipcher", FRandom(-24,24),FRandom(-24,24),FRandom(-24,24), FRandom(-8,8),FRandom(-8,8),FRandom(-8,8), 0, SXF_NOCHECKPOSITION, 240);
+      }
+      SHKR B 1 bright A_FadeOut(0.1);
+      wait;
+   }
+}
+
+class Lith_SwordHither : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 0.5;
+
+      +NOINTERACTION
+   }
+
+   states
+   {
+   Spawn:
+      SHKR B 0;
+      SHKR B 1 bright A_FadeOut(0.1);
+      wait;
+   }
+}
+
+class Lith_SwordHitter : Actor
+{
+   default
+   {
+      Damage 30;
+      DamageType "Melee";
+      Height 6;
+      Radius 6;
+      Species "Lith_Player";
+      Speed 40;
+
+      Projectile;
+      +DONTHARMSPECIES
+      +EXPLODEONWATER
+      +MTHRUSPECIES
+      +RIPPER
+   }
+
+   int m_TrailStep;
+   int m_Delta;
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 3 A_PlaySound("weapons/sword/attack");
+   SpawnLoop:
+      TNT1 A 0 A_JumpIf(m_TrailStep++ >= 8, "TrailDone");
+      TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", m_TrailStep * 4.0 * Vel.X / -35.0, -m_TrailStep * 4.0 * Vel.Y / -35.0, 2.0 + m_TrailStep * 4.0 * Vel.Z / -35.0, 0, 0, 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION, m_Delta * 40);
+      loop;
+   TrailDone:
+      TNT1 A 0 {m_TrailStep = 0;}
+      TNT1 A 0 A_SpawnItemEx("Lith_SwordHitler", flags: SXF_NOCHECKPOSITION);
+      TNT1 A 0 A_JumpIf(++m_Delta >= 15, "Null");
+      TNT1 A 1;
+      goto SpawnLoop;
+   }
+}
+
+class Lith_SwordHipper : Lith_SwordHitter
+{
+   states
+   {
+   Spawn:
+      TNT1 A 3;
+      goto SpawnLoop;
+   }
+}
+
+class Lith_SwordBlitter : Actor
+{
+   default
+   {
+      Speed 0;
+
+      Projectile;
+      +NOBLOCKMAP
+      +EXPLODEONWATER
+   }
+
+   const LITH_FLAGS = CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_BADPITCH;
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnProjectile("Lith_SwordHitter",  16,   8, 0, LITH_FLAGS);
+      TNT1 A 1 A_SpawnProjectile("Lith_SwordHipper",   8,   0, 0, LITH_FLAGS);
+      TNT1 A 0 A_SpawnProjectile("Lith_SwordHitter",  -8,  -8, 0, LITH_FLAGS);
+      TNT1 A 1 A_SpawnProjectile("Lith_SwordHipper", -16, -16, 0, LITH_FLAGS);
+      stop;
+   }
+}
+
+// EOF

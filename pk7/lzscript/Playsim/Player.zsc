@@ -75,4 +75,14 @@ static void Log(Actor mo, int type, int levl, string name)
    }
 }
 
+static bool AdrenalineCheck(Actor mo)
+{
+   Actor th;
+   for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)
+      if(th.bMISSILE && th.Target && th.Target.bCOUNTKILL && !th.IsZeroDamage() &&
+         th.Vec3To(mo).Length() <= 100)
+         return true;
+   return false;
+}
+
 // EOF
