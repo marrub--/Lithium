@@ -19,8 +19,35 @@ class Lith_FatShot : FatShot replaces FatShot
    }
 }
 
+class Lith_XH_FatShot : Lith_FatShot
+{
+   default
+   {
+      Species "Lith_XH_Mancubus";
+      Speed 16;
+
+      +MTHRUSPECIES
+   }
+}
+
 class Lith_XH_Mancubus : Lith_Mancubus
 {
+   states
+   {
+   Missile:
+      FATT G 14 A_FatRaise;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack1("Lith_XH_FatShot");
+      FATT IG random(4,5) A_FaceTarget;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack2("Lith_XH_FatShot");
+      FATT IG random(4,5) A_FaceTarget;
+      FATT H 0 A_PlaySound("enemies/mancubus/fire", CHAN_5);
+      FATT HH 5 bright A_FatAttack3("Lith_XH_FatShot");
+      FATT IG random(4,5) A_FaceTarget;
+      FATT G 0 ResolveState("See");
+      stop;
+   }
 }
 
 class Lith_Mancubus : Lith_Monster replaces Fatso;
