@@ -2,7 +2,7 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
-// p_status.c: Attribute handling.
+// p_attrib.c: Attribute handling.
 
 #include "common.h"
 #include "p_player.h"
