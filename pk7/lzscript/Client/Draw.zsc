@@ -49,8 +49,8 @@ struct DrawData
 struct FadeMsg
 {
    uint16 Time;
-   float  FSub;
-   float  Fade;
+   uint16 FSub;
+   uint16 Fade;
 }
 
 // Constants -----------------------------------------------------------------|
@@ -128,7 +128,7 @@ static void LZ(Actor mo, int w, int h)
    0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
 
                                       arg0
-   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - fade speed
+   -111 1111 1111 1111 1--- ---- ---- ---- 16 16 - fade speed
    ---- ---- ---- ---- ---1 1111 11-- ----  6  7 - time (tics)
    ---- ---- ---- ---- ---- ---- --11 1111  0  6 - fade num
 */
@@ -139,16 +139,16 @@ static void LF(Actor mo, int arg0)
 
    uint num = arg0 & 0x3f;
 
-   cl.m_FadeMsg[num].Time =      (arg0 >>  6) & 0x7f;
-   cl.m_FadeMsg[num].FSub = float(arg0 >> 16) / 0xffff;
-   cl.m_FadeMsg[num].Fade = 1;
+   cl.m_FadeMsg[num].Time = (arg0 >>  6) & 0x7f;
+   cl.m_FadeMsg[num].FSub =  arg0 >> 15;
+   cl.m_FadeMsg[num].Fade = uint16.Max;
 }
 
 static bool LX(Actor mo, int num)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
-   return cl.m_FadeMsg[num].Fade != 0;
+   return cl.m_FadeMsg[num].Fade > 0;
 }
 
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
@@ -177,7 +177,7 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
    if(a ~== 0 || cl.m_NoDraw) return;
    let p = cl.m_DPtr;
 
-   if(a < -1) a = cl.m_FadeMsg[uint(-a - 2)].Fade;
+   if(a < -1) a = float(cl.m_FadeMsg[uint(-a - 2)].Fade) / uint16.Max;
 
    if(a == -1)
       cl.m_D[p].Type = Type_Sprite;
@@ -266,7 +266,7 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 
    let p = cl.m_DPtr;
 
-   cl.m_D[p].A = !af && aa != 0 ? cl.m_FadeMsg[aa - 1].Fade
+   cl.m_D[p].A = !af && aa != 0 ? float(cl.m_FadeMsg[aa - 1].Fade) / uint16.Max
                                 : af ? float(aa) / 0x3F
                                      : 1.0;
 
@@ -443,12 +443,12 @@ static void LE()
 
    cl.m_DPtr = 0;
 
-   for(uint i = 0; i < cl.m_FadeMsg.size(); i++)
+   for(uint i = 0; i < cl.m_FadeMsg.Size(); i++)
    {
       if(!cl.m_FadeMsg[i].Fade)
          continue;
       else if(!cl.m_FadeMsg[i].Time)
-         cl.m_FadeMsg[i].Fade = max(cl.m_FadeMsg[i].Fade - cl.m_FadeMsg[i].FSub, 0);
+         cl.m_FadeMsg[i].Fade = Max(int(cl.m_FadeMsg[i].Fade) - int(cl.m_FadeMsg[i].FSub), 0);
       else
          cl.m_FadeMsg[i].Time--;
    }

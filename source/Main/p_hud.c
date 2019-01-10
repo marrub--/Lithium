@@ -45,7 +45,12 @@ void Lith_HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str c
       if(p->score > p->old.score)
          SetFade(fid_schit1, 4, 0.1);
       else if(p->score < p->old.score)
-         SetFade(fid_schit2, 4, 1 - minmax((p->old.score - p->score) / 30000.0, 0.1, 0.9));
+      {
+         i96 scrdif = p->old.score - p->score;
+         u32 tics = scrdif * 8 / 0xFFFF;
+         u32 mmx = 30000 - minmax(scrdif / 4, 3276, 29490);
+         SetFade(fid_schit2, minmax(tics, 1, 35), mmx / 32767.0);
+      }
 
       if(p->scoreaccumtime > 0)
       {
