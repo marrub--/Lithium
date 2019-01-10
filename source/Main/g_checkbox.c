@@ -14,25 +14,24 @@ bool Lith_GUI_Checkbox_Impl(struct gui_state *g, u32 id, struct gui_arg_cbx cons
    if(!a->disabled)
       Lith_GUI_Auto(g, id, a->x-(pre->w/2), a->y-(pre->h/2), pre->w, pre->h);
 
-   __with(str gfx    = Lith_GUI_Prefix1(g, pre, gfx);
-          str chkgfx = Lith_GUI_Prefix1(g, pre, chkgfx);)
+   __with(char gfx[64], chkgfx[64];)
    {
       if(a->disabled) {
-         if(pre->dis)    gfx    = Lith_GUI_Prefix1(g, pre, dis);
-         if(pre->chkdis) chkgfx = Lith_GUI_Prefix1(g, pre, chkdis);
+         if(pre->dis)    Lith_GUI_Prefix(g, gfx,    pre, dis);
+         if(pre->chkdis) Lith_GUI_Prefix(g, chkgfx, pre, chkdis);
       } else if(g->active == id) {
-         if(pre->hot)    gfx    = Lith_GUI_Prefix1(g, pre, hot);
-         if(pre->chkact) chkgfx = Lith_GUI_Prefix1(g, pre, chkact);
+         if(pre->hot)    Lith_GUI_Prefix(g, gfx,    pre, hot);
+         if(pre->chkact) Lith_GUI_Prefix(g, chkgfx, pre, chkact);
       } else if(g->hot == id) {
-         if(pre->hot)    gfx    = Lith_GUI_Prefix1(g, pre, hot);
-         if(pre->chkhot) chkgfx = Lith_GUI_Prefix1(g, pre, chkhot);
+         if(pre->hot)    Lith_GUI_Prefix(g, gfx,    pre, hot);
+         if(pre->chkhot) Lith_GUI_Prefix(g, chkgfx, pre, chkhot);
       }
 
-      if(gfx)
-         PrintSprite(gfx, a->x + g->ox,0, a->y + g->oy,0);
+      if(!gfx[0])    Lith_GUI_Prefix(g, gfx,    pre, gfx);
+      if(!chkgfx[0]) Lith_GUI_Prefix(g, chkgfx, pre, chkgfx);
 
-      if(chkgfx && a->on)
-         PrintSprite(chkgfx, a->x + g->ox,0, a->y + g->oy,0);
+      if(gfx[0])             PrintSprite(l_strdup(gfx),    a->x + g->ox,0, a->y + g->oy,0);
+      if(chkgfx[0] && a->on) PrintSprite(l_strdup(chkgfx), a->x + g->ox,0, a->y + g->oy,0);
    }
 
    if(g->hot == id && g->active == id && !g->clicklft)

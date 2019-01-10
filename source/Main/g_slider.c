@@ -49,19 +49,19 @@ k64 Lith_GUI_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *
    if(a->integ) norm = roundlk(norm, 10);
 
    // draw graphic
-   ifauto(str, gfx, Lith_GUI_Prefix1(g, pre, gfx))
-      PrintSprite(gfx, x - pre->pad,1, y + pre->h / 2,0);
+   __with(char gfx[64];)
+   {
+      Lith_GUI_Prefix(g, gfx, pre, gfx);
+      if(gfx[0]) PrintSprite(l_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
+   }
 
    // draw notch
-   __with(str graphic;)
+   __with(char gfx[64];)
    {
-      if(g->hot == id || g->active == id)
-         graphic = Lith_GUI_Prefix1(g, pre, notchhot);
-      else
-         graphic = Lith_GUI_Prefix1(g, pre, notch);
+      if(g->hot == id || g->active == id) Lith_GUI_Prefix(g, gfx, pre, notchhot);
+      else                                Lith_GUI_Prefix(g, gfx, pre, notch);
 
-      if(graphic)
-         PrintSprite(graphic, x + val * w - 1,1, y,1);
+      if(gfx[0]) PrintSprite(l_strdup(gfx), x + val * w - 1,1, y,1);
    }
 
    // draw value

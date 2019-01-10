@@ -99,37 +99,46 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    }
 
    // draw top cap
-   ifauto(str, cap, Lith_GUI_Prefix1(g, pre, capS))
-      PrintSprite(cap, x,2, y,1);
+   __with(char cap[64];)
+   {
+      Lith_GUI_Prefix(g, cap, pre, capS);
+      PrintSprite(l_strdup(cap), x,2, y,1);
+   }
    y += caph;
 
    // draw middle of bar
-   __with(str scrl = Lith_GUI_Prefix1(g, pre, scrl);)
-      for(i32 i = 0; i < blocks; i++)
+   __with(char scrl[64];)
    {
-      if(scrl) PrintSprite(scrl, x,2, y,1);
-      y += blockh;
+      Lith_GUI_Prefix(g, scrl, pre, scrl);
+      str scrls = l_strdup(scrl);
+      for(i32 i = 0; i < blocks; i++)
+      {
+         PrintSprite(scrls, x,2, y,1);
+         y += blockh;
+      }
    }
 
    // draw bottom cap
-   ifauto(str, cap, Lith_GUI_Prefix1(g, pre, capE))
-      PrintSprite(cap, x,2, y,1);
+   __with(char cap[64];)
+   {
+      Lith_GUI_Prefix(g, cap, pre, capE);
+      if(cap[0]) PrintSprite(l_strdup(cap), x,2, y,1);
+   }
 
    // get base Y
    i32 const ory = a->y + g->oy;
 
    // draw scroller
-   __with(str graphic;)
+   __with(char gfx[64];)
    {
-      if(g->hot == id || g->active == id)
-         graphic = Lith_GUI_Prefix1(g, pre, notchhot);
-      else
-         graphic = Lith_GUI_Prefix1(g, pre, notchgfx);
+      if(g->hot == id || g->active == id) Lith_GUI_Prefix(g, gfx, pre, notchhot);
+      else                                Lith_GUI_Prefix(g, gfx, pre, notchgfx);
 
-      if(graphic) for(i32 i = 0; i < notches; i++)
+      str gfxs = l_strdup(gfx);
+      for(i32 i = 0; i < notches; i++)
       {
          i32 const npos = roundlk(caph + h * scr->y + caph * i, 10);
-         PrintSprite(graphic, x,2, ory + npos,1);
+         PrintSprite(gfxs, x,2, ory + npos,1);
       }
    }
 

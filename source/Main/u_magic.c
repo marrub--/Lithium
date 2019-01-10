@@ -61,12 +61,12 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
       struct gui_pre_btn pre = {
          .gfx      = gfx,
          .hot      = hot,
-         .snd      = "player/cbi/buttonpress",
          .cdef     = "d",
          .cact     = "r",
          .chot     = "k",
          .cdis     = "m",
-         .font     = "cbifont",
+         .font     = s"cbifont",
+         .snd      = s"player/cbi/buttonpress",
          .external = true,
          .w        = 64,
          .h        = 64

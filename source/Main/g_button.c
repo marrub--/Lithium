@@ -16,8 +16,8 @@ bool Lith_GUI_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const 
 
    __with(char graphic[30];)
    {
-      if(g->hot == id && pre->hot) Lith_GUI_Prefix2(g, graphic, pre, hot);
-      else                         Lith_GUI_Prefix2(g, graphic, pre, gfx);
+      if(g->hot == id && pre->hot) Lith_GUI_Prefix(g, graphic, pre, hot);
+      else                         Lith_GUI_Prefix(g, graphic, pre, gfx);
 
       if(graphic[0]) PrintSprite(l_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
    }
@@ -41,7 +41,7 @@ bool Lith_GUI_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const 
       if(!color) color = "j";
 
       PrintTextFmt("\C%s%s", color, a->label);
-      PrintText(l_strdup(pre->font), CR_WHITE, x,pre->ax, y,pre->ay);
+      PrintText(pre->font, CR_WHITE, x,pre->ax, y,pre->ay);
    }
 
    if(!a->disabled)
@@ -59,7 +59,7 @@ bool Lith_GUI_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const 
 
       if(g->hot == id && g->active == id && click) {
          if(g->slide == id) g->slidecount++;
-         if(pre->snd) ACS_LocalAmbientSound(l_strdup(pre->snd), 127);
+         if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
          return true;
       }
    }

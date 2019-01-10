@@ -39,31 +39,11 @@
    if(a->preset) pre = *a->preset; \
    else          pre = def
 
-#define Lith_GUI_Prefix(set) \
-   if(set) { \
-      ACS_BeginPrint(); \
-      PrintChrSt(g->gfxprefix); \
-      ACS_PrintString(set); \
-      set = ACS_EndStrParam(); \
-   } else (void)0
-#define Lith_GUI_Prefix1(g, pre, mem) \
-   (!(pre)->external \
-      ? ((pre)->mem ? (ACS_BeginPrint(), \
-                       PrintChrSt((g)->gfxprefix), \
-                       ACS_PrintString((pre)->mem), \
-                       ACS_EndStrParam()) : nil) \
-      : (pre)->mem)
-#define Lith_GUI_Prefix2(g, gfx, pre, mem) \
+#define Lith_GUI_Prefix(g, gfx, pre, mem) \
    do { \
-      if(!(pre)->mem) \
-         (gfx)[0] = '\0'; \
-      else if((pre)->external) \
-         strncpy(gfx, (pre)->mem, sizeof(gfx)); \
-      else \
-      { \
-         strcpy(gfx, (g)->gfxprefix); \
-         strcat(gfx, (pre)->mem); \
-      } \
+           if(!(pre)->mem)     (gfx)[0] = '\0'; \
+      else if((pre)->external) strcpy(gfx, (pre)->mem); \
+      else                     lstrcpy2(gfx, (g)->gfxprefix, (pre)->mem); \
    } while(0)
 
 #define Lith_GUI_ScrollReset(g, st) \
@@ -154,12 +134,12 @@ struct gui_pre_btn
 {
    char const *gfx;
    char const *hot;
-   char const *snd;
    char const *cdef;
    char const *cact;
    char const *chot;
    char const *cdis;
-   char const *font;
+   str font;
+   str snd;
    i32 ax;
    i32 ay;
    i32 w;
@@ -179,15 +159,15 @@ struct gui_arg_btn
 
 struct gui_pre_cbx
 {
-   str  gfx;
-   str  hot;
-   str  dis;
+   char const *gfx;
+   char const *hot;
+   char const *dis;
+   char const *chkgfx;
+   char const *chkhot;
+   char const *chkact;
+   char const *chkdis;
    str  sndup;
    str  snddn;
-   str  chkgfx;
-   str  chkhot;
-   str  chkact;
-   str  chkdis;
    bool external;
    i32  w;
    i32  h;
@@ -203,11 +183,11 @@ struct gui_arg_cbx
 
 struct gui_pre_scr
 {
-   str  capS;
-   str  capE;
-   str  scrl;
-   str  notchgfx;
-   str  notchhot;
+   char const *capS;
+   char const *capE;
+   char const *scrl;
+   char const *notchgfx;
+   char const *notchhot;
    bool external;
    i32  scrlw;
    i32  scrlh;
@@ -227,10 +207,10 @@ struct gui_arg_scr
 
 struct gui_pre_sld
 {
-   str  gfx;
+   char const *gfx;
+   char const *notch;
+   char const *notchhot;
    str  snd;
-   str  notch;
-   str  notchhot;
    str  font;
    bool external;
    i32  pad;

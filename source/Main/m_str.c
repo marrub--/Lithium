@@ -74,6 +74,15 @@ i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
    StrCmpImpl();
 }
 
+char *lstrcpy2(char *out, char const *s1, char const *s2)
+{
+   char *p = out;
+   for(; *s1; s1++) *p++ = *s1;
+   for(; *s2; s2++) *p++ = *s2;
+   *p++ = '\0';
+   return out;
+}
+
 stkcall
 char const *scoresep(i96 num)
 {

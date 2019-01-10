@@ -26,6 +26,7 @@ stkcall u32 l_strhash(char __str_ars const *s);
 stkcall u32 lstrhash(char const *s);
 char *lstrcpy_str(char *dest, char __str_ars const *src);
 i32 lstrcmp_str(char const *s1, char __str_ars const *s2);
+char *lstrcpy2(char *out, char const *s1, char const *s2);
 stkcall char const *scoresep(i96 num);
 str LanguageV(str name);
 str LanguageNull(char const *fmt, ...);
