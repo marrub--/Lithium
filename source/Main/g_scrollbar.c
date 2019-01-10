@@ -39,7 +39,7 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    if(a->contenth > realh) notches = a->h / (k64)a->contenth * caps;
    else                    notches = caps;
 
-   i32     const scrlh = notches * caph;           // height in pixels of scroller
+   i32 const scrlh = notches * caph;       // height in pixels of scroller
    k64 const maxy  = (h - scrlh) / (k64)h; // normalized maximum y value
 
    // decrement the sound timer

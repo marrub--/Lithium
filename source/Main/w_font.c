@@ -97,9 +97,8 @@ struct glyph *Sc_GetFontMetric(i32 key)
 #define RetOfs(n) \
    __asm \
    ( \
-      "AddI(Stk 1() LocReg 1(Lit 1(:metr)) Lit 1(" #n "_s31.0))" \
-      "Move(Stk 1() Sta 1(Stk 1()))" \
-      "Retn(Stk 1())" \
+      "AddI(Stk() LocReg(Lit(:metr)) Lit(" #n "_s31.0))" \
+      "Retn(Sta(Stk()))" \
    ); \
    return 0 /* dummy return to keep the compiler quiet */
 

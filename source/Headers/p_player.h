@@ -57,7 +57,7 @@ LITH_X(gR, pcl_robot)
       p->giveEXP(amt)
 
 #define LocalPlayer \
-   (ACS_PlayerNumber() < 0 ? nil : &players[ACS_PlayerNumber()])
+   (ACS_PlayerNumber() >= 0 ? &players[ACS_PlayerNumber()] : (struct player *)nil)
 #define PlayerDiscount(n) (i96)((n) * p->discount)
 #define NoPlayer(p) (!(p) || !(p)->active)
 #define withplayer(ptr) \

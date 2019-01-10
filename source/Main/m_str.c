@@ -161,7 +161,7 @@ str LanguageNull(char const *fmt, ...)
    str name = ACS_EndStrParam();
    str alias = LanguageV(name);
 
-   return name == alias ? nil : alias;
+   return name == alias ? snil : alias;
 }
 
 // EOF

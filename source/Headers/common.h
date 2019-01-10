@@ -156,11 +156,6 @@ stkcall void Lith_SetActorInventory (i32 tid, str item, i32 amount);
 void Lith_DebugStat(char const *fmt, ...);
 void Lith_DebugNote(char const *fmt, ...);
 
-// Address Space Definitions -------------------------------------------------|
-
-__addrdef extern __mod_arr lmvar;
-__addrdef extern __hub_arr lhvar;
-
 // Extern Objects ------------------------------------------------------------|
 
 extern str dbgstat[],  dbgnote[];

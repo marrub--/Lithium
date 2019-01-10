@@ -76,9 +76,9 @@ reinit:
       Lith_PlayerRunScripts(p);
 
       // Update view (extra precision is required here to ensure accuracy)
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (float)p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (float)p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (float)p->addroll);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)p->addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (f32)p->addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (f32)p->addroll);
 
       // Tic passes
       ACS_Delay(1);
@@ -99,9 +99,9 @@ reinit:
       p->oldmana   = oldmana;
 
       // Reset view for next tic
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (float)p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (float)p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (float)p->addroll);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (f32)p->addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (f32)p->addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)p->addroll);
 
       // If the map changes this we need to make sure it's still correct.
       p->validateTID();

@@ -19,7 +19,7 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
 {
    if(target) ACS_SetActivatorToTarget(0);
 
-   union fixedint u;
+   union ik32 u;
 
    withplayer(LocalPlayer) switch(info) {
    case pdata_weapon:     return p->weapontype;

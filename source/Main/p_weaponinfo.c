@@ -16,7 +16,7 @@ StrEntON
 #define N(a) .classname = OBJ a, .name = a
 #define F(...) .flags = __VA_ARGS__
 struct weaponinfo const weaponinfo[weapon_max] = {
-   {0, pcl_any, nil, "MMMMHMHMMMHMMM"},
+   {0, pcl_any, snil, "MMMMHMHMMMHMMM"},
    {1,pcl_outcasts,N("ChargeFist"),P("cfist"),AT_None},
    {5,pcl_outcasts,N("MissileLauncher"),P("missile"),AT_AMag,A("Rocket")},
    {6,pcl_outcasts,N("PlasmaDiffuser"),P("plasdiff"),AT_Ammo,A("Plasma")},

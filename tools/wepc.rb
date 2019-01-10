@@ -75,7 +75,7 @@ StrEntON
 #define N(a) .classname = OBJ a, .name = a
 #define F(...) .flags = __VA_ARGS__
 struct weaponinfo const weaponinfo[weapon_max] = {
-   {0, pcl_any, nil, "MMMMHMHMMMHMMM"},
+   {0, pcl_any, snil, "MMMMHMHMMMHMMM"},
 #{
    ret = ""
    weps.each do |wep| ret << "   {#{wep[:slt]},#{wep[:pcl]},#{wep[:res].join ?,}},\n" end

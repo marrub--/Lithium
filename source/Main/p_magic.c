@@ -64,7 +64,7 @@ void Sc_Feuer(bool left, bool fire)
       k32 max = fire ? 20 : 70;
 
       for(i32 i = 0; i < max; i++) {
-         struct vec2i v = qbezieri(sx, sy, cx, cy, ex, ey, i / max);
+         struct i32v2 v = qbezieri(sx, sy, cx, cy, ex, ey, i / max);
          i32 tid;
          ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, ez, i / max), tid = ACS_UniqueTID());
          if(fire) {

@@ -54,7 +54,7 @@ for ln in ifp
       res = res.split
       nam = res.shift
       inf = res.shift
-      inf.replace(inf == ?- ? "nil" : %("#{inf}"))
+      inf.replace(inf == ?- ? "0" : %("#{inf}"))
       scr = if res[0][0] =~ SCR; res.shift else ?0 end
       pcl = res.shift
       flg = []

@@ -28,8 +28,8 @@ struct shopitem
 StrEntON
 static struct shopitem shopitems[] = {
 // {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]},
-   {{"RocketAmmo", nil, 9000},  gA, 5,    OBJ "RocketAmmo"},
-   {{"PlasmaAmmo", nil, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
+   {{"RocketAmmo", snil, 9000},  gA, 5,    OBJ "RocketAmmo"},
+   {{"PlasmaAmmo", snil, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
 
    {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, OBJ "ChargeFist",      sif_weapon},
    {{"Revolver",        "Revolver",         500000}, pM, 1, OBJ "Revolver",        sif_weapon},
@@ -38,9 +38,9 @@ static struct shopitem shopitems[] = {
    {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, OBJ "MissileLauncher", sif_weapon},
    {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, OBJ "PlasmaDiffuser",  sif_weapon},
 
-   {{"Allmap",   nil, 100000}, gA, 1, "Allmap"},
-   {{"Infrared", nil, 70000},  gA, 1, "Infrared"},
-   {{"RadSuit",  nil, 100000}, gA, 1, "RadSuit"},
+   {{"Allmap",   snil, 100000}, gA, 1, "Allmap"},
+   {{"Infrared", snil, 70000},  gA, 1, "Infrared"},
+   {{"RadSuit",  snil, 100000}, gA, 1, "RadSuit"},
 };
 StrEntOFF
 

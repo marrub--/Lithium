@@ -310,7 +310,7 @@ void Lith_ResetPlayer(struct player *p)
 
       if(dbglevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
-         p->logH(1, "strnil is \"%S\"", nil);
+         p->logH(1, "snil is \"%S\"", snil);
          #if LITHIUM
          PrintDmonAllocSize(p);
          #endif
@@ -328,7 +328,7 @@ void Lith_ResetPlayer(struct player *p)
    {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != nil && info->pclass & p->pclass && !(info->flags & wf_magic))
+         if(info->classname != snil && info->pclass & p->pclass && !(info->flags & wf_magic))
             InvGive(info->classname, 1);
       }
    }

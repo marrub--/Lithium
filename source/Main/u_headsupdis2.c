@@ -15,7 +15,7 @@ static void HUD_Ammo(struct player *p)
 
    i32 type = 0;
 
-   str typegfx = nil;
+   str typegfx = snil;
 
    if(wep->ammotype & AT_NMag) type |= 1;
    if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic)) type |= 2;

@@ -28,7 +28,7 @@ static void HUD_Ammo(struct player *p)
       PrintSprite(typebg, 320,2, 238,2);
    }
 
-   str typegfx = nil;
+   str typegfx = snil;
 
    if(wep->ammotype & AT_NMag)
    {

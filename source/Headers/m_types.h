@@ -12,7 +12,9 @@
 #include <stdfix.h>
 #include <stdint.h>
 
-#define nil NULL
+#define nil  ((void *)0)
+#define snil ((__str_ent *)0)
+#define lnil ((__label *)0)
 
 #define stkcall    [[__call("StkCall")]]
 #define script     [[__call("ScriptI")]]
@@ -24,6 +26,8 @@
 #define stksize(x) [[__alloc_Aut(x)]]
 #define type(x)    [[__script(x)]]
 #define addr(x)    [[__address(x)]]
+
+// Types ---------------------------------------------------------------------|
 
 typedef int32_t i32;
 typedef int64_t i64;
@@ -40,9 +44,18 @@ typedef __str str;
 typedef      _Accum k32;
 typedef long _Accum k64;
 
-struct polar    {k32 ang, dst;};
-struct vec2lk   {k64 x, y;};
-struct vec2i    {i32 x, y;};
-union  fixedint {int_k_t i; k32 k;};
+typedef float  f32;
+typedef double f64;
+
+struct polar {k32 ang, dst;};
+struct k64v2 {k64 x, y;};
+struct i32v2 {i32 x, y;};
+
+union ik32 {int_k_t i; k32 k;};
+
+// Address Space Definitions -------------------------------------------------|
+
+__addrdef extern __mod_arr lmvar;
+__addrdef extern __hub_arr lhvar;
 
 #endif
