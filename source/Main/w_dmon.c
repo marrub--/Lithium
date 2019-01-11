@@ -69,12 +69,12 @@ dmon_t *DmonPtr(i32 tid, i32 ptr)
 stkcall
 dmon_t *DmonSelf(void)
 {
-   ifauto(u32, id, InvNum(so_MonsterID)) return Dmon(id - 1);
+   ifauto(i32, id, InvNum(so_MonsterID)) return Dmon(id - 1);
    else                                  return nil;
 }
 
 stkcall
-dmon_t *Dmon(u32 id)
+dmon_t *Dmon(i32 id)
 {
    if(dmonalloc[id].active) return &dmonalloc[id];
    else                     return nil;

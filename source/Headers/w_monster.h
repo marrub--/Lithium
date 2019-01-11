@@ -53,7 +53,7 @@ struct monster_info {
 
 struct dmon {
    bool active;
-   u32  id;
+   i32  id;
 
    bool wasdead;
    i32  exp;
@@ -73,7 +73,7 @@ typedef struct dmon dmon_t;
 
 script dmon_t *DmonPtr(i32 tid, i32 ptr);
 stkcall dmon_t *DmonSelf(void);
-stkcall dmon_t *Dmon(u32 id);
+stkcall dmon_t *Dmon(i32 id);
 dmon_t *AllocDmon(void);
 
 void PrintDmonAllocSize(struct player *p);

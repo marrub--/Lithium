@@ -95,24 +95,20 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
       }
 
       #if LITHIUM
-      if(m && shp && m->maxhealth)
+      if(m)
       {
-         i32 level  = shadow ? m->level - ACS_Random(-5, 5) : m->level;
-         i32 nsplit = min(m->maxhealth / (k32)shp, 7);
-         i32 split  = ceilk(chp / (k32)m->maxhealth * nsplit);
-         i32 splith = m->maxhealth / (k32)nsplit;
-         UData.tagstr    = StrParam("%S lv.%i", UData.tagstr, level);
-         UData.rank      = m->rank;
-         UData.splitfrac = (chp - (splith * (split - 1))) / (k32)splith;
-         UData.split     = minmax(split, 1, 7);
+         i32 level    = shadow ? m->level - ACS_Random(-5, 5) : m->level;
+         UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
+         UData.rank   = m->rank;
       }
       else
       #endif
-      {
          UData.rank = 0;
-         UData.splitfrac = chp / (k32)shp;
-         UData.split = 1;
-      }
+
+      i32 splitr = chp % shp;
+      i32 split  = chp / shp;
+      UData.splitfrac = splitr / (k32)shp;
+      UData.split     = minmax(split + 1, 1, 14);
 
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
@@ -170,13 +166,15 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    // Health bar
    if(p->getCVarI(sc_scanner_bar))
    {
-      i32 y = afnt ? 201 : 205;
-      SetClip(120 + ox, y + oy, 80 * UData.splitfrac, 2);
-      PrintSprite(StrParam(":UI:HealthBar%i", UData.split), 120+ox,1, y+oy,1);
-      ClearClip();
+      i32 x = 120 + ox;
+      i32 y = (afnt ? 201 : 205) + oy;
 
       if(UData.split > 1)
-         PrintSprite(StrParam(":UI:HealthBar%i", UData.split - 1), 120+ox,1, y+oy,1);
+         PrintSprite(StrParam(":UI:HealthBar%i", UData.split - 1), x,1, y,1);
+
+      SetClip(x, y, 80 * UData.splitfrac, 2);
+      PrintSprite(StrParam(":UI:HealthBar%i", UData.split), x,1, y,1);
+      ClearClip();
    }
 }
 
