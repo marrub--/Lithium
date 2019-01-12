@@ -117,6 +117,7 @@ class Lith_IonRifleExplosion : Actor
             A_SpawnItemEx("Lith_IonRifleParticle2", frandom(-24, 24),frandom(-24, 24),frandom(-24, 24), frandom(-0.5, 0.5),frandom(-0.5, 0.5),frandom(-0.5, 0.5));
          }
       }
+      TNT1 A 22;
       stop;
    }
 }
@@ -195,6 +196,7 @@ action(Weapon) void Lith_A_FireIonRifle()
    Lith_A_MagIncr();
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    A_GunFlash("DummyFlash");
+   A_FireProjectile("Lith_LightProjectileSkyLong", 0, 0, 0, 0, 0, 0);
    A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
    if(invoker.m_Charge >= 1.5)
       A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);

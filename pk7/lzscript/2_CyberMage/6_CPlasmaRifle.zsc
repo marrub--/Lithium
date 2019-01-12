@@ -70,6 +70,7 @@ default
 action(Weapon) void Lith_A_FireCPlasma()
 {
    A_GunFlash("DummyFlash");
+   A_FireProjectile("Lith_LightProjectileGreenShort", 0, 0, 0, 0, 0, 0);
    A_TakeInventory("Lith_PlasmaAmmo", 30, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/plasma/fire", CHAN_WEAPON);
    for(int i = 0; i < 5; i++)
@@ -79,6 +80,7 @@ action(Weapon) void Lith_A_FireCPlasma()
 action(Weapon) void Lith_A_FirePulse()
 {
    A_GunFlash("DummyFlash");
+   A_FireProjectile("Lith_LightProjectileGreenLong", 0, 0, 0, 0, 0, 0);
    A_TakeInventory("Lith_PlasmaAmmo", 80, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/plasma/altfire", CHAN_WEAPON);
    A_FireProjectile("Lith_PulseCharge");

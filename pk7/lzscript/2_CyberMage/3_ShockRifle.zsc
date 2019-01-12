@@ -259,6 +259,7 @@ Fire:
       A_GunFlash("DummyFlash");
       A_PlaySound("weapons/erifle/fire", CHAN_WEAPON);
       Lith_FireBullets(1, 0, -1, 37*FRandom(1,1.5), FBF_NORANDOM, "Lith_ShockPuff");
+	  A_FireProjectile("Lith_LightProjectileRedShort", 0, 0, 0, 0, 0, 0);
       Lith_A_GunSmokeSmall();
    }
    CSRG C 1 bright offset(0, 35) {A_Light(0); Lith_A_RecoilDn(0.25);}
