@@ -39,6 +39,20 @@ pointlight Lith_FinalizerLight
    attenuate 1
 }
 
+pointlight Lith_RailSpot
+{
+   color 0.6 0.2 0.2
+   size 46
+   attenuate 1
+}
+
+pointlight Lith_RailBeam
+{
+   color 0.9 0.2 0.2
+   size 64
+   attenuate 1
+}
+
 pulselight Lith_BigLamp
 {
    color 0.8 0.8 1.0
@@ -225,6 +239,43 @@ flickerlight Lith_CircleLightSmall
    attenuate 1
 }
 
+flickerlight Lith_RailExplode
+{
+   color 0.8 0.0 0.0
+   size 50
+   secondarysize 40
+   chance 0.7
+   offset 0 0 0
+   attenuate 1
+}
+
+flickerlight Lith_Explode1
+{
+   color 1.0 0.7 0.5
+   size 96
+   secondarysize 108
+   chance 0.3
+   attenuate 1
+}
+
+flickerlight Lith_Explode2
+{
+   color 0.5 0.3 0.2
+   size 120
+   secondarysize 132
+   chance 0.3
+   attenuate 1
+}
+
+flickerlight Lith_Explode3
+{
+   color 0.3 0.1 0.1
+   size 144
+   secondarysize 156
+   chance 0.3
+   attenuate 1
+}
+
 flickerlight2 Lith_TorchSmallR
 {
    color 1.0 0.5 0.2
@@ -294,6 +345,15 @@ flickerlight2 Lith_ShockLight
    attenuate 1
 }
 
+flickerlight2 Lith_PoisonBlob
+{
+   color 0.3 1.0 0.3
+   size 8
+   secondarysize 16
+   interval 0.02
+   attenuate 1
+}
+
 flickerlight2 Lith_StarLight1
 {
    color 0.12 0.06 0.95
@@ -330,11 +390,38 @@ flickerlight2 Lith_SMGTrailLight
    attenuate 1
 }
 
+flickerlight2 Lith_PlasmaPistolLight
+{
+   color 0.1 0.18 0.9
+   size 40
+   secondarysize 48
+   interval 0.05
+   attenuate 1
+}
+
 flickerlight2 Lith_CPlasmaLight
 {
    color 0.1 0.9 0.18
    size 36
    secondarysize 40
+   interval 0.05
+   attenuate 1
+}
+
+flickerlight2 Lith_ShotgunTrail1
+{
+   color 0.1 0.9 0.18
+   size 16
+   secondarysize 8
+   interval 0.05
+   attenuate 1
+}
+
+flickerlight2 Lith_ShotgunTrail2
+{
+   color 0.1 0.9 0.18
+   size 8
+   secondarysize 4
    interval 0.05
    attenuate 1
 }
@@ -360,6 +447,7 @@ object Lith_ShockEffect                     {frame ZAP1 {light Lith_ShockLight}}
 object Lith_ShockEffect2                    {frame ZAP1 {light Lith_ShockLight}}
 object Lith_SuperShockEffect                {frame SDXP {light Lith_SuperShockLight}}
 object Lith_SMGTracer3                      {frame TNT1 {light Lith_SMGTrailLight}}
+object Lith_LightProjectileSkyShort         {frame TNT1 {light Lith_IonRifleLight}}
 object Lith_LightProjectileSkyLong          {frame TNT1 {light Lith_IonRifleLight}}
 object Lith_IonRifleExplosion               {frame TNT1 {light Lith_IonExplosionLight}}
 object Lith_LightProjectileGreenShort       {frame TNT1 {light Lith_CPlasmaRifleLight}}
@@ -387,5 +475,15 @@ object Lith_CircleWallFx                    {frame BLLT {light Lith_CircleLight}
 object Lith_CircleElectricity               {frame ZAP1 {light Lith_CircleLightSmall}}
 object Lith_CircleSpear                     {frame BLLT {light Lith_CircleLight}}
 object Lith_MonsterSoul                     {frame BLLT {light Lith_ShockLight}}
+object Lith_ParticleBeam                    {frame BLLT {light Lith_ShockLight}
+                                             frame BFE1 {light Lith_ShockLight}}
+object Lith_GaussExplosionParticle          {frame BLLT {light Lith_PlasmaPistolLight}}
+object Lith_GaussPuff                       {frame BLLT {light Lith_PlasmaPistolLight}}
+object Lith_PoisonBlob                      {frame BLLT {light Lith_PoisonBlob}
+                                             frame RADB {light Lith_PoisonBlob}}
+object Lith_OmegaRailExplosion              {frame BFE1 {light Lith_RailExplode}}
+object Lith_OmegaRailBeam                   {frame BFE1 {light Lith_RailBeam}}
+object Lith_OmegaRailParticle1              {frame PLSS {light Lith_FinalizerLight}}
+object Lith_OmegaRailParticle2              {frame BFE1 {light Lith_RailSpot}}
 
 // EOF

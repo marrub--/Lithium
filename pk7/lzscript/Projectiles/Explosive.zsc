@@ -29,12 +29,14 @@ state Lith_A_DoExplosion()
 states
 {
 Explode:
-   MEXP AB 2 bright;
-   MEXP CD 3 bright;
-   MEXP EF 4 bright;
+   MEXP AB 2 bright light("Lith_Explode1");
+   MEXP CD 3 bright light("Lith_Explode2");
+   MEXP EF 4 bright light("Lith_Explode3");
    stop;
 ExplodeMarathon:
-   MA7G BCDEFG 4 bright;
+   MA7G BC 4 bright light("Lith_Explode1");
+   MA7G DE 4 bright light("Lith_Explode2");
+   MA7G FG 4 bright light("Lith_Explode3");
    stop;
 }
 

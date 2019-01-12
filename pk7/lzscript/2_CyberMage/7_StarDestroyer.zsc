@@ -114,9 +114,9 @@ class Lith_StarProjectile : Actor
       TNT1 A 0 {
          A_PlaySound("weapons/dark/wind", CHAN_7, 1.0, true);
          target.master = invoker;
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile1", 0, 0, 0, 0, 0, 0);
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile2", 0, 0, 0, 0, 0, 0);
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile3", 0, 0, 0, 0, 0, 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile1", 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile2", 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile3", 0);
       }
    Spawn1:
       BLLT L 0 bright {m_RushTimer++; A_AlertMonsters();}
@@ -231,9 +231,9 @@ class Lith_Solspear : Actor
       BLLT L 1;
       BLLT L 0 {
          target.master = invoker;
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile1", 0, 0, 0, 0, 0, 0);
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile2", 0, 0, 0, 0, 0, 0);
-         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile3", 0, 0, 0, 0, 0, 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile1", 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile2", 0);
+         A_SpawnProjectile("Lith_StarDestroyerRainbowProjectile3", 0);
       }
    Spawn1:
       BLLT L 0;
@@ -338,9 +338,9 @@ action(Weapon) void Lith_A_FireStar()
    {
       A_PlaySound("weapons/shipgun/firesurge", CHAN_5);
       CallACS("Lith_SurgeOfDestiny");
-      A_FireProjectile("Lith_SurgeRainbowProjectile1", 0, 0, 0, 0, 0, 0);
-      A_FireProjectile("Lith_SurgeRainbowProjectile2", 0, 0, 0, 0, 0, 0);
-      A_FireProjectile("Lith_SurgeRainbowProjectile3", 0, 0, 0, 0, 0, 0);
+      A_FireProjectile("Lith_SurgeRainbowProjectile1", 0);
+      A_FireProjectile("Lith_SurgeRainbowProjectile2", 0);
+      A_FireProjectile("Lith_SurgeRainbowProjectile3", 0);
    }
    else
    {

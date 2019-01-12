@@ -26,6 +26,7 @@ action(Weapon) void Lith_A_FireRevolver()
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(0.75);
    A_PlaySound("weapons/revolver/fire", CHAN_WEAPON);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
 states(Weapon)

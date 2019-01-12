@@ -39,6 +39,10 @@ $random weapons/cfist/fire {
    weapons/cfist/fire3
 }
 
+$limit weapons/cfist/fire 0
+$limit weapons/cfist/hit 0
+$limit weapons/cfist/hitwall 0
+
 //
 // Missile Launcher
 //

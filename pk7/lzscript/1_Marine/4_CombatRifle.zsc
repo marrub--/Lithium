@@ -16,10 +16,15 @@ class Lith_RifleLaserTrail : Actor
    states
    {
    Spawn:
+      BLLT E 0 bright;
+      BLLT E 0 bright A_JumpIf(Random(0, 255) < 10, "Spawn2");
+   Spawn1:
       BLLT E 5 bright;
-   SpawnLoop:
-      BLLT E 1 bright A_SetScale(scale.x - 0.035);
-      BLLT E 0 bright A_JumpIf(scale.x < 0.05, "Null");
+      goto Spawn3;
+   Spawn2:
+      BLLT E 5 bright light("Lith_FinalizerLight");
+   Spawn3:
+      BLLT E 1 bright {if(Scale.X < 0.05) Destroy(); else Scale -= (0.035, 0.035);}
       loop;
    }
 }
@@ -97,6 +102,7 @@ action(Weapon) void Lith_A_FireRifle()
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
    Lith_A_RecoilUp(0.4);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
    if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW))
    {
       if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))

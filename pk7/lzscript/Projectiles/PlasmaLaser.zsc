@@ -34,7 +34,7 @@ class Lith_PlasmaHit : Lith_PlasmaLaze
       BLL2 A 0 A_PlaySound("weapons/plasma/laser/spark", CHAN_7, 1.0, true);
    PrettiesLoop:
       BLL2 A 0 A_JumpIf(Alpha >= 1, "PrettiesDone");
-      BLL2 A 1 A_FadeIn(0.07);
+      BLL2 A 1 light("Lith_FinalizerLight") A_FadeIn(0.07);
       loop;
    PrettiesDone:
       BLL2 A 1 A_FadeOut(0.1);
@@ -77,7 +77,13 @@ override void Tick()
 states
 {
 Spawn:
-   BLLT E 2;
+   BLLT E 0 bright;
+   BLLT E 0 bright A_JumpIf(Random(0, 255) < 10, "Spawn2");
+Spawn1:
+   BLLT E 2 bright;
+   stop;
+Spawn2:
+   BLLT E 2 bright light("Lith_FinalizerLight");
    stop;
 }
 

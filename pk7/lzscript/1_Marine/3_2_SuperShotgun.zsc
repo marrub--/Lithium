@@ -25,6 +25,7 @@ action(Weapon) void Lith_A_FireSSG()
    A_Recoil(1.2);
    Lith_A_RecoilUp(1.5);
    A_GunFlash();
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Actor)

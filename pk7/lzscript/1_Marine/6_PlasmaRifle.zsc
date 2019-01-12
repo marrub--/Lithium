@@ -27,7 +27,7 @@ class Lith_ParticleBeam : Lith_PlasmaLaze
       +DONTHARMSPECIES
       +FORCERADIUSDMG
       +FORCEXYBILLBOARD
-      +NOTIMEFREEZE
+      -NOTIMEFREEZE
    }
 
    states
@@ -58,6 +58,7 @@ action(Weapon) void Lith_A_FirePlasma()
    A_PlaySound("weapons/plasma/fire", CHAN_WEAPON);
    for(int i = 0; i < 4; i++)
       A_FireProjectile("Lith_PlasmaBolt", CallACS("Lith_CircleSpread", 7 * IFIX, 3 * IFIX, false) / FIX, false, 0, -9, 0, -(CallACS("Lith_CircleSpread", 0, 0, true) / FIX));
+   A_FireProjectile("Lith_LightProjectileGreenShort", 0);
 }
 
 action(Weapon) void Lith_A_FireLaser()
@@ -66,6 +67,7 @@ action(Weapon) void Lith_A_FireLaser()
    A_AlertMonsters();
    A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ);
    A_RailAttack(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_TorgueMode) ? 1 : 12, 0, false, "", "Red", RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING, 0, "Lith_Dummy", 0, 0, 0, 1, 3, 0, "Lith_PlasmaLaze");
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
 action(Weapon) void Lith_A_FireRail()
@@ -75,6 +77,7 @@ action(Weapon) void Lith_A_FireRail()
    A_TakeInventory("Lith_PlasmaAmmo", 200, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/plasma/part/fire", CHAN_WEAPON);
    A_RailAttack(400, 0, false, "", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_ParticleBeamPuff", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8);
+   A_FireProjectile("Lith_LightProjectileSkyLong", 0);
 }
 
 action(Weapon) void Lith_A_FireAltPlasma()
@@ -85,6 +88,7 @@ action(Weapon) void Lith_A_FireAltPlasma()
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(-2.7, -1.9), false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(2.7, 1.9), false, 0, -9);
    A_PlaySound("weapons/plasma/altfire", CHAN_WEAPON);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(Weapon) void Lith_A_EmitIons(int spars)

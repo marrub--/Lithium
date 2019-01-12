@@ -29,6 +29,7 @@ action(Weapon) State Lith_A_FireMissile()
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    for(int i = 0; i < 3; i++)
       A_FireProjectile("Lith_MiniMissile", FRandom(-7, 7), false, FRandom(-2, 2), FRandom(-2, 2), FPF_NOAUTOAIM, FRandom(-5, 5));
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
    switch(invoker.m_Reset = Min(invoker.m_Reset, 5)) {
    case 5: return ResolveState("FireAnim6"); // fuck you eat crime
    case 4: return ResolveState("FireAnim5");

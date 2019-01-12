@@ -222,6 +222,20 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
+action(Weapon) void Lith_A_FireShock()
+{
+   Lith_A_MagIncr();
+   Lith_A_TakeSlot3OptAmmo();
+   A_Light(1);
+   Lith_A_RecoilUp(0.5);
+   A_Recoil(0.1);
+   A_GunFlash("DummyFlash");
+   A_PlaySound("weapons/erifle/fire", CHAN_WEAPON);
+   Lith_FireBullets(1, 0, -1, 37*FRandom(1,1.5), FBF_NORANDOM, "Lith_ShockPuff");
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
+   Lith_A_GunSmokeSmall();
+}
+
 states(Actor)
 {
 SpawnPickup:
@@ -248,20 +262,8 @@ Select:
 Fire:
    CSRG A 0 Lith_A_JumpIfNoSlot3OptAmmo;
    CSRG A 0 Lith_A_JumpIfMagEmpty;
-   CSRG A 1 {
-      Lith_A_MagIncr();
-      Lith_A_TakeSlot3OptAmmo();
-   }
-   CSRG B 1 bright offset(0, 40) {
-      A_Light(1);
-      Lith_A_RecoilUp(0.5);
-      A_Recoil(0.1);
-      A_GunFlash("DummyFlash");
-      A_PlaySound("weapons/erifle/fire", CHAN_WEAPON);
-      Lith_FireBullets(1, 0, -1, 37*FRandom(1,1.5), FBF_NORANDOM, "Lith_ShockPuff");
-	  A_FireProjectile("Lith_LightProjectileRedShort", 0, 0, 0, 0, 0, 0);
-      Lith_A_GunSmokeSmall();
-   }
+   CSRG A 1;
+   CSRG B 1 bright offset(0, 40) Lith_A_FireShock;
    CSRG C 1 bright offset(0, 35) {A_Light(0); Lith_A_RecoilDn(0.25);}
    CSRG A 1 offset(0, 34) Lith_A_RecoilDn(0.25);
    CSRG A 2 offset(0, 33);

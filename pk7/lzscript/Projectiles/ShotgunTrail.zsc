@@ -18,7 +18,8 @@ class Lith_ShotgunTrail : Actor
    {
    Spawn:
       PBAL A 0;
-      PBAL A 20 bright A_Warp(AAPTR_DEFAULT, 0, 0, -8, 0, WARPF_NOCHECKPOSITION);
+      PBAL A 10 bright light("Lith_ShotgunTrail1") A_Warp(AAPTR_DEFAULT, 0, 0, -8, 0, WARPF_NOCHECKPOSITION);
+      PBAL A 10 bright light("Lith_ShotgunTrail2");
    SpawnLoop:
       PBAL A 1 bright A_FadeOut(0.1 / 15.0);
       loop;

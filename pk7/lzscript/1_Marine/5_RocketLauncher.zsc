@@ -93,6 +93,7 @@ action(Weapon) void Lith_A_FireRocket()
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/rocket/fire", CHAN_WEAPON);
    A_FireProjectile("Lith_Rocket");
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(Weapon) void Lith_A_FireGrenade()
@@ -101,6 +102,7 @@ action(Weapon) void Lith_A_FireGrenade()
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/rocket/grenade", CHAN_WEAPON);
    A_FireProjectile("Lith_RifleGrenade");
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(Weapon) void Lith_A_FireHomingRocket()
@@ -109,6 +111,7 @@ action(Weapon) void Lith_A_FireHomingRocket()
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    A_PlaySound("weapons/rocket/fire", CHAN_WEAPON);
    A_FireProjectile("Lith_HomingRocket");
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Actor)

@@ -16,7 +16,14 @@ class Lith_LazShotgunTrail : Actor
    states
    {
    Spawn:
+      BLLT E 0 bright;
+      BLLT E 0 bright A_JumpIf(Random(0, 255) < 10, "Spawn2");
+   Spawn1:
       BLLT E 4 bright;
+      goto Spawn3;
+   Spawn2:
+      BLLT E 4 bright light("Lith_FinalizerLight");
+   Spawn3:
       BLLT E 2 bright A_FadeOut(0.5);
       BLLT E 1 bright A_FadeOut(0.2);
       stop;
@@ -54,6 +61,7 @@ action(Weapon) void Lith_A_LaserFire()
    A_PlaySound("weapons/lshotgun/fire", CHAN_WEAPON);
    A_Recoil(0.5);
    Lith_A_RecoilUp(0.75);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Weapon)

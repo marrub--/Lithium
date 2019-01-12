@@ -68,6 +68,7 @@ action(Weapon) void Lith_A_FireSniper()
    A_Recoil(1);
    Lith_A_RecoilUp(2);
    A_PlaySound("weapons/sniper/fire", CHAN_WEAPON);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Weapon)

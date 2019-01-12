@@ -46,6 +46,7 @@ action(Weapon) void Lith_A_FireCannonBig()
    A_Recoil(4);
    Lith_A_RecoilUp(4);
    A_FireProjectile("Lith_CannonBall", 0, false, 0, -24, FPF_NOAUTOAIM);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(Weapon) void Lith_A_FireCannonSmall()
@@ -56,6 +57,7 @@ action(Weapon) void Lith_A_FireCannonSmall()
    A_Recoil(2);
    Lith_A_RecoilUp(2);
    A_FireProjectile("Lith_SmallCannonBall", 0, false, 0, -16, FPF_NOAUTOAIM);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(Weapon) void Lith_A_FireDarkMatter()
@@ -71,6 +73,7 @@ action(Weapon) void Lith_A_FireOmegaRail()
    A_GunFlash("DummyFlash");
    A_RailAttack(500, 0, false, "", "", RGF_SILENT, 0, "Lith_OmegaRailDummy", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19);
    A_FireProjectile("Lith_OmegaRailHax", 0, false, 0, -19);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Actor)

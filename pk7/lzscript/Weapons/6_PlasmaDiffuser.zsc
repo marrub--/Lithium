@@ -26,14 +26,14 @@ class Lith_DiffPlasma : Lith_PlasmaBolt
       TNT1 A 0 {m_TrailStep = 0;}
       goto Step;
    Step:
-      TNT1 A 1;
+      TNT1 A 1 light("Lith_PlasmaPistolLight");
       TNT1 A 0 ResolveState("Trail");
    Death:
-      PLSE A 4 bright {
+      PLSE A 4 bright light("Lith_PlasmaPistolLight") {
          for(int i = 0; i < 4; i++)
             A_SpawnParticle("Blue", SPF_FULLBRIGHT, 15, 4, 0, FRandom(-5, 5),FRandom(-5, 5),FRandom(-5, 5), FRandom(-5, 5),FRandom(-5, 5),FRandom(-5, 5));
       }
-      PLSE BCDE 4 bright;
+      PLSE BCDE 4 bright light("Lith_PlasmaPistolLight");
       stop;
    }
 }
@@ -56,6 +56,7 @@ action(Weapon) void Lith_A_FirePlasmaDiff()
    A_GunFlash("DummyFlash");
    A_PlaySound("weapons/plasdiff/fire", CHAN_WEAPON);
    A_FireProjectile("Lith_DiffPlasma", 0, false, 0, -9);
+   A_FireProjectile("Lith_LightProjectileSkyShort", 0);
 }
 
 states(Weapon)
