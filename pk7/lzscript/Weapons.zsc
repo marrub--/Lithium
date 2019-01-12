@@ -148,7 +148,7 @@ action(Weapon) void Lith_A_ScopeToggle()
 }
 
 action(Weapon) void Lith_A_ZoomFactorScoped(float amount)
-   {A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom))/FIX * amount * invoker.m_ScopeZoom);}
+   {A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX) * amount * invoker.m_ScopeZoom);}
 
 action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y)
    {A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);}
