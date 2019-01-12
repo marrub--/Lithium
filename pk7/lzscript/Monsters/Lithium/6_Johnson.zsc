@@ -8,9 +8,10 @@ class Lith_Boss_Johnson : Lith_BasicPhantom;
 
 default
 {
-   Tag "Isaac, Superbiorem Est";
    Health 40;
-   Speed 3;
+   Speed  3;
+
+   Tag "Isaac, Superbiorem Est";
 
    +THRUSPECIES
    +NOINFIGHTING

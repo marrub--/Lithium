@@ -6,9 +6,10 @@ class Lith_TitleImpBall : Lith_XH_ImpBall
 {
    default
    {
-      SeeSound "";
-      DeathSound "";
       Speed 20;
+
+      DeathSound "";
+      SeeSound   "";
    }
 }
 
@@ -16,8 +17,8 @@ class Lith_TitleBaronBall : BaronBall
 {
    default
    {
-      SeeSound "";
       DeathSound "";
+      SeeSound   "";
    }
 }
 
@@ -25,15 +26,16 @@ class Lith_TitleHellKnight : HellKnight
 {
    default
    {
-      SeeSound "";
-      ActiveSound "";
-      PainSound "";
-      DeathSound "";
       Species "Lith_TitleEnemy";
 
-      +NOINFIGHTING
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+
       +DONTHARMCLASS
       +DONTHARMSPECIES
+      +NOINFIGHTING
    }
 
    states
@@ -58,15 +60,16 @@ class Lith_TitleImp : Lith_XH_Imp
 {
    default
    {
-      SeeSound "";
-      ActiveSound "";
-      PainSound "";
-      DeathSound "";
       Species "Lith_TitleEnemy";
 
-      +NOINFIGHTING
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+
       +DONTHARMCLASS
       +DONTHARMSPECIES
+      +NOINFIGHTING
    }
 
    states
@@ -74,7 +77,7 @@ class Lith_TitleImp : Lith_XH_Imp
    Melee:
    Missile:
       TROO EF 6 A_FaceTarget;
-      TROO G 5 A_CustomComboAttack("Lith_TitleImpBall", 32, 3 * random(1, 8), "imp/melee");
+      TROO G 5 A_CustomComboAttack("Lith_TitleImpBall", 32, 3 * Random(1, 8), "imp/melee");
       TROO G 2;
       goto See;
    Death:

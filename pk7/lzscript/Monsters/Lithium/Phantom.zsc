@@ -20,9 +20,9 @@ class Lith_PhantomTeleportFX : Actor
 {
    default
    {
-      RenderStyle "Stencil";
+      Alpha        0.8;
+      RenderStyle  "Stencil";
       StencilColor "Black";
-      Alpha 0.8;
 
       +NOINTERACTION
    }
@@ -50,12 +50,12 @@ class Lith_PhantomAuraFX : Actor
 {
    default
    {
+      Alpha       0.8;
       RenderStyle "Subtract";
-      Alpha 0.8;
-      Scale 0.1;
+      Scale       0.1;
 
-      +NOINTERACTION
       +BRIGHT
+      +NOINTERACTION
    }
 
    states
@@ -87,22 +87,22 @@ class Lith_Phantom : Lith_Monster;
 
 default
 {
-   Species "Lith_Phantom";
-   Radius 20;
-   Height 56;
-   Speed 3;
-   Mass 1000;
-   RenderStyle "Stencil";
+   Height       56;
+   Mass         1000;
+   Radius       20;
+   RenderStyle  "Stencil";
+   Species      "Lith_Phantom";
+   Speed        3;
    StencilColor "Black";
 
-   +NOPAIN
-   +THRUSPECIES
-   +DONTHARMSPECIES
    +BOSS
-   +MISSILEMORE
-   +NOTARGET
-   +NEVERTARGET
+   +DONTHARMSPECIES
    +DONTMORPH
+   +MISSILEMORE
+   +NEVERTARGET
+   +NOPAIN
+   +NOTARGET
+   +THRUSPECIES
 }
 
 int m_Phase;

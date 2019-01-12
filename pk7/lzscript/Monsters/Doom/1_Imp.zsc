@@ -6,8 +6,8 @@ class Lith_XH_ImpBall : Lith_ImpBall
 {
    default
    {
-      Speed 24;
       FastSpeed 48;
+      Speed 24;
    }
 }
 
@@ -15,9 +15,9 @@ class Lith_XH_Imp : Lith_Imp
 {
    default
    {
-      Speed 8;
       Health 80;
       MinMissileChance 140;
+      Speed 8;
 
       +MISSILEMORE
    }
@@ -40,10 +40,10 @@ class Lith_ImpBall : DoomImpBall
 {
    default
    {
-      Speed 16;
+      DamageType "Fire";
       FastSpeed 32;
       Scale 1.35;
-      DamageType "Fire";
+      Speed 16;
    }
 
    states
@@ -63,20 +63,23 @@ class Lith_Imp : Lith_Monster replaces DoomImp;
 default
 {
    Lith_Monster.Score Score_Imp;
-   Health 79;
-   Radius 18;
-   Height 50;
-   Mass 100;
-   Speed 9;
+
+   Health           79;
+   Height           50;
+   Mass             100;
    MinMissileChance 160;
-   Scale 0.9;
-   Tag "Hell Trooper";
-   SeeSound "imp/sight";
-   PainSound "imp/pain";
-   DeathSound "imp/death";
+   Radius           18;
+   Scale            0.9;
+   Speed            9;
+
    ActiveSound "imp/active";
+   DeathSound  "imp/death";
+   PainSound   "imp/pain";
+   SeeSound    "imp/sight";
+
    HitObituary "$OB_IMPHIT";
-   Obituary "$OB_IMP";
+   Obituary    "$OB_IMP";
+   Tag         "Hell Trooper";
 
    +FLOORCLIP
 }

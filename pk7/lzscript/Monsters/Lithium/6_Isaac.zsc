@@ -6,9 +6,9 @@ class Lith_IsaacThompsonTrail : Actor
 {
    default
    {
-      Alpha 0.8;
+      Alpha       0.8;
       RenderStyle "Add";
-      Scale 0.8;
+      Scale       0.8;
 
       +NOINTERACTION
    }
@@ -25,16 +25,16 @@ class Lith_IsaacThompsonBullet : FastProjectile
 {
    default
    {
-      Alpha 0.9;
-      DamageFunction 4 * random(1, 4);
-      DamageType "Bullet";
-      Height 4;
-      MissileType "Lith_IsaacThompsonTrail";
-      Radius 4;
-      RenderStyle "Translucent";
-      Scale 0.3;
-      Species "Lith_Phantom";
-      Speed 128;
+      Alpha          0.9;
+      DamageFunction 4 * Random(1, 4);
+      DamageType     "Bullet";
+      Height         4;
+      MissileType    "Lith_IsaacThompsonTrail";
+      Radius         4;
+      RenderStyle    "Translucent";
+      Scale          0.3;
+      Species        "Lith_Phantom";
+      Speed          128;
 
       +BLOODSPLATTER
       +DONTHARMSPECIES
@@ -60,8 +60,9 @@ class Lith_Boss_Isaac : Lith_Phantom;
 
 default
 {
-   Tag "Isaac, Superbiorem Est";
    Health 4000;
+
+   Tag "Isaac, Superbiorem Est";
 }
 
 override void Lith_PostInit()

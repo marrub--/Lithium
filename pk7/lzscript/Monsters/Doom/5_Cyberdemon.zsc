@@ -6,12 +6,13 @@ class Lith_CyberRocket : Lith_Explosive
 {
    default
    {
-      Scale 0.75;
-      Radius 8;
-      Height 4;
-      Speed 25;
-      DamageType "Shrapnel";
-      DamageFunction (15 * random(1, 8));
+      DamageFunction 15 * Random(1, 8);
+      DamageType     "Shrapnel";
+      Height         4;
+      Radius         8;
+      Scale          0.75;
+      Speed          25;
+
       Obituary "$OB_MPROCKET";
 
       Projectile;
@@ -79,26 +80,29 @@ class Lith_Cyberdemon : Lith_Monster replaces Cyberdemon;
 default
 {
    Lith_Monster.Score Score_Cyberdemon;
-   Health 5000;
-   Radius 40;
-   Height 110;
-   Mass 5000;
-   Speed 16;
+
+   Health           5000;
+   Height           110;
+   Mass             5000;
    MinMissileChance 160;
-   SeeSound "cyber/sight";
-   PainSound "cyber/pain";
-   DeathSound "cyber/death";
+   Radius           40;
+   Speed            16;
+
    ActiveSound "cyber/active";
+   DeathSound  "cyber/death";
+   PainSound   "cyber/pain";
+   SeeSound    "cyber/sight";
+
    Obituary "$OB_CYBORG";
-   Tag "Cyber-Demon";
+   Tag      "Cyber-Demon";
 
    +BOSS
-   +MISSILEMORE
-   +MISSILEEVENMORE
-   +FLOORCLIP
-   +NORADIUSDMG
-   +DONTMORPH
    +BOSSDEATH
+   +DONTMORPH
+   +FLOORCLIP
+   +MISSILEEVENMORE
+   +MISSILEMORE
+   +NORADIUSDMG
 }
 
 void Lith_A_CyberdemonShoot()

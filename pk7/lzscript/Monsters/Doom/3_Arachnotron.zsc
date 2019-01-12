@@ -6,11 +6,11 @@ class Lith_ArchoPlasmTrail : Actor
 {
    default
    {
-      Radius 2;
-      Height 2;
+      Alpha       0.666;
+      Height      2;
+      Radius      2;
       Renderstyle "Translucent";
-      Alpha 0.666;
-      Scale 0.8;
+      Scale       0.8;
 
       +DONTSPLASH
       +NOINTERACTION
@@ -31,10 +31,10 @@ class Lith_ArchoPlasmParticles : Actor
 {
    default
    {
-      Radius 2;
-      Height 2;
+      Alpha       0.4;
+      Height      2;
+      Radius      2;
       Renderstyle "Translucent";
-      Alpha 0.4;
 
       +DONTSPLASH
       +NOINTERACTION
@@ -54,12 +54,12 @@ class Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
 {
    default
    {
+      Damage     5;
       DamageType "Electric";
-      Radius 13;
-      Height 8;
-      Speed 25;
-      Damage 5;
-      Scale 0.9;
+      Height     8;
+      Radius     13;
+      Scale      0.9;
+      Speed      25;
 
       Projectile;
       +RANDOMIZE
@@ -87,22 +87,25 @@ class Lith_Arachnotron : Lith_Monster replaces Arachnotron;
 default
 {
    Lith_Monster.Score Score_Arachnotron;
-   Health 500;
-   Radius 64;
-   Height 64;
-   Mass 600;
-   Speed 12;
-   PainChance 128;
-   DamageFactor "Electric", 0.6;
-   SeeSound "baby/sight";
-   PainSound "baby/pain";
-   DeathSound "baby/death";
-   ActiveSound "baby/active";
-   Obituary "$OB_BABY";
-   Tag "Arachnotron";
 
-   +FLOORCLIP
+   DamageFactor "Electric", 0.6;
+   Health       500;
+   Height       64;
+   Mass         600;
+   PainChance   128;
+   Radius       64;
+   Speed        12;
+
+   ActiveSound "baby/active";
+   DeathSound  "baby/death";
+   PainSound   "baby/pain";
+   SeeSound    "baby/sight";
+
+   Obituary "$OB_BABY";
+   Tag      "Arachnotron";
+
    +BOSSDEATH
+   +FLOORCLIP
 }
 
 states

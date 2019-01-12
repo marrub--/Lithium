@@ -10,27 +10,30 @@ class Lith_LostSoul : Lith_Monster replaces LostSoul;
 
 default
 {
-   ActiveSound "skull/active";
-   Alpha 0.7;
-   AttackSound "skull/melee";
-   Damage 3;
-   DeathSound "skull/death";
-   Health 70;
-   Height 56;
    Lith_Monster.Score Score_LostSoul;
-   Mass 50;
-   Obituary "$OB_SKULL";
-   PainChance 256;
-   PainSound "skull/pain";
-   Radius 16;
-   RenderStyle "Add";
-   Speed 8;
-   Tag "Lost Soul";
 
-   +FLOAT
-   +NOGRAVITY
-   +MISSILEMORE
+   Alpha       0.7;
+   Damage      3;
+   Health      70;
+   Height      56;
+   Mass        50;
+   PainChance  256;
+   Radius      16;
+   RenderStyle "Add";
+   Speed       8;
+
+   ActiveSound "skull/active";
+   AttackSound "skull/melee";
+   DeathSound  "skull/death";
+   PainSound   "skull/pain";
+
+   Obituary "$OB_SKULL";
+   Tag      "Lost Soul";
+
    +DONTFALL
+   +FLOAT
+   +MISSILEMORE
+   +NOGRAVITY
    +NOICEDEATH
    +QUICKTORETALIATE
    +THRUSPECIES

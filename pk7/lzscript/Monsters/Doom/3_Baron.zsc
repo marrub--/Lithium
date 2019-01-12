@@ -6,8 +6,8 @@ class Lith_BaronHellfireTrailSpawner : Actor
 {
    default
    {
-      Radius 2;
       Height 2;
+      Radius 2;
 
       +NOINTERACTION
    }
@@ -26,11 +26,11 @@ class Lith_BaronHellfireTrail : Actor
 {
    default
    {
-      Radius 2;
-      Height 2;
-      Scale 0.666;
+      Alpha       0.7;
+      Height      2;
+      Radius      2;
       Renderstyle "Translucent";
-      Alpha 0.7;
+      Scale       0.666;
 
       +DONTSPLASH
       +NOINTERACTION
@@ -49,10 +49,10 @@ class Lith_BaronBall : BaronBall replaces BaronBall
 {
    default
    {
-      DamageType "Magic";
-      Damage 4;
+      Alpha       1;
+      Damage      4;
+      DamageType  "Magic";
       RenderStyle "Translucent";
-      Alpha 1;
 
       +RANDOMIZE
    }
@@ -73,8 +73,8 @@ class Lith_BaronBallSilent : Lith_BaronBall
 {
    default
    {
-      SeeSound "";
       DeathSound "";
+      SeeSound   "";
    }
 }
 
@@ -87,25 +87,28 @@ class Lith_BaronOfHell : Lith_Monster replaces BaronOfHell;
 default
 {
    Lith_Monster.Score Score_BaronOfHell;
-   Health 1000;
-   Radius 24;
-   Height 64;
-   Mass 1000;
-   Speed 8;
-   PainChance 55;
-   Species "Lith_HellKnight";
-   BloodColor "DarkGreen";
-   SeeSound "baron/sight";
-   PainSound "baron/pain";
-   DeathSound "baron/death";
-   ActiveSound "baron/active";
-   Obituary "$OB_BARON";
-   HitObituary "$OB_BARONHIT";
-   Tag "Hell Noble";
 
-   +MISSILEMORE
-   +FLOORCLIP
+   BloodColor "DarkGreen";
+   Health     1000;
+   Height     64;
+   Mass       1000;
+   PainChance 55;
+   Radius     24;
+   Species    "Lith_HellKnight";
+   Speed      8;
+
+   ActiveSound "baron/active";
+   DeathSound  "baron/death";
+   PainSound   "baron/pain";
+   SeeSound    "baron/sight";
+
+   HitObituary "$OB_BARONHIT";
+   Obituary    "$OB_BARON";
+   Tag         "Hell Noble";
+
    +BOSSDEATH
+   +FLOORCLIP
+   +MISSILEMORE
 }
 
 int m_Angle;

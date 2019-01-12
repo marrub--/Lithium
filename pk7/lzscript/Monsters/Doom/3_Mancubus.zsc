@@ -6,9 +6,9 @@ class Lith_FatShot : FatShot replaces FatShot
 {
    default
    {
+      Damage     7;
       DamageType "Fire";
-      Damage 7;
-      Speed 10;
+      Speed      10;
    }
 
    states
@@ -24,7 +24,7 @@ class Lith_XH_FatShot : Lith_FatShot
    default
    {
       Species "Lith_XH_Mancubus";
-      Speed 16;
+      Speed   16;
 
       +MTHRUSPECIES
    }
@@ -55,21 +55,24 @@ class Lith_Mancubus : Lith_Monster replaces Fatso;
 default
 {
    Lith_Monster.Score Score_Mancubus;
-   Health 600;
-   Radius 48;
-   Height 64;
-   Mass 1000;
-   Speed 8;
-   PainChance 50;
-   SeeSound "fatso/sight";
-   PainSound "fatso/pain";
-   DeathSound "fatso/death";
-   ActiveSound "fatso/active";
-   Obituary "$OB_FATSO";
-   Tag "Mancubus";
 
-   +FLOORCLIP
+   Health     600;
+   Height     64;
+   Mass       1000;
+   PainChance 50;
+   Radius     48;
+   Speed      8;
+
+   ActiveSound "fatso/active";
+   DeathSound  "fatso/death";
+   PainSound   "fatso/pain";
+   SeeSound    "fatso/sight";
+
+   Obituary "$OB_FATSO";
+   Tag      "Mancubus";
+
    +BOSSDEATH
+   +FLOORCLIP
 }
 
 states

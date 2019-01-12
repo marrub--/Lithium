@@ -17,16 +17,19 @@ class Lith_PainElemental : Lith_Monster replaces PainElemental;
 default
 {
    Lith_Monster.Score Score_PainElemental;
-   Health 400;
-   Radius 31;
-   Height 56;
-   Mass 400;
-   Speed 8;
+
+   Health     400;
+   Height     56;
+   Mass       400;
    PainChance 128;
-   SeeSound "pain/sight";
-   PainSound "pain/pain";
-   DeathSound "pain/death";
+   Radius     31;
+   Speed      8;
+
    ActiveSound "pain/active";
+   DeathSound  "pain/death";
+   PainSound   "pain/pain";
+   SeeSound    "pain/sight";
+
    Tag "Pain Elemental";
 
    +FLOAT

@@ -26,20 +26,23 @@ class Lith_Cacodemon : Lith_Monster replaces Cacodemon;
 default
 {
    Lith_Monster.Score Score_Cacodemon;
-   Health 400;
-   Radius 31;
-   Height 56;
-   Mass 400;
-   Speed 8;
-   PainChance 128;
-   SeeSound "caco/sight";
-   PainSound "caco/pain";
-   DeathSound "caco/death";
-   ActiveSound "caco/active";
+
    BloodColor "Blue";
-   Obituary "$OB_CACO";
+   Health     400;
+   Height     56;
+   Mass       400;
+   PainChance 128;
+   Radius     31;
+   Speed      8;
+
+   ActiveSound "caco/active";
+   DeathSound  "caco/death";
+   PainSound   "caco/pain";
+   SeeSound    "caco/sight";
+
    HitObituary "$OB_CACOHIT";
-   Tag "Cacodemon";
+   Obituary    "$OB_CACO";
+   Tag         "Cacodemon";
 
    +FLOAT
    +NOGRAVITY
