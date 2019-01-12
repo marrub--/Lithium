@@ -117,7 +117,7 @@ class Lith_IonRifleExplosion : Actor
             A_SpawnItemEx("Lith_IonRifleParticle2", frandom(-24, 24),frandom(-24, 24),frandom(-24, 24), frandom(-0.5, 0.5),frandom(-0.5, 0.5),frandom(-0.5, 0.5));
          }
       }
-	  TNT1 A 22;
+      TNT1 A 22;
       stop;
    }
 }
