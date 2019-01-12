@@ -32,6 +32,13 @@ pointlight Lith_Candelabra
    attenuate 1
 }
 
+pointlight Lith_FinalizerLight
+{
+   color 0.9 0.08 0.08
+   size 46
+   attenuate 1
+}
+
 pulselight Lith_BigLamp
 {
    color 0.8 0.8 1.0
@@ -62,9 +69,100 @@ pulselight Lith_Lamp
    attenuate 1
 }
 
+pulselight Lith_GunshotOrange
+{
+   color 0.9 0.35 0.05
+   size 92
+   secondarysize 70
+   interval 0.2
+   attenuate 1
+}
+
+pulselight Lith_VoidShotLight
+{
+   color 0.8 0.0 0.8
+   size 52
+   secondarysize 32
+   interval 0.8
+   subtractive 1
+   attenuate 1
+}
+
+pulselight Lith_IonRifleLight
+{
+   color 0.7 0.7 1.0
+   size 128
+   secondarysize 110
+   interval 0.4
+   attenuate 1
+}
+
+pulselight Lith_CPlasmaRifleLight
+{
+   color 0.1 0.9 0.18
+   size 64
+   secondarysize 45
+   interval 0.3
+   attenuate 1
+}
+
+pulselight Lith_IonExplosionLight
+{
+   color 0.7 0.7 1.0
+   size 192
+   secondarysize 90
+   interval 2.5
+   attenuate 1
+}
+
+pulselight Lith_StarRainbow1
+{
+   color 1.0 0.0 0.0
+   size 512
+   secondarysize 160
+   interval 4.0
+   attenuate 1
+}
+
+pulselight Lith_StarRainbow2
+{
+   color 0.0 1.0 0.0
+   size 512
+   secondarysize 160
+   interval 3.0
+   attenuate 1
+}
+
+pulselight Lith_StarRainbow3
+{
+   color 0.0 0.0 1.0
+   size 512
+   secondarysize 160
+   interval 2.0
+   attenuate 1
+}
+
+pulselight Lith_StarExplosion
+{
+   color 1.0 1.0 1.0
+   size 512
+   secondarysize 256
+   interval 2.5
+   attenuate 1
+}
+
+pulselight Lith_BladeLight
+{
+   color 0.95 0.8 0.1
+   size 56
+   secondarysize 22
+   interval 1.5
+   attenuate 1
+}
+
 flickerlight Lith_BulletPuff1
 {
-   color 0.5 0.49 0.0
+   color 0.55 0.49 0.05
    size 18
    secondarysize 12
    chance 0.8
@@ -86,6 +184,35 @@ flickerlight Lith_BulletPuff3
    size 6
    secondarysize 4
    chance 0.8
+   attenuate 1
+}
+
+flickerlight Lith_FeuerLight
+{
+   color 0.95 0.66 0.05
+   size 46
+   secondarysize 40
+   chance 0.8
+   attenuate 1
+}
+
+flickerlight Lith_CircleLight
+{
+   color 0.8 0.0 0.0
+   size 46
+   secondarysize 40
+   chance 0.7
+   offset 0 0 0
+   attenuate 1
+}
+
+flickerlight Lith_CircleLightSmall
+{
+   color 0.9 0.3 0.3
+   size 26
+   secondarysize 20
+   chance 0.7
+   offset 0 0 0
    attenuate 1
 }
 
@@ -149,16 +276,107 @@ flickerlight2 Lith_TorchTallB
    attenuate 1
 }
 
-object Lith_CandleFlare      {frame YLGL {light Lith_Candle}}
-object Lith_CandelabraFlare  {frame YLGL {light Lith_Candelabra}}
-object Lith_TechLampFlare    {frame BLGL {light Lith_BigLamp}}
-object Lith_TechLamp2Flare   {frame BLGL {light Lith_SmallLamp}}
-object Lith_ColumnFlare      {frame YLGL {light Lith_Lamp}}
-object Lith_TorchSmallRFlare {frame RDGL {light Lith_TorchSmallR}}
-object Lith_TorchSmallGFlare {frame GRGL {light Lith_TorchSmallG}}
-object Lith_TorchSmallBFlare {frame BLGL {light Lith_TorchSmallB}}
-object Lith_TorchTallRFlare  {frame RDGL {light Lith_TorchTallR}}
-object Lith_TorchTallGFlare  {frame GRGL {light Lith_TorchTallG}}
-object Lith_TorchTallBFlare  {frame BLGL {light Lith_TorchTallB}}
+flickerlight2 Lith_ShockLight
+{
+   color 0.7 0.7 1.0
+   size 45
+   secondarysize 52
+   interval 0.02
+   attenuate 1
+}
+
+flickerlight2 Lith_StarLight1
+{
+   color 0.12 0.06 0.95
+   size 45
+   secondarysize 52
+   interval 0.02
+   attenuate 1
+}
+
+flickerlight2 Lith_StarLight2
+{
+   color 0.95 0.06 0.12
+   size 45
+   secondarysize 52
+   interval 0.02
+   attenuate 1
+}
+
+flickerlight2 Lith_SuperShockLight
+{
+   color 0.7 0.7 1.0
+   size 115
+   secondarysize 125
+   interval 0.04
+   attenuate 1
+}
+
+flickerlight2 Lith_SMGTrailLight
+{
+   color 0.7 0.7 1.0
+   size 25
+   secondarysize 30
+   interval 0.02
+   attenuate 1
+}
+
+flickerlight2 Lith_CPlasmaLight
+{
+   color 0.1 0.9 0.18
+   size 36
+   secondarysize 40
+   interval 0.05
+   attenuate 1
+}
+
+object Lith_CandleFlare                     {frame YLGL {light Lith_Candle}}
+object Lith_CandelabraFlare                 {frame YLGL {light Lith_Candelabra}}
+object Lith_TechLampFlare                   {frame BLGL {light Lith_BigLamp}}
+object Lith_TechLamp2Flare                  {frame BLGL {light Lith_SmallLamp}}
+object Lith_ColumnFlare                     {frame YLGL {light Lith_Lamp}}
+object Lith_TorchSmallRFlare                {frame RDGL {light Lith_TorchSmallR}}
+object Lith_TorchSmallGFlare                {frame GRGL {light Lith_TorchSmallG}}
+object Lith_TorchSmallBFlare                {frame BLGL {light Lith_TorchSmallB}}
+object Lith_TorchTallRFlare                 {frame RDGL {light Lith_TorchTallR}}
+object Lith_TorchTallGFlare                 {frame GRGL {light Lith_TorchTallG}}
+object Lith_TorchTallBFlare                 {frame BLGL {light Lith_TorchTallB}}
+object Lith_HotEmber                        {frame EPUF {light Lith_BulletPuff1}}
+object Lith_BulletPuff                      {frame XPUF {light Lith_BulletPuff1}}
+object Lith_LightProjectileRedShort         {frame TNT1 {light Lith_GunshotOrange}}
+object Lith_LightProjectileRedLong          {frame TNT1 {light Lith_GunshotOrange}}
+object Lith_FinalizerShot                   {frame TNT1 {light Lith_FinalizerLight}}
+object Lith_VoidShot                        {frame BLLT {light Lith_VoidShotLight}}
+object Lith_ShockEffect                     {frame ZAP1 {light Lith_ShockLight}}
+object Lith_ShockEffect2                    {frame ZAP1 {light Lith_ShockLight}}
+object Lith_SuperShockEffect                {frame SDXP {light Lith_SuperShockLight}}
+object Lith_SMGTracer3                      {frame TNT1 {light Lith_SMGTrailLight}}
+object Lith_LightProjectileSkyLong          {frame TNT1 {light Lith_IonRifleLight}}
+object Lith_IonRifleExplosion               {frame TNT1 {light Lith_IonExplosionLight}}
+object Lith_LightProjectileGreenShort       {frame TNT1 {light Lith_CPlasmaRifleLight}}
+object Lith_LightProjectileGreenLong        {frame TNT1 {light Lith_CPlasmaRifleLight}}
+object Lith_PlasmaBolt                      {frame TNT1 {light Lith_CPlasmaLight}}
+object Lith_PulseCharge                     {frame TNT1 {light Lith_CPlasmaLight}}
+object Lith_StarProjectile                  {frame SDXP {light Lith_StarExplosion}}
+object Lith_StarDestroyerRainbowProjectile1 {frame TNT1 {light Lith_StarRainbow1}}
+object Lith_StarDestroyerRainbowProjectile2 {frame TNT1 {light Lith_StarRainbow2}}
+object Lith_StarDestroyerRainbowProjectile3 {frame TNT1 {light Lith_StarRainbow3}}
+object Lith_SurgeRainbowProjectile1         {frame TNT1 {light Lith_StarRainbow1}}
+object Lith_SurgeRainbowProjectile2         {frame TNT1 {light Lith_StarRainbow2}}
+object Lith_SurgeRainbowProjectile3         {frame TNT1 {light Lith_StarRainbow3}}
+object Lith_BladeLightProjectile            {frame TNT1 {light Lith_BladeLight}}
+object Lith_DelearDot                       {frame TNT1 {light Lith_FinalizerLight}}
+object Lith_DelearExplosion                 {frame TNT1 {light Lith_FinalizerLight}}
+object Lith_FeuerExplosion                  {frame BLLT {light Lith_FeuerLight}}
+object Lith_FeuerTest                       {frame BLLT {light Lith_FeuerLight}}
+object Lith_HulgyonEffect                   {frame BLLT {light Lith_FeuerLight}}
+object Lith_Star                            {frame STS2 {light Lith_StarLight1}
+                                             frame STSH {light Lith_StarLight2}}
+object Lith_CircleParticle                  {frame BLLT {light Lith_CircleLight}}
+object Lith_CircleWall                      {frame BLLT {light Lith_CircleLight}}
+object Lith_CircleWallFx                    {frame BLLT {light Lith_CircleLight}}
+object Lith_CircleElectricity               {frame ZAP1 {light Lith_CircleLightSmall}}
+object Lith_CircleSpear                     {frame BLLT {light Lith_CircleLight}}
+//object Lith_BulletTracer                    {frame ____ {light Lith_BulletPuff1}}
 
 // EOF

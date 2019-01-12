@@ -145,6 +145,7 @@ Fire:
    CSHG A 0 {
       Lith_FireBullets(10.5, 3.5, 12, 6);
       Lith_A_GunSmoke();
+	  A_FireProjectile("Lith_LightProjectileRedLong", 0, 0, 0, 0, 0, 0);
    }
    CSHG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B), "FireAuto");
    CSHG B 1 bright offset(0, 35) {A_Light(1); A_PlaySound("weapons/cshotgun/fire", CHAN_WEAPON);}

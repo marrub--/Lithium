@@ -69,6 +69,7 @@ Fire:
    TNT1 A 20 {
       ACS_NamedExecuteWithResult("Lith_Blade", false);
       A_PlaySound("weapons/blade/slash", CHAN_7);
+      A_FireProjectile("Lith_BladeLightProjectile", 0, 0, 0, 0, 0, 0);
       if(CountInv("PowerStrength"))
          A_FireProjectile("Lith_BladeHit2");
       else

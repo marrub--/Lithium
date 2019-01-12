@@ -1,0 +1,132 @@
+class Lith_LightProjectileRedShort : Actor
+{
+   default
+   {
+      Damage 0;
+	  Radius 0;
+	  Speed  0;
+	  Height 0;
+      Projectile;
+
+      +DONTSPLASH
+      +DROPOFF
+      +NOBLOCKMAP
+	  +NOGRAVITY
+      +NOINTERACTION
+	  +NONSHOOTABLE
+      +NOTELEPORT
+      +NOTIMEFREEZE
+      +NOTRIGGER
+	  +THRUACTORS
+   }
+
+   int counter;
+   
+   states
+   {
+   Spawn:
+	  TNT1 A 1 {
+        A_Warp(AAPTR_TARGET, 0, 0, 40, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+        counter++;
+     }
+     TNT1 A 0 A_JumpIf(counter >= 2, "Death");
+     loop;
+   Death:
+      TNT1 A 0;
+      stop;
+   }
+}
+
+class Lith_LightProjectileRedLong : Lith_LightProjectileRedShort
+{
+	states
+	{
+	Spawn:
+	  TNT1 A 1 {
+        A_Warp(AAPTR_TARGET, 0, 0, 40, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+        counter++;
+     }
+     TNT1 A 0 A_JumpIf(counter >= 4, "Death");
+     loop;
+	Death:
+      TNT1 A 0;
+      stop;
+	}
+}
+
+class Lith_LightProjectileSkyLong : Lith_LightProjectileRedLong {}
+
+class Lith_LightProjectileGreenShort : Lith_LightProjectileRedShort {}
+
+class Lith_LightProjectileGreenLong : Lith_LightProjectileRedLong {}
+
+class Lith_StarDestroyerRainbowProjectile1 : Lith_LightProjectileRedShort
+{
+   states
+   {
+   Spawn:
+     TNT1 A 1 NoDelay {
+        target = target.master;
+     }
+     goto Spawn1;
+   Derp:
+     TNT1 A 1;
+   Spawn1:
+     TNT1 A 1 {
+        if (target != null)
+        {
+           SetXYZ(target.pos);
+           return ResolveState("Derp");
+        }
+        return ResolveState("Death");
+     }
+     loop;
+   Death:
+     TNT1 A 1;
+     stop;
+    }
+}
+
+class Lith_StarDestroyerRainbowProjectile2 : Lith_StarDestroyerRainbowProjectile1 {}
+
+class Lith_StarDestroyerRainbowProjectile3 : Lith_StarDestroyerRainbowProjectile1 {}
+
+class Lith_SurgeRainbowProjectile1 : Lith_LightProjectileRedShort
+{
+   states
+   {
+   Spawn:
+	  TNT1 A 1 {
+        A_Warp(AAPTR_TARGET, 0, 0, 40, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+        counter++;
+     }
+     TNT1 A 0 A_JumpIf(counter >= 245, "Death");
+     loop;
+   Death:
+     TNT1 A 0;
+     stop;
+    }
+}
+
+class Lith_SurgeRainbowProjectile2 : Lith_SurgeRainbowProjectile1 {}
+
+class Lith_SurgeRainbowProjectile3 : Lith_SurgeRainbowProjectile1 {}
+
+class Lith_BladeLightProjectile : Lith_LightProjectileRedShort
+{
+   states
+   {
+   Spawn:
+	  TNT1 A 1 {
+        A_Warp(AAPTR_TARGET, 0, 0, 40, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+        counter++;
+     }
+     TNT1 A 0 A_JumpIf(counter >= 8, "Death");
+     loop;
+   Death:
+      TNT1 A 0;
+      stop;
+   }
+}
+
+// EOF

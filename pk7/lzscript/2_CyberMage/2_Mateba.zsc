@@ -157,6 +157,7 @@ action(Weapon) State Lith_A_FireMateba()
       return ResolveState("Finalize");
    Lith_A_RecoilDn(0.2);
    Lith_FireBullets(2, 2, -1, 30, FBF_NORANDOM);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0, 0, 0, 0, 0, 0);
    Lith_A_GunSmokeSmall();
    A_PlaySound("weapons/mateba/fire", CHAN_WEAPON);
    return null;

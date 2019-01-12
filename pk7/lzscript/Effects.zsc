@@ -10,5 +10,6 @@
 #include "lzscript/Effects/Casings.zsc"
 #include "lzscript/Effects/GunSmoke.zsc"
 #include "lzscript/Effects/Rain.zsc"
+#include "lzscript/Effects/DynamicLights.zsc"
 
 // EOF
