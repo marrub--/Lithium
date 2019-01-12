@@ -377,6 +377,7 @@ object Lith_CircleWall                      {frame BLLT {light Lith_CircleLight}
 object Lith_CircleWallFx                    {frame BLLT {light Lith_CircleLight}}
 object Lith_CircleElectricity               {frame ZAP1 {light Lith_CircleLightSmall}}
 object Lith_CircleSpear                     {frame BLLT {light Lith_CircleLight}}
+object Lith_MonsterSoul                     {frame BLLT {light Lith_ShockLight}}
 //object Lith_BulletTracer                    {frame ____ {light Lith_BulletPuff1}}
 
 // EOF
