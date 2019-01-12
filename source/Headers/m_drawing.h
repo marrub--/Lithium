@@ -92,7 +92,7 @@
    DrawCallI(sm_LZ, (i32)(w), (i32)(h))
 
 #define SetFadeArgs(n, time, fade) \
-   ((u32)(n) | ((u32)(time) << 6) | ((union ik32){.k=(fade)}.i << 15))
+   ((u32)(n) | ((u32)(time) << 6) | (k32_to_i32(fade) << 15))
 
 #define SetFade(n, time, fade) \
    DrawCallI(sm_LF, SetFadeArgs(n, time, fade))

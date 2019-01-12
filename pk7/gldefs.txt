@@ -89,6 +89,15 @@ flickerlight Lith_BulletPuff3
    attenuate 1
 }
 
+flickerlight Lith_HeavenlyImage
+{
+   color 1.0 1.0 1.0
+   size 48
+   secondarysize 32
+   chance 0.8
+   attenuate 1
+}
+
 flickerlight2 Lith_TorchSmallR
 {
    color 1.0 0.5 0.2

@@ -16,8 +16,8 @@ class Lith_HeavenlyImage : Actor
    states
    {
    Spawn:
-      #### # 3;
-      #### # 1 A_FadeOut;
+      #### # 3 light("Lith_HeavenlyImage");
+      #### # 1 light("Lith_HeavenlyImage") A_FadeOut;
       wait;
    }
 }

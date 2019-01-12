@@ -36,9 +36,7 @@ struct dmon_stat {
 
 // Static Objects ------------------------------------------------------------|
 
-StrEntON
 #include "w_moninfo.h"
-StrEntOFF
 
 static str const dmgtype_names[dmgtype_max] = {
    s"Bullets",
@@ -138,7 +136,17 @@ static void BaseMonsterLevel(dmon_t *m)
    bias += world.difficulty / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
-   if(world.fun & lfun_ragnarok)
+   if(m->mi->flags & mif_angelic)
+   {
+      m->rank  = 7;
+      m->level = 77;
+   }
+   else if(m->mi->flags & mif_dark)
+   {
+      m->rank  = 6;
+      m->level = 66;
+   }
+   else if(world.fun & lfun_ragnarok)
    {
       m->rank  = MAXRANK;
       m->level = MAXLEVEL + rn2 * bias;
@@ -365,6 +373,7 @@ void Sc_MonsterInfo(void)
    LogDebug(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
+   // Edit: This isn't necessary anymore, but what the hell, keep it.
    InvGive(so_MonsterInvalid, 1);
 }
 

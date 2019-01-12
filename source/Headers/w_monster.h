@@ -40,6 +40,8 @@ enum mtype {
    mtype_mastermind,
    mtype_cyberdemon,
    mtype_phantom,
+   mtype_angel,
+   mtype_darkone,
    mtype_max
 };
 

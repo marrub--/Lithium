@@ -2,6 +2,12 @@ Distributed under the CC0 public domain license.
 By Alison Sanderson. Attribution is encouraged, though not required.
 See licenses/cc0.txt for more information.
 
++mif_full    0
++mif_angelic 1
++mif_dark    2
+
+end flags
+
 Hexen (unused)
  %mif_full
  ShotgunGuy  imp         Ettin
@@ -76,6 +82,10 @@ Lithium
 +2000 0 phantom    Makarov
 +3000 0 phantom    Isaac
 +0    0 cyberdemon Steggles
+
+%mif_angelic
++CyberDemon angel Archangel
+%
 
 Cheogsh.wad
 %mif_full
