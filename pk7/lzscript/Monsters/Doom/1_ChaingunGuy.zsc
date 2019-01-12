@@ -18,20 +18,23 @@ class Lith_ChaingunGuy : Lith_Monster replaces ChaingunGuy;
 default
 {
    Lith_Monster.Score Score_ChaingunGuy;
-   Health 60;
-   Radius 20;
-   Height 56;
-   Mass 100;
-   Speed 9;
-   PainChance 170;
-   SeeSound "chainguy/sight";
-   PainSound "chainguy/pain";
-   DeathSound "chainguy/death";
-   ActiveSound "chainguy/active";
-   Obituary "$OB_CHAINGUY";
-   Tag "Former Corporal";
 
-   +FLOORCLIP;
+   Health     60;
+   Height     56;
+   Mass       100;
+   PainChance 170;
+   Radius     20;
+   Speed      9;
+
+   ActiveSound "chainguy/active";
+   DeathSound  "chainguy/death";
+   PainSound   "chainguy/pain";
+   SeeSound    "chainguy/sight";
+
+   Obituary "$OB_CHAINGUY";
+   Tag      "Former Corporal";
+
+   +FLOORCLIP
 }
 
 virtual void Lith_A_ChaingunGuyShot()

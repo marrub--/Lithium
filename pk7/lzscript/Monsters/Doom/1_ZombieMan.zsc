@@ -24,18 +24,21 @@ class Lith_ZombieMan : Lith_Monster replaces ZombieMan;
 default
 {
    Lith_Monster.Score Score_ZombieMan;
-   Health 30;
-   Radius 20;
-   Height 56;
-   Speed 9;
-   PainChance 200;
+
+   Health           30;
+   Height           56;
    MinMissileChance 150;
-   SeeSound "grunt/sight";
-   PainSound "grunt/pain";
-   DeathSound "grunt/death";
+   PainChance       200;
+   Radius           20;
+   Speed            9;
+
    ActiveSound "grunt/active";
+   DeathSound  "grunt/death";
+   PainSound   "grunt/pain";
+   SeeSound    "grunt/sight";
+
    Obituary "$OB_ZOMBIE";
-   Tag "Former Rifleman";
+   Tag      "Former Rifleman";
 
    +FLOORCLIP
 }

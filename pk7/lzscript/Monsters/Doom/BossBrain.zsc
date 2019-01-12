@@ -28,12 +28,13 @@ class Lith_BossBrain : Actor replaces BossBrain;
 default
 {
    Health 500;
-   Mass int.max;
+   Mass int.Max;
    PainChance 256;
-   +SOLID
-   +SHOOTABLE
+
    +NOICEDEATH
    +OLDRADIUSDMG
+   +SHOOTABLE
+   +SOLID
 }
 
 int m_Boom;

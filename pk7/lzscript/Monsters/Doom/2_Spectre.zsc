@@ -11,10 +11,13 @@ class Lith_Spectre : Lith_Demon replaces Spectre;
 default
 {
    Lith_Monster.Score Score_Spectre;
-   SeeSound "";
+
+   Alpha       0.5;
    RenderStyle "Fuzzy";
-   Alpha 0.5;
-   Speed 11;
+   Speed       11;
+
+   SeeSound "";
+
    Tag "Spectre";
 
    +SHADOW

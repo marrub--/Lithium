@@ -6,9 +6,9 @@ class Lith_MakarovShotgunTrail : Actor
 {
    default
    {
+      Alpha       0.5;
       RenderStyle "Add";
-      Scale 0.5;
-      Alpha 0.5;
+      Scale       0.5;
 
       +NOINTERACTION
    }
@@ -25,14 +25,14 @@ class Lith_MakarovShotgunBullet : FastProjectile
 {
    default
    {
-      MissileType "Lith_MakarovShotgunTrail";
-      RenderStyle "Translucent";
-      DamageType "Bullet";
       Alpha 0.9;
-      Scale 0.5;
-      Radius 24;
+      DamageFunction 3 * Random(1, 5);
+      DamageType "Bullet";
       Height 20;
-      DamageFunction 3 * random(1, 5);
+      MissileType "Lith_MakarovShotgunTrail";
+      Radius 24;
+      RenderStyle "Translucent";
+      Scale 0.5;
       Speed 96;
 
       +BLOODSPLATTER
@@ -57,8 +57,8 @@ class Lith_MakarovGrenade : Lith_RifleGrenade
 {
    default
    {
-      Speed 30;
       Species "Lith_Phantom";
+      Speed   30;
 
       +DONTHARMSPECIES
    }
@@ -88,9 +88,9 @@ class Lith_MakarovChain : Actor
 {
    default
    {
-      Damage 2;
-      Speed 30;
+      Damage     2;
       DamageType "Melee";
+      Speed      30;
 
       Projectile;
       +HITTRACER
@@ -113,8 +113,9 @@ class Lith_Boss_Makarov : Lith_Phantom;
 
 default
 {
-   Tag "Makarov, Avarum Est";
    Health 3000;
+
+   Tag "Makarov, Avarum Est";
 }
 
 states

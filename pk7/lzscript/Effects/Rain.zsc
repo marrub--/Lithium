@@ -40,6 +40,7 @@ class Lith_RainDrop : Actor
 
       if(!m_Done && (WaterLevel > 0 || Pos.Z <= FloorZ))
       {
+         SetOrigin((Pos.XY, FloorZ), false);
          SetState(ResolveState("Death"));
          m_Done = true;
       }
@@ -52,7 +53,7 @@ class Lith_RainDrop : Actor
       stop;
    Death:
       RNDR A 0 {Vel = (0, 0, 0); Scale = (1, 1);}
-      RNDR BCDEFGH 3 A_FadeOut(0.0375);
+      RNDR BCDEFGH 3 A_FadeOut(1/16./3.);
       stop;
    }
 }

@@ -41,8 +41,8 @@ class Lith_ArchvileImmolatorBlast : Actor
 {
    default
    {
-      Translation "192:199=160:167", "200:207=32:39", "240:247=40:47";
       Mass int.Max;
+      Translation "192:199=160:167", "200:207=32:39", "240:247=40:47";
 
       +FLOORHUGGER
       +FORCEYBILLBOARD
@@ -70,26 +70,28 @@ class Lith_Archvile : Lith_Monster replaces Archvile;
 default
 {
    Lith_Monster.Score Score_Archvile;
-   Health 800;
-   Radius 20;
-   Height 56;
-   Mass 500;
-   Speed 15;
-   PainChance 10;
-   MaxTargetRange 896;
-   GibHealth 400;
-   PainChance 2;
-   SeeSound "vile/sight";
-   PainSound "vile/pain";
-   DeathSound "vile/death";
-   ActiveSound "vile/active";
-   MeleeSound "vile/stop";
-   Obituary "$OB_VILE";
-   Tag "Arch-vile";
 
-   +QUICKTORETALIATE
+   GibHealth      400;
+   Health         800;
+   Height         56;
+   Mass           500;
+   MaxTargetRange 896;
+   PainChance     2;
+   Radius         20;
+   Speed          15;
+
+   ActiveSound "vile/active";
+   DeathSound  "vile/death";
+   MeleeSound  "vile/stop";
+   PainSound   "vile/pain";
+   SeeSound    "vile/sight";
+
+   Obituary "$OB_VILE";
+   Tag      "Arch-vile";
+
    +FLOORCLIP
    +NOTARGET
+   +QUICKTORETALIATE
 }
 
 states

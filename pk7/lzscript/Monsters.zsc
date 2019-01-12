@@ -32,6 +32,7 @@
 
 #include "lzscript/Monsters/Lithium/Phantom.zsc"
 
+#include "lzscript/Monsters/Lithium/6_Archangel.zsc"
 #include "lzscript/Monsters/Lithium/6_Isaac.zsc"
 #include "lzscript/Monsters/Lithium/6_James.zsc"
 #include "lzscript/Monsters/Lithium/6_Johnson.zsc"

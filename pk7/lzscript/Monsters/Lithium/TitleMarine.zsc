@@ -7,19 +7,19 @@ class Lith_TitleMarine : ScriptedMarine;
 
 default
 {
-   Speed 4;
-   PainChance 0;
-   MaxTargetRange 16384;
+   MaxTargetRange   16384;
    MinMissileChance 2;
-   Species "Lith_Player";
+   PainChance       0;
+   Species          "Lith_Player";
+   Speed            4;
 
-   +FRIENDLY
-   +MISSILEMORE
-   +MISSILEEVENMORE
    +DONTHARMCLASS
    +DONTHARMSPECIES
-   +NOINFIGHTING
+   +FRIENDLY
    +INVULNERABLE
+   +MISSILEEVENMORE
+   +MISSILEMORE
+   +NOINFIGHTING
 }
 
 states

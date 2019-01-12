@@ -31,10 +31,10 @@ class Lith_XH_RevenantTracer : Lith_RevenantTracer
 {
    default
    {
-      Scale 0.7;
       Damage 1;
-      Radius 2;
       Height 2;
+      Radius 2;
+      Scale  0.7;
    }
 
    states
@@ -83,21 +83,24 @@ class Lith_Revenant : Lith_Monster replaces Revenant;
 default
 {
    Lith_Monster.Score Score_Revenant;
-   Health 350;
-   Radius 20;
-   Height 56;
-   Mass 500;
-   Speed 10;
-   PainChance 100;
+
+   Health         350;
+   Height         56;
+   Mass           500;
    MeleeThreshold 196;
-   SeeSound "skeleton/sight";
-   PainSound "skeleton/pain";
-   DeathSound "skeleton/death";
+   PainChance     100;
+   Radius         20;
+   Speed          10;
+
    ActiveSound "skeleton/active";
-   MeleeSound "skeleton/melee";
-   Obituary "$OB_UNDEAD";
+   DeathSound  "skeleton/death";
+   MeleeSound  "skeleton/melee";
+   PainSound   "skeleton/pain";
+   SeeSound    "skeleton/sight";
+
    HitObituary "$OB_UNDEADHIT";
-   Tag "Revenant";
+   Obituary    "$OB_UNDEAD";
+   Tag         "Revenant";
 
    +FLOORCLIP
    +MISSILEMORE

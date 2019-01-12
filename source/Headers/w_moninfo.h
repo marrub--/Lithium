@@ -2,9 +2,12 @@
 // Edit only if you aren't going to recompile.
 
 enum {
-   mif_full = 1 << 0
+   mif_full = 1 << 0,
+   mif_angelic = 1 << 1,
+   mif_dark = 1 << 2,
 };
 
+StrEntON
 static struct monster_info const monsterinfo[] = {
    {Exp_ZombieMan,Score_ZombieMan,mtype_zombie,"ZombieMan"},
    {Exp_ShotgunGuy,Score_ShotgunGuy,mtype_zombie,"ShotgunGuy"},
@@ -52,6 +55,7 @@ static struct monster_info const monsterinfo[] = {
    {2000,0,mtype_phantom,"Makarov"},
    {3000,0,mtype_phantom,"Isaac"},
    {0,0,mtype_cyberdemon,"Steggles"},
+   {Exp_CyberDemon,Score_CyberDemon,mtype_angel,"Archangel", mif_angelic},
    {Exp_Imp,Score_Imp,mtype_imp,"Howler", mif_full},
    {Exp_Imp,Score_Imp,mtype_imp,"SoulHarvester", mif_full},
    {Exp_Demon,Score_Demon,mtype_demon,"Satyr", mif_full},
@@ -122,5 +126,6 @@ static struct monster_info const monsterinfo[] = {
    {Exp_HellKnight,Score_HellKnight,mtype_hellknight,"Deepone"},
    {Exp_BaronOfHell,Score_BaronOfHell,mtype_baron,"Deeptwo"},
 };
+StrEntOFF
 
 // EOF

@@ -6,9 +6,9 @@ class Lith_JamesRevolverTrail : Actor
 {
    default
    {
+      Alpha       0.8;
       RenderStyle "Add";
-      Scale 0.7;
-      Alpha 0.8;
+      Scale       0.7;
 
       +NOINTERACTION
    }
@@ -25,15 +25,15 @@ class Lith_JamesRevolverBullet : FastProjectile
 {
    default
    {
-      MissileType "Lith_JamesRevolverTrail";
-      RenderStyle "Translucent";
-      DamageType "Bullet";
-      Alpha 0.9;
-      Scale 0.8;
-      Radius 20;
-      Height 4;
-      DamageFunction 10 * random(1, 4);
-      Speed 64;
+      Alpha          0.9;
+      DamageFunction 10 * Random(1, 4);
+      DamageType     "Bullet";
+      Height         4;
+      MissileType    "Lith_JamesRevolverTrail";
+      Radius         20;
+      RenderStyle    "Translucent";
+      Scale          0.8;
+      Speed          64;
 
       +BLOODSPLATTER
    }
@@ -57,8 +57,9 @@ class Lith_Boss_James : Lith_Phantom;
 
 default
 {
-   Tag "James, Vanagloriam Est";
    Health 1000;
+
+   Tag "James, Vanagloriam Est";
 }
 
 states

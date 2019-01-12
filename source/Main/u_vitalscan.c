@@ -144,8 +144,10 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    }
 
    // Rank
-   if(UData.rank) for(i32 i = 1; i <= UData.rank; i++)
-      PrintSprite(StrParam(":UI:Rank%i", i), 100+ox + i*6,1, 216+oy,1);
+   if(UData.rank) for(i32 i = 0; i < UData.rank; i++) {
+      i32 y = 216 + (i > 4 ? 8 : 0);
+      PrintSprite(StrParam(":UI:Rank%i", i+1), 106+ox + i%5*6,1, y+oy,1);
+   }
 
    // Hit indicator
    if(UData.hdelta && CheckFade(fid_vscan)) {

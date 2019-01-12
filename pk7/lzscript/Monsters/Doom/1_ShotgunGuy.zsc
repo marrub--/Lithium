@@ -21,19 +21,22 @@ class Lith_ShotgunGuy : Lith_Monster replaces ShotgunGuy;
 default
 {
    Lith_Monster.Score Score_ShotgunGuy;
-   Health 35;
-   Radius 20;
-   Height 56;
-   Mass 100;
-   Speed 9;
-   PainChance 170;
+
+   Health           35;
+   Height           56;
+   Mass             100;
    MinMissileChance 150;
-   SeeSound "shotguy/sight";
-   PainSound "shotguy/pain";
-   DeathSound "shotguy/death";
+   PainChance       170;
+   Radius           20;
+   Speed            9;
+
    ActiveSound "shotguy/active";
+   DeathSound  "shotguy/death";
+   PainSound   "shotguy/pain";
+   SeeSound    "shotguy/sight";
+
    Obituary "$OB_SHOTGUY";
-   Tag "Former Sergeant";
+   Tag      "Former Sergeant";
 
    +FLOORCLIP
 }

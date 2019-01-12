@@ -11,20 +11,23 @@ class Lith_Demon : Lith_Monster replaces Demon;
 default
 {
    Lith_Monster.Score Score_Demon;
-   Health 150;
-   PainChance 180;
-   Speed 10;
-   Radius 29;
-   Height 56;
-   Mass 400;
+
+   Health     150;
+   Height     56;
+   Mass       400;
    MeleeRange 52;
-   SeeSound "demon/sight";
-   AttackSound "demon/melee";
-   PainSound "demon/pain";
-   DeathSound "demon/death";
+   PainChance 180;
+   Radius     29;
+   Speed      10;
+
    ActiveSound "demon/active";
+   AttackSound "demon/melee";
+   DeathSound  "demon/death";
+   PainSound   "demon/pain";
+   SeeSound    "demon/sight";
+
    Obituary "$OB_DEMONHIT";
-   Tag "Hell Sergeant";
+   Tag      "Hell Sergeant";
 
    +FLOORCLIP
 }
