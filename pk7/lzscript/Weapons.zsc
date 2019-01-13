@@ -155,13 +155,13 @@ action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y)
 
 action(Weapon) void Lith_A_GunSmoke(float x = 0, float y = 6)
 {
-   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10);
+   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10.0);
    Lith_GunSmoke("Lith_GunSmokeSpawner", x, y);
 }
 
 action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
 {
-   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10);
+   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10.0);
    Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y);
 }
 
