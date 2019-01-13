@@ -154,10 +154,16 @@ action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y)
    {A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);}
 
 action(Weapon) void Lith_A_GunSmoke(float x = 0, float y = 6)
-   {Lith_GunSmoke("Lith_GunSmokeSpawner", x, y);}
+{
+   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10);
+   Lith_GunSmoke("Lith_GunSmokeSpawner", x, y);
+}
 
 action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
-   {Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y);}
+{
+   y -= ((1.0 - GetCrouchFactor(invoker.TID)) * 10);
+   Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y);
+}
 
 action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, float px, float py, float pz, float vx, float vy, float vz)
 {
