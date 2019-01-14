@@ -6,6 +6,7 @@
 
 #include "common.h"
 #include "p_player.h"
+#include "w_monster.h"
 
 #include <stdio.h>
 #include <GDCC.h>
@@ -83,6 +84,12 @@ void Log(char const *fmt, ...)
 }
 
 // Scripts -------------------------------------------------------------------|
+
+script_str ext("ACS") addr("Lith_GiveEXPToMonster")
+void Sc_GiveEXPToMonster(i32 amt)
+{
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
+}
 
 script_str ext("ACS") addr("Lith_GiveMail")
 void Sc_DbgGiveMail(i32 num)

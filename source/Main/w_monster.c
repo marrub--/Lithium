@@ -333,12 +333,6 @@ void PrintMonsterInfo(void)
 
 // Scripts -------------------------------------------------------------------|
 
-script_str ext("ACS") addr("Lith_GiveEXPToMonster")
-void Sc_GiveEXPToMonster(i32 amt)
-{
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
-}
-
 script_str ext("ACS") addr("Lith_GiveMonsterEXP")
 void Sc_GiveMonsterEXP(i32 amt)
 {

@@ -85,7 +85,7 @@ class Lith_CombatRifle : Lith_MWeapon;
 
 default
 {
-   Lith_Weapon.MagSize 40;
+   Lith_Weapon.MagSize 80;
    Tag "Combat Rifle";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
@@ -115,10 +115,12 @@ action(Weapon) void Lith_A_FireRifle()
          A_PlaySound("weapons/rifle/firero", CHAN_7,      ro2);
       }
 
-      if(random(0, 256) < 128)
-         Lith_FireBullets(5.77, 2, -1, 1, FBF_NORANDOM, "Lith_RifleBullet");
-      else for(int i = 0; i < 2; i++)
-         Lith_FireBullets(5.77, 2, -1, 1, FBF_NORANDOM, "Lith_RifleBulletPainless");
+      for(int i = 0; i < 2; i++)
+      {
+         class<Actor> cl = Random(0, 256) < 128 ? "Lith_RifleBullet"
+                                                : "Lith_RifleBulletPainless";
+         Lith_FireBullets(5.77, 2, -1, 1, FBF_NORANDOM, cl);
+      }
    }
    else
    {

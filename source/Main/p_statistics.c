@@ -31,7 +31,7 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
    Stat(LC(LANG "STAT_Upgrades"),   "%i",   p->upgradesowned);
    Stat(LC(LANG "STAT_Items"),      "%i",   p->itemsbought);
    Stat(LC(LANG "STAT_Mail"),       "%i",   p->bip.mailreceived);
-   Stat(LC(LANG "STAT_Time"),       "%li",  p->ticks / 35l);
+   Stat(LC(LANG "STAT_Time"),       "%li",  p->ticks / 35L);
    Stat(LC(LANG "STAT_Boom"),       "%i",   p->spuriousexplosions);
    Stat(LC(LANG "STAT_Brouzouf"),   "%i",   p->brouzouf);
    Stat(LC(LANG "STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
