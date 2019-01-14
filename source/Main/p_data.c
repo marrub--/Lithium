@@ -64,18 +64,20 @@ static void SetPClass(struct player *p)
          ACS_Delay(1);
       }
    }
+
+   p->discrim = P_Discrim(p->pclass);
 }
 
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-bool Lith_ButtonPressed(struct player *p, i32 bt)
+bool P_ButtonPressed(struct player *p, i32 bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
 
 stkcall
-bool Lith_SetPlayerVelocity(struct player *p, k32 velx, k32 vely, k32 velz, bool add)
+bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add)
 {
    if(add) p->velx += velx, p->vely += vely, p->velz += velz;
    else    p->velx  = velx, p->vely  = vely, p->velz  = velz;
@@ -83,20 +85,20 @@ bool Lith_SetPlayerVelocity(struct player *p, k32 velx, k32 vely, k32 velz, bool
    return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, true);
 }
 
-void Lith_ValidatePlayerTID(struct player *p)
+void P_ValidateTID(struct player *p)
 {
    if(ACS_ActivatorTID() == 0) {
       ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-      LogDebug(log_dev, "set ptid from 0 to %i", p->tid);
+      Dbg_Log(log_dev, "set ptid from 0 to %i", p->tid);
    } else if(p->tid != ACS_ActivatorTID()) {
-      LogDebug(log_dev, "set ptid from %i to %i", p->tid, ACS_ActivatorTID());
+      Dbg_Log(log_dev, "set ptid from %i to %i", p->tid, ACS_ActivatorTID());
       p->tid = ACS_ActivatorTID();
    }
 }
 
 // Update all of the player's data.
-script
-void Lith_PlayerUpdateData(struct player *p)
+stkcall
+void P_Dat_PTickPre(struct player *p)
 {
    static i32 const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
       WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
@@ -118,7 +120,7 @@ void Lith_PlayerUpdateData(struct player *p)
    p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
    p->roll  = ACS_GetActorRoll (0) - p->addroll;
 
-   p->pitchf = ((-p->pitch + 0.25) * 2) * pi;
+   p->pitchf = (-p->pitch + 0.25) * 2 * pi;
    p->yawf   = p->yaw * tau - pi;
 
    p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
@@ -147,6 +149,16 @@ void Lith_PlayerUpdateData(struct player *p)
    p->krs = InvNum(so_RedSkull);
    p->kys = InvNum(so_YellowSkull);
    p->kbs = InvNum(so_BlueSkull);
+
+   if(ACS_Timer() > 4)
+   {
+           if(p->health < p->oldhealth) p->healthused += p->oldhealth - p->health;
+      else if(p->health > p->oldhealth) p->healthsum  += p->health    - p->oldhealth;
+
+      if(p->x != p->old.x) p->unitstravelled += fastabs(p->x - p->old.x);
+      if(p->y != p->old.y) p->unitstravelled += fastabs(p->y - p->old.y);
+      if(p->z != p->old.z) p->unitstravelled += fastabs(p->z - p->old.z);
+   }
 }
 
 script
@@ -186,7 +198,7 @@ static void LevelUp(struct player *p, u32 attr[at_max])
 }
 
 stkcall
-void Lith_GiveEXP(struct player *p, u64 amt)
+void P_Lv_GiveEXP(struct player *p, u64 amt)
 {
    struct player_attributes *a = &p->attr;
 
@@ -218,7 +230,7 @@ void Lith_GiveEXP(struct player *p, u64 amt)
 
 // Reset some things on the player when they spawn.
 script
-void Lith_ResetPlayer(struct player *p)
+void P_Init(struct player *p)
 {
    if(!p->wasinit)
    {
@@ -226,7 +238,6 @@ void Lith_ResetPlayer(struct player *p)
 
       p->active = true;
       p->num    = ACS_PlayerNumber();
-      p->bipptr = &p->bip;
 
       SetPClass(p);
       SetupAttributes(p);
@@ -254,7 +265,7 @@ void Lith_ResetPlayer(struct player *p)
 
    // If the map sets the TID early on, it could already be set here.
    p->tid = 0;
-   p->validateTID();
+   P_ValidateTID(p);
 
    if(p->cameratid)  ACS_Thing_Remove(p->cameratid);
    if(p->weathertid) ACS_Thing_Remove(p->weathertid);
@@ -264,7 +275,7 @@ void Lith_ResetPlayer(struct player *p)
    if(dbgflag & dbgf_score) p->score = 0xFFFFFFFFFFFFFFFFll;
 
    // Any linked lists on the player need to be initialized here.
-   p->hudstrlist.free(true);
+   ListDtor(&p->hudstrlist, true);
 
    // pls not exit map with murder thingies out
    // is bad practice
@@ -272,7 +283,7 @@ void Lith_ResetPlayer(struct player *p)
    SetPropK(0, APROP_ViewHeight, p->viewheight);
    InvTake(so_WeaponScopedToken, 999);
 
-   Lith_PlayerResetCBIGUI(p);
+   P_CBI_PMinit(p);
 
    p->frozen     = 0;
    p->semifrozen = 0;
@@ -295,18 +306,18 @@ void Lith_ResetPlayer(struct player *p)
 
    p->attr.lvupstr[0] = '\0';
 
-   if(!p->bip.init) Lith_PlayerInitBIP(p);
+   if(!p->bip.init) P_BIP_PInit(p);
 
-   if(!p->upgrinit) Lith_PlayerInitUpgrades(p);
-   else             Lith_PlayerReinitUpgrades(p);
+   if(!p->upgrinit) P_Upg_PInit(p);
+   else             P_Upg_PMInit(p);
 
    #if LITHIUM
-   if(!p->invinit) Lith_PlayerInitInventory(p);
+   if(!p->invinit) P_Inv_PInit(p);
    #endif
 
    if(!p->wasinit)
    {
-      p->logB(1, Lith_Version " :: Compiled %s", __DATE__);
+      p->logB(1, Version " :: Compiled %s", __DATE__);
 
       if(dbglevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
@@ -318,7 +329,7 @@ void Lith_ResetPlayer(struct player *p)
          p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
       }
 
-      p->deliverMail(st_mail_intro);
+      P_BIP_GiveMail(p, st_mail_intro);
 
       p->wasinit = true;
    }
@@ -336,7 +347,7 @@ void Lith_ResetPlayer(struct player *p)
 }
 
 stkcall
-void Lith_PlayerUpdateStats(struct player *p)
+void P_Dat_PTickPst(struct player *p)
 {
    k32 boost = 1 + p->jumpboost;
 
@@ -355,7 +366,7 @@ void Lith_PlayerUpdateStats(struct player *p)
 script_str ext("ACS") addr("Lith_KeyDown")
 void Sc_KeyDown(i32 pnum, i32 ch)
 {
-   withplayer(&players[pnum])
+   with_player(&players[pnum])
       if(p->tbptr + 1 < countof(p->txtbuf))
          p->txtbuf[p->tbptr++] = ch;
 }

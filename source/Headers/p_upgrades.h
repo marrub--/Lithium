@@ -13,10 +13,10 @@
 #include "p_shopdef.h"
 #include "m_list.h"
 
-#define Lith_UpgrBuy(p, upgr, ...) \
-   p->buy(&(upgr)->info->shopdef, (upgr), cLANG "UPGRADE_TITLE_%S", __VA_ARGS__)
+#define P_Upg_Buy(p, upgr, ...) \
+   P_Shop_Buy(p, &(upgr)->info->shopdef, (upgr), cLANG "UPGRADE_TITLE_%S", __VA_ARGS__)
 
-#define ForUpgrade(name) \
+#define for_upgrade(name) \
    for(i32 _i = 0; _i < p->upgrmax; _i++) \
       __with(struct upgrade *name = &p->upgrades[_i];)
 
@@ -34,14 +34,14 @@
 #define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #include "u_func.h"
 
-script void Lith_PlayerInitUpgrades(struct player *p);
-void Lith_PlayerDeallocUpgrades(struct player *p);
-void Lith_PlayerDeinitUpgrades(struct player *p);
-void Lith_PlayerReinitUpgrades(struct player *p);
+script void P_Upg_PInit(struct player *p);
+void P_Upg_PQuit(struct player *p);
+void P_Upg_PDeinit(struct player *p);
+void P_Upg_PMInit(struct player *p);
 
-void Lith_PlayerEnterUpgrades(struct player *p);
+void P_Upg_Enter(struct player *p);
 
-struct upgradeinfo *Lith_UpgradeRegister(struct upgradeinfo const *upgr);
+struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr);
 
 // Extern Objects ------------------------------------------------------------|
 

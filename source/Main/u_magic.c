@@ -42,8 +42,8 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
 {
    struct gui_state *g = &UData.gst;
 
-   Lith_GUI_Begin(g, 320, 240);
-   Lith_GUI_UpdateState(g, p);
+   G_Begin(g, 320, 240);
+   G_UpdateState(g, p);
 
    PrintSprite(sp_UI_MagicSelectBack, 0,1, 0,1);
 
@@ -74,11 +74,11 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
 
       char name[128]; LanguageCV(name, LANG "INFO_SHORT_%s", m->name);
 
-      if(Lith_GUI_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
+      if(G_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
          GiveMagic(m);
    }
 
-   Lith_GUI_End(g, gui_curs_outline);
+   G_End(g, gui_curs_outline);
 }
 
 script
@@ -105,7 +105,7 @@ static void SetMagicUI(struct player *p, bool on)
       UData.gst.cx = 320/2;
       UData.gst.cy = 240/2;
 
-      Lith_GUI_Init(&UData.gst);
+      G_Init(&UData.gst);
    }
    else if(!on && UData.ui)
    {
@@ -152,7 +152,7 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
       SetMembI(tid, sm_UserX, x);
       SetMembI(tid, sm_UserY, y);
       SetPropK(tid, APROP_Alpha, manaperc / 2);
-      Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
       GivePlayerZ(tid, p);
    }
 }
@@ -182,7 +182,7 @@ void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_SetMagicUI")
 void Sc_SetMagicUI(bool on)
 {
-   withplayer(LocalPlayer) SetMagicUI(p, on);
+   with_player(LocalPlayer) SetMagicUI(p, on);
 }
 
 // EOF

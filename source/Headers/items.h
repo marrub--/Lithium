@@ -49,23 +49,21 @@ struct bagitem
    struct container content;
 };
 
-void Lith_PlayerInitInventory(struct player *p);
-void Lith_PlayerDeallocInventory(struct player *p);
+optargs(1) void P_Item_Init(struct item *item, struct itemdata const *data);
+optargs(1) struct item *P_Item_New(struct itemdata const *data);
+void P_Item_Unlink(struct item *item);
 
-optargs(1) void Lith_Item_Init(struct item *item, struct itemdata const *data);
-optargs(1) struct item *Lith_Item_New(struct itemdata const *data);
-void Lith_Item_Unlink(struct item *item);
+script void P_Item_Destroy(struct item *item);
+script bool P_Item_Use(struct item *item);
+script void P_Item_Place(struct item *item, struct container *cont);
 
-script void Lith_Item_Destroy(struct item *item);
-script bool Lith_Item_Use(struct item *item);
-script void Lith_Item_Place(struct item *item, struct container *cont);
+optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data);
 
-optargs(1) struct bagitem *Lith_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data);
+void P_Inv_PInit(struct player *p);
+void P_Inv_PQuit(struct player *p);
 
-bool Lith_ItemPlace(struct container *cont, struct item *item, i32 x, i32 y);
-
-script bool Lith_ItemPlaceFirst(struct container *cont, struct item *item);
-
-bool Lith_PlayerAddItem(struct player *p, struct item *item);
+bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y);
+script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);
+bool P_Inv_Add(struct player *p, struct item *item);
 
 #endif

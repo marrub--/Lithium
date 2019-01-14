@@ -47,7 +47,7 @@ static void LogF(struct player *p, struct logfdt *lf)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_LogB(struct player *p, i32 levl, char const *fmt, ...)
+void P_Log_Both(struct player *p, i32 levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
@@ -64,7 +64,7 @@ void Lith_LogB(struct player *p, i32 levl, char const *fmt, ...)
    LogH(p, &ld);
 }
 
-void Lith_LogH(struct player *p, i32 levl, char const *fmt, ...)
+void P_Log_HUDs(struct player *p, i32 levl, char const *fmt, ...)
 {
    struct logdat ld = {};
 
@@ -80,7 +80,7 @@ void Lith_LogH(struct player *p, i32 levl, char const *fmt, ...)
    LogH(p, &ld);
 }
 
-void Lith_LogF(struct player *p, char const *fmt, ...)
+void P_Log_Full(struct player *p, char const *fmt, ...)
 {
    struct logfdt lf = {};
 
@@ -96,10 +96,10 @@ void Lith_LogF(struct player *p, char const *fmt, ...)
    LogF(p, &lf);
 }
 
-void Lith_PlayerLogEntry(struct player *p)
+void P_Log_Entry(struct player *p)
 {
    struct logmap *lm = nil;
-   i32 lnum = world.mapnum;
+   i32 lnum = MapNum;
 
    for(i32 i = 0; i < p->log.mapsC; i++)
       if(p->log.mapsV[i].lnum == lnum) {lm = &p->log.mapsV[i]; break;}
@@ -114,11 +114,11 @@ void Lith_PlayerLogEntry(struct player *p)
 
    p->log.curmap = lm;
 
-   p->logF(LC(LANG "ENTER_FMT"), lm->name, world.canontime);
+   p->logF(LC(LANG "ENTER_FMT"), lm->name, CanonTime(ct_full));
 }
 
 script
-void Lith_PlayerUpdateLog(struct player *p)
+void P_Log_PTick(struct player *p)
 {
    if(p->log.curtime == 0)
    {
@@ -135,37 +135,37 @@ void Lith_PlayerUpdateLog(struct player *p)
       if(p->log.hudV[i].ftim) p->log.hudV[i].ftim--;
 }
 
-void Lith_CBITab_Log(struct gui_state *g, struct player *p)
+void P_CBI_TabLog(struct gui_state *g, struct player *p)
 {
    static i32 const ht = 10;
 
-   if(Lith_GUI_Button(g, .x = 25, 38, Pre(btnprev)))
+   if(G_Button(g, .x = 25, 38, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;
 
-   if(Lith_GUI_Button(g, .x = 25 + gui_p.btnprev.w, 38, Pre(btnnext)))
+   if(G_Button(g, .x = 25 + gui_p.btnprev.w, 38, Pre(btnnext)))
       if(++CBIState(g)->logsel >= p->log.mapsC) CBIState(g)->logsel = 0;
 
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
    PrintText_str(lm->name, s_cbifont, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
+   G_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
 
    for(i32 i = 0; i < lm->dataC; i++)
    {
       i32 const y = ht * i;
 
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->logscr, y, ht)) continue;
+      if(G_ScrollOcclude(g, &CBIState(g)->logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
       PrintText_str(lm->dataV[i].inf, s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
-   Lith_GUI_ScrollEnd(g, &CBIState(g)->logscr);
+   G_ScrollEnd(g, &CBIState(g)->logscr);
 }
 
 script
-void Lith_HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
+void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
 {
    if(p->getCVarI(sc_hud_showlog))
    {
@@ -210,7 +210,7 @@ void Sc_Log(i32 levl, i32 type)
 
    if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
-   withplayer(LocalPlayer) switch(type) {
+   with_player(LocalPlayer) switch(type) {
    case msg_ammo: if(p->getCVarI(sc_player_ammolog))
    case msg_huds: p->logH(levl, "%S", name); break;
    case msg_full: p->logF(      "%S", name); break;

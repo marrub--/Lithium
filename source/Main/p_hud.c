@@ -10,7 +10,7 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
+void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 {
    if(p->getCVarI(sc_hud_showweapons))
       for(i32 i = 1; i < SLOT_MAX; i++)
@@ -33,7 +33,7 @@ void Lith_HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-void Lith_HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str cr, i32 x, i32 xa, i32 y, i32 ya)
+void HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str cr, i32 x, i32 xa, i32 y, i32 ya)
 {
    if(p->getCVarI(sc_hud_showscore))
    {
@@ -75,7 +75,7 @@ void Lith_HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str c
    }
 }
 
-void Lith_HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
+void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
 {
    #define Inc (horz ? (x -= 10) : (y += 10))
    if(p->krs) PrintSpriteA(sp_HUD_H_KS1, x,2, y,1, a), Inc;

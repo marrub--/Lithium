@@ -11,7 +11,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-i32 Lith_TBufProc(struct token *tok)
+i32 TBufProc(struct token *tok)
 {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
@@ -23,7 +23,7 @@ i32 Lith_TBufProc(struct token *tok)
 }
 
 stkcall
-i32 Lith_TBufProcL(struct token *tok)
+i32 TBufProcL(struct token *tok)
 {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
@@ -33,14 +33,14 @@ i32 Lith_TBufProcL(struct token *tok)
    return tokproc_next;
 }
 
-void Lith_TBufCtor(struct tokbuf *tb)
+void TBufCtor(struct tokbuf *tb)
 {
    tb->orig.line = 1;
    tb->toks = Calloc(tb->bend, sizeof *tb->toks);
-   if(!tb->tokProcess) tb->tokProcess = Lith_TBufProc;
+   if(!tb->tokProcess) tb->tokProcess = TBufProc;
 }
 
-void Lith_TBufDtor(struct tokbuf *tb)
+void TBufDtor(struct tokbuf *tb)
 {
    if(tb->toks) for(i32 i = 0; i < tb->bend; i++)
       Vec_Clear(tb->toks[i].text);
@@ -48,7 +48,7 @@ void Lith_TBufDtor(struct tokbuf *tb)
    Dalloc(tb->toks);
 }
 
-struct token *Lith_TBufGet(struct tokbuf *tb)
+struct token *TBufGet(struct tokbuf *tb)
 {
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
@@ -71,7 +71,7 @@ struct token *Lith_TBufGet(struct tokbuf *tb)
    for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++)
    {
    skip:
-      Lith_ParseToken(tb->fp, &tb->toks[tb->tend], &tb->orig);
+      TokParse(tb->fp, &tb->toks[tb->tend], &tb->orig);
 
       switch(tb->tokProcess(&tb->toks[tb->tend])) {
       case tokproc_next: break;
@@ -84,28 +84,28 @@ done:
    return &tb->toks[tb->tpos];
 }
 
-struct token *Lith_TBufPeek(struct tokbuf *tb)
+struct token *TBufPeek(struct tokbuf *tb)
 {
-   Lith_TBufGet(tb);
-   return Lith_TBufUnGet(tb);
+   TBufGet(tb);
+   return TBufUnGet(tb);
 }
 
 stkcall
-struct token *Lith_TBufUnGet(struct tokbuf *tb)
+struct token *TBufUnGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos--];
 }
 
 stkcall
-struct token *Lith_TBufReGet(struct tokbuf *tb)
+struct token *TBufReGet(struct tokbuf *tb)
 {
    return &tb->toks[tb->tpos];
 }
 
-bool Lith_TBufDrop(struct tokbuf *tb, i32 t)
+bool TBufDrop(struct tokbuf *tb, i32 t)
 {
-   if(Lith_TBufGet(tb)->type != t)
-      {Lith_TBufUnGet(tb); return false;}
+   if(TBufGet(tb)->type != t)
+      {TBufUnGet(tb); return false;}
    else
       return true;
 }

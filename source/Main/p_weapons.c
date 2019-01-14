@@ -34,38 +34,32 @@ static void WeaponGrab(struct player *p, struct weaponinfo const *info)
    else                                ACS_LocalAmbientSound(ss_marathon_pickup, 127);
 
    switch(info->slot) {
-   default: Lith_FadeFlash(255, 255, 255, 0.5, 0.4); break;
-   case 3:  Lith_FadeFlash(0,   255, 0,   0.5, 0.5); break;
-   case 4:  Lith_FadeFlash(255, 255, 0,   0.5, 0.5); break;
-   case 5:  Lith_FadeFlash(255, 64,  0,   0.5, 0.6); break;
-   case 6:  Lith_FadeFlash(0,   0,   255, 0.5, 0.6); break;
-   case 7:  Lith_FadeFlash(255, 0,   0,   0.5, 0.7); break;
+   default: FadeFlash(255, 255, 255, 0.5, 0.4); break;
+   case 3:  FadeFlash(0,   255, 0,   0.5, 0.5); break;
+   case 4:  FadeFlash(255, 255, 0,   0.5, 0.5); break;
+   case 5:  FadeFlash(255, 64,  0,   0.5, 0.6); break;
+   case 6:  FadeFlash(0,   0,   255, 0.5, 0.6); break;
+   case 7:  FadeFlash(255, 0,   0,   0.5, 0.7); break;
    }
 }
 
-static void Lith_PickupScore(struct player *p, i32 parm)
+static void PickupScore(struct player *p, i32 parm)
 {
-   extern void Lith_SellMessage(struct player *p, struct weaponinfo const *info, i96 score);
+   extern void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score);
 
    struct weaponinfo const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
 
    GiveWeaponItem(parm, info->slot);
-   score = p->giveScore(score);
+   score = P_Scr_Give(p, score);
 
-   Lith_SellMessage(p, info, score);
+   P_Log_SellWeapon(p, info, score);
 }
 
 // Extern Functions ----------------------------------------------------------|
 
-stkcall
-i32 Lith_PlayerCurWeaponType(struct player *p)
-{
-   return p->weapon.cur->info->type;
-}
-
-void Lith_GInit_Weapon(void)
+void Wep_GInit(void)
 {
    for(i32 i = 0; i < weapon_max; i++)
    {
@@ -76,7 +70,7 @@ void Lith_GInit_Weapon(void)
 
 // Update information on what weapons we have.
 script
-void Lith_PlayerPreWeapons(struct player *p)
+void P_Wep_PTickPre(struct player *p)
 {
    struct weapondata *w = &p->weapon;
 
@@ -154,9 +148,9 @@ void Lith_PlayerPreWeapons(struct player *p)
 }
 
 script
-void Lith_PlayerUpdateWeapons(struct player *p)
+void P_Wep_PTick(struct player *p)
 {
-   if(!Lith_IsPaused)
+   if(!Paused)
    {
       i32 heat = InvNum(so_SMGHeat);
            if(heat < 100) InvTake(so_SMGHeat, 5);
@@ -179,7 +173,7 @@ void Lith_PlayerUpdateWeapons(struct player *p)
 
    SetSize(320, 240);
 
-   switch(p->weapontype)
+   switch(P_Wep_CurType(p))
    {
    case weapon_c_fist:
       PrintTextA_str(L(st_mana_charge), s_cbifont, CR_BRICK, 160,0, 100,0, 0.5);
@@ -202,16 +196,16 @@ void Lith_PlayerUpdateWeapons(struct player *p)
 script_str ext("ACS") addr("Lith_WeaponPickup")
 bool Sc_WeaponPickup(i32 name)
 {
-   extern void Lith_PickupMessage(struct player *p, struct weaponinfo const *info);
-   extern i32 Lith_WeaponFromName(struct player *p, i32 name);
+   extern void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
+   extern i32 P_Wep_FromName(struct player *p, i32 name);
 
    struct player *p = LocalPlayer;
-   if(NoPlayer(p)) return false;
+   if(P_None(p)) return false;
 
    bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
-   parm = Lith_WeaponFromName(p, name);
+   parm = P_Wep_FromName(p, name);
 
    if(parm >= weapon_max || parm < weapon_min)
       return true;
@@ -222,7 +216,7 @@ bool Sc_WeaponPickup(i32 name)
    {
       if(!weaponstay) {
          WeaponGrab(p, info);
-         Lith_PickupScore(p, parm);
+         PickupScore(p, parm);
       }
 
       return !weaponstay;
@@ -233,10 +227,10 @@ bool Sc_WeaponPickup(i32 name)
 
       p->weaponsheld++;
       bip_name_t tag; lstrcpy_str(tag, info->name);
-      p->bipUnlock(tag);
+      P_BIP_Unlock(p, tag);
 
       GiveWeaponItem(parm, info->slot);
-      Lith_PickupMessage(p, info);
+      P_Log_Weapon(p, info);
       InvGive(info->classname, 1);
 
       return !weaponstay;
@@ -275,7 +269,7 @@ i32 Sc_ChargeFistDamage(void)
 script_str ext("ACS") addr("Lith_AmmoRunOut")
 k32 Sc_AmmoRunOut(bool ro, k32 mul)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       struct invweapon const *wep = p->weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
@@ -335,7 +329,7 @@ i32 Sc_GetWRF(void)
 
    i32 flags = 0;
 
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       if(p->semifrozen)
          flags |= WRF_NOFIRE;
@@ -352,7 +346,7 @@ void Sc_PoisonFXTicker(void)
 {
    for(i32 i = 0; i < 17; i++)
    {
-      Lith_PausableTick();
+      PausableTick();
 
       if(InvNum(so_PoisonFXReset))
       {
@@ -378,7 +372,7 @@ void Sc_PoisonFXTicker(void)
 script_str ext("ACS") addr("Lith_RecoilUp")
 void Sc_RecoilUp(k32 amount)
 {
-   withplayer(LocalPlayer) p->extrpitch += amount / 180.lk;
+   with_player(LocalPlayer) p->extrpitch += amount / 180.lk;
 }
 #endif
 

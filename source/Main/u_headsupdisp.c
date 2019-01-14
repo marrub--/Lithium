@@ -38,7 +38,7 @@ static void HUD_Ammo(struct player *p)
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
          txt = st_out_green;
       else
-         txt = StrParam("\C[Lith_Green]%i/%i", wep->magmax - wep->magcur, wep->magmax);
+         txt = StrParam(CrGreen "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextX_str(txt, s_lhudfont, 0, 224,1, 229-y,0);
    }
 
@@ -54,7 +54,7 @@ static void HUD_Ammo(struct player *p)
          x = -59;
       }
 
-      PrintTextFmt("\C[Lith_Green]%i", wep->ammocur);
+      PrintTextFmt(CrGreen "%i", wep->ammocur);
       PrintTextX(s_lhudfont, 0, x+224,1, 229-y,0);
    }
 
@@ -79,7 +79,7 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 
    PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
 
-   PrintTextFmt("\C[Lith_Green]%i", p->health);
+   PrintTextFmt(CrGreen "%i", p->health);
    PrintTextX(s_lhudfont, 0, 34,1, 231,0);
 
    PrintSprite(sp_HUD_VIT, 2,1, 237,2);
@@ -142,16 +142,16 @@ void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->indialogue) return;
 
-   Lith_HUD_Log(p, CR_GREEN, 0, 0);
+   HUD_Log(p, CR_GREEN, 0, 0);
 
    #if LITHIUM
-   Lith_HUD_KeyInd(p, 320, 20, true, 0.8);
-   Lith_HUD_Score(p, "%s\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
+   HUD_KeyInd(p, 320, 20, true, 0.8);
+   HUD_Score(p, "%s\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_Bar, 279,2, 238,2);
 
-   Lith_HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, s"k", 282, 237);
+   HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, s"k", 282, 237);
 
    // Status
    HUD_Ammo(p);

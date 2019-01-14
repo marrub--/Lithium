@@ -296,9 +296,4 @@ struct gui_presets const gui_p = {
    },
 };
 
-struct gui_presets const *Lith_GUIPreExtern(void)
-{
-   return &gui_p;
-}
-
 // EOF

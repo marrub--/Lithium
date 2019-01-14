@@ -62,8 +62,8 @@ void Sc_Obituary(void)
    *pt = '\0';
 
    if(obit != s_NIL) {
-      LogDebug(log_dev, "%s", out);
-      Lith_ForPlayer() p->logB(1, "%s", out);
+      Dbg_Log(log_dev, "%s", out);
+      for_player() p->logB(1, "%s", out);
    }
 }
 #endif

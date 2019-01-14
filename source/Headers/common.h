@@ -22,6 +22,8 @@
 #include "m_stab.h"
 #include "m_char.h"
 
+#define LineHash ((u32)__LINE__ * FileHash)
+
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
@@ -32,10 +34,10 @@
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #ifndef NDEBUG
-#define LogDebug(level, ...) \
+#define Dbg_Log(level, ...) \
    do if(dbglevel & (level)) Log(c"" #level ": " __VA_ARGS__); while(0)
 #else
-#define LogDebug(...)
+#define Dbg_Log(...)
 #endif
 
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
@@ -65,16 +67,16 @@
 #define GetZ ACS_GetActorZ
 
 #if LITHIUM
-#define Lith_IsPaused ServCallI(sm_GetPaused)
-#define Lith_PausableTick() do ACS_Delay(1); while(Lith_IsPaused)
+#define Paused ServCallI(sm_GetPaused)
+#define PausableTick() do ACS_Delay(1); while(Paused)
 
 #define CVAR  "lith_"
 #define DCVAR "__lith_"
 #define LANG  "LITH_"
 #define OBJ   "Lith_"
 #else
-#define Lith_IsPaused false
-#define Lith_PausableTick()
+#define Paused false
+#define PausableTick()
 
 #define OBJ   "Dt"
 #define CVAR  "dtap_"
@@ -100,19 +102,23 @@
 #define DrawCallK(...) SCallK(sm_Draw, __VA_ARGS__)
 #define DrawCallS(...) SCallS(sm_Draw, __VA_ARGS__)
 
-#define DebugStat(...) \
-   (dbglevel & log_devh ? Lith_DebugStat(__VA_ARGS__) : (void)0)
+#define Dbg_Stat(...) \
+   (dbglevel & log_devh ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
 
-#define DebugNote(...) \
-   (dbglevel & log_devh ? Lith_DebugNote(__VA_ARGS__) : (void)0)
+#define Dbg_Note(...) \
+   (dbglevel & log_devh ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
 
-#define InvNum  ACS_CheckInventory
-#define InvMax(arg) ACS_GetMaxInventory(0, arg)
-#define InvTake ACS_TakeInventory
 #define InvGive ACS_GiveInventory
+#define InvMax(arg) ACS_GetMaxInventory(0, arg)
+#define InvNum  ACS_CheckInventory
+#define InvTake ACS_TakeInventory
 
 #define StrEntON  _Pragma("GDCC STRENT_LITERAL ON")
 #define StrEntOFF _Pragma("GDCC STRENT_LITERAL OFF")
+
+#define CrBlue  "\C[Lith_Blue]"
+#define CrGreen "\C[Lith_Green]"
+#define CrRed   "\C[Lith_Red]"
 
 // Types ---------------------------------------------------------------------|
 
@@ -140,21 +146,19 @@ enum {
 
 // Extern Functions ----------------------------------------------------------|
 
+stkcall void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
+script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
+script optargs(1) i32 PtrPlayerNumber(i32 tid, i32 ptr);
+script optargs(1) bool PtrValid(i32 tid, i32 ptr);
+script optargs(2) bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags);
+stkcall i32  PtrInvNum(i32 tid, str item);
+stkcall void PtrInvGive(i32 tid, str item, i32 amount);
+stkcall void PtrInvTake(i32 tid, str item, i32 amount);
+stkcall void PtrInvSet (i32 tid, str item, i32 amount);
+void Dbg_Stat_Impl(char const *fmt, ...);
+void Dbg_Note_Impl(char const *fmt, ...);
+script void Dbg_PrintMem(void const *data, size_t size);
 void Log(char const *fmt, ...);
-
-script void Lith_PrintMem(void const *data, size_t size);
-
-stkcall void Lith_FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
-script optargs(1) i32 Lith_GetTID(i32 tid, i32 ptr);
-script optargs(1) i32 Lith_GetPlayerNumber(i32 tid, i32 ptr);
-script optargs(1) bool Lith_ValidPointer(i32 tid, i32 ptr);
-script optargs(2) bool Lith_SetPointer(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags);
-stkcall i32 Lith_CheckActorInventory(i32 tid, str item);
-stkcall void Lith_GiveActorInventory(i32 tid, str item, i32 amount);
-stkcall void Lith_TakeActorInventory(i32 tid, str item, i32 amount);
-stkcall void Lith_SetActorInventory (i32 tid, str item, i32 amount);
-void Lith_DebugStat(char const *fmt, ...);
-void Lith_DebugNote(char const *fmt, ...);
 
 // Extern Objects ------------------------------------------------------------|
 

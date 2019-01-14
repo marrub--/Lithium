@@ -16,11 +16,11 @@ static str const upgrcateg[UC_MAX] = {
 
 static void GUIUpgradesList(struct gui_state *g, struct player *p)
 {
-   if(Lith_GUI_Button(g, .x = 90, 213, Pre(btnprev)))
+   if(G_Button(g, .x = 90, 213, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
 
-   if(Lith_GUI_Button(g, .x = 90 + gui_p.btnprev.w, 213, Pre(btnnext)))
+   if(G_Button(g, .x = 90 + gui_p.btnprev.w, 213, Pre(btnnext)))
       if(CBIState(g)->upgrfilter++ >= UC_MAX)
          CBIState(g)->upgrfilter = 0;
 
@@ -40,7 +40,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       PrintTextStr(st_filter_all);
    PrintText(s_cbifont, CR_WHITE, 15,1, 215,1);
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
+   G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
    i32 curcategory = -1;
 
@@ -59,11 +59,11 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
 
       y += gui_p.btnlist.h;
 
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
+      if(G_ScrollOcclude(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
          continue;
 
       char const *color;
-      if(!upgr->owned && !p->canBuy(&upgr->info->shopdef, upgr))
+      if(!upgr->owned && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr))
          color = "u";
       else switch(upgr->info->key)
       {
@@ -80,11 +80,11 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
+      if(G_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
          *upgrsel = i;
    }
 
-   Lith_GUI_ScrollEnd(g, &CBIState(g)->upgrscr);
+   G_ScrollEnd(g, &CBIState(g)->upgrscr);
 }
 
 static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct upgrade *upgr)
@@ -132,7 +132,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       if(upgr->active) {chk = upgr->info->scoreadd > 0; op = s"Disabling";} // TODO
       else             {chk = upgr->info->scoreadd < 0; op = s"Enabling" ;} // TODO
 
-      i32 perc = abs(ceilk(100.0 * upgr->info->scoreadd));
+      i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
@@ -156,7 +156,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(p->getCost(&upgr->info->shopdef)), mark);
+   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
    else                 cost = L(st_free);
 
    PrintText_str(cost, s_cbifont, CR_WHITE, 111,1, 30,1);
@@ -177,14 +177,14 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
 
 static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr)
 {
-   if(Lith_GUI_Button(g, LC(LANG "BUY"), 111, 205, !p->canBuy(&upgr->info->shopdef, upgr)))
-      Lith_UpgrBuy(p, upgr, false);
+   if(G_Button(g, LC(LANG "BUY"), 111, 205, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)))
+      P_Upg_Buy(p, upgr, false);
 
-   if(Lith_GUI_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !upgr->canUse(p)))
-      upgr->toggle(p);
+   if(G_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !P_Upg_CanActivate(p, upgr)))
+      P_Upg_Toggle(p, upgr);
 }
 
-void Lith_CBITab_Upgrades(struct gui_state *g, struct player *p)
+void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)
 {
    GUIUpgradesList(g, p);
 

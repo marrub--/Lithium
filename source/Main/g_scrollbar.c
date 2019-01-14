@@ -9,7 +9,7 @@
 
 // This function is excessively commented in case I need to change it.
 // Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
-void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a)
+void G_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a)
 {
    struct gui_pre_scr const *pre = a->preset ? a->preset : &gui_p.scrdef;
    struct gui_scr *scr = a->st;
@@ -27,7 +27,7 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    i32 y = a->y;              // base y to draw from
 
    // check collision - height is minus caps, and y is offset by the top cap
-   Lith_GUI_Auto(g, id, x - pre->scrlw, y + caph, pre->scrlw, h);
+   G_Auto(g, id, x - pre->scrlw, y + caph, pre->scrlw, h);
 
    // add offset
    x += g->ox;
@@ -101,7 +101,7 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    // draw top cap
    __with(char cap[64];)
    {
-      Lith_GUI_Prefix(g, cap, pre, capS);
+      G_Prefix(g, cap, pre, capS);
       PrintSprite(l_strdup(cap), x,2, y,1);
    }
    y += caph;
@@ -109,7 +109,7 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    // draw middle of bar
    __with(char scrl[64];)
    {
-      Lith_GUI_Prefix(g, scrl, pre, scrl);
+      G_Prefix(g, scrl, pre, scrl);
       str scrls = l_strdup(scrl);
       for(i32 i = 0; i < blocks; i++)
       {
@@ -121,7 +121,7 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    // draw bottom cap
    __with(char cap[64];)
    {
-      Lith_GUI_Prefix(g, cap, pre, capE);
+      G_Prefix(g, cap, pre, capE);
       if(cap[0]) PrintSprite(l_strdup(cap), x,2, y,1);
    }
 
@@ -131,8 +131,8 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    // draw scroller
    __with(char gfx[64];)
    {
-      if(g->hot == id || g->active == id) Lith_GUI_Prefix(g, gfx, pre, notchhot);
-      else                                Lith_GUI_Prefix(g, gfx, pre, notchgfx);
+      if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
+      else                                G_Prefix(g, gfx, pre, notchgfx);
 
       str gfxs = l_strdup(gfx);
       for(i32 i = 0; i < notches; i++)
@@ -147,20 +147,20 @@ void Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr c
    g->oy += scr->oy;
 
    // setup clip
-   Lith_GUI_Clip(g, x, ory, a->w, realh, a->ww);
+   G_Clip(g, x, ory, a->w, realh, a->ww);
 }
 
-void Lith_GUI_ScrollEnd(struct gui_state *g, struct gui_scr *scr)
+void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr)
 {
    // reset offsets
    g->ox -= scr->ox;
    g->oy -= scr->oy;
 
    // reset clip
-   Lith_GUI_ClipRelease(g);
+   G_ClipRelease(g);
 }
 
-bool Lith_GUI_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h)
+bool G_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h)
 {
    return y > scr->occludeE || (h && (y + h) - scr->occludeS < 0);
 }

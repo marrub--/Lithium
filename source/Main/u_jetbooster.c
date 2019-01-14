@@ -28,13 +28,13 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
 
    if(p->frozen) return;
 
-   if(p->buttonPressed(BT_SPEED) && !p->onground && UData.charge >= CHARGE_MAX)
+   if(P_ButtonPressed(p, BT_SPEED) && !p->onground && UData.charge >= CHARGE_MAX)
    {
       k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
       ACS_PlaySound(0, ss_player_rocketboost);
       InvGive(so_RocketBooster, 1);
-      p->setVel(p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
+      P_SetVel(p, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
 
       UData.charge = 0;
       UData_ReflexWetw(p->getUpgr(UPGR_ReflexWetw)).leaped = 0;

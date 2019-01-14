@@ -26,7 +26,7 @@ if(p->num == 0) {
 Category("GUI");
 Float("Horizontal cursor speed", "x", sc_gui_xmul, 0.1, 2.0);
 Float("Vertical cursor speed",   "x", sc_gui_ymul, 0.1, 2.0);
-Enum("Color theme",                   sc_gui_theme,  0, cbi_theme_max-1, "%s", Lith_ThemeName(set));
+Enum("Color theme",                   sc_gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
 Enum("Cursor",                        sc_gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
 #if LITHIUM
 Enum("Japanese font",                 sc_gui_jpfont, 0, font_num-1, "%s", FontName(set));
@@ -197,7 +197,7 @@ static char const *FontName(i32 num)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
+void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 {
    i32 y = 0;
 
@@ -214,7 +214,7 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 #define FromUI
 #include "p_settings.c"
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->settingscr, 15, 30, 280, 192, y);
+   G_ScrollBegin(g, &CBIState(g)->settingscr, 15, 30, 280, 192, y);
 
    y = 0;
 
@@ -226,7 +226,7 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Category(name) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
       { \
          static str const text = s"" name; \
          PrintText_str(text, s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
@@ -236,11 +236,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Bool(label, cvar) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(bool on = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
+         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(cvar, !on); \
       } \
       y += 10; \
@@ -248,11 +248,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Float(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(k64 set = p->getCVarK(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
             p->setCVarK(cvar, set + diff); \
       } \
       y += 10; \
@@ -260,11 +260,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Int(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(i32 set = p->getCVarI(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
             p->setCVarI(cvar, set + diff); \
       } \
       y += 10; \
@@ -272,11 +272,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define ServerBool(label, cvar) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(bool on = ACS_GetCVar(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
+         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             ACS_SetCVar(cvar, !on); \
       } \
       y += 10; \
@@ -284,11 +284,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define ServerFloat(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(k64 set = ACS_GetCVarFixed(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
             ACS_SetCVarFixed(cvar, set + diff); \
       } \
       y += 10; \
@@ -296,11 +296,11 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define ServerInt(label, s, cvar, minima, maxima) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(i32 set = ACS_GetCVar(cvar), diff;) \
       { \
          Label(label); \
-         if((diff = Lith_GUI_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
             ACS_SetCVar(cvar, set + diff); \
       } \
       y += 10; \
@@ -308,13 +308,13 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Enum(label, cvar, minima, maxima, fmt, ...) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          __with(i32 set = p->getCVarI(cvar);) \
       { \
          Label(label); \
-         if(Lith_GUI_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
+         if(G_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
             p->setCVarI(cvar, set - 1); \
-         if(Lith_GUI_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
+         if(G_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
          PrintText(s_cbifont, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
@@ -324,10 +324,10 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define CBox(label, on, ...) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
       { \
          Label(label); \
-         if(Lith_GUI_Checkbox(g, on, 240, y + 5, Pre(cbxsmall))) \
+         if(G_Checkbox(g, on, 240, y + 5, Pre(cbxsmall))) \
             (__VA_ARGS__); \
       } \
       y += 10; \
@@ -335,7 +335,7 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 
 #define Text(label) \
    do { \
-      if(!Lith_GUI_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
          Label(label); \
       y += 10; \
    } while(0)
@@ -344,7 +344,7 @@ void Lith_CBITab_Settings(struct gui_state *g, struct player *p)
 #include "p_settings.c"
 #undef Label
 
-   Lith_GUI_ScrollEnd(g, &CBIState(g)->settingscr);
+   G_ScrollEnd(g, &CBIState(g)->settingscr);
 }
 
 #endif

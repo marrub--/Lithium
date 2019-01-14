@@ -29,14 +29,14 @@ static void SetActorInventory(i32 tid, str item, i32 amount)
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Lith_FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
+void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
 {
    ACS_FadeTo(r, g, b, amount, 0.0);
    ACS_FadeTo(r, g, b, 0.0, seconds);
 }
 
 script
-i32 Lith_GetTID(i32 tid, i32 ptr)
+i32 PtrTID(i32 tid, i32 ptr)
 {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
@@ -44,7 +44,7 @@ i32 Lith_GetTID(i32 tid, i32 ptr)
 }
 
 script
-i32 Lith_GetPlayerNumber(i32 tid, i32 ptr)
+i32 PtrPlayerNumber(i32 tid, i32 ptr)
 {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
@@ -52,7 +52,7 @@ i32 Lith_GetPlayerNumber(i32 tid, i32 ptr)
 }
 
 script
-bool Lith_ValidPointer(i32 tid, i32 ptr)
+bool PtrValid(i32 tid, i32 ptr)
 {
    if(tid || ptr)
       return ACS_SetActivator(tid, ptr);
@@ -61,7 +61,7 @@ bool Lith_ValidPointer(i32 tid, i32 ptr)
 }
 
 script
-bool Lith_SetPointer(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags)
+bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags)
 {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
@@ -69,35 +69,35 @@ bool Lith_SetPointer(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags
 }
 
 stkcall
-i32 Lith_CheckActorInventory(i32 tid, str item)
+i32 PtrInvNum(i32 tid, str item)
 {
    if(tid == 0) return InvNum(item);
    else         return ACS_CheckActorInventory(tid, item);
 }
 
 stkcall
-void Lith_GiveActorInventory(i32 tid, str item, i32 amount)
+void PtrInvGive(i32 tid, str item, i32 amount)
 {
    if(tid == 0) InvGive(item, amount);
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
 stkcall
-void Lith_TakeActorInventory(i32 tid, str item, i32 amount)
+void PtrInvTake(i32 tid, str item, i32 amount)
 {
    if(tid == 0) InvTake(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
 }
 
 stkcall
-void Lith_SetActorInventory(i32 tid, str item, i32 amount)
+void PtrInvSet(i32 tid, str item, i32 amount)
 {
    if(tid == 0) SetInventory(item, amount);
    else         SetActorInventory(tid, item, amount);
 }
 
 stkcall
-void Lith_BeginAngles(i32 x, i32 y)
+void BeginAngles(i32 x, i32 y)
 {
    world.a_cur = 0;
    for(i32 i = 0; i < countof(world.a_angles); i++)
@@ -110,7 +110,7 @@ void Lith_BeginAngles(i32 x, i32 y)
 }
 
 stkcall
-k32 Lith_AddAngle(i32 x, i32 y)
+k32 AddAngle(i32 x, i32 y)
 {
    if(world.a_cur >= countof(world.a_angles))
       return 0;
@@ -125,32 +125,32 @@ k32 Lith_AddAngle(i32 x, i32 y)
 script ext("ACS") addr(lsc_addangle)
 void Sc_AddAngle(i32 x, i32 y)
 {
-   Lith_AddAngle(x, y);
+   AddAngle(x, y);
 }
 
 script_str ext("ACS") addr("Lith_EmitScore")
 void Sc_EmitScore(i32 amount)
 {
-   Lith_GiveAllScore(amount, false);
+   P_GiveAllScore(amount, false);
 }
 
 script_str ext("ACS") addr("Lith_EmitEXP")
 void Sc_EmitEXP(i32 amount)
 {
-   Lith_GiveAllEXP(amount);
+   P_GiveAllEXP(amount);
 }
 
 script_str ext("ACS") addr("Lith_GiveScore")
 void Sc_GiveScore(i32 score)
 {
-   Lith_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
+   P_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
-script_str ext("ACS")
-void Lith_BoughtItemPickup(i32 id)
+script_str ext("ACS") addr("Lith_BoughtItemPickup")
+void Sc_BoughtItemPickup(i32 id)
 {
    static i32 const chan = CHAN_ITEM|CHAN_NOPAUSE;
-   withplayer(LocalPlayer) if(id)
+   with_player(LocalPlayer) if(id)
    {
       struct upgrade *upgr = p->getUpgr(id);
 
@@ -162,8 +162,8 @@ void Lith_BoughtItemPickup(i32 id)
          case UC_Extr: ACS_PlaySound(0, ss_player_pickup_upgrextr, chan, 1, false, ATTN_NONE); break;
          }
 
-         upgr->setOwned(p);
-         upgr->toggle(p);
+         P_Upg_SetOwned(p, upgr);
+         P_Upg_Toggle(p, upgr);
       }
    }
    else

@@ -12,9 +12,9 @@
 
 static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 {
-   Lith_GUI_Clip(g, x, y, w * 4, 8);
+   G_Clip(g, x, y, w * 4, 8);
    PrintSprite(gfx, x,1, y,1);
-   Lith_GUI_ClipRelease(g);
+   G_ClipRelease(g);
 }
 
 static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at)
@@ -24,7 +24,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    k32 helptrns = 0.5;
 
    if(p->attr.points)
-      if(Lith_GUI_Button_Id(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
+      if(G_Button_Id(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
    {
       p->attr.points--;
       p->attr.attrs[at]++;
@@ -58,7 +58,7 @@ static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_Status(struct gui_state *g, struct player *p)
+void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
    i32 x = 30, y = 40;
 

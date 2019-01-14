@@ -10,7 +10,7 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-char const *Lith_CanonTime(i32 type)
+char const *CanonTime(i32 type)
 {
    noinit static char ft[64], st[64], dt[64], lf[256];
 
@@ -31,16 +31,16 @@ char const *Lith_CanonTime(i32 type)
    Y = Y      + 1;
 
    switch(type) {
-   case CANONTIME_FULL:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
-   case CANONTIME_SHORT: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
-   case CANONTIME_DATE:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
+   case ct_full:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
+   case ct_short: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
+   case ct_date:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
    return nil;
 }
 
 stkcall
-void Lith_FreezeTime(bool on)
+void FreezeTime(bool on)
 {
    StrEntON
    static i32 lmvar frozen;
@@ -49,16 +49,16 @@ void Lith_FreezeTime(bool on)
    {
       if(!frozen++)
       {
-         Lith_ForPlayer()
+         for_player()
          {
             p->frozen++;
-            p->setVel(0, 0, 0);
+            P_SetVel(p, 0, 0, 0);
          }
 
-         Lith_ForPlayer()
+         for_player()
          {
-            Lith_GiveActorInventory(p->tid, so_TimeHax, 1);
-            Lith_GiveActorInventory(p->tid, so_TimeHax2, 1);
+            PtrInvGive(p->tid, so_TimeHax, 1);
+            PtrInvGive(p->tid, so_TimeHax2, 1);
             break;
          }
       }
@@ -67,12 +67,12 @@ void Lith_FreezeTime(bool on)
    {
       if(!--frozen)
       {
-         Lith_ForPlayer() p->frozen--;
+         for_player() p->frozen--;
 
-         Lith_ForPlayer()
+         for_player()
          {
-            Lith_TakeActorInventory(p->tid, so_PowerTimeFreezer, 1);
-            Lith_TakeActorInventory(p->tid, so_TimeHax2, 1);
+            PtrInvTake(p->tid, so_PowerTimeFreezer, 1);
+            PtrInvTake(p->tid, so_TimeHax2, 1);
             break;
          }
       }

@@ -9,51 +9,49 @@
 
 #include "m_cps.h"
 
-#define LineHash ((u32)__LINE__ * FileHash)
-
 #define Pre(name) .preset = &gui_p.name
 
 // Fixed ID
-#define Lith_GUI_Button_FId(g, id, ...)      Lith_GUI_Button_Impl     (g, id, &(struct gui_arg_btn const){__VA_ARGS__})
-#define Lith_GUI_Checkbox_FId(g, id, ...)    Lith_GUI_Checkbox_Impl   (g, id, &(struct gui_arg_cbx const){__VA_ARGS__})
-#define Lith_GUI_ScrollBegin_FId(g, id, ...) Lith_GUI_ScrollBegin_Impl(g, id, &(struct gui_arg_scr const){__VA_ARGS__})
-#define Lith_GUI_Slider_FId(g, id, ...)      Lith_GUI_Slider_Impl     (g, id, &(struct gui_arg_sld const){__VA_ARGS__})
-#define Lith_GUI_TextBox_FId(g, id, ...)     Lith_GUI_TextBox_Impl    (g, id, &(struct gui_arg_txt const){__VA_ARGS__})
+#define G_Button_FId(g, id, ...)      G_Button_Impl     (g, id, &(struct gui_arg_btn const){__VA_ARGS__})
+#define G_Checkbox_FId(g, id, ...)    G_Checkbox_Impl   (g, id, &(struct gui_arg_cbx const){__VA_ARGS__})
+#define G_ScrollBegin_FId(g, id, ...) G_ScrollBegin_Impl(g, id, &(struct gui_arg_scr const){__VA_ARGS__})
+#define G_Slider_FId(g, id, ...)      G_Slider_Impl     (g, id, &(struct gui_arg_sld const){__VA_ARGS__})
+#define G_TextBox_FId(g, id, ...)     G_TextBox_Impl    (g, id, &(struct gui_arg_txt const){__VA_ARGS__})
 
 // Dynamic ID
-#define Lith_GUI_Button_Id(g, id, ...)      Lith_GUI_Button_FId     (g, id + LineHash, __VA_ARGS__)
-#define Lith_GUI_Checkbox_Id(g, id, ...)    Lith_GUI_Checkbox_FId   (g, id + LineHash, __VA_ARGS__)
-#define Lith_GUI_ScrollBegin_Id(g, id, ...) Lith_GUI_ScrollBegin_FId(g, id + LineHash, __VA_ARGS__)
-#define Lith_GUI_Slider_Id(g, id, ...)      Lith_GUI_Slider_FId     (g, id + LineHash, __VA_ARGS__)
-#define Lith_GUI_TextBox_Id(g, id, ...)     Lith_GUI_TextBox_FId    (g, id + LineHash, __VA_ARGS__)
+#define G_Button_Id(g, id, ...)      G_Button_FId     (g, id + LineHash, __VA_ARGS__)
+#define G_Checkbox_Id(g, id, ...)    G_Checkbox_FId   (g, id + LineHash, __VA_ARGS__)
+#define G_ScrollBegin_Id(g, id, ...) G_ScrollBegin_FId(g, id + LineHash, __VA_ARGS__)
+#define G_Slider_Id(g, id, ...)      G_Slider_FId     (g, id + LineHash, __VA_ARGS__)
+#define G_TextBox_Id(g, id, ...)     G_TextBox_FId    (g, id + LineHash, __VA_ARGS__)
 
 // Dynamic
-#define Lith_GUI_Button(g, ...)             Lith_GUI_Button_Id     (g, 0, __VA_ARGS__)
-#define Lith_GUI_Checkbox(g, ...)           Lith_GUI_Checkbox_Id   (g, 0, __VA_ARGS__)
-#define Lith_GUI_ScrollBegin(g, ...)        Lith_GUI_ScrollBegin_Id(g, 0, __VA_ARGS__)
-#define Lith_GUI_Slider(g, ...)             Lith_GUI_Slider_Id     (g, 0, __VA_ARGS__)
-#define Lith_GUI_TextBox(g, ...)            Lith_GUI_TextBox_Id    (g, 0, __VA_ARGS__)
+#define G_Button(g, ...)             G_Button_Id     (g, 0, __VA_ARGS__)
+#define G_Checkbox(g, ...)           G_Checkbox_Id   (g, 0, __VA_ARGS__)
+#define G_ScrollBegin(g, ...)        G_ScrollBegin_Id(g, 0, __VA_ARGS__)
+#define G_Slider(g, ...)             G_Slider_Id     (g, 0, __VA_ARGS__)
+#define G_TextBox(g, ...)            G_TextBox_Id    (g, 0, __VA_ARGS__)
 
-#define Lith_GUI_GenPreset(type, def) \
+#define G_GenPreset(type, def) \
    type pre; \
    if(a->preset) pre = *a->preset; \
    else          pre = def
 
-#define Lith_GUI_Prefix(g, gfx, pre, mem) \
+#define G_Prefix(g, gfx, pre, mem) \
    do { \
            if(!(pre)->mem)     (gfx)[0] = '\0'; \
       else if((pre)->external) strcpy(gfx, (pre)->mem); \
       else                     lstrcpy2(gfx, (g)->gfxprefix, (pre)->mem); \
    } while(0)
 
-#define Lith_GUI_ScrollReset(g, st) \
+#define G_ScrollReset(g, st) \
    (*(st) = (struct gui_scr){})
 
-#define Lith_GUI_Tabs(g, st, names, x, y, yy) \
+#define G_Tabs(g, st, names, x, y, yy) \
    do { \
       for(i32 _i = 0; _i < countof(names); _i++) \
       { \
-         if(Lith_GUI_Button_Id(g, _i, names[_i], gui_p.btntab.w * _i + (x), \
+         if(G_Button_Id(g, _i, names[_i], gui_p.btntab.w * _i + (x), \
             gui_p.btntab.h * (yy) + (y), _i == *(st), .preset = &gui_p.btntab)) \
          { \
             *(st) = _i; \
@@ -61,18 +59,18 @@
       } \
    } while(0)
 
-#define Lith_GUI_BasicCheckbox(g, st, ...) \
-   if(Lith_GUI_Checkbox((g), *(st), __VA_ARGS__)) \
+#define G_BasicCheckbox(g, st, ...) \
+   if(G_Checkbox((g), *(st), __VA_ARGS__)) \
       *(st) = !*(st); \
    else \
       (void)0
 
-#define Lith_GUI_TextBox_Reset(st) ((st)->tbptr = 0)
+#define G_TextBox_Reset(st) ((st)->tbptr = 0)
 
-#define Lith_GUI_TextBox_OnTextEntered(st) \
+#define G_TextBox_OnTextEntered(st) \
    __with(char const *txt_buf = Cps_Print(st->txtbuf, st->tbptr);) \
       ifauto(char const *, _c, strchr(txt_buf, '\n')) \
-         __with(size_t txt_len = _c - txt_buf; Lith_GUI_TextBox_Reset(st);)
+         __with(size_t txt_len = _c - txt_buf; G_TextBox_Reset(st);)
 
 // Types ---------------------------------------------------------------------|
 
@@ -282,40 +280,40 @@ extern struct gui_presets const gui_p;
 // Extern Functions ----------------------------------------------------------|
 
 stkcall optargs(1)
-void Lith_GUI_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
+void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
 
 stkcall optargs(1)
-void Lith_GUI_Init(struct gui_state *g, void *state);
+void G_Init(struct gui_state *g, void *state);
 
 stkcall
-void Lith_GUI_UpdateState(struct gui_state *g, struct player *p);
+void G_UpdateState(struct gui_state *g, struct player *p);
 
 stkcall optargs(2)
-void Lith_GUI_Begin(struct gui_state *g, i32 w, i32 h);
+void G_Begin(struct gui_state *g, i32 w, i32 h);
 stkcall
-void Lith_GUI_End(struct gui_state *g, enum cursor curs);
+void G_End(struct gui_state *g, enum cursor curs);
 
 stkcall optargs(1)
-void Lith_GUI_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
+void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
 stkcall
-void Lith_GUI_ClipRelease(struct gui_state *g);
+void G_ClipRelease(struct gui_state *g);
 
 stkcall char const *RemoveTextColors_str(char __str_ars const *s, i32 size);
 stkcall char const *RemoveTextColors    (char           const *s, i32 size);
 
 stkcall
-void Lith_GUI_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
+void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
 stkcall
-struct gui_typ const *Lith_GUI_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
+struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
 
-void Lith_GUI_ScrollEnd(struct gui_state *g, struct gui_scr *scr);
+void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)
-bool Lith_GUI_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
+bool G_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
-bool            Lith_GUI_Button_Impl     (struct gui_state *g, u32 id, struct gui_arg_btn const *a);
-bool            Lith_GUI_Checkbox_Impl   (struct gui_state *g, u32 id, struct gui_arg_cbx const *a);
-void            Lith_GUI_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a);
-k64             Lith_GUI_Slider_Impl     (struct gui_state *g, u32 id, struct gui_arg_sld const *a);
-struct gui_txt *Lith_GUI_TextBox_Impl    (struct gui_state *g, u32 id, struct gui_arg_txt const *a);
+bool            G_Button_Impl     (struct gui_state *g, u32 id, struct gui_arg_btn const *a);
+bool            G_Checkbox_Impl   (struct gui_state *g, u32 id, struct gui_arg_cbx const *a);
+void            G_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a);
+k64             G_Slider_Impl     (struct gui_state *g, u32 id, struct gui_arg_sld const *a);
+struct gui_txt *G_TextBox_Impl    (struct gui_state *g, u32 id, struct gui_arg_txt const *a);
 
 #endif

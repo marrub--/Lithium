@@ -33,7 +33,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 
       p->logH(4, "Adrenaline administered."); // TODO
       ACS_PlaySound(0, ss_player_adren_inj, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      Lith_FadeFlash(255, 255, 255, 0.4, 0.6);
+      FadeFlash(255, 255, 255, 0.4, 0.6);
       InvGive(so_TimeHax2, 1);
 
       ACS_Delay(36);

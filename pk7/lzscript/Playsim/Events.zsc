@@ -142,6 +142,11 @@ override void WorldThingDied(WorldEvent ev)
    }
 }
 
+override void WorldThingRevived(WorldEvent ev)
+{
+   ev.Thing.ACS_ScriptCall("Lith_ResurrectMonster");
+}
+
 override void CheckReplacement(ReplaceEvent ev)
 {
    bool isfinal = ev.IsFinal;

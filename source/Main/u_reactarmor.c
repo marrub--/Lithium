@@ -69,7 +69,7 @@ void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_RA_Give")
 void Sc_GiveRA(i32 num)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       if(!p->getUpgrActive(UPGR_ReactArmor))
          return;

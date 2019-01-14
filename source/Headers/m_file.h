@@ -15,10 +15,10 @@
 #define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
 
 FILE *W_Open(str fname, char const *rw);
-FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw);
-size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp);
-size_t Lith_FWrite(void const *restrict ptr, size_t count, FILE *restrict fp);
-size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp);
-size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp);
+FILE *NFOpen(i32 pnum, str pcvar, char rw);
+size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp);
+size_t FWrite(void const *restrict ptr, size_t count, FILE *restrict fp);
+size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp);
+size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp);
 
 #endif

@@ -9,47 +9,47 @@
 
 void P_Dbg_InitPre(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_InitPst(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_Init(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_ReInit(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_Quit(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_Dealloc(struct player *p)
 {
-   LogDebug(log_sys, "%s", __func__);
+   Dbg_Log(log_sys, "%s", __func__);
 }
 
 void P_Dbg_TickPre(struct player *p)
 {
-   LogDebug(log_sysV, "%s", __func__);
+   Dbg_Log(log_sysV, "%s", __func__);
 }
 
 void P_Dbg_Tick(struct player *p)
 {
-   LogDebug(log_sysV, "%s", __func__);
+   Dbg_Log(log_sysV, "%s", __func__);
 }
 
 void P_Dbg_TickPst(struct player *p)
 {
-   LogDebug(log_sysV, "%s", __func__);
+   Dbg_Log(log_sysV, "%s", __func__);
 }
 
 // EOF

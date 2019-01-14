@@ -17,7 +17,7 @@ i32 dbgstatnum,  dbgnotenum;
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_DebugStat(char const *fmt, ...)
+void Dbg_Stat_Impl(char const *fmt, ...)
 {
    if(!(dbglevel & log_devh)) return;
 
@@ -32,7 +32,7 @@ void Lith_DebugStat(char const *fmt, ...)
    dbgstat[dbgstatnum++] = ACS_EndStrParam();
 }
 
-void Lith_DebugNote(char const *fmt, ...)
+void Dbg_Note_Impl(char const *fmt, ...)
 {
    if(!(dbglevel & log_devh)) return;
 
@@ -47,21 +47,8 @@ void Lith_DebugNote(char const *fmt, ...)
    dbgnote[dbgnotenum++] = ACS_EndStrParam();
 }
 
-void Log(char const *fmt, ...)
-{
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-
-   ACS_EndLog();
-}
-
 script
-void Lith_PrintMem(void const *data, size_t size)
+void Dbg_PrintMem(void const *data, size_t size)
 {
    byte const *d = data;
    i32 pos = 0;
@@ -82,6 +69,19 @@ void Lith_PrintMem(void const *data, size_t size)
    puts("\nEOF\n\n");
 }
 
+void Log(char const *fmt, ...)
+{
+   va_list vl;
+
+   ACS_BeginPrint();
+
+   va_start(vl, fmt);
+   __vnprintf(fmt, vl);
+   va_end(vl);
+
+   ACS_EndLog();
+}
+
 // Scripts -------------------------------------------------------------------|
 
 script_str ext("ACS") addr("Lith_GiveMail")
@@ -100,14 +100,13 @@ void Sc_DbgGiveMail(i32 num)
 
    num %= countof(names);
 
-   withplayer(LocalPlayer)
-      p->deliverMail(names[num]);
+   with_player(LocalPlayer) P_BIP_GiveMail(p, names[num]);
 }
 
 script_str ext("ACS") addr("Lith_GiveMeAllOfTheScore")
 void Sc_DbgGiveScore(void)
 {
-   withplayer(LocalPlayer) p->giveScore(0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
+   with_player(LocalPlayer) P_Scr_Give(p, 0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
 }
 
 script_str ext("ACS") addr("Lith_DumpAlloc")
@@ -121,6 +120,23 @@ void Sc_PrintMonsterInfo(void)
 {
    extern void PrintMonsterInfo(void);
    PrintMonsterInfo();
+}
+
+script_str ext("ACS") addr("Lith_SetFun")
+void Sc_SetFun(i32 fun)
+{
+   with_player(LocalPlayer)
+   {
+      p->fun = fun;
+      P_Data_Save(p);
+   }
+}
+
+script_str ext("ACS") addr("Lith_GetFun")
+i32 Sc_GetFun(void)
+{
+   with_player(LocalPlayer) return p->fun;
+   return 0;
 }
 
 // EOF

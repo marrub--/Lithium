@@ -17,7 +17,7 @@ void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 {
-   if(p->weapontype != weapon_rifle) return;
+   if(P_Wep_CurType(p) != weapon_rifle) return;
 
    if(p->getCVarI(sc_weapons_riflescope) &&
       p->riflefiremode == rifle_firemode_burst)
@@ -42,7 +42,7 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_SwitchRifleFiremode")
 void Sc_SwitchRifleFiremode(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       p->riflefiremode = ++p->riflefiremode % rifle_firemode_max;
       ACS_LocalAmbientSound(ss_weapons_rifle_firemode, 127);
@@ -52,7 +52,7 @@ void Sc_SwitchRifleFiremode(void)
 script_str ext("ACS") addr("Lith_ResetRifleMode")
 void Sc_ResetRifleMode(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
       if(p->getCVarI(sc_weapons_riflemodeclear))
          p->riflefiremode = 0;
 }

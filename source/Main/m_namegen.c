@@ -189,7 +189,7 @@ static str suff[] = {
 
 // Extern Functions ----------------------------------------------------------|
 
-str Lith_RandomName(i32 id)
+str RandomName(i32 id)
 {
    srand(id ? world.mapseed + id : ACS_Random(0, 0x7FFFFFFF));
 

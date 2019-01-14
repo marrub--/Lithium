@@ -97,7 +97,7 @@ struct cbi
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_PlayerResetCBIGUI(struct player *p);
-char const *Lith_ThemeName(u32 num);
+void P_CBI_PMinit(struct player *p);
+char const *ThemeName(u32 num);
 
 #endif

@@ -32,6 +32,7 @@ struct dmon_stat {
    i32  health;
    i32  painwait;
    bool finalized;
+   bool resurrect;
 };
 
 // Static Objects ------------------------------------------------------------|
@@ -73,7 +74,7 @@ static void ApplyLevels(dmon_t *m, i32 prev)
       i96 delt = m->level - prev;
       i96 hp10 = m->spawnhealth / 10;
       i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
-      LogDebug(log_dmonV, "monster %i: newh %i", m->id, newh);
+      Dbg_Log(log_dmonV, "monster %i: newh %i", m->id, newh);
       SetPropI(0, APROP_Health, m->ms->health + newh);
       m->maxhealth += newh;
    }
@@ -94,13 +95,13 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
    i32 const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
    i32 const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
 
-   Lith_ForPlayer() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
+   for_player() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
       {anyplayer = true; break;}
 
    if(!anyplayer)
       return;
 
-   world.begAngles(m->ms->x, m->ms->y);
+   BeginAngles(m->ms->x, m->ms->y);
    ServCallI(sm_MonsterBarrierLook);
 
    for(i32 i = 0; i < world.a_cur; i++)
@@ -129,11 +130,11 @@ static void BaseMonsterLevel(dmon_t *m)
    default:            bias = world.mapscleared / 40.0; break;
    }
 
-   Lith_ForPlayer() {rn2 += p->attr.level / 2.0; break;}
+   for_player() {rn2 += p->attr.level / 2.0; break;}
 
    bias *= bias;
    bias += ACS_GameSkill() / (k32)skill_nightmare * 0.1;
-   bias += world.difficulty / 100.0;
+   bias += ACS_GetCVar(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
    if(m->mi->flags & mif_angelic)
@@ -157,10 +158,8 @@ static void BaseMonsterLevel(dmon_t *m)
       m->level = minmax(rn2 * bias    , 1, MAXLEVEL);
    }
 
-   if(HasResistances(m)) {
-      for(i32 i = 0; i < m->rank; i++)
-         m->resist[ACS_Random(1, dmgtype_max)-1] += 5;
-   }
+   if(HasResistances(m)) for(i32 i = 0; i < m->rank; i++)
+      m->resist[ACS_Random(1, dmgtype_max) - 1] += 5;
 
    ApplyLevels(m, 0);
 }
@@ -174,7 +173,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
    ACS_SpawnForced(so_MonsterSoul, m->ms->x, m->ms->y, m->ms->z + 16, tid);
    SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
-   Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+   PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
 
    for(i32 i = 0; ACS_CheckFlag(0, s_SOLID) && i < 15; i++) ACS_Delay(1);
@@ -190,15 +189,15 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
       i32 x   = m->ms->x + ACS_Random(-16, 16);
       i32 y   = m->ms->y + ACS_Random(-16, 16);
       ACS_Spawn(so_ManaPickup, x, y, m->ms->z + 4, tid);
-      Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
-      Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       i += 150;
    } while(i < m->maxhealth);
 }
 
 static void OnFinalize(dmon_t *m)
 {
-   withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
+   with_player(P_PtrFind(0, AAPTR_TARGET))
    {
       if(p->sgacquired)
       {
@@ -228,11 +227,11 @@ static void OnFinalize(dmon_t *m)
             SoulCleave(m, p);
       }
 
-           if(p->health <  5) p->giveEXP(50);
-      else if(p->health < 15) p->giveEXP(25);
-      else if(p->health < 25) p->giveEXP(10);
+           if(p->health <  5) P_Lv_GiveEXP(p, 50);
+      else if(p->health < 15) P_Lv_GiveEXP(p, 25);
+      else if(p->health < 25) P_Lv_GiveEXP(p, 10);
 
-      Lith_GiveAllEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
+      P_GiveAllEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
    }
 
    m->ms->finalized = true;
@@ -240,19 +239,17 @@ static void OnFinalize(dmon_t *m)
 
 static void OnDeath(dmon_t *m)
 {
-   LogDebug(log_dmon, "monster %i is ded", m->id);
+   Dbg_Log(log_dmon, "monster %i is ded", m->id);
    m->wasdead = true;
 
    OnFinalize(m);
 
    // If enemies emit score on death we only need to give extra rank score.
-   Lith_GiveAllScore((world.enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
+   P_GiveAllScore((world.enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
 }
 
-// Extern Functions ----------------------------------------------------------|
-
 script
-void Lith_MonsterMain(dmon_t *m)
+static void MonsterMain(dmon_t *m)
 {
    struct dmon_stat ms = {};
 
@@ -264,7 +261,7 @@ void Lith_MonsterMain(dmon_t *m)
 
    BaseMonsterLevel(m);
 
-   LogDebug(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
+   Dbg_Log(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
    for(i32 tic = 0;; tic++)
@@ -275,23 +272,24 @@ void Lith_MonsterMain(dmon_t *m)
       {
          OnDeath(m);
 
-         do {ACS_Delay(3); GetInfo(m);} while(m->ms->health <= 0);
+         do {ACS_Delay(15);} while(!m->ms->resurrect);
 
-         LogDebug(log_dmon, "monster %i resurrected", m->id);
+         m->ms->resurrect = false;
+         Dbg_Log(log_dmon, "monster %i resurrected", m->id);
       }
 
       if(m->exp > 500)
       {
          i32 prev = m->level;
 
-         div_t d = div(m->exp, 500);
+         div_t d = __div(m->exp, 500);
          m->level += d.quot;
          m->exp    = d.rem;
 
          ACS_SpawnForced(so_MonsterLevelUp, m->ms->x, m->ms->y, m->ms->z);
          ApplyLevels(m, prev);
 
-         LogDebug(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
+         Dbg_Log(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
       }
 
       if(HasResistances(m) && m->level >= 20)
@@ -303,6 +301,8 @@ void Lith_MonsterMain(dmon_t *m)
       ACS_Delay(2);
    }
 }
+
+// Extern Functions ----------------------------------------------------------|
 
 void PrintMonsterInfo(void)
 {
@@ -345,6 +345,12 @@ void Sc_GiveMonsterEXP(i32 amt)
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
 }
 
+script_str ext("ACS") addr("Lith_ResurrectMonster")
+void Sc_ResurrectMonster(i32 amt)
+{
+   ifauto(dmon_t *, m, DmonSelf()) m->ms->resurrect = true;
+}
+
 script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
@@ -364,13 +370,13 @@ void Sc_MonsterInfo(void)
       {
          ifauto(dmon_t *, m, AllocDmon()) {
             m->mi = mi;
-            Lith_MonsterMain(m);
+            MonsterMain(m);
          }
          return;
       }
    }
 
-   LogDebug(log_dmon, "no monster %S", cname);
+   Dbg_Log(log_dmon, "no monster %S", cname);
 
    // If the monster failed all checks, give them this so we don't need to recheck every tick.
    // Edit: This isn't necessary anymore, but what the hell, keep it.

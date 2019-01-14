@@ -54,13 +54,13 @@ script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *ch
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_SaveWriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size);
-struct savefile *Lith_SaveBegin(struct player *p);
-script void Lith_SaveEnd(struct savefile *save);
+void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size);
+struct savefile *Save_BeginSave(struct player *p);
+script void Save_EndSave(struct savefile *save);
 
 optargs(1)
-i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker);
-struct savefile *Lith_LoadBegin(struct player *p);
-void Lith_LoadEnd(struct savefile *save);
+i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker);
+struct savefile *Save_BeginLoad(struct player *p);
+void Save_EndLoad(struct savefile *save);
 
 #endif

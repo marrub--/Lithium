@@ -15,7 +15,7 @@ static k32  lmvar rain_py;
 static i32  lmvar rain_dist;
 
 script
-void Lith_DoRain(void)
+void W_DoRain(void)
 {
    struct player *p = &players[0];
    p->setActivator();

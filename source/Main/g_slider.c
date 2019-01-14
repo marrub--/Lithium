@@ -7,7 +7,7 @@
 #include "common.h"
 #include "p_player.h"
 
-k64 Lith_GUI_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
+k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
 {
    struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
 
@@ -16,7 +16,7 @@ k64 Lith_GUI_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *
    i32 x = a->x + pre->pad;
    i32 y = a->y;
 
-   Lith_GUI_Auto(g, id, x, y, w, pre->h);
+   G_Auto(g, id, x, y, w, pre->h);
 
    x += g->ox;
    y += g->oy;
@@ -51,15 +51,15 @@ k64 Lith_GUI_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *
    // draw graphic
    __with(char gfx[64];)
    {
-      Lith_GUI_Prefix(g, gfx, pre, gfx);
+      G_Prefix(g, gfx, pre, gfx);
       if(gfx[0]) PrintSprite(l_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
    }
 
    // draw notch
    __with(char gfx[64];)
    {
-      if(g->hot == id || g->active == id) Lith_GUI_Prefix(g, gfx, pre, notchhot);
-      else                                Lith_GUI_Prefix(g, gfx, pre, notch);
+      if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
+      else                                G_Prefix(g, gfx, pre, notch);
 
       if(gfx[0]) PrintSprite(l_strdup(gfx), x + val * w - 1,1, y,1);
    }

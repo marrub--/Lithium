@@ -25,7 +25,7 @@ void Upgr_7777777_Update(struct player *p, struct upgrade *upgr)
 {
    k32 vel = -2;
    if(p->velz > 0) vel = p->velz;
-   p->setVel(p->velx, p->vely, vel);
+   P_SetVel(p, p->velx, p->vely, vel);
 }
 
 // EOF

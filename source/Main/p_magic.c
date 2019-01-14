@@ -17,8 +17,8 @@ void Sc_Blade(bool hit)
    ACS_SetHudSize(800, 600);
    DrawSpriteX(hit ? sp_Weapon_BladeHit : sp_Weapon_Blade, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 3, 0.15);
 
-   withplayer(LocalPlayer)
-      if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
+   with_player(LocalPlayer)
+      if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
 }
 
 script_str ext("ACS") addr("Lith_Rend")
@@ -34,14 +34,14 @@ void Sc_Rend(bool hit, i32 set)
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 2, 0.1);
 
-   withplayer(LocalPlayer)
-      if(!p->onground) p->setVel(p->velx / 2, p->vely / 2, 0);
+   with_player(LocalPlayer)
+      if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
 }
 
 script_str ext("ACS") addr("Lith_Feuer")
 void Sc_Feuer(bool left, bool fire)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       str actor = fire ? so_FeuerExplosion : so_FeuerTest;
       i32 pufftid;
@@ -68,7 +68,7 @@ void Sc_Feuer(bool left, bool fire)
          i32 tid;
          ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, ez, i / max), tid = ACS_UniqueTID());
          if(fire) {
-            Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+            PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
             ACS_Delay(1);
          }
       }
@@ -76,7 +76,7 @@ void Sc_Feuer(bool left, bool fire)
       if(fire) {
          i32 tid;
          ACS_SpawnForced(so_FeuerFinal, ex, ey, ez, tid = ACS_UniqueTID());
-         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       }
    }
 }
@@ -84,7 +84,7 @@ void Sc_Feuer(bool left, bool fire)
 script_str ext("ACS") addr("Lith_Cercle")
 void Sc_Cercle(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       k32 ax, ay, az;
 
@@ -98,7 +98,7 @@ void Sc_Cercle(void)
          az = ACS_GetActorFloorZ(pufftid);
       }
 
-      world.freeze(true);
+      FreezeTime(true);
       ACS_Delay(2); // necessary so sounds may play
 
       ACS_AmbientSound(ss_weapons_cercle_begin, 127);
@@ -113,7 +113,7 @@ void Sc_Cercle(void)
          ACS_SpawnForced(so_CircleParticle, ax + px, ay + py, az + 7, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 100.0);
-         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
          ACS_Thing_ChangeTID(tid, fxtid);
 
          ACS_Delay(i % 2 * (i / 30.0));
@@ -145,7 +145,7 @@ void Sc_Cercle(void)
          ACS_SpawnForced(so_CircleSpearThrower, ax + px, ay + py, az + 24, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 3.0);
-         Lith_SetPointer(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
          ACS_Thing_ChangeTID(tid, fxtid3);
 
          ACS_Delay(7);
@@ -160,14 +160,14 @@ void Sc_Cercle(void)
       ACS_Thing_Remove(fxtid);
       ACS_Thing_Remove(fxtid2);
 
-      world.freeze(false);
+      FreezeTime(false);
    }
 }
 
 script_str ext("ACS") addr("Lith_MagicSelect")
 void Sc_MagicSelect(i32 num)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       if(!p->getCVarI(sc_weapons_magicselanims)) return;
 

@@ -39,10 +39,8 @@ static void ScopeM(struct player *p)
 }
 #endif
 
-// Extern Functions ----------------------------------------------------------|
-
 script
-void Lith_PlayerDebugStats(struct player *p)
+static void DebugStats(struct player *p)
 {
    if(!(dbglevel & log_devh)) return;
 
@@ -57,7 +55,7 @@ void Lith_PlayerDebugStats(struct player *p)
 }
 
 script
-void Lith_PlayerFootstep(struct player *p)
+static void Footstep(struct player *p)
 {
    static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
       {s"FWATER1", s"player/stepw", 11},
@@ -84,7 +82,7 @@ void Lith_PlayerFootstep(struct player *p)
       {s"LAVA4",   s"player/stepl", 17},
    };
 
-   if(Lith_IsPaused) return;
+   if(Paused) return;
 
    if(p->nextstep) {p->nextstep--; return;}
 
@@ -107,7 +105,7 @@ void Lith_PlayerFootstep(struct player *p)
 
 #if LITHIUM
 stkcall
-void Lith_PlayerItemFx(struct player *p)
+static void ItemFx(struct player *p)
 {
    bool hasir = InvNum(so_PowerLightAmp);
 
@@ -120,9 +118,9 @@ void Lith_PlayerItemFx(struct player *p)
 
 // Update view bobbing when you get damaged.
 script
-void Lith_PlayerDamageBob(struct player *p)
+static void DamageBob(struct player *p)
 {
-   if(Lith_IsPaused) return;
+   if(Paused) return;
 
    if(!InvNum(so_PowerStrength) && p->health < p->oldhealth)
    {
@@ -147,9 +145,9 @@ void Lith_PlayerDamageBob(struct player *p)
 
 // Update additive view.
 script
-void Lith_PlayerView(struct player *p)
+static void View(struct player *p)
 {
-   if(Lith_IsPaused) return;
+   if(Paused) return;
 
    k64 addp = 0, addy = 0;
 
@@ -172,17 +170,17 @@ void Lith_PlayerView(struct player *p)
       else if(p->addroll) p->addroll = lerplk(p->addroll, 0,               0.14);
    }
 
-   DebugStat("exp: lv.%u %u/%u\n", p->attr.level, p->attr.exp, p->attr.expnext);
-   DebugStat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
-   DebugStat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
-   DebugStat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);
-   DebugStat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
-   DebugStat("rage: %k\n", p->rage);
+   Dbg_Stat("exp: lv.%u %u/%u\n", p->attr.level, p->attr.exp, p->attr.expnext);
+   Dbg_Stat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
+   Dbg_Stat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
+   Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);
+   Dbg_Stat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
+   Dbg_Stat("rage: %k\n", p->rage);
 }
 
 #if LITHIUM
 script
-void Lith_PlayerStyle(struct player *p)
+static void Style(struct player *p)
 {
    if(p->scopetoken) {
       SetPropI(0, APROP_RenderStyle, STYLE_Subtract);
@@ -194,13 +192,13 @@ void Lith_PlayerStyle(struct player *p)
 }
 
 script
-void Lith_PlayerHUD(struct player *p)
+static void HUD(struct player *p)
 {
    ACS_SetHudSize(320, 200);
 
    if(p->old.scopetoken && !p->scopetoken)
    {
-      p->hudstrlist.free(true);
+      ListDtor(&p->hudstrlist, true);
 
       for(i32 i = hid_scope_clearS; i <= hid_scope_clearE; i++)
       {
@@ -219,7 +217,7 @@ void Lith_PlayerHUD(struct player *p)
 #endif
 
 script
-void Lith_PlayerLevelup(struct player *p)
+static void Levelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level)
    {
@@ -235,6 +233,25 @@ void Lith_PlayerLevelup(struct player *p)
    }
 }
 
+// Extern Functions ----------------------------------------------------------|
+
+stkcall
+void P_Ren_PTickPst(struct player *p)
+{
+   Footstep(p);
+   #if LITHIUM
+   ItemFx(p);
+   #endif
+   DamageBob(p);
+   View(p);
+   #if LITHIUM
+   HUD(p);
+   Style(p);
+   #endif
+   Levelup(p);
+   DebugStats(p);
+}
+
 // Static Functions ----------------------------------------------------------|
 
 #if LITHIUM
@@ -245,7 +262,7 @@ static void StringStack(struct player *p)
    if(ACS_Timer() % 3 == 0)
    {
       struct hudstr *hudstr = Salloc(struct hudstr);
-      hudstr->link.construct(hudstr);
+      ListCtor(&hudstr->link, hudstr);
       hudstr->s = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
 
       hudstr->link.link(&p->hudstrlist);
@@ -289,7 +306,7 @@ static void Waves(struct player *p)
 
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + abs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
 }
 #endif
 

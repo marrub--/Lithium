@@ -66,7 +66,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
          k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
          ACS_LocalAmbientSound(ss_player_slide, 127);
-         p->setVel(p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0);
+         P_SetVel(p, p->velx + (ACS_Cos(angle) * 32.0), p->vely + (ACS_Sin(angle) * 32.0), 0);
 
          DodgeView(p);
 
@@ -74,14 +74,14 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
       }
    }
 
-   if(p->waterlevel == 0 && p->buttonPressed(BT_JUMP) && !InvNum(so_PowerFlight) &&
+   if(p->waterlevel == 0 && P_ButtonPressed(p, BT_JUMP) && !InvNum(so_PowerFlight) &&
       !InvNum(so_RocketBooster) && !UData.leaped &&
       (!p->onground || UData.charge < CHARGE_MAX))
    {
       k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
       ACS_LocalAmbientSound(ss_player_doublejump, 127);
-      p->setVel(p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0);
+      P_SetVel(p, p->velx + (ACS_Cos(angle) * 4.0), p->vely + (ACS_Sin(angle) * 4.0), 12.0);
 
       UData.leaped = 1;
    }
@@ -92,7 +92,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_DodgeView")
 void Sc_DodgeView(void)
 {
-   withplayer(LocalPlayer) DodgeView(p);
+   with_player(LocalPlayer) DodgeView(p);
 }
 
 // EOF

@@ -44,7 +44,7 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig)
+void TokParse(FILE *fp, struct token *tok, struct origin *orig)
 {
    if(!tok || !fp || !orig) return;
 

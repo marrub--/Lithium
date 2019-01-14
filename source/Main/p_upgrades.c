@@ -16,17 +16,17 @@ static i32 g_upgrmax = UPGR_BASE_MAX;
 
 // Static Functions ----------------------------------------------------------|
 
-static bool Lith_UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr)
+static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr)
 {
    return !((struct upgrade *)upgr)->owned;
 }
 
-static void Lith_UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr)
+static void UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr)
 {
-   ((struct upgrade *)upgr)->setOwned(p);
+   P_Upg_SetOwned(p, upgr);
 }
 
-static bool Lith_UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid)
+static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid)
 {
    struct upgrade const *upgr = upgr_;
 
@@ -41,7 +41,7 @@ static bool Lith_UpgrGive(struct player *, struct shopdef const *, void *upgr_, 
    return true;
 }
 
-static i32 Compg_upgrinfo(void const *lhs, void const *rhs)
+static i32 CompUpgrInfo(void const *lhs, void const *rhs)
 {
    struct upgradeinfo const *u1 = lhs, *u2 = rhs;
    i32 c1 = u1->category - u2->category;
@@ -57,14 +57,14 @@ static void SetDataPtr(struct player *p, struct upgrade *upgr)
 
 // Extern Functions ----------------------------------------------------------|
 
-struct upgradeinfo *Lith_UpgradeRegister(struct upgradeinfo const *upgr)
+struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr)
 {
    struct upgradeinfo *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
    *ui = *upgr;
    return ui;
 }
 
-void Lith_MInit_Upgrade(void)
+void Upgr_MInit(void)
 {
    for(i32 i = 0; i < g_upgrmax; i++)
    {
@@ -73,9 +73,9 @@ void Lith_MInit_Upgrade(void)
       // Set up static function pointers
       ui->Init = SetDataPtr; // this is set again by UpgrReinit
 
-      ui->ShopBuy    = Lith_UpgrShopBuy;
-      ui->ShopCanBuy = Lith_UpgrCanBuy;
-      ui->ShopGive   = Lith_UpgrGive;
+      ui->ShopBuy    = UpgrShopBuy;
+      ui->ShopCanBuy = UpgrCanBuy;
+      ui->ShopGive   = UpgrGive;
 
       // Set up individual upgrades' function pointers
       switch(ui->key)
@@ -89,7 +89,7 @@ void Lith_MInit_Upgrade(void)
    }
 }
 
-void Lith_GInit_Upgrade(void)
+void Upgr_GInit(void)
 {
    g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
    memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
@@ -98,13 +98,13 @@ void Lith_GInit_Upgrade(void)
       if(g_upgrinfoex[i].name)
          g_upgrinfo[UPGR_BASE_MAX + i] = g_upgrinfoex[i];
 
-   qsort(g_upgrinfo, g_upgrmax, sizeof *g_upgrinfo, Compg_upgrinfo);
+   qsort(g_upgrinfo, g_upgrmax, sizeof *g_upgrinfo, CompUpgrInfo);
 
    for(i32 i = 0; i < g_upgrmax; i++)
       g_upgrinfo[i].id = i;
 }
 
-void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr)
+void P_Upg_SetOwned(struct player *p, struct upgrade *upgr)
 {
    if(upgr->owned) return;
 
@@ -112,11 +112,11 @@ void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr)
    p->upgradesowned++;
 
    if(upgr->info->category == UC_Body && upgr->info->cost == 0)
-      upgr->toggle(p);
+      P_Upg_Toggle(p, upgr);
 }
 
 script
-void Lith_PlayerInitUpgrades(struct player *p)
+void P_Upg_PInit(struct player *p)
 {
    #define CheckPClass() (g_upgrinfo[i].pclass & p->pclass)
    for(i32 i = 0; i < g_upgrmax; i++)
@@ -137,7 +137,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
       p->upgrademap.insert(upgr);
 
       if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
-         Lith_UpgrBuy(p, upgr, true, true);
+         P_Upg_Buy(p, upgr, true, true);
 
       j++;
    }
@@ -146,7 +146,7 @@ void Lith_PlayerInitUpgrades(struct player *p)
    #undef CheckPClass
 }
 
-void Lith_PlayerDeallocUpgrades(struct player *p)
+void P_Upg_PQuit(struct player *p)
 {
    upgrademap_t_dtor(&p->upgrademap);
    p->upgrmax = 0;
@@ -157,35 +157,35 @@ void Lith_PlayerDeallocUpgrades(struct player *p)
    p->upgrinit = false;
 }
 
-void Lith_PlayerDeinitUpgrades(struct player *p)
+void P_Upg_PDeinit(struct player *p)
 {
-   ForUpgrade(upgr)
+   for_upgrade(upgr)
       if(upgr->active)
-         upgr->wasactive = true,  upgr->toggle(p);
+         upgr->wasactive = true,  P_Upg_Toggle(p, upgr);
 }
 
-void Lith_PlayerReinitUpgrades(struct player *p)
+void P_Upg_PMInit(struct player *p)
 {
-   ForUpgrade(upgr)
+   for_upgrade(upgr)
       if(upgr->wasactive)
-         upgr->wasactive = false, upgr->toggle(p);
+         upgr->wasactive = false, P_Upg_Toggle(p, upgr);
 }
 
 script
-void Lith_PlayerUpdateUpgrades(struct player *p)
+void P_Upg_PTick(struct player *p)
 {
-   if(Lith_IsPaused)
+   if(Paused)
       return;
 
-   ForUpgrade(upgr)
+   for_upgrade(upgr)
       if(upgr->active && upgr->info->Update)
          upgr->info->Update(p, upgr);
 }
 
 script
-void Lith_PlayerRenderUpgrades(struct player *p)
+void P_Upg_PTickPst(struct player *p)
 {
-   ForUpgrade(upgr) if(upgr->active && upgr->info->Render)
+   for_upgrade(upgr) if(upgr->active && upgr->info->Render)
    {
       ACS_SetHudSize(320, 240);
       ACS_SetHudClipRect(0, 0, 0, 0);
@@ -195,14 +195,14 @@ void Lith_PlayerRenderUpgrades(struct player *p)
    }
 }
 
-void Lith_PlayerEnterUpgrades(struct player *p)
+void P_Upg_Enter(struct player *p)
 {
-   ForUpgrade(upgr)
+   for_upgrade(upgr)
       if(upgr->active && upgr->info->Enter)
          upgr->info->Enter(p, upgr);
 }
 
-bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr)
+bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr)
 {
    if(!upgr->active)
    {
@@ -221,9 +221,9 @@ bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr)
    return upgr->owned;
 }
 
-bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr)
+bool P_Upg_Toggle(struct player *p, struct upgrade *upgr)
 {
-   if(!upgr->canUse(p)) return false;
+   if(!P_Upg_CanActivate(p, upgr)) return false;
 
    upgr->active = !upgr->active;
 
@@ -231,9 +231,9 @@ bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr)
    else             p->cbi.pruse -= upgr->info->perf;
 
    if(upgr->active && upgr->info->group)
-      ForUpgrade(other)
+      for_upgrade(other)
          if(other != upgr && other->active && other->info->group == upgr->info->group)
-            other->toggle(p);
+            P_Upg_Toggle(p, other);
 
    if(upgr->active)
    {

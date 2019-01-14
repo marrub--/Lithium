@@ -12,18 +12,18 @@
 #define UPGR_STATIC_MAX 80
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
 
-#define Lith_CastUData(u) ((struct upgr_data *)(u)->dataptr)
-#define UData_Adrenaline(u)  (Lith_CastUData(u)->u01)
-#define UData_JetBooster(u)  (Lith_CastUData(u)->u03)
-#define UData_lolsords(u)    (Lith_CastUData(u)->u04)
-#define UData_ReactArmor(u)  (Lith_CastUData(u)->u05)
-#define UData_ReflexWetw(u)  (Lith_CastUData(u)->u06)
-#define UData_VitalScan(u)   (Lith_CastUData(u)->u07)
-#define UData_Zoom(u)        (Lith_CastUData(u)->u08)
-#define UData_HomingRPG(u)   (Lith_CastUData(u)->u09)
-#define UData_Magic(u)       (Lith_CastUData(u)->u10)
-#define UData_StealthSys(u)  (Lith_CastUData(u)->u11)
-#define UData_HeadsUpDisp(u) (Lith_CastUData(u)->u13)
+#define CastUData(u) ((struct upgr_data *)(u)->dataptr)
+#define UData_Adrenaline(u)  (CastUData(u)->u01)
+#define UData_JetBooster(u)  (CastUData(u)->u03)
+#define UData_lolsords(u)    (CastUData(u)->u04)
+#define UData_ReactArmor(u)  (CastUData(u)->u05)
+#define UData_ReflexWetw(u)  (CastUData(u)->u06)
+#define UData_VitalScan(u)   (CastUData(u)->u07)
+#define UData_Zoom(u)        (CastUData(u)->u08)
+#define UData_HomingRPG(u)   (CastUData(u)->u09)
+#define UData_Magic(u)       (CastUData(u)->u10)
+#define UData_StealthSys(u)  (CastUData(u)->u11)
+#define UData_HeadsUpDisp(u) (CastUData(u)->u13)
 
 enum
 {
@@ -153,15 +153,11 @@ struct upgradeinfo {
    stkcall void (*Init)(struct player *, struct upgrade *);
 };
 
-bool Lith_UpgrCanActivate(struct player *p, struct upgrade *upgr);
-bool Lith_UpgrToggle(struct player *p, struct upgrade *upgr);
-void Lith_UpgrSetOwned(struct player *p, struct upgrade *upgr);
+bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr);
+bool P_Upg_Toggle(struct player *p, struct upgrade *upgr);
+void P_Upg_SetOwned(struct player *p, struct upgrade *upgr);
 
 struct upgrade {
-   __prop canUse   {call: Lith_UpgrCanActivate(__arg, this)}
-   __prop toggle   {call: Lith_UpgrToggle(__arg, this)}
-   __prop setOwned {call: Lith_UpgrSetOwned(__arg, this)}
-
    void *dataptr;
 
    struct upgrade *next, **prev;
@@ -172,7 +168,5 @@ struct upgrade {
    bool owned;
    bool wasactive; // for reinitializing on map load
 };
-
-void Lith_LoadUpgrInfoBalance(struct upgradeinfo *uinfo, i32 max, char const *fname);
 
 #endif

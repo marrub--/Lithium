@@ -99,7 +99,7 @@ char const *scoresep(i96 num)
 
    while(num)
    {
-      lldiv_t div = lldiv(num, 10);
+      lldiv_t div = __div(num, 10);
       *--outp = div.rem + '0';
       num = div.quot;
 

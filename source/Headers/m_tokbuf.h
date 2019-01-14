@@ -14,15 +14,15 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-        void          Lith_TBufCtor (struct tokbuf *tb);
-        void          Lith_TBufDtor (struct tokbuf *tb);
-        struct token *Lith_TBufGet  (struct tokbuf *tb);
-        struct token *Lith_TBufPeek (struct tokbuf *tb);
-stkcall struct token *Lith_TBufUnGet(struct tokbuf *tb);
-stkcall struct token *Lith_TBufReGet(struct tokbuf *tb);
-        bool          Lith_TBufDrop (struct tokbuf *tb, i32 t);
-stkcall i32           Lith_TBufProc (struct token *tok);
-stkcall i32           Lith_TBufProcL(struct token *tok);
+        void          TBufCtor (struct tokbuf *tb);
+        void          TBufDtor (struct tokbuf *tb);
+        struct token *TBufGet  (struct tokbuf *tb);
+        struct token *TBufPeek (struct tokbuf *tb);
+stkcall struct token *TBufUnGet(struct tokbuf *tb);
+stkcall struct token *TBufReGet(struct tokbuf *tb);
+        bool          TBufDrop (struct tokbuf *tb, i32 t);
+stkcall i32           TBufProc (struct token *tok);
+stkcall i32           TBufProcL(struct token *tok);
 
 // Types ---------------------------------------------------------------------|
 
@@ -35,13 +35,11 @@ enum
 
 struct tokbuf
 {
-   __prop ctor  {call: Lith_TBufCtor (this)}
-   __prop dtor  {call: Lith_TBufDtor (this)}
-   __prop get   {call: Lith_TBufGet  (this)}
-   __prop peek  {call: Lith_TBufPeek (this)}
-   __prop unget {call: Lith_TBufUnGet(this)}
-   __prop reget {call: Lith_TBufReGet(this)}
-   __prop drop  {call: Lith_TBufDrop (this)}
+   __prop get   {call: TBufGet  (this)}
+   __prop peek  {call: TBufPeek (this)}
+   __prop unget {call: TBufUnGet(this)}
+   __prop reget {call: TBufReGet(this)}
+   __prop drop  {call: TBufDrop (this)}
 
    struct origin orig;
 

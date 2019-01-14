@@ -13,23 +13,23 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_SaveWriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
+void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 {
    if(dbgflag & dbgf_save)
-      Log("Lith_SaveWriteChunk: writing %u version %u size %zu", iden, vers, size);
+      Log("Save_WriteChunk: writing %u version %u size %zu", iden, vers, size);
 
    struct savechunk chunk = {iden, vers & Save_VersMask, size};
-   Lith_FWrite32(&chunk, sizeof chunk, 4, save->fp);
+   FWrite32(&chunk, sizeof chunk, 4, save->fp);
 }
 
-struct savefile *Lith_SaveBegin(struct player *p)
+struct savefile *Save_BeginSave(struct player *p)
 {
    struct savefile *save = Salloc(struct savefile);
 
-   if((save->fp = Lith_NFOpen(p->num, sc_psave, 'w')))
+   if((save->fp = NFOpen(p->num, sc_psave, 'w')))
    {
       save->p = p;
-      Lith_SaveWriteChunk(save, Ident_Lith, SaveV_Lith, 0);
+      Save_WriteChunk(save, Ident_Lith, SaveV_Lith, 0);
       return save;
    }
 
@@ -38,24 +38,24 @@ struct savefile *Lith_SaveBegin(struct player *p)
 }
 
 script
-void Lith_SaveEnd(struct savefile *save)
+void Save_EndSave(struct savefile *save)
 {
-   Lith_SaveWriteChunk(save, Ident_Lend, SaveV_Lend, 0);
+   Save_WriteChunk(save, Ident_Lend, SaveV_Lend, 0);
    fclose(save->fp);
    Dalloc(save);
 }
 
-i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker)
+i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker)
 {
    rewind(save->fp);
 
    if(dbgflag & dbgf_save)
-      Log("Lith_LoadChunk: Finding chunk %.4X ver%u", iden, vers);
+      Log("Save_ReadChunk: Finding chunk %.4X ver%u", iden, vers);
 
    for(i32 i = 0;; i++)
    {
       struct savechunk chunk;
-      Lith_FRead32(&chunk, sizeof chunk, 4, save->fp);
+      FRead32(&chunk, sizeof chunk, 4, save->fp);
 
       // End of file reached, or we reached the EOF chunk.
       // Otherwise, if the chunk description matches, process it.
@@ -66,7 +66,7 @@ i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
       {
          if(chunker) chunker(save, &chunk);
 
-         if(dbgflag & dbgf_save) Log("Lith_LoadChunk: Found valid chunk at %i", i);
+         if(dbgflag & dbgf_save) Log("Save_ReadChunk: Found valid chunk at %i", i);
 
          return i;
       }
@@ -75,23 +75,23 @@ i32 Lith_LoadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
    }
 
    if(dbgflag & dbgf_save)
-      Log("Lith_LoadChunk: Couldn't find anything");
+      Log("Save_ReadChunk: Couldn't find anything");
 
    return -1;
 }
 
-struct savefile *Lith_LoadBegin(struct player *p)
+struct savefile *Save_BeginLoad(struct player *p)
 {
    struct savefile *save = Salloc(struct savefile);
 
-   if((save->fp = Lith_NFOpen(p->num, sc_psave, 'r')))
+   if((save->fp = NFOpen(p->num, sc_psave, 'r')))
    {
       save->p = p;
 
       // The Lith chunk must always be the first valid chunk.
-      if(Lith_LoadChunk(save, Ident_Lith, SaveV_Lith) != 0)
+      if(Save_ReadChunk(save, Ident_Lith, SaveV_Lith) != 0)
       {
-         Lith_LoadEnd(save);
+         Save_EndLoad(save);
          return nil;
       }
 
@@ -102,7 +102,7 @@ struct savefile *Lith_LoadBegin(struct player *p)
    return nil;
 }
 
-void Lith_LoadEnd(struct savefile *save)
+void Save_EndLoad(struct savefile *save)
 {
    fclose(save->fp);
    Dalloc(save);

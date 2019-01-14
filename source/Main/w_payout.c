@@ -9,7 +9,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-void Lith_DoPayout(void)
+void Scr_HInit(void)
 {
    k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
@@ -28,12 +28,10 @@ void Lith_DoPayout(void)
    payout.total  = payout.killscr + payout.itemscr;
    payout.total -= payout.tax = payout.total * taxpct;
 
-   Lith_ForPlayer()
+   for_player()
    {
-      script
-      extern void Lith_PlayerPayout(struct player *p);
-
-      Lith_PlayerPayout(p);
+      script extern void P_Scr_Payout(struct player *p);
+      P_Scr_Payout(p);
    }
 
    memset(&payout, 0, sizeof payout);

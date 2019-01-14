@@ -66,6 +66,20 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
 }
 
 stkcall
+i32 fastabs(i32 n)
+{
+   __asm(
+      "BAnd     W 1(Stk() LocReg(Lit(:n)) Lit(0x80000000_s31.0))"
+      "Jcnd_Tru W 1(Stk() Lit(:\"neg\"))"
+      "Retn     W 1(LocReg(Lit(:n)))"
+   ":\"neg\""
+      "NegI     W 1(Stk() LocReg(Lit(:n)))"
+      "Retn     W 1(Stk())"
+   );
+   return 0; // shh...
+}
+
+stkcall
 k64 powlk(k64 x, i32 y)
 {
    k64 z = 1;
@@ -93,7 +107,7 @@ i32 mag2i(i32 x, i32 y)
 
 k32 lerpk(k32 a, k32 b, k32 t)
 {
-   k32 ret = ((1.0k - t) * a) + (t * b);
+   k32 ret = (1.0k - t) * a + t * b;
 
    if(roundk(ret, 15) == b)
       return b;
@@ -103,7 +117,7 @@ k32 lerpk(k32 a, k32 b, k32 t)
 
 k64 lerplk(k64 a, k64 b, k64 t)
 {
-   k64 ret = ((1.0lk - t) * a) + (t * b);
+   k64 ret = (1.0lk - t) * a + t * b;
 
    if(roundlk(ret, 15) == b)
       return b;
@@ -122,19 +136,19 @@ i32 ceilk(k32 n)
 {
    union ik32 u = {.k = n};
    if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.k + 1;
-   else             return (i32)u.k;
+   else             return u.k;
 }
 
 stkcall
 k64 bzpolylk(k64 a, k64 b, k64 t)
 {
-   return a + ((b - a) * t);
+   return a + (b - a) * t;
 }
 
 stkcall
 i32 bzpolyi(i32 a, i32 b, k64 t)
 {
-   return a + ((b - a) * t);
+   return a + (b - a) * t;
 }
 
 struct k64v2 qbezierlk(k64 x1, k64 y1, k64 x2, k64 y2, k64 x3, k64 y3, k64 t)

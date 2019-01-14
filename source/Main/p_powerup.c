@@ -16,7 +16,7 @@
 script_str ext("ACS") addr("Lith_DOGS")
 void Sc_DOGS(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       i32 tid = ACS_UniqueTID();
 
@@ -43,7 +43,7 @@ void Sc_DOGS(void)
 script_str ext("ACS") addr("Lith_SteggleEnergy")
 void Sc_SteggleEnergy(void)
 {
-   withplayer(Lith_GetPlayer(0, AAPTR_FRIENDPLAYER))
+   with_player(P_PtrFind(0, AAPTR_FRIENDPLAYER))
    {
       ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
 
@@ -68,7 +68,7 @@ void Sc_SteggleEnergy(void)
 script_str ext("ACS") addr("Lith_BarrierBullets")
 void Sc_BarrierBullets(void)
 {
-   withplayer(Lith_GetPlayer(0, AAPTR_TARGET))
+   with_player(P_PtrFind(0, AAPTR_TARGET))
    {
       k32 ang   = ACS_VectorAngle(GetX(0) - p->x, GetY(0) - p->y);
       k32 xang  = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0));
@@ -85,9 +85,9 @@ void Sc_BarrierBullets(void)
 script_str ext("ACS") addr("Lith_GetSigil")
 void Sc_GetSigil(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
-      p->closeGUI();
+      P_GUI_Close(p);
 
       p->sgacquired = true;
 
@@ -96,7 +96,7 @@ void Sc_GetSigil(void)
 
       if(dbglevel) return;
 
-      world.freeze(true);
+      FreezeTime(true);
 
       ACS_FadeTo(0, 0, 0, 0.4, TS * 3);
       ACS_SetHudSize(320, 200);
@@ -119,7 +119,7 @@ void Sc_GetSigil(void)
 
       ACS_FadeTo(0, 0, 0, 0.0, TS * 5);
 
-      world.freeze(false);
+      FreezeTime(false);
    }
 }
 #endif
@@ -127,7 +127,7 @@ void Sc_GetSigil(void)
 script_str ext("ACS") addr("Lith_GiveHealthBonus")
 void Sc_GiveHealthBonus(i32 amount)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       amount += p->health;
       if(amount > p->maxhealth + 100) amount = p->maxhealth + 100;
@@ -138,7 +138,7 @@ void Sc_GiveHealthBonus(i32 amount)
 script_str ext("ACS") addr("Lith_GiveHealth")
 void Sc_GiveHealth(i32 amount)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       amount += p->health;
       amount *= 1 + p->attr.attrs[at_vit] / 80.0;
@@ -150,14 +150,14 @@ void Sc_GiveHealth(i32 amount)
 script_str ext("ACS") addr("Lith_CheckHealth")
 bool Sc_CheckHealth(void)
 {
-   withplayer(LocalPlayer) return p->health < p->maxhealth;
+   with_player(LocalPlayer) return p->health < p->maxhealth;
    return 0;
 }
 
 script_str ext("ACS") addr("Lith_Discount")
 void Sc_Discount(void)
 {
-   withplayer(LocalPlayer) p->discount = 0.9;
+   with_player(LocalPlayer) p->discount = 0.9;
 }
 
 // EOF

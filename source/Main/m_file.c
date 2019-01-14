@@ -43,7 +43,7 @@ static i32 NetClose(void *nfdata)
    {
       printf("NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
       printf("Data follows\n");
-      Lith_PrintMem(nf->mem, nf->pos);
+      Dbg_PrintMem(nf->mem, nf->pos);
    }
 
    // Base64 encode the buffer.
@@ -156,7 +156,7 @@ FILE *W_Open(str fname, char const *rw)
 }
 
 // fopen() equivalent for netfiles.
-FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
+FILE *NFOpen(i32 pnum, str pcvar, char rw)
 {
    FILE *fp = nil;
 
@@ -205,9 +205,9 @@ FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
          // If debugging, print out information about the buffer being read.
          if(dbgflag & dbgf_save)
          {
-            printf("Lith_NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
+            printf("NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
             printf("Data follows\n");
-            Lith_PrintMem(data, size);
+            Dbg_PrintMem(data, size);
          }
 
          if(data)
@@ -230,7 +230,7 @@ FILE *Lith_NFOpen(i32 pnum, str pcvar, char rw)
 }
 
 // Unpacks integers into a file stream.
-size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp)
+size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;
 
@@ -245,7 +245,7 @@ size_t Lith_FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE 
    return res;
 }
 
-size_t Lith_FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
+size_t FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;
 
@@ -255,7 +255,7 @@ size_t Lith_FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
    return res;
 }
 
-size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
+size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;
 
@@ -266,7 +266,7 @@ size_t Lith_FWrite_str(void const __str_ars *restrict ptr, size_t count, FILE *r
 }
 
 // Reads packed integers from a file stream.
-size_t Lith_FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp)
+size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp)
 {
    size_t res = 0;
 

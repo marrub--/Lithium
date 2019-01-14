@@ -57,7 +57,7 @@ static i96 scorethreshold = 1000000;
 
 // Static Functions ----------------------------------------------------------|
 
-static void Lith_SpawnBossReward(void)
+static void SpawnBossReward(void)
 {
    k32 x = GetX(0);
    k32 y = GetY(0);
@@ -73,20 +73,20 @@ static void Lith_SpawnBossReward(void)
    }
 }
 
-static void Lith_TriggerBoss(void)
+static void TriggerBoss(void)
 {
    static bool firstboss = true;
 
    if(!boss) return;
 
    if(boss->dead) {
-      Log("Lith_TriggerBoss: %S is dead, invalid num", boss->name);
+      Log("%s: %S is dead, invalid num", __func__, boss->name);
       boss = nil;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      Log("Lith_TriggerBoss: invalid boss phase");
+      Log("%s: invalid boss phase", __func__);
       boss = nil;
       return;
    }
@@ -94,13 +94,13 @@ static void Lith_TriggerBoss(void)
    if(!boss->phase)
       boss->phase = 1;
 
-   LogDebug(log_boss, "Lith_TriggerBoss: Spawning boss %S phase %i", boss->name, boss->phase);
+   Dbg_Log(log_boss, "%s: Spawning boss %S phase %i", __func__, boss->name, boss->phase);
 
    ServCallI(sm_TriggerBoss);
 
    if(firstboss) {
       firstboss = false;
-      Lith_ForPlayer() p->deliverMail(st_mail_phantom);
+      for_player() P_BIP_GiveMail(p, st_mail_phantom);
    }
 }
 
@@ -114,7 +114,7 @@ static bool CheckDead(struct boss *b, i32 num)
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Lith_SpawnBosses(i96 sum, bool force)
+void SpawnBosses(i96 sum, bool force)
 {
    if(!force && sum < scorethreshold) return;
 
@@ -127,11 +127,11 @@ void Lith_SpawnBosses(i96 sum, bool force)
 
    if(alldead[diff])
    {
-      LogDebug(log_boss, "%s: All dead, returning", __func__);
+      Dbg_Log(log_boss, "%s: All dead, returning", __func__);
       return;
    }
 
-   LogDebug(log_boss, "%s: Spawning boss, difficulty %i", __func__, diff);
+   Dbg_Log(log_boss, "%s: Spawning boss, difficulty %i", __func__, diff);
 
    if(!lastboss || lastboss->dead) switch(diff)
    {
@@ -142,7 +142,7 @@ void Lith_SpawnBosses(i96 sum, bool force)
    else
       boss = lastboss;
 
-   Lith_TriggerBoss();
+   TriggerBoss();
 }
 
 // Scripts -------------------------------------------------------------------|
@@ -180,7 +180,7 @@ void Sc_PhantomDeath(void)
       ACS_Delay(25);
       InvGive(so_PlayerDeathNuke, 1);
       ACS_Delay(25);
-      Lith_ForPlayer() p->deliverMail(StrParam("%SDefeated", boss->name));
+      for_player() P_BIP_GiveMail(p, StrParam("%SDefeated", boss->name));
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;
@@ -195,13 +195,13 @@ void Sc_PhantomDeath(void)
       ACS_Delay(2);
    }
 
-   LogDebug(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
+   Dbg_Log(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
 
-   Lith_SpawnBossReward();
+   SpawnBossReward();
    world.soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
-   DebugNote(c"score threshold raised to %lli\n", scorethreshold);
+   Dbg_Note(c"score threshold raised to %lli\n", scorethreshold);
 
    boss->phase++;
    boss = nil;
@@ -219,8 +219,8 @@ void Sc_SpawnBoss(void)
 
    ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%S", boss->name), boss->phase);
 
-   LogDebug(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
-   DebugNote("boss: %S phase %i spawned\n", boss->name, boss->phase);
+   Dbg_Log(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
+   Dbg_Note("boss: %S phase %i spawned\n", boss->name, boss->phase);
 
    world.bossspawned = true;
 }
@@ -237,7 +237,7 @@ void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
    if(phase)
       {boss->dead = false; boss->phase = phase;}
 
-   Lith_TriggerBoss();
+   TriggerBoss();
 }
 #endif
 

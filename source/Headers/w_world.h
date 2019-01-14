@@ -12,13 +12,14 @@
 #include "w_data.h"
 
 #define InSecret \
-   (world.game == Game_Doom2 && (world.cluster == 9 || world.cluster == 10))
-
+   (world.game == Game_Doom2 && (Cluster == 9 || Cluster == 10))
 #define InHell \
-   (world.game == Game_Doom2 && world.cluster >= 8)
-
+   (world.game == Game_Doom2 && Cluster >= 8)
 #define OnEarth \
-   (world.game == Game_Doom2 && world.cluster == 7)
+   (world.game == Game_Doom2 && Cluster == 7)
+
+#define MapNum ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
+#define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
 enum
 {
@@ -32,9 +33,9 @@ enum
 
 enum
 {
-   CANONTIME_FULL,
-   CANONTIME_SHORT,
-   CANONTIME_DATE
+   ct_full,
+   ct_short,
+   ct_date
 };
 
 struct payoutinfo
@@ -58,31 +59,15 @@ enum game
    Game_Episodic,
 };
 
-char const *Lith_CanonTime(i32 type);
-optargs(1) i32 Lith_UniqueID(i32 tid);
-stkcall void Lith_BeginAngles(i32 x, i32 y);
-stkcall k32 Lith_AddAngle(i32 x, i32 y);
-stkcall void Lith_FreezeTime(bool on);
-script void Lith_InstallCBIItem(i32 num);
+char const *CanonTime(i32 type);
+optargs(1) i32 UniqueID(i32 tid);
+stkcall void BeginAngles(i32 x, i32 y);
+stkcall k32 AddAngle(i32 x, i32 y);
+stkcall void FreezeTime(bool on);
+script void CBI_Install(i32 num);
 
 struct worldinfo
 {
-   __prop mapsecrets {get: ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS)}
-   __prop mapkills   {get: ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS)}
-   __prop mapitems   {get: ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS)}
-   __prop mapnum     {get: ACS_GetLevelInfo(LEVELINFO_LEVELNUM)}
-   __prop mapkillmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS)}
-   __prop mapitemmax {get: ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS)}
-   __prop cluster    {get: ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)}
-   __prop canontime      {get: Lith_CanonTime(CANONTIME_FULL)}
-   __prop canontimeshort {get: Lith_CanonTime(CANONTIME_SHORT)}
-   __prop canondate      {get: Lith_CanonTime(CANONTIME_DATE)}
-   __prop difficulty     {get: ACS_GetCVar(sc_sv_difficulty)}
-   __prop begAngles      {call: Lith_BeginAngles()}
-   __prop addAngles      {call: Lith_AddAngle()}
-   __prop freeze         {call: Lith_FreezeTime()}
-   __prop autosave       {get: ACS_GetCVar(sc_sv_autosave)}
-
    bool singleplayer;
    i32  mapscleared;
    i32  prevcluster;
@@ -97,28 +82,18 @@ struct worldinfo
    i32  game;
    k32  apiversion;
    i32  soulsfreed;
-
-   i32 fun;
-
-   // Bosses
+   i32  fun;
    bool bossspawned;
-
-   // CBI global information
    i32  cbiperf;
    bool cbiupgr[cupg_max];
-
-   // Mod compat
    bool legendoom;
    bool drlamonsters;
-
-   // Extras
    bool pauseinmenus;
 
    // DECORATE data
    i32 a_x, a_y;
    struct polar a_angles[8];
    i32 a_cur;
-   i32 decvars[8];
 };
 
 extern bool lmvar player_init;

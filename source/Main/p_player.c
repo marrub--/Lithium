@@ -24,9 +24,8 @@ static struct {str on, off;} guisnd[gui_max - 1] = {
 
 // Static Functions ----------------------------------------------------------|
 
-static void Lith_PlayerRunScripts(struct player *p);
 #if LITHIUM
-script static void Lith_BossWarning(struct player *p);
+script static void P_BossWarning(struct player *p);
 #endif
 
 // Scripts -------------------------------------------------------------------|
@@ -34,6 +33,18 @@ script static void Lith_BossWarning(struct player *p);
 script type("enter")
 static void Sc_PlayerEntry(void)
 {
+   script  extern void P_Wep_PTickPre(struct player *p);
+   stkcall extern void P_Dat_PTickPre(struct player *p);
+   stkcall static void P_Scr_PTickPre(struct player *p);
+   script  extern void P_CBI_PTick   (struct player *p);
+   script  extern void P_Inv_PTick   (struct player *p);
+   script  extern void P_Log_PTick   (struct player *p);
+   script  extern void P_Upg_PTick   (struct player *p);
+   script  extern void P_Wep_PTick   (struct player *p);
+   stkcall static void P_Atr_PTick   (struct player *p);
+   script  extern void P_Upg_PTickPst(struct player *p);
+   stkcall extern void P_Ren_PTickPst(struct player *p);
+
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
    struct player *p = LocalPlayer;
@@ -41,11 +52,11 @@ static void Sc_PlayerEntry(void)
 reinit:
    while(!player_init) ACS_Delay(1);
 
-   p->reset();
-   Lith_PlayerLogEntry(p);
-   Lith_PlayerEnterUpgrades(p);
+   P_Init(p);
+   P_Log_Entry(p);
+   P_Upg_Enter(p);
    #if LITHIUM
-   p->loadData();
+   P_Data_Load(p);
 
    if(p->num == 0)
    {
@@ -53,7 +64,7 @@ reinit:
       ServCallI(sm_Fun, world.fun);
    }
 
-   Lith_BossWarning(p);
+   P_BossWarning(p);
    #endif
 
    while(p->active)
@@ -61,7 +72,7 @@ reinit:
       if(p->reinit)
          goto reinit;
 
-      Lith_PlayerUpdateData(p);
+      P_Dat_PTickPre(p);
 
       // Check for resurrect.
       if(p->health > 0 && p->dead)
@@ -72,8 +83,38 @@ reinit:
       i32 oldhealth = p->health;
       i32 oldmana   = p->mana;
 
-      // Run logic and rendering
-      Lith_PlayerRunScripts(p);
+      // Pre-tick
+      #if LITHIUM
+      P_Wep_PTickPre(p); // Update weapon info
+      #endif
+      P_Scr_PTickPre(p); // Update score
+
+      if(!p->dead) P_Upg_PTick(p);
+      P_Upg_PTickPst(p);
+
+      // Tick
+      if(!p->dead)
+      {
+         #if LITHIUM
+         P_Inv_PTick(p);
+         #endif
+
+         switch(p->activegui)
+         case gui_cbi: P_CBI_PTick(p);
+
+         P_Atr_PTick(p);
+         #if LITHIUM
+         P_Wep_PTick(p);
+         #endif
+         P_Log_PTick(p);
+
+         P_Dat_PTickPst(p); // Update engine info
+
+         if(world.pauseinmenus) ServCallI(sm_PauseTick, p->num);
+      }
+
+      // Post-tick
+      P_Ren_PTickPst(p);
 
       // Update view (extra precision is required here to ensure accuracy)
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)p->addpitch);
@@ -86,9 +127,9 @@ reinit:
       #if LITHIUM
       if(p->dlgnum)
       {
-         script extern void Lith_DialogueVM(struct player *p, i32 dlgnum);
+         script extern void Dlg_Run(struct player *p, i32 dlgnum);
 
-         Lith_DialogueVM(p, p->dlgnum);
+         Dlg_Run(p, p->dlgnum);
          p->dlgnum = 0;
       }
       #endif
@@ -104,7 +145,7 @@ reinit:
       ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)p->addroll);
 
       // If the map changes this we need to make sure it's still correct.
-      p->validateTID();
+      P_ValidateTID(p);
 
       p->ticks++;
    }
@@ -117,17 +158,17 @@ static void Sc_PlayerDeath(void)
 
    p->dead = true;
 
-   Lith_PlayerDeinitUpgrades(p);
+   P_Upg_PDeinit(p);
 
    #if LITHIUM
    // unfortunately, we can't keep anything even when we want to
-   Lith_PlayerDeallocInventory(p);
+   P_Inv_PQuit(p);
    #endif
 
    if(world.singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
    {
-      Lith_PlayerDeallocUpgrades(p);
-      p->bip.deallocate();
+      P_Upg_PQuit(p);
+      P_BIP_PQuit(p);
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
 
@@ -170,9 +211,9 @@ static void Sc_PlayerDisconnect(void)
 {
    struct player *p = LocalPlayer;
 
-   p->bip.deallocate();
+   P_BIP_PQuit(p);
 
-   p->hudstrlist.free(true);
+   ListDtor(&p->hudstrlist, true);
 
    upgrademap_t_dtor(&p->upgrademap);
 
@@ -190,7 +231,7 @@ static void Sc_PlayerDisconnect(void)
 GDCC_HashMap_Defn(upgrademap_t, i32, struct upgrade)
 
 stkcall
-struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
+struct upgrade *P_Upg_GetNamed(struct player *p, i32 name)
 {
    struct upgrade *upgr = p->upgrademap.find(name);
    if(!upgr) Log("null pointer trying to find upgrade %i", name);
@@ -198,19 +239,14 @@ struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name)
 }
 
 stkcall
-bool Lith_PlayerGetUpgradeActive(struct player *p, i32 name)
+bool P_Upg_IsActive(struct player *p, i32 name)
 {
    ifauto(struct upgrade *, upgr, p->upgrademap.find(name)) return upgr->active;
    else                                                return false;
 }
 
-struct player (*Lith_GetPlayersExtern(void))[MAX_PLAYERS]
-{
-   return &players;
-}
-
 stkcall
-char const *Lith_PlayerDiscriminator(i32 pclass)
+char const *P_Discrim(i32 pclass)
 {
    switch(pclass) {
    case pcl_marine:    return "Stan";
@@ -224,22 +260,22 @@ char const *Lith_PlayerDiscriminator(i32 pclass)
    return "Mod";
 }
 
-struct player *Lith_GetPlayer(i32 tid, i32 ptr)
+struct player *P_PtrFind(i32 tid, i32 ptr)
 {
-   i32 pnum = Lith_GetPlayerNumber(tid, ptr);
+   i32 pnum = PtrPlayerNumber(tid, ptr);
    if(pnum >= 0) return &players[pnum];
    else          return nil;
 }
 
 stkcall
-void Lith_PlayerCloseGUI(struct player *p)
+void P_GUI_Close(struct player *p)
 {
    if(p->activegui != gui_none)
    {
       if(world.pauseinmenus)
       {
          ServCallI(sm_SetPaused, false);
-         Lith_ForPlayer() p->frozen--;
+         for_player() p->frozen--;
       }
       else
          p->frozen--;
@@ -250,7 +286,7 @@ void Lith_PlayerCloseGUI(struct player *p)
 }
 
 stkcall
-void Lith_PlayerUseGUI(struct player *p, i32 type)
+void P_GUI_Use(struct player *p, i32 type)
 {
    if(p->dead) return;
    if(p->activegui == gui_none)
@@ -258,7 +294,7 @@ void Lith_PlayerUseGUI(struct player *p, i32 type)
       if(world.pauseinmenus)
       {
          ServCallI(sm_SetPaused, true);
-         Lith_ForPlayer() p->frozen++;
+         for_player() p->frozen++;
       }
       else
          p->frozen++;
@@ -270,7 +306,7 @@ void Lith_PlayerUseGUI(struct player *p, i32 type)
       p->activegui = type;
    }
    else if(p->activegui == type)
-      p->closeGUI();
+      P_GUI_Close(p);
    else
    {
       ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
@@ -279,7 +315,7 @@ void Lith_PlayerUseGUI(struct player *p, i32 type)
    }
 }
 
-i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
+i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
 {
    // Could cause division by zero
    if(score == 0)
@@ -325,7 +361,7 @@ i96 Lith_GiveScore(struct player *p, i96 score, bool nomul)
 }
 
 stkcall
-void Lith_TakeScore(struct player *p, i96 score)
+void P_Scr_Take(struct player *p, i96 score)
 {
    if(p->score - score >= 0) {
       p->scoreused += score;
@@ -343,7 +379,7 @@ void Lith_TakeScore(struct player *p, i96 score)
 
 #if LITHIUM
 script
-static void Lith_BossWarning(struct player *p)
+static void P_BossWarning(struct player *p)
 {
    ACS_Delay(35 * 5);
 
@@ -351,81 +387,6 @@ static void Lith_BossWarning(struct player *p)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 #endif
-
-// Run main loop scripts.
-static void Lith_PlayerRunScripts(struct player *p)
-{
-   script extern void Lith_PlayerPreWeapons(struct player *p);
-   script static void Lith_PlayerPreScore(struct player *p);
-   script static void Lith_PlayerPreStats(struct player *p);
-
-   script extern void Lith_PlayerUpdateCBIGUI(struct player *p);
-   script extern void Lith_PlayerUpdateInventory(struct player *p);
-   script static void Lith_PlayerUpdateAttributes(struct player *p);
-   script extern void Lith_PlayerUpdateUpgrades(struct player *p);
-   script extern void Lith_PlayerUpdateWeapons(struct player *p);
-   script extern void Lith_PlayerUpdateLog(struct player *p);
-
-   script  extern void Lith_PlayerFootstep(struct player *p);
-   stkcall extern void Lith_PlayerItemFx(struct player *p);
-   script  extern void Lith_PlayerDamageBob(struct player *p);
-   script  extern void Lith_PlayerView(struct player *p);
-   script  extern void Lith_PlayerRenderUpgrades(struct player *p);
-   script  extern void Lith_PlayerHUD(struct player *p);
-   script  extern void Lith_PlayerStyle(struct player *p);
-   script  extern void Lith_PlayerLevelup(struct player *p);
-   script  extern void Lith_PlayerDebugStats(struct player *p);
-
-   // Pre-logic: Update data from the engine.
-   #if LITHIUM
-   Lith_PlayerPreWeapons(p); // Update weapon info
-   #endif
-   Lith_PlayerPreScore(p);   // Update score
-
-   if(ACS_Timer() > 4)
-      Lith_PlayerPreStats(p); // Update statistics
-
-   if(!p->dead)
-      Lith_PlayerUpdateUpgrades(p);
-
-   Lith_PlayerRenderUpgrades(p);
-
-   if(!p->dead)
-   {
-      #if LITHIUM
-      // Logic: Update our data.
-      Lith_PlayerUpdateInventory(p);
-      #endif
-
-      switch(p->activegui)
-      case gui_cbi: Lith_PlayerUpdateCBIGUI(p);
-
-      Lith_PlayerUpdateAttributes(p);
-      #if LITHIUM
-      Lith_PlayerUpdateWeapons(p);
-      #endif
-      Lith_PlayerUpdateLog(p);
-
-      // Post-logic: Update the engine's data.
-      Lith_PlayerUpdateStats(p); // Update engine info
-
-      if(world.pauseinmenus) ServCallI(sm_PauseTick, p->num);
-   }
-
-   // Rendering
-   Lith_PlayerFootstep(p);
-   #if LITHIUM
-   Lith_PlayerItemFx(p);
-   #endif
-   Lith_PlayerDamageBob(p);
-   Lith_PlayerView(p);
-   #if LITHIUM
-   Lith_PlayerHUD(p);
-   Lith_PlayerStyle(p);
-   #endif
-   Lith_PlayerLevelup(p);
-   Lith_PlayerDebugStats(p);
-}
 
 stkcall
 static void AttrRGE(struct player *p)
@@ -449,10 +410,10 @@ static void AttrCON(struct player *p)
    p->rage = lerpk(p->rage, 0, 0.03);
 }
 
-script
-static void Lith_PlayerUpdateAttributes(struct player *p)
+stkcall
+static void P_Atr_PTick(struct player *p)
 {
-   if(Lith_IsPaused) return;
+   if(Paused) return;
 
    k32  acc = p->attr.attrs[at_acc] / 150.0;
    k32  def = p->attr.attrs[at_def] / 170.0;
@@ -474,8 +435,8 @@ static void Lith_PlayerUpdateAttributes(struct player *p)
       p->health = p->health + 1;
 }
 
-script
-static void Lith_PlayerPreScore(struct player *p)
+stkcall
+static void P_Scr_PTickPre(struct player *p)
 {
    if(!p->scoreaccumtime || p->score < p->old.score)
    {
@@ -487,23 +448,12 @@ static void Lith_PlayerPreScore(struct player *p)
    else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
 }
 
-script
-static void Lith_PlayerPreStats(struct player *p)
-{
-        if(p->health < p->oldhealth                    ) p->healthused += p->oldhealth - p->health;
-   else if(p->health > p->oldhealth && ACS_Timer() != 1) p->healthsum  += p->health    - p->oldhealth;
-
-   if(p->x != p->old.x) p->unitstravelled += abs(p->x - p->old.x);
-   if(p->y != p->old.y) p->unitstravelled += abs(p->y - p->old.y);
-   if(p->z != p->old.z) p->unitstravelled += abs(p->z - p->old.z);
-}
-
 // Scripts -------------------------------------------------------------------|
 
 script ext("ACS") addr(lsc_drawplayericon)
 void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
 {
-   withplayer(&players[num])
+   with_player(&players[num])
    {
       k32 a = absk((x - 160) / 90.0);
            if(a < 0.2) a = 0.2;
@@ -519,7 +469,7 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
 script_str type("net") ext("ACS") addr("Lith_Glare")
 void Sc_Glare(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 

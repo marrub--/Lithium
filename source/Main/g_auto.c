@@ -15,7 +15,7 @@ noinit static char tcbuf[4096];
 // Extern Functions ----------------------------------------------------------|
 
 stkcall
-void Lith_GUI_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
+void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
 {
    x += g->ox;
    y += g->oy;
@@ -39,14 +39,14 @@ void Lith_GUI_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool
 }
 
 stkcall
-void Lith_GUI_Init(struct gui_state *g, void *state)
+void G_Init(struct gui_state *g, void *state)
 {
    g->state = state;
    g->gfxprefix = c":UI:";
 }
 
 stkcall
-void Lith_GUI_UpdateState(struct gui_state *g, struct player *p)
+void G_UpdateState(struct gui_state *g, struct player *p)
 {
    bool inverted = p->getCVarI(sc_player_invertmouse);
 
@@ -77,7 +77,7 @@ void Lith_GUI_UpdateState(struct gui_state *g, struct player *p)
 }
 
 stkcall
-void Lith_GUI_Begin(struct gui_state *g, i32 w, i32 h)
+void G_Begin(struct gui_state *g, i32 w, i32 h)
 {
    if(!w) w = 320;
    if(!h) h = 200;
@@ -89,7 +89,7 @@ void Lith_GUI_Begin(struct gui_state *g, i32 w, i32 h)
 }
 
 stkcall
-void Lith_GUI_End(struct gui_state *g, enum cursor curs)
+void G_End(struct gui_state *g, enum cursor curs)
 {
    str cgfx;
 
@@ -114,7 +114,7 @@ void Lith_GUI_End(struct gui_state *g, enum cursor curs)
 }
 
 stkcall
-void Lith_GUI_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
+void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
 {
    g->useclip = true;
    g->clpxE = x + w;
@@ -125,14 +125,14 @@ void Lith_GUI_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
 }
 
 stkcall
-void Lith_GUI_ClipRelease(struct gui_state *g)
+void G_ClipRelease(struct gui_state *g)
 {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
    ClearClip();
 }
 
 stkcall
-void Lith_GUI_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
+void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
 {
    typeon->txt = text;
    typeon->len = ACS_StrLen(text);
@@ -178,7 +178,7 @@ char const *RemoveTextColors(char const *s, i32 size)
 }
 
 stkcall
-struct gui_typ const *Lith_GUI_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon)
+struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon)
 {
    i32 num = ACS_Random(2, 15);
 

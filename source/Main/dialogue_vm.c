@@ -81,7 +81,7 @@ struct dlgdef *lmvar dlgdefs;
 // Static Functions ----------------------------------------------------------|
 
 script
-static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
+static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {
       // background
@@ -106,8 +106,8 @@ static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *v
                         vm->sr[DSTR_REMOTE] :
                         "<unknown>@raddr.4E19";
 
-   Lith_GUI_Begin(g, sizex, sizey);
-   Lith_GUI_UpdateState(g, p);
+   G_Begin(g, sizex, sizey);
+   G_UpdateState(g, p);
 
    // Background
    SetSize(480, 300);
@@ -135,8 +135,8 @@ static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *v
    switch(vm->trmActi)
    {
    case TACT_LOGON:
-   case TACT_LOGOFF: btright = l_strdup(world.canondate); break;
-   default:          btright = st_term_use_to_ack;        break;
+   case TACT_LOGOFF: btright = l_strdup(CanonTime(ct_date)); break;
+   default:          btright = st_term_use_to_ack;           break;
    }
 
    PrintText_str(btright, s_smallfnt, CR_RED, tright,2, tbottom,2);
@@ -187,7 +187,7 @@ static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *v
       break;
    }
 
-   Lith_GUI_End(g, gui_curs_outlineinv);
+   G_End(g, gui_curs_outlineinv);
 
    if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.indialogue)
    {
@@ -198,7 +198,7 @@ static void Lith_TerminalGUI(struct gui_state *g, struct player *p, struct vm *v
 }
 
 script
-static void Lith_DialogueGUI(struct gui_state *g, struct player *p, struct vm *vm)
+static void DialogueGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {left = 37, top = 75};
 
@@ -206,8 +206,8 @@ static void Lith_DialogueGUI(struct gui_state *g, struct player *p, struct vm *v
    char const *remo = vm->sr[DSTR_REMOTE];
    char icon[32] = ":Dialogue:Icon"; strcat(icon, vm->sr[DSTR_ICON]);
 
-   Lith_GUI_Begin(g, 320, 240);
-   Lith_GUI_UpdateState(g, p);
+   G_Begin(g, 320, 240);
+   G_UpdateState(g, p);
 
    PrintSpriteA(sp_Dialogue_Back, 0,1, 0,1, 0.7);
    PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
@@ -217,7 +217,7 @@ static void Lith_DialogueGUI(struct gui_state *g, struct player *p, struct vm *v
    PrintText(s_lhudfont, CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, world.canontime, vm->textC, vm->textV);
+   PrintTextFmt("\Cd> Remote: %s\n\Cd> Date: %s\n\n\C-%.*s", remo, CanonTime(ct_full), vm->textC, vm->textV);
    PrintText(s_cbifont, CR_WHITE, left,1, top,1);
    ClearClip();
 
@@ -225,14 +225,14 @@ static void Lith_DialogueGUI(struct gui_state *g, struct player *p, struct vm *v
    {
       i32 y = 220 - (14 * vm->optNum);
       for(i32 i = 0; i < vm->optNum; i++, y += 14)
-         if(Lith_GUI_Button_Id(g, i, vm->option[i].name, 45, y, Pre(btndlgsel)))
+         if(G_Button_Id(g, i, vm->option[i].name, 45, y, Pre(btndlgsel)))
       {
          vm->action = ACT_SELOPTION;
          vm->optSel = i;
       }
    }
 
-   Lith_GUI_End(g, gui_curs_outlineinv);
+   G_End(g, gui_curs_outlineinv);
 }
 
 static void SetText(struct vm *vm, char const *s)
@@ -302,7 +302,7 @@ static void TeleportOutEffect(struct player *p)
 
 // Main dialogue VM.
 script
-void Lith_DialogueVM(struct player *p, i32 num)
+void Dlg_Run(struct player *p, i32 num)
 {
    if(p->dead || p->indialogue > 1)
       return;
@@ -318,7 +318,7 @@ void Lith_DialogueVM(struct player *p, i32 num)
    // GUI state
    struct gui_state gst = {};
    gst.gfxprefix = ":UI_Green:";
-   Lith_GUI_Init(&gst);
+   G_Init(&gst);
 
    // VM state
    struct vm vm = {};
@@ -444,12 +444,12 @@ opDCD_DLGWAIT:
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
 
    p->frozen++;
-   p->setVel(0, 0, 0);
+   P_SetVel(p, 0, 0, 0);
 
    if(vm.textV[0]) HudMessageLog("%.*s", vm.textC, vm.textV);
 
    do {
-      Lith_DialogueGUI(&gst, p, &vm);
+      DialogueGUI(&gst, p, &vm);
       ACS_Delay(1);
    } while(vm.action == ACT_NONE);
 
@@ -474,12 +474,12 @@ terminal:
 
       bool timer = vm.trmTime != 0;
       p->frozen++;
-      p->setVel(0, 0, 0);
+      P_SetVel(p, 0, 0, 0);
 
       if(vm.textV[0]) HudMessageLog("%.*s", vm.textC, vm.textV);
 
       do {
-         Lith_TerminalGUI(&gst, p, &vm);
+         TerminalGUI(&gst, p, &vm);
          ACS_Delay(1);
       } while(vm.action == ACT_NONE && (!timer || --vm.trmTime >= 0));
 
@@ -519,13 +519,13 @@ done:
 script_str ext("ACS") addr("Lith_TeleportOutEffect")
 void Sc_TeleportOutEffect(struct player *p)
 {
-   withplayer(LocalPlayer) TeleportOutEffect(p);
+   with_player(LocalPlayer) TeleportOutEffect(p);
 }
 
 script_str ext("ACS") addr("Lith_RunDialogue")
 void Sc_RunDialogue(i32 num)
 {
-   withplayer(LocalPlayer) if(!p->indialogue)
+   with_player(LocalPlayer) if(!p->indialogue)
    {
       p->dlgnum = num;
       p->indialogue++;
@@ -535,7 +535,7 @@ void Sc_RunDialogue(i32 num)
 script_str ext("ACS") addr("Lith_RunTerminal")
 void Sc_RunTerminal(i32 num)
 {
-   withplayer(LocalPlayer) if(!p->indialogue)
+   with_player(LocalPlayer) if(!p->indialogue)
    {
       p->dlgnum = -num;
       p->indialogue++;

@@ -9,7 +9,7 @@
 #include "w_world.h"
 #include "gui.h"
 
-void Lith_CBITab_Statistics(struct gui_state *g, struct player *p)
+void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
 {
    i32 n = 0;
 

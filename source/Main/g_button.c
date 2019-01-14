@@ -7,17 +7,17 @@
 #include "common.h"
 #include "p_player.h"
 
-bool Lith_GUI_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
+bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
 {
    struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
 
    if(!a->disabled)
-      Lith_GUI_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
+      G_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
 
    __with(char graphic[30];)
    {
-      if(g->hot == id && pre->hot) Lith_GUI_Prefix(g, graphic, pre, hot);
-      else                         Lith_GUI_Prefix(g, graphic, pre, gfx);
+      if(g->hot == id && pre->hot) G_Prefix(g, graphic, pre, hot);
+      else                         G_Prefix(g, graphic, pre, gfx);
 
       if(graphic[0]) PrintSprite(l_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
    }

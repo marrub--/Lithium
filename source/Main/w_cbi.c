@@ -47,7 +47,7 @@ struct cupgdef const *GetCUpgr(i32 pclass, i32 num)
 }
 
 script
-void Lith_InstallCBIItem(i32 num)
+void CBI_Install(i32 num)
 {
    if(num < 0 || num >= cupg_max || world.cbiupgr[num]) return;
 
@@ -58,7 +58,7 @@ void Lith_InstallCBIItem(i32 num)
    case cupg_hasupgr2: world.cbiperf += 40; break;
    }
 
-   Lith_ForPlayer()
+   for_player()
    {
       p->setActivator();
 
@@ -66,15 +66,15 @@ void Lith_InstallCBIItem(i32 num)
          if(c->nam)
       {
          bip_name_t tag; lstrcpy_str(tag, c->nam);
-         p->bipUnlock(tag);
+         P_BIP_Unlock(p, tag);
       }
    }
 }
 
-void Lith_InstallSpawnedCBIItems(void)
+void CBI_InstallSpawned(void)
 {
    for(i32 i = 0; i < cbispawniter; i++)
-      Lith_InstallCBIItem(cbispawn[i]);
+      CBI_Install(cbispawn[i]);
 }
 
 // Scripts -------------------------------------------------------------------|
@@ -88,15 +88,15 @@ void Sc_CBIItemWasSpawned(i32 num)
 script_str ext("ACS") addr("Lith_PickupCBIItem")
 void Sc_PickupCBIItem(i32 num)
 {
-   withplayer(LocalPlayer)
-      Lith_FadeFlash(0, 255, 0, 0.7, 0.5);
+   with_player(LocalPlayer)
+      FadeFlash(0, 255, 0, 0.7, 0.5);
 
-   Lith_ForPlayer() {
+   for_player() {
       ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
          if(c->msg) p->logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%S", c->msg));
    }
 
-   Lith_InstallCBIItem(num);
+   CBI_Install(num);
 }
 #endif
 

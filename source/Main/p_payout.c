@@ -13,7 +13,7 @@
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Lith_PlayerPayout(struct player *p)
+void P_Scr_Payout(struct player *p)
 {
 #define Left(...) \
    ( \
@@ -100,7 +100,7 @@ void Lith_PlayerPayout(struct player *p)
 
    ACS_Delay(20);
 
-   p->giveScore(pay.total, true);
+   P_Scr_Give(p, pay.total, true);
 }
 #endif
 

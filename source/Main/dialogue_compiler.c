@@ -13,11 +13,11 @@
 #include "m_tokbuf.h"
 
 #define LogTok(tok, s) \
-   Log(c"(%i:%i) " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, tok->type, \
-      tok->textV ? tok->textV : c"<no string>")
+   Log(c"(%i:%i) %s: " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, __func__, \
+      tok->type, tok->textV ? tok->textV : c"<no string>")
 
 #define LogOri(tok, s) \
-   Log(c"(%i:%i) " s, tok->orig.line, tok->orig.colu)
+   Log(c"(%i:%i) %s: " s, tok->orig.line, tok->orig.colu, __func__)
 
 // Extern Objects ------------------------------------------------------------|
 
@@ -145,7 +145,7 @@ static void GenCode_Pop(struct pstate *d, struct arg *argv, i32 argc)
    GenCode_Reg(POP)
    {
       struct token *tok = d->tb.reget();
-      LogOri(tok, "GenCode_Pop: invalid argument");
+      LogOri(tok, "invalid argument");
    }
 }
 
@@ -193,11 +193,11 @@ static void GetCode_Cond(struct pstate *d)
       switch(StrName(tok->textV)) {
       case STR_item:  code = DCD_JNITEM;  break;
       case STR_class: code = DCD_JNCLASS; break;
-      default: LogOri(tok, "GetCode_Cond: invalid conditional"); return;
+      default: LogOri(tok, "invalid conditional"); return;
       }
    }
    else
-      LogTok(tok, "GetCode_Cond: expected identifier");
+      LogTok(tok, "expected identifier");
 
    // Generate code.
    i32 ptr = 0;
@@ -216,14 +216,14 @@ static void GetCode_Cond(struct pstate *d)
                {*d->nextCode() = r; goto ok;}
          #include "p_player.h"
 
-         LogOri(tok, "GetCode_Cond: invalid playerclass type");
+         LogOri(tok, "invalid playerclass type");
          return;
       }
       else
          *d->nextCode() = d->addString(tok->textV, tok->textC);
    }
    else
-      LogOri(tok, "GetCode_Cond: invalid token in conditional statement");
+      LogOri(tok, "invalid token in conditional statement");
 
    // Generate statement.
 ok:
@@ -267,7 +267,7 @@ static void GetCode_Option(struct pstate *d)
       *d->nextCode() = d->addString(tok->textV, tok->textC);
    }
    else
-      LogOri(tok, "GetCode_Option: invalid option parameter");
+      LogOri(tok, "invalid option parameter");
 
    // Generate statement.
    GetStatement(d);
@@ -287,12 +287,12 @@ static void GetCode_Exec(struct pstate *d)
 static void GetCode_Generic(struct pstate *d)
 {
    struct token *tok = d->tb.reget();
-   LogDebug(log_dlg, "call: %s", tok->textV);
+   Dbg_Log(log_dlg, "call: %s", tok->textV);
 
    // Get the function to generate.
    struct dlgfunc const *func = ftbl.find(tok->textV);
    if(!func) {
-      LogOri(tok, "GetCode_Generic: invalid function in dialogue code");
+      LogOri(tok, "invalid function in dialogue code");
       return;
    }
 
@@ -311,7 +311,7 @@ static void GetCode_Generic(struct pstate *d)
 
       if(!(tok = d->tb.get())->textV)
       {
-         LogTok(tok, "GetCode_Generic: invalid token in argument list");
+         LogTok(tok, "invalid token in argument list");
          return;
       }
 
@@ -320,7 +320,7 @@ static void GetCode_Generic(struct pstate *d)
       case 'S': argv[argc++].s = d->addString(tok->textV, tok->textC); break;
       }
 
-      LogDebug(log_dlg, "arg %i: %s", argc, tok->textV);
+      Dbg_Log(log_dlg, "arg %i: %s", argc, tok->textV);
 
       if(!d->tb.drop(tok_comma) || d->tb.drop(tok_semico))
          break;
@@ -335,7 +335,7 @@ static void GetCode_Generic(struct pstate *d)
       case 'L': argv[argc++].i = func->lit[lit++];     break;
       }
 
-      LogDebug(log_dlg, "arg %i emptied", argc);
+      Dbg_Log(log_dlg, "arg %i emptied", argc);
    }
 
    func->genCode(d, argv, argc);
@@ -355,7 +355,7 @@ static void GetCode_Line(struct pstate *d)
    switch(tok->type)
    {
    case tok_identi:
-      LogDebug(log_dlg, "GetCode_Line: %s", tok->textV);
+      Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
       switch(StrName(tok->textV)) {
       case STR_if:     GetCode_Cond   (d); break;
       case STR_option: GetCode_Option (d); break;
@@ -369,7 +369,7 @@ static void GetCode_Line(struct pstate *d)
    case tok_eof:
       break;
    default:
-      LogTok(tok, "GetCode_Line: invalid token in line");
+      LogTok(tok, "invalid token in line");
    }
 }
 
@@ -407,7 +407,7 @@ static void SetupDialogue(struct pstate *d, i32 num)
    if(!last) dlgdefs    = d->def;
    else      last->next = d->def;
 
-   LogDebug(log_dlg, "set up dialogue %i", num);
+   Dbg_Log(log_dlg, "set up dialogue %i", num);
 }
 
 static void GetDecl_Dialogue(struct pstate *d)
@@ -416,10 +416,10 @@ static void GetDecl_Dialogue(struct pstate *d)
 
    if(tok->type == tok_number) {
       SetupDialogue(d, strtoi(tok->textV, nil, 0));
-      LogDebug(log_dlg, "\n---\ndialogue %i (%i)\n---",
+      Dbg_Log(log_dlg, "\n---\ndialogue %i (%i)\n---",
          d->def->num, d->def->codeC);
    } else {
-      LogOri(tok, "GetDecl_Dialogue: invalid dialogue number token");
+      LogOri(tok, "invalid dialogue number token");
    }
 }
 
@@ -429,10 +429,10 @@ static void GetDecl_Terminal(struct pstate *d)
 
    if(tok->type == tok_number) {
       SetupDialogue(d, -strtoi(tok->textV, nil, 0));
-      LogDebug(log_dlg, "\n---\nterminal %i (%i)\n---",
+      Dbg_Log(log_dlg, "\n---\nterminal %i (%i)\n---",
          -d->def->num, d->def->codeC);
    } else {
-      LogOri(tok, "GetDecl_Terminal: invalid terminal number token");
+      LogOri(tok, "invalid terminal number token");
    }
 }
 
@@ -440,7 +440,7 @@ static void SetupPage(struct pstate *d, i32 num)
 {
    d->def->pages[num] = d->def->codeC;
 
-   LogDebug(log_dlg, "--- page %i (%i)", num, d->def->codeC);
+   Dbg_Log(log_dlg, "--- page %i (%i)", num, d->def->codeC);
 }
 
 static void GetDecl_Page(struct pstate *d)
@@ -450,7 +450,7 @@ static void GetDecl_Page(struct pstate *d)
    if(tok->type == tok_number)
       SetupPage(d, strtoi(tok->textV, nil, 0));
    else
-      LogOri(tok, "GetDecl_Page: invalid page number token");
+      LogOri(tok, "invalid page number token");
 
    GetStatement(d);
 
@@ -470,7 +470,7 @@ static void GetDecl_TrmPage(struct pstate *d, i32 num)
 
 // Loads all string indices into the global stbl, and all function
 // prototypes into the global ftbl.
-void Lith_GInit_Dialogue(void)
+void Dlg_GInit(void)
 {
    static struct dlgfunc funcs[] = {
       {"nop", "L", DCD_NOP},
@@ -542,7 +542,7 @@ void Lith_GInit_Dialogue(void)
    }
 }
 
-void Lith_LoadMapDialogue(void)
+void Dlg_MInit(void)
 {
    // Free any previous dialogue definitions.
    if(dlgdefs)
@@ -566,12 +566,12 @@ void Lith_LoadMapDialogue(void)
 
    if(!d.tb.fp) return;
 
-   d.tb.ctor();
+   TBufCtor(&d.tb);
 
    for(struct token *tok; (tok = d.tb.get())->type != tok_eof;)
    {
       if(tok->type != tok_identi) {
-         LogTok(tok, "Lith_LoadMapDialogue: invalid toplevel token");
+         LogTok(tok, "invalid toplevel token");
          break;
       }
 
@@ -582,12 +582,12 @@ void Lith_LoadMapDialogue(void)
       case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
       case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
       case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
-      default: Log("Lith_LoadMapDialogue: invalid identifier \"%s\"", tok->textV); goto done;
+      default: Log("%s: invalid identifier \"%s\"", __func__, tok->textV); goto done;
       }
    }
 
 done:
-   d.tb.dtor();
+   TBufDtor(&d.tb);
    fclose(d.tb.fp);
 
    if(dbglevel & log_dlg)
@@ -603,7 +603,7 @@ done:
             Log("%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
                ? dcdnames[def->codeV[i]] : c"");
          Log("Dumping string table for script %i...\n%s");
-         Lith_PrintMem(def->stabV, def->stabC);
+         Dbg_PrintMem(def->stabV, def->stabC);
       }
 
       Log("Done.");

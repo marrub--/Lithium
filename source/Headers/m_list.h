@@ -32,21 +32,19 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-optargs(1) void Lith_LinkDefault(struct list *list, void *object);
-void Lith_ListLink(struct list *head, struct list *list);
-void *Lith_ListUnlink(struct list *list);
-size_t Lith_ListSize(struct list *head);
-optargs(1) void Lith_ListFree(struct list *head, bool dofree);
+optargs(1) void ListCtor(struct list *list, void *object);
+optargs(1) void ListDtor(struct list *head, bool dofree);
+void ListLink(struct list *head, struct list *list);
+void *ListUnlink(struct list *list);
+size_t ListSize(struct list *head);
 
 // Type Definitions ----------------------------------------------------------|
 
 struct list
 {
-   __prop construct {call: Lith_LinkDefault(this)}
-   __prop link      {call: Lith_ListLink(__arg, this)}
-   __prop unlink    {call: Lith_ListUnlink(this)}
-   __prop size      {call: Lith_ListSize(this)}
-   __prop free      {call: Lith_ListFree(this)}
+   __prop link   {call: ListLink(__arg, this)}
+   __prop unlink {call: ListUnlink(this)}
+   __prop size   {call: ListSize(this)}
 
    void *object;
    struct list *prev, *next;

@@ -9,11 +9,11 @@
 #include "w_world.h"
 #include "m_cps.h"
 
-struct gui_txt *Lith_GUI_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt const *a)
+struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt const *a)
 {
    struct gui_txt *st = a->st;
 
-   Lith_GUI_Auto(g, id, a->x, a->y, 260, 10);
+   G_Auto(g, id, a->x, a->y, 260, 10);
 
    bool hot = g->hot == id;
 

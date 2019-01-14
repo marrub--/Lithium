@@ -11,21 +11,20 @@
 
 // Extern Functions ----------------------------------------------------------|
 
-i96 Lith_ShopGetCost(struct player *p, struct shopdef const *def)
+i96 P_Shop_Cost(struct player *p, struct shopdef const *def)
 {
-   return PlayerDiscount(def->cost);
+   return P_Discount(def->cost);
 }
 
-bool Lith_ShopCanBuy(struct player *p, struct shopdef const *def, void *obj)
+bool P_Shop_CanBuy(struct player *p, struct shopdef const *def, void *obj)
 {
-   return
-      p->score - p->getCost(def) >= 0 &&
-      (def->ShopCanBuy ? def->ShopCanBuy(p, def, obj) : true);
+   return p->score - P_Shop_Cost(p, def) >= 0 &&
+          (def->ShopCanBuy ? def->ShopCanBuy(p, def, obj) : true);
 }
 
-bool Lith_ShopBuy(struct player *p, struct shopdef const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
+bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
 {
-   if(!p->canBuy(def, obj))
+   if(!P_Shop_CanBuy(p, def, obj))
       return false;
 
    if(!nolog) p->logF("Bought %S", Language(namefmt, def->name)); // TODO
@@ -33,10 +32,10 @@ bool Lith_ShopBuy(struct player *p, struct shopdef const *def, void *obj, char c
    if(def->bipunlock)
    {
       bip_name_t tag; lstrcpy_str(tag, def->bipunlock);
-      p->bipUnlock(tag);
+      P_BIP_Unlock(p, tag);
    }
 
-   p->takeScore(p->getCost(def));
+   P_Scr_Take(p, P_Shop_Cost(p, def));
 
    bool delivered = false;
 

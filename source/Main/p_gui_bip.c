@@ -13,8 +13,8 @@ static void SetCurPage(struct gui_state *g, struct bip *bip, struct page *page, 
 {
    bip->curpage = page;
 
-   Lith_GUI_TypeOn(g, &CBIState(g)->biptypeon, body);
-   Lith_GUI_ScrollReset(g, &CBIState(g)->bipinfoscr);
+   G_TypeOn(g, &CBIState(g)->biptypeon, body);
+   G_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
 script
@@ -42,26 +42,26 @@ static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
    for(i32 i = 0; i < countof(lines); i++)
       PrintTextA_str(lines[i], s_cbifont, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
 
-   if(Lith_GUI_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
+   if(G_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
       bip->curcategory = BIPC_SEARCH;
    n += 10;
-#define LITH_X(name, capt) \
-   if(Lith_GUI_Button_Id(g, BIPC_##name, LC(cLANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
-   { \
-      bip->curcategory = BIPC_##name; \
-      bip->curpage     = nil; \
-   } \
-   n += 10;
-#include "p_bip.h"
+   #define LITH_X(name, capt) \
+      if(G_Button_Id(g, BIPC_##name, LC(cLANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
+      { \
+         bip->curcategory = BIPC_##name; \
+         bip->curpage     = nil; \
+      } \
+      n += 10;
+   #include "p_bip.h"
 }
 
 static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
 {
-   struct gui_txt *st = Lith_GUI_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
+   struct gui_txt *st = G_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
 
    bip->lastcategory = BIPC_MAIN;
 
-   Lith_GUI_TextBox_OnTextEntered(st)
+   G_TextBox_OnTextEntered(st)
    {
       // That's a lot of numbers...
       u64 const extranames[] = {
@@ -96,7 +96,7 @@ static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
          if(!page->unlocked || page->category == BIPC_EXTRA)
             continue;
 
-         struct page_info pinf = Lith_GetPageInfo(page);
+         struct page_info pinf = PageInfo(page);
 
          if(CheckMatch(&pinf, query))
             bip->result[bip->resnum++] = page;
@@ -111,10 +111,10 @@ static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
       for(i32 i = 0; i < bip->rescur; i++)
       {
          struct page *page = bip->result[i];
-         struct page_info pinf = Lith_GetPageInfo(page);
+         struct page_info pinf = PageInfo(page);
          char flname[128]; lstrcpy_str(flname, pinf.flname);
 
-         if(Lith_GUI_Button_Id(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain)))
+         if(G_Button_Id(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain)))
          {
             bip->lastcategory = bip->curcategory;
             bip->curcategory = page->category;
@@ -138,15 +138,15 @@ static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
 static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
 {
    struct page *page = bip->curpage;
-   struct page_info pinf = Lith_GetPageInfo(page);
+   struct page_info pinf = PageInfo(page);
 
-   struct gui_typ const *typeon = Lith_GUI_TypeOnUpdate(g, &CBIState(g)->biptypeon);
+   struct gui_typ const *typeon = G_TypeOnUpdate(g, &CBIState(g)->biptypeon);
 
    i32 oy = 0;
 
    if(page->height)
    {
-      Lith_GUI_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180, page->height * 8 + 20, 184);
+      G_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180, page->height * 8 + 20, 184);
       oy = g->oy - 40;
    }
    else
@@ -182,7 +182,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
    __nprintf("%.*S", typeon->pos, typeon->txt);
    DrawText(ACS_EndStrParam(), CR_WHITE, 111, 60);
 
-   if(page->height) Lith_GUI_ScrollEnd(g, &CBIState(g)->bipinfoscr);
+   if(page->height) G_ScrollEnd(g, &CBIState(g)->bipinfoscr);
    else             ClearClip();
 }
 
@@ -192,30 +192,30 @@ static void CategoryUI(struct gui_state *g, struct player *p, struct bip *bip)
    size_t n = ls->size();
    size_t i = 0;
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
+   G_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
    if(bip->curcategory != BIPC_EXTRA)
       for_list_it(struct page *page, *ls, i++)
    {
       i32 y = gui_p.btnlist.h * i;
 
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
+      if(G_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
 
-      struct page_info pinf = Lith_GetPageInfo(page);
+      struct page_info pinf = PageInfo(page);
       char name[128] = "\Ci";
       lstrcpy_str(bip->curpage == page ? &name[2] : name, pinf.shname);
 
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, Pre(btnlist)))
+      if(G_Button_Id(g, i, name, 0, y, !page->unlocked || bip->curpage == page, Pre(btnlist)))
          SetCurPage(g, bip, page, pinf.body);
    }
 
-   Lith_GUI_ScrollEnd(g, &CBIState(g)->bipscr);
+   G_ScrollEnd(g, &CBIState(g)->bipscr);
 
    if(bip->curpage) DrawPage(g, p, bip);
 }
 
-void Lith_CBITab_BIP(struct gui_state *g, struct player *p)
+void P_CBI_TabBIP(struct gui_state *g, struct player *p)
 {
    struct bip *bip = &p->bip;
    i32 avail, max = 0;
@@ -237,7 +237,7 @@ void Lith_CBITab_BIP(struct gui_state *g, struct player *p)
 
    if(bip->curcategory != BIPC_MAIN)
    {
-      if(Lith_GUI_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
+      if(G_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
          bip->curcategory = bip->lastcategory;
    }
    else

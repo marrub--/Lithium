@@ -43,59 +43,41 @@ LITH_X(gR, pcl_robot)
 
 #define MAX_PLAYERS 8
 
-#define Lith_ForPlayer() \
+#define for_player() \
    for(i32 _piter = 0; _piter < MAX_PLAYERS; _piter++) \
       __with(struct player *p = &players[_piter];) \
          if(p->active)
 
-#define Lith_GiveAllScore(score, nomul) \
-   Lith_ForPlayer() \
-      p->giveScore(score, nomul)
-
-#define Lith_GiveAllEXP(amt) \
-   Lith_ForPlayer() \
-      p->giveEXP(amt)
+#define P_GiveAllScore(score, nomul) for_player() P_Scr_Give(p, score, nomul)
+#define P_GiveAllEXP(amt) for_player() P_Lv_GiveEXP(p, amt)
 
 #define LocalPlayer \
    (ACS_PlayerNumber() >= 0 ? &players[ACS_PlayerNumber()] : (struct player *)nil)
-#define PlayerDiscount(n) (i96)((n) * p->discount)
-#define NoPlayer(p) (!(p) || !(p)->active)
-#define withplayer(ptr) \
+#define P_Discount(n) (i96)((n) * p->discount)
+#define P_None(p) (!(p) || !(p)->active)
+#define with_player(ptr) \
    __with(struct player *p = (ptr);) \
-      if(!NoPlayer(p))
+      if(!P_None(p))
+#define P_Wep_CurType(p) ((p)->weapon.cur->info->type)
 
 // Extern Functions ----------------------------------------------------------|
 
-// state
-script void Lith_ResetPlayer(struct player *p);
-script void Lith_PlayerLoadData(struct player *p);
-script void Lith_PlayerSaveData(struct player *p);
-stkcall i32  Lith_PlayerCurWeaponType(struct player *p);
-stkcall bool Lith_ButtonPressed(struct player *p, i32 bt);
-stkcall optargs(1) bool Lith_SetPlayerVelocity(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
-void Lith_ValidatePlayerTID(struct player *p);
-
-// gui
-stkcall void Lith_PlayerCloseGUI(struct player *p);
-stkcall void Lith_PlayerUseGUI(struct player *p, i32 type);
-
-// score
-optargs(1) i96 Lith_GiveScore(struct player *p, i96 score, bool nomul);
-stkcall void Lith_TakeScore(struct player *p, i96 score);
-
-// attributes
-stkcall void Lith_GiveEXP(struct player *p, u64 amt);
-
-// misc
-stkcall struct upgrade *Lith_PlayerGetNamedUpgrade(struct player *p, i32 name);
-stkcall bool Lith_PlayerGetUpgradeActive(struct player *p, i32 name);
-stkcall char const *Lith_PlayerDiscriminator(i32 pclass);
-
-script void Lith_PlayerUpdateData(struct player *p);
-
-stkcall void Lith_PlayerUpdateStats(struct player *p);
-
-struct player *Lith_GetPlayer(i32 tid, i32 ptr);
+script void P_Init(struct player *p);
+script void P_Data_Load(struct player *p);
+script void P_Data_Save(struct player *p);
+stkcall bool P_ButtonPressed(struct player *p, i32 bt);
+stkcall optargs(1) bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
+void P_ValidateTID(struct player *p);
+stkcall void P_GUI_Close(struct player *p);
+stkcall void P_GUI_Use(struct player *p, i32 type);
+optargs(1) i96 P_Scr_Give(struct player *p, i96 score, bool nomul);
+stkcall void P_Scr_Take(struct player *p, i96 score);
+stkcall void P_Lv_GiveEXP(struct player *p, u64 amt);
+stkcall struct upgrade *P_Upg_GetNamed(struct player *p, i32 name);
+stkcall bool P_Upg_IsActive(struct player *p, i32 name);
+stkcall char const *P_Discrim(i32 pclass);
+stkcall void P_Dat_PTickPst(struct player *p);
+struct player *P_PtrFind(i32 tid, i32 ptr);
 
 // Types ---------------------------------------------------------------------|
 
@@ -166,50 +148,17 @@ struct player_delta
 // edit 31/8/2017: m e r g e
 struct player
 {
-   // state
-   __prop reset         {call: Lith_ResetPlayer(this)}
-   __prop loadData      {call: Lith_PlayerLoadData(this)}
-   __prop saveData      {call: Lith_PlayerSaveData(this)}
-   __prop weapontype    {get:  Lith_PlayerCurWeaponType(this)}
-   __prop buttonPressed {call: Lith_ButtonPressed(this)}
-   __prop setVel        {call: Lith_SetPlayerVelocity(this)}
-   __prop mana          {get:  Lith_CheckActorInventory(->tid, so_MagicAmmo)}
+   // data
+   __prop mana          {get:  PtrInvNum(->tid, so_MagicAmmo)}
    __prop manamax       {get:  ACS_GetMaxInventory(->tid, so_MagicAmmo)}
-   __prop validateTID   {call: Lith_ValidatePlayerTID(this)}
-   __prop health {get: GetPropI(->tid, APROP_Health),
-                  set: SetPropI(->tid, APROP_Health)}
-   __prop setActivator {call: ACS_SetActivator(->tid)}
-   __prop getVel       {call: mag2k(->velx, ->vely)}
-   __prop grabInput  {get: GetMembI(->tid, sm_GrabInput),
-                      set: SetMembI(->tid, sm_GrabInput)}
-   __prop onground   {get: GetMembI(->tid, sm_OnGround)}
-   __prop waterlevel {get: GetPropI(->tid, APROP_Waterlevel)}
-
-   // inventory
-   __prop addItem {call: Lith_PlayerAddItem(this)}
-
-   // score
-   __prop giveScore {call: Lith_GiveScore(this)}
-   __prop takeScore {call: Lith_TakeScore(this)}
-
-   // attributes
-   __prop giveEXP {call: Lith_GiveEXP(this)}
-
-   // log
-   __prop logB {call: Lith_LogB(this)}
-   __prop logF {call: Lith_LogF(this)}
-   __prop logH {call: Lith_LogH(this)}
-
-   // gui
-   __prop useGUI   {call: Lith_PlayerUseGUI(this)}
-   __prop closeGUI {call: Lith_PlayerCloseGUI(this)}
-
-   // misc
-   __prop getUpgr       {call: Lith_PlayerGetNamedUpgrade(this)}
-   __prop getUpgrActive {call: Lith_PlayerGetUpgradeActive(this)}
-   __prop deliverMail   {call: Lith_DeliverMail(this)}
-   __prop bipUnlock     {call: Lith_UnlockBIPPage(->bipptr, __arg, ->pclass)}
-   __prop discrim       {get:  Lith_PlayerDiscriminator(->pclass)}
+   __prop health        {get: GetPropI(->tid, APROP_Health),
+                         set: SetPropI(->tid, APROP_Health)}
+   __prop setActivator  {call: ACS_SetActivator(->tid)}
+   __prop getVel        {call: mag2k(->velx, ->vely)}
+   __prop grabInput     {get: GetMembI(->tid, sm_GrabInput),
+                         set: SetMembI(->tid, sm_GrabInput)}
+   __prop onground      {get: GetMembI(->tid, sm_OnGround)}
+   __prop waterlevel    {get: GetPropI(->tid, APROP_Waterlevel)}
    __prop classname     {get:  GetPropS(->tid, APROP_NameTag)}
 
    // cvars
@@ -220,10 +169,14 @@ struct player
    __prop setCVarK {call: ACS_SetUserCVarFixed (->num)}
    __prop setCVarS {call: ACS_SetUserCVarString(->num)}
 
-   // shop
-   __prop getCost {call: Lith_ShopGetCost(this)}
-   __prop canBuy  {call: Lith_ShopCanBuy(this)}
-   __prop buy     {call: Lith_ShopBuy(this)}
+   // log
+   __prop logB {call: P_Log_Both(this)}
+   __prop logF {call: P_Log_Full(this)}
+   __prop logH {call: P_Log_HUDs(this)}
+
+   // upgrades
+   __prop getUpgr       {call: P_Upg_GetNamed(this)}
+   __prop getUpgrActive {call: P_Upg_IsActive(this)}
 
    // Initialization
    bool wasinit;
@@ -241,6 +194,7 @@ struct player
    i32 pronoun;
    i32 dlgnum;
    i32 fun;
+   char const *discrim;
 
    // Deltas
    anonymous
@@ -250,7 +204,7 @@ struct player
    i32 oldmana;
 
    // BIP
-   struct bip bip, *bipptr;
+   struct bip bip;
 
    // Upgrades
    struct upgr_data upgrdata;
@@ -284,8 +238,6 @@ struct player
    k64 discount;
 
    // Misc
-   i32 decvars[8];
-
    k32 rage;
 
    char *notes[16];

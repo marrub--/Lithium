@@ -15,7 +15,7 @@ script
 static i32 CheckTarget(struct player *p)
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
-      return Lith_UniqueID(0);
+      return UniqueID(0);
    else
       return 0;
 }
@@ -25,7 +25,7 @@ static i32 CheckTarget(struct player *p)
 script
 void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
 {
-   if(p->weapontype == weapon_launcher)
+   if(P_Wep_CurType(p) == weapon_launcher)
    {
       if(p->buttons & BT_ALTATTACK)
       {
@@ -48,7 +48,7 @@ void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_HomingMissile")
 void Sc_HomingMissile(void)
 {
-   struct player *p = Lith_GetPlayer(0, AAPTR_TARGET);
+   struct player *p = P_PtrFind(0, AAPTR_TARGET);
    ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
 }
 

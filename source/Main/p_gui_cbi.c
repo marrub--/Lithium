@@ -104,7 +104,7 @@ static void CBITab_CyberMage(struct gui_state *g, struct player *p)
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_CBITab_CBI(struct gui_state *g, struct player *p)
+void P_CBI_TabCBI(struct gui_state *g, struct player *p)
 {
    switch(p->pclass) {
    case pcl_marine:    CBITab_Marine   (g, p); break;

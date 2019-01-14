@@ -15,25 +15,25 @@
 #define note_Len(s) __with(i32 len = s ? strlen(s) : 0; len = min(len, 255);)
 
 script
-static void Lith_Save_note(struct savefile *save)
+static void Save_note(struct savefile *save)
 {
    u32 chunklen = 0;
 
    for(i32 i = 0; i < countof(save->p->notes); i++)
       note_Len(save->p->notes[i]) chunklen += len + 1;
 
-   Lith_SaveWriteChunk(save, Ident_note, SaveV_note, chunklen);
+   Save_WriteChunk(save, Ident_note, SaveV_note, chunklen);
 
    for(i32 i = 0; i < countof(save->p->notes); i++)
       note_Len(save->p->notes[i])
    {
       fputc(len, save->fp);
-      if(len) Lith_FWrite(save->p->notes[i], len, save->fp);
+      if(len) FWrite(save->p->notes[i], len, save->fp);
    }
 }
 
 script
-static void Lith_Load_note(struct savefile *save, struct savechunk *chunk)
+static void Load_note(struct savefile *save, struct savechunk *chunk)
 {
    for(i32 i = 0; i < countof(save->p->notes); i++)
    {
@@ -49,15 +49,15 @@ static void Lith_Load_note(struct savefile *save, struct savechunk *chunk)
 // Chunk "fun0" --------------------------------------------------------------|
 
 script
-static void Lith_Save_fun0(struct savefile *save)
+static void Save_fun0(struct savefile *save)
 {
-   Lith_SaveWriteChunk(save, Ident_fun0, SaveV_fun0, 1);
+   Save_WriteChunk(save, Ident_fun0, SaveV_fun0, 1);
 
    fputc(save->p->fun, save->fp);
 }
 
 script
-static void Lith_Load_fun0(struct savefile *save, struct savechunk *chunk)
+static void Load_fun0(struct savefile *save, struct savechunk *chunk)
 {
    save->p->fun = fgetc(save->fp);
 }
@@ -65,49 +65,30 @@ static void Lith_Load_fun0(struct savefile *save, struct savechunk *chunk)
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Lith_PlayerSaveData(struct player *p)
+void P_Data_Save(struct player *p)
 {
    struct savefile *save;
 
-   if((save = Lith_SaveBegin(p)))
+   if((save = Save_BeginSave(p)))
    {
-      Lith_Save_note(save);
-      Lith_Save_fun0(save);
-      Lith_SaveEnd(save);
+      Save_note(save);
+      Save_fun0(save);
+      Save_EndSave(save);
    }
 }
 
 script
-void Lith_PlayerLoadData(struct player *p)
+void P_Data_Load(struct player *p)
 {
    struct savefile *save;
 
-   if((save = Lith_LoadBegin(p)))
+   if((save = Save_BeginLoad(p)))
    {
-      Lith_LoadChunk(save, Ident_note, SaveV_note, Lith_Load_note);
-      Lith_LoadChunk(save, Ident_fun0, SaveV_fun0, Lith_Load_fun0);
-      Lith_LoadEnd(save);
+      Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
+      Save_ReadChunk(save, Ident_fun0, SaveV_fun0, Load_fun0);
+      Save_EndLoad(save);
    }
 }
 #endif
-
-// Scripts -------------------------------------------------------------------|
-
-script_str ext("ACS") addr("Lith_SetFun")
-void Sc_SetFun(i32 fun)
-{
-   withplayer(LocalPlayer)
-   {
-      p->fun = fun;
-      p->saveData();
-   }
-}
-
-script_str ext("ACS") addr("Lith_GetFun")
-i32 Sc_GetFun(void)
-{
-   withplayer(LocalPlayer) return p->fun;
-   return 0;
-}
 
 // EOF

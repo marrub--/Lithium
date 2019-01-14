@@ -21,7 +21,7 @@ void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr("Lith_PunctuatorFire")
 void Sc_PunctuatorFire(void)
 {
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       i32 ptid = ACS_UniqueTID();
 

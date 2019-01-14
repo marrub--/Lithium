@@ -42,7 +42,7 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
       i32 chp = GetPropI(0, APROP_Health);
       i32 shp = GetPropI(0, APROP_SpawnHealth);
 
-      i32 id = Lith_UniqueID();
+      i32 id = UniqueID();
       #if LITHIUM
       dmon_t const *const m = DmonSelf();
       #endif
@@ -62,9 +62,9 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
 
       if((freak || boss) && !phantom)
       {
-         extern str Lith_RandomName(i32 id);
+         extern str RandomName(i32 id);
 
-         UData.tagstr = Lith_RandomName(freak ? 0 : id);
+         UData.tagstr = RandomName(freak ? 0 : id);
 
          if(p->getCVarI(sc_scanner_bar))
          {

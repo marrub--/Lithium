@@ -85,7 +85,7 @@ struct weaponinfo const weaponinfo[weapon_max] = {
 
 // Extern Functions ----------------------------------------------------------|
 
-i32 Lith_WeaponFromName(struct player *p, i32 name)
+i32 P_Wep_FromName(struct player *p, i32 name)
 {
    switch(p->pclass)
    {

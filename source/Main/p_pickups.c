@@ -38,7 +38,7 @@ static str const pickupnames[weapon_max] = {
    [weapon_c_shipgun]  = name(weapon_c_shipgun),
 };
 
-static void Lith_StupidPickup(struct player *p, i32 weapon)
+static void StupidPickup(struct player *p, i32 weapon)
 {
    i32 fmtnum = strtoi(LC(LANG "PK_GET_NUM"),       nil, 10);
    i32 uncnum = strtoi(LC(LANG "PK_UNCERTAIN_NUM"), nil, 10);
@@ -63,17 +63,17 @@ static void Lith_StupidPickup(struct player *p, i32 weapon)
    else                          p->logB(1, fmt, nam);
 }
 
-void Lith_PickupMessage(struct player *p, struct weaponinfo const *info)
+void P_Log_Weapon(struct player *p, struct weaponinfo const *info)
 {
    if(p->getCVarI(sc_player_stupidpickups))
-      Lith_StupidPickup(p, info->type);
+      StupidPickup(p, info->type);
    else if(info->name)
       p->logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
    else
       p->logB(1, "Acquired impossible object");
 }
 
-void Lith_SellMessage(struct player *p, struct weaponinfo const *info, i96 score)
+void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score)
 {
    i32 weapon = info->type;
    bool ord = strtoi(LC(LANG "LOG_SellOrder"), nil, 10) == 0;

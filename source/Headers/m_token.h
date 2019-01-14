@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-#define Lith_TokStr(tok) l_strndup((tok)->textV, (tok)->textC)
+#define TokStr(tok) l_strndup((tok)->textV, (tok)->textC)
 
 // Types ---------------------------------------------------------------------|
 
@@ -115,6 +115,6 @@ struct token
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_ParseToken(FILE *fp, struct token *tok, struct origin *orig);
+void TokParse(FILE *fp, struct token *tok, struct origin *orig);
 
 #endif

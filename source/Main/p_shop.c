@@ -66,17 +66,17 @@ static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32
    struct shopitem *item = item_;
    p->itemsbought++;
    if(item->flags & sif_weapon) {
-      Lith_GiveActorInventory(p->tid, item->classname, item->count);
+      PtrInvGive(p->tid, item->classname, item->count);
       return false;
    } else {
-      Lith_GiveActorInventory(tid, item->classname, item->count);
+      PtrInvGive(tid, item->classname, item->count);
       return true;
    }
 }
 
 // Extern Functions ----------------------------------------------------------|
 
-void Lith_MInit_Shop(void)
+void Shop_MInit(void)
 {
    for(i32 i = 0; i < countof(shopitems); i++)
    {
@@ -87,7 +87,7 @@ void Lith_MInit_Shop(void)
    }
 }
 
-void Lith_CBITab_Shop(struct gui_state *g, struct player *p)
+void P_CBI_TabShop(struct gui_state *g, struct player *p)
 {
    i32 nitems = 0;
    for(i32 i = 0; i < countof(shopitems); i++) {
@@ -95,37 +95,37 @@ void Lith_CBITab_Shop(struct gui_state *g, struct player *p)
          nitems++;
    }
 
-   Lith_GUI_ScrollBegin(g, &CBIState(g)->shopscr, 15, 36, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
+   G_ScrollBegin(g, &CBIState(g)->shopscr, 15, 36, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++)
    {
-      if(Lith_GUI_ScrollOcclude(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
+      if(G_ScrollOcclude(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
       char const *name = LanguageC(LANG "SHOP_TITLE_%S", shopitems[i].name);
 
       i32 *shopsel = &CBIState(g)->shopsel;
-      if(Lith_GUI_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
+      if(G_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
          *shopsel = i;
 
       y += gui_p.btnlistsel.h;
    }
 
-   Lith_GUI_ScrollEnd(g, &CBIState(g)->shopscr);
+   G_ScrollEnd(g, &CBIState(g)->shopscr);
 
    struct shopitem *item = &shopitems[CBIState(g)->shopsel];
 
    SetClipW(111, 30, 184, 150, 184);
 
-   PrintTextFmt("%s %s\Cnscr", LC(LANG "COST"), scoresep(p->getCost(&item->shopdef)));
+   PrintTextFmt("%s %s\Cnscr", LC(LANG "COST"), scoresep(P_Shop_Cost(p, &item->shopdef)));
    PrintText(s_cbifont, CR_WHITE, 111,1, 30,1);
 
    PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_cbifont, CR_WHITE, 111,1, 40,1);
 
    ClearClip();
 
-   if(Lith_GUI_Button(g, LC(LANG "BUY"), 259, 170, !p->canBuy(&item->shopdef, item)))
-      p->buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
+   if(G_Button(g, LC(LANG "BUY"), 259, 170, !P_Shop_CanBuy(p, &item->shopdef, item)))
+      P_Shop_Buy(p, &item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
 #endif
 

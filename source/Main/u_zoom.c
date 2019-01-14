@@ -71,7 +71,7 @@ void Sc_KeyZoom(i32 amt)
 {
    if(ACS_Timer() < 10) return;
 
-   withplayer(LocalPlayer)
+   with_player(LocalPlayer)
    {
       struct upgrade *upgr = p->getUpgr(UPGR_Zoom);
       if(upgr) {

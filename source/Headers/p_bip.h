@@ -25,11 +25,10 @@ LITH_X(MAIL,         "Mail")
 
 // Extern Functions ----------------------------------------------------------|
 
-script void Lith_PlayerInitBIP(struct player *p);
-struct page *Lith_FindBIPPage(struct bip *bip, char const *name);
-optargs(1) struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, i32 pclass);
-script void Lith_DeallocateBIP(struct bip *bip);
-script optargs(1) void Lith_DeliverMail(struct player *p, str title, i32 flags);
+script void P_BIP_PInit(struct player *p);
+optargs(1) struct page *P_BIP_Unlock(struct player *p, char const *name);
+stkcall void P_BIP_PQuit(struct player *p);
+script optargs(1) void P_BIP_GiveMail(struct player *p, str title, i32 flags);
 
 // Types ---------------------------------------------------------------------|
 
@@ -76,10 +75,6 @@ struct page_info
 
 struct bip
 {
-   __prop find       {call: Lith_FindBIPPage  (this)}
-   __prop unlock     {call: Lith_UnlockBIPPage(this)}
-   __prop deallocate {call: Lith_DeallocateBIP(this)}
-
    // Stats
    u32 categoryavail[BIPC_MAX];
    u32 categorymax[BIPC_MAX];
@@ -108,6 +103,6 @@ struct bip
 
 // Extern Functions ----------------------------------------------------------|
 
-struct page_info Lith_GetPageInfo(struct page const *page);
+struct page_info PageInfo(struct page const *page);
 
 #endif

@@ -34,7 +34,7 @@ static void Blinker(void)
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Lith_Title(void)
+void W_Title(void)
 {
    DrawCallI(sm_ForceDraw, true);
 

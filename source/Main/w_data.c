@@ -21,8 +21,8 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
 
    union ik32 u;
 
-   withplayer(LocalPlayer) switch(info) {
-   case pdata_weapon:     return p->weapontype;
+   with_player(LocalPlayer) switch(info) {
+   case pdata_weapon:     return P_Wep_CurType(p);
    case pdata_upgrade:    return p->getUpgrActive(permutation);
    case pdata_riflemode:  return p->riflefiremode;
    case pdata_hassigil:   return p->sgacquired;
@@ -48,8 +48,8 @@ i32 Sc_LWData(i32 info)
    case wdata_fun:         return world.fun;
    case wdata_soulsfreed:  return world.soulsfreed;
    case wdata_dorain:      return dorain;
-   case wdata_ptid:   Lith_ForPlayer() return p->tid;
-   case wdata_pclass: Lith_ForPlayer() return p->pclass;
+   case wdata_ptid:   for_player() return p->tid;
+   case wdata_pclass: for_player() return p->pclass;
    }
 
    return 0;

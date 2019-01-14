@@ -5,19 +5,17 @@
 // m_version.h: Version numbers and current version.
 
 #if LITHIUM
-#define Lith_Version "Lithium 1.6.1 (Hyper-Trilithium)"
+#define Version "Lithium 1.6.1 (Hyper-Trilithium)"
 #else
-#define Lith_Version "DoubleTap 1.0"
+#define Version "DoubleTap 1.0"
 #endif
-#define Lith_APIVersion Lith_v1_6_1
-#define Lith_CheckAPIVersion() \
-   do { \
-      if(world.apiversion != Lith_APIVersion) { \
-         printf(c"%s: Invalid API version! Expected %i, but got %i\n", \
-            __func__, Lith_APIVersion, world.apiversion); \
-         abort(); \
-      } \
-   } while(0)
+#define APIVersion Lith_v1_6_1
+#define CheckAPIVersion() \
+   if(world.apiversion != APIVersion) { \
+      printf(c"%s: Invalid API version! Expected %i, but got %i\n", \
+         __func__, Lith_APIVersion, world.apiversion); \
+      abort(); \
+   } else (void)0
 #include <stdio.h>
 #define Lith_v1_6_1   16.1  // 1.6.1 (Hyper-Trilithium)
 #define Lith_v1_6_0   16.0  // 1.6 (Hyper-Dilithium)

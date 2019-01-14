@@ -31,8 +31,10 @@ static str DecryptBody(char __str_ars const *s)
    return ACS_EndStrParam();
 }
 
-static void UnlockPage(struct bip *bip, struct page *page, i32 pclass)
+static void UnlockPage(struct player *p, struct page *page)
 {
+   struct bip *bip = &p->bip;
+
    if(!page->unlocked)
    {
       bip->pageavail++;
@@ -41,12 +43,14 @@ static void UnlockPage(struct bip *bip, struct page *page, i32 pclass)
    }
 
    for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
-      bip->unlock(page->unlocks[i], pclass);
+      P_BIP_Unlock(p, page->unlocks[i]);
 }
 
 optargs(1)
-static void AddToBIP(struct bip *bip, i32 categ, i32 pclass, struct page_init const *pinit, bool isfree)
+static void AddToBIP(struct player *p, i32 categ, struct page_init const *pinit, bool isfree)
 {
+   struct bip *bip = &p->bip;
+
    str image  = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
    i32 height = strtoi_str(Language(LANG "INFO_SSIZE_%s", pinit->name), nil, 0);
 
@@ -59,11 +63,11 @@ static void AddToBIP(struct bip *bip, i32 categ, i32 pclass, struct page_init co
    page->height   = height;
    memmove(page->unlocks, pinit->unlocks, sizeof page->unlocks);
 
-   page->link.construct(page);
+   ListCtor(&page->link, page);
    page->link.link(&bip->infogr[categ]);
 
    // we have to pass along the player's class so discriminators don't fuck up
-   if(isfree) UnlockPage(bip, page, pclass);
+   if(isfree) UnlockPage(p, page);
 }
 
 stkcall
@@ -84,12 +88,13 @@ static i32 PClFromStr(str name)
 }
 
 script
-static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *tok, i32 categ, i32 pclass, bool catfree)
+static struct token *AddPage(struct player *p, struct tokbuf *tb, struct token *tok, i32 categ, bool catfree)
 {
+   struct bip *bip = &p->bip;
    struct page_init page = {};
 
    do
-      page.pclass |= PClFromStr(Lith_TokStr(tok));
+      page.pclass |= PClFromStr(TokStr(tok));
    while(tb->drop(tok_or) && (tok = tb->get()));
 
    tok = tb->get();
@@ -103,22 +108,22 @@ static struct token *AddPage(struct bip *bip, struct tokbuf *tb, struct token *t
       memmove(page.unlocks[i], tok->textV, tok->textC);
    }
 
-   if(categ != BIPC_NONE && pclass & page.pclass)
-      AddToBIP(bip, categ, pclass, &page, page.isfree || catfree);
+   if(categ != BIPC_NONE && p->pclass & page.pclass)
+      AddToBIP(p, categ, &page, page.isfree || catfree);
 
    return tok;
 }
 
-static i32 LoadBIPInfo(str fname, struct bip *bip, i32 pclass)
+static i32 LoadBIPInfo(struct player *p, str fname)
 {
    struct tokbuf tb = {
       .bbeg = 4, .bend = 10,
       .fp = W_Open(fname, c"r"),
-      .tokProcess = Lith_TBufProcL
+      .tokProcess = TBufProcL
    };
    if(!tb.fp) return 0;
 
-   tb.ctor();
+   TBufCtor(&tb);
 
    bool catfree = false;
    i32 categ = BIPC_NONE;
@@ -131,50 +136,57 @@ static i32 LoadBIPInfo(str fname, struct bip *bip, i32 pclass)
    case tok_at:
       // @ Include
       tok = tb.get();
-      total += LoadBIPInfo(Lith_TokStr(tok), bip, pclass);
+      total += LoadBIPInfo(p, TokStr(tok));
       break;
    case tok_xor:
       // ^ Category [*]
       tok = tb.get();
-      categ = CatFromStr(Lith_TokStr(tok));
+      categ = CatFromStr(TokStr(tok));
       catfree = tb.drop(tok_mul);
       break;
    case tok_identi:
       // Classes... Name [*] [-> Unlocks...]
-      tok = AddPage(bip, &tb, tok, categ, pclass, catfree);
+      tok = AddPage(p, &tb, tok, categ, catfree);
       total++;
       break;
    }
 
-   tb.dtor();
+   TBufDtor(&tb);
    fclose(tb.fp);
 
    return total;
 }
 
+static struct page *FindPage(struct bip *bip, char const *name)
+{
+   if(!name) return nil;
+   ForCategoryAndPage() if(strcmp(page->name, name) == 0) return page;
+   return nil;
+}
+
 // Extern Functions ----------------------------------------------------------|
 
 script
-void Lith_PlayerInitBIP(struct player *p)
+void P_BIP_PInit(struct player *p)
 {
    struct bip *bip = &p->bip;
 
    ForCategory()
-      bip->infogr[categ].free(true);
+      ListDtor(&bip->infogr[categ], true);
 
-   i32 total = LoadBIPInfo(sp_lfiles_BIPInfo, bip, p->pclass);
+   i32 total = LoadBIPInfo(p, sp_lfiles_BIPInfo);
    if(dbglevel) p->logH(1, "There are %i info pages!", total);
 
    ForCategory()
       bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
 
-   if(dbgflag & dbgf_bip) ForCategoryAndPage() UnlockPage(bip, page, p->pclass);
+   if(dbgflag & dbgf_bip) ForCategoryAndPage() UnlockPage(p, page);
 
    bip->init = true;
 }
 
 script
-void Lith_DeliverMail(struct player *p, str title, i32 flags)
+void P_BIP_GiveMail(struct player *p, str title, i32 flags)
 {
    // Note: Due to the way this code works, if you switch languages at runtime,
    // mail won't be updated. I provide a lore answer (excuse) for this: When
@@ -204,15 +216,15 @@ void Lith_DeliverMail(struct player *p, str title, i32 flags)
 
    if(!send) send = L(st_mail_internal);
 
-   page->shname   = date ? date : l_strdup(world.canontimeshort);
+   page->shname   = date ? date : l_strdup(CanonTime(ct_short));
    page->title    = name ? name : L(st_mail_notitle);
-   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, world.canontime, body);
+   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, CanonTime(ct_full), body);
    page->category = BIPC_MAIL;
    page->unlocked = true;
 
    if(size) page->height = strtoi_str(size, nil, 0);
 
-   page->link.construct(page);
+   ListCtor(&page->link, page);
    page->link.link(&bip->infogr[BIPC_MAIL]);
 
    bip->mailreceived++;
@@ -233,38 +245,33 @@ void Lith_DeliverMail(struct player *p, str title, i32 flags)
    }
 }
 
-struct page *Lith_FindBIPPage(struct bip *bip, char const *name)
+struct page *P_BIP_Unlock(struct player *p, char const *name)
 {
-   if(!name) return nil;
-   ForCategoryAndPage() if(strcmp(page->name, name) == 0) return page;
-   return nil;
-}
+   struct bip  *bip  = &p->bip;
+   struct page *page = FindPage(bip, name);
 
-struct page *Lith_UnlockBIPPage(struct bip *bip, char const *name, i32 pclass)
-{
-   struct page *page = bip->find(name);
-
-   if(!page && pclass) ifauto(char const *, discrim, Lith_PlayerDiscriminator(pclass))
+   if(!page)
    {
-      bip_name_t tag = {}; strcpy(tag, name); strcat(tag, discrim);
-      page = bip->find(tag);
+      bip_name_t tag = {}; strcpy(tag, name); strcat(tag, p->discrim);
+      page = FindPage(bip, tag);
    }
 
-   if(page && !page->unlocked) UnlockPage(bip, page, pclass);
+   if(page && !page->unlocked) UnlockPage(p, page);
 
-   if(!page) LogDebug(log_bip, "no page '%s' found", name);
+   if(!page) Dbg_Log(log_bip, "no page '%s' found", name);
 
    return page;
 }
 
-script
-void Lith_DeallocateBIP(struct bip *bip)
+stkcall
+void P_BIP_PQuit(struct player *p)
 {
-   ForCategory() bip->infogr[categ].free(true);
+   struct bip *bip = &p->bip;
+   ForCategory() ListDtor(&bip->infogr[categ], true);
    bip->init = false;
 }
 
-struct page_info Lith_GetPageInfo(struct page const *page)
+struct page_info PageInfo(struct page const *page)
 {
    struct page_info pinf;
 
@@ -307,10 +314,10 @@ struct page_info Lith_GetPageInfo(struct page const *page)
 script_str ext("ACS") addr("Lith_BIPUnlock")
 void Sc_UnlockPage(i32 pnum)
 {
-   withplayer(&players[pnum])
+   with_player(&players[pnum])
    {
       bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
-      p->bipUnlock(tag);
+      P_BIP_Unlock(p, tag);
    }
 }
 

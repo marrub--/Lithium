@@ -19,6 +19,7 @@
 
 optargs(1) u64 crc64(void const *data, size_t len, u64 result);
 optargs(1) u64 crc64_str(void __str_ars const *data, size_t len, u64 result);
+stkcall i32 fastabs(i32 n);
 stkcall k64 powlk(k64 x, i32 y);
 stkcall k64 mag2lk(k64 x, k64 y);
 stkcall k32 mag2k(k32 x, k32 y);
