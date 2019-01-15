@@ -20,6 +20,6 @@
 #define Cps_GetC(name, i) \
    (((name)[(i) / 4] & (0xFF << ((i) % 4 * 8))) >> ((i) % 4 * 8))
 
-char const *Cps_Print(u32 *cps, i32 l);
+stkcall char const *Cps_Print(u32 *cps, i32 l);
 
 #endif

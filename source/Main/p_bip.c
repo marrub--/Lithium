@@ -160,7 +160,7 @@ static i32 LoadBIPInfo(struct player *p, str fname)
 static struct page *FindPage(struct bip *bip, char const *name)
 {
    if(!name) return nil;
-   ForCategoryAndPage() if(strcmp(page->name, name) == 0) return page;
+   ForCategoryAndPage() if(faststrcmp(page->name, name) == 0) return page;
    return nil;
 }
 

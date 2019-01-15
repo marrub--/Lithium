@@ -24,5 +24,7 @@
 #define IsIdent(ch) (IsAlNum(ch) || (ch) == '_')
 #define IsNumId(ch) (IsIdent(ch) || (ch) == '.')
 #define IsCntrl(ch) (!IsPrint(ch))
+#define ToUpper(ch) (IsLower(ch) ? (ch) |  0x20 : (ch))
+#define ToLower(ch) (IsUpper(ch) ? (ch) & ~0x20 : (ch))
 
 // EOF

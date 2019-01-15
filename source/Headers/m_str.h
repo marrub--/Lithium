@@ -21,12 +21,13 @@
 #define l_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
 #define l_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 
-str l_strupper(str in);
+stkcall str l_strupper(str in);
 stkcall u32 l_strhash(char __str_ars const *s);
 stkcall u32 lstrhash(char const *s);
-char *lstrcpy_str(char *dest, char __str_ars const *src);
-i32 lstrcmp_str(char const *s1, char __str_ars const *s2);
-char *lstrcpy2(char *out, char const *s1, char const *s2);
+stkcall char *lstrcpy_str(char *dest, char __str_ars const *src);
+stkcall char *lstrcpy2(char *out, char const *s1, char const *s2);
+stkcall i32 lstrcmp_str(char const *s1, char __str_ars const *s2);
+stkcall i32 faststrcmp(char const *s1, char const *s2);
 stkcall char const *scoresep(i96 num);
 str LanguageV(str name);
 str LanguageNull(char const *fmt, ...);

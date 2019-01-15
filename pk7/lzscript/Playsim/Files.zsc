@@ -12,7 +12,7 @@ static clearscope int FindLump(string name)
 static clearscope string ReadLump(int lump)
 {
    let s = Wads.ReadLump(lump);
-   s.replace("\\c", "\c");
+   s.Replace("\\c", "\c");
    return s;
 }
 

@@ -204,7 +204,7 @@ str RandomName(i32 id)
                       lulz[rand() % countof(lulz)] :
                       syll[rand() % countof(syll)];
 
-      if(i == 0) ACS_PrintChar(toupper(s++[0]));
+      if(i == 0) {ACS_PrintChar(ToUpper(*s)); s++;}
 
       PrintChrSt(s);
    }

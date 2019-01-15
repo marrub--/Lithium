@@ -25,8 +25,6 @@ extern struct dlgdef *lmvar dlgdefs;
 
 // Static Functions ----------------------------------------------------------|
 
-static i32 *NextCode(struct pstate *d);
-static i32 AddString(struct pstate *d, char const *s, i32 l);
 static void GetStatement(struct pstate *d);
 
 // Types ---------------------------------------------------------------------|
@@ -60,9 +58,6 @@ struct arg {
 };
 
 struct pstate {
-   __prop nextCode  {call: NextCode(this)}
-   __prop addString {call: AddString(this)}
-
    struct tokbuf tb;
    struct dlgdef *def;
 };
@@ -82,7 +77,7 @@ static functable_t ftbl;
 #define strtable_t_GetPrev(o) (&(o)->prev)
 #define strtable_t_HashKey(k) (lstrhash(k))
 #define strtable_t_HashObj(o) ((o)->keyhash)
-#define strtable_t_KeyCmp(l, r) (strcmp(l, r))
+#define strtable_t_KeyCmp(l, r) (faststrcmp(l, r))
 GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
 
 #define functable_t_GetKey(o) ((o)->name)
@@ -90,7 +85,7 @@ GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
 #define functable_t_GetPrev(o) (&(o)->prev)
 #define functable_t_HashKey(k) (lstrhash(k))
 #define functable_t_HashObj(o) ((o)->keyhash)
-#define functable_t_KeyCmp(l, r) (strcmp(l, r))
+#define functable_t_KeyCmp(l, r) (faststrcmp(l, r))
 GDCC_HashMap_Defn(functable_t, char const *, struct dlgfunc)
 
 static i32 StrName(char const *s)
@@ -115,19 +110,20 @@ static i32 AddString(struct pstate *d, char const *s, i32 l)
    return p;
 }
 
+#define RegCmp(c) (d->def->stabV[argv[0].s] == c && d->def->stabV[argv[0].s + 1] == '\0')
 #define GenCode_Reg(code) \
-        if(d->def->stabV[argv[0].s] == 'a') *d->nextCode() = DCD_##code##_A; \
-   else if(d->def->stabV[argv[0].s] == 'b') *d->nextCode() = DCD_##code##_B; \
-   else if(d->def->stabV[argv[0].s] == 'c') *d->nextCode() = DCD_##code##_C; \
-   else if(d->def->stabV[argv[0].s] == 'd') *d->nextCode() = DCD_##code##_D; \
+        if(RegCmp('a')) *NextCode(d) = DCD_##code##_A; \
+   else if(RegCmp('b')) *NextCode(d) = DCD_##code##_B; \
+   else if(RegCmp('c')) *NextCode(d) = DCD_##code##_C; \
+   else if(RegCmp('d')) *NextCode(d) = DCD_##code##_D; \
    else
 
 static void GenCode_Trace(struct pstate *d, struct arg *argv, i32 argc)
 {
    GenCode_Reg(TRACE)
    {
-      *d->nextCode() = DCD_TRACE_S;
-      *d->nextCode() = argv[0].s;
+      *NextCode(d) = DCD_TRACE_S;
+      *NextCode(d) = argv[0].s;
    }
 }
 
@@ -135,8 +131,8 @@ static void GenCode_Push(struct pstate *d, struct arg *argv, i32 argc)
 {
    GenCode_Reg(PUSH)
    {
-      *d->nextCode() = DCD_PUSH_I;
-      *d->nextCode() = argv[0].s;
+      *NextCode(d) = DCD_PUSH_I;
+      *NextCode(d) = argv[0].s;
    }
 }
 
@@ -154,8 +150,8 @@ static void GenCode_Pop(struct pstate *d, struct arg *argv, i32 argc)
    { \
       GenCode_Reg(code) \
       { \
-         *d->nextCode() = DCD_##code##_I; \
-         *d->nextCode() = argv[0].i; \
+         *NextCode(d) = DCD_##code##_I; \
+         *NextCode(d) = argv[0].i; \
       } \
    }
 
@@ -176,8 +172,8 @@ static void GenCode_Generic(struct pstate *d, struct arg *argv, i32 argc)
 {
    for(i32 i = 0; i < argc; i++)
    {
-      if(argv[i].t == 'S') *d->nextCode() = argv[i].s;
-      else                 *d->nextCode() = argv[i].i;
+      if(argv[i].t == 'S') *NextCode(d) = argv[i].s;
+      else                 *NextCode(d) = argv[i].i;
    }
 }
 
@@ -205,22 +201,22 @@ static void GetCode_Cond(struct pstate *d)
    tok = d->tb.get();
    if(tok->type == tok_identi || tok->type == tok_string)
    {
-      *d->nextCode() = code;
+      *NextCode(d) = code;
       ptr = d->def->codeC;
-      d->nextCode();
+      NextCode(d);
 
       if(code == DCD_JNCLASS)
       {
          #define LITH_X(l, r) \
-            if(strcmp(tok->textV, #l) == 0 || strcmp(tok->textV, #r) == 0) \
-               {*d->nextCode() = r; goto ok;}
+            if(faststrcmp(tok->textV, #l) == 0 || faststrcmp(tok->textV, #r) == 0) \
+               {*NextCode(d) = r; goto ok;}
          #include "p_player.h"
 
          LogOri(tok, "invalid playerclass type");
          return;
       }
       else
-         *d->nextCode() = d->addString(tok->textV, tok->textC);
+         *NextCode(d) = AddString(d, tok->textV, tok->textC);
    }
    else
       LogOri(tok, "invalid token in conditional statement");
@@ -235,9 +231,9 @@ ok:
       i32 tmp = ptr;
 
       // Add jump to end.
-      *d->nextCode() = DCD_JMP;
+      *NextCode(d) = DCD_JMP;
       ptr = d->def->codeC;
-      d->nextCode();
+      NextCode(d);
 
       // Set original jump target to here.
       d->def->codeV[tmp] = d->def->codeC;
@@ -261,10 +257,10 @@ static void GetCode_Option(struct pstate *d)
    i32 ptr = 0;
    if(tok->type == tok_identi || tok->type == tok_string)
    {
-      *d->nextCode() = DCD_PUTOPT;
+      *NextCode(d) = DCD_PUTOPT;
       ptr = d->def->codeC;
-      d->nextCode();
-      *d->nextCode() = d->addString(tok->textV, tok->textC);
+      NextCode(d);
+      *NextCode(d) = AddString(d, tok->textV, tok->textC);
    }
    else
       LogOri(tok, "invalid option parameter");
@@ -279,7 +275,7 @@ static void GetCode_Option(struct pstate *d)
 // Parses and generates code for an exec statement.
 static void GetCode_Exec(struct pstate *d)
 {
-   *d->nextCode() = DCD_TRMWAIT;
+   *NextCode(d) = DCD_TRMWAIT;
    GetStatement(d);
 }
 
@@ -317,7 +313,7 @@ static void GetCode_Generic(struct pstate *d)
 
       switch(argv[argc].t = func->args[argc]) {
       case 'I': argv[argc++].i = strtoi(tok->textV, nil, 0);           break;
-      case 'S': argv[argc++].s = d->addString(tok->textV, tok->textC); break;
+      case 'S': argv[argc++].s = AddString(d, tok->textV, tok->textC); break;
       }
 
       Dbg_Log(log_dlg, "arg %i: %s", argc, tok->textV);
@@ -331,7 +327,7 @@ static void GetCode_Generic(struct pstate *d)
    {
       switch(argv[argc].t = func->args[argc]) {
       case 'I': argv[argc++].i = 0;                    break;
-      case 'S': argv[argc++].s = d->addString(c"", 0); break;
+      case 'S': argv[argc++].s = AddString(d, c"", 0); break;
       case 'L': argv[argc++].i = func->lit[lit++];     break;
       }
 
@@ -343,8 +339,8 @@ static void GetCode_Generic(struct pstate *d)
 
 static void GetCode_Text(struct pstate *d, struct token *tok, i32 code)
 {
-   *d->nextCode() = code;
-   *d->nextCode() = d->addString(tok->textV, tok->textC);
+   *NextCode(d) = code;
+   *NextCode(d) = AddString(d, tok->textV, tok->textC);
 }
 
 // Parse and generate a line of code.
@@ -383,10 +379,10 @@ static void GetBlock(struct pstate *d)
 // Parse and generate a concat block statement.
 static void GetConcatBlock(struct pstate *d)
 {
-   *d->nextCode() = DCD_CONCAT;
+   *NextCode(d) = DCD_CONCAT;
    while(!d->tb.drop(tok_at2) && !d->tb.drop(tok_eof))
       GetStatement(d);
-   *d->nextCode() = DCD_CONCATEND;
+   *NextCode(d) = DCD_CONCATEND;
 }
 
 // Parse and generate a statement.
@@ -454,16 +450,16 @@ static void GetDecl_Page(struct pstate *d)
 
    GetStatement(d);
 
-   *d->nextCode() = DCD_DLGWAIT;
-   *d->nextCode() = DCD_DIE;
+   *NextCode(d) = DCD_DLGWAIT;
+   *NextCode(d) = DCD_DIE;
 }
 
 static void GetDecl_TrmPage(struct pstate *d, i32 num)
 {
    SetupPage(d, num);
    GetStatement(d);
-   *d->nextCode() = DCD_TRMWAIT;
-   *d->nextCode() = DCD_DIE;
+   *NextCode(d) = DCD_TRMWAIT;
+   *NextCode(d) = DCD_DIE;
 }
 
 // Extern Functions ----------------------------------------------------------|

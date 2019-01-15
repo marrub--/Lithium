@@ -46,7 +46,7 @@ fp << <<_end_
 #{SRC   } = source/Main
 #{HDR   } = source/Headers
 #{IR    } = ir
-#{TARGET} = --bc-target=ZDoom
+#{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay
 #{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096

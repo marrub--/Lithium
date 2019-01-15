@@ -28,6 +28,7 @@ StrEntON
 #include "m_stab.h"
 StrEntOFF
 
+stkcall
 char const *Cps_Print(u32 *cps, i32 l)
 {
    noinit static char buf[4096];
@@ -37,13 +38,11 @@ char const *Cps_Print(u32 *cps, i32 l)
    return buf;
 }
 
+stkcall
 str l_strupper(str in)
 {
    ACS_BeginPrint();
-
-   for(char __str_ars const *c = in; *c; c++)
-      ACS_PrintChar(toupper(*c));
-
+   for(char __str_ars const *c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
    return ACS_EndStrParam();
 }
 
@@ -59,21 +58,14 @@ u32 lstrhash(char const *s)
    StrHashImpl();
 }
 
+stkcall
 char *lstrcpy_str(char *dest, char __str_ars const *src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
    return dest;
 }
 
-#define StrCmpImpl() \
-   for(; *s1 && *s2; ++s1, ++s2) {if(*s1 != *s2) return *s1 - *s2;} \
-   return *s1 - *s2
-
-i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
-{
-   StrCmpImpl();
-}
-
+stkcall
 char *lstrcpy2(char *out, char const *s1, char const *s2)
 {
    char *p = out;
@@ -81,6 +73,20 @@ char *lstrcpy2(char *out, char const *s1, char const *s2)
    for(; *s2; s2++) *p++ = *s2;
    *p++ = '\0';
    return out;
+}
+
+#define StrCmpImpl() while(*s1 && *s2 && *s1 == *s2) ++s1, ++s2; return *s1 - *s2
+
+stkcall
+i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
+{
+   StrCmpImpl();
+}
+
+stkcall
+i32 faststrcmp(char const *s1, char const *s2)
+{
+   StrCmpImpl();
 }
 
 stkcall
