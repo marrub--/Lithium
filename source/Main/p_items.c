@@ -167,6 +167,8 @@ void P_Inv_PQuit(struct player *p)
 
    p->useitem = p->selitem = nil;
    p->movitem = false;
+
+   p->invinit = false;
 }
 
 void P_Item_Init(struct item *item, struct itemdata const *data)
