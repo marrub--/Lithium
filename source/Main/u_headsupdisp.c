@@ -60,6 +60,9 @@ static void HUD_Ammo(struct player *p)
 
    if(typegfx)
       PrintSprite(typegfx, 282,1, 236,2);
+
+   if(P_Wep_CurType(p) == weapon_rifle && ServCallI(sm_GetRifleGrenade))
+      PrintSprite(sp_HUD_H_D44, 281,1, 236,1);
 }
 
 static void HUD_Health(struct player *p, struct upgrade *upgr)
