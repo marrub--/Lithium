@@ -15,9 +15,12 @@
 #if LITHIUM
 static void ScopeC(struct player *p)
 {
-   i32 time = (ACS_Timer() % 16) / 4;
-   DrawSpriteXX(StrParam(":HUD_C:ScopeOverlay%i", time + 1),
-      HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
+   static str const os[] = {s":HUD_C:ScopeOverlay1",
+                            s":HUD_C:ScopeOverlay2",
+                            s":HUD_C:ScopeOverlay3"
+                            s":HUD_C:ScopeOverlay4"};
+   i32 time = ACS_Timer() % 16 / 4;
+   DrawSpriteXX(os[time], HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
 
    for(i32 i = 0; i < 200; i++)
       DrawSpriteXX(sp_HUD_H_D41, HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
@@ -39,7 +42,7 @@ static void ScopeM(struct player *p)
 }
 #endif
 
-script
+stkcall
 static void DebugStats(struct player *p)
 {
    if(!(dbglevel & log_devh)) return;
@@ -54,7 +57,7 @@ static void DebugStats(struct player *p)
    PrintText(s_smallfnt, CR_WHITE, 10,1, 20,1);
 }
 
-script
+stkcall
 static void Footstep(struct player *p)
 {
    static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
@@ -117,7 +120,7 @@ static void ItemFx(struct player *p)
 #endif
 
 // Update view bobbing when you get damaged.
-script
+stkcall
 static void DamageBob(struct player *p)
 {
    if(Paused) return;
@@ -144,7 +147,7 @@ static void DamageBob(struct player *p)
 }
 
 // Update additive view.
-script
+stkcall
 static void View(struct player *p)
 {
    if(Paused) return;
@@ -179,7 +182,7 @@ static void View(struct player *p)
 }
 
 #if LITHIUM
-script
+stkcall
 static void Style(struct player *p)
 {
    if(p->scopetoken) {
@@ -216,7 +219,7 @@ static void HUD(struct player *p)
 }
 #endif
 
-script
+stkcall
 static void Levelup(struct player *p)
 {
    if(p->old.attr.level && p->old.attr.level < p->attr.level)
@@ -263,12 +266,11 @@ static void StringStack(struct player *p)
    {
       struct hudstr *hudstr = Salloc(struct hudstr);
       ListCtor(&hudstr->link, hudstr);
-      hudstr->s = StrParam("%.8X", ACS_Random(0, 0x7FFFFFFF));
+      hudstr->s = StrParam("%.8X", ACS_Random(INT_MIN + 1, INT_MAX));
 
       hudstr->link.link(&p->hudstrlist);
 
-      if(p->hudstrlist.size() == 20)
-         Dalloc(p->hudstrlist.next->unlink());
+      if(p->hudstrlist.size() == 20) Dalloc(p->hudstrlist.next->unlink());
    }
 
    SetSize(320, 200);
@@ -280,6 +282,9 @@ static void StringStack(struct player *p)
 
 static void Waves(struct player *p)
 {
+   static str const fs[] = {s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13",
+                            s":HUD:H_D14", s":HUD:H_D15"};
+
    k32 health = p->health / (k32)p->maxhealth;
    i32 frame  = minmax(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
@@ -288,25 +293,17 @@ static void Waves(struct player *p)
 
    // Sine (health)
    i32 pos = (10 + timer) % 160;
-   DrawSpriteFade(StrParam(":HUD:H_D1%i", frame),
-      hid_scope_sineS - pos,
-      300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),
-      25.1 + pos,
-      1.5, 0.3);
+   DrawSpriteFade(fs[frame - 1], hid_scope_sineS - pos, 300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0), 25.1 + pos, 2, 0.6);
 
    // Square
    k32 a = ACS_Cos(pos / 32.0);
 
    pos = (7 + timer) % 160;
-   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46,
-      hid_scope_squareS - pos,
-      300.1 + (a >= 0) * 7.0,
-      25.1 + pos,
-      1.9, 0.1);
+   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, hid_scope_squareS - pos, 300.1 + (a >= 0) * 7.0, 25.1 + pos, 2, 0.6);
 
    // Triangle
    pos = (5 + timer) % 160;
-   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs((pos % 16) - 8), 25.1 + pos, 1.2, 0.2);
+   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs(pos % 16 - 8), 25.1 + pos, 2, 0.6);
 }
 #endif
 

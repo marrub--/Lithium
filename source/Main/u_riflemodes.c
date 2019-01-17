@@ -32,9 +32,12 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
       ClearClip();
    }
 
+   static str const ws[] = {s":HUD:H_W4",
+                            s":HUD:H_W5",
+                            s":HUD:H_W6"};
+
    PrintSprite(sp_HUD_H_W3, 215,2, 240,2);
-   PrintSprite(StrParam(":HUD:H_W%u", (rifle_firemode_max - p->riflefiremode) + 3),
-      215,2, 208 + (p->riflefiremode * 16),2);
+   PrintSprite(ws[rifle_firemode_max - p->riflefiremode - 1], 215,2, 208 + (p->riflefiremode * 16),2);
 }
 
 // Scripts -------------------------------------------------------------------|

@@ -281,7 +281,7 @@ void P_Init(struct player *p)
    // is bad practice
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    SetPropK(0, APROP_ViewHeight, p->viewheight);
-   InvTake(so_WeaponScopedToken, 999);
+   InvTake(so_WeaponScopedToken, INT_MAX);
 
    P_CBI_PMinit(p);
 

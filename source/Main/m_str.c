@@ -128,7 +128,7 @@ str LanguageV(str name)
 
    while(ret[0] == '$')
    {
-      str sub = ACS_StrMid(ret, 1, 0x7FFFFFFF);
+      str sub = ACS_StrMid(ret, 1, INT_MAX);
       ACS_BeginPrint();
       ACS_PrintLocalized(sub);
       str nex = ACS_EndStrParam();

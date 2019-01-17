@@ -262,7 +262,7 @@ script_str ext("ACS") addr("Lith_ChargeFistDamage")
 i32 Sc_ChargeFistDamage(void)
 {
    i32 amount = InvNum(so_FistCharge);
-   InvTake(so_FistCharge, 0x7FFFFFFF);
+   InvTake(so_FistCharge, INT_MAX);
    return amount * ACS_Random(1, 3);
 }
 
@@ -350,8 +350,8 @@ void Sc_PoisonFXTicker(void)
 
       if(InvNum(so_PoisonFXReset))
       {
-         InvTake(so_PoisonFXReset, 999);
-         InvTake(so_PoisonFXTimer, 999);
+         InvTake(so_PoisonFXReset, INT_MAX);
+         InvTake(so_PoisonFXTimer, INT_MAX);
          ServCallI(sm_GivePoison);
          return;
       }
@@ -359,8 +359,8 @@ void Sc_PoisonFXTicker(void)
 
    if(GetPropI(0, APROP_Health) <= 0)
    {
-      InvTake(so_PoisonFXReset, 999);
-      InvTake(so_PoisonFXTimer, 999);
+      InvTake(so_PoisonFXReset, INT_MAX);
+      InvTake(so_PoisonFXTimer, INT_MAX);
    }
    else if(InvNum(so_PoisonFXTimer))
    {

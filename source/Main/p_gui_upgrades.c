@@ -129,8 +129,8 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       str  op;
       bool chk;
 
-      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = s"Disabling";} // TODO
-      else             {chk = upgr->info->scoreadd < 0; op = s"Enabling" ;} // TODO
+      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = st_disabling;} // TODO
+      else             {chk = upgr->info->scoreadd < 0; op = st_enabling;}  // TODO
 
       i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}

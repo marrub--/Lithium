@@ -4,6 +4,27 @@
 
 extend class Lith_HERMES;
 
+static int GetMaxMag(int pnum, string cname)
+{
+   PlayerInfo p = Players[pnum];
+   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
+   return wep ? wep.m_Max : -1;
+}
+
+static int GetCurMag(int pnum, string cname)
+{
+   PlayerInfo p = Players[pnum];
+   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
+   return wep ? wep.m_Fired : -1;
+}
+
+static void AutoReload(int pnum, string cname)
+{
+   PlayerInfo p = Players[pnum];
+   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
+   if(wep) wep.Lith_ReloadFinish(true);
+}
+
 static void Lith_IonizeFX(Actor mo)
 {
    mo.A_SpawnItemEx("Lith_IonizedFX", 0,0,0, 0,0,-1, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);

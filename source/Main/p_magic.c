@@ -26,10 +26,14 @@ void Sc_Rend(bool hit, i32 set)
 {
    static i32 num;
 
+   static str const ns[] = {s":Weapon:Rend1",    s":Weapon:Rend2",
+                            s":Weapon:Rend3",    s":Weapon:Rend4"};
+   static str const hs[] = {s":Weapon:RendHit1", s":Weapon:RendHit2",
+                            s":Weapon:RendHit3", s":Weapon:RendHit4"};
+
    if(!hit) num = set;
 
-   str graphic = hit ? StrParam(":Weapon:RendHit%i", num)
-                     : StrParam(":Weapon:Rend%i",    num);
+   str graphic = hit ? hs[num - 1] : ns[num - 1];
 
    ACS_SetHudSize(800, 600);
    DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 2, 0.1);

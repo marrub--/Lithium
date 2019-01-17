@@ -9,8 +9,8 @@
 
 #include <stdio.h>
 
-#define W_Find(name) ServCallI(s"FindLump", name)
-#define W_Read(lmp)  ServCallS(s"ReadLump", lmp)
+#define W_Find(name) ServCallI(sm_FindLump, name)
+#define W_Read(lmp)  ServCallS(sm_ReadLump, lmp)
 
 #define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
 

@@ -59,23 +59,14 @@ static void HUD_Ammo(struct player *p)
    }
 
    if(typegfx)
-   {
       PrintSprite(typegfx, 282,1, 236,2);
-   }
 }
 
 static void HUD_Health(struct player *p, struct upgrade *upgr)
 {
-   static str weapongfx[SLOT_MAX] = {
-      s":HUD:H_D27",
-      s":HUD:H_D28",
-      s":HUD:H_D24",
-      s":HUD:H_D23",
-      s":HUD:H_D22",
-      s":HUD:H_D21",
-      s":HUD:H_D25",
-      s":HUD:H_D26"
-   };
+   static str ws[SLOT_MAX] = {s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24",
+                              s":HUD:H_D23", s":HUD:H_D22", s":HUD:H_D21",
+                              s":HUD:H_D25", s":HUD:H_D26"};
 
    PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
 
@@ -106,7 +97,7 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
       PrintTextFX(s_lhudfont, UData.cr, 34,1, 231,0, fid_health);
    }
 
-   str gfx = weapongfx[p->weapon.cur->info->slot];
+   str gfx = ws[p->weapon.cur->info->slot];
 
    i32 x = (8 + p->ticks) % 57;
 

@@ -7,6 +7,7 @@
 #ifndef m_types_h
 #define m_types_h
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdfix.h>

@@ -113,7 +113,7 @@ void Sc_DbgGiveMail(i32 num)
 script_str ext("ACS") addr("Lith_GiveMeAllOfTheScore")
 void Sc_DbgGiveScore(void)
 {
-   with_player(LocalPlayer) P_Scr_Give(p, 0x7FFFFFFFFFFFFFFFFFFFFFFFLL, true);
+   with_player(LocalPlayer) P_Scr_Give(p, INT96_MAX, true);
 }
 
 script_str ext("ACS") addr("Lith_DumpAlloc")

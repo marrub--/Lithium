@@ -228,7 +228,7 @@ static void MInit(void)
    #endif
 
    // Init a random seed from the map.
-   world.mapseed = ACS_Random(0, 0x7FFFFFFF);
+   world.mapseed = ACS_Random(0, INT_MAX);
 
    // Init global score multiplier per-map.
    world.scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;

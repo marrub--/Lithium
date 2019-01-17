@@ -55,23 +55,16 @@ static void HUD_Ammo(struct player *p)
 
 static void HUD_Health(struct player *p)
 {
-   static str weapongfx[SLOT_MAX] = {
-      s":HUD:H_D27",
-      s":HUD:H_D28",
-      s":HUD:H_D24",
-      s":HUD:H_D23",
-      s":HUD:H_D22",
-      s":HUD:H_D21",
-      s":HUD:H_D25",
-      s":HUD:H_D26"
-   };
+   static str ws[SLOT_MAX] = {s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24",
+                              s":HUD:H_D23", s":HUD:H_D22", s":HUD:H_D21",
+                              s":HUD:H_D25", s":HUD:H_D26"};
 
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
    PrintTextFmt(CrBlue "%i", p->health);
    PrintTextX(s_lhudfont, 0, 18,1, 228,0);
 
-   str gfx = weapongfx[p->weapon.cur->info->slot];
+   str gfx = ws[p->weapon.cur->info->slot];
 
    i32 x = (8 + p->ticks) % 40;
 

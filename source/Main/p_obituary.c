@@ -22,7 +22,7 @@ void Sc_Obituary(void)
 
    struct player *p = LocalPlayer;
 
-   str obit = ServCallS(s"GetObituary");
+   str obit = ServCallS(sm_GetObituary);
    if(obit == s_NIL) return;
 
    i32 rn = ACS_Random(1, 5);

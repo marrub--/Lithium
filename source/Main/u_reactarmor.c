@@ -26,14 +26,14 @@ static struct {char const *abbr, *full;} const ArmorNames[] = {
 
 static void RA_Take(i32 n)
 {
-   InvTake(StrParam(OBJ "RA_Bullets%i", n),   999);
-   InvTake(StrParam(OBJ "RA_Energy%i", n),    999);
-   InvTake(StrParam(OBJ "RA_Fire%i", n),      999);
-   InvTake(StrParam(OBJ "RA_FireMagic%i", n), 999);
-   InvTake(StrParam(OBJ "RA_Magic%i", n),     999);
-   InvTake(StrParam(OBJ "RA_Melee%i", n),     999);
-   InvTake(StrParam(OBJ "RA_Shrapnel%i", n),  999);
-   InvTake(StrParam(OBJ "RA_Ice%i", n),       999);
+   InvTake(StrParam(OBJ "RA_Bullets%i", n),   INT_MAX);
+   InvTake(StrParam(OBJ "RA_Energy%i", n),    INT_MAX);
+   InvTake(StrParam(OBJ "RA_Fire%i", n),      INT_MAX);
+   InvTake(StrParam(OBJ "RA_FireMagic%i", n), INT_MAX);
+   InvTake(StrParam(OBJ "RA_Magic%i", n),     INT_MAX);
+   InvTake(StrParam(OBJ "RA_Melee%i", n),     INT_MAX);
+   InvTake(StrParam(OBJ "RA_Shrapnel%i", n),  INT_MAX);
+   InvTake(StrParam(OBJ "RA_Ice%i", n),       INT_MAX);
 }
 
 static void RA_Give(char const *name, i32 n)

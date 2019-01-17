@@ -108,7 +108,7 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
       i32 splitr = chp % shp;
       i32 split  = chp / shp;
       UData.splitfrac = splitr / (k32)shp;
-      UData.split     = minmax(split + 1, 1, 14);
+      UData.split     = minmax(split, 0, 13);
 
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
@@ -144,9 +144,13 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    }
 
    // Rank
-   if(UData.rank) for(i32 i = 0; i < UData.rank; i++) {
+   if(UData.rank) for(i32 i = 0; i < UData.rank; i++)
+   {
+      static str const rs[] = {s":UI:Rank1", s":UI:Rank2", s":UI:Rank3",
+                               s":UI:Rank4", s":UI:Rank5", s":UI:Rank6",
+                               s":UI:Rank7"};
       i32 y = 216 + (i > 4 ? 8 : 0);
-      PrintSprite(StrParam(":UI:Rank%i", i+1), 106+ox + i%5*6,1, y+oy,1);
+      PrintSprite(rs[i], 106+ox + i%5*6,1, y+oy,1);
    }
 
    // Hit indicator
@@ -168,14 +172,22 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    // Health bar
    if(p->getCVarI(sc_scanner_bar))
    {
+      static str const bs[] = {s":UI:HealthBar1",  s":UI:HealthBar2",
+                               s":UI:HealthBar3",  s":UI:HealthBar4",
+                               s":UI:HealthBar5",  s":UI:HealthBar6",
+                               s":UI:HealthBar7",  s":UI:HealthBar8",
+                               s":UI:HealthBar9",  s":UI:HealthBar10",
+                               s":UI:HealthBar11", s":UI:HealthBar12",
+                               s":UI:HealthBar13", s":UI:HealthBar14"};
+
       i32 x = 120 + ox;
       i32 y = (afnt ? 201 : 205) + oy;
 
-      if(UData.split > 1)
-         PrintSprite(StrParam(":UI:HealthBar%i", UData.split - 1), x,1, y,1);
+      if(UData.split > 0)
+         PrintSprite(bs[UData.split - 1], x,1, y,1);
 
       SetClip(x, y, 80 * UData.splitfrac, 2);
-      PrintSprite(StrParam(":UI:HealthBar%i", UData.split), x,1, y,1);
+      PrintSprite(bs[UData.split], x,1, y,1);
       ClearClip();
    }
 }
