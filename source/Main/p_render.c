@@ -17,7 +17,7 @@ static void ScopeC(struct player *p)
 {
    static str const os[] = {s":HUD_C:ScopeOverlay1",
                             s":HUD_C:ScopeOverlay2",
-                            s":HUD_C:ScopeOverlay3"
+                            s":HUD_C:ScopeOverlay3",
                             s":HUD_C:ScopeOverlay4"};
    i32 time = ACS_Timer() % 16 / 4;
    DrawSpriteXX(os[time], HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
