@@ -10,11 +10,19 @@
 
 #define DrawSpriteBegin(name) \
    do { \
-      while(name[0] == ':') \
+      for(i32 i = 0; name[0] == ':'; i++) \
       { \
          ACS_BeginPrint(); \
          ACS_PrintLocalized(name); \
          name = ACS_EndStrParam(); \
+         if(i == 15) \
+         { \
+            ACS_BeginPrint(); \
+            ACS_PrintString(s"invalid graphic "); \
+            ACS_PrintString(name); \
+            ACS_EndLog(); \
+            return; \
+         } \
       } \
       ACS_SetFont(name); \
       ACS_BeginPrint(); \
