@@ -150,14 +150,17 @@ action(Weapon) void Lith_A_ScopeToggle()
 action(Weapon) void Lith_A_ZoomFactorScoped(float amount)
    {A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX) * amount * invoker.m_ScopeZoom);}
 
-action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y)
-   {A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);}
+action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y, bool ignoreCrouch)
+{
+   if(!ignoreCrouch) (y -= ((1.0 - GetCrouchFactor(AAPTR_DEFAULT)) * 10.0));
+   A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);
+}
 
-action(Weapon) void Lith_A_GunSmoke(float x = 0, float y = 6)
-   {Lith_GunSmoke("Lith_GunSmokeSpawner", x, y);}
+action(Weapon) void Lith_A_GunSmoke(float x = 0, float y = 6, bool ignoreCrouch = false)
+   {Lith_GunSmoke("Lith_GunSmokeSpawner", x, y, ignoreCrouch);}
 
-action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6)
-   {Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y);}
+action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6, bool ignoreCrouch = false)
+   {Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y, ignoreCrouch);}
 
 action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, float px, float py, float pz, float vx, float vy, float vz)
 {
