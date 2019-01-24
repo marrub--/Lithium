@@ -25,8 +25,8 @@ class ListMenuItemLith_UpdateScroll : ListMenuItemTextItem
 
 struct Lith_Changelog
 {
-   string name;
-   int    page;
+   string m_Name;
+   int    m_Page;
 }
 
 class Lith_UpdateMenu : ListMenu;
@@ -34,7 +34,7 @@ class Lith_UpdateMenu : ListMenu;
 string m_Text;
 int m_LogN, m_Page;
 
-const CLGS = 13;
+const CLGS = 14;
 
 Lith_Changelog[CLGS] m_Clg;
 
@@ -42,19 +42,20 @@ override void Init(Menu parent, ListMenuDescriptor desc)
 {
    Super.Init(parent, desc);
 
-   m_Clg[CLGS-13].name = "Update_1_6";   m_Clg[CLGS-13].page = 5;
-   m_Clg[CLGS-12].name = "Update_1_5_3"; m_Clg[CLGS-12].page = 2;
-   m_Clg[CLGS-11].name = "Update_1_5_2"; m_Clg[CLGS-11].page = 1;
-   m_Clg[CLGS-10].name = "Update_1_5_1"; m_Clg[CLGS-10].page = 2;
-   m_Clg[CLGS-9 ].name = "Update_1_5";   m_Clg[CLGS-9 ].page = 3;
-   m_Clg[CLGS-8 ].name = "Update_1_5b";  m_Clg[CLGS-8 ].page = 2;
-   m_Clg[CLGS-7 ].name = "Update_1_5a2"; m_Clg[CLGS-7 ].page = 1;
-   m_Clg[CLGS-6 ].name = "Update_1_5a";  m_Clg[CLGS-6 ].page = 2;
-   m_Clg[CLGS-5 ].name = "Update_1_4";   m_Clg[CLGS-5 ].page = 2;
-   m_Clg[CLGS-4 ].name = "Update_1_3_1"; m_Clg[CLGS-4 ].page = 1;
-   m_Clg[CLGS-3 ].name = "Update_1_3";   m_Clg[CLGS-3 ].page = 3;
-   m_Clg[CLGS-2 ].name = "Update_1_2";   m_Clg[CLGS-2 ].page = 2;
-   m_Clg[CLGS-1 ].name = "Update_1_1";   m_Clg[CLGS-1 ].page = 3;
+   m_Clg[CLGS-14].m_Name = "Update_1_6_1"; m_Clg[CLGS-14].m_Page = 5;
+   m_Clg[CLGS-13].m_Name = "Update_1_6";   m_Clg[CLGS-13].m_Page = 5;
+   m_Clg[CLGS-12].m_Name = "Update_1_5_3"; m_Clg[CLGS-12].m_Page = 2;
+   m_Clg[CLGS-11].m_Name = "Update_1_5_2"; m_Clg[CLGS-11].m_Page = 1;
+   m_Clg[CLGS-10].m_Name = "Update_1_5_1"; m_Clg[CLGS-10].m_Page = 2;
+   m_Clg[CLGS-9 ].m_Name = "Update_1_5";   m_Clg[CLGS-9 ].m_Page = 3;
+   m_Clg[CLGS-8 ].m_Name = "Update_1_5b";  m_Clg[CLGS-8 ].m_Page = 2;
+   m_Clg[CLGS-7 ].m_Name = "Update_1_5a2"; m_Clg[CLGS-7 ].m_Page = 1;
+   m_Clg[CLGS-6 ].m_Name = "Update_1_5a";  m_Clg[CLGS-6 ].m_Page = 2;
+   m_Clg[CLGS-5 ].m_Name = "Update_1_4";   m_Clg[CLGS-5 ].m_Page = 2;
+   m_Clg[CLGS-4 ].m_Name = "Update_1_3_1"; m_Clg[CLGS-4 ].m_Page = 1;
+   m_Clg[CLGS-3 ].m_Name = "Update_1_3";   m_Clg[CLGS-3 ].m_Page = 3;
+   m_Clg[CLGS-2 ].m_Name = "Update_1_2";   m_Clg[CLGS-2 ].m_Page = 2;
+   m_Clg[CLGS-1 ].m_Name = "Update_1_1";   m_Clg[CLGS-1 ].m_Page = 3;
 
    Lith_SetText();
 }
@@ -70,16 +71,16 @@ void Lith_SetText()
    string s;
 
    if(m_Page > 0)
-      s = String.Format("$LITH_%s_Page%i", m_Clg[m_LogN].name, m_Page + 1);
+      s = String.Format("$LITH_%s_Page%i", m_Clg[m_LogN].m_Name, m_Page + 1);
    else
-      s = String.Format("$LITH_%s", m_Clg[m_LogN].name);
+      s = String.Format("$LITH_%s", m_Clg[m_LogN].m_Name);
 
    m_Text = StringTable.Localize(s);
 }
 
 bool Lith_PrevLog()
 {
-   if(m_Page != m_Clg[m_LogN].page - 1)
+   if(m_Page != m_Clg[m_LogN].m_Page - 1)
    {
       m_Page++;
       Lith_SetText();
@@ -110,7 +111,7 @@ bool Lith_NextLog()
       return false;
 
    m_LogN--;
-   m_Page = m_Clg[m_LogN].page - 1;
+   m_Page = m_Clg[m_LogN].m_Page - 1;
 
    Lith_SetText();
 
