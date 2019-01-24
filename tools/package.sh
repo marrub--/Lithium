@@ -2,5 +2,11 @@
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
+tools/genbuild.rb -DNDEBUG
+ninja -t clean
+ninja
+
 args='-xr!*.gitignore -xr!*.bat -xr!*.dbs -xr!*.wad.b* -tzip'
 (cd pk7 && 7za a ../Lithium.pk3 ./* ../licenses ../credits.txt ../ir/lithmain_ld.txt $args)
+
+tools/genbuild.rb

@@ -8,31 +8,36 @@ See licenses/cc0.txt for more information.
 
 end flags
 
-Hexen (unused)
- %mif_full
- ShotgunGuy  imp         Ettin
- Imp         lostsoul    FireDemon
- Arachnotron arachnotron CentaurLeader
- Demon       demon       Centaur
- Mancubus    hellknight  IceGuy
- Mancubus    hellknight  SerpentLeader
- Arachnotron hellknight  Serpent
- HellKnight  hellknight  Demon1
- BaronOfHell baron       Demon2
- Cacodemon   mancubus    Bishop
- HellKnight  lostsoul    Wraith
- CyberDemon  cyberdemon  Dragon
- CyberDemon  phantom     ClericBoss
- CyberDemon  phantom     FighterBoss
- CyberDemon  phantom     MageBoss
- CyberDemon  cyberdemon  Heresiarch
- DSparil     cyberdemon  Korax
- %
+Hexen (unused) ---------------------------------------------------------------|
 
-Doom
+" %mif_full
+" ShotgunGuy  imp         Ettin
+" Imp         lostsoul    FireDemon
+" Arachnotron arachnotron CentaurLeader
+" Demon       demon       Centaur
+" Mancubus    hellknight  IceGuy
+" Mancubus    hellknight  SerpentLeader
+" Arachnotron hellknight  Serpent
+" HellKnight  hellknight  Demon1
+" BaronOfHell baron       Demon2
+" Cacodemon   mancubus    Bishop
+" HellKnight  lostsoul    Wraith
+" CyberDemon  cyberdemon  Dragon
+" CyberDemon  phantom     ClericBoss
+" CyberDemon  phantom     FighterBoss
+" CyberDemon  phantom     MageBoss
+" CyberDemon  cyberdemon  Heresiarch
+" DSparil     cyberdemon  Korax
+" %
+
+Doom -------------------------------------------------------------------------|
+
 +ZombieMan     zombie        ZombieMan
++ZombieMan     zombie        Zombieman
 +ShotgunGuy    zombie        ShotgunGuy
++ShotgunGuy    zombie        Shotgunguy
 +ChaingunGuy   zombie        ChaingunGuy
++ChaingunGuy   zombie        Chaingunguy
 +Imp           imp           Imp
 +Demon         demon         Demon
 +Spectre       demon         Spectre
@@ -49,7 +54,8 @@ Doom
 +SpiderDemon   mastermind    SpiderMastermind
 +CyberDemon    cyberdemon    Cyberdemon
 
-Chex Quest
+Chex Quest -------------------------------------------------------------------|
+
 +Imp         imp        ArmoredFlemoidusBipedicus
 +Imp         imp        Quadrumpus
 +LostSoul    lostsoul   ChexSoul
@@ -65,7 +71,8 @@ Chex Quest
 +SpiderDemon mastermind Flembomination
 +CyberDemon  cyberdemon Snotfolus
 
-Heretic
+Heretic ----------------------------------------------------------------------|
+
 +Imp         imp         Gargoyle
 +Demon       demon       Golem
 +Nitrogolem  demon       Nitrogolem
@@ -77,7 +84,8 @@ Heretic
 +Maulotaur   mastermind  Maulotaur
 +DSparil     cyberdemon  DSparil
 
-Lithium
+Lithium ----------------------------------------------------------------------|
+
 +1000 0 phantom    James
 +2000 0 phantom    Makarov
 +3000 0 phantom    Isaac
@@ -87,58 +95,47 @@ Lithium
 +CyberDemon angel Archangel
 %
 
-Cheogsh.wad
+Cheogsh.wad ------------------------------------------------------------------|
+
++Spectre demon Nightmare
+
 %mif_full
 +Imp         imp        Howler
 +Imp         imp        SoulHarvester
-+Demon       demon      Satyr
++Spectre     demon      MaulerDemon
 +BaronOfHell baron      HellWarrior
 +CyberDemon  cyberdemon Cheogsh
-+Spectre     demon      MaulerDemon
-+Spectre     demon      KDiZDNightmare
 %
 
-ed4_rfo1.wad
+ed4_rfo1.wad -----------------------------------------------------------------|
+
++DRLACaptain zombie      BazookaZombie
++Imp         imp         BatFamiliar
++Imp         imp         DragonFamiliar
++Imp         imp         SnakeImp
++Arachnotron arachnotron Arachnophyte
++Arachnotron arachnotron RailSpider
+
 %mif_full
 +CyberDemon    cacodemon     RealAbstractPain
-+Arachnotron   arachnotron   RailSpider
 +PainElemental painelemental EDPE
-+Arachnotron   arachnotron   Arachnophyte
-+Imp           imp           DragonFamiliar
-+Imp           imp           BatFamiliar
-+Imp           imp           SnakeImp
-+DRLACaptain   zombie        BazookaZombie
-+Imp           imp           DarkImp
-+Imp           imp           ImpWarlord
 %
 
-dop.pk3
-%mif_full
+dop.pk3 ----------------------------------------------------------------------|
+
 +LostSoul lostsoul LostGhoul
-%
 
-DoomRL Arsenal Monsters
+DoomRL Arsenal Monsters ------------------------------------------------------|
+
 +ZombieMan   zombie FormerHuman
 +ShotgunGuy  zombie FormerSergeant
 +ChaingunGuy zombie FormerCommando
 +DRLACaptain zombie Former
 
-Colorful Hell
-+ZombieMan     zombie        Zombie
-+ShotgunGuy    zombie        SG
-+ChaingunGuy   zombie        CGuy
-+LostSoul      lostsoul      LSoul
-+HellKnight    hellknight    HK
-+Arachnotron   arachnotron   SP1
-+Cacodemon     cacodemon     Caco
-+Archvile      archvile      Arch
-+PainElemental painelemental PE
-+SpiderDemon   mastermind    Mind
-+CyberDemon    cyberdemon    Cybie
+Shut Up and Lithium ----------------------------------------------------------|
 
-Shut Up and Lithium
-+ZombieMan     imp         Roach
 +ZombieMan     imp         Remnant
++ZombieMan     imp         Roach
 +Imp           imp         Turmoil
 +ShotgunGuy    imp         Pitkis
 +ChaingunGuy   imp         Helliate
@@ -161,17 +158,58 @@ Shut Up and Lithium
 +LostSoul      lostsoul    UnbodiedFury
 +ShotgunGuy    imp         Bloodfiend
 +Demon         demon       Golem
-+Demon         demon       Phantasm
 +Demon         demon       Mortuus
++Demon         demon       Phantasm
 +ChaingunGuy   imp         Malum
 +ShotgunGuy    imp         Phasma
 +Spectre       demon       Licho
-+Cacodemon     cacodemon   Mandingo
 +Cacodemon     cacodemon   Hierophant
++Cacodemon     cacodemon   Mandingo
 +CyberDemon    cyberdemon  Burrower
 +Archvile      arachnotron Aranearum
 +Cacodemon     cacodemon   Lividus
 +HellKnight    hellknight  Deepone
 +BaronOfHell   baron       Deeptwo
+
+Western Patch ----------------------------------------------------------------|
+
++ZombieMan  zombie Westman
++ZombieMan  zombie WildGunmanGuy
++ShotgunGuy zombie TheOutsider
+
+Combined Harms ---------------------------------------------------------------|
+
++ZombieMan     zombie        ZombieGunner
++ShotgunGuy    zombie        ShotGunner
++ChaingunGuy   zombie        ChainGunner
++Demon         demon         Pinky
++Spectre       demon         sneakypinky
++Cacodemon     cacodemon     bigmouthedhissything
++LostSoul      lostsoul      skullhead
++PainElemental painelemental meatball
++BaronOfHell   baron         bruiserbro
++HellKnight    hellknight    KnellHight
++Revenant      revenant      agitator
++Mancubus      mancubus      fatty
++Arachnotron   arachnotron   lilspider
++Archvile      archvile      martianbastard
++SpiderDemon   mastermind    bigspider
++CyberDemon    cyberdemon    angrycow
+
+Colorful Hell ----------------------------------------------------------------|
+
+Note, these MUST be at the bottom, because they are extremely vague.
+
++ZombieMan     zombie        Zombie
++ShotgunGuy    zombie        SG
++ChaingunGuy   zombie        CGuy
++LostSoul      lostsoul      LSoul
++HellKnight    hellknight    HK
++Arachnotron   arachnotron   SP1
++Cacodemon     cacodemon     Caco
++Archvile      archvile      Arch
++PainElemental painelemental PE
++SpiderDemon   mastermind    Mind
++CyberDemon    cyberdemon    Cybie
 
 EOF

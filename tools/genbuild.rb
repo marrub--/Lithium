@@ -49,7 +49,7 @@ fp << <<_end_
 #{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay
-#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096
+#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{ARGV.join " "}
 #{DLITH } = -DLITHIUM=1
 #{DDTAP } = -DDOUBLETAP=1
 #{INITSC} = --bc-zdacs-init-script-name
