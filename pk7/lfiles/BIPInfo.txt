@@ -144,7 +144,7 @@ pM AOF
 pC AOFJem
 pM Cid        -> SuperDimension Earth
 pM Facer
-gA JAQTen
+gA JAQTen     -> Tsukama
 gA JJJ
 pM KSKK       -> Earth
 pC KSKKJem    -> Earth
@@ -154,7 +154,7 @@ pM OFMD
 pC OFMDJem
 gO Omakeda    -> Earth
 gO Semaphore  -> OmicronXevv
-gA ShekaKaff
+gA ShekaKaff  -> Tsukama
 gO SYM43      -> AetosVi
 pM UnrealArms -> AetosVi
 gA Yigan

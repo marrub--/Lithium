@@ -47,3 +47,13 @@
 == \#INFO_SHORT_Heaven | 天国
 @@ \#INFO_DESCR_Heaven
 翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_ReverseAce | Reverse Ace
+@@ \#INFO_DESCR_ReverseAce
+翻訳なし
+
+##----------------------------------------------------------------------------|
+== \#INFO_SHORT_Tsukama | Tsukama
+@@ \#INFO_DESCR_Tsukama
+翻訳なし

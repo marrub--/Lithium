@@ -55,5 +55,15 @@
 "LITH_INFO_DESCR_Heaven" =
    "翻訳なし";
 
+//----------------------------------------------------------------------------|
+"LITH_INFO_SHORT_ReverseAce" = "Reverse Ace";
+"LITH_INFO_DESCR_ReverseAce" =
+   "翻訳なし";
+
+//----------------------------------------------------------------------------|
+"LITH_INFO_SHORT_Tsukama" = "Tsukama";
+"LITH_INFO_DESCR_Tsukama" =
+   "翻訳なし";
+
 
 // EOF
