@@ -1,7 +1,7 @@
 // Distributed under the CC0 public domain license.
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
-version "3.7"
+version "3.7.2"
 
 #include "lzscript/Constants.zsc"
 #include "lzscript/Utilities.zsc"

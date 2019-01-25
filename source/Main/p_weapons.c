@@ -364,7 +364,7 @@ void Sc_PoisonFXTicker(void)
    }
    else if(InvNum(so_PoisonFXTimer))
    {
-      InvGive(so_PoisonFXGiver, 1);
+      ServCallI(sm_PoisonFX);
       InvTake(so_PoisonFXTimer, 1);
    }
 }

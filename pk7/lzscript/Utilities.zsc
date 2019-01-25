@@ -55,9 +55,9 @@ struct Lith_UTIL
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static void Exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0)
+   static int Exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0)
    {
-      Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
+      return Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
    }
 }
 

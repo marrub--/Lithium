@@ -25,25 +25,6 @@ class Lith_PoisonFX : Actor
 class Lith_PoisonFXTimer : Inventory {default {Inventory.MaxAmount 20;}}
 class Lith_PoisonFXReset : Inventory {default {Inventory.MaxAmount 1;}}
 
-class Lith_PoisonFXGiver : Lith_CustomFunction
-{
-   override bool TryPickup(in out Actor mo)
-   {
-      // MEGA FUCKING HACK: ACS interfacing with ZScript is a trainwreck
-      Target = mo.Target;
-      int dmg = Lith_Player(Target) ?
-                ACS_ExecuteWithResult(lsc_pdata, pdata_attr, at_acc, true) / 4 :
-                0;
-
-      mo.A_DamageSelf(10 + dmg, "Poison");
-      mo.A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5);
-      mo.A_SpawnItemEx("Lith_PoisonFX", 0,0,8, flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
-      mo.ACS_ScriptCall("Lith_PoisonFXTicker");
-      GoAwayAndDie();
-      return true;
-   }
-}
-
 class Lith_PoisonBlob : Actor
 {
    default

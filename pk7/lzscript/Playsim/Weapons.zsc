@@ -49,22 +49,35 @@ static void DelearSprite(Actor mo_)
    float vx = mo.Vel.X;
    float vy = mo.Vel.Y;
    float vz = mo.Vel.Z;
-   if(sf < 16) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+2 -sp,vx,vy,vz,a,flags);
-   if(sf < 15) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+4 -sp,vx,vy,vz,a,flags);
-   if(sf < 14) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+6 -sp,vx,vy,vz,a,flags);
-   if(sf < 13) mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+8 -sp,vx,vy,vz,a,flags);
-   if(sf < 12) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+12-sp,vx,vy,vz,a,flags);
-   if(sf < 11) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+14-sp,vx,vy,vz,a,flags);
-   if(sf < 10) mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+16-sp,vx,vy,vz,a,flags);
-   if(sf <  9) mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+18-sp,vx,vy,vz,a,flags);
-   if(sf <  8) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+2 -sp,vx,vy,vz,a,flags);
-   if(sf <  7) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+4 -sp,vx,vy,vz,a,flags);
-   if(sf <  6) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+6 -sp,vx,vy,vz,a,flags);
-   if(sf <  5) mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+8 -sp,vx,vy,vz,a,flags);
-   if(sf <  4) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+12-sp,vx,vy,vz,a,flags);
-   if(sf <  3) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+14-sp,vx,vy,vz,a,flags);
-   if(sf <  2) mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+16-sp,vx,vy,vz,a,flags);
-   if(sf <  1) mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,a,flags);
+   switch(sf) {
+   case  0: mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,a,flags);
+   case  1: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+16-sp,vx,vy,vz,a,flags);
+   case  2: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+14-sp,vx,vy,vz,a,flags);
+   case  3: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+12-sp,vx,vy,vz,a,flags);
+   case  4: mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+8 -sp,vx,vy,vz,a,flags);
+   case  5: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+6 -sp,vx,vy,vz,a,flags);
+   case  6: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+4 -sp,vx,vy,vz,a,flags);
+   case  7: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+2 -sp,vx,vy,vz,a,flags);
+   case  8: mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+18-sp,vx,vy,vz,a,flags);
+   case  9: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+16-sp,vx,vy,vz,a,flags);
+   case 10: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+14-sp,vx,vy,vz,a,flags);
+   case 11: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+12-sp,vx,vy,vz,a,flags);
+   case 12: mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+8 -sp,vx,vy,vz,a,flags);
+   case 13: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+6 -sp,vx,vy,vz,a,flags);
+   case 14: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+4 -sp,vx,vy,vz,a,flags);
+   case 15: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+2 -sp,vx,vy,vz,a,flags);
+   }
+}
+
+static void PoisonFX(Actor mo)
+{
+   // removed weird ass bullshit...
+   let trg = Lith_Player(mo.Target);
+   int dmg = trg ? Lith_UTIL.Exec(trg, lsc_pdata, pdata_attr, at_acc) / 4 : 0;
+   mo.A_DamageSelf(10 + dmg, "Poison");
+   mo.A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5);
+   mo.A_SpawnItemEx("Lith_PoisonFX", 0,0,8, flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+   mo.ACS_ScriptCall("Lith_PoisonFXTicker");
 }
 
 static void GivePoison(Actor mo)
@@ -74,7 +87,7 @@ static void GivePoison(Actor mo)
    else
    {
       mo.GiveInventory("Lith_PoisonFXTimer", 20);
-      mo.GiveInventory("Lith_PoisonFXGiver", 1);
+      PoisonFX(mo);
    }
 }
 
