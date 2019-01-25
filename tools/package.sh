@@ -6,7 +6,7 @@ tools/genbuild.rb -DNDEBUG
 ninja -t clean
 ninja
 
-args='-xr!*.gitignore -xr!*.bat -xr!*.dbs -xr!*.wad.b* -tzip'
-(cd pk7 && 7za a ../Lithium.pk3 ./* ../licenses ../credits.txt ../ir/lithmain_ld.txt $args)
+args='-x *.gitignore *.bat *.dbs *.wad.b*'
+(cd pk7 && zip -r ../Lithium.pk3 ./* ../licenses ../credits.txt ../ir/lithmain_ld.txt $args)
 
 tools/genbuild.rb
