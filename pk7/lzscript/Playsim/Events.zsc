@@ -221,12 +221,13 @@ override bool InputProcess(InputEvent ev)
 {
    let cl = Lith_URANUS.Instance();
 
-   if(!cl) return false;
+   if(!cl || !PlayerInGame[ConsolePlayer] || !Lith_Player(Players[ConsolePlayer].MO))
+      return false;
 
    if((ev.Type    == InputEvent.Type_KeyDown || ev.Type    == InputEvent.Type_KeyUp) &&
       (ev.KeyScan == InputEvent.Key_LShift   || ev.KeyScan == InputEvent.Key_RShift))
    {
-      cl.m_PData[ConsolePlayer].ShiftDown = (ev.Type == InputEvent.Type_KeyDown);
+      cl.m_PData[ConsolePlayer].ShiftDown = ev.Type == InputEvent.Type_KeyDown;
       return false;
    }
    else if(Lith_Player(Players[ConsolePlayer].MO).m_GrabInput &&
@@ -234,11 +235,8 @@ override bool InputProcess(InputEvent ev)
    {
       int ch = ev.KeyChar;
 
-      if(cl.m_PData[ConsolePlayer].ShiftDown &&
-         (ch >= Ch_A && ch <= Ch_Z || ch >= Ch_L_A && ch <= Ch_L_Z))
-      {
+      if(cl.m_PData[ConsolePlayer].ShiftDown && ch >= Ch_L_A && ch <= Ch_L_Z)
          ch -= 32;
-      }
 
       EventHandler.SendNetworkEvent("Lith_Key", ch);
       return true;
