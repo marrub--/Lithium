@@ -13,15 +13,6 @@
 #define TABCHARS 20
 
 #define Themes(X) \
-   X("Green")     \
-   X("Rose")      \
-   X("Umi")       \
-   X("Ender")     \
-   X("Orange")    \
-   X("Grey")      \
-   X("Basilissa") \
-   X("Ghost")     \
-   X("WinXP")
 
 // Static Functions ----------------------------------------------------------|
 
@@ -83,9 +74,18 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
 
 char const *ThemeName(u32 num)
 {
-   #define X(n) n,
-   static char const *themes[cbi_theme_max] = {Themes(X)};
-   #undef X
+   static char const *themes[cbi_theme_max] = {
+      "Green",
+      "Rose Pink",
+      "Umi Blue",
+      "Ender Red",
+      "Orange",
+      "Grey",
+      "Basilissa",
+      "Ghost",
+      "Windows XP",
+      "DONKEY KONG",
+   };
 
    return themes[num >= cbi_theme_max ? 0 : num];
 }
@@ -102,8 +102,19 @@ void P_CBI_PTick(struct player *p)
 
    if(p->cbi.theme != p->cbi.oldtheme)
    {
-      #define X(n) ":UI_" n ":",
-      static char const *names[] = {Themes(X)};
+      #define X(n) ":UI_" n ":"
+      static char const *names[] = {
+         X("Green"),
+         X("Rose"),
+         X("Umi"),
+         X("Ender"),
+         X("Orange"),
+         X("Grey"),
+         X("Basilissa"),
+         X("Ghost"),
+         X("WinXP"),
+         X("Trans"),
+      };
       #undef X
 
       if(p->cbi.theme >= cbi_theme_max) p->cbi.theme = 0;

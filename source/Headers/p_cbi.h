@@ -53,6 +53,7 @@ enum
    cbi_theme_basilissa,
    cbi_theme_ghost,
    cbi_theme_winxp,
+   cbi_theme_trans,
    cbi_theme_max
 };
 
