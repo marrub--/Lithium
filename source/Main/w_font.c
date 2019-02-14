@@ -16,7 +16,6 @@
 
 // Types ---------------------------------------------------------------------|
 
-// NOTE: DO NOT change the layout of this without also changing `RetOfs`s
 struct glyph
 {
    i32 key;
@@ -93,20 +92,11 @@ struct glyph *Sc_GetFontMetric(i32 key)
       [key                       % nglyphs ];
 }
 
-// hand-written assembly for these, saves a few cycles
-#define RetOfs(n) \
-   __asm \
-   ( \
-      "AddI(Stk() LocReg(Lit(:metr)) Lit(" #n "_s31.0))" \
-      "Retn(Sta(Stk()))" \
-   ); \
-   return 0 /* dummy return to keep the compiler quiet */
-
-script ext("ACS") addr(lsc_metr_xadv) i32 Sc_Metr_Xadv(struct glyph *metr) {RetOfs(1);}
-script ext("ACS") addr(lsc_metr_yofs) i32 Sc_Metr_Yofs(struct glyph *metr) {RetOfs(2);}
-script ext("ACS") addr(lsc_metr_tex)  i32 Sc_Metr_Tex (struct glyph *metr) {RetOfs(3);}
-script ext("ACS") addr(lsc_metr_w)    i32 Sc_Metr_W   (struct glyph *metr) {RetOfs(4);}
-script ext("ACS") addr(lsc_metr_h)    i32 Sc_Metr_H   (struct glyph *metr) {RetOfs(5);}
+script ext("ACS") addr(lsc_metr_xadv) i32 Sc_Metr_Xadv(struct glyph *metr) {return metr->xadv;}
+script ext("ACS") addr(lsc_metr_yofs) i32 Sc_Metr_Yofs(struct glyph *metr) {return metr->yofs;}
+script ext("ACS") addr(lsc_metr_tex)  i32 Sc_Metr_Tex (struct glyph *metr) {return metr->tex;}
+script ext("ACS") addr(lsc_metr_w)    i32 Sc_Metr_W   (struct glyph *metr) {return metr->w;}
+script ext("ACS") addr(lsc_metr_h)    i32 Sc_Metr_H   (struct glyph *metr) {return metr->h;}
 
 script_str ext("ACS") addr("Lith_SetFontFace") void Sc_SetFontFace(i32 f) {setfont = f;}
 

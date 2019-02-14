@@ -73,7 +73,7 @@ i32 fastabs(i32 n)
       "Jcnd_Tru W 1(Stk() Lit(:\"neg\"))"
       "Retn     W 1(LocReg(Lit(:n)))"
    ":\"neg\""
-      "NegI     W 1(Stk() LocReg(Lit(:n)))"
+      "Neg:I    W 1(Stk() LocReg(Lit(:n)))"
       "Retn     W 1(Stk())"
    );
    return 0; // shh...
