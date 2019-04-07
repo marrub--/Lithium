@@ -110,6 +110,17 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
+override float, float GetFirePattern()
+{
+   switch(m_FirePattern = (m_FirePattern + 1) % 4) {
+   case 0: return  1,  0.5;
+   case 1: return -1,  0.5;
+   case 2: return  1, -0.5;
+   case 3: return -1, -0.5;
+   }
+   return 0, 0;
+}
+
 action(Weapon) void Lith_A_FirePistol()
 {
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_PlasPistol))
@@ -120,13 +131,15 @@ action(Weapon) void Lith_A_FirePistol()
    }
 
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_AutoPistol))
-      Lith_FireBullets(5, 3, 1, 10);
+      Lith_FixedBullets(1, 20);
    else
-      Lith_FireBullets(0, 0, -1, 9);
+      Lith_FireBullets(0, 0, -1, 18, FBF_NORANDOM);
+
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_AutoPistol))
       A_PlaySound("weapons/pistol/fireauto", CHAN_WEAPON);
    else
       A_PlaySound("weapons/pistol/fire", CHAN_WEAPON);
+
    Lith_A_GunSmokeSmall();
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }

@@ -31,6 +31,7 @@ default
 
 int m_Fired;
 int m_Max;
+int m_FirePattern;
 
 private meta sound m_ScopeOutSnd;
 private meta sound m_ScopeInSnd;
@@ -50,6 +51,11 @@ const Lith_PF =
    SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
    SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
    SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
+
+virtual float, float GetFirePattern()
+{
+   return 0, 0;
+}
 
 virtual state Lith_Ready(int flags) {return null;}
 
@@ -176,6 +182,15 @@ action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float 
    px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
    vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
    A_SpawnItemEx(cas, Cos(Pitch)*px, py, pz-Sin(Pitch)*px+vh, vx, vy, vz);
+}
+
+action(Weapon) void Lith_FixedBullets(int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192)
+{
+   for(int i = 0; i < numbullets; i++)
+   {
+      float p, y; [p, y] = invoker.GetFirePattern();
+      Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, pufftype, tracer_x, range);
+   }
 }
 
 action(Weapon) void Lith_FireBullets(float spread_horz, float spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192)

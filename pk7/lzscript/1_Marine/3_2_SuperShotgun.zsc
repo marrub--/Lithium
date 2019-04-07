@@ -15,11 +15,34 @@ default
 int m_Iter;
 int m_Shots;
 
+override float, float GetFirePattern()
+{
+   switch(m_FirePattern = (m_FirePattern + 3) % 16) {
+   case 0:  return -1,  1;
+   case 1:  return -7,  2;
+   case 2:  return -5,  3;
+   case 3:  return -4, -2;
+   case 4:  return -3, -1;
+   case 5:  return -2,  2;
+   case 6:  return -2,  3;
+   case 7:  return -1,  2;
+   case 8:  return  0,  0;
+   case 9:  return  1, -1;
+   case 10: return  2, -2;
+   case 11: return  3,  3;
+   case 12: return  4,  2;
+   case 13: return  5,  1;
+   case 14: return  7, -2;
+   case 15: return  8, -3;
+   }
+   return 0, 0;
+}
+
 action(Weapon) void Lith_A_FireSSG()
 {
    A_TakeInventory("Lith_ShellAmmo", 2, TIF_NOTAKEINFINITE);
    A_AlertMonsters();
-   Lith_FireBullets(9, 6, 16, 8);
+   Lith_FixedBullets(16, 16);
    Lith_A_GunSmoke();
    A_PlaySound("weapons/ssg/fire", CHAN_7);
    A_Recoil(1.2);
