@@ -22,7 +22,7 @@ action(Weapon) void Lith_A_FireRevolver()
 {
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
-   Lith_FireBullets(1, 1, -1, 45);
+   Lith_FireBullets(0, 0, -1, 45);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(0.75);
    A_PlaySound("weapons/revolver/fire", CHAN_WEAPON);
