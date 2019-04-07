@@ -5,122 +5,121 @@
 // p_settings.c: Settings configuration UI.
 
 #ifdef FromUI
-Category("Gameplay");
-Enum("Level-up system", sc_player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
+Category(stx_gameplay);
+Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {
-   ServerInt("Difficulty Base",     "%", sc_sv_difficulty, 1, 100);
-   ServerFloat("Score multiplier",  "x", sc_sv_scoremul,   0, 10);
+   ServerInt("%",   sv_difficulty, 1, 100);
+   ServerFloat("x", sv_scoremul,   0, 10);
    #if LITHIUM
-   ServerBool("Explode on death",        sc_sv_revenge);
+   ServerBool(sv_revenge);
    #endif
-   ServerInt("Autosave Interval", "min", sc_sv_autosave,   0, 30);
+   ServerInt("min", sv_autosave, 0, 30);
    #if LITHIUM
-   ServerBool("Disable phantoms",                      sc_sv_nobosses);
-   ServerBool("Don't pick up ammo when full",          sc_sv_nofullammo);
-   ServerBool("Don't give score when picking up ammo", sc_sv_noscoreammo);
-   ServerBool("Drop shotguns from zombies",            sc_sv_wepdrop);
-   ServerBool("Pause while in menu",                   sc_sv_pauseinmenus);
-   ServerBool("No phantoms",                           sc_sv_nobosses);
-   ServerBool("Start with phantom rewards",            sc_sv_nobossdrop);
+   ServerBool(sv_nofullammo);
+   ServerBool(sv_noscoreammo);
+   ServerBool(sv_wepdrop);
+   ServerBool(sv_pauseinmenus);
+   ServerBool(sv_nobosses);
+   ServerBool(sv_nobossdrop);
    #endif
 }
 
-Category("GUI");
-Float("Horizontal cursor speed", "x", sc_gui_xmul, 0.1, 2.0);
-Float("Vertical cursor speed",   "x", sc_gui_ymul, 0.1, 2.0);
-Enum("Color theme",                   sc_gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
-Enum("Cursor",                        sc_gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
+Category(stx_gui);
+Float("x", gui_xmul, 0.1, 2.0);
+Float("x", gui_ymul, 0.1, 2.0);
+Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
+Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
 #if LITHIUM
-Enum("Japanese font",                 sc_gui_jpfont, 0, font_num-1, "%s", FontName(set));
-Text("");
-Text("To use Japanese language,");
-Text("type \"language jp\" into the console");
-Text("and restart the game.");
+Enum(gui_jpfont, 0, font_num-1, "%s", FontName(set));
+Text(stx_jp_0);
+Text(stx_jp_1);
+Text(stx_jp_2);
+Text(stx_jp_3);
 #endif
 
-Category("Player");
-Float("Damage bob multiplier",       "x", sc_player_damagebobmul, 0.0, 1.0);
-Bool("Bob view when damaged",             sc_player_damagebob);
-Float("Footstep volume",             "x", sc_player_footstepvol,  0.0, 1.0);
-Float("View tilt",                   "x", sc_player_viewtilt,     0.0, 1.0);
-Bool("Log score gained",                  sc_player_scorelog);
-Bool("Play a sound when score is gained", sc_player_scoresound);
+Category(stx_player);
+Float("x", player_damagebobmul, 0.0, 1.0);
+Bool(player_damagebob);
+Float("x", player_footstepvol, 0.0, 1.0);
+Float("x", player_viewtilt,    0.0, 1.0);
+Bool(player_scorelog);
+Bool(player_scoresound);
 #if LITHIUM
-Bool("Play sounds on the results screen", sc_player_resultssound);
+Bool(player_resultssound);
 #endif
-Bool("Invert mouse in netgames (hack)",   sc_player_invertmouse);
+Bool(player_invertmouse);
 #if LITHIUM
-Bool("Enable rain shader",                sc_player_rainshader);
-Bool("Alternate invulnerability palette", sc_player_altinvuln);
+Bool(player_rainshader);
+Bool(player_altinvuln);
 #endif
 
 #if LITHIUM
-Category("Items");
-Bool("Teleport in bought items and upgrades", sc_player_teleshop);
-Bool("Stupid pickup messages",                sc_player_stupidpickups);
-Bool("Log ammo pickups",                      sc_player_ammolog);
+Category(stx_items);
+Bool(player_teleshop);
+Bool(player_stupidpickups);
+Bool(player_ammolog);
 if(p->num == 0) {
-   ServerBool("Bright weapon pickups", sc_player_brightweps);
-   ServerBool("No item effects",       sc_player_noitemfx);
+   ServerBool(player_brightweps);
+   ServerBool(player_noitemfx);
 }
 
-Category("Weapons");
-Float("Scope zoom factor", "x", sc_weapons_zoomfactor, 1.0, 10.0);
-Float("Scope opacity",     "x", sc_weapons_scopealpha, 0.0, 1.0);
-Float("Weapon opacity",    "x", sc_weapons_alpha,      0.0, 1.0);
-Float("Recoil amount",     "x", sc_weapons_recoil,     0.0, 1.0);
-Float("Reload bob",        "x", sc_weapons_reloadbob,  0.0, 1.0);
-Bool("Slot 3 weapons take ammo", sc_weapons_slot3ammo);
+Category(stx_weapons);
+Float("x", weapons_zoomfactor, 1.0, 10.0);
+Float("x", weapons_scopealpha, 0.0, 1.0);
+Float("x", weapons_alpha,      0.0, 1.0);
+Float("x", weapons_recoil,     0.0, 1.0);
+Float("x", weapons_reloadbob,  0.0, 1.0);
+Bool(weapons_slot3ammo);
 if(p->pclass == pcl_marine) {
-   Bool("Modal Rifle scope",          sc_weapons_riflescope);
-   Bool("Clear rifle mode on switch", sc_weapons_riflemodeclear);
+   Bool(weapons_riflescope);
+   Bool(weapons_riflemodeclear);
 } else if(p->pclass == pcl_cybermage) {
-   Bool("Magic selection animations", sc_weapons_magicselanims);
+   Bool(weapons_magicselanims);
 }
 if(p->num == 0) {
-   ServerFloat("Ricochet volume", "x",       sc_weapons_ricochetvol, 0.0, 1.0);
-   ServerBool("Emit casings from weapons",   sc_weapons_casings);
-   ServerBool("Drop magazines from weapons", sc_weapons_magdrops);
-   ServerBool("Casings fade out",            sc_weapons_casingfadeout);
-   ServerBool("Magazines fade out",          sc_weapons_magfadeout);
-   ServerBool("Reload empty weapons",        sc_weapons_reloadempty);
-   ServerBool("No mid-fire bobbing",         sc_weapons_nofirebob);
+   ServerFloat("x", weapons_ricochetvol, 0.0, 1.0);
+   ServerBool(weapons_casings);
+   ServerBool(weapons_magdrops);
+   ServerBool(weapons_casingfadeout);
+   ServerBool(weapons_magfadeout);
+   ServerBool(weapons_reloadempty);
+   ServerBool(weapons_nofirebob);
    if(p->pclass == pcl_marine) {
-      ServerBool("Rainbow lasers", sc_weapons_rainbowlaser);
+      ServerBool(weapons_rainbowlaser);
    }
 }
 
-Category("Heads Up Display");
-Bool("Show score",                    sc_hud_showscore);
-Bool("Show level",                    sc_hud_showlvl);
-Bool("Show weapons",                  sc_hud_showweapons);
-Bool("Show log",                      sc_hud_showlog);
-Bool("Draw log from top of screen",   sc_hud_logfromtop);
-Bool("Large log",                     sc_hud_logbig);
-Bool("Draw reactive armor indicator", sc_hud_showarmorind);
+Category(stx_hud);
+Bool(hud_showscore);
+Bool(hud_showlvl);
+Bool(hud_showweapons);
+Bool(hud_showlog);
+Bool(hud_logfromtop);
+Bool(hud_logbig);
+Bool(hud_showarmorind);
 
-Int("Crosshair red",     "/255", sc_xhair_r,     0, 255);
-Int("Crosshair green",   "/255", sc_xhair_g,     0, 255);
-Int("Crosshair blue",    "/255", sc_xhair_b,     0, 255);
-Int("Crosshair alpha",   "/255", sc_xhair_a,     0, 255);
-Enum("Crosshair style",          sc_xhair_style, 1,  10, "%s", XHairName(set));
-Bool("Crosshair enabled",        sc_xhair_enable);
-Bool("Crosshair juicer enabled", sc_xhair_enablejuicer);
+Int("/255", xhair_r, 0, 255);
+Int("/255", xhair_g, 0, 255);
+Int("/255", xhair_b, 0, 255);
+Int("/255", xhair_a, 0, 255);
+Enum(xhair_style, 1, 10, "%s", XHairName(set));
+Bool(xhair_enable);
+Bool(xhair_enablejuicer);
 #endif
 
-Category("Vital Scanner");
-Int("X offset",   "px", sc_scanner_xoffs, -160, 160);
-Int("Y offset",   "px", sc_scanner_yoffs, -180,  20);
-Enum("Color",           sc_scanner_color, 'a', 'v', "\C%c%s", set, ColorName(set));
-Bool("Slide to target", sc_scanner_slide);
-Bool("Health bar",      sc_scanner_bar);
-Bool("Alternate font",  sc_scanner_altfont);
+Category(stx_vscan);
+Int("px", scanner_xoffs, -160, 160);
+Int("px", scanner_yoffs, -180,  20);
+Enum(scanner_color, 'a', 'v', "\C%c%s", set, ColorName(set));
+Bool(scanner_slide);
+Bool(scanner_bar);
+Bool(scanner_altfont);
 
 #if LITHIUM
 if(p->num == 0) {
-   Category("World");
-   ServerBool("Rain in outside areas", sc_sv_rain);
-   ServerBool("Replace skies",         sc_sv_sky);
+   Category(stx_world);
+   ServerBool(sv_rain);
+   ServerBool(sv_sky);
 }
 #endif
 
@@ -132,7 +131,6 @@ if(p->num == 0) {
 #undef ServerFloat
 #undef ServerInt
 #undef Enum
-#undef CBox
 #undef Text
 #undef FromUI
 
@@ -211,7 +209,6 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 #define ServerFloat(...) y += 10
 #define ServerInt(...) y += 10
 #define Enum(...) y += 10
-#define CBox(...) y += 10
 #define Text(...) y += 10
 #define FromUI
 #include "p_settings.c"
@@ -221,116 +218,99 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
    y = 0;
 
 #define Label(label) \
-   do { \
-      static str const text = s"" label; \
-      PrintText_str(text, s_cbifont, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
-   } while(0)
+   PrintText_str(L(st_##label), s_cbifont, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1);
 
 #define Category(name) \
-   do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
-      { \
-         static str const text = s"" name; \
-         PrintText_str(text, s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
-      } \
-      y += 20; \
-   } while(0)
+   if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
+   { \
+      PrintText_str(L(st_##name), s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
+   } \
+   y += 20;
 
-#define Bool(label, cvar) \
+#define Bool(cvar) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(bool on = p->getCVarI(cvar);) \
+         __with(bool on = p->getCVarI(sc_##cvar);) \
       { \
-         Label(label); \
+         Label(cvar); \
          if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
-            p->setCVarI(cvar, !on); \
+            p->setCVarI(sc_##cvar, !on); \
       } \
       y += 10; \
    } while(0)
 
-#define Float(label, s, cvar, minima, maxima) \
+#define Float(s, cvar, minima, maxima) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(k64 set = p->getCVarK(cvar), diff;) \
+         __with(k64 set = p->getCVarK(sc_##cvar), diff;) \
       { \
-         Label(label); \
+         Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
-            p->setCVarK(cvar, set + diff); \
+            p->setCVarK(sc_##cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define Int(label, s, cvar, minima, maxima) \
+#define Int(s, cvar, minima, maxima) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = p->getCVarI(cvar), diff;) \
+         __with(i32 set = p->getCVarI(sc_##cvar), diff;) \
       { \
-         Label(label); \
+         Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
-            p->setCVarI(cvar, set + diff); \
+            p->setCVarI(sc_##cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define ServerBool(label, cvar) \
+#define ServerBool(cvar) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(bool on = ACS_GetCVar(cvar);) \
+         __with(bool on = ACS_GetCVar(sc_##cvar);) \
       { \
-         Label(label); \
+         Label(cvar); \
          if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
-            ACS_SetCVar(cvar, !on); \
+            ACS_SetCVar(sc_##cvar, !on); \
       } \
       y += 10; \
    } while(0)
 
-#define ServerFloat(label, s, cvar, minima, maxima) \
+#define ServerFloat(s, cvar, minima, maxima) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(k64 set = ACS_GetCVarFixed(cvar), diff;) \
+         __with(k64 set = ACS_GetCVarFixed(sc_##cvar), diff;) \
       { \
-         Label(label); \
+         Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
-            ACS_SetCVarFixed(cvar, set + diff); \
+            ACS_SetCVarFixed(sc_##cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define ServerInt(label, s, cvar, minima, maxima) \
+#define ServerInt(s, cvar, minima, maxima) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = ACS_GetCVar(cvar), diff;) \
+         __with(i32 set = ACS_GetCVar(sc_##cvar), diff;) \
       { \
-         Label(label); \
+         Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
-            ACS_SetCVar(cvar, set + diff); \
+            ACS_SetCVar(sc_##cvar, set + diff); \
       } \
       y += 10; \
    } while(0)
 
-#define Enum(label, cvar, minima, maxima, fmt, ...) \
+#define Enum(cvar, minima, maxima, fmt, ...) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = p->getCVarI(cvar);) \
+         __with(i32 set = p->getCVarI(sc_##cvar);) \
       { \
-         Label(label); \
+         Label(cvar); \
          if(G_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
-            p->setCVarI(cvar, set - 1); \
+            p->setCVarI(sc_##cvar, set - 1); \
          if(G_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
-            p->setCVarI(cvar, set + 1); \
+            p->setCVarI(sc_##cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
          PrintText(s_cbifont, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
-      } \
-      y += 10; \
-   } while(0)
-
-#define CBox(label, on, ...) \
-   do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-      { \
-         Label(label); \
-         if(G_Checkbox(g, on, 240, y + 5, Pre(cbxsmall))) \
-            (__VA_ARGS__); \
       } \
       y += 10; \
    } while(0)

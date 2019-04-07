@@ -75,6 +75,7 @@ in file language.misc.*.txt
    parse file Misc_QuitMessages.txt
    parse file Misc_Changes.txt
    parse file Misc_UI.txt
+   parse file Misc_Settings.txt
    put file Misc_Opener.txt -> \#OPENER
 done
 

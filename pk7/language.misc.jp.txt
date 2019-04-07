@@ -184,6 +184,8 @@
 "LITH_ATTR_HELP_LUK" = "スコア増加運";
 "LITH_ATTR_HELP_RGE" = "反撃攻撃力";
 
+// Misc_Settings.txt stub
+
 "LITH_OPENER" =
 // Misc_Opener.txt
    "1626, New Era.\n"

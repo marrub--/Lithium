@@ -1270,6 +1270,105 @@
 "LITH_ATTR_HELP_RSH" = "Damage buff when gaining health";
 "LITH_ATTR_HELP_REF" = "Movement speed when hit";
 
+// Settings ------------------------------------------------------------------|
+"LITH_stx_gameplay" = "Gameplay";
+
+"LITH_player_lvsys" = "Level-up system";
+"LITH_sv_difficulty" = "Difficulty base";
+"LITH_sv_scoremul" = "Score multiplier";
+"LITH_sv_revenge" = "Explode on death";
+"LITH_sv_autosave" = "Autosave interval";
+"LITH_sv_nofullammo" = "Don't pick up ammo when full";
+"LITH_sv_noscoreammo" = "Don't give score when picking up ammo";
+"LITH_sv_wepdrop" = "Drop weapons from zombies";
+"LITH_sv_pauseinmenus" = "Pause while in menus";
+"LITH_sv_nobosses" = "No phantoms";
+"LITH_sv_nobossdrop" = "Start with phantom rewards";
+
+"LITH_stx_gui" = "GUI";
+
+"LITH_gui_xmul" = "Horizontal cursor speed";
+"LITH_gui_ymul" = "Vertical cursor speed";
+"LITH_gui_theme" = "Interface theme";
+"LITH_gui_cursor" = "Cursor";
+"LITH_gui_jpfont" = "Japanese font";
+
+"LITH_stx_jp_0" = "";
+"LITH_stx_jp_1" = "To use Japanese text,";
+"LITH_stx_jp_2" = "type \"language jp\" into the console";
+"LITH_stx_jp_3" = "and restart the game.";
+
+"LITH_stx_player" = "Player";
+
+"LITH_player_damagebobmul" = "Damage bob multiplier";
+"LITH_player_damagebob" = "Bob view when damaged";
+"LITH_player_footstepvol" = "Footstep volume";
+"LITH_player_viewtilt" = "View tilt when strafing";
+"LITH_player_scorelog" = "Log score gained";
+"LITH_player_scoresound" = "Play a sound when score is gained";
+"LITH_player_resultssound" = "Play sounds on the results screen";
+"LITH_player_invertmouse" = "Invert mouse in network games";
+"LITH_player_rainshader" = "Enable rain shader";
+"LITH_player_altinvuln" = "Alternate invulnerability palette";
+
+"LITH_stx_items" = "Items";
+
+"LITH_player_teleshop" = "Teleport in bought items and upgrades";
+"LITH_player_stupidpickups" = "Silly pickup messages";
+"LITH_player_ammolog" = "Log ammo pickups";
+"LITH_player_brightweps" = "Bright weapon pickups";
+"LITH_player_noitemfx" = "No item effects";
+
+"LITH_stx_weapons" = "Weapons";
+
+"LITH_weapons_zoomfactor" = "Scope zoom factor";
+"LITH_weapons_scopealpha" = "Scope opacity";
+"LITH_weapons_alpha" = "Weapon opacity";
+"LITH_weapons_recoil" = "Visual recoil amount";
+"LITH_weapons_reloadbob" = "Reload bobbing amount";
+"LITH_weapons_slot3ammo" = "Slot 3 weapons take ammo";
+"LITH_weapons_riflescope" = "Modal Rifle scope";
+"LITH_weapons_riflemodeclear" = "Clear rifle mode on switch";
+"LITH_weapons_magicselanims" = "Magic selection animations";
+"LITH_weapons_ricochetvol" = "Ricochet volume";
+"LITH_weapons_casings" = "Emit casings from weapons which use them";
+"LITH_weapons_magdrops" = "Drop magazines from weapons";
+"LITH_weapons_casingfadeout" = "Casings fade out";
+"LITH_weapons_magfadeout" = "Magazines fade out";
+"LITH_weapons_reloadempty" = "Reload weapons automatically";
+"LITH_weapons_nofirebob" = "No mid-fire bobbing";
+"LITH_weapons_rainbowlaser" = "Rainbow lasers";
+
+"LITH_stx_hud" = "Heads Up Display";
+
+"LITH_hud_showscore" = "Show score";
+"LITH_hud_showlvl" = "Show level";
+"LITH_hud_showweapons" = "Show weapons";
+"LITH_hud_showlog" = "Show log";
+"LITH_hud_logfromtop" = "Draw log at the top of the screen";
+"LITH_hud_logbig" = "Large log";
+"LITH_hud_showarmorind" = "Draw reactive armor indicator";
+"LITH_xhair_r" = "Dynamic crosshair red";
+"LITH_xhair_g" = "Dynamic crosshair green";
+"LITH_xhair_b" = "Dynamic crosshair blue";
+"LITH_xhair_a" = "Dynamic crosshair alpha";
+"LITH_xhair_style" = "Dynamic crosshair style";
+"LITH_xhair_enable" = "Dynamic crosshair enabled";
+"LITH_xhair_enablejuicer" = "Dynamic crosshair juicer enabled";
+
+"LITH_stx_vscan" = "Vital Scanner";
+
+"LITH_scanner_xoffs" = "Horizontal offset";
+"LITH_scanner_yoffs" = "Vertical offset";
+"LITH_scanner_color" = "Color";
+"LITH_scanner_slide" = "Slide to target";
+"LITH_scanner_bar" = "Health bar";
+"LITH_scanner_altfont" = "Alternate font";
+
+
+"LITH_sv_rain" = "Rain in outside areas";
+"LITH_sv_sky" = "Replace skies";
+
 "LITH_OPENER" =
 // Misc_Opener.txt
    "1626, New Era.\n"
