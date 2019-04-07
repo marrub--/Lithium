@@ -1,6 +1,5 @@
 working/*
-bin/**/*.ir
-bin/*_ld.txt
+bin/*
 *.bat
 ?.sh
 *.kdev4

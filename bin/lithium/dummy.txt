@@ -1,1 +1,0 @@
-This is just here so Git knows that this folder exists.
