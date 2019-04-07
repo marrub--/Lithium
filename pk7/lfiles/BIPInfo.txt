@@ -79,6 +79,7 @@ pM P114
 pC OPD2
 pC Info400
 pC Info402
+pC HackInfo
 
 gA BIP
 pM CBIStan

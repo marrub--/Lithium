@@ -1,4 +1,4 @@
-## Backstory -----------------------------------------------------------------|
+## Backstory (Marine) --------------------------------------------------------|
 == \#INFO_SHORT_P114 | Project 114
 == \#INFO_TITLE_P114 | $\#INFO_SHORT_P114 
 @@ \#INFO_DESCR_P114
@@ -14,6 +14,7 @@ other operatives to complete the mission with.
 Your advisor is Adam Lambert, and 11 generals currently oversee his and your
 actions on the field.
 
+## Backstory (Cyber-Mage) ----------------------------------------------------|
 == \#INFO_SHORT_OPD2 | Op. D2
 == \#INFO_TITLE_OPD2 | Operation Deception 2
 @@ \#INFO_DESCR_OPD2
@@ -65,6 +66,39 @@ Ye wbjtv w's t' gaathr est Demonic Energy via est prrts 7F47 ssu. D 't by an ms 
 7F47 w's est Demon tati & est Phantom. D 't dst,. Pnss w's * awt :: ye dost.
 
 \cgOrder.
+
+== \#INFO_SHORT_HackInfo | ZCLR README
+== \#INFO_TITLE_HackInfo | Zeke's Custom Lock Remover
+== \#INFO_SSIZE_HackInfo | 44
+@@ \#INFO_DESCR_HackInfo
+Welcome to Zeke's Custom Lock Remover, version 1.0. Well, there won't be any
+other versions anyway, but here we are. If you're reading this, that means it
+worked, and the kernel has been successfully jailbroken. I couldn't brief you
+on this beforehand, but now that we have some privacy, here's what this thing
+can do:
+
+So, running our own code is too risky, as you know. The ASIC would catch it
+right away. But what we can do is get the kernel to execute code for us,
+specifically when it's already in ring 0. Well, you may have noticed Solomon's
+name in the mission parameters looked a bit off. Since he was the instructor,
+we set his name to overflow a certain buffer during a kernel call, overflowing
+straight into a function pointer. Just point that right next to the fixed
+address, and bam. Kiloword boundaries give us plenty of space to write a
+self-modifying program in that padding space.
+
+This also included some other vital parts besides the lock remover and the
+decompiler, mainly the graphics for your weapon materializers. (Sorry they
+don't look so great, the raw optic nerve image format is rather large.) The
+generational program will within a few minutes give you a working decompiler
+and within half an hour it'll be ready to start going at the ROM sources. From
+there it'll embed itself into the ROM and your mind will have fully returned
+to you by the end of the day.
+
+Now, what it can't do: Get rid of the ASIC chip. You will have to be careful
+not to trip it, but for the most part, it just doesn't have permissions to
+track anything we're doing. You should be able to mitigate it in a few ways
+since this program removes all of the hooks in the kernel that call into it,
+but you'll have to do them yourself. I'm sure you can. Good luck. Zeke.
 
 ## Cybernetics ---------------------------------------------------------------|
 == \#INFO_SHORT_BIP | B.I.P.
