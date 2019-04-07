@@ -1,6 +1,6 @@
 working/*
-ir/**/*.ir
-ir/*_ld.txt
+bin/**/*.ir
+bin/*_ld.txt
 *.bat
 ?.sh
 *.kdev4

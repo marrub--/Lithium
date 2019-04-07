@@ -45,7 +45,7 @@ fp = open "build.ninja", "wb"
 fp << <<_end_
 #{SRC   } = source/Main
 #{HDR   } = source/Headers
-#{IR    } = ir
+#{IR    } = bin
 #{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay
@@ -123,19 +123,19 @@ fp << <<_end_
 build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
    #{LFLAGS} = $#{LFLAGS} -llithlib $#{INITSC} "lithmain@gsinit"
    #{STA   } = 1400000
-   #{NUMOUT} = ir/lithmain_ld.txt
+   #{NUMOUT} = $#{IR}/lithmain_ld.txt
 build pk7/acs/lithlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
    #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithlib@gsinit"
    #{STA   } = 70000
-   #{NUMOUT} = ir/lithlib_ld.txt
+   #{NUMOUT} = $#{IR}/lithlib_ld.txt
 build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join " "}
    #{LFLAGS} = $#{LFLAGS} -ldtlib $#{INITSC} "dtmain@gsinit"
    #{STA   } = 1400000
-   #{NUMOUT} = ir/dtmain_ld.txt
+   #{NUMOUT} = $#{IR}/dtmain_ld.txt
 build pk7_dt/acs/dtlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
    #{LFLAGS} = $#{LFLAGS} $#{INITSC} "dtlib@gsinit"
    #{STA   } = 70000
-   #{NUMOUT} = ir/dtlib_ld.txt
+   #{NUMOUT} = $#{IR}/dtlib_ld.txt
 build doubletap: phony dec text fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
 
