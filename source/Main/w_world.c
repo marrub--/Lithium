@@ -305,9 +305,13 @@ static void HInit(void)
    }
 
    #if LITHIUM
-   if(ACS_GetCVar(sc_sv_nobosses) || dbgflag & dbgf_items)
+   if(ACS_GetCVar(sc_sv_nobosses) ||
+      ACS_GetCVar(sc_sv_nobossdrop) ||
+      dbgflag & dbgf_items)
+   {
       for(i32 i = 0; i < cupg_max; i++)
          CBI_Install(i);
+   }
    #endif
 
    hubinit = true;

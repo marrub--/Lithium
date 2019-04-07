@@ -197,7 +197,9 @@ void Sc_PhantomDeath(void)
 
    Dbg_Log(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
 
-   SpawnBossReward();
+   if(!ACS_GetCVar(sc_sv_nobossdrop))
+      SpawnBossReward();
+
    world.soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;

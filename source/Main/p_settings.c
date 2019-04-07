@@ -20,6 +20,8 @@ if(p->num == 0) {
    ServerBool("Don't give score when picking up ammo", sc_sv_noscoreammo);
    ServerBool("Drop shotguns from zombies",            sc_sv_wepdrop);
    ServerBool("Pause while in menu",                   sc_sv_pauseinmenus);
+   ServerBool("No phantoms",                           sc_sv_nobosses);
+   ServerBool("Start with phantom rewards",            sc_sv_nobossdrop);
    #endif
 }
 

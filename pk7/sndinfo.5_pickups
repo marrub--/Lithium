@@ -31,7 +31,7 @@ player/pickup/scorebig    lsounds/Items/ScoreBig    // Self-made
 player/pickup/scoresmall  lsounds/Items/ScoreSmall  // 〃
 player/pickup/stimpack    lsounds/Items/Stimpack    // Doom 3
 player/pickup/medikit     lsounds/Items/Medikit     // Fallout 4
-player/pickup/invuln      lsounds/Items/Invuln      // ???
+player/pickup/invuln      lsounds/Items/Invuln      // Star Wars: Jedi Academy
 player/pickup/mega        lsounds/Items/Mega        // Halo 3
 player/pickup/super       lsounds/Items/Super       // 〃
 player/pickup/allmap      lsounds/Items/AllMap      // Half-Life
