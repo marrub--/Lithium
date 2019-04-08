@@ -49,7 +49,7 @@ Percent denotes flags. Any other text is ignored by the parser.
 
 :darklord
 +d_700e     2 700Express  Placeholder2 NMag
-+d_4bore    3 4Bore       Placeholder2 Ammo A("Shell")
++d_4bore    3 4Bore       Placeholder2 AMag A("Shell")
 +d_launcher 3 ShrapnelGun Placeholder2 Ammo A("Shell")
 +d_minigun  4 Minigun     Placeholder2 NMag
 +d_rocket   5 DualRocket  Placeholder2 Ammo A("Rocket")

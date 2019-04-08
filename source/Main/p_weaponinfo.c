@@ -47,7 +47,7 @@ struct weaponinfo const weaponinfo[weapon_max] = {
    {0,pcl_cybermage,N("StarShot"),Placeholder1,AT_AMag,O("Mana"),F(wf_magic)},
    {0,pcl_cybermage,N("Cercle"),Placeholder1,AT_Ammo,O("Mana"),F(wf_magic)},
    {2,pcl_darklord,N("700Express"),Placeholder2,AT_NMag},
-   {3,pcl_darklord,N("4Bore"),Placeholder2,AT_Ammo,A("Shell")},
+   {3,pcl_darklord,N("4Bore"),Placeholder2,AT_AMag,A("Shell")},
    {3,pcl_darklord,N("ShrapnelGun"),Placeholder2,AT_Ammo,A("Shell")},
    {4,pcl_darklord,N("Minigun"),Placeholder2,AT_NMag},
    {5,pcl_darklord,N("DualRocket"),Placeholder2,AT_Ammo,A("Rocket")},
