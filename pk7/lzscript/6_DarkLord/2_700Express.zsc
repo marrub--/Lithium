@@ -2,6 +2,37 @@
 // By Alison Sanderson. Attribution is encouraged, though not required.
 // See licenses/cc0.txt for more information.
 
+class Lith_700Laser : Actor
+{
+   default
+   {
+      Scale 0.25;
+      Alpha 0.5;
+      RenderStyle "Translucent";
+
+      ClearFlags;
+      +NOINTERACTION
+      +BRIGHT
+      +FORCEXYBILLBOARD
+   }
+
+   states
+   {
+   Spawn:
+      BLLT U 2;
+      BLLT U 1 A_FadeOut;
+      wait;
+   }
+}
+
+class Lith_700Laser2 : Lith_700Laser
+{
+   default
+   {
+      Alpha 0.2;
+   }
+}
+
 class Lith_700Express : Lith_DWeapon;
 
 default
@@ -25,6 +56,49 @@ action(Weapon) void Lith_A_Fire700e()
    A_PlaySound("weapons/700e/fire", CHAN_WEAPON);
 }
 
+action(Weapon) void Lith_A_Laser(double pit)
+{
+   if(invoker.Owner)
+   {
+      let ply = Lith_Player(invoker.Owner);
+      let sz  = ply.Height / 2 + ply.AttackZOffset * ply.Player.CrouchFactor;
+
+      FLineTraceData ltd;
+      LineTrace(ply.m_IYaw, 2048, ply.m_IPitch - pit, 0, sz, 0, 0, ltd);
+      Spawn("Lith_700Laser", ltd.HitLocation);
+
+      LineTrace(ply.Angle, 2048, ply.Pitch - pit, 0, sz, 0, 0, ltd);
+      Spawn("Lith_700Laser2", ltd.HitLocation);
+
+      let loc = ltd.HitLocation;
+
+      let ps = Sin(ply.Pitch - pit - 90);
+      let cz = Cos(ply.Pitch - pit - 90);
+      let ys = Sin(ply.Angle - 15);
+      let yc = Cos(ply.Angle - 15);
+      let cx = ps * yc;
+      let cy = ps * ys;
+
+      let beg = (ply.Pos.X      + cx * -16,
+                 ply.Pos.Y      + cy * -16,
+                 ply.Pos.Z + sz + cz * -16 + 1);
+
+      ys = Sin(ply.Angle);
+      yc = Cos(ply.Angle);
+      cx = ps * yc;
+      cy = ps * ys;
+      let end = (beg.X + cx * -32,
+                 beg.Y + cy * -32,
+                 beg.Z + cz * -32);
+
+      for(int i = 0; i < 10; i++)
+      {
+         let a = Spawn("Lith_700Laser2", Lith_UTIL.Vec3Lerp(beg, end, i / 10.0));
+         a.Alpha -= i / 40.0;
+      }
+   }
+}
+
 states(Actor)
 {
 SpawnPickup:
@@ -36,6 +110,7 @@ states(Weapon)
 {
 Ready:
    700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   700E A 0 Lith_A_Laser(0.0);
    loop;
 
 Deselect:
@@ -50,29 +125,40 @@ Select:
 Fire:
    TNT1 A 0 Lith_A_JumpIfMagEmpty;
    TNT1 A 0 Lith_A_MagIncr;
-   700E A 1 offset(2, 32);
-   700E Y 1 bright Lith_A_Fire700e;
-   700E Z 1 bright offset(10, 28) Lith_A_RecoilUp(2);
-   700E C 2 bright;
-   700E C 2 offset(9, 28);
-   700E C 1 offset(7, 30);
-   700E C 1 offset(5, 31);
-   700E C 1 offset(4, 31);
-   700E C 1 offset(3, 32);
-   700E B 3 offset(2, 32);
-   700E B 3 offset(1, 32);
-   700E A 2;
-   700E A 2 offset(0, 32);
+   700E A 1 offset(2, 32) Lith_A_Laser(0.0);
+   700E Y 1 bright {
+      Lith_A_Fire700e();
+      Lith_A_Laser(22.0);
+   }
+   700E Z 1 bright offset(10, 28) {
+      Lith_A_RecoilUp(2);
+      Lith_A_Laser(16.0);
+   }
+   700E CC 1 bright Lith_A_Laser(9.0);
+   700E CC 1 offset(9, 28) Lith_A_Laser(8.0);
+   700E C 1 offset(7, 30) Lith_A_Laser(7.0);
+   700E C 1 offset(5, 31) Lith_A_Laser(6.0);
+   700E C 1 offset(4, 31) Lith_A_Laser(6.0);
+   700E C 1 offset(3, 32) Lith_A_Laser(6.5);
+   700E BBB 1 offset(2, 32) Lith_A_Laser(5.0);
+   700E BBB 1 offset(1, 32) Lith_A_Laser(5.0);
+   700E A 1 Lith_A_Laser(0.0);
+   700E A 1 Lith_A_Laser(0.0);
+   700E A 1 offset(0, 32) Lith_A_Laser(0.0);
+   700E A 1 offset(0, 32) Lith_A_Laser(0.0);
    goto ReadySelector;
 
 FireEmpty:
-   700E A 1;
-   700E A 2 offset(3, 38);
-   700E A 1 offset(7, 40);
-   700E A 1 offset(5, 37) A_PlaySound("weapons/cshotgun/empty", CHAN_5);
-   700E A 1 offset(4, 34);
-   700E A 1 offset(2, 33);
-   700E A 5 offset(1, 32);
+   700E A 1 Lith_A_Laser(0.0);
+   700E AA 1 offset(3, 38) Lith_A_Laser(0.0);
+   700E A 1 offset(7, 40) Lith_A_Laser(0.0);
+   700E A 1 offset(5, 37) {
+      A_PlaySound("weapons/cshotgun/empty", CHAN_5);
+      Lith_A_Laser(0.0);
+   }
+   700E A 1 offset(4, 34) Lith_A_Laser(0.0);
+   700E A 1 offset(2, 33) Lith_A_Laser(0.0);
+   700E AAAAA 1 offset(1, 32) Lith_A_Laser(0.0);
    goto ReadySelector;
 
 Reload:
