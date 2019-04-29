@@ -166,10 +166,11 @@ private void Lith_AbsorbAmmo(Actor mo, class<Inventory> typ, in out int amt)
 
 override bool TryPickup(in out Actor mo)
 {
+   Lith_AbsorbAmmo(mo, m_Type,  m_Amount);
+   Lith_AbsorbAmmo(mo, m_Type2, m_Amount2);
+
    if(lith_sv_noscoreammo && lith_sv_nofullammo)
    {
-      Lith_AbsorbAmmo(mo, m_Type,  m_Amount);
-      Lith_AbsorbAmmo(mo, m_Type2, m_Amount2);
       if(m_Amount == 0 && m_Amount2 == 0)
          return Super.TryPickup(mo);
       else
