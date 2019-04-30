@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_data.c: Player data tracking.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Player data tracking.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -10,7 +17,7 @@
 #include "w_world.h"
 #include "w_monster.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void SetupAttributes(struct player *p)
 {
@@ -68,7 +75,7 @@ static void SetPClass(struct player *p)
    p->discrim = P_Discrim(p->pclass);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 bool P_ButtonPressed(struct player *p, i32 bt)
@@ -96,7 +103,7 @@ void P_ValidateTID(struct player *p)
    }
 }
 
-// Update all of the player's data.
+/* Update all of the player's data. */
 stkcall
 void P_Dat_PTickPre(struct player *p)
 {
@@ -170,7 +177,7 @@ static void LevelUp(struct player *p, u32 attr[at_max])
 
    for(i32 i = 0; i < 35 * 5; i++)
    {
-      if(level != p->attr.level) return; // a new levelup started, so exit
+      if(level != p->attr.level) return; /* a new levelup started, so exit */
 
       for(i32 j = 0; j < at_max; j++)
          if(i > 35*2 / (k32)at_max * j)
@@ -183,7 +190,7 @@ static void LevelUp(struct player *p, u32 attr[at_max])
 
          for(i32 k = 0, l = 0; k <= j; k++, l++)
          {
-            // skip over any +0 attributes
+            /* skip over any +0 attributes */
             while(l < at_max && !attr[l]) l++;
             if(l >= at_max) break;
 
@@ -228,7 +235,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt)
    a->exp += amt;
 }
 
-// Reset some things on the player when they spawn.
+/* Reset some things on the player when they spawn. */
 script
 void P_Init(struct player *p)
 {
@@ -242,7 +249,7 @@ void P_Init(struct player *p)
       SetPClass(p);
       SetupAttributes(p);
 
-      // i cri tears of pain for APROP_SpawnHealth
+      /* i cri tears of pain for APROP_SpawnHealth */
       p->viewheight  = ACS_GetActorViewHeight(0);
       p->jumpheight  = GetPropK(0, APROP_JumpZ);
       p->spawnhealth = GetPropI(0, APROP_Health);
@@ -263,7 +270,7 @@ void P_Init(struct player *p)
 
    p->reinit = p->dead = false;
 
-   // If the map sets the TID early on, it could already be set here.
+   /* If the map sets the TID early on, it could already be set here. */
    p->tid = 0;
    P_ValidateTID(p);
 
@@ -274,11 +281,11 @@ void P_Init(struct player *p)
 
    if(dbgflag & dbgf_score) p->score = 0xFFFFFFFFFFFFFFFFll;
 
-   // Any linked lists on the player need to be initialized here.
+   /* Any linked lists on the player need to be initialized here. */
    ListDtor(&p->hudstrlist, true);
 
-   // pls not exit map with murder thingies out
-   // is bad practice
+   /* pls not exit map with murder thingies out */
+   /* is bad practice */
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    SetPropK(0, APROP_ViewHeight, p->viewheight);
    InvTake(so_WeaponScopedToken, INT_MAX);
@@ -361,7 +368,7 @@ void P_Dat_PTickPst(struct player *p)
       SetPropK(0, APROP_JumpZ, p->jumpheight * boost);
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_KeyDown")
 void Sc_KeyDown(i32 pnum, i32 ch)
@@ -371,4 +378,4 @@ void Sc_KeyDown(i32 pnum, i32 ch)
          p->txtbuf[p->tbptr++] = ch;
 }
 
-// EOF
+/* EOF */

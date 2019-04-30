@@ -1,34 +1,39 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-player/score1       dtsnd/Player/Score1              // Self-made
-player/score2       dtsnd/Player/Score2              // 〃
-player/score3       dtsnd/Player/Score3              // 〃
-player/doublejump   dtsnd/Player/DoubleJump          // DemonSteele/Smash Bros
-player/zoomin       dtsnd/Player/ZoomIn              // Halo 3
-player/zoomout      dtsnd/Player/ZoomOut             // 〃
-player/levelup      dtsnd/Player/LevelUp             // Phantasy Star Online
-player/glare        dtsnd/Player/Glare               // Monster Girl Quest
+player/score1       dtsnd/Player/Score1              /* Self-made */
+player/score2       dtsnd/Player/Score2              /* 〃 */
+player/score3       dtsnd/Player/Score3              /* 〃 */
+player/doublejump   dtsnd/Player/DoubleJump          /* DemonSteele/Smash Bros */
+player/zoomin       dtsnd/Player/ZoomIn              /* Halo 3 */
+player/zoomout      dtsnd/Player/ZoomOut             /* 〃 */
+player/levelup      dtsnd/Player/LevelUp             /* Phantasy Star Online */
+player/glare        dtsnd/Player/Glare               /* Monster Girl Quest */
 
-player/stepw1 dtsnd/Player/Footsteps/Water1 // Black Mesa
-player/stepw2 dtsnd/Player/Footsteps/Water2 // 〃
-player/stepw3 dtsnd/Player/Footsteps/Water3 // 〃
-player/stepw4 dtsnd/Player/Footsteps/Water4 // 〃
+player/stepw1 dtsnd/Player/Footsteps/Water1 /* Black Mesa */
+player/stepw2 dtsnd/Player/Footsteps/Water2 /* 〃 */
+player/stepw3 dtsnd/Player/Footsteps/Water3 /* 〃 */
+player/stepw4 dtsnd/Player/Footsteps/Water4 /* 〃 */
 
-player/stepl1 dtsnd/Player/Footsteps/Lava1 // Insurgency
-player/stepl2 dtsnd/Player/Footsteps/Lava2 // 〃
-player/stepl3 dtsnd/Player/Footsteps/Lava3 // 〃
-player/stepl4 dtsnd/Player/Footsteps/Lava4 // 〃
+player/stepl1 dtsnd/Player/Footsteps/Lava1 /* Insurgency */
+player/stepl2 dtsnd/Player/Footsteps/Lava2 /* 〃 */
+player/stepl3 dtsnd/Player/Footsteps/Lava3 /* 〃 */
+player/stepl4 dtsnd/Player/Footsteps/Lava4 /* 〃 */
 
-player/steps1 dtsnd/Player/Footsteps/Slime1 // Battlefield 4
-player/steps2 dtsnd/Player/Footsteps/Slime2 // 〃
-player/steps3 dtsnd/Player/Footsteps/Slime3 // 〃
-player/steps4 dtsnd/Player/Footsteps/Slime4 // 〃
+player/steps1 dtsnd/Player/Footsteps/Slime1 /* Battlefield 4 */
+player/steps2 dtsnd/Player/Footsteps/Slime2 /* 〃 */
+player/steps3 dtsnd/Player/Footsteps/Slime3 /* 〃 */
+player/steps4 dtsnd/Player/Footsteps/Slime4 /* 〃 */
 
-player/slide1 dtsnd/Player/Lunge  // ???
-player/slide2 dtsnd/Player/Lunge2 // ???
-player/slide3 dtsnd/Player/Lunge3 // ???
+player/slide1 dtsnd/Player/Lunge  /* ??? */
+player/slide2 dtsnd/Player/Lunge2 /* ??? */
+player/slide3 dtsnd/Player/Lunge3 /* ??? */
 
 $random player/slide {
    player/slide1
@@ -65,14 +70,14 @@ $random player/score {
    player/score3
 }
 
-player/informant/land1 dtsnd/Player/Land1 // Phantasy Star: Nova
-player/informant/land2 dtsnd/Player/Land2 // 〃
-player/informant/land3 dtsnd/Player/Land3 // 〃
+player/informant/land1 dtsnd/Player/Land1 /* Phantasy Star: Nova */
+player/informant/land2 dtsnd/Player/Land2 /* 〃 */
+player/informant/land3 dtsnd/Player/Land3 /* 〃 */
 
-player/informant/step1 dtsnd/Player/Footsteps/Step1 // Fallout 4
-player/informant/step2 dtsnd/Player/Footsteps/Step2 // 〃
-player/informant/step3 dtsnd/Player/Footsteps/Step3 // 〃
-player/informant/step4 dtsnd/Player/Footsteps/Step4 // 〃
+player/informant/step1 dtsnd/Player/Footsteps/Step1 /* Fallout 4 */
+player/informant/step2 dtsnd/Player/Footsteps/Step2 /* 〃 */
+player/informant/step3 dtsnd/Player/Footsteps/Step3 /* 〃 */
+player/informant/step4 dtsnd/Player/Footsteps/Step4 /* 〃 */
 
 $random player/informant/land {
    player/informant/land1
@@ -88,16 +93,16 @@ $random player/marine/step {
 }
 
 $playeralias    player male *land    player/informant/land
-$playersound    player male *grunt   dtsnd/Player/Grunt     // Doom
-$playersound    player male *jump    dtsnd/Player/Jump      // Self-made
-$playersound    player male *death   dtsnd/Player/Death     // 〃
-$playersound    player male *xdeath  dtsnd/Player/XDeath    // 〃
-$playersound    player male *pain100 dtsnd/Player/PainSmall // Doom
-$playersounddup player male *pain75  *pain100               // 〃
-$playersound    player male *pain50  dtsnd/Player/Pain      // 〃
-$playersounddup player male *pain25  *pain50                // 〃
-$playersound    player male *usefail dtsnd/Player/UseFail   // Self-made
-$playersound    player male *dive    dtsnd/Player/SplashIn  // Call of Duty: Modern Warfare 2
-$playersound    player male *surface dtsnd/Player/Splash    // 〃
+$playersound    player male *grunt   dtsnd/Player/Grunt     /* Doom */
+$playersound    player male *jump    dtsnd/Player/Jump      /* Self-made */
+$playersound    player male *death   dtsnd/Player/Death     /* 〃 */
+$playersound    player male *xdeath  dtsnd/Player/XDeath    /* 〃 */
+$playersound    player male *pain100 dtsnd/Player/PainSmall /* Doom */
+$playersounddup player male *pain75  *pain100               /* 〃 */
+$playersound    player male *pain50  dtsnd/Player/Pain      /* 〃 */
+$playersounddup player male *pain25  *pain50                /* 〃 */
+$playersound    player male *usefail dtsnd/Player/UseFail   /* Self-made */
+$playersound    player male *dive    dtsnd/Player/SplashIn  /* Call of Duty: Modern Warfare 2 */
+$playersound    player male *surface dtsnd/Player/Splash    /* 〃 */
 
-// EOF
+/* EOF */

@@ -1,43 +1,46 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Casings
-//
-casings/bullet/bounce1  lsounds/Weapons/Effects/Casings/CaseBounce1  // ???
-casings/bullet/bounce2  lsounds/Weapons/Effects/Casings/CaseBounce2  // 〃
-casings/bullet/bounce3  lsounds/Weapons/Effects/Casings/CaseBounce3  // 〃
-casings/bullet/bounce4  lsounds/Weapons/Effects/Casings/CaseBounce4  // 〃
-casings/bullet/bounce5  lsounds/Weapons/Effects/Casings/CaseBounce5  // 〃
-casings/bullet/bounce6  lsounds/Weapons/Effects/Casings/CaseBounce6  // 〃
-casings/bullet/bounce7  lsounds/Weapons/Effects/Casings/CaseBounce7  // 〃
-casings/bullet/bounce8  lsounds/Weapons/Effects/Casings/CaseBounce8  // 〃
-casings/bullet/bounce9  lsounds/Weapons/Effects/Casings/CaseBounce9  // 〃
-casings/bullet/bounce10 lsounds/Weapons/Effects/Casings/CaseBounce10 // 〃
+/* Casings */
+casings/bullet/bounce1  lsounds/Weapons/Effects/Casings/CaseBounce1  /* ??? */
+casings/bullet/bounce2  lsounds/Weapons/Effects/Casings/CaseBounce2  /* 〃 */
+casings/bullet/bounce3  lsounds/Weapons/Effects/Casings/CaseBounce3  /* 〃 */
+casings/bullet/bounce4  lsounds/Weapons/Effects/Casings/CaseBounce4  /* 〃 */
+casings/bullet/bounce5  lsounds/Weapons/Effects/Casings/CaseBounce5  /* 〃 */
+casings/bullet/bounce6  lsounds/Weapons/Effects/Casings/CaseBounce6  /* 〃 */
+casings/bullet/bounce7  lsounds/Weapons/Effects/Casings/CaseBounce7  /* 〃 */
+casings/bullet/bounce8  lsounds/Weapons/Effects/Casings/CaseBounce8  /* 〃 */
+casings/bullet/bounce9  lsounds/Weapons/Effects/Casings/CaseBounce9  /* 〃 */
+casings/bullet/bounce10 lsounds/Weapons/Effects/Casings/CaseBounce10 /* 〃 */
 
-casings/shell/bounce1 lsounds/Weapons/Effects/Casings/ShellBounce1 // ???
-casings/shell/bounce2 lsounds/Weapons/Effects/Casings/ShellBounce2 // 〃
-casings/shell/bounce3 lsounds/Weapons/Effects/Casings/ShellBounce3 // 〃
-casings/shell/bounce4 lsounds/Weapons/Effects/Casings/ShellBounce4 // 〃
-casings/shell/bounce5 lsounds/Weapons/Effects/Casings/ShellBounce5 // 〃
+casings/shell/bounce1 lsounds/Weapons/Effects/Casings/ShellBounce1 /* ??? */
+casings/shell/bounce2 lsounds/Weapons/Effects/Casings/ShellBounce2 /* 〃 */
+casings/shell/bounce3 lsounds/Weapons/Effects/Casings/ShellBounce3 /* 〃 */
+casings/shell/bounce4 lsounds/Weapons/Effects/Casings/ShellBounce4 /* 〃 */
+casings/shell/bounce5 lsounds/Weapons/Effects/Casings/ShellBounce5 /* 〃 */
 
-casings/bullet/die1  lsounds/Weapons/Effects/Casings/CaseStop1  // ???
-casings/bullet/die2  lsounds/Weapons/Effects/Casings/CaseStop2  // 〃
-casings/bullet/die3  lsounds/Weapons/Effects/Casings/CaseStop3  // 〃
-casings/bullet/die4  lsounds/Weapons/Effects/Casings/CaseStop4  // 〃
-casings/bullet/die5  lsounds/Weapons/Effects/Casings/CaseStop5  // 〃
-casings/bullet/die6  lsounds/Weapons/Effects/Casings/CaseStop6  // 〃
-casings/bullet/die7  lsounds/Weapons/Effects/Casings/CaseStop7  // 〃
-casings/bullet/die8  lsounds/Weapons/Effects/Casings/CaseStop8  // 〃
-casings/bullet/die9  lsounds/Weapons/Effects/Casings/CaseStop9  // 〃
-casings/bullet/die10 lsounds/Weapons/Effects/Casings/CaseStop10 // 〃
+casings/bullet/die1  lsounds/Weapons/Effects/Casings/CaseStop1  /* ??? */
+casings/bullet/die2  lsounds/Weapons/Effects/Casings/CaseStop2  /* 〃 */
+casings/bullet/die3  lsounds/Weapons/Effects/Casings/CaseStop3  /* 〃 */
+casings/bullet/die4  lsounds/Weapons/Effects/Casings/CaseStop4  /* 〃 */
+casings/bullet/die5  lsounds/Weapons/Effects/Casings/CaseStop5  /* 〃 */
+casings/bullet/die6  lsounds/Weapons/Effects/Casings/CaseStop6  /* 〃 */
+casings/bullet/die7  lsounds/Weapons/Effects/Casings/CaseStop7  /* 〃 */
+casings/bullet/die8  lsounds/Weapons/Effects/Casings/CaseStop8  /* 〃 */
+casings/bullet/die9  lsounds/Weapons/Effects/Casings/CaseStop9  /* 〃 */
+casings/bullet/die10 lsounds/Weapons/Effects/Casings/CaseStop10 /* 〃 */
 
-casings/shell/die1 lsounds/Casings/ShellBounce1 // ???
-casings/shell/die2 lsounds/Casings/ShellBounce2 // 〃
-casings/shell/die3 lsounds/Casings/ShellBounce3 // 〃
-casings/shell/die4 lsounds/Casings/ShellBounce4 // 〃
-casings/shell/die5 lsounds/Casings/ShellBounce5 // 〃
+casings/shell/die1 lsounds/Casings/ShellBounce1 /* ??? */
+casings/shell/die2 lsounds/Casings/ShellBounce2 /* 〃 */
+casings/shell/die3 lsounds/Casings/ShellBounce3 /* 〃 */
+casings/shell/die4 lsounds/Casings/ShellBounce4 /* 〃 */
+casings/shell/die5 lsounds/Casings/ShellBounce5 /* 〃 */
 
 $random casings/bullet/bounce {
    casings/bullet/bounce1
@@ -85,16 +88,14 @@ $random casings/shell/die {
 }
 $volume casings/shell/die 0.5
 
-//
-// Magazine
-//
-weapons/magbounce1 lsounds/Weapons/Effects/Magazine/Drop1 // Halo 3
-weapons/magbounce2 lsounds/Weapons/Effects/Magazine/Drop2 // 〃
-weapons/magbounce3 lsounds/Weapons/Effects/Magazine/Drop3 // 〃
+/* Magazine */
+weapons/magbounce1 lsounds/Weapons/Effects/Magazine/Drop1 /* Halo 3 */
+weapons/magbounce2 lsounds/Weapons/Effects/Magazine/Drop2 /* 〃 */
+weapons/magbounce3 lsounds/Weapons/Effects/Magazine/Drop3 /* 〃 */
 
-weapons/magbouncef1 lsounds/Weapons/Effects/Magazine/DropFull1 // Halo 3
-weapons/magbouncef2 lsounds/Weapons/Effects/Magazine/DropFull2 // 〃
-weapons/magbouncef3 lsounds/Weapons/Effects/Magazine/DropFull3 // 〃
+weapons/magbouncef1 lsounds/Weapons/Effects/Magazine/DropFull1 /* Halo 3 */
+weapons/magbouncef2 lsounds/Weapons/Effects/Magazine/DropFull2 /* 〃 */
+weapons/magbouncef3 lsounds/Weapons/Effects/Magazine/DropFull3 /* 〃 */
 
 $random weapons/magbounce {
    weapons/magbounce1
@@ -108,20 +109,18 @@ $random weapons/magbouncef {
    weapons/magbouncef3
 }
 
-//
-// sord
-//
-weapons/sword/chargeup lsounds/Weapons/Sword/Charge  // Touhou 9: Phantasmagoria of Flower View
-weapons/sword/attack   lsounds/Weapons/Sword/Charge1 // 〃
-weapons/sword/swing    lsounds/Weapons/Sword/Swing   // 〃
-weapons/sword/swing1   lsounds/Weapons/Sword/Swing1  // 〃
-weapons/sword/charge   lsounds/Weapons/Sword/Charge2 // 〃
+/* sord */
+weapons/sword/chargeup lsounds/Weapons/Sword/Charge  /* Touhou 9: Phantasmagoria of Flower View */
+weapons/sword/attack   lsounds/Weapons/Sword/Charge1 /* 〃 */
+weapons/sword/swing    lsounds/Weapons/Sword/Swing   /* 〃 */
+weapons/sword/swing1   lsounds/Weapons/Sword/Swing1  /* 〃 */
+weapons/sword/charge   lsounds/Weapons/Sword/Charge2 /* 〃 */
 
-weapons/sword/normal1 lsounds/Weapons/Sword/Swing2 // Ninja Gaiden Black
-weapons/sword/normal2 lsounds/Weapons/Sword/Swing3 // 〃
-weapons/sword/normal3 lsounds/Weapons/Sword/Swing4 // 〃
-weapons/sword/normal4 lsounds/Weapons/Sword/Swing5 // 〃
-weapons/sword/normal5 lsounds/Weapons/Sword/Swing6 // 〃
+weapons/sword/normal1 lsounds/Weapons/Sword/Swing2 /* Ninja Gaiden Black */
+weapons/sword/normal2 lsounds/Weapons/Sword/Swing3 /* 〃 */
+weapons/sword/normal3 lsounds/Weapons/Sword/Swing4 /* 〃 */
+weapons/sword/normal4 lsounds/Weapons/Sword/Swing5 /* 〃 */
+weapons/sword/normal5 lsounds/Weapons/Sword/Swing6 /* 〃 */
 
 $random weapons/sword/normal {
    weapons/sword/normal1
@@ -131,11 +130,11 @@ $random weapons/sword/normal {
    weapons/sword/normal5
 }
 
-weapons/sword/hit1 lsounds/Weapons/Sword/Hit1 // Ninja Gaiden Black
-weapons/sword/hit2 lsounds/Weapons/Sword/Hit2 // 〃
-weapons/sword/hit3 lsounds/Weapons/Sword/Hit3 // 〃
-weapons/sword/hit4 lsounds/Weapons/Sword/Hit4 // 〃
-weapons/sword/hit5 lsounds/Weapons/Sword/Hit5 // 〃
+weapons/sword/hit1 lsounds/Weapons/Sword/Hit1 /* Ninja Gaiden Black */
+weapons/sword/hit2 lsounds/Weapons/Sword/Hit2 /* 〃 */
+weapons/sword/hit3 lsounds/Weapons/Sword/Hit3 /* 〃 */
+weapons/sword/hit4 lsounds/Weapons/Sword/Hit4 /* 〃 */
+weapons/sword/hit5 lsounds/Weapons/Sword/Hit5 /* 〃 */
 
 $random weapons/sword/hit {
    weapons/sword/hit1
@@ -145,27 +144,25 @@ $random weapons/sword/hit {
    weapons/sword/hit5
 }
 
-//
-// Misc.
-//
-weapons/empty lsounds/Weapons/Empty // Half-Life 2 MMod
+/* Misc. */
+weapons/empty lsounds/Weapons/Empty /* Half-Life 2 MMod */
 
-effects/rocket/fly lsounds/WeaponsM/GrenadeLauncher/RocketFly // Unreal Tournament '99
+effects/rocket/fly lsounds/WeaponsM/GrenadeLauncher/RocketFly /* Unreal Tournament '99 */
 
-effects/puff/ricochet1  lsounds/Weapons/Effects/Ricochet/Ric1  // Devil May Cry 2
-effects/puff/ricochet2  lsounds/Weapons/Effects/Ricochet/Ric2  // 〃
-effects/puff/ricochet3  lsounds/Weapons/Effects/Ricochet/Ric3  // 〃
-effects/puff/ricochet4  lsounds/Weapons/Effects/Ricochet/Ric4  // 〃
-effects/puff/ricochet5  lsounds/Weapons/Effects/Ricochet/Ric5  // Half-Life 2
-effects/puff/ricochet6  lsounds/Weapons/Effects/Ricochet/Ric6  // 〃
-effects/puff/ricochet7  lsounds/Weapons/Effects/Ricochet/Ric7  // 〃
-effects/puff/ricochet8  lsounds/Weapons/Effects/Ricochet/Ric8  // 〃
-effects/puff/ricochet9  lsounds/Weapons/Effects/Ricochet/Ric9  // 〃
-effects/puff/ricochet10 lsounds/Weapons/Effects/Ricochet/Ric10 // Half-Life 2 MMod
-effects/puff/ricochet11 lsounds/Weapons/Effects/Ricochet/Ric11 // 〃
-effects/puff/ricochet12 lsounds/Weapons/Effects/Ricochet/Ric12 // 〃
-effects/puff/ricochet13 lsounds/Weapons/Effects/Ricochet/Ric13 // 〃
-effects/puff/ricochet14 lsounds/Weapons/Effects/Ricochet/Ric14 // 〃
+effects/puff/ricochet1  lsounds/Weapons/Effects/Ricochet/Ric1  /* Devil May Cry 2 */
+effects/puff/ricochet2  lsounds/Weapons/Effects/Ricochet/Ric2  /* 〃 */
+effects/puff/ricochet3  lsounds/Weapons/Effects/Ricochet/Ric3  /* 〃 */
+effects/puff/ricochet4  lsounds/Weapons/Effects/Ricochet/Ric4  /* 〃 */
+effects/puff/ricochet5  lsounds/Weapons/Effects/Ricochet/Ric5  /* Half-Life 2 */
+effects/puff/ricochet6  lsounds/Weapons/Effects/Ricochet/Ric6  /* 〃 */
+effects/puff/ricochet7  lsounds/Weapons/Effects/Ricochet/Ric7  /* 〃 */
+effects/puff/ricochet8  lsounds/Weapons/Effects/Ricochet/Ric8  /* 〃 */
+effects/puff/ricochet9  lsounds/Weapons/Effects/Ricochet/Ric9  /* 〃 */
+effects/puff/ricochet10 lsounds/Weapons/Effects/Ricochet/Ric10 /* Half-Life 2 MMod */
+effects/puff/ricochet11 lsounds/Weapons/Effects/Ricochet/Ric11 /* 〃 */
+effects/puff/ricochet12 lsounds/Weapons/Effects/Ricochet/Ric12 /* 〃 */
+effects/puff/ricochet13 lsounds/Weapons/Effects/Ricochet/Ric13 /* 〃 */
+effects/puff/ricochet14 lsounds/Weapons/Effects/Ricochet/Ric14 /* 〃 */
 
 $random effects/puff/ricochet {
    effects/puff/ricochet1
@@ -186,17 +183,17 @@ $random effects/puff/ricochet {
 
 $limit effects/puff/ricochet 0
 
-effects/geexplosion1  lsounds/Weapons/Effects/GEExplosion/expl1  // GoldenEye 007
-effects/geexplosion2  lsounds/Weapons/Effects/GEExplosion/expl2  // 〃
-effects/geexplosion3  lsounds/Weapons/Effects/GEExplosion/expl3  // 〃
-effects/geexplosion4  lsounds/Weapons/Effects/GEExplosion/expl4  // 〃
-effects/geexplosion5  lsounds/Weapons/Effects/GEExplosion/expl5  // 〃
-effects/geexplosion6  lsounds/Weapons/Effects/GEExplosion/expl6  // 〃
-effects/geexplosion7  lsounds/Weapons/Effects/GEExplosion/expl7  // 〃
-effects/geexplosion8  lsounds/Weapons/Effects/GEExplosion/expl8  // 〃
-effects/geexplosion9  lsounds/Weapons/Effects/GEExplosion/expl9  // 〃
-effects/geexplosion10 lsounds/Weapons/Effects/GEExplosion/expl10 // 〃
-effects/geexplosion11 lsounds/Weapons/Effects/GEExplosion/expl11 // 〃
+effects/geexplosion1  lsounds/Weapons/Effects/GEExplosion/expl1  /* GoldenEye 007 */
+effects/geexplosion2  lsounds/Weapons/Effects/GEExplosion/expl2  /* 〃 */
+effects/geexplosion3  lsounds/Weapons/Effects/GEExplosion/expl3  /* 〃 */
+effects/geexplosion4  lsounds/Weapons/Effects/GEExplosion/expl4  /* 〃 */
+effects/geexplosion5  lsounds/Weapons/Effects/GEExplosion/expl5  /* 〃 */
+effects/geexplosion6  lsounds/Weapons/Effects/GEExplosion/expl6  /* 〃 */
+effects/geexplosion7  lsounds/Weapons/Effects/GEExplosion/expl7  /* 〃 */
+effects/geexplosion8  lsounds/Weapons/Effects/GEExplosion/expl8  /* 〃 */
+effects/geexplosion9  lsounds/Weapons/Effects/GEExplosion/expl9  /* 〃 */
+effects/geexplosion10 lsounds/Weapons/Effects/GEExplosion/expl10 /* 〃 */
+effects/geexplosion11 lsounds/Weapons/Effects/GEExplosion/expl11 /* 〃 */
 
 $random effects/geexplosion {
    effects/geexplosion1
@@ -212,4 +209,4 @@ $random effects/geexplosion {
    effects/geexplosion11
 }
 
-// EOF
+/* EOF */

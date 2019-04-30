@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 actor Lith_Splash
 {
@@ -57,7 +62,7 @@ actor Lith_WaterSplashSmall : Lith_WaterSplashLarge
 
 actor Lith_BloodSplashLarge : Lith_WaterSplashLarge
 {
-   Translation "200:207=184:191", "240:247=41:47" //"192:207=32:47"
+   Translation "200:207=184:191", "240:247=41:47" /*"192:207=32:47" */
    Alpha 0.9
 
    states
@@ -241,4 +246,4 @@ actor Lith_LavaParticle
    }
 }
 
-// EOF
+/* EOF */

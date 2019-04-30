@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_gui_cbi.c: CBI tab GUI.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * CBI tab GUI.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -32,7 +39,7 @@
       PrintSprite(path, 0,1, 0,1); \
    } while(0)
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void CBITab_Marine(struct gui_state *g, struct player *p)
 {
@@ -102,7 +109,7 @@ static void CBITab_CyberMage(struct gui_state *g, struct player *p)
    Upgr(c_rdistinter) Slot("RDistInter", 1, 4);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabCBI(struct gui_state *g, struct player *p)
 {
@@ -112,4 +119,4 @@ void P_CBI_TabCBI(struct gui_state *g, struct player *p)
    }
 }
 
-// EOF
+/* EOF */

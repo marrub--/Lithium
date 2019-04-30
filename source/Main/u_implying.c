@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_implying.c: Implying upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Implying upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
@@ -38,5 +45,5 @@ void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
       PrintTextX_str(strings[rand() % countof(strings)], s_dbigfont, 0, rand() % 320,0, rand() % 240,0);
 }
 
-// EOF
+/* EOF */
 

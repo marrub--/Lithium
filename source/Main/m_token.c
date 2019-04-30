@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_token.c: Token-based text parsing.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Token-based text parsing.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "m_token.h"
 #include "m_vec.h"
@@ -32,7 +39,7 @@
    case '\n': orig->colu = 0; ++orig->line; \
    }
 
-//#define tok1(tt1) (printf(#tt1 "\n"), tok->type = tt1)
+/*#define tok1(tt1) (printf(#tt1 "\n"), tok->type = tt1) */
 #define tok1(tt1) (tok->orig = *orig, tok->type = tt1)
 #define tok2(c2, tt1, tt2) \
    if(getch() == c2) tok1(tt2); \
@@ -42,7 +49,7 @@
    else if(   ch   == c2) tok1(tt2); \
    else         (unget(), tok1(tt1))
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void TokParse(FILE *fp, struct token *tok, struct origin *orig)
 {
@@ -62,10 +69,10 @@ begin:;
 
    switch(ch)
    {
-   // Whitespace
+   /* Whitespace */
    case '\r': case '\n': tok1(tok_lnend); advLine(); return;
 
-   // 1-op tokens
+   /* 1-op tokens */
    case ';': tok1(tok_semico); return;
    case ',': tok1(tok_comma ); return;
    case '$': tok1(tok_dollar); return;
@@ -76,7 +83,7 @@ begin:;
    case '(': tok1(tok_pareno); return;
    case ')': tok1(tok_parenc); return;
 
-   // 2-op tokens
+   /* 2-op tokens */
    case '=': tok2('=', tok_eq,   tok_eq2   ); return;
    case '?': tok2('=', tok_tern, tok_terneq); return;
    case '!': tok2('=', tok_not,  tok_neq   ); return;
@@ -84,7 +91,7 @@ begin:;
    case '*': tok2('=', tok_mul,  tok_muleq ); return;
    case '@': tok2('@', tok_at,   tok_at2   ); return;
 
-   // 3-op tokens
+   /* 3-op tokens */
    case '<': tok3('<', '=', tok_lt,  tok_lt2,  tok_le   ); return;
    case '>': tok3('>', '=', tok_gt,  tok_gt2,  tok_ge   ); return;
    case '|': tok3('|', '=', tok_or,  tok_or2,  tok_oreq ); return;
@@ -186,4 +193,4 @@ begin:;
    }
 }
 
-// EOF
+/* EOF */

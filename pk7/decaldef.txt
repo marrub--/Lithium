@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// Animators -----------------------------------------------------------------|
+/* Animators --------------------------------------------------------------- */
 
 fader Lith_QuickFade
 {
@@ -24,7 +29,7 @@ combiner Lith_StarAnimate
    GoAway
 }
 
-// Decals --------------------------------------------------------------------|
+/* Decals ------------------------------------------------------------------ */
 
 decal BulletChip1
 {
@@ -263,7 +268,7 @@ decal Lith_DoomPoster2 {pic "LITH64PS"}
 decal Lith_DoomPoster3 {pic "LITHD2PS"}
 decal Lith_DoomPoster4 {pic "LITHE4PS"}
 
-// Decal Groups --------------------------------------------------------------|
+/* Decal Groups ------------------------------------------------------------ */
 
 decalgroup Lith_DoomPoster 60
 {
@@ -285,7 +290,7 @@ decalgroup Lith_ChargeFistScorch
    Lith_ChargeFistScorch2 1
 }
 
-// Generators ----------------------------------------------------------------|
+/* Generators -------------------------------------------------------------- */
 
 generator Lith_GaussPuff             Lith_GaussScorch
 generator Lith_PlasmaHit             Lith_PlasmaLaserScorch
@@ -344,4 +349,4 @@ generator Lith_RendHit               Lith_Rend
 generator Lith_RendHit2              Lith_Rend
 generator Lith_ChargeFistPuff        Lith_ChargeFistScorch
 
-// EOF
+/* EOF */

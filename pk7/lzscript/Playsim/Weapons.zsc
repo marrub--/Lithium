@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 extend class Lith_HERMES;
 
@@ -71,7 +76,7 @@ static void DelearSprite(Actor mo_)
 
 static void PoisonFX(Actor mo)
 {
-   // removed weird ass bullshit...
+   /* removed weird ass bullshit... */
    let trg = Lith_Player(mo.Target);
    int dmg = trg ? Lith_UTIL.Exec(trg, lsc_pdata, pdata_attr, at_acc) / 4 : 0;
    mo.A_DamageSelf(10 + dmg, "Poison");
@@ -91,4 +96,4 @@ static void GivePoison(Actor mo)
    }
 }
 
-// EOF
+/* EOF */

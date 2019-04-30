@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 server noarchive int  __dtap_debug_level      = 0;
 server noarchive bool __dtap_debug_all        = false;
@@ -13,4 +18,4 @@ server noarchive bool __dtap_debug_nomonsters = false;
 
 server noarchive string __dtap_end;
 
-// EOF
+/* EOF */

@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// This one doesn't have any funny acronym, sorry.
+/* This one doesn't have any funny acronym, sorry. */
 class Lith_Events : EventHandler;
 
 bool m_BossLevel;
@@ -10,11 +15,11 @@ bool m_BossLevel;
 override void WorldLoaded(WorldEvent ev)
 {
    static const string BOSSLEVELS[] = {
-      "058fb092ea1b70da1e3cbf501c4a91a1", // E1M8
-      "effe91df41ad41f6973c06f0ad67ddb9", // E2M8
-      "ef128313112110ed6c1549af96af26c9", // E3M8
-      "2dc939e508ab8eb68af79d5b60568711", // E4M8
-      "5eecd88f4491f516d590ce4bbf45f532"  // MAP30
+      "058fb092ea1b70da1e3cbf501c4a91a1", /* E1M8 */
+      "effe91df41ad41f6973c06f0ad67ddb9", /* E2M8 */
+      "ef128313112110ed6c1549af96af26c9", /* E3M8 */
+      "2dc939e508ab8eb68af79d5b60568711", /* E4M8 */
+      "5eecd88f4491f516d590ce4bbf45f532"  /* MAP30 */
    };
 
    if(ev.IsSaveGame)
@@ -52,9 +57,9 @@ override void WorldUnloaded(WorldEvent ev)
 
 override void UiTick()
 {
-   // because we override finales in the MAPINFO, this should only trigger
-   // at the very end of the game. hopefully.
-   // EDIT: it didn't, so I had to add more hacks
+   /* because we override finales in the MAPINFO, this should only trigger */
+   /* at the very end of the game. hopefully. */
+   /* EDIT: it didn't, so I had to add more hacks */
    if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
 
@@ -250,4 +255,4 @@ override void NetworkProcess(ConsoleEvent ev)
    if(ev.Name == "Lith_Key") CallACS("Lith_KeyDown", ev.Player, ev.Args[0]);
 }
 
-// EOF
+/* EOF */

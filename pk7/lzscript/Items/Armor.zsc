@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Armor_HazMat : Lith_Armor
 {
@@ -218,4 +223,4 @@ class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
    states {Spawn: ARM8 C -1; stop;}
 }
 
-// EOF
+/* EOF */

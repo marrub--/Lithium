@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// dialogue_compiler.c: Dialogue code compiler.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Dialogue code compiler.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -19,15 +26,15 @@
 #define LogOri(tok, s) \
    Log(c"(%i:%i) %s: " s, tok->orig.line, tok->orig.colu, __func__)
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern struct dlgdef *lmvar dlgdefs;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void GetStatement(struct pstate *d);
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum
 {
@@ -58,7 +65,7 @@ struct pstate {
    struct dlgdef *def;
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct strent stbl[] = {
    #define Str(name, s) {#name, #s, STR_##name},
@@ -66,8 +73,10 @@ static struct strent stbl[] = {
 };
 
 static struct dlgfunc ftbl[] = {
+   /* nop */
    {"nop", "L", DCD_NOP},
 
+   /* extended 6502 */
    {"pha", "L", DCD_PHA},
    {"pla", "L", DCD_PLA},
 
@@ -93,17 +102,20 @@ static struct dlgfunc ftbl[] = {
    {"lsh", "LI", DCD_LSHI},
    {"rsh", "LI", DCD_RSHI},
 
+   {"tra", "L",  DCD_TRA},
+   {"trx", "L",  DCD_TRX},
+   {"try", "L",  DCD_TRY},
+   {"trz", "LS", DCD_TRZ},
+
+   {"hlt", "L", DCD_HLT},
+
+   /* dialogue */
    {"exit", "L", DCD_HLT},
 
    {"page", "LI", DCD_JPAGE},
 
    {"script",      "LIIIII", DCD_SCRIPTI},
    {"scriptnamed", "LSIIII", DCD_SCRIPTS},
-
-   {"tra", "L",  DCD_TRA},
-   {"trx", "L",  DCD_TRX},
-   {"try", "L",  DCD_TRY},
-   {"trz", "LS", DCD_TRZ},
 
    {"intralevelteleport", "LI", DCD_TELEPORT_INTRALEVEL},
    {"interlevelteleport", "LI", DCD_TELEPORT_INTERLEVEL},
@@ -128,7 +140,7 @@ static struct dlgfunc ftbl[] = {
    {"trmwait", "L",  DCD_TRMWAIT},
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static struct dlgfunc *GetFunc(char const *s)
 {
@@ -172,13 +184,13 @@ static void GenCode_Generic(struct pstate *d, struct arg *argv, i32 argc)
    }
 }
 
-// Parses and generates code for a conditional statement.
+/* Parses and generates code for a conditional statement. */
 static void GetCode_Cond(struct pstate *d)
 {
    i32 code = DCD_NOP;
    struct token *tok = d->tb.get();
 
-   // Get the code to generate.
+   /* Get the code to generate. */
    if(tok->type == tok_identi)
    {
       switch(StrName(tok->textV)) {
@@ -190,7 +202,7 @@ static void GetCode_Cond(struct pstate *d)
    else
       LogTok(tok, "expected identifier");
 
-   // Generate code.
+   /* Generate code. */
    i32 ptr = 0;
 
    tok = d->tb.get();
@@ -216,7 +228,7 @@ static void GetCode_Cond(struct pstate *d)
    else
       LogOri(tok, "invalid token in conditional statement");
 
-   // Generate statement.
+   /* Generate statement. */
 ok:
    GetStatement(d);
 
@@ -225,30 +237,30 @@ ok:
    {
       i32 tmp = ptr;
 
-      // Add jump to end.
+      /* Add jump to end. */
       *NextCode(d) = DCD_JMP;
       ptr = d->def->codeC;
       NextCode(d);
 
-      // Set original jump target to here.
+      /* Set original jump target to here. */
       d->def->codeV[tmp] = d->def->codeC;
 
-      // Generate statement.
+      /* Generate statement. */
       GetStatement(d);
    }
    else
       d->tb.unget();
 
-   // Set the pointer in the generated code to be after the statement.
+   /* Set the pointer in the generated code to be after the statement. */
    if(ptr) d->def->codeV[ptr] = d->def->codeC;
 }
 
-// Parses and generates code for an option statement.
+/* Parses and generates code for an option statement. */
 static void GetCode_Option(struct pstate *d)
 {
    struct token *tok = d->tb.get();
 
-   // Generate code.
+   /* Generate code. */
    i32 ptr = 0;
    if(tok->type == tok_identi || tok->type == tok_string)
    {
@@ -260,34 +272,34 @@ static void GetCode_Option(struct pstate *d)
    else
       LogOri(tok, "invalid option parameter");
 
-   // Generate statement.
+   /* Generate statement. */
    GetStatement(d);
 
-   // Set the pointer in the generated code to be after the statement.
+   /* Set the pointer in the generated code to be after the statement. */
    if(ptr) d->def->codeV[ptr] = d->def->codeC;
 }
 
-// Parses and generates code for an exec statement.
+/* Parses and generates code for an exec statement. */
 static void GetCode_Exec(struct pstate *d)
 {
    *NextCode(d) = DCD_TRMWAIT;
    GetStatement(d);
 }
 
-// Parses and generates code for a generic statement.
+/* Parses and generates code for a generic statement. */
 static void GetCode_Generic(struct pstate *d)
 {
    struct token *tok = d->tb.reget();
    Dbg_Log(log_dlg, "call: %s", tok->textV);
 
-   // Get the function to generate.
+   /* Get the function to generate. */
    struct dlgfunc const *func = GetFunc(tok->textV);
    if(!func) {
       LogOri(tok, "invalid function in dialogue code");
       return;
    }
 
-   // Get arguments.
+   /* Get arguments. */
    struct arg argv[8] = {};
    i32 argc = 0;
    i32 lit  = 0;
@@ -317,7 +329,7 @@ static void GetCode_Generic(struct pstate *d)
          break;
    }
 
-   // Fill in unfinished arguments.
+   /* Fill in unfinished arguments. */
    while(func->args[argc])
    {
       switch(argv[argc].t = func->args[argc]) {
@@ -341,7 +353,7 @@ static void GetCode_Text(struct pstate *d, struct token *tok, i32 code)
    *NextCode(d) = AddString(d, tok->textV, tok->textC);
 }
 
-// Parse and generate a line of code.
+/* Parse and generate a line of code. */
 static void GetCode_Line(struct pstate *d)
 {
    struct token *tok = d->tb.get();
@@ -367,14 +379,14 @@ static void GetCode_Line(struct pstate *d)
    }
 }
 
-// Parse and generate a block statement.
+/* Parse and generate a block statement. */
 static void GetBlock(struct pstate *d)
 {
    while(!d->tb.drop(tok_bracec) && !d->tb.drop(tok_eof))
       GetStatement(d);
 }
 
-// Parse and generate a concat block statement.
+/* Parse and generate a concat block statement. */
 static void GetConcatBlock(struct pstate *d)
 {
    *NextCode(d) = DCD_CONCAT;
@@ -383,7 +395,7 @@ static void GetConcatBlock(struct pstate *d)
    *NextCode(d) = DCD_CONCATEND;
 }
 
-// Parse and generate a statement.
+/* Parse and generate a statement. */
 static void GetStatement(struct pstate *d)
 {
         if(d->tb.drop(tok_braceo)) GetBlock(d);
@@ -460,7 +472,7 @@ static void GetDecl_TrmPage(struct pstate *d, i32 num)
    *NextCode(d) = DCD_HLT;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void Dlg_GInit(void)
 {
@@ -468,7 +480,7 @@ void Dlg_GInit(void)
 
 void Dlg_MInit(void)
 {
-   // Free any previous dialogue definitions.
+   /* Free any previous dialogue definitions. */
    if(dlgdefs)
    {
       for(struct dlgdef *def = dlgdefs; def;) {
@@ -537,4 +549,4 @@ done:
 }
 #endif
 
-// EOF
+/* EOF */

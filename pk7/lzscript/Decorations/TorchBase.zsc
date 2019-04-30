@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_TorchDecor : Lith_FlareDecor
 {
@@ -82,4 +87,4 @@ class Lith_TorchRFlame : Lith_TorchFlame {states {Spawn: RDTF A 0; goto Spawn1;}
 class Lith_TorchGFlame : Lith_TorchFlame {states {Spawn: GRTF A 0; goto Spawn1;}}
 class Lith_TorchBFlame : Lith_TorchFlame {states {Spawn: BLTF A 0; goto Spawn1;}}
 
-// EOF
+/* EOF */

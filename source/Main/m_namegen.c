@@ -1,16 +1,23 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Procedural monster name generation.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// m_namegen.c: Procedural monster name generation.
-
-// Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
-// Used with permission.
+/* Predefined names and suffixes mostly taken from Kyle873's Doom RPG. */
+/* Used with permission. */
 #include "common.h"
 #include "w_world.h"
 #include <ctype.h>
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static char const *syll[] = {
    "ka",  "k'",   "khi", "kaz", "kr",
@@ -187,7 +194,7 @@ static str suff[] = {
    s"Alpha and Omega",
 };
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 str RandomName(i32 id)
 {
@@ -218,4 +225,4 @@ str RandomName(i32 id)
    return ACS_EndStrParam();
 }
 
-// EOF
+/* EOF */

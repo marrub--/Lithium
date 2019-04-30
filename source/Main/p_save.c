@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_save.c: Save file loading/saving.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Save file loading/saving.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -10,7 +17,7 @@
 #include "p_savedata.h"
 #include "m_file.h"
 
-// Chunk "note" --------------------------------------------------------------|
+/* Chunk "note" ------------------------------------------------------------ */
 
 #define note_Len(s) __with(i32 len = s ? strlen(s) : 0; len = min(len, 255);)
 
@@ -46,7 +53,7 @@ static void Load_note(struct savefile *save, struct savechunk *chunk)
    }
 }
 
-// Chunk "fun0" --------------------------------------------------------------|
+/* Chunk "fun0" ------------------------------------------------------------ */
 
 script
 static void Save_fun0(struct savefile *save)
@@ -62,7 +69,7 @@ static void Load_fun0(struct savefile *save, struct savechunk *chunk)
    save->p->fun = fgetc(save->fp);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void P_Data_Save(struct player *p)
@@ -91,4 +98,4 @@ void P_Data_Load(struct player *p)
 }
 #endif
 
-// EOF
+/* EOF */

@@ -1,58 +1,61 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Pickup
-//
-player/pickup/upgrbody    lsounds/Items/UpgrBody    // Killing Floor, ???
-player/pickup/upgrextr    lsounds/Items/UpgrExtr    // Phantasy Star Nova
-player/pickup/upgrweap    lsounds/Items/UpgrWeap    // Halo 3
-player/pickup/upgrcbi     lsounds/Items/CBIUpgrade  // 〃
-player/pickup/item        lsounds/Items/Item        // Firearms: Source
-player/pickup/barrier     lsounds/Items/Barrier     // Touhou 13
-player/pickup/infrared    lsounds/Items/Goggles     // ???
-player/pickup/redkey      lsounds/Items/RedKey      // ???
-player/pickup/yellowkey   lsounds/Items/YellowKey   // 〃
-player/pickup/bluekey     lsounds/Items/BlueKey     // 〃
-player/pickup/redskull2   lsounds/Items/SKULL       // Deus Ex
-player/pickup/redskull1   lsounds/Items/RedSkull    // Halo 3
-player/pickup/yellowskull lsounds/Items/YellowSkull // 〃
-player/pickup/blueskull   lsounds/Items/BlueSkull   // 〃
-player/pickup/evil        lsounds/Items/EvilItem    // Phantasy Star: Nova
-player/pickup/cells       lsounds/Items/CellSmall   // ???
-player/pickup/cellb       lsounds/Items/CellPack    // 〃
-player/pickup/shells      lsounds/Items/ShellSmall  // 〃
-player/pickup/shellb      lsounds/Items/ShellPack   // 〃
-player/pickup/rockets     lsounds/Items/RocketSmall // Halo 3
-player/pickup/rocketb     lsounds/Items/RocketBig   // Quake 2
-player/pickup/mana        lsounds/Items/Mana        // Devil May Cry 2
-player/pickup/scorebig    lsounds/Items/ScoreBig    // Self-made
-player/pickup/scoresmall  lsounds/Items/ScoreSmall  // 〃
-player/pickup/stimpack    lsounds/Items/Stimpack    // Doom 3
-player/pickup/medikit     lsounds/Items/Medikit     // Fallout 4
-player/pickup/invuln      lsounds/Items/Invuln      // ???
-player/pickup/mega        lsounds/Items/Mega        // Halo 3
-player/pickup/super       lsounds/Items/Super       // 〃
-player/pickup/allmap      lsounds/Items/AllMap      // Half-Life
-player/pickup/radsuit     lsounds/Items/Radsuit     // Call of Duty: Modern Warfare 2
-player/pickup/berserk     lsounds/Items/Berserk     // 〃
-player/pickup/armor       lsounds/Items/Armor       // E.Y.E: Divine Cybermancy
-player/pickup/boots       lsounds/Items/Boots       // 〃
-player/pickup/ring        lsounds/Items/Ring        // 〃
+/* Pickup */
+player/pickup/upgrbody    lsounds/Items/UpgrBody    /* Killing Floor, ??? */
+player/pickup/upgrextr    lsounds/Items/UpgrExtr    /* Phantasy Star Nova */
+player/pickup/upgrweap    lsounds/Items/UpgrWeap    /* Halo 3 */
+player/pickup/upgrcbi     lsounds/Items/CBIUpgrade  /* 〃 */
+player/pickup/item        lsounds/Items/Item        /* Firearms: Source */
+player/pickup/barrier     lsounds/Items/Barrier     /* Touhou 13 */
+player/pickup/infrared    lsounds/Items/Goggles     /* ??? */
+player/pickup/redkey      lsounds/Items/RedKey      /* ??? */
+player/pickup/yellowkey   lsounds/Items/YellowKey   /* 〃 */
+player/pickup/bluekey     lsounds/Items/BlueKey     /* 〃 */
+player/pickup/redskull2   lsounds/Items/SKULL       /* Deus Ex */
+player/pickup/redskull1   lsounds/Items/RedSkull    /* Halo 3 */
+player/pickup/yellowskull lsounds/Items/YellowSkull /* 〃 */
+player/pickup/blueskull   lsounds/Items/BlueSkull   /* 〃 */
+player/pickup/evil        lsounds/Items/EvilItem    /* Phantasy Star: Nova */
+player/pickup/cells       lsounds/Items/CellSmall   /* ??? */
+player/pickup/cellb       lsounds/Items/CellPack    /* 〃 */
+player/pickup/shells      lsounds/Items/ShellSmall  /* 〃 */
+player/pickup/shellb      lsounds/Items/ShellPack   /* 〃 */
+player/pickup/rockets     lsounds/Items/RocketSmall /* Halo 3 */
+player/pickup/rocketb     lsounds/Items/RocketBig   /* Quake 2 */
+player/pickup/mana        lsounds/Items/Mana        /* Devil May Cry 2 */
+player/pickup/scorebig    lsounds/Items/ScoreBig    /* Self-made */
+player/pickup/scoresmall  lsounds/Items/ScoreSmall  /* 〃 */
+player/pickup/stimpack    lsounds/Items/Stimpack    /* Doom 3 */
+player/pickup/medikit     lsounds/Items/Medikit     /* Fallout 4 */
+player/pickup/invuln      lsounds/Items/Invuln      /* ??? */
+player/pickup/mega        lsounds/Items/Mega        /* Halo 3 */
+player/pickup/super       lsounds/Items/Super       /* 〃 */
+player/pickup/allmap      lsounds/Items/AllMap      /* Half-Life */
+player/pickup/radsuit     lsounds/Items/Radsuit     /* Call of Duty: Modern Warfare 2 */
+player/pickup/berserk     lsounds/Items/Berserk     /* 〃 */
+player/pickup/armor       lsounds/Items/Armor       /* E.Y.E: Divine Cybermancy */
+player/pickup/boots       lsounds/Items/Boots       /* 〃 */
+player/pickup/ring        lsounds/Items/Ring        /* 〃 */
 
-player/pickup/scorechip lsounds/Items/ScoreChip // Half-Life 2
+player/pickup/scorechip lsounds/Items/ScoreChip /* Half-Life 2 */
 
-player/pickup/coin1 lsounds/Items/Coin1 // Sony Media 1001 Sound Effects
-player/pickup/coin2 lsounds/Items/Coin2 // 〃
-player/pickup/coin3 lsounds/Items/Coin3 // 〃
+player/pickup/coin1 lsounds/Items/Coin1 /* Sony Media 1001 Sound Effects */
+player/pickup/coin2 lsounds/Items/Coin2 /* 〃 */
+player/pickup/coin3 lsounds/Items/Coin3 /* 〃 */
 
-player/pickup/gem lsounds/Items/Gem // Fallout 4
+player/pickup/gem lsounds/Items/Gem /* Fallout 4 */
 
-player/pickup/material1 lsounds/Items/Material1 // Chronicles of Riddick
-player/pickup/material2 lsounds/Items/Material2 // 〃
-player/pickup/material3 lsounds/Items/Material3 // 〃
-player/pickup/material4 lsounds/Items/Material4 // 〃
+player/pickup/material1 lsounds/Items/Material1 /* Chronicles of Riddick */
+player/pickup/material2 lsounds/Items/Material2 /* 〃 */
+player/pickup/material3 lsounds/Items/Material3 /* 〃 */
+player/pickup/material4 lsounds/Items/Material4 /* 〃 */
 
 $random player/pickup/coin {
    player/pickup/coin1
@@ -105,9 +108,7 @@ $random player/pickup/redskull {
    player/pickup/redskull2
 }
 
-//
-// :V
-//
+/* :V */
 items/healthbonus1  lsounds/Items/bdup/DSHBON1
 items/healthbonus2  lsounds/Items/bdup/DSHBON2
 items/healthbonus3  lsounds/Items/bdup/DSHBON3
@@ -165,4 +166,4 @@ $random items/healthbonus {
    items/healthbonusrandom
 }
 
-// EOF
+/* EOF */

@@ -1,11 +1,18 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_player.h: Player data and functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Player data and functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if defined(LITH_X)
-// Shorthand and classes. For parsing and headers.
+/* Shorthand and classes. For parsing and headers. */
 LITH_X(pM, pcl_marine)
 LITH_X(pC, pcl_cybermage)
 LITH_X(pI, pcl_informant)
@@ -60,7 +67,7 @@ LITH_X(gR, pcl_robot)
       if(!P_None(p))
 #define P_Wep_CurType(p) ((p)->weapon.cur->info->type)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script void P_Init(struct player *p);
 script void P_Data_Load(struct player *p);
@@ -79,7 +86,7 @@ stkcall char const *P_Discrim(i32 pclass);
 stkcall void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 GDCC_HashMap_Decl(upgrademap_t, i32, struct upgrade)
 
@@ -105,50 +112,50 @@ enum
    gui_max
 };
 
-// Data that needs to be kept track of between frames.
+/* Data that needs to be kept track of between frames. */
 struct player_delta
 {
-   // Status
+   /* Status */
    k32 alpha;
    i96 score;
    u32 maxhealth;
    u32 indialogue;
 
-   // Position
+   /* Position */
    k32 x, y, z;
    k32 pitch, yaw, roll;
 
-   // Movement
+   /* Movement */
    k32 velx, vely, velz;
    k32 pitchv, yawv;
    k32 forwardv, sidev, upv;
    k32 speedmul;
    k32 jumpboost;
 
-   // Input
+   /* Input */
    i32  buttons;
    bool scopetoken;
    u32  frozen;
    u32  semifrozen;
 
-   // Attributes
+   /* Attributes */
    struct player_attributes attr;
 };
 
-//       7/4/2016: That's a lot of data!
-// edit  9/4/2016: Holy shit, that's really a lot of data!
-// edit  7/5/2016: JESUS TAKE THE WHEEL
-// edit  3/1/2017: help
-// edit  6/1/2017: there's so much data that I had to split it
-// edit 23/1/2017: D E S T R O Y
-// edit 26/2/2017: There is yet again so much data that I had to split it.
-// edit 11/3/2017: NOW WITH PROPERTY HELL
-// edit 11/7/2017: and now it's over 5000 bytes.
-// edit 14/7/2017: lol nevermind it's only 2kb now
-// edit 31/8/2017: m e r g e
+/*       7/4/2016: That's a lot of data! */
+/* edit  9/4/2016: Holy shit, that's really a lot of data! */
+/* edit  7/5/2016: JESUS TAKE THE WHEEL */
+/* edit  3/1/2017: help */
+/* edit  6/1/2017: there's so much data that I had to split it */
+/* edit 23/1/2017: D E S T R O Y */
+/* edit 26/2/2017: There is yet again so much data that I had to split it. */
+/* edit 11/3/2017: NOW WITH PROPERTY HELL */
+/* edit 11/7/2017: and now it's over 5000 bytes. */
+/* edit 14/7/2017: lol nevermind it's only 2kb now */
+/* edit 31/8/2017: m e r g e */
 struct player
 {
-   // data
+   /* data */
    __prop mana          {get:  PtrInvNum(->tid, so_MagicAmmo)}
    __prop manamax       {get:  ACS_GetMaxInventory(->tid, so_MagicAmmo)}
    __prop health        {get: GetPropI(->tid, APROP_Health),
@@ -161,7 +168,7 @@ struct player
    __prop waterlevel    {get: GetPropI(->tid, APROP_Waterlevel)}
    __prop classname     {get:  GetPropS(->tid, APROP_NameTag)}
 
-   // cvars
+   /* cvars */
    __prop getCVarI {call: ACS_GetUserCVar      (->num)}
    __prop getCVarK {call: ACS_GetUserCVarFixed (->num)}
    __prop getCVarS {call: ACS_GetUserCVarString(->num)}
@@ -169,22 +176,22 @@ struct player
    __prop setCVarK {call: ACS_SetUserCVarFixed (->num)}
    __prop setCVarS {call: ACS_SetUserCVarString(->num)}
 
-   // log
+   /* log */
    __prop logB {call: P_Log_Both(this)}
    __prop logF {call: P_Log_Full(this)}
    __prop logH {call: P_Log_HUDs(this)}
 
-   // upgrades
+   /* upgrades */
    __prop getUpgr       {call: P_Upg_GetNamed(this)}
    __prop getUpgrActive {call: P_Upg_IsActive(this)}
 
-   // Initialization
+   /* Initialization */
    bool wasinit;
    bool active;
    bool dead;
    bool reinit;
 
-   // Info
+   /* Info */
    i32 tid;
    i32 num;
    u64 ticks;
@@ -196,17 +203,17 @@ struct player
    i32 fun;
    char const *discrim;
 
-   // Deltas
+   /* Deltas */
    anonymous
    struct player_delta cur;
    struct player_delta old;
    i32 oldhealth;
    i32 oldmana;
 
-   // BIP
+   /* BIP */
    struct bip bip;
 
-   // Upgrades
+   /* Upgrades */
    struct upgr_data upgrdata;
    struct upgrade   upgrades[UPGR_STATIC_MAX];
    upgrademap_t     upgrademap;
@@ -214,7 +221,7 @@ struct player
    u32  upgrmax;
    bool upgrinit;
 
-   // Inventory
+   /* Inventory */
    struct container inv[8];
    struct container misc;
 
@@ -223,21 +230,21 @@ struct player
    bool         movitem;
    bool         invinit;
 
-   // HUD
+   /* HUD */
    bool hudenabled;
 
    list hudstrlist;
 
    struct loginfo log;
 
-   // Score
+   /* Score */
    i96 scoreaccum;
    str scoreaccumstr;
    i32 scoreaccumtime;
    k64 scoremul;
    k64 discount;
 
-   // Misc
+   /* Misc */
    k32 rage;
 
    char *notes[16];
@@ -245,42 +252,42 @@ struct player
    u32  nextstep;
    bool hadinfrared;
 
-   // Input
+   /* Input */
    char txtbuf[8];
    u32  tbptr;
 
-   // Static data
+   /* Static data */
    u32 spawnhealth;
    k32 jumpheight;
    k32 viewheight;
    str stepnoise;
 
-   // pitch/yaw in precalculated sane radian format
+   /* pitch/yaw in precalculated sane radian format */
    k64 pitchf;
    k64 yawf;
 
-   // Additive angles
+   /* Additive angles */
    k64 addpitch;
    k64 addyaw;
    k64 addroll;
 
-   // Damage bob angles
+   /* Damage bob angles */
    k64 bobpitch;
    k64 bobyaw;
 
-   // Extra angles
+   /* Extra angles */
    k64 extrpitch;
    k64 extryaw;
 
-   // View TIDs
+   /* View TIDs */
    i32 cameratid;
    i32 weathertid;
 
-   // GUI
+   /* GUI */
    u32 activegui;
    struct cbi cbi;
 
-   // Statistics
+   /* Statistics */
    u32 healthsum;
    u32 healthused;
 
@@ -296,22 +303,22 @@ struct player
    u32 itemsbought;
    u32 upgradesowned;
 
-   // Weapons
+   /* Weapons */
    struct weapondata weapon;
    str weaponclass;
 
    i32  riflefiremode;
    bool autoreload;
 
-   // Keys
+   /* Keys */
    bool krc, kyc, kbc;
    bool krs, kys, kbs;
 
-   // 🌌 「÷」 0
+   /* 🌌 「÷」 0 */
    bool sgacquired;
 };
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern struct player players[MAX_PLAYERS];
 

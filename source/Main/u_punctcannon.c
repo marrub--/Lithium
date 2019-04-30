@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_punctcannon.c: PunctCannon upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * PunctCannon upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
 #include <math.h>
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
@@ -16,7 +23,7 @@ void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
    InvGive(so_GTFO, 1);
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_PunctuatorFire")
 void Sc_PunctuatorFire(void)
@@ -59,4 +66,4 @@ void Sc_PunctuatorFire(void)
    }
 }
 
-// EOF
+/* EOF */

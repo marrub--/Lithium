@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_InventoryItem : Inventory abstract
 {
@@ -279,7 +284,7 @@ class Lith_CustomInventory : CustomInventory
    }
 }
 
-// IDOL: Inventory Dummies are Overly Luxurious
+/* IDOL: Inventory Dummies are Overly Luxurious */
 class Lith_IDOL : Inventory;
 
 default
@@ -323,4 +328,4 @@ bool Lith_Use(uint ip)
    return it.Lith_UseItem(owner);
 }
 
-// EOF
+/* EOF */

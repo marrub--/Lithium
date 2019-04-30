@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_draw.c: Legacy drawing functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Legacy drawing functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 
@@ -99,4 +106,4 @@ void HudMessage(char const *fmt, ...)
    ACS_MoreHudMessage();
 }
 
-// EOF
+/* EOF */

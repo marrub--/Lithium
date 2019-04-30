@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_magic.c: Magic upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Magic upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "w_world.h"
 
 #define UData UData_Magic(upgr)
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct magic_info {
    i32 st;
@@ -17,7 +24,7 @@ struct magic_info {
    char const *name;
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct magic_info const minf[] = {
    {-1,                130, 180, "Blade"   },
@@ -29,7 +36,7 @@ static struct magic_info const minf[] = {
    {cupg_c_slot7spell, 130, 100, "Cercle"  },
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 script
 static void GiveMagic(struct magic_info const *m)
@@ -118,7 +125,7 @@ static void SetMagicUI(struct player *p, bool on)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
@@ -177,7 +184,7 @@ void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
    ClearClip();
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_SetMagicUI")
 void Sc_SetMagicUI(bool on)
@@ -185,4 +192,4 @@ void Sc_SetMagicUI(bool on)
    with_player(LocalPlayer) SetMagicUI(p, on);
 }
 
-// EOF
+/* EOF */

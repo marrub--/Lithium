@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_types.h: Common type definitions and attribute macros.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Common type definitions and attribute macros.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef m_types_h
 #define m_types_h
@@ -31,7 +38,7 @@
 #define type(x)    [[__script(x)]]
 #define addr(x)    [[__address(x)]]
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 typedef int32_t i32;
 typedef int64_t i64;
@@ -57,7 +64,7 @@ struct i32v2 {i32 x, y;};
 
 union ik32 {int_k_t i; k32 k;};
 
-// Address Space Definitions -------------------------------------------------|
+/* Address Space Definitions ----------------------------------------------- */
 
 __addrdef extern __mod_arr lmvar;
 __addrdef extern __hub_arr lhvar;

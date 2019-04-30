@@ -1,18 +1,25 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_data.c: Data exposing functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Data exposing functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern bool dorain;
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_pdata)
 i32 Sc_LPData(i32 info, i32 permutation, bool target)
@@ -55,4 +62,4 @@ i32 Sc_LWData(i32 info)
    return 0;
 }
 
-// EOF
+/* EOF */

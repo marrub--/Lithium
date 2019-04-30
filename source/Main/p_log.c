@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_log.c: Log UI and logging functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Log UI and logging functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_log.h"
@@ -11,7 +18,7 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void LogV(i32 levl)
 {
@@ -45,7 +52,7 @@ static void LogF(struct player *p, struct logfdt *lf)
    Vec_Next(p->log.curmap->data) = *lf;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_Log_Both(struct player *p, i32 levl, char const *fmt, ...)
 {
@@ -201,7 +208,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_LogS")
 void Sc_Log(i32 levl, i32 type)
@@ -218,4 +225,4 @@ void Sc_Log(i32 levl, i32 type)
    }
 }
 
-// EOF
+/* EOF */

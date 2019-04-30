@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_cyberspace.c: Main Cyberspace handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Main Cyberspace handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -10,7 +17,7 @@
 #include "m_token.h"
 #include "m_tokbuf.h"
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_CSLoadMap")
 void Sc_CSLoadMap(void)
@@ -30,4 +37,4 @@ void Sc_CSLoadMap(void)
 }
 #endif
 
-// EOF
+/* EOF */

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Dummy : Actor
 {
@@ -22,10 +27,10 @@ class Lith_Dummy : Actor
    }
 }
 
-// Don't remove this, it is actually used for checking if this mod is loaded.
+/* Don't remove this, it is actually used for checking if this mod is loaded. */
 class Lith_GreyHam : HealthBonus
 {
-   //$Category "Health and Armor"
+   /*$Category "Health and Armor" */
 
    default
    {
@@ -57,4 +62,4 @@ class Lith_Bip : Actor
    }
 }
 
-// EOF
+/* EOF */

@@ -1,37 +1,44 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_adrenaline.c: Adrenaline upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Adrenaline upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
 #define UData UData_Adrenaline(upgr)
 #define CHARGE_MAX (35 * 30)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 {
-   // Charge
+   /* Charge */
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
 
-   // Prepare
+   /* Prepare */
    else if(!UData.readied)
    {
       ACS_PlaySound(0, ss_player_adren_ready, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
-      p->logH(1, "Adrenaline injector ready."); // TODO
+      p->logH(1, "Adrenaline injector ready."); /* TODO */
       UData.readied = true;
    }
 
-   // Ready to use
+   /* Ready to use */
    else if(ServCallI(sm_AdrenalineCheck))
    {
       UData.charge = UData.readied = 0;
 
-      p->logH(4, "Adrenaline administered."); // TODO
+      p->logH(4, "Adrenaline administered."); /* TODO */
       ACS_PlaySound(0, ss_player_adren_inj, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
       FadeFlash(255, 255, 255, 0.4, 0.6);
       InvGive(so_TimeHax2, 1);
@@ -60,5 +67,5 @@ void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
       0.8);
 }
 
-// EOF
+/* EOF */
 

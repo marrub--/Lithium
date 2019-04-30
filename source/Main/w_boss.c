@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_boss.c: Phantom and boss handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Phantom and boss handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct boss
 {
@@ -31,7 +38,7 @@ enum
    diff_max
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct boss bosses_easy[] = {
    {s"James",   2},
@@ -55,7 +62,7 @@ static i32 difficulty;
 static struct boss *lastboss;
 static i96 scorethreshold = 1000000;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void SpawnBossReward(void)
 {
@@ -111,7 +118,7 @@ static bool CheckDead(struct boss *b, i32 num)
    return true;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void SpawnBosses(i96 sum, bool force)
@@ -145,7 +152,7 @@ void SpawnBosses(i96 sum, bool force)
    TriggerBoss();
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_PhantomSound")
 void Sc_PhantomSound(void)
@@ -173,7 +180,7 @@ void Sc_PhantomDeath(void)
 
    if(boss->phase == boss->phasenum)
    {
-      // Death
+      /* Death */
       ACS_AmbientSound(ss_player_death1, 127);
       ACS_Delay(35);
       InvGive(so_PlayerDeath, 1);
@@ -187,7 +194,7 @@ void Sc_PhantomDeath(void)
    }
    else
    {
-      // Escape
+      /* Escape */
       ACS_AmbientSound(ss_enemies_phantom_escape, 127);
       ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
@@ -243,4 +250,4 @@ void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
 }
 #endif
 
-// EOF
+/* EOF */

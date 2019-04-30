@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_goldeneye.c: Goldeneye upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Goldeneye upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Goldeneye_Update(struct player *p, struct upgrade *upgr)
@@ -19,4 +26,4 @@ void Upgr_Goldeneye_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-// EOF
+/* EOF */

@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting
+/* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
 class Lith_HERMES : EventHandler;
 
 play string m_LogName;
@@ -19,4 +24,4 @@ static void SetEnding(string ending)
 static clearscope Lith_HERMES Instance()
    {return Lith_HERMES(Find("Lith_HERMES"));}
 
-// EOF
+/* EOF */

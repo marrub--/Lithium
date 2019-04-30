@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_ArchvileFire : ArchvileFire replaces ArchvileFire
 {
@@ -111,7 +116,7 @@ Missile:
    VILE IJKLM 8 bright A_FaceTarget;
    VILE N 0 bright {
       if(Target && CheckSight(Target))
-         {} // TODO
+         {} /* TODO */
    }
    VILE N 8 bright A_FaceTarget;
    VILE N 0 bright {
@@ -151,4 +156,4 @@ Crash.Extreme:
    stop;
 }
 
-// EOF
+/* EOF */

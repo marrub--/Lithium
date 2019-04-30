@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_weapons.c: Weapon information handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Weapon information handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "p_player.h"
@@ -10,7 +17,7 @@
 #include "w_world.h"
 #include "p_hudid.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void GiveWeaponItem(i32 parm, i32 slot)
 {
@@ -57,7 +64,7 @@ static void PickupScore(struct player *p, i32 parm)
    P_Log_SellWeapon(p, info, score);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void Wep_GInit(void)
 {
@@ -68,7 +75,7 @@ void Wep_GInit(void)
    }
 }
 
-// Update information on what weapons we have.
+/* Update information on what weapons we have. */
 script
 void P_Wep_PTickPre(struct player *p)
 {
@@ -76,11 +83,11 @@ void P_Wep_PTickPre(struct player *p)
 
    w->prev = w->cur;
 
-   // Reset data temporarily.
+   /* Reset data temporarily. */
    w->cur = nil;
    for(i32 i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
 
-   // Iterate over each weapon setting information on it.
+   /* Iterate over each weapon setting information on it. */
    for(i32 i = weapon_min; i < weapon_max; i++)
    {
       struct weaponinfo const *info = &weaponinfo[i];
@@ -91,7 +98,7 @@ void P_Wep_PTickPre(struct player *p)
 
       w->slot[info->slot] += wep->owned;
 
-      // Check for currently held weapon.
+      /* Check for currently held weapon. */
       if(!w->cur && p->weaponclass == info->classname)
          w->cur = wep;
 
@@ -99,7 +106,7 @@ void P_Wep_PTickPre(struct player *p)
       wep->ammotype  = info->defammotype;
       wep->ammoclass = info->defammoclass;
 
-      // Special exceptions.
+      /* Special exceptions. */
       switch(i) {
       case weapon_shotgun: if(p->getUpgrActive(UPGR_GaussShotty)) wep->ammotype = AT_NMag; break;
       case weapon_c_spas:  if(p->getUpgrActive(UPGR_SPAS_B))      wep->ammotype = AT_Ammo; break;
@@ -108,7 +115,7 @@ void P_Wep_PTickPre(struct player *p)
 
       switch(i)
       {
-      // For slot 3 weapons that don't take ammo, check if they should.
+      /* For slot 3 weapons that don't take ammo, check if they should. */
       case weapon_shotgun:
       case weapon_c_rifle:
          if(p->getCVarI(sc_weapons_slot3ammo)) {
@@ -117,7 +124,7 @@ void P_Wep_PTickPre(struct player *p)
          }
       }
 
-      // Set magazine and ammo counts.
+      /* Set magazine and ammo counts. */
       if(w->cur == wep)
       {
          if(wep->ammotype & AT_NMag)
@@ -133,7 +140,7 @@ void P_Wep_PTickPre(struct player *p)
          }
       }
 
-      // Auto-reload.
+      /* Auto-reload. */
       if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
       {
          if(wep->autoreload >= 35 * 3)
@@ -191,7 +198,7 @@ void P_Wep_PTick(struct player *p)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_WeaponPickup")
 bool Sc_WeaponPickup(i32 name)
@@ -376,4 +383,4 @@ void Sc_RecoilUp(k32 amount)
 }
 #endif
 
-// EOF
+/* EOF */

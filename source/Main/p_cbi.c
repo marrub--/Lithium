@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_cbi.c: Main CBI GUI entry point.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Main CBI GUI entry point.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -14,7 +21,7 @@
 
 #define Themes(X) \
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void P_CBI_TabArsenal(struct gui_state *g, struct player *p)
 {
@@ -70,7 +77,7 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 char const *ThemeName(u32 num)
 {
@@ -167,7 +174,7 @@ void P_CBI_PMinit(struct player *p)
    p->bip.curpage = nil;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") type("net") addr("Lith_KeyOpenCBI")
 void Sc_OpenCBI(void)
@@ -176,4 +183,4 @@ void Sc_OpenCBI(void)
    with_player(LocalPlayer) P_GUI_Use(p, gui_cbi);
 }
 
-// EOF
+/* EOF */

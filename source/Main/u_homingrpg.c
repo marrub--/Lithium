@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_homingrpg.c: HomingRPG upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * HomingRPG upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "w_world.h"
 
 #define UData UData_HomingRPG(upgr)
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 script
 static i32 CheckTarget(struct player *p)
@@ -20,7 +27,7 @@ static i32 CheckTarget(struct player *p)
       return 0;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
@@ -43,7 +50,7 @@ void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_HomingMissile")
 void Sc_HomingMissile(void)
@@ -52,4 +59,4 @@ void Sc_HomingMissile(void)
    ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
 }
 
-// EOF
+/* EOF */

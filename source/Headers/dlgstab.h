@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// dlgstab.h: Dialogue string table.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Dialogue string table.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 Str(NULL, "")
 Str(class, "class")
@@ -21,4 +28,4 @@ Str(unfinished, "unfinished")
 
 #undef Str
 
-// EOF
+/* EOF */

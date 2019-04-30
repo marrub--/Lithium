@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// AAGH: Armors Are Goddamn Heavy
+/* AAGH: Armors Are Goddamn Heavy */
 class Lith_AAGH : Inventory
 {
    default
@@ -43,7 +48,7 @@ class Lith_AAGH : Inventory
          o.Lith_Unlink();
          m_Slotted[slot] = o;
 
-//       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName());
+/*       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName()); */
 
          return true;
       }
@@ -64,7 +69,7 @@ class Lith_AAGH : Inventory
          {
             m_Slotted[slot] = null;
 
-//          Console.printf("%p: removed: %i", self, slot);
+/*          Console.printf("%p: removed: %i", self, slot); */
          }
          else
             return false;
@@ -91,7 +96,7 @@ class Lith_AAGH : Inventory
       if(damage - save < 1) newdamage = 1;
       else                  newdamage = damage - save;
 
-//    Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage);
+/*    Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage); */
    }
 }
 
@@ -171,4 +176,4 @@ class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor
    }
 }
 
-// EOF
+/* EOF */

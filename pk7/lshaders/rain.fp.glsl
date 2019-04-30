@@ -1,7 +1,12 @@
-// stolen from:
-// "The Drive Home" by Martijn Steinrucken aka BigWings - 2017
-// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-// thank you!
+/* ---------------------------------------------------------------------------|
+ *
+ * stolen from:
+ * "The Drive Home" by Martijn Steinrucken aka BigWings - 2017
+ * License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
 #define S(x, y, z) smoothstep(x, y, z)
 vec3 N31(float p) {
    vec3 p3 = fract(vec3(p) * vec3(.1031,.11369,.13787));
@@ -62,4 +67,4 @@ void main() {
    uv += offs*lith_m;
    FragColor = texture(InputTexture, uv + vec2(dFdx(v), dFdy(v)), 3. / (v + 1.));
 }
-// EOF
+/* EOF */

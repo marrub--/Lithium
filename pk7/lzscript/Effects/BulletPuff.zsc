@@ -1,7 +1,12 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson, Ryan Cordell and Xaser. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-// Taken from Psychic and Enblanco with permission.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson, Ryan Cordell and Xaser. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
 
 class Lith_PuffSmoke : Actor
 {
@@ -267,4 +272,4 @@ PuffMirroredAlt:
    goto PuffMirroredEnd;
 }
 
-// EOF
+/* EOF */

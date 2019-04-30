@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// debug.c: Debugging functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Debugging functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -11,12 +18,12 @@
 #include <stdio.h>
 #include <GDCC.h>
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 str dbgstat[64], dbgnote[64];
 i32 dbgstatnum,  dbgnotenum;
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void Dbg_Stat_Impl(char const *fmt, ...)
 {
@@ -83,7 +90,7 @@ void Log(char const *fmt, ...)
    ACS_EndLog();
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_GiveEXPToMonster")
 void Sc_GiveEXPToMonster(i32 amt)
@@ -146,4 +153,4 @@ i32 Sc_GetFun(void)
    return 0;
 }
 
-// EOF
+/* EOF */

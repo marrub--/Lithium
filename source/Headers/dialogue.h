@@ -1,24 +1,31 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// dialogue.h: Dialogue VM code data.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Dialogue VM code data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifdef DCD
-// VM state
+/* VM state */
 DCD(NOP)
 DCD(HLT)
 
-// Stack
+/* Stack */
 DCD(PHA)
 DCD(PLA)
 
-// Load
+/* Load */
 DCD(LDA)
 DCD(LDX)
 DCD(LDY)
 
-// Transfer
+/* Transfer */
 DCD(TAX)
 DCD(TAY)
 DCD(TSX)
@@ -26,7 +33,7 @@ DCD(TXA)
 DCD(TXS)
 DCD(TYA)
 
-// Arithmetic
+/* Arithmetic */
 #define ArithSet(sfx) \
    DCD(ADD##sfx) \
    DCD(SUB##sfx) \
@@ -41,26 +48,26 @@ DCD(TYA)
 ArithSet(I)
 #undef ArithSet
 
-// Jumps
+/* Jumps */
 DCD(JPAGE)
 DCD(JMP)
 DCD(JNZ)
 DCD(JNITEM)
 DCD(JNCLASS)
 
-// Interaction
+/* Interaction */
 DCD(SCRIPTI)
 DCD(SCRIPTS)
 DCD(TELEPORT_INTRALEVEL)
 DCD(TELEPORT_INTERLEVEL)
 
-// Debugging
+/* Debugging */
 DCD(TRA)
 DCD(TRX)
 DCD(TRY)
 DCD(TRZ)
 
-// Shared
+/* Shared */
 DCD(SETSTRING)
 DCD(SETTEXT)
 DCD(SETTEXTLOCAL)
@@ -69,11 +76,11 @@ DCD(ADDTEXTLOCAL)
 DCD(CONCAT)
 DCD(CONCATEND)
 
-// Dialogue
+/* Dialogue */
 DCD(PUTOPT)
 DCD(DLGWAIT)
 
-// Terminal
+/* Terminal */
 DCD(LOGON)
 DCD(LOGOFF)
 DCD(INFO)
@@ -86,7 +93,7 @@ DCD(TRMWAIT)
 #include "w_world.h"
 #include "m_vec.h"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum
 {

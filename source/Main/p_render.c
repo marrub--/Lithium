@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_render.c: Miscellaneous player effects.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Miscellaneous player effects.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -10,7 +17,7 @@
 
 #include <math.h>
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 static void ScopeC(struct player *p)
@@ -119,7 +126,7 @@ static void ItemFx(struct player *p)
 }
 #endif
 
-// Update view bobbing when you get damaged.
+/* Update view bobbing when you get damaged. */
 stkcall
 static void DamageBob(struct player *p)
 {
@@ -146,7 +153,7 @@ static void DamageBob(struct player *p)
    if(p->bobyaw  ) p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
 }
 
-// Update additive view.
+/* Update additive view. */
 stkcall
 static void View(struct player *p)
 {
@@ -236,7 +243,7 @@ static void Levelup(struct player *p)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void P_Ren_PTickPst(struct player *p)
@@ -255,7 +262,7 @@ void P_Ren_PTickPst(struct player *p)
    DebugStats(p);
 }
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 static void StringStack(struct player *p)
@@ -291,20 +298,20 @@ static void Waves(struct player *p)
 
    ACS_SetHudSize(320, 200);
 
-   // Sine (health)
+   /* Sine (health) */
    i32 pos = (10 + timer) % 160;
    DrawSpriteFade(fs[frame - 1], hid_scope_sineS - pos, 300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0), 25.1 + pos, 2, 0.6);
 
-   // Square
+   /* Square */
    k32 a = ACS_Cos(pos / 32.0);
 
    pos = (7 + timer) % 160;
    DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, hid_scope_squareS - pos, 300.1 + (a >= 0) * 7.0, 25.1 + pos, 2, 0.6);
 
-   // Triangle
+   /* Triangle */
    pos = (5 + timer) % 160;
    DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs(pos % 16 - 8), 25.1 + pos, 2, 0.6);
 }
 #endif
 
-// EOF
+/* EOF */

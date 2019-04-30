@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_headsupdisp.c: HeadsUpDisp upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * HeadsUpDisp upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "p_hud.h"
 
 #define UData UData_HeadsUpDisp(upgr)
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 static void HUD_Ammo(struct player *p)
@@ -117,7 +124,7 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 }
 #endif
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_HeadsUpDisp_Activate(struct player *p, struct upgrade *upgr)
@@ -147,10 +154,10 @@ void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
 
    HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, s"k", 282, 237);
 
-   // Status
+   /* Status */
    HUD_Ammo(p);
    HUD_Health(p, upgr);
    #endif
 }
 
-// EOF
+/* EOF */

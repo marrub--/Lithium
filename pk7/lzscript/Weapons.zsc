@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "lzscript/Weapons/1_ChargeFist.zsc"
 #include "lzscript/Weapons/5_MissileLauncher.zsc"
@@ -43,9 +48,9 @@ property ScopeOutSound: m_ScopeOutSnd;
 property ScopeInSound:  m_ScopeInSnd;
 property ScopeZoom:     m_ScopeZoom;
 
-// These flags are used for spawning pickup actors.
-// UDMF maps have a surprising amount of control over things, so we have
-// to use a load of flags to make this work properly.
+/* These flags are used for spawning pickup actors. */
+/* UDMF maps have a surprising amount of control over things, so we have */
+/* to use a load of flags to make this work properly. */
 const Lith_PF =
    SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
    SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
@@ -219,4 +224,4 @@ DummyFlash:
    stop;
 }
 
-// EOF
+/* EOF */

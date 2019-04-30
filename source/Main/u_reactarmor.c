@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_reactarmor.c: ReactArmor upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * ReactArmor upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
 #define UData UData_ReactArmor(upgr)
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct {char const *abbr, *full;} const ArmorNames[] = {
    "BUL", "Bullets",
@@ -22,7 +29,7 @@ static struct {char const *abbr, *full;} const ArmorNames[] = {
    "HZD", "Hazard",
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void RA_Take(i32 n)
 {
@@ -41,7 +48,7 @@ static void RA_Give(char const *name, i32 n)
    InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
@@ -64,7 +71,7 @@ void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_RA_Give")
 void Sc_GiveRA(i32 num)
@@ -87,7 +94,7 @@ void Sc_GiveRA(i32 num)
 
          ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
 
-         p->logH(3, "Activating Armor->%s()", name); // TODO
+         p->logH(3, "Activating Armor->%s()", name); /* TODO */
 
          if(p->getUpgrActive(UPGR_ReactArmor2)) RA_Give(name, 2);
          else                                   RA_Give(name, 1);
@@ -95,4 +102,4 @@ void Sc_GiveRA(i32 num)
    }
 }
 
-// EOF
+/* EOF */

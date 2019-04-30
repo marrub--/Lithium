@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 user bool dtap_hud_showscore    = true;
 user bool dtap_hud_showlvl      = false;
@@ -22,7 +27,7 @@ user bool dtap_scanner_slide   = true;
 user bool dtap_scanner_bar     = true;
 user int  dtap_scanner_xoffs   = 0;
 user int  dtap_scanner_yoffs   = 0;
-user int  dtap_scanner_color   = 106; // 'j'
+user int  dtap_scanner_color   = 106; /* 'j' */
 user bool dtap_scanner_altfont = false;
 
-// EOF
+/* EOF */

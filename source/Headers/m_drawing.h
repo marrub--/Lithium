@@ -1,10 +1,17 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Drawing functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// m_drawing.h: Drawing functions.
-
-// Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid.
+/* Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid. */
 #define TS 0.029
 
 #define PrintSprite(name, x, xa, y, ya) \
@@ -138,9 +145,9 @@
 
 enum
 {
-   font_misaki_gothic, // 美咲ゴシック
-   font_misaki_mincho, // 美咲明朝
-   font_jfdot_gothic,  // JFドットk6x8
+   font_misaki_gothic, /* 美咲ゴシック */
+   font_misaki_mincho, /* 美咲明朝 */
+   font_jfdot_gothic,  /* JFドットk6x8 */
    font_num,
 };
 
@@ -153,4 +160,4 @@ stkcall void DrawSpriteAlpha(str name, i32 id, k32 x, k32 y, k32 hold, k32 alpha
 stkcall void DrawSpriteFade(str name, i32 id, k32 x, k32 y, k32 hold, k32 fadetime);
 void HudMessage(char const *fmt, ...);
 
-// EOF
+/* EOF */

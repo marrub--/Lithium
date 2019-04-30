@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_BossFucker : Inventory
 {
@@ -36,7 +41,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 {
    let b = Lith_Phantom(Actor.Spawn(name, a.Pos));
 
-   // copy info
+   /* copy info */
    b.Angle      = a.Angle;
    b.Args[0]    = a.Args[0];
    b.Args[1]    = a.Args[1];
@@ -64,7 +69,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 
    b.Health += a.Health / 2;
 
-   // delete it if it's not a boss, otherwise prepare for omega hack
+   /* delete it if it's not a boss, otherwise prepare for omega hack */
    if(!a.bBOSS && !a.bBOSSDEATH)
    {
       a.ClearCounters();
@@ -72,11 +77,11 @@ static void SpawnBoss(Actor a, string name, int phase)
    }
    else
    {
-      // great, it's going to screw everything up, let's "fix" that:
-      // we shut them up, banish them to the shadow realm, remove them from
-      // the world, lobotomize them and make them into a zombie. morbid...
+      /* great, it's going to screw everything up, let's "fix" that: */
+      /* we shut them up, banish them to the shadow realm, remove them from */
+      /* the world, lobotomize them and make them into a zombie. morbid... */
       for(int i = 1; i < 8; i++) a.A_StopSound(i);
-      a.SetXYZ((65535, 65535, 0)); // Banish.
+      a.SetXYZ((65535, 65535, 0)); /* Banish. */
       a.RemoveFromHash();
       a.Tics = -1;
       a.Tracer = b;
@@ -116,4 +121,4 @@ static void TriggerBoss()
    }
 }
 
-// EOF
+/* EOF */

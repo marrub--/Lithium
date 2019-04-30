@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_player.c: Player entry points.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Player entry points.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -12,23 +19,23 @@
 
 #include <limits.h>
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 noinit struct player players[MAX_PLAYERS];
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct {str on, off;} guisnd[gui_max - 1] = {
    {s"player/cbi/open", s"player/cbi/close"},
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 script static void P_BossWarning(struct player *p);
 #endif
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script type("enter")
 static void Sc_PlayerEntry(void)
@@ -74,25 +81,25 @@ reinit:
 
       P_Dat_PTickPre(p);
 
-      // Check for resurrect.
+      /* Check for resurrect. */
       if(p->health > 0 && p->dead)
          p->reinit = true;
 
-      // These can be changed any time, so save them here.
+      /* These can be changed any time, so save them here. */
       struct player_delta olddelta = p->cur;
       i32 oldhealth = p->health;
       i32 oldmana   = p->mana;
 
-      // Pre-tick
+      /* Pre-tick */
       #if LITHIUM
-      P_Wep_PTickPre(p); // Update weapon info
+      P_Wep_PTickPre(p); /* Update weapon info */
       #endif
-      P_Scr_PTickPre(p); // Update score
+      P_Scr_PTickPre(p); /* Update score */
 
       if(!p->dead) P_Upg_PTick(p);
       P_Upg_PTickPst(p);
 
-      // Tick
+      /* Tick */
       if(!p->dead)
       {
          #if LITHIUM
@@ -108,20 +115,20 @@ reinit:
          #endif
          P_Log_PTick(p);
 
-         P_Dat_PTickPst(p); // Update engine info
+         P_Dat_PTickPst(p); /* Update engine info */
 
          if(world.pauseinmenus) ServCallI(sm_PauseTick, p->num);
       }
 
-      // Post-tick
+      /* Post-tick */
       P_Ren_PTickPst(p);
 
-      // Update view (extra precision is required here to ensure accuracy)
+      /* Update view (extra precision is required here to ensure accuracy) */
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)p->addpitch);
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (f32)p->addyaw);
       ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (f32)p->addroll);
 
-      // Tic passes
+      /* Tic passes */
       ACS_Delay(1);
 
       #if LITHIUM
@@ -134,17 +141,17 @@ reinit:
       }
       #endif
 
-      // Update previous-tic values
+      /* Update previous-tic values */
       p->old       = olddelta;
       p->oldhealth = oldhealth;
       p->oldmana   = oldmana;
 
-      // Reset view for next tic
+      /* Reset view for next tic */
       ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (f32)p->addpitch);
       ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (f32)p->addyaw);
       ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)p->addroll);
 
-      // If the map changes this we need to make sure it's still correct.
+      /* If the map changes this we need to make sure it's still correct. */
       P_ValidateTID(p);
 
       p->ticks++;
@@ -161,7 +168,7 @@ static void Sc_PlayerDeath(void)
    P_Upg_PDeinit(p);
 
    #if LITHIUM
-   // unfortunately, we can't keep anything even when we want to
+   /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit(p);
    #endif
 
@@ -220,7 +227,7 @@ static void Sc_PlayerDisconnect(void)
    memset(p, 0, sizeof *p);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 #define upgrademap_t_GetKey(o) ((o)->info->key)
 #define upgrademap_t_GetNext(o) (&(o)->next)
@@ -317,7 +324,7 @@ void P_GUI_Use(struct player *p, i32 type)
 
 i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
 {
-   // Could cause division by zero
+   /* Could cause division by zero */
    if(score == 0)
       return 0;
 
@@ -327,16 +334,16 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
       score *= world.scoremul;
    }
 
-   // Get a multiplier for the score accumulator and sound volume
+   /* Get a multiplier for the score accumulator and sound volume */
    k64 mul = minmax(score, 0, 15000) / 15000.0lk;
            mul = minmax(mul, 0.1lk, 1.0lk);
    k64 vol = 0.7lk * mul;
 
-   // Play a sound when we pick up score
+   /* Play a sound when we pick up score */
    if(vol > 0.001lk && p->getCVarI(sc_player_scoresound))
       ACS_PlaySound(p->cameratid, ss_player_score, CHAN_ITEM, vol, false, ATTN_STATIC);
 
-   // hue
+   /* hue */
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
       p->logB(1, "You gained brouzouf.");
@@ -347,13 +354,13 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
       ACS_SpawnForced(so_EXPLOOOSION, p->x, p->y, p->z);
    }
 
-   // Add score and set score accumulator
+   /* Add score and set score accumulator */
    p->score          += score;
    p->scoresum       += score;
    p->scoreaccum     += score;
    p->scoreaccumtime += 20 * (mul * 2.0lk);
 
-   // Log score
+   /* Log score */
    if(p->getCVarI(sc_player_scorelog))
       p->logH(1, "+\Cj%lli\Cnscr", score);
 
@@ -375,7 +382,7 @@ void P_Scr_Take(struct player *p, i96 score)
    p->scoreaccumtime = 0;
 }
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 script
@@ -448,7 +455,7 @@ static void P_Scr_PTickPre(struct player *p)
    else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_drawplayericon)
 void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
@@ -485,4 +492,4 @@ void Sc_Glare(void)
    }
 }
 
-// EOF
+/* EOF */

@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_bip.c: Info page handling and loading.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Info page handling and loading.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -12,7 +19,7 @@
 #include "m_file.h"
 #include "m_tokbuf.h"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct page_init
 {
@@ -22,7 +29,7 @@ struct page_init
    bool          isfree;
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static str DecryptBody(char __str_ars const *s)
 {
@@ -66,7 +73,7 @@ static void AddToBIP(struct player *p, i32 categ, struct page_init const *pinit,
    ListCtor(&page->link, page);
    page->link.link(&bip->infogr[categ]);
 
-   // we have to pass along the player's class so discriminators don't fuck up
+   /* we have to pass along the player's class so discriminators don't fuck up */
    if(isfree) UnlockPage(p, page);
 }
 
@@ -134,18 +141,18 @@ static i32 LoadBIPInfo(struct player *p, str fname)
    case tok_lnend:
       continue;
    case tok_at:
-      // @ Include
+      /* @ Include */
       tok = tb.get();
       total += LoadBIPInfo(p, TokStr(tok));
       break;
    case tok_xor:
-      // ^ Category [*]
+      /* ^ Category [*] */
       tok = tb.get();
       categ = CatFromStr(TokStr(tok));
       catfree = tb.drop(tok_mul);
       break;
    case tok_identi:
-      // Classes... Name [*] [-> Unlocks...]
+      /* Classes... Name [*] [-> Unlocks...] */
       tok = AddPage(p, &tb, tok, categ, catfree);
       total++;
       break;
@@ -164,7 +171,7 @@ static struct page *FindPage(struct bip *bip, char const *name)
    return nil;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void P_BIP_PInit(struct player *p)
@@ -188,14 +195,14 @@ void P_BIP_PInit(struct player *p)
 script
 void P_BIP_GiveMail(struct player *p, str title, i32 flags)
 {
-   // Note: Due to the way this code works, if you switch languages at runtime,
-   // mail won't be updated. I provide a lore answer (excuse) for this: When
-   // you switch languages, it switches the preferred translation service for
-   // delivered mail, but it's done when the mail is delivered due to a bug in
-   // the BIP software. All of the mail in the game is delivered to the player
-   // in Sce, a south-eastern sector language, but the player themself can't
-   // read this language and so it is translated for them into the actual
-   // language that the person behind the screen reads.
+   /* Note: Due to the way this code works, if you switch languages at runtime, */
+   /* mail won't be updated. I provide a lore answer (excuse) for this: When */
+   /* you switch languages, it switches the preferred translation service for */
+   /* delivered mail, but it's done when the mail is delivered due to a bug in */
+   /* the BIP software. All of the mail in the game is delivered to the player */
+   /* in Sce, a south-eastern sector language, but the player themself can't */
+   /* read this language and so it is translated for them into the actual */
+   /* language that the person behind the screen reads. */
 
    p->setActivator();
 
@@ -309,7 +316,7 @@ struct page_info PageInfo(struct page const *page)
    return pinf;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_BIPUnlock")
 void Sc_UnlockPage(i32 pnum)
@@ -321,4 +328,4 @@ void Sc_UnlockPage(i32 pnum)
    }
 }
 
-// EOF
+/* EOF */

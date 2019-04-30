@@ -1,24 +1,27 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Charge Fist
-//
-weapons/cfist/pickup    lsounds/Weapons/ChargeFist/Pickup    // Halo 3
-weapons/cfist/fire1     lsounds/Weapons/ChargeFist/Fire1     // 〃
-weapons/cfist/fire2     lsounds/Weapons/ChargeFist/Fire2     // 〃
-weapons/cfist/fire3     lsounds/Weapons/ChargeFist/Fire3     // 〃
-weapons/cfist/ready     lsounds/Weapons/ChargeFist/Ready     // 〃
-weapons/cfist/charge    lsounds/Weapons/ChargeFist/Charge    // Fallout 4, Halo 3
-weapons/cfist/chargeend lsounds/Weapons/ChargeFist/ChargeEnd // Fallout 4
-weapons/cfist/hit1      lsounds/Weapons/ChargeFist/HitFlesh1 // Shadow Complex
-weapons/cfist/hit2      lsounds/Weapons/ChargeFist/HitFlesh2 // 〃
-weapons/cfist/hit3      lsounds/Weapons/ChargeFist/HitFlesh3 // 〃
-weapons/cfist/hitwall1  lsounds/Weapons/ChargeFist/HitWall1  // 〃
-weapons/cfist/hitwall2  lsounds/Weapons/ChargeFist/HitWall2  // 〃
-weapons/cfist/hitwall3  lsounds/Weapons/ChargeFist/HitWall3  // 〃
-weapons/cfist/hitwall4  lsounds/Weapons/ChargeFist/HitWall4  // 〃
+/* Charge Fist */
+weapons/cfist/pickup    lsounds/Weapons/ChargeFist/Pickup    /* Halo 3 */
+weapons/cfist/fire1     lsounds/Weapons/ChargeFist/Fire1     /* 〃 */
+weapons/cfist/fire2     lsounds/Weapons/ChargeFist/Fire2     /* 〃 */
+weapons/cfist/fire3     lsounds/Weapons/ChargeFist/Fire3     /* 〃 */
+weapons/cfist/ready     lsounds/Weapons/ChargeFist/Ready     /* 〃 */
+weapons/cfist/charge    lsounds/Weapons/ChargeFist/Charge    /* Fallout 4, Halo 3 */
+weapons/cfist/chargeend lsounds/Weapons/ChargeFist/ChargeEnd /* Fallout 4 */
+weapons/cfist/hit1      lsounds/Weapons/ChargeFist/HitFlesh1 /* Shadow Complex */
+weapons/cfist/hit2      lsounds/Weapons/ChargeFist/HitFlesh2 /* 〃 */
+weapons/cfist/hit3      lsounds/Weapons/ChargeFist/HitFlesh3 /* 〃 */
+weapons/cfist/hitwall1  lsounds/Weapons/ChargeFist/HitWall1  /* 〃 */
+weapons/cfist/hitwall2  lsounds/Weapons/ChargeFist/HitWall2  /* 〃 */
+weapons/cfist/hitwall3  lsounds/Weapons/ChargeFist/HitWall3  /* 〃 */
+weapons/cfist/hitwall4  lsounds/Weapons/ChargeFist/HitWall4  /* 〃 */
 
 $random weapons/cfist/hit {
    weapons/cfist/hit1
@@ -43,29 +46,25 @@ $limit weapons/cfist/fire 0
 $limit weapons/cfist/hit 0
 $limit weapons/cfist/hitwall 0
 
-//
-// Missile Launcher
-//
-weapons/missile/fire      lsounds/Weapons/MissileLauncher/Fire      // FEAR
-weapons/missile/empty     lsounds/Weapons/MissileLauncher/FireEmpty // 〃
-weapons/missile/reloadout lsounds/Weapons/MissileLauncher/ReloadOut // 〃
-weapons/missile/reloadin  lsounds/Weapons/MissileLauncher/ReloadIn  // 〃
-weapons/missile/draw      lsounds/Weapons/MissileLauncher/Draw      // Halo 3, Doom 3
-weapons/missile/explode   lsounds/Weapons/MissileLauncher/Explode   // ???
+/* Missile Launcher */
+weapons/missile/fire      lsounds/Weapons/MissileLauncher/Fire      /* FEAR */
+weapons/missile/empty     lsounds/Weapons/MissileLauncher/FireEmpty /* 〃 */
+weapons/missile/reloadout lsounds/Weapons/MissileLauncher/ReloadOut /* 〃 */
+weapons/missile/reloadin  lsounds/Weapons/MissileLauncher/ReloadIn  /* 〃 */
+weapons/missile/draw      lsounds/Weapons/MissileLauncher/Draw      /* Halo 3, Doom 3 */
+weapons/missile/explode   lsounds/Weapons/MissileLauncher/Explode   /* ??? */
 $limit weapons/missile/explode 0
 
-//
-// Plasma Rifle
-//
-weapons/plasma/fire    lsounds/WeaponsM/PlasmaRifle/Fire      // Devil May Cry 3
-weapons/plasma/altfire lsounds/WeaponsM/PlasmaRifle/AltFire   // 〃
-weapons/plasma/pickup  lsounds/WeaponsM/PlasmaRifle/Pickup    // Alliance of Valiant Arms
-weapons/plasma/empty   lsounds/WeaponsM/PlasmaRifle/FireEmpty // Killing Floor
-weapons/plasma/draw    lsounds/WeaponsM/PlasmaRifle/Draw      // FEAR
+/* Plasma Rifle */
+weapons/plasma/fire    lsounds/WeaponsM/PlasmaRifle/Fire      /* Devil May Cry 3 */
+weapons/plasma/altfire lsounds/WeaponsM/PlasmaRifle/AltFire   /* 〃 */
+weapons/plasma/pickup  lsounds/WeaponsM/PlasmaRifle/Pickup    /* Alliance of Valiant Arms */
+weapons/plasma/empty   lsounds/WeaponsM/PlasmaRifle/FireEmpty /* Killing Floor */
+weapons/plasma/draw    lsounds/WeaponsM/PlasmaRifle/Draw      /* FEAR */
 
-weapons/plasma/explode1 lsounds/WeaponsM/PlasmaRifle/Explode1 // Devil May Cry 3
-weapons/plasma/explode2 lsounds/WeaponsM/PlasmaRifle/Explode2 // 〃
-weapons/plasma/explode3 lsounds/WeaponsM/PlasmaRifle/Explode3 // 〃
+weapons/plasma/explode1 lsounds/WeaponsM/PlasmaRifle/Explode1 /* Devil May Cry 3 */
+weapons/plasma/explode2 lsounds/WeaponsM/PlasmaRifle/Explode2 /* 〃 */
+weapons/plasma/explode3 lsounds/WeaponsM/PlasmaRifle/Explode3 /* 〃 */
 
 $random weapons/plasma/explode {
    weapons/plasma/explode1
@@ -73,31 +72,29 @@ $random weapons/plasma/explode {
    weapons/plasma/explode3
 }
 
-weapons/plasma/laser/fire_start lsounds/WeaponsM/PlasmaRifle/Laser/FireStart // Unreal Tournament '99
-weapons/plasma/laser/fire_hum   lsounds/WeaponsM/PlasmaRifle/Laser/FireHum   // 〃
-weapons/plasma/laser/fire_loop  lsounds/WeaponsM/PlasmaRifle/Laser/FireLoop  // Touhou 9: Phantasmagoria of Flower View
-weapons/plasma/laser/fire_end   lsounds/WeaponsM/PlasmaRifle/Laser/FireEnd   // Quake
-weapons/plasma/laser/spark      lsounds/WeaponsM/PlasmaRifle/Laser/Spark     // Fallout 4
+weapons/plasma/laser/fire_start lsounds/WeaponsM/PlasmaRifle/Laser/FireStart /* Unreal Tournament '99 */
+weapons/plasma/laser/fire_hum   lsounds/WeaponsM/PlasmaRifle/Laser/FireHum   /* 〃 */
+weapons/plasma/laser/fire_loop  lsounds/WeaponsM/PlasmaRifle/Laser/FireLoop  /* Touhou 9: Phantasmagoria of Flower View */
+weapons/plasma/laser/fire_end   lsounds/WeaponsM/PlasmaRifle/Laser/FireEnd   /* Quake */
+weapons/plasma/laser/spark      lsounds/WeaponsM/PlasmaRifle/Laser/Spark     /* Fallout 4 */
 
 $limit weapons/plasma/laser/spark 0
 $limit weapons/plasma/explode 0
 $volume weapons/plasma/explode 0.5
 
-weapons/plasma/part/charge    lsounds/WeaponsM/PlasmaRifle/PartBeam/Charge    // Touhou 13
-weapons/plasma/part/fire      lsounds/WeaponsM/PlasmaRifle/PartBeam/Fire      // FEAR, Halo 3
-weapons/plasma/part/reloadout lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadOut // FEAR
-weapons/plasma/part/reloadin  lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadIn  // 〃
+weapons/plasma/part/charge    lsounds/WeaponsM/PlasmaRifle/PartBeam/Charge    /* Touhou 13 */
+weapons/plasma/part/fire      lsounds/WeaponsM/PlasmaRifle/PartBeam/Fire      /* FEAR, Halo 3 */
+weapons/plasma/part/reloadout lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadOut /* FEAR */
+weapons/plasma/part/reloadin  lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadIn  /* 〃 */
 
 $volume weapons/plasma/part/fire 0.7
 
-//
-// Plasma Diffuser
-//
-weapons/plasdiff/fire1 lsounds/Weapons/PlasmaDiffuser/Fire      // Halo 3
-weapons/plasdiff/fire2 lsounds/Weapons/PlasmaDiffuser/Fire2     // 〃
-weapons/plasdiff/fire3 lsounds/Weapons/PlasmaDiffuser/Fire3     // 〃
-weapons/plasdiff/draw  lsounds/Weapons/PlasmaDiffuser/Draw      // Fallout 3, Halo 3
-weapons/plasdiff/empty lsounds/Weapons/PlasmaDiffuser/FireEmpty // 〃
+/* Plasma Diffuser */
+weapons/plasdiff/fire1 lsounds/Weapons/PlasmaDiffuser/Fire      /* Halo 3 */
+weapons/plasdiff/fire2 lsounds/Weapons/PlasmaDiffuser/Fire2     /* 〃 */
+weapons/plasdiff/fire3 lsounds/Weapons/PlasmaDiffuser/Fire3     /* 〃 */
+weapons/plasdiff/draw  lsounds/Weapons/PlasmaDiffuser/Draw      /* Fallout 3, Halo 3 */
+weapons/plasdiff/empty lsounds/Weapons/PlasmaDiffuser/FireEmpty /* 〃 */
 
 $alias weapons/plasdiff/explode weapons/plasmax
 $limit weapons/plasdiff/explode 0
@@ -108,4 +105,4 @@ $random weapons/plasdiff/fire {
    weapons/plasdiff/fire3
 }
 
-// EOF
+/* EOF */

@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_misc.c: Miscellaneous scripts.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Miscellaneous scripts.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 stkcall
 static void SetInventory(str item, i32 amount)
@@ -26,7 +33,7 @@ static void SetActorInventory(i32 tid, str item, i32 amount)
    else if(s > 0) ACS_GiveActorInventory(tid, item,  s);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
@@ -120,7 +127,7 @@ k32 AddAngle(i32 x, i32 y)
    return p->ang;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_addangle)
 void Sc_AddAngle(i32 x, i32 y)
@@ -174,4 +181,4 @@ void Sc_BoughtItemPickup(i32 id)
    }
 }
 
-// EOF
+/* EOF */

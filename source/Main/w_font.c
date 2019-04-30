@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_font.c: Unicode font handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Unicode font handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -14,7 +21,7 @@
 #define ngroups 32
 #define nplanes 16
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct glyph
 {
@@ -31,7 +38,7 @@ typedef blockdata   *groupdata[ngroups];
 typedef groupdata   *planedata[nplanes];
 typedef planedata   *font;
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static str const fontnames[] = {
    [font_misaki_gothic] = s"MisakiG",
@@ -45,7 +52,7 @@ static FILE *fp;
 
 static i32 curfont, setfont;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 stkcall
 static struct glyph *AllocFontMetric(font *planes, i32 key)
@@ -80,7 +87,7 @@ static void SetFontMetric(i32 key, i32 xadv, i32 yofs)
    metr->h    = h;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_getfontmetric)
 struct glyph *Sc_GetFontMetric(i32 key)
@@ -139,4 +146,4 @@ bool Sc_SetupFontsContinue(void)
 }
 #endif
 
-// EOF
+/* EOF */

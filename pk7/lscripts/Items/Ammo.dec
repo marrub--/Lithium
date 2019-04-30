@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 actor Lith_MagicAmmo  : Ammo {Inventory.MaxAmount 1000}
 actor Lith_BulletAmmo : Ammo {Inventory.MaxAmount 500}
@@ -9,4 +14,4 @@ actor Lith_RocketAmmo : Ammo {Inventory.MaxAmount 200}
 actor Lith_PlasmaAmmo : Ammo {Inventory.MaxAmount 14000}
 actor Lith_CannonAmmo : Ammo {Inventory.MaxAmount 40}
 
-// EOF
+/* EOF */

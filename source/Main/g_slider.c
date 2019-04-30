@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// g_slider.c: GUI sliders.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * GUI sliders.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -21,7 +28,7 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
    x += g->ox;
    y += g->oy;
 
-   // get a normalized value
+   /* get a normalized value */
    k64 aval;
 
    aval = (a->val - a->minima) / (a->maxima - a->minima);
@@ -29,33 +36,33 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
 
    k64 val;
 
-   // move scroll notch
+   /* move scroll notch */
    if(g->active == id)
    {
       val  = g->cx - x;
       val  = minmax(val, 0, w);
       val /= w;
 
-      // play sound
+      /* play sound */
       if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
          ACS_LocalAmbientSound(pre->snd, 60);
    }
    else
       val = aval;
 
-   // get result-normalized value
+   /* get result-normalized value */
    k64 norm = val * (a->maxima - a->minima) + a->minima;
 
    if(a->integ) norm = roundlk(norm, 10);
 
-   // draw graphic
+   /* draw graphic */
    __with(char gfx[64];)
    {
       G_Prefix(g, gfx, pre, gfx);
       if(gfx[0]) PrintSprite(l_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
    }
 
-   // draw notch
+   /* draw notch */
    __with(char gfx[64];)
    {
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
@@ -64,7 +71,7 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
       if(gfx[0]) PrintSprite(l_strdup(gfx), x + val * w - 1,1, y,1);
    }
 
-   // draw value
+   /* draw value */
    if(pre->font)
    {
       char const *suf = a->suf ? a->suf : "";
@@ -75,11 +82,11 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
       PrintText(pre->font, CR_WHITE, x + pre->w/2,4, y + pre->h/2,0);
    }
 
-   // if we've moved it, we return a difference
+   /* if we've moved it, we return a difference */
    if(g->active == id && !g->clicklft && !CloseEnough(aval, val))
       return norm - a->val;
    else
       return 0;
 }
 
-// EOF
+/* EOF */

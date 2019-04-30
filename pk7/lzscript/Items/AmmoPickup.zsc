@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Shell : Lith_AmmoItem replaces Shell
 {
@@ -152,13 +157,13 @@ private void Lith_AbsorbAmmo(Actor mo, class<Inventory> typ, in out int amt)
 
    if((it.Amount + amt - it.MaxAmount) <= 0)
    {
-      // less than or equals max, absorb the whole item
+      /* less than or equals max, absorb the whole item */
       it.Amount += amt;
       amt        = 0;
    }
    else
    {
-      // more than max, absorb some of the item
+      /* more than max, absorb some of the item */
       amt      -= it.MaxAmount - it.Amount;
       it.Amount = it.MaxAmount;
    }
@@ -180,4 +185,4 @@ override bool TryPickup(in out Actor mo)
       return Super.TryPickup(mo);
 }
 
-// EOF
+/* EOF */

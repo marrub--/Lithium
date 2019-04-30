@@ -1,54 +1,53 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 $rolloff * custom 0 2025
 $pitchshiftrange 2
 
-//
-// World
-//
+/* World */
 explosion DSBAREXP
 $limit explosion 0
 $attenuation explosion 0.7
 
-misc/teleport lsounds/World/Teleport/Teleport // Self-made
-silence       lsounds/Silence                 // 〃
+misc/teleport lsounds/World/Teleport/Teleport /* Self-made */
+silence       lsounds/Silence                 /* 〃 */
 
-MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM // ?????
-YOUSONOFABITCH lsounds/YOUSONOFABITCH // ???????????
-AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA // ?????????????
-misc/booom     lsounds/World/boom     // ??????????????
-misc/pop       lsounds/pop            // ????????????????
+MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM /* ????? */
+YOUSONOFABITCH lsounds/YOUSONOFABITCH /* ??????????? */
+AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA /* ????????????? */
+misc/booom     lsounds/World/boom     /* ?????????????? */
+misc/pop       lsounds/pop            /* ???????????????? */
 
-misc/teleout lsounds/World/Teleport/TeleportOut // Touhou 13
-misc/telein  lsounds/World/Teleport/TeleportIn  // 〃
+misc/teleout lsounds/World/Teleport/TeleportOut /* Touhou 13 */
+misc/telein  lsounds/World/Teleport/TeleportIn  /* 〃 */
 
-ghost/hit lsounds/Weapons/GhostHit // Touhou 13
+ghost/hit lsounds/Weapons/GhostHit /* Touhou 13 */
 $alias ghost/spawn player/pickup/barrier
 
-//
-// Intermission
-//
-intermission/tick      lsounds/GUI/Menu/InterTick // Halo 3
-intermission/nextstage lsounds/GUI/Menu/InterNext // Halo 3, Phantasy Star Online
-intermission/paststats lsounds/GUI/Menu/InterPass // Phantasy Star Online
-intermission/mid       lsounds/GUI/Menu/InterMid  // 〃
+/* Intermission */
+intermission/tick      lsounds/GUI/Menu/InterTick /* Halo 3 */
+intermission/nextstage lsounds/GUI/Menu/InterNext /* Halo 3, Phantasy Star Online */
+intermission/paststats lsounds/GUI/Menu/InterPass /* Phantasy Star Online */
+intermission/mid       lsounds/GUI/Menu/InterMid  /* 〃 */
 
 $pitchshift intermission/nextstage 0
 $pitchshift intermission/paststats 0
 $pitchshift intermission/mid 0
 
-//
-// Menu
-//
-misc/chat lsounds/GUI/Chat // FEAR
+/* Menu */
+misc/chat lsounds/GUI/Chat /* FEAR */
 $alias misc/chat2 misc/chat
 
-menu/backup   lsounds/GUI/Menu/Back     // Phantasy Star Online
-menu/cursor   lsounds/GUI/Menu/Move     // 〃
-menu/activate lsounds/GUI/Menu/Activate // 〃
-menu/choose   lsounds/GUI/Menu/Choose   // 〃
+menu/backup   lsounds/GUI/Menu/Back     /* Phantasy Star Online */
+menu/cursor   lsounds/GUI/Menu/Move     /* 〃 */
+menu/activate lsounds/GUI/Menu/Activate /* 〃 */
+menu/choose   lsounds/GUI/Menu/Choose   /* 〃 */
 
 $alias menu/invalid player/cbi/clickinvalid
 $alias menu/change  player/cbi/slidertick
@@ -88,4 +87,4 @@ $pitchshift menu/clear 0
 
 $pitchshift misc/quitsound 0
 
-// EOF
+/* EOF */

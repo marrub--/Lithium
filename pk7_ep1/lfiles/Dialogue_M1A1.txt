@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
+/* ------------------------------------------------------------------------- */
 terminal 1
 
 unfinished
@@ -80,7 +85,7 @@ unfinished
    }
 }
 
-//
+/* ------------------------------------------------------------------------- */
 terminal 2
 
 unfinished
@@ -102,7 +107,7 @@ unfinished
    exec intralevelteleport 4
 }
 
-//
+/* ------------------------------------------------------------------------- */
 terminal 3
 
 unfinished
@@ -142,4 +147,4 @@ unfinished
    }
 }
 
-// EOF
+/* EOF */

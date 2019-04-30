@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_MarinePlayer : Lith_Player
 {
@@ -55,4 +60,4 @@ class Lith_MWeapon : Lith_OutcastsWeapon
 #include "lzscript/1_Marine/6_PlasmaRifle.zsc"
 #include "lzscript/1_Marine/7_OmegaCannon.zsc"
 
-// EOF
+/* EOF */

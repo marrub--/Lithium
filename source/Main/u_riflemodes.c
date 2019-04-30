@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_riflemodes.c: RifleModes upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * RifleModes upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
@@ -40,7 +47,7 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
    PrintSprite(ws[rifle_firemode_max - p->riflefiremode - 1], 215,2, 208 + (p->riflefiremode * 16),2);
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_SwitchRifleFiremode")
 void Sc_SwitchRifleFiremode(void)
@@ -60,4 +67,4 @@ void Sc_ResetRifleMode(void)
          p->riflefiremode = 0;
 }
 
-// EOF
+/* EOF */

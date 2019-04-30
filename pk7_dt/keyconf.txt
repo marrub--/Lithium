@@ -1,15 +1,20 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// Key Sections --------------------------------------------------------------|
+/* Key Sections ------------------------------------------------------------ */
 addkeysection "DoubleTap Actions" DoubleTap
 addmenukey "Open UI" dtap_k_opencbi
 addmenukey "Zoom In"  dtap_k_zoomin
 addmenukey "Zoom Out" dtap_k_zoomout
 addmenukey "Glare" dtap_k_glare
 
-// Aliases -------------------------------------------------------------------|
+/* Aliases ----------------------------------------------------------------- */
 alias dtap_k_opencbi "pukename Lith_KeyOpenCBI"
 
 alias dtap_k_zoomin  "pukename Lith_KeyZoom 30"
@@ -19,8 +24,8 @@ alias dtap_k_glare "pukename Lith_Glare"
 
 alias __dtap_info "pukename Lith_PrintMonsterInfo"
 
-// Binds ---------------------------------------------------------------------|
+/* Binds ------------------------------------------------------------------- */
 defaultbind i dtap_k_opencbi
 defaultbind g +dtap_k_qact
 
-// EOF
+/* EOF */

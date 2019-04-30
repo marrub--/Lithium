@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_powerup.c: Various functions used by powerups.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Various functions used by powerups.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_weapons.h"
@@ -10,7 +17,7 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 #if LITHIUM
 script_str ext("ACS") addr("Lith_DOGS")
@@ -160,4 +167,4 @@ void Sc_Discount(void)
    with_player(LocalPlayer) p->discount = 0.9;
 }
 
-// EOF
+/* EOF */

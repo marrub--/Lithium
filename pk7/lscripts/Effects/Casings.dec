@@ -1,8 +1,13 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-// Previously I thought Per Kristian made these, but they're actually
-// my original work after checking.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+/* my original work after checking. */
 
 actor Lith_CasingSmoke
 {
@@ -124,4 +129,4 @@ actor Lith_CasBigHot : Lith_CasBig
    }
 }
 
-// EOF
+/* EOF */

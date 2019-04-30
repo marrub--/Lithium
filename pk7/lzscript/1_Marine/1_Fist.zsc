@@ -1,4 +1,12 @@
-// ALL THINGS HERE TAKEN FROM LEGENDOOM THANKS YHOLE
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * ALL THINGS HERE TAKEN FROM LEGENDOOM THANKS YHOLE
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Knif : Inventory {default {Inventory.MaxAmount 1;}}
 
@@ -39,11 +47,11 @@ class Lith_KnifPuf1 : Actor
 
 class Lith_KnifPuf2 : Lith_KnifPuf1 {}
 
-class Lith_Fist : Lith_MWeapon replaces Fist; // why would you pick up a fist
+class Lith_Fist : Lith_MWeapon replaces Fist; /* why would you pick up a fist */
 
 default
 {
-   AttackSound "*fist"; // there is nothing wrong here MOVE ALONG
+   AttackSound "*fist"; /* there is nothing wrong here MOVE ALONG */
    DamageType "Melee";
    Tag "Knife";
    Weapon.Kickback 100;
@@ -82,4 +90,4 @@ _KnifeDone_1: TNT1 AAAAA 1 A_ReFire; goto _KnifeDone_2;
 _KnifeFinish:                        goto ReadySelector;
 }
 
-// EOF
+/* EOF */

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 server float __lith_version;
 
@@ -19,4 +24,4 @@ server int   lith_sv_failtime     = 67;
 server bool  lith_sv_wepdrop      = false;
 server int   lith_sv_bloodtime    = 2000;
 
-// EOF
+/* EOF */

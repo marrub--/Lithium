@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "lzscript/Items/AmmoPickup.zsc"
 #include "lzscript/Items/Armor.zsc"
@@ -18,4 +23,4 @@
 #include "lzscript/Items/RandomSpawn.zsc"
 #include "lzscript/Items/ScoreItem.zsc"
 
-// EOF
+/* EOF */

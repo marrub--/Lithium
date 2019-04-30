@@ -1,13 +1,20 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_headsupdis3.c: HeadsUpDis3 upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * HeadsUpDis3 upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "p_hud.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void HUD_Ammo(struct player *p)
 {
@@ -77,7 +84,7 @@ static void HUD_Health(struct player *p)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_HeadsUpDis3_Activate(struct player *p, struct upgrade *upgr)
@@ -105,9 +112,9 @@ void Upgr_HeadsUpDis3_Render(struct player *p, struct upgrade *upgr)
 
    HUD_WeaponSlots(p, CR_BLUE, CR_GREEN, CR_LIGHTBLUE, s"g", 323, 217);
 
-   // Status
+   /* Status */
    HUD_Ammo(p);
    HUD_Health(p);
 }
 
-// EOF
+/* EOF */

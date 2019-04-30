@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_list.c: Linked list functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Linked list functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "m_list.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void ListCtor(list *ls, void *object)
 {
@@ -54,4 +61,4 @@ size_t ListSize(list *head)
    return count;
 }
 
-// EOF
+/* EOF */

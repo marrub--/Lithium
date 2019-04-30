@@ -1,49 +1,48 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 $rolloff * custom 0 2025
 $pitchshiftrange 2
 
-//
-// World
-//
+/* World */
 explosion DSBAREXP
 $limit explosion 0
 $attenuation explosion 0.7
 
-silence lsounds/Silence // Self-made
+silence lsounds/Silence /* Self-made */
 
-//
-// Intermission
-//
-intermission/tick      lsounds/GUI/Menu/InterTick // Halo 3
-intermission/nextstage lsounds/GUI/Menu/InterNext // Halo 3, Phantasy Star Online
-intermission/paststats lsounds/GUI/Menu/InterPass // Phantasy Star Online
-intermission/mid       lsounds/GUI/Menu/InterMid  // 〃
+/* Intermission */
+intermission/tick      lsounds/GUI/Menu/InterTick /* Halo 3 */
+intermission/nextstage lsounds/GUI/Menu/InterNext /* Halo 3, Phantasy Star Online */
+intermission/paststats lsounds/GUI/Menu/InterPass /* Phantasy Star Online */
+intermission/mid       lsounds/GUI/Menu/InterMid  /* 〃 */
 
 $pitchshift intermission/nextstage 0
 $pitchshift intermission/paststats 0
 $pitchshift intermission/mid 0
 
-//
-// Menu
-//
-player/counter     lsounds/GUI/Payout/Counter     // Halo 3
-player/counterdone lsounds/GUI/Payout/CounterDone // 〃
+/* Menu */
+player/counter     lsounds/GUI/Payout/Counter     /* Halo 3 */
+player/counterdone lsounds/GUI/Payout/CounterDone /* 〃 */
 
-player/YOUVEGOTMAIL lsounds/GUI/Mail // AOL
+player/YOUVEGOTMAIL lsounds/GUI/Mail /* AOL */
 
-player/trmopen   lsounds/GUI/Terminal/Open   // Marathon
-player/trmswitch lsounds/GUI/Terminal/Switch // 〃
+player/trmopen   lsounds/GUI/Terminal/Open   /* Marathon */
+player/trmswitch lsounds/GUI/Terminal/Switch /* 〃 */
 
-misc/chat lsounds/GUI/Chat // FEAR
+misc/chat lsounds/GUI/Chat /* FEAR */
 $alias misc/chat2 misc/chat
 
-menu/backup   lsounds/GUI/Menu/Back     // Phantasy Star Online
-menu/cursor   lsounds/GUI/Menu/Move     // 〃
-menu/activate lsounds/GUI/Menu/Activate // 〃
-menu/choose   lsounds/GUI/Menu/Choose   // 〃
+menu/backup   lsounds/GUI/Menu/Back     /* Phantasy Star Online */
+menu/cursor   lsounds/GUI/Menu/Move     /* 〃 */
+menu/activate lsounds/GUI/Menu/Activate /* 〃 */
+menu/choose   lsounds/GUI/Menu/Choose   /* 〃 */
 
 $alias menu/invalid player/cbi/clickinvalid
 $alias menu/change  player/cbi/slidertick
@@ -83,4 +82,4 @@ $pitchshift menu/clear 0
 
 $pitchshift misc/quitsound 0
 
-// EOF
+/* EOF */

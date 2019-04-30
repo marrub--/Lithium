@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_func_end.h: Exiting segment of u_func.h.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Exiting segment of u_func.h.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #undef Ret
 #undef Fn_F
@@ -14,4 +21,4 @@
 #undef E
 #undef R
 
-// EOF
+/* EOF */

@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_char.h: ASCII character classification macros.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * ASCII character classification macros.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #define IsGraph(ch) ((ch) >  ' ' && (ch) <= '~')
 #define IsPrint(ch) ((ch) >= ' ' && (ch) <= '~')
@@ -27,4 +34,4 @@
 #define ToUpper(ch) (IsLower(ch) ? (ch) |  0x20 : (ch))
 #define ToLower(ch) (IsUpper(ch) ? (ch) & ~0x20 : (ch))
 
-// EOF
+/* EOF */

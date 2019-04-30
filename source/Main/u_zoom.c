@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_zoom.c: Zoom upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Zoom upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
@@ -10,7 +17,7 @@
 
 #define UData UData_Zoom(upgr)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_Zoom_Deactivate(struct player *p, struct upgrade *upgr)
@@ -64,7 +71,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") type("net") addr("Lith_KeyZoom")
 void Sc_KeyZoom(i32 amt)
@@ -82,4 +89,4 @@ void Sc_KeyZoom(i32 amt)
    }
 }
 
-// EOF
+/* EOF */

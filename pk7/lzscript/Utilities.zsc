@@ -1,11 +1,16 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// UTIL: Utilities and Tools Interpserse Languages
+/* UTIL: Utilities and Tools Interpserse Languages */
 struct Lith_UTIL
 {
-   // fucking degrees system...
+   /* fucking degrees system... */
    static double ConstDeg(double x)
    {
       x %= 360;
@@ -148,4 +153,4 @@ class Lith_Quaternion
    }
 }
 
-// EOF
+/* EOF */

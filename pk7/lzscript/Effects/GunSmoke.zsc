@@ -1,4 +1,13 @@
-// These are originally from LegenDoom. Thanks, Yholl!
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * These are originally from LegenDoom. Thanks, Yholl!
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
 class Lith_GunSmoke : Actor
 {
    default
@@ -120,4 +129,4 @@ class Lith_GunSmokeSpawnerSmall : Lith_GunSmokeSpawner
    }
 }
 
-// EOF
+/* EOF */

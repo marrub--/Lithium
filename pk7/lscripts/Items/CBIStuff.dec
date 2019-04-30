@@ -1,10 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 actor Lith_CBIItem : Lith_Pickup
 {
-   //$Category "CBI Items"
+   /*$Category "CBI Items" */
 
    Inventory.PickupSound "player/pickup/upgrcbi"
    Lith_Pickup.Glow "Lith_UpgrGlow"
@@ -126,4 +131,4 @@ actor Lith_BossReward6 : Lith_CBIItem
    }
 }
 
-// EOF
+/* EOF */

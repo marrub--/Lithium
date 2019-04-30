@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_vitalscan.c: VitalScan upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * VitalScan upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "w_world.h"
@@ -12,7 +19,7 @@
 
 #define UData UData_VitalScan(upgr)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
@@ -113,7 +120,7 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
 
-      // Hit indicator
+      /* Hit indicator */
       if(UData.hdtime != 0) UData.hdtime--;
       else                  UData.hdelta = 0;
 
@@ -143,7 +150,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
       ox += UData.oangle * 64;
    }
 
-   // Rank
+   /* Rank */
    if(UData.rank) for(i32 i = 0; i < UData.rank; i++)
    {
       static str const rs[] = {s":UI:Rank1", s":UI:Rank2", s":UI:Rank3",
@@ -153,13 +160,13 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
       PrintSprite(rs[i], 106+ox + i%5*6,1, y+oy,1);
    }
 
-   // Hit indicator
+   /* Hit indicator */
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt("-%i", UData.hdelta);
       PrintTextF(s_cbifont, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
-   // Tag and health
+   /* Tag and health */
    bool afnt = p->getCVarI(sc_scanner_altfont);
    str  font = afnt ? s_chfont : s_cbifont;
 
@@ -169,7 +176,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    else                PrintTextFmt("%uhp",  UData.health);
    PrintTextX(UData.freak ? s_alienfont : font, CR_WHITE, 160+ox,4, 225+oy,2);
 
-   // Health bar
+   /* Health bar */
    if(p->getCVarI(sc_scanner_bar))
    {
       static str const bs[] = {s":UI:HealthBar1",  s":UI:HealthBar2",
@@ -192,4 +199,4 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
    }
 }
 
-// EOF
+/* EOF */

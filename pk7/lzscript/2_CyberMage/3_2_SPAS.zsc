@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_VoidShotTrail : Actor
 {
@@ -106,7 +111,7 @@ action(Weapon) State Lith_A_FireSPAS()
    Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
    if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B))
       Lith_A_MagIncr();
-   // don't ask
+   /* don't ask */
    if(Pos.Z - FloorZ >= 24) {
       A_Recoil(15);
       Lith_FireBullets(10.5, 3.5, 3, 3);
@@ -223,4 +228,4 @@ Reload:
    goto ReadySelector;
 }
 
-// EOF
+/* EOF */

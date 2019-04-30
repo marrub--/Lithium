@@ -1,4 +1,12 @@
-// Taken from DemonSteele, with permission.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * Taken from DemonSteele, with permission.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_PuffItDownBro : Actor
 {
@@ -61,4 +69,4 @@ class Lith_ExplodoBoots : Actor
    }
 }
 
-// EOF
+/* EOF */

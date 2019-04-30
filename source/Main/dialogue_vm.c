@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// dialogue_vm.c: Main dialogue VM.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Main dialogue VM.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -18,7 +25,7 @@
 #define JNC goto *cases[IMM]
 #define HLT goto done
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum
 {
@@ -74,12 +81,12 @@ struct vm
 
    char const *st[4];
 
-   i32 pc; // program counter
-   i32 ac; // accumulator
-   i32 x;  // x register
-   i32 y;  // y register
-   i32 sr; // status register
-   i32 sp; // stack pointer
+   i32 pc; /* program counter */
+   i32 ac; /* accumulator */
+   i32 x;  /* x register */
+   i32 y;  /* y register */
+   i32 sr; /* status register */
+   i32 sp; /* stack pointer */
 
    i32 action;
 
@@ -93,17 +100,17 @@ struct vm
    struct vmstate next;
 };
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 struct dlgdef *lmvar dlgdefs;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 script
 static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {
-      // background
+      /* background */
       sizex = 480, sizey = 360,
       right  = sizex,
       top    = sizey*.08,
@@ -111,7 +118,7 @@ static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
 
       midx = right/2, midy = bottom/2,
 
-      // text
+      /* text */
       tsizex  = 320, tsizey = 240,
       tright  = tsizex,
       ttop    = tsizey*.08,
@@ -128,16 +135,16 @@ static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
    G_Begin(g, sizex, sizey);
    G_UpdateState(g, p);
 
-   // Background
+   /* Background */
    SetSize(480, 300);
    PrintSprite(sp_Terminal_Back,   480/2,0, 0,1);
    PrintSprite(sp_Terminal_Border, 480/2,0, 0,1);
 
-   // Top-left text
+   /* Top-left text */
    SetSize(tsizex, tsizey);
    PrintText_str(st_term_sgxline, s_smallfnt, CR_RED, 0,1, 0,1);
 
-   // Top-right text
+   /* Top-right text */
    str tpright;
    switch(vm->trmActi) {
    default:          tpright = StrParam("Remote: %s",               remote); break;
@@ -146,10 +153,10 @@ static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
    }
    PrintText_str(tpright, s_smallfnt, CR_RED, tright,2, 0,1);
 
-   // Bottom-left text
+   /* Bottom-left text */
    PrintText_str(st_term_ip, s_smallfnt, CR_RED, 0,1, tbottom,2);
 
-   // Bottom-right text
+   /* Bottom-right text */
    str btright;
    switch(vm->trmActi)
    {
@@ -160,7 +167,7 @@ static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
 
    PrintText_str(btright, s_smallfnt, CR_RED, tright,2, tbottom,2);
 
-   // Contents
+   /* Contents */
    SetSize(g->w, g->h);
 
    char pict[32] = ":Terminal:"; strcat(pict, vm->trmPict);
@@ -317,16 +324,16 @@ static void TeleportOutEffect(struct player *p)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
-// Main dialogue VM.
+/* Main dialogue VM. */
 script
 void Dlg_Run(struct player *p, i32 num)
 {
    if(p->dead || p->indialogue > 1)
       return;
 
-   // Get the dialogue by number.
+   /* Get the dialogue by number. */
    struct dlgdef *def;
 
    for(def = dlgdefs; def && def->num != num; def = def->next);
@@ -334,17 +341,17 @@ void Dlg_Run(struct player *p, i32 num)
 
    p->indialogue++;
 
-   // GUI state
+   /* GUI state */
    struct gui_state gst = {};
    gst.gfxprefix = ":UI_Green:";
    G_Init(&gst);
 
-   // VM state
+   /* VM state */
    struct vm vm = {};
    ResetText(&vm);
 
-   // terminals are numbered negative
-   // TODO: determine mission status
+   /* terminals are numbered negative */
+   /* TODO: determine mission status */
    if(num < 0) {gst.cx = 320;     gst.cy = 200;    }
    else        {gst.cx = 320 / 2; gst.cy = 200 / 2;}
 
@@ -533,7 +540,7 @@ done:
    p->indialogue -= 2;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_TeleportOutEffect")
 void Sc_TeleportOutEffect(struct player *p)
@@ -562,4 +569,4 @@ void Sc_RunTerminal(i32 num)
 }
 #endif
 
-// EOF
+/* EOF */

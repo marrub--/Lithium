@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_magic.c: Magic weapon functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Magic weapon functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "p_player.h"
 #include "p_hudid.h"
 #include "w_world.h"
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_Blade")
 void Sc_Blade(bool hit)
@@ -103,7 +110,7 @@ void Sc_Cercle(void)
       }
 
       FreezeTime(true);
-      ACS_Delay(2); // necessary so sounds may play
+      ACS_Delay(2); /* necessary so sounds may play */
 
       ACS_AmbientSound(ss_weapons_cercle_begin, 127);
 
@@ -157,10 +164,10 @@ void Sc_Cercle(void)
 
       ACS_Delay(10);
 
-      // NB: The projectiles take the TIDs of the throwers, so this is actually triggering them.
+      /* NB: The projectiles take the TIDs of the throwers, so this is actually triggering them. */
       SetMembI(fxtid3, sm_Trigger, true);
 
-      // Just in case.
+      /* Just in case. */
       ACS_Thing_Remove(fxtid);
       ACS_Thing_Remove(fxtid2);
 
@@ -193,4 +200,4 @@ void Sc_MagicSelect(i32 num)
 }
 #endif
 
-// EOF
+/* EOF */

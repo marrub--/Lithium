@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_statistics.c: Statistics tab.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Statistics tab.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -37,4 +44,4 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
    Stat(LC(LANG "STAT_TrueMail"),   "%i",   p->bip.mailtrulyreceived);
 }
 
-// EOF
+/* EOF */

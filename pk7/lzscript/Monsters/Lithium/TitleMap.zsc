@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_TitleImpBall : Lith_XH_ImpBall
 {
@@ -92,4 +97,4 @@ class Lith_TitleImp : Lith_XH_Imp
 
 class Lith_TitleCyberdemon : Lith_TitleHellKnight {}
 
-// EOF
+/* EOF */

@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
+## ---------------------------------------------------------------------------|
+##
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
-## GenBuild: Generates a Ninja build file for the project.
+##
+## ---------------------------------------------------------------------------|
+##
+## Generates a Ninja build file for the project.
+##
+## ---------------------------------------------------------------------------|
 
 require 'set'
 

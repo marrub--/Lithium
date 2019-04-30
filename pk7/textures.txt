@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 sprite BLL2A0, 31, 25
 {
@@ -32,4 +37,4 @@ graphic DIVSIGI21, 40, 34 {xscale 1.5 yscale 1.5 offset -4,  -4 patch DIVIU0, 0,
 graphic DIVSIGI22, 40, 34 {xscale 1.5 yscale 1.5 offset -4,  -2 patch DIVIV0, 0, 0}
 graphic DIVSIGI23, 40, 34 {xscale 1.5 yscale 1.5 offset -4,  -1 patch DIVIW0, 0, 0}
 
-// EOF
+/* EOF */

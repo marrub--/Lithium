@@ -1,13 +1,19 @@
-// zsc output: pk7/lzscript/Constants/p_data.zsc
-// zsc output: pk7_dt/dtzsc/pdata.zsc
+/* pk7/lzscript/Constants/p_data.zsc
+ * pk7_dt/dtzsc/pdata.zsc
+ * ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Exposed player data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_data.h: Exposed player data.
-
-enum // LAttrib
+enum /* LAttrib */
 {
    at_acc,
    at_def,
@@ -19,7 +25,7 @@ enum // LAttrib
    at_max
 };
 
-enum // PData
+enum /* PData */
 {
    pdata_weapon,
    pdata_upgrade,
@@ -35,11 +41,11 @@ enum // PData
    pdata_attr,
 };
 
-enum // PClass
+enum /* PClass */
 {
    pcl_unknown,
 
-   // Base Classes
+   /* Base Classes */
    pcl_marine    = 1 << 0,
    pcl_cybermage = 1 << 1,
    pcl_informant = 1 << 2,
@@ -49,19 +55,19 @@ enum // PClass
    pcl_thoth     = 1 << 6,
    pcl_doubletap = 1 << 7,
 
-   // Groups
+   /* Groups */
    pcl_outcasts   = pcl_marine    | pcl_cybermage,
    pcl_missioners = pcl_informant | pcl_wanderer,
    pcl_intruders  = pcl_assassin  | pcl_darklord | pcl_thoth,
 
-   // Lifeform Type
+   /* Lifeform Type */
    pcl_human    = pcl_marine    | pcl_cybermage | pcl_assassin,
    pcl_nonhuman = pcl_wanderer  | pcl_darklord  | pcl_thoth,
    pcl_robot    = pcl_informant | pcl_doubletap,
 
-   // Misc. Abilities
+   /* Misc. Abilities */
    pcl_any       = pcl_human | pcl_nonhuman | pcl_robot,
    pcl_magicuser = pcl_cybermage | pcl_wanderer | pcl_thoth,
 };
 
-// EOF
+/* EOF */

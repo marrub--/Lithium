@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 actor Lith_ItemPickup : Lith_Pickup
 {
@@ -24,8 +29,8 @@ actor Lith_DivisionSigilSprite : Lith_AnimItemSprite
 
 actor Lith_DivisionSigil : Lith_ItemPickup
 {
-   //$Category "Items"
-   //$Sprite "DIVIA0"
+   /*$Category "Items" */
+   /*$Sprite "DIVIA0" */
    
    Inventory.Icon "DIVSIGI1"
    Inventory.MaxAmount 1
@@ -69,4 +74,4 @@ actor Lith_ClawOfImp : Lith_ItemPickup
    }
 }
 
-// EOF
+/* EOF */

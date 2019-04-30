@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_hud.c: Generalized HUD functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Generalized HUD functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "p_player.h"
 #include "p_hud.h"
 #include "p_hudid.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
 {
@@ -87,4 +94,4 @@ void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
    #undef Inc
 }
 
-// EOF
+/* EOF */

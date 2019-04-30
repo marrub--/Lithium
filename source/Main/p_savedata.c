@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_savedata.c: Archived player data handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Archived player data handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -11,7 +18,7 @@
 #include "p_savedata.h"
 #include "w_world.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 {
@@ -57,9 +64,9 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
       struct savechunk chunk;
       FRead32(&chunk, sizeof chunk, 4, save->fp);
 
-      // End of file reached, or we reached the EOF chunk.
-      // Otherwise, if the chunk description matches, process it.
-      // Or, the chunk is not correct, and we skip the data.
+      /* End of file reached, or we reached the EOF chunk. */
+      /* Otherwise, if the chunk description matches, process it. */
+      /* Or, the chunk is not correct, and we skip the data. */
       if(chunk.iden == Ident_Lend || feof(save->fp))
          break;
       else if(chunk.iden == iden && (chunk.vrfl & Save_VersMask) == vers)
@@ -88,7 +95,7 @@ struct savefile *Save_BeginLoad(struct player *p)
    {
       save->p = p;
 
-      // The Lith chunk must always be the first valid chunk.
+      /* The Lith chunk must always be the first valid chunk. */
       if(Save_ReadChunk(save, Ident_Lith, SaveV_Lith) != 0)
       {
          Save_EndLoad(save);
@@ -109,4 +116,4 @@ void Save_EndLoad(struct savefile *save)
 }
 #endif
 
-// EOF
+/* EOF */

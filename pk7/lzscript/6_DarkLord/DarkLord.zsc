@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_DarkLordPlayer : Lith_Player
 {
@@ -68,4 +73,4 @@ class Lith_SubweaponShots  : Inventory {default {Inventory.MaxAmount 2;}}
 #include "lzscript/6_DarkLord/6_FatMac.zsc"
 #include "lzscript/6_DarkLord/7_FortuneGun.zsc"
 
-// EOF
+/* EOF */

@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_upgrades.h: Upgrade entry points and utilities.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Upgrade entry points and utilities.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef p_upgrades_h
 #define p_upgrades_h
@@ -27,9 +34,9 @@
 #define CheckRequires_RDI CheckRequires(UR_RDI, world.cbiupgr[cupg_rdistinter])
 #define CheckRequires_RA  CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
-// These are included here so the compiler may check the function signatures.
+/* These are included here so the compiler may check the function signatures. */
 #define Fn_F(n, cb) stkcall void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #include "u_func.h"
@@ -43,7 +50,7 @@ void P_Upg_Enter(struct player *p);
 
 struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr);
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern struct upgradeinfo const upgrinfobase[UPGR_BASE_MAX];
 

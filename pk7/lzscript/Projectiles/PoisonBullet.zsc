@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_PoisonFX : Actor
 {
@@ -46,7 +51,7 @@ class Lith_PoisonBlob : Actor
       BLLT G 5;
       BLLT G 0 A_PlaySound("weapons/shotgun/poison/acid", CHAN_5);
    SpawnLoop:
-      BLLT G 0 A_JumpIf(Pos.Z == FloorZ, "Crash"); // >:I
+      BLLT G 0 A_JumpIf(Pos.Z == FloorZ, "Crash"); /* >:I */
       BLLT G 1 A_FadeOut(0.01);
       loop;
    Crash:
@@ -98,4 +103,4 @@ class Lith_PoisonBullet : Lith_BulletPuff
    }
 }
 
-// EOF
+/* EOF */

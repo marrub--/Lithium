@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 user   float lith_weapons_zoomfactor     = 1.5;
 user   float lith_weapons_scopealpha     = 0.2;
@@ -20,4 +25,4 @@ server float lith_weapons_ricochetvol    = 1.0;
 server bool  lith_weapons_reloadempty    = true;
 server bool  lith_weapons_nofirebob      = false;
 
-// EOF
+/* EOF */

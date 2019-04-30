@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_cyberlegs.c: CyberLegs upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * CyberLegs upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_CyberLegs_Activate(struct player *p, struct upgrade *upgr)
@@ -40,4 +47,4 @@ void Upgr_CyberLegs_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-// EOF
+/* EOF */

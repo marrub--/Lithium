@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_math.c: Various math functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Various math functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 
@@ -15,12 +22,12 @@
    type yb = func(y2, y3, t); \
    return (ret){func(xa, xb, t), func(ya, yb, t)}
 
-static u64 lmvar crctable[256]; // NB: Don't try to hash >8bit data.
+static u64 lmvar crctable[256]; /* NB: Don't try to hash >8bit data. */
 static bool lmvar crcinit;
 
 static void InitCRC64(void)
 {
-   u64 const polynomial = 0xC96C5795D7870F42; // ECMA 182
+   u64 const polynomial = 0xC96C5795D7870F42; /* ECMA 182 */
 
    for(u64 i = 0; i < 256; i++)
    {
@@ -76,7 +83,7 @@ i32 fastabs(i32 n)
       "Neg:I    W 1(Stk() LocReg(Lit(:n)))"
       "Retn     W 1(Stk())"
    );
-   return 0; // shh...
+   return 0; /* shh... */
 }
 
 stkcall
@@ -166,4 +173,4 @@ struct polar ctopol(k32 x, k32 y)
    return (struct polar){ACS_VectorAngle(x, y), mag2i(x, y)};
 }
 
-// EOF
+/* EOF */

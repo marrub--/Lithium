@@ -1,13 +1,19 @@
-// zsc output: pk7/lzscript/Constants/w_data.zsc
-// zsc output: pk7_dt/dtzsc/wdata.zsc
+/* pk7/lzscript/Constants/w_data.zsc
+ * pk7_dt/dtzsc/wdata.zsc
+ * ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Exposed world data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_data.h: Exposed world data.
-
-enum // WData
+enum /* WData */
 {
    wdata_bossspawned,
    wdata_enemycheck,
@@ -18,12 +24,12 @@ enum // WData
    wdata_pclass,
 };
 
-enum // Fun
+enum /* Fun */
 {
    lfun_ragnarok = 1 << 0,
 };
 
-enum // CBIUpgradeM
+enum /* CBIUpgradeM */
 {
    cupg_weapninter,
    cupg_hasupgr1,
@@ -34,7 +40,7 @@ enum // CBIUpgradeM
    cupg_max
 };
 
-enum // CBIUpgradeC
+enum /* CBIUpgradeC */
 {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
@@ -44,7 +50,7 @@ enum // CBIUpgradeC
    cupg_c_rdistinter,
 };
 
-enum // RandomSpawnNum
+enum /* RandomSpawnNum */
 {
    lrsn_garmor,
    lrsn_barmor,
@@ -54,7 +60,7 @@ enum // RandomSpawnNum
    lrsn_clipbx,
 };
 
-enum // ArmorSlot
+enum /* ArmorSlot */
 {
    aslot_lower,
    aslot_upper,
@@ -63,7 +69,7 @@ enum // ArmorSlot
    aslot_max
 };
 
-enum // MsgType
+enum /* MsgType */
 {
    msg_ammo,
    msg_huds,
@@ -71,7 +77,7 @@ enum // MsgType
    msg_both
 };
 
-enum // LDamageType
+enum /* LDamageType */
 {
    ldt_bullets,
    ldt_energy,
@@ -85,7 +91,7 @@ enum // LDamageType
    ldt_none
 };
 
-enum // LScriptNum
+enum /* LScriptNum */
 {
    lsc_getfontmetric = 17100,
    lsc_metr_xadv,
@@ -101,4 +107,4 @@ enum // LScriptNum
    lsc_raindropspawn,
 };
 
-// EOF
+/* EOF */

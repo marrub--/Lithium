@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// common.h: Common functions and debugging functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Common functions and debugging functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef common_h
 #define common_h
@@ -120,19 +127,19 @@
 #define CrGreen "\C[Lith_Green]"
 #define CrRed   "\C[Lith_Red]"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum {
    log_none,
-   log_dev   = 1 << 0, // general debug info
-   log_devh  = 1 << 1, // prints live stats to the HUD (position, angles, etc)
-   log_boss  = 1 << 2, // debug info for the boss system
-   log_dmon  = 1 << 3, // debug info for the monster tracker
-   log_dmonV = 1 << 4, // verbose debug info for the monster tracker
-   log_dlg   = 1 << 5, // debug info for the dialogue/terminal compiler
-   log_bip   = 1 << 6, // debug info for the BIP
-   log_sys   = 1 << 7, // meta debug info
-   log_sysV  = 1 << 7, // tick info
+   log_dev   = 1 << 0, /* general debug info */
+   log_devh  = 1 << 1, /* prints live stats to the HUD (position, angles, etc) */
+   log_boss  = 1 << 2, /* debug info for the boss system */
+   log_dmon  = 1 << 3, /* debug info for the monster tracker */
+   log_dmonV = 1 << 4, /* verbose debug info for the monster tracker */
+   log_dlg   = 1 << 5, /* debug info for the dialogue/terminal compiler */
+   log_bip   = 1 << 6, /* debug info for the BIP */
+   log_sys   = 1 << 7, /* meta debug info */
+   log_sysV  = 1 << 7, /* tick info */
 };
 
 enum {
@@ -144,7 +151,7 @@ enum {
    dbgf_upgr  = 1 << 5,
 };
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
 script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
@@ -160,7 +167,7 @@ void Dbg_Note_Impl(char const *fmt, ...);
 script void Dbg_PrintMem(void const *data, size_t size);
 void Log(char const *fmt, ...);
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;

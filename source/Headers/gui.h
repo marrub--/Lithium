@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// gui.h: GUI functions and data.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * GUI functions and data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef gui_h
 #define gui_h
@@ -11,21 +18,21 @@
 
 #define Pre(name) .preset = &gui_p.name
 
-// Fixed ID
+/* Fixed ID */
 #define G_Button_FId(g, id, ...)      G_Button_Impl     (g, id, &(struct gui_arg_btn const){__VA_ARGS__})
 #define G_Checkbox_FId(g, id, ...)    G_Checkbox_Impl   (g, id, &(struct gui_arg_cbx const){__VA_ARGS__})
 #define G_ScrollBegin_FId(g, id, ...) G_ScrollBegin_Impl(g, id, &(struct gui_arg_scr const){__VA_ARGS__})
 #define G_Slider_FId(g, id, ...)      G_Slider_Impl     (g, id, &(struct gui_arg_sld const){__VA_ARGS__})
 #define G_TextBox_FId(g, id, ...)     G_TextBox_Impl    (g, id, &(struct gui_arg_txt const){__VA_ARGS__})
 
-// Dynamic ID
+/* Dynamic ID */
 #define G_Button_Id(g, id, ...)      G_Button_FId     (g, id + LineHash, __VA_ARGS__)
 #define G_Checkbox_Id(g, id, ...)    G_Checkbox_FId   (g, id + LineHash, __VA_ARGS__)
 #define G_ScrollBegin_Id(g, id, ...) G_ScrollBegin_FId(g, id + LineHash, __VA_ARGS__)
 #define G_Slider_Id(g, id, ...)      G_Slider_FId     (g, id + LineHash, __VA_ARGS__)
 #define G_TextBox_Id(g, id, ...)     G_TextBox_FId    (g, id + LineHash, __VA_ARGS__)
 
-// Dynamic
+/* Dynamic */
 #define G_Button(g, ...)             G_Button_Id     (g, 0, __VA_ARGS__)
 #define G_Checkbox(g, ...)           G_Checkbox_Id   (g, 0, __VA_ARGS__)
 #define G_ScrollBegin(g, ...)        G_ScrollBegin_Id(g, 0, __VA_ARGS__)
@@ -72,7 +79,7 @@
       ifauto(char const *, _c, strchr(txt_buf, '\n')) \
          __with(size_t txt_len = _c - txt_buf; G_TextBox_Reset(st);)
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct gui_scr
 {
@@ -273,11 +280,11 @@ enum cursor
    gui_curs_max,
 };
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 extern struct gui_presets const gui_p;
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall optargs(1)
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);

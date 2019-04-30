@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_monster.c: Monster entry points.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Monster entry points.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "w_monster.h"
@@ -24,7 +31,7 @@
       (m)->ms->health = GetPropI(0, APROP_Health); \
    } while(0)
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct dmon_stat {
    k32  x, y, z;
@@ -35,7 +42,7 @@ struct dmon_stat {
    bool resurrect;
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 #include "w_moninfo.h"
 
@@ -48,7 +55,7 @@ static str const dmgtype_names[dmgtype_max] = {
    s"Shrapnel"
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void ApplyLevels(dmon_t *m, i32 prev)
 {
@@ -58,7 +65,7 @@ static void ApplyLevels(dmon_t *m, i32 prev)
    {
       if(i % 10 == 0)
       {
-         // if we have resistances, randomly pick a resistance we already have
+         /* if we have resistances, randomly pick a resistance we already have */
          if(HasResistances(m))
          {
             i32 r;
@@ -91,7 +98,7 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
 {
    bool anyplayer = false;
 
-   // Optimization: Check for players nearby first.
+   /* Optimization: Check for players nearby first. */
    i32 const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
    i32 const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
 
@@ -164,8 +171,8 @@ static void BaseMonsterLevel(dmon_t *m)
    ApplyLevels(m, 0);
 }
 
-// Spawn a Monster Soul and temporarily set the species of it until the
-// actor is no longer solid, so it won't explode immediately.
+/* Spawn a Monster Soul and temporarily set the species of it until the */
+/* actor is no longer solid, so it won't explode immediately. */
 script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
@@ -244,7 +251,7 @@ static void OnDeath(dmon_t *m)
 
    OnFinalize(m);
 
-   // If enemies emit score on death we only need to give extra rank score.
+   /* If enemies emit score on death we only need to give extra rank score. */
    P_GiveAllScore((world.enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
 }
 
@@ -302,7 +309,7 @@ static void MonsterMain(dmon_t *m)
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void PrintMonsterInfo(void)
 {
@@ -331,7 +338,7 @@ void PrintMonsterInfo(void)
       Log("no active monster");
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_GiveMonsterEXP")
 void Sc_GiveMonsterEXP(i32 amt)
@@ -372,8 +379,8 @@ void Sc_MonsterInfo(void)
 
    Dbg_Log(log_dmon, "no monster %S", cname);
 
-   // If the monster failed all checks, give them this so we don't need to recheck every tick.
-   // Edit: This isn't necessary anymore, but what the hell, keep it.
+   /* If the monster failed all checks, give them this so we don't need to recheck every tick. */
+   /* Edit: This isn't necessary anymore, but what the hell, keep it. */
    InvGive(so_MonsterInvalid, 1);
 }
 
@@ -385,4 +392,4 @@ void Sc_MonsterFinalized(void)
 }
 #endif
 
-// EOF
+/* EOF */

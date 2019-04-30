@@ -1,8 +1,28 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
+/* ------------------------------------------------------------------------- */
+/*
+program 1
+{
+   lda 0
+   add 5
+   tax
+   mul 10
+
+   tra
+   trx
+   trz "butts"
+}
+*/
+
+/* ------------------------------------------------------------------------- */
 dialogue 1
 
 page 0
@@ -24,15 +44,6 @@ page 2
 {
    if class pcl_marine    `Who are you?
    if class pcl_cybermage `Right. The Cybernati.
-
-   lda 0
-   add 5
-   tax
-   mul 10
-
-   tra
-   trx
-   trz "butts"
 
    @@
    `Test of concatenated
@@ -193,7 +204,7 @@ page 7
 }
 
 
-//
+/* ------------------------------------------------------------------------- */
 terminal 1
 
 unfinished
@@ -213,4 +224,4 @@ unfinished
    logoff 01602
 }
 
-// EOF
+/* EOF */

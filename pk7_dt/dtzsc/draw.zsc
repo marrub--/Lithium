@@ -1,3 +1,12 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
 struct DtRenderDrawData
 {
    uint8 dt;
@@ -30,7 +39,7 @@ enum DtRenderDrawType
    dt_cte,
    dt_xte,
    dt_txt,
-// dt_utx,
+/* dt_utx, */
    dt_cls,
    dt_clc,
    dt_siz,
@@ -262,7 +271,7 @@ static void LC(Actor mo, int x, int y, int w, int h, int ww)
 
    if(x || y || w || h)
    {
-      // simple optimization (which also prevents division by zero)
+      /* simple optimization (which also prevents division by zero) */
       if((cl.m_nodraw = w <= 0 || h <= 0)) return;
 
       cl.m_d[p].dt = dt_cls;
@@ -342,4 +351,4 @@ override void RenderOverlay(RenderEvent evt)
    }
 }
 
-// EOF
+/* EOF */

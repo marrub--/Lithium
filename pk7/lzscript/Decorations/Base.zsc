@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_SwitchableDecor : Actor
 {
@@ -116,4 +121,4 @@ class Lith_DecorFlareG : Lith_DecorFlare {states {Spawn: GRGL A 0; goto SpawnLoo
 class Lith_DecorFlareR : Lith_DecorFlare {states {Spawn: RDGL A 0; goto SpawnLoop;}}
 class Lith_DecorFlareY : Lith_DecorFlare {states {Spawn: YLGL A 0; goto SpawnLoop;}}
 
-// EOF
+/* EOF */

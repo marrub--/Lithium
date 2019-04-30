@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_tokbuf.c: Buffered token stream.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Buffered token stream.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "m_tokbuf.h"
 
 #include <string.h>
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 i32 TBufProc(struct token *tok)
@@ -52,13 +59,13 @@ struct token *TBufGet(struct tokbuf *tb)
 {
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
-   // Free beginning of buffer.
+   /* Free beginning of buffer. */
    for(i32 i = 0; i < tb->bbeg; i++) {
       Vec_Clear(tb->toks[i].text);
-      //memset(&tb->toks[i], 0, sizeof tb->toks[i]);
+      /*memset(&tb->toks[i], 0, sizeof tb->toks[i]); */
    }
 
-   // Move end of buffer to beginning.
+   /* Move end of buffer to beginning. */
    if(tb->tend)
    {
       i32 s = tb->tend - tb->bbeg;
@@ -67,7 +74,7 @@ struct token *TBufGet(struct tokbuf *tb)
       memset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }
 
-   // Get new tokens.
+   /* Get new tokens. */
    for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++)
    {
    skip:
@@ -110,4 +117,4 @@ bool TBufDrop(struct tokbuf *tb, i32 t)
       return true;
 }
 
-// EOF
+/* EOF */

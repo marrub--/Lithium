@@ -1,22 +1,23 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Subweapons
-//
-weapons/subweapon/charge lsounds/WeaponsD/Subweapons/Charge // Rozenkreuzstilette
-weapons/subweapon/armgun lsounds/WeaponsD/Subweapons/ArmGun // Phantasy Star: Nova
+/* Subweapons */
+weapons/subweapon/charge lsounds/WeaponsD/Subweapons/Charge /* Rozenkreuzstilette */
+weapons/subweapon/armgun lsounds/WeaponsD/Subweapons/ArmGun /* Phantasy Star: Nova */
 
-//
-// 700 Express
-//
-weapons/700e/fire1 lsounds/WeaponsD/700Express/Fire1     // E.Y.E: Divine Cybermancy
-weapons/700e/fire2 lsounds/WeaponsD/700Express/Fire2     // 〃
-weapons/700e/fire3 lsounds/WeaponsD/700Express/Fire3     // 〃
-weapons/700e/out   lsounds/WeaponsD/700Express/ReloadOut // 〃
-weapons/700e/in    lsounds/WeaponsD/700Express/ReloadIn  // 〃
-weapons/700e/move  lsounds/WeaponsD/700Express/Move      // Halo 3
+/* 700 Express */
+weapons/700e/fire1 lsounds/WeaponsD/700Express/Fire1     /* E.Y.E: Divine Cybermancy */
+weapons/700e/fire2 lsounds/WeaponsD/700Express/Fire2     /* 〃 */
+weapons/700e/fire3 lsounds/WeaponsD/700Express/Fire3     /* 〃 */
+weapons/700e/out   lsounds/WeaponsD/700Express/ReloadOut /* 〃 */
+weapons/700e/in    lsounds/WeaponsD/700Express/ReloadIn  /* 〃 */
+weapons/700e/move  lsounds/WeaponsD/700Express/Move      /* Halo 3 */
 
 $random weapons/700e/fire {
    weapons/700e/fire1
@@ -24,31 +25,25 @@ $random weapons/700e/fire {
    weapons/700e/fire3
 }
 
-//
-// 4-Bore
-//
-weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire // a1337spy
+/* 4-Bore */
+weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire /* a1337spy */
 
-//
-// Minigun
-//
-weapons/minigun/fire   lsounds/WeaponsD/Minigun/Fire        // Serious Sam: The First Encounter HD
-weapons/minigun/rotate lsounds/WeaponsD/Minigun/Rotate      // 〃
-weapons/minigun/up     lsounds/WeaponsD/Minigun/RotateUp    // 〃
-weapons/minigun/click  lsounds/WeaponsD/Minigun/Click       // 〃
-weapons/minigun/down   lsounds/WeaponsD/Minigun/RotateDown  // E.Y.E: Divine Cybermancy
-weapons/minigun/place  lsounds/WeaponsD/Minigun/RotatePlace // Quake 2
-weapons/minigun/empty  lsounds/WeaponsD/Minigun/Empty       // Halo 3
-weapons/minigun/magout lsounds/WeaponsD/Minigun/MagOut      // E.Y.E: Divine Cybermancy
-weapons/minigun/magin  lsounds/WeaponsD/Minigun/MagIn       // 〃
+/* Minigun */
+weapons/minigun/fire   lsounds/WeaponsD/Minigun/Fire        /* Serious Sam: The First Encounter HD */
+weapons/minigun/rotate lsounds/WeaponsD/Minigun/Rotate      /* 〃 */
+weapons/minigun/up     lsounds/WeaponsD/Minigun/RotateUp    /* 〃 */
+weapons/minigun/click  lsounds/WeaponsD/Minigun/Click       /* 〃 */
+weapons/minigun/down   lsounds/WeaponsD/Minigun/RotateDown  /* E.Y.E: Divine Cybermancy */
+weapons/minigun/place  lsounds/WeaponsD/Minigun/RotatePlace /* Quake 2 */
+weapons/minigun/empty  lsounds/WeaponsD/Minigun/Empty       /* Halo 3 */
+weapons/minigun/magout lsounds/WeaponsD/Minigun/MagOut      /* E.Y.E: Divine Cybermancy */
+weapons/minigun/magin  lsounds/WeaponsD/Minigun/MagIn       /* 〃 */
 
-//
-// Fat Mac
-//
-weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire // Halo 3, Half-Life 2
+/* Fat Mac */
+weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire /* Halo 3, Half-Life 2 */
 
 $alias weapons/fatmac/empty weapons/cshotgun/empty
 $alias weapons/fatmac/boltback weapons/sniper/boltback
 $alias weapons/fatmac/boltforward weapons/sniper/boltforward
 
-// EOF
+/* EOF */

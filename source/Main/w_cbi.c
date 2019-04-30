@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_cbi.c: CBI upgrade/boss reward payouts.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * CBI upgrade/boss reward payouts.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
@@ -77,7 +84,7 @@ void CBI_InstallSpawned(void)
       CBI_Install(cbispawn[i]);
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_CBIItemWasSpawned")
 void Sc_CBIItemWasSpawned(i32 num)
@@ -100,4 +107,4 @@ void Sc_PickupCBIItem(i32 num)
 }
 #endif
 
-// EOF
+/* EOF */

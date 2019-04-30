@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 user   float dtap_player_damagebobmul  = 0.6;
 user   bool  dtap_player_damagebob     = true;
@@ -19,9 +24,9 @@ user   bool  dtap_player_rainshader    = true;
 user   int   dtap_player_lvsys         = 1;
 user   bool  dtap_player_altinvuln     = false;
 
-// These are 200 bytes of storage per, so overall we have around 6kb available.
-// If this isn't enough more of these can be added trivially (ACS doesn't
-// assume the amount of available storage)
+/* These are 200 bytes of storage per, so overall we have around 6kb available. */
+/* If this isn't enough more of these can be added trivially (ACS doesn't */
+/* assume the amount of available storage) */
 user string dtap_psave_0  = "";
 user string dtap_psave_1  = "";
 user string dtap_psave_2  = "";
@@ -53,4 +58,4 @@ user string dtap_psave_27 = "";
 user string dtap_psave_28 = "";
 user string dtap_psave_29 = "";
 
-// EOF
+/* EOF */

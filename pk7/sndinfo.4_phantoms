@@ -1,20 +1,23 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Phantom
-//
-enemies/phantom/spawn1 lsounds/Monsters/Phantoms/Spawn  // Self-made
-enemies/phantom/spawn2 lsounds/Monsters/Phantoms/Spawn2 // 〃
+/* Phantom */
+enemies/phantom/spawn1 lsounds/Monsters/Phantoms/Spawn  /* Self-made */
+enemies/phantom/spawn2 lsounds/Monsters/Phantoms/Spawn2 /* 〃 */
 
-enemies/phantom/lunge1 lsounds/Monsters/Phantoms/Lunge  // Ninja Gaiden Black
-enemies/phantom/lunge2 lsounds/Monsters/Phantoms/Lunge2 // 〃
-enemies/phantom/lunge3 lsounds/Monsters/Phantoms/Lunge3 // 〃
+enemies/phantom/lunge1 lsounds/Monsters/Phantoms/Lunge  /* Ninja Gaiden Black */
+enemies/phantom/lunge2 lsounds/Monsters/Phantoms/Lunge2 /* 〃 */
+enemies/phantom/lunge3 lsounds/Monsters/Phantoms/Lunge3 /* 〃 */
 
-enemies/phantom/aura lsounds/Monsters/Phantoms/Aura // Phantasy Star Nova
+enemies/phantom/aura lsounds/Monsters/Phantoms/Aura /* Phantasy Star Nova */
 
-enemies/phantom/escape lsounds/Monsters/Phantoms/Escape // Touhou 13
+enemies/phantom/escape lsounds/Monsters/Phantoms/Escape /* Touhou 13 */
 
 $random enemies/phantom/lunge {
    enemies/phantom/lunge1
@@ -27,16 +30,14 @@ $random enemies/phantom/spawned {
    enemies/phantom/spawn2
 }
 
-//
-// James
-//
-enemies/james/fire1 lsounds/Monsters/Phantoms/James/Fire  // Alliance of Valiant Arms
-enemies/james/fire2 lsounds/Monsters/Phantoms/James/Fire2 // 〃
-enemies/james/fire3 lsounds/Monsters/Phantoms/James/Fire3 // 〃
+/* James */
+enemies/james/fire1 lsounds/Monsters/Phantoms/James/Fire  /* Alliance of Valiant Arms */
+enemies/james/fire2 lsounds/Monsters/Phantoms/James/Fire2 /* 〃 */
+enemies/james/fire3 lsounds/Monsters/Phantoms/James/Fire3 /* 〃 */
 
-enemies/james/knife1 lsounds/Monsters/Phantoms/James/Knife  // ???
-enemies/james/knife2 lsounds/Monsters/Phantoms/James/Knife2 // 〃
-enemies/james/knife3 lsounds/Monsters/Phantoms/James/Knife3 // 〃
+enemies/james/knife1 lsounds/Monsters/Phantoms/James/Knife  /* ??? */
+enemies/james/knife2 lsounds/Monsters/Phantoms/James/Knife2 /* 〃 */
+enemies/james/knife3 lsounds/Monsters/Phantoms/James/Knife3 /* 〃 */
 
 $alias enemies/james/knifehit weapons/knife/hitflesh
 
@@ -55,27 +56,25 @@ $random enemies/james/fire {
 $limit enemies/james/fire 0
 $attenuation enemies/james/fire 0.5
 
-//
-// Makarov
-//
-enemies/makarov/fire1 lsounds/Monsters/Phantoms/Makarov/Fire  // Fallout: New Vegas
-enemies/makarov/fire2 lsounds/Monsters/Phantoms/Makarov/Fire2 // 〃
+/* Makarov */
+enemies/makarov/fire1 lsounds/Monsters/Phantoms/Makarov/Fire  /* Fallout: New Vegas */
+enemies/makarov/fire2 lsounds/Monsters/Phantoms/Makarov/Fire2 /* 〃 */
 
-enemies/makarov/pump1 lsounds/Monsters/Phantoms/Makarov/Pump  // ???
-enemies/makarov/pump2 lsounds/Monsters/Phantoms/Makarov/Pump2 // 〃
+enemies/makarov/pump1 lsounds/Monsters/Phantoms/Makarov/Pump  /* ??? */
+enemies/makarov/pump2 lsounds/Monsters/Phantoms/Makarov/Pump2 /* 〃 */
 
-enemies/makarov/chainthrow lsounds/Monsters/Phantoms/Makarov/ChainThrow // ???
-enemies/makarov/chainhit   lsounds/Monsters/Phantoms/Makarov/ChainHit   // 〃
+enemies/makarov/chainthrow lsounds/Monsters/Phantoms/Makarov/ChainThrow /* ??? */
+enemies/makarov/chainhit   lsounds/Monsters/Phantoms/Makarov/ChainHit   /* 〃 */
 
-enemies/makarov/throw1 lsounds/Monsters/Phantoms/Makarov/Throw  // ???
-enemies/makarov/throw2 lsounds/Monsters/Phantoms/Makarov/Throw2 // 〃
-enemies/makarov/throw3 lsounds/Monsters/Phantoms/Makarov/Throw3 // 〃
+enemies/makarov/throw1 lsounds/Monsters/Phantoms/Makarov/Throw  /* ??? */
+enemies/makarov/throw2 lsounds/Monsters/Phantoms/Makarov/Throw2 /* 〃 */
+enemies/makarov/throw3 lsounds/Monsters/Phantoms/Makarov/Throw3 /* 〃 */
 
-enemies/makarov/scythe1 lsounds/Monsters/Phantoms/Makarov/ScytheSwing  // ???, Killing Floor
-enemies/makarov/scythe2 lsounds/Monsters/Phantoms/Makarov/ScytheSwing2 // 〃
+enemies/makarov/scythe1 lsounds/Monsters/Phantoms/Makarov/ScytheSwing  /* ???, Killing Floor */
+enemies/makarov/scythe2 lsounds/Monsters/Phantoms/Makarov/ScytheSwing2 /* 〃 */
 
-enemies/makarov/scythehit1 lsounds/Monsters/Phantoms/Makarov/ScytheHit  // Killing Floor
-enemies/makarov/scythehit2 lsounds/Monsters/Phantoms/Makarov/ScytheHit2 // 〃
+enemies/makarov/scythehit1 lsounds/Monsters/Phantoms/Makarov/ScytheHit  /* Killing Floor */
+enemies/makarov/scythehit2 lsounds/Monsters/Phantoms/Makarov/ScytheHit2 /* 〃 */
 
 $random enemies/makarov/scythe {
    enemies/makarov/scythe1
@@ -108,11 +107,9 @@ $attenuation enemies/makarov/fire 0.5
 
 $limit enemies/makarov/pump 0
 
-//
-// Isaac
-//
-enemies/isaac/fire1 lsounds/Monsters/Phantoms/Isaac/Fire  // ???, Halo 3
-enemies/isaac/fire2 lsounds/Monsters/Phantoms/Isaac/Fire2 // 〃
+/* Isaac */
+enemies/isaac/fire1 lsounds/Monsters/Phantoms/Isaac/Fire  /* ???, Halo 3 */
+enemies/isaac/fire2 lsounds/Monsters/Phantoms/Isaac/Fire2 /* 〃 */
 
 $random enemies/isaac/fire {
    enemies/isaac/fire1
@@ -122,16 +119,14 @@ $random enemies/isaac/fire {
 $limit enemies/isaac/fire 0
 $attenuation enemies/isaac/fire 0.5
 
-//
-// Michael
-//
-enemies/michael/swing1 lsounds/Monsters/Phantoms/Michael/Swing  // Fallout 4
-enemies/michael/swing2 lsounds/Monsters/Phantoms/Michael/Swing2 // 〃
-enemies/michael/swing3 lsounds/Monsters/Phantoms/Michael/Swing3 // 〃
+/* Michael */
+enemies/michael/swing1 lsounds/Monsters/Phantoms/Michael/Swing  /* Fallout 4 */
+enemies/michael/swing2 lsounds/Monsters/Phantoms/Michael/Swing2 /* 〃 */
+enemies/michael/swing3 lsounds/Monsters/Phantoms/Michael/Swing3 /* 〃 */
 
-enemies/michael/hit1 lsounds/Monsters/Phantoms/Michael/Hit  // Halo 3
-enemies/michael/hit2 lsounds/Monsters/Phantoms/Michael/Hit2 // 〃
-enemies/michael/hit3 lsounds/Monsters/Phantoms/Michael/Hit3 // 〃
+enemies/michael/hit1 lsounds/Monsters/Phantoms/Michael/Hit  /* Halo 3 */
+enemies/michael/hit2 lsounds/Monsters/Phantoms/Michael/Hit2 /* 〃 */
+enemies/michael/hit3 lsounds/Monsters/Phantoms/Michael/Hit3 /* 〃 */
 
 $random enemies/michael/swing {
    enemies/michael/swing1
@@ -145,4 +140,4 @@ $random enemies/michael/hit {
    enemies/michael/hit3
 }
 
-// EOF
+/* EOF */

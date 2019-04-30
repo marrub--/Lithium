@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_BloodHitSpray : Actor
 {
@@ -150,7 +155,7 @@ void Lith_A_SetLevel(int num)
 states
 {
 Spawn:
-   TNT1 A 0 nodelay ResolveState("Heavy"); // HACK: this is STILL hardcoded!
+   TNT1 A 0 nodelay ResolveState("Heavy"); /* HACK: this is STILL hardcoded! */
    TNT1 A 0 ResolveState("Medium");
    TNT1 A 0 ResolveState("Low");
    BLUD A 0 Lith_A_Dogs;
@@ -199,4 +204,4 @@ DoneLow:
    stop;
 }
 
-// EOF
+/* EOF */

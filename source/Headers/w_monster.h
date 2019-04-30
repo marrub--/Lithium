@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_monster.h: Monster tracking and information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Monster tracking and information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef w_monster_h
 #define w_monster_h
@@ -69,8 +76,8 @@ struct dmon {
    struct monster_info const *mi;
 };
 
-// this must be kept as a typedef, because it could be moved to another
-// address space, and then I'd have to do a bunch of rewriting again
+/* this must be kept as a typedef, because it could be moved to another */
+/* address space, and then I'd have to do a bunch of rewriting again */
 typedef struct dmon dmon_t;
 
 script dmon_t *DmonPtr(i32 tid, i32 ptr);

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 actor Lith_Coin : Lith_ScoreItem
 {
@@ -319,4 +324,4 @@ actor Lith_Tourmaline1 : Lith_MultiSpawner
    Lith_MultiSpawner.Type "Lith_Tourmaline"
 }
 
-// EOF
+/* EOF */

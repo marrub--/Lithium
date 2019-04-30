@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_shop.c: Player shop handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Player shop handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum {
    sif_weapon = 1 << 0,
@@ -23,11 +30,11 @@ struct shopitem
    i32 flags;
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 StrEntON
 static struct shopitem shopitems[] = {
-// {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]},
+/* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
    {{"RocketAmmo", snil, 9000},  gA, 5,    OBJ "RocketAmmo"},
    {{"PlasmaAmmo", snil, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
 
@@ -44,7 +51,7 @@ static struct shopitem shopitems[] = {
 };
 StrEntOFF
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static bool Shop_CanBuy(struct player *p, struct shopdef const *, void *item_)
 {
@@ -74,7 +81,7 @@ static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void Shop_MInit(void)
 {
@@ -129,4 +136,4 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
 }
 #endif
 
-// EOF
+/* EOF */

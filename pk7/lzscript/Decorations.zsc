@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "lzscript/Decorations/Base.zsc"
 #include "lzscript/Decorations/BurningBarrel.zsc"
@@ -11,4 +16,4 @@
 #include "lzscript/Decorations/TorchSmall.zsc"
 #include "lzscript/Decorations/TorchTall.zsc"
 
-// EOF
+/* EOF */

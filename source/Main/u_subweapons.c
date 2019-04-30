@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_subweapons.c: Subweapons upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Subweapons upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr)
@@ -39,4 +46,4 @@ void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
    PrintText(s_chfont, CR_WHITE, 10,1, 120,2);
 }
 
-// EOF
+/* EOF */

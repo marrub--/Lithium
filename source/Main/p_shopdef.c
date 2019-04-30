@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_shopdef.c: Unified shop definition handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Unified shop definition handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_shopdef.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 i96 P_Shop_Cost(struct player *p, struct shopdef const *def)
 {
@@ -27,7 +34,7 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char con
    if(!P_Shop_CanBuy(p, def, obj))
       return false;
 
-   if(!nolog) p->logF("Bought %S", Language(namefmt, def->name)); // TODO
+   if(!nolog) p->logF("Bought %S", Language(namefmt, def->name)); /* TODO */
 
    if(def->bipunlock)
    {
@@ -53,14 +60,14 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char con
       if((x || y || z) && ACS_Spawn(so_BoughtItem, x, y, z, tid = ACS_UniqueTID()))
       {
          if(def->ShopGive(p, def, obj, tid))
-            p->logH(1, "\CjItem delivered."); // TODO
+            p->logH(1, "\CjItem delivered."); /* TODO */
          else
             ACS_Thing_Remove(tid);
 
          delivered = true;
       }
       else
-         p->logH(1, "\CgCouldn't deliver item\C-, placing directly in inventory."); // TODO
+         p->logH(1, "\CgCouldn't deliver item\C-, placing directly in inventory."); /* TODO */
    }
 
    if(!delivered) def->ShopBuy(p, def, obj);
@@ -68,4 +75,4 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char con
    return true;
 }
 
-// EOF
+/* EOF */

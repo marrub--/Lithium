@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_gui_upgrades.c: Upgrades tab GUI.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Upgrades tab GUI.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "w_world.h"
@@ -106,37 +113,37 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
 
    #undef Req
 
-   // Performance rating
+   /* Performance rating */
    if(upgr->info->perf && p->pclass != pcl_cybermage)
    {
       bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
 
       if(upgr->active)
-         PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf); // TODO
+         PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf); /* TODO */
       else if(over)
-         PrintTextFmt("Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf); // TODO
+         PrintTextFmt("Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf); /* TODO */
       else
-         PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf); // TODO
+         PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf); /* TODO */
 
       PrintText(s_cbifont, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 
-   // Score multiplier
+   /* Score multiplier */
    if(upgr->info->scoreadd != 0)
    {
       char cr;
       str  op;
       bool chk;
 
-      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = st_disabling;} // TODO
-      else             {chk = upgr->info->scoreadd < 0; op = st_enabling;}  // TODO
+      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = st_disabling;} /* TODO */
+      else             {chk = upgr->info->scoreadd < 0; op = st_enabling;}  /* TODO */
 
       i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
-      PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc); // TODO
+      PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc); /* TODO */
       PrintText(s_cbifont, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
@@ -146,7 +153,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
 {
    SetClipW(111, 30, 190, 170, 184);
 
-   // Cost
+   /* Cost */
    char const *mark;
    str cost;
 
@@ -161,10 +168,10 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
 
    PrintText_str(cost, s_cbifont, CR_WHITE, 111,1, 30,1);
 
-   // Category
+   /* Category */
    PrintText_str(L(upgrcateg[upgr->info->category]), s_cbifont, CR_WHITE, 111,1, 40,1);
 
-   // Effect
+   /* Effect */
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("%s %S", LC(LANG "EFFECT"), effect);
 
@@ -195,4 +202,4 @@ void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)
    GUIUpgradeRequirements(g, p, upgr);
 }
 
-// EOF
+/* EOF */

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_LampSpark : Actor
 {
@@ -92,4 +97,4 @@ class Lith_TechLampFlare  : Lith_DecorFlareB   {default {Height 65;}}
 class Lith_TechLamp2Flare : Lith_TechLampFlare {default {Height 50; Scale 0.7;}}
 class Lith_ColumnFlare    : Lith_DecorFlareY   {default {Height 40; Scale 0.7;}}
 
-// EOF
+/* EOF */

@@ -1,20 +1,25 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Cyberspace : Thinker;
 
-// pixel texture
+/* pixel texture */
 TextureID m_PTex;
 
-// pixel buffer – do not read unless in UI context
+/* pixel buffer – do not read unless in UI context */
 const RW = 64;
 const RH = 48;
 
 uint8 m_DBuf[RW * RH];
 float m_CamX[RW];
 
-// map (TODO: make dynamic)
+/* map (TODO: make dynamic) */
 const MW = 8;
 const MH = 8;
 
@@ -29,15 +34,15 @@ static const uint8[] CMAP = {
    1, 1, 1, 1, 1, 1, 1, 1
 };
 
-// camera normal
+/* camera normal */
 float m_NX;
 float m_NY;
 
-// camera plane
+/* camera plane */
 float m_PX;
 float m_PY;
 
-// view pos
+/* view pos */
 int m_VX;
 int m_VY;
 
@@ -76,8 +81,8 @@ void Lith_RotateView(float rel)
    float o_nx = m_NX;
    float o_px = m_PX;
 
-   // rotate normal and plane with a simple matrix
-   // TODO: calculate this in drawframe instead and use a euler angle
+   /* rotate normal and plane with a simple matrix */
+   /* TODO: calculate this in drawframe instead and use a euler angle */
    m_NX = m_NX * Cos(rel) - m_NY * Sin(rel);
    m_NY = o_nx * Sin(rel) + m_NY * Cos(rel);
    m_PX = m_PX * Cos(rel) - m_PY * Sin(rel);
@@ -88,33 +93,33 @@ void Lith_DrawFrame()
 {
    for(int x = 0; x < RW; x++)
    {
-      // camera x coordinate
+      /* camera x coordinate */
       float ndc = m_CamX[x];
-      if(ndc == 0) ndc = 0.001; // hack to prevent sigfpe when facing 0°
+      if(ndc == 0) ndc = 0.001; /* hack to prevent sigfpe when facing 0° */
 
-      // ray normal
+      /* ray normal */
       float rnx = m_NX + m_PX * ndc;
       float rny = m_NY + m_PY * ndc;
 
-      // direction delta
+      /* direction delta */
       float ddx = Sqrt(1 + (rny * rny) / (rnx * rnx));
       float ddy = Sqrt(1 + (rnx * rnx) / (rny * rny));
 
-      // distance to side
+      /* distance to side */
       float sidedx;
       float sidedy;
 
-      // step sign
+      /* step sign */
       int stepx;
       int stepy;
 
-      // get direction for ray normal
+      /* get direction for ray normal */
       if(rnx < 0) {stepx = -1; sidedx = 0;}
       else        {stepx =  1; sidedx = ddx;}
       if(rny < 0) {stepy = -1; sidedy = 0;}
       else        {stepy =  1; sidedy = ddy;}
 
-      // dda raycast
+      /* dda raycast */
       int mapx = m_VX;
       int mapy = m_VY;
 
@@ -125,12 +130,12 @@ void Lith_DrawFrame()
          else                {sidedy += ddy; mapy += stepy; side = true; }
       } while(!CMAP[mapx + mapy * MW]);
 
-      // get perspective distance
+      /* get perspective distance */
       float pwdst;
       if(side) pwdst = (mapy - m_VY + (1 - stepy) / 2) / rny;
       else     pwdst = (mapx - m_VX + (1 - stepx) / 2) / rnx;
 
-      // get line draw properties
+      /* get line draw properties */
       int lineh = RH / pwdst;
 
       int ds = -lineh / 2 + RH / 2;
@@ -141,12 +146,12 @@ void Lith_DrawFrame()
 
       if(ds == de) continue;
 
-      // get light amount for line
+      /* get light amount for line */
       int light = 0xFF - (pwdst * 32);
       if(side) light /= 2;
       light = Clamp(light, 32, 135);
 
-      // clear and draw line
+      /* clear and draw line */
       for(int y =  0; y <  RH; y++) m_DBuf[x + y * RW] = 0;
       for(int y = ds; y <= de; y++) m_DBuf[x + y * RW] = light;
    }
@@ -156,7 +161,7 @@ ui void Lith_Render() const
 {
    Screen.Dim("Black", 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
 
-   // draw scene from pixel buffer
+   /* draw scene from pixel buffer */
    for(int y = 0; y < RH; y++) for(int x = 0; x < RW; x++)
       Screen.DrawTexture(m_PTex, false, x, y,
          DTA_VirtualWidth,  RW,
@@ -164,4 +169,4 @@ ui void Lith_Render() const
          DTA_FillColor,     m_DBuf[x + y * RW]);
 }
 
-// EOF
+/* EOF */

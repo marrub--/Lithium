@@ -1,26 +1,29 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Ambiance
-//
-amb/rain       lsounds/World/Ambiance/Rain          // ???
-amb/wind       lsounds/World/Ambiance/Wind          // 〃
-amb/rainout    lsounds/World/Ambiance/RainOut       // 〃
-amb/windout    lsounds/World/Ambiance/WindOut       // 〃
-amb/bigcomp    lsounds/World/Ambiance/BigComputer   // EYE: Divine Cybermancy
-amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant  // Half-Life 2
-amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2 // 〃
-amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3 // 〃
-amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4 // 〃
-amb/ship       lsounds/World/Ambiance/Ship          // 〃
-amb/field      lsounds/World/Ambiance/NoEntry       // 〃
-amb/vent       lsounds/World/Ambiance/VentPump      // 〃
-amb/lightson   lsounds/World/Ambiance/LightsOn      // 〃
-amb/computer   lsounds/World/Ambiance/Computer      // Quake
+/* Ambiance */
+amb/rain       lsounds/World/Ambiance/Rain          /* ??? */
+amb/wind       lsounds/World/Ambiance/Wind          /* 〃 */
+amb/rainout    lsounds/World/Ambiance/RainOut       /* 〃 */
+amb/windout    lsounds/World/Ambiance/WindOut       /* 〃 */
+amb/bigcomp    lsounds/World/Ambiance/BigComputer   /* EYE: Divine Cybermancy */
+amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant  /* Half-Life 2 */
+amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2 /* 〃 */
+amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3 /* 〃 */
+amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4 /* 〃 */
+amb/ship       lsounds/World/Ambiance/Ship          /* 〃 */
+amb/field      lsounds/World/Ambiance/NoEntry       /* 〃 */
+amb/vent       lsounds/World/Ambiance/VentPump      /* 〃 */
+amb/lightson   lsounds/World/Ambiance/LightsOn      /* 〃 */
+amb/computer   lsounds/World/Ambiance/Computer      /* Quake */
 
-amb/fire lsounds/World/Ambiance/Fire // Hexen
+amb/fire lsounds/World/Ambiance/Fire /* Hexen */
 $limit amb/fire 0
 
 $alias amb/spark weapons/erifle/zap
@@ -46,9 +49,7 @@ $ambient 42425 amb/field     point 4.0  continuous    1.0
 $ambient 42426 amb/vent      point 5.0  continuous    0.5
 $ambient 42427 amb/computer  point 2.0  continuous    1.0
 
-//
-// Barrels
-//
+/* Barrels */
 misc/barrel/hit1 lsounds/World/Barrel/Hit
 misc/barrel/hit2 lsounds/World/Barrel/Hit2
 
@@ -57,15 +58,13 @@ $random misc/barrel/hit {
    misc/barrel/hit2
 }
 
-//
-// Decorations
-//
-amb/lamp1    lsounds/World/Ambiance/LampTall     // ???
-amb/lamp2    lsounds/World/Ambiance/LampSmall    // ???
-amb/shatter1 lsounds/World/Ambiance/GlassBreak1  // Half-Life 2
-amb/shatter2 lsounds/World/Ambiance/GlassBreak2  // 〃
-amb/metalx   lsounds/World/Ambiance/MetalExplode // 〃
-amb/woodx    lsounds/World/Ambiance/WoodExplode  // 〃
+/* Decorations */
+amb/lamp1    lsounds/World/Ambiance/LampTall     /* ??? */
+amb/lamp2    lsounds/World/Ambiance/LampSmall    /* ??? */
+amb/shatter1 lsounds/World/Ambiance/GlassBreak1  /* Half-Life 2 */
+amb/shatter2 lsounds/World/Ambiance/GlassBreak2  /* 〃 */
+amb/metalx   lsounds/World/Ambiance/MetalExplode /* 〃 */
+amb/woodx    lsounds/World/Ambiance/WoodExplode  /* 〃 */
 
 $random amb/shatter {
    amb/shatter1
@@ -76,26 +75,24 @@ $volume amb/lamp1 0.3
 $volume amb/lamp2 0.3
 $volume amb/shatter 0.4
 
-//
-// Splashes
-//
-world/splash/nukage lsounds/World/Splashes/Nukage // ???
+/* Splashes */
+world/splash/nukage lsounds/World/Splashes/Nukage /* ??? */
 
-world/splash/water1 lsounds/World/Splashes/Water1 // Call of Duty: Modern Warfare 2
-world/splash/water2 lsounds/World/Splashes/Water2 // 〃
-world/splash/water3 lsounds/World/Splashes/Water3 // 〃
-world/splash/water4 lsounds/World/Splashes/Water4 // 〃
-world/splash/water5 lsounds/World/Splashes/Water5 // 〃
+world/splash/water1 lsounds/World/Splashes/Water1 /* Call of Duty: Modern Warfare 2 */
+world/splash/water2 lsounds/World/Splashes/Water2 /* 〃 */
+world/splash/water3 lsounds/World/Splashes/Water3 /* 〃 */
+world/splash/water4 lsounds/World/Splashes/Water4 /* 〃 */
+world/splash/water5 lsounds/World/Splashes/Water5 /* 〃 */
 
-world/splash/sludge1 lsounds/World/Splashes/Sludge1 // ???
-world/splash/sludge2 lsounds/World/Splashes/Sludge2 // ???
-world/splash/sludge3 lsounds/World/Splashes/Sludge3 // ???
-world/splash/sludge4 lsounds/World/Splashes/Sludge4 // ???
+world/splash/sludge1 lsounds/World/Splashes/Sludge1 /* ??? */
+world/splash/sludge2 lsounds/World/Splashes/Sludge2 /* ??? */
+world/splash/sludge3 lsounds/World/Splashes/Sludge3 /* ??? */
+world/splash/sludge4 lsounds/World/Splashes/Sludge4 /* ??? */
 
-world/splash/lava1 lsounds/World/Splashes/Lava1 // ???
-world/splash/lava2 lsounds/World/Splashes/Lava2 // ???
-world/splash/lava3 lsounds/World/Splashes/Lava3 // ???
-world/splash/lava4 lsounds/World/Splashes/Lava4 // ???
+world/splash/lava1 lsounds/World/Splashes/Lava1 /* ??? */
+world/splash/lava2 lsounds/World/Splashes/Lava2 /* ??? */
+world/splash/lava3 lsounds/World/Splashes/Lava3 /* ??? */
+world/splash/lava4 lsounds/World/Splashes/Lava4 /* ??? */
 
 $random world/splash/water {
    world/splash/water1
@@ -121,4 +118,4 @@ $random world/splash/lava {
 
 $alias world/splash/nukage world/splash/sludge
 
-// EOF
+/* EOF */

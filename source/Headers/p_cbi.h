@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_cbi.h: CBI GUI data.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * CBI GUI data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef p_cbi_h
 #define p_cbi_h
@@ -11,7 +18,7 @@
 
 #define CBIState(g) ((struct cbistate *)((g)->state))
 
-// Type Definitions ----------------------------------------------------------|
+/* Type Definitions -------------------------------------------------------- */
 
 enum
 {
@@ -96,7 +103,7 @@ struct cbi
    u32 pruse;
 };
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_PMinit(struct player *p);
 char const *ThemeName(u32 num);

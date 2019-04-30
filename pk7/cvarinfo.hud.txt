@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 user bool lith_hud_showscore    = true;
 user bool lith_hud_showlvl      = false;
@@ -22,7 +27,7 @@ user bool lith_scanner_slide   = true;
 user bool lith_scanner_bar     = true;
 user int  lith_scanner_xoffs   = 0;
 user int  lith_scanner_yoffs   = 0;
-user int  lith_scanner_color   = 106; // 'j'
+user int  lith_scanner_color   = 106; /* 'j' */
 user bool lith_scanner_altfont = false;
 
-// EOF
+/* EOF */

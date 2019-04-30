@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_attrib.c: Attribute handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Attribute handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 {
@@ -56,7 +63,7 @@ static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
    PrintText_str(right, s_chfont, CR_WHITE, x+80,2, y,1);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
@@ -92,4 +99,4 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
       DrawAttr(g, x, y, p, i);
 }
 
-// EOF
+/* EOF */

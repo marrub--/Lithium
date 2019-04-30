@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_dmon.c: Monster tracker functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Monster tracker functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "w_monster.h"
@@ -11,14 +18,14 @@
 
 #define DMON_MAX 0x7FFF
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
-// This is lazy-allocated. Don't touch or GDCC will break your computer's face.
+/* This is lazy-allocated. Don't touch or GDCC will break your computer's face. */
 noinit
 static dmon_t dmonalloc[DMON_MAX];
 static i32    dmonid;
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void PrintDmonAllocSize(struct player *p)
 {
@@ -88,4 +95,4 @@ dmon_t *AllocDmon(void)
 }
 #endif
 
-// EOF
+/* EOF */

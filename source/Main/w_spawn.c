@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_spawn.c: Random spawners.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Random spawners.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
 #include "w_world.h"
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 struct witem
 {
@@ -16,7 +23,7 @@ struct witem
    char const *item;
 };
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct witem const garmor[] = {
    {1000, OBJ "Armor_Standard_Upper"},
@@ -82,7 +89,7 @@ static struct witem const clipbx[] = {
    BonusItemsBig(4000),
 };
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 stkcall
 static char const *RandomWeighted(struct witem const *l, i32 c)
@@ -94,7 +101,7 @@ static char const *RandomWeighted(struct witem const *l, i32 c)
    return nil;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_RandomSpawn")
 void Sc_RandomSpawn(i32 rsn)
@@ -115,4 +122,4 @@ void Sc_RandomSpawn(i32 rsn)
 }
 #endif
 
-// EOF
+/* EOF */

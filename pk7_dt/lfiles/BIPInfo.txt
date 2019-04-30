@@ -1,11 +1,21 @@
-// vim: syntax=c
-// This is a configuration file for Lithium's info pages. The current category
-// is set with ^ Category [*], and then the syntax is simply:
-// Classes... Name [*] [-> Unlocks...]
+/* vim: syntax=c
+ * ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * This is a configuration file for Lithium's info pages. The current category
+ * is set with ^ Category [*], and then the syntax is simply:
+ * Classes... Name [*] [-> Unlocks...]
+ *
+ */
 
-@"lfiles/BIPInfo_Mod.txt" // if you want to add extra pages, use this file
+@"lfiles/BIPInfo_Mod.txt" /* if you want to add extra pages, use this file */
 
-^ENEMIES* //------------------------------------------------------------------|
+^ENEMIES* /* --------------------------------------------------------------- */
 
 gA ZombieMan
 gA ShotgunGuy
@@ -32,7 +42,7 @@ gA Cyberdemon
 gA Phantom
 gA IconOfSin
 
-^ITEMS //---------------------------------------------------------------------|
+^ITEMS /* ------------------------------------------------------------------ */
 
 gA ScoreChip
 gA HealthBonus
@@ -70,12 +80,13 @@ pM ArmorInter
 pM CBIUpgr1   -> KSKK
 pM CBIUpgr2   -> KSKK
 
-^YOURSELF* //-----------------------------------------------------------------|
+^YOURSELF* /* -------------------------------------------------------------- */
 
 pM P114
 pC OPD2
 pC Info400
 pC Info402
+pC HackInfo
 
 gA BIP
 pM CBIStan
@@ -100,7 +111,7 @@ pW    AttrAGI
 pA    AttrRSH
 pD    AttrREF
 
-^UPGRADES //------------------------------------------------------------------|
+^UPGRADES /* --------------------------------------------------------------- */
 
 pM HeadsUpDisp -> OFMD
 pM JetBooster  -> OFMD
@@ -119,7 +130,7 @@ pC StealthSys
 gO VitalScanner -> KSKK
 gO AutoReload   -> KSKK
 
-^PLACES //--------------------------------------------------------------------|
+^PLACES /* ----------------------------------------------------------------- */
 
 gO AetosVi
 pC Algidistari
@@ -131,17 +142,17 @@ gA Hell           -> Earth
 gO Mars           -> Earth OFMD
 gO OmicronXevv
 gA ReverseAce
-pM SuperDimension -> BFG9000 //SIGFPE
+pM SuperDimension -> BFG9000 /* SIGFPE */
 gA Tsukama
 
-^CORPORATIONS //--------------------------------------------------------------|
+^CORPORATIONS /* ----------------------------------------------------------- */
 
 gO AllPoint
 pM AOF
 pC AOFJem
 pM Cid        -> SuperDimension Earth
 pM Facer
-gA JAQTen
+gA JAQTen     -> Tsukama
 gA JJJ
 pM KSKK       -> Earth
 pC KSKKJem    -> Earth
@@ -151,12 +162,12 @@ pM OFMD
 pC OFMDJem
 gO Omakeda    -> Earth
 gO Semaphore  -> OmicronXevv
-gA ShekaKaff
+gA ShekaKaff  -> Tsukama
 gO SYM43      -> AetosVi
 pM UnrealArms -> AetosVi
 gA Yigan
 
-^WEAPONS //-------------------------------------------------------------------|
+^WEAPONS /* ---------------------------------------------------------------- */
 
 gO ChargeFist -> KSKK
 
@@ -213,7 +224,7 @@ pC Hulgyon  -> Heaven
 pC StarShot -> AOF
 pC Cercle   -> Earth
 
-^EXTRA* //--------------------------------------------------------------------|
+^EXTRA* /* ----------------------------------------------------------------- */
 
 gA Extra1
 gA Extra2
@@ -221,4 +232,4 @@ gA Extra3
 gA Extra4
 gA Extra5
 
-// EOF
+/* EOF */

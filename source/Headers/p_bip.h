@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_bip.h: Info page data.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Info page data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if defined(LITH_X)
 LITH_X(WEAPONS,      "Weapons")
@@ -23,14 +30,14 @@ LITH_X(MAIL,         "Mail")
 #define ForPage() for_list(struct page *page, bip->infogr[categ])
 #define ForCategoryAndPage() ForCategory() ForPage()
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(struct player *p);
 optargs(1) struct page *P_BIP_Unlock(struct player *p, char const *name);
 stkcall void P_BIP_PQuit(struct player *p);
 script optargs(1) void P_BIP_GiveMail(struct player *p, str title, i32 flags);
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum
 {
@@ -75,7 +82,7 @@ struct page_info
 
 struct bip
 {
-   // Stats
+   /* Stats */
    u32 categoryavail[BIPC_MAX];
    u32 categorymax[BIPC_MAX];
 
@@ -85,7 +92,7 @@ struct bip
    u32 mailreceived;
    u32 mailtrulyreceived;
 
-   // State
+   /* State */
    bool init;
 
    struct page *curpage;
@@ -97,11 +104,11 @@ struct bip
    u32 resnum;
    u32 rescur;
 
-   // Info
+   /* Info */
    list infogr[BIPC_MAX];
 };
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 struct page_info PageInfo(struct page const *page);
 

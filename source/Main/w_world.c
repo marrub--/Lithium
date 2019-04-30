@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_world.c: World entry points.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * World entry points.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -10,7 +17,7 @@
 #include "w_monster.h"
 #include "m_version.h"
 
-// Extern Objects ------------------------------------------------------------|
+/* Extern Objects ---------------------------------------------------------- */
 
 __addrdef __mod_arr lmvar;
 __addrdef __hub_arr lhvar;
@@ -22,7 +29,7 @@ bool dorain;
 
 bool lmvar player_init;
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static bool reopen;
 
@@ -32,7 +39,7 @@ static bool lmvar modinit;
 static bool lhvar hubinit;
 static bool       gblinit;
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 script void SpawnBosses(i96 sum, bool force);
 
@@ -40,19 +47,19 @@ i32 UniqueID(i32 tid)
 {
    i32 pn;
 
-   // Negative values are for players.
+   /* Negative values are for players. */
    if((pn = PtrPlayerNumber(tid)) != -1) return -(pn + 1);
 
-   // If we already have a unique identifier, return that.
+   /* If we already have a unique identifier, return that. */
    i32 id = PtrInvNum(tid, so_UniqueID);
 
-   // Otherwise we have to give a new unique identifier.
+   /* Otherwise we have to give a new unique identifier. */
    if(id == 0) PtrInvGive(tid, so_UniqueID, id = ++mapid);
 
    return id;
 }
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
 script
@@ -88,7 +95,7 @@ static void CheckEnemyCompat(void)
 script
 static void Boss_HInit(void)
 {
-   ACS_Delay(1); // Delay another tic for monster spawners.
+   ACS_Delay(1); /* Delay another tic for monster spawners. */
 
    for_player() {
       SpawnBosses(p->scoresum, false);
@@ -112,17 +119,17 @@ static void UpdateGame(void)
          __with(ACS_SetCVarFixed(sc_version, n);)
 
    Update(Lith_v1_5_1)
-      ACS_SetCVarFixed(sc_sv_scoremul, 1.25); // 2.0 => 1.25
+      ACS_SetCVarFixed(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
 
    Update(Lith_v1_5_2)
-      ACS_SetCVar(sc_sv_difficulty, 10); // 1 => 10
+      ACS_SetCVar(sc_sv_difficulty, 10); /* 1 => 10 */
 
    Update(Lith_v1_6_0)
    {
       for_player()
       {
-         p->setCVarK(sc_player_footstepvol, 0.2); // 1.0 => 0.2
-         p->setCVarI(sc_player_ammolog, true); // false => true
+         p->setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
+         p->setCVarI(sc_player_ammolog, true); /* false => true */
       }
    }
 
@@ -130,7 +137,7 @@ static void UpdateGame(void)
    {
       for_player()
       {
-         p->setCVarK(sc_weapons_zoomfactor, 1.5); // 3.0 => 1.5
+         p->setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
       }
    }
    #undef Update
@@ -195,8 +202,8 @@ static void MInitPst(void)
    payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
    payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
 
-   // Line 1888300 is used as a control line for mod features.
-   // Check for if rain should be used.
+   /* Line 1888300 is used as a control line for mod features. */
+   /* Check for if rain should be used. */
    if(!ACS_GetLineUDMFInt(1888300, sm_MapNoRain) &&
       (ACS_GetCVar(sc_sv_rain) || ACS_GetLineUDMFInt(1888300, sm_MapUseRain)) &&
       ACS_PlayerCount() <= 1)
@@ -227,17 +234,17 @@ static void MInit(void)
    world.soulsfreed = 0;
    #endif
 
-   // Init a random seed from the map.
+   /* Init a random seed from the map. */
    world.mapseed = ACS_Random(0, INT_MAX);
 
-   // Init global score multiplier per-map.
+   /* Init global score multiplier per-map. */
    world.scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;
 
-   // Give players some extra score if they're playing on extra hard or above.
+   /* Give players some extra score if they're playing on extra hard or above. */
    if(ACS_GameSkill() >= skill_extrahard)
       world.scoremul += 0.15;
 
-   // Set the air control because ZDoom's default sucks.
+   /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
 
    Upgr_MInit();
@@ -282,11 +289,11 @@ static void HInit(void)
    if(!ACS_GetCVar(sc_sv_nobosses))
       Boss_HInit();
 
-   // Payout, which is not done on the first map.
+   /* Payout, which is not done on the first map. */
    if(world.mapscleared != 0) Scr_HInit();
    #endif
 
-   // Cluster messages.
+   /* Cluster messages. */
    #define Message(cmp, n, name) \
       if(cmp && !(msgs & (1 << n))) { \
          for_player() P_BIP_GiveMail(p, name); \
@@ -317,7 +324,7 @@ static void HInit(void)
    hubinit = true;
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script type("open")
 static void Sc_World(void)
@@ -325,8 +332,8 @@ static void Sc_World(void)
 begin:
    GetDebugInfo();
 
-   // yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
-   // we can still detect it by using Timer, so correct this variable.
+   /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups. */
+   /* we can still detect it by using Timer, so correct this variable. */
    if(hubinit && ACS_Timer() < 2) hubinit = false;
 
    #if LITHIUM
@@ -366,28 +373,28 @@ begin:
 
    dbgnotenum = 0;
 
-   // Let the map do... whatever.
+   /* Let the map do... whatever. */
    ACS_Delay(1);
 
    if(!modinit) MInitPre();
    if(!gblinit) GInit();
    if(!modinit) MInit();
 
-   // Hub-static pre-player init.
+   /* Hub-static pre-player init. */
    if(!hubinit) HInitPre();
 
-   world.unloaded = false; // Unloaded flag can be reset now.
+   world.unloaded = false; /* Unloaded flag can be reset now. */
    player_init = true;
 
-   ACS_Delay(1); // Wait for players to get initialized.
+   ACS_Delay(1); /* Wait for players to get initialized. */
 
-   // Hub-static post-player init.
+   /* Hub-static post-player init. */
    if(!hubinit) HInit();
 
-   // Module-static post-hub init.
+   /* Module-static post-hub init. */
    if(!modinit) MInitPst();
 
-   // Main loop.
+   /* Main loop. */
    i32 prevsecrets = 0;
    i32 prevkills   = 0;
    i32 previtems   = 0;
@@ -488,4 +495,4 @@ void Sc_Finale(void)
    ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
-// EOF
+/* EOF */

@@ -1,18 +1,25 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// g_auto.c: Miscellaneous GUI functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Miscellaneous GUI functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 noinit static char tcbuf[4096];
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
@@ -20,7 +27,7 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
    x += g->ox;
    y += g->oy;
 
-   // check clip versus cursor (if clipping), then check control versus cursor
+   /* check clip versus cursor (if clipping), then check control versus cursor */
    if(!g->useclip || aabb(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
       if(aabb(x, y, x + w, y + h, g->cx, g->cy))
    {
@@ -30,7 +37,7 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
          g->active = id;
    }
 
-   // check slide state
+   /* check slide state */
    if(slide && g->slide != id && g->active == id) {
       g->slide      = id;
       g->slidetime  = 1;
@@ -50,8 +57,8 @@ void G_UpdateState(struct gui_state *g, struct player *p)
 {
    bool inverted = p->getCVarI(sc_player_invertmouse);
 
-   // Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
-   // This breaks network sync so we can only do it in singleplayer.
+   /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing. */
+   /* This breaks network sync so we can only do it in singleplayer. */
    if(world.singleplayer) inverted |= ACS_GetCVar(sc_invertmouse);
 
    g->old = g->cur;
@@ -188,4 +195,4 @@ struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon
    return typeon;
 }
 
-// EOF
+/* EOF */

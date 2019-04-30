@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_str.h: Various string functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Various string functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include <GDCC.h>
 #include <stdio.h>
@@ -34,4 +41,4 @@ str LanguageNull(char const *fmt, ...);
 char *LanguageVC(char *out, char const *name);
 char *LanguageCV(char *out, char const *name, ...);
 
-// EOF
+/* EOF */

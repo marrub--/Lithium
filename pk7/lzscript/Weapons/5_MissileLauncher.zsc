@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson & Yholl. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & Yholl. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_MissileLauncher : Lith_OutcastsWeapon;
 
@@ -31,7 +36,7 @@ action(Weapon) State Lith_A_FireMissile()
       A_FireProjectile("Lith_MiniMissile", FRandom(-7, 7), false, FRandom(-2, 2), FRandom(-2, 2), FPF_NOAUTOAIM, FRandom(-5, 5));
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    switch(invoker.m_Reset = Min(invoker.m_Reset, 5)) {
-   case 5: return ResolveState("FireAnim6"); // fuck you eat crime
+   case 5: return ResolveState("FireAnim6"); /* fuck you eat crime */
    case 4: return ResolveState("FireAnim5");
    case 3: return ResolveState("FireAnim4");
    case 2: return ResolveState("FireAnim3");
@@ -97,44 +102,44 @@ Fire1:
    MISG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
    #### # 0 Lith_A_JumpIfMagEmpty;
    MISG A 0 Lith_A_FireMissile;
-FireAnim: // choke on the crime
+FireAnim: /* choke on the crime */
    MISG B 1 bright offset(0, 32);
    MISG C 1 bright offset(0, 33);
    MISG D 1 bright offset(0, 34);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting;
-FireAnim2: // be consumed by the crime
+FireAnim2: /* be consumed by the crime */
    MISG B 1 bright offset(0, 33);
    MISG C 1 bright offset(0, 34);
    MISG D 1 bright offset(0, 35);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting2;
-FireAnim3: // fall victim to the crime
+FireAnim3: /* fall victim to the crime */
    MISG B 1 bright offset(0, 34);
    MISG C 1 bright offset(0, 35);
    MISG D 1 bright offset(0, 36);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting3;
-FireAnim4: // crime is love
+FireAnim4: /* crime is love */
    MISG B 1 bright offset(0, 35);
    MISG C 1 bright offset(0, 36);
    MISG D 1 bright offset(0, 37);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting4;
-FireAnim5: // crime is life
+FireAnim5: /* crime is life */
    MISG B 1 bright offset(0, 36);
    MISG C 1 bright offset(0, 37);
    MISG D 1 bright offset(0, 38);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting5;
-FireAnim6: // worship the crime, for it brings graf salt
+FireAnim6: /* worship the crime, for it brings graf salt */
    MISG B 1 bright offset(0, 37);
    MISG C 1 bright offset(0, 38);
    MISG D 1 bright offset(0, 39);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting6;
 
-AnimResetting6: // oh yessssss
+AnimResetting6: /* oh yessssss */
    MISG A 1 offset(0, 39) A_ReFire("Fire1");
    MISG A 0 {invoker.m_Reset--;}
 AnimResetting5:
@@ -155,7 +160,7 @@ AnimResetting:
    MISG AAAAA 1 offset(0, 32) A_ReFire("Fire1");
    goto ReadySelector;
 
-FireEmpty: // fuck u i ain't doing more
+FireEmpty: /* fuck u i ain't doing more */
    MISG A 1;
    MISG A 2 offset(0, 41);
    MISG A 1 offset(0, 45);
@@ -170,4 +175,4 @@ FireEmpty: // fuck u i ain't doing more
    goto ReadySelector;
 }
 
-// EOF
+/* EOF */

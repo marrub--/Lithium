@@ -1,6 +1,11 @@
-// Effects taken from Realm667.
-// I think Tormenter made these originally, sorry if that's incorrect.
-// Thanks to Kate for making these look better.
+/* ---------------------------------------------------------------------------|
+ *
+ * Effects taken from Realm667.
+ * I think Tormenter made these originally, sorry if that's incorrect.
+ * Thanks to Kate for making these look better.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_RainDrop : Actor
 {
@@ -68,4 +73,4 @@ class Lith_BloodRainDrop : Lith_RainDrop
    }
 }
 
-// EOF
+/* EOF */

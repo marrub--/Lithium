@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_tokbuf.h: Buffered token stream.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Buffered token stream.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef m_tokbuf_h
 #define m_tokbuf_h
@@ -12,7 +19,7 @@
 
 #include <stdbool.h>
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
         void          TBufCtor (struct tokbuf *tb);
         void          TBufDtor (struct tokbuf *tb);
@@ -24,7 +31,7 @@ stkcall struct token *TBufReGet(struct tokbuf *tb);
 stkcall i32           TBufProc (struct token *tok);
 stkcall i32           TBufProcL(struct token *tok);
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum
 {

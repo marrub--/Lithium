@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 ALIENFONT
 {
@@ -30,7 +35,7 @@ LHUDFONTSMALL
 
 LHUDFONT
 {
-   // This is fucking awful, but Template doesn't let you use long filenames.
+   /* This is fucking awful, but Template doesn't let you use long filenames. */
    "/" "dtgfx/HUDFont/47.png"
    "0" "dtgfx/HUDFont/48.png"
    "1" "dtgfx/HUDFont/49.png"
@@ -78,4 +83,4 @@ LTRMFONT
    Template LITHC%d
 }
 
-// EOF
+/* EOF */

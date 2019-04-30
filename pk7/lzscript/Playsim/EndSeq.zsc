@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 struct Lith_EndSeqNode
 {
@@ -26,12 +31,12 @@ enum Lith_EndSeqState
    ESEQ_FADEMUS,
 }
 
-// Program
+/* Program */
 private ui uint m_P;
 private ui Lith_EndSeqNode m_Node[32];
 private ui uint16 m_Jmp[99];
 
-// State
+/* State */
 private ui uint m_ESeq;
 private ui color m_BgColo, m_FdColo;
 private ui string m_Text;
@@ -117,8 +122,8 @@ ui void DrawEndSequence(RenderEvent evt)
    if(m_ESeq == ESEQ_WRITEOUT)
    {
       uint len = m_Text.length();
-      uint prc = m_Time*IFIX / m_Tics; // divide (k/i)
-      uint amt = len * prc / IFIX; // multiply (i*k) and remove decimal
+      uint prc = m_Time*IFIX / m_Tics; /* divide (k/i) */
+      uint amt = len * prc / IFIX; /* multiply (i*k) and remove decimal */
       txt = m_Text.left(amt);
    }
 
@@ -255,4 +260,4 @@ ui void RunEndSequence()
    }
 }
 
-// EOF
+/* EOF */

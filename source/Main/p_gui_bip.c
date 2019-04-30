@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_gui_bip.c: Info tab GUI.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Info tab GUI.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "p_player.h"
@@ -63,7 +70,7 @@ static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
 
    G_TextBox_OnTextEntered(st)
    {
-      // That's a lot of numbers...
+      /* That's a lot of numbers... */
       u64 const extranames[] = {
          0x5F38B6C56F0A6D84L,
          0x90215131A36573D7L,
@@ -162,7 +169,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
       else                                                    ACS_PrintChar('|'); \
       PrintText(s_cbifont, cr, x,1, y+oy,1)
 
-   // render an outline if the page has an image
+   /* render an outline if the page has an image */
    if(page->image)
    {
       char const *txt = RemoveTextColors_str(typeon->txt, typeon->pos);
@@ -253,4 +260,4 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p)
    }
 }
 
-// EOF
+/* EOF */

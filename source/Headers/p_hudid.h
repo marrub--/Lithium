@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_hudid.h: Legacy HudMessage IDs and new Fade IDs.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Legacy HudMessage IDs and new Fade IDs.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef p_hudid_h
 #define p_hudid_h

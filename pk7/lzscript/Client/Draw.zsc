@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson & Benjamin Moir. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & Benjamin Moir. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 /*
    The URANUS drawing system is essentially an instruction set with a
@@ -12,7 +17,7 @@
 
 extend class Lith_URANUS;
 
-// Types ---------------------------------------------------------------------|
+/* Types ------------------------------------------------------------------- */
 
 enum DrawType
 {
@@ -53,7 +58,7 @@ struct FadeMsg
    uint16 Fade;
 }
 
-// Constants -----------------------------------------------------------------|
+/* Constants --------------------------------------------------------------- */
 
 const LT_X_MASK = 0x0FFFFFFF;
 const LT_Y_MASK = 0x1FFFFFFF;
@@ -86,7 +91,7 @@ const C_FIRE      = 0xfb7329;
 const C_SAPPHIRE  = 0x6c729f;
 const C_TEAL      = 0x8cd0dc;
 
-// Members -------------------------------------------------------------------|
+/* Members ----------------------------------------------------------------- */
 
 private transient play DrawData[400] m_D;
 private transient play uint m_DPtr;
@@ -99,7 +104,7 @@ private transient play bool m_ForceDraw;
 bool m_FontLoaded;
 bool m_English;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static void ForceDraw(bool on)
 {
@@ -419,7 +424,7 @@ static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
       uint w =  arg1        & 0xffff;
       uint h = (arg1 >> 16) & 0xffff;
 
-      // simple optimization (which also prevents division by zero)
+      /* simple optimization (which also prevents division by zero) */
       if((cl.m_NoDraw = w <= 0 || h <= 0)) return;
 
       cl.m_D[p].Type = Type_ClipSet;
@@ -584,14 +589,14 @@ private static clearscope uint GetParsedColor(uint defcr, name cr)
    }
 }
 
-// Member Functions ----------------------------------------------------------|
+/* Member Functions -------------------------------------------------------- */
 
 override void WorldLoaded(WorldEvent evt)
 {
    if(m_FontLoaded) return;
 
-   // Unfortunately, due to the script runaway limit in ACS, we need to do this
-   // here so everything is initialized without breaking.
+   /* Unfortunately, due to the script runaway limit in ACS, we need to do this */
+   /* here so everything is initialized without breaking. */
    for(int fontnum = 0;; fontnum++)
    {
       if(!CallACS("Lith_SetupFontsBegin", fontnum)) break;
@@ -737,4 +742,4 @@ float, float GetScSized(float x, float y, bool kludge = false)
    return xy.X, xy.Y;
 }
 
-// EOF
+/* EOF */

@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// w_world.h: World data.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * World data.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifndef w_world_h
 #define w_world_h
@@ -90,7 +97,7 @@ struct worldinfo
    bool drlamonsters;
    bool pauseinmenus;
 
-   // DECORATE data
+   /* DECORATE data */
    i32 a_x, a_y;
    struct polar a_angles[8];
    i32 a_cur;

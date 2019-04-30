@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_reflexwetw.c: ReflexWetw upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * ReflexWetw upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
@@ -10,7 +17,7 @@
 
 #define CHARGE_MAX (35 * 0.8)
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 script
 static void DodgeView(struct player *p)
@@ -27,7 +34,7 @@ static void DodgeView(struct player *p)
    SetPropK(0, APROP_ViewHeight, vh);
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
@@ -87,7 +94,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_DodgeView")
 void Sc_DodgeView(void)
@@ -95,4 +102,4 @@ void Sc_DodgeView(void)
    with_player(LocalPlayer) DodgeView(p);
 }
 
-// EOF
+/* EOF */

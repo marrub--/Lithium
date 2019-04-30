@@ -1,15 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_items.c: Inventory handling and UI.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Inventory handling and UI.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 script
 static void BagItem_Tick(struct item *_item)
@@ -130,7 +137,7 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
    }
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_Inv_PInit(struct player *p)
 {
@@ -308,25 +315,25 @@ void P_Inv_PTick(struct player *p)
 void P_CBI_TabItems(struct gui_state *g, struct player *p)
 {
    static i32 const x[] = {
-      155+8*-14, // Backpack
-      155+8*  1, // L Upper Arm
-      155+8*  8, // R Upper Arm
-      155+8*  0, // L Lower Arm
-      155+8*  9, // R Lower Arm
-      155+8*  3, // Belt
-      155+8*  1, // L Leg
-      155+8*  7, // R Leg
+      155+8*-14, /* Backpack */
+      155+8*  1, /* L Upper Arm */
+      155+8*  8, /* R Upper Arm */
+      155+8*  0, /* L Lower Arm */
+      155+8*  9, /* R Lower Arm */
+      155+8*  3, /* Belt */
+      155+8*  1, /* L Leg */
+      155+8*  7, /* R Leg */
    };
 
    static i32 const y[] = {
-      80+8*-1, // Backpack
-      80+8*-2, // L Upper Arm
-      80+8*-2, // R Upper Arm
-      80+8* 2, // L Lower Arm
-      80+8* 2, // R Lower Arm
-      80+8* 5, // Belt
-      80+8* 9, // L Leg
-      80+8* 9, // R Leg
+      80+8*-1, /* Backpack */
+      80+8*-2, /* L Upper Arm */
+      80+8*-2, /* R Upper Arm */
+      80+8* 2, /* L Lower Arm */
+      80+8* 2, /* R Lower Arm */
+      80+8* 5, /* Belt */
+      80+8* 9, /* L Leg */
+      80+8* 9, /* R Leg */
    };
 
    PrintSpriteA(sp_UI_Body, 151,1, 40,1, 0.6);
@@ -381,7 +388,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
          PrintText_str(name, s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
 }
 
-// Scripts -------------------------------------------------------------------|
+/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_ItemCreate")
 void *Sc_ItemCreate(i32 w, i32 h)
@@ -462,4 +469,4 @@ bool Sc_ItemCanPlace(void *_item)
 }
 #endif
 
-// EOF
+/* EOF */

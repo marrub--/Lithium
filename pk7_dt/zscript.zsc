@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 version "3.6"
 
@@ -153,7 +158,7 @@ class DtPlayer : DoomPlayer
 
    override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
-      // ÜBER KLUDGE (override behaviour for DONTHARMSPECIES)
+      /* ÜBER KLUDGE (override behaviour for DONTHARMSPECIES) */
       if(inflictor && inflictor.Species == Species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
          return 0;
 
@@ -221,22 +226,22 @@ class DtShotgunFreeze : Powerup
 
       if(owner == null || owner.Player == null) return;
 
-      // Give the player and his teammates the power to move when time is frozen.
+      /* Give the player and his teammates the power to move when time is frozen. */
       int freezemask = 1 << owner.PlayerNumber();
       Owner.Player.TimeFreezer |= freezemask;
       for(int i = 0; i < MAXPLAYERS; i++)
          if(PlayerInGame[i] && Players[i].Mo != null && Players[i].Mo.IsTeammate(Owner))
             Players[i].TimeFreezer |= freezemask;
 
-      // [RH] The effect ends one tic after the counter hits zero, so make
-      // sure we start at an odd count.
+      /* [RH] The effect ends one tic after the counter hits zero, so make */
+      /* sure we start at an odd count. */
       EffectTics += !(EffectTics & 1);
       if((EffectTics & 1) == 0)
          EffectTics++;
-      // Make sure the effect starts and ends on an even tic.
+      /* Make sure the effect starts and ends on an even tic. */
       if((Level.Time & 1) == 0)
          Level.Frozen = true;
-      // Compensate for skipped tic, but beware of overflow.
+      /* Compensate for skipped tic, but beware of overflow. */
       else if(EffectTics < 0x7fffffff)
          EffectTics++;
    }
@@ -253,8 +258,8 @@ class DtShotgunFreeze : Powerup
    {
       Super.EndEffect();
 
-      // If there is an owner, remove the timefreeze flag corresponding to
-      // her from all players.
+      /* If there is an owner, remove the timefreeze flag corresponding to */
+      /* her from all players. */
       if(Owner != null && Owner.Player != null)
       {
          int freezemask = ~(1 << Owner.PlayerNumber());
@@ -262,12 +267,12 @@ class DtShotgunFreeze : Powerup
             Players[i].TimeFreezer &= freezemask;
       }
 
-      // Are there any players who still have timefreezer bits set?
+      /* Are there any players who still have timefreezer bits set? */
       for(int i = 0; i < MAXPLAYERS; ++i)
          if(PlayerInGame[i] && Players[i].TimeFreezer != 0)
             return;
 
-      // No, so allow other actors to move about freely once again.
+      /* No, so allow other actors to move about freely once again. */
       Level.Frozen = false;
    }
 }
@@ -341,4 +346,4 @@ class DtShotgun : Shotgun replaces Shotgun
 #include "dtzsc/wdata.zsc"
 #include "dtzsc/draw.zsc"
 
-// EOF
+/* EOF */

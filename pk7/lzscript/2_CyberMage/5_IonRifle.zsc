@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_IonRifleFXBase : Actor
 {
@@ -81,7 +86,7 @@ class Lith_IonizedFX : Actor
    }
 }
 
-class Lith_Ionized : PowerProtection // HAH NOT SO PROTECTED NOW ARE YOU
+class Lith_Ionized : PowerProtection /* HAH NOT SO PROTECTED NOW ARE YOU */
 {
    default
    {
@@ -414,4 +419,4 @@ FireEmpty:
    goto ReadySelector;
 }
 
-// EOF
+/* EOF */

@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_stab.h: ACS string table.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * ACS string table.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #if defined(X)
 
-// Strings
+/* Strings */
 X(s_BOSS,          "BOSS")
 X(s_COUNTKILL,     "COUNTKILL")
 X(s_DROPPED,       "DROPPED")
@@ -45,7 +52,7 @@ X(s_ob_slime,      "(slime)")
 X(s_ob_suicide,    "(suicide)")
 X(s_smallfnt,      "smallfnt")
 
-// Console Variables
+/* Console Variables */
 X(sc_debug_all,              DCVAR "debug_all")
 X(sc_debug_bip,              DCVAR "debug_bip")
 X(sc_debug_items,            DCVAR "debug_items")
@@ -136,11 +143,11 @@ X(sc_xhair_g,                CVAR "xhair_g")
 X(sc_xhair_r,                CVAR "xhair_r")
 X(sc_xhair_style,            CVAR "xhair_style")
 
-// Inventory Types
+/* Inventory Types */
 X(si_Armor,       "Armor")
 X(si_SlottedItem, "SlottedItem")
 
-// Methods / Members
+/* Methods / Members */
 X(sm_AdrenalineCheck,    "AdrenalineCheck")
 X(sm_AutoReload,         "AutoReload")
 X(sm_DelearSprite,       "DelearSprite")
@@ -202,7 +209,7 @@ X(sm_UserX,              "user_X")
 X(sm_UserY,              "user_Y")
 X(sm_UserZ,              "user_Z")
 
-// Objects
+/* Objects */
 X(so_Alerter,                     OBJ "Alerter")
 X(so_AssassinPlayer,              OBJ "AssassinPlayer")
 X(so_BarrierFX,                   OBJ "BarrierFX")
@@ -308,7 +315,7 @@ X(so_YellowCard,                  "YellowCard")
 X(so_YellowSkull,                 "YellowSkull")
 X(so_ZombieMan,                   "ZombieMan")
 
-// Paths
+/* Paths */
 X(sp_Any,                  "*")
 X(sp_Background,           "Background")
 X(sp_Dialogue_Back,        ":Dialogue:Back")
@@ -394,7 +401,7 @@ X(sp_lmusic_DOGS,          "lmusic/DOGS.ogg")
 X(sp_lmusic_Unce,          "lmusic/Unce.ogg")
 X(sp_lsounds_Silence,      "lsounds/Silence")
 
-// Sounds
+/* Sounds */
 X(ss_amb_rain,                 "amb/rain")
 X(ss_amb_wind,                 "amb/wind")
 X(ss_enemies_phantom_escape,   "enemies/phantom/escape")
@@ -443,7 +450,7 @@ X(ss_weapons_rifle_firemode,   "weapons/rifle/firemode")
 X(ss_weapons_rocket_mark,      "weapons/rocket/mark")
 X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 
-// Text
+/* Text */
 X(st_0,                      "0")
 X(st_begin,                  "\Cd[Press any key to begin]")
 X(st_bip_header,             "BIOTIC INFORMATION PANEL ver2.5")
@@ -566,7 +573,7 @@ X(st_stx_world,              LANG "stx_world")
 X(st_sv_rain,                LANG "sv_rain")
 X(st_sv_sky,                 LANG "sv_sky")
 
-// Generated
+/* Generated */
 X(st_bip_help_search, LANG "BIP_HELP_Search")
 #define LITH_X(name, capt) X(st_bip_help_##name, LANG "BIP_HELP_" capt)
 #include "p_bip.h"

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 server float __dtap_version;
 
@@ -17,4 +22,4 @@ server bool  dtap_sv_noscoreammo  = true;
 server int   dtap_sv_failtime     = 67;
 server bool  dtap_sv_wepdrop      = false;
 
-// EOF
+/* EOF */

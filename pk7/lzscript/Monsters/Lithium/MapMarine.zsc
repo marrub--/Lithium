@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_Map_Jacques : Lith_MapMarine
 {
@@ -11,11 +16,11 @@ class Lith_Map_Jacques : Lith_MapMarine
 }
 
 class Lith_MapMarine : Lith_TitleMarine;
-//$Category "Marines"
+/*$Category "Marines" */
 
-//$Arg0 "Dialogue Number"
-//$Arg0ToolTip "Identifier of the dialogue when talked to."
-//$Arg0Default 1
+/*$Arg0 "Dialogue Number" */
+/*$Arg0ToolTip "Identifier of the dialogue when talked to." */
+/*$Arg0Default 1 */
 
 default
 {
@@ -43,4 +48,4 @@ Missile.Shotgun:
    goto Missile.Chaingun;
 }
 
-// EOF
+/* EOF */

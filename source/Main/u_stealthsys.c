@@ -1,14 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_stealthsys.c: StealthSys upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * StealthSys upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
 #define UData UData_StealthSys(upgr)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_StealthSys_Deactivate(struct player *p, struct upgrade *upgr)
@@ -28,4 +35,4 @@ void Upgr_StealthSys_Update(struct player *p, struct upgrade *upgr)
    else                                 InvTake(so_StealthSystem, 1);
 }
 
-// EOF
+/* EOF */

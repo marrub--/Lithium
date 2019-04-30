@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_settings.c: Settings configuration UI.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Settings configuration UI.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #ifdef FromUI
 Category(stx_gameplay);
@@ -140,7 +147,7 @@ if(p->num == 0) {
 #include "p_player.h"
 #include "w_world.h"
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static char const *LvSysName(i32 num)
 {
@@ -195,7 +202,7 @@ static char const *FontName(i32 num)
    else                           return fonts[num];
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 {
@@ -331,4 +338,4 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #endif
 
-// EOF
+/* EOF */

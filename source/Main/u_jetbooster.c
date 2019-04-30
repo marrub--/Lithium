@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_jetbooster.c: JetBooster upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * JetBooster upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
@@ -10,7 +17,7 @@
 
 #define CHARGE_MAX (35 * 7)
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_JetBooster_Activate(struct player *p, struct upgrade *upgr)
@@ -66,5 +73,5 @@ void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
          0.1, 0.5, 0.5);
 }
 
-// EOF
+/* EOF */
 

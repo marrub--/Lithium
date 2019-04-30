@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By itsmedoggo & Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By itsmedoggo & Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_LightProjectile : Actor abstract
 {
@@ -82,4 +87,4 @@ class Lith_SurgeRainbowProjectile3 : Lith_SurgeRainbowProjectile1 {}
 class Lith_BladeLightProjectile : Lith_LightProjectile
    {default {Lith_LightProjectile.Counter 8;}}
 
-// EOF
+/* EOF */

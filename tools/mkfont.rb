@@ -1,8 +1,16 @@
 #!/usr/bin/env ruby
+## ---------------------------------------------------------------------------|
+##
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
-## mkfont: Creates fonts and downloads necessary TTFs if needed.
+##
+## ---------------------------------------------------------------------------|
+##
+## Creates fonts and downloads necessary TTFs if needed.
+##
+## ---------------------------------------------------------------------------|
+
 require 'shellwords'
 
 FONTS=%w(MisakiG MisakiM JFDotG)

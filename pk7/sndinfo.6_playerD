@@ -1,19 +1,22 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Dark Lord
-//
-player/darklord/step lsounds/PlayerD/Step // Resident Evil 4
+/* Dark Lord */
+player/darklord/step lsounds/PlayerD/Step /* Resident Evil 4 */
 
-$playersound    darklord male *death   lsounds/PlayerD/Death // Phantasy Star: Nova
-$playersound    darklord male *xdeath  lsounds/PlayerD/XDeath // 〃
-$playersound    darklord male *pain100 lsounds/PlayerD/PainSmall // 〃
-$playersound    darklord male *pain75  lsounds/PlayerD/Pain // 〃
-$playersounddup darklord male *pain50  *pain75 // 〃
-$playersounddup darklord male *pain25  *pain75 // 〃
-$playersound    darklord male *grunt   lsounds/PlayerD/Grunt // 〃
-$playersound    darklord male *land    lsounds/PlayerD/Land // Resident Evil 4, Slave Zero
+$playersound    darklord male *death   lsounds/PlayerD/Death /* Phantasy Star: Nova */
+$playersound    darklord male *xdeath  lsounds/PlayerD/XDeath /* 〃 */
+$playersound    darklord male *pain100 lsounds/PlayerD/PainSmall /* 〃 */
+$playersound    darklord male *pain75  lsounds/PlayerD/Pain /* 〃 */
+$playersounddup darklord male *pain50  *pain75 /* 〃 */
+$playersounddup darklord male *pain25  *pain75 /* 〃 */
+$playersound    darklord male *grunt   lsounds/PlayerD/Grunt /* 〃 */
+$playersound    darklord male *land    lsounds/PlayerD/Land /* Resident Evil 4, Slave Zero */
 
-// EOF
+/* EOF */

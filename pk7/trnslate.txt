@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 Lith_AllToRed = "0:255=%[0,0,0]:[1,0,0]"
 Lith_BloodRainDrop = "80:111=[0,64,64]:[0,128,128]"
@@ -29,4 +34,4 @@ Lith_VoidShot = "0:255=%[0,0,0]:[0.8,0.1,0.75]"
 Lith_WeapGlow = "112:127=197:207", "224:231=192:199"
 Lith_WeapGlowBright = "112:127=192:207", "224:231=192:194"
 
-// EOF
+/* EOF */

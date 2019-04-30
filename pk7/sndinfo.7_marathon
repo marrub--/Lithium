@@ -1,7 +1,11 @@
-// Distributed under the CC0 public domain license.
-// See licenses/cc0.txt for more information.
-
-// All sounds from Marathon Trilogy
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 marathon/pickup   lsounds/Marathon/Pickup
 marathon/explode  lsounds/Marathon/Explode
@@ -29,4 +33,4 @@ $random marathon/hit {
    marathon/hit3
 }
 
-// EOF
+/* EOF */

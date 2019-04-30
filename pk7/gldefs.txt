@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 hardwareshader sprite LDTHA0
 {
@@ -486,4 +491,4 @@ object Lith_OmegaRailBeam                   {frame BFE1 {light Lith_RailBeam}}
 object Lith_OmegaRailParticle1              {frame PLSS {light Lith_FinalizerLight}}
 object Lith_OmegaRailParticle2              {frame BFE1 {light Lith_RailSpot}}
 
-// EOF
+/* EOF */

@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 class Lith_CyberMagePlayer : Lith_Player
 {
@@ -61,4 +66,4 @@ class Lith_CWeapon : Lith_OutcastsWeapon
 #include "lzscript/2_CyberMage/6_CPlasmaRifle.zsc"
 #include "lzscript/2_CyberMage/7_StarDestroyer.zsc"
 
-// EOF
+/* EOF */

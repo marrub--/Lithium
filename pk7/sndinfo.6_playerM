@@ -1,20 +1,21 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
-//
-// Upgrades
-//
-player/rarmor/mode   lsounds/PlayerM/RArmor/ChangeMode // Halo 3
-player/rarmor/damage lsounds/PlayerM/RArmor/Damage     // Touhou 13
+/* Upgrades */
+player/rarmor/mode   lsounds/PlayerM/RArmor/ChangeMode /* Halo 3 */
+player/rarmor/damage lsounds/PlayerM/RArmor/Damage     /* Touhou 13 */
 
-player/rocketboost lsounds/PlayerM/RocketBoost       // ???
-player/adren/inj   lsounds/PlayerM/Adrenaline/Inject // Killing Floor
-player/adren/ready lsounds/PlayerM/Adrenaline/Ready  // 〃
+player/rocketboost lsounds/PlayerM/RocketBoost       /* ??? */
+player/adren/inj   lsounds/PlayerM/Adrenaline/Inject /* Killing Floor */
+player/adren/ready lsounds/PlayerM/Adrenaline/Ready  /* 〃 */
 
-//
-// Marine
-//
+/* Marine */
 $alias player/marine/step player/step
 
-// EOF
+/* EOF */

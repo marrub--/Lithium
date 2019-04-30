@@ -1,12 +1,19 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// u_unceunce.c: UNCEUNCE upgrade.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * UNCEUNCE upgrade.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void Upgr_UNCEUNCE_Activate(struct player *p, struct upgrade *upgr)
@@ -33,4 +40,4 @@ void Upgr_UNCEUNCE_Update(struct player *p, struct upgrade *upgr)
    p->extryaw   += greeen * 0.01;
 }
 
-// EOF
+/* EOF */

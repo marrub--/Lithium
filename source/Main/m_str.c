@@ -1,8 +1,15 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// m_str.c: Various string functions.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Various string functions.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "common.h"
 #include "m_cps.h"
@@ -179,4 +186,4 @@ str LanguageNull(char const *fmt, ...)
    return name == alias ? snil : alias;
 }
 
-// EOF
+/* EOF */

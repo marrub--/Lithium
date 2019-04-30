@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 cameratexture LITHCAM1 320 200
 cameratexture LITHCAM2 480 240
@@ -8,4 +13,4 @@ cameratexture LITHCAM3 480 240
 
 texture DIVSIGI1 range DIVSIGI23 tics 1
 
-// EOF
+/* EOF */

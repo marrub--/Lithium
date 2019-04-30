@@ -1,20 +1,27 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
-
-// p_upgrades.c: Upgrade handling.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Upgrade handling.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "u_common.h"
 #include "w_world.h"
 
-// Static Objects ------------------------------------------------------------|
+/* Static Objects ---------------------------------------------------------- */
 
 static struct upgradeinfo g_upgrinfoex[UPGR_EXTRA_NUM];
 
 static struct upgradeinfo *g_upgrinfo;
 static i32 g_upgrmax = UPGR_BASE_MAX;
 
-// Static Functions ----------------------------------------------------------|
+/* Static Functions -------------------------------------------------------- */
 
 static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr)
 {
@@ -55,7 +62,7 @@ static void SetDataPtr(struct player *p, struct upgrade *upgr)
    upgr->dataptr = &p->upgrdata;
 }
 
-// Extern Functions ----------------------------------------------------------|
+/* Extern Functions -------------------------------------------------------- */
 
 struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr)
 {
@@ -70,14 +77,14 @@ void Upgr_MInit(void)
    {
       struct upgradeinfo *ui = &g_upgrinfo[i];
 
-      // Set up static function pointers
-      ui->Init = SetDataPtr; // this is set again by UpgrReinit
+      /* Set up static function pointers */
+      ui->Init = SetDataPtr; /* this is set again by UpgrReinit */
 
       ui->ShopBuy    = UpgrShopBuy;
       ui->ShopCanBuy = UpgrCanBuy;
       ui->ShopGive   = UpgrGive;
 
-      // Set up individual upgrades' function pointers
+      /* Set up individual upgrades' function pointers */
       switch(ui->key)
       {
       #define Ret(n) continue;
@@ -253,4 +260,4 @@ bool P_Upg_Toggle(struct player *p, struct upgrade *upgr)
    return true;
 }
 
-// EOF
+/* EOF */

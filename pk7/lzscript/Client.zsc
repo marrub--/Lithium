@@ -1,6 +1,11 @@
-// Distributed under the CC0 public domain license.
-// By Alison Sanderson. Attribution is encouraged, though not required.
-// See licenses/cc0.txt for more information.
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
 
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/StatScreen.zsc"
@@ -12,7 +17,7 @@
 class Lith_StatusBar : BaseStatusBar
    {override void Init() {Super.Init(); SetSize(0, 320, 240);}}
 
-// URANUS: Users Really Are Not UI Systems
+/* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : EventHandler;
 
 struct PlayerData clearscope
@@ -25,4 +30,4 @@ transient ui PlayerData m_PData[MAXPLAYERS];
 static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}
 
-// EOF
+/* EOF */
