@@ -25,16 +25,14 @@ page 2
    if class pcl_marine    `Who are you?
    if class pcl_cybermage `Right. The Cybernati.
 
-   add  5
-   push a
-   pop  b
-   xor  a
-   add  10
-   mul  b
+   lda 0
+   add 5
+   tax
+   mul 10
 
-   trace a
-   trace b
-   trace "_butts"
+   tra
+   trx
+   trz "butts"
 
    @@
    `Test of concatenated

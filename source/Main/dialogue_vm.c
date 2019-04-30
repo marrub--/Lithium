@@ -11,9 +11,10 @@
 #include "p_hudid.h"
 #include "dialogue.h"
 
-#define IMM *++vm.pc
+#define IMM def->codeV[++vm.pc]
+#define CUR def->codeV[vm.pc]
 #define STR &def->stabV[IMM]
-#define JCC goto *cases[*vm.pc]
+#define JCC goto *cases[CUR]
 #define JNC goto *cases[IMM]
 #define HLT goto done
 
@@ -36,10 +37,26 @@ enum
    TACT_PICT,
 };
 
+enum
+{
+   SR_N_BIT,
+   SR_V_BIT,
+   SR_Z_BIT,
+   SR_C_BIT,
+};
+
+enum
+{
+   SR_N = 1 << SR_N_BIT,
+   SR_V = 1 << SR_V_BIT,
+   SR_Z = 1 << SR_Z_BIT,
+   SR_C = 1 << SR_C_BIT,
+};
+
 struct vmopt
 {
    char const *name;
-   i32        *ptr;
+   i32         ptr;
 };
 
 struct vmstate
@@ -54,13 +71,15 @@ struct vm
    Vec_Decl(char, text);
 
    i32 stk[16];
-   i32 *sp, *pc;
 
-   char const *sr[4]; // String Registers
-   i32         ra;    // Integer Registers
-   i32         rb;
-   i32         rc;
-   i32         rd;
+   char const *st[4];
+
+   i32 pc; // program counter
+   i32 ac; // accumulator
+   i32 x;  // x register
+   i32 y;  // y register
+   i32 sr; // status register
+   i32 sp; // stack pointer
 
    i32 action;
 
@@ -102,8 +121,8 @@ static void TerminalGUI(struct gui_state *g, struct player *p, struct vm *vm)
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   char const *remote = vm->sr[DSTR_REMOTE] ?
-                        vm->sr[DSTR_REMOTE] :
+   char const *remote = vm->st[DSTR_REMOTE] ?
+                        vm->st[DSTR_REMOTE] :
                         "<unknown>@raddr.4E19";
 
    G_Begin(g, sizex, sizey);
@@ -202,9 +221,9 @@ static void DialogueGUI(struct gui_state *g, struct player *p, struct vm *vm)
 {
    enum {left = 37, top = 75};
 
-   char const *name = vm->sr[DSTR_NAME];
-   char const *remo = vm->sr[DSTR_REMOTE];
-   char icon[32] = ":Dialogue:Icon"; strcat(icon, vm->sr[DSTR_ICON]);
+   char const *name = vm->st[DSTR_NAME];
+   char const *remo = vm->st[DSTR_REMOTE];
+   char icon[32] = ":Dialogue:Icon"; strcat(icon, vm->st[DSTR_ICON]);
 
    G_Begin(g, 320, 240);
    G_UpdateState(g, p);
@@ -322,7 +341,6 @@ void Dlg_Run(struct player *p, i32 num)
 
    // VM state
    struct vm vm = {};
-   vm.sp = &vm.stk[0];
    ResetText(&vm);
 
    // terminals are numbered negative
@@ -335,50 +353,52 @@ void Dlg_Run(struct player *p, i32 num)
       #include "dialogue.h"
    };
 
-   vm.pc = &def->codeV[def->pages[0]];
+   vm.pc = def->pages[0];
    JCC;
 
 opDCD_NOP: JNC;
-opDCD_DIE: HLT;
+opDCD_HLT: HLT;
 
-opDCD_PUSH_I: *vm.sp++ = IMM;   JNC;
-opDCD_PUSH_A: *vm.sp++ = vm.ra; JNC;
-opDCD_PUSH_B: *vm.sp++ = vm.rb; JNC;
-opDCD_PUSH_C: *vm.sp++ = vm.rc; JNC;
-opDCD_PUSH_D: *vm.sp++ = vm.rd; JNC;
+opDCD_PHA: vm.stk[vm.sp++] = vm.ac; JNC;
+opDCD_PLA: vm.ac = vm.stk[--vm.sp]; JNC;
 
-opDCD_POP:            --vm.sp; JNC;
-opDCD_POP_A: vm.ra = *--vm.sp; JNC;
-opDCD_POP_B: vm.rb = *--vm.sp; JNC;
-opDCD_POP_C: vm.rc = *--vm.sp; JNC;
-opDCD_POP_D: vm.rd = *--vm.sp; JNC;
+opDCD_LDA: vm.ac = IMM; JNC;
+opDCD_LDX: vm.x  = IMM; JNC;
+opDCD_LDY: vm.y  = IMM; JNC;
 
-#define Arith(op, r) vm.ra op##= r
+opDCD_TAX: vm.x  = vm.ac; JNC;
+opDCD_TAY: vm.y  = vm.ac; JNC;
+opDCD_TSX: vm.x  = vm.sp; JNC;
+opDCD_TXA: vm.ac = vm.x;  JNC;
+opDCD_TXS: vm.sp = vm.x;  JNC;
+opDCD_TYA: vm.ac = vm.y;  JNC;
+
 #define ArithSet(sfx, r) \
-   opDCD_ADD_##sfx: Arith(+,  r); JNC; \
-   opDCD_SUB_##sfx: Arith(-,  r); JNC; \
-   opDCD_MUL_##sfx: Arith(*,  r); JNC; \
-   opDCD_DIV_##sfx: Arith(/,  r); JNC; \
-   opDCD_MOD_##sfx: Arith(%,  r); JNC; \
-   opDCD_IOR_##sfx: Arith(|,  r); JNC; \
-   opDCD_AND_##sfx: Arith(&,  r); JNC; \
-   opDCD_XOR_##sfx: Arith(^,  r); JNC; \
-   opDCD_LSH_##sfx: Arith(<<, r); JNC; \
-   opDCD_RSH_##sfx: Arith(>>, r); JNC
+   opDCD_ADD##sfx: vm.ac +=  r; JNC; \
+   opDCD_SUB##sfx: vm.ac -=  r; JNC; \
+   opDCD_MUL##sfx: vm.ac *=  r; JNC; \
+   opDCD_DIV##sfx: vm.ac /=  r; JNC; \
+   opDCD_MOD##sfx: vm.ac %=  r; JNC; \
+   opDCD_IOR##sfx: vm.ac |=  r; JNC; \
+   opDCD_AND##sfx: vm.ac &=  r; JNC; \
+   opDCD_XOR##sfx: vm.ac ^=  r; JNC; \
+   opDCD_LSH##sfx: vm.ac <<= r; JNC; \
+   opDCD_RSH##sfx: vm.ac >>= r; JNC
 ArithSet(I, IMM);
-ArithSet(A, vm.ra);
-ArithSet(B, vm.rb);
-ArithSet(C, vm.rc);
-ArithSet(D, vm.rd);
-#undef Arith
 #undef ArithSet
 
-opDCD_JPAGE: vm.pc = &def->codeV[def->pages[IMM]]; JCC;
-opDCD_JMP:   vm.pc = &def->codeV[IMM];             JCC;
+opDCD_JPAGE: vm.pc = def->pages[IMM]; JCC;
+opDCD_JMP:   vm.pc = IMM;             JCC;
 
 #define GenJump(t) \
-   __with(i32 *j = &def->codeV[IMM];) if(t) {vm.pc = j; JCC;} JNC
-opDCD_JNZ:     GenJump(vm.sp[-1] != 0);
+   __with(i32 j = IMM;) { \
+      if(t) { \
+         vm.pc = j; \
+         JCC; \
+      } \
+   } \
+   JNC
+opDCD_JNZ:     GenJump(vm.stk[vm.sp - 1] != 0);
 opDCD_JNITEM:  GenJump(!InvNum(l_strdup(STR)));
 opDCD_JNCLASS: GenJump(p->pclass != IMM);
 #undef GenJump
@@ -403,15 +423,14 @@ opDCD_TELEPORT_INTERLEVEL:
    ACS_Teleport_NewMap(IMM, 0, 0);
    HLT;
 
-opDCD_TRACE_S: Log("%s",   STR);   JNC;
-opDCD_TRACE_A: Log("%.8X", vm.ra); JNC;
-opDCD_TRACE_B: Log("%.8X", vm.rb); JNC;
-opDCD_TRACE_C: Log("%.8X", vm.rc); JNC;
-opDCD_TRACE_D: Log("%.8X", vm.rd); JNC;
+opDCD_TRA: Log("%.8X", vm.ac); JNC;
+opDCD_TRX: Log("%.8X", vm.x);  JNC;
+opDCD_TRY: Log("%.8X", vm.y);  JNC;
+opDCD_TRZ: Log("%s",   STR);   JNC;
 
 opDCD_SETSTRING:
    __with(i32 num = IMM; char const *s = STR;)
-      vm.sr[num] = s;
+      vm.st[num] = s;
    JNC;
 
 opDCD_SETTEXT:      SetText(&vm,    STR ); JNC;
@@ -429,7 +448,7 @@ opDCD_CONCATEND:
    JNC;
 
 opDCD_PUTOPT:
-   __with(i32 *j = &def->codeV[IMM];)
+   __with(i32 j = IMM;)
    {
       struct vmopt *option = vm.option + vm.optNum++;
 
@@ -499,7 +518,7 @@ guiact:
       {
       case ACT_ACKNOWLEDGE: break;
       case ACT_SELOPTION:
-         vm.pc = vm.option[vm.optSel].ptr;
+         vm.pc     = vm.option[vm.optSel].ptr;
          vm.optSel = 0;
          vm.optNum = 0;
          JCC;

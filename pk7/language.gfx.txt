@@ -32,6 +32,7 @@
 ":Dialogue:Selection" = "lgfx/Dialogue/Selection.png";
 ":End:CyberMage" = "lgfx/End/CyberMage.png";
 ":End:Marine" = "lgfx/End/Marine.png";
+":HUD:H_D27" = "lgfx/HUD/H_D27.png";
 ":HUD:AMMO" = "lgfx/HUD/AMMO.png";
 ":HUD:ARM" = "lgfx/HUD/ARM.png";
 ":HUD:Bar" = "lgfx/HUD/Bar.png";
@@ -57,7 +58,6 @@
 ":HUD:H_D24" = "lgfx/HUD/H_D24.png";
 ":HUD:H_D25" = "lgfx/HUD/H_D25.png";
 ":HUD:H_D26" = "lgfx/HUD/H_D26.png";
-":HUD:H_D27" = "lgfx/HUD/H_D27.png";
 ":HUD:H_D28" = "lgfx/HUD/H_D28.png";
 ":HUD:H_D41" = "lgfx/HUD/H_D41.png";
 ":HUD:H_D42" = "lgfx/HUD/H_D42.png";
@@ -207,6 +207,8 @@
 ":Terminal:TeleportOut" = "lgfx/Terminal/TeleportOut.png";
 ":Terminal:UAC" = "lgfx/Terminal/UAC.png";
 ":Title" = "lgfx/Title.png";
+":UI:CursorOutline2" = "lgfx/UI/CursorOutline2.png";
+":UI:HealthBar6" = "lgfx/UI/HealthBar6.png";
 ":UI:ArmorInter" = "lgfx/UI/ArmorInter.png";
 ":UI:AttrBar1" = "lgfx/UI/AttrBar1.png";
 ":UI:AttrBar2" = "lgfx/UI/AttrBar2.png";
@@ -226,7 +228,6 @@
 ":UI:CursorBlue" = "lgfx/UI/CursorBlue.png";
 ":UI:CursorOrange" = "lgfx/UI/CursorOrange.png";
 ":UI:CursorOutline" = "lgfx/UI/CursorOutline.png";
-":UI:CursorOutline2" = "lgfx/UI/CursorOutline2.png";
 ":UI:CursorOutline2Inv" = "lgfx/UI/CursorOutline2Inv.png";
 ":UI:CursorOutlineInv" = "lgfx/UI/CursorOutlineInv.png";
 ":UI:CursorPink" = "lgfx/UI/CursorPink.png";
@@ -250,7 +251,6 @@
 ":UI:HealthBar3" = "lgfx/UI/HealthBar3.png";
 ":UI:HealthBar4" = "lgfx/UI/HealthBar4.png";
 ":UI:HealthBar5" = "lgfx/UI/HealthBar5.png";
-":UI:HealthBar6" = "lgfx/UI/HealthBar6.png";
 ":UI:HealthBar7" = "lgfx/UI/HealthBar7.png";
 ":UI:HealthBar8" = "lgfx/UI/HealthBar8.png";
 ":UI:HealthBar9" = "lgfx/UI/HealthBar9.png";
@@ -282,6 +282,7 @@
 ":UI:TextBoxBack" = "lgfx/UI/TextBoxBack.png";
 ":UI:WeapnInte2" = "lgfx/UI/WeapnInte2.png";
 ":UI:WeapnInter" = "lgfx/UI/WeapnInter.png";
+":UI_Basilissa:CheckboxSmallHot" = "lgfx/UI_Basilissa/CheckboxSmallHot.png";
 ":UI_Basilissa:Background" = "lgfx/UI_Basilissa/Background.png";
 ":UI_Basilissa:BtnNext" = "lgfx/UI_Basilissa/BtnNext.png";
 ":UI_Basilissa:BtnNextHot" = "lgfx/UI_Basilissa/BtnNextHot.png";
@@ -298,7 +299,6 @@
 ":UI_Basilissa:CheckboxHot" = "lgfx/UI_Basilissa/CheckboxHot.png";
 ":UI_Basilissa:CheckboxSmall" = "lgfx/UI_Basilissa/CheckboxSmall.png";
 ":UI_Basilissa:CheckboxSmallDisabled" = "lgfx/UI_Basilissa/CheckboxSmallDisabled.png";
-":UI_Basilissa:CheckboxSmallHot" = "lgfx/UI_Basilissa/CheckboxSmallHot.png";
 ":UI_Basilissa:CheckboxX" = "lgfx/UI_Basilissa/CheckboxX.png";
 ":UI_Basilissa:CheckboxXActive" = "lgfx/UI_Basilissa/CheckboxXActive.png";
 ":UI_Basilissa:CheckboxXDisabled" = "lgfx/UI_Basilissa/CheckboxXDisabled.png";
@@ -324,6 +324,7 @@
 ":UI_Basilissa:SliderNotchHot" = "lgfx/UI_Basilissa/SliderNotchHot.png";
 ":UI_Basilissa:Tab" = "lgfx/UI_Basilissa/Tab.png";
 ":UI_Basilissa:TabHot" = "lgfx/UI_Basilissa/TabHot.png";
+":UI_Ender:CheckboxSmallHot" = "lgfx/UI_Ender/CheckboxSmallHot.png";
 ":UI_Ender:Background" = "lgfx/UI_Ender/Background.png";
 ":UI_Ender:BtnNext" = "lgfx/UI_Ender/BtnNext.png";
 ":UI_Ender:BtnNextHot" = "lgfx/UI_Ender/BtnNextHot.png";
@@ -340,7 +341,6 @@
 ":UI_Ender:CheckboxHot" = "lgfx/UI_Ender/CheckboxHot.png";
 ":UI_Ender:CheckboxSmall" = "lgfx/UI_Ender/CheckboxSmall.png";
 ":UI_Ender:CheckboxSmallDisabled" = "lgfx/UI_Ender/CheckboxSmallDisabled.png";
-":UI_Ender:CheckboxSmallHot" = "lgfx/UI_Ender/CheckboxSmallHot.png";
 ":UI_Ender:CheckboxX" = "lgfx/UI_Ender/CheckboxX.png";
 ":UI_Ender:CheckboxXActive" = "lgfx/UI_Ender/CheckboxXActive.png";
 ":UI_Ender:CheckboxXDisabled" = "lgfx/UI_Ender/CheckboxXDisabled.png";
@@ -366,6 +366,7 @@
 ":UI_Ender:SliderNotchHot" = "lgfx/UI_Ender/SliderNotchHot.png";
 ":UI_Ender:Tab" = "lgfx/UI_Ender/Tab.png";
 ":UI_Ender:TabHot" = "lgfx/UI_Ender/TabHot.png";
+":UI_Ghost:CheckboxSmallHot" = "lgfx/UI_Ghost/CheckboxSmallHot.png";
 ":UI_Ghost:Background" = "lgfx/UI_Ghost/Background.png";
 ":UI_Ghost:BtnNext" = "lgfx/UI_Ghost/BtnNext.png";
 ":UI_Ghost:BtnNextHot" = "lgfx/UI_Ghost/BtnNextHot.png";
@@ -382,7 +383,6 @@
 ":UI_Ghost:CheckboxHot" = "lgfx/UI_Ghost/CheckboxHot.png";
 ":UI_Ghost:CheckboxSmall" = "lgfx/UI_Ghost/CheckboxSmall.png";
 ":UI_Ghost:CheckboxSmallDisabled" = "lgfx/UI_Ghost/CheckboxSmallDisabled.png";
-":UI_Ghost:CheckboxSmallHot" = "lgfx/UI_Ghost/CheckboxSmallHot.png";
 ":UI_Ghost:CheckboxX" = "lgfx/UI_Ghost/CheckboxX.png";
 ":UI_Ghost:CheckboxXActive" = "lgfx/UI_Ghost/CheckboxXActive.png";
 ":UI_Ghost:CheckboxXDisabled" = "lgfx/UI_Ghost/CheckboxXDisabled.png";
@@ -408,6 +408,7 @@
 ":UI_Ghost:SliderNotchHot" = "lgfx/UI_Ghost/SliderNotchHot.png";
 ":UI_Ghost:Tab" = "lgfx/UI_Ghost/Tab.png";
 ":UI_Ghost:TabHot" = "lgfx/UI_Ghost/TabHot.png";
+":UI_Green:CheckboxSmallHot" = "lgfx/UI_Green/CheckboxSmallHot.png";
 ":UI_Green:Background" = "lgfx/UI_Green/Background.png";
 ":UI_Green:BtnNext" = "lgfx/UI_Green/BtnNext.png";
 ":UI_Green:BtnNextHot" = "lgfx/UI_Green/BtnNextHot.png";
@@ -424,7 +425,6 @@
 ":UI_Green:CheckboxHot" = "lgfx/UI_Green/CheckboxHot.png";
 ":UI_Green:CheckboxSmall" = "lgfx/UI_Green/CheckboxSmall.png";
 ":UI_Green:CheckboxSmallDisabled" = "lgfx/UI_Green/CheckboxSmallDisabled.png";
-":UI_Green:CheckboxSmallHot" = "lgfx/UI_Green/CheckboxSmallHot.png";
 ":UI_Green:CheckboxX" = "lgfx/UI_Green/CheckboxX.png";
 ":UI_Green:CheckboxXActive" = "lgfx/UI_Green/CheckboxXActive.png";
 ":UI_Green:CheckboxXDisabled" = "lgfx/UI_Green/CheckboxXDisabled.png";
@@ -450,6 +450,7 @@
 ":UI_Green:SliderNotchHot" = "lgfx/UI_Green/SliderNotchHot.png";
 ":UI_Green:Tab" = "lgfx/UI_Green/Tab.png";
 ":UI_Green:TabHot" = "lgfx/UI_Green/TabHot.png";
+":UI_Grey:CheckboxSmallHot" = "lgfx/UI_Grey/CheckboxSmallHot.png";
 ":UI_Grey:Background" = "lgfx/UI_Grey/Background.png";
 ":UI_Grey:BtnNext" = "lgfx/UI_Grey/BtnNext.png";
 ":UI_Grey:BtnNextHot" = "lgfx/UI_Grey/BtnNextHot.png";
@@ -466,7 +467,6 @@
 ":UI_Grey:CheckboxHot" = "lgfx/UI_Grey/CheckboxHot.png";
 ":UI_Grey:CheckboxSmall" = "lgfx/UI_Grey/CheckboxSmall.png";
 ":UI_Grey:CheckboxSmallDisabled" = "lgfx/UI_Grey/CheckboxSmallDisabled.png";
-":UI_Grey:CheckboxSmallHot" = "lgfx/UI_Grey/CheckboxSmallHot.png";
 ":UI_Grey:CheckboxX" = "lgfx/UI_Grey/CheckboxX.png";
 ":UI_Grey:CheckboxXActive" = "lgfx/UI_Grey/CheckboxXActive.png";
 ":UI_Grey:CheckboxXDisabled" = "lgfx/UI_Grey/CheckboxXDisabled.png";
@@ -492,6 +492,7 @@
 ":UI_Grey:SliderNotchHot" = "lgfx/UI_Grey/SliderNotchHot.png";
 ":UI_Grey:Tab" = "lgfx/UI_Grey/Tab.png";
 ":UI_Grey:TabHot" = "lgfx/UI_Grey/TabHot.png";
+":UI_Orange:CheckboxSmallHot" = "lgfx/UI_Orange/CheckboxSmallHot.png";
 ":UI_Orange:Background" = "lgfx/UI_Orange/Background.png";
 ":UI_Orange:BtnNext" = "lgfx/UI_Orange/BtnNext.png";
 ":UI_Orange:BtnNextHot" = "lgfx/UI_Orange/BtnNextHot.png";
@@ -508,7 +509,6 @@
 ":UI_Orange:CheckboxHot" = "lgfx/UI_Orange/CheckboxHot.png";
 ":UI_Orange:CheckboxSmall" = "lgfx/UI_Orange/CheckboxSmall.png";
 ":UI_Orange:CheckboxSmallDisabled" = "lgfx/UI_Orange/CheckboxSmallDisabled.png";
-":UI_Orange:CheckboxSmallHot" = "lgfx/UI_Orange/CheckboxSmallHot.png";
 ":UI_Orange:CheckboxX" = "lgfx/UI_Orange/CheckboxX.png";
 ":UI_Orange:CheckboxXActive" = "lgfx/UI_Orange/CheckboxXActive.png";
 ":UI_Orange:CheckboxXDisabled" = "lgfx/UI_Orange/CheckboxXDisabled.png";
@@ -534,6 +534,7 @@
 ":UI_Orange:SliderNotchHot" = "lgfx/UI_Orange/SliderNotchHot.png";
 ":UI_Orange:Tab" = "lgfx/UI_Orange/Tab.png";
 ":UI_Orange:TabHot" = "lgfx/UI_Orange/TabHot.png";
+":UI_Rose:CheckboxSmallHot" = "lgfx/UI_Rose/CheckboxSmallHot.png";
 ":UI_Rose:Background" = "lgfx/UI_Rose/Background.png";
 ":UI_Rose:BtnNext" = "lgfx/UI_Rose/BtnNext.png";
 ":UI_Rose:BtnNextHot" = "lgfx/UI_Rose/BtnNextHot.png";
@@ -550,7 +551,6 @@
 ":UI_Rose:CheckboxHot" = "lgfx/UI_Rose/CheckboxHot.png";
 ":UI_Rose:CheckboxSmall" = "lgfx/UI_Rose/CheckboxSmall.png";
 ":UI_Rose:CheckboxSmallDisabled" = "lgfx/UI_Rose/CheckboxSmallDisabled.png";
-":UI_Rose:CheckboxSmallHot" = "lgfx/UI_Rose/CheckboxSmallHot.png";
 ":UI_Rose:CheckboxX" = "lgfx/UI_Rose/CheckboxX.png";
 ":UI_Rose:CheckboxXActive" = "lgfx/UI_Rose/CheckboxXActive.png";
 ":UI_Rose:CheckboxXDisabled" = "lgfx/UI_Rose/CheckboxXDisabled.png";
@@ -576,6 +576,7 @@
 ":UI_Rose:SliderNotchHot" = "lgfx/UI_Rose/SliderNotchHot.png";
 ":UI_Rose:Tab" = "lgfx/UI_Rose/Tab.png";
 ":UI_Rose:TabHot" = "lgfx/UI_Rose/TabHot.png";
+":UI_Trans:CheckboxSmallHot" = "lgfx/UI_Trans/CheckboxSmallHot.png";
 ":UI_Trans:Background" = "lgfx/UI_Trans/Background.png";
 ":UI_Trans:BtnNext" = "lgfx/UI_Trans/BtnNext.png";
 ":UI_Trans:BtnNextHot" = "lgfx/UI_Trans/BtnNextHot.png";
@@ -592,7 +593,6 @@
 ":UI_Trans:CheckboxHot" = "lgfx/UI_Trans/CheckboxHot.png";
 ":UI_Trans:CheckboxSmall" = "lgfx/UI_Trans/CheckboxSmall.png";
 ":UI_Trans:CheckboxSmallDisabled" = "lgfx/UI_Trans/CheckboxSmallDisabled.png";
-":UI_Trans:CheckboxSmallHot" = "lgfx/UI_Trans/CheckboxSmallHot.png";
 ":UI_Trans:CheckboxX" = "lgfx/UI_Trans/CheckboxX.png";
 ":UI_Trans:CheckboxXActive" = "lgfx/UI_Trans/CheckboxXActive.png";
 ":UI_Trans:CheckboxXDisabled" = "lgfx/UI_Trans/CheckboxXDisabled.png";
@@ -618,6 +618,7 @@
 ":UI_Trans:SliderNotchHot" = "lgfx/UI_Trans/SliderNotchHot.png";
 ":UI_Trans:Tab" = "lgfx/UI_Trans/Tab.png";
 ":UI_Trans:TabHot" = "lgfx/UI_Trans/TabHot.png";
+":UI_Umi:CheckboxSmallHot" = "lgfx/UI_Umi/CheckboxSmallHot.png";
 ":UI_Umi:Background" = "lgfx/UI_Umi/Background.png";
 ":UI_Umi:BtnNext" = "lgfx/UI_Umi/BtnNext.png";
 ":UI_Umi:BtnNextHot" = "lgfx/UI_Umi/BtnNextHot.png";
@@ -634,7 +635,6 @@
 ":UI_Umi:CheckboxHot" = "lgfx/UI_Umi/CheckboxHot.png";
 ":UI_Umi:CheckboxSmall" = "lgfx/UI_Umi/CheckboxSmall.png";
 ":UI_Umi:CheckboxSmallDisabled" = "lgfx/UI_Umi/CheckboxSmallDisabled.png";
-":UI_Umi:CheckboxSmallHot" = "lgfx/UI_Umi/CheckboxSmallHot.png";
 ":UI_Umi:CheckboxX" = "lgfx/UI_Umi/CheckboxX.png";
 ":UI_Umi:CheckboxXActive" = "lgfx/UI_Umi/CheckboxXActive.png";
 ":UI_Umi:CheckboxXDisabled" = "lgfx/UI_Umi/CheckboxXDisabled.png";
@@ -660,6 +660,7 @@
 ":UI_Umi:SliderNotchHot" = "lgfx/UI_Umi/SliderNotchHot.png";
 ":UI_Umi:Tab" = "lgfx/UI_Umi/Tab.png";
 ":UI_Umi:TabHot" = "lgfx/UI_Umi/TabHot.png";
+":UI_WinXP:CheckboxSmallHot" = "lgfx/UI_WinXP/CheckboxSmallHot.png";
 ":UI_WinXP:Background" = "lgfx/UI_WinXP/Background.png";
 ":UI_WinXP:BtnNext" = "lgfx/UI_WinXP/BtnNext.png";
 ":UI_WinXP:BtnNextHot" = "lgfx/UI_WinXP/BtnNextHot.png";
@@ -676,7 +677,6 @@
 ":UI_WinXP:CheckboxHot" = "lgfx/UI_WinXP/CheckboxHot.png";
 ":UI_WinXP:CheckboxSmall" = "lgfx/UI_WinXP/CheckboxSmall.png";
 ":UI_WinXP:CheckboxSmallDisabled" = "lgfx/UI_WinXP/CheckboxSmallDisabled.png";
-":UI_WinXP:CheckboxSmallHot" = "lgfx/UI_WinXP/CheckboxSmallHot.png";
 ":UI_WinXP:CheckboxX" = "lgfx/UI_WinXP/CheckboxX.png";
 ":UI_WinXP:CheckboxXActive" = "lgfx/UI_WinXP/CheckboxXActive.png";
 ":UI_WinXP:CheckboxXDisabled" = "lgfx/UI_WinXP/CheckboxXDisabled.png";

@@ -39,16 +39,12 @@ enum
 struct strent {
    char const *key, *s;
    i32 name;
-   size_t keyhash;
-   struct strent *next, **prev;
 };
 
 struct dlgfunc {
    char const *name, *args;
    i32 lit[4];
    void (*genCode)(struct pstate *d, struct arg *argv, i32 argc);
-   size_t keyhash;
-   struct dlgfunc *next, **prev;
 };
 
 struct arg {
@@ -62,38 +58,95 @@ struct pstate {
    struct dlgdef *def;
 };
 
-GDCC_HashMap_Decl(strtable_t,  char const *, struct strent)
-GDCC_HashMap_Decl(functable_t, char const *, struct dlgfunc)
-
 // Static Objects ------------------------------------------------------------|
 
-static strtable_t  stbl;
-static functable_t ftbl;
+static struct strent stbl[] = {
+   #define Str(name, s) {#name, #s, STR_##name},
+   #include "dlgstab.h"
+};
+
+static struct dlgfunc ftbl[] = {
+   {"nop", "L", DCD_NOP},
+
+   {"pha", "L", DCD_PHA},
+   {"pla", "L", DCD_PLA},
+
+   {"lda", "LI", DCD_LDA},
+   {"ldx", "LI", DCD_LDX},
+   {"ldy", "LI", DCD_LDY},
+
+   {"tax", "L", DCD_TAX},
+   {"tay", "L", DCD_TAY},
+   {"tsx", "L", DCD_TSX},
+   {"txa", "L", DCD_TXA},
+   {"txs", "L", DCD_TXS},
+   {"tya", "L", DCD_TYA},
+
+   {"add", "LI", DCD_ADDI},
+   {"sub", "LI", DCD_SUBI},
+   {"mul", "LI", DCD_MULI},
+   {"div", "LI", DCD_DIVI},
+   {"mod", "LI", DCD_MODI},
+   {"ior", "LI", DCD_IORI},
+   {"and", "LI", DCD_ANDI},
+   {"xor", "LI", DCD_XORI},
+   {"lsh", "LI", DCD_LSHI},
+   {"rsh", "LI", DCD_RSHI},
+
+   {"exit", "L", DCD_HLT},
+
+   {"page", "LI", DCD_JPAGE},
+
+   {"script",      "LIIIII", DCD_SCRIPTI},
+   {"scriptnamed", "LSIIII", DCD_SCRIPTS},
+
+   {"tra", "L",  DCD_TRA},
+   {"trx", "L",  DCD_TRX},
+   {"try", "L",  DCD_TRY},
+   {"trz", "LS", DCD_TRZ},
+
+   {"intralevelteleport", "LI", DCD_TELEPORT_INTRALEVEL},
+   {"interlevelteleport", "LI", DCD_TELEPORT_INTERLEVEL},
+
+   {"text",      "LS",  DCD_SETTEXT},
+   {"local",     "LS",  DCD_SETTEXTLOCAL},
+   {"addtext",   "LS",  DCD_ADDTEXT},
+   {"addlocal",  "LS",  DCD_ADDTEXTLOCAL},
+   {"setstr",    "LIS", DCD_SETSTRING},
+   {"name",      "LLS", DCD_SETSTRING, DSTR_NAME},
+   {"icon",      "LLS", DCD_SETSTRING, DSTR_ICON},
+   {"remote",    "LLS", DCD_SETSTRING, DSTR_REMOTE},
+   {"concat",    "L",   DCD_CONCAT},
+   {"endconcat", "L",   DCD_CONCATEND},
+
+   {"dlgwait", "L", DCD_DLGWAIT},
+
+   {"logon",   "LS", DCD_LOGON},
+   {"logoff",  "LS", DCD_LOGOFF},
+   {"info",    "L",  DCD_INFO},
+   {"pict",    "LS", DCD_PICT},
+   {"trmwait", "L",  DCD_TRMWAIT},
+};
 
 // Static Functions ----------------------------------------------------------|
 
-#define strtable_t_GetKey(o) ((o)->key)
-#define strtable_t_GetNext(o) (&(o)->next)
-#define strtable_t_GetPrev(o) (&(o)->prev)
-#define strtable_t_HashKey(k) (lstrhash(k))
-#define strtable_t_HashObj(o) ((o)->keyhash)
-#define strtable_t_KeyCmp(l, r) (faststrcmp(l, r))
-GDCC_HashMap_Defn(strtable_t, char const *, struct strent)
+static struct dlgfunc *GetFunc(char const *s)
+{
+   for(int i = 0; i < countof(ftbl); i++)
+      if(strcmp(ftbl[i].name, s) == 0)
+         return &ftbl[i];
 
-#define functable_t_GetKey(o) ((o)->name)
-#define functable_t_GetNext(o) (&(o)->next)
-#define functable_t_GetPrev(o) (&(o)->prev)
-#define functable_t_HashKey(k) (lstrhash(k))
-#define functable_t_HashObj(o) ((o)->keyhash)
-#define functable_t_KeyCmp(l, r) (faststrcmp(l, r))
-GDCC_HashMap_Defn(functable_t, char const *, struct dlgfunc)
+   Log("%s: invalid func \"%s\"", __func__, s);
+   return nil;
+}
 
 static i32 StrName(char const *s)
 {
-   ifauto(struct strent *, e, stbl.find(s))
-      return e->name;
-   else
-      return STR_NULL;
+   for(int i = 0; i < countof(stbl); i++)
+      if(strcmp(stbl[i].key, s) == 0)
+         return stbl[i].name;
+
+   return STR_NULL;
 }
 
 static i32 *NextCode(struct pstate *d)
@@ -109,64 +162,6 @@ static i32 AddString(struct pstate *d, char const *s, i32 l)
    Vec_MoveEnd(d->def->stab, s, l);
    return p;
 }
-
-#define RegCmp(c) (d->def->stabV[argv[0].s] == c && d->def->stabV[argv[0].s + 1] == '\0')
-#define GenCode_Reg(code) \
-        if(RegCmp('a')) *NextCode(d) = DCD_##code##_A; \
-   else if(RegCmp('b')) *NextCode(d) = DCD_##code##_B; \
-   else if(RegCmp('c')) *NextCode(d) = DCD_##code##_C; \
-   else if(RegCmp('d')) *NextCode(d) = DCD_##code##_D; \
-   else
-
-static void GenCode_Trace(struct pstate *d, struct arg *argv, i32 argc)
-{
-   GenCode_Reg(TRACE)
-   {
-      *NextCode(d) = DCD_TRACE_S;
-      *NextCode(d) = argv[0].s;
-   }
-}
-
-static void GenCode_Push(struct pstate *d, struct arg *argv, i32 argc)
-{
-   GenCode_Reg(PUSH)
-   {
-      *NextCode(d) = DCD_PUSH_I;
-      *NextCode(d) = argv[0].s;
-   }
-}
-
-static void GenCode_Pop(struct pstate *d, struct arg *argv, i32 argc)
-{
-   GenCode_Reg(POP)
-   {
-      struct token *tok = d->tb.reget();
-      LogOri(tok, "invalid argument");
-   }
-}
-
-#define GenCode_Arith(code) \
-   static void GenCode_Arith_##code(struct pstate *d, struct arg *argv, i32 argc) \
-   { \
-      GenCode_Reg(code) \
-      { \
-         *NextCode(d) = DCD_##code##_I; \
-         *NextCode(d) = argv[0].i; \
-      } \
-   }
-
-GenCode_Arith(ADD)
-GenCode_Arith(SUB)
-GenCode_Arith(MUL)
-GenCode_Arith(DIV)
-GenCode_Arith(MOD)
-GenCode_Arith(IOR)
-GenCode_Arith(AND)
-GenCode_Arith(XOR)
-GenCode_Arith(LSH)
-GenCode_Arith(RSH)
-
-#undef GenCode_Arith
 
 static void GenCode_Generic(struct pstate *d, struct arg *argv, i32 argc)
 {
@@ -187,9 +182,9 @@ static void GetCode_Cond(struct pstate *d)
    if(tok->type == tok_identi)
    {
       switch(StrName(tok->textV)) {
-      case STR_item:  code = DCD_JNITEM;  break;
-      case STR_class: code = DCD_JNCLASS; break;
-      default: LogOri(tok, "invalid conditional"); return;
+         case STR_item:  code = DCD_JNITEM;  break;
+         case STR_class: code = DCD_JNCLASS; break;
+         default: LogOri(tok, "invalid conditional"); return;
       }
    }
    else
@@ -286,7 +281,7 @@ static void GetCode_Generic(struct pstate *d)
    Dbg_Log(log_dlg, "call: %s", tok->textV);
 
    // Get the function to generate.
-   struct dlgfunc const *func = ftbl.find(tok->textV);
+   struct dlgfunc const *func = GetFunc(tok->textV);
    if(!func) {
       LogOri(tok, "invalid function in dialogue code");
       return;
@@ -312,8 +307,8 @@ static void GetCode_Generic(struct pstate *d)
       }
 
       switch(argv[argc].t = func->args[argc]) {
-      case 'I': argv[argc++].i = strtoi(tok->textV, nil, 0);           break;
-      case 'S': argv[argc++].s = AddString(d, tok->textV, tok->textC); break;
+         case 'I': argv[argc++].i = strtoi(tok->textV, nil, 0);           break;
+         case 'S': argv[argc++].s = AddString(d, tok->textV, tok->textC); break;
       }
 
       Dbg_Log(log_dlg, "arg %i: %s", argc, tok->textV);
@@ -326,15 +321,18 @@ static void GetCode_Generic(struct pstate *d)
    while(func->args[argc])
    {
       switch(argv[argc].t = func->args[argc]) {
-      case 'I': argv[argc++].i = 0;                    break;
-      case 'S': argv[argc++].s = AddString(d, c"", 0); break;
-      case 'L': argv[argc++].i = func->lit[lit++];     break;
+         case 'I': argv[argc++].i = 0;                    break;
+         case 'S': argv[argc++].s = AddString(d, c"", 0); break;
+         case 'L': argv[argc++].i = func->lit[lit++];     break;
       }
 
       Dbg_Log(log_dlg, "arg %i emptied", argc);
    }
 
-   func->genCode(d, argv, argc);
+   if(func->genCode)
+      func->genCode(d, argv, argc);
+   else
+      GenCode_Generic(d, argv, argc);
 }
 
 static void GetCode_Text(struct pstate *d, struct token *tok, i32 code)
@@ -350,22 +348,22 @@ static void GetCode_Line(struct pstate *d)
 
    switch(tok->type)
    {
-   case tok_identi:
-      Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
-      switch(StrName(tok->textV)) {
-      case STR_if:     GetCode_Cond   (d); break;
-      case STR_option: GetCode_Option (d); break;
-      case STR_exec:   GetCode_Exec   (d); break;
-      default:         GetCode_Generic(d); break;
-      }
-      break;
-   case tok_quote:  GetCode_Text(d, d->tb.reget(), DCD_ADDTEXT);      break;
-   case tok_dollar: GetCode_Text(d, d->tb.  get(), DCD_ADDTEXTLOCAL); break;
-   case tok_semico:
-   case tok_eof:
-      break;
-   default:
-      LogTok(tok, "invalid token in line");
+      case tok_identi:
+         Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
+         switch(StrName(tok->textV)) {
+            case STR_if:     GetCode_Cond   (d); break;
+            case STR_option: GetCode_Option (d); break;
+            case STR_exec:   GetCode_Exec   (d); break;
+            default:         GetCode_Generic(d); break;
+         }
+         break;
+      case tok_quote:  GetCode_Text(d, d->tb.reget(), DCD_ADDTEXT);      break;
+      case tok_dollar: GetCode_Text(d, d->tb.  get(), DCD_ADDTEXTLOCAL); break;
+      case tok_semico:
+      case tok_eof:
+         break;
+      default:
+         LogTok(tok, "invalid token in line");
    }
 }
 
@@ -451,7 +449,7 @@ static void GetDecl_Page(struct pstate *d)
    GetStatement(d);
 
    *NextCode(d) = DCD_DLGWAIT;
-   *NextCode(d) = DCD_DIE;
+   *NextCode(d) = DCD_HLT;
 }
 
 static void GetDecl_TrmPage(struct pstate *d, i32 num)
@@ -459,83 +457,13 @@ static void GetDecl_TrmPage(struct pstate *d, i32 num)
    SetupPage(d, num);
    GetStatement(d);
    *NextCode(d) = DCD_TRMWAIT;
-   *NextCode(d) = DCD_DIE;
+   *NextCode(d) = DCD_HLT;
 }
 
 // Extern Functions ----------------------------------------------------------|
 
-// Loads all string indices into the global stbl, and all function
-// prototypes into the global ftbl.
 void Dlg_GInit(void)
 {
-   static struct dlgfunc funcs[] = {
-      {"nop", "L", DCD_NOP},
-
-      {"push", "S", .genCode = GenCode_Push},
-      {"pop",  "S", .genCode = GenCode_Pop},
-
-      {"add", "I", .genCode = GenCode_Arith_ADD},
-      {"sub", "I", .genCode = GenCode_Arith_SUB},
-      {"mul", "I", .genCode = GenCode_Arith_MUL},
-      {"div", "I", .genCode = GenCode_Arith_DIV},
-      {"mod", "I", .genCode = GenCode_Arith_MOD},
-      {"ior", "I", .genCode = GenCode_Arith_IOR},
-      {"and", "I", .genCode = GenCode_Arith_AND},
-      {"xor", "I", .genCode = GenCode_Arith_XOR},
-      {"lsh", "I", .genCode = GenCode_Arith_LSH},
-      {"rsh", "I", .genCode = GenCode_Arith_RSH},
-
-      {"die",  "L", DCD_DIE},
-      {"exit", "L", DCD_DIE},
-
-      {"page", "LI", DCD_JPAGE},
-
-      {"script",      "LIIIII", DCD_SCRIPTI},
-      {"scriptnamed", "LSIIII", DCD_SCRIPTS},
-
-      {"trace", "S", .genCode = GenCode_Trace},
-
-      {"intralevelteleport", "LI", DCD_TELEPORT_INTRALEVEL},
-      {"interlevelteleport", "LI", DCD_TELEPORT_INTERLEVEL},
-
-      {"text",      "LS",  DCD_SETTEXT},
-      {"local",     "LS",  DCD_SETTEXTLOCAL},
-      {"addtext",   "LS",  DCD_ADDTEXT},
-      {"addlocal",  "LS",  DCD_ADDTEXTLOCAL},
-      {"setstr",    "LIS", DCD_SETSTRING},
-      {"name",      "LLS", DCD_SETSTRING, DSTR_NAME},
-      {"icon",      "LLS", DCD_SETSTRING, DSTR_ICON},
-      {"remote",    "LLS", DCD_SETSTRING, DSTR_REMOTE},
-      {"concat",    "L",   DCD_CONCAT},
-      {"endconcat", "L",   DCD_CONCATEND},
-
-      {"dlgwait", "L", DCD_DLGWAIT},
-
-      {"logon",   "LS", DCD_LOGON},
-      {"logoff",  "LS", DCD_LOGOFF},
-      {"info",    "L",  DCD_INFO},
-      {"pict",    "LS", DCD_PICT},
-      {"trmwait", "L",  DCD_TRMWAIT},
-   };
-
-   static struct strent strs[] = {
-      #define Str(name, s) {#name, #s},
-      #include "dlgstab.h"
-   };
-
-   strtable_t_ctor(&stbl, countof(strs), 1);
-   for(i32 i = 0; i < countof(strs); i++) {
-      strs[i].keyhash = lstrhash(strs[i].key);
-      strs[i].name = i;
-      stbl.insert(&strs[i]);
-   }
-
-   functable_t_ctor(&ftbl, countof(funcs), 1);
-   for(i32 i = 0; i < countof(funcs); i++) {
-      funcs[i].keyhash = lstrhash(funcs[i].name);
-      if(!funcs[i].genCode) funcs[i].genCode = GenCode_Generic;
-      ftbl.insert(&funcs[i]);
-   }
 }
 
 void Dlg_MInit(void)
@@ -572,13 +500,15 @@ void Dlg_MInit(void)
       }
 
       switch(StrName(tok->textV)) {
-      case STR_dialogue:   GetDecl_Dialogue(&d); break;
-      case STR_page:       GetDecl_Page    (&d); break;
-      case STR_terminal:   GetDecl_Terminal(&d); break;
-      case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
-      case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
-      case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
-      default: Log("%s: invalid identifier \"%s\"", __func__, tok->textV); goto done;
+         case STR_dialogue:   GetDecl_Dialogue(&d); break;
+         case STR_page:       GetDecl_Page    (&d); break;
+         case STR_terminal:   GetDecl_Terminal(&d); break;
+         case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
+         case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
+         case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
+         default:
+            Log("%s: invalid identifier \"%s\"", __func__, tok->textV);
+            goto done;
       }
    }
 

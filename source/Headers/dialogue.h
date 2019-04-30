@@ -7,38 +7,38 @@
 #ifdef DCD
 // VM state
 DCD(NOP)
-DCD(DIE)
+DCD(HLT)
 
 // Stack
-DCD(PUSH_I)
-DCD(PUSH_A)
-DCD(PUSH_B)
-DCD(PUSH_C)
-DCD(PUSH_D)
+DCD(PHA)
+DCD(PLA)
 
-DCD(POP)
-DCD(POP_A)
-DCD(POP_B)
-DCD(POP_C)
-DCD(POP_D)
+// Load
+DCD(LDA)
+DCD(LDX)
+DCD(LDY)
+
+// Transfer
+DCD(TAX)
+DCD(TAY)
+DCD(TSX)
+DCD(TXA)
+DCD(TXS)
+DCD(TYA)
 
 // Arithmetic
 #define ArithSet(sfx) \
-   DCD(ADD_##sfx) \
-   DCD(SUB_##sfx) \
-   DCD(MUL_##sfx) \
-   DCD(DIV_##sfx) \
-   DCD(MOD_##sfx) \
-   DCD(IOR_##sfx) \
-   DCD(AND_##sfx) \
-   DCD(XOR_##sfx) \
-   DCD(LSH_##sfx) \
-   DCD(RSH_##sfx)
+   DCD(ADD##sfx) \
+   DCD(SUB##sfx) \
+   DCD(MUL##sfx) \
+   DCD(DIV##sfx) \
+   DCD(MOD##sfx) \
+   DCD(IOR##sfx) \
+   DCD(AND##sfx) \
+   DCD(XOR##sfx) \
+   DCD(LSH##sfx) \
+   DCD(RSH##sfx)
 ArithSet(I)
-ArithSet(A)
-ArithSet(B)
-ArithSet(C)
-ArithSet(D)
 #undef ArithSet
 
 // Jumps
@@ -55,11 +55,10 @@ DCD(TELEPORT_INTRALEVEL)
 DCD(TELEPORT_INTERLEVEL)
 
 // Debugging
-DCD(TRACE_S)
-DCD(TRACE_A)
-DCD(TRACE_B)
-DCD(TRACE_C)
-DCD(TRACE_D)
+DCD(TRA)
+DCD(TRX)
+DCD(TRY)
+DCD(TRZ)
 
 // Shared
 DCD(SETSTRING)
