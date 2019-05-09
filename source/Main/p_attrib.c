@@ -26,9 +26,9 @@ static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 
 static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at)
 {
-   u32         attr = p->attr.attrs[at];
-   char const *name = p->attr.names[at];
-   k32 helptrns = 0.5;
+   u32  attr = p->attr.attrs[at];
+   cstr name = p->attr.names[at];
+   k32  helptrns = 0.5;
 
    if(p->attr.points)
       if(G_Button_Id(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))

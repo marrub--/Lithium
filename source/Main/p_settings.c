@@ -149,17 +149,17 @@ if(p->num == 0) {
 
 /* Static Functions -------------------------------------------------------- */
 
-static char const *LvSysName(i32 num)
+static cstr LvSysName(i32 num)
 {
-   static char const *names[] = {"Auto", "Hybrid", "Manual"};
+   static cstr names[] = {"Auto", "Hybrid", "Manual"};
 
    if(num < atsys_auto || num > atsys_manual) return "Unknown";
    else                                       return names[num];
 }
 
-static char const *ColorName(char ch)
+static cstr ColorName(char ch)
 {
-   static char const *colors[] = {
+   static cstr colors[] = {
       "Brick", "Tan", "Grey", "Green", "Brown", "Gold", "Red", "Blue",
       "Orange", "White", "Yellow", "Default", "Black", "Light Blue", "Cream",
       "Olive", "Dark Green", "Dark Red", "Dark Brown", "Purple", "Dark Grey",
@@ -170,9 +170,9 @@ static char const *ColorName(char ch)
    else                     return colors[ch - 'a'];
 }
 
-static char const *CursName(i32 num)
+static cstr CursName(i32 num)
 {
-   static char const *cursors[] = {
+   static cstr cursors[] = {
       "Green", "Pink", "Blue", "Orange", "Red", "White", "Outline",
       "Outline (Tail)", "Inv. Outline", "Inv. Outline (Tail)"
    };
@@ -181,9 +181,9 @@ static char const *CursName(i32 num)
    else                               return cursors[num];
 }
 
-static char const *XHairName(i32 num)
+static cstr XHairName(i32 num)
 {
-   static char const *xhairs[] = {
+   static cstr xhairs[] = {
       "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur",
       "Angle", "Dot", "X+"
    };
@@ -192,9 +192,9 @@ static char const *XHairName(i32 num)
    else                                 return xhairs[num - 1];
 }
 
-static char const *FontName(i32 num)
+static cstr FontName(i32 num)
 {
-   static char const *fonts[] = {
+   static cstr fonts[] = {
       "Misaki Gothic", "Misaki Mincho", "JF Dot Gothic"
    };
 

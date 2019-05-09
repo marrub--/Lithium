@@ -50,7 +50,7 @@ void W_Title(void)
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   char const *txt = LC(LANG "OPENER");
+   cstr txt = LC(LANG "OPENER");
    i32 len = strlen(txt);
 
    for(i32 t = 0, pos = 0;;)

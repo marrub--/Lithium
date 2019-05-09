@@ -27,6 +27,7 @@
         struct token *TBufPeek (struct tokbuf *tb);
 stkcall struct token *TBufUnGet(struct tokbuf *tb);
 stkcall struct token *TBufReGet(struct tokbuf *tb);
+stkcall struct token *TBufBack (struct tokbuf *tb, i32 n);
         bool          TBufDrop (struct tokbuf *tb, i32 t);
 stkcall i32           TBufProc (struct token *tok);
 stkcall i32           TBufProcL(struct token *tok);
@@ -46,6 +47,7 @@ struct tokbuf
    __prop peek  {call: TBufPeek (this)}
    __prop unget {call: TBufUnGet(this)}
    __prop reget {call: TBufReGet(this)}
+   __prop back  {call: TBufBack (this)}
    __prop drop  {call: TBufDrop (this)}
 
    struct origin orig;

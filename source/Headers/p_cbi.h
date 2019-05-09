@@ -106,6 +106,6 @@ struct cbi
 /* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_PMinit(struct player *p);
-char const *ThemeName(u32 num);
+cstr ThemeName(u32 num);
 
 #endif

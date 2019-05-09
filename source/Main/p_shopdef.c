@@ -29,7 +29,7 @@ bool P_Shop_CanBuy(struct player *p, struct shopdef const *def, void *obj)
           (def->ShopCanBuy ? def->ShopCanBuy(p, def, obj) : true);
 }
 
-bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog)
+bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog)
 {
    if(!P_Shop_CanBuy(p, def, obj))
       return false;

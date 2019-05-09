@@ -21,7 +21,7 @@
 struct magic_info {
    i32 st;
    i32 x, y;
-   char const *name;
+   cstr name;
 };
 
 /* Static Objects ---------------------------------------------------------- */

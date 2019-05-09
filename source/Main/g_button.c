@@ -32,7 +32,7 @@ bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
    if(a->label && pre->font)
    {
       i32 x, y;
-      char const *color;
+      cstr color;
 
       if(pre->ax == 4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
       else                         x = a->x + g->ox;

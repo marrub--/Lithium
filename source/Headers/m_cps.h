@@ -14,19 +14,20 @@
 #ifndef m_cps_h
 #define m_cps_h
 
-#define Cps_Count(name) (countof(name) * 4)
-#define Cps_Size(len) ((len) / 4 + (len) % 4)
-#define Cps_Defn(name, len) u32 (name)[Cps_Size(len)] = {}
-#define Cps_Decl(name, len) u32 (name)[Cps_Size(len)]
-#define Cps_Shif(i, set) ((set) << ((i) % 4 * 8))
+#define Cps_Adjust(len) ((len) / 4 + (((len) % 4) != 0))
 
-#define Cps_SetC(name, i, set) \
-   ((name)[(i) / 4] &= ~Cps_Shif(i, 0xFF), \
-    (name)[(i) / 4] |=  Cps_Shif(i, set & 0xFF))
+#define Cps_CountOf(name) (countof(name) * 4)
 
-#define Cps_GetC(name, i) \
-   (((name)[(i) / 4] & (0xFF << ((i) % 4 * 8))) >> ((i) % 4 * 8))
+#define Cps_Defn(name, len) u32 (name)[Cps_Adjust(len)] = {}
+#define Cps_Decl(name, len) u32 (name)[Cps_Adjust(len)]
 
-stkcall char const *Cps_Print(u32 *cps, i32 l);
+#define Cps_Expand_str(cps, s)   l_strdup(Cps_Expand(cps, s))
+#define Cps_ExpandNT_str(cps, s) l_strdup(Cps_ExpandNT(cps, s))
+
+stkcall void Cps_SetC(u32 *cps, u32 p, u32 c);
+stkcall byte Cps_GetC(u32 const *cps, u32 p);
+
+stkcall cstr Cps_Expand(u32 *cps, u32 s, u32 l);
+stkcall cstr Cps_ExpandNT(u32 *cps, u32 s);
 
 #endif

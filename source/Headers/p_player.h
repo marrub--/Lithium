@@ -82,7 +82,7 @@ stkcall void P_Scr_Take(struct player *p, i96 score);
 stkcall void P_Lv_GiveEXP(struct player *p, u64 amt);
 stkcall struct upgrade *P_Upg_GetNamed(struct player *p, i32 name);
 stkcall bool P_Upg_IsActive(struct player *p, i32 name);
-stkcall char const *P_Discrim(i32 pclass);
+stkcall cstr P_Discrim(i32 pclass);
 stkcall void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
 
@@ -201,7 +201,7 @@ struct player
    i32 pronoun;
    i32 dlgnum;
    i32 fun;
-   char const *discrim;
+   cstr discrim;
 
    /* Deltas */
    anonymous

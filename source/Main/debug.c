@@ -14,6 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 #include "w_monster.h"
+#include "m_char.h"
 
 #include <stdio.h>
 #include <GDCC.h>
@@ -25,7 +26,7 @@ i32 dbgstatnum,  dbgnotenum;
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Dbg_Stat_Impl(char const *fmt, ...)
+void Dbg_Stat_Impl(cstr fmt, ...)
 {
    if(!(dbglevel & log_devh)) return;
 
@@ -40,7 +41,7 @@ void Dbg_Stat_Impl(char const *fmt, ...)
    dbgstat[dbgstatnum++] = ACS_EndStrParam();
 }
 
-void Dbg_Note_Impl(char const *fmt, ...)
+void Dbg_Note_Impl(cstr fmt, ...)
 {
    if(!(dbglevel & log_devh)) return;
 
@@ -53,6 +54,30 @@ void Dbg_Note_Impl(char const *fmt, ...)
    va_end(vl);
 
    dbgnote[dbgnotenum++] = ACS_EndStrParam();
+}
+
+script
+void Dbg_PrintMemC(void const *data, size_t size)
+{
+   u32 const *d = data;
+   i32 pos = 0;
+
+   for(size_t i = 0; i < size * 4; i++)
+   {
+      if(pos + 3 > 79)
+      {
+         puts("");
+         pos = 0;
+      }
+
+      byte c = Cps_GetC(d, i);
+
+      printf(IsPrint(c) ? "%c  " : c"%.2X ", c);
+
+      pos += 3;
+   }
+
+   puts("\nEOF\n\n");
 }
 
 script
@@ -69,7 +94,7 @@ void Dbg_PrintMem(void const *data, size_t size)
          pos = 0;
       }
 
-      printf(IsPrint(d[i]) ? "%c  " : c"%.2X ",  d[i]);
+      printf(IsPrint(d[i]) ? "%c  " : c"%.2X ", d[i]);
 
       pos += 3;
    }
@@ -77,7 +102,7 @@ void Dbg_PrintMem(void const *data, size_t size)
    puts("\nEOF\n\n");
 }
 
-void Log(char const *fmt, ...)
+void Log(cstr fmt, ...)
 {
    va_list vl;
 

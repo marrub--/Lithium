@@ -75,7 +75,7 @@ begin:;
    /* 1-op tokens */
    case ';': tok1(tok_semico); return;
    case ',': tok1(tok_comma ); return;
-   case '$': tok1(tok_dollar); return;
+   case '#': tok1(tok_hash  ); return;
    case '[': tok1(tok_bracko); return;
    case ']': tok1(tok_brackc); return;
    case '{': tok1(tok_braceo); return;
@@ -173,10 +173,18 @@ begin:;
       unget();
       goto begin;
    }
-   else if(IsDigit(ch) || ch == '.' || ch == '-')
+   else if(IsDigit(ch) || ch == '.' || ch == '-' || ch == '$')
    {
       tok1(tok_number);
-      textNext() = ch;
+
+      if(ch == '$')
+      {
+         textNext() = '0';
+         textNext() = 'x';
+      }
+      else
+         textNext() = ch;
+
       getch();
       tokText(IsNumId);
    }

@@ -18,6 +18,7 @@
 #include "w_world.h"
 #include "m_file.h"
 #include "m_tokbuf.h"
+#include "m_char.h"
 
 /* Types ------------------------------------------------------------------- */
 
@@ -31,7 +32,7 @@ struct page_init
 
 /* Static Functions -------------------------------------------------------- */
 
-static str DecryptBody(char __str_ars const *s)
+static str DecryptBody(astr s)
 {
    ACS_BeginPrint();
    for(; *s; s++) ACS_PrintChar(!IsPrint(*s) ? *s : *s ^ 7);
@@ -164,7 +165,7 @@ static i32 LoadBIPInfo(struct player *p, str fname)
    return total;
 }
 
-static struct page *FindPage(struct bip *bip, char const *name)
+static struct page *FindPage(struct bip *bip, cstr name)
 {
    if(!name) return nil;
    ForCategoryAndPage() if(faststrcmp(page->name, name) == 0) return page;
@@ -252,7 +253,7 @@ void P_BIP_GiveMail(struct player *p, str title, i32 flags)
    }
 }
 
-struct page *P_BIP_Unlock(struct player *p, char const *name)
+struct page *P_BIP_Unlock(struct player *p, cstr name)
 {
    struct bip  *bip  = &p->bip;
    struct page *page = FindPage(bip, name);

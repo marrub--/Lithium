@@ -109,6 +109,12 @@ struct token *TBufReGet(struct tokbuf *tb)
    return &tb->toks[tb->tpos];
 }
 
+stkcall
+struct token *TBufBack(struct tokbuf *tb, i32 n)
+{
+   return &tb->toks[tb->tpos - n];
+}
+
 bool TBufDrop(struct tokbuf *tb, i32 t)
 {
    if(TBufGet(tb)->type != t)

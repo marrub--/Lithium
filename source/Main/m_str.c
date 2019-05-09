@@ -12,10 +12,9 @@
  */
 
 #include "common.h"
-#include "m_cps.h"
+#include "m_char.h"
 
 #include <stdio.h>
-#include <ctype.h>
 
 #define CpyStrLocal(out, st) \
    do { \
@@ -35,45 +34,30 @@ StrEntON
 #include "m_stab.h"
 StrEntOFF
 
-stkcall
-char const *Cps_Print(u32 *cps, i32 l)
-{
-   noinit static char buf[4096];
-   i32 i, ch;
-   for(i = 0; (ch = Cps_GetC(cps, i)) && (!l || i < l); i++) buf[i] = ch;
-   buf[i] = '\0';
-   return buf;
-}
-
-stkcall
-str l_strupper(str in)
+stkcall str l_strupper(str in)
 {
    ACS_BeginPrint();
-   for(char __str_ars const *c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
+   for(astr c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
    return ACS_EndStrParam();
 }
 
-stkcall
-u32 l_strhash(char __str_ars const *s)
+stkcall u32 l_strhash(astr s)
 {
    StrHashImpl();
 }
 
-stkcall
-u32 lstrhash(char const *s)
+stkcall u32 lstrhash(cstr s)
 {
    StrHashImpl();
 }
 
-stkcall
-char *lstrcpy_str(char *dest, char __str_ars const *src)
+stkcall char *lstrcpy_str(char *dest, astr src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
    return dest;
 }
 
-stkcall
-char *lstrcpy2(char *out, char const *s1, char const *s2)
+stkcall char *lstrcpy2(char *out, cstr s1, cstr s2)
 {
    char *p = out;
    for(; *s1; s1++) *p++ = *s1;
@@ -82,22 +66,41 @@ char *lstrcpy2(char *out, char const *s1, char const *s2)
    return out;
 }
 
-#define StrCmpImpl() while(*s1 && *s2 && *s1 == *s2) ++s1, ++s2; return *s1 - *s2
-
-stkcall
-i32 lstrcmp_str(char const *s1, char __str_ars const *s2)
+stkcall i32 lstrcmp_str(cstr s1, astr s2)
 {
-   StrCmpImpl();
+   register i32 res;
+
+   while((res = *s1 - *s2++) == 0)
+      if(*s1++ == '\0') break;
+
+   return res;
 }
 
-stkcall
-i32 faststrcmp(char const *s1, char const *s2)
+stkcall i32 faststrcmp(cstr s1, cstr s2)
 {
-   StrCmpImpl();
+   if(s1 == s2) return 0;
+
+   register i32 res;
+
+   while((res = *s1 - *s2++) == 0)
+      if(*s1++ == '\0') break;
+
+   return res;
 }
 
-stkcall
-char const *scoresep(i96 num)
+stkcall i32 faststrcasecmp(cstr s1, cstr s2)
+{
+   if(s1 == s2) return 0;
+
+   register i32 res;
+
+   while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0)
+      if(*s1++ == '\0') break;
+
+   return res;
+}
+
+stkcall cstr scoresep(i96 num)
 {
    static char out[48];
 
@@ -146,7 +149,7 @@ str LanguageV(str name)
    return ret;
 }
 
-char *LanguageVC(char *out, char const *name)
+char *LanguageVC(char *out, cstr name)
 {
    noinit static char sbuf[8192];
 
@@ -158,7 +161,7 @@ char *LanguageVC(char *out, char const *name)
    return out;
 }
 
-char *LanguageCV(char *out, char const *fmt, ...)
+char *LanguageCV(char *out, cstr fmt, ...)
 {
    noinit static char nbuf[256];
    va_list vl;
@@ -170,7 +173,7 @@ char *LanguageCV(char *out, char const *fmt, ...)
    return LanguageVC(out, nbuf);
 }
 
-str LanguageNull(char const *fmt, ...)
+str LanguageNull(cstr fmt, ...)
 {
    va_list vl;
 

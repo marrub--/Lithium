@@ -173,13 +173,13 @@ void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
    return tcbuf;
 
 stkcall
-char const *RemoveTextColors_str(char __str_ars const *s, i32 size)
+cstr RemoveTextColors_str(astr s, i32 size)
 {
    RemoveTextColorsImpl();
 }
 
 stkcall
-char const *RemoveTextColors(char const *s, i32 size)
+cstr RemoveTextColors(cstr s, i32 size)
 {
    RemoveTextColorsImpl();
 }

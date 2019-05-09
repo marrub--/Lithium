@@ -93,7 +93,7 @@ void DrawSpriteFade(str name, i32 id, k32 x, k32 y, k32 hold, k32 fadetime)
    ACS_EndHudMessage(fadetime);
 }
 
-void HudMessage(char const *fmt, ...)
+void HudMessage(cstr fmt, ...)
 {
    va_list vl;
 

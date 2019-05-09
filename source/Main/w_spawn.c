@@ -20,7 +20,7 @@
 struct witem
 {
    i32 weight;
-   char const *item;
+   cstr item;
 };
 
 /* Static Objects ---------------------------------------------------------- */
@@ -92,7 +92,7 @@ static struct witem const clipbx[] = {
 /* Static Functions -------------------------------------------------------- */
 
 stkcall
-static char const *RandomWeighted(struct witem const *l, i32 c)
+static cstr RandomWeighted(struct witem const *l, i32 c)
 {
    i32 sel = ACS_Random(1, l[c - 1].weight);
 
@@ -106,7 +106,7 @@ static char const *RandomWeighted(struct witem const *l, i32 c)
 script_str ext("ACS") addr("Lith_RandomSpawn")
 void Sc_RandomSpawn(i32 rsn)
 {
-   char const *item;
+   cstr item;
 
    switch(rsn) {
    case lrsn_garmor: item = RandomWeighted(garmor, countof(garmor)); break;

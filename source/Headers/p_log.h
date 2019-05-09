@@ -48,9 +48,9 @@ struct loginfo
    u32            curtime;
 };
 
-void P_Log_Both(struct player *p, i32 levl, char const *fmt, ...); /* log to HUD and full log */
-void P_Log_HUDs(struct player *p, i32 levl, char const *fmt, ...); /* log to HUD only */
-void P_Log_Full(struct player *p,           char const *fmt, ...); /* log to full log only */
+void P_Log_Both(struct player *p, i32 levl, cstr fmt, ...); /* log to HUD and full log */
+void P_Log_HUDs(struct player *p, i32 levl, cstr fmt, ...); /* log to HUD only */
+void P_Log_Full(struct player *p,           cstr fmt, ...); /* log to full log only */
 void P_Log_Entry(struct player *p);
 
 #endif

@@ -6,123 +6,448 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * Dialogue VM code data.
+ * Dialogue VM data. A 6502 emulator with extensions.
+ *
+ * Registers:
+ *
+ *    AC - Accumulator
+ *    PC - Program Counter
+ *    RX - X
+ *    RY - Y
+ *    SP - Stack Pointer
+ *    SR - Processor State
+ *
+ * Extended registers:
+ *
+ *    TX - Text
+ *    UI - GUI State
+ *    VA - VM Action
+ *
+ * Status bits:
+ *
+ *    B - Break Command (ignored)
+ *    C - Carry
+ *    D - Decimal Mode (ignored)
+ *    I - Interrupt Disable (ignored)
+ *    N - Negative
+ *    V - Overflow
+ *    Z - Zero
+ *
+ * Base instructions:
+ *
+ *    ADC AND ASL BCC BCS BEQ BIT BMI BNE BPL BRK BVC BVS CLC
+ *    CLD CLI CLV CMP CPX CPY DEC DEX DEY EOR INC INX INY JMP
+ *    JSR LDA LDX LDY LSR NOP ORA PHA PHP PLA PLP ROL ROR RTI
+ *    RTS SBC SEC SED SEI STA STX STY TAX TAY TSX TXA TXS TYA
+ *
+ * Extended instructions:
+ *
+ *    JPG - Jump Page
+ *    LDV - Load VM Action
+ *    TRR - Trace Registers
+ *    TRS - Trace Stack
+ *    TRT - Trace Text
+ *    TRV - Trace Variables
  *
  * ---------------------------------------------------------------------------|
  */
 
-#ifdef DCD
-/* VM state */
-DCD(NOP)
-DCD(HLT)
+#if defined(ACT)
+ACT(DLG_WAIT)            /* (OP)                       -> VA<ret> OPT_SEL */
+ACT(LD_ITEM)             /* (ADRL(name))               -> AC<count>       */
+ACT(LD_OPT)              /* (ADRL<name> RADRL<ptr>)    -> OPT_CNT OPT     */
+ACT(SCRIPT_I)            /* (SCP0 SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
+ACT(SCRIPT_S)            /* (ADRL SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
+ACT(TELEPORT_INTERLEVEL) /* (ADRL<map>)                -> VA<halt>        */
+ACT(TELEPORT_INTRALEVEL) /* (ADRL<tag>)                -> VA<halt>        */
+ACT(TEXT_ADDI)           /* (ADRL)                     -> TX              */
+ACT(TEXT_ADDL)           /* (ADRL)                     -> TX              */
+ACT(TEXT_SETI)           /* (ADRL)                     -> TX              */
+ACT(TEXT_SETL)           /* (ADRL)                     -> TX              */
+/*ACT(TRM_INFO)
+ACT(TRM_LOGOFF)
+ACT(TRM_LOGON)
+ACT(TRM_PICT)
+ACT(TRM_WAIT)*/
 
-/* Stack */
-DCD(PHA)
-DCD(PLA)
-
-/* Load */
-DCD(LDA)
-DCD(LDX)
-DCD(LDY)
-
-/* Transfer */
-DCD(TAX)
-DCD(TAY)
-DCD(TSX)
-DCD(TXA)
-DCD(TXS)
-DCD(TYA)
-
-/* Arithmetic */
-#define ArithSet(sfx) \
-   DCD(ADD##sfx) \
-   DCD(SUB##sfx) \
-   DCD(MUL##sfx) \
-   DCD(DIV##sfx) \
-   DCD(MOD##sfx) \
-   DCD(IOR##sfx) \
-   DCD(AND##sfx) \
-   DCD(XOR##sfx) \
-   DCD(LSH##sfx) \
-   DCD(RSH##sfx)
-ArithSet(I)
-#undef ArithSet
+#undef ACT
+#elif defined(DCD)
+/* No-op */
+DCD(0xEA, NOP, NP)
 
 /* Jumps */
-DCD(JPAGE)
-DCD(JMP)
-DCD(JNZ)
-DCD(JNITEM)
-DCD(JNCLASS)
+DCD(0x00, BRK, NP)
+DCD(0x10, BPL, RI)
+DCD(0x20, JSR, AI)
+DCD(0x30, BMI, RI)
+DCD(0x40, RTI, NP)
+DCD(0x50, BVC, RI)
+DCD(0x60, RTS, NP)
+DCD(0x70, BVS, RI)
+DCD(0x90, BCC, RI)
+DCD(0xB0, BCS, RI)
+DCD(0xD0, BNE, RI)
+DCD(0xF0, BEQ, RI)
 
-/* Interaction */
-DCD(SCRIPTI)
-DCD(SCRIPTS)
-DCD(TELEPORT_INTRALEVEL)
-DCD(TELEPORT_INTERLEVEL)
+DCD(0x4C, JMP, AI)
+DCD(0x6C, JMP, II)
 
-/* Debugging */
-DCD(TRA)
-DCD(TRX)
-DCD(TRY)
-DCD(TRZ)
+DCD(0x22, JPG, VI) /* Extension */
 
-/* Shared */
-DCD(SETSTRING)
-DCD(SETTEXT)
-DCD(SETTEXTLOCAL)
-DCD(ADDTEXT)
-DCD(ADDTEXTLOCAL)
-DCD(CONCAT)
-DCD(CONCATEND)
+/* Comparison */
+DCD(0xC0, CPY, VI)
+DCD(0xE0, CPX, VI)
 
-/* Dialogue */
-DCD(PUTOPT)
-DCD(DLGWAIT)
+DCD(0xC1, CMP, IX)
+DCD(0xD1, CMP, IY)
 
-/* Terminal */
-DCD(LOGON)
-DCD(LOGOFF)
-DCD(INFO)
-DCD(PICT)
-DCD(TRMWAIT)
+DCD(0x24, BIT, ZI)
+DCD(0xC4, CPY, ZI)
+DCD(0xE4, CPX, ZI)
+
+DCD(0xC5, CMP, ZI)
+DCD(0xD5, CMP, ZX)
+
+DCD(0xC9, CMP, VI)
+DCD(0xD9, CMP, AY)
+
+DCD(0x2C, BIT, AI)
+
+DCD(0xCC, CPY, AI)
+DCD(0xEC, CPX, AI)
+
+DCD(0xCD, CMP, AI)
+DCD(0xDD, CMP, AX)
+
+/* Stack */
+DCD(0x08, PHP, NP)
+DCD(0x28, PLP, NP)
+DCD(0x48, PHA, NP)
+DCD(0x68, PLA, NP)
+
+/* Flags */
+DCD(0x18, CLC, NP)
+DCD(0x38, SEC, NP)
+DCD(0x58, CLI, NP)
+DCD(0x78, SEI, NP)
+DCD(0xB8, CLV, NP)
+DCD(0xD8, CLD, NP)
+DCD(0xF8, SED, NP)
+
+/* Load */
+DCD(0xA0, LDY, VI)
+
+DCD(0xA1, LDA, IX)
+DCD(0xB1, LDA, IY)
+
+DCD(0xA2, LDX, VI)
+
+DCD(0xA4, LDY, ZI)
+DCD(0xB4, LDY, ZX)
+
+DCD(0xA5, LDA, ZI)
+DCD(0xB5, LDA, ZX)
+
+DCD(0xA6, LDX, ZI)
+DCD(0xB6, LDX, ZY)
+
+DCD(0xA9, LDA, VI)
+DCD(0xB9, LDA, AY)
+
+DCD(0xAC, LDY, AI)
+DCD(0xBC, LDY, AX)
+
+DCD(0xAD, LDA, AI)
+DCD(0xBD, LDA, AX)
+
+DCD(0xAE, LDX, AI)
+DCD(0xBE, LDX, AY)
+
+DCD(0x03, LDV, VI) /* Extension */
+DCD(0x13, LDV, ZI) /* Extension */
+DCD(0x23, LDV, ZX) /* Extension */
+DCD(0x33, LDV, AI) /* Extension */
+DCD(0x43, LDV, AX) /* Extension */
+
+/* Transfer */
+DCD(0x98, TYA, NP)
+DCD(0xA8, TAY, NP)
+
+DCD(0x8A, TXA, NP)
+DCD(0x9A, TXS, NP)
+DCD(0xAA, TAX, NP)
+DCD(0xBA, TSX, NP)
+
+/* Store */
+DCD(0x81, STA, IX)
+DCD(0x91, STA, IY)
+
+DCD(0x84, STY, ZI)
+DCD(0x94, STY, ZX)
+
+DCD(0x85, STA, ZI)
+DCD(0x95, STA, ZX)
+
+DCD(0x86, STX, ZI)
+DCD(0x96, STX, ZY)
+
+DCD(0x99, STA, AY)
+
+DCD(0x8C, STY, AI)
+
+DCD(0x8D, STA, AI)
+DCD(0x9D, STA, AX)
+
+DCD(0x8E, STX, AI)
+
+/* Arithmetic */
+DCD(0x01, ORA, IX)
+DCD(0x11, ORA, IY)
+DCD(0x21, AND, IX)
+DCD(0x31, AND, IY)
+DCD(0x41, EOR, IX)
+DCD(0x51, EOR, IY)
+DCD(0x61, ADC, IX)
+DCD(0x71, ADC, IY)
+DCD(0xE1, SBC, IX)
+DCD(0xF1, SBC, IY)
+
+DCD(0x05, ORA, ZI)
+DCD(0x15, ORA, ZX)
+DCD(0x25, AND, ZI)
+DCD(0x35, AND, ZX)
+DCD(0x45, EOR, ZI)
+DCD(0x55, EOR, ZX)
+DCD(0x65, ADC, ZI)
+DCD(0x75, ADC, ZX)
+DCD(0xE5, SBC, ZI)
+DCD(0xF5, SBC, ZX)
+
+DCD(0x06, ASL, ZI)
+DCD(0x16, ASL, ZX)
+DCD(0x26, ROL, ZI)
+DCD(0x36, ROL, ZX)
+DCD(0x46, LSR, ZI)
+DCD(0x56, LSR, ZX)
+DCD(0x66, ROR, ZI)
+DCD(0x76, ROR, ZX)
+DCD(0xC6, DEC, ZI)
+DCD(0xD6, DEC, ZX)
+DCD(0xE6, INC, ZI)
+DCD(0xF6, INC, ZX)
+
+DCD(0x88, DEY, NP)
+DCD(0xC8, INY, NP)
+DCD(0xE8, INX, NP)
+
+DCD(0x09, ORA, VI)
+DCD(0x19, ORA, AY)
+DCD(0x29, AND, VI)
+DCD(0x39, AND, AY)
+DCD(0x49, EOR, VI)
+DCD(0x59, EOR, AY)
+DCD(0x69, ADC, VI)
+DCD(0x79, ADC, AY)
+DCD(0xE9, SBC, VI)
+DCD(0xF9, SBC, AY)
+
+DCD(0x0A, ASL, NP)
+DCD(0x2A, ROL, NP)
+DCD(0x4A, LSR, NP)
+DCD(0x6A, ROR, NP)
+
+DCD(0xCA, DEX, NP)
+
+DCD(0x0D, ORA, AI)
+DCD(0x1D, ORA, AX)
+DCD(0x2D, AND, AI)
+DCD(0x3D, AND, AX)
+DCD(0x4D, EOR, AI)
+DCD(0x5D, EOR, AX)
+DCD(0x6D, ADC, AI)
+DCD(0x7D, ADC, AX)
+DCD(0xED, SBC, AI)
+DCD(0xFD, SBC, AX)
+
+DCD(0x0E, ASL, AI)
+DCD(0x1E, ASL, AX)
+DCD(0x2E, ROL, AI)
+DCD(0x3E, ROL, AX)
+DCD(0x4E, LSR, AI)
+DCD(0x5E, LSR, AX)
+DCD(0x6E, ROR, AI)
+DCD(0x7E, ROR, AX)
+DCD(0xCE, DEC, AI)
+DCD(0xDE, DEC, AX)
+DCD(0xEE, INC, AI)
+DCD(0xFE, INC, AX)
+
+/* Trace */
+DCD(0x02, TRR, NP) /* Extension */
+DCD(0x12, TRS, NP) /* Extension */
+DCD(0x32, TRV, NP) /* Extension */
+DCD(0x42, TRT, NP) /* Extension */
 #undef DCD
 #elif !defined(dialogue_h)
 #define dialogue_h
 
 #include "w_world.h"
 #include "m_vec.h"
+#include "m_cps.h"
+
+#define StructOfs(nam, mem, sel) \
+   (VAR_##nam##_BEG + S_##nam##_##mem + S_##nam##_SIZE * (sel))
+
+#define StructOfsHead(nam, sel) (VAR_##nam##_BEG + S_##nam##_SIZE * (sel))
 
 /* Types ------------------------------------------------------------------- */
 
 enum
 {
-   #define DCD(name) DCD_##name,
+   #define DCD(n, op, ty) DCD_##op##_##ty = n,
    #include "dialogue.h"
 };
 
 enum
 {
-   DSTR_NAME,
-   DSTR_ICON,
-   DSTR_REMOTE,
+   DPAGE_DIALOGUE   = 0x1A,
+   DPAGE_TERMINAL   = 0xF0,
+   DPAGE_UNFINISHED = 0xFD,
+   DPAGE_FINISHED,
+   DPAGE_FAILURE,
 };
 
 enum
 {
-   DTRMPAGE_UNFINISHED = 0x7FFFFF0F,
-   DTRMPAGE_FINISHED,
-   DTRMPAGE_FAILURE,
+   STA_START = 0x0100,
+   VAR_START = 0x0200,
+   PRG_START = 0xA000,
+   STR_START = 0xC000,
+   IRQ_START = 0xFF00,
+   STA_START_C = STA_START / 4,
+   PRG_START_C = PRG_START / 4,
+   STR_START_C = STR_START / 4,
 };
 
-struct dlgdef
+enum
+{
+   ADRM_AI, /* Absolute-immediate */
+   ADRM_AX, /* Absolute-X         */
+   ADRM_AY, /* Absolute-Y         */
+   ADRM_II, /* Indirect-immediate */
+   ADRM_IX, /* Indirect-X         */
+   ADRM_IY, /* Indirect-Y         */
+   ADRM_NP, /* No-parameter       */
+   ADRM_RI, /* Relative-immediate */
+   ADRM_VI, /* Value-immediate    */
+   ADRM_ZI, /* Zeropage-immediate */
+   ADRM_ZX, /* Zeropage-X         */
+   ADRM_ZY, /* Zeropage-Y         */
+};
+
+/* structures */
+enum
+{
+   /* options */
+   S_OPT_PTRL,
+   S_OPT_PTRH,
+   S_OPT_NAML,
+   S_OPT_NAMH,
+   S_OPT_SIZE,
+};
+
+enum
+{
+   /* constants */
+   VAR_PCLASS = VAR_START,
+
+   /* vars */
+   VAR_CONCAT,
+   VAR_UACT,
+
+   /* general address */
+   VAR_ADRL,
+   VAR_ADRH,
+   VAR_RADRL,
+   VAR_RADRH,
+
+   /* scripts */
+   VAR_SCP0,
+   VAR_SCP1,
+   VAR_SCP2,
+   VAR_SCP3,
+   VAR_SCP4,
+
+   /* strings */
+   VAR_NAMEL,
+   VAR_NAMEH,
+   VAR_ICONL,
+   VAR_ICONH,
+   VAR_REMOTEL,
+   VAR_REMOTEH,
+   VAR_PICTL,
+   VAR_PICTH,
+
+   /* options */
+   VAR_OPT_CNT,
+   VAR_OPT_SEL,
+
+   VAR_OPT_BEG,
+   VAR_OPT_END = VAR_OPT_BEG + S_OPT_SIZE * 16,
+
+   /* end */
+   VAR_END
+};
+
+enum
+{
+   #define ACT(name) ACT_##name,
+   #include "dialogue.h"
+   ACT_MAX,
+
+   /* response actions */
+   ACT_NONE,
+   ACT_HALT,
+   ACT_JUMP,
+};
+
+enum
+{
+   TACT_NONE,
+   TACT_LOGON,
+   TACT_LOGOFF,
+   TACT_INFO,
+   TACT_PICT,
+};
+
+enum
+{
+   UACT_NONE,
+   UACT_ACKNOWLEDGE,
+   UACT_SELOPTION,
+   UACT_EXIT,
+};
+
+struct dlg_def
 {
    i32 num;
-   i32 pages[48];
-   Vec_Decl(i32,  code);
-   Vec_Decl(char, stab);
+   u32 pages[0xFF];
+   size_t codeP, stabP;
+   Vec_Decl(u32, code);
+   Vec_Decl(u32, stab);
 
-   struct dlgdef *next;
+   struct dlg_def *next;
 };
+
+struct dcd_info
+{
+   char name[7];
+   u32  adrm;
+};
+
+/* Extern Objects ---------------------------------------------------------- */
+
+extern struct dlg_def *lmvar dlgdefs;
+extern struct dcd_info const dcdinfo[0xFF];
 
 #endif

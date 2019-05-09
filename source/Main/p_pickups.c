@@ -61,8 +61,8 @@ static void StupidPickup(struct player *p, i32 weapon)
 
    str nam = StupidName(weapon);
 
-   char const *fmt = LanguageC(LANG "PK_GET_%.3i", ifmt);
-   str         unc = Language (LANG "PK_UNCERTAIN_%.3i", iunc);
+   cstr fmt = LanguageC(LANG "PK_GET_%.3i", ifmt);
+   str  unc = Language (LANG "PK_UNCERTAIN_%.3i", iunc);
 
         if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) p->logB(1, fmt, nam, nam);
@@ -92,7 +92,7 @@ void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score
    else
       nam = Language(LANG "INFO_SHORT_%S", info->name);
 
-   char const *msg = LC(LANG "LOG_Sell");
+   cstr msg = LC(LANG "LOG_Sell");
 
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);

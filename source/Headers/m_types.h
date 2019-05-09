@@ -30,6 +30,8 @@
 #define stkcall    [[__call("StkCall")]]
 #define script     [[__call("ScriptI")]]
 #define script_str [[__call("ScriptS")]]
+#define sync       [[__call("SScriptI")]]
+#define sync_str   [[__call("SScriptS")]]
 #define optargs(x) [[__optional_args(x)]]
 #define noinit     [[__no_init]]
 #define anonymous  [[__anonymous]]
@@ -37,6 +39,8 @@
 #define stksize(x) [[__alloc_Aut(x)]]
 #define type(x)    [[__script(x)]]
 #define addr(x)    [[__address(x)]]
+
+#define local stkcall static inline
 
 /* Types ------------------------------------------------------------------- */
 
@@ -51,6 +55,9 @@ typedef uint96_t u96;
 typedef unsigned char byte;
 
 typedef __str str;
+
+typedef char __str_ars const *astr;
+typedef char           const *cstr;
 
 typedef      _Accum k32;
 typedef long _Accum k64;

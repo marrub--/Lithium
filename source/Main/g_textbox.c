@@ -15,6 +15,7 @@
 #include "p_player.h"
 #include "w_world.h"
 #include "m_cps.h"
+#include "m_char.h"
 
 struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt const *a)
 {
@@ -39,7 +40,7 @@ struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt c
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 1 < Cps_Count(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
+         if(st->tbptr + 1 < Cps_CountOf(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
          {
             Cps_SetC(st->txtbuf, st->tbptr, *c);
             st->tbptr++;
@@ -54,7 +55,8 @@ struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt c
 
    SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
    if(st->tbptr)
-      PrintTextFmt("%s%s", Cps_Print(st->txtbuf, st->tbptr), hot ? Ticker("|", "") : "");
+      PrintTextFmt("%s%s", Cps_Expand(st->txtbuf, 0, st->tbptr),
+                           hot ? Ticker("|", "") : "");
    else
       PrintTextFmt("\C%c%s", hot ? 'c' : 'm', LC(LANG "GUI_TEXTBOX"));
    PrintText(s_cbifont, CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);

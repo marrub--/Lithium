@@ -20,7 +20,7 @@
 script_str ext("ACS") addr("Lith_Obituary")
 void Sc_Obituary(void)
 {
-   static char const *pronoun[pro_max][5] = {
+   static cstr pronoun[pro_max][5] = {
       {"they", "them", "their", "theirs", "they're"},
       {"she",  "her",  "her",   "hers",   "she's"  },
       {"he",   "him",  "his",   "his",    "he's"   },
@@ -46,9 +46,9 @@ void Sc_Obituary(void)
    noinit static char out[1024];
    char *pt = out;
 
-   for(char __str_ars const *s = obit; *s;)
+   for(astr s = obit; *s;)
    {
-      char const *cs;
+      cstr cs;
       str st;
       i32 len;
 

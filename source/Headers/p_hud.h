@@ -31,7 +31,7 @@ struct hud_wsl
 };
 
 void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a);
-void HUD_Score(struct player *p, char const *fmt, i96 scr, str font, str cr, i32 x, i32 xa, i32 y, i32 ya);
+void HUD_Score(struct player *p, cstr fmt, i96 scr, str font, str cr, i32 x, i32 xa, i32 y, i32 ya);
 void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a);
 script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy);
 

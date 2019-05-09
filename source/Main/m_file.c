@@ -100,7 +100,7 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
    return size;
 }
 
-static ssize_t MemWrite(void *memdata, char const *buf, size_t size)
+static ssize_t MemWrite(void *memdata, cstr buf, size_t size)
 {
    struct memfile *mem = memdata;
    size_t avail = mem->len - mem->pos;
@@ -152,7 +152,7 @@ static i32 MemClose(void *memdata)
 
 /* Extern Functions -------------------------------------------------------- */
 
-FILE *W_Open(str fname, char const *rw)
+FILE *W_Open(str fname, cstr rw)
 {
    str f;
    ifw(i32 lmp = W_Find(fname), lmp == -1)
@@ -256,7 +256,7 @@ size_t FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;
 
-   for(char const *itr = ptr; count--; res++)
+   for(cstr itr = ptr; count--; res++)
       if(fputc(*itr++, fp) == EOF) return res;
 
    return res;
@@ -266,7 +266,7 @@ size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restric
 {
    size_t res = 0;
 
-   for(char const __str_ars *itr = ptr; count--; res++)
+   for(astr itr = ptr; count--; res++)
       if(fputc(*itr++, fp) == EOF) return res;
 
    return res;

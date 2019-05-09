@@ -158,6 +158,6 @@ stkcall void DrawSpriteXXX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, 
 stkcall void DrawSpritePlain(str name, i32 id, k32 x, k32 y, k32 hold);
 stkcall void DrawSpriteAlpha(str name, i32 id, k32 x, k32 y, k32 hold, k32 alpha);
 stkcall void DrawSpriteFade(str name, i32 id, k32 x, k32 y, k32 hold, k32 fadetime);
-void HudMessage(char const *fmt, ...);
+void HudMessage(cstr fmt, ...);
 
 /* EOF */

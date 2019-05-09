@@ -69,7 +69,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       if(G_ScrollOcclude(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
          continue;
 
-      char const *color;
+      cstr color;
       if(!upgr->owned && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr))
          color = "u";
       else switch(upgr->info->key)
@@ -154,7 +154,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    SetClipW(111, 30, 190, 170, 184);
 
    /* Cost */
-   char const *mark;
+   cstr mark;
    str cost;
 
    switch(upgr->info->key) {

@@ -44,7 +44,7 @@
 static void CBITab_Marine(struct gui_state *g, struct player *p)
 {
    i32 ram;
-   char const *name;
+   cstr name;
 
         Upgr(hasupgr2) {CPU(1); ram = 150; name = LC(LANG "CBI_CPU3");}
    else Upgr(hasupgr1) {CPU(2); ram = 100; name = LC(LANG "CBI_CPU2");}
@@ -75,7 +75,7 @@ static void CBITab_Marine(struct gui_state *g, struct player *p)
 
 static void CBITab_CyberMage(struct gui_state *g, struct player *p)
 {
-   char const *name = LC(LANG "CBI_CPU4");
+   cstr name = LC(LANG "CBI_CPU4");
 
    CPU(2);
    PrintTextChS(name);

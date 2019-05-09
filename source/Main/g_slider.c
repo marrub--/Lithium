@@ -74,8 +74,8 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
    /* draw value */
    if(pre->font)
    {
-      char const *suf = a->suf ? a->suf : "";
-      k64 amt = roundlk(norm * 100.lk, 10) / 100.lk;
+      cstr suf = a->suf ? a->suf : "";
+      k64  amt = roundlk(norm * 100.lk, 10) / 100.lk;
       if(a->integ) PrintTextFmt("%i%s",     (i32)amt, suf);
       else         PrintTextFmt("%.1k%s", (k32)amt, suf);
 

@@ -39,8 +39,8 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
       if(G_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(LANG "EMPTY"),
          44, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))
       {
-         i32 l = CBIState(g)->notebox.tbptr;
-         char const *s = Cps_Print(CBIState(g)->notebox.txtbuf, l);
+         i32  l = CBIState(g)->notebox.tbptr;
+         cstr s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
 
          Dalloc(p->notes[i]);
          p->notes[i] = Nalloc(l + 1);

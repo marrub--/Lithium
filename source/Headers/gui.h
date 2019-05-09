@@ -75,8 +75,8 @@
 #define G_TextBox_Reset(st) ((st)->tbptr = 0)
 
 #define G_TextBox_OnTextEntered(st) \
-   __with(char const *txt_buf = Cps_Print(st->txtbuf, st->tbptr);) \
-      ifauto(char const *, _c, strchr(txt_buf, '\n')) \
+   __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
+      ifauto(cstr , _c, strchr(txt_buf, '\n')) \
          __with(size_t txt_len = _c - txt_buf; G_TextBox_Reset(st);)
 
 /* Types ------------------------------------------------------------------- */
@@ -132,17 +132,17 @@ struct gui_state
 
    void *state;
 
-   char const *gfxprefix;
+   cstr gfxprefix;
 };
 
 struct gui_pre_btn
 {
-   char const *gfx;
-   char const *hot;
-   char const *cdef;
-   char const *cact;
-   char const *chot;
-   char const *cdis;
+   cstr gfx;
+   cstr hot;
+   cstr cdef;
+   cstr cact;
+   cstr chot;
+   cstr cdis;
    str font;
    str snd;
    i32 ax;
@@ -154,23 +154,23 @@ struct gui_pre_btn
 
 struct gui_arg_btn
 {
-   char const *label;
-   i32         x, y;
-   bool        disabled;
-   char const *color;
-   bool        slide;
+   cstr label;
+   i32  x, y;
+   bool disabled;
+   cstr color;
+   bool slide;
    struct gui_pre_btn const *preset;
 };
 
 struct gui_pre_cbx
 {
-   char const *gfx;
-   char const *hot;
-   char const *dis;
-   char const *chkgfx;
-   char const *chkhot;
-   char const *chkact;
-   char const *chkdis;
+   cstr gfx;
+   cstr hot;
+   cstr dis;
+   cstr chkgfx;
+   cstr chkhot;
+   cstr chkact;
+   cstr chkdis;
    str  sndup;
    str  snddn;
    bool external;
@@ -188,11 +188,11 @@ struct gui_arg_cbx
 
 struct gui_pre_scr
 {
-   char const *capS;
-   char const *capE;
-   char const *scrl;
-   char const *notchgfx;
-   char const *notchhot;
+   cstr capS;
+   cstr capE;
+   cstr scrl;
+   cstr notchgfx;
+   cstr notchhot;
    bool external;
    i32  scrlw;
    i32  scrlh;
@@ -212,9 +212,9 @@ struct gui_arg_scr
 
 struct gui_pre_sld
 {
-   char const *gfx;
-   char const *notch;
-   char const *notchhot;
+   cstr gfx;
+   cstr notch;
+   cstr notchhot;
    str  snd;
    str  font;
    bool external;
@@ -231,7 +231,7 @@ struct gui_arg_sld
    k64  maxima;
    k64  val;
    bool integ;
-   char const *suf;
+   cstr suf;
    struct gui_pre_sld const *preset;
 };
 
@@ -305,8 +305,8 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
 stkcall
 void G_ClipRelease(struct gui_state *g);
 
-stkcall char const *RemoveTextColors_str(char __str_ars const *s, i32 size);
-stkcall char const *RemoveTextColors    (char           const *s, i32 size);
+stkcall cstr RemoveTextColors_str(astr s, i32 size);
+stkcall cstr RemoveTextColors    (cstr s, i32 size);
 
 stkcall
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);

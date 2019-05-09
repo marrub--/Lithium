@@ -29,16 +29,17 @@
 #define l_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 
 stkcall str l_strupper(str in);
-stkcall u32 l_strhash(char __str_ars const *s);
-stkcall u32 lstrhash(char const *s);
-stkcall char *lstrcpy_str(char *dest, char __str_ars const *src);
-stkcall char *lstrcpy2(char *out, char const *s1, char const *s2);
-stkcall i32 lstrcmp_str(char const *s1, char __str_ars const *s2);
-stkcall i32 faststrcmp(char const *s1, char const *s2);
-stkcall char const *scoresep(i96 num);
+stkcall u32 l_strhash(astr s);
+stkcall u32 lstrhash(cstr s);
+stkcall char *lstrcpy_str(char *dest, astr src);
+stkcall char *lstrcpy2(char *out, cstr s1, cstr s2);
+stkcall i32 lstrcmp_str(cstr s1, astr s2);
+stkcall i32 faststrcmp(cstr s1, cstr s2);
+stkcall i32 faststrcasecmp(cstr s1, cstr s2);
+stkcall cstr scoresep(i96 num);
 str LanguageV(str name);
-str LanguageNull(char const *fmt, ...);
-char *LanguageVC(char *out, char const *name);
-char *LanguageCV(char *out, char const *name, ...);
+str LanguageNull(cstr fmt, ...);
+char *LanguageVC(char *out, cstr name);
+char *LanguageCV(char *out, cstr name, ...);
 
 /* EOF */

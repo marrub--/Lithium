@@ -34,6 +34,6 @@ struct shopdef
 
 i96 P_Shop_Cost(struct player *p, struct shopdef const *def);
 bool P_Shop_CanBuy(struct player *p, struct shopdef const *def, void *obj);
-optargs(1) bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, char const *namefmt, bool nodelivery, bool nolog);
+optargs(1) bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog);
 
 #endif

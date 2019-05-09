@@ -17,8 +17,6 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define FourCC(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
-
 /* Lith: First valid chunk in save file. */
 /* Ver. 7:  Initial version. */
 /* Ver. 14: Rewrite of save system. */

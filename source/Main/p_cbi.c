@@ -79,9 +79,9 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-char const *ThemeName(u32 num)
+cstr ThemeName(u32 num)
 {
-   static char const *themes[cbi_theme_max] = {
+   static cstr themes[cbi_theme_max] = {
       "Green",
       "Rose Pink",
       "Umi Blue",
@@ -110,7 +110,7 @@ void P_CBI_PTick(struct player *p)
    if(p->cbi.theme != p->cbi.oldtheme)
    {
       #define X(n) ":UI_" n ":"
-      static char const *names[] = {
+      static cstr names[] = {
          X("Green"),
          X("Rose"),
          X("Umi"),

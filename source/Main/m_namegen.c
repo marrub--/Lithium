@@ -2,6 +2,8 @@
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
+ * Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
+ * Used with permission.
  * See licenses/cc0.txt for more information.
  *
  * ---------------------------------------------------------------------------|
@@ -11,15 +13,13 @@
  * ---------------------------------------------------------------------------|
  */
 
-/* Predefined names and suffixes mostly taken from Kyle873's Doom RPG. */
-/* Used with permission. */
 #include "common.h"
 #include "w_world.h"
-#include <ctype.h>
+#include "m_char.h"
 
 /* Static Objects ---------------------------------------------------------- */
 
-static char const *syll[] = {
+static cstr syll[] = {
    "ka",  "k'",   "khi", "kaz", "kr",
    "ga",  "go",   "gor", "got", "gn", "gl",
    "sha", "sk",   "shu", "shi", "si",
@@ -36,7 +36,7 @@ static char const *syll[] = {
    "ver", "xel'", "xe",
 };
 
-static char const *lulz[] = {
+static cstr lulz[] = {
    "ohgodwhat",
    "kdizd",
    "help",
@@ -207,9 +207,9 @@ str RandomName(i32 id)
       ACS_PrintString(name[rand() % countof(name)]);
    else for(i32 i = 0, n = 3 + (rand() % 6); i < n; i++)
    {
-      char const *s = rand() % 101 == 0 ?
-                      lulz[rand() % countof(lulz)] :
-                      syll[rand() % countof(syll)];
+      cstr s = rand() % 101 == 0 ?
+               lulz[rand() % countof(lulz)] :
+               syll[rand() % countof(syll)];
 
       if(i == 0) {ACS_PrintChar(ToUpper(*s)); s++;}
 

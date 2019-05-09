@@ -20,357 +20,519 @@
 #include "m_tokbuf.h"
 
 #define LogTok(tok, s) \
-   Log(c"(%i:%i) %s: " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, __func__, \
-      tok->type, tok->textV ? tok->textV : c"<no string>")
-
-#define LogOri(tok, s) \
-   Log(c"(%i:%i) %s: " s, tok->orig.line, tok->orig.colu, __func__)
-
-/* Extern Objects ---------------------------------------------------------- */
-
-extern struct dlgdef *lmvar dlgdefs;
-
-/* Static Functions -------------------------------------------------------- */
-
-static void GetStatement(struct pstate *d);
+   Log(c"(%i:%i) %s: " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, \
+       __func__, tok->type, tok->textV ? tok->textV : c"<no string>")
 
 /* Types ------------------------------------------------------------------- */
 
-enum
-{
-   #define Str(name, s) STR_##name,
-   #include "dlgstab.h"
-   STR_MAX
-};
-
-struct strent {
-   char const *key, *s;
-   i32 name;
-};
-
-struct dlgfunc {
-   char const *name, *args;
-   i32 lit[4];
-   void (*genCode)(struct pstate *d, struct arg *argv, i32 argc);
-};
-
-struct arg {
-   i32  s;
-   i32  i;
-   char t;
-};
-
-struct pstate {
+struct parse_state {
    struct tokbuf tb;
-   struct dlgdef *def;
+   struct dlg_def *def;
 };
 
-/* Static Objects ---------------------------------------------------------- */
-
-static struct strent stbl[] = {
-   #define Str(name, s) {#name, #s, STR_##name},
-   #include "dlgstab.h"
-};
-
-static struct dlgfunc ftbl[] = {
-   /* nop */
-   {"nop", "L", DCD_NOP},
-
-   /* extended 6502 */
-   {"pha", "L", DCD_PHA},
-   {"pla", "L", DCD_PLA},
-
-   {"lda", "LI", DCD_LDA},
-   {"ldx", "LI", DCD_LDX},
-   {"ldy", "LI", DCD_LDY},
-
-   {"tax", "L", DCD_TAX},
-   {"tay", "L", DCD_TAY},
-   {"tsx", "L", DCD_TSX},
-   {"txa", "L", DCD_TXA},
-   {"txs", "L", DCD_TXS},
-   {"tya", "L", DCD_TYA},
-
-   {"add", "LI", DCD_ADDI},
-   {"sub", "LI", DCD_SUBI},
-   {"mul", "LI", DCD_MULI},
-   {"div", "LI", DCD_DIVI},
-   {"mod", "LI", DCD_MODI},
-   {"ior", "LI", DCD_IORI},
-   {"and", "LI", DCD_ANDI},
-   {"xor", "LI", DCD_XORI},
-   {"lsh", "LI", DCD_LSHI},
-   {"rsh", "LI", DCD_RSHI},
-
-   {"tra", "L",  DCD_TRA},
-   {"trx", "L",  DCD_TRX},
-   {"try", "L",  DCD_TRY},
-   {"trz", "LS", DCD_TRZ},
-
-   {"hlt", "L", DCD_HLT},
-
-   /* dialogue */
-   {"exit", "L", DCD_HLT},
-
-   {"page", "LI", DCD_JPAGE},
-
-   {"script",      "LIIIII", DCD_SCRIPTI},
-   {"scriptnamed", "LSIIII", DCD_SCRIPTS},
-
-   {"intralevelteleport", "LI", DCD_TELEPORT_INTRALEVEL},
-   {"interlevelteleport", "LI", DCD_TELEPORT_INTERLEVEL},
-
-   {"text",      "LS",  DCD_SETTEXT},
-   {"local",     "LS",  DCD_SETTEXTLOCAL},
-   {"addtext",   "LS",  DCD_ADDTEXT},
-   {"addlocal",  "LS",  DCD_ADDTEXTLOCAL},
-   {"setstr",    "LIS", DCD_SETSTRING},
-   {"name",      "LLS", DCD_SETSTRING, DSTR_NAME},
-   {"icon",      "LLS", DCD_SETSTRING, DSTR_ICON},
-   {"remote",    "LLS", DCD_SETSTRING, DSTR_REMOTE},
-   {"concat",    "L",   DCD_CONCAT},
-   {"endconcat", "L",   DCD_CONCATEND},
-
-   {"dlgwait", "L", DCD_DLGWAIT},
-
-   {"logon",   "LS", DCD_LOGON},
-   {"logoff",  "LS", DCD_LOGOFF},
-   {"info",    "L",  DCD_INFO},
-   {"pict",    "LS", DCD_PICT},
-   {"trmwait", "L",  DCD_TRMWAIT},
+struct ptr2 {
+   u32 l, h;
 };
 
 /* Static Functions -------------------------------------------------------- */
 
-static struct dlgfunc *GetFunc(char const *s)
+script static void GetStatement(struct parse_state *d);
+
+static void PushB1(struct parse_state *d, u32 b)
 {
-   for(int i = 0; i < countof(ftbl); i++)
-      if(strcmp(ftbl[i].name, s) == 0)
-         return &ftbl[i];
+   size_t pc = d->def->codeP++;
 
-   Log("%s: invalid func \"%s\"", __func__, s);
-   return nil;
-}
-
-static i32 StrName(char const *s)
-{
-   for(int i = 0; i < countof(stbl); i++)
-      if(strcmp(stbl[i].key, s) == 0)
-         return stbl[i].name;
-
-   return STR_NULL;
-}
-
-static i32 *NextCode(struct pstate *d)
-{
-   Vec_GrowN(d->def->code, 1, 32);
-   return &Vec_Next(d->def->code);
-}
-
-static i32 AddString(struct pstate *d, char const *s, i32 l)
-{
-   i32 p = d->def->stabC;
-   Vec_Grow(d->def->stab, l);
-   Vec_MoveEnd(d->def->stab, s, l);
-   return p;
-}
-
-static void GenCode_Generic(struct pstate *d, struct arg *argv, i32 argc)
-{
-   for(i32 i = 0; i < argc; i++)
+   if(pc + 1 > d->def->codeC * 4)
    {
-      if(argv[i].t == 'S') *NextCode(d) = argv[i].s;
-      else                 *NextCode(d) = argv[i].i;
+      Vec_Grow(d->def->code, 1);
+      d->def->codeC++;
    }
+
+   if(b > 255) Log("%s: byte error (overflow) %u", b);
+
+   Cps_SetC(d->def->codeV, pc, b);
 }
 
-/* Parses and generates code for a conditional statement. */
-static void GetCode_Cond(struct pstate *d)
+static void PushB2(struct parse_state *d, u32 word)
 {
-   i32 code = DCD_NOP;
+   PushB1(d, word & 0xFF);
+   PushB1(d, word >> 8);
+}
+
+static void PushLdv(struct parse_state *d, u32 action)
+{
+   PushB1(d, DCD_LDV_VI);
+   PushB1(d, action);
+}
+
+static struct ptr2 PushLoadAdr(struct parse_state *d, u32 at, u32 set)
+{
+   struct ptr2 adr;
+
+   PushB1(d, DCD_LDA_VI);
+   PushB1(d, set & 0xFF);
+   adr.l = d->def->codeP - 1;
+
+   PushB1(d, DCD_STA_AI);
+   PushB2(d, at);
+
+   PushB1(d, DCD_LDA_VI);
+   PushB1(d, set >> 8);
+   adr.h = d->def->codeP - 1;
+
+   PushB1(d, DCD_STA_AI);
+   PushB2(d, at + 1);
+
+   return adr;
+}
+
+static void SetB1(struct parse_state *d, u32 ptr, u32 b)
+{
+   if(b > 255) Log("%s: byte error (overflow) %u", b);
+
+   Cps_SetC(d->def->codeV, ptr, b);
+}
+
+static void SetB2(struct parse_state *d, u32 ptr, u32 word)
+{
+   SetB1(d, ptr + 0, word & 0xFF);
+   SetB1(d, ptr + 1, word >> 8);
+}
+
+static u32 PushST(struct parse_state *d, cstr s, u32 l)
+{
+   u32  p = d->def->stabP;
+   u32 vl = Cps_Adjust(p + l) - d->def->stabC;
+
+   Dbg_Log(log_dlg, "%s: (%3u %3u) '%s'", __func__, l, vl, s);
+
+   Vec_Grow(d->def->stab, vl);
+   d->def->stabC += vl;
+   d->def->stabP += l;
+
+   for(u32 i = 0; i < l; i++) Cps_SetC(d->def->stabV, p + i, s[i]);
+
+   return STR_START + p;
+}
+
+static i32 CodeABS(struct parse_state *d, cstr reg)
+{
    struct token *tok = d->tb.get();
 
-   /* Get the code to generate. */
+   if(tok->type == tok_number) {
+      i32 n = strtoi(tok->textV, nil, 0);
+
+      if(n <= 0xFFFF) {
+         if(!reg) {
+            return n;
+         } else if(d->tb.drop(tok_comma)) {
+            tok = d->tb.get();
+
+            if(tok->type == tok_identi && faststrcmp(tok->textV, reg) == 0) {
+               return n;
+            }
+
+            d->tb.unget();
+         }
+      }
+   }
+
+   d->tb.unget();
+
+   return false;
+}
+
+static i32 CodeZPG(struct parse_state *d, cstr reg)
+{
+   struct token *tok = d->tb.get();
+
+   if(tok->type == tok_number) {
+      i32 n = strtoi(tok->textV, nil, 0);
+
+      if(n <= 0xFF) {
+         if(!reg) {
+            return n;
+         } else if(d->tb.drop(tok_comma)) {
+            tok = d->tb.get();
+
+            if(tok->type == tok_identi && faststrcmp(tok->textV, reg) == 0) {
+               return n;
+            }
+
+            d->tb.unget();
+         }
+      }
+   }
+
+   d->tb.unget();
+
+   return -1;
+}
+
+static bool CodeAI(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeABS(d, nil), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n & 0xFF);
+      PushB1(d, n >> 8);
+      return true;
+   }
+
+   return false;
+}
+
+static bool CodeAX(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeABS(d, "X"), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n & 0xFF);
+      PushB1(d, n >> 8);
+      return true;
+   }
+
+   return false;
+}
+
+static bool CodeAY(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeABS(d, "Y"), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n & 0xFF);
+      PushB1(d, n >> 8);
+      return true;
+   }
+
+   return false;
+}
+
+static bool CodeII(struct parse_state *d, u32 code)
+{
+   if(d->tb.drop(tok_pareno)) {
+      struct token *tok = d->tb.get();
+
+      if(tok->type == tok_number) {
+         i32 n = strtoi(tok->textV, nil, 0);
+
+         if(n <= 0xFFFF && d->tb.drop(tok_parenc)) {
+            PushB1(d, code);
+            PushB1(d, n & 0xFF);
+            PushB1(d, n >> 8);
+            return true;
+         }
+      }
+
+      d->tb.unget();
+   }
+
+   return false;
+}
+
+static bool CodeIX(struct parse_state *d, u32 code)
+{
+   if(d->tb.drop(tok_pareno)) {
+      struct token *tok = d->tb.get();
+
+      if(tok->type == tok_number) {
+         i32 n = strtoi(tok->textV, nil, 0);
+
+         if(n <= 0xFF && d->tb.drop(tok_comma)) {
+            tok = d->tb.get();
+
+            if(tok->type == tok_identi &&
+               faststrcmp(tok->textV, "X") == 0 &&
+               d->tb.drop(tok_parenc))
+            {
+               PushB1(d, code);
+               PushB1(d, n);
+               return true;
+            }
+
+            d->tb.unget();
+         }
+      }
+
+      d->tb.unget();
+   }
+
+   return false;
+}
+
+static bool CodeIY(struct parse_state *d, u32 code)
+{
+   if(d->tb.drop(tok_pareno)) {
+      struct token *tok = d->tb.get();
+
+      if(tok->type == tok_number) {
+         i32 n = strtoi(tok->textV, nil, 0);
+
+         if(n <= 0xFF && d->tb.drop(tok_parenc) && d->tb.drop(tok_comma)) {
+            tok = d->tb.get();
+
+            if(tok->type == tok_identi && faststrcmp(tok->textV, "Y") == 0) {
+               PushB1(d, code);
+               PushB1(d, n);
+               return true;
+            }
+
+            d->tb.unget();
+         }
+      }
+
+      d->tb.unget();
+   }
+
+   return false;
+}
+
+#define CodeNP(d, code) (PushB1(d, code), true)
+#define CodeRI CodeZI
+
+static bool CodeVI(struct parse_state *d, u32 code)
+{
+   if(d->tb.drop(tok_hash)) {
+      struct token *tok = d->tb.get();
+
+      if(tok->type == tok_number) {
+         i32 n = strtoi(tok->textV, nil, 0);
+
+         if(n <= 0xFF) {
+            PushB1(d, code);
+            PushB1(d, n);
+            return true;
+         }
+      }
+
+      d->tb.unget();
+   }
+
+   return false;
+}
+
+static bool CodeZI(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeZPG(d, nil), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n);
+      return true;
+   }
+
+   return false;
+}
+
+static bool CodeZX(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeZPG(d, "X"), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n);
+      return true;
+   }
+
+   return false;
+}
+
+static bool CodeZY(struct parse_state *d, u32 code)
+{
+   ifw(i32 n = CodeZPG(d, "Y"), n > 0) {
+      PushB1(d, code);
+      PushB1(d, n);
+      return true;
+   }
+
+   return false;
+}
+
+static void GetCode_Asm(struct parse_state *d)
+{
+   register struct token *tok;
+
+   #define DCD(n, op, ty) \
+      tok = d->tb.reget(); \
+      if(faststrcasecmp(tok->textV, #op) == 0) \
+         if(Code##ty(d, DCD_##op##_##ty)) return;
+   #include "dialogue.h"
+
+   tok = d->tb.reget();
+   LogTok(tok, "no function found with this syntax");
+}
+
+static void GetCode_Text(struct parse_state *d, struct token *tok, u32 act)
+{
+   PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+   PushLdv(d, act);
+}
+
+static void GetCode_Cond(struct parse_state *d)
+{
+   struct token *tok = d->tb.get();
+   u32 ins = DCD_BNE_RI;
+
    if(tok->type == tok_identi)
    {
-      switch(StrName(tok->textV)) {
-         case STR_item:  code = DCD_JNITEM;  break;
-         case STR_class: code = DCD_JNCLASS; break;
-         default: LogOri(tok, "invalid conditional"); return;
+      if(faststrcmp(tok->textV, "item") == 0) {
+         tok = d->tb.get();
+         ins = DCD_BEQ_RI;
+
+         PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+
+         PushLdv(d, ACT_LD_ITEM);
+      } else if(faststrcmp(tok->textV, "class") == 0) {
+         tok = d->tb.get();
+
+         PushB1(d, DCD_LDA_AI);
+         PushB2(d, VAR_PCLASS);
+
+         PushB1(d, DCD_CMP_VI);
+         #define LITH_X(shr, lng) \
+            if(faststrcmp(tok->textV, #shr) == 0) {PushB1(d, shr); goto ok;}
+         #include "p_player.h"
+         LogTok(tok, "invalid playerclass type");
+         ok:;
+      } else {
+         LogTok(tok, "invalid conditional");
       }
    }
    else
       LogTok(tok, "expected identifier");
 
-   /* Generate code. */
-   i32 ptr = 0;
+   PushB1(d, ins);
+   PushB1(d, 0); /* placeholder */
+   u32 ptr = d->def->codeP;
 
-   tok = d->tb.get();
-   if(tok->type == tok_identi || tok->type == tok_string)
-   {
-      *NextCode(d) = code;
-      ptr = d->def->codeC;
-      NextCode(d);
-
-      if(code == DCD_JNCLASS)
-      {
-         #define LITH_X(l, r) \
-            if(faststrcmp(tok->textV, #l) == 0 || faststrcmp(tok->textV, #r) == 0) \
-               {*NextCode(d) = r; goto ok;}
-         #include "p_player.h"
-
-         LogOri(tok, "invalid playerclass type");
-         return;
-      }
-      else
-         *NextCode(d) = AddString(d, tok->textV, tok->textC);
-   }
-   else
-      LogOri(tok, "invalid token in conditional statement");
-
-   /* Generate statement. */
-ok:
    GetStatement(d);
 
+   u32 rel = d->def->codeP - ptr;
+   if(rel > 0x7F) Log("%s: bad jump (too much code)", __func__);
+
+   SetB1(d, ptr - 1, rel);
+
    tok = d->tb.get();
-   if(tok->type == tok_identi && StrName(tok->textV) == STR_else)
-   {
-      i32 tmp = ptr;
 
-      /* Add jump to end. */
-      *NextCode(d) = DCD_JMP;
-      ptr = d->def->codeC;
-      NextCode(d);
+   if(tok->type == tok_identi && faststrcmp(tok->textV, "else") == 0) {
+      PushB1(d, DCD_JMP_AI);
+      PushB2(d, 0);
+      ptr = d->def->codeP;
 
-      /* Set original jump target to here. */
-      d->def->codeV[tmp] = d->def->codeC;
-
-      /* Generate statement. */
       GetStatement(d);
-   }
-   else
-      d->tb.unget();
 
-   /* Set the pointer in the generated code to be after the statement. */
-   if(ptr) d->def->codeV[ptr] = d->def->codeC;
+      SetB2(d, ptr - 2, PRG_START + d->def->codeP);
+   } else {
+      d->tb.unget();
+   }
 }
 
-/* Parses and generates code for an option statement. */
-static void GetCode_Option(struct pstate *d)
+static void GetCode_Option(struct parse_state *d)
 {
    struct token *tok = d->tb.get();
 
-   /* Generate code. */
-   i32 ptr = 0;
    if(tok->type == tok_identi || tok->type == tok_string)
    {
-      *NextCode(d) = DCD_PUTOPT;
-      ptr = d->def->codeC;
-      NextCode(d);
-      *NextCode(d) = AddString(d, tok->textV, tok->textC);
+      PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+      struct ptr2 adr = PushLoadAdr(d, VAR_RADRL, 0); /* placeholder */
+
+      PushLdv(d, ACT_LD_OPT);
+
+      PushB1(d, DCD_JMP_AI);
+      PushB2(d, 0); /* placeholder */
+
+      u32 ptr = d->def->codeP;
+      u32 rel = PRG_START + ptr;
+
+      SetB1(d, adr.l, rel & 0xFF);
+      SetB1(d, adr.h, rel >> 8);
+
+      GetStatement(d);
+
+      SetB2(d, ptr - 2, PRG_START + d->def->codeP);
    }
    else
-      LogOri(tok, "invalid option parameter");
-
-   /* Generate statement. */
-   GetStatement(d);
-
-   /* Set the pointer in the generated code to be after the statement. */
-   if(ptr) d->def->codeV[ptr] = d->def->codeC;
+      LogTok(tok, "invalid option parameter");
 }
 
-/* Parses and generates code for an exec statement. */
-static void GetCode_Exec(struct pstate *d)
+static void GetCode_Str(struct parse_state *d, u32 adr)
 {
-   *NextCode(d) = DCD_TRMWAIT;
-   GetStatement(d);
-}
+   struct token *tok = d->tb.get();
 
-/* Parses and generates code for a generic statement. */
-static void GetCode_Generic(struct pstate *d)
-{
-   struct token *tok = d->tb.reget();
-   Dbg_Log(log_dlg, "call: %s", tok->textV);
-
-   /* Get the function to generate. */
-   struct dlgfunc const *func = GetFunc(tok->textV);
-   if(!func) {
-      LogOri(tok, "invalid function in dialogue code");
-      return;
-   }
-
-   /* Get arguments. */
-   struct arg argv[8] = {};
-   i32 argc = 0;
-   i32 lit  = 0;
-
-   while(func->args[argc])
-   {
-      if(func->args[argc] == 'L')
-      {
-         argv[argc++].i = func->lit[lit++];
-         continue;
-      }
-
-      if(!(tok = d->tb.get())->textV)
-      {
-         LogTok(tok, "invalid token in argument list");
-         return;
-      }
-
-      switch(argv[argc].t = func->args[argc]) {
-         case 'I': argv[argc++].i = strtoi(tok->textV, nil, 0);           break;
-         case 'S': argv[argc++].s = AddString(d, tok->textV, tok->textC); break;
-      }
-
-      Dbg_Log(log_dlg, "arg %i: %s", argc, tok->textV);
-
-      if(!d->tb.drop(tok_comma) || d->tb.drop(tok_semico))
+   switch(tok->type) {
+      case tok_identi:
+      case tok_string:
+      case tok_number:
+         PushLoadAdr(d, adr, PushST(d, tok->textV, tok->textC));
+         break;
+      default:
+         LogTok(tok, "invalid string parameter");
          break;
    }
+}
 
-   /* Fill in unfinished arguments. */
-   while(func->args[argc])
-   {
-      switch(argv[argc].t = func->args[argc]) {
-         case 'I': argv[argc++].i = 0;                    break;
-         case 'S': argv[argc++].s = AddString(d, c"", 0); break;
-         case 'L': argv[argc++].i = func->lit[lit++];     break;
-      }
+static void GetCode_Script(struct parse_state *d)
+{
+   struct token *tok = d->tb.get();
+   u32 act;
 
-      Dbg_Log(log_dlg, "arg %i emptied", argc);
+   if(tok->type == tok_string) {
+      act = ACT_SCRIPT_S;
+      PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+   } else if(tok->type == tok_number) {
+      u32 prm = strtoi(tok->textV, nil, 0);
+
+      act = ACT_SCRIPT_I;
+
+      PushB1(d, DCD_LDA_VI);
+      PushB1(d, prm);
+
+      PushB1(d, DCD_STA_AI);
+      PushB2(d, VAR_SCP0);
+   } else {
+      LogTok(tok, "invalid script name or number");
    }
 
-   if(func->genCode)
-      func->genCode(d, argv, argc);
-   else
-      GenCode_Generic(d, argv, argc);
+   for(u32 i = 0; i < 4 && d->tb.drop(tok_comma); i++) {
+      u32 prm = strtoi(d->tb.get()->textV, nil, 0);
+
+      PushB1(d, DCD_LDA_VI);
+      PushB1(d, prm);
+
+      PushB1(d, DCD_STA_AI);
+      PushB2(d, VAR_SCP1 + i);
+   }
+
+   PushLdv(d, act);
 }
 
-static void GetCode_Text(struct pstate *d, struct token *tok, i32 code)
-{
-   *NextCode(d) = code;
-   *NextCode(d) = AddString(d, tok->textV, tok->textC);
-}
-
-/* Parse and generate a line of code. */
-static void GetCode_Line(struct pstate *d)
+static void GetCode_Line(struct parse_state *d)
 {
    struct token *tok = d->tb.get();
 
-   switch(tok->type)
-   {
+   switch(tok->type) {
       case tok_identi:
          Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
-         switch(StrName(tok->textV)) {
-            case STR_if:     GetCode_Cond   (d); break;
-            case STR_option: GetCode_Option (d); break;
-            case STR_exec:   GetCode_Exec   (d); break;
-            default:         GetCode_Generic(d); break;
+
+         if(faststrcmp(tok->textV, "if") == 0) {
+            GetCode_Cond(d);
+         } else if(faststrcmp(tok->textV, "option") == 0) {
+            GetCode_Option(d);
+         } else if(faststrcmp(tok->textV, "page") == 0) {
+            tok = d->tb.get();
+            if(tok->type != tok_number) LogTok(tok, "invalid token for page");
+
+            PushB1(d, DCD_JPG_VI);
+            PushB1(d, strtoi(tok->textV, nil, 0));
+         } else if(faststrcmp(tok->textV, "name") == 0) {
+            GetCode_Str(d, VAR_NAMEL);
+         } else if(faststrcmp(tok->textV, "icon") == 0) {
+            GetCode_Str(d, VAR_ICONL);
+         } else if(faststrcmp(tok->textV, "remote") == 0) {
+            GetCode_Str(d, VAR_REMOTEL);
+         } else if(faststrcmp(tok->textV, "pict") == 0) {
+            GetCode_Str(d, VAR_PICTL);
+         } else if(faststrcmp(tok->textV, "script") == 0) {
+            GetCode_Script(d);
+         } else {
+            GetCode_Asm(d);
          }
          break;
-      case tok_quote:  GetCode_Text(d, d->tb.reget(), DCD_ADDTEXT);      break;
-      case tok_dollar: GetCode_Text(d, d->tb.  get(), DCD_ADDTEXTLOCAL); break;
+      case tok_quote: GetCode_Text(d, d->tb.reget(), ACT_TEXT_ADDI); break;
+      case tok_hash:  GetCode_Text(d, d->tb.get(),   ACT_TEXT_ADDL); break;
       case tok_semico:
       case tok_eof:
          break;
@@ -379,97 +541,228 @@ static void GetCode_Line(struct pstate *d)
    }
 }
 
-/* Parse and generate a block statement. */
-static void GetBlock(struct pstate *d)
+static void GetBlock(struct parse_state *d)
 {
    while(!d->tb.drop(tok_bracec) && !d->tb.drop(tok_eof))
       GetStatement(d);
 }
 
-/* Parse and generate a concat block statement. */
-static void GetConcatBlock(struct pstate *d)
+static void GetConcatBlock(struct parse_state *d)
 {
-   *NextCode(d) = DCD_CONCAT;
-   while(!d->tb.drop(tok_at2) && !d->tb.drop(tok_eof))
-      GetStatement(d);
-   *NextCode(d) = DCD_CONCATEND;
+   PushB1(d, DCD_INC_AI);
+   PushB2(d, VAR_CONCAT);
+
+   while(!d->tb.drop(tok_at2) && !d->tb.drop(tok_eof)) GetStatement(d);
+
+   PushB1(d, DCD_DEC_AI);
+   PushB2(d, VAR_CONCAT);
 }
 
-/* Parse and generate a statement. */
-static void GetStatement(struct pstate *d)
+script static void GetStatement(struct parse_state *d)
 {
         if(d->tb.drop(tok_braceo)) GetBlock(d);
    else if(d->tb.drop(tok_at2))    GetConcatBlock(d);
    else                            GetCode_Line(d);
 }
 
-static void SetupDialogue(struct pstate *d, i32 num)
-{
-   struct dlgdef *last = d->def;
-
-   d->def = Salloc(struct dlgdef);
-   d->def->num = num;
-
-   if(!last) dlgdefs    = d->def;
-   else      last->next = d->def;
-
-   Dbg_Log(log_dlg, "set up dialogue %i", num);
-}
-
-static void GetDecl_Dialogue(struct pstate *d)
+static void GetItem_Head(struct parse_state *d, i32 head)
 {
    struct token *tok = d->tb.get();
 
    if(tok->type == tok_number) {
-      SetupDialogue(d, strtoi(tok->textV, nil, 0));
-      Dbg_Log(log_dlg, "\n---\ndialogue %i (%i)\n---",
-         d->def->num, d->def->codeC);
+      i32            num  = head + strtoi(tok->textV, nil, 0);
+      struct dlg_def *last = d->def;
+
+      d->def = Salloc(struct dlg_def);
+      d->def->num = num;
+
+      if(!last) dlgdefs    = d->def;
+      else      last->next = d->def;
+
+      Dbg_Log(log_dlg, "\n---\nheading %i (%i)\n---",
+         d->def->num, d->def->codeP);
    } else {
-      LogOri(tok, "invalid dialogue number token");
+      LogTok(tok, "invalid terminal number token");
+   }
+
+   if(!d->tb.drop(tok_semico)) {
+      LogTok(tok, "semicolon required after heading");
    }
 }
 
-static void GetDecl_Terminal(struct pstate *d)
+static void SetupPage(struct parse_state *d, u32 num)
 {
-   struct token *tok = d->tb.get();
+   if(num > countof(d->def->pages))
+      Log("%s: bad page index", __func__);
 
-   if(tok->type == tok_number) {
-      SetupDialogue(d, -strtoi(tok->textV, nil, 0));
-      Dbg_Log(log_dlg, "\n---\nterminal %i (%i)\n---",
-         -d->def->num, d->def->codeC);
-   } else {
-      LogOri(tok, "invalid terminal number token");
-   }
+   d->def->pages[num] = d->def->codeP;
+
+   Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def->codeP);
 }
 
-static void SetupPage(struct pstate *d, i32 num)
-{
-   d->def->pages[num] = d->def->codeC;
-
-   Dbg_Log(log_dlg, "--- page %i (%i)", num, d->def->codeC);
-}
-
-static void GetDecl_Page(struct pstate *d)
+static void GetItem_Page(struct parse_state *d)
 {
    struct token *tok = d->tb.get();
 
    if(tok->type == tok_number)
       SetupPage(d, strtoi(tok->textV, nil, 0));
    else
-      LogOri(tok, "invalid page number token");
+      LogTok(tok, "invalid page number token");
 
    GetStatement(d);
 
-   *NextCode(d) = DCD_DLGWAIT;
-   *NextCode(d) = DCD_HLT;
+   PushLdv(d, ACT_DLG_WAIT);
+
+   PushB1(d, DCD_BRK_NP);
 }
 
-static void GetDecl_TrmPage(struct pstate *d, i32 num)
+/*
+static void GetItem_NumPage(struct parse_state *d, i32 num)
 {
    SetupPage(d, num);
+
    GetStatement(d);
-   *NextCode(d) = DCD_TRMWAIT;
-   *NextCode(d) = DCD_HLT;
+
+   PushLdv(d, ACT_TRM_WAIT);
+
+   PushB1(d, DCD_BRK_NP);
+}
+*/
+
+script static u32 WriteCode(struct dlg_def  const *def,
+                            struct dcd_info const *inf,
+                            u32 i)
+{
+   u32 c2, c3;
+
+   switch(inf->adrm) {
+      case ADRM_AI:
+         c2 = Cps_GetC(def->codeV, i++);
+         c3 = Cps_GetC(def->codeV, i++);
+         printf("%02X %02X\t%s $%02X%02X\n", c2, c3, inf->name, c3, c2);
+         break;
+      case ADRM_AX:
+         c2 = Cps_GetC(def->codeV, i++);
+         c3 = Cps_GetC(def->codeV, i++);
+         printf("%02X %02X\t%s $%02X%02X,X\n", c2, c3, inf->name, c3, c2);
+         break;
+      case ADRM_AY:
+         c2 = Cps_GetC(def->codeV, i++);
+         c3 = Cps_GetC(def->codeV, i++);
+         printf("%02X %02X\t%s $%02X%02X,Y\n", c2, c3, inf->name, c3, c2);
+         break;
+      case ADRM_II:
+         c2 = Cps_GetC(def->codeV, i++);
+         c3 = Cps_GetC(def->codeV, i++);
+         printf("%02X %02X\t%s ($%02X%02X)\n", c2, c3, inf->name, c3, c2);
+         break;
+      case ADRM_IX:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t%s ($%02X,X)\n", c2, inf->name, c2);
+         break;
+      case ADRM_IY:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t%s ($%02X),Y\n", c2, inf->name, c2);
+         break;
+      case ADRM_NP:
+         printf("\t%s\n", inf->name);
+         break;
+      case ADRM_ZI:
+      case ADRM_RI:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t%s $%02X\n", c2, inf->name, c2);
+         break;
+      case ADRM_VI:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t%s #$%02X\n", c2, inf->name, c2);
+         break;
+      case ADRM_ZX:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t%s $%02X,X\n", c2, inf->name, c2);
+         break;
+      case ADRM_ZY:
+         c2 = Cps_GetC(def->codeV, i++);
+         printf("%02X\t\t%s $%02X,Y\n", c2, inf->name, c2);
+         break;
+   }
+
+   return i;
+}
+
+script static void Disassemble(struct dlg_def const *def)
+{
+   for(u32 i = 0; i < def->codeP;)
+   {
+      printf("%04X ", PRG_START + i);
+
+      u32 c = Cps_GetC(def->codeV, i++);
+      printf("%02X ", c);
+
+      struct dcd_info const *inf = &dcdinfo[c];
+
+      if(inf->name[0]) {
+         i = WriteCode(def, inf, i);
+      } else {
+         printf("\t\tinvalid opcode\n");
+      }
+   }
+}
+
+script static void LoadFile(FILE *fp)
+{
+   struct parse_state d = {{.bbeg = 14, .bend = 28, .fp = fp}};
+
+   TBufCtor(&d.tb);
+
+   for(struct token *tok; (tok = d.tb.get())->type != tok_eof;)
+   {
+      if(tok->type != tok_identi) {
+         LogTok(tok, "invalid toplevel token");
+         break;
+      }
+
+      if(faststrcmp(tok->textV, "program") == 0) {
+         GetItem_Head(&d, 0);
+      } else if(faststrcmp(tok->textV, "dialogue") == 0) {
+         GetItem_Head(&d, DPAGE_DIALOGUE);
+      } else if(faststrcmp(tok->textV, "terminal") == 0) {
+         GetItem_Head(&d, DPAGE_TERMINAL);
+      } else if(faststrcmp(tok->textV, "page") == 0 ||
+                faststrcmp(tok->textV, "entry") == 0) {
+         GetItem_Page(&d);
+      /*
+      } else if(faststrcmp(tok->textV, "failure") == 0) {
+         GetItem_NumPage(&d, DPAGE_FAILURE);
+      } else if(faststrcmp(tok->textV, "finished") == 0) {
+         GetItem_NumPage(&d, DPAGE_FINISHED);
+      } else if(faststrcmp(tok->textV, "unfinished") == 0) {
+         GetItem_NumPage(&d, DPAGE_UNFINISHED);
+      */
+      } else {
+         Log("%s: invalid identifier \"%s\"", __func__, tok->textV);
+         break;
+      }
+   }
+
+   TBufDtor(&d.tb);
+   fclose(d.tb.fp);
+
+   if(dbglevel & log_dlg)
+   {
+      for(struct dlg_def *def = dlgdefs; def; def = def->next) {
+         printf("Disassembling script %i(%p,%u,%u)...\n", def->num, def->codeV,
+             def->codeC, def->codeP);
+         Disassemble(def);
+         printf("Dumping code...\n");
+         Dbg_PrintMemC(def->codeV, def->codeC);
+
+         printf("Dumping string table for script %i(%p,%u,%u)...\n", def->num,
+             def->stabV, def->stabC, def->stabP);
+         Dbg_PrintMemC(def->stabV, def->stabC);
+      }
+
+      printf("Done.\n");
+   }
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -483,8 +776,8 @@ void Dlg_MInit(void)
    /* Free any previous dialogue definitions. */
    if(dlgdefs)
    {
-      for(struct dlgdef *def = dlgdefs; def;) {
-         struct dlgdef *next = def->next;
+      for(struct dlg_def *def = dlgdefs; def;) {
+         struct dlg_def *next = def->next;
          Vec_Clear(def->code);
          Vec_Clear(def->stab);
          Dalloc(def);
@@ -495,58 +788,11 @@ void Dlg_MInit(void)
       dlgdefs = nil;
    }
 
-   struct pstate d = {{
-      .bbeg = 4, .bend = 10,
-      .fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r")
-   }};
+   FILE *fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
 
-   if(!d.tb.fp) return;
-
-   TBufCtor(&d.tb);
-
-   for(struct token *tok; (tok = d.tb.get())->type != tok_eof;)
-   {
-      if(tok->type != tok_identi) {
-         LogTok(tok, "invalid toplevel token");
-         break;
-      }
-
-      switch(StrName(tok->textV)) {
-         case STR_dialogue:   GetDecl_Dialogue(&d); break;
-         case STR_page:       GetDecl_Page    (&d); break;
-         case STR_terminal:   GetDecl_Terminal(&d); break;
-         case STR_failure:    GetDecl_TrmPage (&d, DTRMPAGE_FAILURE);    break;
-         case STR_finished:   GetDecl_TrmPage (&d, DTRMPAGE_FINISHED);   break;
-         case STR_unfinished: GetDecl_TrmPage (&d, DTRMPAGE_UNFINISHED); break;
-         default:
-            Log("%s: invalid identifier \"%s\"", __func__, tok->textV);
-            goto done;
-      }
-   }
-
-done:
-   TBufDtor(&d.tb);
-   fclose(d.tb.fp);
-
-   if(dbglevel & log_dlg)
-   {
-      static char const *dcdnames[] = {
-         #define DCD(name) #name,
-         #include "dialogue.h"
-      };
-
-      for(struct dlgdef *def = dlgdefs; def; def = def->next) {
-         Log("Dumping code for script %i...", def->num);
-         for(i32 i = 0; i < def->codeC; i++)
-            Log("%10i %s", def->codeV[i], def->codeV[i] < countof(dcdnames)
-               ? dcdnames[def->codeV[i]] : c"");
-         Log("Dumping string table for script %i...\n%s");
-         Dbg_PrintMem(def->stabV, def->stabC);
-      }
-
-      Log("Done.");
-   }
+   if(fp) LoadFile(fp);
 }
+
 #endif
 
 /* EOF */

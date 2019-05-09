@@ -17,7 +17,7 @@
 
 /* Static Objects ---------------------------------------------------------- */
 
-static struct {char const *abbr, *full;} const ArmorNames[] = {
+static struct {cstr abbr, full;} const ArmorNames[] = {
    "BUL", "Bullets",
    "ENE", "Energy",
    "FIR", "Fire",
@@ -43,7 +43,7 @@ static void RA_Take(i32 n)
    InvTake(StrParam(OBJ "RA_Ice%i", n),       INT_MAX);
 }
 
-static void RA_Give(char const *name, i32 n)
+static void RA_Give(cstr name, i32 n)
 {
    InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
 }
@@ -85,7 +85,7 @@ void Sc_GiveRA(i32 num)
 
       if(UData.activearmor != num + 1)
       {
-         char const *name = ArmorNames[num].full;
+         cstr name = ArmorNames[num].full;
 
          UData.activearmor = num + 1;
 

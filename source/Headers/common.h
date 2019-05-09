@@ -27,7 +27,6 @@
 #include "m_math.h"
 #include "m_str.h"
 #include "m_stab.h"
-#include "m_char.h"
 
 #define LineHash ((u32)__LINE__ * FileHash)
 
@@ -49,6 +48,8 @@
 
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
+
+#define FourCC(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
 
 #define SCallI ACS_ScriptCall
 #define SCallK ACS_ScriptCallFixed
@@ -162,10 +163,11 @@ stkcall i32  PtrInvNum(i32 tid, str item);
 stkcall void PtrInvGive(i32 tid, str item, i32 amount);
 stkcall void PtrInvTake(i32 tid, str item, i32 amount);
 stkcall void PtrInvSet (i32 tid, str item, i32 amount);
-void Dbg_Stat_Impl(char const *fmt, ...);
-void Dbg_Note_Impl(char const *fmt, ...);
+void Dbg_Stat_Impl(cstr fmt, ...);
+void Dbg_Note_Impl(cstr fmt, ...);
 script void Dbg_PrintMem(void const *data, size_t size);
-void Log(char const *fmt, ...);
+script void Dbg_PrintMemC(void const *data, size_t size);
+void Log(cstr fmt, ...);
 
 /* Extern Objects ---------------------------------------------------------- */
 

@@ -253,7 +253,7 @@ bool P_Upg_IsActive(struct player *p, i32 name)
 }
 
 stkcall
-char const *P_Discrim(i32 pclass)
+cstr P_Discrim(i32 pclass)
 {
    switch(pclass) {
    case pcl_marine:    return "Stan";

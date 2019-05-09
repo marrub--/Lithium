@@ -45,7 +45,7 @@ enum
    tok_lnend,  /* \n */
    tok_semico, /* ; */
    tok_comma,  /* , */
-   tok_dollar, /* $ */
+   tok_hash,   /* # */
    tok_bracko, /* [ */
    tok_brackc, /* ] */
    tok_braceo, /* { */

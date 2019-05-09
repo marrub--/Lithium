@@ -40,7 +40,7 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-void HUD_Score(struct player *p, char const *fmt, i96 scrn, str font, str cr, i32 x, i32 xa, i32 y, i32 ya)
+void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i32 xa, i32 y, i32 ya)
 {
    if(p->getCVarI(sc_hud_showscore))
    {

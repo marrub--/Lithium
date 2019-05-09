@@ -172,7 +172,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
    /* render an outline if the page has an image */
    if(page->image)
    {
-      char const *txt = RemoveTextColors_str(typeon->txt, typeon->pos);
+      cstr txt = RemoveTextColors_str(typeon->txt, typeon->pos);
       str s = l_strdup(txt);
 
       DrawText(s, CR_BLACK, 112, 61); DrawText(s, CR_BLACK, 110, 61);

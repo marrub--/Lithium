@@ -66,7 +66,7 @@ enum game
    Game_Episodic,
 };
 
-char const *CanonTime(i32 type);
+cstr CanonTime(i32 type);
 optargs(1) i32 UniqueID(i32 tid);
 stkcall void BeginAngles(i32 x, i32 y);
 stkcall k32 AddAngle(i32 x, i32 y);

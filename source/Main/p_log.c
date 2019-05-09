@@ -54,7 +54,7 @@ static void LogF(struct player *p, struct logfdt *lf)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_Log_Both(struct player *p, i32 levl, char const *fmt, ...)
+void P_Log_Both(struct player *p, i32 levl, cstr fmt, ...)
 {
    struct logdat ld = {};
 
@@ -71,7 +71,7 @@ void P_Log_Both(struct player *p, i32 levl, char const *fmt, ...)
    LogH(p, &ld);
 }
 
-void P_Log_HUDs(struct player *p, i32 levl, char const *fmt, ...)
+void P_Log_HUDs(struct player *p, i32 levl, cstr fmt, ...)
 {
    struct logdat ld = {};
 
@@ -87,7 +87,7 @@ void P_Log_HUDs(struct player *p, i32 levl, char const *fmt, ...)
    LogH(p, &ld);
 }
 
-void P_Log_Full(struct player *p, char const *fmt, ...)
+void P_Log_Full(struct player *p, cstr fmt, ...)
 {
    struct logfdt lf = {};
 
@@ -198,7 +198,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
 
          if(CheckFade(fid_logadS + i))
          {
-            char const *s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
+            cstr s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
             PrintTextChS(s);
             PrintTextF(s_logfont, CR_WHITE, x,1, y,ya, fid_logadS + i);
          }

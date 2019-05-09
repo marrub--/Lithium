@@ -33,7 +33,7 @@ LITH_X(MAIL,         "Mail")
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(struct player *p);
-optargs(1) struct page *P_BIP_Unlock(struct player *p, char const *name);
+optargs(1) struct page *P_BIP_Unlock(struct player *p, cstr name);
 stkcall void P_BIP_PQuit(struct player *p);
 script optargs(1) void P_BIP_GiveMail(struct player *p, str title, i32 flags);
 

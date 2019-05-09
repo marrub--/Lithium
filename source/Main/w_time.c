@@ -17,7 +17,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-char const *CanonTime(i32 type)
+cstr CanonTime(i32 type)
 {
    noinit static char ft[64], st[64], dt[64], lf[256];
 
