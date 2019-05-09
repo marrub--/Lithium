@@ -21,11 +21,12 @@ stkcall
 i32 TBufProc(struct token *tok)
 {
    switch(tok->type) {
-   case tok_eof:    return tokproc_done;
-   case tok_lnend:
-   case tok_cmtblk:
-   case tok_cmtlin: return tokproc_skip;
+      case tok_eof:    return tokproc_done;
+      case tok_lnend:
+      case tok_cmtblk:
+      case tok_cmtlin: return tokproc_skip;
    }
+
    return tokproc_next;
 }
 
@@ -33,10 +34,11 @@ stkcall
 i32 TBufProcL(struct token *tok)
 {
    switch(tok->type) {
-   case tok_eof:    return tokproc_done;
-   case tok_cmtblk:
-   case tok_cmtlin: return tokproc_skip;
+      case tok_eof:    return tokproc_done;
+      case tok_cmtblk:
+      case tok_cmtlin: return tokproc_skip;
    }
+
    return tokproc_next;
 }
 
@@ -44,6 +46,7 @@ void TBufCtor(struct tokbuf *tb)
 {
    tb->orig.line = 1;
    tb->toks = Calloc(tb->bend, sizeof *tb->toks);
+
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
 }
 
@@ -59,31 +62,29 @@ struct token *TBufGet(struct tokbuf *tb)
 {
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
-   /* Free beginning of buffer. */
-   for(i32 i = 0; i < tb->bbeg; i++) {
+   /* free beginning of buffer */
+   for(i32 i = 0; i < tb->bbeg; i++)
       Vec_Clear(tb->toks[i].text);
-      /*memset(&tb->toks[i], 0, sizeof tb->toks[i]); */
-   }
 
-   /* Move end of buffer to beginning. */
-   if(tb->tend)
-   {
+   /* move end of buffer to beginning */
+   if(tb->tend) {
       i32 s = tb->tend - tb->bbeg;
+
       for(i32 i = s, j = 0; i < tb->tend; i++, j++)
          tb->toks[j] = tb->toks[i];
+
       memset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }
 
-   /* Get new tokens. */
-   for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++)
-   {
+   /* get new tokens */
+   for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++) {
    skip:
       TokParse(tb->fp, &tb->toks[tb->tend], &tb->orig);
 
       switch(tb->tokProcess(&tb->toks[tb->tend])) {
-      case tokproc_next: break;
-      case tokproc_done: goto done;
-      case tokproc_skip: goto skip;
+         case tokproc_next: break;
+         case tokproc_done: goto done;
+         case tokproc_skip: goto skip;
       }
    }
 
@@ -117,10 +118,12 @@ struct token *TBufBack(struct tokbuf *tb, i32 n)
 
 bool TBufDrop(struct tokbuf *tb, i32 t)
 {
-   if(TBufGet(tb)->type != t)
-      {TBufUnGet(tb); return false;}
-   else
+   if(TBufGet(tb)->type != t) {
+      TBufUnGet(tb);
+      return false;
+   } else {
       return true;
+   }
 }
 
 /* EOF */

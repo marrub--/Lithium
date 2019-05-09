@@ -212,11 +212,11 @@ local void AdrZX_S(u32 v) {MemB1_S(AdrZX_V(), v);}
 local void AdrZY_S(u32 v) {MemB1_S(AdrZY_V(), v);}
 
 /* stack */
-local u32 StaB1_G() {return MemB1_G(STA_START + IncSP(1));}
-local u32 StaB2_G() {return MemB2_G(STA_START + IncSP(2));}
+local u32 StaB1_G() {return MemB1_G(STA_BEG + IncSP(1));}
+local u32 StaB2_G() {return MemB2_G(STA_BEG + IncSP(2));}
 
-local void StaB1_S(u32 v) {MemB1_S(STA_START + DecSP(1),     v);}
-local void StaB2_S(u32 v) {MemB2_S(STA_START + DecSP(2) - 1, v);}
+local void StaB1_S(u32 v) {MemB1_S(STA_BEG + DecSP(1),     v);}
+local void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
 /* jumps */
 #define JmpVI goto *cases[MemI1_G()] /* jump next byte       */
@@ -579,14 +579,14 @@ script void Dlg_Run(struct player *p, i32 num)
    textV[0] = '\0';
 
    /* copy program data into memory */
-   for(u32 i = 0; i < def->codeC; i++) memory[PRG_START_C + i] = def->codeV[i];
-   for(u32 i = 0; i < def->stabC; i++) memory[STR_START_C + i] = def->stabV[i];
+   for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
+   for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
    if(dbglevel & log_dlg) {
       Log("Dumping segment PRG..");
-      Dbg_PrintMemC(&memory[PRG_START_C], def->codeC);
+      Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
       Log("Dumping segment STR..");
-      Dbg_PrintMemC(&memory[STR_START_C], def->stabC);
+      Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC);
    }
 
    /* copy some constants into memory */
@@ -598,7 +598,7 @@ script void Dlg_Run(struct player *p, i32 num)
    };
 
    /* all right, start the damn VM already! */
-   SetPC(PRG_START + def->pages[0]);
+   SetPC(PRG_BEG + def->pages[0]);
    JmpVI;
 
 vmaction:
@@ -640,7 +640,7 @@ JMP_II:
    JmpVI;
 
 JPG_VI:
-   SetPC(PRG_START + def->pages[AdrVI_V()]);
+   SetPC(PRG_BEG + def->pages[AdrVI_V()]);
    JmpVI;
 
 RTI_NP:
@@ -934,12 +934,12 @@ TRR_NP:
 
 TRS_NP:
    for(u32 i = GetSP() + 1; i <= 0xFF; i++)
-      Log("%02X: %02X", i, MemB1_G(STA_START + i));
+      Log("%02X: %02X", i, MemB1_G(STA_BEG + i));
    JmpVI;
 
 TRV_NP:
    for(u32 i = 0; i <= 0xFF; i++)
-      Log("%02X: %02X", i, MemB1_G(VAR_START + i));
+      Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    JmpVI;
 
 TRT_NP:

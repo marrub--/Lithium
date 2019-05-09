@@ -19,15 +19,48 @@
 #include "m_file.h"
 #include "m_tokbuf.h"
 
-#define LogTok(tok, s) \
-   Log(c"(%i:%i) %s: " s " (%i:\"%s\")", tok->orig.line, tok->orig.colu, \
-       __func__, tok->type, tok->textV ? tok->textV : c"<no string>")
+#include <setjmp.h>
+
+#define Error(d) longjmp((d)->env, 1)
+
+#define ErrF(d, fmt, ...) \
+   (Log("%s: " fmt, __func__, __VA_ARGS__), Error(d))
+
+#define Err(d, fmt) \
+   (Log("%s: " fmt, __func__), Error(d))
+
+#define ErrT(d, tok, s) \
+   (Log("(%i:%i) %s: " s " (%i:'%s')", tok->orig.line, tok->orig.colu, \
+        __func__, tok->type, tok->textV ? tok->textV : "<no string>"), \
+    Error(d))
+
+#define Expect(d, tok, typ) \
+   if(tok->type != typ) ErrT(d, tok, "expected " #typ)
+
+#define Expect2(d, tok, typ1, typ2) \
+   if(tok->type != typ1 && tok->type != typ2) \
+      ErrT(d, tok, "expected " #typ1 " or " #typ2)
+
+#define Expect3(d, tok, typ1, typ2, typ3) \
+   if(tok->type != typ1 && tok->type != typ2 && tok->type != typ3) \
+      ErrT(d, tok, "expected " #typ1 ", " #typ2 " or " #typ3)
+
+#define ExpectDrop(d, typ) \
+   if(!d->tb.drop(typ)) {\
+      struct token *_tok = d->tb.reget(); \
+      ErrT(d, _tok, "expected " #typ); \
+   }
+
+#define CheckKw(tok, kw) \
+   (tok->type == tok_identi && faststrcmp(tok->textV, kw) == 0)
 
 /* Types ------------------------------------------------------------------- */
 
-struct parse_state {
-   struct tokbuf tb;
+struct compiler {
+   struct tokbuf   tb;
    struct dlg_def *def;
+   jmp_buf         env;
+   bool            ok;
 };
 
 struct ptr2 {
@@ -36,36 +69,37 @@ struct ptr2 {
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void GetStatement(struct parse_state *d);
+script static void GetStatement(struct compiler *d);
 
-static void PushB1(struct parse_state *d, u32 b)
+static void PushB1(struct compiler *d, u32 b)
 {
    size_t pc = d->def->codeP++;
 
-   if(pc + 1 > d->def->codeC * 4)
-   {
+   if(pc + 1 > PRG_END - PRG_BEG) Err(d, "PRG segment overflow");
+
+   if(pc + 1 > d->def->codeC * 4) {
       Vec_Grow(d->def->code, 1);
       d->def->codeC++;
    }
 
-   if(b > 255) Log("%s: byte error (overflow) %u", b);
+   if(b > 0xFF) ErrF(d, "byte error (overflow) %u", b);
 
    Cps_SetC(d->def->codeV, pc, b);
 }
 
-static void PushB2(struct parse_state *d, u32 word)
+static void PushB2(struct compiler *d, u32 word)
 {
    PushB1(d, word & 0xFF);
    PushB1(d, word >> 8);
 }
 
-static void PushLdv(struct parse_state *d, u32 action)
+static void PushLdv(struct compiler *d, u32 action)
 {
    PushB1(d, DCD_LDV_VI);
    PushB1(d, action);
 }
 
-static struct ptr2 PushLoadAdr(struct parse_state *d, u32 at, u32 set)
+static struct ptr2 PushLoadAdr(struct compiler *d, u32 at, u32 set)
 {
    struct ptr2 adr;
 
@@ -86,23 +120,25 @@ static struct ptr2 PushLoadAdr(struct parse_state *d, u32 at, u32 set)
    return adr;
 }
 
-static void SetB1(struct parse_state *d, u32 ptr, u32 b)
+static void SetB1(struct compiler *d, u32 ptr, u32 b)
 {
-   if(b > 255) Log("%s: byte error (overflow) %u", b);
+   if(b > 0xFF) ErrF(d, "byte error (overflow) %u", b);
 
    Cps_SetC(d->def->codeV, ptr, b);
 }
 
-static void SetB2(struct parse_state *d, u32 ptr, u32 word)
+static void SetB2(struct compiler *d, u32 ptr, u32 word)
 {
    SetB1(d, ptr + 0, word & 0xFF);
    SetB1(d, ptr + 1, word >> 8);
 }
 
-static u32 PushST(struct parse_state *d, cstr s, u32 l)
+static u32 PushST(struct compiler *d, cstr s, u32 l)
 {
    u32  p = d->def->stabP;
    u32 vl = Cps_Adjust(p + l) - d->def->stabC;
+
+   if(p + l > STR_END - STR_BEG) Err(d, "STR segment overflow");
 
    Dbg_Log(log_dlg, "%s: (%3u %3u) '%s'", __func__, l, vl, s);
 
@@ -112,10 +148,10 @@ static u32 PushST(struct parse_state *d, cstr s, u32 l)
 
    for(u32 i = 0; i < l; i++) Cps_SetC(d->def->stabV, p + i, s[i]);
 
-   return STR_START + p;
+   return STR_BEG + p;
 }
 
-static i32 CodeABS(struct parse_state *d, cstr reg)
+static i32 CodeABS(struct compiler *d, cstr reg)
 {
    struct token *tok = d->tb.get();
 
@@ -128,9 +164,7 @@ static i32 CodeABS(struct parse_state *d, cstr reg)
          } else if(d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(tok->type == tok_identi && faststrcmp(tok->textV, reg) == 0) {
-               return n;
-            }
+            if(CheckKw(tok, reg)) return n;
 
             d->tb.unget();
          }
@@ -142,7 +176,7 @@ static i32 CodeABS(struct parse_state *d, cstr reg)
    return false;
 }
 
-static i32 CodeZPG(struct parse_state *d, cstr reg)
+static i32 CodeZPG(struct compiler *d, cstr reg)
 {
    struct token *tok = d->tb.get();
 
@@ -155,9 +189,7 @@ static i32 CodeZPG(struct parse_state *d, cstr reg)
          } else if(d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(tok->type == tok_identi && faststrcmp(tok->textV, reg) == 0) {
-               return n;
-            }
+            if(CheckKw(tok, reg)) return n;
 
             d->tb.unget();
          }
@@ -169,7 +201,7 @@ static i32 CodeZPG(struct parse_state *d, cstr reg)
    return -1;
 }
 
-static bool CodeAI(struct parse_state *d, u32 code)
+static bool CodeAI(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, nil), n > 0) {
       PushB1(d, code);
@@ -181,7 +213,7 @@ static bool CodeAI(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeAX(struct parse_state *d, u32 code)
+static bool CodeAX(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, "X"), n > 0) {
       PushB1(d, code);
@@ -193,7 +225,7 @@ static bool CodeAX(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeAY(struct parse_state *d, u32 code)
+static bool CodeAY(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, "Y"), n > 0) {
       PushB1(d, code);
@@ -205,7 +237,7 @@ static bool CodeAY(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeII(struct parse_state *d, u32 code)
+static bool CodeII(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -227,7 +259,7 @@ static bool CodeII(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeIX(struct parse_state *d, u32 code)
+static bool CodeIX(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -238,10 +270,7 @@ static bool CodeIX(struct parse_state *d, u32 code)
          if(n <= 0xFF && d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(tok->type == tok_identi &&
-               faststrcmp(tok->textV, "X") == 0 &&
-               d->tb.drop(tok_parenc))
-            {
+            if(CheckKw(tok, "X") && d->tb.drop(tok_parenc)) {
                PushB1(d, code);
                PushB1(d, n);
                return true;
@@ -257,7 +286,7 @@ static bool CodeIX(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeIY(struct parse_state *d, u32 code)
+static bool CodeIY(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -268,7 +297,7 @@ static bool CodeIY(struct parse_state *d, u32 code)
          if(n <= 0xFF && d->tb.drop(tok_parenc) && d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(tok->type == tok_identi && faststrcmp(tok->textV, "Y") == 0) {
+            if(CheckKw(tok, "Y")) {
                PushB1(d, code);
                PushB1(d, n);
                return true;
@@ -287,7 +316,7 @@ static bool CodeIY(struct parse_state *d, u32 code)
 #define CodeNP(d, code) (PushB1(d, code), true)
 #define CodeRI CodeZI
 
-static bool CodeVI(struct parse_state *d, u32 code)
+static bool CodeVI(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_hash)) {
       struct token *tok = d->tb.get();
@@ -308,7 +337,7 @@ static bool CodeVI(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeZI(struct parse_state *d, u32 code)
+static bool CodeZI(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, nil), n > 0) {
       PushB1(d, code);
@@ -319,7 +348,7 @@ static bool CodeZI(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeZX(struct parse_state *d, u32 code)
+static bool CodeZX(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, "X"), n > 0) {
       PushB1(d, code);
@@ -330,7 +359,7 @@ static bool CodeZX(struct parse_state *d, u32 code)
    return false;
 }
 
-static bool CodeZY(struct parse_state *d, u32 code)
+static bool CodeZY(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, "Y"), n > 0) {
       PushB1(d, code);
@@ -341,7 +370,7 @@ static bool CodeZY(struct parse_state *d, u32 code)
    return false;
 }
 
-static void GetCode_Asm(struct parse_state *d)
+static void GetCode_Asm(struct compiler *d)
 {
    register struct token *tok;
 
@@ -352,47 +381,47 @@ static void GetCode_Asm(struct parse_state *d)
    #include "dialogue.h"
 
    tok = d->tb.reget();
-   LogTok(tok, "no function found with this syntax");
+   ErrT(d, tok, "no function found with this syntax");
 }
 
-static void GetCode_Text(struct parse_state *d, struct token *tok, u32 act)
+static void GetCode_Text(struct compiler *d, struct token *tok, u32 act)
 {
    PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
    PushLdv(d, act);
 }
 
-static void GetCode_Cond(struct parse_state *d)
+static void GetCode_Cond(struct compiler *d)
 {
    struct token *tok = d->tb.get();
+   Expect(d, tok, tok_identi);
+
    u32 ins = DCD_BNE_RI;
 
-   if(tok->type == tok_identi)
-   {
-      if(faststrcmp(tok->textV, "item") == 0) {
-         tok = d->tb.get();
-         ins = DCD_BEQ_RI;
+   if(faststrcmp(tok->textV, "item") == 0) {
+      tok = d->tb.get();
+      Expect(d, tok, tok_string);
 
-         PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+      ins = DCD_BEQ_RI;
 
-         PushLdv(d, ACT_LD_ITEM);
-      } else if(faststrcmp(tok->textV, "class") == 0) {
-         tok = d->tb.get();
+      PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
 
-         PushB1(d, DCD_LDA_AI);
-         PushB2(d, VAR_PCLASS);
+      PushLdv(d, ACT_LD_ITEM);
+   } else if(faststrcmp(tok->textV, "class") == 0) {
+      tok = d->tb.get();
+      Expect(d, tok, tok_identi);
 
-         PushB1(d, DCD_CMP_VI);
-         #define LITH_X(shr, lng) \
-            if(faststrcmp(tok->textV, #shr) == 0) {PushB1(d, shr); goto ok;}
-         #include "p_player.h"
-         LogTok(tok, "invalid playerclass type");
-         ok:;
-      } else {
-         LogTok(tok, "invalid conditional");
-      }
+      PushB1(d, DCD_LDA_AI);
+      PushB2(d, VAR_PCLASS);
+
+      PushB1(d, DCD_CMP_VI);
+      #define LITH_X(shr, lng) \
+         if(faststrcmp(tok->textV, #shr) == 0) {PushB1(d, shr); goto ok;}
+      #include "p_player.h"
+      ErrT(d, tok, "invalid playerclass type");
+   ok:;
+   } else {
+      ErrT(d, tok, "invalid conditional type");
    }
-   else
-      LogTok(tok, "expected identifier");
 
    PushB1(d, ins);
    PushB1(d, 0); /* placeholder */
@@ -401,78 +430,69 @@ static void GetCode_Cond(struct parse_state *d)
    GetStatement(d);
 
    u32 rel = d->def->codeP - ptr;
-   if(rel > 0x7F) Log("%s: bad jump (too much code)", __func__);
+   if(rel > 0x7F) Err(d, "bad jump (too much code)");
 
    SetB1(d, ptr - 1, rel);
 
    tok = d->tb.get();
-
-   if(tok->type == tok_identi && faststrcmp(tok->textV, "else") == 0) {
+   if(CheckKw(tok, "else")) {
       PushB1(d, DCD_JMP_AI);
       PushB2(d, 0);
       ptr = d->def->codeP;
 
       GetStatement(d);
 
-      SetB2(d, ptr - 2, PRG_START + d->def->codeP);
+      SetB2(d, ptr - 2, PRG_BEG + d->def->codeP);
    } else {
       d->tb.unget();
    }
 }
 
-static void GetCode_Option(struct parse_state *d)
+static void GetCode_Option(struct compiler *d)
 {
+   struct ptr2 adr;
+
    struct token *tok = d->tb.get();
+   Expect2(d, tok, tok_identi, tok_string);
 
-   if(tok->type == tok_identi || tok->type == tok_string)
-   {
-      PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
-      struct ptr2 adr = PushLoadAdr(d, VAR_RADRL, 0); /* placeholder */
+   PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
+   adr = PushLoadAdr(d, VAR_RADRL, 0); /* placeholder */
 
-      PushLdv(d, ACT_LD_OPT);
+   PushLdv(d, ACT_LD_OPT);
 
-      PushB1(d, DCD_JMP_AI);
-      PushB2(d, 0); /* placeholder */
+   PushB1(d, DCD_JMP_AI);
+   PushB2(d, 0); /* placeholder */
 
-      u32 ptr = d->def->codeP;
-      u32 rel = PRG_START + ptr;
+   u32 ptr = d->def->codeP;
+   u32 rel = PRG_BEG + ptr;
 
-      SetB1(d, adr.l, rel & 0xFF);
-      SetB1(d, adr.h, rel >> 8);
+   SetB1(d, adr.l, rel & 0xFF);
+   SetB1(d, adr.h, rel >> 8);
 
-      GetStatement(d);
+   GetStatement(d);
 
-      SetB2(d, ptr - 2, PRG_START + d->def->codeP);
-   }
-   else
-      LogTok(tok, "invalid option parameter");
+   SetB2(d, ptr - 2, PRG_BEG + d->def->codeP);
 }
 
-static void GetCode_Str(struct parse_state *d, u32 adr)
+static void GetCode_Str(struct compiler *d, u32 adr)
 {
    struct token *tok = d->tb.get();
+   Expect3(d, tok, tok_identi, tok_string, tok_number);
 
-   switch(tok->type) {
-      case tok_identi:
-      case tok_string:
-      case tok_number:
-         PushLoadAdr(d, adr, PushST(d, tok->textV, tok->textC));
-         break;
-      default:
-         LogTok(tok, "invalid string parameter");
-         break;
-   }
+   PushLoadAdr(d, adr, PushST(d, tok->textV, tok->textC));
 }
 
-static void GetCode_Script(struct parse_state *d)
+static void GetCode_Script(struct compiler *d)
 {
    struct token *tok = d->tb.get();
+   Expect2(d, tok, tok_string, tok_number);
+
    u32 act;
 
    if(tok->type == tok_string) {
       act = ACT_SCRIPT_S;
       PushLoadAdr(d, VAR_ADRL, PushST(d, tok->textV, tok->textC));
-   } else if(tok->type == tok_number) {
+   } else {
       u32 prm = strtoi(tok->textV, nil, 0);
 
       act = ACT_SCRIPT_I;
@@ -482,12 +502,13 @@ static void GetCode_Script(struct parse_state *d)
 
       PushB1(d, DCD_STA_AI);
       PushB2(d, VAR_SCP0);
-   } else {
-      LogTok(tok, "invalid script name or number");
    }
 
    for(u32 i = 0; i < 4 && d->tb.drop(tok_comma); i++) {
-      u32 prm = strtoi(d->tb.get()->textV, nil, 0);
+      tok = d->tb.get();
+      Expect(d, tok, tok_number);
+
+      u32 prm = strtoi(tok->textV, nil, 0);
 
       PushB1(d, DCD_LDA_VI);
       PushB1(d, prm);
@@ -499,7 +520,7 @@ static void GetCode_Script(struct parse_state *d)
    PushLdv(d, act);
 }
 
-static void GetCode_Line(struct parse_state *d)
+static void GetCode_Line(struct compiler *d)
 {
    struct token *tok = d->tb.get();
 
@@ -513,8 +534,7 @@ static void GetCode_Line(struct parse_state *d)
             GetCode_Option(d);
          } else if(faststrcmp(tok->textV, "page") == 0) {
             tok = d->tb.get();
-            if(tok->type != tok_number) LogTok(tok, "invalid token for page");
-
+            Expect(d, tok, tok_number);
             PushB1(d, DCD_JPG_VI);
             PushB1(d, strtoi(tok->textV, nil, 0));
          } else if(faststrcmp(tok->textV, "name") == 0) {
@@ -531,93 +551,92 @@ static void GetCode_Line(struct parse_state *d)
             GetCode_Asm(d);
          }
          break;
-      case tok_quote: GetCode_Text(d, d->tb.reget(), ACT_TEXT_ADDI); break;
-      case tok_hash:  GetCode_Text(d, d->tb.get(),   ACT_TEXT_ADDL); break;
+      case tok_quote:
+         GetCode_Text(d, tok, ACT_TEXT_ADDI);
+         break;
+      case tok_hash:
+         tok = d->tb.get();
+         Expect2(d, tok, tok_identi, tok_string);
+         GetCode_Text(d, tok, ACT_TEXT_ADDL);
+         break;
       case tok_semico:
-      case tok_eof:
          break;
       default:
-         LogTok(tok, "invalid token in line");
+         ErrT(d, tok, "invalid token in line");
+         break;
    }
 }
 
-static void GetBlock(struct parse_state *d)
+static void GetBlock(struct compiler *d)
 {
-   while(!d->tb.drop(tok_bracec) && !d->tb.drop(tok_eof))
-      GetStatement(d);
+   while(!d->tb.drop(tok_bracec)) GetStatement(d);
 }
 
-static void GetConcatBlock(struct parse_state *d)
+static void GetConcatBlock(struct compiler *d)
 {
    PushB1(d, DCD_INC_AI);
    PushB2(d, VAR_CONCAT);
 
-   while(!d->tb.drop(tok_at2) && !d->tb.drop(tok_eof)) GetStatement(d);
+   while(!d->tb.drop(tok_at2)) GetStatement(d);
 
    PushB1(d, DCD_DEC_AI);
    PushB2(d, VAR_CONCAT);
 }
 
-script static void GetStatement(struct parse_state *d)
+script static void GetStatement(struct compiler *d)
 {
         if(d->tb.drop(tok_braceo)) GetBlock(d);
    else if(d->tb.drop(tok_at2))    GetConcatBlock(d);
    else                            GetCode_Line(d);
 }
 
-static void GetItem_Head(struct parse_state *d, i32 head)
+static void GetItem_Head(struct compiler *d, i32 head)
 {
    struct token *tok = d->tb.get();
+   Expect(d, tok, tok_number);
 
-   if(tok->type == tok_number) {
-      i32            num  = head + strtoi(tok->textV, nil, 0);
-      struct dlg_def *last = d->def;
+   i32 num = head + strtoi(tok->textV, nil, 0);
 
-      d->def = Salloc(struct dlg_def);
-      d->def->num = num;
+   struct dlg_def *last = d->def;
 
-      if(!last) dlgdefs    = d->def;
-      else      last->next = d->def;
+   d->def = Salloc(struct dlg_def);
+   d->def->num = num;
 
-      Dbg_Log(log_dlg, "\n---\nheading %i (%i)\n---",
-         d->def->num, d->def->codeP);
-   } else {
-      LogTok(tok, "invalid terminal number token");
-   }
+   if(!last) dlgdefs    = d->def;
+   else      last->next = d->def;
 
-   if(!d->tb.drop(tok_semico)) {
-      LogTok(tok, "semicolon required after heading");
-   }
+   Dbg_Log(log_dlg, "\n---\nheading %i (%i)\n---", d->def->num, d->def->codeP);
+
+   ExpectDrop(d, tok_semico);
 }
 
-static void SetupPage(struct parse_state *d, u32 num)
+static void SetupPage(struct compiler *d, u32 num)
 {
-   if(num > countof(d->def->pages))
-      Log("%s: bad page index", __func__);
+   /* TODO: make this syntax dependent */
+   if(!d->def) Err(d, "not in a definition");
+
+   if(num > countof(d->def->pages)) Err(d, "bad page index");
 
    d->def->pages[num] = d->def->codeP;
 
    Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def->codeP);
 }
 
-static void GetItem_Page(struct parse_state *d)
+static void GetItem_Page(struct compiler *d)
 {
    struct token *tok = d->tb.get();
+   Expect(d, tok, tok_number);
 
-   if(tok->type == tok_number)
-      SetupPage(d, strtoi(tok->textV, nil, 0));
-   else
-      LogTok(tok, "invalid page number token");
+   SetupPage(d, strtoi(tok->textV, nil, 0));
 
    GetStatement(d);
 
    PushLdv(d, ACT_DLG_WAIT);
-
    PushB1(d, DCD_BRK_NP);
 }
 
 /*
-static void GetItem_NumPage(struct parse_state *d, i32 num)
+static void GetItem_NumPage(struct compiler *d, i32 num)
 {
    SetupPage(d, num);
 
@@ -691,35 +710,32 @@ script static u32 WriteCode(struct dlg_def  const *def,
 
 script static void Disassemble(struct dlg_def const *def)
 {
-   for(u32 i = 0; i < def->codeP;)
-   {
-      printf("%04X ", PRG_START + i);
+   for(u32 i = 0; i < def->codeP;) {
+      printf("%04X ", PRG_BEG + i);
 
       u32 c = Cps_GetC(def->codeV, i++);
       printf("%02X ", c);
 
       struct dcd_info const *inf = &dcdinfo[c];
 
-      if(inf->name[0]) {
-         i = WriteCode(def, inf, i);
-      } else {
-         printf("\t\tinvalid opcode\n");
-      }
+      if(inf->name[0]) i = WriteCode(def, inf, i);
+      else             printf("\t\tinvalid opcode\n");
    }
 }
 
 script static void LoadFile(FILE *fp)
 {
-   struct parse_state d = {{.bbeg = 14, .bend = 28, .fp = fp}};
+   struct compiler d = {{.bbeg = 14, .bend = 28, .fp = fp}, .ok = true};
 
    TBufCtor(&d.tb);
 
-   for(struct token *tok; (tok = d.tb.get())->type != tok_eof;)
-   {
-      if(tok->type != tok_identi) {
-         LogTok(tok, "invalid toplevel token");
-         break;
-      }
+   if(setjmp(d.env)) {
+      d.ok = false;
+      goto done;
+   }
+
+   for(struct token *tok; (tok = d.tb.get())->type != tok_eof;) {
+      Expect(&d, tok, tok_identi);
 
       if(faststrcmp(tok->textV, "program") == 0) {
          GetItem_Head(&d, 0);
@@ -739,16 +755,15 @@ script static void LoadFile(FILE *fp)
          GetItem_NumPage(&d, DPAGE_UNFINISHED);
       */
       } else {
-         Log("%s: invalid identifier \"%s\"", __func__, tok->textV);
-         break;
+         ErrF(&d, "invalid identifier '%s'", tok->textV);
       }
    }
 
+done:
    TBufDtor(&d.tb);
    fclose(d.tb.fp);
 
-   if(dbglevel & log_dlg)
-   {
+   if(d.ok && dbglevel & log_dlg) {
       for(struct dlg_def *def = dlgdefs; def; def = def->next) {
          printf("Disassembling script %i(%p,%u,%u)...\n", def->num, def->codeV,
              def->codeC, def->codeP);
@@ -774,8 +789,7 @@ void Dlg_GInit(void)
 void Dlg_MInit(void)
 {
    /* Free any previous dialogue definitions. */
-   if(dlgdefs)
-   {
+   if(dlgdefs) {
       for(struct dlg_def *def = dlgdefs; def;) {
          struct dlg_def *next = def->next;
          Vec_Clear(def->code);
@@ -789,7 +803,6 @@ void Dlg_MInit(void)
    }
 
    FILE *fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
-
    if(fp) LoadFile(fp);
 }
 

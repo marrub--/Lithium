@@ -32,7 +32,7 @@ page 0
    icon "AOF"
    remote "jacques.p42710@corp.AOF"
    
-   if item Lith_DivisionSigil
+   if item "Lith_DivisionSigil"
       page 7
    
    `...

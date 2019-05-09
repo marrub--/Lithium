@@ -319,14 +319,18 @@ enum
 
 enum
 {
-   STA_START = 0x0100,
-   VAR_START = 0x0200,
-   PRG_START = 0xA000,
-   STR_START = 0xC000,
-   IRQ_START = 0xFF00,
-   STA_START_C = STA_START / 4,
-   PRG_START_C = PRG_START / 4,
-   STR_START_C = STR_START / 4,
+   STA_BEG = 0x0100,
+   STA_END = 0x01FF,
+   VAR_BEG = 0x0200,
+   VAR_END = 0x02FF,
+   PRG_BEG = 0xA000,
+   PRG_END = 0xBFFF,
+   STR_BEG = 0xC000,
+   STR_END = 0xFEFF,
+   IRQ_BEG = 0xFF00,
+   STA_BEG_C = STA_BEG / 4,
+   PRG_BEG_C = PRG_BEG / 4,
+   STR_BEG_C = STR_BEG / 4,
 };
 
 enum
@@ -359,7 +363,7 @@ enum
 enum
 {
    /* constants */
-   VAR_PCLASS = VAR_START,
+   VAR_PCLASS = VAR_BEG,
 
    /* vars */
    VAR_CONCAT,
