@@ -116,7 +116,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    /* Performance rating */
    if(upgr->info->perf && p->pclass != pcl_cybermage)
    {
-      bool over = upgr->info->perf + p->cbi.pruse > world.cbiperf;
+      bool over = upgr->info->perf + p->cbi.pruse > cbiperf;
 
       if(upgr->active)
          PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf); /* TODO */

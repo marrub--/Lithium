@@ -33,7 +33,7 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
    Stat(LC(LANG "STAT_HealthSum"),  "%u",   p->healthsum);
    Stat(LC(LANG "STAT_ScoreUsed"),  "%lli", p->scoreused);
    Stat(LC(LANG "STAT_ScoreSum"),   "%lli", p->scoresum);
-   Stat(LC(LANG "STAT_Secrets"),    "%i",   world.secretsfound);
+   Stat(LC(LANG "STAT_Secrets"),    "%i",   secretsfound);
    Stat(LC(LANG "STAT_Units"),      "%imu", p->unitstravelled);
    Stat(LC(LANG "STAT_Upgrades"),   "%i",   p->upgradesowned);
    Stat(LC(LANG "STAT_Items"),      "%i",   p->itemsbought);

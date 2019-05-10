@@ -50,10 +50,10 @@ script ext("ACS") addr(lsc_wdata)
 i32 Sc_LWData(i32 info)
 {
    switch(info) {
-   case wdata_bossspawned: return world.bossspawned;
-   case wdata_enemycheck:  return world.enemycheck;
-   case wdata_fun:         return world.fun;
-   case wdata_soulsfreed:  return world.soulsfreed;
+   case wdata_bossspawned: return bossspawned;
+   case wdata_enemycheck:  return enemycheck;
+   case wdata_fun:         return fun;
+   case wdata_soulsfreed:  return soulsfreed;
    case wdata_dorain:      return dorain;
    case wdata_ptid:   for_player() return p->tid;
    case wdata_pclass: for_player() return p->pclass;

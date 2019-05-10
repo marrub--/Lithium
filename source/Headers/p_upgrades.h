@@ -28,10 +28,10 @@
       __with(struct upgrade *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
-#define CheckRequires_AI  CheckRequires(UR_AI,  world.cbiupgr[cupg_armorinter])
-#define CheckRequires_WMD CheckRequires(UR_WMD, world.cbiupgr[cupg_weapninter])
-#define CheckRequires_WRD CheckRequires(UR_WRD, world.cbiupgr[cupg_weapninte2])
-#define CheckRequires_RDI CheckRequires(UR_RDI, world.cbiupgr[cupg_rdistinter])
+#define CheckRequires_AI  CheckRequires(UR_AI,  cbiupgr[cupg_armorinter])
+#define CheckRequires_WMD CheckRequires(UR_WMD, cbiupgr[cupg_weapninter])
+#define CheckRequires_WRD CheckRequires(UR_WRD, cbiupgr[cupg_weapninte2])
+#define CheckRequires_RDI CheckRequires(UR_RDI, cbiupgr[cupg_rdistinter])
 #define CheckRequires_RA  CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
 
 /* Extern Functions -------------------------------------------------------- */

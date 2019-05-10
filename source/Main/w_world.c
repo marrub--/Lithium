@@ -22,7 +22,30 @@
 __addrdef __mod_arr lmvar;
 __addrdef __hub_arr lhvar;
 
-struct worldinfo world = {.apiversion = APIVersion};
+bool lmvar player_init;
+struct payoutinfo payout;
+bool singleplayer;
+i32 mapscleared;
+i32 prevcluster;
+i32 mapseed;
+bool unloaded;
+bool islithmap;
+bool enemycompat;
+bool enemycheck;
+i32 secretsfound;
+k64 scoremul;
+u64 ticks;
+i32 game;
+k32 apiversion = APIVersion;
+i32 soulsfreed;
+i32 fun;
+bool bossspawned;
+i32 cbiperf;
+bool cbiupgr[cupg_max];
+bool legendoom;
+bool drlamonsters;
+bool pauseinmenus;
+enum mission_status lmvar mission = _unfinished;
 struct payoutinfo payout;
 
 bool dorain;
@@ -65,7 +88,7 @@ i32 UniqueID(i32 tid)
 script
 static void CheckEnemyCompat(void)
 {
-   if(ACS_GetCVar(sc_sv_nomonsters) || world.enemycheck)
+   if(ACS_GetCVar(sc_sv_nomonsters) || enemycheck)
       return;
 
    i32 tid;
@@ -79,15 +102,15 @@ static void CheckEnemyCompat(void)
       Dbg_Log(log_dev, "Enemy check on %S", cl);
 
       if(strstr_str(cl, s_OBJ) || ACS_StrCmp(cl, s_RLFormer, 8) == 0)
-         world.enemycompat = true;
+         enemycompat = true;
 
       if(ServCallI(sm_IsHeretic) || ServCallI(sm_IsChex))
-         world.enemycompat = false;
+         enemycompat = false;
 
-      if(world.enemycompat) Dbg_Log(log_dev, "Enemies are \Cdcompatible");
+      if(enemycompat) Dbg_Log(log_dev, "Enemies are \Cdcompatible");
       else                  Dbg_Log(log_dev, "Enemies are \Cgnot compatible");
 
-      world.enemycheck = true;
+      enemycheck = true;
       ACS_Thing_Remove(0);
    }
 }
@@ -107,9 +130,9 @@ static void CheckModCompat(void)
 {
    i32 tid;
 
-   if((world.legendoom = ACS_SpawnForced(so_LegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((legendoom = ACS_SpawnForced(so_LegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
-   world.drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
+   drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
 }
 
 static void UpdateGame(void)
@@ -184,10 +207,10 @@ static void GInit(void)
    CheckEnemyCompat();
    #endif
 
-   world.game         = ACS_GetCVar(sc_game);
-   world.singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
+   game         = ACS_GetCVar(sc_game);
+   singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
-   world.cbiperf = 10;
+   cbiperf = 10;
 
    gblinit = true;
 }
@@ -227,22 +250,22 @@ static void MInit(void)
    extern void Dlg_MInit(void);
    Dlg_MInit();
 
-   world.islithmap = (MapNum & 0xFFFFFC00) == 0x01202000;
+   islithmap = (MapNum & 0xFFFFFC00) == 0x01202000;
 
-   world.pauseinmenus = world.singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
+   pauseinmenus = singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
 
-   world.soulsfreed = 0;
+   soulsfreed = 0;
    #endif
 
    /* Init a random seed from the map. */
-   world.mapseed = ACS_Random(0, INT_MAX);
+   mapseed = ACS_Random(0, INT_MAX);
 
    /* Init global score multiplier per-map. */
-   world.scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;
+   scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;
 
    /* Give players some extra score if they're playing on extra hard or above. */
    if(ACS_GameSkill() >= skill_extrahard)
-      world.scoremul += 0.15;
+      scoremul += 0.15;
 
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
@@ -257,14 +280,14 @@ static void HInitPre(void)
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   if(world.unloaded)
-      world.mapscleared++;
+   if(unloaded)
+      mapscleared++;
 
    #if LITHIUM
    DmonInit();
-   world.bossspawned = false;
+   bossspawned = false;
 
-   if(ACS_GetCVar(sc_sv_sky) && !world.islithmap)
+   if(ACS_GetCVar(sc_sv_sky) && !islithmap)
    {
       if(InHell)
       {
@@ -290,7 +313,7 @@ static void HInit(void)
       Boss_HInit();
 
    /* Payout, which is not done on the first map. */
-   if(world.mapscleared != 0) Scr_HInit();
+   if(mapscleared != 0) Scr_HInit();
    #endif
 
    /* Cluster messages. */
@@ -302,7 +325,7 @@ static void HInit(void)
 
    static i32 msgs;
 
-   if(world.game == Game_Doom2)
+   if(game == Game_Doom2)
    {
       Message(Cluster >= 6,  0, st_mail_cluster1);
       Message(Cluster >= 7,  1, st_mail_cluster2);
@@ -383,7 +406,7 @@ begin:
    /* Hub-static pre-player init. */
    if(!hubinit) HInitPre();
 
-   world.unloaded = false; /* Unloaded flag can be reset now. */
+   unloaded = false; /* Unloaded flag can be reset now. */
    player_init = true;
 
    ACS_Delay(1); /* Wait for players to get initialized. */
@@ -410,7 +433,7 @@ begin:
       }
 
       #if LITHIUM
-      if(world.ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !world.islithmap)
+      if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap)
       {
          ServCallI(sm_SetEnding, st_timeout);
          ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION, -1);
@@ -425,7 +448,7 @@ begin:
       if(secrets > prevsecrets) {
          i32 delta = secrets - prevsecrets;
          P_GiveAllScore(9000 * delta, true);
-         world.secretsfound += delta;
+         secretsfound += delta;
       }
 
       if(kills > prevkills) payout.killnum += kills - prevkills;
@@ -436,7 +459,7 @@ begin:
       previtems   = items;
 
       #if LITHIUM
-      if(world.enemycheck && !(dbgflag & dbgf_nomon)) {
+      if(enemycheck && !(dbgflag & dbgf_nomon)) {
          extern void DmonDebugInfo(void);
          DmonDebugInfo();
       }
@@ -456,10 +479,10 @@ begin:
       ACS_Delay(1);
 
       dbgstatnum = 0;
-      world.ticks++;
+      ticks++;
 
       i32 autosave = ACS_GetCVar(sc_sv_autosave);
-      if(autosave && world.ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
+      if(autosave && ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
    }
 }
 
@@ -473,7 +496,7 @@ script type("unloading")
 static void Sc_WorldUnload(void)
 {
    extern void CBI_InstallSpawned(void);
-   world.unloaded = true;
+   unloaded = true;
    Dbg_Log(log_dev, "%s", __func__);
 
    #if LITHIUM

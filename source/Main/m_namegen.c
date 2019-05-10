@@ -198,7 +198,7 @@ static str suff[] = {
 
 str RandomName(i32 id)
 {
-   srand(id ? world.mapseed + id : ACS_Random(0, INT_MAX));
+   srand(id ? mapseed + id : ACS_Random(0, INT_MAX));
 
    ACS_BeginPrint();
    PrintChars("\Cg", 2);

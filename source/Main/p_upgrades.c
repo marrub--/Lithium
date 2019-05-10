@@ -219,7 +219,7 @@ bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr)
          CheckRequires_WRD ||
          CheckRequires_RDI ||
          CheckRequires_RA) ||
-         p->cbi.pruse + upgr->info->perf > world.cbiperf)
+         p->cbi.pruse + upgr->info->perf > cbiperf)
       {
          return false;
       }

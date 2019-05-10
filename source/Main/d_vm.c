@@ -17,6 +17,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 #include "d_vm.h"
+#include "w_world.h"
 
 /* Types ------------------------------------------------------------------- */
 
@@ -555,15 +556,15 @@ script void Dlg_Run(struct player *p, u32 num)
    if(p->dead || p->indialogue > 1)
       return;
 
-   /* Get the dialogue by number. */
+   /* get the dialogue by number */
    register struct dlg_def lmvar *def = &dlgdefs[num];
+
+   p->indialogue++;
 
    if(!def->codeV) {
       Log("%s: dialogue %u has no code", __func__, num);
-      return;
+      JmpHL;
    }
-
-   p->indialogue++;
 
    /* GUI state */
    fastmemset(&gst, 0, sizeof gst);
@@ -600,6 +601,14 @@ script void Dlg_Run(struct player *p, u32 num)
       #define DCD(n, op, ty) [n] = &&op##_##ty,
       #include "d_vm.h"
    };
+
+   u32 first_page = 0;
+
+   switch(mission) {
+      case _unfinished: first_page = DPAGE_UNFINISHED; break;
+      case _finished:   first_page = DPAGE_FINISHED;   break;
+      case _failure:    first_page = DPAGE_FAILURE;    break;
+   }
 
    /* all right, start the damn VM already! */
    SetPC(PRG_BEG + def->pages[0]);

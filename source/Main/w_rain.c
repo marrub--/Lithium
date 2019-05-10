@@ -42,7 +42,7 @@ void W_DoRain(void)
       else
          InvTake(so_SMGHeat, 1);
 
-      if((InHell || InSecret) && !world.islithmap)
+      if((InHell || InSecret) && !islithmap)
          ServCallI(sm_SpawnRain, so_BloodRainDrop);
       else
          ServCallI(sm_SpawnRain, so_RainDrop);

@@ -37,8 +37,8 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
       UData = (struct upgr_data_VitalScan){};
    else if(validtarget)
    {
-      bool legendary = world.legendoom && InvNum(so_LegendaryMonsterToken);
-      bool henshin   = world.legendoom && InvNum(so_LegendaryMonsterTransformed);
+      bool legendary = legendoom && InvNum(so_LegendaryMonsterToken);
+      bool henshin   = legendoom && InvNum(so_LegendaryMonsterTransformed);
 
       bool phantom = InvNum(so_IsPhantom);
 

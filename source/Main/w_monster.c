@@ -111,9 +111,9 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
    BeginAngles(m->ms->x, m->ms->y);
    ServCallI(sm_MonsterBarrierLook);
 
-   for(i32 i = 0; i < world.a_cur; i++)
+   for(i32 i = 0; i < a_cur; i++)
    {
-      struct polar *a = &world.a_angles[i];
+      struct polar *a = &a_angles[i];
 
       k32 dst = m->ms->r / 2 + a->dst / 4;
       k32 x   = m->ms->x + ACS_Cos(a->ang) * dst;
@@ -132,9 +132,9 @@ static void BaseMonsterLevel(dmon_t *m)
    k32 rn2 = ACS_RandomFixed(1, MAXLEVEL);
    k32 bias;
 
-   switch(world.game) {
-   case Game_Episodic: bias = world.mapscleared / 10.0; break;
-   default:            bias = world.mapscleared / 40.0; break;
+   switch(game) {
+      case Game_Episodic: bias = mapscleared / 10.0; break;
+      default:            bias = mapscleared / 40.0; break;
    }
 
    for_player() {rn2 += p->attr.level / 2.0; break;}
@@ -154,7 +154,7 @@ static void BaseMonsterLevel(dmon_t *m)
       m->rank  = 6;
       m->level = 66;
    }
-   else if(world.fun & lfun_ragnarok)
+   else if(fun & lfun_ragnarok)
    {
       m->rank  = MAXRANK;
       m->level = MAXLEVEL + rn2 * bias;
@@ -252,7 +252,7 @@ static void OnDeath(dmon_t *m)
    OnFinalize(m);
 
    /* If enemies emit score on death we only need to give extra rank score. */
-   P_GiveAllScore((world.enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
+   P_GiveAllScore((enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
 }
 
 script

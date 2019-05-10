@@ -68,8 +68,8 @@ reinit:
 
    if(p->num == 0)
    {
-      world.fun = p->fun;
-      ServCallI(sm_Fun, world.fun);
+      fun = p->fun;
+      ServCallI(sm_Fun, fun);
    }
 
    P_BossWarning(p);
@@ -118,7 +118,7 @@ reinit:
 
          P_Dat_PTickPst(p); /* Update engine info */
 
-         if(world.pauseinmenus) ServCallI(sm_PauseTick, p->num);
+         if(pauseinmenus) ServCallI(sm_PauseTick, p->num);
       }
 
       /* Post-tick */
@@ -170,7 +170,7 @@ static void Sc_PlayerDeath(void)
    P_Inv_PQuit(p);
    #endif
 
-   if(world.singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
+   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
    {
       P_Upg_PQuit(p);
       P_BIP_PQuit(p);
@@ -178,7 +178,7 @@ static void Sc_PlayerDeath(void)
    }
 
    #if LITHIUM
-   if(world.singleplayer)
+   if(singleplayer)
    {
       if(ACS_GetCVar(sc_sv_revenge))
       {
@@ -277,7 +277,7 @@ void P_GUI_Close(struct player *p)
 {
    if(p->activegui != gui_none)
    {
-      if(world.pauseinmenus)
+      if(pauseinmenus)
       {
          ServCallI(sm_SetPaused, false);
          for_player() p->frozen--;
@@ -296,7 +296,7 @@ void P_GUI_Use(struct player *p, i32 type)
    if(p->dead) return;
    if(p->activegui == gui_none)
    {
-      if(world.pauseinmenus)
+      if(pauseinmenus)
       {
          ServCallI(sm_SetPaused, true);
          for_player() p->frozen++;
@@ -329,7 +329,7 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
    if(!nomul) {
       score *= p->scoremul;
       score *= 1 + (k64)ACS_RandomFixed(0, p->attr.attrs[at_luk] / 77.7);
-      score *= world.scoremul;
+      score *= scoremul;
    }
 
    /* Get a multiplier for the score accumulator and sound volume */
@@ -388,7 +388,7 @@ static void P_BossWarning(struct player *p)
 {
    ACS_Delay(35 * 5);
 
-   if(world.bossspawned)
+   if(bossspawned)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 #endif

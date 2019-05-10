@@ -157,8 +157,7 @@ void P_Wep_PTickPre(struct player *p)
 script
 void P_Wep_PTick(struct player *p)
 {
-   if(!Paused)
-   {
+   if(!Paused) {
       i32 heat = InvNum(so_SMGHeat);
            if(heat < 100) InvTake(so_SMGHeat, 5);
       else if(heat < 200) InvTake(so_SMGHeat, 4);
@@ -167,15 +166,14 @@ void P_Wep_PTick(struct player *p)
       else                InvTake(so_SMGHeat, 1);
    }
 
-   if(p->pclass == pcl_cybermage)
-   {
-                                           InvGive(so_Blade,    1);
-                                           InvGive(so_Delear,   1);
-      if(world.cbiupgr[cupg_c_slot3spell]) InvGive(so_Feuer,    1);
-      if(world.cbiupgr[cupg_c_slot4spell]) InvGive(so_Rend,     1);
-      if(world.cbiupgr[cupg_c_slot5spell]) InvGive(so_Hulgyon,  1);
-      if(world.cbiupgr[cupg_c_slot6spell]) InvGive(so_StarShot, 1);
-      if(world.cbiupgr[cupg_c_slot7spell]) InvGive(so_Cercle,   1);
+   if(p->pclass == pcl_cybermage) {
+                                     InvGive(so_Blade,    1);
+                                     InvGive(so_Delear,   1);
+      if(cbiupgr[cupg_c_slot3spell]) InvGive(so_Feuer,    1);
+      if(cbiupgr[cupg_c_slot4spell]) InvGive(so_Rend,     1);
+      if(cbiupgr[cupg_c_slot5spell]) InvGive(so_Hulgyon,  1);
+      if(cbiupgr[cupg_c_slot6spell]) InvGive(so_StarShot, 1);
+      if(cbiupgr[cupg_c_slot7spell]) InvGive(so_Cercle,   1);
    }
 
    SetSize(320, 240);

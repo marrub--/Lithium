@@ -56,13 +56,13 @@ struct cupgdef const *GetCUpgr(i32 pclass, i32 num)
 script
 void CBI_Install(i32 num)
 {
-   if(num < 0 || num >= cupg_max || world.cbiupgr[num]) return;
+   if(num < 0 || num >= cupg_max || cbiupgr[num]) return;
 
-   world.cbiupgr[num] = true;
+   cbiupgr[num] = true;
 
    switch(num) {
-   case cupg_hasupgr1: world.cbiperf += 20; break;
-   case cupg_hasupgr2: world.cbiperf += 40; break;
+      case cupg_hasupgr1: cbiperf += 20; break;
+      case cupg_hasupgr2: cbiperf += 40; break;
    }
 
    for_player()

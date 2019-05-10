@@ -106,24 +106,24 @@ void PtrInvSet(i32 tid, str item, i32 amount)
 stkcall
 void BeginAngles(i32 x, i32 y)
 {
-   world.a_cur = 0;
-   for(i32 i = 0; i < countof(world.a_angles); i++)
+   a_cur = 0;
+   for(i32 i = 0; i < countof(a_angles); i++)
    {
-      world.a_angles[i].ang = 0;
-      world.a_angles[i].dst = 0;
+      a_angles[i].ang = 0;
+      a_angles[i].dst = 0;
    }
-   world.a_x = x;
-   world.a_y = y;
+   a_x = x;
+   a_y = y;
 }
 
 stkcall
 k32 AddAngle(i32 x, i32 y)
 {
-   if(world.a_cur >= countof(world.a_angles))
+   if(a_cur >= countof(a_angles))
       return 0;
 
-   struct polar *p = &world.a_angles[world.a_cur++];
-   *p = ctopol(x - world.a_x, y - world.a_y);
+   struct polar *p = &a_angles[a_cur++];
+   *p = ctopol(x - a_x, y - a_y);
    return p->ang;
 }
 

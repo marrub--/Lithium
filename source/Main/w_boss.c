@@ -207,7 +207,7 @@ void Sc_PhantomDeath(void)
    if(!ACS_GetCVar(sc_sv_nobossdrop))
       SpawnBossReward();
 
-   world.soulsfreed++;
+   soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
    Dbg_Note(c"score threshold raised to %lli\n", scorethreshold);
@@ -215,7 +215,7 @@ void Sc_PhantomDeath(void)
    boss->phase++;
    boss = nil;
 
-   world.bossspawned = false;
+   bossspawned = false;
 }
 
 script_str ext("ACS") addr("Lith_SpawnBoss")
@@ -231,7 +231,7 @@ void Sc_SpawnBoss(void)
    Dbg_Log(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
    Dbg_Note("boss: %S phase %i spawned\n", boss->name, boss->phase);
 
-   world.bossspawned = true;
+   bossspawned = true;
 }
 
 script_str ext("ACS") addr("Lith_TriggerBoss") optargs(1)

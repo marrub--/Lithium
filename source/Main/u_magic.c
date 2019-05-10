@@ -60,7 +60,7 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
    {
       struct magic_info const *m = &minf[i];
 
-      if(m->st != -1 && !world.cbiupgr[m->st]) continue;
+      if(m->st != -1 && !cbiupgr[m->st]) continue;
 
       char gfx[32] = ":UI:"; strcat(gfx, m->name);
       char hot[32] = ":UI:"; strcat(hot, m->name); strcat(hot, "Sel");
