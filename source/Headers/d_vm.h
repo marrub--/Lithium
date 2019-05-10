@@ -64,11 +64,11 @@ ACT(TEXT_ADDI)           /* (ADRL)                     -> TX              */
 ACT(TEXT_ADDL)           /* (ADRL)                     -> TX              */
 ACT(TEXT_SETI)           /* (ADRL)                     -> TX              */
 ACT(TEXT_SETL)           /* (ADRL)                     -> TX              */
-/*ACT(TRM_INFO)
+ACT(TRM_INFO)
 ACT(TRM_LOGOFF)
 ACT(TRM_LOGON)
 ACT(TRM_PICT)
-ACT(TRM_WAIT)*/
+ACT(TRM_WAIT)
 
 #undef ACT
 #elif defined(DCD)
@@ -288,8 +288,8 @@ DCD(0x12, TRS, NP) /* Extension */
 DCD(0x32, TRV, NP) /* Extension */
 DCD(0x42, TRT, NP) /* Extension */
 #undef DCD
-#elif !defined(dialogue_h)
-#define dialogue_h
+#elif !defined(d_vm_h)
+#define d_vm_h
 
 #include "w_world.h"
 #include "m_vec.h"
@@ -302,23 +302,29 @@ DCD(0x42, TRT, NP) /* Extension */
 
 /* Types ------------------------------------------------------------------- */
 
-enum
-{
+enum {
    #define DCD(n, op, ty) DCD_##op##_##ty = n,
-   #include "dialogue.h"
+   #include "d_vm.h"
 };
 
-enum
-{
-   DPAGE_DIALOGUE   = 0x1A,
-   DPAGE_TERMINAL   = 0xF0,
-   DPAGE_UNFINISHED = 0xFD,
+enum {
+   DNUM_PRG_BEG,
+   DNUM_PRG_END = DNUM_PRG_BEG + 10,
+   DNUM_DLG_BEG,
+   DNUM_DLG_END = DNUM_DLG_BEG + 10,
+   DNUM_TRM_BEG,
+   DNUM_TRM_END = DNUM_TRM_BEG + 10,
+   DNUM_MAX,
+};
+
+enum {
+   DPAGE_NORMAL_MAX = 0xEF,
+   DPAGE_UNFINISHED,
    DPAGE_FINISHED,
    DPAGE_FAILURE,
 };
 
-enum
-{
+enum {
    STA_BEG = 0x0100,
    STA_END = 0x01FF,
    VAR_BEG = 0x0200,
@@ -333,8 +339,7 @@ enum
    STR_BEG_C = STR_BEG / 4,
 };
 
-enum
-{
+enum {
    ADRM_AI, /* Absolute-immediate */
    ADRM_AX, /* Absolute-X         */
    ADRM_AY, /* Absolute-Y         */
@@ -350,8 +355,7 @@ enum
 };
 
 /* structures */
-enum
-{
+enum {
    /* options */
    S_OPT_PTRL,
    S_OPT_PTRH,
@@ -360,8 +364,7 @@ enum
    S_OPT_SIZE,
 };
 
-enum
-{
+enum {
    /* constants */
    VAR_PCLASS = VAR_BEG,
 
@@ -403,10 +406,9 @@ enum
    VAR_END
 };
 
-enum
-{
+enum {
    #define ACT(name) ACT_##name,
-   #include "dialogue.h"
+   #include "d_vm.h"
    ACT_MAX,
 
    /* response actions */
@@ -415,8 +417,7 @@ enum
    ACT_JUMP,
 };
 
-enum
-{
+enum {
    TACT_NONE,
    TACT_LOGON,
    TACT_LOGOFF,
@@ -424,34 +425,32 @@ enum
    TACT_PICT,
 };
 
-enum
-{
+enum {
    UACT_NONE,
    UACT_ACKNOWLEDGE,
    UACT_SELOPTION,
    UACT_EXIT,
 };
 
-struct dlg_def
-{
-   i32 num;
+struct dlg_def {
    u32 pages[0xFF];
    size_t codeP, stabP;
    Vec_Decl(u32, code);
    Vec_Decl(u32, stab);
-
-   struct dlg_def *next;
 };
 
-struct dcd_info
-{
+struct dcd_info {
    char name[7];
    u32  adrm;
 };
 
+/* Extern Functions -------------------------------------------------------- */
+
+script void Dlg_Run(struct player *p, u32 num);
+
 /* Extern Objects ---------------------------------------------------------- */
 
-extern struct dlg_def *lmvar dlgdefs;
+extern struct dlg_def  lmvar dlgdefs[DNUM_MAX];
 extern struct dcd_info const dcdinfo[0xFF];
 
 #endif

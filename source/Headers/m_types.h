@@ -68,6 +68,7 @@ typedef double f64;
 struct polar {k32 ang, dst;};
 struct k64v2 {k64 x, y;};
 struct i32v2 {i32 x, y;};
+struct ptr2  {u32 l, h;};
 
 union ik32 {int_k_t i; k32 k;};
 

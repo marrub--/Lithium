@@ -199,7 +199,7 @@ struct player
    i32 pclass;
    str pcstr;
    i32 pronoun;
-   i32 dlgnum;
+   u32 dlgnum;
    i32 fun;
    cstr discrim;
 

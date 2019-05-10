@@ -16,7 +16,7 @@
 #include "w_world.h"
 #include "p_player.h"
 #include "p_hudid.h"
-#include "dialogue.h"
+#include "d_vm.h"
 
 /* Types ------------------------------------------------------------------- */
 
@@ -64,11 +64,11 @@ sync typedef void (*vm_action)(struct player *p);
 
 /* Extern Objects ---------------------------------------------------------- */
 
-struct dlg_def *lmvar dlgdefs;
+struct dlg_def lmvar dlgdefs[DNUM_MAX];
 
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
-   #include "dialogue.h"
+   #include "d_vm.h"
 };
 
 /* Static Objects ---------------------------------------------------------- */
@@ -83,11 +83,11 @@ static u32 r1, r2;
 Vec_Decl(char, text, static);
 
 #define ACT(name) sync static void Act##name(struct player *p);
-#include "dialogue.h"
+#include "d_vm.h"
 
 static vm_action actions[] = {
    #define ACT(name) &Act##name,
-   #include "dialogue.h"
+   #include "d_vm.h"
 };
 
 /* Static Functions -------------------------------------------------------- */
@@ -541,28 +541,32 @@ sync static void ActTEXT_SETL(struct player *p) {
    SetVA(ACT_NONE);
    SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
+sync static void ActTRM_INFO(struct player *p) {}
+sync static void ActTRM_LOGOFF(struct player *p) {}
+sync static void ActTRM_LOGON(struct player *p) {}
+sync static void ActTRM_PICT(struct player *p) {}
+sync static void ActTRM_WAIT(struct player *p) {}
 
 /* Extern Functions -------------------------------------------------------- */
 
 /* Main dialogue VM. */
-script void Dlg_Run(struct player *p, i32 num)
+script void Dlg_Run(struct player *p, u32 num)
 {
    if(p->dead || p->indialogue > 1)
       return;
 
    /* Get the dialogue by number. */
-   register struct dlg_def *def;
-   for(def = dlgdefs; def && def->num != num; def = def->next);
+   register struct dlg_def lmvar *def = &dlgdefs[num];
 
-   if(!def) {
-      Log("%s: tried to get invalid dialogue %i", __func__, num);
+   if(!def->codeV) {
+      Log("%s: dialogue %u has no code", __func__, num);
       return;
    }
 
    p->indialogue++;
 
    /* GUI state */
-   memset(&gst, 0, sizeof gst);
+   fastmemset(&gst, 0, sizeof gst);
    gst.cx = 320 / 2;
    gst.cy = 200 / 2;
    gst.gfxprefix = ":UI_Green:";
@@ -594,7 +598,7 @@ script void Dlg_Run(struct player *p, i32 num)
 
    static __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,
-      #include "dialogue.h"
+      #include "d_vm.h"
    };
 
    /* all right, start the damn VM already! */
@@ -1005,7 +1009,7 @@ void Sc_RunProgram(i32 num)
 {
    with_player(LocalPlayer) {
       if(!p->indialogue) {
-         p->dlgnum = num;
+         p->dlgnum = DNUM_PRG_BEG + num;
          p->indialogue++;
       }
    }
@@ -1016,7 +1020,7 @@ void Sc_RunDialogue(i32 num)
 {
    with_player(LocalPlayer) {
       if(!p->indialogue) {
-         p->dlgnum = DPAGE_DIALOGUE + num;
+         p->dlgnum = DNUM_DLG_BEG + num;
          p->indialogue++;
       }
    }
@@ -1027,7 +1031,7 @@ void Sc_RunTerminal(i32 num)
 {
    with_player(LocalPlayer) {
       if(!p->indialogue) {
-         p->dlgnum = DPAGE_TERMINAL + num;
+         p->dlgnum = DNUM_TRM_BEG + num;
          p->indialogue++;
       }
    }

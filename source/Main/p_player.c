@@ -16,6 +16,7 @@
 #include "m_list.h"
 #include "p_hudid.h"
 #include "w_world.h"
+#include "d_vm.h"
 
 #include <limits.h>
 
@@ -132,10 +133,7 @@ reinit:
       ACS_Delay(1);
 
       #if LITHIUM
-      if(p->dlgnum)
-      {
-         script extern void Dlg_Run(struct player *p, i32 dlgnum);
-
+      if(p->dlgnum) {
          Dlg_Run(p, p->dlgnum);
          p->dlgnum = 0;
       }

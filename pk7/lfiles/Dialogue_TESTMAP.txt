@@ -10,7 +10,7 @@
 /* ------------------------------------------------------------------------- */
 program 7;
 
-entry 0
+page 0
 {
    ldx #$FF
    txs
@@ -32,8 +32,7 @@ page 0
    icon "AOF"
    remote "jacques.p42710@corp.AOF"
    
-   if item "Lith_DivisionSigil"
-      page 7
+   if item "Lith_DivisionSigil" page 7
    
    `...
    
@@ -56,8 +55,7 @@ page 2
 
    #QUITMSG39
 
-   option "emit skeltal"
-   {
+   option "emit skeltal" {
       script 2
       page 2
    }
@@ -71,14 +69,11 @@ page 3
    `What, you want something?
    `
 
-   if class pC
-   {
+   if class pC {
       `What did you need, Stilko?
       option "The nightmares are back." page 10
       option "I just need someone to talk to, Jacques." page 11
-   }
-   else
-   {
+   } else {
       `Too bad. Get it yourself.
       option "That's rude." page 4
    }
