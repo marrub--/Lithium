@@ -58,7 +58,7 @@ void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr)
 
       if(UData.target != id)
       {
-         memset(&UData, 0, sizeof UData);
+         fastmemset(&UData, 0, sizeof UData);
          UData.oldhealth = UData.health;
       }
 

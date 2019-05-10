@@ -62,7 +62,7 @@ struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt c
    PrintText(s_cbifont, CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
-   memset(a->p->txtbuf, 0, sizeof a->p->txtbuf);
+   fastmemset(a->p->txtbuf, 0, sizeof a->p->txtbuf);
    a->p->tbptr = 0;
 
    return st;

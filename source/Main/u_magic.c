@@ -121,7 +121,7 @@ static void SetMagicUI(struct player *p, bool on)
       UData.ui = false;
       p->semifrozen--;
 
-      memset(&UData.gst, 0, sizeof UData.gst);
+      fastmemset(&UData.gst, 0, sizeof UData.gst);
    }
 }
 

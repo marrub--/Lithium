@@ -131,7 +131,7 @@ void P_Upg_PInit(struct player *p)
          p->upgrmax++;
 
    upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
-   memset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
+   fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
    for(i32 i = 0, j = 0; i < g_upgrmax; i++)
       if(CheckPClass())
@@ -159,7 +159,7 @@ void P_Upg_PQuit(struct player *p)
    p->upgrmax = 0;
 
    for(i32 i = 0; i < countof(p->upgrades); i++)
-      memset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
+      fastmemset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
 
    p->upgrinit = false;
 }

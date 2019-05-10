@@ -28,6 +28,9 @@
 #define l_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
 #define l_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 
+#define fastmemset(p, s, c, ...) \
+   for(i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s;
+
 stkcall str l_strupper(str in);
 stkcall u32 l_strhash(astr s);
 stkcall u32 lstrhash(cstr s);

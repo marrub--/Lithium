@@ -224,7 +224,7 @@ static void Sc_PlayerDisconnect(void)
 
    upgrademap_t_dtor(&p->upgrademap);
 
-   memset(p, 0, sizeof *p);
+   fastmemset(p, 0, sizeof *p);
 }
 
 /* Extern Functions -------------------------------------------------------- */

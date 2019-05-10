@@ -12,6 +12,7 @@
  */
 
 #include "m_tokbuf.h"
+#include "m_str.h"
 
 #include <string.h>
 
@@ -73,7 +74,7 @@ struct token *TBufGet(struct tokbuf *tb)
       for(i32 i = s, j = 0; i < tb->tend; i++, j++)
          tb->toks[j] = tb->toks[i];
 
-      memset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
+      fastmemset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }
 
    /* get new tokens */

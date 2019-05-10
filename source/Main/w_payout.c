@@ -41,7 +41,7 @@ void Scr_HInit(void)
       P_Scr_Payout(p);
    }
 
-   memset(&payout, 0, sizeof payout);
+   fastmemset(&payout, 0, sizeof payout);
 }
 #endif
 

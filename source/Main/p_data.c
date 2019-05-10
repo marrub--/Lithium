@@ -241,7 +241,7 @@ void P_Init(struct player *p)
 {
    if(!p->wasinit)
    {
-      memset(p, 0, sizeof *p);
+      fastmemset(p, 0, sizeof *p);
 
       p->active = true;
       p->num    = ACS_PlayerNumber();
@@ -266,7 +266,7 @@ void P_Init(struct player *p)
 
    }
 
-   memset(&p->old, 0, sizeof p->old);
+   fastmemset(&p->old, 0, sizeof p->old);
 
    p->reinit = p->dead = false;
 
