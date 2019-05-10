@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * Dialogue statements.
+ * Dialogue compiler statements.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -50,11 +50,11 @@ void Dlg_GetStmt_Cond(struct compiler *d)
          if(faststrcmp(tok->textV, #shr) == 0) {Dlg_PushB1(d, shr); goto ok;}
       #include "p_player.h"
       ErrT(d, tok, "invalid playerclass type");
-   ok:;
    } else {
       ErrT(d, tok, "invalid conditional type");
    }
 
+ok:
    Dlg_PushB1(d, ins);
    Dlg_PushB1(d, 0); /* placeholder */
    u32 ptr = d->def.codeP;
@@ -218,6 +218,11 @@ script void Dlg_GetStmt(struct compiler *d)
          Expect2(d, tok, tok_identi, tok_string);
          Dlg_GetStmt_Text(d, tok, ACT_TEXT_ADDL);
          break;
+      case tok_lt:
+         while((tok = d->tb.get())->type != tok_gt) {
+            Expect(d, tok, tok_number);
+            Dlg_PushB1(d, strtoi(tok->textV, nil, 0));
+         }
       case tok_semico:
          break;
       default:

@@ -21,6 +21,7 @@ page 0
    lda #$AA
    trs
    trr
+   <$A9 $7F $00>
 }
 
 /* ------------------------------------------------------------------------- */
@@ -33,9 +34,9 @@ page 0
    remote "jacques.p42710@corp.AOF"
    
    if item "Lith_DivisionSigil" page 7
-   
+
    `...
-   
+
    option "Say hello" page 2
    option "Exit"      brk
 }
@@ -195,29 +196,30 @@ page 7
    `
    `find yourself
    `starting back
-   
+
    option "Thanks, bye!" brk
 }
 
-/*
 /* ------------------------------------------------------------------------- */
+/*
 terminal 1;
 
 unfinished
 {
    remote "test@org.example"
-   
-   logon "01602"
-   `\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
-   
-   info
-   `test text, information block
-   
-   pict "AOF"
-   `test with picture
-   `and multiple lines of text
-   
-   logoff "01602"
+
+   logon "01602" `\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+
+   info `test text, information block
+
+   pict "AOF" {
+      `test with picture
+      `and multiple lines of text
+   }
+
+   logoff "01602" {}
+
+   script 2
 }
 */
 

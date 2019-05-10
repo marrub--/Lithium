@@ -318,10 +318,11 @@ enum {
 };
 
 enum {
-   DPAGE_NORMAL_MAX = 0xEF,
+   DPAGE_NORMAL_MAX = 30,
    DPAGE_UNFINISHED,
    DPAGE_FINISHED,
    DPAGE_FAILURE,
+   DPAGE_MAX,
 };
 
 enum {
@@ -433,7 +434,7 @@ enum {
 };
 
 struct dlg_def {
-   u32 pages[0xFF];
+   u32 pages[DPAGE_MAX];
    size_t codeP, stabP;
    Vec_Decl(u32, code);
    Vec_Decl(u32, stab);

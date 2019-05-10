@@ -101,8 +101,6 @@ void Dlg_ClearDef(struct compiler *d)
 
 void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 {
-   if(num > countof(d->def.pages)) Err(d, "bad page index");
-
    d->def.pages[num] = d->def.codeP;
 
    Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
@@ -121,7 +119,10 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
       tok = d->tb.get();
       Expect(d, tok, tok_number);
 
-      Dlg_GetItem_Page(d, strtoi(tok->textV, nil, 0), act);
+      u32 num = strtoi(tok->textV, nil, 0);
+      if(num > DPAGE_NORMAL_MAX) Err(d, "bad page index");
+
+      Dlg_GetItem_Page(d, num, act);
       return true;
    } else if(act == ACT_TRM_WAIT) {
       if(faststrcmp(tok->textV, "failure") == 0) {
