@@ -10,52 +10,52 @@
 == \#MANA_CHARGE | [マナ補給中]
 
 ## Obituaries ----------------------------------------------------------------|
-== \#OB_S_FatMac    | %o's shoulders fell off their mounts.
+== \#OB_S_FatMac    | %oの肩身がマウントから落ちた。
 == \#OB_S_Explosion | %oは爆発した。
 
-== \#OB_Falling_1 | %o took a long walk off a short floor.
+== \#OB_Falling_1 | %oは惑星の反対側へ向かった。
 == \#OB_Falling_2 | 床は%oが大好きになった。
-== \#OB_Falling_3 | %o became paste with the power of gravity.
+== \#OB_Falling_3 | %oは重力によって糊に加工された。
 == \#OB_Falling_4 | サヨナラ、%oよ。
-== \#OB_Falling_5 | %o doesn't like heights.
+== \#OB_Falling_5 | %o好みの高さではなかった。
 
 == \#OB_Crush_1 | %oは閉所が好きすぎた。
-== \#OB_Crush_2 | %oは天井が大好きになった。
+== \#OB_Crush_2 | %oは天井に潰された
 == \#OB_Crush_3 | 天井は%oが大好きになった。
 == \#OB_Crush_4 | %oはグチャってなった。
 == \#OB_Crush_5 | %oがひしゃげた。
 
-== \#OB_Exit_1 | %o didn't realize the futility of their actions.
+== \#OB_Exit_1 | %oは皆の行動の無益さを理解していなかった。
 == \#OB_Exit_2 | %oが逃げようとした。
 == \#OB_Exit_3 | 去りませんわ、%oよ。
 == \#OB_Exit_4 | \cgワタシ\c-の手で%oの手足が引き裂かれた。
 
-== \#OB_Drowning_1 | %o's lungs burst.
-== \#OB_Drowning_2 | %o's brain lacked the oxygen to go on.
-== \#OB_Drowning_3 | %oはおぼれ死んだ。
-== \#OB_Drowning_4 | %o won't be heard from again.
-== \#OB_Drowning_5 | Better start looking for %o's body.
+== \#OB_Drowning_1 | %oの肺が張り裂けた。
+== \#OB_Drowning_2 | %oの脳へ酸素の代わりに命を供給した。
+== \#OB_Drowning_3 | %oは溺れた。
+== \#OB_Drowning_4 | %oからの応答が途絶えた。
+== \#OB_Drowning_5 | %oの体に捜索願が届けられた。
 
 == \#OB_Slime_1 | %oがとろけた。
-== \#OB_Slime_2 | %o's boots don't appreciate them anymore.
-== \#OB_Slime_3 | %o lost their legs.
-== \#OB_Slime_4 | %o stood in something bad.
+== \#OB_Slime_2 | %oはブーツのありがたみを認めなかった。
+== \#OB_Slime_3 | %oの脚が無くなった。
+== \#OB_Slime_4 | %oは悪質な何かに立っていた。
 == \#OB_Slime_5 | %oが液になった。
 
-== \#OB_Fire_1 | %o fried to death.
-== \#OB_Fire_2 | %oのパッションが燃える！っえっと、「火」が燃える。
-== \#OB_Fire_3 | It'll be hard to tell if %o's corpse is theirs.
+== \#OB_Fire_1 | %oが焼き焦げた。
+== \#OB_Fire_2 | %oの情熱が燃え上がった!...えっと、火で燃えた。
+== \#OB_Fire_3 | %oの死体が奴等のモノかどうか見分けるのは難しいでしょう。
 == \#OB_Fire_4 | %oが火で死んだ。
-== \#OB_Fire_5 | それは・・・%oのくさい。
+== \#OB_Fire_5 | どうやら・・・%oの臭いだ。
 
-== \#OB_Suicide_1 | %o took the hard way out.
-== \#OB_Suicide_2 | %oはダーウィン賞を受賞。
-== \#OB_Suicide_3 | %o took a permanent solution to a temporary problem.
+== \#OB_Suicide_1 | %oは困難を乗り越えた。
+== \#OB_Suicide_2 | %oはダーウィン賞を受賞した。
+== \#OB_Suicide_3 | %oは一時的な問題の永続的な解決策を講じた。
 == \#OB_Suicide_4 | %oが破裂した。
-== \#OB_Suicide_5 | %o couldn't take it anymore.
+== \#OB_Suicide_5 | %oはもう何も得られなくなった。
 
 == \#OB_Default_1 | %oが氏んだ
-== \#OB_Default_2 | %o was perforated by a chaingunner hiding in the sky.
-== \#OB_Default_3 | %o was removed from the board.
-== \#OB_Default_4 | %o dehumanized themself.
+== \#OB_Default_2 | %oが死兆星にいたチェーンガンナーに撃ち抜かれた。
+== \#OB_Default_3 | %oが盤上から掻っ攫われた。
+== \#OB_Default_4 | %o自身を非人間化させた。
 == \#OB_Default_5 | %oが消えた。
