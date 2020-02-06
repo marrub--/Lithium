@@ -21,7 +21,7 @@
 
 == \#TAB_ARSENAL_Stan | 兵器
 == \#TAB_ARSENAL_Jem  | 指令
-== \#TAB_ARSENAL_Ari  | 猟具
+== \#TAB_ARSENAL_Ari  | 機体
 
 == \#TAB_STATUS    | ステータス
 == \#TAB_INVENTORY | 所持品
