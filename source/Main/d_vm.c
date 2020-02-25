@@ -252,7 +252,7 @@ local void TraceReg()
    }
 
 /* VM action auxiliary */
-script static void TerminalGUI(struct player *p, u32 act)
+script static void TerminalGUI(struct player *p, u32 tact)
 {
    enum {
       /* background */
@@ -288,7 +288,7 @@ script static void TerminalGUI(struct player *p, u32 act)
    /* Top-right text */
    u32 tra = MemB2_G(VAR_REMOTEL);
    str tr = tra ? MemSA_G(tra) : s"<unknown>@raddr.4E19";
-   switch(act) {
+   switch(tact) {
       default:          tr = StrParam("Remote: %S",               tr); break;
       case TACT_LOGON:  tr = StrParam("Opening Connection to %S", tr); break;
       case TACT_LOGOFF: tr = st_term_disconnecting;                    break;
@@ -300,7 +300,7 @@ script static void TerminalGUI(struct player *p, u32 act)
 
    /* Bottom-right text */
    str br;
-   switch(act) {
+   switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date)); break;
       default:          br = st_term_use_to_ack;           break;
@@ -312,7 +312,7 @@ script static void TerminalGUI(struct player *p, u32 act)
 
    char pict[32] = ":Terminal:"; strcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
 
-   switch(act) {
+   switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF:
          __with(i32 y = midy;) {
@@ -551,30 +551,61 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p)
    SetVA(ACT_HALT);
 }
 
-sync static void ActTEXT_ADDI(struct player *p) {
+sync static void ActTEXT_ADDI(struct player *p)
+{
    SetVA(ACT_NONE);
    AddText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-sync static void ActTEXT_ADDL(struct player *p) {
+sync static void ActTEXT_ADDL(struct player *p)
+{
    SetVA(ACT_NONE);
    AddText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
 
-sync static void ActTEXT_SETI(struct player *p) {
+sync static void ActTEXT_SETI(struct player *p)
+{
    SetVA(ACT_NONE);
    SetText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-sync static void ActTEXT_SETL(struct player *p) {
+sync static void ActTEXT_SETL(struct player *p)
+{
    SetVA(ACT_NONE);
    SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
-sync static void ActTRM_INFO(struct player *p) {}
-sync static void ActTRM_LOGOFF(struct player *p) {}
-sync static void ActTRM_LOGON(struct player *p) {}
-sync static void ActTRM_PICT(struct player *p) {}
-sync static void ActTRM_WAIT(struct player *p) {}
+
+sync static void ActTRM_WAIT(struct player *p)
+{
+   SetVA(ACT_NONE);
+
+   u32 tact = MemB1_G(VAR_TACT);
+   MemB1_S(VAR_TACT, TACT_NONE);
+
+   if(tact != TACT_NONE) {
+      i32 timer;
+
+      if(tact == TACT_LOGON || tact == TACT_LOGOFF) {
+         ACS_LocalAmbientSound(ss_player_trmopen, 127);
+         timer = 45;
+      } else {
+         timer = INT32_MAX;
+      }
+
+      p->frozen++;
+      P_SetVel(p, 0, 0, 0);
+
+      if(textV[0]) HudMessageLog("%.*s", textC, textV);
+
+      do {
+         TerminalGUI(p, tact);
+         ACS_Delay(1);
+      } while(MemB1_G(VAR_UACT) == UACT_NONE && --timer >= 0);
+
+      p->frozen--;
+      GuiAct();
+   }
+}
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -974,44 +1005,6 @@ TRV_NP:
 TRT_NP:
    Log("%.*s", textC, textV);
    JmpVI;
-
-/*
-LOGON:   vm.next.trmActi = TACT_LOGON;  goto login;
-LOGOFF:  vm.next.trmActi = TACT_LOGOFF; goto login;
-INFO:    vm.next.trmActi = TACT_INFO;   goto terminal;
-PICT:    vm.next.trmActi = TACT_PICT;   goto pict;
-TRMWAIT: goto terminal;
-
-login:
-   vm.next.trmTime = 42;
-pict:
-   vm.next.trmPict = STR;
-terminal:
-   gst.cx = 320;
-   gst.cy = 200;
-   if(vm.trmActi != TACT_NONE)
-   {
-      if(vm.trmActi == TACT_LOGON || vm.trmActi == TACT_LOGOFF)
-         ACS_LocalAmbientSound(ss_player_trmopen, 127);
-
-      bool timer = vm.trmTime != 0;
-      p->frozen++;
-      P_SetVel(p, 0, 0, 0);
-
-      if(vm.textV[0]) HudMessageLog("%.*s", vm.textC, vm.textV);
-
-      do {
-         TerminalGUI(&gst, p, &vm);
-         ACS_Delay(1);
-      } while(vm.action == ACT_NONE && (!timer || --vm.trmTime >= 0));
-
-      p->frozen--;
-   }
-
-   vm.cur = vm.next;
-   vm.next.trmActi = TACT_NONE;
-   vm.next.trmTime = 0;
-*/
 
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);

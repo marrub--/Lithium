@@ -32,7 +32,7 @@ page 0
    name "Jacques"
    icon "AOF"
    remote "jacques.p42710@corp.AOF"
-   
+
    if item "Lith_DivisionSigil" page 7
 
    `...
@@ -201,7 +201,6 @@ page 7
 }
 
 /* ------------------------------------------------------------------------- */
-/*
 terminal 1;
 
 unfinished
@@ -221,6 +220,5 @@ unfinished
 
    script 2
 }
-*/
 
 /* EOF */

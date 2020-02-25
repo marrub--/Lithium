@@ -64,10 +64,6 @@ ACT(TEXT_ADDI)           /* (ADRL)                     -> TX              */
 ACT(TEXT_ADDL)           /* (ADRL)                     -> TX              */
 ACT(TEXT_SETI)           /* (ADRL)                     -> TX              */
 ACT(TEXT_SETL)           /* (ADRL)                     -> TX              */
-ACT(TRM_INFO)
-ACT(TRM_LOGOFF)
-ACT(TRM_LOGON)
-ACT(TRM_PICT)
 ACT(TRM_WAIT)
 
 #undef ACT
@@ -369,9 +365,9 @@ enum {
    /* constants */
    VAR_PCLASS = VAR_BEG,
 
-   /* vars */
-   VAR_CONCAT,
+   /* interaction */
    VAR_UACT,
+   VAR_TACT,
 
    /* general address */
    VAR_ADRL,
@@ -387,6 +383,7 @@ enum {
    VAR_SCP4,
 
    /* strings */
+   VAR_CONCAT,
    VAR_NAMEL,
    VAR_NAMEH,
    VAR_ICONL,

@@ -118,8 +118,26 @@ void Dlg_GetStmt_Str(struct compiler *d, u32 adr)
 {
    struct token *tok = d->tb.get();
    Expect3(d, tok, tok_identi, tok_string, tok_number);
-
    Dlg_PushLdAdr(d, adr, Dlg_PushStr(d, tok->textV, tok->textC));
+}
+
+void Dlg_GetStmt_Terminal(struct compiler *d, bool use_s, u32 act)
+{
+   if(use_s) {
+      struct token *tok = d->tb.get();
+      Expect3(d, tok, tok_identi, tok_string, tok_number);
+      Dlg_PushLdAdr(d, VAR_PICTL, Dlg_PushStr(d, tok->textV, tok->textC));
+   }
+
+   Dlg_GetStmt(d);
+
+   Dlg_PushB1(d, DCD_LDA_VI);
+   Dlg_PushB1(d, act & 0xFF);
+
+   Dlg_PushB1(d, DCD_STA_AI);
+   Dlg_PushB2(d, VAR_TACT);
+
+   Dlg_PushLdVA(d, ACT_TRM_WAIT);
 }
 
 void Dlg_GetStmt_Script(struct compiler *d)
@@ -202,10 +220,16 @@ script void Dlg_GetStmt(struct compiler *d)
             Dlg_GetStmt_Str(d, VAR_ICONL);
          else if(faststrcmp(tok->textV, "remote") == 0)
             Dlg_GetStmt_Str(d, VAR_REMOTEL);
-         else if(faststrcmp(tok->textV, "pict") == 0)
-            Dlg_GetStmt_Str(d, VAR_PICTL);
          else if(faststrcmp(tok->textV, "script") == 0)
             Dlg_GetStmt_Script(d);
+         else if(faststrcmp(tok->textV, "logon") == 0)
+            Dlg_GetStmt_Terminal(d, true, TACT_LOGON);
+         else if(faststrcmp(tok->textV, "logoff") == 0)
+            Dlg_GetStmt_Terminal(d, true, TACT_LOGOFF);
+         else if(faststrcmp(tok->textV, "pict") == 0)
+            Dlg_GetStmt_Terminal(d, true, TACT_PICT);
+         else if(faststrcmp(tok->textV, "info") == 0)
+            Dlg_GetStmt_Terminal(d, false, TACT_INFO);
          else
             Dlg_GetStmt_Asm(d);
 
