@@ -26,54 +26,54 @@
 "LITH_MANA_CHARGE" = "[マナ補給中]";
 
 /* Obituaries ----------------------------------------------------------------|*/
-"LITH_OB_S_FatMac" = "%o's shoulders fell off their mounts.";
+"LITH_OB_S_FatMac" = "%oの肩身がマウントから落ちた。";
 "LITH_OB_S_Explosion" = "%oは爆発した。";
 
-"LITH_OB_Falling_1" = "%o took a long walk off a short floor.";
+"LITH_OB_Falling_1" = "%oは惑星の反対側へ向かった。";
 "LITH_OB_Falling_2" = "床は%oが大好きになった。";
-"LITH_OB_Falling_3" = "%o became paste with the power of gravity.";
+"LITH_OB_Falling_3" = "%oは重力によって糊に加工された。";
 "LITH_OB_Falling_4" = "サヨナラ、%oよ。";
-"LITH_OB_Falling_5" = "%o doesn't like heights.";
+"LITH_OB_Falling_5" = "%o好みの高さではなかった。";
 
 "LITH_OB_Crush_1" = "%oは閉所が好きすぎた。";
-"LITH_OB_Crush_2" = "%oは天井が大好きになった。";
+"LITH_OB_Crush_2" = "%oは天井に潰された";
 "LITH_OB_Crush_3" = "天井は%oが大好きになった。";
 "LITH_OB_Crush_4" = "%oはグチャってなった。";
 "LITH_OB_Crush_5" = "%oがひしゃげた。";
 
-"LITH_OB_Exit_1" = "%o didn't realize the futility of their actions.";
+"LITH_OB_Exit_1" = "%oは皆の行動の無益さを理解していなかった。";
 "LITH_OB_Exit_2" = "%oが逃げようとした。";
 "LITH_OB_Exit_3" = "去りませんわ、%oよ。";
 "LITH_OB_Exit_4" = "\cgワタシ\c-の手で%oの手足が引き裂かれた。";
 
-"LITH_OB_Drowning_1" = "%o's lungs burst.";
-"LITH_OB_Drowning_2" = "%o's brain lacked the oxygen to go on.";
-"LITH_OB_Drowning_3" = "%oはおぼれ死んだ。";
-"LITH_OB_Drowning_4" = "%o won't be heard from again.";
-"LITH_OB_Drowning_5" = "Better start looking for %o's body.";
+"LITH_OB_Drowning_1" = "%oの肺が張り裂けた。";
+"LITH_OB_Drowning_2" = "%oの脳へ酸素の代わりに命を供給した。";
+"LITH_OB_Drowning_3" = "%oは溺れた。";
+"LITH_OB_Drowning_4" = "%oからの応答が途絶えた。";
+"LITH_OB_Drowning_5" = "%oの体に捜索願が届けられた。";
 
 "LITH_OB_Slime_1" = "%oがとろけた。";
-"LITH_OB_Slime_2" = "%o's boots don't appreciate them anymore.";
-"LITH_OB_Slime_3" = "%o lost their legs.";
-"LITH_OB_Slime_4" = "%o stood in something bad.";
+"LITH_OB_Slime_2" = "%oはブーツのありがたみを認めなかった。";
+"LITH_OB_Slime_3" = "%oの脚が無くなった。";
+"LITH_OB_Slime_4" = "%oは悪質な何かに立っていた。";
 "LITH_OB_Slime_5" = "%oが液になった。";
 
-"LITH_OB_Fire_1" = "%o fried to death.";
-"LITH_OB_Fire_2" = "%oのパッションが燃える！っえっと、「火」が燃える。";
-"LITH_OB_Fire_3" = "It'll be hard to tell if %o's corpse is theirs.";
+"LITH_OB_Fire_1" = "%oが焼き焦げた。";
+"LITH_OB_Fire_2" = "%oの情熱が燃え上がった!...えっと、火で燃えた。";
+"LITH_OB_Fire_3" = "%oの死体が奴等のモノかどうか見分けるのは難しいでしょう。";
 "LITH_OB_Fire_4" = "%oが火で死んだ。";
-"LITH_OB_Fire_5" = "それは・・・%oのくさい。";
+"LITH_OB_Fire_5" = "どうやら・・・%oの臭いだ。";
 
-"LITH_OB_Suicide_1" = "%o took the hard way out.";
-"LITH_OB_Suicide_2" = "%oはダーウィン賞を受賞。";
-"LITH_OB_Suicide_3" = "%o took a permanent solution to a temporary problem.";
+"LITH_OB_Suicide_1" = "%oは困難を乗り越えた。";
+"LITH_OB_Suicide_2" = "%oはダーウィン賞を受賞した。";
+"LITH_OB_Suicide_3" = "%oは一時的な問題の永続的な解決策を講じた。";
 "LITH_OB_Suicide_4" = "%oが破裂した。";
-"LITH_OB_Suicide_5" = "%o couldn't take it anymore.";
+"LITH_OB_Suicide_5" = "%oはもう何も得られなくなった。";
 
 "LITH_OB_Default_1" = "%oが氏んだ";
-"LITH_OB_Default_2" = "%o was perforated by a chaingunner hiding in the sky.";
-"LITH_OB_Default_3" = "%o was removed from the board.";
-"LITH_OB_Default_4" = "%o dehumanized themself.";
+"LITH_OB_Default_2" = "%oが死兆星にいたチェーンガンナーに撃ち抜かれた。";
+"LITH_OB_Default_3" = "%oが盤上から掻っ攫われた。";
+"LITH_OB_Default_4" = "%o自身を非人間化させた。";
 "LITH_OB_Default_5" = "%oが消えた。";
 
 /* Misc_QuitMessages.txt stub*/
@@ -103,7 +103,7 @@
 
 "LITH_TAB_ARSENAL_Stan" = "兵器";
 "LITH_TAB_ARSENAL_Jem" = "指令";
-"LITH_TAB_ARSENAL_Ari" = "猟具";
+"LITH_TAB_ARSENAL_Ari" = "機体";
 
 "LITH_TAB_STATUS" = "ステータス";
 "LITH_TAB_INVENTORY" = "所持品";
@@ -197,22 +197,25 @@
 
 "LITH_OPENER" =
 /* Misc_Opener.txt*/
-   "1626, New Era.\n"
+   "１６２６, ニューエラ\n"
    "\n"
-   "A revelation in multiverse theory: Proof of other universes existing within the same dimension of time as our own universe.\n"
+   "多元理論における啓示: 我々の宇宙と同次元に存在する他宇宙の証明\n"
    "\n"
-   "Finally explaining the odd artifacts which had been found throughout the new era, the researchers involved were to be awarded for their immense discovery, but soon after disappeared all at once.\n"
+   "ニューエラにの奇妙な遺物の計り知れない発見について、\n"
+   "解読に関与した研究者達へ表彰が授与される予定だったが、\n"
+   "間もなく全員姿を消した。\n"
    "\n"
-   "Twenty years later, 1649 N.E.\n"
+   "２０年後, １６４９ N.E.\n"
    "\n"
-   "Communications with these scientists have been re-established, and after investigation by the computer mega-corp Optic Fiber Maxim-Danil, they have been found to be no more than a red mist floating in space.\n"
+   "これら科学者との対話が再確立され、巨大コンピューター企業 Optic Fiber Maxim-Danil社の調査により、\n"
+   "それは宇宙に浮かぶ赤い霧に過ぎない事が判明した。\n"
    "\n"
-   "The planetary system's central star had become a hole of darkness, emitting massive amounts of unknown magical energy.\n"
+   "惑星系の中心星はブラックホールとは異なる暗黒の穴になり、魔法の様な未知のエネルギーを大量に放出していた。\n"
    "\n"
-   "A hole which has begun spitting out demons.\n"
+   "悪魔がその穴から吐き出されるまでは。\n"
    "\n"
-   "A portal to Hell itself.\n"
+   "地獄へと繋がるポータル。\n"
    "\n"
-   "May those who attempt to stop it have godspeed, or Lithium shall forever rain from the skies.";
+   "それを封鎖できる程の幸運に恵まれた者が現れるか、あるいは永遠なるLithiumの雨が宇宙から降り注ぐか。";
 
 /* EOF*/
