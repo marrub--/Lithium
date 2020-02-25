@@ -43,12 +43,12 @@ enum
 
 struct tokbuf
 {
-   __prop get   {call: TBufGet  (this)}
-   __prop peek  {call: TBufPeek (this)}
-   __prop unget {call: TBufUnGet(this)}
-   __prop reget {call: TBufReGet(this)}
-   __prop back  {call: TBufBack (this)}
-   __prop drop  {call: TBufDrop (this)}
+   __prop get   {operator(): TBufGet  (this)}
+   __prop peek  {operator(): TBufPeek (this)}
+   __prop unget {operator(): TBufUnGet(this)}
+   __prop reget {operator(): TBufReGet(this)}
+   __prop back  {operator(): TBufBack (this)}
+   __prop drop  {operator(): TBufDrop (this)}
 
    struct origin orig;
 

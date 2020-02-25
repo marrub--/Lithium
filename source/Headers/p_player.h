@@ -156,34 +156,34 @@ struct player_delta
 struct player
 {
    /* data */
-   __prop mana          {get:  PtrInvNum(->tid, so_MagicAmmo)}
-   __prop manamax       {get:  ACS_GetMaxInventory(->tid, so_MagicAmmo)}
-   __prop health        {get: GetPropI(->tid, APROP_Health),
-                         set: SetPropI(->tid, APROP_Health)}
-   __prop setActivator  {call: ACS_SetActivator(->tid)}
-   __prop getVel        {call: mag2k(->velx, ->vely)}
-   __prop grabInput     {get: GetMembI(->tid, sm_GrabInput),
-                         set: SetMembI(->tid, sm_GrabInput)}
-   __prop onground      {get: GetMembI(->tid, sm_OnGround)}
-   __prop waterlevel    {get: GetPropI(->tid, APROP_Waterlevel)}
-   __prop classname     {get:  GetPropS(->tid, APROP_NameTag)}
+   __prop mana          {default: PtrInvNum(->tid, so_MagicAmmo)}
+   __prop manamax       {default: ACS_GetMaxInventory(->tid, so_MagicAmmo)}
+   __prop health        {default:   GetPropI(->tid, APROP_Health),
+                         operator=: SetPropI(->tid, APROP_Health)}
+   __prop setActivator  {operator(): ACS_SetActivator(->tid)}
+   __prop getVel        {operator(): mag2k(->velx, ->vely)}
+   __prop grabInput     {default:   GetMembI(->tid, sm_GrabInput),
+                         operator=: SetMembI(->tid, sm_GrabInput)}
+   __prop onground      {default: GetMembI(->tid, sm_OnGround)}
+   __prop waterlevel    {default: GetPropI(->tid, APROP_Waterlevel)}
+   __prop classname     {default: GetPropS(->tid, APROP_NameTag)}
 
    /* cvars */
-   __prop getCVarI {call: ACS_GetUserCVar      (->num)}
-   __prop getCVarK {call: ACS_GetUserCVarFixed (->num)}
-   __prop getCVarS {call: ACS_GetUserCVarString(->num)}
-   __prop setCVarI {call: ACS_SetUserCVar      (->num)}
-   __prop setCVarK {call: ACS_SetUserCVarFixed (->num)}
-   __prop setCVarS {call: ACS_SetUserCVarString(->num)}
+   __prop getCVarI {operator(): ACS_GetUserCVar      (->num)}
+   __prop getCVarK {operator(): ACS_GetUserCVarFixed (->num)}
+   __prop getCVarS {operator(): ACS_GetUserCVarString(->num)}
+   __prop setCVarI {operator(): ACS_SetUserCVar      (->num)}
+   __prop setCVarK {operator(): ACS_SetUserCVarFixed (->num)}
+   __prop setCVarS {operator(): ACS_SetUserCVarString(->num)}
 
    /* log */
-   __prop logB {call: P_Log_Both(this)}
-   __prop logF {call: P_Log_Full(this)}
-   __prop logH {call: P_Log_HUDs(this)}
+   __prop logB {operator(): P_Log_Both(this)}
+   __prop logF {operator(): P_Log_Full(this)}
+   __prop logH {operator(): P_Log_HUDs(this)}
 
    /* upgrades */
-   __prop getUpgr       {call: P_Upg_GetNamed(this)}
-   __prop getUpgrActive {call: P_Upg_IsActive(this)}
+   __prop getUpgr       {operator(): P_Upg_GetNamed(this)}
+   __prop getUpgrActive {operator(): P_Upg_IsActive(this)}
 
    /* Initialization */
    bool wasinit;

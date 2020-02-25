@@ -49,9 +49,9 @@ size_t ListSize(struct list *head);
 
 struct list
 {
-   __prop link   {call: ListLink(__arg, this)}
-   __prop unlink {call: ListUnlink(this)}
-   __prop size   {call: ListSize(this)}
+   __prop link   {operator(): ListLink(..., this)}
+   __prop unlink {operator(): ListUnlink(this)}
+   __prop size   {operator(): ListSize(this)}
 
    void *object;
    struct list *prev, *next;
