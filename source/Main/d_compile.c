@@ -110,7 +110,7 @@ void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 
    Dlg_GetStmt(d);
 
-   if(act) Dlg_PushLdVA(d, act);
+   if(act != ACT_NONE) Dlg_PushLdVA(d, act);
    Dlg_PushB1(d, DCD_BRK_NP);
 }
 
@@ -170,7 +170,7 @@ bool Dlg_GetTop(struct compiler *d)
    Expect(d, tok, tok_identi);
 
    if(faststrcmp(tok->textV, "program") == 0)
-      Dlg_GetTop_Prog(d, 0, DNUM_PRG_BEG, DNUM_PRG_END);
+      Dlg_GetTop_Prog(d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
    else if(faststrcmp(tok->textV, "dialogue") == 0)
       Dlg_GetTop_Prog(d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
    else if(faststrcmp(tok->textV, "terminal") == 0)
