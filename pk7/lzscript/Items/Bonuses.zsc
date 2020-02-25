@@ -7,6 +7,416 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_Coin : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 50;
+      Lith_BasicPickup.LogName "Coin", 2;
+      Inventory.PickupSound "player/pickup/coin";
+      Scale 0.3;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR H -1 bright;
+      stop;
+   }
+}
+
+class Lith_ScoreChip : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 200;
+      Lith_BasicPickup.LogName "ScoreChip", 2;
+      Lith_BasicPickup.InfoPage "ScoreChip";
+      Inventory.PickupSound "player/pickup/scorechip";
+      Scale 0.4;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR I -1 bright;
+      stop;
+   }
+}
+
+class Lith_Ruby : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 300;
+      Lith_BasicPickup.LogName "Ruby", 2;
+      Inventory.PickupSound "player/pickup/gem";
+      Scale 0.3;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR C -1 bright;
+      stop;
+   }
+}
+
+class Lith_Sapphire : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 300;
+      Lith_BasicPickup.LogName "Sapphire", 2;
+      Inventory.PickupSound "player/pickup/gem";
+      Scale 0.4;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR D -1 bright;
+      stop;
+   }
+}
+
+class Lith_Amethyst : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 200;
+      Lith_BasicPickup.LogName "Amethyst", 2;
+      Inventory.PickupSound "player/pickup/gem";
+      Scale 0.3;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR E -1 bright;
+      stop;
+   }
+}
+
+class Lith_Diamond : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 1000;
+      Lith_BasicPickup.LogName "Diamond", 2;
+      Inventory.PickupSound "player/pickup/gem";
+      Scale 0.4;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR F -1 bright;
+      stop;
+   }
+}
+
+class Lith_Emerald : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 400;
+      Lith_BasicPickup.LogName "Emerald", 2;
+      Inventory.PickupSound "player/pickup/gem";
+      Scale 0.4;
+      Radius 10;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR G -1 bright;
+      stop;
+   }
+}
+
+class Lith_Scheelite : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 15000;
+      Lith_BasicPickup.LogName "Scheelite", 2;
+      Inventory.PickupSound "player/pickup/material";
+      Scale 0.5;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR J -1 bright;
+      stop;
+   }
+}
+
+class Lith_Nambulite : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 15000;
+      Lith_BasicPickup.LogName "Nambulite", 2;
+      Inventory.PickupSound "player/pickup/material";
+      Scale 0.5;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR K -1 bright;
+      stop;
+   }
+}
+
+class Lith_Lepidolite : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 30000;
+      Lith_BasicPickup.LogName "Lepidolite", 2;
+      Inventory.PickupSound "player/pickup/material";
+      Scale 0.5;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR L -1 bright;
+      stop;
+   }
+}
+
+class Lith_Petalite : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 30000;
+      Lith_BasicPickup.LogName "Petalite", 2;
+      Inventory.PickupSound "player/pickup/material";
+      Scale 0.5;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR N -1 bright;
+      stop;
+   }
+}
+
+class Lith_Tourmaline : Lith_ScoreItem
+{
+   default
+   {
+      Lith_ScoreItem.Score 30000;
+      Lith_BasicPickup.LogName "Tourmaline", 2;
+      Inventory.PickupSound "player/pickup/material";
+      Scale 0.5;
+      Radius 12;
+
+      +LITH_BASICPICKUP.VACUUM
+   }
+
+   states
+   {
+   Spawn:
+      SCOR M -1 bright;
+      stop;
+   }
+}
+
+class Lith_HealthBonus1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_HealthBonusVial";
+   }
+}
+
+class Lith_HealthBonus2 : Lith_HealthBonus1
+{
+   default
+   {
+      Lith_MultiSpawner.Amount 2;
+   }
+}
+
+class Lith_Coin2 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Coin";
+      Lith_MultiSpawner.Amount 2;
+   }
+}
+
+class Lith_Coin5 : Lith_Coin2
+{
+   default
+   {
+      Lith_MultiSpawner.Amount 5;
+   }
+}
+
+class Lith_ScoreChip1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_ScoreChip";
+   }
+}
+
+class Lith_ScoreChip2 : Lith_ScoreChip1
+{
+   default
+   {
+      Lith_MultiSpawner.Amount 2;
+   }
+}
+
+class Lith_Radio1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Radio";
+   }
+}
+
+class Lith_Radio2 : Lith_Radio1
+{
+   default
+   {
+      Lith_MultiSpawner.Amount 2;
+   }
+}
+
+class Lith_BoxOfAmmo1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_BoxOfAmmo";
+   }
+}
+
+class Lith_Ruby4 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Ruby";
+      Lith_MultiSpawner.Amount 4;
+   }
+}
+
+class Lith_Sapphire4 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Sapphire";
+      Lith_MultiSpawner.Amount 4;
+   }
+}
+
+class Lith_Amethyst6 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Amethyst";
+      Lith_MultiSpawner.Amount 6;
+   }
+}
+
+class Lith_Diamond1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Diamond";
+   }
+}
+
+class Lith_Emerald2 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Emerald";
+      Lith_MultiSpawner.Amount 2;
+   }
+}
+
+class Lith_Scheelite1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Scheelite";
+   }
+}
+
+class Lith_Nambulite1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Nambulite";
+   }
+}
+
+class Lith_Lepidolite1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Lepidolite";
+   }
+}
+
+class Lith_Petalite1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Petalite";
+   }
+}
+
+class Lith_Tourmaline1 : Lith_MultiSpawner
+{
+   default
+   {
+      Lith_MultiSpawner.Type "Lith_Tourmaline";
+   }
+}
+
 class Lith_HealthBonusVial : Lith_BasicPickup
 {
    default

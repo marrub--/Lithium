@@ -7,6 +7,216 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_AllMap : Lith_CustomInventory replaces Allmap
+{
+   default
+   {
+      Tag "Computer Area Map";
+      Inventory.PickupSound "player/pickup/allmap";
+      Lith_CustomInventory.InfoPage "AllMap";
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      PMAP ABCDCB 6 bright;
+      loop;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "AllMap");
+      TNT1 A 0 A_GiveInventory("MapRevealer");
+      stop;
+   }
+}
+
+class Lith_Berserk : Lith_CustomInventory replaces Berserk
+{
+   default
+   {
+      Tag "Berserk";
+      Inventory.PickupSound "player/pickup/berserk";
+      Lith_CustomInventory.InfoPage "Berserk";
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      PSTR A -1;
+      stop;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "Berserk");
+      TNT1 A 0 A_GiveInventory("PowerStrength");
+      TNT1 A 0 HealThing(100, 0);
+      stop;
+   }
+}
+
+class Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
+{
+   default
+   {
+      Tag "Barrier";
+      DropItem "Lith_BlurSphere", 255, 9998;
+      DropItem "Lith_SteggleSphere", 255, 1;
+      DropItem "Lith_ShobonSphere", 255, 1;
+   }
+}
+
+class Lith_Infrared : Lith_CustomInventory replaces Infrared
+{
+   default
+   {
+      Tag "CB-Goggles";
+      Inventory.PickupSound "player/pickup/infrared";
+      Lith_CustomInventory.InfoPage "Infrared";
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      PVIS A 6 bright;
+      PVIS B 6;
+      loop;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "Infrared");
+      TNT1 A 0 A_GiveInventory("Lith_PowerLightAmp");
+      stop;
+   }
+}
+
+class Lith_InvulnerabilitySphereSprite : Lith_MagicSphereItemSprite
+{
+   default {Lith_AnimItemSprite.Phases 24;}
+   states {SetSpr: PINV AAAAAABBBBBBCCCCCCDDDDDD 0 Lith_A_JumpPhase; stop;}
+}
+
+class Lith_MegasphereSprite : Lith_MagicSphereItemSprite
+{
+   default {Lith_AnimItemSprite.Phases 30;}
+   states {SetSpr: MEGA AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase; stop;}
+}
+
+class Lith_BlurSphereSprite : Lith_MagicSphereItemSprite
+{
+   default {Lith_AnimItemSprite.Phases 36; +VISIBILITYPULSE}
+   states {SetSpr: PINS AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 0 Lith_A_JumpPhase; stop;}
+}
+
+class Lith_Megasphere : Lith_CustomInventory replaces Megasphere
+{
+   default
+   {
+      Tag "Tao'chyan";
+      Inventory.PickupSound "player/pickup/mega";
+      Lith_CustomInventory.InfoPage "Taochyan";
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_MegasphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 4, "Megasphere");
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 200);
+      TNT1 A 0 A_GiveInventory("Lith_MegaProtection", 100);
+      stop;
+   }
+}
+
+class Lith_RadSuit : Lith_CustomInventory replaces RadSuit
+{
+   default
+   {
+      Tag "Radiation Shielding Suit";
+      Inventory.PickupSound "player/pickup/radsuit";
+      Lith_CustomInventory.InfoPage "RadSuit";
+
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      SUIT A -1 bright;
+      stop;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "Radsuit");
+      TNT1 A 0 A_GiveInventory("Lith_PowerIronFeet");
+      stop;
+   }
+}
+
+class Lith_SoulSphereSprite : Lith_MagicSphereItemSprite
+{
+   default {Lith_AnimItemSprite.Phases 30;}
+   states {SetSpr: SOUL AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase; stop;}
+}
+
+class Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
+{
+   default
+   {
+      Tag "Heart";
+      Inventory.PickupSound "player/pickup/super";
+      Lith_CustomInventory.InfoPage "Heart";
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_SoulSphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 4, "Soulsphere");
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 100);
+      stop;
+   }
+}
+
+class Lith_ArtiFly : Lith_CustomInventory replaces ArtiFly
+{
+   default
+   {
+      Tag "Wings of Wrath";
+      Inventory.PickupFlash "PickupFlash";
+      Inventory.PickupSound "misc/p_pkup";
+      Inventory.RespawnTics 4320;
+
+      +COUNTITEM
+      +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   states
+   {
+   Spawn:
+      SOAR ABCB 5;
+      loop;
+   Pickup:
+      TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiFly");
+      TNT1 A 0 A_GiveInventory("PowerFlight");
+      stop;
+   }
+}
+
 class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
 {
    default
