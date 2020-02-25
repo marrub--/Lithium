@@ -25,6 +25,8 @@
 "LITH_CHARGE_FMT" = "%.1lkkV\cjチャージ";
 "LITH_MANA_CHARGE" = "[マナ補給中]";
 
+"SECRETMESSAGE" = "\cnシークレットを解き明かした!";
+
 /* Obituaries ----------------------------------------------------------------|*/
 "LITH_OB_S_FatMac" = "%oの肩身がマウントから落ちた。";
 "LITH_OB_S_Explosion" = "%oは爆発した。";
@@ -75,6 +77,92 @@
 "LITH_OB_Default_3" = "%oが盤上から掻っ攫われた。";
 "LITH_OB_Default_4" = "%o自身を非人間化させた。";
 "LITH_OB_Default_5" = "%oが消えた。";
+
+/* Menus ---------------------------------------------------------------------|*/
+"MENU_CHOOSECLASS" = "オマエのクラスは";
+"MENU_WHICHEPISODE" = "オマエの物語は";
+"MENU_CHOOSESKILL" = "オマエのスキルは";
+
+"DIFF_TOURIST" = "> ただのツアーだよ。";
+"DIFF_EASY" = "> 手伝ってくれ。";
+"DIFF_NORMAL" = "> 存分にやってくれ。";
+"DIFF_HARD" = "> ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!";
+"DIFF_XHARD" = "> おれを死ぬの見れよ!";
+"DIFF_NMARE" = "> 狂乱悪夢!";
+
+"PLYRMNU_PRESSSPACE" = "\cjスペースキー\c-で";
+"PLYRMNU_SEEFRONT" = "で前面を表示。";
+"PLYRMNU_SEEBACK" = "で背面を表示。";
+
+"OPTVAL_MALE" = "男性";
+"OPTVAL_FEMALE" = "女性";
+"OPTVAL_NEUTRAL" = "Xジェンダー";
+"OPTVAL_OTHER" = "他の性別";
+
+"OPTVAL_OFF" = "[オフ]";
+"OPTVAL_ON" = "[オン]";
+"OPTVAL_AUTO" = "[自動]";
+
+"SAFEMESSAGE" = ">>> [[[よろしいですか?]]] <<<";
+
+"CNTRLMNU_ALTATTACK" = "セカンダリ・ズーム";
+"CNTRLMNU_RELOAD" = "リロード";
+"CNTRLMNU_RUN" = "脱出・走る";
+"CNTRLMNU_USER1" = "ウェポンアクション";
+"CNTRLMNU_USER4" = "スペシャルアクション";
+"CNTRLMNU_SAY" = "申す";
+"CNTRLMNU_TEAMSAY" = "チームに申す";
+"CNTRLMNU_AUTOMAP" = "オートマップ";
+"CNTRLMNU_CHASECAM" = "はた";
+"CNTRLMNU_COOPSPY" = "他者視点";
+"CNTRLMNU_CONSOLE" = "コンソールを開く";
+"CNTRLMNU_ZOOM" = "\cm[不用]ズーム";
+"CNTRLMNU_TOGGLERUN" = "\cm[不用]走るトグル";
+"CNTRLMNU_USER2" = "\cm[不用]アクション２";
+"CNTRLMNU_USER3" = "\cm[不用]アクション３";
+"CNTRLMNU_USEITEM" = "\cm[不用]アイテムを使用";
+"CNTRLMNU_USEALLITEMS" = "\cm[不用]すべてのアイテムを使用";
+"CNTRLMNU_NEXTITEM" = "\cm[不用]次のアイテム";
+"CNTRLMNU_PREVIOUSITEM" = "\cm[不用]前のアイテム";
+"CNTRLMNU_DROPITEM" = "\cm[不用]アイテムを捨てて";
+"CNTRLMNU_QUERYITEM" = "\cm[不用]アイテムを表示";
+"CNTRLMNU_DROPWEAPON" = "\cm[不用]武器を捨てて";
+"CNTRLMNU_MISSION" = "\cm[不用]クエスト";
+"CNTRLMNU_KEYS" = "\cm[不用]キーリスト";
+"CNTRLMNU_STATS" = "\cm[不用]状態";
+
+"LITH_SKILL_TOURIST" =
+   "本気か?このスキルが\n"
+   "面白さそうぞ。";
+
+"LITH_SKILL_EXTRAHARD" =
+   "よいか?これが\n"
+   "エクストラハードだよ。";
+
+"LITH_SKILL_NIGHTMARE" =
+   "よいか?これ以上、\n"
+   "正気がなくなる。";
+
+"DOSY" = "(Yで終了。)";
+"PRESSYN" = "YかNで押してください。";
+"PRESSKEY" = "どのキーを押してください。";
+
+"TXT_YES" = "[はい]";
+"TXT_NO" = "[いいえ]";
+
+"LITH_CTRL_ACTIONS" = "Lithiumのアクション";
+"LITH_CTRL_OPENCBI" = "CBIを開ける";
+"LITH_CTRL_ZOOMIN" = "ズームイン";
+"LITH_CTRL_ZOOMOUT" = "ズームアウト";
+"LITH_CTRL_GLARE" = "睨み";
+
+"LITH_CLASS_MARINE" = "ﾏﾘｰﾝ";
+"LITH_CLASS_CYBERMAGE" = "ｻｲﾊﾞﾒｲｼﾞ";
+"LITH_CLASS_INFORMANT" = "ｲﾝﾌｫｰﾏﾝﾄ";
+"LITH_CLASS_ASSASSIN" = "ｱｻｼﾝ";
+"LITH_CLASS_DARKLORD" = "ﾀﾞｰｸﾛｰﾄﾞ";
+"LITH_CLASS_WANDERER" = "ﾜﾝﾀﾞﾗｰ";
+"LITH_CLASS_THOTH" = "ﾄｰﾄ";
 
 /* Misc_QuitMessages.txt stub*/
 

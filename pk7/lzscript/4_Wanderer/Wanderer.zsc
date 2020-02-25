@@ -11,7 +11,7 @@ class Lith_WandererPlayer : Lith_Player
 {
    default
    {
-      Player.DisplayName "Wanderer";
+      Player.DisplayName "$LITH_CLASS_WANDERER";
       Player.SoundClass "wanderer";
       Player.Portrait "lgfx/Portraits/Wanderer.png";
       Tag "Wanderer";

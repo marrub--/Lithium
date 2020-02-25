@@ -14,7 +14,7 @@ class Lith_DarkLordPlayer : Lith_Player
       Health 200;
       Lith_Player.ViewBob 0.4;
       Player.AttackZOffset 17;
-      Player.DisplayName "Dark Lord";
+      Player.DisplayName "$LITH_CLASS_DARKLORD";
       Player.ForwardMove 1, 0.5;
       Player.MaxHealth 200;
       Player.Portrait "lgfx/Portraits/DarkLord.png";

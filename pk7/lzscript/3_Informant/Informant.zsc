@@ -11,7 +11,7 @@ class Lith_InformantPlayer : Lith_Player
 {
    default
    {
-      Player.DisplayName "Informant";
+      Player.DisplayName "$LITH_CLASS_INFORMANT";
       Player.SoundClass "informant";
       Player.Portrait "lgfx/Portraits/Informant.png";
       Player.ViewHeight 44;

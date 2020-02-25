@@ -28,7 +28,7 @@ gameinfo
    NoRandomPlayerClass     = true
    PauseSign               = "lgfx/Pause.png"
    PickupColor             = "#A0F3A0"
-   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer"/*, "Lith_InformantPlayer", "Lith_WandererPlayer", "Lith_AssassinPlayer"*/,  "Lith_DarkLordPlayer"/*, "Lith_ThothPlayer"*/
+   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer", "Lith_InformantPlayer", "Lith_WandererPlayer", "Lith_AssassinPlayer",  "Lith_DarkLordPlayer", "Lith_ThothPlayer"
    PrecacheSounds          = "amb/rain", "amb/wind"
    QuitSound               = "misc/quitsound"
    StatScreen_Single       = "Lith_STATUS"

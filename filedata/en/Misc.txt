@@ -181,3 +181,17 @@ This one isn't even remotely fair.
 
 == TXT_YES | [Yes]
 == TXT_NO  | [No]
+
+== \#CTRL_ACTIONS | Lithium Actions
+== \#CTRL_OPENCBI | Open CBI
+== \#CTRL_ZOOMIN  | Zoom In
+== \#CTRL_ZOOMOUT | Zoom Out
+== \#CTRL_GLARE   | Glare
+
+== \#CLASS_MARINE    | Marine
+== \#CLASS_CYBERMAGE | Cyber-Mage
+== \#CLASS_INFORMANT | Informant
+== \#CLASS_ASSASSIN  | Assassin
+== \#CLASS_DARKLORD  | Dark Lord
+== \#CLASS_WANDERER  | Wanderer
+== \#CLASS_THOTH     | Thoth

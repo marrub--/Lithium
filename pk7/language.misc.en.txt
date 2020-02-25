@@ -198,6 +198,20 @@
 "TXT_YES" = "[Yes]";
 "TXT_NO" = "[No]";
 
+"LITH_CTRL_ACTIONS" = "Lithium Actions";
+"LITH_CTRL_OPENCBI" = "Open CBI";
+"LITH_CTRL_ZOOMIN" = "Zoom In";
+"LITH_CTRL_ZOOMOUT" = "Zoom Out";
+"LITH_CTRL_GLARE" = "Glare";
+
+"LITH_CLASS_MARINE" = "Marine";
+"LITH_CLASS_CYBERMAGE" = "Cyber-Mage";
+"LITH_CLASS_INFORMANT" = "Informant";
+"LITH_CLASS_ASSASSIN" = "Assassin";
+"LITH_CLASS_DARKLORD" = "Dark Lord";
+"LITH_CLASS_WANDERER" = "Wanderer";
+"LITH_CLASS_THOTH" = "Thoth";
+
 /* Quit Messages -------------------------------------------------------------|*/
 "QUITMSG1" = "Hold it, your contract isn't complete yet!";
 "QUITMSG2" = "I got nothing.";

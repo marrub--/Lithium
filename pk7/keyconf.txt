@@ -7,11 +7,11 @@
 // ---------------------------------------------------------------------------|
 
 // Key Sections --------------------------------------------------------------|
-addkeysection "Lithium Actions" Lithium
-addmenukey "Open CBI" lith_k_opencbi
-addmenukey "Zoom In"  lith_k_zoomin
-addmenukey "Zoom Out" lith_k_zoomout
-addmenukey "Glare" lith_k_glare
+addkeysection "$LITH_CTRL_ACTIONS" Lithium
+addmenukey "$LITH_CTRL_OPENCBI" lith_k_opencbi
+addmenukey "$LITH_CTRL_ZOOMIN"  lith_k_zoomin
+addmenukey "$LITH_CTRL_ZOOMOUT" lith_k_zoomout
+addmenukey "$LITH_CTRL_GLARE"   lith_k_glare
 
 // Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"

@@ -12,7 +12,7 @@ class Lith_MarinePlayer : Lith_Player
    default
    {
       Player.AttackZOffset 15;
-      Player.DisplayName "Marine";
+      Player.DisplayName "$LITH_CLASS_MARINE";
       Player.Portrait "lgfx/Portraits/Marine.png";
       Player.SoundClass "marine";
       Player.ViewHeight 48;
