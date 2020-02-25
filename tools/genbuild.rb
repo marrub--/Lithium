@@ -14,27 +14,34 @@
 require 'set'
 
 def hash s
-   res = 0
-   s.each_codepoint{|ch| res = res * 101 + ch; res &= 0x7FFFFFFF}
-   res
+	res = 0
+	s.each_codepoint{|ch| res = res * 101 + ch; res &= 0x7FFFFFFF}
+	res
 end
+
+LIB_PATH      = (ENV["LIB_PATH"] ? "--lib-path='#{ENV["LIB_PATH"]}'" : "")
+ALL_FLAGS     = ENV["ALL_FLAGS"] || ""
+MAKELIB_FLAGS = (ENV["MAKELIB_FLAGS"] || "") + ALL_FLAGS + LIB_PATH
+CC_FLAGS      = (ENV["CC_FLAGS"]      || "") + ALL_FLAGS + LIB_PATH
+LD_FLAGS      = (ENV["LD_FLAGS"]      || "") + ALL_FLAGS
 
 `rm -f build.ninja .ninja_deps .ninja_log`
 
-SRC    = "s"
-HDR    = "h"
-IR     = "i"
-TARGET = "t"
-WARN   = "w"
-LFLAGS = "l"
-CFLAGS = "c"
-HASH   = "x"
-STA    = "z"
-TYPE   = "z"
-DLITH  = "y"
-DDTAP  = "d"
-INITSC = "j"
+SRC    = "a"
+HDR    = "b"
+IR     = "c"
+TARGET = "d"
+WARN   = "e"
+LFLAGS = "f"
+CFLAGS = "g"
+HASH   = "h"
+STA    = "i"
+TYPE   = "j"
+DLITH  = "k"
+DDTAP  = "l"
+INITSC = "m"
 NUMOUT = "n"
+MFLAGS = "o"
 
 UPGCIN = "$#{HDR}/u_names.h $#{SRC}/p_upgrinfo.c $#{HDR}/u_func.h"
 WEPCIN = "$#{HDR}/p_weapons.h $#{SRC}/p_weaponinfo.c"
@@ -55,45 +62,46 @@ fp << <<_end_
 #{IR    } = bin
 #{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
-#{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay
-#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{ARGV.join " "}
+#{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay #{LD_FLAGS}
+#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{ARGV.join " "} #{CC_FLAGS}
+#{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
 #{DLITH } = -DLITHIUM=1
 #{DDTAP } = -DDOUBLETAP=1
 #{INITSC} = --bc-zdacs-init-script-name
 
 rule cc
-   command = gdcc-cc $#{CFLAGS} -DFileHash=$#{HASH} -c $in -o $out
-   description = CC $out
+ command = gdcc-cc $#{CFLAGS} -DFileHash=$#{HASH} -c $in -o $out
+ description = CC $out
 rule makelib
-   command = gdcc-makelib $#{TARGET} -c $#{TYPE} -o $out
-   description = MakeLib $out
+ command = gdcc-makelib $#{MFLAGS} -c $#{TYPE} -o $out
+ description = MakeLib $out
 rule ld
-   command = gdcc-ld $#{LFLAGS} --alloc-min Sta "" $#{STA} $in -o $out --bc-zdacs-dump-ScriptI $#{NUMOUT} --func-minimum ScriptI 17000
-   description = LD $out
+ command = gdcc-ld $#{LFLAGS} --alloc-min Sta "" $#{STA} $in -o $out --bc-zdacs-dump-ScriptI $#{NUMOUT} --func-minimum ScriptI 17000
+ description = LD $out
 rule fs
-   command = tools/hashfs.rb #{HSFSIN}
-   description = HashFS
+ command = tools/hashfs.rb #{HSFSIN}
+ description = HashFS
 rule text
-   command = cd filedata; ../tools/compilefs.rb #{TEXTIN}
-   description = CompileFS
+ command = cd filedata; ../tools/compilefs.rb #{TEXTIN}
+ description = CompileFS
 rule dec
-   command = tools/decompat.rb $in
-   description = DeCompat
+ command = tools/decompat.rb $in
+ description = DeCompat
 rule gettf
-   command = tools/gettf.sh
-   description = Getting ttfuck
+ command = tools/gettf.sh
+ description = Getting ttfuck
 rule font
-   command = rm -f pk7/lgfx/Font/*/*.png; tools/mkfont.rb
-   description = Font (remember to run PNGGauntlet!)
+ command = rm -f pk7/lgfx/Font/*/*.png; tools/mkfont.rb
+ description = Font
 rule wepc
-   command = tools/wepc.rb $in $out
-   description = WepC
+ command = tools/wepc.rb $in $out
+ description = WepC
 rule upgc
-   command = tools/upgc.rb $in $out
-   description = UpgC
+ command = tools/upgc.rb $in $out
+ description = UpgC
 rule monc
-   command = tools/monc.rb $in $out
-   description = MonC
+ command = tools/monc.rb $in $out
+ description = MonC
 
 build tools/ttfuck/ttfuck.exe: gettf
 build fs: fs | tools/hashfs.rb
@@ -104,45 +112,45 @@ build #{WEPCIN}: wepc source/Weapons.txt | tools/wepc.rb
 build #{UPGCIN}: upgc source/Upgrades.txt | tools/upgc.rb
 build #{MONCIN}: monc source/Monsters.txt | tools/monc.rb
 build $#{IR}/libc.ir: makelib
-   #{TYPE} = libc
+ #{TYPE} = libc
 build $#{IR}/libGDCC.ir: makelib
-   #{TYPE} = libGDCC
+ #{TYPE} = libGDCC
 _end_
 
 inputs_lithium = []
 inputs_doubletap = []
 
 for f in Dir["source/Main/*"]
-   f.replace File.basename f
-   fp << <<~_end_
-   build $#{IR}/lithium/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
-      #{HASH  } = #{hash f}
-      #{CFLAGS} = $#{CFLAGS} $#{DLITH}
-   build $#{IR}/doubletap/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
-      #{HASH  } = #{hash f}
-      #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
-   _end_
-   inputs_lithium   << "$#{IR}/lithium/#{f}.ir"
-   inputs_doubletap << "$#{IR}/doubletap/#{f}.ir"
+	f.replace File.basename f
+	fp << <<~_end_
+	build $#{IR}/lithium/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+	 #{HASH  } = #{hash f}
+	 #{CFLAGS} = $#{CFLAGS} $#{DLITH}
+	build $#{IR}/doubletap/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+	 #{HASH  } = #{hash f}
+	 #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
+	_end_
+	inputs_lithium   << "$#{IR}/lithium/#{f}.ir"
+	inputs_doubletap << "$#{IR}/doubletap/#{f}.ir"
 end
 
 fp << <<_end_
 build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
-   #{LFLAGS} = $#{LFLAGS} -llithlib $#{INITSC} "lithmain@gsinit"
-   #{STA   } = 1400000
-   #{NUMOUT} = $#{IR}/lithmain_ld.txt
+ #{LFLAGS} = $#{LFLAGS} -llithlib $#{INITSC} "lithmain@gsinit"
+ #{STA   } = 1400000
+ #{NUMOUT} = $#{IR}/lithmain_ld.txt
 build pk7/acs/lithlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
-   #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithlib@gsinit"
-   #{STA   } = 70000
-   #{NUMOUT} = $#{IR}/lithlib_ld.txt
+ #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithlib@gsinit"
+ #{STA   } = 70000
+ #{NUMOUT} = $#{IR}/lithlib_ld.txt
 build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join " "}
-   #{LFLAGS} = $#{LFLAGS} -ldtlib $#{INITSC} "dtmain@gsinit"
-   #{STA   } = 1400000
-   #{NUMOUT} = $#{IR}/dtmain_ld.txt
+ #{LFLAGS} = $#{LFLAGS} -ldtlib $#{INITSC} "dtmain@gsinit"
+ #{STA   } = 1400000
+ #{NUMOUT} = $#{IR}/dtmain_ld.txt
 build pk7_dt/acs/dtlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
-   #{LFLAGS} = $#{LFLAGS} $#{INITSC} "dtlib@gsinit"
-   #{STA   } = 70000
-   #{NUMOUT} = $#{IR}/dtlib_ld.txt
+ #{LFLAGS} = $#{LFLAGS} $#{INITSC} "dtlib@gsinit"
+ #{STA   } = 70000
+ #{NUMOUT} = $#{IR}/dtlib_ld.txt
 build doubletap: phony dec text fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
 
