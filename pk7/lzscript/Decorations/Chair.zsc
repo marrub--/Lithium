@@ -7,11 +7,23 @@
  * ---------------------------------------------------------------------------|
  */
 
-actor Lith_MagicAmmo  : Ammo {Inventory.MaxAmount 1000}
-actor Lith_BulletAmmo : Ammo {Inventory.MaxAmount 500}
-actor Lith_ShellAmmo  : Ammo {Inventory.MaxAmount 60}
-actor Lith_RocketAmmo : Ammo {Inventory.MaxAmount 200}
-actor Lith_PlasmaAmmo : Ammo {Inventory.MaxAmount 14000}
-actor Lith_CannonAmmo : Ammo {Inventory.MaxAmount 40}
+class Lith_Chair : Actor
+{
+   default
+   {
+      /*$Category "Decoration" */
+
+      Height 32;
+      Radius 20;
+      Scale 0.7;
+   }
+
+   states
+   {
+   Spawn:
+      CHAI A -1;
+      stop;
+   }
+}
 
 /* EOF */

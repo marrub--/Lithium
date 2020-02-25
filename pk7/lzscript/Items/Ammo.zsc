@@ -1,0 +1,17 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_MagicAmmo  : Ammo {default {Inventory.MaxAmount 1000;}}
+class Lith_BulletAmmo : Ammo {default {Inventory.MaxAmount 500;}}
+class Lith_ShellAmmo  : Ammo {default {Inventory.MaxAmount 60;}}
+class Lith_RocketAmmo : Ammo {default {Inventory.MaxAmount 200;}}
+class Lith_PlasmaAmmo : Ammo {default {Inventory.MaxAmount 14000;}}
+class Lith_CannonAmmo : Ammo {default {Inventory.MaxAmount 40;}}
+
+/* EOF */

@@ -7,7 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#include "lscripts/Items/Ammo.dec"
 #include "lscripts/Items/Bonuses.dec"
 #include "lscripts/Items/CBIStuff.dec"
 #include "lscripts/Items/DivisionSigil.dec"

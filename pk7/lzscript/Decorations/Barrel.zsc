@@ -1,0 +1,38 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
+{
+   default
+   {
+      Health 60;
+      PainChance 255;
+      PainSound "misc/barrel/hit";
+   }
+
+   states
+   {
+   Spawn:
+      BAR1 ABCDEFGHIJKLM 2;
+      loop;
+   Pain:
+      BAR1 X 5 A_Pain;
+      goto Spawn;
+   }
+}
+
+class Lith_BoomBarrel : ExplosiveBarrel
+{
+   default
+   {
+      DeathSound "misc/booom";
+   }
+}
+
+/* EOF */

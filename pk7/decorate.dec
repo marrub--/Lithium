@@ -10,11 +10,9 @@
 #include "lscripts/Constants.dec"
 
 #include "lscripts/Misc.dec"
-#include "lscripts/Effects.dec"
 #include "lscripts/Items.dec"
 #include "lscripts/Weapons.dec"
 #include "lscripts/Player.dec"
 #include "lscripts/Monsters.dec"
-#include "lscripts/Decorations.dec"
 
 /* EOF */

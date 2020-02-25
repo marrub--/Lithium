@@ -48,4 +48,49 @@ class Lith_Nuke : Lith_CustomFunction
    }
 }
 
+class Lith_PlayerDeathParticle : Actor
+{
+   default
+   {
+      RenderStyle "Subtract";
+
+      +THRUACTORS
+      +NOGRAVITY
+      +BOUNCEONWALLS
+      +BOUNCEONCEILINGS
+      +NOTELEPORT
+      +BRIGHT
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A random(3, 10);
+      LDTH AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SetScale(frandom(0.15, 0.2));
+      LDTH A 1 A_FadeOut(0.01);
+      wait;
+   }
+}
+
+class Lith_PlayerDeathParticle2 : Actor
+{
+   default
+   {
+      RenderStyle "Subtract";
+      Scale 0.2;
+
+      +NOINTERACTION
+      +BRIGHT
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A random(3, 10);
+      LDTH AAAA 12 A_FadeOut(0.1);
+      LDTH AAAA 4 A_FadeOut(0.1);
+      stop;
+   }
+}
+
 /* EOF */

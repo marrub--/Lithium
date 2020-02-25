@@ -7,6 +7,138 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_CasingSmoke : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Alpha 0.6;
+      Scale 0.02;
+
+      Projectile;
+      +NOINTERACTION
+      +NOTELEPORT
+      +THRUACTORS
+      +DROPOFF
+      +FLOORCLIP
+      +FORCEXYBILLBOARD
+   }
+
+   states
+   {
+   Spawn:
+      SMOK C random(2, 5);
+      SMOK DEFGH 4 A_FadeOut(FRandom(0.05, 0.15));
+      stop;
+   }
+}
+
+class Lith_CasShell : Lith_CasingBase
+{
+   default
+   {
+      Scale 0.26;
+      BounceFactor 0.5;
+      WallBounceFactor 0.4;
+      BounceCount 5;
+      BounceSound "casings/shell/bounce";
+   }
+
+   states
+   {
+   Spawn1:
+      SCAS AABBCCDDEEFFGGHH 1;
+      loop;
+   Death:
+      TNT1 A 0 A_PlaySound("casings/shell/die");
+      SHDY ABCDEF 0 A_Jump(64, "Done");
+      goto Done;
+   }
+}
+
+class Lith_CasShellHot : Lith_CasShell
+{
+   states
+   {
+   Spawn1:
+      TNT1 A 0;
+      SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+   Spawn2:
+      SCAS ABCDEFGH 1;
+      loop;
+   }
+}
+
+class Lith_CasSmall : Lith_CasingBase
+{
+   default
+   {
+      Scale 0.11;
+      BounceFactor 0.5;
+      WallBounceFactor 0.4;
+      BounceCount 4;
+      BounceSound "casings/bullet/bounce";
+   }
+
+   states
+   {
+   Spawn1:
+      BCAS ABCDEFGH 1;
+      loop;
+   Death:
+      TNT1 A 0 A_PlaySound("casings/bullet/die");
+      BCAS KGIJ 0 A_Jump(64, "Done");
+      goto Done;
+   }
+}
+
+class Lith_CasSmallHot : Lith_CasSmall
+{
+   states
+   {
+   Spawn1:
+      TNT1 A 0;
+      BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+   Spawn2:
+      BCAS ABCDEFGH 1;
+      loop;
+   }
+}
+
+class Lith_CasBig : Lith_CasingBase
+{
+   default
+   {
+      Scale 0.11;
+      BounceFactor 0.5;
+      WallBounceFactor 0.4;
+      BounceCount 4;
+      BounceSound "casings/bullet/bounce";
+   }
+
+   states
+   {
+   Spawn1:
+      BBCA ABCDEFGH 1;
+      loop;
+   Death:
+      TNT1 A 0 A_PlaySound("casings/bullet/die");
+      BBCA CG 0 A_Jump(128, "Done");
+      goto Done;
+   }
+}
+
+class Lith_CasBigHot : Lith_CasBig
+{
+   states
+   {
+   Spawn1:
+      TNT1 A 0;
+      BBCA ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0, 0, 3);
+      loop;
+   }
+}
+
 class Lith_CasingBase : Actor;
 
 default

@@ -8,6 +8,5 @@
  */
 
 #include "lscripts/Player/Misc.dec"
-#include "lscripts/Player/Death.dec"
 
 /* EOF */

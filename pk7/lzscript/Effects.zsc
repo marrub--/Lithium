@@ -9,12 +9,14 @@
 
 #include "lzscript/Effects/Blood.zsc"
 #include "lzscript/Effects/BulletPuff.zsc"
+#include "lzscript/Effects/Casings.zsc"
 #include "lzscript/Effects/Death.zsc"
+#include "lzscript/Effects/DynamicLights.zsc"
+#include "lzscript/Effects/GunSmoke.zsc"
 #include "lzscript/Effects/ItemSprite.zsc"
 #include "lzscript/Effects/Magazine.zsc"
-#include "lzscript/Effects/Casings.zsc"
-#include "lzscript/Effects/GunSmoke.zsc"
 #include "lzscript/Effects/Rain.zsc"
-#include "lzscript/Effects/DynamicLights.zsc"
+#include "lzscript/Effects/Splashes.zsc"
+#include "lzscript/Effects/TeleFog.zsc"
 
 /* EOF */

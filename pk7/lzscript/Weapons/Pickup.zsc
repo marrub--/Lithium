@@ -1,0 +1,191 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_FistPickup : Lith_WeaponPickup replaces Fist
+{
+   default
+   {
+      Lith_Pickup.Sprite "FISTA";
+      Tag "Fist Pickup";
+
+      +LITH_PICKUP.GENERIC
+   }
+}
+
+class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPA";
+      Lith_Pickup.SpriteM "CFISZ";
+      Lith_Pickup.SpriteC "CFISY";
+
+      Tag "Chainsaw Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chainsaw);
+      stop;
+   }
+}
+
+class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPB";
+      Lith_Pickup.SpriteM "PISTA";
+      Lith_Pickup.SpriteC "REVLA";
+
+      Tag "Pistol Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_pistol);
+      stop;
+   }
+}
+
+class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPC";
+      Lith_Pickup.SpriteM "SHOTA";
+      Lith_Pickup.SpriteC "CSRGZ";
+
+      Tag "Shotgun Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_shotgun);
+      stop;
+   }
+}
+
+class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPC";
+      Lith_Pickup.SpriteM "SSGGX";
+      Lith_Pickup.SpriteC "CSHGY";
+
+      Tag "Super Shotgun Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_supershotgun);
+      stop;
+   }
+}
+
+class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPD";
+      Lith_Pickup.SpriteM "RIFLA";
+      Lith_Pickup.SpriteC "CSMGY";
+
+      Tag "Chaingun Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chaingun);
+      stop;
+   }
+}
+
+class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPE";
+      Lith_Pickup.SpriteM "LAUNA";
+      Lith_Pickup.SpriteC "IONGZ";
+
+      Tag "Rocket Launcher Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_rocketlauncher);
+      stop;
+   }
+}
+
+class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPF";
+      Lith_Pickup.SpriteM "PLASA";
+      Lith_Pickup.SpriteC "CPLGZ";
+
+      Tag "Plasma Rifle Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_plasmarifle);
+      stop;
+   }
+}
+
+class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000
+{
+   default
+   {
+      Lith_Pickup.Sprite  "LWEPG";
+      Lith_Pickup.SpriteM "BFUGA";
+      Lith_Pickup.SpriteC "SDSGZ";
+
+      Tag "BFG9000 Pickup";
+   }
+
+   states
+   {
+   Pickup:
+      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_bfg9000);
+      stop;
+   }
+}
+
+class Lith_WeaponPickup : Lith_Pickup;
+
+default
+{
+   Lith_Pickup.Glow "Lith_WeapGlow";
+}
+
+states
+{
+Spawn:
+   TNT1 A 0;
+   TNT1 A 0 A_CheckFlag("DROPPED", "Null");
+   goto SpawnLoop;
+Pickup:
+   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_fist);
+   stop;
+}
+
+/* EOF */

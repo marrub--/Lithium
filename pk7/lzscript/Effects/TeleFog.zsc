@@ -7,28 +7,31 @@
  * ---------------------------------------------------------------------------|
  */
 
-actor Lith_TeleFogRing
+class Lith_TeleFogRing : Actor
 {
-   RenderStyle "Add"
-   
-   +NOINTERACTION
-   +BRIGHT
-   
-   States
+   default
+   {
+      RenderStyle "Add";
+
+      +NOINTERACTION
+      +BRIGHT
+   }
+
+   states
    {
    Spawn:
-      TELE AAAAA 2 A_FadeOut
-      stop
+      TELE AAAAA 2 A_FadeOut;
+      stop;
    }
 }
 
-actor Lith_P67TeleFog : TeleportFog replaces TeleportFog
+class Lith_P67TeleFog : TeleportFog replaces TeleportFog
 {
-   States
+   states
    {
    Spawn:
-      TNT1 AAAA 5 nodelay A_SpawnItemEx("Lith_TeleFogRing", 0,0,0, 0,0,4)
-      stop
+      TNT1 AAAA 5 nodelay A_SpawnItemEx("Lith_TeleFogRing", 0,0,0, 0,0,4);
+      stop;
    }
 }
 
