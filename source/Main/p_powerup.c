@@ -99,7 +99,7 @@ void Sc_GetSigil(void)
       p->sgacquired = true;
 
       ACS_Thing_Remove(InvNum(so_DivisionSigilSpriteTID));
-      InvTake(so_DivisionSigilSpriteTID, INT_MAX);
+      InvTake(so_DivisionSigilSpriteTID, INT32_MAX);
 
       if(dbglevel) return;
 

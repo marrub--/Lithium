@@ -258,7 +258,7 @@ static void MInit(void)
    #endif
 
    /* Init a random seed from the map. */
-   mapseed = ACS_Random(0, INT_MAX);
+   mapseed = ACS_Random(0, INT32_MAX);
 
    /* Init global score multiplier per-map. */
    scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;

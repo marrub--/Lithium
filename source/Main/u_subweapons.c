@@ -24,7 +24,7 @@ void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr)
       {
          ACS_LocalAmbientSound(ss_weapons_subweapon_charge, 127);
          InvGive(so_SubweaponShots, 1);
-         InvTake(so_SubweaponCharge, INT_MAX);
+         InvTake(so_SubweaponCharge, INT32_MAX);
       }
       else
          InvGive(so_SubweaponCharge, 1);

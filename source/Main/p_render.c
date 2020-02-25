@@ -273,7 +273,7 @@ static void StringStack(struct player *p)
    {
       struct hudstr *hudstr = Salloc(struct hudstr);
       ListCtor(&hudstr->link, hudstr);
-      hudstr->s = StrParam("%.8X", ACS_Random(INT_MIN + 1, INT_MAX));
+      hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
 
       hudstr->link.link(&p->hudstrlist);
 
