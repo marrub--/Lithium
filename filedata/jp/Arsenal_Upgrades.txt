@@ -1,13 +1,13 @@
 ## Body ----------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDisp | HUD
-@@ \#UPGRADE_EFFEC_HeadsUpDisp
+== \#UPGRADE_TITLE_HeadsUpDisM | HUD
+@@ \#UPGRADE_EFFEC_HeadsUpDisM
 重要な情報を表示。
 
 機械脳技術/コンピューターに組み込まれたヘッドアップ ディスプレイ プログラム。
 
 ##----------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDis2 | $\#UPGRADE_TITLE_HeadsUpDisp
-@@ \#UPGRADE_EFFEC_HeadsUpDis2
+== \#UPGRADE_TITLE_HeadsUpDisC | $\#UPGRADE_TITLE_HeadsUpDisM
+@@ \#UPGRADE_EFFEC_HeadsUpDisC
 生体情報を表示。
 
 HUDプログラムです。

@@ -15,7 +15,7 @@
 
 #include <math.h>
 
-#define UData UData_Zoom(upgr)
+#define UData p->upgrdata.zoom
 
 /* Extern Functions -------------------------------------------------------- */
 

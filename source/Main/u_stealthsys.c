@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_StealthSys(upgr)
+#define UData p->upgrdata.stealthsys
 
 /* Extern Functions -------------------------------------------------------- */
 

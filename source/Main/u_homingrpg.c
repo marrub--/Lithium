@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData UData_HomingRPG(upgr)
+#define UData p->upgrdata.homingrpg
 
 /* Static Functions -------------------------------------------------------- */
 

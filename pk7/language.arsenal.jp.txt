@@ -70,15 +70,15 @@
 
 
 /* Body ----------------------------------------------------------------------|*/
-"LITH_UPGRADE_TITLE_HeadsUpDisp" = "HUD";
-"LITH_UPGRADE_EFFEC_HeadsUpDisp" =
+"LITH_UPGRADE_TITLE_HeadsUpDisM" = "HUD";
+"LITH_UPGRADE_EFFEC_HeadsUpDisM" =
    "重要な情報を表示。"
    "\n\n"
    "機械脳技術/コンピューターに組み込まれたヘッドアップ ディスプレイ プログラム。";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_UPGRADE_TITLE_HeadsUpDis2" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
-"LITH_UPGRADE_EFFEC_HeadsUpDis2" =
+"LITH_UPGRADE_TITLE_HeadsUpDisC" = "$LITH_UPGRADE_TITLE_HeadsUpDisM";
+"LITH_UPGRADE_EFFEC_HeadsUpDisC" =
    "生体情報を表示。"
    "\n\n"
    "HUDプログラムです。";

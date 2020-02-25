@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_ReactArmor(upgr)
+#define UData p->upgrdata.reactarmor
 
 /* Static Objects ---------------------------------------------------------- */
 

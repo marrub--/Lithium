@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData UData_Magic(upgr)
+#define UData p->upgrdata.magic
 
 /* Types ------------------------------------------------------------------- */
 

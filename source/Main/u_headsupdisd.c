@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * HeadsUpDis3 upgrade.
+ * HeadsUpDisD upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -87,19 +87,19 @@ static void HUD_Health(struct player *p)
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall
-void Upgr_HeadsUpDis3_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisD_Activate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = true;
 }
 
 stkcall
-void Upgr_HeadsUpDis3_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisD_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = false;
 }
 
 stkcall
-void Upgr_HeadsUpDis3_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->dlg.active) return;
 

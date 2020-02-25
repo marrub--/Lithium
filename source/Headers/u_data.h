@@ -19,19 +19,6 @@
 #define UPGR_STATIC_MAX 80
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
 
-#define CastUData(u) ((struct upgr_data *)(u)->dataptr)
-#define UData_Adrenaline(u)  (CastUData(u)->u01)
-#define UData_JetBooster(u)  (CastUData(u)->u03)
-#define UData_lolsords(u)    (CastUData(u)->u04)
-#define UData_ReactArmor(u)  (CastUData(u)->u05)
-#define UData_ReflexWetw(u)  (CastUData(u)->u06)
-#define UData_VitalScan(u)   (CastUData(u)->u07)
-#define UData_Zoom(u)        (CastUData(u)->u08)
-#define UData_HomingRPG(u)   (CastUData(u)->u09)
-#define UData_Magic(u)       (CastUData(u)->u10)
-#define UData_StealthSys(u)  (CastUData(u)->u11)
-#define UData_HeadsUpDisp(u) (CastUData(u)->u13)
-
 enum
 {
    UC_Body,
@@ -122,22 +109,22 @@ struct upgr_data_StealthSys {
    k32 mulvel;
 };
 
-struct upgr_data_HeadsUpDisp {
+struct upgr_data_HeadsUpDisM {
    i32 cr;
 };
 
 struct upgr_data {
-   struct upgr_data_Adrenaline  u01;
-   struct upgr_data_JetBooster  u03;
-   struct upgr_data_lolsords    u04;
-   struct upgr_data_ReactArmor  u05;
-   struct upgr_data_ReflexWetw  u06;
-   struct upgr_data_VitalScan   u07;
-   struct upgr_data_Zoom        u08;
-   struct upgr_data_HomingRPG   u09;
-   struct upgr_data_Magic       u10;
-   struct upgr_data_StealthSys  u11;
-   struct upgr_data_HeadsUpDisp u13;
+   struct upgr_data_Adrenaline  adrenaline;
+   struct upgr_data_JetBooster  jetbooster;
+   struct upgr_data_lolsords    lolsords;
+   struct upgr_data_ReactArmor  reactarmor;
+   struct upgr_data_ReflexWetw  reflexwetw;
+   struct upgr_data_VitalScan   vitalscan;
+   struct upgr_data_Zoom        zoom;
+   struct upgr_data_HomingRPG   homingrpg;
+   struct upgr_data_Magic       magic;
+   struct upgr_data_StealthSys  stealthsys;
+   struct upgr_data_HeadsUpDisM headsupdism;
 };
 
 struct upgradeinfo {
@@ -165,8 +152,6 @@ bool P_Upg_Toggle(struct player *p, struct upgrade *upgr);
 void P_Upg_SetOwned(struct player *p, struct upgrade *upgr);
 
 struct upgrade {
-   void *dataptr;
-
    struct upgrade *next, **prev;
 
    struct upgradeinfo const *info;

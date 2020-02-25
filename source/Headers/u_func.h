@@ -14,20 +14,20 @@
 
 #include "u_func_beg.h"
 
-Case(HeadsUpDisp)
-   A(HeadsUpDisp)
-   D(HeadsUpDisp)
-   R(HeadsUpDisp)
+Case(HeadsUpDisM)
+   A(HeadsUpDisM)
+   D(HeadsUpDisM)
+   R(HeadsUpDisM)
 
-Case(HeadsUpDis2)
-   A(HeadsUpDis2)
-   D(HeadsUpDis2)
-   R(HeadsUpDis2)
+Case(HeadsUpDisC)
+   A(HeadsUpDisC)
+   D(HeadsUpDisC)
+   R(HeadsUpDisC)
 
-Case(HeadsUpDis3)
-   A(HeadsUpDis3)
-   D(HeadsUpDis3)
-   R(HeadsUpDis3)
+Case(HeadsUpDisD)
+   A(HeadsUpDisD)
+   D(HeadsUpDisD)
+   R(HeadsUpDisD)
 
 Case(JetBooster)
    A(JetBooster)

@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * HeadsUpDisp upgrade.
+ * HeadsUpDisM upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-#define UData UData_HeadsUpDisp(upgr)
+#define UData p->upgrdata.headsupdism
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -127,19 +127,19 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall
-void Upgr_HeadsUpDisp_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisM_Activate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = true;
 }
 
 stkcall
-void Upgr_HeadsUpDisp_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisM_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->hudenabled = false;
 }
 
 stkcall
-void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
 {
    if(p->dlg.active) return;
 

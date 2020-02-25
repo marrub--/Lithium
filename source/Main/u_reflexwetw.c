@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_ReflexWetw(upgr)
+#define UData p->upgrdata.reflexwetw
 
 #define CHARGE_MAX (35 * 0.8)
 
@@ -68,7 +68,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
 
       if(p->buttons & BT_SPEED && (p->onground ||
          !p->getUpgrActive(UPGR_JetBooster) ||
-         UData_JetBooster(p->getUpgr(UPGR_JetBooster)).discharged))
+         p->upgrdata.jetbooster.discharged))
       {
          k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 

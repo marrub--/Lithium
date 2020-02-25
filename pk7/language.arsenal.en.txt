@@ -82,15 +82,15 @@
 
 
 /* Body ----------------------------------------------------------------------|*/
-"LITH_UPGRADE_TITLE_HeadsUpDisp" = "Heads Up Disp.";
-"LITH_UPGRADE_EFFEC_HeadsUpDisp" =
+"LITH_UPGRADE_TITLE_HeadsUpDisM" = "Heads Up Disp.";
+"LITH_UPGRADE_EFFEC_HeadsUpDisM" =
    "Shows vital information."
    "\n\n"
    "A Heads Up Display program built into your Computer/Brain Interface.";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_UPGRADE_TITLE_HeadsUpDis2" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
-"LITH_UPGRADE_EFFEC_HeadsUpDis2" =
+"LITH_UPGRADE_TITLE_HeadsUpDisC" = "$LITH_UPGRADE_TITLE_HeadsUpDisM";
+"LITH_UPGRADE_EFFEC_HeadsUpDisC" =
    "Shows vital information."
    "\n\n"
    "A Heads Up Display program.";

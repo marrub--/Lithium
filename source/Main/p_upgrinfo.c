@@ -19,9 +19,9 @@ StrEntON
 /* Extern Objects ---------------------------------------------------------- */
 
 struct upgradeinfo const upgrinfobase[UPGR_BASE_MAX] = {
-   {{"HeadsUpDisp", "HeadsUpDisp", 0}, pM|pX, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDisp},
-   {{"HeadsUpDis2", "HeadsUpDisp", 0}, pC, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDis2},
-   {{"HeadsUpDis3", "HeadsUpDisp", 0}, pD, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDis3},
+   {{"HeadsUpDisM", "HeadsUpDisp", 0}, pM|pX, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDisM},
+   {{"HeadsUpDisC", "HeadsUpDisp", 0}, pC, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDisC},
+   {{"HeadsUpDisD", "HeadsUpDisp", 0}, pD, UC_Body, 1, UG_HUD, 0, -.05, UPGR_HeadsUpDisD},
    {{"JetBooster", "JetBooster", 0}, pM, UC_Body, 0, 0, 0, -.05, UPGR_JetBooster},
    {{"ReflexWetw", "ReflexWetw", 0}, gO|pX, UC_Body, 5, 0, 0, -.05, UPGR_ReflexWetw},
    {{"Zoom", 0, 0}, gA, UC_Body, 0, 0, 0, 0, UPGR_Zoom},

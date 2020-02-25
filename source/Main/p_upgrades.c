@@ -56,12 +56,6 @@ static i32 CompUpgrInfo(void const *lhs, void const *rhs)
    else        return u1->key - u2->key;
 }
 
-stkcall
-static void SetDataPtr(struct player *p, struct upgrade *upgr)
-{
-   upgr->dataptr = &p->upgrdata;
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
 struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr)
@@ -78,8 +72,6 @@ void Upgr_MInit(void)
       struct upgradeinfo *ui = &g_upgrinfo[i];
 
       /* Set up static function pointers */
-      ui->Init = SetDataPtr; /* this is set again by UpgrReinit */
-
       ui->ShopBuy    = UpgrShopBuy;
       ui->ShopCanBuy = UpgrCanBuy;
       ui->ShopGive   = UpgrGive;
@@ -138,7 +130,6 @@ void P_Upg_PInit(struct player *p)
    {
       struct upgrade *upgr = &p->upgrades[j];
 
-      g_upgrinfo[i].Init(p, upgr);
       upgr->info = &g_upgrinfo[i];
 
       p->upgrademap.insert(upgr);

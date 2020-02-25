@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_Adrenaline(upgr)
+#define UData p->upgrdata.adrenaline
 #define CHARGE_MAX (35 * 30)
 
 /* Extern Functions -------------------------------------------------------- */
@@ -52,7 +52,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
 {
-   if(!p->getUpgrActive(UPGR_HeadsUpDisp)) return;
+   if(!p->getUpgrActive(UPGR_HeadsUpDisM)) return;
 
    i32 timemod = p->ticks % 45;
    k64 amt = UData.charge / (k64)CHARGE_MAX;
@@ -68,4 +68,3 @@ void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
 }
 
 /* EOF */
-

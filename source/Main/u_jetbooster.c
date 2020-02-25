@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_JetBooster(upgr)
+#define UData p->upgrdata.jetbooster
 
 #define CHARGE_MAX (35 * 7)
 
@@ -44,7 +44,7 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
       P_SetVel(p, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
 
       UData.charge = 0;
-      UData_ReflexWetw(p->getUpgr(UPGR_ReflexWetw)).leaped = 0;
+      p->upgrdata.reflexwetw.leaped = 0;
    }
 }
 
@@ -74,4 +74,3 @@ void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
 }
 
 /* EOF */
-

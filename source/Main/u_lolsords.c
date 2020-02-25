@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData UData_lolsords(upgr)
+#define UData p->upgrdata.lolsords
 
 /* Extern Functions -------------------------------------------------------- */
 

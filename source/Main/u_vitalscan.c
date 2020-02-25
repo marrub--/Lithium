@@ -17,7 +17,7 @@
 
 #include <math.h>
 
-#define UData UData_VitalScan(upgr)
+#define UData p->upgrdata.vitalscan
 
 /* Extern Functions -------------------------------------------------------- */
 
