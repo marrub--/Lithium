@@ -14,9 +14,9 @@
 require 'set'
 
 def hash s
-	res = 0
-	s.each_codepoint{|ch| res = res * 101 + ch; res &= 0x7FFFFFFF}
-	res
+   res = 0
+   s.each_codepoint{|ch| res = res * 101 + ch; res &= 0x7FFFFFFF}
+   res
 end
 
 LIB_PATH      = (ENV["LIB_PATH"] ? "--lib-path='#{ENV["LIB_PATH"]}'" : "")
@@ -121,17 +121,17 @@ inputs_lithium = []
 inputs_doubletap = []
 
 for f in Dir["source/Main/*"]
-	f.replace File.basename f
-	fp << <<~_end_
-	build $#{IR}/lithium/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
-	 #{HASH  } = #{hash f}
-	 #{CFLAGS} = $#{CFLAGS} $#{DLITH}
-	build $#{IR}/doubletap/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
-	 #{HASH  } = #{hash f}
-	 #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
-	_end_
-	inputs_lithium   << "$#{IR}/lithium/#{f}.ir"
-	inputs_doubletap << "$#{IR}/doubletap/#{f}.ir"
+   f.replace File.basename f
+   fp << <<~_end_
+   build $#{IR}/lithium/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+    #{HASH  } = #{hash f}
+    #{CFLAGS} = $#{CFLAGS} $#{DLITH}
+   build $#{IR}/doubletap/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS}
+    #{HASH  } = #{hash f}
+    #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
+   _end_
+   inputs_lithium   << "$#{IR}/lithium/#{f}.ir"
+   inputs_doubletap << "$#{IR}/doubletap/#{f}.ir"
 end
 
 fp << <<_end_
