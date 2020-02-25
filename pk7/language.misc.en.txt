@@ -25,6 +25,12 @@
 "LITH_CHARGE_FMT" = "%.1lkkV \cjcharge";
 "LITH_MANA_CHARGE" = "[Siphoning Mana]";
 
+"LITH_DIV_SIGIL_GET" = "D I V I S I O N  S I G I L";
+"LITH_DIV_SIGIL_WARNING" =
+   "=== Warning ===\n"
+   "This item is unfathomably dangerous.\n"
+   "Use at the expense of your world.";
+
 "SECRETMESSAGE" = "\cnA secret is revealed!";
 
 "BGFLAT06" = "ZZLITHBG";

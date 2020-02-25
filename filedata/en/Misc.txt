@@ -9,6 +9,12 @@
 == \#CHARGE_FMT  | %.1lkkV \cjcharge
 == \#MANA_CHARGE | [Siphoning Mana]
 
+== \#DIV_SIGIL_GET | D I V I S I O N  S I G I L
+%% \#DIV_SIGIL_WARNING
+=== Warning ===
+This item is unfathomably dangerous.
+Use at the expense of your world.
+
 == SECRETMESSAGE | \cnA secret is revealed!
 
 == BGFLAT06 | ZZLITHBG

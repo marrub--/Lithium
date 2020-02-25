@@ -110,17 +110,15 @@ void Sc_GetSigil(void)
 
       ACS_Delay(3);
 
-      ACS_SetFont(s_dbigfont);
       ACS_BeginPrint();
-      ACS_PrintString(st_div_get);
+      ACS_PrintLocalized(st_div_get);
       ACS_MoreHudMessage();
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.5, TS * 5, 0.3);
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.0, TS * 6, 0.3);
 
-      ACS_SetFont(s_dbigfont);
       ACS_BeginPrint();
-      ACS_PrintString(st_div_warning);
+      ACS_PrintLocalized(st_div_warning);
       ACS_MoreHudMessage();
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TS * 2, 0.3);
+      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TS * 7, 0.3);
 
       ACS_Delay(35 * 7);
 
