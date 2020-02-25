@@ -45,6 +45,7 @@ LITH_X(gR, pcl_robot)
 #include "p_attrib.h"
 #include "p_sys.h"
 #include "items.h"
+#include "d_vm.h"
 
 #include <GDCC/HashMap.h>
 
@@ -119,7 +120,8 @@ struct player_delta
    k32 alpha;
    i96 score;
    u32 maxhealth;
-   u32 indialogue;
+
+   struct dlg_start_info dlg;
 
    /* Position */
    k32 x, y, z;
@@ -199,7 +201,6 @@ struct player
    i32 pclass;
    str pcstr;
    i32 pronoun;
-   u32 dlgnum;
    i32 fun;
    cstr discrim;
 

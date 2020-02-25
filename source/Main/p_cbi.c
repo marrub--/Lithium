@@ -131,7 +131,7 @@ void P_CBI_PTick(struct player *p)
 
    G_Begin(g, 320, 240);
 
-   if(!p->indialogue) G_UpdateState(g, p);
+   if(!p->dlg.active) G_UpdateState(g, p);
 
    ACS_BeginPrint();
    PrintChrSt(g->gfxprefix);

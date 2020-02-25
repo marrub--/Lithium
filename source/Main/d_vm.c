@@ -17,6 +17,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 #include "d_vm.h"
+#include "d_compile.h"
 #include "w_world.h"
 
 /* Types ------------------------------------------------------------------- */
@@ -88,6 +89,11 @@ Vec_Decl(char, text, static);
 
 static vm_action actions[] = {
    #define ACT(name) &Act##name,
+   #include "d_vm.h"
+};
+
+static cstr const action_names[] = {
+   #define ACT(name) #name,
    #include "d_vm.h"
 };
 
@@ -219,9 +225,31 @@ local u32 StaB2_G() {return MemB2_G(STA_BEG + IncSP(2));}
 local void StaB1_S(u32 v) {MemB1_S(STA_BEG + DecSP(1),     v);}
 local void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
+/* trace */
+local void TraceReg()
+{
+   printf("PC:%04X SP:%02X VA:%02X "
+          "AC:%02X RX:%02X RY:%02X SR:%02X\n",
+          GetPC(), GetSP(), GetVA(),
+          GetAC(), GetRX(), GetRY(), GetSR());
+}
+
 /* jumps */
-#define JmpVI goto *cases[MemI1_G()] /* jump next byte       */
-#define JmpHL goto halt              /* jump halt            */
+#define JmpVI { \
+      /* jump next byte */ \
+      u32 next = MemI1_G(); \
+      if(dbglevel & log_dlg) { \
+         Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
+         putc(' ', stdout); \
+         TraceReg(); \
+      } \
+      goto *cases[next]; \
+   }
+
+#define JmpHL { \
+      /* jump halt */ \
+      goto halt; \
+   }
 
 /* VM action auxiliary */
 script static void TerminalGUI(struct player *p, u32 act)
@@ -324,7 +352,7 @@ script static void TerminalGUI(struct player *p, u32 act)
 
    G_End(&gst, gui_curs_outlineinv);
 
-   if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.indialogue) {
+   if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.dlg.active) {
       ACS_LocalAmbientSound(ss_player_trmswitch, 127);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
    }
@@ -553,13 +581,13 @@ sync static void ActTRM_WAIT(struct player *p) {}
 /* Main dialogue VM. */
 script void Dlg_Run(struct player *p, u32 num)
 {
-   if(p->dead || p->indialogue > 1)
+   if(p->dead || p->dlg.active > 1)
       return;
 
    /* get the dialogue by number */
    register struct dlg_def lmvar *def = &dlgdefs[num];
 
-   p->indialogue++;
+   p->dlg.active++;
 
    if(!def->codeV) {
       Log("%s: dialogue %u has no code", __func__, num);
@@ -602,20 +630,13 @@ script void Dlg_Run(struct player *p, u32 num)
       #include "d_vm.h"
    };
 
-   u32 first_page = 0;
-
-   switch(mission) {
-      case _unfinished: first_page = DPAGE_UNFINISHED; break;
-      case _finished:   first_page = DPAGE_FINISHED;   break;
-      case _failure:    first_page = DPAGE_FAILURE;    break;
-   }
-
    /* all right, start the damn VM already! */
-   SetPC(PRG_BEG + def->pages[0]);
+   SetPC(PRG_BEG + def->pages[p->dlg.page]);
    JmpVI;
 
 vmaction:
-   while(ua = GetVA(), ua != ACT_NONE && ua < ACT_MAX) {
+   while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
+	   Dbg_Log(log_dlg, "action %02X %s", ua, action_names[ua]);
       actions[ua](p);
       switch(GetVA()) {
          case ACT_HALT: JmpHL;
@@ -937,12 +958,7 @@ INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI;
 
 /* Trace */
 TRR_NP:
-   Log("PC:%04X\tSP:%02X\tVA:%02X\n"
-       "AC:%02X\tRX:%02X\tRY:%02X\tSR:%02X\n"
-       "R1:%08X\tR2:%08X",
-       GetPC(), GetSP(), GetVA(),
-       GetAC(), GetRX(), GetRY(), GetSR(),
-       r1, r2);
+   TraceReg();
    JmpVI;
 
 TRS_NP:
@@ -1002,7 +1018,7 @@ halt:
 
    Vec_Clear(text);
 
-   p->indialogue -= 2;
+   p->dlg.active -= 2;
 }
 
 /* Scripts ----------------------------------------------------------------- */
@@ -1017,9 +1033,9 @@ script_str ext("ACS") addr("Lith_RunProgram")
 void Sc_RunProgram(i32 num)
 {
    with_player(LocalPlayer) {
-      if(!p->indialogue) {
-         p->dlgnum = DNUM_PRG_BEG + num;
-         p->indialogue++;
+      if(!p->dlg.active) {
+         p->dlg.num = DNUM_PRG_BEG + num;
+         p->dlg.active++;
       }
    }
 }
@@ -1028,9 +1044,10 @@ script_str ext("ACS") addr("Lith_RunDialogue")
 void Sc_RunDialogue(i32 num)
 {
    with_player(LocalPlayer) {
-      if(!p->indialogue) {
-         p->dlgnum = DNUM_DLG_BEG + num;
-         p->indialogue++;
+      if(!p->dlg.active) {
+         p->dlg.num = DNUM_DLG_BEG + num;
+         p->dlg.page = 0;
+         p->dlg.active++;
       }
    }
 }
@@ -1039,9 +1056,15 @@ script_str ext("ACS") addr("Lith_RunTerminal")
 void Sc_RunTerminal(i32 num)
 {
    with_player(LocalPlayer) {
-      if(!p->indialogue) {
-         p->dlgnum = DNUM_TRM_BEG + num;
-         p->indialogue++;
+      if(!p->dlg.active) {
+         switch(mission) {
+            case _unfinished: p->dlg.page = DPAGE_UNFINISHED; break;
+            case _finished:   p->dlg.page = DPAGE_FINISHED;   break;
+            case _failure:    p->dlg.page = DPAGE_FAILURE;    break;
+         }
+
+         p->dlg.num = DNUM_TRM_BEG + num;
+         p->dlg.active++;
       }
    }
 }

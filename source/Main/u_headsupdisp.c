@@ -141,7 +141,7 @@ void Upgr_HeadsUpDisp_Deactivate(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_HeadsUpDisp_Render(struct player *p, struct upgrade *upgr)
 {
-   if(p->indialogue) return;
+   if(p->dlg.active) return;
 
    HUD_Log(p, CR_GREEN, 0, 0);
 

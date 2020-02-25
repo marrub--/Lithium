@@ -96,7 +96,7 @@ void Upgr_HeadsUpDis2_Deactivate(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_HeadsUpDis2_Render(struct player *p, struct upgrade *upgr)
 {
-   if(p->indialogue) return;
+   if(p->dlg.active) return;
 
    HUD_Log(p, CR_RED, 0, -10);
    HUD_KeyInd(p, 180, 21, true, 0.8);

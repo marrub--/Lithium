@@ -133,9 +133,9 @@ reinit:
       ACS_Delay(1);
 
       #if LITHIUM
-      if(p->dlgnum) {
-         Dlg_Run(p, p->dlgnum);
-         p->dlgnum = 0;
+      if(p->dlg.num) {
+         Dlg_Run(p, p->dlg.num);
+         p->dlg.num = 0;
       }
       #endif
 

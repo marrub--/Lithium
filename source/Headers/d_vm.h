@@ -440,6 +440,12 @@ struct dlg_def {
    Vec_Decl(u32, stab);
 };
 
+struct dlg_start_info {
+   u32 active;
+   u32 page;
+   u32 num;
+};
+
 struct dcd_info {
    char name[7];
    u32  adrm;

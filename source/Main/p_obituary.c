@@ -46,21 +46,22 @@ void Sc_Obituary(void)
    noinit static char out[1024];
    char *pt = out;
 
-   for(astr s = obit; *s;)
-   {
+   for(astr s = obit; *s;) {
       cstr cs;
       str st;
       i32 len;
 
       if(s[0] == '%') switch(s[1]) {
-      case 'o': s += 2; st = p->name;                goto print_s;
-      case 'g': s += 2; cs = pronoun[p->pronoun][0]; goto print;
-      case 'h': s += 2; cs = pronoun[p->pronoun][1]; goto print;
-      case 'p': s += 2; cs = pronoun[p->pronoun][2]; goto print;
-      case 's': s += 2; cs = pronoun[p->pronoun][3]; goto print;
-      case 'r': s += 2; cs = pronoun[p->pronoun][4]; goto print;
-      print:   len =     strlen(cs);      strcpy(pt, cs); pt += len; continue;
-      print_s: len = ACS_StrLen(st); lstrcpy_str(pt, st); pt += len; continue;
+         case 'o': s += 2; st = p->name;                goto print_s;
+         case 'g': s += 2; cs = pronoun[p->pronoun][0]; goto print;
+         case 'h': s += 2; cs = pronoun[p->pronoun][1]; goto print;
+         case 'p': s += 2; cs = pronoun[p->pronoun][2]; goto print;
+         case 's': s += 2; cs = pronoun[p->pronoun][3]; goto print;
+         case 'r': s += 2; cs = pronoun[p->pronoun][4]; goto print;
+      print:
+         len =     strlen(cs);      strcpy(pt, cs); pt += len; continue;
+      print_s:
+         len = ACS_StrLen(st); lstrcpy_str(pt, st); pt += len; continue;
       }
 
       *pt++ = *s++;
