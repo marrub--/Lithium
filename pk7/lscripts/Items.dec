@@ -11,6 +11,5 @@
 #include "lscripts/Items/CBIStuff.dec"
 #include "lscripts/Items/DivisionSigil.dec"
 #include "lscripts/Items/Powerups.dec"
-#include "lscripts/Items/SteggleSphere.dec"
 
 /* EOF */

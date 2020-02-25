@@ -16,6 +16,8 @@
 
 #include "lzscript/Weapons/OutcastsWeapon.zsc"
 
+#include "lzscript/Weapons/Pickup.zsc"
+
 class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 
 class Lith_Weapon : Weapon;

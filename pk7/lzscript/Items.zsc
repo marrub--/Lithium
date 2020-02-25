@@ -23,5 +23,6 @@
 #include "lzscript/Items/Powerups.zsc"
 #include "lzscript/Items/RandomSpawn.zsc"
 #include "lzscript/Items/ScoreItem.zsc"
+#include "lzscript/Items/SteggleSphere.zsc"
 
 /* EOF */

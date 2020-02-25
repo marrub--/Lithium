@@ -11,8 +11,5 @@
 
 #include "lscripts/Misc.dec"
 #include "lscripts/Items.dec"
-#include "lscripts/Weapons.dec"
-#include "lscripts/Player.dec"
-#include "lscripts/Monsters.dec"
 
 /* EOF */
