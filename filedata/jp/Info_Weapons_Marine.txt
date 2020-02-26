@@ -1,5 +1,5 @@
 ## Marine --------------------------------------------------------------------|
-== \#INFO_SHORT_Fist | Knife
+== \#INFO_SHORT_Fist | ナイフ
 
 ##----------------------------------------------------------------------------|
 == \#INFO_SHORT_Pistol | ピストル
@@ -35,8 +35,8 @@
 翻訳なし
 
 ##----------------------------------------------------------------------------|
-== \#INFO_SHORT_SuperShotgun | Super Shotgun
 == \#INFO_SHORT_SuperShotgun | スーパーショットガン
+== \#INFO_TITLE_SuperShotgun | $\#INFO_SHORT_SuperShotgun
 @@ \#INFO_DESCR_SuperShotgun
 翻訳なし
 
@@ -85,7 +85,7 @@
 翻訳なし
 
 ##----------------------------------------------------------------------------|
-== \#INFO_TITLE_PlasmaUpgr | AllPoint 68-o Plasmatic Laser
+== \#INFO_TITLE_PlasmaUpgr | AllPoint 68-o プラズマチックレーザー
 @@ \#INFO_DESCR_PlasmaUpgr
 翻訳なし
 
@@ -100,11 +100,11 @@
 翻訳なし
 
 ##----------------------------------------------------------------------------|
-== \#INFO_TITLE_CannonUpgr | Omega Cannon: Punctuator Buffer
+== \#INFO_TITLE_CannonUpgr | オメガ砲：区切りバッファー
 @@ \#INFO_DESCR_CannonUpgr
 翻訳なし
 
 ##----------------------------------------------------------------------------|
-== \#INFO_TITLE_CannonUpg2 | Omega Cannon: Railgun
+== \#INFO_TITLE_CannonUpg2 | オメガ砲：レールガン
 @@ \#INFO_DESCR_CannonUpg2
 翻訳なし

@@ -34,7 +34,7 @@
 
 
 /* Cyber-Mage ----------------------------------------------------------------|*/
-"LITH_INFO_SHORT_CFist" = "Mana Siphon";
+"LITH_INFO_SHORT_CFist" = "マナ吸水管";
 
 /*----------------------------------------------------------------------------|*/
 "LITH_INFO_SHORT_Mateba" = "マテバ";
@@ -184,7 +184,7 @@
 
 
 /* Marine --------------------------------------------------------------------|*/
-"LITH_INFO_SHORT_Fist" = "Knife";
+"LITH_INFO_SHORT_Fist" = "ナイフ";
 
 /*----------------------------------------------------------------------------|*/
 "LITH_INFO_SHORT_Pistol" = "ピストル";
@@ -220,8 +220,8 @@
    "翻訳なし";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_SHORT_SuperShotgun" = "Super Shotgun";
 "LITH_INFO_SHORT_SuperShotgun" = "スーパーショットガン";
+"LITH_INFO_TITLE_SuperShotgun" = "$LITH_INFO_SHORT_SuperShotgun";
 "LITH_INFO_DESCR_SuperShotgun" =
    "翻訳なし";
 
@@ -270,7 +270,7 @@
    "翻訳なし";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_TITLE_PlasmaUpgr" = "AllPoint 68-o Plasmatic Laser";
+"LITH_INFO_TITLE_PlasmaUpgr" = "AllPoint 68-o プラズマチックレーザー";
 "LITH_INFO_DESCR_PlasmaUpgr" =
    "翻訳なし";
 
@@ -285,12 +285,12 @@
    "翻訳なし";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_TITLE_CannonUpgr" = "Omega Cannon: Punctuator Buffer";
+"LITH_INFO_TITLE_CannonUpgr" = "オメガ砲：区切りバッファー";
 "LITH_INFO_DESCR_CannonUpgr" =
    "翻訳なし";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_TITLE_CannonUpg2" = "Omega Cannon: Railgun";
+"LITH_INFO_TITLE_CannonUpg2" = "オメガ砲：レールガン";
 "LITH_INFO_DESCR_CannonUpg2" =
    "翻訳なし";
 
