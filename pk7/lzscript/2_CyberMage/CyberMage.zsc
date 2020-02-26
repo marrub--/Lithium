@@ -23,10 +23,10 @@ class Lith_CyberMagePlayer : Lith_Player
    override void GiveDefaultInventory()
    {
       Super.GiveDefaultInventory();
-      Lith_GiveDefWeapon("Lith_Mateba");
       Lith_GiveDefItem("Lith_CFist", 1);
       Lith_GiveDefItem("Lith_Delear", 1);
       Lith_GiveDefItem("Lith_Blade", 1);
+      Lith_GiveDefWeapon("Lith_Mateba");
    }
 }
 

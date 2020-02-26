@@ -22,8 +22,8 @@ class Lith_MarinePlayer : Lith_Player
    override void GiveDefaultInventory()
    {
       Super.GiveDefaultInventory();
-      Lith_GiveDefWeapon("Lith_Pistol");
       Lith_GiveDefItem("Lith_Fist", 1);
+      Lith_GiveDefWeapon("Lith_Pistol");
    }
 }
 
