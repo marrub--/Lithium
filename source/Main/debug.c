@@ -131,6 +131,8 @@ void Sc_DbgGiveMail(i32 num)
       s"Cluster1",
       s"Cluster2",
       s"Cluster3",
+      s"Secret1",
+      s"Secret2",
       s"Phantom",
       s"JamesDefeated",
       s"MakarovDefeated",
