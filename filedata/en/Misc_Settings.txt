@@ -93,7 +93,7 @@
 == \#scanner_bar     | Health bar
 == \#scanner_altfont | Alternate font
 
-== \#stx_world
+== \#stx_world | World
 
 == \#sv_rain | Rain in outside areas
 == \#sv_sky  | Replace skies

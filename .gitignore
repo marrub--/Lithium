@@ -7,3 +7,4 @@ bin/*
 *.wad.b*
 *.swp
 *.ninja*
+gzdoom-crash.log
