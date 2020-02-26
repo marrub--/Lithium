@@ -181,7 +181,7 @@ void P_Wep_PTick(struct player *p)
    switch(P_Wep_CurType(p))
    {
    case weapon_c_fist:
-      PrintTextA_str(L(st_mana_charge), s_cbifont, CR_BRICK, 160,0, 100,0, 0.5);
+      PrintTextA_str(L(st_mana_charge), s_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);
@@ -190,7 +190,7 @@ void P_Wep_PTick(struct player *p)
       __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.lk;)
       {
          PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
-         PrintText(s_cbifont, CR_LIGHTBLUE, 270,2, 200,2);
+         PrintText(s_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
    }

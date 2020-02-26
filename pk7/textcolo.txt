@@ -7,28 +7,23 @@
  * ---------------------------------------------------------------------------|
  */
 
-Lith_Grey
-{
+Lith_Grey {
    #3D3D3D #BFBFBF
 }
 
-Lith_Purple
-{
+Lith_Purple {
    #301875 #8C3BF8
 }
 
-Lith_Green
-{
+Lith_Green {
    #005000 #00FF00
 }
 
-Lith_Red
-{
+Lith_Red {
    #1F1F1F #BF0F4A
 }
 
-Lith_Blue
-{
+Lith_Blue {
    #111688 #3B47F8
 }
 

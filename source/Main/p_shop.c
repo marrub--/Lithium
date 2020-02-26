@@ -125,9 +125,9 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
    SetClipW(111, 30, 184, 150, 184);
 
    PrintTextFmt("%s %s\Cnscr", LC(LANG "COST"), scoresep(P_Shop_Cost(p, &item->shopdef)));
-   PrintText(s_cbifont, CR_WHITE, 111,1, 30,1);
+   PrintText(s_smallfnt, CR_WHITE, 111,1, 30,1);
 
-   PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_cbifont, CR_WHITE, 111,1, 40,1);
+   PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_smallfnt, CR_WHITE, 111,1, 40,1);
 
    ClearClip();
 

@@ -66,7 +66,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
          if(x < 0 || x > 320) continue;
 
          PrintTextChr(&points[i * 2], 2);
-         PrintText(s_cbifont, CR_WHITE, x,1, 120,0);
+         PrintText(s_smallfnt, CR_WHITE, x,1, 120,0);
       }
    }
 }

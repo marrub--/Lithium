@@ -36,7 +36,7 @@ static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
 {
    i32 n = 0;
 
-   PrintText_str(st_info_categories, s_cbifont, CR_PURPLE, 40,1, 70,1);
+   PrintText_str(st_info_categories, s_smallfnt, CR_PURPLE, 40,1, 70,1);
 
    bip->lastcategory = BIPC_MAIN;
 
@@ -47,7 +47,7 @@ static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
    };
 
    for(i32 i = 0; i < countof(lines); i++)
-      PrintTextA_str(lines[i], s_cbifont, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
+      PrintTextA_str(lines[i], s_smallfnt, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
 
    if(G_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
       bip->curcategory = BIPC_SEARCH;
@@ -139,7 +139,7 @@ static void SearchUI(struct gui_state *g, struct player *p, struct bip *bip)
       }
    }
    else
-      PrintText_str(st_no_results, s_cbifont, CR_DARKGREY, 70,0, 95,0);
+      PrintText_str(st_no_results, s_smallfnt, CR_DARKGREY, 70,0, 95,0);
 }
 
 static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
@@ -161,13 +161,13 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
 
    if(page->image) PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-   PrintText_str(pinf.flname, s_cbifont, CR_ORANGE, 200,4, 45 + oy,1);
+   PrintText_str(pinf.flname, s_smallfnt, CR_ORANGE, 200,4, 45 + oy,1);
 
    #define DrawText(txt, cr, x, y) \
       PrintTextStr(txt); \
       if(typeon->pos == typeon->len) {if(Ticker(true, false)) ACS_PrintString(st_nl_bar);} \
       else                                                    ACS_PrintChar('|'); \
-      PrintText(s_cbifont, cr, x,1, y+oy,1)
+      PrintText(s_smallfnt, cr, x,1, y+oy,1)
 
    /* render an outline if the page has an image */
    if(page->image)
@@ -250,13 +250,13 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p)
    else
    {
       PrintSpriteA(sp_UI_bip, 20,1, 40,1, 0.1);
-      PrintText_str(st_bip_header, s_cbifont, CR_WHITE, 35,1, 40,1);
+      PrintText_str(st_bip_header, s_smallfnt, CR_WHITE, 35,1, 40,1);
    }
 
    if(max)
    {
       PrintTextFmt("%i/%i AVAILABLE", avail, max);
-      PrintText(s_cbifont, CR_WHITE, 300,2, 30,1);
+      PrintText(s_smallfnt, CR_WHITE, 300,2, 30,1);
    }
 }
 

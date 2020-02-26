@@ -467,7 +467,7 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
       PrintTextFmt("%S <%i>\n", p->name, p->num);
       __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
       if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
-      PrintTextA(s_cbifont, CR_WHITE, x-9,1, y-2,1, a);
+      PrintTextA(s_smallfnt, CR_WHITE, x-9,1, y-2,1, a);
    }
 }
 

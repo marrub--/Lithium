@@ -20,7 +20,7 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
 {
    struct gui_txt *st = G_TextBox(g, &CBIState(g)->notebox, 48, 40, p);
 
-   PrintText_str(L(st_edit), s_cbifont, CR_WHITE, 32,2, 40,0);
+   PrintText_str(L(st_edit), s_smallfnt, CR_WHITE, 32,2, 40,0);
    G_BasicCheckbox(g, &CBIState(g)->noteedit, 39, 40);
 
    if(G_Button(g, LC(LANG "CLEAR"), 16, 48, Pre(btnclear)))
@@ -34,7 +34,7 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
          continue;
 
       PrintTextFmt(LC(LANG "NOTE_FMT"), i + 1);
-      PrintText(s_cbifont, CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
+      PrintText(s_smallfnt, CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
 
       if(G_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(LANG "EMPTY"),
          44, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))

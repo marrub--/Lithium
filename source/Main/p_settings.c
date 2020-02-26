@@ -225,7 +225,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
    y = 0;
 
 #define Label(label) \
-   PrintText_str(L(st_##label), s_cbifont, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1);
+   PrintText_str(L(st_##label), s_smallfnt, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1);
 
 #define Category(name) \
    if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
@@ -317,7 +317,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
          if(G_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(sc_##cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
-         PrintText(s_cbifont, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
+         PrintText(s_smallfnt, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
       } \
       y += 10; \
    } while(0)

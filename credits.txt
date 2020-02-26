@@ -105,7 +105,7 @@
 *                                  * Jimmy *
 
 *  Fonts! Pretty much all of 'em
-*  Added some missing characters to the CBIFONT for me (which he also made)
+*  Added some missing characters to the SMALLFNT for me (which he also made)
 *  Really, like, this guy is kind of crazy great
 *  Made the base MENUDEFs for me
 

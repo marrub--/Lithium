@@ -349,7 +349,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       i32 x_ = x[0];
       i32 y_ = y[0] + 60;
 
-      PrintText_str(sel->name, s_cbifont, CR_WHITE, x_,1, y_,1);
+      PrintText_str(sel->name, s_smallfnt, CR_WHITE, x_,1, y_,1);
       y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
@@ -369,7 +369,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       if(sel->scr)
       {
          PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
-         PrintText(s_cbifont, CR_WHITE, x_+18,1, y_,1);
+         PrintText(s_smallfnt, CR_WHITE, x_+18,1, y_,1);
       }
 
       if(G_Button(g, sel->scr ? "Sell" : "Discard", x_, y_, Pre(btnclear)))
@@ -381,11 +381,11 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
    }
 
    PrintTextFmt("Equipped (%S)", ServCallS(sm_GetArmorDT));
-   PrintText(s_cbifont, CR_WHITE, 40,1, 38,1);
+   PrintText(s_smallfnt, CR_WHITE, 40,1, 38,1);
 
    for(i32 i = 0; i < aslot_max; i++)
       ifw(str name = ServCallS(sm_GetArmorSlot, i), name != s_NIL)
-         PrintText_str(name, s_cbifont, CR_WHITE, 40,1, 45+7*i,1);
+         PrintText_str(name, s_smallfnt, CR_WHITE, 40,1, 45+7*i,1);
 }
 
 /* Scripts ----------------------------------------------------------------- */

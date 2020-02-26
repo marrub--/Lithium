@@ -72,7 +72,7 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
          .cact     = "r",
          .chot     = "k",
          .cdis     = "m",
-         .font     = s"cbifont",
+         .font     = s"smallfnt",
          .snd      = s"player/cbi/buttonpress",
          .external = true,
          .w        = 64,

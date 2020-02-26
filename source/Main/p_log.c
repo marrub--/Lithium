@@ -154,7 +154,7 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p)
 
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
-   PrintText_str(lm->name, s_cbifont, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
+   PrintText_str(lm->name, s_smallfnt, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
    G_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
 
@@ -165,7 +165,7 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p)
       if(G_ScrollOcclude(g, &CBIState(g)->logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
-      PrintText_str(lm->dataV[i].inf, s_cbifont, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
+      PrintText_str(lm->dataV[i].inf, s_smallfnt, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
    G_ScrollEnd(g, &CBIState(g)->logscr);

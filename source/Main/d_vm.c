@@ -378,7 +378,7 @@ script static void DialogueGUI(struct player *p)
    SetClipW(left, top, 263, 157, 263);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s\n\n\C-%.*s",
                 srem, CanonTime(ct_full), textC, textV);
-   PrintText(s_cbifont, CR_WHITE, left,1, top,1);
+   PrintText(s_smallfnt, CR_WHITE, left,1, top,1);
    ClearClip();
 
    u32 oc = MemB1_G(VAR_OPT_CNT);

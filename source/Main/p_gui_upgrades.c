@@ -45,7 +45,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
    }
    else
       PrintTextStr(st_filter_all);
-   PrintText(s_cbifont, CR_WHITE, 15,1, 215,1);
+   PrintText(s_smallfnt, CR_WHITE, 15,1, 215,1);
 
    G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
@@ -61,7 +61,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
-         PrintText_str(L(upgrcateg[curcategory]), s_cbifont, CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
+         PrintText_str(L(upgrcateg[curcategory]), s_smallfnt, CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
@@ -101,7 +101,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    #define Req(name) \
    { \
       static str const text = s"Requires " name "."; \
-      PrintText_str(text, s_cbifont, CR_RED, 111,1, 200 + y,2); \
+      PrintText_str(text, s_smallfnt, CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
 
@@ -125,7 +125,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else
          PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf); /* TODO */
 
-      PrintText(s_cbifont, CR_WHITE, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 
@@ -144,7 +144,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else    {cr = 'n'; perc = 100 + perc;}
 
       PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc); /* TODO */
-      PrintText(s_cbifont, CR_WHITE, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
 }
@@ -166,17 +166,17 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
    else                 cost = L(st_free);
 
-   PrintText_str(cost, s_cbifont, CR_WHITE, 111,1, 30,1);
+   PrintText_str(cost, s_smallfnt, CR_WHITE, 111,1, 30,1);
 
    /* Category */
-   PrintText_str(L(upgrcateg[upgr->info->category]), s_cbifont, CR_WHITE, 111,1, 40,1);
+   PrintText_str(L(upgrcateg[upgr->info->category]), s_smallfnt, CR_WHITE, 111,1, 40,1);
 
    /* Effect */
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("%s %S", LC(LANG "EFFECT"), effect);
 
    static i32 const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
-   PrintText(s_cbifont,
+   PrintText(s_smallfnt,
       upgr->info->key == UPGR_UNCEUNCE ? crs[ACS_Timer() / 4 % countof(crs)] : CR_WHITE, 111,1, 50,1);
 
    ClearClip();

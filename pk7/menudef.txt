@@ -91,7 +91,7 @@ ListMenu "UpdateMenu"
 {
    Class "Lith_UpdateMenu"
 
-   Font "CBIFONT", "Green"
+   Font "SMALLFNT", "Green"
    Selector "-", -10, 0
    LineSpacing 10
    Position 20, 0
