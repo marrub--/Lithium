@@ -38,6 +38,7 @@ for f in FONTS
    system *words
 end
 
-system *%W(advpng -z4).push(*out)
+system *%W"pngquant --ext .png -f 2".push(*out)
+system *%W"advpng -z4".push(*out)
 
 ## EOF

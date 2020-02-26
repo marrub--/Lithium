@@ -5,11 +5,13 @@
 
 ## All Classes ---------------------------------------------------------------|
 ++ \#MAIL_BODY_JamesDefeated   | Mail/Phantom_James.txt
+== \#MAIL_SIZE_JamesDefeated   | 25
 ++ \#MAIL_BODY_MakarovDefeated | Mail/Phantom_Makarov.txt
 ++ \#MAIL_BODY_IsaacDefeated   | Mail/Phantom_Isaac.txt
 
 ## Marine --------------------------------------------------------------------|
 ++ \#MAIL_BODY_IntroStan | Mail/Intro_Marine.txt
+== \#MAIL_SIZE_IntroStan | 95
 
 ++ \#MAIL_BODY_Cluster1Stan | Mail/Cluster1_Marine.txt
 ++ \#MAIL_BODY_Cluster2Stan | Mail/Cluster2_Marine.txt
@@ -17,6 +19,7 @@
 
 ++ \#MAIL_BODY_PhantomStan | Mail/Intro2_Marine.txt
 == \#MAIL_SEND_PhantomStan | htic0@gov.（不明）.mailserv
+== \#MAIL_SIZE_PhantomStan | 50
 
 ++ \#MAIL_BODY_Secret1Stan | Mail/Secret1_Marine.txt
 == \#MAIL_NAME_Secret1Stan | 保存済バッファ
@@ -29,19 +32,22 @@
 == \#MAIL_NAME_IntroJem | 保存したメッセージ
 == \#MAIL_SEND_IntroJem | （不明）@corp.AOF
 == \#MAIL_TIME_IntroJem | 13:44 25日7月部49年
-== \#MAIL_SIZE_IntroJem | 38
+== \#MAIL_SIZE_IntroJem | 45
 
 ++ \#MAIL_BODY_Cluster1Jem | Mail/Cluster1_CyberMage.txt
 == \#MAIL_NAME_Cluster1Jem | 保存済１０４
-== \#MAIL_SIZE_Cluster1Jem | 29
+== \#MAIL_SIZE_Cluster1Jem | 40
 
 ++ \#MAIL_BODY_Cluster2Jem | Mail/Cluster2_CyberMage.txt
 == \#MAIL_NAME_Cluster2Jem | 保存済 152
-== \#MAIL_SIZE_Cluster2Jem | 36
+== \#MAIL_SIZE_Cluster2Jem | 50
 
 ++ \#MAIL_BODY_Cluster3Jem | Mail/Cluster3_CyberMage.txt
 == \#MAIL_NAME_Cluster3Jem | 保存済 244
-== \#MAIL_SIZE_Cluster3Jem | 28
+== \#MAIL_SIZE_Cluster3Jem | 45
+
+++ \#MAIL_BODY_PhantomJem | Mail/Intro2_CyberMage.txt
+== \#MAIL_SIZE_PhantomJem | 30
 
 ++ \#MAIL_BODY_Secret1Jem | Mail/Secret1_CyberMage.txt
 == \#MAIL_NAME_Secret1Jem | 保存済 250
