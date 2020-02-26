@@ -4,48 +4,48 @@ to be outputted into a code file, specifically LANGUAGE.
 Any line not detected to be a command of any kind will be completely ignored.
 
 Toplevel commands include:
-<in directory> directoryname
+in directory <directory-name>
    Sets the directory to put outputted files into. Defaults to ".".
 
-<in file> filename
+in file <filename>
    Begins a block (terminated by <done>) which will output the result of each
    data command into the given file. The file name will have any "*" in it
    replaced with the current language name.
 
-<language> name -> header
+language <name> -> <header>
    Describes a language to be used.
 
 Data commands output processed data to the current file.
 
 Data commands include:
-<comment> content
+comment <content>
    Outputs the argument as a comment.
 
-<put data> data -> alias
+put data <data> -> <alias>
    Outputs the argument to the given alias.
 
-<put file> filename -> alias
+put file <filename> -> <alias>
    Outputs the contents of a file to the given alias.
 
-<parse file> filename
+parse file <filename>
    Parses the given file using parsefile syntax.
 
 "parsefiles" are another format provided by compilefs, created to make large
 amounts of multi-line data easier to write. It provides five commands, which
 all output data:
 
-<##>
+## <arg>
    Outputs a comment.
 
-<++>
-   Outputs an entire file to the given alias using the syntax "alias | file".
+++ <alias> | <file>
+   Outputs an entire file to the given alias.
 
-<==>
-   Outputs to the given alias using the syntax "alias | arg".
+== <alias> | <arg>
+   Outputs the argument to the given alias.
 
-<%%>
+%% <alias>
    Outputs the following lines to the given alias verbatim.
 
-<@@>
+@@ <alias>
    Outputs the following lines to the given alias, concatenating lines that
    are not empty together with spaces, and separating lines with an empty one.

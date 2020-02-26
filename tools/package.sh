@@ -1,8 +1,17 @@
 #!/usr/bin/env sh
+## ---------------------------------------------------------------------------|
+##
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
-tools/genbuild.rb -DNDEBUG
+##
+## ---------------------------------------------------------------------------|
+##
+## Script to generate master packages of Lithium.
+##
+## ---------------------------------------------------------------------------|
+
+env CC_FLAGS=-DNDEBUG tools/genbuild.rb
 ninja -t clean
 ninja
 

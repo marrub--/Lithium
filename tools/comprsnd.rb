@@ -7,23 +7,16 @@
 ##
 ## ---------------------------------------------------------------------------|
 ##
-## Renames stuff in sndinfo files.
-##
-## An input file can be generated with:
-##
-## git diff --staged --name-status -C |
-## sed '/R100/!d' |
-## cut -f 2,3 |
-## sed 's/pk7\///g'
+## Compresses sounds.
 ##
 ## ---------------------------------------------------------------------------|
 
-renames = Hash[open(ARGV[0], "rt").each_line.map{|l| l.chomp.split(?\t, 2)}]
-
-Dir["pk7/sndinfo.*"].each do |f|
-   s = open(f, "rb").read
-   renames.each{|k, v| s.sub! k, v}
-   open(f, "wb").write s
+Dir[ARGV[0]].each do |f|
+   if File.file?(f) && open(f) {|f| f.readpartial(4) == "fLaC"}
+      puts "*** #{f}"
+      `flac --best --no-padding --preserve-modtime -f "#{f}" -o "#{f}" 2>&1`
+      `metaflac --dont-use-padding --remove-all "#{f}" 2>&1`
+   end
 end
 
 ## EOF

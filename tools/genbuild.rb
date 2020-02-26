@@ -49,7 +49,7 @@ WEPCIN = %W"$#{HDR}/p_weapons.h".push(*WEPCCI)
 MONCIN = %W"$#{HDR}/w_moninfo.h"
 DECOIN = %W"$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h
             $#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
-TEXTIN = Dir["filedata/*.txt"].map do |s| File.basename s end
+TEXTIN = Dir["text/*.txt"].map do |s| File.basename s end
 HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
             pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
 DEPS_I = [*UPGCIN, *WEPCIN, *MONCIN]
@@ -68,7 +68,7 @@ fp << <<_end_
 #{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay #{LD_FLAGS}
-#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{ARGV.join " "} #{CC_FLAGS}
+#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{CC_FLAGS}
 #{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
 #{DLITH } = -DLITHIUM=1
 #{DDTAP } = -DDOUBLETAP=1
@@ -87,7 +87,7 @@ rule fs
  command = tools/hashfs.rb #{HSFSIN.join " "}
  description = HashFS
 rule text
- command = cd filedata; ../tools/compilefs.rb #{TEXTIN.join " "}
+ command = cd text; ../tools/compilefs.rb #{TEXTIN.join " "}
  description = CompileFS
 rule dec
  command = tools/decompat.rb $in

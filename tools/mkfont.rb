@@ -17,7 +17,7 @@ CMAP=`tools/getcmap.rb`
 out = []
 
 for f in FONTS
-   fontfile = "tools/#{f}.ttf"
+   fontfile = "bin/#{f}.ttf"
    unless FileTest.exist? fontfile
       system *%W"wget http://mab.greyserv.net/f/#{f}.ttf -O #{fontfile}"
    end

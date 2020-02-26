@@ -7,7 +7,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 ##
-## Generates a character map from the filedata directory.
+## Generates a character map from the text directory.
 ##
 ## ---------------------------------------------------------------------------|
 
@@ -15,7 +15,7 @@ require 'set'
 
 chs = Set[]
 
-`find filedata -type f -name '*.txt'`.split(?\n).each do |f|
+`find text -type f -name '*.txt'`.split(?\n).each do |f|
    f.replace(open(f).read).each_char do |c| chs << c end
 end
 
