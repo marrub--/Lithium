@@ -47,7 +47,7 @@ class Lith_Blade : Lith_CWeapon;
 
 default
 {
-   Tag "Blade";
+   Tag "$LITH_INFO_SHORT_Blade";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/blade/draw";

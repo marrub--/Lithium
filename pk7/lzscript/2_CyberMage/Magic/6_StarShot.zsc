@@ -50,7 +50,7 @@ class Lith_StarShot : Lith_CWeapon;
 default
 {
    Lith_Weapon.MagSize 150;
-   Tag "Hosh'danma";
+   Tag "$LITH_INFO_SHORT_StarShot";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/starshot/draw";

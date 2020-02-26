@@ -50,7 +50,7 @@ class Lith_PlasmaRifle : Lith_MWeapon;
 default
 {
    Lith_Weapon.MagSize 5;
-   Tag "Plasma Rifle";
+   Tag "$LITH_INFO_SHORT_PlasmaRifle";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/plasma/draw";

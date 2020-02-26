@@ -97,7 +97,7 @@ class Lith_SPAS : Lith_CWeapon;
 default
 {
    Lith_Weapon.MagSize 8;
-   Tag "Shotgun";
+   Tag "$LITH_INFO_SHORT_SPAS";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
    Weapon.UpSound "weapons/cshotgun/draw";

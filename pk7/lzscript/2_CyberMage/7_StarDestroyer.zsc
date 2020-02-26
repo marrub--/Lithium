@@ -321,7 +321,7 @@ class Lith_StarDestroyer : Lith_CWeapon;
 
 default
 {
-   Tag "Star Destroyer";
+   Tag "$LITH_INFO_SHORT_StarDestroyer";
    Weapon.BobRangeX 1.7;
    Weapon.BobSpeed 0.7;
    Weapon.SlotNumber 7;

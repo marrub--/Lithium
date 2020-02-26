@@ -104,7 +104,7 @@ default
    Lith_Weapon.ScopeInSound "weapons/pistol/zoomin";
    Lith_Weapon.ScopeOutSound "weapons/pistol/zoomout";
    Lith_Weapon.ScopeZoom 0.5;
-   Tag "Pistol";
+   Tag "$LITH_INFO_SHORT_Pistol";
    Weapon.BobRangeX 0.2;
    Weapon.BobRangeY 0.3;
    Weapon.BobSpeed 3;

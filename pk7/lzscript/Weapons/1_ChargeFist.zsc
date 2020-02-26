@@ -71,7 +71,7 @@ class Lith_ChargeFist : Lith_OutcastsWeapon;
 default
 {
    DamageType "Melee";
-   Tag "Charge Fist";
+   Tag "$LITH_INFO_SHORT_ChargeFist";
    Weapon.Kickback 100;
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;

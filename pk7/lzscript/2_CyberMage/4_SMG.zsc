@@ -158,7 +158,7 @@ class Lith_SMG : Lith_CWeapon;
 default
 {
    Lith_Weapon.MagSize 50;
-   Tag "Sub Machine Gun";
+   Tag "$LITH_INFO_SHORT_SMG";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/smg/draw";

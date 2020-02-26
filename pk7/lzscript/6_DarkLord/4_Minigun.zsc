@@ -12,7 +12,7 @@ class Lith_Minigun : Lith_DWeapon;
 default
 {
    Lith_Weapon.MagSize 400;
-   Tag "Minigun";
+   Tag "$LITH_INFO_SHORT_Minigun";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
 }

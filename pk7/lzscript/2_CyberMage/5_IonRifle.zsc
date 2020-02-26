@@ -186,7 +186,7 @@ default
    Lith_Weapon.MagSize 6;
    Lith_Weapon.ScopeInSound "weapons/ionrifle/zoomin";
    Lith_Weapon.ScopeOutSound "weapons/ionrifle/zoomout";
-   Tag "Ion Rifle";
+   Tag "$LITH_INFO_SHORT_IonRifle";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/ionrifle/draw";

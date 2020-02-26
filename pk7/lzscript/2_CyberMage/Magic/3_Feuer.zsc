@@ -116,7 +116,7 @@ class Lith_Feuer : Lith_CWeapon;
 
 default
 {
-   Tag "Feuer";
+   Tag "$LITH_INFO_SHORT_Feuer";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/feuer/draw";

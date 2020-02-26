@@ -12,7 +12,7 @@ class Lith_4Bore : Lith_DWeapon;
 default
 {
    Lith_Weapon.MagSize 2;
-   Tag "4-Bore Shotgun";
+   Tag "$LITH_INFO_SHORT_4Bore";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
 }

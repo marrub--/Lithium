@@ -96,7 +96,7 @@ class Lith_Delear : Lith_CWeapon;
 default
 {
    Lith_Weapon.MagSize 16;
-   Tag "Delear";
+   Tag "$LITH_INFO_SHORT_Delear";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/delear/draw";

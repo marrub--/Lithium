@@ -91,7 +91,7 @@ class Lith_CombatRifle : Lith_MWeapon;
 default
 {
    Lith_Weapon.MagSize 80;
-   Tag "Combat Rifle";
+   Tag "$LITH_INFO_SHORT_CombatRifle";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rifle/draw";

@@ -55,7 +55,7 @@ class Lith_FatMac : Lith_DWeapon;
 
 default
 {
-   Tag "Fat Mac";
+   Tag "$LITH_INFO_SHORT_FatMac";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
 

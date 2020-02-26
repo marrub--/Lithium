@@ -14,7 +14,7 @@ class Lith_BFG9000 : Lith_MWeapon;
 
 default
 {
-   Tag "Omega Cannon";
+   Tag "$LITH_INFO_SHORT_BFG9000";
    Weapon.BobRangeX 1.7;
    Weapon.BobSpeed 0.7;
    Weapon.SlotNumber 7;

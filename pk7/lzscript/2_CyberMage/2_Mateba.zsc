@@ -141,7 +141,7 @@ class Lith_Mateba : Lith_CWeapon;
 default
 {
    Lith_Weapon.MagSize 12;
-   Tag "Mateba";
+   Tag "$LITH_INFO_SHORT_Mateba";
    Weapon.BobRangeX 0.2;
    Weapon.BobRangeY 0.3;
    Weapon.BobSpeed 2.5;
