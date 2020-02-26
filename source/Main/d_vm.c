@@ -283,7 +283,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
 
    /* Top-left text */
    SetSize(tsizex, tsizey);
-   PrintText_str(st_term_sgxline, s_smallfnt, CR_RED, 0,1, 0,1);
+   PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
    u32 tra = MemB2_G(VAR_REMOTEL);
@@ -293,10 +293,10 @@ script static void TerminalGUI(struct player *p, u32 tact)
       case TACT_LOGON:  tr = StrParam("Opening Connection to %S", tr); break;
       case TACT_LOGOFF: tr = st_term_disconnecting;                    break;
    }
-   PrintText_str(tr, s_smallfnt, CR_RED, tright,2, 0,1);
+   PrintText_str(tr, s_ltrmfont, CR_RED, tright,2, 0,1);
 
    /* Bottom-left text */
-   PrintText_str(st_term_ip, s_smallfnt, CR_RED, 0,1, tbottom,2);
+   PrintText_str(st_term_ip, s_ltrmfont, CR_RED, 0,1, tbottom,2);
 
    /* Bottom-right text */
    str br;
@@ -305,7 +305,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
       case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date)); break;
       default:          br = st_term_use_to_ack;           break;
    }
-   PrintText_str(br, s_smallfnt, CR_RED, tright,2, tbottom,2);
+   PrintText_str(br, s_ltrmfont, CR_RED, tright,2, tbottom,2);
 
    /* Contents */
    SetSize(gst.w, gst.h);
@@ -319,7 +319,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
             if(textV) {
                SetSize(tsizex, tsizey);
                PrintTextChr(textV, textC);
-               PrintText(s_smallfnt, CR_WHITE, tmidx,0, tmidy + 35,0);
+               PrintText(s_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
                SetSize(gst.w, gst.h);
 
                y -= 10;
@@ -335,7 +335,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
          SetClipW(tleft, ttop, 150, 300, 150);
 
          PrintTextChr(textV, textC);
-         PrintText(s_smallfnt, CR_WHITE, tleft,1, ttop,1);
+         PrintText(s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
 
          SetSize(gst.w, gst.h);
          ClearClip();
@@ -344,7 +344,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
          SetSize(tsizex, tsizey);
 
          PrintTextChr(textV, textC);
-         PrintText(s_smallfnt, CR_WHITE, 2,1, ttop+2,1);
+         PrintText(s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
 
          SetSize(gst.w, gst.h);
          break;

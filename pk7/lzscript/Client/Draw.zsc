@@ -31,7 +31,6 @@ enum DrawType
    Type_SpriteStencilAlpha,
    Type_Text,
    Type_TextAlpha,
-   Type_TextUnicode,
 }
 
 struct DrawData
@@ -62,8 +61,6 @@ struct FadeMsg
 
 const LT_X_MASK = 0x0FFFFFFF;
 const LT_Y_MASK = 0x1FFFFFFF;
-
-const FONT_SPACE = 4;
 
 const C_BLACK     = 0x4d4d4d;
 const C_BLUE      = 0x6e6eff;
@@ -101,7 +98,7 @@ private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
 private transient play bool m_ForceDraw;
 
-bool m_FontLoaded;
+Font m_UtfFont;
 bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
@@ -279,91 +276,29 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 
    uint lns, lnx = 0;
 
-   if(uf || cl.m_English)
-   {
-      cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
+   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
 
+   if(uf || cl.m_English) {
       cl.m_D[p].Fnt = Font.GetFont(fnt);
-      cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
-      let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
-
-      lns = brl.Count();
-
-      cl.m_D[p].Txt.Resize(lns);
-      cl.m_D[p].LnW.Resize(lns);
-
-      for(uint i = 0, w; i < lns; i++)
-      {
-         cl.m_D[p].Txt[i] = brl.StringAt(i);
-         cl.m_D[p].LnW[i] = brl.StringWidth(i);
-
-         if(lnx < (w = cl.m_D[p].LnW[i])) lnx = w;
-      }
+   } else {
+      cl.m_D[p].Fnt = cl.m_UtfFont;
+      y += 2;
    }
-   else
+
+   cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
+   let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
+
+   lns = brl.Count();
+
+   cl.m_D[p].Txt.Resize(lns);
+   cl.m_D[p].LnW.Resize(lns);
+
+   for(uint i = 0, w; i < lns; i++)
    {
-      cl.m_D[p].Type = Type_TextUnicode;
+      cl.m_D[p].Txt[i] = brl.StringAt(i);
+      cl.m_D[p].LnW[i] = brl.StringWidth(i);
 
-      cl.m_D[p].LnY = 8;
-
-      array<string> brl;
-      txt.Split(brl, "\n");
-      let lnum = brl.Size();
-
-      cl.m_D[p].Txt.Clear();
-      cl.m_D[p].LnW.Clear();
-
-      for(uint i = 0; i < lnum; i++)
-      {
-         uint w = 0;
-         uint pos, sta, len;
-
-         for(pos = 0, sta = 0, len = brl[i].Length(); pos < len;)
-         {
-            let str = brl[i];
-            uint uclen, ucp; [uclen, ucp] = Utf32AtUtf8(str, pos);
-            pos += uclen;
-
-            if(ucp == Ch_Color)
-            {
-               name _; [_, pos] = ParseColor(str, pos);
-               continue;
-            }
-
-            uint ww;
-
-            if(ucp == Ch_Space)
-               ww = FONT_SPACE;
-            else
-            {
-               let metr = ACS_ExecuteWithResult(lsc_getfontmetric, ucp);
-               let xadv = ACS_ExecuteWithResult(lsc_metr_xadv, metr);
-               ww = xadv;
-            }
-
-            if(w + ww > (cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff))
-            {
-               if(ucp != Ch_Space) pos -= uclen;
-
-               cl.m_D[p].Txt.Push(brl[i].mid(sta, pos - sta));
-               cl.m_D[p].LnW.Push(w);
-
-               if(lnx < w) lnx = w;
-
-               sta = pos;
-               w = 0;
-            }
-            else
-               w += ww;
-         }
-
-         cl.m_D[p].Txt.Push(brl[i].Mid(sta, pos - sta));
-         cl.m_D[p].LnW.Push(w);
-
-         if(lnx < w) lnx = w;
-      }
-
-      lns = cl.m_D[p].Txt.Size();
+      if(lnx < (w = cl.m_D[p].LnW[i])) lnx = w;
    }
 
    switch(xa) {
@@ -591,78 +526,15 @@ private static clearscope uint GetParsedColor(uint defcr, name cr)
 
 /* Member Functions -------------------------------------------------------- */
 
-override void WorldLoaded(WorldEvent evt)
-{
-   if(m_FontLoaded) return;
-
-   /* Unfortunately, due to the script runaway limit in ACS, we need to do this */
-   /* here so everything is initialized without breaking. */
-   for(int fontnum = 0;; fontnum++)
-   {
-      if(!CallACS("Lith_SetupFontsBegin", fontnum)) break;
-      while(CallACS("Lith_SetupFontsContinue"));
-   }
-
-   m_FontLoaded = true;
-}
-
 override void WorldTick()
 {
-   if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng"))
-      CallACS("Lith_SetFontFace",
-         CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt());
-}
-
-private ui void DrawTextUnicode(int scw, int sch, int i)
-{
-   uint defcr = GetDefColor(m_D[i].Cr);
-   uint cr = defcr;
-   for(uint ln = 0, lns = m_D[i].LnX.Size(), y = m_D[i].Y + m_D[i].LnY; ln < lns; ln++)
-   {
-      int x = m_D[i].X - m_D[i].LnX[ln];
-      int xo = x;
-
-      for(uint pos = 0, len = m_D[i].Txt[ln].Length(); pos < len;)
-      {
-         let str = m_D[i].Txt[ln];
-         uint uclen, ucp; [uclen, ucp] = Utf32AtUtf8(str, pos);
-         pos += uclen;
-
-         if(ucp == Ch_Color)
-         {
-            name colo; [colo, pos] = ParseColor(str, pos);
-            cr = GetParsedColor(defcr, colo);
-         }
-         else if(ucp == Ch_Space)
-            x += FONT_SPACE;
-         else
-         {
-            int metr = ACS_ExecuteWithResult(lsc_getfontmetric, ucp);
-            int gfx_ = ACS_ExecuteWithResult(lsc_metr_tex,  metr);
-            let xadv = ACS_ExecuteWithResult(lsc_metr_xadv, metr);
-            let yofs = ACS_ExecuteWithResult(lsc_metr_yofs, metr);
-            if(gfx_ < 0) continue;
-
-            textureid gfx; gfx.SetNull(); gfx += gfx_;
-            if(!gfx.IsValid()) continue;
-
-            Screen.DrawTexture(gfx, false, x, y-yofs,
-               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-               DTA_Alpha,m_D[i].A, DTA_AlphaChannel,true, DTA_FillColor,cr);
-
-            if(x + xadv > scw)
-            {
-               y += m_D[i].LnY;
-               x = xo;
-
-               while(str.CharCodeAt(pos++) == Ch_Space);
-            }
-            else
-               x += xadv;
-         }
+   if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
+      switch(CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt()) {
+	 default:
+	 case 0: m_UtfFont = "MisakiG"; break;
+	 case 1: m_UtfFont = "MisakiM"; break;
+	 case 2: m_UtfFont = "JFDotG";  break;
       }
-
-      y += m_D[i].LnY;
    }
 }
 
@@ -716,9 +588,6 @@ override void RenderOverlay(RenderEvent evt)
             m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
             DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
             DTA_Alpha,m_D[i].A);
-      break;
-   case Type_TextUnicode:
-      DrawTextUnicode(scw, sch, i);
       break;
    }
 

@@ -16,8 +16,12 @@ require 'set'
 chs = Set[]
 
 `find filedata -type f -name '*.txt'`.split(?\n).each do |f|
-   f.replace(open(f).read).each_char{|c| chs << c}
+   f.replace(open(f).read).each_char do |c| chs << c end
 end
+
+chs.delete " "
+chs.delete "\n"
+chs.delete "\u{5c}"
 
 print chs.to_a.sort!.join
 

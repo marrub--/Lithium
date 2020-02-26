@@ -11,27 +11,33 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-require 'shellwords'
-
 FONTS=%w(MisakiG MisakiM JFDotG)
 CMAP=`tools/getcmap.rb`
 
+out = []
+
 for f in FONTS
-   unless FileTest.exist? "tools/#{f}.ttf"
-      `wget 'http://mab.greyserv.net/f/#{f}.ttf' -O tools/#{f}.ttf`
+   fontfile = "tools/#{f}.ttf"
+   unless FileTest.exist? fontfile
+      system *%W"wget http://mab.greyserv.net/f/#{f}.ttf -O #{fontfile}"
    end
 
-   words = %W(tools/ttfuck/ttfuck.exe tools/#{f}.ttf 8 #{CMAP} pk7/lfiles/Font_#{f}.txt pk7/lgfx/Font/#{f})
+   outdir = "pk7/fonts/#{f.downcase}"
 
-   `which mono`
-   words.prepend "mono" if $?.success?
+   `rm -f #{outdir}/*.png`
 
-   system words.shelljoin
+   words = %W"convert -depth 1 -font #{fontfile} -pointsize 8 -background none -fill white"
 
-   words = %W(advpng -z4)
-   words.append *(Dir.glob "pk7/lgfx/Font/#{f}/*.png")
+   for ch in CMAP.each_char
+      num = sprintf "%08X", ch.ord
+      f = "#{outdir}/#{num}.png"
+      out.push f
+      words.push *%W"( label:#{ch} -write #{f} )"
+   end
 
-   system words.shelljoin
+   system *words
 end
+
+system *%W(advpng -z4).push(*out)
 
 ## EOF

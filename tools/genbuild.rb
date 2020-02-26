@@ -87,11 +87,8 @@ rule text
 rule dec
  command = tools/decompat.rb $in
  description = DeCompat
-rule gettf
- command = tools/gettf.sh
- description = Getting ttfuck
 rule font
- command = rm -f pk7/lgfx/Font/*/*.png; tools/mkfont.rb
+ command = tools/mkfont.rb
  description = Font
 rule wepc
  command = tools/wepc.rb $in $out
@@ -103,11 +100,10 @@ rule monc
  command = tools/monc.rb $in $out
  description = MonC
 
-build tools/ttfuck/ttfuck.exe: gettf
 build fs: fs | tools/hashfs.rb
 build text: text | tools/compilefs.rb
 build dec: dec #{DECOIN} | tools/decompat.rb
-build font: font | tools/ttfuck/ttfuck.exe
+build font: font
 build #{WEPCIN}: wepc source/Weapons.txt | tools/wepc.rb
 build #{UPGCIN}: upgc source/Upgrades.txt | tools/upgc.rb
 build #{MONCIN}: monc source/Monsters.txt | tools/monc.rb

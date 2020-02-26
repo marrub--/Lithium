@@ -1394,6 +1394,7 @@
 "LITH_scanner_bar" = "Health bar";
 "LITH_scanner_altfont" = "Alternate font";
 
+"LITH_stx_world" = "World";
 
 "LITH_sv_rain" = "Rain in outside areas";
 "LITH_sv_sky" = "Replace skies";
