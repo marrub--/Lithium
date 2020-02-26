@@ -88,12 +88,12 @@
 "MENU_WHICHEPISODE" = "オマエの物語は";
 "MENU_CHOOSESKILL" = "オマエのスキルは";
 
-"DIFF_TOURIST" = "> ただのツアーだよ。";
-"DIFF_EASY" = "> 手伝ってくれ。";
-"DIFF_NORMAL" = "> 存分にやってくれ。";
-"DIFF_HARD" = "> ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!";
-"DIFF_XHARD" = "> おれを死ぬの見れよ!";
-"DIFF_NMARE" = "> 狂乱悪夢!";
+"DIFF_TOURIST" = "ただのツアーだよ。";
+"DIFF_EASY" = "手伝ってくれ。";
+"DIFF_NORMAL" = "存分にやってくれ。";
+"DIFF_HARD" = "ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!";
+"DIFF_XHARD" = "おれを死ぬの見れよ!";
+"DIFF_NMARE" = "狂乱悪夢!";
 
 "PLYRMNU_PRESSSPACE" = "\cjスペースキー\c-で";
 "PLYRMNU_SEEFRONT" = "で前面を表示。";

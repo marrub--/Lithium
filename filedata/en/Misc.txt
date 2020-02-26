@@ -121,12 +121,12 @@ Use at the expense of your world.
 == MENU_WHICHEPISODE | Your Story Is:
 == MENU_CHOOSESKILL  | Your Skill Is:
 
-== DIFF_TOURIST | > I'm just a tourist.
-== DIFF_EASY    | > Throw me a bone.
-== DIFF_NORMAL  | > Hurt me plenty.
-== DIFF_HARD    | > Ultra-Violence!
-== DIFF_XHARD   | > Watch me die!
-== DIFF_NMARE   | > Crazed Nightmare!
+== DIFF_TOURIST | I'm just a tourist.
+== DIFF_EASY    | Throw me a bone.
+== DIFF_NORMAL  | Hurt me plenty.
+== DIFF_HARD    | Ultra-Violence!
+== DIFF_XHARD   | Watch me die!
+== DIFF_NMARE   | Crazed Nightmare!
 
 == PLYRMNU_PRESSSPACE | Press \cjSPACE
 == PLYRMNU_SEEFRONT   | to see the front.

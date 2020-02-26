@@ -49,13 +49,11 @@ WEPCIN = %W"$#{HDR}/p_weapons.h".push(*WEPCCI)
 MONCIN = %W"$#{HDR}/w_moninfo.h"
 DECOIN = %W"$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h
             $#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
-TEXTIN = Dir["filedata/*.txt"].map do |s| s.gsub "filedata/", "" end
+TEXTIN = Dir["filedata/*.txt"].map do |s| File.basename s end
 HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
             pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
 DEPS_I = [*UPGCIN, *WEPCIN, *MONCIN]
-DEPS_H = Dir["source/Headers/*"].map do |s|
-   s.gsub "source/Headers", "$#{HDR}"
-end
+DEPS_H = Dir["source/Headers/*"].map do |s| "$#{HDR}/#{File.basename s}" end
 DEPS = [*DEPS_I, *DEPS_H].uniq
 SRCS = [*Dir["source/Main/*"], *UPGCCI, *WEPCCI].map do |s| File.basename s end.uniq
 
