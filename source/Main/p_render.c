@@ -284,7 +284,7 @@ static void StringStack(struct player *p)
 
    size_t i = 0;
    for_list_back_it(struct hudstr *hudstr, p->hudstrlist, i++)
-      PrintTextA_str(hudstr->s, s_confont, CR_RED, 300,2, 20+i*9,1, 0.5);
+      PrintTextA_str(hudstr->s, s_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
 }
 
 static void Waves(struct player *p)
