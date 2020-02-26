@@ -98,7 +98,8 @@ private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
 private transient play bool m_ForceDraw;
 
-Font m_UtfFont;
+private transient Font m_UtfFont;
+
 bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
