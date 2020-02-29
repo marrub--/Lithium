@@ -18,8 +18,64 @@ WEPNAMES = %W"wepnam_fist wepnam_chainsaw wepnam_pistol wepnam_shotgun
               wepnam_supershotgun wepnam_chaingun wepnam_rocketlauncher
               wepnam_plasmarifle wepnam_bfg9000"
 
-def out_header fp, weps
-   fp.puts <<_end_
+tks = tokenize(ARGV.shift).each
+
+pcl  = "pcl_any"
+wf   = ""
+weps = []
+wepn = {}
+
+loop do
+   tok = tks.next.expect_in_top [:colon, :modulo, :plus, :semico]
+
+   case tok.type
+   when :colon
+      tok = tks.next.expect_after tok, :identi
+      pcl = "pcl_" + tok.text
+   when :modulo
+      if tks.peek.type == :identi
+         wf = "F(" + tks.next.text + ")"
+      else
+         wf = ""
+      end
+   when :plus
+      begin
+         res = []
+         tok = tks.next.expect_after tok, :identi
+         nam = "weapon_" + tok.text
+         tok = tks.next.expect_after tok, :number
+         slt = tok.text
+         tok = tks.next.expect_after tok, :identi
+         res.push 'N("' + tok.text + '")'
+         tok = tks.next.expect_after tok, [:identi, :string]
+         if tok.type == :identi
+            res.push tok.text
+         else
+            res.push 'P("' + tok.text + '")'
+         end
+         tok = tks.next.expect_after tok, :identi
+         res.push "AT_" + tok.text
+         if tks.peek.type == :identi
+            tok = tks.next
+            typ = tok.text
+            tok = tks.next.expect_after tok, :string
+            res.push typ + '("' + tok.text + '")'
+         end
+      rescue StopIteration
+      ensure
+         weps.push({pcl: pcl.dup, nam: nam, slt: slt, res: res})
+      end
+   when :semico
+      res = []
+      while tks.peek.type == :identi
+         tok = tks.next
+         res.push "weapon_" + tok.text
+      end
+      wepn[pcl] = res
+   end
+end
+
+open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_
 /* pk7/lzscript/Constants/p_weapons.zsc
  */
 #{generated_header "wepc"}
@@ -61,11 +117,7 @@ enum /* RifleMode */
 };
 
 /* EOF */
-_end_
-end
-
-def out_source fp, weps, wepn
-   fp.puts <<_end_
+_end_h_
 #{generated_header "wepc"}
 
 #if LITHIUM
@@ -111,40 +163,6 @@ i32 P_Wep_FromName(struct player *p, i32 name) {
 #endif
 
 /* EOF */
-_end_
-end
-
-def new_wep pcl, wf, spl
-   spl.push "F(#{wf})" unless wf.empty?
-   {pcl: pcl.dup,
-    nam: "weapon_#{spl.shift}",
-    slt: spl.shift,
-    res: [%<N("#{spl.shift}")>, spl.shift, "AT_#{spl.shift}", *spl]}
-end
-
-def proc_file ifp, ofh, ofc
-   pcl  = "pcl_any"
-   wf   = ""
-   weps = []
-   wepn = {}
-
-   for ln in ifp
-      ln.chomp!
-      next if ln.empty?
-
-      res = ln[1..-1]
-      case ln[0]
-      when ":"; pcl = "pcl_#{res}"
-      when "%"; wf  = res.dup
-      when "+"; weps.push new_wep pcl, wf, res.split
-      when ";"; wepn[pcl] = res.split.map do |s| "weapon_#{s}" end
-      end
-   end
-
-   out_header ofh, weps
-   out_source ofc, weps, wepn
-end
-
-proc_file open(ARGV[0], "rt"), open(ARGV[1], "wt"), open(ARGV[2], "wt")
+_end_c_
 
 ## EOF
