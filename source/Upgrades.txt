@@ -1,77 +1,92 @@
-Distributed under the CC0 public domain license.
-By Alison Sanderson. Attribution is encouraged, though not required.
-See licenses/cc0.txt for more information.
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
+## Upgrades to be processed into C files.
+## : denotes a category.
+## + denotes an upgrade.
+##
+## ---------------------------------------------------------------------------|
 
-Upgrades to be processed into C files. Colon denotes a category.
-Plus denotes an upgrade. Any other text is ignored by the parser.
-
- Name        Info Page     [Cost] Cl    Funcs [Pr] [[-].Score Mul] [Group] [(Req)]
+#------+------+--------+----+--------+------+----------+----------+--------|
+# Name | Page | [Cost] | Cl | \Funcs | [Pr] | [.Score] | [=Group] | [%Req] |
 :Body
-+HeadsUpDisM HeadsUpDisp          pM|pX AD-R-  1 -.05 HUD
-+HeadsUpDisC HeadsUpDisp          pC    AD-R-  1 -.05 HUD
-+HeadsUpDisI HeadsUpDisp          pI    AD-R-  1 -.05 HUD
-+HeadsUpDisD HeadsUpDisp          pD    AD-R-  1 -.05 HUD
-+JetBooster  JetBooster           pM    A-UR-    -.05
-+ReflexWetw  ReflexWetw           gO|pX ADU--  5 -.05
-+Zoom        -                    gA    -DUR-
-+VitalScan   VitalScanner         gA    --UR-  2
-+CyberLegs   CyberLegs    1220000 pM    ADU--  4
-+ReactArmor  Yh0          3500200 pM    -D-R- 20 (AI)
-+ReactArmor2 Yh0          2990200 pM    ----- 10 (AI|RA)
-+DefenseNuke DefenseNuke   580030 pM    ----E    (AI)
-+Adrenaline  Adrenaline   1801000 pM    --UR- 10
+# HUDs
++HeadsUpDisM HeadsUpDisp pM|pX \AD-R- 1 .-0.05 =HUD
++HeadsUpDisC HeadsUpDisp pC    \AD-R- 1 .-0.05 =HUD
++HeadsUpDisI HeadsUpDisp pI    \AD-R- 1 .-0.05 =HUD
++HeadsUpDisD HeadsUpDisp pD    \AD-R- 1 .-0.05 =HUD
 
-Cyber-Mage
-+Magic       Magic               pC --UR-
-+SoulCleaver SoulCleaver 1100000 pC -----
-+StealthSys  StealthSys  1800450 pC -DU--
+# All classes
++Zoom      N/A          gA \-DUR-
++VitalScan VitalScanner gA \--UR- 2
 
-Dark Lord
-+Subweapons Subweapons pD --UR-
+# Outcasts
++ReflexWetw ReflexWetw gO|pX \ADU-- 5 .-0.05
+
+# Marine
++JetBooster  JetBooster          pM \A-UR-    .-0.05
++CyberLegs   CyberLegs   1220000 pM \ADU--  4
++ReactArmor  Yh0         3500200 pM \-D-R- 20 %AI
++ReactArmor2 Yh0         2990200 pM \----- 10 %AI | RA
++DefenseNuke DefenseNuke  580030 pM \----E    %AI
++Adrenaline  Adrenaline  1801000 pM \--UR- 10
+
+# Cyber-Mage
++Magic       Magic               pC \--UR-
++SoulCleaver SoulCleaver 1100000 pC \-----
++StealthSys  StealthSys  1800450 pC \-DU--
+
+# Dark Lord
++Subweapons Subweapons pD \--UR-
 
 :Weap
-Outcasts
-+AutoReload  AutoReload 950050 gO AD--- 2
+# Outcasts
++AutoReload AutoReload 950050 gO \AD--- 2
 
-Marine
-+AutoPistol  -             140940 pM -----
-+PlasPistol  -             340000 pM -----            (WMD)
-+GaussShotty ShotgunUpgr  1079430 pM ----- 1 Shotgun  (WMD)
-+PoisonShot  ShotgunUpg2  1010420 pM -----   Shotgun  (WMD)
-+RifleModes  RifleUpgr     340100 pM -D-R-
-+LaserRCW    RifleUpg2    1008080 pM ----- 1          (WMD)
-+ChargeRPG   LauncherUpgr 1550000 pM -----   Launcher (WMD|WRD)
-+HomingRPG   LauncherUpg2 2505010 pM --U-- 1 Launcher (WMD)
-+PlasLaser   PlasmaUpgr   2250000 pM -----   Plasma   (WMD)
-+PartBeam    PlasmaUpg2   2500000 pM ----- 1 Plasma   (WMD|WRD)
-+PunctCannon CannonUpgr   5100700 pM -D---   BFG      (WMD)
-+OmegaRail   CannonUpg2   5800100 pM ----- 5 BFG      (WMD|WRD)
+# Marine
++AutoPistol  N/A           140940 pM \-----
++PlasPistol  N/A           340000 pM \-----             %WMD
++GaussShotty ShotgunUpgr  1079430 pM \----- 1 =Shotgun  %WMD
++PoisonShot  ShotgunUpg2  1010420 pM \-----   =Shotgun  %WMD
++RifleModes  RifleUpgr     340100 pM \-D-R-
++LaserRCW    RifleUpg2    1008080 pM \----- 1           %WMD
++ChargeRPG   LauncherUpgr 1550000 pM \-----   =Launcher %WMD | WRD
++HomingRPG   LauncherUpg2 2505010 pM \--U-- 1 =Launcher %WMD
++PlasLaser   PlasmaUpgr   2250000 pM \-----   =Plasma   %WMD
++PartBeam    PlasmaUpg2   2500000 pM \----- 1 =Plasma   %WMD | WRD
++PunctCannon CannonUpgr   5100700 pM \-D---   =BFG      %WMD
++OmegaRail   CannonUpg2   5800100 pM \----- 5 =BFG      %WMD | WRD
 
-Cyber-Mage
-+Mateba_A   MatebaUpgr    614100 pC ----- Pistol
-+ShockRif_A ShockRifUpgr 1519590 pC ----- Shotgun
-+ShockRif_B ShockRifUpg2 1911590 pC ----- Shotgun
-+SPAS_A     SPASUpgr     2140400 pC ----- SSG
-+SPAS_B     SPASUpg2     1511100 pC ----- SSG
-+SMG_A      SMGUpgr      2055000 pC -----
-+SMG_B      SMGUpg2      2888000 pC -----
-+SMG_C      SMGUpg3       998900 pC -----
-+IonRifle_A IonRifleUpgr 1977000 pC -----
-+IonRifle_B IonRifleUpg2 2855050 pC -----
-+CPlasma_A  CPlasmaUpgr  2230500 pC ----- Plasma
-+ShipGun_A  ShipGunUpgr  6988800 pC ----- BFG
-+ShipGun_B  ShipGunUpg2  7767700 pC ----- BFG
+# Cyber-Mage
++Mateba_A   MatebaUpgr    614100 pC \----- =Pistol
++ShockRif_A ShockRifUpgr 1519590 pC \----- =Shotgun
++ShockRif_B ShockRifUpg2 1911590 pC \----- =Shotgun
++SPAS_A     SPASUpgr     2140400 pC \----- =SSG
++SPAS_B     SPASUpg2     1511100 pC \----- =SSG
++SMG_A      SMGUpgr      2055000 pC \-----
++SMG_B      SMGUpg2      2888000 pC \-----
++SMG_C      SMGUpg3       998900 pC \-----
++IonRifle_A IonRifleUpgr 1977000 pC \-----
++IonRifle_B IonRifleUpg2 2855050 pC \-----
++CPlasma_A  CPlasmaUpgr  2230500 pC \----- =Plasma
++ShipGun_A  ShipGunUpgr  6988800 pC \----- =BFG
++ShipGun_B  ShipGunUpg2  7767700 pC \----- =BFG
 
 :Extr
-+TorgueMode - 8000000 gA ----- 8         (RDI)
-+7777777    - 8235430 gA ADU-- 7 .10     (RDI)
-+lolsords   - 1000000 gA ADU--   .20     (RDI)
-+Goldeneye  -   70000 gA --U--   .07     (RDI)
-+DarkCannon - 1500000 pM -----       BFG (WMD|WRD|RDI)
++TorgueMode N/A 8000000 gA \----- 8       %RDI
++\7777777   N/A 8235430 gA \ADU-- 7 .0.10 %RDI
++lolsords   N/A 1000000 gA \ADU--   .0.20 %RDI
++Goldeneye  N/A   70000 gA \--U--   .0.07 %RDI
++DarkCannon N/A 1500000 pM \-----   =BFG  %WMD | WRD | RDI
 
 :Down
-+Implying   - gA --U-- .20
-+UNCEUNCE   - gA ADU-- .30
-+InstaDeath - gA --U-- .50
++Implying   N/A gA \--U-- .0.20
++UNCEUNCE   N/A gA \ADU-- .0.30
++InstaDeath N/A gA \--U-- .0.50
 
-EOF
+## EOF
