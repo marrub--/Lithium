@@ -10,7 +10,7 @@
 class Lith_Cyberspace : Thinker;
 
 /* pixel texture */
-TextureID m_PTex;
+textureid m_PTex;
 
 /* pixel buffer – do not read unless in UI context */
 const RW = 64;
@@ -50,7 +50,7 @@ static Lith_Cyberspace CreateDerived(class<Lith_Cyberspace> type)
 {
    let cs = Lith_Cyberspace(new(type));
 
-   cs.m_PTex = TexMan.CheckForTexture("lgfx/Pixel.png", 0);
+   cs.m_PTex = TexMan.CheckForTexture("PIXEL", 0);
 
    cs.m_NX = -1.0;
    cs.m_NY =  0.0;

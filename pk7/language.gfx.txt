@@ -689,4 +689,3 @@
 ":HUD:ARM" = "lgfx/HUD/ARM.png";
 ":HUD:SplitBack" = "lgfx/HUD/SplitBack.png";
 ":ZoomOverlay" = "lgfx/ZoomOverlay.png";
-":Pixel" = "lgfx/Pixel.png";
