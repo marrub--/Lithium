@@ -255,16 +255,8 @@ local void TraceReg()
 script static void TerminalGUI(struct player *p, u32 tact)
 {
    enum {
-      /* background */
-      sizex = 480, sizey = 360,
-      right  = sizex,
-      top    = sizey*.08,
-      bottom = sizey*.75,
-
-      midx = right/2, midy = bottom/2,
-
       /* text */
-      tsizex  = 320, tsizey = 240,
+      tsizex  = 640, tsizey = 480,
       tright  = tsizex,
       ttop    = tsizey*.08,
       tbottom = tsizey*.75,
@@ -273,16 +265,15 @@ script static void TerminalGUI(struct player *p, u32 tact)
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   G_Begin(&gst, sizex, sizey);
+   G_Begin(&gst, tsizex, tsizey);
    G_UpdateState(&gst, p);
 
    /* Background */
-   SetSize(480, 300);
-   PrintSprite(sp_Terminal_Back,   480/2,0, 0,1);
-   PrintSprite(sp_Terminal_Border, 480/2,0, 0,1);
+   PrintRect(0, 0,          tsizex, tbottom, 0xFF000000);
+   PrintRect(0, 0,          tsizex, 12,      0xFF44000C);
+   PrintRect(0, tbottom-12, tsizex, 12,      0xFF44000C);
 
    /* Top-left text */
-   SetSize(tsizex, tsizey);
    PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
@@ -315,7 +306,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
    switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF:
-         __with(i32 y = midy;) {
+         __with(i32 y = tmidy;) {
             if(textV) {
                SetSize(tsizex, tsizey);
                PrintTextChr(textV, textC);
@@ -325,11 +316,11 @@ script static void TerminalGUI(struct player *p, u32 tact)
                y -= 10;
             }
 
-            PrintSprite(l_strdup(pict), midx,0, y,0);
+            PrintSprite(l_strdup(pict), tmidx,0, y,0);
          }
          break;
       case TACT_PICT:
-         PrintSprite(l_strdup(pict), midx/2,0, midy,0);
+         PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
 
          SetSize(tsizex, tsizey);
          SetClipW(tleft, ttop, 150, 300, 150);

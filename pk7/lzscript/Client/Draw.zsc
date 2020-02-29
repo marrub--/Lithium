@@ -1,19 +1,19 @@
 /* ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
- * By Alison Sanderson & Benjamin Moir. Attribution is encouraged, though not required.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
  * See licenses/cc0.txt for more information.
  *
  * ---------------------------------------------------------------------------|
+ *
+ * The URANUS drawing system is essentially an instruction set with a
+ * (very) simple state machine to draw stuff to the screen, either via ACS
+ * or via ZScript. This is meant to replace HudMessage and allow a nicer,
+ * unified drawing system between ZScript and ACS, usable by the playsim
+ * while still providing maximum performance, as well as multiplayer compat.
+ *
+ * ---------------------------------------------------------------------------|
  */
-
-/*
-   The URANUS drawing system is essentially an instruction set with a
-   (very) simple state machine to draw stuff to the screen, either via ACS
-   or via ZScript. This is meant to replace HudMessage and allow a nicer,
-   unified drawing system between ZScript and ACS, usable by the playsim
-   while still providing maximum performance, as well as multiplayer compat.
-*/
 
 extend class Lith_URANUS;
 
@@ -31,6 +31,7 @@ enum DrawType
    Type_SpriteStencilAlpha,
    Type_Text,
    Type_TextAlpha,
+   Type_Rect,
 }
 
 struct DrawData
@@ -61,32 +62,6 @@ struct FadeMsg
 
 const LT_X_MASK = 0x0FFFFFFF;
 const LT_Y_MASK = 0x1FFFFFFF;
-
-const C_BLACK     = 0x4d4d4d;
-const C_BLUE      = 0x6e6eff;
-const C_BRICK     = 0xeaadad;
-const C_BROWN     = 0xcc9966;
-const C_GOLD      = 0xffcc00;
-const C_WHITE     = 0xffffff;
-const C_YELLOW    = 0xeeee32;
-const C_TAN       = 0xd2b48c;
-const C_GRAY      = 0xc0c0c0;
-const C_GREEN     = 0x33ff33;
-const C_RED       = 0xff4e60;
-const C_ORANGE    = 0xffaa00;
-const C_LIGHTBLUE = 0x33eeff;
-const C_CREAM     = 0xfecc99;
-const C_OLIVE     = 0xd1d8a7;
-const C_DARKGREEN = 0x129a12;
-const C_DARKRED   = 0xb22323;
-const C_DARKBROWN = 0x6c5d56;
-const C_PURPLE    = 0xa674d7;
-const C_DARKGRAY  = 0x414141;
-const C_CYAN      = 0x00fffe;
-const C_ICE       = 0xafccd3;
-const C_FIRE      = 0xfb7329;
-const C_SAPPHIRE  = 0x6c729f;
-const C_TEAL      = 0x8cd0dc;
 
 /* Members ----------------------------------------------------------------- */
 
@@ -245,8 +220,8 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
 
                                       arg2
    1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
-   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
-   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
+   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - Y alignment
+   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - Y position
 */
 static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 {
@@ -378,6 +353,41 @@ static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
    cl.m_DPtr++;
 }
 
+/* BIT LAYOUT OF ARGUMENTS
+
+   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
+
+                                      arg0
+   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - Y position
+   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - X position
+
+                                      arg1
+   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - height
+   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - width
+*/
+static void LR(Actor mo, int arg0 = 0, int arg1 = 0, color arg2 = 0)
+{
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
+
+   if(cl.m_NoDraw) return;
+   let p = cl.m_DPtr;
+
+   uint x =  arg0        & 0xffff;
+   uint y = (arg0 >> 16) & 0xffff;
+   uint w =  arg1        & 0xffff;
+   uint h = (arg1 >> 16) & 0xffff;
+
+   cl.m_D[p].Type = Type_Rect;
+
+   [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
+   [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
+
+   cl.m_D[p].C = arg2;
+
+   cl.m_DPtr++;
+}
+
 static void LE()
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
@@ -392,136 +402,6 @@ static void LE()
          cl.m_FadeMsg[i].Fade = Max(int(cl.m_FadeMsg[i].Fade) - int(cl.m_FadeMsg[i].FSub), 0);
       else
          cl.m_FadeMsg[i].Time--;
-   }
-}
-
-static clearscope uint, uint Utf32AtUtf8(string str, uint pos)
-{
-   uint len, b0 = str.CharCodeAt(pos) & 0xff, b1, b2, b3;
-
-        if(b0 < 0x80) len = 1;
-   else if(b0 < 0xe0) len = 2;
-   else if(b0 < 0xf0) len = 3;
-   else               len = 4;
-
-   switch(len) {
-   case 4: b3 = str.CharCodeAt(pos + 3) & 0xff;
-   case 3: b2 = str.CharCodeAt(pos + 2) & 0xff;
-   case 2: b1 = str.CharCodeAt(pos + 1) & 0xff;
-   case 1: break;
-   }
-
-   switch(len) {
-   default:
-   case 1: return len,  b0;
-   case 2: return len, (b0 - 0xc0) << 6  | (b1 - 0x80);
-   case 3: return len, (b0 - 0xe0) << 12 | (b1 - 0x80) << 6  | (b2 - 0x80);
-   case 4: return len, (b0 - 0xf0) << 18 | (b1 - 0x80) << 12 | (b2 - 0x80) << 6 | (b3 - 0x80);
-   }
-}
-
-static clearscope name, uint ParseColor(string str, uint pos)
-{
-   if(str.CharCodeAt(pos) == Ch_BrackO)
-   {
-      uint sta = pos;
-      while(str.CharCodeAt(++pos) != Ch_BrackC);
-      return str.Mid(sta, pos - sta), pos;
-   }
-   else
-      return str.CharAt(pos++), pos;
-}
-
-static int GetTex(string gfx)
-{
-   return int(TexMan.CheckForTexture(gfx, TexMan.Type_Any));
-}
-
-static int GetTexW(int gfx_)
-{
-   if(gfx_ < 0) return 0;
-   textureid gfx; gfx.SetNull(); gfx += gfx_;
-   int w, h; [w, h] = TexMan.GetSize(gfx);
-   return w;
-}
-
-static int GetTexH(int gfx_)
-{
-   if(gfx_ < 0) return 0;
-   textureid gfx; gfx.SetNull(); gfx += gfx_;
-   int w, h; [w, h] = TexMan.GetSize(gfx);
-   return h;
-}
-
-private static clearscope uint GetDefColor(int cr)
-{
-   switch(cr) {
-   case Font.CR_BLACK:     return C_BLACK;
-   case Font.CR_BLUE:      return C_BLUE;
-   case Font.CR_BRICK:     return C_BRICK;
-   case Font.CR_BROWN:     return C_BROWN;
-   case Font.CR_CREAM:     return C_CREAM;
-   case Font.CR_CYAN:      return C_CYAN;
-   case Font.CR_DARKBROWN: return C_DARKBROWN;
-   case Font.CR_DARKGRAY:  return C_DARKGRAY;
-   case Font.CR_DARKGREEN: return C_DARKGREEN;
-   case Font.CR_DARKRED:   return C_DARKRED;
-   case Font.CR_FIRE:      return C_FIRE;
-   case Font.CR_GOLD:      return C_GOLD;
-   case Font.CR_GREEN:     return C_GREEN;
-   case Font.CR_GRAY:      return C_GRAY;
-   case Font.CR_ICE:       return C_ICE;
-   case Font.CR_LIGHTBLUE: return C_LIGHTBLUE;
-   case Font.CR_OLIVE:     return C_OLIVE;
-   case Font.CR_ORANGE:    return C_ORANGE;
-   case Font.CR_PURPLE:    return C_PURPLE;
-   case Font.CR_RED:       return C_RED;
-   case Font.CR_SAPPHIRE:  return C_SAPPHIRE;
-   case Font.CR_TAN:       return C_TAN;
-   case Font.CR_TEAL:      return C_TEAL;
-   default:
-   case Font.CR_UNTRANSLATED:
-   case Font.CR_WHITE:     return C_WHITE;
-   case Font.CR_YELLOW:    return C_YELLOW;
-   }
-}
-
-private static clearscope uint GetParsedColor(uint defcr, name cr)
-{
-   switch(cr) {
-   case 'a': return C_BRICK;
-   case 'b': return C_TAN;
-   case 'c': return C_GRAY;
-   case 'd': return C_GREEN;
-   case 'e': return C_BROWN;
-   case 'f': return C_GOLD;
-   case 'g': return C_RED;
-   case 'h': return C_BLUE;
-   case 'i': return C_ORANGE;
-   case 'j': return C_WHITE;
-   case 'k': return C_YELLOW;
-   default:
-   case '-':
-   case 'l': return defcr;
-   case 'm': return C_BLACK;
-   case 'n': return C_LIGHTBLUE;
-   case 'o': return C_CREAM;
-   case 'p': return C_OLIVE;
-   case 'q': return C_DARKGREEN;
-   case 'r': return C_DARKRED;
-   case 's': return C_DARKBROWN;
-   case 't': return C_PURPLE;
-   case 'u': return C_DARKGRAY;
-   case 'v': return C_CYAN;
-   case 'w': return C_ICE;
-   case 'x': return C_FIRE;
-   case 'y': return C_SAPPHIRE;
-   case 'z': return C_TEAL;
-   case '[Lith_Blue]':   return 0x3b47f8;
-   case '[Lith_Green]':  return 0x00ff00;
-   case '[Lith_Grey]':   return 0xbfbfbf;
-   case '[Lith_Purple]': return 0x8c3bf8;
-   case '[Lith_Red]':    return 0xbf0f4a;
    }
 }
 
@@ -542,6 +422,9 @@ override void WorldTick()
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320, sch = 240;
+   Shape2D shape;
+
+   textureid texnull = skyflatnum;
 
    if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
    {
@@ -589,6 +472,20 @@ override void RenderOverlay(RenderEvent evt)
             m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
             DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
             DTA_Alpha,m_D[i].A);
+      break;
+   case Type_Rect:
+      shape = new("Shape2D");
+      shape.pushVertex((m_D[i].X,            m_D[i].Y));
+      shape.pushVertex((m_D[i].X + m_D[i].Z, m_D[i].Y));
+      shape.pushVertex((m_D[i].X,            m_D[i].Y + m_D[i].W));
+      shape.pushVertex((m_D[i].X + m_D[i].Z, m_D[i].Y + m_D[i].W));
+      shape.pushCoord((0, 0));
+      shape.pushCoord((1, 0));
+      shape.pushCoord((0, 1));
+      shape.pushCoord((1, 1));
+      shape.pushTriangle(0, 3, 1);
+      shape.pushTriangle(0, 2, 3);
+      Screen.DrawShape(texnull, false, shape, DTA_FillColor,m_D[i].C);
       break;
    }
 

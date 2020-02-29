@@ -14,6 +14,12 @@
 /* Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid. */
 #define TS 0.029
 
+#define PrintRectArgs0(x, y) ((u32)(x) | ((u32)(y) << 16))
+#define PrintRectArgs1(w, h) PrintRectArgs0(w, h)
+
+#define PrintRect(x, y, w, h, c) \
+   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), c)
+
 #define PrintSprite(name, x, xa, y, ya) \
    DrawCallI(sm_LS, name, (i32)(x), (i32)(y), (i32)(xa), (i32)(ya))
 
@@ -142,6 +148,12 @@
    ( \
       HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha) \
    )
+
+#define CrBlue   "\C[Lith_Blue]"
+#define CrGreen  "\C[Lith_Green]"
+#define CrRed    "\C[Lith_Red]"
+#define CrPurple "\C[Lith_Purple]"
+#define CrGrey   "\C[Lith_Grey]"
 
 enum
 {

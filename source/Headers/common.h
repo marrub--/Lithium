@@ -124,10 +124,6 @@
 #define StrEntON  _Pragma("GDCC STRENT_LITERAL ON")
 #define StrEntOFF _Pragma("GDCC STRENT_LITERAL OFF")
 
-#define CrBlue  "\C[Lith_Blue]"
-#define CrGreen "\C[Lith_Green]"
-#define CrRed   "\C[Lith_Red]"
-
 /* Types ------------------------------------------------------------------- */
 
 enum {

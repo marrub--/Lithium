@@ -164,11 +164,9 @@
 ":Terminal:2" = "lgfx/Terminal/2.png";
 ":Terminal:AOF" = "lgfx/Terminal/AOF.png";
 ":Terminal:01602" = "lgfx/Terminal/01602.png";
-":Terminal:Back" = "lgfx/Terminal/Back.png";
 ":Terminal:LogonData" = "lgfx/Terminal/LogonData.png";
 ":Terminal:TeleportOut" = "lgfx/Terminal/TeleportOut.png";
 ":Terminal:1" = "lgfx/Terminal/1.png";
-":Terminal:Border" = "lgfx/Terminal/Border.png";
 ":Terminal:UAC" = "lgfx/Terminal/UAC.png";
 ":Terminal:3" = "lgfx/Terminal/3.png";
 ":UI_WinXP:ListScrollNotchBottomHot" = "lgfx/UI_WinXP/ListScrollNotchBottomHot.png";
