@@ -251,8 +251,7 @@ def parse_directive state
       tok = tks.next.expect_after "path", :brac2o
       rhs = []
 
-      loop do
-         break if tks.drop :brac2c
+      tks.until_drop :brac2c do
          rhs.push parse_path state, tok
          tok = tks.next.expect_after "path", :comma
       end
@@ -274,8 +273,7 @@ def parse_definition state
    if rhs.type == :brac2o
       origin = state.path.dup
       state.path.replace lhs
-      loop do
-         break if tks.drop :brac2c
+      tks.until_drop :brac2c do
          parse_statement state
       end
       state.path.replace origin

@@ -1,36 +1,46 @@
-Distributed under the CC0 public domain license.
-By Alison Sanderson. Attribution is encouraged, though not required.
-See licenses/cc0.txt for more information.
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
+## Upgrades to be processed into C files.
+##
+## % denotes flags.
+## + denotes a monster.
+## = denotes an enumerated flag.
+##
+## ---------------------------------------------------------------------------|
 
-+mif_full    0
-+mif_angelic 1
-+mif_dark    2
+=mif_full
+=mif_angelic
+=mif_dark
 
-end flags
+## Hexen (unused) ------------------------------------------------------------|
 
-Hexen (unused) ---------------------------------------------------------------|
+#%mif_full
+#+ShotgunGuy  imp         Ettin
+#+Imp         lostsoul    FireDemon
+#+Arachnotron arachnotron CentaurLeader
+#+Demon       demon       Centaur
+#+Mancubus    hellknight  IceGuy
+#+Mancubus    hellknight  SerpentLeader
+#+Arachnotron hellknight  Serpent
+#+HellKnight  hellknight  Demon1
+#+BaronOfHell baron       Demon2
+#+Cacodemon   mancubus    Bishop
+#+HellKnight  lostsoul    Wraith
+#+CyberDemon  cyberdemon  Dragon
+#+CyberDemon  phantom     ClericBoss
+#+CyberDemon  phantom     FighterBoss
+#+CyberDemon  phantom     MageBoss
+#+CyberDemon  cyberdemon  Heresiarch
+#+DSparil     cyberdemon  Korax
+#%
 
-" %mif_full
-" ShotgunGuy  imp         Ettin
-" Imp         lostsoul    FireDemon
-" Arachnotron arachnotron CentaurLeader
-" Demon       demon       Centaur
-" Mancubus    hellknight  IceGuy
-" Mancubus    hellknight  SerpentLeader
-" Arachnotron hellknight  Serpent
-" HellKnight  hellknight  Demon1
-" BaronOfHell baron       Demon2
-" Cacodemon   mancubus    Bishop
-" HellKnight  lostsoul    Wraith
-" CyberDemon  cyberdemon  Dragon
-" CyberDemon  phantom     ClericBoss
-" CyberDemon  phantom     FighterBoss
-" CyberDemon  phantom     MageBoss
-" CyberDemon  cyberdemon  Heresiarch
-" DSparil     cyberdemon  Korax
-" %
-
-Doom -------------------------------------------------------------------------|
+## Doom ----------------------------------------------------------------------|
 
 +ZombieMan     zombie        ZombieMan
 +ZombieMan     zombie        Zombieman
@@ -54,7 +64,7 @@ Doom -------------------------------------------------------------------------|
 +SpiderDemon   mastermind    SpiderMastermind
 +CyberDemon    cyberdemon    Cyberdemon
 
-Chex Quest -------------------------------------------------------------------|
+## Chex Quest ----------------------------------------------------------------|
 
 +Imp         imp        ArmoredFlemoidusBipedicus
 +Imp         imp        Quadrumpus
@@ -71,7 +81,7 @@ Chex Quest -------------------------------------------------------------------|
 +SpiderDemon mastermind Flembomination
 +CyberDemon  cyberdemon Snotfolus
 
-Heretic ----------------------------------------------------------------------|
+## Heretic -------------------------------------------------------------------|
 
 +Imp         imp         Gargoyle
 +Demon       demon       Golem
@@ -84,7 +94,7 @@ Heretic ----------------------------------------------------------------------|
 +Maulotaur   mastermind  Maulotaur
 +DSparil     cyberdemon  DSparil
 
-Lithium ----------------------------------------------------------------------|
+## Lithium -------------------------------------------------------------------|
 
 +1000 0 phantom    James
 +2000 0 phantom    Makarov
@@ -95,7 +105,7 @@ Lithium ----------------------------------------------------------------------|
 +CyberDemon angel Archangel
 %
 
-Cheogsh.wad ------------------------------------------------------------------|
+## Cheogsh.wad ---------------------------------------------------------------|
 
 +Spectre demon Nightmare
 
@@ -107,7 +117,7 @@ Cheogsh.wad ------------------------------------------------------------------|
 +CyberDemon  cyberdemon Cheogsh
 %
 
-ed4_rfo1.wad -----------------------------------------------------------------|
+## ed4_rfo1.wad --------------------------------------------------------------|
 
 +DRLACaptain zombie      BazookaZombie
 +Imp         imp         BatFamiliar
@@ -121,18 +131,18 @@ ed4_rfo1.wad -----------------------------------------------------------------|
 +PainElemental painelemental EDPE
 %
 
-dop.pk3 ----------------------------------------------------------------------|
+## dop.pk3 -------------------------------------------------------------------|
 
 +LostSoul lostsoul LostGhoul
 
-DoomRL Arsenal Monsters ------------------------------------------------------|
+## DoomRL Arsenal Monsters ---------------------------------------------------|
 
 +ZombieMan   zombie FormerHuman
 +ShotgunGuy  zombie FormerSergeant
 +ChaingunGuy zombie FormerCommando
 +DRLACaptain zombie Former
 
-Shut Up and Lithium ----------------------------------------------------------|
+## Shut Up and Lithium -------------------------------------------------------|
 
 +ZombieMan     imp         Remnant
 +ZombieMan     imp         Roach
@@ -171,13 +181,13 @@ Shut Up and Lithium ----------------------------------------------------------|
 +HellKnight    hellknight  Deepone
 +BaronOfHell   baron       Deeptwo
 
-Western Patch ----------------------------------------------------------------|
+## Western Patch -------------------------------------------------------------|
 
 +ZombieMan  zombie Westman
 +ZombieMan  zombie WildGunmanGuy
 +ShotgunGuy zombie TheOutsider
 
-Combined Harms ---------------------------------------------------------------|
+## Combined Harms ------------------------------------------------------------|
 
 +ZombieMan     zombie        ZombieGunner
 +ShotgunGuy    zombie        ShotGunner
@@ -196,9 +206,8 @@ Combined Harms ---------------------------------------------------------------|
 +SpiderDemon   mastermind    bigspider
 +CyberDemon    cyberdemon    angrycow
 
-Colorful Hell ----------------------------------------------------------------|
-
-Note, these MUST be at the bottom, because they are extremely vague.
+## Colorful Hell -------------------------------------------------------------|
+## Note, these MUST be at the bottom, because they are extremely vague.
 
 +ZombieMan     zombie        Zombie
 +ShotgunGuy    zombie        SG
@@ -212,4 +221,4 @@ Note, these MUST be at the bottom, because they are extremely vague.
 +SpiderDemon   mastermind    Mind
 +CyberDemon    cyberdemon    Cybie
 
-EOF
+## EOF

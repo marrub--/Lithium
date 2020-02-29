@@ -14,8 +14,9 @@ _end_
 ##
 ## ---------------------------------------------------------------------------|
 
-require_relative "corinth/token.rb"
 require_relative "corinth/io.rb"
+require_relative "corinth/token.rb"
+require_relative "corinth/tokenstream.rb"
 
 def common_main
    begin

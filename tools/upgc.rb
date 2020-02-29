@@ -24,10 +24,9 @@ def parse_upgrade tks, tok
    scr = tks.peek_or :number, "0"
 
    pcl = []
-   loop do
+   tks.while_drop :bar do
       tok = tks.next.expect_after tok, :identi
       pcl.push tok.text
-      break unless tks.drop :bar
    end
    pcl = pcl.join " | "
 
@@ -58,10 +57,9 @@ def parse_upgrade tks, tok
    req = tks.peek_or :modulo, "0" do |orig|
       req = []
       tok = orig
-      loop do
+      tks.while_drop :bar do
          tok = tks.next.expect_after tok, :identi
          req.push "UR_" + tok.text
-         break unless tks.drop :bar
       end
       req.join " | "
    end

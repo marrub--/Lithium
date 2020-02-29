@@ -86,50 +86,6 @@ class Token
    end
 end
 
-class TokenStream
-   def initialize inner, eof
-      @inner = inner
-      @eof   = eof
-   end
-
-   def peek
-      begin
-         @inner.peek
-      rescue StopIteration
-         @eof
-      end
-   end
-
-   def next
-      begin
-         @inner.next
-      rescue StopIteration
-         @eof
-      end
-   end
-
-   def peek_or type, default = nil
-      if self.peek.type == type
-         tok = self.next
-         if block_given?
-            yield tok
-         else
-            tok.text
-         end
-      else
-         default
-      end
-   end
-
-   def drop type
-      if self.peek.type == type
-         self.next
-      else
-         nil
-      end
-   end
-end
-
 def tokenize filename
    read = PosReader.read filename
    data = read.each

@@ -14,59 +14,81 @@
 
 require_relative "corinth.rb"
 
-def proc_monster ofp, flg, lst
-   ofp << "   {"
-   if lst[0] =~ /[[:digit:]]/
-      ofp << "#{lst.shift},#{lst.shift},"
-   else
-      name = lst.shift
-      ofp << "Exp_#{name},Score_#{name},"
-   end
-   ofp << %(mtype_#{lst.shift},"#{lst.shift}")
-   ofp << ", #{flg}" unless flg.empty?
-   ofp << "},\n"
-end
+common_main do
+   tks = tokenize ARGV.shift
 
-def proc_file ifp, ofp
-   it = ifp.read.lines.each
-
-   ofp.puts generated_header "monc"
-   ofp.puts "enum {"
+   flags    = []
+   enums    = []
+   monsters = []
 
    loop do
-      ln = it.next
-      break if ln == "end flags\n"
-      if ln[0] == "+"
-         sp = ln[1..-1].chomp.split
-         ofp << "   #{sp[0]} = 1 << #{sp[1]},\n"
+      tok = tks.next.expect_in_top [:plus, :modulo, :assign, :eof]
+
+      case tok.type
+      when :plus
+         tok = tks.next.expect_after tok, [:identi, :number]
+         exp = nil
+         scr = nil
+         if tok.type == :number
+            exp = tok.text
+            tok = tks.next.expect_after tok, :number
+            scr = tok.text
+         else
+            exp = "Exp_" + tok.text
+            scr = "Score_" + tok.text
+         end
+         tok = tks.next.expect_after tok, :identi
+         mtype = tok.text
+         tok = tks.next.expect_after tok, :identi
+         match = tok.text
+         monsters.push({exp:   exp, scr: scr, mtype: mtype, match: match,
+                        flags: flags})
+      when :modulo
+         flags = []
+         if tks.peek.type == :identi
+            tks.while_drop :bar do
+               tok = tks.next.expect_after tok, :identi
+               flags.push tok.text
+            end
+         end
+      when :assign
+         tok = tks.next.expect_after tok, :identi
+         enums.push tok.text
+      when :eof
+         break
       end
    end
 
-   ofp << <<~_end_
-   };
-
-   StrEntON
-   static struct monster_info const monsterinfo[] = {
-   _end_
-
-   flg = ""
-   loop do
-      ln = it.next
-      txt = ln[1..-1].chomp
-      case ln[0]
-      when "%" then flg = txt
-      when "+" then proc_monster ofp, flg, txt.split
-      end
-   end
-
-   ofp << <<~_end_
-   };
-   StrEntOFF
-
-   /* EOF */
-   _end_
+   open(ARGV.shift, "wt").puts <<_end_
+#{generated_header "monc"}
+enum {
+#{
+res = String.new
+for enum, i in enums.each_with_index
+   res.concat "   #{enum} = 1 << #{i},\n"
 end
+res
+}
+};
 
-proc_file open(ARGV[0], "rt"), open(ARGV[1], "wt")
+StrEntON
+static struct monster_info const monsterinfo[] = {
+#{
+res = String.new
+for mon in monsters
+   res.concat %(   {#{mon[:exp]}, #{mon[:scr]}, mtype_#{mon[:mtype]}, "#{mon[:match]}")
+   unless mon[:flags].empty?
+      res.concat ", " + mon[:flags].join("|")
+   end
+   res.concat "},\n"
+end
+res
+}
+};
+StrEntOFF
+
+/* EOF */
+_end_
+end
 
 ## EOF

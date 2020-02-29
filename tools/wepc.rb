@@ -22,7 +22,7 @@ common_main do
    tks = tokenize ARGV.shift
 
    pcl  = "pcl_any"
-   wf   = ""
+   wf   = []
    weps = []
    wepn = {}
 
@@ -34,35 +34,36 @@ common_main do
          tok = tks.next.expect_after tok, :identi
          pcl = "pcl_" + tok.text
       when :modulo
-         wf = tks.peek_or :identi, "" do |tok|
-            "F(" + tok.text + ")"
+         wf = []
+         if tks.peek.type == :identi
+            tks.while_drop :bar do
+               tok = tks.next.expect_after tok, :identi
+               wf.push tok.text
+            end
          end
       when :plus
-         begin
-            res = []
-            tok = tks.next.expect_after tok, :identi
-            nam = "weapon_" + tok.text
-            tok = tks.next.expect_after tok, :number
-            slt = tok.text
-            tok = tks.next.expect_after tok, :identi
-            res.push 'N("' + tok.text + '")'
-            tok = tks.next.expect_after tok, [:identi, :string]
-            if tok.type == :identi
-               res.push tok.text
-            else
-               res.push 'P("' + tok.text + '")'
-            end
-            tok = tks.next.expect_after tok, :identi
-            res.push "AT_" + tok.text
-            tks.peek_or :identi do |orig|
-               typ = orig.text
-               tok = tks.next.expect_after orig, :string
-               res.push typ + '("' + tok.text + '")'
-            end
-         rescue StopIteration
-         ensure
-            weps.push({pcl: pcl.dup, nam: nam, slt: slt, res: res})
+         res = []
+         tok = tks.next.expect_after tok, :identi
+         nam = "weapon_" + tok.text
+         tok = tks.next.expect_after tok, :number
+         slt = tok.text
+         tok = tks.next.expect_after tok, :identi
+         res.push 'N("' + tok.text + '")'
+         tok = tks.next.expect_after tok, [:identi, :string]
+         if tok.type == :identi
+            res.push tok.text
+         else
+            res.push 'P("' + tok.text + '")'
          end
+         tok = tks.next.expect_after tok, :identi
+         res.push "AT_" + tok.text
+         tks.peek_or :identi do |orig|
+            typ = orig.text
+            tok = tks.next.expect_after orig, :string
+            res.push typ + '("' + tok.text + '")'
+         end
+         res.push "F(" + wf.join(" | ") + ")" unless wf.empty?
+         weps.push({pcl: pcl, nam: nam, slt: slt, res: res})
       when :semico
          res = []
          while tks.peek.type == :identi
@@ -87,7 +88,7 @@ enum /* WeaponNum */
 
 #{
    ret = String.new
-   weps.each do |wep| ret << "   #{wep[:nam]},\n" end
+   weps.each do |wep| ret.concat "   #{wep[:nam]},\n" end
    ret
 }
    weapon_max
@@ -139,7 +140,9 @@ struct weaponinfo const weaponinfo[weapon_max] = {
    {0, pcl_any, snil, "MMMMHMHMMMHMMM"},
 #{
    ret = String.new
-   weps.each do |wep| ret << "   {#{wep[:slt]},#{wep[:pcl]},#{wep[:res].join ","}},\n" end
+   weps.each do |wep|
+      ret.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:res].join ","}},\n"
+   end
    ret
 }
 };
@@ -151,9 +154,11 @@ i32 P_Wep_FromName(struct player *p, i32 name) {
 #{
    ret = String.new
    for pcl, wpns in wepn
-      ret << "   case #{pcl}:\n      switch(name) {\n"
-      wpns.each_with_index do |wep, i| ret << "      case #{WEPNAMES[i]}: return #{wep};\n" end
-      ret << "      }\n"
+      ret.concat "   case #{pcl}:\n      switch(name) {\n"
+      wpns.each_with_index do |wep, i|
+         ret.concat "      case #{WEPNAMES[i]}: return #{wep};\n"
+      end
+      ret.concat "      }\n"
    end
    ret
 }   }
