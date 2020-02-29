@@ -116,11 +116,8 @@ def parse_path state, orig
    parse_relative_path = lambda do |path|
       tok = tks.next.expect_after tok, :identi
       path.push tok.text
-      if tks.peek.type == :period
-         tks.next
+      tks.peek_or :period, path do |tok|
          parse_relative_path.(path)
-      else
-         path
       end
    end
 
@@ -161,10 +158,10 @@ def parse_ambient state, tok, directive
    end
 
    num = case tok.text
-         when "continuous"; 0
-         when "periodic";   1
-         when "random";     2
-         else; tok.raise_kw "mode"
+         when "continuous" then 0
+         when "periodic"   then 1
+         when "random"     then 2
+         else              tok.raise_kw "mode"
          end
 
    args.push tok.text
@@ -207,10 +204,8 @@ def parse_directive state
    tok = tks.next.expect_after tok, :identi
    case (directive = tok.text)
    when "include"
-      tok       = tks.next.expect_after tok, :string
-      new_tks   = tokenize tok.text
-      new_state = state.with new_tks.each
-      parse new_state
+      tok = tks.next.expect_after tok, :string
+      parse state.with tokenize tok.text
    when "output"
       tok = tks.next.expect_after tok, :string
       state.out_file.replace tok.text
@@ -257,10 +252,7 @@ def parse_directive state
       rhs = []
 
       loop do
-         if tks.peek.type == :brac2c
-            tks.next
-            break
-         end
+         break if tks.drop :brac2c
          rhs.push parse_path state, tok
          tok = tks.next.expect_after "path", :comma
       end
@@ -283,10 +275,7 @@ def parse_definition state
       origin = state.path.dup
       state.path.replace lhs
       loop do
-         if tks.peek.type == :brac2c
-            tks.next
-            break
-         end
+         break if tks.drop :brac2c
          parse_statement state
       end
       state.path.replace origin
@@ -298,7 +287,7 @@ end
 
 def parse_statement state
    tks = state.tks
-   tok = tks.peek.expect_in_top [:identi, :period, :dollar, :equals]
+   tok = tks.peek.expect_in_top [:identi, :period, :dollar, :equals, :eof]
 
    case tok.type
    when :identi, :period
@@ -310,6 +299,8 @@ def parse_statement state
       tks.next
       tok = tks.next.expect_after tok, [:identi, :string]
       state.file_dir.replace tok.text
+   when :eof
+      raise StopIteration
    end
 end
 
@@ -319,14 +310,13 @@ def parse state
    end
 end
 
-begin
+common_main do
    base = Dir.pwd
    for filename in ARGV
       Dir.chdir File.dirname filename
       filename = File.basename filename
 
-      tks   = tokenize filename
-      state = ParseState.new tks.each
+      state = ParseState.new tokenize filename
       parse state
 
       fp = open state.out_file, "wt"
@@ -343,8 +333,6 @@ begin
       end
       Dir.chdir base
    end
-rescue => exc
-   puts "Error:\n#{exc.backtrace.join "\n"}\n#{exc.message}"
 end
 
 ## EOF

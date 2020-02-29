@@ -13,7 +13,7 @@
 ## ---------------------------------------------------------------------------|
 
 Dir[ARGV[0]].each do |f|
-   if File.file?(f) && open(f) {|f| f.readpartial(4) == "fLaC"}
+   if File.file?(f) && open(f) do |f| f.readpartial(4) == "fLaC" end
       puts "*** #{f}"
       `flac --best --no-padding --preserve-modtime -f "#{f}" -o "#{f}" 2>&1`
       `metaflac --dont-use-padding --remove-all "#{f}" 2>&1`

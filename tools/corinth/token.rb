@@ -15,21 +15,23 @@
 class Symbol
    def tk_to_s
       case self
-      when :assign; "`='"
-      when :brac2c; "`}'"
-      when :brac2o; "`{'"
-      when :colon ; "`:'"
-      when :comma ; "`,'"
-      when :dollar; "`$'"
-      when :equals; "`=='"
-      when :identi; "identifier"
-      when :modulo; "`%'"
-      when :number; "number"
-      when :period; "`.'"
-      when :plus  ; "`+'"
-      when :semico; "`;'"
-      when :string; "string"
-      else;         "unknown token"
+      when :assign then "`='"
+      when :bar    then "`|'"
+      when :brac2c then "`}'"
+      when :brac2o then "`{'"
+      when :colon  then "`:'"
+      when :comma  then "`,'"
+      when :dollar then "`$'"
+      when :eof    then "EOF"
+      when :equals then "`=='"
+      when :identi then "identifier"
+      when :modulo then "`%'"
+      when :number then "number"
+      when :period then "`.'"
+      when :plus   then "`+'"
+      when :semico then "`;'"
+      when :string then "string"
+      else              "unknown token"
       end
    end
 end
@@ -38,7 +40,7 @@ class Token
    SPACE = /\s/
    IDENS = /[a-zA-Z_*\\]/
    IDENC = /[a-zA-Z0-9_\/-]/
-   NUMRS = /[0-9]/
+   NUMRS = /[0-9-]/
    NUMRC = /[0-9.]/
 
    attr_reader :pos, :type, :text
@@ -76,10 +78,54 @@ class Token
 
    def to_s
       case @type
-      when :identi; "`#{@text}'"
-      when :string; "\"#{@text}\""
-      when :number; "#{@text}"
-      else;         @type.tk_to_s
+      when :identi then "`#{@text}'"
+      when :string then "\"#{@text}\""
+      when :number then "#{@text}"
+      else              @type.tk_to_s
+      end
+   end
+end
+
+class TokenStream
+   def initialize inner, eof
+      @inner = inner
+      @eof   = eof
+   end
+
+   def peek
+      begin
+         @inner.peek
+      rescue StopIteration
+         @eof
+      end
+   end
+
+   def next
+      begin
+         @inner.next
+      rescue StopIteration
+         @eof
+      end
+   end
+
+   def peek_or type, default = nil
+      if self.peek.type == type
+         tok = self.next
+         if block_given?
+            yield tok
+         else
+            tok.text
+         end
+      else
+         default
+      end
+   end
+
+   def drop type
+      if self.peek.type == type
+         self.next
+      else
+         nil
       end
    end
 end
@@ -106,18 +152,19 @@ def tokenize filename
 
    loop do
       case c = data.next
-      when Token::SPACE; next
-      when "#"; read_until_from data do |c| c == "\n" end
-      when "$"; tok_1.(read.pos, :dollar)
-      when "%"; tok_1.(read.pos, :modulo)
-      when "+"; tok_1.(read.pos, :plus  )
-      when ","; tok_1.(read.pos, :comma )
-      when "."; tok_1.(read.pos, :period)
-      when ":"; tok_1.(read.pos, :colon )
-      when ";"; tok_1.(read.pos, :semico)
-      when "="; tok_2.(read.pos, "=", :equals, :assign)
-      when "{"; tok_1.(read.pos, :brac2o)
-      when "}"; tok_1.(read.pos, :brac2c)
+      when Token::SPACE then next
+      when "#" then read_until_from data do |c| c == "\n" end
+      when "$" then tok_1.(read.pos, :dollar)
+      when "%" then tok_1.(read.pos, :modulo)
+      when "+" then tok_1.(read.pos, :plus  )
+      when "," then tok_1.(read.pos, :comma )
+      when "." then tok_1.(read.pos, :period)
+      when ":" then tok_1.(read.pos, :colon )
+      when ";" then tok_1.(read.pos, :semico)
+      when "=" then tok_2.(read.pos, "=", :equals, :assign)
+      when "{" then tok_1.(read.pos, :brac2o)
+      when "|" then tok_1.(read.pos, :bar   )
+      when "}" then tok_1.(read.pos, :brac2c)
       when '"'
          pos = read.pos
          s   = read_until_from data do |c| c == '"' end
@@ -136,7 +183,9 @@ def tokenize filename
       end
    end
 
-   tokens
+   eof = Token.new read.pos, :eof
+
+   TokenStream.new tokens.each, eof
 end
 
 ## EOF

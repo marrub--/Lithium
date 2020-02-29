@@ -17,6 +17,15 @@ _end_
 require_relative "corinth/token.rb"
 require_relative "corinth/io.rb"
 
+def common_main
+   begin
+      yield
+   rescue => exc
+      puts "Error:\n#{exc.backtrace.join "\n"}\n#{exc.message}"
+      exit false
+   end
+end
+
 def generated_header progname, terminate = true
    <<_end_
 /* ---------------------------------------------------------------------------|

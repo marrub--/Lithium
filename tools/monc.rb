@@ -54,8 +54,8 @@ def proc_file ifp, ofp
       ln = it.next
       txt = ln[1..-1].chomp
       case ln[0]
-      when "%"; flg = txt
-      when "+"; proc_monster ofp, flg, txt.split
+      when "%" then flg = txt
+      when "+" then proc_monster ofp, flg, txt.split
       end
    end
 

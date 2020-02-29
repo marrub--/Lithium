@@ -14,68 +14,68 @@
 
 require_relative "corinth.rb"
 
-WEPNAMES = %W"wepnam_fist wepnam_chainsaw wepnam_pistol wepnam_shotgun
-              wepnam_supershotgun wepnam_chaingun wepnam_rocketlauncher
-              wepnam_plasmarifle wepnam_bfg9000"
+common_main do
+   WEPNAMES = %W"wepnam_fist wepnam_chainsaw wepnam_pistol wepnam_shotgun
+               wepnam_supershotgun wepnam_chaingun wepnam_rocketlauncher
+               wepnam_plasmarifle wepnam_bfg9000"
 
-tks = tokenize(ARGV.shift).each
+   tks = tokenize ARGV.shift
 
-pcl  = "pcl_any"
-wf   = ""
-weps = []
-wepn = {}
+   pcl  = "pcl_any"
+   wf   = ""
+   weps = []
+   wepn = {}
 
-loop do
-   tok = tks.next.expect_in_top [:colon, :modulo, :plus, :semico]
+   loop do
+      tok = tks.next.expect_in_top [:colon, :modulo, :plus, :semico, :eof]
 
-   case tok.type
-   when :colon
-      tok = tks.next.expect_after tok, :identi
-      pcl = "pcl_" + tok.text
-   when :modulo
-      if tks.peek.type == :identi
-         wf = "F(" + tks.next.text + ")"
-      else
-         wf = ""
-      end
-   when :plus
-      begin
+      case tok.type
+      when :colon
+         tok = tks.next.expect_after tok, :identi
+         pcl = "pcl_" + tok.text
+      when :modulo
+         wf = tks.peek_or :identi, "" do |tok|
+            "F(" + tok.text + ")"
+         end
+      when :plus
+         begin
+            res = []
+            tok = tks.next.expect_after tok, :identi
+            nam = "weapon_" + tok.text
+            tok = tks.next.expect_after tok, :number
+            slt = tok.text
+            tok = tks.next.expect_after tok, :identi
+            res.push 'N("' + tok.text + '")'
+            tok = tks.next.expect_after tok, [:identi, :string]
+            if tok.type == :identi
+               res.push tok.text
+            else
+               res.push 'P("' + tok.text + '")'
+            end
+            tok = tks.next.expect_after tok, :identi
+            res.push "AT_" + tok.text
+            tks.peek_or :identi do |orig|
+               typ = orig.text
+               tok = tks.next.expect_after orig, :string
+               res.push typ + '("' + tok.text + '")'
+            end
+         rescue StopIteration
+         ensure
+            weps.push({pcl: pcl.dup, nam: nam, slt: slt, res: res})
+         end
+      when :semico
          res = []
-         tok = tks.next.expect_after tok, :identi
-         nam = "weapon_" + tok.text
-         tok = tks.next.expect_after tok, :number
-         slt = tok.text
-         tok = tks.next.expect_after tok, :identi
-         res.push 'N("' + tok.text + '")'
-         tok = tks.next.expect_after tok, [:identi, :string]
-         if tok.type == :identi
-            res.push tok.text
-         else
-            res.push 'P("' + tok.text + '")'
-         end
-         tok = tks.next.expect_after tok, :identi
-         res.push "AT_" + tok.text
-         if tks.peek.type == :identi
+         while tks.peek.type == :identi
             tok = tks.next
-            typ = tok.text
-            tok = tks.next.expect_after tok, :string
-            res.push typ + '("' + tok.text + '")'
+            res.push "weapon_" + tok.text
          end
-      rescue StopIteration
-      ensure
-         weps.push({pcl: pcl.dup, nam: nam, slt: slt, res: res})
+         wepn[pcl] = res
+      when :eof
+         break
       end
-   when :semico
-      res = []
-      while tks.peek.type == :identi
-         tok = tks.next
-         res.push "weapon_" + tok.text
-      end
-      wepn[pcl] = res
    end
-end
 
-open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_
+   open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_
 /* pk7/lzscript/Constants/p_weapons.zsc
  */
 #{generated_header "wepc"}
@@ -164,5 +164,6 @@ i32 P_Wep_FromName(struct player *p, i32 name) {
 
 /* EOF */
 _end_c_
+end
 
 ## EOF
