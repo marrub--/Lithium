@@ -18,12 +18,16 @@ class Symbol
       when :assign; "`='"
       when :brac2c; "`}'"
       when :brac2o; "`{'"
+      when :colon ; "`:'"
       when :comma ; "`,'"
       when :dollar; "`$'"
       when :equals; "`=='"
       when :identi; "identifier"
+      when :modulo; "`%'"
       when :number; "number"
       when :period; "`.'"
+      when :plus  ; "`+'"
+      when :semico; "`;'"
       when :string; "string"
       else;         "unknown token"
       end
@@ -45,23 +49,29 @@ class Token
       @text = text
    end
 
-   def self.expect cr, pr, nx
-      self.expect_in cr, nx do |cr, nx|
-         "#{nx} must follow #{pr} (but found #{cr} instead)"
+   def expect_after pr, nx
+      expect_in nx do |nx|
+         "#{nx} must follow #{pr} (but found #{self} instead)"
       end
    end
 
-   def self.expect_in cr, nx
+   def expect_in_top nx
+      expect_in nx do |nx|
+         "#{nx} expected in toplevel but got #{self}"
+      end
+   end
+
+   def expect_in nx
       nx = [nx] if nx.is_a? Symbol
-      unless nx.include? cr.type
+      unless nx.include? @type
          nx = nx.map do |sy| sy.tk_to_s end.join ", "
-         raise "#{cr.pos}: #{yield cr, nx}"
+         raise "#{@pos}: #{yield nx}"
       end
-      cr
+      self
    end
 
-   def self.raise_kw tok, kind
-      raise "#{tok.pos}: invalid #{kind} #{tok}"
+   def raise_kw kind
+      raise "#{@pos}: invalid #{kind} #{self}"
    end
 
    def to_s
@@ -96,20 +106,22 @@ def tokenize filename
 
    loop do
       case c = data.next
-      when Token::SPACE
-         next
+      when Token::SPACE; next
+      when "#"; read_until_from data do |c| c == "\n" end
+      when "$"; tok_1.(read.pos, :dollar)
+      when "%"; tok_1.(read.pos, :modulo)
+      when "+"; tok_1.(read.pos, :plus  )
+      when ","; tok_1.(read.pos, :comma )
+      when "."; tok_1.(read.pos, :period)
+      when ":"; tok_1.(read.pos, :colon )
+      when ";"; tok_1.(read.pos, :semico)
+      when "="; tok_2.(read.pos, "=", :equals, :assign)
+      when "{"; tok_1.(read.pos, :brac2o)
+      when "}"; tok_1.(read.pos, :brac2c)
       when '"'
          pos = read.pos
          s   = read_until_from data do |c| c == '"' end
          tok_s.(pos, :string, s)
-      when "#"
-         read_until_from data do |c| c == "\n" end
-      when "="; tok_2.(read.pos, "=", :equals, :assign)
-      when "$"; tok_1.(read.pos, :dollar)
-      when "."; tok_1.(read.pos, :period)
-      when ","; tok_1.(read.pos, :comma )
-      when "{"; tok_1.(read.pos, :brac2o)
-      when "}"; tok_1.(read.pos, :brac2c)
       when Token::IDENS
          c   = "" if c == "\\"
          pos = read.pos

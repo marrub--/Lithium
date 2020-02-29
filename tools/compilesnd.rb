@@ -111,10 +111,10 @@ end
 
 def parse_path state, orig
    tks = state.tks
-   tok = Token.expect tks.peek, orig, [:identi, :period]
+   tok = tks.peek.expect_after orig, [:identi, :period]
 
    parse_relative_path = lambda do |path|
-      tok = Token.expect tks.next, tok, :identi
+      tok = tks.next.expect_after tok, :identi
       path.push tok.text
       if tks.peek.type == :period
          tks.next
@@ -143,34 +143,34 @@ def parse_ambient state, tok, directive
    tks  = state.tks
    args = []
 
-   tok = Token.expect tks.next, tok, :number
+   tok = tks.next.expect_after tok, :number
    args.push tok.text
 
    path = parse_path state, tok
    args.push path
 
-   tok = Token.expect tks.next, "path", :identi
+   tok = tks.next.expect_after "path", :identi
    case tok.text
    when "point"
-      tok = Token.expect tks.next, tok, :number
+      tok = tks.next.expect_after tok, :number
       args.push "point", tok.text
-      tok = Token.expect tks.next, tok, :identi
+      tok = tks.next.expect_after tok, :identi
    when "surround", "world"
       args.push tok.text
-      tok = Token.expect tks.next, tok, :identi
+      tok = tks.next.expect_after tok, :identi
    end
 
    num = case tok.text
          when "continuous"; 0
          when "periodic";   1
          when "random";     2
-         else; Token.raise_kw tok, "mode"
+         else; tok.raise_kw "mode"
          end
 
    args.push tok.text
 
    (num + 1).times do
-      tok = Token.expect tks.next, tok, :number
+      tok = tks.next.expect_after tok, :number
       args.push tok.text
    end
 
@@ -182,19 +182,19 @@ def parse_player state, tok, directive
    args = []
 
    3.times do
-      tok = Token.expect tks.next, tok, :identi
+      tok = tks.next.expect_after tok, :identi
       args.push tok.text
    end
 
    case directive
    when "playersounddup"
-      tok = Token.expect tks.next, tok, :identi
+      tok = tks.next.expect_after tok, :identi
       args.push tok.text
    when "playeralias"
       path = parse_path state, tok
       args.push path
    else
-      tok = Token.expect tks.next, tok, [:identi, :string]
+      tok = tks.next.expect_after tok, [:identi, :string]
       args.push state.prepend_file_dir tok.text
    end
 
@@ -204,56 +204,56 @@ end
 def parse_directive state
    tks = state.tks
 
-   tok = Token.expect tks.next, tok, :identi
+   tok = tks.next.expect_after tok, :identi
    case (directive = tok.text)
    when "include"
-      tok       = Token.expect tks.next, tok, :string
+      tok       = tks.next.expect_after tok, :string
       new_tks   = tokenize tok.text
       new_state = state.with new_tks.each
       parse new_state
    when "output"
-      tok = Token.expect tks.next, tok, :string
+      tok = tks.next.expect_after tok, :string
       state.out_file.replace tok.text
    when "sounds"
-      tok = Token.expect tks.next, tok, :string
+      tok = tks.next.expect_after tok, :string
       state.snds_dir.replace tok.text
    when "ignore"
-      tok = Token.expect tks.next, tok, [:identi, :string]
+      tok = tks.next.expect_after tok, [:identi, :string]
       state.ignore state.prepend_file_dir tok.text
    when "rolloff"
       path = path_to_sndinfo parse_path state, tok
       args = [path]
 
-      tok = Token.expect tks.next, tok, [:identi, :number]
+      tok = tks.next.expect_after tok, [:identi, :number]
       if tok.type == :identi
          case tok.text
          when "custom", "linear", "log"
             args.push tok.text
-            tok = Token.expect tks.next, tok, :number
+            tok = tks.next.expect_after tok, :number
          else
-            Token.raise_kw "type"
+            tok.raise_kw "type"
          end
       end
       args.push tok.text
 
-      tok = Token.expect tks.next, tok, :number
+      tok = tks.next.expect_after tok, :number
       args.push tok.text
       state.write OutDir.new directive, args
    when "pitchshiftrange"
-      tok = Token.expect tks.next, tok, :number
+      tok = tks.next.expect_after tok, :number
       state.write OutDir.new directive, [tok.text]
    when "attenuation", "limit", "pitchshift", "volume"
       path = parse_path state, tok
-      tok  = Token.expect tks.next, "path", :number
+      tok  = tks.next.expect_after "path", :number
       state.write OutDir.new directive, [path, tok.text]
    when "alias"
       lhs = parse_path state, tok
-      tok = Token.expect tks.next, "path", :assign
+      tok = tks.next.expect_after "path", :assign
       rhs = parse_path state, tok
       state.write OutDir.new directive, [lhs, rhs]
    when "random"
       lhs = parse_path state, tok
-      tok = Token.expect tks.next, "path", :brac2o
+      tok = tks.next.expect_after "path", :brac2o
       rhs = []
 
       loop do
@@ -262,7 +262,7 @@ def parse_directive state
             break
          end
          rhs.push parse_path state, tok
-         tok = Token.expect tks.next, "path", :comma
+         tok = tks.next.expect_after "path", :comma
       end
 
       state.write OutDbl.new directive, [lhs], rhs
@@ -271,14 +271,14 @@ def parse_directive state
    when "ambient"
       parse_ambient state, tok, directive
    else
-      Token.raise_kw tok, "directive"
+      tok.raise_kw "directive"
    end
 end
 
 def parse_definition state
    tks = state.tks
    lhs = parse_path state, nil
-   rhs = Token.expect tks.next, "path", [:brac2o, :identi, :string]
+   rhs = tks.next.expect_after "path", [:brac2o, :identi, :string]
    if rhs.type == :brac2o
       origin = state.path.dup
       state.path.replace lhs
@@ -298,10 +298,7 @@ end
 
 def parse_statement state
    tks = state.tks
-   tok = Token.expect_in tks.peek,
-                         [:identi, :period, :dollar, :equals] do |cr, nx|
-      "#{nx} expected in toplevel but got #{cr}"
-   end
+   tok = tks.peek.expect_in_top [:identi, :period, :dollar, :equals]
 
    case tok.type
    when :identi, :period
@@ -311,7 +308,7 @@ def parse_statement state
       parse_directive state
    when :equals
       tks.next
-      tok = Token.expect tks.next, tok, [:identi, :string]
+      tok = tks.next.expect_after tok, [:identi, :string]
       state.file_dir.replace tok.text
    end
 end
