@@ -61,7 +61,7 @@ static void DebugStats(struct player *p)
       ACS_PrintString(dbgstat[i]);
    for(i32 i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
-   PrintText(s_smallfnt, CR_WHITE, 10,1, 20,1);
+   PrintTextA(s_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }
 
 stkcall
@@ -186,6 +186,7 @@ static void View(struct player *p)
    Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);
    Dbg_Stat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
    Dbg_Stat("rage: %k\n", p->rage);
+   Dbg_Stat("score: %lli\n", p->score);
 }
 
 #if LITHIUM
