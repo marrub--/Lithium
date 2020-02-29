@@ -240,7 +240,7 @@ static void Levelup(struct player *p)
    {
       SetSize(320, 240);
       PrintTextChS(p->attr.lvupstr);
-      PrintText(s_cnfont, CR_WHITE, 7,1, 17,1);
+      PrintText(s_cnfont, CR_WHITE, 220,1, 75,1);
    }
 }
 
