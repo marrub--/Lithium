@@ -1,0 +1,26 @@
+$output "../pk7/sndinfo.txt"
+$sounds "../pk7"
+$ignore DSBAREXP
+
+$rolloff * custom 0 2025
+$pitchshiftrange 2
+
+$include "sound/misc.txt"
+$include "sound/cbi.txt"
+$include "sound/monsters.txt"
+$include "sound/phantoms.txt"
+$include "sound/pickups.txt"
+$include "sound/player.txt"
+$include "sound/player.c.txt"
+$include "sound/player.d.txt"
+$include "sound/player.i.txt"
+$include "sound/player.m.txt"
+$include "sound/marathon.txt"
+$include "sound/weapons.txt"
+$include "sound/weapons.c.txt"
+$include "sound/weapons.d.txt"
+$include "sound/weapons.m.txt"
+$include "sound/weapons.go.txt"
+$include "sound/world.txt"
+
+# EOF

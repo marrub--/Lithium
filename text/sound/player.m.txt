@@ -1,0 +1,23 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+# Marine
+player {
+   $alias marine.step = step
+
+   # Upgrades
+   == lsounds/PlayerM
+   rarmor/mode   RArmor/ChangeMode # Halo 3
+   rarmor/damage RArmor/Damage     # Touhou 13
+
+   rocketboost RocketBoost       # ???
+   adren/inj   Adrenaline/Inject # Killing Floor
+   adren/ready Adrenaline/Ready  # 〃
+}
+
+# EOF

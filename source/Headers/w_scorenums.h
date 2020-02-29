@@ -1,4 +1,6 @@
 /* pk7/lzscript/Constants/w_scorenums.zsc
+ */
+/*
  * ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.

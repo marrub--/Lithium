@@ -1,0 +1,129 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+amb {
+   == lsounds/World/Ambiance
+   # Ambiance
+   rain       Rain          # ???
+   wind       Wind          # 〃
+   rainout    RainOut       # 〃
+   windout    WindOut       # 〃
+   bigcomp    BigComputer   # EYE: Divine Cybermancy
+   alarmdist1 AlarmDistant  # Half-Life 2
+   alarmdist2 AlarmDistant2 # 〃
+   alarmdist3 AlarmDistant3 # 〃
+   alarmdist4 AlarmDistant4 # 〃
+   ship       Ship          # 〃
+   field      NoEntry       # 〃
+   vent       VentPump      # 〃
+   lightson   LightsOn      # 〃
+   computer   Computer      # Quake
+
+   fire Fire # Hexen
+   $limit fire 0
+
+   $alias  spark = .weapons.erifle.zap
+   $volume spark 0.01
+
+   $alias  turnon  = .player.cbi.clickon
+   $alias  turnoff = .player.cbi.clickoff
+   $volume turnon  0.1
+   $volume turnoff 0.1
+
+   $random alarmdist {
+      alarmdist1,
+      alarmdist2,
+      alarmdist3,
+      alarmdist4,
+   }
+
+   $ambient 42421 alarmdist point 0.25 random 40 240 1.0
+   $ambient 42422 bigcomp   point 1.5  continuous    0.7
+   $ambient 42423 ship      world      continuous    0.1
+   $ambient 42424 field     point 2.0  continuous    1.0
+   $ambient 42425 field     point 4.0  continuous    1.0
+   $ambient 42426 vent      point 5.0  continuous    0.5
+   $ambient 42427 computer  point 2.0  continuous    1.0
+
+   # Decorations
+   lamp1    LampTall     # ???
+   lamp2    LampSmall    # ???
+   shatter1 GlassBreak1  # Half-Life 2
+   shatter2 GlassBreak2  # 〃
+   metalx   MetalExplode # 〃
+   woodx    WoodExplode  # 〃
+
+   $random shatter {
+      shatter1,
+      shatter2,
+   }
+
+   $volume lamp1 0.3
+   $volume lamp2 0.3
+   $volume shatter 0.4
+}
+
+misc.barrel {
+   # Barrels
+   == lsounds/World/Barrel
+   hit1 Hit
+   hit2 Hit2
+
+   $random hit {
+      hit1,
+      hit2,
+   }
+}
+
+world.splash {
+   # Splashes
+   == lsounds/World/Splashes
+   nukage Nukage # ???
+
+   water1 Water1 # Call of Duty: Modern Warfare 2
+   water2 Water2 # 〃
+   water3 Water3 # 〃
+   water4 Water4 # 〃
+   water5 Water5 # 〃
+
+   sludge1 Sludge1 # ???
+   sludge2 Sludge2 # ???
+   sludge3 Sludge3 # ???
+   sludge4 Sludge4 # ???
+
+   lava1 Lava1 # ???
+   lava2 Lava2 # ???
+   lava3 Lava3 # ???
+   lava4 Lava4 # ???
+
+   $random water {
+      water1,
+      water2,
+      water3,
+      water4,
+      water5,
+   }
+
+   $random sludge {
+      sludge1,
+      sludge2,
+      sludge3,
+      sludge4,
+   }
+
+   $random lava {
+      lava1,
+      lava2,
+      lava3,
+      lava4,
+   }
+
+   $alias nukage = sludge
+}
+
+# EOF

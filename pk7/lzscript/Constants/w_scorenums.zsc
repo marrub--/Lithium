@@ -10,6 +10,17 @@
  * See licenses/cc0.txt for more information.
  *
  * ---------------------------------------------------------------------------|
+ */
+/* pk7/lzscript/Constants/w_scorenums.zsc
+ */
+/*
+ * ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
  *
  * Score numbers for various items and enemies.
  *

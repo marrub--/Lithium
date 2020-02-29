@@ -12,15 +12,17 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+require_relative "corinth.rb"
+
 def hash s
    s.each_codepoint.reduce do |res, ch| (res * 101 + ch) & 0x7FFFFFFF end
 end
 
-LIB_PATH      = (ENV["LIB_PATH"] ? "--lib-path='#{ENV["LIB_PATH"]}'" : "")
-ALL_FLAGS     = ENV["ALL_FLAGS"] || ""
-MAKELIB_FLAGS = (ENV["MAKELIB_FLAGS"] || "") + ALL_FLAGS + LIB_PATH
-CC_FLAGS      = (ENV["CC_FLAGS"]      || "") + ALL_FLAGS + LIB_PATH
-LD_FLAGS      = (ENV["LD_FLAGS"]      || "") + ALL_FLAGS
+LIB_PATH      = (ENV["LIB_PATH"] ? "--lib-path='#{ENV["LIB_PATH"]}'" : "") + " "
+ALL_FLAGS     = (ENV["ALL_FLAGS"] || "") + " "
+MAKELIB_FLAGS = (ENV["MAKELIB_FLAGS"] || "") + " " + ALL_FLAGS + LIB_PATH
+CC_FLAGS      = (ENV["CC_FLAGS"]      || "") + " " + ALL_FLAGS + LIB_PATH
+LD_FLAGS      = (ENV["LD_FLAGS"]      || "") + " " + ALL_FLAGS
 
 `rm -f build.ninja .ninja_deps .ninja_log`
 
@@ -42,20 +44,24 @@ INITSC = "o"
 NUMOUT = "p"
 MFLAGS = "q"
 
-UPGCCI = %W"$#{SRC}/p_upgrinfo.c"
-UPGCIN = %W"$#{HDR}/u_names.h".push(*UPGCCI, "$#{HDR}/u_func.h")
-WEPCCI = %W"$#{SRC}/p_weaponinfo.c"
-WEPCIN = %W"$#{HDR}/p_weapons.h".push(*WEPCCI)
-MONCIN = %W"$#{HDR}/w_moninfo.h"
+UPGCCO = %W"$#{SRC}/p_upgrinfo.c"
+UPGCHO = %W"$#{HDR}/u_names.h".push(*UPGCCO, "$#{HDR}/u_func.h")
+WEPCCO = %W"$#{SRC}/p_weaponinfo.c"
+WEPCHO = %W"$#{HDR}/p_weapons.h".push(*WEPCCO)
+MONCHO = %W"$#{HDR}/w_moninfo.h"
 DECOIN = %W"$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h
             $#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
-TEXTIN = Dir["text/*.txt"].map do |s| File.basename s end
+TEXTIN = Dir["text/*.txt"]
 HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
             pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
-DEPS_I = [*UPGCIN, *WEPCIN, *MONCIN]
-DEPS_H = Dir["source/Headers/*"].map do |s| "$#{HDR}/#{File.basename s}" end
-DEPS = [*DEPS_I, *DEPS_H].uniq
-SRCS = [*Dir["source/Main/*"], *UPGCCI, *WEPCCI].map do |s| File.basename s end.uniq
+SNDSIN = %w"text/Sounds.txt"
+DEPS = [*UPGCHO, *WEPCHO, *MONCHO,
+        Dir["source/Headers/*"].map do |s|
+           "$#{HDR}/#{File.basename s}"
+        end].uniq
+SRCS = [*Dir["source/Main/*"], *UPGCCO, *WEPCCO].map do |s|
+   File.basename s
+end.uniq
 
 fp = open "build.ninja", "wb"
 
@@ -87,8 +93,11 @@ rule fs
  command = tools/hashfs.rb #{HSFSIN.join " "}
  description = HashFS
 rule text
- command = cd text; ../tools/compilefs.rb #{TEXTIN.join " "}
+ command = tools/compilefs.rb $in
  description = CompileFS
+rule snd
+ command = tools/compilesnd.rb $in
+ description = CompileSnd
 rule dec
  command = tools/decompat.rb $in
  description = DeCompat
@@ -105,14 +114,15 @@ rule monc
  command = tools/monc.rb $in $out
  description = MonC
 
-build fs: fs | tools/hashfs.rb
-build text: text | tools/compilefs.rb
-build dec: dec #{DECOIN.join " "} | tools/decompat.rb
-build font: font
+build _fs: fs | tools/hashfs.rb
+build _text: text #{TEXTIN.join " "} | tools/compilefs.rb
+build _snd: snd #{SNDSIN.join " "} | tools/compilesnd.rb
+build _dec: dec #{DECOIN.join " "} | tools/decompat.rb
+build _font: font
 
-build #{WEPCIN.join " "}: wepc source/Weapons.txt | tools/wepc.rb
-build #{UPGCIN.join " "}: upgc source/Upgrades.txt | tools/upgc.rb
-build #{MONCIN.join " "}: monc source/Monsters.txt | tools/monc.rb
+build #{WEPCHO.join " "}: wepc source/Weapons.txt | tools/wepc.rb
+build #{UPGCHO.join " "}: upgc source/Upgrades.txt | tools/upgc.rb
+build #{MONCHO.join " "}: monc source/Monsters.txt | tools/monc.rb
 
 build $#{IR}/libc.ir: makelib
  #{TYPE} = libc
@@ -155,8 +165,8 @@ build pk7_dt/acs/dtlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
  #{STA   } = 70000
  #{NUMOUT} = $#{IR}/dtlib_ld.txt
 
-build lithium: phony dec text fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
-build doubletap: phony dec text fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
+build lithium: phony _dec _snd _text _fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
+build doubletap: phony _dec _snd _text _fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 
 default lithium
 _end_

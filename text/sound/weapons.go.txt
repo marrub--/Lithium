@@ -1,0 +1,123 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+weapons {
+   cfist {
+      == lsounds/Weapons/ChargeFist
+      pickup    Pickup    # Halo 3
+      fire1     Fire1     # 〃
+      fire2     Fire2     # 〃
+      fire3     Fire3     # 〃
+      ready     Ready     # 〃
+      charge    Charge    # Fallout 4, Halo 3
+      chargeend ChargeEnd # Fallout 4
+      hit1      HitFlesh1 # Shadow Complex
+      hit2      HitFlesh2 # 〃
+      hit3      HitFlesh3 # 〃
+      hitwall1  HitWall1  # 〃
+      hitwall2  HitWall2  # 〃
+      hitwall3  HitWall3  # 〃
+      hitwall4  HitWall4  # 〃
+
+      $random hit {
+         hit1,
+         hit2,
+         hit3,
+      }
+
+      $random hitwall {
+         hitwall1,
+         hitwall2,
+         hitwall3,
+         hitwall4,
+      }
+
+      $random fire {
+         fire1,
+         fire2,
+         fire3,
+      }
+
+      $limit fire    0
+      $limit hit     0
+      $limit hitwall 0
+   }
+
+   missile {
+      == lsounds/Weapons/MissileLauncher
+      fire      Fire      # FEAR
+      empty     FireEmpty # 〃
+      reloadout ReloadOut # 〃
+      reloadin  ReloadIn  # 〃
+      draw      Draw      # Halo 3, Doom 3
+      explode   Explode   # ???
+      $limit explode 0
+   }
+
+   plasma {
+      == lsounds/WeaponsM/PlasmaRifle
+      fire    Fire      # Devil May Cry 3
+      altfire AltFire   # 〃
+      pickup  Pickup    # Alliance of Valiant Arms
+      empty   FireEmpty # Killing Floor
+      draw    Draw      # FEAR
+
+      explode1 Explode1 # Devil May Cry 3
+      explode2 Explode2 # 〃
+      explode3 Explode3 # 〃
+
+      $random explode {
+         explode1,
+         explode2,
+         explode3,
+      }
+
+      $limit explode 0
+      $volume explode 0.5
+
+      laser {
+         == lsounds/WeaponsM/PlasmaRifle/Laser
+         fire_start FireStart # Unreal Tournament '99
+         fire_hum   FireHum   # 〃
+         fire_loop  FireLoop  # Touhou 9: Phantasmagoria of Flower View
+         fire_end   FireEnd   # Quake
+         spark      Spark     # Fallout 4
+         $limit spark 0
+      }
+
+      part {
+         == lsounds/WeaponsM/PlasmaRifle/PartBeam
+         charge    Charge    # Touhou 13
+         fire      Fire      # FEAR, Halo 3
+         reloadout ReloadOut # FEAR
+         reloadin  ReloadIn  # 〃
+
+         $volume fire 0.7
+      }
+   }
+
+   plasdiff {
+      == lsounds/Weapons/PlasmaDiffuser
+      fire1 Fire      # Halo 3
+      fire2 Fire2     # 〃
+      fire3 Fire3     # 〃
+      draw  Draw      # Fallout 3, Halo 3
+      empty FireEmpty # 〃
+
+      $alias explode = .weapons.plasmax
+      $limit explode 0
+
+      $random fire {
+         fire1,
+         fire2,
+         fire3,
+      }
+   }
+}
+
+# EOF

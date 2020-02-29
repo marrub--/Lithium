@@ -1,5 +1,6 @@
 working/*
 bin/*
+master/*
 *.bat
 ?.sh
 *.kdev4

@@ -1,0 +1,146 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+player.pickup {
+   == lsounds/Items
+   upgrbody    UpgrBody    # Killing Floor, ???
+   upgrextr    UpgrExtr    # Phantasy Star Nova
+   upgrweap    UpgrWeap    # Halo 3
+   upgrcbi     CBIUpgrade  # 〃
+   item        Item        # Firearms: Source
+   barrier     Barrier     # Touhou 13
+   infrared    Goggles     # ???
+   redkey      RedKey      # ???
+   yellowkey   YellowKey   # 〃
+   bluekey     BlueKey     # 〃
+   redskull2   SKULL       # Deus Ex
+   redskull1   RedSkull    # Halo 3
+   yellowskull YellowSkull # 〃
+   blueskull   BlueSkull   # 〃
+   evil        EvilItem    # Phantasy Star: Nova
+   cells       CellSmall   # ???
+   cellb       CellPack    # 〃
+   shells      ShellSmall  # 〃
+   shellb      ShellPack   # 〃
+   rockets     RocketSmall # Halo 3
+   rocketb     RocketBig   # Quake 2
+   mana        Mana        # Devil May Cry 2
+   scorebig    ScoreBig    # Self-made
+   scoresmall  ScoreSmall  # 〃
+   stimpack    Stimpack    # Doom 3
+   medikit     Medikit     # Fallout 4
+   invuln      Invuln      # Star Wars: Jedi Academy
+   mega        Mega        # Halo 3
+   super       Super       # 〃
+   allmap      AllMap      # Half-Life
+   radsuit     Radsuit     # Call of Duty: Modern Warfare 2
+   berserk     Berserk     # 〃
+   armor       Armor       # E.Y.E: Divine Cybermancy
+   boots       Boots       # 〃
+   ring        Ring        # 〃
+
+   scorechip ScoreChip # Half-Life 2
+
+   coin1 Coin1 # Sony Media 1001 Sound Effects
+   coin2 Coin2 # 〃
+   coin3 Coin3 # 〃
+
+   gem Gem # Fallout 4
+
+   material1 Material1 # Chronicles of Riddick
+   material2 Material2 # 〃
+   material3 Material3 # 〃
+   material4 Material4 # 〃
+
+   $random coin {
+      coin1,
+      coin2,
+      coin3,
+   }
+
+   $random material {
+      material1,
+      material2,
+      material3,
+      material4,
+   }
+
+   $random redskull {
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull1, redskull1, redskull1, redskull1, redskull1, redskull1,
+      redskull2,
+   }
+}
+
+# :V
+items {
+   == lsounds/Items
+   healthbonus1  bdup/DSHBON1
+   healthbonus2  bdup/DSHBON2
+   healthbonus3  bdup/DSHBON3
+   healthbonus4  bdup/DSHBON4
+   healthbonus5  bdup/DSHBON5
+   healthbonus6  bdup/DSHBON6
+   healthbonus7  bdup/DSHBON7
+   healthbonus8  bdup/DSHBON8
+   healthbonus9  bdup/DSHBON9
+   healthbonus10 bdup/DSHBON10
+   healthbonus11 bdup/DSHBON11
+   healthbonus12 bdup/DSHBON12
+   healthbonus13 bdup/DSHBON13
+   healthbonus14 bdup/DSHBON14
+
+   $random healthbonusrandom {
+      healthbonus1,
+      healthbonus2,
+      healthbonus3,
+      healthbonus4,
+      healthbonus5,
+      healthbonus6,
+      healthbonus7,
+      healthbonus8,
+      healthbonus9,
+      healthbonus10,
+      healthbonus11,
+      healthbonus12,
+      healthbonus13,
+      healthbonus14,
+   }
+
+   vial HealthBonus
+
+   $random healthbonus {
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial, vial,
+      vial, vial, vial, vial, vial, vial, healthbonusrandom,
+   }
+}
+
+# EOF

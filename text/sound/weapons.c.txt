@@ -1,0 +1,183 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+weapons {
+   mateba {
+      == lsounds/WeaponsC/Mateba
+      fire     Fire     # ???
+      open     Open     # ???
+      eject    Eject    # Killing Floor
+      load     Load     # 〃
+      close    Close    # Half-Life 2, Fallout 4
+      draw     Draw     # ???
+      finalize Finalize # Monster Girl Quest
+      $alias pickup = draw
+   }
+
+   erifle {
+      == lsounds/WeaponsC/ShockRifle
+      pickup    Pickup    # Halo 3
+      draw      Draw      # 〃
+      fire      Fire      # Return to Castle Wolfenstein, Halo 3
+      zap1      Zap1      # Half-Life 2
+      zap2      Zap2      # 〃
+      zap3      Zap3      # 〃
+      reloadout ReloadOut # Return to Castle Wolfenstein
+      reloadin  ReloadIn  # 〃
+      shock1    Shock1    # Half-Life 2
+      shock2    Shock2    # 〃
+
+      $random shock {
+         shock1,
+         shock2,
+      }
+
+      $random zap {
+         zap1,
+         zap2,
+         zap3,
+      }
+
+      $volume zap 0.15
+   }
+
+   cshotgun {
+      == lsounds/WeaponsC/SPAS
+      fire   Fire      # FEAR, Dynamic Range
+      fire2  Fire2     # 〃
+      load   Load      # Halo 3
+      pump   Pump      # Dynamic Range
+      empty  FireEmpty # EYE: Divine Cybermancy
+      pickup Pickup    # FEAR, Dynamic Range
+      draw   Draw      # Dynamic Range
+   }
+
+   smg {
+      == lsounds/WeaponsC/SMG
+      fire     Fire         # FEAR
+      firedone FireDone     # 〃
+      firehit  FireHit      # Half-Life 2 MMod
+      eject    EjectRod     # Killing Floor
+      insert   InsertRod    # 〃
+      heat     HeatDisperse # Self-made
+      lift     Lift         # Call of Duty: Modern Warfare 2
+      open     TopOpen      # Half-Life 2
+      close    TopClose     # 〃
+      magin2   MagInLong    # 〃
+      magout   MagOut       # Call of Duty: Modern Warfare 2
+      magin    MagIn        # 〃
+      draw     Draw         # Halo 3
+      pickup   Pickup       # FEAR
+   }
+
+   ionrifle {
+      == lsounds/WeaponsC/IonRifle
+      fire    Fire      # Fallout: New Vegas
+      fire2   Fire2     # 〃
+      eject   Eject     # Killing Floor
+      load    Load      # 〃
+      magout  MagOut    # Halo 3
+      magin   MagIn     # 〃
+      zoomout ZoomOut   # 〃
+      zoomin  ZoomIn    # 〃
+      empty   FireEmpty # Killing Floor
+      draw    Draw      # Killing Floor, Fallout 3
+      pickup  Pickup    # Killing Floor, Halo 3
+      cfire1  Charged1  # Halo 3
+      cfire2  Charged2  # 〃
+      charge  Charge    # Quake 2
+
+      $random cfire {
+         cfire1,
+         cfire2,
+      }
+
+      $alias heat = .weapons.smg.heat
+   }
+
+   shipgun {
+      == lsounds/WeaponsC/StarDestroyer
+      explode   Explode      # Halo 3
+      fire      Fire         # 〃
+      firesol   FireSolspear # Halo 3, Fallout 4
+      prepare   Charge       # Halo 3, Devil May Cry 2
+      empty     FireEmpty    # Counter-Strike: Source, Phantasy Star Online
+      draw      Draw         # Fallout: New Vegas
+      pickup    Pickup       # Halo 3, Doom 3
+      firesurge FireSurge    # Doom 3, Quake 2
+      idle      Idle         # Phantasy Star Nova
+
+      $limit explode 0
+      $attenuation explode 0.6
+   }
+
+   blade {
+      == lsounds/WeaponsC/Blade
+      slash Slash # Monster Girl Quest
+      hit   Hit   # 〃
+   }
+
+   delear {
+      == lsounds/WeaponsC/Delear
+      fire   Fire   # Devil May Cry 3
+      open   Open   # Devil May Cry 3, ???
+      charge Charge # Devil May Cry 3, Deus Ex
+      close  Close  # Alliance of Valiant Arms
+   }
+
+   feuer {
+      == lsounds/WeaponsC/Feuer
+      explode Explode # Monster Girl Quest
+      fire    Fire    # Touhou 13
+      final   Final   # 〃
+
+      $limit explode 0
+      $volume fire 0.9
+   }
+
+   rend {
+      == lsounds/WeaponsC/Rend
+      slash1  Fire1   # ???
+      slash2  Fire2   # ???
+      slash3  Fire3   # ???
+      end     End     # Phantasy Star Nova
+      reflect Reflect # 〃
+
+      $random slash {
+         slash1,
+         slash2,
+         slash3,
+      }
+
+      $alias hit = .weapons.blade.hit
+   }
+
+   hulgyon {
+      == lsounds/WeaponsC/Hulgyon
+      proc Proc # Touhou 13
+      $limit proc 0
+   }
+
+   sshot {
+      == lsounds/WeaponsC/StarShot
+      fire   Fire   # Halo 3
+      firero RunOut # Monster Girl Quest
+
+      $alias hit = .weapons.shotgun.gauss.puff
+      $limit hit 0
+      $limit fire 0
+   }
+
+   cercle {
+      == lsounds/WeaponsC/Cercle
+      begin  Begin  # Phantasy Star Online
+      attack Attack # 〃
+   }
+}
+
+# EOF

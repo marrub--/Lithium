@@ -1,0 +1,115 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+body {
+   # Body
+   == lsounds/Monsters/Body
+   bullethit1 Bullet1 # Half-Life
+   bullethit2 Bullet2 # 〃
+
+   flesh1 Flesh1 # Half-Life 2 MMod
+   flesh2 Flesh2 # 〃
+   flesh3 Flesh3 # 〃
+   flesh4 Flesh4 # 〃
+   flesh5 Flesh5 # 〃
+
+   $random bullethit {
+      bullethit1,
+      bullethit2,
+   }
+
+   $random flesh {
+      flesh1,
+      flesh2,
+      flesh3,
+      flesh4,
+      flesh5,
+   }
+}
+
+enemies {
+   # Misc
+   == lsounds/Monsters
+   levelup1 LevelUp1 # ???
+   levelup2 LevelUp2 # ???
+
+   $random levelup {
+      levelup1,
+      levelup2,
+   }
+
+   zombie {
+      == lsounds/Monsters/ZombieMan
+      ready Ready # Fallout 3
+      fire  Fire  # Killing Floor
+      $attenuation fire 0.5
+      $limit fire 0
+   }
+
+   shotguy {
+      == lsounds/Monsters/ShotGuy
+      ready Ready # Fallout: New Vegas
+      fire  Fire  # Killing Floor
+      $attenuation fire 0.5
+      $limit fire 0
+   }
+
+   chainguy {
+      == lsounds/Monsters/ChaingunGuy
+      fire  Fire        # Killing Floor
+      bolt  Bolt        # 〃
+      boltb BoltBack    # 〃
+      boltf BoltForward # 〃
+      $attenuation fire 0.5
+      $limit fire 0
+   }
+
+   mancubus {
+      == lsounds/Monsters/Mancubus
+      fire Fire # FEAR, Doom
+      $attenuation fire 0.5
+   }
+
+   hellknight {
+      == lsounds/Monsters/HellKnight
+      throw Throw # Touhou 7
+   }
+
+   revenant {
+      $alias home = .weapons.rifle.firemode
+   }
+
+   spiderdemon {
+      == lsounds/Monsters/SpiderMastermind
+      ready    Arm      # ???
+      fire     Fire     # FEAR
+      firestop FireStop # 〃
+   }
+
+   cyberdemon {
+      == lsounds/Monsters/Cyberdemon
+      ready    Ready    # FEAR
+      fire     Fire     # 〃
+      firedone FireDone # 〃
+      $attenuation ready 0.3
+      $attenuation fire 0.25
+      $attenuation firedone 0.25
+   }
+
+   ophidian {
+      == lsounds/Monsters
+      ice  Ophidian/IceAttack # Touhou 9
+      fire Mancubus/Fire      # FEAR, Doom
+      $limit ice 0
+      $limit fire 0
+      $attenuation ice 0.6
+      $attenuation fire 0.6
+   }
+}
+
+# EOF

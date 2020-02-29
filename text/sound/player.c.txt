@@ -1,0 +1,25 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+# Cyber-Mage
+== lsounds/PlayerC
+$playersound    cybermage male *death   Death     # Doom
+$playersound    cybermage male *xdeath  XDeath    # 〃
+$playersound    cybermage male *pain100 PainSmall # 〃
+$playersounddup cybermage male *pain75  *pain100  # 〃
+$playersound    cybermage male *pain50  Pain      # 〃
+$playersounddup cybermage male *pain25  *pain50   # 〃
+$playersound    cybermage male *grunt   Grunt     # Doom 64
+
+player {
+   manafull FullCharge # Touhou 13
+
+   $alias cyber-mage.step = step
+}
+
+# EOF

@@ -9,6 +9,7 @@ Plus denotes an upgrade. Any other text is ignored by the parser.
 :Body
 +HeadsUpDisM HeadsUpDisp          pM|pX AD-R-  1 -.05 HUD
 +HeadsUpDisC HeadsUpDisp          pC    AD-R-  1 -.05 HUD
++HeadsUpDisI HeadsUpDisp          pI    AD-R-  1 -.05 HUD
 +HeadsUpDisD HeadsUpDisp          pD    AD-R-  1 -.05 HUD
 +JetBooster  JetBooster           pM    A-UR-    -.05
 +ReflexWetw  ReflexWetw           gO|pX ADU--  5 -.05

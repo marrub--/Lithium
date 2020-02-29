@@ -1,0 +1,104 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+# World
+explosion DSBAREXP
+$limit explosion 0
+$attenuation explosion 0.7
+
+== lsounds
+silence Silence # 〃
+
+MMMMHMHMMMHMMM MMMMHMHMMMHMMM # ?????
+YOUSONOFABITCH YOUSONOFABITCH # ???????????
+AAAAAAAAAAAAAA AAAAAAAAAAAAAA # ?????????????
+
+misc {
+   pop pop # ????????????????
+
+   == lsounds/World
+   booom boom # ??????????????
+
+   == lsounds/World/Teleport
+   teleport Teleport    # Self-made
+   teleout  TeleportOut # Touhou 13
+   telein   TeleportIn  # 〃
+}
+
+ghost {
+   == lsounds/Weapons
+   hit GhostHit # Touhou 13
+   $alias spawn = .player.pickup.barrier
+}
+
+intermission {
+   == lsounds/GUI/Menu
+   tick      InterTick # Halo 3
+   nextstage InterNext # Halo 3, Phantasy Star Online
+   paststats InterPass # Phantasy Star Online
+   mid       InterMid  # 〃
+
+   $pitchshift nextstage 0
+   $pitchshift paststats 0
+   $pitchshift mid 0
+}
+
+misc {
+   # Menu
+   == lsounds/GUI
+   chat Chat # FEAR
+   $alias chat2 = chat
+
+   $random quitsound {
+      .enemies.zombie.ready,
+      .enemies.shotguy.ready,
+      .enemies.chainguy.bolt,
+      .enemies.hellknight.throw,
+      .enemies.cyberdemon.ready,
+      .misc.teleport,
+      .misc.chat,
+      .player.barrier,
+      .marathon.hitsolid,
+      .weapons.revolver.pickup,
+      .weapons.shotgun.pickup,
+      .weapons.sniper.draw,
+      .weapons.sword.hit,
+   }
+
+   $pitchshift chat 0
+   $pitchshift chat2 0
+
+   $pitchshift quitsound 0
+}
+
+menu {
+   == lsounds/GUI/Menu
+   backup   Back     # Phantasy Star Online
+   cursor   Move     # 〃
+   activate Activate # 〃
+   choose   Choose   # 〃
+
+   $alias invalid = .player.cbi.clickinvalid
+   $alias change  = .player.cbi.slidertick
+
+   $alias dismiss = backup
+   $alias prompt  = activate
+   $alias clear   = backup
+
+   $pitchshift backup 0
+   $pitchshift cursor 0
+   $pitchshift activate 0
+   $pitchshift choose 0
+   $pitchshift invalid 0
+   $pitchshift change 0
+   $pitchshift dismiss 0
+   $pitchshift prompt 0
+   $pitchshift clear 0
+}
+
+# EOF

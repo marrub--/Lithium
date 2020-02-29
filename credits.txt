@@ -23,7 +23,7 @@
 | I don't want myself or anyone else who's given me stuff (directly or not)   |
 | to get pissed off because proper attribution or permission wasn't given.    |
 |                                                                             |
-| Sound credits are all in the "sndinfo" files as comments.                   |
+| Sound credits are all in the <ltext/sound> files as comments.               |
 |\                                                                           /|
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */                                                                           \*

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -11,11 +12,13 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+require_relative "corinth.rb"
+
 require 'set'
 
 chs = Set[]
 
-`find text -type f -name '*.txt'`.split(?\n).each do |f|
+`find text -type f -name '*.txt'`.split("\n").each do |f|
    f.replace(open(f).read).each_char do |c| chs << c end
 end
 

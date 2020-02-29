@@ -1,0 +1,40 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+marathon {
+   == lsounds/Marathon
+   pickup   Pickup
+   explode  Explode
+   hitsolid HitSolid
+
+   rifle {
+      fire    RifleFire
+      grenade GrenadeLaunch
+      reload  RifleReload
+   }
+
+   hitwall1 HitWall1
+   hitwall2 HitWall2
+
+   hit1 Hit1
+   hit2 Hit2
+   hit3 Hit3
+
+   $random hitwall {
+      hitwall1,
+      hitwall2,
+   }
+
+   $random hit {
+      hit1,
+      hit2,
+      hit3,
+   }
+}
+
+# EOF

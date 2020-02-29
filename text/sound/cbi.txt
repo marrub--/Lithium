@@ -1,0 +1,64 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+player.cbi {
+   == lsounds/GUI
+   win95 Startup # Windows 95 / Brian Eno
+
+   open  Open  # Halo 3
+   close Close # 〃
+
+   buttoncurs  ButtonCursor # Rosenkreuzstilette
+   buttonpress ButtonPress  # Doom 3
+
+   slidertick SliderTick # Phantasy Star Nova
+
+   find     Find     # Phantasy Star Nova
+   finddone FindDone # 〃
+   findfail FindFail # 〃
+
+   invcur InvCur # Phantasy Star Nova
+   invmov InvMov # 〃
+
+   key1 Key1 # ???
+   key2 Key2 # 〃
+   key3 Key3 # 〃
+
+   clickon  ClickOn   # 3maze - Buttons and Switches
+   clickoff ClickOff  # 〃
+   clicklst ClickList # Resident Evil 4
+
+   auto {
+      toggle  AutoGroupToggle  # Deus Ex
+      buy     AutoGroupBuy     # The Sound Keeper - Dark Sci-Fi UI Sounds
+      invalid AutoGroupInvalid # Touhou 13
+   }
+
+   dlgopen  DialogueOpen  # Resident Evil 4
+   dlgclick DialogueClick # 〃
+
+   clickinvalid ClickInvalid # Steam
+   mail         MailReceive  # Fallout 4
+   tabswitch    TabSwitch    # 〃
+
+   scroll    Scroll        # Mac OS 9
+   scrollend ScrollRelease # 〃
+
+   left  Left  # Mac OS 9
+   right Right # 〃
+
+   $alias invrem = findfail
+
+   $random keypress {
+      key1,
+      key2,
+      key3,
+   }
+}
+
+# EOF

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -10,6 +11,8 @@
 ## Creates fonts and downloads necessary TTFs if needed.
 ##
 ## ---------------------------------------------------------------------------|
+
+require_relative "corinth.rb"
 
 FONTS=%w(MisakiG MisakiM JFDotG)
 CMAP=`tools/getcmap.rb`

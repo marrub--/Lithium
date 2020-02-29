@@ -1,5 +1,7 @@
 /* pk7/lzscript/Constants/w_data.zsc
  * pk7_dt/dtzsc/wdata.zsc
+ */
+/*
  * ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
