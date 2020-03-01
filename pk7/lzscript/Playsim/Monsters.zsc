@@ -67,19 +67,18 @@ static void SpawnBoss(Actor a, string name, int phase)
    b.HandleSpawnFlags();
    b.SpawnFlags = a.SpawnFlags;
 
-   b.Health += a.Health / 2;
+   /* probably fixes some weird stuff... */
+   if(a.health < 10000)
+      b.Health += a.Health / 2;
 
    /* delete it if it's not a boss, otherwise prepare for omega hack */
-   if(!a.bBOSS && !a.bBOSSDEATH)
-   {
+   if(!a.bBOSS && !a.bBOSSDEATH) {
       a.ClearCounters();
       a.Destroy();
-   }
-   else
-   {
-      /* great, it's going to screw everything up, let's "fix" that: */
-      /* we shut them up, banish them to the shadow realm, remove them from */
-      /* the world, lobotomize them and make them into a zombie. morbid... */
+   } else {
+      /* great, it's going to screw everything up, let's "fix" that:
+       * we shut them up, banish them to the shadow realm, remove them from
+       * the world, lobotomize them and make them into a zombie. morbid... */
       for(int i = 1; i < 8; i++) a.A_StopSound(i);
       a.SetXYZ((65535, 65535, 0)); /* Banish. */
       a.RemoveFromHash();
@@ -90,18 +89,15 @@ static void SpawnBoss(Actor a, string name, int phase)
 
    b.m_Phase = phase;
 
-   if(phase == 2)
-   {
+   if(phase == 2) {
       b.DamageMultiply = 1.5;
       b.ReactionTime   = 4;
       b.Health         = int(b.Health * 1.5);
       b.bMISSILEMORE   = true;
-   }
-   else if(phase == 3)
-   {
+   } else if(phase == 3) {
       b.DamageMultiply   = 2;
       b.ReactionTime     = 2;
-      b.Health          *= 2;
+      b.Health           = int(b.Health * 2.0);
       b.bMISSILEMORE     = true;
       b.bMISSILEEVENMORE = true;
    }
