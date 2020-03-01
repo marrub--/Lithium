@@ -24,5 +24,6 @@ server bool  lith_weapons_rainbowlaser   = false;
 server float lith_weapons_ricochetvol    = 1.0;
 server bool  lith_weapons_reloadempty    = true;
 server bool  lith_weapons_nofirebob      = false;
+server bool  lith_weapons_fastlazshot    = false;
 
 /* EOF */

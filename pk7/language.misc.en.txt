@@ -1391,6 +1391,7 @@
 "LITH_weapons_reloadempty" = "Reload weapons automatically";
 "LITH_weapons_nofirebob" = "No mid-fire bobbing";
 "LITH_weapons_rainbowlaser" = "Rainbow lasers";
+"LITH_weapons_fastlazshot" = "Better lazer shotgun performance";
 
 "LITH_stx_hud" = "Heads Up Display";
 

@@ -61,8 +61,12 @@ default
 action(Weapon) void Lith_A_LaserFire()
 {
    A_AlertMonsters();
+   class<Actor> trail = "Lith_LazShotgunTrail";
+   if(lith_weapons_fastlazshot) {
+      trail = "";
+   }
    for(int i = 0; i < 7; i++)
-      A_RailAttack(7 * Random(1, 4), 0, true, "", "Red", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_LazShotgunPuff", 4, 4, 0, 10, 5, 0, "Lith_LazShotgunTrail", -8);
+      A_RailAttack(7 * Random(1, 4), 0, true, "", "#eb002b", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_LazShotgunPuff", 4, 4, 0, 10, 5, 0, trail, -8);
    A_PlaySound("weapons/lshotgun/fire", CHAN_WEAPON);
    A_Recoil(0.5);
    Lith_A_RecoilUp(0.75);

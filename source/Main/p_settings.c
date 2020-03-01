@@ -93,6 +93,7 @@ if(p->num == 0) {
    ServerBool(weapons_nofirebob);
    if(p->pclass == pcl_marine) {
       ServerBool(weapons_rainbowlaser);
+      ServerBool(weapons_fastlazshot);
    }
 }
 

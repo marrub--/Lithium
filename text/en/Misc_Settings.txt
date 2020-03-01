@@ -66,6 +66,7 @@
 == \#weapons_reloadempty    | Reload weapons automatically
 == \#weapons_nofirebob      | No mid-fire bobbing
 == \#weapons_rainbowlaser   | Rainbow lasers
+== \#weapons_fastlazshot    | Better lazer shotgun performance
 
 == \#stx_hud | Heads Up Display
 
