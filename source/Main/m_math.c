@@ -132,6 +132,46 @@ k64 lerplk(k64 a, k64 b, k64 t)
    return ret;
 }
 
+/* code by Kate, originally for Doom RPG. */
+void lerplli(struct interp_data_lli *data)
+{
+   if(data->value != data->value_old) {
+      data->value_start = data->value_display;
+      data->timer_max =
+         llabs(data->value - data->value_display) * data->timer_max_cap;
+      data->timer_max = min(data->timer_max, data->timer_max_cap * 35);
+      data->timer = data->timer_max - 1;
+   }
+
+   if(data->timer > 0) {
+      i96 timer_max2 = data->timer_max * data->timer_max;
+      i96 timer2     = data->timer     * data->timer;
+
+      i96 perc = timer_max2 - timer2;
+
+      data->value_display =
+         data->value_start + ((data->value - data->value_start) * perc /
+                              timer_max2);
+
+      data->timer--;
+   } else {
+      data->value_display = data->value;
+   }
+
+   data->value_old = data->value;
+}
+
+void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer)
+{
+   data->value         = value;
+   data->value_old     = value;
+   data->value_start   = value;
+   data->value_display = value;
+   data->timer         = 0;
+   data->timer_max     = 0;
+   data->timer_max_cap = 2;
+}
+
 stkcall
 bool aabb(i32 x, i32 y, i32 z, i32 w, i32 x2, i32 y2)
 {

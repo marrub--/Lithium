@@ -24,6 +24,17 @@
 #define pi4 (pi / 4.0lk)
 #define tau (pi * 2.0lk)
 
+struct interp_data_lli {
+   i96 value;
+   i96 value_old;
+   i96 value_start;
+   i96 value_display;
+
+   i96 timer;
+   i96 timer_max;
+   i96 timer_max_cap;
+};
+
 optargs(1) u64 crc64(void const *data, size_t len, u64 result);
 optargs(1) u64 crc64_str(void __str_ars const *data, size_t len, u64 result);
 stkcall i32 fastabs(i32 n);
@@ -33,6 +44,8 @@ stkcall k32 mag2k(k32 x, k32 y);
 stkcall i32 mag2i(i32 x, i32 y);
 k32 lerpk(k32 a, k32 b, k32 t);
 k64 lerplk(k64 a, k64 b, k64 t);
+void lerplli(struct interp_data_lli *data);
+void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer);
 stkcall bool aabb(i32 x, i32 y, i32 z, i32 w, i32 x2, i32 y2);
 stkcall i32 ceilk(k32 n);
 stkcall k64 bzpolylk(k64 a, k64 b, k64 t);

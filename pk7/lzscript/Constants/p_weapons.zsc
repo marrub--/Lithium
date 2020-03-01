@@ -69,6 +69,7 @@ enum WeaponNum
    weapon_d_rocket,
    weapon_d_fatmac,
    weapon_d_railgun,
+   weapon_i_flintlock,
    weapon_wings,
 
    weapon_max

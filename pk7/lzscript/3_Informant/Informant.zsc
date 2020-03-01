@@ -11,6 +11,8 @@ class Lith_InformantPlayer : Lith_Player
 {
    default
    {
+      Health 50;
+      Lith_Player.ViewBob 0.1;
       Player.DisplayName "$LITH_CLASS_INFORMANT";
       Player.SoundClass "informant";
       Player.Portrait "lgfx/Portraits/Informant.png";
@@ -24,6 +26,13 @@ class Lith_InformantPlayer : Lith_Player
 
    private int m_DodgeDbc;
    private int m_IFrames;
+   int m_Overdrive;
+
+   override void GiveDefaultInventory()
+   {
+      Super.GiveDefaultInventory();
+      Lith_GiveDefWeapon("Lith_Flintlock");
+   }
 
    override void Tick()
    {
@@ -64,5 +73,7 @@ class Lith_IWeapon : Lith_Weapon
       Inventory.RestrictedTo "Lith_InformantPlayer";
    }
 }
+
+#include "lzscript/3_Informant/2_Flintlock.zsc"
 
 /* EOF */

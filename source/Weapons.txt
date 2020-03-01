@@ -67,6 +67,10 @@
 +d_railgun  7 FortuneGun  Placeholder2 Ammo A "Cannon"
 ;fist fist d_700e d_4bore d_launcher d_minigun d_rocket d_fatmac d_railgun
 
+:informant
++i_flintlock 2 Flintlock Placeholder2 AMag A "Shell"
+;fist fist i_flintlock fist fist fist fist fist fist
+
 :any
 +wings 0 WingsOfDeath Placeholder1 None
 

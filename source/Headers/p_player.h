@@ -169,6 +169,7 @@ struct player
    __prop onground      {default: GetMembI(->tid, sm_OnGround)}
    __prop waterlevel    {default: GetPropI(->tid, APROP_Waterlevel)}
    __prop classname     {default: GetPropS(->tid, APROP_NameTag)}
+   __prop overdrive     {default: GetMembI(->tid, sm_Overdrive)}
 
    /* cvars */
    __prop getCVarI {operator(): ACS_GetUserCVar      (->num)}

@@ -1,0 +1,53 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_Flintlock : Lith_IWeapon;
+
+default
+{
+   Lith_Weapon.MagSize 2;
+   Tag "$LITH_INFO_SHORT_Flintlock";
+   Weapon.BobRangeX 1.7;
+   Weapon.BobRangeY 0.7;
+   Weapon.BobSpeed 2;
+   Weapon.SlotNumber 2;
+   Weapon.SlotPriority 1;
+
+   +WEAPON.NOAUTOFIRE;
+}
+
+states(Actor)
+{
+SpawnPickup:
+   TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
+   stop;
+}
+
+states(Weapon)
+{
+Ready:
+   PISG A 1 Lith_A_Ready;
+   loop;
+
+Deselect:
+   PISG AA 0 A_Lower;
+   PISG A 1;
+   loop;
+
+Select:
+   PISG AA 0 A_Raise;
+   PISG A 1;
+   loop;
+
+Fire:
+   PISG A 10 Lith_A_MagIncr();
+   goto ReadySelector;
+}
+
+/* EOF */

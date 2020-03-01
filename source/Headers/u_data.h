@@ -113,6 +113,12 @@ struct upgr_data_HeadsUpDisM {
    i32 cr;
 };
 
+struct upgr_data_HeadsUpDisI {
+   struct interp_data_lli score;
+   struct interp_data_lli health;
+   struct interp_data_lli overdrive;
+};
+
 struct upgr_data {
    struct upgr_data_Adrenaline  adrenaline;
    struct upgr_data_JetBooster  jetbooster;
@@ -125,6 +131,7 @@ struct upgr_data {
    struct upgr_data_Magic       magic;
    struct upgr_data_StealthSys  stealthsys;
    struct upgr_data_HeadsUpDisM headsupdism;
+   struct upgr_data_HeadsUpDisI headsupdisi;
 };
 
 struct upgradeinfo {
