@@ -142,6 +142,30 @@
 +ChaingunGuy zombie FormerCommando
 +DRLACaptain zombie Former
 
+## Rampancy ------------------------------------------------------------------|
+
+%mif_full
++ZombieMan     zombie        Robot_SentryBot
++ShotgunGuy    zombie        Robot_DefenderBot
++ChaingunGuy   zombie        Robot_SecurityBotSmall
++Imp           imp           Robot_SoldierBot
++Demon         demon         Robot_SpiderBotSmall
++Spectre       demon         Robot_StealthDroid
++LostSoul      lostsoul      Robot_ScoutDrone
++Cacodemon     cacodemon     Robot_AssaultDrone
++HellKnight    hellknight    Robot_SecurityBot
++BaronOfHell   baron         Robot_DreadnoughtBot
++Arachnotron   arachnotron   Robot_SpiderBot
++PainElemental painelemental Robot_FabricationNode
++Revenant      revenant      Robot_RollerDroid
++Mancubus      mancubus      Robot_MaintenanceBot
++Archvile      archvile      Robot_RepairBot
++CyberDemon    cyberdemon    Robot_MilitaryBot
++SpiderDemon   mastermind    Robot_LoaderBot
++AIMainframe   mastermind    Robot_BossEye
++ChaingunGuy   zombie        Robot_GunTurret
+%
+
 ## Shut Up and Lithium -------------------------------------------------------|
 
 +ZombieMan     imp         Remnant

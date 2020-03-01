@@ -72,7 +72,8 @@ enum ScoreNum
    Score_Maulotaur   = Score_SpiderDemon, /* Melee, Fire */
 
    /* Tier 6 */
-   Score_DSparil = 10000000, /* Energy */
+   Score_DSparil     = 10000000, /* Energy */
+   Score_AIMainframe = Score_DSparil,
 };
 
 enum EXPNum
@@ -109,7 +110,8 @@ enum EXPNum
    Exp_Maulotaur   = 1000,
 
    /* Tier 6 */
-   Exp_DSparil = 9000,
+   Exp_DSparil     = 9000,
+   Exp_AIMainframe = Exp_DSparil,
 };
 
 /* EOF */

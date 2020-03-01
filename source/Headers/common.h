@@ -136,7 +136,7 @@ enum {
    log_dlg   = 1 << 5, /* debug info for the dialogue/terminal compiler */
    log_bip   = 1 << 6, /* debug info for the BIP */
    log_sys   = 1 << 7, /* meta debug info */
-   log_sysV  = 1 << 7, /* tick info */
+   log_sysV  = 1 << 8, /* tick info */
 };
 
 enum {
