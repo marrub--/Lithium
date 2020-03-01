@@ -19,8 +19,7 @@
 #define UPGR_STATIC_MAX 80
 #define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
 
-enum
-{
+enum {
    UC_Body,
    UC_Weap,
    UC_Extr,
@@ -28,8 +27,7 @@ enum
    UC_MAX
 };
 
-enum
-{
+enum {
    UG_None,
    UG_Pistol,
    UG_Shotgun,
@@ -41,13 +39,17 @@ enum
    UG_HUD,
 };
 
-enum
-{
+enum {
    UR_AI  = 1 << 0,
    UR_WMD = 1 << 1,
    UR_WRD = 1 << 2,
    UR_RDI = 1 << 3,
    UR_RA  = 1 << 4,
+};
+
+struct upgr_data_7777777 {
+   k32  fvel, fyaw;
+   bool in_air;
 };
 
 struct upgr_data_Adrenaline {
@@ -120,6 +122,7 @@ struct upgr_data_HeadsUpDisI {
 };
 
 struct upgr_data {
+   struct upgr_data_7777777     seven7;
    struct upgr_data_Adrenaline  adrenaline;
    struct upgr_data_JetBooster  jetbooster;
    struct upgr_data_lolsords    lolsords;

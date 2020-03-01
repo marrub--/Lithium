@@ -13,6 +13,8 @@
 
 #include "u_common.h"
 
+#define UData p->upgrdata.seven7
+
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall
@@ -30,9 +32,27 @@ void Upgr_7777777_Deactivate(struct player *p, struct upgrade *upgr)
 script
 void Upgr_7777777_Update(struct player *p, struct upgrade *upgr)
 {
-   k32 vel = -2;
-   if(p->velz > 0) vel = p->velz;
-   P_SetVel(p, p->velx, p->vely, vel);
+   k32 velx, vely, velz = p->velz > 0 ? p->velz : -2;
+
+   if(p->velz != 0) {
+      if(!UData.in_air) {
+         UData.in_air = true;
+         SetPropK(0, APROP_Friction, 0.0);
+         UData.fvel = p->getVel();
+         UData.fyaw = p->yaw - ACS_VectorAngle(p->velx, p->vely);
+      }
+      k32 fyaw = UData.fyaw;
+      fyaw = (i32)(fyaw * 100) / 100.0k;
+      velx = ACS_Cos(p->yaw - fyaw) * UData.fvel;
+      vely = ACS_Sin(p->yaw - fyaw) * UData.fvel;
+   } else {
+      UData.in_air = false;
+      SetPropK(0, APROP_Friction, 1.0);
+      velx = p->velx;
+      vely = p->vely;
+   }
+
+   P_SetVel(p, velx, vely, velz);
 }
 
 /* EOF */
