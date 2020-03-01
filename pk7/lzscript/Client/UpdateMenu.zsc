@@ -39,7 +39,7 @@ class Lith_UpdateMenu : ListMenu;
 string m_Text;
 int m_LogN, m_Page;
 
-const CLGS = 14;
+const CLGS = 15;
 
 Lith_Changelog[CLGS] m_Clg;
 
@@ -47,6 +47,7 @@ override void Init(Menu parent, ListMenuDescriptor desc)
 {
    Super.Init(parent, desc);
 
+   m_Clg[CLGS-15].m_Name = "Update_1_6_2"; m_Clg[CLGS-15].m_Page = 1;
    m_Clg[CLGS-14].m_Name = "Update_1_6_1"; m_Clg[CLGS-14].m_Page = 5;
    m_Clg[CLGS-13].m_Name = "Update_1_6";   m_Clg[CLGS-13].m_Page = 5;
    m_Clg[CLGS-12].m_Name = "Update_1_5_3"; m_Clg[CLGS-12].m_Page = 2;

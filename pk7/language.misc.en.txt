@@ -482,6 +482,30 @@
 /* Removed  = \cg-*/
 /* Subspace = \cb]*/
 
+"LITH_UPDATE_1_6_2" =
+   "\cf(\ciFeb. 29, 2020\cf) \cjFrom \cn1.6.1\cj to \cf1.6.2\cj:\n"
+   "\cd+ Added Dark Lord, incomplete.\n"
+   "\cd+ Added Informant, incomplete.\n"
+   "\cd+ Added a lot of new translations for Japanese.\n"
+   "\cd+ Added a setting to disable phantoms.\n"
+   "\cd+ Added a setting to start with phantom rewards.\n"
+   "\cd+ Added another info page for Cyber-Mage.\n"
+   "\cd+ Added error handling to the dialogue compiler.\n"
+   "\cd+ Added the DONKEY KONG theme.\n"
+   "\cj| Changed a lot of files to be better compressed, particularly images.\n"
+   "\cj| Changed all player attacks to have fixed damage and fixed spread patterns.\n"
+   "\cj| Changed some things to improve performance.\n"
+   "\cj| Changed the HUD layout slightly.\n"
+   "\cj| Changed the Unicode font renderer to use GZDoom's built-in one.\n"
+   "\cj| Changed the dialogue system to emulate a 6502 CPU. Don't ask.\n"
+   "\cj| Changed the revolver to be completely accurate.\n"
+   "\cj| Fixed Doom 1 not working.\n"
+   "\cj| Fixed GZDoom 3.7.2+ crashing on load.\n"
+   "\cj| Fixed a bunch of null pointer errors.\n"
+   "\cj| Fixed a lot of bugs. Probably all of them.\n"
+   "\cj| Fixed ammo pickups not actually giving you ammo.\n"
+   "\cj| Improved build system and tooling.";
+
 "LITH_UPDATE_1_6_1" =
    "\cf(\ciJan. 24, 2019\cf) \cjFrom \cn1.6\cj to \cf1.6.1\cj:\n"
    "\cd+ Added Chex Quest compatibility.\n"

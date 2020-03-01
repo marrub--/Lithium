@@ -12,11 +12,11 @@
  */
 
 #if LITHIUM
-#define Version "Lithium 1.6.1 (Hyper-Trilithium)"
+#define Version "Lithium 1.6.2 (Trilithionite)"
 #else
 #define Version "DoubleTap 1.0"
 #endif
-#define APIVersion Lith_v1_6_1
+#define APIVersion Lith_v1_6_2
 #define CheckAPIVersion() \
    if(apiversion != APIVersion) { \
       printf(c"%s: Invalid API version! Expected %i, but got %i\n", \
@@ -24,6 +24,7 @@
       abort(); \
    } else (void)0
 #include <stdio.h>
+#define Lith_v1_6_2   16.2  /* 1.6.2 (Trilithionite) */
 #define Lith_v1_6_1   16.1  /* 1.6.1 (Hyper-Trilithium) */
 #define Lith_v1_6_0   16.0  /* 1.6 (Hyper-Dilithium) */
 #define Lith_v1_5_3   15.3  /* 1.5.3 (Indicolite Pegmatite) */
