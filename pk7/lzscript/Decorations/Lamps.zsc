@@ -51,7 +51,7 @@ class Lith_TechLamp : Lith_FlareDecor replaces TechLamp
    Death:    TLMP X 0;
    Death1:
       #### # 1 A_PlaySound("amb/shatter", CHAN_AUTO, 1.0, 0, ATTN_NORM);
-      #### # 35 A_SpawnItemEx("Lith_LampSpark", frandom(-0.5, 0.5), frandom(-0.5, 0.5), height-8, 0, 0, frandom(-1,1), frandom(-1,1), frandom(2,4), 168);
+      #### # 35 A_SpawnItemEx("Lith_LampSpark", frandom(-0.5, 0.5), frandom(-0.5, 0.5), height-8, 0, 0, frandom(-1,1), frandom(-1,1), random(2,4), 168);
       wait;
    }
 }

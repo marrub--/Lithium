@@ -95,7 +95,7 @@ override void WorldThingSpawned(WorldEvent ev)
 
       if(m_BossLevel && th.bBOSS)
       {
-         th.Health *= FRandom(2, 3);
+         th.Health = int(th.Health * FRandom(2, 3));
          th.ReactionTime = 0;
          th.DamageMultiply *= FRandom(1.1, 1.6);
          th.DamageFactor   *= FRandom(0.3, 0.5);
@@ -128,7 +128,7 @@ override void WorldThingDamaged(WorldEvent ev)
    if(!src) return;
 
    if(src != dst && src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.Damage * 3.77);
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", int(ev.Damage * 3.77));
 }
 
 override void WorldThingDied(WorldEvent ev)

@@ -302,7 +302,7 @@ private void Lith_Crosshair()
 
    if(CVar.GetCVar('lith_xhair_enablejuicer', player).getBool())
    {
-      int xp = ceil(ACS_ExecuteWithResult(lsc_pdata, pdata_recoilp)/FIX * 500) + 10;
+      int xp = int(ceil(ACS_ExecuteWithResult(lsc_pdata, pdata_recoilp)/FIX * 500)) + 10;
 
       Lith_URANUS.LS(self, ":XHairs:L", xhx - xp, xhy, 0, 0, a/255., c);
       Lith_URANUS.LS(self, ":XHairs:R", xhx + xp, xhy, 0, 0, a/255., c);

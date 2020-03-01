@@ -136,7 +136,7 @@ void Lith_DrawFrame()
       else     pwdst = (mapx - m_VX + (1 - stepx) / 2) / rnx;
 
       /* get line draw properties */
-      int lineh = RH / pwdst;
+      int lineh = int(RH / pwdst);
 
       int ds = -lineh / 2 + RH / 2;
       int de =  lineh / 2 + RH / 2;
@@ -147,7 +147,7 @@ void Lith_DrawFrame()
       if(ds == de) continue;
 
       /* get light amount for line */
-      int light = 0xFF - (pwdst * 32);
+      int light = 0xFF - int(pwdst * 32);
       if(side) light /= 2;
       light = Clamp(light, 32, 135);
 

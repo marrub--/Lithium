@@ -55,7 +55,7 @@ class Lith_HulgyonProjectile : Actor
       +BRIGHT
    }
 
-   int m_LZ;
+   float m_LZ;
 
    state Lith_A_Step()
    {

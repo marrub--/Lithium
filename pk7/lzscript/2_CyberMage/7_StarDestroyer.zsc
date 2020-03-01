@@ -136,16 +136,24 @@ class Lith_StarProjectile : Actor
       BLLT L 0 bright {m_SoundTimer = 3; A_PlaySound("weapons/dark/fire", CHAN_5);}
    DoMissile:
       BLLT L 0 bright {
-         A_Explode(40, 8 + 45 * Scale.X, 0);
+         float x_45 = Scale.X * 45;
+         A_Explode(40, int(8 + 45 * Scale.X), 0);
          for(int i = 0; i < 5; i++)
-            A_SpawnProjectile("Lith_StarShrapnel", CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+            A_SpawnProjectile("Lith_StarShrapnel",
+	                      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
+			      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
+			      0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
       }
       goto DoSeek;
    DoHomingMissile:
       BLLT L 0 bright {
+         float x_45 = Scale.X * 45;
          m_HomingShrapnelTimer = 0;
          for(int i = 0; i < 2; i++)
-            A_SpawnProjectile("Lith_StarShrapnelHoming", CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, false)/FIX, CallACS("Lith_CircleSpread", 45*Scale.X*FIX, 45*Scale.X*FIX, true)/FIX, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+            A_SpawnProjectile("Lith_StarShrapnelHoming",
+	                      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
+			      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
+			      0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
       }
       goto SoundCheck1;
    ScaleUp:

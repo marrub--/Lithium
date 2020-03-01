@@ -207,7 +207,7 @@ action(Weapon) void Lith_A_FireIonRifle()
       A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
    if(invoker.m_Charge >= 2)
       A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
-   A_RailAttack(invoker.m_Charge * 300, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 16, 0, "Lith_IonRifleParticle");
+   A_RailAttack(int(invoker.m_Charge * 300), 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 16, 0, "Lith_IonRifleParticle");
    A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 0.5, 0);
    A_Recoil(invoker.m_Charge * 2);
    if(invoker.m_Charge >= 2)

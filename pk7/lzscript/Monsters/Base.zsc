@@ -49,7 +49,7 @@ void Lith_A_Die()
 
 void Lith_A_XDie()
 {
-   if(m_ScoreGive) CallACS("Lith_EmitScore", m_ScoreGive * 1.5);
+   if(m_ScoreGive) CallACS("Lith_EmitScore", int(m_ScoreGive * 1.5));
    A_XScream();
    A_NoBlocking();
 }

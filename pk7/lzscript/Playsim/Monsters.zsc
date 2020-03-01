@@ -34,7 +34,7 @@ static void PrepareForRagnarok(Actor mo)
 static void MonsterBarrierLook(Actor mo)
 {
    for(let it = BlockThingsIterator.Create(mo, 192*2); it.Next();)
-      if(it.Thing.Player) ACS_ExecuteWithResult(lsc_addangle, it.Thing.Pos.X, it.Thing.Pos.Y);
+      if(it.Thing.Player) ACS_ExecuteWithResult(lsc_addangle, int(it.Thing.Pos.X), int(it.Thing.Pos.Y));
 }
 
 static void SpawnBoss(Actor a, string name, int phase)
@@ -94,7 +94,7 @@ static void SpawnBoss(Actor a, string name, int phase)
    {
       b.DamageMultiply = 1.5;
       b.ReactionTime   = 4;
-      b.Health        *= 1.5;
+      b.Health         = int(b.Health * 1.5);
       b.bMISSILEMORE   = true;
    }
    else if(phase == 3)

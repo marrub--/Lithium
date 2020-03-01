@@ -74,7 +74,7 @@ action(Weapon) void Lith_A_FireFatMac()
    let vl = self.Vel.XY.Length();
    if(vl > 8)
    {
-      self.A_DamageSelf(vl, 'FatMacRecoil');
+      self.A_DamageSelf(int(vl * 2), 'FatMacRecoil');
 
       if(Random(0, 10000) == 0)
          Lith_HERMES.Log(self, msg_huds, 1, "This is my arm fucker");

@@ -123,16 +123,28 @@ action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", in
 }
 
 action(Weapon) void Lith_A_RecoilUp(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt * FIX);}
+{
+   float v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt;
+   CallACS("Lith_RecoilUp", int(v * FIX));
+}
 
 action(Weapon) void Lith_A_RecoilDn(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4) * FIX);}
+{
+   float v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4);
+   CallACS("Lith_RecoilUp", int(v * FIX));
+}
 
 action(Weapon) void Lith_A_ReloadBobUp(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt * FIX);}
+{
+   float v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt;
+   CallACS("Lith_RecoilUp", int(v * FIX));
+}
 
 action(Weapon) void Lith_A_ReloadBobDn(double amt)
-   {CallACS("Lith_RecoilUp", CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt * FIX);}
+{
+   float v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt;
+   CallACS("Lith_RecoilUp", int(v * FIX));
+}
 
 action(Weapon) void Lith_A_ScopeIn()
 {

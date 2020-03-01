@@ -71,7 +71,7 @@ override void Tick()
 
 int Lith_WindupTime()
 {
-   return (1.0 - m_WindUp) * 10.0;
+   return int((1.0 - m_WindUp) * 10.0);
 }
 
 action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
