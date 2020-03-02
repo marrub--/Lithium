@@ -161,8 +161,8 @@ stkcall void PtrInvTake(i32 tid, str item, i32 amount);
 stkcall void PtrInvSet (i32 tid, str item, i32 amount);
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
-script void Dbg_PrintMem(void const *data, size_t size);
-script void Dbg_PrintMemC(void const *data, size_t size);
+void Dbg_PrintMem(void const *data, size_t size);
+void Dbg_PrintMemC(void const *data, size_t size);
 void Log(cstr fmt, ...);
 
 /* Extern Objects ---------------------------------------------------------- */

@@ -228,10 +228,10 @@ local void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 /* trace */
 local void TraceReg()
 {
-   printf("PC:%04X SP:%02X VA:%02X "
-          "AC:%02X RX:%02X RY:%02X SR:%02X\n",
-          GetPC(), GetSP(), GetVA(),
-          GetAC(), GetRX(), GetRY(), GetSR());
+   __nprintf("PC:%04X SP:%02X VA:%02X "
+             "AC:%02X RX:%02X RY:%02X SR:%02X",
+             GetPC(), GetSP(), GetVA(),
+             GetAC(), GetRX(), GetRY(), GetSR());
 }
 
 /* jumps */
@@ -239,9 +239,11 @@ local void TraceReg()
       /* jump next byte */ \
       u32 next = MemI1_G(); \
       if(dbglevel & log_dlg) { \
+         ACS_BeginLog(); \
          Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
-         putc(' ', stdout); \
+         ACS_PrintChar(' '); \
          TraceReg(); \
+         ACS_EndLog(); \
       } \
       goto *cases[next]; \
    }
@@ -638,10 +640,12 @@ script void Dlg_Run(struct player *p, u32 num)
    for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
    if(dbglevel & log_dlg) {
-      Log("Dumping segment PRG..");
+      ACS_BeginLog();
+      __nprintf("Dumping segment PRG..");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
-      Log("Dumping segment STR..");
+      __nprintf("Dumping segment STR..");
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC);
+      ACS_EndLog();
    }
 
    /* copy some constants into memory */
@@ -980,7 +984,9 @@ INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI;
 
 /* Trace */
 TRR_NP:
+   ACS_BeginLog();
    TraceReg();
+   ACS_EndLog();
    JmpVI;
 
 TRS_NP:

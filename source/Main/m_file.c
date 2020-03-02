@@ -48,9 +48,11 @@ static i32 NetClose(void *nfdata)
    /* If debugging, print out information about the buffer being written. */
    if(dbgflag & dbgf_save)
    {
-      printf("NetClose: Writing netfile \"%S\" (%zub)\n", nf->pcvar, nf->pos);
-      printf("Data follows\n");
+      ACS_BeginLog();
+      __nprintf("NetClose: Writing netfile \"%S\" (%zub)\nData follows\n",
+                nf->pcvar, nf->pos);
       Dbg_PrintMem(nf->mem, nf->pos);
+      ACS_EndLog();
    }
 
    /* Base64 encode the buffer. */
@@ -212,9 +214,11 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
          /* If debugging, print out information about the buffer being read. */
          if(dbgflag & dbgf_save)
          {
-            printf("NFOpen: Opening memfile \"%S\" (%zub)\n", pcvar, size);
-            printf("Data follows\n");
+            ACS_BeginLog();
+            __nprintf("NFOpen: Opening memfile \"%S\" (%zub)\nData follows\n",
+                      pcvar, size);
             Dbg_PrintMem(data, size);
+            ACS_EndLog();
          }
 
          if(data)

@@ -19,8 +19,10 @@
 #define APIVersion Lith_v1_6_2
 #define CheckAPIVersion() \
    if(apiversion != APIVersion) { \
-      printf(c"%s: Invalid API version! Expected %i, but got %i\n", \
-         __func__, Lith_APIVersion, apiversion); \
+      ACS_BeginLog(); \
+      __nprintf(c"%s: Invalid API version! Expected %i, but got %i\n", \
+                __func__, Lith_APIVersion, apiversion); \
+      ACS_EndLog(); \
       abort(); \
    } else (void)0
 #include <stdio.h>

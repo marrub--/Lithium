@@ -16,29 +16,29 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void Disassemble(struct dlg_def const lmvar *def)
+script static void Disassemble(struct dlg_def const *def)
 {
    for(u32 i = 0; i < def->codeP;) {
-      printf("%04X ", PRG_BEG + i);
+      __nprintf("%04X ", PRG_BEG + i);
 
       u32 c = Cps_GetC(def->codeV, i++);
       i = Dlg_WriteCode(def, c, i);
-      putc('\n', stdout);
+      ACS_PrintChar('\n');
    }
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-script u32 Dlg_WriteCode(struct dlg_def  const lmvar *def, u32 c, u32 i)
+script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
 {
    u32 c2, c3;
 
    struct dcd_info const *inf = &dcdinfo[c];
 
-   printf("%02X ", c);
+   __nprintf("%02X ", c);
 
    if(!inf->name[0]) {
-      printf("       invalid opcode");
+      __nprintf("       invalid opcode");
       return i;
    }
 
@@ -46,50 +46,50 @@ script u32 Dlg_WriteCode(struct dlg_def  const lmvar *def, u32 c, u32 i)
       case ADRM_AI:
          c2 = Cps_GetC(def->codeV, i++);
          c3 = Cps_GetC(def->codeV, i++);
-         printf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
+         __nprintf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
          break;
       case ADRM_AX:
          c2 = Cps_GetC(def->codeV, i++);
          c3 = Cps_GetC(def->codeV, i++);
-         printf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
+         __nprintf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
          break;
       case ADRM_AY:
          c2 = Cps_GetC(def->codeV, i++);
          c3 = Cps_GetC(def->codeV, i++);
-         printf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
+         __nprintf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
          break;
       case ADRM_II:
          c2 = Cps_GetC(def->codeV, i++);
          c3 = Cps_GetC(def->codeV, i++);
-         printf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
+         __nprintf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
          break;
       case ADRM_IX:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
+         __nprintf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
          break;
       case ADRM_IY:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s ($%02X),Y", c2, inf->name, c2);
+         __nprintf("%02X    %s ($%02X),Y", c2, inf->name, c2);
          break;
       case ADRM_NP:
-         printf("      %s        ", inf->name);
+         __nprintf("      %s        ", inf->name);
          break;
       case ADRM_ZI:
       case ADRM_RI:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s $%02X    ", c2, inf->name, c2);
+         __nprintf("%02X    %s $%02X    ", c2, inf->name, c2);
          break;
       case ADRM_VI:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s #$%02X   ", c2, inf->name, c2);
+         __nprintf("%02X    %s #$%02X   ", c2, inf->name, c2);
          break;
       case ADRM_ZX:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s $%02X,X  ", c2, inf->name, c2);
+         __nprintf("%02X    %s $%02X,X  ", c2, inf->name, c2);
          break;
       case ADRM_ZY:
          c2 = Cps_GetC(def->codeV, i++);
-         printf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
+         __nprintf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
          break;
    }
 

@@ -23,12 +23,12 @@
 
 #if LITH_MEMORY_DEBUG
 #include <stdio.h>
-#define Calloc(n, s) (printf("%s:%i: Calloc\n", __FILE__, __LINE__), Calloc_real(n, s))
-#define Dalloc(p)    (printf("%s:%i: Dalloc\n", __FILE__, __LINE__), Dalloc_real(p))
-#define Nalloc(s)    (printf("%s:%i: Nalloc\n", __FILE__, __LINE__), Nalloc_real(s))
-#define Malloc(s)    (printf("%s:%i: Malloc\n", __FILE__, __LINE__), Malloc_real(s))
-#define Ralloc(p, s) (printf("%s:%i: Ralloc\n", __FILE__, __LINE__), Ralloc_real(p, s))
-#define Salloc(t)    (printf("%s:%i: Salloc\n", __FILE__, __LINE__), Salloc_real(t))
+#define Calloc(n, s) (Log("%s:%i: Calloc", __FILE__, __LINE__), Calloc_real(n, s))
+#define Dalloc(p)    (Log("%s:%i: Dalloc", __FILE__, __LINE__), Dalloc_real(p))
+#define Nalloc(s)    (Log("%s:%i: Nalloc", __FILE__, __LINE__), Nalloc_real(s))
+#define Malloc(s)    (Log("%s:%i: Malloc", __FILE__, __LINE__), Malloc_real(s))
+#define Ralloc(p, s) (Log("%s:%i: Ralloc", __FILE__, __LINE__), Ralloc_real(p, s))
+#define Salloc(t)    (Log("%s:%i: Salloc", __FILE__, __LINE__), Salloc_real(t))
 #else
 #define Calloc(n, s) Calloc_real(n, s)
 #define Dalloc(p)    Dalloc_real(p)

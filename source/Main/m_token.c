@@ -39,7 +39,6 @@
    case '\n': orig->colu = 0; ++orig->line; \
    }
 
-/*#define tok1(tt1) (printf(#tt1 "\n"), tok->type = tt1) */
 #define tok1(tt1) (tok->orig = *orig, tok->type = tt1)
 #define tok2(c2, tt1, tt2) \
    if(getch() == c2) tok1(tt2); \

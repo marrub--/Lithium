@@ -56,31 +56,27 @@ void Dbg_Note_Impl(cstr fmt, ...)
    dbgnote[dbgnotenum++] = ACS_EndStrParam();
 }
 
-script
 void Dbg_PrintMemC(void const *data, size_t size)
 {
    u32 const *d = data;
    i32 pos = 0;
 
-   for(size_t i = 0; i < size * 4; i++)
-   {
-      if(pos + 3 > 79)
-      {
-         puts("");
+   for(size_t i = 0; i < size * 4; i++) {
+      if(pos + 3 > 79) {
+         ACS_PrintChar('\n');
          pos = 0;
       }
 
       byte c = Cps_GetC(d, i);
 
-      printf(IsPrint(c) ? "%c  " : c"%.2X ", c);
+      __nprintf(IsPrint(c) ? "%c  " : c"%.2X ", c);
 
       pos += 3;
    }
 
-   puts("\nEOF\n\n");
+   __nprintf("\nEOF\n");
 }
 
-script
 void Dbg_PrintMem(void const *data, size_t size)
 {
    byte const *d = data;
@@ -88,18 +84,17 @@ void Dbg_PrintMem(void const *data, size_t size)
 
    for(size_t i = 0; i < size; i++)
    {
-      if(pos + 3 > 79)
-      {
-         puts("");
+      if(pos + 3 > 79) {
+         ACS_PrintChar('\n');
          pos = 0;
       }
 
-      printf(IsPrint(d[i]) ? "%c  " : c"%.2X ", d[i]);
+      __nprintf(IsPrint(d[i]) ? "%c  " : c"%.2X ", d[i]);
 
       pos += 3;
    }
 
-   puts("\nEOF\n\n");
+   __nprintf("\nEOF\n");
 }
 
 void Log(cstr fmt, ...)
