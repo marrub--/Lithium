@@ -27,13 +27,13 @@ void Dlg_GetStmt_Cond(struct compiler *d)
    struct token *tok = d->tb.get();
    Expect(d, tok, tok_identi);
 
-   u32 ins = DCD_BNE_RI;
+   bool bne = true;
 
    if(faststrcmp(tok->textV, "item") == 0) {
       tok = d->tb.get();
       Expect(d, tok, tok_string);
 
-      ins = DCD_BEQ_RI;
+      bne = false;
 
       Dlg_PushLdAdr(d, VAR_ADRL, Dlg_PushStr(d, tok->textV, tok->textC));
 
@@ -55,28 +55,48 @@ void Dlg_GetStmt_Cond(struct compiler *d)
    }
 
 ok:
-   Dlg_PushB1(d, ins);
+   Dlg_PushB1(d, 0); /* placeholder */
    Dlg_PushB1(d, 0); /* placeholder */
    u32 ptr = d->def.codeP;
+   Dlg_PushB1(d, 0); /* placeholder */
+   Dlg_PushB1(d, 0); /* placeholder */
+   Dlg_PushB1(d, 0); /* placeholder */
 
    Dlg_GetStmt(d);
 
-   u32 rel = d->def.codeP - ptr;
-   if(rel > 0x7F) Err(d, "bad jump (too much code)");
-
-   Dlg_SetB1(d, ptr - 1, rel);
+   bool use_else = false;
+   u32  else_ptr;
 
    tok = d->tb.get();
    if(CheckKw(tok, "else")) {
       Dlg_PushB1(d, DCD_JMP_AI);
       Dlg_PushB2(d, 0);
-      ptr = d->def.codeP;
-
-      Dlg_GetStmt(d);
-
-      Dlg_SetB2(d, ptr - 2, PRG_BEG + d->def.codeP);
+      else_ptr = d->def.codeP;
+      use_else = true;
    } else {
       d->tb.unget();
+   }
+
+   u32 rel = d->def.codeP - ptr;
+   if(rel > 0x7F) {
+      // if A !~ B then jump +3 (continue)
+      Dlg_SetB1(d, ptr - 2, bne ? DCD_BEQ_RI : DCD_BNE_RI);
+      Dlg_SetB1(d, ptr - 1, 3);
+      // else jump $<end>
+      Dlg_SetB1(d, ptr + 0, DCD_JMP_AI);
+      Dlg_SetB2(d, ptr + 1, PRG_BEG + d->def.codeP);
+   } else {
+      // if A ~ B then jump +<end>
+      // else          continue
+      Dlg_SetB1(d, ptr - 2, bne ? DCD_BNE_RI : DCD_BEQ_RI);
+      Dlg_SetB1(d, ptr - 1, rel);
+      for(i32 i = 0; i < 3; i++)
+         Dlg_SetB1(d, ptr + i, DCD_NOP_NP);
+   }
+
+   if(use_else) {
+      Dlg_GetStmt(d);
+      Dlg_SetB2(d, else_ptr - 2, PRG_BEG + d->def.codeP);
    }
 }
 
