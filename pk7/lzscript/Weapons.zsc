@@ -68,6 +68,9 @@ virtual state Lith_Ready(int flags) {return null;}
 
 action state Lith_A_Ready(int flags = 0)
 {
+   if(!CountInv("Lith_WeaponScopedToken"))
+      A_ZoomFactor(1.0, ZOOM_INSTANT);
+
    let st = invoker.Lith_Ready(flags);
    if(st)
       return st;
