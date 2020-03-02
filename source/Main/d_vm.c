@@ -62,11 +62,9 @@ enum {
    SR_N = 1 << SR_N_BIT << R2_S_SR,
 };
 
-sync typedef void (*vm_action)(struct player *p);
-
 /* Extern Objects ---------------------------------------------------------- */
 
-struct dlg_def lmvar dlgdefs[DNUM_MAX];
+struct dlg_def dlgdefs[DNUM_MAX];
 
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
@@ -83,14 +81,6 @@ static struct gui_state gst;
 static u32 r1, r2;
 
 Vec_Decl(char, text, static);
-
-#define ACT(name) sync static void Act##name(struct player *p);
-#include "d_vm.h"
-
-static vm_action actions[] = {
-   #define ACT(name) &Act##name,
-   #include "d_vm.h"
-};
 
 static cstr const action_names[] = {
    #define ACT(name) #name,
@@ -325,7 +315,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
          PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
 
          SetSize(tsizex, tsizey);
-         SetClipW(tleft, ttop, 150, 300, 150);
+         SetClipW(tleft, ttop, tright - tleft, tbottom, tright - tleft);
 
          PrintTextChr(textV, textC);
          PrintText(s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
@@ -482,14 +472,14 @@ sync static void ActDLG_WAIT(struct player *p)
    GuiAct();
 }
 
-sync static void ActLD_ITEM(struct player *p)
+stkcall static void ActLD_ITEM(struct player *p)
 {
    SetVA(ACT_NONE);
 
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-sync static void ActLD_OPT(struct player *p)
+stkcall static void ActLD_OPT(struct player *p)
 {
    SetVA(ACT_NONE);
 
@@ -500,7 +490,7 @@ sync static void ActLD_OPT(struct player *p)
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-sync static void ActSCRIPT_I(struct player *p)
+stkcall static void ActSCRIPT_I(struct player *p)
 {
    SetVA(ACT_NONE);
 
@@ -511,7 +501,7 @@ sync static void ActSCRIPT_I(struct player *p)
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-sync static void ActSCRIPT_S(struct player *p)
+stkcall static void ActSCRIPT_S(struct player *p)
 {
    SetVA(ACT_NONE);
 
@@ -529,7 +519,7 @@ sync static void ActTELEPORT_INTERLEVEL(struct player *p)
    ACS_Delay(5);
    TeleportOutEffect(p);
    ACS_Delay(34);
-   ACS_Teleport_NewMap(tag, 0, 0);
+   ACS_Teleport_NewMap(tag | LithMapMagic, 0, 0);
 
    SetVA(ACT_HALT);
 }
@@ -544,25 +534,25 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p)
    SetVA(ACT_HALT);
 }
 
-sync static void ActTEXT_ADDI(struct player *p)
+stkcall static void ActTEXT_ADDI(struct player *p)
 {
    SetVA(ACT_NONE);
    AddText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-sync static void ActTEXT_ADDL(struct player *p)
+stkcall static void ActTEXT_ADDL(struct player *p)
 {
    SetVA(ACT_NONE);
    AddText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
 
-sync static void ActTEXT_SETI(struct player *p)
+stkcall static void ActTEXT_SETI(struct player *p)
 {
    SetVA(ACT_NONE);
    SetText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-sync static void ActTEXT_SETL(struct player *p)
+stkcall static void ActTEXT_SETL(struct player *p)
 {
    SetVA(ACT_NONE);
    SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
@@ -609,7 +599,7 @@ script void Dlg_Run(struct player *p, u32 num)
       return;
 
    /* get the dialogue by number */
-   register struct dlg_def lmvar *def = &dlgdefs[num];
+   register struct dlg_def *def = &dlgdefs[num];
 
    p->dlg.active++;
 
@@ -662,9 +652,10 @@ script void Dlg_Run(struct player *p, u32 num)
 
 vmaction:
    while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
-	   Dbg_Log(log_dlg, "action %02X %s", ua, action_names[ua]);
-      actions[ua](p);
-      switch(GetVA()) {
+      Dbg_Log(log_dlg, "action %02X %s", ua, action_names[ua]);
+      switch(ua) {
+         #define ACT(name) case ACT_##name: Act##name(p); break;
+         #include "d_vm.h"
          case ACT_HALT: JmpHL;
          case ACT_JUMP: JmpVI;
       }

@@ -195,14 +195,12 @@ static void GInit(void)
 {
    extern void Upgr_GInit(void);
    extern void Wep_GInit(void);
-   extern void Dlg_GInit(void);
 
    Dbg_Log(log_dev, "%s", __func__);
 
    Upgr_GInit();
    #if LITHIUM
    Wep_GInit();
-   Dlg_GInit();
 
    CheckEnemyCompat();
    #endif
@@ -250,7 +248,7 @@ static void MInit(void)
    extern void Dlg_MInit(void);
    Dlg_MInit();
 
-   islithmap = (MapNum & 0xFFFFFC00) == 0x01202000;
+   islithmap = (MapNum & LithMapMask) == LithMapMagic;
 
    pauseinmenus = singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
 

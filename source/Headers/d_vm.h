@@ -454,7 +454,7 @@ script void Dlg_Run(struct player *p, u32 num);
 
 /* Extern Objects ---------------------------------------------------------- */
 
-extern struct dlg_def  lmvar dlgdefs[DNUM_MAX];
+extern struct dlg_def        dlgdefs[DNUM_MAX];
 extern struct dcd_info const dcdinfo[0xFF];
 
 #endif

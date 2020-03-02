@@ -28,6 +28,9 @@
 #define MapNum ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
+#define LithMapMagic 0x01202000
+#define LithMapMask  0xFFFFFC00
+
 /* Types ------------------------------------------------------------------- */
 
 enum {

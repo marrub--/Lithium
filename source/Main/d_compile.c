@@ -27,6 +27,35 @@ script static void Disassemble(struct dlg_def const *def)
    }
 }
 
+static void FinishDef(struct compiler *d)
+{
+   if(d->def.codeV) dlgdefs[d->num] = d->def;
+   fastmemset(&d->def, 0, sizeof d->def);
+}
+
+script
+static void PrintDbg() {
+   ACS_BeginLog();
+   for(u32 i = 0; i < countof(dlgdefs); i++) {
+      struct dlg_def *def = &dlgdefs[i];
+
+      if(def->codeV) {
+         __nprintf("Disassembling script %u(%p,%u,%u)...\n", i, def->codeV,
+                def->codeC, def->codeP);
+         Disassemble(def);
+         __nprintf("Dumping code...\n");
+         Dbg_PrintMemC(def->codeV, def->codeC);
+
+         __nprintf("Dumping string table for script %u(%p,%u,%u)...\n", i,
+                def->stabV, def->stabC, def->stabP);
+         Dbg_PrintMemC(def->stabV, def->stabC);
+      }
+   }
+
+   __nprintf("Done.");
+   ACS_EndLog();
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
@@ -96,12 +125,6 @@ script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
    return i;
 }
 
-void Dlg_ClearDef(struct compiler *d)
-{
-   if(d->def.codeV) dlgdefs[d->num] = d->def;
-   fastmemset(&d->def, 0, sizeof d->def);
-}
-
 void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 {
    d->def.pages[num] = d->def.codeP;
@@ -154,7 +177,7 @@ void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 
    ExpectDrop(d, tok_semico);
 
-   Dlg_ClearDef(d);
+   FinishDef(d);
    d->num = num;
 
    Dbg_Log(log_dlg, "\n---\nheading %u\n---", num);
@@ -162,85 +185,57 @@ void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
    while(Dlg_GetItem(d, act));
 }
 
-bool Dlg_GetTop(struct compiler *d)
-{
-   struct token *tok = d->tb.get();
-   if(tok->type == tok_eof) return false;
-
-   Expect(d, tok, tok_identi);
-
-   if(faststrcmp(tok->textV, "program") == 0)
-      Dlg_GetTop_Prog(d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
-   else if(faststrcmp(tok->textV, "dialogue") == 0)
-      Dlg_GetTop_Prog(d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
-   else if(faststrcmp(tok->textV, "terminal") == 0)
-      Dlg_GetTop_Prog(d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
-   else
-      ErrF(d, "invalid toplevel item '%s'", tok->textV);
-
-   return true;
-}
-
-script void Dlg_LoadFile(FILE *fp)
-{
-   struct compiler d = {{.bbeg = 14, .bend = 28, .fp = fp}, .ok = true};
-
-   TBufCtor(&d.tb);
-
-   if(setjmp(d.env)) {
-      d.ok = false;
-      goto done;
-   }
-
-   while(Dlg_GetTop(&d));
-
-   Dlg_ClearDef(&d);
-
-done:
-   TBufDtor(&d.tb);
-   fclose(d.tb.fp);
-}
-
-void Dlg_GInit(void)
-{
-}
-
 void Dlg_MInit(void)
 {
    /* Free any previous dialogue definitions. */
    for(u32 i = 0; i < countof(dlgdefs); i++) {
-      struct dlg_def lmvar *def = &dlgdefs[i];
+      struct dlg_def *def = &dlgdefs[i];
 
       if(def->codeV) {
          Vec_Clear(def->code);
          Vec_Clear(def->stab);
       }
 
-      fastmemset(def, 0, sizeof *def, lmvar);
+      fastmemset(def, 0, sizeof *def);
    }
 
-   FILE *fp = W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
-   if(fp) Dlg_LoadFile(fp);
+   FILE *fp =
+      W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
+   if(fp) {
+      struct compiler d = {{.bbeg = 14, .bend = 28, .fp = fp}, .ok = true};
 
-   if(dbglevel & log_dlg) {
-      for(u32 i = 0; i < countof(dlgdefs); i++) {
-         struct dlg_def lmvar *def = &dlgdefs[i];
+      TBufCtor(&d.tb);
 
-         if(def->codeV) {
-            printf("Disassembling script %u(%p,%u,%u)...\n", i, def->codeV,
-                   def->codeC, def->codeP);
-            Disassemble(def);
-            printf("Dumping code...\n");
-            Dbg_PrintMemC(def->codeV, def->codeC);
-
-            printf("Dumping string table for script %u(%p,%u,%u)...\n", i,
-                   def->stabV, def->stabC, def->stabP);
-            Dbg_PrintMemC(def->stabV, def->stabC);
-         }
+      if(setjmp(d.env)) {
+         d.ok = false;
+         goto done;
       }
 
-      printf("Done.\n");
+      for(;;) {
+         struct token *tok = d.tb.get();
+         if(tok->type == tok_eof) break;
+
+         Expect(&d, tok, tok_identi);
+
+         if(faststrcmp(tok->textV, "program") == 0)
+            Dlg_GetTop_Prog(&d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
+         else if(faststrcmp(tok->textV, "dialogue") == 0)
+            Dlg_GetTop_Prog(&d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
+         else if(faststrcmp(tok->textV, "terminal") == 0)
+            Dlg_GetTop_Prog(&d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
+         else
+            ErrF(&d, "invalid toplevel item '%s'", tok->textV);
+      }
+
+
+      FinishDef(&d);
+
+   done:
+      TBufDtor(&d.tb);
+      fclose(d.tb.fp);
    }
+
+   if(dbglevel & log_dlg) PrintDbg();
 }
 
 #endif
