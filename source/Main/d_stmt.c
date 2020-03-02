@@ -140,6 +140,15 @@ void Dlg_GetStmt_Terminal(struct compiler *d, bool use_s, u32 act)
    Dlg_PushLdVA(d, ACT_TRM_WAIT);
 }
 
+void Dlg_GetStmt_Num(struct compiler *d, u32 act)
+{
+   struct token *tok = d->tb.get();
+   Expect(d, tok, tok_number);
+
+   Dlg_PushLdAdr(d, VAR_ADRL, strtoi(tok->textV, nil, 0) & 0xFFFF);
+   Dlg_PushLdVA(d, act);
+}
+
 void Dlg_GetStmt_Script(struct compiler *d)
 {
    struct token *tok = d->tb.get();
@@ -220,6 +229,10 @@ script void Dlg_GetStmt(struct compiler *d)
             Dlg_GetStmt_Str(d, VAR_ICONL);
          else if(faststrcmp(tok->textV, "remote") == 0)
             Dlg_GetStmt_Str(d, VAR_REMOTEL);
+         else if(faststrcmp(tok->textV, "teleport_interlevel") == 0)
+            Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
+         else if(faststrcmp(tok->textV, "teleport_intralevel") == 0)
+            Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
          else if(faststrcmp(tok->textV, "script") == 0)
             Dlg_GetStmt_Script(d);
          else if(faststrcmp(tok->textV, "logon") == 0)
