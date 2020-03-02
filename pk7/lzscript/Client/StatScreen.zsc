@@ -153,7 +153,7 @@ override void DrawStats()
       DrawTime(320 - SP_TIMEX, SP_TIMEY, cnt_par);
    }
 
-   Screen.DrawText("smallfnt", Font.CR_WHITE, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   Screen.DrawText(smallfont, Font.CR_WHITE, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
 override void DrawShowNextLoc()

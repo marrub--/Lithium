@@ -127,7 +127,7 @@ ui void DrawEndSequence(RenderEvent evt)
       txt = m_Text.left(amt);
    }
 
-   if(txt != "") Screen.DrawText("smallfnt", Font.CR_WHITE, 10, 10, txt, DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   if(txt != "") Screen.DrawText(smallfont, Font.CR_WHITE, 10, 10, txt, DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 
    switch(m_ESeq) {
    case ESEQ_FADEMUS:
@@ -142,7 +142,7 @@ ui void DrawEndSequence(RenderEvent evt)
    }
    }
 
-   if(m_Skip) Screen.DrawText("smallfnt", Font.CR_WHITE, 5, 0, String.Format("Skip: %u", 1 + m_Skip / 10), DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   if(m_Skip) Screen.DrawText(smallfont, Font.CR_WHITE, 5, 0, String.Format("Skip: %u", 1 + m_Skip / 10), DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
 ui void RunEndSequence()

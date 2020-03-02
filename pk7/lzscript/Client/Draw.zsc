@@ -255,7 +255,11 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
    cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
 
    if(uf || cl.m_English) {
-      cl.m_D[p].Fnt = Font.GetFont(fnt);
+      if(fnt == "smallfnt") {
+	 cl.m_D[p].Fnt = smallfont;
+      } else {
+	 cl.m_D[p].Fnt = Font.GetFont(fnt);
+      }
    } else {
       cl.m_D[p].Fnt = cl.m_UtfFont;
       y += 2;
