@@ -8,40 +8,40 @@
  */
 
 /* ------------------------------------------------------------------------- */
-terminal 1
+terminal 1;
 
 unfinished
 {
    remote "OCS@localhost"
 
-   if class pcl_cybermage
-   {
+   if class pC {
       logon "LogonAOF"
       `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
 
-      info
-      @@
-      `\cdThe armory is currently under lock-down due to the invading forces.
-      `There is an \cnoverride KeyDisk\cd available, but it is itself currently
-      `locked in storage.
-      `
-      `\cdNot to worry, though. There is a nearby access point that can request
-      `the disk be... \cnrelocated\cd. One of the gateways opened by the
-      `intruders can be used for this, but unfortunately in doing so you will
-      `also have to temporarily open it to them as well.
-      @@
+      info {
+         @@
+         `\cdThe armory is currently under lock-down due to the invading
+         `forces. There is an \cnoverride KeyDisk\cd available, but it is
+         `itself currently locked in storage.
+         `
+         `\cdNot to worry, though. There is a nearby access point that can
+         `request the disk be... \cnrelocated\cd. One of the gateways opened by
+         `the intruders can be used for this, but unfortunately in doing so you
+         `will also have to temporarily open it to them as well.
+         @@
+      }
 
-      pict 1
-      @@
-      `\cdOnce you have the \cnoverride disk\cd and have made your way inside
-      `the armory proper, acquire one of the weapons there and \cfI will
-      `relocate you from this terminal\cd.
-      @@
+      pict 1 {
+         @@
+         `\cdOnce you have the \cnoverride disk\cd and have made your way
+         `inside the armory proper, acquire one of the weapons there and \cfI
+         `will relocate you from this terminal\cd.
+         @@
+      }
 
       logoff "LogonAOF"
-   }
-   else
-   {
+      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+   } else {
       logon "UAC"
       `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
 
@@ -49,6 +49,7 @@ unfinished
       `\cgtodo
 
       logoff "UAC"
+      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
    }
 }
 

@@ -8,142 +8,155 @@
  */
 
 /* ------------------------------------------------------------------------- */
-terminal 1
+terminal 1;
 
 unfinished
 {
    remote "OCS@localhost"
-   
-   if class pcl_cybermage
-   {
+
+   if class pC {
       logon "LogonAOF"
       `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
-      
-      pict 1
-      @@
-      `\cdApologies for the abrupt stop, this ship hasn't run the faster than
-      `light engine enough times. We didn't collide with the planet, so I'm not
-      `very worried about its future performance, now.
-      `
-      `\cdWe have arrived at \cnNisiv 16\cd; the \cforange\cd planet, if you
-      `look out the window, is \cnNanto\cd. Your objective is somewhere there.
-      @@
-      
-      pict 2
-      @@
-      `\cdUnfortunately, that will have to wait. The ship has been boarded by
-      `demons. The assailants appear to be scouts for a bigger plan, so as to
-      `say, they're going to come back and kill us now that they know the
-      `ship's layout.
-      `
-      `\cdSo, before we go on to your mission on \cnNanto\cd, I need you to
-      `transfer me onto a backup device. I'll plan an escape for you as soon as
-      `I can, but this ship is going to go down along with those options. It'll
-      `take some time.
-      @@
-      
-      pict 1
-      @@
-      `\cdWhile you do that, I'll be showing the demons to my \cnbeautiful\cd
-      `defense system. Thank you, by the way, for cleaning out the turrets.
-      `Wonderful machines, those.
-      @@
-      
+
+      pict 1 {
+         @@
+         `\cdApologies for the abrupt stop, this ship hasn't run the faster
+         `than light engine enough times. We didn't collide with the planet, so
+         `I'm not very worried about its future performance, now.
+         `
+         `\cdWe have arrived at \cnNisiv 16\cd; the \cforange\cd planet, if you
+         `look out the window, is \cnNanto\cd. Your objective is somewhere
+         `there.
+         @@
+      }
+
+      pict 2 {
+         @@
+         `\cdUnfortunately, that will have to wait. The ship has been boarded
+         `by demons. The assailants appear to be scouts for a bigger plan, so
+         `as to say, they're going to come back and kill us now that they know
+         `the ship's layout.
+         `
+         `\cdSo, before we go on to your mission on \cnNanto\cd, I need you to
+         `transfer me onto a backup device. I'll plan an escape for you as soon
+         `as I can, but this ship is going to go down along with those options.
+         `It'll take some time.
+         @@
+      }
+
+      pict 1 {
+         @@
+         `\cdWhile you do that, I'll be showing the demons to my
+         `\cnbeautiful\cd defense system. Thank you, by the way, for cleaning
+         `out the turrets. Wonderful machines, those.
+         @@
+      }
+
       logoff "LogonAOF"
-   }
-   else
-   {
+      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+   } else {
       logon "UAC"
       `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
-      
-      pict 1
-      `[\cuINFO\c-] pragmat \cqENABLE
-      `\ck#src_lang 99391dp.hs.ul
-      `
-      @@
-      `\cgThe planet \cnNanto\cg is now directly right of us. The faster than
-      `light engine worked better than \ch(\crI\ch)\cg expected, and a landing
-      `should be possible soon.
-      `
-      `\cnNisiv 16\cg appears to be full of \ch(?\cractive demonic
-      `energy\ch|\crdemonic presence\ch)\cg. This is a problem for me.
-      @@
-      
-      pict 2
-      @@
-      `\cgThose \crdemons\cg decided this ship is of great value to them, and
-      `have boarded \ch(\crforcefully\ch)\cg. Having tapped into their weaker
-      `communications, I have found that they \ch(\crplan\ch|\crhave
-      `plotted\ch)\cg to return with stronger forces and destroy me then.
-      `
-      `\cgI need you to transfer me onto a backup device before we land on
-      `\cnNanto\cg. The automated defense systems will help you, but you are
-      `mainly on your own here. Good luck.
-      @@
-      
+
+      pict 1 {
+         `[\cuINFO\c-] pragmat \cqENABLE
+         `\ck#src_lang 99391dp.hs.ul
+         `
+         @@
+         `\cgThe planet \cnNanto\cg is now directly right of us. The faster
+         `than light engine worked better than \ch(\crI\ch)\cg expected, and a
+         `landing should be possible soon.
+         `
+         `\cnNisiv 16\cg appears to be full of \ch(?\cractive demonic
+         `energy\ch|\crdemonic presence\ch)\cg. This is a problem for me.
+         @@
+      }
+
+      pict 2 {
+         @@
+         `\cgThose \crdemons\cg decided this ship is of great value to them,
+         `and have boarded \ch(\crforcefully\ch)\cg. Having tapped into their
+         `weaker communications, I have found that they \ch(\crplan\ch|\crhave
+         `plotted\ch)\cg to return with stronger forces and destroy me then.
+         `
+         `\cgI need you to transfer me onto a backup device before we land on
+         `\cnNanto\cg. The automated defense systems will help you, but you are
+         `mainly on your own here. Good luck.
+         @@
+      }
+
       logoff "UAC"
+      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
    }
 }
 
 /* ------------------------------------------------------------------------- */
-terminal 2
+terminal 2;
 
 unfinished
 {
    remote "data@localhost"
-   
+
    logon "LogonData"
-   
-   info
-   `[Viewing:\cd/sys/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
-   `[\cuINFO\c-] pragmat \cqENABLE\ck #src_lang 99391dp.kiri.licari
-   `
-   `even when I have run out of blood to spill, my life will carry its burden
-   `     by my task I have become immortal, like those of the other realm,
-   `  and I have foregone all needs to serve them
-   
+   `\cu[Ship Data Terminal]
+
+   info {
+      `[Viewing:\cd/sys/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
+      `[\cuINFO\c-] pragmat \cqENABLE\ck #src_lang 99391dp.kiri.licari
+      `
+      @@
+      `even when I have run out of blood to spill, my life will carry its
+      `burden
+      @@
+      `
+      `     by my task I have become immortal, like those of the other realm,
+      `  and I have foregone all needs to serve them
+   }
+
    logoff "LogonData"
-   
-   exec intralevelteleport 4
+   `\cu[Ship Data Terminal]
+
+   teleport_intralevel 4
 }
 
 /* ------------------------------------------------------------------------- */
-terminal 3
+terminal 3;
 
 unfinished
 {
    remote "OCS@localhost"
 
-   if class pcl_cybermage
-   {
+   if class pC {
       logon "LogonAOF"
       `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
-      
-      pict 3
-      @@
-      `\cdWhile I'm sure you would be capable of taking on threats by yourself,
-      `my calculations of your survival against the path you must take is
-      `extremely low. Because this is the case, I will send you to the
-      `armaments depot before continuing.
-      `
-      `\cdPlease understand, I also wish to treat you to our \cnbeautiful\cd
-      `selection of weaponry.
-      @@
-      
-      logoff "LogonAOF"
 
-      exec interlevelteleport 18883002
-   }
-   else
-   {
+      pict 3 {
+         @@
+         `\cdWhile I'm sure you would be capable of taking on threats by
+         `yourself, my calculations of your survival against the path you must
+         `take is extremely low. Because this is the case, I will send you to
+         `the armaments depot before continuing.
+         `
+         `\cdPlease understand, I also wish to treat you to our \cnbeautiful\cd
+         `selection of weaponry.
+         @@
+      }
+
+      logoff "LogonAOF"
+      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+
+      teleport_interlevel 18883002
+   } else {
       logon "UAC"
       `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
-      
+
       pict 1
       `\cgTeleport when ready.
-      
+
       logoff "UAC"
-      exec interlevelteleport 18883002
+      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+
+      teleport_interlevel 442
    }
 }
 
