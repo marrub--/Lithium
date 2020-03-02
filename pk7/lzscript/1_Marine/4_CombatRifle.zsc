@@ -43,6 +43,12 @@ class Lith_LaserRiflePuff : Actor
       +ALWAYSPUFF
       +FORCEDECAL
    }
+
+   states {
+   Spawn:
+      TNT1 A 1;
+      stop;
+   }
 }
 
 class Lith_CombatRifleMagazine : Lith_DroppedMagazine
