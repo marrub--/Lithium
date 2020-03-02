@@ -75,6 +75,9 @@ private transient play bool m_ForceDraw;
 
 private transient Font m_UtfFont;
 
+Shape2DTransform m_RectXf;
+Shape2D m_Rect;
+
 bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
@@ -411,6 +414,22 @@ static void LE()
 
 /* Member Functions -------------------------------------------------------- */
 
+override void WorldLoaded(WorldEvent evt)
+{
+   m_RectXf = new("Shape2DTransform");
+   m_Rect = new("Shape2D");
+   m_Rect.pushVertex((0, 0));
+   m_Rect.pushVertex((1, 0));
+   m_Rect.pushVertex((0, 1));
+   m_Rect.pushVertex((1, 1));
+   m_Rect.pushCoord((0, 0));
+   m_Rect.pushCoord((1, 0));
+   m_Rect.pushCoord((0, 1));
+   m_Rect.pushCoord((1, 1));
+   m_Rect.pushTriangle(0, 3, 1);
+   m_Rect.pushTriangle(0, 2, 3);
+}
+
 override void WorldTick()
 {
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
@@ -426,9 +445,6 @@ override void WorldTick()
 override void RenderOverlay(RenderEvent evt)
 {
    int scw = 320, sch = 240;
-   Shape2D shape;
-
-   textureid texnull = skyflatnum;
 
    if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
    {
@@ -478,18 +494,11 @@ override void RenderOverlay(RenderEvent evt)
             DTA_Alpha,m_D[i].A);
       break;
    case Type_Rect:
-      shape = new("Shape2D");
-      shape.pushVertex((m_D[i].X,            m_D[i].Y));
-      shape.pushVertex((m_D[i].X + m_D[i].Z, m_D[i].Y));
-      shape.pushVertex((m_D[i].X,            m_D[i].Y + m_D[i].W));
-      shape.pushVertex((m_D[i].X + m_D[i].Z, m_D[i].Y + m_D[i].W));
-      shape.pushCoord((0, 0));
-      shape.pushCoord((1, 0));
-      shape.pushCoord((0, 1));
-      shape.pushCoord((1, 1));
-      shape.pushTriangle(0, 3, 1);
-      shape.pushTriangle(0, 2, 3);
-      Screen.DrawShape(texnull, false, shape, DTA_FillColor,m_D[i].C);
+      m_RectXf.clear();
+      m_RectXf.scale((m_D[i].Z, m_D[i].W));
+      m_RectXf.translate((m_D[i].X, m_D[i].Y));
+      m_Rect.setTransform(m_RectXf);
+      Screen.DrawShape(skyflatnum, false, m_Rect, DTA_FillColor,m_D[i].C);
       break;
    }
 
