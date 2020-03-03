@@ -20,6 +20,54 @@
 /* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM
+static void StringStack(struct player *p)
+{
+   struct hudstr {str s; list link;};
+
+   if(ACS_Timer() % 3 == 0)
+   {
+      struct hudstr *hudstr = Salloc(struct hudstr);
+      ListCtor(&hudstr->link, hudstr);
+      hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
+
+      hudstr->link.link(&p->hudstrlist);
+
+      if(p->hudstrlist.size() == 20) Dalloc(p->hudstrlist.next->unlink());
+   }
+
+   SetSize(320, 200);
+
+   size_t i = 0;
+   for_list_back_it(struct hudstr *hudstr, p->hudstrlist, i++)
+      PrintTextA_str(hudstr->s, s_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
+}
+
+static void Waves(struct player *p)
+{
+   static str const fs[] = {s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13",
+                            s":HUD:H_D14", s":HUD:H_D15"};
+
+   k32 health = p->health / (k32)p->maxhealth;
+   i32 frame  = minmax(health * 4, 1, 5);
+   i32 timer  = ACS_Timer();
+
+   ACS_SetHudSize(320, 200);
+
+   /* Sine (health) */
+   i32 pos = (10 + timer) % 160;
+   DrawSpriteFade(fs[frame - 1], hid_scope_sineS - pos, 300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0), 25.1 + pos, 2, 0.6);
+
+   /* Square */
+   k32 a = ACS_Cos(pos / 32.0);
+
+   pos = (7 + timer) % 160;
+   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, hid_scope_squareS - pos, 300.1 + (a >= 0) * 7.0, 25.1 + pos, 2, 0.6);
+
+   /* Triangle */
+   pos = (5 + timer) % 160;
+   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs(pos % 16 - 8), 25.1 + pos, 2, 0.6);
+}
+
 static void ScopeC(struct player *p)
 {
    static str const os[] = {s":HUD_C:ScopeOverlay1",
@@ -41,9 +89,6 @@ static void ScopeI(struct player *p)
 
 static void ScopeM(struct player *p)
 {
-   static void StringStack(struct player *p);
-   static void Waves(struct player *p);
-
    Waves(p);
    StringStack(p);
 }
@@ -263,56 +308,52 @@ void P_Ren_PTickPst(struct player *p)
    DebugStats(p);
 }
 
-/* Static Functions -------------------------------------------------------- */
-
-#if LITHIUM
-static void StringStack(struct player *p)
+sync void P_TeleportIn(struct player *p)
 {
-   struct hudstr {str s; list link;};
+   p->teleportedout = false;
 
-   if(ACS_Timer() % 3 == 0)
-   {
-      struct hudstr *hudstr = Salloc(struct hudstr);
-      ListCtor(&hudstr->link, hudstr);
-      hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
+   ACS_AmbientSound(ss_misc_telein, 127);
+   ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
 
-      hudstr->link.link(&p->hudstrlist);
+   for(i32 i = 18, j = 18; i >= 1; i--) {
+      ACS_Delay(1);
+      k32 w = 1 + (i / 18.lk / 3.lk * 50);
+      k32 h = 1 + (j / 18.lk / 8.lk * 10);
+      SetSize(320, 200);
+      PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
+      SetSize(640 / w, 480 * h);
+      PrintSprite(s_LITHCAM3, 320/w,0, 240*h,0);
+      if(i & 3) j--;
+   }
+}
 
-      if(p->hudstrlist.size() == 20) Dalloc(p->hudstrlist.next->unlink());
+sync void P_TeleportOut(struct player *p)
+{
+   ACS_AmbientSound(ss_misc_teleout, 127);
+   ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
+
+   for(i32 i = 1, j = 1; i <= 18; i++) {
+      ACS_Delay(1);
+      k32 w = 1 + (i / 18.lk / 3.lk * 50);
+      k32 h = 1 + (j / 18.lk / 8.lk * 10);
+      SetSize(320, 200);
+      PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
+      SetSize(640 / w, 480 * h);
+      PrintSprite(s_LITHCAM3, 320/w,0, 240*h,0);
+      if(i & 3) j++;
    }
 
-   SetSize(320, 200);
-
-   size_t i = 0;
-   for_list_back_it(struct hudstr *hudstr, p->hudstrlist, i++)
-      PrintTextA_str(hudstr->s, s_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
+   p->teleportedout = true;
 }
 
-static void Waves(struct player *p)
+script void P_TeleportInAsync(struct player *p)
 {
-   static str const fs[] = {s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13",
-                            s":HUD:H_D14", s":HUD:H_D15"};
-
-   k32 health = p->health / (k32)p->maxhealth;
-   i32 frame  = minmax(health * 4, 1, 5);
-   i32 timer  = ACS_Timer();
-
-   ACS_SetHudSize(320, 200);
-
-   /* Sine (health) */
-   i32 pos = (10 + timer) % 160;
-   DrawSpriteFade(fs[frame - 1], hid_scope_sineS - pos, 300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0), 25.1 + pos, 2, 0.6);
-
-   /* Square */
-   k32 a = ACS_Cos(pos / 32.0);
-
-   pos = (7 + timer) % 160;
-   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, hid_scope_squareS - pos, 300.1 + (a >= 0) * 7.0, 25.1 + pos, 2, 0.6);
-
-   /* Triangle */
-   pos = (5 + timer) % 160;
-   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs(pos % 16 - 8), 25.1 + pos, 2, 0.6);
+   P_TeleportIn(p);
 }
-#endif
+
+script void P_TeleportOutAsync(struct player *p)
+{
+   P_TeleportOut(p);
+}
 
 /* EOF */

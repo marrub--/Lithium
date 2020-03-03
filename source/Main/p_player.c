@@ -75,6 +75,8 @@ reinit:
    P_BossWarning(p);
    #endif
 
+   if(p->teleportedout) P_TeleportInAsync(p);
+
    while(p->active)
    {
       if(p->reinit)

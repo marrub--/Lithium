@@ -87,6 +87,11 @@ stkcall cstr P_Discrim(i32 pclass);
 stkcall void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
 
+sync void P_TeleportIn(struct player *p);
+sync void P_TeleportOut(struct player *p);
+script void P_TeleportInAsync(struct player *p);
+script void P_TeleportOutAsync(struct player *p);
+
 /* Types ------------------------------------------------------------------- */
 
 GDCC_HashMap_Decl(upgrademap_t, i32, struct upgrade)
@@ -253,6 +258,8 @@ struct player
 
    u32  nextstep;
    bool hadinfrared;
+
+   bool teleportedout;
 
    /* Input */
    char txtbuf[8];

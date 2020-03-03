@@ -408,24 +408,6 @@ void GuiAct(void)
    }
 }
 
-script static void TeleportOutEffect(struct player *p)
-{
-   ACS_AmbientSound(ss_misc_teleout, 127);
-
-   ACS_SetHudSize(320, 200);
-   ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
-
-   DrawSpritePlain(sp_Terminal_TeleportOut, hid_teleportback, 160.0, 100.0, 1);
-
-   for(i32 j = 1; j <= 25; j++)
-   {
-      k32 e = j / 25.lk * 30;
-      ACS_SetHudSize(320 * e, 240);
-      DrawSpriteFade(s_LITHCAM3, hid_teleport, (i32)(160 * e), 120, TS, 0.2);
-      ACS_Delay(1);
-   }
-}
-
 static void SetText(cstr s)
 {
    i32 l = strlen(s) + 1;
@@ -517,8 +499,7 @@ sync static void ActTELEPORT_INTERLEVEL(struct player *p)
    u32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
-   TeleportOutEffect(p);
-   ACS_Delay(34);
+   P_TeleportOut(p);
    ACS_Teleport_NewMap(tag | LithMapMagic, 0, 0);
 
    SetVA(ACT_HALT);
@@ -1003,12 +984,6 @@ halt:
 }
 
 /* Scripts ----------------------------------------------------------------- */
-
-script_str ext("ACS") addr("Lith_TeleportOutEffect")
-void Sc_TeleportOutEffect(struct player *p)
-{
-   with_player(LocalPlayer) TeleportOutEffect(p);
-}
 
 script_str ext("ACS") addr("Lith_RunProgram")
 void Sc_RunProgram(i32 num)
