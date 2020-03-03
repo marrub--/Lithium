@@ -123,7 +123,7 @@ static bool CheckDead(struct boss *b, i32 num)
 script
 void SpawnBosses(i96 sum, bool force)
 {
-   if(!force && sum < scorethreshold) return;
+   if(islithmap || (!force && sum < scorethreshold)) return;
 
    alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
    alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
