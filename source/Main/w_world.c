@@ -353,8 +353,9 @@ static void Sc_World(void)
 begin:
    GetDebugInfo();
 
-   /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups. */
-   /* we can still detect it by using Timer, so correct this variable. */
+   /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
+    * we can still detect it by using Timer, so correct this variable.
+    */
    if(hubinit && ACS_Timer() < 2) hubinit = false;
 
    #if LITHIUM
@@ -370,8 +371,7 @@ begin:
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;)
-   {
+   if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
           "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
@@ -387,8 +387,10 @@ begin:
           "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
           "5. Save the file and start GZDoom again. If the issue persists "
           "try these steps again or delete your GZDoom configuration.\n"
-          "\n\n\n\n\n\n");
-      Log("Invalid settings detected. Please open the console (\"%jS\" or options menu) for more information.", "toggleconsole");
+          "\n\n\n\n\n\n"
+          "Invalid settings detected. Please open the console"
+          "(\"%jS\" or options menu) for more information.",
+          s"toggleconsole");
       ACS_Delay(10);
    }
 
@@ -423,16 +425,14 @@ begin:
    i32 missionkill = 0;
    i32 missionprc  = 0;
 
-   for(;;)
-   {
+   for(;;) {
       if(reopen) {
          player_init = reopen = false;
          goto begin;
       }
 
       #if LITHIUM
-      if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap)
-      {
+      if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
          ServCallI(sm_SetEnding, st_timeout);
          ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION, -1);
          return;
