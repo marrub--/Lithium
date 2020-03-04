@@ -117,6 +117,10 @@ Use at the expense of your world.
 == MENU_UPDAT  | * (Update-Notes)
 == MENU_QUITG  | * (Quit-Game)
 
+== MNU_SAVEGAME | (Save-Game)
+== MNU_LOADGAME | (Load-Game)
+== MNU_OPTIONS  | (Options)
+
 == MENU_CHOOSECLASS  | Your Class Is:
 == MENU_WHICHEPISODE | Your Story Is:
 == MENU_CHOOSESKILL  | Your Skill Is:

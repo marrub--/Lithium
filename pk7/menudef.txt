@@ -9,7 +9,7 @@
 
 DefaultListMenu
 {
-   Font "BIGFONT", "DarkGreen", "Green"
+   Font "BigUpper", "DarkGreen", "Green"
    Selector "-", -20, 2
    LineSpacing 16
 }
@@ -29,23 +29,16 @@ ListMenu "MainMenu"
    {
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
-      TextItem "$MENU_OPTION","o", "LOptionsMenu"
+      TextItem "$MENU_OPTION","o", "OptionsMenu"
    }
    else
    {
-      TextItem "$MENU_OPTION","o", "LOptionsMenu"
+      TextItem "$MENU_OPTION","o", "OptionsMenu"
       TextItem "$MENU_LOADG", "l", "LoadGameMenu"
       TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
    }
    TextItem "$MENU_UPDAT", "u", "UpdateMenu"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
-}
-
-OptionMenu "LOptionsMenu"
-{
-   Class "Lith_OptionsMenu"
-
-   Title "OPTIONS"
 }
 
 ListMenu "PlayerclassMenu"
@@ -55,13 +48,14 @@ ListMenu "PlayerclassMenu"
    Position 14, 55
    Font "LTRMFONT"
    PlayerDisplay 100, 50, "00 00 00", "00 FF 00"
-   MouseWindow 14, 55
+   StaticPatch 4, 48, "lgfx/Menu/ClassBack.png"
 }
 
 ListMenu "EpisodeMenu"
 {
    NetgameMessage "$NEWGAME"
    StaticTextCentered 160, 30, "$MENU_WHICHEPISODE"
+   StaticPatch 42, 48, "lgfx/Menu/EpisodeBack.png"
    Position 48, 63
 }
 
@@ -70,21 +64,6 @@ ListMenu "SkillMenu"
    StaticTextCentered 160, 30, "$MENU_CHOOSESKILL"
    StaticPatch 42, 48, "lgfx/Menu/SkillBack.png"
    Position 48, 63
-}
-
-ListMenu "LoadGameMenu"
-{
-   NetgameMessage "$LOADNET"
-   StaticTextCentered 160, -20, "$MENU_LOADG"
-   Position 80, 54
-   Class "Lith_LoadMenu"
-}
-
-ListMenu "SaveGameMenu"
-{
-   StaticTextCentered 160, -20, "$MENU_SAVEG"
-   Position 80, 54
-   Class "Lith_SaveMenu"
 }
 
 ListMenu "UpdateMenu"

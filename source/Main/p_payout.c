@@ -36,7 +36,7 @@ void P_Scr_Payout(struct player *p)
 
 #define Head(...) \
    ( \
-      HudMessageF(s_dbigfont, __VA_ARGS__), \
+      HudMessageF(s_bigupper, __VA_ARGS__), \
       HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 8.1, y + 0.1, TS, 0.2) \
    )
 
@@ -70,7 +70,7 @@ void P_Scr_Payout(struct player *p)
       Head("RESULTS");
 
       if(i < 16) {
-         HudMessageF(s_dbigfont, "RESULTS");
+         HudMessageF(s_bigupper, "RESULTS");
          HudMessageParams(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid, CR_WHITE, 8 + 0.1, y + .1, TS, 0.5);
       }
 

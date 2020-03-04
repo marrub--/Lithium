@@ -640,6 +640,8 @@
 ":UI_Orange:ListScrollbar" = "lgfx/UI_Orange/ListScrollbar.png";
 ":UI_Orange:ListButtonActive" = "lgfx/UI_Orange/ListButtonActive.png";
 ":Menu:SkillBack" = "lgfx/Menu/SkillBack.png";
+":Menu:EpisodeBack" = "lgfx/Menu/EpisodeBack.png";
+":Menu:ClassBack" = "lgfx/Menu/ClassBack.png";
 ":HUD:H_D25" = "lgfx/HUD/H_D25.png";
 ":HUD:H_D28" = "lgfx/HUD/H_D28.png";
 ":HUD:H_W1" = "lgfx/HUD/H_W1.png";
