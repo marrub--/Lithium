@@ -15,7 +15,7 @@
 [en enu default]
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_SHORT_HeadsUpDisp" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_INFO_SHORT_HeadsUpDisp" = "$LITH_UPGRADE_TITLE_HeadsUpDisM";
 "LITH_INFO_TITLE_HeadsUpDisp" = "Heads Up Display";
 "LITH_INFO_DESCR_HeadsUpDisp" =
    "This is a military issue Heads Up Display program, which tracks vital signs, "
@@ -169,7 +169,7 @@
    "Solomon, requires only an energy source.";
 
 /*----------------------------------------------------------------------------|*/
-"LITH_INFO_SHORT_HeadsUpDispJem" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_INFO_SHORT_HeadsUpDispJem" = "$LITH_UPGRADE_TITLE_HeadsUpDisC";
 "LITH_INFO_TITLE_HeadsUpDispJem" = "Heads Up Display";
 "LITH_INFO_DESCR_HeadsUpDispJem" =
    "This program is the 37th version of the standard issue heads-up display for "
