@@ -1,0 +1,22 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_MessageBox : MessageBoxMenu;
+
+override void Init(Menu parent, string message, int message_mode, bool play_sound, name cmd, voidptr native_handler)
+{
+   if(message == "HACK HACK THIS IS A HACK WOW WHAT A HACK") {
+      int num = StringTable.Localize("QUITMSGNUM", false).toInt(10);
+      num = (gametic % num) + 1;
+      message = StringTable.Localize(string.Format("QUITMSG%i", num), false);
+   }
+   super.Init(parent, message, message_mode, play_sound, cmd, native_handler);
+}
+
+/* EOF */

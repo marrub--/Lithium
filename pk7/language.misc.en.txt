@@ -471,6 +471,8 @@
 "QUITMSG101" = "die";
 "QUITMSG102" = "Aw, dude. There's still so many demons to kill. Don't leave me here with them.";
 
+"QUITMSGNUM" = "102";
+
 /* Updates -------------------------------------------------------------------|*/
 
 /* Header format:*/
