@@ -24,9 +24,6 @@
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
 
-#define k32_to_i32(n) ((union ik32){.k=(n)}.i)
-#define i32_to_k32(n) ((union ik32){.i=(n)}.k)
-
 #define stkcall    [[__call("StkCall")]]
 #define script     [[__call("ScriptI")]]
 #define script_str [[__call("ScriptS")]]
@@ -70,7 +67,8 @@ struct k64v2 {k64 x, y;};
 struct i32v2 {i32 x, y;};
 struct ptr2  {u32 l, h;};
 
-union ik32 {int_k_t i; k32 k;};
+union ik32 {i32 i; k32 k;};
+union uk32 {u32 u; k32 k;};
 
 /* Address Space Definitions ----------------------------------------------- */
 

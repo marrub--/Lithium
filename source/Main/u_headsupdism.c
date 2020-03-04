@@ -89,17 +89,17 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 
    if(p->health < p->oldhealth)
    {
-      UData.cr = CR_YELLOW;
+      UData.cr = CR_PURPLE;
       ft = (p->oldhealth - p->health) / 300.0;
       ft = minmax(ft, 0.1, 1.0);
    }
    else if(p->health > p->oldhealth)
    {
-      UData.cr = CR_PURPLE;
+      UData.cr = CR_YELLOW;
       ft = 0.1;
    }
 
-   if(ft) SetFade(fid_health, 4, ft);
+   if(ft) SetFade(fid_health, 4, ft * 255);
 
    if(CheckFade(fid_health))
    {

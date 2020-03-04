@@ -194,7 +194,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
 
          PrintText_str(ld->inf, s_logfont, cr, x,1, y,ya);
 
-         if(ld->ftim) SetFade(fid_logadS + i, 1, 0.07);
+         if(ld->ftim) SetFade(fid_logadS + i, 1, 8);
 
          if(CheckFade(fid_logadS + i))
          {

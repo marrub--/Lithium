@@ -51,40 +51,62 @@ static void Waves(struct player *p)
    i32 frame  = minmax(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
 
-   ACS_SetHudSize(320, 200);
+   SetSize(320, 200);
 
    /* Sine (health) */
-   i32 pos = (10 + timer) % 160;
-   DrawSpriteFade(fs[frame - 1], hid_scope_sineS - pos, 300.1 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0), 25.1 + pos, 2, 0.6);
+   for(i32 i = 0; i < 70; i++) {
+      i32 pos = (10 + timer + i) % 160;
+      PrintSpriteA(fs[frame - 1], 300 + roundk(ACS_Sin(pos / 32.0) * 7.0, 0),1, 25 + pos,1, i / 70.0k);
+   }
 
    /* Square */
-   k32 a = ACS_Cos(pos / 32.0);
-
-   pos = (7 + timer) % 160;
-   DrawSpriteFade(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, hid_scope_squareS - pos, 300.1 + (a >= 0) * 7.0, 25.1 + pos, 2, 0.6);
+   for(i32 i = 0; i < 70; i++) {
+      i32 pos = (7 + timer + i) % 160;
+      k32 a   = ACS_Cos(pos / 32.0);
+      PrintSpriteA(roundk(a, 2) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, 300 + (a >= 0) * 7.0,1, 25 + pos,1, i / 70.0k);
+   }
 
    /* Triangle */
-   pos = (5 + timer) % 160;
-   DrawSpriteFade(sp_HUD_H_D14, hid_scope_triS - pos, 300.1 + fastabs(pos % 16 - 8), 25.1 + pos, 2, 0.6);
+   for(i32 i = 0; i < 70; i++) {
+      i32 pos = (5 + timer + i) % 160;
+      PrintSpriteA(sp_HUD_H_D14, 300 + fastabs(pos % 16 - 8),1, 25 + pos,1, i / 70.0k);
+   }
 }
 
 static void ScopeC(struct player *p)
 {
-   static str const os[] = {s":HUD_C:ScopeOverlay1",
-                            s":HUD_C:ScopeOverlay2",
-                            s":HUD_C:ScopeOverlay3",
-                            s":HUD_C:ScopeOverlay4"};
-   i32 time = ACS_Timer() % 16 / 4;
-   DrawSpriteXX(os[time], HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_overlayE + time, 0.1, 0.1, 0.1, 0.25, 0.5);
+   i32 which = ACS_Timer() % 16 / 4;
 
-   for(i32 i = 0; i < 200; i++)
-      DrawSpriteXX(sp_HUD_H_D41, HUDMSG_ADDBLEND|HUDMSG_FADEOUT|HUDMSG_ALPHA, hid_scope_lineE + i, 32, i+.1, 0.1, 0.1, ACS_RandomFixed(0.3, 0.6));
+   if(p->scopetoken) {
+      SetFadeA(fid_scopecoS + which, 1, 16, 0.5);
+
+      for(i32 i = 0; i < 200; i++) {
+         k32 rn = ACS_RandomFixed(0.3, 0.6);
+         SetFadeA(fid_scopecgS + i, 1, 16, rn);
+      }
+   }
+
+   static str const os[] = {s":HUD_C:ScopeOverlay1", s":HUD_C:ScopeOverlay2",
+                            s":HUD_C:ScopeOverlay3", s":HUD_C:ScopeOverlay4"};
+
+   SetSize(320, 200);
+
+   for(u32 i = 0; i < 4; i++) {
+      u32 fid = fid_scopecoS + i;
+      if(CheckFade(fid)) PrintSpriteFP(os[i], 0,1, 0,1, fid);
+   }
+
+   for(u32 i = 0; i < 200; i++) {
+      u32 fid = fid_scopecgS + i;
+      if(CheckFade(fid)) PrintSpriteFP(sp_HUD_H_D41, 32,0, i,1, fid);
+   }
 }
 
 static void ScopeI(struct player *p)
 {
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
-   DrawSpriteX(sp_HUD_I_ScopeOverlay, HUDMSG_ADDBLEND|HUDMSG_ALPHA, hid_scope_overlayE, -2.1, -2.1, TS, a);
+   SetSize(320, 200);
+   PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
 }
 
 static void ScopeM(struct player *p)
@@ -247,27 +269,25 @@ static void Style(struct player *p)
    }
 }
 
+static void Advice(struct player *p)
+{
+   /*
+   SetSize(320, 240);
+   PrintTextChS(p->attr.lvupstr);
+   PrintText(s_cnfont, CR_WHITE, 220,1, 75,1);
+   */
+}
+
 script
 static void HUD(struct player *p)
 {
-   ACS_SetHudSize(320, 200);
-
    if(p->old.scopetoken && !p->scopetoken)
-   {
       ListDtor(&p->hudstrlist, true);
 
-      for(i32 i = hid_scope_clearS; i <= hid_scope_clearE; i++)
-      {
-         ACS_BeginPrint();
-         ACS_MoreHudMessage();
-         HudMessagePlain(i, 0.0, 0.0, 0.0);
-      }
-   }
-
-   if(p->scopetoken) switch(p->pclass) {
-   case pcl_cybermage: ScopeC(p); break;
-   case pcl_informant: ScopeI(p); break;
-   case pcl_marine:    ScopeM(p); break;
+   switch(p->pclass) {
+      case pcl_cybermage:                   ScopeC(p); break;
+      case pcl_informant: if(p->scopetoken) ScopeI(p); break;
+      case pcl_marine:    if(p->scopetoken) ScopeM(p); break;
    }
 }
 #endif
@@ -275,14 +295,12 @@ static void HUD(struct player *p)
 stkcall
 static void Levelup(struct player *p)
 {
-   if(p->old.attr.level && p->old.attr.level < p->attr.level)
-   {
+   if(p->old.attr.level && p->old.attr.level < p->attr.level) {
       ACS_LocalAmbientSound(ss_player_levelup, 127);
       p->logH(1, LanguageC(LANG "LOG_LevelUp%s", p->discrim), ACS_Random(1000, 9000));
    }
 
-   if(p->attr.lvupstr[0])
-   {
+   if(p->attr.lvupstr[0]) {
       SetSize(320, 240);
       PrintTextChS(p->attr.lvupstr);
       PrintText(s_cnfont, CR_WHITE, 220,1, 75,1);
@@ -303,6 +321,7 @@ void P_Ren_PTickPst(struct player *p)
    #if LITHIUM
    HUD(p);
    Style(p);
+   Advice(p);
    #endif
    Levelup(p);
    DebugStats(p);

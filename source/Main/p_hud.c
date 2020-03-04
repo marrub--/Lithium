@@ -30,7 +30,7 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       PrintTextX(s_lhudfontsmall, a->ncol[min(slot - 1, 2)], x,2, y,2);
 
       if(p->weapon.cur->info->slot == i)
-         SetFade(fid_slotnS + i, 1, 0.05);
+         SetFade(fid_slotnS + i, 1, 6);
 
       if(CheckFade(fid_slotnS + i))
       {
@@ -49,19 +49,17 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i3
       PrintTextFmt("\C%S%S", cr, scr);
       PrintTextX(font, 0, x,xa, y,ya);
 
-      if(p->score > p->old.score)
-         SetFade(fid_schit1, 4, 0.1);
-      else if(p->score < p->old.score)
-      {
+      if(p->score > p->old.score) {
+         SetFade(fid_schit1, 4, 12);
+      } else if(p->score < p->old.score) {
          i96 scrdif = p->old.score - p->score;
          u32 tics = scrdif * 8 / 0xFFFF;
          u32 mmx = 30000 - minmax(scrdif / 4, 3276, 29490);
-         SetFade(fid_schit2, minmax(tics, 1, 35), mmx / 32767.0);
+         SetFade(fid_schit2, minmax(tics, 1, 35), mmx >> 8);
       }
 
-      if(p->scoreaccumtime > 0)
-      {
-         SetFade(fid_scacum, 5, 0.1);
+      if(p->scoreaccumtime > 0) {
+         SetFade(fid_scacum, 5, 12);
          p->scoreaccumstr = StrParam("%c%s", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
       }
 

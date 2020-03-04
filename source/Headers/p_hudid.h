@@ -25,6 +25,10 @@ enum
    fid_slotnE = fid_slotnS + 8,
    fid_logadS,
    fid_logadE = fid_logadS + 8,
+   fid_scopecoS,
+   fid_scopecoE = fid_scopecoS + 4,
+   fid_scopecgS,
+   fid_scopecgE = fid_scopecgS + 200,
 };
 
 enum
@@ -60,20 +64,6 @@ enum
    hid_adrenind_fxS = hid_adrenind_fxE + 45,
 
    hid_log_throwaway,
-
-   hid_scope_sineE,
-   hid_scope_sineS = hid_scope_sineE + 200,
-   hid_scope_squareE,
-   hid_scope_squareS = hid_scope_squareE + 200,
-   hid_scope_triE,
-   hid_scope_triS = hid_scope_triE + 200,
-   hid_scope_overlayE,
-   hid_scope_overlayS = hid_scope_overlayE + 5,
-   hid_scope_lineE,
-   hid_scope_lineS = hid_scope_lineE + 200,
-
-   hid_scope_clearS = hid_scope_sineE,
-   hid_scope_clearE = hid_scope_triS,
 };
 
 #endif

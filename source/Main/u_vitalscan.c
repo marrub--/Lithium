@@ -136,7 +136,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled || !UData.target) return;
 
-   if(UData.hdtime == 30) SetFade(fid_vscan, 10, 0.1);
+   if(UData.hdtime == 30) SetFade(fid_vscan, 10, 12);
 
    i32 ox = p->getCVarI(sc_scanner_xoffs);
    i32 oy = p->getCVarI(sc_scanner_yoffs);

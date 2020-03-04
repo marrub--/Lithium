@@ -19,8 +19,7 @@ extend class Lith_URANUS;
 
 /* Types ------------------------------------------------------------------- */
 
-enum DrawType
-{
+enum DrawType {
    Type_ClipSet,
    Type_ClipClear,
    Type_SetSize,
@@ -34,8 +33,7 @@ enum DrawType
    Type_Rect,
 }
 
-struct DrawData
-{
+struct DrawData {
    uint8 Type;
    int16 X, Y, Z, W;
 
@@ -43,31 +41,33 @@ struct DrawData
    color     C;
    float     A;
 
-   uint8         Cr;
-   uint8         LnY;
+   uint8 Cr;
+   uint8 LnY;
+   uint8 Style;
+
    Font          Fnt;
    array<string> Txt;
    array<int>    LnW;
    array<int>    LnX;
 }
 
-struct FadeMsg
-{
-   uint16 Time;
-   uint16 FSub;
-   uint16 Fade;
+struct FadeMsg {
+   uint8 Fade;
+   uint8 Time;
+   uint8 FSub;
+   uint8 Alph;
 }
 
 /* Constants --------------------------------------------------------------- */
 
-const LT_X_MASK = 0x0FFFFFFF;
-const LT_Y_MASK = 0x1FFFFFFF;
+const X_MASK = 0x0FFFFFFF;
+const Y_MASK = 0x1FFFFFFF;
 
 /* Members ----------------------------------------------------------------- */
 
 private transient play DrawData[400] m_D;
 private transient play uint m_DPtr;
-private transient play FadeMsg[32] m_FadeMsg;
+private transient play FadeMsg[256] m_FadeMsg;
 private transient play vector2 m_VirtualSize;
 private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
@@ -109,27 +109,28 @@ static void LZ(Actor mo, int w, int h)
    0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
 
                                       arg0
-   -111 1111 1111 1111 1--- ---- ---- ---- 16 16 - fade speed
-   ---- ---- ---- ---- ---1 1111 11-- ----  6  7 - time (tics)
-   ---- ---- ---- ---- ---- ---- --11 1111  0  6 - fade num
+   1111 1111 ---- ---- ---- ---- ---- ---- 24  8 - alpha
+   ---- ---- 1111 1111 ---- ---- ---- ---- 16  8 - speed
+   ---- ---- ---- ---- 1111 1111 ---- ----  8  8 - time
+   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - fade num
 */
 static void LF(Actor mo, int arg0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   uint num = arg0 & 0x3f;
-
-   cl.m_FadeMsg[num].Time = (arg0 >>  6) & 0x7f;
-   cl.m_FadeMsg[num].FSub =  arg0 >> 15;
-   cl.m_FadeMsg[num].Fade = uint16.Max;
+   uint num               = (arg0 >>  0) & 0xff;
+   cl.m_FadeMsg[num].Time = (arg0 >>  8) & 0xff;
+   cl.m_FadeMsg[num].FSub = (arg0 >> 16) & 0xff;
+   cl.m_FadeMsg[num].Alph = (arg0 >> 24) & 0xff;
+   cl.m_FadeMsg[num].Fade = 255;
 }
 
 static bool LX(Actor mo, int num)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
-   return cl.m_FadeMsg[num].Fade > 0;
+   return cl.m_FadeMsg[num].Fade > 0 && cl.m_FadeMsg[num].Alph > 0;
 }
 
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
@@ -150,37 +151,70 @@ static void LL(Actor mo, int x, int y, int z, int w, string c = "")
    cl.m_DPtr++;
 }
 
-static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1, string c = "")
+/* BIT LAYOUT OF ARGUMENTS
+
+   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
+
+                                      arg0
+   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - X sign
+   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - X alignment
+   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - X position
+
+                                      arg1
+   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
+   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
+   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
+
+                                      arg2
+   ---- ---- ---- ---- ---- -1-- ---- ---- 10  1 - alpha flag
+   ---- ---- ---- ---- ---- --1- ---- ----  9  1 - fade flag
+   ---- ---- ---- ---- ---- ---1 ---- ----  8  1 - additive flag
+   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - alpha OR fade num
+*/
+static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, string arg3 = "")
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
+   if(cl.m_NoDraw) return;
 
-   if(a ~== 0 || cl.m_NoDraw) return;
+   int  x  =  arg0        & X_MASK;
+   int  y  =  arg1        & Y_MASK;
+   uint xa = (arg0 >> 28) & 0x7;
+   uint ya = (arg1 >> 29) & 0x3;
+   uint af =  arg2        & 0xff;
+
+   if(arg0 & 0x80000000) x -= X_MASK + 1;
+   if(arg1 & 0x80000000) y -= Y_MASK + 1;
+
    let p = cl.m_DPtr;
 
-   if(a < -1) a = float(cl.m_FadeMsg[uint(-a - 2)].Fade) / uint16.Max;
-
-   if(a == -1)
-      cl.m_D[p].Type = Type_Sprite;
-   else
-   {
-      if(a < 0.001) return;
-
-      cl.m_D[p].Type = Type_SpriteAlpha;
-      cl.m_D[p].A = a;
+   if(arg2 & 0x200) {
+      cl.m_D[p].A  = cl.m_FadeMsg[af].Fade / 255.0;
+      cl.m_D[p].A *= cl.m_FadeMsg[af].Alph / 255.0;
+   } else if(arg2 & 0x400) {
+      cl.m_D[p].A = af / 255.0;
+   } else {
+      cl.m_D[p].A = 1.0;
    }
+   if(cl.m_D[p].A < 0.001) return;
+   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_SpriteAlpha : Type_Sprite;
 
-   if(c != "")
-   {
+   if(arg2 & 0x100)
+      cl.m_D[p].Style = STYLE_Add;
+   else if(cl.m_D[p].Type == Type_SpriteAlpha)
+      cl.m_D[p].Style = STYLE_Translucent;
+   else
+      cl.m_D[p].Style = STYLE_Normal;
+
+   if(arg3 != "") {
       if(cl.m_D[p].Type == Type_SpriteAlpha)
          cl.m_D[p].Type = Type_SpriteStencilAlpha;
       else
          cl.m_D[p].Type = Type_SpriteStencil;
-      cl.m_D[p].C = c;
+      cl.m_D[p].C = arg3;
    }
 
-   for(int i = 0; tex.CharCodeAt(0) == Ch_Colon; i++)
-   {
+   for(int i = 0; tex.CharCodeAt(0) == Ch_Colon; i++) {
       if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
    }
@@ -190,17 +224,17 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
    int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_D[p].Tex);
 
    switch(xa) {
-   default:
-   case 1: cl.m_D[p].X = x;          break;
-   case 0: cl.m_D[p].X = x - sx / 2; break;
-   case 2: cl.m_D[p].X = x - sx;     break;
+      default:
+      case 1: cl.m_D[p].X = x;          break;
+      case 0: cl.m_D[p].X = x - sx / 2; break;
+      case 2: cl.m_D[p].X = x - sx;     break;
    }
 
    switch(ya) {
-   default:
-   case 1: cl.m_D[p].Y = y;          break;
-   case 0: cl.m_D[p].Y = y - sy / 2; break;
-   case 2: cl.m_D[p].Y = y - sy;     break;
+      default:
+      case 1: cl.m_D[p].Y = y;          break;
+      case 0: cl.m_D[p].Y = y - sy / 2; break;
+      case 2: cl.m_D[p].Y = y - sy;     break;
    }
 
    cl.m_DPtr++;
@@ -211,58 +245,58 @@ static void LS(Actor mo, string tex, int x, int y, int xa, int ya, double a = -1
    0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
 
                                       arg0
-   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - "no unicode" flag
-   -1-- ---- ---- ---- ---- ---- ---- ---- 30  1 - alpha flag
-   --11 1111 ---- ---- ---- ---- ---- ---- 24  6 - alpha OR fade num
-   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - color
-
-                                      arg1
    1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - X sign
    -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - X alignment
    ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - X position
 
-                                      arg2
+                                      arg1
    1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
-   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - Y alignment
-   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - Y position
+   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
+   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
+
+                                      arg2
+   ---- ---- ---- -1-- ---- ---- ---- ---- 18  1 - "no unicode" flag
+   ---- ---- ---- --1- ---- ---- ---- ---- 17  1 - alpha flag
+   ---- ---- ---- ---1 ---- ---- ---- ---- 16  1 - fade flag
+   ---- ---- ---- ---- 1111 1111 ---- ----  8  8 - alpha OR fade num
+   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - color
 */
 static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
+   if(cl.m_NoDraw) return;
 
-   bool af =  arg0        & 0x40000000;
-   uint aa = (arg0 >> 24) & 0x3F;
+   int  x  =  arg0        & X_MASK;
+   int  y  =  arg1        & Y_MASK;
+   uint xa = (arg0 >> 28) & 0x7;
+   uint ya = (arg1 >> 29) & 0x3;
+   uint af = (arg2 >>  8) & 0xff;
+   uint cr =  arg2        & 0xff;
 
-   if((af && aa == 0) || cl.m_NoDraw) return;
-
-   int  x  =  arg1        & LT_X_MASK;
-   int  y  =  arg2        & LT_Y_MASK;
-   uint xa = (arg1 >> 28) & 0x7;
-   uint ya = (arg2 >> 29) & 0x3;
-   bool uf =  arg0        & 0x80000000;
-
-   if(arg1 & 0x80000000) x = x - LT_X_MASK + 1;
-   if(arg2 & 0x80000000) y = y - LT_Y_MASK + 1;
+   if(arg0 & 0x80000000) x -= X_MASK + 1;
+   if(arg1 & 0x80000000) y -= Y_MASK + 1;
 
    let p = cl.m_DPtr;
 
-   cl.m_D[p].A = !af && aa != 0 ? float(cl.m_FadeMsg[aa - 1].Fade) / uint16.Max
-                                : af ? float(aa) / 0x3F
-                                     : 1.0;
+   if(arg2 & 0x10000) {
+      cl.m_D[p].A  = cl.m_FadeMsg[af].Fade / 255.0;
+      cl.m_D[p].A *= cl.m_FadeMsg[af].Alph / 255.0;
+   } else if(arg2 & 0x20000) {
+      cl.m_D[p].A = float(af) / 0xff;
+   } else {
+      cl.m_D[p].A = 1.0;
+   }
+   if(cl.m_D[p].A < 0.001) return;
+   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
 
-   cl.m_D[p].Cr = arg0 & 0xff;
+   cl.m_D[p].Cr = cr;
 
    uint lns, lnx = 0;
 
-   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
-
-   if(uf || cl.m_English) {
-      if(fnt == "smallfnt") {
-	 cl.m_D[p].Fnt = smallfont;
-      } else {
-	 cl.m_D[p].Fnt = Font.GetFont(fnt);
-      }
+   if(arg2 & 0x40000 || cl.m_English) {
+      if(fnt == "smallfnt") cl.m_D[p].Fnt = smallfont;
+      else                  cl.m_D[p].Fnt = Font.GetFont(fnt);
    } else {
       cl.m_D[p].Fnt = cl.m_UtfFont;
       y += 2;
@@ -276,8 +310,7 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
    cl.m_D[p].Txt.Resize(lns);
    cl.m_D[p].LnW.Resize(lns);
 
-   for(uint i = 0, w; i < lns; i++)
-   {
+   for(uint i = 0, w; i < lns; i++) {
       cl.m_D[p].Txt[i] = brl.StringAt(i);
       cl.m_D[p].LnW[i] = brl.StringWidth(i);
 
@@ -401,14 +434,15 @@ static void LE()
 
    cl.m_DPtr = 0;
 
-   for(uint i = 0; i < cl.m_FadeMsg.Size(); i++)
-   {
-      if(!cl.m_FadeMsg[i].Fade)
-         continue;
-      else if(!cl.m_FadeMsg[i].Time)
-         cl.m_FadeMsg[i].Fade = Max(int(cl.m_FadeMsg[i].Fade) - int(cl.m_FadeMsg[i].FSub), 0);
-      else
-         cl.m_FadeMsg[i].Time--;
+   for(uint i = 0; i < cl.m_FadeMsg.Size(); i++) {
+      if(cl.m_FadeMsg[i].Fade) {
+         if(!cl.m_FadeMsg[i].Time) {
+            cl.m_FadeMsg[i].Fade =
+               Max(int(cl.m_FadeMsg[i].Fade) - int(cl.m_FadeMsg[i].FSub), 0);
+         } else {
+            cl.m_FadeMsg[i].Time--;
+         }
+      }
    }
 }
 
@@ -434,10 +468,10 @@ override void WorldTick()
 {
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
       switch(CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt()) {
-	 default:
-	 case 0: m_UtfFont = "MisakiG"; break;
-	 case 1: m_UtfFont = "MisakiM"; break;
-	 case 2: m_UtfFont = "JFDotG";  break;
+         default:
+         case 0: m_UtfFont = "MisakiG"; break;
+         case 1: m_UtfFont = "MisakiM"; break;
+         case 2: m_UtfFont = "JFDotG";  break;
       }
    }
 }
@@ -463,35 +497,43 @@ override void RenderOverlay(RenderEvent evt)
       break;
    case Type_Sprite:
       Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0);
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
       break;
    case Type_SpriteAlpha:
       Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
-         DTA_Alpha,m_D[i].A);
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_LegacyRenderStyle,m_D[i].Style,
+                         DTA_Alpha,m_D[i].A);
       break;
    case Type_SpriteStencil:
       Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
-         DTA_FillColor,m_D[i].C);
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_FillColor,m_D[i].C);
       break;
    case Type_SpriteStencilAlpha:
       Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch, DTA_TopOffset,0, DTA_LeftOffset,0,
-         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
       break;
    case Type_Text:
       for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
          Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-            m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
-            DTA_VirtualWidth,scw, DTA_VirtualHeight,sch);
+                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                         m_D[i].Txt[ln],
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch);
       break;
    case Type_TextAlpha:
       for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
          Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-            m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln, m_D[i].Txt[ln],
-            DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-            DTA_Alpha,m_D[i].A);
+                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                         m_D[i].Txt[ln],
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_Alpha,m_D[i].A);
       break;
    case Type_Rect:
       m_RectXf.clear();

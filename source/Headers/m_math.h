@@ -15,6 +15,13 @@
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))
 
+#define k32_to_i32(n) ((union ik32){.k=(n)}.i)
+#define i32_to_k32(n) ((union ik32){.i=(n)}.k)
+#define k32_to_u32(n) ((union uk32){.k=(n)}.u)
+#define u32_to_k32(n) ((union uk32){.u=(n)}.k)
+
+#define k32_to_byte(n) ((k32_to_u32((k32)(n) * 255.0) >> 16) & 0xff)
+
 /* To make pitch values down=0, up=1 */
 #define PITCH_BASE (-0.5)
 
