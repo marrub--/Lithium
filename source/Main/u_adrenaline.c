@@ -28,7 +28,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    /* Prepare */
    else if(!UData.readied)
    {
-      ACS_PlaySound(0, ss_player_adren_ready, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+      StartSound(ss_player_adren_ready, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       p->logH(1, "Adrenaline injector ready."); /* TODO */
       UData.readied = true;
    }
@@ -39,7 +39,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
       UData.charge = UData.readied = 0;
 
       p->logH(4, "Adrenaline administered."); /* TODO */
-      ACS_PlaySound(0, ss_player_adren_inj, 5|CHAN_NOPAUSE|CHAN_MAYBE_LOCAL|CHAN_UI, 1.0, false, ATTN_STATIC);
+      StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       FadeFlash(255, 255, 255, 0.4, 0.6);
       InvGive(so_TimeHax2, 1);
 

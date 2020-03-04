@@ -111,7 +111,7 @@ class Lith_BulletAfterSmoke : Actor
    {
       Super.Tick();
 
-      if(!level.frozen && !globalfreeze)
+      if(!level.isFrozen())
       {
          Scale.X += m_SX;
          Scale.Y += m_SY;
@@ -253,7 +253,7 @@ PuffNormalEnd:
    XPUF H 1 bright;
    stop;
 PuffNormalAlt:
-   XPUF A 0 A_PlaySound("effects/puff/ricochet", volume: lith_weapons_ricochetvol);
+   XPUF A 0 A_StartSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
    XPUF AB 1 bright;
    XPUF CDE 1 bright light("Lith_BulletPuff2");
    goto PuffNormalEnd;
@@ -266,7 +266,7 @@ PuffMirroredEnd:
    XPUF P 1 bright;
    stop;
 PuffMirroredAlt:
-   XPUF I 0 A_PlaySound("effects/puff/ricochet", volume: lith_weapons_ricochetvol);
+   XPUF I 0 A_StartSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
    XPUF IJ 1 bright;
    XPUF KLM 1 bright light("Lith_BulletPuff2");
    goto PuffMirroredEnd;

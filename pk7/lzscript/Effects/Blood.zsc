@@ -31,7 +31,7 @@ class Lith_BloodHitSpray : Actor
 
    override void Tick()
    {
-      if(!GlobalFreeze && !Level.Frozen)
+      if(!level.isFrozen())
       {
          if(m_Step < .015) SetOrigin(Pos + (0, 0, .04), true);
          else              SetOrigin(Pos - (0, 0, .04), true);
@@ -74,12 +74,12 @@ class Lith_BloodHitCore : Actor
       mo.Translation = Translation;
       mo.Scale = Scale;
       mo.Angle = Angle;
-      if(Random(0, 255) < 128) A_PlaySound("body/flesh", CHAN_BODY);
+      if(Random(0, 255) < 128) A_StartSound("body/flesh", lch_body);
    }
 
    override void Tick()
    {
-      if(!GlobalFreeze && !Level.Frozen)
+      if(!level.isFrozen())
       {
          if(++m_Tics > 4)
          {

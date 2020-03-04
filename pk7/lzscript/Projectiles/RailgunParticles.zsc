@@ -106,7 +106,7 @@ class Lith_OmegaRailExplosion : Lith_OmegaRailFXBase
       BFE1 C 0 bright;
       BFE1 C 15 bright {
          A_Explode(128, 512, 0, false, 512);
-         A_PlaySound("weapons/rail/impact");
+         A_StartSound("weapons/rail/impact", lch_body);
          for(int i = 0; i < 26; i++)
             A_SpawnItemEx("Lith_OmegaRailParticle2", FRandom(-32, 32),FRandom(-32, 32),FRandom(-32, 32), FRandom(-2, 2),FRandom(-2, 2),FRandom(-2, 2));
       }

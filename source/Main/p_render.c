@@ -131,7 +131,7 @@ static void DebugStats(struct player *p)
    PrintTextA(s_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }
 
-stkcall
+script
 static void Footstep(struct player *p)
 {
    static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
@@ -175,7 +175,8 @@ static void Footstep(struct player *p)
       for(i32 i = 0; i < countof(stepsnd); i++)
          if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
 
-      ACS_PlaySound(p->cameratid, snd, CHAN_BODY, vol);
+      ACS_SetActivator(p->cameratid);
+      StartSound(snd, lch_body, 0, vol);
       p->nextstep = next;
    }
 }

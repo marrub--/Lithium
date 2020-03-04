@@ -39,7 +39,7 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
    {
       k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
 
-      ACS_PlaySound(0, ss_player_rocketboost);
+      StartSound(ss_player_rocketboost, lch_auto, 0);
       InvGive(so_RocketBooster, 1);
       P_SetVel(p, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
 

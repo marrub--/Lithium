@@ -35,13 +35,13 @@ Ready:
    loop;
 
 Deselect:
-   TNT1 A 20 A_PlaySound("weapons/delear/close");
+   TNT1 A 20 A_StartSound("weapons/delear/close", lch_weapon);
 DeselectLoop:
    TNT1 A 0 A_Lower;
    loop;
 
 Select:
-   TNT1 A 20 A_PlaySound("weapons/delear/open");
+   TNT1 A 20 A_StartSound("weapons/delear/open", lch_weapon);
 SelectLoop:
    TNT1 A 0 A_Raise;
    loop;

@@ -24,7 +24,7 @@ statelabel m_LastState;
 
 override void Tick()
 {
-   if(Owner && Owner.Player && Owner.Health > 0 && !GlobalFreeze && !Level.Frozen)
+   if(Owner && Owner.Player && Owner.Health > 0 && !level.isFrozen())
    {
       if(Owner.Player.ReadyWeapon != self)
       {
@@ -40,17 +40,17 @@ override void Tick()
 
          if(!m_SndState)
          {
-            Owner.A_PlaySound("weapons/minigun/up", CHAN_7, 1, true);
+            Owner.A_StartSound("weapons/minigun/up", lch_weapon2, CHANF_LOOP);
             m_SndState++;
          }
          else if(m_SndState++ == 15)
-            Owner.A_PlaySound("weapons/minigun/rotate", CHAN_7, 1, true);
+            Owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
       }
       else
       {
          if(m_SndState)
          {
-            Owner.A_PlaySound("weapons/minigun/down", CHAN_7);
+            Owner.A_StartSound("weapons/minigun/down", lch_weapon2);
             m_SndState = 0;
          }
 
@@ -61,7 +61,7 @@ override void Tick()
             if(m_WindUp < 0)
             {
                m_WindUp = m_SndState = 0;
-               Owner.A_PlaySound("weapons/minigun/place", CHAN_6);
+               Owner.A_StartSound("weapons/minigun/place", lch_weapon3);
             }
          }
       }
@@ -93,7 +93,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
          return ResolveState(l);
       else
       {
-         A_PlaySound("weapons/minigun/empty", CHAN_WEAPON);
+         A_StartSound("weapons/minigun/empty", lch_dryweapon);
          A_WeaponOffset(FRandom(2, 3), FRandom(32, 34), WOF_INTERPOLATE);
          return null;
       }
@@ -111,7 +111,7 @@ action(Weapon) void Lith_A_MinigunFire()
 {
    Lith_A_MagIncr();
    A_AlertMonsters();
-   A_PlaySound("weapons/minigun/fire", CHAN_WEAPON);
+   A_StartSound("weapons/minigun/fire", lch_weapon);
    A_WeaponOffset(FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
    Lith_FireBullets(7, 1.7, 2, 7, tracer_x: 1);
    Lith_A_RecoilUp(0.15);
@@ -138,7 +138,7 @@ Ready:
    MNGG A 0 Lith_A_MinigunPostReady("Ready2");
    loop;
 Ready2:
-   MNGG B 0 A_PlaySound("weapons/minigun/click", CHAN_5, 0.4);
+   MNGG B 0 A_StartSound("weapons/minigun/click", lch_dryweapon, volume: 0.4);
 Ready2Loop:
    MNGG B 1 Lith_A_MinigunReady("Ready2Loop", "Fire2");
    MNGG B 0 Lith_A_MinigunPostReady("Ready3");
@@ -149,7 +149,7 @@ Ready3:
    loop;
 
 Deselect:
-   #### # 0 {A_StopSound(CHAN_7); invoker.m_Reloading = false;}
+   #### # 0 {A_StopSound(lch_weapon2); invoker.m_Reloading = false;}
    #### #### 0 A_Lower;
    #### # 1;
    loop;
@@ -176,7 +176,7 @@ Reload:
    MNGG # 1 Lith_A_JumpIfMagFull;
    MNGG S 1 offset(2, 34) {invoker.m_Reloading = true;}
    MNGG T 1 offset(4, 37);
-   MNGG U 1 offset(9, 37) A_PlaySound("weapons/minigun/magout", CHAN_5);
+   MNGG U 1 offset(9, 37) A_StartSound("weapons/minigun/magout", lch_reload);
    MNGG G 1 offset(12, 37);
    MNGG H 1 offset(14, 42) Lith_A_ReloadBobDn(0.7);
    MNGG I 2 offset(12, 45);
@@ -184,7 +184,7 @@ Reload:
    MNGG K 9 offset(10, 50);
    MNGG L 19 offset(11, 50);
    MNGG M 1 offset(13, 49) {
-      A_PlaySound("weapons/minigun/magin", CHAN_5);
+      A_StartSound("weapons/minigun/magin", lch_reload);
       Lith_A_ReloadFinish();
    }
    MNGG N 2 offset(11, 39) Lith_A_ReloadBobUp(0.4);

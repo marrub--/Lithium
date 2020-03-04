@@ -28,10 +28,10 @@ class Lith_SwitchableDecor : Actor
    virtual void Lith_Active()
    {
       if(m_IdleNoise)
-         A_PlaySound(m_IdleNoise, CHAN_5, m_Volume, true, ATTN_STATIC);
+         A_StartSound(m_IdleNoise, lch_body, CHANF_LOOP, m_Volume, ATTN_STATIC);
    }
 
-   virtual void Lith_Inactive() {A_StopSound(CHAN_5);}
+   virtual void Lith_Inactive() {A_StopSound(lch_body);}
 
    override void PostBeginPlay()
    {
@@ -50,7 +50,7 @@ class Lith_SwitchableDecor : Actor
    {
       if(health > 0) {
          Lith_Active();
-         A_PlaySound("amb/turnon", CHAN_6);
+         A_StartSound("amb/turnon", lch_body2);
          SetStateLabel("Spawn");
       }
    }
@@ -59,7 +59,7 @@ class Lith_SwitchableDecor : Actor
    {
       if(health > 0) {
          Lith_Inactive();
-         A_PlaySound("amb/turnoff", CHAN_6);
+         A_StartSound("amb/turnoff", lch_body2);
          SetStateLabel("Inactive");
       }
    }

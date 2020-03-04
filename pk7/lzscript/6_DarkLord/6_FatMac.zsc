@@ -69,7 +69,7 @@ action(Weapon) void Lith_A_FireFatMac()
    A_SetBlend("White", 0.6, 10);
    Lith_FireBullets(0, 0, 8, 200, FBF_NORANDOM, "Lith_700Bullet");
    A_RailAttack(700, 0, false, "", "White", RGF_SILENT, 4, sparsity: 10, spawnclass: "Lith_JDJTrail");
-   A_PlaySound("weapons/fatmac/fire", CHAN_WEAPON);
+   A_StartSound("weapons/fatmac/fire", lch_weapon);
 
    let vl = self.Vel.XY.Length();
    if(vl > 8)
@@ -111,7 +111,7 @@ FireEmpty:
    IONG A 1;
    IONG A 2 offset(0, 38);
    IONG A 1 offset(0, 40);
-   IONG A 1 offset(0, 37) A_PlaySound("weapons/fatmac/empty", CHAN_5);
+   IONG A 1 offset(0, 37) A_StartSound("weapons/fatmac/empty", lch_dryweapon);
    IONG A 1 offset(0, 34);
    IONG A 1 offset(0, 33);
    IONG A 5 offset(0, 32);
@@ -137,10 +137,10 @@ Fire:
    IONG A 10 offset(19, 60);
    IONG A 4 offset(21, 64);
    IONG A 2 offset(23, 67);
-   IONG A 2 offset(22, 74) A_PlaySound("weapons/fatmac/boltback", CHAN_5);
+   IONG A 2 offset(22, 74) A_StartSound("weapons/fatmac/boltback", lch_reload);
    IONG A 4 offset(19, 78);
    IONG A 20 offset(18, 80);
-   IONG A 3 offset(17, 74) A_PlaySound("weapons/fatmac/boltforward", CHAN_6);
+   IONG A 3 offset(17, 74) A_StartSound("weapons/fatmac/boltforward", lch_reload2);
    IONG A 3 offset(19, 67);
    IONG A 2 offset(20, 66);
    IONG A 2 offset(21, 62);

@@ -77,7 +77,7 @@ class Lith_ArchangelStaticBall : Actor
    override void Tick()
    {
       Super.Tick();
-      if(!GlobalFreeze && !Level.Frozen && ReactionTime == 0)
+      if(!level.isFrozen() && ReactionTime == 0)
       {
          A_Weave(1, 0, 2, 0);
          let mo = Spawn("Lith_ArchangelStaticBall", Pos);
@@ -136,7 +136,7 @@ override void PostBeginPlay()
 override void Tick()
 {
    Super.Tick();
-   if(!GlobalFreeze && !Level.Frozen)
+   if(!level.isFrozen())
    {
       if(Level.TotalTime % 6 == 0)
          Spawn("Lith_ArchangelStaticBall", Pos + (FRandom(-64, 64), FRandom(-64, 64), FRandom(0, 16)));

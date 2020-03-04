@@ -30,7 +30,7 @@ action(Weapon) void Lith_A_FireRevolver()
    Lith_FireBullets(0, 0, -1, 45);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(0.75);
-   A_PlaySound("weapons/revolver/fire", CHAN_WEAPON);
+   A_StartSound("weapons/revolver/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
@@ -63,7 +63,7 @@ FireEmpty:
    #### # 1;
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/ionrifle/empty", CHAN_7);
+   #### # 1 offset(0, 40) A_StartSound("weapons/ionrifle/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);
@@ -73,7 +73,7 @@ FireEmpty:
 
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
-   REVO A 1 offset(0, 33) A_PlaySound("weapons/revolver/reload", CHAN_7);
+   REVO A 1 offset(0, 33) A_StartSound("weapons/revolver/reload", lch_reload);
    REVO A 1 offset(0, 34);
    REVO A 1 offset(0, 35) Lith_A_ReloadBobDn(0.1);
    REVO A 1 offset(-1, 37) Lith_A_ReloadBobDn(0.1);

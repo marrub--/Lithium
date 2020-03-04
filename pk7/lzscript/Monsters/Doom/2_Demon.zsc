@@ -57,7 +57,7 @@ Missile:
    SARG A 0 A_JumpIfCloser(192, 2);
    SARG G 0 ResolveState("See");
    SARG A 2 A_FaceTarget;
-   SARG E 0 A_PlaySound("demon/melee", CHAN_BODY);
+   SARG E 0 A_StartSound("demon/melee", lch_body);
    SARG E 0 A_FaceTarget;
    SARG E 0 ThrustThingZ(0, 16, 0, 1);
    SARG E 8 ThrustThing(int(angle / 360 * 256), 32, 0, 0);

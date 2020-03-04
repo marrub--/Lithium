@@ -13,7 +13,7 @@ class Lith_RendHitSound : Lith_CustomFunction
    {
    Pickup:
       TNT1 A 0 {
-         A_PlaySound("weapons/rend/hit", CHAN_5);
+         A_StartSound("weapons/rend/hit", lch_body);
          CallACS("Lith_Rend", true);
       }
       stop;
@@ -78,7 +78,7 @@ Fire:
    TNT1 A 5 {
       A_TakeInventory("Lith_MagicAmmo", 10);
       CallACS("Lith_Rend", false, random(1, 4));
-      A_PlaySound("weapons/rend/slash", CHAN_7);
+      A_StartSound("weapons/rend/slash", lch_weapon);
       A_FireProjectile("Lith_BladeLightProjectile", 0);
       A_AlertMonsters();
       if(CountInv("PowerStrength"))
@@ -87,7 +87,7 @@ Fire:
          A_FireProjectile("Lith_RendHit");
    }
    TNT1 A 0 A_ReFire;
-   TNT1 A 5 A_PlaySound("weapons/rend/end", CHAN_6);
+   TNT1 A 5 A_StartSound("weapons/rend/end", lch_weapon2);
    goto ReadySelector;
 }
 

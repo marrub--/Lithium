@@ -11,7 +11,7 @@ extend class Lith_HERMES;
 
 static void SetPaused(bool on)
 {
-   Level.Frozen = on;
+   level.setFrozen(on);
 
    let sv = Lith_HERMES.Instance();
    if(sv) sv.m_Paused = on;

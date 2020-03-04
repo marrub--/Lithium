@@ -30,7 +30,7 @@ action(Weapon) void Lith_ArmGunPreFire()
 action(Weapon) void Lith_ArmGunFire()
 {
    Player.GetPSprite(7).Frame = RandomPick(0, 2);
-   A_PlaySound("weapons/subweapon/armgun");
+   A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
    Lith_FireBullets(1, 2, -1, 15, tracer_x: -6);
    A_Recoil(0.07);

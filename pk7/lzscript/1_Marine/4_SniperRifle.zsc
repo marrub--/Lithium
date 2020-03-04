@@ -72,7 +72,7 @@ action(Weapon) void Lith_A_FireSniper()
    Lith_FireBullets(0, 0, 1, 161, FBF_NORANDOM, "Lith_SniperBullet");
    A_Recoil(1);
    Lith_A_RecoilUp(2);
-   A_PlaySound("weapons/sniper/fire", CHAN_WEAPON);
+   A_StartSound("weapons/sniper/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
@@ -129,10 +129,10 @@ BoltAnim:
    #### # 1 offset(21, 64);
    #### # 1 offset(23, 67);
    #### # 0 Lith_A_ReloadBobDn(0.5);
-   #### # 1 offset(22, 74) A_PlaySound("weapons/sniper/boltback", CHAN_5);
+   #### # 1 offset(22, 74) A_StartSound("weapons/sniper/boltback", lch_weapon2);
    #### # 1 offset(19, 78) Lith_A_ReloadBobDn(0.5);
    #### # 5 offset(18, 80) Lith_A_Casing("Lith_CasBigHot", 15, 4, 30, frandom(3,4), frandom(7,8), frandom(2,4));
-   #### # 1 offset(17, 74) A_PlaySound("weapons/sniper/boltforward", CHAN_6);
+   #### # 1 offset(17, 74) A_StartSound("weapons/sniper/boltforward", lch_weapon3);
    #### # 1 offset(19, 67);
    #### # 1 offset(20, 66);
    #### # 1 offset(21, 62);
@@ -156,7 +156,7 @@ FireEmpty:
    #### # 1;
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/ionrifle/empty", CHAN_7);
+   #### # 1 offset(0, 40) A_StartSound("weapons/ionrifle/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);
@@ -176,7 +176,7 @@ Reload:
    SNPG A 1 offset(-2, 34);
    SNPG A 1 offset(-4, 37);
    SNPG A 0 Lith_A_ReloadBobUp(0.5);
-   SNPG A 1 offset(-9, 43) A_PlaySound("weapons/sniper/magout", CHAN_6);
+   SNPG A 1 offset(-9, 43) A_StartSound("weapons/sniper/magout", lch_reload);
    SNPG A 1 offset(-12, 47);
    SNPG A 1 offset(-14, 52);
    SNPG A 2 offset(-12, 55) Lith_A_DropMag("Lith_SniperRifleMagazine", "Lith_SniperRifleMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
@@ -185,7 +185,7 @@ Reload:
    SNPG A 8 offset(-11, 60);
    SNPG A 0 Lith_A_ReloadFinish;
    SNPG A 0 Lith_A_ReloadBobDn(0.5);
-   SNPG A 2 offset(-13, 59) A_PlaySound("weapons/sniper/magin", CHAN_7);
+   SNPG A 2 offset(-13, 59) A_StartSound("weapons/sniper/magin", lch_reload2);
    SNPG A 2 offset(-11, 49);
    SNPG A 2 offset(-11, 47);
    SNPG A 7 offset(-11, 45);

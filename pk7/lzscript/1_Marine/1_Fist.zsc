@@ -35,11 +35,11 @@ class Lith_KnifPuf1 : Actor
    XDeath:
       TNT1 A 0;
       TNT1 A 0 A_JumpIf(tracer ? tracer.bNOBLOOD : true, "Crash");
-      TNT1 A 0 A_PlaySound("weapons/knife/hitflesh", CHAN_WEAPON, 1, 0, 1.8);
+      TNT1 A 0 A_StartSound("weapons/knife/hitflesh", lch_body, attenuation: 1.8);
       stop;
    Melee:
    Crash:
-      PUFF A 2 bright A_PlaySound("weapons/knife/hitwall", CHAN_WEAPON, 1, 0, 1.8);
+      PUFF A 2 bright A_StartSound("weapons/knife/hitwall", lch_body, attenuation: 1.8);
       PUFF BCD 2;
       stop;
    }

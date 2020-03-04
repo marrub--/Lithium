@@ -23,7 +23,7 @@ class Lith_LampSpark : Actor
       SPRK A 0;
       SPRK A 0 {scale.x *= randompick(-1, 1);}
       SPRK A 1 bright;
-      SPRK B 1 bright A_PlaySound("amb/spark", CHAN_AUTO, 1.0, 0, ATTN_NORM);
+      SPRK B 1 bright A_StartSound("amb/spark", lch_body, attenuation: ATTN_NORM);
       SPRK CD 2 bright;
       SPRK EF 3;
       SPRK GH 4 A_FadeOut;
@@ -50,7 +50,7 @@ class Lith_TechLamp : Lith_FlareDecor replaces TechLamp
    Inactive: TLMP Y -1; stop;
    Death:    TLMP X 0;
    Death1:
-      #### # 1 A_PlaySound("amb/shatter", CHAN_AUTO, 1.0, 0, ATTN_NORM);
+      #### # 1 A_StartSound("amb/shatter", lch_body, attenuation: ATTN_NORM);
       #### # 35 A_SpawnItemEx("Lith_LampSpark", frandom(-0.5, 0.5), frandom(-0.5, 0.5), height-8, 0, 0, frandom(-1,1), frandom(-1,1), random(2,4), 168);
       wait;
    }

@@ -68,7 +68,7 @@ class Lith_Heretic_OphidianIceProjectile : SnakeProjA replaces SnakeProjA
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 A_PlaySound("enemies/ophidian/ice");
+      TNT1 A 0 A_StartSound("enemies/ophidian/ice", lch_body);
       goto Super::Spawn;
    }
 }
@@ -85,7 +85,7 @@ class Lith_Heretic_OphidianFireProjectile : SnakeProjB replaces SnakeProjB
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 A_PlaySound("enemies/ophidian/fire");
+      TNT1 A 0 A_StartSound("enemies/ophidian/fire", lch_body);
       goto Super::Spawn;
    }
 }

@@ -15,7 +15,7 @@ struct Lith_Sprite
    play void Get(string full)
    {
       Spr = Actor.GetSpriteIndex(full.left(4));
-      Frm = full.CharCodeAt(4) - Ch_A;
+      Frm = full.ByteAt(4) - Ch_A;
    }
 }
 

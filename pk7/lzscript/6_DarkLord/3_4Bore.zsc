@@ -32,7 +32,7 @@ action(Weapon) void Lith_A_Fire4Bore()
    A_SetBlend("White", 0.2, 6);
    A_GunFlash("DummyFlash");
    Lith_FireBullets(4, 2, 4, 30, FBF_NORANDOM, "Lith_700Bullet");
-   A_PlaySound("weapons/4bore/fire", CHAN_WEAPON);
+   A_StartSound("weapons/4bore/fire", lch_weapon);
    Lith_A_RecoilUp(0.8);
 }
 
@@ -64,21 +64,21 @@ Fire:
 FireEmpty:
    SHTG A 2 offset(0, 42);
    SHTG A 2 offset(0, 38);
-   SHTG A 2 offset(0, 35) A_PlaySound("weapons/cshotgun/empty", CHAN_5);
+   SHTG A 2 offset(0, 35) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
    SHTG A 1 offset(0, 34);
    SHTG A 1 offset(0, 33);
    SHTG A 1 offset(0, 32);
    goto ReadySelector;
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
-   SHT2 D 2 offset(-10, 32) A_PlaySound("weapons/ssg/open", CHAN_5);
+   SHT2 D 2 offset(-10, 32) A_StartSound("weapons/ssg/open", lch_reload);
    SHT2 D 2 offset(-5, 32);
    SHT2 D 3 offset(1, 32);
    SHT2 Z 10;
    SHT2 E 4;
-   SHT2 F 5 A_PlaySound("weapons/ssg/load", CHAN_6);
+   SHT2 F 5 A_StartSound("weapons/ssg/load", lch_reload2);
    SHT2 G 5;
-   SHT2 H 6 A_PlaySound("weapons/ssg/close", CHAN_7);
+   SHT2 H 6 A_StartSound("weapons/ssg/close", lch_reload3);
    SHTG A 0 Lith_A_ReloadFinish;
    goto ReadySelector;
 }

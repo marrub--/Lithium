@@ -64,9 +64,9 @@ See:
 
 Missile:
    SPOS E 2 A_FaceTarget;
-   SPOS E 0 A_PlaySound("enemies/shotguy/ready", CHAN_BODY|CHAN_NOPAUSE);
+   SPOS E 0 A_StartSound("enemies/shotguy/ready", lch_body, CHANF_NOPAUSE);
    SPOS E 10 A_FaceTarget;
-   SPOS F 0 A_PlaySound("enemies/shotguy/fire", CHAN_WEAPON);
+   SPOS F 0 A_StartSound("enemies/shotguy/fire", lch_weapon);
    SPOS F 0 Lith_A_ShotgunGuyShot;
    SPOS F 10 bright;
    SPOS E 10;

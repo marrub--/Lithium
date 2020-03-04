@@ -75,7 +75,7 @@ class Lith_FeuerFinal : Actor
       BLLT L 5 {
          for(int i = 0; i < 15; i++)
             A_SpawnItemEx("Lith_FeuerFX", 0,0,0, FRandom(-4,4),FRandom(-4,4),FRandom(-2,2));
-         A_PlaySound("weapons/feuer/final", CHAN_WEAPON);
+         A_StartSound("weapons/feuer/final", lch_body);
          A_Explode(96, 128, 0);
       }
       BLLT L 1 A_FadeOut;
@@ -104,7 +104,7 @@ class Lith_FeuerExplosion : Actor
       BLLT L 5 {
          for(int i = 0; i < 5; i++)
             A_SpawnItemEx("Lith_FeuerFX", 0,0,0, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1));
-         A_PlaySound("weapons/feuer/explode", CHAN_BODY);
+         A_StartSound("weapons/feuer/explode", lch_body);
          A_Explode(5, 20, 0);
       }
       BLLT L 1 A_FadeOut;
@@ -129,7 +129,7 @@ action(Weapon) void Lith_A_FireFeuer(bool left)
    CallACS("Lith_Feuer", left, true);
    A_AlertMonsters();
    A_TakeInventory("Lith_MagicAmmo", 15);
-   A_PlaySound("weapons/feuer/fire", CHAN_WEAPON);
+   A_StartSound("weapons/feuer/fire", lch_weapon);
 }
 
 states(Weapon)

@@ -155,7 +155,7 @@ action(Weapon) void Lith_A_ScopeIn()
    {
       A_GiveInventory("Lith_WeaponScopedToken", 1);
       A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX)*invoker.m_ScopeZoom);
-      A_PlaySound(invoker.m_ScopeInSnd, CHAN_6);
+      A_StartSound(invoker.m_ScopeInSnd, lch_scope);
    }
 }
 
@@ -165,7 +165,7 @@ action(Weapon) void Lith_A_ScopeOut()
    {
       A_TakeInventory("Lith_WeaponScopedToken", 1);
       A_ZoomFactor(1.0, ZOOM_INSTANT);
-      A_PlaySound(invoker.m_ScopeOutSnd, CHAN_6);
+      A_StartSound(invoker.m_ScopeOutSnd, lch_scope);
    }
 }
 

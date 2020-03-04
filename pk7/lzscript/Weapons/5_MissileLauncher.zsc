@@ -30,7 +30,7 @@ action(Weapon) State Lith_A_FireMissile()
 {
    Lith_A_MagIncr();
    A_AlertMonsters();
-   A_PlaySound("weapons/missile/fire", CHAN_WEAPON);
+   A_StartSound("weapons/missile/fire", lch_weapon);
    A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
    for(int i = 0; i < 3; i++)
       A_FireProjectile("Lith_MiniMissile", FRandom(-7, 7), false, FRandom(-2, 2), FRandom(-2, 2), FPF_NOAUTOAIM, FRandom(-5, 5));
@@ -65,7 +65,7 @@ Reload:
    MISG A 1;
    MISG A 1 offset(-2, 34);
    MISG A 1 offset(-4, 37);
-   MISG A 1 offset(-9, 43) A_PlaySound("weapons/missile/reloadout", CHAN_6);
+   MISG A 1 offset(-9, 43) A_StartSound("weapons/missile/reloadout", lch_reload);
    MISG A 1 offset(-12, 47) Lith_A_ReloadBobUp(0.3);
    MISG A 1 offset(-14, 52) Lith_A_ReloadBobUp(0.4);
    MISG A 2 offset(-12, 55);
@@ -73,7 +73,7 @@ Reload:
    MISG A 8 offset(-10, 60);
    MISG A 8 offset(-11, 60);
    MISG A 2 offset(-13, 59) {
-      A_PlaySound("weapons/missile/reloadin", CHAN_7);
+      A_StartSound("weapons/missile/reloadin", lch_reload2);
       Lith_A_ReloadFinish();
    }
    MISG A 2 offset(-11, 49) Lith_A_ReloadBobDn(0.4);
@@ -165,7 +165,7 @@ FireEmpty: /* fuck u i ain't doing more */
    MISG A 2 offset(0, 41);
    MISG A 1 offset(0, 45);
    MISG A 1 offset(0, 43);
-   MISG A 1 offset(0, 40) A_PlaySound("weapons/missile/empty", CHAN_5);
+   MISG A 1 offset(0, 40) A_StartSound("weapons/missile/empty", lch_dryweapon);
    MISG A 1 offset(0, 38);
    MISG A 1 offset(0, 36);
    MISG A 1 offset(0, 33);

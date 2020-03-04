@@ -80,7 +80,7 @@ static void PoisonFX(Actor mo)
    let trg = Lith_Player(mo.Target);
    int dmg = trg ? Lith_UTIL.Exec(trg, lsc_pdata, pdata_attr, at_acc) / 4 : 0;
    mo.A_DamageSelf(10 + dmg, "Poison");
-   mo.A_PlaySound("weapons/shotgun/poison/acid", CHAN_5, 1, false, 0.5);
+   mo.A_StartSound("weapons/shotgun/poison/acid", lch_body3, attenuation: 0.5);
    mo.A_SpawnItemEx("Lith_PoisonFX", 0,0,8, flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
    mo.ACS_ScriptCall("Lith_PoisonFXTicker");
 }

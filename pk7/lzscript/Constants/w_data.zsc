@@ -122,4 +122,27 @@ enum LScriptNum
    lsc_raindropspawn,
 };
 
+enum Lith_Channel
+{
+   lch_auto,
+
+   lch_weapon,
+   lch_voice,
+   lch_item,
+   lch_body,
+
+   lch_altweapon,
+   lch_body2,
+   lch_body3,
+   lch_dryweapon,
+   lch_idleweapon,
+   lch_item2,
+   lch_reload,
+   lch_reload2,
+   lch_reload3,
+   lch_scope,
+   lch_weapon2,
+   lch_weapon3,
+};
+
 /* EOF */

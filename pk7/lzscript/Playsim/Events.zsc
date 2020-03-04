@@ -122,7 +122,7 @@ override void WorldThingDamaged(WorldEvent ev)
    {
       let mo = Actor.Spawn("Lith_Dummy", dst.Pos + (0, 0, dst.Height / 2));
       float vol = Clamp(ev.damage / 10.0, 0, 1);
-      mo.A_PlaySound("body/bullethit", CHAN_BODY, vol * FRandom(0.5, 1.1));
+      mo.A_StartSound("body/bullethit", lch_body, volume: vol * FRandom(0.5, 1.1));
    }
 
    if(!src) return;

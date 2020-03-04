@@ -214,7 +214,7 @@ static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, string arg3 =
       cl.m_D[p].C = arg3;
    }
 
-   for(int i = 0; tex.CharCodeAt(0) == Ch_Colon; i++) {
+   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
       if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
    }

@@ -58,7 +58,7 @@ action(Weapon) void Lith_A_Fire700e()
    Lith_FireBullets(0, 0, -1, int(60*frandom(1,1.7)), FBF_NORANDOM, "Lith_700Bullet", 4);
    for(int i = 1; i <= 3; i++)
       Lith_A_GunSmoke(7, 3 * i);
-   A_PlaySound("weapons/700e/fire", CHAN_WEAPON);
+   A_StartSound("weapons/700e/fire", lch_weapon);
 }
 
 action(Weapon) void Lith_A_Laser(double pit)
@@ -158,7 +158,7 @@ FireEmpty:
    700E AA 1 offset(3, 38) Lith_A_Laser(0.0);
    700E A 1 offset(7, 40) Lith_A_Laser(0.0);
    700E A 1 offset(5, 37) {
-      A_PlaySound("weapons/cshotgun/empty", CHAN_5);
+      A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
       Lith_A_Laser(0.0);
    }
    700E A 1 offset(4, 34) Lith_A_Laser(0.0);
@@ -168,13 +168,13 @@ FireEmpty:
 
 Reload:
    700E B 1 Lith_A_JumpIfMagFull;
-   700E B 1 offset(2, 31) A_PlaySound("weapons/700e/move", CHAN_6);
+   700E B 1 offset(2, 31) A_StartSound("weapons/700e/move", lch_reload);
    700E C 1 offset(1, 32) Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(3, 32) Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(4, 33) Lith_A_ReloadBobUp(0.5);
    700E C 5 offset(5, 34) Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(2, 38);
-   700E D 1 offset(3, 32) A_PlaySound("weapons/700e/out", CHAN_5);
+   700E D 1 offset(3, 32) A_StartSound("weapons/700e/out", lch_reload2);
    700E D 1 offset(1, 32);
    700E D 1 offset(-1, 32) Lith_A_ReloadBobDn(0.25);
    700E E 1 offset(-1, 32) Lith_A_ReloadBobDn(0.25);
@@ -189,7 +189,7 @@ Reload:
    TNT1 A 2 Lith_A_ReloadFinish;
    700E C 1 offset(-35, 100);
    700E C 1 offset(-20, 90) {
-      A_PlaySound("weapons/700e/in", CHAN_5);
+      A_StartSound("weapons/700e/in", lch_reload2);
       Lith_A_ReloadBobUp(2);
    }
    700E C 1 offset(-15, 70);

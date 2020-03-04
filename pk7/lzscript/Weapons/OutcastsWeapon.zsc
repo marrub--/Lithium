@@ -36,11 +36,11 @@ _KnifeStart:
    TNT1 A 0 {invoker.m_KnifeReFire = true;}
    TNT1 A 0 offset(1, 32) A_AlertMonsters;
    TNT1 A 0 A_JumpIfInventory("Lith_Knif", 1, "_Knife1");
-   KNIF A 1 A_PlaySound("weapons/knife/swing1", CHAN_WEAPON);
+   KNIF A 1 A_StartSound("weapons/knife/swing1", lch_weapon);
    KNIF BCD 1;
    goto _KnifeNormal;
 _Knife1:
-   TNT1 A 1 A_PlaySound("weapons/knife/swing2", CHAN_WEAPON);
+   TNT1 A 1 A_StartSound("weapons/knife/swing2", lch_weapon);
    KNIF FGH 1;
 _KnifeNormal:
    TNT1 A 0 A_JumpIfInventory("Lith_Knif", 1, "_KnifeEnd2");

@@ -130,7 +130,7 @@ action(Weapon) void Lith_A_FirePistol()
 {
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_PlasPistol))
    {
-      A_PlaySound("weapons/pistol/plasma/fire", CHAN_WEAPON);
+      A_StartSound("weapons/pistol/plasma/fire", lch_weapon);
       A_FireProjectile("Lith_PlasmaPistolShot");
       return;
    }
@@ -141,9 +141,9 @@ action(Weapon) void Lith_A_FirePistol()
       Lith_FireBullets(0, 0, -1, 18, FBF_NORANDOM);
 
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_AutoPistol))
-      A_PlaySound("weapons/pistol/fireauto", CHAN_WEAPON);
+      A_StartSound("weapons/pistol/fireauto", lch_weapon);
    else
-      A_PlaySound("weapons/pistol/fire", CHAN_WEAPON);
+      A_StartSound("weapons/pistol/fire", lch_weapon);
 
    Lith_A_GunSmokeSmall();
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
@@ -212,7 +212,7 @@ FireEmpty:
    #### # 1;
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/empty", CHAN_7);
+   #### # 1 offset(0, 40) A_StartSound("weapons/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);
@@ -228,7 +228,7 @@ AltFire:
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
    PISG A 0 Lith_A_ScopeOut;
-   PISG A 0 A_PlaySound("weapons/pistol/reload", 7);
+   PISG A 0 A_StartSound("weapons/pistol/reload", lch_reload);
    PISG A 1 offset(0, 34);
    PISG A 1 offset(0, 36);
    PISG B 1 offset(0, 50);

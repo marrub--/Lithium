@@ -336,12 +336,12 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
 
    /* Get a multiplier for the score accumulator and sound volume */
    k64 mul = minmax(score, 0, 15000) / 15000.0lk;
-           mul = minmax(mul, 0.1lk, 1.0lk);
-   k64 vol = 0.7lk * mul;
+       mul = minmax(mul, 0.1lk, 1.0lk);
+   k32 vol = 0.7lk * mul;
 
    /* Play a sound when we pick up score */
-   if(vol > 0.001lk && p->getCVarI(sc_player_scoresound))
-      ACS_PlaySound(p->cameratid, ss_player_score, CHAN_ITEM, vol, false, ATTN_STATIC);
+   if(vol > 0.001k && p->getCVarI(sc_player_scoresound))
+      StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
 
    /* hue */
    if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {

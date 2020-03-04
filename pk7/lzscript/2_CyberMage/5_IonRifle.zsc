@@ -211,11 +211,11 @@ action(Weapon) void Lith_A_FireIonRifle()
    A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 0.5, 0);
    A_Recoil(invoker.m_Charge * 2);
    if(invoker.m_Charge >= 2)
-      A_PlaySound("weapons/ionrifle/fire2", CHAN_WEAPON);
+      A_StartSound("weapons/ionrifle/fire2", lch_weapon);
    else if(invoker.m_Charge >= 1.5)
-      A_PlaySound("weapons/ionrifle/cfire", CHAN_7);
+      A_StartSound("weapons/ionrifle/cfire", lch_weapon2);
    else
-      A_PlaySound("weapons/ionrifle/fire", CHAN_WEAPON);
+      A_StartSound("weapons/ionrifle/fire", lch_weapon);
 }
 
 states(Actor)
@@ -257,7 +257,7 @@ Fire:
    #### # 2;
    #### # 1 A_ReFire(1);
    goto DoFire;
-   #### # 0 A_PlaySound("weapons/ionrifle/charge", CHAN_WEAPON);
+   #### # 0 A_StartSound("weapons/ionrifle/charge", lch_weapon);
    #### # 2 offset(0, 33) {invoker.m_Charge += 0.05;}
    #### # 1 A_ReFire(1);
    goto DoFire;
@@ -304,7 +304,7 @@ FireAnim_Scoped:
 ChillCheck:
    #### # 0 A_JumpIf(invoker.m_Charge < 1.3, "BoltAnim");
    IONG A 1 offset(-1, 33) {
-      A_PlaySound("weapons/ionrifle/heat", CHAN_7);
+      A_StartSound("weapons/ionrifle/heat", lch_reload);
       Lith_A_ScopeOut();
    }
    IONG A 2 offset(-4, 34) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
@@ -330,14 +330,14 @@ BoltAnim:
    #### # 1 offset(8, 38);
    #### # 1 offset(12, 45);
    #### # 1 offset(16, 53);
-   #### # 1 offset(19, 60) A_PlaySound("weapons/ionrifle/eject", CHAN_5);
+   #### # 1 offset(19, 60) A_StartSound("weapons/ionrifle/eject", lch_reload2);
    #### # 1 offset(21, 64);
    #### # 1 offset(23, 67);
    #### # 1 offset(22, 74);
    #### # 1 offset(19, 78);
    #### # 5 offset(18, 80);
    #### # 5 offset(17, 80);
-   #### # 5 offset(16, 80) A_PlaySound("weapons/ionrifle/load", CHAN_6);
+   #### # 5 offset(16, 80) A_StartSound("weapons/ionrifle/load", lch_reload3);
    #### # 1 offset(17, 74);
    #### # 1 offset(19, 67);
    #### # 1 offset(20, 66);
@@ -374,7 +374,7 @@ Reload:
    IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-4, 37) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 0 Lith_A_ReloadBobDn(0.2);
-   IONG A 1 offset(-9, 43) A_PlaySound("weapons/ionrifle/magout", CHAN_7);
+   IONG A 1 offset(-9, 43) A_StartSound("weapons/ionrifle/magout", lch_reload);
    IONG A 0 Lith_A_ReloadBobDn(0.2);
    IONG A 1 offset(-12, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 1 offset(-14, 52) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
@@ -384,7 +384,7 @@ Reload:
    IONG A 8 offset(-11, 60) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 8 offset(-12, 60) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 0 Lith_A_ReloadFinish;
-   IONG A 2 offset(-13, 59) A_PlaySound("weapons/ionrifle/magin", CHAN_6);
+   IONG A 2 offset(-13, 59) A_StartSound("weapons/ionrifle/magin", lch_reload2);
    IONG A 2 offset(-11, 49) Lith_A_ReloadBobUp(0.4);
    IONG A 2 offset(-11, 47) Lith_A_ReloadBobUp(0.4);
    IONG A 7 offset(-11, 45);
@@ -409,7 +409,7 @@ FireEmpty:
    #### # 2 offset(0, 41);
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/ionrifle/empty", CHAN_5);
+   #### # 1 offset(0, 40) A_StartSound("weapons/ionrifle/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);

@@ -22,7 +22,7 @@ class Lith_BarrierFX : Actor
    {
    Spawn:
       TNT1 A 0;
-      LBAR A 10 A_PlaySound("player/barrier", CHAN_NOPAUSE|CHAN_LISTENERZ);
+      LBAR A 10 A_StartSound("player/barrier", lch_body, CHANF_NOPAUSE|CHANF_LISTENERZ);
       LBAR A 1 {Scale *= 0.86; Alpha -= 0.25; if(Alpha <= 0) Destroy();}
       wait;
    }
@@ -38,7 +38,7 @@ class Lith_HasBarrier : Powerup
 
    override void Tick()
    {
-      if(!GlobalFreeze && !Level.Frozen)
+      if(!level.isFrozen())
       {
          Actor th;
          for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)

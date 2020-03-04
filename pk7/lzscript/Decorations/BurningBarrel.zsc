@@ -25,7 +25,7 @@ class Lith_BurningBarrel : Lith_FlareDecor replaces BurningBarrel
    Spawn:    FCAN ABC 4 bright; loop;
    Inactive: FCAN Y -1; stop;
    Death:
-      FCAN X 0 A_PlaySound("amb/metalx", CHAN_AUTO);
+      FCAN X 0 A_StartSound("amb/metalx", lch_body);
       FCAN X -1;
       stop;
    }

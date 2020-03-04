@@ -164,7 +164,7 @@ action(Weapon) State Lith_A_FireMateba()
    Lith_FireBullets(2, 2, -1, 30, FBF_NORANDOM);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall();
-   A_PlaySound("weapons/mateba/fire", CHAN_WEAPON);
+   A_StartSound("weapons/mateba/fire", lch_weapon);
    return null;
 }
 
@@ -173,9 +173,9 @@ action(Weapon) void Lith_A_FireFinalizer()
    Lith_A_GunSmokeSmall();
    A_SpawnItemEx("Lith_FinalizerEffect", cos(pitch)*24, 0, ((height-19)+2) - sin(pitch)*24);
    A_FireProjectile("Lith_FinalizerShot", 0, false, 0, 10);
-   A_PlaySound("weapons/mateba/fire", CHAN_WEAPON);
-   A_PlaySound("weapons/mateba/finalize", CHAN_6);
-   A_PlaySound("weapons/shotgun/just", CHAN_5);
+   A_StartSound("weapons/mateba/fire", lch_weapon);
+   A_StartSound("weapons/mateba/finalize", lch_weapon2);
+   A_StartSound("weapons/shotgun/just", lch_weapon3);
 }
 
 states(Actor)
@@ -230,7 +230,7 @@ FireEmpty:
    MTBG A 1;
    MTBG A 1 offset(0, 45);
    MTBG A 1 offset(0, 43);
-   MTBG A 1 offset(0, 40) A_PlaySound("weapons/empty", CHAN_7);
+   MTBG A 1 offset(0, 40) A_StartSound("weapons/empty", lch_dryweapon);
    MTBG A 1 offset(0, 38);
    MTBG A 1 offset(0, 36);
    MTBG A 1 offset(0, 33);
@@ -244,11 +244,11 @@ Reload:
    MTBG F 2;
    MTBG G 2;
    MTBG H 2;
-   MTBG I 4 A_PlaySound("weapons/mateba/open", CHAN_7);
+   MTBG I 4 A_StartSound("weapons/mateba/open", lch_reload);
    MTBG J 3;
    MTBG K 2;
    MTBG L 3 {
-      A_PlaySound("weapons/mateba/eject", CHAN_6);
+      A_StartSound("weapons/mateba/eject", lch_reload2);
       Lith_A_ReloadBobDn(0.1);
    }
    MTBG M 3 {
@@ -258,12 +258,12 @@ Reload:
    }
    MTBG N 3;
    MTBG O 2 {
-      A_PlaySound("weapons/mateba/load", CHAN_5);
+      A_StartSound("weapons/mateba/load", lch_reload);
       Lith_A_ReloadBobDn(0.1);
    }
    MTBG P 3;
    MTBG Q 3 {
-      A_PlaySound("weapons/mateba/close", CHAN_7);
+      A_StartSound("weapons/mateba/close", lch_reload2);
       Lith_A_ReloadBobUp(0.1);
    }
    MTBG R 3;

@@ -14,7 +14,7 @@ class Lith_PlayerDeath : Lith_CustomFunction
       if(mo)
       {
          mo.A_Quake(9, 35*2, 0, 2048);
-         mo.A_PlaySound("player/death2", CHAN_6, 1.0, false, ATTN_NONE);
+         mo.A_StartSound("player/death2", lch_body3, attenuation: ATTN_NONE);
          for(int i = 0; i < 76; i++)
             mo.A_SpawnItemEx("Lith_PlayerDeathParticle", FRandom(-32,32), FRandom(-32,32), FRandom(0, 64), FRandom(-2, 2), FRandom(-2, 2), FRandom(1, 2), 0, SXF_NOCHECKPOSITION);
       }
@@ -39,7 +39,7 @@ class Lith_Nuke : Lith_CustomFunction
    {
       if(mo)
       {
-         mo.A_PlaySound("player/nuke", CHAN_7, 1.0, false, ATTN_NONE);
+         mo.A_StartSound("player/nuke", lch_body2, attenuation: ATTN_NONE);
          mo.A_RadiusGive("Lith_Death", 6144, RGF_MONSTERS);
          mo.A_AlertMonsters();
       }

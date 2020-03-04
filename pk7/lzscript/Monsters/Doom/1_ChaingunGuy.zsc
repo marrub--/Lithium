@@ -11,7 +11,7 @@ class Lith_XH_ChaingunGuy : Lith_ChaingunGuy
 {
    override void Lith_A_ChaingunGuyShot()
    {
-      A_PlaySound("enemies/chainguy/fire");
+      A_StartSound("enemies/chainguy/fire", lch_weapon);
       A_FaceTarget();
       if(!Lith_BarrierBullets())
          A_WolfAttack(WAF_NORANDOM | WAF_USEPUFF, "", 2, 20, 256, 4, 6);
@@ -44,7 +44,7 @@ default
 
 virtual void Lith_A_ChaingunGuyShot()
 {
-   A_PlaySound("enemies/chainguy/fire");
+   A_StartSound("enemies/chainguy/fire", lch_weapon);
    A_FaceTarget();
    if(!Lith_BarrierBullets())
       A_CustomBulletAttack(22.5, 0, 1, random(1, 5) * 3, "BulletPuff", 0, CBAF_NORANDOM);
@@ -62,7 +62,7 @@ See:
 
 Missile:
    CPOS E 2 A_FaceTarget;
-   CPOS E 0 A_PlaySound("enemies/chainguy/bolt", CHAN_WEAPON|CHAN_NOPAUSE);
+   CPOS E 0 A_StartSound("enemies/chainguy/bolt", lch_weapon, CHANF_NOPAUSE);
    CPOS EE 6 A_FaceTarget;
 MissileLoop:
    CPOS F 4 bright Lith_A_ChaingunGuyShot;

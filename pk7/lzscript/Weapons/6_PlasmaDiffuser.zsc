@@ -59,7 +59,7 @@ action(Weapon) void Lith_A_FirePlasmaDiff()
 {
    A_TakeInventory("Lith_PlasmaAmmo", 60, TIF_NOTAKEINFINITE);
    A_GunFlash("DummyFlash");
-   A_PlaySound("weapons/plasdiff/fire", CHAN_WEAPON);
+   A_StartSound("weapons/plasdiff/fire", lch_weapon);
    A_FireProjectile("Lith_DiffPlasma", 0, false, 0, -9);
    A_FireProjectile("Lith_LightProjectileSkyShort", 0);
 }
@@ -90,9 +90,7 @@ Fire:
    PDFG A 1 offset(0, 32) A_ReFire;
    goto ReadySelector;
 FireEmpty:
-   #### # 0 A_StopSound(CHAN_7);
-   #### # 0 A_StopSound(CHAN_6);
-   #### # 1 A_PlaySound("weapons/plasdiff/empty", CHAN_7);
+   #### # 1 A_StartSound("weapons/plasdiff/empty", lch_dryweapon);
    #### # 1 offset(0, 37);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 35);

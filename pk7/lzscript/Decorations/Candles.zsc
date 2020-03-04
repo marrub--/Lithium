@@ -25,7 +25,7 @@ class Lith_Candlestick : Lith_FlareDecor replaces Candlestick
    Spawn:    CAND ABCDBDABCAC 3 bright; loop;
    Inactive: CAND I -1; stop;
    Death:
-      CAND X 0 A_PlaySound("amb/puff", CHAN_AUTO);
+      CAND X 0 A_StartSound("amb/puff", lch_body);
       CAND X -1;
       stop;
    }
@@ -48,7 +48,7 @@ class Lith_Candelabra : Lith_FlareDecor replaces Candelabra
    Spawn:    CBRA ABCDBDABCAC 3 bright; loop;
    Inactive: CBRA I -1; stop;
    Death:
-      CBRA X 0 A_PlaySound("amb/metalx", CHAN_AUTO);
+      CBRA X 0 A_StartSound("amb/metalx", lch_body);
       CBRA X -1;
       stop;
    }

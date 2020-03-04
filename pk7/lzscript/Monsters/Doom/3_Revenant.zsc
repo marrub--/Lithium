@@ -23,7 +23,7 @@ class Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
       FATB A 0 A_JumpIf(m_Timer++ > 35 * 10, "Death");
       FATB AB 2 bright {
          if(level.time & 3 == 0) {
-            if(level.time % 20 == 0) A_PlaySound("enemies/revenant/home");
+            if(level.time % 20 == 0) A_StartSound("enemies/revenant/home", lch_body);
             A_SpawnItemEx("Lith_RifleGrenadeSmoke", -8);
             A_SeekerMissile(1, 45, 0);
          }

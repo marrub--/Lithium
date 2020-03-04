@@ -208,7 +208,7 @@ ui void RunEndSequence()
       case 'img': {
          string tex = m_Node[m_P++].Text;
 
-         if(tex.charCodeAt(0) == Ch_Colon)
+         if(tex.byteAt(0) == Ch_Colon)
             tex = StringTable.Localize(String.Format("LITH%s", tex), false);
 
          m_BgImg = TexMan.CheckForTexture(tex, TexMan.Type_Any);

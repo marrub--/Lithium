@@ -156,7 +156,6 @@ void Sc_GiveScore(i32 score)
 script_str ext("ACS") addr("Lith_BoughtItemPickup")
 void Sc_BoughtItemPickup(i32 id)
 {
-   static i32 const chan = CHAN_ITEM|CHAN_NOPAUSE;
    with_player(LocalPlayer) if(id)
    {
       struct upgrade *upgr = p->getUpgr(id);
@@ -164,9 +163,9 @@ void Sc_BoughtItemPickup(i32 id)
       if(!upgr->owned)
       {
          switch(upgr->info->category) {
-         case UC_Body: ACS_PlaySound(0, ss_player_pickup_upgrbody, chan, 1, false, ATTN_NONE); break;
-         case UC_Weap: ACS_PlaySound(0, ss_player_pickup_upgrweap, chan, 1, false, ATTN_NONE); break;
-         case UC_Extr: ACS_PlaySound(0, ss_player_pickup_upgrextr, chan, 1, false, ATTN_NONE); break;
+         case UC_Body: StartSound(ss_player_pickup_upgrbody, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
+         case UC_Weap: StartSound(ss_player_pickup_upgrweap, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
+         case UC_Extr: StartSound(ss_player_pickup_upgrextr, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
          }
 
          P_Upg_SetOwned(p, upgr);
@@ -175,7 +174,7 @@ void Sc_BoughtItemPickup(i32 id)
    }
    else
    {
-      ACS_PlaySound(0, ss_player_pickup_item, chan, 1, false, ATTN_NONE);
+      StartSound(ss_player_pickup_item, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE);
 
       p->itemsbought++;
    }

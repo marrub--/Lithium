@@ -38,7 +38,7 @@ private void Lith_DrawCent(int x, int y, string text)
 override void Start(wbstartstruct wbss)
 {
    m_Souls = random(400, 700);
-   S_Sound("intermission/mid", CHAN_5 | CHAN_UI | CHAN_LOOP, 0.43, ATTN_NONE);
+   S_StartSound("intermission/mid", lch_body, CHANF_UI | CHANF_LOOP, 0.43, ATTN_NONE);
    Super.Start(wbss);
 }
 

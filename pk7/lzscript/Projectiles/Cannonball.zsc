@@ -92,7 +92,7 @@ class Lith_CannonBall : Lith_Explosive
 
    void Lith_A_Bounce(sound snd, int chan)
    {
-      A_PlaySound(snd, chan);
+      A_StartSound(snd, chan);
       A_Quake(1, 10, 0, 512);
       A_Explode();
    }
@@ -117,15 +117,15 @@ class Lith_CannonBall : Lith_Explosive
       loop;
    Bounce.Floor:
    Bounce.Ceiling:
-      TNT1 A 0 Lith_A_Bounce("weapons/cannon/impactfloor", CHAN_5);
+      TNT1 A 0 Lith_A_Bounce("weapons/cannon/impactfloor", lch_body2);
       goto SpawnLoop;
    Bounce.Wall:
-      TNT1 A 0 Lith_A_Bounce("weapons/cannon/impactwall", CHAN_6);
+      TNT1 A 0 Lith_A_Bounce("weapons/cannon/impactwall", lch_body3);
       goto SpawnLoop;
    Death:
       CBAL B 0 {
-         A_PlaySound("weapons/cannon/explode", CHAN_7);
-         A_PlaySound("weapons/cannon/explode", CHAN_BODY);
+         A_StartSound("weapons/cannon/explode", lch_body);
+         A_StartSound("weapons/cannon/explode", lch_body2);
          bNOGRAVITY = true;
          Lith_CannonBallExplode();
          A_Quake(4, 20, 0, 640);

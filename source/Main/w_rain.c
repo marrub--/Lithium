@@ -25,10 +25,11 @@ script
 void W_DoRain(void)
 {
    struct player *p = &players[0];
-   p->setActivator();
 
-   ACS_PlaySound(p->weathertid, ss_amb_wind, CHAN_BODY,  0.001, true, ATTN_NONE);
-   ACS_PlaySound(p->weathertid, ss_amb_rain, CHAN_VOICE, 0.001, true, ATTN_NONE);
+   ACS_SetActivator(p->weathertid);
+   StartSound(ss_amb_wind, lch_body,  CHANF_LOOP, 0.001, ATTN_NONE);
+   StartSound(ss_amb_rain, lch_voice, CHANF_LOOP, 0.001, ATTN_NONE);
+   p->setActivator();
 
    k32 skydist, curskydist = 1;
    for(;;)
@@ -58,8 +59,8 @@ void W_DoRain(void)
          skydist = 0;
 
       curskydist = lerpk(curskydist, skydist, 0.035);
-      ACS_SoundVolume(p->weathertid, CHAN_BODY,  1 - curskydist);
-      ACS_SoundVolume(p->weathertid, CHAN_VOICE, 1 - curskydist);
+      ACS_SoundVolume(p->weathertid, lch_body,  1 - curskydist);
+      ACS_SoundVolume(p->weathertid, lch_voice, 1 - curskydist);
    }
 }
 

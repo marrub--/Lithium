@@ -142,13 +142,13 @@ action(Weapon) void Lith_A_FireRifle()
    if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW))
    {
       if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
-         A_PlaySound("marathon/rifle/fire", CHAN_WEAPON);
+         A_StartSound("marathon/rifle/fire", lch_weapon);
       else
       {
          let ro1 = CallACS("Lith_AmmoRunOut", false)/FIX;
          let ro2 = CallACS("Lith_AmmoRunOut", true) /FIX;
-         A_PlaySound("weapons/rifle/fire",   CHAN_WEAPON, ro1);
-         A_PlaySound("weapons/rifle/firero", CHAN_7,      ro2);
+         A_StartSound("weapons/rifle/fire",   lch_weapon,    volume: ro1);
+         A_StartSound("weapons/rifle/firero", lch_dryweapon, volume: ro2);
       }
 
       for(int i = 0; i < 2; i++)
@@ -160,7 +160,7 @@ action(Weapon) void Lith_A_FireRifle()
    }
    else
    {
-      A_PlaySound("weapons/rcw/fire", CHAN_WEAPON);
+      A_StartSound("weapons/rcw/fire", lch_weapon);
 
       for(int i = 0; i < 2; i++) {
          A_RailAttack(8, 0, true, "", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_LaserRiflePuff", 5.77, 3, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
@@ -176,12 +176,12 @@ action(Weapon) void Lith_A_FireRifleBurst()
    {
       if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW))
       {
-         A_PlaySound("weapons/rifle/firesnipe", CHAN_WEAPON);
+         A_StartSound("weapons/rifle/firesnipe", lch_weapon);
          Lith_FireBullets(0, 0, -3, 1, FBF_NORANDOM, "Lith_RifleBullet");
       }
       else
       {
-         A_PlaySound("weapons/rcw/firesnipe", CHAN_WEAPON);
+         A_StartSound("weapons/rcw/firesnipe", lch_weapon);
          A_RailAttack(8, 0, true, "", "Red", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_LaserRiflePuff", 2, 2, 0, 0, 4, 0, "Lith_RifleLaserTrail", 0);
       }
    }
@@ -191,9 +191,9 @@ action(Weapon) void Lith_A_FireRifleGrenade()
 {
    invoker.m_GrenFire = true;
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
-      A_PlaySound("marathon/rifle/grenade", CHAN_WEAPON);
+      A_StartSound("marathon/rifle/grenade", lch_weapon);
    else
-      A_PlaySound("weapons/rifle/grenade", CHAN_WEAPON);
+      A_StartSound("weapons/rifle/grenade", lch_weapon);
    A_AlertMonsters();
    A_FireProjectile("Lith_RifleGrenade");
 }
@@ -258,9 +258,9 @@ FireGrenade:
 GrenadeReload:
    CRFG A 1 offset(1, 32) {
       if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
-         A_PlaySound("marathon/rifle/reload", CHAN_6);
+         A_StartSound("marathon/rifle/reload", lch_reload);
       else
-         A_PlaySound("weapons/rifle/rldmount", CHAN_6);
+         A_StartSound("weapons/rifle/rldmount", lch_reload);
    }
    CRFG A 1 offset(3, 32);
    CRFG A 1 offset(4, 32);
@@ -298,7 +298,7 @@ FireEmpty:
    #### # 1;
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/empty", CHAN_7);
+   #### # 1 offset(0, 40) A_StartSound("weapons/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);
@@ -322,7 +322,7 @@ Reload:
    CRFG J 1 offset(-2, 34);
    CRFG J 1 offset(-4, 37);
    CRFG J 0 Lith_A_ReloadBobUp(0.1);
-   CRFG J 1 offset(-9, 43) A_PlaySound("weapons/rifle/reloadout", CHAN_6);
+   CRFG J 1 offset(-9, 43) A_StartSound("weapons/rifle/reloadout", lch_reload);
    CRFG J 1 offset(-12, 47) Lith_A_ReloadBobUp(0.1);
    CRFG J 0 Lith_A_ReloadBobUp(0.1);
    CRFG J 1 offset(-14, 52) Lith_A_DropMag("Lith_CombatRifleMagazine", "Lith_CombatRifleMagazine2", 9,0,20, frandom(0,1),frandom(-1,-4),0);
@@ -333,7 +333,7 @@ Reload:
    CRFG J 8 offset(-11, 60);
    CRFG J 0 Lith_A_ReloadFinish;
    CRFG J 0 Lith_A_ReloadBobDn(0.1);
-   CRFG J 2 offset(-13, 59) A_PlaySound("weapons/rifle/reloadin", CHAN_7);
+   CRFG J 2 offset(-13, 59) A_StartSound("weapons/rifle/reloadin", lch_reload2);
    CRFG J 2 offset(-11, 49) Lith_A_ReloadBobDn(0.7);
    CRFG J 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    CRFG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

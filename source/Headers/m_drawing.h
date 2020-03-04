@@ -168,14 +168,27 @@
 #define HudMessageAlpha(id, x, y, hold, alpha) \
    HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha)
 
+#define StartSound(...) \
+   DrawCallI(sm_StartSound, __VA_ARGS__)
+
 #define CrBlue   "\C[Lith_Blue]"
 #define CrGreen  "\C[Lith_Green]"
 #define CrRed    "\C[Lith_Red]"
 #define CrPurple "\C[Lith_Purple]"
 #define CrGrey   "\C[Lith_Grey]"
 
-enum
-{
+enum {
+   CHANF_LISTENERZ = 8,
+   CHANF_MAYBE_LOCAL = 16,
+   CHANF_UI = 32,
+   CHANF_NOPAUSE = 64,
+   CHANF_LOOP = 256,
+   CHANF_NOSTOP = 4096,
+   CHANF_OVERLAP = 8192,
+   CHANF_LOCAL = 16384,
+};
+
+enum {
    font_misaki_gothic, /* 美咲ゴシック */
    font_misaki_mincho, /* 美咲明朝 */
    font_jfdot_gothic,  /* JFドットk6x8 */

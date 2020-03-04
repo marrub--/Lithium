@@ -50,7 +50,7 @@ class Lith_CasShell : Lith_CasingBase
       SCAS AABBCCDDEEFFGGHH 1;
       loop;
    Death:
-      TNT1 A 0 A_PlaySound("casings/shell/die");
+      TNT1 A 0 A_StartSound("casings/shell/die", lch_body);
       SHDY ABCDEF 0 A_Jump(64, "Done");
       goto Done;
    }
@@ -86,7 +86,7 @@ class Lith_CasSmall : Lith_CasingBase
       BCAS ABCDEFGH 1;
       loop;
    Death:
-      TNT1 A 0 A_PlaySound("casings/bullet/die");
+      TNT1 A 0 A_StartSound("casings/bullet/die", lch_body);
       BCAS KGIJ 0 A_Jump(64, "Done");
       goto Done;
    }
@@ -122,7 +122,7 @@ class Lith_CasBig : Lith_CasingBase
       BBCA ABCDEFGH 1;
       loop;
    Death:
-      TNT1 A 0 A_PlaySound("casings/bullet/die");
+      TNT1 A 0 A_StartSound("casings/bullet/die", lch_body);
       BBCA CG 0 A_Jump(128, "Done");
       goto Done;
    }

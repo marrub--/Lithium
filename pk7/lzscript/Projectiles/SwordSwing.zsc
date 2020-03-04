@@ -92,7 +92,7 @@ class Lith_SwordHitter : Actor
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 3 A_PlaySound("weapons/sword/attack");
+      TNT1 A 3 A_StartSound("weapons/sword/attack", lch_body);
    SpawnLoop:
       TNT1 A 0 A_JumpIf(m_TrailStep++ >= 8, "TrailDone");
       TNT1 A 0 A_SpawnItemEx("Lith_SwordHither", m_TrailStep * 4.0 * Vel.X / -35.0, -m_TrailStep * 4.0 * Vel.Y / -35.0, 2.0 + m_TrailStep * 4.0 * Vel.Z / -35.0, 0, 0, 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION, m_Delta * 40);

@@ -40,7 +40,7 @@ class Lith_Star : Actor
       #### ABC 1 A_SeekerMissile(0, 1, SMF_LOOK);
       loop;
    Death:
-      TNT1 A 0 A_PlaySound("weapons/sshot/hit", CHAN_BODY, 0.3);
+      TNT1 A 0 A_StartSound("weapons/sshot/hit", lch_body, volume: 0.3);
       stop;
    }
 }
@@ -79,7 +79,7 @@ Fire:
    TNT1 A 2 bright {
       Lith_A_MagIncr(RandomPick(2, 4));
       A_AlertMonsters();
-      A_PlaySound("weapons/sshot/firero", CHAN_7, CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
+      A_StartSound("weapons/sshot/firero", lch_dryweapon, volume: CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
       A_FireProjectile("Lith_Star", FRandom(-5,5), false, -20, 10, FPF_NOAUTOAIM, -FRandom(-2,3));
       A_FireProjectile("Lith_Star", FRandom(-5,5), false,  20, 10, FPF_NOAUTOAIM, -FRandom(-2,3));
       A_FireProjectile("Lith_Star", FRandom(-2,2), false, -16, 16, FPF_NOAUTOAIM, -FRandom(-2,3));
@@ -94,11 +94,11 @@ Reload:
    TNT1 A 0 A_JumpIf(CountInv("Lith_MagicAmmo") < 100, "ReadySelector");
    TNT1 A 22 {
       A_TakeInventory("Lith_MagicAmmo", 100);
-      A_PlaySound("weapons/delear/open", CHAN_6);
+      A_StartSound("weapons/delear/open", lch_reload);
    }
-   TNT1 A 10 A_PlaySound("weapons/delear/charge", CHAN_5);
+   TNT1 A 10 A_StartSound("weapons/delear/charge", lch_reload2);
    TNT1 A 4 Lith_A_ReloadFinish;
-   TNT1 A 4 A_PlaySound("weapons/delear/close", CHAN_6);
+   TNT1 A 4 A_StartSound("weapons/delear/close", lch_reload);
    goto ReadySelector;
 }
 

@@ -170,7 +170,7 @@ action(Weapon) void Lith_A_FireSMG()
 {
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
-   A_PlaySound("weapons/rifle/firero", CHAN_7, CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
+   A_StartSound("weapons/rifle/firero", lch_dryweapon, volume: CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
    Lith_A_RecoilUp(0.15);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 
@@ -207,7 +207,7 @@ Ready:
    loop;
 
 Deselect:
-   CSMG A 0 A_StopSound(CHAN_WEAPON);
+   CSMG A 0 A_StopSound(lch_weapon);
 DeselectLoop:
    CSMG AA 0 A_Lower;
    CSMG A 1 A_Lower;
@@ -224,7 +224,7 @@ Fire:
    CSMG A 0 Lith_A_JumpIfMagEmpty;
    CSMG A 0 A_JumpIf(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_C), 2);
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 450, "Ready");
-   CSMG A 0 A_PlaySound("weapons/smg/fire", CHAN_WEAPON, 1, true);
+   CSMG A 0 A_StartSound("weapons/smg/fire", lch_weapon, CHANF_LOOP);
 Fire1:
    CSMG A 0 A_JumpIf(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_C), 2);
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 450, "FireAnim1");
@@ -237,16 +237,12 @@ Fire1:
    CSMG A 0 Lith_A_RecoilDn(0.05);
    CSMG A 1 A_ReFire("Fire1");
 FireAnim1:
-   CSMG A 1 A_StopSound(CHAN_WEAPON);
-   CSMG A 0 A_PlaySound("weapons/smg/firedone", CHAN_5);
+   CSMG A 1 A_StartSound("weapons/smg/firedone", lch_weapon);
    goto ReadySelector;
 
 EmptyFromFiring:
-   CSMG A 0 {
-      A_StopSound(CHAN_WEAPON);
-      A_PlaySound("weapons/smg/firedone", CHAN_5);
-      A_PlaySound("weapons/smg/firehit", CHAN_6);
-   }
+   CSMG A 0 A_StartSound("weapons/smg/firedone", lch_weapon);
+   CSMG A 0 A_StartSound("weapons/smg/firehit", lch_weapon2);
    goto FireEmpty1;
 FireEmpty:
    #### # 1;
@@ -254,7 +250,7 @@ FireEmpty:
 FireEmpty1:
    #### # 1 offset(0, 45);
    #### # 1 offset(0, 43);
-   #### # 1 offset(0, 40) A_PlaySound("weapons/empty", CHAN_7);
+   #### # 1 offset(0, 40) A_StartSound("weapons/empty", lch_dryweapon);
    #### # 1 offset(0, 38);
    #### # 1 offset(0, 36);
    #### # 1 offset(0, 33);
@@ -264,10 +260,7 @@ FireEmpty1:
    goto ReadySelector;
 
 ReloadHeatFromFiring:
-   CSMG A 0 {
-      A_StopSound(CHAN_WEAPON);
-      A_PlaySound("weapons/smg/firedone", CHAN_5);
-   }
+   CSMG A 0 A_StartSound("weapons/smg/firedone", lch_weapon);
 User1:
 ReloadHeat:
    CSMG A 0 A_JumpIf(CountInv("Lith_SMGHeat") < 200, "Ready");
@@ -275,19 +268,19 @@ ReloadHeat:
    CSMG A 1 offset(3, 32);
    CSMG A 1 offset(4, 32);
    CSMG A 1 offset(8, 38);
-   CSMG A 2 offset(12, 45) A_PlaySound("weapons/smg/open", CHAN_6);
+   CSMG A 2 offset(12, 45) A_StartSound("weapons/smg/open", lch_reload);
    CSMG A 2 offset(16, 53) Lith_A_ReloadBobDn(0.2);
    CSMG A 2 offset(19, 60) Lith_A_ReloadBobDn(0.2);
    CSMG A 2 offset(21, 64) Lith_A_ReloadBobDn(0.3);
    CSMG A 3 offset(23, 67) Lith_A_ReloadBobDn(0.4);
    CSMG A 3 offset(22, 69) {
-      A_PlaySound("weapons/smg/eject", CHAN_6);
+      A_StartSound("weapons/smg/eject", lch_reload);
       Lith_A_ReloadBobDn(0.1);
       Lith_A_DropMag("Lith_SMGBarrel", null, 4,-1,20, FRandom(0,2),FRandom(-1,1),0);
    }
    CSMG A 3 offset(19, 70);
    CSMG A 0 offset(18, 72) {
-      A_PlaySound("weapons/smg/heat", CHAN_7);
+      A_StartSound("weapons/smg/heat", lch_reload2);
       A_TakeInventory("Lith_SMGHeat", 999);
    }
    CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, -2, 5);
@@ -302,7 +295,7 @@ ReloadHeat:
    CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
    CSMG A 3 offset(17, 69);
    CSMG A 3 offset(19, 67);
-   CSMG A 8 offset(20, 66) A_PlaySound("weapons/smg/insert", CHAN_6);
+   CSMG A 8 offset(20, 66) A_StartSound("weapons/smg/insert", lch_reload);
    CSMG A 10 offset(21, 62);
    CSMG A 5 offset(20, 60) Lith_A_ReloadBobUp(0.1);
    CSMG A 4 offset(21, 63) Lith_A_ReloadBobUp(0.1);
@@ -310,7 +303,7 @@ ReloadHeat:
    CSMG A 2 offset(24, 68) Lith_A_ReloadBobUp(0.1);
    CSMG A 2 offset(25, 63) Lith_A_ReloadBobUp(0.1);
    CSMG A 2 offset(24, 59);
-   CSMG A 2 offset(22, 57) A_PlaySound("weapons/smg/close", CHAN_6);
+   CSMG A 2 offset(22, 57) A_StartSound("weapons/smg/close", lch_reload);
    CSMG A 1 offset(20, 54) Lith_A_ReloadBobDn(0.2);
    CSMG A 1 offset(16, 49);
    CSMG A 1 offset(12, 44);
@@ -322,18 +315,15 @@ ReloadHeat:
    goto ReadySelector;
 
 ReloadFromFiring:
-   CSMG A 0 {
-      A_StopSound(CHAN_WEAPON);
-      A_PlaySound("weapons/smg/firedone", CHAN_5);
-   }
+   CSMG A 0 A_StartSound("weapons/smg/firedone", lch_weapon);
 Reload:
    CSMG A 0 Lith_A_JumpIfMagFull;
    CSMG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_A), "ReloadLong");
-   CSMG A 1 A_PlaySound("weapons/smg/lift", CHAN_7);
+   CSMG A 1 A_StartSound("weapons/smg/lift", lch_reload);
    CSMG D 1 offset(-2, 34);
    CSMG E 1 offset(-4, 37);
    CSMG F 1 offset(-9, 43) {
-      A_PlaySound("weapons/smg/magout", CHAN_6);
+      A_StartSound("weapons/smg/magout", lch_reload2);
       Lith_A_ReloadBobUp(0.2);
    }
    CSMG F 1 offset(-12, 47) Lith_A_ReloadBobUp(0.2);
@@ -343,7 +333,7 @@ Reload:
    CSMG F 8 offset(-10, 60);
    CSMG F 8 offset(-11, 60);
    CSMG E 2 offset(-13, 59) {
-      A_PlaySound("weapons/smg/magin", CHAN_7);
+      A_StartSound("weapons/smg/magin", lch_reload);
       Lith_A_ReloadFinish();
    }
    CSMG E 2 offset(-11, 49) Lith_A_ReloadBobDn(0.5);
@@ -368,7 +358,7 @@ ReloadLong:
    CSMG A 1;
    CSMG A 1 offset(-2, 34);
    CSMG D 1 offset(-4, 37);
-   CSMG D 1 offset(-9, 43) A_PlaySound("weapons/smg/magout", CHAN_6);
+   CSMG D 1 offset(-9, 43) A_StartSound("weapons/smg/magout", lch_reload);
    CSMG E 1 offset(-12, 47);
    CSMG E 2 offset(-14, 52);
    CSMG F 2 offset(-12, 55) Lith_A_DropMag("Lith_SMGMagazine", "Lith_SMGMagazine2", 4,-1,20, FRandom(0,2),FRandom(-1,1),0);
@@ -376,7 +366,7 @@ ReloadLong:
    CSMG F 12 offset(-10, 60);
    CSMG F 12 offset(-11, 60);
    CSMG E 2 offset(-13, 59) {
-      A_PlaySound("weapons/smg/magin2", CHAN_7);
+      A_StartSound("weapons/smg/magin2", lch_reload2);
       Lith_A_ReloadFinish();
    }
    CSMG E 2 offset(-11, 49);
