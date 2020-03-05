@@ -162,8 +162,8 @@ struct player_delta
 struct player
 {
    /* data */
-   __prop mana          {default: PtrInvNum(->tid, so_MagicAmmo)}
-   __prop manamax       {default: ACS_GetMaxInventory(->tid, so_MagicAmmo)}
+   __prop mana          {default: PtrInvNum(->tid, so_Mana)}
+   __prop manamax       {default: ACS_GetMaxInventory(->tid, so_Mana)}
    __prop health        {default:   GetPropI(->tid, APROP_Health),
                          operator=: SetPropI(->tid, APROP_Health)}
    __prop setActivator  {operator(): ACS_SetActivator(->tid)}

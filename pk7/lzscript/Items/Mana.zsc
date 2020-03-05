@@ -53,7 +53,7 @@ override void PostBeginPlay()
    Super.PostBeginPlay();
    A_SetTranslation("Lith_Mana" .. Random(1, 8));
    Scale *= FRandom(0.5, 1);
-   GiveInventory("Lith_MagicAmmo", Random(7, 10));
+   GiveInventory("Lith_Mana", Random(7, 10));
    ThrustThingZ(0, 16, 0, 1);
 }
 

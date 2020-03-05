@@ -74,9 +74,9 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_MagicAmmo") < 10, "ReadySelector");
+   TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 10, "ReadySelector");
    TNT1 A 5 {
-      A_TakeInventory("Lith_MagicAmmo", 10);
+      A_TakeInventory("Lith_Mana", 10);
       CallACS("Lith_Rend", false, random(1, 4));
       A_StartSound("weapons/rend/slash", lch_weapon);
       A_FireProjectile("Lith_BladeLightProjectile", 0);

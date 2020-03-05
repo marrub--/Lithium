@@ -98,10 +98,10 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_MagicAmmo") < 50, "ReadySelector");
+   TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 50, "ReadySelector");
    TNT1 A 10 {
       A_FireProjectile("Lith_HulgyonProjectile");
-      A_TakeInventory("Lith_MagicAmmo", 50);
+      A_TakeInventory("Lith_Mana", 50);
    }
    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("Lith_HulgyonSprite2", Cos(Pitch)*32, 0, (Height-19)-(Sin(Pitch)*32), flags: SXF_NOCHECKPOSITION);
    goto ReadySelector;
