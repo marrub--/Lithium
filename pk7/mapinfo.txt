@@ -9,15 +9,29 @@
 
 gameinfo
 {
-   AddEventHandlers        = "Lith_HERMES", "Lith_Events", "Lith_URANUS"
-   AdvisoryTime            = 0
-   BorderFlat              = "ZZLITHBG"
-   DimAmount               = 0.25
+   AdvisoryTime        = 0
+   DimAmount           = 0.25
+   DrawReadThis        = false
+   IntermissionCounter = true
+   NoRandomPlayerClass = true
+
+   IntermissionMusic = "lmusic/alchemis.it"
+   PrecacheSounds    = "amb/rain", "amb/wind"
+   QuitSound         = "misc/quitsound"
+
+   AddEventHandlers  = "Lith_HERMES", "Lith_Events", "Lith_URANUS"
+   PlayerClasses     = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
+                       "Lith_InformantPlayer", "Lith_WandererPlayer",
+                       "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
+                       "Lith_ThothPlayer"
+   StatScreen_Single = "Lith_STATUS"
+   StatusBarClass    = "Lith_StatusBar"
+   MessageBoxClass   = "Lith_MessageBox"
+
+   QuitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
+
    DimColor                = "Black"
-   DrawReadThis            = false
-   InfoPage                = "HELP"
-   IntermissionCounter     = true
-   IntermissionMusic       = "lmusic/alchemis.it"
+   PickupColor             = "#A0F3A0"
    MenuFontColor_Action    = "White"
    MenuFontColor_Header    = "Green"
    MenuFontColor_Highlight = "Green"
@@ -25,16 +39,16 @@ gameinfo
    MenuFontColor_Selection = "Green"
    MenuFontColor_Title     = "Green"
    MenuFontColor_Value     = "Purple"
-   NoRandomPlayerClass     = true
-   PauseSign               = "lgfx/Pause.png"
-   PickupColor             = "#A0F3A0"
-   PlayerClasses           = "Lith_MarinePlayer", "Lith_CyberMagePlayer", "Lith_InformantPlayer", "Lith_WandererPlayer", "Lith_AssassinPlayer",  "Lith_DarkLordPlayer", "Lith_ThothPlayer"
-   PrecacheSounds          = "amb/rain", "amb/wind"
-   QuitSound               = "misc/quitsound"
-   StatScreen_Single       = "Lith_STATUS"
-   StatusBarClass          = "Lith_StatusBar"
-   MessageBoxClass         = "Lith_MessageBox"
-   QuitMessages            = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
+
+   StatScreen_MapNameFont  = "BigUpper", "White"
+   StatScreen_FinishedFont = "BigUpper", "Green"
+   StatScreen_EnteringFont = "BigUpper", "Green"
+   StatScreen_ContentFont  = "BigUpper", "Green"
+
+   InfoPage       = "HELP"
+   BorderFlat     = "lgfx/Menu/Black.png"
+   PauseSign      = "lgfx/Menu/Pause.png"
+   MenuBackButton = "lgfx/Menu/BackUp.png"
 }
 
 automap

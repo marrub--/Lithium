@@ -65,8 +65,6 @@
 ":UI_Umi:ListScrollNotchHot" = "lgfx/UI_Umi/ListScrollNotchHot.png";
 ":UI_Umi:ListScrollbar" = "lgfx/UI_Umi/ListScrollbar.png";
 ":UI_Umi:ListButtonActive" = "lgfx/UI_Umi/ListButtonActive.png";
-":Pause" = "lgfx/Pause.png";
-":Title" = "lgfx/Title.png";
 ":UI_Rose:ListScrollNotchBottomHot" = "lgfx/UI_Rose/ListScrollNotchBottomHot.png";
 ":UI_Rose:ListButtonActiveHot" = "lgfx/UI_Rose/ListButtonActiveHot.png";
 ":UI_Rose:BtnNextHot" = "lgfx/UI_Rose/BtnNextHot.png";
@@ -639,8 +637,12 @@
 ":UI_Orange:ListScrollNotchHot" = "lgfx/UI_Orange/ListScrollNotchHot.png";
 ":UI_Orange:ListScrollbar" = "lgfx/UI_Orange/ListScrollbar.png";
 ":UI_Orange:ListButtonActive" = "lgfx/UI_Orange/ListButtonActive.png";
+":Menu:Pause" = "lgfx/Menu/Pause.png";
 ":Menu:SkillBack" = "lgfx/Menu/SkillBack.png";
+":Menu:Title" = "lgfx/Menu/Title.png";
 ":Menu:EpisodeBack" = "lgfx/Menu/EpisodeBack.png";
+":Menu:Black" = "lgfx/Menu/Black.png";
+":Menu:BackUp" = "lgfx/Menu/BackUp.png";
 ":Menu:ClassBack" = "lgfx/Menu/ClassBack.png";
 ":HUD:H_D25" = "lgfx/HUD/H_D25.png";
 ":HUD:H_D28" = "lgfx/HUD/H_D28.png";

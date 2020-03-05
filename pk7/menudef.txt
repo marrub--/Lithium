@@ -21,21 +21,21 @@ DefaultOptionMenu
 
 ListMenu "MainMenu"
 {
-   StaticPatch 190, -10, "lgfx/Title.png"
+   StaticPatch 190, -10, "lgfx/Menu/Title.png"
    Position 30, 90
 
    TextItem "$MENU_NGAME", "n", "PlayerclassMenu"
    ifoption(SwapMenu)
    {
-      TextItem "$MENU_LOADG", "l", "LoadGameMenu"
-      TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
-      TextItem "$MENU_OPTION","o", "OptionsMenu"
+      TextItem "$MENU_LOADG",  "l", "LoadGameMenu"
+      TextItem "$MENU_SAVEG",  "s", "SaveGameMenu"
+      TextItem "$MENU_OPTION", "o", "OptionsMenu"
    }
    else
    {
-      TextItem "$MENU_OPTION","o", "OptionsMenu"
-      TextItem "$MENU_LOADG", "l", "LoadGameMenu"
-      TextItem "$MENU_SAVEG", "s", "SaveGameMenu"
+      TextItem "$MENU_OPTION", "o", "OptionsMenu"
+      TextItem "$MENU_LOADG",  "l", "LoadGameMenu"
+      TextItem "$MENU_SAVEG",  "s", "SaveGameMenu"
    }
    TextItem "$MENU_UPDAT", "u", "UpdateMenu"
    TextItem "$MENU_QUITG", "q", "QuitMenu"
