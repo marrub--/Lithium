@@ -38,7 +38,7 @@ static void HUD_Ammo(struct player *p)
          txt = st_out_red;
       else
          txt = StrParam(CrRed "%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintTextX_str(txt, s_lhudfont, 0, 242,1, 229,0);
+      PrintTextX_str(txt, s_lhudfont, 0, 242,1, 229,0, ptf_no_utf);
    }
 
    if(type & 2)
@@ -54,7 +54,7 @@ static void HUD_Ammo(struct player *p)
       }
 
       PrintTextFmt(CrRed "%i", wep->ammocur);
-      PrintTextX(s_lhudfont, 0, x+242,1, 229,0);
+      PrintTextX(s_lhudfont, 0, x+242,1, 229,0, ptf_no_utf);
    }
 
    if(typegfx)
@@ -76,7 +76,7 @@ static void HUD_Health(struct player *p)
    PrintSprite(sp_HUD_C_VIT,       2,1, 237,2);
 
    PrintTextFmt(CrRed "%i", p->health);
-   PrintTextX(s_lhudfont, 0, 21,1, 229,0);
+   PrintTextX(s_lhudfont, 0, 21,1, 229,0, ptf_no_utf);
 }
 
 /* Extern Functions -------------------------------------------------------- */

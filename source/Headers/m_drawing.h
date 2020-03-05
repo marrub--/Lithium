@@ -94,21 +94,25 @@
 #define PrintText_str(s, font, cr, x, xa, y, ya) \
    DrawCallI(sm_LT, s, font, PrintTextArgs_N(cr, 0, x, xa, y, ya))
 
-#define PrintTextX_str(s, font, cr, x, xa, y, ya) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_N(cr, 0x40000, x, xa, y, ya))
+#define PrintTextX_str(s, font, cr, x, xa, y, ya, flg) \
+   DrawCallI(sm_LT, s, font, PrintTextArgs_N(cr, flg, x, xa, y, ya))
 
 #define PrintTextA_str(s, font, cr, x, xa, y, ya, alpha) \
    DrawCallI(sm_LT, s, font, PrintTextArgs_A(cr, 0, x, xa, y, ya, alpha))
 
+#define PrintTextAX_str(s, font, cr, x, xa, y, ya, alpha, flg) \
+   DrawCallI(sm_LT, s, font, PrintTextArgs_A(cr, flg, x, xa, y, ya, alpha))
+
 #define PrintTextF_str(s, font, cr, x, xa, y, ya, num) \
    DrawCallI(sm_LT, s, font, PrintTextArgs_F(cr, 0, x, xa, y, ya, num))
 
-#define PrintTextFX_str(s, font, cr, x, xa, y, ya, num) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_F(cr, 0x40000, x, xa, y, ya, num))
+#define PrintTextFX_str(s, font, cr, x, xa, y, ya, num, flg) \
+   DrawCallI(sm_LT, s, font, PrintTextArgs_F(cr, flg, x, xa, y, ya, num))
 
 #define PrintText(...)   PrintText_str  (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextX(...)  PrintTextX_str (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextA(...)  PrintTextA_str (PrintTextEnd(), __VA_ARGS__)
+#define PrintTextAX(...) PrintTextAX_str(PrintTextEnd(), __VA_ARGS__)
 #define PrintTextF(...)  PrintTextF_str (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextFX(...) PrintTextFX_str(PrintTextEnd(), __VA_ARGS__)
 
@@ -142,32 +146,6 @@
 #define CheckFade(n) \
    DrawCallI(sm_LX, n)
 
-#define HudMessageLog(...) (HudMessage(__VA_ARGS__), \
-                            ACS_OptHudMessage(HUDMSG_NOTWITHFULLMAP | \
-                                              HUDMSG_NOTWITH3DVIEW | \
-                                              HUDMSG_NOTWITHOVERLAYMAP | \
-                                              HUDMSG_LOG, hid_log_throwaway, \
-                                              CR_UNTRANSLATED, 0, 0, TS), \
-                            ACS_EndHudMessage())
-
-#define HudMessageF(font, ...) (ACS_SetFont(font), \
-                                HudMessage(__VA_ARGS__))
-
-#define HudMessageParams(flags, id, tr, x, y, hold, ...) \
-   (ACS_OptHudMessage((flags) | HUDMSG_NOTWITHFULLMAP, id, tr, x, y, hold), \
-    ACS_EndHudMessage(__VA_ARGS__))
-
-#define HudMessagePlain(id, x, y, hold) \
-   (ACS_OptHudMessage(HUDMSG_PLAIN | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold), \
-    ACS_EndHudMessage())
-
-#define HudMessageFade(id, x, y, hold, fadetime) \
-   (ACS_OptHudMessage(HUDMSG_FADEOUT | HUDMSG_NOTWITHFULLMAP, id, CR_UNTRANSLATED, x, y, hold), \
-    ACS_EndHudMessage(fadetime))
-
-#define HudMessageAlpha(id, x, y, hold, alpha) \
-   HudMessageParams(HUDMSG_ALPHA, id, CR_UNTRANSLATED, x, y, hold, alpha)
-
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
@@ -178,14 +156,19 @@
 #define CrGrey   "\C[Lith_Grey]"
 
 enum {
-   CHANF_LISTENERZ = 8,
+   CHANF_LISTENERZ   = 8,
    CHANF_MAYBE_LOCAL = 16,
-   CHANF_UI = 32,
-   CHANF_NOPAUSE = 64,
-   CHANF_LOOP = 256,
-   CHANF_NOSTOP = 4096,
-   CHANF_OVERLAP = 8192,
-   CHANF_LOCAL = 16384,
+   CHANF_UI          = 32,
+   CHANF_NOPAUSE     = 64,
+   CHANF_LOOP        = 256,
+   CHANF_NOSTOP      = 4096,
+   CHANF_OVERLAP     = 8192,
+   CHANF_LOCAL       = 16384,
+};
+
+enum {
+   ptf_no_utf = 0x40000,
+   ptf_add    = 0x80000,
 };
 
 enum {
@@ -194,14 +177,5 @@ enum {
    font_jfdot_gothic,  /* JFドットk6x8 */
    font_num,
 };
-
-stkcall void DrawSprite(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold);
-stkcall void DrawSpriteX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1);
-stkcall void DrawSpriteXX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1, k32 a2);
-stkcall void DrawSpriteXXX(str name, i32 flags, i32 id, k32 x, k32 y, k32 hold, k32 a1, k32 a2, k32 a3);
-stkcall void DrawSpritePlain(str name, i32 id, k32 x, k32 y, k32 hold);
-stkcall void DrawSpriteAlpha(str name, i32 id, k32 x, k32 y, k32 hold, k32 alpha);
-stkcall void DrawSpriteFade(str name, i32 id, k32 x, k32 y, k32 hold, k32 fadetime);
-void HudMessage(cstr fmt, ...);
 
 /* EOF */

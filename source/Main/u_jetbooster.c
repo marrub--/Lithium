@@ -51,26 +51,22 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
 {
-   if(!p->hudenabled || UData.charge == CHARGE_MAX) return;
+   if(!p->hudenabled) return;
+
+   if(UData.charge != CHARGE_MAX)
+      SetFade(fid_jet, 1, 16);
+
+   if(!CheckFade(fid_jet)) return;
 
    k32 rocket = UData.charge / (k32)CHARGE_MAX;
-   i32 max = (hid_jetS - hid_jetE) * rocket;
+   i32 max    = rocket * 15;
 
-   DrawSpriteFade(sp_HUD_H_B3, hid_jetbg, 320.2, 80.1, 0.0, 0.5);
-
-   ACS_SetFont(s_smallfnt);
-   ACS_BeginPrint();
-   ACS_PrintString(st_jet);
-   ACS_MoreHudMessage();
-   HudMessageParams(HUDMSG_FADEOUT, hid_jettext, CR_RED, 320.2, 160.1, 0.1, 0.5);
+   PrintSpriteF(sp_HUD_H_B3, 320,2, 80,1, fid_jet);
+   PrintTextF_str(st_jet, s_smallfnt, CR_RED, 320,2, 160,1, fid_jet);
 
    for(i32 i = 0; i < max; i++)
-      DrawSpriteXX(UData.discharged ? sp_HUD_H_C1 : sp_HUD_H_C2,
-         HUDMSG_FADEOUT | HUDMSG_ADDBLEND | HUDMSG_ALPHA,
-         hid_jetS - i,
-         320.2,
-         150.1 - (i * 5),
-         0.1, 0.5, 0.5);
+      PrintSpriteFP(UData.discharged ? sp_HUD_H_C1 : sp_HUD_H_C2,
+                    320,2, 150 - i * 5,1, fid_jet);
 }
 
 /* EOF */

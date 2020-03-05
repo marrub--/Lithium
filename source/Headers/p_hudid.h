@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * Legacy HudMessage IDs and new Fade IDs.
+ * Fade IDs.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -29,41 +29,11 @@ enum
    fid_scopecoE = fid_scopecoS + 4,
    fid_scopecgS,
    fid_scopecgE = fid_scopecgS + 200,
-};
-
-enum
-{
-   hid_base = 0x100000,
-
-   hid_base_payout = hid_base,
-   hid_end_payout  = hid_base + 999,
-
-   hid_base_misc = hid_base + 1000,
-   hid_end_misc  = hid_base + 1999,
-
-   hid_teleport = hid_base_misc,
-   hid_teleportback,
-
-   hid_zoomvignette,
-   hid_zoombase,
-   hid_zoomcomp,
-   hid_zoomcam = hid_zoomcomp + 8,
-
-   hid_sigil_title,
-   hid_sigil_subtitle,
-
-   hid_magicsel,
-   hid_blade,
-
-   hid_jetE,
-   hid_jetS = hid_jetE + 15,
-   hid_jettext,
-   hid_jetbg,
-
-   hid_adrenind_fxE,
-   hid_adrenind_fxS = hid_adrenind_fxE + 45,
-
-   hid_log_throwaway,
+   fid_jet,
+   fid_divsigil,
+   fid_blade,
+   fid_result,
+   fid_result2,
 };
 
 #endif

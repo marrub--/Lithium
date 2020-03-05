@@ -174,7 +174,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
 
    if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
    else                PrintTextFmt("%uhp",  UData.health);
-   PrintTextX(UData.freak ? s_alienfont : font, CR_WHITE, 160+ox,4, 225+oy,2);
+   PrintTextX(UData.freak ? s_alienfont : font, CR_WHITE, 160+ox,4, 225+oy,2, ptf_no_utf);
 
    /* Health bar */
    if(p->getCVarI(sc_scanner_bar))

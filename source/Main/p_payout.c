@@ -22,83 +22,99 @@
 script
 void P_Scr_Payout(struct player *p)
 {
+   enum {
+      begin_total      = 35,
+      begin_tax        = 44,
+      begin_grandtotal = 52,
+   };
+
 #define Left(...) \
-   ( \
-      HudMessageF(s_cnfont, __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 16.1, y + .1, TS, .2) \
-   )
+   (PrintTextFmt(__VA_ARGS__), \
+    PrintTextF(s_cnfont, CR_WHITE, 16,1, y,1, fid_result))
 
 #define Right(...) \
-   ( \
-      HudMessageF(s_cnfont, __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 280.2, y + .1, TS, .2) \
-   )
+   (PrintTextFmt(__VA_ARGS__), \
+    PrintTextF(s_cnfont, CR_WHITE, 280,2, y,1, fid_result))
 
 #define Head(...) \
-   ( \
-      HudMessageF(s_bigupper, __VA_ARGS__), \
-      HudMessageParams(HUDMSG_FADEOUT, hid--, CR_WHITE, 8.1, y + 0.1, TS, 0.2) \
-   )
+   (PrintTextFmt(__VA_ARGS__), \
+    PrintTextF(s_bigupper, CR_WHITE, 8,1, y,1, fid_result))
 
 #define GenCount(word, name) \
-   if(1) \
-   { \
+   if(1) { \
       Left(word " %.1lk%%", pay.name##pct); \
-      \
-      if(i < 35) \
-      { \
-         HudMessageF(s_cnfont, "%s\Cnscr", scoresep(lerplk(0, pay.name##scr, i / 34.0lk))); \
-         HudMessageParams(HUDMSG_FADEOUT, hid, CR_WHITE, 280.2, y + 0.1, 2, 0.2); \
-      } \
-      \
+      Right("%s\Cnscr", \
+            scoresep(i < begin_total ? \
+                     lerplk(0, pay.name##scr, i / 34.0lk) : \
+                     pay.name##scr)); \
       y += 9; \
-      hid--; \
    } else (void)0
 
    struct payoutinfo pay = payout;
 
    p->setActivator();
    ACS_Delay(25);
-   ACS_SetHudSize(320, 240);
 
-   for(i32 i = 0; i < 35*3; i++)
-   {
-      i32 hid = hid_base_payout;
+   SetFade(fid_result,  35 * 3, 8);
+   SetFade(fid_result2, 16,     16);
+
+   for(i32 i = 0; CheckFade(fid_result); i++) {
       i32 y = 20;
       bool counting = false;
 
+      /* TODO: translatable */
+
+      SetSize(320, 240);
       Head("RESULTS");
 
-      if(i < 16) {
-         HudMessageF(s_bigupper, "RESULTS");
-         HudMessageParams(HUDMSG_FADEOUT | HUDMSG_ADDBLEND, hid, CR_WHITE, 8 + 0.1, y + .1, TS, 0.5);
-      }
+      if(CheckFade(fid_result2))
+         PrintTextFX_str(s"RESULTS", s_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
 
       y += 16;
-      hid--;
 
-      if(pay.killmax) {GenCount("ELIMINATED", kill); counting |= pay.killnum;}
-      if(pay.itemmax) {GenCount("ARTIFACTS",  item); counting |= pay.itemnum;}
-
-      if(i > 35) {y += 7; Head("TOTAL"); y += 16;}
-      if(i > 35 * 1.25) {Left("Tax"); Right("%s\Cnscr", scoresep(pay.tax)); y += 9;}
-
-      if(i > 35 * 1.5)
-      {
-         Left("Total"); Right("%s\Cnscr", scoresep(pay.total)); y += 16;
-
-         Head("PAYMENT"); y += 16;
-         Left("Primary Account"); Right("%sTRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
+      if(pay.killmax) {
+         GenCount("ELIMINATED", kill);
+         counting |= pay.killnum;
       }
 
-      if(p->getCVarI(sc_player_resultssound))
-      {
+      if(pay.itemmax) {
+         GenCount("ARTIFACTS", item);
+         counting |= pay.itemnum;
+      }
+
+      if(i > begin_total) {
+         y += 7;
+         Head("TOTAL");
+         y += 16;
+      }
+
+      if(i > begin_tax) {
+         Left("Tax");
+         Right("%s\Cnscr", scoresep(pay.tax));
+         y += 9;
+      }
+
+      if(i > begin_grandtotal) {
+         Left("Total");
+         Right("%s\Cnscr", scoresep(pay.total));
+         y += 16;
+
+         Head("PAYMENT");
+         y += 16;
+
+         Left("Primary Account");
+         Right("%sTRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
+      }
+
+      if(p->getCVarI(sc_player_resultssound)) {
          if(counting) {
-                 if(i <  35) ACS_LocalAmbientSound(ss_player_counter, 80);
-            else if(i == 35) ACS_LocalAmbientSound(ss_player_counterdone, 80);
+            str snd = snil;
+                 if(i <  begin_total) snd = ss_player_counter;
+            else if(i == begin_total) snd = ss_player_counterdone;
+                 if(snd != snil)      ACS_LocalAmbientSound(snd, 80);
          }
 
-         if(i == (i32)(35 * 1.25) || i == (i32)(35 * 1.5))
+         if(i == begin_tax || i == begin_grandtotal)
             ACS_LocalAmbientSound(ss_player_counterdone, 80);
       }
 

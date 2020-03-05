@@ -200,7 +200,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
          {
             cstr s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
             PrintTextChS(s);
-            PrintTextF(s_logfont, CR_WHITE, x,1, y,ya, fid_logadS + i);
+            PrintTextFX(s_logfont, CR_WHITE, x,1, y,ya, fid_logadS + i, ptf_add);
          }
       }
 

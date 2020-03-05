@@ -46,6 +46,9 @@
 #define Dbg_Log(...)
 #endif
 
+/* !!!FIXME!!! GZDoom doesn't have a way of using PRINT_NONOTIFY yet */
+#define ConsoleLog(...) ((void)0)
+
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
 

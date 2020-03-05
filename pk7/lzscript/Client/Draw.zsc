@@ -255,6 +255,7 @@ static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, string arg3 =
    ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
 
                                       arg2
+   ---- ---- ---- 1--- ---- ---- ---- ---- 19  1 - additive flag
    ---- ---- ---- -1-- ---- ---- ---- ---- 18  1 - "no unicode" flag
    ---- ---- ---- --1- ---- ---- ---- ---- 17  1 - alpha flag
    ---- ---- ---- ---1 ---- ---- ---- ---- 16  1 - fade flag
@@ -289,6 +290,13 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
    }
    if(cl.m_D[p].A < 0.001) return;
    cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
+
+   if(arg2 & 0x80000)
+      cl.m_D[p].Style = STYLE_Add;
+   else if(cl.m_D[p].Type == Type_TextAlpha)
+      cl.m_D[p].Style = STYLE_Translucent;
+   else
+      cl.m_D[p].Style = STYLE_Normal;
 
    cl.m_D[p].Cr = cr;
 
@@ -525,7 +533,8 @@ override void RenderOverlay(RenderEvent evt)
          Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
                          m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
                          m_D[i].Txt[ln],
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch);
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
       break;
    case Type_TextAlpha:
       for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
@@ -533,7 +542,8 @@ override void RenderOverlay(RenderEvent evt)
                          m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
                          m_D[i].Txt[ln],
                          DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_Alpha,m_D[i].A);
+                         DTA_Alpha,m_D[i].A,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
       break;
    case Type_Rect:
       m_RectXf.clear();

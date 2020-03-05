@@ -27,7 +27,7 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       k32 y = a->y+.2;
 
       PrintTextFmt("%i", i);
-      PrintTextX(s_lhudfontsmall, a->ncol[min(slot - 1, 2)], x,2, y,2);
+      PrintTextX(s_lhudfontsmall, a->ncol[min(slot - 1, 2)], x,2, y,2, ptf_no_utf);
 
       if(p->weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 6);
@@ -35,7 +35,7 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
       if(CheckFade(fid_slotnS + i))
       {
          PrintTextFmt("\C%S%i", a->scol, i);
-         PrintTextFX(s_lhudfontsmall, 0, x,2, y,2, fid_slotnS + i);
+         PrintTextFX(s_lhudfontsmall, 0, x,2, y,2, fid_slotnS + i, ptf_no_utf);
       }
    }
 }
@@ -47,7 +47,7 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i3
       str scr = StrParam(fmt, scoresep(scrn));
 
       PrintTextFmt("\C%S%S", cr, scr);
-      PrintTextX(font, 0, x,xa, y,ya);
+      PrintTextX(font, 0, x,xa, y,ya, ptf_no_utf);
 
       if(p->score > p->old.score) {
          SetFade(fid_schit1, 4, 12);
@@ -64,19 +64,19 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i3
       }
 
       if(CheckFade(fid_schit1))
-         PrintTextFX_str(scr, font, CR_ORANGE, x,xa, y,ya, fid_schit1);
+         PrintTextFX_str(scr, font, CR_ORANGE, x,xa, y,ya, fid_schit1, ptf_no_utf);
       else if(CheckFade(fid_schit2))
-         PrintTextFX_str(scr, font, CR_PURPLE, x,xa, y,ya, fid_schit2);
+         PrintTextFX_str(scr, font, CR_PURPLE, x,xa, y,ya, fid_schit2, ptf_no_utf);
 
       if(CheckFade(fid_scacum))
-         PrintTextFX_str(p->scoreaccumstr, font, CR_WHITE, x,xa, y+10,ya, fid_scacum);
+         PrintTextFX_str(p->scoreaccumstr, font, CR_WHITE, x,xa, y+10,ya, fid_scacum, ptf_no_utf);
    }
 
    if(p->getCVarI(sc_hud_showlvl))
    {
       PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf(" (%u pts)", p->attr.points);
-      PrintTextX(font, 0, x,xa, y+20,ya);
+      PrintTextX(font, 0, x,xa, y+20,ya, ptf_no_utf);
    }
 }
 

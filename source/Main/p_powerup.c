@@ -98,29 +98,24 @@ void Sc_GetSigil(void)
 
       p->sgacquired = true;
 
-      ACS_Thing_Remove(InvNum(so_DivisionSigilSpriteTID));
-      InvTake(so_DivisionSigilSpriteTID, INT32_MAX);
-
       if(dbglevel) return;
 
       FreezeTime(true);
 
       ACS_FadeTo(0, 0, 0, 0.4, TS * 3);
-      ACS_SetHudSize(320, 200);
 
       ACS_Delay(3);
 
-      ACS_BeginPrint();
-      ACS_PrintLocalized(st_div_get);
-      ACS_MoreHudMessage();
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_title, CR_ORANGE, 160.4, 100.2, 1.0, TS * 6, 0.3);
+      SetFade(fid_divsigil, 35 * 7, 8);
+      for(i32 i = 0;; i++) {
+         if(!CheckFade(fid_divsigil)) break;
 
-      ACS_BeginPrint();
-      ACS_PrintLocalized(st_div_warning);
-      ACS_MoreHudMessage();
-      HudMessageParams(HUDMSG_TYPEON, hid_sigil_subtitle, CR_RED, 160.4, 100.1, 1.0, TS * 7, 0.3);
+         SetSize(320, 240);
+         PrintTextF_str(L(st_div_get), s_bigupper, CR_ORANGE, 160,4, 120,2, fid_divsigil);
+         PrintTextF_str(L(st_div_warning), s_bigupper, CR_RED, 160,4, 120,1, fid_divsigil);
 
-      ACS_Delay(35 * 7);
+         ACS_Delay(1);
+      }
 
       ACS_FadeTo(0, 0, 0, 0.0, TS * 5);
 

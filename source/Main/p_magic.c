@@ -21,11 +21,17 @@
 script_str ext("ACS") addr("Lith_Blade")
 void Sc_Blade(bool hit)
 {
-   ACS_SetHudSize(800, 600);
-   DrawSpriteX(hit ? sp_Weapon_BladeHit : sp_Weapon_Blade, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 3, 0.15);
-
    with_player(LocalPlayer)
       if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
+
+   str graphic = hit ? sp_Weapon_BladeHit : sp_Weapon_Blade;
+
+   SetFade(fid_blade, 3, 16);
+   for(i32 i = 0; CheckFade(fid_blade); i++) {
+      SetSize(800, 600);
+      PrintSpriteFP(graphic, 0,1, 0,1, fid_blade);
+      ACS_Delay(1);
+   }
 }
 
 script_str ext("ACS") addr("Lith_Rend")
@@ -40,13 +46,17 @@ void Sc_Rend(bool hit, i32 set)
 
    if(!hit) num = set;
 
-   str graphic = hit ? hs[num - 1] : ns[num - 1];
-
-   ACS_SetHudSize(800, 600);
-   DrawSpriteX(graphic, HUDMSG_FADEOUT|HUDMSG_ADDBLEND, hid_blade, 0.1, 0.1, TS * 2, 0.1);
-
    with_player(LocalPlayer)
       if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
+
+   str graphic = hit ? hs[num - 1] : ns[num - 1];
+
+   SetFade(fid_blade, 3, 16);
+   for(i32 i = 0; CheckFade(fid_blade); i++) {
+      SetSize(800, 600);
+      PrintSpriteFP(graphic, 0,1, 0,1, fid_blade);
+      ACS_Delay(1);
+   }
 }
 
 script_str ext("ACS") addr("Lith_Feuer")
@@ -190,11 +200,12 @@ void Sc_MagicSelect(i32 num)
 
       ACS_FadeTo(0, 0, 0, 0.0, 0.3);
 
-      ACS_SetHudSize(64, 64);
       for(i32 i = 0; i < 4; i++) {
-         DrawSpriteAlpha(StrParam(":MagicSel:Slot%i_%i", num, i + 1),
-            hid_magicsel, 0.1, 0.1, TS*3, 0.5);
-         ACS_Delay(3);
+         for(i32 j = 0; j < 3; j++) {
+            SetSize(64, 64);
+            PrintSpriteA(StrParam(":MagicSel:Slot%i_%i", num, i + 1), 0,1, 0,1, 0.5);
+            ACS_Delay(1);
+         }
       }
    }
 }

@@ -443,7 +443,7 @@ sync static void ActDLG_WAIT(struct player *p)
    p->frozen++;
    P_SetVel(p, 0, 0, 0);
 
-   if(textV[0]) HudMessageLog("%.*s", textC, textV);
+   if(textV[0]) ConsoleLog("%.*s", textC, textV);
 
    do {
       DialogueGUI(p);
@@ -559,7 +559,7 @@ sync static void ActTRM_WAIT(struct player *p)
       p->frozen++;
       P_SetVel(p, 0, 0, 0);
 
-      if(textV[0]) HudMessageLog("%.*s", textC, textV);
+      if(textV[0]) ConsoleLog("%.*s", textC, textV);
 
       do {
          TerminalGUI(p, tact);

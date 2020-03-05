@@ -42,7 +42,7 @@ void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
    srand(p->ticks / 7);
 
    for(i32 i = 0; i < 40; i++)
-      PrintTextX_str(strings[rand() % countof(strings)], s_bigupper, 0, rand() % 320,0, rand() % 240,0);
+      PrintTextX_str(strings[rand() % countof(strings)], s_bigupper, 0, rand() % 320,0, rand() % 240,0, ptf_no_utf);
 }
 
 /* EOF */

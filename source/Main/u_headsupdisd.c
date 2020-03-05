@@ -38,7 +38,7 @@ static void HUD_Ammo(struct player *p)
          txt = st_out_blue;
       else
          txt = StrParam(CrBlue "%i/%i", wep->magmax - wep->magcur, wep->magmax);
-      PrintTextX_str(txt, s_lhudfont, 0, 242,1, 227,0);
+      PrintTextX_str(txt, s_lhudfont, 0, 242,1, 227,0, ptf_no_utf);
    }
 
    if(type & 2)
@@ -54,7 +54,7 @@ static void HUD_Ammo(struct player *p)
       }
 
       PrintTextFmt(CrBlue "%i", wep->ammocur);
-      PrintTextX(s_lhudfont, 0, x+242,1, 227,0);
+      PrintTextX(s_lhudfont, 0, x+242,1, 227,0, ptf_no_utf);
    }
 
    if(typegfx) PrintSprite(typegfx, 318,2, 232,2);
@@ -69,7 +69,7 @@ static void HUD_Health(struct player *p)
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
    PrintTextFmt(CrBlue "%i", p->health);
-   PrintTextX(s_lhudfont, 0, 18,1, 228,0);
+   PrintTextX(s_lhudfont, 0, 18,1, 228,0, ptf_no_utf);
 
    str gfx = ws[p->weapon.cur->info->slot];
 
