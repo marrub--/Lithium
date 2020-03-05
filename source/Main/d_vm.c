@@ -248,22 +248,22 @@ script static void TerminalGUI(struct player *p, u32 tact)
 {
    enum {
       /* text */
-      tsizex  = 640, tsizey = 480,
-      tright  = tsizex,
-      ttop    = tsizey*.08,
-      tbottom = tsizey*.75,
-      tleft   = tsizex/2 - 10,
+      twidth  = 640, theigh = 480,
+      tright  = twidth,
+      ttop    = theigh*.08,
+      tbottom = theigh*.75,
+      tleft   = twidth/2 - 10,
 
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   G_Begin(&gst, tsizex, tsizey);
+   G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst, p);
 
    /* Background */
-   PrintRect(0, 0,          tsizex, tbottom, 0xFF000000);
-   PrintRect(0, 0,          tsizex, 12,      0xFF44000C);
-   PrintRect(0, tbottom-12, tsizex, 12,      0xFF44000C);
+   PrintRect(0, 0,          twidth, tbottom, 0xFF000000);
+   PrintRect(0, 0,          twidth, 12,      0xFF44000C);
+   PrintRect(0, tbottom-12, twidth, 12,      0xFF44000C);
 
    /* Top-left text */
    PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);
@@ -300,10 +300,8 @@ script static void TerminalGUI(struct player *p, u32 tact)
       case TACT_LOGOFF:
          __with(i32 y = tmidy;) {
             if(textV) {
-               SetSize(tsizex, tsizey);
                PrintTextChr(textV, textC);
                PrintText(s_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
-               SetSize(gst.w, gst.h);
 
                y -= 10;
             }
@@ -314,22 +312,20 @@ script static void TerminalGUI(struct player *p, u32 tact)
       case TACT_PICT:
          PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
 
-         SetSize(tsizex, tsizey);
          SetClipW(tleft, ttop, tright - tleft, tbottom, tright - tleft);
 
          PrintTextChr(textV, textC);
          PrintText(s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
 
-         SetSize(gst.w, gst.h);
          ClearClip();
          break;
       case TACT_INFO:
-         SetSize(tsizex, tsizey);
+         SetClipW(0, ttop, twidth, tbottom, twidth);
 
          PrintTextChr(textV, textC);
          PrintText(s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
 
-         SetSize(gst.w, gst.h);
+         ClearClip();
          break;
    }
 
