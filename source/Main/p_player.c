@@ -382,6 +382,22 @@ void P_Scr_Take(struct player *p, i96 score)
    p->scoreaccumtime = 0;
 }
 
+script void P_GiveAllScore(i96 score, bool nomul)
+{
+   for_player() {
+      p->setActivator();
+      P_Scr_Give(p, score, nomul);
+   }
+}
+
+script void P_GiveAllEXP(u64 amt)
+{
+   for_player() {
+      p->setActivator();
+      P_Lv_GiveEXP(p, amt);
+   }
+}
+
 /* Static Functions -------------------------------------------------------- */
 
 #if LITHIUM

@@ -56,9 +56,6 @@ LITH_X(gR, pcl_robot)
       __with(struct player *p = &players[_piter];) \
          if(p->active)
 
-#define P_GiveAllScore(score, nomul) for_player() P_Scr_Give(p, score, nomul)
-#define P_GiveAllEXP(amt) for_player() P_Lv_GiveEXP(p, amt)
-
 #define LocalPlayer \
    (ACS_PlayerNumber() >= 0 ? &players[ACS_PlayerNumber()] : (struct player *)nil)
 #define P_Discount(n) (i96)((n) * p->discount)
@@ -80,6 +77,8 @@ stkcall void P_GUI_Close(struct player *p);
 stkcall void P_GUI_Use(struct player *p, i32 type);
 optargs(1) i96 P_Scr_Give(struct player *p, i96 score, bool nomul);
 stkcall void P_Scr_Take(struct player *p, i96 score);
+script void P_GiveAllScore(i96 score, bool nomul);
+script void P_GiveAllEXP(u64 amt);
 stkcall void P_Lv_GiveEXP(struct player *p, u64 amt);
 stkcall struct upgrade *P_Upg_GetNamed(struct player *p, i32 name);
 stkcall bool P_Upg_IsActive(struct player *p, i32 name);

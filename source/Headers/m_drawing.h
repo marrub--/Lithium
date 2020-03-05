@@ -63,7 +63,7 @@
 #define PrintSpriteFP(name, x, xa, y, ya, num) \
    DrawCallI(sm_LS, name, PrintSpriteArgs_F(x, xa, y, ya, num, 0x100))
 
-#define PrintTextFmt(...) StrParamBegin(__VA_ARGS__)
+#define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s)    (ACS_BeginPrint(), ACS_PrintString(s))
 #define PrintTextChr(s, n) (ACS_BeginPrint(), PrintChars(s, n))
 #define PrintTextChS(s)    (ACS_BeginPrint(), PrintChrSt(s))
