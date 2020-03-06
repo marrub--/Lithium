@@ -1,3 +1,4 @@
+   mus lmusic/asdfn2.ogg
    bg black
    fade 10,#061102
    bg #061102

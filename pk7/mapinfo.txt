@@ -157,9 +157,8 @@ skill nightmare
 
 map TITLEMAP "Lithium Title"
 {
-   Music = "lmusic/Shredder.ogg"
-   Sky1  = "LITHSKRD", 0.05
-   Sky2  = "LITHSKS1"
+   Sky1 = "LITHSKRD", 0.05
+   Sky2 = "LITHSKS1"
    DoubleSky
 }
 
