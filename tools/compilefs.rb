@@ -54,54 +54,63 @@ def parse_file state, filename, language
       when /^## .+$/
          do_close_buf.call
       when /^== (.+)\|(.*)$/
+         m = $~
          do_close_buf.call
-         name = $~[1].strip
-         text = $~[2].strip
+         name = m[1].strip
+         text = m[2].strip
          lan.data.push Alias.new name, text
       when /^%% (.+)$/
+         m = $~
          do_close_buf.call
-         name = $~[1].strip
+         name = m[1].strip
          buf  = []
          close_buf = lambda do
             text = buf.join "\n"
             lan.data.push Alias.new name, text
          end
       when /^@@ (.+)$/
+         m = $~
          do_close_buf.call
-         name = $~[1].strip
+         name = m[1].strip
          buf  = []
          close_buf = lambda do
             text = buf.reduce "" do |memo, ln|
                if ln.empty? then memo + "\n\n"
-               else              memo + ln.strip end
+               else              memo + ln.strip + " " end
             end
+            text = text.gsub /[ \t]+\n/, "\n"
             lan.data.push Alias.new name, text
          end
       when /^\+\+ (.+)\|(.+)$/
+         m = $~
          do_close_buf.call
-         name = $~[1].strip
-         file = split_name $~[2]
+         name = m[1].strip
+         file = split_name m[2]
          file = unsplit_name state, file
          file = IO.read file
          lan.data.push Alias.new name, file
       when /^!!output (.+)$/
+         m = $~
          do_close_buf.call
-         state.out = $~[1].strip
+         state.out = m[1].strip
       when /^!!lang (.+)\|(.+)$/
+         m = $~
          do_close_buf.call
-         lnam = $~[1].strip
-         name = $~[2].strip
+         lnam = m[1].strip
+         name = m[2].strip
          state.langs[lnam] = Language.new name, []
       when /^!!inclang (.+)$/
+         m = $~
          do_close_buf.call
-         name = split_name $~[1]
+         name = split_name m[1]
          for lnam in state.langs.each_key
             lname = [lnam] + name
             parse_file state, lname, lnam
          end
       when /^!!include (.+)$/
+         m = $~
          do_close_buf.call
-         name = split_name $~[1]
+         name = split_name m[1]
          parse_file state, name, language
       else
          if buf
