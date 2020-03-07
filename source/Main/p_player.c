@@ -443,7 +443,7 @@ static void P_BossText(struct player *p, i32 boss)
       SetSize(640, 400);
       SetClipW(0, 0, 640, 400, 640);
       PrintTextChS(text);
-      PrintTextF(s_bigupper, CR_WHITE, 320,0, 100,0, fid_bosstext);
+      PrintTextF(s_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
       ClearClip();
 
       ACS_Delay(1);
