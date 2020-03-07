@@ -2,6 +2,9 @@
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
 
+!!include End/Stan/Dialogue.txt
+!!include End/Jem/Dialogue.txt
+
 ++ \#ENDING_Credits    | End/Credits.txt
 ++ \#ENDING_Dedication | End/Dedication.txt
 

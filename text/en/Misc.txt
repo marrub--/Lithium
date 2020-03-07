@@ -3,7 +3,6 @@
 ## See licenses/cc0.txt for more information.
 
 !!include Misc/Changes.txt
-!!include Misc/FinalBoss.txt
 !!include Misc/QuitMessages.txt
 !!include Misc/Settings.txt
 !!include Misc/UI.txt

@@ -1,0 +1,81 @@
+## Barons --------------------------------------------------------------------|
+%% \#BOSS_BAR_1_Jem
+\cgTerrifying! \cm*laughs*
+\cyA human comes to our domain.
+
+%% \#BOSS_BAR_2_Jem
+\cgAn intrepid hero comes through the portal.
+\cyDon't fret though. It'll be over quite soon.
+
+%% \#BOSS_BAR_3_Jem
+\cgWhat in the world are you? Some kind of insane robot?
+\cyThis place is cursed. If you leave, it will only be worse.
+
+%% \#BOSS_BAR_4_Jem
+\cgWhatever you are, you shall not pass.
+\cyDeimos is ours now. I think it's only fair to tell you.
+
+== \#BOSS_BAR_5_Jem | $\#BOSS_BAR_5_Stan
+
+%% \#BOSS_BAR_6_Jem
+\ctYour life is forfeit.
+
+%% \#BOSS_BAR_7_Jem
+\cgIt won't be long now until your pathetic race is wiped from this universe.
+\cyIt will be too late by the time you get through the gate.
+
+%% \#BOSS_BAR_8_Jem
+\cgAs amusing a thought as that is, for such a worm to come here...
+\cyWe offer a battle you have no chance of winning.
+
+%% \#BOSS_BAR_9_Jem
+\cgInteresting. Very interesting. I'll see to your demise.
+\cyIt will be less painful than what you would go through.
+
+%% \#BOSS_BAR_10_Jem
+\ctPrepare to die.
+
+## Icon of Sin ---------------------------------------------------------------|
+%% \#BOSS_IOS_1_Jem
+You fucking scum.
+You are not worthy of being here.
+
+%% \#BOSS_IOS_2_Jem
+My defeat is impossible from the likes of you.
+If you had the slightest microcosm of humanity left in you, maybe you wouldn't be so fucking pathetic.
+
+%% \#BOSS_IOS_3_Jem
+This is the end.
+You will not see your friends in the afterlife.
+This realm already consumed them.
+
+%% \#BOSS_IOS_4_Jem
+What a disgusting pile of flesh, not even in its original form, like the Gods should have intended.
+
+%% \#BOSS_IOS_5_Jem
+They're idiots. They shouldn't even be considered Gods when they can't create a species incapable of subservience.
+
+%% \#BOSS_IOS_6_Jem
+As for you, I think you're much the same.
+So much deception.
+
+%% \#BOSS_IOS_7_Jem
+You defy your masters,
+you defy your humanity,
+you defy your very body.
+
+%% \#BOSS_IOS_8_Jem
+Stupid girl. Do you think those modifications could possibly trick me?
+Even if they could, I know your origins. You come from Delsona.
+
+%% \#BOSS_IOS_9_Jem
+It's too bad you couldn't save any of those who were captured.
+Your society is fucking laughable.
+
+%% \#BOSS_IOS_10_Jem
+A bunch of idiotic sheep waiting to be herded.
+I think I've had my fun now.
+I won't bother assimilating you.
+\cgYou\c- will simply fade into nonexistence.
+
+## EOF
