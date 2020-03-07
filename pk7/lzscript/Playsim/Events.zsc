@@ -55,6 +55,15 @@ override void WorldLoaded(WorldEvent ev)
    for(int i = 0; i < BOSS_D2.Size(); i++)
       if(sum == BOSS_D2[i]) {m_BossLevel = boss_iconofsin;   break;}
 
+   if(sum == "058fb092ea1b70da1e3cbf501c4a91a1") {
+      Actor th;
+      for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));) {
+         if(th.bBOSSDEATH && th.pos.x == 528) {
+            th.A_SetTranslation('Lith_BlueBaron');
+         }
+      }
+   }
+
    if(ev.IsReopen) {
       CallACS("Lith_WorldReopen");
    } else {
