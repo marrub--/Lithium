@@ -21,6 +21,13 @@ hardwareshader postprocess scene
    uniform float lith_m
 }
 
+hardwareshader postprocess screen
+{
+   shader "lshaders/end.fp.glsl" 330
+   name "Lith_End"
+   uniform float lith_t
+}
+
 pointlight Lith_Candle
 {
    color 1.0 1.0 0.3

@@ -7,8 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-uniform float timer;
-
 vec4 Process(vec4 color)
 {
    float pi = 3.1415926535897932384626433832795;
@@ -37,7 +35,7 @@ vec4 Process(vec4 color)
    fc.g *= 0.6;
    fc.b = abs(tsx * 0.25);
    fc.a = 0.0;
-   
+
    return (getTexel(gl_TexCoord[0].st) + fc) * color;
 }
 

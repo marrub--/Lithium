@@ -28,7 +28,7 @@ class Lith_BossBrainExplosion : Actor
    }
 }
 
-class Lith_BossBrain : Actor replaces BossBrain;
+class Lith_BossBrain : BossBrain replaces BossBrain;
 
 default
 {

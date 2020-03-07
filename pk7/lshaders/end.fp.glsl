@@ -7,14 +7,17 @@
  * ---------------------------------------------------------------------------|
  */
 
-vec4 Process(vec4 color)
-{
-   vec2 uv = gl_TexCoord[0].st;
-   float a = getTexel(uv).a;
-   float s = cos(sin(uv.x) * uv.y * 3 + timer) + 0.5;
-   float tt = (uv.x * sin(timer) + uv.y * cos(timer)) * 3;
-   vec4 fc = vec4(-(s * 0.05 * cos(tt)), 1, -(s * 0.05 * sin(tt)), a);
-   return fc * color;
+void main() {
+   vec2 uv = TexCoord.xy;
+   vec4 cr = texture(InputTexture, uv);
+   float n = floor(1.0 + lith_t * 200.0 / 35.0);
+
+   for(float i = 1.0; i < n; i++) {
+      cr += texture(InputTexture, vec2(uv.x, uv.y + i / 1600.0));
+      cr += vec4(0.001 * i, 0.0, 0.0, 0.0);
+   }
+
+   FragColor = cr / n;
 }
 
 /* EOF */
