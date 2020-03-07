@@ -179,7 +179,6 @@ static void Footstep(struct player *p)
    }
 }
 
-#if LITHIUM
 stkcall
 static void ItemFx(struct player *p)
 {
@@ -190,7 +189,6 @@ static void ItemFx(struct player *p)
 
    p->hadinfrared = hasir;
 }
-#endif
 
 /* Update view bobbing when you get damaged. */
 stkcall
@@ -255,7 +253,6 @@ static void View(struct player *p)
    Dbg_Stat("score: %lli\n", p->score);
 }
 
-#if LITHIUM
 stkcall
 static void Style(struct player *p)
 {
@@ -289,7 +286,6 @@ static void HUD(struct player *p)
       case pcl_marine:    if(p->scopetoken) ScopeM(p); break;
    }
 }
-#endif
 
 stkcall
 static void Levelup(struct player *p)
@@ -312,16 +308,12 @@ stkcall
 void P_Ren_PTickPst(struct player *p)
 {
    Footstep(p);
-   #if LITHIUM
    ItemFx(p);
-   #endif
    DamageBob(p);
    View(p);
-   #if LITHIUM
    HUD(p);
    Style(p);
    Advice(p);
-   #endif
    Levelup(p);
    DebugStats(p);
 }
