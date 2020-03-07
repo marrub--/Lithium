@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -43,6 +42,5 @@ void Scr_HInit(void)
 
    fastmemset(&payout, 0, sizeof payout);
 }
-#endif
 
 /* EOF */

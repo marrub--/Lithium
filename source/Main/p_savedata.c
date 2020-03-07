@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "m_file.h"
@@ -114,6 +113,5 @@ void Save_EndLoad(struct savefile *save)
    fclose(save->fp);
    Dalloc(save);
 }
-#endif
 
 /* EOF */

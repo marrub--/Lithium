@@ -17,14 +17,15 @@ require_relative "corinth.rb"
 require 'fileutils'
 
 def run of, pkdir, dir
-   of.puts generated_header("hashfs") + "\n[enu default]"
+   of.puts "identifier,default"
 
    pdir = "#{pkdir}#{dir}"
    re = /#{Regexp.escape pdir}\/(.+)\.png/
-   Dir.glob "#{pdir}/**/*.png" do |item|
+   names = Dir.glob("#{pdir}/**/*.png").sort
+   for item in names
       unless item.include? "/Font/"
          m = re.match item
-         of.puts %(":#{m[1].gsub "/", ":"}" = "#{item.gsub pkdir, ""}";)
+         of.puts ":#{m[1].gsub "/", ":"},#{item.gsub pkdir, ""}"
       end
    end
 end

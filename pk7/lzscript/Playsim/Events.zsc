@@ -7,38 +7,59 @@
  * ---------------------------------------------------------------------------|
  */
 
-/* This one doesn't have any funny acronym, sorry. */
-class Lith_Events : EventHandler;
+extend class Lith_HERMES;
 
-bool m_BossLevel;
+static void SetEnding(string ending)
+   {if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);}
+
+static int GetBossLevel() {return Instance().m_BossLevel;}
 
 override void WorldLoaded(WorldEvent ev)
 {
-   static const string BOSSLEVELS[] = {
-      "058fb092ea1b70da1e3cbf501c4a91a1", /* E1M8 */
-      "effe91df41ad41f6973c06f0ad67ddb9", /* E2M8 */
-      "ef128313112110ed6c1549af96af26c9", /* E3M8 */
-      "2dc939e508ab8eb68af79d5b60568711", /* E4M8 */
-      "5eecd88f4491f516d590ce4bbf45f532"  /* MAP30 */
+   /* TODO: hashes for doom.wad (1.9, BFG), doom1.wad (1.9), doom2.wad (BFG),
+            hashes for community maps, etc */
+   static const string BOSS_E1[] = {
+      "058fb092ea1b70da1e3cbf501c4a91a1" /* doom.wad (1.9ud) E1M8 */
+   };
+
+   static const string BOSS_E2[] = {
+      "effe91df41ad41f6973c06f0ad67ddb9" /* doom.wad (1.9ud) E2M8 */
+   };
+
+   static const string BOSS_E3[] = {
+      "ef128313112110ed6c1549af96af26c9" /* doom.wad (1.9ud) E3M8 */
+   };
+
+   static const string BOSS_E4[] = {
+      "2dc939e508ab8eb68af79d5b60568711" /* doom.wad (1.9ud) E4M8 */
+   };
+
+   static const string BOSS_D2[] = {
+      "5eecd88f4491f516d590ce4bbf45f532" /* doom2.wad (1.9) MAP30 */
    };
 
    if(ev.IsSaveGame)
       return;
 
-   if(ev.IsReopen)
+   m_BossLevel = boss_none;
+
+   let sum = Level.GetChecksum();
+   for(int i = 0; i < BOSS_E1.Size(); i++)
+      if(sum == BOSS_E1[i]) {m_BossLevel = boss_barons;      break;}
+   for(int i = 0; i < BOSS_E2.Size(); i++)
+      if(sum == BOSS_E2[i]) {m_BossLevel = boss_cyberdemon;  break;}
+   for(int i = 0; i < BOSS_E3.Size(); i++)
+      if(sum == BOSS_E3[i]) {m_BossLevel = boss_spiderdemon; break;}
+   for(int i = 0; i < BOSS_E4.Size(); i++)
+      if(sum == BOSS_E4[i]) {m_BossLevel = boss_other;       break;}
+   for(int i = 0; i < BOSS_D2.Size(); i++)
+      if(sum == BOSS_D2[i]) {m_BossLevel = boss_iconofsin;   break;}
+
+   if(ev.IsReopen) {
       CallACS("Lith_WorldReopen");
-   else
-   {
+   } else {
       CallACS("lithlib@gsinit");
       CallACS("lithmain@gsinit");
-
-      let sum = Level.GetChecksum();
-      for(int i = 0; i < BOSSLEVELS.Size(); i++)
-         if(sum == BOSSLEVELS[i])
-      {
-         m_BossLevel = true;
-         break;
-      }
    }
 }
 
@@ -57,15 +78,14 @@ override void WorldUnloaded(WorldEvent ev)
 
 override void UiTick()
 {
-   /* because we override finales in the MAPINFO, this should only trigger */
-   /* at the very end of the game. hopefully. */
-   /* EDIT: it didn't, so I had to add more hacks */
    if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
 
    if(m_ESeq == ESEQ_HALT && __lith_end != "")
    {
-      LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end));
+      int which =
+         LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end), 0);
+      LoadEnding("lfiles/End_Common.txt", which);
       CVar.FindCVar('__lith_end').SetString("");
    }
    else if(m_ESeq >= ESEQ_RUN)
@@ -93,7 +113,7 @@ override void WorldThingSpawned(WorldEvent ev)
       if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
-      if(m_BossLevel && th.bBOSS)
+      if(m_BossLevel != boss_none && th.bBOSS)
       {
          th.Health = int(th.Health * FRandom(2, 3));
          th.ReactionTime = 0;
@@ -105,7 +125,7 @@ override void WorldThingSpawned(WorldEvent ev)
 
 override void WorldTick()
 {
-   if(m_BossLevel)
+   if(m_BossLevel != boss_none)
       for(int i = 0, m = Level.Lines.Size(); i < m; i++)
          for(int j = 0; j < 3; j++)
             Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);

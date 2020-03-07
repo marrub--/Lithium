@@ -61,14 +61,15 @@ class OutDbl < OutDir
 end
 
 class ParseState
-   attr_reader   :out_file, :snds_dir, :file_dir, :path
+   attr_reader   :out_file, :snds_dir, :file_dir, :base_dir, :path
    attr_accessor :tks
 
-   def initialize tks
+   def initialize base, tks
       @tks      = tks
       @out_file = String.new
       @snds_dir = String.new
       @file_dir = String.new
+      @base_dir = base.dup
       @out      = []
       @ignore   = []
       @path     = []
@@ -205,7 +206,8 @@ def parse_directive state
    case (directive = tok.text)
    when "include"
       tok = tks.next.expect_after tok, :string
-      parse state.with tokenize tok.text
+      filename = state.base_dir + "/" + tok.text
+      parse state.with tokenize filename
    when "output"
       tok = tks.next.expect_after tok, :string
       state.out_file.replace tok.text
@@ -309,12 +311,10 @@ def parse state
 end
 
 common_main do
-   base = Dir.pwd
    for filename in ARGV
-      Dir.chdir File.dirname filename
-      filename = File.basename filename
+      base_dir = File.dirname filename
 
-      state = ParseState.new tokenize filename
+      state = ParseState.new base_dir, tokenize(filename)
       parse state
 
       fp = open state.out_file, "wt"
@@ -329,7 +329,6 @@ common_main do
          end
          fp.puts out
       end
-      Dir.chdir base
    end
 end
 

@@ -17,18 +17,14 @@ Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {
    ServerInt("%",   sv_difficulty, 1, 100);
    ServerFloat("x", sv_scoremul,   0, 10);
-   #if LITHIUM
    ServerBool(sv_revenge);
-   #endif
    ServerInt("min", sv_autosave, 0, 30);
-   #if LITHIUM
    ServerBool(sv_nofullammo);
    ServerBool(sv_noscoreammo);
    ServerBool(sv_wepdrop);
    ServerBool(sv_pauseinmenus);
    ServerBool(sv_nobosses);
    ServerBool(sv_nobossdrop);
-   #endif
 }
 
 Category(stx_gui);
@@ -36,13 +32,11 @@ Float("x", gui_xmul, 0.1, 2.0);
 Float("x", gui_ymul, 0.1, 2.0);
 Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
 Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
-#if LITHIUM
 Enum(gui_jpfont, 0, font_num-1, "%s", FontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
 Text(stx_jp_2);
 Text(stx_jp_3);
-#endif
 
 Category(stx_player);
 Float("x", player_damagebobmul, 0.0, 1.0);
@@ -51,16 +45,16 @@ Float("x", player_footstepvol, 0.0, 1.0);
 Float("x", player_viewtilt,    0.0, 1.0);
 Bool(player_scorelog);
 Bool(player_scoresound);
-#if LITHIUM
 Bool(player_resultssound);
-#endif
 Bool(player_invertmouse);
-#if LITHIUM
 Bool(player_rainshader);
 Bool(player_altinvuln);
-#endif
+Bool(player_bosstexts);
+Text(stx_boss_0);
+Text(stx_boss_1);
+Text(stx_boss_2);
+Text(stx_boss_3);
 
-#if LITHIUM
 Category(stx_items);
 Bool(player_teleshop);
 Bool(player_stupidpickups);
@@ -113,7 +107,6 @@ Int("/255", xhair_a, 0, 255);
 Enum(xhair_style, 1, 10, "%s", XHairName(set));
 Bool(xhair_enable);
 Bool(xhair_enablejuicer);
-#endif
 
 Category(stx_vscan);
 Int("px", scanner_xoffs, -160, 160);
@@ -123,13 +116,11 @@ Bool(scanner_slide);
 Bool(scanner_bar);
 Bool(scanner_altfont);
 
-#if LITHIUM
 if(p->num == 0) {
    Category(stx_world);
    ServerBool(sv_rain);
    ServerBool(sv_sky);
 }
-#endif
 
 #undef Category
 #undef Bool

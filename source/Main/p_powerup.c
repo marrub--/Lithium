@@ -19,7 +19,6 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-#if LITHIUM
 script_str ext("ACS") addr("Lith_DOGS")
 void Sc_DOGS(void)
 {
@@ -122,7 +121,6 @@ void Sc_GetSigil(void)
       FreezeTime(false);
    }
 }
-#endif
 
 script_str ext("ACS") addr("Lith_GiveHealthBonus")
 void Sc_GiveHealthBonus(i32 amount)

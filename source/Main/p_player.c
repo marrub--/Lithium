@@ -32,9 +32,8 @@ static struct {str on, off;} guisnd[gui_max - 1] = {
 
 /* Static Functions -------------------------------------------------------- */
 
-#if LITHIUM
 script static void P_BossWarning(struct player *p);
-#endif
+script static void P_BossText(struct player *p, i32 boss);
 
 /* Scripts ----------------------------------------------------------------- */
 
@@ -63,7 +62,6 @@ reinit:
    P_Init(p);
    P_Log_Entry(p);
    P_Upg_Enter(p);
-   #if LITHIUM
    P_Data_Load(p);
 
    if(p->num == 0)
@@ -73,7 +71,9 @@ reinit:
    }
 
    P_BossWarning(p);
-   #endif
+
+   if(p->getCVarI(sc_player_bosstexts))
+      P_BossText(p, ServCallI(sm_GetBossLevel));
 
    if(p->teleportedout) P_TeleportInAsync(p);
 
@@ -94,9 +94,7 @@ reinit:
       i32 oldmana   = p->mana;
 
       /* Pre-tick */
-      #if LITHIUM
       P_Wep_PTickPre(p); /* Update weapon info */
-      #endif
       P_Scr_PTickPre(p); /* Update score */
 
       if(!p->dead) P_Upg_PTick(p);
@@ -105,17 +103,13 @@ reinit:
       /* Tick */
       if(!p->dead)
       {
-         #if LITHIUM
          P_Inv_PTick(p);
-         #endif
 
          switch(p->activegui)
          case gui_cbi: P_CBI_PTick(p);
 
          P_Atr_PTick(p);
-         #if LITHIUM
          P_Wep_PTick(p);
-         #endif
          P_Log_PTick(p);
 
          P_Dat_PTickPst(p); /* Update engine info */
@@ -134,12 +128,10 @@ reinit:
       /* Tic passes */
       ACS_Delay(1);
 
-      #if LITHIUM
       if(p->dlg.num) {
          Dlg_Run(p, p->dlg.num);
          p->dlg.num = 0;
       }
-      #endif
 
       /* Update previous-tic values */
       p->old       = olddelta;
@@ -167,10 +159,8 @@ static void Sc_PlayerDeath(void)
 
    P_Upg_PDeinit(p);
 
-   #if LITHIUM
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit(p);
-   #endif
 
    if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
    {
@@ -179,7 +169,6 @@ static void Sc_PlayerDeath(void)
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
 
-   #if LITHIUM
    if(singleplayer)
    {
       if(ACS_GetCVar(sc_sv_revenge))
@@ -198,7 +187,6 @@ static void Sc_PlayerDeath(void)
          Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }
    }
-   #endif
 }
 
 script type("respawn")
@@ -400,7 +388,6 @@ script void P_GiveAllEXP(u64 amt)
 
 /* Static Functions -------------------------------------------------------- */
 
-#if LITHIUM
 script
 static void P_BossWarning(struct player *p)
 {
@@ -409,7 +396,59 @@ static void P_BossWarning(struct player *p)
    if(bossspawned)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
-#endif
+
+script
+static void P_BossText(struct player *p, i32 boss)
+{
+   cstr fmt;
+   switch(boss) {
+      case boss_none:
+      case boss_other:
+         return;
+      case boss_barons:      fmt = LANG "BOSS_BAR_%i_%s"; break;
+      case boss_cyberdemon:  fmt = LANG "BOSS_CYB_%i_%s"; break;
+      case boss_spiderdemon: fmt = LANG "BOSS_SPI_%i_%s"; break;
+      case boss_iconofsin:   fmt = LANG "BOSS_IOS_%i_%s"; break;
+   }
+
+   /* TODO */
+   p->logB(1, "\CgYou feel ringing in your ears...");
+   p->logB(1, "\CgSomething is calling out to you.");
+
+   ACS_Delay(35 * 4);
+
+   char text[1024];
+   for(i32 i = 0, j = 1; i < 35 * 100; i++) {
+      if(i % (35 * 10) == 0) {
+         k32 di = ACS_RandomFixed(0.1, 0.2);
+         k32 fa = ACS_RandomFixed(0.1, 0.8);
+         k32 ft = ACS_RandomFixed(0.1, 2.0);
+         k32 ya = ACS_RandomFixed(0.0, 1.0);
+         k32 ys = ACS_Sin(ya), yc = ACS_Cos(ya);
+
+         p->bobyaw   += ys * di;
+         p->bobpitch += yc * di;
+
+         ACS_FadeTo(255, 0, 0, fa, 0.0);
+         ACS_FadeTo(255, 0, 0, 0.0, ft);
+
+         StartSound(ss_xx_pain25,         lch_voice,  CHANF_LOCAL, 0.3);
+         StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL);
+
+         SetFade(fid_bosstext, 20, 1);
+         LanguageCV(text, fmt, j, p->discrim);
+         j++;
+      }
+
+      SetSize(640, 400);
+      SetClipW(0, 0, 640, 400, 640);
+      PrintTextChS(text);
+      PrintTextF(s_bigupper, CR_WHITE, 320,0, 100,0, fid_bosstext);
+      ClearClip();
+
+      ACS_Delay(1);
+   }
+}
 
 stkcall
 static void AttrRGE(struct player *p)

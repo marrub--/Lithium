@@ -36,7 +36,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr)
    if(has_ammo) {
       typegfx = sp_HUD_I_AMMO;
 
-      int x = 0;
+      i32 x = 0;
 
       if(has_nmag) {
          x = -58;

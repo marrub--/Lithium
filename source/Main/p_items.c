@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -467,6 +466,5 @@ bool Sc_ItemCanPlace(void *_item)
 
    return false;
 }
-#endif
 
 /* EOF */

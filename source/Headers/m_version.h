@@ -11,11 +11,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #define Version "Lithium 1.6.2 (Trilithionite)"
-#else
-#define Version "DoubleTap 1.0"
-#endif
 #define APIVersion Lith_v1_6_2
 #define CheckAPIVersion() \
    if(apiversion != APIVersion) { \

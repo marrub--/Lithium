@@ -1,10 +1,8 @@
-## None
-## > System
-## >> Low priority (ammo, misc)
-## >>> Medium-priority (vital)
-## >>>> High-priority (high vital)
-## >>>>> Mission-vital (powerups, keys)
-## >>>>>> Error?
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+!!include Log/Random.txt
 
 ## Health --------------------------------------------------------------------|
 == \#LOG_HealthBonus | $\#INFO_SHORT_HealthBonus
@@ -104,3 +102,5 @@
 == \#LOG_SellOrder | 0
 == \#LOG_Sell | Sold the %S for %lli\cnscr\c-.
 == \#LOG_CBI  | Installed %S.
+
+## EOF

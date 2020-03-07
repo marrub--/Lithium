@@ -15,11 +15,7 @@ play string m_Obituary;
 play bool m_Paused;
 play name m_DmgType;
 play bool m_DmgWorld;
-
-static void SetEnding(string ending)
-{
-   if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);
-}
+play int m_BossLevel;
 
 static clearscope Lith_HERMES Instance()
    {return Lith_HERMES(Find("Lith_HERMES"));}

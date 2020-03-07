@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "d_compile.h"
 
 /* Extern Functions -------------------------------------------------------- */
@@ -95,7 +94,5 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l)
 
    return STR_BEG + p;
 }
-
-#endif
 
 /* EOF */

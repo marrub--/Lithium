@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
@@ -97,6 +96,5 @@ void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score
    if(ord) p->logB(1, msg, nam, score);
    else    p->logB(1, msg, score, nam);
 }
-#endif
 
 /* EOF */

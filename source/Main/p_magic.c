@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "p_player.h"
 #include "p_hudid.h"
 #include "w_world.h"
@@ -209,6 +208,5 @@ void Sc_MagicSelect(i32 num)
       }
    }
 }
-#endif
 
 /* EOF */

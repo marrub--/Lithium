@@ -7,6 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
+#include "lzscript/Decorations/Advice.zsc"
 #include "lzscript/Decorations/Barrel.zsc"
 #include "lzscript/Decorations/Base.zsc"
 #include "lzscript/Decorations/BurningBarrel.zsc"

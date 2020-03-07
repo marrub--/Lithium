@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "d_compile.h"
 
 /* Extern Functions -------------------------------------------------------- */
@@ -287,7 +286,5 @@ script void Dlg_GetStmt(struct compiler *d)
          break;
    }
 }
-
-#endif
 
 /* EOF */

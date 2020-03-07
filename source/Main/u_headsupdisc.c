@@ -66,7 +66,7 @@ static void HUD_Ammo(struct player *p)
       PrintSprite(sp_HUD_C_BarSmall, 320,2, 205,2);
       SetClip(320-63, 205-9, heat * 63, 9);
       PrintSprite(sp_HUD_C_HeatBar, 320,2, 205,2);
-      SetClip(0, 0, 0, 0);
+      ClearClip();
    }
 }
 

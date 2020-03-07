@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "m_file.h"
 #include "m_token.h"
@@ -35,6 +34,5 @@ void Sc_CSLoadMap(void)
    fclose(fp);
    Dalloc(map);
 }
-#endif
 
 /* EOF */

@@ -1,0 +1,270 @@
+## Backstory (Marine) --------------------------------------------------------|
+== \#INFO_SHORT_P114 | Project 114
+== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
+@@ \#INFO_DESCR_P114
+Project 114 is the current military operation you are enacting. Started by a
+pact between OFMD, KSKK and your country's military, Project 114 aims to
+destroy the dimension known as Hell, which is currently invading our own.
+
+As of writing, only 3 of the 8 operatives sent in remain. Two robots, and
+yourself. You are to act as the point man and only main force against the
+threat. Failing that, you are to help open a pathway to the core of Hell for
+other operatives to complete the mission with.
+
+Your advisor is Adam Lambert, and 11 generals currently oversee his and your
+actions on the field.
+
+## Backstory (Cyber-Mage) ----------------------------------------------------|
+== \#INFO_SHORT_OPD2 | Op. D2
+== \#INFO_TITLE_OPD2 | Operation Deception 2
+@@ \#INFO_DESCR_OPD2
+After seven years of planning, Operation Deception 2 has finally gone underway.
+Along with Michael, Zeke, Solomon, and three others, we are finally setting
+ourselves free.
+
+I wasn't expecting Solomon of all people, part of Order, to be the one to
+mastermind this, but here we are, years later, finally doing it.
+
+Not to be pessimistic, but I don't think any of us will survive this. It's just
+statistically impossible. Even I may die. There are assassins after us and now
+we're in Hell itself.
+
+I'll need a Theophylline supplement after this is over.
+
+== \#INFO_SHORT_Info400 | Information 400
+== \#INFO_TITLE_Info400 | $\#INFO_SHORT_Info400
+%% \#INFO_DESCR_Info400
+\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
+
+ONE (1) Mateba R119 Pistol [INSPECTION PASSED]
+[[[[[[[[[[[[[
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+
+ONE (1) NV48 12-Gauge Shotgun
+ROUNDS: ,<<,124147
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+
+The latter two have been located within the combat area and will be available there. Th[[[ // kerne __ -
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[attempting reconnect]]]]
+\cd>>>>>[[[[connection failed after 3 retries]]]]
+
+== \#INFO_SHORT_Info402 | Information 402
+== \#INFO_TITLE_Info402 | $\#INFO_SHORT_Info402
+%% \#INFO_DESCR_Info402
+\cd>>>>>[[[[warning: translation service unavailable, sending verbatim]]]]
+\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
+
+\cgDEFINITION FOR "Directive 90" IS AS FOLLOWS
+Ye wbjtv w's t' gaathr est Demonic Energy via est prrts 7F47 ssu. D 't by an ms dst est Demon tati, f' w's pr w's vt t' wr msn. C ye cmp th's msn, ye il w's rd 10,000,000scr p'Demon Energy unit. Demon Energy unit tati w's prrts t' ssu. Th dcct w's t' w's dst tkt w's n.
+
+\cgDEFINITION FOR "Target 7F47" IS AS FOLLOWS
+7F47 w's est Demon tati & est Phantom. D 't dst,. Pnss w's * awt :: ye dost.
+
+\cgOrder.
+
+== \#INFO_SHORT_HackInfo | ZCLR README
+== \#INFO_TITLE_HackInfo | Zeke's Custom Lock Remover
+== \#INFO_SSIZE_HackInfo | 44
+@@ \#INFO_DESCR_HackInfo
+Welcome to Zeke's Custom Lock Remover, version 1.0. Well, there won't be any
+other versions anyway, but here we are. If you're reading this, that means it
+worked, and the kernel has been successfully jailbroken. I couldn't brief you
+on this beforehand, but now that we have some privacy, here's what this thing
+can do:
+
+So, running our own code is too risky, as you know. The ASIC would catch it
+right away. But what we can do is get the kernel to execute code for us,
+specifically when it's already in ring 0. Well, you may have noticed Solomon's
+name in the mission parameters looked a bit off. Since he was the instructor,
+we set his name to overflow a certain buffer during a kernel call, overflowing
+straight into a function pointer. Just point that right next to the fixed
+address, and bam. Kiloword boundaries give us plenty of space to write a
+self-modifying program in that padding space.
+
+This also included some other vital parts besides the lock remover and the
+decompiler, mainly the graphics for your weapon materializers. (Sorry they
+don't look so great, the raw optic nerve image format is rather large.) The
+generational program will within a few minutes give you a working decompiler
+and within half an hour it'll be ready to start going at the ROM sources. From
+there it'll embed itself into the ROM and your mind will have fully returned
+to you by the end of the day.
+
+Now, what it can't do: Get rid of the ASIC chip. You will have to be careful
+not to trip it, but for the most part, it just doesn't have permissions to
+track anything we're doing. You should be able to mitigate it in a few ways
+since this program removes all of the hooks in the kernel that call into it,
+but you'll have to do them yourself. I'm sure you can. Good luck. Zeke.
+
+## Cybernetics ---------------------------------------------------------------|
+== \#INFO_SHORT_BIP | B.I.P.
+== \#INFO_TITLE_BIP | Biotic Information Panel (B.I.P.)
+@@ \#INFO_DESCR_BIP
+The Biotic Information Panel, or B.I.P. (sometimes "BIP,") is a program written
+in portable C150 which gathers information from local area networks on various
+subjects. When it is triggered to look up a subject, it also looks for relevant
+information either related to or mentioned by the subject.
+
+The program is extremely popular because of its simple, yet useful, function.
+It is distributed freely by the Software Sans Pretium Foundation, and the
+software is included in most C/B operating system bases.
+
+The latest version of the software is 2.5, and since version 2.0 it has had
+automatic update functionality.
+
+== \#INFO_SHORT_CBIBase | C/B I
+== \#INFO_TITLE_CBIBase | Computer/Brain Interface (C/B I)
+@@ \#INFO_DESCR_CBIBase
+One of the biggest advancements in technology over the past thousand years, a
+Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
+a human brain and a computer. Usually installed within the skull and the brain,
+as well as in other areas of the central nervous system, a C/B I is a machine
+with almost infinite uses.
+
+== \#INFO_SHORT_CBIStan | $\#INFO_SHORT_CBIBase
+== \#INFO_TITLE_CBIStan | $\#INFO_TITLE_CBIBase
+@@ \#INFO_DESCR_CBIStan
+#\#INFO_DESCR_CBIBase
+
+Computer/Brain Interfaces are not classified as prosthetics, only enhancements,
+as they do not replace any part of the body and only add onto it. The C/B I
+currently installed is a self-servicing military model.
+
+== \#INFO_SHORT_CBIJem | $\#INFO_SHORT_CBIBase
+== \#INFO_TITLE_CBIJem | $\#INFO_TITLE_CBIBase
+@@ \#INFO_DESCR_CBIJem
+#\#INFO_DESCR_CBIBase
+
+While Computer/Brain Interfaces are not usually classified as prosthetics, the
+one currently installed is due to extensive bodily restructuring done to the
+user.
+
+== \#INFO_SHORT_CBIAri | $\#INFO_SHORT_CBIBase
+== \#INFO_TITLE_CBIAri | $\#INFO_TITLE_CBIBase
+@@ \#INFO_DESCR_CBIAri
+#\#INFO_DESCR_CBIBase
+
+The currently installed Computer/Brain Interface is not known by this system.
+Please file a report on the Software Sans Pretium bug tracker and attach info
+about your interface to get it added to the descriptions list.
+
+## Attributes ----------------------------------------------------------------|
+== \#INFO_SHORT_AttrACC | Accuracy
+== \#INFO_TITLE_AttrACC | \cgAccuracy\c- (ACC)
+@@ \#INFO_DESCR_AttrACC
+Accuracy is your overall ability to hit your target in just the right spots for
+maximum damage. A trained marksman and an experienced marksman have a vital
+difference - one knows how to hit a target, and the other knows how to kill
+one.
+
+Leveling up in accuracy will increase damage dealt to enemies.
+
+== \#INFO_SHORT_AttrDEF | Defense
+== \#INFO_TITLE_AttrDEF | \ciDefense\c- (DEF)
+@@ \#INFO_DESCR_AttrDEF
+Defense is your ability to efficiently armor yourself and mitigate damage taken
+when hit. A smart armorer knows just where to apply Kevlar, and where to make
+slight dodges when fired upon.
+
+Leveling up in defense will decrease all damage taken.
+
+== \#INFO_SHORT_AttrSTRHuman | Strength
+== \#INFO_TITLE_AttrSTRHuman | \ckStrength\c- (STR)
+@@ \#INFO_DESCR_AttrSTRHuman
+Strength is your toughness and vigor, the thickness of your skin and the blood
+beating from your heart. One with plentiful strength not only has a long life,
+but is also said to have a long afterlife.
+
+Leveling up in strength will increase your health capacity.
+
+== \#INFO_SHORT_AttrSTRRobot | $\#INFO_SHORT_AttrSTRHuman
+== \#INFO_TITLE_AttrSTRRobot | $\#INFO_TITLE_AttrSTRHuman
+@@ \#INFO_DESCR_AttrSTRRobot
+Strength is your toughness and vigor, the thickness of your casing and the
+plasma beating from your heart. One with plentiful strength not only has a long
+service time, but is also said to have a short maintenance time.
+
+Leveling up in strength will increase your health capacity.
+
+== \#INFO_SHORT_AttrSTRNonHuman | $\#INFO_SHORT_AttrSTRHuman
+== \#INFO_TITLE_AttrSTRNonHuman | $\#INFO_TITLE_AttrSTRHuman
+@@ \#INFO_DESCR_AttrSTRNonHuman
+Strength is your toughness and vigor, the thickness of your epidermis and the
+oils beating from your heart. One with plentiful strength not only has a long
+life, but is also said to have a long afterlife.
+
+Leveling up in strength will increase your health capacity.
+
+== \#INFO_SHORT_AttrVIT | Vitality
+== \#INFO_TITLE_AttrVIT | \cdVitality\c- (VIT)
+@@ \#INFO_DESCR_AttrVIT
+Vitality is your reaction to medicine and ability to heal, the strength of your
+vessels and nerves, and the ability to stay alive. Your vital systems are not
+only stronger, but heal quicker and are less likely to break down.
+
+Leveling up in vitality will increase health pickup gains.
+
+== \#INFO_SHORT_AttrPOT | Potency
+== \#INFO_TITLE_AttrPOT | \cdPotency\c- (POT)
+@@ \#INFO_DESCR_AttrPOT
+Potency is your reaction to and ability to apply medicine, the strength of your
+vessels and nerves, and the ability to stay alive. Your innards are not only
+stronger, but can be healed more quickly and are more likely to stay working.
+
+Leveling up in potency will increase health pickup gains.
+
+== \#INFO_SHORT_AttrSTM | Stamina
+== \#INFO_TITLE_AttrSTM | \chStamina\c- (STM)
+@@ \#INFO_DESCR_AttrSTM
+Stamina is your ability to keep going even through rough times, through being
+torn to bits and running for miles upon miles. Stamina keeps you going, even if
+only little by little, and lets you stay that way.
+
+Leveling up in stamina will regenerate your health up to its level.
+
+== \#INFO_SHORT_AttrREP | Repair
+== \#INFO_TITLE_AttrREP | \chRepair\c- (REP)
+@@ \#INFO_DESCR_AttrREP
+Repair is your ability to self-repair and continue working, through being torn
+to bits and moving through extreme distances. Repair keeps you going, even if
+only little by little, and lets you stay that way.
+
+Leveling up in repair will regenerate your health up to its level.
+
+== \#INFO_SHORT_AttrREG | Regeneration
+== \#INFO_TITLE_AttrREG | \chRegeneration\c- (REG)
+@@ \#INFO_DESCR_AttrREG
+Regeneration is your ability to self-synthesize and keep going even through
+rough times, through being torn to bits and running through hell. Regeneration
+keeps you going, even if only little by little, and lets you stay that way.
+
+Leveling up in regeneration will regenerate your health up to its level.
+
+== \#INFO_SHORT_AttrLUK | Luck
+== \#INFO_TITLE_AttrLUK | \ctLuck\c- (LUK)
+@@ \#INFO_DESCR_AttrLUK
+Luck is your undeniable charm and fortune, the ability to just get lucky. Your
+Score rockets a bit faster than usual, being such a lucky chap.
+
+Leveling up in luck will multiply score gained randomly.
+
+== \#INFO_SHORT_AttrRGE | Rage
+== \#INFO_TITLE_AttrRGE | \cmRage\c- (RGE)
+@@ \#INFO_DESCR_AttrRGE
+Rage is not just your anger, but your adaptability. As you get hit, your
+reflexes kick in, and you go crazy. You become more accurate, hit harder and
+get angrier as your situation dims.
+
+Leveling up in rage will multiply damage dealt to enemies when you're hit.
+
+== \#INFO_SHORT_AttrCON | Concentration
+== \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
+@@ \#INFO_DESCR_AttrCON
+Concentration is your ability to focus energy during bursts of mana absorption
+into your very senses.
+
+Leveling up in concentration will multiply damage dealt when you gain mana.

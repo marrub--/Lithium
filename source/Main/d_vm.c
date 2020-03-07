@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "w_world.h"
 #include "p_player.h"
@@ -1020,6 +1019,5 @@ void Sc_RunTerminal(i32 num)
       }
    }
 }
-#endif
 
 /* EOF */

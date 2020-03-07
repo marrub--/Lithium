@@ -1,0 +1,14 @@
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+++ \#ENDING_Credits    | End/Credits.txt
+++ \#ENDING_Dedication | End/Dedication.txt
+
+++ \#ENDING_TimeOut_1 | End/TimeOut1.txt
+++ \#ENDING_TimeOut_2 | End/TimeOut2.txt
+
+++ \#ENDING_IconOfSin_Stan | End/Stan/IconOfSin.txt
+++ \#ENDING_IconOfSin_Jem  | End/Jem/IconOfSin.txt
+
+## EOF

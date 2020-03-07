@@ -1,0 +1,263 @@
+## Marine --------------------------------------------------------------------|
+== \#INFO_SHORT_Fist | Knife
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Pistol | Pistol
+== \#INFO_TITLE_Pistol | Custom Ka Haa'umi Pistol
+@@ \#INFO_DESCR_Pistol
+Originally a vanilla mod Ka Haa'umi pistol manufactured by Omakeda, this gun
+has been repaired enough times that it's practically indestructible now.
+
+Having used it for a whole decade, this pistol still services you today,
+without fail.
+
+Fires fourteen custom high-grade vacuum-enabled .374 Express rounds. Can be
+reloaded easily, since you duct-taped a magazine holder on the side. Features
+a small CB-Scope similar to that of most other Omakeda weapons.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Revolver | Revolver
+== \#INFO_TITLE_Revolver | $\#INFO_SHORT_Revolver
+@@ \#INFO_DESCR_Revolver
+Other than this weapon being made on Earth, all you need to know about it is
+that it fires six Teflon-plated .50 Action Express rounds and loads with a
+break on the top. Crack some skulls with it.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Shotgun | Shotgun
+== \#INFO_TITLE_Shotgun | Hiku Mk.2 Shotgun
+@@ \#INFO_DESCR_Shotgun
+Manufactured by Omakeda, this shotgun fires both regular 8-gauge buck and a
+small plasma charge at the same time. This enables the shotgun to be used both
+as a rifle with railgun-like capabilities and a standard shotgun.
+
+The plasma charge is powered by a small self-replenishing battery lodged in
+the firing mechanism.
+
+Most military models come with a CB-Scope.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_ShotgunUpgr | $\#UPGRADE_TITLE_GaussShotty
+== \#INFO_TITLE_ShotgunUpgr | Hiku Mk.2 Shotgun Gauss Mod
+@@ \#INFO_DESCR_ShotgunUpgr
+During the short Avian-Sapiens war of
+1401 NE, A.O.F Inc. ran a line of modified Hiku Mk.2 shotguns that removed the
+shell firing mechanism and replaced it with a high-power photon condenser.
+
+This both removes the need to chamber rounds and gives a nice boost in fire
+rate. The gun is, essentially, completely different in use.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_ShotgunUpg2 | $\#UPGRADE_TITLE_PoisonShot
+== \#INFO_TITLE_ShotgunUpg2 | Hiku Mk.2 Shotgun Poison Mod
+@@ \#INFO_DESCR_ShotgunUpg2
+A modification for the Hiku Mk.1 shotgun made by A.O.F Inc. for research
+purposes. Uses a rather small container of poison that refills itself
+automatically, contained in the loading mechanism, to infect enemies with
+deadly corrosive acid fused with deadly neurotoxin.
+
+This rather terrifying upgrade was never updated to the Mk.2 model. The
+internal structure is similar enough that one may still use it with the Mk.2,
+but the plasma firing mechanism must be disabled.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_LazShotgun | Laser Shotgun
+== \#INFO_TITLE_LazShotgun | Kaether Photon Rifle
+@@ \#INFO_DESCR_LazShotgun
+Made during a war on Earth by a long nameless company, this weapon excels in
+penetrating enemies with pure energy.
+
+A superconducting coil in the middle is used to channel tons of energy into a
+photon accelerator at extremely quick speeds, recharged by cocking the gun.
+
+Great for cooking chicken.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_SuperShotgun | Super Shotgun
+== \#INFO_TITLE_SuperShotgun | $\#INFO_SHORT_SuperShotgun
+@@ \#INFO_DESCR_SuperShotgun
+Puts out 2x2 4ga shells made to hunt the gigantic beasts of the planet Ch'ari.
+
+The barrels are extremely tempered so as to not melt under harsh environments,
+and have a unique dual-loading system. This dual-loading system allows you to
+fire four shots in rapid succession without a large amount of recoil by
+placing additional shells into both barrels.
+
+It is currently unknown how this actually works, and it possibly uses
+4-dimensional geometry.
+
+This weapon bears manufacturer marks in a non-human language and is known only
+as the Super Shotgun.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_CombatRifle | Combat Rifle
+== \#INFO_TITLE_CombatRifle | AllPoint 75-b Assault Rifle
+@@ \#INFO_DESCR_CombatRifle
+AllPoint's 75-b model full-auto AR, produced for military and government
+enforcer use. Also the single best-selling weapon in AllPoint's catalog.
+
+Firing 1,050 rounds per minute of .467 caliber Teflon-plated death, this
+beautiful gun works in both harsh atmospheres and vacuums thanks to a
+super-tough exterior made out of titanium.
+
+Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade
+at a time, but packs a great punch.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_RifleUpgr | $\#UPGRADE_TITLE_RifleModes
+== \#INFO_TITLE_RifleUpgr | AllPoint 75-c Modal Trigger
+@@ \#INFO_DESCR_RifleUpgr
+Looking at the design failures in the 75-b, AllPoint sought to make an
+improvement by way of a modification. Thus, they gathered, they could take
+parts from their 80-g Sniper Rifle and fit them snugly into a combat rifle.
+
+The 75-c Modal Trigger enables a third firing mode in which four two-round
+bursts are fired sequentially. Using this mode also enables a partial
+CB-Scope, which unfortunately does little more than obstruct your view.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_RifleUpg2 | $\#UPGRADE_TITLE_LaserRCW
+== \#INFO_TITLE_RifleUpg2 | SF-209 Laser Rifle
+@@ \#INFO_DESCR_RifleUpg2
+This modification does little more than replace the firing system with one
+much more similar to a photon rifle. The combat effectiveness of the rifle is
+increased quite a lot, as it now fires 4tW penetrating beams capable of
+ripping into most unarmored vehicles.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_SniperRifle | Sniper Rifle
+== \#INFO_TITLE_SniperRifle | Facer AM-49d Sniper Rifle
+@@ \#INFO_DESCR_SniperRifle
+An extremely strong rifle which fires .50 BMG rounds, able to destroy most
+living targets completely and penetrate weakly armored vehicles.
+
+The main production of these weapons spanned about 20 years, and they were
+sold to mercenaries in bulk. For a long time, this rifle had been the sniper's
+main weapon of choice.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_GrenadeLauncher | Grenade Launcher
+== \#INFO_TITLE_GrenadeLauncher | SYM4.3 D.671 EXPLOSIVE LAUNCHER
+@@ \#INFO_DESCR_GrenadeLauncher
+Boasting extreme speed, highly modifiable parts, and a sleek exterior design,
+the D.671 will eradicate any foe you put against it.
+
+After SYM4.3 put it on the market, this weapon was ultimately ignored because
+of lack of advertising and early rumors regarding how weakly rockets are
+initially propelled out the rifle.
+
+This seems to use nanomachines or some similar technology to propel rockets
+after they've been ignited and left the barrel; thus causing a small lag
+before the rocket takes off fully.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_LauncherUpgr | $\#UPGRADE_TITLE_ChargeRPG
+== \#INFO_TITLE_LauncherUpgr | UE-1 "Eight-Ball" Revolving Launcher
+@@ \#INFO_DESCR_LauncherUpgr
+Explosives are fun, as we all know, and Unreal Arms agreed with the sentiment.
+Eight high-yield rocket-propelled grenades are loaded one at a time into the
+launcher until finally the load is unleashed.
+
+The secondary trigger can be held to select the mode of fire -- the default
+mode shoots all eight in a horizontal line forward. The second mode shoots the
+rockets in a spiral pattern for maximum damage on one area, and the third and
+final mode hurls all of the grenades out of their rocket casings.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_LauncherUpg2 | $\#UPGRADE_TITLE_HomingRPG
+== \#INFO_TITLE_LauncherUpg2 | SYM4.3 D.788 HOMING ROCKET SYSTEM
+@@ \#INFO_DESCR_LauncherUpg2
+This is a modification that adds an extra nanomachine dispenser to the gun's
+PCI bus, which attaches several hundred thousand nanobots to the grenade when
+it is fired that push it to angle toward the enemy.
+
+Similar in concept to traditional rocket-based homing systems, this design is
+both more space-efficient and much more accurate, allowing it to be used even
+in a launcher as small as the D.671.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_PlasmaRifle | Plasma Rifle
+== \#INFO_TITLE_PlasmaRifle | AllPoint 68-n Plasma Rifle
+@@ \#INFO_DESCR_PlasmaRifle
+In 1025 NE a paramilitary group commissioned Maxim-Danil Defense Org to make
+several high-grade weapons. After MDDO went defunct, their assets were sold to
+several companies.
+
+One of those weapons, owned now by AllPoint and sold as the "68-n Plasma
+Rifle", is their second best selling weapon.
+
+The primary fire mode emits 7.52tW per bolt at approximately 2,800 bolts per
+minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute.
+This thing will make Swiss cheese out of anything in its path.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_PlasmaUpgr | $\#UPGRADE_TITLE_PlasLaser
+== \#INFO_TITLE_PlasmaUpgr | AllPoint 68-o Plasmatic Laser
+@@ \#INFO_DESCR_PlasmaUpgr
+Having their second best-seller also be complete trash at aiming pissed
+AllPoint staff off so much that they completely redesigned the weapon's
+internals to boast a 37.96tW high-speed ion condenser that fires pure death
+out of the rifle hotter than the sun.
+
+No, really. It's probably hotter than the sun. If you were like, 700km away
+from it or something, but still.
+
+The upgrade was, unfortunately, woefully expensive. It has been sold only to
+private investors for quite some time now, but thankfully, your employer is
+one of them.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_PlasmaUpg2 | $\#UPGRADE_TITLE_PartBeam
+== \#INFO_TITLE_PlasmaUpg2 | SF-2012 Ion Acceleration Cannon
+@@ \#INFO_DESCR_PlasmaUpg2
+The SF-2012 IAC is quite ubiquitous among Semaphore's arsenal, being one of
+their few hand-held weapons, and one of their very few modifications. The IAC
+focuses a ray of ions, gathers energy in the rifle, and then fires an charge
+through the ion ray all at once, creating a huge plasmatic explosion in a very
+accurate line.
+
+This weapon has a reputation for being rather useless in defending a space
+ship from the inside, as it ends up melting holes in the hull.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_BFG9000 | Omega Cannon
+== \#INFO_TITLE_BFG9000 | $\#INFO_SHORT_BFG9000
+@@ \#INFO_DESCR_BFG9000
+This weapon was developed in another dimensional plane, where magic is still
+usable. Employs an extremely complex magical pattern buffer that takes in
+condensed demonic energy and spits out whatever it pleases.
+
+The currently installed pattern buffer is an explosive cannonball, which can
+steam-roll pretty much anything. Comes with a CB-Scope, but it isn't usable
+for some reason.
+
+This weapon was acquired by your employers via the black market group "Cid"
+for a hefty price. Take care of it.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_CannonUpgr | $\#UPGRADE_TITLE_PunctCannon
+== \#INFO_TITLE_CannonUpgr | Omega Cannon: Punctuator Buffer
+@@ \#INFO_DESCR_CannonUpgr
+A pattern buffer for the Omega Cannon which emits an explosive bolt that does
+damage by penetrating walls with explosives, via magic.
+
+How this buffer was sent here is unknown, as no living being in this dimension
+can enter the Super Dimension, where it was created.
+
+Popular theory among black market traders suggests that it could have been sent
+here because the creator of the Omega Cannon wasn't satisfied with its power,
+and wanted whoever attained it to be all-powerful.
+
+Also, the CB-Scope works again, somehow.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_CannonUpg2 | $\#UPGRADE_TITLE_OmegaRail
+== \#INFO_TITLE_CannonUpg2 | Omega Cannon: Railgun
+@@ \#INFO_DESCR_CannonUpg2
+With years of reverse engineering research put into the Omega Cannon by
+several groups, a photon accelerator was developed which could use the Omega
+Cannon's pattern buffer system to create abhorrent amounts of energy.
+
+With this, a gigantic red beam of destruction with an ungodly amount of heat
+and energy is fired out of the cannon, causing most anything in its path to be
+absolutely destroyed.

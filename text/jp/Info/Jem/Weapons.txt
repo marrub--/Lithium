@@ -1,0 +1,148 @@
+## Cyber-Mage ----------------------------------------------------------------|
+== \#INFO_SHORT_CFist | マナ吸水管
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Mateba | マテバ
+== \#INFO_TITLE_Mateba | マテバR119
+@@ \#INFO_DESCR_Mateba
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MatebaUpgr | \cdFinirentur\c-, \cgRussorum\c- 19
+@@ \#INFO_DESCR_MatebaUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_ShockRifle | ショックライフル
+== \#INFO_TITLE_ShockRifle | 自家製ショックライフル
+@@ \#INFO_DESCR_ShockRifle
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_ShockRifUpgr | Shock Charge
+@@ \#INFO_DESCR_ShockRifUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_ShockRifUpg2 | Electric Binding
+@@ \#INFO_DESCR_ShockRifUpg2
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_SPAS | ショットガン
+== \#INFO_TITLE_SPAS | NV48 12ゲージショットガン
+@@ \#INFO_DESCR_SPAS
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_SPASUpgr | \cdInvalidassero\c-, \cgRussorum\c- 14
+@@ \#INFO_DESCR_SPASUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_SPASUpg2 | NV48-1 Shell Auto-loader
+@@ \#INFO_DESCR_SPASUpg2
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_SMG | サブマシンガン
+== \#INFO_TITLE_SMG | SYM4.3 D.22 MODEL M SUBMACHINE GUN
+@@ \#INFO_DESCR_SMG
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_SMGUpgr | Arms Annex F474
+@@ \#INFO_DESCR_SMGUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_SMGUpg2 | Arms Annex 138D5
+@@ \#INFO_DESCR_SMGUpg2
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_SMGUpg3 | SYM4.3 D.24 MODEL M SAFE TRIGGER
+@@ \#INFO_DESCR_SMGUpg3
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_IonRifle | イオンライフル
+== \#INFO_TITLE_IonRifle | KDA「Thrown」モデル11号イオンライフル
+@@ \#INFO_DESCR_IonRifle
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_IonRifleUpgr | KDA「Radiator」モデル11号イオナイザー
+@@ \#INFO_DESCR_IonRifleUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_IonRifleUpg2 | KDA「Overloader」モデル11号オバーロードチャージャー
+@@ \#INFO_DESCR_IonRifleUpg2
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_CPlasmaRifle | プラズマライフル
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_CPlasmaUpgr | MD 47.65.69.73.74 パルスチャージャー
+@@ \#INFO_DESCR_CPlasmaUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_StarDestroyer | 星砕き砲
+== \#INFO_TITLE_StarDestroyer | $\#INFO_SHORT_StarDestroyer
+@@ \#INFO_DESCR_StarDestroyer
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_ShipGunUpgr | The Forsaken Longinus Solspear
+@@ \#INFO_DESCR_ShipGunUpgr
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_ShipGunUpg2 | The Galliant Surge of Destiny
+@@ \#INFO_DESCR_ShipGunUpg2
+翻訳なし
+
+## Cyber-Mage Magic ----------------------------------------------------------|
+== \#INFO_SHORT_Blade | ブレード
+== \#INFO_TITLE_Blade | \cdSfregiassero\c-, \ciAurantiorum\c- 2
+@@ \#INFO_DESCR_Blade
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Delear | ディリアン
+== \#INFO_TITLE_Delear | \cdDelerentur Ex\c-, \ciAurantiorum\c- 24
+@@ \#INFO_DESCR_Delear
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Feuer | フューア
+== \#INFO_TITLE_Feuer | \cdIncenderentur Ex\c-, \ciAurantiorum\c- 32
+@@ \#INFO_DESCR_Feuer
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Rend | ロミエッタ
+== \#INFO_TITLE_Rend | \cdFinderentur Ex\c-, \ciAurantiorum\c- 4
+@@ \#INFO_DESCR_Rend
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Hulgyon | ハルギョン
+== \#INFO_TITLE_Hulgyon | \cdHumarentur Ex\c-, \ciAurantiorum\c- 16
+@@ \#INFO_DESCR_Hulgyon
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_StarShot | ホシュ’ダンマ
+== \#INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
+@@ \#INFO_DESCR_StarShot
+翻訳なし
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Cercle | セルス・デ・ラ・モルテ
+== \#INFO_TITLE_Cercle | \cdPeccarentur Ex\c-, \cgRussorum\c- 7
+@@ \#INFO_DESCR_Cercle
+翻訳なし

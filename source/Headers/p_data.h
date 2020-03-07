@@ -1,5 +1,4 @@
 /* pk7/lzscript/Constants/p_data.zsc
- * pk7_dt/dtzsc/pdata.zsc
  */
 /*
  * ---------------------------------------------------------------------------|
@@ -55,7 +54,6 @@ enum /* PClass */
    pcl_assassin  = 1 << 4,
    pcl_darklord  = 1 << 5,
    pcl_thoth     = 1 << 6,
-   pcl_doubletap = 1 << 7,
 
    /* Groups */
    pcl_outcasts   = pcl_marine    | pcl_cybermage,
@@ -63,9 +61,9 @@ enum /* PClass */
    pcl_intruders  = pcl_assassin  | pcl_darklord | pcl_thoth,
 
    /* Lifeform Type */
-   pcl_human    = pcl_marine    | pcl_cybermage | pcl_assassin,
-   pcl_nonhuman = pcl_wanderer  | pcl_darklord  | pcl_thoth,
-   pcl_robot    = pcl_informant | pcl_doubletap,
+   pcl_human    = pcl_marine   | pcl_cybermage | pcl_assassin,
+   pcl_nonhuman = pcl_wanderer | pcl_darklord  | pcl_thoth,
+   pcl_robot    = pcl_informant,
 
    /* Misc. Abilities */
    pcl_any       = pcl_human | pcl_nonhuman | pcl_robot,

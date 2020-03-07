@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -248,6 +247,5 @@ void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
 
    TriggerBoss();
 }
-#endif
 
 /* EOF */

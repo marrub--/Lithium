@@ -1,5 +1,4 @@
 /* pk7/lzscript/Constants/w_data.zsc
- * pk7_dt/dtzsc/wdata.zsc
  */
 /*
  * ---------------------------------------------------------------------------|
@@ -128,8 +127,19 @@ enum /* Lith_Channel */
    lch_reload2,
    lch_reload3,
    lch_scope,
+   lch_voice2,
    lch_weapon2,
    lch_weapon3,
+};
+
+enum /* BossType */
+{
+   boss_none,
+   boss_barons,
+   boss_cyberdemon,
+   boss_spiderdemon,
+   boss_iconofsin,
+   boss_other,
 };
 
 /* EOF */

@@ -84,7 +84,6 @@ i32 UniqueID(i32 tid)
 
 /* Static Functions -------------------------------------------------------- */
 
-#if LITHIUM
 script
 static void CheckEnemyCompat(void)
 {
@@ -165,7 +164,6 @@ static void UpdateGame(void)
    }
    #undef Update
 }
-#endif
 
 static void GetDebugInfo(void)
 {
@@ -185,10 +183,8 @@ static void MInitPre(void)
 {
    Dbg_Log(log_dev, "%s", __func__);
 
-   #if LITHIUM
    CheckModCompat();
    UpdateGame();
-   #endif
 }
 
 static void GInit(void)
@@ -199,11 +195,9 @@ static void GInit(void)
    Dbg_Log(log_dev, "%s", __func__);
 
    Upgr_GInit();
-   #if LITHIUM
    Wep_GInit();
 
    CheckEnemyCompat();
-   #endif
 
    game         = ACS_GetCVar(sc_game);
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
@@ -219,7 +213,6 @@ static void MInitPst(void)
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   #if LITHIUM
    payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
    payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
 
@@ -232,7 +225,6 @@ static void MInitPst(void)
       dorain = true;
       W_DoRain();
    }
-   #endif
 
    modinit = true;
 }
@@ -241,11 +233,10 @@ static void MInit(void)
 {
    extern void Upgr_MInit(void);
    extern void Shop_MInit(void);
+   extern void Dlg_MInit(void);
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   #if LITHIUM
-   extern void Dlg_MInit(void);
    Dlg_MInit();
 
    islithmap = (MapNum & LithMapMask) == LithMapMagic;
@@ -253,7 +244,6 @@ static void MInit(void)
    pauseinmenus = singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
 
    soulsfreed = 0;
-   #endif
 
    /* Init a random seed from the map. */
    mapseed = ACS_Random(0, INT32_MAX);
@@ -281,7 +271,6 @@ static void HInitPre(void)
    if(unloaded)
       mapscleared++;
 
-   #if LITHIUM
    DmonInit();
    bossspawned = false;
 
@@ -297,7 +286,6 @@ static void HInitPre(void)
       else
          ACS_ChangeSky(s_LITHSKS1, s_LITHSKS1);
    }
-   #endif
 }
 
 static void HInit(void)
@@ -306,13 +294,11 @@ static void HInit(void)
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   #if LITHIUM
    if(!ACS_GetCVar(sc_sv_nobosses))
       Boss_HInit();
 
    /* Payout, which is not done on the first map. */
    if(mapscleared != 0) Scr_HInit();
-   #endif
 
    /* Cluster messages. */
    #define Message(cmp, n, name) \
@@ -332,7 +318,6 @@ static void HInit(void)
       Message(Cluster == 10, 4, st_mail_secret2);
    }
 
-   #if LITHIUM
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop) ||
       dbgflag & dbgf_items)
@@ -340,7 +325,6 @@ static void HInit(void)
       for(i32 i = 0; i < cupg_max; i++)
          CBI_Install(i);
    }
-   #endif
 
    hubinit = true;
 }
@@ -358,7 +342,6 @@ begin:
     */
    if(hubinit && ACS_Timer() < 2) hubinit = false;
 
-   #if LITHIUM
    if(ACS_GameType() == GAME_TITLE_MAP) {
       script extern void W_Title(void);
       W_Title();
@@ -367,7 +350,6 @@ begin:
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
-   #endif
 
    Dbg_Log(log_dev, "%s", __func__);
 
@@ -431,13 +413,11 @@ begin:
          goto begin;
       }
 
-      #if LITHIUM
       if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
          ServCallI(sm_SetEnding, st_timeout);
          ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION, -1);
          return;
       }
-      #endif
 
       i32 secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       i32 kills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
@@ -456,7 +436,6 @@ begin:
       prevkills   = kills;
       previtems   = items;
 
-      #if LITHIUM
       if(enemycheck && !(dbgflag & dbgf_nomon)) {
          extern void DmonDebugInfo(void);
          DmonDebugInfo();
@@ -472,7 +451,6 @@ begin:
       }
 
       Dbg_Stat("mission%%: %i\n", missionprc);
-      #endif
 
       ACS_Delay(1);
 
@@ -497,9 +475,7 @@ static void Sc_WorldUnload(void)
    unloaded = true;
    Dbg_Log(log_dev, "%s", __func__);
 
-   #if LITHIUM
    CBI_InstallSpawned();
-   #endif
 
    for_player() {
       p->setActivator();
@@ -512,7 +488,17 @@ static void Sc_WorldUnload(void)
 script_str ext("ACS") addr("Lith_Finale")
 void Sc_Finale(void)
 {
-   ServCallI(sm_SetEnding, st_normal);
+   i32 boss = ServCallI(sm_GetBossLevel);
+   str which;
+   switch(boss) {
+      case boss_none:
+      case boss_other:       which = st_normal;      break;
+      case boss_barons:      which = st_barons;      break;
+      case boss_cyberdemon:  which = st_cyberdemon;  break;
+      case boss_spiderdemon: which = st_spiderdemon; break;
+      case boss_iconofsin:   which = st_iconofsin;   break;
+   }
+   ServCallI(sm_SetEnding, which);
    ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 

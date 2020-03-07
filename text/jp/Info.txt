@@ -1,0 +1,18 @@
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+!!include Info/Corporations.txt
+!!include Info/Enemies.txt
+!!include Info/Extra.txt
+!!include Info/Items.txt
+!!include Info/Places.txt
+!!include Info/Upgrades.txt
+!!include Info/Yourself.txt
+
+!!include Info/Jem/Weapons.txt
+!!include Info/Stan/Weapons.txt
+
+!!include Info/Outcasts/Weapons.txt
+
+## EOF

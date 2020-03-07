@@ -18,7 +18,6 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-#if LITHIUM
 static void HUD_Ammo(struct player *p)
 {
    struct invweapon const *wep = p->weapon.cur;
@@ -122,7 +121,6 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
       PrintSpriteA(gfx, 88-xx,1, 214+y,1, (20 - i) / 20.0);
    }
 }
-#endif
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -145,7 +143,6 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
 
    HUD_Log(p, CR_GREEN, 0, 0);
 
-   #if LITHIUM
    HUD_KeyInd(p, 320, 20, true, 0.8);
    HUD_Score(p, "%s\Cnscr", p->score, s_cnfont, s"j", 320,2, 3,1);
 
@@ -157,7 +154,6 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
    /* Status */
    HUD_Ammo(p);
    HUD_Health(p, upgr);
-   #endif
 }
 
 /* EOF */

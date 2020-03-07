@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "p_savedata.h"
@@ -96,6 +95,5 @@ void P_Data_Load(struct player *p)
       Save_EndLoad(save);
    }
 }
-#endif
 
 /* EOF */

@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "w_monster.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -390,6 +389,5 @@ void Sc_MonsterFinalized(void)
    ifauto(dmon_t *, m, DmonSelf())
       OnFinalize(m);
 }
-#endif
 
 /* EOF */

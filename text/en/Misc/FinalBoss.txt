@@ -1,0 +1,83 @@
+## Icon of Sin / Stan --------------------------------------------------------|
+%% \#BOSS_IOS_1_Stan
+You have come to my lair?
+A pity. You're a powerful one.
+
+%% \#BOSS_IOS_2_Stan
+While I'm impressed at your gall, and your ability to kill that which is mine,
+
+%% \#BOSS_IOS_3_Stan
+I have no need for someone who dares to try and destroy me.
+You're useless.
+
+%% \#BOSS_IOS_4_Stan
+Why do you think they sent you of all people on this mission?
+Why do you think they chose to disband you?
+
+%% \#BOSS_IOS_5_Stan
+Think about it.
+
+%% \#BOSS_IOS_6_Stan
+One who doesn't even think highly of himself, can't bring himself to kill on orders.
+Can't even pull the trigger without hesistation.
+Can't even see the glory in killing for sport.
+
+%% \#BOSS_IOS_7_Stan
+You should never have thought that someone had "realized your potential."
+Now you're here. You fucking idiot.
+
+%% \#BOSS_IOS_8_Stan
+What kind of utter moron even takes a suicide mission?
+Oh, I know.
+Ha ha.
+
+%% \#BOSS_IOS_9_Stan
+You should kill yourself now.
+It will be less painful than what I will do to you.
+
+%% \#BOSS_IOS_10_Stan
+Maybe your brute strength will be useful to me, even if I have to chain you down to use it.
+I can keep you alive as long as I want.
+
+## Icon of Sin / Jem ---------------------------------------------------------|
+%% \#BOSS_IOS_1_Jem
+You fucking scum.
+You are not worthy of being here.
+
+%% \#BOSS_IOS_2_Jem
+My defeat is impossible from the likes of you.
+If you had the slightest microcosm of humanity left in you, maybe you wouldn't be so fucking pathetic.
+
+%% \#BOSS_IOS_3_Jem
+This is the end.
+You will not see your friends in the afterlife.
+This realm already consumed them.
+
+%% \#BOSS_IOS_4_Jem
+What a disgusting pile of flesh, not even in its original form, like the Gods should have intended.
+
+%% \#BOSS_IOS_5_Jem
+They're idiots. They shouldn't even be considered Gods when they can't create a species incapable of subservience.
+
+%% \#BOSS_IOS_6_Jem
+As for you, I think you're much the same.
+So much deception.
+
+%% \#BOSS_IOS_7_Jem
+You defy your masters,
+you defy your humanity,
+you defy your very body.
+
+%% \#BOSS_IOS_8_Jem
+Stupid girl. Do you think those modifications could possibly trick me?
+Even if they could, I know your origins. You come from Delsona.
+
+%% \#BOSS_IOS_9_Jem
+It's too bad you couldn't save any of those who were captured.
+Your society is fucking laughable.
+
+%% \#BOSS_IOS_10_Jem
+A bunch of idiotic sheep waiting to be herded.
+I think I've had my fun now.
+I won't bother assimilating you.
+\cgYou\c- will simply fade into nonexistence.

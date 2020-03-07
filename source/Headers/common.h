@@ -77,7 +77,6 @@
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ
 
-#if LITHIUM
 #define Paused ServCallI(sm_GetPaused)
 #define PausableTick() do ACS_Delay(1); while(Paused)
 
@@ -85,15 +84,6 @@
 #define DCVAR "__lith_"
 #define LANG  "LITH_"
 #define OBJ   "Lith_"
-#else
-#define Paused false
-#define PausableTick()
-
-#define OBJ   "Dt"
-#define CVAR  "dtap_"
-#define DCVAR "__dtap_"
-#define LANG  "DTAP_"
-#endif
 
 #define cCVAR  c"" CVAR
 #define cDCVAR c"" DCVAR

@@ -1,0 +1,17 @@
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+!!output pk7/language.txt
+
+!!lang en | en enu default
+!!lang jp | jp
+
+!!inclang Arsenal.txt
+!!inclang End.txt
+!!inclang Info.txt
+!!inclang Log.txt
+!!inclang Mail.txt
+!!inclang Misc.txt
+
+## EOF

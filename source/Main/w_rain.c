@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -75,6 +74,5 @@ void Sc_RainDropSpawn(void)
       if(dist < rain_dist) rain_dist = dist;
    }
 }
-#endif
 
 /* EOF */

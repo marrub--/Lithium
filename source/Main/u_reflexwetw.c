@@ -39,9 +39,7 @@ static void DodgeView(struct player *p)
 stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
 {
-   #if LITHIUM
    p->speedmul += 0.3;
-   #endif
    UData.charge = CHARGE_MAX;
    UData.leaped = 0;
 }
@@ -49,9 +47,7 @@ void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_ReflexWetw_Deactivate(struct player *p, struct upgrade *upgr)
 {
-   #if LITHIUM
    p->speedmul -= 0.3;
-   #endif
 }
 
 script

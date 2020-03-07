@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "d_compile.h"
 
 /* Static Functions -------------------------------------------------------- */
@@ -237,7 +236,5 @@ void Dlg_MInit(void)
 
    if(dbglevel & log_dlg) PrintDbg();
 }
-
-#endif
 
 /* EOF */

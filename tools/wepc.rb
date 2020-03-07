@@ -121,7 +121,6 @@ enum /* RifleMode */
 _end_h_
 #{generated_header "wepc"}
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
@@ -165,7 +164,6 @@ i32 P_Wep_FromName(struct player *p, i32 name) {
 
    return weapon_unknown;
 }
-#endif
 
 /* EOF */
 _end_c_

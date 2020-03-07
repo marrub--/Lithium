@@ -34,6 +34,7 @@ enum
    fid_blade,
    fid_result,
    fid_result2,
+   fid_bosstext,
 };
 
 #endif

@@ -1,3 +1,9 @@
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+!!include Log/Random.txt
+
 ## Health --------------------------------------------------------------------|
 == \#LOG_MegaSphere  | メガチャージ！
 == \#LOG_SoulSphere  | スーパーチャージ！
@@ -69,3 +75,5 @@
 == \#LOG_SellOrder | 1
 == \#LOG_Sell | %lli\cnscr\c-で%Sを売った。
 == \#LOG_CBI  | %Sはインストールされた。
+
+## EOF

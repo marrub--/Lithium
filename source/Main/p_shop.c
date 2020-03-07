@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
@@ -134,6 +133,5 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
    if(G_Button(g, LC(LANG "BUY"), 259, 170, !P_Shop_CanBuy(p, &item->shopdef, item)))
       P_Shop_Buy(p, &item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
-#endif
 
 /* EOF */

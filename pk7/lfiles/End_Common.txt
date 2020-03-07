@@ -1,0 +1,19 @@
+   fade 100,black
+   img TITLEPIC
+   0
+   fade -70,black
+   700 $LITH_ENDING_Credits
+   stop
+   fade 70,black
+   bg black
+   0
+   wait 50
+   100 $LITH_ENDING_Dedication
+   wait 100
+   fade 150,black
+   20 The end.
+   wait 70
+   fade 20,black
+   0
+   fmus 300
+   done

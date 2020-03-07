@@ -86,8 +86,7 @@ class Token
    end
 end
 
-def tokenize filename
-   read = PosReader.read filename
+def tokenize_from read
    data = read.each
    colu = 1
    line = 1
@@ -142,6 +141,10 @@ def tokenize filename
    eof = Token.new read.pos, :eof
 
    TokenStream.new tokens.each, eof
+end
+
+def tokenize filename
+   tokenize_from PosReader.read filename
 end
 
 ## EOF

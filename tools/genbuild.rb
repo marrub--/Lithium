@@ -30,7 +30,6 @@ SRC    = "a"
 HDR    = "b"
 IR     = "c"
 IRLITH = "d"
-IRDTAP = "e"
 TARGET = "f"
 WARN   = "g"
 LFLAGS = "h"
@@ -39,7 +38,6 @@ HASH   = "j"
 STA    = "k"
 TYPE   = "l"
 DLITH  = "m"
-DDTAP  = "n"
 INITSC = "o"
 NUMOUT = "p"
 MFLAGS = "q"
@@ -51,9 +49,8 @@ WEPCHO = %W"$#{HDR}/p_weapons.h".push(*WEPCCO)
 MONCHO = %W"$#{HDR}/w_moninfo.h"
 DECOIN = %W"$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h
             $#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
-TEXTIN = Dir["text/*.txt"]
-HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
-            pk7_dt/language.gfx.txt:pk7_dt/:dtgfx"
+TEXTIN = %w"text/Text.txt"
+HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx"
 SNDSIN = %w"text/Sounds.txt"
 DEPS = [*UPGCHO, *WEPCHO, *MONCHO,
         Dir["source/Headers/*"].map do |s|
@@ -70,14 +67,11 @@ fp << <<_end_
 #{HDR   } = source/Headers
 #{IR    } = bin
 #{IRLITH} = $#{IR}/lithium
-#{IRDTAP} = $#{IR}/doubletap
 #{TARGET} = --target-engine=ZDoom
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay #{LD_FLAGS}
 #{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{CC_FLAGS}
 #{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
-#{DLITH } = -DLITHIUM=1
-#{DDTAP } = -DDOUBLETAP=1
 #{INITSC} = --bc-zdacs-init-script-name
 
 rule cc
@@ -131,19 +125,14 @@ build $#{IR}/libGDCC.ir: makelib
 _end_
 
 inputs_lithium = []
-inputs_doubletap = []
 
 for f in SRCS
    fp << <<~_end_
    build $#{IRLITH}/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS.join " "}
     #{HASH  } = #{hash f}
-    #{CFLAGS} = $#{CFLAGS} $#{DLITH}
-   build $#{IRDTAP}/#{f}.ir: cc $#{SRC}/#{f} | #{DEPS.join " "}
-    #{HASH  } = #{hash f}
-    #{CFLAGS} = $#{CFLAGS} $#{DDTAP}
+    #{CFLAGS} = $#{CFLAGS}
    _end_
-   inputs_lithium   << "$#{IRLITH}/#{f}.ir"
-   inputs_doubletap << "$#{IRDTAP}/#{f}.ir"
+   inputs_lithium << "$#{IRLITH}/#{f}.ir"
 end
 
 fp << <<_end_
@@ -156,17 +145,7 @@ build pk7/acs/lithlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
  #{STA   } = 70000
  #{NUMOUT} = $#{IR}/lithlib_ld.txt
 
-build pk7_dt/acs/dtmain.bin: ld #{inputs_doubletap.join " "}
- #{LFLAGS} = $#{LFLAGS} -ldtlib $#{INITSC} "dtmain@gsinit"
- #{STA   } = 1400000
- #{NUMOUT} = $#{IR}/dtmain_ld.txt
-build pk7_dt/acs/dtlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
- #{LFLAGS} = $#{LFLAGS} $#{INITSC} "dtlib@gsinit"
- #{STA   } = 70000
- #{NUMOUT} = $#{IR}/dtlib_ld.txt
-
 build lithium: phony _dec _snd _text _fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
-build doubletap: phony _dec _snd _text _fs pk7_dt/acs/dtmain.bin pk7_dt/acs/dtlib.bin
 
 default lithium
 _end_

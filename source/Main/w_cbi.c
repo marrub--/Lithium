@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "w_world.h"
 #include "p_player.h"
@@ -105,6 +104,5 @@ void Sc_PickupCBIItem(i32 num)
 
    CBI_Install(num);
 }
-#endif
 
 /* EOF */

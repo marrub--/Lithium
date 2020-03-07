@@ -19,7 +19,6 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-#if LITHIUM
 static void StringStack(struct player *p)
 {
    struct hudstr {str s; list link;};
@@ -114,7 +113,6 @@ static void ScopeM(struct player *p)
    Waves(p);
    StringStack(p);
 }
-#endif
 
 stkcall
 static void DebugStats(struct player *p)

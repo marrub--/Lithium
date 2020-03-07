@@ -1,5 +1,5 @@
-$output "../pk7/sndinfo.txt"
-$sounds "../pk7"
+$output "pk7/sndinfo.txt"
+$sounds "pk7"
 $ignore DSBAREXP
 
 $rolloff * custom 0 2025

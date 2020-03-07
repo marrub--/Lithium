@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 #include "w_world.h"
@@ -125,6 +124,5 @@ void P_Scr_Payout(struct player *p)
 
    P_Scr_Give(p, pay.total, true);
 }
-#endif
 
 /* EOF */

@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "p_player.h"
 #include "w_monster.h"
 #include "w_world.h"
@@ -379,6 +378,5 @@ void Sc_RecoilUp(k32 amount)
 {
    with_player(LocalPlayer) p->extrpitch += amount / 180.lk;
 }
-#endif
 
 /* EOF */

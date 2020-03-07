@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "w_monster.h"
 #include "w_world.h"
 #include "p_player.h"
@@ -93,6 +92,5 @@ dmon_t *AllocDmon(void)
    *m = (dmon_t){.active = true, .id = dmonid++};
    return m;
 }
-#endif
 
 /* EOF */

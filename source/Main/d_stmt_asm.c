@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "d_compile.h"
 
 /* Static Functions -------------------------------------------------------- */
@@ -246,7 +245,5 @@ void Dlg_GetStmt_Asm(struct compiler *d)
    tok = d->tb.reget();
    ErrT(d, tok, "no function found with this syntax");
 }
-
-#endif
 
 /* EOF */

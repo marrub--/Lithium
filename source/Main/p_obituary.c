@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "p_player.h"
 
@@ -74,6 +73,5 @@ void Sc_Obituary(void)
       for_player() p->logB(1, "%s", out);
    }
 }
-#endif
 
 /* EOF */

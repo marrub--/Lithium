@@ -1,8 +1,0 @@
-++ \#ENDING_CREDITS    | Endings/End_Credits.txt
-++ \#ENDING_DEDICATION | Endings/End_Dedication.txt
-
-++ \#ENDING_TIMEOUT_1 | Endings/End_TimeOut1.txt
-++ \#ENDING_TIMEOUT_2 | Endings/End_TimeOut2.txt
-
-++ \#ENDING_NORMAL_MARINE    | Endings/End_Normal_Marine.txt
-++ \#ENDING_NORMAL_CYBERMAGE | Endings/End_Normal_CyberMage.txt

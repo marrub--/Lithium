@@ -11,7 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if LITHIUM
 #include "common.h"
 #include "w_world.h"
 
@@ -120,6 +119,5 @@ void Sc_RandomSpawn(i32 rsn)
 
    SCallI(so_RandomSpawn, sm_Set, l_strdup(item));
 }
-#endif
 
 /* EOF */

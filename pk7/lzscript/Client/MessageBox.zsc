@@ -7,7 +7,9 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_MessageBox : MessageBoxMenu;
+/* MESSAGEBOX: Meandering, Endearing, Silly, Silly Ass Graf Eviscerating
+               Butt-pulled Omega haX */
+class Lith_MESSAGEBOX : MessageBoxMenu;
 
 override void Init(Menu parent, string message, int message_mode, bool play_sound, name cmd, voidptr native_handler)
 {

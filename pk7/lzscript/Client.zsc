@@ -10,10 +10,8 @@
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/MessageBox.zsc"
 #include "lzscript/Client/StatScreen.zsc"
+#include "lzscript/Client/StatusBar.zsc"
 #include "lzscript/Client/UpdateMenu.zsc"
-
-class Lith_StatusBar : BaseStatusBar
-   {override void Init() {Super.Init(); SetSize(0, 320, 240);}}
 
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : EventHandler;

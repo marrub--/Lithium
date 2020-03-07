@@ -53,7 +53,6 @@ static void SetupAttributes(struct player *p)
 static void SetPClass(struct player *p)
 {
    __with(str cl = p->pcstr = ACS_GetActorClass(0);) {
-      #if LITHIUM
            if(cl == so_MarinePlayer   ) p->pclass = pcl_marine;
       else if(cl == so_CyberMagePlayer) p->pclass = pcl_cybermage;
       else if(cl == so_InformantPlayer) p->pclass = pcl_informant;
@@ -61,10 +60,6 @@ static void SetPClass(struct player *p)
       else if(cl == so_AssassinPlayer ) p->pclass = pcl_assassin;
       else if(cl == so_DarkLordPlayer ) p->pclass = pcl_darklord;
       else if(cl == so_ThothPlayer    ) p->pclass = pcl_thoth;
-      #else
-      if(cl == so_Player)
-         p->pclass = pcl_doubletap;
-      #endif
       else for(;;)
       {
          Log("Invalid player class detected, everything is going to explode!");
@@ -318,9 +313,7 @@ void P_Init(struct player *p)
    if(!p->upgrinit) P_Upg_PInit(p);
    else             P_Upg_PMInit(p);
 
-   #if LITHIUM
    if(!p->invinit) P_Inv_PInit(p);
-   #endif
 
    if(!p->wasinit)
    {
@@ -329,9 +322,7 @@ void P_Init(struct player *p)
       if(dbglevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "snil is \"%S\"", snil);
-         #if LITHIUM
          PrintDmonAllocSize(p);
-         #endif
       } else {
          p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
       }
@@ -341,7 +332,6 @@ void P_Init(struct player *p)
       p->wasinit = true;
    }
 
-   #if LITHIUM
    if(dbgflag & dbgf_items)
    {
       for(i32 i = weapon_min; i < weapon_max; i++) {
@@ -350,7 +340,6 @@ void P_Init(struct player *p)
             InvGive(info->classname, 1);
       }
    }
-   #endif
 }
 
 stkcall

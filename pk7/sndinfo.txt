@@ -101,6 +101,9 @@ $random body/flesh { body/flesh1 body/flesh2 body/flesh3 body/flesh4 body/flesh5
 enemies/levelup1 lsounds/Monsters/LevelUp1
 enemies/levelup2 lsounds/Monsters/LevelUp2
 $random enemies/levelup { enemies/levelup1 enemies/levelup2 }
+enemies/boss/talk1 lsounds/Monsters/Boss/Talk
+enemies/boss/talk2 lsounds/Monsters/Boss/Talk2
+$random enemies/boss/talk { enemies/boss/talk1 enemies/boss/talk2 }
 enemies/zombie/ready lsounds/Monsters/ZombieMan/Ready
 enemies/zombie/fire lsounds/Monsters/ZombieMan/Fire
 $attenuation enemies/zombie/fire 0.5

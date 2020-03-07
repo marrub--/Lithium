@@ -1,0 +1,12 @@
+   case marine,3
+   mus lmusic/lithambientwip3.ogg
+   img :End:Marine
+3  case cybermage,4
+   mus lmusic/tmary7.ogg
+   img :End:CyberMage
+4  fade -50,black
+   case marine,1
+   600 $LITH_ENDING_Barons_Stan
+1  case cybermage,2
+   800 $LITH_ENDING_Barons_Jem
+2  stop
