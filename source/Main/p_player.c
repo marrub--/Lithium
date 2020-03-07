@@ -411,9 +411,8 @@ static void P_BossText(struct player *p, i32 boss)
       case boss_iconofsin:   fmt = LANG "BOSS_IOS_%i_%s"; break;
    }
 
-   /* TODO */
-   p->logB(1, "\CgYou feel ringing in your ears...");
-   p->logB(1, "\CgSomething is calling out to you.");
+   p->logB(1, LC(LANG "LOG_BossHear1"));
+   p->logB(1, LC(LANG "LOG_BossHear2"));
 
    ACS_Delay(35 * 4);
 

@@ -39,15 +39,9 @@ void P_Scr_Payout(struct player *p)
    (PrintTextFmt(__VA_ARGS__), \
     PrintTextF(s_bigupper, CR_WHITE, 8,1, y,1, fid_result))
 
-#define GenCount(word, name) \
-   if(1) { \
-      Left(word " %.1lk%%", pay.name##pct); \
-      Right("%s\Cnscr", \
-            scoresep(i < begin_total ? \
-                     lerplk(0, pay.name##scr, i / 34.0lk) : \
-                     pay.name##scr)); \
-      y += 9; \
-   } else (void)0
+#define CountScr(scr) scoresep(i < begin_total ? \
+                               lerplk(0, scr, i / 34.0lk) :\
+                               scr)
 
    struct payoutinfo pay = payout;
 
@@ -60,49 +54,54 @@ void P_Scr_Payout(struct player *p)
    for(i32 i = 0; CheckFade(fid_result); i++) {
       i32 y = 20;
       bool counting = false;
-
-      /* TODO: translatable */
+      cstr res = LC(LANG "RES_RESULTS");
 
       SetSize(320, 240);
-      Head("RESULTS");
+      Head(res);
 
-      if(CheckFade(fid_result2))
-         PrintTextFX_str(s"RESULTS", s_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
+      if(CheckFade(fid_result2)) {
+         PrintTextChS(res);
+         PrintTextFX(s_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
+      }
 
       y += 16;
 
       if(pay.killmax) {
-         GenCount("ELIMINATED", kill);
+         Left(LC(LANG "RES_ELIMINATED"), pay.killpct);
+         Right("%s\Cnscr", CountScr(pay.killscr));
          counting |= pay.killnum;
+         y += 9;
       }
 
       if(pay.itemmax) {
-         GenCount("ARTIFACTS", item);
+         Left(LC(LANG "RES_ARTIFACTS"), pay.itempct);
+         Right("%s\Cnscr", CountScr(pay.itemscr));
          counting |= pay.itemnum;
+         y += 9;
       }
 
       if(i > begin_total) {
          y += 7;
-         Head("TOTAL");
+         Head(LC(LANG "RES_TOTAL"));
          y += 16;
       }
 
       if(i > begin_tax) {
-         Left("Tax");
+         Left(LC(LANG "RES_TAX"));
          Right("%s\Cnscr", scoresep(pay.tax));
          y += 9;
       }
 
       if(i > begin_grandtotal) {
-         Left("Total");
+         Left(LC(LANG "RES_SUBTOTAL"));
          Right("%s\Cnscr", scoresep(pay.total));
          y += 16;
 
-         Head("PAYMENT");
+         Head(LC(LANG "RES_PAYMENT"));
          y += 16;
 
-         Left("Primary Account");
-         Right("%sTRANSACTION CLOSED", (i % 6) == 0 ? "\Cn" : "");
+         Left(LC(LANG "RES_ACCOUNT"));
+         Right(LC(LANG "RES_CLOSED"), (i % 6) == 0 ? 'n' : '-');
       }
 
       if(p->getCVarI(sc_player_resultssound)) {

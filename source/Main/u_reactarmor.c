@@ -94,7 +94,7 @@ void Sc_GiveRA(i32 num)
 
          ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
 
-         p->logH(3, "Activating Armor->%s()", name); /* TODO */
+         p->logH(3, LC(LANG "LOG_ActiveArmor"), name);
 
          if(p->getUpgrActive(UPGR_ReactArmor2)) RA_Give(name, 2);
          else                                   RA_Give(name, 1);

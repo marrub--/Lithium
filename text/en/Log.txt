@@ -95,6 +95,9 @@
 
 == \#LOG_BossWarnMod | $\#LOG_BossWarnStan
 
+== \#LOG_BossHear1 | \cgYou feel ringing in your ears...
+== \#LOG_BossHear2 | \cgSomething is calling out to you.
+
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | Press "%jS" to open the menu.
 == \#LOG_MailRecv  | Mail received from <\cj%S\c->.
@@ -102,5 +105,14 @@
 == \#LOG_SellOrder | 0
 == \#LOG_Sell | Sold the %S for %lli\cnscr\c-.
 == \#LOG_CBI  | Installed %S.
+
+== \#LOG_ActiveArmor | Activating Armor->%s()
+
+== \#LOG_AdrenalineReady | Adrenaline injector ready.
+== \#LOG_AdrenalineUsed  | Adrenaline administered.
+
+== \#LOG_Bought    | Bought %s
+== \#LOG_Delivered | \cjItem delivered.
+== \#LOG_NoDeliver | \cgCouldn't deliver item\c-, placing directly in inventory.
 
 ## EOF

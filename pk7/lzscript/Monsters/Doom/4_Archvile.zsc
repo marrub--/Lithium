@@ -114,10 +114,6 @@ Missile:
    VILE G 10 bright A_FaceTarget;
    VILE H 8 bright A_VileTarget;
    VILE IJKLM 8 bright A_FaceTarget;
-   VILE N 0 bright {
-      if(Target && CheckSight(Target))
-         {} /* TODO */
-   }
    VILE N 8 bright A_FaceTarget;
    VILE N 0 bright {
       if(Target && CheckSight(Target))

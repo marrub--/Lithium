@@ -29,7 +29,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    else if(!UData.readied)
    {
       StartSound(ss_player_adren_ready, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
-      p->logH(1, "Adrenaline injector ready."); /* TODO */
+      p->logH(1, LC(LANG "LOG_AdrenalineReady"));
       UData.readied = true;
    }
 
@@ -38,7 +38,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    {
       UData.charge = UData.readied = 0;
 
-      p->logH(4, "Adrenaline administered."); /* TODO */
+      p->logH(4, LC(LANG "LOG_AdrenalineUsed"));
       StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       FadeFlash(255, 255, 255, 0.4, 0.6);
       InvGive(so_TimeHax2, 1);

@@ -40,6 +40,25 @@
 == \#TAB_UPGRADES | Upgrades
 == \#TAB_SHOP     | Shop
 
+## Results -------------------------------------------------------------------|
+== \#RES_RESULTS    | RESULTS
+== \#RES_ELIMINATED | ELIMINATED %.1lk%%
+== \#RES_ARTIFACTS  | ARTIFACTS %.1lk%%
+== \#RES_TOTAL      | TOTAL
+== \#RES_TAX        | Tax
+== \#RES_SUBTOTAL   | Subtotal
+== \#RES_PAYMENT    | PAYMENT
+== \#RES_ACCOUNT    | Primary Account
+== \#RES_CLOSED     | \c%cTRANSACTION CLOSED
+
+## Shop ----------------------------------------------------------------------|
+== \#SHOP_CANT_ACTIVATE | Activating requires \ca%i\cbPerf\c-.
+== \#SHOP_ACTIVATE_USES | Activating will use \ca%i\cbPerf\c-.
+== \#SHOP_DISABLE_SAVES | Disabling saves \cn%i\cbPerf\c-.
+
+== \#SHOP_MUL_ENABLE  | Enabling will multiply score by \c%c%i\c-%%
+== \#SHOP_MUL_DISABLE | Disabling will multiply score by \c%c%i\c-%%
+
 ## CBI Items -----------------------------------------------------------------|
 == \#CBI_PERF | Performance: %i\cbPerf
 == \#CBI_PUSE | In use: %i\cbPerf
@@ -51,6 +70,7 @@
 == \#CBI_WeapnInte2 | Weapon Refactoring Device
 == \#CBI_ArmorInter | Armor Interface
 == \#CBI_RDistInter | Reality Distortion Interface
+== \#CBI_ReactArmor | \#UPGRADE_TITLE_ReactArmor
 
 == \#CBI_Slot1Spell | \ciBlade Spell Driver
 == \#CBI_Slot2Spell | \ciDelear Spell Driver

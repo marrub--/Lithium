@@ -34,7 +34,7 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr nam
    if(!P_Shop_CanBuy(p, def, obj))
       return false;
 
-   if(!nolog) p->logF("Bought %S", Language(namefmt, def->name)); /* TODO */
+   if(!nolog) p->logF(LC(LANG "LOG_Bought"), LanguageC(namefmt, def->name));
 
    if(def->bipunlock)
    {
@@ -60,14 +60,14 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr nam
       if((x || y || z) && ACS_Spawn(so_BoughtItem, x, y, z, tid = ACS_UniqueTID()))
       {
          if(def->ShopGive(p, def, obj, tid))
-            p->logH(1, "\CjItem delivered."); /* TODO */
+            p->logH(1, LC(LANG "LOG_Delivered"));
          else
             ACS_Thing_Remove(tid);
 
          delivered = true;
       }
       else
-         p->logH(1, "\CgCouldn't deliver item\C-, placing directly in inventory."); /* TODO */
+         p->logH(1, LC(LANG "LOG_NoDeliver"));
    }
 
    if(!delivered) def->ShopBuy(p, def, obj);

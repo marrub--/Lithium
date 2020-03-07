@@ -100,16 +100,15 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
 
    #define Req(name) \
    { \
-      static str const text = s"Requires " name "."; \
-      PrintText_str(text, s_smallfnt, CR_RED, 111,1, 200 + y,2); \
+      PrintText_str(L(name), s_smallfnt, CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
 
-   if(CheckRequires_AI)  Req("Armor Interface")
-   if(CheckRequires_WMD) Req("Weapon Modification Device")
-   if(CheckRequires_WRD) Req("Weapon Refactoring Device")
-   if(CheckRequires_RDI) Req("Reality Distortion Interface")
-   if(CheckRequires_RA)  Req("Reactive Armor")
+   if(CheckRequires_AI)  Req(st_cbi_armorinter)
+   if(CheckRequires_WMD) Req(st_cbi_weapninter)
+   if(CheckRequires_WRD) Req(st_cbi_weapninte2)
+   if(CheckRequires_RDI) Req(st_cbi_rdistinter)
+   if(CheckRequires_RA)  Req(st_cbi_reactarmor)
 
    #undef Req
 
@@ -119,11 +118,11 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       bool over = upgr->info->perf + p->cbi.pruse > cbiperf;
 
       if(upgr->active)
-         PrintTextFmt("Disabling saves \Cn%i\CbPerf\C-.", upgr->info->perf); /* TODO */
+         PrintTextFmt(LC(LANG "SHOP_DISABLE_SAVES"), upgr->info->perf);
       else if(over)
-         PrintTextFmt("Activating requires \Ca%i\CbPerf\C-.", upgr->info->perf); /* TODO */
+         PrintTextFmt(LC(LANG "SHOP_CANT_ACTIVATE"), upgr->info->perf);
       else
-         PrintTextFmt("Activating will use \Cj%i\CbPerf\C-.", upgr->info->perf); /* TODO */
+         PrintTextFmt(LC(LANG "SHOP_ACTIVATE_USES"), upgr->info->perf);
 
       PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
@@ -133,17 +132,17 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    if(upgr->info->scoreadd != 0)
    {
       char cr;
-      str  op;
+      cstr op;
       bool chk;
 
-      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = st_disabling;} /* TODO */
-      else             {chk = upgr->info->scoreadd < 0; op = st_enabling;}  /* TODO */
+      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = LC(LANG "SHOP_MUL_DISABLE");}
+      else             {chk = upgr->info->scoreadd < 0; op = LC(LANG "SHOP_MUL_ENABLE");}
 
       i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
-      PrintTextFmt("%S will multiply score by \C%c%i\C-%%", op, cr, perc); /* TODO */
+      PrintTextFmt(op, cr, perc);
       PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
       y -= 10;
    }
