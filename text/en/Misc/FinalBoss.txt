@@ -1,3 +1,79 @@
+## Barons / Stan -------------------------------------------------------------|
+%% \#BOSS_BAR_1_Stan
+\cgWhat a riot!
+\cyA human comes to our domain.
+
+%% \#BOSS_BAR_2_Stan
+\cgIt's quite amusing to see someone so strong of will here.
+\cyDon't fret though. It'll be over quite soon.
+
+%% \#BOSS_BAR_3_Stan
+\cgAn incredible sight seeing a warrior here.
+\cyThis place is cursed. If you leave, it will only be worse.
+
+%% \#BOSS_BAR_4_Stan
+\cgYou won't be allowed to pass. Deimos is...
+\cyDeimos is ours now. I think it's only fair to tell you.
+
+%% \#BOSS_BAR_5_Stan
+\cgSomeone so ready to die must be prepared for hard knowledge.
+\cyApologies for being harsh, but we have already won.
+
+%% \#BOSS_BAR_6_Stan
+\ctYour universe is forfeit.
+
+%% \#BOSS_BAR_7_Stan
+\cgIt won't be long now until our masters' plans are in full force.
+\cyIt will be too late by the time you get through the gate.
+
+%% \#BOSS_BAR_8_Stan
+\cgYour species is doomed. But we will grant you one last fight.
+\cyBesides, you wouldn't be nearly enough to stop them.
+
+%% \#BOSS_BAR_9_Stan
+\cgIf you wish to leave, we cannot grant that.
+\cyIf you go through, you will only see despair.
+
+%% \#BOSS_BAR_10_Stan
+\ctPrepare for your last breath.
+
+## Barons / Jem --------------------------------------------------------------|
+%% \#BOSS_BAR_1_Jem
+\cgTerrifying! \cm*laughs*
+\cyA human comes to our domain.
+
+%% \#BOSS_BAR_2_Jem
+\cgAn intrepid hero comes through the portal.
+\cyDon't fret though. It'll be over quite soon.
+
+%% \#BOSS_BAR_3_Jem
+\cgWhat in the world are you? Some kind of insane robot?
+\cyThis place is cursed. If you leave, it will only be worse.
+
+%% \#BOSS_BAR_4_Jem
+\cgWhatever you are, you shall not pass.
+\cyDeimos is ours now. I think it's only fair to tell you.
+
+== \#BOSS_BAR_5_Jem | $\#BOSS_BAR_5_Stan
+
+%% \#BOSS_BAR_6_Jem
+\ctYour life is forfeit.
+
+%% \#BOSS_BAR_7_Jem
+\cgIt won't be long now until your pathetic race is wiped from this universe.
+\cyIt will be too late by the time you get through the gate.
+
+%% \#BOSS_BAR_8_Jem
+\cgAs amusing a thought as that is, for such a worm to come here...
+\cyWe offer a battle you have no chance of winning.
+
+%% \#BOSS_BAR_9_Jem
+\cgInteresting. Very interesting. I'll see to your demise.
+\cyIt will be less painful than what you would go through.
+
+%% \#BOSS_BAR_10_Jem
+\ctPrepare to die.
+
 ## Icon of Sin / Stan --------------------------------------------------------|
 %% \#BOSS_IOS_1_Stan
 You have come to my lair?

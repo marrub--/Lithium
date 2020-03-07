@@ -417,12 +417,13 @@ static void P_BossText(struct player *p, i32 boss)
    ACS_Delay(35 * 4);
 
    char text[1024];
-   for(i32 i = 0, j = 1; i < 35 * 100; i++) {
-      if(i % (35 * 10) == 0) {
+   for(i32 i = 0, j = 1; i < 35 * 50; i++) {
+      if(i % (35 * 5) == 0) {
          k32 di = ACS_RandomFixed(0.1, 0.2);
-         k32 fa = ACS_RandomFixed(0.1, 0.8);
-         k32 ft = ACS_RandomFixed(0.1, 2.0);
-         k32 ya = ACS_RandomFixed(0.0, 1.0);
+         k32 fa = ACS_RandomFixed(0.1, 0.6);
+         k32 ft = ACS_RandomFixed(0.1, 1.0);
+         k32 ya = ACS_RandomFixed(0.0, 0.6);
+         k32 pt = ACS_RandomFixed(0.2, 1.1);
          k32 ys = ACS_Sin(ya), yc = ACS_Cos(ya);
 
          p->bobyaw   += ys * di;
@@ -431,8 +432,8 @@ static void P_BossText(struct player *p, i32 boss)
          ACS_FadeTo(255, 0, 0, fa, 0.0);
          ACS_FadeTo(255, 0, 0, 0.0, ft);
 
-         StartSound(ss_xx_pain25,         lch_voice,  CHANF_LOCAL, 0.3);
-         StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL);
+         StartSound(ss_xx_pain25,         lch_voice,  CHANF_LOCAL, 0.2);
+         StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);
          LanguageCV(text, fmt, j, p->discrim);
