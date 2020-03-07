@@ -115,19 +115,16 @@ override void WorldThingSpawned(WorldEvent ev)
       return;
    }
 
-   if(th.bISMONSTER)
-   {
+   if(th.bISMONSTER) {
       Lith_UTIL.Exec(th, lsc_monsterinfo);
 
       if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
-      if(m_BossLevel != boss_none && th.bBOSS)
-      {
-         th.Health = int(th.Health * FRandom(2, 3));
+      if(m_BossLevel != boss_none && th.bBOSSDEATH) {
+         th.Health = int(th.Health * 2.7);
          th.ReactionTime = 0;
-         th.DamageMultiply *= FRandom(1.1, 1.6);
-         th.DamageFactor   *= FRandom(0.3, 0.5);
+         th.DamageMultiply *= 1.6;
       }
    }
 }
