@@ -14,7 +14,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-enum /* LAttrib */
+enum /* Lith_Attrib */
 {
    at_acc,
    at_def,
@@ -26,7 +26,7 @@ enum /* LAttrib */
    at_max
 };
 
-enum /* PData */
+enum /* Lith_PData */
 {
    pdata_weapon,
    pdata_upgrade,
@@ -42,7 +42,7 @@ enum /* PData */
    pdata_attr,
 };
 
-enum /* PClass */
+enum /* Lith_PClass */
 {
    pcl_unknown,
 

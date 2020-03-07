@@ -184,7 +184,7 @@
 
                           * Japanese fonts *
 
-* JF Dot k6x8          * http://jikasei.me/font/jf-dotfont/
+* JF Dot k6x8/jiskan   * http://jikasei.me/font/jf-dotfont/
 * Misaki Gothic/Mincho * http://www.geocities.jp/littlimi/misaki.htm
 
                       * Laser Shotgun sprites *

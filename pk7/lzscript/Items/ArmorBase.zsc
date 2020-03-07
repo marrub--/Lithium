@@ -19,7 +19,7 @@ class Lith_AAGH : Inventory
 
    Lith_SlottedItem m_Slotted[aslot_max];
 
-   static LDamageType Lith_NameToDT(name type)
+   static Lith_DamageType Lith_NameToDT(name type)
    {
       switch(type)
       {

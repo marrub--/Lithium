@@ -95,7 +95,7 @@ common_main do
  */
 #{generated_header "upgc"}
 
-enum /* UpgradeName */
+enum /* Lith_UpgradeName */
 {
 #{
 res = String.new

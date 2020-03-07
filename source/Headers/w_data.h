@@ -14,7 +14,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-enum /* WData */
+enum /* Lith_WData */
 {
    wdata_bossspawned,
    wdata_enemycheck,
@@ -25,12 +25,12 @@ enum /* WData */
    wdata_pclass,
 };
 
-enum /* Fun */
+enum /* Lith_Fun */
 {
    lfun_ragnarok = 1 << 0,
 };
 
-enum /* CBIUpgradeM */
+enum /* Lith_CBIUpgradeM */
 {
    cupg_weapninter,
    cupg_hasupgr1,
@@ -41,7 +41,7 @@ enum /* CBIUpgradeM */
    cupg_max
 };
 
-enum /* CBIUpgradeC */
+enum /* Lith_CBIUpgradeC */
 {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
@@ -51,7 +51,7 @@ enum /* CBIUpgradeC */
    cupg_c_rdistinter,
 };
 
-enum /* RandomSpawnNum */
+enum /* Lith_RandomSpawnNum */
 {
    lrsn_garmor,
    lrsn_barmor,
@@ -61,7 +61,7 @@ enum /* RandomSpawnNum */
    lrsn_clipbx,
 };
 
-enum /* ArmorSlot */
+enum /* Lith_ArmorSlot */
 {
    aslot_lower,
    aslot_upper,
@@ -70,7 +70,7 @@ enum /* ArmorSlot */
    aslot_max
 };
 
-enum /* MsgType */
+enum /* Lith_MsgType */
 {
    msg_ammo,
    msg_huds,
@@ -78,7 +78,7 @@ enum /* MsgType */
    msg_both
 };
 
-enum /* LDamageType */
+enum /* Lith_DamageType */
 {
    ldt_bullets,
    ldt_energy,
@@ -92,7 +92,7 @@ enum /* LDamageType */
    ldt_none
 };
 
-enum /* LScriptNum */
+enum /* Lith_ScriptNum */
 {
    lsc_getfontmetric = 17100,
    lsc_metr_xadv,
@@ -132,7 +132,7 @@ enum /* Lith_Channel */
    lch_weapon3,
 };
 
-enum /* BossType */
+enum /* Lith_BossType */
 {
    boss_none,
    boss_barons,
@@ -140,6 +140,15 @@ enum /* BossType */
    boss_spiderdemon,
    boss_iconofsin,
    boss_other,
+};
+
+enum /* Lith_FontNum */
+{
+   font_misaki_gothic, /* 美咲ゴシック */
+   font_misaki_mincho, /* 美咲明朝 */
+   font_jfdot_8,       /* JFドットk6x8 */
+   font_jfdot_14,      /* JFドットk14 */
+   font_num,
 };
 
 /* EOF */

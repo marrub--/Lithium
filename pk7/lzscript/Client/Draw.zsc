@@ -477,9 +477,10 @@ override void WorldTick()
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
       switch(CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt()) {
          default:
-         case 0: m_UtfFont = "MisakiG"; break;
-         case 1: m_UtfFont = "MisakiM"; break;
-         case 2: m_UtfFont = "JFDotG";  break;
+         case font_misaki_gothic: m_UtfFont = "MisakiG"; break;
+         case font_misaki_mincho: m_UtfFont = "MisakiM"; break;
+         case font_jfdot_8:       m_UtfFont = "JFDot8";  break;
+         case font_jfdot_14:      m_UtfFont = "JFDot16"; break;
       }
    }
 }

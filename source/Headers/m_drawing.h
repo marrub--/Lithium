@@ -171,11 +171,4 @@ enum {
    ptf_add    = 0x80000,
 };
 
-enum {
-   font_misaki_gothic, /* 美咲ゴシック */
-   font_misaki_mincho, /* 美咲明朝 */
-   font_jfdot_gothic,  /* JFドットk6x8 */
-   font_num,
-};
-
 /* EOF */

@@ -14,12 +14,12 @@
 
 require_relative "corinth.rb"
 
-FONTS=%w(MisakiG MisakiM JFDotG)
+FONTS=[[8, "MisakiG"], [8, "MisakiM"], [8, "JFDot8"], [16, "JFDot16"]]
 CMAP=`tools/getcmap.rb`
 
 out = []
 
-for f in FONTS
+for sz, f in FONTS
    fontfile = "bin/#{f}.ttf"
    unless FileTest.exist? fontfile
       system *%W"wget http://mab.greyserv.net/f/#{f}.ttf -O #{fontfile}"
@@ -29,7 +29,7 @@ for f in FONTS
 
    `rm -f #{outdir}/*.png`
 
-   words = %W"convert -depth 1 -font #{fontfile} -pointsize 8 -background none -fill white"
+   words = %W"convert -depth 1 -font #{fontfile} -pointsize #{sz} -background none -fill white"
 
    for ch in CMAP.each_char
       num = sprintf "%08X", ch.ord

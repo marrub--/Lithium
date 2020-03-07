@@ -28,7 +28,7 @@
  */
 
 
-enum UpgradeName
+enum Lith_UpgradeName
 {
    UPGR_HeadsUpDisM,
    UPGR_HeadsUpDisC,

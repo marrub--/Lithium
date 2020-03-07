@@ -187,7 +187,7 @@ static cstr XHairName(i32 num)
 static cstr FontName(i32 num)
 {
    static cstr fonts[] = {
-      "Misaki Gothic", "Misaki Mincho", "JF Dot Gothic"
+      "Misaki Gothic", "Misaki Mincho", "JF Dot k6x8", "JF Dot jiskan"
    };
 
    if(num < 0 || num >= font_num) return "Unknown";
