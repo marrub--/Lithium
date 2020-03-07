@@ -90,42 +90,42 @@ anything but killing anyhow. Like a real demon. Heh heh.
 Prepare yourself.
 
 ## Spider-Demon --------------------------------------------------------------|
-@@ \#BOSS_SPD_1_Stan
+@@ \#BOSS_SPI_1_Stan
 You have come to my lair?
 
 A pity. You're a powerful one.
 
-@@ \#BOSS_SPD_2_Stan
+@@ \#BOSS_SPI_2_Stan
 If you had simply surrendered to my subordinates, this would be much,
 much easier.
 
-@@ \#BOSS_SPD_3_Stan
+@@ \#BOSS_SPI_3_Stan
 At this point all I can do for you is give you one piece of advice.
 
-@@ \#BOSS_SPD_4_Stan
+@@ \#BOSS_SPI_4_Stan
 If you really want to see what's on the other side of my portal, be
 prepared for disappointment.
 
-@@ \#BOSS_SPD_5_Stan
+@@ \#BOSS_SPI_5_Stan
 The Nobles did not exaggerate.
 
 While they have slick tongues in the courts of our land, they never
 lie to humans.
 
-@@ \#BOSS_SPD_6_Stan
+@@ \#BOSS_SPI_6_Stan
 Not that it would do them any good. You intrepid beasts will just
 shoot anything that looks scary to you.
 
-@@ \#BOSS_SPD_7_Stan
+@@ \#BOSS_SPI_7_Stan
 We will never empathize with your kind. If we are to successfully live
 on, all of you must die.
 
-@@ \#BOSS_SPD_8_Stan
+@@ \#BOSS_SPI_8_Stan
 It's you or us.
 
 We expand. You extinguish.
 
-@@ \#BOSS_SPD_8_Stan
+@@ \#BOSS_SPI_8_Stan
 You're honestly not worth my time. If anything I shouldn't even be
 talking to you.
 
@@ -133,12 +133,12 @@ But I want to let it seep into you. Your race will perish under our
 hand. There is no need for undercode here. It has already begun and
 you can not stop it.
 
-@@ \#BOSS_SPD_9_Stan
+@@ \#BOSS_SPI_9_Stan
 Once we're done with you, what next, you say?
 
 We find a new enemy.
 
-@@ \#BOSS_SPD_10_Stan
+@@ \#BOSS_SPI_10_Stan
 You will not be the last.
 
 As for yourself, I will keep you as a pet. Laughable and disgusting as
