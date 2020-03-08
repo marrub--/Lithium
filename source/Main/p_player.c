@@ -420,6 +420,8 @@ static void P_BossText(struct player *p, i32 boss)
 
    ACS_Delay(35 * 4);
 
+   WaitPause();
+
    char text[1024];
    for(i32 i = 0, j = 1; i < 35 * 50; i++) {
       if(i % (35 * 5) == 0) {
@@ -450,7 +452,7 @@ static void P_BossText(struct player *p, i32 boss)
       PrintTextF(s_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
       ClearClip();
 
-      ACS_Delay(1);
+      PausableTick();
    }
 }
 

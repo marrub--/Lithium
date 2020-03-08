@@ -79,6 +79,7 @@
 
 #define Paused ServCallI(sm_GetPaused)
 #define PausableTick() do ACS_Delay(1); while(Paused)
+#define WaitPause() while(Paused) ACS_Delay(1)
 
 #define CVAR  "lith_"
 #define DCVAR "__lith_"
