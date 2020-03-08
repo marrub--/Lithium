@@ -10,10 +10,9 @@
  *
  * ---------------------------------------------------------------------------|
  */
+/* decompat-out pk7/lzscript/Constants/m_drawing.zsc */
 
-/* Not 1.0 / 35.0 or even 0.028 because ZDoom is stupid. */
-#define TS 0.029
-
+/* decompat-cut */
 #define BitArg(x, mask, shift) (((u32)(x) & mask) << shift)
 #define SignArg(x, mask) (((u32)(x) & mask) | ((u32)(x) & 0x80000000))
 
@@ -169,6 +168,40 @@ enum {
 enum {
    ptf_no_utf = 0x40000,
    ptf_add    = 0x80000,
+};
+/* decompat-end */
+
+enum /* Lith_FontNum */
+{
+   font_misaki_gothic, /* 美咲ゴシック */
+   font_misaki_mincho, /* 美咲明朝 */
+   font_jfdot_8,       /* JFドットk6x8 */
+   font_jfdot_14,      /* JFドットk14 */
+   font_num,
+};
+
+enum /* Lith_Channel */
+{
+   lch_auto,
+
+   lch_weapon,
+   lch_voice,
+   lch_item,
+   lch_body,
+
+   lch_altweapon,
+   lch_body2,
+   lch_body3,
+   lch_dryweapon,
+   lch_idleweapon,
+   lch_item2,
+   lch_reload,
+   lch_reload2,
+   lch_reload3,
+   lch_scope,
+   lch_voice2,
+   lch_weapon2,
+   lch_weapon3,
 };
 
 /* EOF */

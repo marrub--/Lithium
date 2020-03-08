@@ -18,28 +18,6 @@
 =mif_angelic
 =mif_dark
 
-## Hexen (unused) ------------------------------------------------------------|
-
-#%mif_full
-#+ShotgunGuy  imp         Ettin
-#+Imp         lostsoul    FireDemon
-#+Arachnotron arachnotron CentaurLeader
-#+Demon       demon       Centaur
-#+Mancubus    hellknight  IceGuy
-#+Mancubus    hellknight  SerpentLeader
-#+Arachnotron hellknight  Serpent
-#+HellKnight  hellknight  Demon1
-#+BaronOfHell baron       Demon2
-#+Cacodemon   mancubus    Bishop
-#+HellKnight  lostsoul    Wraith
-#+CyberDemon  cyberdemon  Dragon
-#+CyberDemon  phantom     ClericBoss
-#+CyberDemon  phantom     FighterBoss
-#+CyberDemon  phantom     MageBoss
-#+CyberDemon  cyberdemon  Heresiarch
-#+DSparil     cyberdemon  Korax
-#%
-
 ## Doom ----------------------------------------------------------------------|
 
 +ZombieMan     zombie        ZombieMan

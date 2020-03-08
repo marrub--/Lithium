@@ -1,7 +1,4 @@
-/* pk7/lzscript/Constants/w_data.zsc
- */
-/*
- * ---------------------------------------------------------------------------|
+/* ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
@@ -13,6 +10,7 @@
  *
  * ---------------------------------------------------------------------------|
  */
+/* decompat-out pk7/lzscript/Constants/w_data.zsc */
 
 enum /* Lith_WData */
 {
@@ -108,30 +106,6 @@ enum /* Lith_ScriptNum */
    lsc_raindropspawn,
 };
 
-enum /* Lith_Channel */
-{
-   lch_auto,
-
-   lch_weapon,
-   lch_voice,
-   lch_item,
-   lch_body,
-
-   lch_altweapon,
-   lch_body2,
-   lch_body3,
-   lch_dryweapon,
-   lch_idleweapon,
-   lch_item2,
-   lch_reload,
-   lch_reload2,
-   lch_reload3,
-   lch_scope,
-   lch_voice2,
-   lch_weapon2,
-   lch_weapon3,
-};
-
 enum /* Lith_BossType */
 {
    boss_none,
@@ -140,15 +114,6 @@ enum /* Lith_BossType */
    boss_spiderdemon,
    boss_iconofsin,
    boss_other,
-};
-
-enum /* Lith_FontNum */
-{
-   font_misaki_gothic, /* 美咲ゴシック */
-   font_misaki_mincho, /* 美咲明朝 */
-   font_jfdot_8,       /* JFドットk6x8 */
-   font_jfdot_14,      /* JFドットk14 */
-   font_num,
 };
 
 /* EOF */

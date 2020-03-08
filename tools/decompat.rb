@@ -15,15 +15,34 @@
 require_relative "corinth.rb"
 
 for filename in ARGV
-   lns  = open(filename, "rt").readlines
-   iter = lns.each
-   while (ln = iter.next) =~ /^.. (.+\.zsc)$/
-      out = open $~[1], "wt"
-      out.write generated_header "decompat", true
+   lns = open(filename, "rt").readlines
+   outfiles = []
+   out      = []
+   cut      = false
 
-      for ln in lns
-         out.write ln.chomp.sub(/enum \/\* (.+) \*\//, 'enum \1') + "\n"
+   for ln in lns
+      ln = ln.chomp
+      case ln
+      when "/* decompat-cut */"
+         cut = true
+      when "/* decompat-end */"
+         cut = false
+      when /\/\* decompat-out (.+) \*\//
+         outfiles.push $~[1]
+      else
+         if ln =~ /enum\s+\w*\s*\/\*\s*([^\s]+)\s*\*\/( {)?/
+            ln = "enum #{$~[1]}#{$~[2]}"
+         end
+         out.push ln unless cut
       end
+   end
+
+   out = out.join "\n"
+
+   for outfile in outfiles
+      fp = open outfile, "wt"
+      fp.write generated_header "decompat"
+      fp.puts  out
    end
 end
 

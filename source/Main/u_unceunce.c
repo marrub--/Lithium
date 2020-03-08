@@ -35,7 +35,7 @@ void Upgr_UNCEUNCE_Update(struct player *p, struct upgrade *upgr)
    k32 greeen = ACS_Cos(p->ticks / 24.0) + 1.0 / 2.0;
    k32 bluuue = ACS_Sin(p->ticks / 13.0) + 1.0 / 2.0;
 
-   ACS_FadeTo(reeeed * 255, greeen * 255, bluuue * 255, 0.6, TS);
+   ACS_FadeTo(reeeed * 255, greeen * 255, bluuue * 255, 0.6, 0.029);
    p->extrpitch += bluuue * 0.015;
    p->extryaw   += greeen * 0.01;
 }

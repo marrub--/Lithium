@@ -10,7 +10,8 @@
  *
  * ---------------------------------------------------------------------------|
  */
-
+/* decompat-out pk7/lzscript/Constants/w_monster.zsc */
+/* decompat-cut */
 #ifndef w_monster_h
 #define w_monster_h
 
@@ -29,8 +30,9 @@ enum dmgtype {
    dmgtype_shrapnel,
    dmgtype_max
 };
+/* decompat-end */
 
-enum mtype {
+enum mtype /* Lith_MonsterType*/ {
    mtype_unknown,
    mtype_zombie,
    mtype_imp,
@@ -52,6 +54,7 @@ enum mtype {
    mtype_max
 };
 
+/* decompat-cut */
 struct monster_info {
    u64        exp;
    i96        score;
@@ -88,3 +91,4 @@ dmon_t *AllocDmon(void);
 void PrintDmonAllocSize(struct player *p);
 
 #endif
+/* decompat-end */

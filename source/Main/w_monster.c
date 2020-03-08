@@ -339,6 +339,13 @@ void PrintMonsterInfo(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
+script_str ext("ACS") addr("Lith_GetMonsterType")
+i32 Sc_GetMonsterType()
+{
+   ifauto(dmon_t *, m, DmonSelf()) return m->mi->type;
+   else                            return mtype_unknown;
+}
+
 script_str ext("ACS") addr("Lith_GiveMonsterEXP")
 void Sc_GiveMonsterEXP(i32 amt)
 {

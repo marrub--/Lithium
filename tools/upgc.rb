@@ -91,9 +91,8 @@ common_main do
    end
 
    open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_; open(ARGV.shift, "wt").puts <<_end_f_
-/* pk7/lzscript/Constants/u_names.zsc
- */
 #{generated_header "upgc"}
+/* decompat-out pk7/lzscript/Constants/u_names.zsc */
 
 enum /* Lith_UpgradeName */
 {

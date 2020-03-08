@@ -1,7 +1,4 @@
-/* pk7/lzscript/Constants/p_data.zsc
- */
-/*
- * ---------------------------------------------------------------------------|
+/* ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
@@ -13,6 +10,7 @@
  *
  * ---------------------------------------------------------------------------|
  */
+/* decompat-out pk7/lzscript/Constants/p_data.zsc */
 
 enum /* Lith_Attrib */
 {

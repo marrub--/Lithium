@@ -1,7 +1,4 @@
-/* pk7/lzscript/Constants/w_scorenums.zsc
- */
-/*
- * ---------------------------------------------------------------------------|
+/* ---------------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
@@ -13,6 +10,7 @@
  *
  * ---------------------------------------------------------------------------|
  */
+/* decompat-out pk7/lzscript/Constants/w_scorenums.zsc */
 
 enum /* ScoreNum */
 {

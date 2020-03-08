@@ -101,7 +101,7 @@ void Sc_GetSigil(void)
 
       FreezeTime(true);
 
-      ACS_FadeTo(0, 0, 0, 0.4, TS * 3);
+      ACS_FadeTo(0, 0, 0, 0.4, 0.087);
 
       ACS_Delay(3);
 
@@ -116,7 +116,7 @@ void Sc_GetSigil(void)
          ACS_Delay(1);
       }
 
-      ACS_FadeTo(0, 0, 0, 0.0, TS * 5);
+      ACS_FadeTo(0, 0, 0, 0.0, 0.145);
 
       FreezeTime(false);
    }

@@ -47,8 +47,15 @@ UPGCHO = %W"$#{HDR}/u_names.h".push(*UPGCCO, "$#{HDR}/u_func.h")
 WEPCCO = %W"$#{SRC}/p_weaponinfo.c"
 WEPCHO = %W"$#{HDR}/p_weapons.h".push(*WEPCCO)
 MONCHO = %W"$#{HDR}/w_moninfo.h"
-DECOIN = %W"$#{HDR}/p_weapons.h $#{HDR}/p_data.h $#{HDR}/w_data.h
-            $#{HDR}/u_names.h $#{HDR}/w_scorenums.h"
+DECOIN = %W"
+   $#{HDR}/m_drawing.h
+   $#{HDR}/p_data.h
+   $#{HDR}/p_weapons.h
+   $#{HDR}/u_names.h
+   $#{HDR}/w_data.h
+   $#{HDR}/w_monster.h
+   $#{HDR}/w_scorenums.h
+"
 TEXTIN = %w"text/Text.txt"
 HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx"
 SNDSIN = %w"text/Sounds.txt"
