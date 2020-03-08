@@ -70,8 +70,6 @@ class Lith_HellKnight : Lith_BaronOfHell replaces HellKnight;
 
 default
 {
-   Lith_Monster.Score Score_HellKnight;
-
    BloodColor "DarkGreen";
    Health     500;
    Species    "Lith_HellKnight";

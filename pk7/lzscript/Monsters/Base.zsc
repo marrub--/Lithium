@@ -36,20 +36,14 @@ default
    Monster;
 }
 
-private meta int m_ScoreGive;
-
-property Score: m_ScoreGive;
-
 void Lith_A_Die()
 {
-   if(m_ScoreGive) CallACS("Lith_EmitScore", m_ScoreGive);
    A_Scream();
    A_NoBlocking();
 }
 
 void Lith_A_XDie()
 {
-   if(m_ScoreGive) CallACS("Lith_EmitScore", int(m_ScoreGive * 1.5));
    A_XScream();
    A_NoBlocking();
 }

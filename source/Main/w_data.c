@@ -51,7 +51,6 @@ i32 Sc_LWData(i32 info)
 {
    switch(info) {
    case wdata_bossspawned: return bossspawned;
-   case wdata_enemycheck:  return enemycheck;
    case wdata_fun:         return fun;
    case wdata_soulsfreed:  return soulsfreed;
    case wdata_dorain:      return dorain;

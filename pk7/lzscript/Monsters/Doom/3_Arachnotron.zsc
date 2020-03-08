@@ -91,8 +91,6 @@ class Lith_Arachnotron : Lith_Monster replaces Arachnotron;
 
 default
 {
-   Lith_Monster.Score Score_Arachnotron;
-
    DamageFactor "Electric", 0.6;
    Health       500;
    Height       64;

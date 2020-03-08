@@ -22,8 +22,6 @@ class Lith_ChaingunGuy : Lith_Monster replaces ChaingunGuy;
 
 default
 {
-   Lith_Monster.Score Score_ChaingunGuy;
-
    Health     60;
    Height     56;
    Mass       100;

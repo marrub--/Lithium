@@ -62,8 +62,6 @@ class Lith_SpiderMastermind : Lith_Monster replaces SpiderMastermind;
 
 default
 {
-   Lith_Monster.Score Score_SpiderDemon;
-
    Health           4000;
    Height           100;
    Mass             9000;

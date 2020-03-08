@@ -100,8 +100,6 @@ class Lith_Archangel : Lith_Monster;
 
 default
 {
-   Lith_Monster.Score Score_Cyberdemon;
-
    Health         8000;
    Height         56;
    Mass           500;

@@ -30,8 +30,6 @@ class Lith_Cacodemon : Lith_Monster replaces Cacodemon;
 
 default
 {
-   Lith_Monster.Score Score_Cacodemon;
-
    BloodColor "Blue";
    Health     400;
    Height     56;

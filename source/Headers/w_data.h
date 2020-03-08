@@ -15,7 +15,6 @@
 enum /* Lith_WData */
 {
    wdata_bossspawned,
-   wdata_enemycheck,
    wdata_fun,
    wdata_soulsfreed,
    wdata_dorain,
@@ -104,6 +103,7 @@ enum /* Lith_ScriptNum */
    lsc_addangle,
    lsc_monsterinfo,
    lsc_raindropspawn,
+   lsc_monstertype,
 };
 
 enum /* Lith_BossType */

@@ -74,8 +74,6 @@ class Lith_Archvile : Lith_Monster replaces Archvile;
 
 default
 {
-   Lith_Monster.Score Score_Archvile;
-
    GibHealth      400;
    Health         800;
    Height         56;

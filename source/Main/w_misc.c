@@ -138,7 +138,7 @@ void Sc_AddAngle(i32 x, i32 y)
 script_str ext("ACS") addr("Lith_EmitScore")
 void Sc_EmitScore(i32 amount)
 {
-   P_GiveAllScore(amount, false);
+   /* dummied out */
 }
 
 script_str ext("ACS") addr("Lith_EmitEXP")

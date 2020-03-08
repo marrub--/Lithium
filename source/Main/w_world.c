@@ -30,8 +30,6 @@ i32 prevcluster;
 i32 mapseed;
 bool unloaded;
 bool islithmap;
-bool enemycompat;
-bool enemycheck;
 i32 secretsfound;
 k64 scoremul;
 u64 ticks;
@@ -83,36 +81,6 @@ i32 UniqueID(i32 tid)
 }
 
 /* Static Functions -------------------------------------------------------- */
-
-script
-static void CheckEnemyCompat(void)
-{
-   if(ACS_GetCVar(sc_sv_nomonsters) || enemycheck)
-      return;
-
-   i32 tid;
-   if(ACS_SpawnForced(so_ZombieMan, 0, 0, 0, tid = ACS_UniqueTID(), 0))
-   {
-      ACS_SetActivator(tid);
-      InvGive(so_EnemyChecker, 1);
-
-      str cl = ACS_GetActorClass(0);
-
-      Dbg_Log(log_dev, "Enemy check on %S", cl);
-
-      if(strstr_str(cl, s_OBJ) || ACS_StrCmp(cl, s_RLFormer, 8) == 0)
-         enemycompat = true;
-
-      if(ServCallI(sm_IsHeretic) || ServCallI(sm_IsChex))
-         enemycompat = false;
-
-      if(enemycompat) Dbg_Log(log_dev, "Enemies are \Cdcompatible");
-      else                  Dbg_Log(log_dev, "Enemies are \Cgnot compatible");
-
-      enemycheck = true;
-      ACS_Thing_Remove(0);
-   }
-}
 
 script
 static void Boss_HInit(void)
@@ -196,8 +164,6 @@ static void GInit(void)
 
    Upgr_GInit();
    Wep_GInit();
-
-   CheckEnemyCompat();
 
    game         = ACS_GetCVar(sc_game);
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
@@ -331,12 +297,16 @@ static void HInit(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
+script_str ext("ACS") addr("Lith_PreInit")
+void Sc_PreInit(void)
+{
+   GetDebugInfo();
+}
+
 script type("open")
 static void Sc_World(void)
 {
 begin:
-   GetDebugInfo();
-
    /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
     * we can still detect it by using Timer, so correct this variable.
     */
@@ -435,11 +405,6 @@ begin:
       prevsecrets = secrets;
       prevkills   = kills;
       previtems   = items;
-
-      if(enemycheck && !(dbgflag & dbgf_nomon)) {
-         extern void DmonDebugInfo(void);
-         DmonDebugInfo();
-      }
 
       if(ACS_Timer() % 5 == 0 && missionkill < kills)
       {

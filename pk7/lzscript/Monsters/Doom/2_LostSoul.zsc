@@ -15,8 +15,6 @@ class Lith_LostSoul : Lith_Monster replaces LostSoul;
 
 default
 {
-   Lith_Monster.Score Score_LostSoul;
-
    Alpha       0.7;
    Damage      3;
    Health      70;

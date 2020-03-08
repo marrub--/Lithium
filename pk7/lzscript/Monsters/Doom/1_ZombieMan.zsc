@@ -28,8 +28,6 @@ class Lith_ZombieMan : Lith_Monster replaces ZombieMan;
 
 default
 {
-   Lith_Monster.Score Score_ZombieMan;
-
    Health           30;
    Height           56;
    MinMissileChance 150;

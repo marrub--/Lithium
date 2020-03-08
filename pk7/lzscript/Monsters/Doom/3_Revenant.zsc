@@ -87,8 +87,6 @@ class Lith_Revenant : Lith_Monster replaces Revenant;
 
 default
 {
-   Lith_Monster.Score Score_Revenant;
-
    Health         350;
    Height         56;
    Mass           500;

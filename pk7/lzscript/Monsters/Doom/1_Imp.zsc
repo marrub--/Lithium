@@ -67,8 +67,6 @@ class Lith_Imp : Lith_Monster replaces DoomImp;
 
 default
 {
-   Lith_Monster.Score Score_Imp;
-
    Health           79;
    Height           50;
    Mass             100;

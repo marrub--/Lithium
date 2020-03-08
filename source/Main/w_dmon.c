@@ -31,35 +31,6 @@ void PrintDmonAllocSize(struct player *p)
    p->logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
 }
 
-void DmonDebugInfo(void)
-{
-   static i32 lmvar idprev;
-
-   if(!(dbglevel & log_dmon)) return;
-
-   if(idprev < dmonid)
-   {
-      i32 hilvl = 0, lolvl = MAXLEVEL;
-      i32 hirnk = 0, lornk = MAXRANK;
-
-      for(i32 i = idprev; i < dmonid; i++)
-      {
-         dmon_t *m = &dmonalloc[i];
-         if(m->level < lolvl) lolvl = m->level;
-         if(m->level > hilvl) hilvl = m->level;
-         if(m->rank  < lornk) lornk = m->rank;
-         if(m->rank  > hirnk) hirnk = m->rank;
-      }
-
-      Log("\Cghighest\C- level enemy: lv.%i", hilvl);
-      Log("\Chlowest \C- level enemy: lv.%i", lolvl);
-      Log("\Cghighest\C- rank enemy:  r%i", hirnk);
-      Log("\Chlowest \C- rank enemy:  r%i", lornk);
-   }
-
-   idprev = dmonid;
-}
-
 void DmonInit(void)
 {
    dmonid = 0;

@@ -15,8 +15,6 @@ class Lith_Demon : Lith_Monster replaces Demon;
 
 default
 {
-   Lith_Monster.Score Score_Demon;
-
    Health     150;
    Height     56;
    Mass       400;

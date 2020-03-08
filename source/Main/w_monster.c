@@ -250,8 +250,7 @@ static void OnDeath(dmon_t *m)
 
    OnFinalize(m);
 
-   /* If enemies emit score on death we only need to give extra rank score. */
-   P_GiveAllScore((enemycompat ? 0 : m->mi->score) + m->rank * 500, false);
+   P_GiveAllScore(m->mi->score + m->rank * 500, false);
 }
 
 script
@@ -339,7 +338,7 @@ void PrintMonsterInfo(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_GetMonsterType")
+script ext("ACS") addr(lsc_monstertype)
 i32 Sc_GetMonsterType()
 {
    ifauto(dmon_t *, m, DmonSelf()) return m->mi->type;
@@ -361,20 +360,16 @@ void Sc_ResurrectMonster(i32 amt)
 script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
-   while(ACS_Timer() < 3) ACS_Delay(1);
-
    str cname = ACS_GetActorClass(0);
 
-   for(i32 i = 0; i < countof(monsterinfo); i++)
-   {
+   for(i32 i = 0; i < countof(monsterinfo); i++) {
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
 
       if(mi->flags & mif_full) init = cname == mi->name;
       else                     init = strstr_str(cname, mi->name);
 
-      if(init)
-      {
+      if(init) {
          ifauto(dmon_t *, m, AllocDmon()) {
             m->mi = mi;
             MonsterMain(m);
@@ -385,8 +380,9 @@ void Sc_MonsterInfo(void)
 
    Dbg_Log(log_dmon, "no monster %S", cname);
 
-   /* If the monster failed all checks, give them this so we don't need to recheck every tick. */
-   /* Edit: This isn't necessary anymore, but what the hell, keep it. */
+   /* If the monster failed all checks, give them this so we don't
+      need to recheck every tick.
+      Edit: This isn't necessary anymore, but what the hell, keep it. */
    InvGive(so_MonsterInvalid, 1);
 }
 

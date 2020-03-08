@@ -21,8 +21,6 @@ class Lith_PainElemental : Lith_Monster replaces PainElemental;
 
 default
 {
-   Lith_Monster.Score Score_PainElemental;
-
    Health     400;
    Height     56;
    Mass       400;

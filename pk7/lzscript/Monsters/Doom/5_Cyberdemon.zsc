@@ -84,8 +84,6 @@ class Lith_Cyberdemon : Lith_Monster replaces Cyberdemon;
 
 default
 {
-   Lith_Monster.Score Score_Cyberdemon;
-
    Health           5000;
    Height           110;
    Mass             5000;

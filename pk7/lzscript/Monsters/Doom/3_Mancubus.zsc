@@ -59,8 +59,6 @@ class Lith_Mancubus : Lith_Monster replaces Fatso;
 
 default
 {
-   Lith_Monster.Score Score_Mancubus;
-
    Health     600;
    Height     64;
    Mass       1000;

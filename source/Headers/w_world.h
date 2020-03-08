@@ -83,8 +83,6 @@ extern i32 prevcluster;
 extern i32 mapseed;
 extern bool unloaded;
 extern bool islithmap;
-extern bool enemycompat;
-extern bool enemycheck;
 extern i32 secretsfound;
 extern k64 scoremul;
 extern u64 ticks;

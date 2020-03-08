@@ -65,6 +65,7 @@ override void WorldLoaded(WorldEvent ev)
    } else {
       CallACS("lithlib@gsinit");
       CallACS("lithmain@gsinit");
+      CallACS("Lith_PreInit");
    }
 }
 
@@ -112,7 +113,7 @@ override void WorldThingSpawned(WorldEvent ev)
    if(m_BossLevel == boss_iconofsin && th is "BossBrain")
       m_BossBabies.push(th);
 
-   if(th.bISMONSTER) {
+   if(th.bISMONSTER && !(th is "RandomSpawner")) {
       Lith_UTIL.Exec(th, lsc_monsterinfo);
 
       if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
@@ -121,10 +122,18 @@ override void WorldThingSpawned(WorldEvent ev)
       if(m_BossLevel == boss_barons && th.bBOSSDEATH && th.pos.x == 528)
          th.A_SetTranslation('Lith_BlueBaron');
 
-      if(m_BossLevel != boss_none && th.bBOSSDEATH) {
-         if(m_BossLevel != boss_iconofsin)
-            m_BossBabies.push(th);
+      int typ = mtype_unknown;
 
+      switch(m_BossLevel) {
+         case boss_barons:      typ = mtype_baron;      break;
+         case boss_cyberdemon:  typ = mtype_cyberdemon; break;
+         case boss_spiderdemon: typ = mtype_mastermind; break;
+      }
+
+      if(typ == mtype_unknown || Lith_UTIL.Exec(th, lsc_monstertype) == typ)
+         m_BossBabies.push(th);
+
+      if(m_BossLevel != boss_none && th.bBOSSDEATH) {
          th.Health = int(th.Health * 2.7);
          th.ReactionTime = 0;
          th.DamageMultiply *= 1.6;
