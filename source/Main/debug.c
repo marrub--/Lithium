@@ -112,6 +112,12 @@ void Log(cstr fmt, ...)
 
 /* Scripts ----------------------------------------------------------------- */
 
+script_str ext("ACS") addr("Lith_NoBossWarn")
+void Sc_NoBossWarn(void)
+{
+   Dbg_Log(log_dev, "warning: no boss detected");
+}
+
 script_str ext("ACS") addr("Lith_GiveEXPToMonster")
 void Sc_GiveEXPToMonster(i32 amt)
 {

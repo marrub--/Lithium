@@ -139,7 +139,6 @@ static void GetDebugInfo(void)
 
    dbglevel = ACS_GetCVar(sc_debug_level);
 
-   if(       ACS_GetCVar(sc_debug_nomonsters)) dbgflag |= dbgf_nomon;
    if(all || ACS_GetCVar(sc_debug_bip))        dbgflag |= dbgf_bip;
    if(all || ACS_GetCVar(sc_debug_items))      dbgflag |= dbgf_items;
    if(all || ACS_GetCVar(sc_debug_save))       dbgflag |= dbgf_save;

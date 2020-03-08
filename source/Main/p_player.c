@@ -400,6 +400,10 @@ static void P_BossWarning(struct player *p)
 script
 static void P_BossText(struct player *p, i32 boss)
 {
+   if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
+      return;
+   }
+
    cstr fmt;
    switch(boss) {
       case boss_none:

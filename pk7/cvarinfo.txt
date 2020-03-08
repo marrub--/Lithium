@@ -11,14 +11,13 @@ server float __lith_version;
 
 server noarchive string __lith_end;
 
-server noarchive int  __lith_debug_level      = 0;
-server noarchive bool __lith_debug_all        = false;
-server noarchive bool __lith_debug_items      = false;
-server noarchive bool __lith_debug_bip        = false;
-server noarchive bool __lith_debug_score      = false;
-server noarchive bool __lith_debug_upgrades   = false;
-server noarchive bool __lith_debug_save       = false;
-server noarchive bool __lith_debug_nomonsters = false;
+server noarchive int  __lith_debug_level    = 0;
+server noarchive bool __lith_debug_all      = false;
+server noarchive bool __lith_debug_items    = false;
+server noarchive bool __lith_debug_bip      = false;
+server noarchive bool __lith_debug_score    = false;
+server noarchive bool __lith_debug_upgrades = false;
+server noarchive bool __lith_debug_save     = false;
 
 server int   lith_sv_difficulty   = 10;
 server bool  lith_sv_rain         = false;

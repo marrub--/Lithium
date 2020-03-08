@@ -135,10 +135,9 @@ enum {
 enum {
    dbgf_bip   = 1 << 0,
    dbgf_items = 1 << 1,
-   dbgf_nomon = 1 << 2,
-   dbgf_save  = 1 << 3,
-   dbgf_score = 1 << 4,
-   dbgf_upgr  = 1 << 5,
+   dbgf_save  = 1 << 2,
+   dbgf_score = 1 << 3,
+   dbgf_upgr  = 1 << 4,
 };
 
 /* Extern Functions -------------------------------------------------------- */

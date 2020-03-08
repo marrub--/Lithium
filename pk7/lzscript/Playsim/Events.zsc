@@ -149,22 +149,27 @@ override void WorldTick()
             Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);
 
       if(m_BossDeathInit == 0) {
-         bool boss_baby_is_dead = true;
+         bool boss_baby_is_dead;
 
-         for(int i = 0; i < m_BossBabies.size(); i++) {
-            if(m_BossLevel == boss_barons) {
-               for(int i = 0; i < MAXPLAYERS; i++) {
-                  PlayerInfo player = players[i];
-                  if(playeringame[i] && player.mo) {
-                     SecSpecial spec;
-                     player.mo.floorSector.getSpecial(spec);
-                     if((spec.flags & Sector.SECF_ENDLEVEL) == 0) {
-                        boss_baby_is_dead = false;
+         if(m_BossBabies.size() == 0) {
+            boss_baby_is_dead = false;
+            CallACS("Lith_NoBossWarn");
+         } else {
+            boss_baby_is_dead = true;
+            for(int i = 0; i < m_BossBabies.size(); i++) {
+               if(m_BossLevel == boss_barons) {
+                  for(int i = 0; i < MAXPLAYERS; i++) {
+                     PlayerInfo player = players[i];
+                     if(playeringame[i] && player.mo) {
+                        SecSpecial spec;
+                        player.mo.floorSector.getSpecial(spec);
+                        if(!(spec.flags & Sector.SECF_ENDLEVEL))
+                           boss_baby_is_dead = false;
                      }
                   }
+               } else if(m_BossBabies[i] && m_BossBabies[i].health > 0) {
+                  boss_baby_is_dead = false;
                }
-            } else if(m_BossBabies[i].health > 0) {
-               boss_baby_is_dead = false;
             }
          }
 

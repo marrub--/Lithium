@@ -9,6 +9,13 @@
 
 extend class Lith_HERMES;
 
+static bool IsRampancy()
+{
+   string why = "Robot_Thingo";
+   class<Object> stopit = why;
+   return stopit != null;
+}
+
 static bool IsHeretic() {return gameinfo.gametype & GAME_Heretic != 0;}
 static bool IsChex()    {return gameinfo.gametype & GAME_Chex    != 0;}
 
