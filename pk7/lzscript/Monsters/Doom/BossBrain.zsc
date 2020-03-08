@@ -28,11 +28,143 @@ class Lith_BossBrainExplosion : Actor
    }
 }
 
+class Lith_BossDamageEffect : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+
+      +NOTIMEFREEZE
+      +NOINTERACTION
+      +BRIGHT
+   }
+
+   states
+   {
+   Spawn:
+      BLLT Q 0 A_SetScale(scale.x * 0.95);
+      BLLT Q 1 A_FadeOut(0.01);
+      loop;
+   }
+}
+
+class Lith_BossDamage : Actor
+{
+   default
+   {
+      RenderStyle "Add";
+      Scale 4;
+      Radius 4;
+      Height 4;
+      Speed 24;
+
+      Projectile;
+      +SEEKERMISSILE
+      +BRIGHT
+      +THRUACTORS
+   }
+
+   action void Lith_A_SpawnEffect(bool dorandom)
+   {
+      let fx = Spawn("Lith_BossDamageEffect", pos);
+      fx.scale = scale;
+      if(dorandom)
+         fx.vel = (frandom(-2,2), frandom(-2,2), frandom(-2,2));
+   }
+
+   states
+   {
+   Spawn:
+      BLLT Q 0;
+      BLLT Q 0 ThrustThingZ(0, 4, 0, 0);
+   SpawnLoop:
+      BLLT Q 0 Lith_A_SpawnEffect(false);
+      BLLT Q 1 A_SeekerMissile(90, 90, SMF_PRECISE);
+      loop;
+   Death:
+      TNT1 A 0 A_DamageTracer(damage);
+      TNT1 AAAAAAAAAAAA 0 Lith_A_SpawnEffect(true);
+      stop;
+   }
+}
+
+class Lith_ATField : Actor
+{
+   default
+   {
+      RenderStyle "ColorAdd";
+      XScale 2;
+      YScale 10;
+      VSpeed 2;
+      Alpha 0.1;
+
+      +NOTIMEFREEZE
+      +NOINTERACTION
+      +OLDRADIUSDMG
+   }
+
+   states
+   {
+   Spawn:
+      LBAR B 1;
+   SpawnLoop:
+      LBAR B 0 A_Explode(40, 100, 0, false, 100);
+      LBAR B 1 A_FadeOut(frandom(0.06, 0.08));
+      loop;
+   }
+}
+
+class Lith_BossEye : BossEye replaces BossEye
+{
+   default
+   {
+      DropItem "DoomImp",       0, 50;
+      DropItem "Demon",         0, 40;
+      DropItem "Cacodemon",     0, 30;
+      DropItem "Fatso",         0, 30;
+      DropItem "Spectre",       0, 30;
+      DropItem "HellKnight",    0, 24;
+      DropItem "Arachnotron",   0, 20;
+      DropItem "PainElemental", 0, 10;
+      DropItem "Revenant",      0, 10;
+      DropItem "BaronOfHell",   0, 9;
+      DropItem "Archvile",      0, 2;
+      DropItem "CyberDemon",    0, 1;
+   }
+
+   Lith_BossBrain m_BossBrain;
+
+   override void tick() {
+      if(!isFrozen() && m_BossBrain) {
+         for(int i = 0; i < 40; i++) {
+            let mo = Spawn("Lith_ATField", pos + (cos(i * 9) * 400,
+                                                  sin(i * 9) * 400,
+                                                  0));
+            mo.alpha *= 0.5 + (m_BossBrain.m_Shield / 100.0);
+         }
+      }
+
+      super.tick();
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 1 A_Look;
+      wait;
+   See:
+      TNT1 A 180 A_BrainAwake;
+      TNT1 A 120 A_BrainSpit;
+      wait;
+   }
+}
+
 class Lith_BossBrain : BossBrain replaces BossBrain;
 
 default
 {
-   Health 500;
+   Health 700;
    Mass int.Max;
    PainChance 256;
 
@@ -42,6 +174,70 @@ default
    +SOLID
 }
 
+override void postBeginPlay()
+{
+   super.postBeginPlay();
+
+   Lith_BossEye th;
+   for(let it = ThinkerIterator.create("Lith_BossEye"); (th = Lith_BossEye(it.next()));) {
+      th.m_BossBrain = self;
+      m_BossEye = true;
+   }
+
+   m_ShieldRegenTicks = 0;
+   m_Shield = 100;
+   m_OldShield = 100;
+}
+
+override void tick() {
+   if(!isFrozen()) {
+      if(m_Shield < m_OldShield) {
+         if(m_Shield <= 0) {
+            m_ShieldRegenTicks = 35 * 24;
+         } else {
+            m_ShieldRegenTicks = 35 * 40;
+         }
+      }
+
+      if(m_ShieldRegenTicks == 0) {
+         m_Shield += 20;
+         m_Shield  = min(m_Shield, 100);
+      } else {
+         m_ShieldRegenTicks--;
+      }
+
+      m_OldShield = m_Shield;
+   }
+
+   super.tick();
+}
+
+override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
+{
+   if(source is "Lith_BossDamage" && m_Shield > 0) {
+      A_StartSound("enemies/ios/crack", lch_body, attenuation: 0.2);
+      m_Shield -= damage;
+      if(m_Shield < 0)
+         A_StartSound("enemies/ios/crash", lch_body, attenuation: 0.2);
+      return 0;
+   }
+
+   if(m_BossEye) {
+      if(m_Shield <= 0 || source is "ExplosiveBarrel" || source == self) {
+         return super.damageMobj(inflictor, source, damage, mod, flags, angle);
+      } else {
+         return 0;
+      }
+   } else {
+      return super.damageMobj(inflictor, source, damage, mod, flags, angle);
+   }
+}
+
+int m_Shield;
+int m_OldShield;
+int m_ShieldRegenTicks;
+
+bool m_BossEye;
 int m_Boom;
 
 states
@@ -51,7 +247,7 @@ Spawn:
    stop;
 Pain:
    TNT1 A 0 A_Quake(1, 36, 0, 4096, "");
-   BBRN B 36 A_StartSound("brain/pain", lch_voice, attenuation: 0.1);
+   BBRN B 1 A_StartSound("brain/pain", lch_voice, attenuation: 0.1);
    goto Spawn;
 Death:
    TNT1 A 0 {

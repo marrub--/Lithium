@@ -212,6 +212,22 @@ override void WorldThingDied(WorldEvent ev)
       bl.Translation = mo.BloodTranslation;
       if(ev.Inflictor) bl.A_Face(ev.Inflictor);
    }
+
+   int sph = mo.spawnHealth();
+   if(mo.bBOSSSPAWNED && sph > 50) {
+      Lith_BossBrain to;
+      int dmg = sph / 50 * random(1, 4);
+      float sc = log10(sph);
+      for(let it = ThinkerIterator.create("Lith_BossBrain"); (to = Lith_BossBrain(it.next()));) {
+         if(to.m_Shield > 0) {
+            let shot = Actor.Spawn("Lith_BossDamage", mo.pos);
+            shot.target = mo;
+            shot.tracer = to;
+            shot.setDamage(dmg);
+            shot.scale = (sc, sc);
+         }
+      }
+   }
 }
 
 override void WorldThingRevived(WorldEvent ev)

@@ -43,6 +43,23 @@ enemies {
       levelup2,
    }
 
+   ios {
+      == lsounds/Monsters/IoS
+      crash Crash # Akzeriyyuth (Feryquitous song), mgamabile (FreeSound), connum (FreeSound)
+      crack1 Crack1 # speedygonzo (FreeSound)
+      crack2 Crack2 # 〃
+      crack3 Crack3 # 〃
+      crack4 Crack4 # 〃
+      crack5 Crack5 # 〃
+      $random crack {
+         crack1,
+         crack2,
+         crack3,
+         crack4,
+         crack5,
+      }
+   }
+
    boss {
       == lsounds/Monsters/Boss
       talk1 Talk  # Doom 3

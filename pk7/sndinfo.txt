@@ -101,6 +101,13 @@ $random body/flesh { body/flesh1 body/flesh2 body/flesh3 body/flesh4 body/flesh5
 enemies/levelup1 lsounds/Monsters/LevelUp1
 enemies/levelup2 lsounds/Monsters/LevelUp2
 $random enemies/levelup { enemies/levelup1 enemies/levelup2 }
+enemies/ios/crash lsounds/Monsters/IoS/Crash
+enemies/ios/crack1 lsounds/Monsters/IoS/Crack1
+enemies/ios/crack2 lsounds/Monsters/IoS/Crack2
+enemies/ios/crack3 lsounds/Monsters/IoS/Crack3
+enemies/ios/crack4 lsounds/Monsters/IoS/Crack4
+enemies/ios/crack5 lsounds/Monsters/IoS/Crack5
+$random enemies/ios/crack { enemies/ios/crack1 enemies/ios/crack2 enemies/ios/crack3 enemies/ios/crack4 enemies/ios/crack5 }
 enemies/boss/talk1 lsounds/Monsters/Boss/Talk
 enemies/boss/talk2 lsounds/Monsters/Boss/Talk2
 $random enemies/boss/talk { enemies/boss/talk1 enemies/boss/talk2 }
