@@ -125,6 +125,14 @@ class Lith_ATFieldCrash : Lith_ATField
    }
 }
 
+class Lith_SpawnFire : SpawnFire
+{
+   default
+   {
+      SeeSound "vile/firecrkl";
+   }
+}
+
 class Lith_SpawnShot : SpawnShot replaces SpawnShot
 {
    default
@@ -136,7 +144,7 @@ class Lith_SpawnShot : SpawnShot replaces SpawnShot
    {
    Spawn:
       BOSF A 3 bright A_SpawnSound;
-      BOSF BBBCCCDDD 1 bright A_SpawnFly;
+      BOSF BBBCCCDDD 1 bright A_SpawnFly("Lith_SpawnFire");
       loop;
    }
 }
