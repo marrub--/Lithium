@@ -125,9 +125,9 @@ class Lith_BossEye : BossEye replaces BossEye
       DropItem "Spectre",       0, 30;
       DropItem "HellKnight",    0, 24;
       DropItem "Arachnotron",   0, 20;
-      DropItem "PainElemental", 0, 10;
       DropItem "Revenant",      0, 10;
       DropItem "BaronOfHell",   0, 9;
+      DropItem "PainElemental", 0, 4;
       DropItem "Archvile",      0, 2;
       DropItem "CyberDemon",    0, 1;
    }
