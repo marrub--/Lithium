@@ -122,16 +122,18 @@ override void WorldThingSpawned(WorldEvent ev)
       if(m_BossLevel == boss_barons && th.bBOSSDEATH && th.pos.x == 528)
          th.A_SetTranslation('Lith_BlueBaron');
 
-      int typ = mtype_unknown;
+      if(m_BossLevel != boss_iconofsin && m_BossLevel != boss_none) {
+         int typ = mtype_unknown;
 
-      switch(m_BossLevel) {
-         case boss_barons:      typ = mtype_baron;      break;
-         case boss_cyberdemon:  typ = mtype_cyberdemon; break;
-         case boss_spiderdemon: typ = mtype_mastermind; break;
+         switch(m_BossLevel) {
+            case boss_barons:      typ = mtype_baron;      break;
+            case boss_cyberdemon:  typ = mtype_cyberdemon; break;
+            case boss_spiderdemon: typ = mtype_mastermind; break;
+         }
+
+         if(typ == mtype_unknown || Lith_UTIL.Exec(th, lsc_monstertype) == typ)
+            m_BossBabies.push(th);
       }
-
-      if(typ == mtype_unknown || Lith_UTIL.Exec(th, lsc_monstertype) == typ)
-         m_BossBabies.push(th);
 
       if(m_BossLevel != boss_none && th.bBOSSDEATH) {
          th.Health = int(th.Health * 2.7);
