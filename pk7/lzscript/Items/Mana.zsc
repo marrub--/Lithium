@@ -34,7 +34,7 @@ default
 {
    RenderStyle "Add";
    Radius 4;
-   Height 4;
+   Height 64;
    Scale 0.8;
    Inventory.PickupSound "player/pickup/mana";
    Inventory.PickupMessage "";
@@ -68,7 +68,7 @@ Spawn:
    BLLT Q 0 A_SpawnItemEx("Lith_ManaPickupTrail", flags: SXF_TRANSFERTRANSLATION);
    BLLT Q 0 {
       if(CheckIfTargetInLOS())
-         A_SeekerMissile(360, 40, SMF_PRECISE|SMF_CURSPEED);
+         A_SeekerMissile(90, 40, SMF_PRECISE|SMF_CURSPEED);
    }
    BLLT Q 1;
    loop;
