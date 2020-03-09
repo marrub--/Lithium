@@ -362,6 +362,8 @@ void Sc_MonsterInfo(void)
 {
    str cname = ACS_GetActorClass(0);
 
+   if(strstr_str(cname, so_RLAdaptive)) return;
+
    for(i32 i = 0; i < countof(monsterinfo); i++) {
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
