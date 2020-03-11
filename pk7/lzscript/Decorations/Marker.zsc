@@ -1,0 +1,31 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_MapMarker : Actor {
+   default {
+      +NOBLOCKMAP
+      +NOGRAVITY
+      +DONTSPLASH
+      +INVISIBLE
+   }
+
+   override void beginPlay() {
+      changeTid(level.findUniqueTid());
+      setTag(StringTable.localize(curSector.getUdmfString('user_marker')));
+      changeStatNum(_stat_mapmark);
+   }
+
+   states {
+   Spawn:
+      TNT1 A -1;
+      stop;
+   }
+}
+
+/* EOF */

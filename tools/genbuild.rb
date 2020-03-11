@@ -57,13 +57,14 @@ DECOIN = %W"
    $#{HDR}/w_scorenums.h
 "
 TEXTIN = %w"text/Text.txt"
-HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx"
+HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
+            pk7_ep1/language.gfx.txt:pk7_ep1/:lgfx"
 SNDSIN = %w"text/Sounds.txt"
 DEPS = [*UPGCHO, *WEPCHO, *MONCHO,
-        Dir["source/Headers/*"].map do |s|
+        Dir.glob("source/Headers/*").map do |s|
            "$#{HDR}/#{File.basename s}"
         end].uniq
-SRCS = [*Dir["source/Main/*"], *UPGCCO, *WEPCCO].map do |s|
+SRCS = [*Dir.glob("source/Main/*"), *UPGCCO, *WEPCCO].map do |s|
    File.basename s
 end.uniq
 

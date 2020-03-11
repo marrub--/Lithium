@@ -14,34 +14,71 @@
 
 require_relative "corinth.rb"
 
-FONTS=[[8, "MisakiG"], [8, "MisakiM"], [8, "JFDot8"], [16, "JFDot16"]]
-CMAP=`tools/getcmap.rb`
+require 'set'
 
-out = []
+Font = Struct.new :pt, :name, :cmap, :body
 
-for sz, f in FONTS
-   fontfile = "bin/#{f}.ttf"
-   unless FileTest.exist? fontfile
-      system *%W"wget http://mab.greyserv.net/f/#{f}.ttf -O #{fontfile}"
+cmap_all = Set[]
+
+Dir.glob("text/**/*.txt").each do |f|
+   open(f).each_char do |c|
+      cmap_all.add c
+   end
+end
+
+cmap_all.delete " "
+cmap_all.delete "\n"
+cmap_all.delete "\u{5c}"
+
+cmap_all = cmap_all.to_a.sort
+cmap_anm = [*"a".."z", *"A".."Z", *"0".."9"]
+
+fonts = []
+fonts.push Font.new 8,  "MisakiG",  cmap_all
+fonts.push Font.new 8,  "MisakiM",  cmap_all
+fonts.push Font.new 8,  "JFDot8",   cmap_all
+fonts.push Font.new 16, "JFDot16",  cmap_all
+fonts.push Font.new(30, "AreaName", cmap_anm, lambda do |words, ch|
+   words.push *%W"-stroke black -strokewidth 5 label:#{ch}
+                  -stroke none                 label:#{ch}
+                  -composite"
+end)
+
+pngquant_in = []
+advpng_in   = []
+
+for fnt in fonts
+   ttf = "bin/#{fnt.name}.ttf"
+
+   unless FileTest.exist? ttf
+      system *%W"wget http://mab.greyserv.net/f/#{fnt.name}.ttf -O #{ttf}"
    end
 
-   outdir = "pk7/fonts/#{f.downcase}"
+   outdir = "pk7/fonts/#{fnt.name.downcase}"
 
-   `rm -f #{outdir}/*.png`
+   system *%W"rm -f".push(*Dir.glob("#{outdir}/*.png"))
 
-   words = %W"convert -depth 1 -font #{fontfile} -pointsize #{sz} -background none -fill white"
+   words = %W"convert -depth 1 -font #{ttf} -pointsize #{fnt.pt}
+              -background none -fill white"
 
-   for ch in CMAP.each_char
+   for ch in fnt.cmap
       num = sprintf "%08X", ch.ord
       f = "#{outdir}/#{num}.png"
-      out.push f
-      words.push *%W"( label:#{ch} -write #{f} )"
+      pngquant_in.push f unless fnt.body
+      advpng_in.push f
+      words.push "("
+      if fnt.body
+         fnt.body.call words, ch
+      else
+         words.push "label:#{ch}"
+      end
+      words.push *%W"-write #{f} )"
    end
 
    system *words
 end
 
-system *%W"pngquant --ext .png -f 2".push(*out)
-system *%W"advpng -z4".push(*out)
+system *%w"pngquant --ext .png -f 8 -s 1".push(*pngquant_in)
+system *%w"advpng -z4".push(*advpng_in)
 
 ## EOF

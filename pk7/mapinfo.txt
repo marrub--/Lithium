@@ -194,6 +194,7 @@ doomednums
    22431 = Lith_Chair
    22432 = Lith_BoomBarrel
    22433 = Lith_AdviceMarker
+   22434 = Lith_MapMarker
 }
 
 damagetype Lith_NoDamage

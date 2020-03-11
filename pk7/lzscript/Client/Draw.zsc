@@ -555,7 +555,7 @@ override void RenderOverlay(RenderEvent evt)
       break;
    }
 
-   let p = Lith_Player(evt.Camera);
+   let p = Lith_Player(evt.camera);
    if(p && p.m_Cs) p.m_Cs.Lith_Render();
 }
 

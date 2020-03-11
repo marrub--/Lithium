@@ -12,7 +12,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-Dir[ARGV[0]].each do |f|
+Dir.glob(ARGV[0]).each do |f|
    if File.file?(f) && open(f) do |f| f.readpartial(4) == "fLaC" end
       puts "*** #{f}"
       `flac --best --no-padding --preserve-modtime -f "#{f}" -o "#{f}" 2>&1`

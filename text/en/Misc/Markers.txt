@@ -1,0 +1,24 @@
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+@@ \#ADVICE_Terminal
+Walk up to the terminal and press {+use} to read it.
+
+Some terminals may be necessary to progress.
+
+@@ \#ADVICE_Jump
+Press {+jump} to climb the barrier.
+
+@@ \#ADVICE_DoubleJump
+Some classes can double-jump or temporarily fly.
+
+Try pressing {+jump} or {+speed} mid-air to get up to the platform.
+
+== \#MARKER_Unknown | Unknown
+
+== \#MARKER_M1A1_EscapePod   | Escape Pod 02C3
+== \#MARKER_M1A1_Quarters    | Personal Quarters
+== \#MARKER_M1A1_TeleportBay | Teleport Bay 1E14
+
+## EOF

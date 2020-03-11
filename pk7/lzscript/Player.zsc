@@ -107,6 +107,8 @@ double m_IYaw, m_LastIYaw;
 double m_ZVel, m_LastZVel;
 double m_VZVel, m_LastVZVel;
 
+Lith_MapMarker m_curMark;
+
 property ViewBob: m_VBob;
 
 override void BeginPlay()
@@ -329,8 +331,7 @@ void Lith_PreTick()
    m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);
 
    /* stupid hack to keep the view from moving around */
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen))
-   {
+   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen)) {
       angle -= 1;
       pitch -= 1;
       A_SetAngle(angle + 1, SPF_INTERPOLATE);
@@ -341,8 +342,7 @@ void Lith_PreTick()
    if(m_CS) m_CS.Lith_RotateView(2);
 
    /* draw stuff if we're the camera */
-   if(players[consoleplayer].camera == self)
-   {
+   if(players[consoleplayer].camera == self) {
       if(m_CS) m_CS.Lith_DrawFrame();
       Lith_URANUS.LE();
    }
@@ -350,6 +350,8 @@ void Lith_PreTick()
 
 void Lith_PostTick()
 {
+   if(!player) return;
+
    if(CVar.GetCVar('lith_player_rainshader', player).getBool())
       Lith_RainEffect();
    else
@@ -359,14 +361,22 @@ void Lith_PostTick()
 
    Lith_URANUS.LZ(self, 320, 240);
 
-   if(!player) return;
-
    if(health > 0 && CVar.GetCVar('lith_xhair_enable', player).getBool())
       Lith_Crosshair();
 
    if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
       if(playeringame[i] && players[i] != player && players[i].mo)
          Lith_PlayerIndicator(players[i]);
+
+   Lith_MapMarker th;
+   for(let it = ThinkerIterator.create("Lith_MapMarker", _stat_mapmark);
+       (th = (Lith_MapMarker(it.next())));) {
+      if(th.cursector == cursector && th != m_curMark &&
+         (!m_curMark || th.getTag() != m_curMark.getTag())) {
+         m_curMark = th;
+         CallACS("Lith_Markiplier", m_curMark.tid);
+      }
+   }
 
    m_LastIPitch = m_IPitch;
    m_LastVPitch = m_VPitch;

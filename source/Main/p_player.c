@@ -518,11 +518,37 @@ static void P_Scr_PTickPre(struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
+script_str ext("ACS") addr("Lith_Markiplier")
+void Sc_MapMarker(i32 tid) {
+   enum {ticks = 35 * 2};
+
+   str text = GetPropS(tid, APROP_NameTag);
+
+   while(!player_init) ACS_Delay(1);
+
+   ACS_Delay(5);
+
+   with_player(LocalPlayer) {
+      for(i32 i = 0; i < ticks; i++) {
+         k32 alpha;
+
+         /**/ if(i < 15)         alpha = i / 15.0;
+         else if(i > ticks - 15) alpha = (ticks - i) / 15.0;
+         else                    alpha = 1.0;
+
+         i32 x = absk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
+
+         SetSize(640, 480);
+         PrintTextA_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha);
+
+         ACS_Delay(1);
+      }
+   }
+}
+
 script ext("ACS") addr(lsc_drawplayericon)
-void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
-{
-   with_player(&players[num])
-   {
+void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
+   with_player(&players[num]) {
       k32 a = absk((x - 160) / 90.0);
            if(a < 0.2) a = 0.2;
       else if(a > 1.0) a = 1.0;
@@ -535,10 +561,8 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y)
 }
 
 script_str type("net") ext("ACS") addr("Lith_Glare")
-void Sc_Glare(void)
-{
-   with_player(LocalPlayer)
-   {
+void Sc_Glare(void) {
+   with_player(LocalPlayer) {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
       ACS_LocalAmbientSound(ss_player_glare, 127);

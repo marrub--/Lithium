@@ -64,7 +64,7 @@ static Lith_Cyberspace CreateDerived(class<Lith_Cyberspace> type)
    for(int x = 0; x < cs.RW; x++)
       cs.m_CamX[x] = x / float(cs.RW) * 2 - 1;
 
-   cs.ChangeStatNum(Thinker.STAT_USER + 7);
+   cs.changeStatNum(_stat_cyberspace);
 
    CallACS("Lith_CSLoadMap");
 

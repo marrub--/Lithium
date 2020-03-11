@@ -16,12 +16,14 @@ require_relative "corinth.rb"
 
 require 'fileutils'
 
-def run of, pkdir, dir
-   of.puts "identifier,default"
-
-   pdir = "#{pkdir}#{dir}"
-   re = /#{Regexp.escape pdir}\/(.+)\.png/
+for arg in ARGV
+   fname, pkdir, dir = arg.split ":"
+   pdir  = "#{pkdir}#{dir}"
+   re    = /#{Regexp.escape pdir}\/(.+)\.png/
    names = Dir.glob("#{pdir}/**/*.png").sort
+
+   of = open fname, "w"
+   of.puts "identifier,default"
    for item in names
       unless item.include? "/Font/"
          m = re.match item
@@ -30,7 +32,4 @@ def run of, pkdir, dir
    end
 end
 
-for arg in ARGV
-   fname, pkdir, dir = arg.split ":"
-   run open(fname, "w"), pkdir, dir
-end
+## EOF
