@@ -30,8 +30,6 @@ class Lith_Dummy : Actor
 /* Don't remove this, it is actually used for checking if this mod is loaded. */
 class Lith_GreyHam : HealthBonus
 {
-   /*$Category "Health and Armor" */
-
    default
    {
       Tag "Grey Ham";

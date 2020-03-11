@@ -388,8 +388,6 @@ class Lith_ShobonSphere : Lith_CustomInventory
 {
    default
    {
-      /*$Category "Powerups" */
-
       Tag "Shobon Sphere";
       Inventory.PickupSound "misc/p_pkup";
 

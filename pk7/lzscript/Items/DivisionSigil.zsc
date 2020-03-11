@@ -37,9 +37,6 @@ class Lith_DivisionSigil : Lith_ItemPickup
 {
    default
    {
-      /*$Category "Items" */
-      /*$Sprite "DIVIA0" */
-
       Inventory.Icon "DIVSIGI1";
       Inventory.MaxAmount 1;
       Tag "Division Sigil";

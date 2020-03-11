@@ -11,8 +11,6 @@ class Lith_Chair : Actor
 {
    default
    {
-      /*$Category "Decoration" */
-
       Height 32;
       Radius 20;
       Scale 0.7;

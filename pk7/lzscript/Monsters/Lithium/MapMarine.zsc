@@ -16,11 +16,6 @@ class Lith_Map_Jacques : Lith_MapMarine
 }
 
 class Lith_MapMarine : Lith_TitleMarine;
-/*$Category "Marines" */
-
-/*$Arg0 "Dialogue Number" */
-/*$Arg0ToolTip "Identifier of the dialogue when talked to." */
-/*$Arg0Default 1 */
 
 default
 {

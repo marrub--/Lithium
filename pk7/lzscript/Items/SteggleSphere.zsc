@@ -94,8 +94,6 @@ class Lith_SteggleSphere : Lith_CustomInventory;
 
 default
 {
-   /*$Category "Powerups" */
-
    Tag "Steggle Sphere";
    Inventory.PickupSound "misc/p_pkup";
 

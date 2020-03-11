@@ -58,8 +58,6 @@ class Lith_BlurSphere : Lith_CustomInventory;
 
 default
 {
-   /*$Category "Powerups" */
-
    Tag "Fragma";
    Inventory.PickupSound "player/pickup/barrier";
    Lith_CustomInventory.InfoPage "Fragma";

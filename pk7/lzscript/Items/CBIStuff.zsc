@@ -11,8 +11,6 @@ class Lith_CBIItem : Lith_Pickup
 {
    default
    {
-      /*$Category "CBI Items" */
-
       Inventory.PickupSound "player/pickup/upgrcbi";
       Lith_Pickup.Glow "Lith_UpgrGlow";
 
