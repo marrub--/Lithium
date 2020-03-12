@@ -31,14 +31,15 @@ cmap_all.delete "\n"
 cmap_all.delete "\u{5c}"
 
 cmap_all = cmap_all.to_a.sort
-cmap_anm = [*"a".."z", *"A".."Z", *"0".."9"]
+cmap_asc = (33..125).map do |n| n.chr end
+cmap_asc.delete_if do |x| %w"$ & @".include? x end
 
 fonts = []
 fonts.push Font.new 8,  "MisakiG",  cmap_all
 fonts.push Font.new 8,  "MisakiM",  cmap_all
 fonts.push Font.new 8,  "JFDot8",   cmap_all
 fonts.push Font.new 16, "JFDot16",  cmap_all
-fonts.push Font.new(30, "AreaName", cmap_anm, lambda do |words, ch|
+fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
    words.push *%W"-stroke black -strokewidth 5 label:#{ch}
                   -stroke none                 label:#{ch}
                   -composite"
@@ -67,6 +68,7 @@ for fnt in fonts
       pngquant_in.push f unless fnt.body
       advpng_in.push f
       words.push "("
+      ch = "\\" + ch if %w"\\ ( ) -".include? ch
       if fnt.body
          fnt.body.call words, ch
       else
