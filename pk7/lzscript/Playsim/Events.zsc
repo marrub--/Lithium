@@ -38,7 +38,8 @@ override void WorldLoaded(WorldEvent ev)
    };
 
    static const string BOSS_D2[] = {
-      "5eecd88f4491f516d590ce4bbf45f532" /* doom2.wad (1.9) MAP30 */
+      "5eecd88f4491f516d590ce4bbf45f532", /* doom2.wad (1.9) MAP30 */
+      "b304ac2e0c15b97fe9e2dcd5cff9066c"  /* freedoom2.wad (0.12.1) MAP30 */
    };
 
    if(ev.IsSaveGame)
