@@ -123,6 +123,8 @@ def parse_file state, filename, language
       end
    end
 
+   do_close_buf.call
+
    state.cwd.pop dirname.size
 end
 
@@ -140,7 +142,7 @@ for filename in ARGV
       out.puts "[" + lang.name + "]"
       for data in lang.data
          if data.is_a? Alias
-            out.puts %("#{escape data.name}" = "#{escape data.text.chomp}";)
+            out.puts %("#{escape data.name}" = "#{escape data.text.strip}";)
          else
             out.puts data
          end
