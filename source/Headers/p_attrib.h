@@ -23,6 +23,7 @@ enum
    atsys_auto,
    atsys_hybrid,
    atsys_manual,
+   atsys_max,
 };
 
 struct player_attributes

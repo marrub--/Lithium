@@ -647,8 +647,8 @@ identifier,default
 :Weapon:RendHit2,lgfx/Weapon/RendHit2.png
 :Weapon:RendHit3,lgfx/Weapon/RendHit3.png
 :Weapon:RendHit4,lgfx/Weapon/RendHit4.png
-:XHairs:10b,lgfx/XHairs/10b.png
-:XHairs:10w,lgfx/XHairs/10w.png
+:XHairs:0b,lgfx/XHairs/0b.png
+:XHairs:0w,lgfx/XHairs/0w.png
 :XHairs:1b,lgfx/XHairs/1b.png
 :XHairs:1w,lgfx/XHairs/1w.png
 :XHairs:2b,lgfx/XHairs/2b.png

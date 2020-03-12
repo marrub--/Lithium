@@ -1,4 +1,73 @@
-## Settings ------------------------------------------------------------------|
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+
+== \#ST_PFX_Percent | %
+== \#ST_PFX_Times   | x
+== \#ST_PFX_Minutes | min
+== \#ST_PFX_Of255   | /255
+== \#ST_PFX_Pixels  | px
+
+== \#ST_NAME_Unknown | Unknown
+
+== \#ST_NAME_LvSys_0 | Auto
+== \#ST_NAME_LvSys_1 | Hybrid
+== \#ST_NAME_LvSys_2 | Manual
+
+== \#ST_NAME_Color_a | Brick
+== \#ST_NAME_Color_b | Tan
+== \#ST_NAME_Color_c | Grey
+== \#ST_NAME_Color_d | Green
+== \#ST_NAME_Color_e | Brown
+== \#ST_NAME_Color_f | Gold
+== \#ST_NAME_Color_g | Red
+== \#ST_NAME_Color_h | Blue
+== \#ST_NAME_Color_i | Orange
+== \#ST_NAME_Color_j | White
+== \#ST_NAME_Color_k | Yellow
+== \#ST_NAME_Color_l | Default
+== \#ST_NAME_Color_m | Black
+== \#ST_NAME_Color_n | Light Blue
+== \#ST_NAME_Color_o | Cream
+== \#ST_NAME_Color_p | Olive
+== \#ST_NAME_Color_q | Dark Green
+== \#ST_NAME_Color_r | Dark Red
+== \#ST_NAME_Color_s | Dark Brown
+== \#ST_NAME_Color_t | Purple
+== \#ST_NAME_Color_u | Dark Grey
+== \#ST_NAME_Color_v | Cyan
+== \#ST_NAME_Color_w | Ice
+== \#ST_NAME_Color_x | Fire
+== \#ST_NAME_Color_y | Sapphire
+== \#ST_NAME_Color_z | Teal
+
+== \#ST_NAME_Cursor_0 | Green
+== \#ST_NAME_Cursor_1 | Pink
+== \#ST_NAME_Cursor_2 | Blue
+== \#ST_NAME_Cursor_3 | Orange
+== \#ST_NAME_Cursor_4 | Red
+== \#ST_NAME_Cursor_5 | White
+== \#ST_NAME_Cursor_6 | Outline
+== \#ST_NAME_Cursor_7 | Outline (Tail)
+== \#ST_NAME_Cursor_8 | Inv. Outline
+== \#ST_NAME_Cursor_9 | Inv. Outline (Tail)
+
+== \#ST_NAME_XHair_0 | Cross
+== \#ST_NAME_XHair_1 | Circle
+== \#ST_NAME_XHair_2 | Delta
+== \#ST_NAME_XHair_3 | Oval
+== \#ST_NAME_XHair_4 | Basic
+== \#ST_NAME_XHair_5 | Delear
+== \#ST_NAME_XHair_6 | Finirentur
+== \#ST_NAME_XHair_7 | Angle
+== \#ST_NAME_XHair_8 | Dot
+== \#ST_NAME_XHair_9 | X+
+
+== \#ST_NAME_JpFont_0 | Misaki Gothic
+== \#ST_NAME_JpFont_1 | Misaki Mincho
+== \#ST_NAME_JpFont_2 | k6x8
+== \#ST_NAME_JpFont_3 | jiskan16
+
 == \#stx_gameplay | Gameplay
 
 == \#player_lvsys    | Level-up system
@@ -104,3 +173,5 @@
 
 == \#sv_rain | Rain in outside areas
 == \#sv_sky  | Replace skies
+
+## EOF

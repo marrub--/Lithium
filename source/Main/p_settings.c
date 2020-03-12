@@ -13,12 +13,12 @@
 
 #ifdef FromUI
 Category(stx_gameplay);
-Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
+Enum(player_lvsys, atsys_auto, atsys_manual, "%S", LvSysName(set));
 if(p->num == 0) {
-   ServerInt("%",   sv_difficulty, 1, 100);
-   ServerFloat("x", sv_scoremul,   0, 10);
+   ServerInt(Percent, sv_difficulty, 1, 100);
+   ServerFloat(Times, sv_scoremul, 0, 10);
    ServerBool(sv_revenge);
-   ServerInt("min", sv_autosave, 0, 30);
+   ServerInt(Minutes, sv_autosave, 0, 30);
    ServerBool(sv_nofullammo);
    ServerBool(sv_noscoreammo);
    ServerBool(sv_wepdrop);
@@ -28,21 +28,21 @@ if(p->num == 0) {
 }
 
 Category(stx_gui);
-Float("x", gui_xmul, 0.1, 2.0);
-Float("x", gui_ymul, 0.1, 2.0);
-Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
-Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
-Enum(gui_jpfont, 0, font_num-1, "%s", FontName(set));
+Float(Times, gui_xmul, 0.1, 2.0);
+Float(Times, gui_ymul, 0.1, 2.0);
+Enum(gui_theme,  0, cbi_theme_max-1, "%S", ThemeName(set));
+Enum(gui_cursor, 0, gui_curs_max-1, "%S", CursName(set));
+Enum(gui_jpfont, 0, font_num-1, "%S", JpFontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
 Text(stx_jp_2);
 Text(stx_jp_3);
 
 Category(stx_player);
-Float("x", player_damagebobmul, 0.0, 1.0);
+Float(Times, player_damagebobmul, 0.0, 1.0);
 Bool(player_damagebob);
-Float("x", player_footstepvol, 0.0, 1.0);
-Float("x", player_viewtilt,    0.0, 1.0);
+Float(Times, player_footstepvol, 0.0, 1.0);
+Float(Times, player_viewtilt, 0.0, 1.0);
 Bool(player_scorelog);
 Bool(player_scoresound);
 Bool(player_resultssound);
@@ -65,11 +65,11 @@ if(p->num == 0) {
 }
 
 Category(stx_weapons);
-Float("x", weapons_zoomfactor, 1.0, 10.0);
-Float("x", weapons_scopealpha, 0.0, 1.0);
-Float("x", weapons_alpha,      0.0, 1.0);
-Float("x", weapons_recoil,     0.0, 1.0);
-Float("x", weapons_reloadbob,  0.0, 1.0);
+Float(Times, weapons_zoomfactor, 1.0, 10.0);
+Float(Times, weapons_scopealpha, 0.0, 1.0);
+Float(Times, weapons_alpha, 0.0, 1.0);
+Float(Times, weapons_recoil, 0.0, 1.0);
+Float(Times, weapons_reloadbob, 0.0, 1.0);
 Bool(weapons_slot3ammo);
 if(p->pclass == pcl_marine) {
    Bool(weapons_riflescope);
@@ -78,7 +78,7 @@ if(p->pclass == pcl_marine) {
    Bool(weapons_magicselanims);
 }
 if(p->num == 0) {
-   ServerFloat("x", weapons_ricochetvol, 0.0, 1.0);
+   ServerFloat(Times, weapons_ricochetvol, 0.0, 1.0);
    ServerBool(weapons_casings);
    ServerBool(weapons_magdrops);
    ServerBool(weapons_casingfadeout);
@@ -100,18 +100,18 @@ Bool(hud_logfromtop);
 Bool(hud_logbig);
 Bool(hud_showarmorind);
 
-Int("/255", xhair_r, 0, 255);
-Int("/255", xhair_g, 0, 255);
-Int("/255", xhair_b, 0, 255);
-Int("/255", xhair_a, 0, 255);
-Enum(xhair_style, 1, 10, "%s", XHairName(set));
+Int(Of255, xhair_r, 0, 255);
+Int(Of255, xhair_g, 0, 255);
+Int(Of255, xhair_b, 0, 255);
+Int(Of255, xhair_a, 0, 255);
+Enum(xhair_style, 0, lxh_max-1, "%S", XHairName(set));
 Bool(xhair_enable);
 Bool(xhair_enablejuicer);
 
 Category(stx_vscan);
-Int("px", scanner_xoffs, -160, 160);
-Int("px", scanner_yoffs, -180,  20);
-Enum(scanner_color, 'a', 'v', "\C%c%s", set, ColorName(set));
+Int(Pixels, scanner_xoffs, -160, 160);
+Int(Pixels, scanner_yoffs, -180,  20);
+Enum(scanner_color, 'a', 'z', "\C%c%S", set, ColorName(set));
 Bool(scanner_slide);
 Bool(scanner_bar);
 Bool(scanner_altfont);
@@ -141,57 +141,44 @@ if(p->num == 0) {
 
 /* Static Functions -------------------------------------------------------- */
 
-static cstr LvSysName(i32 num)
+static str LvSysName(i32 num)
 {
-   static cstr names[] = {"Auto", "Hybrid", "Manual"};
-
-   if(num < atsys_auto || num > atsys_manual) return "Unknown";
-   else                                       return names[num];
+   if(num < 0 || num >= atsys_max)
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_LvSys_%i", num);
 }
 
-static cstr ColorName(char ch)
+static str ColorName(char ch)
 {
-   static cstr colors[] = {
-      "Brick", "Tan", "Grey", "Green", "Brown", "Gold", "Red", "Blue",
-      "Orange", "White", "Yellow", "Default", "Black", "Light Blue", "Cream",
-      "Olive", "Dark Green", "Dark Red", "Dark Brown", "Purple", "Dark Grey",
-      "Cyan"
-   };
-
-   if(ch < 'a' || ch > 'v') return "Unknown";
-   else                     return colors[ch - 'a'];
+   if(ch < 'a' || ch > 'z')
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_Color_%c", ch);
 }
 
-static cstr CursName(i32 num)
+static str CursName(i32 num)
 {
-   static cstr cursors[] = {
-      "Green", "Pink", "Blue", "Orange", "Red", "White", "Outline",
-      "Outline (Tail)", "Inv. Outline", "Inv. Outline (Tail)"
-   };
-
-   if(num < 0 || num >= gui_curs_max) return "Unknown";
-   else                               return cursors[num];
+   if(num < 0 || num >= gui_curs_max)
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_Cursor_%i", num);
 }
 
-static cstr XHairName(i32 num)
+static str XHairName(i32 num)
 {
-   static cstr xhairs[] = {
-      "Cross", "Circle", "Delta", "Oval", "Basic", "Delear", "Finirentur",
-      "Angle", "Dot", "X+"
-   };
-
-   if(num < 1 || num > countof(xhairs)) return "Unknown";
-   else                                 return xhairs[num - 1];
+   if(num < 0 || num >= lxh_max)
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_XHair_%i", num);
 }
 
-static cstr FontName(i32 num)
+static str JpFontName(i32 num)
 {
-   static cstr fonts[] = {
-      "Misaki Gothic", "Misaki Mincho", "k6x8", "jiskan16"
-   };
-
-   if(num < 0 || num >= font_num) return "Unknown";
-   else                           return fonts[num];
+   if(num < 0 || num >= font_num)
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_JpFont_%i", num);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -244,7 +231,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
          __with(k64 set = p->getCVarK(sc_##cvar), diff;) \
       { \
          Label(cvar); \
-         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) \
             p->setCVarK(sc_##cvar, set + diff); \
       } \
       y += 10; \
@@ -256,7 +243,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
          __with(i32 set = p->getCVarI(sc_##cvar), diff;) \
       { \
          Label(cvar); \
-         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = LC(LANG "ST_PFX_" #s)))) \
             p->setCVarI(sc_##cvar, set + diff); \
       } \
       y += 10; \
@@ -280,7 +267,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
          __with(k64 set = ACS_GetCVarFixed(sc_##cvar), diff;) \
       { \
          Label(cvar); \
-         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) \
             ACS_SetCVarFixed(sc_##cvar, set + diff); \
       } \
       y += 10; \
@@ -292,7 +279,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
          __with(i32 set = ACS_GetCVar(sc_##cvar), diff;) \
       { \
          Label(cvar); \
-         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = s))) \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = LC(LANG "ST_PFX_" #s)))) \
             ACS_SetCVar(sc_##cvar, set + diff); \
       } \
       y += 10; \

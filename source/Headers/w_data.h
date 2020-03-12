@@ -12,6 +12,11 @@
  */
 /* decompat-out pk7/lzscript/Constants/w_data.zsc */
 
+enum /* Lith_XHair */
+{
+   lxh_max = 10,
+};
+
 enum /* Lith_WData */
 {
    wdata_bossspawned,
