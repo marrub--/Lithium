@@ -35,6 +35,7 @@ enum
    fid_result,
    fid_result2,
    fid_bosstext,
+   fid_advice,
 };
 
 #endif

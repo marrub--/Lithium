@@ -267,11 +267,13 @@ static void Style(struct player *p)
 
 static void Advice(struct player *p)
 {
-   /*
-   SetSize(320, 240);
-   PrintTextChS(p->attr.lvupstr);
-   PrintText(s_cnfont, CR_WHITE, 220,1, 75,1);
-   */
+   if(CheckFade(fid_advice)) {
+      SetSize(640, 480);
+
+      SetClipW(80, 100, 500, 500, 500);
+      PrintTextF_str(p->advice, s_smallfnt, CR_YELLOW, 80,1, 100,1, fid_advice);
+      ClearClip();
+   }
 }
 
 script

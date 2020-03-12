@@ -524,8 +524,6 @@ void Sc_MapMarker(i32 tid) {
 
    str text = GetPropS(tid, APROP_NameTag);
 
-   while(!player_init) ACS_Delay(1);
-
    ACS_Delay(5);
 
    with_player(LocalPlayer) {
@@ -543,6 +541,37 @@ void Sc_MapMarker(i32 tid) {
 
          ACS_Delay(1);
       }
+   }
+}
+
+script_str ext("ACS") addr("Lith_SetAdviceMarker")
+void Sc_SetAdviceMarker(i32 tid) {
+   str text;
+
+   if(tid) {
+      text = GetPropS(tid, APROP_NameTag);
+
+      ACS_BeginPrint();
+      for(i32 i = 0, n = ACS_StrLen(text); i < n; i++) {
+         if(text[i] == '{') {
+            ACS_BeginPrint();
+            for(i32 j = 0; j < 15 && text[++i] != '}'; j++)
+               ACS_PrintChar(text[i]);
+            ACS_PrintBind(ACS_EndStrParam());
+         } else {
+            ACS_PrintChar(text[i]);
+         }
+      }
+      text = ACS_EndStrParam();
+   } else {
+      text = snil;
+   }
+
+   ACS_Delay(5);
+
+   with_player(LocalPlayer) {
+      p->advice = text;
+      SetFade(fid_advice, 35 * 5, 12);
    }
 }
 

@@ -107,7 +107,8 @@ double m_IYaw, m_LastIYaw;
 double m_ZVel, m_LastZVel;
 double m_VZVel, m_LastVZVel;
 
-Lith_MapMarker m_curMark;
+Lith_MapMarker    m_curMark;
+Lith_AdviceMarker m_curAdvice;
 
 property ViewBob: m_VBob;
 
@@ -348,6 +349,35 @@ void Lith_PreTick()
    }
 }
 
+void Lith_ShowMapMarker()
+{
+   Lith_MapMarker th;
+
+   for(let it = ThinkerIterator.create("Lith_MapMarker", _stat_mapmark);
+       (th = (Lith_MapMarker(it.next())));) {
+      if(th.cursector == cursector && th != m_curMark &&
+         (!m_curMark || th.getTag() != m_curMark.getTag())) {
+         m_curMark = th;
+         CallACS("Lith_Markiplier", m_curMark.tid);
+         break;
+      }
+   }
+}
+
+void Lith_ShowAdviceMarker()
+{
+   Lith_AdviceMarker th;
+
+   for(let it = ThinkerIterator.create("Lith_AdviceMarker", _stat_advicemark);
+         (th = (Lith_AdviceMarker(it.next())));) {
+      if(th.cursector == cursector && th != m_curAdvice) {
+         m_curAdvice = th;
+         CallACS("Lith_SetAdviceMarker", m_curAdvice.tid);
+         break;
+      }
+   }
+}
+
 void Lith_PostTick()
 {
    if(!player) return;
@@ -368,15 +398,8 @@ void Lith_PostTick()
       if(playeringame[i] && players[i] != player && players[i].mo)
          Lith_PlayerIndicator(players[i]);
 
-   Lith_MapMarker th;
-   for(let it = ThinkerIterator.create("Lith_MapMarker", _stat_mapmark);
-       (th = (Lith_MapMarker(it.next())));) {
-      if(th.cursector == cursector && th != m_curMark &&
-         (!m_curMark || th.getTag() != m_curMark.getTag())) {
-         m_curMark = th;
-         CallACS("Lith_Markiplier", m_curMark.tid);
-      }
-   }
+   Lith_ShowMapMarker();
+   Lith_ShowAdviceMarker();
 
    m_LastIPitch = m_IPitch;
    m_LastVPitch = m_VPitch;

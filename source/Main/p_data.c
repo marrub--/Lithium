@@ -234,8 +234,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt)
 script
 void P_Init(struct player *p)
 {
-   if(!p->wasinit)
-   {
+   if(!p->wasinit) {
       fastmemset(p, 0, sizeof *p);
 
       p->active = true;
@@ -258,7 +257,6 @@ void P_Init(struct player *p)
       case 2: p->pronoun = pro_nb;     break;
       case 3: p->pronoun = pro_object; break;
       }
-
    }
 
    fastmemset(&p->old, 0, sizeof p->old);
@@ -305,6 +303,8 @@ void P_Init(struct player *p)
    p->scoremul       = 1.3;
 
    p->alpha = 1;
+
+   p->advice = snil;
 
    p->attr.lvupstr[0] = '\0';
 

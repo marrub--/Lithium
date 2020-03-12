@@ -207,6 +207,7 @@ struct player
    i32 pronoun;
    i32 fun;
    cstr discrim;
+   str advice;
 
    /* Deltas */
    anonymous
