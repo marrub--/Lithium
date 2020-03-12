@@ -187,15 +187,15 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 {
    i32 y = 0;
 
-#define Category(...) y += 20
-#define Bool(...) y += 10
-#define Float(...) y += 10
-#define Int(...) y += 10
-#define ServerBool(...) y += 10
+#define Category(...)    y += 20
+#define Bool(...)        y += 10
+#define Float(...)       y += 10
+#define Int(...)         y += 10
+#define ServerBool(...)  y += 10
 #define ServerFloat(...) y += 10
-#define ServerInt(...) y += 10
-#define Enum(...) y += 10
-#define Text(...) y += 10
+#define ServerInt(...)   y += 10
+#define Enum(...)        y += 10
+#define Text(...)        y += 10
 #define FromUI
 #include "p_settings.c"
 

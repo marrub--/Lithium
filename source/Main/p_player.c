@@ -537,7 +537,7 @@ void Sc_MapMarker(i32 tid) {
          i32 x = absk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
 
          SetSize(640, 480);
-         PrintTextA_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha);
+         PrintTextAX_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
 
          ACS_Delay(1);
       }
