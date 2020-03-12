@@ -173,10 +173,10 @@ enum {
 
 enum /* Lith_FontNum */
 {
-   font_misaki_gothic, /* 美咲ゴシック */
-   font_misaki_mincho, /* 美咲明朝 */
-   font_jfdot_8,       /* JFドットk6x8 */
-   font_jfdot_14,      /* JFドットk14 */
+   font_misaki_gothic,
+   font_misaki_mincho,
+   font_k6x8,
+   font_jiskan16,
    font_num,
 };
 

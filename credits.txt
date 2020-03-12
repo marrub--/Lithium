@@ -66,7 +66,6 @@
 * GAA1992        * Gauss Shotgun idle sprite
 * HorrorMovieGuy * SteggleSphere sprites
 * JetPlane       * Image used as a base for the SMG sprite
-* Jimmy          * BIGUPPER, CHFONT, CNFONT, LOGFONT, and SMALLFONT
 * Kate Fox       * Blank sphere used as a base for the the Blursphere
 *                * Intermission text and background
 * Kurashiki      * Basilissa art
@@ -182,10 +181,13 @@
 * torridGristle * Assault rifle sprite
 * Marrub        * Redraw
 
-                          * Japanese fonts *
+                              * Fonts *
 
-* JF Dot k6x8/jiskan   * http://jikasei.me/font/jf-dotfont/
-* Misaki Gothic/Mincho * http://www.geocities.jp/littlimi/misaki.htm
+* littlelimit          * 美咲ゴシックと明朝 https://littlelimit.net/misaki.htm
+*                      * k6x8 https://littlelimit.net/k6x8.htm
+* Jimmy                * bigupper, chfont, cnfont, logfont, and smallfont
+* 小山壽久             * jiskan16
+* 作者です             * AreaName font
 
                       * Laser Shotgun sprites *
 

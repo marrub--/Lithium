@@ -479,8 +479,8 @@ override void WorldTick()
          default:
          case font_misaki_gothic: m_UtfFont = "MisakiG"; break;
          case font_misaki_mincho: m_UtfFont = "MisakiM"; break;
-         case font_jfdot_8:       m_UtfFont = "JFDot8";  break;
-         case font_jfdot_14:      m_UtfFont = "JFDot16"; break;
+         case font_k6x8:          m_UtfFont = "k6x8";  break;
+         case font_jiskan16:      m_UtfFont = "jiskan16"; break;
       }
    }
 }

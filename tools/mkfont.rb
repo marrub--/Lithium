@@ -37,8 +37,8 @@ cmap_asc.delete_if do |x| %w"$ & @".include? x end
 fonts = []
 fonts.push Font.new 8,  "MisakiG",  cmap_all
 fonts.push Font.new 8,  "MisakiM",  cmap_all
-fonts.push Font.new 8,  "JFDot8",   cmap_all
-fonts.push Font.new 16, "JFDot16",  cmap_all
+fonts.push Font.new 8,  "k6x8",     cmap_all
+fonts.push Font.new 16, "jiskan16", cmap_all
 fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
    words.push *%W"-stroke black -strokewidth 5 label:#{ch}
                   -stroke none                 label:#{ch}
