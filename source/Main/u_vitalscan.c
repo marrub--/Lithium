@@ -160,7 +160,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr)
 
    /* Tag and health */
    bool afnt = p->getCVarI(sc_scanner_altfont);
-   str  font = afnt ? s_chfont : s_smallfnt;
+   str  font = afnt ? s_lmidfont : s_smallfnt;
 
    PrintText_str(UData.tagstr, font, CR_WHITE, 160+ox,4, 216+oy,2);
 

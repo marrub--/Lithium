@@ -209,7 +209,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 #define Category(name) \
    if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
    { \
-      PrintText_str(L(st_##name), s_chfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
+      PrintText_str(L(st_##name), s_lmidfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
    } \
    y += 20;
 

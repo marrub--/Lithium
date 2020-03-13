@@ -43,7 +43,7 @@ void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
    i32 const prc = cn == 0 ? 100 : cn / (k32)cm * 100;
 
    PrintTextFmt("SHOTS: %i\nCHARGE: %-3i%%", sn, prc);
-   PrintText(s_chfont, CR_WHITE, 10,1, 120,2);
+   PrintText(s_lmidfont, CR_WHITE, 10,1, 120,2);
 }
 
 /* EOF */

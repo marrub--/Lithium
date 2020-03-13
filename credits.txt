@@ -186,7 +186,7 @@
 
 * littlelimit * 美咲ゴシックと明朝 https://littlelimit.net/misaki.htm
 *             * k6x8 https://littlelimit.net/k6x8.htm
-* Jimmy       * bigupper, chfont, and smallfont
+* Jimmy       * bigupper, lmidfont, and smallfont
 * 小山壽久    * jiskan16
 * 作者です    * AreaName font
 

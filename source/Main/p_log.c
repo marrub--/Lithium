@@ -192,7 +192,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
          if(p->getCVarI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
          else                               {ya = 2; y = (yo - y) + yy;}
 
-         PrintText_str(ld->inf, s_chfont, cr, x,1, y,ya);
+         PrintText_str(ld->inf, s_lmidfont, cr, x,1, y,ya);
 
          if(ld->ftim) SetFade(fid_logadS + i, 1, 8);
 
@@ -200,7 +200,7 @@ void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy)
          {
             cstr s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
             PrintTextChS(s);
-            PrintTextFX(s_chfont, CR_WHITE, x,1, y,ya, fid_logadS + i, ptf_add);
+            PrintTextFX(s_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, ptf_add);
          }
       }
 
