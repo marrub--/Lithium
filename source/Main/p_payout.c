@@ -29,11 +29,11 @@ void P_Scr_Payout(struct player *p)
 
 #define Left(...) \
    (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(s_cnfont, CR_WHITE, 16,1, y,1, fid_result))
+    PrintTextF(s_smallfnt, CR_WHITE, 16,1, y,1, fid_result))
 
 #define Right(...) \
    (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(s_cnfont, CR_WHITE, 280,2, y,1, fid_result))
+    PrintTextF(s_smallfnt, CR_WHITE, 280,2, y,1, fid_result))
 
 #define Head(...) \
    (PrintTextFmt(__VA_ARGS__), \

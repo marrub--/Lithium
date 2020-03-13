@@ -100,7 +100,7 @@ void Upgr_HeadsUpDisC_Render(struct player *p, struct upgrade *upgr)
 
    HUD_Log(p, CR_RED, 0, -10);
    HUD_KeyInd(p, 180, 21, true, 0.8);
-   HUD_Score(p, CrRed "%s\Cnscr", p->score, s_cnfont, s"a", 160,0, 3,1);
+   HUD_Score(p, CrRed "%s\Cnscr", p->score, s_smallfnt, s"a", 160,0, 3,1);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_C_Bar, 320,2, 220,2);

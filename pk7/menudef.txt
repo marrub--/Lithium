@@ -9,7 +9,7 @@
 
 DefaultListMenu
 {
-   Font "BigUpper", "DarkGreen", "Green"
+   Font "bigupper", "DarkGreen", "Green"
    Selector "-", -20, 2
    LineSpacing 16
 }
@@ -46,7 +46,7 @@ ListMenu "PlayerclassMenu"
    NetgameMessage "$NEWGAME"
    StaticTextCentered 160, 30, "$MENU_CHOOSECLASS"
    Position 14, 55
-   Font "LTRMFONT"
+   Font "ltrmfont"
    PlayerDisplay 100, 50, "00 00 00", "00 FF 00"
    StaticPatch 4, 48, "lgfx/Menu/ClassBack.png"
 }
@@ -70,7 +70,7 @@ ListMenu "UpdateMenu"
 {
    Class "Lith_UpdateMenu"
 
-   Font "SMALLFNT", "Green"
+   Font "smallfont", "Green"
    Selector "-", -10, 0
    LineSpacing 10
    Position 20, 0
