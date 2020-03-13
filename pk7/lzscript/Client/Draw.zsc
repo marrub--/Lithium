@@ -73,6 +73,7 @@ private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
 private transient play bool m_ForceDraw;
 
+private transient Font m_UtfBigFont;
 private transient Font m_UtfFont;
 
 Shape2DTransform m_RectXf;
@@ -306,7 +307,8 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
       if(fnt == "smallfnt") cl.m_D[p].Fnt = smallfont;
       else                  cl.m_D[p].Fnt = Font.GetFont(fnt);
    } else {
-      cl.m_D[p].Fnt = cl.m_UtfFont;
+      if(fnt == "bigupper") cl.m_D[p].Fnt = cl.m_UtfBigFont;
+      else                  cl.m_D[p].Fnt = cl.m_UtfFont;
       y += 2;
    }
 
@@ -482,6 +484,7 @@ override void WorldTick()
          case font_k6x8:          m_UtfFont = "k6x8";  break;
          case font_jiskan16:      m_UtfFont = "jiskan16"; break;
       }
+      m_UtfBigFont = "newconsolefont";
    }
 }
 
