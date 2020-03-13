@@ -16,6 +16,10 @@ require_relative "corinth.rb"
 
 require 'set'
 
+def gen_map areas
+   areas.flat_map do |area| area.entries end
+end
+
 Font = Struct.new :pt, :name, :cmap, :body
 
 cmap_all = Set[]
@@ -29,10 +33,11 @@ end
 cmap_all.delete " "
 cmap_all.delete "\n"
 cmap_all.delete "\u{5c}"
+cmap_all.delete_if do |c| c >= "À" && c <= "ÿ" end
 
 cmap_all = cmap_all.to_a.sort
-cmap_asc = (33..125).map do |n| n.chr end
-cmap_asc.delete_if do |x| %w"$ & @".include? x end
+cmap_asc = gen_map [("!".."#"), ["%"], ("'".."?"), ("A".."}")]
+cmap_l1s = gen_map [("!".."~"), ("¡".."£"), ("¥".."¬"), ("®".."´"), ("¶".."ÿ")]
 
 fonts = []
 fonts.push Font.new 8,  "MisakiG",  cmap_all
@@ -40,10 +45,15 @@ fonts.push Font.new 8,  "MisakiM",  cmap_all
 fonts.push Font.new 8,  "k6x8",     cmap_all
 fonts.push Font.new 16, "jiskan16", cmap_all
 fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
-   words.push *%W"-stroke black -strokewidth 5 label:#{ch}
-                  -stroke none                 label:#{ch}
-                  -composite"
-end)
+                       words.push *%W"-stroke black -strokewidth 5 label:#{ch}
+                                      -stroke none                 label:#{ch}
+                                      -composite"
+                    end)
+fonts.push Font.new(11, "ltrmfont", cmap_l1s, lambda do |words, ch|
+                       words.push *%W"-stroke black -strokewidth 1 label:#{ch}
+                                      -stroke none                 label:#{ch}
+                                      -composite"
+                    end)
 
 pngquant_in = []
 advpng_in   = []
