@@ -79,32 +79,22 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 
    PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
 
-   PrintTextFmt(CrGreen "%i", p->health);
-   PrintTextX(s_lhudfont, 0, 34,1, 231,0, ptf_no_utf);
-
    PrintSprite(sp_HUD_VIT, 2,1, 237,2);
 
    k32 ft = 0;
 
-   if(p->health < p->oldhealth)
-   {
+   if(p->health < p->oldhealth) {
       UData.cr = CR_PURPLE;
       ft = (p->oldhealth - p->health) / 300.0;
       ft = minmax(ft, 0.1, 1.0);
-   }
-   else if(p->health > p->oldhealth)
-   {
+   } else if(p->health > p->oldhealth) {
       UData.cr = CR_YELLOW;
       ft = 0.1;
    }
 
    if(ft) SetFade(fid_health, 4, ft * 255);
 
-   if(CheckFade(fid_health))
-   {
-      PrintTextFmt("%i", p->health);
-      PrintTextFX(s_lhudfont, UData.cr, 34,1, 231,0, fid_health, ptf_no_utf);
-   }
+   HUD_DrawHealth(p, p->health, 34, 231, CrGreen, UData.cr);
 
    str gfx = ws[p->weapon.cur->info->slot];
 

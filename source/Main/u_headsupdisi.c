@@ -71,8 +71,7 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
    UData.health.value = p->health;
    lerplli(&UData.health);
 
-   PrintTextFmt(CrPurple "%lli", UData.health.value_display);
-   PrintTextX(s_lhudfont, CR_PURPLE, 21,1, 202,0, ptf_no_utf);
+   HUD_DrawHealth(p, UData.health.value_display, 21, 202, CrPurple);
 
    UData.overdrive.value = p->overdrive;
    lerplli(&UData.overdrive);

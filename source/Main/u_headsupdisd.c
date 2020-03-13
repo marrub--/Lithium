@@ -68,8 +68,7 @@ static void HUD_Health(struct player *p)
 
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
-   PrintTextFmt(CrBlue "%i", p->health);
-   PrintTextX(s_lhudfont, 0, 18,1, 228,0, ptf_no_utf);
+   HUD_DrawHealth(p, p->health, 18, 228, CrBlue);
 
    str gfx = ws[p->weapon.cur->info->slot];
 

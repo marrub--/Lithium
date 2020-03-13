@@ -161,18 +161,19 @@ struct player_delta
 struct player
 {
    /* data */
-   __prop mana          {default: PtrInvNum(->tid, so_Mana)}
-   __prop manamax       {default: ACS_GetMaxInventory(->tid, so_Mana)}
-   __prop health        {default:   GetPropI(->tid, APROP_Health),
-                         operator=: SetPropI(->tid, APROP_Health)}
-   __prop setActivator  {operator(): ACS_SetActivator(->tid)}
-   __prop getVel        {operator(): mag2k(->velx, ->vely)}
-   __prop grabInput     {default:   GetMembI(->tid, sm_GrabInput),
-                         operator=: SetMembI(->tid, sm_GrabInput)}
-   __prop onground      {default: GetMembI(->tid, sm_OnGround)}
-   __prop waterlevel    {default: GetPropI(->tid, APROP_Waterlevel)}
-   __prop classname     {default: GetPropS(->tid, APROP_NameTag)}
-   __prop overdrive     {default: GetMembI(->tid, sm_Overdrive)}
+   __prop megaProtect  {default: PtrInvNum(->tid, so_MegaProtection)}
+   __prop mana         {default: PtrInvNum(->tid, so_Mana)}
+   __prop manamax      {default: ACS_GetMaxInventory(->tid, so_Mana)}
+   __prop health       {default:   GetPropI(->tid, APROP_Health),
+                        operator=: SetPropI(->tid, APROP_Health)}
+   __prop setActivator {operator(): ACS_SetActivator(->tid)}
+   __prop getVel       {operator(): mag2k(->velx, ->vely)}
+   __prop grabInput    {default:   GetMembI(->tid, sm_GrabInput),
+                        operator=: SetMembI(->tid, sm_GrabInput)}
+   __prop onground     {default: GetMembI(->tid, sm_OnGround)}
+   __prop waterlevel   {default: GetPropI(->tid, APROP_Waterlevel)}
+   __prop classname    {default: GetPropS(->tid, APROP_NameTag)}
+   __prop overdrive    {default: GetMembI(->tid, sm_Overdrive)}
 
    /* cvars */
    __prop getCVarI {operator(): ACS_GetUserCVar      (->num)}

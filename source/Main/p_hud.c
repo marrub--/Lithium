@@ -92,4 +92,23 @@ void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
    #undef Inc
 }
 
+void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, char const *pfx, i32 cr)
+{
+   i32 protect = p->megaProtect;
+
+   PrintTextFmt("%s%i", pfx, health);
+   PrintTextX(s_lhudfont, 0, x,1, y,0, ptf_no_utf);
+
+   if(protect) {
+      k32 amt = protect / 200.0;
+      PrintTextFmt("%i", health);
+      PrintTextAX(s_lhudfont, CR_TAN, x,1, y,0, amt, ptf_no_utf);
+   }
+
+   if(CheckFade(fid_health)) {
+      PrintTextFmt("%i", health);
+      PrintTextFX(s_lhudfont, cr, x,1, y,0, fid_health, ptf_no_utf);
+   }
+}
+
 /* EOF */

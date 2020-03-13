@@ -77,6 +77,7 @@ static void HUD_Health(struct player *p)
 
    PrintTextFmt(CrRed "%i", p->health);
    PrintTextX(s_lhudfont, 0, 21,1, 229,0, ptf_no_utf);
+   HUD_DrawHealth(p, p->health, 21, 229, CrRed);
 }
 
 /* Extern Functions -------------------------------------------------------- */
