@@ -9,6 +9,7 @@
 
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/MessageBox.zsc"
+#include "lzscript/Client/PlayerclassMenu.zsc"
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/StatusBar.zsc"
 #include "lzscript/Client/UpdateMenu.zsc"

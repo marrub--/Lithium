@@ -43,12 +43,15 @@ ListMenu "MainMenu"
 
 ListMenu "PlayerclassMenu"
 {
+   Class "Lith_PlayerclassMenu"
+
    NetgameMessage "$NEWGAME"
    StaticTextCentered 160, 30, "$MENU_CHOOSECLASS"
    Position 14, 55
    Font "ltrmfont"
-   PlayerDisplay 100, 50, "00 00 00", "00 FF 00"
    StaticPatch 4, 48, "lgfx/Menu/ClassBack.png"
+   StaticPatch 100, 50, "lgfx/Menu/ClassDescBack.png"
+   PlayerDisplay 117, 65, "00 00 00", "00 FF 00"
 }
 
 ListMenu "EpisodeMenu"

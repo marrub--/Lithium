@@ -1700,12 +1700,33 @@
 "LITH_CTRL_ZOOMOUT" = "Zoom Out";
 "LITH_CTRL_GLARE" = "Glare";
 "LITH_CLASS_MARINE" = "Marine";
+"LITH_CLASS_MARINE_Nam" = "Stan Blazkowicz";
+"LITH_CLASS_MARINE_Col" = "\c[Lith_Green]";
+"LITH_CLASS_MARINE_Dsc" = "An exceptional soldier,\naugmented with cyber-tech\nand advanced weaponry.\nAgile, skillful, and\nready for action.";
 "LITH_CLASS_CYBERMAGE" = "Cyber-Mage";
+"LITH_CLASS_CYBERMAGE_Nam" = "Jeremy Stilko";
+"LITH_CLASS_CYBERMAGE_Col" = "\c[Lith_Red]";
+"LITH_CLASS_CYBERMAGE_Dsc" = "Possesses great knowledge\nof magic and technology,\ncapable of using both\nfirearms and spells to\nhis advantage.";
 "LITH_CLASS_INFORMANT" = "Informant";
+"LITH_CLASS_INFORMANT_Nam" = "Fulk 5";
+"LITH_CLASS_INFORMANT_Col" = "\c[Lith_Purple]";
+"LITH_CLASS_INFORMANT_Dsc" = "Not implemented";
 "LITH_CLASS_ASSASSIN" = "Assassin";
+"LITH_CLASS_ASSASSIN_Nam" = "Omisielle Faulzaje";
+"LITH_CLASS_ASSASSIN_Col" = "\c[Lith_Pink]";
+"LITH_CLASS_ASSASSIN_Dsc" = "Not implemented";
 "LITH_CLASS_DARKLORD" = "Dark Lord";
+"LITH_CLASS_DARKLORD_Nam" = "Aricil Deyan'za";
+"LITH_CLASS_DARKLORD_Col" = "\c[Lith_Blue]";
+"LITH_CLASS_DARKLORD_Dsc" = "Sort of implemented";
 "LITH_CLASS_WANDERER" = "Wanderer";
+"LITH_CLASS_WANDERER_Nam" = "Lucas Sánchez";
+"LITH_CLASS_WANDERER_Col" = "\c[Lith_Yellow]";
+"LITH_CLASS_WANDERER_Dsc" = "Not implemented";
 "LITH_CLASS_THOTH" = "Thoth";
+"LITH_CLASS_THOTH_Nam" = "Kirihito Kosatohara";
+"LITH_CLASS_THOTH_Col" = "\c[Lith_Grey]";
+"LITH_CLASS_THOTH_Dsc" = "Not implemented";
 [es]
 "LITH_INFO_DESCR_PlasmaUpgr" = "El que su segundo best-seller también fuese una bazofia total apuntando cabreó tanto al personal de AllPoint que rediseñaron las partes internas del arma, equipándola de un condensador de iones de alta velocidad de 37.96tW que dispara muerte total más caliente que el propio sol.\n\nNo, en serio. Probablemente suelte más calor que el sol. Si estuvieras a, 700km o así, pero bueno.\n\nDesafortunadamente, la mejora fue tremendamente cara. Por ahora solo se ha vendido a inversores privados, pero por suerte, tu jefe es uno de ellos.";
 [jp]
