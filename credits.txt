@@ -188,7 +188,7 @@
 *             * k6x8 https://littlelimit.net/k6x8.htm
 * Jimmy       * bigupper, lmidfont, and smallfont
 * 小山壽久    * jiskan16
-* 作者です    * AreaName font
+* 作者です    * areaname
 
                       * Laser Shotgun sprites *
 
