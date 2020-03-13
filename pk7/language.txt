@@ -1827,6 +1827,16 @@
 "LITH_UPGRADE_EFFEC_UNCEUNCE" = "ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ";
 "LITH_UPGRADE_TITLE_InstaDeath" = "即死";
 "LITH_UPGRADE_EFFEC_InstaDeath" = "人は銃で撃たれると死ぬ。";
+"LITH_BOSS_BAR_1_Stan" = "\cgマジかこれ！\n\cy人間が来ましたな。";
+"LITH_BOSS_BAR_2_Stan" = "\cgそんな力持っている人がここに行くが面白いぞ。\n\cy心配しないでよ。すぐに終わらせて。";
+"LITH_BOSS_BAR_3_Stan" = "\cgツワモノのスペクタクルだよなー。\n\cyここが魔所だ。もし行くのなら、もう悪化するようです。";
+"LITH_BOSS_BAR_4_Stan" = "\cgお主が通るまい。ダイモスがもう・・・。\n\cyダイモスがもう我が物にした。あなたに告げないが正しくないのだ。";
+"LITH_BOSS_BAR_5_Stan" = "\cg死に覚悟が決めた者がひどいことを聞けるはずだろう。\n\cy申し訳ないが、俺たちがもう勝ちました。";
+"LITH_BOSS_BAR_6_Stan" = "\ctこの全宇宙、全滅する。";
+"LITH_BOSS_BAR_7_Stan" = "\cg今すぐに我らの君主の革命が始まるぞ。\n\cyゲートが超える後にもう始まりました。";
+"LITH_BOSS_BAR_8_Stan" = "\cgお主が絶える。けれど、最後の戦いを上げる。\n\cyそれに、あなたなら足りないです。";
+"LITH_BOSS_BAR_9_Stan" = "\cg超えてということもらいない。\n\cy超えも、絶望を拝見するだけです。";
+"LITH_BOSS_BAR_10_Stan" = "\ct覚悟なさい。";
 "LITH_INFO_SHORT_AllPoint" = "AllPoint";
 "LITH_INFO_TITLE_AllPoint" = "AllPoint精密銃器合同会社";
 "LITH_INFO_DESCR_AllPoint" = "翻訳なし";
