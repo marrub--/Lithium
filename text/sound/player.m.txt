@@ -17,7 +17,7 @@ player {
 
    rocketboost RocketBoost       # ???
    adren/inj   Adrenaline/Inject # Killing Floor
-   adren/ready Adrenaline/Ready  # 〃
+   adren/ready Adrenaline/Ready  # //
 }
 
 # EOF

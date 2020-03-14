@@ -11,7 +11,7 @@ player.cbi {
    win95 Startup # Windows 95 / Brian Eno
 
    open  Open  # Halo 3
-   close Close # 〃
+   close Close # //
 
    buttoncurs  ButtonCursor # Rosenkreuzstilette
    buttonpress ButtonPress  # Doom 3
@@ -19,18 +19,18 @@ player.cbi {
    slidertick SliderTick # Phantasy Star Nova
 
    find     Find     # Phantasy Star Nova
-   finddone FindDone # 〃
-   findfail FindFail # 〃
+   finddone FindDone # //
+   findfail FindFail # //
 
    invcur InvCur # Phantasy Star Nova
-   invmov InvMov # 〃
+   invmov InvMov # //
 
    key1 Key1 # ???
-   key2 Key2 # 〃
-   key3 Key3 # 〃
+   key2 Key2 # //
+   key3 Key3 # //
 
    clickon  ClickOn   # 3maze - Buttons and Switches
-   clickoff ClickOff  # 〃
+   clickoff ClickOff  # //
    clicklst ClickList # Resident Evil 4
 
    auto {
@@ -40,17 +40,17 @@ player.cbi {
    }
 
    dlgopen  DialogueOpen  # Resident Evil 4
-   dlgclick DialogueClick # 〃
+   dlgclick DialogueClick # //
 
    clickinvalid ClickInvalid # Steam
    mail         MailReceive  # Fallout 4
-   tabswitch    TabSwitch    # 〃
+   tabswitch    TabSwitch    # //
 
    scroll    Scroll        # Mac OS 9
-   scrollend ScrollRelease # 〃
+   scrollend ScrollRelease # //
 
    left  Left  # Mac OS 9
-   right Right # 〃
+   right Right # //
 
    $alias invrem = findfail
 

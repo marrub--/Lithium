@@ -10,11 +10,11 @@ enemies {
    phantom {
       == lsounds/Monsters/Phantoms
       spawn1 Spawn  # Self-made
-      spawn2 Spawn2 # 〃
+      spawn2 Spawn2 # //
 
       lunge1 Lunge  # Ninja Gaiden Black
-      lunge2 Lunge2 # 〃
-      lunge3 Lunge3 # 〃
+      lunge2 Lunge2 # //
+      lunge3 Lunge3 # //
 
       aura Aura # Phantasy Star Nova
 
@@ -35,12 +35,12 @@ enemies {
    james {
       == lsounds/Monsters/Phantoms/James
       fire1 Fire  # Alliance of Valiant Arms
-      fire2 Fire2 # 〃
-      fire3 Fire3 # 〃
+      fire2 Fire2 # //
+      fire3 Fire3 # //
 
       knife1 Knife  # ???
-      knife2 Knife2 # 〃
-      knife3 Knife3 # 〃
+      knife2 Knife2 # //
+      knife3 Knife3 # //
 
       $alias knifehit = .weapons.knife.hitflesh
 
@@ -63,23 +63,23 @@ enemies {
    makarov {
       == lsounds/Monsters/Phantoms/Makarov
       fire1 Fire  # Fallout: New Vegas
-      fire2 Fire2 # 〃
+      fire2 Fire2 # //
 
       pump1 Pump  # ???
-      pump2 Pump2 # 〃
+      pump2 Pump2 # //
 
       chainthrow ChainThrow # ???
-      chainhit   ChainHit   # 〃
+      chainhit   ChainHit   # //
 
       throw1 Throw  # ???
-      throw2 Throw2 # 〃
-      throw3 Throw3 # 〃
+      throw2 Throw2 # //
+      throw3 Throw3 # //
 
       scythe1 ScytheSwing  # ???, Killing Floor
-      scythe2 ScytheSwing2 # 〃
+      scythe2 ScytheSwing2 # //
 
       scythehit1 ScytheHit  # Killing Floor
-      scythehit2 ScytheHit2 # 〃
+      scythehit2 ScytheHit2 # //
 
       $random scythe {
          scythe1,
@@ -116,7 +116,7 @@ enemies {
    isaac {
       == lsounds/Monsters/Phantoms/Isaac
       fire1 Fire  # ???, Halo 3
-      fire2 Fire2 # 〃
+      fire2 Fire2 # //
 
       $random fire {
          fire1,
@@ -130,12 +130,12 @@ enemies {
    michael {
       == lsounds/Monsters/Phantoms/Michael
       swing1 Swing  # Fallout 4
-      swing2 Swing2 # 〃
-      swing3 Swing3 # 〃
+      swing2 Swing2 # //
+      swing3 Swing3 # //
 
       hit1 Hit  # Halo 3
-      hit2 Hit2 # 〃
-      hit3 Hit3 # 〃
+      hit2 Hit2 # //
+      hit3 Hit3 # //
 
       $random swing {
          swing1,

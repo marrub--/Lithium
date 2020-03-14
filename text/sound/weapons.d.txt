@@ -16,10 +16,10 @@ weapons {
    \700e {
       == lsounds/WeaponsD/700Express
       fire1 Fire1     # E.Y.E: Divine Cybermancy
-      fire2 Fire2     # 〃
-      fire3 Fire3     # 〃
-      out   ReloadOut # 〃
-      in    ReloadIn  # 〃
+      fire2 Fire2     # //
+      fire3 Fire3     # //
+      out   ReloadOut # //
+      in    ReloadIn  # //
       move  Move      # Halo 3
 
       $random fire {
@@ -35,14 +35,14 @@ weapons {
    minigun {
       == lsounds/WeaponsD/Minigun
       fire   Fire        # Serious Sam: The First Encounter HD
-      rotate Rotate      # 〃
-      up     RotateUp    # 〃
-      click  Click       # 〃
+      rotate Rotate      # //
+      up     RotateUp    # //
+      click  Click       # //
       down   RotateDown  # E.Y.E: Divine Cybermancy
       place  RotatePlace # Quake 2
       empty  Empty       # Halo 3
       magout MagOut      # E.Y.E: Divine Cybermancy
-      magin  MagIn       # 〃
+      magin  MagIn       # //
    }
 
    fatmac {
