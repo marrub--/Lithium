@@ -22,10 +22,10 @@
 
 +ZombieMan     zombie        ZombieMan
 +ZombieMan     zombie        Zombieman
-+ShotgunGuy    zombie        ShotgunGuy
-+ShotgunGuy    zombie        Shotgunguy
-+ChaingunGuy   zombie        ChaingunGuy
-+ChaingunGuy   zombie        Chaingunguy
++ShotgunGuy    zombiesg      ShotgunGuy
++ShotgunGuy    zombiesg      Shotgunguy
++ChaingunGuy   zombiecg      ChaingunGuy
++ChaingunGuy   zombiecg      Chaingunguy
 +Imp           imp           Imp
 +Demon         demon         Demon
 +Spectre       demon         Spectre
@@ -50,7 +50,7 @@
 +LostSoul    lostsoul   FlemMine
 +BaronOfHell baron      Flembrane
 +BaronOfHell baron      FlemoidusMaximus
-+ShotgunGuy  zombie     FlemoidusBipedicus
++ShotgunGuy  zombiesg   FlemoidusBipedicus
 +ZombieMan   zombie     FlemoidusCommonus
 +Spectre     demon      FlemoidusCycloptisCommonus
 +Demon       demon      FlemoidusStridicus
@@ -115,17 +115,17 @@
 
 ## DoomRL Arsenal Monsters ---------------------------------------------------|
 
-+ZombieMan   zombie FormerHuman
-+ShotgunGuy  zombie FormerSergeant
-+ChaingunGuy zombie FormerCommando
-+DRLACaptain zombie Former
++ZombieMan   zombie   FormerHuman
++ShotgunGuy  zombiesg FormerSergeant
++ChaingunGuy zombiecg FormerCommando
++DRLACaptain zombie   Former
 
 ## Rampancy ------------------------------------------------------------------|
 
 %mif_full
 +ZombieMan     zombie        Robot_SentryBot
-+ShotgunGuy    zombie        Robot_DefenderBot
-+ChaingunGuy   zombie        Robot_SecurityBotSmall
++ShotgunGuy    zombiesg      Robot_DefenderBot
++ChaingunGuy   zombiecg      Robot_SecurityBotSmall
 +Imp           imp           Robot_SoldierBot
 +Demon         demon         Robot_SpiderBotSmall
 +Spectre       demon         Robot_StealthDroid
@@ -185,15 +185,15 @@
 
 ## Western Patch -------------------------------------------------------------|
 
-+ZombieMan  zombie Westman
-+ZombieMan  zombie WildGunmanGuy
-+ShotgunGuy zombie TheOutsider
++ZombieMan  zombie   Westman
++ZombieMan  zombie   WildGunmanGuy
++ShotgunGuy zombiesg TheOutsider
 
 ## Combined Harms ------------------------------------------------------------|
 
 +ZombieMan     zombie        ZombieGunner
-+ShotgunGuy    zombie        ShotGunner
-+ChaingunGuy   zombie        ChainGunner
++ShotgunGuy    zombiesg      ShotGunner
++ChaingunGuy   zombiecg      ChainGunner
 +Demon         demon         Pinky
 +Spectre       demon         sneakypinky
 +Cacodemon     cacodemon     bigmouthedhissything
@@ -212,8 +212,8 @@
 ## Note, these MUST be at the bottom, because they are extremely vague.
 
 +ZombieMan     zombie        Zombie
-+ShotgunGuy    zombie        SG
-+ChaingunGuy   zombie        CGuy
++ShotgunGuy    zombiesg      SG
++ChaingunGuy   zombiecg      CGuy
 +LostSoul      lostsoul      LSoul
 +HellKnight    hellknight    HK
 +Arachnotron   arachnotron   SP1

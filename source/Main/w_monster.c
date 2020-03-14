@@ -222,11 +222,18 @@ static void OnFinalize(dmon_t *m)
             SpawnManaPickup(m, p);
          }
 
-         if(m->mi->type == mtype_zombie && ACS_GetCVar(sc_sv_wepdrop) && !p->weapon.slot[3])
+         if(ACS_GetCVar(sc_sv_wepdrop) && !p->weapon.slot[3])
          {
-            i32 tid = ACS_UniqueTID();
-            ACS_SpawnForced(so_Shotgun, m->ms->x, m->ms->y, m->ms->z, tid);
-            ACS_SetActorFlag(tid, s_DROPPED, false);
+            str sp = snil;
+            switch(m->mi->type) {
+               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = so_Shotgun;  break;
+               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = so_Chaingun; break;
+            }
+            if(sp) {
+               i32 tid = ACS_UniqueTID();
+               ACS_SpawnForced(sp, m->ms->x, m->ms->y, m->ms->z, tid);
+               ACS_SetActorFlag(tid, s_DROPPED, false);
+            }
          }
 
          if(p->getUpgrActive(UPGR_SoulCleaver))

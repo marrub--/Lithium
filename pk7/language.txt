@@ -940,11 +940,12 @@
 "LITH_PK_weapon_c_mateba_009" = "Marteba";
 "LITH_PK_weapon_c_mateba_010" = "Metabe";
 "LITH_PK_weapon_c_mateba_011" = "Mercury Poisoning";
-"LITH_PK_weapon_c_rifle_NUM" = "3";
+"LITH_PK_weapon_c_rifle_NUM" = "4";
 "LITH_PK_weapon_c_rifle_000" = "Sock Rifle";
 "LITH_PK_weapon_c_rifle_001" = "Shock Stifle";
 "LITH_PK_weapon_c_rifle_002" = "Stock Knifle";
 "LITH_PK_weapon_c_rifle_003" = "ShohS RifiR";
+"LITH_PK_weapon_c_rifle_004" = "Cock Waffle";
 "LITH_PK_weapon_c_smg_NUM" = "10";
 "LITH_PK_weapon_c_smg_000" = "Chug Smug";
 "LITH_PK_weapon_c_smg_001" = "Real Supersand";

@@ -238,11 +238,12 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_weapon_c_mateba_010 | Metabe
 == \#PK_weapon_c_mateba_011 | Mercury Poisoning
 
-== \#PK_weapon_c_rifle_NUM | 3
+== \#PK_weapon_c_rifle_NUM | 4
 == \#PK_weapon_c_rifle_000 | Sock Rifle
 == \#PK_weapon_c_rifle_001 | Shock Stifle
 == \#PK_weapon_c_rifle_002 | Stock Knifle
 == \#PK_weapon_c_rifle_003 | ShohS RifiR
+== \#PK_weapon_c_rifle_004 | Cock Waffle
 
 == \#PK_weapon_c_smg_NUM | 10
 == \#PK_weapon_c_smg_000 | Chug Smug

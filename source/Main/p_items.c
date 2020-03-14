@@ -105,7 +105,8 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 
    if(p && p->movitem && g->clicklft &&
       aabb(sx, sy, sx+w, sy+h, g->cx, g->cy) &&
-      P_Inv_Place(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8)) {
+      (P_Inv_Place(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
+       P_Inv_PlaceFirst(cont, p->selitem))) {
       p->movitem = false;
       ACS_LocalAmbientSound(ss_player_cbi_invmov, 127);
    }

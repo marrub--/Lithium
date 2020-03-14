@@ -35,6 +35,8 @@ enum dmgtype {
 enum mtype /* Lith_MonsterType*/ {
    mtype_unknown,
    mtype_zombie,
+   mtype_zombiesg,
+   mtype_zombiecg,
    mtype_imp,
    mtype_demon,
    mtype_lostsoul,
