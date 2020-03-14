@@ -95,7 +95,7 @@ for fnt in fonts
    system *words
 end
 
-system *%w"optipng -preserve -clobber -o 2".push(*optipng_in)
+system *%w"optipng -strip all -preserve -clobber -o 2".push(*optipng_in)
 system *%w"pngquant --ext .png -f 8 -s 1".push(*pngquant_in)
 system *%w"advpng -z4".push(*advpng_in)
 
