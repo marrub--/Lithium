@@ -304,11 +304,35 @@ static void Levelup(struct player *p)
    }
 }
 
+stkcall
+static void Magic(struct player *p)
+{
+   SetSize(800, 600);
+
+   for(i32 i = 0; i < 4; i++) {
+      static str const ns[] = {s":Weapon:Rend1",    s":Weapon:Rend2",
+                               s":Weapon:Rend3",    s":Weapon:Rend4"};
+      static str const hs[] = {s":Weapon:RendHit1", s":Weapon:RendHit2",
+                               s":Weapon:RendHit3", s":Weapon:RendHit4"};
+
+      i32 fid = fid_rendS + i;
+      if(CheckFade(fid))
+         PrintSpriteFP(p->rendhit ? hs[i] : ns[i], 0,1, 0,1, fid);
+   }
+
+   if(CheckFade(fid_blade)) {
+      static str const ns = s":Weapon:Blade";
+      static str const hs = s":Weapon:BladeHit";
+      PrintSpriteFP(p->bladehit ? hs : ns, 0,1, 0,1, fid_blade);
+   }
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall
 void P_Ren_PTickPst(struct player *p)
 {
+   Magic(p);
    Footstep(p);
    ItemFx(p);
    DamageBob(p);

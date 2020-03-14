@@ -13,6 +13,9 @@
 
 #if defined(X)
 
+/* TODO: go through these and make the ones that don't need to be here statics,
+ *       and remove the ones that are obsolete
+ */
 /* Strings */
 X(s_BOSS,          "BOSS")
 X(s_COUNTKILL,     "COUNTKILL")
@@ -401,8 +404,6 @@ X(sp_UI_MagicSelectBack,   ":UI:MagicSelectBack")
 X(sp_UI_TextBoxBack,       ":UI:TextBoxBack")
 X(sp_UI_bip,               ":UI:bip")
 X(sp_Vignette,             ":Vignette")
-X(sp_Weapon_Blade,         ":Weapon:Blade")
-X(sp_Weapon_BladeHit,      ":Weapon:BladeHit")
 X(sp_ZoomOverlay,          ":ZoomOverlay")
 X(sp_lfiles_BIPInfo,       "lfiles/BIPInfo.txt")
 X(sp_lfiles_Cyberspace,    "lfiles/Cyberspace.txt")

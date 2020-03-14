@@ -317,6 +317,7 @@ struct player
 
    i32  riflefiremode;
    bool autoreload;
+   bool bladehit, rendhit;
 
    /* Keys */
    bool krc, kyc, kbc;

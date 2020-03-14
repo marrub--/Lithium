@@ -20,41 +20,20 @@
 script_str ext("ACS") addr("Lith_Blade")
 void Sc_Blade(bool hit)
 {
-   with_player(LocalPlayer)
+   with_player(LocalPlayer) {
       if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
-
-   str graphic = hit ? sp_Weapon_BladeHit : sp_Weapon_Blade;
-
-   SetFade(fid_blade, 3, 16);
-   for(i32 i = 0; CheckFade(fid_blade); i++) {
-      SetSize(800, 600);
-      PrintSpriteFP(graphic, 0,1, 0,1, fid_blade);
-      ACS_Delay(1);
+      p->bladehit = hit;
+      SetFade(fid_blade, 3, 24);
    }
 }
 
 script_str ext("ACS") addr("Lith_Rend")
 void Sc_Rend(bool hit, i32 set)
 {
-   static i32 num;
-
-   static str const ns[] = {s":Weapon:Rend1",    s":Weapon:Rend2",
-                            s":Weapon:Rend3",    s":Weapon:Rend4"};
-   static str const hs[] = {s":Weapon:RendHit1", s":Weapon:RendHit2",
-                            s":Weapon:RendHit3", s":Weapon:RendHit4"};
-
-   if(!hit) num = set;
-
-   with_player(LocalPlayer)
+   with_player(LocalPlayer) {
       if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
-
-   str graphic = hit ? hs[num - 1] : ns[num - 1];
-
-   SetFade(fid_blade, 3, 16);
-   for(i32 i = 0; CheckFade(fid_blade); i++) {
-      SetSize(800, 600);
-      PrintSpriteFP(graphic, 0,1, 0,1, fid_blade);
-      ACS_Delay(1);
+      p->rendhit = hit;
+      SetFade(fid_rendS + set, 3, 48);
    }
 }
 
