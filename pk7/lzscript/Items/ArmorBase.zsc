@@ -44,7 +44,6 @@ class Lith_ArmorBase : Lith_InventoryItem abstract {
       if(Lith_OnBody() && !DamageTypeDefinition.IgnoreArmor(type)) {
          int save = Lith_SaveAmt(type);
 
-         Console.printf("absorbing %i damage", save);
          if(damage - save < 1) newdamage = 1;
          else                  newdamage = damage - save;
       }
