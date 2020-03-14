@@ -222,8 +222,7 @@ static void OnFinalize(dmon_t *m)
             SpawnManaPickup(m, p);
          }
 
-         if(ACS_GetCVar(sc_sv_wepdrop) && !p->weapon.slot[3])
-         {
+         if(ACS_GetCVar(sc_sv_wepdrop)) {
             str sp = snil;
             switch(m->mi->type) {
                case mtype_zombiesg: if(!p->weapon.slot[3]) sp = so_Shotgun;  break;
