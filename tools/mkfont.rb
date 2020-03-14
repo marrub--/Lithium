@@ -55,6 +55,7 @@ fonts.push Font.new(11, "ltrmfont", cmap_l1s, lambda do |words, ch|
                                       -composite"
                     end)
 
+optipng_in  = []
 pngquant_in = []
 advpng_in   = []
 
@@ -75,7 +76,11 @@ for fnt in fonts
    for ch in fnt.cmap
       num = sprintf "%08X", ch.ord
       f = "#{outdir}/#{num}.png"
-      pngquant_in.push f unless fnt.body
+      if fnt.body
+         optipng_in.push f
+      else
+         pngquant_in.push f
+      end
       advpng_in.push f
       words.push "("
       ch = "\\" + ch if %w"\\ ( ) -".include? ch
@@ -90,6 +95,7 @@ for fnt in fonts
    system *words
 end
 
+system *%w"optipng -preserve -clobber -o 2".push(*optipng_in)
 system *%w"pngquant --ext .png -f 8 -s 1".push(*pngquant_in)
 system *%w"advpng -z4".push(*advpng_in)
 

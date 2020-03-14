@@ -79,24 +79,6 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-cstr ThemeName(u32 num)
-{
-   static cstr themes[cbi_theme_max] = {
-      "Green",
-      "Rose Pink",
-      "Umi Blue",
-      "Ender Red",
-      "Orange",
-      "Grey",
-      "Basilissa",
-      "Ghost",
-      "Windows XP",
-      "DONKEY KONG",
-   };
-
-   return themes[num >= cbi_theme_max ? 0 : num];
-}
-
 script
 void P_CBI_PTick(struct player *p)
 {

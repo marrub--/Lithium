@@ -181,6 +181,14 @@ static str JpFontName(i32 num)
       return Language(LANG "ST_NAME_JpFont_%i", num);
 }
 
+static str ThemeName(u32 num)
+{
+   if(num < 0 || num >= cbi_theme_max)
+      return L(st_st_name_unknown);
+   else
+      return Language(LANG "ST_NAME_Theme_%i", num);
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabSettings(struct gui_state *g, struct player *p)

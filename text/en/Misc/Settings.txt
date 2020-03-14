@@ -68,6 +68,17 @@
 == \#ST_NAME_JpFont_2 | k6x8
 == \#ST_NAME_JpFont_3 | jiskan16
 
+== \#ST_NAME_Theme_0 | Green
+== \#ST_NAME_Theme_1 | Rose Pink
+== \#ST_NAME_Theme_2 | Umi Blue
+== \#ST_NAME_Theme_3 | Ender Red
+== \#ST_NAME_Theme_4 | Orange
+== \#ST_NAME_Theme_5 | Grey
+== \#ST_NAME_Theme_6 | Basilissa
+== \#ST_NAME_Theme_7 | Ghost
+== \#ST_NAME_Theme_8 | Windows XP
+== \#ST_NAME_Theme_9 | DONKEY KONG
+
 == \#stx_gameplay | Gameplay
 
 == \#player_lvsys    | Level-up system
