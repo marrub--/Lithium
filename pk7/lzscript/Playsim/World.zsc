@@ -9,8 +9,7 @@
 
 extend class Lith_HERMES;
 
-static bool IsRampancy()
-{
+static bool IsRampancy() {
    string why = "Robot_Thingo";
    class<Object> stopit = why;
    return stopit != null;
@@ -19,10 +18,26 @@ static bool IsRampancy()
 static bool IsHeretic() {return gameinfo.gametype & GAME_Heretic != 0;}
 static bool IsChex()    {return gameinfo.gametype & GAME_Chex    != 0;}
 
-static void SpawnRain(Actor mo, string type)
-{
-   for(int i = 0; i < 27; i++)
-   {
+static Lith_DamageType nameToDT(name type) {
+   switch(type) {
+   case 'None': if(Instance().m_DmgWorld) return ldt_hazard;
+   default:
+   case 'Bullet':    return ldt_bullets;
+   case 'Plasma':
+   case 'Railgun':
+   case 'Electric':  return ldt_energy;
+   case 'Fire':      return ldt_fire;
+   case 'FireMagic': return ldt_firemagic;
+   case 'Magic':     return ldt_magic;
+   case 'Melee':     return ldt_melee;
+   case 'Shrapnel':
+   case 'Explosion': return ldt_shrapnel;
+   case 'Ice':       return ldt_ice;
+   }
+}
+
+static void SpawnRain(Actor mo, string type) {
+   for(int i = 0; i < 27; i++) {
       Actor a[2];
       bool _;
 
@@ -34,10 +49,8 @@ static void SpawnRain(Actor mo, string type)
    }
 }
 
-static void Fun(int fun)
-{
-   if(fun & lfun_ragnarok)
-   {
+static void Fun(int fun) {
+   if(fun & lfun_ragnarok) {
       S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
 
       let sky = TexMan.CheckForTexture("HELP", TexMan.Type_Any);
@@ -46,25 +59,21 @@ static void Fun(int fun)
       level.skyspeed1 = 0.001;
       level.skyspeed2 = 0.001;
 
-      for(int i = 0, j = level.sectors.size(); i < j; i++)
-      {
+      for(int i = 0, j = level.sectors.size(); i < j; i++) {
          Sector sec = level.sectors[i];
          sec.lightlevel = 107;
          sec.flags |= Sector.SECF_ENDGODMODE;
          sec.setAngle(Sector.floor,   frandom(0, 360));
          sec.setAngle(Sector.ceiling, frandom(0, 360));
 
-         for(int k = 0, l = sec.lines.size(); k < l; k++)
-         {
+         for(int k = 0, l = sec.lines.size(); k < l; k++) {
             Line lin = sec.lines[k];
             lin.flags |= Line.ML_DONTDRAW;
             lin.alpha = frandom(0.5, 1);
 
-            for(int m = 0; m < 2; m++)
-            {
+            for(int m = 0; m < 2; m++) {
                Side sid = lin.sidedef[m];
-               if(sid)
-               {
+               if(sid) {
                   sid.addTextureXOffset(Side.top,    frandom(-7,7));
                   sid.addTextureXOffset(Side.mid,    frandom(-7,7));
                   sid.addTextureXOffset(Side.bottom, frandom(-7,7));
@@ -78,8 +87,7 @@ static void Fun(int fun)
       }
 
       Thinker th;
-      for(let it = ThinkerIterator.Create("Actor"); (th = it.next());)
-      {
+      for(let it = ThinkerIterator.Create("Actor"); (th = it.next());) {
          let mo = Actor(th);
          if(mo && mo.bISMONSTER) PrepareForRagnarok(mo);
       }

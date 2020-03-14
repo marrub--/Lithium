@@ -51,7 +51,7 @@ class Lith_BoughtItem : Lith_CustomInventory
       TNT1 A 0 A_SpawnItemEx("Lith_P67TeleFog");
       UCAN A 0 A_JumpIf(user_UpgradeBody, "Animate");
       WUPG A 0 A_JumpIf(user_UpgradeWeap, "Animate");
-      BPAK B 0 A_JumpIf(user_UpgradeExtr, "Extra");
+      BPAK A 0 A_JumpIf(user_UpgradeExtr, "Extra");
    Animate:
       #### # 5 bright;
       #### # 5;

@@ -96,6 +96,7 @@ identifier,default
 :HUD_I:HPAPBack,lgfx/HUD_I/HPAPBack.png
 :HUD_I:MAG,lgfx/HUD_I/MAG.png
 :HUD_I:ScopeOverlay,lgfx/HUD_I/ScopeOverlay.png
+:Items:AeroArmor,lgfx/Items/AeroArmor.png
 :Items:T1,lgfx/Items/T1.png
 :Items:T2,lgfx/Items/T2.png
 :Items:T3,lgfx/Items/T3.png

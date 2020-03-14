@@ -9,18 +9,6 @@
 
 class Lith_IsPhantom : Inventory {default {Inventory.MaxAmount 1;}}
 
-class Lith_PhantomOut : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0;
-      TNT1 A 0 A_Quake(9, 35*2, 0, 2048);
-      TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-16,16), frandom(-16,16), 0, 0, 0, frandom(2, 6), 0, SXF_NOCHECKPOSITION);
-      stop;
-   }
-}
-
 class Lith_PhantomTeleportFX : Actor
 {
    default
@@ -38,16 +26,6 @@ class Lith_PhantomTeleportFX : Actor
       #### # 3;
       #### # 1 A_FadeOut;
       wait;
-   }
-}
-
-class Lith_PhantomTeleport : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 A_SpawnItemEx("Lith_PhantomTeleportFX", 0,0,0, 0,0,0.5, 0, SXF_TRANSFERSPRITEFRAME);
-      stop;
    }
 }
 

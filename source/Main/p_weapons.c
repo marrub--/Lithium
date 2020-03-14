@@ -22,7 +22,7 @@ static void GiveWeaponItem(i32 parm, i32 slot)
 {
    switch(parm) {
    case weapon_c_fist:
-   case weapon_fist:      InvGive(so_Death,      1);    break;
+   case weapon_fist:      ServCallI(sm_DieMonster);     break;
    case weapon_c_spas:    InvGive(so_ShellAmmo,  8);    break;
    case weapon_ssg:       InvGive(so_ShellAmmo,  4);    break;
    case weapon_c_sniper:  InvGive(so_RocketAmmo, 6);    break;

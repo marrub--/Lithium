@@ -233,6 +233,8 @@ player/pickup/berserk lsounds/Items/Berserk
 player/pickup/armor lsounds/Items/Armor
 player/pickup/boots lsounds/Items/Boots
 player/pickup/ring lsounds/Items/Ring
+player/pickup/armor/pink lsounds/Items/ArmorPink
+player/pickup/armor/midori lsounds/Items/ArmorMidori
 player/pickup/scorechip lsounds/Items/ScoreChip
 player/pickup/coin1 lsounds/Items/Coin1
 player/pickup/coin2 lsounds/Items/Coin2

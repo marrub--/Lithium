@@ -44,6 +44,11 @@ player.pickup {
    boots       Boots       # 〃
    ring        Ring        # 〃
 
+   armor {
+      pink   ArmorPink   # ...
+      midori ArmorMidori # ...
+   }
+
    scorechip ScoreChip # Half-Life 2
 
    coin1 Coin1 # Sony Media 1001 Sound Effects

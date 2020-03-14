@@ -77,10 +77,10 @@ Upgrades the Yh0 plating system, reducing damage taken twice over.
 When you enter a level, sets off a huge explosion, defending you from initial
 threats.
 
-\cgThis alerts monsters when you enter a map.
-
 Implant a slow-charging self-defense explosive into your armor, keeping
 threats away while you're distracted.
+
+\cgThis alerts monsters when you enter a map.
 
 ## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_Adrenaline | Adrenaline Inj.

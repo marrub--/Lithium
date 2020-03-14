@@ -63,15 +63,6 @@ enum /* Lith_RandomSpawnNum */
    lrsn_clipbx,
 };
 
-enum /* Lith_ArmorSlot */
-{
-   aslot_lower,
-   aslot_upper,
-   aslot_ring,
-   aslot_pauld,
-   aslot_max
-};
-
 enum /* Lith_MsgType */
 {
    msg_ammo,

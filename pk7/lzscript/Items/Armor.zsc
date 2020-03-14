@@ -7,217 +7,229 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Armor_HazMat : Lith_Armor
-{
-   override int Lith_SaveAmt(name type)
-      {return Lith_HERMES.Instance().m_DmgWorld ? 10 : m_CurSave;}
+class Lith_Armor_HazMat : Lith_ArmorBase {
+   override int Lith_SaveAmt(name type) {
+      return Lith_HERMES.Instance().m_DmgWorld ? 10 : m_CurSave;
+   }
 }
 
-class Lith_Armor_Aerodynamic : Lith_Armor
-{
-   override double GetSpeedFactor()
-      {return m_Owner ? 1.1 : 1;}
-}
-
-class Lith_Armor_Standard_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmStandard";
+class Lith_Armor_Standard_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmStandardUp";
+      Lith_InventoryItem.InfoPage "ArmStandard";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 9600;
-      Lith_Armor.SlotSave aslot_upper, 2, 3;
-      Lith_Armor_Resistant.Resist ldt_bullets;
+      Lith_ArmorBase.Save 2, 3;
+      Lith_ArmorResistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM1 A -1; stop;}
 }
 
-class Lith_Armor_Standard_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmStandard";
+class Lith_Armor_Standard_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmStandardLo";
+      Lith_InventoryItem.InfoPage "ArmStandard";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 6600;
-      Lith_Armor.SlotSave aslot_lower, 1, 2;
-      Lith_Armor_Resistant.Resist ldt_bullets;
+      Lith_ArmorBase.Save 1, 2;
+      Lith_ArmorResistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM1 C -1; stop;}
 }
 
-class Lith_Armor_Improved_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmImproved";
+class Lith_Armor_Improved_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmImprovedUp";
+      Lith_InventoryItem.InfoPage "ArmImproved";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 11000;
-      Lith_Armor.SlotSave aslot_upper, 3, 4;
-      Lith_Armor_Resistant.Resist ldt_bullets;
+      Lith_ArmorBase.Save 3, 4;
+      Lith_ArmorResistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM2 A -1; stop;}
 }
 
-class Lith_Armor_Improved_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmImproved";
+class Lith_Armor_Improved_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmImprovedLo";
+      Lith_InventoryItem.InfoPage "ArmImproved";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 8000;
-      Lith_Armor.SlotSave aslot_lower, 2, 3;
-      Lith_Armor_Resistant.Resist ldt_bullets;
+      Lith_ArmorBase.Save 2, 3;
+      Lith_ArmorResistant.Resist ldt_bullets;
    }
 
    states {Spawn: ARM2 C -1; stop;}
 }
 
-class Lith_Armor_Teflon_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmTeflon";
+class Lith_Armor_Teflon_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmTeflonUp";
+      Lith_InventoryItem.InfoPage "ArmTeflon";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 11000;
-      Lith_Armor.SlotSave aslot_upper, 3, 4;
-      Lith_Armor_Resistant.Resist ldt_energy;
+      Lith_ArmorBase.Save 3, 4;
+      Lith_ArmorResistant.Resist ldt_energy;
    }
 
    states {Spawn: ARM3 A -1; stop;}
 }
 
-class Lith_Armor_Teflon_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmTeflon";
+class Lith_Armor_Teflon_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmTeflonLo";
+      Lith_InventoryItem.InfoPage "ArmTeflon";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 8000;
-      Lith_Armor.SlotSave aslot_lower, 1, 2;
-      Lith_Armor_Resistant.Resist ldt_energy;
+      Lith_ArmorBase.Save 1, 2;
+      Lith_ArmorResistant.Resist ldt_energy;
    }
 
    states {Spawn: ARM3 C -1; stop;}
 }
 
-class Lith_Armor_Dendrite_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmDendrite";
+class Lith_Armor_Dendrite_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmDendriteUp";
+      Lith_InventoryItem.InfoPage "ArmDendrite";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 11000;
-      Lith_Armor.SlotSave aslot_upper, 3, 4;
-      Lith_Armor_Resistant.Resist ldt_fire;
+      Lith_ArmorBase.Save 3, 4;
+      Lith_ArmorResistant.Resist ldt_fire;
    }
 
    states {Spawn: ARM4 A -1; stop;}
 }
 
-class Lith_Armor_Dendrite_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmDendrite";
+class Lith_Armor_Dendrite_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmDendriteLo";
+      Lith_InventoryItem.InfoPage "ArmDendrite";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 8000;
-      Lith_Armor.SlotSave aslot_lower, 1, 2;
-      Lith_Armor_Resistant.Resist ldt_fire;
+      Lith_ArmorBase.Save 1, 2;
+      Lith_ArmorResistant.Resist ldt_fire;
    }
 
    states {Spawn: ARM4 C -1; stop;}
 }
 
-class Lith_Armor_Aerodynamic_Upper : Lith_Armor_Aerodynamic
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmAerodynamic";
+class Lith_Armor_Aerodynamic_Upper : Lith_ArmorBase {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmAerodynamicUp";
+      Lith_InventoryItem.InfoPage "ArmAerodynamic";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 12000;
-      Lith_Armor.SlotSave aslot_upper, 2, 3;
+      Lith_ArmorBase.Save 2, 3;
+      Lith_ArmorBase.Speed 1.1;
    }
 
    states {Spawn: ARM5 A -1; stop;}
 }
 
-class Lith_Armor_Aerodynamic_Lower : Lith_Armor_Aerodynamic
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmAerodynamic";
+class Lith_Armor_Aerodynamic_Lower : Lith_ArmorBase {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmAerodynamicLo";
+      Lith_InventoryItem.InfoPage "ArmAerodynamic";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 9000;
-      Lith_Armor.SlotSave aslot_lower, 1, 2;
+      Lith_ArmorBase.Save 1, 2;
+      Lith_ArmorBase.Speed 1.1;
    }
 
    states {Spawn: ARM5 C -1; stop;}
 }
 
-class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmHazMat";
+class Lith_Armor_HazMat_Upper : Lith_Armor_HazMat {
+   default {
+      Inventory.PickupSound "player/pickup/armor";
+      Lith_InventoryItem.InvName "ArmHazMatUp";
+      Lith_InventoryItem.InfoPage "ArmHazMat";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 12000;
-      Lith_Armor.SlotSave aslot_upper, 2, 3;
+      Lith_ArmorBase.Save 2, 3;
    }
 
    states {Spawn: ARM6 A -1; stop;}
 }
 
-class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmHazMat";
+class Lith_Armor_HazMat_Lower : Lith_Armor_HazMat {
+   default {
+      Inventory.PickupSound "player/pickup/boots";
+      Lith_InventoryItem.InvName "ArmHazMatLo";
+      Lith_InventoryItem.InfoPage "ArmHazMat";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 9000;
-      Lith_Armor.SlotSave aslot_lower, 1, 2;
+      Lith_ArmorBase.Save 1, 2;
    }
 
    states {Spawn: ARM6 C -1; stop;}
 }
 
-class Lith_Armor_PinkSilver_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmPinkSilver";
+class Lith_Armor_PinkSilver_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor/pink";
+      Lith_InventoryItem.InvName "ArmPinkSilverUp";
+      Lith_InventoryItem.InfoPage "ArmPinkSilver";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_upper, 6, 7;
-      Lith_Armor_Resistant.Resist ldt_magic;
+      Lith_ArmorBase.Save 6, 7;
+      Lith_ArmorResistant.Resist ldt_magic;
    }
 
    states {Spawn: ARM7 A -1; stop;}
 }
 
-class Lith_Armor_PinkSilver_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmPinkSilver";
+class Lith_Armor_PinkSilver_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor/pink";
+      Lith_InventoryItem.InvName "ArmPinkSilverLo";
+      Lith_InventoryItem.InfoPage "ArmPinkSilver";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_lower, 4, 5;
-      Lith_Armor_Resistant.Resist ldt_magic;
+      Lith_ArmorBase.Save 4, 5;
+      Lith_ArmorResistant.Resist ldt_magic;
    }
 
    states {Spawn: ARM7 C -1; stop;}
 }
 
-class Lith_Armor_Midori_Upper : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmMidori";
+class Lith_Armor_Midori_Upper : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor/midori";
+      Lith_InventoryItem.InvName "ArmMidoriUp";
+      Lith_InventoryItem.InfoPage "ArmMidori";
+      Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_upper, 6, 7;
-      Lith_Armor_Resistant.Resist ldt_firemagic;
+      Lith_ArmorBase.Save 6, 7;
+      Lith_ArmorResistant.Resist ldt_firemagic;
    }
 
    states {Spawn: ARM8 A -1; stop;}
 }
 
-class Lith_Armor_Midori_Lower : Lith_Armor_Resistant
-{
-   default
-   {
-      Lith_InventoryItem.InvName "ArmMidori";
+class Lith_Armor_Midori_Lower : Lith_ArmorResistant {
+   default {
+      Inventory.PickupSound "player/pickup/armor/midori";
+      Lith_InventoryItem.InvName "ArmMidoriLo";
+      Lith_InventoryItem.InfoPage "ArmMidori";
+      Lith_InventoryItem.Size 2, 3;
       Lith_InventoryItem.InvSell 777700;
-      Lith_Armor.SlotSave aslot_lower, 4, 5;
-      Lith_Armor_Resistant.Resist ldt_firemagic;
+      Lith_ArmorBase.Save 4, 5;
+      Lith_ArmorResistant.Resist ldt_firemagic;
    }
 
    states {Spawn: ARM8 C -1; stop;}

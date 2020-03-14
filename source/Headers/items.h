@@ -16,22 +16,36 @@
 
 #define for_item(cont) for_list(struct item *it, (cont).items) if(it)
 
-struct itemdata
-{
+enum {
+   _inv_backpack,
+   _inv_arm_upper_l,
+   _inv_arm_upper_r,
+   _inv_arm_lower_l,
+   _inv_arm_lower_r,
+   _inv_belt,
+   _inv_leg_l,
+   _inv_leg_r,
+   _inv_torso,
+   _inv_legs,
+   _inv_num,
+};
+
+struct itemdata {
    str name, spr, tag;
    u32 w, h;
    i96 scr;
 
-   /* these need to be ScriptS or they'll disappear on map load */
-   /* (we shouldn't use a MInit callback because it would cause too much recursion) */
+   /* these need to be scripts or they'll disappear on map load
+    * (we shouldn't use a MInit callback because it would cause too much
+    * recursion for the VM to handle)
+    */
    script bool (*Use)(struct item *);
    script void (*Tick)(struct item *);
    script void (*Destroy)(struct item *);
    script void (*Place)(struct item *, struct container *);
 };
 
-struct item
-{
+struct item {
    anonymous struct itemdata data;
 
    u32 x, y;
@@ -42,16 +56,16 @@ struct item
    list link;
 };
 
-struct container
-{
+struct container {
    u32  w, h;
+   cstr name;
+   bool body;
    str  bg;
    list items;
    struct player *user;
 };
 
-struct bagitem
-{
+struct bagitem {
    anonymous struct item item;
    struct container content;
 };

@@ -229,8 +229,7 @@ struct player
    bool upgrinit;
 
    /* Inventory */
-   struct container inv[8];
-   struct container misc;
+   struct container inv[_inv_num];
 
    struct item *useitem;
    struct item *selitem;

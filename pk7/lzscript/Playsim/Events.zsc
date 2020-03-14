@@ -72,8 +72,8 @@ override void WorldLoaded(WorldEvent ev)
 
 override void WorldThingDestroyed(WorldEvent ev)
 {
-   if(ev.Thing is "Lith_InventoryItem")
-      Lith_InventoryItem(ev.Thing).Lith_Destroy();
+   let item = Lith_InventoryItem(ev.thing);
+   if(item) item.Lith_Destroy();
 }
 
 override void WorldUnloaded(WorldEvent ev)
@@ -82,7 +82,7 @@ override void WorldUnloaded(WorldEvent ev)
 
    let it = ThinkerIterator.Create("Lith_InventoryItem");
    for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());)
-      if(!mo.Owner) mo.Lith_Destroy();
+      if(!mo.owner) mo.Lith_Destroy();
 }
 
 override void UiTick()

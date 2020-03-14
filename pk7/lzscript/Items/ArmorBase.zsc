@@ -7,171 +7,83 @@
  * ---------------------------------------------------------------------------|
  */
 
-/* AAGH: Armors Are Goddamn Heavy */
-class Lith_AAGH : Inventory
-{
-   default
-   {
-      +INVENTORY.KEEPDEPLETED
-      +INVENTORY.UNTOSSABLE
-      +INVENTORY.UNDROPPABLE
-   }
-
-   Lith_SlottedItem m_Slotted[aslot_max];
-
-   static Lith_DamageType Lith_NameToDT(name type)
-   {
-      switch(type)
-      {
-      case 'None': if(Lith_HERMES.Instance().m_DmgWorld) return ldt_hazard;
-      default:
-      case 'Bullet':    return ldt_bullets;
-      case 'Plasma':
-      case 'Railgun':
-      case 'Electric':  return ldt_energy;
-      case 'Fire':      return ldt_fire;
-      case 'FireMagic': return ldt_firemagic;
-      case 'Magic':     return ldt_magic;
-      case 'Melee':     return ldt_melee;
-      case 'Shrapnel':
-      case 'Explosion': return ldt_shrapnel;
-      case 'Ice':       return ldt_ice;
-      }
-   }
-
-   bool Lith_AddSlot(Lith_SlottedItem o)
-   {
-      let slot = o.m_Slot;
-
-      if(!m_Slotted[slot])
-      {
-         o.Lith_Unlink();
-         m_Slotted[slot] = o;
-
-/*       Console.printf("%p: slotted: %i %s", self, slot, o.getClassName()); */
-
-         return true;
-      }
-      else
-         return false;
-   }
-
-   void Lith_OmitSlot(int slot)
-   {
-      m_Slotted[slot] = null;
-   }
-
-   bool Lith_RemoveSlot(int slot)
-   {
-      if(m_Slotted[slot])
-      {
-         if(m_Slotted[slot].Lith_Attach())
-         {
-            m_Slotted[slot] = null;
-
-/*          Console.printf("%p: removed: %i", self, slot); */
-         }
-         else
-            return false;
-      }
-
-      return true;
-   }
-
-   int Lith_SaveAmt(name type = 'None')
-   {
-      int save = 0;
-      for(int i = 0; i < aslot_max; i++)
-         if(m_Slotted[i])
-            save += m_Slotted[i].Lith_SaveAmt(type);
-      return save;
-   }
-
-   override void AbsorbDamage(int damage, name type, out int newdamage)
-   {
-      if(DamageTypeDefinition.IgnoreArmor(type)) return;
-
-      int save = Lith_SaveAmt(type);
-
-      if(damage - save < 1) newdamage = 1;
-      else                  newdamage = damage - save;
-
-/*    Console.printf("DT save: (%s) %i (%i -> %i)", type, save, damage, newdamage); */
-   }
-}
-
-class Lith_Armor : Lith_SlottedItem abstract
-{
-   default
-   {
-      Lith_InventoryItem.Size 4, 2;
+class Lith_ArmorBase : Lith_InventoryItem abstract {
+   default {
       Lith_InventoryItem.InvType "Armor";
 
       +INVENTORY.ISARMOR
    }
 
-   private int m_Save0;
-   private int m_Save1;
+   private int    m_save0, m_save1;
+   private double m_speed;
 
-   protected int m_CurSave;
+   protected int m_curSave;
 
-   property Save: m_Save0, m_Save1;
-   property SlotSave: m_Slot, m_Save0, m_Save1;
+   property Save:  m_save0, m_save1;
+   property Speed: m_speed;
 
-   override int Lith_SaveAmt(name type) {return m_CurSave;}
+   virtual int Lith_SaveAmt(name type) {return m_curSave;}
 
-   override Inventory CreateCopy(Actor mo)
-   {
-      let copy = Lith_Armor(Super.CreateCopy(mo));
+   override Inventory CreateCopy(Actor mo) {
+      let copy = Lith_ArmorBase(Super.CreateCopy(mo));
 
-      copy.m_Save0   = m_Save0;
-      copy.m_Save1   = m_Save1;
-      copy.m_CurSave = m_CurSave;
+      copy.m_save0   = m_save0;
+      copy.m_save1   = m_save1;
+      copy.m_speed   = m_speed;
+      copy.m_curSave = m_curSave;
 
       return copy;
    }
 
-   override void BeginPlay()
-   {
+   override void BeginPlay() {
       Super.BeginPlay();
-      m_CurSave = m_Save0;
+      m_curSave = m_save0;
+   }
+
+   override void AbsorbDamage(int damage, name type, out int newdamage) {
+      if(Lith_OnBody() && !DamageTypeDefinition.IgnoreArmor(type)) {
+         int save = Lith_SaveAmt(type);
+
+         Console.printf("absorbing %i damage", save);
+         if(damage - save < 1) newdamage = 1;
+         else                  newdamage = damage - save;
+      }
+   }
+
+   override double GetSpeedFactor() {
+      if(m_speed && Lith_OnBody()) {
+         return m_speed;
+      } else {
+         return 1.0;
+      }
    }
 }
 
-class Lith_Armor_Resistant : Lith_Armor
-{
+class Lith_ArmorResistant : Lith_ArmorBase {
    protected int m_Resist;
 
    property Resist: m_Resist;
 
-   override Inventory CreateCopy(Actor mo)
-   {
-      let copy = Lith_Armor_Resistant(Super.CreateCopy(mo));
-
+   override Inventory CreateCopy(Actor mo) {
+      let copy = Lith_ArmorResistant(Super.CreateCopy(mo));
       copy.m_Resist = m_Resist;
-
       return copy;
    }
 
-   override int Lith_SaveAmt(name type)
-   {
-      let dt = Lith_AAGH.Lith_NameToDT(type);
-      return m_Resist == dt ? m_CurSave * 2 : m_CurSave;
+   override int Lith_SaveAmt(name type) {
+      let dt = Lith_HERMES.nameToDT(type);
+      return m_Resist == dt ? m_curSave * 2 : m_curSave;
    }
 }
 
-class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor
-{
-   default
-   {
+class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor {
+   default {
       Lith_RandomSpawn.SpawnNum lrsn_garmor;
    }
 }
 
-class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor
-{
-   default
-   {
+class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor {
+   default {
       Lith_RandomSpawn.SpawnNum lrsn_barmor;
    }
 }

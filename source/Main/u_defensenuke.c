@@ -18,7 +18,7 @@
 stkcall
 void Upgr_DefenseNuke_Enter(struct player *p, struct upgrade *upgr)
 {
-   InvGive(so_Nuke, 1);
+   ServCallI(sm_Nuke);
 }
 
 /* EOF */

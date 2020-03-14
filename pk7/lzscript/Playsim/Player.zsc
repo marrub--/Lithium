@@ -9,6 +9,27 @@
 
 extend class Lith_HERMES;
 
+static void Nuke(Actor mo) {
+   mo.A_StartSound("player/nuke", lch_body2, attenuation: ATTN_NONE);
+   for(let it = BlockThingsIterator.Create(mo, 6144); it.next();)
+      if(it.thing.bISMONSTER && it.thing.checkSight(mo))
+         DieMonster(it.thing);
+   mo.A_AlertMonsters();
+}
+
+static void PlayerDeath(Actor mo) {
+   mo.A_Quake(9, 35*2, 0, 2048);
+   mo.A_StartSound("player/death2", lch_body3, attenuation: ATTN_NONE);
+   for(int i = 0; i < 76; i++)
+      mo.A_SpawnItemEx("Lith_PlayerDeathParticle", FRandom(-32,32), FRandom(-32,32), FRandom(0, 64), FRandom(-2, 2), FRandom(-2, 2), FRandom(1, 2), 0, SXF_NOCHECKPOSITION);
+}
+
+static void PlayerDeathNuke(Actor mo) {
+   for(int i = 0; i < 76; i++)
+      mo.A_SpawnItemEx("Lith_PlayerDeathParticle2", FRandom(-32,32), FRandom(-32,32), FRandom(0, 64), FRandom(-16, 16), FRandom(-16, 16), FRandom(1.5, 2.5), 0, SXF_NOCHECKPOSITION);
+   Nuke(mo);
+}
+
 static string GetObituary()
 {
    let sv = Instance();
@@ -33,20 +54,6 @@ static bool UseItem(Actor mo, int item)
    let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
    if(id) return id.Lith_Use(item);
    else   return false;
-}
-
-static string GetArmorSlot(Actor mo, int slot)
-{
-   let ar = Lith_AAGH(mo.FindInventory("Lith_AAGH"));
-   if(ar) return ar.m_Slotted[slot] ? ar.m_Slotted[slot].GetTag() : "";
-   else   return "";
-}
-
-static string GetArmorDT(Actor mo)
-{
-   let ar = Lith_AAGH(mo.FindInventory("Lith_AAGH"));
-   if(ar) return ar.Lith_SaveAmt() .. " DT";
-   else   return "";
 }
 
 static void Log(Actor mo, int type, int levl, string name)

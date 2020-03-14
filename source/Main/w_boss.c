@@ -167,7 +167,7 @@ void Sc_PhantomTeleport(void)
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
    for(i32 i = 0; i < 15; i++) {
-      InvGive(so_PhantomTeleport, 1);
+      ServCallI(sm_PhantomTeleport);
       ACS_Delay(1);
    }
 }
@@ -177,27 +177,24 @@ void Sc_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
 
-   if(boss->phase == boss->phasenum)
-   {
+   if(boss->phase == boss->phasenum) {
       /* Death */
       ACS_AmbientSound(ss_player_death1, 127);
       ACS_Delay(35);
-      InvGive(so_PlayerDeath, 1);
+      ServCallI(sm_PlayerDeath);
       ACS_Delay(25);
-      InvGive(so_PlayerDeathNuke, 1);
+      ServCallI(sm_PlayerDeathNuke);
       ACS_Delay(25);
       for_player() P_BIP_GiveMail(p, StrParam("%SDefeated", boss->name));
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;
-   }
-   else
-   {
+   } else {
       /* Escape */
       ACS_AmbientSound(ss_enemies_phantom_escape, 127);
       ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
-      InvGive(so_PhantomOut, 1);
+      ServCallI(sm_PhantomOut);
       ACS_Delay(2);
    }
 

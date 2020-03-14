@@ -33,7 +33,7 @@ void Sc_DOGS(void)
          k32 ang = ACS_RandomFixed(0, 1);
          k32 dst = ACS_RandomFixed(0, 64);
          ACS_SpawnForced(so_Steggles, p->x + ACS_Cos(ang) * dst, p->y + ACS_Sin(ang) * dst, p->z + 8, tid);
-         InvGive(so_Alerter, 1);
+         ServCallI(sm_AlertMonsters);
          ACS_Delay(10);
       }
 

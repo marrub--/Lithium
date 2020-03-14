@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_InventoryItem : Inventory abstract
-{
-   default
-   {
+class Lith_InventoryItem : Inventory abstract {
+   default {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
 
@@ -18,194 +16,100 @@ class Lith_InventoryItem : Inventory abstract
       +INVENTORY.UNDROPPABLE
    }
 
-   string m_InvType;
-   string m_InvName;
-   uint   m_InvItem;
-   uint   m_InvSell;
+   string m_invType;
+   string m_invName;
+   uint   m_invSell;
+   uint   m_invItem;
 
-   int m_W, m_H;
+   string m_infoPage;
 
-   property InvType: m_InvType;
-   property InvName: m_InvName;
-   property InvSell: m_InvSell;
-   property Size: m_W, m_H;
+   int m_w, m_h;
 
-   bool Lith_Attach()
-   {
-      if(Lith_IDOL(Owner).Lith_Attach(m_InvItem))
-      {
-         Lith_OnAttach();
-         return true;
-      }
-      else
-         return false;
-   }
+   property InvType:  m_invType;
+   property InvName:  m_invName;
+   property InvSell:  m_invSell;
+   property Size:     m_w, m_h;
+   property InfoPage: m_infoPage;
 
-   void Lith_Unlink()
-      {Lith_IDOL(Owner).Lith_Unlink(m_InvItem);}
+   bool Lith_OnBody() {return CallACS("Lith_ItemOnBody", m_invItem);}
 
-   void Lith_Detach()
-      {m_InvItem = 0; Destroy();}
+   void Lith_Detach() {m_invItem = 0; Destroy();}
 
    virtual bool Lith_UseItem(Actor mo) {return false;}
-   virtual void Lith_OnAttach() {}
+   virtual void Lith_OnAttach(Actor mo) {}
 
-   virtual void Lith_Destroy()
-   {
-      if(m_InvItem)
-      {
-         uint ip = m_InvItem;
-         m_InvItem = 0;
+   virtual void Lith_Destroy() {
+      if(m_invItem) {
+         uint ip = m_invItem;
+         m_invItem = 0;
          CallACS("Lith_ItemDetach", ip);
       }
    }
 
-   private void Lith_CreateItem()
-      {m_InvItem = CallACS("Lith_ItemCreate", m_W, m_H);}
+   private void Lith_CreateItem() {
+      m_invItem = CallACS("Lith_ItemCreate", m_w, m_h);
+   }
 
-   virtual string Lith_GetName()
-      {return StringTable.Localize("LITH_ITEM_TAG_" .. m_InvName, false);}
+   string Lith_GetName() {
+      return StringTable.Localize("LITH_ITEM_TAG_" .. m_invName, false);
+   }
 
-   override Inventory CreateCopy(Actor mo)
-   {
+   override Inventory CreateCopy(Actor mo) {
       let copy = Lith_InventoryItem(Super.CreateCopy(mo));
 
-      copy.m_InvType = m_InvType;
-      copy.m_InvName = m_InvName;
+      if(copy != self) {
+         copy.m_invType  = m_invType;
+         copy.m_invName  = m_invName;
+         copy.m_invSell  = m_invSell;
+         copy.m_w        = m_w;
+         copy.m_h        = m_h;
+         copy.m_infoPage = m_infoPage;
 
-      setTag(Lith_GetName());
-
-      if(copy != self) copy.Lith_CreateItem();
+         copy.setTag(Lith_GetName());
+         copy.Lith_CreateItem();
+      }
 
       return copy;
    }
 
-   override bool HandlePickup(Inventory item)
-      {return false;}
+   override bool HandlePickup(Inventory item) {return false;}
 
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
-      SetTag(Lith_GetName());
+      setTag(Lith_GetName());
       Lith_CreateItem();
    }
 
-   override void AttachToOwner(Actor mo)
-   {
+   override void AttachToOwner(Actor mo) {
       let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-      id.Lith_Attach(m_InvItem);
+      if(id.Lith_Attach(m_invItem)) {
+         if(m_infoPage) CallACS("Lith_BIPUnlock", mo.playerNumber());
+         Lith_OnAttach(mo);
+      }
       Super.AttachToOwner(id);
    }
 
-   override bool CanPickup(Actor mo)
-   {
-      if(Super.CanPickup(mo))
-      {
+   override bool CanPickup(Actor mo) {
+      if(Super.CanPickup(mo)) {
          let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-         return m_InvItem && id && id.Lith_SpaceFree(m_InvItem);
-      }
-      else
+         return m_invItem && id && id.Lith_SpaceFree(m_invItem);
+      } else {
          return false;
+      }
    }
 
-   override bool TryPickup(in out Actor mo)
-   {
-      if(Super.TryPickup(mo))
-      {
-         Lith_HERMES.Log(mo, msg_both, 3, getTag());
+   override bool TryPickup(in out Actor mo) {
+      if(Super.TryPickup(mo)) {
+         Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
+         return true;
+      } else {
          return true;
       }
-      else
-         return true;
    }
 }
 
-class Lith_SlottedItem : Lith_InventoryItem abstract
-{
-   default
-   {
-      Lith_InventoryItem.Size 1, 1;
-      Lith_InventoryItem.InvType "SlottedItem";
-   }
-
-   int m_Slot;
-
-   protected Lith_AAGH m_Owner;
-
-   property Slot: m_Slot;
-
-   private void Lith_SetSound()
-   {
-      switch(m_Slot) {
-      default:
-      case aslot_upper: PickupSound = "player/pickup/armor"; break;
-      case aslot_lower: PickupSound = "player/pickup/boots"; break;
-      case aslot_ring:  PickupSound = "player/pickup/ring";  break;
-      }
-   }
-
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      Lith_SetSound();
-   }
-
-   override void Lith_OnAttach()
-      {m_Owner = null;}
-
-   override bool Lith_UseItem(Actor mo)
-   {
-      let ar = Lith_AAGH(mo.FindInventory("Lith_AAGH"));
-
-      if(ar && ar.Lith_RemoveSlot(m_Slot) && ar.Lith_AddSlot(self))
-      {
-         m_Owner = ar;
-         return true;
-      }
-      else
-         return false;
-   }
-
-   override void Lith_Destroy()
-   {
-      if(m_Owner)
-      {
-         m_Owner.Lith_OmitSlot(m_Slot);
-         m_Owner = null;
-      }
-
-      Super.Lith_Destroy();
-   }
-
-   override string Lith_GetName()
-   {
-      let msg = Super.Lith_GetName();
-      switch(m_Slot) {
-      case aslot_lower: return msg .. " (Lower)";
-      case aslot_upper: return msg .. " (Upper)";
-      case aslot_ring:  return msg .. " (Ring)";
-      case aslot_pauld: return msg .. " (Shoulders)";
-      default:          return msg;
-      }
-   }
-
-   virtual int Lith_SaveAmt(name type = 'None') {return 0;}
-
-   override Inventory CreateCopy(Actor mo)
-   {
-      let copy = Lith_SlottedItem(Super.CreateCopy(mo));
-
-      copy.m_Slot = m_Slot;
-      Lith_SetSound();
-
-      return copy;
-   }
-}
-
-class Lith_BasicPickup : Inventory
-{
-   default
-   {
+class Lith_BasicPickup : Inventory {
+   default {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
       Lith_BasicPickup.LogType msg_both;
@@ -226,34 +130,32 @@ class Lith_BasicPickup : Inventory
 
    flagdef Vacuum: m_Flags, 0;
 
-   virtual void Lith_OnPickup(Actor mo)
-   {
-      if(m_LogName) Lith_HERMES.Log(mo, m_LogType, m_LogLevl, "_" .. m_LogName);
-      if(m_InfoPage) CallACS("Lith_BIPUnlock", mo.PlayerNumber());
+   virtual void Lith_OnPickup(Actor mo) {
+      if(m_LogName)
+         Lith_HERMES.Log(mo, m_LogType, m_LogLevl, "_" .. m_LogName);
+
+      if(m_InfoPage)
+         CallACS("Lith_BIPUnlock", mo.PlayerNumber());
    }
 
-   override bool TryPickup(in out Actor mo)
-   {
+   override bool TryPickup(in out Actor mo) {
       Lith_OnPickup(mo);
       GoAwayAndDie();
       return true;
    }
 }
 
-class Lith_CustomFunction : CustomInventory
-{
-   default
-   {
+/* TODO: remove these two classes when possible */
+class Lith_CustomFunction : CustomInventory {
+   default {
       Inventory.PickupMessage "";
       +INVENTORY.ALWAYSPICKUP
       +NOTIMEFREEZE
    }
 }
 
-class Lith_CustomInventory : CustomInventory
-{
-   default
-   {
+class Lith_CustomInventory : CustomInventory {
+   default {
       Inventory.PickupMessage "";
    }
 
@@ -261,23 +163,25 @@ class Lith_CustomInventory : CustomInventory
 
    property InfoPage: m_InfoPage;
 
-   action void Lith_A_Log(int type, int levl, string name)
-      {Lith_HERMES.Log(self, type, levl, "_" .. name);}
+   action void Lith_A_Log(int type, int levl, string name) {
+      Lith_HERMES.Log(self, type, levl, "_" .. name);
+   }
 
-   void Lith_A_BIPUnlock(Actor invoker, string name)
-      {m_InfoPage = name; invoker.ACS_ScriptCall("Lith_BIPUnlock", PlayerNumber());}
+   void Lith_A_BIPUnlock(Actor invoker, string name) {
+      m_InfoPage = name;
+      invoker.ACS_ScriptCall("Lith_BIPUnlock", PlayerNumber());
+   }
 
-   action void Lith_A_SetNamedScriptSpecial(name sc, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0)
-      {A_SetSpecial(84, -int(sc), arg0, arg1, arg2, arg3);}
+   action void Lith_A_SetNamedScriptSpecial(name sc, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
+      A_SetSpecial(84, -int(sc), arg0, arg1, arg2, arg3);
+   }
 
-   override bool TryPickup(in out Actor mo)
-   {
+   override bool TryPickup(in out Actor mo) {
       if(m_InfoPage) CallACS("Lith_BIPUnlock", mo.playerNumber());
       return Super.TryPickup(mo);
    }
 
-   states
-   {
+   states {
    Nope:
       TNT1 A 0;
       fail;
@@ -287,21 +191,19 @@ class Lith_CustomInventory : CustomInventory
 /* IDOL: Inventory Dummies are Overly Luxurious */
 class Lith_IDOL : Inventory;
 
-default
-{
+default {
    +INVENTORY.KEEPDEPLETED
    +INVENTORY.UNTOSSABLE
    +INVENTORY.UNDROPPABLE
 }
 
-Lith_InventoryItem Lith_Find(uint ip)
-{
-   for(Inventory it = inv; it; it = it.inv)
-      if(it.Owner == self && it is "Lith_InventoryItem")
-   {
-      let item = Lith_InventoryItem(it);
-      if(item.m_InvItem == ip)
-         return item;
+Lith_InventoryItem Lith_Find(uint ip) {
+   for(Inventory it = inv; it; it = it.inv) {
+      if(it.Owner == self && it is "Lith_InventoryItem") {
+         let item = Lith_InventoryItem(it);
+         if(item.m_invItem == ip)
+            return item;
+      }
    }
 
    return null;
@@ -313,17 +215,12 @@ bool Lith_Attach(uint ip)
 bool Lith_SpaceFree(uint ip)
    {return owner && owner.ACS_ScriptCall("Lith_ItemCanPlace", ip);}
 
-void Lith_Unlink(uint ip)
-   {if(owner) owner.ACS_ScriptCall("Lith_ItemUnlink", ip);}
-
-void Lith_Remove(uint ip)
-{
+void Lith_Remove(uint ip) {
    let it = Lith_Find(ip);
    it.Lith_Detach();
 }
 
-bool Lith_Use(uint ip)
-{
+bool Lith_Use(uint ip) {
    let it = Lith_Find(ip);
    return it.Lith_UseItem(owner);
 }

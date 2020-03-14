@@ -23,6 +23,29 @@ class Lith_BossFucker : Inventory
 
 extend class Lith_HERMES;
 
+static void DieNow(Actor mo) {
+   mo.A_Die();
+}
+
+static void DieMonster(Actor mo) {
+   if(mo.health < 1000) mo.A_Die();
+}
+
+static void AlertMonsters(Actor mo) {
+   mo.A_AlertMonsters();
+}
+
+static void PhantomOut(Actor mo) {
+   mo.A_Quake(9, 35*2, 0, 2048);
+   for(int i = 0; i < 76; i++) {
+      mo.A_SpawnItemEx("Lith_PlayerDeathParticle", frandom(-16,16), frandom(-16,16), 0, 0, 0, frandom(2, 6), 0, SXF_NOCHECKPOSITION);
+   }
+}
+
+static void PhantomTeleport(Actor mo) {
+   mo.A_SpawnItemEx("Lith_PhantomTeleportFX", 0,0,0, 0,0,0.5, 0, SXF_TRANSFERSPRITEFRAME);
+}
+
 static void PrepareForRagnarok(Actor mo)
 {
    mo.DamageMultiply += 2;

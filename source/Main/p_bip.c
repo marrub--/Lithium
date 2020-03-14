@@ -43,15 +43,14 @@ static void UnlockPage(struct player *p, struct page *page)
 {
    struct bip *bip = &p->bip;
 
-   if(!page->unlocked)
-   {
+   if(!page->unlocked) {
       bip->pageavail++;
       bip->categoryavail[page->category]++;
       page->unlocked = true;
-   }
 
-   for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
-      P_BIP_Unlock(p, page->unlocks[i]);
+      for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
+         P_BIP_Unlock(p, page->unlocks[i]);
+   }
 }
 
 optargs(1)
@@ -74,7 +73,7 @@ static void AddToBIP(struct player *p, i32 categ, struct page_init const *pinit,
    ListCtor(&page->link, page);
    page->link.link(&bip->infogr[categ]);
 
-   /* we have to pass along the player's class so discriminators don't fuck up */
+   /* we have to pass along the player's class so discrims don't fuck up */
    if(isfree) UnlockPage(p, page);
 }
 
@@ -258,15 +257,17 @@ struct page *P_BIP_Unlock(struct player *p, cstr name)
    struct bip  *bip  = &p->bip;
    struct page *page = FindPage(bip, name);
 
-   if(!page)
-   {
+   if(!page) {
       bip_name_t tag = {}; strcpy(tag, name); strcat(tag, p->discrim);
       page = FindPage(bip, tag);
    }
 
-   if(page && !page->unlocked) UnlockPage(p, page);
-
-   if(!page) Dbg_Log(log_bip, "no page '%s' found", name);
+   if(page && !page->unlocked) {
+      Dbg_Log(log_bip, "adding page '%s'", name);
+      UnlockPage(p, page);
+   } else if(!page) {
+      Dbg_Log(log_bip, "no page '%s' found", name);
+   }
 
    return page;
 }
@@ -322,8 +323,7 @@ struct page_info PageInfo(struct page const *page)
 script_str ext("ACS") addr("Lith_BIPUnlock")
 void Sc_UnlockPage(i32 pnum)
 {
-   with_player(&players[pnum])
-   {
+   with_player(&players[pnum]) {
       bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
       P_BIP_Unlock(p, tag);
    }

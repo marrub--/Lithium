@@ -7,6 +7,7 @@
 !!include Misc/QuitMessages.txt
 !!include Misc/Settings.txt
 !!include Misc/UI.txt
+!!include Misc/Inventory.txt
 
 ++ \#OPENER | Misc/Opener.txt
 

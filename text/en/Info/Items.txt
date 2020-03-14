@@ -1,31 +1,4 @@
 ## ---------------------------------------------------------------------------|
-== \#ITEM_TAG_ArmStandard    | Standard Armor
-== \#ITEM_TAG_ArmImproved    | Improved Armor
-== \#ITEM_TAG_ArmTeflon      | Teflon-weave Armor
-== \#ITEM_TAG_ArmDendrite    | Dendrite Armor
-== \#ITEM_TAG_ArmAerodynamic | Aerodynamic Armor
-== \#ITEM_TAG_ArmHazMat      | Haz-Mat Armor
-## thank you
-== \#ITEM_TAG_ArmPinkSilver  | Pink Silver
-== \#ITEM_TAG_ArmMidori      | Midori
-
-== :ItemSpr:ArmStandard    | ARM1A0
-== :ItemSpr:ArmImproved    | ARM2A0
-== :ItemSpr:ArmTeflon      | ARM3A0
-== :ItemSpr:ArmDendrite    | ARM4A0
-== :ItemSpr:ArmAerodynamic | ARM5A0
-== :ItemSpr:ArmHazMat      | ARM6A0
-== :ItemSpr:ArmPinkSilver  | ARM7A0
-== :ItemSpr:ArmMidori      | ARM8A0
-
-== :HUD:H_KC1 | RKEYB0
-== :HUD:H_KC2 | YKEYB0
-== :HUD:H_KC3 | BKEYB0
-== :HUD:H_KS1 | RSKUB0
-== :HUD:H_KS2 | YSKUB0
-== :HUD:H_KS3 | BSKUB0
-
-## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ScoreChip | Score Chip
 == \#INFO_TITLE_ScoreChip | GIC 781000 Score Chip
 @@ \#INFO_DESCR_ScoreChip
@@ -200,17 +173,15 @@ in an absorbent mana pool form, somehow.
 Gives 200 health and defends against attack temporarily.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmStandard | $\#ITEM_TAG_ArmStandard
+== \#INFO_SHORT_ArmStandard | Standard Armor
 == \#INFO_TITLE_ArmStandard | Standard Military Armor
 @@ \#INFO_DESCR_ArmStandard
 A standard plated ballistic vest able to absorb a bit of damage from bullets.
 Attribution to the current design has been lost to time from the hundreds of
 revisions it has gone through, with parts of it dating back as far as 2082 CE.
 
-Resists bullet damage. Upper 2 DT, lower 1 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmImproved | $\#ITEM_TAG_ArmImproved
+== \#INFO_SHORT_ArmImproved | Improved Armor
 == \#INFO_TITLE_ArmImproved | Improved Military Armor
 @@ \#INFO_DESCR_ArmImproved
 An improved, but more expensive, version of standard military armor. Has
@@ -218,11 +189,9 @@ harder plates and a more absorbent synthetic material to compensate damage
 with. Materials for this are mainly produced by SYM4.3, but the actual assembly
 is done by many others.
 
-Resists bullet damage. Upper 3 DT, lower 2 DT.
-
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ArmTeflon | Teflon Armor
-== \#INFO_TITLE_ArmTeflon | $\#ITEM_TAG_ArmTeflon
+== \#INFO_TITLE_ArmTeflon | Teflon-weave Armor
 @@ \#INFO_DESCR_ArmTeflon
 An armor with a vest made of a synthetic material composed of
 Polytetrafluoroethylene (PTFE or brand name Teflon,) Kevlar, and others, made
@@ -230,37 +199,29 @@ to resist electric shock by deflection. The material is interleaved with, as
 well, a material similar to the Improved Military Armor's. Produced by Sheka
 Kaff, Inc.
 
-Resists electric damage. Upper 3 DT, lower 1 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmDendrite | $\#ITEM_TAG_ArmDendrite
+== \#INFO_SHORT_ArmDendrite | Dendrite Armor
 == \#INFO_TITLE_ArmDendrite | $\#INFO_SHORT_ArmDendrite
 @@ \#INFO_DESCR_ArmDendrite
 An armor with a nickel dendritic micro-structure woven with tungsten and other
 materials for extreme heat resistance. Produced by Sheka Kaff, Inc.
 
-Resists fire damage. Upper 3 DT, lower 1 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmAerodynamic | $\#ITEM_TAG_ArmAerodynamic
+== \#INFO_SHORT_ArmAerodynamic | Aerodynamic Armor
 == \#INFO_TITLE_ArmAerodynamic | $\#INFO_SHORT_ArmAerodynamic
 @@ \#INFO_DESCR_ArmAerodynamic
 Light wind-gliding armor with a blue finish that allows the wearer increased
 speed by wind resistance. Produced by Yigan.
 
-No resistances. Upper 2 DT, lower 1 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmHazMat | $\#ITEM_TAG_ArmHazMat
-== \#INFO_TITLE_ArmHazMat | $\#INFO_SHORT_ArmHazMat
+== \#INFO_SHORT_ArmHazMat | Haz-mat Armor
+== \#INFO_TITLE_ArmHazMat | Hazardous Materials Armor
 @@ \#INFO_DESCR_ArmHazMat
 An insulating lead suit made to keep out radiation and other hazardous
 environment conditions. Produced by Yigan.
 
-Resists world damage. Upper 2 DT, lower 1 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmPinkSilver | $\#ITEM_TAG_ArmPinkSilver
+== \#INFO_SHORT_ArmPinkSilver | Pink Silver
 == \#INFO_TITLE_ArmPinkSilver | $\#INFO_SHORT_ArmPinkSilver
 @@ \#INFO_DESCR_ArmPinkSilver
 An artifact from an unknown dimension. On the back, the number "72" is written
@@ -269,10 +230,8 @@ resistance as well as physical resistance. Upon closer inspection, you notice
 a peculiar drawing on the inside that resembles a cute fox with a heart tail.
 Next to the drawing is a message written in blue paint reading "I miss you."
 
-Resists magical damage. Upper 6 DT, lower 4 DT.
-
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmMidori | $\#ITEM_TAG_ArmMidori
+== \#INFO_SHORT_ArmMidori | Midori
 == \#INFO_TITLE_ArmMidori | $\#INFO_SHORT_ArmMidori
 @@ \#INFO_DESCR_ArmMidori
 An artifact from the Reverse Ace dimension. A dark, matte green suit with
@@ -280,8 +239,6 @@ various religious and spiritual symbols hanging from it. Despite being placed
 on the armor mainly with beaded strings, the objects don't seem to come off
 no matter how hard you pull on them. This armor, through an unknown magic
 layer, is the only known object capable of resisting fire magic.
-
-Resists fire magic damage. Upper 6 DT, lower 4 DT.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_WeapnInter | Weapon Interface

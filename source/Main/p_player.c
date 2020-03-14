@@ -162,27 +162,23 @@ static void Sc_PlayerDeath(void)
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit(p);
 
-   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory))
-   {
+   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory)) {
       P_Upg_PQuit(p);
       P_BIP_PQuit(p);
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
    }
 
-   if(singleplayer)
-   {
-      if(ACS_GetCVar(sc_sv_revenge))
-      {
+   if(singleplayer) {
+      if(ACS_GetCVar(sc_sv_revenge)) {
          ACS_LocalAmbientSound(ss_player_death1, 127);
          ACS_Delay(35);
-         InvGive(so_PlayerDeath, 1);
+         ServCallI(sm_PlayerDeath);
          ACS_Delay(25);
-         InvGive(so_PlayerDeathNuke, 1);
+         ServCallI(sm_PlayerDeathNuke);
          ACS_Delay(25);
       }
 
-      while(p->dead)
-      {
+      while(p->dead) {
          ACS_Delay(35 * 5);
          Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
       }

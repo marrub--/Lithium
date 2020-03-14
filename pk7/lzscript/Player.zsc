@@ -127,7 +127,6 @@ override void PostBeginPlay()
 
 override void GiveDefaultInventory()
 {
-   GiveInventoryType("Lith_AAGH");
    GiveInventoryType("Lith_IDOL");
 }
 
@@ -454,7 +453,7 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
    if(sv.m_DmgWorld || source == self) mod = 'None';
 
    /* special protection */
-   CallACS("Lith_RA_Give", Lith_AAGH.Lith_NameToDT(mod));
+   CallACS("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
 
    if(damage > 1)
    {

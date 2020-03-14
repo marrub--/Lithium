@@ -7,47 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_PlayerDeath : Lith_CustomFunction
-{
-   override bool TryPickup(in out Actor mo)
-   {
-      if(mo)
-      {
-         mo.A_Quake(9, 35*2, 0, 2048);
-         mo.A_StartSound("player/death2", lch_body3, attenuation: ATTN_NONE);
-         for(int i = 0; i < 76; i++)
-            mo.A_SpawnItemEx("Lith_PlayerDeathParticle", FRandom(-32,32), FRandom(-32,32), FRandom(0, 64), FRandom(-2, 2), FRandom(-2, 2), FRandom(1, 2), 0, SXF_NOCHECKPOSITION);
-      }
-      return Super.TryPickup(mo);
-   }
-}
-
-class Lith_PlayerDeathNuke : Lith_Nuke
-{
-   override bool TryPickup(in out Actor mo)
-   {
-      if(mo)
-         for(int i = 0; i < 76; i++)
-            mo.A_SpawnItemEx("Lith_PlayerDeathParticle2", FRandom(-32,32), FRandom(-32,32), FRandom(0, 64), FRandom(-16, 16), FRandom(-16, 16), FRandom(1.5, 2.5), 0, SXF_NOCHECKPOSITION);
-      return Super.TryPickup(mo);
-   }
-}
-
-class Lith_Nuke : Lith_CustomFunction
-{
-   override bool TryPickup(in out Actor mo)
-   {
-      if(mo)
-      {
-         mo.A_StartSound("player/nuke", lch_body2, attenuation: ATTN_NONE);
-         mo.A_RadiusGive("Lith_Death", 6144, RGF_MONSTERS);
-         mo.A_AlertMonsters();
-      }
-      GoAwayAndDie();
-      return true;
-   }
-}
-
 class Lith_PlayerDeathParticle : Actor
 {
    default

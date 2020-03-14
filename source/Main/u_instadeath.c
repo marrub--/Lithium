@@ -19,7 +19,7 @@ script
 void Upgr_InstaDeath_Update(struct player *p, struct upgrade *upgr)
 {
    if(p->health < p->oldhealth)
-      InvGive(so_Die, 1);
+      ServCallI(sm_DieNow);
 }
 
 /* EOF */
