@@ -1442,6 +1442,7 @@
 "LITH_USE" = "Use";
 "LITH_SELL" = "Sell";
 "LITH_DISCARD" = "Discard";
+"LITH_REQUIRED" = "Required";
 "LITH_EMPTY" = "<empty>";
 "LITH_NOTE_FMT" = "\cmNote %i";
 "LITH_CAT_BODY" = "\cnBody";
@@ -1487,7 +1488,7 @@
 "LITH_CBI_WeapnInte2" = "Weapon Refactoring Device";
 "LITH_CBI_ArmorInter" = "Armor Interface";
 "LITH_CBI_RDistInter" = "Reality Distortion Interface";
-"LITH_CBI_ReactArmor" = "LITH_UPGRADE_TITLE_ReactArmor";
+"LITH_CBI_ReactArmor" = "$LITH_UPGRADE_TITLE_ReactArmor";
 "LITH_CBI_Slot1Spell" = "\ciBlade Spell Driver";
 "LITH_CBI_Slot2Spell" = "\ciDelear Spell Driver";
 "LITH_CBI_Slot3Spell" = "\ciFeuer Spell Driver";

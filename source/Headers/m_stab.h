@@ -412,13 +412,6 @@ X(ss_xx_pain25,                "*pain25")
 /* Text */
 X(st_begin,                  "\Cd[Press any key to begin]") /* TODO */
 X(st_bip_header,             "BIOTIC INFORMATION PANEL ver2.5") /* TODO */
-X(st_cbi_armorinter,         LANG "CBI_ArmorInter")
-X(st_cbi_rdistinter,         LANG "CBI_RDistInter")
-X(st_cbi_reactarmor,         LANG "CBI_ReactArmor")
-X(st_cbi_weapninte2,         LANG "CBI_WeapnInte2")
-X(st_cbi_weapninter,         LANG "CBI_WeapnInter")
-X(st_div_get,                LANG "DIV_SIGIL_GET")
-X(st_div_warning,            LANG "DIV_SIGIL_WARNING")
 X(st_edit,                   LANG "EDIT")
 X(st_exp,                    "EXP")
 X(st_filter_all,             "Filter: \CjAll") /* TODO */
@@ -436,7 +429,6 @@ X(st_mail_notitle,           LANG "MAIL_NOTITLE")
 X(st_mail_phantom,           "Phantom")
 X(st_mail_secret1,           "Secret1")
 X(st_mail_secret2,           "Secret2")
-X(st_mana_charge,            LANG "MANA_CHARGE")
 X(st_mp,                     "MP")
 X(st_next,                   "Next") /* TODO */
 X(st_no_results,             "No results") /* TODO */

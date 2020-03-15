@@ -98,17 +98,20 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
 {
    i32 y = 0;
 
-   #define Req(name) \
-   { \
-      PrintText_str(L(name), s_smallfnt, CR_RED, 111,1, 200 + y,2); \
+   #define Req(name) { \
+      ACS_BeginPrint(); \
+      PrintChrSt(LC(LANG name)); \
+      ACS_PrintChar(' '); \
+      PrintChrSt(LC(LANG "REQUIRED")); \
+      PrintText(s_smallfnt, CR_RED, 111,1, 200 + y,2); \
       y -= 10; \
    }
 
-   if(CheckRequires_AI)  Req(st_cbi_armorinter)
-   if(CheckRequires_WMD) Req(st_cbi_weapninter)
-   if(CheckRequires_WRD) Req(st_cbi_weapninte2)
-   if(CheckRequires_RDI) Req(st_cbi_rdistinter)
-   if(CheckRequires_RA)  Req(st_cbi_reactarmor)
+   if(CheckRequires_AI)  Req("CBI_ArmorInter")
+   if(CheckRequires_WMD) Req("CBI_WeapnInter")
+   if(CheckRequires_WRD) Req("CBI_WeapnInte2")
+   if(CheckRequires_RDI) Req("CBI_RDistInter")
+   if(CheckRequires_RA)  Req("CBI_ReactArmor")
 
    #undef Req
 

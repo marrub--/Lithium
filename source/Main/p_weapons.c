@@ -180,7 +180,8 @@ void P_Wep_PTick(struct player *p)
    switch(P_Wep_CurType(p))
    {
    case weapon_c_fist:
-      PrintTextA_str(L(st_mana_charge), s_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
+      Str(mana_charge, sLANG "MANA_CHARGE");
+      PrintTextA_str(L(mana_charge), s_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);

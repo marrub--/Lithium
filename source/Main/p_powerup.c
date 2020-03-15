@@ -107,11 +107,14 @@ void Sc_GetSigil(void)
 
       SetFade(fid_divsigil, 35 * 7, 8);
       for(i32 i = 0;; i++) {
+         Str(div_get,     sLANG "DIV_SIGIL_GET");
+         Str(div_warning, sLANG "DIV_SIGIL_WARNING");
+
          if(!CheckFade(fid_divsigil)) break;
 
          SetSize(320, 240);
-         PrintTextF_str(L(st_div_get), s_bigupper, CR_ORANGE, 160,4, 120,2, fid_divsigil);
-         PrintTextF_str(L(st_div_warning), s_bigupper, CR_RED, 160,4, 120,1, fid_divsigil);
+         PrintTextF_str(L(div_get), s_bigupper, CR_ORANGE, 160,4, 120,2, fid_divsigil);
+         PrintTextF_str(L(div_warning), s_bigupper, CR_RED, 160,4, 120,1, fid_divsigil);
 
          ACS_Delay(1);
       }

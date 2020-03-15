@@ -13,6 +13,7 @@
 == \#USE        | Use
 == \#SELL       | Sell
 == \#DISCARD    | Discard
+== \#REQUIRED   | Required
 == \#EMPTY      | <empty>
 == \#NOTE_FMT   | \cmNote %i
 
@@ -74,7 +75,7 @@
 == \#CBI_WeapnInte2 | Weapon Refactoring Device
 == \#CBI_ArmorInter | Armor Interface
 == \#CBI_RDistInter | Reality Distortion Interface
-== \#CBI_ReactArmor | \#UPGRADE_TITLE_ReactArmor
+== \#CBI_ReactArmor | $\#UPGRADE_TITLE_ReactArmor
 
 == \#CBI_Slot1Spell | \ciBlade Spell Driver
 == \#CBI_Slot2Spell | \ciDelear Spell Driver
