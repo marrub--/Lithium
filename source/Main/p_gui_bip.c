@@ -40,14 +40,16 @@ static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
 
    bip->lastcategory = BIPC_MAIN;
 
-   str const lines[] = {
-      L(st_bip_help_search),
-      #define LITH_X(name, capt) L(st_bip_help_##name),
+   cstr lines[] = {
+      LC(LANG "BIP_HELP_Search"),
+      #define LITH_X(name, capt) LC(LANG "BIP_HELP_" #name),
       #include "p_bip.h"
    };
 
-   for(i32 i = 0; i < countof(lines); i++)
-      PrintTextA_str(lines[i], s_smallfnt, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
+   for(i32 i = 0; i < countof(lines); i++) {
+      PrintTextChS(lines[i]);
+      PrintTextA(s_smallfnt, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
+   }
 
    if(G_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
       bip->curcategory = BIPC_SEARCH;
@@ -163,10 +165,15 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
 
    PrintText_str(pinf.flname, s_smallfnt, CR_ORANGE, 200,4, 45 + oy,1);
 
+   Str(nl_bar, s"\n|");
+
    #define DrawText(txt, cr, x, y) \
       PrintTextStr(txt); \
-      if(typeon->pos == typeon->len) {if(Ticker(true, false)) ACS_PrintString(st_nl_bar);} \
-      else                                                    ACS_PrintChar('|'); \
+      if(typeon->pos == typeon->len) { \
+         if(Ticker(true, false)) {ACS_PrintChar('\n'); ACS_PrintChar('|');} \
+      } else { \
+         ACS_PrintChar('|'); \
+      } \
       PrintText(s_smallfnt, cr, x,1, y+oy,1)
 
    /* render an outline if the page has an image */

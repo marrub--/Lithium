@@ -206,7 +206,8 @@ bool Sc_WeaponPickup(i32 name)
    struct player *p = LocalPlayer;
    if(P_None(p)) return false;
 
-   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
+   Str(sv_weaponstay, s"sv_weaponstay");
+   bool weaponstay = ACS_GetCVar(sv_weaponstay);
    i32 parm = weapon_unknown;
 
    parm = P_Wep_FromName(p, name);

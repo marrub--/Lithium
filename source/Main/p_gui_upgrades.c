@@ -14,12 +14,12 @@
 #include "u_common.h"
 #include "w_world.h"
 
-static str const upgrcateg[UC_MAX] = {
+StrAry(upgrcateg,
    [UC_Body] = sLANG "CAT_BODY",
    [UC_Weap] = sLANG "CAT_WEAP",
    [UC_Extr] = sLANG "CAT_EXTR",
    [UC_Down] = sLANG "CAT_DOWN"
-};
+);
 
 static void GUIUpgradesList(struct gui_state *g, struct player *p)
 {

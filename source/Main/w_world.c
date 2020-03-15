@@ -52,6 +52,8 @@ bool lmvar player_init;
 
 /* Static Objects ---------------------------------------------------------- */
 
+Str(lithend, s"LITHEND");
+
 static bool reopen;
 
 static i32 lmvar mapid;
@@ -95,11 +97,14 @@ static void Boss_HInit(void)
 
 static void CheckModCompat(void)
 {
+   Str(legendary_monster_marker, s"LDLegendaryMonsterMarker");
+   Str(drla_is_using_monsters,   s"DRLA_is_using_monsters");
+
    i32 tid;
 
-   if((legendoom = ACS_SpawnForced(so_LegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((legendoom = ACS_SpawnForced(legendary_monster_marker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
-   drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
+   drlamonsters = ACS_GetCVar(drla_is_using_monsters);
 }
 
 static void UpdateGame(void)
@@ -239,17 +244,18 @@ static void HInitPre(void)
    DmonInit();
    bossspawned = false;
 
-   if(ACS_GetCVar(sc_sv_sky) && !islithmap)
-   {
-      if(InHell)
-      {
-         ACS_ChangeSky(s_LITHSKRD, s_LITHSKRD);
+   if(ACS_GetCVar(sc_sv_sky) && !islithmap) {
+      Str(lithskde, s"LITHSKDE");
+      Str(lithskrd, s"LITHSKRD");
+      Str(lithsks1, s"LITHSKS1");
+      if(InHell) {
+         ACS_ChangeSky(lithskrd, lithskrd);
          ACS_SetSkyScrollSpeed(1, 0.01);
+      } else if(OnEarth) {
+         ACS_ChangeSky(lithskde, lithskde);
+      } else {
+         ACS_ChangeSky(lithsks1, lithsks1);
       }
-      else if(OnEarth)
-         ACS_ChangeSky(s_LITHSKDE, s_LITHSKDE);
-      else
-         ACS_ChangeSky(s_LITHSKS1, s_LITHSKS1);
    }
 }
 
@@ -383,8 +389,9 @@ begin:
       }
 
       if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
-         ServCallI(sm_SetEnding, st_timeout);
-         ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION, -1);
+         Str(timeout, s"TimeOut");
+         ServCallI(sm_SetEnding, timeout);
+         ACS_ChangeLevel(lithend, 0, CHANGELEVEL_NOINTERMISSION, -1);
          return;
       }
 
@@ -452,18 +459,23 @@ static void Sc_WorldUnload(void)
 script_str ext("ACS") addr("Lith_Finale")
 void Sc_Finale(void)
 {
+   Str(normal,      s"Normal");
+   Str(barons,      s"Barons");
+   Str(cyberdemon,  s"CyberDemon");
+   Str(spiderdemon, s"SpiderDemon");
+   Str(iconofsin,   s"IconOfSin");
    i32 boss = ServCallI(sm_GetBossLevel);
    str which;
    switch(boss) {
       case boss_none:
-      case boss_other:       which = st_normal;      break;
-      case boss_barons:      which = st_barons;      break;
-      case boss_cyberdemon:  which = st_cyberdemon;  break;
-      case boss_spiderdemon: which = st_spiderdemon; break;
-      case boss_iconofsin:   which = st_iconofsin;   break;
+      case boss_other:       which = normal;      break;
+      case boss_barons:      which = barons;      break;
+      case boss_cyberdemon:  which = cyberdemon;  break;
+      case boss_spiderdemon: which = spiderdemon; break;
+      case boss_iconofsin:   which = iconofsin;   break;
    }
    ServCallI(sm_SetEnding, which);
-   ACS_ChangeLevel(s_LITHEND, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
+   ACS_ChangeLevel(lithend, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 /* EOF */

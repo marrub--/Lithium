@@ -29,13 +29,13 @@
 
 #define Slot(name, x, y) \
    do { \
-      static str const path = s":UI:" name; \
+      Str(path, s":UI:" name); \
       PrintSprite(path, 300-x*48,2, 48*y-20,1); \
    } while(0)
 
 #define CPU(num) \
    do { \
-      static str const path = s":UI:CPU" #num; \
+      Str(path, s":UI:CPU" #num); \
       PrintSprite(path, 0,1, 0,1); \
    } while(0)
 

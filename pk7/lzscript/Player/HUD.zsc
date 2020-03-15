@@ -1,0 +1,69 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_Player;
+
+private void Lith_Crosshair()
+{
+   if(gamestate == GS_TITLELEVEL) return;
+
+   /* get the "actual" view angles */
+   float rp = pitch + ACS_ExecuteWithResult(lsc_pdata, pdata_addp)/FIX * 180;
+   float ry = angle + ACS_ExecuteWithResult(lsc_pdata, pdata_addy)/FIX * 360;
+
+   /* trace to where the crosshair should be in world space */
+   float sz = height / 2 + attackzoffset * player.crouchfactor;
+
+   FLineTraceData ltd;
+   LineTrace(ry, 2048, rp, 0, sz, 0, 0, ltd);
+
+   /* unproject */
+   int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
+
+   /* draw a tracer for targeting system */
+   if(tracer && tracer.health > 0 && ACS_ExecuteWithResult(lsc_pdata, pdata_weapon) == weapon_launcher)
+   {
+      int thx, thy; bool ok; [thx, thy, ok] = Lith_Unproject(tracer.pos + (0, 0, tracer.height / 2));
+      if(ok) Lith_URANUS.LL(self, xhx, xhy, thx, thy, "red");
+   }
+
+   /* draw the crosshair */
+   uint r = min(CVar.GetCVar('lith_xhair_r', player).getInt(), 255);
+   uint g = min(CVar.GetCVar('lith_xhair_g', player).getInt(), 255);
+   uint b = min(CVar.GetCVar('lith_xhair_b', player).getInt(), 255);
+   uint a = min(CVar.GetCVar('lith_xhair_a', player).getInt(), 255);
+
+   int style = CVar.GetCVar('lith_xhair_style', player).getInt();
+
+   let c = String.Format("#%.2X%.2X%.2X", r, g, b);
+
+   let gb = String.Format(":XHairs:%ib", style);
+   let gw = String.Format(":XHairs:%iw", style);
+
+   Lith_URANUS.LS(self, gb, xhx, xhy, 0x400 | a);
+   Lith_URANUS.LS(self, gw, xhx, xhy, 0x400 | a, c);
+
+   if(CVar.GetCVar('lith_xhair_enablejuicer', player).getBool())
+   {
+      int xp = int(ceil(ACS_ExecuteWithResult(lsc_pdata, pdata_recoilp)/FIX * 500)) + 10;
+
+      Lith_URANUS.LS(self, ":XHairs:L", xhx - xp, xhy, 0x400 | a, c);
+      Lith_URANUS.LS(self, ":XHairs:R", xhx + xp, xhy, 0x400 | a, c);
+   }
+}
+
+private void Lith_PlayerIndicator(PlayerInfo p)
+{
+   let mo = p.MO;
+
+   int x, y; bool seen; [x, y, seen] = Lith_Unproject(mo.pos + (0, 0, mo.height));
+   if(seen) ACS_ExecuteWithResult(lsc_drawplayericon, mo.PlayerNumber(), x, y);
+}
+
+/* EOF */

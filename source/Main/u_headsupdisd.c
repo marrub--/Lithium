@@ -62,9 +62,8 @@ static void HUD_Ammo(struct player *p)
 
 static void HUD_Health(struct player *p)
 {
-   static str ws[SLOT_MAX] = {s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24",
-                              s":HUD:H_D23", s":HUD:H_D22", s":HUD:H_D21",
-                              s":HUD:H_D25", s":HUD:H_D26"};
+   StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
+              s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 

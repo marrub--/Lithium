@@ -18,12 +18,9 @@
 
 #include "w_data.h"
 
-#define InSecret \
-   (game == Game_Doom2 && (Cluster == 9 || Cluster == 10))
-#define InHell \
-   (game == Game_Doom2 && Cluster >= 8)
-#define OnEarth \
-   (game == Game_Doom2 && Cluster == 7)
+#define InSecret (game == Game_Doom2 && (Cluster == 9 || Cluster == 10))
+#define InHell   (game == Game_Doom2 && Cluster >= 8)
+#define OnEarth  (game == Game_Doom2 && Cluster == 7)
 
 #define MapNum ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)

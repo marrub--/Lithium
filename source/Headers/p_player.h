@@ -48,10 +48,8 @@ LITH_X(gR, pcl_robot)
 
 #include <GDCC/HashMap.h>
 
-#define MAX_PLAYERS 8
-
 #define for_player() \
-   for(i32 _piter = 0; _piter < MAX_PLAYERS; _piter++) \
+   for(i32 _piter = 0; _piter < _max_players; _piter++) \
       __with(struct player *p = &players[_piter];) \
          if(p->active)
 
@@ -93,6 +91,10 @@ script void P_TeleportOutAsync(struct player *p);
 /* Types ------------------------------------------------------------------- */
 
 GDCC_HashMap_Decl(upgrademap_t, i32, struct upgrade)
+
+enum {
+   _max_players = 8,
+};
 
 enum
 {
@@ -145,19 +147,23 @@ struct player_delta
 
    /* Attributes */
    struct player_attributes attr;
+
+   /* Flashlight */
+   bool lt_on;
 };
 
-/*       7/4/2016: That's a lot of data! */
-/* edit  9/4/2016: Holy shit, that's really a lot of data! */
-/* edit  7/5/2016: JESUS TAKE THE WHEEL */
-/* edit  3/1/2017: help */
-/* edit  6/1/2017: there's so much data that I had to split it */
-/* edit 23/1/2017: D E S T R O Y */
-/* edit 26/2/2017: There is yet again so much data that I had to split it. */
-/* edit 11/3/2017: NOW WITH PROPERTY HELL */
-/* edit 11/7/2017: and now it's over 5000 bytes. */
-/* edit 14/7/2017: lol nevermind it's only 2kb now */
-/* edit 31/8/2017: m e r g e */
+/*       7/4/2016: That's a lot of data!
+ * edit  9/4/2016: Holy shit, that's really a lot of data!
+ * edit  7/5/2016: JESUS TAKE THE WHEEL
+ * edit  3/1/2017: help
+ * edit  6/1/2017: there's so much data that I had to split it
+ * edit 23/1/2017: D E S T R O Y
+ * edit 26/2/2017: There is yet again so much data that I had to split it.
+ * edit 11/3/2017: NOW WITH PROPERTY HELL
+ * edit 11/7/2017: and now it's over 5000 bytes.
+ * edit 14/7/2017: lol nevermind it's only 2kb now
+ * edit 31/8/2017: m e r g e
+ */
 struct player
 {
    /* data */
@@ -323,12 +329,16 @@ struct player
    bool krc, kyc, kbc;
    bool krs, kys, kbs;
 
+   /* Flashlight */
+   i32 lt_battery;
+   k64 lt_intensity, lt_target, lt_speed;
+
    /* 🌌 「÷」 0 */
    bool sgacquired;
 };
 
 /* Extern Objects ---------------------------------------------------------- */
 
-extern struct player players[MAX_PLAYERS];
+extern struct player players[_max_players];
 
 #endif

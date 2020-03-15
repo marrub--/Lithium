@@ -7,6 +7,8 @@
 == \#ST_PFX_Minutes | min
 == \#ST_PFX_Of255   | /255
 == \#ST_PFX_Pixels  | px
+== \#ST_PFX_Seconds | s
+== \#ST_PFX_Units   | mu
 
 == \#ST_NAME_Unknown | Unknown
 
@@ -124,6 +126,15 @@
 == \#stx_boss_1 | If you are sensitive to suggestion or otherwise
 == \#stx_boss_2 | made uncomfortable by threats, please disable
 == \#stx_boss_3 | boss dialogues!
+
+== \#stx_light | Flashlight
+
+== \#light_battery | Battery
+== \#light_regen   | Battery regeneration
+== \#light_r       | Red intensity
+== \#light_g       | Green intensity
+== \#light_b       | Blue intensity
+== \#light_radius  | Radius
 
 == \#stx_items | Items
 

@@ -1,0 +1,77 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_Player;
+
+override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+   /* ÜBER KLUDGE (override behaviour for DONTHARMSPECIES) */
+   if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
+      return 0;
+
+   /* set global damage info (ouch) */
+   let sv = Lith_HERMES.Instance();
+
+   sv.m_DmgWorld = !(inflictor || source);
+   sv.m_DmgType  = mod;
+
+   /* hack: remove the damage type for world stuff so obituaries are
+    *       easier to override
+    */
+   if(sv.m_DmgWorld || source == self) mod = 'None';
+
+   /* special protection */
+   CallACS("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
+
+   if(damage > 1)
+   {
+      if(CountInv("Lith_MegaProtection"))
+      {
+         TakeInventory("Lith_MegaProtection", damage / 2);
+         damage /= 2;
+      }
+
+      if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
+   }
+
+   return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+}
+
+override void Die(Actor source, Actor inflictor, int dmgflags) {
+   target = source;
+   Super.Die(null, inflictor, dmgflags);
+
+   let sv = Lith_HERMES.Instance();
+   string ob;
+
+   if(source == self) {
+      switch(sv.m_DmgType) {
+         case 'FatMacRecoil': ob = "$LITH_OB_S_FatMac";    break;
+         case 'Shrapnel':     ob = "$LITH_OB_S_Explosion"; break;
+         default:             ob = "(suicide)";            break;
+      }
+   } else if(source) {
+      ob = sv.m_DmgType == 'Melee' ? source.hitobituary : source.obituary;
+   } else {
+      switch(sv.m_DmgType) {
+         case 'Falling':  ob = "(falling)";  break;
+         case 'Crush':    ob = "(crush)";    break;
+         case 'Exit':     ob = "(exit)";     break;
+         case 'Drowning': ob = "(drowning)"; break;
+         case 'Slime':    ob = "(slime)";    break;
+         case 'Fire':     ob = "(fire)";     break;
+         default:         ob = "(default)";  break;
+      }
+   }
+
+   sv.m_Obituary = StringTable.Localize(ob);
+
+   CallACS("Lith_Obituary");
+}
+
+/* EOF */

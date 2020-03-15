@@ -102,13 +102,29 @@ void P_ValidateTID(struct player *p)
 stkcall
 void P_Dat_PTickPre(struct player *p)
 {
-   static i32 const warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
-      WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION | WARPF_COPYPITCH;
+   Str(c_card_b, s"ChexBlueCard");
+   Str(c_card_r, s"ChexRedCard");
+   Str(c_card_y, s"ChexYellowCard");
+   Str(d_card_b, s"BlueCard");
+   Str(d_card_r, s"RedCard");
+   Str(d_card_y, s"YellowCard");
+   Str(d_skul_b, s"BlueSkull");
+   Str(d_skul_r, s"RedSkull");
+   Str(d_skul_y, s"YellowSkull");
+   Str(htic_k_b, s"KeyBlue");
+   Str(htic_k_g, s"KeyGreen");
+   Str(htic_k_y, s"KeyYellow");
+
+   enum {
+      _warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
+                   WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION |
+                   WARPF_COPYPITCH
+   };
 
    p->grabInput = false;
 
-   ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
-   ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, warpflags);
+   ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
+   ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
 
    p->x = GetX(0);
    p->y = GetY(0);
@@ -139,22 +155,15 @@ void P_Dat_PTickPre(struct player *p)
 
    p->scopetoken = InvNum(so_WeaponScopedToken);
 
-   p->krc = InvNum(so_RedCard)     ||
-            InvNum(so_ChexRedCard) ||
-            InvNum(so_KeyGreen);
-   p->kyc = InvNum(so_YellowCard)     ||
-            InvNum(so_ChexYellowCard) ||
-            InvNum(so_KeyYellow);
-   p->kbc = InvNum(so_BlueCard)     ||
-            InvNum(so_ChexBlueCard) ||
-            InvNum(so_KeyBlue);
-   p->krs = InvNum(so_RedSkull);
-   p->kys = InvNum(so_YellowSkull);
-   p->kbs = InvNum(so_BlueSkull);
+   p->krc = InvNum(d_card_r) || InvNum(c_card_r) || InvNum(htic_k_g);
+   p->kyc = InvNum(d_card_y) || InvNum(c_card_y) || InvNum(htic_k_y);
+   p->kbc = InvNum(d_card_b) || InvNum(c_card_b) || InvNum(htic_k_b);
+   p->krs = InvNum(d_skul_r);
+   p->kys = InvNum(d_skul_y);
+   p->kbs = InvNum(d_skul_b);
 
-   if(ACS_Timer() > 4)
-   {
-           if(p->health < p->oldhealth) p->healthused += p->oldhealth - p->health;
+   if(ACS_Timer() > 4) {
+      /**/ if(p->health < p->oldhealth) p->healthused += p->oldhealth - p->health;
       else if(p->health > p->oldhealth) p->healthsum  += p->health    - p->oldhealth;
 
       if(p->x != p->old.x) p->unitstravelled += fastabs(p->x - p->old.x);
@@ -252,10 +261,10 @@ void P_Init(struct player *p)
       p->stepnoise   = StrParam("player/%S/step", p->classname);
 
       switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
-      case 0: p->pronoun = pro_male;   break;
-      case 1: p->pronoun = pro_female; break;
-      case 2: p->pronoun = pro_nb;     break;
-      case 3: p->pronoun = pro_object; break;
+         case 0: p->pronoun = pro_male;   break;
+         case 1: p->pronoun = pro_female; break;
+         case 2: p->pronoun = pro_nb;     break;
+         case 3: p->pronoun = pro_object; break;
       }
    }
 
@@ -301,6 +310,12 @@ void P_Init(struct player *p)
    p->scoreaccum     = 0;
    p->scoreaccumtime = 0;
    p->scoremul       = 1.3;
+
+   p->lt_on        = false;
+   p->lt_battery   = 0xffff;
+   p->lt_intensity = 0.0;
+   p->lt_target    = 0.0;
+   p->lt_speed     = 1.0;
 
    p->alpha = 1;
 

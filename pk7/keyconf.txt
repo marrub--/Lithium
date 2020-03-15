@@ -9,18 +9,21 @@
 // Key Sections --------------------------------------------------------------|
 addkeysection "$LITH_CTRL_ACTIONS" Lithium
 addmenukey "$LITH_CTRL_OPENCBI" lith_k_opencbi
+addmenukey "$CNTRLMNU_USER4"    +lith_k_qact
+addmenukey "$LITH_CTRL_LIGHT"   lith_k_light
 addmenukey "$LITH_CTRL_ZOOMIN"  lith_k_zoomin
 addmenukey "$LITH_CTRL_ZOOMOUT" lith_k_zoomout
 addmenukey "$LITH_CTRL_GLARE"   lith_k_glare
-addmenukey "$CNTRLMNU_USER4"    +lith_k_qact
 
 // Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 
+alias lith_k_light "pukename Lith_KeyLight"
+
 alias lith_k_zoomin  "pukename Lith_KeyZoom 30"
 alias lith_k_zoomout "pukename Lith_KeyZoom -60"
 
-alias lith_k_glare "pukename Lith_Glare"
+alias lith_k_glare "pukename Lith_KeyGlare"
 
 alias +lith_k_qact "+user4"
 alias -lith_k_qact "-user4"

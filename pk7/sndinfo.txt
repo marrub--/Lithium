@@ -285,6 +285,8 @@ player/hitground lsounds/Player/HitGround
 player/infraredoff lsounds/Player/InfraredOff
 player/levelup lsounds/Player/LevelUp
 player/glare lsounds/Player/Glare
+player/lighton lsounds/Player/LightOn
+player/lightoff lsounds/Player/LightOff
 $volume player/death2 0.7
 $volume player/nuke 0.7
 $volume player/doublejump 0.7

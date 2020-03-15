@@ -127,7 +127,7 @@ void Sc_GiveEXPToMonster(i32 amt)
 script_str ext("ACS") addr("Lith_GiveMail")
 void Sc_DbgGiveMail(i32 num)
 {
-   static str const names[] = {
+   StrAry(names,
       s"Intro",
       s"Cluster1",
       s"Cluster2",
@@ -138,7 +138,7 @@ void Sc_DbgGiveMail(i32 num)
       s"JamesDefeated",
       s"MakarovDefeated",
       s"IsaacDefeated"
-   };
+   );
 
    num %= countof(names);
 

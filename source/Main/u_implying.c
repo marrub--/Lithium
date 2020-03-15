@@ -18,7 +18,7 @@
 script
 void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
 {
-   static str strings[] = {
+   StrAry(strings,
       s"\Cd>implying",
       s"\Cd>doombabbies",
       s"\Cd>implying",
@@ -37,7 +37,7 @@ void Upgr_Implying_Update(struct player *p, struct upgrade *upgr)
       s"\Cd>>>>>>>>>>>>>>>",
       s"\Cd>doom >2012",
       s"\Cq<",
-   };
+   );
 
    srand(p->ticks / 7);
 

@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_Player;
+
+void Lith_ShowMapMarker() {
+   Lith_MapMarker th;
+
+   for(let it = ThinkerIterator.create("Lith_MapMarker", _stat_mapmark);
+       (th = (Lith_MapMarker(it.next())));) {
+      if(th.cursector == cursector && th != m_curMark &&
+         (!m_curMark || th.getTag() != m_curMark.getTag())) {
+         m_curMark = th;
+         CallACS("Lith_Markiplier", m_curMark.tid);
+         break;
+      }
+   }
+}
+
+void Lith_ShowAdviceMarker() {
+   Lith_AdviceMarker th;
+
+   for(let it = ThinkerIterator.create("Lith_AdviceMarker", _stat_advicemark);
+         (th = (Lith_AdviceMarker(it.next())));) {
+      if(th.cursector == cursector && th != m_curAdvice) {
+         m_curAdvice = th;
+         CallACS("Lith_SetAdviceMarker", m_curAdvice.tid);
+         break;
+      }
+   }
+}
+
+/* EOF */

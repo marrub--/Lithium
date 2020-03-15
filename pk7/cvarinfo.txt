@@ -82,6 +82,13 @@ user int  lith_scanner_yoffs   = 0;
 user int  lith_scanner_color   = 106; /* 'j' */
 user bool lith_scanner_altfont = false;
 
+user int lith_light_battery = 7;
+user int lith_light_regen   = 2;
+user int lith_light_r       = 255;
+user int lith_light_g       = 217;
+user int lith_light_b       = 186;
+user int lith_light_radius  = 400;
+
 user   float lith_player_damagebobmul  = 0.6;
 user   bool  lith_player_damagebob     = true;
 user   bool  lith_player_scoresound    = true;

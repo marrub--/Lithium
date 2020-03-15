@@ -45,14 +45,13 @@ struct dmon_stat {
 
 #include "w_moninfo.h"
 
-static str const dmgtype_names[dmgtype_max] = {
-   s"Bullets",
-   s"Energy",
-   s"Fire",
-   s"Magic",
-   s"Melee",
-   s"Shrapnel"
-};
+StrAry(dmgtype_names,
+       s"Bullets",
+       s"Energy",
+       s"Fire",
+       s"Magic",
+       s"Melee",
+       s"Shrapnel");
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -175,6 +174,8 @@ static void BaseMonsterLevel(dmon_t *m)
 script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
+   Str(solid_s, s"SOLID");
+
    i32 tid = ACS_UniqueTID();
    ACS_SpawnForced(so_MonsterSoul, m->ms->x, m->ms->y, m->ms->z + 16, tid);
    SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
@@ -182,7 +183,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
    PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
 
-   for(i32 i = 0; ACS_CheckFlag(0, s_SOLID) && i < 15; i++) ACS_Delay(1);
+   for(i32 i = 0; ACS_CheckFlag(0, solid_s) && i < 15; i++) ACS_Delay(1);
 
    SetPropS(tid, APROP_Species, so_Player);
 }
@@ -223,15 +224,18 @@ static void OnFinalize(dmon_t *m)
          }
 
          if(ACS_GetCVar(sc_sv_wepdrop)) {
+            Str(sgun, s"Shotgun");
+            Str(cgun, s"Chaingun");
             str sp = snil;
             switch(m->mi->type) {
-               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = so_Shotgun;  break;
-               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = so_Chaingun; break;
+               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = sgun; break;
+               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = cgun; break;
             }
             if(sp) {
+               Str(dropped_s, s"DROPPED");
                i32 tid = ACS_UniqueTID();
                ACS_SpawnForced(sp, m->ms->x, m->ms->y, m->ms->z, tid);
-               ACS_SetActorFlag(tid, s_DROPPED, false);
+               ACS_SetActorFlag(tid, dropped_s, false);
             }
          }
 
@@ -366,9 +370,11 @@ void Sc_ResurrectMonster(i32 amt)
 script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
+   Str(rladaptive, s"RLAdaptive");
+
    str cname = ACS_GetActorClass(0);
 
-   if(strstr_str(cname, so_RLAdaptive)) return;
+   if(strstr_str(cname, rladaptive)) return;
 
    for(i32 i = 0; i < countof(monsterinfo); i++) {
       struct monster_info const *mi = &monsterinfo[i];

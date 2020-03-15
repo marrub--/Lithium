@@ -1267,6 +1267,8 @@
 "LITH_ST_PFX_Minutes" = "min";
 "LITH_ST_PFX_Of255" = "/255";
 "LITH_ST_PFX_Pixels" = "px";
+"LITH_ST_PFX_Seconds" = "s";
+"LITH_ST_PFX_Units" = "mu";
 "LITH_ST_NAME_Unknown" = "Unknown";
 "LITH_ST_NAME_LvSys_0" = "Auto";
 "LITH_ST_NAME_LvSys_1" = "Hybrid";
@@ -1369,6 +1371,13 @@
 "LITH_stx_boss_1" = "If you are sensitive to suggestion or otherwise";
 "LITH_stx_boss_2" = "made uncomfortable by threats, please disable";
 "LITH_stx_boss_3" = "boss dialogues!";
+"LITH_stx_light" = "Flashlight";
+"LITH_light_battery" = "Battery";
+"LITH_light_regen" = "Battery regeneration";
+"LITH_light_r" = "Red intensity";
+"LITH_light_g" = "Green intensity";
+"LITH_light_b" = "Blue intensity";
+"LITH_light_radius" = "Radius";
 "LITH_stx_items" = "Items";
 "LITH_player_teleshop" = "Teleport in bought items and upgrades";
 "LITH_player_stupidpickups" = "Silly pickup messages";
@@ -1753,10 +1762,11 @@
 "TXT_YES" = "[Yes]";
 "TXT_NO" = "[No]";
 "LITH_CTRL_ACTIONS" = "Lithium Actions";
+"LITH_CTRL_GLARE" = "Glare";
+"LITH_CTRL_LIGHT" = "Toggle Flashlight";
 "LITH_CTRL_OPENCBI" = "Open CBI";
 "LITH_CTRL_ZOOMIN" = "Zoom In";
 "LITH_CTRL_ZOOMOUT" = "Zoom Out";
-"LITH_CTRL_GLARE" = "Glare";
 "LITH_CLASS_MARINE" = "Marine";
 "LITH_CLASS_MARINE_Nam" = "Stan Blazkowicz";
 "LITH_CLASS_MARINE_Col" = "\c[Lith_Green]";

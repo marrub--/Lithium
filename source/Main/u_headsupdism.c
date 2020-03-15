@@ -73,11 +73,12 @@ static void HUD_Ammo(struct player *p)
 
 static void HUD_Health(struct player *p, struct upgrade *upgr)
 {
-   static str ws[SLOT_MAX] = {s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24",
-                              s":HUD:H_D23", s":HUD:H_D22", s":HUD:H_D21",
-                              s":HUD:H_D25", s":HUD:H_D26"};
+   Str(power_strength, s"PowerStrength");
 
-   PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
+   StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
+              s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
+
+   PrintSprite(InvNum(power_strength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 239,2);
 
    PrintSprite(sp_HUD_VIT, 2,1, 237,2);
 

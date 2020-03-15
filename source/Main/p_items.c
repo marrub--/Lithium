@@ -394,13 +394,14 @@ struct item *Sc_ItemCreate(i32 w, i32 h)
    Dbg_Log(log_dev, "%s: creating %S (%S) %S", __func__, type, tag, spr);
 
    #define Type(t, ...) \
-      if(type == t) { \
+      Str(t##s, s"" #t); \
+      if(type == t##s) { \
          struct itemdata const data = \
             {name, spr, tag, w, h, scr, __VA_ARGS__}; \
          return P_Item_New(&data); \
       }
 
-   Type(si_Armor);
+   Type(Armor);
 
    return nil;
 }

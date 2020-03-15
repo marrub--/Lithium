@@ -20,7 +20,7 @@
    Language("%S_%.3i", pickupnames[w], \
       ACS_Random(0, strtoi_str(Language(c"%S_NUM", pickupnames[w]), nil, 10)))
 
-static str const pickupnames[weapon_max] = {
+StrAry(pickupnames,
    [weapon_unknown]    = name(weapon_unknown),
 
    [weapon_fist]       = name(weapon_unknown),
@@ -42,7 +42,7 @@ static str const pickupnames[weapon_max] = {
    [weapon_c_sniper]   = name(weapon_c_sniper),
    [weapon_c_plasma]   = name(weapon_plasma),
    [weapon_c_shipgun]  = name(weapon_c_shipgun),
-};
+);
 
 static void StupidPickup(struct player *p, i32 weapon)
 {

@@ -1,0 +1,102 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson & InsanityBringer. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_Player;
+
+void Lith_BobWeapon() {
+   m_LastIPitch = m_IPitch;
+   m_LastVPitch = m_VPitch;
+   m_IPitch = Lith_UTIL.Lerp(m_IPitch, Pitch, 0.377);
+   m_VPitch = Min(m_IPitch - m_LastIPitch, 0.4);
+
+   m_LastIYaw = m_IYaw;
+   m_LastVYaw = m_VYaw;
+   m_IYaw = Lith_UTIL.AngleLerp(m_IYaw, Angle, 0.377);
+   if(m_IYaw - m_LastIYaw ~== 0) {m_VYaw = 0;}
+   else                          {m_VYaw = m_IYaw - m_LastIYaw;}
+
+   if(Vel.Z - m_LastZVel > double.Epsilon) {
+      if(m_LastZVel >= 0) {m_ZVel += Vel.Z;}
+      else                {m_ZVel += 5 - m_LastZVel * 2;}
+   }
+
+   m_ZVel = Lith_UTIL.Lerp(m_ZVel, 0, 0.277);
+   m_LastZVel = Vel.Z;
+
+   m_LastVZVel = m_VZVel;
+   m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
+}
+
+override vector2 BobWeapon(double ticfrac) {
+   if(!Player) return (0, 0);
+
+   let wep = Player.ReadyWeapon;
+   if(!wep) return (0, 0);
+
+   vector2 p[2];
+   p[0] = (0, 0);
+   p[1] = (0, 0);
+
+   if(!wep.bDONTBOB) for(int i = 0; i < 2; i++) {
+      double ang = wep.BobSpeed * 128 * Player.GetWBobSpeed() * (Level.Time - 1 + i) * 0.044;
+      double bobtarget = Player.Bob;
+
+      if(CVar.GetCVar('lith_weapons_nofirebob', Player).GetBool() && !(Player.WeaponState & WF_WEAPONBOBBING)) {
+         bobtarget = 0;
+      }
+
+      if(Abs(bobtarget - CurBob) <= 1) {
+         CurBob = bobtarget;
+      } else {
+         double zoom = Max(1.0, Abs(CurBob - bobtarget) / 40);
+         if(CurBob > bobtarget) CurBob -= zoom;
+         else                   CurBob += zoom;
+      }
+
+      double bobx = 0, boby = 0;
+
+      if(CurBob != 0) {
+         bobx = Player.Bob * wep.BobRangeX * ViewBob;
+         boby = Player.Bob * wep.BobRangeY * ViewBob;
+
+         switch(wep.BobStyle) {
+            case Bob_Smooth:
+            case Bob_Normal:
+               bobx *= Cos(ang) + Sin(ang / 5) / 7;
+               boby *= 0.5 * (1 + Sin(ang * 2));
+               break;
+            case Bob_InverseSmooth:
+            case Bob_Inverse:
+               bobx *= Cos(ang) + Sin(ang / 5) / 7;
+               boby *= 0.5 * (1 - Sin(ang * 2));
+               break;
+            case Bob_Alpha:
+               bobx *= Sin(ang);
+               boby *= Abs(Sin(ang));
+               break;
+            case Bob_InverseAlpha:
+               bobx *= Sin(ang);
+               boby *= 1 - Abs(Sin(ang));
+               break;
+         }
+      }
+
+      p[i] = (bobx, boby);
+   }
+
+   vector2 interp = p[0] * (1 - ticfrac) + p[1] * ticfrac;
+
+   interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
+   interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
+   interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);
+
+   return interp;
+}
+
+/* EOF */

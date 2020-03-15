@@ -31,16 +31,16 @@ void W_DoRain(void)
    p->setActivator();
 
    k32 skydist, curskydist = 1;
-   for(;;)
-   {
-      if((rain_chk = !ACS_CheckActorCeilingTexture(0, s_F_SKY1)))
-      {
+   for(;;) {
+      Str(f_sky1, s"F_SKY1");
+
+      if((rain_chk = !ACS_CheckActorCeilingTexture(0, f_sky1))) {
          rain_dist = 1024;
          rain_px = p->x;
          rain_py = p->y;
-      }
-      else
+      } else {
          InvTake(so_SMGHeat, 1);
+      }
 
       if((InHell || InSecret) && !islithmap)
          ServCallI(sm_SpawnRain, so_BloodRainDrop);

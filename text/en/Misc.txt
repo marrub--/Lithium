@@ -206,10 +206,11 @@ This one isn't even remotely fair.
 == TXT_NO  | [No]
 
 == \#CTRL_ACTIONS | Lithium Actions
+== \#CTRL_GLARE   | Glare
+== \#CTRL_LIGHT   | Toggle Flashlight
 == \#CTRL_OPENCBI | Open CBI
 == \#CTRL_ZOOMIN  | Zoom In
 == \#CTRL_ZOOMOUT | Zoom Out
-== \#CTRL_GLARE   | Glare
 
 ## Description characters:
 ## 01234567890123456789012345

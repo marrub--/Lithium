@@ -24,7 +24,8 @@ void Upgr_UNCEUNCE_Activate(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_UNCEUNCE_Deactivate(struct player *p, struct upgrade *upgr)
 {
-   ACS_SetMusic(sp_Any);
+   Str(original, s"*");
+   ACS_SetMusic(original);
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 

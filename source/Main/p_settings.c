@@ -13,7 +13,7 @@
 
 #ifdef FromUI
 Category(stx_gameplay);
-Enum(player_lvsys, atsys_auto, atsys_manual, "%S", LvSysName(set));
+Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {
    ServerInt(Percent, sv_difficulty, 1, 100);
    ServerFloat(Times, sv_scoremul, 0, 10);
@@ -30,9 +30,9 @@ if(p->num == 0) {
 Category(stx_gui);
 Float(Times, gui_xmul, 0.1, 2.0);
 Float(Times, gui_ymul, 0.1, 2.0);
-Enum(gui_theme,  0, cbi_theme_max-1, "%S", ThemeName(set));
-Enum(gui_cursor, 0, gui_curs_max-1, "%S", CursName(set));
-Enum(gui_jpfont, 0, font_num-1, "%S", JpFontName(set));
+Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
+Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
+Enum(gui_jpfont, 0, font_num-1, "%s", JpFontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
 Text(stx_jp_2);
@@ -54,6 +54,14 @@ Text(stx_boss_0);
 Text(stx_boss_1);
 Text(stx_boss_2);
 Text(stx_boss_3);
+
+Category(stx_light);
+Int(Seconds, light_battery, 0, 60);
+Int(Times, light_regen, 1, 10);
+Int(Of255, light_r, 0, 255);
+Int(Of255, light_g, 0, 255);
+Int(Of255, light_b, 0, 255);
+Int(Units, light_radius, 100, 1000);
 
 Category(stx_items);
 Bool(player_teleshop);
@@ -104,14 +112,14 @@ Int(Of255, xhair_r, 0, 255);
 Int(Of255, xhair_g, 0, 255);
 Int(Of255, xhair_b, 0, 255);
 Int(Of255, xhair_a, 0, 255);
-Enum(xhair_style, 0, lxh_max-1, "%S", XHairName(set));
+Enum(xhair_style, 0, lxh_max-1, "%s", XHairName(set));
 Bool(xhair_enable);
 Bool(xhair_enablejuicer);
 
 Category(stx_vscan);
 Int(Pixels, scanner_xoffs, -160, 160);
 Int(Pixels, scanner_yoffs, -180,  20);
-Enum(scanner_color, 'a', 'z', "\C%c%S", set, ColorName(set));
+Enum(scanner_color, 'a', 'z', "\C%c%s", set, ColorName(set));
 Bool(scanner_slide);
 Bool(scanner_bar);
 Bool(scanner_altfont);
@@ -141,58 +149,22 @@ if(p->num == 0) {
 
 /* Static Functions -------------------------------------------------------- */
 
-static str LvSysName(i32 num)
-{
-   if(num < 0 || num >= atsys_max)
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_LvSys_%i", num);
-}
+#define NameFunc(name, arg, min, max, fmt, ...)  \
+   static cstr name(arg n) { \
+      if(n < min || n >= max) return LC(LANG "ST_NAME_Unknown"); \
+      else                    return LanguageC(fmt, __VA_ARGS__); \
+   }
 
-static str ColorName(char ch)
-{
-   if(ch < 'a' || ch > 'z')
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_Color_%c", ch);
-}
-
-static str CursName(i32 num)
-{
-   if(num < 0 || num >= gui_curs_max)
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_Cursor_%i", num);
-}
-
-static str XHairName(i32 num)
-{
-   if(num < 0 || num >= lxh_max)
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_XHair_%i", num);
-}
-
-static str JpFontName(i32 num)
-{
-   if(num < 0 || num >= font_num)
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_JpFont_%i", num);
-}
-
-static str ThemeName(u32 num)
-{
-   if(num < 0 || num >= cbi_theme_max)
-      return L(st_st_name_unknown);
-   else
-      return Language(LANG "ST_NAME_Theme_%i", num);
-}
+NameFunc(LvSysName,  i32,  0,   atsys_max,     LANG "ST_NAME_LvSys_%i",  n)
+NameFunc(ColorName,  char, 'a', 'z' + 1,       LANG "ST_NAME_Color_%c",  n)
+NameFunc(CursName,   i32,  0,   gui_curs_max,  LANG "ST_NAME_Cursor_%i", n)
+NameFunc(XHairName,  i32,  0,   lxh_max,       LANG "ST_NAME_XHair_%i",  n)
+NameFunc(JpFontName, i32,  0,   font_num,      LANG "ST_NAME_JpFont_%i", n)
+NameFunc(ThemeName,  i32,  0,   cbi_theme_max, LANG "ST_NAME_Theme_%i",  n)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_CBI_TabSettings(struct gui_state *g, struct player *p)
-{
+void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
    i32 y = 0;
 
 #define Category(...)    y += 20
@@ -211,22 +183,24 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
    y = 0;
 
-#define Label(label) \
-   PrintText_str(L(st_##label), s_smallfnt, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1);
+#define Label(label) { \
+      Str(st, sLANG #label); \
+      PrintText_str(L(st), s_smallfnt, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
+   }
 
 #define Category(name) \
-   if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) \
-   { \
-      PrintText_str(L(st_##name), s_lmidfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
+   if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 20)) { \
+      Str(st, sLANG #name); \
+      PrintText_str(L(st), s_lmidfont, CR_LIGHTBLUE, g->ox + 140,0, g->oy + y + 5,1); \
    } \
    y += 20;
 
 #define Bool(cvar) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(bool on = p->getCVarI(sc_##cvar);) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         bool on = p->getCVarI(sc_##cvar); \
          Label(cvar); \
+         /* TODO */ \
          if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(sc_##cvar, !on); \
       } \
@@ -235,9 +209,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define Float(s, cvar, minima, maxima) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(k64 set = p->getCVarK(sc_##cvar), diff;) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         k64 set = p->getCVarK(sc_##cvar), diff; \
          Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) \
             p->setCVarK(sc_##cvar, set + diff); \
@@ -247,9 +220,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define Int(s, cvar, minima, maxima) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = p->getCVarI(sc_##cvar), diff;) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         i32 set = p->getCVarI(sc_##cvar), diff; \
          Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = LC(LANG "ST_PFX_" #s)))) \
             p->setCVarI(sc_##cvar, set + diff); \
@@ -259,10 +231,10 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define ServerBool(cvar) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(bool on = ACS_GetCVar(sc_##cvar);) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         bool on = ACS_GetCVar(sc_##cvar); \
          Label(cvar); \
+         /* TODO */ \
          if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             ACS_SetCVar(sc_##cvar, !on); \
       } \
@@ -271,9 +243,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define ServerFloat(s, cvar, minima, maxima) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(k64 set = ACS_GetCVarFixed(sc_##cvar), diff;) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         k64 set = ACS_GetCVarFixed(sc_##cvar), diff; \
          Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) \
             ACS_SetCVarFixed(sc_##cvar, set + diff); \
@@ -283,9 +254,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define ServerInt(s, cvar, minima, maxima) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = ACS_GetCVar(sc_##cvar), diff;) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         i32 set = ACS_GetCVar(sc_##cvar), diff; \
          Label(cvar); \
          if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, true, .suf = LC(LANG "ST_PFX_" #s)))) \
             ACS_SetCVar(sc_##cvar, set + diff); \
@@ -295,9 +265,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p)
 
 #define Enum(cvar, minima, maxima, fmt, ...) \
    do { \
-      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) \
-         __with(i32 set = p->getCVarI(sc_##cvar);) \
-      { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         i32 set = p->getCVarI(sc_##cvar); \
          Label(cvar); \
          if(G_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == minima, Pre(btnprevs))) \
             p->setCVarI(sc_##cvar, set - 1); \

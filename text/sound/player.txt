@@ -30,6 +30,8 @@ player {
    infraredoff  InfraredOff         # Counter-Strike: Source
    levelup      LevelUp             # Phantasy Star Online
    glare        Glare               # Monster Girl Quest
+   lighton      LightOn             # Phantasy Star Online
+   lightoff     LightOff            # //
 
    $volume death2 0.7
    $volume nuke 0.7

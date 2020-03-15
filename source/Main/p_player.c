@@ -22,7 +22,7 @@
 
 /* Extern Objects ---------------------------------------------------------- */
 
-noinit struct player players[MAX_PLAYERS];
+noinit struct player players[_max_players];
 
 /* Static Objects ---------------------------------------------------------- */
 
@@ -93,14 +93,13 @@ reinit:
       i32 oldhealth = p->health;
       i32 oldmana   = p->mana;
 
-      /* Pre-tick */
+      /* Tick all systems. */
       P_Wep_PTickPre(p); /* Update weapon info */
       P_Scr_PTickPre(p); /* Update score */
 
       if(!p->dead) P_Upg_PTick(p);
       P_Upg_PTickPst(p);
 
-      /* Tick */
       if(!p->dead)
       {
          P_Inv_PTick(p);
@@ -117,7 +116,6 @@ reinit:
          if(pauseinmenus) ServCallI(sm_PauseTick, p->num);
       }
 
-      /* Post-tick */
       P_Ren_PTickPst(p);
 
       /* Update view (extra precision is required here to ensure accuracy) */
@@ -162,7 +160,8 @@ static void Sc_PlayerDeath(void)
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit(p);
 
-   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory)) {
+   Str(sv_cooploseinventory, s"sv_cooploseinventory");
+   if(singleplayer || ACS_GetCVar(sv_cooploseinventory)) {
       P_Upg_PQuit(p);
       P_BIP_PQuit(p);
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
@@ -514,6 +513,12 @@ static void P_Scr_PTickPre(struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
+script_str ext("ACS") addr("Lith_GetFlashlightIntensity")
+k32 Sc_GetFlashlightIntensity(void) {
+   with_player(LocalPlayer) {return p->lt_intensity;}
+   return 0.0;
+}
+
 script_str ext("ACS") addr("Lith_Markiplier")
 void Sc_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
@@ -585,12 +590,17 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
    }
 }
 
-script_str type("net") ext("ACS") addr("Lith_Glare")
-void Sc_Glare(void) {
+script_str type("net") ext("ACS") addr("Lith_KeyLight")
+void Sc_KeyLight(void) {with_player(LocalPlayer) {p->lt_on = !p->lt_on;}}
+
+script_str type("net") ext("ACS") addr("Lith_KeyGlare")
+void Sc_KeyGlare(void) {
    with_player(LocalPlayer) {
+      Str(snd, s"player/glare");
+
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      ACS_LocalAmbientSound(ss_player_glare, 127);
+      ACS_LocalAmbientSound(snd, 127);
       ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 

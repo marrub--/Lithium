@@ -17,8 +17,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-cstr CanonTime(i32 type)
-{
+cstr CanonTime(i32 type) {
    noinit static char ft[64], st[64], dt[64], lf[256];
 
    i32 t = ticks;
@@ -38,47 +37,39 @@ cstr CanonTime(i32 type)
    Y = Y      + 1;
 
    switch(type) {
-   case ct_full:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
-   case ct_short: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
-   case ct_date:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
+      case ct_full:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
+      case ct_short: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
+      case ct_date:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
    }
 
    return nil;
 }
 
-stkcall
-void FreezeTime(bool on)
-{
+stkcall void FreezeTime(bool on) {
    StrEntON
    static i32 lmvar frozen;
 
-   if(on)
-   {
-      if(!frozen++)
-      {
-         for_player()
-         {
+   if(on) {
+      if(!frozen++) {
+         for_player() {
             p->frozen++;
             P_SetVel(p, 0, 0, 0);
          }
 
-         for_player()
-         {
+         for_player() {
             PtrInvGive(p->tid, so_TimeHax, 1);
             PtrInvGive(p->tid, so_TimeHax2, 1);
             break;
          }
       }
-   }
-   else
-   {
-      if(!--frozen)
-      {
+   } else {
+      if(!--frozen) {
+         Str(power_time_freezer, s"PowerTimeFreezer");
+
          for_player() p->frozen--;
 
-         for_player()
-         {
-            PtrInvTake(p->tid, so_PowerTimeFreezer, 1);
+         for_player() {
+            PtrInvTake(p->tid, power_time_freezer, 1);
             PtrInvTake(p->tid, so_TimeHax2, 1);
             break;
          }
@@ -89,8 +80,7 @@ void FreezeTime(bool on)
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_Timer")
-i32 Sc_Timer(void)
-{
+i32 Sc_Timer(void) {
    return ACS_Timer();
 }
 

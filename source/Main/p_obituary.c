@@ -19,6 +19,15 @@
 script_str ext("ACS") addr("Lith_Obituary")
 void Sc_Obituary(void)
 {
+   Str(ob_crush,      s"(crush)");
+   Str(ob_default,    s"(default)");
+   Str(ob_drowning,   s"(drowning)");
+   Str(ob_exit,       s"(exit)");
+   Str(ob_falling,    s"(falling)");
+   Str(ob_fire,       s"(fire)");
+   Str(ob_slime,      s"(slime)");
+   Str(ob_suicide,    s"(suicide)");
+
    static cstr pronoun[pro_max][5] = {
       {"they", "them", "their", "theirs", "they're"},
       {"she",  "her",  "her",   "hers",   "she's"  },
@@ -33,14 +42,14 @@ void Sc_Obituary(void)
 
    i32 rn = ACS_Random(1, 5);
 
-        if(obit == s_ob_crush)    obit = Language(LANG "OB_Crush_%i",    rn);
-   else if(obit == s_ob_default)  obit = Language(LANG "OB_Default_%i",  rn);
-   else if(obit == s_ob_drowning) obit = Language(LANG "OB_Drowning_%i", rn);
-   else if(obit == s_ob_exit)     obit = Language(LANG "OB_Exit_%i",     rn);
-   else if(obit == s_ob_falling)  obit = Language(LANG "OB_Falling_%i",  rn);
-   else if(obit == s_ob_fire)     obit = Language(LANG "OB_Fire_%i",     rn);
-   else if(obit == s_ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
-   else if(obit == s_ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
+   /**/ if(obit == ob_crush)    obit = Language(LANG "OB_Crush_%i",    rn);
+   else if(obit == ob_default)  obit = Language(LANG "OB_Default_%i",  rn);
+   else if(obit == ob_drowning) obit = Language(LANG "OB_Drowning_%i", rn);
+   else if(obit == ob_exit)     obit = Language(LANG "OB_Exit_%i",     rn);
+   else if(obit == ob_falling)  obit = Language(LANG "OB_Falling_%i",  rn);
+   else if(obit == ob_fire)     obit = Language(LANG "OB_Fire_%i",     rn);
+   else if(obit == ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
+   else if(obit == ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
 
    noinit static char out[1024];
    char *pt = out;

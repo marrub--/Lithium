@@ -20,6 +20,8 @@ identifier,default
 :HUD:ARM,lgfx/HUD/ARM.png
 :HUD:Bar,lgfx/HUD/Bar.png
 :HUD:BarBig,lgfx/HUD/BarBig.png
+:HUD:Battery,lgfx/HUD/Battery.png
+:HUD:BatteryOutline,lgfx/HUD/BatteryOutline.png
 :HUD:H_A1,lgfx/HUD/H_A1.png
 :HUD:H_A2,lgfx/HUD/H_A2.png
 :HUD:H_B1,lgfx/HUD/H_B1.png

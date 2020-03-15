@@ -117,7 +117,7 @@ void P_CBI_PTick(struct player *p)
 
    ACS_BeginPrint();
    PrintChrSt(g->gfxprefix);
-   ACS_PrintString(sp_Background);
+   PrintChrSt("Background");
    PrintSpriteA(ACS_EndStrParam(), 0,1, 0,1, 0.7);
 
    if(G_Button(g, .x = 296, 13, Pre(btnexit))) P_GUI_Use(p, gui_cbi);
