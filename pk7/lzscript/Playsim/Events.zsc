@@ -9,13 +9,13 @@
 
 extend class Lith_HERMES;
 
-private array<Actor> m_BossBabies;
+private array<Actor> m_bossBabies;
 private int m_BossDeathInit;
 
 static void SetEnding(string ending)
    {if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);}
 
-static int GetBossLevel() {return Instance().m_BossLevel;}
+static int GetBossLevel() {return Instance().m_bossLevel;}
 
 override void WorldLoaded(WorldEvent ev)
 {
@@ -45,21 +45,21 @@ override void WorldLoaded(WorldEvent ev)
    if(ev.IsSaveGame)
       return;
 
-   m_BossLevel = boss_none;
+   m_bossLevel = boss_none;
 
-   m_BossBabies.clear();
+   m_bossBabies.clear();
 
    let sum = Level.GetChecksum();
    for(int i = 0; i < BOSS_E1.Size(); i++)
-      if(sum == BOSS_E1[i]) {m_BossLevel = boss_barons;      break;}
+      if(sum == BOSS_E1[i]) {m_bossLevel = boss_barons;      break;}
    for(int i = 0; i < BOSS_E2.Size(); i++)
-      if(sum == BOSS_E2[i]) {m_BossLevel = boss_cyberdemon;  break;}
+      if(sum == BOSS_E2[i]) {m_bossLevel = boss_cyberdemon;  break;}
    for(int i = 0; i < BOSS_E3.Size(); i++)
-      if(sum == BOSS_E3[i]) {m_BossLevel = boss_spiderdemon; break;}
+      if(sum == BOSS_E3[i]) {m_bossLevel = boss_spiderdemon; break;}
    for(int i = 0; i < BOSS_E4.Size(); i++)
-      if(sum == BOSS_E4[i]) {m_BossLevel = boss_other;       break;}
+      if(sum == BOSS_E4[i]) {m_bossLevel = boss_other;       break;}
    for(int i = 0; i < BOSS_D2.Size(); i++)
-      if(sum == BOSS_D2[i]) {m_BossLevel = boss_iconofsin;   break;}
+      if(sum == BOSS_D2[i]) {m_bossLevel = boss_iconofsin;   break;}
 
    if(ev.IsReopen) {
       CallACS("Lith_WorldReopen");
@@ -111,8 +111,8 @@ override void WorldThingSpawned(WorldEvent ev)
       return;
    }
 
-   if(m_BossLevel == boss_iconofsin && th is "BossBrain")
-      m_BossBabies.push(th);
+   if(m_bossLevel == boss_iconofsin && th is "BossBrain")
+      m_bossBabies.push(th);
 
    if(th.bISMONSTER && !(th is "RandomSpawner")) {
       Lith_UTIL.Exec(th, lsc_monsterinfo);
@@ -120,23 +120,29 @@ override void WorldThingSpawned(WorldEvent ev)
       if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
-      if(m_BossLevel == boss_barons && th.bBOSSDEATH && th.pos.x == 528)
-         th.A_SetTranslation('Lith_BlueBaron');
+      switch(m_bossLevel) {
+         case boss_barons:
+            if(th.bBOSSDEATH && th.pos.x == 528)
+               th.A_SetTranslation('Lith_BlueBaron');
+            break;
 
-      if(m_BossLevel != boss_iconofsin && m_BossLevel != boss_none) {
-         int typ = mtype_unknown;
+         case boss_cyberdemon:
+         case boss_spiderdemon:
+            int typ = mtype_unknown;
 
-         switch(m_BossLevel) {
-            case boss_barons:      typ = mtype_baron;      break;
-            case boss_cyberdemon:  typ = mtype_cyberdemon; break;
-            case boss_spiderdemon: typ = mtype_mastermind; break;
-         }
+            switch(m_bossLevel) {
+               case boss_barons:      typ = mtype_baron;      break;
+               case boss_cyberdemon:  typ = mtype_cyberdemon; break;
+               case boss_spiderdemon: typ = mtype_mastermind; break;
+            }
 
-         if(typ == mtype_unknown || Lith_UTIL.Exec(th, lsc_monstertype) == typ)
-            m_BossBabies.push(th);
+            if(typ == mtype_unknown ||
+               Lith_UTIL.Exec(th, lsc_monstertype) == typ)
+               m_bossBabies.push(th);
+            break;
       }
 
-      if(m_BossLevel != boss_none && th.bBOSSDEATH) {
+      if(m_bossLevel != boss_none && th.bBOSSDEATH) {
          th.Health = int(th.Health * 2.7);
          th.ReactionTime = 0;
          th.DamageMultiply *= 1.6;
@@ -146,7 +152,7 @@ override void WorldThingSpawned(WorldEvent ev)
 
 override void WorldTick()
 {
-   if(m_BossLevel != boss_none) {
+   if(m_bossLevel != boss_none) {
       for(int i = 0, m = Level.Lines.Size(); i < m; i++)
          for(int j = 0; j < 3; j++)
             Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);
@@ -154,13 +160,13 @@ override void WorldTick()
       if(m_BossDeathInit == 0) {
          bool boss_baby_is_dead;
 
-         if(m_BossBabies.size() == 0) {
+         if(m_bossBabies.size() == 0) {
             boss_baby_is_dead = false;
             CallACS("Lith_NoBossWarn");
          } else {
             boss_baby_is_dead = true;
-            for(int i = 0; i < m_BossBabies.size(); i++) {
-               if(m_BossLevel == boss_barons) {
+            for(int i = 0; i < m_bossBabies.size(); i++) {
+               if(m_bossLevel == boss_barons) {
                   for(int i = 0; i < MAXPLAYERS; i++) {
                      PlayerInfo player = players[i];
                      if(playeringame[i] && player.mo) {
@@ -170,7 +176,7 @@ override void WorldTick()
                            boss_baby_is_dead = false;
                      }
                   }
-               } else if(m_BossBabies[i] && m_BossBabies[i].health > 0) {
+               } else if(m_bossBabies[i] && m_bossBabies[i].health > 0) {
                   boss_baby_is_dead = false;
                }
             }
