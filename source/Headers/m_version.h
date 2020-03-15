@@ -11,8 +11,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-#define Version "Lithium 1.6.2 (Trilithionite)"
-#define APIVersion Lith_v1_6_2
+#define Version "Lithium 1.6.3 (Trilithionite Red)"
+#define APIVersion Lith_v1_6_3
 #define CheckAPIVersion() \
    if(apiversion != APIVersion) { \
       ACS_BeginLog(); \
@@ -22,6 +22,7 @@
       abort(); \
    } else (void)0
 #include <stdio.h>
+#define Lith_v1_6_3   16.3  /* 1.6.3 (Trilithionite Red) */
 #define Lith_v1_6_2   16.2  /* 1.6.2 (Trilithionite) */
 #define Lith_v1_6_1   16.1  /* 1.6.1 (Hyper-Trilithium) */
 #define Lith_v1_6_0   16.0  /* 1.6 (Hyper-Dilithium) */

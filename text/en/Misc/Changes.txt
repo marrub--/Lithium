@@ -9,6 +9,69 @@
 ## Removed  = \cg-
 ## Subspace = \cb]
 
+%% \#UPDATE_1_6_3
+\cf(\ciMar. 15, 2020\cf) \cjFrom \cn1.6.2\cj to \cf1.6.3\cj:
+\cd+ Added Latin-1 Supplement characters to all of the fonts.
+\cd+ Added a blurring effect when final bosses die.
+\cd+ Added a customizable flashlight with battery.
+\cd+ Added a setting to decrease particle effects.
+\cd+ Added an indicator for over-health.
+\cd+ Added an option for increasing performance of the Laser Shotgun.
+\cd+ Added boss dialogues.
+\cd+ Added jiskan as a Japanese font option.
+\cd+ Added lith_k_qact back in.
+\cd+ Added lowercase characters to the big font.
+\cd+ Added new ending texts.
+\cd+ Added new mechanics for the Icon of Sin.
+\cd+ Added new translations.
+\cd+ Added place and advice marker systems.
+\cd+ Added smoother barrel explosion sprites.
+\cd+ Added support for FreeDoom.
+\cd+ Added support for Rampancy.
+\cj| Changed 7777777 Mode to properly emulate Marathon's air velocity.
+\cj| Changed boss cubes to spawn less Pain Elementals.
+\cj| Changed fonts to be used more consistently.
+\cj| Destroyed the last remnants of HudMessage use.
+
+%% \#UPDATE_1_6_3_Page2
+\cj| Fixed DRLA Monsters Adaptive difficulty giving extra score.
+\cj| Fixed I, 2 and 7 in the small font.
+\cj| Fixed a lot of drawing issues.
+\cj| Fixed attributions of fonts.
+\cj| Fixed endings not showing the right images.
+\cj| Fixed laser rifle puffs not being destroyed.
+\cj| Fixed lith_sv_wepdrop not giving the right items.
+\cj| Fixed mana not always being picked up.
+\cj| Fixed mana not working right.
+\cj| Fixed menu jankiness.
+\cj| Fixed minor visual errors.
+\cj| Fixed oddities with font heights.
+\cj| Fixed offsets of the bullet chip decals.
+\cj| Fixed secrets crashing the game.
+\cj| Fixed some bosses being really strong.
+\cj| Fixed some dialogue actions not working properly.
+\cj| Fixed some dialogues not being compiled right.
+\cj| Fixed some info pages being incorrectly labeled.
+\cj| Fixed some odd bugs relating to monster mods.
+\cj| Fixed some sound channel issues.
+\cj| Fixed some text errors.
+\cj| Fixed sprite conflicts.
+
+%% \#UPDATE_1_6_3_Page3
+\cj| Fixed the TITLEMAP being incomplete.
+\cj| Fixed the spell selection graphics being incorrect when hovered.
+\cj| Fixed tick info debugging level.
+\cj| Fixed truncation warnings.
+\cj| Fixed weapon pickups sometimes appearing when they shouldn't.
+\cj| Fixed weapons staying zoomed when exiting a level.
+\cj| Improved font handling drastically.
+\cj| Improved performance of box drawing.
+\cj| Improved the class selection menu.
+\cj| Improved the terminal/character font.
+\cj| Overhauled the inventory system.
+\cj| Ported old dialogues to the new syntax.
+\cj| Potentially fixed Phantoms sometimes having too much health.
+
 %% \#UPDATE_1_6_2
 \cf(\ciFeb. 29, 2020\cf) \cjFrom \cn1.6.1\cj to \cf1.6.2\cj:
 \cd+ Added Dark Lord, incomplete.
