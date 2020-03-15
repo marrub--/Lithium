@@ -11,7 +11,16 @@
 ++ \#ENDING_TimeOut_1 | End/TimeOut1.txt
 ++ \#ENDING_TimeOut_2 | End/TimeOut2.txt
 
-++ \#ENDING_IconOfSin_Stan | End/Stan/IconOfSin.txt
-++ \#ENDING_IconOfSin_Jem  | End/Jem/IconOfSin.txt
+++ \#ENDING_Barons_Stan      | End/Stan/Barons.txt
+++ \#ENDING_CyberDemon_Stan  | End/Stan/CyberDemon.txt
+++ \#ENDING_SpiderDemon_Stan | End/Stan/SpiderDemon.txt
+++ \#ENDING_IconOfSin_Stan   | End/Stan/IconOfSin.txt
+++ \#ENDING_Normal_Stan      | End/Stan/Normal.txt
+
+++ \#ENDING_Barons_Jem      | End/Jem/Barons.txt
+++ \#ENDING_CyberDemon_Jem  | End/Jem/CyberDemon.txt
+++ \#ENDING_SpiderDemon_Jem | End/Jem/SpiderDemon.txt
+++ \#ENDING_IconOfSin_Jem   | End/Jem/IconOfSin.txt
+++ \#ENDING_Normal_Jem      | End/Jem/Normal.txt
 
 ## EOF
