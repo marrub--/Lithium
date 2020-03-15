@@ -193,7 +193,8 @@
 
 == \#stx_world | World
 
-== \#sv_rain | Rain in outside areas
-== \#sv_sky  | Replace skies
+== \#sv_rain          | Rain in outside areas
+== \#sv_sky           | Replace skies
+== \#sv_lessparticles | Less particles
 
 ## EOF

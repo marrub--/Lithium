@@ -1436,6 +1436,7 @@
 "LITH_stx_world" = "World";
 "LITH_sv_rain" = "Rain in outside areas";
 "LITH_sv_sky" = "Replace skies";
+"LITH_sv_lessparticles" = "Less particles";
 "LITH_COST" = "Cost:";
 "LITH_EFFECT" = "Effect:";
 "LITH_FREE" = "Free";

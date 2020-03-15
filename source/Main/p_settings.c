@@ -128,6 +128,7 @@ if(p->num == 0) {
    Category(stx_world);
    ServerBool(sv_rain);
    ServerBool(sv_sky);
+   ServerBool(sv_lessparticles);
 }
 
 #undef Category
