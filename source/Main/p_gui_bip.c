@@ -40,22 +40,20 @@ static void MainUI(struct gui_state *g, struct player *p, struct bip *bip)
 
    bip->lastcategory = BIPC_MAIN;
 
-   cstr lines[] = {
-      LC(LANG "BIP_HELP_Search"),
-      #define LITH_X(name, capt) LC(LANG "BIP_HELP_" #name),
-      #include "p_bip.h"
-   };
-
-   for(i32 i = 0; i < countof(lines); i++) {
-      PrintTextChS(lines[i]);
-      PrintTextA(s_smallfnt, CR_WHITE, 105,1, 85+n + i*10,1, 0.7);
+   #define LITH_X(name, capt) { \
+      Str(st, sLANG "BIP_HELP_" capt); \
+      PrintTextA_str(L(st), s_smallfnt, CR_WHITE, 105,1, 85+n,1, 0.7); \
+      n += 10; \
    }
+   LITH_X(SEARCH, "Search")
+   #include "p_bip.h"
+   n = 0;
 
    if(G_Button(g, LC(LANG "BIP_NAME_Search"), 45, 85 + n, Pre(btnbipmain)))
       bip->curcategory = BIPC_SEARCH;
    n += 10;
    #define LITH_X(name, capt) \
-      if(G_Button_Id(g, BIPC_##name, LC(cLANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
+      if(G_Button_Id(g, BIPC_##name, LC(LANG "BIP_NAME_" capt), 45, 85 + n, Pre(btnbipmain))) \
       { \
          bip->curcategory = BIPC_##name; \
          bip->curpage     = nil; \

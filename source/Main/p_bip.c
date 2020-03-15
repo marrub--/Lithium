@@ -195,14 +195,17 @@ void P_BIP_PInit(struct player *p)
 script
 void P_BIP_GiveMail(struct player *p, str title, i32 flags)
 {
-   /* Note: Due to the way this code works, if you switch languages at runtime, */
-   /* mail won't be updated. I provide a lore answer (excuse) for this: When */
-   /* you switch languages, it switches the preferred translation service for */
-   /* delivered mail, but it's done when the mail is delivered due to a bug in */
-   /* the BIP software. All of the mail in the game is delivered to the player */
-   /* in Sce, a south-eastern sector language, but the player themself can't */
-   /* read this language and so it is translated for them into the actual */
-   /* language that the person behind the screen reads. */
+   /* Note: Due to the way this code works, if you switch languages at runtime,
+    * mail won't be updated. I provide a lore answer (excuse) for this: When
+    * you switch languages, it switches the preferred translation service for
+    * delivered mail, but it's done when the mail is delivered due to a bug in
+    * the BIP software. All of the mail in the game is delivered to the player
+    * in Sce, a south-eastern sector language, but the player themself can't
+    * read this language and so it is translated for them into the actual
+    * language that the person behind the screen reads.
+    *
+    * If you can actually read Sce this answer falls apart but *shhhhh*.
+    */
 
    p->setActivator();
 
@@ -236,19 +239,17 @@ void P_BIP_GiveMail(struct player *p, str title, i32 flags)
 
    bip->mailreceived++;
 
-   if(!(flags & MAILF_NoPrint))
-   {
+   if(!(flags & MAILF_NoPrint)) {
       ACS_Delay(20);
 
       p->logB(1, LC(LANG "LOG_MailRecv"), send);
 
-      if(ACS_Random(1, 10000) == 1)
-      {
+      if(ACS_Random(1, 10000) == 1) {
          bip->mailtrulyreceived++;
          ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
-      }
-      else
+      } else {
          ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
+      }
    }
 }
 
@@ -299,15 +300,13 @@ struct page_info PageInfo(struct page const *page)
    if(page->category == BIPC_EXTRA)
       pinf.body = DecryptBody(pinf.body);
 
-   if(pinf.body[0] == '#')
-   {
+   if(pinf.body[0] == '#') {
       bool top = false;
 
       ACS_BeginPrint();
       ACS_BeginPrint();
 
-      for(i32 i = 1, l = ACS_StrLen(pinf.body); i < l; i++)
-      {
+      for(i32 i = 1, l = ACS_StrLen(pinf.body); i < l; i++) {
          if(!top && pinf.body[i] == '\n') {top = true; ACS_PrintString(L(ACS_EndStrParam()));}
          ACS_PrintChar(pinf.body[i]);
       }
