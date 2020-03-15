@@ -1,9 +1,9 @@
    case marine,3
    mus lmusic/lithambientwip3.ogg
-   img :End:Marine
+   img :End:Stan:IconOfSin
 3  case cybermage,4
    mus lmusic/tmary7.ogg
-   img :End:CyberMage
+   img :End:Jem:IconOfSin
 4  fade -50,black
    case marine,1
    600 $LITH_ENDING_IconOfSin_Stan

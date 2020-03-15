@@ -14,8 +14,8 @@ identifier,default
 :Dialogue:SelectBack,lgfx/Dialogue/SelectBack.png
 :Dialogue:SelectBackHot,lgfx/Dialogue/SelectBackHot.png
 :Dialogue:Selection,lgfx/Dialogue/Selection.png
-:End:CyberMage,lgfx/End/CyberMage.png
-:End:Marine,lgfx/End/Marine.png
+:End:Jem:IconOfSin,lgfx/End/Jem/IconOfSin.png
+:End:Stan:IconOfSin,lgfx/End/Stan/IconOfSin.png
 :HUD:AMMO,lgfx/HUD/AMMO.png
 :HUD:ARM,lgfx/HUD/ARM.png
 :HUD:Bar,lgfx/HUD/Bar.png
