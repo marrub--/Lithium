@@ -9,6 +9,12 @@
 
 extend class Lith_HERMES;
 
+static void PlayerInit(Actor mo_) {
+   let mo = Lith_Player(mo_);
+   /* mo.m_CS = Lith_Cyberspace.create(); */
+   mo.m_light = Lith_Flashlight.create(mo);
+}
+
 static void Nuke(Actor mo) {
    mo.A_StartSound("player/nuke", lch_body2, attenuation: ATTN_NONE);
    for(let it = BlockThingsIterator.Create(mo, 6144); it.next();)

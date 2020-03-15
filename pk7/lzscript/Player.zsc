@@ -115,13 +115,6 @@ override void BeginPlay() {
    viewbob = m_VBob;
 }
 
-override void PostBeginPlay() {
-   Super.PostBeginPlay();
-
-   /* m_CS = Lith_Cyberspace.Create(); */
-   m_light = Lith_Flashlight.create(self);
-}
-
 override void GiveDefaultInventory() {
    GiveInventoryType("Lith_IDOL");
 }

@@ -240,9 +240,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt)
 }
 
 /* Reset some things on the player when they spawn. */
-script
-void P_Init(struct player *p)
-{
+script void P_Init(struct player *p) {
    if(!p->wasinit) {
       fastmemset(p, 0, sizeof *p);
 
@@ -311,11 +309,14 @@ void P_Init(struct player *p)
    p->scoreaccumtime = 0;
    p->scoremul       = 1.3;
 
+   /* init the flashlight */
    p->lt_on        = false;
    p->lt_battery   = 0xffff;
    p->lt_intensity = 0.0;
    p->lt_target    = 0.0;
    p->lt_speed     = 1.0;
+
+   ServCallI(sm_PlayerInit);
 
    p->alpha = 1;
 
@@ -330,8 +331,7 @@ void P_Init(struct player *p)
 
    if(!p->invinit) P_Inv_PInit(p);
 
-   if(!p->wasinit)
-   {
+   if(!p->wasinit) {
       p->logB(1, Version " :: Compiled %s", __DATE__);
 
       if(dbglevel) {
@@ -347,8 +347,7 @@ void P_Init(struct player *p)
       p->wasinit = true;
    }
 
-   if(dbgflag & dbgf_items)
-   {
+   if(dbgflag & dbgf_items) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
          if(info->classname != snil && info->pclass & p->pclass && !(info->flags & wf_magic))
