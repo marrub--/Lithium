@@ -371,10 +371,12 @@ script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
    Str(rladaptive, s"RLAdaptive");
+   Str(rlhax,      s"RLCyberdemonMkII");
 
    str cname = ACS_GetActorClass(0);
 
-   if(strstr_str(cname, rladaptive)) return;
+   if(strstr_str(cname, rladaptive) || strstr_str(cname, rlhax))
+      return;
 
    for(i32 i = 0; i < countof(monsterinfo); i++) {
       struct monster_info const *mi = &monsterinfo[i];
