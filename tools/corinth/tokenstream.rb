@@ -55,6 +55,10 @@ class TokenStream
       end
    end
 
+   def drop? type
+      drop(type) != nil
+   end
+
    def while_drop type
       loop do
          yield

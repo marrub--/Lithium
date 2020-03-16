@@ -124,8 +124,13 @@ struct gui_state
    i32 ox, oy;
    i32 w, h;
 
-   u32 active, hot, slide;
+   u32 active, hot;
+
+   u32 slide;
    i32 slidecount, slidetime;
+
+   u32 dbl;
+   i32 dbltime;
 
    bool useclip;
    i32 clpxS, clpyS, clpxE, clpyE;

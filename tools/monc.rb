@@ -14,6 +14,20 @@
 
 require_relative "corinth.rb"
 
+ChColors =
+   %w"Common Green Blue Cyan Purple Yellow FireBlu Red Gray Abyss Black White"
+
+def ch_stuff monsters, expscr, mtype, match
+   for cr in ChColors
+      monsters.push({exp:     "Exp_" + expscr,
+                     scr:     "Score_" + expscr,
+                     mtype:   mtype,
+                     match:   cr + match,
+                     flags:   %w"mif_full",
+                     exclude: true})
+   end
+end
+
 common_main do
    tks = tokenize ARGV.shift
 
@@ -41,8 +55,13 @@ common_main do
          mtype = tok.text
          tok = tks.next.expect_after tok, :identi
          match = tok.text
-         monsters.push({exp:   exp, scr: scr, mtype: mtype, match: match,
-                        flags: flags})
+         exclude = tks.drop? :dollar
+         monsters.push({exp:     exp,
+                        scr:     scr,
+                        mtype:   mtype,
+                        match:   match,
+                        flags:   flags,
+                        exclude: exclude})
       when :modulo
          flags = []
          if tks.peek.type == :identi
@@ -56,6 +75,38 @@ common_main do
          enums.push tok.text
       when :eof
          break
+      end
+   end
+
+   ch_stuff monsters, "Revenant",      "revenant",      "Revenant"
+   ch_stuff monsters, "ZombieMan",     "zombie",        "Zombie"
+   ch_stuff monsters, "Imp",           "imp",           "Imp"
+   ch_stuff monsters, "ShotgunGuy",    "zombiesg",      "SG"
+   ch_stuff monsters, "Demon",         "demon",         "Demon"
+   ch_stuff monsters, "Spectre",       "demon",         "Spectre"
+   ch_stuff monsters, "ChaingunGuy",   "zombiecg",      "CGuy"
+   ch_stuff monsters, "Cacodemon",     "cacodemon",     "Caco"
+   ch_stuff monsters, "HellKnight",    "hellknight",    "HK"
+   ch_stuff monsters, "Arachnotron",   "arachnotron",   "SP1"
+   ch_stuff monsters, "Mancubus",      "mancubus",      "Fatso"
+   ch_stuff monsters, "Archvile",      "archvile",      "Arch"
+   ch_stuff monsters, "BaronOfHell",   "baron",         "Baron"
+   ch_stuff monsters, "LostSoul",      "lostsoul",      "LSoul"
+   ch_stuff monsters, "PainElemental", "painelemental", "PE"
+   ch_stuff monsters, "CyberDemon",    "cyberdemon",    "Cybie"
+   ch_stuff monsters, "SpiderDemon",   "mastermind",    "Mind"
+
+   for mon in monsters
+      cnt = monsters.count do |x|
+         if x[:exclude]
+            false
+         else
+            x[:match].include? mon[:match]
+         end
+      end
+
+      if cnt > 1
+         raise "string `#{mon[:match]}' appears multiple times in monsters"
       end
    end
 

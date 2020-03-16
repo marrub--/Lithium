@@ -44,13 +44,12 @@
 
 ## Chex Quest ----------------------------------------------------------------|
 
-+Imp         imp        ArmoredFlemoidusBipedicus
++Imp         imp        FlemoidusBipedicus
 +Imp         imp        Quadrumpus
 +LostSoul    lostsoul   ChexSoul
 +LostSoul    lostsoul   FlemMine
 +BaronOfHell baron      Flembrane
 +BaronOfHell baron      FlemoidusMaximus
-+ShotgunGuy  zombiesg   FlemoidusBipedicus
 +ZombieMan   zombie     FlemoidusCommonus
 +Spectre     demon      FlemoidusCycloptisCommonus
 +Demon       demon      FlemoidusStridicus
@@ -67,44 +66,33 @@
 +Spectre     demon       Sabreclaw
 +Cacodemon   mancubus    Disciple
 +Ophidian    arachnotron Ophidian
-+HellKnight  hellknight  Warrior
++HellKnight  hellknight  UndeadWarrior
++HellKnight  hellknight  SpectralWarrior
 +BaronOfHell cacodemon   IronLich
 +Maulotaur   mastermind  Maulotaur
 +DSparil     cyberdemon  DSparil
 
 ## Lithium -------------------------------------------------------------------|
 
-+1000 0 phantom    James
-+2000 0 phantom    Makarov
-+3000 0 phantom    Isaac
-+0    0 cyberdemon Steggles
-
-%mif_angelic
-+CyberDemon angel Archangel
+%mif_full
++1000 0 phantom    Lith_Boss_James
++2000 0 phantom    Lith_Boss_Makarov
++3000 0 phantom    Lith_Boss_Isaac
++0    0 cyberdemon Lith_Steggles
 %
 
-## Cheogsh.wad ---------------------------------------------------------------|
-
-+Spectre demon Nightmare
-
-%mif_full
-+Imp         imp        Howler
-+Imp         imp        SoulHarvester
-+Spectre     demon      MaulerDemon
-+BaronOfHell baron      HellWarrior
-+CyberDemon  cyberdemon Cheogsh
+%mif_full|mif_angelic
++CyberDemon angel Lith_Archangel
 %
 
 ## ed4_rfo1.wad --------------------------------------------------------------|
 
-+DRLACaptain zombie      BazookaZombie
-+Imp         imp         BatFamiliar
-+Imp         imp         DragonFamiliar
-+Imp         imp         SnakeImp
-+Arachnotron arachnotron Arachnophyte
-+Arachnotron arachnotron RailSpider
-
 %mif_full
++DRLACaptain   zombie        BazookaZombie
++Imp           imp           BatFamiliar
++Imp           imp           DragonFamiliar
++Arachnotron   arachnotron   Arachnophyte
++Arachnotron   arachnotron   RailSpider
 +CyberDemon    cacodemon     RealAbstractPain
 +PainElemental painelemental EDPE
 %
@@ -112,13 +100,6 @@
 ## dop.pk3 -------------------------------------------------------------------|
 
 +LostSoul lostsoul LostGhoul
-
-## DoomRL Arsenal Monsters ---------------------------------------------------|
-
-+ZombieMan   zombie   FormerHuman
-+ShotgunGuy  zombiesg FormerSergeant
-+ChaingunGuy zombiecg FormerCommando
-+DRLACaptain zombie   Former
 
 ## Rampancy ------------------------------------------------------------------|
 
@@ -131,9 +112,9 @@
 +Spectre       demon         Robot_StealthDroid
 +LostSoul      lostsoul      Robot_ScoutDrone
 +Cacodemon     cacodemon     Robot_AssaultDrone
-+HellKnight    hellknight    Robot_SecurityBot
++HellKnight    hellknight    Robot_SecurityBot $
 +BaronOfHell   baron         Robot_DreadnoughtBot
-+Arachnotron   arachnotron   Robot_SpiderBot
++Arachnotron   arachnotron   Robot_SpiderBot $
 +PainElemental painelemental Robot_FabricationNode
 +Revenant      revenant      Robot_RollerDroid
 +Mancubus      mancubus      Robot_MaintenanceBot
@@ -169,7 +150,6 @@
 +HellKnight    imp         Doorman
 +LostSoul      lostsoul    UnbodiedFury
 +ShotgunGuy    imp         Bloodfiend
-+Demon         demon       Golem
 +Demon         demon       Mortuus
 +Demon         demon       Phantasm
 +ChaingunGuy   imp         Malum
@@ -208,19 +188,51 @@
 +SpiderDemon   mastermind    bigspider
 +CyberDemon    cyberdemon    angrycow
 
-## Colorful Hell -------------------------------------------------------------|
-## Note, these MUST be at the bottom, because they are extremely vague.
+## Cyberpack -----------------------------------------------------------------|
 
-+ZombieMan     zombie        Zombie
-+ShotgunGuy    zombiesg      SG
-+ChaingunGuy   zombiecg      CGuy
-+LostSoul      lostsoul      LSoul
-+HellKnight    hellknight    HK
-+Arachnotron   arachnotron   SP1
-+Cacodemon     cacodemon     Caco
-+Archvile      archvile      Arch
-+PainElemental painelemental PE
-+SpiderDemon   mastermind    Mind
-+CyberDemon    cyberdemon    Cybie
++ZombieMan zombie ZSec
+
+%mif_full
++ZombieMan     zombie        DuneWarrior
++ShotgunGuy    zombiesg      NailBorg
++ShotgunGuy    zombiesg      QuadShotgunZombie
++ChaingunGuy   zombiecg      ZSpecOpsMachinegun
++LostSoul      lostsoul      MiniSentinel
++LostSoul      lostsoul      Railbot
++Demon         demon         CyberFiend
++Revenant      revenant      RevGhoul
++HellKnight    hellknight    Paladin
++Mancubus      mancubus      Hectebus
++Cacodemon     cacodemon     Facebot
++PainElemental painelemental ZombieMissileTank
++Arachnotron   arachnotron   FusionSpider
++Arachnotron   arachnotron   CGunSpider
++CyberDemon    cyberdemon    Annihilator
++CyberDemon    cyberdemon    Terminator
++CyberDemon    cyberdemon    Thamuz
++CyberDemon    cyberdemon    PaladinTitan $
++SpiderDemon   mastermind    Demolisher
++SpiderDemon   mastermind    Overlord
++SpiderDemon   mastermind    UACBot
++SpiderDemon   mastermind    Maephisto
+%
+
+## DoomRL Arsenal Monsters ---------------------------------------------------|
+
++ZombieMan   zombie   FormerHuman
++ShotgunGuy  zombiesg FormerSergeant
++ChaingunGuy zombiecg FormerCommando
++DRLACaptain zombie   FormerCaptain
+
+## Cheogsh.wad ---------------------------------------------------------------|
+
++Spectre demon Nightmare
+
+%mif_full
++Imp         imp        Howler
++Imp         imp        SoulHarvester
++BaronOfHell baron      HellWarrior
++CyberDemon  cyberdemon Cheogsh
+%
 
 ## EOF

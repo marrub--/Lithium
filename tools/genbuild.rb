@@ -41,12 +41,19 @@ DLITH  = "m"
 INITSC = "o"
 NUMOUT = "p"
 MFLAGS = "q"
+TXT    = "r"
 
+UPGCIN = %W"$#{TXT}/Upgrades.txt"
 UPGCCO = %W"$#{SRC}/p_upgrinfo.c"
 UPGCHO = %W"$#{HDR}/u_names.h".push(*UPGCCO, "$#{HDR}/u_func.h")
+
+WEPCIN = %W"$#{TXT}/Weapons.txt"
 WEPCCO = %W"$#{SRC}/p_weaponinfo.c"
 WEPCHO = %W"$#{HDR}/p_weapons.h".push(*WEPCCO)
+
+MONCIN = %W"$#{TXT}/Monsters.txt"
 MONCHO = %W"$#{HDR}/w_moninfo.h"
+
 DECOIN = %W"
    $#{HDR}/m_drawing.h
    $#{HDR}/p_data.h
@@ -56,23 +63,29 @@ DECOIN = %W"
    $#{HDR}/w_monster.h
    $#{HDR}/w_scorenums.h
 "
-TEXTIN = %w"text/Text.txt"
-HSFSIN = %w"pk7/language.gfx.txt:pk7/:lgfx
+
+TEXTIN = %W"$#{TXT}/Text.txt"
+
+HSFSIN = %W"pk7/language.gfx.txt:pk7/:lgfx
             pk7_ep1/language.gfx.txt:pk7_ep1/:lgfx"
-SNDSIN = %w"text/Sounds.txt"
+
+SNDSIN = %W"$#{TXT}/Sounds.txt"
+
 DEPS = [*UPGCHO, *WEPCHO, *MONCHO,
-        Dir.glob("source/Headers/*").map do |s|
+        Dir.glob("source/include/*").map do |s|
            "$#{HDR}/#{File.basename s}"
         end].uniq
-SRCS = [*Dir.glob("source/Main/*"), *UPGCCO, *WEPCCO].map do |s|
+
+SRCS = [*Dir.glob("source/*.c"), *UPGCCO, *WEPCCO].map do |s|
    File.basename s
 end.uniq
 
 fp = open "build.ninja", "wb"
 
 fp << <<_end_
-#{SRC   } = source/Main
-#{HDR   } = source/Headers
+#{SRC   } = source
+#{HDR   } = source/include
+#{TXT   } = text
 #{IR    } = bin
 #{IRLITH} = $#{IR}/lithium
 #{TARGET} = --target-engine=ZDoom
@@ -122,9 +135,9 @@ build _snd: snd #{SNDSIN.join " "} | tools/compilesnd.rb
 build _dec: dec #{DECOIN.join " "} | tools/decompat.rb
 build _font: font
 
-build #{WEPCHO.join " "}: wepc source/Weapons.txt | tools/wepc.rb
-build #{UPGCHO.join " "}: upgc source/Upgrades.txt | tools/upgc.rb
-build #{MONCHO.join " "}: monc source/Monsters.txt | tools/monc.rb
+build #{WEPCHO.join " "}: wepc #{WEPCIN.join " "} | tools/wepc.rb
+build #{UPGCHO.join " "}: upgc #{UPGCIN.join " "} | tools/upgc.rb
+build #{MONCHO.join " "}: monc #{MONCIN.join " "} | tools/monc.rb
 
 build $#{IR}/libc.ir: makelib
  #{TYPE} = libc
