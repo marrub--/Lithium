@@ -3,16 +3,16 @@ You can right click to quickly move items.
 To equip armor place it on your \cdbody\c-.
 
 ## Containers ----------------------------------------------------------------|
-== \#CONTAINER_Backpack | \ceBackpack
-== \#CONTAINER_ArmUpL   | \cnL Shoulder
-== \#CONTAINER_ArmUpR   | \caR Shoulder
-== \#CONTAINER_ArmLoL   | \cnL Wrist
-== \#CONTAINER_ArmLoR   | \caR Wrist
-== \#CONTAINER_Belt     | \cuBelt
-== \#CONTAINER_LegL     | \cnL Thigh
-== \#CONTAINER_LegR     | \caR Thigh
-== \#CONTAINER_Torso    | \cdTorso
-== \#CONTAINER_Legs     | \cdLegs
+== \#CONTAINER_Backpack | Backpack
+== \#CONTAINER_ArmUpL   | L Shoulder
+== \#CONTAINER_ArmUpR   | R Shoulder
+== \#CONTAINER_ArmLoL   | L Wrist
+== \#CONTAINER_ArmLoR   | R Wrist
+== \#CONTAINER_Belt     | Belt
+== \#CONTAINER_LegL     | L Thigh
+== \#CONTAINER_LegR     | R Thigh
+== \#CONTAINER_Torso    | Torso
+== \#CONTAINER_Legs     | Legs
 
 ## Tags ----------------------------------------------------------------------|
 == \#ITEM_TAG_ArmStandardUp    | Standard Armor

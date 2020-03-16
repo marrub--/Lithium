@@ -92,13 +92,25 @@ static bool ItemCanPlaceAny(struct container *cont, struct item *item)
 
 static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy)
 {
+   Str(back_store,  s":UI:InvBackStore");
+   Str(back_arms_u, s":UI:InvBackUpperArms");
+   Str(back_arms_l, s":UI:InvBackLowerArms");
+   Str(back_body,   s":UI:InvBackBody");
+
    struct player *p = cont->user;
 
-   str bg = cont->bg ? cont->bg : sp_UI_InvBack;
+   str bg;
+   switch(cont->type) {
+      case _cont_store:  bg = back_store;  break;
+      case _cont_arms_u: bg = back_arms_u; break;
+      case _cont_arms_l: bg = back_arms_l; break;
+      case _cont_body:   bg = back_body;   break;
+   }
+
    i32 h = cont->h * 8;
    i32 w = cont->w * 8;
 
-   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), s_smallfnt, CR_GOLD, sx,1, sy,2);
+   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), s_smallfnt, CR_WHITE, sx,1, sy,2);
 
    for(i32 y = 0; y < h; y += 8) for(i32 x = 0; x < w; x += 8)
       PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
@@ -140,16 +152,16 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 void P_Inv_PInit(struct player *p)
 {
    static struct container const baseinv[] = {
-      [_inv_backpack]    = {11, 7, "Backpack"},
-      [_inv_arm_upper_l] = {1,  3, "ArmUpL", true},
-      [_inv_arm_upper_r] = {1,  3, "ArmUpR", true},
-      [_inv_arm_lower_l] = {1,  3, "ArmLoL", true},
-      [_inv_arm_lower_r] = {1,  3, "ArmLoR", true},
-      [_inv_belt]        = {4,  1, "Belt"},
-      [_inv_leg_l]       = {1,  4, "LegL",  true},
-      [_inv_leg_r]       = {1,  4, "LegR",  true},
-      [_inv_torso]       = {4,  2, "Torso", true},
-      [_inv_legs]        = {2,  3, "Legs",  true},
+      [_inv_backpack]    = {11, 7, "Backpack", _cont_store},
+      [_inv_arm_upper_l] = {1,  3, "ArmUpL",   _cont_arms_u},
+      [_inv_arm_upper_r] = {1,  3, "ArmUpR",   _cont_arms_u},
+      [_inv_arm_lower_l] = {1,  3, "ArmLoL",   _cont_arms_l},
+      [_inv_arm_lower_r] = {1,  3, "ArmLoR",   _cont_arms_l},
+      [_inv_belt]        = {4,  1, "Belt",     _cont_store},
+      [_inv_leg_l]       = {1,  4, "LegL",     _cont_store},
+      [_inv_leg_r]       = {1,  4, "LegR",     _cont_store},
+      [_inv_torso]       = {4,  2, "Torso",    _cont_body},
+      [_inv_legs]        = {2,  3, "Legs",     _cont_body},
    };
 
    memmove(p->inv, baseinv, sizeof baseinv);
@@ -237,7 +249,7 @@ void P_Item_Unlink(struct item *item)
    }
 }
 
-struct bagitem *P_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data)
+struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data)
 {
    struct bagitem *item = Salloc(struct bagitem);
 
@@ -245,9 +257,9 @@ struct bagitem *P_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data)
 
    ListCtor(&item->link, item);
 
-   item->content.w  = w;
-   item->content.h  = h;
-   item->content.bg = bg;
+   item->content.w    = w;
+   item->content.h    = h;
+   item->content.type = type;
 
    item->Tick    = BagItem_Tick;
    item->Destroy = BagItem_Destroy;
@@ -438,7 +450,7 @@ bool Sc_ItemCanPlace(struct item *item)
 script_str ext("ACS") addr("Lith_ItemOnBody")
 bool Sc_ItemOnBody(struct item *item)
 {
-   return item->container && item->container->body;
+   return item->container && item->container->type == _cont_body;
 }
 
 /* EOF */

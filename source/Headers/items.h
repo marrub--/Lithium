@@ -30,6 +30,13 @@ enum {
    _inv_num,
 };
 
+enum {
+   _cont_store,
+   _cont_arms_u,
+   _cont_arms_l,
+   _cont_body,
+};
+
 struct itemdata {
    str name, spr, tag;
    u32 w, h;
@@ -59,8 +66,7 @@ struct item {
 struct container {
    u32  w, h;
    cstr name;
-   bool body;
-   str  bg;
+   i32  type;
    list items;
    struct player *user;
 };
@@ -78,7 +84,7 @@ script void P_Item_Destroy(struct item *item);
 script bool P_Item_Use(struct item *item);
 script void P_Item_Place(struct item *item, struct container *cont);
 
-optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, str bg, struct itemdata const *data);
+optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data);
 
 void P_Inv_PInit(struct player *p);
 void P_Inv_PQuit(struct player *p);

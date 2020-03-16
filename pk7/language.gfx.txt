@@ -197,7 +197,10 @@ identifier,default
 :UI:HealthBar9,lgfx/UI/HealthBar9.png
 :UI:Hulgyon,lgfx/UI/Hulgyon.png
 :UI:HulgyonSel,lgfx/UI/HulgyonSel.png
-:UI:InvBack,lgfx/UI/InvBack.png
+:UI:InvBackBody,lgfx/UI/InvBackBody.png
+:UI:InvBackLowerArms,lgfx/UI/InvBackLowerArms.png
+:UI:InvBackStore,lgfx/UI/InvBackStore.png
+:UI:InvBackUpperArms,lgfx/UI/InvBackUpperArms.png
 :UI:InvSel,lgfx/UI/InvSel.png
 :UI:LogList,lgfx/UI/LogList.png
 :UI:MagicSelectBack,lgfx/UI/MagicSelectBack.png
