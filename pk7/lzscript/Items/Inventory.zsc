@@ -33,7 +33,7 @@ class Lith_InventoryItem : Inventory abstract {
 
    bool Lith_OnBody() {return CallACS("Lith_ItemOnBody", m_invItem);}
 
-   void Lith_Detach() {m_invItem = 0; Destroy();}
+   void Lith_Detach() {if(!self) return; m_invItem = 0; Destroy();}
 
    virtual bool Lith_UseItem(Actor mo) {return false;}
    virtual void Lith_OnAttach(Actor mo) {}
