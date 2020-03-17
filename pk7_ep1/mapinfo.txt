@@ -13,6 +13,7 @@ map M1A1 "Begin The Begin"
 {
    LevelNum = 18883001
    Sky1 = "textures/Skies/Nisiv16.png"
+   Music = "lmusic/M1A1.ogg"
 
    ForceNoSkyStretch
 }
@@ -20,6 +21,7 @@ map M1A1 "Begin The Begin"
 map M1A2 "The Ash Is Burning"
 {
    LevelNum = 18883002
+   Music = "lmusic/M1A2.ogg"
 }
 
 /* Episodes ---------------------------------------------------------------- */
