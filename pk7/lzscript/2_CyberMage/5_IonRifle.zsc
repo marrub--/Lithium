@@ -213,7 +213,7 @@ action(Weapon) void Lith_A_FireIonRifle()
    if(invoker.m_Charge >= 2)
       A_StartSound("weapons/ionrifle/fire2", lch_weapon);
    else if(invoker.m_Charge >= 1.5)
-      A_StartSound("weapons/ionrifle/cfire", lch_weapon2);
+      A_StartSound("weapons/ionrifle/cfire", lch_weapon);
    else
       A_StartSound("weapons/ionrifle/fire", lch_weapon);
 }
