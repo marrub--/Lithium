@@ -154,13 +154,15 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_weapon_unknown_001 | How Even
 == \#PK_weapon_unknown_002 | Why Are You Doing This
 
-== \#PK_weapon_cfist_NUM | 3
+== \#PK_weapon_cfist_NUM | 5
 == \#PK_weapon_cfist_000 | Chaaji Fisuto
 == \#PK_weapon_cfist_001 | Charred Fist
 == \#PK_weapon_cfist_002 | Charged Mr. Fisto
 == \#PK_weapon_cfist_003 | Chargle Fargle
+== \#PK_weapon_cfist_004 | Yūgi no Ken
+== \#PK_weapon_cfist_005 | Baron Smasher
 
-== \#PK_weapon_pistol_NUM | 9
+== \#PK_weapon_pistol_NUM | 11
 == \#PK_weapon_pistol_000 | Postil
 == \#PK_weapon_pistol_001 | Peestol
 == \#PK_weapon_pistol_002 | Pinstool
@@ -171,6 +173,8 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_weapon_pistol_007 | hurty peestal
 == \#PK_weapon_pistol_008 | Pete Stool
 == \#PK_weapon_pistol_009 | Bandity Pistal
+== \#PK_weapon_pistol_010 | Piston
+== \#PK_weapon_pistol_011 | Pispy Peashooter
 
 == \#PK_weapon_revolver_NUM | 3
 == \#PK_weapon_revolver_000 | Rvleolr
@@ -217,12 +221,13 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_weapon_plasma_005 | Plisplam Fimfam
 == \#PK_weapon_plasma_006 | Plastic Hamdonk
 
-== \#PK_weapon_bfg_NUM | 4
+== \#PK_weapon_bfg_NUM | 5
 == \#PK_weapon_bfg_000 | Biffgee Nintendo
 == \#PK_weapon_bfg_001 | BFG 8000
 == \#PK_weapon_bfg_002 | Biffug 9999
 == \#PK_weapon_bfg_003 | Bilmap Frignarp Gnu 9
 == \#PK_weapon_bfg_004 | Frosty Balga Gams
+== \#PK_weapon_bfg_005 | SBC Cannon
 
 == \#PK_weapon_c_mateba_NUM | 11
 == \#PK_weapon_c_mateba_000 | Metabolism
