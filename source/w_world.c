@@ -186,12 +186,17 @@ static void MInitPst(void)
    payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
    payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
 
-   /* Line 1888300 is used as a control line for mod features. */
-   /* Check for if rain should be used. */
-   if(!ACS_GetLineUDMFInt(1888300, sm_MapNoRain) &&
-      (ACS_GetCVar(sc_sv_rain) || ACS_GetLineUDMFInt(1888300, sm_MapUseRain)) &&
-      ACS_PlayerCount() <= 1)
-   {
+   /* Check for if rain should be used.
+    * - If there are more than 1 players, never use rain.
+    * - If `user_Lith_NoRain' is set on LithMapLine, never use rain.
+    * - If the player has rain enabled, use it if not for those preconditions.
+    * - If `user_Lith_UseRain' is set on LithMapLine, use it if not for that.
+    */
+   bool multi_player  = ACS_PlayerCount() > 1;
+   bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
+   bool use_rain_user = ACS_GetCVar(sc_sv_rain);
+   bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
+   if(!multi_player && !never_rain && (use_rain_user || use_rain_map)) {
       dorain = true;
       W_DoRain();
    }
