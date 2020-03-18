@@ -9,8 +9,7 @@
 
 /* Maps -------------------------------------------------------------------- */
 
-map M1A1 "Begin The Begin"
-{
+map M1A1 "Begin The Begin" {
    LevelNum = 18883001
    Sky1 = "textures/Skies/Nisiv16.png"
    Music = "lmusic/M1A1.ogg"
@@ -18,17 +17,23 @@ map M1A1 "Begin The Begin"
    ForceNoSkyStretch
 }
 
-map M1A2 "The Ash Is Burning"
-{
+map M1A2 "The Ash Is Burning" {
    LevelNum = 18883002
    Music = "lmusic/M1A2.ogg"
 }
 
 /* Episodes ---------------------------------------------------------------- */
 
-episode M1A1
-{
-   name = "Nanto Naku"
+episode M1A1 {
+   Name = "∞¹ - Nanto Naku"
+}
+
+episode M2A1 {
+   Name = "∞² - E.R.A."
+}
+
+episode M3A1 {
+   Name = "ℵ₀ - F.S.S."
 }
 
 /* EOF */
