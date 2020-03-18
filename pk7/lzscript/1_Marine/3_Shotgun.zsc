@@ -161,17 +161,14 @@ ReadyGauss:
 Deselect:
    SHTG A 0 Lith_A_ScopeOut;
 DeselectLoop:
-   SHTG AA 0 A_Lower;
-   SHTG A 1 A_Lower;
+   SHTG A 1 A_Lower(18);
    loop;
 
 Select:
    SHTG A 0 Lith_A_ScopeOut;
    SHTG A 0 {invoker.m_Just = 3;}
-SelectLoop:
-   SHTG AA 0 A_Raise;
-   SHTG A 1 A_Raise;
-   loop;
+   SHTG A 1 A_Raise(18);
+   wait;
 
 Fire:
    #### # 0 Lith_A_JumpIfNoSlot3OptAmmo;

@@ -43,12 +43,10 @@ Ready:
    loop;
 
 Deselect:
-   SHTG AA 0 A_Lower;
-   SHTG A 1;
+   SHTG A 1 A_Lower(12);
    loop;
 Select:
-   SHTG AA 0 A_Raise;
-   SHTG A 1;
+   SHTG A 1 A_Raise(12);
    loop;
 
 Fire:

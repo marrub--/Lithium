@@ -117,13 +117,11 @@ Ready:
 Deselect:
    PLSG A 0 {A_StopSound(lch_weapon2); A_StopSound(lch_weapon3);}
 DeselectLoop:
-   PLSG AA 0 A_Lower;
-   PLSG A 1 A_Lower;
+   PLSG A 1 A_Lower(18);
    loop;
 
 Select:
-   PLSG AA 0 A_Raise;
-   PLSG A 1 A_Raise;
+   PLSG A 1 A_Raise(18);
    loop;
 
 Fire:

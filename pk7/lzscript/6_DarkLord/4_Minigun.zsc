@@ -150,13 +150,11 @@ Ready3:
 
 Deselect:
    #### # 0 {A_StopSound(lch_weapon2); invoker.m_Reloading = false;}
-   #### #### 0 A_Lower;
-   #### # 1;
+   #### # 1 A_Lower(24);
    loop;
 
 Select:
-   MNGG AAAA 0 A_Raise;
-   MNGG A 1;
+   MNGG A 1 A_Raise(24);
    loop;
 
 Fire:

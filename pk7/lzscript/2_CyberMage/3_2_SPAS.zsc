@@ -159,13 +159,11 @@ Ready:
    loop;
 
 Deselect:
-   CSHG AA 0 A_Lower;
-   CSHG A 1 A_Lower;
+   CSHG A 1 A_Lower(18);
    loop;
 
 Select:
-   CSHG AA 0 A_Raise;
-   CSHG A 1 A_Raise;
+   CSHG A 1 A_Raise(18);
    loop;
 
 Fire:

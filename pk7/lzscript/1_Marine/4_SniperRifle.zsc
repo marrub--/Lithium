@@ -87,16 +87,13 @@ Ready:
 
 Deselect:
    SNPG A 0 Lith_A_ScopeOut;
-DeselectLoop:
-   SNPG AA 0 A_Lower;
-   SNPG A 1 A_Lower;
-   loop;
+   SNPG A 1 A_Lower(18);
+   wait;
 
 Select:
    SNPG A 0 Lith_A_ScopeOut;
 SelectLoop:
-   SNPG AA 0 A_Raise;
-   SNPG A 1 A_Raise;
+   SNPG A 1 A_Raise(18);
    loop;
 
 Fire:

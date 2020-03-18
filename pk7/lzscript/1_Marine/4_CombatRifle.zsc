@@ -212,15 +212,13 @@ Ready:
    loop;
 
 Deselect:
-   CRFG AA 0 A_Lower;
-   CRFG A 1 A_Lower;
+   CRFG A 1 A_Lower(18);
    loop;
 
 Select:
    CRFG A 0 ACS_ScriptCall("Lith_ResetRifleMode");
 SelectLoop:
-   CRFG AA 0 A_Raise;
-   CRFG A 1 A_Raise;
+   CRFG A 1 A_Raise(18);
    loop;
 
 Fire:

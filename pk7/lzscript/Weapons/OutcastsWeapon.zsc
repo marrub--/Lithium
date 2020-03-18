@@ -77,8 +77,7 @@ _KnifeDone_2:
    stop;
 _KnifeFinish:
    TNT1 A 0 {invoker.m_KnifeReFire = false;}
-   TNT1 AAAAAAAAA 0 A_Lower;
-   TNT1 A 1;
+   TNT1 A 1 A_Lower(54);
    TNT1 A 0 ResolveState("Select");
    stop;
 }

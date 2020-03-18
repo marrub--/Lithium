@@ -378,16 +378,13 @@ Ready:
 Deselect:
    SDSG A 0 A_StopSound(lch_idleweapon);
 DeselectLoop:
-   SDSG AA 0 A_Lower;
-   SDSG A 1 A_Lower;
+   SDSG A 1 A_Lower(18);
    loop;
 
 Select:
    SDSG A 0 A_StartSound("weapons/shipgun/idle", lch_idleweapon, CHANF_LOOP);
-SelectLoop:
-   SDSG A 0 A_Raise;
-   SDSG A 1 A_Raise;
-   loop;
+   SDSG A 1 A_Raise(12);
+   wait;
 
 Fire:
    SDSG A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 5, "FireEmpty");

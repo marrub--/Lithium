@@ -98,13 +98,11 @@ Ready:
    loop;
 
 Deselect:
-   IONG AAA 0 A_Lower;
-   IONG A 1;
+   IONG A 1 A_Lower(18);
    loop;
 
 Select:
-   IONG AAA 0 A_Raise;
-   IONG A 1;
+   IONG A 1 A_Raise(18);
    loop;
 
 FireEmpty:

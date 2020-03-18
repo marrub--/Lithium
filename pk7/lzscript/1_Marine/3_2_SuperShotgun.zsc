@@ -71,13 +71,11 @@ Ready:
    loop;
 
 Deselect:
-   SSGG A 0 A_Lower;
-   SSGG A 1 A_Lower;
+   SSGG A 1 A_Lower(12);
    loop;
 
 Select:
-   SSGG A 0 A_Raise;
-   SSGG A 1 A_Raise;
+   SSGG A 1 A_Raise(12);
    loop;
 
 FireEmpty:

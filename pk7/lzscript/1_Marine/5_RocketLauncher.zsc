@@ -133,12 +133,10 @@ Ready:
    loop;
 
 Deselect:
-   GRLG AA 0 A_Lower;
-   GRLG A 1 A_Lower;
+   GRLG A 1 A_Lower(18);
    loop;
 Select:
-   GRLG AA 0 A_Raise;
-   GRLG A 1 A_Raise;
+   GRLG A 1 A_Raise(18);
    loop;
 
 Fire:

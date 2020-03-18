@@ -71,13 +71,11 @@ Ready:
    loop;
 
 Deselect:
-   PDFG AA 0 A_Lower;
-   PDFG A 1 A_Lower;
+   PDFG A 1 A_Lower(18);
    loop;
 
 Select:
-   PDFG AA 0 A_Raise;
-   PDFG A 1 A_Raise;
+   PDFG A 1 A_Raise(18);
    loop;
 
 Fire:

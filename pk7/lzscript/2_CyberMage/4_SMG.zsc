@@ -209,13 +209,11 @@ Ready:
 Deselect:
    CSMG A 0 A_StopSound(lch_weapon);
 DeselectLoop:
-   CSMG AA 0 A_Lower;
-   CSMG A 1 A_Lower;
+   CSMG A 1 A_Lower(18);
    loop;
 
 Select:
-   CSMG AA 0 A_Raise;
-   CSMG A 1 A_Raise;
+   CSMG A 1 A_Raise(18);
    loop;
 
 Fire:

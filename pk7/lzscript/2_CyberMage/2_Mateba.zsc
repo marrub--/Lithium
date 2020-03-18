@@ -192,12 +192,10 @@ Ready:
    loop;
 
 Deselect:
-   MTBG AA 0 A_Lower;
-   MTBG A 1 A_Lower;
+   MTBG A 1 A_Lower(18);
    loop;
 Select:
-   MTBG AA 0 A_Raise;
-   MTBG A 1 A_Raise;
+   MTBG A 1 A_Raise(18);
    loop;
 
 Fire:

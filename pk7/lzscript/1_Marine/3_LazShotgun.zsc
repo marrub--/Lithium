@@ -80,13 +80,11 @@ Ready:
    loop;
 
 Deselect:
-   LSHT AA 0 A_Lower;
-   LSHT A 1 A_Lower;
+   LSHT A 1 A_Lower(18);
    loop;
 
 Select:
-   LSHT AA 0 A_Raise;
-   LSHT A 1 A_Raise;
+   LSHT A 1 A_Raise(18);
    loop;
 
 Fire:
