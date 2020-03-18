@@ -177,7 +177,7 @@ doomednums {
    22426 = Lith_SteggleSphere
    22427 = Lith_BlurSphere
    22428 = Lith_GreyHam
-   22429 = Lith_Map_Jacques
+   22429 = Lith_Person_Jacques
    22430 = Lith_DivisionSigil
    22431 = Lith_Chair
    22432 = Lith_BoomBarrel

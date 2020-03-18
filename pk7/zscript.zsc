@@ -22,6 +22,7 @@ version "4.3.3"
 #include "lzscript/Items.zsc"
 #include "lzscript/Weapons.zsc"
 #include "lzscript/Player.zsc"
+#include "lzscript/People.zsc"
 #include "lzscript/Decorations.zsc"
 
 /* EOF */

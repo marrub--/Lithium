@@ -7,17 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-#include "lzscript/Weapons/Base.zsc"
-
-#include "lzscript/Weapons/1_ChargeFist.zsc"
-#include "lzscript/Weapons/5_MissileLauncher.zsc"
-#include "lzscript/Weapons/6_PlasmaDiffuser.zsc"
-
-#include "lzscript/Weapons/Sword.zsc"
-#include "lzscript/Weapons/Wings.zsc"
-
-#include "lzscript/Weapons/OutcastsWeapon.zsc"
-
-#include "lzscript/Weapons/Pickup.zsc"
+#include "lzscript/People/Base.zsc"
+#include "lzscript/People/AdvMarine.zsc"
+#include "lzscript/People/People.zsc"
 
 /* EOF */

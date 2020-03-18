@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------------|
+/* -*-Agw-LithDlg-*-----------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
@@ -10,8 +10,7 @@
 /* ------------------------------------------------------------------------- */
 program 7;
 
-page 0
-{
+page 0 {
    ldx #$FF
    txs
    lda #$1A
@@ -27,8 +26,7 @@ page 0
 /* ------------------------------------------------------------------------- */
 dialogue 1;
 
-page 0
-{
+page 0 {
    name "Jacques"
    icon "AOF"
    remote "jacques.p42710@corp.AOF"
@@ -41,8 +39,7 @@ page 0
    option "Exit"      brk
 }
 
-page 2
-{
+page 2 {
    if class pM `Who are you?
    if class pC `Right. The Cybernati.
 
@@ -65,8 +62,7 @@ page 2
    option "Thanks, bye!" brk
 }
 
-page 3
-{
+page 3 {
    `What, you want something?
    `
 
@@ -82,8 +78,7 @@ page 3
    option "Bye." brk
 }
 
-page 10
-{
+page 10 {
    @@
    ` Already? Are you sure it isn't just ASIC bugs? I have trouble believing
    `that they'd be back so soon, after your doctor gave you that prescription
@@ -97,8 +92,7 @@ page 10
    option "Right... Thank you, Zeke." brk
 }
 
-page 11
-{
+page 11 {
    @@
    ` I know how that is. You know, Order doesn't pass through this part of
    `the ship. You could say "Zeke" again if you want. I know they don't like
@@ -112,8 +106,7 @@ page 11
    option "Thanks, 'Z.'" page 12
 }
 
-page 12
-{
+page 12 {
    @@
    ` Heh.. "Z." You're quite creative.
    `
@@ -124,8 +117,7 @@ page 12
    option "... The nightmares are back." page 10
 }
 
-page 13
-{
+page 13 {
    @@
    ` Worse?
    `
@@ -137,8 +129,7 @@ page 13
    option "Yeah. And I don't want to go to the doctor." page 14
 }
 
-page 14
-{
+page 14 {
    @@
    ` ...
    `
@@ -149,8 +140,7 @@ page 14
    option "You'd have told me if you could hear it, right?" page 15
 }
 
-page 15
-{
+page 15 {
    @@
    ` Are you hearing a beat? It could be your home calling for you. I'd imagine
    `AOF didn't put much use to that planet after they went and captured you,
@@ -161,8 +151,7 @@ page 15
       page 16
 }
 
-page 16
-{
+page 16 {
    @@
    ` Darker...
    `
@@ -173,8 +162,7 @@ page 16
    option "It's coming. Just thought I'd let you know." brk
 }
 
-page 4
-{
+page 4 {
    `Life is rude.
    `
    `Now go away.
@@ -182,8 +170,7 @@ page 4
    option "Right." brk
 }
 
-page 7
-{
+page 7 {
    `thousands are sailing
    `the same self    the only self
    `
@@ -203,8 +190,7 @@ page 7
 /* ------------------------------------------------------------------------- */
 terminal 1;
 
-unfinished
-{
+unfinished {
    remote "test@org.example"
 
    logon "01602" `\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>

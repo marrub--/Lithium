@@ -7,17 +7,16 @@
  * ---------------------------------------------------------------------------|
  */
 
-#include "lzscript/Weapons/Base.zsc"
+class Lith_BasePerson : Actor;
 
-#include "lzscript/Weapons/1_ChargeFist.zsc"
-#include "lzscript/Weapons/5_MissileLauncher.zsc"
-#include "lzscript/Weapons/6_PlasmaDiffuser.zsc"
+default {
+   +DONTTHRUST
+   +USESPECIAL
+}
 
-#include "lzscript/Weapons/Sword.zsc"
-#include "lzscript/Weapons/Wings.zsc"
-
-#include "lzscript/Weapons/OutcastsWeapon.zsc"
-
-#include "lzscript/Weapons/Pickup.zsc"
+override void PostBeginPlay() {
+   super.postBeginPlay();
+   A_SetSpecial(84, -int('Lith_RunDialogue'), args[0]);
+}
 
 /* EOF */

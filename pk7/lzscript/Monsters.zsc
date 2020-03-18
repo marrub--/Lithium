@@ -45,8 +45,6 @@
 #include "lzscript/Monsters/Lithium/6_Michael.zsc"
 
 #include "lzscript/Monsters/Lithium/TitleMap.zsc"
-#include "lzscript/Monsters/Lithium/TitleMarine.zsc"
-#include "lzscript/Monsters/Lithium/MapMarine.zsc"
 
 class Lith_UniqueID : Inventory
 {

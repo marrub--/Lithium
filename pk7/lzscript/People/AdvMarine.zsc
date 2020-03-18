@@ -8,7 +8,7 @@
  */
 
 
-class Lith_TitleMarine : ScriptedMarine;
+class Lith_AdvMarine : ScriptedMarine;
 
 default
 {

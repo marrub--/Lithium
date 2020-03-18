@@ -151,13 +151,13 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
       return true;
    } else if(act == ACT_TRM_WAIT) {
       if(faststrcmp(tok->textV, "failure") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_FAILURE, ACT_TRM_WAIT);
+         Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
          return true;
       } else if(faststrcmp(tok->textV, "finished") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_FINISHED, ACT_TRM_WAIT);
+         Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
          return true;
       } else if(faststrcmp(tok->textV, "unfinished") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_UNFINISHED, ACT_TRM_WAIT);
+         Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
          return true;
       }
    }

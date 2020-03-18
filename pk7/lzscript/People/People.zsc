@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_Person_Jacques : Lith_BasePerson {
+   default {
+      Tag "Jacques";
+      Radius 16;
+      Height 56;
+      Translation 0;
+   }
+
+   states {
+   Spawn:
+      NMA6 A -1;
+      stop;
+   }
+}
+
+class Lith_Person_Maxie : Lith_BasePerson {
+   default {
+      Tag "Maxie";
+      Radius 16;
+      Height 16;
+   }
+
+   states {
+   Spawn:
+      MAXI A -1;
+      stop;
+   }
+}
+
+/* EOF */

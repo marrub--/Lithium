@@ -78,15 +78,16 @@ ok:
 
    u32 rel = d->def.codeP - ptr;
    if(rel > 0x7F) {
-      // if A !~ B then jump +3 (continue)
+      /* if A !~ B then jump +3 (continue) */
       Dlg_SetB1(d, ptr - 2, bne ? DCD_BEQ_RI : DCD_BNE_RI);
       Dlg_SetB1(d, ptr - 1, 3);
-      // else jump $<end>
+      /* else jump $<end> */
       Dlg_SetB1(d, ptr + 0, DCD_JMP_AI);
       Dlg_SetB2(d, ptr + 1, PRG_BEG + d->def.codeP);
    } else {
-      // if A ~ B then jump +<end>
-      // else          continue
+      /* if A ~ B then jump +<end>
+       * else          continue
+       */
       Dlg_SetB1(d, ptr - 2, bne ? DCD_BNE_RI : DCD_BEQ_RI);
       Dlg_SetB1(d, ptr - 1, rel);
       for(i32 i = 0; i < 3; i++)
