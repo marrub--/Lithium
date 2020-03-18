@@ -7,8 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-gameinfo
-{
+gameinfo {
    AdvisoryTime        = 0
    DimAmount           = 0.25
    DrawReadThis        = false
@@ -51,8 +50,7 @@ gameinfo
    MenuBackButton = "lgfx/Menu/BackUp.png"
 }
 
-automap
-{
+automap {
    Base                 = "Doom"
    Background           = "#000000"
    CeilingDiffWallColor = "#008800"
@@ -66,8 +64,7 @@ automap
 
 clearskills
 
-skill tourist
-{
+skill tourist {
    ACSReturn     = 0
    ArmorFactor   = 2
    DamageFactor  = 0.1
@@ -83,8 +80,7 @@ skill tourist
    TotalInfighting
 }
 
-skill easy
-{
+skill easy {
    ACSReturn      = 1
    Aggressiveness = -0.3
    DamageFactor   = 0.9
@@ -94,8 +90,7 @@ skill easy
    SpawnFilter    = 2
 }
 
-skill normal
-{
+skill normal {
    ACSReturn   = 2
    Key         = "h"
    Name        = "$DIFF_NORMAL"
@@ -103,16 +98,14 @@ skill normal
    DefaultSkill
 }
 
-skill hard
-{
+skill hard {
    ACSReturn   = 3
    Key         = "u"
    Name        = "$DIFF_HARD"
    SpawnFilter = 4
 }
 
-skill extrahard
-{
+skill extrahard {
    ACSReturn      = 4
    Aggressiveness = 0.1
    DamageFactor   = 1.05
@@ -140,8 +133,7 @@ skill extrahard
    ReplaceActor = "Cyberdemon",       "Lith_XH_Cyberdemon"
 }
 
-skill nightmare
-{
+skill nightmare {
    ACSReturn     = 5
    ArmorFactor   = 2
    DamageFactor  = 2
@@ -155,15 +147,13 @@ skill nightmare
    NoInfighting
 }
 
-map TITLEMAP "Lithium Title"
-{
+map TITLEMAP "Lithium Title" {
    Sky1 = "LITHSKRD", 0.05
    Sky2 = "LITHSKS1"
    DoubleSky
 }
 
-map TESTMAP "Test Map"
-{
+map TESTMAP "Test Map" {
    LevelNum = 18883000
    Music    = "lmusic/dandalins story.it"
    Next     = 1
@@ -172,14 +162,12 @@ map TESTMAP "Test Map"
    DoubleSky
 }
 
-map LITHEND ""
-{
+map LITHEND "" {
    LevelNum = 1911777
    NoIntermission
 }
 
-doomednums
-{
+doomednums {
    22420 = Lith_BossReward1
    22421 = Lith_BossReward2
    22422 = Lith_BossReward3
@@ -197,8 +185,14 @@ doomednums
    22434 = Lith_MapMarker
 }
 
-damagetype Lith_NoDamage
-{
+spawnnums {
+   22420 = Lith_AdvMarine
+   22421 = Lith_TitleCyberdemon
+   22422 = Lith_TitleHellKnight
+   22423 = Lith_TitleImp
+}
+
+damagetype Lith_NoDamage {
    Factor = 0
    ReplaceFactor
 }
