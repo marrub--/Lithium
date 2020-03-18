@@ -7,24 +7,12 @@
  * ---------------------------------------------------------------------------|
  */
 
-Lith_Grey {
-   #3D3D3D #BFBFBF
-}
-
-Lith_Purple {
-   #301875 #8C3BF8
-}
-
-Lith_Green {
-   #005000 #00FF00
-}
-
-Lith_Red {
-   #1F1F1F #BF0F4A
-}
-
-Lith_Blue {
-   #111688 #3B47F8
-}
+Lith_Grey   {#3D3D3D #BFBFBF}
+Lith_Purple {#301875 #8C3BF8}
+Lith_Yellow {#000000 #FFD023}
+Lith_Pink   {#611C47 #E873AF}
+Lith_Green  {#005000 #00FF00}
+Lith_Red    {#1F1F1F #BF0F4A}
+Lith_Blue   {#111688 #3B47F8}
 
 /* EOF */
