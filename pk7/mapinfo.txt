@@ -60,6 +60,7 @@ automap {
    SpecialWallColor     = "#FF00FF"
    WallColor            = "#00FF00"
    YourColor            = "#00FF00"
+   PortalColor          = "#00AA00"
 }
 
 clearskills
