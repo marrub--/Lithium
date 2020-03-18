@@ -318,6 +318,14 @@ player/YOUVEGOTMAIL lsounds/GUI/Mail
 player/trmopen lsounds/GUI/Terminal/Open
 player/trmswitch lsounds/GUI/Terminal/Switch
 player/wings lsounds/Weapons/Wings
+$playersound assassin male *death lsounds/PlayerA/Death
+$playersound assassin male *xdeath lsounds/PlayerA/XDeath
+$playersound assassin male *pain100 lsounds/PlayerA/PainSmall
+$playersounddup assassin male *pain75 *pain100
+$playersound assassin male *pain50 lsounds/PlayerA/Pain
+$playersounddup assassin male *pain25 *pain50
+$playersound assassin male *grunt lsounds/PlayerA/Grunt
+$alias player/assassin/step player/step
 $playersound cybermage male *death lsounds/PlayerC/Death
 $playersound cybermage male *xdeath lsounds/PlayerC/XDeath
 $playersound cybermage male *pain100 lsounds/PlayerC/PainSmall
