@@ -71,6 +71,10 @@
 +i_flintlock 2 Flintlock Placeholder2 AMag A "Shell"
 ;fist fist i_flintlock fist fist fist fist fist fist
 
+:thoth
++t_redrifle 5 RedRifle Placeholder2 Ammo A "Rocket"
+;fist fist fist fist fist fist fist fist fist
+
 :any
 +wings 0 WingsOfDeath Placeholder1 None
 

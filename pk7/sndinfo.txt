@@ -725,6 +725,8 @@ $random weapons/dark/water { weapons/dark/water1 weapons/dark/water2 weapons/dar
 $random weapons/dark/fire { weapons/dark/fire1 weapons/dark/fire2 weapons/dark/fire3 }
 $random weapons/dark/impact { weapons/dark/impact1 weapons/dark/impact2 weapons/dark/impact3 }
 $limit weapons/dark/impact 0
+weapons/redrifle/fire lsounds/WeaponsT/RedRifle/Fire
+weapons/redrifle/bolt lsounds/WeaponsT/RedRifle/Bolt
 weapons/cfist/pickup lsounds/Weapons/ChargeFist/Pickup
 weapons/cfist/fire1 lsounds/Weapons/ChargeFist/Fire1
 weapons/cfist/fire2 lsounds/Weapons/ChargeFist/Fire2

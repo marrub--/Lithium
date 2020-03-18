@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ThothPlayer : Lith_Player
-{
-   default
-   {
+class Lith_ThothPlayer : Lith_Player {
+   default {
       Player.DisplayName "$LITH_CLASS_THOTH";
       Player.SoundClass "thoth";
       Player.Portrait "lgfx/Portraits/Thoth.png";
@@ -18,20 +16,18 @@ class Lith_ThothPlayer : Lith_Player
    }
 }
 
-class Lith_ItemSpriteT : Lith_ItemSprite
-{
-   default
-   {
+class Lith_ItemSpriteT : Lith_ItemSprite {
+   default {
       VisibleToPlayerClass "Lith_ThothPlayer";
    }
 }
 
-class Lith_TWeapon : Lith_Weapon
-{
-   default
-   {
+class Lith_TWeapon : Lith_Weapon {
+   default {
       Inventory.RestrictedTo "Lith_ThothPlayer";
    }
 }
+
+#include "lzscript/7_Thoth/5_RedRifle.zsc"
 
 /* EOF */
