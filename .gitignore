@@ -8,10 +8,10 @@ master/*
 *.wad.b*
 *.swp
 *.ninja*
-source/Headers/u_func.h
-source/Headers/u_names.h
-source/Headers/p_weapons.h
-source/Headers/w_moninfo.h
-source/Main/p_upgrinfo.c
-source/Main/p_weaponinfo.c
+source/include/u_func.h
+source/include/u_names.h
+source/include/p_weapons.h
+source/include/w_moninfo.h
+source/p_upgrinfo.c
+source/p_weaponinfo.c
 gzdoom-crash.log
