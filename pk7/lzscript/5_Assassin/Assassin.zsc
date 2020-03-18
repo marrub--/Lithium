@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_AssassinPlayer : Lith_Player
-{
-   default
-   {
+class Lith_AssassinPlayer : Lith_Player {
+   default {
       Player.DisplayName "$LITH_CLASS_ASSASSIN";
       Player.SoundClass "assassin";
       Player.Portrait "lgfx/Portraits/Assassin.png";
@@ -18,20 +16,18 @@ class Lith_AssassinPlayer : Lith_Player
    }
 }
 
-class Lith_ItemSpriteA : Lith_ItemSprite
-{
-   default
-   {
+class Lith_ItemSpriteA : Lith_ItemSprite {
+   default {
       VisibleToPlayerClass "Lith_AssassinPlayer";
    }
 }
 
-class Lith_AWeapon : Lith_Weapon
-{
-   default
-   {
+class Lith_AWeapon : Lith_Weapon {
+   default {
       Inventory.RestrictedTo "Lith_AssassinPlayer";
    }
 }
+
+#include "lzscript/5_Assassin/4_BurstRifle.zsc"
 
 /* EOF */

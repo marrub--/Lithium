@@ -468,6 +468,11 @@ effects/geexplosion9 lsounds/Weapons/Effects/GEExplosion/expl9
 effects/geexplosion10 lsounds/Weapons/Effects/GEExplosion/expl10
 effects/geexplosion11 lsounds/Weapons/Effects/GEExplosion/expl11
 $random effects/geexplosion { effects/geexplosion1 effects/geexplosion2 effects/geexplosion3 effects/geexplosion4 effects/geexplosion5 effects/geexplosion6 effects/geexplosion7 effects/geexplosion8 effects/geexplosion9 effects/geexplosion10 effects/geexplosion11 }
+weapons/burstrif/fire1 lsounds/WeaponsA/BurstRifle/Fire
+weapons/burstrif/fire2 lsounds/WeaponsA/BurstRifle/Fire2
+weapons/burstrif/fire3 lsounds/WeaponsA/BurstRifle/Fire3
+weapons/burstrif/bolt lsounds/WeaponsA/BurstRifle/Bolt
+$random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }
 weapons/mateba/fire lsounds/WeaponsC/Mateba/Fire
 weapons/mateba/open lsounds/WeaponsC/Mateba/Open
 weapons/mateba/eject lsounds/WeaponsC/Mateba/Eject

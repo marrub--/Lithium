@@ -20,21 +20,18 @@
 
 #define SLOT_MAX 8
 
-enum
-{
+enum {
    AT_None = 0,
    AT_NMag = 1 << 0,
    AT_Ammo = 1 << 1,
    AT_AMag = AT_NMag | AT_Ammo,
 };
 
-enum
-{
-   wf_magic = 1 << 0
+enum {
+   wf_magic = 1 << 0,
 };
 
-struct weaponinfo
-{
+struct weaponinfo {
    i32 slot;
    i32 pclass;
    str name;
@@ -46,8 +43,7 @@ struct weaponinfo
    i32 flags;
 };
 
-struct invweapon
-{
+struct invweapon {
    struct weaponinfo const *info;
    bool owned;
    i32 autoreload;
@@ -59,8 +55,7 @@ struct invweapon
    i32 ammocur;
 };
 
-struct weapondata
-{
+struct weapondata {
    i32 slot[SLOT_MAX];
    struct invweapon inv[weapon_max];
    struct invweapon *cur;

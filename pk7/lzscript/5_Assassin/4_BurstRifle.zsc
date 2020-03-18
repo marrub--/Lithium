@@ -1,0 +1,129 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison Sanderson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_BurstRifle : Lith_AWeapon;
+
+default {
+   Lith_Weapon.MagSize 40;
+   Tag "$LITH_INFO_SHORT_BurstRifle";
+   Weapon.SlotNumber 4;
+   Weapon.SlotPriority 1;
+}
+
+float m_lessen;
+
+action(Weapon) void Lith_A_FireBurstRifle() {
+   Lith_A_MagIncr();
+   A_GunFlash("DummyFlash");
+   Lith_FireBullets(2, 1, -1, 50 / invoker.m_lessen, FBF_NORANDOM);
+   Lith_A_GunSmokeSmall();
+   Lith_A_RecoilUp(1.5);
+   A_StartSound("weapons/burstrif/fire", lch_weapon);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
+   invoker.m_lessen += 0.43;
+}
+
+states(Actor) {
+SpawnPickup:
+   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
+   stop;
+}
+
+states(Weapon) {
+Ready:
+   KM64 A 0 {invoker.m_lessen = 1.0;}
+   KM64 A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   loop;
+
+Deselect:
+   KM64 A 1 A_Lower(12);
+   loop;
+
+Select:
+   KM64 A 1 A_Raise(12);
+   loop;
+
+Fire:
+   KM64 A 0 Lith_A_JumpIfMagEmpty;
+   KM64 C 1 bright Lith_A_FireBurstRifle;
+   KM64 C 1 bright offset(0, 45);
+   KM64 B 1 bright offset(0, 40);
+   KM64 B 1 bright offset(0, 38);
+   KM64 A 1 offset(0, 34);
+   KM64 AAA 1 offset(0, 32) A_ReFire;
+LoadAnim:
+   #### D 1 offset(3, 32);
+   #### D 1 offset(8, 38);
+   #### D 1 offset(12, 45);
+   #### D 1 offset(19, 60);
+   #### D 1 offset(23, 67);
+   #### D 1 offset(22, 69) A_StartSound("weapons/punct/load", lch_reload);
+   #### E 1 offset(19, 70);
+   #### E 4 offset(18, 72);
+   #### E 1 offset(17, 69);
+   #### E 1 offset(19, 67);
+   #### E 1 offset(20, 66);
+   #### E 1 offset(21, 62);
+   #### E 1 offset(20, 60);
+   #### E 1 offset(21, 63);
+   #### E 1 offset(23, 66);
+   #### E 1 offset(25, 63);
+   #### E 1 offset(24, 59);
+   #### E 1 offset(22, 57);
+   #### E 1 offset(16, 49);
+   #### E 1 offset(12, 44);
+   #### D 1 offset(10, 42);
+   #### D 1 offset(8, 40);
+   #### D 1 offset(5, 38);
+   #### D 1 offset(2, 35);
+   goto ReadySelector;
+FireEmpty:
+   #### # 1;
+   #### # 1 offset(0, 45);
+   #### # 1 offset(0, 43);
+   #### # 1 offset(0, 40) A_StartSound("weapons/empty", lch_dryweapon);
+   #### # 1 offset(0, 38);
+   #### # 1 offset(0, 36);
+   #### # 1 offset(0, 33);
+   #### # 1 offset(0, 32);
+   #### # 2;
+   goto ReadySelector;
+
+Reload:
+   #### # 0 Lith_A_JumpIfMagFull;
+   KM64 D 1;
+   KM64 D 1 offset(-2, 34);
+   KM64 D 1 offset(-4, 37);
+   KM64 E 0 Lith_A_ReloadBobUp(0.1);
+   KM64 E 1 offset(-9, 43) A_StartSound("weapons/rifle/reloadout", lch_reload);
+   KM64 E 1 offset(-12, 47) Lith_A_ReloadBobUp(0.1);
+   KM64 F 0 Lith_A_ReloadBobUp(0.1);
+   KM64 F 1 offset(-14, 52) Lith_A_DropMag("Lith_CombatRifleMagazine", "Lith_CombatRifleMagazine2", 9,0,20, frandom(0,1),frandom(-1,-4),0);
+   KM64 F 0 Lith_A_ReloadBobUp(0.1);
+   KM64 F 1 offset(-12, 55);
+   KM64 F 1 offset(-11, 57);
+   KM64 G 2 offset(-10, 60);
+   KM64 G 2 offset(-11, 60);
+   KM64 G 0 Lith_A_ReloadFinish;
+   KM64 G 0 Lith_A_ReloadBobDn(0.1);
+   KM64 H 4 offset(-13, 59) A_StartSound("weapons/rifle/reloadin", lch_reload2);
+   KM64 E 1 offset(-11, 49) Lith_A_ReloadBobDn(0.7);
+   KM64 E 1 offset(-11, 47);
+   KM64 E 1 offset(-8, 53);
+   KM64 E 1 offset(-1, 57);
+   KM64 E 1 offset(3, 56);
+   KM64 E 1 offset(8, 52);
+   KM64 D 1 offset(8, 47) A_StartSound("weapons/burstrif/bolt", lch_reload2);
+   KM64 D 1 offset(5, 43);
+   KM64 D 1 offset(3, 40);
+   KM64 D 1 offset(2, 39);
+   goto ReadySelector;
+}
+
+/* EOF */
