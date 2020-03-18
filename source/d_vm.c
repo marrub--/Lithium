@@ -338,7 +338,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
 
 script static void DialogueGUI(struct player *p)
 {
-   enum {left = 37, top = 75};
+   enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = MemSA_G(MemB2_G(VAR_NAMEL));
    str srem = MemSA_G(MemB2_G(VAR_REMOTEL));
@@ -351,12 +351,13 @@ script static void DialogueGUI(struct player *p)
    PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
 
    PrintTextStr(snam);
-   PrintText(s_lhudfont, CR_GREEN, 30,1, 35,1);
+   PrintText(s_bigupper, CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s\n\n\C-%.*s",
-                srem, CanonTime(ct_full), textC, textV);
-   PrintText(s_smallfnt, CR_WHITE, left,1, top,1);
+   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full));
+   PrintText(s_lmidfont, CR_WHITE, left,1, top,1);
+   PrintTextChr(textV, textC);
+   PrintText(s_smallfnt, CR_WHITE, left,1, texttop,1);
    ClearClip();
 
    u32 oc = MemB1_G(VAR_OPT_CNT);
