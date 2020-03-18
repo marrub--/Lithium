@@ -28,10 +28,13 @@
 
 enum Lith_UpgradeName
 {
-   UPGR_HeadsUpDisM,
+   UPGR_HeadsUpDisA,
    UPGR_HeadsUpDisC,
-   UPGR_HeadsUpDisI,
    UPGR_HeadsUpDisD,
+   UPGR_HeadsUpDisI,
+   UPGR_HeadsUpDisM,
+   UPGR_HeadsUpDisT,
+   UPGR_HeadsUpDisW,
    UPGR_Zoom,
    UPGR_VitalScan,
    UPGR_ReflexWetw,

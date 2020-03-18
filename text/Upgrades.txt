@@ -16,10 +16,13 @@
 # Name | Page | [Cost] | Cl | \Funcs | [Pr] | [.Score] | [=Group] | [%Req] |
 :Body
 # HUDs
-+HeadsUpDisM HeadsUpDisp pM \AD-R- 1 .-0.05 =HUD
++HeadsUpDisA HeadsUpDisp pA \AD-R- 1 .-0.05 =HUD
 +HeadsUpDisC HeadsUpDisp pC \AD-R- 1 .-0.05 =HUD
-+HeadsUpDisI HeadsUpDisp pI \AD-R- 1 .-0.05 =HUD
 +HeadsUpDisD HeadsUpDisp pD \AD-R- 1 .-0.05 =HUD
++HeadsUpDisI HeadsUpDisp pI \AD-R- 1 .-0.05 =HUD
++HeadsUpDisM HeadsUpDisp pM \AD-R- 1 .-0.05 =HUD
++HeadsUpDisT HeadsUpDisp pT \AD-R- 1 .-0.05 =HUD
++HeadsUpDisW HeadsUpDisp pW \AD-R- 1 .-0.05 =HUD
 
 # All classes
 +Zoom      N/A          gA \-DUR-
