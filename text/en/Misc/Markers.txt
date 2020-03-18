@@ -15,6 +15,16 @@ Some classes can double-jump or temporarily fly.
 
 Try jumping ({+jump}) or running ({+speed}) mid-air to get up to the platform.
 
+@@ \#ADVICE_Dialogue
+Some people and things are not enemies, at least not right now.
+
+Walk up to the robot and press {+use} on it to talk with it.
+
+Dialogues are not necessary to progress.
+
+@@ \#ADVICE_Crouch
+Press {+crouch} to crouch into the vent.
+
 == \#MARKER_Unknown | Unknown
 
 == \#MARKER_M1A1_EscapePod   | Escape Pod 02C3

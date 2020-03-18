@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------------|
+/* -*-Agw-LithDlg-*-----------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison Sanderson. Attribution is encouraged, though not required.
@@ -10,13 +10,11 @@
 /* ------------------------------------------------------------------------- */
 terminal 1;
 
-unfinished
-{
+unfinished {
    remote "OCS@localhost"
 
    if class pC {
-      logon "LogonAOF"
-      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+      logon "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
 
       pict 1 {
          @@
@@ -52,11 +50,9 @@ unfinished
          @@
       }
 
-      logoff "LogonAOF"
-      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+      logoff "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
    } else {
-      logon "UAC"
-      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logon "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
 
       pict 1 {
          `[\cuINFO\c-] pragmat \cqENABLE
@@ -85,20 +81,17 @@ unfinished
          @@
       }
 
-      logoff "UAC"
-      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logoff "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
    }
 }
 
 /* ------------------------------------------------------------------------- */
 terminal 2;
 
-unfinished
-{
+unfinished {
    remote "data@localhost"
 
-   logon "LogonData"
-   `\cu[Ship Data Terminal]
+   logon "LogonData" `\cu[Ship Data Terminal]
 
    info {
       `[Viewing:\cd/sys/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
@@ -113,8 +106,7 @@ unfinished
       `  and I have foregone all needs to serve them
    }
 
-   logoff "LogonData"
-   `\cu[Ship Data Terminal]
+   logoff "LogonData" `\cu[Ship Data Terminal]
 
    teleport_intralevel 4
 }
@@ -122,13 +114,11 @@ unfinished
 /* ------------------------------------------------------------------------- */
 terminal 3;
 
-unfinished
-{
+unfinished {
    remote "OCS@localhost"
 
    if class pC {
-      logon "LogonAOF"
-      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+      logon "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
 
       pict 3 {
          @@
@@ -142,22 +132,16 @@ unfinished
          @@
       }
 
-      logoff "LogonAOF"
-      `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
-
-      teleport_interlevel 18883002
+      logoff "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
    } else {
-      logon "UAC"
-      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logon "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
 
-      pict 1
-      `\cgTeleport when ready.
+      pict 1 `\cgTeleport when ready.
 
-      logoff "UAC"
-      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
-
-      teleport_interlevel 442
+      logoff "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
    }
+
+   teleport_interlevel 442
 }
 
 /* EOF */

@@ -9,6 +9,7 @@ identifier,default
 :BIP:Sym43,lgfx/BIP/Sym43.png
 :Dialogue:Back,lgfx/Dialogue/Back.png
 :Dialogue:IconAOF,lgfx/Dialogue/IconAOF.png
+:Dialogue:IconMaxie,lgfx/Dialogue/IconMaxie.png
 :Dialogue:IconNone,lgfx/Dialogue/IconNone.png
 :Dialogue:IconUAC,lgfx/Dialogue/IconUAC.png
 :Dialogue:SelectBack,lgfx/Dialogue/SelectBack.png
