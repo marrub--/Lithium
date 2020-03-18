@@ -9,6 +9,8 @@
 
 class Lith_RedRifle : Lith_TWeapon;
 
+const _ammo_used = 70;
+
 default {
    Tag "$LITH_INFO_SHORT_RedRifle";
    Weapon.SlotNumber 5;
@@ -18,10 +20,10 @@ default {
 }
 
 action(Weapon) void Lith_A_FireRedRifle() {
-   A_TakeInventory("Lith_RocketAmmo", 10, TIF_NOTAKEINFINITE);
+   A_TakeInventory("Lith_Mana", _ammo_used, TIF_NOTAKEINFINITE);
    A_GunFlash("DummyFlash");
    Lith_FireBullets(0, 0, -1, 300, FBF_NORANDOM);
-   Lith_A_GunSmokeSmall();
+   Lith_A_GunSmoke();
    Lith_A_RecoilUp(4);
    A_StartSound("weapons/redrifle/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -47,7 +49,7 @@ Select:
    loop;
 
 Fire:
-   PISG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") < 10, "FireEmpty");
+   PISG A 0 A_JumpIf(CountInv("Lith_Mana") < _ammo_used, "FireEmpty");
    PISG A 10 Lith_A_FireRedRifle;
    PISG A 30 A_StartSound("weapons/redrifle/bolt", lch_weapon2);
    goto ReadySelector;

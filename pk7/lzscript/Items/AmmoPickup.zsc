@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Shell : Lith_AmmoItem replaces Shell
-{
-   default
-   {
+class Lith_Shell : Lith_AmmoItem replaces Shell {
+   default {
       Inventory.PickupSound "player/pickup/shells";
       Lith_BasicPickup.LogName "Shell", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -18,18 +16,15 @@ class Lith_Shell : Lith_AmmoItem replaces Shell
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
    }
 
-   states
-   {
+   states {
    Spawn:
       SHEL A -1;
       stop;
    }
 }
 
-class Lith_ShellBox : Lith_AmmoItem replaces ShellBox
-{
-   default
-   {
+class Lith_ShellBox : Lith_AmmoItem replaces ShellBox {
+   default {
       Inventory.PickupSound "player/pickup/shellb";
       Lith_BasicPickup.LogName "ShellBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -37,18 +32,15 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
    }
 
-   states
-   {
+   states {
    Spawn:
       SBOX A -1;
       stop;
    }
 }
 
-class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo
-{
-   default
-   {
+class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo {
+   default {
       Inventory.PickupSound "player/pickup/rockets";
       Lith_BasicPickup.LogName "Rocket", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -56,18 +48,15 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
    }
 
-   states
-   {
+   states {
    Spawn:
       ROCK A -1;
       stop;
    }
 }
 
-class Lith_RocketBox : Lith_AmmoItem replaces RocketBox
-{
-   default
-   {
+class Lith_RocketBox : Lith_AmmoItem replaces RocketBox {
+   default {
       Inventory.PickupSound "player/pickup/rocketb";
       Lith_BasicPickup.LogName "RocketBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -75,18 +64,15 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
    }
 
-   states
-   {
+   states {
    Spawn:
       BROK A -1;
       stop;
    }
 }
 
-class Lith_Cell : Lith_AmmoItem replaces Cell
-{
-   default
-   {
+class Lith_Cell : Lith_AmmoItem replaces Cell {
+   default {
       Inventory.PickupSound "player/pickup/cells";
       Lith_BasicPickup.LogName "Cell", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -94,18 +80,15 @@ class Lith_Cell : Lith_AmmoItem replaces Cell
       Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
    }
 
-   states
-   {
+   states {
    Spawn:
       CELL A -1;
       stop;
    }
 }
 
-class Lith_CellPack : Lith_AmmoItem replaces CellPack
-{
-   default
-   {
+class Lith_CellPack : Lith_AmmoItem replaces CellPack {
+   default {
       Inventory.PickupSound "player/pickup/cellb";
       Lith_BasicPickup.LogName "CellBox", 2;
       Lith_BasicPickup.LogType msg_ammo;
@@ -114,8 +97,7 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack
       Lith_AmmoItem.Give2 "Lith_CannonAmmo", AmmoAmt_CannonPack;
    }
 
-   states
-   {
+   states {
    Spawn:
       CELP A -1;
       stop;
@@ -124,65 +106,69 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack
 
 class Lith_AmmoItem : Lith_ScoreItem abstract;
 
-private meta class<Inventory> m_Type, m_Type2;
-private int m_Amount, m_Amount2;
+private meta class<Inventory> m_type, m_type2;
+private int m_amount, m_amount2;
 
-property Give:  m_Type,  m_Amount;
-property Give2: m_Type2, m_Amount2;
+property Give:  m_type,  m_amount;
+property Give2: m_type2, m_amount2;
 
-override bool Lith_CanGiveScore() {return !lith_sv_noscoreammo;}
+override bool lith_canGiveScore() {return !lith_sv_noscoreammo;}
 
-private bool Lith_AmmoNotFull(Actor mo)
-{
-   let i1 = mo.FindInventory(m_Type);
-   let i2 = mo.FindInventory(m_Type2);
-   return m_Type  && m_Amount  && (!i1 || i1.Amount < i1.MaxAmount) ||
-          m_Type2 && m_Amount2 && (!i2 || i2.Amount < i2.MaxAmount);
+private bool lith_ammoNotFull(Actor mo) {
+   let t1 = m_type;
+   let t2 = m_type2;
+
+   if(mo is "Lith_ThothPlayer") {
+      if(t1) t1 = "Lith_Mana";
+      if(t2) t2 = "Lith_Mana";
+   }
+
+   let i1 = mo.findInventory(t1);
+   let i2 = mo.findInventory(t2);
+   return m_type  && m_amount  && (!i1 || i1.amount < i1.maxAmount) ||
+          m_type2 && m_amount2 && (!i2 || i2.amount < i2.maxAmount);
 }
 
-override bool CanPickup(Actor mo)
-{
-   if(Super.CanPickup(mo))
-      return !lith_sv_nofullammo || Lith_AmmoNotFull(mo);
-   else
+override bool canPickup(Actor mo) {
+   if(super.canPickup(mo)) {
+      return !lith_sv_nofullammo || lith_ammoNotFull(mo);
+   } else {
       return false;
+   }
 }
 
-private void Lith_AbsorbAmmo(Actor mo, class<Inventory> typ, in out int amt)
-{
+private void lith_absorbAmmo(Actor mo, class<Inventory> typ, in out int amt) {
    if(!typ) return;
 
-   let it = mo.FindInventory(typ);
-   if(!it) {it = Inventory(Spawn(typ)); it.Amount = 0; it.CallTryPickup(mo);}
+   if(mo is "Lith_ThothPlayer") {typ = "Lith_Mana";}
 
-   if((it.Amount + amt - it.MaxAmount) <= 0)
-   {
+   let it = mo.findInventory(typ);
+   if(!it) {it = Inventory(spawn(typ)); it.amount = 0; it.callTryPickup(mo);}
+
+   if((it.amount + amt - it.maxAmount) <= 0) {
       /* less than or equals max, absorb the whole item */
-      it.Amount += amt;
+      it.amount += amt;
       amt        = 0;
-   }
-   else
-   {
+   } else {
       /* more than max, absorb some of the item */
-      amt      -= it.MaxAmount - it.Amount;
-      it.Amount = it.MaxAmount;
+      amt      -= it.maxAmount - it.amount;
+      it.amount = it.maxAmount;
    }
 }
 
-override bool TryPickup(in out Actor mo)
-{
-   Lith_AbsorbAmmo(mo, m_Type,  m_Amount);
-   Lith_AbsorbAmmo(mo, m_Type2, m_Amount2);
+override bool tryPickup(in out Actor mo) {
+   lith_absorbAmmo(mo, m_type,  m_amount);
+   lith_absorbAmmo(mo, m_type2, m_amount2);
 
-   if(lith_sv_noscoreammo && lith_sv_nofullammo)
-   {
-      if(m_Amount == 0 && m_Amount2 == 0)
-         return Super.TryPickup(mo);
-      else
+   if(lith_sv_noscoreammo && lith_sv_nofullammo) {
+      if(m_amount == 0 && m_amount2 == 0) {
+         return super.tryPickup(mo);
+      } else {
          return true;
+      }
+   } else {
+      return super.tryPickup(mo);
    }
-   else
-      return Super.TryPickup(mo);
 }
 
 /* EOF */
