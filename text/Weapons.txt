@@ -76,7 +76,8 @@
 ;fist fist fist fist fist a_burstrif fist fist fist
 
 :thoth
-+t_redrifle 5 RedRifle Placeholder2 Ammo O "Mana"
++t_riotshot 3 RiotShotgun Placeholder2 Ammo O "Mana"
++t_redrifle 5 RedRifle    Placeholder2 Ammo O "Mana"
 ;fist fist fist fist fist fist fist fist fist
 
 :any

@@ -28,6 +28,7 @@ class Lith_TWeapon : Lith_Weapon {
    }
 }
 
+#include "lzscript/7_Thoth/3_RiotShotgun.zsc"
 #include "lzscript/7_Thoth/5_RedRifle.zsc"
 
 /* EOF */

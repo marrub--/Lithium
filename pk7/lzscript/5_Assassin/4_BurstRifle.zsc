@@ -21,7 +21,7 @@ float m_lessen;
 action(Weapon) void Lith_A_FireBurstRifle() {
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
-   Lith_FireBullets(2, 1, -1, 50 / invoker.m_lessen, FBF_NORANDOM);
+   Lith_FireBullets(2, 1, -1, int(50 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(1.5);
    A_StartSound("weapons/burstrif/fire", lch_weapon);
