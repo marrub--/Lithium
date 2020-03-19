@@ -7,52 +7,148 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_Franca : Lith_Rocket {
+   default {
+      Speed 30;
+      Damage 50;
+   }
+}
+
+class Lith_Sophia : Lith_Rocket {
+   default {
+      Speed 30;
+      Damage 30;
+      +SEEKERMISSILE
+   }
+
+   states {
+   SpawnLoop:
+      #### # 0 Lith_A_SpawnRocketTrail;
+      #### # 1 bright A_SeekerMissile(0, 2, SMF_LOOK);
+      loop;
+   }
+}
+
 class Lith_DualRocket : Lith_DWeapon;
 
-default
-{
+enum Lith_DualRocketPSprites {
+   _psp_franca_g = 40,
+   _psp_franca_f,
+   _psp_sophia_g,
+   _psp_sophia_f,
+
+   _psp_flags = PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE,
+}
+
+default {
    Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
 }
 
-int m_Side;
+bool m_side;
 
-states(Actor)
-{
+action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
+   A_GunFlash("DummyFlash");
+   A_FireProjectile(cl, 0, true, xofs, -2);
+   A_TakeInventory("Lith_RocketAmmo", 2);
+   Lith_A_RecoilUp(1.2);
+}
+
+action(Weapon) void Lith_A_Offset(bool left, int x, int y) {
+   int which = left ? _psp_franca_g : _psp_sophia_g;
+   A_OverlayOffset(which + 0, x, y);
+   A_OverlayOffset(which + 1, x, y);
+}
+
+states(Actor) {
 SpawnPickup:
    TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
    stop;
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
-   GRLG A 1 Lith_A_Ready;
+   TNT1 A 1 Lith_A_Ready;
    loop;
+ReadyFranca:
+   FRAN A 1 A_JumpIf(health < 1, "Null");
+   wait;
+ReadySophia:
+   SOPH A 1 A_JumpIf(health < 1, "Null");
+   wait;
 
 Deselect:
-   GRLG A 1 A_Lower(18);
+   TNT1 A 1 A_Lower(18);
    loop;
 
 Select:
-   GRLG A 1 A_Raise(12);
+   TNT1 A 0 {
+      A_Overlay(_psp_franca_g, "ReadyFranca");
+      A_Overlay(_psp_sophia_g, "ReadySophia");
+      A_OverlayFlags(_psp_franca_g, _psp_flags, true);
+      A_OverlayFlags(_psp_sophia_g, _psp_flags, true);
+   }
+   TNT1 A 1 A_Raise(12);
    loop;
 
 Fire:
-   GRLG A 0 {
-      invoker.m_Side = !invoker.m_Side;
-      return invoker.m_Side ? ResolveState("FireLeft") : ResolveState("FireRight");
+   TNT1 A 0 A_JumpIf(countInv("Lith_RocketAmmo") < 1, "FireEmpty");
+   TNT1 A 10 {
+      invoker.m_side = !invoker.m_side;
+      if(invoker.m_side) A_Overlay(_psp_franca_g, "FireFranca");
+      else               A_Overlay(_psp_sophia_g, "FireSophia");
    }
-FireLeft:
-   GRLG B 2 bright A_FireProjectile("Lith_Rocket", 0, true, -5, -2);
-   GRLG CDE 3 bright;
-   goto FireDone;
-FireRight:
-   GRLG B 2 bright A_FireProjectile("Lith_Rocket", 0, true, 5, -2);
-   GRLG CDE 3 bright;
-FireDone:
-   GRLG A 0 A_ReFire;
+   TNT1 A 0 A_ReFire;
+   goto ReadySelector;
+FireFranca:
+   FRAN A 0 A_Overlay(_psp_franca_f, "FlashFranca");
+   FRAN A 0 A_StartSound("weapons/dualrocket/firel", lch_weapon);
+   FRAN A 1 Lith_A_FireRocket("Lith_Franca", -14);
+   goto FireOffsetsFranca;
+FireSophia:
+   SOPH A 0 A_Overlay(_psp_sophia_f, "FlashSophia");
+   SOPH A 0 A_StartSound("weapons/dualrocket/firer", lch_weapon2);
+   SOPH A 1 Lith_A_FireRocket("Lith_Sophia", 14);
+   goto FireOffsetsSophia;
+FlashFranca:
+   FRAN BCD 3 bright;
+   stop;
+FlashSophia:
+   SOPH BCD 3 bright;
+   stop;
+FireEmptyFranca:
+   FRAN A 0;
+FireOffsetsFranca:
+   #### # 2 Lith_A_Offset(true,  0, 9);
+   #### # 1 Lith_A_Offset(true, -1, 13);
+   #### # 1 Lith_A_Offset(true, -2, 11);
+   #### # 1 Lith_A_Offset(true, -2, 8);
+   #### # 1 Lith_A_Offset(true, -2, 6);
+   #### # 1 Lith_A_Offset(true, -1, 4);
+   #### # 1 Lith_A_Offset(true,  0, 1);
+   #### # 1 Lith_A_Offset(true,  0, 0);
+   goto ReadyFranca;
+FireEmptySophia:
+   SOPH A 0;
+FireOffsetsSophia:
+   #### # 2 Lith_A_Offset(false, 0, 9);
+   #### # 1 Lith_A_Offset(false, 1, 13);
+   #### # 1 Lith_A_Offset(false, 2, 11);
+   #### # 1 Lith_A_Offset(false, 2, 8);
+   #### # 1 Lith_A_Offset(false, 2, 6);
+   #### # 1 Lith_A_Offset(false, 1, 4);
+   #### # 1 Lith_A_Offset(false, 0, 1);
+   #### # 1 Lith_A_Offset(false, 0, 0);
+   goto ReadySophia;
+FireEmpty:
+   #### # 6 {
+      invoker.m_side = !invoker.m_side;
+      if(invoker.m_side) A_Overlay(_psp_franca_g, "FireEmptyFranca");
+      else               A_Overlay(_psp_sophia_g, "FireEmptySophia");
+   }
+   #### # 9 A_StartSound("weapons/rocket/empty", lch_dryweapon);
+   #### #### 1 A_ReFire;
    goto ReadySelector;
 }
 

@@ -58,22 +58,22 @@ SpawnPickup:
 states(Weapon)
 {
 Ready:
-   SHT2 A 1 Lith_A_Ready;
+   PISG A 1 Lith_A_Ready;
    loop;
 
 Deselect:
-   SHT2 A 1 A_Lower(12);
+   PISG A 1 A_Lower(12);
    loop;
 
 Select:
-   SHT2 A 1 A_Raise(12);
+   PISG A 1 A_Raise(12);
    loop;
 
 Fire:
-   SHT2 A 1 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
-   SHT2 A 1 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
-   SHT2 A 1 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
-   SHT2 A 34;
+   PISG A 3 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
+   PISG A 3 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
+   PISG A 3 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
+   PISG A 34;
    goto ReadySelector;
 }
 

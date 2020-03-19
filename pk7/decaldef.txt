@@ -311,6 +311,8 @@ generator Lith_RifleGrenade          Scorch
 generator Lith_8BallGrenade          Scorch
 generator Lith_MakarovGrenade        Scorch
 generator Lith_Rocket                Scorch
+generator Lith_Franca                Scorch
+generator Lith_Sophia                Scorch
 generator Lith_HomingRocket          Scorch
 generator Lith_SpiralRocket          Scorch
 generator Lith_OmegaRailDummy        Scorch

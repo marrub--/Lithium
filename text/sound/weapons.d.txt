@@ -45,6 +45,18 @@ weapons {
       magin  MagIn       # //
    }
 
+   dualrocket {
+      == lsounds/WeaponsD/DualRocket
+      firel1 FireLeft   # ???
+      firel2 FireLeft2  # ???
+      firel3 FireLeft3  # ???
+      firer1 FireRight  # ???
+      firer2 FireRight2 # ???
+      firer3 FireRight3 # ???
+      $random firel {firel1, firel2, firel3,}
+      $random firer {firer1, firer2, firer3,}
+   }
+
    fatmac {
       == lsounds/WeaponsD/FatMac
       fire Fire # Halo 3, Half-Life 2

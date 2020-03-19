@@ -13,9 +13,12 @@
  */
 $rolloff * custom 0 2025
 $pitchshiftrange 2
-explosion DSBAREXP
+explosion1 lsounds/Explosion
+explosion2 lsounds/Explosion2
+explosion3 lsounds/Explosion3
+$random explosion { explosion1 explosion2 explosion3 }
 $limit explosion 0
-$attenuation explosion 0.7
+$attenuation explosion 0.5
 silence lsounds/Silence
 MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM
 YOUSONOFABITCH lsounds/YOUSONOFABITCH
@@ -596,6 +599,14 @@ weapons/minigun/place lsounds/WeaponsD/Minigun/RotatePlace
 weapons/minigun/empty lsounds/WeaponsD/Minigun/Empty
 weapons/minigun/magout lsounds/WeaponsD/Minigun/MagOut
 weapons/minigun/magin lsounds/WeaponsD/Minigun/MagIn
+weapons/dualrocket/firel1 lsounds/WeaponsD/DualRocket/FireLeft
+weapons/dualrocket/firel2 lsounds/WeaponsD/DualRocket/FireLeft2
+weapons/dualrocket/firel3 lsounds/WeaponsD/DualRocket/FireLeft3
+weapons/dualrocket/firer1 lsounds/WeaponsD/DualRocket/FireRight
+weapons/dualrocket/firer2 lsounds/WeaponsD/DualRocket/FireRight2
+weapons/dualrocket/firer3 lsounds/WeaponsD/DualRocket/FireRight3
+$random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
+$random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
 weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire
 $alias weapons/fatmac/empty weapons/cshotgun/empty
 $alias weapons/fatmac/boltback weapons/sniper/boltback
