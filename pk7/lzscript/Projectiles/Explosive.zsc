@@ -7,36 +7,60 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Explosive : Actor;
-
-bool CheckMarathon(bool target = true)
-   {return ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777, target);}
-
-void Lith_A_ExplodeSound(int chan = lch_body2, bool target = true)
-{
-   if(CheckMarathon(target)) A_StartSound("marathon/explode", chan);
-   else                      A_StartSound("explosion",        chan);
+class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
+   default {
+      Alpha 0.1;
+   }
 }
 
-state Lith_A_JumpExplosion(bool target = true)
-{
+class Lith_Explosive : Actor;
+
+bool CheckMarathon(bool target = true) {
+   return ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777, target);
+}
+
+void Lith_A_ExplodeSound(int chan = lch_body2, bool target = true) {
+   double p = FRandom(0.9, 1.1);
+   if(CheckMarathon(target)) A_StartSound("marathon/explode", chan, pitch: p);
+   else                      A_StartSound("explosion",        chan, pitch: p);
+}
+
+state Lith_A_JumpExplosion(bool target = true) {
    if(CheckMarathon(target)) return ResolveState("ExplodeMarathon");
    else                      return ResolveState("Explode");
 }
 
-state Lith_A_DoExplosion()
-{
+state Lith_A_DoExplosion() {
+   for(int i = 0, m = random(10, 20); i < m; i++)
+      A_SpawnItemEx("Lith_HotEmber", FRandom(-4, 4), FRandom(-4, 4), FRandom(-4, 4), FRandom(-8, 8), FRandom(-8, 8), FRandom(-4, 14), 0, SXF_NOCHECKPOSITION);
+
+   for(int i = 0; i < 50; i++) {
+      A_SpawnParticle("FFFF00", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+         FRandom(-8,8), FRandom(-8,8), FRandom(-2,2),
+         FRandom( 0,1), FRandom(-5,5), FRandom( 5,10),
+         0, 0, FRandom(-0.5, -3),
+         1.0, -1);
+
+      A_SpawnParticle("444444", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+         FRandom(-8,8), FRandom(-8,8), FRandom(-2,2),
+         FRandom( 0,1), FRandom(-5,5), FRandom( 5,10),
+         0, 0, FRandom(-0.5, -3),
+         1.0, -1);
+   }
+
+   A_SpawnItemEx("Lith_ExplosionAfterSmoke", FRandom(-1,1), FRandom(-1,1), FRandom(-2,2),
+      FRandom(-0.5,0.5), FRandom(-0.5,0.5), FRandom(-0.2,0.2));
+
    bNOGRAVITY = true;
    Lith_A_ExplodeSound();
    return Lith_A_JumpExplosion();
 }
 
-states
-{
+states {
 Explode:
-   MEXP AB 2 bright light("Lith_Explode1");
-   MEXP CD 3 bright light("Lith_Explode2");
-   MEXP EF 4 bright light("Lith_Explode3");
+   MEXP AB 1 bright light("Lith_Explode1");
+   MEXP CD 2 bright light("Lith_Explode2");
+   MEXP EF 3 bright light("Lith_Explode3");
    stop;
 ExplodeMarathon:
    MA7G BC 4 bright light("Lith_Explode1");

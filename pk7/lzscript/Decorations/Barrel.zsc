@@ -7,43 +7,40 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
-{
-   default
-   {
-      Health 60;
-      PainChance 255;
-      PainSound "misc/barrel/hit";
-   }
-
-   states
-   {
-   Spawn:
-      BAR1 ABCDEFGHIJKLM 2;
-      loop;
-   Pain:
-      BAR1 N 5 A_Pain;
-      goto Spawn;
-   Death:
-      BAR1 OP 5;
-      BAR1 Q 3 bright;
-      BAR1 R 2 bright A_Scream;
-      BAR1 S 3 bright A_Explode;
-      BAR1 TUV 4 bright;
-      BAR1 W 3 bright;
-      TNT1 A 10;
-      TNT1 A 1050 A_BarrelDestroy;
-      TNT1 A 5 A_Respawn;
-      wait;
+class Lith_BoomBarrel : ExplosiveBarrel {
+   default {
+      DeathSound "misc/booom";
    }
 }
 
-class Lith_BoomBarrel : ExplosiveBarrel
+class Lith_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel;
+
+default {
+   Health 60;
+   PainChance 255;
+   PainSound "misc/barrel/hit";
+   DeathSound "explosion";
+}
+
+states
 {
-   default
-   {
-      DeathSound "misc/booom";
-   }
+Spawn:
+   BAR1 ABCDEFGHIJKLM 2;
+   loop;
+Pain:
+   BAR1 N 5 A_Pain;
+   goto Spawn;
+Death:
+   BAR1 OP 5;
+   BAR1 Q 3 bright;
+   BAR1 R 2 bright A_Scream;
+   BAR1 S 3 bright A_Explode;
+   BAR1 TUV 4 bright;
+   BAR1 W 3 bright;
+   TNT1 A 10;
+   TNT1 A 1050 A_BarrelDestroy;
+   TNT1 A 5 A_Respawn;
+   wait;
 }
 
 /* EOF */

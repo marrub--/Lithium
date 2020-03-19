@@ -7,9 +7,12 @@
 ## ---------------------------------------------------------------------------|
 
 # World
-explosion DSBAREXP
+explosion1 lsounds/Explosion
+explosion2 lsounds/Explosion2
+explosion3 lsounds/Explosion3
+$random explosion {explosion1, explosion2, explosion3,}
 $limit explosion 0
-$attenuation explosion 0.7
+$attenuation explosion 0.5
 
 == lsounds
 silence Silence # //

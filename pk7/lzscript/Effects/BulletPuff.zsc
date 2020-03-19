@@ -79,10 +79,8 @@ class Lith_HotEmberTrail : Actor
    }
 }
 
-class Lith_BulletAfterSmoke : Actor
-{
-   default
-   {
+class Lith_BulletAfterSmoke : Actor {
+   default {
       RenderStyle "Add";
       Alpha 0.01;
       Speed 20;
@@ -96,25 +94,22 @@ class Lith_BulletAfterSmoke : Actor
       +DONTSPLASH
    }
 
-   float m_SX, m_SY;
+   float m_sx, m_sy;
 
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      Scale.X *= FRandom(2, 6);
-      Scale.Y *= FRandom(0.4, 1.5);
-      m_SX = FRandom(0.005, 0.01);
-      m_SY = FRandom(0.001, 0.005);
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      scale.x *= FRandom(2, 6);
+      scale.y *= FRandom(0.4, 1.5);
+      m_sx = FRandom(0.005, 0.01);
+      m_sy = FRandom(0.001, 0.005);
    }
 
-   override void Tick()
-   {
-      Super.Tick();
+   override void tick() {
+      super.tick();
 
-      if(!isFrozen())
-      {
-         Scale.X += m_SX;
-         Scale.Y += m_SY;
+      if(!isFrozen()) {
+         scale.x += m_sx;
+         scale.y += m_sy;
       }
    }
 
@@ -143,9 +138,9 @@ class Lith_BulletTracer : FastProjectile
       +DONTSPLASH
    }
 
-   override void PostBeginPlay()
+   override void postBeginPlay()
    {
-      Super.PostBeginPlay();
+      super.postBeginPlay();
       int n = RandomPick(45, -45);
       Roll = FRandom(n - 2, n + 2);
    }
@@ -168,13 +163,13 @@ class Lith_BulletRicochetSpark : Actor
       +DONTSPLASH
    }
 
-   override void PostBeginPlay()
+   override void postBeginPlay()
    {
-      Super.PostBeginPlay();
+      super.postBeginPlay();
       Roll = FRandom(0, 359);
       Pitch = FRandom(-5, 5);
       double sc = FRandom(.5, 1);
-      Scale = (sc, sc);
+      scale = (sc, sc);
    }
 
    states
@@ -228,9 +223,9 @@ void Lith_A_RicochetFX()
       1.0, -1);
 }
 
-override void PostBeginPlay()
+override void postBeginPlay()
 {
-   Super.PostBeginPlay();
+   super.postBeginPlay();
    Lith_A_SmokeFX();
    Lith_A_RicochetFX();
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_TorgueMode, true))
