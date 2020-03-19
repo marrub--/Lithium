@@ -21,7 +21,7 @@ double m_lessen;
 action(Weapon) void Lith_A_FireBurstRifle() {
    double p = clamp(3 / invoker.m_lessen, 0.5, 1.0);
    Lith_A_MagIncr();
-   A_GunFlash("DummyFlash");
+   A_GunFlash();
    Lith_FireBullets(2, 1, -1, int(50 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(1.5);
@@ -50,12 +50,16 @@ Select:
    KM64 A 1 A_Raise(12);
    loop;
 
+Flash:
+   KM64 C 2 bright A_AlertMonsters;
+   KM64 B 2 bright;
+   stop;
 Fire:
    KM64 A 0 Lith_A_JumpIfMagEmpty;
-   KM64 C 1 bright Lith_A_FireBurstRifle;
-   KM64 C 1 bright offset(0, 45);
-   KM64 B 1 bright offset(0, 40);
-   KM64 B 1 bright offset(0, 38);
+   KM64 A 1 Lith_A_FireBurstRifle;
+   KM64 A 1 offset(0, 45);
+   KM64 A 1 offset(0, 40);
+   KM64 A 1 offset(0, 38);
    KM64 A 1 offset(0, 34);
    KM64 AAA 1 offset(0, 32) A_ReFire;
 LoadAnim:
