@@ -36,7 +36,7 @@ static void BagItem_Place(struct item *_item, struct container *cont)
    item->content.user = item->user;
 
    for_item(item->content)
-      it->Place(it, &item->content);
+      if(it->Place) it->Place(it, &item->content);
 }
 
 script
@@ -45,7 +45,7 @@ static void BagItem_Destroy(struct item *_item)
    struct bagitem *item = (struct bagitem *)_item;
 
    for_item(item->content)
-      it->Destroy(it);
+      if(it->Destroy) it->Destroy(it);
 
    P_Item_Destroy(&item->item);
 }
@@ -178,7 +178,7 @@ void P_Inv_PQuit(struct player *p)
 {
    for(i32 i = 0; i < _inv_num; i++)
    {
-      for_item(p->inv[i]) it->Destroy(it);
+      for_item(p->inv[i]) if(it->Destroy) it->Destroy(it);
       p->inv[i].user = nil;
    }
 
@@ -272,7 +272,7 @@ bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y)
 {
    if(!ItemCanPlace(cont, item, x, y)) return false;
 
-   item->Place(item, cont);
+   if(item->Place) item->Place(item, cont);
 
    item->x = x;
    item->y = y;
@@ -386,7 +386,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 
       if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", Pre(btnclear))) {
          if(sel->scr) P_Scr_Give(p, sel->scr, true);
-         sel->Destroy(sel);
+         if(sel->Destroy) sel->Destroy(sel);
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
       }
    }
@@ -433,7 +433,7 @@ void Sc_ItemDetach(struct item *item)
 {
    Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
 
-   item->Destroy(item);
+   if(item->Destroy) item->Destroy(item);
 }
 
 script_str ext("ACS") addr("Lith_ItemCanPlace")

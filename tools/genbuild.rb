@@ -88,9 +88,9 @@ fp << <<_end_
 #{TXT   } = text
 #{IR    } = bin
 #{IRLITH} = $#{IR}/lithium
-#{TARGET} = --target-engine=ZDoom
+#{TARGET} = --target-engine=ZDoom --target-format=ACSE --func-minimum ScriptI 17000
 #{WARN  } = --warn-all --no-warn-parentheses
-#{LFLAGS} = $#{TARGET} --bc-zdacs-init-delay #{LD_FLAGS}
+#{LFLAGS} = $#{TARGET} --bc-opt --bc-zdacs-init-delay #{LD_FLAGS}
 #{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{CC_FLAGS}
 #{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
 #{INITSC} = --bc-zdacs-init-script-name
@@ -102,7 +102,7 @@ rule makelib
  command = gdcc-makelib $#{MFLAGS} -c $#{TYPE} -o $out
  description = MakeLib $out
 rule ld
- command = gdcc-ld $#{LFLAGS} --alloc-min Sta "" $#{STA} $in -o $out --bc-zdacs-dump-ScriptI $#{NUMOUT} --func-minimum ScriptI 17000
+ command = gdcc-ld $#{LFLAGS} --alloc-min Sta "" $#{STA} $in -o $out --bc-zdacs-dump-ScriptI $#{NUMOUT}
  description = LD $out
 rule fs
  command = tools/hashfs.rb #{HSFSIN.join " "}

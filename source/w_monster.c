@@ -130,10 +130,7 @@ static void BaseMonsterLevel(dmon_t *m)
    k32 rn2 = ACS_RandomFixed(1, MAXLEVEL);
    k32 bias;
 
-   switch(game) {
-      case Game_Episodic: bias = mapscleared / 10.0; break;
-      default:            bias = mapscleared / 40.0; break;
-   }
+   bias = mapscleared / 40.0;
 
    for_player() {rn2 += p->attr.level / 2.0; break;}
 
@@ -142,23 +139,16 @@ static void BaseMonsterLevel(dmon_t *m)
    bias += ACS_GetCVar(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
-   if(m->mi->flags & mif_angelic)
-   {
+   if(m->mi->flags & mif_angelic) {
       m->rank  = 7;
       m->level = 77;
-   }
-   else if(m->mi->flags & mif_dark)
-   {
+   } else if(m->mi->flags & mif_dark) {
       m->rank  = 6;
       m->level = 66;
-   }
-   else if(fun & lfun_ragnarok)
-   {
+   } else if(fun & lfun_ragnarok) {
       m->rank  = MAXRANK;
       m->level = MAXLEVEL + rn2 * bias;
-   }
-   else
-   {
+   } else {
       m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
       m->level = minmax(rn2 * bias    , 1, MAXLEVEL);
    }

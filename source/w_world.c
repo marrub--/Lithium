@@ -33,7 +33,6 @@ bool islithmap;
 i32 secretsfound;
 k64 scoremul;
 u64 ticks;
-i32 game;
 k32 apiversion = APIVersion;
 i32 soulsfreed;
 i32 fun;
@@ -169,7 +168,6 @@ static void GInit(void)
    Upgr_GInit();
    Wep_GInit();
 
-   game         = ACS_GetCVar(sc_game);
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
    cbiperf = 10;
@@ -281,18 +279,15 @@ static void HInit(void)
       if(cmp && !(msgs & (1 << n))) { \
          for_player() P_BIP_GiveMail(p, name); \
          msgs |= 1 << n; \
-      } else ((void)0)
+      }
 
    static i32 msgs;
 
-   if(game == Game_Doom2)
-   {
-      Message(Cluster >= 6,  0, st_mail_cluster1);
-      Message(Cluster >= 7,  1, st_mail_cluster2);
-      Message(Cluster == 8,  2, st_mail_cluster3);
-      Message(Cluster == 9,  3, st_mail_secret1);
-      Message(Cluster == 10, 4, st_mail_secret2);
-   }
+   Message(Cluster >= 6,  0, st_mail_cluster1);
+   Message(Cluster >= 7,  1, st_mail_cluster2);
+   Message(Cluster == 8,  2, st_mail_cluster3);
+   Message(Cluster == 9,  3, st_mail_secret1);
+   Message(Cluster == 10, 4, st_mail_secret2);
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop) ||
@@ -316,6 +311,8 @@ void Sc_PreInit(void)
 script type("open")
 static void Sc_World(void)
 {
+   Dbg_Log(log_dev, "%s", __func__);
+
 begin:
    /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
     * we can still detect it by using Timer, so correct this variable.
@@ -330,8 +327,6 @@ begin:
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
-
-   Dbg_Log(log_dev, "%s", __func__);
 
    if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
       Log("\n=======\n"

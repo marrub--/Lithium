@@ -18,9 +18,9 @@
 
 #include "w_data.h"
 
-#define InSecret (game == Game_Doom2 && (Cluster == 9 || Cluster == 10))
-#define InHell   (game == Game_Doom2 && Cluster >= 8)
-#define OnEarth  (game == Game_Doom2 && Cluster == 7)
+#define InSecret (Cluster == 9 || Cluster == 10)
+#define InHell   (Cluster >= 8)
+#define OnEarth  (Cluster == 7)
 
 #define MapNum ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
@@ -64,11 +64,6 @@ struct payoutinfo {
    i32 tax;
 };
 
-enum game {
-   Game_Doom2,
-   Game_Episodic,
-};
-
 enum mission_status {
    _unfinished,
    _finished,
@@ -88,7 +83,6 @@ extern bool islithmap;
 extern i32 secretsfound;
 extern k64 scoremul;
 extern u64 ticks;
-extern i32 game;
 extern k32 apiversion;
 extern i32 soulsfreed;
 extern i32 fun;
