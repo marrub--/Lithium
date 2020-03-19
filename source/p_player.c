@@ -433,7 +433,6 @@ static void P_BossText(struct player *p, i32 boss)
          ACS_FadeTo(255, 0, 0, fa, 0.0);
          ACS_FadeTo(255, 0, 0, 0.0, ft);
 
-         StartSound(ss_xx_pain25,         lch_voice,  CHANF_LOCAL, 0.2);
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);

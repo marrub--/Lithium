@@ -408,7 +408,6 @@ X(ss_weapons_cercle_begin,     "weapons/cercle/begin")
 X(ss_weapons_rifle_firemode,   "weapons/rifle/firemode")
 X(ss_weapons_rocket_mark,      "weapons/rocket/mark")
 X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
-X(ss_xx_pain25,                "*pain25")
 
 /* Text */
 X(st_begin,                  "\Cd[Press any key to begin]") /* TODO */
