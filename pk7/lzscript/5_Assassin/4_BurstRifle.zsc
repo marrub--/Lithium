@@ -16,15 +16,16 @@ default {
    Weapon.SlotPriority 1;
 }
 
-float m_lessen;
+double m_lessen;
 
 action(Weapon) void Lith_A_FireBurstRifle() {
+   double p = clamp(3 / invoker.m_lessen, 0.5, 1.0);
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
    Lith_FireBullets(2, 1, -1, int(50 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(1.5);
-   A_StartSound("weapons/burstrif/fire", lch_weapon);
+   A_StartSound("weapons/burstrif/fire", lch_weapon, pitch: p);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    invoker.m_lessen += 0.43;
 }
