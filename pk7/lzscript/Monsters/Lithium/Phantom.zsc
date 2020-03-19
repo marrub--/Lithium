@@ -59,7 +59,7 @@ class Lith_BasicPhantom : Lith_Phantom
       if(Level.TotalTime % 10 == 0)
          Lith_EmitAura();
 
-      if(!level.isFrozen() && m_MeleeTime)
+      if(!isFrozen() && m_MeleeTime)
          m_MeleeTime--;
 
       Super.Tick();
@@ -133,7 +133,7 @@ override void Tick()
       if(Level.TotalTime % 5 == 0)
          Lith_EmitAura();
 
-      if(!level.isFrozen() && m_MeleeTime)
+      if(!isFrozen() && m_MeleeTime)
          m_MeleeTime--;
    }
 

@@ -111,7 +111,7 @@ class Lith_BulletAfterSmoke : Actor
    {
       Super.Tick();
 
-      if(!level.isFrozen())
+      if(!isFrozen())
       {
          Scale.X += m_SX;
          Scale.Y += m_SY;

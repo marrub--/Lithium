@@ -50,12 +50,12 @@ class Lith_SpiralRocket : Lith_Rocket
 
    override void Tick()
    {
-      if(!level.isFrozen())
+      if(!isFrozen())
          SetOrigin(Pos + m_APos, false);
 
       Super.Tick();
 
-      if(!level.isFrozen())
+      if(!isFrozen())
       {
          A_SpawnItemEx("Lith_SpiralRocketHackActor9000", flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
          SetOrigin(Pos - m_APos, false);

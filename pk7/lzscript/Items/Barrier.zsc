@@ -38,7 +38,7 @@ class Lith_HasBarrier : Powerup
 
    override void Tick()
    {
-      if(!level.isFrozen())
+      if(!isFrozen())
       {
          Actor th;
          for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)

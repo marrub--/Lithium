@@ -31,7 +31,7 @@ class Lith_BloodHitSpray : Actor
 
    override void Tick()
    {
-      if(!level.isFrozen())
+      if(!isFrozen())
       {
          if(m_Step < .015) SetOrigin(Pos + (0, 0, .04), true);
          else              SetOrigin(Pos - (0, 0, .04), true);
@@ -79,7 +79,7 @@ class Lith_BloodHitCore : Actor
 
    override void Tick()
    {
-      if(!level.isFrozen())
+      if(!isFrozen())
       {
          if(++m_Tics > 4)
          {
