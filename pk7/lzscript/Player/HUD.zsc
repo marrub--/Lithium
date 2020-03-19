@@ -19,12 +19,10 @@ private void Lith_Crosshair()
 
    /* trace to where the crosshair should be in world space */
    float sz = height / 2 + attackzoffset * player.crouchfactor;
-
-   FLineTraceData ltd;
-   LineTrace(ry, 2048, rp, 0, sz, 0, 0, ltd);
+   let loc = Lith_UTIL.TraceFrom(self, ry, 2048, rp, sz);
 
    /* unproject */
-   int xhx, xhy; [xhx, xhy] = Lith_Unproject(ltd.hitlocation);
+   int xhx, xhy; [xhx, xhy] = Lith_Unproject(loc);
 
    /* draw a tracer for targeting system */
    if(tracer && tracer.health > 0 && ACS_ExecuteWithResult(lsc_pdata, pdata_weapon) == weapon_launcher)

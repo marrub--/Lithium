@@ -68,14 +68,11 @@ action(Weapon) void Lith_A_Laser(double pit)
       let ply = Lith_Player(invoker.Owner);
       let sz  = ply.Height / 2 + ply.AttackZOffset * ply.Player.CrouchFactor;
 
-      FLineTraceData ltd;
-      LineTrace(ply.m_IYaw, 2048, ply.m_IPitch - pit, 0, sz, 0, 0, ltd);
-      Spawn("Lith_700Laser", ltd.HitLocation);
+      let loc = Lith_UTIL.TraceFrom(ply, ply.m_IYaw, 2048, ply.m_IPitch - pit, sz);
+      Spawn("Lith_700Laser", loc);
 
-      LineTrace(ply.Angle, 2048, ply.Pitch - pit, 0, sz, 0, 0, ltd);
-      Spawn("Lith_700Laser2", ltd.HitLocation);
-
-      let loc = ltd.HitLocation;
+      loc = Lith_UTIL.TraceFrom(ply, ply.angle, 2048, ply.pitch - pit, sz);
+      Spawn("Lith_700Laser2", loc);
 
       let ps = Sin(ply.Pitch - pit - 90);
       let cz = Cos(ply.Pitch - pit - 90);
