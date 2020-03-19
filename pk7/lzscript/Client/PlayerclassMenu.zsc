@@ -17,6 +17,7 @@ override void Init(Menu parent, ListMenuDescriptor desc)
 override void Drawer()
 {
    Super.Drawer();
+   if(mDesc.mSelectedItem < 0) return;
    let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
    if(sel) {
       let txt_l = sel.mText;
