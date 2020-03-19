@@ -17,77 +17,68 @@ default
    Weapon.SlotPriority 1;
 }
 
-double     m_WindUp;
-int        m_SndState;
-bool       m_Reloading;
-statelabel m_LastState;
+double     m_windUp;
+int        m_sndState;
+bool       m_reloading;
+statelabel m_lastState;
 
-override void Tick()
-{
-   if(Owner && Owner.Player && Owner.Health > 0 && !level.isFrozen())
-   {
-      if(Owner.Player.ReadyWeapon != self)
-      {
-         m_WindUp = 0;
+override void tick() {
+   if(owner && owner.player && owner.health > 0 && !isFrozen()) {
+      if(owner.player.readyWeapon != self) {
+         m_windUp = 0;
          return;
       }
 
-      if(Owner.Player.Buttons & (BT_ATTACK|BT_USER1) && !m_Reloading)
-      {
-         if((m_WindUp += 0.04) > 1) m_WindUp = 1;
+      if(owner.player.buttons & (BT_ATTACK|BT_USER1) && !m_reloading) {
+         if((m_windUp += 0.04) > 1) m_windUp = 1;
 
-         Owner.A_AlertMonsters(256);
+         owner.A_AlertMonsters(256);
 
-         if(!m_SndState)
-         {
-            Owner.A_StartSound("weapons/minigun/up", lch_weapon2, CHANF_LOOP);
-            m_SndState++;
+         if(!m_sndState) {
+            owner.A_StartSound("weapons/minigun/up", lch_weapon2, CHANF_LOOP);
+            m_sndState++;
+         } else if(m_sndState++ == 15) {
+            owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
          }
-         else if(m_SndState++ == 15)
-            Owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
-      }
-      else
-      {
-         if(m_SndState)
-         {
-            Owner.A_StartSound("weapons/minigun/down", lch_weapon2);
-            m_SndState = 0;
+      } else {
+         if(m_sndState) {
+            owner.A_StartSound("weapons/minigun/down", lch_weapon2);
+            m_sndState = 0;
          }
 
-         if(m_WindUp)
-         {
-            m_WindUp -= 0.08;
+         if(m_windUp) {
+            m_windUp -= 0.08;
 
-            if(m_WindUp < 0)
-            {
-               m_WindUp = m_SndState = 0;
-               Owner.A_StartSound("weapons/minigun/place", lch_weapon3);
+            if(m_windUp < 0) {
+               m_windUp = m_sndState = 0;
+               owner.A_StartSound("weapons/minigun/place", lch_weapon3);
             }
          }
       }
    }
-   Super.Tick();
+
+   super.tick();
 }
 
 int Lith_WindupTime()
 {
-   return int((1.0 - m_WindUp) * 10.0);
+   return int((1.0 - m_windUp) * 10.0);
 }
 
 action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 {
    int flags = WRF_NOPRIMARY;
 
-   if(invoker.m_WindUp ~== 0) flags |= WRF_ALLOWRELOAD;
+   if(invoker.m_windUp ~== 0) flags |= WRF_ALLOWRELOAD;
    else                       flags |= WRF_NOSECONDARY;
 
-   invoker.m_LastState = lb;
+   invoker.m_lastState = lb;
 
    A_SetTics(invoker.Lith_WindupTime() + 1);
    state st = Lith_A_Ready(flags);
    if(st) return st;
 
-   if(Player.Buttons & BT_ATTACK && Level.TotalTime & 1)
+   if(player.buttons & BT_ATTACK && Level.TotalTime & 1)
    {
       if(!invoker.Lith_MagEmpty())
          return ResolveState(l);
@@ -104,7 +95,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 
 action(Weapon) state Lith_A_MinigunPostReady(statelabel l)
 {
-   return invoker.m_WindUp ? ResolveState(l) : null;
+   return invoker.m_windUp ? ResolveState(l) : null;
 }
 
 action(Weapon) void Lith_A_MinigunFire()
@@ -149,7 +140,7 @@ Ready3:
    loop;
 
 Deselect:
-   #### # 0 {A_StopSound(lch_weapon2); invoker.m_Reloading = false;}
+   #### # 0 {A_StopSound(lch_weapon2); invoker.m_reloading = false;}
    #### # 1 A_Lower(24);
    loop;
 
@@ -172,7 +163,7 @@ Fire3:
 
 Reload:
    MNGG # 1 Lith_A_JumpIfMagFull;
-   MNGG S 1 offset(2, 34) {invoker.m_Reloading = true;}
+   MNGG S 1 offset(2, 34) {invoker.m_reloading = true;}
    MNGG T 1 offset(4, 37);
    MNGG U 1 offset(9, 37) A_StartSound("weapons/minigun/magout", lch_reload);
    MNGG G 1 offset(12, 37);
@@ -201,8 +192,8 @@ Reload:
    MNGG A 3 offset(-1, 31);
    MNGG A 2 offset(-1, 32);
    MNGG A 1;
-   MNGG A 0 {invoker.m_Reloading = false;}
-   TNT1 A 0 ResolveState(invoker.m_LastState);
+   MNGG A 0 {invoker.m_reloading = false;}
+   TNT1 A 0 ResolveState(invoker.m_lastState);
    stop;
 }
 
