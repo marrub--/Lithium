@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_TITLE_HeadsUpDisp | Heads Up Display
 @@ \#INFO_DESCR_HeadsUpDisp
@@ -67,3 +75,5 @@
 == \#INFO_TITLE_Magic | Mana Absorber
 @@ \#INFO_DESCR_Magic
 翻訳なし
+
+## EOF

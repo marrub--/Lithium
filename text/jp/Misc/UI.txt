@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## UI ------------------------------------------------------------------------|
 == \#COST       | 価格
 == \#EFFECT     | 効果
@@ -110,3 +118,5 @@
 == \#ATTR_HELP_STM | 最大再生ＨＰ
 == \#ATTR_HELP_LUK | スコア増加運
 == \#ATTR_HELP_RGE | 反撃攻撃力
+
+## EOF

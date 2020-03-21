@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_AetosVi | Aetos Vi
 @@ \#INFO_DESCR_AetosVi
@@ -57,3 +65,5 @@
 == \#INFO_SHORT_Tsukama | Tsukama
 @@ \#INFO_DESCR_Tsukama
 翻訳なし
+
+## EOF

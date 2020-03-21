@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#ITEM_TAG_ArmStandard    | Standard Armor
 == \#ITEM_TAG_ArmImproved    | Improved Armor
@@ -164,3 +172,5 @@
 == \#INFO_TITLE_CBIUpgr2 | $\#CBI_CPU3
 @@ \#INFO_DESCR_CBIUpgr2
 翻訳なし
+
+## EOF

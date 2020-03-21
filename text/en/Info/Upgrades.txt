@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_HeadsUpDisp | $\#UPGRADE_TITLE_HeadsUpDisM
 == \#INFO_TITLE_HeadsUpDisp | Heads Up Display
@@ -171,3 +179,5 @@ captures energy from the dead and dying.
 Using this method, it uses hostility detection to find potential sources of
 mana, and upon that source losing metaphysical structure, siphons all mana
 from it with approximately 73.416% efficiency.
+
+## EOF

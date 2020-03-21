@@ -1,6 +1,14 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Backstory -----------------------------------------------------------------|
 == \#INFO_SHORT_P114 | プロジェクト114
-== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114 
+== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
 @@ \#INFO_DESCR_P114
 翻訳なし
 
@@ -106,3 +114,5 @@
 == \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
 @@ \#INFO_DESCR_AttrCON
 翻訳なし
+
+## EOF

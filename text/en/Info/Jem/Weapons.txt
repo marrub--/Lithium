@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Cyber-Mage ----------------------------------------------------------------|
 == \#INFO_SHORT_CFist | Mana Siphon
 
@@ -341,3 +349,5 @@ This method was created on accident as a first-century researcher was
 experimenting with \cgRussum\c- sigils. The attack was powerful enough to
 accidentally murder all of the housemaids in their mansion and several wild
 animals in their garden, however it did no damage to their property.
+
+## EOF

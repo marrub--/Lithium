@@ -51,7 +51,7 @@ def parse_file state, filename, language
    for ln, linenum in lns.each_with_index
       ln = ln.chomp.gsub "\\#", "LITH_"
       case ln
-      when /^## .+$/
+      when /^##.*$/
          do_close_buf.call
       when /^== (.+)\|(.*)$/
          m = $~

@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
 ## Rank:
 ##    \cu非居住者
 ##    \cs下位者
@@ -5,13 +13,15 @@
 ##    \cf貴族
 ##    \cg僭主
 ##    \cr大将\c-
-
+##
 ## Threat:
 ##    \csD
 ##    \ciC
 ##    \ckB
 ##    \cgA
 ##    \crE
+##
+## ---------------------------------------------------------------------------|
 
 == \#INFO_SHORT_ZombieMan | フォーマー兵卒
 == \#INFO_TITLE_ZombieMan | 憑依人兵卒
@@ -227,3 +237,5 @@
 止まることはないヤツは現在、別の部隊が頭を真っ二つに引きさいたらしく、
 怪我の修復で寝ている。そちらの最終目標はこの世が地獄に成り果てる前に
 ヤツを見つけ、破壊するんだ。
+
+## EOF

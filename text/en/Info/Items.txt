@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ScoreChip | Score Chip
 == \#INFO_TITLE_ScoreChip | GIC 781000 Score Chip
@@ -321,3 +329,5 @@ testing and many trials, and now you wield the result of those efforts.
 Despite only having 3 billion neurons, not much more than high-grade CPUs,
 the quality of each is much higher, being able to withstand much more precise
 data transfer through high density synapses and storage in each cell.
+
+## EOF

@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Outcast Weapons -----------------------------------------------------------|
 == \#INFO_SHORT_ChargeFist | チャージ拳
 == \#INFO_TITLE_ChargeFist | Utsu Denkasou アサルトブレスレット
@@ -26,3 +34,5 @@ X-400が発射するミニチュアミサイルは普通のミサイルほど強
 68-nプラズマライフルと似た働きをするが、発射速度よりもダメージを好む武器。
 D.640の設計はMDDOによって設計されたいくつかの古いモデルと、
 セマフォ株式会社が特許を取得した新しいコンポーネントに基づいている。
+
+## EOF

@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Backstory (Marine) --------------------------------------------------------|
 == \#INFO_SHORT_P114 | Project 114
 == \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
@@ -268,3 +276,5 @@ Concentration is your ability to focus energy during bursts of mana absorption
 into your very senses.
 
 Leveling up in concentration will multiply damage dealt when you gain mana.
+
+## EOF

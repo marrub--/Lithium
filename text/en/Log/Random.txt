@@ -1,7 +1,17 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
 ## Flags:
 ## 1: Two copies of name
 ## 2: Very rare
 ## 4: Randomized certainty
+##
+## ---------------------------------------------------------------------------|
 
 ## Random Pickup Messages ----------------------------------------------------|
 == \#PK_UNCERTAIN_NUM | 8

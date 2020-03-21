@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 == \#SHOP_TITLE_RocketAmmo | ロケット箱
 @@ \#SHOP_DESCR_RocketAmmo
 SYM4.3社製造のロケット推進弾。 指一本でかなりスッキリさせる高収量榴弾
@@ -51,3 +59,5 @@ A.O.F財団の高縮合エネルギーセル。
 まるで旧プラズマライフル。
 
 アップグレードできません。
+
+## EOF

@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 @@ \#INFO_DESCR_PlasmaUpgr
 El que su segundo best-seller también fuese una bazofia total apuntando
 cabreó tanto al personal de AllPoint que rediseñaron las partes internas
@@ -9,3 +17,5 @@ No, en serio. Probablemente suelte más calor que el sol. Si estuvieras a,
 
 Desafortunadamente, la mejora fue tremendamente cara. Por ahora solo se
 ha vendido a inversores privados, pero por suerte, tu jefe es uno de ellos.
+
+## EOF

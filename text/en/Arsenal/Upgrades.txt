@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Body ----------------------------------------------------------------------|
 == \#UPGRADE_TITLE_HeadsUpDisM | Heads Up Disp.
 @@ \#UPGRADE_EFFEC_HeadsUpDisM
@@ -368,3 +376,5 @@ UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 == \#UPGRADE_TITLE_InstaDeath | Instant Death
 @@ \#UPGRADE_EFFEC_InstaDeath
 Upon losing health, you instantly die.
+
+## EOF

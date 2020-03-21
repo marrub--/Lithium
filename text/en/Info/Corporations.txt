@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_AllPoint | AllPoint
 == \#INFO_TITLE_AllPoint | AllPoint Precision Firearms
@@ -252,3 +260,5 @@ They mostly produce specialty armors for defense against elements such as
 energy and fire, but also produce some simpler wares to get ahead in the
 growing market. Several lawsuits have been filed against them for theft of
 materials, but no conclusive evidence has been found as of yet.
+
+## EOF

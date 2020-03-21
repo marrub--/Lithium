@@ -1,6 +1,10 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
 ## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
 
 == \#ST_NAME_Theme_0 | みどり
 == \#ST_NAME_Theme_1 | ローズももいろ

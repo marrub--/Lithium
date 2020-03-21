@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 == \#PK_GET_NUM | 13
 == \#PK_GET_000 | %Sを入手した!
 == \#PK_GET_001 | おう、%Sだ。
@@ -13,3 +21,5 @@
 == \#PK_GET_011 | %Sがあなたと結婚した。
 == \#PK_GET_012 | %Sを壊した。
 == \#PK_GET_013 | 何だこの%Sは・・・！
+
+## EOF

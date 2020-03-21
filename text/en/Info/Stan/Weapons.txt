@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Marine --------------------------------------------------------------------|
 == \#INFO_SHORT_Fist | Knife
 
@@ -261,3 +269,5 @@ Cannon's pattern buffer system to create abhorrent amounts of energy.
 With this, a gigantic red beam of destruction with an ungodly amount of heat
 and energy is fired out of the cannon, causing most anything in its path to be
 absolutely destroyed.
+
+## EOF

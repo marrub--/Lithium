@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 == \#SHOP_TITLE_RocketAmmo | Rocket Ammo
 @@ \#SHOP_DESCR_RocketAmmo
 Rocket propelled grenades produced by SYM4.3 for your launcher.
@@ -63,3 +71,5 @@ A game playing system, containing several old titles.
 == \#SHOP_TITLE_DivSigil | Div. Sigil
 @@ \#SHOP_DESCR_DivSigil
 A mistake of the universe.
+
+## EOF

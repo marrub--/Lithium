@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 == \#INFO_TITLE_Extra1 | Nan Kosi Mal
 %% \#INFO_DESCR_Extra1
 Bisu~'6(2
@@ -47,3 +55,5 @@ Bisu~'2(2
 6370?57?'Wkf}jf'Fqbirb
 
 NSBUFSB
+
+## EOF

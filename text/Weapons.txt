@@ -1,4 +1,4 @@
-## ---------------------------------------------------------------------------|
+## -*-Prog-*------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
 ## By Alison Sanderson. Attribution is encouraged, though not required.
@@ -72,7 +72,8 @@
 ;fist fist i_flintlock fist fist fist fist fist fist
 
 :assassin
-+a_burstrif 4 BurstRifle Placeholder2 NMag
++a_dualpist 2 DualPistols Placeholder2 NMag
++a_burstrif 4 BurstRifle  Placeholder2 NMag
 ;fist fist fist fist fist a_burstrif fist fist fist
 
 :thoth

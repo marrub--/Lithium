@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Body ----------------------------------------------------------------------|
 == \#UPGRADE_TITLE_HeadsUpDisM | HUD
 @@ \#UPGRADE_EFFEC_HeadsUpDisM
@@ -343,3 +351,5 @@ IMASUGU KOUNYUU SITAMAE!
 == \#UPGRADE_TITLE_InstaDeath | 即死
 @@ \#UPGRADE_EFFEC_InstaDeath
 人は銃で撃たれると死ぬ。
+
+## EOF

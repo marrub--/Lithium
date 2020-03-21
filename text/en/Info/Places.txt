@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_AetosVi | Aetos Vi
 == \#INFO_TITLE_AetosVi | $\#INFO_SHORT_AetosVi
@@ -172,3 +180,5 @@ inhabiting human life, although have few native inhabitants, none sentient.
 Seven of the planets are completely barren, although house valuable minerals
 which make the system a large trading place. The other three planets are gas
 giants and have not been surface inspected yet.
+
+## EOF

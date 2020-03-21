@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_AllPoint | AllPoint
 == \#INFO_TITLE_AllPoint | AllPoint精密銃器合同会社
@@ -105,3 +113,5 @@
 == \#INFO_TITLE_Yigan | Yigan合同会社
 @@ \#INFO_DESCR_Yigan
 翻訳なし
+
+## EOF

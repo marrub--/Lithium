@@ -1,4 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
 ## ---------------------------------------------------------------------------|
+##
 ## Rank:
 ##    \cuNon-resident
 ##    \csSubordinate
@@ -6,13 +13,15 @@
 ##    \cfNoble
 ##    \cgTyrant
 ##    \crOverlord\c-
-
+##
 ## Threat:
 ##    \csD
 ##    \ciC
 ##    \ckB
 ##    \cgA
 ##    \crE
+##
+## ---------------------------------------------------------------------------|
 
 ## Non-residents -------------------------------------------------------------|
 == \#INFO_SHORT_ZombieMan | Former Human
@@ -210,3 +219,5 @@ Threat: \crE\c-
 The catalyst of destruction, whom spawned all of Hell's monstrosities and dictates over all; the Icon of Sin, said by some to be Satan himself, feeds purely off of hatred and chaos and will stop at nothing to attain everything in the world.
 
 Currently, he lay sleeping ill under repair, as his head was torn in twain by a force unknown. The ultimate goal of your mission is to find him, and destroy him before Hell takes over our realm.
+
+## EOF

@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Updates -------------------------------------------------------------------|
 
 ## Header format:
@@ -789,3 +797,5 @@
 \cj| Fixed the Lost Souls giving too much Score
 \cj| Added Thing ID validation to the player, which should possibly fix more
 \cj  advanced ZDoom maps breaking
+
+## EOF

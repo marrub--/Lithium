@@ -1,3 +1,11 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
 ## Quit Messages -------------------------------------------------------------|
 == QUITMSG1 | Hold it, your contract isn't complete yet!
 == QUITMSG2 | I got nothing.
@@ -253,3 +261,5 @@ Just do it already!
 == QUITMSG103 | Chase down the Willow?
 
 == QUITMSGNUM | 103
+
+## EOF
