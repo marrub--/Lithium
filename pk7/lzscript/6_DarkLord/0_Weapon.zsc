@@ -23,11 +23,11 @@ override state Lith_Ready(int flags) {
 }
 
 action(Weapon) void Lith_ArmGunPreFire() {
-   Player.GetPSprite(177).Frame = RandomPick(1, 3);
+   Player.GetPSprite(_psp_d_subweapon).Frame = RandomPick(1, 3);
 }
 
 action(Weapon) void Lith_ArmGunFire() {
-   Player.GetPSprite(177).Frame = RandomPick(0, 2);
+   Player.GetPSprite(_psp_d_subweapon).Frame = RandomPick(0, 2);
    A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
    Lith_FireBullets(1, 2, -1, 15, tracer_x: -6);
@@ -53,11 +53,11 @@ override void tick() {
 
    if(owner && owner.player && owner.health > 0 && !isFrozen() &&
       owner.player.buttons & BT_ALTATTACK &&
-      owner.player.getPSprite(177).tics <= 0 &&
+      owner.player.getPSprite(_psp_d_subweapon).tics <= 0 &&
       owner.countInv("Lith_SubweaponShots") > 0) {
       owner.takeInventory("Lith_SubweaponShots", 1);
-      owner.player.setPSprite(177, resolveState("_ArmGun"));
-      let psp = owner.player.getPSprite(177);
+      owner.player.setPSprite(_psp_d_subweapon, resolveState("_ArmGun"));
+      let psp = owner.player.getPSprite(_psp_d_subweapon);
       psp.bAddWeapon = false;
       psp.bAddBob    = false;
       psp.bPowDouble = true;

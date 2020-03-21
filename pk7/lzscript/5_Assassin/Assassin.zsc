@@ -28,6 +28,7 @@ class Lith_AWeapon : Lith_Weapon {
    }
 }
 
+#include "lzscript/5_Assassin/2_DualPistols.zsc"
 #include "lzscript/5_Assassin/4_BurstRifle.zsc"
 
 /* EOF */
