@@ -64,7 +64,7 @@
 +d_minigun  4 Minigun     Placeholder2 NMag
 +d_rocket   5 DualRocket  Placeholder2 Ammo A "Rocket"
 +d_fatmac   6 FatMac      Placeholder2 Ammo A "Plasma"
-+d_railgun  7 FortuneGun  Placeholder2 Ammo A "Cannon"
++d_railgun  7 FortuneGun  Placeholder2 AMag A "Cannon"
 ;fist fist d_700e d_4bore d_launcher d_minigun d_rocket d_fatmac d_railgun
 
 :informant

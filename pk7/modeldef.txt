@@ -7,8 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-model "Lith_BulletTracer"
-{
+model "Lith_BulletTracer" {
    DontCullBackfaces
    PitchFromMomentum
    UseActorRoll
@@ -16,14 +15,13 @@ model "Lith_BulletTracer"
    Scale 16.0 1.0 32.0
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "tracer.png"
 
    FrameIndex ____ A 0 0
 }
 
-model "Lith_BulletRicochetSpark"
-{
+model "Lith_BulletRicochetSpark" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -32,14 +30,13 @@ model "Lith_BulletRicochetSpark"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "spark1.png"
 
    FrameIndex ____ A 0 0
 }
 
-model "Lith_BulletRicochetSpark"
-{
+model "Lith_BulletRicochetSpark" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -48,14 +45,13 @@ model "Lith_BulletRicochetSpark"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "spark2.png"
 
    FrameIndex ____ B 0 0
 }
 
-model "Lith_BulletRicochetSpark"
-{
+model "Lith_BulletRicochetSpark" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -64,14 +60,13 @@ model "Lith_BulletRicochetSpark"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "spark3.png"
 
    FrameIndex ____ C 0 0
 }
 
-model "Lith_BulletRicochetSpark"
-{
+model "Lith_BulletRicochetSpark" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -80,14 +75,13 @@ model "Lith_BulletRicochetSpark"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "spark4.png"
 
    FrameIndex ____ D 0 0
 }
 
-model "Lith_BloodHitSpray"
-{
+model "Lith_BloodHitSpray" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -96,14 +90,13 @@ model "Lith_BloodHitSpray"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "blood_drop.png"
 
    FrameIndex ____ A 0 0
 }
 
-model "Lith_BloodHitCore"
-{
+model "Lith_BloodHitCore" {
    DontCullBackfaces
    UseActorRoll
    UseActorPitch
@@ -112,8 +105,22 @@ model "Lith_BloodHitCore"
    PitchOffset 45
 
    Path "lmodels"
-   Model 0 "1x1.obj"
+   Model 0 "square.obj"
    Skin 0 "blood_core.png"
+
+   FrameIndex ____ A 0 0
+}
+
+model "Lith_FortuneShotWind" {
+   DontCullBackfaces
+   UseActorRoll
+   UseActorPitch
+
+   Scale 128.0 8.0 1.0
+
+   Path "lmodels"
+   Model 0 "tapered.obj"
+   Skin 0 "air.png"
 
    FrameIndex ____ A 0 0
 }

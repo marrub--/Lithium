@@ -123,8 +123,8 @@ Select:
    loop;
 
 Fire:
-   TNT1 A 0 Lith_A_JumpIfMagEmpty;
-   TNT1 A 0 Lith_A_MagIncr;
+   #### # 0 Lith_A_JumpIfMagEmpty;
+   #### # 0 Lith_A_MagIncr;
    700E A 1 offset(2, 32) Lith_A_Laser(0.0);
    700E Y 1 bright {
       Lith_A_Fire700e();

@@ -611,6 +611,12 @@ weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire
 $alias weapons/fatmac/empty weapons/cshotgun/empty
 $alias weapons/fatmac/boltback weapons/sniper/boltback
 $alias weapons/fatmac/boltforward weapons/sniper/boltforward
+weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
+weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
+weapons/fortune/hit lsounds/WeaponsD/FortuneGun/Hit
+weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
+$limit weapons/fortune/hit 0
+$limit weapons/fortune/spark 0
 weapons/knife/swing1 lsounds/WeaponsM/Knife/Fire1
 weapons/knife/swing2 lsounds/WeaponsM/Knife/Fire2
 weapons/knife/hitflesh lsounds/WeaponsM/Knife/Hit

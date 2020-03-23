@@ -65,6 +65,16 @@ weapons {
       $alias boltback    = .weapons.sniper.boltback
       $alias boltforward = .weapons.sniper.boltforward
    }
+
+   fortune {
+      == lsounds/WeaponsD/FortuneGun
+      fire   Fire   # Metal Gear Solid 2
+      charge Charge # //
+      hit    Hit    # //
+      spark  Spark  # //
+      $limit hit 0
+      $limit spark 0
+   }
 }
 
 # EOF
