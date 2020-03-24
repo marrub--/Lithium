@@ -153,6 +153,12 @@ static void BaseMonsterLevel(dmon_t *m)
       m->level = minmax(rn2 * bias    , 1, MAXLEVEL);
    }
 
+   switch(m->rank) {
+      case 5: ServCallI(sm_SetTeleFogTo, so_TeleFog5); break;
+      case 6: ServCallI(sm_SetTeleFogTo, so_TeleFog6); break;
+      case 7: ServCallI(sm_SetTeleFogTo, so_TeleFog7); break;
+   }
+
    if(HasResistances(m)) for(i32 i = 0; i < m->rank; i++)
       m->resist[ACS_Random(1, dmgtype_max) - 1] += 5;
 

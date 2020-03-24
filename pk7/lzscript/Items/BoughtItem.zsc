@@ -48,7 +48,7 @@ class Lith_BoughtItem : Lith_CustomInventory
       TNT1 A 0;
       TNT1 A 0 Lith_A_SetNamedScriptSpecial("Lith_BoughtItemPickup", user_UpgradeId);
       TNT1 A random(1, 10);
-      TNT1 A 0 A_SpawnItemEx("Lith_P67TeleFog");
+      TNT1 A 0 A_SpawnItemEx("Lith_TeleFog");
       UCAN A 0 A_JumpIf(user_UpgradeBody, "Animate");
       WUPG A 0 A_JumpIf(user_UpgradeWeap, "Animate");
       BPAK A 0 A_JumpIf(user_UpgradeExtr, "Extra");

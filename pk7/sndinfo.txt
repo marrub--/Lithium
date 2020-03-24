@@ -26,6 +26,9 @@ AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA
 misc/pop lsounds/pop
 misc/booom lsounds/World/boom
 misc/teleport lsounds/World/Teleport/Teleport
+misc/teleport5 lsounds/World/Teleport/Teleport5
+misc/teleport6 lsounds/World/Teleport/Teleport6
+misc/teleport7 lsounds/World/Teleport/Teleport7
 misc/teleout lsounds/World/Teleport/TeleportOut
 misc/telein lsounds/World/Teleport/TeleportIn
 ghost/hit lsounds/Weapons/GhostHit

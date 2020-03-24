@@ -28,9 +28,12 @@ misc {
    booom boom # ??????????????
 
    == lsounds/World/Teleport
-   teleport Teleport    # Self-made
-   teleout  TeleportOut # Touhou 13
-   telein   TeleportIn  # //
+   teleport  Teleport    # Self-made
+   teleport5 Teleport5   # //
+   teleport6 Teleport6   # //
+   teleport7 Teleport7   # //
+   teleout   TeleportOut # Touhou 13
+   telein    TeleportIn  # //
 }
 
 ghost {
