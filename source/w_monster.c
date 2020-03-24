@@ -32,6 +32,11 @@
 
 /* Types ------------------------------------------------------------------- */
 
+enum {
+   _max_rank  = 5,
+   _max_level = 150,
+};
+
 struct dmon_stat {
    k32  x, y, z;
    k32  r, h;
@@ -86,7 +91,7 @@ static void ApplyLevels(dmon_t *m, i32 prev)
 
    for(i32 i = 0; i < dmgtype_max; i++) {
       ifauto(i32, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i], min(resist, MAXRANK)), 1);
+         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i], min(resist, _max_rank)), 1);
       }
    }
 }
@@ -126,8 +131,8 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
 
 static void BaseMonsterLevel(dmon_t *m)
 {
-   k32 rn1 = ACS_RandomFixed(1, MAXRANK);
-   k32 rn2 = ACS_RandomFixed(1, MAXLEVEL);
+   k32 rn1 = ACS_RandomFixed(1, _max_rank);
+   k32 rn2 = ACS_RandomFixed(1, _max_level);
    k32 bias;
 
    bias = mapscleared / 40.0;
@@ -146,11 +151,11 @@ static void BaseMonsterLevel(dmon_t *m)
       m->rank  = 6;
       m->level = 66;
    } else if(fun & lfun_ragnarok) {
-      m->rank  = MAXRANK;
-      m->level = MAXLEVEL + rn2 * bias;
+      m->rank  = _max_rank;
+      m->level = _max_level + rn2 * bias;
    } else {
-      m->rank  = minmax(rn1 * bias * 2, 1, MAXRANK);
-      m->level = minmax(rn2 * bias    , 1, MAXLEVEL);
+      m->rank  = minmax(rn1 * bias * 2, 1, _max_rank);
+      m->level = minmax(rn2 * bias    , 1, _max_level);
    }
 
    switch(m->rank) {

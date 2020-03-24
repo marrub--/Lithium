@@ -28,11 +28,20 @@ alias lith_k_glare "pukename Lith_KeyGlare"
 alias +lith_k_qact "+user4"
 alias -lith_k_qact "-user4"
 
-alias __lith_puketrm  "pukename Lith_RunTerminal %1"
-alias __lith_pukedlg  "pukename Lith_RunDialogue %1"
-alias __lith_pukemail "pukename Lith_GiveMail %1"
+alias __lith_runtrm "pukename Lith_RunTerminal %1"
+alias __lith_rundlg "pukename Lith_RunDialogue %1"
 
 alias __lith_info "pukename Lith_PrintMonsterInfo"
+alias __lith_giveexptomonster "pukename Lith_GiveEXPToMonster %1"
+alias __lith_triggerboss "pukename Lith_TriggerBoss %1 %2 %3"
+
+alias __lith_giveexp "pukename Lith_EmitEXP %1"
+alias __lith_givescr "pukename Lith_GiveScore %1"
+alias __lith_givediscount "pukename Lith_Discount"
+alias __lith_givemail "pukename Lith_GiveMail %1"
+alias __lith_givemeallofthescore "pukename Lith_GiveMeAllOfTheScore"
+
+alias __lith_dumpmem "pukename Lith_DumpAlloc"
 
 // Binds ---------------------------------------------------------------------|
 defaultbind i lith_k_opencbi

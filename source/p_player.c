@@ -64,12 +64,6 @@ reinit:
    P_Upg_Enter(p);
    P_Data_Load(p);
 
-   if(p->num == 0)
-   {
-      fun = p->fun;
-      ServCallI(sm_Fun, fun);
-   }
-
    P_BossWarning(p);
 
    if(p->getCVarI(sc_player_bosstexts))

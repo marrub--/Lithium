@@ -164,21 +164,4 @@ void Sc_PrintMonsterInfo(void)
    PrintMonsterInfo();
 }
 
-script_str ext("ACS") addr("Lith_SetFun")
-void Sc_SetFun(i32 fun)
-{
-   with_player(LocalPlayer)
-   {
-      p->fun = fun;
-      P_Data_Save(p);
-   }
-}
-
-script_str ext("ACS") addr("Lith_GetFun")
-i32 Sc_GetFun(void)
-{
-   with_player(LocalPlayer) return p->fun;
-   return 0;
-}
-
 /* EOF */

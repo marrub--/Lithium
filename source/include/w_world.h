@@ -85,7 +85,7 @@ extern k64 scoremul;
 extern u64 ticks;
 extern k32 apiversion;
 extern i32 soulsfreed;
-extern i32 fun;
+extern i32 lmvar fun;
 extern bool bossspawned;
 extern i32 cbiperf;
 extern bool cbiupgr[cupg_max];

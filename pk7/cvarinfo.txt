@@ -10,6 +10,7 @@
 server float __lith_version;
 
 server noarchive string __lith_end;
+server int __lith_fun;
 
 server noarchive int  __lith_debug_level    = 0;
 server noarchive bool __lith_debug_all      = false;

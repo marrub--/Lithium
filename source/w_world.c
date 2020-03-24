@@ -35,7 +35,7 @@ k64 scoremul;
 u64 ticks;
 k32 apiversion = APIVersion;
 i32 soulsfreed;
-i32 fun;
+i32 lmvar fun;
 bool bossspawned;
 i32 cbiperf;
 bool cbiupgr[cupg_max];
@@ -306,6 +306,8 @@ void Sc_PreInit(void)
    GetDebugInfo();
 
    islithmap = (MapNum & LithMapMask) == LithMapMagic;
+   fun = ACS_GetCVar(sc_fun);
+   ServCallI(sm_Fun, fun);
 }
 
 script type("open")

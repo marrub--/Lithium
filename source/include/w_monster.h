@@ -18,9 +18,6 @@
 #include "common.h"
 #include "m_list.h"
 
-#define MAXRANK 5
-#define MAXLEVEL 150
-
 enum dmgtype {
    dmgtype_bullets,
    dmgtype_energy,

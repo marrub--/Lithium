@@ -52,22 +52,6 @@ static void Load_note(struct savefile *save, struct savechunk *chunk)
    }
 }
 
-/* Chunk "fun0" ------------------------------------------------------------ */
-
-script
-static void Save_fun0(struct savefile *save)
-{
-   Save_WriteChunk(save, Ident_fun0, SaveV_fun0, 1);
-
-   fputc(save->p->fun, save->fp);
-}
-
-script
-static void Load_fun0(struct savefile *save, struct savechunk *chunk)
-{
-   save->p->fun = fgetc(save->fp);
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
 script
@@ -78,7 +62,6 @@ void P_Data_Save(struct player *p)
    if((save = Save_BeginSave(p)))
    {
       Save_note(save);
-      Save_fun0(save);
       Save_EndSave(save);
    }
 }
@@ -91,7 +74,6 @@ void P_Data_Load(struct player *p)
    if((save = Save_BeginLoad(p)))
    {
       Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
-      Save_ReadChunk(save, Ident_fun0, SaveV_fun0, Load_fun0);
       Save_EndLoad(save);
    }
 }
