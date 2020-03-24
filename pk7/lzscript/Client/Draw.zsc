@@ -562,7 +562,7 @@ override void RenderOverlay(RenderEvent evt)
    if(p && p.m_Cs) p.m_Cs.Lith_Render();
 }
 
-float, float GetScSized(float x, float y, bool kludge = false)
+int, int GetScSized(float x, float y, bool kludge = false)
 {
    float vw = m_VirtualSize.X;
    float vh = m_VirtualSize.Y;
@@ -575,7 +575,7 @@ float, float GetScSized(float x, float y, bool kludge = false)
    if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
    else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
 
-   return xy.X, xy.Y;
+   return int(xy.X), int(xy.Y);
 }
 
 /* EOF */
