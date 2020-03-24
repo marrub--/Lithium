@@ -44,6 +44,13 @@ Allows you to press the zoom keys to zoom in and out.
 Drivers for zooming software, which utilizes your eye implants.
 
 ## ---------------------------------------------------------------------------|
+== \#UPGRADE_TITLE_Flashlight | Flashlight
+@@ \#UPGRADE_EFFEC_Flashlight
+Allows you to press the flashlight key to turn on a flashlight.
+
+Drivers for flashlight software, which utilizes your armor's built-in lighting.
+
+## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_VitalScan | Vital Scanner
 @@ \#UPGRADE_EFFEC_VitalScan
 While aiming at living things, you can see their health and how much damage is

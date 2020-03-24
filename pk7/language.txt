@@ -48,6 +48,8 @@
 "LITH_UPGRADE_EFFEC_ReflexWetw" = "Lets you move quicker, easier and more efficiently.\n\nAllows you to double jump by pressing jump mid-air and slide by pressing run.\n\nCybernetic wetware that improves your reflexes and implicit agility.";
 "LITH_UPGRADE_TITLE_Zoom" = "Zoom Wetware";
 "LITH_UPGRADE_EFFEC_Zoom" = "Allows you to press the zoom keys to zoom in and out.\n\nDrivers for zooming software, which utilizes your eye implants.";
+"LITH_UPGRADE_TITLE_Flashlight" = "Flashlight";
+"LITH_UPGRADE_EFFEC_Flashlight" = "Allows you to press the flashlight key to turn on a flashlight.\n\nDrivers for flashlight software, which utilizes your armor's built-in lighting.";
 "LITH_UPGRADE_TITLE_VitalScan" = "Vital Scanner";
 "LITH_UPGRADE_EFFEC_VitalScan" = "While aiming at living things, you can see their health and how much damage is being dealt to them on your HUD.\n\nCustomizable via settings menu.\n\nA set of nanobots are deployed to get vitality information on targets you aim at.";
 "LITH_UPGRADE_TITLE_CyberLegs" = "Move Wetware";
