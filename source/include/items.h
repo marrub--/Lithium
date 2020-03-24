@@ -10,7 +10,9 @@
  *
  * ---------------------------------------------------------------------------|
  */
+/* decompat-out pk7/lzscript/Constants/items.zsc */
 
+/* decompat-cut */
 #ifndef items_h
 #define items_h
 
@@ -29,17 +31,20 @@ enum {
    _inv_legs,
    _inv_num,
 };
+/* decompat-end */
 
-enum {
+enum /* Lith_Container */ {
    _cont_store,
    _cont_arms_u,
    _cont_arms_l,
    _cont_body,
 };
 
+/* decompat-cut */
 struct itemdata {
-   str name, spr, tag;
+   str name, spr;
    u32 w, h;
+   u32 equip;
    i96 scr;
 
    /* these need to be scripts or they'll disappear on map load
@@ -91,6 +96,9 @@ void P_Inv_PQuit(struct player *p);
 
 bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y);
 script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);
+script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs);
+bool P_Inv_Swap(struct item *lhs, struct item *rhs);
 bool P_Inv_Add(struct player *p, struct item *item);
 
 #endif
+/* decompat-end */

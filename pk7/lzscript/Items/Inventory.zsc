@@ -11,12 +11,13 @@ class Lith_InventoryItem : Inventory abstract {
    default {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
+      Lith_InventoryItem.InvEquip _cont_store;
 
       +INVENTORY.UNTOSSABLE
       +INVENTORY.UNDROPPABLE
    }
 
-   string m_invType;
+   uint   m_invEquip;
    string m_invName;
    uint   m_invSell;
    uint   m_invItem;
@@ -25,7 +26,7 @@ class Lith_InventoryItem : Inventory abstract {
 
    int m_w, m_h;
 
-   property InvType:  m_invType;
+   property InvEquip: m_invEquip;
    property InvName:  m_invName;
    property InvSell:  m_invSell;
    property Size:     m_w, m_h;
@@ -47,7 +48,7 @@ class Lith_InventoryItem : Inventory abstract {
    }
 
    private void Lith_CreateItem() {
-      m_invItem = CallACS("Lith_ItemCreate", m_w, m_h);
+      m_invItem = CallACS("Lith_ItemCreate", m_w, m_h, m_invEquip, m_invSell);
    }
 
    string Lith_GetName() {
@@ -58,7 +59,6 @@ class Lith_InventoryItem : Inventory abstract {
       let copy = Lith_InventoryItem(Super.CreateCopy(mo));
 
       if(copy != self) {
-         copy.m_invType  = m_invType;
          copy.m_invName  = m_invName;
          copy.m_invSell  = m_invSell;
          copy.m_w        = m_w;

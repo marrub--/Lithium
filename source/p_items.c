@@ -90,6 +90,23 @@ static bool ItemCanPlaceAny(struct container *cont, struct item *item)
    return false;
 }
 
+static void EquipItem(struct player *p, struct item *sel) {
+   bool ok = false;
+
+   for(i32 i = 0; i < _inv_num; i++) {
+      struct container *cont = &p->inv[i];
+
+      if(cont->type == sel->equip && (P_Inv_PlaceFirst(cont, sel) ||
+                                      P_Inv_SwapFirst(cont, sel))) {
+         ok = true;
+         break;
+      }
+   }
+
+   if(ok) ACS_LocalAmbientSound(ss_player_cbi_invmov,       127);
+   else   ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
+}
+
 static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy)
 {
    Str(back_store,  s":UI:InvBackStore");
@@ -176,8 +193,7 @@ void P_Inv_PInit(struct player *p)
 
 void P_Inv_PQuit(struct player *p)
 {
-   for(i32 i = 0; i < _inv_num; i++)
-   {
+   for(i32 i = 0; i < _inv_num; i++) {
       for_item(p->inv[i]) if(it->Destroy) it->Destroy(it);
       p->inv[i].user = nil;
    }
@@ -280,14 +296,34 @@ bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y)
    return true;
 }
 
-script
-bool P_Inv_PlaceFirst(struct container *cont, struct item *item)
-{
+script bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
    for(i32 y = 0; y < cont->h; y++) for(i32 x = 0; x < cont->w; x++)
       if(P_Inv_Place(cont, item, x, y))
          return true;
 
    return false;
+}
+
+script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
+   for_item(*cont) if(P_Inv_Swap(lhs, it)) return true;
+   return false;
+}
+
+bool P_Inv_Swap(struct item *lhs, struct item *rhs) {
+   /* naive way of doing it, but for our purposes no problem, just swap
+    * only if there is no difference in size.
+    */
+   if(lhs->w == rhs->w && lhs->h == rhs->h) {
+      struct container *lhs_cont = lhs->container;
+      struct container *rhs_cont = rhs->container;
+      swap(i32, lhs->x, rhs->x);
+      swap(i32, lhs->y, rhs->y);
+      lhs->Place(lhs, rhs_cont);
+      rhs->Place(rhs, lhs_cont);
+      return true;
+   } else {
+      return false;
+   }
 }
 
 bool P_Inv_Add(struct player *p, struct item *item)
@@ -373,6 +409,12 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
          p->movitem = !p->movitem;
       y_ += 8;
 
+      if(sel->equip != _cont_store) {
+         if(G_Button(g, LC(LANG "EQUIP"), x_, y_, .color = "n", Pre(btnclear)))
+            EquipItem(p, sel);
+         y_ += 8;
+      }
+
       if(sel->Use) {
          if(G_Button(g, LC(LANG "USE"), x_, y_, .color = "g", Pre(btnclear)))
             p->useitem = sel;
@@ -395,27 +437,23 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_ItemCreate")
-struct item *Sc_ItemCreate(i32 w, i32 h)
+struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr)
 {
-   str type = GetMembS(0, sm_InvType);
-   str tag  = GetMembS(0, sm_InvName);
-   u32 scr  = GetMembI(0, sm_InvSell);
-   str spr  = StrParam(":ItemSpr:%S", tag);
    str name = GetMembS(0, sm_InvName);
+   str spr  = StrParam(":ItemSpr:%S", name);
 
-   Dbg_Log(log_dev, "%s: creating %S (%S) %S", __func__, type, tag, spr);
+   Dbg_Log(log_dev, "%s: creating %S", __func__, name);
 
-   #define Type(t, ...) \
-      Str(t##s, s"" #t); \
-      if(type == t##s) { \
-         struct itemdata const data = \
-            {name, spr, tag, w, h, scr, __VA_ARGS__}; \
-         return P_Item_New(&data); \
-      }
+   struct itemdata const data = {
+      .w     = w,
+      .h     = h,
+      .equip = equip,
+      .scr   = scr,
+      .spr   = spr,
+      .name  = name,
+   };
 
-   Type(Armor);
-
-   return nil;
+   return P_Item_New(&data);
 }
 
 script_str ext("ACS") addr("Lith_ItemAttach")

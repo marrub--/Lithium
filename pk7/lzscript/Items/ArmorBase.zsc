@@ -7,64 +7,13 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ArmorBase : Lith_InventoryItem abstract {
-   default {
-      Lith_InventoryItem.InvType "Armor";
-
-      +INVENTORY.ISARMOR
-   }
-
-   private int    m_save0, m_save1;
-   private double m_speed;
-
-   protected int m_curSave;
-
-   property Save:  m_save0, m_save1;
-   property Speed: m_speed;
-
-   virtual int Lith_SaveAmt(name type) {return m_curSave;}
-
-   override Inventory CreateCopy(Actor mo) {
-      let copy = Lith_ArmorBase(Super.CreateCopy(mo));
-
-      copy.m_save0   = m_save0;
-      copy.m_save1   = m_save1;
-      copy.m_speed   = m_speed;
-      copy.m_curSave = m_curSave;
-
-      return copy;
-   }
-
-   override void BeginPlay() {
-      Super.BeginPlay();
-      m_curSave = m_save0;
-   }
-
-   override void AbsorbDamage(int damage, name type, out int newdamage) {
-      if(Lith_OnBody() && !DamageTypeDefinition.IgnoreArmor(type)) {
-         int save = Lith_SaveAmt(type);
-
-         if(damage - save < 1) newdamage = 1;
-         else                  newdamage = damage - save;
-      }
-   }
-
-   override double GetSpeedFactor() {
-      if(m_speed && Lith_OnBody()) {
-         return m_speed;
-      } else {
-         return 1.0;
-      }
-   }
-}
-
 class Lith_ArmorResistant : Lith_ArmorBase {
    protected int m_Resist;
 
    property Resist: m_Resist;
 
-   override Inventory CreateCopy(Actor mo) {
-      let copy = Lith_ArmorResistant(Super.CreateCopy(mo));
+   override Inventory createCopy(Actor mo) {
+      let copy = Lith_ArmorResistant(super.createCopy(mo));
       copy.m_Resist = m_Resist;
       return copy;
    }
@@ -84,6 +33,56 @@ class Lith_GreenArmor : Lith_RandomSpawn replaces GreenArmor {
 class Lith_BlueArmor : Lith_RandomSpawn replaces BlueArmor {
    default {
       Lith_RandomSpawn.SpawnNum lrsn_barmor;
+   }
+}
+
+class Lith_ArmorBase : Lith_InventoryItem abstract;
+
+default {
+   Lith_InventoryItem.InvEquip _cont_body;
+   +INVENTORY.ISARMOR
+}
+
+private int    m_save0, m_save1;
+private double m_speed;
+
+protected int m_curSave;
+
+property Save:  m_save0, m_save1;
+property Speed: m_speed;
+
+virtual int Lith_SaveAmt(name type) {return m_curSave;}
+
+override Inventory createCopy(Actor mo) {
+   let copy = Lith_ArmorBase(super.createCopy(mo));
+
+   copy.m_save0   = m_save0;
+   copy.m_save1   = m_save1;
+   copy.m_speed   = m_speed;
+   copy.m_curSave = m_curSave;
+
+   return copy;
+}
+
+override void beginPlay() {
+   super.beginPlay();
+   m_curSave = m_save0;
+}
+
+override void AbsorbDamage(int damage, name type, out int newdamage) {
+   if(Lith_OnBody() && !DamageTypeDefinition.IgnoreArmor(type)) {
+      int save = Lith_SaveAmt(type);
+
+      if(damage - save < 1) newdamage = 1;
+      else                  newdamage = damage - save;
+   }
+}
+
+override double getSpeedFactor() {
+   if(m_speed && Lith_OnBody()) {
+      return m_speed;
+   } else {
+      return 1.0;
    }
 }
 

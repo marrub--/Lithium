@@ -55,6 +55,7 @@ MONCIN = %W"$#{TXT}/Monsters.txt"
 MONCHO = %W"$#{HDR}/w_moninfo.h"
 
 DECOIN = %W"
+   $#{HDR}/items.h
    $#{HDR}/m_drawing.h
    $#{HDR}/p_data.h
    $#{HDR}/p_weapons.h

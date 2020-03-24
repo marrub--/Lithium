@@ -7,6 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
+#include "lzscript/Constants/items.zsc"
 #include "lzscript/Constants/m_drawing.zsc"
 #include "lzscript/Constants/p_data.zsc"
 #include "lzscript/Constants/p_weapons.zsc"
@@ -15,8 +16,7 @@
 #include "lzscript/Constants/w_monster.zsc"
 #include "lzscript/Constants/w_scorenums.zsc"
 
-enum ASCII
-{
+enum Lith_ASCII {
    Ch_NUL, /* null */
    Ch_SOH, /* start of heading */
    Ch_STX, /* start of text */

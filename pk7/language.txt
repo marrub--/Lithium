@@ -1464,6 +1464,7 @@
 "LITH_SELL" = "Sell";
 "LITH_DISCARD" = "Discard";
 "LITH_REQUIRED" = "Required";
+"LITH_EQUIP" = "Equip";
 "LITH_EMPTY" = "<empty>";
 "LITH_NOTE_FMT" = "\cmNote %i";
 "LITH_CAT_BODY" = "\cnBody";
@@ -1569,7 +1570,7 @@
 "LITH_ATTR_HELP_AGI" = "Speed and damage mitigation when dodging";
 "LITH_ATTR_HELP_RSH" = "Damage buff when gaining health";
 "LITH_ATTR_HELP_REF" = "Movement speed when hit";
-"LITH_INV_HINTS" = "You can right click to quickly move items.\nTo equip armor place it on your \cdbody\c-.";
+"LITH_INV_HINTS" = "You can right click to quickly move items.\nTo equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
 "LITH_CONTAINER_Backpack" = "Backpack";
 "LITH_CONTAINER_ArmUpL" = "L Shoulder";
 "LITH_CONTAINER_ArmUpR" = "R Shoulder";
