@@ -7,28 +7,25 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_BurningBarrel : Lith_FlareDecor replaces BurningBarrel
-{
-   default
-   {
-      Health 600;
-      Radius 16;
-      Height 32;
-      DeathHeight 32;
-      ProjectilePassHeight -32;
-      Lith_SwitchableDecor.Noise "amb/fire";
-      Lith_FlareDecor.Type "Lith_TorchSmallRFlare";
-   }
+class Lith_BurningBarrel : Lith_FlareDecor replaces BurningBarrel;
 
-   states
-   {
-   Spawn:    FCAN ABC 4 bright; loop;
-   Inactive: FCAN Y -1; stop;
-   Death:
-      FCAN X 0 A_StartSound("amb/metalx", lch_body3);
-      FCAN X -1;
-      stop;
-   }
+default {
+   Health 600;
+   Radius 16;
+   Height 32;
+   DeathHeight 32;
+   ProjectilePassHeight -32;
+   Lith_SwitchableDecor.Noise "amb/fire";
+   Lith_FlareDecor.Type "Lith_TorchSmallRFlare";
+}
+
+states {
+Spawn:    FCAN ABC 4 bright; loop;
+Inactive: FCAN Y -1; stop;
+Death:
+   FCAN X 0 A_StartSound("amb/metalx", lch_body3);
+   FCAN X -1;
+   stop;
 }
 
 /* EOF */

@@ -7,16 +7,14 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_TechPillar : TechPillar replaces TechPillar
-{
-   states
-   {
-   Spawn:
-      ELEC A 0;
-      ELEC A 0 A_StartSound("amb/lamp1", lch_body, CHANF_LOOP, attenuation: ATTN_STATIC);
-      ELEC A -1;
-      stop;
-   }
+class Lith_TechPillar : TechPillar replaces TechPillar;
+
+states {
+Spawn:
+   ELEC A 0;
+   ELEC A 0 A_StartSound("amb/lamp1", lch_body, CHANF_LOOP, attenuation: ATTN_STATIC);
+   ELEC A -1;
+   stop;
 }
 
 /* EOF */

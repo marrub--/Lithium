@@ -7,12 +7,12 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_AdviceMarker : Lith_MapMarker {
-   override void beginPlay() {
-      changeTid(level.findUniqueTid());
-      setTag(StringTable.localize(curSector.getUdmfString('user_advice')));
-      changeStatNum(_stat_advicemark);
-   }
+class Lith_AdviceMarker : Lith_MapMarker;
+
+override void beginPlay() {
+   changeTid(level.findUniqueTid());
+   setTag(StringTable.localize(curSector.getUdmfString('user_advice')));
+   changeStatNum(_stat_advicemark);
 }
 
 /* EOF */

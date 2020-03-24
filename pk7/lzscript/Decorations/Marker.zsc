@@ -7,25 +7,25 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_MapMarker : Actor {
-   default {
-      +NOBLOCKMAP
-      +NOGRAVITY
-      +DONTSPLASH
-      +INVISIBLE
-   }
+class Lith_MapMarker : Actor;
 
-   override void beginPlay() {
-      changeTid(level.findUniqueTid());
-      setTag(StringTable.localize(curSector.getUdmfString('user_marker')));
-      changeStatNum(_stat_mapmark);
-   }
+default {
+   +NOBLOCKMAP
+   +NOGRAVITY
+   +DONTSPLASH
+   +INVISIBLE
+}
 
-   states {
-   Spawn:
-      TNT1 A -1;
-      stop;
-   }
+override void beginPlay() {
+   changeTid(level.findUniqueTid());
+   setTag(StringTable.localize(curSector.getUdmfString('user_marker')));
+   changeStatNum(_stat_mapmark);
+}
+
+states {
+Spawn:
+   TNT1 A -1;
+   stop;
 }
 
 /* EOF */

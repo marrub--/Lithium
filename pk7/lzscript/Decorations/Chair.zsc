@@ -7,21 +7,18 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Chair : Actor
-{
-   default
-   {
-      Height 32;
-      Radius 20;
-      Scale 0.7;
-   }
+class Lith_Chair : Actor;
 
-   states
-   {
-   Spawn:
-      CHAI A -1;
-      stop;
-   }
+default {
+   Height 32;
+   Radius 20;
+   Scale 0.7;
+}
+
+states {
+Spawn:
+   CHAI A -1;
+   stop;
 }
 
 /* EOF */
