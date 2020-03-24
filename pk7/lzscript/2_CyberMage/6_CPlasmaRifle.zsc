@@ -66,6 +66,7 @@ class Lith_CPlasmaRifle : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PlasmaRiflePickup";
    Tag "$LITH_INFO_SHORT_CPlasmaRifle";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
@@ -89,13 +90,6 @@ action(Weapon) void Lith_A_FirePulse()
    A_TakeInventory("Lith_PlasmaAmmo", 80, TIF_NOTAKEINFINITE);
    A_StartSound("weapons/plasma/altfire", lch_weapon);
    A_FireProjectile("Lith_PulseCharge");
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PlasmaRiflePickup");
-   stop;
 }
 
 states(Weapon)

@@ -12,6 +12,7 @@ class Lith_RiotShotgun : Lith_TWeapon;
 const _ammo_used = 10;
 
 default {
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Tag "$LITH_INFO_SHORT_RiotShotgun";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
@@ -29,12 +30,6 @@ action(Weapon) void Lith_A_FireRiotShotgun() {
    Lith_A_RecoilUp(4);
    A_StartSound("weapons/riotshot/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_SuperShotgunPickup");
-   stop;
 }
 
 states(Weapon) {

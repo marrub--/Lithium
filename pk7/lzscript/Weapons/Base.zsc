@@ -58,6 +58,8 @@ private meta sound m_scopeOutSnd;
 private meta sound m_scopeInSnd;
 private meta float m_scopeZoom;
 
+private meta class<Actor> m_spawnType;
+
 private bool m_side;
 
 property MagSize: m_max;
@@ -66,12 +68,15 @@ property ScopeOutSound: m_scopeOutSnd;
 property ScopeInSound:  m_scopeInSnd;
 property ScopeZoom:     m_scopeZoom;
 
+property SpawnType: m_spawnType;
+
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
 
-/* These flags are used for spawning pickup actors. */
-/* UDMF maps have a surprising amount of control over things, so we have */
-/* to use a load of flags to make this work properly. */
+/* These flags are used for spawning pickup actors.
+ * UDMF maps have a surprising amount of control over things, so we have
+ * to use a load of flags to make this work properly.
+ */
 const Lith_PF =
    SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
    SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
@@ -138,7 +143,6 @@ action state Lith_A_Ready(int flags = 0) {
 }
 
 action(Actor) void Lith_A_SpawnPickup(class<Actor> a) {
-   A_SpawnItemEx(a, flags: Lith_PF);
 }
 
 bool Lith_MagEmpty() {
@@ -273,7 +277,8 @@ states(Actor) {
 Spawn:
    TNT1 A 0;
    TNT1 A 0 {
-      return bDROPPED ? ResolveState("Null") : ResolveState("SpawnPickup");
+      if(!bDROPPED && m_spawnType)
+         A_SpawnItemEx(m_spawnType, flags: Lith_PF);
    }
    stop;
 }

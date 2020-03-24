@@ -11,6 +11,7 @@ class Lith_SuperShotgun : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Tag "$LITH_INFO_SHORT_SuperShotgun";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
@@ -54,13 +55,6 @@ action(Weapon) void Lith_A_FireSSG()
    Lith_A_RecoilUp(1.5);
    A_GunFlash();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_SuperShotgunPickup");
-   stop;
 }
 
 states(Weapon)

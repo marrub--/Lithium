@@ -12,6 +12,7 @@ class Lith_RedRifle : Lith_TWeapon;
 const _ammo_used = 30;
 
 default {
+   Lith_Weapon.SpawnType "Lith_RocketLauncherPickup";
    Tag "$LITH_INFO_SHORT_RedRifle";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
@@ -27,12 +28,6 @@ action(Weapon) void Lith_A_FireRedRifle() {
    Lith_A_RecoilUp(4);
    A_StartSound("weapons/redrifle/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
-   stop;
 }
 
 states(Weapon) {

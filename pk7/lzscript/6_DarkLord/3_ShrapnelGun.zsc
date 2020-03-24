@@ -34,6 +34,7 @@ class Lith_ShrapnelProjectile : Actor {
 class Lith_ShrapnelGun : Lith_DWeapon;
 
 default {
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Tag "$LITH_INFO_SHORT_ShrapnelGun";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.9;
@@ -41,12 +42,6 @@ default {
 
 action(Weapon) void Lith_A_FireShrapnel() {
    A_FireProjectile("Lith_ShrapnelProjectile", frandom(-5, 5), false, frandom(-5, 5), frandom(-7, 7), FPF_NOAUTOAIM);
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_SuperShotgunPickup");
-   stop;
 }
 
 states(Weapon) {

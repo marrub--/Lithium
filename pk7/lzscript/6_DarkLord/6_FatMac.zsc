@@ -55,6 +55,7 @@ class Lith_FatMac : Lith_DWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PlasmaRiflePickup";
    Tag "$LITH_INFO_SHORT_FatMac";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
@@ -82,13 +83,6 @@ action(Weapon) void Lith_A_FireFatMac()
 
    A_Recoil(14 + vl * 2);
    Lith_A_RecoilUp(3 + vl * 1.1);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
-   stop;
 }
 
 states(Weapon)

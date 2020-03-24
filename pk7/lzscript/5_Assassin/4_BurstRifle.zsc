@@ -10,6 +10,7 @@
 class Lith_BurstRifle : Lith_AWeapon;
 
 default {
+   Lith_Weapon.SpawnType "Lith_ChaingunPickup";
    Lith_Weapon.MagSize 40;
    Tag "$LITH_INFO_SHORT_BurstRifle";
    Weapon.SlotNumber 4;
@@ -28,12 +29,6 @@ action(Weapon) void Lith_A_FireBurstRifle() {
    A_StartSound("weapons/burstrif/fire", lch_weapon, pitch: p);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    invoker.m_lessen += 0.43;
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
-   stop;
 }
 
 states(Weapon) {

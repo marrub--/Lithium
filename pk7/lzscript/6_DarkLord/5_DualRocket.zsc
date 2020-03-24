@@ -32,6 +32,7 @@ class Lith_Sophia : Lith_Rocket {
 class Lith_DualRocket : Lith_DWeapon;
 
 default {
+   Lith_Weapon.SpawnType "Lith_RocketLauncherPickup";
    Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
@@ -42,12 +43,6 @@ action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
    A_FireProjectile(cl, 0, true, xofs, -2);
    A_TakeInventory("Lith_RocketAmmo", 2);
    Lith_A_RecoilUp(1.2);
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
-   stop;
 }
 
 states(Weapon) {

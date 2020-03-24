@@ -70,6 +70,7 @@ class Lith_ChargeFist : Lith_OutcastsWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_ChainsawPickup";
    DamageType "Melee";
    Tag "$LITH_INFO_SHORT_ChargeFist";
    Weapon.Kickback 100;
@@ -79,14 +80,6 @@ default
    +WEAPON.CHEATNOTWEAPON
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
-}
-
-states(Actor)
-{
-Spawn:
-   TNT1 A 0;
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChainsawPickup");
-   stop;
 }
 
 states(Weapon)

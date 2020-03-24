@@ -183,6 +183,7 @@ class Lith_IonRifle : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_RocketLauncherPickup";
    Lith_Weapon.MagSize 6;
    Lith_Weapon.ScopeInSound "weapons/ionrifle/zoomin";
    Lith_Weapon.ScopeOutSound "weapons/ionrifle/zoomout";
@@ -216,13 +217,6 @@ action(Weapon) void Lith_A_FireIonRifle()
       A_StartSound("weapons/ionrifle/cfire", lch_weapon);
    else
       A_StartSound("weapons/ionrifle/fire", lch_weapon);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
-   stop;
 }
 
 states(Weapon)

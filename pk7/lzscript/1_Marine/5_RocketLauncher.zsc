@@ -76,6 +76,7 @@ class Lith_GrenadeLauncher : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_RocketLauncherPickup";
    Tag "$LITH_INFO_SHORT_GrenadeLauncher";
    Weapon.BobRangeX 0.9;
    Weapon.BobRangeY 1.1;
@@ -117,13 +118,6 @@ action(Weapon) void Lith_A_FireHomingRocket()
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_HomingRocket");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_RocketLauncherPickup");
-   stop;
 }
 
 states(Weapon)

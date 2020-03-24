@@ -116,6 +116,7 @@ class Lith_FortuneProjectile : Actor {
 class Lith_FortuneGun : Lith_DWeapon;
 
 default {
+   Lith_Weapon.SpawnType "Lith_BFG9000Pickup";
    Lith_Weapon.MagSize 4;
    Tag "$LITH_INFO_SHORT_FortuneGun";
    Weapon.SlotNumber 7;
@@ -133,12 +134,6 @@ action(Weapon) void Lith_A_FireFortune() {
    let pr = A_FireProjectile("Lith_FortuneProjectile", spawnheight: -32);
    pr.pitch = self.pitch;
    Lith_A_RecoilUp(10);
-}
-
-states(Actor) {
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_BFG9000Pickup");
-   stop;
 }
 
 states(Weapon) {

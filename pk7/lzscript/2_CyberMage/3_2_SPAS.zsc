@@ -96,6 +96,7 @@ class Lith_SPAS : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Lith_Weapon.MagSize 8;
    Tag "$LITH_INFO_SHORT_SPAS";
    Weapon.SlotNumber 3;
@@ -143,13 +144,6 @@ action(Weapon) void Lith_A_FireSPASAuto()
    Lith_FireBullets(11, 5, 2, 2);
    Lith_A_GunSmoke();
    A_StartSound("weapons/cshotgun/fire2", lch_weapon);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_SuperShotgunPickup");
-   stop;
 }
 
 states(Weapon)

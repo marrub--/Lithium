@@ -11,6 +11,7 @@ class Lith_Flintlock : Lith_IWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 2;
    Tag "$LITH_INFO_SHORT_Flintlock";
    Weapon.BobRangeX 1.7;
@@ -20,13 +21,6 @@ default
    Weapon.SlotPriority 1;
 
    +WEAPON.NOAUTOFIRE;
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
-   stop;
 }
 
 states(Weapon)

@@ -157,6 +157,7 @@ class Lith_SMG : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_ChaingunPickup";
    Lith_Weapon.MagSize 50;
    Tag "$LITH_INFO_SHORT_SMG";
    Weapon.SlotNumber 4;
@@ -187,13 +188,6 @@ action(Weapon) void Lith_A_FireSMG()
 
    invoker.m_Recoil += 0.05;
    if(invoker.m_Recoil > 1) invoker.m_Recoil = 1;
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
-   stop;
 }
 
 states(Weapon)

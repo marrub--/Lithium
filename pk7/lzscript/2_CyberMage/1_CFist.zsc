@@ -11,6 +11,7 @@ class Lith_CFist : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_FistPickup";
    Tag "$LITH_INFO_SHORT_CFist";
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
@@ -18,13 +19,6 @@ default
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
    +WEAPON.WIMPY_WEAPON
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_FistPickup");
-   stop;
 }
 
 states(Weapon)

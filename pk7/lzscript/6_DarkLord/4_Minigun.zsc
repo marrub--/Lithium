@@ -11,6 +11,7 @@ class Lith_Minigun : Lith_DWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_ChaingunPickup";
    Lith_Weapon.MagSize 400;
    Tag "$LITH_INFO_SHORT_Minigun";
    Weapon.SlotNumber 4;
@@ -113,13 +114,6 @@ action(Weapon) void Lith_A_MinigunPostFire()
 {
    Lith_A_RecoilDn(0.35);
    A_SetTics(invoker.Lith_WindupTime());
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
-   stop;
 }
 
 states(Weapon)

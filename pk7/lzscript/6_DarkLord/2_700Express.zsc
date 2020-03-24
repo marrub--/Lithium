@@ -42,6 +42,7 @@ class Lith_700Express : Lith_DWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 4;
    Tag "$LITH_INFO_SHORT_700Express";
    Weapon.SlotNumber 2;
@@ -99,13 +100,6 @@ action(Weapon) void Lith_A_Laser(double pit)
          a.Alpha -= i / 40.0;
       }
    }
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
-   stop;
 }
 
 states(Weapon)

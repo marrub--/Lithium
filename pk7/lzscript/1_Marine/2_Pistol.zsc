@@ -100,6 +100,7 @@ class Lith_Pistol : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 14;
    Lith_Weapon.ScopeInSound "weapons/pistol/zoomin";
    Lith_Weapon.ScopeOutSound "weapons/pistol/zoomout";
@@ -147,13 +148,6 @@ action(Weapon) void Lith_A_FirePistol()
 
    Lith_A_GunSmokeSmall();
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
-   stop;
 }
 
 states(Weapon)

@@ -49,6 +49,7 @@ class Lith_PlasmaRifle : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PlasmaRiflePickup";
    Lith_Weapon.MagSize 5;
    Tag "$LITH_INFO_SHORT_PlasmaRifle";
    Weapon.SlotNumber 6;
@@ -99,13 +100,6 @@ action(Weapon) void Lith_A_FireAltPlasma()
 action(Weapon) void Lith_A_EmitIons(int spars)
 {
    A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, spars, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PlasmaRiflePickup");
-   stop;
 }
 
 states(Weapon)

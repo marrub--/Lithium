@@ -140,6 +140,7 @@ class Lith_Mateba : Lith_CWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 12;
    Tag "$LITH_INFO_SHORT_Mateba";
    Weapon.BobRangeX 0.2;
@@ -176,13 +177,6 @@ action(Weapon) void Lith_A_FireFinalizer()
    A_StartSound("weapons/mateba/fire", lch_weapon);
    A_StartSound("weapons/mateba/finalize", lch_weapon2);
    A_StartSound("weapons/shotgun/just", lch_weapon3);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_PistolPickup");
-   stop;
 }
 
 states(Weapon)

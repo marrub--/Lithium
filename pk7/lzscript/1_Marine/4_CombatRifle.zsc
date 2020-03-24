@@ -96,6 +96,7 @@ class Lith_CombatRifle : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_ChaingunPickup";
    Lith_Weapon.MagSize 80;
    Tag "$LITH_INFO_SHORT_CombatRifle";
    Weapon.SlotNumber 4;
@@ -196,13 +197,6 @@ action(Weapon) void Lith_A_FireRifleGrenade()
       A_StartSound("weapons/rifle/grenade", lch_weapon);
    A_AlertMonsters();
    A_FireProjectile("Lith_RifleGrenade");
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ChaingunPickup");
-   stop;
 }
 
 states(Weapon)

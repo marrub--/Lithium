@@ -64,6 +64,7 @@ class Lith_Shotgun : Lith_MWeapon;
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_ShotgunPickup";
    Lith_Weapon.MagSize 15;
    Tag "$LITH_INFO_SHORT_Shotgun";
    Weapon.SlotNumber 3;
@@ -135,13 +136,6 @@ action(Weapon) void Lith_A_FireGauss()
    A_StartSound("weapons/shotgun/gauss/fire", lch_weapon);
    A_Recoil(0.777);
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_ShotgunPickup");
-   stop;
 }
 
 states(Weapon)

@@ -51,6 +51,7 @@ class Lith_Fist : Lith_MWeapon replaces Fist; /* why would you pick up a fist */
 
 default
 {
+   Lith_Weapon.SpawnType "Lith_FistPickup";
    AttackSound "*fist"; /* there is nothing wrong here MOVE ALONG */
    DamageType "Melee";
    Tag "$LITH_INFO_SHORT_Fist";
@@ -61,13 +62,6 @@ default
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
    +WEAPON.WIMPY_WEAPON
-}
-
-states(Actor)
-{
-SpawnPickup:
-   TNT1 A 0 Lith_A_SpawnPickup("Lith_FistPickup");
-   stop;
 }
 
 states(Weapon)
