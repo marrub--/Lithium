@@ -136,6 +136,14 @@
 "LITH_UPGRADE_EFFEC_UNCEUNCE" = "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
 "LITH_UPGRADE_TITLE_InstaDeath" = "Instant Death";
 "LITH_UPGRADE_EFFEC_InstaDeath" = "Upon losing health, you instantly die.";
+"LITH_BOSS_DIV_1" = "Wait.\n\nYou must leave this place.";
+"LITH_BOSS_DIV_2" = "I cannot let you have it.\n\nIf you acquire it, everything will go to waste.";
+"LITH_BOSS_DIV_3" = "I know you have defeated me once before.\n\nTime has repeated.";
+"LITH_BOSS_DIV_4" = "You must leave, now.";
+"LITH_BOSS_DIV_5" = "If time is allowed to repeat once more the Artifact may not be in my hands.\n\nI do not know if any others would know how to handle it.";
+"LITH_BOSS_DIV_6" = "I do not know if I can.\n\nLeave. Now.";
+"LITH_BOSS_DIV_7" = "If you are so avaritious that you must truly defeat me once more,\n\ndo not touch the Artifact.";
+"LITH_BOSS_DIV_8" = "Kill me if you must.\n\nBut I will not hold back.\n\nI plead of you to leave,\n\nor die by my hand.";
 "LITH_BOSS_BAR_1_Stan" = "\cgWhat a riot!\n\cyA human comes to our domain.";
 "LITH_BOSS_BAR_2_Stan" = "\cgIt's quite amusing to see someone so strong of will here.\n\cyDon't fret though. It'll be over quite soon.";
 "LITH_BOSS_BAR_3_Stan" = "\cgAn incredible sight seeing a warrior here.\n\cyThis place is cursed. If you leave, it will only be worse.";
@@ -1070,6 +1078,7 @@
 "LITH_LOG_BossWarnMod" = "$LITH_LOG_BossWarnStan";
 "LITH_LOG_BossHear1" = "\cgYou feel ringing in your ears...";
 "LITH_LOG_BossHear2" = "\cgSomething is calling out to you.";
+"LITH_LOG_BossHear3" = "\cgYou feel intense pain throughout your whole body...";
 "LITH_LOG_StartGame" = "Press \"%jS\" to open the menu.";
 "LITH_LOG_MailRecv" = "Mail received from <\cj%S\c->.";
 "LITH_LOG_SellOrder" = "0";
@@ -1449,6 +1458,13 @@
 "LITH_sv_rain" = "Rain in outside areas";
 "LITH_sv_sky" = "Replace skies";
 "LITH_sv_lessparticles" = "Less particles";
+"LITH_stx_postgame" = "Post-game";
+"LITH_sv_postgame" = "Enable post-game content";
+"LITH_stx_postgame_0" = "";
+"LITH_stx_postgame_1" = "\cgWarning:\c- Post-game content can";
+"LITH_stx_postgame_2" = "cause saves to be effectively deleted,";
+"LITH_stx_postgame_3" = "and will have \cipermanent repercussions\c-.";
+"LITH_stx_postgame_4" = "Only enable it if you really want more.";
 "LITH_COST" = "Cost:";
 "LITH_EFFECT" = "Effect:";
 "LITH_FREE" = "Free";

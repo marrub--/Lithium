@@ -7,10 +7,22 @@
  * ---------------------------------------------------------------------------|
  */
 
+/* FINAL: Fuck Inconsistent Naming of Acroynms, Ligma */
+class Lith_FINAL : StaticEventHandler {
+   override void worldLoaded(WorldEvent ev) {
+      if(ev.isSaveGame) {
+         if(!(__lith_fun & lfun_final) && Lith_HERMES.instance().m_wasFinal) {
+            CallACS("Lith_TimelineInconsistent");
+         }
+      }
+   }
+}
+
 extend class Lith_HERMES;
 
 private array<Actor> m_bossBabies;
-private int m_BossDeathInit;
+private int m_bossDeathInit;
+bool m_wasFinal;
 
 static void SetEnding(string ending)
    {if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);}
@@ -42,9 +54,6 @@ override void WorldLoaded(WorldEvent ev)
       "b304ac2e0c15b97fe9e2dcd5cff9066c"  /* freedoom2.wad (0.12.1) MAP30 */
    };
 
-   if(ev.IsSaveGame)
-      return;
-
    m_bossLevel = boss_none;
 
    m_bossBabies.clear();
@@ -58,16 +67,23 @@ override void WorldLoaded(WorldEvent ev)
       if(sum == BOSS_E3[i]) {m_bossLevel = boss_spiderdemon; break;}
    for(int i = 0; i < BOSS_E4.Size(); i++)
       if(sum == BOSS_E4[i]) {m_bossLevel = boss_other;       break;}
-   for(int i = 0; i < BOSS_D2.Size(); i++)
-      if(sum == BOSS_D2[i]) {m_bossLevel = boss_iconofsin;   break;}
+   for(int i = 0; i < BOSS_D2.Size(); i++) {
+      if(sum == BOSS_D2[i]) {
+         m_bossLevel = boss_iconofsin;
+         if(__lith_fun & lfun_final) m_wasFinal = true;
+         break;
+      }
+   }
 
-   if(ev.IsReopen) {
+   if(ev.isReopen) {
       CallACS("Lith_WorldReopen");
    } else {
       CallACS("lithlib@gsinit");
       CallACS("lithmain@gsinit");
       CallACS("Lith_PreInit");
    }
+
+   if(__lith_fun & lfun_ragnarok) Ragnarok();
 
    bool in_hell = CallACS("Lith_InHell");
    if(CallACS("Lith_SkyMap")) {
@@ -81,6 +97,50 @@ override void WorldLoaded(WorldEvent ev)
    }
 }
 
+static void Ragnarok() {
+   S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
+
+   let sky = TexMan.CheckForTexture("HELP", TexMan.Type_Any);
+
+   level.changeSky(sky, sky);
+   level.skyspeed1 = 0.001;
+   level.skyspeed2 = 0.001;
+
+   for(int i = 0, j = level.sectors.size(); i < j; i++) {
+      Sector sec = level.sectors[i];
+      sec.lightlevel = 107;
+      sec.flags |= Sector.SECF_ENDGODMODE;
+      sec.setAngle(Sector.floor,   frandom(0, 360));
+      sec.setAngle(Sector.ceiling, frandom(0, 360));
+
+      for(int k = 0, l = sec.lines.size(); k < l; k++) {
+         Line lin = sec.lines[k];
+         lin.flags |= Line.ML_DONTDRAW;
+         lin.alpha = frandom(0.5, 1);
+
+         for(int m = 0; m < 2; m++) {
+            Side sid = lin.sidedef[m];
+            if(sid) {
+               sid.addTextureXOffset(Side.top,    frandom(-7,7));
+               sid.addTextureXOffset(Side.mid,    frandom(-7,7));
+               sid.addTextureXOffset(Side.bottom, frandom(-7,7));
+               sid.addTextureYOffset(Side.top,    frandom(-7,7));
+               sid.addTextureYOffset(Side.mid,    frandom(-7,7));
+               sid.addTextureYOffset(Side.bottom, frandom(-7,7));
+               sid.light = random(-40, 40);
+            }
+         }
+      }
+   }
+
+   Thinker th;
+   for(let it = ThinkerIterator.Create("Actor"); (th = it.next());) {
+      let mo = Actor(th);
+      if(mo && mo.bISMONSTER) PrepareForRagnarok(mo);
+   }
+}
+
+
 override void WorldThingDestroyed(WorldEvent ev)
 {
    let item = Lith_InventoryItem(ev.thing);
@@ -89,7 +149,7 @@ override void WorldThingDestroyed(WorldEvent ev)
 
 override void WorldUnloaded(WorldEvent ev)
 {
-   m_BossDeathInit = 0;
+   m_bossDeathInit = 0;
 
    let it = ThinkerIterator.Create("Lith_InventoryItem");
    for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());)
@@ -128,7 +188,7 @@ override void WorldThingSpawned(WorldEvent ev)
    if(th.bISMONSTER && !(th is "RandomSpawner")) {
       Lith_UTIL.Exec(th, lsc_monsterinfo);
 
-      if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & lfun_ragnarok)
+      if(__lith_fun & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
 
       switch(m_bossLevel) {
@@ -153,10 +213,18 @@ override void WorldThingSpawned(WorldEvent ev)
             break;
       }
 
-      if(m_bossLevel != boss_none && th.bBOSSDEATH) {
-         th.Health = int(th.Health * 2.7);
-         th.ReactionTime = 0;
-         th.DamageMultiply *= 1.6;
+      if(m_bossLevel != boss_none) {
+         if(__lith_fun & lfun_final) {
+            th.Health *= 2;
+            th.ReactionTime = 0;
+            th.DamageMultiply *= 1.5;
+         }
+
+         if(th.bBOSSDEATH) {
+            th.Health = int(th.Health * 2.7);
+            th.ReactionTime = 0;
+            th.DamageMultiply *= 1.6;
+         }
       }
    }
 }
@@ -168,7 +236,7 @@ override void WorldTick()
          for(int j = 0; j < 3; j++)
             Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);
 
-      if(m_BossDeathInit == 0) {
+      if(m_bossDeathInit == 0) {
          bool boss_baby_is_dead;
 
          if(m_bossBabies.size() == 0) {
@@ -193,7 +261,19 @@ override void WorldTick()
             }
          }
 
-         if(boss_baby_is_dead) m_BossDeathInit = level.totaltime;
+         if(boss_baby_is_dead) {
+            m_bossDeathInit = level.totaltime;
+            if(m_bossLevel == boss_iconofsin && lith_sv_postgame) {
+               int nf = __lith_fun;
+               if(__lith_fun & lfun_final) {
+                  nf |= lfun_division;
+                  nf &= ~lfun_final;
+               } else {
+                  nf |= lfun_final;
+               }
+               CVar.findCVar('__lith_fun').setInt(nf);
+            }
+         }
       }
    }
 }
@@ -359,11 +439,11 @@ override void NetworkProcess(ConsoleEvent ev)
 }
 
 override void RenderOverlay(RenderEvent evt) {
-   float ftic = level.totaltime - m_BossDeathInit + evt.fracTic;
+   float ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
 
    for(int i = 0; i < MAXPLAYERS; i++) {
       PlayerInfo player = players[i];
-      if(m_BossDeathInit == 0) {
+      if(m_bossDeathInit == 0) {
          Shader.SetEnabled(player, "Lith_End", false);
       } else if(ftic > 15.0) {
          Shader.SetEnabled(player, "Lith_End", true);

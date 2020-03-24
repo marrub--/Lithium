@@ -18,7 +18,7 @@ gameinfo {
    PrecacheSounds    = "amb/rain", "amb/wind"
    QuitSound         = "misc/quitsound"
 
-   AddEventHandlers  = "Lith_HERMES", "Lith_URANUS"
+   AddEventHandlers  = "Lith_HERMES", "Lith_URANUS", "Lith_FINAL"
    PlayerClasses     = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
                        "Lith_InformantPlayer", "Lith_WandererPlayer",
                        "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",

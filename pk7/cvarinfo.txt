@@ -10,7 +10,7 @@
 server float __lith_version;
 
 server noarchive string __lith_end;
-server int __lith_fun;
+server nosave int __lith_fun;
 
 server noarchive int  __lith_debug_level    = 0;
 server noarchive bool __lith_debug_all      = false;
@@ -35,6 +35,7 @@ server int   lith_sv_failtime      = 67;
 server bool  lith_sv_wepdrop       = false;
 server int   lith_sv_bloodtime     = 2000;
 server bool  lith_sv_lessparticles = false;
+server bool  lith_sv_postgame      = false;
 
 user   float lith_weapons_zoomfactor     = 1.5;
 user   float lith_weapons_scopealpha     = 0.2;

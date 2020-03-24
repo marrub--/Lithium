@@ -66,8 +66,7 @@ reinit:
 
    P_BossWarning(p);
 
-   if(p->getCVarI(sc_player_bosstexts))
-      P_BossText(p, ServCallI(sm_GetBossLevel));
+   P_BossText(p, ServCallI(sm_GetBossLevel));
 
    if(p->teleportedout) P_TeleportInAsync(p);
 
@@ -145,6 +144,10 @@ reinit:
 script type("death")
 static void Sc_PlayerDeath(void)
 {
+   i32 fun = GetFun();
+
+   if(fun & lfun_final) SetFun(fun & ~lfun_final);
+
    struct player *p = LocalPlayer;
 
    p->dead = true;
@@ -393,6 +396,12 @@ static void P_BossText(struct player *p, i32 boss)
       return;
    }
 
+   bool division = boss == boss_iconofsin && GetFun() & lfun_final;
+
+   if(division) p->logB(1, LC(LANG "LOG_BossHear3"));
+
+   if(!p->getCVarI(sc_player_bosstexts)) return;
+
    cstr fmt;
    switch(boss) {
       case boss_none:
@@ -401,7 +410,10 @@ static void P_BossText(struct player *p, i32 boss)
       case boss_barons:      fmt = LANG "BOSS_BAR_%i_%s"; break;
       case boss_cyberdemon:  fmt = LANG "BOSS_CYB_%i_%s"; break;
       case boss_spiderdemon: fmt = LANG "BOSS_SPI_%i_%s"; break;
-      case boss_iconofsin:   fmt = LANG "BOSS_IOS_%i_%s"; break;
+      case boss_iconofsin:
+         if(division) fmt = LANG "BOSS_DIV_%i";
+         else         fmt = LANG "BOSS_IOS_%i_%s";
+         break;
    }
 
    p->logB(1, LC(LANG "LOG_BossHear1"));
@@ -411,8 +423,9 @@ static void P_BossText(struct player *p, i32 boss)
 
    WaitPause();
 
+   i32 t = 35 * 5 * (division ? 8 : 10);
    char text[1024];
-   for(i32 i = 0, j = 1; i < 35 * 50; i++) {
+   for(i32 i = 0, j = 1; i < t; i++) {
       if(i % (35 * 5) == 0) {
          k32 di = ACS_RandomFixed(0.1, 0.2);
          k32 fa = ACS_RandomFixed(0.1, 0.6);
@@ -593,6 +606,23 @@ void Sc_KeyGlare(void) {
       ACS_FadeTo(255, 255, 255, 0.0, 0.2);
 
       ACS_Delay(19);
+   }
+}
+
+script_str ext("ACS") addr("Lith_TimelineInconsistent")
+void Sc_TimelineInconsistent(void) {
+   for(;;) {
+      for_player() {
+         p->setActivator();
+         ACS_FadeTo(0, 0, 0, 1.0, 0.0);
+         SetSize(320, 240);
+         PrintTextChS("This timeline is irreparable,\n"
+                      "and cannot continue.\n"
+                      "You must start anew.");
+         PrintText(s_bigupper, CR_WHITE, 160,4, 120,0);
+         p->health = -1;
+      }
+      ACS_Delay(1);
    }
 }
 

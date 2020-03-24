@@ -150,7 +150,7 @@ static void BaseMonsterLevel(dmon_t *m)
    } else if(m->mi->flags & mif_dark) {
       m->rank  = 6;
       m->level = 66;
-   } else if(fun & lfun_ragnarok) {
+   } else if(GetFun() & lfun_ragnarok) {
       m->rank  = _max_rank;
       m->level = _max_level + rn2 * bias;
    } else {

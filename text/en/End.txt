@@ -6,6 +6,8 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+!!include End/Division.txt
+
 !!include End/Stan/Dialogue.txt
 !!include End/Jem/Dialogue.txt
 

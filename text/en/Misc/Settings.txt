@@ -201,4 +201,14 @@
 == \#sv_sky           | Replace skies
 == \#sv_lessparticles | Less particles
 
+== \#stx_postgame | Post-game
+
+== \#sv_postgame | Enable post-game content
+
+== \#stx_postgame_0 |
+== \#stx_postgame_1 | \cgWarning:\c- Post-game content can
+== \#stx_postgame_2 | cause saves to be effectively deleted,
+== \#stx_postgame_3 | and will have \cipermanent repercussions\c-.
+== \#stx_postgame_4 | Only enable it if you really want more.
+
 ## EOF

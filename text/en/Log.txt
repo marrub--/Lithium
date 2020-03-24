@@ -101,6 +101,7 @@
 
 == \#LOG_BossHear1 | \cgYou feel ringing in your ears...
 == \#LOG_BossHear2 | \cgSomething is calling out to you.
+== \#LOG_BossHear3 | \cgYou feel intense pain throughout your whole body...
 
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | Press "%jS" to open the menu.

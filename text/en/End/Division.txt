@@ -1,0 +1,51 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#BOSS_DIV_1
+Wait.
+
+You must leave this place.
+
+%% \#BOSS_DIV_2
+I cannot let you have it.
+
+If you acquire it, everything will go to waste.
+
+%% \#BOSS_DIV_3
+I know you have defeated me once before.
+
+Time has repeated.
+
+%% \#BOSS_DIV_4
+You must leave, now.
+
+%% \#BOSS_DIV_5
+If time is allowed to repeat once more the Artifact may not be in my hands.
+
+I do not know if any others would know how to handle it.
+
+%% \#BOSS_DIV_6
+I do not know if I can.
+
+Leave. Now.
+
+%% \#BOSS_DIV_7
+If you are so avaritious that you must truly defeat me once more,
+
+do not touch the Artifact.
+
+%% \#BOSS_DIV_8
+Kill me if you must.
+
+But I will not hold back.
+
+I plead of you to leave,
+
+or die by my hand.
+
+## EOF

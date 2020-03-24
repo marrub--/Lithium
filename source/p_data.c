@@ -337,6 +337,15 @@ script void P_Init(struct player *p) {
 
       P_BIP_GiveMail(p, st_mail_intro);
 
+      if(GetFun() & lfun_division) {
+         Str(divsigil, sOBJ "DivisionSigil");
+         k32 a = ACS_GetActorAngle(0);
+         k32 x = GetX(0) + ACS_Cos(a) * 128.0;
+         k32 y = GetY(0) + ACS_Sin(a) * 128.0;
+         k32 z = GetZ(0);
+         ACS_SpawnForced(divsigil, x, y, z);
+      }
+
       p->wasinit = true;
    }
 

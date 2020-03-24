@@ -131,6 +131,14 @@ if(p->num == 0) {
    ServerBool(sv_lessparticles);
 }
 
+Category(stx_postgame);
+ServerBool(sv_postgame);
+Text(stx_postgame_0);
+Text(stx_postgame_1);
+Text(stx_postgame_2);
+Text(stx_postgame_3);
+Text(stx_postgame_4);
+
 #undef Category
 #undef Bool
 #undef Float

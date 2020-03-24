@@ -33,6 +33,9 @@
 #define LithMapMagic 0x01202000
 #define LithMapMask  0xFFFFFC00
 
+#define GetFun()  ACS_GetCVar(sc_fun)
+#define SetFun(x) ACS_SetCVar(sc_fun, x)
+
 /* Types ------------------------------------------------------------------- */
 
 enum {
@@ -85,7 +88,6 @@ extern k64 scoremul;
 extern u64 ticks;
 extern k32 apiversion;
 extern i32 soulsfreed;
-extern i32 lmvar fun;
 extern bool bossspawned;
 extern i32 cbiperf;
 extern bool cbiupgr[cupg_max];

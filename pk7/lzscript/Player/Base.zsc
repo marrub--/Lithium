@@ -41,6 +41,9 @@ double m_VYaw, m_LastVYaw;
 double m_IYaw, m_LastIYaw;
 
 double m_ZVel, m_LastZVel;
+
+double m_VXVel, m_LastVXVel;
+double m_VYVel, m_LastVYVel;
 double m_VZVel, m_LastVZVel;
 
 Lith_MapMarker    m_curMark;
@@ -104,7 +107,7 @@ private void Lith_RainEffect() {
 }
 
 private void Lith_ItemVacuum() {
-   if(ACS_ExecuteWithResult(lsc_wdata, wdata_fun) & 2) {
+   if(__lith_fun & lfun_bips) {
       for(let it = BlockThingsIterator.Create(self, 70); it.next();) {
          if(Inventory(it.thing)) {
             let mo = Spawn("Lith_Bip", it.thing.pos);
