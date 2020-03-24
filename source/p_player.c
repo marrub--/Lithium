@@ -512,12 +512,6 @@ static void P_Scr_PTickPre(struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_GetFlashlightIntensity")
-k32 Sc_GetFlashlightIntensity(void) {
-   with_player(LocalPlayer) {return p->lt_intensity;}
-   return 0.0;
-}
-
 script_str ext("ACS") addr("Lith_Markiplier")
 void Sc_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
@@ -588,9 +582,6 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
       PrintTextA(s_smallfnt, CR_WHITE, x-9,1, y-2,1, a);
    }
 }
-
-script_str type("net") ext("ACS") addr("Lith_KeyLight")
-void Sc_KeyLight(void) {with_player(LocalPlayer) {p->lt_on = !p->lt_on;}}
 
 script_str type("net") ext("ACS") addr("Lith_KeyGlare")
 void Sc_KeyGlare(void) {

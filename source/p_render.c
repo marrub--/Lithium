@@ -59,68 +59,10 @@ static void P_Ren_LevelUp(struct player *p) {
    }
 }
 
-static void P_Ren_Flashlight(struct player *p) {
-   if(Paused) return;
-
-   i32 bat_life  = p->getCVarI(sc_light_battery) * 35;
-   i32 bat_regen = p->getCVarI(sc_light_regen);
-
-   if(p->old.lt_on != p->lt_on) {
-      Str(snd_off, s"player/lightoff");
-      Str(snd_on,  s"player/lighton");
-
-      ACS_LocalAmbientSound(p->lt_on ? snd_on : snd_off, 127);
-
-      if(p->old.lt_on) {
-         p->lt_target = 0.0;
-         p->lt_speed  = 0.05;
-      } else {
-         p->lt_target = 1.0;
-         p->lt_speed  = 0.15;
-      }
-   }
-
-   if(bat_life != 0) {
-      if(p->lt_on) {p->lt_battery--;}
-      else         {p->lt_battery += bat_regen;}
-
-      if(p->lt_battery > bat_life) {
-         p->lt_battery = bat_life;
-      } else if(p->lt_battery < 0) {
-         p->lt_battery = 0;
-         p->lt_on = false;
-      } else if(p->lt_battery < bat_life / 4 && ticks % 10 == 0) {
-         p->lt_intensity = ACS_RandomFixed(0.25, 0.75);
-      }
-
-      if(p->hudenabled) {
-         i32 y = p->lt_battery / (k32)bat_life * 8;
-
-         Str(bar,  s":HUD:Battery");
-         Str(back, s":HUD:BatteryOutline");
-
-         SetSize(320, 240);
-         PrintSprite(back, 90,1, 238,2);
-         SetClip(92, 236 - y, 2, 8);
-         PrintSprite(bar, 92,1, 236,2);
-         ClearClip();
-      }
-   }
-
-   if(p->lt_intensity != p->lt_target) {
-      p->lt_intensity = lerplk(p->lt_intensity, p->lt_target, p->lt_speed);
-   }
-
-   Dbg_Stat("lt_target: %lk\nlt_intensity: %lk\nlt_speed: %lk\n"
-            "lt_battery: %u\n",
-            p->lt_target, p->lt_intensity, p->lt_speed, p->lt_battery);
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall void P_Ren_PTickPst(struct player *p) {
    P_Ren_Magic(p);
-   P_Ren_Flashlight(p);
    P_Ren_Step(p);
    P_Ren_Infrared(p);
    P_Ren_View(p);

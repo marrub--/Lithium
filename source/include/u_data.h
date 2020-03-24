@@ -97,6 +97,12 @@ struct upgr_data_Zoom {
    k64 vzoom;
 };
 
+struct upgr_data_Flashlight {
+   bool on, was_on;
+   i32 battery;
+   k64 intensity, target, speed;
+};
+
 struct upgr_data_HomingRPG {
    i32 id;
 };
@@ -124,17 +130,18 @@ struct upgr_data_HeadsUpDisI {
 struct upgr_data {
    struct upgr_data_7777777     seven7;
    struct upgr_data_Adrenaline  adrenaline;
+   struct upgr_data_Flashlight  flashlight;
+   struct upgr_data_HeadsUpDisI headsupdisi;
+   struct upgr_data_HeadsUpDisM headsupdism;
+   struct upgr_data_HomingRPG   homingrpg;
    struct upgr_data_JetBooster  jetbooster;
-   struct upgr_data_lolsords    lolsords;
+   struct upgr_data_Magic       magic;
    struct upgr_data_ReactArmor  reactarmor;
    struct upgr_data_ReflexWetw  reflexwetw;
+   struct upgr_data_StealthSys  stealthsys;
    struct upgr_data_VitalScan   vitalscan;
    struct upgr_data_Zoom        zoom;
-   struct upgr_data_HomingRPG   homingrpg;
-   struct upgr_data_Magic       magic;
-   struct upgr_data_StealthSys  stealthsys;
-   struct upgr_data_HeadsUpDisM headsupdism;
-   struct upgr_data_HeadsUpDisI headsupdisi;
+   struct upgr_data_lolsords    lolsords;
 };
 
 struct upgradeinfo {

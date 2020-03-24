@@ -309,13 +309,6 @@ script void P_Init(struct player *p) {
    p->scoreaccumtime = 0;
    p->scoremul       = 1.3;
 
-   /* init the flashlight */
-   p->lt_on        = false;
-   p->lt_battery   = 0xffff;
-   p->lt_intensity = 0.0;
-   p->lt_target    = 0.0;
-   p->lt_speed     = 1.0;
-
    ServCallI(sm_PlayerInit);
 
    p->alpha = 1;

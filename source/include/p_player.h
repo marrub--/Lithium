@@ -147,9 +147,6 @@ struct player_delta
 
    /* Attributes */
    struct player_attributes attr;
-
-   /* Flashlight */
-   bool lt_on;
 };
 
 /*       7/4/2016: That's a lot of data!
@@ -328,10 +325,6 @@ struct player
    /* Keys */
    bool krc, kyc, kbc;
    bool krs, kys, kbs;
-
-   /* Flashlight */
-   i32 lt_battery;
-   k64 lt_intensity, lt_target, lt_speed;
 
    /* 🌌 「÷」 0 */
    bool sgacquired;

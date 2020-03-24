@@ -23,18 +23,15 @@ static i32 g_upgrmax = UPGR_BASE_MAX;
 
 /* Static Functions -------------------------------------------------------- */
 
-static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr)
-{
+static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr) {
    return !((struct upgrade *)upgr)->owned;
 }
 
-static void UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr)
-{
+static void UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr) {
    P_Upg_SetOwned(p, upgr);
 }
 
-static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid)
-{
+static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid) {
    struct upgrade const *upgr = upgr_;
 
    SetMembI(tid, sm_UpgradeId, upgr->info->key);
@@ -48,8 +45,7 @@ static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 t
    return true;
 }
 
-static i32 CompUpgrInfo(void const *lhs, void const *rhs)
-{
+static i32 CompUpgrInfo(void const *lhs, void const *rhs) {
    struct upgradeinfo const *u1 = lhs, *u2 = rhs;
    i32 c1 = u1->category - u2->category;
    if(c1 != 0) return c1;
@@ -58,17 +54,14 @@ static i32 CompUpgrInfo(void const *lhs, void const *rhs)
 
 /* Extern Functions -------------------------------------------------------- */
 
-struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr)
-{
+struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr) {
    struct upgradeinfo *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
    *ui = *upgr;
    return ui;
 }
 
-void Upgr_MInit(void)
-{
-   for(i32 i = 0; i < g_upgrmax; i++)
-   {
+void Upgr_MInit(void) {
+   for(i32 i = 0; i < g_upgrmax; i++) {
       struct upgradeinfo *ui = &g_upgrinfo[i];
 
       /* Set up static function pointers */
@@ -77,8 +70,7 @@ void Upgr_MInit(void)
       ui->ShopGive   = UpgrGive;
 
       /* Set up individual upgrades' function pointers */
-      switch(ui->key)
-      {
+      switch(ui->key) {
       #define Ret(n) continue;
       #define Fn_F(n, cb) ui->cb = Upgr_##n##_##cb;
       #define Fn_S(n, cb) Fn_F(n, cb)
@@ -88,8 +80,7 @@ void Upgr_MInit(void)
    }
 }
 
-void Upgr_GInit(void)
-{
+void Upgr_GInit(void) {
    g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
    memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
 
@@ -103,8 +94,7 @@ void Upgr_GInit(void)
       g_upgrinfo[i].id = i;
 }
 
-void P_Upg_SetOwned(struct player *p, struct upgrade *upgr)
-{
+void P_Upg_SetOwned(struct player *p, struct upgrade *upgr) {
    if(upgr->owned) return;
 
    upgr->owned = true;
@@ -114,9 +104,7 @@ void P_Upg_SetOwned(struct player *p, struct upgrade *upgr)
       P_Upg_Toggle(p, upgr);
 }
 
-script
-void P_Upg_PInit(struct player *p)
-{
+script void P_Upg_PInit(struct player *p) {
    #define CheckPClass() (g_upgrinfo[i].pclass & p->pclass)
    for(i32 i = 0; i < g_upgrmax; i++)
       if(CheckPClass())
@@ -125,27 +113,26 @@ void P_Upg_PInit(struct player *p)
    upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
    fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
-   for(i32 i = 0, j = 0; i < g_upgrmax; i++)
-      if(CheckPClass())
-   {
-      struct upgrade *upgr = &p->upgrades[j];
+   for(i32 i = 0, j = 0; i < g_upgrmax; i++) {
+      if(CheckPClass()) {
+         struct upgrade *upgr = &p->upgrades[j];
 
-      upgr->info = &g_upgrinfo[i];
+         upgr->info = &g_upgrinfo[i];
 
-      p->upgrademap.insert(upgr);
+         p->upgrademap.insert(upgr);
 
-      if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
-         P_Upg_Buy(p, upgr, true, true);
+         if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
+            P_Upg_Buy(p, upgr, true, true);
 
-      j++;
+         j++;
+      }
    }
 
    p->upgrinit = true;
    #undef CheckPClass
 }
 
-void P_Upg_PQuit(struct player *p)
-{
+void P_Upg_PQuit(struct player *p) {
    upgrademap_t_dtor(&p->upgrademap);
    p->upgrmax = 0;
 
@@ -155,23 +142,19 @@ void P_Upg_PQuit(struct player *p)
    p->upgrinit = false;
 }
 
-void P_Upg_PDeinit(struct player *p)
-{
+void P_Upg_PDeinit(struct player *p) {
    for_upgrade(upgr)
       if(upgr->active)
          upgr->wasactive = true,  P_Upg_Toggle(p, upgr);
 }
 
-void P_Upg_PMInit(struct player *p)
-{
+void P_Upg_PMInit(struct player *p) {
    for_upgrade(upgr)
       if(upgr->wasactive)
          upgr->wasactive = false, P_Upg_Toggle(p, upgr);
 }
 
-script
-void P_Upg_PTick(struct player *p)
-{
+script void P_Upg_PTick(struct player *p) {
    if(Paused)
       return;
 
@@ -180,47 +163,35 @@ void P_Upg_PTick(struct player *p)
          upgr->info->Update(p, upgr);
 }
 
-script
-void P_Upg_PTickPst(struct player *p)
-{
-   for_upgrade(upgr) if(upgr->active && upgr->info->Render)
-   {
-      ACS_SetHudSize(320, 240);
-      ACS_SetHudClipRect(0, 0, 0, 0);
+script void P_Upg_PTickPst(struct player *p) {
+   for_upgrade(upgr) if(upgr->active && upgr->info->Render) {
       SetSize(320, 240);
       ClearClip();
       upgr->info->Render(p, upgr);
    }
 }
 
-void P_Upg_Enter(struct player *p)
-{
+void P_Upg_Enter(struct player *p) {
    for_upgrade(upgr)
       if(upgr->active && upgr->info->Enter)
          upgr->info->Enter(p, upgr);
 }
 
-bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr)
-{
-   if(!upgr->active)
-   {
-      if((p->pclass == pcl_marine &&
-         CheckRequires_AI  ||
-         CheckRequires_WMD ||
-         CheckRequires_WRD ||
-         CheckRequires_RDI ||
-         CheckRequires_RA) ||
-         p->cbi.pruse + upgr->info->perf > cbiperf)
-      {
-         return false;
-      }
-   }
-
-   return upgr->owned;
+bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr) {
+   if(!upgr->active &&
+      (p->pclass == pcl_marine &&
+       CheckRequires_AI  ||
+       CheckRequires_WMD ||
+       CheckRequires_WRD ||
+       CheckRequires_RDI ||
+       CheckRequires_RA) ||
+      p->cbi.pruse + upgr->info->perf > cbiperf)
+      return false;
+   else
+      return upgr->owned;
 }
 
-bool P_Upg_Toggle(struct player *p, struct upgrade *upgr)
-{
+bool P_Upg_Toggle(struct player *p, struct upgrade *upgr) {
    if(!P_Upg_CanActivate(p, upgr)) return false;
 
    upgr->active = !upgr->active;
@@ -233,15 +204,12 @@ bool P_Upg_Toggle(struct player *p, struct upgrade *upgr)
          if(other != upgr && other->active && other->info->group == upgr->info->group)
             P_Upg_Toggle(p, other);
 
-   if(upgr->active)
-   {
+   if(upgr->active) {
       if(upgr->info->Activate)
          upgr->info->Activate(p, upgr);
 
       p->scoremul += upgr->info->scoreadd;
-   }
-   else
-   {
+   } else {
       if(upgr->info->Deactivate)
          upgr->info->Deactivate(p, upgr);
 

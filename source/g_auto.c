@@ -93,8 +93,7 @@ void G_Begin(struct gui_state *g, i32 w, i32 h)
 
    g->hot = 0;
 
-   ACS_SetHudSize(g->w = w, g->h = h);
-   SetSize(g->w, g->h);
+   SetSize(g->w = w, g->h = h);
 }
 
 stkcall

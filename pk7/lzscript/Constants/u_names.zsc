@@ -37,6 +37,7 @@ enum Lith_UpgradeName
    UPGR_HeadsUpDisW,
    UPGR_Zoom,
    UPGR_VitalScan,
+   UPGR_Flashlight,
    UPGR_ReflexWetw,
    UPGR_JetBooster,
    UPGR_CyberLegs,
