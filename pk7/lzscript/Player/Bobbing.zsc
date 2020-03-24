@@ -10,6 +10,15 @@
 extend class Lith_Player;
 
 void Lith_BobWeapon() {
+   double mang = atan2(vel.y, vel.x) - angle;
+   double mvel = vel.xy.length();
+
+   m_LastVXVel = m_VXVel;
+   m_VXVel = clamp(sin(mang) * mvel, -8.0, 8.0);
+
+   m_LastVYVel = m_VYVel;
+   m_VYVel = clamp(cos(mang) * mvel, 0.0, 4.0);
+
    m_LastIPitch = m_IPitch;
    m_LastVPitch = m_VPitch;
    m_IPitch = Lith_UTIL.Lerp(m_IPitch, Pitch, 0.377);
@@ -95,6 +104,8 @@ override vector2 BobWeapon(double ticfrac) {
    interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
    interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
    interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);
+   interp.x += Lith_UTIL.Lerp(m_LastVXVel, m_VXVel, ticfrac);
+   interp.y += Lith_UTIL.Lerp(m_LastVYVel, m_VYVel, ticfrac);
 
    return interp;
 }
