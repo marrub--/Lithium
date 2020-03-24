@@ -29,7 +29,7 @@ i32 mapscleared;
 i32 prevcluster;
 i32 mapseed;
 bool unloaded;
-bool islithmap;
+bool lmvar islithmap;
 i32 secretsfound;
 k64 scoremul;
 u64 ticks;
@@ -212,8 +212,6 @@ static void MInit(void)
 
    Dlg_MInit();
 
-   islithmap = (MapNum & LithMapMask) == LithMapMagic;
-
    pauseinmenus = singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
 
    soulsfreed = 0;
@@ -306,6 +304,8 @@ script_str ext("ACS") addr("Lith_PreInit")
 void Sc_PreInit(void)
 {
    GetDebugInfo();
+
+   islithmap = (MapNum & LithMapMask) == LithMapMagic;
 }
 
 script type("open")
@@ -431,6 +431,12 @@ begin:
       i32 autosave = ACS_GetCVar(sc_sv_autosave);
       if(autosave && ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
    }
+}
+
+script_str ext("ACS") addr("Lith_InHell") i32 Sc_InHell(void) {return InHell;}
+
+script_str ext("ACS") addr("Lith_SkyMap") i32 Sc_SkyMap(void) {
+   return ACS_GetCVar(sc_sv_sky) && !islithmap;
 }
 
 script_str ext("ACS") addr("Lith_WorldReopen")

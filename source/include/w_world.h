@@ -79,7 +79,7 @@ extern i32 mapscleared;
 extern i32 prevcluster;
 extern i32 mapseed;
 extern bool unloaded;
-extern bool islithmap;
+extern bool lmvar islithmap;
 extern i32 secretsfound;
 extern k64 scoremul;
 extern u64 ticks;
