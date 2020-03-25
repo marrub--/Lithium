@@ -140,9 +140,9 @@ class Lith_StarProjectile : Actor
          A_Explode(40, int(8 + 45 * Scale.X), 0);
          for(int i = 0; i < 5; i++)
             A_SpawnProjectile("Lith_StarShrapnel",
-	                      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
-			      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
-			      0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+                              CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
+                              CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
+                              0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
       }
       goto DoSeek;
    DoHomingMissile:
@@ -151,9 +151,9 @@ class Lith_StarProjectile : Actor
          m_HomingShrapnelTimer = 0;
          for(int i = 0; i < 2; i++)
             A_SpawnProjectile("Lith_StarShrapnelHoming",
-	                      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
-			      CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
-			      0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
+                              CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), false)/FIX,
+                              CallACS("Lith_CircleSpread", int(x_45*FIX), int(x_45*FIX), true)/FIX,
+                              0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
       }
       goto SoundCheck1;
    ScaleUp:
@@ -174,9 +174,12 @@ class Lith_StarProjectile : Actor
          A_Quake(1, 2, 0, 512);
          A_Quake(3, 2, 0, 256);
          A_Quake(5, 2, 0, 64);
-         A_RadiusGive("Lith_BlindingLight1", 256, RGF_PLAYERS);
-         A_RadiusGive("Lith_BlindingLight2", 128, RGF_PLAYERS);
-         A_RadiusGive("Lith_BlindingLight3", 64,  RGF_PLAYERS);
+         for(let it = BlockThingsIterator.create(self, 256); it.next();)
+            if(it.thing.player) it.thing.A_SetBlend("White", 0.1, 35*2);
+         for(let it = BlockThingsIterator.create(self, 128); it.next();)
+            if(it.thing.player) it.thing.A_SetBlend("White", 0.4, 35*2);
+         for(let it = BlockThingsIterator.create(self, 64); it.next();)
+            if(it.thing.player) it.thing.A_SetBlend("White", 0.7, 35*2);
       }
       goto Spawn1;
    Death:
@@ -185,7 +188,8 @@ class Lith_StarProjectile : Actor
          A_StopSound(lch_body);
          A_StartSound("weapons/shipgun/explode", lch_body);
          Scale = (1, 1);
-         A_RadiusGive("Lith_BlindingLight3", 512, RGF_PLAYERS);
+         for(let it = BlockThingsIterator.create(self, 512); it.next();)
+            if(it.thing.player) it.thing.A_SetBlend("White", 0.1, 35*2);
       }
       SDXP BCDEFGHIJKLMNOPQRS 1 bright;
       SDXP T 1 bright A_FadeOut;

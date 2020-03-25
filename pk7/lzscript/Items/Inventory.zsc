@@ -141,15 +141,6 @@ class Lith_BasicPickup : Inventory {
    }
 }
 
-/* TODO: remove these two classes when possible */
-class Lith_CustomFunction : CustomInventory {
-   default {
-      Inventory.PickupMessage "";
-      +INVENTORY.ALWAYSPICKUP
-      +NOTIMEFREEZE
-   }
-}
-
 /* IDOL: Inventory Dummies are Overly Luxurious */
 class Lith_IDOL : Inventory;
 
