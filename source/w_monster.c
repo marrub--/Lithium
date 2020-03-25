@@ -203,24 +203,18 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
    } while(i < m->maxhealth);
 }
 
-static void OnFinalize(dmon_t *m)
-{
-   with_player(P_PtrFind(0, AAPTR_TARGET))
-   {
-      if(p->sgacquired)
-      {
-         if(p->weapon.cur->info->type == weapon_c_starshot && rand() == 1)
-            ACS_Teleport_EndGame();
-
-         if(m->mi->type == mtype_imp && m->level >= 50 && m->rank >= 4)
+static void OnFinalize(dmon_t *m) {
+   with_player(P_PtrFind(0, AAPTR_TARGET)) {
+      if(p->sgacquired) {
+         bool high_level_imp =
+            m->mi->type == mtype_imp && m->level >= 70 && m->rank >= 4;
+         if(high_level_imp && ACS_Random(0, 100) < 4)
             ACS_SpawnForced(so_ClawOfImp, m->ms->x, m->ms->y, m->ms->z);
       }
 
-      if(!m->ms->finalized)
-      {
+      if(!m->ms->finalized) {
          if(p->getUpgrActive(UPGR_Magic) && p->mana != p->manamax &&
-            (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10))
-         {
+            (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10)) {
             SpawnManaPickup(m, p);
          }
 
