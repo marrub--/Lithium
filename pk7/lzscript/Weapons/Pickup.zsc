@@ -10,19 +10,19 @@
 class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
    default {
       Lith_WeaponPickup.WepName wepnam_fist;
-      Lith_Pickup.Sprite "FISTA";
+      Lith_WeaponPickup.Sprite "FISTA";
       Tag "Fist Pickup";
 
-      +LITH_PICKUP.GENERIC
+      +LITH_WEAPONPICKUP.GENERIC
    }
 }
 
 class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw {
    default {
       Lith_WeaponPickup.WepName wepnam_chainsaw;
-      Lith_Pickup.Sprite  "LWEPA";
-      Lith_Pickup.SpriteM "CFISZ";
-      Lith_Pickup.SpriteC "CFISY";
+      Lith_WeaponPickup.Sprite  "LWEPA";
+      Lith_WeaponPickup.SpriteM "CFISZ";
+      Lith_WeaponPickup.SpriteC "CFISY";
 
       Tag "Chainsaw Pickup";
    }
@@ -31,9 +31,9 @@ class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw {
 class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol {
    default {
       Lith_WeaponPickup.WepName wepnam_pistol;
-      Lith_Pickup.Sprite  "LWEPB";
-      Lith_Pickup.SpriteM "PISTA";
-      Lith_Pickup.SpriteC "REVLA";
+      Lith_WeaponPickup.Sprite  "LWEPB";
+      Lith_WeaponPickup.SpriteM "PISTA";
+      Lith_WeaponPickup.SpriteC "REVLA";
 
       Tag "Pistol Pickup";
    }
@@ -42,9 +42,9 @@ class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol {
 class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun {
    default {
       Lith_WeaponPickup.WepName wepnam_shotgun;
-      Lith_Pickup.Sprite  "LWEPC";
-      Lith_Pickup.SpriteM "SHOTA";
-      Lith_Pickup.SpriteC "CSRGZ";
+      Lith_WeaponPickup.Sprite  "LWEPC";
+      Lith_WeaponPickup.SpriteM "SHOTA";
+      Lith_WeaponPickup.SpriteC "CSRGZ";
 
       Tag "Shotgun Pickup";
    }
@@ -53,9 +53,9 @@ class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun {
 class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun {
    default {
       Lith_WeaponPickup.WepName wepnam_supershotgun;
-      Lith_Pickup.Sprite  "LWEPC";
-      Lith_Pickup.SpriteM "SSGGX";
-      Lith_Pickup.SpriteC "CSHGY";
+      Lith_WeaponPickup.Sprite  "LWEPC";
+      Lith_WeaponPickup.SpriteM "SSGGX";
+      Lith_WeaponPickup.SpriteC "CSHGY";
 
       Tag "Super Shotgun Pickup";
    }
@@ -64,9 +64,9 @@ class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun {
 class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun {
    default {
       Lith_WeaponPickup.WepName wepnam_chaingun;
-      Lith_Pickup.Sprite  "LWEPD";
-      Lith_Pickup.SpriteM "RIFLA";
-      Lith_Pickup.SpriteC "CSMGY";
+      Lith_WeaponPickup.Sprite  "LWEPD";
+      Lith_WeaponPickup.SpriteM "RIFLA";
+      Lith_WeaponPickup.SpriteC "CSMGY";
 
       Tag "Chaingun Pickup";
    }
@@ -75,9 +75,9 @@ class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun {
 class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher {
    default {
       Lith_WeaponPickup.WepName wepnam_rocketlauncher;
-      Lith_Pickup.Sprite  "LWEPE";
-      Lith_Pickup.SpriteM "LAUNA";
-      Lith_Pickup.SpriteC "IONGZ";
+      Lith_WeaponPickup.Sprite  "LWEPE";
+      Lith_WeaponPickup.SpriteM "LAUNA";
+      Lith_WeaponPickup.SpriteC "IONGZ";
 
       Tag "Rocket Launcher Pickup";
    }
@@ -86,9 +86,9 @@ class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher {
 class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle {
    default {
       Lith_WeaponPickup.WepName wepnam_plasmarifle;
-      Lith_Pickup.Sprite  "LWEPF";
-      Lith_Pickup.SpriteM "PLASA";
-      Lith_Pickup.SpriteC "CPLGZ";
+      Lith_WeaponPickup.Sprite  "LWEPF";
+      Lith_WeaponPickup.SpriteM "PLASA";
+      Lith_WeaponPickup.SpriteC "CPLGZ";
 
       Tag "Plasma Rifle Pickup";
    }
@@ -97,18 +97,22 @@ class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle {
 class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000 {
    default {
       Lith_WeaponPickup.WepName wepnam_bfg9000;
-      Lith_Pickup.Sprite  "LWEPG";
-      Lith_Pickup.SpriteM "BFUGA";
-      Lith_Pickup.SpriteC "SDSGZ";
+      Lith_WeaponPickup.Sprite  "LWEPG";
+      Lith_WeaponPickup.SpriteM "BFUGA";
+      Lith_WeaponPickup.SpriteC "SDSGZ";
 
       Tag "BFG9000 Pickup";
    }
 }
 
-class Lith_WeaponPickup : Lith_Pickup;
+class Lith_WeaponPickup : Inventory abstract;
+
+mixin Lith_Pickup;
 
 default {
-   Lith_Pickup.Glow "Lith_WeapGlow";
+   Inventory.PickupMessage "";
+   Inventory.PickupSound "";
+   Lith_WeaponPickup.Glow "Lith_WeapGlow";
 }
 
 private meta int m_wepName;
@@ -116,8 +120,17 @@ private meta int m_wepName;
 property WepName: m_wepName;
 
 override void postBeginPlay() {
-   if(bDROPPED) destroy();
-   else         super.postBeginPlay();
+   if(bDROPPED) {
+      destroy();
+   } else {
+      super.postBeginPlay();
+      Lith_PickupPostBeginPlay();
+   }
+}
+
+override void tick() {
+   super.tick();
+   Lith_PickupTick();
 }
 
 override bool tryPickup(in out Actor mo) {

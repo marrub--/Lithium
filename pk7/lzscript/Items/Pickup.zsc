@@ -67,101 +67,87 @@ class Lith_UpgrGlow : Lith_ItemGlow {
    }
 }
 
-class Lith_Pickup : Inventory;
+mixin class Lith_Pickup {
+   private int m_PkFlags;
 
-default
-{
-   Inventory.PickupMessage "";
-   Inventory.PickupSound "";
-   Lith_Pickup.Sprite "UNKNA";
-}
+   private meta string m_PkSprGf;
+   private meta string m_PkSprMf;
+   private meta string m_PkSprCf;
 
-private int m_Flags;
+   private int m_PkGlA;
+   private int m_PkGlZ;
 
-private meta string m_SprGf;
-private meta string m_SprMf;
-private meta string m_SprCf;
+   private Actor m_PkSpr;
 
-private int m_GlA;
-private int m_GlZ;
+   private Lith_Sprite m_PkSprG;
+   private Lith_Sprite m_PkSprM;
+   private Lith_Sprite m_PkSprC;
 
-private Actor m_Spr;
+   private class<Actor> m_PkGlow;
 
-private Lith_Sprite m_SprG;
-private Lith_Sprite m_SprM;
-private Lith_Sprite m_SprC;
+   property Sprite:  m_PkSprGf;
+   property SpriteM: m_PkSprMf;
+   property SpriteC: m_PkSprCf;
+   property Glow:    m_PkGlow;
 
-private class<Actor> m_Glow;
+   flagdef Generic:  m_PkFlags, 0;
+   flagdef NoSprite: m_PkFlags, 0;
 
-property Sprite:  m_SprGf;
-property SpriteM: m_SprMf;
-property SpriteC: m_SprCf;
-property Glow:    m_Glow;
+   void Lith_PickupPostBeginPlay() {
+      if(m_PkSprGf) m_PkSprG.Get(m_PkSprGf);
+      if(m_PkSprMf) m_PkSprM.Get(m_PkSprMf);
+      if(m_PkSprCf) m_PkSprC.Get(m_PkSprCf);
 
-flagdef Generic: m_Flags, 0;
-
-const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
-
-override void postBeginPlay()
-{
-   super.postBeginPlay();
-
-   if(m_SprGf) m_SprG.Get(m_SprGf);
-   if(m_SprMf) m_SprM.Get(m_SprMf);
-   if(m_SprCf) m_SprC.Get(m_SprCf);
-
-   m_Spr = Spawn("Lith_ItemSprite", Pos);
-   m_Spr.Master = self;
-}
-
-override void tick()
-{
-   super.tick();
-
-   if(!m_Spr) return;
-
-   if(bGENERIC)
-   {
-      Lith_SetSprite(m_SprG);
-      return;
+      if(!bNOSPRITE) {
+         m_PkSpr = Spawn("Lith_ItemSprite", Pos);
+         m_PkSpr.Master = self;
+      } else {
+         m_PkSpr = null;
+      }
    }
 
-   if(!Players[ConsolePlayer].Camera)
-      return;
+   void Lith_PickupTick() {
+      if(!m_PkSpr) return;
 
-   let p = Players[ConsolePlayer].Camera;
-        if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_SprM);
-   else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_SprC);
-   else                                 Lith_SetSprite(m_SprG);
-}
+      if(bGENERIC) {
+         Lith_SetSprite(m_PkSprG);
+         return;
+      }
 
-void Lith_SetSprite(Lith_Sprite s)
-{
-   m_Spr.Sprite = s.Spr;
-   m_Spr.Frame  = s.Frm;
-}
+      if(!Players[ConsolePlayer].Camera)
+         return;
 
-void Lith_ItemGlow()
-{
-   m_GlA = (m_GlA + 5) % 360;
-   m_GlZ = (m_GlZ + 2) % 360;
-
-   if(!lith_player_noitemfx && Players[ConsolePlayer].Camera.CheckSight(self, SF_IGNOREVISIBILITY|SF_SEEPASTSHOOTABLELINES|SF_SEEPASTBLOCKEVERYTHING))
-   {
-      double sa = Sin(m_GlA);
-      double sz = Sin(m_GlZ);
-      double ca = Cos(m_GlA);
-
-      A_SpawnItemEx(m_Glow,      sa  * 32,      ca  * 32,      24 + sz *  9);
-      A_SpawnItemEx(m_Glow,             0,      sa  * 32,      24 + ca * 32);
-      A_SpawnItemEx(m_Glow,      ca  * 32,      sa  * 32,      24 + sa * 32);
-      A_SpawnItemEx(m_Glow,      ca  * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
-      A_SpawnItemEx(m_Glow,      sa  * 32,                  0, 24 + ca * 32);
-      A_SpawnItemEx(m_Glow,      sa  * 32,      ca  * 32,      24 + sa * 32);
-      A_SpawnItemEx(m_Glow, (1 - sa) * 32 - 32, ca  * 32,      24 + sa * 32);
+      let p = Players[ConsolePlayer].Camera;
+      /**/ if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_PkSprM);
+      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_PkSprC);
+      else                                 Lith_SetSprite(m_PkSprG);
    }
-}
 
-states(Actor) {Spawn: TNT1 A 1 Lith_ItemGlow(); loop;}
+   void Lith_SetSprite(Lith_Sprite s) {
+      m_PkSpr.Sprite = s.Spr;
+      m_PkSpr.Frame  = s.Frm;
+   }
+
+   void Lith_ItemGlow() {
+      m_PkGlA = (m_PkGlA + 5) % 360;
+      m_PkGlZ = (m_PkGlZ + 2) % 360;
+
+      if(!lith_player_noitemfx && Players[ConsolePlayer].Camera.CheckSight(self, SF_IGNOREVISIBILITY|SF_SEEPASTSHOOTABLELINES|SF_SEEPASTBLOCKEVERYTHING)) {
+         double sa = Sin(m_PkGlA);
+         double sz = Sin(m_PkGlZ);
+         double ca = Cos(m_PkGlA);
+
+         A_SpawnItemEx(m_PkGlow,      sa  * 32,      ca  * 32,      24 + sz *  9);
+         A_SpawnItemEx(m_PkGlow,             0,      sa  * 32,      24 + ca * 32);
+         A_SpawnItemEx(m_PkGlow,      ca  * 32,      sa  * 32,      24 + sa * 32);
+         A_SpawnItemEx(m_PkGlow,      ca  * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
+         A_SpawnItemEx(m_PkGlow,      sa  * 32,                  0, 24 + ca * 32);
+         A_SpawnItemEx(m_PkGlow,      sa  * 32,      ca  * 32,      24 + sa * 32);
+         A_SpawnItemEx(m_PkGlow, (1 - sa) * 32 - 32, ca  * 32,      24 + sa * 32);
+      }
+   }
+
+   states(Actor) {Spawn: TNT1 A 1 Lith_ItemGlow(); loop;}
+}
 
 /* EOF */

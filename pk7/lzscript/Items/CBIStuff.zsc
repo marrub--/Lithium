@@ -10,8 +10,8 @@
 class Lith_BossReward1 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_weapninter;
-      Lith_Pickup.SpriteM "WUPGA";
-      Lith_Pickup.SpriteC "SPELA";
+      Lith_CBIItem.SpriteM "WUPGA";
+      Lith_CBIItem.SpriteC "SPELA";
 
       Tag "Weapon Modification Device";
    }
@@ -20,8 +20,8 @@ class Lith_BossReward1 : Lith_CBIItem {
 class Lith_BossReward2 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_hasupgr1;
-      Lith_Pickup.SpriteM "CUPGA";
-      Lith_Pickup.SpriteC "SPELB";
+      Lith_CBIItem.SpriteM "CUPGA";
+      Lith_CBIItem.SpriteC "SPELB";
 
       Tag "KSKK Spec. High-Grade CPU";
    }
@@ -30,8 +30,8 @@ class Lith_BossReward2 : Lith_CBIItem {
 class Lith_BossReward3 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_armorinter;
-      Lith_Pickup.SpriteM "ARM1Z";
-      Lith_Pickup.SpriteC "SPELC";
+      Lith_CBIItem.SpriteM "ARM1Z";
+      Lith_CBIItem.SpriteC "SPELC";
 
       Tag "Armor Interface";
    }
@@ -40,8 +40,8 @@ class Lith_BossReward3 : Lith_CBIItem {
 class Lith_BossReward4 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_hasupgr2;
-      Lith_Pickup.SpriteM "CUPGB";
-      Lith_Pickup.SpriteC "SPELD";
+      Lith_CBIItem.SpriteM "CUPGB";
+      Lith_CBIItem.SpriteC "SPELD";
 
       Tag "KSKK Spec. Super High-Grade CPU";
    }
@@ -50,8 +50,8 @@ class Lith_BossReward4 : Lith_CBIItem {
 class Lith_BossReward5 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_weapninte2;
-      Lith_Pickup.SpriteM "WRDPA";
-      Lith_Pickup.SpriteC "SPELE";
+      Lith_CBIItem.SpriteM "WRDPA";
+      Lith_CBIItem.SpriteC "SPELE";
 
       Tag "Weapon Refactoring Device";
    }
@@ -60,18 +60,21 @@ class Lith_BossReward5 : Lith_CBIItem {
 class Lith_BossReward6 : Lith_CBIItem {
    default {
       Lith_CBIItem.UpgrName cupg_rdistinter;
-      Lith_Pickup.Sprite "IOBJC";
+      Lith_CBIItem.Sprite "IOBJC";
       Tag "Reality Distortion Interface";
 
-      +LITH_PICKUP.GENERIC
+      +LITH_CBIITEM.GENERIC
    }
 }
 
-class Lith_CBIItem : Lith_Pickup;
+class Lith_CBIItem : Inventory abstract;
+
+mixin Lith_Pickup;
 
 default {
+   Inventory.PickupMessage "";
    Inventory.PickupSound "player/pickup/upgrcbi";
-   Lith_Pickup.Glow "Lith_UpgrGlow";
+   Lith_CBIItem.Glow "Lith_UpgrGlow";
 
    +INVENTORY.ALWAYSPICKUP
 }
@@ -82,7 +85,13 @@ property UpgrName: m_upgName;
 
 override void postBeginPlay() {
    super.postBeginPlay();
+   Lith_PickupPostBeginPlay();
    ACS_NamedExecuteWithResult("Lith_CBIItemWasSpawned", m_upgName);
+}
+
+override void tick() {
+   super.tick();
+   Lith_PickupTick();
 }
 
 override bool tryPickup(in out Actor mo) {

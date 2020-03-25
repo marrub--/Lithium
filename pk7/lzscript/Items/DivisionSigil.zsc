@@ -7,13 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ItemPickup : Lith_Pickup {
-   default {
-      Inventory.PickupSound "player/pickup/evil";
-      Lith_Pickup.Glow "Lith_ItemGlow";
-   }
-}
-
 class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
    default {
       Lith_AnimItemSprite.Phases 23;
@@ -59,10 +52,24 @@ class Lith_ClawOfImp : Lith_ItemPickup {
       Tag "Claw of Imp";
    }
 
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
-   }
+class Lith_ItemPickup : Lith_InventoryItem abstract;
+
+mixin Lith_Pickup;
+
+default {
+   Inventory.PickupSound "player/pickup/evil";
+   Lith_InventoryItem.InvEquip _cont_store;
+   Lith_ItemPickup.Glow "Lith_ItemGlow";
+}
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   Lith_PickupPostBeginPlay();
+}
+
+override void tick() {
+   super.tick();
+   Lith_PickupTick();
 }
 
 /* EOF */
