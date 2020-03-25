@@ -23,14 +23,15 @@ class Lith_SpriteLoader : Actor
 {
    states
    {
-      WUPG A 0;
-      CUPG A 0;
-      SPEL A 0;
       ARM1 A 0;
-      WRDP A 0;
-      IOBJ A 0;
-      LWEP A 0;
+      CUPG A 0;
       FDLI A 0;
+      IOBJ A 0;
+      LIFX A 0;
+      LWEP A 0;
+      SPEL A 0;
+      WRDP A 0;
+      WUPG A 0;
    }
 }
 

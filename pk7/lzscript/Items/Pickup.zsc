@@ -21,17 +21,17 @@ class Lith_ItemGlow : Actor {
    override void postBeginPlay() {
       super.postBeginPlay();
 
-      sprite = Actor.GetSpriteIndex("PBAL");
+      sprite = Actor.GetSpriteIndex("LIFX");
 
       switch(ACS_ExecuteWithResult(lsc_wdata, wdata_pclass))
       {
-      case pcl_marine:    frame = Ch_A - Ch_A; break;
+      case pcl_marine:    frame = Ch_M - Ch_A; break;
       case pcl_cybermage: frame = Ch_C - Ch_A; break;
-      case pcl_informant: frame = Ch_D - Ch_A; break;
-      case pcl_wanderer:  frame = Ch_E - Ch_A; break;
-      case pcl_assassin:  frame = Ch_F - Ch_A; break;
-      case pcl_darklord:  frame = Ch_G - Ch_A; break;
-      case pcl_thoth:     frame = Ch_H - Ch_A; break;
+      case pcl_informant: frame = Ch_I - Ch_A; break;
+      case pcl_wanderer:  frame = Ch_W - Ch_A; break;
+      case pcl_assassin:  frame = Ch_A - Ch_A; break;
+      case pcl_darklord:  frame = Ch_D - Ch_A; break;
+      case pcl_thoth:     frame = Ch_T - Ch_A; break;
       default:
          sprite = Actor.GetSpriteIndex("UNKN");
          break;
