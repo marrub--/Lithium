@@ -74,11 +74,14 @@
 
 ## Lithium -------------------------------------------------------------------|
 
+%mif_full|mif_dark
++1000 0 phantom Lith_Boss_James
++2000 0 phantom Lith_Boss_Makarov
++3000 0 phantom Lith_Boss_Isaac
+%
+
 %mif_full
-+1000 0 phantom    Lith_Boss_James
-+2000 0 phantom    Lith_Boss_Makarov
-+3000 0 phantom    Lith_Boss_Isaac
-+0    0 cyberdemon Lith_Steggles
++0 0 cyberdemon Lith_Steggles
 %
 
 %mif_full|mif_angelic

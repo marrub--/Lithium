@@ -131,13 +131,10 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
 
 static void BaseMonsterLevel(dmon_t *m)
 {
-   k32 rn1 = ACS_RandomFixed(1, _max_rank);
-   k32 rn2 = ACS_RandomFixed(1, _max_level);
+   k32 rlv = ACS_RandomFixed(1, _max_level);
    k32 bias;
 
    bias = mapscleared / 40.0;
-
-   for_player() {rn2 += p->attr.level / 2.0; break;}
 
    bias *= bias;
    bias += ACS_GameSkill() / (k32)skill_nightmare * 0.1;
@@ -146,16 +143,20 @@ static void BaseMonsterLevel(dmon_t *m)
 
    if(m->mi->flags & mif_angelic) {
       m->rank  = 7;
-      m->level = 77;
+      m->level = 7 + rlv * bias;
    } else if(m->mi->flags & mif_dark) {
       m->rank  = 6;
-      m->level = 66;
+      m->level = 6 + rlv * bias;
    } else if(GetFun() & lfun_ragnarok) {
       m->rank  = _max_rank;
-      m->level = _max_level + rn2 * bias;
+      m->level = _max_level + rlv * bias;
    } else {
-      m->rank  = minmax(rn1 * bias * 2, 1, _max_rank);
-      m->level = minmax(rn2 * bias    , 1, _max_level);
+      k32 rrn = ACS_RandomFixed(1, _max_rank);
+
+      for_player() {rlv += p->attr.level / 2.0; break;}
+
+      m->rank  = minmax(rrn * bias * 2, 1, _max_rank);
+      m->level = minmax(rlv * bias    , 1, _max_level);
    }
 
    switch(m->rank) {
