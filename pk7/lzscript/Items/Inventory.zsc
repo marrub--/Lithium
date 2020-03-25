@@ -99,9 +99,12 @@ class Lith_InventoryItem : Inventory abstract {
    }
 
    override bool TryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
-      goAwayAndDie();
-      return true;
+      if(Super.TryPickup(mo)) {
+         Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
+         return true;
+      } else {
+         return false;
+      }
    }
 }
 
