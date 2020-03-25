@@ -88,6 +88,7 @@ class Lith_SteggleSphere : Inventory;
 default
 {
    Tag "Steggle Sphere";
+   Inventory.PickupMessage "";
    Inventory.PickupSound "misc/p_pkup";
 
    +COUNTITEM

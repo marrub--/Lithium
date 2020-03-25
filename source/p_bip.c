@@ -320,10 +320,10 @@ struct page_info PageInfo(struct page const *page)
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_BIPUnlock")
-void Sc_UnlockPage(i32 pnum)
+void Sc_UnlockPage(void)
 {
-   with_player(&players[pnum]) {
-      bip_name_t tag; lstrcpy_str(tag, GetMembS(0, sm_InfoPage));
+   with_player(LocalPlayer) {
+      bip_name_t tag; lstrcpy_str(tag, ServCallS(sm_GetBipName));
       P_BIP_Unlock(p, tag);
    }
 }

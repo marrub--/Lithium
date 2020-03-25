@@ -9,6 +9,9 @@
 
 extend class Lith_HERMES;
 
+private play string m_LogName;
+private play string m_BipName;
+
 static void PlayerInit(Actor mo_) {
    let mo = Lith_Player(mo_);
    /* mo.m_CS = Lith_Cyberspace.create(); */
@@ -43,12 +46,6 @@ static string GetObituary()
    else   return "";
 }
 
-static string GetLogName()
-{
-   let sv = Instance();
-   return sv ? sv.m_LogName : "";
-}
-
 static void DeleteItem(Actor mo, int item)
 {
    let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
@@ -62,6 +59,12 @@ static bool UseItem(Actor mo, int item)
    else   return false;
 }
 
+static string GetLogName()
+{
+   let sv = Instance();
+   return sv ? sv.m_LogName : "";
+}
+
 static void Log(Actor mo, int type, int levl, string name)
 {
    let sv = Instance();
@@ -69,6 +72,21 @@ static void Log(Actor mo, int type, int levl, string name)
    {
       sv.m_LogName = name;
       mo.ACS_ScriptCall("Lith_LogS", levl, type);
+   }
+}
+
+static string GetBipName()
+{
+   let sv = Instance();
+   return sv ? sv.m_BipName : "";
+}
+
+static void UnlockBip(Actor mo, string name)
+{
+   let sv = Instance();
+   if(sv && mo.Player) {
+      sv.m_BipName = name;
+      mo.ACS_ScriptCall("Lith_BIPUnlock");
    }
 }
 

@@ -10,7 +10,6 @@
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
 class Lith_HERMES : EventHandler;
 
-play string m_LogName;
 play string m_Obituary;
 play bool m_Paused;
 play name m_DmgType;

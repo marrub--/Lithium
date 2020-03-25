@@ -83,7 +83,7 @@ class Lith_InventoryItem : Inventory abstract {
    override void AttachToOwner(Actor mo) {
       let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
       if(id.Lith_Attach(m_invItem)) {
-         if(m_infoPage) CallACS("Lith_BIPUnlock", mo.playerNumber());
+         if(m_infoPage) Lith_HERMES.UnlockBip(mo, m_infoPage);
          Lith_OnAttach(mo);
       }
       Super.AttachToOwner(id);
@@ -133,9 +133,8 @@ class Lith_BasicPickup : Inventory {
    virtual void Lith_OnPickup(Actor mo) {
       if(m_LogName)
          Lith_HERMES.Log(mo, m_LogType, m_LogLevl, "_" .. m_LogName);
-
       if(m_InfoPage)
-         CallACS("Lith_BIPUnlock", mo.PlayerNumber());
+         Lith_HERMES.UnlockBip(mo, m_InfoPage);
    }
 
    override bool TryPickup(in out Actor mo) {
@@ -167,9 +166,8 @@ class Lith_CustomInventory : CustomInventory {
       Lith_HERMES.Log(self, type, levl, "_" .. name);
    }
 
-   void Lith_A_BIPUnlock(Actor invoker, string name) {
-      m_InfoPage = name;
-      invoker.ACS_ScriptCall("Lith_BIPUnlock", PlayerNumber());
+   void Lith_A_BIPUnlock(Actor mo, string name) {
+      Lith_HERMES.UnlockBip(mo, name);
    }
 
    action void Lith_A_SetNamedScriptSpecial(name sc, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
@@ -177,7 +175,7 @@ class Lith_CustomInventory : CustomInventory {
    }
 
    override bool TryPickup(in out Actor mo) {
-      if(m_InfoPage) CallACS("Lith_BIPUnlock", mo.playerNumber());
+      if(m_InfoPage) Lith_HERMES.UnlockBip(mo, m_infoPage);
       return Super.TryPickup(mo);
    }
 
