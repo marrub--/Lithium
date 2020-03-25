@@ -7,16 +7,24 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_AllMap : Lith_CustomInventory replaces Allmap
+class Lith_AllMap : Inventory replaces Allmap
 {
    default
    {
       Tag "Computer Area Map";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/allmap";
-      Lith_CustomInventory.InfoPage "AllMap";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_AllMap");
+      Lith_HERMES.UnlockBip(mo, "AllMap");
+      mo.A_GiveInventory("MapRevealer");
+      goAwayAndDie();
+      return true;
    }
 
    states
@@ -24,34 +32,36 @@ class Lith_AllMap : Lith_CustomInventory replaces Allmap
    Spawn:
       PMAP ABCDCB 6 bright;
       loop;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "AllMap");
-      TNT1 A 0 A_GiveInventory("MapRevealer");
-      stop;
    }
 }
 
-class Lith_Berserk : Lith_CustomInventory replaces Berserk
+class Lith_Berserk : Inventory replaces Berserk
 {
    default
    {
       Tag "Berserk";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/berserk";
-      Lith_CustomInventory.InfoPage "Berserk";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_Berserk");
+      Lith_HERMES.UnlockBip(mo, "Berserk");
+      mo.A_GiveInventory("PowerStrength");
+      if(mo.health < 100) {
+         mo.health = 100;
+      }
+      goAwayAndDie();
+      return true;
    }
 
    states
    {
    Spawn:
       PSTR A -1;
-      stop;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "Berserk");
-      TNT1 A 0 A_GiveInventory("PowerStrength");
-      TNT1 A 0 HealThing(100, 0);
       stop;
    }
 }
@@ -67,16 +77,24 @@ class Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere
    }
 }
 
-class Lith_Infrared : Lith_CustomInventory replaces Infrared
+class Lith_Infrared : Inventory replaces Infrared
 {
    default
    {
       Tag "CB-Goggles";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/infrared";
-      Lith_CustomInventory.InfoPage "Infrared";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_Infrared");
+      Lith_HERMES.UnlockBip(mo, "Infrared");
+      mo.A_GiveInventory("Lith_PowerLightAmp");
+      goAwayAndDie();
+      return true;
    }
 
    states
@@ -85,10 +103,6 @@ class Lith_Infrared : Lith_CustomInventory replaces Infrared
       PVIS A 6 bright;
       PVIS B 6;
       loop;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "Infrared");
-      TNT1 A 0 A_GiveInventory("Lith_PowerLightAmp");
-      stop;
    }
 }
 
@@ -110,16 +124,25 @@ class Lith_BlurSphereSprite : Lith_MagicSphereItemSprite
    states {SetSpr: PINS AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 0 Lith_A_JumpPhase; stop;}
 }
 
-class Lith_Megasphere : Lith_CustomInventory replaces Megasphere
+class Lith_Megasphere : Inventory replaces Megasphere
 {
    default
    {
       Tag "Tao'chyan";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/mega";
-      Lith_CustomInventory.InfoPage "Taochyan";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 4, "_Megasphere");
+      Lith_HERMES.UnlockBip(mo, "Taochyan");
+      mo.A_GiveInventory("Lith_MegaProtection", 100);
+      mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
+      goAwayAndDie();
+      return true;
    }
 
    states
@@ -129,33 +152,32 @@ class Lith_Megasphere : Lith_CustomInventory replaces Megasphere
       TNT1 A 0 A_SpawnItemEx("Lith_MegasphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
       TNT1 A 1;
       wait;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 4, "Megasphere");
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 200);
-      TNT1 A 0 A_GiveInventory("Lith_MegaProtection", 100);
-      stop;
    }
 }
 
-class Lith_RadSuit : Lith_CustomInventory replaces RadSuit
+class Lith_RadSuit : Inventory replaces RadSuit
 {
    default
    {
       Tag "Radiation Shielding Suit";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/radsuit";
-      Lith_CustomInventory.InfoPage "RadSuit";
 
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_RadSuit");
+      Lith_HERMES.UnlockBip(mo, "RadSuit");
+      mo.A_GiveInventory("Lith_PowerIronFeet");
+      goAwayAndDie();
+      return true;
    }
 
    states
    {
    Spawn:
       SUIT A -1 bright;
-      stop;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "Radsuit");
-      TNT1 A 0 A_GiveInventory("Lith_PowerIronFeet");
       stop;
    }
 }
@@ -166,16 +188,24 @@ class Lith_SoulSphereSprite : Lith_MagicSphereItemSprite
    states {SetSpr: SOUL AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase; stop;}
 }
 
-class Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
+class Lith_SoulSphere : Inventory replaces SoulSphere
 {
    default
    {
       Tag "Heart";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/super";
-      Lith_CustomInventory.InfoPage "Heart";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 4, "_Soulsphere");
+      Lith_HERMES.UnlockBip(mo, "Heart");
+      mo.ACS_ScriptCall("Lith_GiveHealthBonus", 100);
+      goAwayAndDie();
+      return true;
    }
 
    states
@@ -185,24 +215,28 @@ class Lith_SoulSphere : Lith_CustomInventory replaces SoulSphere
       TNT1 A 0 A_SpawnItemEx("Lith_SoulSphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
       TNT1 A 1;
       wait;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 4, "Soulsphere");
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GiveHealthBonus", 100);
-      stop;
    }
 }
 
-class Lith_ArtiFly : Lith_CustomInventory replaces ArtiFly
+class Lith_ArtiFly : Inventory replaces ArtiFly
 {
    default
    {
       Tag "Wings of Wrath";
+      Inventory.PickupMessage "";
       Inventory.PickupFlash "PickupFlash";
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_ArtiFly");
+      mo.A_GiveInventory("PowerFlight");
+      goAwayAndDie();
+      return true;
    }
 
    states
@@ -210,24 +244,28 @@ class Lith_ArtiFly : Lith_CustomInventory replaces ArtiFly
    Spawn:
       SOAR ABCB 5;
       loop;
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiFly");
-      TNT1 A 0 A_GiveInventory("PowerFlight");
-      stop;
    }
 }
 
-class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
+class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
 {
    default
    {
+      Tag "Chaos Device";
+      Inventory.PickupMessage "";
       Inventory.PickupFlash "PickupFlash";
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
-      Tag "Chaos Device";
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_ArtiTeleport");
+      mo.useInventory(mo.giveInventoryType("ArtiTeleport"));
+      goAwayAndDie();
+      return true;
    }
 
    states(Actor)
@@ -235,14 +273,6 @@ class Lith_ArtiTeleport : Lith_CustomInventory replaces ArtiTeleport
    Spawn:
       ATLP ABCB 4;
       loop;
-   }
-
-   states(Item)
-   {
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "ArtiTeleport");
-      TNT1 A 0 {UseInventory(GiveInventoryType("ArtiTeleport"));}
-      stop;
    }
 }
 
@@ -273,17 +303,28 @@ class Lith_PowerInvulnerableGiver : PowerupGiver
 class Lith_PowerInvulnerableGiver2 : Lith_PowerInvulnerableGiver
    {default {Powerup.Color "GoldMap";}}
 
-class Lith_InvulnerabilitySphere : Lith_CustomInventory replaces InvulnerabilitySphere
+class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere
 {
    default
    {
       Tag "Invulnerability";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/invuln";
-      Lith_CustomInventory.InfoPage "Invulnerability";
 
       +COUNTITEM
       +INVENTORY.BIGPOWERUP
       +INVENTORY.FANCYPICKUPSOUND
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 6, "_Invuln");
+      Lith_HERMES.UnlockBip(mo, "Invulnerability");
+      if(CVar.GetCVar('lith_player_altinvuln', mo.player).GetBool())
+         A_GiveInventory("Lith_PowerInvulnerableGiver2");
+      else
+         A_GiveInventory("Lith_PowerInvulnerableGiver");
+      goAwayAndDie();
+      return true;
    }
 
    states(Actor)
@@ -293,19 +334,6 @@ class Lith_InvulnerabilitySphere : Lith_CustomInventory replaces Invulnerability
       TNT1 A 0 A_SpawnItemEx("Lith_InvulnerabilitySphereSprite", flags: SXF_SETMASTER);
       TNT1 A 1;
       wait;
-   }
-
-   states(Item)
-   {
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 6, "Invuln");
-      TNT1 A 0 {
-         if(CVar.GetCVar('lith_player_altinvuln', Player).GetBool())
-            A_GiveInventory("Lith_PowerInvulnerableGiver2");
-         else
-            A_GiveInventory("Lith_PowerInvulnerableGiver");
-      }
-      stop;
    }
 }
 
@@ -384,11 +412,12 @@ class Lith_Shobon : Actor
    }
 }
 
-class Lith_ShobonSphere : Lith_CustomInventory
+class Lith_ShobonSphere : Inventory
 {
    default
    {
       Tag "Shobon Sphere";
+      Inventory.PickupMessage "";
       Inventory.PickupSound "misc/p_pkup";
 
       +COUNTITEM
@@ -396,21 +425,20 @@ class Lith_ShobonSphere : Lith_CustomInventory
       +INVENTORY.FANCYPICKUPSOUND
    }
 
-   states(Actor)
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(mo, msg_both, 5, "_ShobonSphere");
+      spawn("Lith_Shobon", mo.pos).master = mo;
+      goAwayAndDie();
+      return true;
+   }
+
+   states
    {
    Spawn:
       TNT1 A 0;
       SHOB B 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_TRANSFERSPRITEFRAME);
       TNT1 A 1;
       wait;
-   }
-
-   states(Item)
-   {
-   Pickup:
-      TNT1 A 0 Lith_A_Log(msg_both, 5, "ShobonSphere");
-      TNT1 A 0 A_SpawnItemEx("Lith_Shobon", flags: SXF_SETMASTER);
-      stop;
    }
 }
 

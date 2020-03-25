@@ -99,12 +99,9 @@ class Lith_InventoryItem : Inventory abstract {
    }
 
    override bool TryPickup(in out Actor mo) {
-      if(Super.TryPickup(mo)) {
-         Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
-         return true;
-      } else {
-         return false;
-      }
+      Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
+      goAwayAndDie();
+      return true;
    }
 }
 
@@ -150,39 +147,6 @@ class Lith_CustomFunction : CustomInventory {
       Inventory.PickupMessage "";
       +INVENTORY.ALWAYSPICKUP
       +NOTIMEFREEZE
-   }
-}
-
-class Lith_CustomInventory : CustomInventory {
-   default {
-      Inventory.PickupMessage "";
-   }
-
-   string m_InfoPage;
-
-   property InfoPage: m_InfoPage;
-
-   action void Lith_A_Log(int type, int levl, string name) {
-      Lith_HERMES.Log(self, type, levl, "_" .. name);
-   }
-
-   void Lith_A_BIPUnlock(Actor mo, string name) {
-      Lith_HERMES.UnlockBip(mo, name);
-   }
-
-   action void Lith_A_SetNamedScriptSpecial(name sc, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
-      A_SetSpecial(84, -int(sc), arg0, arg1, arg2, arg3);
-   }
-
-   override bool TryPickup(in out Actor mo) {
-      if(m_InfoPage) Lith_HERMES.UnlockBip(mo, m_infoPage);
-      return Super.TryPickup(mo);
-   }
-
-   states {
-   Nope:
-      TNT1 A 0;
-      fail;
    }
 }
 

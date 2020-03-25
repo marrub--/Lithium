@@ -121,12 +121,9 @@ override void postBeginPlay() {
 }
 
 override bool tryPickup(in out Actor mo) {
-   if(super.tryPickup(mo)) {
-      mo.acs_scriptCall("Lith_WeaponPickup", m_wepName);
-      return true;
-   } else {
-      return false;
-   }
+   mo.acs_scriptCall("Lith_WeaponPickup", m_wepName);
+   goAwayAndDie();
+   return true;
 }
 
 /* EOF */

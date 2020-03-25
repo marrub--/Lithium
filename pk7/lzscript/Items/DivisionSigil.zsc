@@ -30,10 +30,7 @@ class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
 class Lith_DivisionSigil : Lith_ItemPickup {
    default {
       Inventory.Icon "DIVSIGI1";
-      Inventory.MaxAmount 1;
       Tag "Division Sigil";
-
-      +INVENTORY.INVBAR
    }
 
    override void postBeginPlay() {
@@ -50,13 +47,10 @@ class Lith_DivisionSigil : Lith_ItemPickup {
    }
 
    override bool tryPickup(in out Actor mo) {
-      if(super.tryPickup(mo)) {
-         mo.A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
-         mo.acs_scriptCall("Lith_GetSigil");
-         return true;
-      } else {
-         return false;
-      }
+      mo.A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
+      mo.acs_scriptCall("Lith_GetSigil");
+      goAwayAndDie();
+      return true;
    }
 }
 

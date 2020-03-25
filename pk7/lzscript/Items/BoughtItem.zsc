@@ -43,12 +43,9 @@ class Lith_BoughtItem : Inventory
    int m_upgradeExtr;
 
    override bool tryPickup(in out Actor mo) {
-      if(super.tryPickup(mo)) {
-         mo.acs_scriptCall("Lith_BoughtItemPickup", m_upgradeId);
-         return true;
-      } else {
-         return false;
-      }
+      mo.acs_scriptCall("Lith_BoughtItemPickup", m_upgradeId);
+      goAwayAndDie();
+      return true;
    }
 
    states

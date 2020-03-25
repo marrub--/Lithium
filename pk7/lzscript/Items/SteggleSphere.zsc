@@ -98,17 +98,14 @@ default
 
 override void postBeginPlay() {
    super.postBeginPlay();
-   spawn("Lith_SteggleSphereSprite").master = self;
+   spawn("Lith_SteggleSphereSprite", self.pos).master = self;
 }
 
 override bool tryPickup(in out Actor mo) {
-   if(super.tryPickup(mo)) {
-      mo.ACS_ScriptCall("Lith_DOGS");
-      Lith_HERMES.Log(mo, msg_both, 5, "_DoggoSphere");
-      return true;
-   } else {
-      return false;
-   }
+   mo.ACS_ScriptCall("Lith_DOGS");
+   Lith_HERMES.Log(mo, msg_both, 5, "_DoggoSphere");
+   goAwayAndDie();
+   return true;
 }
 
 states {
