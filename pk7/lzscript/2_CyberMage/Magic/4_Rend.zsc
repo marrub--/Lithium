@@ -7,19 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_RendHitSound : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 {
-         A_StartSound("weapons/rend/hit", lch_body);
-         CallACS("Lith_Rend", true);
-      }
-      stop;
-   }
-}
-
 class Lith_RendHit : FastProjectile
 {
    default
@@ -38,7 +25,12 @@ class Lith_RendHit : FastProjectile
       TNT1 A 1;
       stop;
    XDeath:
-      TNT1 A 0 A_GiveInventory("Lith_RendHitSound", 1, AAPTR_TARGET);
+      TNT1 A 0 {
+         if(target) {
+            target.A_StartSound("weapons/rend/hit", lch_body);
+            target.ACS_ScriptCall("Lith_Rend", true);
+         }
+      }
       stop;
    }
 }

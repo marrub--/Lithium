@@ -7,17 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_BladeHitSound : Lith_CustomFunction
-{
-   states
-   {
-   Pickup:
-      TNT1 A 0 A_StartSound("weapons/blade/hit", lch_body);
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_Blade", true);
-      stop;
-   }
-}
-
 class Lith_BladeHit : FastProjectile
 {
    default
@@ -36,7 +25,12 @@ class Lith_BladeHit : FastProjectile
       TNT1 A 1;
       stop;
    XDeath:
-      TNT1 A 0 A_GiveInventory("Lith_BladeHitSound", 1, AAPTR_TARGET);
+      TNT1 A 0 {
+         if(target) {
+            target.A_StartSound("weapons/blade/hit", lch_body);
+            target.ACS_ScriptCall("Lith_Blade", true);
+         }
+      }
       stop;
    }
 }
