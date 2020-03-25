@@ -10,109 +10,216 @@
 == \#INFO_SHORT_P114 | プロジェクト114
 == \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
 @@ \#INFO_DESCR_P114
-翻訳なし
+プロジェクト114は現在実行中の軍事作戦。OFMD、KSKKと貴方の国の軍事間協定に
+よって開始されたプロジェクト114は、今尚我々に侵略してくる地獄として知られる
+次元を破壊することを目的としている。
+
+この記事の執筆時点で派遣された8人の工作員のうち3人しか残っていない。
+2台のロボットと貴方だけ。そちらはポイントマンとして脅威に対抗する唯一の主力と
+して行動するべきだ。そうでなければ、他の工作員が任務を完遂できるように
+地獄の中心への道を開く手助けをすることになる。
+
+あなたのアドバイザーはアダム・ランバート。現在11人のジェネラル達が現場で
+彼と貴方の行動を監督している。
 
 == \#INFO_SHORT_OPD2 | Op. D2
 == \#INFO_TITLE_OPD2 | Operation Deception 2
 @@ \#INFO_DESCR_OPD2
-翻訳なし
+7年間の計画を経て、遂に"Operation Deception2"が始まった。
+マイケル、ジーク、ソロモン、そして他の3人と一緒に、
+我々はついに自由の身になろうとしている。
 
-== \#INFO_SHORT_Info400 | Information 400
+誰もソロモンには首謀者として期待していなかった、役割の一部として、
+何年もかかったが最終的にはやり遂げた。
+
+悲観的にならないようにしていても、我々の誰もが生き残れないと思っている。
+統計的にそれは不可能だ。私でさえ死ぬかもしれない。
+今、我々の背後には常に暗殺者が潜む地獄そのものにいる。
+
+これが終わったらテオフィリンのサプリメントをくれないか。
+
+== \#INFO_SHORT_Info400 | 報告 400
 == \#INFO_TITLE_Info400 | $\#INFO_SHORT_Info400
 %% \#INFO_DESCR_Info400
-翻訳なし
+\ciこのドキュメントは機密情報です。読んだ後には削除してください。
 
-== \#INFO_SHORT_Info402 | Information 402
+マテバR119ピストル 1丁 [検査通過]
+[[[[[[[[[[[[[
+\cd>>>>>[[[[データストリームの破損検出]]]]
+\cd>>>>>[[[[再接続を試行中]]]]
+
+NV48 12ゲージ ショットガン 1丁
+ROUNDS: ,<<,124147
+\cd>>>>>[[[[データストリームの破損検出]]]]
+\cd>>>>>[[[[再接続を試行中]]]]
+
+残りの2つは戦闘区域内にあり、そこで入手できる。Th[[[ // kerne __ -
+\cd>>>>>[[[[データストリームの破損検出]]]]
+\cd>>>>>[[[[再接続を試行中]]]]
+\cd>>>>>[[[[再接続を試行中]]]]
+\cd>>>>>[[[[再接続を試行中]]]]
+\cd>>>>>[[[[接続の再試行に3回失敗しました]]]]
+
+== \#INFO_SHORT_Info402 | 報告 402
 == \#INFO_TITLE_Info402 | $\#INFO_SHORT_Info402
 %% \#INFO_DESCR_Info402
-翻訳なし
+\cd>>>>>>[[[[警告:翻訳サービスが利用できません、逐語的に送信]]]]
+\ciこのドキュメントは機密情報です。読んだ後に削除してください。
+
+\cg"指令90"の定義は次の通り
+ｲｪ.ｪﾌﾞjtv.w'.s t'..ｷﾞｧｻﾞ..est.デモニックエネルギーを経由し.est.prrts;7F47..ｯｽ.D 't.ﾝｧからの.ﾓﾄ.dst.est.デ-モンﾀﾁ,f'w's.ﾍﾟﾗw'sｿｶt'wr msn.Cﾝｨcmpｶｸ'ﾄmsn, ﾝｨilﾃ'ﾄrd 10,000,000scr ｾ'デ-モンエネルギ-ユニット.Demon Energy unit tatiﾃ'ﾄprrtsｶ'ｯｽ.ｺﾉﾄﾞｷｭ..ｲ'ｲ..ｶ'ﾃ'ﾛ.ｲﾏ..ﾆｺﾛｽ ｷ'ｻ ﾏ.
+
+\cg"タ-ゲット 7F47"の定義は次の通り
+7F47 w's est Demonｶﾁｶﾆ & est Phanトム. D'ﾈdst,.Pnssﾃ'ﾄ*awt::yeｼﾗﾄｶ.
+
+\cgOrder.
 
 ## Cybernetics ---------------------------------------------------------------|
 == \#INFO_SHORT_BIP | B.I.P.
 == \#INFO_TITLE_BIP | Biotic Information Panel (B.I.P.)
 @@ \#INFO_DESCR_BIP
-翻訳なし
+Biotic Information Panel("BIP"とも言う)は、様々な主題に関するローカルエリア
+ネットワークから情報を収集する携帯型C150で書かれたプログラムである。
+サブジェクトを検索するようにトリガーされると、サブジェクトに関連するまたは
+サブジェクトによって言及される関連情報も検索される。
+
+このプログラムはシンプルでありながら便利な機能があるため非常に人気がある。
+これはSoftware Sans Pretium Foundationによって自由に配布され、
+ソフトウェアはほとんどのC/Bオペレーティングシステムベースに含まれている。
+
+ソフトウェアの最新バージョンは2.5で、バージョン2.0から自動更新機能を備えた。
 
 == \#INFO_SHORT_CBIBase | C/B I
 == \#INFO_TITLE_CBIBase | Computer/Brain Interface (C/B I)
 @@ \#INFO_DESCR_CBIBase
-翻訳なし
+Computer/Brain Interface("CBI"とも言う)は、人間の脳とコンピューターの間の
+インターフェイスである。C/BIは通常、頭蓋骨や脳のほか中枢神経系の他の箇所にも
+内蔵され、ほぼ無限の用途を持つ機械である。
 
 @@ \#INFO_DESCR_CBIStan
 #\#INFO_DESCR_CBIBase
 
-翻訳なし(Marineの文)
+Computer/Brain Interfaceは機能強化としてのみ分類されている。何故ならそれらは
+身体の義肢にならず付加するだけだからである。現在インストールしているC/B Iは
+セルフサービスの軍用モデルだ。
 
 @@ \#INFO_DESCR_CBIJem
 #\#INFO_DESCR_CBIBase
 
-翻訳なし(CyberMageの文)
+Computer/Brain Interfaceは通常、人工義肢として分類されないが現在インストール
+されているものは、使用者の身体に広範囲な再構築を行うものだ。
 
 @@ \#INFO_DESCR_CBIAri
 #\#INFO_DESCR_CBIBase
 
-翻訳なし(DarkLordの文)
+現在インストールされているComputer/Brain Interfaceは、このシステムでは
+認識されない。Software Sans Pretiumバグトラッカーについてのレポートを提出し
+インターフェースに関する情報を添付して、記述リストに追加しなければならない。
 
 ## Attributes ----------------------------------------------------------------|
 == \#INFO_SHORT_AttrACC | Accuracy
 == \#INFO_TITLE_AttrACC | \cgAccuracy\c- (ACC)
 @@ \#INFO_DESCR_AttrACC
-翻訳なし
+Accuracyとは、ターゲットの最大ダメージを与えるのに適した箇所に当てる能力のこと。
+訓練した射手と熟練した射手には決定的な違いがある。一人は標的を攻撃する方法を、
+もう一人は標的を殺す方法を知っている。
+
+Accuracyを上げることで、敵へのダメージが大きくなります。
 
 == \#INFO_SHORT_AttrDEF | Defense
 == \#INFO_TITLE_AttrDEF | \ciDefense\c- (DEF)
 @@ \#INFO_DESCR_AttrDEF
-翻訳なし
+Defenseとは、自分自身を効率的に防御し攻撃を受けたときに受けるダメージを軽減する
+能力のことです。賢明な装甲師はケブラーをどこに塗るべきか、また発砲された時
+どうかわすべきかを知っている。
+
+Defenseを強化すれば、全てのダメージを減らすことができる。
 
 == \#INFO_SHORT_AttrSTRHuman | Strength
 == \#INFO_TITLE_AttrSTRHuman | \ckStrength\c- (STR)
 @@ \#INFO_DESCR_AttrSTRHuman
-翻訳なし(Marine・CyberMage・Assassinの文)
+Strengthとは、強靭さと力強さ、皮膚の厚さ、そして心臓から鼓動する血のことで、
+Strengthがあると長寿なだけでなく余生も長いとも言われています。
+
+Strengthをつけていくと、最大ヘルスが増えます。
 
 @@ \#INFO_DESCR_AttrSTRRobot
-翻訳なし(Informantの文)
+Strengthとは、タフさと活力、機体の厚さ、そして心臓から鼓動するプラズマのことで
+Strengthが十分にある者は使用時間が長いだけでなく、メンテナンス時間も短くなると
+言われています。
+
+Strengthをつけていくと、最大ヘルスが増えます。
 
 @@ \#INFO_DESCR_AttrSTRNonHuman
-翻訳なし(Wanderer・DarkLord・Thothの文)
+強さは、タフさと活力、表皮の厚さ、そして心臓から鼓動するオイルで、
+十分なStrengthを持つ人は、長寿なだけでなく長い来世を得られるとも言われている。
+
+Strengthをつけていくと、最大ヘルスが増えます。
 
 == \#INFO_SHORT_AttrVIT | Vitality
 == \#INFO_TITLE_AttrVIT | \cdVitality\c- (VIT)
 @@ \#INFO_DESCR_AttrVIT
-翻訳なし
+Vitalityとは、薬に対する反応や治癒能力、血管や神経の強さ、生存能力のことです。
+あなたの重要なシステムは、より強力であるだけでなく、より早く回復し、
+壊れにくくなります。
 
-== \#INFO_SHORT_AttrPOT | Potency
+生命力がレベルアップすると、ヘルス取得時の効果が増加する。
+
+== \#INFO_SHORT_AttrPOT | PotencyPotency
 == \#INFO_TITLE_AttrPOT | \cdPotency\c- (POT)
 @@ \#INFO_DESCR_AttrPOT
-翻訳なし
+Potencyとは、薬に対する反応や薬を塗る能力、血管や神経の強さ、生存能力のことです。
+内臓が丈夫になるだけでなく、治りも早く働き続ける可能性も高くなります。
+
+Potencyがレベルアップすると、ヘルス取得時の効果が増加する。
 
 == \#INFO_SHORT_AttrSTM | Stamina
 == \#INFO_TITLE_AttrSTM | \chStamina\c- (STM)
 @@ \#INFO_DESCR_AttrSTM
-翻訳なし
+Staminaとは、荒波にもまれ、何キロでも何マイルでもそのままで走り続けられる
+能力です。少しずつでもStaminaはついていきます。
+
+Staminaをつけることで、そのレベルまでヘルスを回復します。
 
 == \#INFO_SHORT_AttrREP | Repair
 == \#INFO_TITLE_AttrREP | \chRepair\c- (REP)
 @@ \#INFO_DESCR_AttrREP
-翻訳なし
+Repairとは、バラバラに引き裂かれ極端な距離を動いても、自分で修復して
+作業を継続する能力のことです。Repairを続けると、少しずつでも状態を保ちます。
+
+Repairをレベルアップすれば、そのレベルまでヘルスを回復します。
 
 == \#INFO_SHORT_AttrREG | Regeneration
 == \#INFO_TITLE_AttrREG | \chRegeneration\c- (REG)
 @@ \#INFO_DESCR_AttrREG
-翻訳なし
+Regenerationとは、バラバラに引き裂かれ困難な時でも、自分自身を統合し
+地獄を駆け抜ける能力である。Regenerationは少しずつではあるが、
+前進し続ける状態を維持させる。
+
+Regenerationをレベルアップすれば、そのレベルまでヘルスを回復します。
 
 == \#INFO_SHORT_AttrLUK | Luck
 == \#INFO_TITLE_AttrLUK | \ctLuck\c- (LUK)
 @@ \#INFO_DESCR_AttrLUK
-翻訳なし
+Luckはソチラの紛れもない魅力と幸運、ただ幸運を得る能力です。
+あなたのスコアはいつもより早く上がる、幸運なやつです。
+
+Luckをレベルアップすれば、ランダムに獲得スコアを増やす。
 
 == \#INFO_SHORT_AttrRGE | Rage
 == \#INFO_TITLE_AttrRGE | \cmRage\c- (RGE)
 @@ \#INFO_DESCR_AttrRGE
-翻訳なし
+Rageは単なる怒りではなく、順応性です。殴られると反射神経が働いて気が狂います。
+状況が斜陽になるつれて、より強い一撃を、より正確に、よりキレ味が増します。
+
+Rageをレベルアップすれば、攻撃を受けたときに敵に与えられるダメージが倍増する。
 
 == \#INFO_SHORT_AttrCON | Concentration
 == \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
 @@ \#INFO_DESCR_AttrCON
-翻訳なし
+Concentrationとは、マナが爆発的に吸収されている間にエネルギーを集中させる
+能力のことです。
+
+Concentrationをレベルアップすると、マナを獲得したときに与えられるダメージが増えます。
 
 ## EOF
