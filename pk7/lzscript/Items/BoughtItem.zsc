@@ -25,7 +25,7 @@ class Lith_ExtraUpgradeSprite : Lith_AnimItemSprite
    }
 }
 
-class Lith_BoughtItem : Lith_CustomInventory
+class Lith_BoughtItem : Inventory
 {
    default
    {
@@ -37,21 +37,29 @@ class Lith_BoughtItem : Lith_CustomInventory
       +FORCEXYBILLBOARD
    }
 
-   int user_UpgradeId;
-   int user_UpgradeWeap;
-   int user_UpgradeBody;
-   int user_UpgradeExtr;
+   int m_upgradeId;
+   int m_upgradeWeap;
+   int m_upgradeBody;
+   int m_upgradeExtr;
 
-   states(Actor)
+   override bool tryPickup(in out Actor mo) {
+      if(super.tryPickup(mo)) {
+         mo.acs_scriptCall("Lith_BoughtItemPickup", m_upgradeId);
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   states
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 Lith_A_SetNamedScriptSpecial("Lith_BoughtItemPickup", user_UpgradeId);
-      TNT1 A random(1, 10);
+      TNT1 A random(1, 7);
       TNT1 A 0 A_SpawnItemEx("Lith_TeleFog");
-      UCAN A 0 A_JumpIf(user_UpgradeBody, "Animate");
-      WUPG A 0 A_JumpIf(user_UpgradeWeap, "Animate");
-      BPAK A 0 A_JumpIf(user_UpgradeExtr, "Extra");
+      UCAN A 0 A_JumpIf(m_upgradeBody, "Animate");
+      WUPG A 0 A_JumpIf(m_upgradeWeap, "Animate");
+      BPAK A 0 A_JumpIf(m_upgradeExtr, "Extra");
    Animate:
       #### # 5 bright;
       #### # 5;
@@ -60,13 +68,6 @@ class Lith_BoughtItem : Lith_CustomInventory
       TNT1 A 0 A_SpawnItemEx("Lith_ExtraUpgradeSprite", flags: SXF_SETMASTER);
       TNT1 A 1;
       wait;
-   }
-
-   states(Item)
-   {
-   Pickup:
-      TNT1 A 0;
-      stop;
    }
 }
 

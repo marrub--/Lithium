@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ItemGlow : Actor
-{
-   default
-   {
+class Lith_ItemGlow : Actor {
+   default {
       RenderStyle "Add";
       Alpha 0.7;
       Scale 0.1;
@@ -20,9 +18,8 @@ class Lith_ItemGlow : Actor
       +NOTIMEFREEZE
    }
 
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
+   override void postBeginPlay() {
+      super.postBeginPlay();
 
       sprite = Actor.GetSpriteIndex("PBAL");
 
@@ -41,8 +38,7 @@ class Lith_ItemGlow : Actor
       }
    }
 
-   states
-   {
+   states {
    Spawn:
       #### # 5 bright;
       #### # 0 bright A_JumpIf(Players[ConsolePlayer].Camera.Vec2To(self).Length() > 600, "Spawn1");
@@ -54,29 +50,24 @@ class Lith_ItemGlow : Actor
    }
 }
 
-class Lith_WeapGlow : Lith_ItemGlow
-{
-   default
-   {
+class Lith_WeapGlow : Lith_ItemGlow {
+   default {
       Translation "Lith_WeapGlow";
    }
 
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
+   override void postBeginPlay() {
+      super.postBeginPlay();
       if(lith_player_brightweps) A_SetTranslation("Lith_WeapGlowBright");
    }
 }
 
-class Lith_UpgrGlow : Lith_ItemGlow
-{
-   default
-   {
+class Lith_UpgrGlow : Lith_ItemGlow {
+   default {
       Translation "None";
    }
 }
 
-class Lith_Pickup : CustomInventory;
+class Lith_Pickup : Inventory;
 
 default
 {
@@ -111,9 +102,9 @@ flagdef Generic: m_Flags, 0;
 
 const Lith_ISF = SXF_TRANSFERSPRITEFRAME | SXF_SETMASTER;
 
-override void PostBeginPlay()
+override void postBeginPlay()
 {
-   Super.PostBeginPlay();
+   super.postBeginPlay();
 
    if(m_SprGf) m_SprG.Get(m_SprGf);
    if(m_SprMf) m_SprM.Get(m_SprMf);
@@ -123,9 +114,9 @@ override void PostBeginPlay()
    m_Spr.Master = self;
 }
 
-override void Tick()
+override void tick()
 {
-   Super.Tick();
+   super.tick();
 
    if(!m_Spr) return;
 
@@ -171,6 +162,6 @@ void Lith_ItemGlow()
    }
 }
 
-states {SpawnLoop: TNT1 A 1 {invoker.Lith_ItemGlow();} loop;}
+states(Actor) {Spawn: TNT1 A 1 Lith_ItemGlow(); loop;}
 
 /* EOF */

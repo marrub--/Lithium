@@ -32,25 +32,12 @@ class Lith_RealSpectralSteggles : Actor
    }
 }
 
-class Lith_Dogs : Lith_CustomInventory
-{
-   default
-   {
+class Lith_Dogs : Inventory {
+   default {
       Inventory.MaxAmount 1;
       Inventory.InterHubAmount 0;
 
       +INVENTORY.UNDROPPABLE
-   }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 A_GiveInventory("HealthBonus", 1);
-      TNT1 A 0 Lith_A_Log(msg_both, 1, "Dogs");
-      stop;
-   Use:
-      TNT1 A 0;
-      fail;
    }
 }
 
@@ -69,13 +56,19 @@ class Lith_Steggles : MBFHelperDog
    states
    {
    Energize:
-      DOGS A 0 A_GiveToTarget("Lith_Dogs", 1);
+      DOGS A 0 {
+         if(target) {
+            target.A_GiveInventory("Lith_Dogs", 1);
+            target.A_GiveInventory("HealthBonus", 1);
+            Lith_HERMES.Log(target, msg_both, 1, "_Dogs");
+         }
+      }
       stop;
    PureSteggleEnergy:
       DOGS A 0 {
-	 bNOCLIP = true;
-	 bNOGRAVITY = true;
-	 A_ChangeLinkFlags(1);
+      bNOCLIP = true;
+      bNOGRAVITY = true;
+      A_ChangeLinkFlags(1);
       }
       DOGS A 0 A_SetTranslucent(0.8, 1);
       DOGS A 0 ACS_NamedExecuteAlways("Lith_SteggleEnergy", 0);
@@ -90,7 +83,7 @@ class Lith_SteggleSphereSprite : Lith_AnimItemSprite
    states {SetSpr: DOGO AAAAAABBBBBBCCCCCCBBBBBB 0 Lith_A_JumpPhase; stop;}
 }
 
-class Lith_SteggleSphere : Lith_CustomInventory;
+class Lith_SteggleSphere : Inventory;
 
 default
 {
@@ -102,17 +95,25 @@ default
    +INVENTORY.FANCYPICKUPSOUND
 }
 
-states
-{
+override void postBeginPlay() {
+   super.postBeginPlay();
+   spawn("Lith_SteggleSphereSprite").master = self;
+}
+
+override bool tryPickup(in out Actor mo) {
+   if(super.tryPickup(mo)) {
+      mo.ACS_ScriptCall("Lith_DOGS");
+      Lith_HERMES.Log(mo, msg_both, 5, "_DoggoSphere");
+      return true;
+   } else {
+      return false;
+   }
+}
+
+states {
 Spawn:
-   TNT1 A 0;
-   TNT1 A 0 A_SpawnItemEx("Lith_SteggleSphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
    TNT1 A 1;
    wait;
-Pickup:
-   TNT1 A 0 Lith_A_Log(msg_both, 5, "DoggoSphere");
-   TNT1 A 0 ACS_NamedExecuteAlways("Lith_DOGS", 0);
-   stop;
 }
 
 /* EOF */

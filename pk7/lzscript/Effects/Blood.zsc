@@ -130,15 +130,17 @@ void Lith_A_Dogs()
       if(mo.Player && mo.CountInv("Lith_Dogs"))
       {
          let steg = Spawn("Lith_RealSpectralSteggles", Pos + (0,0,32), ALLOW_REPLACE);
-         steg.Vel = (10,0,9);
+         steg.Vel = (frandom(-10,10),frandom(-10,10),frandom(2,9));
          steg.Angle = FRandom(0, 359);
-         steg.Target = self;
+         steg.Target = mo;
       }
    }
 }
 
 void Lith_A_SetLevel(int num)
 {
+   Lith_A_Dogs();
+
    if(!m_Lev)
    {
       let mo = Spawn("Lith_BloodHitCore", Pos + (FRandom(-1,1),FRandom(-1,1),FRandom(-1,1)), ALLOW_REPLACE);
@@ -158,7 +160,6 @@ Spawn:
    TNT1 A 0 nodelay ResolveState("Heavy"); /* HACK: this is STILL hardcoded! */
    TNT1 A 0 ResolveState("Medium");
    TNT1 A 0 ResolveState("Low");
-   BLUD A 0 Lith_A_Dogs;
    stop;
 Heavy:
    BLUD A 8 Lith_A_SetLevel(1);

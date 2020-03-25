@@ -103,7 +103,7 @@ class Lith_InventoryItem : Inventory abstract {
          Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
          return true;
       } else {
-         return true;
+         return false;
       }
    }
 }

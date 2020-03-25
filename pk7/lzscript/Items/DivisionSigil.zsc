@@ -7,36 +7,28 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ItemPickup : Lith_Pickup
-{
-   default
-   {
+class Lith_ItemPickup : Lith_Pickup {
+   default {
       Inventory.PickupSound "player/pickup/evil";
       Lith_Pickup.Glow "Lith_ItemGlow";
    }
 }
 
-class Lith_DivisionSigilSprite : Lith_AnimItemSprite
-{
-   default
-   {
+class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
+   default {
       Lith_AnimItemSprite.Phases 23;
-
       +BRIGHT
    }
 
-   states(Actor)
-   {
+   states(Actor) {
    SetSpr:
       DIVI ABCDEFGHIJKLMNOPQRSTUVW 0 Lith_A_JumpPhase;
       stop;
    }
 }
 
-class Lith_DivisionSigil : Lith_ItemPickup
-{
-   default
-   {
+class Lith_DivisionSigil : Lith_ItemPickup {
+   default {
       Inventory.Icon "DIVSIGI1";
       Inventory.MaxAmount 1;
       Tag "Division Sigil";
@@ -44,41 +36,38 @@ class Lith_DivisionSigil : Lith_ItemPickup
       +INVENTORY.INVBAR
    }
 
-   states
-   {
-   Spawn:
-      DIVI A 0;
-      DIVI A 0 A_SpawnItemEx("Lith_DivisionSigilSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
-      goto SpawnLoop;
-   Pickup:
-      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_hassigil), "PickupNope");
-      TNT1 A 0 A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_GetSigil");
-      TNT1 A 0 A_RailWait;
-      stop;
-   Use:
-   PickupNope:
-      TNT1 A 0;
-      fail;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      A_SpawnItemEx("Lith_DivisionSigilSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
+   }
+
+   override bool canPickup(Actor mo) {
+      if(super.canPickup(mo)) {
+         return !ACS_ExecuteWithResult(lsc_pdata, pdata_hassigil);
+      } else {
+         return false;
+      }
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      if(super.tryPickup(mo)) {
+         mo.A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
+         mo.acs_scriptCall("Lith_GetSigil");
+         return true;
+      } else {
+         return false;
+      }
    }
 }
 
-class Lith_ClawOfImp : Lith_ItemPickup
-{
-   default
-   {
+class Lith_ClawOfImp : Lith_ItemPickup {
+   default {
       Tag "Claw of Imp";
    }
 
-   states
-   {
-   Spawn:
-      DITM A 0;
-      DITM A 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
-      goto SpawnLoop;
-   Pickup:
-      TNT1 A 0 A_RailWait;
-      stop;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
    }
 }
 

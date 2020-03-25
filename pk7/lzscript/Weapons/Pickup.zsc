@@ -7,10 +7,9 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_FistPickup : Lith_WeaponPickup replaces Fist
-{
-   default
-   {
+class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
+   default {
+      Lith_WeaponPickup.WepName wepnam_fist;
       Lith_Pickup.Sprite "FISTA";
       Tag "Fist Pickup";
 
@@ -18,178 +17,116 @@ class Lith_FistPickup : Lith_WeaponPickup replaces Fist
    }
 }
 
-class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw
-{
-   default
-   {
+class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw {
+   default {
+      Lith_WeaponPickup.WepName wepnam_chainsaw;
       Lith_Pickup.Sprite  "LWEPA";
       Lith_Pickup.SpriteM "CFISZ";
       Lith_Pickup.SpriteC "CFISY";
 
       Tag "Chainsaw Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chainsaw);
-      stop;
-   }
 }
 
-class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol
-{
-   default
-   {
+class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol {
+   default {
+      Lith_WeaponPickup.WepName wepnam_pistol;
       Lith_Pickup.Sprite  "LWEPB";
       Lith_Pickup.SpriteM "PISTA";
       Lith_Pickup.SpriteC "REVLA";
 
       Tag "Pistol Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_pistol);
-      stop;
-   }
 }
 
-class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun
-{
-   default
-   {
+class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun {
+   default {
+      Lith_WeaponPickup.WepName wepnam_shotgun;
       Lith_Pickup.Sprite  "LWEPC";
       Lith_Pickup.SpriteM "SHOTA";
       Lith_Pickup.SpriteC "CSRGZ";
 
       Tag "Shotgun Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_shotgun);
-      stop;
-   }
 }
 
-class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun
-{
-   default
-   {
+class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun {
+   default {
+      Lith_WeaponPickup.WepName wepnam_supershotgun;
       Lith_Pickup.Sprite  "LWEPC";
       Lith_Pickup.SpriteM "SSGGX";
       Lith_Pickup.SpriteC "CSHGY";
 
       Tag "Super Shotgun Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_supershotgun);
-      stop;
-   }
 }
 
-class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun
-{
-   default
-   {
+class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun {
+   default {
+      Lith_WeaponPickup.WepName wepnam_chaingun;
       Lith_Pickup.Sprite  "LWEPD";
       Lith_Pickup.SpriteM "RIFLA";
       Lith_Pickup.SpriteC "CSMGY";
 
       Tag "Chaingun Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_chaingun);
-      stop;
-   }
 }
 
-class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher
-{
-   default
-   {
+class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher {
+   default {
+      Lith_WeaponPickup.WepName wepnam_rocketlauncher;
       Lith_Pickup.Sprite  "LWEPE";
       Lith_Pickup.SpriteM "LAUNA";
       Lith_Pickup.SpriteC "IONGZ";
 
       Tag "Rocket Launcher Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_rocketlauncher);
-      stop;
-   }
 }
 
-class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle
-{
-   default
-   {
+class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle {
+   default {
+      Lith_WeaponPickup.WepName wepnam_plasmarifle;
       Lith_Pickup.Sprite  "LWEPF";
       Lith_Pickup.SpriteM "PLASA";
       Lith_Pickup.SpriteC "CPLGZ";
 
       Tag "Plasma Rifle Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_plasmarifle);
-      stop;
-   }
 }
 
-class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000
-{
-   default
-   {
+class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000 {
+   default {
+      Lith_WeaponPickup.WepName wepnam_bfg9000;
       Lith_Pickup.Sprite  "LWEPG";
       Lith_Pickup.SpriteM "BFUGA";
       Lith_Pickup.SpriteC "SDSGZ";
 
       Tag "BFG9000 Pickup";
    }
-
-   states
-   {
-   Pickup:
-      TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_bfg9000);
-      stop;
-   }
 }
 
 class Lith_WeaponPickup : Lith_Pickup;
 
-default
-{
+default {
    Lith_Pickup.Glow "Lith_WeapGlow";
 }
+
+private meta int m_wepName;
+
+property WepName: m_wepName;
 
 override void postBeginPlay() {
    if(bDROPPED) destroy();
    else         super.postBeginPlay();
 }
 
-states
-{
-Spawn:
-   TNT1 A 0;
-   goto SpawnLoop;
-Pickup:
-   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_WeaponPickup", wepnam_fist);
-   stop;
+override bool tryPickup(in out Actor mo) {
+   if(super.tryPickup(mo)) {
+      mo.acs_scriptCall("Lith_WeaponPickup", m_wepName);
+      return true;
+   } else {
+      return false;
+   }
 }
 
 /* EOF */
