@@ -112,13 +112,15 @@ class Lith_FinalizerShot : FastProjectile
       wait;
    Death:
       TNT1 A 0 {
-         if(bBOSS || float(Health) / CallACS("Lith_GetFinalizerMaxHealth") > 0.5) {
-            tracer.A_DamageSelf(50);
-         } else {
-            tracer.A_SpawnItemEx("Lith_FinalizerKill", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
-            tracer.ACS_ScriptCall("Lith_MonsterFinalized");
-            if(tracer.bBOSSDEATH) tracer.A_BossDeath();
-            tracer.destroy();
+         if(tracer) {
+            if(bBOSS || float(Health) / CallACS("Lith_GetFinalizerMaxHealth") > 0.5) {
+               tracer.A_DamageSelf(50);
+            } else {
+               tracer.A_SpawnItemEx("Lith_FinalizerKill", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+               tracer.ACS_ScriptCall("Lith_MonsterFinalized");
+               if(tracer.bBOSSDEATH) tracer.A_BossDeath();
+               tracer.destroy();
+            }
          }
       }
       stop;
