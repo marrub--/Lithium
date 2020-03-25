@@ -1597,6 +1597,8 @@
 "LITH_CONTAINER_LegR" = "R Thigh";
 "LITH_CONTAINER_Torso" = "Torso";
 "LITH_CONTAINER_Legs" = "Legs";
+"LITH_ITEM_TAG_ClawOfImp" = "Claw of Imp";
+"LITH_ITEM_TAG_DivisionSigil" = "\cgD\cii\ckv\cfi\cds\cvi\cno\chn \ctS\cai\cgg\cii\ckl";
 "LITH_ITEM_TAG_ArmStandardUp" = "Standard Armor";
 "LITH_ITEM_TAG_ArmImprovedUp" = "Improved Armor";
 "LITH_ITEM_TAG_ArmTeflonUp" = "Teflon-weave Armor";
@@ -1613,6 +1615,8 @@
 "LITH_ITEM_TAG_ArmHazMatLo" = "Haz-Mat Pants";
 "LITH_ITEM_TAG_ArmPinkSilverLo" = "Pink Silver Leggings";
 "LITH_ITEM_TAG_ArmMidoriLo" = "Midori Leggings";
+"LITH_ITEM_SHORT_DivisionSigil" = "\cgA mistake of the universe.";
+"LITH_ITEM_SHORT_ClawOfImp" = "Used in division.";
 "LITH_ITEM_SHORT_ArmStandardUp" = "\ca4 DT to bullets.\n2 DT to other types.";
 "LITH_ITEM_SHORT_ArmImprovedUp" = "\ca6 DT to bullets.\n3 DT to other types.";
 "LITH_ITEM_SHORT_ArmTeflonUp" = "\ca6 DT to electricity.\n3 DT to other types.";
@@ -1645,6 +1649,8 @@
 ":ItemSpr:ArmHazMatLo" = "ARM6C0";
 ":ItemSpr:ArmPinkSilverLo" = "ARM7C0";
 ":ItemSpr:ArmMidoriLo" = "ARM8C0";
+":ItemSpr:ClawOfImp" = "DITMA0";
+":ItemSpr:DivisionSigil" = ":Items:DivisionSigil";
 ":HUD:H_KC1" = "RKEYB0";
 ":HUD:H_KC2" = "YKEYB0";
 ":HUD:H_KC3" = "BKEYB0";

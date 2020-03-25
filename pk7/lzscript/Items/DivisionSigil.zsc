@@ -22,13 +22,15 @@ class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
 
 class Lith_DivisionSigil : Lith_ItemPickup {
    default {
-      Inventory.Icon "DIVSIGI1";
       Tag "Division Sigil";
+      Lith_InventoryItem.InvName "DivisionSigil";
+      Lith_InventoryItem.Size 3, 3;
+      +LITH_ITEMPICKUP.NOSPRITE
    }
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      A_SpawnItemEx("Lith_DivisionSigilSprite", 0,0,0, 0,0,0, 0, Lith_ISF);
+      spawn("Lith_DivisionSigilSprite", pos).master = self;
    }
 
    override bool canPickup(Actor mo) {
@@ -42,15 +44,19 @@ class Lith_DivisionSigil : Lith_ItemPickup {
    override bool tryPickup(in out Actor mo) {
       mo.A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
       mo.acs_scriptCall("Lith_GetSigil");
-      goAwayAndDie();
-      return true;
+      return super.tryPickup(mo);
    }
 }
 
 class Lith_ClawOfImp : Lith_ItemPickup {
    default {
       Tag "Claw of Imp";
+      Lith_InventoryItem.InvName "ClawOfImp";
+      Lith_InventoryItem.Size 4, 2;
+      Lith_ItemPickup.Sprite "DITMA";
+      +LITH_ITEMPICKUP.GENERIC
    }
+}
 
 class Lith_ItemPickup : Lith_InventoryItem abstract;
 

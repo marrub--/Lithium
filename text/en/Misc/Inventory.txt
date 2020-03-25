@@ -11,6 +11,7 @@ You can right click to quickly move items.
 To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 
 ## Containers ----------------------------------------------------------------|
+
 == \#CONTAINER_Backpack | Backpack
 == \#CONTAINER_ArmUpL   | L Shoulder
 == \#CONTAINER_ArmUpR   | R Shoulder
@@ -23,6 +24,10 @@ To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 == \#CONTAINER_Legs     | Legs
 
 ## Tags ----------------------------------------------------------------------|
+
+== \#ITEM_TAG_ClawOfImp     | Claw of Imp
+== \#ITEM_TAG_DivisionSigil | \cgD\cii\ckv\cfi\cds\cvi\cno\chn \ctS\cai\cgg\cii\ckl
+
 == \#ITEM_TAG_ArmStandardUp    | Standard Armor
 == \#ITEM_TAG_ArmImprovedUp    | Improved Armor
 == \#ITEM_TAG_ArmTeflonUp      | Teflon-weave Armor
@@ -43,6 +48,13 @@ To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 == \#ITEM_TAG_ArmMidoriLo      | Midori Leggings
 
 ## Descriptions --------------------------------------------------------------|
+
+%% \#ITEM_SHORT_DivisionSigil
+\cgA mistake of the universe.
+
+%% \#ITEM_SHORT_ClawOfImp
+Used in division.
+
 %% \#ITEM_SHORT_ArmStandardUp
 \ca4 DT to bullets.
 2 DT to other types.
@@ -108,6 +120,7 @@ To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 4 DT to other types.
 
 ## Sprites -------------------------------------------------------------------|
+
 == :ItemSpr:ArmStandardUp    | ARM1A0
 == :ItemSpr:ArmImprovedUp    | ARM2A0
 == :ItemSpr:ArmTeflonUp      | ARM3A0
@@ -125,6 +138,9 @@ To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 == :ItemSpr:ArmHazMatLo      | ARM6C0
 == :ItemSpr:ArmPinkSilverLo  | ARM7C0
 == :ItemSpr:ArmMidoriLo      | ARM8C0
+
+== :ItemSpr:ClawOfImp     | DITMA0
+== :ItemSpr:DivisionSigil | :Items:DivisionSigil
 
 == :HUD:H_KC1 | RKEYB0
 == :HUD:H_KC2 | YKEYB0
