@@ -68,7 +68,7 @@ class Lith_UpgrGlow : Lith_ItemGlow {
 }
 
 mixin class Lith_Pickup {
-   private int m_PkFlags;
+   private meta int m_PkFlags;
 
    private meta string m_PkSprGf;
    private meta string m_PkSprMf;
@@ -83,22 +83,22 @@ mixin class Lith_Pickup {
    private Lith_Sprite m_PkSprM;
    private Lith_Sprite m_PkSprC;
 
-   private class<Actor> m_PkGlow;
+   private meta class<Actor> m_PkGlow;
 
    property Sprite:  m_PkSprGf;
    property SpriteM: m_PkSprMf;
    property SpriteC: m_PkSprCf;
    property Glow:    m_PkGlow;
 
-   flagdef Generic:  m_PkFlags, 0;
-   flagdef NoSprite: m_PkFlags, 0;
+   flagdef Pkup_Generic:  m_PkFlags, 0;
+   flagdef Pkup_NoSprite: m_PkFlags, 1;
 
    void Lith_PickupPostBeginPlay() {
       if(m_PkSprGf) m_PkSprG.Get(m_PkSprGf);
       if(m_PkSprMf) m_PkSprM.Get(m_PkSprMf);
       if(m_PkSprCf) m_PkSprC.Get(m_PkSprCf);
 
-      if(!bNOSPRITE) {
+      if(!bPKUP_NOSPRITE) {
          m_PkSpr = Spawn("Lith_ItemSprite", Pos);
          m_PkSpr.Master = self;
       } else {
@@ -109,7 +109,7 @@ mixin class Lith_Pickup {
    void Lith_PickupTick() {
       if(!m_PkSpr) return;
 
-      if(bGENERIC) {
+      if(bPKUP_GENERIC) {
          Lith_SetSprite(m_PkSprG);
          return;
       }

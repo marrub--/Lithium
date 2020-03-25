@@ -13,7 +13,7 @@ class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
       Lith_WeaponPickup.Sprite "FISTA";
       Tag "Fist Pickup";
 
-      +LITH_WEAPONPICKUP.GENERIC
+      +LITH_WEAPONPICKUP.PKUP_GENERIC
    }
 }
 

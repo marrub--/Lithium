@@ -25,7 +25,7 @@ class Lith_DivisionSigil : Lith_ItemPickup {
       Tag "Division Sigil";
       Lith_InventoryItem.InvName "DivisionSigil";
       Lith_InventoryItem.Size 3, 3;
-      +LITH_ITEMPICKUP.NOSPRITE
+      +LITH_ITEMPICKUP.PKUP_NOSPRITE
    }
 
    override void postBeginPlay() {
@@ -54,7 +54,7 @@ class Lith_ClawOfImp : Lith_ItemPickup {
       Lith_InventoryItem.InvName "ClawOfImp";
       Lith_InventoryItem.Size 4, 2;
       Lith_ItemPickup.Sprite "DITMA";
-      +LITH_ITEMPICKUP.GENERIC
+      +LITH_ITEMPICKUP.PKUP_GENERIC
    }
 }
 

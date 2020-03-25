@@ -9,61 +9,56 @@
 
 class Lith_BossReward1 : Lith_CBIItem {
    default {
+      Tag "Weapon Modification Device";
       Lith_CBIItem.UpgrName cupg_weapninter;
       Lith_CBIItem.SpriteM "WUPGA";
       Lith_CBIItem.SpriteC "SPELA";
-
-      Tag "Weapon Modification Device";
    }
 }
 
 class Lith_BossReward2 : Lith_CBIItem {
    default {
+      Tag "KSKK Spec. High-Grade CPU";
       Lith_CBIItem.UpgrName cupg_hasupgr1;
       Lith_CBIItem.SpriteM "CUPGA";
       Lith_CBIItem.SpriteC "SPELB";
-
-      Tag "KSKK Spec. High-Grade CPU";
    }
 }
 
 class Lith_BossReward3 : Lith_CBIItem {
    default {
+      Tag "Armor Interface";
       Lith_CBIItem.UpgrName cupg_armorinter;
       Lith_CBIItem.SpriteM "ARM1Z";
       Lith_CBIItem.SpriteC "SPELC";
-
-      Tag "Armor Interface";
    }
 }
 
 class Lith_BossReward4 : Lith_CBIItem {
    default {
+      Tag "KSKK Spec. Super High-Grade CPU";
       Lith_CBIItem.UpgrName cupg_hasupgr2;
       Lith_CBIItem.SpriteM "CUPGB";
       Lith_CBIItem.SpriteC "SPELD";
-
-      Tag "KSKK Spec. Super High-Grade CPU";
    }
 }
 
 class Lith_BossReward5 : Lith_CBIItem {
    default {
+      Tag "Weapon Refactoring Device";
       Lith_CBIItem.UpgrName cupg_weapninte2;
       Lith_CBIItem.SpriteM "WRDPA";
       Lith_CBIItem.SpriteC "SPELE";
-
-      Tag "Weapon Refactoring Device";
    }
 }
 
 class Lith_BossReward6 : Lith_CBIItem {
    default {
+      Tag "Reality Distortion Interface";
       Lith_CBIItem.UpgrName cupg_rdistinter;
       Lith_CBIItem.Sprite "IOBJC";
-      Tag "Reality Distortion Interface";
 
-      +LITH_CBIITEM.GENERIC
+      +LITH_CBIITEM.PKUP_GENERIC
    }
 }
 

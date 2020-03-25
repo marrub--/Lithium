@@ -25,6 +25,7 @@ class Lith_SpriteLoader : Actor
    {
       ARM1 A 0;
       CUPG A 0;
+      DITM A 0;
       FDLI A 0;
       IOBJ A 0;
       LIFX A 0;
