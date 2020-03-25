@@ -308,7 +308,7 @@ i32 Sc_GetFinalizerMaxHealth(void)
 script_str ext("ACS") addr("Lith_SurgeOfDestiny")
 void Sc_SurgeOfDestiny(void)
 {
-   for(i32 i = 0; i < (35 * 7) / 2; i++) {
+   for(i32 i = 0; i < (35 * 17) / 2; i++) {
       ServCallI(sm_SurgeOfDestiny);
       ACS_Delay(2);
    }
