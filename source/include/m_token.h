@@ -33,8 +33,7 @@ enum
    tok_string, /* String */
    tok_charac, /* Character String */
    tok_quote,  /* Quote */
-   tok_cmtlin, /* Line comment */
-   tok_cmtblk, /* Block comment */
+   tok_cmment, /* Comment */
 
    /* Special (post-process) */
    tok_keywrd, /* Keyword */

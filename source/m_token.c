@@ -28,7 +28,7 @@
       unget(); \
    } while(0)
 
-#define InComment(ch) ((ch) != '\n' && !FEOF(fp))
+#define untilEOL(ch) ((ch) != '\n' && !FEOF(fp))
 
 #define unget() ((orig->colu -= 1), ungetc(ch, fp))
 #define getch() ((orig->colu += 1), ch = fgetc(fp))
@@ -111,15 +111,9 @@ begin:;
    case '/':
       if(getch() == '=')
          tok1(tok_diveq);
-      else if(ch == '/')
-      {
-         tok1(tok_cmtlin);
-         getch();
-         tokText(InComment);
-      }
       else if(ch == '*')
       {
-         tok1(tok_cmtblk);
+         tok1(tok_cmment);
          getch();
 
          for(i32 lvl = 1; lvl && !FEOF(fp); getch())
@@ -153,7 +147,7 @@ begin:;
 
    case '`':
       getch();
-      tokText(InComment);
+      tokText(untilEOL);
       tok1(tok_quote);
       return;
 

@@ -49,9 +49,9 @@ gA HealthBonus
 gA AllMap
 pM BackpackStan
 pC BackpackJem
-gA Berserk       -> JAQTen
-gA Infrared      -> SYM43
-gA RadSuit       -> SYM43
+gA Berserk  -> JAQTen
+gA Infrared -> SYM43
+gA RadSuit  -> SYM43
 
 gA Medikit  -> JJJ
 gA Stimpack -> JJJ

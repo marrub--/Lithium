@@ -24,8 +24,7 @@ i32 TBufProc(struct token *tok)
    switch(tok->type) {
       case tok_eof:    return tokproc_done;
       case tok_lnend:
-      case tok_cmtblk:
-      case tok_cmtlin: return tokproc_skip;
+      case tok_cmment: return tokproc_skip;
    }
 
    return tokproc_next;
@@ -36,8 +35,7 @@ i32 TBufProcL(struct token *tok)
 {
    switch(tok->type) {
       case tok_eof:    return tokproc_done;
-      case tok_cmtblk:
-      case tok_cmtlin: return tokproc_skip;
+      case tok_cmment: return tokproc_skip;
    }
 
    return tokproc_next;
