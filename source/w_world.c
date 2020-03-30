@@ -117,20 +117,27 @@ static void UpdateGame(void)
    Update(Lith_v1_5_2)
       ACS_SetCVar(sc_sv_difficulty, 10); /* 1 => 10 */
 
-   Update(Lith_v1_6_0)
-   {
-      for_player()
-      {
+   Update(Lith_v1_6_0) {
+      for_player() {
          p->setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
          p->setCVarI(sc_player_ammolog, true); /* false => true */
       }
    }
 
-   Update(Lith_v1_6_1)
-   {
-      for_player()
-      {
+   Update(Lith_v1_6_1) {
+      for_player() {
          p->setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
+      }
+   }
+
+   /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
+    * version 1.7 instead.
+    */
+   Update(Lith_v1_7_0) {
+      for_player() {
+         if(p->getCVarI(sc_xhair_style) >= lxh_max) {
+            p->setCVarI(sc_xhair_style, 0);
+         }
       }
    }
    #undef Update
