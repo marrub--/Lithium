@@ -68,7 +68,7 @@ struct compiler {
 
 /* Extern Functions -------------------------------------------------------- */
 
-script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i);
+u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i);
 
 void Dlg_GetStmt_Asm(struct compiler *d);
 script void Dlg_GetStmt(struct compiler *d);

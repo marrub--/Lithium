@@ -15,8 +15,12 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void Disassemble(struct dlg_def const *def)
-{
+script
+static void Disassemble(struct dlg_def const *def) {
+   ACS_BeginLog();
+   __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
+             def->codeP);
+
    for(u32 i = 0; i < def->codeP;) {
       __nprintf("%04X ", PRG_BEG + i);
 
@@ -24,6 +28,43 @@ script static void Disassemble(struct dlg_def const *def)
       i = Dlg_WriteCode(def, c, i);
       ACS_PrintChar('\n');
    }
+   ACS_EndLog();
+}
+
+script
+static void DumpCode(struct dlg_def *def) {
+   ACS_BeginLog();
+   __nprintf("Dumping code...\n");
+   Dbg_PrintMemC(def->codeV, def->codeC);
+   ACS_EndLog();
+}
+
+script
+static void DumpStringTable(struct dlg_def *def) {
+   ACS_BeginLog();
+   __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
+             def->stabP);
+   Dbg_PrintMemC(def->stabV, def->stabC);
+   ACS_EndLog();
+}
+
+static void PrintDbg() {
+   for(u32 i = 0; i < countof(dlgdefs); i++) {
+      struct dlg_def *def = &dlgdefs[i];
+
+      if(def->codeV) {
+         ACS_BeginLog();
+         __nprintf("--- Script %u ---\n", i);
+         ACS_EndLog();
+         Disassemble(def);
+         DumpCode(def);
+         DumpStringTable(def);
+      }
+   }
+
+   ACS_BeginLog();
+   __nprintf("Done.");
+   ACS_EndLog();
 }
 
 static void FinishDef(struct compiler *d)
@@ -32,32 +73,69 @@ static void FinishDef(struct compiler *d)
    fastmemset(&d->def, 0, sizeof d->def);
 }
 
-script
-static void PrintDbg() {
-   ACS_BeginLog();
-   for(u32 i = 0; i < countof(dlgdefs); i++) {
-      struct dlg_def *def = &dlgdefs[i];
+static void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
+{
+   d->def.pages[num] = d->def.codeP;
 
-      if(def->codeV) {
-         __nprintf("Disassembling script %u(%p,%u,%u)...\n", i, def->codeV,
-                def->codeC, def->codeP);
-         Disassemble(def);
-         __nprintf("Dumping code...\n");
-         Dbg_PrintMemC(def->codeV, def->codeC);
+   Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
 
-         __nprintf("Dumping string table for script %u(%p,%u,%u)...\n", i,
-                def->stabV, def->stabC, def->stabP);
-         Dbg_PrintMemC(def->stabV, def->stabC);
+   Dlg_GetStmt(d);
+
+   if(act != ACT_NONE) Dlg_PushLdVA(d, act);
+   Dlg_PushB1(d, DCD_BRK_NP);
+}
+
+static bool Dlg_GetItem(struct compiler *d, u32 act)
+{
+   struct token *tok = d->tb.get();
+
+   if(faststrcmp(tok->textV, "page") == 0) {
+      tok = d->tb.get();
+      Expect(d, tok, tok_number);
+
+      u32 num = strtoi(tok->textV, nil, 0);
+      if(num > DPAGE_NORMAL_MAX) Err(d, "bad page index");
+
+      Dlg_GetItem_Page(d, num, act);
+      return true;
+   } else if(act == ACT_TRM_WAIT) {
+      if(faststrcmp(tok->textV, "failure") == 0) {
+         Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
+         return true;
+      } else if(faststrcmp(tok->textV, "finished") == 0) {
+         Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
+         return true;
+      } else if(faststrcmp(tok->textV, "unfinished") == 0) {
+         Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
+         return true;
       }
    }
 
-   __nprintf("Done.");
-   ACS_EndLog();
+   d->tb.unget();
+   return false;
+}
+
+static void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
+{
+   struct token *tok = d->tb.get();
+   Expect(d, tok, tok_number);
+
+   u32 num = beg + strtoi(tok->textV, nil, 0);
+   if(num > end) ErrF(d, "invalid dialogue number %u", num);
+
+   ExpectDrop(d, tok_semico);
+
+   FinishDef(d);
+   d->num = num;
+
+   Dbg_Log(log_dlg, "\n---\nheading %u\n---", num);
+
+   while(Dlg_GetItem(d, act));
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
+u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
 {
    u32 c2, c3;
 
@@ -122,66 +200,6 @@ script u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
    }
 
    return i;
-}
-
-void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
-{
-   d->def.pages[num] = d->def.codeP;
-
-   Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
-
-   Dlg_GetStmt(d);
-
-   if(act != ACT_NONE) Dlg_PushLdVA(d, act);
-   Dlg_PushB1(d, DCD_BRK_NP);
-}
-
-bool Dlg_GetItem(struct compiler *d, u32 act)
-{
-   struct token *tok = d->tb.get();
-
-   if(faststrcmp(tok->textV, "page") == 0) {
-      tok = d->tb.get();
-      Expect(d, tok, tok_number);
-
-      u32 num = strtoi(tok->textV, nil, 0);
-      if(num > DPAGE_NORMAL_MAX) Err(d, "bad page index");
-
-      Dlg_GetItem_Page(d, num, act);
-      return true;
-   } else if(act == ACT_TRM_WAIT) {
-      if(faststrcmp(tok->textV, "failure") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
-         return true;
-      } else if(faststrcmp(tok->textV, "finished") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
-         return true;
-      } else if(faststrcmp(tok->textV, "unfinished") == 0) {
-         Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
-         return true;
-      }
-   }
-
-   d->tb.unget();
-   return false;
-}
-
-void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
-{
-   struct token *tok = d->tb.get();
-   Expect(d, tok, tok_number);
-
-   u32 num = beg + strtoi(tok->textV, nil, 0);
-   if(num > end) ErrF(d, "invalid dialogue number %u", num);
-
-   ExpectDrop(d, tok_semico);
-
-   FinishDef(d);
-   d->num = num;
-
-   Dbg_Log(log_dlg, "\n---\nheading %u\n---", num);
-
-   while(Dlg_GetItem(d, act));
 }
 
 void Dlg_MInit(void)
