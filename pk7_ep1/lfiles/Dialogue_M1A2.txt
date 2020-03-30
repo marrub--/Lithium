@@ -60,8 +60,7 @@ unfinished {
 
       logoff "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
    } else {
-      logon "UAC"
-      `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logon "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
 
       pict 3 {
          @@
@@ -106,7 +105,7 @@ page 1 {
    remote "maxie@ai.<hidden>"
 
    @@
-   `I'm Maxie. I used to be the 4334th Counsel of the 51st Era Judgement.
+   `I'm Maxie. I used to be the 4334th Counsel of the 51st Era Judgment.
    `Now I'm, uh, this. Sorry to disappoint.
    @@
 
@@ -118,7 +117,7 @@ page 2 {
    remote "maxie@ai.<hidden>"
 
    @@
-   `I was the 4334th Counsel of the 51st Era Judgement. Now I'm, as you can
+   `I was the 4334th Counsel of the 51st Era Judgment. Now I'm, as you can
    `quite clearly see, a bowl, an eye, and a power core.
    @@
 
@@ -128,10 +127,10 @@ page 2 {
 
 page 3 {
    @@
-   `Explain? Well, you surely know the Judgement. I can only presume you mean
+   `Explain? Well, you surely know the Judgment. I can only presume you mean
    `how I got in this state. Here, I'll tell you my story.
    `
-   `In the beginning of the 51st Era I was cast out of Judgement and forced
+   `In the beginning of the 51st Era I was cast out of Judgment and forced
    `into a body. I decided it would be best for me to roam this galaxy to see
    `if I could find a place to hide. However, marauders found me along my
    `journey, and now most of my body is gone. All that remains are my power
