@@ -157,11 +157,11 @@ static void DrawPage(struct gui_state *g, struct player *p, struct bip *bip)
       oy = g->oy - 40;
    }
    else
-      SetClipW(111, 40, 200, 180, 184);
+      SetClipW(110, 40, 201, 180, 185);
 
    if(page->image) PrintSpriteA(page->image, 296,2, 180,2, 0.4);
 
-   PrintText_str(pinf.flname, s_smallfnt, CR_ORANGE, 200,4, 45 + oy,1);
+   PrintText_str(pinf.flname, s_lmidfont, CR_ORANGE, 111,1, 45 + oy,1);
 
    Str(nl_bar, s"\n|");
 
@@ -249,13 +249,14 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p)
 
    if(bip->curcategory != BIPC_MAIN)
    {
+      /* TODO */
       if(G_Button(g, "<BACK", 20, 38, false, Pre(btnbipback)))
          bip->curcategory = bip->lastcategory;
    }
    else
    {
       PrintSpriteA(sp_UI_bip, 20,1, 40,1, 0.1);
-      PrintText_str(st_bip_header, s_smallfnt, CR_WHITE, 35,1, 40,1);
+      PrintText_str(st_bip_header, s_lmidfont, CR_WHITE, 35,1, 40,1);
    }
 
    if(max)

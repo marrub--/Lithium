@@ -34,7 +34,7 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
          continue;
 
       PrintTextFmt(LC(LANG "NOTE_FMT"), i + 1);
-      PrintText(s_smallfnt, CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
+      PrintText(s_lmidfont, CR_WHITE, g->ox+2,1, i * 30 + g->oy,1);
 
       if(G_Button_Id(g, i, p->notes[i] ? p->notes[i] : LC(LANG "EMPTY"),
          44, i * 30, .disabled = !CBIState(g)->noteedit, Pre(btnnote)))

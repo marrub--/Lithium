@@ -51,7 +51,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
       helptrns += 0.3;
    }
 
-   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_lmidfont, CR_WHITE, x+1,1, y+1,1, helptrns);
+   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, CR_WHITE, x+1,1, y,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
    PrintText(s_lmidfont, CR_WHITE, x+202,1, y,1);
@@ -60,7 +60,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
 static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
 {
    PrintText_str(left,  s_lmidfont, CR_WHITE, x,1, y,1);
-   PrintText_str(right, s_lmidfont, CR_WHITE, x+80,2, y,1);
+   PrintText_str(right, s_smallfnt, CR_WHITE, x+80,2, y,1);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -72,7 +72,7 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
    PrintText_str(p->name, s_lmidfont, CR_WHITE, x,1, y,1);
    y += 10;
 
-   PrintText_str(p->classname, s_lmidfont, CR_WHITE, x,1, y,1);
+   StatusInfo(g, x, y += 10, st_class, p->classname);
 
    StatusInfo(g, x, y += 10, st_lv, StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));
@@ -88,8 +88,9 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 
    if(p->attr.points)
    {
+      /* TODO */
       PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
-      PrintText(s_lmidfont, CR_WHITE, x,1, y,1);
+      PrintText(s_smallfnt, CR_WHITE, x,1, y,1);
    }
 
    x  = 53;

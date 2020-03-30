@@ -61,7 +61,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
-         PrintText_str(L(upgrcateg[curcategory]), s_smallfnt, CR_WHITE, g->ox + 4,1, y + g->oy + 1,1);
+         PrintText_str(L(upgrcateg[curcategory]), s_lmidfont, CR_WHITE, g->ox + 40,4, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
