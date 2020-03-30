@@ -94,7 +94,7 @@ unfinished {
    logon "LogonData" `\cu[Ship Data Terminal]
 
    info {
-      `[Viewing:\cd/sys/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
+      `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
       `[\cuINFO\c-] pragmat \cqENABLE\ck #src_lang 99391dp.kiri.licari
       `
       @@
