@@ -86,6 +86,78 @@ unfinished {
 }
 
 /* ------------------------------------------------------------------------- */
+terminal 2;
+
+unfinished {
+   remote "data@localhost"
+
+   logon "LogonData" `\cu[Ship Data Terminal]
+
+   info {
+      @@
+      `[Viewing:\cd/usr/share/vis/u436x/flooring.v\c-]
+      `
+      `The \cnU-4360707\c- Star Ship is equipped with comfortable, accessible
+      `flooring throughout the entirety of the personnel facilities. The
+      `material used for floors in these sections is a subpatented\ci*\c-
+      `polymer built to withstand explosions up to 40 MJ/kg\ci**\c- while
+      `still being comfortable to walk on.
+      `
+      `The \cnSuperFlex\c- flooring system allows for secure buildings to have
+      `maximal comfort during peace time. Thanks to this, the \cnU-4360707\c-
+      `Star Ship has both incredible resistance and incredible comfort
+      `all throughout\ci***\c-.
+      `
+      `All areas\ci***\c- in the ship are also equipped with accessible ramps
+      `for disabled crew and autonomous ship AI cores. Minor inclines of around
+      `four to six degrees are not included in this statement.
+      @@
+      `
+      ` \ci*   \cuSubpatent N-E-FO/MT-8389.\c-
+      ` \ci**  \cuExact measurement is 39.0864 MJ/kg.\c-
+      ` \ci*** \cuIn all personnel facilities.\c-
+   }
+
+   info {
+      @@
+      `[Viewing:\cd/usr/share/vis/vis/intro.v\c-]
+      `
+      `The \cnVisual Information System\c- (VIS) is a set of universal
+      `standards, ranging from subpatent \cnV-W-IN-20\c- up to \cnV-W-IN-30\c-.
+      `
+      `The VIS standard subpatents are all free to use by any organization or
+      `individual. You may reproduce, modify, and sell all 10 subpatents with
+      `no restriction whatsoever. \cnTransference of Issue\c- applies to all
+      `VIS subpatents. See \cnUniversal Legal Code\c- for more on ToI and
+      `warranties. This code is also available under
+      `\cd/usr/share/vis/ulc/toi.v\c-, as are all other legal codes.
+      `
+      `The \cnVisual Information System\c- standards include:
+      @@
+      `
+      ` \ci- \cu20 :: \c-Textual Representation of Visual Information
+      ` \ci- \cu21 :: \c-Optional Representations for Visual Information
+      ` \ci- \cu22 :: \c-Appropriate Storage Media for Visual Information
+      ` \ci- \cu23 :: \c-Standard Outputs for Visual Information
+      ` \ci- \cu24 :: \c-Acceptable Outputs for Visual Information
+      ` \ci- \cu25 :: \c-Appropriate Output Media for Visual Information
+      ` \ci- \cu26 :: \c-Organization and Categorization of Visual Information
+      ` \ci- \cu27 :: \c-Requirements for the Filing of Visual Information
+      ` \ci- \cu28 :: \c-Standard Visual Information Suite
+      ` \ci- \cu29 :: \c-Extraneous Visual Information Suite
+      ` \ci- \cu30 :: \c-Context, Definitions and Purpose of Visual Information
+      `
+      @@
+      `Please view the respective information pages for more on each standard.
+      `All subpatents included in the standard suite are placed in
+      `\cd/usr/share/vis/subp/\c-.
+      @@
+   }
+
+   logoff "LogonData" `\cu[Ship Data Terminal]
+}
+
+/* ------------------------------------------------------------------------- */
 dialogue 1;
 
 page 0 {
