@@ -103,8 +103,10 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          i32 level    = shadow ? m->level - ACS_Random(-5, 5) : m->level;
          UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
          UData.rank   = m->rank;
+         UData.exp    = m->exp / (k32)_monster_level_exp;
       } else {
          UData.rank = 0;
+         UData.exp  = 1.0;
       }
 
       i32 splitr = chp % shp;
@@ -182,6 +184,11 @@ stkcall void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
 
       SetClip(x, y, 80 * UData.splitfrac, 2);
       PrintSprite(bs[UData.split], x,1, y,1);
+      ClearClip();
+
+      Str(exp_bar_1, s":UI:ExpBar1");
+      SetClip(x, y+3, 24 * UData.exp, 2);
+      PrintSprite(exp_bar_1, x,1, y+3,1);
       ClearClip();
    }
 }

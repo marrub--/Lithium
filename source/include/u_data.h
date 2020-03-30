@@ -90,6 +90,7 @@ struct upgr_data_VitalScan {
    u32 split;
    u32 rank;
    bool freak;
+   k32 exp;
 };
 
 struct upgr_data_Zoom {

@@ -289,11 +289,11 @@ static void MonsterMain(dmon_t *m)
          Dbg_Log(log_dmon, "monster %i resurrected", m->id);
       }
 
-      if(m->exp > 500)
+      if(m->exp > _monster_level_exp)
       {
          i32 prev = m->level;
 
-         div_t d = __div(m->exp, 500);
+         div_t d = __div(m->exp, _monster_level_exp);
          m->level += d.quot;
          m->exp    = d.rem;
 

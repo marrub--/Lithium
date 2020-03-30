@@ -18,6 +18,10 @@
 #include "common.h"
 #include "m_list.h"
 
+enum {
+   _monster_level_exp = 500,
+};
+
 enum dmgtype {
    dmgtype_bullets,
    dmgtype_energy,
