@@ -98,6 +98,7 @@
 == \#sv_pauseinmenus | Pause while in menus
 == \#sv_nobosses     | No phantoms
 == \#sv_nobossdrop   | Start with phantom rewards
+== \#sv_minhealth    | Minimum health on map start
 
 == \#stx_gui | GUI
 

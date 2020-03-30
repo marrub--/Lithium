@@ -25,6 +25,7 @@ if(p->num == 0) {
    ServerBool(sv_pauseinmenus);
    ServerBool(sv_nobosses);
    ServerBool(sv_nobossdrop);
+   ServerInt(Percent, sv_minhealth, 0, 200);
 }
 
 Category(stx_gui);

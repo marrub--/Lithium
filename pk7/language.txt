@@ -1374,6 +1374,7 @@
 "LITH_sv_pauseinmenus" = "Pause while in menus";
 "LITH_sv_nobosses" = "No phantoms";
 "LITH_sv_nobossdrop" = "Start with phantom rewards";
+"LITH_sv_minhealth" = "Minimum health on map start";
 "LITH_stx_gui" = "GUI";
 "LITH_gui_xmul" = "Horizontal cursor speed";
 "LITH_gui_ymul" = "Vertical cursor speed";

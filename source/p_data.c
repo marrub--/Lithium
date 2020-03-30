@@ -349,6 +349,11 @@ script void P_Init(struct player *p) {
       p->wasinit = true;
    }
 
+   i32 minhealth = ACS_GetCVar(sc_sv_minhealth);
+   if(p->health < minhealth) {
+      p->health = minhealth;
+   }
+
    if(dbgflag & dbgf_items) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];

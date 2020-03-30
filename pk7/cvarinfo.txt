@@ -36,6 +36,7 @@ server bool  lith_sv_wepdrop       = false;
 server int   lith_sv_bloodtime     = 2000;
 server bool  lith_sv_lessparticles = false;
 server bool  lith_sv_postgame      = false;
+server int   lith_sv_minhealth     = 0;
 
 user   float lith_weapons_zoomfactor     = 1.5;
 user   float lith_weapons_scopealpha     = 0.2;
