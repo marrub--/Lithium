@@ -20,6 +20,20 @@
 == \#ST_NAME_LvSys_1 | Hybrid
 == \#ST_NAME_LvSys_2 | Manual
 
+== \#ST_NAME_ExpBar_0  | None
+== \#ST_NAME_ExpBar_1  | Default Red
+== \#ST_NAME_ExpBar_2  | Tangy
+== \#ST_NAME_ExpBar_3  | Lemonade
+== \#ST_NAME_ExpBar_4  | Chartreuse
+== \#ST_NAME_ExpBar_5  | Forest
+== \#ST_NAME_ExpBar_6  | Mint
+== \#ST_NAME_ExpBar_7  | Sky
+== \#ST_NAME_ExpBar_8  | Comp
+== \#ST_NAME_ExpBar_9  | Deep Purple
+== \#ST_NAME_ExpBar_10 | Fallen Fox
+== \#ST_NAME_ExpBar_11 | Pink
+== \#ST_NAME_ExpBar_12 | More Pink
+
 == \#ST_NAME_Color_a | Brick
 == \#ST_NAME_Color_b | Tan
 == \#ST_NAME_Color_c | Grey
@@ -179,6 +193,7 @@
 == \#hud_logfromtop     | Draw log at the top of the screen
 == \#hud_logbig         | Large log
 == \#hud_showarmorind   | Draw reactive armor indicator
+== \#hud_expbar         | Show experience bar
 == \#xhair_r            | Dynamic crosshair red
 == \#xhair_g            | Dynamic crosshair green
 == \#xhair_b            | Dynamic crosshair blue

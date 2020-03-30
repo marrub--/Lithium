@@ -103,7 +103,7 @@ void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr)
 
    HUD_Log(p, CR_LIGHTBLUE, 0, -10);
    HUD_KeyInd(p, 180, 21, true, 0.8);
-   HUD_Score(p, CrBlue "%s\Cnscr", p->score, s_smallfnt, s"a", 160,0, 3,1);
+   HUD_Score(p, CrBlue "%s\Cnscr", p->score, s_smallfnt, s"a", 160,0);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_D_WepBack, 320,2, 219,2);

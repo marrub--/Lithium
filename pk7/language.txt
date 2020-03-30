@@ -1302,6 +1302,19 @@
 "LITH_ST_NAME_LvSys_0" = "Auto";
 "LITH_ST_NAME_LvSys_1" = "Hybrid";
 "LITH_ST_NAME_LvSys_2" = "Manual";
+"LITH_ST_NAME_ExpBar_0" = "None";
+"LITH_ST_NAME_ExpBar_1" = "Default Red";
+"LITH_ST_NAME_ExpBar_2" = "Tangy";
+"LITH_ST_NAME_ExpBar_3" = "Lemonade";
+"LITH_ST_NAME_ExpBar_4" = "Chartreuse";
+"LITH_ST_NAME_ExpBar_5" = "Forest";
+"LITH_ST_NAME_ExpBar_6" = "Mint";
+"LITH_ST_NAME_ExpBar_7" = "Sky";
+"LITH_ST_NAME_ExpBar_8" = "Comp";
+"LITH_ST_NAME_ExpBar_9" = "Deep Purple";
+"LITH_ST_NAME_ExpBar_10" = "Fallen Fox";
+"LITH_ST_NAME_ExpBar_11" = "Pink";
+"LITH_ST_NAME_ExpBar_12" = "More Pink";
 "LITH_ST_NAME_Color_a" = "Brick";
 "LITH_ST_NAME_Color_b" = "Tan";
 "LITH_ST_NAME_Color_c" = "Grey";
@@ -1441,6 +1454,7 @@
 "LITH_hud_logfromtop" = "Draw log at the top of the screen";
 "LITH_hud_logbig" = "Large log";
 "LITH_hud_showarmorind" = "Draw reactive armor indicator";
+"LITH_hud_expbar" = "Show experience bar";
 "LITH_xhair_r" = "Dynamic crosshair red";
 "LITH_xhair_g" = "Dynamic crosshair green";
 "LITH_xhair_b" = "Dynamic crosshair blue";

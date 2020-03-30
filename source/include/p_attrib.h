@@ -28,7 +28,7 @@ enum
 
 struct player_attributes
 {
-   u32 exp, expnext;
+   u32 expprev, exp, expnext;
    u32 level;
    u32 points;
    u32 attrs[at_max];

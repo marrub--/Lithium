@@ -135,7 +135,7 @@ static void UpdateGame(void)
     */
    Update(Lith_v1_7_0) {
       for_player() {
-         if(p->getCVarI(sc_xhair_style) >= lxh_max) {
+         if(p->getCVarI(sc_xhair_style) >= 10) {
             p->setCVarI(sc_xhair_style, 0);
          }
       }

@@ -42,6 +42,7 @@ X(sc_gui_jpfont,             CVAR "gui_jpfont")
 X(sc_gui_theme,              CVAR "gui_theme")
 X(sc_gui_xmul,               CVAR "gui_xmul")
 X(sc_gui_ymul,               CVAR "gui_ymul")
+X(sc_hud_expbar,             CVAR "hud_expbar")
 X(sc_hud_logbig,             CVAR "hud_logbig")
 X(sc_hud_logfromtop,         CVAR "hud_logfromtop")
 X(sc_hud_showarmorind,       CVAR "hud_showarmorind")
@@ -405,6 +406,7 @@ X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 /* Text */
 X(st_begin,                  "\Cd[Press any key to begin]") /* TODO */
 X(st_bip_header,             "BIOTIC INFORMATION PANEL ver2.5") /* TODO */
+X(st_class,                  "Class") /* TODO */
 X(st_edit,                   LANG "EDIT")
 X(st_exp,                    "EXP")
 X(st_filter_all,             "Filter: \CjAll") /* TODO */

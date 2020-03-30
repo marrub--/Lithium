@@ -46,6 +46,7 @@ static void SetupAttributes(struct player *p)
       memmove(p->attr.names[at_stm], "REG", 3);
    }
 
+   p->attr.expprev = 0;
    p->attr.expnext = 500;
    p->attr.level = 1;
 }
@@ -219,6 +220,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt)
    while(a->exp + amt >= a->expnext)
    {
       a->level++;
+      a->expprev = a->expnext;
       a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
 
       __with(i32 pts = 7;) switch(p->getCVarI(sc_player_lvsys))

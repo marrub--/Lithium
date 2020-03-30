@@ -14,7 +14,7 @@
 void P_Ren_Debug(struct player *p) {
    if(!(dbglevel & log_devh)) return;
 
-   Dbg_Stat("exp: lv.%u %u/%u\n", p->attr.level, p->attr.exp, p->attr.expnext);
+   Dbg_Stat("exp: lv.%u %u/%u/%u\n", p->attr.level, p->attr.expprev, p->attr.exp, p->attr.expnext);
    Dbg_Stat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
    Dbg_Stat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
    Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);

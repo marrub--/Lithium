@@ -40,14 +40,13 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i32 xa, i32 y, i32 ya)
+void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i32 xa)
 {
-   if(p->getCVarI(sc_hud_showscore))
-   {
+   if(p->getCVarI(sc_hud_showscore)) {
       str scr = StrParam(fmt, scoresep(scrn));
 
       PrintTextFmt("\C%S%S", cr, scr);
-      PrintTextX(font, 0, x,xa, y,ya, ptf_no_utf);
+      PrintTextX(font, 0, x,xa, 3,1, ptf_no_utf);
 
       if(p->score > p->old.score) {
          SetFade(fid_schit1, 4, 12);
@@ -64,19 +63,35 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i3
       }
 
       if(CheckFade(fid_schit1))
-         PrintTextFX_str(scr, font, CR_ORANGE, x,xa, y,ya, fid_schit1, ptf_no_utf);
+         PrintTextFX_str(scr, font, CR_ORANGE, x,xa, 3,1, fid_schit1, ptf_no_utf);
       else if(CheckFade(fid_schit2))
-         PrintTextFX_str(scr, font, CR_PURPLE, x,xa, y,ya, fid_schit2, ptf_no_utf);
+         PrintTextFX_str(scr, font, CR_PURPLE, x,xa, 3,1, fid_schit2, ptf_no_utf);
 
       if(CheckFade(fid_scacum))
-         PrintTextFX_str(p->scoreaccumstr, font, CR_WHITE, x,xa, y+10,ya, fid_scacum, ptf_no_utf);
+         PrintTextFX_str(p->scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, ptf_no_utf);
    }
 
-   if(p->getCVarI(sc_hud_showlvl))
-   {
+   if(p->getCVarI(sc_hud_showlvl)) {
       PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf(" (%u pts)", p->attr.points);
-      PrintTextX(font, 0, x,xa, y+20,ya, ptf_no_utf);
+      PrintTextX(font, 0, x,xa, 17,1, ptf_no_utf);
+   }
+
+   i32 expbar = p->getCVarI(sc_hud_expbar);
+   if(expbar > 0) {
+      Str(exp_bar_0, s":UI:ExpBar0");
+      PrintSprite(exp_bar_0, x,xa, 24,1);
+      i32 xx = x;
+      k32 fr =
+         (p->attr.exp - p->attr.expprev) /
+         (k32)(p->attr.expnext - p->attr.expprev);
+      switch(xa) {
+         case 0: xx -= 12; break;
+         case 2: xx -= 24; break;
+      }
+      SetClip(xx, 24, 24 * fr, 2);
+      PrintSprite(StrParam(":UI:ExpBar%i", expbar), xx,1, 24,1);
+      ClearClip();
    }
 }
 

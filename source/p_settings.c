@@ -11,6 +11,11 @@
  * ---------------------------------------------------------------------------|
  */
 
+enum {
+   lxh_max = 10,
+   lxb_max = 13,
+};
+
 #ifdef FromUI
 Category(stx_gameplay);
 Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
@@ -108,6 +113,7 @@ Bool(hud_showlog);
 Bool(hud_logfromtop);
 Bool(hud_logbig);
 Bool(hud_showarmorind);
+Enum(hud_expbar, 0, lxb_max-1, "%s", ExpBarName(set));
 
 Int(Of255, xhair_r, 0, 255);
 Int(Of255, xhair_g, 0, 255);
@@ -169,6 +175,7 @@ NameFunc(LvSysName,  i32,  0,   atsys_max,     LANG "ST_NAME_LvSys_%i",  n)
 NameFunc(ColorName,  char, 'a', 'z' + 1,       LANG "ST_NAME_Color_%c",  n)
 NameFunc(CursName,   i32,  0,   gui_curs_max,  LANG "ST_NAME_Cursor_%i", n)
 NameFunc(XHairName,  i32,  0,   lxh_max,       LANG "ST_NAME_XHair_%i",  n)
+NameFunc(ExpBarName, i32,  0,   lxb_max,       LANG "ST_NAME_ExpBar_%i",  n)
 NameFunc(JpFontName, i32,  0,   font_num,      LANG "ST_NAME_JpFont_%i", n)
 NameFunc(ThemeName,  i32,  0,   cbi_theme_max, LANG "ST_NAME_Theme_%i",  n)
 
