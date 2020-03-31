@@ -7,40 +7,75 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_HudMessage ui {
+   string text;
+   double alpha;
+   int    timer;
+   int    x, y;
+
+   void lith_tick() {
+      if(timer) {
+         timer--;
+      } else if(alpha > 0.01) {
+         alpha = Lith_UTIL.Lerp(alpha, 0, 0.1);
+      }
+   }
+
+   void lith_draw() {
+      if(alpha > 0.01) {
+         Screen.DrawText("lmidfont", Font.CR_GOLD, x, y, text,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_Alpha,alpha);
+      }
+   }
+}
+
 /* STATUSBAR: Seriously, This Acronym Trite Usurps Serious, Butt-free Acronym
               Readings */
 class Lith_STATUSBAR : BaseStatusBar;
 
-string m_midText;
-double m_midAlpha;
-int    m_midTimer;
+Lith_HudMessage m_chatMsg, m_midPrint;
 
-override void init() {super.init(); setSize(0, 320, 240);}
+override void init() {
+   super.init();
+   setSize(0, 320, 240);
+   m_chatMsg  = new("Lith_HudMessage");
+   m_midPrint = new("Lith_HudMessage");
+}
 
 override void tick() {
-   if(m_midTimer) {
-      m_midTimer--;
-   } else if(m_midAlpha > 0.01) {
-      m_midAlpha = Lith_UTIL.Lerp(m_midAlpha, 0, 0.1);
-   }
+   m_chatMsg.lith_tick();
+   m_midPrint.lith_tick();
 }
 
 override void draw(int state, double ticFrac) {
-   if(m_midAlpha > 0.01) {
-      Screen.DrawText("lmidfont", Font.CR_GOLD, 0, 40, m_midText,
-                     DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                     DTA_Alpha,m_midAlpha);
-   }
+   m_chatMsg.lith_draw();
+   m_midPrint.lith_draw();
 }
 
 override void flashItem(class<Inventory> itemtype) {}
 
-override bool processNotify(EPrintLevel printlevel, string tx) {return true;}
+override void drawPowerups() {}
 
-override bool processMidPrint(Font fnt, string msg, bool bold) {
-   m_midText  = msg;
-   m_midTimer = 35;
-   m_midAlpha = 1.0;
+override bool processNotify(EPrintLevel level, string text) {return true;}
+
+override bool processMidPrint(Font fnt, string text, bool bold) {
+   let msg   = m_midPrint;
+   msg.text  = text;
+   msg.timer = 35;
+   msg.alpha = 1.0;
+   msg.x     = 0;
+   msg.y     = 40;
+   return true;
+}
+
+override bool drawChat(string text) {
+   let msg   = m_chatMsg;
+   msg.text  = text;
+   msg.alpha = 1.0;
+   msg.timer = 35;
+   msg.x     = 0;
+   msg.y     = 48;
    return true;
 }
 
