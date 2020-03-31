@@ -95,7 +95,7 @@ unfinished {
 
    info {
       `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
-      `[\cuINFO\c-] pragmat \cqENABLE\ck #src_lang 99391dp.kiri.licari
+      `[\cnINFO\c-] pragmat \cdENABLE\ck #src_lang 99391dp.kiri.licari\cu
       `
       @@
       `even when I have run out of blood to spill, my life will carry its

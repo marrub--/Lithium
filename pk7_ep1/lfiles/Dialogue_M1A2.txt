@@ -157,6 +157,32 @@ unfinished {
    logoff "LogonData" `\cu[Ship Data Terminal]
 }
 
+terminal 3;
+
+unfinished {
+   remote "data@localhost"
+
+   logon "LogonData" `\cu[Ship Data Terminal]
+
+   info {
+      `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
+      `[\cnINFO\c-] pragmat \cdENABLE\ck #src_lang 99391dp.kiri.licari\cu
+      `
+      `before his time has come, his star begins to fall,
+      `      truth spread out before the lies, no more does he use disguise,
+      `
+      `   but fore his death thine flesh be torn, all his life been forlorn,
+      `the south star falls and none arise, no more may he close his eyes
+      `
+      `does one know oneself without death?
+      `
+      `   will ever one bereft, find the knowledge of those correct?
+      ` can one truly know?
+   }
+
+   logoff "LogonData" `\cu[Ship Data Terminal]
+}
+
 /* ------------------------------------------------------------------------- */
 dialogue 1;
 

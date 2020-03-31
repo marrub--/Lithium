@@ -34,7 +34,7 @@ void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
 {
-   if(!p->hudenabled) return;
+   if(!p->hudenabled || p->dlg.active) return;
 
    i32 const sn = InvNum(so_SubweaponShots);
    i32 const cn = InvNum(so_SubweaponCharge);

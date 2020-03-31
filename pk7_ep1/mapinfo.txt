@@ -29,7 +29,7 @@ episode M1A1 {
 }
 
 episode M2A1 {
-   Name = "∞² - E.R.A."
+   Name = "∞² - Era"
 }
 
 episode M3A1 {

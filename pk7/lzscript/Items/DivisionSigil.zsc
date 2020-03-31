@@ -53,6 +53,7 @@ class Lith_ClawOfImp : Lith_ItemPickup {
       Tag "Claw of Imp";
       Lith_InventoryItem.InvName "ClawOfImp";
       Lith_InventoryItem.Size 4, 2;
+      Lith_InventoryItem.InvSell 2000;
       Lith_ItemPickup.Sprite "DITMA";
       +LITH_ITEMPICKUP.PKUP_GENERIC
    }
