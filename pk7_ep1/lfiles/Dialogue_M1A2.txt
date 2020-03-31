@@ -165,7 +165,7 @@ unfinished {
    logon "LogonData" `\cu[Ship Data Terminal]
 
    info {
-      `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
+      `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/59-131067-.v\c-]
       `[\cnINFO\c-] pragmat \cdENABLE\ck #src_lang 99391dp.kiri.licari\cu
       `
       `before his time has come, his star begins to fall,
@@ -211,9 +211,6 @@ page 1 {
 }
 
 page 2 {
-   name "Maxie"
-   remote "maxie@ai.<hidden>"
-
    @@
    `I was the 4334th Counsel of the 51st Era Judgment. Now I'm, as you can
    `quite clearly see, a bowl, an eye, and a power core.
