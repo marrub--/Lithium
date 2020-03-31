@@ -11,6 +11,37 @@
               Readings */
 class Lith_STATUSBAR : BaseStatusBar;
 
-override void Init() {Super.Init(); SetSize(0, 320, 240);}
+string m_midText;
+double m_midAlpha;
+int    m_midTimer;
+
+override void init() {super.init(); setSize(0, 320, 240);}
+
+override void tick() {
+   if(m_midTimer) {
+      m_midTimer--;
+   } else if(m_midAlpha > 0.01) {
+      m_midAlpha = Lith_UTIL.Lerp(m_midAlpha, 0, 0.1);
+   }
+}
+
+override void draw(int state, double ticFrac) {
+   if(m_midAlpha > 0.01) {
+      Screen.DrawText("lmidfont", Font.CR_GOLD, 0, 40, m_midText,
+                     DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                     DTA_Alpha,m_midAlpha);
+   }
+}
+
+override void flashItem(class<Inventory> itemtype) {}
+
+override bool processNotify(EPrintLevel printlevel, string tx) {return true;}
+
+override bool processMidPrint(Font fnt, string msg, bool bold) {
+   m_midText  = msg;
+   m_midTimer = 35;
+   m_midAlpha = 1.0;
+   return true;
+}
 
 /* EOF */
