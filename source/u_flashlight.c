@@ -82,9 +82,11 @@ script void Upgr_Flashlight_Update(struct player *p, struct upgrade *upgr) {
 }
 
 stkcall void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
+   if(!p->hudenabled || p->dlg.active) return;
+
    i32 bat_life = p->getCVarI(sc_light_battery) * 35;
 
-   if(p->hudenabled && bat_life > 0) {
+   if(bat_life > 0) {
       i32 y = UData.battery / (k32)bat_life * 8;
 
       Str(bar,  s":HUD:Battery");
