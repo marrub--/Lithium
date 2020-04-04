@@ -140,11 +140,6 @@ static i32 LoadBIPInfo(struct player *p, str fname)
    {
    case tok_lnend:
       continue;
-   case tok_at:
-      /* @ Include */
-      tok = tb.get();
-      total += LoadBIPInfo(p, TokStr(tok));
-      break;
    case tok_xor:
       /* ^ Category [*] */
       tok = tb.get();

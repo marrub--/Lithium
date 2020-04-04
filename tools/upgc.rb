@@ -94,17 +94,29 @@ common_main do
 #{generated_header "upgc"}
 /* decompat-out pk7/lzscript/Constants/u_names.zsc */
 
+/* decompat-cut */
+#if defined(Name)
+#{
+res = String.new
+upgrades.each do |upg| res.concat "Name(" + upg[:nam] + ")\n" end
+res
+}
+#else
+/* decompat-end */
+
 enum /* Lith_UpgradeName */
 {
 #{
 res = String.new
-for upg in upgrades
-   res.concat "   UPGR_#{upg[:nam]},\n"
-end
-res.concat "   UPGR_BASE_MAX"
+upgrades.each do |upg| res.concat "   UPGR_#{upg[:nam]},\n" end
+res.concat "   UPGR_MAX"
 res
 }
 };
+
+/* decompat-cut */
+#endif
+/* decompat-end */
 
 /* EOF */
 _end_h_
@@ -116,7 +128,7 @@ StrEntON
 
 /* Extern Objects ---------------------------------------------------------- */
 
-struct upgradeinfo const upgrinfobase[UPGR_BASE_MAX] = {
+struct upgradeinfo upgrinfo[UPGR_MAX] = {
 #{
 res = String.new
 for upg in upgrades
@@ -137,7 +149,7 @@ res = String.new
 for upg in upgrades
    unless upg[:flg].empty?
       nam = upg[:nam]
-      flg = upg[:flg].map do |a| "   #{a}(#{nam})" end.join "\n"
+      flg = upg[:flg].map do |a| "   #{a}(#{nam})\n" end.join
       res.concat "Case(" + nam +")\n" + flg
    end
 end

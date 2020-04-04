@@ -12,8 +12,6 @@
  *
  */
 
-@"lfiles/BIPInfo_Mod.txt" /* if you want to add extra pages, use this file */
-
 ^ENEMIES* /* --------------------------------------------------------------- */
 
 gA ZombieMan

@@ -11,7 +11,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-#ifdef Ret
+#if defined(Ret)
    #define Case(n) Ret(n) case UPGR_##n:;
    #define A(n) Fn_F(n, Activate)
    #define D(n) Fn_F(n, Deactivate)

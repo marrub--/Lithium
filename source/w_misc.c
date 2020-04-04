@@ -158,7 +158,7 @@ void Sc_BoughtItemPickup(i32 id)
 {
    with_player(LocalPlayer) if(id)
    {
-      struct upgrade *upgr = p->getUpgr(id);
+      struct upgrade *upgr = &p->upgrades[id];
 
       if(!upgr->owned)
       {

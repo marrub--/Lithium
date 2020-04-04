@@ -63,7 +63,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
       if(p->onground) UData.leaped = 0;
 
       if(p->buttons & BT_SPEED && (p->onground ||
-         !p->getUpgrActive(UPGR_JetBooster) ||
+         !p->upgrades[UPGR_JetBooster].active ||
          p->upgrdata.jetbooster.discharged))
       {
          k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);

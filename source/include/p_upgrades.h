@@ -32,7 +32,7 @@
 #define CheckRequires_WMD CheckRequires(UR_WMD, cbiupgr[cupg_weapninter])
 #define CheckRequires_WRD CheckRequires(UR_WRD, cbiupgr[cupg_weapninte2])
 #define CheckRequires_RDI CheckRequires(UR_RDI, cbiupgr[cupg_rdistinter])
-#define CheckRequires_RA  CheckRequires(UR_RA,  p->getUpgr(UPGR_ReactArmor)->owned)
+#define CheckRequires_RA  CheckRequires(UR_RA,  p->upgrades[UPGR_ReactArmor].owned)
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -47,11 +47,5 @@ void P_Upg_PDeinit(struct player *p);
 void P_Upg_PMInit(struct player *p);
 
 void P_Upg_Enter(struct player *p);
-
-struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr);
-
-/* Extern Objects ---------------------------------------------------------- */
-
-extern struct upgradeinfo const upgrinfobase[UPGR_BASE_MAX];
 
 #endif

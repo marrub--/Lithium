@@ -52,7 +52,7 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
 {
-   if(!p->getUpgrActive(UPGR_HeadsUpDisM)) return;
+   if(!p->upgrades[UPGR_HeadsUpDisM].active) return;
 
    k64 amt = UData.charge / (k64)CHARGE_MAX;
 

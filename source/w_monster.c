@@ -214,7 +214,7 @@ static void OnFinalize(dmon_t *m) {
       }
 
       if(!m->ms->finalized) {
-         if(p->getUpgrActive(UPGR_Magic) && p->mana != p->manamax &&
+         if(p->upgrades[UPGR_Magic].active && p->mana != p->manamax &&
             (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10)) {
             SpawnManaPickup(m, p);
          }
@@ -235,7 +235,7 @@ static void OnFinalize(dmon_t *m) {
             }
          }
 
-         if(p->getUpgrActive(UPGR_SoulCleaver))
+         if(p->upgrades[UPGR_SoulCleaver].active)
             SoulCleave(m, p);
       }
 

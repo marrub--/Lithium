@@ -80,12 +80,9 @@ void Sc_KeyZoom(i32 amt)
 
    with_player(LocalPlayer)
    {
-      struct upgrade *upgr = p->getUpgr(UPGR_Zoom);
-      if(upgr) {
-         if(upgr->active)    UData.zoom += amt;
-         if(UData.zoom < 0)  UData.zoom  = 0;
-         if(UData.zoom > 80) UData.zoom  = 80;
-      }
+      if(p->upgrades[UPGR_Zoom].active) UData.zoom += amt;
+      if(UData.zoom < 0)                UData.zoom  = 0;
+      if(UData.zoom > 80)               UData.zoom  = 80;
    }
 }
 

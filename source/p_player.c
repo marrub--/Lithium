@@ -202,35 +202,10 @@ static void Sc_PlayerDisconnect(void)
 
    ListDtor(&p->hudstrlist, true);
 
-   upgrademap_t_dtor(&p->upgrademap);
-
    fastmemset(p, 0, sizeof *p);
 }
 
 /* Extern Functions -------------------------------------------------------- */
-
-#define upgrademap_t_GetKey(o) ((o)->info->key)
-#define upgrademap_t_GetNext(o) (&(o)->next)
-#define upgrademap_t_GetPrev(o) (&(o)->prev)
-#define upgrademap_t_HashKey(k) (k)
-#define upgrademap_t_HashObj(o) ((o)->info->key)
-#define upgrademap_t_KeyCmp(l, r) ((l) - (r))
-GDCC_HashMap_Defn(upgrademap_t, i32, struct upgrade)
-
-stkcall
-struct upgrade *P_Upg_GetNamed(struct player *p, i32 name)
-{
-   struct upgrade *upgr = p->upgrademap.find(name);
-   if(!upgr) Log("null pointer trying to find upgrade %i", name);
-   return upgr;
-}
-
-stkcall
-bool P_Upg_IsActive(struct player *p, i32 name)
-{
-   ifauto(struct upgrade *, upgr, p->upgrademap.find(name)) return upgr->active;
-   else                                                return false;
-}
 
 stkcall
 cstr P_Discrim(i32 pclass)
@@ -324,12 +299,12 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
       StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
 
    /* hue */
-   if(p->getUpgrActive(UPGR_CyberLegs) && ACS_Random(0, 10000) == 0) {
+   if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
       p->logB(1, "You gained brouzouf.");
    }
 
-   if(p->getUpgrActive(UPGR_TorgueMode) && ACS_Random(0, 10) == 0) {
+   if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0) {
       p->spuriousexplosions++;
       ACS_SpawnForced(so_EXPLOOOSION, p->x, p->y, p->z);
    }

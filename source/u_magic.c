@@ -101,8 +101,6 @@ static void SetMagicUI(struct player *p, bool on)
 {
    if(p->dead) return;
 
-   struct upgrade *upgr = p->getUpgr(UPGR_Magic);
-
    if(on)
    {
       UData.ui = true;

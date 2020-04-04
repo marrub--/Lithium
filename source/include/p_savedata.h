@@ -38,15 +38,13 @@
 
 /* Types ------------------------------------------------------------------- */
 
-struct savechunk
-{
+struct savechunk {
    u32 iden; /* four char identifier */
    u32 vrfl; /* version (lower 8 bits) + flags (upper 24 bits) */
    u32 size; /* size of chunk data in bytes */
 };
 
-struct savefile
-{
+struct savefile {
    FILE *fp;
    struct player *p;
 };

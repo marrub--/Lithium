@@ -14,12 +14,9 @@
 #include "u_common.h"
 #include "w_world.h"
 
-/* Static Objects ---------------------------------------------------------- */
+/* Extern Objects ---------------------------------------------------------- */
 
-static struct upgradeinfo g_upgrinfoex[UPGR_EXTRA_NUM];
-
-static struct upgradeinfo *g_upgrinfo;
-static i32 g_upgrmax = UPGR_BASE_MAX;
+extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -45,24 +42,17 @@ static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 t
    return true;
 }
 
-static i32 CompUpgrInfo(void const *lhs, void const *rhs) {
-   struct upgradeinfo const *u1 = lhs, *u2 = rhs;
-   i32 c1 = u1->category - u2->category;
-   if(c1 != 0) return c1;
-   else        return u1->key - u2->key;
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
-struct upgradeinfo *Upgr_Register(struct upgradeinfo const *upgr) {
-   struct upgradeinfo *ui = &g_upgrinfoex[g_upgrmax++ - UPGR_BASE_MAX];
-   *ui = *upgr;
-   return ui;
+i32 Upgr_StrToEnum(cstr s) {
+   #define Name(name) if(faststrcmp(s, #name) == 0) return UPGR_##name;
+   #include "u_names.h"
+   return UPGR_MAX;
 }
 
 void Upgr_MInit(void) {
-   for(i32 i = 0; i < g_upgrmax; i++) {
-      struct upgradeinfo *ui = &g_upgrinfo[i];
+   for(i32 i = 0; i < UPGR_MAX; i++) {
+      struct upgradeinfo *ui = &upgrinfo[i];
 
       /* Set up static function pointers */
       ui->ShopBuy    = UpgrShopBuy;
@@ -80,20 +70,6 @@ void Upgr_MInit(void) {
    }
 }
 
-void Upgr_GInit(void) {
-   g_upgrinfo = Calloc(g_upgrmax, sizeof *g_upgrinfo);
-   memmove(g_upgrinfo, upgrinfobase, sizeof upgrinfobase);
-
-   for(i32 i = 0; i < countof(g_upgrinfoex); i++)
-      if(g_upgrinfoex[i].name)
-         g_upgrinfo[UPGR_BASE_MAX + i] = g_upgrinfoex[i];
-
-   qsort(g_upgrinfo, g_upgrmax, sizeof *g_upgrinfo, CompUpgrInfo);
-
-   for(i32 i = 0; i < g_upgrmax; i++)
-      g_upgrinfo[i].id = i;
-}
-
 void P_Upg_SetOwned(struct player *p, struct upgrade *upgr) {
    if(upgr->owned) return;
 
@@ -105,21 +81,16 @@ void P_Upg_SetOwned(struct player *p, struct upgrade *upgr) {
 }
 
 script void P_Upg_PInit(struct player *p) {
-   #define CheckPClass() (g_upgrinfo[i].pclass & p->pclass)
-   for(i32 i = 0; i < g_upgrmax; i++)
-      if(CheckPClass())
-         p->upgrmax++;
+   #define CheckPClass() (upgrinfo[i].pclass & p->pclass)
+   for(i32 i = 0; i < UPGR_MAX; i++) if(CheckPClass()) p->upgrmax++;
 
-   upgrademap_t_ctor(&p->upgrademap, p->upgrmax, 1);
    fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
-   for(i32 i = 0, j = 0; i < g_upgrmax; i++) {
+   for(i32 i = 0, j = 0; i < UPGR_MAX; i++) {
       if(CheckPClass()) {
          struct upgrade *upgr = &p->upgrades[j];
 
-         upgr->info = &g_upgrinfo[i];
-
-         p->upgrademap.insert(upgr);
+         upgr->info = &upgrinfo[i];
 
          if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
             P_Upg_Buy(p, upgr, true, true);
@@ -133,11 +104,9 @@ script void P_Upg_PInit(struct player *p) {
 }
 
 void P_Upg_PQuit(struct player *p) {
-   upgrademap_t_dtor(&p->upgrademap);
    p->upgrmax = 0;
 
-   for(i32 i = 0; i < countof(p->upgrades); i++)
-      fastmemset(&p->upgrades[i], 0, sizeof p->upgrades[i]);
+   fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
    p->upgrinit = false;
 }

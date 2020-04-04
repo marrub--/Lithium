@@ -16,7 +16,7 @@ enum {
    lxb_max = 13,
 };
 
-#ifdef FromUI
+#if defined(FromUI)
 Category(stx_gameplay);
 Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {

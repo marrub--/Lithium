@@ -166,12 +166,10 @@ static void MInitPre(void)
 
 static void GInit(void)
 {
-   extern void Upgr_GInit(void);
    extern void Wep_GInit(void);
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   Upgr_GInit();
    Wep_GInit();
 
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;

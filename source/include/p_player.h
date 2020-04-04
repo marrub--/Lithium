@@ -77,8 +77,6 @@ stkcall void P_Scr_Take(struct player *p, i96 score);
 script void P_GiveAllScore(i96 score, bool nomul);
 script void P_GiveAllEXP(u64 amt);
 stkcall void P_Lv_GiveEXP(struct player *p, u64 amt);
-stkcall struct upgrade *P_Upg_GetNamed(struct player *p, i32 name);
-stkcall bool P_Upg_IsActive(struct player *p, i32 name);
 stkcall cstr P_Discrim(i32 pclass);
 stkcall void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
@@ -89,8 +87,6 @@ script void P_TeleportInAsync(struct player *p);
 script void P_TeleportOutAsync(struct player *p);
 
 /* Types ------------------------------------------------------------------- */
-
-GDCC_HashMap_Decl(upgrademap_t, i32, struct upgrade)
 
 enum {
    _max_players = 8,
@@ -149,17 +145,18 @@ struct player_delta
    struct player_attributes attr;
 };
 
-/*       7/4/2016: That's a lot of data!
- * edit  9/4/2016: Holy shit, that's really a lot of data!
- * edit  7/5/2016: JESUS TAKE THE WHEEL
- * edit  3/1/2017: help
- * edit  6/1/2017: there's so much data that I had to split it
- * edit 23/1/2017: D E S T R O Y
- * edit 26/2/2017: There is yet again so much data that I had to split it.
- * edit 11/3/2017: NOW WITH PROPERTY HELL
- * edit 11/7/2017: and now it's over 5000 bytes.
- * edit 14/7/2017: lol nevermind it's only 2kb now
- * edit 31/8/2017: m e r g e
+/*      07-04-2016: That's a lot of data!
+ * edit 09-04-2016: Holy shit, that's really a lot of data!
+ * edit 07-05-2016: JESUS TAKE THE WHEEL
+ * edit 03-01-2017: help
+ * edit 06-01-2017: there's so much data that I had to split it
+ * edit 23-01-2017: D E S T R O Y
+ * edit 26-02-2017: There is yet again so much data that I had to split it.
+ * edit 11-03-2017: NOW WITH PROPERTY HELL
+ * edit 11-07-2017: and now it's over 5000 bytes.
+ * edit 14-07-2017: lol nevermind it's only 2kb now
+ * edit 31-08-2017: m e r g e
+ * edit 04-04-2020: WHY DID YOU MAKE IT THAT COMPLEX YOU BUNGUS
  */
 struct player
 {
@@ -191,10 +188,6 @@ struct player
    __prop logF {operator(): P_Log_Full(this)}
    __prop logH {operator(): P_Log_HUDs(this)}
 
-   /* upgrades */
-   __prop getUpgr       {operator(): P_Upg_GetNamed(this)}
-   __prop getUpgrActive {operator(): P_Upg_IsActive(this)}
-
    /* Initialization */
    bool wasinit;
    bool active;
@@ -224,8 +217,7 @@ struct player
 
    /* Upgrades */
    struct upgr_data upgrdata;
-   struct upgrade   upgrades[UPGR_STATIC_MAX];
-   upgrademap_t     upgrademap;
+   struct upgrade   upgrades[UPGR_MAX];
 
    u32  upgrmax;
    bool upgrinit;

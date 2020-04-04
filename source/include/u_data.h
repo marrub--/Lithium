@@ -16,9 +16,6 @@
 
 #include "p_shopdef.h"
 
-#define UPGR_STATIC_MAX 80
-#define UPGR_EXTRA_NUM (UPGR_STATIC_MAX - UPGR_BASE_MAX)
-
 enum {
    UC_Body,
    UC_Weap,
