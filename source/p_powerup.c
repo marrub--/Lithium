@@ -105,7 +105,7 @@ void Sc_GetSigil(void)
 
       ACS_Delay(3);
 
-      SetFade(fid_divsigil, 35 * 7, 8);
+      SetFade(fid_divsigil, 44, 8);
       for(i32 i = 0;; i++) {
          Str(div_get,     sLANG "DIV_SIGIL_GET");
          Str(div_warning, sLANG "DIV_SIGIL_WARNING");
