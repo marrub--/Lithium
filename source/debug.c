@@ -112,37 +112,10 @@ void Log(cstr fmt, ...)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_NoBossWarn")
-void Sc_NoBossWarn(void)
-{
-   Dbg_Log(log_dev, "warning: no boss detected");
-}
-
 script_str ext("ACS") addr("Lith_GiveEXPToMonster")
 void Sc_GiveEXPToMonster(i32 amt)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
-}
-
-script_str ext("ACS") addr("Lith_GiveMail")
-void Sc_DbgGiveMail(i32 num)
-{
-   StrAry(names,
-      s"Intro",
-      s"Cluster1",
-      s"Cluster2",
-      s"Cluster3",
-      s"Secret1",
-      s"Secret2",
-      s"Phantom",
-      s"JamesDefeated",
-      s"MakarovDefeated",
-      s"IsaacDefeated"
-   );
-
-   num %= countof(names);
-
-   with_player(LocalPlayer) P_BIP_GiveMail(p, names[num]);
 }
 
 script_str ext("ACS") addr("Lith_GiveMeAllOfTheScore")

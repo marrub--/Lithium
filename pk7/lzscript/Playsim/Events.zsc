@@ -241,7 +241,6 @@ override void WorldTick()
 
          if(m_bossBabies.size() == 0) {
             boss_baby_is_dead = false;
-            CallACS("Lith_NoBossWarn");
          } else {
             boss_baby_is_dead = true;
             for(int i = 0; i < m_bossBabies.size(); i++) {
