@@ -44,11 +44,13 @@ override void init() {
 }
 
 override void tick() {
+   super.tick();
    m_chatMsg.lith_tick();
    m_midPrint.lith_tick();
 }
 
 override void draw(int state, double ticFrac) {
+   super.draw(state, ticFrac);
    m_chatMsg.lith_draw();
    m_midPrint.lith_draw();
 }
