@@ -103,7 +103,7 @@ extern i32 a_cur;
 
 /* Extern Functions -------------------------------------------------------- */
 
-cstr CanonTime(i32 type);
+cstr CanonTime(i32 type, u64 time);
 optargs(1) i32 UniqueID(i32 tid);
 stkcall void BeginAngles(i32 x, i32 y);
 stkcall k32 AddAngle(i32 x, i32 y);

@@ -16,8 +16,8 @@ require_relative "corinth.rb"
 
 common_main do
    WEPNAMES = %W"wepnam_fist wepnam_chainsaw wepnam_pistol wepnam_shotgun
-               wepnam_supershotgun wepnam_chaingun wepnam_rocketlauncher
-               wepnam_plasmarifle wepnam_bfg9000"
+                 wepnam_supershotgun wepnam_chaingun wepnam_rocketlauncher
+                 wepnam_plasmarifle wepnam_bfg9000"
 
    tks = tokenize ARGV.shift
 

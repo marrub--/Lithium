@@ -74,7 +74,7 @@
 
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | ”%jS”でメニューを開く。
-== \#LOG_MailRecv  | ＜\cj%S\c-＞からメールを受信した。
+== \#LOG_MailRecv  | ＜\cj%s\c-＞からメールを受信した。
 
 == \#LOG_SellOrder | 1
 == \#LOG_Sell | %lli\cnscr\c-で%Sを売った。

@@ -437,10 +437,6 @@ X(st_term_sgxline,           "SGXLine r4205") /* TODO */
 X(st_term_use_to_ack,        "Use To Acknowledge") /* TODO */
 
 /* Generated */
-X(st_bipc_EXTRA, "EXTRA")
-#define LITH_X(n, _) X(st_bipc_##n, #n)
-#include "p_bip.h"
-
 #define LITH_X(n, pc) X(st_##n, #n) X(st_##pc, #pc)
 #include "p_player.h"
 

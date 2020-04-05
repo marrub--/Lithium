@@ -337,8 +337,6 @@ script void P_Init(struct player *p) {
          p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
       }
 
-      P_BIP_GiveMail(p, st_mail_intro);
-
       if(GetFun() & lfun_division) {
          Str(divsigil, sOBJ "DivisionSigil");
          k32 a = ACS_GetActorAngle(0);

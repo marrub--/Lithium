@@ -1,0 +1,68 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+!!include Jem/Mail.txt
+!!include Stan/Mail.txt
+
+## Template ------------------------------------------------------------------|
+%% \#MAIL_TEMPLATE
+\cd>>>>>[[[[RELAYING MESSAGE]]]]
+
+\cd> Remote: <\cj%s\cd>
+\cd> Date: \cj%s
+
+== \#MAIL_INTERNAL | <internal>
+== \#MAIL_NOTITLE  | <title omitted>
+
+## ---------------------------------------------------------------------------|
+== \#INFO_REMOT_MJamesDefeated | jam0s@g0n0j0t00.1025
+@@ \#INFO_DESCR_MJamesDefeated
+\ccI woke in a \cudark place\cc, unsure of my fate; if my life was
+renewed out of cruel retribution or of a final opportunity.
+
+\ccI wandered this hell, more real and yet more dream-like than I
+thought possible, seeking any sign of escape; any sign of pity from
+the monsters that inhabit this place.
+
+\ccNo, the fate of the damned is but this.
+
+\ccI can only guess that my family went to Heaven and that I was left
+the lone sinner.
+
+\cgThank you for putting this to an end.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_REMOT_MMakarovDefeated | mak666v@org.r\.\\\-
+@@ \#INFO_DESCR_MMakarovDefeated
+There aren't many like you who can take such a being down. Maybe I
+should commend you for that, struggler.
+
+No, there is no need. What your victories have done is enough.
+
+\cgMaybe I advise you turn back.
+
+\crI am not the strongest of these manifestations.
+
+Maybe you don't need such advice.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_REMOT_MIsaacDefeated | isaac@syn.400khz
+%% \#INFO_DESCR_MIsaacDefeated
+\caOne shan't care what he shoots, but one may take care in where he treads.
+
+\ca     And I think that you've treaded
+\cr   a bit too far.
+
+\ca Perhaps just me.
+\ca    Or maybe you agree?
+
+\ca            Here is a gift.
+
+\ca  I won't tell you to use it wisely.
+
+## EOF

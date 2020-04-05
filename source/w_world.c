@@ -279,17 +279,17 @@ static void HInit(void)
    /* Cluster messages. */
    #define Message(cmp, n, name) \
       if(cmp && !(msgs & (1 << n))) { \
-         for_player() P_BIP_GiveMail(p, name); \
+         for_player() P_BIP_Unlock(p, name); \
          msgs |= 1 << n; \
       }
 
    static i32 msgs;
 
-   Message(Cluster >= 6,  0, st_mail_cluster1);
-   Message(Cluster >= 7,  1, st_mail_cluster2);
-   Message(Cluster == 8,  2, st_mail_cluster3);
-   Message(Cluster == 9,  3, st_mail_secret1);
-   Message(Cluster == 10, 4, st_mail_secret2);
+   Message(Cluster >= 6,  0, "MCluster1");
+   Message(Cluster >= 7,  1, "MCluster2");
+   Message(Cluster == 8,  2, "MCluster3");
+   Message(Cluster == 9,  3, "MSecret1");
+   Message(Cluster == 10, 4, "MSecret2");
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop) ||

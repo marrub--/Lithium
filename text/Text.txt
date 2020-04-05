@@ -16,7 +16,6 @@
 !!inclang End.txt
 !!inclang Info.txt
 !!inclang Log.txt
-!!inclang Mail.txt
 !!inclang Misc.txt
 
 ## EOF

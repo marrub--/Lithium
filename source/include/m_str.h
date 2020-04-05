@@ -36,6 +36,7 @@ stkcall u32 l_strhash(astr s);
 stkcall u32 lstrhash(cstr s);
 stkcall char *lstrcpy_str(char *dest, astr src);
 stkcall char *lstrcpy2(char *out, cstr s1, cstr s2);
+stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
 stkcall i32 lstrcmp_str(cstr s1, astr s2);
 stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);

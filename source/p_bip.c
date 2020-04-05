@@ -18,305 +18,131 @@
 #include "w_world.h"
 #include "m_file.h"
 #include "m_tokbuf.h"
-#include "m_char.h"
-
-/* Types ------------------------------------------------------------------- */
-
-struct page_init
-{
-   i32           pclass;
-   bip_name_t    name;
-   bip_unlocks_t unlocks;
-   bool          isfree;
-};
 
 /* Static Functions -------------------------------------------------------- */
 
-static str DecryptBody(astr s)
-{
-   ACS_BeginPrint();
-   for(; *s; s++) ACS_PrintChar(!IsPrint(*s) ? *s : *s ^ 7);
-   return ACS_EndStrParam();
-}
+script static void MailNotify(struct player *p, cstr name) {
+   p->setActivator();
 
-static void UnlockPage(struct player *p, struct page *page)
-{
-   struct bip *bip = &p->bip;
+   p->bip.mailreceived++;
 
-   if(!page->unlocked) {
-      bip->pageavail++;
-      bip->categoryavail[page->category]++;
-      page->unlocked = true;
+   ACS_Delay(20);
 
-      for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i][0]; i++)
-         P_BIP_Unlock(p, page->unlocks[i]);
+   char remote[64];
+   strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
+
+   p->logB(1, LC(LANG "LOG_MailRecv"), remote);
+
+   if(ACS_Random(1, 10000) == 1) {
+      p->bip.mailtrulyreceived++;
+      ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
+   } else {
+      ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
    }
 }
 
-optargs(1)
-static void AddToBIP(struct player *p, i32 categ, struct page_init const *pinit, bool isfree)
-{
-   struct bip *bip = &p->bip;
-
-   str image  = LanguageNull(LANG "INFO_IMAGE_%s", pinit->name);
-   i32 height = strtoi_str(Language(LANG "INFO_SSIZE_%s", pinit->name), nil, 0);
-
-   struct page *page = Salloc(struct page);
-
-   memmove(page->name, pinit->name, sizeof page->name);
-   page->category = categ;
-   page->unlocked = false;
-   page->image    = image;
-   page->height   = height;
-   memmove(page->unlocks, pinit->unlocks, sizeof page->unlocks);
-
-   ListCtor(&page->link, page);
-   page->link.link(&bip->infogr[categ]);
-
-   /* we have to pass along the player's class so discrims don't fuck up */
-   if(isfree) UnlockPage(p, page);
-}
-
-stkcall
-static i32 CatFromStr(str name)
-{
-   if(name == st_bipc_EXTRA) return BIPC_EXTRA;
-   #define LITH_X(n, _) if(name == st_bipc_##n) return BIPC_##n;
-   #include "p_bip.h"
-   return BIPC_NONE;
-}
-
-stkcall
-static i32 PClFromStr(str name)
-{
-   #define LITH_X(n, pc) if(name == st_##n || name == st_##pc) return pc;
-   #include "p_player.h"
-   return 0;
-}
-
-script
-static struct token *AddPage(struct player *p, struct tokbuf *tb, struct token *tok, i32 categ, bool catfree)
-{
-   struct bip *bip = &p->bip;
-   struct page_init page = {};
-
-   do
-      page.pclass |= PClFromStr(TokStr(tok));
-   while(tb->drop(tok_or) && (tok = tb->get()));
-
-   tok = tb->get();
-   memmove(page.name, tok->textV, tok->textC);
-   page.isfree = tb->drop(tok_mul);
-
-   if(tb->drop(tok_rarrow))
-      for(i32 i = 0; i < countof(page.unlocks) && !tb->drop(tok_lnend); i++)
-   {
-      tok = tb->get();
-      memmove(page.unlocks[i], tok->textV, tok->textC);
+script static void UnlockPage(struct player *p, struct page *page) {
+   if(!(page->flags & _page_available)) {
+      Dbg_Log(log_bip, "page '%s' not available", page->info->name);
+      return;
    }
 
-   if(categ != BIPC_NONE && p->pclass & page.pclass)
-      AddToBIP(p, categ, &page, page.isfree || catfree);
+   if(!(page->flags & _page_unlocked)) {
+      Dbg_Log(log_bip, "unlocking page '%s'", page->info->name);
 
-   return tok;
+      if(page->info->category == BIPC_MAIL && !page->info->aut) {
+         MailNotify(p, page->info->name);
+      }
+
+      page->flags |= ticks;
+      page->flags |= _page_unlocked;
+
+      p->bip.pageavail++;
+      p->bip.categoryavail[page->info->category]++;
+
+      for(i32 i = 0;
+          i < countof(page->info->unlocks) && page->info->unlocks[i][0];
+          i++) {
+         P_BIP_Unlock(p, page->info->unlocks[i]);
+      }
+   } else {
+      Dbg_Log(log_bip, "already unlocked page '%s'", page->info->name);
+   }
 }
 
-static i32 LoadBIPInfo(struct player *p, str fname)
-{
-   struct tokbuf tb = {
-      .bbeg = 4, .bend = 10,
-      .fp = W_Open(fname, c"r"),
-      .tokProcess = TBufProcL
-   };
-   if(!tb.fp) return 0;
-
-   TBufCtor(&tb);
-
-   bool catfree = false;
-   i32 categ = BIPC_NONE;
-   i32 total = 0;
-
-   for(struct token *tok; (tok = tb.get())->type != tok_eof;) switch(tok->type)
-   {
-   case tok_lnend:
-      continue;
-   case tok_xor:
-      /* ^ Category [*] */
-      tok = tb.get();
-      categ = CatFromStr(TokStr(tok));
-      catfree = tb.drop(tok_mul);
-      break;
-   case tok_identi:
-      /* Classes... Name [*] [-> Unlocks...] */
-      tok = AddPage(p, &tb, tok, categ, catfree);
-      total++;
-      break;
+static u32 NameToNum(cstr discrim, cstr name) {
+   for(u32 i = 0; i < BIP_MAX; i++) {
+      bip_name_t tag;
+      lstrcpy2(tag, name, discrim);
+      if(!faststrcmp(bipinfo[i].name, tag) ||
+         !faststrcmp(bipinfo[i].name, name)) {
+         return i;
+      }
    }
 
-   TBufDtor(&tb);
-   fclose(tb.fp);
-
-   return total;
-}
-
-static struct page *FindPage(struct bip *bip, cstr name)
-{
-   if(!name) return nil;
-   ForCategoryAndPage() if(faststrcmp(page->name, name) == 0) return page;
-   return nil;
+   return BIP_MAX;
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-script
-void P_BIP_PInit(struct player *p)
-{
-   struct bip *bip = &p->bip;
+script void P_BIP_PInit(struct player *p) {
+   if(dbglevel) p->logH(1, "There are %u info pages!", BIP_MAX);
 
-   ForCategory()
-      ListDtor(&bip->infogr[categ], true);
+   p->bip.pagemax = 0;
 
-   i32 total = LoadBIPInfo(p, sp_lfiles_BIPInfo);
-   if(dbglevel) p->logH(1, "There are %i info pages!", total);
+   for_category() {
+      p->bip.categorymax[categ] = 0;
+   }
 
-   ForCategory()
-      bip->pagemax += bip->categorymax[categ] = bip->infogr[categ].size();
+   for_page() {
+      page->info  = &bipinfo[pagen];
+      page->flags = 0;
 
-   if(dbgflag & dbgf_bip) ForCategoryAndPage() UnlockPage(p, page);
+      bool avail = page->info->pclass & p->pclass;
 
-   bip->init = true;
-}
+      if(avail) {
+         page->flags = _page_available;
 
-script
-void P_BIP_GiveMail(struct player *p, str title, i32 flags)
-{
-   /* Note: Due to the way this code works, if you switch languages at runtime,
-    * mail won't be updated. I provide a lore answer (excuse) for this: When
-    * you switch languages, it switches the preferred translation service for
-    * delivered mail, but it's done when the mail is delivered due to a bug in
-    * the BIP software. All of the mail in the game is delivered to the player
-    * in Sce, a south-eastern sector language, but the player themself can't
-    * read this language and so it is translated for them into the actual
-    * language that the person behind the screen reads.
-    *
-    * If you can actually read Sce this answer falls apart but *shhhhh*.
-    */
+         p->bip.pagemax++;
+         p->bip.categorymax[page->info->category]++;
 
-   p->setActivator();
-
-   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S", title), nil, 0);
-   flags |= strtoi_str(Language(LANG "MAIL_FLAG_%S%s", title, p->discrim), nil, 0);
-
-   if(!(flags & MAILF_AllPlayers)) title = StrParam("%S%s", title, p->discrim);
-
-   struct bip *bip = &p->bip;
-
-   struct page *page = Salloc(struct page);
-
-   str date = LanguageNull(LANG "MAIL_TIME_%S", title);
-   str size = LanguageNull(LANG "MAIL_SIZE_%S", title);
-   str send = LanguageNull(LANG "MAIL_SEND_%S", title);
-   str name = LanguageNull(LANG "MAIL_NAME_%S", title);
-   str body = Language    (LANG "MAIL_BODY_%S", title);
-
-   if(!send) send = L(st_mail_internal);
-
-   page->shname   = date ? date : l_strdup(CanonTime(ct_short));
-   page->title    = name ? name : L(st_mail_notitle);
-   page->body     = StrParam(LC(LANG "MAIL_TEMPLATE"), send, CanonTime(ct_full), body);
-   page->category = BIPC_MAIL;
-   page->unlocked = true;
-
-   if(size) page->height = strtoi_str(size, nil, 0);
-
-   ListCtor(&page->link, page);
-   page->link.link(&bip->infogr[BIPC_MAIL]);
-
-   bip->mailreceived++;
-
-   if(!(flags & MAILF_NoPrint)) {
-      ACS_Delay(20);
-
-      p->logB(1, LC(LANG "LOG_MailRecv"), send);
-
-      if(ACS_Random(1, 10000) == 1) {
-         bip->mailtrulyreceived++;
-         ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
-      } else {
-         ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
+         if(dbgflag & dbgf_bip || page->info->aut) {
+            UnlockPage(p, page);
+         }
       }
    }
+
+   p->bip.init = true;
 }
 
-struct page *P_BIP_Unlock(struct player *p, cstr name)
-{
-   struct bip  *bip  = &p->bip;
-   struct page *page = FindPage(bip, name);
+void P_BIP_Unlock(struct player *p, cstr name) {
+   u32 num = NameToNum(p->discrim, name);
 
-   if(!page) {
-      bip_name_t tag = {}; strcpy(tag, name); strcat(tag, p->discrim);
-      page = FindPage(bip, tag);
-   }
-
-   if(page && !page->unlocked) {
-      Dbg_Log(log_bip, "adding page '%s'", name);
-      UnlockPage(p, page);
-   } else if(!page) {
+   if(num == BIP_MAX) {
       Dbg_Log(log_bip, "no page '%s' found", name);
+      return;
    }
 
-   return page;
+   UnlockPage(p, &p->bip.pages[num]);
 }
 
-stkcall
-void P_BIP_PQuit(struct player *p)
-{
-   struct bip *bip = &p->bip;
-   ForCategory() ListDtor(&bip->infogr[categ], true);
-   bip->init = false;
+stkcall void P_BIP_PQuit(struct player *p) {
+   p->bip.init = false;
 }
 
-struct page_info PageInfo(struct page const *page)
-{
-   struct page_info pinf;
-
-   pinf.shname = page->shname
-      ? page->shname
-      : Language(LANG "INFO_SHORT_%s", page->name);
-
-   pinf.body = page->body
-      ? page->body
-      : Language(LANG "INFO_DESCR_%s", page->name);
-
-   pinf.flname = page->title
-      ? page->title
-      : Language(LANG "INFO_TITLE_%s", page->name);
-
-   if(page->category == BIPC_EXTRA)
-      pinf.body = DecryptBody(pinf.body);
-
-   if(pinf.body[0] == '#') {
-      bool top = false;
-
-      ACS_BeginPrint();
-      ACS_BeginPrint();
-
-      for(i32 i = 1, l = ACS_StrLen(pinf.body); i < l; i++) {
-         if(!top && pinf.body[i] == '\n') {top = true; ACS_PrintString(L(ACS_EndStrParam()));}
-         ACS_PrintChar(pinf.body[i]);
-      }
-
-      pinf.body = ACS_EndStrParam();
+stkcall cstr P_BIP_CategoryToName(u32 category) {
+   switch(category) {
+      #define Categ(name) case BIPC_##name: return #name;
+      Categ(SEARCH);
+      #include "p_bipname.h"
    }
-
-   return pinf;
+   return nil;
 }
 
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_BIPUnlock")
-void Sc_UnlockPage(void)
-{
+void Sc_UnlockPage(void) {
    with_player(LocalPlayer) {
       bip_name_t tag; lstrcpy_str(tag, ServCallS(sm_GetBipName));
       P_BIP_Unlock(p, tag);

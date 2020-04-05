@@ -54,6 +54,10 @@ WEPCHO = %W"$#{HDR}/p_weapons.h".push(*WEPCCO)
 MONCIN = %W"$#{TXT}/Monsters.txt"
 MONCHO = %W"$#{HDR}/w_moninfo.h"
 
+INFCIN = %W"$#{TXT}/Info.txt"
+INFCCO = %W"$#{SRC}/p_bipinfo.c"
+INFCHO = %W"$#{HDR}/p_bipname.h".push(*INFCCO)
+
 DECOIN = %W"
    $#{HDR}/items.h
    $#{HDR}/m_drawing.h
@@ -72,12 +76,12 @@ HSFSIN = %W"pk7/language.gfx.txt:pk7/:lgfx
 
 SNDSIN = %W"$#{TXT}/Sounds.txt"
 
-DEPS = [*UPGCHO, *WEPCHO, *MONCHO,
+DEPS = [*UPGCHO, *WEPCHO, *MONCHO, *INFCHO,
         Dir.glob("source/include/*").map do |s|
            "$#{HDR}/#{File.basename s}"
         end].uniq
 
-SRCS = [*Dir.glob("source/*.c"), *UPGCCO, *WEPCCO].map do |s|
+SRCS = [*Dir.glob("source/*.c"), *UPGCCO, *WEPCCO, *INFCCO].map do |s|
    File.basename s
 end.uniq
 
@@ -129,6 +133,9 @@ rule upgc
 rule monc
  command = tools/monc.rb $in $out
  description = MonC
+rule infc
+ command = tools/infc.rb $in $out
+ description = InfC
 
 build _fs: fs | tools/hashfs.rb
 build _text: text #{TEXTIN.join " "} | tools/compilefs.rb
@@ -139,6 +146,7 @@ build _font: font
 build #{WEPCHO.join " "}: wepc #{WEPCIN.join " "} | tools/wepc.rb
 build #{UPGCHO.join " "}: upgc #{UPGCIN.join " "} | tools/upgc.rb
 build #{MONCHO.join " "}: monc #{MONCIN.join " "} | tools/monc.rb
+build #{INFCHO.join " "}: infc #{INFCIN.join " "} | tools/infc.rb
 
 build $#{IR}/libc.ir: makelib
  #{TYPE} = libc

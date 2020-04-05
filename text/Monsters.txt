@@ -6,7 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 ##
-## Upgrades to be processed into C files.
+## Monsters to be processed into C files.
 ##
 ## % denotes flags.
 ## + denotes a monster.

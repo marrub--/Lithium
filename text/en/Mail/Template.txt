@@ -1,6 +1,0 @@
-\cd>>>>>[[[[RELAYING MESSAGE]]]]
-
-\cd> Remote: <\cj%S\cd>
-\cd> Date: \cj%s
-
-%S

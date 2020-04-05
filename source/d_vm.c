@@ -284,8 +284,8 @@ script static void TerminalGUI(struct player *p, u32 tact)
    str br;
    switch(tact) {
       case TACT_LOGON:
-      case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date)); break;
-      default:          br = st_term_use_to_ack;           break;
+      case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date, ticks)); break;
+      default:          br = st_term_use_to_ack;                  break;
    }
    PrintText_str(br, s_ltrmfont, CR_RED, tright,2, tbottom,2);
 
@@ -354,7 +354,7 @@ script static void DialogueGUI(struct player *p)
    PrintText(s_bigupper, CR_GREEN, 30,1, 35,1);
 
    SetClipW(left, top, 263, 157, 263);
-   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full));
+   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
    PrintText(s_lmidfont, CR_WHITE, left,1, top,1);
    PrintTextChr(textV, textC);
    PrintText(s_smallfnt, CR_WHITE, left,1, texttop,1);

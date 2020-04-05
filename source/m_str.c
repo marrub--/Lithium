@@ -66,6 +66,16 @@ stkcall char *lstrcpy2(char *out, cstr s1, cstr s2)
    return out;
 }
 
+stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
+{
+   char *p = out;
+   for(; *s1; s1++) *p++ = *s1;
+   for(; *s2; s2++) *p++ = *s2;
+   for(; *s3; s3++) *p++ = *s3;
+   *p++ = '\0';
+   return out;
+}
+
 stkcall i32 lstrcmp_str(cstr s1, astr s2)
 {
    register i32 res;

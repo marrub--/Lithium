@@ -76,7 +76,7 @@
 
 #define G_TextBox_OnTextEntered(st) \
    __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
-      ifauto(cstr , _c, strchr(txt_buf, '\n')) \
+      ifauto(cstr, _c, strchr(txt_buf, '\n')) \
          __with(size_t txt_len = _c - txt_buf; G_TextBox_Reset(st);)
 
 /* Types ------------------------------------------------------------------- */

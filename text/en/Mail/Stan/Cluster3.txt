@@ -1,6 +1,0 @@
-Now that you have entered the city, you m\\r-3434[[
-\cgSYSTEM ERROR 0x4E4943456A6F6244554D42415353
-\cd>>>>>[[[[procedure resetting terminal]]]]
-\cd>>>>>[[[[status: heap corrupted]]]]
-\cd>>>>>[[[[error handler malfunction error]]]]
-\cd>>>>>[[[[failure to proceed]]]]

@@ -17,10 +17,10 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-cstr CanonTime(i32 type) {
+cstr CanonTime(i32 type, u64 time) {
    noinit static char ft[64], st[64], dt[64], lf[256];
 
-   i32 t = ticks;
+   i32 t = time;
    i32 s = 53 + t / 35;
    i32 m = 30 + s / 60;
    i32 h = 14 + m / 60;

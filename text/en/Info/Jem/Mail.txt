@@ -1,0 +1,141 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison Sanderson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MIntroJem | Saved Message
+== \#INFO_REMOT_MIntroJem | <hidden>@corp.AOF
+== \#INFO_SSIZE_MIntroJem | 36
+%% \#INFO_DESCR_MIntroJem
+l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`
+\cm// sio.c basic screen inp-1[3\4[`pk;
+\cm#include <kernel_display.h>
+
+\cmint scr_blit(char ************* {
+\cm    int ret = ERR_NONE;
+\cm    __asm("push $4049CB617144\n\t"<<
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+The following procedures have been activated:
+- Destroy IV on target 7F44
+- Destroy V on target 7F45
+- Destroy V on target 7F46
+- Directive 90 on target 7F47
+
+The following permissions have been granted:
+- Mateba R119 Pistol
+- NV48 12-Gauge Shotgun
+- SYM4.3 D.22 MODEL M SUBMACHINE GUN
+- Bishop
+- Information 400
+- Information 402
+
+\chSIGNATURE 0x44190519FBCAD2903 CONFIRMED
+\chDISCARDING MESSA[[[[[
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[auto-saving buffer]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster1Jem | Saved Text 104
+== \#INFO_REMOT_MCluster1Jem | $\#MAIL_INTERNAL
+== \#INFO_SSIZE_MCluster1Jem | 30
+%% \#INFO_DESCR_MCluster1Jem
+l[]];;\cg444444\cj41414191918 --------
+\cm    scr_exec(SCR_FINISH, 0, NULL);
+\cmdone:
+\cm    return 0;
+\cm}
+\cm]]]]]]]]]]EOF
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+Notes:
+
+40 thousand lines dumped so far, maybe 30-40% done? Estimated total ~200k SLoC
+ROM is about half C source, quarter XMb5 using SKVM, the rest is scripts
+Important bits already dumped, the custom lock remover does not skimp on anything
+
+Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster2Jem | Saved Text 152
+== \#INFO_REMOT_MCluster2Jem | $\#MAIL_INTERNAL
+== \#INFO_SSIZE_MCluster2Jem | 36
+%% \#INFO_DESCR_MCluster2Jem
+l[]];;\cg444444\cj41414191918 --------
+\cm    io_buf_get 0x1C, fp, out;
+\cm    string_explode out, bufs, bufs_num = bufs.length / 8;
+\cm    for(i in (iter 0, bufs_num)) {{{
+\cm        9339mv__word_of]]q]qq]qq]]]]]]]````````\\\\\\\\<<
+\cd>>>>>[[[[datastream corruption detected]]]]
+\cd>>>>>[[[[reloading mail daemon]]]]
+
+It's all gone now. I'm glad I was smarter than to assume I was going insane, though now I wonder what the other deceivers must have gone through.
+
+The core of hell is still far yonder, but yet my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.
+
+The kernel and ROM etc. sources are all done dumping, the utilities are still going but those aren't important and have already been scanned for ASIC code.
+
+Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster3Jem | Saved Text 244
+== \#INFO_REMOT_MCluster3Jem | $\#MAIL_INTERNAL
+== \#INFO_SSIZE_MCluster3Jem | 28
+@@ \#INFO_DESCR_MCluster3Jem
+I've entered a strange realm that doesn't seem to make sense. This
+must really be Hell itself; no mistaking it now.
+
+The air is so humid and hot that I've begun sweating. That can't
+happen. I can't sweat. There isn't anything to sweat. I'm scared. This
+has to be an illusion... or does reality not matter in this place?
+
+In any case, now that I'm here, there's no turning back. I have to
+destroy whatever corrupted them, I'm sure they're here... I saw it in
+their eyes, they were yelling at me visions of their true selves that
+could not be described with human eyes. That only I could know.
+
+Though my mind had just been regained, now sanity may lie out of my
+hands.
+
+It doesn't matter. I will see this through.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MPhantomJem | $\#MAIL_NOTITLE
+== \#INFO_REMOT_MPhantomJem | order@corp.AOF
+@@ \#INFO_DESCR_MPhantomJem
+\cg*** This is a global warning to all deceivers: If you are reading
+this, you are already being tracked and will be executed on sight. ***
+
+\cg====================================
+
+\cgWe have confirmed that three of you have been absorbed (see Dark
+Realm Properties c. 115C) and two have been executed. We will not stop
+until the remaining two are confirmed dead or incapacitated.
+
+\cgYou will not get away with this intrepid game.
+
+\cg  - \cnOrder
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MSecret1Jem | Saved Text 250
+== \#INFO_REMOT_MSecret1Jem | $\#MAIL_INTERNAL
+@@ \#INFO_DESCR_MSecret1Jem
+Another facet of this place, where does it end? I must destroy this
+place, the evil energy is overflowing here... and this architecture
+gives me bad vibes.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MSecret2Jem | Saved Text 252
+== \#INFO_REMOT_MSecret2Jem | $\#MAIL_INTERNAL
+@@ \#INFO_DESCR_MSecret2Jem
+Here seems to be the end of this terrifying compartment of Hell. I'd
+better blaze through this one.
+
+## EOF

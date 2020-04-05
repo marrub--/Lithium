@@ -100,25 +100,25 @@
 == \#CBI_CPU4 | AOF 5900001 Rev7 CPU
 
 ## BIP -----------------------------------------------------------------------|
-== \#BIP_NAME_Search      | Search
-== \#BIP_NAME_Weapons     | Weapons
-== \#BIP_NAME_Adversaries | Adversaries
-== \#BIP_NAME_Items       | Items
-== \#BIP_NAME_Yourself    | Yourself
-== \#BIP_NAME_Upgrades    | Upgrades
-== \#BIP_NAME_Locations   | Locations
-== \#BIP_NAME_Companies   | Companies
-== \#BIP_NAME_Mail        | Mail
+== \#BIP_NAME_CORPORATIONS | Companies
+== \#BIP_NAME_ENEMIES      | Adversaries
+== \#BIP_NAME_ITEMS        | Items
+== \#BIP_NAME_MAIL         | Mail
+== \#BIP_NAME_PLACES       | Locations
+== \#BIP_NAME_SEARCH       | Search
+== \#BIP_NAME_UPGRADES     | Upgrades
+== \#BIP_NAME_WEAPONS      | Weapons
+== \#BIP_NAME_YOURSELF     | Yourself
 
-== \#BIP_HELP_Search      | Text search all categories.
-== \#BIP_HELP_Weapons     | Weapons and weapon upgrades.
-== \#BIP_HELP_Adversaries | Enemies and bosses.
-== \#BIP_HELP_Items       | Armors and other loot.
-== \#BIP_HELP_Yourself    | Your attributes, abilities and history.
-== \#BIP_HELP_Upgrades    | Body upgrades.
-== \#BIP_HELP_Locations   | Places of interest around the galaxy.
-== \#BIP_HELP_Companies   | Important companies, historic and current.
-== \#BIP_HELP_Mail        | Received mail.
+== \#BIP_HELP_CORPORATIONS | Important companies, historic and current.
+== \#BIP_HELP_ENEMIES      | Enemies and bosses.
+== \#BIP_HELP_ITEMS        | Armors and other loot.
+== \#BIP_HELP_MAIL         | Received mail.
+== \#BIP_HELP_PLACES       | Places of interest around the galaxy.
+== \#BIP_HELP_SEARCH       | Text search all categories.
+== \#BIP_HELP_UPGRADES     | Body upgrades.
+== \#BIP_HELP_WEAPONS      | Weapons and weapon upgrades.
+== \#BIP_HELP_YOURSELF     | Your attributes, abilities and history.
 
 ## Statistics ----------------------------------------------------------------|
 == \#STAT_ScoreMul   | Score Multiplier
