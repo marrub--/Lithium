@@ -51,8 +51,7 @@ void TBufCtor(struct tokbuf *tb)
 
 void TBufDtor(struct tokbuf *tb)
 {
-   if(tb->toks) for(i32 i = 0; i < tb->bend; i++)
-      Vec_Clear(tb->toks[i].text);
+   if(tb->toks) for(i32 i = 0; i < tb->bend; i++) tb->toks[i].textC = 0;
 
    Dalloc(tb->toks);
 }
@@ -62,8 +61,7 @@ struct token *TBufGet(struct tokbuf *tb)
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
    /* free beginning of buffer */
-   for(i32 i = 0; i < tb->bbeg; i++)
-      Vec_Clear(tb->toks[i].text);
+   for(i32 i = 0; i < tb->bbeg; i++) tb->toks[i].textC = 0;
 
    /* move end of buffer to beginning */
    if(tb->tend) {

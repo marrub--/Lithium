@@ -22,8 +22,7 @@
 
 /* Types ------------------------------------------------------------------- */
 
-enum
-{
+enum {
    tok_null,   /* No token */
 
    /* Text sequences */
@@ -107,16 +106,15 @@ enum
    tok_max
 };
 
-struct origin
-{
+struct origin {
    i32 colu, line;
 };
 
-struct token
-{
+struct token {
    i32 type;
    struct origin orig;
-   Vec_Decl(char, text);
+   char textV[128];
+   size_t textC;
 };
 
 /* Extern Functions -------------------------------------------------------- */

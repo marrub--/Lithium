@@ -16,7 +16,7 @@
 #include "m_char.h"
 #include "m_file.h"
 
-#define textNext() Vec_Grow(tok->text, 1), Vec_Next(tok->text)
+#define textNext() tok->textV[tok->textC++]
 
 #define tokText(fn) \
    do { \
@@ -57,7 +57,7 @@ void TokParse(FILE *fp, struct token *tok, struct origin *orig)
 begin:;
    i32 ch;
 
-   Vec_Clear(tok->text);
+   tok->textC = 0;
 
    getch();
    if(FEOF(fp) || ch == EOF) {
