@@ -19,8 +19,8 @@
 
 struct boss
 {
-   str const name;
-   i32 const phasenum;
+   char const name[16];
+   i32  const phasenum;
 
    i32  phase;
    bool dead;
@@ -40,15 +40,15 @@ enum
 /* Static Objects ---------------------------------------------------------- */
 
 static struct boss bosses_easy[] = {
-   {s"James",   2},
+   {"James",   2},
 };
 
 static struct boss bosses_medi[] = {
-   {s"Makarov", 3},
+   {"Makarov", 3},
 };
 
 static struct boss bosses_hard[] = {
-   {s"Isaac",   3},
+   {"Isaac",   3},
 };
 
 static struct boss *lmvar boss;
@@ -86,7 +86,7 @@ static void TriggerBoss(void)
    if(!boss) return;
 
    if(boss->dead) {
-      Log("%s: %S is dead, invalid num", __func__, boss->name);
+      Log("%s: %s is dead, invalid num", __func__, boss->name);
       boss = nil;
       return;
    }
@@ -100,13 +100,13 @@ static void TriggerBoss(void)
    if(!boss->phase)
       boss->phase = 1;
 
-   Dbg_Log(log_boss, "%s: Spawning boss %S phase %i", __func__, boss->name, boss->phase);
+   Dbg_Log(log_boss, "%s: Spawning boss %s phase %i", __func__, boss->name, boss->phase);
 
    ServCallI(sm_TriggerBoss);
 
    if(firstboss) {
       firstboss = false;
-      for_player() P_BIP_GiveMail(p, st_mail_phantom);
+      for_player() P_BIP_Unlock(p, "MPhantom");
    }
 }
 
@@ -185,7 +185,9 @@ void Sc_PhantomDeath(void)
       ACS_Delay(25);
       ServCallI(sm_PlayerDeathNuke);
       ACS_Delay(25);
-      for_player() P_BIP_GiveMail(p, StrParam("%SDefeated", boss->name));
+      bip_name_t tag;
+      lstrcpy3(tag, "M", boss->name, "Defeated");
+      for_player() P_BIP_Unlock(p, tag);
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;
@@ -198,7 +200,7 @@ void Sc_PhantomDeath(void)
       ACS_Delay(2);
    }
 
-   Dbg_Log(log_boss, "Lith_PhantomDeath: %S phase %i defeated", boss->name, boss->phase);
+   Dbg_Log(log_boss, "Lith_PhantomDeath: %s phase %i defeated", boss->name, boss->phase);
 
    if(!ACS_GetCVar(sc_sv_nobossdrop))
       SpawnBossReward();
@@ -222,10 +224,10 @@ void Sc_SpawnBoss(void)
    bosstid = ACS_ActivatorTID();
    bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
-   ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%S", boss->name), boss->phase);
+   ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%s", boss->name), boss->phase);
 
-   Dbg_Log(log_boss, "Lith_SpawnBoss: Boss %S phase %i spawned", boss->name, boss->phase);
-   Dbg_Note("boss: %S phase %i spawned\n", boss->name, boss->phase);
+   Dbg_Log(log_boss, "Lith_SpawnBoss: Boss %s phase %i spawned", boss->name, boss->phase);
+   Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);
 
    bossspawned = true;
 }
