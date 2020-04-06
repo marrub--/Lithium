@@ -182,20 +182,51 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("%s %S", LC(LANG "EFFECT"), effect);
 
-   static i32 const crs[] = {CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED};
-   PrintText(s_smallfnt,
-      upgr->info->key == UPGR_UNCEUNCE ? crs[ACS_Timer() / 4 % countof(crs)] : CR_WHITE, 111,1, 50,1);
+   static i32 const crs[] = {
+      CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED
+   };
+
+   i32 cr = CR_WHITE;
+
+   if(upgr->info->key == UPGR_UNCEUNCE)
+      cr = crs[ACS_Timer() / 4 % countof(crs)];
+
+   PrintText(s_smallfnt, cr, 111,1, 50,1);
 
    ClearClip();
 }
 
 static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr)
 {
+   /* Buy */
    if(G_Button(g, LC(LANG "BUY"), 111, 205, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)))
       P_Upg_Buy(p, upgr, false);
 
+   /* Activate */
    if(G_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !P_Upg_CanActivate(p, upgr)))
       P_Upg_Toggle(p, upgr);
+
+   /* Groups */
+   PrintTextChS(LC(LANG "AUTOGROUPS"));
+   PrintText(s_smallfnt, CR_WHITE, 255,0, 205,0);
+
+   for(i32 i = 0; i < 4; i++) {
+      static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};
+
+      u32  mask      = 1 << i;
+      bool has_group = upgr->agroups & mask;
+
+      ACS_BeginPrint();
+      ACS_PrintChar('1' + i);
+      PrintText(s_lmidfont, crs[i], 220 + i * 20,2, 215,1);
+
+      if(G_Checkbox_Id(g, i, has_group, 221 + i * 20, 211)) {
+         if(has_group) upgr->agroups &= ~mask;
+         else          upgr->agroups |=  mask;
+
+         P_Data_Save(p);
+      }
+   }
 }
 
 void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)

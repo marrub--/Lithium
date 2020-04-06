@@ -28,9 +28,13 @@
 #define Ident_Lend FourCC('L', 'e', 'n', 'd')
 #define SaveV_Lend 0
 
-/* note: Player's notes. */
+/* note: Notes. */
 #define Ident_note FourCC('n', 'o', 't', 'e')
 #define SaveV_note 0
+
+/* agrp: Auto-groups. */
+#define Ident_agrp FourCC('a', 'g', 'r', 'p')
+#define SaveV_agrp 0
 
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00

@@ -25,6 +25,7 @@
 == \#EQUIP      | Equip
 == \#EMPTY      | <empty>
 == \#NOTE_FMT   | \cmNote %i
+== \#AUTOGROUPS | Active Auto-Groups
 
 == \#CAT_BODY | \cnBody
 == \#CAT_WEAP | \caWeapon

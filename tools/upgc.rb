@@ -15,7 +15,7 @@
 require_relative "corinth.rb"
 
 def zstr s
-   s == "\0" ? "\\0" : s
+   s.gsub "\0", "\\\\0"
 end
 
 def generate_strhash_switch kvp, ind = 1, it = 0
@@ -172,7 +172,7 @@ cstr Upgr_EnumToStr(i32 n) {
    switch(n) {
 #{
 res = String.new
-upgrades.each_key do |una| res.concat "      case UPGR_#{una}: return \"#{una}\";\n" end
+upgrades.each_key do |una| res.concat "      case UPGR_#{una}: return \"#{zstr una.ljust 12, "\0"}\";\n" end
 res
 }
    }

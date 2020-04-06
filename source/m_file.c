@@ -256,16 +256,7 @@ size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *rest
    return res;
 }
 
-size_t FWrite(void const *restrict ptr, size_t count, FILE *restrict fp)
-{
-   size_t res = 0;
-
-   for(cstr itr = ptr; count--; res++)
-      if(fputc(*itr++, fp) == EOF) return res;
-
-   return res;
-}
-
+/* Basic write function for bytes in a string. */
 size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
 {
    size_t res = 0;

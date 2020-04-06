@@ -18,31 +18,27 @@
 
 /* Chunk "note" ------------------------------------------------------------ */
 
-#define note_Len(s) __with(i32 len = s ? strlen(s) : 0; len = min(len, 255);)
+#define note_len(s) i32 len = s ? strlen(s) : 0; len = min(len, 255)
 
-script
-static void Save_note(struct savefile *save)
-{
+script static void Save_note(struct savefile *save) {
    u32 chunklen = 0;
 
-   for(i32 i = 0; i < countof(save->p->notes); i++)
-      note_Len(save->p->notes[i]) chunklen += len + 1;
+   for(i32 i = 0; i < countof(save->p->notes); i++) {
+      note_len(save->p->notes[i]);
+      chunklen += len + 1;
+   }
 
    Save_WriteChunk(save, Ident_note, SaveV_note, chunklen);
 
-   for(i32 i = 0; i < countof(save->p->notes); i++)
-      note_Len(save->p->notes[i])
-   {
+   for(i32 i = 0; i < countof(save->p->notes); i++) {
+      note_len(save->p->notes[i]);
       fputc(len, save->fp);
-      if(len) FWrite(save->p->notes[i], len, save->fp);
+      if(len) fwrite(save->p->notes[i], 1, len, save->fp);
    }
 }
 
-script
-static void Load_note(struct savefile *save, struct savechunk *chunk)
-{
-   for(i32 i = 0; i < countof(save->p->notes); i++)
-   {
+script static void Load_note(struct savefile *save, struct savechunk *chunk) {
+   for(i32 i = 0; i < countof(save->p->notes); i++) {
       u32 len = fgetc(save->fp);
       if(!len) continue;
 
@@ -52,28 +48,65 @@ static void Load_note(struct savefile *save, struct savechunk *chunk)
    }
 }
 
+/* Chunk "agrp" ------------------------------------------------------------ */
+
+script static void Save_agrp(struct savefile *save) {
+   u32 groupnum = 0;
+
+   for(i32 i = 0; i < UPGR_MAX; i++) {
+      if(save->p->upgrades[i].agroups) {
+         groupnum++;
+      }
+   }
+
+   Save_WriteChunk(save, Ident_agrp, SaveV_agrp, 1 + groupnum * 13);
+
+   fputc(groupnum & 0xFF, save->fp);
+
+   for(i32 i = 0; i < UPGR_MAX; i++) {
+      u32 groups = save->p->upgrades[i].agroups;
+      if(groups) {
+         fwrite(Upgr_EnumToStr(i), 1, 12, save->fp);
+         fputc(groups & 0xFF, save->fp);
+      }
+   }
+}
+
+script static void Load_agrp(struct savefile *save, struct savechunk *chunk) {
+   u32 groupnum = fgetc(save->fp);
+
+   for(i32 i = 0; i < groupnum; i++) {
+      char name[12];
+      i32  groups;
+
+      fread(name, 1, 12, save->fp);
+      groups = fgetc(save->fp);
+
+      u32 num = Upgr_StrToEnum(name);
+      if(num < UPGR_MAX && groups != EOF) {
+         save->p->upgrades[num].agroups = groups;
+      }
+   }
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
-script
-void P_Data_Save(struct player *p)
-{
+script void P_Data_Save(struct player *p) {
    struct savefile *save;
 
-   if((save = Save_BeginSave(p)))
-   {
+   if((save = Save_BeginSave(p))) {
       Save_note(save);
+      Save_agrp(save);
       Save_EndSave(save);
    }
 }
 
-script
-void P_Data_Load(struct player *p)
-{
+script void P_Data_Load(struct player *p) {
    struct savefile *save;
 
-   if((save = Save_BeginLoad(p)))
-   {
+   if((save = Save_BeginLoad(p))) {
       Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
+      Save_ReadChunk(save, Ident_agrp, SaveV_agrp, Load_agrp);
       Save_EndLoad(save);
    }
 }

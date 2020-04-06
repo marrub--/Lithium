@@ -1504,6 +1504,7 @@
 "LITH_EQUIP" = "Equip";
 "LITH_EMPTY" = "<empty>";
 "LITH_NOTE_FMT" = "\cmNote %i";
+"LITH_AUTOGROUPS" = "Active Auto-Groups";
 "LITH_CAT_BODY" = "\cnBody";
 "LITH_CAT_WEAP" = "\caWeapon";
 "LITH_CAT_EXTR" = "\cfExtra";

@@ -152,7 +152,7 @@ struct upgradeinfo {
    i32 requires;
    k32 scoreadd;
 
-   i32 key, id;
+   i32 key;
 
    stkcall void (*Activate)(struct player *, struct upgrade *);
    stkcall void (*Deactivate)(struct player *, struct upgrade *);
