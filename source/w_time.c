@@ -15,6 +15,10 @@
 #include "p_player.h"
 #include "w_world.h"
 
+/* Static Objects ---------------------------------------------------------- */
+
+static i32 lmvar frozen;
+
 /* Extern Functions -------------------------------------------------------- */
 
 cstr CanonTime(i32 type, u64 time) {
@@ -45,36 +49,26 @@ cstr CanonTime(i32 type, u64 time) {
    return nil;
 }
 
-stkcall void FreezeTime(bool on) {
-   StrEntON
-   static i32 lmvar frozen;
+void FreezeTime(bool players_ok) {
+   frozen++;
 
-   if(on) {
-      if(!frozen++) {
-         for_player() {
-            p->frozen++;
-            P_SetVel(p, 0, 0, 0);
-         }
+   bool players_ok_mask = !singleplayer;
 
-         for_player() {
-            PtrInvGive(p->tid, so_TimeHax, 1);
-            PtrInvGive(p->tid, so_TimeHax2, 1);
-            break;
-         }
-      }
-   } else {
-      if(!--frozen) {
-         Str(power_time_freezer, s"PowerTimeFreezer");
-
-         for_player() p->frozen--;
-
-         for_player() {
-            PtrInvTake(p->tid, power_time_freezer, 1);
-            PtrInvTake(p->tid, so_TimeHax2, 1);
-            break;
-         }
-      }
+   for_player() {
+      if(!players_ok) p->frozen++;
+      if(!p->frozen)  players_ok_mask = true;
    }
+
+   ServCallI(sm_SetFrozen, true, players_ok_mask);
+}
+
+void UnfreezeTime(bool players_ok) {
+   if(frozen < 1) return;
+
+   frozen--;
+   for_player() {if(!players_ok) p->frozen--;}
+
+   if(frozen < 1) ServCallI(sm_SetFrozen, false, 0);
 }
 
 /* Scripts ----------------------------------------------------------------- */

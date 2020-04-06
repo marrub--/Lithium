@@ -40,7 +40,7 @@ enum
 /* Static Objects ---------------------------------------------------------- */
 
 static struct boss bosses_easy[] = {
-   {"James",   2},
+   {"James", 2},
 };
 
 static struct boss bosses_medi[] = {
@@ -48,7 +48,7 @@ static struct boss bosses_medi[] = {
 };
 
 static struct boss bosses_hard[] = {
-   {"Isaac",   3},
+   {"Isaac", 3},
 };
 
 static struct boss *lmvar boss;

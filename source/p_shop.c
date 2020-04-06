@@ -16,17 +16,13 @@
 
 /* Types ------------------------------------------------------------------- */
 
-enum {
-   sif_weapon = 1 << 0,
-};
-
 struct shopitem
 {
    anonymous struct shopdef shopdef;
    i32 pclass;
    i32 count;
    str classname;
-   i32 flags;
+   bool weapon;
 };
 
 /* Static Objects ---------------------------------------------------------- */
@@ -37,12 +33,12 @@ static struct shopitem shopitems[] = {
    {{"RocketAmmo", snil, 9000},  gA, 5,    OBJ "RocketAmmo"},
    {{"PlasmaAmmo", snil, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
 
-   {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, OBJ "ChargeFist",      sif_weapon},
-   {{"Revolver",        "Revolver",         500000}, pM, 1, OBJ "Revolver",        sif_weapon},
-   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, OBJ "LazShotgun",      sif_weapon},
-   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, OBJ "SniperRifle",     sif_weapon},
-   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, OBJ "MissileLauncher", sif_weapon},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, OBJ "PlasmaDiffuser",  sif_weapon},
+   {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, OBJ "ChargeFist",      true},
+   {{"Revolver",        "Revolver",         500000}, pM, 1, OBJ "Revolver",        true},
+   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, OBJ "LazShotgun",      true},
+   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, OBJ "SniperRifle",     true},
+   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, OBJ "MissileLauncher", true},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, OBJ "PlasmaDiffuser",  true},
 
    {{"Allmap",   snil, 100000}, gA, 1, "Allmap"},
    {{"Infrared", snil, 70000},  gA, 1, "Infrared"},
@@ -71,7 +67,7 @@ static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32
 {
    struct shopitem *item = item_;
    p->itemsbought++;
-   if(item->flags & sif_weapon) {
+   if(item->weapon) {
       PtrInvGive(p->tid, item->classname, item->count);
       return false;
    } else {

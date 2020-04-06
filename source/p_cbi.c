@@ -17,18 +17,13 @@
 #include "m_list.h"
 #include "w_world.h"
 
-#define TABCHARS 20
-
-#define Themes(X) \
-
 /* Static Functions -------------------------------------------------------- */
 
-static void P_CBI_TabArsenal(struct gui_state *g, struct player *p)
-{
+static void P_CBI_TabArsenal(struct gui_state *g, struct player *p) {
    extern void P_CBI_TabUpgrades(struct gui_state *g, struct player *p);
    extern void P_CBI_TabShop    (struct gui_state *g, struct player *p);
 
-   char tn[2][TABCHARS];
+   char tn[2][20];
    LanguageVC(tn[0], LANG "TAB_UPGRADES");
    LanguageVC(tn[1], LANG "TAB_SHOP");
    G_Tabs(g, &CBIState(g)->arsetab, tn, 13, 13, 1);
@@ -39,12 +34,11 @@ static void P_CBI_TabArsenal(struct gui_state *g, struct player *p)
    }
 }
 
-static void P_CBI_TabStat(struct gui_state *g, struct player *p)
-{
+static void P_CBI_TabStat(struct gui_state *g, struct player *p) {
    extern void P_CBI_TabCBI   (struct gui_state *g, struct player *p);
    extern void P_CBI_TabStatus(struct gui_state *g, struct player *p);
 
-   char tn[2][TABCHARS];
+   char tn[2][20];
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
    LanguageVC(tn[1], LANG "TAB_CBI");
    G_Tabs(g, &CBIState(g)->stattab, tn, 13, 13, 1);
@@ -55,14 +49,13 @@ static void P_CBI_TabStat(struct gui_state *g, struct player *p)
    }
 }
 
-static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
-{
+static void P_CBI_TabInfo(struct gui_state *g, struct player *p) {
    extern void P_CBI_TabBIP       (struct gui_state *g, struct player *p);
    extern void P_CBI_TabLog       (struct gui_state *g, struct player *p);
    extern void P_CBI_TabStatistics(struct gui_state *g, struct player *p);
    extern void P_CBI_TabNotes     (struct gui_state *g, struct player *p);
 
-   char tn[4][TABCHARS];
+   char tn[4][20];
    LanguageVC(tn[0], LANG "TAB_BIP");
    LanguageVC(tn[1], LANG "TAB_LOG");
    LanguageVC(tn[2], LANG "TAB_STATISTICS");
@@ -79,9 +72,7 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-script
-void P_CBI_PTick(struct player *p)
-{
+script void P_CBI_PTick(struct player *p) {
    extern void P_CBI_TabItems   (struct gui_state *g, struct player *p);
    extern void P_CBI_TabSettings(struct gui_state *g, struct player *p);
 
@@ -89,8 +80,7 @@ void P_CBI_PTick(struct player *p)
 
    p->cbi.theme = p->getCVarI(sc_gui_theme);
 
-   if(p->cbi.theme != p->cbi.oldtheme)
-   {
+   if(p->cbi.theme != p->cbi.oldtheme) {
       #define X(n) ":UI_" n ":"
       static cstr names[] = {
          X("Green"),
@@ -120,9 +110,9 @@ void P_CBI_PTick(struct player *p)
    PrintChrSt("Background");
    PrintSpriteA(ACS_EndStrParam(), 0,1, 0,1, 0.7);
 
-   if(G_Button(g, .x = 296, 13, Pre(btnexit))) P_GUI_Use(p, gui_cbi);
+   if(G_Button(g, .x = 296, 13, Pre(btnexit))) P_GUI_Use(p);
 
-   char tn[5][TABCHARS];
+   char tn[5][20];
    LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);
    LanguageVC(tn[1], LANG "TAB_STATUS");
    LanguageVC(tn[2], LANG "TAB_INVENTORY");
@@ -141,8 +131,7 @@ void P_CBI_PTick(struct player *p)
    G_End(g, p->getCVarI(sc_gui_cursor));
 }
 
-void P_CBI_PMinit(struct player *p)
-{
+void P_CBI_PMinit(struct player *p) {
    p->cbi.guistate.cx = 320 / 2;
    p->cbi.guistate.cy = 240 / 2;
 
@@ -159,10 +148,9 @@ void P_CBI_PMinit(struct player *p)
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") type("net") addr("Lith_KeyOpenCBI")
-void Sc_OpenCBI(void)
-{
+void Sc_OpenCBI(void) {
    if(ACS_Timer() < 10) return;
-   with_player(LocalPlayer) P_GUI_Use(p, gui_cbi);
+   with_player(LocalPlayer) P_GUI_Use(p);
 }
 
 /* EOF */

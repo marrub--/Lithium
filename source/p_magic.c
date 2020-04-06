@@ -97,7 +97,7 @@ void Sc_Cercle(void)
          az = ACS_GetActorFloorZ(pufftid);
       }
 
-      FreezeTime(true);
+      FreezeTime();
       ACS_Delay(2); /* necessary so sounds may play */
 
       ACS_AmbientSound(ss_weapons_cercle_begin, 127);
@@ -159,7 +159,7 @@ void Sc_Cercle(void)
       ACS_Thing_Remove(fxtid);
       ACS_Thing_Remove(fxtid2);
 
-      FreezeTime(false);
+      UnfreezeTime();
    }
 }
 

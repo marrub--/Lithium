@@ -109,7 +109,6 @@
 == \#sv_nofullammo   | Don't pick up ammo when full
 == \#sv_noscoreammo  | Don't give score when picking up ammo
 == \#sv_wepdrop      | Drop weapons from zombies
-== \#sv_pauseinmenus | Pause while in menus
 == \#sv_nobosses     | No phantoms
 == \#sv_nobossdrop   | Start with phantom rewards
 == \#sv_minhealth    | Minimum health on map start

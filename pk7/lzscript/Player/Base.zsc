@@ -29,8 +29,9 @@ Lith_Flashlight m_light;
 
 Lith_Cyberspace m_CS;
 
-bool m_GrabInput;
-bool m_OnGround;
+bool m_grabInput;
+bool m_onGround;
+bool m_wasFrozen;
 
 int m_DmgFac;
 
@@ -54,6 +55,7 @@ property ViewBob: m_VBob;
 override void BeginPlay() {
    Super.BeginPlay();
    viewbob = m_VBob;
+   m_wasFrozen = false;
 }
 
 override void GiveDefaultInventory() {
@@ -84,7 +86,7 @@ override void PlayerThink() {
       player.turnticks = 0;
    }
 
-   m_OnGround = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
+   m_onGround = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
 
    Super.PlayerThink();
 }
@@ -177,6 +179,15 @@ int, int, bool Lith_Unproject(vector3 loc) {
 }
 
 void Lith_PreTick() {
+   if(!m_wasFrozen && isFrozen()) {
+      if(player.psprites) player.psprites.tics = -1;
+      viewBob = 0;
+   } else if(m_wasFrozen && !isFrozen()) {
+      if(player.psprites) player.psprites.tics = player.psprites.curState.tics;
+      viewBob = m_VBob;
+   }
+   m_wasFrozen = isFrozen();
+
    /* create pitch and yaw quaternions for unprojection */
    vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
    pvec /= pvec.length();

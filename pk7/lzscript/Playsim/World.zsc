@@ -9,6 +9,16 @@
 
 extend class Lith_HERMES;
 
+static void SetFrozen(bool on, bool players_ok) {
+   level.setFrozen(on);
+
+   for(int i = 0; i < MAXPLAYERS; i++) {
+      if(playeringame[i]) {
+         players[i].timefreezer = players_ok;
+      }
+   }
+}
+
 static bool IsRampancy() {
    string why = "Robot_Thingo";
    class<Object> stopit = why;

@@ -42,16 +42,15 @@
 #define tok1(tt1) (tok->orig = *orig, tok->type = tt1)
 #define tok2(c2, tt1, tt2) \
    if(getch() == c2) tok1(tt2); \
-   else    (unget(), tok1(tt1))
+   else              (unget(), tok1(tt1))
 #define tok3(c2, c3, tt1, tt2, tt3) \
         if(getch() == c3) tok1(tt3); \
-   else if(   ch   == c2) tok1(tt2); \
-   else         (unget(), tok1(tt1))
+   else if(ch      == c2) tok1(tt2); \
+   else                   (unget(), tok1(tt1))
 
 /* Extern Functions -------------------------------------------------------- */
 
-void TokParse(FILE *fp, struct token *tok, struct origin *orig)
-{
+void TokParse(FILE *fp, struct token *tok, struct origin *orig) {
    if(!tok || !fp || !orig) return;
 
 begin:;
@@ -66,8 +65,7 @@ begin:;
       return;
    }
 
-   switch(ch)
-   {
+   switch(ch) {
    /* Whitespace */
    case '\r': case '\n': tok1(tok_lnend); advLine(); return;
 
@@ -101,23 +99,21 @@ begin:;
    case ':': tok3(':', '=', tok_col, tok_col2, tok_coleq); return;
 
    case '-':
-           if(getch() == '-')        tok1(tok_sub2);
-      else if(ch == '=')             tok1(tok_subeq);
-      else if(ch == '>')             tok1(tok_rarrow);
-      else if(IsDigit(ch)) {unget(); ch = '-'; break;}
-      else                 {unget(); tok1(tok_sub);}
+           if(getch() == '-') tok1(tok_sub2);
+      else if(ch == '=')      tok1(tok_subeq);
+      else if(ch == '>')      tok1(tok_rarrow);
+      else if(IsDigit(ch))    {unget(); ch = '-'; break;}
+      else                    {unget(); tok1(tok_sub);}
       return;
 
    case '/':
-      if(getch() == '=')
+      if(getch() == '=') {
          tok1(tok_diveq);
-      else if(ch == '*')
-      {
+      } else if(ch == '*') {
          tok1(tok_cmment);
          getch();
 
-         for(i32 lvl = 1; lvl && !FEOF(fp); getch())
-         {
+         for(i32 lvl = 1; lvl && !FEOF(fp); getch()) {
             if(ch == '/') {
                if(getch() == '*') {lvl++; continue;}
                else               {unget(); ch = '/';}
@@ -131,9 +127,10 @@ begin:;
          }
 
          unget();
+      } else {
+         unget();
+         tok1(tok_div);
       }
-      else
-         {unget(); tok1(tok_div);}
       return;
 
    case '.':
@@ -160,34 +157,26 @@ begin:;
       return;
    }
 
-   if(IsBlank(ch))
-   {
+   if(IsBlank(ch)) {
       while(ch = getch(), IsBlank(ch));
       unget();
       goto begin;
-   }
-   else if(IsDigit(ch) || ch == '.' || ch == '-' || ch == '$')
-   {
+   } else if(IsDigit(ch) || ch == '.' || ch == '-' || ch == '$') {
       tok1(tok_number);
 
-      if(ch == '$')
-      {
+      if(ch == '$') {
          textNext() = '0';
          textNext() = 'x';
-      }
-      else
+      } else {
          textNext() = ch;
+      }
 
       getch();
       tokText(IsNumId);
-   }
-   else if(IsIdent(ch))
-   {
+   } else if(IsIdent(ch)) {
       tok1(tok_identi);
       tokText(IsIdent);
-   }
-   else
-   {
+   } else {
       tok1(tok_chrseq);
       textNext() = ch;
       textNext() = '\0';

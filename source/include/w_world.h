@@ -93,7 +93,6 @@ extern i32 cbiperf;
 extern bool cbiupgr[cupg_max];
 extern bool legendoom;
 extern bool drlamonsters;
-extern bool pauseinmenus;
 extern enum mission_status lmvar mission;
 
 /* DECORATE data */
@@ -107,7 +106,8 @@ cstr CanonTime(i32 type, u64 time);
 optargs(1) i32 UniqueID(i32 tid);
 stkcall void BeginAngles(i32 x, i32 y);
 stkcall k32 AddAngle(i32 x, i32 y);
-stkcall void FreezeTime(bool on);
+optargs(1) void FreezeTime(bool players_ok);
+optargs(1) void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
 
 #endif

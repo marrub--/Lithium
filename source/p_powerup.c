@@ -99,7 +99,7 @@ void Sc_GetSigil(void)
 
       if(dbglevel) return;
 
-      FreezeTime(true);
+      FreezeTime();
 
       ACS_FadeTo(0, 0, 0, 0.4, 0.087);
 
@@ -121,7 +121,7 @@ void Sc_GetSigil(void)
 
       ACS_FadeTo(0, 0, 0, 0.0, 0.145);
 
-      FreezeTime(false);
+      UnfreezeTime();
    }
 }
 

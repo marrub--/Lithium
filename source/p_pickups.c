@@ -14,13 +14,13 @@
 #include "common.h"
 #include "p_player.h"
 
-#define name(n) sLANG "PK_" #n
+#define name(n) LANG "PK_" #n
 
 #define StupidName(w) \
-   Language("%S_%.3i", pickupnames[w], \
-      ACS_Random(0, strtoi_str(Language(c"%S_NUM", pickupnames[w]), nil, 10)))
+   Language("%s_%.3i", pickupnames[w], \
+      ACS_Random(0, strtoi_str(Language("%s_NUM", pickupnames[w]), nil, 10)))
 
-StrAry(pickupnames,
+static cstr pickupnames[] = {
    [weapon_unknown]    = name(weapon_unknown),
 
    [weapon_fist]       = name(weapon_unknown),
@@ -42,7 +42,7 @@ StrAry(pickupnames,
    [weapon_c_sniper]   = name(weapon_c_sniper),
    [weapon_c_plasma]   = name(weapon_plasma),
    [weapon_c_shipgun]  = name(weapon_c_shipgun),
-);
+};
 
 static void StupidPickup(struct player *p, i32 weapon)
 {

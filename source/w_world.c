@@ -40,7 +40,6 @@ i32 cbiperf;
 bool cbiupgr[cupg_max];
 bool legendoom;
 bool drlamonsters;
-bool pauseinmenus;
 enum mission_status lmvar mission = _unfinished;
 struct payoutinfo payout;
 
@@ -215,8 +214,6 @@ static void MInit(void)
    Dbg_Log(log_dev, "%s", __func__);
 
    Dlg_MInit();
-
-   pauseinmenus = singleplayer && ACS_GetCVar(sc_sv_pauseinmenus);
 
    soulsfreed = 0;
 

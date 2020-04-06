@@ -442,7 +442,7 @@ sync static void ActDLG_WAIT(struct player *p)
 
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
 
-   p->frozen++;
+   if(singleplayer) FreezeTime();
    P_SetVel(p, 0, 0, 0);
 
    if(textV[0]) ConsoleLog("%.*s", textC, textV);
@@ -452,7 +452,7 @@ sync static void ActDLG_WAIT(struct player *p)
       ACS_Delay(1);
    } while(MemB1_G(VAR_UACT) == UACT_NONE);
 
-   p->frozen--;
+   if(singleplayer) UnfreezeTime();
    GuiAct();
 }
 
@@ -558,7 +558,7 @@ sync static void ActTRM_WAIT(struct player *p)
          timer = INT32_MAX;
       }
 
-      p->frozen++;
+      if(singleplayer) FreezeTime();
       P_SetVel(p, 0, 0, 0);
 
       if(textV[0]) ConsoleLog("%.*s", textC, textV);
@@ -568,7 +568,7 @@ sync static void ActTRM_WAIT(struct player *p)
          ACS_Delay(1);
       } while(MemB1_G(VAR_UACT) == UACT_NONE && --timer >= 0);
 
-      p->frozen--;
+      if(singleplayer) UnfreezeTime();
       GuiAct();
    }
 }

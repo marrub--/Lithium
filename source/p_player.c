@@ -24,12 +24,6 @@
 
 noinit struct player players[_max_players];
 
-/* Static Objects ---------------------------------------------------------- */
-
-static struct {str on, off;} guisnd[gui_max - 1] = {
-   {s"player/cbi/open", s"player/cbi/close"},
-};
-
 /* Static Functions -------------------------------------------------------- */
 
 script static void P_BossWarning(struct player *p);
@@ -97,16 +91,13 @@ reinit:
       {
          P_Inv_PTick(p);
 
-         switch(p->activegui)
-         case gui_cbi: P_CBI_PTick(p);
+         if(p->cbion) P_CBI_PTick(p);
 
          P_Atr_PTick(p);
          P_Wep_PTick(p);
          P_Log_PTick(p);
 
          P_Dat_PTickPst(p); /* Update engine info */
-
-         if(pauseinmenus) ServCallI(sm_PauseTick, p->num);
       }
 
       P_Ren_PTickPst(p);
@@ -229,51 +220,32 @@ struct player *P_PtrFind(i32 tid, i32 ptr)
    else          return nil;
 }
 
-stkcall
-void P_GUI_Close(struct player *p)
-{
-   if(p->activegui != gui_none)
-   {
-      if(pauseinmenus)
-      {
-         ServCallI(sm_SetPaused, false);
-         for_player() p->frozen--;
-      }
-      else
-         p->frozen--;
+stkcall void P_GUI_Close(struct player *p) {
+   Str(guisnd_close, s"player/cbi/close");
 
-      ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
-      p->activegui = gui_none;
+   if(p->cbion) {
+      if(singleplayer) UnfreezeTime();
+      ACS_LocalAmbientSound(guisnd_close, 127);
+      p->cbion = false;
    }
 }
 
-stkcall
-void P_GUI_Use(struct player *p, i32 type)
-{
-   if(p->dead) return;
-   if(p->activegui == gui_none)
-   {
-      if(pauseinmenus)
-      {
-         ServCallI(sm_SetPaused, true);
-         for_player() p->frozen++;
-      }
-      else
-         p->frozen++;
+stkcall void P_GUI_Use(struct player *p) {
+   Str(guisnd_open,  s"player/cbi/open");
+   Str(guisnd_win95, s"player/cbi/win95");
 
-      if(ACS_Random(0, 10000) == 777)
-         ACS_LocalAmbientSound(ss_player_cbi_win95, 127);
-      else
-         ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
-      p->activegui = type;
-   }
-   else if(p->activegui == type)
+   if(p->dead) return;
+
+   if(!p->cbion) {
+      if(singleplayer) FreezeTime();
+      if(ACS_Random(0, 10000) == 777) {
+         ACS_LocalAmbientSound(guisnd_win95, 127);
+      } else {
+         ACS_LocalAmbientSound(guisnd_open, 127);
+      }
+      p->cbion = true;
+   } else {
       P_GUI_Close(p);
-   else
-   {
-      ACS_LocalAmbientSound(guisnd[p->activegui - 1].off, 127);
-      ACS_LocalAmbientSound(guisnd[type - 1].on, 127);
-      p->activegui = type;
    }
 }
 

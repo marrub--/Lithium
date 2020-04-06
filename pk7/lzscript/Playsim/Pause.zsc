@@ -9,40 +9,8 @@
 
 extend class Lith_HERMES;
 
-static void SetPaused(bool on)
-{
-   level.setFrozen(on);
-
-   let sv = Lith_HERMES.Instance();
-   if(sv) sv.m_Paused = on;
-
-   for(int i = 0; i < MAXPLAYERS; i++)
-   {
-      if(!PlayerInGame[i] || Players[i].MO == null) continue;
-
-      PlayerInfo pl = Players[i];
-      if(on) {
-         pl.MO.ViewBob = 0;
-      } else {
-         let mo = Lith_Player(pl.MO);
-         mo.ViewBob = mo ? mo.m_VBob : 1;
-         if(pl.PSprites) pl.PSprites.Tics = pl.PSprites.CurState.Tics;
-      }
-   }
-}
-
-static bool GetPaused()
-{
-   let sv = Lith_HERMES.Instance();
-   if(sv) return sv.m_Paused;
-   return false;
-}
-
-static void PauseTick(int pnum)
-{
-   let sv = Lith_HERMES.Instance();
-   if(sv && sv.m_Paused && PlayerInGame[pnum] && Players[pnum].PSprites)
-      Players[pnum].PSprites.Tics = -1;
+static bool GetPaused() {
+   return level.isFrozen();
 }
 
 /* EOF */

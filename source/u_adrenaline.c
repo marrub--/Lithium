@@ -14,7 +14,7 @@
 #include "u_common.h"
 
 #define UData p->upgrdata.adrenaline
-#define CHARGE_MAX (35 * 30)
+#define CHARGE_MAX (35 * 1)
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -41,11 +41,11 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
       p->logH(4, LC(LANG "LOG_AdrenalineUsed"));
       StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       FadeFlash(255, 255, 255, 0.4, 0.6);
-      InvGive(so_TimeHax2, 1);
+      FreezeTime(true);
 
-      ACS_Delay(36);
+      ACS_Delay(44);
 
-      InvTake(so_TimeHax2, 1);
+      UnfreezeTime(true);
    }
 }
 

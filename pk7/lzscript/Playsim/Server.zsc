@@ -11,7 +11,6 @@
 class Lith_HERMES : EventHandler;
 
 play string m_Obituary;
-play bool m_Paused;
 play name m_DmgType;
 play bool m_DmgWorld;
 play int m_BossLevel;

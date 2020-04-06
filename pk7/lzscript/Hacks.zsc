@@ -19,9 +19,6 @@ class Lith_CameraHax : Actor
    }
 }
 
-class Lith_TimeHax  : PowerTimeFreezer {default {Powerup.Duration   1;}}
-class Lith_TimeHax2 : PowerTimeFreezer {default {Powerup.Duration -80;}}
-
 class Lith_PlayerBox : Actor
 {
    default

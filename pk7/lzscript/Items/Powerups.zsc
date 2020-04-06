@@ -277,13 +277,13 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
 }
 
 class Lith_PowerLightAmp : PowerLightAmp
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
 
 class Lith_PowerInvulnerable : PowerInvulnerable
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
 
 class Lith_PowerIronFeet : PowerIronFeet
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
 
 /* this is a rather terrible hack, but there's actually no other way to give */
 /* the player the special inverted screen color map in the engine... */

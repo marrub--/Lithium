@@ -71,7 +71,7 @@ stkcall bool P_ButtonPressed(struct player *p, i32 bt);
 stkcall optargs(1) bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
 void P_ValidateTID(struct player *p);
 stkcall void P_GUI_Close(struct player *p);
-stkcall void P_GUI_Use(struct player *p, i32 type);
+stkcall void P_GUI_Use(struct player *p);
 optargs(1) i96 P_Scr_Give(struct player *p, i96 score, bool nomul);
 stkcall void P_Scr_Take(struct player *p, i96 score);
 script void P_GiveAllScore(i96 score, bool nomul);
@@ -105,13 +105,6 @@ enum
    pro_male,
    pro_object,
    pro_max,
-};
-
-enum
-{
-   gui_none,
-   gui_cbi,
-   gui_max
 };
 
 /* Data that needs to be kept track of between frames. */
@@ -286,7 +279,7 @@ struct player
    i32 weathertid;
 
    /* GUI */
-   u32 activegui;
+   bool cbion;
    struct cbi cbi;
 
    /* Statistics */

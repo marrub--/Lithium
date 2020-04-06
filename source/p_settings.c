@@ -27,7 +27,6 @@ if(p->num == 0) {
    ServerBool(sv_nofullammo);
    ServerBool(sv_noscoreammo);
    ServerBool(sv_wepdrop);
-   ServerBool(sv_pauseinmenus);
    ServerBool(sv_nobosses);
    ServerBool(sv_nobossdrop);
    ServerInt(Percent, sv_minhealth, 0, 200);

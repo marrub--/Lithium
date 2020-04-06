@@ -1391,7 +1391,6 @@
 "LITH_sv_nofullammo" = "Don't pick up ammo when full";
 "LITH_sv_noscoreammo" = "Don't give score when picking up ammo";
 "LITH_sv_wepdrop" = "Drop weapons from zombies";
-"LITH_sv_pauseinmenus" = "Pause while in menus";
 "LITH_sv_nobosses" = "No phantoms";
 "LITH_sv_nobossdrop" = "Start with phantom rewards";
 "LITH_sv_minhealth" = "Minimum health on map start";
