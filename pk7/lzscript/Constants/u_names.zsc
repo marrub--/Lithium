@@ -26,9 +26,7 @@
  */
 
 
-
-enum Lith_UpgradeName
-{
+enum Lith_UpgradeName {
    UPGR_HeadsUpDisA,
    UPGR_HeadsUpDisC,
    UPGR_HeadsUpDisD,
@@ -86,6 +84,5 @@ enum Lith_UpgradeName
    UPGR_InstaDeath,
    UPGR_MAX
 };
-
 
 /* EOF */

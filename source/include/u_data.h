@@ -162,18 +162,23 @@ struct upgradeinfo {
    stkcall void (*Init)(struct player *, struct upgrade *);
 };
 
-bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr);
-bool P_Upg_Toggle(struct player *p, struct upgrade *upgr);
-void P_Upg_SetOwned(struct player *p, struct upgrade *upgr);
-
 struct upgrade {
    struct upgrade *next, **prev;
 
    struct upgradeinfo const *info;
 
+   u32 agroups;
+
    bool active;
    bool owned;
    bool wasactive; /* for reinitializing on map load */
 };
+
+bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr);
+bool P_Upg_Toggle(struct player *p, struct upgrade *upgr);
+void P_Upg_SetOwned(struct player *p, struct upgrade *upgr);
+
+i32 Upgr_StrToEnum(cstr s);
+cstr Upgr_EnumToStr(i32 n);
 
 #endif

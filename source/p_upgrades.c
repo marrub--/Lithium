@@ -44,12 +44,6 @@ static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 t
 
 /* Extern Functions -------------------------------------------------------- */
 
-i32 Upgr_StrToEnum(cstr s) {
-   #define Name(name) if(faststrcmp(s, #name) == 0) return UPGR_##name;
-   #include "u_names.h"
-   return UPGR_MAX;
-}
-
 void Upgr_MInit(void) {
    for(i32 i = 0; i < UPGR_MAX; i++) {
       struct upgradeinfo *ui = &upgrinfo[i];

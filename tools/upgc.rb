@@ -14,64 +14,51 @@
 
 require_relative "corinth.rb"
 
-def parse_upgrade tks, tok
-   tok = tks.next.expect_after tok, :identi
-   nam = tok.text
+def zstr s
+   s == "\0" ? "\\0" : s
+end
 
-   tok = tks.next.expect_after tok, :identi
-   inf = if tok.text == "N/A" then "0" else '"' + tok.text + '"' end
-
-   scr = tks.peek_or :number, "0"
-
-   pcl = []
-   tks.while_drop :bar do
-      tok = tks.next.expect_after tok, :identi
-      pcl.push tok.text
-   end
-   pcl = pcl.join " | "
-
-   flg = []
-   tok = tks.next.expect_after tok, :identi
-   for c, i in tok.text.chars.each_with_index
-         if c == "-"           then next
-      elsif c == "A" && i == 0 then flg.push c
-      elsif c == "D" && i == 1 then flg.push c
-      elsif c == "U" && i == 2 then flg.push c
-      elsif c == "R" && i == 3 then flg.push c
-      elsif c == "E" && i == 4 then flg.push c
-      else                          tok.raise_kw "funcs" end
-   end
-
-   prf = tks.peek_or :number, "0"
-
-   mul = tks.peek_or :period, "0" do |orig|
-      tok = tks.next.expect_after orig, :number
-      tok.text
-   end
-
-   grp = tks.peek_or :assign, "0" do |orig|
-      tok = tks.next.expect_after orig, :identi
-      "UG_" + tok.text
-   end
-
-   req = tks.peek_or :modulo, "0" do |orig|
-      req = []
-      tok = orig
-      tks.while_drop :bar do
-         tok = tks.next.expect_after tok, :identi
-         req.push "UR_" + tok.text
+def generate_strhash_switch kvp, ind = 1, it = 0
+   res = String.new
+   itx = "   "
+   res.concat "#{itx*ind}switch(#{%w"fst snd thd"[it]}) {\n"
+   for key, nxt in kvp
+      ind += 1
+      z0 = zstr key[0]
+      z1 = zstr key[1]
+      z2 = zstr key[2]
+      z3 = zstr key[3]
+      res.concat "#{itx*ind}case FourCC('#{z0}', '#{z1}', '#{z2}', '#{z3}'):\n"
+      ind += 1
+      if nxt.is_a? String
+         res.concat "#{itx*ind}return #{nxt};\n"
+      else
+         res.concat generate_strhash_switch nxt, ind, it + 1
+         res.concat "#{itx*ind}break;\n"
       end
-      req.join " | "
+      ind -= 2
    end
+   res.concat "#{itx*ind}}\n"
+   res
+end
 
-   {nam: nam, inf: inf, scr: scr, pcl: pcl, prf: prf, grp: grp, req: req,
-    mul: mul, flg: flg}
+def generate_strhasher keys, pfx
+   sorted_keys = {}
+   for key in keys
+      fst = key[0... 4].to_s.ljust 4, "\0"
+      snd = key[4... 8].to_s.ljust 4, "\0"
+      thd = key[8...12].to_s.ljust 4, "\0"
+      sorted_keys[fst]           = {}        unless sorted_keys[fst]
+      sorted_keys[fst][snd]      = {}        unless sorted_keys[fst][snd]
+      sorted_keys[fst][snd][thd] = pfx + key unless sorted_keys[fst][snd][thd]
+   end
+   generate_strhash_switch sorted_keys
 end
 
 common_main do
    tks = tokenize ARGV.shift
 
-   upgrades = []
+   upgrades = {}
    category = ""
 
    loop do
@@ -82,9 +69,57 @@ common_main do
          tok = tks.next.expect_after tok, :identi
          category = "UC_" + tok.text
       when :plus
-         upg = parse_upgrade tks, tok
-         upg[:cat] = category
-         upgrades.push upg
+         tok = tks.next.expect_after tok, :identi
+         una = tok.text
+
+         tok = tks.next.expect_after tok, :identi
+         inf = if tok.text == "N/A" then "0" else '"' + tok.text + '"' end
+
+         scr = tks.peek_or :number, "0"
+
+         pcl = []
+         tks.while_drop :bar do
+            tok = tks.next.expect_after tok, :identi
+            pcl.push tok.text
+         end
+         pcl = pcl.join " | "
+
+         flg = []
+         tok = tks.next.expect_after tok, :identi
+         for c, i in tok.text.chars.each_with_index
+               if c == "-"           then next
+            elsif c == "A" && i == 0 then flg.push c
+            elsif c == "D" && i == 1 then flg.push c
+            elsif c == "U" && i == 2 then flg.push c
+            elsif c == "R" && i == 3 then flg.push c
+            elsif c == "E" && i == 4 then flg.push c
+            else                          tok.raise_kw "funcs" end
+         end
+
+         prf = tks.peek_or :number, "0"
+
+         mul = tks.peek_or :period, "0" do |orig|
+            tok = tks.next.expect_after orig, :number
+            tok.text
+         end
+
+         grp = tks.peek_or :assign, "0" do |orig|
+            tok = tks.next.expect_after orig, :identi
+            "UG_" + tok.text
+         end
+
+         req = tks.peek_or :modulo, "0" do |orig|
+            req = []
+            tok = orig
+            tks.while_drop :bar do
+               tok = tks.next.expect_after tok, :identi
+               req.push "UR_" + tok.text
+            end
+            req.join " | "
+         end
+
+         upgrades[una] = {inf: inf, scr: scr, pcl: pcl, prf: prf, grp: grp,
+                          req: req, mul: mul, flg: flg, cat: category}
       when :eof
          break
       end
@@ -94,29 +129,14 @@ common_main do
 #{generated_header "upgc"}
 /* decompat-out pk7/lzscript/Constants/u_names.zsc */
 
-/* decompat-cut */
-#if defined(Name)
+enum /* Lith_UpgradeName */ {
 #{
 res = String.new
-upgrades.each do |upg| res.concat "Name(" + upg[:nam] + ")\n" end
-res
-}
-#else
-/* decompat-end */
-
-enum /* Lith_UpgradeName */
-{
-#{
-res = String.new
-upgrades.each do |upg| res.concat "   UPGR_#{upg[:nam]},\n" end
+upgrades.each_key do |una| res.concat "   UPGR_#{una},\n" end
 res.concat "   UPGR_MAX"
 res
 }
 };
-
-/* decompat-cut */
-#endif
-/* decompat-end */
 
 /* EOF */
 _end_h_
@@ -124,19 +144,40 @@ _end_h_
 
 #include "u_common.h"
 
-StrEntON
-
 /* Extern Objects ---------------------------------------------------------- */
+
+StrEntON
 
 struct upgradeinfo upgrinfo[UPGR_MAX] = {
 #{
 res = String.new
-for upg in upgrades
-   res.concat %(   {{"#{upg[:nam]}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{upg[:nam]}},\n)
+for una, upg in upgrades
+   res.concat %(   {{"#{una}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{una}},\n)
 end
 res
 }
 };
+
+StrEntOFF
+
+i32 Upgr_StrToEnum(cstr s) {
+   u32 fst = FourCC(s[0], s[1], s[ 2], s[ 3]);
+   u32 snd = FourCC(s[4], s[5], s[ 6], s[ 7]);
+   u32 thd = FourCC(s[8], s[9], s[10], s[11]);
+#{generate_strhasher upgrades.keys, "UPGR_"}
+   return UPGR_MAX;
+}
+
+cstr Upgr_EnumToStr(i32 n) {
+   switch(n) {
+#{
+res = String.new
+upgrades.each_key do |una| res.concat "      case UPGR_#{una}: return \"#{una}\";\n" end
+res
+}
+   }
+   return nil;
+}
 
 /* EOF */
 _end_c_
@@ -146,11 +187,10 @@ _end_c_
 
 #{
 res = String.new
-for upg in upgrades
+for una, upg in upgrades
    unless upg[:flg].empty?
-      nam = upg[:nam]
-      flg = upg[:flg].map do |a| "   #{a}(#{nam})\n" end.join
-      res.concat "Case(" + nam +")\n" + flg
+      flg = upg[:flg].map do |a| "   #{a}(#{una})\n" end.join
+      res.concat "Case(" + una +")\n" + flg
    end
 end
 res
