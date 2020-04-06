@@ -20,10 +20,11 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
 {
    struct gui_txt *st = G_TextBox(g, &CBIState(g)->notebox, 48, 40, p);
 
-   PrintText_str(L(st_edit), s_smallfnt, CR_WHITE, 32,2, 40,0);
-   G_BasicCheckbox(g, &CBIState(g)->noteedit, 39, 40);
+   PrintText_str(L(st_edit), s_smallfnt, CR_WHITE, 32,2, 41,0);
+   if(G_Checkbox(g, CBIState(g)->noteedit, 34, 37))
+      CBIState(g)->noteedit = !CBIState(g)->noteedit;
 
-   if(G_Button(g, LC(LANG "CLEAR"), 16, 48, Pre(btnclear)))
+   if(G_Button(g, LC(LANG "CLEAR"), 16, 50, Pre(btnclear)))
       G_TextBox_Reset(st);
 
    G_ScrollBegin(g, &CBIState(g)->notescr, 15, 63, 280, 160, 30 * countof(p->notes), 240);

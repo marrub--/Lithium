@@ -14,23 +14,20 @@
 #include "common.h"
 #include "p_player.h"
 
-bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
-{
+bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
    struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
 
    if(!a->disabled)
       G_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
 
-   __with(char graphic[30];)
-   {
+   __with(char graphic[30];) {
       if(g->hot == id && pre->hot) G_Prefix(g, graphic, pre, hot);
       else                         G_Prefix(g, graphic, pre, gfx);
 
       if(graphic[0]) PrintSprite(l_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
    }
 
-   if(a->label && pre->font)
-   {
+   if(a->label && pre->font) {
       i32 x, y;
       cstr color;
 
@@ -51,12 +48,10 @@ bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a)
       PrintText(pre->font, CR_WHITE, x,pre->ax, y,pre->ay);
    }
 
-   if(!a->disabled)
-   {
+   if(!a->disabled) {
       bool click = !g->clicklft;
 
-      if(g->slide == id)
-      {
+      if(g->slide == id) {
          click = g->clicklft && !g->old.clicklft;
 
               if(g->slidecount < 2)  click = click || g->slidetime % 20 == 0;

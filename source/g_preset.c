@@ -275,8 +275,8 @@ struct gui_presets const gui_p = {
       .sndup    = s"player/cbi/clickon",
       .snddn    = s"player/cbi/clickoff",
       .external = false,
-      .w        = 10,
-      .h        = 10
+      .w        = 8,
+      .h        = 8
    },
 
    .scrdef = {

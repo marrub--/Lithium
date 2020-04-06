@@ -66,12 +66,6 @@
       } \
    } while(0)
 
-#define G_BasicCheckbox(g, st, ...) \
-   if(G_Checkbox((g), *(st), __VA_ARGS__)) \
-      *(st) = !*(st); \
-   else \
-      (void)0
-
 #define G_TextBox_Reset(st) ((st)->tbptr = 0)
 
 #define G_TextBox_OnTextEntered(st) \
