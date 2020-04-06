@@ -121,7 +121,8 @@ One Armor Interface. A PCB and a set of emplacements on your armor.
 
 One Weapon Modification Device, as its name implies.
 
-One Weapon Refactoring Device, which can perform large modifications on guns.
+One Weapon Refactoring Device, which can perform large modifications
+on guns.
 
 See you.
 

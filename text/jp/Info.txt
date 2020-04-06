@@ -10,6 +10,7 @@
 !!include Info/Enemies.txt
 !!include Info/Extra.txt
 !!include Info/Items.txt
+!!include Info/Mail.txt
 !!include Info/Places.txt
 !!include Info/Upgrades.txt
 !!include Info/Yourself.txt
