@@ -31,19 +31,21 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       if(CBIState(g)->upgrfilter++ >= UC_MAX)
          CBIState(g)->upgrfilter = 0;
 
-   i32 numbtns = p->upgrmax + UC_MAX;
+   i32 numbtns = 0;
    i32 filter  = CBIState(g)->upgrfilter - 1;
 
    /* TODO */
    cstr filter_name = "All";
 
    if(filter != -1) {
-      numbtns = 0;
-      for(i32 i = 0; i < p->upgrmax; i++)
-         if(p->upgrades[i].info->category == filter)
-            numbtns++;
-
       filter_name = LC(upgrcateg[filter]);
+
+      for_upgrade(upgr)
+         if(upgr->info->category == filter)
+            numbtns++;
+   } else {
+      for_upgrade(upgr)
+         numbtns++;
    }
 
    /* TODO */
@@ -54,14 +56,11 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
 
    i32 curcategory = -1;
 
-   for(i32 i = 0, y = -gui_p.btnlist.h; i < p->upgrmax; i++)
-   {
-      struct upgrade *upgr = &p->upgrades[i];
-
-      if(filter != -1)
-         {if(upgr->info->category != filter) continue;}
-      else if(upgr->info->category != curcategory)
-      {
+   i32 y = -gui_p.btnlist.h;
+   for_upgrade(upgr) {
+      if(filter != -1) {
+         if(upgr->info->category != filter) continue;
+      } else if(upgr->info->category != curcategory) {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
          PrintTextChS(LC(upgrcateg[curcategory]));
@@ -74,25 +73,26 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
          continue;
 
       cstr color;
-      if(!upgr->owned && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr))
+      if(!upgr->owned && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)) {
          color = "u";
-      else switch(upgr->info->key)
-      {
-      case UPGR_TorgueMode: color = "g"; break;
-      case UPGR_DarkCannon: color = "m"; break;
-      default:              color = nil; break;
+      } else {
+         switch(upgr->info->key) {
+            case UPGR_TorgueMode: color = "g"; break;
+            case UPGR_DarkCannon: color = "m"; break;
+            default:              color = nil; break;
+         }
       }
 
       struct gui_pre_btn const *preset;
-           if(upgr->active) preset = &gui_p.btnlistactivated;
+      /**/ if(upgr->active) preset = &gui_p.btnlistactivated;
       else if(upgr->owned)  preset = &gui_p.btnlistactive;
       else                  preset = &gui_p.btnlistsel;
 
       char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(G_Button_Id(g, i, name, 0, y, i == *upgrsel, .color = color, .preset = preset))
-         *upgrsel = i;
+      if(G_Button_Id(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = preset))
+         *upgrsel = _i;
    }
 
    G_ScrollEnd(g, &CBIState(g)->upgrscr);

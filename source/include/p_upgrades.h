@@ -24,8 +24,9 @@
    P_Shop_Buy(p, &(upgr)->info->shopdef, (upgr), cLANG "UPGRADE_TITLE_%S", __VA_ARGS__)
 
 #define for_upgrade(name) \
-   for(i32 _i = 0; _i < p->upgrmax; _i++) \
-      __with(struct upgrade *name = &p->upgrades[_i];)
+   for(i32 _i = 0; _i < UPGR_MAX; _i++) \
+      if(p->upgrades[_i].available) \
+         __with(struct upgrade *name = &p->upgrades[_i];)
 
 #define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
 #define CheckRequires_AI  CheckRequires(UR_AI,  cbiupgr[cupg_armorinter])

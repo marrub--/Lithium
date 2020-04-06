@@ -75,31 +75,25 @@ void P_Upg_SetOwned(struct player *p, struct upgrade *upgr) {
 }
 
 script void P_Upg_PInit(struct player *p) {
-   #define CheckPClass() (upgrinfo[i].pclass & p->pclass)
-   for(i32 i = 0; i < UPGR_MAX; i++) if(CheckPClass()) p->upgrmax++;
-
    fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
-   for(i32 i = 0, j = 0; i < UPGR_MAX; i++) {
-      if(CheckPClass()) {
-         struct upgrade *upgr = &p->upgrades[j];
-
-         upgr->info = &upgrinfo[i];
-
-         if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
-            P_Upg_Buy(p, upgr, true, true);
-
-         j++;
+   for(i32 i = 0; i < UPGR_MAX; i++) {
+      if(upgrinfo[i].pclass & p->pclass) {
+         p->upgrades[i].available = true;
       }
    }
 
+   for_upgrade(upgr) {
+      upgr->info = &upgrinfo[_i];
+
+      if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
+         P_Upg_Buy(p, upgr, true, true);
+   }
+
    p->upgrinit = true;
-   #undef CheckPClass
 }
 
 void P_Upg_PQuit(struct player *p) {
-   p->upgrmax = 0;
-
    fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
 
    p->upgrinit = false;

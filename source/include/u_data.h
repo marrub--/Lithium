@@ -169,6 +169,8 @@ struct upgrade {
 
    u32 agroups;
 
+   /* TODO: make flags instead of bools */
+   bool available;
    bool active;
    bool owned;
    bool wasactive; /* for reinitializing on map load */
