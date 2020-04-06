@@ -347,7 +347,6 @@ X(sp_UI_TextBoxBack,       ":UI:TextBoxBack")
 X(sp_UI_bip,               ":UI:bip")
 X(sp_Vignette,             ":Vignette")
 X(sp_ZoomOverlay,          ":ZoomOverlay")
-X(sp_lfiles_BIPInfo,       "lfiles/BIPInfo.txt")
 X(sp_lfiles_Cyberspace,    "lfiles/Cyberspace.txt")
 X(sp_lmusic_DOGS,          "lmusic/DOGS.ogg")
 X(sp_lmusic_Unce,          "lmusic/Unce.ogg")
@@ -406,24 +405,13 @@ X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 /* Text */
 X(st_begin,                  "\Cd[Press any key to begin]") /* TODO */
 X(st_bip_header,             "BIOTIC INFORMATION PANEL ver2.5") /* TODO */
-X(st_class,                  "Class") /* TODO */
 X(st_edit,                   LANG "EDIT")
 X(st_exp,                    "EXP")
-X(st_filter_all,             "Filter: \CjAll") /* TODO */
 X(st_free,                   LANG "FREE")
 X(st_hp,                     "HP")
 X(st_info_categories,        "INFO CATEGORIES") /* TODO */
 X(st_jet,                    "Jet") /* TODO */
 X(st_lv,                     "Lv.")
-X(st_mail_cluster1,          "Cluster1")
-X(st_mail_cluster2,          "Cluster2")
-X(st_mail_cluster3,          "Cluster3")
-X(st_mail_internal,          LANG "MAIL_INTERNAL")
-X(st_mail_intro,             "Intro")
-X(st_mail_notitle,           LANG "MAIL_NOTITLE")
-X(st_mail_phantom,           "Phantom")
-X(st_mail_secret1,           "Secret1")
-X(st_mail_secret2,           "Secret2")
 X(st_mp,                     "MP")
 X(st_next,                   "Next") /* TODO */
 X(st_no_results,             "No results") /* TODO */
@@ -431,10 +419,6 @@ X(st_out_blue,               CrBlue "OUT")
 X(st_out_green,              CrGreen "OUT")
 X(st_out_purple,             CrPurple "Out")
 X(st_out_red,                CrRed "OUT")
-X(st_term_disconnecting,     "Disconnecting...") /* TODO */
-X(st_term_ip,                "<55.883.115.7>") /* TODO */
-X(st_term_sgxline,           "SGXLine r4205") /* TODO */
-X(st_term_use_to_ack,        "Use To Acknowledge") /* TODO */
 
 /* Generated */
 #define LITH_X(n, pc) X(st_##n, #n) X(st_##pc, #pc)

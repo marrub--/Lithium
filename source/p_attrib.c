@@ -67,12 +67,14 @@ static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
 
 void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
+   Str(class, s"Class"); /* TODO */
+
    i32 x = 30, y = 40;
 
    PrintText_str(p->name, s_lmidfont, CR_WHITE, x,1, y,1);
    y += 10;
 
-   StatusInfo(g, x, y += 10, st_class, p->classname);
+   StatusInfo(g, x, y += 10, class, p->classname);
 
    StatusInfo(g, x, y += 10, st_lv, StrParam("%u", p->attr.level));
    StatusInfo(g, x, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));

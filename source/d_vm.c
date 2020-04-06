@@ -256,6 +256,12 @@ script static void TerminalGUI(struct player *p, u32 tact)
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
+   /* TODO */
+   Str(st_term_disconnecting,     s"Disconnecting...");
+   Str(st_term_ip,                s"<55.883.115.7>");
+   Str(st_term_sgxline,           s"SGXLine r4205");
+   Str(st_term_use_to_ack,        s"Use To Acknowledge");
+
    G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst, p);
 

@@ -14,12 +14,12 @@
 #include "u_common.h"
 #include "w_world.h"
 
-StrAry(upgrcateg,
-   [UC_Body] = sLANG "CAT_BODY",
-   [UC_Weap] = sLANG "CAT_WEAP",
-   [UC_Extr] = sLANG "CAT_EXTR",
-   [UC_Down] = sLANG "CAT_DOWN"
-);
+cstr upgrcateg[] = {
+   [UC_Body] = LANG "CAT_BODY",
+   [UC_Weap] = LANG "CAT_WEAP",
+   [UC_Extr] = LANG "CAT_EXTR",
+   [UC_Down] = LANG "CAT_DOWN",
+};
 
 static void GUIUpgradesList(struct gui_state *g, struct player *p)
 {
@@ -34,17 +34,20 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
    i32 numbtns = p->upgrmax + UC_MAX;
    i32 filter  = CBIState(g)->upgrfilter - 1;
 
-   if(filter != -1)
-   {
+   /* TODO */
+   cstr filter_name = "All";
+
+   if(filter != -1) {
       numbtns = 0;
       for(i32 i = 0; i < p->upgrmax; i++)
          if(p->upgrades[i].info->category == filter)
             numbtns++;
 
-      PrintTextFmt("Filter: %S", L(upgrcateg[filter]));
+      filter_name = LC(upgrcateg[filter]);
    }
-   else
-      PrintTextStr(st_filter_all);
+
+   /* TODO */
+   PrintTextFmt("Filter: %s", filter_name);
    PrintText(s_smallfnt, CR_WHITE, 15,1, 215,1);
 
    G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
@@ -61,7 +64,8 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
-         PrintText_str(L(upgrcateg[curcategory]), s_lmidfont, CR_WHITE, g->ox + 40,4, y + g->oy + 1,1);
+         PrintTextChS(LC(upgrcateg[curcategory]));
+         PrintText(s_lmidfont, CR_WHITE, g->ox + 40,4, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
@@ -171,7 +175,8 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    PrintText_str(cost, s_smallfnt, CR_WHITE, 111,1, 30,1);
 
    /* Category */
-   PrintText_str(L(upgrcateg[upgr->info->category]), s_smallfnt, CR_WHITE, 111,1, 40,1);
+   PrintTextChS(LC(upgrcateg[upgr->info->category]));
+   PrintText(s_smallfnt, CR_WHITE, 111,1, 40,1);
 
    /* Effect */
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
