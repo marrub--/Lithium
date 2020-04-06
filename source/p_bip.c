@@ -26,6 +26,8 @@ script static void MailNotify(struct player *p, cstr name) {
 
    p->bip.mailreceived++;
 
+   if(dbgflag & dbgf_bip) return;
+
    ACS_Delay(20);
 
    char remote[64];

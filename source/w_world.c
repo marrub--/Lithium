@@ -274,19 +274,13 @@ static void HInit(void)
    if(mapscleared != 0) Scr_HInit();
 
    /* Cluster messages. */
-   #define Message(cmp, n, name) \
-      if(cmp && !(msgs & (1 << n))) { \
-         for_player() P_BIP_Unlock(p, name); \
-         msgs |= 1 << n; \
-      }
-
-   static i32 msgs;
-
-   Message(Cluster >= 6,  0, "MCluster1");
-   Message(Cluster >= 7,  1, "MCluster2");
-   Message(Cluster == 8,  2, "MCluster3");
-   Message(Cluster == 9,  3, "MSecret1");
-   Message(Cluster == 10, 4, "MSecret2");
+   for_player() {
+      if(Cluster >=  6) P_BIP_Unlock(p, "MCluster1");
+      if(Cluster >=  7) P_BIP_Unlock(p, "MCluster2");
+      if(Cluster ==  8) P_BIP_Unlock(p, "MCluster3");
+      if(Cluster ==  9) P_BIP_Unlock(p, "MSecret1");
+      if(Cluster == 10) P_BIP_Unlock(p, "MSecret2");
+   }
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop) ||
