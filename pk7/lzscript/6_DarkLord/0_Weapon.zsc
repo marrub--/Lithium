@@ -22,9 +22,10 @@ class Lith_RedDagger : Actor {
 
    override int specialMissileHit(Actor th) {
       if(target != th && tracer != th) {
+         double ang = target ? target.angleTo(self) : 0;
          tracer = th;
          th.damageMobj(self, target, 15, 'Magic');
-         th.spawnLineAttackBlood(th.target, pos, 0, 15, 15);
+         th.spawnLineAttackBlood(th.target, pos, ang, 15, 15);
       }
       return 1;
    }
@@ -63,16 +64,20 @@ action(Weapon) void Lith_SubGunFire() {
    A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
    Lith_FireBullets(1, 2, -1, 15, pufftype: "Lith_BulletPuffPainful", tracer_x: -6);
-   A_Recoil(0.07);
 }
 
 action(Weapon) void Lith_SubDagFire() {
    A_StartSound("weapons/subweapon/dagger", lch_altweapon);
    A_AlertMonsters();
    for(int i = 0; i < 3; i++) {
-      A_FireProjectile("Lith_RedDagger", 0, true, frandom(-8,8), frandom(-8,8));
+      A_FireProjectile("Lith_RedDagger", 0, false, frandom(-8,8), frandom(-8,8));
    }
-   A_Recoil(0.07);
+}
+
+action(Weapon) void Lith_SubGrnFire() {
+   A_StartSound("weapons/subweapon/grenade", lch_altweapon);
+   A_AlertMonsters();
+   A_FireProjectile("Lith_RifleGrenade", 0, false, -7, 6);
 }
 
 action(Weapon) void Lith_Sprint() {
@@ -170,7 +175,7 @@ _SubGun:
    TNT1 A 1;
    ARGN B 1 bright Lith_SubGunPreFire;
    ARGN A 1 bright Lith_SubGunFire;
-   TNT1 A 3;
+   TNT1 A 4;
    stop;
 _SubDag:
    ADAG D 1 bright Lith_SubDagFire;
@@ -184,6 +189,9 @@ _SubDag:
    TNT1 A 10;
    stop;
 _SubGrn:
+   AGRN A 1 bright Lith_SubGrnFire;
+   AGRN BCDEFG 1 bright;
+   TNT1 A 11;
    stop;
 _SubMin:
    stop;

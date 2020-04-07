@@ -12,7 +12,8 @@ weapons {
       charge Charge # Rozenkreuzstilette
       armgun ArmGun # Phantasy Star: Nova
 
-      $alias dagger = .weapons.rend.end
+      $alias dagger  = .weapons.rend.end
+      $alias grenade = .weapons.rifle.grenade
    }
 
    \700e {
