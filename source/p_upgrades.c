@@ -102,7 +102,7 @@ void P_Upg_PQuit(struct player *p) {
 void P_Upg_PDeinit(struct player *p) {
    for_upgrade(upgr)
       if(upgr->active)
-         upgr->wasactive = true,  P_Upg_Toggle(p, upgr);
+         upgr->wasactive = true, P_Upg_Toggle(p, upgr);
 }
 
 void P_Upg_PMInit(struct player *p) {

@@ -120,4 +120,9 @@
 == \#LOG_Delivered | \cjItem delivered.
 == \#LOG_NoDeliver | \cgCouldn't deliver item\c-, placing directly in inventory.
 
+== \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1.
+== \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cnSet 2.
+== \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cdSet 3.
+== \#LOG_AutoBuy4 | Auto-bought \cj%i\c- upgrade%s in \cfSet 4.
+
 ## EOF

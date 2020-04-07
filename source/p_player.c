@@ -32,8 +32,7 @@ script static void P_BossText(struct player *p, i32 boss);
 /* Scripts ----------------------------------------------------------------- */
 
 script type("enter")
-static void Sc_PlayerEntry(void)
-{
+static void Sc_PlayerEntry(void) {
    script  extern void P_Wep_PTickPre(struct player *p);
    stkcall extern void P_Dat_PTickPre(struct player *p);
    stkcall static void P_Scr_PTickPre(struct player *p);
@@ -45,6 +44,7 @@ static void Sc_PlayerEntry(void)
    stkcall static void P_Atr_PTick   (struct player *p);
    script  extern void P_Upg_PTickPst(struct player *p);
    stkcall extern void P_Ren_PTickPst(struct player *p);
+   stkcall static void P_Aug_PTick   (struct player *p);
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -93,6 +93,8 @@ reinit:
 
          if(p->cbion) P_CBI_PTick(p);
 
+         P_Aug_PTick(p);
+
          P_Atr_PTick(p);
          P_Wep_PTick(p);
          P_Log_PTick(p);
@@ -133,8 +135,7 @@ reinit:
 }
 
 script type("death")
-static void Sc_PlayerDeath(void)
-{
+static void Sc_PlayerDeath(void) {
    i32 fun = GetFun();
 
    if(fun & lfun_final) SetFun(fun & ~lfun_final);
@@ -173,20 +174,17 @@ static void Sc_PlayerDeath(void)
 }
 
 script type("respawn")
-static void Sc_PlayerRespawn(void)
-{
+static void Sc_PlayerRespawn(void) {
    LocalPlayer->reinit = true;
 }
 
 script type("return")
-static void Sc_PlayerReturn(void)
-{
+static void Sc_PlayerReturn(void) {
    LocalPlayer->reinit = true;
 }
 
 script type("disconnect")
-static void Sc_PlayerDisconnect(void)
-{
+static void Sc_PlayerDisconnect(void) {
    struct player *p = LocalPlayer;
 
    P_BIP_PQuit(p);
@@ -198,9 +196,7 @@ static void Sc_PlayerDisconnect(void)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
-cstr P_Discrim(i32 pclass)
-{
+stkcall cstr P_Discrim(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return "Stan";
    case pcl_cybermage: return "Jem";
@@ -213,8 +209,7 @@ cstr P_Discrim(i32 pclass)
    return "Mod";
 }
 
-struct player *P_PtrFind(i32 tid, i32 ptr)
-{
+struct player *P_PtrFind(i32 tid, i32 ptr) {
    i32 pnum = PtrPlayerNumber(tid, ptr);
    if(pnum >= 0) return &players[pnum];
    else          return nil;
@@ -249,8 +244,7 @@ stkcall void P_GUI_Use(struct player *p) {
    }
 }
 
-i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
-{
+i96 P_Scr_Give(struct player *p, i96 score, bool nomul) {
    /* Could cause division by zero */
    if(score == 0)
       return 0;
@@ -294,9 +288,7 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul)
    return score;
 }
 
-stkcall
-void P_Scr_Take(struct player *p, i96 score)
-{
+stkcall void P_Scr_Take(struct player *p, i96 score) {
    if(p->score - score >= 0) {
       p->scoreused += score;
       p->score     -= score;
@@ -309,16 +301,14 @@ void P_Scr_Take(struct player *p, i96 score)
    p->scoreaccumtime = 0;
 }
 
-script void P_GiveAllScore(i96 score, bool nomul)
-{
+script void P_GiveAllScore(i96 score, bool nomul) {
    for_player() {
       p->setActivator();
       P_Scr_Give(p, score, nomul);
    }
 }
 
-script void P_GiveAllEXP(u64 amt)
-{
+script void P_GiveAllEXP(u64 amt) {
    for_player() {
       p->setActivator();
       P_Lv_GiveEXP(p, amt);
@@ -327,18 +317,14 @@ script void P_GiveAllEXP(u64 amt)
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static void P_BossWarning(struct player *p)
-{
+script static void P_BossWarning(struct player *p) {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 
-script
-static void P_BossText(struct player *p, i32 boss)
-{
+script static void P_BossText(struct player *p, i32 boss) {
    if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
       return;
    }
@@ -404,9 +390,7 @@ static void P_BossText(struct player *p, i32 boss)
    }
 }
 
-stkcall
-static void AttrRGE(struct player *p)
-{
+stkcall static void AttrRGE(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->health < p->oldhealth)
@@ -415,9 +399,7 @@ static void AttrRGE(struct player *p)
    p->rage = lerpk(p->rage, 0, 0.02);
 }
 
-stkcall
-static void AttrCON(struct player *p)
-{
+stkcall static void AttrCON(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->mana > p->oldmana)
@@ -426,9 +408,7 @@ static void AttrCON(struct player *p)
    p->rage = lerpk(p->rage, 0, 0.03);
 }
 
-stkcall
-static void P_Atr_PTick(struct player *p)
-{
+stkcall static void P_Atr_PTick(struct player *p) {
    if(Paused) return;
 
    k32  acc = p->attr.attrs[at_acc] / 150.0;
@@ -438,8 +418,8 @@ static void P_Atr_PTick(struct player *p)
    i32 stmt = 75 - stm;
 
    switch(p->pclass) {
-   case pcl_marine:    AttrRGE(p); break;
-   case pcl_cybermage: AttrCON(p); break;
+      case pcl_marine:    AttrRGE(p); break;
+      case pcl_cybermage: AttrCON(p); break;
    }
 
    p->maxhealth = p->spawnhealth + strn;
@@ -451,17 +431,35 @@ static void P_Atr_PTick(struct player *p)
       p->health = p->health + 1;
 }
 
-stkcall
-static void P_Scr_PTickPre(struct player *p)
-{
-   if(!p->scoreaccumtime || p->score < p->old.score)
-   {
+stkcall static void P_Scr_PTickPre(struct player *p) {
+   if(!p->scoreaccumtime || p->score < p->old.score) {
       p->scoreaccum = 0;
       p->scoreaccumtime = 0;
    }
 
-        if(p->scoreaccumtime > 0) p->scoreaccumtime--;
+   /**/ if(p->scoreaccumtime > 0) p->scoreaccumtime--;
    else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
+}
+
+stkcall static void P_Aug_PTick(struct player *p) {
+   for(i32 i = 0; i < 4; i++) {
+      i32 total = 0;
+
+      for_upgrade(upgr) {
+         if(get_bit(upgr->agroups, i) && get_bit(p->autobuy, i)) {
+            if(P_Upg_Buy(p, upgr, true)) {
+               total++;
+               P_Upg_Toggle(p, upgr);
+            }
+         }
+      }
+
+      if(total) {
+         Str(snd, s"player/cbi/auto/buy");
+         ACS_LocalAmbientSound(snd, 127);
+         p->logH(1, LanguageC(LANG "LOG_AutoBuy%i", i + 1), total, total != 1 ? "s" : "");
+      }
+   }
 }
 
 /* Scripts ----------------------------------------------------------------- */
