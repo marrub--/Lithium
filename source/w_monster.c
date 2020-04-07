@@ -141,10 +141,10 @@ static void BaseMonsterLevel(dmon_t *m)
    bias += ACS_GetCVar(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
-   if(m->mi->flags & mif_angelic) {
+   if(get_bit(m->mi->flags, mif_angelic)) {
       m->rank  = 7;
       m->level = 7 + rlv * bias;
-   } else if(m->mi->flags & mif_dark) {
+   } else if(get_bit(m->mi->flags, mif_dark)) {
       m->rank  = 6;
       m->level = 6 + rlv * bias;
    } else if(GetFun() & lfun_ragnarok) {
@@ -378,8 +378,8 @@ void Sc_MonsterInfo(void)
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
 
-      if(mi->flags & mif_full) init = cname == mi->name;
-      else                     init = strstr_str(cname, mi->name);
+      if(get_bit(mi->flags, mif_full)) init = cname == mi->name;
+      else                             init = strstr_str(cname, mi->name);
 
       if(init) {
          ifauto(dmon_t *, m, AllocDmon()) {

@@ -148,7 +148,7 @@ void P_Wep_PTickPre(struct player *p)
       }
 
       /* Auto-reload. */
-      if(p->autoreload && wep->ammotype & AT_NMag && !(info->flags & wf_magic))
+      if(p->autoreload && wep->ammotype & AT_NMag && !get_bit(info->flags, wf_magic))
       {
          if(wep->autoreload >= 35 * 3)
             ServCallI(sm_AutoReload, p->num, info->classname);

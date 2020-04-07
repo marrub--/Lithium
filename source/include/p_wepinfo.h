@@ -28,7 +28,7 @@ enum {
 };
 
 enum {
-   wf_magic = 1 << 0,
+   wf_magic,
 };
 
 struct weaponinfo {

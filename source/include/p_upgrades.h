@@ -28,7 +28,7 @@
       if(p->upgrades[_i].available) \
          __with(struct upgrade *name = &p->upgrades[_i];)
 
-#define CheckRequires(a1, a2) (upgr->info->requires & a1 && !(a2))
+#define CheckRequires(a1, a2) (get_bit(upgr->info->requires, a1) && !(a2))
 #define CheckRequires_AI  CheckRequires(UR_AI,  cbiupgr[cupg_armorinter])
 #define CheckRequires_WMD CheckRequires(UR_WMD, cbiupgr[cupg_weapninter])
 #define CheckRequires_WRD CheckRequires(UR_WRD, cbiupgr[cupg_weapninte2])

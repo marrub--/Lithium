@@ -357,7 +357,7 @@ script void P_Init(struct player *p) {
    if(dbgflag & dbgf_items) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & p->pclass && !(info->flags & wf_magic))
+         if(info->classname != snil && info->pclass & p->pclass && !get_bit(info->flags, wf_magic))
             InvGive(info->classname, 1);
       }
    }

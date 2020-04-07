@@ -113,7 +113,7 @@ common_main do
             tok = orig
             tks.while_drop :bar do
                tok = tks.next.expect_after tok, :identi
-               req.push "UR_" + tok.text
+               req.push "dst_bit(UR_" + tok.text + ")"
             end
             req.join " | "
          end

@@ -25,7 +25,7 @@ static void HUD_Ammo(struct player *p)
    str typegfx = snil;
 
    if(wep->ammotype & AT_NMag) type |= 1;
-   if(wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic)) type |= 2;
+   if(wep->ammotype & AT_Ammo && !get_bit(wep->info->flags, wf_magic)) type |= 2;
 
    if(type) PrintSprite(sp_HUD_C_SplitFront, 320,2, 238,2);
 

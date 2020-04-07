@@ -23,7 +23,7 @@ def ch_stuff monsters, expscr, mtype, match
                      scr:     "Score_" + expscr,
                      mtype:   mtype,
                      match:   cr + match,
-                     flags:   %w"mif_full",
+                     flags:   %w"dst_bit(mif_full)",
                      exclude: true})
    end
 end
@@ -67,7 +67,7 @@ common_main do
          if tks.peek.type == :identi
             tks.while_drop :bar do
                tok = tks.next.expect_after tok, :identi
-               flags.push tok.text
+               flags.push "dst_bit(" + tok.text + ")"
             end
          end
       when :assign
@@ -116,7 +116,7 @@ enum {
 #{
 res = String.new
 for enum, i in enums.each_with_index
-   res.concat "   #{enum} = 1 << #{i},\n"
+   res.concat "   #{enum} = #{i},\n"
 end
 res
 }

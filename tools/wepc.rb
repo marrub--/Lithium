@@ -38,7 +38,7 @@ common_main do
          if tks.peek.type == :identi
             tks.while_drop :bar do
                tok = tks.next.expect_after tok, :identi
-               wf.push tok.text
+               wf.push "dst_bit(" + tok.text + ")"
             end
          end
       when :plus

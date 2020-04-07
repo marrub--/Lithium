@@ -24,7 +24,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr)
 
    str typegfx = snil;
 
-   bool has_ammo = (wep->ammotype & AT_Ammo && !(wep->info->flags & wf_magic));
+   bool has_ammo = (wep->ammotype & AT_Ammo && !get_bit(wep->info->flags, wf_magic));
    bool has_nmag = wep->ammotype & AT_NMag;
 
    if(has_ammo && has_nmag) {
