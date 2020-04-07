@@ -104,20 +104,30 @@
 == \#LOG_BossHear3 | \cgYou feel intense pain throughout your whole body...
 
 ## Auto-groups ---------------------------------------------------------------|
-== \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1.
-== \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cnSet 2.
-== \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cdSet 3.
-== \#LOG_AutoBuy4 | Auto-bought \cj%i\c- upgrade%s in \cfSet 4.
+== \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1\c-.
+== \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cnSet 2\c-.
+== \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cdSet 3\c-.
+== \#LOG_AutoBuy4 | Auto-bought \cj%i\c- upgrade%s in \cfSet 4\c-.
 
-== \#LOG_GroupBuy1 | Bought \c%c%i/%i\c- upgrade%s in \caSet 1.
-== \#LOG_GroupBuy2 | Bought \c%c%i/%i\c- upgrade%s in \cnSet 2.
-== \#LOG_GroupBuy3 | Bought \c%c%i/%i\c- upgrade%s in \cdSet 3.
-== \#LOG_GroupBuy4 | Bought \c%c%i/%i\c- upgrade%s in \cfSet 4.
+== \#LOG_GroupBuy1 | Bought \c%c%i/%i\c- upgrade%s in \caSet 1\c-.
+== \#LOG_GroupBuy2 | Bought \c%c%i/%i\c- upgrade%s in \cnSet 2\c-.
+== \#LOG_GroupBuy3 | Bought \c%c%i/%i\c- upgrade%s in \cdSet 3\c-.
+== \#LOG_GroupBuy4 | Bought \c%c%i/%i\c- upgrade%s in \cfSet 4\c-.
 
-== \#LOG_GroupBuy5 | No items to buy in \caSet 1.
-== \#LOG_GroupBuy6 | No items to buy in \cnSet 2.
-== \#LOG_GroupBuy7 | No items to buy in \cdSet 3.
-== \#LOG_GroupBuy8 | No items to buy in \cfSet 4.
+== \#LOG_GroupBuy5 | No items to buy in \caSet 1\c-.
+== \#LOG_GroupBuy6 | No items to buy in \cnSet 2\c-.
+== \#LOG_GroupBuy7 | No items to buy in \cdSet 3\c-.
+== \#LOG_GroupBuy8 | No items to buy in \cfSet 4\c-.
+
+== \#LOG_GroupToggle1 | Toggled \caSet 1\c-.
+== \#LOG_GroupToggle2 | Toggled \cnSet 2\c-.
+== \#LOG_GroupToggle3 | Toggled \cdSet 3\c-.
+== \#LOG_GroupToggle4 | Toggled \cfSet 4\c-.
+
+== \#LOG_GroupToggle5 | No items to toggle in \caSet 1\c-.
+== \#LOG_GroupToggle6 | No items to toggle in \cnSet 2\c-.
+== \#LOG_GroupToggle7 | No items to toggle in \cdSet 3\c-.
+== \#LOG_GroupToggle8 | No items to toggle in \cfSet 4\c-.
 
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | Press "%jS" to open the menu.

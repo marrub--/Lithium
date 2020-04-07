@@ -567,11 +567,34 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
 
       ACS_LocalAmbientSound(snd, 127);
 
-      i32 fmt;
-      if(total) fmt = grp + 1;
-      else      fmt = grp + 5;
+      i32 fmt = total ? grp + 1 : grp + 5;
 
       p->logH(1, LanguageC(LANG "LOG_GroupBuy%i", fmt), cr, success, total, success != 1 ? "s" : "");
+   }
+}
+
+script_str type("net") ext("ACS") addr("Lith_KeyToggleAutoGroup")
+void Sc_KeyToggleAutoGroup(i32 grp) {
+   Str(snd, s"player/cbi/auto/toggle");
+
+   if(grp < 0 || grp >= 4) {
+      return;
+   }
+
+   with_player(LocalPlayer) {
+      i32 total = 0;
+
+      for_upgrade(upgr) {
+         if(upgr->owned && get_bit(upgr->agroups, grp)) {
+            total++;
+            P_Upg_Toggle(p, upgr);
+         }
+      }
+
+      if(total) ACS_LocalAmbientSound(snd, 127);
+
+      i32 fmt = total ? grp + 1 : grp + 5;
+      p->logH(1, LanguageC(LANG "LOG_GroupToggle%i", fmt));
    }
 }
 
