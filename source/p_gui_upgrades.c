@@ -233,6 +233,15 @@ void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)
 {
    GUIUpgradesList(g, p);
 
+   if(CBIState(g)->upgrsel == UPGR_MAX) {
+      for_upgrade(upgr) {
+         if(upgr->available) {
+            CBIState(g)->upgrsel = _i;
+            break;
+         }
+      }
+   }
+
    struct upgrade *upgr = &p->upgrades[CBIState(g)->upgrsel];
 
    GUIUpgradeDescription (g, p, upgr);

@@ -137,7 +137,7 @@ void P_CBI_PMinit(struct player *p) {
 
    G_Init(&p->cbi.guistate, &p->cbi.st);
 
-   p->cbi.st.upgrselold = -1;
+   p->cbi.st.upgrsel = UPGR_MAX;
 
    p->cbi.oldtheme = -1;
 

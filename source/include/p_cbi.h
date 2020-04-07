@@ -89,7 +89,6 @@ struct cbi
       struct gui_scr shopscr;
 
       i32            upgrsel;
-      i32            upgrselold;
       i32            upgrfilter;
       struct gui_scr upgrscr;
 
