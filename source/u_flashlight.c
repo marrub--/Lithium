@@ -86,16 +86,15 @@ stkcall void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
 
    i32 bat_life = p->getCVarI(sc_light_battery) * 35;
 
-   if(bat_life > 0) {
+   if(bat_life > 0 && UData.battery < bat_life) {
       i32 y = UData.battery / (k32)bat_life * 8;
 
       Str(bar,  s":HUD:Battery");
       Str(back, s":HUD:BatteryOutline");
 
-      SetSize(320, 240);
-      PrintSprite(back, 90,1, 238,2);
-      SetClip(92, 236 - y, 2, 8);
-      PrintSprite(bar, 92,1, 236,2);
+      PrintSprite(back, 0,1, 240,2);
+      SetClip(2, 238 - y, 2, 8);
+      PrintSprite(bar, 2,1, 238,2);
       ClearClip();
    }
 }
