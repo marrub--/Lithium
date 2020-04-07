@@ -25,9 +25,9 @@
 +HeadsUpDisW HeadsUpDisp pW \AD-R- 1 .-0.05 =HUD
 
 # All classes
++Flashlight N/A          gA \-DURE
 +Zoom       N/A          gA \-DUR-
 +VitalScan  VitalScanner gA \--UR- 2
-+Flashlight N/A          gA \-DURE
 
 # Outcasts
 +ReflexWetw ReflexWetw gO \ADU-- 5 .-0.05
