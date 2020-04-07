@@ -1394,6 +1394,11 @@
 "LITH_sv_nobosses" = "No phantoms";
 "LITH_sv_nobossdrop" = "Start with phantom rewards";
 "LITH_sv_minhealth" = "Minimum health on map start";
+"LITH_stx_autogroups" = "Auto-groups";
+"LITH_stx_autobuy_1" = "Automatically buy \caSet 1";
+"LITH_stx_autobuy_2" = "Automatically buy \cnSet 2";
+"LITH_stx_autobuy_3" = "Automatically buy \cdSet 3";
+"LITH_stx_autobuy_4" = "Automatically buy \cfSet 4";
 "LITH_stx_gui" = "GUI";
 "LITH_gui_xmul" = "Horizontal cursor speed";
 "LITH_gui_ymul" = "Vertical cursor speed";
@@ -1504,7 +1509,7 @@
 "LITH_EQUIP" = "Equip";
 "LITH_EMPTY" = "<empty>";
 "LITH_NOTE_FMT" = "\cmNote %i";
-"LITH_AUTOGROUPS" = "Active Auto-Groups";
+"LITH_AUTOGROUPS" = "Active Auto-groups";
 "LITH_CAT_BODY" = "\cnBody";
 "LITH_CAT_WEAP" = "\caWeapon";
 "LITH_CAT_EXTR" = "\cfExtra";
@@ -1834,6 +1839,15 @@
 "LITH_CTRL_OPENCBI" = "Open CBI";
 "LITH_CTRL_ZOOMIN" = "Zoom In";
 "LITH_CTRL_ZOOMOUT" = "Zoom Out";
+"LITH_CTRL_AUTOGROUPS" = "Lithium Auto-groups";
+"LITH_CTRL_BUYGRP1" = "Buy \caSet 1";
+"LITH_CTRL_BUYGRP2" = "Buy \cnSet 2";
+"LITH_CTRL_BUYGRP3" = "Buy \cdSet 3";
+"LITH_CTRL_BUYGRP4" = "Buy \cfSet 4";
+"LITH_CTRL_TOGGRP1" = "Toggle \caSet 1";
+"LITH_CTRL_TOGGRP2" = "Toggle \cnSet 2";
+"LITH_CTRL_TOGGRP3" = "Toggle \cdSet 3";
+"LITH_CTRL_TOGGRP4" = "Toggle \cfSet 4";
 "LITH_CLASS_MARINE" = "Marine";
 "LITH_CLASS_MARINE_Nam" = "Stan Blazkowicz";
 "LITH_CLASS_MARINE_Col" = "\c[Lith_Green]";

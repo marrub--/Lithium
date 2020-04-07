@@ -113,6 +113,13 @@
 == \#sv_nobossdrop   | Start with phantom rewards
 == \#sv_minhealth    | Minimum health on map start
 
+== \#stx_autogroups | Auto-groups
+
+== \#stx_autobuy_1 | Automatically buy \caSet 1
+== \#stx_autobuy_2 | Automatically buy \cnSet 2
+== \#stx_autobuy_3 | Automatically buy \cdSet 3
+== \#stx_autobuy_4 | Automatically buy \cfSet 4
+
 == \#stx_gui | GUI
 
 == \#gui_xmul   | Horizontal cursor speed

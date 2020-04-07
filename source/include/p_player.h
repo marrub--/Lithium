@@ -212,6 +212,8 @@ struct player
    struct upgr_data upgrdata;
    struct upgrade   upgrades[UPGR_MAX];
 
+   u32 autobuy;
+
    bool upgrinit;
 
    /* Inventory */

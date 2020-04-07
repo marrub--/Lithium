@@ -216,6 +216,16 @@ This one isn't even remotely fair.
 == \#CTRL_ZOOMIN  | Zoom In
 == \#CTRL_ZOOMOUT | Zoom Out
 
+== \#CTRL_AUTOGROUPS | Lithium Auto-groups
+== \#CTRL_BUYGRP1    | Buy \caSet 1
+== \#CTRL_BUYGRP2    | Buy \cnSet 2
+== \#CTRL_BUYGRP3    | Buy \cdSet 3
+== \#CTRL_BUYGRP4    | Buy \cfSet 4
+== \#CTRL_TOGGRP1    | Toggle \caSet 1
+== \#CTRL_TOGGRP2    | Toggle \cnSet 2
+== \#CTRL_TOGGRP3    | Toggle \cdSet 3
+== \#CTRL_TOGGRP4    | Toggle \cfSet 4
+
 ## Description characters:
 ## 01234567890123456789012345
 ## 01234567890123456789012345

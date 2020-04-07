@@ -17,6 +17,9 @@ enum {
 };
 
 #if defined(FromUI)
+#define GetAutoBuy(n)  get_bit(p->autobuy, n)
+#define TogAutoBuy(n) (tog_bit(p->autobuy, n), P_Data_Save(p))
+
 Category(stx_gameplay);
 Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
 if(p->num == 0) {
@@ -31,6 +34,12 @@ if(p->num == 0) {
    ServerBool(sv_nobossdrop);
    ServerInt(Percent, sv_minhealth, 0, 200);
 }
+
+Category(stx_autogroups);
+CBox(stx_autobuy_1, GetAutoBuy(0), TogAutoBuy(0));
+CBox(stx_autobuy_2, GetAutoBuy(1), TogAutoBuy(1));
+CBox(stx_autobuy_3, GetAutoBuy(2), TogAutoBuy(2));
+CBox(stx_autobuy_4, GetAutoBuy(3), TogAutoBuy(3));
 
 Category(stx_gui);
 Float(Times, gui_xmul, 0.1, 2.0);
@@ -145,16 +154,17 @@ Text(stx_postgame_2);
 Text(stx_postgame_3);
 Text(stx_postgame_4);
 
-#undef Category
 #undef Bool
+#undef CBox
+#undef Category
+#undef Enum
 #undef Float
+#undef FromUI
 #undef Int
 #undef ServerBool
 #undef ServerFloat
 #undef ServerInt
-#undef Enum
 #undef Text
-#undef FromUI
 
 #else
 
@@ -185,6 +195,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
 
 #define Category(...)    y += 20
 #define Bool(...)        y += 10
+#define CBox(...)        y += 10
 #define Float(...)       y += 10
 #define Int(...)         y += 10
 #define ServerBool(...)  y += 10
@@ -219,6 +230,16 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
          /* TODO */ \
          if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(sc_##cvar, !on); \
+      } \
+      y += 10; \
+   } while(0)
+
+#define CBox(name, fn_get, fn_set) \
+   do { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         Label(name); \
+         if(G_Checkbox(g, (fn_get), 280 - gui_p.cbxsmall.w, y, Pre(cbxsmall))) \
+            (fn_set); \
       } \
       y += 10; \
    } while(0)

@@ -11,6 +11,11 @@
  * ---------------------------------------------------------------------------|
  */
 
+#define get_bit(x, y) ((x) &   (1 << (y)))
+#define set_bit(x, y) ((x) |=  (1 << (y)))
+#define dis_bit(x, y) ((x) &= ~(1 << (y)))
+#define tog_bit(x, y) ((x) ^=  (1 << (y)))
+
 #define max(x, y) ((x) < (y) ? (y) : (x))
 #define min(x, y) ((x) < (y) ? (x) : (y))
 #define minmax(x, mi, ma) (min(max(x, mi), ma))

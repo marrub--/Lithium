@@ -59,9 +59,10 @@ script static void Save_agrp(struct savefile *save) {
       }
    }
 
-   Save_WriteChunk(save, Ident_agrp, SaveV_agrp, 1 + groupnum * 13);
+   Save_WriteChunk(save, Ident_agrp, SaveV_agrp, 2 + groupnum * 13);
 
-   fputc(groupnum & 0xFF, save->fp);
+   fputc(save->p->autobuy & 0xFF, save->fp);
+   fputc(groupnum         & 0xFF, save->fp);
 
    for(i32 i = 0; i < UPGR_MAX; i++) {
       u32 groups = save->p->upgrades[i].agroups;
@@ -73,7 +74,8 @@ script static void Save_agrp(struct savefile *save) {
 }
 
 script static void Load_agrp(struct savefile *save, struct savechunk *chunk) {
-   u32 groupnum = fgetc(save->fp);
+   save->p->autobuy = fgetc(save->fp);
+   u32 groupnum     = fgetc(save->fp);
 
    for(i32 i = 0; i < groupnum; i++) {
       char name[12];

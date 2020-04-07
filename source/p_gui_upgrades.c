@@ -213,17 +213,12 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
    for(i32 i = 0; i < 4; i++) {
       static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};
 
-      u32  mask      = 1 << i;
-      bool has_group = upgr->agroups & mask;
-
       ACS_BeginPrint();
       ACS_PrintChar('1' + i);
       PrintText(s_lmidfont, crs[i], 220 + i * 20,2, 215,1);
 
-      if(G_Checkbox_Id(g, i, has_group, 221 + i * 20, 211)) {
-         if(has_group) upgr->agroups &= ~mask;
-         else          upgr->agroups |=  mask;
-
+      if(G_Checkbox_Id(g, i, get_bit(upgr->agroups, i), 221 + i * 20, 211)) {
+         tog_bit(upgr->agroups, i);
          P_Data_Save(p);
       }
    }

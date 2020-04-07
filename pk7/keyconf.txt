@@ -7,23 +7,38 @@
 // ---------------------------------------------------------------------------|
 
 // Key Sections --------------------------------------------------------------|
-addkeysection "$LITH_CTRL_ACTIONS" Lithium
+addkeysection "$LITH_CTRL_ACTIONS" Lith_Actions
+
 addmenukey "$LITH_CTRL_OPENCBI" lith_k_opencbi
 addmenukey "$CNTRLMNU_USER4"    +lith_k_qact
 addmenukey "$LITH_CTRL_LIGHT"   lith_k_light
-addmenukey "$LITH_CTRL_ZOOMIN"  lith_k_zoomin
-addmenukey "$LITH_CTRL_ZOOMOUT" lith_k_zoomout
+addmenukey "$LITH_CTRL_ZOOMIN"  "lith_k_zoom 30"
+addmenukey "$LITH_CTRL_ZOOMOUT" "lith_k_zoom -60"
 addmenukey "$LITH_CTRL_GLARE"   lith_k_glare
+
+addkeysection "$LITH_CTRL_AUTOGROUPS" Lith_AutoGroups
+
+addmenukey "$LITH_CTRL_BUYGRP1" "lith_k_buygrp 1"
+addmenukey "$LITH_CTRL_BUYGRP2" "lith_k_buygrp 2"
+addmenukey "$LITH_CTRL_BUYGRP3" "lith_k_buygrp 3"
+addmenukey "$LITH_CTRL_BUYGRP4" "lith_k_buygrp 4"
+
+addmenukey "$LITH_CTRL_TOGGRP1" "lith_k_toggrp 1"
+addmenukey "$LITH_CTRL_TOGGRP2" "lith_k_toggrp 2"
+addmenukey "$LITH_CTRL_TOGGRP3" "lith_k_toggrp 3"
+addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 4"
 
 // Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 
 alias lith_k_light "pukename Lith_KeyLight"
 
-alias lith_k_zoomin  "pukename Lith_KeyZoom 30"
-alias lith_k_zoomout "pukename Lith_KeyZoom -60"
+alias lith_k_zoom "pukename Lith_KeyZoom %1"
 
 alias lith_k_glare "pukename Lith_KeyGlare"
+
+alias lith_k_buygrp "pukename Lith_KeyBuyAutoGroup %1"
+alias lith_k_toggrp "pukename Lith_KeyToggleAutoGroup %1"
 
 alias +lith_k_qact "+user4"
 alias -lith_k_qact "-user4"
