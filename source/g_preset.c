@@ -261,7 +261,8 @@ struct gui_presets const gui_p = {
       .snddn    = s"player/cbi/clickoff",
       .external = false,
       .w        = 10,
-      .h        = 10
+      .h        = 10,
+      .cx = 0, .cy = 0
    },
 
    .cbxsmall = {
@@ -276,7 +277,8 @@ struct gui_presets const gui_p = {
       .snddn    = s"player/cbi/clickoff",
       .external = false,
       .w        = 8,
-      .h        = 8
+      .h        = 8,
+      .cx = -1, .cy = -1
    },
 
    .scrdef = {

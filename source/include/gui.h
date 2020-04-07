@@ -175,6 +175,8 @@ struct gui_pre_cbx
    bool external;
    i32  w;
    i32  h;
+   i32  cx;
+   i32  cy;
 };
 
 struct gui_arg_cbx
