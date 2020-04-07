@@ -103,6 +103,22 @@
 == \#LOG_BossHear2 | \cgSomething is calling out to you.
 == \#LOG_BossHear3 | \cgYou feel intense pain throughout your whole body...
 
+## Auto-groups ---------------------------------------------------------------|
+== \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1.
+== \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cnSet 2.
+== \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cdSet 3.
+== \#LOG_AutoBuy4 | Auto-bought \cj%i\c- upgrade%s in \cfSet 4.
+
+== \#LOG_GroupBuy1 | Bought \c%c%i/%i\c- upgrade%s in \caSet 1.
+== \#LOG_GroupBuy2 | Bought \c%c%i/%i\c- upgrade%s in \cnSet 2.
+== \#LOG_GroupBuy3 | Bought \c%c%i/%i\c- upgrade%s in \cdSet 3.
+== \#LOG_GroupBuy4 | Bought \c%c%i/%i\c- upgrade%s in \cfSet 4.
+
+== \#LOG_GroupBuy5 | No items to buy in \caSet 1.
+== \#LOG_GroupBuy6 | No items to buy in \cnSet 2.
+== \#LOG_GroupBuy7 | No items to buy in \cdSet 3.
+== \#LOG_GroupBuy8 | No items to buy in \cfSet 4.
+
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | Press "%jS" to open the menu.
 == \#LOG_MailRecv  | Mail received from <\cj%s\c->.
@@ -119,10 +135,5 @@
 == \#LOG_Bought    | Bought %s
 == \#LOG_Delivered | \cjItem delivered.
 == \#LOG_NoDeliver | \cgCouldn't deliver item\c-, placing directly in inventory.
-
-== \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1.
-== \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cnSet 2.
-== \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cdSet 3.
-== \#LOG_AutoBuy4 | Auto-bought \cj%i\c- upgrade%s in \cfSet 4.
 
 ## EOF

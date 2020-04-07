@@ -535,6 +535,46 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
    }
 }
 
+script_str type("net") ext("ACS") addr("Lith_KeyBuyAutoGroup")
+void Sc_KeyBuyAutoGroup(i32 grp) {
+   Str(snd_bought,  s"player/cbi/auto/buy");
+   Str(snd_invalid, s"player/cbi/auto/invalid");
+
+   if(grp < 0 || grp >= 4) {
+      return;
+   }
+
+   with_player(LocalPlayer) {
+      i32 total = 0, success = 0;
+
+      for_upgrade(upgr) {
+         if(!upgr->owned && get_bit(upgr->agroups, grp)) {
+            total++;
+
+            if(P_Upg_Buy(p, upgr, true)) {
+               success++;
+               P_Upg_Toggle(p, upgr);
+            }
+         }
+      }
+
+      char cr;
+      str  snd;
+
+      /**/ if(success ==     0) {cr = 'g'; snd = snd_invalid;}
+      else if(success != total) {cr = 'j'; snd = snd_bought;}
+      else                      {cr = 'q'; snd = snd_bought;}
+
+      ACS_LocalAmbientSound(snd, 127);
+
+      i32 fmt;
+      if(total) fmt = grp + 1;
+      else      fmt = grp + 5;
+
+      p->logH(1, LanguageC(LANG "LOG_GroupBuy%i", fmt), cr, success, total, success != 1 ? "s" : "");
+   }
+}
+
 script_str type("net") ext("ACS") addr("Lith_KeyGlare")
 void Sc_KeyGlare(void) {
    with_player(LocalPlayer) {

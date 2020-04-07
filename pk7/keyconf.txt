@@ -18,15 +18,15 @@ addmenukey "$LITH_CTRL_GLARE"   lith_k_glare
 
 addkeysection "$LITH_CTRL_AUTOGROUPS" Lith_AutoGroups
 
-addmenukey "$LITH_CTRL_BUYGRP1" "lith_k_buygrp 1"
-addmenukey "$LITH_CTRL_BUYGRP2" "lith_k_buygrp 2"
-addmenukey "$LITH_CTRL_BUYGRP3" "lith_k_buygrp 3"
-addmenukey "$LITH_CTRL_BUYGRP4" "lith_k_buygrp 4"
+addmenukey "$LITH_CTRL_BUYGRP1" "lith_k_buygrp 0"
+addmenukey "$LITH_CTRL_BUYGRP2" "lith_k_buygrp 1"
+addmenukey "$LITH_CTRL_BUYGRP3" "lith_k_buygrp 2"
+addmenukey "$LITH_CTRL_BUYGRP4" "lith_k_buygrp 3"
 
-addmenukey "$LITH_CTRL_TOGGRP1" "lith_k_toggrp 1"
-addmenukey "$LITH_CTRL_TOGGRP2" "lith_k_toggrp 2"
-addmenukey "$LITH_CTRL_TOGGRP3" "lith_k_toggrp 3"
-addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 4"
+addmenukey "$LITH_CTRL_TOGGRP1" "lith_k_toggrp 0"
+addmenukey "$LITH_CTRL_TOGGRP2" "lith_k_toggrp 1"
+addmenukey "$LITH_CTRL_TOGGRP3" "lith_k_toggrp 2"
+addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 3"
 
 // Aliases -------------------------------------------------------------------|
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
