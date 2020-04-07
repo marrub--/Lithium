@@ -99,13 +99,13 @@ local i32 SignExtendB1(u32 v) {return SignB1(v) ? (v) | 0xFFFFFF00 : (v);}
 local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
 
 /* registers */
-local u32 GetPC() {return (r1 & R1_M_PC) >> R1_S_PC;}
-local u32 GetSP() {return (r1 & R1_M_SP) >> R1_S_SP;}
-local u32 GetVA() {return (r1 & R1_M_VA) >> R1_S_VA;}
-local u32 GetAC() {return (r2 & R2_M_AC) >> R2_S_AC;}
-local u32 GetRX() {return (r2 & R2_M_RX) >> R2_S_RX;}
-local u32 GetRY() {return (r2 & R2_M_RY) >> R2_S_RY;}
-local u32 GetSR() {return (r2 & R2_M_SR) >> R2_S_SR;}
+#define GetPC() ((r1 & R1_M_PC) >> R1_S_PC)
+#define GetSP() ((r1 & R1_M_SP) >> R1_S_SP)
+#define GetVA() ((r1 & R1_M_VA) >> R1_S_VA)
+#define GetAC() ((r2 & R2_M_AC) >> R2_S_AC)
+#define GetRX() ((r2 & R2_M_RX) >> R2_S_RX)
+#define GetRY() ((r2 & R2_M_RY) >> R2_S_RY)
+#define GetSR() ((r2 & R2_M_SR) >> R2_S_SR)
 
 #define Set(reg, msk, bit) \
    reg &= ~msk; \
@@ -126,21 +126,21 @@ local u32 IncPC(u32 n) {u32 x = GetPC(); SetPC(x + n); return x;}
 local u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
 
 /* processor flags */
-local bool GetSR_C() {return r2 & SR_C;}
-local bool GetSR_Z() {return r2 & SR_Z;}
-local bool GetSR_I() {return r2 & SR_I;}
-local bool GetSR_D() {return r2 & SR_D;}
-local bool GetSR_B() {return r2 & SR_B;}
-local bool GetSR_V() {return r2 & SR_V;}
-local bool GetSR_N() {return r2 & SR_N;}
+#define GetSR_C() (r2 & SR_C)
+#define GetSR_Z() (r2 & SR_Z)
+#define GetSR_I() (r2 & SR_I)
+#define GetSR_D() (r2 & SR_D)
+#define GetSR_B() (r2 & SR_B)
+#define GetSR_V() (r2 & SR_V)
+#define GetSR_N() (r2 & SR_N)
 
-local void SetSR_C(bool v) {r2 &= ~SR_C; if(v) r2 |= SR_C;}
-local void SetSR_Z(bool v) {r2 &= ~SR_Z; if(v) r2 |= SR_Z;}
-local void SetSR_I(bool v) {r2 &= ~SR_I; if(v) r2 |= SR_I;}
-local void SetSR_D(bool v) {r2 &= ~SR_D; if(v) r2 |= SR_D;}
-local void SetSR_B(bool v) {r2 &= ~SR_B; if(v) r2 |= SR_B;}
-local void SetSR_V(bool v) {r2 &= ~SR_V; if(v) r2 |= SR_V;}
-local void SetSR_N(bool v) {r2 &= ~SR_N; if(v) r2 |= SR_N;}
+local void SetSR_C(bool v) {if(v) r2 |= SR_C; else r2 &= ~SR_C;}
+local void SetSR_Z(bool v) {if(v) r2 |= SR_Z; else r2 &= ~SR_Z;}
+local void SetSR_I(bool v) {if(v) r2 |= SR_I; else r2 &= ~SR_I;}
+local void SetSR_D(bool v) {if(v) r2 |= SR_D; else r2 &= ~SR_D;}
+local void SetSR_B(bool v) {if(v) r2 |= SR_B; else r2 &= ~SR_B;}
+local void SetSR_V(bool v) {if(v) r2 |= SR_V; else r2 &= ~SR_V;}
+local void SetSR_N(bool v) {if(v) r2 |= SR_N; else r2 &= ~SR_N;}
 
 local void ModSR_Z(u32 v) {SetSR_Z((v) == 0);}
 local void ModSR_N(u32 v) {SetSR_N(SignB1(v));}
@@ -154,10 +154,10 @@ local cstr MemSC_G(u32 p) {return Cps_ExpandNT(memory, p);}
 local str  MemSA_G(u32 p) {return Cps_ExpandNT_str(memory, p);}
 local u32  MemB1_G(u32 p) {return Cps_GetC(memory, p);}
 local u32  MemB2_G(u32 p) {return MemB1_G(p) | (MemB1_G(p + 1) << 8);}
-local u32  MemC1_G()      {return MemB1_G(GetPC());}
-local u32  MemC2_G()      {return MemB2_G(GetPC());}
-local u32  MemI1_G()      {return MemB1_G(IncPC(1));}
-local u32  MemI2_G()      {return MemB2_G(IncPC(2));}
+#define    MemC1_G()      (MemB1_G(GetPC()))
+#define    MemC2_G()      (MemB2_G(GetPC()))
+#define    MemI1_G()      (MemB1_G(IncPC(1)))
+#define    MemI2_G()      (MemB2_G(IncPC(2)))
 local u32  MemIZ_G(u32 p) {return WrapB1(MemI1_G() + p);}
 local u32  MemIA_G(u32 p) {return WrapB2(MemI2_G() + p);}
 
@@ -165,35 +165,33 @@ local void MemB1_S(u32 p, u32 v) {Cps_SetC(memory, p, WrapB1(v));}
 local void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 
 /* addressed memory access */
-local u32 AdrAI_V() {return MemI2_G();}
-local u32 AdrAX_V() {return MemIA_G(GetRX());}
-local u32 AdrAY_V() {return MemIA_G(GetRY());}
-local u32 AdrII_V() {return MemB2_G(MemI2_G());}
-local u32 AdrIX_V() {return MemB2_G(MemIZ_G(GetRX()));}
-local u32 AdrIY_V() {return WrapB2(MemB2_G(MemI1_G()) + GetRY());}
-local u32 AdrRI_V() {return SignExtendB1(MemI1_G());}
-local u32 AdrVI_V() {return MemI1_G();}
-local u32 AdrZI_V() {return MemI1_G();}
-local u32 AdrZX_V() {return MemIZ_G(GetRX());}
-local u32 AdrZY_V() {return MemIZ_G(GetRY());}
+#define AdrAI_V() (MemI2_G())
+#define AdrAX_V() (MemIA_G(GetRX()))
+#define AdrAY_V() (MemIA_G(GetRY()))
+#define AdrII_V() (MemB2_G(MemI2_G()))
+#define AdrIX_V() (MemB2_G(MemIZ_G(GetRX())))
+#define AdrIY_V() (WrapB2(MemB2_G(MemI1_G()) + GetRY()))
+#define AdrRI_V() (SignExtendB1(MemI1_G()))
+#define AdrVI_V() (MemI1_G())
+#define AdrZI_V() (MemI1_G())
+#define AdrZX_V() (MemIZ_G(GetRX()))
+#define AdrZY_V() (MemIZ_G(GetRY()))
 
-local u32 AdrAC_G(u32 a, u32 b)
-{
+local u32 AdrAC_G(u32 a, u32 b) {
    if(b & 2) return GetAC();
    else      return MemB1_G(a);
 }
 
-local u32 AdrAI_G() {return MemB1_G(AdrAI_V());}
-local u32 AdrAX_G() {return MemB1_G(AdrAX_V());}
-local u32 AdrAY_G() {return MemB1_G(AdrAY_V());}
-local u32 AdrIX_G() {return MemB1_G(AdrIX_V());}
-local u32 AdrIY_G() {return MemB1_G(AdrIY_V());}
-local u32 AdrZI_G() {return MemB1_G(AdrZI_V());}
-local u32 AdrZX_G() {return MemB1_G(AdrZX_V());}
-local u32 AdrZY_G() {return MemB1_G(AdrZY_V());}
+#define AdrAI_G() (MemB1_G(AdrAI_V()))
+#define AdrAX_G() (MemB1_G(AdrAX_V()))
+#define AdrAY_G() (MemB1_G(AdrAY_V()))
+#define AdrIX_G() (MemB1_G(AdrIX_V()))
+#define AdrIY_G() (MemB1_G(AdrIY_V()))
+#define AdrZI_G() (MemB1_G(AdrZI_V()))
+#define AdrZX_G() (MemB1_G(AdrZX_V()))
+#define AdrZY_G() (MemB1_G(AdrZY_V()))
 
-local void AdrAC_S(u32 a, u32 b, u32 r)
-{
+local void AdrAC_S(u32 a, u32 b, u32 r) {
    if(b & 2) SetAC(r);
    else      MemB1_S(a, r);
 }
@@ -208,15 +206,14 @@ local void AdrZX_S(u32 v) {MemB1_S(AdrZX_V(), v);}
 local void AdrZY_S(u32 v) {MemB1_S(AdrZY_V(), v);}
 
 /* stack */
-local u32 StaB1_G() {return MemB1_G(STA_BEG + IncSP(1));}
-local u32 StaB2_G() {return MemB2_G(STA_BEG + IncSP(2));}
+#define StaB1_G() (MemB1_G(STA_BEG + IncSP(1)))
+#define StaB2_G() (MemB2_G(STA_BEG + IncSP(2)))
 
 local void StaB1_S(u32 v) {MemB1_S(STA_BEG + DecSP(1),     v);}
 local void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
 /* trace */
-local void TraceReg()
-{
+local void TraceReg() {
    __nprintf("PC:%04X SP:%02X VA:%02X "
              "AC:%02X RX:%02X RY:%02X SR:%02X",
              GetPC(), GetSP(), GetVA(),
@@ -243,8 +240,7 @@ local void TraceReg()
    }
 
 /* VM action auxiliary */
-script static void TerminalGUI(struct player *p, u32 tact)
-{
+script static void TerminalGUI(struct player *p, u32 tact) {
    enum {
       /* text */
       twidth  = 640, theigh = 480,
@@ -342,8 +338,7 @@ script static void TerminalGUI(struct player *p, u32 tact)
    }
 }
 
-script static void DialogueGUI(struct player *p)
-{
+script static void DialogueGUI(struct player *p) {
    enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = MemSA_G(MemB2_G(VAR_NAMEL));
@@ -384,8 +379,7 @@ script static void DialogueGUI(struct player *p)
    G_End(&gst, gui_curs_outlineinv);
 }
 
-void GuiAct(void)
-{
+void GuiAct(void) {
    u32 action = MemB1_G(VAR_UACT);
    MemB1_S(VAR_UACT, UACT_NONE);
 
@@ -410,15 +404,13 @@ void GuiAct(void)
    }
 }
 
-static void SetText(cstr s)
-{
+static void SetText(cstr s) {
    i32 l = strlen(s) + 1;
    Vec_Resize(text, l);
    memmove(textV, s, l);
 }
 
-static void AddText(cstr s)
-{
+static void AddText(cstr s) {
    if(s[0]) {
       i32 l = strlen(s);
       Vec_Grow(text, l + 1);
@@ -436,8 +428,7 @@ static void AddText(cstr s)
 }
 
 /* VM actions */
-sync static void ActDLG_WAIT(struct player *p)
-{
+sync static void ActDLG_WAIT(struct player *p) {
    SetVA(ACT_NONE);
 
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
@@ -456,15 +447,13 @@ sync static void ActDLG_WAIT(struct player *p)
    GuiAct();
 }
 
-stkcall static void ActLD_ITEM(struct player *p)
-{
+stkcall static void ActLD_ITEM(struct player *p) {
    SetVA(ACT_NONE);
 
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-stkcall static void ActLD_OPT(struct player *p)
-{
+stkcall static void ActLD_OPT(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -474,8 +463,7 @@ stkcall static void ActLD_OPT(struct player *p)
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-stkcall static void ActSCRIPT_I(struct player *p)
-{
+stkcall static void ActSCRIPT_I(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -485,8 +473,7 @@ stkcall static void ActSCRIPT_I(struct player *p)
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-stkcall static void ActSCRIPT_S(struct player *p)
-{
+stkcall static void ActSCRIPT_S(struct player *p) {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -496,8 +483,7 @@ stkcall static void ActSCRIPT_S(struct player *p)
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-sync static void ActTELEPORT_INTERLEVEL(struct player *p)
-{
+sync static void ActTELEPORT_INTERLEVEL(struct player *p) {
    u32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -507,8 +493,7 @@ sync static void ActTELEPORT_INTERLEVEL(struct player *p)
    SetVA(ACT_HALT);
 }
 
-sync static void ActTELEPORT_INTRALEVEL(struct player *p)
-{
+sync static void ActTELEPORT_INTRALEVEL(struct player *p) {
    u32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -517,32 +502,27 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p)
    SetVA(ACT_HALT);
 }
 
-stkcall static void ActTEXT_ADDI(struct player *p)
-{
+stkcall static void ActTEXT_ADDI(struct player *p) {
    SetVA(ACT_NONE);
    AddText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-stkcall static void ActTEXT_ADDL(struct player *p)
-{
+stkcall static void ActTEXT_ADDL(struct player *p) {
    SetVA(ACT_NONE);
    AddText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
 
-stkcall static void ActTEXT_SETI(struct player *p)
-{
+stkcall static void ActTEXT_SETI(struct player *p) {
    SetVA(ACT_NONE);
    SetText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-stkcall static void ActTEXT_SETL(struct player *p)
-{
+stkcall static void ActTEXT_SETL(struct player *p) {
    SetVA(ACT_NONE);
    SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
 
-sync static void ActTRM_WAIT(struct player *p)
-{
+sync static void ActTRM_WAIT(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 tact = MemB1_G(VAR_TACT);
@@ -576,8 +556,7 @@ sync static void ActTRM_WAIT(struct player *p)
 /* Extern Functions -------------------------------------------------------- */
 
 /* Main dialogue VM. */
-script void Dlg_Run(struct player *p, u32 num)
-{
+script void Dlg_Run(struct player *p, u32 num) {
    if(p->dead || p->dlg.active > 1)
       return;
 
@@ -988,8 +967,7 @@ halt:
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr("Lith_RunProgram")
-void Sc_RunProgram(i32 num)
-{
+void Sc_RunProgram(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {
          p->dlg.num = DNUM_PRG_BEG + num;
@@ -999,8 +977,7 @@ void Sc_RunProgram(i32 num)
 }
 
 script_str ext("ACS") addr("Lith_RunDialogue")
-void Sc_RunDialogue(i32 num)
-{
+void Sc_RunDialogue(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {
          p->dlg.num = DNUM_DLG_BEG + num;
@@ -1011,8 +988,7 @@ void Sc_RunDialogue(i32 num)
 }
 
 script_str ext("ACS") addr("Lith_RunTerminal")
-void Sc_RunTerminal(i32 num)
-{
+void Sc_RunTerminal(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {
          switch(mission) {
