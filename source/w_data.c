@@ -30,7 +30,7 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
 
    with_player(LocalPlayer) switch(info) {
    case pdata_weapon:     return P_Wep_CurType(p);
-   case pdata_upgrade:    return p->upgrades[permutation].active;
+   case pdata_upgrade:    return get_bit(p->upgrades[permutation].flags, _ug_active);
    case pdata_riflemode:  return p->riflefiremode;
    case pdata_hassigil:   return p->sgacquired;
    case pdata_weaponzoom: return u.k = p->getCVarK(sc_weapons_zoomfactor), u.i;

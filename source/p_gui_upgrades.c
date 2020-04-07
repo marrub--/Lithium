@@ -73,7 +73,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
          continue;
 
       cstr color;
-      if(!upgr->owned && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)) {
+      if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)) {
          color = "u";
       } else {
          switch(upgr->info->key) {
@@ -83,22 +83,22 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
          }
       }
 
-      struct gui_pre_btn const *preset;
-      /**/ if(upgr->active) preset = &gui_p.btnlistactivated;
-      else if(upgr->owned)  preset = &gui_p.btnlistactive;
-      else                  preset = &gui_p.btnlistsel;
+      struct gui_pre_btn const *pre;
+      /**/ if(get_bit(upgr->flags, _ug_active)) pre = &gui_p.btnlistactivated;
+      else if(get_bit(upgr->flags, _ug_owned )) pre = &gui_p.btnlistactive;
+      else                                      pre = &gui_p.btnlistsel;
 
       char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(G_Button_Id(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = preset))
+      if(G_Button_Id(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = pre))
          *upgrsel = _i;
 
       for(i32 i = 0; i < 4; i++) {
          StrAry(gfxs,
                 s":UI:Group1", s":UI:Group2", s":UI:Group3", s":UI:Group4");
          if(get_bit(upgr->agroups, i)) {
-            PrintSprite(gfxs[i], g->ox + preset->w - 9,1, g->oy + y + 1,1);
+            PrintSprite(gfxs[i], g->ox + pre->w - 9,1, g->oy + y + 1,1);
          }
       }
    }
@@ -132,7 +132,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    {
       bool over = upgr->info->perf + p->cbi.pruse > cbiperf;
 
-      if(upgr->active)
+      if(get_bit(upgr->flags, _ug_active))
          PrintTextFmt(LC(LANG "SHOP_DISABLE_SAVES"), upgr->info->perf);
       else if(over)
          PrintTextFmt(LC(LANG "SHOP_CANT_ACTIVATE"), upgr->info->perf);
@@ -150,8 +150,13 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       cstr op;
       bool chk;
 
-      if(upgr->active) {chk = upgr->info->scoreadd > 0; op = LC(LANG "SHOP_MUL_DISABLE");}
-      else             {chk = upgr->info->scoreadd < 0; op = LC(LANG "SHOP_MUL_ENABLE");}
+      if(get_bit(upgr->flags, _ug_active)) {
+         chk = upgr->info->scoreadd > 0;
+         op = LC(LANG "SHOP_MUL_DISABLE");
+      } else {
+         chk = upgr->info->scoreadd < 0;
+         op = LC(LANG "SHOP_MUL_ENABLE");
+      }
 
       i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
@@ -211,7 +216,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
       P_Upg_Buy(p, upgr, false);
 
    /* Activate */
-   if(G_Button(g, upgr->active ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !P_Upg_CanActivate(p, upgr)))
+   if(G_Button(g, get_bit(upgr->flags, _ug_active) ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !P_Upg_CanActivate(p, upgr)))
       P_Upg_Toggle(p, upgr);
 
    /* Groups */
@@ -238,7 +243,7 @@ void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)
 
    if(CBIState(g)->upgrsel == UPGR_MAX) {
       for_upgrade(upgr) {
-         if(upgr->available) {
+         if(get_bit(upgr->flags, _ug_available)) {
             CBIState(g)->upgrsel = _i;
             break;
          }

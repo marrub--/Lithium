@@ -44,6 +44,13 @@ enum {
    UR_RA,
 };
 
+enum {
+   _ug_available,
+   _ug_active,
+   _ug_owned,
+   _ug_wasactive, /* for reinitializing on map load */
+};
+
 struct upgr_data_7777777 {
    k32  fvel, fyaw;
    bool in_air;
@@ -175,12 +182,7 @@ struct upgrade {
    struct upgradeinfo const *info;
 
    u32 agroups;
-
-   /* TODO: make flags instead of bools */
-   bool available;
-   bool active;
-   bool owned;
-   bool wasactive; /* for reinitializing on map load */
+   u32 flags;
 };
 
 bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr);

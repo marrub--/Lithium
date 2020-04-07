@@ -78,7 +78,7 @@ void Sc_GiveRA(i32 num)
 {
    with_player(LocalPlayer)
    {
-      if(!p->upgrades[UPGR_ReactArmor].active) return;
+      if(!get_bit(p->upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
 
       if(UData.activearmor != num + 1)
       {
@@ -93,8 +93,10 @@ void Sc_GiveRA(i32 num)
 
          p->logH(3, LC(LANG "LOG_ActiveArmor"), name);
 
-         if(p->upgrades[UPGR_ReactArmor2].active) RA_Give(name, 2);
-         else                                     RA_Give(name, 1);
+         if(get_bit(p->upgrades[UPGR_ReactArmor2].flags, _ug_active))
+            RA_Give(name, 2);
+         else
+            RA_Give(name, 1);
       }
    }
 }

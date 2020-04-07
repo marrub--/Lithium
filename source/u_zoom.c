@@ -80,9 +80,9 @@ void Sc_KeyZoom(i32 amt)
 
    with_player(LocalPlayer)
    {
-      if(p->upgrades[UPGR_Zoom].active) UData.zoom += amt;
-      if(UData.zoom < 0)                UData.zoom  = 0;
-      if(UData.zoom > 80)               UData.zoom  = 80;
+      if(get_bit(p->upgrades[UPGR_Zoom].flags, _ug_active)) UData.zoom += amt;
+      if(UData.zoom < 0)                                    UData.zoom  = 0;
+      if(UData.zoom > 80)                                   UData.zoom  = 80;
    }
 }
 

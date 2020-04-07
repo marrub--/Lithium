@@ -46,7 +46,7 @@ stkcall void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
 script_str ext("ACS") addr("Lith_GetSubShots")
 i32 Sc_GetSubShots(void) {
    with_player(LocalPlayer) {
-      if(p->upgrades[UPGR_Subweapons].active) {
+      if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
          return UData.shots;
       }
    }
@@ -57,7 +57,7 @@ i32 Sc_GetSubShots(void) {
 script_str ext("ACS") addr("Lith_TakeSubShot")
 void Sc_TakeSubShot(void) {
    with_player(LocalPlayer) {
-      if(p->upgrades[UPGR_Subweapons].active) {
+      if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
          UData.shots--;
       }
    }

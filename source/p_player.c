@@ -265,12 +265,12 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul) {
       StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
 
    /* hue */
-   if(p->upgrades[UPGR_CyberLegs].active && ACS_Random(0, 10000) == 0) {
+   if(get_bit(p->upgrades[UPGR_CyberLegs].flags, _ug_active) && ACS_Random(0, 10000) == 0) {
       p->brouzouf += score;
       p->logB(1, "You gained brouzouf.");
    }
 
-   if(p->upgrades[UPGR_TorgueMode].active && ACS_Random(0, 10) == 0) {
+   if(get_bit(p->upgrades[UPGR_TorgueMode].flags, _ug_active) && ACS_Random(0, 10) == 0) {
       p->spuriousexplosions++;
       ACS_SpawnForced(so_EXPLOOOSION, p->x, p->y, p->z);
    }
@@ -548,7 +548,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
       i32 total = 0, success = 0;
 
       for_upgrade(upgr) {
-         if(!upgr->owned && get_bit(upgr->agroups, grp)) {
+         if(!get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
             total++;
 
             if(P_Upg_Buy(p, upgr, true)) {
@@ -585,7 +585,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
       i32 total = 0;
 
       for_upgrade(upgr) {
-         if(upgr->owned && get_bit(upgr->agroups, grp)) {
+         if(get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
             total++;
             P_Upg_Toggle(p, upgr);
          }
