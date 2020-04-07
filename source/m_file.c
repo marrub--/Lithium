@@ -46,7 +46,7 @@ static i32 NetClose(void *nfdata)
    struct netfile *nf = nfdata;
 
    /* If debugging, print out information about the buffer being written. */
-   if(dbgflag & dbgf_save)
+   if(get_bit(dbgflag, dbgf_save))
    {
       ACS_BeginLog();
       __nprintf("NetClose: Writing netfile \"%S\" (%zub)\nData follows\n",
@@ -212,7 +212,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
          Dalloc(input);
 
          /* If debugging, print out information about the buffer being read. */
-         if(dbgflag & dbgf_save)
+         if(get_bit(dbgflag, dbgf_save))
          {
             ACS_BeginLog();
             __nprintf("NFOpen: Opening memfile \"%S\" (%zub)\nData follows\n",

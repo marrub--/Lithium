@@ -22,8 +22,8 @@
 
 enum {
    AT_None = 0,
-   AT_NMag = 1 << 0,
-   AT_Ammo = 1 << 1,
+   AT_NMag = dst_bit(0),
+   AT_Ammo = dst_bit(1),
    AT_AMag = AT_NMag | AT_Ammo,
 };
 

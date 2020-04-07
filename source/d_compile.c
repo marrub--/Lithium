@@ -252,7 +252,7 @@ void Dlg_MInit(void)
       fclose(d.tb.fp);
    }
 
-   if(dbglevel & log_dlg) PrintDbg();
+   if(get_bit(dbglevel, log_dlg)) PrintDbg();
 }
 
 /* EOF */

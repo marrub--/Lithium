@@ -21,7 +21,7 @@
 
 void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 {
-   if(dbgflag & dbgf_save)
+   if(get_bit(dbgflag, dbgf_save))
       Log("Save_WriteChunk: writing %u version %u size %zu", iden, vers, size);
 
    struct savechunk chunk = {iden, vers & Save_VersMask, size};
@@ -55,7 +55,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
 {
    rewind(save->fp);
 
-   if(dbgflag & dbgf_save)
+   if(get_bit(dbgflag, dbgf_save))
       Log("Save_ReadChunk: Finding chunk %.4X ver%u", iden, vers);
 
    for(i32 i = 0;; i++)
@@ -72,7 +72,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
       {
          if(chunker) chunker(save, &chunk);
 
-         if(dbgflag & dbgf_save) Log("Save_ReadChunk: Found valid chunk at %i", i);
+         if(get_bit(dbgflag, dbgf_save)) Log("Save_ReadChunk: Found valid chunk at %i", i);
 
          return i;
       }
@@ -80,7 +80,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
          fseek(save->fp, chunk.size, SEEK_CUR);
    }
 
-   if(dbgflag & dbgf_save)
+   if(get_bit(dbgflag, dbgf_save))
       Log("Save_ReadChunk: Couldn't find anything");
 
    return -1;

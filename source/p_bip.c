@@ -26,7 +26,7 @@ script static void MailNotify(struct player *p, cstr name) {
 
    p->bip.mailreceived++;
 
-   if(dbgflag & dbgf_bip) return;
+   if(get_bit(dbgflag, dbgf_bip)) return;
 
    ACS_Delay(20);
 
@@ -108,7 +108,7 @@ script void P_BIP_PInit(struct player *p) {
          p->bip.pagemax++;
          p->bip.categorymax[page->info->category]++;
 
-         if(dbgflag & dbgf_bip || page->info->aut) {
+         if(get_bit(dbgflag, dbgf_bip) || page->info->aut) {
             UnlockPage(p, page);
          }
       }

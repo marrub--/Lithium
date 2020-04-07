@@ -86,7 +86,7 @@ script void P_Upg_PInit(struct player *p) {
    for_upgrade(upgr) {
       upgr->info = &upgrinfo[_i];
 
-      if(upgr->info->cost == 0 || dbgflag & dbgf_upgr)
+      if(upgr->info->cost == 0 || get_bit(dbgflag, dbgf_upgr))
          P_Upg_Buy(p, upgr, true, true);
    }
 

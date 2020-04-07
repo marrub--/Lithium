@@ -281,7 +281,7 @@ script void P_Init(struct player *p) {
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->cameratid  = ACS_UniqueTID());
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
-   if(dbgflag & dbgf_score) p->score = 0xFFFFFFFFFFFFFFFFll;
+   if(get_bit(dbgflag, dbgf_score)) p->score = 0xFFFFFFFFFFFFFFFFll;
 
    /* Any linked lists on the player need to be initialized here. */
    ListDtor(&p->hudstrlist, true);
@@ -354,7 +354,7 @@ script void P_Init(struct player *p) {
       p->health = minhealth;
    }
 
-   if(dbgflag & dbgf_items) {
+   if(get_bit(dbgflag, dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
          if(info->classname != snil && info->pclass & p->pclass && !get_bit(info->flags, wf_magic))

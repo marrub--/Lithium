@@ -41,7 +41,7 @@
 
 #ifndef NDEBUG
 #define Dbg_Log(level, ...) \
-   do if(dbglevel & (level)) Log(c"" #level ": " __VA_ARGS__); while(0)
+   do if(get_bit(dbglevel, level)) Log(c"" #level ": " __VA_ARGS__); while(0)
 #else
 #define Dbg_Log(...)
 #endif
@@ -105,10 +105,10 @@
 #define DrawCallS(...) SCallS(sm_Draw, __VA_ARGS__)
 
 #define Dbg_Stat(...) \
-   (dbglevel & log_devh ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
+   (get_bit(dbglevel, log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
 
 #define Dbg_Note(...) \
-   (dbglevel & log_devh ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
+   (get_bit(dbglevel, log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
 
 #define InvGive ACS_GiveInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
@@ -122,23 +122,23 @@
 
 enum {
    log_none,
-   log_dev   = 1 << 0, /* general debug info */
-   log_devh  = 1 << 1, /* prints live stats to the HUD (position, angles, etc) */
-   log_boss  = 1 << 2, /* debug info for the boss system */
-   log_dmon  = 1 << 3, /* debug info for the monster tracker */
-   log_dmonV = 1 << 4, /* verbose debug info for the monster tracker */
-   log_dlg   = 1 << 5, /* debug info for the dialogue/terminal compiler */
-   log_bip   = 1 << 6, /* debug info for the BIP */
-   log_sys   = 1 << 7, /* meta debug info */
-   log_sysV  = 1 << 8, /* tick info */
+   log_dev,   /* general debug info */
+   log_devh,  /* prints live stats to the HUD (position, angles, etc) */
+   log_boss,  /* debug info for the boss system */
+   log_dmon,  /* debug info for the monster tracker */
+   log_dmonV, /* verbose debug info for the monster tracker */
+   log_dlg,   /* debug info for the dialogue/terminal compiler */
+   log_bip,   /* debug info for the BIP */
+   log_sys,   /* meta debug info */
+   log_sysV,  /* tick info */
 };
 
 enum {
-   dbgf_bip   = 1 << 0,
-   dbgf_items = 1 << 1,
-   dbgf_save  = 1 << 2,
-   dbgf_score = 1 << 3,
-   dbgf_upgr  = 1 << 4,
+   dbgf_bip,
+   dbgf_items,
+   dbgf_save,
+   dbgf_score,
+   dbgf_upgr,
 };
 
 /* Extern Functions -------------------------------------------------------- */

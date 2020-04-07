@@ -42,23 +42,14 @@ enum {
 };
 
 enum {
-   SR_C_BIT = 0,
-   SR_Z_BIT = 1,
-   SR_I_BIT = 2,
-   SR_D_BIT = 3,
-   SR_B_BIT = 4,
-   SR_V_BIT = 6,
-   SR_N_BIT = 7,
-};
-
-enum {
-   SR_C = 1 << SR_C_BIT << R2_S_SR,
-   SR_Z = 1 << SR_Z_BIT << R2_S_SR,
-   SR_I = 1 << SR_I_BIT << R2_S_SR,
-   SR_D = 1 << SR_D_BIT << R2_S_SR,
-   SR_B = 1 << SR_B_BIT << R2_S_SR,
-   SR_V = 1 << SR_V_BIT << R2_S_SR,
-   SR_N = 1 << SR_N_BIT << R2_S_SR,
+   SR_C = R2_S_SR,
+   SR_Z,
+   SR_I,
+   SR_D,
+   SR_B,
+   SR__,
+   SR_V,
+   SR_N,
 };
 
 /* Extern Objects ---------------------------------------------------------- */
@@ -126,21 +117,21 @@ local u32 IncPC(u32 n) {u32 x = GetPC(); SetPC(x + n); return x;}
 local u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
 
 /* processor flags */
-#define GetSR_C() (r2 & SR_C)
-#define GetSR_Z() (r2 & SR_Z)
-#define GetSR_I() (r2 & SR_I)
-#define GetSR_D() (r2 & SR_D)
-#define GetSR_B() (r2 & SR_B)
-#define GetSR_V() (r2 & SR_V)
-#define GetSR_N() (r2 & SR_N)
+#define GetSR_C() get_bit(r2, SR_C)
+#define GetSR_Z() get_bit(r2, SR_Z)
+#define GetSR_I() get_bit(r2, SR_I)
+#define GetSR_D() get_bit(r2, SR_D)
+#define GetSR_B() get_bit(r2, SR_B)
+#define GetSR_V() get_bit(r2, SR_V)
+#define GetSR_N() get_bit(r2, SR_N)
 
-local void SetSR_C(bool v) {if(v) r2 |= SR_C; else r2 &= ~SR_C;}
-local void SetSR_Z(bool v) {if(v) r2 |= SR_Z; else r2 &= ~SR_Z;}
-local void SetSR_I(bool v) {if(v) r2 |= SR_I; else r2 &= ~SR_I;}
-local void SetSR_D(bool v) {if(v) r2 |= SR_D; else r2 &= ~SR_D;}
-local void SetSR_B(bool v) {if(v) r2 |= SR_B; else r2 &= ~SR_B;}
-local void SetSR_V(bool v) {if(v) r2 |= SR_V; else r2 &= ~SR_V;}
-local void SetSR_N(bool v) {if(v) r2 |= SR_N; else r2 &= ~SR_N;}
+local void SetSR_C(bool v) {if(v) set_bit(r2, SR_C); else dis_bit(r2, SR_C);}
+local void SetSR_Z(bool v) {if(v) set_bit(r2, SR_Z); else dis_bit(r2, SR_Z);}
+local void SetSR_I(bool v) {if(v) set_bit(r2, SR_I); else dis_bit(r2, SR_I);}
+local void SetSR_D(bool v) {if(v) set_bit(r2, SR_D); else dis_bit(r2, SR_D);}
+local void SetSR_B(bool v) {if(v) set_bit(r2, SR_B); else dis_bit(r2, SR_B);}
+local void SetSR_V(bool v) {if(v) set_bit(r2, SR_V); else dis_bit(r2, SR_V);}
+local void SetSR_N(bool v) {if(v) set_bit(r2, SR_N); else dis_bit(r2, SR_N);}
 
 local void ModSR_Z(u32 v) {SetSR_Z((v) == 0);}
 local void ModSR_N(u32 v) {SetSR_N(SignB1(v));}
@@ -224,7 +215,7 @@ local void TraceReg() {
 #define JmpVI { \
       /* jump next byte */ \
       u32 next = MemI1_G(); \
-      if(dbglevel & log_dlg) { \
+      if(get_bit(dbglevel, log_dlg)) { \
          ACS_BeginLog(); \
          Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
          ACS_PrintChar(' '); \
@@ -591,7 +582,7 @@ script void Dlg_Run(struct player *p, u32 num) {
    for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
    for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
-   if(dbglevel & log_dlg) {
+   if(get_bit(dbglevel, log_dlg)) {
       ACS_BeginLog();
       __nprintf("Dumping segment PRG..");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);

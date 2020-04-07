@@ -37,11 +37,11 @@ enum {
 };
 
 enum {
-   UR_AI  = 1 << 0,
-   UR_WMD = 1 << 1,
-   UR_WRD = 1 << 2,
-   UR_RDI = 1 << 3,
-   UR_RA  = 1 << 4,
+   UR_AI,
+   UR_WMD,
+   UR_WRD,
+   UR_RDI,
+   UR_RA,
 };
 
 struct upgr_data_7777777 {

@@ -148,11 +148,11 @@ static void GetDebugInfo(void)
 
    dbglevel = ACS_GetCVar(sc_debug_level);
 
-   if(all || ACS_GetCVar(sc_debug_bip))        dbgflag |= dbgf_bip;
-   if(all || ACS_GetCVar(sc_debug_items))      dbgflag |= dbgf_items;
-   if(all || ACS_GetCVar(sc_debug_save))       dbgflag |= dbgf_save;
-   if(all || ACS_GetCVar(sc_debug_score))      dbgflag |= dbgf_score;
-   if(all || ACS_GetCVar(sc_debug_upgrades))   dbgflag |= dbgf_upgr;
+   if(all || ACS_GetCVar(sc_debug_bip))        set_bit(dbgflag, dbgf_bip);
+   if(all || ACS_GetCVar(sc_debug_items))      set_bit(dbgflag, dbgf_items);
+   if(all || ACS_GetCVar(sc_debug_save))       set_bit(dbgflag, dbgf_save);
+   if(all || ACS_GetCVar(sc_debug_score))      set_bit(dbgflag, dbgf_score);
+   if(all || ACS_GetCVar(sc_debug_upgrades))   set_bit(dbgflag, dbgf_upgr);
 }
 
 static void MInitPre(void)
@@ -284,7 +284,7 @@ static void HInit(void)
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop) ||
-      dbgflag & dbgf_items)
+      get_bit(dbgflag, dbgf_items))
    {
       for(i32 i = 0; i < cupg_max; i++)
          CBI_Install(i);

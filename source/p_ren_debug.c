@@ -12,7 +12,7 @@
 #include "p_hudid.h"
 
 void P_Ren_Debug(struct player *p) {
-   if(!(dbglevel & log_devh)) return;
+   if(!get_bit(dbglevel, log_devh)) return;
 
    Dbg_Stat("exp: lv.%u %u/%u/%u\n", p->attr.level, p->attr.expprev, p->attr.exp, p->attr.expnext);
    Dbg_Stat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
