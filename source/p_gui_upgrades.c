@@ -93,6 +93,14 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
       i32 *upgrsel = &CBIState(g)->upgrsel;
       if(G_Button_Id(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = preset))
          *upgrsel = _i;
+
+      for(i32 i = 0; i < 4; i++) {
+         StrAry(gfxs,
+                s":UI:Group1", s":UI:Group2", s":UI:Group3", s":UI:Group4");
+         if(get_bit(upgr->agroups, i)) {
+            PrintSprite(gfxs[i], g->ox + preset->w - 9,1, g->oy + y + 1,1);
+         }
+      }
    }
 
    G_ScrollEnd(g, &CBIState(g)->upgrscr);
