@@ -80,8 +80,8 @@ static cstr const action_names[] = {
 /* Static Functions -------------------------------------------------------- */
 
 /* utilities */
-#define SignB1(v) ((v) & 0x0080)
-#define SignB2(v) ((v) & 0x8000)
+#define SignB1(v) get_bit(v,  7)
+#define SignB2(v) get_bit(v, 15)
 
 #define WrapB1(p) ((u32)(p) & 0x00FF)
 #define WrapB2(p) ((u32)(p) & 0xFFFF)

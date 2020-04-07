@@ -44,12 +44,12 @@ script static void MailNotify(struct player *p, cstr name) {
 }
 
 script static void UnlockPage(struct player *p, struct page *page) {
-   if(!(page->flags & _page_available)) {
+   if(!get_bit(page->flags, _page_available)) {
       Dbg_Log(log_bip, "page '%s' not available", page->info->name);
       return;
    }
 
-   if(!(page->flags & _page_unlocked)) {
+   if(!get_bit(page->flags, _page_unlocked)) {
       Dbg_Log(log_bip, "unlocking page '%s'", page->info->name);
 
       if(page->info->category == BIPC_MAIL && !page->info->aut) {
@@ -57,7 +57,7 @@ script static void UnlockPage(struct player *p, struct page *page) {
       }
 
       page->flags |= ticks;
-      page->flags |= _page_unlocked;
+      set_bit(page->flags, _page_unlocked);
 
       p->bip.pageavail++;
       p->bip.categoryavail[page->info->category]++;
@@ -103,7 +103,7 @@ script void P_BIP_PInit(struct player *p) {
       bool avail = page->info->pclass & p->pclass;
 
       if(avail) {
-         page->flags = _page_available;
+         set_bit(page->flags, _page_available);
 
          p->bip.pagemax++;
          p->bip.categorymax[page->info->category]++;

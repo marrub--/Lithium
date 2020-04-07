@@ -159,8 +159,8 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
 
    u32 i = 0;
    for_page() {
-      if(page->info->category != categ || !(page->flags & _page_available) ||
-         (categ == BIPC_MAIL && !(page->flags & _page_unlocked)))
+      if(page->info->category != categ || !get_bit(page->flags, _page_available) ||
+         (categ == BIPC_MAIL && !get_bit(page->flags, _page_unlocked)))
          continue;
 
       i32 y = gui_p.btnlist.h * i;
@@ -168,7 +168,7 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
       if(G_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
 
-      bool lock = !(page->flags & _page_unlocked) || p->bip.curpage == page;
+      bool lock = !get_bit(page->flags, _page_unlocked) || p->bip.curpage == page;
 
       char name[128] = "\Ci";
       strcpy(p->bip.curpage == page ? &name[2] : name, GetShortName(page));
@@ -224,7 +224,7 @@ static void SearchUI(struct gui_state *g, struct player *p) {
             break;
          }
 
-         if(!(page->flags & _page_unlocked) ||
+         if(!get_bit(page->flags, _page_unlocked) ||
             page->info->category == BIPC_EXTRA) {
             continue;
          }

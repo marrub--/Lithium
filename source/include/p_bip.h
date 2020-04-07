@@ -27,9 +27,10 @@
 /* Types ------------------------------------------------------------------- */
 
 enum {
-   _page_unlocked  = 0x80000000,
-   _page_available = 0x40000000,
-   _page_time      = 0x3fffffff,
+   _page_available = 30,
+   _page_unlocked,
+
+   _page_time = 0x3fffffff,
 };
 
 typedef char bip_name_t[20];

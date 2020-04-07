@@ -17,9 +17,9 @@ local bool IsPunct(i32 c) {return c >= '!' && c <= '/' ||
                                   c >= ':' && c <= '@' ||
                                   c >= '[' && c <= '`' ||
                                   c >= '{' && c <= '~';}
-local bool IsSpace(i32 c) {return c >= 0x9 && c <= 0xD ||
+local bool IsSpace(i32 c) {return c >=   9 && c <=  13 ||
                                   c == ' ';}
-local bool IsBlank(i32 c) {return c == ' ' || c == 0x9;}
+local bool IsBlank(i32 c) {return c == ' ' || c ==   9;}
 local bool IsDigit(i32 c) {return c >= '0' && c <= '9';}
 local bool IsXDigi(i32 c) {return c >= 'a' && c <= 'f' ||
                                   c >= 'A' && c <= 'F' ||
