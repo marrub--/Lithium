@@ -81,20 +81,12 @@ action(Weapon) void Lith_SubGrnFire() {
 }
 
 action(Weapon) void Lith_Sprint() {
-   if(vel.xy.length() < 8) {
-      let psp = player.getPSprite(PSP_WEAPON);
-      psp.x = psp.oldx = 0;
-      psp.y = psp.oldy = 32;
-   }
-
    A_GiveInventory("Lith_DarkLordSprint", 1);
 }
 
 action(Weapon) state Lith_JumpIfSprint() {
-   if(vel.xy.length() < 8) {
-      let psp = player.getPSprite(PSP_WEAPON);
-      psp.frame = 99;
-   }
+   if(vel.xy.length() < 8)
+      player.getPSprite(PSP_WEAPON).frame = 99;
 
    if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0)
       return resolveState("_SprintDone");
