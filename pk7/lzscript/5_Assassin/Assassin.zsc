@@ -14,6 +14,11 @@ class Lith_AssassinPlayer : Lith_Player {
       Player.Portrait "lgfx/Portraits/Assassin.png";
       Tag "Assassin";
    }
+
+   override void GiveDefaultInventory() {
+      Super.GiveDefaultInventory();
+      Lith_GiveDefWeapon("Lith_DualPistols");
+   }
 }
 
 class Lith_ItemSpriteA : Lith_ItemSprite {

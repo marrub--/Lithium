@@ -24,12 +24,7 @@ class Lith_DarkLordPlayer : Lith_Player {
 
    override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
-      Lith_GiveDefItem("Lith_SubweaponShots", 2);
       Lith_GiveDefWeapon("Lith_700Express");
-   }
-
-   void Lith_SwapSubweapon() {
-      /* TODO */
    }
 }
 
@@ -41,9 +36,6 @@ class Lith_DarkLordSprint : PowerSpeed {
       +POWERSPEED.NOTRAIL
    }
 }
-
-class Lith_SubweaponCharge : Inventory {default {Inventory.MaxAmount 100;}}
-class Lith_SubweaponShots  : Inventory {default {Inventory.MaxAmount 2;}}
 
 #include "lzscript/6_DarkLord/0_Weapon.zsc"
 #include "lzscript/6_DarkLord/2_700Express.zsc"

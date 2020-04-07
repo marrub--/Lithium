@@ -46,7 +46,7 @@
 +StealthSys  StealthSys  1800450 pC \-DU--
 
 # Dark Lord
-+Subweapons Subweapons pD \--UR-
++Subweapons Subweapons pD \--URE
 
 :Weap
 # Outcasts

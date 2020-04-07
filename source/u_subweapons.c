@@ -13,37 +13,54 @@
 
 #include "u_common.h"
 
+#define UData p->upgrdata.subweapons
+
 /* Extern Functions -------------------------------------------------------- */
 
-script
-void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr)
-{
-   if(InvNum(so_SubweaponShots) < 2)
-   {
-      if(InvNum(so_SubweaponCharge) == InvMax(so_SubweaponCharge))
-      {
+script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
+   if(UData.shots < 2) {
+      if(UData.charge >= 100) {
          ACS_LocalAmbientSound(ss_weapons_subweapon_charge, 127);
-         InvGive(so_SubweaponShots, 1);
-         InvTake(so_SubweaponCharge, INT32_MAX);
+         UData.shots++;
+         UData.charge = 0;
+      } else {
+         UData.charge++;
       }
-      else
-         InvGive(so_SubweaponCharge, 1);
    }
 }
 
-stkcall
-void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr)
-{
+stkcall void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
    if(!p->hudenabled || p->dlg.active) return;
 
-   i32 const sn = InvNum(so_SubweaponShots);
-   i32 const cn = InvNum(so_SubweaponCharge);
-   i32 const cm = InvMax(so_SubweaponCharge);
-
-   i32 const prc = cn == 0 ? 100 : cn / (k32)cm * 100;
-
-   PrintTextFmt("SHOTS: %i\nCHARGE: %-3i%%", sn, prc);
+   u32 prc = UData.charge ? UData.charge : 100;
+   PrintTextFmt("SSHOTS %i\nCHARGE %03i%%", UData.shots, prc);
    PrintText(s_lmidfont, CR_WHITE, 10,1, 120,2);
+}
+
+stkcall void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
+   UData.shots = 2;
+}
+
+/* Scripts ----------------------------------------------------------------- */
+
+script_str ext("ACS") addr("Lith_GetSubShots")
+i32 Sc_GetSubShots(void) {
+   with_player(LocalPlayer) {
+      if(p->upgrades[UPGR_Subweapons].active) {
+         return UData.shots;
+      }
+   }
+
+   return 0;
+}
+
+script_str ext("ACS") addr("Lith_TakeSubShot")
+void Sc_TakeSubShot(void) {
+   with_player(LocalPlayer) {
+      if(p->upgrades[UPGR_Subweapons].active) {
+         UData.shots--;
+      }
+   }
 }
 
 /* EOF */

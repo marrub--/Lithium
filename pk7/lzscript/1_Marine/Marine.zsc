@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_MarinePlayer : Lith_Player
-{
-   default
-   {
+class Lith_MarinePlayer : Lith_Player {
+   default {
       Player.AttackZOffset 15;
       Player.DisplayName "$LITH_CLASS_MARINE";
       Player.Portrait "lgfx/Portraits/Marine.png";
@@ -19,28 +17,23 @@ class Lith_MarinePlayer : Lith_Player
       Tag "Marine";
    }
 
-   override void GiveDefaultInventory()
-   {
+   override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
       Lith_GiveDefItem("Lith_Fist", 1);
       Lith_GiveDefWeapon("Lith_Pistol");
    }
 }
 
-class Lith_RocketBooster : PowerFlight
-{
-   default
-   {
+class Lith_RocketBooster : PowerFlight {
+   default {
       Powerup.Duration 60;
 
       -INVENTORY.HUBPOWER
    }
 }
 
-class Lith_MWeapon : Lith_OutcastsWeapon
-{
-   default
-   {
+class Lith_MWeapon : Lith_OutcastsWeapon {
+   default {
       Inventory.RestrictedTo "Lith_MarinePlayer";
    }
 }

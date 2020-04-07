@@ -115,6 +115,12 @@ struct upgr_data_StealthSys {
    k32 mulvel;
 };
 
+struct upgr_data_Subweapons {
+   u32 charge;
+   u32 shots;
+   u32 which;
+};
+
 struct upgr_data_HeadsUpDisM {
    i32 cr;
 };
@@ -137,6 +143,7 @@ struct upgr_data {
    struct upgr_data_ReactArmor  reactarmor;
    struct upgr_data_ReflexWetw  reflexwetw;
    struct upgr_data_StealthSys  stealthsys;
+   struct upgr_data_Subweapons  subweapons;
    struct upgr_data_VitalScan   vitalscan;
    struct upgr_data_Zoom        zoom;
    struct upgr_data_lolsords    lolsords;
