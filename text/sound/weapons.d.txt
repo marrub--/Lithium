@@ -11,6 +11,8 @@ weapons {
       == lsounds/WeaponsD/Subweapons
       charge Charge # Rozenkreuzstilette
       armgun ArmGun # Phantasy Star: Nova
+
+      $alias dagger = .weapons.rend.end
    }
 
    \700e {

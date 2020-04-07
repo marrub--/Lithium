@@ -126,6 +126,7 @@ struct upgr_data_Subweapons {
    u32 charge;
    u32 shots;
    u32 which;
+   u32 have;
 };
 
 struct upgr_data_HeadsUpDisM {

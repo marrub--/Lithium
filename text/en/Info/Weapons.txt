@@ -6,6 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+!!include Ari/Weapons.txt
 !!include Jem/Weapons.txt
 !!include Outcasts/Weapons.txt
 !!include Stan/Weapons.txt

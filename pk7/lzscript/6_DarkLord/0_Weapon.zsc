@@ -7,6 +7,38 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_RedDagger : Actor {
+   default {
+      Damage 0;
+      DamageType "Magic";
+      RenderStyle "ColorAdd";
+      Speed 40;
+
+      Projectile;
+      +BRIGHT
+      +RIPPER
+      +PAINLESS
+   }
+
+   override int specialMissileHit(Actor th) {
+      if(target != th && tracer != th) {
+         tracer = th;
+         th.damageMobj(self, target, 15, 'Magic');
+         th.spawnLineAttackBlood(th.target, pos, 0, 15, 15);
+      }
+      return 1;
+   }
+
+   states {
+   Spawn:
+      BLLT V -1;
+      stop;
+   Death:
+      BLLT V 1 A_FadeOut;
+      wait;
+   }
+}
+
 class Lith_DWeapon : Lith_Weapon;
 
 default {
@@ -22,15 +54,24 @@ override state Lith_Ready(int flags) {
       return null;
 }
 
-action(Weapon) void Lith_ArmGunPreFire() {
+action(Weapon) void Lith_SubGunPreFire() {
    player.getPSprite(_psp_d_subweapon).frame = randomPick(1, 3);
 }
 
-action(Weapon) void Lith_ArmGunFire() {
+action(Weapon) void Lith_SubGunFire() {
    player.getPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
    A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
-   Lith_FireBullets(1, 2, -1, 15, tracer_x: -6);
+   Lith_FireBullets(1, 2, -1, 15, pufftype: "Lith_BulletPuffPainful", tracer_x: -6);
+   A_Recoil(0.07);
+}
+
+action(Weapon) void Lith_SubDagFire() {
+   A_StartSound("weapons/subweapon/dagger", lch_altweapon);
+   A_AlertMonsters();
+   for(int i = 0; i < 3; i++) {
+      A_FireProjectile("Lith_RedDagger", 0, true, frandom(-8,8), frandom(-8,8));
+   }
    A_Recoil(0.07);
 }
 
@@ -56,7 +97,16 @@ override void tick() {
       owner.player.getPSprite(_psp_d_subweapon).tics <= 0 &&
       owner.acs_scriptCall("Lith_GetSubShots") > 0) {
       owner.acs_scriptCall("Lith_TakeSubShot");
-      owner.player.setPSprite(_psp_d_subweapon, resolveState("_ArmGun"));
+      state which;
+      switch(owner.acs_scriptCall("Lith_GetSubType")) {
+         case _subw_gun:     which = resolveState("_SubGun"); break;
+         case _subw_dagger:  which = resolveState("_SubDag"); break;
+         case _subw_grenade: which = resolveState("_SubGrn"); break;
+         case _subw_mine:    which = resolveState("_SubMin"); break;
+         case _subw_axe:     which = resolveState("_SubAxe"); break;
+         case _subw_dart:    which = resolveState("_SubDrt"); break;
+      }
+      owner.player.setPSprite(_psp_d_subweapon, which);
       let psp = owner.player.getPSprite(_psp_d_subweapon);
       psp.bAddWeapon = false;
       psp.bAddBob    = false;
@@ -105,22 +155,41 @@ _SprintDone:
    TNT1 A 1 offset(1, 32) A_Lower(60);
    TNT1 A 0 resolveState("Select");
    stop;
-_ArmGun:
-   ARGN B 1 bright Lith_ArmGunPreFire;
-   ARGN A 1 bright Lith_ArmGunFire;
+_SubGun:
+   ARGN B 1 bright Lith_SubGunPreFire;
+   ARGN A 1 bright Lith_SubGunFire;
    TNT1 A 1;
-   ARGN B 1 bright Lith_ArmGunPreFire;
-   ARGN A 1 bright Lith_ArmGunFire;
+   ARGN B 1 bright Lith_SubGunPreFire;
+   ARGN A 1 bright Lith_SubGunFire;
    TNT1 A 1;
-   ARGN B 1 bright Lith_ArmGunPreFire;
-   ARGN A 1 bright Lith_ArmGunFire;
+   ARGN B 1 bright Lith_SubGunPreFire;
+   ARGN A 1 bright Lith_SubGunFire;
    TNT1 A 1;
-   ARGN B 1 bright Lith_ArmGunPreFire;
-   ARGN A 1 bright Lith_ArmGunFire;
+   ARGN B 1 bright Lith_SubGunPreFire;
+   ARGN A 1 bright Lith_SubGunFire;
    TNT1 A 1;
-   ARGN B 1 bright Lith_ArmGunPreFire;
-   ARGN A 1 bright Lith_ArmGunFire;
-   TNT1 A 1;
+   ARGN B 1 bright Lith_SubGunPreFire;
+   ARGN A 1 bright Lith_SubGunFire;
+   TNT1 A 3;
+   stop;
+_SubDag:
+   ADAG D 1 bright Lith_SubDagFire;
+   ADAG D 1 bright;
+   ADAG C 1 bright Lith_SubDagFire;
+   ADAG C 1 bright;
+   ADAG B 1 bright Lith_SubDagFire;
+   ADAG B 1 bright;
+   ADAG A 1 bright;
+   ADAG A 1 bright;
+   TNT1 A 10;
+   stop;
+_SubGrn:
+   stop;
+_SubMin:
+   stop;
+_SubAxe:
+   stop;
+_SubDrt:
    stop;
 }
 

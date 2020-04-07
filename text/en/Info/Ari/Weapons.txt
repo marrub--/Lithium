@@ -1,0 +1,24 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+== \#INFO_SHORT_700Express  | .700 Express
+== \#INFO_SHORT_4Bore       | Four-bore Shotgun
+== \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
+== \#INFO_SHORT_Minigun     | Minigun
+== \#INFO_SHORT_DualRocket  | Franca & Sophia
+== \#INFO_SHORT_FatMac      | .900 JDJ Rifle
+== \#INFO_SHORT_FortuneGun  | Fortiuty
+
+== \#INFO_SHORT_Subweapon0 | Sub-bullets
+== \#INFO_SHORT_Subweapon1 | Sub-daggers
+== \#INFO_SHORT_Subweapon2 | Sub-grenades
+== \#INFO_SHORT_Subweapon3 | Sub-mines
+== \#INFO_SHORT_Subweapon4 | Sub-stealers
+== \#INFO_SHORT_Subweapon5 | Sub-darts
+
+## EOF

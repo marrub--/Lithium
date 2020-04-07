@@ -39,12 +39,13 @@ enum /* Lith_PData */ {
 };
 
 enum /* Lith_SubweaponType */ {
-   subw_gun,
-   subw_dagger,
-   subw_grenade,
-   subw_mine,
-   subw_axe,
-   subw_dart,
+   _subw_gun,
+   _subw_dagger,
+   _subw_grenade,
+   _subw_mine,
+   _subw_axe,
+   _subw_dart,
+   _subw_max,
 };
 
 enum /* Lith_PClass */ {

@@ -183,6 +183,9 @@ class Lith_BulletRicochetSpark : Actor
    }
 }
 
+class Lith_BulletPuffPainless : Lith_BulletPuff {default {+PAINLESS}}
+class Lith_BulletPuffPainful  : Lith_BulletPuff {default {+FORCEPAIN}}
+
 class Lith_BulletPuff : Actor replaces BulletPuff;
 
 default

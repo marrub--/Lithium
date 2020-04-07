@@ -19,6 +19,7 @@ class Lith_700Laser : Actor
       +NOINTERACTION
       +BRIGHT
       +FORCEXYBILLBOARD
+      +NOTIMEFREEZE
    }
 
    states
