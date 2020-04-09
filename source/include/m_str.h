@@ -42,8 +42,8 @@ stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);
 stkcall cstr scoresep(i96 num);
 str LanguageV(str name);
-str LanguageNull(cstr fmt, ...);
 char *LanguageVC(char *out, cstr name);
 char *LanguageCV(char *out, cstr name, ...);
+str LanguageNull(cstr fmt, ...);
 
 /* EOF */

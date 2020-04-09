@@ -44,7 +44,7 @@ common_main do
       when :plus
          res = []
          tok = tks.next.expect_after tok, :identi
-         nam = "weapon_" + tok.text
+         nam = tok.text
          tok = tks.next.expect_after tok, :number
          slt = tok.text
          tok = tks.next.expect_after tok, :identi
@@ -81,21 +81,19 @@ common_main do
  */
 #{generated_header "wepc"}
 
-enum /* Lith_WeaponNum */
-{
+enum /* Lith_WeaponNum */ {
    weapon_min = 1,
    weapon_unknown = 0,
 
 #{
-   ret = String.new
-   weps.each do |wep| ret.concat "   #{wep[:nam]},\n" end
-   ret
+res = String.new
+weps.each do |wep| res.concat "   weapon_#{wep[:nam]},\n" end
+res
 }
    weapon_max
 };
 
-enum /* Lith_WeaponName */
-{
+enum /* Lith_WeaponName */ {
    wepnam_fist,
    wepnam_chainsaw,
    wepnam_pistol,
@@ -109,8 +107,7 @@ enum /* Lith_WeaponName */
    wepnam_max,
 };
 
-enum /* Lith_RifleMode */
-{
+enum /* Lith_RifleMode */ {
    rifle_firemode_auto,
    rifle_firemode_grenade,
    rifle_firemode_burst,
@@ -124,9 +121,9 @@ _end_h_
 #include "common.h"
 #include "p_player.h"
 
-StrEntON
-
 /* Extern Objects ---------------------------------------------------------- */
+
+StrEntON
 
 #define Placeholder1 "MMMMHMHMMMHMMM"
 #define Placeholder2 "YOUSONOFABITCH"
@@ -138,29 +135,45 @@ StrEntON
 struct weaponinfo const weaponinfo[weapon_max] = {
    {0, pcl_any, snil, "MMMMHMHMMMHMMM"},
 #{
-   ret = String.new
-   weps.each do |wep|
-      ret.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:res].join ","}},\n"
-   end
-   ret
+res = String.new
+weps.each do |wep|
+   res.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:res].join ","}},\n"
+end
+res
 }
 };
 
+StrEntOFF
+
 /* Extern Functions -------------------------------------------------------- */
+
+cstr P_Wep_GetPickup(i32 n) {
+   switch(n) {
+#{
+res = String.new
+for wep in weps
+   res.concat "   case weapon_#{wep[:nam]}: return \"#{wep[:nam]}\";\n"
+end
+res
+}
+   }
+   return "unknown";
+}
 
 i32 P_Wep_FromName(struct player *p, i32 name) {
    switch(p->pclass) {
 #{
-   ret = String.new
-   for pcl, wpns in wepn
-      ret.concat "   case #{pcl}:\n      switch(name) {\n"
-      wpns.each_with_index do |wep, i|
-         ret.concat "      case #{WEPNAMES[i]}: return #{wep};\n"
-      end
-      ret.concat "      }\n"
+res = String.new
+for pcl, wpns in wepn
+   res.concat "   case #{pcl}:\n      switch(name) {\n"
+   wpns.each_with_index do |wep, i|
+      res.concat "      case #{WEPNAMES[i]}: return #{wep};\n"
    end
-   ret
-}   }
+   res.concat "      }\n"
+end
+res
+}
+   }
 
    return weapon_unknown;
 }
