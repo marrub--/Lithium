@@ -92,6 +92,16 @@ identifier,default
 :HUD_D:AmmoBack,lgfx/HUD_D/AmmoBack.png
 :HUD_D:HPBack,lgfx/HUD_D/HPBack.png
 :HUD_D:MAG,lgfx/HUD_D/MAG.png
+:HUD_D:SubWep0,lgfx/HUD_D/SubWep0.png
+:HUD_D:SubWep1,lgfx/HUD_D/SubWep1.png
+:HUD_D:SubWep2,lgfx/HUD_D/SubWep2.png
+:HUD_D:SubWep3,lgfx/HUD_D/SubWep3.png
+:HUD_D:SubWep4,lgfx/HUD_D/SubWep4.png
+:HUD_D:SubWep5,lgfx/HUD_D/SubWep5.png
+:HUD_D:SubWepBack,lgfx/HUD_D/SubWepBack.png
+:HUD_D:SubWepBar1,lgfx/HUD_D/SubWepBar1.png
+:HUD_D:SubWepBar2,lgfx/HUD_D/SubWepBar2.png
+:HUD_D:SubWepUse,lgfx/HUD_D/SubWepUse.png
 :HUD_D:WepBack,lgfx/HUD_D/WepBack.png
 :HUD_I:AMMO,lgfx/HUD_I/AMMO.png
 :HUD_I:AmmoExtend,lgfx/HUD_I/AmmoExtend.png
