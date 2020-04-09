@@ -43,8 +43,8 @@ script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
 }
 
 stkcall void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled || p->dlg.active) return;
 
+   if(!p->hudenabled) return;
    u32 prc = UData.charge ? UData.charge : 100;
    PrintTextChS("shots\ncharge\nwhich\ntemp UI");
    PrintText(s_lmidfont, CR_WHITE, 75,2, 120,1);

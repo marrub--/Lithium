@@ -112,6 +112,18 @@ void P_Upg_PMInit(struct player *p) {
 }
 
 script void P_Upg_PTick(struct player *p) {
+   if(p->dlg.active) {
+      p->hudenabled = false;
+   } else {
+      p->hudenabled = false;
+
+      for_upgrade(upgr) {
+         if(get_bit(upgr->flags, _ug_active) && upgr->info->group == UG_HUD) {
+            p->hudenabled = true;
+         }
+      }
+   }
+
    if(Paused)
       return;
 

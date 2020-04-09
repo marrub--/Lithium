@@ -165,7 +165,7 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 {
-   if(!p->hudenabled || p->dlg.active) return;
+   if(!p->hudenabled) return;
 
    i32 hprc = ceilk(min(UData.manaperc,       0.5) * 2 * 62);
    i32 fprc = ceilk(max(UData.manaperc - 0.5, 0.0) * 2 * 62);

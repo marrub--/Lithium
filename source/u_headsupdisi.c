@@ -85,22 +85,15 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
 stkcall
 void Upgr_HeadsUpDisI_Activate(struct player *p, struct upgrade *upgr)
 {
-   p->hudenabled = true;
    lerplli_init(&UData.score,     p->score,     4);
    lerplli_init(&UData.health,    p->health,    1);
    lerplli_init(&UData.overdrive, p->overdrive, 1);
 }
 
 stkcall
-void Upgr_HeadsUpDisI_Deactivate(struct player *p, struct upgrade *upgr)
-{
-   p->hudenabled = false;
-}
-
-stkcall
 void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
 {
-   if(p->dlg.active) return;
+   if(!p->hudenabled) return;
 
    HUD_Log(p, CR_LIGHTBLUE, 0, -15);
 

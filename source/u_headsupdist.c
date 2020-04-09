@@ -16,18 +16,6 @@
 /* Extern Functions -------------------------------------------------------- */
 
 stkcall
-void Upgr_HeadsUpDisT_Activate(struct player *p, struct upgrade *upgr)
-{
-   Upgr_HeadsUpDisC_Activate(p, upgr);
-}
-
-stkcall
-void Upgr_HeadsUpDisT_Deactivate(struct player *p, struct upgrade *upgr)
-{
-   Upgr_HeadsUpDisC_Deactivate(p, upgr);
-}
-
-stkcall
 void Upgr_HeadsUpDisT_Render(struct player *p, struct upgrade *upgr)
 {
    Upgr_HeadsUpDisC_Render(p, upgr);
