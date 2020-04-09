@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 == \#INFO_SHORT_700Express  | .700 Express
-== \#INFO_SHORT_4Bore       | Four-bore Shotgun
+== \#INFO_SHORT_4Bore       | 4 ga. Shotgun
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_Minigun     | Minigun
 == \#INFO_SHORT_DualRocket  | Franca & Sophia

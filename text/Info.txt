@@ -221,6 +221,21 @@
 +pC StarShot : AOF
 +pC Cercle   : Earth
 
++pD \700Express
++pD \4Bore
++pD ShrapnelGun
++pD Minigun
++pD DualRocket
++pD FatMac
++pD FortuneGun
+
++pD Subweapon0
++pD Subweapon1
++pD Subweapon2
++pD Subweapon3
++pD Subweapon4
++pD Subweapon5
+
 ;EXTRA. # --------------------------------------------------------------------|
 
 +gA Extra1
