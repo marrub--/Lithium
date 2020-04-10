@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_CasingSmoke : Actor
-{
-   default
-   {
+class Lith_CasingSmoke : Actor {
+   default {
       RenderStyle "Add";
       Alpha 0.6;
       Scale 0.02;
@@ -24,8 +22,7 @@ class Lith_CasingSmoke : Actor
       +FORCEXYBILLBOARD
    }
 
-   states
-   {
+   states {
    Spawn:
       SMOK C random(2, 5);
       SMOK DEFGH 4 A_FadeOut(FRandom(0.05, 0.15));
@@ -33,10 +30,8 @@ class Lith_CasingSmoke : Actor
    }
 }
 
-class Lith_CasShell : Lith_CasingBase
-{
-   default
-   {
+class Lith_CasShell : Lith_CasingBase {
+   default {
       Scale 0.26;
       BounceFactor 0.5;
       WallBounceFactor 0.4;
@@ -44,8 +39,7 @@ class Lith_CasShell : Lith_CasingBase
       BounceSound "casings/shell/bounce";
    }
 
-   states
-   {
+   states {
    Spawn1:
       SCAS AABBCCDDEEFFGGHH 1;
       loop;
@@ -56,10 +50,8 @@ class Lith_CasShell : Lith_CasingBase
    }
 }
 
-class Lith_CasShellHot : Lith_CasShell
-{
-   states
-   {
+class Lith_CasShellHot : Lith_CasShell {
+   states {
    Spawn1:
       TNT1 A 0;
       SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
@@ -69,10 +61,8 @@ class Lith_CasShellHot : Lith_CasShell
    }
 }
 
-class Lith_CasSmall : Lith_CasingBase
-{
-   default
-   {
+class Lith_CasSmall : Lith_CasingBase {
+   default {
       Scale 0.11;
       BounceFactor 0.5;
       WallBounceFactor 0.4;
@@ -80,8 +70,7 @@ class Lith_CasSmall : Lith_CasingBase
       BounceSound "casings/bullet/bounce";
    }
 
-   states
-   {
+   states {
    Spawn1:
       BCAS ABCDEFGH 1;
       loop;
@@ -92,10 +81,8 @@ class Lith_CasSmall : Lith_CasingBase
    }
 }
 
-class Lith_CasSmallHot : Lith_CasSmall
-{
-   states
-   {
+class Lith_CasSmallHot : Lith_CasSmall {
+   states {
    Spawn1:
       TNT1 A 0;
       BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
@@ -105,10 +92,8 @@ class Lith_CasSmallHot : Lith_CasSmall
    }
 }
 
-class Lith_CasBig : Lith_CasingBase
-{
-   default
-   {
+class Lith_CasBig : Lith_CasingBase {
+   default {
       Scale 0.11;
       BounceFactor 0.5;
       WallBounceFactor 0.4;
@@ -116,22 +101,19 @@ class Lith_CasBig : Lith_CasingBase
       BounceSound "casings/bullet/bounce";
    }
 
-   states
-   {
+   states {
    Spawn1:
       BBCA ABCDEFGH 1;
       loop;
    Death:
-      TNT1 A 0 A_StartSound("casings/bullet/die", lch_body);
-      BBCA CG 0 A_Jump(128, "Done");
+      #### # 0 A_StartSound("casings/bullet/die", lch_body);
+      #### CG 0 A_Jump(128, "Done");
       goto Done;
    }
 }
 
-class Lith_CasBigHot : Lith_CasBig
-{
-   states
-   {
+class Lith_CasBigHot : Lith_CasBig {
+   states {
    Spawn1:
       TNT1 A 0;
       BBCA ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0, 0, 3);
@@ -139,10 +121,17 @@ class Lith_CasBigHot : Lith_CasBig
    }
 }
 
+class Lith_Cas700e : Lith_CasBig {
+   states {
+   Spawn1:
+      B7CA ABCDEFGH 1;
+      loop;
+   }
+}
+
 class Lith_CasingBase : Actor;
 
-default
-{
+default {
    BounceType "Doom";
    Radius 3;
    Height 3;
@@ -155,8 +144,7 @@ default
    +FORCEXYBILLBOARD
 }
 
-states
-{
+states {
 Spawn:
    TNT1 A 0;
    TNT1 A 0 A_JumpIf(!lith_weapons_casings, "Null");

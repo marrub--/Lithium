@@ -310,3 +310,12 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_c_shipgun_011 | Srassa Drass
 == \#PK_c_shipgun_012 | Store Destroyer
 == \#PK_c_shipgun_013 | Master Spark
+
+== \#PK_d_700e_NUM | 4
+== \#PK_d_700e_000 | 700 Sexpress
+== \#PK_d_700e_001 | 777 Bexbus
+== \#PK_d_700e_002 | 7 Binbus
+== \#PK_d_700e_003 | Barbro Bexbess
+== \#PK_d_700e_004 | Beven Bundred Bexpress
+
+## EOF

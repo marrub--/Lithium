@@ -1085,6 +1085,12 @@
 "LITH_PK_c_shipgun_011" = "Srassa Drass";
 "LITH_PK_c_shipgun_012" = "Store Destroyer";
 "LITH_PK_c_shipgun_013" = "Master Spark";
+"LITH_PK_d_700e_NUM" = "4";
+"LITH_PK_d_700e_000" = "700 Sexpress";
+"LITH_PK_d_700e_001" = "777 Bexbus";
+"LITH_PK_d_700e_002" = "7 Binbus";
+"LITH_PK_d_700e_003" = "Barbro Bexbess";
+"LITH_PK_d_700e_004" = "Beven Bundred Bexpress";
 "LITH_LOG_HealthBonus" = "$LITH_INFO_SHORT_HealthBonus";
 "LITH_LOG_Medikit" = "$LITH_INFO_SHORT_Medikit";
 "LITH_LOG_MegaSphere" = "Mega Charge!";

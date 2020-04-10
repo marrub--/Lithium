@@ -595,6 +595,7 @@ weapons/700e/fire3 lsounds/WeaponsD/700Express/Fire3
 weapons/700e/out lsounds/WeaponsD/700Express/ReloadOut
 weapons/700e/in lsounds/WeaponsD/700Express/ReloadIn
 weapons/700e/move lsounds/WeaponsD/700Express/Move
+weapons/700e/draw lsounds/WeaponsD/700Express/Draw
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
 weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire
 weapons/minigun/fire lsounds/WeaponsD/Minigun/Fire

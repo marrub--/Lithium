@@ -27,6 +27,7 @@ weapons {
       out   ReloadOut # //
       in    ReloadIn  # //
       move  Move      # Halo 3
+      draw  Draw      # //
 
       $random fire {
          fire1,
