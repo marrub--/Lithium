@@ -7,12 +7,32 @@
  * ---------------------------------------------------------------------------|
  */
 
-Lith_Blue   {#111688 #3B47F8}
-Lith_Green  {#005000 #00FF00}
-Lith_Grey   {#3D3D3D #BFBFBF}
-Lith_Pink   {#611C47 #E873AF}
-Lith_Purple {#301875 #8C3BF8}
-Lith_Red    {#1F1F1F #BF0F4A}
-Lith_Yellow {#000000 #FFD023}
+Lith_Blue   {#111688 #3b47f8}
+Lith_Green  {#005000 #00ff00}
+Lith_Grey   {#3d3d3d #bfbfbf}
+Lith_Pink   {#611c47 #e873af}
+Lith_Purple {#301875 #8c3bf8}
+Lith_Red    {#1f1f1f #bf0f4a}
+Lith_Yellow {#000000 #ffd023}
+
+Lith_WSelC1 {#1f1f1f #bf0f4a}
+Lith_WSelC2 {#313131 #d92375}
+Lith_WSelC3 {#424242 #ee3e99}
+Lith_WSelCS {#550000 #ff0000}
+
+Lith_WSelD1 {#164b56 #0cc16d}
+Lith_WSelD2 {#311026 #c111aa}
+Lith_WSelD3 {#114801 #2eba03}
+Lith_WSelDS {#0f1e31 #0a97ac}
+
+Lith_WSelI1 {#615d13 #fcf434}
+Lith_WSelI2 {#747474 #fcfcfc}
+Lith_WSelI3 {#38214d #9c5cd4}
+Lith_WSelIS {#101010 #2c2c2c}
+
+Lith_WSelM1 {#001b12 #009868}
+Lith_WSelM2 {#343b00 #bfd800}
+Lith_WSelM3 {#005000 #00ff00}
+Lith_WSelMS {#002755 #0077ff}
 
 /* EOF */

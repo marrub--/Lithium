@@ -13,6 +13,21 @@
 /* decompat-out pk7/lzscript/Constants/m_drawing.zsc */
 
 /* decompat-cut */
+#if defined(GlobalCr)
+GlobalCr(blue)
+GlobalCr(green)
+GlobalCr(grey)
+GlobalCr(pink)
+GlobalCr(purple)
+GlobalCr(red)
+GlobalCr(yellow)
+
+GlobalCr(wselc1) GlobalCr(wselc2) GlobalCr(wselc3) GlobalCr(wselcs)
+GlobalCr(wseld1) GlobalCr(wseld2) GlobalCr(wseld3) GlobalCr(wselds)
+GlobalCr(wseli1) GlobalCr(wseli2) GlobalCr(wseli3) GlobalCr(wselis)
+GlobalCr(wselm1) GlobalCr(wselm2) GlobalCr(wselm3) GlobalCr(wselms)
+#undef GlobalCr
+#else
 #define BitArg(x, mask, shift) (((u32)(x) & mask) << shift)
 #define SignArg(x, mask) (((u32)(x) & mask) | ((u32)(x) & 0x80000000))
 
@@ -164,13 +179,12 @@ enum {
    ptf_add    = 0x80000,
 };
 
-extern i32 cr_blue;
-extern i32 cr_green;
-extern i32 cr_grey;
-extern i32 cr_pink;
-extern i32 cr_purple;
-extern i32 cr_red;
-extern i32 cr_yellow;
+#define Cr(name) globalcolors.name
+
+extern struct globalcolors {
+   #define GlobalCr(name) i32 name;
+   #include "m_drawing.h"
+} globalcolors;
 /* decompat-end */
 
 enum /* FontNum */
@@ -205,5 +219,9 @@ enum /* Channel */
    lch_weapon2,
    lch_weapon3,
 };
+
+/* decompat-cut */
+#endif
+/* decompat-end */
 
 /* EOF */

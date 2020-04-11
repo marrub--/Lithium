@@ -17,7 +17,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_many, i32 cr_none, i32 cr_cur, i32 _x, i32 _y) {
+void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i32 _y) {
    if(p->getCVarI(sc_hud_showweapons))
       for(i32 i = 1; i < SLOT_MAX; i++)
          ifauto(i32, slot, p->weapon.slot[i])
@@ -26,8 +26,8 @@ void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_many, i32 cr_none, i32
       k32 y = _y+.2;
       i32 cr;
       switch(slot) {
-      case 0:  cr = cr_none; break;
       case 1:  cr = cr_one;  break;
+      case 2:  cr = cr_two;  break;
       default: cr = cr_many; break;
       }
 

@@ -43,7 +43,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_lhudfont, cr_purple, x+242,1, 218,0, ptf_no_utf);
+      PrintTextX(s_lhudfont, Cr(purple), x+242,1, 218,0, ptf_no_utf);
    }
 
    if(has_nmag) {
@@ -55,14 +55,14 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_lhudfont, cr_purple, 242,1, 218,0, ptf_no_utf);
+      PrintTextX(s_lhudfont, Cr(purple), 242,1, 218,0, ptf_no_utf);
    }
 
    if(typegfx) {
       PrintSprite(typegfx, 309,0, 219,0);
    }
 
-   HUD_WeaponSlots(p, 0, CR_DARKGRAY, CR_GRAY, cr_purple, 323, 208);
+   HUD_WeaponSlots(p, Cr(wseli1), Cr(wseli2), Cr(wseli3), Cr(wselis), 323, 208);
 }
 
 static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
@@ -72,13 +72,13 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
    UData.health.value = p->health;
    lerplli(&UData.health);
 
-   HUD_DrawHealth(p, UData.health.value_display, 21, 202, cr_purple, 0);
+   HUD_DrawHealth(p, UData.health.value_display, 21, 202, Cr(purple), 0);
 
    UData.overdrive.value = p->overdrive;
    lerplli(&UData.overdrive);
 
    PrintTextFmt("%lli", UData.overdrive.value_display);
-   PrintTextX(s_lhudfont, cr_purple, 21,1, 220,0, ptf_no_utf);
+   PrintTextX(s_lhudfont, Cr(purple), 21,1, 220,0, ptf_no_utf);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -96,14 +96,14 @@ void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;
 
-   HUD_Log(p, cr_purple, 0, -15);
+   HUD_Log(p, Cr(purple), 0, -15);
 
    HUD_KeyInd(p, 20, 20, false, 0.8);
 
    UData.score.value = p->score;
    lerplli(&UData.score);
 
-   HUD_Score(p, "%s \CnScore", UData.score.value_display, s_lmidfont, cr_purple, 2,1);
+   HUD_Score(p, "%s \CnScore", UData.score.value_display, s_lmidfont, Cr(purple), 2,1);
 
    /* Status */
    HUDI_Ammo(p, upgr);

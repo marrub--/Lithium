@@ -44,7 +44,7 @@ static void HUD_Ammo(struct player *p)
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_lhudfont, cr_green, 224,1, 229-y,0, ptf_no_utf);
+      PrintTextX(s_lhudfont, Cr(green), 224,1, 229-y,0, ptf_no_utf);
    }
 
    if(wep->ammotype & AT_Ammo) {
@@ -59,7 +59,7 @@ static void HUD_Ammo(struct player *p)
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_lhudfont, cr_green, x+224,1, 229-y,0, ptf_no_utf);
+      PrintTextX(s_lhudfont, Cr(green), x+224,1, 229-y,0, ptf_no_utf);
    }
 
    if(typegfx)
@@ -93,7 +93,7 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 
    if(ft) SetFade(fid_health, 4, ft * 255);
 
-   HUD_DrawHealth(p, p->health, 34, 231, cr_green, UData.cr);
+   HUD_DrawHealth(p, p->health, 34, 231, Cr(green), UData.cr);
 
    str gfx = ws[p->weapon.cur->info->slot];
 
@@ -118,7 +118,7 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;
 
-   HUD_Log(p, cr_green, 0, 0);
+   HUD_Log(p, Cr(green), 0, 0);
 
    HUD_KeyInd(p, 320, 20, true, 0.8);
    HUD_Score(p, "%s\Cnscr", p->score, s_smallfnt, CR_WHITE, 320,2);
@@ -126,7 +126,7 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_Bar, 279,2, 238,2);
 
-   HUD_WeaponSlots(p, 0, CR_LIGHTBLUE, CR_BRICK, cr_green, 282, 237);
+   HUD_WeaponSlots(p, Cr(wselm1), Cr(wselm2), Cr(wselm3), Cr(wselms), 282, 237);
 
    /* Status */
    HUD_Ammo(p);
