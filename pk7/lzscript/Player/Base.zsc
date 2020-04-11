@@ -135,6 +135,10 @@ private void Lith_ItemVacuum() {
    }
 }
 
+double lith_getViewHeight() {
+   return height / 2 + attackZOffset * player.crouchFactor;
+}
+
 int, int, bool Lith_Unproject(vector3 loc) {
    /* create (view-adjusted) normalized vector for where we're looking */
    vector3 la = pos - loc;

@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_700Laser : Actor
-{
-   default
-   {
+class Lith_700Laser : Actor {
+   default {
       Scale 0.25;
       Alpha 0.5;
       RenderStyle "Translucent";
@@ -22,8 +20,7 @@ class Lith_700Laser : Actor
       +NOTIMEFREEZE
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT U 2;
       BLLT U 1 A_FadeOut;
@@ -31,18 +28,23 @@ class Lith_700Laser : Actor
    }
 }
 
-class Lith_700Laser2 : Lith_700Laser
-{
-   default
-   {
+class Lith_700Laser2 : Lith_700Laser {
+   default {
       Alpha 0.2;
+   }
+}
+
+class Lith_700Laser3 : Lith_700Laser {
+   states {
+   Spawn:
+      BLLT U -1;
+      stop;
    }
 }
 
 class Lith_700Express : Lith_DWeapon;
 
-default
-{
+default {
    Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 4;
    Tag "$LITH_INFO_SHORT_700Express";
@@ -53,8 +55,30 @@ default
    +WEAPON.NOAUTOFIRE;
 }
 
-action(Weapon) void Lith_A_Fire700e()
-{
+Actor[10] m_laser;
+bool m_doLaser;
+
+override void tick() {
+   super.tick();
+   vector3 beg, end; [beg, end] = lith_getLaserPos(0.0);
+
+   for(int i = 0; i < m_laser.size(); i++) {
+      if(!owner || owner.player.readyWeapon != self) {
+         if(m_laser[i]) m_laser[i].destroy();
+      } else if(m_doLaser) {
+         if(!m_laser[i])
+            m_laser[i] = Spawn("Lith_700Laser3",
+                               lith_lerpLaserPos(beg, end, i));
+         m_laser[i].alpha = 0.2 / (i + 1);
+      } else if(m_laser[i]) {
+         m_laser[i].alpha = 0.0;
+      }
+   }
+
+   m_doLaser = false;
+}
+
+action(Weapon) void lith_fire700e() {
    A_GunFlash("DummyFlash");
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
@@ -64,97 +88,121 @@ action(Weapon) void Lith_A_Fire700e()
    A_StartSound("weapons/700e/fire", lch_weapon);
 }
 
-action(Weapon) void Lith_A_Laser(double pit)
-{
-   if(invoker.Owner)
-   {
-      let ply = Lith_Player(invoker.Owner);
-      let sz  = ply.Height / 2 + ply.AttackZOffset * ply.Player.CrouchFactor;
+vector3, vector3 lith_getLaserPos(double pit) {
+   let ply = Lith_Player(owner);
+   let sz  = ply.lith_getViewHeight();
 
-      let loc = Lith_UTIL.TraceFrom(ply, ply.m_IYaw, 2048, ply.m_IPitch - pit, sz);
-      Spawn("Lith_700Laser", loc);
+   let ps = sin(ply.pitch - pit - 90);
+   let cz = cos(ply.pitch - pit - 90);
+   let ys = sin(ply.angle - 15);
+   let yc = cos(ply.angle - 15);
+   let cx = ps * yc;
+   let cy = ps * ys;
 
-      loc = Lith_UTIL.TraceFrom(ply, ply.angle, 2048, ply.pitch - pit, sz);
-      Spawn("Lith_700Laser2", loc);
+   let beg = (ply.pos.x      + cx * -16,
+              ply.pos.y      + cy * -16,
+              ply.pos.z + sz + cz * -16 + 1);
 
-      let ps = Sin(ply.Pitch - pit - 90);
-      let cz = Cos(ply.Pitch - pit - 90);
-      let ys = Sin(ply.Angle - 15);
-      let yc = Cos(ply.Angle - 15);
-      let cx = ps * yc;
-      let cy = ps * ys;
+   ys = sin(ply.angle);
+   yc = cos(ply.angle);
+   cx = ps * yc;
+   cy = ps * ys;
 
-      let beg = (ply.Pos.X      + cx * -16,
-                 ply.Pos.Y      + cy * -16,
-                 ply.Pos.Z + sz + cz * -16 + 1);
+   let end = (beg.X + cx * -32,
+              beg.Y + cy * -32,
+              beg.Z + cz * -32);
 
-      ys = Sin(ply.Angle);
-      yc = Cos(ply.Angle);
-      cx = ps * yc;
-      cy = ps * ys;
-      let end = (beg.X + cx * -32,
-                 beg.Y + cy * -32,
-                 beg.Z + cz * -32);
+   return beg, end;
+}
 
-      for(int i = 0; i < 10; i++)
-      {
-         let a = Spawn("Lith_700Laser2", Lith_UTIL.Vec3Lerp(beg, end, i / 10.0));
-         a.Alpha -= i / 40.0;
+vector3 lith_lerpLaserPos(vector3 beg, vector3 end, int i) {
+   return Lith_UTIL.Vec3Lerp(beg, end, i / 10.0);
+}
+
+void lith_moveLaser(double pit) {
+   if(!owner) return;
+
+   m_doLaser = true;
+
+   vector3 beg, end; [beg, end] = lith_getLaserPos(pit);
+
+   for(int i = 0; i < m_laser.size(); i++) {
+      if(m_laser[i]) {
+         m_laser[i].setOrigin(lith_lerpLaserPos(beg, end, i), true);
       }
    }
+}
+
+void lith_spawnLaserTrace(double pit) {
+   if(!owner) return;
+
+   let ply = Lith_Player(owner);
+   let sz  = ply.lith_getViewHeight();
+
+   let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, 2048, ply.m_ipitch - pit, sz);
+   Spawn("Lith_700Laser", loc);
+
+   loc = Lith_UTIL.TraceFrom(ply, ply.angle, 2048, ply.pitch - pit, sz);
+   Spawn("Lith_700Laser2", loc);
+
+}
+
+action(Weapon) void lith_laser(double pit) {
+   invoker.lith_spawnLaserTrace(pit);
+   invoker.lith_moveLaser(pit);
 }
 
 states(Weapon)
 {
 Ready:
+   700E A 0 lith_laser(0.0);
    700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
-   700E A 0 Lith_A_Laser(0.0);
    loop;
 
 Deselect:
    700E A 1 A_Lower(18);
-   loop;
+   wait;
 Select:
    700E A 1 A_Raise(18);
-   loop;
+   wait;
 
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
-   700E A 1 offset(2, 32) Lith_A_Laser(0.0);
+   700E A 1 offset(2, 32) lith_laser(0.0);
    700E Y 1 bright {
-      Lith_A_Fire700e();
-      Lith_A_Laser(22.0);
+      lith_fire700e();
+      lith_laser(22.0);
    }
    700E Z 1 bright offset(10, 28) {
       Lith_A_RecoilUp(2);
-      Lith_A_Laser(16.0);
+      lith_laser(16.0);
    }
-   700E CC 1 bright Lith_A_Laser(9.0);
-   700E CC 1 offset(9, 28) Lith_A_Laser(8.0);
-   700E C 1 offset(7, 30) Lith_A_Laser(7.0);
-   700E C 1 offset(5, 31) Lith_A_Laser(6.0);
-   700E C 1 offset(4, 31) Lith_A_Laser(6.0);
-   700E C 1 offset(3, 32) Lith_A_Laser(6.5);
-   700E BBB 1 offset(2, 32) Lith_A_Laser(5.0);
-   700E BBB 1 offset(1, 32) Lith_A_Laser(5.0);
-   700E A 1 Lith_A_Laser(0.0);
-   700E A 1 Lith_A_Laser(0.0);
-   700E A 1 offset(0, 32) Lith_A_Laser(0.0);
-   700E A 1 offset(0, 32) Lith_A_Laser(0.0);
+   700E CC 1 bright lith_laser(9.0);
+   700E CC 1 offset(9, 28) lith_laser(8.0);
+   700E C 1 offset(7, 30) lith_laser(7.0);
+   700E C 1 offset(5, 31) lith_laser(6.0);
+   700E C 1 offset(4, 31) lith_laser(6.0);
+   700E C 1 offset(3, 32) lith_laser(6.5);
+   700E BBB 1 offset(2, 32) lith_laser(5.0);
+   700E BBB 1 offset(1, 32) lith_laser(5.0);
+   700E A 1 lith_laser(0.0);
+   700E A 1 lith_laser(0.0);
+   700E A 1 offset(0, 32) lith_laser(0.0);
+   700E A 1 offset(0, 32) lith_laser(0.0);
    goto ReadySelector;
 
 FireEmpty:
-   700E A 1 Lith_A_Laser(0.0);
-   700E AA 1 offset(3, 38) Lith_A_Laser(0.0);
-   700E A 1 offset(7, 40) Lith_A_Laser(0.0);
+   700E A 1 lith_laser(0.0);
+   700E AA 1 offset(3, 38) lith_laser(0.0);
+   700E A 1 offset(7, 40) lith_laser(0.0);
    700E A 1 offset(5, 37) {
       A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
-      Lith_A_Laser(0.0);
+      lith_laser(0.0);
    }
-   700E A 1 offset(4, 34) Lith_A_Laser(0.0);
-   700E A 1 offset(2, 33) Lith_A_Laser(0.0);
-   700E AAAAA 1 offset(1, 32) Lith_A_Laser(0.0);
+   700E A 1 offset(4, 34) lith_laser(0.0);
+   700E A 1 offset(2, 33) lith_laser(0.0);
+   700E AAAAA 1 offset(1, 32) lith_laser(0.0);
    goto ReadySelector;
 
 Reload:
