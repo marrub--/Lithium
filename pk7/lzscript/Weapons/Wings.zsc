@@ -49,7 +49,7 @@ Ready:
       A_AlertMonsters();
       for(let it = BlockThingsIterator.create(self, 1024); it.next();) {
          let mo = it.thing;
-         if(mo.bSHOOTABLE && mo.checkSight(self)) {
+         if(mo != self && mo.bSHOOTABLE && mo.checkSight(self)) {
             mo.target = self;
             mo.A_Die();
          }
