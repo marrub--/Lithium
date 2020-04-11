@@ -41,7 +41,7 @@ class Lith_ItemGlow : Actor {
    states {
    Spawn:
       #### # 5 bright;
-      #### # 0 bright A_JumpIf(Players[ConsolePlayer].Camera.Vec2To(self).Length() > 600, "Spawn1");
+      #### # 0 bright A_JumpIf(players[consolePlayer].camera.Vec2To(self).Length() > 600, "Spawn1");
       #### # 1 bright A_FadeOut(1.0 / 35.0);
       wait;
    Spawn1:
@@ -71,8 +71,14 @@ mixin class Lith_Pickup {
    private meta int m_PkFlags;
 
    private meta string m_PkSprGf;
-   private meta string m_PkSprMf;
+
+   private meta string m_PkSprAf;
    private meta string m_PkSprCf;
+   private meta string m_PkSprDf;
+   private meta string m_PkSprIf;
+   private meta string m_PkSprMf;
+   private meta string m_PkSprTf;
+   private meta string m_PkSprWf;
 
    private int m_PkGlA;
    private int m_PkGlZ;
@@ -80,23 +86,42 @@ mixin class Lith_Pickup {
    private Actor m_PkSpr;
 
    private Lith_Sprite m_PkSprG;
-   private Lith_Sprite m_PkSprM;
+
+   private Lith_Sprite m_PkSprA;
    private Lith_Sprite m_PkSprC;
+   private Lith_Sprite m_PkSprD;
+   private Lith_Sprite m_PkSprI;
+   private Lith_Sprite m_PkSprM;
+   private Lith_Sprite m_PkSprT;
+   private Lith_Sprite m_PkSprW;
 
    private meta class<Actor> m_PkGlow;
 
-   property Sprite:  m_PkSprGf;
-   property SpriteM: m_PkSprMf;
+   property Sprite: m_PkSprGf;
+
+   property SpriteA: m_PkSprAf;
    property SpriteC: m_PkSprCf;
-   property Glow:    m_PkGlow;
+   property SpriteD: m_PkSprDf;
+   property SpriteI: m_PkSprIf;
+   property SpriteM: m_PkSprMf;
+   property SpriteT: m_PkSprTf;
+   property SpriteW: m_PkSprWf;
+
+   property Glow: m_PkGlow;
 
    flagdef Pkup_Generic:  m_PkFlags, 0;
    flagdef Pkup_NoSprite: m_PkFlags, 1;
 
    void Lith_PickupPostBeginPlay() {
       if(m_PkSprGf) m_PkSprG.Get(m_PkSprGf);
-      if(m_PkSprMf) m_PkSprM.Get(m_PkSprMf);
+
+      if(m_PkSprAf) m_PkSprA.Get(m_PkSprAf);
       if(m_PkSprCf) m_PkSprC.Get(m_PkSprCf);
+      if(m_PkSprDf) m_PkSprD.Get(m_PkSprDf);
+      if(m_PkSprIf) m_PkSprI.Get(m_PkSprIf);
+      if(m_PkSprMf) m_PkSprM.Get(m_PkSprMf);
+      if(m_PkSprTf) m_PkSprT.Get(m_PkSprTf);
+      if(m_PkSprWf) m_PkSprW.Get(m_PkSprWf);
 
       if(!bPKUP_NOSPRITE) {
          m_PkSpr = Spawn("Lith_ItemSprite", Pos);
@@ -110,20 +135,25 @@ mixin class Lith_Pickup {
       if(!m_PkSpr) return;
 
       if(bPKUP_GENERIC) {
-         Lith_SetSprite(m_PkSprG);
+         Lith_SetSpr(m_PkSprG);
          return;
       }
 
-      if(!Players[ConsolePlayer].Camera)
+      if(!players[consolePlayer].camera)
          return;
 
-      let p = Players[ConsolePlayer].Camera;
-      /**/ if(p is "Lith_MarinePlayer")    Lith_SetSprite(m_PkSprM);
-      else if(p is "Lith_CyberMagePlayer") Lith_SetSprite(m_PkSprC);
-      else                                 Lith_SetSprite(m_PkSprG);
+      let p = players[consolePlayer].camera;
+      /**/ if(m_PkSprAf && p is "Lith_AssassinPlayer")  Lith_SetSpr(m_PkSprA);
+      else if(m_PkSprCf && p is "Lith_CyberMagePlayer") Lith_SetSpr(m_PkSprC);
+      else if(m_PkSprDf && p is "Lith_DarkLordPlayer")  Lith_SetSpr(m_PkSprD);
+      else if(m_PkSprIf && p is "Lith_InformantPlayer") Lith_SetSpr(m_PkSprI);
+      else if(m_PkSprMf && p is "Lith_MarinePlayer")    Lith_SetSpr(m_PkSprM);
+      else if(m_PkSprTf && p is "Lith_ThothPlayer")     Lith_SetSpr(m_PkSprT);
+      else if(m_PkSprWf && p is "Lith_WandererPlayer")  Lith_SetSpr(m_PkSprW);
+      else if(m_PkSprGf)                                Lith_SetSpr(m_PkSprG);
    }
 
-   void Lith_SetSprite(Lith_Sprite s) {
+   void Lith_SetSpr(Lith_Sprite s) {
       m_PkSpr.Sprite = s.Spr;
       m_PkSpr.Frame  = s.Frm;
    }
@@ -132,18 +162,22 @@ mixin class Lith_Pickup {
       m_PkGlA = (m_PkGlA + 5) % 360;
       m_PkGlZ = (m_PkGlZ + 2) % 360;
 
-      if(!lith_player_noitemfx && Players[ConsolePlayer].Camera.CheckSight(self, SF_IGNOREVISIBILITY|SF_SEEPASTSHOOTABLELINES|SF_SEEPASTBLOCKEVERYTHING)) {
-         double sa = Sin(m_PkGlA);
-         double sz = Sin(m_PkGlZ);
-         double ca = Cos(m_PkGlA);
+      if(!lith_player_noitemfx &&
+         players[consolePlayer].camera.CheckSight(self,
+                                                  SF_IGNOREVISIBILITY       |
+                                                  SF_SEEPASTSHOOTABLELINES  |
+                                                  SF_SEEPASTBLOCKEVERYTHING)) {
+         double s = sin(m_PkGlA);
+         double z = sin(m_PkGlZ);
+         double c = cos(m_PkGlA);
 
-         A_SpawnItemEx(m_PkGlow,      sa  * 32,      ca  * 32,      24 + sz *  9);
-         A_SpawnItemEx(m_PkGlow,             0,      sa  * 32,      24 + ca * 32);
-         A_SpawnItemEx(m_PkGlow,      ca  * 32,      sa  * 32,      24 + sa * 32);
-         A_SpawnItemEx(m_PkGlow,      ca  * 32, (1 - sa) * 32 - 32, 24 + sa * 32);
-         A_SpawnItemEx(m_PkGlow,      sa  * 32,                  0, 24 + ca * 32);
-         A_SpawnItemEx(m_PkGlow,      sa  * 32,      ca  * 32,      24 + sa * 32);
-         A_SpawnItemEx(m_PkGlow, (1 - sa) * 32 - 32, ca  * 32,      24 + sa * 32);
+         spawn(m_PkGlow, pos + (     s  * 32,      c  * 32,      24 + z *  9));
+         spawn(m_PkGlow, pos + (           0,      s  * 32,      24 + c * 32));
+         spawn(m_PkGlow, pos + (     c  * 32,      s  * 32,      24 + s * 32));
+         spawn(m_PkGlow, pos + (     c  * 32, (1 - s) * 32 - 32, 24 + s * 32));
+         spawn(m_PkGlow, pos + (     s  * 32,                 0, 24 + c * 32));
+         spawn(m_PkGlow, pos + (     s  * 32,      c  * 32,      24 + s * 32));
+         spawn(m_PkGlow, pos + ((1 - s) * 32 - 32, c  * 32,      24 + s * 32));
       }
    }
 
