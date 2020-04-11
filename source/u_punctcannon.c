@@ -25,7 +25,7 @@ void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_PunctuatorFire")
+script_str ext("ACS") addr(OBJ "PunctuatorFire")
 void Sc_PunctuatorFire(void)
 {
    with_player(LocalPlayer)

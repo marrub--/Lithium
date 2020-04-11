@@ -40,12 +40,12 @@ void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
    }
 }
 
-void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i32 xa)
+void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, cstr cr, i32 x, i32 xa)
 {
    if(p->getCVarI(sc_hud_showscore)) {
       str scr = StrParam(fmt, scoresep(scrn));
 
-      PrintTextFmt("\C%S%S", cr, scr);
+      PrintTextFmt("\C%s%S", cr, scr);
       PrintTextX(font, 0, x,xa, 3,1, ptf_no_utf);
 
       if(p->score > p->old.score) {
@@ -72,7 +72,7 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, str cr, i32 x, i3
    }
 
    if(p->getCVarI(sc_hud_showlvl)) {
-      PrintTextFmt("\C%SLv.%u", cr, p->attr.level);
+      PrintTextFmt("\C%sLv.%u", cr, p->attr.level);
       if(p->attr.points) __nprintf(" (%u pts)", p->attr.points);
       PrintTextX(font, 0, x,xa, 17,1, ptf_no_utf);
    }

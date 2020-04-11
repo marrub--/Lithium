@@ -18,7 +18,7 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_CSLoadMap")
+script_str ext("ACS") addr(OBJ "CSLoadMap")
 void Sc_CSLoadMap(void)
 {
    FILE *fp = W_Open(sp_lfiles_Cyberspace, "r");

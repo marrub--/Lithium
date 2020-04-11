@@ -153,13 +153,13 @@ void SpawnBosses(i96 sum, bool force)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_PhantomSound")
+script_str ext("ACS") addr(OBJ "PhantomSound")
 void Sc_PhantomSound(void)
 {
    ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
-script_str ext("ACS") addr("Lith_PhantomTeleport")
+script_str ext("ACS") addr(OBJ "PhantomTeleport")
 void Sc_PhantomTeleport(void)
 {
    k32 ang = ACS_GetActorAngle(0);
@@ -172,7 +172,7 @@ void Sc_PhantomTeleport(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_PhantomDeath")
+script_str ext("ACS") addr(OBJ "PhantomDeath")
 void Sc_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);
@@ -200,7 +200,7 @@ void Sc_PhantomDeath(void)
       ACS_Delay(2);
    }
 
-   Dbg_Log(log_boss, "Lith_PhantomDeath: %s phase %i defeated", boss->name, boss->phase);
+   Dbg_Log(log_boss, "%s: %s phase %i defeated", __func__, boss->name, boss->phase);
 
    if(!ACS_GetCVar(sc_sv_nobossdrop))
       SpawnBossReward();
@@ -216,7 +216,7 @@ void Sc_PhantomDeath(void)
    bossspawned = false;
 }
 
-script_str ext("ACS") addr("Lith_SpawnBoss")
+script_str ext("ACS") addr(OBJ "SpawnBoss")
 void Sc_SpawnBoss(void)
 {
    if(!boss) return;
@@ -226,13 +226,13 @@ void Sc_SpawnBoss(void)
 
    ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%s", boss->name), boss->phase);
 
-   Dbg_Log(log_boss, "Lith_SpawnBoss: Boss %s phase %i spawned", boss->name, boss->phase);
+   Dbg_Log(log_boss, "%s: Boss %s phase %i spawned", __func__, boss->name, boss->phase);
    Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);
 
    bossspawned = true;
 }
 
-script_str ext("ACS") addr("Lith_TriggerBoss") optargs(1)
+script_str ext("ACS") addr(OBJ "TriggerBoss") optargs(1)
 void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
 {
    switch(diff) {

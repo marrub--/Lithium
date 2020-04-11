@@ -112,25 +112,25 @@ void Log(cstr fmt, ...)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_GiveEXPToMonster")
+script_str ext("ACS") addr(OBJ "GiveEXPToMonster")
 void Sc_GiveEXPToMonster(i32 amt)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
 }
 
-script_str ext("ACS") addr("Lith_GiveMeAllOfTheScore")
+script_str ext("ACS") addr(OBJ "GiveMeAllOfTheScore")
 void Sc_DbgGiveScore(void)
 {
    with_player(LocalPlayer) P_Scr_Give(p, INT96_MAX, true);
 }
 
-script_str ext("ACS") addr("Lith_DumpAlloc")
+script_str ext("ACS") addr(OBJ "DumpAlloc")
 void Sc_DbgDumpAlloc(void)
 {
    __GDCC__alloc_dump();
 }
 
-script_str ext("ACS") addr("Lith_PrintMonsterInfo")
+script_str ext("ACS") addr(OBJ "PrintMonsterInfo")
 void Sc_PrintMonsterInfo(void)
 {
    extern void PrintMonsterInfo(void);

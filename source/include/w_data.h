@@ -12,7 +12,7 @@
  */
 /* decompat-out pk7/lzscript/Constants/w_data.zsc */
 
-enum /* Lith_WData */
+enum /* WData */
 {
    wdata_bossspawned,
    wdata_soulsfreed,
@@ -21,7 +21,7 @@ enum /* Lith_WData */
    wdata_pclass,
 };
 
-enum /* Lith_Fun */
+enum /* Fun */
 {
    lfun_ragnarok = 1 << 0,
    lfun_bips     = 1 << 1,
@@ -29,7 +29,7 @@ enum /* Lith_Fun */
    lfun_division = 1 << 3,
 };
 
-enum /* Lith_CBIUpgradeM */
+enum /* CBIUpgradeM */
 {
    cupg_weapninter,
    cupg_hasupgr1,
@@ -40,7 +40,7 @@ enum /* Lith_CBIUpgradeM */
    cupg_max
 };
 
-enum /* Lith_CBIUpgradeC */
+enum /* CBIUpgradeC */
 {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
@@ -50,7 +50,7 @@ enum /* Lith_CBIUpgradeC */
    cupg_c_rdistinter,
 };
 
-enum /* Lith_RandomSpawnNum */
+enum /* RandomSpawnNum */
 {
    lrsn_garmor,
    lrsn_barmor,
@@ -60,7 +60,7 @@ enum /* Lith_RandomSpawnNum */
    lrsn_clipbx,
 };
 
-enum /* Lith_MsgType */
+enum /* MsgType */
 {
    msg_ammo,
    msg_huds,
@@ -68,7 +68,7 @@ enum /* Lith_MsgType */
    msg_both
 };
 
-enum /* Lith_DamageType */
+enum /* DamageType */
 {
    ldt_bullets,
    ldt_energy,
@@ -82,7 +82,7 @@ enum /* Lith_DamageType */
    ldt_none
 };
 
-enum /* Lith_ScriptNum */
+enum /* ScriptNum */
 {
    lsc_getfontmetric = 17100,
    lsc_metr_xadv,
@@ -99,7 +99,7 @@ enum /* Lith_ScriptNum */
    lsc_monstertype,
 };
 
-enum /* Lith_BossType */
+enum /* BossType */
 {
    boss_none,
    boss_barons,

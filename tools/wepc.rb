@@ -81,7 +81,7 @@ common_main do
  */
 #{generated_header "wepc"}
 
-enum /* Lith_WeaponNum */ {
+enum /* WeaponNum */ {
    weapon_min = 1,
    weapon_unknown = 0,
 
@@ -93,7 +93,7 @@ res
    weapon_max
 };
 
-enum /* Lith_WeaponName */ {
+enum /* WeaponName */ {
    wepnam_fist,
    wepnam_chainsaw,
    wepnam_pistol,
@@ -107,7 +107,7 @@ enum /* Lith_WeaponName */ {
    wepnam_max,
 };
 
-enum /* Lith_RifleMode */ {
+enum /* RifleMode */ {
    rifle_firemode_auto,
    rifle_firemode_grenade,
    rifle_firemode_burst,

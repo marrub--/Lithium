@@ -198,7 +198,7 @@ script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_LogS")
+script_str ext("ACS") addr(OBJ "LogS")
 void Sc_Log(i32 levl, i32 type) {
    str name = ServCallS(sm_GetLogName);
 

@@ -184,7 +184,7 @@ void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_SetMagicUI")
+script_str ext("ACS") addr(OBJ "SetMagicUI")
 void Sc_SetMagicUI(bool on)
 {
    with_player(LocalPlayer) SetMagicUI(p, on);

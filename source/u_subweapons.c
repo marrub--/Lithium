@@ -81,7 +81,7 @@ stkcall void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_GetSubShots")
+script_str ext("ACS") addr(OBJ "GetSubShots")
 i32 Sc_GetSubShots(void) {
    with_player(LocalPlayer) {
       if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
@@ -92,7 +92,7 @@ i32 Sc_GetSubShots(void) {
    return 0;
 }
 
-script_str ext("ACS") addr("Lith_TakeSubShot")
+script_str ext("ACS") addr(OBJ "TakeSubShot")
 void Sc_TakeSubShot(void) {
    with_player(LocalPlayer) {
       if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
@@ -101,7 +101,7 @@ void Sc_TakeSubShot(void) {
    }
 }
 
-script_str ext("ACS") addr("Lith_GetSubType")
+script_str ext("ACS") addr(OBJ "GetSubType")
 i32 Sc_GetSubType(void) {
    with_player(LocalPlayer) {
       return UData.which;

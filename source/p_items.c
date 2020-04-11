@@ -436,7 +436,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_ItemCreate")
+script_str ext("ACS") addr(OBJ "ItemCreate")
 struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr)
 {
    str name = GetMembS(0, sm_InvName);
@@ -456,7 +456,7 @@ struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr)
    return P_Item_New(&data);
 }
 
-script_str ext("ACS") addr("Lith_ItemAttach")
+script_str ext("ACS") addr(OBJ "ItemAttach")
 bool Sc_ItemAttach(struct item *item)
 {
    Dbg_Log(log_dev, "%s: attaching item %p", __func__, item);
@@ -466,7 +466,7 @@ bool Sc_ItemAttach(struct item *item)
    return false;
 }
 
-script_str ext("ACS") addr("Lith_ItemDetach")
+script_str ext("ACS") addr(OBJ "ItemDetach")
 void Sc_ItemDetach(struct item *item)
 {
    Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
@@ -474,7 +474,7 @@ void Sc_ItemDetach(struct item *item)
    if(item->Destroy) item->Destroy(item);
 }
 
-script_str ext("ACS") addr("Lith_ItemCanPlace")
+script_str ext("ACS") addr(OBJ "ItemCanPlace")
 bool Sc_ItemCanPlace(struct item *item)
 {
    with_player(LocalPlayer)
@@ -485,7 +485,7 @@ bool Sc_ItemCanPlace(struct item *item)
    return false;
 }
 
-script_str ext("ACS") addr("Lith_ItemOnBody")
+script_str ext("ACS") addr(OBJ "ItemOnBody")
 bool Sc_ItemOnBody(struct item *item)
 {
    return item->container && item->container->type == _cont_body;

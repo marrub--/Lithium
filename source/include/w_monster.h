@@ -33,7 +33,7 @@ enum dmgtype {
 };
 /* decompat-end */
 
-enum mtype /* Lith_MonsterType*/ {
+enum mtype /* MonsterType */ {
    mtype_unknown,
    mtype_zombie,
    mtype_zombiesg,

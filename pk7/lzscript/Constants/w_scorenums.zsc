@@ -24,7 +24,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-enum ScoreNum
+enum Lith_ScoreNum
 {
    /* Score values */
    Score_Clip      = 1000,
@@ -73,7 +73,7 @@ enum ScoreNum
    Score_AIMainframe = Score_DSparil,
 };
 
-enum EXPNum
+enum Lith_EXPNum
 {
    /* Tier 1 */
    Exp_ZombieMan   = 5,

@@ -110,20 +110,20 @@ static void UpdateGame(void)
       if(ACS_GetCVarFixed(sc_version) < n) \
          __with(ACS_SetCVarFixed(sc_version, n);)
 
-   Update(Lith_v1_5_1)
+   Update(v1_5_1)
       ACS_SetCVarFixed(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
 
-   Update(Lith_v1_5_2)
+   Update(v1_5_2)
       ACS_SetCVar(sc_sv_difficulty, 10); /* 1 => 10 */
 
-   Update(Lith_v1_6_0) {
+   Update(v1_6_0) {
       for_player() {
          p->setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
          p->setCVarI(sc_player_ammolog, true); /* false => true */
       }
    }
 
-   Update(Lith_v1_6_1) {
+   Update(v1_6_1) {
       for_player() {
          p->setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
       }
@@ -132,7 +132,7 @@ static void UpdateGame(void)
    /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
     * version 1.7 instead.
     */
-   Update(Lith_v1_7_0) {
+   Update(v1_7_0) {
       for_player() {
          if(p->getCVarI(sc_xhair_style) >= 10) {
             p->setCVarI(sc_xhair_style, 0);
@@ -189,9 +189,9 @@ static void MInitPst(void)
 
    /* Check for if rain should be used.
     * - If there are more than 1 players, never use rain.
-    * - If `user_Lith_NoRain' is set on LithMapLine, never use rain.
+    * - If `NoRain' is set on LithMapLine, never use rain.
     * - If the player has rain enabled, use it if not for those preconditions.
-    * - If `user_Lith_UseRain' is set on LithMapLine, use it if not for that.
+    * - If `UseRain' is set on LithMapLine, use it if not for that.
     */
    bool multi_player  = ACS_PlayerCount() > 1;
    bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
@@ -295,7 +295,7 @@ static void HInit(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_PreInit")
+script_str ext("ACS") addr(OBJ "PreInit")
 void Sc_PreInit(void)
 {
    GetDebugInfo();
@@ -428,13 +428,13 @@ begin:
    }
 }
 
-script_str ext("ACS") addr("Lith_InHell") i32 Sc_InHell(void) {return InHell;}
+script_str ext("ACS") addr(OBJ "InHell") i32 Sc_InHell(void) {return InHell;}
 
-script_str ext("ACS") addr("Lith_SkyMap") i32 Sc_SkyMap(void) {
+script_str ext("ACS") addr(OBJ "SkyMap") i32 Sc_SkyMap(void) {
    return ACS_GetCVar(sc_sv_sky) && !islithmap;
 }
 
-script_str ext("ACS") addr("Lith_WorldReopen")
+script_str ext("ACS") addr(OBJ "WorldReopen")
 void Sc_WorldReopen(void)
 {
    reopen = true;
@@ -457,7 +457,7 @@ static void Sc_WorldUnload(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_Finale")
+script_str ext("ACS") addr(OBJ "Finale")
 void Sc_Finale(void)
 {
    Str(normal,      s"Normal");

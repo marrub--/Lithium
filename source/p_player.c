@@ -464,7 +464,7 @@ stkcall static void P_Aug_PTick(struct player *p) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_Markiplier")
+script_str ext("ACS") addr(OBJ "Markiplier")
 void Sc_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
 
@@ -490,7 +490,7 @@ void Sc_MapMarker(i32 tid) {
    }
 }
 
-script_str ext("ACS") addr("Lith_SetAdviceMarker")
+script_str ext("ACS") addr(OBJ "SetAdviceMarker")
 void Sc_SetAdviceMarker(i32 tid) {
    str text;
 
@@ -535,7 +535,7 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
    }
 }
 
-script_str type("net") ext("ACS") addr("Lith_KeyBuyAutoGroup")
+script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
 void Sc_KeyBuyAutoGroup(i32 grp) {
    Str(snd_bought,  s"player/cbi/auto/buy");
    Str(snd_invalid, s"player/cbi/auto/invalid");
@@ -573,7 +573,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
    }
 }
 
-script_str type("net") ext("ACS") addr("Lith_KeyToggleAutoGroup")
+script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup")
 void Sc_KeyToggleAutoGroup(i32 grp) {
    Str(snd, s"player/cbi/auto/toggle");
 
@@ -598,7 +598,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
    }
 }
 
-script_str type("net") ext("ACS") addr("Lith_KeyGlare")
+script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
 void Sc_KeyGlare(void) {
    with_player(LocalPlayer) {
       Str(snd, s"player/glare");
@@ -617,7 +617,7 @@ void Sc_KeyGlare(void) {
    }
 }
 
-script_str ext("ACS") addr("Lith_TimelineInconsistent")
+script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
    for(;;) {
       for_player() {

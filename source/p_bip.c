@@ -143,7 +143,7 @@ stkcall cstr P_BIP_CategoryToName(u32 category) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_BIPUnlock")
+script_str ext("ACS") addr(OBJ "BIPUnlock")
 void Sc_UnlockPage(void) {
    with_player(LocalPlayer) {
       bip_name_t tag; lstrcpy_str(tag, ServCallS(sm_GetBipName));

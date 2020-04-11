@@ -94,7 +94,7 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_DodgeView")
+script_str ext("ACS") addr(OBJ "DodgeView")
 void Sc_DodgeView(void)
 {
    with_player(LocalPlayer) DodgeView(p);

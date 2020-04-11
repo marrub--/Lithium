@@ -209,7 +209,7 @@ void P_Wep_PTick(struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_WeaponPickup")
+script_str ext("ACS") addr(OBJ "WeaponPickup")
 bool Sc_WeaponPickup(i32 name)
 {
    extern void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
@@ -254,7 +254,7 @@ bool Sc_WeaponPickup(i32 name)
    }
 }
 
-script_str ext("ACS") addr("Lith_CircleSpread")
+script_str ext("ACS") addr(OBJ "CircleSpread")
 k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
 {
    static k32 A;
@@ -275,7 +275,7 @@ k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
       return P;
 }
 
-script_str ext("ACS") addr("Lith_ChargeFistDamage")
+script_str ext("ACS") addr(OBJ "ChargeFistDamage")
 i32 Sc_ChargeFistDamage(void)
 {
    i32 amount = InvNum(so_FistCharge);
@@ -283,7 +283,7 @@ i32 Sc_ChargeFistDamage(void)
    return amount * ACS_Random(1, 3);
 }
 
-script_str ext("ACS") addr("Lith_AmmoRunOut")
+script_str ext("ACS") addr(OBJ "AmmoRunOut")
 k32 Sc_AmmoRunOut(bool ro, k32 mul)
 {
    with_player(LocalPlayer)
@@ -305,7 +305,7 @@ k32 Sc_AmmoRunOut(bool ro, k32 mul)
    return 0;
 }
 
-script_str ext("ACS") addr("Lith_GetFinalizerMaxHealth")
+script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
 i32 Sc_GetFinalizerMaxHealth(void)
 {
    i32 sh = GetPropI(0, APROP_SpawnHealth);
@@ -316,7 +316,7 @@ i32 Sc_GetFinalizerMaxHealth(void)
       return sh;
 }
 
-script_str ext("ACS") addr("Lith_SurgeOfDestiny")
+script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
 void Sc_SurgeOfDestiny(void)
 {
    for(i32 i = 0; i < (35 * 17) / 2; i++) {
@@ -325,7 +325,7 @@ void Sc_SurgeOfDestiny(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_GetWRF")
+script_str ext("ACS") addr(OBJ "GetWRF")
 i32 Sc_GetWRF(void)
 {
    enum
@@ -358,7 +358,7 @@ i32 Sc_GetWRF(void)
    return flags;
 }
 
-script_str ext("ACS") addr("Lith_PoisonFXTicker")
+script_str ext("ACS") addr(OBJ "PoisonFXTicker")
 void Sc_PoisonFXTicker(void)
 {
    for(i32 i = 0; i < 17; i++)
@@ -386,7 +386,7 @@ void Sc_PoisonFXTicker(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_RecoilUp")
+script_str ext("ACS") addr(OBJ "RecoilUp")
 void Sc_RecoilUp(k32 amount)
 {
    with_player(LocalPlayer) p->extrpitch += amount / 180.lk;

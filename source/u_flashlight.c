@@ -101,13 +101,13 @@ stkcall void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_GetFlashlightIntensity")
+script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")
 k32 Sc_GetFlashlightIntensity(void) {
    with_player(LocalPlayer) {return UData.intensity;}
    return 0.0;
 }
 
-script_str type("net") ext("ACS") addr("Lith_KeyLight")
+script_str type("net") ext("ACS") addr(OBJ "KeyLight")
 void Sc_KeyLight(void) {with_player(LocalPlayer) {UData.on = !UData.on;}}
 
 /* EOF */

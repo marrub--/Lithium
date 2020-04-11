@@ -12,7 +12,7 @@
  */
 /* decompat-out pk7/lzscript/Constants/p_data.zsc */
 
-enum /* Lith_Attrib */ {
+enum /* Attrib */ {
    at_acc,
    at_def,
    at_str,
@@ -23,7 +23,7 @@ enum /* Lith_Attrib */ {
    at_max
 };
 
-enum /* Lith_PData */ {
+enum /* PData */ {
    pdata_weapon,
    pdata_upgrade,
    pdata_riflemode,
@@ -38,7 +38,7 @@ enum /* Lith_PData */ {
    pdata_attr,
 };
 
-enum /* Lith_SubweaponType */ {
+enum /* SubweaponType */ {
    _subw_gun,
    _subw_dagger,
    _subw_grenade,
@@ -48,7 +48,7 @@ enum /* Lith_SubweaponType */ {
    _subw_max,
 };
 
-enum /* Lith_PClass */ {
+enum /* PClass */ {
    pcl_unknown,
 
    /* Base Classes */

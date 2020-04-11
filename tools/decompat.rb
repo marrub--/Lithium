@@ -31,7 +31,7 @@ for filename in ARGV
          outfiles.push $~[1]
       else
          if ln =~ /enum\s+\w*\s*\/\*\s*([^\s]+)\s*\*\/( {)?/
-            ln = "enum #{$~[1]}#{$~[2]}"
+            ln = "enum Lith_#{$~[1]}#{$~[2]}"
          end
          out.push ln unless cut
       end

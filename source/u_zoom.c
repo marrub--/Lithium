@@ -73,7 +73,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") type("net") addr("Lith_KeyZoom")
+script_str ext("ACS") type("net") addr(OBJ "KeyZoom")
 void Sc_KeyZoom(i32 amt)
 {
    if(ACS_Timer() < 10) return;

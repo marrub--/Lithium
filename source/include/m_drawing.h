@@ -148,11 +148,11 @@
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
-#define CrBlue   "\C[Lith_Blue]"
-#define CrGreen  "\C[Lith_Green]"
-#define CrRed    "\C[Lith_Red]"
-#define CrPurple "\C[Lith_Purple]"
-#define CrGrey   "\C[Lith_Grey]"
+#define CrBlue   "\C[" OBJ "Blue]"
+#define CrGreen  "\C[" OBJ "Green]"
+#define CrRed    "\C[" OBJ "Red]"
+#define CrPurple "\C[" OBJ "Purple]"
+#define CrGrey   "\C[" OBJ "Grey]"
 
 enum {
    CHANF_LISTENERZ   = 8,
@@ -171,7 +171,7 @@ enum {
 };
 /* decompat-end */
 
-enum /* Lith_FontNum */
+enum /* FontNum */
 {
    font_misaki_gothic,
    font_misaki_mincho,
@@ -180,7 +180,7 @@ enum /* Lith_FontNum */
    font_num,
 };
 
-enum /* Lith_Channel */
+enum /* Channel */
 {
    lch_auto,
 

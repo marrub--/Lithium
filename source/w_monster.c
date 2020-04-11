@@ -352,13 +352,13 @@ i32 Sc_GetMonsterType()
    else                            return mtype_unknown;
 }
 
-script_str ext("ACS") addr("Lith_GiveMonsterEXP")
+script_str ext("ACS") addr(OBJ "GiveMonsterEXP")
 void Sc_GiveMonsterEXP(i32 amt)
 {
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
 }
 
-script_str ext("ACS") addr("Lith_ResurrectMonster")
+script_str ext("ACS") addr(OBJ "ResurrectMonster")
 void Sc_ResurrectMonster(i32 amt)
 {
    ifauto(dmon_t *, m, DmonSelf()) m->ms->resurrect = true;
@@ -399,7 +399,7 @@ void Sc_MonsterInfo(void)
    InvGive(so_MonsterInvalid, 1);
 }
 
-script_str ext("ACS") addr("Lith_MonsterFinalized")
+script_str ext("ACS") addr(OBJ "MonsterFinalized")
 void Sc_MonsterFinalized(void)
 {
    ifauto(dmon_t *, m, DmonSelf())

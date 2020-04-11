@@ -73,7 +73,7 @@ void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_RA_Give")
+script_str ext("ACS") addr(OBJ "RA_Give")
 void Sc_GiveRA(i32 num)
 {
    with_player(LocalPlayer)

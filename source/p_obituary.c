@@ -16,7 +16,7 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_Obituary")
+script_str ext("ACS") addr(OBJ "Obituary")
 void Sc_Obituary(void)
 {
    Str(ob_crush,      s"(crush)");

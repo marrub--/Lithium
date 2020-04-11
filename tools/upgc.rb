@@ -129,7 +129,7 @@ common_main do
 #{generated_header "upgc"}
 /* decompat-out pk7/lzscript/Constants/u_names.zsc */
 
-enum /* Lith_UpgradeName */ {
+enum /* UpgradeName */ {
 #{
 res = String.new
 upgrades.each_key do |una| res.concat "   UPGR_#{una},\n" end

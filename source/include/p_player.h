@@ -11,24 +11,24 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if defined(LITH_X)
+#if defined(PCL)
 /* Shorthand and classes. For parsing and headers. */
-LITH_X(pM, pcl_marine)
-LITH_X(pC, pcl_cybermage)
-LITH_X(pI, pcl_informant)
-LITH_X(pW, pcl_wanderer)
-LITH_X(pA, pcl_assassin)
-LITH_X(pD, pcl_darklord)
-LITH_X(pT, pcl_thoth)
+PCL(pM, pcl_marine)
+PCL(pC, pcl_cybermage)
+PCL(pI, pcl_informant)
+PCL(pW, pcl_wanderer)
+PCL(pA, pcl_assassin)
+PCL(pD, pcl_darklord)
+PCL(pT, pcl_thoth)
 
-LITH_X(gO, pcl_outcasts)
-LITH_X(gM, pcl_missioners)
-LITH_X(gI, pcl_intruders)
-LITH_X(gA, pcl_any)
-LITH_X(gH, pcl_human)
-LITH_X(gN, pcl_nonhuman)
-LITH_X(gR, pcl_robot)
-#undef LITH_X
+PCL(gO, pcl_outcasts)
+PCL(gM, pcl_missioners)
+PCL(gI, pcl_intruders)
+PCL(gA, pcl_any)
+PCL(gH, pcl_human)
+PCL(gN, pcl_nonhuman)
+PCL(gR, pcl_robot)
+#undef PCL
 #elif !defined(p_player_h)
 #define p_player_h
 
@@ -94,7 +94,7 @@ enum {
 
 enum
 {
-   #define LITH_X(l, r) l = r,
+   #define PCL(l, r) l = r,
    #include "p_player.h"
 };
 

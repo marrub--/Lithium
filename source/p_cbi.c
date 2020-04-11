@@ -147,7 +147,7 @@ void P_CBI_PMinit(struct player *p) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") type("net") addr("Lith_KeyOpenCBI")
+script_str ext("ACS") type("net") addr(OBJ "KeyOpenCBI")
 void Sc_OpenCBI(void) {
    if(ACS_Timer() < 10) return;
    with_player(LocalPlayer) P_GUI_Use(p);

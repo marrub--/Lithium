@@ -52,7 +52,7 @@ void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_HomingMissile")
+script_str ext("ACS") addr(OBJ "HomingMissile")
 void Sc_HomingMissile(void)
 {
    struct player *p = P_PtrFind(0, AAPTR_TARGET);

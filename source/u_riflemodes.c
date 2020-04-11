@@ -47,7 +47,7 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_SwitchRifleFiremode")
+script_str ext("ACS") addr(OBJ "SwitchRifleFiremode")
 void Sc_SwitchRifleFiremode(void)
 {
    with_player(LocalPlayer)
@@ -57,7 +57,7 @@ void Sc_SwitchRifleFiremode(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_ResetRifleMode")
+script_str ext("ACS") addr(OBJ "ResetRifleMode")
 void Sc_ResetRifleMode(void)
 {
    with_player(LocalPlayer)

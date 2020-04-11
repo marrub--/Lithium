@@ -85,13 +85,13 @@ void CBI_InstallSpawned(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_CBIItemWasSpawned")
+script_str ext("ACS") addr(OBJ "CBIItemWasSpawned")
 void Sc_CBIItemWasSpawned(i32 num)
 {
    cbispawn[cbispawniter++] = num;
 }
 
-script_str ext("ACS") addr("Lith_PickupCBIItem")
+script_str ext("ACS") addr(OBJ "PickupCBIItem")
 void Sc_PickupCBIItem(i32 num)
 {
    with_player(LocalPlayer)

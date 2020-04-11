@@ -45,7 +45,7 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       Dlg_PushB2(d, VAR_PCLASS);
 
       Dlg_PushB1(d, DCD_CMP_VI);
-      #define LITH_X(shr, lng) \
+      #define PCL(shr, lng) \
          if(faststrcmp(tok->textV, #shr) == 0) {Dlg_PushB1(d, shr); goto ok;}
       #include "p_player.h"
       ErrT(d, tok, "invalid playerclass type");

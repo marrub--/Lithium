@@ -17,7 +17,7 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_Blade")
+script_str ext("ACS") addr(OBJ "Blade")
 void Sc_Blade(bool hit)
 {
    with_player(LocalPlayer) {
@@ -27,7 +27,7 @@ void Sc_Blade(bool hit)
    }
 }
 
-script_str ext("ACS") addr("Lith_Rend")
+script_str ext("ACS") addr(OBJ "Rend")
 void Sc_Rend(bool hit, i32 set)
 {
    with_player(LocalPlayer) {
@@ -37,7 +37,7 @@ void Sc_Rend(bool hit, i32 set)
    }
 }
 
-script_str ext("ACS") addr("Lith_Feuer")
+script_str ext("ACS") addr(OBJ "Feuer")
 void Sc_Feuer(bool left, bool fire)
 {
    with_player(LocalPlayer)
@@ -80,7 +80,7 @@ void Sc_Feuer(bool left, bool fire)
    }
 }
 
-script_str ext("ACS") addr("Lith_Cercle")
+script_str ext("ACS") addr(OBJ "Cercle")
 void Sc_Cercle(void)
 {
    with_player(LocalPlayer)
@@ -163,7 +163,7 @@ void Sc_Cercle(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_MagicSelect")
+script_str ext("ACS") addr(OBJ "MagicSelect")
 void Sc_MagicSelect(i32 num)
 {
    with_player(LocalPlayer)

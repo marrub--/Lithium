@@ -33,7 +33,7 @@ enum {
 };
 /* decompat-end */
 
-enum /* Lith_Container */ {
+enum /* Container */ {
    _cont_store,
    _cont_arms_u,
    _cont_arms_l,

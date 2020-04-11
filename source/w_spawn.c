@@ -102,7 +102,7 @@ static cstr RandomWeighted(struct witem const *l, i32 c)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_RandomSpawn")
+script_str ext("ACS") addr(OBJ "RandomSpawn")
 void Sc_RandomSpawn(i32 rsn)
 {
    cstr item;

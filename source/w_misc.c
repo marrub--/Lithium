@@ -135,25 +135,25 @@ void Sc_AddAngle(i32 x, i32 y)
    AddAngle(x, y);
 }
 
-script_str ext("ACS") addr("Lith_EmitScore")
+script_str ext("ACS") addr(OBJ "EmitScore")
 void Sc_EmitScore(i32 amount)
 {
    /* dummied out */
 }
 
-script_str ext("ACS") addr("Lith_EmitEXP")
+script_str ext("ACS") addr(OBJ "EmitEXP")
 void Sc_EmitEXP(i32 amount)
 {
    P_GiveAllEXP(amount);
 }
 
-script_str ext("ACS") addr("Lith_GiveScore")
+script_str ext("ACS") addr(OBJ "GiveScore")
 void Sc_GiveScore(i32 score)
 {
    P_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
-script_str ext("ACS") addr("Lith_BoughtItemPickup")
+script_str ext("ACS") addr(OBJ "BoughtItemPickup")
 void Sc_BoughtItemPickup(i32 id)
 {
    with_player(LocalPlayer) if(id)

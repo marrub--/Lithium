@@ -102,7 +102,7 @@ void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
    UData.score.value = p->score;
    lerplli(&UData.score);
 
-   HUD_Score(p, "%s \CnScore", UData.score.value_display, s_lmidfont, s"[Lith_Purple]", 2,1);
+   HUD_Score(p, "%s \CnScore", UData.score.value_display, s_lmidfont, CrPurple, 2,1);
 
    /* Status */
    HUDI_Ammo(p, upgr);

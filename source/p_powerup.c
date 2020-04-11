@@ -19,7 +19,7 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_DOGS")
+script_str ext("ACS") addr(OBJ "DOGS")
 void Sc_DOGS(void)
 {
    with_player(LocalPlayer)
@@ -46,7 +46,7 @@ void Sc_DOGS(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_SteggleEnergy")
+script_str ext("ACS") addr(OBJ "SteggleEnergy")
 void Sc_SteggleEnergy(void)
 {
    with_player(P_PtrFind(0, AAPTR_FRIENDPLAYER))
@@ -71,7 +71,7 @@ void Sc_SteggleEnergy(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_BarrierBullets")
+script_str ext("ACS") addr(OBJ "BarrierBullets")
 void Sc_BarrierBullets(void)
 {
    with_player(P_PtrFind(0, AAPTR_TARGET))
@@ -88,7 +88,7 @@ void Sc_BarrierBullets(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_GetSigil")
+script_str ext("ACS") addr(OBJ "GetSigil")
 void Sc_GetSigil(void)
 {
    with_player(LocalPlayer)
@@ -125,7 +125,7 @@ void Sc_GetSigil(void)
    }
 }
 
-script_str ext("ACS") addr("Lith_GiveHealthBonus")
+script_str ext("ACS") addr(OBJ "GiveHealthBonus")
 void Sc_GiveHealthBonus(i32 amount)
 {
    with_player(LocalPlayer)
@@ -136,7 +136,7 @@ void Sc_GiveHealthBonus(i32 amount)
    }
 }
 
-script_str ext("ACS") addr("Lith_GiveHealth")
+script_str ext("ACS") addr(OBJ "GiveHealth")
 void Sc_GiveHealth(i32 amount)
 {
    with_player(LocalPlayer)
@@ -148,14 +148,14 @@ void Sc_GiveHealth(i32 amount)
    }
 }
 
-script_str ext("ACS") addr("Lith_CheckHealth")
+script_str ext("ACS") addr(OBJ "CheckHealth")
 bool Sc_CheckHealth(void)
 {
    with_player(LocalPlayer) return p->health < p->maxhealth;
    return 0;
 }
 
-script_str ext("ACS") addr("Lith_Discount")
+script_str ext("ACS") addr(OBJ "Discount")
 void Sc_Discount(void)
 {
    with_player(LocalPlayer) p->discount = 0.9;

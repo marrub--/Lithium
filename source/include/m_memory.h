@@ -21,7 +21,7 @@
 #define Ralloc_real(p, s) realloc(p, s)
 #define Salloc_real(t)    calloc(1, sizeof(t))
 
-#if LITH_MEMORY_DEBUG
+#if MEMORY_DEBUG
 #include <stdio.h>
 #include <ACS_ZDoom.h>
 #define AllocLog(name) (ACS_BeginPrint(), \

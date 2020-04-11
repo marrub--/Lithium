@@ -380,7 +380,7 @@ void P_Dat_PTickPst(struct player *p)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_KeyDown")
+script_str ext("ACS") addr(OBJ "KeyDown")
 void Sc_KeyDown(i32 pnum, i32 ch)
 {
    with_player(&players[pnum])

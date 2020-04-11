@@ -957,7 +957,7 @@ halt:
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_RunProgram")
+script_str ext("ACS") addr(OBJ "RunProgram")
 void Sc_RunProgram(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {
@@ -967,7 +967,7 @@ void Sc_RunProgram(i32 num) {
    }
 }
 
-script_str ext("ACS") addr("Lith_RunDialogue")
+script_str ext("ACS") addr(OBJ "RunDialogue")
 void Sc_RunDialogue(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {
@@ -978,7 +978,7 @@ void Sc_RunDialogue(i32 num) {
    }
 }
 
-script_str ext("ACS") addr("Lith_RunTerminal")
+script_str ext("ACS") addr(OBJ "RunTerminal")
 void Sc_RunTerminal(i32 num) {
    with_player(LocalPlayer) {
       if(!p->dlg.active) {

@@ -73,7 +73,7 @@ void UnfreezeTime(bool players_ok) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr("Lith_Timer")
+script_str ext("ACS") addr(OBJ "Timer")
 i32 Sc_Timer(void) {
    return ACS_Timer();
 }
