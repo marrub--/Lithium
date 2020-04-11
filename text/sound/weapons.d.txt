@@ -51,6 +51,7 @@ weapons {
       magout MagOut      # E.Y.E: Divine Cybermancy
       magin  MagIn       # //
       pickup Pickup      # Doom 3
+      draw   Draw        # //
    }
 
    dualrocket {

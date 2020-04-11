@@ -152,8 +152,7 @@ action(Weapon) void lith_laser(double pit) {
    invoker.lith_moveLaser(pit);
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    700E A 0 lith_laser(0.0);
    700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
