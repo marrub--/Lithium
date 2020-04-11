@@ -45,8 +45,8 @@ Category(stx_gui);
 Float(Times, gui_xmul, 0.1, 2.0);
 Float(Times, gui_ymul, 0.1, 2.0);
 Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
-Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
-Enum(gui_defcr, 'a', 'z', "\C%c%s", set, ColorName(set));
+Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursorName(set));
+Color(gui_defcr);
 Enum(gui_jpfont, 0, font_num-1, "%s", JpFontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
@@ -135,7 +135,7 @@ Bool(xhair_enablejuicer);
 Category(stx_vscan);
 Int(Pixels, scanner_xoffs, -160, 160);
 Int(Pixels, scanner_yoffs, -180,  20);
-Enum(scanner_color, 'a', 'z', "\C%c%s", set, ColorName(set));
+Color(scanner_color);
 Bool(scanner_slide);
 Bool(scanner_bar);
 Bool(scanner_altfont);
@@ -159,6 +159,7 @@ Text(stx_postgame_4);
 #undef CBox
 #undef Category
 #undef Enum
+#undef Color
 #undef Float
 #undef FromUI
 #undef Int
@@ -175,19 +176,19 @@ Text(stx_postgame_4);
 
 /* Static Functions -------------------------------------------------------- */
 
-#define NameFunc(name, arg, min, max, fmt, ...)  \
-   static cstr name(arg n) { \
+#define NameFunc(name, arg, min, max)  \
+   static cstr name##Name(arg n) { \
       if(n < min || n >= max) return LC(LANG "ST_NAME_Unknown"); \
-      else                    return LanguageC(fmt, __VA_ARGS__); \
+      else                    return LanguageC(LANG "ST_NAME_" #name "_%i", n); \
    }
 
-NameFunc(LvSysName,  i32,  0,   atsys_max,     LANG "ST_NAME_LvSys_%i",  n)
-NameFunc(ColorName,  char, 'a', 'z' + 1,       LANG "ST_NAME_Color_%c",  n)
-NameFunc(CursName,   i32,  0,   gui_curs_max,  LANG "ST_NAME_Cursor_%i", n)
-NameFunc(XHairName,  i32,  0,   lxh_max,       LANG "ST_NAME_XHair_%i",  n)
-NameFunc(ExpBarName, i32,  0,   lxb_max,       LANG "ST_NAME_ExpBar_%i",  n)
-NameFunc(JpFontName, i32,  0,   font_num,      LANG "ST_NAME_JpFont_%i", n)
-NameFunc(ThemeName,  i32,  0,   cbi_theme_max, LANG "ST_NAME_Theme_%i",  n)
+NameFunc(LvSys,  i32,  0,   atsys_max)
+NameFunc(Color,  char, 'a', 'z' + _gcr_max + 1)
+NameFunc(Cursor, i32,  0,   gui_curs_max)
+NameFunc(XHair,  i32,  0,   lxh_max)
+NameFunc(ExpBar, i32,  0,   lxb_max)
+NameFunc(JpFont, i32,  0,   font_num)
+NameFunc(Theme,  i32,  0,   cbi_theme_max)
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -203,6 +204,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
 #define ServerFloat(...) y += 10
 #define ServerInt(...)   y += 10
 #define Enum(...)        y += 10
+#define Color(...)       y += 10
 #define Text(...)        y += 10
 #define FromUI
 #include "p_settings.c"
@@ -312,6 +314,21 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
             p->setCVarI(sc_##cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
          PrintText(s_smallfnt, g->defcr, g->ox + 200,1, g->oy + y + 0,1); \
+      } \
+      y += 10; \
+   } while(0)
+
+#define Color(cvar) \
+   do { \
+      if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
+         i32 set = p->getCVarI(sc_##cvar); \
+         Label(cvar); \
+         if(G_Button_Id(g, 0, .x = 280 - (gui_p.btnnexts.w*2), y, set == 'a', Pre(btnprevs))) \
+            p->setCVarI(sc_##cvar, set - 1); \
+         if(G_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == 'z' + _gcr_max, Pre(btnnexts))) \
+            p->setCVarI(sc_##cvar, set + 1); \
+         PrintTextChS(ColorName(set)); \
+         PrintText(s_smallfnt, Draw_GetCr(set), g->ox + 200,1, g->oy + y + 0,1); \
       } \
       y += 10; \
    } while(0)

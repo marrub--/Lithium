@@ -34,32 +34,52 @@
 == \#ST_NAME_ExpBar_11 | Pink
 == \#ST_NAME_ExpBar_12 | More Pink
 
-== \#ST_NAME_Color_a | Brick
-== \#ST_NAME_Color_b | Tan
-== \#ST_NAME_Color_c | Grey
-== \#ST_NAME_Color_d | Green
-== \#ST_NAME_Color_e | Brown
-== \#ST_NAME_Color_f | Gold
-== \#ST_NAME_Color_g | Red
-== \#ST_NAME_Color_h | Blue
-== \#ST_NAME_Color_i | Orange
-== \#ST_NAME_Color_j | White
-== \#ST_NAME_Color_k | Yellow
-== \#ST_NAME_Color_l | Default
-== \#ST_NAME_Color_m | Black
-== \#ST_NAME_Color_n | Light Blue
-== \#ST_NAME_Color_o | Cream
-== \#ST_NAME_Color_p | Olive
-== \#ST_NAME_Color_q | Dark Green
-== \#ST_NAME_Color_r | Dark Red
-== \#ST_NAME_Color_s | Dark Brown
-== \#ST_NAME_Color_t | Purple
-== \#ST_NAME_Color_u | Dark Grey
-== \#ST_NAME_Color_v | Cyan
-== \#ST_NAME_Color_w | Ice
-== \#ST_NAME_Color_x | Fire
-== \#ST_NAME_Color_y | Sapphire
-== \#ST_NAME_Color_z | Teal
+== \#ST_NAME_Color_97  | Brick
+== \#ST_NAME_Color_98  | Tan
+== \#ST_NAME_Color_99  | Grey
+== \#ST_NAME_Color_100 | Green
+== \#ST_NAME_Color_101 | Brown
+== \#ST_NAME_Color_102 | Gold
+== \#ST_NAME_Color_103 | Red
+== \#ST_NAME_Color_104 | Blue
+== \#ST_NAME_Color_105 | Orange
+== \#ST_NAME_Color_106 | White
+== \#ST_NAME_Color_107 | Yellow
+== \#ST_NAME_Color_108 | Default
+== \#ST_NAME_Color_109 | Black
+== \#ST_NAME_Color_110 | Light Blue
+== \#ST_NAME_Color_111 | Cream
+== \#ST_NAME_Color_112 | Olive
+== \#ST_NAME_Color_113 | Dark Green
+== \#ST_NAME_Color_114 | Dark Red
+== \#ST_NAME_Color_115 | Dark Brown
+== \#ST_NAME_Color_116 | Purple
+== \#ST_NAME_Color_117 | Dark Grey
+== \#ST_NAME_Color_118 | Cyan
+== \#ST_NAME_Color_119 | Ice
+== \#ST_NAME_Color_120 | Fire
+== \#ST_NAME_Color_121 | Sapphire
+== \#ST_NAME_Color_122 | Teal
+== \#ST_NAME_Color_123 | $\#CLASS_DARKLORD
+== \#ST_NAME_Color_124 | $\#CLASS_MARINE
+== \#ST_NAME_Color_125 | $\#CLASS_THOTH
+== \#ST_NAME_Color_126 | $\#CLASS_ASSASSIN
+== \#ST_NAME_Color_127 | $\#CLASS_INFORMANT
+== \#ST_NAME_Color_128 | $\#CLASS_CYBERMAGE
+== \#ST_NAME_Color_129 | $\#CLASS_WANDERER
+== \#ST_NAME_Color_130 | Lane Red
+== \#ST_NAME_Color_131 | Lane D. Orange
+== \#ST_NAME_Color_132 | Lane Orange
+== \#ST_NAME_Color_133 | Lane Yellow
+== \#ST_NAME_Color_134 | Lane Y-Green
+== \#ST_NAME_Color_135 | Lane Green
+== \#ST_NAME_Color_136 | Lane Cyan
+== \#ST_NAME_Color_137 | Lane Blue
+== \#ST_NAME_Color_138 | Lane Indigo
+== \#ST_NAME_Color_139 | Lane Purple
+== \#ST_NAME_Color_140 | Lane Lavendar
+== \#ST_NAME_Color_141 | Lane Pink
+== \#ST_NAME_Color_142 | Lane Hot Pink
 
 == \#ST_NAME_Cursor_0 | Green
 == \#ST_NAME_Cursor_1 | Pink

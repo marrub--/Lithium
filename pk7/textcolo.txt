@@ -15,6 +15,20 @@ Lith_Purple {#301875 #8c3bf8}
 Lith_Red    {#1f1f1f #bf0f4a}
 Lith_Yellow {#000000 #ffd023}
 
+Lith_RRed {#000000 #f54f4c}
+Lith_RDOr {#000000 #f2754b}
+Lith_ROra {#000000 #f7a54d}
+Lith_RYel {#000000 #fae04d}
+Lith_RYlg {#000000 #b8f24b}
+Lith_RGrn {#000000 #48f74b}
+Lith_RCya {#000000 #44e5eb}
+Lith_RBlu {#000000 #427aeb}
+Lith_RInd {#000000 #6e6eab}
+Lith_RPur {#000000 #b948ff}
+Lith_RLav {#000000 #be66f9}
+Lith_RPnk {#000000 #eb42d4}
+Lith_RHPn {#000000 #f2416b}
+
 Lith_WSelC1 {#1f1f1f #bf0f4a}
 Lith_WSelC2 {#313131 #d92375}
 Lith_WSelC3 {#424242 #ee3e99}

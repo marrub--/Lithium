@@ -85,12 +85,10 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       } else {
          Str(six_tag, s"\Cg6");
 
-         char color = p->getCVarI(sc_scanner_color) & 0x7F;
-
          /**/ if(six)     UData.tagstr = six_tag;
-         else if(henshin) UData.tagstr = StrParam("\CgLegendary\C%c %tS", color, 0);
-         else if(phantom) UData.tagstr = StrParam("\Cg%tS", 0);
-         else             UData.tagstr = StrParam("\C%c%tS", color, 0);
+         else if(henshin) UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
+         else if(phantom) UData.tagstr = StrParam("\Cg%tS\C-", 0);
+         else             UData.tagstr = StrParam("%tS\C-", 0);
       }
 
       if(!healthset) {
@@ -162,7 +160,9 @@ stkcall void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    bool afnt = p->getCVarI(sc_scanner_altfont);
    str  font = afnt ? s_lmidfont : s_smallfnt;
 
-   PrintText_str(UData.tagstr, font, CR_WHITE, 160+ox,4, 216+oy,2);
+   int cr = Draw_GetCr(p->getCVarI(sc_scanner_color));
+
+   PrintText_str(UData.tagstr, font, cr, 160+ox,4, 216+oy,2);
 
    if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
    else                PrintTextFmt("%uhp",  UData.health);

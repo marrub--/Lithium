@@ -50,7 +50,7 @@ int Draw_GetCr(int n) {
       case 'x': return CR_FIRE;
       case 'y': return CR_SAPPHIRE;
       case 'z': return CR_TEAL;
-      #define GlobalCr(name) case 0x7b + globalcr_##name: return Cr(name);
+      #define GlobalCr(name) case 0x7b + _gcr_##name: return Cr(name);
       #define GlobalCrH(name)
       #include "m_drawing.h"
    }

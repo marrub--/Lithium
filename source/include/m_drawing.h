@@ -18,13 +18,12 @@
 #define GlobalCrH GlobalCr
 #endif
 
-GlobalCr(blue)
-GlobalCr(green)
-GlobalCr(grey)
-GlobalCr(pink)
-GlobalCr(purple)
-GlobalCr(red)
-GlobalCr(yellow)
+GlobalCr(blue) GlobalCr(green) GlobalCr(grey) GlobalCr(pink) GlobalCr(purple)
+GlobalCr(red)  GlobalCr(yellow)
+
+GlobalCr(rred) GlobalCr(rdor) GlobalCr(rora) GlobalCr(ryel) GlobalCr(rylg)
+GlobalCr(rgrn) GlobalCr(rcya) GlobalCr(rblu) GlobalCr(rind) GlobalCr(rpur)
+GlobalCr(rlav) GlobalCr(rpnk) GlobalCr(rhpn)
 
 GlobalCrH(wselc1) GlobalCrH(wselc2) GlobalCrH(wselc3) GlobalCrH(wselcs)
 GlobalCrH(wseld1) GlobalCrH(wseld2) GlobalCrH(wseld3) GlobalCrH(wselds)
@@ -192,10 +191,10 @@ extern struct globalcolors {
 } globalcolors;
 
 enum {
-   #define GlobalCr(name) globalcr_##name,
+   #define GlobalCr(name) _gcr_##name,
    #define GlobalCrH(name)
    #include "m_drawing.h"
-   globalcr_max,
+   _gcr_max,
 };
 
 int Draw_GetCr(int n);
