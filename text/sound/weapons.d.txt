@@ -50,6 +50,7 @@ weapons {
       empty  Empty       # Halo 3
       magout MagOut      # E.Y.E: Divine Cybermancy
       magin  MagIn       # //
+      pickup Pickup      # Doom 3
    }
 
    dualrocket {

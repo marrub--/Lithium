@@ -67,6 +67,7 @@ class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun {
       Lith_WeaponPickup.Sprite  "LWEPD";
       Lith_WeaponPickup.SpriteM "RIFLA";
       Lith_WeaponPickup.SpriteC "CSMGY";
+      Lith_WeaponPickup.SpriteD "MNGGZ";
 
       Tag "Chaingun Pickup";
    }

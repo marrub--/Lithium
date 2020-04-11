@@ -1091,6 +1091,13 @@
 "LITH_PK_d_700e_002" = "7 Binbus";
 "LITH_PK_d_700e_003" = "Barbro Bexbess";
 "LITH_PK_d_700e_004" = "Beven Bundred Bexpress";
+"LITH_PK_d_minigun_NUM" = "5";
+"LITH_PK_d_minigun_000" = "Mnegbun";
+"LITH_PK_d_minigun_001" = "Minibini";
+"LITH_PK_d_minigun_002" = "Bimbo";
+"LITH_PK_d_minigun_003" = "Miggug";
+"LITH_PK_d_minigun_004" = "Marg-Rarg";
+"LITH_PK_d_minigun_005" = "Many Barreled Rifle";
 "LITH_LOG_HealthBonus" = "$LITH_INFO_SHORT_HealthBonus";
 "LITH_LOG_Medikit" = "$LITH_INFO_SHORT_Medikit";
 "LITH_LOG_MegaSphere" = "Mega Charge!";

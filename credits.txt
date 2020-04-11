@@ -65,6 +65,7 @@
 * Anthony Cole   * Test map marine sprites
 * ChronoTeeth    * SPAS reload frames
 * Combine_Kegan  * Shobon.
+* Dynamo         * Minigun (from Target originally)
 * GAA1992        * Gauss Shotgun idle sprite
 * HorrorMovieGuy * SteggleSphere sprites
 * JetPlane       * Image used as a base for the SMG sprite

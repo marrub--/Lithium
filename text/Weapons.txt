@@ -61,7 +61,7 @@
 +d_700e     2 \700Express Placeholder2 NMag
 +d_4bore    3 \4Bore      Placeholder2 AMag A "Shell"
 +d_launcher 3 ShrapnelGun Placeholder2 Ammo A "Shell"
-+d_minigun  4 Minigun     Placeholder2 NMag
++d_minigun  4 Minigun     "minigun"    NMag
 +d_rocket   5 DualRocket  Placeholder2 Ammo A "Rocket"
 +d_fatmac   6 FatMac      Placeholder2 Ammo A "Plasma"
 +d_railgun  7 FortuneGun  Placeholder2 AMag A "Cannon"

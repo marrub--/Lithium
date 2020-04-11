@@ -607,6 +607,7 @@ weapons/minigun/place lsounds/WeaponsD/Minigun/RotatePlace
 weapons/minigun/empty lsounds/WeaponsD/Minigun/Empty
 weapons/minigun/magout lsounds/WeaponsD/Minigun/MagOut
 weapons/minigun/magin lsounds/WeaponsD/Minigun/MagIn
+weapons/minigun/pickup lsounds/WeaponsD/Minigun/Pickup
 weapons/dualrocket/firel1 lsounds/WeaponsD/DualRocket/FireLeft
 weapons/dualrocket/firel2 lsounds/WeaponsD/DualRocket/FireLeft2
 weapons/dualrocket/firel3 lsounds/WeaponsD/DualRocket/FireLeft3
