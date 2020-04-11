@@ -39,13 +39,13 @@ enum
 {
    cbi_tab_stat_attr,
    cbi_tab_stat_cbi,
+   cbi_tab_stat_statistics,
 };
 
 enum
 {
    cbi_tab_info_bip,
    cbi_tab_info_log,
-   cbi_tab_info_statistics,
    cbi_tab_info_notes,
 };
 

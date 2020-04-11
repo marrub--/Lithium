@@ -35,38 +35,38 @@ static void P_CBI_TabArsenal(struct gui_state *g, struct player *p) {
 }
 
 static void P_CBI_TabStat(struct gui_state *g, struct player *p) {
-   extern void P_CBI_TabCBI   (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabStatus(struct gui_state *g, struct player *p);
+   extern void P_CBI_TabCBI       (struct gui_state *g, struct player *p);
+   extern void P_CBI_TabStatus    (struct gui_state *g, struct player *p);
+   extern void P_CBI_TabStatistics(struct gui_state *g, struct player *p);
 
-   char tn[2][20];
+   char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
    LanguageVC(tn[1], LANG "TAB_CBI");
+   LanguageVC(tn[2], LANG "TAB_STATISTICS");
    G_Tabs(g, &CBIState(g)->stattab, tn, 13, 13, 1);
 
    switch(CBIState(g)->stattab) {
-   case cbi_tab_stat_attr: P_CBI_TabStatus(g, p); break;
-   case cbi_tab_stat_cbi:  P_CBI_TabCBI   (g, p); break;
+   case cbi_tab_stat_attr:       P_CBI_TabStatus    (g, p); break;
+   case cbi_tab_stat_cbi:        P_CBI_TabCBI       (g, p); break;
+   case cbi_tab_stat_statistics: P_CBI_TabStatistics(g, p); break;
    }
 }
 
 static void P_CBI_TabInfo(struct gui_state *g, struct player *p) {
    extern void P_CBI_TabBIP       (struct gui_state *g, struct player *p);
    extern void P_CBI_TabLog       (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabStatistics(struct gui_state *g, struct player *p);
    extern void P_CBI_TabNotes     (struct gui_state *g, struct player *p);
 
-   char tn[4][20];
+   char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_BIP");
    LanguageVC(tn[1], LANG "TAB_LOG");
-   LanguageVC(tn[2], LANG "TAB_STATISTICS");
-   LanguageVC(tn[3], LANG "TAB_NOTES");
+   LanguageVC(tn[2], LANG "TAB_NOTES");
    G_Tabs(g, &CBIState(g)->infotab, tn, 13, 13, 1);
 
    switch(CBIState(g)->infotab) {
-   case cbi_tab_info_bip:        P_CBI_TabBIP       (g, p); break;
-   case cbi_tab_info_log:        P_CBI_TabLog       (g, p); break;
-   case cbi_tab_info_statistics: P_CBI_TabStatistics(g, p); break;
-   case cbi_tab_info_notes:      P_CBI_TabNotes     (g, p); break;
+   case cbi_tab_info_bip:   P_CBI_TabBIP  (g, p); break;
+   case cbi_tab_info_log:   P_CBI_TabLog  (g, p); break;
+   case cbi_tab_info_notes: P_CBI_TabNotes(g, p); break;
    }
 }
 

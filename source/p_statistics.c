@@ -21,11 +21,9 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
    i32 n = 0;
 
    #define Stat(name, f, x) \
-      PrintTextChS(name); PrintText(s_smallfnt, CR_WHITE, 23,1,  50 + 8*n,1); \
-      PrintTextFmt(f, x); PrintText(s_smallfnt, CR_WHITE, 300,2, 50 + 8*n,1); \
+      PrintTextChS(name); PrintText(s_lmidfont, CR_WHITE, 30,1,  40 + 8*n,1); \
+      PrintTextFmt(f, x); PrintText(s_smallfnt, CR_WHITE, 280,2, 40 + 8*n,1); \
       n++
-
-   PrintText_str(p->name, s_lmidfont, CR_LIGHTBLUE, 20,1, 40,1);
 
    Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
    Stat(LC(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);

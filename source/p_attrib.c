@@ -57,10 +57,10 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    PrintText(s_lmidfont, CR_WHITE, x+202,1, y,1);
 }
 
-static void StatusInfo(struct gui_state *g, i32 x, i32 y, str left, str right)
+static void StatusInfo(struct gui_state *g, i32 y, str left, str right)
 {
-   PrintText_str(left,  s_lmidfont, CR_WHITE, x,1, y,1);
-   PrintText_str(right, s_smallfnt, CR_WHITE, x+80,2, y,1);
+   PrintText_str(left,  s_lmidfont, CR_WHITE,  30,1, y,1);
+   PrintText_str(right, s_smallfnt, CR_WHITE, 280,2, y,1);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -69,37 +69,35 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
    Str(class, s"Class"); /* TODO */
 
-   i32 x = 30, y = 40;
+   i32 y = 40;
 
-   PrintText_str(p->name, s_lmidfont, CR_WHITE, x,1, y,1);
+   PrintText_str(p->name, s_lmidfont, CR_WHITE, 30,1, y,1);
    y += 10;
 
-   StatusInfo(g, x, y += 10, class, p->classname);
+   StatusInfo(g, y += 10, class, p->classname);
 
-   StatusInfo(g, x, y += 10, st_lv, StrParam("%u", p->attr.level));
-   StatusInfo(g, x, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, y += 10, st_lv, StrParam("%u", p->attr.level));
+   StatusInfo(g, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));
 
    if(p->pclass & pcl_magicuser)
-      StatusInfo(g, x, y += 10, st_mp, StrParam("%i/%i", p->mana, p->manamax));
+      StatusInfo(g, y += 10, st_mp, StrParam("%i/%i", p->mana, p->manamax));
 
-   StatusInfo(g, x, y += 10, st_exp,  StrParam("%u", p->attr.exp));
-   StatusInfo(g, x, y += 10, st_next, StrParam("%u", p->attr.expnext));
+   StatusInfo(g, y += 10, st_exp,  StrParam("%u", p->attr.exp));
+   StatusInfo(g, y += 10, st_next, StrParam("%u", p->attr.expnext));
 
-   x  = 20;
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
    if(p->attr.points)
    {
       /* TODO */
       PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
-      PrintText(s_smallfnt, CR_WHITE, x,1, y,1);
+      PrintText(s_smallfnt, CR_WHITE, 20,1, y,1);
    }
 
-   x  = 53;
    y += 10;
 
    for(i32 i = 0; i < at_max; i++, y += 10)
-      DrawAttr(g, x, y, p, i);
+      DrawAttr(g, 53, y, p, i);
 }
 
 /* EOF */
