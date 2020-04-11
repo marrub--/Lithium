@@ -38,7 +38,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    }
 
    PrintTextChr(name, 3);
-   PrintText(s_lmidfont, CR_WHITE, x-24,1, y,1);
+   PrintText(s_lmidfont, g->defcr, x-24,1, y,1);
 
    PrintSprite(sp_UI_AttrBar1, x,1, y,1);
 
@@ -51,16 +51,16 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
       helptrns += 0.3;
    }
 
-   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, CR_WHITE, x+1,1, y,1, helptrns);
+   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, g->defcr, x+1,1, y,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
-   PrintText(s_lmidfont, CR_WHITE, x+202,1, y,1);
+   PrintText(s_lmidfont, g->defcr, x+202,1, y,1);
 }
 
 static void StatusInfo(struct gui_state *g, i32 y, str left, str right)
 {
-   PrintText_str(left,  s_lmidfont, CR_WHITE,  30,1, y,1);
-   PrintText_str(right, s_smallfnt, CR_WHITE, 280,2, y,1);
+   PrintText_str(left,  s_lmidfont, g->defcr,  30,1, y,1);
+   PrintText_str(right, s_smallfnt, g->defcr, 280,2, y,1);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -71,7 +71,7 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 
    i32 y = 40;
 
-   PrintText_str(p->name, s_lmidfont, CR_WHITE, 30,1, y,1);
+   PrintText_str(p->name, s_lmidfont, g->defcr, 30,1, y,1);
    y += 10;
 
    StatusInfo(g, y += 10, class, p->classname);
@@ -91,7 +91,7 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
    {
       /* TODO */
       PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
-      PrintText(s_smallfnt, CR_WHITE, 20,1, y,1);
+      PrintText(s_smallfnt, g->defcr, 20,1, y,1);
    }
 
    y += 10;

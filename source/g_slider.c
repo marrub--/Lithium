@@ -79,7 +79,7 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
       if(a->integ) PrintTextFmt("%i%s",     (i32)amt, suf);
       else         PrintTextFmt("%.1k%s", (k32)amt, suf);
 
-      PrintText(pre->font, CR_WHITE, x + pre->w/2,4, y + pre->h/2,0);
+      PrintText(pre->font, g->defcr, x + pre->w/2,4, y + pre->h/2,0);
    }
 
    /* if we've moved it, we return a difference */

@@ -46,6 +46,7 @@ Float(Times, gui_xmul, 0.1, 2.0);
 Float(Times, gui_ymul, 0.1, 2.0);
 Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
 Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursName(set));
+Enum(gui_defcr, 'a', 'z', "\C%c%s", set, ColorName(set));
 Enum(gui_jpfont, 0, font_num-1, "%s", JpFontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
@@ -212,7 +213,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
 
 #define Label(label) { \
       Str(st, sLANG #label); \
-      PrintText_str(L(st), s_smallfnt, CR_WHITE, g->ox + 2,1, g->oy + y + 0,1); \
+      PrintText_str(L(st), s_smallfnt, g->defcr, g->ox + 2,1, g->oy + y + 0,1); \
    }
 
 #define Category(name) \
@@ -310,7 +311,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
          if(G_Button_Id(g, 1, .x = 280 -  gui_p.btnnexts.w   , y, set == maxima, Pre(btnnexts))) \
             p->setCVarI(sc_##cvar, set + 1); \
          PrintTextFmt(fmt, __VA_ARGS__); \
-         PrintText(s_smallfnt, CR_WHITE, g->ox + 200,1, g->oy + y + 0,1); \
+         PrintText(s_smallfnt, g->defcr, g->ox + 200,1, g->oy + y + 0,1); \
       } \
       y += 10; \
    } while(0)

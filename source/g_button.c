@@ -42,10 +42,10 @@ bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
       else if(g->hot    == id) color = pre->chot;
       else if(a->color)        color = a->color;
       else                     color = pre->cdef;
-      if(!color) color = "j";
+      if(!color) color = "-";
 
       PrintTextFmt("\C%s%s", color, a->label);
-      PrintText(pre->font, CR_WHITE, x,pre->ax, y,pre->ay);
+      PrintText(pre->font, g->defcr, x,pre->ax, y,pre->ay);
    }
 
    if(!a->disabled) {

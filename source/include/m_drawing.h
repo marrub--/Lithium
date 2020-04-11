@@ -14,6 +14,10 @@
 
 /* decompat-cut */
 #if defined(GlobalCr)
+#if !defined(GlobalCrH)
+#define GlobalCrH GlobalCr
+#endif
+
 GlobalCr(blue)
 GlobalCr(green)
 GlobalCr(grey)
@@ -22,11 +26,12 @@ GlobalCr(purple)
 GlobalCr(red)
 GlobalCr(yellow)
 
-GlobalCr(wselc1) GlobalCr(wselc2) GlobalCr(wselc3) GlobalCr(wselcs)
-GlobalCr(wseld1) GlobalCr(wseld2) GlobalCr(wseld3) GlobalCr(wselds)
-GlobalCr(wseli1) GlobalCr(wseli2) GlobalCr(wseli3) GlobalCr(wselis)
-GlobalCr(wselm1) GlobalCr(wselm2) GlobalCr(wselm3) GlobalCr(wselms)
+GlobalCrH(wselc1) GlobalCrH(wselc2) GlobalCrH(wselc3) GlobalCrH(wselcs)
+GlobalCrH(wseld1) GlobalCrH(wseld2) GlobalCrH(wseld3) GlobalCrH(wselds)
+GlobalCrH(wseli1) GlobalCrH(wseli2) GlobalCrH(wseli3) GlobalCrH(wselis)
+GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #undef GlobalCr
+#undef GlobalCrH
 #else
 #define BitArg(x, mask, shift) (((u32)(x) & mask) << shift)
 #define SignArg(x, mask) (((u32)(x) & mask) | ((u32)(x) & 0x80000000))
@@ -185,6 +190,15 @@ extern struct globalcolors {
    #define GlobalCr(name) i32 name;
    #include "m_drawing.h"
 } globalcolors;
+
+enum {
+   #define GlobalCr(name) globalcr_##name,
+   #define GlobalCrH(name)
+   #include "m_drawing.h"
+   globalcr_max,
+};
+
+int Draw_GetCr(int n);
 /* decompat-end */
 
 enum /* FontNum */

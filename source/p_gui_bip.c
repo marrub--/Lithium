@@ -120,7 +120,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
 
    ACS_BeginPrint();
    __nprintf("%.*S", typeon->pos, typeon->txt);
-   DrawText(ACS_EndStrParam(), CR_WHITE, 111, 60);
+   DrawText(ACS_EndStrParam(), g->defcr, 111, 60);
 
    if(height) G_ScrollEnd(g, &CBIState(g)->bipinfoscr);
    else             ClearClip();
@@ -136,7 +136,7 @@ static void MainUI(struct gui_state *g, struct player *p) {
    #define Categ(name) { \
       cstr s = LanguageC(LANG "BIP_HELP_%s", P_BIP_CategoryToName(name)); \
       PrintTextChS(s); \
-      PrintTextA(s_smallfnt, CR_WHITE, 105,1, 85+n,1, 0.7); \
+      PrintTextA(s_smallfnt, g->defcr, 105,1, 85+n,1, 0.7); \
       s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
       if(G_Button_Id(g, name, s, 45, 85 + n, Pre(btnbipmain))) { \
          p->bip.curcategory = name; \
@@ -289,13 +289,13 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p) {
          p->bip.curcategory = p->bip.lastcategory;
    } else {
       PrintSpriteA(sp_UI_bip, 20,1, 40,1, 0.1);
-      PrintText_str(st_bip_header, s_lmidfont, CR_WHITE, 35,1, 40,1);
+      PrintText_str(st_bip_header, s_lmidfont, g->defcr, 35,1, 40,1);
    }
 
    if(max) {
       /* TODO */
       PrintTextFmt("%i/%i AVAILABLE", avail, max);
-      PrintText(s_smallfnt, CR_WHITE, 300,2, 30,1);
+      PrintText(s_smallfnt, g->defcr, 300,2, 30,1);
    }
 }
 

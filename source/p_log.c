@@ -144,7 +144,7 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p) {
 
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
-   PrintText_str(lm->name, s_lmidfont, CR_WHITE, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
+   PrintText_str(lm->name, s_lmidfont, g->defcr, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
    G_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
 

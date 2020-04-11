@@ -79,6 +79,8 @@ void G_UpdateState(struct gui_state *g, struct player *p)
    g->clickrgt = p->buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
 
+   g->defcr = Draw_GetCr(p->getCVarI(sc_gui_defcr));
+
    if(!g->clickany)
       g->slide = 0;
    else if(g->slidecount)

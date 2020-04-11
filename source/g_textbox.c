@@ -59,7 +59,7 @@ struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt c
                            hot ? Ticker("|", "") : "");
    else
       PrintTextFmt("\C%c%s", hot ? 'c' : 'm', LC(LANG "GUI_TEXTBOX"));
-   PrintText(s_smallfnt, CR_WHITE, a->x + g->ox,1, a->y + g->oy,1);
+   PrintText(s_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
    fastmemset(a->p->txtbuf, 0, sizeof a->p->txtbuf);

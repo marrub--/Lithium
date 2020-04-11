@@ -50,7 +50,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
 
    /* TODO */
    PrintTextFmt("Filter: %s", filter_name);
-   PrintText(s_smallfnt, CR_WHITE, 15,1, 215,1);
+   PrintText(s_smallfnt, g->defcr, 15,1, 215,1);
 
    G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
@@ -64,7 +64,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
          PrintTextChS(LC(upgrcateg[curcategory]));
-         PrintText(s_lmidfont, CR_WHITE, g->ox + 40,4, y + g->oy + 1,1);
+         PrintText(s_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
@@ -139,7 +139,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else
          PrintTextFmt(LC(LANG "SHOP_ACTIVATE_USES"), upgr->info->perf);
 
-      PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, g->defcr, 111,1, 200 + y,2);
       y -= 10;
    }
 
@@ -163,7 +163,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else    {cr = 'n'; perc = 100 + perc;}
 
       PrintTextFmt(op, cr, perc);
-      PrintText(s_smallfnt, CR_WHITE, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, g->defcr, 111,1, 200 + y,2);
       y -= 10;
    }
 }
@@ -185,11 +185,11 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
    else                 cost = L(st_free);
 
-   PrintText_str(cost, s_smallfnt, CR_WHITE, 111,1, 30,1);
+   PrintText_str(cost, s_smallfnt, g->defcr, 111,1, 30,1);
 
    /* Category */
    PrintTextChS(LC(upgrcateg[upgr->info->category]));
-   PrintText(s_smallfnt, CR_WHITE, 111,1, 40,1);
+   PrintText(s_smallfnt, g->defcr, 111,1, 40,1);
 
    /* Effect */
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
@@ -199,7 +199,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
       CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED
    };
 
-   i32 cr = CR_WHITE;
+   i32 cr = g->defcr;
 
    if(upgr->info->key == UPGR_UNCEUNCE)
       cr = crs[ACS_Timer() / 4 % countof(crs)];
@@ -221,7 +221,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
 
    /* Groups */
    PrintTextChS(LC(LANG "AUTOGROUPS"));
-   PrintText(s_smallfnt, CR_WHITE, 255,0, 205,0);
+   PrintText(s_smallfnt, g->defcr, 255,0, 205,0);
 
    for(i32 i = 0; i < 4; i++) {
       static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};

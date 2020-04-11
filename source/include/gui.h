@@ -115,6 +115,8 @@ struct gui_state
    struct gui_delta cur;
    struct gui_delta old;
 
+   i32 defcr;
+
    i32 ox, oy;
    i32 w, h;
 
