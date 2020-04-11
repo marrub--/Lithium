@@ -132,6 +132,7 @@ X(sm_DeleteItem,         "DeleteItem")
 X(sm_DieMonster,         "DieMonster")
 X(sm_DieNow,             "DieNow")
 X(sm_DmgFac,             "m_DmgFac")
+X(sm_FindFontColor,      "FindFontColor")
 X(sm_FindLump,           "FindLump")
 X(sm_ForceDraw,          "ForceDraw")
 X(sm_FxTID,              "m_FxTID")
@@ -411,10 +412,6 @@ X(st_lv,              "Lv.")
 X(st_mp,              "MP")
 X(st_next,            "Next") /* TODO */
 X(st_no_results,      "No results") /* TODO */
-X(st_out_blue,        CrBlue "OUT")
-X(st_out_green,       CrGreen "OUT")
-X(st_out_purple,      CrPurple "Out")
-X(st_out_red,         CrRed "OUT")
 
 X(sm_Draw, OBJ "URANUS")
 X(sm_Serv, OBJ "HERMES")

@@ -17,36 +17,42 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a)
-{
+void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_many, i32 cr_none, i32 cr_cur, i32 _x, i32 _y) {
    if(p->getCVarI(sc_hud_showweapons))
       for(i32 i = 1; i < SLOT_MAX; i++)
          ifauto(i32, slot, p->weapon.slot[i])
    {
-      k32 x = a->x+.2 - 8 * (SLOT_MAX - i);
-      k32 y = a->y+.2;
+      k32 x = _x+.2 - 8 * (SLOT_MAX - i);
+      k32 y = _y+.2;
+      i32 cr;
+      switch(slot) {
+      case 0:  cr = cr_none; break;
+      case 1:  cr = cr_one;  break;
+      default: cr = cr_many; break;
+      }
 
-      PrintTextFmt("%i", i);
-      PrintTextX(s_lhudfontsmall, a->ncol[min(slot - 1, 2)], x,2, y,2, ptf_no_utf);
+      ACS_BeginPrint();
+      ACS_PrintInt(i);
+      PrintTextX(s_lhudfontsmall, cr, x,2, y,2, ptf_no_utf);
 
       if(p->weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 6);
 
-      if(CheckFade(fid_slotnS + i))
-      {
-         PrintTextFmt("\C%S%i", a->scol, i);
-         PrintTextFX(s_lhudfontsmall, 0, x,2, y,2, fid_slotnS + i, ptf_no_utf);
+      if(CheckFade(fid_slotnS + i)) {
+         ACS_BeginPrint();
+         ACS_PrintInt(i);
+         PrintTextFX(s_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, ptf_no_utf);
       }
    }
 }
 
-void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, cstr cr, i32 x, i32 xa)
-{
+void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
    if(p->getCVarI(sc_hud_showscore)) {
-      str scr = StrParam(fmt, scoresep(scrn));
+      char scr[64];
+      sprintf(scr, fmt, scoresep(scrn));
 
-      PrintTextFmt("\C%s%S", cr, scr);
-      PrintTextX(font, 0, x,xa, 3,1, ptf_no_utf);
+      PrintTextChS(scr);
+      PrintTextX(font, cr, x,xa, 3,1, ptf_no_utf);
 
       if(p->score > p->old.score) {
          SetFade(fid_schit1, 4, 12);
@@ -62,19 +68,22 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, cstr cr, i32 x, i
          p->scoreaccumstr = StrParam("%c%s", p->scoreaccum >= 0 ? '+' : ' ', scoresep(p->scoreaccum));
       }
 
-      if(CheckFade(fid_schit1))
-         PrintTextFX_str(scr, font, CR_ORANGE, x,xa, 3,1, fid_schit1, ptf_no_utf);
-      else if(CheckFade(fid_schit2))
-         PrintTextFX_str(scr, font, CR_PURPLE, x,xa, 3,1, fid_schit2, ptf_no_utf);
+      if(CheckFade(fid_schit1)) {
+         PrintTextChS(scr);
+         PrintTextFX(font, CR_ORANGE, x,xa, 3,1, fid_schit1, ptf_no_utf);
+      } else if(CheckFade(fid_schit2)) {
+         PrintTextChS(scr);
+         PrintTextFX(font, CR_PURPLE, x,xa, 3,1, fid_schit2, ptf_no_utf);
+      }
 
       if(CheckFade(fid_scacum))
          PrintTextFX_str(p->scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, ptf_no_utf);
    }
 
    if(p->getCVarI(sc_hud_showlvl)) {
-      PrintTextFmt("\C%sLv.%u", cr, p->attr.level);
-      if(p->attr.points) __nprintf(" (%u pts)", p->attr.points);
-      PrintTextX(font, 0, x,xa, 17,1, ptf_no_utf);
+      PrintTextFmt("Lv.%u", p->attr.level);
+      if(p->attr.points) __nprintf(" (\Cn%u\C- pts)", p->attr.points);
+      PrintTextX(font, cr, x,xa, 17,1, ptf_no_utf);
    }
 
    i32 expbar = p->getCVarI(sc_hud_expbar);
@@ -95,8 +104,7 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, cstr cr, i32 x, i
    }
 }
 
-void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
-{
+void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a) {
    #define Inc (horz ? (x -= 10) : (y += 10))
    if(p->krs) PrintSpriteA(sp_HUD_H_KS1, x,2, y,1, a), Inc;
    if(p->kys) PrintSpriteA(sp_HUD_H_KS2, x,2, y,1, a), Inc;
@@ -107,22 +115,24 @@ void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a)
    #undef Inc
 }
 
-void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, char const *pfx, i32 cr)
-{
+void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, i32 cr, i32 cr_fade) {
    i32 protect = p->megaProtect;
 
-   PrintTextFmt("%s%i", pfx, health);
-   PrintTextX(s_lhudfont, 0, x,1, y,0, ptf_no_utf);
+   ACS_BeginPrint();
+   ACS_PrintInt(health);
+   PrintTextX(s_lhudfont, cr, x,1, y,0, ptf_no_utf);
 
    if(protect) {
       k32 amt = protect / 200.0;
-      PrintTextFmt("%i", health);
+      ACS_BeginPrint();
+      ACS_PrintInt(health);
       PrintTextAX(s_lhudfont, CR_TAN, x,1, y,0, amt, ptf_no_utf);
    }
 
    if(CheckFade(fid_health)) {
-      PrintTextFmt("%i", health);
-      PrintTextFX(s_lhudfont, cr, x,1, y,0, fid_health, ptf_no_utf);
+      ACS_BeginPrint();
+      ACS_PrintInt(health);
+      PrintTextFX(s_lhudfont, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
    }
 }
 

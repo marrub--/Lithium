@@ -16,24 +16,10 @@
 
 #include "w_world.h"
 
-#define HUD_StaParam(type, ...) \
-   __with(static struct type const _a = {__VA_ARGS__}, *const _ap = &_a;)
-
-#define HUD_WeaponSlots(h, ...) \
-   HUD_StaParam(hud_wsl, __VA_ARGS__) HUD_WeaponSlots_Impl((h), _ap)
-
-struct hud_wsl
-{
-   i32 ncol[3];
-   str scol;
-   i32 x;
-   i32 y;
-};
-
-void HUD_WeaponSlots_Impl(struct player *p, struct hud_wsl const *a);
-void HUD_Score(struct player *p, cstr fmt, i96 scr, str font, cstr cr, i32 x, i32 xa);
+void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_many, i32 cr_none, i32 cr_cur, i32 _x, i32 _y);
+void HUD_Score(struct player *p, cstr fmt, i96 scr, str font, i32 cr, i32 x, i32 xa);
 void HUD_KeyInd(struct player *p, i32 x, i32 y, bool horz, k32 a);
 script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy);
-optargs(1) void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, char const *pfx, i32 cr);
+void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, i32 cr, i32 cr_fade);
 
 #endif

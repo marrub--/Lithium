@@ -148,12 +148,6 @@
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
-#define CrBlue   "\C[" OBJ "Blue]"
-#define CrGreen  "\C[" OBJ "Green]"
-#define CrRed    "\C[" OBJ "Red]"
-#define CrPurple "\C[" OBJ "Purple]"
-#define CrGrey   "\C[" OBJ "Grey]"
-
 enum {
    CHANF_LISTENERZ   = 8,
    CHANF_MAYBE_LOCAL = 16,
@@ -169,6 +163,14 @@ enum {
    ptf_no_utf = 0x40000,
    ptf_add    = 0x80000,
 };
+
+extern i32 cr_blue;
+extern i32 cr_green;
+extern i32 cr_grey;
+extern i32 cr_pink;
+extern i32 cr_purple;
+extern i32 cr_red;
+extern i32 cr_yellow;
 /* decompat-end */
 
 enum /* FontNum */

@@ -9,6 +9,10 @@
 
 extend class Lith_HERMES;
 
+static int FindFontColor(name cr) {
+   return Font.FindFontColor(cr);
+}
+
 static void SetFrozen(bool on, bool players_ok) {
    level.setFrozen(on);
 

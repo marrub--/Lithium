@@ -81,20 +81,17 @@
 #define PausableTick() do ACS_Delay(1); while(Paused)
 #define WaitPause() while(Paused) ACS_Delay(1)
 
+#define Spf s""
+
 #define CVAR  "lith_"
 #define DCVAR "__lith_"
 #define LANG  "LITH_"
 #define OBJ   "Lith_"
 
-#define cCVAR  c"" CVAR
-#define cDCVAR c"" DCVAR
-#define cLANG  c"" LANG
-#define cOBJ   c"" OBJ
-
-#define sCVAR  s"" CVAR
-#define sDCVAR s"" DCVAR
-#define sLANG  s"" LANG
-#define sOBJ   s"" OBJ
+#define sCVAR  Spf CVAR
+#define sDCVAR Spf DCVAR
+#define sLANG  Spf LANG
+#define sOBJ   Spf OBJ
 
 #define ServCallI(...) SCallI(sm_Serv, __VA_ARGS__)
 #define ServCallK(...) SCallK(sm_Serv, __VA_ARGS__)

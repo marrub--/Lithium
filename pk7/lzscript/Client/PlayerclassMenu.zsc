@@ -20,17 +20,13 @@ override void Drawer()
    if(mDesc.mSelectedItem < 0) return;
    let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
    if(sel) {
-      let txt_l = sel.mText;
-      let col_l = String.format("%s_Col", txt_l);
-      let nam_l = String.format("%s_Nam", txt_l);
-      let dsc_l = String.format("%s_Dsc", txt_l);
-      let col = StringTable.localize(col_l);
-      let txt = String.format("%s%s", col, StringTable.localize(txt_l));
-      let nam = String.format("%s%s", col, StringTable.localize(nam_l));
-      let dsc = String.format("%s%s", col, StringTable.localize(dsc_l));
-      let cr = Font.CR_WHITE;
-      Screen.DrawText("bigupper", cr, 168, 59, txt, DTA_Clean, true);
-      Screen.DrawText("ltrmfont", cr, 168, 73, nam, DTA_Clean, true);
+      let col = StringTable.localize(String.format("%s_Col", sel.mText));
+      let nam = StringTable.localize(String.format("%s_Nam", sel.mText));
+      let dsc = StringTable.localize(String.format("%s_Dsc", sel.mText));
+      let txt = StringTable.localize(sel.mText);
+      let cr  = Font.FindFontColor(col);
+      Screen.DrawText("bigupper", cr, 168, 59,  txt, DTA_Clean, true);
+      Screen.DrawText("ltrmfont", cr, 168, 73,  nam, DTA_Clean, true);
       Screen.DrawText("ltrmfont", cr, 104, 108, dsc, DTA_Clean, true);
    }
 }
