@@ -108,7 +108,7 @@ void P_Upg_PDeinit(struct player *p) {
 void P_Upg_PMInit(struct player *p) {
    for_upgrade(upgr)
       if(get_bit(upgr->flags, _ug_wasactive))
-         set_bit(upgr->flags, _ug_wasactive), P_Upg_Toggle(p, upgr);
+         dis_bit(upgr->flags, _ug_wasactive), P_Upg_Toggle(p, upgr);
 }
 
 script void P_Upg_PTick(struct player *p) {
