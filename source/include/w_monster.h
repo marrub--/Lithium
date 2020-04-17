@@ -78,7 +78,13 @@ struct dmon {
    i32  spawnhealth;
    i32  resist[dmgtype_max];
 
-   struct dmon_stat          *ms;
+   k32  x, y, z;
+   k32  r, h;
+   i32  health;
+   i32  painwait;
+   bool finalized;
+   bool resurrect;
+
    struct monster_info const *mi;
 };
 

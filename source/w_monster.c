@@ -18,32 +18,11 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
-#define GetInfo(m) \
-   do { \
-      (m)->ms->x = GetX(0); \
-      (m)->ms->y = GetY(0); \
-      (m)->ms->z = GetZ(0); \
-      \
-      (m)->ms->r = GetPropK(0, APROP_Radius); \
-      (m)->ms->h = GetPropK(0, APROP_Height); \
-      \
-      (m)->ms->health = GetPropI(0, APROP_Health); \
-   } while(0)
-
 /* Types ------------------------------------------------------------------- */
 
 enum {
    _max_rank  = 5,
    _max_level = 150,
-};
-
-struct dmon_stat {
-   k32  x, y, z;
-   k32  r, h;
-   i32  health;
-   i32  painwait;
-   bool finalized;
-   bool resurrect;
 };
 
 /* Static Objects ---------------------------------------------------------- */
@@ -60,17 +39,25 @@ StrAry(dmgtype_names,
 
 /* Static Functions -------------------------------------------------------- */
 
-static void ApplyLevels(dmon_t *m, i32 prev)
-{
+static void GetInfo(dmon_t *m) {
+   m->x = GetX(0);
+   m->y = GetY(0);
+   m->z = GetZ(0);
+
+   m->r = GetPropK(0, APROP_Radius);
+   m->h = GetPropK(0, APROP_Height);
+
+   m->health = GetMembI(0, sm_Health);
+}
+
+static void ApplyLevels(dmon_t *m, i32 prev) {
    GetInfo(m);
 
-   for(i32 i = prev + 1; i <= m->level; i++)
-   {
-      if(i % 10 == 0)
-      {
-         /* if we have resistances, randomly pick a resistance we already have */
-         if(HasResistances(m))
-         {
+   for(i32 i = prev + 1; i <= m->level; i++) {
+      if(i % 10 == 0) {
+         /* if we have resistances, randomly pick a resistance we
+          * already have */
+         if(HasResistances(m)) {
             i32 r;
             do {r = ACS_Random(0, dmgtype_max-1);} while(m->resist[r] == 0);
             m->resist[r] += 2;
@@ -78,14 +65,13 @@ static void ApplyLevels(dmon_t *m, i32 prev)
       }
    }
 
-   if(m->level >= 5)
-   {
+   if(m->level >= 5) {
       k32 rn = m->rank / 10.0;
       i96 delt = m->level - prev;
       i96 hp10 = m->spawnhealth / 10;
       i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
       Dbg_Log(log_dmonV, "monster %i: newh %i", m->id, newh);
-      SetPropI(0, APROP_Health, m->ms->health + newh);
+      SetPropI(0, APROP_Health, m->health + newh);
       m->maxhealth += newh;
    }
 
@@ -96,14 +82,13 @@ static void ApplyLevels(dmon_t *m, i32 prev)
    }
 }
 
-stkcall
 static void ShowBarrier(dmon_t const *m, k32 alpha)
 {
    bool anyplayer = false;
 
    /* Optimization: Check for players nearby first. */
-   i32 const xw1 = m->ms->x - 192, xw2 = m->ms->x + 192;
-   i32 const yw1 = m->ms->y - 192, yw2 = m->ms->y + 192;
+   i32 const xw1 = m->x - 192, xw2 = m->x + 192;
+   i32 const yw1 = m->y - 192, yw2 = m->y + 192;
 
    for_player() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
       {anyplayer = true; break;}
@@ -111,20 +96,20 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
    if(!anyplayer)
       return;
 
-   BeginAngles(m->ms->x, m->ms->y);
+   BeginAngles(m->x, m->y);
    ServCallI(sm_MonsterBarrierLook);
 
    for(i32 i = 0; i < a_cur; i++)
    {
       struct polar *a = &a_angles[i];
 
-      k32 dst = m->ms->r / 2 + a->dst / 4;
-      k32 x   = m->ms->x + ACS_Cos(a->ang) * dst;
-      k32 y   = m->ms->y + ACS_Sin(a->ang) * dst;
+      k32 dst = m->r / 2 + a->dst / 4;
+      k32 x   = m->x + ACS_Cos(a->ang) * dst;
+      k32 y   = m->y + ACS_Sin(a->ang) * dst;
       i32   tid = ACS_UniqueTID();
       str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
 
-      ACS_SpawnForced(bar, x, y, m->ms->z + m->ms->h / 2, tid);
+      ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
       SetPropK(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
    }
 }
@@ -179,7 +164,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
    Str(solid_s, s"SOLID");
 
    i32 tid = ACS_UniqueTID();
-   ACS_SpawnForced(so_MonsterSoul, m->ms->x, m->ms->y, m->ms->z + 16, tid);
+   ACS_SpawnForced(so_MonsterSoul, m->x, m->y, m->z + 16, tid);
    SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
 
    PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
@@ -195,9 +180,9 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
    i32 i = 0;
    do {
       i32 tid = ACS_UniqueTID();
-      i32 x   = m->ms->x + ACS_Random(-16, 16);
-      i32 y   = m->ms->y + ACS_Random(-16, 16);
-      ACS_Spawn(so_ManaPickup, x, y, m->ms->z + 4, tid);
+      i32 x   = m->x + ACS_Random(-16, 16);
+      i32 y   = m->y + ACS_Random(-16, 16);
+      ACS_Spawn(so_ManaPickup, x, y, m->z + 4, tid);
       PtrSet(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
       PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       i += 150;
@@ -210,10 +195,10 @@ static void OnFinalize(dmon_t *m) {
          bool high_level_imp =
             m->mi->type == mtype_imp && m->level >= 70 && m->rank >= 4;
          if(high_level_imp && ACS_Random(0, 100) < 4)
-            ACS_SpawnForced(so_ClawOfImp, m->ms->x, m->ms->y, m->ms->z);
+            ACS_SpawnForced(so_ClawOfImp, m->x, m->y, m->z);
       }
 
-      if(!m->ms->finalized) {
+      if(!m->finalized) {
          if(get_bit(p->upgrades[UPGR_Magic].flags, _ug_active) &&
             p->mana != p->manamax &&
             (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10)) {
@@ -231,7 +216,7 @@ static void OnFinalize(dmon_t *m) {
             if(sp) {
                Str(dropped_s, s"DROPPED");
                i32 tid = ACS_UniqueTID();
-               ACS_SpawnForced(sp, m->ms->x, m->ms->y, m->ms->z, tid);
+               ACS_SpawnForced(sp, m->x, m->y, m->z, tid);
                ACS_SetActorFlag(tid, dropped_s, false);
             }
          }
@@ -247,7 +232,7 @@ static void OnFinalize(dmon_t *m) {
       P_GiveAllEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
    }
 
-   m->ms->finalized = true;
+   m->finalized = true;
 }
 
 static void OnDeath(dmon_t *m)
@@ -263,13 +248,10 @@ static void OnDeath(dmon_t *m)
 script
 static void MonsterMain(dmon_t *m)
 {
-   struct dmon_stat ms = {};
-
    InvGive(so_MonsterID, m->id + 1);
 
-   m->ms = &ms;
    GetInfo(m);
-   m->spawnhealth = m->maxhealth = m->ms->health;
+   m->spawnhealth = m->maxhealth = m->health;
 
    BaseMonsterLevel(m);
 
@@ -280,13 +262,13 @@ static void MonsterMain(dmon_t *m)
    {
       GetInfo(m);
 
-      if(m->ms->health <= 0)
+      if(m->health <= 0)
       {
          OnDeath(m);
 
-         do {ACS_Delay(15);} while(!m->ms->resurrect);
+         do {ACS_Delay(15);} while(!m->resurrect);
 
-         m->ms->resurrect = false;
+         m->resurrect = false;
          Dbg_Log(log_dmon, "monster %i resurrected", m->id);
       }
 
@@ -298,7 +280,7 @@ static void MonsterMain(dmon_t *m)
          m->level += d.quot;
          m->exp    = d.rem;
 
-         ACS_SpawnForced(so_MonsterLevelUp, m->ms->x, m->ms->y, m->ms->z);
+         ACS_SpawnForced(so_MonsterLevelUp, m->x, m->y, m->z);
          ApplyLevels(m, prev);
 
          Dbg_Log(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
@@ -320,7 +302,7 @@ void PrintMonsterInfo(void)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
    {
-      Log("%p (%p %p) %S active: %u id: %.3u\n"
+      Log("%p (%p) %S active: %u id: %.3u\n"
           "wasdead: %u finalized: %u painwait: %i\n"
           "level: %.3i rank: %i exp: %i\n"
           "health: %i/%i\n"
@@ -328,12 +310,12 @@ void PrintMonsterInfo(void)
           "r: %k h: %k\n"
           "mi->exp: %lu mi->score: %lli\n"
           "mi->flags: %i mi->type: %i",
-          m, m->ms, m->mi, m->mi->name, m->active, m->id,
-          m->wasdead, m->ms->finalized, m->ms->painwait,
+          m, m->mi, m->mi->name, m->active, m->id,
+          m->wasdead, m->finalized, m->painwait,
           m->level, m->rank, m->exp,
-          m->ms->health, m->maxhealth,
-          m->ms->x, m->ms->y, m->ms->z,
-          m->ms->r, m->ms->h,
+          m->health, m->maxhealth,
+          m->x, m->y, m->z,
+          m->r, m->h,
           m->mi->exp, m->mi->score,
           m->mi->flags, m->mi->type);
       for(i32 i = 0; i < countof(m->resist); i++)
@@ -361,7 +343,7 @@ void Sc_GiveMonsterEXP(i32 amt)
 script_str ext("ACS") addr(OBJ "ResurrectMonster")
 void Sc_ResurrectMonster(i32 amt)
 {
-   ifauto(dmon_t *, m, DmonSelf()) m->ms->resurrect = true;
+   ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
 
 script ext("ACS") addr(lsc_monsterinfo)
@@ -383,6 +365,7 @@ void Sc_MonsterInfo(void)
       else                             init = strstr_str(cname, mi->name);
 
       if(init) {
+         ACS_Delay(1);
          ifauto(dmon_t *, m, AllocDmon()) {
             m->mi = mi;
             MonsterMain(m);
