@@ -34,7 +34,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       ACS_CheckFlag(0, countkill_s) ||
       ACS_PlayerNumber() != -1;
 
-   if(GetPropI(0, APROP_Health) <= 0) {
+   if(GetMembI(0, sm_Health) <= 0) {
       UData = (struct upgr_data_VitalScan){};
    } else if(validtarget) {
       Str(boss_s,     s"BOSS");
@@ -54,8 +54,8 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       bool boss   = ACS_CheckFlag(0, boss_s);
       bool shadow = ACS_CheckFlag(0, shadow_s);
 
-      i32 chp = GetPropI(0, APROP_Health);
-      i32 shp = GetPropI(0, APROP_SpawnHealth);
+      i32 chp = GetMembI(0, sm_Health);
+      i32 shp = ServCallI(sm_GetSpawnHealth);
 
       i32 id = UniqueID();
       dmon_t const *const m = DmonSelf();
@@ -107,10 +107,15 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          UData.exp  = 1.0;
       }
 
-      i32 splitr = chp % shp;
-      i32 split  = chp / shp;
-      UData.splitfrac = splitr / (k32)shp;
-      UData.split     = minmax(split, 0, 13);
+      if(shp) {
+         i32 splitr = chp % shp;
+         i32 split  = chp / shp;
+         UData.splitfrac = splitr / (k32)shp;
+         UData.split     = minmax(split, 0, 13);
+      } else {
+         UData.splitfrac = 0.0;
+         UData.split     = 0;
+      }
 
       UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;

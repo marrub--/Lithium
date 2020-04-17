@@ -251,7 +251,7 @@ script void P_Init(struct player *p) {
       /* i cri tears of pain for APROP_SpawnHealth */
       p->viewheight  = ACS_GetActorViewHeight(0);
       p->jumpheight  = GetPropK(0, APROP_JumpZ);
-      p->spawnhealth = GetPropI(0, APROP_Health);
+      p->spawnhealth = GetMembI(0, sm_Health);
       p->maxhealth   = p->spawnhealth;
       p->discount    = 1.0;
       p->stepnoise   = StrParam("player/%S/step", p->classname);

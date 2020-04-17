@@ -308,7 +308,7 @@ k32 Sc_AmmoRunOut(bool ro, k32 mul)
 script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
 i32 Sc_GetFinalizerMaxHealth(void)
 {
-   i32 sh = GetPropI(0, APROP_SpawnHealth);
+   i32 sh = ServCallI(sm_GetSpawnHealth);
 
    ifauto(dmon_t *, m, DmonSelf())
       return sh + (m->maxhealth - sh) * 0.5;
@@ -374,7 +374,7 @@ void Sc_PoisonFXTicker(void)
       }
    }
 
-   if(GetPropI(0, APROP_Health) <= 0)
+   if(GetMembI(0, sm_Health) <= 0)
    {
       InvTake(so_PoisonFXReset, INT32_MAX);
       InvTake(so_PoisonFXTimer, INT32_MAX);

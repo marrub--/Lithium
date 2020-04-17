@@ -23,6 +23,10 @@ class Lith_BossFucker : Inventory
 
 extend class Lith_HERMES;
 
+static int GetSpawnHealth(Actor mo) {
+   return mo.spawnHealth();
+}
+
 static void SurgeOfDestiny(Actor mo) {
    mo.A_GiveInventory("Lith_SurgeProtector");
    mo.A_Explode(128, 192, 0);
