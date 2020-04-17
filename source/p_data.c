@@ -73,13 +73,11 @@ static void SetPClass(struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 bool P_ButtonPressed(struct player *p, i32 bt)
 {
    return p->buttons & bt && !(p->old.buttons & bt);
 }
 
-stkcall
 bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add)
 {
    if(add) p->velx += velx, p->vely += vely, p->velz += velz;
@@ -100,7 +98,6 @@ void P_ValidateTID(struct player *p)
 }
 
 /* Update all of the player's data. */
-stkcall
 void P_Dat_PTickPre(struct player *p)
 {
    Str(c_card_b, s"ChexBlueCard");
@@ -209,7 +206,6 @@ static void LevelUp(struct player *p, u32 attr[at_max])
    p->attr.lvupstr[0] = '\0';
 }
 
-stkcall
 void P_Lv_GiveEXP(struct player *p, u64 amt)
 {
    struct player_attributes *a = &p->attr;
@@ -363,7 +359,6 @@ script void P_Init(struct player *p) {
    }
 }
 
-stkcall
 void P_Dat_PTickPst(struct player *p)
 {
    k32 boost = 1 + p->jumpboost;

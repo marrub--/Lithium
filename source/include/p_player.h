@@ -67,18 +67,18 @@ PCL(gR, pcl_robot)
 script void P_Init(struct player *p);
 script void P_Data_Load(struct player *p);
 script void P_Data_Save(struct player *p);
-stkcall bool P_ButtonPressed(struct player *p, i32 bt);
-stkcall optargs(1) bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
+bool P_ButtonPressed(struct player *p, i32 bt);
+optargs(1) bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
 void P_ValidateTID(struct player *p);
-stkcall void P_GUI_Close(struct player *p);
-stkcall void P_GUI_Use(struct player *p);
+void P_GUI_Close(struct player *p);
+void P_GUI_Use(struct player *p);
 optargs(1) i96 P_Scr_Give(struct player *p, i96 score, bool nomul);
-stkcall void P_Scr_Take(struct player *p, i96 score);
+void P_Scr_Take(struct player *p, i96 score);
 script void P_GiveAllScore(i96 score, bool nomul);
 script void P_GiveAllEXP(u64 amt);
-stkcall void P_Lv_GiveEXP(struct player *p, u64 amt);
-stkcall cstr P_Discrim(i32 pclass);
-stkcall void P_Dat_PTickPst(struct player *p);
+void P_Lv_GiveEXP(struct player *p, u64 amt);
+cstr P_Discrim(i32 pclass);
+void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
 
 sync void P_TeleportIn(struct player *p);

@@ -15,13 +15,11 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->riflefiremode = 0;
 }
 
-stkcall
 void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 {
    if(P_Wep_CurType(p) != weapon_rifle) return;

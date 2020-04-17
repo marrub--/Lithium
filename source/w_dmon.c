@@ -43,14 +43,12 @@ dmon_t *DmonPtr(i32 tid, i32 ptr)
    return DmonSelf();
 }
 
-stkcall
 dmon_t *DmonSelf(void)
 {
    ifauto(i32, id, InvNum(so_MonsterID)) return Dmon(id - 1);
    else                                  return nil;
 }
 
-stkcall
 dmon_t *Dmon(i32 id)
 {
    if(dmonalloc[id].active) return &dmonalloc[id];

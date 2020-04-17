@@ -162,7 +162,6 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-stkcall
 void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;

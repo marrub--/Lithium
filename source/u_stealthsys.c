@@ -17,7 +17,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_StealthSys_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->alpha = 1;

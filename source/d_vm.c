@@ -438,13 +438,13 @@ sync static void ActDLG_WAIT(struct player *p) {
    GuiAct();
 }
 
-stkcall static void ActLD_ITEM(struct player *p) {
+static void ActLD_ITEM(struct player *p) {
    SetVA(ACT_NONE);
 
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-stkcall static void ActLD_OPT(struct player *p) {
+static void ActLD_OPT(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -454,7 +454,7 @@ stkcall static void ActLD_OPT(struct player *p) {
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-stkcall static void ActSCRIPT_I(struct player *p) {
+static void ActSCRIPT_I(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -464,7 +464,7 @@ stkcall static void ActSCRIPT_I(struct player *p) {
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-stkcall static void ActSCRIPT_S(struct player *p) {
+static void ActSCRIPT_S(struct player *p) {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -493,22 +493,22 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p) {
    SetVA(ACT_HALT);
 }
 
-stkcall static void ActTEXT_ADDI(struct player *p) {
+static void ActTEXT_ADDI(struct player *p) {
    SetVA(ACT_NONE);
    AddText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-stkcall static void ActTEXT_ADDL(struct player *p) {
+static void ActTEXT_ADDL(struct player *p) {
    SetVA(ACT_NONE);
    AddText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }
 
-stkcall static void ActTEXT_SETI(struct player *p) {
+static void ActTEXT_SETI(struct player *p) {
    SetVA(ACT_NONE);
    SetText(MemSC_G(MemB2_G(VAR_ADRL)));
 }
 
-stkcall static void ActTEXT_SETL(struct player *p) {
+static void ActTEXT_SETL(struct player *p) {
    SetVA(ACT_NONE);
    SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
 }

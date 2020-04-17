@@ -17,14 +17,12 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_lolsords_Activate(struct player *p, struct upgrade *upgr)
 {
    UData.origweapon = p->weaponclass;
    InvGive(so_Sword, 1);
 }
 
-stkcall
 void Upgr_lolsords_Deactivate(struct player *p, struct upgrade *upgr)
 {
    InvTake(so_Sword, 1);

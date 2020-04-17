@@ -17,13 +17,11 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_7777777_Activate(struct player *p, struct upgrade *upgr)
 {
    SetPropK(0, APROP_Gravity, 0.0);
 }
 
-stkcall
 void Upgr_7777777_Deactivate(struct player *p, struct upgrade *upgr)
 {
    SetPropK(0, APROP_Gravity, 1.0);

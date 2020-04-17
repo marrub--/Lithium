@@ -16,18 +16,18 @@
 
 #define Cps_Shift(i, set) ((set) << ((i) % 4 * 8))
 
-stkcall void Cps_SetC(u32 *cps, u32 p, u32 c)
+void Cps_SetC(u32 *cps, u32 p, u32 c)
 {
    cps[p / 4] &= ~Cps_Shift(p, 0xFF);
    cps[p / 4] |=  Cps_Shift(p, c & 0xFF);
 }
 
-stkcall byte Cps_GetC(u32 const *cps, u32 p)
+byte Cps_GetC(u32 const *cps, u32 p)
 {
    return (cps[p / 4] & (0xFF << (p % 4 * 8))) >> (p % 4 * 8);
 }
 
-stkcall cstr Cps_Expand(u32 *cps, u32 s, u32 l)
+cstr Cps_Expand(u32 *cps, u32 s, u32 l)
 {
    noinit static char buf[4096];
    u32 i;
@@ -36,7 +36,7 @@ stkcall cstr Cps_Expand(u32 *cps, u32 s, u32 l)
    return buf;
 }
 
-stkcall cstr Cps_ExpandNT(u32 *cps, u32 s)
+cstr Cps_ExpandNT(u32 *cps, u32 s)
 {
    noinit static char buf[4096];
    u32 i;

@@ -24,7 +24,6 @@
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
 
-#define stkcall    [[__call("StkCall")]]
 #define script     [[__call("ScriptI")]]
 #define script_str [[__call("ScriptS")]]
 #define sync       [[__call("SScriptI")]]
@@ -37,7 +36,7 @@
 #define type(x)    [[__script(x)]]
 #define addr(x)    [[__address(x)]]
 
-#define local stkcall static inline
+#define local static inline
 
 /* Types ------------------------------------------------------------------- */
 

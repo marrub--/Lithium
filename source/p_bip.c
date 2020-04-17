@@ -128,11 +128,11 @@ void P_BIP_Unlock(struct player *p, cstr name) {
    UnlockPage(p, &p->bip.pages[num]);
 }
 
-stkcall void P_BIP_PQuit(struct player *p) {
+void P_BIP_PQuit(struct player *p) {
    p->bip.init = false;
 }
 
-stkcall cstr P_BIP_CategoryToName(u32 category) {
+cstr P_BIP_CategoryToName(u32 category) {
    switch(category) {
       #define Categ(name) case BIPC_##name: return #name;
       Categ(SEARCH);

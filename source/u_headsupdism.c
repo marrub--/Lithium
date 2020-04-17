@@ -113,7 +113,6 @@ static void HUD_Health(struct player *p, struct upgrade *upgr)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;

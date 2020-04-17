@@ -21,16 +21,16 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-        void          TBufCtor (struct tokbuf *tb);
-        void          TBufDtor (struct tokbuf *tb);
-        struct token *TBufGet  (struct tokbuf *tb);
-        struct token *TBufPeek (struct tokbuf *tb);
-stkcall struct token *TBufUnGet(struct tokbuf *tb);
-stkcall struct token *TBufReGet(struct tokbuf *tb);
-stkcall struct token *TBufBack (struct tokbuf *tb, i32 n);
-        bool          TBufDrop (struct tokbuf *tb, i32 t);
-stkcall i32           TBufProc (struct token *tok);
-stkcall i32           TBufProcL(struct token *tok);
+void          TBufCtor (struct tokbuf *tb);
+void          TBufDtor (struct tokbuf *tb);
+struct token *TBufGet  (struct tokbuf *tb);
+struct token *TBufPeek (struct tokbuf *tb);
+struct token *TBufUnGet(struct tokbuf *tb);
+struct token *TBufReGet(struct tokbuf *tb);
+struct token *TBufBack (struct tokbuf *tb, i32 n);
+bool          TBufDrop (struct tokbuf *tb, i32 t);
+i32           TBufProc (struct token *tok);
+i32           TBufProcL(struct token *tok);
 
 /* Types ------------------------------------------------------------------- */
 
@@ -59,7 +59,7 @@ struct tokbuf
    i32 tpos, tend;
    i32 bbeg, bend;
 
-   stkcall i32 (*tokProcess)(struct token *tok);
+   i32 (*tokProcess)(struct token *tok);
 };
 
 #endif

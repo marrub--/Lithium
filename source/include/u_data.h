@@ -169,12 +169,12 @@ struct upgradeinfo {
 
    i32 key;
 
-   stkcall void (*Activate)(struct player *, struct upgrade *);
-   stkcall void (*Deactivate)(struct player *, struct upgrade *);
-   script  void (*Update)(struct player *, struct upgrade *);
-   stkcall void (*Enter)(struct player *, struct upgrade *);
-   stkcall void (*Render)(struct player *, struct upgrade *);
-   stkcall void (*Init)(struct player *, struct upgrade *);
+   void (*Activate)(struct player *, struct upgrade *);
+   void (*Deactivate)(struct player *, struct upgrade *);
+   script void (*Update)(struct player *, struct upgrade *);
+   void (*Enter)(struct player *, struct upgrade *);
+   void (*Render)(struct player *, struct upgrade *);
+   void (*Init)(struct player *, struct upgrade *);
 };
 
 struct upgrade {

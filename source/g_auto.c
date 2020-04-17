@@ -21,7 +21,6 @@ noinit static char tcbuf[4096];
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
 {
    x += g->ox;
@@ -45,14 +44,12 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
    }
 }
 
-stkcall
 void G_Init(struct gui_state *g, void *state)
 {
    g->state = state;
    g->gfxprefix = c":UI:";
 }
 
-stkcall
 void G_UpdateState(struct gui_state *g, struct player *p)
 {
    bool inverted = p->getCVarI(sc_player_invertmouse);
@@ -87,7 +84,6 @@ void G_UpdateState(struct gui_state *g, struct player *p)
       g->slidetime++;
 }
 
-stkcall
 void G_Begin(struct gui_state *g, i32 w, i32 h)
 {
    if(!w) w = 320;
@@ -98,7 +94,6 @@ void G_Begin(struct gui_state *g, i32 w, i32 h)
    SetSize(g->w = w, g->h = h);
 }
 
-stkcall
 void G_End(struct gui_state *g, enum cursor curs)
 {
    str cgfx;
@@ -123,7 +118,6 @@ void G_End(struct gui_state *g, enum cursor curs)
       g->active = 0;
 }
 
-stkcall
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
 {
    g->useclip = true;
@@ -134,14 +128,12 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
    SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);
 }
 
-stkcall
 void G_ClipRelease(struct gui_state *g)
 {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
    ClearClip();
 }
 
-stkcall
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
 {
    typeon->txt = text;
@@ -175,19 +167,16 @@ void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
    \
    return tcbuf;
 
-stkcall
 cstr RemoveTextColors_str(astr s, i32 size)
 {
    RemoveTextColorsImpl();
 }
 
-stkcall
 cstr RemoveTextColors(cstr s, i32 size)
 {
    RemoveTextColorsImpl();
 }
 
-stkcall
 struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon)
 {
    i32 num = ACS_Random(2, 15);

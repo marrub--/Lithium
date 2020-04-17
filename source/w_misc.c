@@ -17,7 +17,6 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-stkcall
 static void SetInventory(str item, i32 amount)
 {
    i32 s = InvNum(item) - amount;
@@ -25,7 +24,6 @@ static void SetInventory(str item, i32 amount)
    else if(s > 0) InvGive(item,  s);
 }
 
-stkcall
 static void SetActorInventory(i32 tid, str item, i32 amount)
 {
    i32 s = ACS_CheckActorInventory(tid, item) - amount;
@@ -35,7 +33,6 @@ static void SetActorInventory(i32 tid, str item, i32 amount)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
 {
    ACS_FadeTo(r, g, b, amount, 0.0);
@@ -75,35 +72,30 @@ bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags)
    return ACS_SetPointer(assign, tid2, ptr2, flags);
 }
 
-stkcall
 i32 PtrInvNum(i32 tid, str item)
 {
    if(tid == 0) return InvNum(item);
    else         return ACS_CheckActorInventory(tid, item);
 }
 
-stkcall
 void PtrInvGive(i32 tid, str item, i32 amount)
 {
    if(tid == 0) InvGive(item, amount);
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
-stkcall
 void PtrInvTake(i32 tid, str item, i32 amount)
 {
    if(tid == 0) InvTake(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
 }
 
-stkcall
 void PtrInvSet(i32 tid, str item, i32 amount)
 {
    if(tid == 0) SetInventory(item, amount);
    else         SetActorInventory(tid, item, amount);
 }
 
-stkcall
 void BeginAngles(i32 x, i32 y)
 {
    a_cur = 0;
@@ -116,7 +108,6 @@ void BeginAngles(i32 x, i32 y)
    a_y = y;
 }
 
-stkcall
 k32 AddAngle(i32 x, i32 y)
 {
    if(a_cur >= countof(a_angles))

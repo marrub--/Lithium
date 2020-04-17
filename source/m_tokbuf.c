@@ -18,7 +18,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall i32 TBufProc(struct token *tok) {
+i32 TBufProc(struct token *tok) {
    switch(tok->type) {
       case tok_eof:    return tokproc_done;
       case tok_lnend:
@@ -28,7 +28,7 @@ stkcall i32 TBufProc(struct token *tok) {
    return tokproc_next;
 }
 
-stkcall i32 TBufProcL(struct token *tok) {
+i32 TBufProcL(struct token *tok) {
    switch(tok->type) {
       case tok_eof:    return tokproc_done;
       case tok_cmment: return tokproc_skip;
@@ -87,15 +87,15 @@ struct token *TBufPeek(struct tokbuf *tb) {
    return TBufUnGet(tb);
 }
 
-stkcall struct token *TBufUnGet(struct tokbuf *tb) {
+struct token *TBufUnGet(struct tokbuf *tb) {
    return &tb->toks[tb->tpos--];
 }
 
-stkcall struct token *TBufReGet(struct tokbuf *tb) {
+struct token *TBufReGet(struct tokbuf *tb) {
    return &tb->toks[tb->tpos];
 }
 
-stkcall struct token *TBufBack(struct tokbuf *tb, i32 n) {
+struct token *TBufBack(struct tokbuf *tb, i32 n) {
    return &tb->toks[tb->tpos - n];
 }
 

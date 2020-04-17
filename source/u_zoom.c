@@ -19,7 +19,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_Zoom_Deactivate(struct player *p, struct upgrade *upgr)
 {
    UData.zoom = UData.vzoom = 0;
@@ -45,7 +44,6 @@ void Upgr_Zoom_Update(struct player *p, struct upgrade *upgr)
       UData.vzoom = UData.zoom;
 }
 
-stkcall
 void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 {
    if(UData.vzoom)

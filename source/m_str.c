@@ -34,30 +34,30 @@ StrEntON
 #include "m_stab.h"
 StrEntOFF
 
-stkcall str l_strupper(str in)
+str l_strupper(str in)
 {
    ACS_BeginPrint();
    for(astr c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
    return ACS_EndStrParam();
 }
 
-stkcall u32 l_strhash(astr s)
+u32 l_strhash(astr s)
 {
    StrHashImpl();
 }
 
-stkcall u32 lstrhash(cstr s)
+u32 lstrhash(cstr s)
 {
    StrHashImpl();
 }
 
-stkcall char *lstrcpy_str(char *dest, astr src)
+char *lstrcpy_str(char *dest, astr src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
    return dest;
 }
 
-stkcall char *lstrcpy2(char *out, cstr s1, cstr s2)
+char *lstrcpy2(char *out, cstr s1, cstr s2)
 {
    char *p = out;
    for(; *s1; s1++) *p++ = *s1;
@@ -66,7 +66,7 @@ stkcall char *lstrcpy2(char *out, cstr s1, cstr s2)
    return out;
 }
 
-stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
+char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
 {
    char *p = out;
    for(; *s1; s1++) *p++ = *s1;
@@ -76,7 +76,7 @@ stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
    return out;
 }
 
-stkcall i32 lstrcmp_str(cstr s1, astr s2)
+i32 lstrcmp_str(cstr s1, astr s2)
 {
    register i32 res;
 
@@ -86,7 +86,7 @@ stkcall i32 lstrcmp_str(cstr s1, astr s2)
    return res;
 }
 
-stkcall i32 faststrcmp(cstr s1, cstr s2)
+i32 faststrcmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
 
@@ -98,7 +98,7 @@ stkcall i32 faststrcmp(cstr s1, cstr s2)
    return res;
 }
 
-stkcall i32 faststrcasecmp(cstr s1, cstr s2)
+i32 faststrcasecmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
 
@@ -110,7 +110,7 @@ stkcall i32 faststrcasecmp(cstr s1, cstr s2)
    return res;
 }
 
-stkcall cstr scoresep(i96 num)
+cstr scoresep(i96 num)
 {
    static char out[48];
 

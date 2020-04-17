@@ -36,7 +36,6 @@ static void DodgeView(struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
 {
    p->speedmul += 0.3;
@@ -44,7 +43,6 @@ void Upgr_ReflexWetw_Activate(struct player *p, struct upgrade *upgr)
    UData.leaped = 0;
 }
 
-stkcall
 void Upgr_ReflexWetw_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->speedmul -= 0.3;

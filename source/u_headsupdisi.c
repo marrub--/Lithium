@@ -83,7 +83,6 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_HeadsUpDisI_Activate(struct player *p, struct upgrade *upgr)
 {
    lerplli_init(&UData.score,     p->score,     4);
@@ -91,7 +90,6 @@ void Upgr_HeadsUpDisI_Activate(struct player *p, struct upgrade *upgr)
    lerplli_init(&UData.overdrive, p->overdrive, 1);
 }
 
-stkcall
 void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;

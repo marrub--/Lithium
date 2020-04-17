@@ -90,7 +90,6 @@ static struct witem const clipbx[] = {
 
 /* Static Functions -------------------------------------------------------- */
 
-stkcall
 static cstr RandomWeighted(struct witem const *l, i32 c)
 {
    i32 sel = ACS_Random(1, l[c - 1].weight);

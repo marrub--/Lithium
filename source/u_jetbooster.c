@@ -19,7 +19,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_JetBooster_Activate(struct player *p, struct upgrade *upgr)
 {
    UData.charge = CHARGE_MAX;
@@ -48,7 +47,6 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-stkcall
 void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
 {
    if(!p->hudenabled) return;

@@ -50,7 +50,6 @@ static void RA_Give(cstr name, i32 n)
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
 {
    UData.activearmor = 0;
@@ -59,7 +58,6 @@ void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
    RA_Take(2);
 }
 
-stkcall
 void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
 {
    if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))

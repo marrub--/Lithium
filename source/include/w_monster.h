@@ -87,8 +87,8 @@ struct dmon {
 typedef struct dmon dmon_t;
 
 script dmon_t *DmonPtr(i32 tid, i32 ptr);
-stkcall dmon_t *DmonSelf(void);
-stkcall dmon_t *Dmon(i32 id);
+dmon_t *DmonSelf(void);
+dmon_t *Dmon(i32 id);
 dmon_t *AllocDmon(void);
 
 void PrintDmonAllocSize(struct player *p);

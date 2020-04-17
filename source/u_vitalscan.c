@@ -126,7 +126,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
    }
 }
 
-stkcall void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
+void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    if(!p->hudenabled || !UData.target) return;
 
    if(UData.hdtime == 30) SetFade(fid_vscan, 10, 12);

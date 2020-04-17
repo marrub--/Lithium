@@ -15,13 +15,11 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_AutoReload_Activate(struct player *p, struct upgrade *upgr)
 {
    p->autoreload = true;
 }
 
-stkcall
 void Upgr_AutoReload_Deactivate(struct player *p, struct upgrade *upgr)
 {
    p->autoreload = false;

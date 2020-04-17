@@ -140,15 +140,15 @@ enum {
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
+void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
 script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
 script optargs(1) i32 PtrPlayerNumber(i32 tid, i32 ptr);
 script optargs(1) bool PtrValid(i32 tid, i32 ptr);
 script optargs(2) bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags);
-stkcall i32  PtrInvNum(i32 tid, str item);
-stkcall void PtrInvGive(i32 tid, str item, i32 amount);
-stkcall void PtrInvTake(i32 tid, str item, i32 amount);
-stkcall void PtrInvSet (i32 tid, str item, i32 amount);
+i32  PtrInvNum(i32 tid, str item);
+void PtrInvGive(i32 tid, str item, i32 amount);
+void PtrInvTake(i32 tid, str item, i32 amount);
+void PtrInvSet (i32 tid, str item, i32 amount);
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
 void Dbg_PrintMem(void const *data, size_t size);

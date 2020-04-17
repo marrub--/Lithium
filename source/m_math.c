@@ -72,7 +72,6 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
    return ~result;
 }
 
-stkcall
 i32 fastabs(i32 n)
 {
    __asm(
@@ -86,7 +85,6 @@ i32 fastabs(i32 n)
    return 0; /* shh... */
 }
 
-stkcall
 k64 powlk(k64 x, i32 y)
 {
    k64 z = 1;
@@ -94,19 +92,16 @@ k64 powlk(k64 x, i32 y)
    return z;
 }
 
-stkcall
 k64 mag2lk(k64 x, k64 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
-stkcall
 k32 mag2k(k32 x, k32 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
-stkcall
 i32 mag2i(i32 x, i32 y)
 {
    return ACS_Sqrt(x * x + y * y);
@@ -172,13 +167,11 @@ void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer)
    data->timer_max_cap = 2;
 }
 
-stkcall
 bool aabb(i32 x, i32 y, i32 z, i32 w, i32 x2, i32 y2)
 {
    return x2 >= x && y2 >= y && x2 < z && y2 < w;
 }
 
-stkcall
 i32 ceilk(k32 n)
 {
    union ik32 u = {.k = n};
@@ -186,13 +179,11 @@ i32 ceilk(k32 n)
    else             return u.k;
 }
 
-stkcall
 k64 bzpolylk(k64 a, k64 b, k64 t)
 {
    return a + (b - a) * t;
 }
 
-stkcall
 i32 bzpolyi(i32 a, i32 b, k64 t)
 {
    return a + (b - a) * t;

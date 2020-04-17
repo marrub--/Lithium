@@ -33,18 +33,18 @@ script static void P_BossText(struct player *p, i32 boss);
 
 script type("enter")
 static void Sc_PlayerEntry(void) {
-   script  extern void P_Wep_PTickPre(struct player *p);
-   stkcall extern void P_Dat_PTickPre(struct player *p);
-   stkcall static void P_Scr_PTickPre(struct player *p);
-   script  extern void P_CBI_PTick   (struct player *p);
-   script  extern void P_Inv_PTick   (struct player *p);
-   script  extern void P_Log_PTick   (struct player *p);
-   script  extern void P_Upg_PTick   (struct player *p);
-   script  extern void P_Wep_PTick   (struct player *p);
-   stkcall static void P_Atr_PTick   (struct player *p);
-   script  extern void P_Upg_PTickPst(struct player *p);
-   stkcall extern void P_Ren_PTickPst(struct player *p);
-   stkcall static void P_Aug_PTick   (struct player *p);
+   script extern void P_Wep_PTickPre(struct player *p);
+          extern void P_Dat_PTickPre(struct player *p);
+          static void P_Scr_PTickPre(struct player *p);
+   script extern void P_CBI_PTick   (struct player *p);
+   script extern void P_Inv_PTick   (struct player *p);
+   script extern void P_Log_PTick   (struct player *p);
+   script extern void P_Upg_PTick   (struct player *p);
+   script extern void P_Wep_PTick   (struct player *p);
+          static void P_Atr_PTick   (struct player *p);
+   script extern void P_Upg_PTickPst(struct player *p);
+          extern void P_Ren_PTickPst(struct player *p);
+          static void P_Aug_PTick   (struct player *p);
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -196,7 +196,7 @@ static void Sc_PlayerDisconnect(void) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall cstr P_Discrim(i32 pclass) {
+cstr P_Discrim(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return "Stan";
    case pcl_cybermage: return "Jem";
@@ -215,7 +215,7 @@ struct player *P_PtrFind(i32 tid, i32 ptr) {
    else          return nil;
 }
 
-stkcall void P_GUI_Close(struct player *p) {
+void P_GUI_Close(struct player *p) {
    Str(guisnd_close, s"player/cbi/close");
 
    if(p->cbion) {
@@ -225,7 +225,7 @@ stkcall void P_GUI_Close(struct player *p) {
    }
 }
 
-stkcall void P_GUI_Use(struct player *p) {
+void P_GUI_Use(struct player *p) {
    Str(guisnd_open,  s"player/cbi/open");
    Str(guisnd_win95, s"player/cbi/win95");
 
@@ -288,7 +288,7 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul) {
    return score;
 }
 
-stkcall void P_Scr_Take(struct player *p, i96 score) {
+void P_Scr_Take(struct player *p, i96 score) {
    if(p->score - score >= 0) {
       p->scoreused += score;
       p->score     -= score;
@@ -390,7 +390,7 @@ script static void P_BossText(struct player *p, i32 boss) {
    }
 }
 
-stkcall static void AttrRGE(struct player *p) {
+static void AttrRGE(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->health < p->oldhealth)
@@ -399,7 +399,7 @@ stkcall static void AttrRGE(struct player *p) {
    p->rage = lerpk(p->rage, 0, 0.02);
 }
 
-stkcall static void AttrCON(struct player *p) {
+static void AttrCON(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->mana > p->oldmana)
@@ -408,7 +408,7 @@ stkcall static void AttrCON(struct player *p) {
    p->rage = lerpk(p->rage, 0, 0.03);
 }
 
-stkcall static void P_Atr_PTick(struct player *p) {
+static void P_Atr_PTick(struct player *p) {
    if(Paused) return;
 
    k32  acc = p->attr.attrs[at_acc] / 150.0;
@@ -431,7 +431,7 @@ stkcall static void P_Atr_PTick(struct player *p) {
       p->health = p->health + 1;
 }
 
-stkcall static void P_Scr_PTickPre(struct player *p) {
+static void P_Scr_PTickPre(struct player *p) {
    if(!p->scoreaccumtime || p->score < p->old.score) {
       p->scoreaccum = 0;
       p->scoreaccumtime = 0;
@@ -441,7 +441,7 @@ stkcall static void P_Scr_PTickPre(struct player *p) {
    else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
 }
 
-stkcall static void P_Aug_PTick(struct player *p) {
+static void P_Aug_PTick(struct player *p) {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 

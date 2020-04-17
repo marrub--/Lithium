@@ -15,7 +15,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_HeadsUpDisA_Render(struct player *p, struct upgrade *upgr)
 {
    Upgr_HeadsUpDisM_Render(p, upgr);

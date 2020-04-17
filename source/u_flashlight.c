@@ -19,7 +19,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall void Upgr_Flashlight_Enter(struct player *p, struct upgrade *upgr) {
+void Upgr_Flashlight_Enter(struct player *p, struct upgrade *upgr) {
    UData.on        = false;
    UData.battery   = 0xffff;
    UData.intensity = 0.0;
@@ -27,8 +27,7 @@ stkcall void Upgr_Flashlight_Enter(struct player *p, struct upgrade *upgr) {
    UData.speed     = 1.0;
 }
 
-stkcall void Upgr_Flashlight_Deactivate(struct player *p,
-                                        struct upgrade *upgr) {
+void Upgr_Flashlight_Deactivate(struct player *p, struct upgrade *upgr) {
    UData.on        = false;
    UData.intensity = 0.0;
    UData.target    = 0.0;
@@ -81,7 +80,7 @@ script void Upgr_Flashlight_Update(struct player *p, struct upgrade *upgr) {
             UData.target, UData.intensity, UData.speed, UData.battery);
 }
 
-stkcall void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
+void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
    if(!p->hudenabled) return;
 
    i32 bat_life = p->getCVarI(sc_light_battery) * 35;

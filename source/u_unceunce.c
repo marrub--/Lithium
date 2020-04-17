@@ -15,13 +15,11 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_UNCEUNCE_Activate(struct player *p, struct upgrade *upgr)
 {
    ACS_SetMusic(sp_lmusic_Unce);
 }
 
-stkcall
 void Upgr_UNCEUNCE_Deactivate(struct player *p, struct upgrade *upgr)
 {
    Str(original, s"*");

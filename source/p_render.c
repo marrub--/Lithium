@@ -61,7 +61,7 @@ static void P_Ren_LevelUp(struct player *p) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall void P_Ren_PTickPst(struct player *p) {
+void P_Ren_PTickPst(struct player *p) {
    P_Ren_Magic(p);
    P_Ren_Step(p);
    P_Ren_Infrared(p);

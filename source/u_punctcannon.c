@@ -17,7 +17,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall
 void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr)
 {
    InvGive(so_GTFO, 1);

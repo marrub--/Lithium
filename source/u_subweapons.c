@@ -42,7 +42,7 @@ script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
    }
 }
 
-stkcall void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
+void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
    Str(subwepback, s":HUD_D:SubWepBack");
    Str(subwepbar1, s":HUD_D:SubWepBar1");
    Str(subwepbar2, s":HUD_D:SubWepBar2");
@@ -73,7 +73,7 @@ stkcall void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
    }
 }
 
-stkcall void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
+void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
    UData.shots = 2;
    if(get_bit(dbgflag, dbgf_items)) UData.have = UINT32_MAX;
    else                             set_bit(UData.have, _subw_gun);

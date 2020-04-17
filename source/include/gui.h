@@ -289,31 +289,26 @@ extern struct gui_presets const gui_p;
 
 /* Extern Functions -------------------------------------------------------- */
 
-stkcall optargs(1)
+optargs(1)
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
 
-stkcall optargs(1)
+optargs(1)
 void G_Init(struct gui_state *g, void *state);
 
-stkcall
 void G_UpdateState(struct gui_state *g, struct player *p);
 
-stkcall optargs(2)
+optargs(2)
 void G_Begin(struct gui_state *g, i32 w, i32 h);
-stkcall
 void G_End(struct gui_state *g, enum cursor curs);
 
-stkcall optargs(1)
+optargs(1)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
-stkcall
 void G_ClipRelease(struct gui_state *g);
 
-stkcall cstr RemoveTextColors_str(astr s, i32 size);
-stkcall cstr RemoveTextColors    (cstr s, i32 size);
+cstr RemoveTextColors_str(astr s, i32 size);
+cstr RemoveTextColors    (cstr s, i32 size);
 
-stkcall
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
-stkcall
 struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
 
 void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr);

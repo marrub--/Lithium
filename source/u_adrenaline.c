@@ -49,7 +49,6 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    }
 }
 
-stkcall
 void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
 {
    if(!get_bit(p->upgrades[UPGR_HeadsUpDisM].flags, _ug_active)) return;

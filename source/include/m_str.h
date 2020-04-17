@@ -31,16 +31,16 @@
 #define fastmemset(p, s, c, ...) \
    for(i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s;
 
-stkcall str l_strupper(str in);
-stkcall u32 l_strhash(astr s);
-stkcall u32 lstrhash(cstr s);
-stkcall char *lstrcpy_str(char *dest, astr src);
-stkcall char *lstrcpy2(char *out, cstr s1, cstr s2);
-stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
-stkcall i32 lstrcmp_str(cstr s1, astr s2);
-stkcall i32 faststrcmp(cstr s1, cstr s2);
-stkcall i32 faststrcasecmp(cstr s1, cstr s2);
-stkcall cstr scoresep(i96 num);
+str l_strupper(str in);
+u32 l_strhash(astr s);
+u32 lstrhash(cstr s);
+char *lstrcpy_str(char *dest, astr src);
+char *lstrcpy2(char *out, cstr s1, cstr s2);
+char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
+i32 lstrcmp_str(cstr s1, astr s2);
+i32 faststrcmp(cstr s1, cstr s2);
+i32 faststrcasecmp(cstr s1, cstr s2);
+cstr scoresep(i96 num);
 str LanguageV(str name);
 char *LanguageVC(char *out, cstr name);
 char *LanguageCV(char *out, cstr name, ...);
