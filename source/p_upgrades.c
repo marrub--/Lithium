@@ -158,12 +158,12 @@ bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr) {
    return
       get_bit(upgr->flags, _ug_owned) &&
       (get_bit(upgr->flags, _ug_active) ||
-       ((p->pclass == pcl_marine &&
-         !RequiresButDontHave_AI  &&
-         !RequiresButDontHave_WMD &&
-         !RequiresButDontHave_WRD &&
-         !RequiresButDontHave_RDI &&
-         !RequiresButDontHave_RA) &&
+       p->pclass != pcl_marine ||
+       (!RequiresButDontHave_AI  &&
+        !RequiresButDontHave_WMD &&
+        !RequiresButDontHave_WRD &&
+        !RequiresButDontHave_RDI &&
+        !RequiresButDontHave_RA  &&
         p->cbi.pruse + upgr->info->perf <= cbiperf));
 }
 
