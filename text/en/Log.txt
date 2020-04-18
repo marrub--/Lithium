@@ -144,6 +144,7 @@
 
 == \#LOG_Bought    | Bought %s
 == \#LOG_Delivered | \cjItem delivered.
-== \#LOG_NoDeliver | \cgCouldn't deliver item\c-, placing directly in inventory.
+@@ \#LOG_NoDeliver
+\cgCouldn't deliver item\c-, placing directly in inventory.
 
 ## EOF

@@ -1,3 +1,12 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#ENDING_Credits
 \cd>>>>>                             [[[[ Lithium ]]]]
 \cd>>>>>                         Project Golan, Xevv 2
 
@@ -7,21 +16,33 @@ Title music - \cdShredder\cj by \cn505\cj
 Fonts by \cnJimmy\cj
 
 Sprites by:
-* \cnAnthony Cole\cj * \cnBloax\cj * \cnCage\cj * \cnCaptain J\cj * \cnGAA1992\cj *
-* \cnHorrorMovieGuy\cj * \cnKate Fox\cj * \cnMarlboro Mike\cj * \cnMarrub\cj *
-* \cnMike12\cj * \cnMinigunner\cj * \cnMrEnchanter\cj * \cnScuba Steve\cj *
-* \cnSeryder\cj * \cnSgt. Shivers\cj * \cnSlax\cj * \cnSolo Spaghetti\cj *
-* \cnTheRailgunner\cj * \cnTurbo\cj * \cnwildweasel\cj * \cntorridGristle\cj *
-* \cnzrrion the insect\cj * and others... *
+@@
+* \cnAnthony Cole\cj * \cnBloax\cj * \cnCage\cj * \cnCaptain J\cj *
+* \cnGAA1992\cj * \cnHorrorMovieGuy\cj * \cnKate Fox\cj * \cnMarlboro
+* Mike\cj * \cnMarrub\cj * \cnMike12\cj * \cnMinigunner\cj *
+* \cnMrEnchanter\cj * \cnScuba Steve\cj * \cnSeryder\cj * \cnSgt.
+* Shivers\cj * \cnSlax\cj * \cnSolo Spaghetti\cj * \cnTheRailgunner\cj
+* \cnTurbo\cj * \cnwildweasel\cj * \cntorridGristle\cj * \cnzrrion the
+* insect\cj * and others... *
+@@
 
 With sound help from:
-* \cna1337spy\cj * \cnKyle873\cj * \cnShadowlink226\cj *
+@@
+* \cna1337spy\cj * \cnKyle873\cj * \cnShadowlink226\cj
 * \cnTerminusEst13\cj * \cnwildweasel\cj * and others... *
+@@
 
 And code help from:
+@@
 * \cnDavidPH\cj * \cnInsanityBringer\cj * \cnYholl\cj * \cnZombie\cj *
+@@
 
 All of my thanks to:
 \cnDavidPH\cj, for making this project possible.
-\cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being an inspiration.
+@@
+\cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being
+an inspiration.
+@@
 \cnYholl\cj and \cnZombie\cj, for tons of help dealing with ZDoom.
+
+## EOF

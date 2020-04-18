@@ -1,3 +1,12 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+@@ \#ENDING_SpiderDemon_Stan
 The massive spider demon explodes into a million bits as your body is
 once again shuttled through dimensions of space-time.
 
@@ -17,3 +26,5 @@ These thoughts all seem to fly away as you are returned to the
 corporeal world.
 
 You seem to be on some kind of twisted version of Earth...
+
+## EOF

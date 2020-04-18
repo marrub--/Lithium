@@ -102,13 +102,20 @@ only true name is "King Crimera Haxfucker."
 == QUITMSG30 | AAAGH
 == QUITMSG31 | wan
 
-%% QUITMSG32
-hellote i been looking at the sources what dont tell me how do i made a BSP grenades
-like it is regular grenades but when you make explode it deform bsp tree into shrub
+@@ QUITMSG32
+hellote i been looking at the sources what dont tell me how do i made
+a BSP grenades
+
+like it is regular grenades but when you make explode it deform bsp
+tree into shrub
 
 == QUITMSG33 | ~text interface terminal malfunction error ~2992dud
 == QUITMSG34 | Internet pornography.
-== QUITMSG35 | if god is everywhere, then that means he's in this quit message and he needs to get the fuck OUT
+
+@@ QUITMSG35
+if god is everywhere, then that means he's in this quit message and he
+needs to get the fuck OUT
+
 == QUITMSG36 | Now if you'll excuse me, I need to go die to the Soviet Union.
 
 %% QUITMSG37
@@ -255,9 +262,31 @@ Just do it already!
 == QUITMSG97 | If you quit, you will never become THE COPPER MAN.
 == QUITMSG98 | >stops in mid flow to sip his tea
 == QUITMSG99 | bepis
-== QUITMSG100 | Crungy Spimmy: Back 2 Tha Source: Wrong Number: Remastered Edition: Featuring Jungo from Chummy Tuungle 3: Lord of the Flies: Special Edition: Featuring Exclusive Grimbo and Hat DLC: Expansion Pack: Electronic Knucle Scrungus Mod: Day 1 Edition [Early Access] Only on PS4: Steam Greenlight Approved: The Long Lost Tale of the Gringledop Boopledonger: Frodus Poster Pack: HTC Vive Support Enabled: (BUY ROCKBAND MICROPHONE AND DRUMSET TO EXPAND YOUR BAND): "Every Chimmbus Eases the Pain" Extended Digital Special Edition: What's Under Double D's hat in Ed Edd 'n' Eddy? The Game Theory: Way If We Pees Form Butts?: Featuring Dongle Flopperdinglebop from the Fun Truungledinge Lost Tale of the Gringledop Boopledonger Series 2: Super Mega Edition: Redial: Featuring a Free Comic About Grimbo's Quest for the Humbusdoob: Ultra Edition: Bumbicop Statue With Real Chimmbus Action: Fire Red Version: Dream Drop Distance: Subsistence: See Inside: Crungy Spimmy and the Gringle Spingle Limited Edition Comic Series Cereal Box: The Movie: The Game
+
+@@ QUITMSG100
+Crungy Spimmy: Back 2 Tha Source: Wrong Number: Remastered Edition:
+Featuring Jungo from Chummy Tuungle 3: Lord of the Flies: Special
+Edition: Featuring Exclusive Grimbo and Hat DLC: Expansion Pack:
+Electronic Knucle Scrungus Mod: Day 1 Edition [Early Access] Only on
+PS4: Steam Greenlight Approved: The Long Lost Tale of the Gringledop
+Boopledonger: Frodus Poster Pack: HTC Vive Support Enabled: (BUY
+ROCKBAND MICROPHONE AND DRUMSET TO EXPAND YOUR BAND): "Every Chimmbus
+Eases the Pain" Extended Digital Special Edition: What's Under Double
+D's hat in Ed Edd 'n' Eddy? The Game Theory: Way If We Pees Form
+Butts?: Featuring Dongle Flopperdinglebop from the Fun Truungledinge
+Lost Tale of the Gringledop Boopledonger Series 2: Super Mega Edition:
+Redial: Featuring a Free Comic About Grimbo's Quest for the
+Humbusdoob: Ultra Edition: Bumbicop Statue With Real Chimmbus Action:
+Fire Red Version: Dream Drop Distance: Subsistence: See Inside: Crungy
+Spimmy and the Gringle Spingle Limited Edition Comic Series Cereal
+Box: The Movie: The Game
+
 == QUITMSG101 | die
-== QUITMSG102 | Aw, dude. There's still so many demons to kill. Don't leave me here with them.
+
+@@ QUITMSG102
+Aw, dude. There's still so many demons to kill. Don't leave me here
+with them.
+
 == QUITMSG103 | Chase down the Willow?
 
 == QUITMSGNUM | 103

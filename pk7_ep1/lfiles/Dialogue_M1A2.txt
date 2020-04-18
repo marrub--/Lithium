@@ -11,75 +11,21 @@
 terminal 1;
 
 unfinished {
-   remote "OCS@localhost"
+   remote OCS
 
    if class pC {
-      logon "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+      logon "LogonAOF" text AOF
 
-      pict 1 {
-         @@
-         `\cdI'm sure there's quite a bit of shellshock going on right now.
-         `Apologies. I'll try to talk in terms you might understand a little
-         `better.
-         `
-         `\cdI know that you don't know me. But I've known you for several
-         `hundred years. Something changed in you suddenly and you forgot
-         `everything. As I was beginning to worry I noticed something peculiar.
-         `
-         `\cgEvery atom in your body \cdhad been mutated in some way. Some of
-         `them simply moved, others changed structure, and some of them even
-         `were removed completely. I don't think I have to tell you how odd it
-         `is for something to simply vanish from the universe. I'm not even
-         `sure it's possible.
-         `
-         `\cdAll that can wait for a moment. I'll get back to you with my
-         `findings and some explanations to get you up to speed, after we've
-         `resolved our current dilemma.
-         @@
-      }
+      pict 1 text M1A2_01_C_01
+      pict 1 text M1A2_01_C_02
 
-      pict 1 {
-         @@
-         `\cdThe armory is currently under lock-down due to the invading
-         `forces. There is an \cnoverride KeyDisk\cd available, but it is
-         `itself currently locked in storage.
-         `
-         `\cdNot to worry, though. There is a nearby access point that can
-         `request the disk be... \cnrelocated\cd. One of the gateways opened by
-         `the intruders can be used for this, but unfortunately in doing so you
-         `will also have to temporarily open it to them as well.
-         `
-         `\cdOnce you have the \cnoverride disk\cd and have made your way
-         `inside the armory proper, acquire one of the weapons there and \cfI
-         `will relocate you from this terminal\cd.
-         `
-         `\cdYou should go through the ventilation access to get to there. I'll
-         `unlock it for you now.
-         @@
-      }
-
-      logoff "LogonAOF" `\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+      logoff "LogonAOF" text AOF
    } else {
-      logon "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logon "UAC" text UAC
 
-      pict 3 {
-         @@
-         `\cgThe armory \ch(?\crhas been\ch|\cris\ch)\cg set into lock down.
-         `You must go to the access point and \cnrelocate the override
-         `KeyDisk\cg. Unfortunately the method of transport is not as easy.
-         `
-         `\cgRelocation requires the use of the enemy's gateways. You will also
-         `let them in temporarily by doing so. Be prepared for a fight.
-         `
-         `\cgI apologize for my bluntness. Hopefully these
-         `\ch(?\crsmall\ch|\crmeasly\ch)\cg weapons will be adequate for your
-         `mission. I apologize for the distress.
-         `
-         `\cgI will open the ventilation access doors now.
-         @@
-      }
+      pict 3 text M1A2_01_M_01
 
-      logoff "UAC" `\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+      logoff "UAC" text UAC
    }
 
    script "Lith_UnlockVents"
@@ -89,162 +35,69 @@ unfinished {
 terminal 2;
 
 unfinished {
-   remote "data@localhost"
+   remote DATA
 
-   logon "LogonData" `\cu[Ship Data Terminal]
+   logon "LogonData" text DATA
 
-   info {
-      @@
-      `[Viewing:\cd/usr/share/vis/u436x/flooring.v\c-]
-      `
-      `The \cnU-4360707\c- Star Ship is equipped with comfortable, accessible
-      `flooring throughout the entirety of the personnel facilities. The
-      `material used for floors in these sections is a subpatented\ci*\c-
-      `polymer built to withstand explosions up to 40 MJ/kg\ci**\c- while
-      `still being comfortable to walk on.
-      `
-      `The \cnSuperFlex\c- flooring system allows for secure buildings to have
-      `maximal comfort during peace time. Thanks to this, the \cnU-4360707\c-
-      `Star Ship has both incredible resistance and incredible comfort
-      `all throughout\ci***\c-.
-      `
-      `All areas\ci***\c- in the ship are also equipped with accessible ramps
-      `for disabled crew and autonomous ship AI cores. Minor inclines of around
-      `four to six degrees are not included in this statement.
-      @@
-      `
-      ` \ci*   \cuSubpatent N-E-FO/MT-8389.\c-
-      ` \ci**  \cuExact measurement is 39.0864 MJ/kg.\c-
-      ` \ci*** \cuIn all personnel facilities.\c-
-   }
+   info text M1A2_02_01
+   info text M1A2_02_02
 
-   info {
-      @@
-      `[Viewing:\cd/usr/share/vis/vis/intro.v\c-]
-      `
-      `The \cnVisual Information System\c- (VIS) is a set of universal
-      `standards, ranging from subpatent \cnV-W-IN-20\c- up to \cnV-W-IN-30\c-.
-      `
-      `The VIS standard subpatents are all free to use by any organization or
-      `individual. You may reproduce, modify, and sell all 10 subpatents with
-      `no restriction whatsoever. \cnTransference of Issue\c- applies to all
-      `VIS subpatents. See \cnUniversal Legal Code\c- for more on ToI and
-      `warranties. This code is also available under
-      `\cd/usr/share/vis/ulc/toi.v\c-, as are all other legal codes.
-      `
-      `The \cnVisual Information System\c- standards include:
-      @@
-      `
-      ` \ci- \cu20 :: \c-Textual Representation of Visual Information
-      ` \ci- \cu21 :: \c-Optional Representations for Visual Information
-      ` \ci- \cu22 :: \c-Appropriate Storage Media for Visual Information
-      ` \ci- \cu23 :: \c-Standard Outputs for Visual Information
-      ` \ci- \cu24 :: \c-Acceptable Outputs for Visual Information
-      ` \ci- \cu25 :: \c-Appropriate Output Media for Visual Information
-      ` \ci- \cu26 :: \c-Organization and Categorization of Visual Information
-      ` \ci- \cu27 :: \c-Requirements for the Filing of Visual Information
-      ` \ci- \cu28 :: \c-Standard Visual Information Suite
-      ` \ci- \cu29 :: \c-Extraneous Visual Information Suite
-      ` \ci- \cu30 :: \c-Context, Definitions and Purpose of Visual Information
-      `
-      @@
-      `Please view the respective information pages for more on each standard.
-      `All subpatents included in the standard suite are placed in
-      `\cd/usr/share/vis/subp/\c-.
-      @@
-   }
-
-   logoff "LogonData" `\cu[Ship Data Terminal]
+   logoff "LogonData" text DATA
 }
 
 terminal 3;
 
 unfinished {
-   remote "data@localhost"
+   remote DATA
 
-   logon "LogonData" `\cu[Ship Data Terminal]
+   logon "LogonData" text DATA
 
-   info {
-      `[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/59-131067-.v\c-]
-      `[\cnINFO\c-] pragmat \cdENABLE\ck #src_lang 99391dp.kiri.licari\cu
-      `
-      `before his time has come, his star begins to fall,
-      `      truth spread out before the lies, no more does he use disguise,
-      `
-      `   but fore his death thine flesh be torn, all his life been forlorn,
-      `the south star falls and none arise, no more may he close his eyes
-      `
-      `does one know oneself without death?
-      `
-      `   will ever one bereft, find the knowledge of those correct?
-      ` can one truly know?
-   }
+   info text M1A2_03_01
 
-   logoff "LogonData" `\cu[Ship Data Terminal]
+   logoff "LogonData" text DATA
 }
 
 /* ------------------------------------------------------------------------- */
 dialogue 1;
 
 page 0 {
-   name "???"
-   icon "Maxie"
-   remote "<hidden>"
+   icon   "Maxie"
+   remote HIDDEN
 
-   `Oh, hi there. You seem friendly.
+   text M1A2_01_00
 
-   option "Yeah. Who might you be?" page 1
-   option "Maybe. What are you?" page 2
-   option "Not friendly enough." brk
+   option M1A2_01_00_01 page 1
+   option M1A2_01_00_02 page 2
+   option M1A2_01_00_03 brk
 }
 
 page 1 {
-   name "Maxie"
-   remote "maxie@ai.<hidden>"
+   name   "Maxie"
+   remote MAXIE
 
-   @@
-   `I'm Maxie. I used to be the 4334th Counsel of the 51st Era Judgment.
-   `Now I'm, uh, this. Sorry to disappoint.
-   @@
+   text M1A2_01_01
 
-   option "This is all rather new to me. Can you explain?" page 3
+   option M1A2_01_01_01 page 3
 }
 
 page 2 {
-   @@
-   `I was the 4334th Counsel of the 51st Era Judgment. Now I'm, as you can
-   `quite clearly see, a bowl, an eye, and a power core.
-   @@
+   text M1A2_01_02
 
-   option "That's quite sad. Can you explain that to me?" page 3
-   option "What a shame." brk
+   option M1A2_01_02_01 page 3
+   option M1A2_01_02_02 brk
 }
 
 page 3 {
-   @@
-   `Explain? Well, you surely know the Judgment. I can only presume you mean
-   `how I got in this state. Here, I'll tell you my story.
-   `
-   `In the beginning of the 51st Era I was cast out of Judgment and forced
-   `into a body. I decided it would be best for me to roam this galaxy to see
-   `if I could find a place to hide. However, marauders found me along my
-   `journey, and now most of my body is gone. All that remains are my power
-   `core and this eye.
-   @@
+   text M1A2_01_03
 
-   option "Cool. Thanks for the story." page 4
-   option "I'm not really interested anymore." brk
+   option M1A2_01_03_01 page 4
+   option M1A2_01_03_02 brk
 }
 
 page 4 {
-   @@
-   `If you wish to hear more stories, I'll be around. I can still move in this
-   `form, somewhat. At a snail's pace. It's better than nothing, I suppose.
-   `
-   `Maybe if I put wheels on this bowl I'd go faster...
-   @@
+   text M1A2_01_04
 
-   option "Goodbye." brk
+   option M1A2_01_04_01 brk
 }
 
 /* EOF */

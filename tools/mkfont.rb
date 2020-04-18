@@ -40,10 +40,15 @@ cmap_asc = gen_map [("!".."#"), ["%"], ("'".."?"), ("A".."}")]
 cmap_l1s = gen_map [("!".."~"), ("¡".."£"), ("¥".."¬"), ("®".."´"), ("¶".."ÿ")]
 
 fonts = []
-fonts.push Font.new 8,  "MisakiG",  cmap_all
-fonts.push Font.new 8,  "MisakiM",  cmap_all
-fonts.push Font.new 8,  "k6x8",     cmap_all
-fonts.push Font.new 16, "jiskan16", cmap_all
+fonts.push Font.new 8,  "MisakiG",   cmap_all
+fonts.push Font.new 8,  "MisakiM",   cmap_all
+fonts.push Font.new 8,  "k6x8",      cmap_all
+fonts.push Font.new 16, "jiskan16",  cmap_all
+fonts.push Font.new(8,  "ljtrmfont", cmap_all, lambda do |words, ch|
+                       words.push *%W"-stroke black -strokewidth 1 label:#{ch}
+                                      -stroke none                 label:#{ch}
+                                      -composite"
+                    end)
 fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
                        words.push *%W"-stroke black -strokewidth 5 label:#{ch}
                                       -stroke none                 label:#{ch}

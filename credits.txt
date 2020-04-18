@@ -212,5 +212,7 @@
                       ** LOOKING FOR CREDITS **
 
 * Barrel explosion sprites
+* ljtrmfont source, apparently by 橘浩志 and 今村俊幸 but I don't know
+  where to find it (the font is JF Dot K12 Bold)
 
 EOF

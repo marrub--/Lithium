@@ -31,7 +31,9 @@
 == \#PK_GET_002 | The %S has been acquired.
 == \#PK_GET_003 | Snatched up a %S!
 == \#PK_GET_004 | Oh baby, it's time for %S!
-== \#PK_GET_005 | There was a %S here, but you stole it. It is now in your inventory. You Monster.
+@@ \#PK_GET_005
+There was a %S here, but you stole it. It is now in your inventory.
+You Monster.
 == \#PK_GET_006 | Acquired a %S.
 == \#PK_GET_007 | The %S is safe and sound with you.
 == \#PK_GET_008 | I bet that %S totally wanted you to pick it up.
@@ -44,19 +46,24 @@
 == \#PK_GET_014 | OH NO, NOT %S
 == \#PK_GET_015_FLAGS | 4
 == \#PK_GET_015 | What? Is that.. %S? ... %S
-== \#PK_GET_016 | Magnetically attached a %S to your body, crushing your every bone.
+@@ \#PK_GET_016
+Magnetically attached a %S to your body, crushing your every bone.
 == \#PK_GET_017 | DavidPH was here, nyu.
 == \#PK_GET_018 | %S-senpai still won't notice you.
 == \#PK_GET_019 | Grabbed a %S!
 == \#PK_GET_020 | Snatched up a %S!
 == \#PK_GET_021 | Embraced the %S carefully!
-== \#PK_GET_022 | There's a thing that looks like a %S here. You picked it up. Past-tense.
+@@ \#PK_GET_022
+There's a thing that looks like a %S here. You picked it up.
+Past-tense.
 == \#PK_GET_023 | Another day, another %S.
 == \#PK_GET_024 | Xaser didn't make this %S, so it sucks. You should drop it.
 == \#PK_GET_025 | \cg%S. Finally.
 == \#PK_GET_026_FLAGS | 4
 == \#PK_GET_026 | The %S. %S
-== \#PK_GET_027 | I don't know about you, but I quite like the %S. I'll pick it up for you.
+@@ \#PK_GET_027
+I don't know about you, but I quite like the %S. I'll pick it up for
+you.
 == \#PK_GET_028 | ...Huh? You do something? I wasn't paying attention.
 == \#PK_GET_029_FLAGS | 1
 == \#PK_GET_029 | The %S. It is very much a %S.
@@ -75,7 +82,8 @@
 == \#PK_GET_038 | What is a man? A miserable pile of %Ss!
 == \#PK_GET_039 | The %S was delicious.
 == \#PK_GET_040_FLAGS | 1
-== \#PK_GET_040 | There's plenty of %Ss in the sea, but you're the only %S for me.
+@@ \#PK_GET_040
+There's plenty of %Ss in the sea, but you're the only %S for me.
 == \#PK_GET_041 | Disassembled the %S and reassembled it into your inventory.
 == \#PK_GET_042 | The %S is keepin' it real, as usual.
 == \#PK_GET_043 | The %S finds you agreeable, and lets you pick it up.
@@ -105,32 +113,29 @@
 == \#PK_GET_066 | The %S shoots back at you, but you were stronger.
 == \#PK_GET_067 | why are you reading this? eyes on the road, dumpass.
 == \#PK_GET_068_FLAGS | 2
-%% \#PK_GET_068
+@@ \#PK_GET_068
 What the fuck did you just fucking say about %S, you little bitch?
-I'll have you know I graduated top of my class in the Navy Seals,
-and I've been involved in numerous secret raids on Al-Quaeda, and I
-have over 300 confirmed kills.
-I am trained in gorilla warfare and I'm the top sniper
-in the entire US armed forces.
-You are nothing to me but just another target. I will wipe you the
-fuck out with precision the likes of which has never been seen before
-on this Earth, mark my fucking words.
-You think you can get away with saying that shit to me over the Internet?
-Think again, fucker. As we speak I am contacting my secret network of
-spies across the USA and your IP is being traced right now so you
-better prepare for the storm, maggot.
-The storm that wipes out the pathetic little thing you call your life.
-You're fucking dead, kid.
-I can be anywhere, anytime, and I can kill you in over
+I'll have you know I graduated top of my class in the Navy Seals, and
+I've been involved in numerous secret raids on Al-Quaeda, and I have
+over 300 confirmed kills. I am trained in gorilla warfare and I'm the
+top sniper in the entire US armed forces. You are nothing to me but
+just another target. I will wipe you the fuck out with precision the
+likes of which has never been seen before on this Earth, mark my
+fucking words. You think you can get away with saying that shit to me
+over the Internet? Think again, fucker. As we speak I am contacting my
+secret network of spies across the USA and your IP is being traced
+right now so you better prepare for the storm, maggot. The storm that
+wipes out the pathetic little thing you call your life. You're fucking
+dead, kid. I can be anywhere, anytime, and I can kill you in over
 seven hundred ways, and that's just with my bare hands. Not only am I
 extensively trained in unarmed combat, but I have access to the entire
-arsenal of the United States Marine Corps and I will use it to its full
-extent to wipe your miserable ass off the face of the continent, you little shit.
-If only you could have known what unholy retribution your little "clever"
-comment was about to bring down upon you, maybe you would have held
-your fucking tongue. But you couldn't, you didn't, and now you're paying
-the price, you goddamn idiot. I will shit fury all over you
-and you will drown in it. You're fucking dead, kiddo.
+arsenal of the United States Marine Corps and I will use it to its
+full extent to wipe your miserable ass off the face of the continent,
+you little shit. If only you could have known what unholy retribution
+your little "clever" comment was about to bring down upon you, maybe
+you would have held your fucking tongue. But you couldn't, you didn't,
+and now you're paying the price, you goddamn idiot. I will shit fury
+all over you and you will drown in it. You're fucking dead, kiddo.
 == \#PK_GET_069 | A weapon to surpass Metal Gear, The %S.
 == \#PK_GET_070 | Appropriated the %S.
 == \#PK_GET_071 | Ooh, the %S.
@@ -138,15 +143,21 @@ and you will drown in it. You're fucking dead, kiddo.
 == \#PK_GET_073 | Gluten-free %S for all your daily needs.
 == \#PK_GET_074 | You forcefully draw in the %S.
 == \#PK_GET_075 | They don't think it be %S but it do.
-== \#PK_GET_076 | The %S wrestled with your other items and won. It is now one of us.
+@@ \#PK_GET_076
+The %S wrestled with your other items and won. It is now one of us.
 == \#PK_GET_077_FLAGS | 2
-== \#PK_GET_077 | hellote it is i durnadle and this is the 77th pickup messag you have gotten the %S and it is terrible becaus i did not make it please get rid of it
+@@ \#PK_GET_077
+hellote it is i durnadle and this is the 77th pickup messag you have
+gotten the %S and it is terrible becaus i did not make it please get
+rid of it
 == \#PK_GET_078 | BEES
 == \#PK_GET_079 | WELCOME TO THE %S ZONE
 == \#PK_GET_080 | YOU WA %S
 == \#PK_GET_081 | GET EQUIPPED WITH %S
 == \#PK_GET_082 | This is my %S. There are many like it, but this one is mine.
-== \#PK_GET_083 | Whan that %S with his boulette shoten, the droghte of blood hath perced to the rooten.
+@@ \#PK_GET_083
+Whan that %S with his boulette shoten, the droghte of blood hath
+perced to the rooten.
 == \#PK_GET_084 | ERROR: %S IS DEAD.
 == \#PK_GET_085 | %S... It's time.
 == \#PK_GET_086 | Hey what's up gamers, log here with another %S

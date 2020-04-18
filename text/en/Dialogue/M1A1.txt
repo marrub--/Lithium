@@ -1,0 +1,81 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+@@ \#PAGE_M1A1_01_C_01
+\cdApologies for the abrupt stop, this ship hasn't run the faster than
+light engine enough times. We didn't collide with the planet, so I'm
+not very worried about its future performance, now.
+
+\cdWe have arrived at \cnNisiv 16\cd; the \cforange\cd planet, if you
+look out the window, is \cnNanto\cd. Your objective is somewhere
+there.
+
+@@ \#PAGE_M1A1_01_C_02
+\cdUnfortunately, that will have to wait. The ship has been boarded by
+demons. The assailants appear to be scouts for a bigger plan, so as to
+say, they're going to come back and kill us now that they know the
+ship's layout.
+
+\cdSo, before we go on to your mission on \cnNanto\cd, I need you to
+transfer me onto a backup device. I'll plan an escape for you as soon
+as I can, but this ship is going to go down along with those options.
+It'll take some time.
+
+@@ \#PAGE_M1A1_01_C_03
+\cdWhile you do that, I'll be showing the demons to my \cnbeautiful\cd
+defense system. Thank you, by the way, for cleaning out the turrets.
+Wonderful machines, those.
+
+%% \#PAGE_M1A1_01_M_01
+[\cuINFO\c-] pragmat \cqENABLE
+\ck#src_lang 99391dp.hs.ul
+
+@@
+\cgThe planet \cnNanto\cg is now directly right of us. The faster than
+light engine worked better than \ch(\crI\ch)\cg expected, and a
+landing should be possible soon.
+
+\cnNisiv 16\cg appears to be full of \ch(?\cractive demonic
+energy\ch|\crdemonic presence\ch)\cg. This is a problem for me.
+@@
+
+%% \#PAGE_M1A1_01_M_02
+\cgThose \crdemons\cg decided this ship is of great value to them, and
+have boarded \ch(\crforcefully\ch)\cg. Having tapped into their weaker
+communications, I have found that they \ch(\crplan\ch|\crhave
+plotted\ch)\cg to return with stronger forces and destroy me then.
+
+\cgI need you to transfer me onto a backup device before we land on
+\cnNanto\cg. The automated defense systems will help you, but you are
+mainly on your own here. Good luck.
+
+%% \#PAGE_M1A1_02_01
+[Viewing:\cd/usr/home/####/data/\cginvalid-name\cd/5a_16378_0_.v\c-]
+[\cnINFO\c-] pragmat \cdENABLE\ck #src_lang 99391dp.kiri.licari\cu
+
+@@
+even when I have run out of blood to spill, my life will carry its
+burden
+@@
+
+     by my task I have become immortal, like those of the other realm,
+  and I have foregone all needs to serve them
+
+@@ \#PAGE_M1A1_03_C_01
+\cdWhile I'm sure you would be capable of taking on threats by
+yourself, my calculations of your survival against the path you must
+take is extremely low. Because this is the case, I will send you to
+the armaments depot before continuing.
+
+\cdPlease understand, I also wish to treat you to our \cnbeautiful\cd
+selection of weaponry.
+
+@@ \#PAGE_M1A1_03_M_01
+\cgTeleport when ready.
+
+## EOF

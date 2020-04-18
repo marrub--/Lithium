@@ -1,3 +1,12 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+@@ \#ENDING_Barons_Jem
 As you enter the portal you feel like you did that fated day many
 years ago, but it's not just your jaw now. Your whole body feels like
 it's been removed from this galaxy, and you're stretched across an
@@ -8,7 +17,9 @@ awaken on Deimos, you feel as if you've had a hangover, and woke up in
 the hottest depths of the sun.
 
 As you look around yourself, you notice the heat is not coming from
-your body, but from everything around you. You check your depth
-meter to find you've successfully entered Hell.
+your body, but from everything around you. You check your depth meter
+to find you've successfully entered Hell.
 
 For a moment, you almost feel like crying, but steel yourself instead.
+
+## EOF

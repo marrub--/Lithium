@@ -1,3 +1,12 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#ENDING_TimeOut1
 >>>>>[[[[INCOMING MESSAGE]]]]
 
 > Remotes: <hidden>@<hidden>.mailserv, <hidden>@corp.<hidden>
@@ -5,11 +14,13 @@
 
 >>>>>[[[[RECEIVING SPLIT TRANSMISSION 1/2]]]]
 
-The mission has failed, several samples of demonic energy have
-been delivered throughout A.O.F territory and are already
-confirmedly in their secret databases around the galaxy. You are
-to be immediately transfered to [REDACTED]'s military and follow
-all orders you are given.
+@@
+The mission has failed, several samples of demonic energy have been
+delivered throughout A.O.F territory and are already confirmedly in
+their secret databases around the galaxy. You are to be immediately
+transfered to [REDACTED]'s military and follow all orders you are
+given.
+@@
 
 You will not hear from me again.
 Delete this transmission upon reading.
@@ -18,3 +29,5 @@ Delete this transmission upon reading.
 
 77777777777777777777777777732069089143XXXXXXXXXX
 [[[[[[[[[>> data stream corrupt, retrying
+
+## EOF

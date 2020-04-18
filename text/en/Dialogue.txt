@@ -1,0 +1,30 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+!!include Dialogue/M1A1.txt
+!!include Dialogue/M1A2.txt
+!!include Dialogue/TESTMAP.txt
+
+== \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
+== \#REMOTE_HIDDEN  | <hidden>
+== \#REMOTE_OCS     | OCS@localhost
+== \#REMOTE_DATA    | data@localhost
+== \#REMOTE_MAXIE   | maxie@ai.<hidden>
+== \#REMOTE_JACQUES | jacques.p42710@corp.AOF
+== \#REMOTE_TEST    | test@org.example
+
+== \#PNAME_UNKNOWN | ???
+== \#PNAME_MAXIE   | Maxie
+== \#PNAME_JACQUES | Jacques
+
+== \#LOGON_AOF  | \ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+== \#LOGON_UAC  | \cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+== \#LOGON_DATA | \cu[Ship Data Terminal]
+== \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+
+## EOF

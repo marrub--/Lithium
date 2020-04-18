@@ -1,3 +1,14 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+@@ \#ENDING_Normal_Stan
 You finish your work on this plane of Hell and prepare for the next.
 
 Some day you'll find the end of it.
+
+## EOF

@@ -13,6 +13,7 @@
 !!lang jp | jp
 
 !!inclang Arsenal.txt
+!!inclang Dialogue.txt
 !!inclang End.txt
 !!inclang Info.txt
 !!inclang Log.txt

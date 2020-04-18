@@ -39,13 +39,14 @@ def parse_file state, filename, language
    lns = read_lines unsplit_name state, [readname]
    lan = state.langs[language]
 
-   buf       = nil
-   close_buf = nil
+   buf        = nil
+   name       = nil
+   in_concat  = false
+   last_empty = true
 
    do_close_buf = lambda do
-      close_buf.call if close_buf
-      buf       = nil
-      close_buf = nil
+      lan.data.push Alias.new name, buf if buf
+      buf = nil
    end
 
    for ln, linenum in lns.each_with_index
@@ -53,6 +54,9 @@ def parse_file state, filename, language
       case ln
       when /^##.*$/
          do_close_buf.call
+      when /^@@$/
+         in_concat = !in_concat
+         buf.concat "\n" if buf and !last_empty
       when /^== (.+)\|(.*)$/
          m = $~
          do_close_buf.call
@@ -62,33 +66,15 @@ def parse_file state, filename, language
       when /^%% (.+)$/
          m = $~
          do_close_buf.call
-         name = m[1].strip
-         buf  = []
-         close_buf = lambda do
-            text = buf.join "\n"
-            lan.data.push Alias.new name, text
-         end
+         name      = m[1].strip
+         buf       = String.new
+         in_concat = false
       when /^@@ (.+)$/
          m = $~
          do_close_buf.call
-         name = m[1].strip
-         buf  = []
-         close_buf = lambda do
-            text = buf.reduce "" do |memo, ln|
-               if ln.empty? then memo + "\n\n"
-               else              memo + ln.strip + " " end
-            end
-            text = text.gsub /[ \t]+\n/, "\n"
-            lan.data.push Alias.new name, text
-         end
-      when /^\+\+ (.+)\|(.+)$/
-         m = $~
-         do_close_buf.call
-         name = m[1].strip
-         file = split_name m[2]
-         file = unsplit_name state, file
-         file = IO.read file
-         lan.data.push Alias.new name, file
+         name      = m[1].strip
+         buf       = String.new
+         in_concat = true
       when /^!!output (.+)$/
          m = $~
          do_close_buf.call
@@ -114,7 +100,21 @@ def parse_file state, filename, language
          parse_file state, name, language
       else
          if buf
-            buf.push ln
+            if in_concat
+               if ln.empty?
+                  buf.concat "\n\n"
+                  last_empty = true
+               elsif last_empty || language == "jp"
+                  buf.concat ln.strip
+                  last_empty = false
+               else
+                  buf.concat " " + ln.strip
+                  last_empty = false
+               end
+            else
+               buf.concat ln + "\n"
+               last_empty = true
+            end
          elsif ln.empty?
             next
          else

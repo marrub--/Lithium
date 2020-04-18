@@ -27,180 +27,108 @@ page 0 {
 dialogue 1;
 
 page 0 {
-   name "Jacques"
+   name JACQUES
    icon "AOF"
-   remote "jacques.p42710@corp.AOF"
+   remote JACQUES
 
    if item "Lith_DivisionSigil" page 7
 
-   `...
+   text TESTMAP_01_00
 
-   option "Say hello" page 2
-   option "Exit"      brk
+   option TESTMAP_01_00_01 page 2
+   option TESTMAP_01_00_02 brk
 }
 
 page 2 {
-   if class pM `Who are you?
-   if class pC `Right. The Cybernati.
+   if class pM text TESTMAP_01_02_M
+   if class pC text TESTMAP_01_02_C
 
-   @@
-   `Test of concatenated
-   `text which should concat
-   `lines with spaces...
-   `
-   `and break on multiple lines.
-   @@
-
-   #QUITMSG39
-
-   option "emit skeltal" {
+   option TESTMAP_01_02_01 {
       script 2
       page 2
    }
 
-   option "Talk to me." page 3
-   option "Thanks, bye!" brk
+   option TESTMAP_01_02_02 page 3
+   option TESTMAP_01_02_03 brk
 }
 
 page 3 {
-   `What, you want something?
-   `
-
    if class pC {
-      `What did you need, Stilko?
-      option "The nightmares are back." page 10
-      option "I just need someone to talk to, Jacques." page 11
+      text TESTMAP_01_03_C
+      option TESTMAP_01_03_01_C page 10
+      option TESTMAP_01_03_02_C page 11
    } else {
-      `Too bad. Get it yourself.
-      option "That's rude." page 4
+      text TESTMAP_01_03_M
+      option TESTMAP_01_03_01_M page 4
    }
-
-   option "Bye." brk
 }
 
 page 10 {
-   @@
-   ` Already? Are you sure it isn't just ASIC bugs? I have trouble believing
-   `that they'd be back so soon, after your doctor gave you that prescription
-   `and even turned down your AS-voltage.
-   `
-   ` You know, ASIC hardware reacts to changes. It might just be that it's
-   `settling to the new voltage and giving you a hard time.
-   @@
+   text TESTMAP_01_10
 
-   option "It's not that, I'm certain.. They're \cmworse\c-." page 13
-   option "Right... Thank you, Zeke." brk
+   option TESTMAP_01_10_01 page 13
+   option TESTMAP_01_10_02 brk
 }
 
 page 11 {
-   @@
-   ` I know how that is. You know, Order doesn't pass through this part of
-   `the ship. You could say "Zeke" again if you want. I know they don't like
-   `the names we give ourselves, but we're not infront of them. We at least
-   `have that freedom.
-   `
-   ` If you want, I can call you "Jem," too. Though I'd rather you of all
-   `people not get in trouble for being called by your true name.
-   @@
+   text TESTMAP_01_11
 
-   option "Thanks, 'Z.'" page 12
+   option TESTMAP_01_11_01 page 12
 }
 
 page 12 {
-   @@
-   ` Heh.. "Z." You're quite creative.
-   `
-   ` There's trouble in your voice, though. I know you usually tremble, but
-   `right now it seems even worse than usual. What's wrong, "J?"
-   @@
+   text TESTMAP_01_12
 
-   option "... The nightmares are back." page 10
+   option TESTMAP_01_12_01 page 10
 }
 
 page 13 {
-   @@
-   ` Worse?
-   `
-   ` ...
-   `
-   ` You can feel in them now, right? That's why you're trembling.
-   @@
+   text TESTMAP_01_13
 
-   option "Yeah. And I don't want to go to the doctor." page 14
+   option TESTMAP_01_13_01 page 14
 }
 
 page 14 {
-   @@
-   ` ...
-   `
-   ` Is there anything I can do to help? It's not a lack of food or something,
-   `right?
-   @@
+   text TESTMAP_01_14
 
-   option "You'd have told me if you could hear it, right?" page 15
+   option TESTMAP_01_14_01 page 15
 }
 
 page 15 {
-   @@
-   ` Are you hearing a beat? It could be your home calling for you. I'd imagine
-   `AOF didn't put much use to that planet after they went and captured you,
-   `it's probably just aching for its mana to be used.
-   @@
+   text TESTMAP_01_15
 
-   option "That's not it, I always hear that. What I hear now is.. darker."
-      page 16
+   option TESTMAP_01_15_01 page 16
 }
 
 page 16 {
-   @@
-   ` Darker...
-   `
-   ` Then, do you think that it's come?  Doesn't ever come excluding
-   `incantation, vile, enroaching reality, Hell?
-   @@
+   text TESTMAP_01_16
 
-   option "It's coming. Just thought I'd let you know." brk
+   option TESTMAP_01_16_01 brk
 }
 
 page 4 {
-   `Life is rude.
-   `
-   `Now go away.
+   text TESTMAP_01_04
 
-   option "Right." brk
+   option TESTMAP_01_04_01 brk
 }
 
 page 7 {
-   `thousands are sailing
-   `the same self    the only self
-   `
-   `self willed the peril of a thousand fates
-   `
-   `a line of infinite ends    finite finishing
-   `the one remains oblique and pure
-   `
-   `arching to the single point of consciousness
-   `
-   `find yourself
-   `starting back
+   text TESTMAP_01_07
 
-   option "Thanks, bye!" brk
+   option TESTMAP_01_07_01 brk
 }
 
 /* ------------------------------------------------------------------------- */
 terminal 1;
 
 unfinished {
-   remote "test@org.example"
+   remote TEST
 
-   logon "01602" `\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+   logon "01602" text TEST
 
-   info `test text, information block
+   info text TESTMAP_01_01
 
-   pict "AOF" {
-      `test with picture
-      `and multiple lines of text
-   }
+   pict "AOF" text TESTMAP_01_02
 
    logoff "01602" {}
 

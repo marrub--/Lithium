@@ -11,9 +11,15 @@
 == \#INFO_REMOT_MIntroStan | ALambert@corp.OFMD
 == \#INFO_SSIZE_MIntroStan | 77
 %% \#INFO_DESCR_MIntroStan
-Your weapons have been deployed to various locations we were able to send other people to.  Do take care of them, acquiring the correct armaments for your job was quite expensive and now we've probably lost a few people.
+@@
+Your weapons have been deployed to various locations we were able to
+send other people to. Do take care of them, acquiring the correct
+armaments for your job was quite expensive and now we've probably lost
+a few people.
 
-Besides being deployed with your pistol and combat knife (as you requested), you have been sent these five weapons:
+Besides being deployed with your pistol and combat knife (as you
+requested), you have been sent these five weapons:
+@@
 
 1. A combat-modified military model Hiku Mk.2 Shotgun, manufactured by Omakeda.
 >  This weapon was chosen because it has a powerful plasma shot that can
@@ -48,7 +54,12 @@ Besides being deployed with your pistol and combat knife (as you requested), you
 >  appearance of it. Even if it just looks like a fancy bracelet, it is capable
 >  of outputting several tons of weight out your fist.
 
-You will also be able to purchase the weapons you designated, in your words, as "must-have" in the Shop.  I warn you that these weapons may not be as effective as you think; we spent quite a lot of time making sure that the arms we sent you were top-notch.
+@@
+You will also be able to purchase the weapons you designated, in your
+words, as "must-have" in the Shop. I warn you that these weapons may
+not be as effective as you think; we spent quite a lot of time making
+sure that the arms we sent you were top-notch.
+@@
 
 Lambert out.  Good luck, Blazkowicz.
 

@@ -19,7 +19,6 @@
  *
  * Extended registers:
  *
- *    TX - Text
  *    UI - GUI State
  *    VA - VM Action
  *
@@ -46,7 +45,6 @@
  *    LDV - Load VM Action
  *    TRR - Trace Registers
  *    TRS - Trace Stack
- *    TRT - Trace Text
  *    TRV - Trace Variables
  *
  * ---------------------------------------------------------------------------|
@@ -60,10 +58,6 @@ ACT(SCRIPT_I)            /* (SCP0 SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
 ACT(SCRIPT_S)            /* (ADRL SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
 ACT(TELEPORT_INTERLEVEL) /* (ADRL<map>)                -> VA<halt>        */
 ACT(TELEPORT_INTRALEVEL) /* (ADRL<tag>)                -> VA<halt>        */
-ACT(TEXT_ADDI)           /* (ADRL)                     -> TX              */
-ACT(TEXT_ADDL)           /* (ADRL)                     -> TX              */
-ACT(TEXT_SETI)           /* (ADRL)                     -> TX              */
-ACT(TEXT_SETL)           /* (ADRL)                     -> TX              */
 ACT(TRM_WAIT)
 
 #undef ACT
@@ -282,7 +276,6 @@ DCD(0xFE, INC, AX)
 DCD(0x02, TRR, NP) /* Extension */
 DCD(0x12, TRS, NP) /* Extension */
 DCD(0x32, TRV, NP) /* Extension */
-DCD(0x42, TRT, NP) /* Extension */
 #undef DCD
 #elif !defined(d_vm_h)
 #define d_vm_h
@@ -383,7 +376,6 @@ enum {
    VAR_SCP4,
 
    /* strings */
-   VAR_CONCAT,
    VAR_NAMEL,
    VAR_NAMEH,
    VAR_ICONL,
@@ -392,6 +384,8 @@ enum {
    VAR_REMOTEH,
    VAR_PICTL,
    VAR_PICTH,
+   VAR_TEXTL,
+   VAR_TEXTH,
 
    /* options */
    VAR_OPT_CNT,

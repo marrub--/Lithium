@@ -13,7 +13,31 @@
 !!include Misc/UI.txt
 !!include Misc/Inventory.txt
 
-++ \#OPENER | Misc/Opener.txt
+@@ \#OPENER
+1626, New Era.
+
+A revelation in multiverse theory: Proof of other universes existing
+within the same dimension of time as our own universe.
+
+Finally explaining the odd artifacts which had been found throughout
+the new era, the researchers involved were to be awarded for their
+immense discovery, but soon after disappeared all at once.
+
+Twenty years later, 1649 N.E.
+
+Communications with these scientists have been re-established, and
+after investigation by the computer mega-corp Optic Fiber Maxim-Danil,
+they have been found to be no more than a red mist floating in space.
+
+The planetary system's central star had become a hole of darkness,
+emitting massive amounts of unknown magical energy.
+
+A hole which has begun spitting out demons.
+
+A portal to Hell itself.
+
+May those who attempt to stop it have Godspeed, or Lithium shall
+forever rain from the skies.
 
 ## Misc ----------------------------------------------------------------------|
 == \#CHECK | Eng

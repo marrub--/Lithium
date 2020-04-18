@@ -15,7 +15,7 @@ bool m_Ready;
 
 private void Lith_DrawSetq(int x, int y, string text)
 {
-   let font = Font.GetFont("BigUpper");
+   let font = Font.GetFont("bigupper");
    int lh = font.getHeight() * 3 / 2;
    Screen.DrawText(font, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
 }
@@ -33,7 +33,7 @@ private void Lith_DrawPrct(int y, string text, int n, int m)
 
 private void Lith_DrawCent(int x, int y, string text)
 {
-   let font = Font.GetFont("BigUpper");
+   let font = Font.GetFont("bigupper");
    Screen.DrawText(font, Font.CR_GREEN, x - font.stringWidth(text) / 2, y, text, DTA_Clean, true);
 }
 

@@ -70,8 +70,6 @@ static struct gui_state gst;
 
 static u32 r1, r2;
 
-Vec_Decl(char, text, static);
-
 static cstr const action_names[] = {
    #define ACT(name) #name,
    #include "d_vm.h"
@@ -231,6 +229,45 @@ local void TraceReg() {
    }
 
 /* VM action auxiliary */
+enum {
+   _from_dlg,
+   _from_trm,
+   _from_lon,
+};
+
+local str GetText(i32 from) {
+   u32  adr = MemB2_G(VAR_TEXTL);
+   cstr pfx;
+
+   switch(from) {
+   case _from_dlg: pfx = "DLOG";  break;
+   case _from_trm: pfx = "PAGE";  break;
+   case _from_lon: pfx = "LOGON"; break;
+   }
+
+   return adr ? LanguageNull(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
+}
+
+local str GetRemote() {
+   u32  adr = MemB2_G(VAR_REMOTEL);
+   cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
+   return Language(LANG "REMOTE_%s", nam);
+}
+
+local str GetName() {
+   u32  adr = MemB2_G(VAR_NAMEL);
+   cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
+   return Language(LANG "PNAME_%s", nam);
+}
+
+local void ConsoleLogText(i32 from) {
+   __with(str text = GetText(from);) if(text) ConsoleLog("%s", text);
+}
+
+#define ResetName()   MemB2_S(VAR_NAMEL,   0)
+#define ResetRemote() MemB2_S(VAR_REMOTEL, 0)
+#define ResetText()   MemB2_S(VAR_TEXTL,   0)
+
 script static void TerminalGUI(struct player *p, u32 tact) {
    enum {
       /* text */
@@ -261,8 +298,7 @@ script static void TerminalGUI(struct player *p, u32 tact) {
    PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
-   u32 tra = MemB2_G(VAR_REMOTEL);
-   str tr = tra ? MemSA_G(tra) : s"<unknown>@raddr.4E19";
+   str tr = GetRemote();
    switch(tact) {
       default:          tr = StrParam("Remote: %S",               tr); break;
       case TACT_LOGON:  tr = StrParam("Opening Connection to %S", tr); break;
@@ -289,36 +325,44 @@ script static void TerminalGUI(struct player *p, u32 tact) {
 
    switch(tact) {
       case TACT_LOGON:
-      case TACT_LOGOFF:
-         __with(i32 y = tmidy;) {
-            if(textV) {
-               PrintTextChr(textV, textC);
-               PrintText(s_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
+      case TACT_LOGOFF: {
+         i32 y = tmidy;
+         str text = GetText(_from_lon);
 
-               y -= 10;
-            }
-
-            PrintSprite(l_strdup(pict), tmidx,0, y,0);
+         if(text) {
+            PrintText_str(text, s_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
+            y -= 10;
          }
+
+         PrintSprite(l_strdup(pict), tmidx,0, y,0);
          break;
-      case TACT_PICT:
+      }
+      case TACT_PICT: {
+         str text = GetText(_from_trm);
+
          PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
 
          SetClipW(tleft, ttop, tright - tleft, tbottom, tright - tleft);
 
-         PrintTextChr(textV, textC);
-         PrintText(s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
+         if(text) {
+            PrintText_str(text, s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
+         }
 
          ClearClip();
          break;
-      case TACT_INFO:
+      }
+      case TACT_INFO: {
+         str text = GetText(_from_trm);
+
          SetClipW(0, ttop, twidth, tbottom, twidth);
 
-         PrintTextChr(textV, textC);
-         PrintText(s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
+         if(text) {
+            PrintText_str(text, s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
+         }
 
          ClearClip();
          break;
+      }
    }
 
    G_End(&gst, gui_curs_outlineinv);
@@ -332,8 +376,9 @@ script static void TerminalGUI(struct player *p, u32 tact) {
 script static void DialogueGUI(struct player *p) {
    enum {left = 37, top = 75, texttop = top + 24};
 
-   str snam = MemSA_G(MemB2_G(VAR_NAMEL));
-   str srem = MemSA_G(MemB2_G(VAR_REMOTEL));
+   str snam = GetName();
+   str srem = GetRemote();
+   str text = GetText(_from_dlg);
    char icon[32] = ":Dialogue:Icon"; strcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
 
    G_Begin(&gst, 320, 240);
@@ -348,8 +393,11 @@ script static void DialogueGUI(struct player *p) {
    SetClipW(left, top, 263, 157, 263);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
    PrintText(s_lmidfont, CR_WHITE, left,1, top,1);
-   PrintTextChr(textV, textC);
-   PrintText(s_smallfnt, CR_WHITE, left,1, texttop,1);
+
+   if(text) {
+      PrintText_str(text, s_smallfnt, CR_WHITE, left,1, texttop,1);
+   }
+
    ClearClip();
 
    u32 oc = MemB1_G(VAR_OPT_CNT);
@@ -358,9 +406,10 @@ script static void DialogueGUI(struct player *p) {
       i32 y = 220 - 14 * oc;
 
       for(i32 i = 0; i < oc; i++, y += 14) {
-         u32 adr = MemB2_G(StructOfs(OPT, NAML, i));
+         u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
+         cstr txt = LanguageC(LANG "OPT_%s", MemSC_G(adr));
 
-         if(G_Button_Id(&gst, i, MemSC_G(adr), 45, y, Pre(btndlgsel))) {
+         if(G_Button_Id(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
             MemB1_S(VAR_OPT_SEL, i);
          }
@@ -374,8 +423,7 @@ void GuiAct(void) {
    u32 action = MemB1_G(VAR_UACT);
    MemB1_S(VAR_UACT, UACT_NONE);
 
-   Vec_Resize(text, 1);
-   textV[0] = '\0';
+   ResetText();
 
    switch(action) {
       case UACT_ACKNOWLEDGE:
@@ -395,29 +443,6 @@ void GuiAct(void) {
    }
 }
 
-static void SetText(cstr s) {
-   i32 l = strlen(s) + 1;
-   Vec_Resize(text, l);
-   memmove(textV, s, l);
-}
-
-static void AddText(cstr s) {
-   if(s[0]) {
-      i32 l = strlen(s);
-      Vec_Grow(text, l + 1);
-      textC--;
-      Vec_MoveEnd(text, s, l);
-      Vec_Next(text) = MemB1_G(VAR_CONCAT) ? ' ' : '\n';
-      Vec_Next(text) = '\0';
-   } else {
-      Vec_Grow(text, 2);
-      textC--;
-      Vec_Next(text) = '\n';
-      Vec_Next(text) = '\n';
-      Vec_Next(text) = '\0';
-   }
-}
-
 /* VM actions */
 sync static void ActDLG_WAIT(struct player *p) {
    SetVA(ACT_NONE);
@@ -427,7 +452,7 @@ sync static void ActDLG_WAIT(struct player *p) {
    if(singleplayer) FreezeTime();
    P_SetVel(p, 0, 0, 0);
 
-   if(textV[0]) ConsoleLog("%.*s", textC, textV);
+   ConsoleLogText(_from_dlg);
 
    do {
       DialogueGUI(p);
@@ -493,26 +518,6 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p) {
    SetVA(ACT_HALT);
 }
 
-static void ActTEXT_ADDI(struct player *p) {
-   SetVA(ACT_NONE);
-   AddText(MemSC_G(MemB2_G(VAR_ADRL)));
-}
-
-static void ActTEXT_ADDL(struct player *p) {
-   SetVA(ACT_NONE);
-   AddText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
-}
-
-static void ActTEXT_SETI(struct player *p) {
-   SetVA(ACT_NONE);
-   SetText(MemSC_G(MemB2_G(VAR_ADRL)));
-}
-
-static void ActTEXT_SETL(struct player *p) {
-   SetVA(ACT_NONE);
-   SetText(LC(MemSC_G(MemB2_G(VAR_ADRL))));
-}
-
 sync static void ActTRM_WAIT(struct player *p) {
    SetVA(ACT_NONE);
 
@@ -525,14 +530,14 @@ sync static void ActTRM_WAIT(struct player *p) {
       if(tact == TACT_LOGON || tact == TACT_LOGOFF) {
          ACS_LocalAmbientSound(ss_player_trmopen, 127);
          timer = 45;
+         ConsoleLogText(_from_lon);
       } else {
          timer = INT32_MAX;
+         ConsoleLogText(_from_trm);
       }
 
       if(singleplayer) FreezeTime();
       P_SetVel(p, 0, 0, 0);
-
-      if(textV[0]) ConsoleLog("%.*s", textC, textV);
 
       do {
          TerminalGUI(p, tact);
@@ -575,8 +580,9 @@ script void Dlg_Run(struct player *p, u32 num) {
    r1 = 0;
    r2 = 0;
 
-   Vec_Resize(text, 1);
-   textV[0] = '\0';
+   ResetName();
+   ResetRemote();
+   ResetText();
 
    /* copy program data into memory */
    for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
@@ -943,14 +949,8 @@ TRV_NP:
       Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    JmpVI;
 
-TRT_NP:
-   Log("%.*s", textC, textV);
-   JmpVI;
-
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);
-
-   Vec_Clear(text);
 
    p->dlg.active -= 2;
 }

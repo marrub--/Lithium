@@ -1,3 +1,12 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#ENDING_IconOfSin_Jem
 \cdYou are at last free.
 \cdFree again to think and observe, and see for yourself
 \cdthe abolishment of your former captors.
@@ -19,3 +28,5 @@
 \cvYour parents are waiting back at home.
 
 \cvIt's time to go back.
+
+## EOF

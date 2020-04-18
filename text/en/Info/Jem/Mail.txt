@@ -59,9 +59,15 @@ Notes:
 
 40 thousand lines dumped so far, maybe 30-40% done? Estimated total ~200k SLoC
 ROM is about half C source, quarter XMb5 using SKVM, the rest is scripts
-Important bits already dumped, the custom lock remover does not skimp on anything
+@@
+Important bits already dumped, the custom lock remover does not skimp
+on anything
 
-Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.
+Next goal while this continues decompiling is to find all active AOF
+hostnames and block them, the main servers are already deactivated but
+there might be more. Rerouting to other active companies' addresses
+has helped clear my mind.
+@@
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_TITLE_MCluster2Jem | Saved Text 152
@@ -76,13 +82,24 @@ l[]];;\cg444444\cj41414191918 --------
 \cd>>>>>[[[[datastream corruption detected]]]]
 \cd>>>>>[[[[reloading mail daemon]]]]
 
-It's all gone now. I'm glad I was smarter than to assume I was going insane, though now I wonder what the other deceivers must have gone through.
+@@
+It's all gone now. I'm glad I was smarter than to assume I was going
+insane, though now I wonder what the other deceivers must have gone
+through.
 
-The core of hell is still far yonder, but yet my body trembles in its sheer horror... Maybe I'll make it out alive if I'm lucky, but I should at least try.
+The core of hell is still far yonder, but yet my body trembles in its
+sheer horror... Maybe I'll make it out alive if I'm lucky, but I
+should at least try.
 
-The kernel and ROM etc. sources are all done dumping, the utilities are still going but those aren't important and have already been scanned for ASIC code.
+The kernel and ROM etc. sources are all done dumping, the utilities
+are still going but those aren't important and have already been
+scanned for ASIC code.
 
-Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.
+Proc. analysis has been done on all of the dumped code, revealing many
+unoptimized code paths, ASIC crap, and a few red herrings. Not careful
+enough for technology that could easily exist two years after this was
+developed.
+@@
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_TITLE_MCluster3Jem | Saved Text 244

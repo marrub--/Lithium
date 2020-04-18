@@ -74,6 +74,7 @@ transient play bool m_NoDraw;
 transient play bool m_ForceDraw;
 
 transient Font m_UtfBigFont;
+transient Font m_UtfTrmFont;
 transient Font m_UtfFont;
 
 Shape2DTransform m_RectXf;
@@ -307,8 +308,9 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
       if(fnt == "smallfnt") cl.m_D[p].Fnt = smallfont;
       else                  cl.m_D[p].Fnt = Font.GetFont(fnt);
    } else {
-      if(fnt == "bigupper") cl.m_D[p].Fnt = cl.m_UtfBigFont;
-      else                  cl.m_D[p].Fnt = cl.m_UtfFont;
+      /**/ if(fnt == "bigupper") cl.m_D[p].Fnt = cl.m_UtfBigFont;
+      else if(fnt == "ltrmfont") cl.m_D[p].Fnt = cl.m_UtfTrmFont;
+      else                       cl.m_D[p].Fnt = cl.m_UtfFont;
       y += 2;
    }
 
@@ -479,12 +481,13 @@ override void WorldTick()
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
       switch(CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt()) {
          default:
-         case font_misaki_gothic: m_UtfFont = "MisakiG"; break;
-         case font_misaki_mincho: m_UtfFont = "MisakiM"; break;
-         case font_k6x8:          m_UtfFont = "k6x8";  break;
+         case font_misaki_gothic: m_UtfFont = "MisakiG";  break;
+         case font_misaki_mincho: m_UtfFont = "MisakiM";  break;
+         case font_k6x8:          m_UtfFont = "k6x8";     break;
          case font_jiskan16:      m_UtfFont = "jiskan16"; break;
       }
       m_UtfBigFont = "newconsolefont";
+      m_UtfTrmFont = "ljtrmfont";
    }
 }
 

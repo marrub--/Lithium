@@ -15,12 +15,6 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Dlg_GetStmt_Text(struct compiler *d, struct token *tok, u32 act)
-{
-   Dlg_PushLdAdr(d, VAR_ADRL, Dlg_PushStr(d, tok->textV, tok->textC));
-   Dlg_PushLdVA(d, act);
-}
-
 void Dlg_GetStmt_Cond(struct compiler *d)
 {
    struct token *tok = d->tb.get();
@@ -212,17 +206,6 @@ void Dlg_GetStmt_Block(struct compiler *d)
    while(!d->tb.drop(tok_bracec)) Dlg_GetStmt(d);
 }
 
-void Dlg_GetStmt_Concat(struct compiler *d)
-{
-   Dlg_PushB1(d, DCD_INC_AI);
-   Dlg_PushB2(d, VAR_CONCAT);
-
-   while(!d->tb.drop(tok_at2)) Dlg_GetStmt(d);
-
-   Dlg_PushB1(d, DCD_DEC_AI);
-   Dlg_PushB2(d, VAR_CONCAT);
-}
-
 script void Dlg_GetStmt(struct compiler *d)
 {
    struct token *tok = d->tb.get();
@@ -230,9 +213,6 @@ script void Dlg_GetStmt(struct compiler *d)
    switch(tok->type) {
       case tok_braceo:
          Dlg_GetStmt_Block(d);
-         break;
-      case tok_at2:
-         Dlg_GetStmt_Concat(d);
          break;
       case tok_identi:
          Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
@@ -249,6 +229,8 @@ script void Dlg_GetStmt(struct compiler *d)
             Dlg_GetStmt_Str(d, VAR_ICONL);
          else if(faststrcmp(tok->textV, "remote") == 0)
             Dlg_GetStmt_Str(d, VAR_REMOTEL);
+         else if(faststrcmp(tok->textV, "text") == 0)
+            Dlg_GetStmt_Str(d, VAR_TEXTL);
          else if(faststrcmp(tok->textV, "teleport_interlevel") == 0)
             Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
          else if(faststrcmp(tok->textV, "teleport_intralevel") == 0)
@@ -266,14 +248,6 @@ script void Dlg_GetStmt(struct compiler *d)
          else
             Dlg_GetStmt_Asm(d);
 
-         break;
-      case tok_quote:
-         Dlg_GetStmt_Text(d, tok, ACT_TEXT_ADDI);
-         break;
-      case tok_hash:
-         tok = d->tb.get();
-         Expect2(d, tok, tok_identi, tok_string);
-         Dlg_GetStmt_Text(d, tok, ACT_TEXT_ADDL);
          break;
       case tok_lt:
          while((tok = d->tb.get())->type != tok_gt) {

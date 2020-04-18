@@ -418,7 +418,10 @@
 \cd+ Added all the intermission screen stuff.
 \cd+ Added pickup sprites for Cyber-Mage.
 \cd+ Added sprites for the Ion Rifle.
-\cd+ Added new menus! All of them! Really, launch the game! THEY'RE COOL THANK YOU JIMMY
+@@
+\cd+ Added new menus! All of them! Really, launch the game! THEY'RE
+COOL THANK YOU JIMMY
+@@
 \cd+ Added the Ghost GUI theme.
 \cd+ Added the Basilissa GUI theme (thanks, Shivers and Kurashiki!)
 \cd+ Added in-game changelog.
@@ -443,7 +446,10 @@
 \cj| Changed the log color for Cyber-Mage.
 \cj| Improved the way mail messages and environment settings are handled.
 \cj| Made the laser rifle trail prettier.
-\cj| Changed the way the Star Destroyer targets enemies, making it even more deadly.
+@@
+\cj| Changed the way the Star Destroyer targets enemies, making it
+even more deadly.
+@@
 \cj| Fixed the log being positioned wrong for Cyber-Mage.
 \cj| Raised the base difficulty to 10.
 \cj| Slightly nerfed the Sniper Rifle.
@@ -453,7 +459,10 @@
 
 %% \#UPDATE_1_5_Page3
 \cj| Slightly changed the SMG's draw sound.
-\cj| Moved the TITLEMAP to the doom2 filter, so it won't make some games unplayable.
+@@
+\cj| Moved the TITLEMAP to the doom2 filter, so it won't make some
+games unplayable.
+@@
 \cj| Made rain effects better (thanks, Kate!)
 \cj| Fixed some ZScript event handler bugs.
 \cj| Optimized enemy barrier display, improving performance a ton on huge maps.
@@ -465,7 +474,10 @@
 \cj| Made Finalizer deal damage on hit.
 \cj| Made Finalizer disintegrate enemies when killed.
 \cj| Fixed Hell Knight attack frames.
-\cj| Made the monster tracker allocate into a different address space. (This is faster.)
+@@
+\cj| Made the monster tracker allocate into a different address space.
+(This is faster.)
+@@
 \cj| Improved performance slightly in some trigonometry-heavy areas.
 \cj| Fixed CBI items being installable twice.
 \cj| Made damage bobbing a bit smoother.

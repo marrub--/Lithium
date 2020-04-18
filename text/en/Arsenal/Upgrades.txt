@@ -121,7 +121,8 @@ Enables mana display on the HUD.
 When living things die, they emit a projectile that will seek other enemies for
 a short time.
 
-Creates an artificial soul on your targets and makes it destroy their neighbors.
+Creates an artificial soul on your targets and makes it destroy their
+neighbors.
 
 ## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_StealthSys | Stealth System
@@ -208,7 +209,8 @@ Lets you hold "fire" to queue extra grenades in your grenade launcher.
 
 Can fire rockets in a line, spiral, or grenade dump.
 
-Allows your grenade launcher to hold multiple rockets and fire them all at once.
+Allows your grenade launcher to hold multiple rockets and fire them
+all at once.
 
 Hold fire to load more grenades, and then hold alt-fire to change the firing
 mode.

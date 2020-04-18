@@ -20,7 +20,8 @@ Produced by A.O.F Inc.
 
 == \#SHOP_TITLE_AllMap | $\#INFO_SHORT_AllMap
 @@ \#SHOP_DESCR_AllMap
-A map of the area for your Automap. Reveals all locations you have and haven't seen.
+A map of the area for your Automap. Reveals all locations you have and
+haven't seen.
 
 == \#SHOP_TITLE_Infrared | $\#INFO_SHORT_Infrared
 @@ \#SHOP_DESCR_Infrared
