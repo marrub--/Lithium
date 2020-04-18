@@ -100,15 +100,21 @@ void P_Upg_PQuit(struct player *p) {
 }
 
 void P_Upg_PDeinit(struct player *p) {
-   for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_active))
-         set_bit(upgr->flags, _ug_wasactive), P_Upg_Toggle(p, upgr);
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_active)) {
+         set_bit(upgr->flags, _ug_wasactive);
+         P_Upg_Toggle(p, upgr);
+      }
+   }
 }
 
 void P_Upg_PMInit(struct player *p) {
-   for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_wasactive))
-         dis_bit(upgr->flags, _ug_wasactive), P_Upg_Toggle(p, upgr);
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_wasactive)) {
+         dis_bit(upgr->flags, _ug_wasactive);
+         P_Upg_Toggle(p, upgr);
+      }
+   }
 }
 
 script void P_Upg_PTick(struct player *p) {
@@ -149,23 +155,24 @@ void P_Upg_Enter(struct player *p) {
 }
 
 bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr) {
-   if(!get_bit(upgr->flags, _ug_active) &&
-      (p->pclass == pcl_marine &&
-       CheckRequires_AI  ||
-       CheckRequires_WMD ||
-       CheckRequires_WRD ||
-       CheckRequires_RDI ||
-       CheckRequires_RA) ||
-      p->cbi.pruse + upgr->info->perf > cbiperf)
-      return false;
-   else
-      return get_bit(upgr->flags, _ug_owned);
+   return
+      get_bit(upgr->flags, _ug_owned) &&
+      (get_bit(upgr->flags, _ug_active) ||
+       ((p->pclass == pcl_marine &&
+         !RequiresButDontHave_AI  &&
+         !RequiresButDontHave_WMD &&
+         !RequiresButDontHave_WRD &&
+         !RequiresButDontHave_RDI &&
+         !RequiresButDontHave_RA) &&
+        p->cbi.pruse + upgr->info->perf <= cbiperf));
 }
 
 bool P_Upg_Toggle(struct player *p, struct upgrade *upgr) {
-   if(!P_Upg_CanActivate(p, upgr)) return false;
+   if(!P_Upg_CanActivate(p, upgr))
+      return false;
 
-   bool on = tog_bit(upgr->flags, _ug_active);
+   tog_bit(upgr->flags, _ug_active);
+   bool on = get_bit(upgr->flags, _ug_active);
 
    if(on) p->cbi.pruse += upgr->info->perf;
    else   p->cbi.pruse -= upgr->info->perf;

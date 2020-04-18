@@ -119,11 +119,11 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       y -= 10; \
    }
 
-   if(CheckRequires_AI)  Req("CBI_ArmorInter")
-   if(CheckRequires_WMD) Req("CBI_WeapnInter")
-   if(CheckRequires_WRD) Req("CBI_WeapnInte2")
-   if(CheckRequires_RDI) Req("CBI_RDistInter")
-   if(CheckRequires_RA)  Req("CBI_ReactArmor")
+   if(RequiresButDontHave_AI)  Req("CBI_ArmorInter")
+   if(RequiresButDontHave_WMD) Req("CBI_WeapnInter")
+   if(RequiresButDontHave_WRD) Req("CBI_WeapnInte2")
+   if(RequiresButDontHave_RDI) Req("CBI_RDistInter")
+   if(RequiresButDontHave_RA)  Req("CBI_ReactArmor")
 
    #undef Req
 

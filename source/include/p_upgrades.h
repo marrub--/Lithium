@@ -28,12 +28,12 @@
       if(get_bit(p->upgrades[_i].flags, _ug_available)) \
          __with(struct upgrade *name = &p->upgrades[_i];)
 
-#define CheckRequires(a1, a2) (get_bit(upgr->info->requires, a1) && !(a2))
-#define CheckRequires_AI  CheckRequires(UR_AI,  cbiupgr[cupg_armorinter])
-#define CheckRequires_WMD CheckRequires(UR_WMD, cbiupgr[cupg_weapninter])
-#define CheckRequires_WRD CheckRequires(UR_WRD, cbiupgr[cupg_weapninte2])
-#define CheckRequires_RDI CheckRequires(UR_RDI, cbiupgr[cupg_rdistinter])
-#define CheckRequires_RA  CheckRequires(UR_RA,  get_bit(p->upgrades[UPGR_ReactArmor].flags, _ug_owned))
+#define RequiresButDontHave(a1, a2) (get_bit(upgr->info->requires, a1) && !(a2))
+#define RequiresButDontHave_AI  RequiresButDontHave(UR_AI,  cbiupgr[cupg_armorinter])
+#define RequiresButDontHave_WMD RequiresButDontHave(UR_WMD, cbiupgr[cupg_weapninter])
+#define RequiresButDontHave_WRD RequiresButDontHave(UR_WRD, cbiupgr[cupg_weapninte2])
+#define RequiresButDontHave_RDI RequiresButDontHave(UR_RDI, cbiupgr[cupg_rdistinter])
+#define RequiresButDontHave_RA  RequiresButDontHave(UR_RA,  get_bit(p->upgrades[UPGR_ReactArmor].flags, _ug_owned))
 
 /* Extern Functions -------------------------------------------------------- */
 
