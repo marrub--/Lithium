@@ -65,16 +65,16 @@ const Y_MASK = 0x1FFFFFFF;
 
 /* Members ----------------------------------------------------------------- */
 
-private transient play DrawData[700] m_D;
-private transient play uint m_DPtr;
-private transient play FadeMsg[256] m_FadeMsg;
-private transient play vector2 m_VirtualSize;
-private transient play int m_BreakWidth;
-private transient play bool m_NoDraw;
-private transient play bool m_ForceDraw;
+transient play DrawData[700] m_D;
+transient play uint m_DPtr;
+transient play FadeMsg[256] m_FadeMsg;
+transient play vector2 m_VirtualSize;
+transient play int m_BreakWidth;
+transient play bool m_NoDraw;
+transient play bool m_ForceDraw;
 
-private transient Font m_UtfBigFont;
-private transient Font m_UtfFont;
+transient Font m_UtfBigFont;
+transient Font m_UtfFont;
 
 Shape2DTransform m_RectXf;
 Shape2D m_Rect;
