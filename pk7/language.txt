@@ -340,7 +340,7 @@
 "LITH_INFO_SHORT_HellKnight" = "Hell Knight";
 "LITH_INFO_TITLE_HellKnight" = "$LITH_INFO_SHORT_HellKnight";
 "LITH_INFO_DESCR_HellKnight" = "Class: \cfNoble\c-\nThreat: \ckB\c-\n\nThe weakest of Hell's nobles, they serve the military as grunts to head assaults on weak targets and seek-and-destroy missions.\n\nThey throw long, thin magic attacks that corrode skin and bone. With skin only just more durable than iron, these demons are deadly in groups.";
-"LITH_INFO_SHORT_BaronOfHell" = "Hell Baron";
+"LITH_INFO_SHORT_BaronOfHell" = "Hell Noble";
 "LITH_INFO_TITLE_BaronOfHell" = "$LITH_INFO_SHORT_BaronOfHell";
 "LITH_INFO_DESCR_BaronOfHell" = "Class: \cfNoble\c-\nThreat: \ckB++\c-\n\nStronger Hell nobles with red skin, horns and hooves. Similar in appearance to Knights, but despite this, they differ in attack and strategy.\n\nBarons prefer to lead missions, plan overall tactics of an attack, and destroy their foes in glory. They attack in 45 degree angles, throwing strong magic energy everywhere.";
 "LITH_INFO_SHORT_Revenant" = "Revenant";
@@ -349,7 +349,7 @@
 "LITH_INFO_SHORT_PainElemental" = "Pain Elemental";
 "LITH_INFO_TITLE_PainElemental" = "Sin of Bellona, \"Pain Elemental\"";
 "LITH_INFO_DESCR_PainElemental" = "Class: \cgTyrant\c-\nThreat: \cgA\c-\n\nAn evil, mean-spirited demon that thrives purely off of the pain and suffering of its enemies; it summons lost souls to battle for it, as it itself is too weak to fight.\n\nThis enemy is both annoying and hazardous at the same time, especially if left unchecked for an elongated period of time. Prioritize their destruction.";
-"LITH_INFO_SHORT_Archvile" = "Archvile";
+"LITH_INFO_SHORT_Archvile" = "Arch-vile";
 "LITH_INFO_TITLE_Archvile" = "Sin of Janus, \"Arch-vile\"";
 "LITH_INFO_DESCR_Archvile" = "Class: \cgTyrant\c-\nThreat: \cgA\c-\n\nBrutal and vicious, caster of evil magic and healer of the sinful.\n\nThe Arch-vile is a malicious, extremely dangerous being capable of destroying anything at any range with its powerful fire magic, and resurrecting dead enemies it comes by.";
 "LITH_INFO_SHORT_SpiderMastermind" = "Spider Demon";
@@ -361,6 +361,17 @@
 "LITH_INFO_SHORT_Phantom" = "Phantom";
 "LITH_INFO_TITLE_Phantom" = "$LITH_INFO_SHORT_Phantom";
 "LITH_INFO_DESCR_Phantom" = "Class: \cm???\c-\nThreat: \crE\c-\n\nA threat yet unexplained, the phantom seeks to destroy all and will leave no one alive -- not even demons. They are a dark, silhouette-like being that takes on various forms and does nothing but destroy.\n\nExtreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.";
+"LITH_INFO_SHORT_James" = "James";
+"LITH_INFO_TITLE_James" = "James, Vanagloriam Est";
+"LITH_INFO_SHORT_Makarov" = "Makarov";
+"LITH_INFO_TITLE_Makarov" = "Makarov, Avarum Est";
+"LITH_INFO_SHORT_Isaac" = "Isaac";
+"LITH_INFO_TITLE_Isaac" = "Isaac, Superbiorem Est";
+"LITH_INFO_SHORT_Johnson" = "Johnson";
+"LITH_INFO_TITLE_Johnson" = "Johnson, Ally of Isaac";
+"LITH_INFO_SHORT_Michael" = "Michael";
+"LITH_INFO_TITLE_Michael" = "Michael, Brother of Isaac";
+"LITH_INFO_SHORT_Archangel" = "The Archangel";
 "LITH_INFO_SHORT_IconOfSin" = "Icon of Sin";
 "LITH_INFO_TITLE_IconOfSin" = "Overlord of Hell, Icon of Sin";
 "LITH_INFO_DESCR_IconOfSin" = "Class: \crOverlord\c-\nThreat: \crE\c-\n\nThe catalyst of destruction, whom spawned all of Hell's monstrosities and dictates over all; the Icon of Sin, said by some to be Satan himself, feeds purely off of hatred and chaos and will stop at nothing to attain everything in the world.\n\nCurrently, he lay sleeping ill under repair, as his head was torn in twain by a force unknown. The ultimate goal of your mission is to find him, and destroy him before Hell takes over our realm.";

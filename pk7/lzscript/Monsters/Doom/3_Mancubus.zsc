@@ -72,7 +72,7 @@ default
    SeeSound    "fatso/sight";
 
    Obituary "$OB_FATSO";
-   Tag      "Mancubus";
+   Tag      "$LITH_INFO_SHORT_Mancubus";
 
    +BOSSDEATH
    +FLOORCLIP

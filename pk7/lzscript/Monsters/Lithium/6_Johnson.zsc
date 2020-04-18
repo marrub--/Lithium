@@ -16,7 +16,7 @@ default
    Health 40;
    Speed  3;
 
-   Tag "Isaac, Superbiorem Est";
+   Tag "$LITH_INFO_TITLE_Isaac";
 
    +THRUSPECIES
    +NOINFIGHTING
@@ -25,7 +25,7 @@ default
 override void Tick()
 {
    Super.Tick();
-   if(Health < 20) SetTag("Johnson, Ally of Isaac");
+   if(Health < 20) SetTag("$LITH_INFO_TITLE_Johnson");
 }
 
 override void Lith_OnDeath()

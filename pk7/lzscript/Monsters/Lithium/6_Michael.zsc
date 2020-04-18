@@ -14,7 +14,7 @@ default
    Health 4000;
    Speed  7;
 
-   Tag "Michael, Brother of Isaac";
+   Tag "$LITH_INFO_TITLE_Michael";
 
    +NOINFIGHTING
    +THRUSPECIES

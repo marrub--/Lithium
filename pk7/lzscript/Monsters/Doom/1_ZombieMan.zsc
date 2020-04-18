@@ -41,7 +41,7 @@ default
    SeeSound    "grunt/sight";
 
    Obituary "$OB_ZOMBIE";
-   Tag      "Former Rifleman";
+   Tag      "$LITH_INFO_SHORT_ZombieMan";
 
    +FLOORCLIP
 }

@@ -31,7 +31,7 @@ default
    PainSound   "skull/pain";
 
    Obituary "$OB_SKULL";
-   Tag      "Lost Soul";
+   Tag      "$LITH_INFO_SHORT_LostSoul";
 
    +DONTFALL
    +FLOAT

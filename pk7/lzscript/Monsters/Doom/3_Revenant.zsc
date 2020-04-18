@@ -103,7 +103,7 @@ default
 
    HitObituary "$OB_UNDEADHIT";
    Obituary    "$OB_UNDEAD";
-   Tag         "Revenant";
+   Tag         "$LITH_INFO_SHORT_Revenant";
 
    +FLOORCLIP
    +MISSILEMORE

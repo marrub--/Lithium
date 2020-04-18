@@ -35,7 +35,7 @@ default
    SeeSound    "chainguy/sight";
 
    Obituary "$OB_CHAINGUY";
-   Tag      "Former Corporal";
+   Tag      "$LITH_INFO_SHORT_ChaingunGuy";
 
    +FLOORCLIP
 }

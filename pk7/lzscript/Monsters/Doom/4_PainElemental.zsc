@@ -33,7 +33,7 @@ default
    PainSound   "pain/pain";
    SeeSound    "pain/sight";
 
-   Tag "Pain Elemental";
+   Tag "$LITH_INFO_SHORT_PainElemental";
 
    +FLOAT
    +NOGRAVITY

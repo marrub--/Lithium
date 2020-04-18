@@ -97,7 +97,7 @@ default
    SeeSound    "cyber/sight";
 
    Obituary "$OB_CYBORG";
-   Tag      "Cyber-Demon";
+   Tag      "$LITH_INFO_SHORT_Cyberdemon";
 
    +BOSS
    +BOSSDEATH

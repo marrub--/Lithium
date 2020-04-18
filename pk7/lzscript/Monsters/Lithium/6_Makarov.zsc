@@ -110,7 +110,7 @@ default
 {
    Health 3000;
 
-   Tag "Makarov, Avarum Est";
+   Tag "$LITH_INFO_TITLE_Makarov";
 }
 
 states

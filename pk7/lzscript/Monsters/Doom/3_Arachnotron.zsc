@@ -105,7 +105,7 @@ default
    SeeSound    "baby/sight";
 
    Obituary "$OB_BABY";
-   Tag      "Arachnotron";
+   Tag      "$LITH_INFO_SHORT_Arachnotron";
 
    +BOSSDEATH
    +FLOORCLIP

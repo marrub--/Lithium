@@ -64,7 +64,7 @@ default
 {
    Health 1000;
 
-   Tag "James, Vanagloriam Est";
+   Tag "$LITH_INFO_TITLE_James";
 }
 
 states

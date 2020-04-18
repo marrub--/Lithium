@@ -82,7 +82,7 @@ default
 
    HitObituary "$OB_KNIGHTHIT";
    Obituary    "$OB_KNIGHT";
-   Tag         "Hell Knight";
+   Tag         "$LITH_INFO_SHORT_HellKnight";
 
    -BOSSDEATH
 }

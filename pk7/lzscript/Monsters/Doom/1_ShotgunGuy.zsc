@@ -39,7 +39,7 @@ default
    SeeSound    "shotguy/sight";
 
    Obituary "$OB_SHOTGUY";
-   Tag      "Former Sergeant";
+   Tag      "$LITH_INFO_SHORT_ShotgunGuy";
 
    +FLOORCLIP
 }

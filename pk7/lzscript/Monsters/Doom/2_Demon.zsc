@@ -30,7 +30,7 @@ default
    SeeSound    "demon/sight";
 
    Obituary "$OB_DEMONHIT";
-   Tag      "Hell Sergeant";
+   Tag      "$LITH_INFO_SHORT_Demon";
 
    +FLOORCLIP
 }

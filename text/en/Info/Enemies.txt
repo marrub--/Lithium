@@ -137,7 +137,7 @@ The weakest of Hell's nobles, they serve the military as grunts to head assaults
 
 They throw long, thin magic attacks that corrode skin and bone. With skin only just more durable than iron, these demons are deadly in groups.
 
-== \#INFO_SHORT_BaronOfHell | Hell Baron
+== \#INFO_SHORT_BaronOfHell | Hell Noble
 == \#INFO_TITLE_BaronOfHell | $\#INFO_SHORT_BaronOfHell
 %% \#INFO_DESCR_BaronOfHell
 Class: \cfNoble\c-
@@ -168,7 +168,7 @@ An evil, mean-spirited demon that thrives purely off of the pain and suffering o
 
 This enemy is both annoying and hazardous at the same time, especially if left unchecked for an elongated period of time. Prioritize their destruction.
 
-== \#INFO_SHORT_Archvile | Archvile
+== \#INFO_SHORT_Archvile | Arch-vile
 == \#INFO_TITLE_Archvile | Sin of Janus, "Arch-vile"
 %% \#INFO_DESCR_Archvile
 Class: \cgTyrant\c-
@@ -208,6 +208,23 @@ Threat: \crE\c-
 A threat yet unexplained, the phantom seeks to destroy all and will leave no one alive -- not even demons. They are a dark, silhouette-like being that takes on various forms and does nothing but destroy.
 
 Extreme caution is advised against these enemies, if you can run from them they will only continue to chase you down.
+
+== \#INFO_SHORT_James | James
+== \#INFO_TITLE_James | James, Vanagloriam Est
+
+== \#INFO_SHORT_Makarov | Makarov
+== \#INFO_TITLE_Makarov | Makarov, Avarum Est
+
+== \#INFO_SHORT_Isaac | Isaac
+== \#INFO_TITLE_Isaac | Isaac, Superbiorem Est
+
+== \#INFO_SHORT_Johnson | Johnson
+== \#INFO_TITLE_Johnson | Johnson, Ally of Isaac
+
+== \#INFO_SHORT_Michael | Michael
+== \#INFO_TITLE_Michael | Michael, Brother of Isaac
+
+== \#INFO_SHORT_Archangel | The Archangel
 
 ## Overlord ------------------------------------------------------------------|
 == \#INFO_SHORT_IconOfSin | Icon of Sin

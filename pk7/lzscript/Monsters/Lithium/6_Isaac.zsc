@@ -67,7 +67,7 @@ default
 {
    Health 4000;
 
-   Tag "Isaac, Superbiorem Est";
+   Tag "$LITH_INFO_TITLE_Isaac";
 }
 
 override void Lith_PostInit()

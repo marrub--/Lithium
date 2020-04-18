@@ -90,7 +90,7 @@ default
    SeeSound    "vile/sight";
 
    Obituary "$OB_VILE";
-   Tag      "Arch-vile";
+   Tag      "$LITH_INFO_SHORT_Archvile";
 
    +FLOORCLIP
    +NOTARGET

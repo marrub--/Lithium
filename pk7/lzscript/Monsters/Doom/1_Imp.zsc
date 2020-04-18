@@ -82,7 +82,7 @@ default
 
    HitObituary "$OB_IMPHIT";
    Obituary    "$OB_IMP";
-   Tag         "Hell Trooper";
+   Tag         "$LITH_INFO_SHORT_Imp";
 
    +FLOORCLIP
 }

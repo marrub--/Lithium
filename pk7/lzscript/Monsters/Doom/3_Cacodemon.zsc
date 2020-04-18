@@ -45,7 +45,7 @@ default
 
    HitObituary "$OB_CACOHIT";
    Obituary    "$OB_CACO";
-   Tag         "Cacodemon";
+   Tag         "$LITH_INFO_SHORT_Cacodemon";
 
    +FLOAT
    +NOGRAVITY

@@ -107,7 +107,7 @@ default
 
    HitObituary "$OB_BARONHIT";
    Obituary    "$OB_BARON";
-   Tag         "Hell Noble";
+   Tag         "$LITH_INFO_SHORT_BaronOfHell";
 
    +BOSSDEATH
    +FLOORCLIP

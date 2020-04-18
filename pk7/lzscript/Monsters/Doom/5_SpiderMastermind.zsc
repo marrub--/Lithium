@@ -75,7 +75,7 @@ default
    SeeSound    "spider/sight";
 
    Obituary "$OB_SPIDER";
-   Tag      "Spider Demon";
+   Tag      "$LITH_INFO_SHORT_SpiderMastermind";
 
    +BOSS
    +BOSSDEATH

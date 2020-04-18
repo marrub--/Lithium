@@ -117,7 +117,7 @@ default
    SeeSound    "vile/sight";
 
    Obituary "$OB_VILE";
-   Tag      "The Archangel";
+   Tag      "$LITH_INFO_SHORT_Archangel";
 
    +BRIGHT
    +FLOORCLIP

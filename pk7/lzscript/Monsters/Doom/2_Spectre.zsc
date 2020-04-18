@@ -21,7 +21,7 @@ default
 
    SeeSound "";
 
-   Tag "Spectre";
+   Tag "$LITH_INFO_SHORT_Spectre";
 
    +SHADOW
 }
