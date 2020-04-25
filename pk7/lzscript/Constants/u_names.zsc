@@ -79,7 +79,6 @@ enum Lith_UpgradeName {
    UPGR_lolsords,
    UPGR_Goldeneye,
    UPGR_DarkCannon,
-   UPGR_Implying,
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
    UPGR_MAX

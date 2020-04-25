@@ -370,11 +370,6 @@ You get a sword. It is literally your only weapon.
 Get the true Goldeneye 007(tm) experience!
 
 ## Downgrades ----------------------------------------------------------------|
-== \#UPGRADE_TITLE_Implying | >Implicating
-@@ \#UPGRADE_EFFEC_Implying
-Oh god why did I add something Kegan suggested to me this was not a good idea
-
-## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_UNCEUNCE | UNCE UNCE
 @@ \#UPGRADE_EFFEC_UNCEUNCE
 UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE

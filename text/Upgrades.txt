@@ -89,7 +89,6 @@
 +DarkCannon N/A 1500000 pM \-----   =BFG  %WMD | WRD | RDI
 
 :Down
-+Implying   N/A gA \--U-- .0.20
 +UNCEUNCE   N/A gA \ADU-- .0.30
 +InstaDeath N/A gA \--U-- .0.50
 

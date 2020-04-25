@@ -130,8 +130,6 @@
 "LITH_UPGRADE_EFFEC_lolsords" = "You get a sword. It is literally your only weapon.";
 "LITH_UPGRADE_TITLE_Goldeneye" = "007 Mode";
 "LITH_UPGRADE_EFFEC_Goldeneye" = "Get the true Goldeneye 007(tm) experience!";
-"LITH_UPGRADE_TITLE_Implying" = ">Implicating";
-"LITH_UPGRADE_EFFEC_Implying" = "Oh god why did I add something Kegan suggested to me this was not a good idea";
 "LITH_UPGRADE_TITLE_UNCEUNCE" = "UNCE UNCE";
 "LITH_UPGRADE_EFFEC_UNCEUNCE" = "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
 "LITH_UPGRADE_TITLE_InstaDeath" = "Instant Death";
@@ -180,7 +178,7 @@
 "LITH_OPT_TESTMAP_01_03_02_C" = "I just needed someone to talk to.";
 "LITH_OPT_TESTMAP_01_03_01_M" = "That's rude.";
 "LITH_DLOG_TESTMAP_01_04" = "Life is rude.\n\nNow go away.";
-"LITH_OPT_TESTMAP_01_04" = "Right.";
+"LITH_OPT_TESTMAP_01_04_01" = "Right.";
 "LITH_DLOG_TESTMAP_01_07" = "thousands are sailing\nthe same self    the only self\n\nself willed the peril of a thousand fates\n\na line of infinite ends    finite finishing\nthe one remains oblique and pure\n\narching to the single point of consciousness\n\nfind yourself\nstarting back";
 "LITH_OPT_TESTMAP_01_07" = "Thanks, bye!";
 "LITH_DLOG_TESTMAP_01_10" = "Already? Are you sure it isn't just ASIC bugs? I have trouble believing that they'd be back so soon, after your doctor gave you that prescription and even turned down your AS-voltage.\n\nYou know, ASIC hardware reacts to changes. It might just be that it's settling to the new voltage and giving you a hard time.";
@@ -2145,8 +2143,6 @@
 "LITH_UPGRADE_EFFEC_lolsords" = "剣を掲げよ、其れが己を切り拓く。";
 "LITH_UPGRADE_TITLE_Goldeneye" = "007モード";
 "LITH_UPGRADE_EFFEC_Goldeneye" = "真のゴールデンアイ 007(tm)を体験せよ!";
-"LITH_UPGRADE_TITLE_Implying" = ">そうだね";
-"LITH_UPGRADE_EFFEC_Implying" = "おおブッダよ、keganが何故このような提案をし、それを受け入れたのか。";
 "LITH_UPGRADE_TITLE_UNCEUNCE" = "ずんちゃっちゃ";
 "LITH_UPGRADE_EFFEC_UNCEUNCE" = "ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ";
 "LITH_UPGRADE_TITLE_InstaDeath" = "即死";
