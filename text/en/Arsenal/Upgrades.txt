@@ -376,6 +376,8 @@ UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 
+\cgEpilepsy warning! Don't use if you are prone to seizures.
+
 ## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_InstaDeath | Instant Death
 @@ \#UPGRADE_EFFEC_InstaDeath

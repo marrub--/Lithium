@@ -131,7 +131,7 @@
 "LITH_UPGRADE_TITLE_Goldeneye" = "007 Mode";
 "LITH_UPGRADE_EFFEC_Goldeneye" = "Get the true Goldeneye 007(tm) experience!";
 "LITH_UPGRADE_TITLE_UNCEUNCE" = "UNCE UNCE";
-"LITH_UPGRADE_EFFEC_UNCEUNCE" = "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE";
+"LITH_UPGRADE_EFFEC_UNCEUNCE" = "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE\n\n\cgEpilepsy warning! Don't use if you are prone to seizures.";
 "LITH_UPGRADE_TITLE_InstaDeath" = "Instant Death";
 "LITH_UPGRADE_EFFEC_InstaDeath" = "Upon losing health, you instantly die.";
 "LITH_PAGE_M1A1_01_C_01" = "\cdApologies for the abrupt stop, this ship hasn't run the faster than light engine enough times. We didn't collide with the planet, so I'm not very worried about its future performance, now.\n\n\cdWe have arrived at \cnNisiv 16\cd; the \cforange\cd planet, if you look out the window, is \cnNanto\cd. Your objective is somewhere there.";
@@ -2144,7 +2144,7 @@
 "LITH_UPGRADE_TITLE_Goldeneye" = "007モード";
 "LITH_UPGRADE_EFFEC_Goldeneye" = "真のゴールデンアイ 007(tm)を体験せよ!";
 "LITH_UPGRADE_TITLE_UNCEUNCE" = "ずんちゃっちゃ";
-"LITH_UPGRADE_EFFEC_UNCEUNCE" = "ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ";
+"LITH_UPGRADE_EFFEC_UNCEUNCE" = "ずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃずんちゃ ずっちゃ ずっちゃ ずずちゃ ずんちゃ ずっちゃ ずっちゃ ずずちゃ\n\n\cg光敏感性発作警告！";
 "LITH_UPGRADE_TITLE_InstaDeath" = "即死";
 "LITH_UPGRADE_EFFEC_InstaDeath" = "人は銃で撃たれると死ぬ。";
 "LITH_BOSS_BAR_1_Stan" = "\cg何の騒ぎだ!\n\cy人間が我が領地に来たか。";
