@@ -21,7 +21,7 @@ static void PlayerInit(Actor mo_) {
 static void Nuke(Actor mo) {
    mo.A_StartSound("player/nuke", lch_body2, attenuation: ATTN_NONE);
    for(let it = BlockThingsIterator.Create(mo, 6144); it.next();)
-      if(it.thing.bSHOOTABLE && it.thing.checkSight(mo))
+      if(it.thing.bSHOOTABLE && it.thing.checkSight(mo) && !it.thing.player)
          DieMonster(it.thing);
    mo.A_AlertMonsters();
 }
