@@ -46,6 +46,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
    } else {
       for_upgrade(upgr)
          numbtns++;
+      numbtns += UC_MAX;
    }
 
    /* TODO */
