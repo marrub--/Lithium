@@ -91,5 +91,6 @@
 :Down
 +UNCEUNCE   N/A gA \ADU-- .0.30
 +InstaDeath N/A gA \--U-- .0.50
++OneShot    N/A gA \----- .0.50
 
 ## EOF

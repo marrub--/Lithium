@@ -73,16 +73,6 @@ property SpawnType: m_spawnType;
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
 
-/* These flags are used for spawning pickup actors.
- * UDMF maps have a surprising amount of control over things, so we have
- * to use a load of flags to make this work properly.
- */
-const Lith_PF =
-   SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
-   SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    | SXF_TRANSFERSCALE |
-   SXF_TRANSFERSPECIAL     | SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA |
-   SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME | SXF_TRANSFERROLL;
-
 virtual float, float GetFirePattern() {
    return 0, 0;
 }
@@ -169,7 +159,10 @@ action(Weapon) state Lith_A_JumpIfMagFull(statelabel sn = "ReadySelector") {
 }
 
 action(Weapon) void Lith_A_MagIncr(int amt = 1) {
-   invoker.m_fired = min(invoker.m_fired + amt, invoker.m_max);
+   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_OneShot))
+      invoker.m_fired = min(invoker.m_fired + amt, invoker.m_max);
+   else
+      invoker.m_fired = invoker.m_max;
 }
 
 action(Weapon) void Lith_A_ReloadFinish() {
@@ -277,8 +270,17 @@ states(Actor) {
 Spawn:
    TNT1 A 0;
    TNT1 A 0 {
+      /* UDMF maps have a surprising amount of control over things, so we
+       * have to use a load of flags to make this work properly.
+       */
       if(!bDROPPED && m_spawnType)
-         A_SpawnItemEx(m_spawnType, flags: Lith_PF);
+         A_SpawnItemEx(m_spawnType, flags:
+                       SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
+                       SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    |
+                       SXF_TRANSFERSCALE       | SXF_TRANSFERSPECIAL     |
+                       SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA       |
+                       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME |
+                       SXF_TRANSFERROLL);
    }
    stop;
 }

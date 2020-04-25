@@ -81,6 +81,7 @@ enum Lith_UpgradeName {
    UPGR_DarkCannon,
    UPGR_UNCEUNCE,
    UPGR_InstaDeath,
+   UPGR_OneShot,
    UPGR_MAX
 };
 
