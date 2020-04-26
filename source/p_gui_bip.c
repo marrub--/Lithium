@@ -151,7 +151,7 @@ static void MainUI(struct gui_state *g, struct player *p) {
 
 static void CategoryUI(struct gui_state *g, struct player *p) {
    u32 categ = p->bip.curcategory;
-   u32 n = p->bip.categoryavail[categ];
+   u32 n = p->bip.categorymax[categ];
 
    if(categ == BIPC_EXTRA) goto draw;
 
