@@ -183,6 +183,26 @@ draw:
    if(p->bip.curpage) DrawPage(g, p, p->bip.curpage);
 }
 
+script static
+i32 SearchPage(struct player *p, struct page *page, cstr query) {
+   if(p->bip.resnum >= countof(p->bip.result)) {
+      return 0;
+   }
+
+   if(!get_bit(page->flags, _page_unlocked) ||
+      page->info->category == BIPC_EXTRA) {
+      return 1;
+   }
+
+   if(strcasestr(GetShortName(page), query) ||
+      strcasestr(GetFullName(page),  query) ||
+      strcasestr(GetBody(page),      query)) {
+      p->bip.result[p->bip.resnum++] = page;
+   }
+
+   return 2;
+}
+
 static void SearchUI(struct gui_state *g, struct player *p) {
    struct gui_txt *st = G_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
 
@@ -218,20 +238,9 @@ static void SearchUI(struct gui_state *g, struct player *p) {
       }
 
       for_page() {
-         if(p->bip.resnum >= countof(p->bip.result)) {
-            break;
-         }
-
-         if(!get_bit(page->flags, _page_unlocked) ||
-            page->info->category == BIPC_EXTRA) {
-            continue;
-         }
-
-         if(strcasestr(GetShortName(page), query) ||
-            strcasestr(GetFullName(page),  query) ||
-            strcasestr(GetBody(page),      query)) {
-            p->bip.result[p->bip.resnum++] = page;
-         }
+         i32 res = SearchPage(p, page, query);
+         /**/ if(res == 0) break;
+         else if(res == 1) continue;
       }
 
       if(p->bip.resnum == 0) {
