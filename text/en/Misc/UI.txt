@@ -61,14 +61,20 @@ It will not show up again.
 Hold %jS to continue.
 
 ## Results -------------------------------------------------------------------|
-== \#RES_RESULTS    | RESULTS
-== \#RES_ELIMINATED | ELIMINATED %.1lk%%
-== \#RES_ARTIFACTS  | ARTIFACTS %.1lk%%
-== \#RES_TOTAL      | TOTAL
-== \#RES_TAX        | Tax
-== \#RES_SUBTOTAL   | Subtotal
-== \#RES_PAYMENT    | PAYMENT
-== \#RES_ACCOUNT    | Checking Acct.
+== \#RES_RESULTS  | RESULTS
+== \#RES_KILL     | ELIMINATED %.1lk%%
+== \#RES_ITEM     | ARTIFACTS %.1lk%%
+== \#RES_SCRT     | HIDDEN AREAS %.1lk%%
+== \#RES_KILL100  | ALL ELIMINATED
+== \#RES_ITEM100  | ALL ARTIFACTS
+== \#RES_SCRT100  | ALL SECRETS
+== \#RES_PAR      | SPEED BONUS
+== \#RES_SPONSOR  | SPONSORSHIP
+== \#RES_TOTAL    | TOTAL
+== \#RES_TAX      | Tax
+== \#RES_SUBTOTAL | Subtotal
+== \#RES_PAYMENT  | PAYMENT
+== \#RES_ACCOUNT  | Checking Acct.
 %% \#RES_CLOSED
 \c%cTRANSACTION
 CLOSED

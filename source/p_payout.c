@@ -20,7 +20,9 @@
 
 script
 void P_Scr_Payout(struct player *p) {
-   Str(sp_resultframe, s":UI:ResultFrame");
+   Str(sp_resultframe,        s":UI:ResultFrame");
+   Str(ss_player_counter,     s"player/counter");
+   Str(ss_player_counterdone, s"player/counterdone");
 
    enum {
       _begin_total      = 35,
@@ -37,9 +39,8 @@ void P_Scr_Payout(struct player *p) {
 #define Rght(...) Msg(144, 6, s_smallfnt, __VA_ARGS__)
 #define Head(...) Msg(8,   1, s_bigupper, __VA_ARGS__)
 
-#define CountScr(scr) scoresep(i < _begin_total ? \
-                               lerplk(0, scr, i / 34.0lk) :\
-                               scr)
+#define CountScr(scr) \
+   scoresep(i < _begin_total ? lerplk(0, scr, i / 34.0lk) : scr)
 
    struct payoutinfo pay = payout;
 
@@ -66,21 +67,33 @@ void P_Scr_Payout(struct player *p) {
 
       y += 16;
 
-      if(pay.killmax) {
-         Fram();
-         Left(LC(LANG "RES_ELIMINATED"), pay.killpct);
-         Rght("%s\Cnscr", CountScr(pay.killscr));
-         counting |= pay.killnum;
-         y += 9;
-      }
+#define Pay(name) \
+   if(pay.name##max) { \
+      Fram(); \
+      Left(LC(LANG "RES_" #name), pay.name##pct); \
+      Rght("%s\Cnscr", CountScr(pay.name##scr)); \
+      counting |= pay.name##num; \
+      y += 9; \
+   }
 
-      if(pay.itemmax) {
-         Fram();
-         Left(LC(LANG "RES_ARTIFACTS"), pay.itempct);
-         Rght("%s\Cnscr", CountScr(pay.itemscr));
-         counting |= pay.itemnum;
-         y += 9;
-      }
+      Pay(kill);
+      Pay(item);
+      Pay(scrt);
+
+#define Activity(name) \
+   if(pay.activities.name) { \
+      Fram(); \
+      Left(LC(LANG "RES_" #name)); \
+      Rght("%s\Cnscr", CountScr(pay.activities.name)); \
+      counting = true; \
+      y += 9; \
+   }
+
+      Activity(kill100);
+      Activity(item100);
+      Activity(scrt100);
+      Activity(par);
+      Activity(sponsor);
 
       if(i > _begin_total) {
          y += 7;
@@ -112,9 +125,11 @@ void P_Scr_Payout(struct player *p) {
       if(p->getCVarI(sc_player_resultssound)) {
          if(counting) {
             str snd = snil;
+
             /**/ if(i <  _begin_total) snd = ss_player_counter;
             else if(i == _begin_total) snd = ss_player_counterdone;
-            /**/ if(snd != snil)      ACS_LocalAmbientSound(snd, 80);
+
+            if(snd != snil) ACS_LocalAmbientSound(snd, 80);
          }
 
          if(i == _begin_tax || i == _begin_grandtotal)

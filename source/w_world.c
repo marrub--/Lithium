@@ -41,7 +41,6 @@ bool cbiupgr[cupg_max];
 bool legendoom;
 bool drlamonsters;
 enum mission_status lmvar mission = _unfinished;
-struct payoutinfo payout;
 
 bool dorain;
 
@@ -186,8 +185,11 @@ static void MInitPst(void)
 
    Dbg_Log(log_dev, "%s", __func__);
 
+   payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
+
    payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
    payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+   payout.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
 
    /* Check for if rain should be used.
     * - If there are more than 1 players, never use rain.
@@ -373,9 +375,9 @@ begin:
    if(!modinit) MInitPst();
 
    /* Main loop. */
-   i32 prevsecrets = 0;
-   i32 prevkills   = 0;
-   i32 previtems   = 0;
+   i32 prevscrts = 0;
+   i32 prevkills = 0;
+   i32 previtems = 0;
 
    i32 missionkill = 0;
    i32 missionprc  = 0;
@@ -393,22 +395,18 @@ begin:
          return;
       }
 
-      i32 secrets = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
-      i32 kills   = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
-      i32 items   = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
+      i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+      i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
+      i32 items = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
 
-      if(secrets > prevsecrets) {
-         i32 delta = secrets - prevsecrets;
-         P_GiveAllScore(9000 * delta, true);
-         secretsfound += delta;
-      }
+      if(kills > prevkills)  payout.killnum += kills - prevkills;
+      if(items > previtems)  payout.itemnum += items - previtems;
+      if(scrts > prevscrts) {payout.scrtnum += scrts - prevscrts;
+                             secretsfound   += scrts - prevscrts;}
 
-      if(kills > prevkills) payout.killnum += kills - prevkills;
-      if(items > previtems) payout.itemnum += items - previtems;
-
-      prevsecrets = secrets;
-      prevkills   = kills;
-      previtems   = items;
+      prevscrts = scrts;
+      prevkills = kills;
+      previtems = items;
 
       if(ACS_Timer() % 5 == 0 && missionkill < kills)
       {

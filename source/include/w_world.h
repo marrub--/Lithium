@@ -22,7 +22,7 @@
 #define InHell   (Cluster >= 8)
 #define OnEarth  (Cluster == 7)
 
-#define MapNum ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
+#define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
 /* Line 1888300 is used as a control line for mod features.
@@ -54,17 +54,24 @@ enum {
 };
 
 struct payoutinfo {
-   i32 killnum, killmax;
-   i32 itemnum, itemmax;
+   i32 killnum, killmax, killscr;
+   i32 itemnum, itemmax, itemscr;
+   i32 scrtnum, scrtmax, scrtscr;
 
-   k64 killpct;
-   k64 itempct;
-
-   i32 killscr;
-   i32 itemscr;
+   k64 killpct, itempct, scrtpct;
 
    i32 total;
    i32 tax;
+
+   i32 par;
+
+   struct {
+      i32 kill100;
+      i32 item100;
+      i32 scrt100;
+      i32 par;
+      i32 sponsor;
+   } activities;
 };
 
 enum mission_status {

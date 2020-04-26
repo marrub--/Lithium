@@ -22,7 +22,7 @@ void Draw_GInit(void) {
    #include "m_drawing.h"
 }
 
-int Draw_GetCr(int n) {
+i32 Draw_GetCr(i32 n) {
    switch(n) {
       case 'a': return CR_BRICK;
       case 'b': return CR_TAN;

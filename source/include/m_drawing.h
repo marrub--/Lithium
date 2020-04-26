@@ -206,7 +206,7 @@ enum {
    _gcr_max,
 };
 
-int Draw_GetCr(int n);
+i32 Draw_GetCr(i32 n);
 /* decompat-end */
 
 enum /* FontNum */

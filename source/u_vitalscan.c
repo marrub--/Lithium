@@ -165,7 +165,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    bool afnt = p->getCVarI(sc_scanner_altfont);
    str  font = afnt ? s_lmidfont : s_smallfnt;
 
-   int cr = Draw_GetCr(p->getCVarI(sc_scanner_color));
+   i32 cr = Draw_GetCr(p->getCVarI(sc_scanner_color));
 
    PrintText_str(UData.tagstr, font, cr, 160+ox,4, 216+oy,2);
 
