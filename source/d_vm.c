@@ -290,9 +290,9 @@ script static void TerminalGUI(struct player *p, u32 tact) {
    G_UpdateState(&gst, p);
 
    /* Background */
-   PrintRect(0, 0,          twidth, tbottom, 0xFF000000);
-   PrintRect(0, 0,          twidth, 12,      0xFF44000C);
-   PrintRect(0, tbottom-12, twidth, 12,      0xFF44000C);
+   PrintRect(0, 0,          twidth, tbottom, 0x000000);
+   PrintRect(0, 0,          twidth, 12,      0x44000C);
+   PrintRect(0, tbottom-12, twidth, 12,      0x44000C);
 
    /* Top-left text */
    PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);

@@ -15,13 +15,11 @@
 #include "p_player.h"
 #include "w_world.h"
 
-void Scr_HInit(void)
-{
+void Scr_HInit(void) {
    k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
    #define GenPay(name) \
-      if(payout.name##max) \
-      { \
+      if(payout.name##max) { \
          payout.name##pct = (payout.name##num / (k64)payout.name##max) * 100; \
          payout.name##scr = payout.name##pct * 600; \
       }
@@ -34,8 +32,7 @@ void Scr_HInit(void)
    payout.total  = payout.killscr + payout.itemscr;
    payout.total -= payout.tax = payout.total * taxpct;
 
-   for_player()
-   {
+   for_player() {
       script extern void P_Scr_Payout(struct player *p);
       P_Scr_Payout(p);
    }

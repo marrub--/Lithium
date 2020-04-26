@@ -68,8 +68,10 @@ Hold %jS to continue.
 == \#RES_TAX        | Tax
 == \#RES_SUBTOTAL   | Subtotal
 == \#RES_PAYMENT    | PAYMENT
-== \#RES_ACCOUNT    | Primary Account
-== \#RES_CLOSED     | \c%cTRANSACTION CLOSED
+== \#RES_ACCOUNT    | Checking Acct.
+%% \#RES_CLOSED
+\c%cTRANSACTION
+CLOSED
 
 ## Shop ----------------------------------------------------------------------|
 == \#SHOP_CANT_ACTIVATE | Activating requires \ca%i\cbPerf\c-.

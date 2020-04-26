@@ -135,6 +135,15 @@ static bool LX(Actor mo, int num)
    return cl.m_FadeMsg[num].Fade > 0 && cl.m_FadeMsg[num].Alph > 0;
 }
 
+static int LY(Actor mo, int num)
+{
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
+   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
+   return int(cl.m_FadeMsg[num].Fade / 255.0 *
+              cl.m_FadeMsg[num].Alph / 255.0 *
+              255.0);
+}
+
 static void LL(Actor mo, int x, int y, int z, int w, string c = "")
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
@@ -557,7 +566,7 @@ override void RenderOverlay(RenderEvent evt)
       m_RectXf.scale((m_D[i].Z, m_D[i].W));
       m_RectXf.translate((m_D[i].X, m_D[i].Y));
       m_Rect.setTransform(m_RectXf);
-      Screen.DrawShape(skyflatnum, false, m_Rect, DTA_FillColor,m_D[i].C);
+      Screen.DrawShape(skyflatnum, false, m_Rect, DTA_Alpha,m_D[i].C.a/255.0, DTA_FillColor,m_D[i].C);
       break;
    }
 

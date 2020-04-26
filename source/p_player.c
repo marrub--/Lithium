@@ -458,6 +458,7 @@ void P_doIntro(struct player *p) {
    u32 fill  = 0;
 
    for(;;) {
+      SetSize(320, 240);
       if(which != last) {
          last = which;
 
@@ -523,6 +524,8 @@ void P_doIntro(struct player *p) {
 
    for(i32 j = 0; j < _out_tics; j++) {
       k32 alpha = (_out_tics - j) / (k32)_out_tics;
+
+      SetSize(320, 240);
 
       for(i32 i = 0; i < _nlines; i++) {
          if(!lines[i]) continue;

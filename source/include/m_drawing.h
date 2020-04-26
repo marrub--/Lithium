@@ -40,9 +40,15 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 
 #define PrintRectArgs0(x, y) (BitArg(x, 0xffff, 0) | BitArg(y, 0xffff, 16))
 #define PrintRectArgs1(w, h) PrintRectArgs0(w, h)
+#define PrintRectArgs2(c, a) ((c) | BitArg(a, 0xff, 24))
 
 #define PrintRect(x, y, w, h, c) \
-   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), c)
+   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), \
+             PrintRectArgs2(c, 0xff))
+
+#define PrintRectA(x, y, w, h, c, a) \
+   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), \
+             PrintRectArgs2(c, a))
 
 #define PrintSpriteArgs0(x,      xa) XBitArg(x, xa)
 #define PrintSpriteArgs1(y,      ya) YBitArg(y, ya)
@@ -163,6 +169,9 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 
 #define CheckFade(n) \
    DrawCallI(sm_LX, n)
+
+#define GetFade(n) \
+   DrawCallI(sm_LY, n)
 
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)

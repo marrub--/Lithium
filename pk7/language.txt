@@ -1704,8 +1704,8 @@
 "LITH_RES_TAX" = "Tax";
 "LITH_RES_SUBTOTAL" = "Subtotal";
 "LITH_RES_PAYMENT" = "PAYMENT";
-"LITH_RES_ACCOUNT" = "Primary Account";
-"LITH_RES_CLOSED" = "\c%cTRANSACTION CLOSED";
+"LITH_RES_ACCOUNT" = "Checking Acct.";
+"LITH_RES_CLOSED" = "\c%cTRANSACTION\nCLOSED";
 "LITH_SHOP_CANT_ACTIVATE" = "Activating requires \ca%i\cbPerf\c-.";
 "LITH_SHOP_ACTIVATE_USES" = "Activating will use \ca%i\cbPerf\c-.";
 "LITH_SHOP_DISABLE_SAVES" = "Disabling saves \cn%i\cbPerf\c-.";

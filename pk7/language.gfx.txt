@@ -249,6 +249,7 @@ identifier,default
 :UI:Rank7,lgfx/UI/Rank7.png
 :UI:Rend,lgfx/UI/Rend.png
 :UI:RendSel,lgfx/UI/RendSel.png
+:UI:ResultFrame,lgfx/UI/ResultFrame.png
 :UI:Slot1Spell,lgfx/UI/Slot1Spell.png
 :UI:Slot2Spell,lgfx/UI/Slot2Spell.png
 :UI:Slot3Spell,lgfx/UI/Slot3Spell.png

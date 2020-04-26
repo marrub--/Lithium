@@ -19,27 +19,25 @@
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void P_Scr_Payout(struct player *p)
-{
+void P_Scr_Payout(struct player *p) {
+   Str(sp_resultframe, s":UI:ResultFrame");
+
    enum {
-      begin_total      = 35,
-      begin_tax        = 44,
-      begin_grandtotal = 52,
+      _begin_total      = 35,
+      _begin_tax        = 44,
+      _begin_grandtotal = 52,
    };
 
-#define Left(...) \
+#define Msg(x, xa, font, ...) \
    (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(s_smallfnt, CR_WHITE, 16,1, y,1, fid_result))
+    PrintTextF(font, CR_WHITE, x,xa, y,1, fid_result))
 
-#define Right(...) \
-   (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(s_smallfnt, CR_WHITE, 280,2, y,1, fid_result))
+#define Fram()    PrintSpriteF(sp_resultframe, 14,1, y-1,1, fid_result)
+#define Left(...) Msg(16,  1, s_smallfnt, __VA_ARGS__)
+#define Rght(...) Msg(144, 6, s_smallfnt, __VA_ARGS__)
+#define Head(...) Msg(8,   1, s_bigupper, __VA_ARGS__)
 
-#define Head(...) \
-   (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(s_bigupper, CR_WHITE, 8,1, y,1, fid_result))
-
-#define CountScr(scr) scoresep(i < begin_total ? \
+#define CountScr(scr) scoresep(i < _begin_total ? \
                                lerplk(0, scr, i / 34.0lk) :\
                                scr)
 
@@ -57,6 +55,8 @@ void P_Scr_Payout(struct player *p)
       cstr res = LC(LANG "RES_RESULTS");
 
       SetSize(320, 240);
+
+      PrintRectA(4, 16, 152, 208, 0x000000, GetFade(fid_result) / 2);
       Head(res);
 
       if(CheckFade(fid_result2)) {
@@ -67,52 +67,57 @@ void P_Scr_Payout(struct player *p)
       y += 16;
 
       if(pay.killmax) {
+         Fram();
          Left(LC(LANG "RES_ELIMINATED"), pay.killpct);
-         Right("%s\Cnscr", CountScr(pay.killscr));
+         Rght("%s\Cnscr", CountScr(pay.killscr));
          counting |= pay.killnum;
          y += 9;
       }
 
       if(pay.itemmax) {
+         Fram();
          Left(LC(LANG "RES_ARTIFACTS"), pay.itempct);
-         Right("%s\Cnscr", CountScr(pay.itemscr));
+         Rght("%s\Cnscr", CountScr(pay.itemscr));
          counting |= pay.itemnum;
          y += 9;
       }
 
-      if(i > begin_total) {
+      if(i > _begin_total) {
          y += 7;
          Head(LC(LANG "RES_TOTAL"));
          y += 16;
       }
 
-      if(i > begin_tax) {
+      if(i > _begin_tax) {
+         Fram();
          Left(LC(LANG "RES_TAX"));
-         Right("%s\Cnscr", scoresep(pay.tax));
+         Rght("%s\Cnscr", scoresep(pay.tax));
          y += 9;
       }
 
-      if(i > begin_grandtotal) {
+      if(i > _begin_grandtotal) {
+         Fram();
          Left(LC(LANG "RES_SUBTOTAL"));
-         Right("%s\Cnscr", scoresep(pay.total));
+         Rght("%s\Cnscr", scoresep(pay.total));
          y += 16;
 
          Head(LC(LANG "RES_PAYMENT"));
          y += 16;
 
+         Fram();
          Left(LC(LANG "RES_ACCOUNT"));
-         Right(LC(LANG "RES_CLOSED"), (i % 6) == 0 ? 'n' : '-');
+         Rght(LC(LANG "RES_CLOSED"), (i % 6) < 3 ? 'n' : '-');
       }
 
       if(p->getCVarI(sc_player_resultssound)) {
          if(counting) {
             str snd = snil;
-                 if(i <  begin_total) snd = ss_player_counter;
-            else if(i == begin_total) snd = ss_player_counterdone;
-                 if(snd != snil)      ACS_LocalAmbientSound(snd, 80);
+            /**/ if(i <  _begin_total) snd = ss_player_counter;
+            else if(i == _begin_total) snd = ss_player_counterdone;
+            /**/ if(snd != snil)      ACS_LocalAmbientSound(snd, 80);
          }
 
-         if(i == begin_tax || i == begin_grandtotal)
+         if(i == _begin_tax || i == _begin_grandtotal)
             ACS_LocalAmbientSound(ss_player_counterdone, 80);
       }
 
