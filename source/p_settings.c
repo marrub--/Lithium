@@ -255,8 +255,9 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
          k64 set = p->getCVarK(sc_##cvar), diff; \
          Label(cvar); \
-         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) \
-            p->setCVarK(sc_##cvar, set + diff); \
+         if((diff = G_Slider(g, 280 - gui_p.slddef.w, y, minima, maxima, set, .suf = LC(LANG "ST_PFX_" #s)))) { \
+            p->setCVarK(sc_##cvar, (i32)((set + diff) * 100) / 100.0k); \
+         } \
       } \
       y += 10; \
    } while(0)
