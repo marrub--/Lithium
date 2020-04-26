@@ -163,7 +163,7 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
          (categ == BIPC_MAIL && !get_bit(page->flags, _page_unlocked)))
          continue;
 
-      i32 y = gui_p.btnlist.h * i;
+      i32 y = gui_p.btnlist.h * i++;
 
       if(G_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
@@ -175,8 +175,6 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
 
       if(G_Button_Id(g, i, name, 0, y, lock, Pre(btnlist)))
          SetCurPage(g, p, page);
-
-      i++;
    }
 
    G_ScrollEnd(g, &CBIState(g)->bipscr);
