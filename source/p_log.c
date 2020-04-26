@@ -162,11 +162,8 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p) {
 
 script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy) {
    if(p->getCVarI(sc_hud_showlog)) {
-      i32 yo;
-      i32 xs, ys;
-
-      if(p->getCVarI(sc_hud_logbig)) {yo = 200; xs = 320; ys = 240;}
-      else                           {yo = 255; xs = 480; ys = 300;}
+      k32 scale = p->getCVarK(sc_hud_logsize);
+      i32 yo = 200 / scale, xs = 320 / scale, ys = 240 / scale;
 
       SetSize(xs, ys);
       SetClipW(0, 0, xs, ys, xs);

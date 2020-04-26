@@ -123,7 +123,7 @@ Bool(hud_showlvl);
 Bool(hud_showweapons);
 Bool(hud_showlog);
 Bool(hud_logfromtop);
-Bool(hud_logbig);
+Float(Times, hud_logsize, 0.2, 1.0);
 Bool(hud_showarmorind);
 Enum(hud_expbar, 0, lxb_max-1, "%s", ExpBarName(set));
 

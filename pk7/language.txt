@@ -1630,7 +1630,7 @@
 "LITH_hud_showweapons" = "Show weapons";
 "LITH_hud_showlog" = "Show log";
 "LITH_hud_logfromtop" = "Draw log at the top of the screen";
-"LITH_hud_logbig" = "Large log";
+"LITH_hud_logsize" = "Log size";
 "LITH_hud_showarmorind" = "Draw reactive armor indicator";
 "LITH_hud_expbar" = "Show experience bar";
 "LITH_xhair_r" = "Dynamic crosshair red";

@@ -218,7 +218,7 @@
 == \#hud_showweapons    | Show weapons
 == \#hud_showlog        | Show log
 == \#hud_logfromtop     | Draw log at the top of the screen
-== \#hud_logbig         | Large log
+== \#hud_logsize        | Log size
 == \#hud_showarmorind   | Draw reactive armor indicator
 == \#hud_expbar         | Show experience bar
 == \#xhair_r            | Dynamic crosshair red
