@@ -28,6 +28,9 @@ class Lith_HudMessage ui {
          if(cl && !cl.m_english) {
             fnt = cl.m_utfFont;
          }
+         if(!fnt) {
+            return;
+         }
          Screen.DrawText(fnt, Font.CR_GOLD, x, y, text,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_Alpha,alpha);

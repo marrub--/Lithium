@@ -51,6 +51,7 @@ void Save_EndSave(struct savefile *save)
    Dalloc(save);
 }
 
+script
 i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker)
 {
    rewind(save->fp);
@@ -86,6 +87,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
    return -1;
 }
 
+script
 struct savefile *Save_BeginLoad(struct player *p)
 {
    struct savefile *save = Salloc(struct savefile);
@@ -108,6 +110,7 @@ struct savefile *Save_BeginLoad(struct player *p)
    return nil;
 }
 
+script
 void Save_EndLoad(struct savefile *save)
 {
    fclose(save->fp);
