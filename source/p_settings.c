@@ -49,6 +49,7 @@ Float(Times, gui_ymul, 0.1, 2.0);
 Enum(gui_theme,  0, cbi_theme_max-1, "%s", ThemeName(set));
 Enum(gui_cursor, 0, gui_curs_max-1, "%s", CursorName(set));
 Color(gui_defcr);
+Int(Ticks, gui_buyfiller, 0, 70);
 Enum(gui_jpfont, 0, font_num-1, "%s", JpFontName(set));
 Text(stx_jp_0);
 Text(stx_jp_1);
@@ -151,7 +152,7 @@ if(p->num == 0) {
 }
 
 Category(stx_postgame);
-ServerBool(sv_postgame);
+ServerBool(sv_postgame, .fill = {&CBIState(g)->postgamefill, 35*5});
 Text(stx_postgame_0);
 Text(stx_postgame_1);
 Text(stx_postgame_2);
@@ -161,8 +162,8 @@ Text(stx_postgame_4);
 #undef Bool
 #undef CBox
 #undef Category
-#undef Enum
 #undef Color
+#undef Enum
 #undef Float
 #undef FromUI
 #undef Int
@@ -198,16 +199,16 @@ NameFunc(Theme,  i32,  0,   cbi_theme_max)
 void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
    i32 y = 0;
 
-#define Category(...)    y += 20
 #define Bool(...)        y += 10
 #define CBox(...)        y += 10
+#define Category(...)    y += 20
+#define Color(...)       y += 10
+#define Enum(...)        y += 10
 #define Float(...)       y += 10
 #define Int(...)         y += 10
 #define ServerBool(...)  y += 10
 #define ServerFloat(...) y += 10
 #define ServerInt(...)   y += 10
-#define Enum(...)        y += 10
-#define Color(...)       y += 10
 #define Text(...)        y += 10
 #define FromUI
 #include "p_settings.c"
@@ -273,13 +274,13 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       y += 10; \
    } while(0)
 
-#define ServerBool(cvar) \
+#define ServerBool(cvar, ...) \
    do { \
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
          bool on = ACS_GetCVar(sc_##cvar); \
          Label(cvar); \
          /* TODO */ \
-         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
+         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist), __VA_ARGS__)) \
             ACS_SetCVar(sc_##cvar, !on); \
       } \
       y += 10; \

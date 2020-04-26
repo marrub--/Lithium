@@ -126,7 +126,7 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
 
    ClearClip();
 
-   if(G_Button(g, LC(LANG "BUY"), 259, 170, !P_Shop_CanBuy(p, &item->shopdef, item)))
+   if(G_Button(g, LC(LANG "BUY"), 259, 170, !P_Shop_CanBuy(p, &item->shopdef, item), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
       P_Shop_Buy(p, &item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
 

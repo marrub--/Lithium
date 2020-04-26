@@ -1451,6 +1451,7 @@
 "LITH_ST_PFX_Pixels" = "px";
 "LITH_ST_PFX_Seconds" = "s";
 "LITH_ST_PFX_Units" = "mu";
+"LITH_ST_PFX_Ticks" = "/35th s";
 "LITH_ST_NAME_Unknown" = "Unknown";
 "LITH_ST_NAME_LvSys_0" = "Auto";
 "LITH_ST_NAME_LvSys_1" = "Hybrid";
@@ -1570,6 +1571,8 @@
 "LITH_gui_ymul" = "Vertical cursor speed";
 "LITH_gui_theme" = "Interface theme";
 "LITH_gui_cursor" = "Cursor";
+"LITH_gui_defcr" = "Default text color";
+"LITH_gui_buyfiller" = "Click protection for buying items";
 "LITH_gui_jpfont" = "Japanese font";
 "LITH_stx_jp_0" = "";
 "LITH_stx_jp_1" = "To use Japanese text,";

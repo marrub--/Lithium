@@ -187,4 +187,21 @@ struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon
    return typeon;
 }
 
+bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held) {
+   if(*fill > tics) {
+      *fill = 0;
+      return true;
+   }
+
+   if(held) {
+      *fill += 1;
+   } else if(*fill && ticks % 4 == 0) {
+      *fill -= 1;
+   }
+
+   PrintSprite(StrParam(":UI:Filler%i", (*fill * 8) / tics), x,1, y,0);
+
+   return false;
+}
+
 /* EOF */

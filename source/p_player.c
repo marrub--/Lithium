@@ -407,25 +407,6 @@ script static void P_bossText(struct player *p, i32 boss) {
    }
 }
 
-static
-bool P_filler(struct player *p, i32 x, i32 y, u32 *fill, u32 secs, bool held) {
-   u32 tics = secs * 35;
-
-   if(*fill > tics) {
-      return true;
-   }
-
-   if(held) {
-      *fill += 1;
-   } else if(*fill && ticks % 4 == 0) {
-      *fill -= 1;
-   }
-
-   PrintSprite(StrParam(":UI:Filler%i", (*fill * 8) / tics), x,1, y,0);
-
-   return false;
-}
-
 script static
 void P_doIntro(struct player *p) {
    enum {
@@ -491,10 +472,9 @@ void P_doIntro(struct player *p) {
       PrintTextFmt(LC(LANG "SKIP_INTRO"), use, attack);
       PrintText(s_smallfnt, CR_WHITE, 275,6, 220,0);
 
-      if(P_filler(p, 280, 220, &fill, 2, p->buttons & (BT_USE | BT_ATTACK))) {
+      if(G_Filler(280, 220, &fill, 70, p->buttons & (BT_USE | BT_ATTACK))) {
          if(p->buttons & BT_ATTACK) {
             which++;
-            fill = 0;
             continue;
          } else {
             break;

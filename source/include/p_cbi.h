@@ -20,8 +20,7 @@
 
 /* Type Definitions -------------------------------------------------------- */
 
-enum
-{
+enum {
    cbi_tab_arsenal,
    cbi_tab_status,
    cbi_tab_items,
@@ -29,28 +28,24 @@ enum
    cbi_tab_settings,
 };
 
-enum
-{
+enum {
    cbi_tab_arsenal_upgrades,
    cbi_tab_arsenal_shop,
 };
 
-enum
-{
+enum {
    cbi_tab_stat_attr,
    cbi_tab_stat_cbi,
    cbi_tab_stat_statistics,
 };
 
-enum
-{
+enum {
    cbi_tab_info_bip,
    cbi_tab_info_log,
    cbi_tab_info_notes,
 };
 
-enum
-{
+enum {
    cbi_theme_green,
    cbi_theme_rose,
    cbi_theme_umi,
@@ -64,12 +59,10 @@ enum
    cbi_theme_max
 };
 
-struct cbi
-{
+struct cbi {
    struct gui_state guistate;
 
-   struct cbistate
-   {
+   struct cbistate {
       i32 maintab;
       i32 stattab;
       i32 arsetab;
@@ -95,6 +88,10 @@ struct cbi
       bool           noteedit;
       struct gui_scr notescr;
       struct gui_txt notebox;
+
+      u32 buyfill;
+      u32 itemfill;
+      u32 postgamefill;
    } st;
 
    u32 theme;

@@ -75,8 +75,7 @@
 
 /* Types ------------------------------------------------------------------- */
 
-struct gui_scr
-{
+struct gui_scr {
    i32  ox;
    i32  oy;
    i32  occludeS;
@@ -87,21 +86,23 @@ struct gui_scr
    i32  nextsnd;
 };
 
-struct gui_typ
-{
+struct gui_typ {
    str txt;
    i32 len;
    i32 pos;
 };
 
-struct gui_txt
-{
+struct gui_txt {
    Cps_Decl(txtbuf, 128);
    i32 tbptr;
 };
 
-struct gui_delta
-{
+struct gui_fil {
+   u32 *ptr;
+   u32  tic;
+};
+
+struct gui_delta {
    k64 cx, cy;
 
    bool clicklft;
@@ -109,8 +110,7 @@ struct gui_delta
    bool clickany;
 };
 
-struct gui_state
-{
+struct gui_state {
    anonymous
    struct gui_delta cur;
    struct gui_delta old;
@@ -136,8 +136,7 @@ struct gui_state
    cstr gfxprefix;
 };
 
-struct gui_pre_btn
-{
+struct gui_pre_btn {
    cstr gfx;
    cstr hot;
    cstr cdef;
@@ -153,18 +152,17 @@ struct gui_pre_btn
    bool external;
 };
 
-struct gui_arg_btn
-{
+struct gui_arg_btn {
    cstr label;
    i32  x, y;
    bool disabled;
    cstr color;
    bool slide;
+   struct gui_fil const fill;
    struct gui_pre_btn const *preset;
 };
 
-struct gui_pre_cbx
-{
+struct gui_pre_cbx {
    cstr gfx;
    cstr hot;
    cstr dis;
@@ -181,16 +179,14 @@ struct gui_pre_cbx
    i32  cy;
 };
 
-struct gui_arg_cbx
-{
+struct gui_arg_cbx {
    bool on;
    i32  x, y;
    bool disabled;
    struct gui_pre_cbx const *preset;
 };
 
-struct gui_pre_scr
-{
+struct gui_pre_scr {
    cstr capS;
    cstr capE;
    cstr scrl;
@@ -201,8 +197,7 @@ struct gui_pre_scr
    i32  scrlh;
 };
 
-struct gui_arg_scr
-{
+struct gui_arg_scr {
    struct gui_scr *st;
    i32 x;
    i32 y;
@@ -213,8 +208,7 @@ struct gui_arg_scr
    struct gui_pre_scr const *preset;
 };
 
-struct gui_pre_sld
-{
+struct gui_pre_sld {
    cstr gfx;
    cstr notch;
    cstr notchhot;
@@ -226,8 +220,7 @@ struct gui_pre_sld
    i32  h;
 };
 
-struct gui_arg_sld
-{
+struct gui_arg_sld {
    i32  x;
    i32  y;
    k64  minima;
@@ -238,8 +231,7 @@ struct gui_arg_sld
    struct gui_pre_sld const *preset;
 };
 
-struct gui_arg_txt
-{
+struct gui_arg_txt {
    struct gui_txt *st;
    i32 x, y;
    struct player *p;
@@ -268,8 +260,7 @@ struct gui_presets {
    struct gui_pre_sld slddef;
 };
 
-enum cursor
-{
+enum cursor {
    gui_curs_green,
    gui_curs_pink,
    gui_curs_blue,
@@ -310,6 +301,8 @@ cstr RemoveTextColors    (cstr s, i32 size);
 
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
 struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
+
+bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held);
 
 void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)

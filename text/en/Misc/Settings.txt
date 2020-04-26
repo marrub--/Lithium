@@ -13,6 +13,7 @@
 == \#ST_PFX_Pixels  | px
 == \#ST_PFX_Seconds | s
 == \#ST_PFX_Units   | mu
+== \#ST_PFX_Ticks   | /35th s
 
 == \#ST_NAME_Unknown | Unknown
 
@@ -142,11 +143,13 @@
 
 == \#stx_gui | GUI
 
-== \#gui_xmul   | Horizontal cursor speed
-== \#gui_ymul   | Vertical cursor speed
-== \#gui_theme  | Interface theme
-== \#gui_cursor | Cursor
-== \#gui_jpfont | Japanese font
+== \#gui_xmul      | Horizontal cursor speed
+== \#gui_ymul      | Vertical cursor speed
+== \#gui_theme     | Interface theme
+== \#gui_cursor    | Cursor
+== \#gui_defcr     | Default text color
+== \#gui_buyfiller | Click protection for buying items
+== \#gui_jpfont    | Japanese font
 
 == \#stx_jp_0 |
 == \#stx_jp_1 | To use Japanese text,

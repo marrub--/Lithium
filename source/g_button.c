@@ -49,17 +49,31 @@ bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
    }
 
    if(!a->disabled) {
-      bool click = !g->clicklft;
+      bool click;
 
-      if(g->slide == id) {
+      if(a->fill.ptr && a->fill.tic) {
+         if(g->hot == id && g->active == id) {
+            click =
+               G_Filler(g->cx + 8, g->cy, a->fill.ptr, a->fill.tic, click);
+         } else {
+            if(g->active != id) {
+               *a->fill.ptr = 0;
+            }
+            click = false;
+         }
+      } else if(g->slide == id) {
          click = g->clicklft && !g->old.clicklft;
 
-              if(g->slidecount < 2)  click = click || g->slidetime % 20 == 0;
+              if(g->slidecount <  2) click = click || g->slidetime % 20 == 0;
          else if(g->slidecount < 10) click = click || g->slidetime % 5  == 0;
          else                        click = true;
+      } else {
+         click = !g->clicklft;
       }
 
-      if(g->hot == id && g->active == id && click) {
+      click = g->hot == id && g->active == id && click;
+
+      if(click) {
          if(g->slide == id) g->slidecount++;
          if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
          return true;

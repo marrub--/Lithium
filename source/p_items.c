@@ -426,7 +426,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
          PrintText(s_smallfnt, g->defcr, x_+18,1, y_,1);
       }
 
-      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", Pre(btnclear))) {
+      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", .fill = {&CBIState(g)->itemfill, 26}, Pre(btnclear))) {
          if(sel->scr) P_Scr_Give(p, sel->scr, true);
          if(sel->Destroy) sel->Destroy(sel);
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
