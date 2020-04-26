@@ -293,6 +293,8 @@ player/levelup lsounds/Player/LevelUp
 player/glare lsounds/Player/Glare
 player/lighton lsounds/Player/LightOn
 player/lightoff lsounds/Player/LightOff
+player/startgame lsounds/Player/StartGame
+player/showtext lsounds/Player/ShowText
 $volume player/death2 0.7
 $volume player/nuke 0.7
 $volume player/doublejump 0.7

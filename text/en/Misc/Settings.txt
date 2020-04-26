@@ -166,6 +166,7 @@
 == \#player_rainshader   | Enable rain shader
 == \#player_altinvuln    | Alternate invulnerability palette
 == \#player_bosstexts    | Enable boss dialogues
+== \#stx_done_intro      | Don't play intro on next game start
 
 == \#stx_boss_0 |
 == \#stx_boss_1 | If you are sensitive to suggestion or otherwise

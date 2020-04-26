@@ -91,6 +91,20 @@ script static void Load_agrp(struct savefile *save, struct savechunk *chunk) {
    }
 }
 
+/* Chunk "intr" ------------------------------------------------------------ */
+
+script static void Save_intr(struct savefile *save) {
+   Save_WriteChunk(save, Ident_intr, SaveV_intr, 2);
+   fputc(save->p->done_intro      & 0xFF, save->fp);
+   fputc(save->p->done_intro >> 8 & 0xFF, save->fp);
+}
+
+script static void Load_intr(struct savefile *save, struct savechunk *chunk) {
+   i32 n0 = fgetc(save->fp);
+   i32 n1 = fgetc(save->fp);
+   save->p->done_intro = n0 | n1 << 8;
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_Data_Save(struct player *p) {
@@ -99,6 +113,7 @@ script void P_Data_Save(struct player *p) {
    if((save = Save_BeginSave(p))) {
       Save_note(save);
       Save_agrp(save);
+      Save_intr(save);
       Save_EndSave(save);
    }
 }
@@ -109,6 +124,7 @@ script void P_Data_Load(struct player *p) {
    if((save = Save_BeginLoad(p))) {
       Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
       Save_ReadChunk(save, Ident_agrp, SaveV_agrp, Load_agrp);
+      Save_ReadChunk(save, Ident_intr, SaveV_intr, Load_intr);
       Save_EndLoad(save);
    }
 }

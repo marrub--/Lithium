@@ -7,6 +7,7 @@ identifier,default
 :BIP:Omakeda,lgfx/BIP/Omakeda.png
 :BIP:Semaphore,lgfx/BIP/Semaphore.png
 :BIP:Sym43,lgfx/BIP/Sym43.png
+:Black,lgfx/Black.png
 :Dialogue:Back,lgfx/Dialogue/Back.png
 :Dialogue:IconAOF,lgfx/Dialogue/IconAOF.png
 :Dialogue:IconMaxie,lgfx/Dialogue/IconMaxie.png
@@ -202,6 +203,15 @@ identifier,default
 :UI:ExpBar9,lgfx/UI/ExpBar9.png
 :UI:Feuer,lgfx/UI/Feuer.png
 :UI:FeuerSel,lgfx/UI/FeuerSel.png
+:UI:Filler0,lgfx/UI/Filler0.png
+:UI:Filler1,lgfx/UI/Filler1.png
+:UI:Filler2,lgfx/UI/Filler2.png
+:UI:Filler3,lgfx/UI/Filler3.png
+:UI:Filler4,lgfx/UI/Filler4.png
+:UI:Filler5,lgfx/UI/Filler5.png
+:UI:Filler6,lgfx/UI/Filler6.png
+:UI:Filler7,lgfx/UI/Filler7.png
+:UI:Filler8,lgfx/UI/Filler8.png
 :UI:Group1,lgfx/UI/Group1.png
 :UI:Group2,lgfx/UI/Group2.png
 :UI:Group3,lgfx/UI/Group3.png

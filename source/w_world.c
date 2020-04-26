@@ -326,6 +326,7 @@ begin:
    }
 
    if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
+      Str(toggleconsole, s"toggleconsole");
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
           "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
@@ -344,7 +345,7 @@ begin:
           "\n\n\n\n\n\n"
           "Invalid settings detected. Please open the console"
           "(\"%jS\" or options menu) for more information.",
-          s"toggleconsole");
+          toggleconsole);
       ACS_Delay(10);
    }
 

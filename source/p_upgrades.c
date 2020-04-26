@@ -118,7 +118,7 @@ void P_Upg_PMInit(struct player *p) {
 }
 
 script void P_Upg_PTick(struct player *p) {
-   if(p->dlg.active) {
+   if(p->dlg.active || p->doing_intro) {
       p->hudenabled = false;
    } else {
       p->hudenabled = false;

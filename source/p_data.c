@@ -69,6 +69,7 @@ static void SetPClass(struct player *p)
    }
 
    p->discrim = P_Discrim(p->pclass);
+   p->color   = P_Color(p->pclass);
 }
 
 /* Extern Functions -------------------------------------------------------- */

@@ -36,6 +36,10 @@
 #define Ident_agrp FourCC('a', 'g', 'r', 'p')
 #define SaveV_agrp 0
 
+/* intr: Intros. */
+#define Ident_intr FourCC('i', 'n', 't', 'r')
+#define SaveV_intr 0
+
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00
 #define Save_FlagShft 8

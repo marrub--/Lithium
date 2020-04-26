@@ -26,8 +26,9 @@ noinit struct player players[_max_players];
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void P_BossWarning(struct player *p);
-script static void P_BossText(struct player *p, i32 boss);
+script static void P_bossWarning(struct player *p);
+script static void P_bossText(struct player *p, i32 boss);
+script static void P_doIntro(struct player *p);
 
 /* Scripts ----------------------------------------------------------------- */
 
@@ -41,7 +42,7 @@ static void Sc_PlayerEntry(void) {
    script extern void P_Log_PTick   (struct player *p);
    script extern void P_Upg_PTick   (struct player *p);
    script extern void P_Wep_PTick   (struct player *p);
-          static void P_Atr_PTick   (struct player *p);
+          static void P_Atr_pTick   (struct player *p);
    script extern void P_Upg_PTickPst(struct player *p);
           extern void P_Ren_PTickPst(struct player *p);
           static void P_Aug_PTick   (struct player *p);
@@ -58,9 +59,11 @@ reinit:
    P_Upg_Enter(p);
    P_Data_Load(p);
 
-   P_BossWarning(p);
+   P_doIntro(p);
 
-   P_BossText(p, ServCallI(sm_GetBossLevel));
+   P_bossWarning(p);
+
+   P_bossText(p, ServCallI(sm_GetBossLevel));
 
    if(p->teleportedout) P_TeleportInAsync(p);
 
@@ -87,15 +90,14 @@ reinit:
       if(!p->dead) P_Upg_PTick(p);
       P_Upg_PTickPst(p);
 
-      if(!p->dead)
-      {
+      if(!p->dead) {
          P_Inv_PTick(p);
 
          if(p->cbion) P_CBI_PTick(p);
 
          P_Aug_PTick(p);
 
-         P_Atr_PTick(p);
+         P_Atr_pTick(p);
          P_Wep_PTick(p);
          P_Log_PTick(p);
 
@@ -168,7 +170,9 @@ static void Sc_PlayerDeath(void) {
 
       while(p->dead) {
          ACS_Delay(35 * 5);
-         Log("%S", Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         ACS_BeginPrint();
+         ACS_PrintString(Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         ACS_EndLog();
       }
    }
 }
@@ -207,6 +211,19 @@ cstr P_Discrim(i32 pclass) {
    case pcl_thoth:     return "Kiri";
    }
    return "Mod";
+}
+
+i32 P_Color(i32 pclass) {
+   switch(pclass) {
+   case pcl_marine:    return Cr(green);
+   case pcl_cybermage: return Cr(red);
+   case pcl_informant: return Cr(purple);
+   case pcl_wanderer:  return Cr(yellow);
+   case pcl_assassin:  return Cr(pink);
+   case pcl_darklord:  return Cr(blue);
+   case pcl_thoth:     return Cr(grey);
+   }
+   return CR_WHITE;
 }
 
 struct player *P_PtrFind(i32 tid, i32 ptr) {
@@ -317,14 +334,14 @@ script void P_GiveAllEXP(u64 amt) {
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void P_BossWarning(struct player *p) {
+script static void P_bossWarning(struct player *p) {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 
-script static void P_BossText(struct player *p, i32 boss) {
+script static void P_bossText(struct player *p, i32 boss) {
    if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
       return;
    }
@@ -390,7 +407,151 @@ script static void P_BossText(struct player *p, i32 boss) {
    }
 }
 
-static void AttrRGE(struct player *p) {
+static
+bool P_filler(struct player *p, i32 x, i32 y, u32 *fill, u32 secs, bool held) {
+   u32 tics = secs * 35;
+
+   if(*fill > tics) {
+      return true;
+   }
+
+   if(held) {
+      *fill += 1;
+   } else if(*fill && ticks % 4 == 0) {
+      *fill -= 1;
+   }
+
+   PrintSprite(StrParam(":UI:Filler%i", (*fill * 8) / tics), x,1, y,0);
+
+   return false;
+}
+
+script static
+void P_doIntro(struct player *p) {
+   enum {
+      _nlines   = 26,
+      _out_tics = 35 * 2,
+   };
+
+   Str(use,       s"+use");
+   Str(attack,    s"+attack");
+   Str(startgame, s"player/startgame");
+   Str(showtext,  s"player/showtext");
+
+   if(mapscleared != 0 || p->done_intro & p->pclass) return;
+
+   p->done_intro |= p->pclass;
+   P_Data_Save(p);
+
+   p->doing_intro = true;
+   FreezeTime(false);
+   ACS_FadeTo(0, 0, 0, 1.0, 0.0);
+
+   char *text = Malloc(8192);
+
+   char *lines[_nlines];
+   u32   linec[_nlines];
+   u32   linen[_nlines];
+
+   u32 which = 1;
+   u32 last  = 0;
+   u32 fill  = 0;
+
+   for(;;) {
+      if(which != last) {
+         last = which;
+
+         ifauto(str, texts,
+                LanguageNull(LANG "BEGINNING_%s_%u", p->discrim, which)) {
+            lstrcpy_str(text, texts);
+         } else {
+            break;
+         }
+
+         ACS_LocalAmbientSound(showtext, 127);
+
+         char *line = strtok(text, "\n");
+         for(i32 i = 0; i < _nlines; i++) {
+            lines[i] = nil;
+            linec[i] = 0;
+            linen[i] = 0;
+
+            if(text) {
+               if(*text) {
+                  lines[i] = line;
+                  linec[i] = strlen(line);
+               }
+
+               line = strtok(nil, "\n");
+            }
+         }
+      }
+
+      PrintTextFmt(LC(LANG "SKIP_INTRO"), use, attack);
+      PrintText(s_smallfnt, CR_WHITE, 275,6, 220,0);
+
+      if(P_filler(p, 280, 220, &fill, 2, p->buttons & (BT_USE | BT_ATTACK))) {
+         if(p->buttons & BT_ATTACK) {
+            which++;
+            fill = 0;
+            continue;
+         } else {
+            break;
+         }
+      }
+
+      for(i32 i = 0; i < _nlines; i++) {
+         if(!lines[i]) continue;
+
+         if(linen[i] < linec[i]) {
+            linen[i]++;
+         }
+
+         if(lines[i][0] != '~') {
+            PrintTextChr(lines[i], linen[i]);
+            PrintText(s_smallfnt, p->color, 0,1, 8 * i,1);
+         }
+      }
+
+      ACS_Delay(1);
+   }
+
+   UnfreezeTime(false);
+
+   ACS_LocalAmbientSound(startgame, 127);
+   ACS_FadeTo(0, 0, 0, 0.0, 2.0);
+
+   for(i32 j = 0; j < _out_tics; j++) {
+      k32 alpha = (_out_tics - j) / (k32)_out_tics;
+
+      for(i32 i = 0; i < _nlines; i++) {
+         if(!lines[i]) continue;
+
+         if(lines[i][0] != '~') {
+            PrintTextChr(lines[i], linen[i]);
+            PrintTextA(s_smallfnt, p->color, 0,1, 8 * i,1, alpha);
+         }
+
+         for(i32 k = 0; k < linen[i]; k++) {
+            if(ACS_Random(0, 100) < 1) {
+               lines[i][k] = ACS_Random('!', '}');
+            }
+         }
+
+         if(linen[i]) {
+            linen[i]--;
+         }
+      }
+
+      ACS_Delay(1);
+   }
+
+   Dalloc(text);
+
+   p->doing_intro = false;
+}
+
+static void P_attrRGE(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->health < p->oldhealth)
@@ -399,7 +560,7 @@ static void AttrRGE(struct player *p) {
    p->rage = lerpk(p->rage, 0, 0.02);
 }
 
-static void AttrCON(struct player *p) {
+static void P_attrCON(struct player *p) {
    i32 rge = p->attr.attrs[at_spc];
 
    if(p->mana > p->oldmana)
@@ -408,7 +569,7 @@ static void AttrCON(struct player *p) {
    p->rage = lerpk(p->rage, 0, 0.03);
 }
 
-static void P_Atr_PTick(struct player *p) {
+static void P_Atr_pTick(struct player *p) {
    if(Paused) return;
 
    k32  acc = p->attr.attrs[at_acc] / 150.0;
@@ -418,8 +579,8 @@ static void P_Atr_PTick(struct player *p) {
    i32 stmt = 75 - stm;
 
    switch(p->pclass) {
-      case pcl_marine:    AttrRGE(p); break;
-      case pcl_cybermage: AttrCON(p); break;
+      case pcl_marine:    P_attrRGE(p); break;
+      case pcl_cybermage: P_attrCON(p); break;
    }
 
    p->maxhealth = p->spawnhealth + strn;

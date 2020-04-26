@@ -32,6 +32,8 @@ player {
    glare        Glare               # Monster Girl Quest
    lighton      LightOn             # Phantasy Star Online
    lightoff     LightOff            # //
+   startgame    StartGame           # //
+   showtext     ShowText            # //
 
    $volume death2 0.7
    $volume nuke 0.7

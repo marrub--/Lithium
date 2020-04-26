@@ -19,6 +19,8 @@ enum {
 #if defined(FromUI)
 #define GetAutoBuy(n)  get_bit(p->autobuy, n)
 #define TogAutoBuy(n) (tog_bit(p->autobuy, n), P_Data_Save(p))
+#define GetDoneIntro  p->done_intro  & p->pclass
+#define TogDoneIntro (p->done_intro ^= p->pclass, P_Data_Save(p))
 
 Category(stx_gameplay);
 Enum(player_lvsys, atsys_auto, atsys_manual, "%s", LvSysName(set));
@@ -64,6 +66,7 @@ Bool(player_resultssound);
 Bool(player_invertmouse);
 Bool(player_rainshader);
 Bool(player_altinvuln);
+CBox(stx_done_intro, GetDoneIntro, TogDoneIntro);
 Bool(player_bosstexts);
 Text(stx_boss_0);
 Text(stx_boss_1);

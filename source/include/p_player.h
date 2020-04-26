@@ -78,6 +78,7 @@ script void P_GiveAllScore(i96 score, bool nomul);
 script void P_GiveAllEXP(u64 amt);
 void P_Lv_GiveEXP(struct player *p, u64 amt);
 cstr P_Discrim(i32 pclass);
+i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(struct player *p);
 struct player *P_PtrFind(i32 tid, i32 ptr);
 
@@ -196,6 +197,7 @@ struct player
    str pcstr;
    i32 pronoun;
    cstr discrim;
+   i32 color;
    str advice;
 
    /* Deltas */
@@ -247,6 +249,8 @@ struct player
    bool hadinfrared;
 
    bool teleportedout;
+   u32  done_intro;
+   bool doing_intro;
 
    /* Input */
    char txtbuf[8];

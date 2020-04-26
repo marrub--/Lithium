@@ -6,6 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+!!include Misc/Beginning.txt
 !!include Misc/Changes.txt
 !!include Misc/Markers.txt
 !!include Misc/QuitMessages.txt

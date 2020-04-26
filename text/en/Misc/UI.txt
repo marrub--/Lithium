@@ -55,6 +55,11 @@
 == \#TAB_UPGRADES | Upgrades
 == \#TAB_SHOP     | Shop
 
+%% \#SKIP_INTRO
+Hold %jS to skip this intro.
+It will not show up again.
+Hold %jS to continue.
+
 ## Results -------------------------------------------------------------------|
 == \#RES_RESULTS    | RESULTS
 == \#RES_ELIMINATED | ELIMINATED %.1lk%%
