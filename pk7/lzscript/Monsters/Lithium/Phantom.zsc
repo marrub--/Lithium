@@ -9,10 +9,8 @@
 
 class Lith_IsPhantom : Inventory {default {Inventory.MaxAmount 1;}}
 
-class Lith_PhantomTeleportFX : Actor
-{
-   default
-   {
+class Lith_PhantomTeleportFX : Actor {
+   default {
       Alpha        0.8;
       RenderStyle  "Stencil";
       StencilColor "Black";
@@ -20,8 +18,7 @@ class Lith_PhantomTeleportFX : Actor
       +NOINTERACTION
    }
 
-   states
-   {
+   states {
    Spawn:
       #### # 3;
       #### # 1 A_FadeOut;
@@ -29,10 +26,8 @@ class Lith_PhantomTeleportFX : Actor
    }
 }
 
-class Lith_PhantomAuraFX : Actor
-{
-   default
-   {
+class Lith_PhantomAuraFX : Actor {
+   default {
       Alpha       0.8;
       RenderStyle "Subtract";
       Scale       0.1;
@@ -41,21 +36,18 @@ class Lith_PhantomAuraFX : Actor
       +NOINTERACTION
    }
 
-   states
-   {
+   states {
    Spawn:
       LDTH A 1 A_FadeOut(0.01);
       wait;
    }
 }
 
-class Lith_BasicPhantom : Lith_Phantom
-{
+class Lith_BasicPhantom : Lith_Phantom {
    override void Lith_PostInit() {}
    override void Lith_OnDeath () {}
 
-   override void Tick()
-   {
+   override void Tick() {
       if(Level.TotalTime % 10 == 0)
          Lith_EmitAura();
 
@@ -68,8 +60,7 @@ class Lith_BasicPhantom : Lith_Phantom
 
 class Lith_Phantom : Lith_Monster;
 
-default
-{
+default {
    Height       56;
    Mass         1000;
    Radius       20;
@@ -93,47 +84,42 @@ int m_MeleeTime;
 
 private int m_Step;
 
-virtual void Lith_PostInit()
-{
+virtual void Lith_PostInit() {
    CallACS("Lith_PhantomSound");
    A_StartSound("enemies/phantom/aura", lch_body2, CHANF_LOOP, 0.7, 0.7);
 }
 
-virtual void Lith_OnDeath()
-{
+virtual void Lith_OnDeath() {
    CallACS("Lith_PhantomDeath");
 }
 
-void Lith_EmitAura()
-{
+void Lith_EmitAura() {
    for(int i = 0; i < 8; i++)
       A_SpawnItemEx("Lith_PhantomAuraFX", frandom(-20,20),frandom(-20,20),frandom(0,32), 0,0,frandom(0.4,1.8), 0, 0, 128);
 }
 
-override void Tick()
-{
-   if(health > 0)
-   {
+override void Tick() {
+   if(!isFrozen() && health > 0) {
       if(target && target.player && !CheckIfTargetInLOS())
          target = null;
 
-      if(!target)
-         for(let it = BlockThingsIterator.Create(self, 1024); it.next();)
-      {
-         let mo = it.thing;
-         if(mo && (mo.bISMONSTER && mo.bCOUNTKILL || mo.player) &&
-            !mo.countInv("Lith_IsPhantom") && checkSight(mo))
-         {
-            target = it.thing;
-            SetState(ResolveState("See"));
-            break;
+      if(!target) {
+         for(let it = BlockThingsIterator.Create(self, 1024); it.next();) {
+            let mo = it.thing;
+            if(mo && (mo.bISMONSTER && mo.bCOUNTKILL || mo.player) &&
+               !mo.countInv("Lith_IsPhantom") && checkSight(mo))
+            {
+               target = it.thing;
+               SetState(ResolveState("See"));
+               break;
+            }
          }
       }
 
       if(Level.TotalTime % 5 == 0)
          Lith_EmitAura();
 
-      if(!isFrozen() && m_MeleeTime)
+      if(m_MeleeTime)
          m_MeleeTime--;
    }
 
