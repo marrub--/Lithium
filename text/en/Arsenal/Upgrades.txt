@@ -383,4 +383,10 @@ UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 @@ \#UPGRADE_EFFEC_InstaDeath
 Upon losing health, you instantly die.
 
+## ---------------------------------------------------------------------------|
+== \#UPGRADE_TITLE_OneShot | One Shot
+@@ \#UPGRADE_EFFEC_OneShot
+Firing any gun with a magazine will immediately unload it completely.
+Hope you like reload animations!
+
 ## EOF

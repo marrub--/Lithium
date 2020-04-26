@@ -134,6 +134,8 @@
 "LITH_UPGRADE_EFFEC_UNCEUNCE" = "UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE\n\n\cgEpilepsy warning! Don't use if you are prone to seizures.";
 "LITH_UPGRADE_TITLE_InstaDeath" = "Instant Death";
 "LITH_UPGRADE_EFFEC_InstaDeath" = "Upon losing health, you instantly die.";
+"LITH_UPGRADE_TITLE_OneShot" = "One Shot";
+"LITH_UPGRADE_EFFEC_OneShot" = "Firing any gun with a magazine will immediately unload it completely. Hope you like reload animations!";
 "LITH_PAGE_M1A1_01_C_01" = "\cdApologies for the abrupt stop, this ship hasn't run the faster than light engine enough times. We didn't collide with the planet, so I'm not very worried about its future performance, now.\n\n\cdWe have arrived at \cnNisiv 16\cd; the \cforange\cd planet, if you look out the window, is \cnNanto\cd. Your objective is somewhere there.";
 "LITH_PAGE_M1A1_01_C_02" = "\cdUnfortunately, that will have to wait. The ship has been boarded by demons. The assailants appear to be scouts for a bigger plan, so as to say, they're going to come back and kill us now that they know the ship's layout.\n\n\cdSo, before we go on to your mission on \cnNanto\cd, I need you to transfer me onto a backup device. I'll plan an escape for you as soon as I can, but this ship is going to go down along with those options. It'll take some time.";
 "LITH_PAGE_M1A1_01_C_03" = "\cdWhile you do that, I'll be showing the demons to my \cnbeautiful\cd defense system. Thank you, by the way, for cleaning out the turrets. Wonderful machines, those.";
