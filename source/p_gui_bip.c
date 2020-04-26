@@ -21,25 +21,20 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static cstr EncryptedBody(struct page *p) {
-   char *s = LanguageC(LANG "INFO_DESCR_%s", p->info->name);
+static void EncryptedBody(struct page *p, char *bodytext) {
+   char *s = LanguageCV(bodytext, LANG "INFO_DESCR_%s", p->info->name);
    for(; *s; s++) *s = !IsPrint(*s) ? *s : *s ^ 7;
-   return s;
 }
 
-static cstr MailBody(struct page *p) {
-   noinit static char body[8192];
-
+static void MailBody(struct page *p, char *bodytext) {
    char remote[64];
    strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", p->info->name));
 
    cstr sent = CanonTime(ct_full, p->flags & _page_time);
 
-   sprintf(body, LanguageC(LANG "MAIL_TEMPLATE"), remote, sent);
-   strcat(body, "\n\n");
-   strcat(body, LanguageC(LANG "INFO_DESCR_%s", p->info->name));
-
-   return body;
+   sprintf(bodytext, LanguageC(LANG "MAIL_TEMPLATE"), remote, sent);
+   strcat(bodytext, "\n\n");
+   strcat(bodytext, LanguageC(LANG "INFO_DESCR_%s", p->info->name));
 }
 
 static cstr GetShortName(struct page *p) {
@@ -55,11 +50,20 @@ static cstr GetFullName(struct page *p) {
 }
 
 static cstr GetBody(struct page *p) {
+   noinit
+   static char bodytext[8192];
    switch(p->info->category) {
-      case BIPC_EXTRA: return EncryptedBody(p);
-      case BIPC_MAIL:  return      MailBody(p);
+   case BIPC_EXTRA:
+      EncryptedBody(p, bodytext);
+      break;
+   case BIPC_MAIL:
+      MailBody(p, bodytext);
+      break;
+   default:
+      LanguageCV(bodytext, LANG "INFO_DESCR_%s", p->info->name);
+      break;
    }
-   return LanguageC(LANG "INFO_DESCR_%s", p->info->name);
+   return bodytext;
 }
 
 static void SetCurPage(struct gui_state *g, struct player *p, struct page *page) {
