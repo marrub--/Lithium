@@ -1702,6 +1702,7 @@
 "LITH_TAB_UPGRADES" = "Upgrades";
 "LITH_TAB_SHOP" = "Shop";
 "LITH_SKIP_INTRO" = "Hold %jS to skip this intro.\nIt will not show up again.\nHold %jS to continue.";
+"LITH_BEGIN" = "[Press any key to begin]";
 "LITH_RES_RESULTS" = "RESULTS";
 "LITH_RES_KILL" = "ELIMINATED %.1lk%%";
 "LITH_RES_ITEM" = "ARTIFACTS %.1lk%%";

@@ -405,7 +405,6 @@ X(ss_weapons_rocket_mark,      "weapons/rocket/mark")
 X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 
 /* Text */
-X(st_begin,           "\Cd[Press any key to begin]") /* TODO */
 X(st_bip_header,      "BIOTIC INFORMATION PANEL ver2.5") /* TODO */
 X(st_edit,            LANG "EDIT")
 X(st_exp,             "EXP")

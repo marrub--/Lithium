@@ -60,6 +60,8 @@ Hold %jS to skip this intro.
 It will not show up again.
 Hold %jS to continue.
 
+== \#BEGIN | [Press any key to begin]
+
 ## Results -------------------------------------------------------------------|
 == \#RES_RESULTS  | RESULTS
 == \#RES_KILL     | ELIMINATED %.1lk%%

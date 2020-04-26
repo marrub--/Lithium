@@ -15,7 +15,7 @@
 
 struct globalcolors globalcolors;
 
-void Draw_GInit(void) {
+void Draw_Init(void) {
    #define GlobalCr(name) \
       Str(name, sOBJ #name); \
       globalcolors.name = ServCallI(sm_FindFontColor, name);

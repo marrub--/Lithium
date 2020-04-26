@@ -164,12 +164,10 @@ static void MInitPre(void)
 
 static void GInit(void)
 {
-   extern void Draw_GInit(void);
    extern void Wep_GInit(void);
 
    Dbg_Log(log_dev, "%s", __func__);
 
-   Draw_GInit();
    Wep_GInit();
 
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
@@ -317,6 +315,10 @@ begin:
     * we can still detect it by using Timer, so correct this variable.
     */
    if(hubinit && ACS_Timer() < 2) hubinit = false;
+
+   extern void Draw_Init(void);
+
+   Draw_Init();
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
       script extern void W_Title(void);

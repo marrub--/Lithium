@@ -15,19 +15,16 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void Blinker(void)
-{
+static void Blinker(cstr bgn) {
    static i32 const time = 20;
    static k32 a;
    static i32 t;
 
-   if(t < time)
-   {
-      PrintTextA_str(st_begin, s_smallfnt, 0, 160,0, 220,0, a);
+   if(t < time) {
+      PrintTextChS(bgn);
+      PrintTextA(s_smallfnt, Cr(green), 160,0, 220,0, a);
       a += 0.006;
-   }
-   else if(t >= time*2)
-   {
+   } else if(t >= time*2) {
       t = 0;
       a += 0.004;
    }
@@ -40,8 +37,7 @@ static void Blinker(void)
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void W_Title(void)
-{
+void W_Title(void) {
    DrawCallI(sm_ForceDraw, true);
 
    ACS_Delay(35*5);
@@ -49,13 +45,17 @@ void W_Title(void)
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   cstr txt = LC(LANG "OPENER");
+   char txt[4096];
+   char bgn[128];
+   LanguageCV(txt, LANG "OPENER");
+   LanguageCV(bgn, LANG "BEGIN");
+
    i32 len = strlen(txt);
 
    for(i32 t = 0, pos = 0;;)
    {
-      PrintTextFmt("\Cd%.*s", pos, txt);
-      PrintText(s_smallfnt, 0, 7,1, 6,1);
+      PrintTextChr(txt, pos);
+      PrintText(s_smallfnt, Cr(green), 7,1, 6,1);
 
       if(t == 0)
       {
@@ -69,32 +69,32 @@ void W_Title(void)
       else
          t--;
 
-      Blinker();
+      Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
    }
 
    for(i32 i = 0; i < 35 * 7; i++)
    {
-      PrintTextFmt("\Cd%s", txt);
-      PrintText(s_smallfnt, 0, 7,1, 6,1);
-      Blinker();
+      PrintTextChS(txt);
+      PrintText(s_smallfnt, Cr(green), 7,1, 6,1);
+      Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
    }
 
    for(k32 a = 1; a > 0; a -= 0.01)
    {
-      PrintTextFmt("\Cd%s", txt);
-      PrintTextA(s_smallfnt, 0, 7,1, 6,1, a);
-      Blinker();
+      PrintTextChS(txt);
+      PrintTextA(s_smallfnt, Cr(green), 7,1, 6,1, a);
+      Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
    }
 
    for(;;)
    {
-      Blinker();
+      Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
    }
