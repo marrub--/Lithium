@@ -31,9 +31,9 @@ void Scr_HInit(void) {
 #undef GenPay
 
    if(ticks <= payout.par)    payout.activities.par     = 10000;
-   if(payout.killpct == 100)  payout.activities.kill100 = 10000;
-   if(payout.itempct == 100)  payout.activities.item100 = 5000;
-   if(payout.scrtpct == 100)  payout.activities.scrt100 = 15000;
+   if(payout.killpct >= 100)  payout.activities.kill100 = 10000;
+   if(payout.itempct >= 100)  payout.activities.item100 = 5000;
+   if(payout.scrtpct >= 100)  payout.activities.scrt100 = 15000;
    if(ACS_Random(0, 10) == 0) payout.activities.sponsor = ACS_Random(1, 3) * 5000;
 
    payout.total  = payout.killscr + payout.itemscr;
