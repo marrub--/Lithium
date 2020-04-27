@@ -22,8 +22,7 @@ void Upgr_UNCEUNCE_Activate(struct player *p, struct upgrade *upgr)
 
 void Upgr_UNCEUNCE_Deactivate(struct player *p, struct upgrade *upgr)
 {
-   Str(original, s"*");
-   ACS_SetMusic(original);
+   ACS_SetMusic(sp_star);
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 

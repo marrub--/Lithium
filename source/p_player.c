@@ -421,10 +421,8 @@ void P_doIntro(struct player *p) {
 
    if(mapscleared != 0 || p->done_intro & p->pclass) return;
 
-   p->done_intro |= p->pclass;
-   P_Data_Save(p);
-
    p->doing_intro = true;
+   ACS_SetMusic(sp_lsounds_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 
@@ -530,6 +528,11 @@ void P_doIntro(struct player *p) {
    }
 
    Dalloc(text);
+
+   ACS_SetMusic(sp_star);
+
+   p->done_intro |= p->pclass;
+   P_Data_Save(p);
 
    p->doing_intro = false;
 }
