@@ -14,7 +14,7 @@
 #include "u_common.h"
 
 #define UData p->upgrdata.adrenaline
-#define CHARGE_MAX (35 * 1)
+#define CHARGE_MAX (35 * 30)
 
 /* Extern Functions -------------------------------------------------------- */
 
