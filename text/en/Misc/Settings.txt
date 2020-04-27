@@ -201,6 +201,7 @@
 == \#weapons_recoil         | Visual recoil amount
 == \#weapons_reloadbob      | Reload bobbing amount
 == \#weapons_slot3ammo      | Slot 3 weapons take ammo
+== \#weapons_reducedsg      | Reduced shotgun sound
 == \#weapons_riflescope     | Modal Rifle scope
 == \#weapons_riflemodeclear | Clear rifle mode on switch
 == \#weapons_magicselanims  | Magic selection animations
@@ -212,7 +213,7 @@
 == \#weapons_reloadempty    | Reload weapons automatically
 == \#weapons_nofirebob      | No mid-fire bobbing
 == \#weapons_rainbowlaser   | Rainbow lasers
-== \#weapons_fastlazshot    | Better lazer shotgun performance
+== \#weapons_fastlazshot    | Better laser shotgun performance
 
 == \#stx_hud | Heads Up Display
 

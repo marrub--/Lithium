@@ -55,6 +55,7 @@ server float lith_weapons_ricochetvol    = 1.0;
 server bool  lith_weapons_reloadempty    = true;
 server bool  lith_weapons_nofirebob      = false;
 server bool  lith_weapons_fastlazshot    = false;
+user   bool  lith_weapons_reducedsg      = false;
 
 user float lith_gui_xmul      = 1.0;
 user float lith_gui_ymul      = 1.0;

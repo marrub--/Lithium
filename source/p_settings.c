@@ -99,6 +99,7 @@ Float(Times, weapons_recoil, 0.0, 1.0);
 Float(Times, weapons_reloadbob, 0.0, 1.0);
 Bool(weapons_slot3ammo);
 if(p->pclass == pcl_marine) {
+   Bool(weapons_reducedsg);
    Bool(weapons_riflescope);
    Bool(weapons_riflemodeclear);
 } else if(p->pclass == pcl_cybermage) {

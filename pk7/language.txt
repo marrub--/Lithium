@@ -1615,6 +1615,7 @@
 "LITH_weapons_recoil" = "Visual recoil amount";
 "LITH_weapons_reloadbob" = "Reload bobbing amount";
 "LITH_weapons_slot3ammo" = "Slot 3 weapons take ammo";
+"LITH_weapons_reducedsg" = "Reduced shotgun sound";
 "LITH_weapons_riflescope" = "Modal Rifle scope";
 "LITH_weapons_riflemodeclear" = "Clear rifle mode on switch";
 "LITH_weapons_magicselanims" = "Magic selection animations";
@@ -1626,7 +1627,7 @@
 "LITH_weapons_reloadempty" = "Reload weapons automatically";
 "LITH_weapons_nofirebob" = "No mid-fire bobbing";
 "LITH_weapons_rainbowlaser" = "Rainbow lasers";
-"LITH_weapons_fastlazshot" = "Better lazer shotgun performance";
+"LITH_weapons_fastlazshot" = "Better laser shotgun performance";
 "LITH_stx_hud" = "Heads Up Display";
 "LITH_hud_showscore" = "Show score";
 "LITH_hud_showlvl" = "Show level";

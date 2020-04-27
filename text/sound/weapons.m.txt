@@ -47,6 +47,7 @@ weapons {
    shotgun {
       == lsounds/WeaponsM/Shotgun
       fire    FireFull  # Killing Floor, General 6000
+      fire2   FireFull2 # //
       open    PumpOpen  # General 6000
       close   PumpClose # //
       zoomin  ScopeIn   # Halo 3, EYE: Divine Cybermancy

@@ -651,6 +651,7 @@ weapons/revolver/draw lsounds/WeaponsM/Revolver/Draw
 weapons/revolver/pickup lsounds/WeaponsM/Revolver/Pickup
 weapons/revolver/reload lsounds/WeaponsM/Revolver/Reload
 weapons/shotgun/fire lsounds/WeaponsM/Shotgun/FireFull
+weapons/shotgun/fire2 lsounds/WeaponsM/Shotgun/FireFull2
 weapons/shotgun/open lsounds/WeaponsM/Shotgun/PumpOpen
 weapons/shotgun/close lsounds/WeaponsM/Shotgun/PumpClose
 weapons/shotgun/zoomin lsounds/WeaponsM/Shotgun/ScopeIn

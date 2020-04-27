@@ -21,8 +21,7 @@ cstr upgrcateg[] = {
    [UC_Down] = LANG "CAT_DOWN",
 };
 
-static void GUIUpgradesList(struct gui_state *g, struct player *p)
-{
+static void GUIUpgradesList(struct gui_state *g, struct player *p) {
    if(G_Button(g, .x = 90, 213, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
@@ -108,8 +107,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
    G_ScrollEnd(g, &CBIState(g)->upgrscr);
 }
 
-static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct upgrade *upgr)
-{
+static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct upgrade *upgr) {
    i32 y = 0;
 
    #define Req(name) { \
@@ -121,17 +119,16 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       y -= 10; \
    }
 
-   if(RequiresButDontHave_AI)  Req("CBI_ArmorInter")
-   if(RequiresButDontHave_WMD) Req("CBI_WeapnInter")
-   if(RequiresButDontHave_WRD) Req("CBI_WeapnInte2")
-   if(RequiresButDontHave_RDI) Req("CBI_RDistInter")
-   if(RequiresButDontHave_RA)  Req("CBI_ReactArmor")
+   if(RequiresButDontHave_AI)  Req("CBI_ArmorInter");
+   if(RequiresButDontHave_WMD) Req("CBI_WeapnInter");
+   if(RequiresButDontHave_WRD) Req("CBI_WeapnInte2");
+   if(RequiresButDontHave_RDI) Req("CBI_RDistInter");
+   if(RequiresButDontHave_RA)  Req("CBI_ReactArmor");
 
    #undef Req
 
    /* Performance rating */
-   if(upgr->info->perf && p->pclass != pcl_cybermage)
-   {
+   if(upgr->info->perf && p->pclass != pcl_cybermage) {
       bool over = upgr->info->perf + p->cbi.pruse > cbiperf;
 
       if(get_bit(upgr->flags, _ug_active))
@@ -146,8 +143,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    }
 
    /* Score multiplier */
-   if(upgr->info->scoreadd != 0)
-   {
+   if(upgr->info->scoreadd != 0) {
       char cr;
       cstr op;
       bool chk;
@@ -170,8 +166,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    }
 }
 
-static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct upgrade *upgr)
-{
+static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct upgrade *upgr) {
    Str(free, sLANG "FREE");
 
    SetClipW(111, 30, 190, 170, 184);
@@ -213,8 +208,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    ClearClip();
 }
 
-static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr)
-{
+static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr) {
    Str(autogroups, sLANG "AUTOGROUPS");
 
    /* Buy */
@@ -242,8 +236,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
    }
 }
 
-void P_CBI_TabUpgrades(struct gui_state *g, struct player *p)
-{
+void P_CBI_TabUpgrades(struct gui_state *g, struct player *p) {
    GUIUpgradesList(g, p);
 
    if(CBIState(g)->upgrsel == UPGR_MAX) {

@@ -120,7 +120,10 @@ action(Weapon) void Lith_A_FireShotgun()
    {
       Lith_FixedBullets(8, 10);
       A_RailAttack(20, 0, true, "", "Green", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_ShotgunRailPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
-      A_StartSound("weapons/shotgun/fire", lch_weapon);
+      if(CVar.getCVar('lith_weapons_reducedsg', self.player).getBool())
+         A_StartSound("weapons/shotgun/fire2", lch_weapon);
+      else
+         A_StartSound("weapons/shotgun/fire", lch_weapon);
    }
 }
 
