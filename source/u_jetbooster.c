@@ -49,6 +49,8 @@ void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
 
 void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
 {
+   Str(jet, sLANG "JET");
+
    if(!p->hudenabled) return;
 
    if(UData.charge != CHARGE_MAX)
@@ -60,7 +62,7 @@ void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
    i32 max    = rocket * 15;
 
    PrintSpriteF(sp_HUD_H_B3, 320,2, 80,1, fid_jet);
-   PrintTextF_str(st_jet, s_smallfnt, CR_RED, 320,2, 160,1, fid_jet);
+   PrintTextF_str(L(jet), s_smallfnt, CR_RED, 320,2, 160,1, fid_jet);
 
    for(i32 i = 0; i < max; i++)
       PrintSpriteFP(UData.discharged ? sp_HUD_H_C1 : sp_HUD_H_C2,

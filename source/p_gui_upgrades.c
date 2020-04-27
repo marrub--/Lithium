@@ -34,8 +34,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
    i32 numbtns = 0;
    i32 filter  = CBIState(g)->upgrfilter - 1;
 
-   /* TODO */
-   cstr filter_name = "All";
+   cstr filter_name;
 
    if(filter != -1) {
       filter_name = LC(upgrcateg[filter]);
@@ -44,13 +43,15 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p)
          if(upgr->info->category == filter)
             numbtns++;
    } else {
+      filter_name = LC(LANG "CAT_ALL");
+
       for_upgrade(upgr)
          numbtns++;
+
       numbtns += UC_MAX;
    }
 
-   /* TODO */
-   PrintTextFmt("Filter: %s", filter_name);
+   PrintTextFmt(LC(LANG "CAT_FILTER"), filter_name);
    PrintText(s_smallfnt, g->defcr, 15,1, 215,1);
 
    G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
@@ -171,6 +172,8 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
 
 static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct upgrade *upgr)
 {
+   Str(free, sLANG "FREE");
+
    SetClipW(111, 30, 190, 170, 184);
 
    /* Cost */
@@ -184,7 +187,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    }
 
    if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
-   else                 cost = L(st_free);
+   else                 cost = L(free);
 
    PrintText_str(cost, s_smallfnt, g->defcr, 111,1, 30,1);
 
@@ -212,6 +215,8 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
 
 static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr)
 {
+   Str(autogroups, sLANG "AUTOGROUPS");
+
    /* Buy */
    if(G_Button(g, LC(LANG "BUY"), 111, 205, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
       P_Upg_Buy(p, upgr, false);
@@ -221,8 +226,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
       P_Upg_Toggle(p, upgr);
 
    /* Groups */
-   PrintTextChS(LC(LANG "AUTOGROUPS"));
-   PrintText(s_smallfnt, g->defcr, 255,0, 205,0);
+   PrintText_str(L(autogroups), s_smallfnt, g->defcr, 255,0, 205,0);
 
    for(i32 i = 0; i < 4; i++) {
       static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};

@@ -31,6 +31,16 @@
 == \#CAT_WEAP | \caWeapon
 == \#CAT_EXTR | \cfExtra
 == \#CAT_DOWN | \ctDowngrade
+== \#CAT_ALL  | All
+
+== \#CAT_FILTER | Filter: %s
+
+== \#TERM_DISCONNECTING | Disconnecting...
+== \#TERM_IP            | <55.883.115.7>
+== \#TERM_SGXLINE       | SGXLine r4205
+== \#TERM_USE_TO_ACK    | Use To Acknowledge
+== \#TERM_OPEN_CONNECT  | Opening Connection to %S
+== \#TERM_REMOTE        | Remote: %S
 
 == \#GUI_TEXTBOX | Put your cursor here to input text.
 
@@ -55,12 +65,38 @@
 == \#TAB_UPGRADES | Upgrades
 == \#TAB_SHOP     | Shop
 
+== \#JET | Jet
+
+== \#STATUS_XP | Experience
+== \#STATUS_HP | Health
+== \#STATUS_LV | Level
+== \#STATUS_MP | Mana
+== \#STATUS_NX | Next
+== \#STATUS_CL | Class
+
+== \#STATUS_LEVELUP | Divide %u points among your attributes.
+
+== \#ON  | On
+== \#OFF | Off
+
 %% \#SKIP_INTRO
 Hold %jS to skip this intro.
 It will not show up again.
 Hold %jS to continue.
 
+%% \#BADTIMELINE
+This timeline is irreparable,
+and cannot continue.
+You must start anew.
+
 == \#BEGIN | [Press any key to begin]
+
+## BIP -----------------------------------------------------------------------|
+== \#BIP_AVAILABLE  | %i/%i AVAILABLE
+== \#BIP_BACK       | <BACK
+== \#BIP_CATEGS     | INFO CATEGORIES
+== \#BIP_HEADER     | BIOTIC INFORMATION PANEL ver2.5
+== \#BIP_NO_RESULTS | No results
 
 ## Results -------------------------------------------------------------------|
 == \#RES_RESULTS  | RESULTS

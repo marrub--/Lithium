@@ -234,8 +234,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
          bool on = p->getCVarI(sc_##cvar); \
          Label(cvar); \
-         /* TODO */ \
-         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
+         if(G_Button(g, on ? LC(LANG "ON") : LC(LANG "OFF"), 280 - gui_p.btnlist.w, y, Pre(btnlist))) \
             p->setCVarI(sc_##cvar, !on); \
       } \
       y += 10; \
@@ -279,8 +278,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, y, 10)) { \
          bool on = ACS_GetCVar(sc_##cvar); \
          Label(cvar); \
-         /* TODO */ \
-         if(G_Button(g, on ? "On" : "Off", 280 - gui_p.btnlist.w, y, Pre(btnlist), __VA_ARGS__)) \
+         if(G_Button(g, on ? LC(LANG "ON") : LC(LANG "OFF"), 280 - gui_p.btnlist.w, y, Pre(btnlist), __VA_ARGS__)) \
             ACS_SetCVar(sc_##cvar, !on); \
       } \
       y += 10; \

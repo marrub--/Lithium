@@ -67,30 +67,33 @@ static void StatusInfo(struct gui_state *g, i32 y, str left, str right)
 
 void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
-   Str(class, s"Class"); /* TODO */
+   Str(exp,   sLANG "STATUS_XP");
+   Str(hp,    sLANG "STATUS_HP");
+   Str(lv,    sLANG "STATUS_LV");
+   Str(mp,    sLANG "STATUS_MP");
+   Str(next,  sLANG "STATUS_NX");
+   Str(class, sLANG "STATUS_CL");
 
    i32 y = 40;
 
    PrintText_str(p->name, s_lmidfont, g->defcr, 30,1, y,1);
    y += 10;
 
-   StatusInfo(g, y += 10, class, p->classname);
+   StatusInfo(g, y += 10, L(class), p->classname);
 
-   StatusInfo(g, y += 10, st_lv, StrParam("%u", p->attr.level));
-   StatusInfo(g, y += 10, st_hp, StrParam("%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, y += 10, L(lv), StrParam("%u", p->attr.level));
+   StatusInfo(g, y += 10, L(hp), StrParam("%i/%i", p->health, p->maxhealth));
 
    if(p->pclass & pcl_magicuser)
-      StatusInfo(g, y += 10, st_mp, StrParam("%i/%i", p->mana, p->manamax));
+      StatusInfo(g, y += 10, mp, StrParam("%i/%i", p->mana, p->manamax));
 
-   StatusInfo(g, y += 10, st_exp,  StrParam("%u", p->attr.exp));
-   StatusInfo(g, y += 10, st_next, StrParam("%u", p->attr.expnext));
+   StatusInfo(g, y += 10, L(exp),  StrParam("%u", p->attr.exp));
+   StatusInfo(g, y += 10, L(next), StrParam("%u", p->attr.expnext));
 
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
-   if(p->attr.points)
-   {
-      /* TODO */
-      PrintTextFmt("Divide %u points among your attributes.", p->attr.points);
+   if(p->attr.points) {
+      PrintTextFmt(LC(LANG "STATUS_LEVELUP"), p->attr.points);
       PrintText(s_smallfnt, g->defcr, 20,1, y,1);
    }
 

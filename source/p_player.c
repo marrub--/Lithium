@@ -765,13 +765,11 @@ script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
    for(;;) {
       for_player() {
+         Str(bad_timeline, sLANG "BADTIMELINE");
          p->setActivator();
          ACS_FadeTo(0, 0, 0, 1.0, 0.0);
          SetSize(320, 240);
-         PrintTextChS("This timeline is irreparable,\n"
-                      "and cannot continue.\n"
-                      "You must start anew.");
-         PrintText(s_bigupper, CR_WHITE, 160,4, 120,0);
+         PrintText_str(L(bad_timeline), s_bigupper, CR_WHITE, 160,4, 120,0);
          p->health = -1;
       }
       ACS_Delay(1);

@@ -404,19 +404,6 @@ X(ss_weapons_rifle_firemode,   "weapons/rifle/firemode")
 X(ss_weapons_rocket_mark,      "weapons/rocket/mark")
 X(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 
-/* Text */
-X(st_bip_header,      "BIOTIC INFORMATION PANEL ver2.5") /* TODO */
-X(st_edit,            LANG "EDIT")
-X(st_exp,             "EXP")
-X(st_free,            LANG "FREE")
-X(st_hp,              "HP")
-X(st_info_categories, "INFO CATEGORIES") /* TODO */
-X(st_jet,             "Jet") /* TODO */
-X(st_lv,              "Lv.")
-X(st_mp,              "MP")
-X(st_next,            "Next") /* TODO */
-X(st_no_results,      "No results") /* TODO */
-
 X(sm_Draw, OBJ "URANUS")
 X(sm_Serv, OBJ "HERMES")
 

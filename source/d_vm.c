@@ -280,11 +280,10 @@ script static void TerminalGUI(struct player *p, u32 tact) {
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   /* TODO */
-   Str(st_term_disconnecting,     s"Disconnecting...");
-   Str(st_term_ip,                s"<55.883.115.7>");
-   Str(st_term_sgxline,           s"SGXLine r4205");
-   Str(st_term_use_to_ack,        s"Use To Acknowledge");
+   Str(term_disconnecting,     sLANG "TERM_DISCONNECTING");
+   Str(term_ip,                sLANG "TERM_IP");
+   Str(term_sgxline,           sLANG "TERM_SGXLINE");
+   Str(term_use_to_ack,        sLANG "TERM_USE_TO_ACK");
 
    G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst, p);
@@ -295,26 +294,26 @@ script static void TerminalGUI(struct player *p, u32 tact) {
    PrintRect(0, tbottom-12, twidth, 12,      0x44000C);
 
    /* Top-left text */
-   PrintText_str(st_term_sgxline, s_ltrmfont, CR_RED, 0,1, 0,1);
+   PrintText_str(L(term_sgxline), s_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
    str tr = GetRemote();
    switch(tact) {
-      default:          tr = StrParam("Remote: %S",               tr); break;
-      case TACT_LOGON:  tr = StrParam("Opening Connection to %S", tr); break;
-      case TACT_LOGOFF: tr = st_term_disconnecting;                    break;
+      default:          tr = StrParam(LC(LANG "TERM_REMOTE"),       tr); break;
+      case TACT_LOGON:  tr = StrParam(LC(LANG "TERM_OPEN_CONNECT"), tr); break;
+      case TACT_LOGOFF: tr = L(term_disconnecting);                      break;
    }
    PrintText_str(tr, s_ltrmfont, CR_RED, tright,2, 0,1);
 
    /* Bottom-left text */
-   PrintText_str(st_term_ip, s_ltrmfont, CR_RED, 0,1, tbottom,2);
+   PrintText_str(L(term_ip), s_ltrmfont, CR_RED, 0,1, tbottom,2);
 
    /* Bottom-right text */
    str br;
    switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date, ticks)); break;
-      default:          br = st_term_use_to_ack;                  break;
+      default:          br = L(term_use_to_ack);                  break;
    }
    PrintText_str(br, s_ltrmfont, CR_RED, tright,2, tbottom,2);
 

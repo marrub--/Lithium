@@ -18,9 +18,11 @@
 
 void P_CBI_TabNotes(struct gui_state *g, struct player *p)
 {
+   Str(edit, sLANG "EDIT");
+
    struct gui_txt *st = G_TextBox(g, &CBIState(g)->notebox, 48, 40, p);
 
-   PrintText_str(L(st_edit), s_smallfnt, g->defcr, 32,2, 41,0);
+   PrintText_str(L(edit), s_smallfnt, g->defcr, 32,2, 41,0);
    if(G_Checkbox(g, CBIState(g)->noteedit, 34, 37))
       CBIState(g)->noteedit = !CBIState(g)->noteedit;
 

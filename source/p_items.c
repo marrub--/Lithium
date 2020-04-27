@@ -381,11 +381,12 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       [_inv_legs]        = 80+8*10,
    };
 
+   Str(inv_hints, sLANG "INV_HINTS");
+
    PrintSpriteA(sp_UI_Body, 151,1, 40,1, 0.6);
    PrintSpriteA(sp_UI_Bag,  47 ,1, 44,1, 0.6);
 
-   PrintTextChS(LC(LANG "INV_HINTS"));
-   PrintText(s_smallfnt, g->defcr, 15,1, 225,2);
+   PrintText_str(L(inv_hints), s_smallfnt, g->defcr, 15,1, 225,2);
 
    for(i32 i = 0; i < _inv_num; i++)
       Container(g, &p->inv[i], x[i], y[i]);
