@@ -133,7 +133,7 @@ A.O.F.株式会社が研究目的で作成したHiku Mk.１ショットガンの
 長い間、このライフル銃は狙撃手の主力武器であった。
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_GrenadeLauncher | グレネードランチャー
+== \#INFO_SHORT_GrenadeLauncher | ｸﾞﾚﾈｰﾄﾞﾗﾝﾁｬｰ
 == \#INFO_TITLE_GrenadeLauncher | SYM4.3 D.６７１ 発破砲
 @@ \#INFO_DESCR_GrenadeLauncher
 非常に高速で高度な部品に変更可能、洗練された外観を誇り、D.671は敵を根絶する。
