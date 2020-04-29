@@ -140,22 +140,22 @@ override void DrawStats()
    if(souls) Lith_DrawCent(160, 120, (souls * m_Souls) .. " SOULS FREED");
 
    Lith_DrawCent(160, 0, "(Leave-Area)");
-   DrawName(40 * CleanYFac, wbs.lname0, lnametexts[0]);
+   textureid nothing;
+   nothing.setInvalid();
+   DrawName(40 * CleanYFac, nothing, lnametexts[0]);
 
-   if(cnt_time >= 0)
-   {
-      Screen.DrawTexture(Timepic, true, SP_TIMEX, SP_TIMEY, DTA_Clean, true);
-      DrawTime(160 - SP_TIMEX, SP_TIMEY, cnt_time);
-      DrawTime(160 - SP_TIMEX, SP_TIMEY + 12, cnt_total_time, true);
+   if(cnt_time >= 0) {
+      Screen.DrawText("bigupper", Font.CR_GREEN, SP_TIMEX, SP_TIMEY, "(time)", DTA_Clean, true);
+      DrawTimeFont("bigupper", 160 - SP_TIMEX, SP_TIMEY, cnt_time, Font.CR_GREEN);
+      DrawTimeFont("bigupper", 160 - SP_TIMEX, SP_TIMEY + 12, cnt_total_time, Font.CR_GREEN);
    }
 
-   if(wbs.partime && cnt_par >= 0)
-   {
-      Screen.DrawTexture(Par, true, 160 + SP_TIMEX, SP_TIMEY, DTA_Clean, true);
-      DrawTime(320 - SP_TIMEX, SP_TIMEY, cnt_par);
+   if(wbs.partime && cnt_par >= 0) {
+      Screen.DrawText("bigupper", Font.CR_GREEN, 160 + SP_TIMEX, SP_TIMEY, "(par)", DTA_Clean, true);
+      DrawTimeFont("bigupper", 320 - SP_TIMEX, SP_TIMEY, cnt_par, Font.CR_GREEN);
    }
 
-   Screen.DrawText(smallfont, Font.CR_WHITE, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   Screen.DrawText(smallfont, Font.CR_GREEN, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
 override void DrawShowNextLoc()
