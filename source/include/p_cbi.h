@@ -63,10 +63,11 @@ struct cbi {
    struct gui_state guistate;
 
    struct cbistate {
-      i32 maintab;
-      i32 stattab;
-      i32 arsetab;
-      i32 infotab;
+      u32 maintab;
+      u32 stattab;
+      u32 arsetab;
+      u32 infotab;
+      u32 settingstab;
 
       struct gui_typ biptypeon;
       struct gui_scr bipscr;

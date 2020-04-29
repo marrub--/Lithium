@@ -204,4 +204,26 @@ bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held) {
    return false;
 }
 
+i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20], size_t num,
+           i32 x, i32 y, i32 yp) {
+   i32 xp = 0;
+
+   for(i32 i = 0; i < num; i++) {
+      if(G_Button_Id(g, xp + yp * 6, names[i], gui_p.btntab.w * xp + x,
+         gui_p.btntab.h * yp + y, i == *st, .preset = &gui_p.btntab)) {
+         *st = i;
+      }
+
+      if(xp == 5) {
+         xp = 0;
+         yp++;
+      } else {
+         xp++;
+      }
+   }
+
+   return yp;
+}
+
+
 /* EOF */

@@ -26,7 +26,7 @@ static void P_CBI_TabArsenal(struct gui_state *g, struct player *p) {
    char tn[2][20];
    LanguageVC(tn[0], LANG "TAB_UPGRADES");
    LanguageVC(tn[1], LANG "TAB_SHOP");
-   G_Tabs(g, &CBIState(g)->arsetab, tn, 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->arsetab, tn, countof(tn), 13, 13, 1);
 
    switch(CBIState(g)->arsetab) {
    case cbi_tab_arsenal_upgrades: P_CBI_TabUpgrades(g, p); break;
@@ -43,7 +43,7 @@ static void P_CBI_TabStat(struct gui_state *g, struct player *p) {
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
    LanguageVC(tn[1], LANG "TAB_CBI");
    LanguageVC(tn[2], LANG "TAB_STATISTICS");
-   G_Tabs(g, &CBIState(g)->stattab, tn, 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->stattab, tn, countof(tn), 13, 13, 1);
 
    switch(CBIState(g)->stattab) {
    case cbi_tab_stat_attr:       P_CBI_TabStatus    (g, p); break;
@@ -61,7 +61,7 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p) {
    LanguageVC(tn[0], LANG "TAB_BIP");
    LanguageVC(tn[1], LANG "TAB_LOG");
    LanguageVC(tn[2], LANG "TAB_NOTES");
-   G_Tabs(g, &CBIState(g)->infotab, tn, 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->infotab, tn, countof(tn), 13, 13, 1);
 
    switch(CBIState(g)->infotab) {
    case cbi_tab_info_bip:   P_CBI_TabBIP  (g, p); break;
@@ -118,7 +118,7 @@ script void P_CBI_PTick(struct player *p) {
    LanguageVC(tn[2], LANG "TAB_INVENTORY");
    LanguageVC(tn[3], LANG "TAB_INFO");
    LanguageVC(tn[4], LANG "TAB_SETTINGS");
-   G_Tabs(g, &CBIState(g)->maintab, tn, 13, 13, 0);
+   G_Tabs(g, &CBIState(g)->maintab, tn, countof(tn), 13, 13, 0);
 
    switch(CBIState(g)->maintab) {
    case cbi_tab_arsenal:  P_CBI_TabArsenal (g, p); break;

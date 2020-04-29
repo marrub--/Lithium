@@ -93,13 +93,13 @@
 #define sLANG  Spf LANG
 #define sOBJ   Spf OBJ
 
-#define ServCallI(...) SCallI(sm_Serv, __VA_ARGS__)
-#define ServCallK(...) SCallK(sm_Serv, __VA_ARGS__)
-#define ServCallS(...) SCallS(sm_Serv, __VA_ARGS__)
+#define ServCallI(...) SCallI(so_Serv, __VA_ARGS__)
+#define ServCallK(...) SCallK(so_Serv, __VA_ARGS__)
+#define ServCallS(...) SCallS(so_Serv, __VA_ARGS__)
 
-#define DrawCallI(...) SCallI(sm_Draw, __VA_ARGS__)
-#define DrawCallK(...) SCallK(sm_Draw, __VA_ARGS__)
-#define DrawCallS(...) SCallS(sm_Draw, __VA_ARGS__)
+#define DrawCallI(...) SCallI(so_Draw, __VA_ARGS__)
+#define DrawCallK(...) SCallK(so_Draw, __VA_ARGS__)
+#define DrawCallS(...) SCallS(so_Draw, __VA_ARGS__)
 
 #define Dbg_Stat(...) \
    (get_bit(dbglevel, log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)

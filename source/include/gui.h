@@ -54,18 +54,6 @@
 #define G_ScrollReset(g, st) \
    (*(st) = (struct gui_scr){})
 
-#define G_Tabs(g, st, names, x, y, yy) \
-   do { \
-      for(i32 _i = 0; _i < countof(names); _i++) \
-      { \
-         if(G_Button_Id(g, _i, names[_i], gui_p.btntab.w * _i + (x), \
-            gui_p.btntab.h * (yy) + (y), _i == *(st), .preset = &gui_p.btntab)) \
-         { \
-            *(st) = _i; \
-         } \
-      } \
-   } while(0)
-
 #define G_TextBox_Reset(st) ((st)->tbptr = 0)
 
 #define G_TextBox_OnTextEntered(st) \
@@ -303,6 +291,9 @@ void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
 struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
 
 bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held);
+
+i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20], size_t num,
+           i32 x, i32 y, i32 yp);
 
 void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)
