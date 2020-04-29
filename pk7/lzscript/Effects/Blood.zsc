@@ -17,7 +17,7 @@ class Lith_BloodHitSpray : Actor
       +DONTSPLASH
    }
 
-   float m_Step;
+   double m_Step;
 
    override void PostBeginPlay()
    {

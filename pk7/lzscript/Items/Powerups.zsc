@@ -393,10 +393,10 @@ class Lith_Shobon : Actor
 
          if(!(v.X ~== 0) || !(v.Y ~== 0))
          {
-            float a  = Atan2(v.Y, v.X) - 180;
-            float m  = v.XY.Length();
-            float x_ = Lith_UTIL.Lerp(m_DoruPos.X, Cos(a) * 32, m / 32.);
-            float y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
+            double a  = Atan2(v.Y, v.X) - 180;
+            double m  = v.XY.Length();
+            double x_ = Lith_UTIL.Lerp(m_DoruPos.X, Cos(a) * 32, m / 32.);
+            double y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
             m_DoruPos = (x_, y_);
          }
 

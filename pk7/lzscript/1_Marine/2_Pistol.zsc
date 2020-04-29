@@ -116,7 +116,7 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
-override float, float GetFirePattern()
+override double, double GetFirePattern()
 {
    switch(m_FirePattern = (m_FirePattern + 1) % 4) {
    case 0: return  1,  0.5;

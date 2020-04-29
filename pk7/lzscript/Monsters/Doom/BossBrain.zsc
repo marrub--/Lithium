@@ -159,7 +159,7 @@ class Lith_BossEye : BossEye replaces BossEye {
             let mp = (cos(t) * 400, sin(t) * 400, 0);
             if(m_bossBrain.m_shield > 0) {
                let mo = Spawn("Lith_ATField", pos + mp);
-               mo.alpha *= 0.5 + m_bossBrain.m_shield / float(m_bossBrain.m_shieldMax);
+               mo.alpha *= 0.5 + m_bossBrain.m_shield / double(m_bossBrain.m_shieldMax);
             } else if(m_bossBrain.m_shieldCrash) {
                let mo = Spawn("Lith_ATFieldCrash", pos + mp);
                if(m_bossBrain.m_shieldCrash < 4) {

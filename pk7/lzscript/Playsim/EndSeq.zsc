@@ -134,11 +134,11 @@ ui void DrawEndSequence(RenderEvent evt)
 
    switch(m_ESeq) {
       case ESEQ_FADEMUS:
-         SetMusicVolume(1 - m_Time / float(m_Tics));
+         SetMusicVolume(1 - m_Time / double(m_Tics));
          break;
       case ESEQ_FADEIN:
       case ESEQ_FADEOUT: {
-         float fd = m_Time / float(m_Tics);
+         double fd = m_Time / double(m_Tics);
          if(m_ESeq == ESEQ_FADEIN) fd = 1 - fd;
          Screen.Dim(m_FdColo, fd, 0, 0, Screen.GetWidth(), Screen.GetHeight());
          break;

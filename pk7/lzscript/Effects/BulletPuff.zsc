@@ -94,7 +94,7 @@ class Lith_BulletAfterSmoke : Actor {
       +DONTSPLASH
    }
 
-   float m_sx, m_sy;
+   double m_sx, m_sy;
 
    override void postBeginPlay() {
       super.postBeginPlay();

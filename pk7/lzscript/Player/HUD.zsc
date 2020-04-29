@@ -14,11 +14,11 @@ private void Lith_Crosshair()
    if(gamestate == GS_TITLELEVEL) return;
 
    /* get the "actual" view angles */
-   float rp = pitch + ACS_ExecuteWithResult(lsc_pdata, pdata_addp)/FIX * 180;
-   float ry = angle + ACS_ExecuteWithResult(lsc_pdata, pdata_addy)/FIX * 360;
+   double rp = pitch + ACS_ExecuteWithResult(lsc_pdata, pdata_addp)/FIX * 180;
+   double ry = angle + ACS_ExecuteWithResult(lsc_pdata, pdata_addy)/FIX * 360;
 
    /* trace to where the crosshair should be in world space */
-   float sz = lith_getViewHeight();
+   double sz = lith_getViewHeight();
    let loc = Lith_UTIL.TraceFrom(self, ry, 2048, rp, sz);
 
    /* unproject */

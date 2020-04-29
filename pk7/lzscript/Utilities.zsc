@@ -78,28 +78,28 @@ struct Lith_UTIL
 
 class Lith_EAngle
 {
-   float p, b, h;
+   double p, b, h;
 }
 
 class Lith_Quaternion
 {
-   float x, y, z, w;
+   double x, y, z, w;
 
-   static Lith_Quaternion Create(float angle, float lx, float ly, float lz)
+   static Lith_Quaternion Create(double angle, double lx, double ly, double lz)
    {
       let q = new("Lith_Quaternion");
       q.make(angle, lx, ly, lz);
       return q;
    }
 
-   static Lith_Quaternion CreateVector(float lx, float ly, float lz)
+   static Lith_Quaternion CreateVector(double lx, double ly, double lz)
    {
       let q = new("Lith_Quaternion");
       q.makeVector(lx, ly, lz);
       return q;
    }
 
-   void make(float angle, float lx, float ly, float lz)
+   void make(double angle, double lx, double ly, double lz)
    {
       x = lx * sin(angle / 2);
       y = ly * sin(angle / 2);
@@ -107,7 +107,7 @@ class Lith_Quaternion
       w =      cos(angle / 2);
    }
 
-   void makeVector(float lx, float ly, float lz)
+   void makeVector(double lx, double ly, double lz)
    {
       x = lx;
       y = ly;
@@ -137,12 +137,12 @@ class Lith_Quaternion
 
    Lith_EAngle generateEuler()
    {
-      float ysqr = y * y;
-      float t0 = 2 * (w * x + y * z);
-      float t1 = 1 - 2 * (x * x + ysqr);
-      float t2 = clamp(2 * (w * y - z * x), -1, 1);
-      float t3 = 2 * (w * z + x * y);
-      float t4 = 1 - 2 * (ysqr + z * z);
+      double ysqr = y * y;
+      double t0 = 2 * (w * x + y * z);
+      double t1 = 1 - 2 * (x * x + ysqr);
+      double t2 = clamp(2 * (w * y - z * x), -1, 1);
+      double t3 = 2 * (w * z + x * y);
+      double t4 = 1 - 2 * (ysqr + z * z);
 
       let a = new("Lith_EAngle");
 

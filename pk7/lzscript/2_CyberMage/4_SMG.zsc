@@ -177,8 +177,8 @@ action(Weapon) void Lith_A_FireSMG()
 
    for(int i = 0; i < 2; i++)
    {
-      float spx = invoker.m_Recoil * FRandom(-5, 5);
-      float spy = invoker.m_Recoil * FRandom(-1, 1);
+      double spx = invoker.m_Recoil * FRandom(-5, 5);
+      double spy = invoker.m_Recoil * FRandom(-1, 1);
 
       if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_B))
          A_FireProjectile("Lith_SMGTracer3", spx, pitch: spy);

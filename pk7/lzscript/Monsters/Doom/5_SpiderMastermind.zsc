@@ -104,8 +104,8 @@ void Lith_A_Metal()
 
 state Lith_A_SpiderMastermindShoot(int spreadx, int spready)
 {
-   float x = FRandom(-5 * spreadx, 5 * spready);
-   float y = FRandom(-3 * spreadx, 3 * spready);
+   double x = FRandom(-5 * spreadx, 5 * spready);
+   double y = FRandom(-3 * spreadx, 3 * spready);
 
    A_CustomBulletAttack(x, y, 1, 3 * Random(1, 5), flags: CBAF_NORANDOM|CBAF_EXPLICITANGLE, missile: "Lith_SpiderMastermindBullet", spawnheight: 45, spawnofs_xy: 10);
 

@@ -47,13 +47,13 @@ static void DelearSprite(Actor mo_)
    if(!w) return;
    int sf = w.m_Fired;
    int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE;
-   float a = mo.m_IYaw;
-   float cp = Cos(mo.m_IPitch) * 32;
-   float sp = Sin(mo.m_IPitch) * 32;
-   float h = mo.Height - 19;
-   float vx = mo.Vel.X;
-   float vy = mo.Vel.Y;
-   float vz = mo.Vel.Z;
+   double a = mo.m_IYaw;
+   double cp = Cos(mo.m_IPitch) * 32;
+   double sp = Sin(mo.m_IPitch) * 32;
+   double h = mo.Height - 19;
+   double vx = mo.Vel.X;
+   double vy = mo.Vel.Y;
+   double vz = mo.Vel.Z;
    switch(sf) {
    case  0: mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,a,flags);
    case  1: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+16-sp,vx,vy,vz,a,flags);

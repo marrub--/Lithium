@@ -136,7 +136,7 @@ class Lith_StarProjectile : Actor
       BLLT L 0 bright {m_SoundTimer = 3; A_StartSound("weapons/dark/fire", lch_weapon);}
    DoMissile:
       BLLT L 0 bright {
-         float x_45 = Scale.X * 45;
+         double x_45 = Scale.X * 45;
          A_Explode(40, int(8 + 45 * Scale.X), 0);
          for(int i = 0; i < 5; i++)
             A_SpawnProjectile("Lith_StarShrapnel",
@@ -147,7 +147,7 @@ class Lith_StarProjectile : Actor
       goto DoSeek;
    DoHomingMissile:
       BLLT L 0 bright {
-         float x_45 = Scale.X * 45;
+         double x_45 = Scale.X * 45;
          m_HomingShrapnelTimer = 0;
          for(int i = 0; i < 2; i++)
             A_SpawnProjectile("Lith_StarShrapnelHoming",

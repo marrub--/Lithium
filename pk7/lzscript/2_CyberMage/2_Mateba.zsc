@@ -113,7 +113,7 @@ class Lith_FinalizerShot : FastProjectile
    Death:
       TNT1 A 0 {
          if(tracer) {
-            if(bBOSS || float(tracer.health) / tracer.ACS_ScriptCall("Lith_GetFinalizerMaxHealth") > 0.5) {
+            if(bBOSS || double(tracer.health) / tracer.ACS_ScriptCall("Lith_GetFinalizerMaxHealth") > 0.5) {
                tracer.A_DamageSelf(50);
             } else {
                tracer.A_SpawnItemEx("Lith_FinalizerKill", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);

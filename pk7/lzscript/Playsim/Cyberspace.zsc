@@ -17,7 +17,7 @@ const RW = 64;
 const RH = 48;
 
 uint8 m_DBuf[RW * RH];
-float m_CamX[RW];
+double m_CamX[RW];
 
 /* map (TODO: make dynamic) */
 const MW = 8;
@@ -35,12 +35,12 @@ static const uint8[] CMAP = {
 };
 
 /* camera normal */
-float m_NX;
-float m_NY;
+double m_NX;
+double m_NY;
 
 /* camera plane */
-float m_PX;
-float m_PY;
+double m_PX;
+double m_PY;
 
 /* view pos */
 int m_VX;
@@ -62,7 +62,7 @@ static Lith_Cyberspace CreateDerived(class<Lith_Cyberspace> type)
    cs.m_VY = 4;
 
    for(int x = 0; x < cs.RW; x++)
-      cs.m_CamX[x] = x / float(cs.RW) * 2 - 1;
+      cs.m_CamX[x] = x / double(cs.RW) * 2 - 1;
 
    cs.changeStatNum(_stat_cyberspace);
 
@@ -76,10 +76,10 @@ static Lith_Cyberspace Create()
    return CreateDerived("Lith_Cyberspace");
 }
 
-void Lith_RotateView(float rel)
+void Lith_RotateView(double rel)
 {
-   float o_nx = m_NX;
-   float o_px = m_PX;
+   double o_nx = m_NX;
+   double o_px = m_PX;
 
    /* rotate normal and plane with a simple matrix */
    /* TODO: calculate this in drawframe instead and use a euler angle */
@@ -94,20 +94,20 @@ void Lith_DrawFrame()
    for(int x = 0; x < RW; x++)
    {
       /* camera x coordinate */
-      float ndc = m_CamX[x];
+      double ndc = m_CamX[x];
       if(ndc == 0) ndc = 0.001; /* hack to prevent sigfpe when facing 0° */
 
       /* ray normal */
-      float rnx = m_NX + m_PX * ndc;
-      float rny = m_NY + m_PY * ndc;
+      double rnx = m_NX + m_PX * ndc;
+      double rny = m_NY + m_PY * ndc;
 
       /* direction delta */
-      float ddx = Sqrt(1 + (rny * rny) / (rnx * rnx));
-      float ddy = Sqrt(1 + (rnx * rnx) / (rny * rny));
+      double ddx = Sqrt(1 + (rny * rny) / (rnx * rnx));
+      double ddy = Sqrt(1 + (rnx * rnx) / (rny * rny));
 
       /* distance to side */
-      float sidedx;
-      float sidedy;
+      double sidedx;
+      double sidedy;
 
       /* step sign */
       int stepx;
@@ -131,7 +131,7 @@ void Lith_DrawFrame()
       } while(!CMAP[mapx + mapy * MW]);
 
       /* get perspective distance */
-      float pwdst;
+      double pwdst;
       if(side) pwdst = (mapy - m_VY + (1 - stepy) / 2) / rny;
       else     pwdst = (mapx - m_VX + (1 - stepx) / 2) / rnx;
 

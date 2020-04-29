@@ -93,7 +93,7 @@ class Lith_GunSmokeSpawner : Actor
 
    const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
 
-   void Lith_A_SpawnSmoke(float vx, float vy)
+   void Lith_A_SpawnSmoke(double vx, double vy)
    {
       A_SpawnItemEx("Lith_GunSmoke", FRandom(-4,4),FRandom(-1,1),FRandom(-2,2), Vel.X + vx,Vel.Y + vy,Vel.Z, 0, flags);
    }

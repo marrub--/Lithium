@@ -56,7 +56,7 @@ int m_firePattern;
 
 private meta sound m_scopeOutSnd;
 private meta sound m_scopeInSnd;
-private meta float m_scopeZoom;
+private meta double m_scopeZoom;
 
 private meta class<Actor> m_spawnType;
 
@@ -73,7 +73,7 @@ property SpawnType: m_spawnType;
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
 
-virtual float, float GetFirePattern() {
+virtual double, double GetFirePattern() {
    return 0, 0;
 }
 
@@ -184,22 +184,22 @@ action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", in
 }
 
 action(Weapon) void Lith_A_RecoilUp(double amt) {
-   float v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt;
+   double v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_RecoilDn(double amt) {
-   float v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4);
+   double v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4);
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_ReloadBobUp(double amt) {
-   float v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt;
+   double v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_ReloadBobDn(double amt) {
-   float v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt;
+   double v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
@@ -224,45 +224,45 @@ action(Weapon) void Lith_A_ScopeToggle() {
    else                                   Lith_A_ScopeIn();
 }
 
-action(Weapon) void Lith_A_ZoomFactorScoped(float amount) {
+action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
    A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
 }
 
-action(Weapon) void Lith_GunSmoke(class<Actor> type, float x, float y, bool ignoreCrouch) {
+action(Weapon) void Lith_GunSmoke(class<Actor> type, double x, double y, bool ignoreCrouch) {
    if(!ignoreCrouch) (y -= ((1.0 - GetCrouchFactor(AAPTR_DEFAULT)) * 10.0));
    A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);
 }
 
-action(Weapon) void Lith_A_GunSmoke(float x = 0, float y = 6, bool ignoreCrouch = false) {
+action(Weapon) void Lith_A_GunSmoke(double x = 0, double y = 6, bool ignoreCrouch = false) {
    Lith_GunSmoke("Lith_GunSmokeSpawner", x, y, ignoreCrouch);
 }
 
-action(Weapon) void Lith_A_GunSmokeSmall(float x = 0, float y = 6, bool ignoreCrouch = false) {
+action(Weapon) void Lith_A_GunSmokeSmall(double x = 0, double y = 6, bool ignoreCrouch = false) {
    Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y, ignoreCrouch);
 }
 
-action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, float px, float py, float pz, float vx, float vy, float vz) {
-   float vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
+action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, double px, double py, double pz, double vx, double vy, double vz) {
+   double vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
    px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
    vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
    A_SpawnItemEx(invoker.Lith_MagEmpty() || !mag2 ? mag1 : mag2, px,py,pz+vh, vx,vy,vz);
 }
 
-action void Lith_A_Casing(class<Lith_CasingBase> cas, float px, float py, float pz, float vx, float vy, float vz) {
-   float vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
+action void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double py, double pz, double vx, double vy, double vz) {
+   double vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
    px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
    vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
    A_SpawnItemEx(cas, Cos(Pitch)*px, py, pz-Sin(Pitch)*px+vh, vx, vy, vz);
 }
 
-action(Weapon) void Lith_FixedBullets(int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192) {
+action(Weapon) void Lith_FixedBullets(int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", double tracer_x = 0, double range = 8192) {
    for(int i = 0; i < numbullets; i++) {
-      float p, y; [p, y] = invoker.GetFirePattern();
+      double p, y; [p, y] = invoker.GetFirePattern();
       Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, pufftype, tracer_x, range);
    }
 }
 
-action(Weapon) void Lith_FireBullets(float spread_horz, float spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", float tracer_x = 0, float range = 8192) {
+action(Weapon) void Lith_FireBullets(double spread_horz, double spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", double tracer_x = 0, double range = 8192) {
    A_FireBullets(spread_horz, spread_vert, numbullets, damage, pufftype, flags, range, "Lith_BulletTracer", 7 + FRandom(-1, 0), tracer_x + FRandom(-0.7, 0.7));
 }
 

@@ -98,7 +98,7 @@ private void Lith_RainEffect() {
 
    if(player && ACS_ExecuteWithResult(lsc_wdata, wdata_dorain) &&
       ceilingpic == skyflatnum && pitch < -5) {
-      float m = -pitch - 5;
+      double m = -pitch - 5;
       m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, m / 85., 0.1);
       Shader.SetEnabled(player, "Lith_Rain", true);
    } else if(m_RainLerp > 0.01) {
@@ -147,8 +147,8 @@ int, int, bool Lith_Unproject(vector3 loc) {
    la /= la.length();
 
    /* get projection angles */
-   float pp = asin(la.z);
-   float py = atan2(la.y, la.x) - 180;
+   double pp = asin(la.z);
+   double py = atan2(la.y, la.x) - 180;
 
    /* rotate to lookat vector */
    let q  = Lith_Quaternion.CreateVector(1, 0, 0);
@@ -168,11 +168,11 @@ int, int, bool Lith_Unproject(vector3 loc) {
    /* get screenspace position */
    if(la.x > 0) {
       /* adjust for FOV */
-      float fovmod = 1 / tan(player.fov / 2);
+      double fovmod = 1 / tan(player.fov / 2);
 
       /* get NDC position */
-      float pv = -la.z / la.x * fovmod;
-      float ph = -la.y / la.x * fovmod;
+      double pv = -la.z / la.x * fovmod;
+      double ph = -la.y / la.x * fovmod;
 
       /* convert to screenspace */
       return Lith_UTIL.Round(ph            * 160 + 160),
@@ -197,7 +197,7 @@ void Lith_PreTick() {
    vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
    pvec /= pvec.length();
 
-   float newpitch = atan2(pvec.y, pvec.x);
+   double newpitch = atan2(pvec.y, pvec.x);
 
    m_QP = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
    m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);

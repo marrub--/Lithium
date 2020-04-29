@@ -39,7 +39,7 @@ struct DrawData {
 
    textureid Tex;
    color     C;
-   float     A;
+   double    A;
 
    uint8 Cr;
    uint8 LnY;
@@ -295,7 +295,7 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
       cl.m_D[p].A  = cl.m_FadeMsg[af].Fade / 255.0;
       cl.m_D[p].A *= cl.m_FadeMsg[af].Alph / 255.0;
    } else if(arg2 & 0x20000) {
-      cl.m_D[p].A = float(af) / 0xff;
+      cl.m_D[p].A = double(af) / 0xff;
    } else {
       cl.m_D[p].A = 1.0;
    }
@@ -574,13 +574,13 @@ override void RenderOverlay(RenderEvent evt)
    if(p && p.m_Cs) p.m_Cs.Lith_Render();
 }
 
-int, int GetScSized(float x, float y, bool kludge = false)
+int, int GetScSized(double x, double y, bool kludge = false)
 {
-   float vw = m_VirtualSize.X;
-   float vh = m_VirtualSize.Y;
+   double vw = m_VirtualSize.X;
+   double vh = m_VirtualSize.Y;
 
-   float sw = Screen.GetWidth();
-   float sh = Screen.GetHeight();
+   double sw = Screen.GetWidth();
+   double sh = Screen.GetHeight();
 
    vector2 xy, sc;
 

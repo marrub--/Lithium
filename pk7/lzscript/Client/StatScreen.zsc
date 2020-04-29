@@ -25,7 +25,7 @@ private void Lith_DrawPrct(int y, string text, int n, int m)
    Lith_DrawSetq(50+y*2, y, text);
 
         if(n < 0) text = "'...)";
-   else if(m)     text = "\"" .. int(float(n) / m * 100) .. "%\")";
+   else if(m)     text = "\"" .. int(double(n) / m * 100) .. "%\")";
    else           text = "())";
 
    Lith_DrawSetq(210, y, text);

@@ -20,7 +20,7 @@ class Lith_SwitchableDecor : Actor
    }
 
    private meta sound m_IdleNoise;
-   private meta float m_Volume;
+   private meta double m_Volume;
 
    property Noise: m_IdleNoise;
    property Volume: m_Volume;

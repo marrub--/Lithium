@@ -17,7 +17,7 @@ class Lith_TorchDecor : Lith_FlareDecor
 
    private meta class<Actor> m_Type1;
    private meta color m_Col1, m_Col2, m_Col3;
-   private meta float m_Height;
+   private meta double m_Height;
 
    property Height: m_Height;
    property TypeColo: m_Type1, m_Col1, m_Col2, m_Col3;

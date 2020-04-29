@@ -279,16 +279,16 @@ override void WorldTick()
 
 override void WorldThingDamaged(WorldEvent ev)
 {
-   let src = ev.DamageSource;
-   let dst = ev.Thing;
+   let src = ev.damageSource;
+   let dst = ev.thing;
+   let pos = dst.pos + (0, 0, dst.height / 2);
 
    if(!dst) return;
 
-   if(ev.DamageType == 'Bullet' && ev.Damage >= 8 && !dst.bNOBLOOD)
-   {
-      let mo = Actor.Spawn("Lith_Dummy", dst.Pos + (0, 0, dst.Height / 2));
-      float vol = Clamp(ev.damage / 10.0, 0, 1);
-      mo.A_StartSound("body/bullethit", lch_body, volume: vol * FRandom(0.5, 1.1));
+   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD) {
+      double vol = clamp(ev.damage / 10.0, 0, 1);
+      let mo = Actor.spawn("Lith_Dummy", pos);
+      mo.A_StartSound("body/bullethit", lch_body, volume: vol * frandom(0.5, 1.1));
    }
 
    if(!src) return;
@@ -316,7 +316,7 @@ override void WorldThingDied(WorldEvent ev)
    if(mo.bBOSSSPAWNED && sph > 50) {
       Lith_BossBrain to;
       int dmg = sph / 50 * random(1, 4);
-      float sc = log10(sph);
+      double sc = log10(sph);
       for(let it = ThinkerIterator.create("Lith_BossBrain"); (to = Lith_BossBrain(it.next()));) {
          if(to.m_Shield > 0) {
             let shot = Actor.Spawn("Lith_BossDamage", mo.pos);
@@ -438,7 +438,7 @@ override void NetworkProcess(ConsoleEvent ev)
 }
 
 override void RenderOverlay(RenderEvent evt) {
-   float ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
+   double ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
 
    for(int i = 0; i < MAXPLAYERS; i++) {
       PlayerInfo player = players[i];

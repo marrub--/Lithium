@@ -17,7 +17,7 @@ class Lith_HulgyonHit : Actor
       +THRUACTORS
    }
 
-   void Lith_A_Spawn(float z)
+   void Lith_A_Spawn(double z)
    {
       A_SpawnItemEx("Lith_HulgyonEffect", 0,0,z  , flags: SXF_TRANSFERPOINTERS);
       A_SpawnItemEx("Lith_HulgyonEffect", 0,0,z+4, flags: SXF_TRANSFERPOINTERS);
@@ -55,7 +55,7 @@ class Lith_HulgyonProjectile : Actor
       +BRIGHT
    }
 
-   float m_LZ;
+   double m_LZ;
 
    state Lith_A_Step()
    {
