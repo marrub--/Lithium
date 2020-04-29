@@ -215,13 +215,14 @@ bool S_isEnabled(struct setting const *st, struct player *p) {
 #define S_svFixed S_svEnabl, .cb_g = {.k = SG_svFixed}
 
 struct setting const st_gui[] = {
-   {S_enume, "gui_cursor",    S_clInteg, S_bndi(0,   gui_curs_max),  "cursor"},
+   {S_enume, "gui_cursor",    S_clInteg, S_bndi(0, gui_curs_max), "cursor"},
    {S_enume, "gui_defcr",     S_clInteg, S_color},
-   {S_enume, "gui_jpfont",    S_clInteg, S_bndi(0,   font_num),      "jpfont"},
-   {S_enume, "gui_theme",     S_clInteg, S_bndi(0,   cbi_theme_max), "theme"},
+   {S_enume, "gui_theme",     S_clInteg, S_bndi(0, cbi_theme_max), "theme"},
    {S_fixed, "gui_xmul",      S_clFixed, S_bndk(0.1, 2.0), "mult"},
    {S_fixed, "gui_ymul",      S_clFixed, S_bndk(0.1, 2.0), "mult"},
-   {S_integ, "gui_buyfiller", S_clInteg, S_bndi(0,   70),  "tick"},
+   {S_integ, "gui_buyfiller", S_clInteg, S_bndi(0, 70),  "tick"},
+   {S_empty},
+   {S_enume, "gui_jpfont", S_clInteg, S_bndi(0, font_num), "jpfont"},
    {S_empty},
    {S_label, "st_labl_jp_1"},
    {S_label, "st_labl_jp_2"},
