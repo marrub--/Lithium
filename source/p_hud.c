@@ -120,19 +120,19 @@ void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, i32 cr, i32 cr_f
 
    ACS_BeginPrint();
    ACS_PrintInt(health);
-   PrintTextX(s_lhudfont, cr, x,1, y,0, ptf_no_utf);
+   PrintTextX(s_bigupper, cr, x,1, y,0, ptf_no_utf);
 
    if(protect) {
       k32 amt = protect / 200.0;
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextAX(s_lhudfont, CR_TAN, x,1, y,0, amt, ptf_no_utf);
+      PrintTextAX(s_bigupper, CR_TAN, x,1, y,0, amt, ptf_no_utf);
    }
 
    if(CheckFade(fid_health)) {
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextFX(s_lhudfont, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
+      PrintTextFX(s_bigupper, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
    }
 }
 

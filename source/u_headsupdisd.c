@@ -37,7 +37,7 @@ static void HUD_Ammo(struct player *p) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_lhudfont, Cr(blue), 242,1, 227,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), 242,1, 227,0, ptf_no_utf);
    }
 
    if(type & 2) {
@@ -52,7 +52,7 @@ static void HUD_Ammo(struct player *p) {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_lhudfont, Cr(blue), x+242,1, 227,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), x+242,1, 227,0, ptf_no_utf);
    }
 
    if(typegfx) PrintSprite(typegfx, 318,2, 232,2);

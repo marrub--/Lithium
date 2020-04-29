@@ -43,7 +43,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_lhudfont, Cr(purple), x+242,1, 218,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(purple), x+242,1, 218,0, ptf_no_utf);
    }
 
    if(has_nmag) {
@@ -55,7 +55,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_lhudfont, Cr(purple), 242,1, 218,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(purple), 242,1, 218,0, ptf_no_utf);
    }
 
    if(typegfx) {
@@ -78,7 +78,7 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
    lerplli(&UData.overdrive);
 
    PrintTextFmt("%lli", UData.overdrive.value_display);
-   PrintTextX(s_lhudfont, Cr(purple), 21,1, 220,0, ptf_no_utf);
+   PrintTextX(s_bigupper, Cr(purple), 21,1, 220,0, ptf_no_utf);
 }
 
 /* Extern Functions -------------------------------------------------------- */

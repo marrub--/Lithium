@@ -695,7 +695,7 @@ void Sc_DrawDmgNum(i32 which_alpha, i32 damage, i32 x, i32 y) {
    switch(which) {
    case _dnum_smol: font = s_smallfnt; cr = CR_GREY;  break;
    case _dnum_norm: font = s_lmidfont; cr = CR_WHITE; break;
-   case _dnum_crit: font = s_lhudfont; cr = CR_GOLD;  break;
+   case _dnum_crit: font = s_bigupper; cr = CR_GOLD;  break;
    }
 
    ACS_BeginPrint();
