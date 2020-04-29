@@ -156,8 +156,9 @@ static void BaseMonsterLevel(dmon_t *m)
    ApplyLevels(m, 0);
 }
 
-/* Spawn a Monster Soul and temporarily set the species of it until the */
-/* actor is no longer solid, so it won't explode immediately. */
+/* Spawn a Monster Soul and temporarily set the species of it until the
+ * actor is no longer solid, so it won't explode immediately.
+ */
 script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
@@ -165,7 +166,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
 
    i32 tid = ACS_UniqueTID();
    ACS_SpawnForced(so_MonsterSoul, m->x, m->y, m->z + 16, tid);
-   SetPropI(tid, APROP_Damage, 7 * m->rank * ACS_Random(1, 8));
+   SetPropI(tid, APROP_Damage, m->level / 8 * 7);
 
    PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
    SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
