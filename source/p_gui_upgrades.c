@@ -33,16 +33,16 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
    i32 numbtns = 0;
    i32 filter  = CBIState(g)->upgrfilter - 1;
 
-   cstr filter_name;
+   char filter_name[16];
 
    if(filter != -1) {
-      filter_name = LC(upgrcateg[filter]);
+      LanguageVC(filter_name, upgrcateg[filter]);
 
       for_upgrade(upgr)
          if(upgr->info->category == filter)
             numbtns++;
    } else {
-      filter_name = LC(LANG "CAT_ALL");
+      LanguageVC(filter_name, LANG "CAT_ALL");
 
       for_upgrade(upgr)
          numbtns++;
