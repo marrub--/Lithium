@@ -65,7 +65,7 @@ A.O.F.株式会社が研究目的で作成したHiku Mk.１ショットガンの
 十分使用できるほど似ていた。ただしプラズマ点火メカニズムを無効にする必要がある
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_LazShotgun | レーザーショットガン
+== \#INFO_SHORT_LazShotgun | ﾚｰｻﾞｰｼｮｯﾄｶﾞﾝ
 == \#INFO_TITLE_LazShotgun | Kaether フォトンライフル
 @@ \#INFO_DESCR_LazShotgun
 地球との戦争中、長らく無名の会社によって作られたこの武器は純粋なエネルギーで
@@ -77,7 +77,7 @@ A.O.F.株式会社が研究目的で作成したHiku Mk.１ショットガンの
 鶏肉の調理に最適。
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SuperShotgun | スーパーショットガン
+== \#INFO_SHORT_SuperShotgun | ｽｰﾊﾟｰｼｮｯﾄｶﾞﾝ
 == \#INFO_TITLE_SuperShotgun | $\#INFO_SHORT_SuperShotgun
 @@ \#INFO_DESCR_SuperShotgun
 惑星Ch'ariの巨大獣を狩るために作られた２x２ 4ga シェルを撃ち出す。
